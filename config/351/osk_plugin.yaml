@@ -1,0 +1,75 @@
+name: osk_plugin (351)
+sha1: 36f3ee503de77e5df32636619017bdfb673deb81
+options:
+  basename: osk_plugin
+  target_path: tmp/baserom/351/osk_plugin.prx
+  elf_path: tmp/build/351/osk_plugin.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/351/osk_plugin
+  src_path: src/osk_plugin
+  build_path: tmp/build/351
+  ld_script_path: tmp/build/351/osk_plugin.ld
+  cache_path: tmp/build/351/.splat_cache.osk_plugin
+  symbol_addrs_path:
+    - config/351/symbol_addrs.osk_plugin.txt
+    - tmp/build/351/prx_syms.osk_plugin.txt
+  reloc_addrs_path: [tmp/build/351/reloc_addrs.osk_plugin.txt]
+  asset_path: tmp/assets/351/osk_plugin
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/351/undefined_funcs_auto.osk_plugin.txt
+  undefined_syms_auto_path: tmp/build/351/undefined_syms_auto.osk_plugin.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x128C0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x1E5B4
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: osk_plugin
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, osk_plugin]
+      - { start: 0x11590, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x11880, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x11884, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x11894, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x11898, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x1189C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x11908, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x1190C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - [0x11940, rodata, osk_plugin]
+      - { start: 0x13B28, type: prxpad, order: .rodata }
+  - name: osk_plugin_seg1
+    type: code
+    start: 0x13B30
+    vram: 0x13A90
+    bss_size: 0x24C
+    subsegments:
+      - [0x13B30, data, osk_plugin_data]
+      - { start: 0x1E3F8, type: bss, vram: 0x1E358 }
+  - [0x1E3F8, bin, elf_trailer]
+  - [0x2A2F0]

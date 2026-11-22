@@ -1,0 +1,75 @@
+name: mpeg_vsh (351)
+sha1: 40765c276fb2fedae42f84b56d8697837eebfe07
+options:
+  basename: mpeg_vsh
+  target_path: tmp/baserom/351/mpeg_vsh.prx
+  elf_path: tmp/build/351/mpeg_vsh.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/351/mpeg_vsh
+  src_path: src/mpeg_vsh
+  build_path: tmp/build/351
+  ld_script_path: tmp/build/351/mpeg_vsh.ld
+  cache_path: tmp/build/351/.splat_cache.mpeg_vsh
+  symbol_addrs_path:
+    - config/351/symbol_addrs.mpeg_vsh.txt
+    - tmp/build/351/prx_syms.mpeg_vsh.txt
+  reloc_addrs_path: [tmp/build/351/reloc_addrs.mpeg_vsh.txt]
+  asset_path: tmp/assets/351/mpeg_vsh
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/351/undefined_funcs_auto.mpeg_vsh.txt
+  undefined_syms_auto_path: tmp/build/351/undefined_syms_auto.mpeg_vsh.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8000
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xA05C
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: mpeg_vsh
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, mpeg_vsh]
+      - { start: 0x9758, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x9850, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x9854, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x9878, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x987C, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x9880, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x98E4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x98E8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - [0x991C, rodata, mpeg_vsh]
+      - { start: 0x9E8C, type: prxpad, order: .rodata }
+  - name: mpeg_vsh_seg1
+    type: code
+    start: 0x9EC0
+    vram: 0x9E00
+    bss_size: 0x248
+    subsegments:
+      - [0x9EC0, data, mpeg_vsh_data]
+      - { start: 0x9EC4, type: bss, vram: 0x9E04 }
+  - [0x9EC4, bin, elf_trailer]
+  - [0xC298]
