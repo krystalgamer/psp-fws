@@ -29,6 +29,18 @@ make             # build and verify sha1
 ```
 
 `VERSION` (default `360`) and `MODULE` (default `mcctrl`) select the target.
+`make EXTRA_CPPFLAGS=-DNON_MATCHING` builds the non-matching C drafts instead of their asm.
+
+## Decompiling
+
+```sh
+.venv/bin/python tools/progress.py            # per-function status
+.venv/bin/python tools/diff.py <function>     # side-by-side vs the original
+.venv/bin/python tools/m2c.py <function>      # m2c draft with project headers as context
+```
+
+Install m2c from GitHub (`pip install git+https://github.com/matt-kempster/m2c.git`);
+the `m2c` package on PyPI is an unrelated project.
 
 ## Notes
 
@@ -41,3 +53,9 @@ make             # build and verify sha1
   `--no-pad-sections`.
 - The `.comment` section has one `GCC: ...` entry per linked object file, which
   hints at the number of translation units (mcctrl: 4).
+- psp-1.7.1 objects had 8-byte aligned `.text`; padding `nop`s before an
+  8-aligned function mark a translation-unit boundary (e.g. mcctrl 0xE78).
+  `tools/fix_old_gas.py --text-align 8` emulates this for psp-as 1.3.1 output.
+- Sony code here uses small inline helpers (memclr/memcpy/memcmp taking
+  `void *` and casting to local byte pointers) and `goto end` error chains;
+  reproducing those is usually what makes register allocation match.
