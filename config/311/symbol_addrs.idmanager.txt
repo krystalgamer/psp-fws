@@ -1,0 +1,22 @@
+// NID-derived names
+module_start = 0x00000000; // type:func
+sceIdMgr_driver_F464F91C = 0x000006E4; // type:func
+InitForKernel_27932388 = 0x00000714; // type:func
+InitForKernel_7233B5BC = 0x0000071C; // type:func
+sceIoOpen = 0x00000724; // type:func
+sceIoLseek = 0x0000072C; // type:func
+sceIoRead = 0x00000734; // type:func
+IoFileMgrForKernel_6D08A871 = 0x0000073C; // type:func
+sceIoClose = 0x00000744; // type:func
+sceIoGetstat = 0x0000074C; // type:func
+IoFileMgrForKernel_B2A628C1 = 0x00000754; // type:func
+SysMemForKernel_419DB8F4 = 0x0000075C; // type:func
+memset = 0x00000764; // type:func
+strcat = 0x0000076C; // type:func
+strlen = 0x00000774; // type:func
+strncmp = 0x0000077C; // type:func
+sceKernelCreateFpl = 0x00000784; // type:func
+sceKernelAllocateFpl = 0x0000078C; // type:func
+sceKernelDeleteFpl = 0x00000794; // type:func
+scePspNpDrm_driver_0F9547E6 = 0x0000079C; // type:func
+sceRtc_driver_B44BDAED = 0x000007A4; // type:func

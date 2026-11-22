@@ -1,0 +1,84 @@
+name: opening_plugin (311)
+sha1: effe582d22a4c8a81027eec7a34e5b7a6371f224
+options:
+  basename: opening_plugin
+  target_path: tmp/baserom/311/opening_plugin.prx
+  elf_path: tmp/build/311/opening_plugin.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/311/opening_plugin
+  src_path: src/opening_plugin
+  build_path: tmp/build/311
+  ld_script_path: tmp/build/311/opening_plugin.ld
+  cache_path: tmp/build/311/.splat_cache.opening_plugin
+  symbol_addrs_path:
+    - config/311/symbol_addrs.opening_plugin.txt
+    - tmp/build/311/prx_syms.opening_plugin.txt
+  reloc_addrs_path: [tmp/build/311/reloc_addrs.opening_plugin.txt]
+  asset_path: tmp/assets/311/opening_plugin
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/311/undefined_funcs_auto.opening_plugin.txt
+  undefined_syms_auto_path: tmp/build/311/undefined_syms_auto.opening_plugin.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8100
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x1C50
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: opening_plugin
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - { start: 0xA0, type: asm, name: init, linker_section: .init }
+      - [0xC4, asm, opening_plugin]
+      - { start: 0x1500, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x151C, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1684, type: prxpad, order: .text }
+      - { start: 0x1690, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x1694, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x16A4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x16A8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x16AC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x16EC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x16F0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x1724, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x1778, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x182C, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x1868, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x1874, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x1880, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x1884, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x1888, rodata, opening_plugin]
+  - name: opening_plugin_seg1
+    type: code
+    start: 0x1B80
+    vram: 0x1AE0
+    bss_size: 0x54
+    subsegments:
+      - [0x1B80, data, opening_plugin_data]
+      - { start: 0x1C8C, type: bss, vram: 0x1BF0 }
+  - [0x1C8C, bin, elf_trailer]
+  - [0x334C]
