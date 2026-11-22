@@ -1,6 +1,14 @@
 #include "common.h"
 #include "crypto.h"
 
+/*
+ * Control flow: structured code is preferred, but the exported functions
+ * below use a single `end:` cleanup block reached via `goto`. Structured
+ * equivalents (nested ifs, && chains, do/while(0) + break, inline helpers with
+ * early returns) all compile to a different block layout with psp-gcc 1.7.1,
+ * so the original evidently used gotos here.
+ */
+
 typedef struct {
     /* 0x000 */ u8 iv[0x10];
     /* 0x010 */ u8 unk10[0x14];
