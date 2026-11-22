@@ -14,4 +14,8 @@ sceKernelCreateSema = 0x00000A2C; // type:func
 sceKernelSignalSema = 0x00000A34; // type:func
 sceKernelWaitSema = 0x00000A3C; // type:func
 sceIdStorageLookup = 0x00000A44; // type:func
-semaphore_4C537C72 = 0x00000A4C; // type:func
+sceUtilsBufferCopyWithRange = 0x00000A4C; // type:func
+
+// Data
+g_ddrdbBufPtr = 0x00000C40; // size:0x4
+g_ddrdbBuf = 0x00000D80;
