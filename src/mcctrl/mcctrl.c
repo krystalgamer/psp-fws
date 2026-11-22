@@ -89,7 +89,6 @@ int sceMcctrl_877CD3A5(void) {
     return 0;
 }
 
-#ifdef NON_MATCHING
 int sceMcctrl_1EDFD6BB(u8 *arg0, u8 *arg1) {
     McctrlBlock *buf1 = &D_000012D4;
     McctrlBlock2 *buf2 = &D_000013F4;
@@ -116,6 +115,9 @@ int sceMcctrl_1EDFD6BB(u8 *arg0, u8 *arg1) {
     mcctrl_memcpy(buf2->unk10, buf1->unk24, sizeof(buf2->unk10));
     mcctrl_memcpy(buf2->unk38, buf1->cert, sizeof(buf2->unk38));
     func_00000EBC(buf2->iv, sizeof(buf2->iv));
+    /* FAKEMATCH: no-op that raises arg0's allocation priority (s4/s5 order). */
+    arg0++;
+    arg0--;
     ret = func_00000BC8((u8 *)buf2, arg1, 0xB0);
     if (ret != 0) {
         goto end;
@@ -131,9 +133,6 @@ end:
     }
     return ret;
 }
-#else
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_1EDFD6BB);
-#endif
 
 #ifdef NON_MATCHING
 int sceMcctrl_7CAC25B2(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, u8 *arg4, u8 *arg5) {
