@@ -1,26 +1,26 @@
 #include "common.h"
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000000);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", module_start);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000008);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", module_stop);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000010);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_A8C9C10A);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000048);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_6DCEA43E);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000080);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_48C0D599);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000128);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_4D094AD7);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000150);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_6264E827);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000017C);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_EA2E7E4D);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000001C4);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_B17B2B4E);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000002B4);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_FA30975D);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000480);
+INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_56CA3080);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000514);
 
