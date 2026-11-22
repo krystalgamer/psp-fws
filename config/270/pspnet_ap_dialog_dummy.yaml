@@ -1,0 +1,78 @@
+name: pspnet_ap_dialog_dummy (270)
+sha1: 68b768e8715c18023971d0ad80243893658fd30e
+options:
+  basename: pspnet_ap_dialog_dummy
+  target_path: tmp/baserom/270/pspnet_ap_dialog_dummy.prx
+  elf_path: tmp/build/270/pspnet_ap_dialog_dummy.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/270/pspnet_ap_dialog_dummy
+  src_path: src/pspnet_ap_dialog_dummy
+  build_path: tmp/build/270
+  ld_script_path: tmp/build/270/pspnet_ap_dialog_dummy.ld
+  cache_path: tmp/build/270/.splat_cache.pspnet_ap_dialog_dummy
+  symbol_addrs_path:
+    - config/270/symbol_addrs.pspnet_ap_dialog_dummy.txt
+    - tmp/build/270/prx_syms.pspnet_ap_dialog_dummy.txt
+  reloc_addrs_path: [tmp/build/270/reloc_addrs.pspnet_ap_dialog_dummy.txt]
+  asset_path: tmp/assets/270/pspnet_ap_dialog_dummy
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/270/undefined_funcs_auto.pspnet_ap_dialog_dummy.txt
+  undefined_syms_auto_path: tmp/build/270/undefined_syms_auto.pspnet_ap_dialog_dummy.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8000
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x820
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: pspnet_ap_dialog_dummy
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, pspnet_ap_dialog_dummy]
+      - { start: 0x6A0, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x6E8, type: prxpad, order: .text }
+      - { start: 0x6F0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x6F4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x714, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x718, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x71C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x76C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x770, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x7A4, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x838, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x85C, rodata, pspnet_ap_dialog_dummy]
+      - { start: 0x888, type: prxpad, order: .rodata }
+  - name: pspnet_ap_dialog_dummy_seg1
+    type: code
+    start: 0x890
+    vram: 0x7F0
+    bss_size: 0x1C
+    subsegments:
+      - [0x890, data, pspnet_ap_dialog_dummy_data]
+      - { start: 0x894, type: bss, vram: 0x800 }
+  - [0x894, bin, elf_trailer]
+  - [0x11FC]
