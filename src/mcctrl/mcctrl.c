@@ -169,7 +169,53 @@ end:
     return ret;
 }
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_61550814);
+int sceMcctrl_61550814(u8 *arg0, u8 *arg1, int size, u8 *out, u32 outSize) {
+    McctrlBlock *buf1 = &D_000012D4;
+    u8 *buf2 = (u8 *)&D_000013F4;
+    u8 *data = arg1 + 4;
+    int ret = 0x80530001;
+    u32 len;
+    int i;
+
+    if (D_000012D0 == 0) {
+        goto end;
+    }
+    ret = func_00000C48(arg0, (u8 *)buf1, sizeof(McctrlBlock));
+    if (ret != 0) {
+        goto end;
+    }
+    for (i = 0; i < sizeof(u32); i++) {
+        buf2[i] = arg1[i] ^ buf1->unk10[0x10 + i];
+    }
+    len = (buf2[0] << 24) | (buf2[1] << 16) | (buf2[2] << 8) | buf2[3];
+    ret = 0x80530002;
+    if (outSize < ((len + 15) & ~15)) {
+        goto end;
+    }
+    ret = func_00000C48(data, out, size - 4);
+    if (ret != 0) {
+        goto end;
+    }
+    for (i = 0; i < len; i++) {
+        out[i] ^= buf1->unk10[i % 16];
+        if (i % 16 == 15) {
+            ret = func_000010A8(D_000012D4.unk10, D_000012D4.unk10, 0x10);
+            if (ret < 0) {
+                ret = 0x80530004;
+                goto end;
+            }
+        }
+    }
+    ret = len;
+
+end:
+    func_00000EBC((u8 *)&D_000012D4, sizeof(McctrlBlock));
+    func_00000EBC((u8 *)&D_000013F4, sizeof(McctrlBlock2));
+    if ((ret & 0xFFFF0000) == 0x80530000) {
+        ret |= 0x80530300;
+    }
+    return ret;
+}
 
 int func_00000BC8(u8 *src, u8 *dst, u32 size) {
     int ret;
