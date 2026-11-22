@@ -8,6 +8,7 @@ import argparse
 import difflib
 import re
 import struct
+import sys
 from pathlib import Path
 
 import rabbitizer
@@ -71,6 +72,10 @@ def main():
     ap.add_argument("--score", action="store_true", help="only print alignment-aware mismatch score")
     args = ap.parse_args()
 
+    elf = ROOT / "tmp/build" / args.version / f"{args.module}.elf"
+    srcs = list((ROOT / "src" / args.module).rglob("*.[ch]"))
+    if elf.exists() and srcs and max(p.stat().st_mtime for p in srcs) > elf.stat().st_mtime:
+        print(f"warning: {elf.name} is older than src/{args.module}; rebuild first", file=sys.stderr)
     base = (ROOT / "tmp/baserom" / args.version / f"{args.module}.prx").read_bytes()
     build = (ROOT / "tmp/build" / args.version / f"{args.module}.prx").read_bytes()
     if args.end is None:

@@ -31,13 +31,37 @@ make             # build and verify sha1
 `VERSION` (default `360`) and `MODULE` (default `mcctrl`) select the target.
 `make EXTRA_CPPFLAGS=-DNON_MATCHING` builds the non-matching C drafts instead of their asm.
 
+## Modules
+
+| Module | Builds covered | Setup | C status |
+|---|---|---|---|
+| mcctrl | 2.00–3.60 (one binary), config `360` | matching | 21/22 functions; `sceMcctrl_7CAC25B2` is a NON_MATCHING draft |
+| openpsid | 2.00–2.82 (psp-1.7.1 build), config `282` | matching | 12/14; Encrypt and GetOpenPSID are NON_MATCHING drafts |
+| mcore | 2.70–3.40, config `340` | matching | 84/707 (auto-decompiled) |
+| mcore | 2.50, 2.60 | matching (asm only) | – |
+| paf, pafmini | 1.00 | matching (asm only) | only 2 objects each are psp-1.3.1; the rest need the unavailable psp-1.5.1 |
+
+New modules: `tools/gen_config.py <ver> <path under F0>` then `tools/nid_names.py <ver> <name>`
+and `make split VERSION=<ver> MODULE=<name>`.
+
 ## Decompiling
 
 ```sh
 .venv/bin/python tools/progress.py            # per-function status
 .venv/bin/python tools/diff.py <function>     # side-by-side vs the original
 .venv/bin/python tools/m2c.py <function>      # m2c draft with project headers as context
+.venv/bin/python tools/auto_decomp.py <ver> <module>   # keep only exact m2c matches (full build verified)
+.venv/bin/python tools/try_variants.py <function> <variants.py>   # score source variants
+.venv/bin/python tools/permuter_setup.py <function>  # then run tmp/permuter (decomp-permuter)
 ```
+
+`diff.py --score` is alignment-aware (branch/jump targets masked). Use `--version/--module`
+for modules other than mcctrl 3.60.
+
+Style: prefer structured control flow. `goto` is only kept where every
+structured equivalent compiles differently (documented in the source); the
+auto-decompiler rejects m2c output containing `goto`. Fakematches must be
+marked `FAKEMATCH`.
 
 Install m2c from GitHub (`pip install git+https://github.com/matt-kempster/m2c.git`);
 the `m2c` package on PyPI is an unrelated project.
@@ -56,6 +80,10 @@ the `m2c` package on PyPI is an unrelated project.
 - psp-1.7.1 objects had 8-byte aligned `.text`; padding `nop`s before an
   8-aligned function mark a translation-unit boundary (e.g. mcctrl 0xE78).
   `tools/fix_old_gas.py --text-align 8` emulates this for psp-as 1.3.1 output.
+- NIDs are the first 4 bytes of SHA-1 of the name; `tools/nid_names.py`
+  resolves them from identifiers in the SDK (extracted to `tmp/sdk`).
+- Data words reference symbols only through PRX relocations (value-based
+  pointer guessing is disabled in `tools/split.py`).
 - Sony code here uses small inline helpers (memclr/memcpy/memcmp taking
   `void *` and casting to local byte pointers) and `goto end` error chains;
   reproducing those is usually what makes register allocation match.
