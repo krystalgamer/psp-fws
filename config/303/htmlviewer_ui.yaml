@@ -1,0 +1,79 @@
+name: htmlviewer_ui (303)
+sha1: 598a3f6b54b7cf3ebd7b343b0a4f576d94a09045
+options:
+  basename: htmlviewer_ui
+  target_path: tmp/baserom/303/htmlviewer_ui.prx
+  elf_path: tmp/build/303/htmlviewer_ui.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/303/htmlviewer_ui
+  src_path: src/htmlviewer_ui
+  build_path: tmp/build/303
+  ld_script_path: tmp/build/303/htmlviewer_ui.ld
+  cache_path: tmp/build/303/.splat_cache.htmlviewer_ui
+  symbol_addrs_path:
+    - config/303/symbol_addrs.htmlviewer_ui.txt
+    - tmp/build/303/prx_syms.htmlviewer_ui.txt
+  reloc_addrs_path: [tmp/build/303/reloc_addrs.htmlviewer_ui.txt]
+  asset_path: tmp/assets/303/htmlviewer_ui
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/303/undefined_funcs_auto.htmlviewer_ui.txt
+  undefined_syms_auto_path: tmp/build/303/undefined_syms_auto.htmlviewer_ui.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8CF0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x6E68C
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: htmlviewer_ui
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, htmlviewer_ui]
+      - { start: 0x5BB68, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x5C510, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x5C514, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x5C538, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x5C53C, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x5C540, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x5C6E8, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x5C6EC, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x5C720, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x5C990, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x5CE64, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x5CE78, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - { start: 0x5CEB4, type: prxpad, order: .rodata }
+      - [0x5CEB8, rodata, htmlviewer_ui]
+  - name: htmlviewer_ui_seg1
+    type: code
+    start: 0x60C30
+    vram: 0x60BB0
+    bss_size: 0xCDCC
+    subsegments:
+      - [0x60C30, data, htmlviewer_ui_data]
+      - { start: 0x61930, type: bss, vram: 0x618B0 }
+  - [0x61930, bin, elf_trailer]
+  - [0x83404]

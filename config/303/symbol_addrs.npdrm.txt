@@ -1,0 +1,9 @@
+// NID-derived names
+scePspNpDrm_driver_04618D16 = 0x00000000; // type:func
+scePspNpDrm_driver_17E3F4BB = 0x00000034; // type:func
+scePspNpDrm_driver_37B9B10D = 0x00000088; // type:func
+scePspNpDrm_driver_5667B7B9 = 0x000000DC; // type:func
+module_start = 0x0000044C; // type:func
+module_stop = 0x00000454; // type:func
+sceDdrdbSigvry = 0x00001D30; // type:func
+sceOpenPSID_driver_19D579F0 = 0x00001D38; // type:func

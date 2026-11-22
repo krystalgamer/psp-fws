@@ -1,0 +1,79 @@
+name: mgvideo (303)
+sha1: e11b7a290cdd05ec0b17e9c30b4af2fac0cc0057
+options:
+  basename: mgvideo
+  target_path: tmp/baserom/303/mgvideo.prx
+  elf_path: tmp/build/303/mgvideo.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/303/mgvideo
+  src_path: src/mgvideo
+  build_path: tmp/build/303
+  ld_script_path: tmp/build/303/mgvideo.ld
+  cache_path: tmp/build/303/.splat_cache.mgvideo
+  symbol_addrs_path:
+    - config/303/symbol_addrs.mgvideo.txt
+    - tmp/build/303/prx_syms.mgvideo.txt
+  reloc_addrs_path: [tmp/build/303/reloc_addrs.mgvideo.txt]
+  asset_path: tmp/assets/303/mgvideo
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/303/undefined_funcs_auto.mgvideo.txt
+  undefined_syms_auto_path: tmp/build/303/undefined_syms_auto.mgvideo.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8080
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xE190
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: mgvideo
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, mgvideo]
+      - { start: 0x7744, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x78BC, type: prxpad, order: .text }
+      - { start: 0x78C0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x78C4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x78E8, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x78EC, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x78F0, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x796C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x7970, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x79A4, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x7B40, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x7BFC, type: prxpad, order: .rodata }
+      - [0x7C00, rodata, mgvideo]
+      - { start: 0x8134, type: prxpad, order: .rodata }
+  - name: mgvideo_seg1
+    type: code
+    start: 0x8140
+    vram: 0x80A0
+    bss_size: 0x605C
+    subsegments:
+      - [0x8140, data, mgvideo_data]
+      - { start: 0x81C4, type: bss, vram: 0x8130 }
+  - [0x81C4, bin, elf_trailer]
+  - [0xA454]

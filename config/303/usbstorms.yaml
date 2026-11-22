@@ -1,0 +1,78 @@
+name: usbstorms (303)
+sha1: e552f56dac742beb4e1bbd8c19a2700afd81865b
+options:
+  basename: usbstorms
+  target_path: tmp/baserom/303/usbstorms.prx
+  elf_path: tmp/build/303/usbstorms.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/303/usbstorms
+  src_path: src/usbstorms
+  build_path: tmp/build/303
+  ld_script_path: tmp/build/303/usbstorms.ld
+  cache_path: tmp/build/303/.splat_cache.usbstorms
+  symbol_addrs_path:
+    - config/303/symbol_addrs.usbstorms.txt
+    - tmp/build/303/prx_syms.usbstorms.txt
+  reloc_addrs_path: [tmp/build/303/reloc_addrs.usbstorms.txt]
+  asset_path: tmp/assets/303/usbstorms
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/303/undefined_funcs_auto.usbstorms.txt
+  undefined_syms_auto_path: tmp/build/303/undefined_syms_auto.usbstorms.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8060
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x4310
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: usbstorms
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, usbstorms]
+      - { start: 0x36BC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x37FC, type: prxpad, order: .text }
+      - { start: 0x3800, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x3804, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x3824, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x3828, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x382C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x38E4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x38E8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x391C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x3A50, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x3AF0, rodata, usbstorms]
+      - { start: 0x40FC, type: prxpad, order: .rodata }
+  - name: usbstorms_seg1
+    type: code
+    start: 0x4100
+    vram: 0x4080
+    bss_size: 0x214
+    subsegments:
+      - [0x4100, data, usbstorms_data]
+      - { start: 0x416C, type: bss, vram: 0x4100 }
+  - [0x416C, bin, elf_trailer]
+  - [0x6188]
