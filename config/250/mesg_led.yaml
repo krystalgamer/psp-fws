@@ -1,0 +1,76 @@
+name: mesg_led (250)
+sha1: b75f8b1e727dd78ab2d1001931c542a37b3edc17
+options:
+  basename: mesg_led
+  target_path: tmp/baserom/250/mesg_led.prx
+  elf_path: tmp/build/250/mesg_led.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/250/mesg_led
+  src_path: src/mesg_led
+  build_path: tmp/build/250
+  ld_script_path: tmp/build/250/mesg_led.ld
+  cache_path: tmp/build/250/.splat_cache.mesg_led
+  symbol_addrs_path:
+    - config/250/symbol_addrs.mesg_led.txt
+    - tmp/build/250/prx_syms.mesg_led.txt
+  reloc_addrs_path: [tmp/build/250/reloc_addrs.mesg_led.txt]
+  asset_path: tmp/assets/250/mesg_led
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/250/undefined_funcs_auto.mesg_led.txt
+  undefined_syms_auto_path: tmp/build/250/undefined_syms_auto.mesg_led.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x7FF0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x40D0
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: mesg_led
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, mesg_led]
+      - { start: 0x20A8, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x20E0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x20E4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2184, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2188, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x218C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x21B4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x21B8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x21EC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x239C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x23B8, rodata, mesg_led]
+      - { start: 0x3C48, type: prxpad, order: .rodata }
+  - name: mesg_led_seg1
+    type: code
+    start: 0x3C80
+    vram: 0x3C00
+    bss_size: 0x4C0
+    subsegments:
+      - { start: 0x3C80, type: bss, vram: 0x3C00 }
+  - [0x3C80, bin, elf_trailer]
+  - [0x551C]

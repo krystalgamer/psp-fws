@@ -1,0 +1,78 @@
+name: libfont_hv (250)
+sha1: 377e82b75a0e4bb87fed4f30ed222dd8b6787da7
+options:
+  basename: libfont_hv
+  target_path: tmp/baserom/250/libfont_hv.prx
+  elf_path: tmp/build/250/libfont_hv.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/250/libfont_hv
+  src_path: src/libfont_hv
+  build_path: tmp/build/250
+  ld_script_path: tmp/build/250/libfont_hv.ld
+  cache_path: tmp/build/250/.splat_cache.libfont_hv
+  symbol_addrs_path:
+    - config/250/symbol_addrs.libfont_hv.txt
+    - tmp/build/250/prx_syms.libfont_hv.txt
+  reloc_addrs_path: [tmp/build/250/reloc_addrs.libfont_hv.txt]
+  asset_path: tmp/assets/250/libfont_hv
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/250/undefined_funcs_auto.libfont_hv.txt
+  undefined_syms_auto_path: tmp/build/250/undefined_syms_auto.libfont_hv.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x80C0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x9FE0
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: libfont_hv
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, libfont_hv]
+      - { start: 0x9740, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x9768, type: prxpad, order: .text }
+      - { start: 0x9770, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x9774, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x9794, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x9798, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x979C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x97C4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x97C8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x97FC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x993C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x9950, rodata, libfont_hv]
+      - { start: 0x9F64, type: prxpad, order: .rodata }
+  - name: libfont_hv_seg1
+    type: code
+    start: 0x9F70
+    vram: 0x9EF0
+    bss_size: 0x1C
+    subsegments:
+      - [0x9F70, data, libfont_hv_data]
+      - { start: 0xA034, type: bss, vram: 0x9FC0 }
+  - [0xA034, bin, elf_trailer]
+  - [0xC884]

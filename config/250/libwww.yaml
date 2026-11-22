@@ -1,0 +1,71 @@
+name: libwww (250)
+sha1: 2727e7649dd26967b78282bf74d0f51fdf0bd8c0
+options:
+  basename: libwww
+  target_path: tmp/baserom/250/libwww.prx
+  elf_path: tmp/build/250/libwww.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/250/libwww
+  src_path: src/libwww
+  build_path: tmp/build/250
+  ld_script_path: tmp/build/250/libwww.ld
+  cache_path: tmp/build/250/.splat_cache.libwww
+  symbol_addrs_path:
+    - config/250/symbol_addrs.libwww.txt
+    - tmp/build/250/prx_syms.libwww.txt
+  reloc_addrs_path: [tmp/build/250/reloc_addrs.libwww.txt]
+  asset_path: tmp/assets/250/libwww
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/250/undefined_funcs_auto.libwww.txt
+  undefined_syms_auto_path: tmp/build/250/undefined_syms_auto.libwww.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x7FF0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xE3CD0
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: libwww
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, libwww]
+      - { start: 0xCC168, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0xCD388, type: prxpad, order: .text }
+      - { start: 0xCD390, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0xCD394, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0xCD3B4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0xCD3B8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0xCD3BC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0xCD3D4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0xCD3D8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0xCD40C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0xCD8EC, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0xCE1FC, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - [0xCEBA8, rodata, libwww]
+      - { start: 0xE3D34, type: prxpad, order: .rodata }
+  - [0xE3D40, bin, elf_trailer]
+  - [0x11E691]

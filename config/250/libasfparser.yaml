@@ -1,0 +1,69 @@
+name: libasfparser (250)
+sha1: 39cde9f057b8b751978e5d28e59e5f500d249365
+options:
+  basename: libasfparser
+  target_path: tmp/baserom/250/libasfparser.prx
+  elf_path: tmp/build/250/libasfparser.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/250/libasfparser
+  src_path: src/libasfparser
+  build_path: tmp/build/250
+  ld_script_path: tmp/build/250/libasfparser.ld
+  cache_path: tmp/build/250/.splat_cache.libasfparser
+  symbol_addrs_path:
+    - config/250/symbol_addrs.libasfparser.txt
+    - tmp/build/250/prx_syms.libasfparser.txt
+  reloc_addrs_path: [tmp/build/250/reloc_addrs.libasfparser.txt]
+  asset_path: tmp/assets/250/libasfparser
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/250/undefined_funcs_auto.libasfparser.txt
+  undefined_syms_auto_path: tmp/build/250/undefined_syms_auto.libasfparser.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x7FF0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xD710
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: libasfparser
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, libasfparser]
+      - { start: 0x77A8, type: prxpad, order: .text }
+      - { start: 0x77B0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x77B4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x77D4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x77D8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x77DC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x77E0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x7814, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x78B4, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - { start: 0x78E4, type: prxpad, order: .rodata }
+      - [0x78E8, rodata, libasfparser]
+      - { start: 0xD778, type: prxpad, order: .rodata }
+  - [0xD780, bin, elf_trailer]
+  - [0xFB58]

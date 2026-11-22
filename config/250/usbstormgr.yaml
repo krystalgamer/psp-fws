@@ -1,0 +1,78 @@
+name: usbstormgr (250)
+sha1: fe84fae929795b19ceab0c8f49e2f127b9cc188e
+options:
+  basename: usbstormgr
+  target_path: tmp/baserom/250/usbstormgr.prx
+  elf_path: tmp/build/250/usbstormgr.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/250/usbstormgr
+  src_path: src/usbstormgr
+  build_path: tmp/build/250
+  ld_script_path: tmp/build/250/usbstormgr.ld
+  cache_path: tmp/build/250/.splat_cache.usbstormgr
+  symbol_addrs_path:
+    - config/250/symbol_addrs.usbstormgr.txt
+    - tmp/build/250/prx_syms.usbstormgr.txt
+  reloc_addrs_path: [tmp/build/250/reloc_addrs.usbstormgr.txt]
+  asset_path: tmp/assets/250/usbstormgr
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/250/undefined_funcs_auto.usbstormgr.txt
+  undefined_syms_auto_path: tmp/build/250/undefined_syms_auto.usbstormgr.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8010
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x5234
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: usbstormgr
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, usbstormgr]
+      - { start: 0x4C28, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x4DF8, type: prxpad, order: .text }
+      - { start: 0x4E00, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x4E04, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x4E14, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x4E18, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x4E1C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x4E94, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x4E98, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x4ECC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x4F6C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x5054, rodata, usbstormgr]
+      - { start: 0x51F4, type: prxpad, order: .rodata }
+  - name: usbstormgr_seg1
+    type: code
+    start: 0x5200
+    vram: 0x5180
+    bss_size: 0x90
+    subsegments:
+      - [0x5200, data, usbstormgr_data]
+      - { start: 0x5214, type: bss, vram: 0x51A0 }
+  - [0x5214, bin, elf_trailer]
+  - [0x6FF8]

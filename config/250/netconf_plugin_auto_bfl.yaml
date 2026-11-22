@@ -1,0 +1,84 @@
+name: netconf_plugin_auto_bfl (250)
+sha1: 1c09b2c3240cba09e5a39b9ba51219657fbfeaa1
+options:
+  basename: netconf_plugin_auto_bfl
+  target_path: tmp/baserom/250/netconf_plugin_auto_bfl.prx
+  elf_path: tmp/build/250/netconf_plugin_auto_bfl.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/250/netconf_plugin_auto_bfl
+  src_path: src/netconf_plugin_auto_bfl
+  build_path: tmp/build/250
+  ld_script_path: tmp/build/250/netconf_plugin_auto_bfl.ld
+  cache_path: tmp/build/250/.splat_cache.netconf_plugin_auto_bfl
+  symbol_addrs_path:
+    - config/250/symbol_addrs.netconf_plugin_auto_bfl.txt
+    - tmp/build/250/prx_syms.netconf_plugin_auto_bfl.txt
+  reloc_addrs_path: [tmp/build/250/reloc_addrs.netconf_plugin_auto_bfl.txt]
+  asset_path: tmp/assets/250/netconf_plugin_auto_bfl
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/250/undefined_funcs_auto.netconf_plugin_auto_bfl.txt
+  undefined_syms_auto_path: tmp/build/250/undefined_syms_auto.netconf_plugin_auto_bfl.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8020
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x59B0
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: netconf_plugin_auto_bfl
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - [0xA4, asm, netconf_plugin_auto_bfl]
+      - { start: 0x4324, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x4340, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x4478, type: prxpad, order: .text }
+      - { start: 0x4480, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x4484, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x44A4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x44A8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x44AC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x4550, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x4554, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x4588, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x467C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x4718, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x4720, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x4728, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x472C, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x4730, rodata, netconf_plugin_auto_bfl]
+      - { start: 0x489C, type: prxpad, order: .rodata }
+  - name: netconf_plugin_auto_bfl_seg1
+    type: code
+    start: 0x48A0
+    vram: 0x4820
+    bss_size: 0x1158
+    subsegments:
+      - [0x48A0, data, netconf_plugin_auto_bfl_data]
+      - { start: 0x48C8, type: bss, vram: 0x4850 }
+  - [0x48C8, bin, elf_trailer]
+  - [0x6CC3]

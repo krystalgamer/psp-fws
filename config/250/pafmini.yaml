@@ -1,0 +1,86 @@
+name: pafmini (250)
+sha1: 292e065bb54420bba594529a4fcf1d2f476d8f59
+options:
+  basename: pafmini
+  target_path: tmp/baserom/250/pafmini.prx
+  elf_path: tmp/build/250/pafmini.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/250/pafmini
+  src_path: src/pafmini
+  build_path: tmp/build/250
+  ld_script_path: tmp/build/250/pafmini.ld
+  cache_path: tmp/build/250/.splat_cache.pafmini
+  symbol_addrs_path:
+    - config/250/symbol_addrs.pafmini.txt
+    - tmp/build/250/prx_syms.pafmini.txt
+  reloc_addrs_path: [tmp/build/250/reloc_addrs.pafmini.txt]
+  asset_path: tmp/assets/250/pafmini
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/250/undefined_funcs_auto.pafmini.txt
+  undefined_syms_auto_path: tmp/build/250/undefined_syms_auto.pafmini.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x9150
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x116764
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: pafmini
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - { start: 0xA4, type: prxpad, order: .text }
+      - [0xB0, asm, pafmini]
+      - { start: 0xCD93C, type: asm, name: fini, linker_section: .fini }
+      - { start: 0xCD958, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0xCDB48, type: prxpad, order: .text }
+      - { start: 0xCDB50, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0xCDB54, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0xCDB74, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0xCDB78, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0xCDB7C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0xCDC80, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0xCDC84, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0xCDCB8, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0xCFA0C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0xCFB04, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0xCFB54, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0xCFB90, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0xCFB94, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - { start: 0xCFB98, type: prxpad, order: .rodata }
+      - [0xCFBC0, rodata, pafmini]
+      - { start: 0xDEAA8, type: prxpad, order: .rodata }
+  - name: pafmini_seg1
+    type: code
+    start: 0xDEAB0
+    vram: 0xDEA30
+    bss_size: 0x36BD0
+    subsegments:
+      - [0xDEAB0, data, pafmini_data]
+      - { start: 0xDFC04, type: bss, vram: 0xDFB90 }
+  - [0xDFC04, bin, elf_trailer]
+  - [0x122CC2]

@@ -1,0 +1,21 @@
+// NID-derived names
+Uart4ForKernel_D00E3D06 = 0x00000088; // type:func
+Uart4ForKernel_4E9CBD00 = 0x000001C4; // type:func
+Uart4ForKernel_A68555F7 = 0x00000244; // type:func
+Uart4ForKernel_C703109F = 0x000002A4; // type:func
+Uart4ForKernel_C0BE3133 = 0x000002D0; // type:func
+Uart4ForKernel_D91079E3 = 0x000002F8; // type:func
+Uart4ForKernel_69BCBEF1 = 0x00000418; // type:func
+Uart4ForKernel_2518C2F3 = 0x00000440; // type:func
+Uart4ForKernel_2FD96F62 = 0x00000460; // type:func
+Uart4ForKernel_393E7F51 = 0x00000480; // type:func
+syslib_D3744BE0 = 0x000004E0; // type:func
+sceKernelCpuSuspendIntr = 0x00000680; // type:func
+sceKernelCpuResumeIntr = 0x00000688; // type:func
+sceKernelCpuResumeIntrWithSync = 0x00000690; // type:func
+KDebugForKernel_E146606D = 0x00000698; // type:func
+KDebugForKernel_66253C4E = 0x000006A0; // type:func
+KDebugForKernel_E6554FDA = 0x000006A8; // type:func
+KDebugForKernel_7D1C74F0 = 0x000006B0; // type:func
+sceSuspendForKernel_91A77137 = 0x000006B8; // type:func
+sceSuspendForKernel_B43D1A8C = 0x000006C0; // type:func

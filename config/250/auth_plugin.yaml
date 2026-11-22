@@ -1,0 +1,85 @@
+name: auth_plugin (250)
+sha1: f1f8fe27765705f75109beeea151b0a328e84743
+options:
+  basename: auth_plugin
+  target_path: tmp/baserom/250/auth_plugin.prx
+  elf_path: tmp/build/250/auth_plugin.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/250/auth_plugin
+  src_path: src/auth_plugin
+  build_path: tmp/build/250
+  ld_script_path: tmp/build/250/auth_plugin.ld
+  cache_path: tmp/build/250/.splat_cache.auth_plugin
+  symbol_addrs_path:
+    - config/250/symbol_addrs.auth_plugin.txt
+    - tmp/build/250/prx_syms.auth_plugin.txt
+  reloc_addrs_path: [tmp/build/250/reloc_addrs.auth_plugin.txt]
+  asset_path: tmp/assets/250/auth_plugin
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/250/undefined_funcs_auto.auth_plugin.txt
+  undefined_syms_auto_path: tmp/build/250/undefined_syms_auto.auth_plugin.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8040
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x3464
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: auth_plugin
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - [0xA4, asm, auth_plugin]
+      - { start: 0x2DD0, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x2DEC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x2F64, type: prxpad, order: .text }
+      - { start: 0x2F70, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x2F74, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2F84, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2F88, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x2F8C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x2FD0, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x2FD4, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x3008, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x3058, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x3114, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x319C, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x31A8, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x31B4, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x31B8, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x31BC, rodata, auth_plugin]
+      - { start: 0x337C, type: prxpad, order: .rodata }
+  - name: auth_plugin_seg1
+    type: code
+    start: 0x3380
+    vram: 0x3300
+    bss_size: 0x110
+    subsegments:
+      - [0x3380, data, auth_plugin_data]
+      - { start: 0x33C4, type: bss, vram: 0x3350 }
+  - [0x33C4, bin, elf_trailer]
+  - [0x55DC]

@@ -1,0 +1,78 @@
+name: me_wrapper (250)
+sha1: 527a33eca66d2bf4d866a8180cf0494d878554b4
+options:
+  basename: me_wrapper
+  target_path: tmp/baserom/250/me_wrapper.prx
+  elf_path: tmp/build/250/me_wrapper.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/250/me_wrapper
+  src_path: src/me_wrapper
+  build_path: tmp/build/250
+  ld_script_path: tmp/build/250/me_wrapper.ld
+  cache_path: tmp/build/250/.splat_cache.me_wrapper
+  symbol_addrs_path:
+    - config/250/symbol_addrs.me_wrapper.txt
+    - tmp/build/250/prx_syms.me_wrapper.txt
+  reloc_addrs_path: [tmp/build/250/reloc_addrs.me_wrapper.txt]
+  asset_path: tmp/assets/250/me_wrapper
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/250/undefined_funcs_auto.me_wrapper.txt
+  undefined_syms_auto_path: tmp/build/250/undefined_syms_auto.me_wrapper.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8030
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x274C
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: me_wrapper
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, me_wrapper]
+      - { start: 0x1F50, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x2088, type: prxpad, order: .text }
+      - { start: 0x2090, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x2094, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2104, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2108, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x210C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x21EC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x21F0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x2224, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x2548, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x25E4, rodata, me_wrapper]
+      - { start: 0x2768, type: prxpad, order: .rodata }
+  - name: me_wrapper_seg1
+    type: code
+    start: 0x2770
+    vram: 0x26F0
+    bss_size: 0xC
+    subsegments:
+      - [0x2770, data, me_wrapper_data]
+      - { start: 0x27B0, type: bss, vram: 0x2730 }
+  - [0x27B0, bin, elf_trailer]
+  - [0x3D18]
