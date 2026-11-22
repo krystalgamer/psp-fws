@@ -37,6 +37,9 @@ UNSUPPORTED = {
 def unsupported(op):
     # Every remaining VFPU mnemonic starts with "v"; base MIPS has none.
     return op in UNSUPPORTED or op.startswith("v")
+DATA_WORD_RE = re.compile(
+    r"^(?P<pre>\s*/\* (?P<rom>[0-9A-F]+) [0-9A-F]+ (?P<raw>[0-9A-F]{8}) \*/ )\.word (?P<val>[A-Za-z_][\w.+\- ]*)$"
+)
 INSN_RE = re.compile(
     r"^(?P<pre>\s*/\* [0-9A-F]+ [0-9A-F]+ (?P<raw>[0-9A-F]{8}) \*/\s+)(?P<op>[a-z0-9.]+)\s"
 )
@@ -52,13 +55,30 @@ def _psp_init(target_bytes: bytes):
     spimdisasm.common.GlobalConfig.ALLOW_ALL_CONSTANTS_ON_DATA = False
 
 
-def fix_unsupported(asm_dir: Path):
+def fix_unsupported(asm_dir: Path, reloc_roms=frozenset()):
+    """Rewrite lines GAS can't take (or that would mis-assemble) as raw words.
+
+    Besides opcodes modern GAS rejects for Allegrex, this covers %hi/%lo
+    operands spimdisasm inferred at offsets without a PRX relocation: those
+    are plain constants (e.g. handwritten code using $gp as a register).
+    """
     for path in asm_dir.rglob("*.s"):
         lines = path.read_text().splitlines(keepends=True)
         changed = False
         for i, line in enumerate(lines):
             m = INSN_RE.match(line)
-            if m and unsupported(m["op"]):
+            bogus_reloc = (
+                m is not None and reloc_roms is not None
+                and ("%hi(" in line or "%lo(" in line or "%gp_rel(" in line)
+                and int(line.split("/*", 1)[1].split()[0], 16) not in reloc_roms
+            )
+            dm = DATA_WORD_RE.match(line.rstrip("\n"))
+            if dm and reloc_roms and int(dm["rom"], 16) not in reloc_roms:
+                word = int.from_bytes(bytes.fromhex(dm["raw"]), "little")
+                lines[i] = f"{dm['pre']}.word 0x{word:08X} # {dm['val']}\n"
+                changed = True
+                continue
+            if m and (unsupported(m["op"]) or bogus_reloc):
                 word = int.from_bytes(bytes.fromhex(m["raw"]), "little")
                 lines[i] = f"{m['pre']}.word      0x{word:08X} # {line[m.start('op'):].strip()}\n"
                 changed = True
@@ -116,6 +136,7 @@ def _no_pointer_guessing(self, word: int) -> bool:
 
 
 spimdisasm.mips.sections.MipsSectionBase.SectionBase.checkWordIsASymbolReference = _no_pointer_guessing
+
 splat.platforms.psp.init = _psp_init
 
 if __name__ == "__main__":
@@ -124,6 +145,11 @@ if __name__ == "__main__":
         splat_main()
     finally:
         if options.opts is not None and getattr(options.opts, "asm_path", None):
-            fix_unsupported(options.opts.asm_path)
+            relocs = set()
+            for rp in options.opts.reloc_addrs_paths:
+                for rl in Path(rp).read_text().splitlines():
+                    if rl.startswith("rom:"):
+                        relocs.add(int(rl.split()[0][4:], 16))
+            fix_unsupported(options.opts.asm_path, relocs)
             fix_ld_script(options.opts.ld_script_path, Path(sys.argv[-1]))
             prune_undefined_syms(options.opts.asm_path, options.opts.undefined_syms_auto_path)

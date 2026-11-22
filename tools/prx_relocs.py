@@ -122,10 +122,15 @@ def main():
             target += segs[addr_base]["p_vaddr"]
             seg = segs[addr_base]
             in_seg = seg["p_vaddr"] <= target <= seg["p_vaddr"] + seg["p_memsz"]
-            if typ != R_MIPS_32 and not in_seg and target != gp_target:
+            in_section = any(x.addr <= target < x.addr + x.size for x in secs)
+            if target == gp_target:
+                in_range_elsewhere = True
+            elif typ != R_MIPS_32 and not in_seg:
                 in_range_elsewhere = False
             else:
-                in_range_elsewhere = True
+                # targets between sections (e.g. one-past-end pointers) get no
+                # label from splat, so they must not become named symbols
+                in_range_elsewhere = in_section or target < text_end
             if target < 0 or target > 0xFFFFFFFF or not in_range_elsewhere:
                 # base-minus-offset arithmetic: reference an absolute zero
                 # symbol with the link-space value as addend

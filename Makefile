@@ -45,6 +45,7 @@ $(BASEROM):
 extract: $(BASEROM)
 
 split: $(BASEROM)
+	rm -rf $(BUILD)/.splat_cache $(BUILD)/.splat_cache.$(MODULE)
 	$(PYTHON) tools/prx_relocs.py $(BASEROM) $(BUILD)/reloc_addrs.$(MODULE).txt $(BUILD)/prx_syms.$(MODULE).txt --names config/$(VERSION)/symbol_addrs.$(MODULE).txt
 	$(PYTHON) tools/split.py $(CONFIG)
 
