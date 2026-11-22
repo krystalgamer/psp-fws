@@ -1,0 +1,76 @@
+name: cert_loader (340)
+sha1: c21324aff5d2c05fa598159c8e84c2bb4acf6cff
+options:
+  basename: cert_loader
+  target_path: tmp/baserom/340/cert_loader.prx
+  elf_path: tmp/build/340/cert_loader.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/340/cert_loader
+  src_path: src/cert_loader
+  build_path: tmp/build/340
+  ld_script_path: tmp/build/340/cert_loader.ld
+  cache_path: tmp/build/340/.splat_cache.cert_loader
+  symbol_addrs_path:
+    - config/340/symbol_addrs.cert_loader.txt
+    - tmp/build/340/prx_syms.cert_loader.txt
+  reloc_addrs_path: [tmp/build/340/reloc_addrs.cert_loader.txt]
+  asset_path: tmp/assets/340/cert_loader
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/340/undefined_funcs_auto.cert_loader.txt
+  undefined_syms_auto_path: tmp/build/340/undefined_syms_auto.cert_loader.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8000
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xDF0
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: cert_loader
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, cert_loader]
+      - { start: 0xC9C, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0xCC4, type: prxpad, order: .text }
+      - { start: 0xCD0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0xCD4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0xD04, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0xD08, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0xD0C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0xD34, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0xD38, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0xD6C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0xDE8, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0xDFC, rodata, cert_loader]
+      - { start: 0xE64, type: prxpad, order: .rodata }
+  - name: cert_loader_seg1
+    type: code
+    start: 0xE70
+    vram: 0xDD0
+    subsegments:
+      - [0xE70, data, cert_loader_data]
+  - [0xE74, bin, elf_trailer]
+  - [0x1774]

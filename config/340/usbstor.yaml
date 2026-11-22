@@ -1,0 +1,77 @@
+name: usbstor (340)
+sha1: 54f82dd23a902a524ddf1b6d9933255a04f20fa9
+options:
+  basename: usbstor
+  target_path: tmp/baserom/340/usbstor.prx
+  elf_path: tmp/build/340/usbstor.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/340/usbstor
+  src_path: src/usbstor
+  build_path: tmp/build/340
+  ld_script_path: tmp/build/340/usbstor.ld
+  cache_path: tmp/build/340/.splat_cache.usbstor
+  symbol_addrs_path:
+    - config/340/symbol_addrs.usbstor.txt
+    - tmp/build/340/prx_syms.usbstor.txt
+  reloc_addrs_path: [tmp/build/340/reloc_addrs.usbstor.txt]
+  asset_path: tmp/assets/340/usbstor
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/340/undefined_funcs_auto.usbstor.txt
+  undefined_syms_auto_path: tmp/build/340/undefined_syms_auto.usbstor.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x80F0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x2DEC
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: usbstor
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, usbstor]
+      - { start: 0x234C, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x242C, type: prxpad, order: .text }
+      - { start: 0x2430, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x2434, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2474, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2478, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x247C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x250C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x2510, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x2544, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x2688, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x26F8, rodata, usbstor]
+  - name: usbstor_seg1
+    type: code
+    start: 0x2BE0
+    vram: 0x2B40
+    bss_size: 0x1A4
+    subsegments:
+      - [0x2BE0, data, usbstor_data]
+      - { start: 0x2CD8, type: bss, vram: 0x2C40 }
+  - [0x2CD8, bin, elf_trailer]
+  - [0x4288]

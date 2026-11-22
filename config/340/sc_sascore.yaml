@@ -1,0 +1,78 @@
+name: sc_sascore (340)
+sha1: 263c0d81505853bb60171296b0e5fcc28b83c966
+options:
+  basename: sc_sascore
+  target_path: tmp/baserom/340/sc_sascore.prx
+  elf_path: tmp/build/340/sc_sascore.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/340/sc_sascore
+  src_path: src/sc_sascore
+  build_path: tmp/build/340
+  ld_script_path: tmp/build/340/sc_sascore.ld
+  cache_path: tmp/build/340/.splat_cache.sc_sascore
+  symbol_addrs_path:
+    - config/340/symbol_addrs.sc_sascore.txt
+    - tmp/build/340/prx_syms.sc_sascore.txt
+  reloc_addrs_path: [tmp/build/340/reloc_addrs.sc_sascore.txt]
+  asset_path: tmp/assets/340/sc_sascore
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/340/undefined_funcs_auto.sc_sascore.txt
+  undefined_syms_auto_path: tmp/build/340/undefined_syms_auto.sc_sascore.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8000
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x28A8
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: sc_sascore
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, sc_sascore]
+      - { start: 0x2568, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x25C8, type: prxpad, order: .text }
+      - { start: 0x25D0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x25D4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2628, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x262C, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x2630, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x2694, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x2698, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x26CC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x28C4, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x28F4, rodata, sc_sascore]
+      - { start: 0x291C, type: prxpad, order: .rodata }
+  - name: sc_sascore_seg1
+    type: code
+    start: 0x2920
+    vram: 0x2880
+    bss_size: 0x14
+    subsegments:
+      - [0x2920, data, sc_sascore_data]
+      - { start: 0x2924, type: bss, vram: 0x2890 }
+  - [0x2924, bin, elf_trailer]
+  - [0x391C]

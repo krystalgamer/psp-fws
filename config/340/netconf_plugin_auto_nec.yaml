@@ -1,0 +1,83 @@
+name: netconf_plugin_auto_nec (340)
+sha1: f181db1c71e602de815667a1b944abd94f99b931
+options:
+  basename: netconf_plugin_auto_nec
+  target_path: tmp/baserom/340/netconf_plugin_auto_nec.prx
+  elf_path: tmp/build/340/netconf_plugin_auto_nec.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/340/netconf_plugin_auto_nec
+  src_path: src/netconf_plugin_auto_nec
+  build_path: tmp/build/340
+  ld_script_path: tmp/build/340/netconf_plugin_auto_nec.ld
+  cache_path: tmp/build/340/.splat_cache.netconf_plugin_auto_nec
+  symbol_addrs_path:
+    - config/340/symbol_addrs.netconf_plugin_auto_nec.txt
+    - tmp/build/340/prx_syms.netconf_plugin_auto_nec.txt
+  reloc_addrs_path: [tmp/build/340/reloc_addrs.netconf_plugin_auto_nec.txt]
+  asset_path: tmp/assets/340/netconf_plugin_auto_nec
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/340/undefined_funcs_auto.netconf_plugin_auto_nec.txt
+  undefined_syms_auto_path: tmp/build/340/undefined_syms_auto.netconf_plugin_auto_nec.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8060
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x98A8
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: netconf_plugin_auto_nec
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - { start: 0xA0, type: asm, name: init, linker_section: .init }
+      - [0xC4, asm, netconf_plugin_auto_nec]
+      - { start: 0x565C, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x5678, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x5768, type: prxpad, order: .text }
+      - { start: 0x5770, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x5774, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x5794, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x5798, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x579C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x5854, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x5858, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x588C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x5998, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x5A10, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x5A18, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x5A20, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x5A24, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x5A54, rodata, netconf_plugin_auto_nec]
+  - name: netconf_plugin_auto_nec_seg1
+    type: code
+    start: 0x8530
+    vram: 0x8490
+    bss_size: 0x139C
+    subsegments:
+      - [0x8530, data, netconf_plugin_auto_nec_data]
+      - { start: 0x859C, type: bss, vram: 0x8500 }
+  - [0x859C, bin, elf_trailer]
+  - [0xA434]

@@ -1,0 +1,86 @@
+name: music_common (340)
+sha1: 8419d91884d2e7c0ca6246a2dbc3e54bbf366459
+options:
+  basename: music_common
+  target_path: tmp/baserom/340/music_common.prx
+  elf_path: tmp/build/340/music_common.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/340/music_common
+  src_path: src/music_common
+  build_path: tmp/build/340
+  ld_script_path: tmp/build/340/music_common.ld
+  cache_path: tmp/build/340/.splat_cache.music_common
+  symbol_addrs_path:
+    - config/340/symbol_addrs.music_common.txt
+    - tmp/build/340/prx_syms.music_common.txt
+  reloc_addrs_path: [tmp/build/340/reloc_addrs.music_common.txt]
+  asset_path: tmp/assets/340/music_common
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/340/undefined_funcs_auto.music_common.txt
+  undefined_syms_auto_path: tmp/build/340/undefined_syms_auto.music_common.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8370
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x25C80
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: music_common
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - { start: 0xA0, type: asm, name: init, linker_section: .init }
+      - { start: 0xC4, type: prxpad, order: .text }
+      - [0xD0, asm, music_common]
+      - { start: 0x22DD8, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x22DF4, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x232C4, type: prxpad, order: .text }
+      - { start: 0x232D0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x232D4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x232F8, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x232FC, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x23300, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x23394, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x23398, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x233CC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x2398C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x23BF4, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x23C3C, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x23C4C, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x23C58, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x23C5C, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x23C60, rodata, music_common]
+      - { start: 0x254AC, type: prxpad, order: .rodata }
+  - name: music_common_seg1
+    type: code
+    start: 0x254B0
+    vram: 0x25410
+    bss_size: 0x4EC
+    subsegments:
+      - [0x254B0, data, music_common_data]
+      - { start: 0x25824, type: bss, vram: 0x25790 }
+  - [0x25824, bin, elf_trailer]
+  - [0x31C60]
