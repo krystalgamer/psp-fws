@@ -108,8 +108,9 @@ int sceMcctrl_1EDFD6BB(u8 *arg0, u8 *arg1) {
     if (func_00000FCC(buf1->cert) != 0) {
         goto end;
     }
-    ret = 0x80530010;
-    if (func_00000F70(buf1->unk10) != 0) {
+    ret = func_00000F70(buf1->unk10);
+    if (ret != 0) {
+        ret = 0x80530010;
         goto end;
     }
     mcctrl_memcpy(buf2->unk10, buf1->unk24, sizeof(buf2->unk10));
@@ -141,6 +142,7 @@ int sceMcctrl_7CAC25B2(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, u8 *arg4, u8 *arg
     u8 *in = buf2 + 0x28;
     u8 *out = buf2 + 0x148;
     int ret = 0x80530001;
+    u8 *work;
 
     if (D_000012D0 == 0) {
         goto end;
@@ -168,26 +170,29 @@ int sceMcctrl_7CAC25B2(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, u8 *arg4, u8 *arg
     if (func_00000FE8(in + 0x70, in + 0xBC, D_0000166C, 0x60) != 0) {
         goto end;
     }
-    ret = 0x80530029;
     if (mcctrl_memcmp(in + 0x38, buf1->unk24, 0x28) != 0) {
+        ret = 0x80530029;
         goto end;
     }
-    ret = 0x80530028;
     if (mcctrl_memcmp(in + 0x60, buf1->cert, 0x10) != 0) {
+        ret = 0x80530028;
         goto end;
     }
     ret = 0x80530011;
     if (func_00000F8C(buf2, in + 0x10, buf1->unk10) != 0) {
         goto end;
     }
-    mcctrl_memcpy(D_0000166C, buf2, 0x14);
-    mcctrl_memcpy(D_0000166C + 0x14, in + 0x10, 0x60);
-    if (func_00000FB0(D_0000166C, 0x74, D_0000166C) != 0) {
+    work = D_0000166C;
+    mcctrl_memcpy(work, buf2, 0x14);
+    work += 0x14;
+    mcctrl_memcpy(work, in + 0x10, 0x60);
+    ret = func_00000FB0(D_0000166C, 0x74, D_0000166C);
+    if (ret != 0) {
         ret = 0x80530020;
         goto end;
     }
-    ret = 0x80530021;
     if (mcctrl_memcmp(in + 0x98, D_0000166C, 0x14) != 0) {
+        ret = 0x80530021;
         goto end;
     }
     mcctrl_memcpy(out + 0x10, buf1->unk24, 0x28);
@@ -196,21 +201,28 @@ int sceMcctrl_7CAC25B2(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, u8 *arg4, u8 *arg
     mcctrl_memcpy(out + 0xAC, arg2, 0x20);
     mcctrl_memcpy(out + 0xCC, arg3, 0x40);
     mcctrl_memcpy(out + 0x10C, arg4, 0x10);
-    mcctrl_memcpy(D_0000166C, out + 0x10, 0x60);
-    mcctrl_memcpy(D_0000166C + 0x60, out + 0xAC, 0x20);
-    mcctrl_memcpy(D_0000166C + 0x80, out + 0xCC, 0x40);
-    mcctrl_memcpy(D_0000166C + 0xC0, out + 0x10C, 0x10);
+    work = D_0000166C;
+    mcctrl_memcpy(work, out + 0x10, 0x60);
+    work += 0x60;
+    mcctrl_memcpy(work, out + 0xAC, 0x20);
+    work += 0x20;
+    mcctrl_memcpy(work, out + 0xCC, 0x40);
+    work += 0x40;
+    mcctrl_memcpy(work, out + 0x10C, 0x10);
     ret = 0x80530018;
     if (func_00001048(out + 0x70, buf1->cert + 0x88, D_0000166C, 0xD0) != 0) {
         goto end;
     }
-    mcctrl_memcpy(D_0000166C, buf2, 0x14);
-    mcctrl_memcpy(D_0000166C + 0x14, out + 0x10, 0x60);
-    if (func_00000FB0(D_0000166C, 0x74, D_0000166C) != 0) {
+    work = D_0000166C;
+    mcctrl_memcpy(work, buf2, 0x14);
+    work += 0x14;
+    mcctrl_memcpy(work, out + 0x10, 0x60);
+    ret = func_00000FB0(work - 0x14, 0x74, work - 0x14);
+    if (ret != 0) {
         ret = 0x80530020;
         goto end;
     }
-    mcctrl_memcpy(out + 0x98, D_0000166C, 0x14);
+    mcctrl_memcpy(out + 0x98, work - 0x14, 0x14);
     mcctrl_memclr(buf1, sizeof(McctrlBlock));
     mcctrl_memcpy(buf1->unk10, buf2, 0x14);
     func_00000EBC(out, 0x10);
