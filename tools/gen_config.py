@@ -123,7 +123,11 @@ def main():
             out.append(f"      - [0x{off:X}, data, {name}]\n")
             prev_kind = ".data"
         else:
-            raise SystemExit(f"unhandled section {s.name}")
+            # Other named sections (.init/.fini/.ctors/.dtors/.jcr/.eh_frame...)
+            nm = s.name.strip(".").replace(".", "_")
+            typ = "asm" if s["sh_flags"] & 4 else "rodata"
+            out.append(f"      - {{ start: 0x{off:X}, type: {typ}, name: {nm}, linker_section: {s.name} }}\n")
+            prev_kind = ".text" if typ == "asm" else ".rodata"
         prev_end = off + s["sh_size"]
     if seg1 is None:
         raise SystemExit("PRX without segment 1 not handled")

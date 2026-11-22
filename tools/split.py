@@ -36,6 +36,9 @@ def _psp_init(target_bytes: bytes):
     # Only emit .align when it can't move anything (PRX sections are 4-aligned
     # and jump tables/doubles there aren't necessarily 8-aligned).
     spimdisasm.common.GlobalConfig.SYMBOL_ALIGNMENT_REQUIRES_ALIGNED_SECTION = True
+    # Data words only reference symbols through real relocations.
+    spimdisasm.common.GlobalConfig.ALLOW_ALL_ADDENDS_ON_DATA = False
+    spimdisasm.common.GlobalConfig.ALLOW_ALL_CONSTANTS_ON_DATA = False
 
 
 def fix_unsupported(asm_dir: Path):
@@ -77,6 +80,31 @@ def fix_ld_script(ld_path: Path, config_path: Path):
     ld_path.write_text(text)
 
 
+def prune_undefined_syms(asm_dir: Path, undef_path: Path):
+    """Drop auto 'undefined' symbols that the asm defines.
+
+    Linker-script assignments override object symbols, so a stale entry
+    (seen when segment 1 starts right where segment 0 ends) would pin the
+    symbol to its absolute vram instead of its segment-relative address.
+    """
+    if not undef_path.exists():
+        return
+    defined = set()
+    for f in asm_dir.rglob("*.s"):
+        defined.update(re.findall(r"^\s*(?:glabel|dlabel|alabel|jlabel)\s+(\w+)", f.read_text(), re.M))
+    lines = undef_path.read_text().splitlines()
+    kept = [l for l in lines if l.split("=")[0].strip() not in defined]
+    undef_path.write_text("\n".join(kept) + ("\n" if kept else ""))
+
+
+def _no_pointer_guessing(self, word: int) -> bool:
+    # PRX relocations identify every real pointer (fed in via reloc_addrs);
+    # value-based guessing turns plain data that happens to look like an
+    # address into bogus symbol references.
+    return False
+
+
+spimdisasm.mips.sections.MipsSectionBase.SectionBase.checkWordIsASymbolReference = _no_pointer_guessing
 splat.platforms.psp.init = _psp_init
 
 if __name__ == "__main__":
@@ -87,3 +115,4 @@ if __name__ == "__main__":
         if options.opts is not None and getattr(options.opts, "asm_path", None):
             fix_unsupported(options.opts.asm_path)
             fix_ld_script(options.opts.ld_script_path, Path(sys.argv[-1]))
+            prune_undefined_syms(options.opts.asm_path, options.opts.undefined_syms_auto_path)
