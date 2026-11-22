@@ -1,0 +1,84 @@
+name: photo_plugin (282)
+sha1: 56a9060a46d98b1c06cfe08aaf6552e59c9f256b
+options:
+  basename: photo_plugin
+  target_path: tmp/baserom/282/photo_plugin.prx
+  elf_path: tmp/build/282/photo_plugin.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/282/photo_plugin
+  src_path: src/photo_plugin
+  build_path: tmp/build/282
+  ld_script_path: tmp/build/282/photo_plugin.ld
+  cache_path: tmp/build/282/.splat_cache.photo_plugin
+  symbol_addrs_path:
+    - config/282/symbol_addrs.photo_plugin.txt
+    - tmp/build/282/prx_syms.photo_plugin.txt
+  reloc_addrs_path: [tmp/build/282/reloc_addrs.photo_plugin.txt]
+  asset_path: tmp/assets/282/photo_plugin
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/282/undefined_funcs_auto.photo_plugin.txt
+  undefined_syms_auto_path: tmp/build/282/undefined_syms_auto.photo_plugin.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x83C0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x3281C
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: photo_plugin
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - { start: 0xA0, type: asm, name: init, linker_section: .init }
+      - [0xC4, asm, photo_plugin]
+      - { start: 0x2DBC4, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x2DBE0, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x2E3B0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x2E3B4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2E3C4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2E3C8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x2E3CC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x2E504, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x2E508, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x2E53C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x2E678, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x2EA60, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x2EE7C, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x2EEA8, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x2EECC, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x2EED0, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - { start: 0x2EED4, type: prxpad, order: .rodata }
+      - [0x2EED8, rodata, photo_plugin]
+  - name: photo_plugin_seg1
+    type: code
+    start: 0x321A0
+    vram: 0x32100
+    bss_size: 0x348
+    subsegments:
+      - [0x321A0, data, photo_plugin_data]
+      - { start: 0x32564, type: bss, vram: 0x324D0 }
+  - [0x32564, bin, elf_trailer]
+  - [0x489E8]

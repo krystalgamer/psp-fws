@@ -1,0 +1,81 @@
+name: mm_flash (282)
+sha1: 326c5a2dd818bf030f82423dc80d6ce3f987fd08
+options:
+  basename: mm_flash
+  target_path: tmp/baserom/282/mm_flash.prx
+  elf_path: tmp/build/282/mm_flash.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/282/mm_flash
+  src_path: src/mm_flash
+  build_path: tmp/build/282
+  ld_script_path: tmp/build/282/mm_flash.ld
+  cache_path: tmp/build/282/.splat_cache.mm_flash
+  symbol_addrs_path:
+    - config/282/symbol_addrs.mm_flash.txt
+    - tmp/build/282/prx_syms.mm_flash.txt
+  reloc_addrs_path: [tmp/build/282/reloc_addrs.mm_flash.txt]
+  asset_path: tmp/assets/282/mm_flash
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/282/undefined_funcs_auto.mm_flash.txt
+  undefined_syms_auto_path: tmp/build/282/undefined_syms_auto.mm_flash.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x87B0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xCD3CC
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: mm_flash
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, mm_flash]
+      - { start: 0xB2EBC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0xB321C, type: prxpad, order: .text }
+      - { start: 0xB3220, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0xB3224, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0xB3244, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0xB3248, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0xB324C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0xB3304, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0xB3308, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0xB333C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0xB3440, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0xB35F0, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - { start: 0xB43D8, type: rodata, name: gcc_except_table, linker_section: .gcc_except_table }
+      - { start: 0xB442C, type: prxpad, order: .rodata }
+      - [0xB4430, rodata, mm_flash]
+      - { start: 0xC5604, type: prxpad, order: .rodata }
+  - name: mm_flash_seg1
+    type: code
+    start: 0xC5610
+    vram: 0xC5590
+    bss_size: 0x7674
+    subsegments:
+      - [0xC5610, data, mm_flash_data]
+      - { start: 0xC5DC8, type: bss, vram: 0xC5D50 }
+  - [0xC5DC8, bin, elf_trailer]
+  - [0x1033B0]

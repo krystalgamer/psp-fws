@@ -1,0 +1,77 @@
+name: libdnas (282)
+sha1: a70ef6215da74ed4b424009394169edef220f1e3
+options:
+  basename: libdnas
+  target_path: tmp/baserom/282/libdnas.prx
+  elf_path: tmp/build/282/libdnas.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/282/libdnas
+  src_path: src/libdnas
+  build_path: tmp/build/282
+  ld_script_path: tmp/build/282/libdnas.ld
+  cache_path: tmp/build/282/.splat_cache.libdnas
+  symbol_addrs_path:
+    - config/282/symbol_addrs.libdnas.txt
+    - tmp/build/282/prx_syms.libdnas.txt
+  reloc_addrs_path: [tmp/build/282/reloc_addrs.libdnas.txt]
+  asset_path: tmp/assets/282/libdnas
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/282/undefined_funcs_auto.libdnas.txt
+  undefined_syms_auto_path: tmp/build/282/undefined_syms_auto.libdnas.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8010
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x2FF4
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: libdnas
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, libdnas]
+      - { start: 0x20C0, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x2368, type: prxpad, order: .text }
+      - { start: 0x2370, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x2374, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2394, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2398, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x239C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x2450, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x2454, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x2488, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x257C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x26D0, rodata, libdnas]
+  - name: libdnas_seg1
+    type: code
+    start: 0x2850
+    vram: 0x27D0
+    bss_size: 0x7FC
+    subsegments:
+      - [0x2850, data, libdnas_data]
+      - { start: 0x2868, type: bss, vram: 0x27F0 }
+  - [0x2868, bin, elf_trailer]
+  - [0x3BB0]

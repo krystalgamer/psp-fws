@@ -1,0 +1,78 @@
+name: usbpspcm (282)
+sha1: 87eb069cc90c9195959f5f54c72e31e5ebef3df1
+options:
+  basename: usbpspcm
+  target_path: tmp/baserom/282/usbpspcm.prx
+  elf_path: tmp/build/282/usbpspcm.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/282/usbpspcm
+  src_path: src/usbpspcm
+  build_path: tmp/build/282
+  ld_script_path: tmp/build/282/usbpspcm.ld
+  cache_path: tmp/build/282/.splat_cache.usbpspcm
+  symbol_addrs_path:
+    - config/282/symbol_addrs.usbpspcm.txt
+    - tmp/build/282/prx_syms.usbpspcm.txt
+  reloc_addrs_path: [tmp/build/282/reloc_addrs.usbpspcm.txt]
+  asset_path: tmp/assets/282/usbpspcm
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/282/undefined_funcs_auto.usbpspcm.txt
+  undefined_syms_auto_path: tmp/build/282/undefined_syms_auto.usbpspcm.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x80F0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x5588
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: usbpspcm
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, usbpspcm]
+      - { start: 0x41A4, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x42F4, type: prxpad, order: .text }
+      - { start: 0x4300, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x4304, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x4314, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x4318, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x431C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x43C0, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x43C4, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x43F8, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x44CC, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x4574, rodata, usbpspcm]
+      - { start: 0x533C, type: prxpad, order: .rodata }
+  - name: usbpspcm_seg1
+    type: code
+    start: 0x5340
+    vram: 0x52A0
+    bss_size: 0x1D8
+    subsegments:
+      - [0x5340, data, usbpspcm_data]
+      - { start: 0x5440, type: bss, vram: 0x53A0 }
+  - [0x5440, bin, elf_trailer]
+  - [0x7914]
