@@ -17,6 +17,9 @@ from pathlib import Path
 
 from elftools.elf.elffile import ELFFile
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import prxinfo  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 IDENT = re.compile(rb"[A-Za-z_][A-Za-z0-9_]{3,}")
 
@@ -64,20 +67,21 @@ def main():
     nids = load_cache()
 
     syms = {}
-    stub = elf.get_section_by_name(".lib.stub")
+    secs = {x.name: x for x in prxinfo.sections(elf, data)}
+    stub = secs.get(".lib.stub")
     off = 0
-    while off < stub["sh_size"]:
-        va = stub["sh_addr"] + off
+    while stub is not None and off < stub.size:
+        va = stub.addr + off
         name_va, _, _, size, _, nfunc, nid_tab, stub_tab = struct.unpack_from("<IHHBBHII", data, vr(va))
         off += size * 4
         lib = cstr(data, vr(name_va)) if name_va else "unk"
         for i in range(nfunc):
             n = w(nid_tab + 4 * i)
             syms[stub_tab + 8 * i] = nids.get(n, f"{lib}_{n:08X}")
-    ent = elf.get_section_by_name(".lib.ent")
+    ent = secs.get(".lib.ent")
     off = 0
-    while off < ent["sh_size"]:
-        va = ent["sh_addr"] + off
+    while ent is not None and off < ent.size:
+        va = ent.addr + off
         name_va, _, _, size, nvar, nfunc, tab = struct.unpack_from("<IHHBBHI", data, vr(va))
         lib = cstr(data, vr(name_va)) if name_va else "syslib"
         total = nvar + nfunc

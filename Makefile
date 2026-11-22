@@ -51,6 +51,7 @@ split: $(BASEROM)
 $(BUILD)/%.s.o: %.s
 	@mkdir -p $(@D)
 	$(AS) $(ASFLAGS) -o $@ $<
+	$(PYTHON) tools/fix_old_gas.py --text-align 4 --data-align 4 $@
 
 $(BUILD)/%.bin.o: %.bin
 	@mkdir -p $(@D)
@@ -63,7 +64,7 @@ $(BUILD)/%.c.o: %.c
 	$(PYTHON) tools/fix_old_gas.py --text-align $$(grep -oP "text-align: \K[0-9]+" $< || echo 4) $@
 
 $(ELF): $(O_FILES) $(LD_SCRIPT)
-	$(LD) -EL -T $(LD_SCRIPT) -T $(BUILD)/undefined_syms_auto.$(MODULE).txt -T $(BUILD)/undefined_funcs_auto.$(MODULE).txt -Map $(BUILD)/$(MODULE).map -o $@
+	$(LD) -EL -T $(LD_SCRIPT) -T $(BUILD)/undefined_syms_auto.$(MODULE).txt -T $(BUILD)/undefined_funcs_auto.$(MODULE).txt -T $(BUILD)/abs_syms.$(MODULE).txt -Map $(BUILD)/$(MODULE).map -o $@
 
 $(TARGET): $(ELF)
 	$(OBJCOPY) -O binary $< $@

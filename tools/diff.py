@@ -90,8 +90,10 @@ def main():
         os_, oe = int(args.start, 0), int(args.end, 0)
         bs, be = os_, oe
 
+    text_off = struct.unpack_from("<I", base, struct.unpack_from("<I", base, 0x1C)[0] + 4)[0]  # phdr[0].p_offset
+
     def words(data, s, e):
-        return [struct.unpack_from("<I", data, va + TEXT_FILE_OFFSET)[0] for va in range(s, e, 4)]
+        return [struct.unpack_from("<I", data, va + text_off)[0] for va in range(s, e, 4)]
 
     a_words, b_words = words(base, os_, oe), words(build, bs, be)
     if args.score:

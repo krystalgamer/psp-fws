@@ -9,11 +9,16 @@ because PRX segment 1 is relocated independently (immediates are relative).
 Gaps between sections become `prxpad` subsegments.
 """
 import argparse
+import sys
+import struct
 import hashlib
 import zipfile
 from pathlib import Path
 
 from elftools.elf.elffile import ELFFile
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import prxinfo  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SPECIAL = {
@@ -68,11 +73,11 @@ def main():
     import io
     elf = ELFFile(io.BytesIO(data))
     segs = [p for p in elf.iter_segments() if p["p_type"] == "PT_LOAD"]
-    secs = sorted((s for s in elf.iter_sections() if s["sh_flags"] & 2), key=lambda s: (s["sh_addr"], s["sh_offset"]))
+    secs = prxinfo.sections(elf, data)
     seg1 = segs[1] if len(segs) > 1 else None
 
     def in_seg1(s):
-        return seg1 is not None and s["sh_addr"] >= seg1["p_vaddr"]
+        return seg1 is not None and s.addr >= seg1["p_vaddr"]
 
     out = []
     v = args.version
@@ -86,27 +91,25 @@ def main():
                f"  extensions_path: tools/splat_ext\n"
                f"  undefined_funcs_auto_path: tmp/build/{v}/undefined_funcs_auto.{name}.txt\n"
                f"  undefined_syms_auto_path: tmp/build/{v}/undefined_syms_auto.{name}.txt\n\n")
-    seg1_ = segs[1] if len(segs) > 1 else None
-    gp_base = 0
-    if seg1_ is not None:
-        small = [x for x in elf.iter_sections() if x.name in (".sbss", ".bss", ".sdata") and x["sh_addr"] >= seg1_["p_vaddr"]]
-        sdata = [x for x in small if x.name == ".sdata" and x["sh_size"]]
-        gp_base = (sdata[0] if sdata else min(small, key=lambda x: x["sh_addr"]))["sh_addr"] - seg1_["p_vaddr"] if small else 0
-    out.append(OPTIONS.replace("gp_value: 0x7FF0", f"gp_value: 0x{gp_base + 0x7FF0:X}"))
-    end_vram = max(s["sh_addr"] + s["sh_size"] for s in secs)
+    # gp is the (segment-relative) word at sceModuleInfo+0x20
+    mi = prxinfo.module_info_addr(elf, data)
+    gp_value = struct.unpack_from("<I", data, segs[0]["p_offset"] + mi + 0x20)[0] if mi is not None else 0x7FF0
+    out.append(OPTIONS.replace("gp_value: 0x7FF0", f"gp_value: 0x{gp_value:X}"))
+    end_vram = max(s.addr + s.size for s in secs)
     out.append(f"  global_vram_start: 0x0\n  global_vram_end: 0x{end_vram + 0x10:X}\n\n")
 
     out.append("segments:\n  - [0x0, bin, elf_header]\n")
-    seg0_bss = [s for s in secs if not in_seg1(s) and s["sh_type"] == "SHT_NOBITS" and s["sh_size"]]
+    seg0_bss = [s for s in secs if not in_seg1(s) and s.nobits and s.size]
     out.append(f"  - name: {name}\n    type: code\n    start: 0x{segs[0]['p_offset']:X}\n    vram: 0x0\n    subsegments:\n")
     file_end = segs[0]["p_offset"] + segs[0]["p_filesz"]
     prev_end, prev_kind = None, ".text"
+    rodata_seen = 0
     for s in secs:
-        if in_seg1(s) or s["sh_type"] == "SHT_NOBITS":
+        if in_seg1(s) or s.nobits:
             continue
-        if not s["sh_size"]:
+        if not s.size:
             continue
-        off = s["sh_offset"]
+        off = s.offset
         if prev_end is not None and off > prev_end:
             out.append(f"      - {{ start: 0x{prev_end:X}, type: prxpad, order: {prev_kind} }}\n")
         if s.name == ".text":
@@ -117,7 +120,9 @@ def main():
             out.append(f"      - {{ start: 0x{off:X}, type: {typ}, name: {nm}, linker_section: {s.name} }}\n")
             prev_kind = ".text" if typ == "asm" else ".rodata"
         elif s.name == ".rodata":
-            out.append(f"      - [0x{off:X}, {'rodata' if args.asm else '.rodata'}, {name}]\n")
+            nm = name if not rodata_seen else f"{name}_{s.addr:X}"
+            rodata_seen += 1
+            out.append(f"      - [0x{off:X}, {'rodata' if args.asm else '.rodata'}, {nm}]\n")
             prev_kind = ".rodata"
         elif s.name == ".data":
             out.append(f"      - [0x{off:X}, data, {name}]\n")
@@ -125,10 +130,10 @@ def main():
         else:
             # Other named sections (.init/.fini/.ctors/.dtors/.jcr/.eh_frame...)
             nm = s.name.strip(".").replace(".", "_")
-            typ = "asm" if s["sh_flags"] & 4 else "rodata"
+            typ = "asm" if s.executable else "rodata"
             out.append(f"      - {{ start: 0x{off:X}, type: {typ}, name: {nm}, linker_section: {s.name} }}\n")
             prev_kind = ".text" if typ == "asm" else ".rodata"
-        prev_end = off + s["sh_size"]
+        prev_end = off + s.size
     if seg1 is None:
         raise SystemExit("PRX without segment 1 not handled")
     if prev_end < seg1["p_offset"]:
@@ -136,20 +141,20 @@ def main():
     assert not seg0_bss, "bss in segment 0 not handled"
 
     base = seg1["p_vaddr"]
-    s1 = [s for s in secs if in_seg1(s) and s["sh_size"]]
+    s1 = [s for s in secs if in_seg1(s) and s.size]
     fpos = seg1["p_offset"]
     if s1:
         out.append(f"  - name: {name}_seg1\n    type: code\n    start: 0x{seg1['p_offset']:X}\n    vram: 0x{base:X}\n")
-        bss = [s for s in s1 if s["sh_type"] == "SHT_NOBITS"]
+        bss = [s for s in s1 if s.nobits]
         if bss:
             out.append(f"    bss_size: 0x{seg1['p_memsz'] - seg1['p_filesz']:X}\n")
         out.append("    subsegments:\n")
         for s in s1:
-            if s["sh_type"] == "SHT_NOBITS":
-                out.append(f"      - {{ start: 0x{fpos:X}, type: bss, vram: 0x{s['sh_addr']:X} }}\n")
+            if s.nobits:
+                out.append(f"      - {{ start: 0x{fpos:X}, type: bss, vram: 0x{s.addr:X} }}\n")
             else:
-                out.append(f"      - [0x{s['sh_offset']:X}, data, {name}_data]\n")
-                fpos = s["sh_offset"] + s["sh_size"]
+                out.append(f"      - [0x{s.offset:X}, data, {name}_data]\n")
+                fpos = s.offset + s.size
     out.append(f"  - [0x{fpos:X}, bin, elf_trailer]\n  - [0x{len(data):X}]\n")
 
     text = "".join(out)

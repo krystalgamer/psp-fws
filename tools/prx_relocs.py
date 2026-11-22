@@ -15,6 +15,9 @@ from pathlib import Path
 
 from elftools.elf.elffile import ELFFile
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import prxinfo  # noqa: E402
+
 SHT_PRXRELOC = 0x700000A0
 R_MIPS_32 = 2
 R_MIPS_HI16 = 5
@@ -50,15 +53,26 @@ def main():
     def word(rom):
         return struct.unpack_from("<I", raw, rom)[0]
 
-    text_end = max(
-        s["sh_addr"] + s["sh_size"]
-        for s in elf.iter_sections()
-        if s["sh_flags"] & 0x4  # SHF_EXECINSTR
-    )
+    secs = prxinfo.sections(elf, raw)
+    text_end = max(s.addr + s.size for s in secs if s.executable)
     gp_addr = None
     funcs = set()
     data_syms = set()
     phantoms = set()
+
+    # The module's gp value is the relocated word at sceModuleInfo+0x20.
+    gp_target = None
+    mi_addr = prxinfo.module_info_addr(elf, raw)
+    for d in prxinfo.reloc_tables(elf):
+        if mi_addr is None:
+            continue
+        for i in range(0, len(d), 8):
+            ofs, info = struct.unpack_from("<II", d, i)
+            ofs_base, addr_base = (info >> 8) & 0xFF, (info >> 16) & 0xFF
+            if info & 0xFF == R_MIPS_32 and segs[ofs_base]["p_vaddr"] + ofs == mi_addr + 0x20:
+                gp_target = word(file_offset(ofs_base, ofs)) + segs[addr_base]["p_vaddr"]
+
+    absolute = set()
 
     def sym_name(target, typ):
         if target in names:
@@ -68,16 +82,17 @@ def main():
             # be named explicitly in the module's symbol_addrs file.
             funcs.add(target)
             return f"func_{target:08X}"
-        if target >= segs[-1]["p_vaddr"] + segs[-1]["p_memsz"]:
+        if target == gp_target:
             return "_gp"
+        if target >= segs[-1]["p_vaddr"] + segs[-1]["p_memsz"]:
+            # e.g. hardware addresses: defined as absolute symbols for ld
+            absolute.add(target)
+            return f"D_{target:08X}"
         data_syms.add(target)
         return f"D_{target:08X}"
 
     lines = []
-    for sec in elf.iter_sections():
-        if sec["sh_type"] != SHT_PRXRELOC:
-            continue
-        data = sec.data()
+    for data in prxinfo.reloc_tables(elf):
         ents = [struct.unpack_from("<II", data, i) for i in range(0, len(data), 8)]
         hi_value = {}
         for i, (ofs, info) in enumerate(ents):
@@ -99,11 +114,23 @@ def main():
                 hi_value[addr_base] = insn & 0xFFFF
             else:
                 target = (hi_value.get(addr_base, 0) << 16) + sext16(insn & 0xFFFF)
-            if typ != R_MIPS_32 and segs[addr_base]["p_vaddr"]:
+            if typ != R_MIPS_32 and segs[addr_base]["p_vaddr"] and 0 <= target <= 0xFFFFFFFF:
                 # spimdisasm also pairs the raw (unrelocated) immediates,
                 # which point at bogus low addresses; ban those.
                 phantoms.add(target)
+            link_value = target
             target += segs[addr_base]["p_vaddr"]
+            seg = segs[addr_base]
+            in_seg = seg["p_vaddr"] <= target <= seg["p_vaddr"] + seg["p_memsz"]
+            if typ != R_MIPS_32 and not in_seg and target != gp_target:
+                in_range_elsewhere = False
+            else:
+                in_range_elsewhere = True
+            if target < 0 or target > 0xFFFFFFFF or not in_range_elsewhere:
+                # base-minus-offset arithmetic: reference an absolute zero
+                # symbol with the link-space value as addend
+                lines.append(f"rom:{rom:#X} reloc:{REL_NAMES[typ]} symbol:PRX_ZERO addend:{link_value:#x}")
+                continue
             lines.append(
                 f"rom:{rom:#X} reloc:{REL_NAMES[typ]} symbol:{sym_name(target, typ)}"
             )
@@ -124,6 +151,8 @@ def main():
         syms.append(f"D_{d:08X} = 0x{d:08X};")
     for ph in sorted(phantoms - funcs - data_syms - names.keys()):
         syms.append(f"PHANTOM_{ph:08X} = 0x{ph:08X}; // ignore:True")
+    abs_path = args.out.with_name(args.out.name.replace("reloc_addrs.", "abs_syms."))
+    abs_path.write_text("PRX_ZERO = 0;\n" + "".join(f"D_{a:08X} = 0x{a:08X};\n" for a in sorted(absolute)))
     args.syms.write_text("\n".join(syms) + "\n")
 
 

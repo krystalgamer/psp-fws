@@ -25,7 +25,18 @@ UNSUPPORTED = {
     "ld", "sd", "ldl", "ldr", "sdl", "sdr", "lwu", "lld", "scd", "pref",
     "ldc1", "sdc1", "ldc2", "sdc2", "lwc2", "swc2", "daddi", "daddiu",
     "lwl", "lwr", "swl", "swr",
+    # Allegrex system/debug instructions modern GAS doesn't know
+    "mfie", "mtie", "sleep", "halt", "mfic", "mtic", "mfdr", "mtdr", "dbreak", "dret",
+    "tgei", "tgeiu", "tlti", "tltiu", "teqi", "tnei",
+    # VFPU loads/stores, moves and branches (other VFPU ops start with "v")
+    "lv.s", "lv.q", "sv.s", "sv.q", "lvl.q", "lvr.q", "svl.q", "svr.q",
+    "mfv", "mtv", "mfvc", "mtvc", "bvf", "bvt", "bvfl", "bvtl",
 }
+
+
+def unsupported(op):
+    # Every remaining VFPU mnemonic starts with "v"; base MIPS has none.
+    return op in UNSUPPORTED or op.startswith("v")
 INSN_RE = re.compile(
     r"^(?P<pre>\s*/\* [0-9A-F]+ [0-9A-F]+ (?P<raw>[0-9A-F]{8}) \*/\s+)(?P<op>[a-z0-9.]+)\s"
 )
@@ -47,7 +58,7 @@ def fix_unsupported(asm_dir: Path):
         changed = False
         for i, line in enumerate(lines):
             m = INSN_RE.match(line)
-            if m and m["op"] in UNSUPPORTED:
+            if m and unsupported(m["op"]):
                 word = int.from_bytes(bytes.fromhex(m["raw"]), "little")
                 lines[i] = f"{m['pre']}.word      0x{word:08X} # {line[m.start('op'):].strip()}\n"
                 changed = True
