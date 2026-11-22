@@ -1,3 +1,4 @@
+/* text-align: 8 (this object had 8-byte aligned .text; see padding before func_00000E78) */
 #include "common.h"
 #include "ddrdb.h"
 #include "idstorage.h"

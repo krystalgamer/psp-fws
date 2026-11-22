@@ -60,7 +60,7 @@ $(BUILD)/%.c.o: %.c
 	@mkdir -p $(@D)
 	$(CPP) $(CPPFLAGS) $< | $(CC1) $(CFLAGS) -o $(BUILD)/$*.c.s
 	$(PSP_AS) -EL -G0 -Iinclude -o $@ $(BUILD)/$*.c.s
-	$(PYTHON) tools/fix_old_gas.py --text-align 8 $@
+	$(PYTHON) tools/fix_old_gas.py --text-align $$(grep -oP "text-align: \K[0-9]+" $< || echo 4) $@
 
 $(ELF): $(O_FILES) $(LD_SCRIPT)
 	$(LD) -EL -T $(LD_SCRIPT) -T $(BUILD)/undefined_syms_auto.$(MODULE).txt -T $(BUILD)/undefined_funcs_auto.$(MODULE).txt -Map $(BUILD)/$(MODULE).map -o $@
