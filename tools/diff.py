@@ -5,6 +5,7 @@ Usage: tools/diff.py <start> <end> [--version 360] [--module mcctrl]
        tools/diff.py <function_name>   (looks it up in the build map)
 """
 import argparse
+import difflib
 import re
 import struct
 from pathlib import Path
@@ -18,6 +19,16 @@ TEXT_FILE_OFFSET = 0x80
 def disasm(word, vram):
     ins = rabbitizer.Instruction(word, vram, rabbitizer.InstrCategory.R4000ALLEGREX)
     return ins.disassemble()
+
+
+def norm(word):
+    """Mask jump targets and branch offsets so layout shifts don't count."""
+    op = word >> 26
+    if op in (2, 3):
+        return word & 0xFC000000
+    if op in (1, 4, 5, 6, 7, 20, 21, 22, 23):
+        return word & 0xFFFF0000
+    return word
 
 
 def func_ranges(map_path, sym_path):
@@ -50,6 +61,7 @@ def main():
     ap.add_argument("end", nargs="?")
     ap.add_argument("--version", default="360")
     ap.add_argument("--module", default="mcctrl")
+    ap.add_argument("--score", action="store_true", help="only print alignment-aware mismatch score")
     args = ap.parse_args()
 
     base = (ROOT / "tmp/baserom" / args.version / f"{args.module}.prx").read_bytes()
@@ -70,6 +82,11 @@ def main():
         return [struct.unpack_from("<I", data, va + TEXT_FILE_OFFSET)[0] for va in range(s, e, 4)]
 
     a_words, b_words = words(base, os_, oe), words(build, bs, be)
+    if args.score:
+        sm = difflib.SequenceMatcher(None, [norm(w) for w in a_words], [norm(w) for w in b_words], autojunk=False)
+        same = sum(b.size for b in sm.get_matching_blocks())
+        print(f"score {max(len(a_words), len(b_words)) - same} (orig {oe - os_:#x} bytes, build {be - bs:#x} bytes)")
+        return
     diffs = 0
     for i in range(max(len(a_words), len(b_words))):
         a = a_words[i] if i < len(a_words) else None
