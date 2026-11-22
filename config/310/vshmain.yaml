@@ -1,0 +1,84 @@
+name: vshmain (310)
+sha1: 29500722b8380f9e2948f473aa90d9ad7f646d32
+options:
+  basename: vshmain
+  target_path: tmp/baserom/310/vshmain.prx
+  elf_path: tmp/build/310/vshmain.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/310/vshmain
+  src_path: src/vshmain
+  build_path: tmp/build/310
+  ld_script_path: tmp/build/310/vshmain.ld
+  cache_path: tmp/build/310/.splat_cache.vshmain
+  symbol_addrs_path:
+    - config/310/symbol_addrs.vshmain.txt
+    - tmp/build/310/prx_syms.vshmain.txt
+  reloc_addrs_path: [tmp/build/310/reloc_addrs.vshmain.txt]
+  asset_path: tmp/assets/310/vshmain
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/310/undefined_funcs_auto.vshmain.txt
+  undefined_syms_auto_path: tmp/build/310/undefined_syms_auto.vshmain.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x9540
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x3A6B4
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: vshmain
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - { start: 0xA0, type: asm, name: init, linker_section: .init }
+      - [0xC4, asm, vshmain]
+      - { start: 0x2AECC, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x2AEE8, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x2BAB0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x2BAB4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2BAD8, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2BADC, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x2BAE0, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x2BCF0, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x2BCF4, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x2BD28, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x2C2E4, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x2C8C8, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x2CCF4, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x2CD10, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x2CD2C, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x2CD30, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - { start: 0x2CD34, type: prxpad, order: .rodata }
+      - [0x2CD38, rodata, vshmain]
+  - name: vshmain_seg1
+    type: code
+    start: 0x389A0
+    vram: 0x38900
+    bss_size: 0x860
+    subsegments:
+      - [0x389A0, data, vshmain_data]
+      - { start: 0x39EE4, type: bss, vram: 0x39E50 }
+  - [0x39EE4, bin, elf_trailer]
+  - [0x5437C]

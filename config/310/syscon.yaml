@@ -1,0 +1,78 @@
+name: syscon (310)
+sha1: b1a5f3445c65893b8c139c42a61360d5f2d4013f
+options:
+  basename: syscon
+  target_path: tmp/baserom/310/syscon.prx
+  elf_path: tmp/build/310/syscon.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/310/syscon
+  src_path: src/syscon
+  build_path: tmp/build/310
+  ld_script_path: tmp/build/310/syscon.ld
+  cache_path: tmp/build/310/.splat_cache.syscon
+  symbol_addrs_path:
+    - config/310/symbol_addrs.syscon.txt
+    - tmp/build/310/prx_syms.syscon.txt
+  reloc_addrs_path: [tmp/build/310/reloc_addrs.syscon.txt]
+  asset_path: tmp/assets/310/syscon
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/310/undefined_funcs_auto.syscon.txt
+  undefined_syms_auto_path: tmp/build/310/undefined_syms_auto.syscon.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8040
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x4580
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: syscon
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, syscon]
+      - { start: 0x3B50, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x3C48, type: prxpad, order: .text }
+      - { start: 0x3C50, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x3C54, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x3C78, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x3C7C, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x3C80, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x3D24, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x3D28, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x3D5C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x4328, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x43A4, rodata, syscon]
+      - { start: 0x441C, type: prxpad, order: .rodata }
+  - name: syscon_seg1
+    type: code
+    start: 0x4420
+    vram: 0x4380
+    bss_size: 0x1AC
+    subsegments:
+      - [0x4420, data, syscon_data]
+      - { start: 0x4464, type: bss, vram: 0x43D0 }
+  - [0x4464, bin, elf_trailer]
+  - [0x5FC4]

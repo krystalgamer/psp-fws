@@ -1,0 +1,5 @@
+// NID-derived names
+module_start = 0x00000000; // type:func
+module_stop = 0x0000006C; // type:func
+sceIdStorageLookup = 0x00000074; // type:func
+sceWlanDrv_driver_E50312AB = 0x0000007C; // type:func
