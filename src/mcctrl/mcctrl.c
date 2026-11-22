@@ -1,6 +1,5 @@
 #include "common.h"
-#include "ddrdb.h"
-#include "idstorage.h"
+#include "crypto.h"
 
 typedef struct {
     /* 0x000 */ u8 iv[0x10];
@@ -18,20 +17,19 @@ typedef struct {
     /* 0x0B0 */ u8 unkB0[0x1C8];
 } McctrlBlock2; /* size 0x278 */
 
+typedef struct {
+    /* 0x00 */ u8 key[0x40];
+    /* 0x40 */ u8 digest[0x14];
+} McctrlMacCtx; /* size 0x54 */
+
 extern s32 D_000012D0;
 extern McctrlBlock D_000012D4;
 extern McctrlBlock2 D_000013F4;
+extern McctrlMacCtx D_0000173C;
 
 int func_00000BC8(u8 *src, u8 *dst, u32 size);
 int func_00000C48(u8 *src, u8 *dst, u32 size);
 int func_00000D3C(u8 *buf, u32 size, u8 *arg2);
-int func_00000E78(void *buf, u32 size);
-void func_00000EB4(int, int);
-int func_00000EBC(u8 *buf, u32 size);
-int func_00000F70(u8 *buf);
-int func_00000FCC(u8 *cert);
-int func_000010A8(u8 *src, u8 *dst, u32 size);
-int func_000010F0(u8 *src, u8 *dst, u32 size);
 
 static inline void mcctrl_memclr(void *p, u32 size) {
     u32 i;
@@ -256,90 +254,38 @@ end:
     return ret;
 }
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000D3C);
+int func_00000D3C(u8 *buf, u32 size, u8 *mac) {
+    u8 *key;
+    int ret = 0x80530006;
 
-int func_00000E78(void *buf, u32 size) {
-    int ret;
-
-    if (size >= 0xB8) {
-        size = 0xB8;
+    if (func_00000FB0(buf, size, D_0000173C.digest) < 0) {
+        goto end;
     }
-    ret = sceIdStorageLookup(0x100, 0x38, buf, size);
-    return (ret < 0) ? ret : 0;
-}
-
-void func_00000EB4(int arg0, int arg1) {
-}
-
-int func_00000EBC(u8 *buf, u32 size) {
-    u8 rand[20];
-    u32 i;
-    int ret = 0;
-
-    for (i = 0; i < size; i++) {
-        if (i % 20 == 0) {
-            ret = sceDdrdbPrngen(rand);
-            if (ret < 0) {
-                break;
-            }
-        }
-        buf[i] = rand[i % 20];
+    /* The MAC key is embedded in .text behind a dead `jr $ra` stub. */
+    __asm__ __volatile__(
+        ".set noreorder\n"
+        "    la      %0, 1f\n"
+        "    b       2f\n"
+        "    nop\n"
+        "    jr      $31\n"
+        "    nop\n"
+        "1:\n"
+        "    .word   0x2021CDAA, 0xB64FDA4E, 0x8891FEDA, 0x3BC6A8CD\n"
+        "    .word   0x9EB34F8D, 0x12F769F8, 0x4F108508, 0x5CFB72DF\n"
+        "    .word   0x0C4460EC, 0x3F222AD6, 0x52E27FF3, 0x75D00F40\n"
+        "    .word   0x3B9C492B, 0x30826A0A, 0xCE4D6B44, 0x20D12AC2\n"
+        "    nop\n"
+        "2:\n"
+        ".set reorder\n"
+        : "=r"(key));
+    mcctrl_memcpy(D_0000173C.key, key, sizeof(D_0000173C.key));
+    ret = func_00000FB0((u8 *)&D_0000173C, sizeof(McctrlMacCtx), (u8 *)&D_0000173C);
+    if (ret < 0) {
+        ret = 0x80530006;
+    } else {
+        mcctrl_memcpy(mac, &D_0000173C, 16);
     }
+end:
+    func_00000EBC((u8 *)&D_0000173C, sizeof(McctrlMacCtx));
     return ret;
-}
-
-int func_00000F70(u8 *buf) {
-    return sceDdrdbMul1(buf);
-}
-
-int func_00000F8C(u8 *out, u8 *b, u8 *a) {
-    return sceDdrdbMul2(a, b, out);
-}
-
-int func_00000FB0(u8 *data, u32 size, u8 *digest) {
-    return sceDdrdbHash(data, size, digest);
-}
-
-int func_00000FCC(u8 *cert) {
-    return sceDdrdbCertvry(cert);
-}
-
-int func_00000FE8(u8 *sig, u8 *pubKey, u8 *data, u32 size) {
-    u8 digest[20];
-    int ret;
-
-    ret = sceDdrdbHash(data, size, digest);
-    if (ret < 0) {
-        return ret;
-    }
-    return sceDdrdbSigvry(pubKey, digest, sig);
-}
-
-int func_00001048(u8 *sig, u8 *privKey, u8 *data, u32 size) {
-    u8 digest[20];
-    int ret;
-
-    ret = sceDdrdbHash(data, size, digest);
-    if (ret < 0) {
-        return ret;
-    }
-    return sceDdrdbSiggen(privKey, digest, sig);
-}
-
-int func_000010A8(u8 *src, u8 *dst, u32 size) {
-    u32 i;
-
-    for (i = 0; i < size; i++) {
-        dst[i] = src[i];
-    }
-    return sceDdrdbEncrypt(dst, size);
-}
-
-int func_000010F0(u8 *src, u8 *dst, u32 size) {
-    u32 i;
-
-    for (i = 0; i < size; i++) {
-        dst[i] = src[i];
-    }
-    return sceDdrdbDecrypt(dst, size);
 }

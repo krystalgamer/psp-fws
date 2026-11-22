@@ -54,6 +54,7 @@ segments:
     bss_size: 0x4C0
     subsegments:
       - [0x80, c, mcctrl]
+      - [0xEF8, c, crypto]
       - { start: 0x11B8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - [0x1208, prxpad]
       - { start: 0x1210, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
