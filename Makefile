@@ -23,7 +23,7 @@ CPPFLAGS := -P -undef -nostdinc -Iinclude -Isrc -DVERSION=$(VERSION) -D__GNUC__=
 CFLAGS  := -O2 -G0 -quiet
 
 S_FILES   = $(shell find tmp/asm/$(VERSION)/$(MODULE) -name '*.s' -not -path '*/nonmatchings/*' 2>/dev/null)
-C_FILES   = $(shell find src/$(MODULE) -name '*.c' 2>/dev/null)
+C_FILES   = $(shell grep -oE 'src/[^ ()]+\.c' $(LD_SCRIPT) 2>/dev/null | sort -u)
 BIN_FILES = $(wildcard tmp/assets/$(VERSION)/$(MODULE)/*.bin)
 O_FILES   = $(foreach f,$(S_FILES) $(C_FILES) $(BIN_FILES),$(BUILD)/$(f).o)
 
