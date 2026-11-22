@@ -109,14 +109,14 @@ def main():
         if prev_end is not None and off > prev_end:
             out.append(f"      - {{ start: 0x{prev_end:X}, type: prxpad, order: {prev_kind} }}\n")
         if s.name == ".text":
-            out.append(f"      - [0x{off:X}, asm, {name}]\n")
+            out.append(f"      - [0x{off:X}, c, {name}]\n")
             prev_kind = ".text"
         elif s.name in SPECIAL:
             typ, nm = SPECIAL[s.name]
             out.append(f"      - {{ start: 0x{off:X}, type: {typ}, name: {nm}, linker_section: {s.name} }}\n")
             prev_kind = ".text" if typ == "asm" else ".rodata"
         elif s.name == ".rodata":
-            out.append(f"      - [0x{off:X}, rodata, {name}]\n")
+            out.append(f"      - [0x{off:X}, .rodata, {name}]\n")
             prev_kind = ".rodata"
         elif s.name == ".data":
             out.append(f"      - [0x{off:X}, data, {name}]\n")
