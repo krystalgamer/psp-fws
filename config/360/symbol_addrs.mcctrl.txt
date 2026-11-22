@@ -21,3 +21,6 @@ sceDdrdbMul2 = 0x00001168; // type:func
 sceDdrdbSiggen = 0x00001170; // type:func
 sceDdrdbPrngen = 0x00001178; // type:func
 sceIdStorageLookup = 0x00001180; // type:func
+
+// Data embedded in .text (MAC key in func_00000D3C)
+D_00000D94 = 0x00000D94;

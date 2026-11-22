@@ -40,7 +40,7 @@ toolchain:
 	tools/setup_toolchain.sh
 
 $(BASEROM):
-	$(PYTHON) tools/extract_baserom.py $(VERSION) kd/$(MODULE).prx
+	$(PYTHON) tools/extract_baserom.py $(VERSION) $(MODULE)
 
 extract: $(BASEROM)
 

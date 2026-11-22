@@ -63,7 +63,9 @@ def main():
     def sym_name(target, typ):
         if target in names:
             return names[target]
-        if typ == R_MIPS_32 and target < text_end:
+        if target < text_end:
+            # Code addresses are function pointers; data embedded in code must
+            # be named explicitly in the module's symbol_addrs file.
             funcs.add(target)
             return f"func_{target:08X}"
         if target >= segs[-1]["p_vaddr"] + segs[-1]["p_memsz"]:

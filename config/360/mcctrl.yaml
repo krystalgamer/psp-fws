@@ -40,7 +40,7 @@ options:
   ld_bss_is_noload: true
   emit_subalign: false
   ld_align_segment_vram_end: false
-  ld_align_section_vram_end: true
+  ld_align_section_vram_end: false
   disasm_unknown: true
   global_vram_start: 0x0
   global_vram_end: 0x1790
