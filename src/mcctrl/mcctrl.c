@@ -1,46 +1,211 @@
 #include "common.h"
+#include "ddrdb.h"
+#include "idstorage.h"
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000000);
+extern s32 D_000012D0;
+extern u8 D_000012D4[0x120];
+extern u8 D_000013F4[0x278];
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000008);
+int func_00000BC8(u8 *src, u8 *dst, u32 size);
+int func_00000D3C(u8 *buf, u32 size, u8 *arg2);
+int func_00000E78(void *buf, u32 size);
+void func_00000EB4(int, int);
+int func_00000EBC(u8 *buf, u32 size);
+int func_00000F70(u8 *buf);
+int func_00000FCC(u8 *cert);
+int func_000010A8(u8 *src, u8 *dst, u32 size);
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000010);
+static inline void mcctrl_memclr(u8 *buf, u32 size) {
+    u32 i;
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000058);
+    for (i = 0; i < size; i++) {
+        buf[i] = 0;
+    }
+}
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000068);
+static inline void mcctrl_memcpy(u8 *dst, u8 *src, int size) {
+    int i;
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000230);
+    for (i = 0; i < size; i++) {
+        dst[i] = src[i];
+    }
+}
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_000008A0);
+int module_start(SceSize args, void *argp) {
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_000009D4);
+int module_stop(SceSize args, void *argp) {
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000BC8);
+int sceMcctrl_3EF531DB(void) {
+    if (D_000012D0 == 0) {
+        func_00000EB4(0, 0);
+        D_000012D0 = 1;
+    }
+    return 0;
+}
+
+int sceMcctrl_877CD3A5(void) {
+    D_000012D0 = 0;
+    return 0;
+}
+
+#ifdef NON_MATCHING
+int sceMcctrl_1EDFD6BB(u8 *arg0, u8 *arg1) {
+    u8 *buf1 = D_000012D4;
+    u8 *buf2 = D_000013F4;
+    u8 *cert;
+    int ret = 0x80530001;
+
+    if (D_000012D0 == 0) {
+        goto end;
+    }
+    mcctrl_memclr(buf2, 0xB0);
+    mcctrl_memclr(buf1, 0x120);
+    cert = buf1 + 0x4C;
+    ret = 0x80530012;
+    if (func_00000E78(cert, 0xB8) != 0) {
+        goto end;
+    }
+    ret = 0x80530013;
+    if (func_00000FCC(cert) != 0) {
+        goto end;
+    }
+    ret = 0x80530010;
+    if (func_00000F70(buf1 + 0x10) != 0) {
+        goto end;
+    }
+    mcctrl_memcpy(buf2 + 0x10, buf1 + 0x24, 0x28);
+    mcctrl_memcpy(buf2 + 0x38, buf1 + 0x4C, 0x60);
+    func_00000EBC(buf2, 0x10);
+    ret = func_00000BC8(buf2, arg1, 0xB0);
+    if (ret != 0) {
+        goto end;
+    }
+    func_00000EBC(buf1, 0x10);
+    ret = func_00000BC8(buf1, arg0, 0x120);
+
+end:
+    func_00000EBC(D_000012D4, 0x120);
+    func_00000EBC(D_000013F4, 0x278);
+    if ((ret & 0xFFFF0000) == 0x80530000) {
+        ret |= 0x80530300;
+    }
+    return ret;
+}
+#else
+INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_1EDFD6BB);
+#endif
+
+INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_7CAC25B2);
+
+INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_9618EE57);
+
+INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_61550814);
+
+int func_00000BC8(u8 *src, u8 *dst, u32 size) {
+    int ret;
+
+    if (size & 0xF) {
+        return 0x80530002;
+    }
+    ret = func_000010A8(src, dst, size - 16);
+    if (ret < 0) {
+        ret = 0x80530003;
+    } else {
+        ret = func_00000D3C(dst, size - 16, dst + size - 16);
+    }
+    return ret;
+}
 
 INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000C48);
 
 INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000D3C);
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000E78);
+int func_00000E78(void *buf, u32 size) {
+    int ret;
 
-void func_00000EB4(void) {
+    if (size >= 0xB8) {
+        size = 0xB8;
+    }
+    ret = sceIdStorageLookup(0x100, 0x38, buf, size);
+    return (ret < 0) ? ret : 0;
 }
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000EBC);
+void func_00000EB4(int arg0, int arg1) {
+}
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000F70);
+int func_00000EBC(u8 *buf, u32 size) {
+    u8 rand[20];
+    u32 i;
+    int ret = 0;
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000F8C);
+    for (i = 0; i < size; i++) {
+        if (i % 20 == 0) {
+            ret = sceDdrdbPrngen(rand);
+            if (ret < 0) {
+                break;
+            }
+        }
+        buf[i] = rand[i % 20];
+    }
+    return ret;
+}
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000FB0);
+int func_00000F70(u8 *buf) {
+    return sceDdrdbMul1(buf);
+}
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000FCC);
+int func_00000F8C(u8 *out, u8 *b, u8 *a) {
+    return sceDdrdbMul2(a, b, out);
+}
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000FE8);
+int func_00000FB0(u8 *data, u32 size, u8 *digest) {
+    return sceDdrdbHash(data, size, digest);
+}
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00001048);
+int func_00000FCC(u8 *cert) {
+    return sceDdrdbCertvry(cert);
+}
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_000010A8);
+int func_00000FE8(u8 *sig, u8 *pubKey, u8 *data, u32 size) {
+    u8 digest[20];
+    int ret;
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_000010F0);
+    ret = sceDdrdbHash(data, size, digest);
+    if (ret < 0) {
+        return ret;
+    }
+    return sceDdrdbSigvry(pubKey, digest, sig);
+}
+
+int func_00001048(u8 *sig, u8 *privKey, u8 *data, u32 size) {
+    u8 digest[20];
+    int ret;
+
+    ret = sceDdrdbHash(data, size, digest);
+    if (ret < 0) {
+        return ret;
+    }
+    return sceDdrdbSiggen(privKey, digest, sig);
+}
+
+int func_000010A8(u8 *src, u8 *dst, u32 size) {
+    u32 i;
+
+    for (i = 0; i < size; i++) {
+        dst[i] = src[i];
+    }
+    return sceDdrdbEncrypt(dst, size);
+}
+
+int func_000010F0(u8 *src, u8 *dst, u32 size) {
+    u32 i;
+
+    for (i = 0; i < size; i++) {
+        dst[i] = src[i];
+    }
+    return sceDdrdbDecrypt(dst, size);
+}
