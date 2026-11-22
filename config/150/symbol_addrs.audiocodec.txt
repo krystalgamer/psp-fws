@@ -1,0 +1,19 @@
+// NID-derived names
+sceAudiocodec_9D3F790C = 0x00000000; // type:func
+sceAudiocodec_5B37EB1D = 0x000000D4; // type:func
+sceAudiocodec_70A703F8 = 0x0000025C; // type:func
+sceAudiocodec_8ACA11D5 = 0x000003F4; // type:func
+sceAudiocodec_6CD2A861 = 0x00000528; // type:func
+sceAudiocodec_59176A0F = 0x000005A8; // type:func
+sceAudiocodec_3A20A200 = 0x00000628; // type:func
+sceAudiocodec_29681260 = 0x000006E0; // type:func
+sceAudiocodec_driver_62518B7E = 0x00000AD8; // type:func
+module_stop = 0x00000AE0; // type:func
+sceKernelDcacheWritebackRange = 0x00000AE8; // type:func
+sceKernelDcacheWritebackInvalidateRange = 0x00000AF0; // type:func
+sceMeAudio_driver_C00D873B = 0x00000AF8; // type:func
+sceMeAudio_driver_FEE0A97D = 0x00000B00; // type:func
+sceMeAudio_driver_BAC7C2BE = 0x00000B08; // type:func
+sceMeAudio_driver_39F06790 = 0x00000B10; // type:func
+sceMeMemory_driver_A177798D = 0x00000B18; // type:func
+sceMeMemory_driver_5AD660FA = 0x00000B20; // type:func

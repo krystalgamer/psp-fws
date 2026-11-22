@@ -1,0 +1,78 @@
+name: usb (150)
+sha1: 604cece59730075618c8df8bd4722cc4678ecc8d
+options:
+  basename: usb
+  target_path: tmp/baserom/150/usb.prx
+  elf_path: tmp/build/150/usb.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/150/usb
+  src_path: src/usb
+  build_path: tmp/build/150
+  ld_script_path: tmp/build/150/usb.ld
+  cache_path: tmp/build/150/.splat_cache.usb
+  symbol_addrs_path:
+    - config/150/symbol_addrs.usb.txt
+    - tmp/build/150/prx_syms.usb.txt
+  reloc_addrs_path: [tmp/build/150/reloc_addrs.usb.txt]
+  asset_path: tmp/assets/150/usb
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/150/undefined_funcs_auto.usb.txt
+  undefined_syms_auto_path: tmp/build/150/undefined_syms_auto.usb.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8200
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xAE94
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: usb
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, usb]
+      - { start: 0x8AFC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x8C8C, type: prxpad, order: .text }
+      - { start: 0x8C90, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x8C94, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x8CD4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x8CD8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x8CDC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x8D90, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x8D94, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x8DC8, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x8FC8, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x9090, rodata, usb]
+      - { start: 0xA8FC, type: prxpad, order: .rodata }
+  - name: usb_seg1
+    type: code
+    start: 0xA900
+    vram: 0xA880
+    bss_size: 0x3F8
+    subsegments:
+      - [0xA900, data, usb_data]
+      - { start: 0xAB0C, type: bss, vram: 0xAAC0 }
+  - [0xAB0C, bin, elf_trailer]
+  - [0xE954]

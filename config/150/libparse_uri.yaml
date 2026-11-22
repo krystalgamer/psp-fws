@@ -1,0 +1,73 @@
+name: libparse_uri (150)
+sha1: ccc48b415e01a8cd7fd36413707bbbf894d1b0db
+options:
+  basename: libparse_uri
+  target_path: tmp/baserom/150/libparse_uri.prx
+  elf_path: tmp/build/150/libparse_uri.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/150/libparse_uri
+  src_path: src/libparse_uri
+  build_path: tmp/build/150
+  ld_script_path: tmp/build/150/libparse_uri.ld
+  cache_path: tmp/build/150/.splat_cache.libparse_uri
+  symbol_addrs_path:
+    - config/150/symbol_addrs.libparse_uri.txt
+    - tmp/build/150/prx_syms.libparse_uri.txt
+  reloc_addrs_path: [tmp/build/150/reloc_addrs.libparse_uri.txt]
+  asset_path: tmp/assets/150/libparse_uri
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/150/undefined_funcs_auto.libparse_uri.txt
+  undefined_syms_auto_path: tmp/build/150/undefined_syms_auto.libparse_uri.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8080
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x2AB0
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: libparse_uri
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, libparse_uri]
+      - { start: 0x266C, type: prxpad, order: .text }
+      - { start: 0x2670, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x2674, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2694, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2698, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x269C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x26A0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x26D4, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - [0x2718, rodata, libparse_uri]
+      - { start: 0x2A88, type: prxpad, order: .rodata }
+  - name: libparse_uri_seg1
+    type: code
+    start: 0x2A90
+    vram: 0x2A10
+    subsegments:
+      - [0x2A90, data, libparse_uri_data]
+  - [0x2B1C, bin, elf_trailer]
+  - [0x3C80]

@@ -1,0 +1,85 @@
+name: paf (150)
+sha1: b1d7b59c6ade15708246aee168110bc6e61f57a4
+options:
+  basename: paf
+  target_path: tmp/baserom/150/paf.prx
+  elf_path: tmp/build/150/paf.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/150/paf
+  src_path: src/paf
+  build_path: tmp/build/150
+  ld_script_path: tmp/build/150/paf.ld
+  cache_path: tmp/build/150/.splat_cache.paf
+  symbol_addrs_path:
+    - config/150/symbol_addrs.paf.txt
+    - tmp/build/150/prx_syms.paf.txt
+  reloc_addrs_path: [tmp/build/150/reloc_addrs.paf.txt]
+  asset_path: tmp/assets/150/paf
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/150/undefined_funcs_auto.paf.txt
+  undefined_syms_auto_path: tmp/build/150/undefined_syms_auto.paf.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x9D20
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x173600
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: paf
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - { start: 0xA4, type: prxpad, order: .text }
+      - [0xB0, asm, paf]
+      - { start: 0x110550, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x11056C, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x11086C, type: prxpad, order: .text }
+      - { start: 0x110870, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x110874, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x110894, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x110898, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x11089C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x1109DC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x1109E0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x110A14, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x112134, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x1122B4, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x112304, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x112344, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x112348, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - { start: 0x11234C, type: prxpad, order: .rodata }
+      - [0x112380, rodata, paf]
+  - name: paf_seg1
+    type: code
+    start: 0x124BC0
+    vram: 0x124B40
+    bss_size: 0x4CD8C
+    subsegments:
+      - [0x124BC0, data, paf_data]
+      - { start: 0x1268E4, type: bss, vram: 0x126880 }
+  - [0x1268E4, bin, elf_trailer]
+  - [0x17F23E]

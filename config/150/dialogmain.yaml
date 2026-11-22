@@ -1,0 +1,85 @@
+name: dialogmain (150)
+sha1: 2e69f15327d9d2c0a101de8a057fab7e59744891
+options:
+  basename: dialogmain
+  target_path: tmp/baserom/150/dialogmain.prx
+  elf_path: tmp/build/150/dialogmain.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/150/dialogmain
+  src_path: src/dialogmain
+  build_path: tmp/build/150
+  ld_script_path: tmp/build/150/dialogmain.ld
+  cache_path: tmp/build/150/.splat_cache.dialogmain
+  symbol_addrs_path:
+    - config/150/symbol_addrs.dialogmain.txt
+    - tmp/build/150/prx_syms.dialogmain.txt
+  reloc_addrs_path: [tmp/build/150/reloc_addrs.dialogmain.txt]
+  asset_path: tmp/assets/150/dialogmain
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/150/undefined_funcs_auto.dialogmain.txt
+  undefined_syms_auto_path: tmp/build/150/undefined_syms_auto.dialogmain.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8160
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x9CC4
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: dialogmain
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - [0xA4, asm, dialogmain]
+      - { start: 0x745C, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x7478, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x7958, type: prxpad, order: .text }
+      - { start: 0x7960, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x7964, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x7974, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x7978, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x797C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x7A88, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x7A8C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x7AC0, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x7BC8, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x7E38, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x7F4C, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x7F58, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x7F64, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x7F68, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x7F6C, rodata, dialogmain]
+      - { start: 0x91AC, type: prxpad, order: .rodata }
+  - name: dialogmain_seg1
+    type: code
+    start: 0x91C0
+    vram: 0x9130
+    bss_size: 0xA1C
+    subsegments:
+      - [0x91C0, data, dialogmain_data]
+      - { start: 0x9328, type: bss, vram: 0x92C0 }
+  - [0x9328, bin, elf_trailer]
+  - [0xED9C]

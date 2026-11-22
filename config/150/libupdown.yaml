@@ -1,0 +1,77 @@
+name: libupdown (150)
+sha1: df911bde0e7ffb908f135de0c7cc9052e2f3d9a5
+options:
+  basename: libupdown
+  target_path: tmp/baserom/150/libupdown.prx
+  elf_path: tmp/build/150/libupdown.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/150/libupdown
+  src_path: src/libupdown
+  build_path: tmp/build/150
+  ld_script_path: tmp/build/150/libupdown.ld
+  cache_path: tmp/build/150/.splat_cache.libupdown
+  symbol_addrs_path:
+    - config/150/symbol_addrs.libupdown.txt
+    - tmp/build/150/prx_syms.libupdown.txt
+  reloc_addrs_path: [tmp/build/150/reloc_addrs.libupdown.txt]
+  asset_path: tmp/assets/150/libupdown
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/150/undefined_funcs_auto.libupdown.txt
+  undefined_syms_auto_path: tmp/build/150/undefined_syms_auto.libupdown.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8080
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x4740
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: libupdown
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, libupdown]
+      - { start: 0x305C, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x313C, type: prxpad, order: .text }
+      - { start: 0x3140, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x3144, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x3164, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x3168, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x316C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x31BC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x31C0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x31F4, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x32B4, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x3324, rodata, libupdown]
+  - name: libupdown_seg1
+    type: code
+    start: 0x3CE0
+    vram: 0x3C60
+    bss_size: 0xA40
+    subsegments:
+      - [0x3CE0, data, libupdown_data]
+      - { start: 0x3D70, type: bss, vram: 0x3CF0 }
+  - [0x3D70, bin, elf_trailer]
+  - [0x5D10]

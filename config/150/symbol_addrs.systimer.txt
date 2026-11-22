@@ -1,0 +1,21 @@
+// NID-derived names
+SysTimerForKernel_C99073E3 = 0x00000000; // type:func
+SysTimerForKernel_975D8E84 = 0x000001B0; // type:func
+syslib_D3744BE0 = 0x000002F4; // type:func
+module_reboot_before = 0x000003DC; // type:func
+SysTimerForKernel_C105CF38 = 0x00000448; // type:func
+SysTimerForKernel_B53534B4 = 0x00000504; // type:func
+SysTimerForKernel_A95143E2 = 0x000005E0; // type:func
+SysTimerForKernel_4A01F9D3 = 0x00000670; // type:func
+SysTimerForKernel_54BB5DB4 = 0x000006D8; // type:func
+SysTimerForKernel_228EDAE4 = 0x00000744; // type:func
+SysTimerForKernel_53231A15 = 0x000007BC; // type:func
+sceKernelCpuSuspendIntr = 0x00000984; // type:func
+sceKernelCpuResumeIntr = 0x0000098C; // type:func
+InterruptManagerForKernel_FE28C6D9 = 0x00000994; // type:func
+InterruptManagerForKernel_58DD8978 = 0x0000099C; // type:func
+InterruptManagerForKernel_F987B1F0 = 0x000009A4; // type:func
+InterruptManagerForKernel_4D6E7305 = 0x000009AC; // type:func
+InterruptManagerForKernel_D774BA45 = 0x000009B4; // type:func
+sceSuspendForKernel_91A77137 = 0x000009BC; // type:func
+sceSuspendForKernel_B43D1A8C = 0x000009C4; // type:func
