@@ -38,7 +38,14 @@ def func_ranges(map_path, sym_path):
         m = re.match(r"\s*(\w+)\s*=\s*(0x[0-9A-Fa-f]+)\s*;.*type:func", line)
         if m:
             names[m[1]] = int(m[2], 16)
-    build = {m[2]: int(m[1], 16) for m in re.finditer(r"^\s+0x([0-9a-f]+)\s+(\w+)$", map_path.read_text(), re.M)}
+    from elftools.elf.elffile import ELFFile
+
+    elf = ELFFile(open(map_path.with_suffix(".elf"), "rb"))
+    build = {
+        sym.name: sym["st_value"]
+        for sym in elf.get_section_by_name(".symtab").iter_symbols()
+        if sym["st_info"]["type"] in ("STT_FUNC", "STT_NOTYPE", "STT_OBJECT") and sym.name and "." not in sym.name
+    }
     orig = {}
     for n in build:
         if n in names:

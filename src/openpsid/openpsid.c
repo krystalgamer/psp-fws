@@ -3,6 +3,32 @@
 #include "kirk.h"
 
 extern u8 *g_ddrdbBufPtr;
+extern SceUID g_openPsidSema;
+extern u8 g_openPsidCert[0xB8];
+
+/* The kernel keeps the caller's privilege level in $k1. */
+static inline u32 shiftK1(void) {
+    u32 oldK1;
+
+    __asm__ __volatile__("move %0, $27\n\tsrl $27, $27, 16" : "=r"(oldK1));
+    return oldK1;
+}
+
+static inline int k1IsUserMode(void) {
+    int ret;
+
+    __asm__ __volatile__("andi %0, $27, 0x18" : "=r"(ret));
+    return ret;
+}
+
+static inline void setK1(u32 k1) {
+    __asm__ __volatile__("move $27, %0" : : "r"(k1));
+}
+
+int sceIdStorageLookup(u16 key, u32 offset, void *buf, u32 len);
+SceUID sceKernelCreateSema(const char *name, u32 attr, int initVal, int maxVal, void *option);
+int sceKernelWaitSema(SceUID semaid, int signal, u32 *timeout);
+int sceKernelSignalSema(SceUID semaid, int signal);
 extern u32 g_ddrdbBuf[];
 
 static inline void ddrdb_memcpy(void *p1, void *p2, u32 size) {
@@ -23,11 +49,61 @@ static inline void ddrdb_memclr(u8 *buf, u32 size) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", func_00000000);
+static int func_00000000(u8 *cert) {
+    if (sceIdStorageLookup(0x101, 0x1D0, cert, 0x30) < 0 && sceIdStorageLookup(0x121, 0x1D0, cert, 0x30) < 0) {
+        return 0xC0520002;
+    }
+    if (sceIdStorageLookup(0x102, 0, cert + 0x30, 0x88) < 0 && sceIdStorageLookup(0x122, 0, cert + 0x30, 0x88) < 0) {
+        return 0xC0520002;
+    }
+    return (sceUtilsBufferCopyWithRange(NULL, 0, cert, 0xB8, KIRK_CMD_CERTVRY) == 0) ? 0 : 0xC0520001;
+}
 
-INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", module_start);
+int module_start(SceSize args, void *argp) {
+    u32 i;
 
+    for (i = 0; i < sizeof(g_openPsidCert); i++) {
+        g_openPsidCert[i] = 0;
+    }
+    g_openPsidSema = sceKernelCreateSema("SceOpenPSID", 0, 1, 1, NULL);
+    return g_openPsidSema < 1;
+}
+
+#ifdef NON_MATCHING
+/* Register allocation and the WaitSema success-path layout differ. */
+int sceOpenPSIDGetOpenPSID(u8 *psid) {
+    u32 oldK1;
+    int ret;
+    u32 i;
+    u32 j;
+
+    oldK1 = shiftK1();
+    if (k1IsUserMode() && (s32)((u32)psid | (u32)(psid + 0x10)) < 0) {
+        ret = 0x80000023;
+    } else {
+        ret = 0x80000041;
+        if (sceKernelWaitSema(g_openPsidSema, 1, NULL) == 0) {
+            ret = func_00000000(g_openPsidCert);
+            if (ret == 0) {
+                for (i = 0; i < 0x10; i++) {
+                    psid[i] = g_openPsidCert[i];
+                }
+                ret = 0;
+            }
+            for (j = 0; j < sizeof(g_openPsidCert); j++) {
+                g_openPsidCert[j] = 0;
+            }
+            if (sceKernelSignalSema(g_openPsidSema, 1) != 0) {
+                ret = 0x80000041;
+            }
+        }
+    }
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceOpenPSIDGetOpenPSID);
+#endif
 
 s32 func_00000244(void) {
     return 0;

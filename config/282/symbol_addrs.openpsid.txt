@@ -19,3 +19,5 @@ sceUtilsBufferCopyWithRange = 0x00000A4C; // type:func
 // Data
 g_ddrdbBufPtr = 0x00000C40; // size:0x4
 g_ddrdbBuf = 0x00000D80;
+g_openPsidSema = 0x00000C80; // size:0x4
+g_openPsidCert = 0x00000CC0; // size:0xB8
