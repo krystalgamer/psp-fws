@@ -1,0 +1,79 @@
+name: libhttp (152)
+sha1: b28c55fa59cf9e2de59ddf5d5ee30754e747f156
+options:
+  basename: libhttp
+  target_path: tmp/baserom/152/libhttp.prx
+  elf_path: tmp/build/152/libhttp.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/152/libhttp
+  src_path: src/libhttp
+  build_path: tmp/build/152
+  ld_script_path: tmp/build/152/libhttp.ld
+  cache_path: tmp/build/152/.splat_cache.libhttp
+  symbol_addrs_path:
+    - config/152/symbol_addrs.libhttp.txt
+    - tmp/build/152/prx_syms.libhttp.txt
+  reloc_addrs_path: [tmp/build/152/reloc_addrs.libhttp.txt]
+  asset_path: tmp/assets/152/libhttp
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/152/undefined_funcs_auto.libhttp.txt
+  undefined_syms_auto_path: tmp/build/152/undefined_syms_auto.libhttp.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x80A0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xFEA4
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: libhttp
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, libhttp]
+      - { start: 0xEBAC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0xEE8C, type: prxpad, order: .text }
+      - { start: 0xEE90, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0xEE94, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0xEEB4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0xEEB8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0xEEBC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0xEFC0, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0xEFC4, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0xEFF8, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0xF280, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0xF3F0, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0xF450, rodata, libhttp]
+      - { start: 0xFA48, type: prxpad, order: .rodata }
+  - name: libhttp_seg1
+    type: code
+    start: 0xFA50
+    vram: 0xF9D0
+    bss_size: 0x414
+    subsegments:
+      - [0xFA50, data, libhttp_data]
+      - { start: 0xFB00, type: bss, vram: 0xFA80 }
+  - [0xFB00, bin, elf_trailer]
+  - [0x153F8]

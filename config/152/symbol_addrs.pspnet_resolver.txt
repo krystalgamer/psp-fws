@@ -1,0 +1,24 @@
+// NID-derived names
+sceNetResolverStartNtoA = 0x00000000; // type:func
+sceNetResolverStartAtoN = 0x00000108; // type:func
+sceNetResolverStop = 0x0000021C; // type:func
+sceNetResolverInit = 0x000002D4; // type:func
+sceNetResolverTerm = 0x0000033C; // type:func
+sceNetResolverCreate = 0x00000378; // type:func
+sceNetResolverDelete = 0x000003CC; // type:func
+module_start = 0x00001AC8; // type:func
+module_stop = 0x00001AD0; // type:func
+sceKernelCpuSuspendIntr = 0x00001FE4; // type:func
+sceKernelCpuResumeIntr = 0x00001FEC; // type:func
+sceKernelGetThreadId = 0x00001FF4; // type:func
+sceKernelGetSystemTime = 0x00001FFC; // type:func
+sceNetIfhandle_lib_15CFE3C0 = 0x00002004; // type:func
+sceNetIfhandle_lib_76BAD213 = 0x0000200C; // type:func
+sceNetInetClose = 0x00002014; // type:func
+sceNetInetRecvfrom = 0x0000201C; // type:func
+sceNetInetSendto = 0x00002024; // type:func
+sceNetInetSetsockopt = 0x0000202C; // type:func
+sceNetInetSocket = 0x00002034; // type:func
+sceNetInetSocketAbort = 0x0000203C; // type:func
+sceNetInetGetErrno = 0x00002044; // type:func
+sceNetInet_lib_AC9D90A5 = 0x0000204C; // type:func

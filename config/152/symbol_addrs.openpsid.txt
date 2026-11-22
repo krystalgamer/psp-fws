@@ -1,0 +1,8 @@
+// NID-derived names
+module_start = 0x000000E8; // type:func
+sceOpenPSIDGetOpenPSID = 0x00000148; // type:func
+sceKernelCreateSema = 0x00000254; // type:func
+sceKernelSignalSema = 0x0000025C; // type:func
+sceKernelWaitSema = 0x00000264; // type:func
+sceIdStorageLookup = 0x0000026C; // type:func
+semaphore_4C537C72 = 0x00000274; // type:func

@@ -1,0 +1,77 @@
+name: utils (152)
+sha1: 29ef38a34e102712cbcc5fe612b7eb307b20ddbc
+options:
+  basename: utils
+  target_path: tmp/baserom/152/utils.prx
+  elf_path: tmp/build/152/utils.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/152/utils
+  src_path: src/utils
+  build_path: tmp/build/152
+  ld_script_path: tmp/build/152/utils.ld
+  cache_path: tmp/build/152/.splat_cache.utils
+  symbol_addrs_path:
+    - config/152/symbol_addrs.utils.txt
+    - tmp/build/152/prx_syms.utils.txt
+  reloc_addrs_path: [tmp/build/152/reloc_addrs.utils.txt]
+  asset_path: tmp/assets/152/utils
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/152/undefined_funcs_auto.utils.txt
+  undefined_syms_auto_path: tmp/build/152/undefined_syms_auto.utils.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8050
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x4700
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: utils
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, utils]
+      - { start: 0x39E0, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x3A30, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x3A34, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x3A64, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x3A68, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x3A6C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x3ABC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x3AC0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x3AF4, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x3D8C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x3DB4, type: prxpad, order: .rodata }
+      - [0x3DC0, rodata, utils]
+  - name: utils_seg1
+    type: code
+    start: 0x4700
+    vram: 0x4680
+    bss_size: 0x18
+    subsegments:
+      - [0x4700, data, utils_data]
+      - { start: 0x4758, type: bss, vram: 0x46E0 }
+  - [0x4758, bin, elf_trailer]
+  - [0x6000]

@@ -1,0 +1,24 @@
+// NID-derived names
+module_start = 0x00000000; // type:func
+sceLFatFs_driver_933F6E29 = 0x00000568; // type:func
+sceLFatFs_driver_8F0560E0 = 0x00000570; // type:func
+InitForKernel_2C6E9FE9 = 0x00000578; // type:func
+InitForKernel_7A2333AD = 0x00000580; // type:func
+InitForKernel_A6E71B93 = 0x00000588; // type:func
+sceIoDevctl = 0x00000590; // type:func
+KDebugForKernel_84F370BC = 0x00000598; // type:func
+sceKernelGetBlockHeadAddr = 0x000005A0; // type:func
+strncmp = 0x000005A8; // type:func
+sceKernelCreateCallback = 0x000005B0; // type:func
+sceKernelDeleteCallback = 0x000005B8; // type:func
+sceKernelCreateEventFlag = 0x000005C0; // type:func
+sceKernelDeleteEventFlag = 0x000005C8; // type:func
+sceKernelSetEventFlag = 0x000005D0; // type:func
+sceKernelWaitEventFlagCB = 0x000005D8; // type:func
+sceUmdCheckMedium = 0x000005E0; // type:func
+sceUmdActivate = 0x000005E8; // type:func
+sceUmdWaitDriveStat = 0x000005F0; // type:func
+sceUmdGetDriveStat = 0x000005F8; // type:func
+sceUmdGetErrorStat = 0x00000600; // type:func
+sceUmdRegisterUMDCallBack = 0x00000608; // type:func
+sceUmdUnRegisterUMDCallBack = 0x00000610; // type:func

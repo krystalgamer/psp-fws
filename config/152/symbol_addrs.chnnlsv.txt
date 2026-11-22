@@ -1,0 +1,14 @@
+// NID-derived names
+module_start = 0x000001EC; // type:func
+module_stop = 0x00000278; // type:func
+sceChnnlsv_driver_E7833020 = 0x000002FC; // type:func
+sceChnnlsv_driver_F21A1FCA = 0x0000036C; // type:func
+sceChnnlsv_driver_C4C494F8 = 0x000005F0; // type:func
+sceChnnlsv_driver_ABFDFC8B = 0x00000A58; // type:func
+sceChnnlsv_driver_850A7FA1 = 0x00000CBC; // type:func
+sceChnnlsv_driver_21BE78B4 = 0x00000E54; // type:func
+sceKernelCreateSema = 0x000012D0; // type:func
+sceKernelDeleteSema = 0x000012D8; // type:func
+sceKernelSignalSema = 0x000012E0; // type:func
+sceKernelWaitSema = 0x000012E8; // type:func
+semaphore_4C537C72 = 0x000012F0; // type:func
