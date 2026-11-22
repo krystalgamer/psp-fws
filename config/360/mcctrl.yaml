@@ -36,6 +36,7 @@ options:
   data_string_guesser_level: 2
   gp_value: 0x7FF0
   add_set_gp_64: false
+  named_regs_for_c_funcs: false
   ld_bss_is_noload: true
   emit_subalign: false
   ld_align_segment_vram_end: false
@@ -52,7 +53,7 @@ segments:
     vram: 0x0
     bss_size: 0x4C0
     subsegments:
-      - [0x80, asm, mcctrl]
+      - [0x80, c, mcctrl]
       - { start: 0x11B8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - [0x1208, prxpad]
       - { start: 0x1210, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
