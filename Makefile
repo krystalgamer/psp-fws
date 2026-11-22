@@ -45,7 +45,7 @@ $(BASEROM):
 extract: $(BASEROM)
 
 split: $(BASEROM)
-	$(PYTHON) tools/prx_relocs.py $(BASEROM) $(BUILD)/reloc_addrs.$(MODULE).txt $(BUILD)/prx_syms.$(MODULE).txt
+	$(PYTHON) tools/prx_relocs.py $(BASEROM) $(BUILD)/reloc_addrs.$(MODULE).txt $(BUILD)/prx_syms.$(MODULE).txt --names config/$(VERSION)/symbol_addrs.$(MODULE).txt
 	$(PYTHON) tools/split.py $(CONFIG)
 
 $(BUILD)/%.s.o: %.s

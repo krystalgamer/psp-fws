@@ -8,6 +8,7 @@ are relative to the addr_base segment, which splat cannot know about, so we
 emit explicit HI16/LO16 symbol references for every pair.
 """
 import argparse
+import re
 import struct
 import sys
 from pathlib import Path
@@ -30,7 +31,14 @@ def main():
     ap.add_argument("prx", type=Path)
     ap.add_argument("out", type=Path, help="reloc_addrs output")
     ap.add_argument("syms", type=Path, help="symbol_addrs output")
+    ap.add_argument("--names", type=Path, action="append", default=[],
+                    help="hand-written symbol_addrs files whose names take precedence")
     args = ap.parse_args()
+
+    names = {}
+    for f in args.names:
+        for m in re.finditer(r"^\s*(\w+)\s*=\s*(0x[0-9A-Fa-f]+|\d+)\s*;", f.read_text(), re.M):
+            names[int(m[2], 0)] = m[1]
 
     raw = args.prx.read_bytes()
     elf = ELFFile(open(args.prx, "rb"))
@@ -53,6 +61,8 @@ def main():
     phantoms = set()
 
     def sym_name(target, typ):
+        if target in names:
+            return names[target]
         if typ == R_MIPS_32 and target < text_end:
             funcs.add(target)
             return f"func_{target:08X}"
@@ -103,14 +113,14 @@ def main():
     # Zero words are usually NULL/padding, not pointers to the function at 0,
     # so only explicit relocations may reference it.
     syms = []
-    for f in sorted(funcs):
+    for f in sorted(funcs - names.keys()):
         extra = " can_be_referenced:False" if f == 0 else ""
         syms.append(f"func_{f:08X} = 0x{f:08X}; // type:func{extra}")
     # Data referenced inside code (e.g. embedded keys) stays a plain label so
     # it doesn't split the enclosing function.
-    for d in sorted(x for x in data_syms if x >= text_end):
+    for d in sorted(x for x in data_syms - names.keys() if x >= text_end):
         syms.append(f"D_{d:08X} = 0x{d:08X};")
-    for ph in sorted(phantoms - funcs - data_syms):
+    for ph in sorted(phantoms - funcs - data_syms - names.keys()):
         syms.append(f"PHANTOM_{ph:08X} = 0x{ph:08X}; // ignore:True")
     args.syms.write_text("\n".join(syms) + "\n")
 

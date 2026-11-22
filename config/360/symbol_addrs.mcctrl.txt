@@ -1,0 +1,23 @@
+// Module exports (syslib)
+module_start = 0x00000000; // type:func can_be_referenced:False
+module_stop = 0x00000008; // type:func
+
+// sceMcctrl exports (names unknown, keyed by NID)
+sceMcctrl_3EF531DB = 0x00000010; // type:func
+sceMcctrl_877CD3A5 = 0x00000058; // type:func
+sceMcctrl_1EDFD6BB = 0x00000068; // type:func
+sceMcctrl_7CAC25B2 = 0x00000230; // type:func
+sceMcctrl_9618EE57 = 0x000008A0; // type:func
+sceMcctrl_61550814 = 0x000009D4; // type:func
+
+// Import stubs
+sceDdrdbHash = 0x00001138; // type:func
+sceDdrdbSigvry = 0x00001140; // type:func
+sceDdrdbCertvry = 0x00001148; // type:func
+sceDdrdbEncrypt = 0x00001150; // type:func
+sceDdrdbDecrypt = 0x00001158; // type:func
+sceDdrdbMul1 = 0x00001160; // type:func
+sceDdrdbMul2 = 0x00001168; // type:func
+sceDdrdbSiggen = 0x00001170; // type:func
+sceDdrdbPrngen = 0x00001178; // type:func
+sceIdStorageLookup = 0x00001180; // type:func
