@@ -1,0 +1,77 @@
+name: mediaman (271)
+sha1: 2c3e661156d4dd9a9a45306c9f16fe1468b2fae5
+options:
+  basename: mediaman
+  target_path: tmp/baserom/271/mediaman.prx
+  elf_path: tmp/build/271/mediaman.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/271/mediaman
+  src_path: src/mediaman
+  build_path: tmp/build/271
+  ld_script_path: tmp/build/271/mediaman.ld
+  cache_path: tmp/build/271/.splat_cache.mediaman
+  symbol_addrs_path:
+    - config/271/symbol_addrs.mediaman.txt
+    - tmp/build/271/prx_syms.mediaman.txt
+  reloc_addrs_path: [tmp/build/271/reloc_addrs.mediaman.txt]
+  asset_path: tmp/assets/271/mediaman
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/271/undefined_funcs_auto.mediaman.txt
+  undefined_syms_auto_path: tmp/build/271/undefined_syms_auto.mediaman.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x7FF0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x1340
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: mediaman
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, mediaman]
+      - { start: 0xF30, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0xFB8, type: prxpad, order: .text }
+      - { start: 0xFC0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0xFC4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0xFF8, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0xFFC, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x1000, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x1068, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x106C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x10A0, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x12E8, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x132C, rodata, mediaman]
+      - { start: 0x135C, type: prxpad, order: .rodata }
+  - name: mediaman_seg1
+    type: code
+    start: 0x1360
+    vram: 0x12C0
+    bss_size: 0x70
+    subsegments:
+      - { start: 0x1360, type: bss, vram: 0x12C0 }
+  - [0x1360, bin, elf_trailer]
+  - [0x20A8]

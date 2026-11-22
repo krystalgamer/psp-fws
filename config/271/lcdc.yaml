@@ -1,0 +1,77 @@
+name: lcdc (271)
+sha1: 80a7c458a5a4bbdd39826dc8f37730ebd13c0170
+options:
+  basename: lcdc
+  target_path: tmp/baserom/271/lcdc.prx
+  elf_path: tmp/build/271/lcdc.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/271/lcdc
+  src_path: src/lcdc
+  build_path: tmp/build/271
+  ld_script_path: tmp/build/271/lcdc.ld
+  cache_path: tmp/build/271/.splat_cache.lcdc
+  symbol_addrs_path:
+    - config/271/symbol_addrs.lcdc.txt
+    - tmp/build/271/prx_syms.lcdc.txt
+  reloc_addrs_path: [tmp/build/271/reloc_addrs.lcdc.txt]
+  asset_path: tmp/assets/271/lcdc
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/271/undefined_funcs_auto.lcdc.txt
+  undefined_syms_auto_path: tmp/build/271/undefined_syms_auto.lcdc.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8030
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xDE8
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: lcdc
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, lcdc]
+      - { start: 0xAE0, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0xB30, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0xB34, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0xB58, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0xB5C, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0xB60, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0xBA0, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0xBA4, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0xBD8, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0xD04, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0xD2C, rodata, lcdc]
+      - { start: 0xDFC, type: prxpad, order: .rodata }
+  - name: lcdc_seg1
+    type: code
+    start: 0xE00
+    vram: 0xD60
+    bss_size: 0x38
+    subsegments:
+      - [0xE00, data, lcdc_data]
+      - { start: 0xE40, type: bss, vram: 0xDA0 }
+  - [0xE40, bin, elf_trailer]
+  - [0x1874]

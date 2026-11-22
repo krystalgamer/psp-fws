@@ -1,0 +1,78 @@
+name: audio (271)
+sha1: f2baec6c318aafbd3e51d394882ad6493089d916
+options:
+  basename: audio
+  target_path: tmp/baserom/271/audio.prx
+  elf_path: tmp/build/271/audio.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/271/audio
+  src_path: src/audio
+  build_path: tmp/build/271
+  ld_script_path: tmp/build/271/audio.ld
+  cache_path: tmp/build/271/.splat_cache.audio
+  symbol_addrs_path:
+    - config/271/symbol_addrs.audio.txt
+    - tmp/build/271/prx_syms.audio.txt
+  reloc_addrs_path: [tmp/build/271/reloc_addrs.audio.txt]
+  asset_path: tmp/assets/271/audio
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/271/undefined_funcs_auto.audio.txt
+  undefined_syms_auto_path: tmp/build/271/undefined_syms_auto.audio.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8030
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x394C
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: audio
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, audio]
+      - { start: 0x2CDC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x2E74, type: prxpad, order: .text }
+      - { start: 0x2E80, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x2E84, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2EBC, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2EC0, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x2EC4, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x2FA4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x2FA8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x2FDC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x330C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x33D8, rodata, audio]
+      - { start: 0x3404, type: prxpad, order: .rodata }
+  - name: audio_seg1
+    type: code
+    start: 0x3440
+    vram: 0x3380
+    bss_size: 0x57C
+    subsegments:
+      - [0x3440, data, audio_data]
+      - { start: 0x3480, type: bss, vram: 0x33C0 }
+  - [0x3480, bin, elf_trailer]
+  - [0x4AA8]

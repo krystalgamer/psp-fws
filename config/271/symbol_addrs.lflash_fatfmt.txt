@@ -1,0 +1,21 @@
+// NID-derived names
+LflashFatfmt_B7A424A4 = 0x000013F8; // type:func
+module_start = 0x00001414; // type:func
+sceKernelCpuSuspendIntr = 0x0000141C; // type:func
+sceKernelCpuResumeIntr = 0x00001424; // type:func
+sceIoOpen = 0x0000142C; // type:func
+sceIoLseek = 0x00001434; // type:func
+sceIoWrite = 0x0000143C; // type:func
+sceIoIoctl = 0x00001444; // type:func
+sceIoClose = 0x0000144C; // type:func
+KDebugForKernel_84F370BC = 0x00001454; // type:func
+puts = 0x0000145C; // type:func
+bcopy = 0x00001464; // type:func
+strtok_r = 0x0000146C; // type:func
+strlen = 0x00001474; // type:func
+bzero = 0x0000147C; // type:func
+strcmp = 0x00001484; // type:func
+sceKernelCreateVpl = 0x0000148C; // type:func
+sceKernelDeleteVpl = 0x00001494; // type:func
+sceKernelTryAllocateVpl = 0x0000149C; // type:func
+sceKernelDelayThread = 0x000014A4; // type:func

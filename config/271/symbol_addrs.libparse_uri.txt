@@ -1,0 +1,8 @@
+// NID-derived names
+sceUriEscape = 0x00000058; // type:func
+sceUriUnescape = 0x000001DC; // type:func
+sceUriParse = 0x00000374; // type:func
+sceUriBuild = 0x00000708; // type:func
+sceUriMerge = 0x00000C4C; // type:func
+sceUriSweepPath = 0x00000E64; // type:func
+sceKernelCheckThreadStack = 0x000029AC; // type:func
