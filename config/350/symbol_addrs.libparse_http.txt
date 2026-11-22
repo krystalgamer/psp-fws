@@ -1,0 +1,4 @@
+// NID-derived names
+sceParseHttpStatusLine = 0x00000000; // type:func
+sceParseHttpResponseHeader = 0x00000118; // type:func
+sceKernelCheckThreadStack = 0x00000C80; // type:func

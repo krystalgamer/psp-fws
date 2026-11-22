@@ -1,0 +1,74 @@
+name: loadcore (350)
+sha1: 4cffe4c5abae75c4a8402407ff43a7b4555663df
+options:
+  basename: loadcore
+  target_path: tmp/baserom/350/loadcore.prx
+  elf_path: tmp/build/350/loadcore.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/350/loadcore
+  src_path: src/loadcore
+  build_path: tmp/build/350
+  ld_script_path: tmp/build/350/loadcore.ld
+  cache_path: tmp/build/350/.splat_cache.loadcore
+  symbol_addrs_path:
+    - config/350/symbol_addrs.loadcore.txt
+    - tmp/build/350/prx_syms.loadcore.txt
+  reloc_addrs_path: [tmp/build/350/reloc_addrs.loadcore.txt]
+  asset_path: tmp/assets/350/loadcore
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/350/undefined_funcs_auto.loadcore.txt
+  undefined_syms_auto_path: tmp/build/350/undefined_syms_auto.loadcore.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8060
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xA558
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: loadcore
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, loadcore]
+      - { start: 0x7780, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x78E0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x78E4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x7918, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x791C, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x7920, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x799C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x79A0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - [0x79D4, rodata, loadcore]
+  - name: loadcore_seg1
+    type: code
+    start: 0x8070
+    vram: 0x7FD0
+    bss_size: 0x2514
+    subsegments:
+      - [0x8070, data, loadcore_data]
+      - { start: 0x80D4, type: bss, vram: 0x8034 }
+  - [0x80D4, bin, elf_trailer]
+  - [0xA938]
