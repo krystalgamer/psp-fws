@@ -59,6 +59,7 @@ def main():
     ap.add_argument("--name")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--stdout", action="store_true")
+    ap.add_argument("--asm", action="store_true", help="emit .text as asm (no C file), e.g. for extra versions")
     args = ap.parse_args()
 
     name = args.name or Path(args.module).stem
@@ -109,14 +110,14 @@ def main():
         if prev_end is not None and off > prev_end:
             out.append(f"      - {{ start: 0x{prev_end:X}, type: prxpad, order: {prev_kind} }}\n")
         if s.name == ".text":
-            out.append(f"      - [0x{off:X}, c, {name}]\n")
+            out.append(f"      - [0x{off:X}, {'asm' if args.asm else 'c'}, {name}]\n")
             prev_kind = ".text"
         elif s.name in SPECIAL:
             typ, nm = SPECIAL[s.name]
             out.append(f"      - {{ start: 0x{off:X}, type: {typ}, name: {nm}, linker_section: {s.name} }}\n")
             prev_kind = ".text" if typ == "asm" else ".rodata"
         elif s.name == ".rodata":
-            out.append(f"      - [0x{off:X}, .rodata, {name}]\n")
+            out.append(f"      - [0x{off:X}, {'rodata' if args.asm else '.rodata'}, {name}]\n")
             prev_kind = ".rodata"
         elif s.name == ".data":
             out.append(f"      - [0x{off:X}, data, {name}]\n")
