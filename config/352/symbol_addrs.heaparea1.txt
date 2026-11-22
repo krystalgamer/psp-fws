@@ -1,0 +1,10 @@
+// NID-derived names
+module_start = 0x0000010C; // type:func
+module_stop = 0x0000012C; // type:func
+scePafHeaparea_F50AAE41 = 0x0000014C; // type:func
+scePafHeaparea_ACCE25B2 = 0x0000016C; // type:func
+SysMemUserForUser_ACBD88CA = 0x00000394; // type:func
+sceKernelDeleteFpl = 0x0000039C; // type:func
+sceKernelFreeFpl = 0x000003A4; // type:func
+sceKernelTryAllocateFpl = 0x000003AC; // type:func
+sceKernelCreateFpl = 0x000003B4; // type:func

@@ -1,0 +1,78 @@
+name: iofilemgr_dnas (352)
+sha1: 97a982b193a664cab1ebfd240b46945379ec6840
+options:
+  basename: iofilemgr_dnas
+  target_path: tmp/baserom/352/iofilemgr_dnas.prx
+  elf_path: tmp/build/352/iofilemgr_dnas.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/352/iofilemgr_dnas
+  src_path: src/iofilemgr_dnas
+  build_path: tmp/build/352
+  ld_script_path: tmp/build/352/iofilemgr_dnas.ld
+  cache_path: tmp/build/352/.splat_cache.iofilemgr_dnas
+  symbol_addrs_path:
+    - config/352/symbol_addrs.iofilemgr_dnas.txt
+    - tmp/build/352/prx_syms.iofilemgr_dnas.txt
+  reloc_addrs_path: [tmp/build/352/reloc_addrs.iofilemgr_dnas.txt]
+  asset_path: tmp/assets/352/iofilemgr_dnas
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/352/undefined_funcs_auto.iofilemgr_dnas.txt
+  undefined_syms_auto_path: tmp/build/352/undefined_syms_auto.iofilemgr_dnas.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x81B0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x1CA0
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: iofilemgr_dnas
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, iofilemgr_dnas]
+      - { start: 0x13D8, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1458, type: prxpad, order: .text }
+      - { start: 0x1460, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x1464, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x1474, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x1478, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x147C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x14F4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x14F8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x152C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x15DC, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x161C, rodata, iofilemgr_dnas]
+      - { start: 0x1718, type: prxpad, order: .rodata }
+  - name: iofilemgr_dnas_seg1
+    type: code
+    start: 0x1740
+    vram: 0x1680
+    bss_size: 0x45C
+    subsegments:
+      - [0x1740, data, iofilemgr_dnas_data]
+      - { start: 0x18F4, type: bss, vram: 0x1840 }
+  - [0x18F4, bin, elf_trailer]
+  - [0x250C]

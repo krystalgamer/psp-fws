@@ -1,0 +1,75 @@
+name: idstorage (352)
+sha1: 7be5034293fcdbf546209684f4f0a5eac02415bf
+options:
+  basename: idstorage
+  target_path: tmp/baserom/352/idstorage.prx
+  elf_path: tmp/build/352/idstorage.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/352/idstorage
+  src_path: src/idstorage
+  build_path: tmp/build/352
+  ld_script_path: tmp/build/352/idstorage.ld
+  cache_path: tmp/build/352/.splat_cache.idstorage
+  symbol_addrs_path:
+    - config/352/symbol_addrs.idstorage.txt
+    - tmp/build/352/prx_syms.idstorage.txt
+  reloc_addrs_path: [tmp/build/352/reloc_addrs.idstorage.txt]
+  asset_path: tmp/assets/352/idstorage
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/352/undefined_funcs_auto.idstorage.txt
+  undefined_syms_auto_path: tmp/build/352/undefined_syms_auto.idstorage.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8040
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x6B40
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: idstorage
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, idstorage]
+      - { start: 0x1DE4, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1EF4, type: prxpad, order: .text }
+      - { start: 0x1F00, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x1F04, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x1F28, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x1F2C, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x1F30, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x1FE8, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x1FEC, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - [0x2020, rodata, idstorage]
+  - name: idstorage_seg1
+    type: code
+    start: 0x22E0
+    vram: 0x2240
+    bss_size: 0x48AC
+    subsegments:
+      - [0x22E0, data, idstorage_data]
+      - { start: 0x2324, type: bss, vram: 0x2284 }
+  - [0x2324, bin, elf_trailer]
+  - [0x2FA8]

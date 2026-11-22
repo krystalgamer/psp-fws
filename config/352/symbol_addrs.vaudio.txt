@@ -1,0 +1,27 @@
+// NID-derived names
+sceVaudioOutputBlocking = 0x00000000; // type:func
+sceVaudioChRelease = 0x00000474; // type:func
+sceVaudioSetEffectType = 0x0000053C; // type:func
+module_start = 0x000005E4; // type:func
+sceVaudioChReserve = 0x000006BC; // type:func
+sceVaudioChReserveBuffering = 0x000006D8; // type:func
+sceVaudioSetAlcMode = 0x000006F4; // type:func
+sceVaudio_driver_DCC18F25 = 0x0000072C; // type:func
+module_stop = 0x00000734; // type:func
+memset = 0x00000D70; // type:func
+sceKernelDeleteSema = 0x00000D78; // type:func
+sceKernelSignalSema = 0x00000D80; // type:func
+sceKernelWaitSema = 0x00000D88; // type:func
+sceKernelCreateFpl = 0x00000D90; // type:func
+sceKernelCreateSema = 0x00000D98; // type:func
+sceKernelAllocateFpl = 0x00000DA0; // type:func
+sceKernelDeleteFpl = 0x00000DA8; // type:func
+sceKernelDcacheWritebackRange = 0x00000DB0; // type:func
+sceKernelDcacheInvalidateRange = 0x00000DB8; // type:func
+sceAudio_driver_38553111 = 0x00000DC0; // type:func
+sceAudio_driver_5C37C0AE = 0x00000DC8; // type:func
+sceAudio_driver_927AC32B = 0x00000DD0; // type:func
+sceAudio_driver_A2BEAA6C = 0x00000DD8; // type:func
+sceAudio_driver_E0727056 = 0x00000DE0; // type:func
+sceMeCore_driver_3D5F109C = 0x00000DE8; // type:func
+sceMeCore_driver_D1EA3DFD = 0x00000DF0; // type:func

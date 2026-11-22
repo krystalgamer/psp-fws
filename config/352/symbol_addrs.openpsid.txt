@@ -1,0 +1,20 @@
+// NID-derived names
+module_start = 0x00000200; // type:func
+sceOpenPSIDGetOpenPSID = 0x00000260; // type:func
+sceOpenPSID_driver_19D579F0 = 0x00000368; // type:func
+scePcact_driver_F9ECFDDD = 0x0000044C; // type:func
+scePcact_driver_08BB9677 = 0x000009D4; // type:func
+sceDdrdbSigvry = 0x00000D84; // type:func
+sceDdrdbCertvry = 0x00000E58; // type:func
+sceDdrdbMul1 = 0x00000EE4; // type:func
+sceDdrdbMul2 = 0x00000F7C; // type:func
+sceDdrdbSiggen = 0x00001060; // type:func
+sceDdrdbPrngen = 0x00001144; // type:func
+sceDdrdbHash = 0x000011DC; // type:func
+sceDdrdbEncrypt = 0x000012FC; // type:func
+sceDdrdbDecrypt = 0x00001428; // type:func
+sceKernelSignalSema = 0x0000155C; // type:func
+sceKernelWaitSema = 0x00001564; // type:func
+sceKernelCreateSema = 0x0000156C; // type:func
+sceIdStorageLookup = 0x00001574; // type:func
+semaphore_4C537C72 = 0x0000157C; // type:func

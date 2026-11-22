@@ -1,0 +1,76 @@
+name: pspnet_resolver (352)
+sha1: e9ad457429231b71acc3a7be8370062b1c8511b4
+options:
+  basename: pspnet_resolver
+  target_path: tmp/baserom/352/pspnet_resolver.prx
+  elf_path: tmp/build/352/pspnet_resolver.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/352/pspnet_resolver
+  src_path: src/pspnet_resolver
+  build_path: tmp/build/352
+  ld_script_path: tmp/build/352/pspnet_resolver.ld
+  cache_path: tmp/build/352/.splat_cache.pspnet_resolver
+  symbol_addrs_path:
+    - config/352/symbol_addrs.pspnet_resolver.txt
+    - tmp/build/352/prx_syms.pspnet_resolver.txt
+  reloc_addrs_path: [tmp/build/352/reloc_addrs.pspnet_resolver.txt]
+  asset_path: tmp/assets/352/pspnet_resolver
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/352/undefined_funcs_auto.pspnet_resolver.txt
+  undefined_syms_auto_path: tmp/build/352/undefined_syms_auto.pspnet_resolver.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8000
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x1FAE
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: pspnet_resolver
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, pspnet_resolver]
+      - { start: 0x1D40, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1DE8, type: prxpad, order: .text }
+      - { start: 0x1DF0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x1DF4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x1E14, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x1E18, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x1E1C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x1E94, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x1E98, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - [0x1ECC, rodata, pspnet_resolver]
+      - { start: 0x2018, type: prxpad, order: .rodata }
+  - name: pspnet_resolver_seg1
+    type: code
+    start: 0x2020
+    vram: 0x1F80
+    bss_size: 0x1A
+    subsegments:
+      - [0x2020, data, pspnet_resolver_data]
+      - { start: 0x2024, type: bss, vram: 0x1F84 }
+  - [0x2024, bin, elf_trailer]
+  - [0x2770]

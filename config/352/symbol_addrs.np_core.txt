@@ -1,0 +1,17 @@
+// NID-derived names
+sceNpCore_A665A995 = 0x00000000; // type:func
+sceNpCore_B8F79ECE = 0x00000058; // type:func
+sceNpCore_788D8345 = 0x000000C0; // type:func
+sceNpCore_FE78939F = 0x00000150; // type:func
+sceNpCore_C5680D3E = 0x000001E0; // type:func
+sceNpCore_DF0865B0 = 0x00000270; // type:func
+sceNpCore_551FCE6B = 0x000002D8; // type:func
+sceNpCore_5CB19B99 = 0x00000340; // type:func
+sceNpCore_01AF3EEF = 0x000003A8; // type:func
+sceNpCore_6A44E76B = 0x00000410; // type:func
+strtol = 0x00000A10; // type:func
+strlen = 0x00000A18; // type:func
+sprintf = 0x00000A20; // type:func
+strncmp = 0x00000A28; // type:func
+strcpy = 0x00000A30; // type:func
+sceOpenPSID_driver_19D579F0 = 0x00000A38; // type:func

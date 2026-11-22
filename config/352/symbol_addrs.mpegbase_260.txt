@@ -1,0 +1,26 @@
+// NID-derived names
+sceMpegbase_driver_27A2982F = 0x00000000; // type:func
+module_stop = 0x00000050; // type:func
+sceMpegbase_driver_91929A21 = 0x00000078; // type:func
+sceMpegbase_driver_CE8EB837 = 0x0000035C; // type:func
+sceMpegbase_driver_304882E1 = 0x000005E8; // type:func
+sceMpegbase_driver_0530BE4E = 0x0000097C; // type:func
+sceMpegbase_driver_AC9E717E = 0x000009A8; // type:func
+sceMpegbase_driver_492B5E4B = 0x00000AE8; // type:func
+sceMpegbase_driver_BEA18F91 = 0x00001034; // type:func
+sceMpegbase_driver_7AC0321A = 0x000011DC; // type:func
+sceMpegbase_driver_BE45C284 = 0x000013EC; // type:func
+sceKernelDeleteSema = 0x000016F0; // type:func
+sceKernelSignalSema = 0x000016F8; // type:func
+sceKernelWaitSema = 0x00001700; // type:func
+sceKernelCreateSema = 0x00001708; // type:func
+sceKernelDcacheWritebackInvalidateRange = 0x00001710; // type:func
+sceKernelDcacheWritebackRange = 0x00001718; // type:func
+sceDmacplus_driver_1D73DDA8 = 0x00001720; // type:func
+sceDmacplus_driver_2D5940FF = 0x00001728; // type:func
+sceDmacplus_driver_3438DA0B = 0x00001730; // type:func
+sceDmacplus_driver_3A98EE05 = 0x00001738; // type:func
+sceDmacplus_driver_58DE4914 = 0x00001740; // type:func
+sceDmacplus_driver_74323807 = 0x00001748; // type:func
+sceDmacplus_driver_AB49D2CB = 0x00001750; // type:func
+sceDmacplus_driver_B2EFA681 = 0x00001758; // type:func

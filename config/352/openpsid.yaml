@@ -1,0 +1,78 @@
+name: openpsid (352)
+sha1: c98e2874b7668a39bcf5fac56a83c5cfa1e76beb
+options:
+  basename: openpsid
+  target_path: tmp/baserom/352/openpsid.prx
+  elf_path: tmp/build/352/openpsid.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/352/openpsid
+  src_path: src/openpsid
+  build_path: tmp/build/352
+  ld_script_path: tmp/build/352/openpsid.ld
+  cache_path: tmp/build/352/.splat_cache.openpsid
+  symbol_addrs_path:
+    - config/352/symbol_addrs.openpsid.txt
+    - tmp/build/352/prx_syms.openpsid.txt
+  reloc_addrs_path: [tmp/build/352/reloc_addrs.openpsid.txt]
+  asset_path: tmp/assets/352/openpsid
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/352/undefined_funcs_auto.openpsid.txt
+  undefined_syms_auto_path: tmp/build/352/undefined_syms_auto.openpsid.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8000
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x21D0
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: openpsid
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, openpsid]
+      - { start: 0x15FC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1624, type: prxpad, order: .text }
+      - { start: 0x1630, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x1634, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x1684, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x1688, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x168C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x16C8, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x16CC, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x1700, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x1808, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x181C, rodata, openpsid]
+      - { start: 0x1858, type: prxpad, order: .rodata }
+  - name: openpsid_seg1
+    type: code
+    start: 0x1880
+    vram: 0x17C0
+    bss_size: 0x9F8
+    subsegments:
+      - [0x1880, data, openpsid_data]
+      - { start: 0x1888, type: bss, vram: 0x1800 }
+  - [0x1888, bin, elf_trailer]
+  - [0x24D0]
