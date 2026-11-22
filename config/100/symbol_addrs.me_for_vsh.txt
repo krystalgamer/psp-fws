@@ -1,0 +1,3 @@
+// NID-derived names
+sceMe4VSH_driver_99CBCF35 = 0x00000000; // type:func
+sceMeWrapper_driver_3D5F109C = 0x00000020; // type:func

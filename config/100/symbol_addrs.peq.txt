@@ -1,0 +1,9 @@
+// NID-derived names
+scePEQ_driver_213DE849 = 0x00000000; // type:func
+scePEQ_F7EA0632 = 0x00000008; // type:func
+scePEQ_FC45514B = 0x000000B4; // type:func
+scePEQ_ED13C3B5 = 0x00000154; // type:func
+sceKernelDcacheWritebackRange = 0x000002AC; // type:func
+sceKernelDcacheInvalidateRange = 0x000002B4; // type:func
+sceMeWrapper_driver_D1EA3DFD = 0x000002BC; // type:func
+sceMeWrapper_driver_3D5F109C = 0x000002C4; // type:func

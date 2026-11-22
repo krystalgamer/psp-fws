@@ -1,0 +1,9 @@
+// NID-derived names
+module_start = 0x00000190; // type:func
+module_stop = 0x00000200; // type:func
+sceChkreg_driver_54495B19 = 0x00000288; // type:func
+sceKernelCreateSema = 0x00000334; // type:func
+sceKernelDeleteSema = 0x0000033C; // type:func
+sceKernelSignalSema = 0x00000344; // type:func
+sceKernelWaitSema = 0x0000034C; // type:func
+sceIdStorage_driver_EB00C509 = 0x00000354; // type:func

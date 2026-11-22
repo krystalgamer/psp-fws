@@ -1,0 +1,78 @@
+name: iofilemgr (100)
+sha1: 96df6cf3871d86dc191eed359cffafc2e5158250
+options:
+  basename: iofilemgr
+  target_path: tmp/baserom/100/iofilemgr.prx
+  elf_path: tmp/build/100/iofilemgr.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/100/iofilemgr
+  src_path: src/iofilemgr
+  build_path: tmp/build/100
+  ld_script_path: tmp/build/100/iofilemgr.ld
+  cache_path: tmp/build/100/.splat_cache.iofilemgr
+  symbol_addrs_path:
+    - config/100/symbol_addrs.iofilemgr.txt
+    - tmp/build/100/prx_syms.iofilemgr.txt
+  reloc_addrs_path: [tmp/build/100/reloc_addrs.iofilemgr.txt]
+  asset_path: tmp/assets/100/iofilemgr
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/100/undefined_funcs_auto.iofilemgr.txt
+  undefined_syms_auto_path: tmp/build/100/undefined_syms_auto.iofilemgr.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8060
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x6D10
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: iofilemgr
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, iofilemgr]
+      - { start: 0x3E14, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x3F8C, type: prxpad, order: .text }
+      - { start: 0x3F90, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x3F94, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x3FC4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x3FC8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x3FCC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x4044, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x4048, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x407C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x43BC, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x4478, rodata, iofilemgr]
+      - { start: 0x4CE8, type: prxpad, order: .rodata }
+  - name: iofilemgr_seg1
+    type: code
+    start: 0x4CF0
+    vram: 0x4C70
+    bss_size: 0x2020
+    subsegments:
+      - [0x4CF0, data, iofilemgr_data]
+      - { start: 0x4D60, type: bss, vram: 0x4CE0 }
+  - [0x4D60, bin, elf_trailer]
+  - [0x7124]
