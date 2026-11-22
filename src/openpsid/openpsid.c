@@ -191,6 +191,72 @@ int sceDdrdbHash(u8 *data, u32 size, u8 *digest) {
     return ret;
 }
 
-INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceDdrdbEncrypt);
+#ifdef NON_MATCHING
+/* size and size + 0x14 end up in swapped saved registers. */
+int sceDdrdbEncrypt(u8 *buf, u32 size) {
+    int ret;
+    u32 i;
+    u32 j;
+    u32 k;
 
-INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceDdrdbDecrypt);
+    if (size > 0x800 || (size & 0xF) != 0) {
+        ret = 0x80530301;
+    } else {
+        g_ddrdbBuf[0] = 4;
+        g_ddrdbBuf[1] = 0;
+        g_ddrdbBuf[2] = 0;
+        g_ddrdbBuf[3] = 0xB;
+        g_ddrdbBuf[4] = size;
+        for (i = 0; i < size; i++) {
+            g_ddrdbBufPtr[0x14 + i] = buf[i];
+        }
+        ret = sceUtilsBufferCopyWithRange(g_ddrdbBufPtr, size + 0x14, g_ddrdbBufPtr, size + 0x14, KIRK_CMD_ENCRYPT);
+        if (ret != 0) {
+            ret = 0x80530300;
+        } else {
+            for (j = 0; j < size; j++) {
+                buf[j] = g_ddrdbBufPtr[0x14 + j];
+            }
+            ret = 0;
+        }
+    }
+    for (k = 0; k < size + 0x14; k++) {
+        g_ddrdbBufPtr[k] = 0;
+    }
+    return ret;
+}
+#else
+INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceDdrdbEncrypt);
+#endif
+
+int sceDdrdbDecrypt(u8 *buf, u32 size) {
+    int ret;
+    u32 i;
+    u32 j;
+    u32 k;
+
+    if (size > 0x800 || (size & 0xF) != 0) {
+        ret = 0x80530301;
+    } else {
+        g_ddrdbBuf[0] = 5;
+        g_ddrdbBuf[1] = 0;
+        g_ddrdbBuf[2] = 0;
+        g_ddrdbBuf[3] = 0xB;
+        g_ddrdbBuf[4] = size;
+        for (i = 0; i < size; i++) {
+            g_ddrdbBufPtr[0x14 + i] = buf[i];
+        }
+        if (sceUtilsBufferCopyWithRange(g_ddrdbBufPtr, size + 0x14, g_ddrdbBufPtr, size + 0x14, KIRK_CMD_DECRYPT) != 0) {
+            ret = 0x80530300;
+        } else {
+            for (j = 0; j < size; j++) {
+                buf[j] = g_ddrdbBufPtr[j];
+            }
+            ret = 0;
+        }
+    }
+    for (k = 0; k < size + 0x14; k++) {
+        g_ddrdbBufPtr[k] = 0;
+    }
+    return ret;
+}
