@@ -1,0 +1,76 @@
+name: lftv_middleware (352)
+sha1: e14d6873e68e1a15c3c4f86fedc297945e94835c
+options:
+  basename: lftv_middleware
+  target_path: tmp/baserom/352/lftv_middleware.prx
+  elf_path: tmp/build/352/lftv_middleware.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/352/lftv_middleware
+  src_path: src/lftv_middleware
+  build_path: tmp/build/352
+  ld_script_path: tmp/build/352/lftv_middleware.ld
+  cache_path: tmp/build/352/.splat_cache.lftv_middleware
+  symbol_addrs_path:
+    - config/352/symbol_addrs.lftv_middleware.txt
+    - tmp/build/352/prx_syms.lftv_middleware.txt
+  reloc_addrs_path: [tmp/build/352/reloc_addrs.lftv_middleware.txt]
+  asset_path: tmp/assets/352/lftv_middleware
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/352/undefined_funcs_auto.lftv_middleware.txt
+  undefined_syms_auto_path: tmp/build/352/undefined_syms_auto.lftv_middleware.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0xBFB0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x64D34
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: lftv_middleware
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, lftv_middleware]
+      - { start: 0x5279C, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x52CCC, type: prxpad, order: .text }
+      - { start: 0x52CD0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x52CD4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x52CF8, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x52CFC, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x52D00, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x52E08, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x52E0C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - [0x52E40, rodata, lftv_middleware]
+      - { start: 0x59D98, type: prxpad, order: .rodata }
+  - name: lftv_middleware_seg1
+    type: code
+    start: 0x59DA0
+    vram: 0x59D00
+    bss_size: 0x7064
+    subsegments:
+      - [0x59DA0, data, lftv_middleware_data]
+      - { start: 0x5DD60, type: bss, vram: 0x5DCC0 }
+  - [0x5DD60, bin, elf_trailer]
+  - [0x7D938]

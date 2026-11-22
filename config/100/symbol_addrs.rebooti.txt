@@ -1,0 +1,3 @@
+// NID-derived names
+RebootForKernel_72E280A8 = 0x00000170; // type:func
+syslib_D3744BE0 = 0x000004B4; // type:func

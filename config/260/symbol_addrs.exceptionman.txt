@@ -1,0 +1,10 @@
+// NID-derived names
+syslib_D3744BE0 = 0x00000000; // type:func
+ExceptionManagerForKernel_5A837AD4 = 0x000000F4; // type:func
+ExceptionManagerForKernel_565C0B0E = 0x000001EC; // type:func
+ExceptionManagerForKernel_1AA6CFFA = 0x00000280; // type:func
+ExceptionManagerForKernel_291FF031 = 0x00000348; // type:func
+ExceptionManagerForKernel_3FB264FC = 0x0000057C; // type:func
+ExceptionManagerForKernel_DF83875E = 0x0000059C; // type:func
+ExceptionManagerForKernel_15ADC862 = 0x00000A9C; // type:func
+ExceptionManagerForKernel_B15357C9 = 0x00000B04; // type:func

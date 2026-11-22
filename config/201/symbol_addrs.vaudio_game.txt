@@ -1,0 +1,9 @@
+// NID-derived names
+sceVaudioOutputBlocking = 0x00000000; // type:func
+sceVaudioChReserve = 0x0000000C; // type:func
+sceVaudioChRelease = 0x00000018; // type:func
+sceVaudioSetEffectType = 0x00000024; // type:func
+sceVaudio_driver_DCC18F25 = 0x00000034; // type:func
+sceVaudio_driver_82EF2F9D = 0x0000003C; // type:func
+sceVaudio_driver_5A7435B7 = 0x00000058; // type:func
+sceVaudio_driver_72749E84 = 0x00000060; // type:func

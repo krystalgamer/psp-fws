@@ -1,0 +1,7 @@
+// NID-derived names
+sceUriEscape = 0x00000058; // type:func
+sceUriUnescape = 0x00000248; // type:func
+sceUriParse = 0x000003C4; // type:func
+sceUriBuild = 0x00000770; // type:func
+module_start = 0x000017A0; // type:func
+module_stop = 0x000017A8; // type:func

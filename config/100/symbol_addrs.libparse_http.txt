@@ -1,0 +1,5 @@
+// NID-derived names
+sceParseHttpStatusLine = 0x00000000; // type:func
+sceParseHttpResponseHeader = 0x000000AC; // type:func
+module_start = 0x000005E0; // type:func
+module_stop = 0x000005E8; // type:func

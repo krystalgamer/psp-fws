@@ -1,0 +1,76 @@
+name: pops (352)
+sha1: d815c4599cda284f301de9febbc6a9fc9332551e
+options:
+  basename: pops
+  target_path: tmp/baserom/352/pops.prx
+  elf_path: tmp/build/352/pops.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/352/pops
+  src_path: src/pops
+  build_path: tmp/build/352
+  ld_script_path: tmp/build/352/pops.ld
+  cache_path: tmp/build/352/.splat_cache.pops
+  symbol_addrs_path:
+    - config/352/symbol_addrs.pops.txt
+    - tmp/build/352/prx_syms.pops.txt
+  reloc_addrs_path: [tmp/build/352/reloc_addrs.pops.txt]
+  asset_path: tmp/assets/352/pops
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/352/undefined_funcs_auto.pops.txt
+  undefined_syms_auto_path: tmp/build/352/undefined_syms_auto.pops.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0xC550
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x6ECA40
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: pops
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, pops]
+      - { start: 0x2B4F0, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x2B898, type: prxpad, order: .text }
+      - { start: 0x2B8A0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x2B8A4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2B8B4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2B8B8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x2B8BC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x2BA3C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x2BA40, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - [0x2BA74, rodata, pops]
+      - { start: 0xECEFC, type: prxpad, order: .rodata }
+  - name: pops_seg1
+    type: code
+    start: 0xECF00
+    vram: 0xECE80
+    bss_size: 0x5FB654
+    subsegments:
+      - [0xECF00, data, pops_data]
+      - { start: 0xF145C, type: bss, vram: 0xF13DC }
+  - [0xF145C, bin, elf_trailer]
+  - [0x102DC8]
