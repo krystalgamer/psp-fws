@@ -1,0 +1,26 @@
+// NID-derived names
+sceVideocodec_2D31F5B1 = 0x00000000; // type:func
+sceVideocodec_4F160BF4 = 0x000000A8; // type:func
+sceVideocodec_C01EC829 = 0x0000012C; // type:func
+sceVideocodec_17099F0A = 0x00000244; // type:func
+sceVideocodec_DBA273FA = 0x00000370; // type:func
+sceVideocodec_A2F0564E = 0x000004EC; // type:func
+sceVideocodec_307E6E1C = 0x00000624; // type:func
+sceVideocodec_745A7B7A = 0x00000714; // type:func
+sceVideocodec_2F385E7F = 0x00000800; // type:func
+sceVideocodec_26927D19 = 0x0000097C; // type:func
+sceVideocodec_627B7D42 = 0x00000A50; // type:func
+sceVideocodec_driver_E76D65FE = 0x00000B80; // type:func
+sceVideocodec_driver_CB3312D1 = 0x00000B88; // type:func
+sceKernelDcacheWritebackInvalidateRange = 0x00001064; // type:func
+sceKernelDcacheInvalidateRange = 0x0000106C; // type:func
+sceMeMemory_driver_C86500E3 = 0x00001074; // type:func
+sceMeMemory_driver_5AD660FA = 0x0000107C; // type:func
+sceMePower_driver_B6FE3E62 = 0x00001084; // type:func
+sceMePower_driver_05B2C420 = 0x0000108C; // type:func
+sceMeVideo_driver_B655AD4E = 0x00001094; // type:func
+sceMeVideo_driver_06F0236A = 0x0000109C; // type:func
+sceMeVideo_driver_176BBE07 = 0x000010A4; // type:func
+sceMeVideo_driver_DE2E7E89 = 0x000010AC; // type:func
+sceMeVideo_driver_E67F4E0A = 0x000010B4; // type:func
+sceMeVideo_driver_1C6A60E1 = 0x000010BC; // type:func

@@ -1,0 +1,12 @@
+// NID-derived names
+sceMeBooter_driver_3BCB751E = 0x00000000; // type:func
+memcpy = 0x00000200; // type:func
+sceKernelDelayThread = 0x00000208; // type:func
+sceKernelDcacheWritebackInvalidateAll = 0x00000210; // type:func
+UtilsForKernel_78934841 = 0x00000218; // type:func
+UtilsForKernel_23FFC828 = 0x00000220; // type:func
+sceDdr_driver_87D86769 = 0x00000228; // type:func
+sceSysreg_driver_DE59DACB = 0x00000230; // type:func
+sceSysreg_driver_2DB0EB28 = 0x00000238; // type:func
+sceSysreg_driver_7558064A = 0x00000240; // type:func
+sceSysreg_driver_44F6CDA7 = 0x00000248; // type:func

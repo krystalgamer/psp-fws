@@ -1,0 +1,78 @@
+name: wlan (201)
+sha1: 365611bca76b0226eb3e81aa9d8a3ed122a9285b
+options:
+  basename: wlan
+  target_path: tmp/baserom/201/wlan.prx
+  elf_path: tmp/build/201/wlan.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/201/wlan
+  src_path: src/wlan
+  build_path: tmp/build/201
+  ld_script_path: tmp/build/201/wlan.ld
+  cache_path: tmp/build/201/.splat_cache.wlan
+  symbol_addrs_path:
+    - config/201/symbol_addrs.wlan.txt
+    - tmp/build/201/prx_syms.wlan.txt
+  reloc_addrs_path: [tmp/build/201/reloc_addrs.wlan.txt]
+  asset_path: tmp/assets/201/wlan
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/201/undefined_funcs_auto.wlan.txt
+  undefined_syms_auto_path: tmp/build/201/undefined_syms_auto.wlan.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x1EE00
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x2E01C
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: wlan
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, wlan]
+      - { start: 0x15B04, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x15E44, type: prxpad, order: .text }
+      - { start: 0x15E50, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x15E54, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x15E94, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x15E98, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x15E9C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x15F90, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x15F94, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x15FC8, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x162DC, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x1647C, rodata, wlan]
+      - { start: 0x1697C, type: prxpad, order: .rodata }
+  - name: wlan_seg1
+    type: code
+    start: 0x16980
+    vram: 0x16900
+    bss_size: 0x900
+    subsegments:
+      - [0x16980, data, wlan_data]
+      - { start: 0x2D78C, type: bss, vram: 0x2D710 }
+  - [0x2D78C, bin, elf_trailer]
+  - [0x33FAC]

@@ -1,0 +1,78 @@
+name: netfront (201)
+sha1: b7b7abd9c72f0d1816aaa4263dcbad893cf0d3af
+options:
+  basename: netfront
+  target_path: tmp/baserom/201/netfront.prx
+  elf_path: tmp/build/201/netfront.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/201/netfront
+  src_path: src/netfront
+  build_path: tmp/build/201
+  ld_script_path: tmp/build/201/netfront.ld
+  cache_path: tmp/build/201/.splat_cache.netfront
+  symbol_addrs_path:
+    - config/201/symbol_addrs.netfront.txt
+    - tmp/build/201/prx_syms.netfront.txt
+  reloc_addrs_path: [tmp/build/201/reloc_addrs.netfront.txt]
+  asset_path: tmp/assets/201/netfront
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/201/undefined_funcs_auto.netfront.txt
+  undefined_syms_auto_path: tmp/build/201/undefined_syms_auto.netfront.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8B30
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x11EB50
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: netfront
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, netfront]
+      - { start: 0x105BDC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x106334, type: prxpad, order: .text }
+      - { start: 0x106340, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x106344, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x106364, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x106368, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x10636C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x1064AC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x1064B0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x1064E4, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x107C20, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x107FCC, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x108040, rodata, netfront]
+  - name: netfront_seg1
+    type: code
+    start: 0x11B400
+    vram: 0x11B380
+    bss_size: 0x2C80
+    subsegments:
+      - [0x11B400, data, netfront_data]
+      - { start: 0x11BF40, type: bss, vram: 0x11BEC0 }
+  - [0x11BF40, bin, elf_trailer]
+  - [0x16D65F]

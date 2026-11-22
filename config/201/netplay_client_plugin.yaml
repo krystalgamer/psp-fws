@@ -1,0 +1,85 @@
+name: netplay_client_plugin (201)
+sha1: 1c3895d728574e435b91d4e597cd06013f8ebac9
+options:
+  basename: netplay_client_plugin
+  target_path: tmp/baserom/201/netplay_client_plugin.prx
+  elf_path: tmp/build/201/netplay_client_plugin.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/201/netplay_client_plugin
+  src_path: src/netplay_client_plugin
+  build_path: tmp/build/201
+  ld_script_path: tmp/build/201/netplay_client_plugin.ld
+  cache_path: tmp/build/201/.splat_cache.netplay_client_plugin
+  symbol_addrs_path:
+    - config/201/symbol_addrs.netplay_client_plugin.txt
+    - tmp/build/201/prx_syms.netplay_client_plugin.txt
+  reloc_addrs_path: [tmp/build/201/reloc_addrs.netplay_client_plugin.txt]
+  asset_path: tmp/assets/201/netplay_client_plugin
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/201/undefined_funcs_auto.netplay_client_plugin.txt
+  undefined_syms_auto_path: tmp/build/201/undefined_syms_auto.netplay_client_plugin.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8130
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x81EC
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: netplay_client_plugin
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - [0xA4, asm, netplay_client_plugin]
+      - { start: 0x6B34, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x6B50, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x6EC8, type: prxpad, order: .text }
+      - { start: 0x6ED0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x6ED4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x6EE4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x6EE8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x6EEC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x7024, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x7028, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x705C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x7198, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x7354, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x745C, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x746C, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x747C, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x7480, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - { start: 0x7484, type: prxpad, order: .rodata }
+      - [0x7488, rodata, netplay_client_plugin]
+  - name: netplay_client_plugin_seg1
+    type: code
+    start: 0x7DA0
+    vram: 0x7D20
+    bss_size: 0x37C
+    subsegments:
+      - [0x7DA0, data, netplay_client_plugin_data]
+      - { start: 0x7EE0, type: bss, vram: 0x7E60 }
+  - [0x7EE0, bin, elf_trailer]
+  - [0xCA9C]

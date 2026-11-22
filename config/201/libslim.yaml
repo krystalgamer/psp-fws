@@ -1,0 +1,78 @@
+name: libslim (201)
+sha1: efe649625940578cbdeb2b91c787a65d3937c996
+options:
+  basename: libslim
+  target_path: tmp/baserom/201/libslim.prx
+  elf_path: tmp/build/201/libslim.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/201/libslim
+  src_path: src/libslim
+  build_path: tmp/build/201
+  ld_script_path: tmp/build/201/libslim.ld
+  cache_path: tmp/build/201/.splat_cache.libslim
+  symbol_addrs_path:
+    - config/201/symbol_addrs.libslim.txt
+    - tmp/build/201/prx_syms.libslim.txt
+  reloc_addrs_path: [tmp/build/201/reloc_addrs.libslim.txt]
+  asset_path: tmp/assets/201/libslim
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/201/undefined_funcs_auto.libslim.txt
+  undefined_syms_auto_path: tmp/build/201/undefined_syms_auto.libslim.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x7FF0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x18370
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: libslim
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, libslim]
+      - { start: 0x1632C, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1633C, type: prxpad, order: .text }
+      - { start: 0x16340, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x16344, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x16364, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x16368, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x1636C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x16380, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x16384, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x163B8, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x16658, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x16660, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x16694, rodata, libslim]
+      - { start: 0x17E48, type: prxpad, order: .rodata }
+  - name: libslim_seg1
+    type: code
+    start: 0x17E50
+    vram: 0x17DD0
+    bss_size: 0x590
+    subsegments:
+      - { start: 0x17E50, type: bss, vram: 0x17DD0 }
+  - [0x17E50, bin, elf_trailer]
+  - [0x1DD12]

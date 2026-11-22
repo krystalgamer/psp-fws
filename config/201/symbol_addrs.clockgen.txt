@@ -1,0 +1,25 @@
+// NID-derived names
+sceClockgen_driver_176833E1 = 0x00000000; // type:func
+sceClockgen_driver_C9AF3102 = 0x000000F8; // type:func
+module_start = 0x0000029C; // type:func
+module_reboot_before = 0x0000030C; // type:func
+sceClockgen_driver_29160F5D = 0x00000358; // type:func
+sceClockgen_driver_36F9B49D = 0x000003B0; // type:func
+sceClockgen_driver_C6D4C843 = 0x000003FC; // type:func
+sceClockgen_driver_32C8CA86 = 0x00000470; // type:func
+sceClockgen_driver_B9716D48 = 0x00000484; // type:func
+sceClockgen_driver_4EB657D5 = 0x000004B0; // type:func
+sceClockgen_driver_5F8328FD = 0x000004F0; // type:func
+sceClockgen_driver_B9FE99D1 = 0x00000510; // type:func
+sceClockgen_driver_7FF82F6F = 0x00000530; // type:func
+sceClockgen_driver_DBE5F283 = 0x00000550; // type:func
+sceKernelCreateSema = 0x0000070C; // type:func
+sceKernelDeleteSema = 0x00000714; // type:func
+sceKernelSignalSema = 0x0000071C; // type:func
+sceKernelWaitSema = 0x00000724; // type:func
+sceKernelPollSema = 0x0000072C; // type:func
+sceI2c_driver_D6E9836A = 0x00000734; // type:func
+sceI2c_driver_E9463B99 = 0x0000073C; // type:func
+sceI2c_driver_6536B1B6 = 0x00000744; // type:func
+sceSysEventForKernel_CD9E4BB5 = 0x0000074C; // type:func
+sceSysEventForKernel_D7D3FDCD = 0x00000754; // type:func
