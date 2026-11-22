@@ -113,7 +113,32 @@ int sceDdrdbMul2(u8 *a, u8 *b, u8 *out) {
     return ret;
 }
 
-INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceDdrdbSiggen);
+int sceDdrdbSiggen(u8 *privKey, u8 *digest, u8 *sig) {
+    int ret;
+    u32 i;
+    u32 j;
+    u32 k;
+    u32 l;
+
+    for (i = 0; i < 0x20; i++) {
+        g_ddrdbBufPtr[i] = privKey[i];
+    }
+    for (j = 0; j < 0x14; j++) {
+        g_ddrdbBufPtr[0x20 + j] = digest[j];
+    }
+    if (sceUtilsBufferCopyWithRange(g_ddrdbBufPtr, 0x34, g_ddrdbBufPtr, 0x34, KIRK_CMD_SIGGEN) != 0) {
+        ret = 0x80530300;
+    } else {
+        for (k = 0; k < 0x28; k++) {
+            sig[k] = g_ddrdbBufPtr[k];
+        }
+        ret = 0;
+    }
+    for (l = 0; l < 0x34; l++) {
+        g_ddrdbBufPtr[l] = 0;
+    }
+    return ret;
+}
 
 int sceDdrdbPrngen(u8 *out) {
     int ret = 0x80530300;
@@ -132,21 +157,22 @@ int sceDdrdbPrngen(u8 *out) {
     return ret;
 }
 
-#ifdef NON_MATCHING
-/* 7 words off: psp-gcc moves `ret = 0` into the digest copy loop. */
 int sceDdrdbHash(u8 *data, u32 size, u8 *digest) {
-    int ret = 0x80530301;
+    int ret;
     u32 i;
     u32 j;
     u32 k;
 
-    if (size <= 0x800) {
+    if (size > 0x800) {
+        ret = 0x80530301;
+    } else {
         g_ddrdbBuf[0] = size;
         for (i = 0; i < size; i++) {
             g_ddrdbBufPtr[4 + i] = data[i];
         }
-        ret = 0x80530300;
-        if (sceUtilsBufferCopyWithRange(g_ddrdbBufPtr, 0x14, g_ddrdbBufPtr, size + 4, KIRK_CMD_SHA1) == 0) {
+        if (sceUtilsBufferCopyWithRange(g_ddrdbBufPtr, 0x14, g_ddrdbBufPtr, size + 4, KIRK_CMD_SHA1) != 0) {
+            ret = 0x80530300;
+        } else {
             for (j = 0; j < 0x14; j++) {
                 digest[j] = g_ddrdbBufPtr[j];
             }
@@ -164,9 +190,6 @@ int sceDdrdbHash(u8 *data, u32 size, u8 *digest) {
     }
     return ret;
 }
-#else
-INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceDdrdbHash);
-#endif
 
 INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceDdrdbEncrypt);
 
