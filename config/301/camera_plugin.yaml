@@ -1,0 +1,85 @@
+name: camera_plugin (301)
+sha1: 5183b76133f826c3a50548a1ca940e46d2d909fc
+options:
+  basename: camera_plugin
+  target_path: tmp/baserom/301/camera_plugin.prx
+  elf_path: tmp/build/301/camera_plugin.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/301/camera_plugin
+  src_path: src/camera_plugin
+  build_path: tmp/build/301
+  ld_script_path: tmp/build/301/camera_plugin.ld
+  cache_path: tmp/build/301/.splat_cache.camera_plugin
+  symbol_addrs_path:
+    - config/301/symbol_addrs.camera_plugin.txt
+    - tmp/build/301/prx_syms.camera_plugin.txt
+  reloc_addrs_path: [tmp/build/301/reloc_addrs.camera_plugin.txt]
+  asset_path: tmp/assets/301/camera_plugin
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/301/undefined_funcs_auto.camera_plugin.txt
+  undefined_syms_auto_path: tmp/build/301/undefined_syms_auto.camera_plugin.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x82B0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x173170
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: camera_plugin
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - { start: 0xA0, type: asm, name: init, linker_section: .init }
+      - [0xC4, asm, camera_plugin]
+      - { start: 0x1ED98, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x1EDB4, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1F62C, type: prxpad, order: .text }
+      - { start: 0x1F630, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x1F634, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x1F644, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x1F648, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x1F64C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x1F784, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x1F788, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x1F7BC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x1F8E0, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x1FD1C, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x1FF6C, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x1FF94, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x1FFBC, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x1FFC0, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x20000, rodata, camera_plugin]
+      - { start: 0x2343C, type: prxpad, order: .rodata }
+  - name: camera_plugin_seg1
+    type: code
+    start: 0x23440
+    vram: 0x233C0
+    bss_size: 0x14FAE8
+    subsegments:
+      - [0x23440, data, camera_plugin_data]
+      - { start: 0x236F8, type: bss, vram: 0x23680 }
+  - [0x236F8, bin, elf_trailer]
+  - [0x326A4]

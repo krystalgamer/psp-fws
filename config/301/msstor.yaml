@@ -1,0 +1,78 @@
+name: msstor (301)
+sha1: 74a5c0753e97a973622428d90c7753e83bcb12a3
+options:
+  basename: msstor
+  target_path: tmp/baserom/301/msstor.prx
+  elf_path: tmp/build/301/msstor.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/301/msstor
+  src_path: src/msstor
+  build_path: tmp/build/301
+  ld_script_path: tmp/build/301/msstor.ld
+  cache_path: tmp/build/301/.splat_cache.msstor
+  symbol_addrs_path:
+    - config/301/symbol_addrs.msstor.txt
+    - tmp/build/301/prx_syms.msstor.txt
+  reloc_addrs_path: [tmp/build/301/reloc_addrs.msstor.txt]
+  asset_path: tmp/assets/301/msstor
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/301/undefined_funcs_auto.msstor.txt
+  undefined_syms_auto_path: tmp/build/301/undefined_syms_auto.msstor.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x81B0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xEF18
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: msstor
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, msstor]
+      - { start: 0x91D0, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x93B8, type: prxpad, order: .text }
+      - { start: 0x93C0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x93C4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x93E4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x93E8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x93EC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x94A4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x94A8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x94DC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x95F0, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x96E4, rodata, msstor]
+      - { start: 0x9F48, type: prxpad, order: .rodata }
+  - name: msstor_seg1
+    type: code
+    start: 0x9F50
+    vram: 0x9EB0
+    bss_size: 0x4E98
+    subsegments:
+      - [0x9F50, data, msstor_data]
+      - { start: 0xA110, type: bss, vram: 0xA070 }
+  - [0xA110, bin, elf_trailer]
+  - [0xCB3C]

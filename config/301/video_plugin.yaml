@@ -1,0 +1,85 @@
+name: video_plugin (301)
+sha1: 7aa099402e48deaf419ae856d92413f8bf11ae74
+options:
+  basename: video_plugin
+  target_path: tmp/baserom/301/video_plugin.prx
+  elf_path: tmp/build/301/video_plugin.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/301/video_plugin
+  src_path: src/video_plugin
+  build_path: tmp/build/301
+  ld_script_path: tmp/build/301/video_plugin.ld
+  cache_path: tmp/build/301/.splat_cache.video_plugin
+  symbol_addrs_path:
+    - config/301/symbol_addrs.video_plugin.txt
+    - tmp/build/301/prx_syms.video_plugin.txt
+  reloc_addrs_path: [tmp/build/301/reloc_addrs.video_plugin.txt]
+  asset_path: tmp/assets/301/video_plugin
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/301/undefined_funcs_auto.video_plugin.txt
+  undefined_syms_auto_path: tmp/build/301/undefined_syms_auto.video_plugin.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8020
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x4CD4
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: video_plugin
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - { start: 0xA0, type: asm, name: init, linker_section: .init }
+      - [0xC4, asm, video_plugin]
+      - { start: 0x28B8, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x28D4, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x2ADC, type: prxpad, order: .text }
+      - { start: 0x2AE0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x2AE4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2AF4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2AF8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x2AFC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x2B94, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x2B98, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x2BCC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x2C5C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x2D60, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x2DCC, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x2DD8, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x2DE4, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x2DE8, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x2DEC, rodata, video_plugin]
+      - { start: 0x3238, type: prxpad, order: .rodata }
+  - name: video_plugin_seg1
+    type: code
+    start: 0x3240
+    vram: 0x31A0
+    bss_size: 0x1AF8
+    subsegments:
+      - [0x3240, data, video_plugin_data]
+      - { start: 0x326C, type: bss, vram: 0x31D0 }
+  - [0x326C, bin, elf_trailer]
+  - [0x54F8]

@@ -1,0 +1,78 @@
+name: usbcam (301)
+sha1: 13c5e54e7c070b07965a50b6ba51ca18a566ee71
+options:
+  basename: usbcam
+  target_path: tmp/baserom/301/usbcam.prx
+  elf_path: tmp/build/301/usbcam.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/301/usbcam
+  src_path: src/usbcam
+  build_path: tmp/build/301
+  ld_script_path: tmp/build/301/usbcam.ld
+  cache_path: tmp/build/301/.splat_cache.usbcam
+  symbol_addrs_path:
+    - config/301/symbol_addrs.usbcam.txt
+    - tmp/build/301/prx_syms.usbcam.txt
+  reloc_addrs_path: [tmp/build/301/reloc_addrs.usbcam.txt]
+  asset_path: tmp/assets/301/usbcam
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/301/undefined_funcs_auto.usbcam.txt
+  undefined_syms_auto_path: tmp/build/301/undefined_syms_auto.usbcam.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8320
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xC288
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: usbcam
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, usbcam]
+      - { start: 0x9F04, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0xA0BC, type: prxpad, order: .text }
+      - { start: 0xA0C0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0xA0C4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0xA0FC, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0xA100, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0xA104, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0xA1D0, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0xA1D4, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0xA208, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0xA6CC, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0xA7A8, rodata, usbcam]
+      - { start: 0xBCC8, type: prxpad, order: .rodata }
+  - name: usbcam_seg1
+    type: code
+    start: 0xBCD0
+    vram: 0xBC30
+    bss_size: 0x320
+    subsegments:
+      - [0xBCD0, data, usbcam_data]
+      - { start: 0xBFF8, type: bss, vram: 0xBF60 }
+  - [0xBFF8, bin, elf_trailer]
+  - [0x1139C]
