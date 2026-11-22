@@ -5,6 +5,16 @@
 extern u8 *g_ddrdbBufPtr;
 extern u32 g_ddrdbBuf[];
 
+static inline void ddrdb_memcpy(void *p1, void *p2, int size) {
+    int i;
+    u8 *dst = p1;
+    u8 *src = p2;
+
+    for (i = 0; i < size; i++) {
+        dst[i] = src[i];
+    }
+}
+
 static inline void ddrdb_memclr(u8 *buf, u32 size) {
     u32 i;
 
@@ -27,7 +37,22 @@ s32 func_0000024C(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceDdrdbSigvry);
+int sceDdrdbSigvry(u8 *pubKey, u8 *digest, u8 *sig) {
+    u8 *buf = g_ddrdbBufPtr;
+    int ret;
+    u32 i;
+
+    ddrdb_memcpy(buf, pubKey, 0x28);
+    buf += 0x28;
+    ddrdb_memcpy(buf, digest, 0x14);
+    buf += 0x14;
+    ddrdb_memcpy(buf, sig, 0x28);
+    ret = (sceUtilsBufferCopyWithRange(NULL, 0, g_ddrdbBufPtr, 0x64, KIRK_CMD_SIGVRY) == 0) ? 0 : 0x80530300;
+    for (i = 0; i < 0x64; i++) {
+        g_ddrdbBufPtr[i] = 0;
+    }
+    return ret;
+}
 
 int sceDdrdbCertvry(u8 *cert) {
     int ret;
@@ -61,7 +86,32 @@ int sceDdrdbMul1(u8 *out) {
     return ret;
 }
 
-INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceDdrdbMul2);
+int sceDdrdbMul2(u8 *a, u8 *b, u8 *out) {
+    int ret;
+    u32 i;
+    u32 j;
+    u32 k;
+    u32 l;
+
+    for (i = 0; i < 0x14; i++) {
+        g_ddrdbBufPtr[i] = a[i];
+    }
+    for (j = 0; j < 0x28; j++) {
+        g_ddrdbBufPtr[0x14 + j] = b[j];
+    }
+    if (sceUtilsBufferCopyWithRange(g_ddrdbBufPtr, 0x28, g_ddrdbBufPtr, 0x3C, KIRK_CMD_MUL2) != 0) {
+        ret = 0x80530300;
+    } else {
+        for (k = 0; k < 0x28; k++) {
+            out[k] = g_ddrdbBufPtr[k];
+        }
+        ret = 0;
+    }
+    for (l = 0; l < 0x3C; l++) {
+        g_ddrdbBufPtr[l] = 0;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceDdrdbSiggen);
 
