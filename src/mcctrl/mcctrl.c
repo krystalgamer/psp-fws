@@ -2,11 +2,28 @@
 #include "ddrdb.h"
 #include "idstorage.h"
 
+typedef struct {
+    /* 0x000 */ u8 iv[0x10];
+    /* 0x010 */ u8 unk10[0x14];
+    /* 0x024 */ u8 unk24[0x28];
+    /* 0x04C */ u8 cert[0xB8];
+    /* 0x104 */ u8 unk104[0x1C];
+} McctrlBlock; /* size 0x120 */
+
+typedef struct {
+    /* 0x000 */ u8 iv[0x10];
+    /* 0x010 */ u8 unk10[0x28];
+    /* 0x038 */ u8 unk38[0x60];
+    /* 0x098 */ u8 unk98[0x18];
+    /* 0x0B0 */ u8 unkB0[0x1C8];
+} McctrlBlock2; /* size 0x278 */
+
 extern s32 D_000012D0;
-extern u8 D_000012D4[0x120];
-extern u8 D_000013F4[0x278];
+extern McctrlBlock D_000012D4;
+extern McctrlBlock2 D_000013F4;
 
 int func_00000BC8(u8 *src, u8 *dst, u32 size);
+int func_00000C48(u8 *src, u8 *dst, u32 size);
 int func_00000D3C(u8 *buf, u32 size, u8 *arg2);
 int func_00000E78(void *buf, u32 size);
 void func_00000EB4(int, int);
@@ -75,42 +92,40 @@ int sceMcctrl_877CD3A5(void) {
 
 #ifdef NON_MATCHING
 int sceMcctrl_1EDFD6BB(u8 *arg0, u8 *arg1) {
-    u8 *buf1 = D_000012D4;
-    u8 *buf2 = D_000013F4;
-    u8 *cert;
+    McctrlBlock *buf1 = &D_000012D4;
+    McctrlBlock2 *buf2 = &D_000013F4;
     int ret = 0x80530001;
 
     if (D_000012D0 == 0) {
         goto end;
     }
     mcctrl_memclr(buf2, 0xB0);
-    mcctrl_memclr(buf1, 0x120);
-    cert = buf1 + 0x4C;
+    mcctrl_memclr(buf1, sizeof(McctrlBlock));
     ret = 0x80530012;
-    if (func_00000E78(cert, 0xB8) != 0) {
+    if (func_00000E78(buf1->cert, sizeof(buf1->cert)) != 0) {
         goto end;
     }
     ret = 0x80530013;
-    if (func_00000FCC(cert) != 0) {
+    if (func_00000FCC(buf1->cert) != 0) {
         goto end;
     }
     ret = 0x80530010;
-    if (func_00000F70(buf1 + 0x10) != 0) {
+    if (func_00000F70(buf1->unk10) != 0) {
         goto end;
     }
-    mcctrl_memcpy(buf2 + 0x10, buf1 + 0x24, 0x28);
-    mcctrl_memcpy(buf2 + 0x38, buf1 + 0x4C, 0x60);
-    func_00000EBC(buf2, 0x10);
-    ret = func_00000BC8(buf2, arg1, 0xB0);
+    mcctrl_memcpy(buf2->unk10, buf1->unk24, sizeof(buf2->unk10));
+    mcctrl_memcpy(buf2->unk38, buf1->cert, sizeof(buf2->unk38));
+    func_00000EBC(buf2->iv, sizeof(buf2->iv));
+    ret = func_00000BC8((u8 *)buf2, arg1, 0xB0);
     if (ret != 0) {
         goto end;
     }
-    func_00000EBC(buf1, 0x10);
-    ret = func_00000BC8(buf1, arg0, 0x120);
+    func_00000EBC(buf1->iv, sizeof(buf1->iv));
+    ret = func_00000BC8((u8 *)buf1, arg0, sizeof(McctrlBlock));
 
 end:
-    func_00000EBC(D_000012D4, 0x120);
-    func_00000EBC(D_000013F4, 0x278);
+    func_00000EBC((u8 *)&D_000012D4, sizeof(McctrlBlock));
+    func_00000EBC((u8 *)&D_000013F4, sizeof(McctrlBlock2));
     if ((ret & 0xFFFF0000) == 0x80530000) {
         ret |= 0x80530300;
     }
@@ -122,7 +137,37 @@ INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_1EDFD6BB);
 
 INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_7CAC25B2);
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_9618EE57);
+int sceMcctrl_9618EE57(u8 *arg0, u8 *arg1, u32 arg2) {
+    McctrlBlock *buf1 = &D_000012D4;
+    u8 *buf2 = (u8 *)&D_000013F4;
+    int ret = 0x80530001;
+    u32 len;
+    u32 i;
+
+    if (D_000012D0 == 0) {
+        goto end;
+    }
+    ret = func_00000C48(arg0, (u8 *)buf1, sizeof(McctrlBlock));
+    if (ret != 0) {
+        goto end;
+    }
+    for (i = 0; i < 4; i++) {
+        buf2[i] = arg1[i] ^ buf1->unk10[0x10 + i];
+    }
+    len = (buf2[0] << 24) | (buf2[1] << 16) | (buf2[2] << 8) | buf2[3];
+    ret = 0x80530004;
+    if (len <= arg2) {
+        ret = (len + 15) & ~15;
+    }
+
+end:
+    func_00000EBC((u8 *)&D_000012D4, sizeof(McctrlBlock));
+    func_00000EBC((u8 *)&D_000013F4, sizeof(McctrlBlock2));
+    if ((ret & 0xFFFF0000) == 0x80530000) {
+        ret |= 0x80530300;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_61550814);
 
