@@ -1,0 +1,78 @@
+name: memlmd (302)
+sha1: ae3a2f254847a4727f96e4dd624c7b80d8289a60
+options:
+  basename: memlmd
+  target_path: tmp/baserom/302/memlmd.prx
+  elf_path: tmp/build/302/memlmd.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/302/memlmd
+  src_path: src/memlmd
+  build_path: tmp/build/302
+  ld_script_path: tmp/build/302/memlmd.ld
+  cache_path: tmp/build/302/.splat_cache.memlmd
+  symbol_addrs_path:
+    - config/302/symbol_addrs.memlmd.txt
+    - tmp/build/302/prx_syms.memlmd.txt
+  reloc_addrs_path: [tmp/build/302/reloc_addrs.memlmd.txt]
+  asset_path: tmp/assets/302/memlmd
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/302/undefined_funcs_auto.memlmd.txt
+  undefined_syms_auto_path: tmp/build/302/undefined_syms_auto.memlmd.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8040
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x2FD0
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: memlmd
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, memlmd]
+      - { start: 0x1C7C, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1D14, type: prxpad, order: .text }
+      - { start: 0x1D20, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x1D24, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x1D54, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x1D58, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x1D5C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x1DB0, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x1DB4, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x1DE8, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x1ED4, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x1F20, rodata, memlmd]
+      - { start: 0x2B18, type: prxpad, order: .rodata }
+  - name: memlmd_seg1
+    type: code
+    start: 0x2B40
+    vram: 0x2A80
+    bss_size: 0x4F0
+    subsegments:
+      - [0x2B40, data, memlmd_data]
+      - { start: 0x2B90, type: bss, vram: 0x2B00 }
+  - [0x2B90, bin, elf_trailer]
+  - [0x3E08]

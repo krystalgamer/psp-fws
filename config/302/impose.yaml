@@ -1,0 +1,77 @@
+name: impose (302)
+sha1: b827113ec26b454f2c591c6d055b1cc78aef41fb
+options:
+  basename: impose
+  target_path: tmp/baserom/302/impose.prx
+  elf_path: tmp/build/302/impose.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/302/impose
+  src_path: src/impose
+  build_path: tmp/build/302
+  ld_script_path: tmp/build/302/impose.ld
+  cache_path: tmp/build/302/.splat_cache.impose
+  symbol_addrs_path:
+    - config/302/symbol_addrs.impose.txt
+    - tmp/build/302/prx_syms.impose.txt
+  reloc_addrs_path: [tmp/build/302/reloc_addrs.impose.txt]
+  asset_path: tmp/assets/302/impose
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/302/undefined_funcs_auto.impose.txt
+  undefined_syms_auto_path: tmp/build/302/undefined_syms_auto.impose.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8040
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xF96C
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: impose
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, impose]
+      - { start: 0x5EAC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x60DC, type: prxpad, order: .text }
+      - { start: 0x60E0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x60E4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x6138, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x613C, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x6140, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x6298, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x629C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x62D0, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x661C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x6734, rodata, impose]
+  - name: impose_seg1
+    type: code
+    start: 0xF780
+    vram: 0xF6E0
+    bss_size: 0x234
+    subsegments:
+      - [0xF780, data, impose_data]
+      - { start: 0xF7C8, type: bss, vram: 0xF730 }
+  - [0xF7C8, bin, elf_trailer]
+  - [0x1273C]

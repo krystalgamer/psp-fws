@@ -1,0 +1,75 @@
+name: idmanager (302)
+sha1: 451c1384fd27752ef0e6f40099f904c6a496372a
+options:
+  basename: idmanager
+  target_path: tmp/baserom/302/idmanager.prx
+  elf_path: tmp/build/302/idmanager.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/302/idmanager
+  src_path: src/idmanager
+  build_path: tmp/build/302
+  ld_script_path: tmp/build/302/idmanager.ld
+  cache_path: tmp/build/302/.splat_cache.idmanager
+  symbol_addrs_path:
+    - config/302/symbol_addrs.idmanager.txt
+    - tmp/build/302/prx_syms.idmanager.txt
+  reloc_addrs_path: [tmp/build/302/reloc_addrs.idmanager.txt]
+  asset_path: tmp/assets/302/idmanager
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/302/undefined_funcs_auto.idmanager.txt
+  undefined_syms_auto_path: tmp/build/302/undefined_syms_auto.idmanager.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8000
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x940
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: idmanager
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, idmanager]
+      - { start: 0x6F4, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x77C, type: prxpad, order: .text }
+      - { start: 0x780, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x784, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x794, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x798, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x79C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x83C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x840, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x874, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x940, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x984, rodata, idmanager]
+  - name: idmanager_seg1
+    type: code
+    start: 0x9C0
+    vram: 0x920
+    subsegments:
+      - [0x9C0, data, idmanager_data]
+  - [0x9C4, bin, elf_trailer]
+  - [0x1180]
