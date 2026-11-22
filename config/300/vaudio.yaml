@@ -1,0 +1,77 @@
+name: vaudio (300)
+sha1: 778276b30fdea0f82e6c3deea223d5f46b7309d4
+options:
+  basename: vaudio
+  target_path: tmp/baserom/300/vaudio.prx
+  elf_path: tmp/build/300/vaudio.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/300/vaudio
+  src_path: src/vaudio
+  build_path: tmp/build/300
+  ld_script_path: tmp/build/300/vaudio.ld
+  cache_path: tmp/build/300/.splat_cache.vaudio
+  symbol_addrs_path:
+    - config/300/symbol_addrs.vaudio.txt
+    - tmp/build/300/prx_syms.vaudio.txt
+  reloc_addrs_path: [tmp/build/300/reloc_addrs.vaudio.txt]
+  asset_path: tmp/assets/300/vaudio
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/300/undefined_funcs_auto.vaudio.txt
+  undefined_syms_auto_path: tmp/build/300/undefined_syms_auto.vaudio.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8000
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xEB4
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: vaudio
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, vaudio]
+      - { start: 0xBDC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0xC5C, type: prxpad, order: .text }
+      - { start: 0xC60, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0xC64, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0xC94, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0xC98, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0xC9C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0xCEC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0xCF0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0xD24, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0xE14, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0xE54, rodata, vaudio]
+  - name: vaudio_seg1
+    type: code
+    start: 0xF20
+    vram: 0xE80
+    bss_size: 0x20
+    subsegments:
+      - [0xF20, data, vaudio_data]
+      - { start: 0xF24, type: bss, vram: 0xE90 }
+  - [0xF24, bin, elf_trailer]
+  - [0x1890]

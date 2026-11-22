@@ -1,0 +1,77 @@
+name: irda (300)
+sha1: 45ae0fb98298770487d84ec005d6b5065ee85b58
+options:
+  basename: irda
+  target_path: tmp/baserom/300/irda.prx
+  elf_path: tmp/build/300/irda.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/300/irda
+  src_path: src/irda
+  build_path: tmp/build/300
+  ld_script_path: tmp/build/300/irda.ld
+  cache_path: tmp/build/300/.splat_cache.irda
+  symbol_addrs_path:
+    - config/300/symbol_addrs.irda.txt
+    - tmp/build/300/prx_syms.irda.txt
+  reloc_addrs_path: [tmp/build/300/reloc_addrs.irda.txt]
+  asset_path: tmp/assets/300/irda
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/300/undefined_funcs_auto.irda.txt
+  undefined_syms_auto_path: tmp/build/300/undefined_syms_auto.irda.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8040
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x1800
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: irda
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, irda]
+      - { start: 0x1448, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1530, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x1534, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x1544, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x1548, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x154C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x15DC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x15E0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x1614, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x16E4, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x1758, rodata, irda]
+      - { start: 0x17E4, type: prxpad, order: .rodata }
+  - name: irda_seg1
+    type: code
+    start: 0x17F0
+    vram: 0x1750
+    bss_size: 0x5C
+    subsegments:
+      - [0x17F0, data, irda_data]
+      - { start: 0x1834, type: bss, vram: 0x17A0 }
+  - [0x1834, bin, elf_trailer]
+  - [0x25CC]

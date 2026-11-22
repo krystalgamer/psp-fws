@@ -1,0 +1,78 @@
+name: avcodec (300)
+sha1: d0971c18c790fce42b712e40b1b0e53450171753
+options:
+  basename: avcodec
+  target_path: tmp/baserom/300/avcodec.prx
+  elf_path: tmp/build/300/avcodec.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/300/avcodec
+  src_path: src/avcodec
+  build_path: tmp/build/300
+  ld_script_path: tmp/build/300/avcodec.ld
+  cache_path: tmp/build/300/.splat_cache.avcodec
+  symbol_addrs_path:
+    - config/300/symbol_addrs.avcodec.txt
+    - tmp/build/300/prx_syms.avcodec.txt
+  reloc_addrs_path: [tmp/build/300/reloc_addrs.avcodec.txt]
+  asset_path: tmp/assets/300/avcodec
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/300/undefined_funcs_auto.avcodec.txt
+  undefined_syms_auto_path: tmp/build/300/undefined_syms_auto.avcodec.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8000
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x4B08
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: avcodec
+    type: code
+    start: 0xA0
+    vram: 0x0
+    subsegments:
+      - [0xA0, asm, avcodec]
+      - { start: 0x3D68, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x3E88, type: prxpad, order: .text }
+      - { start: 0x3E90, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x3E94, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x3F04, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x3F08, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x3F0C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x3FAC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x3FB0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x3FE4, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x42C4, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x4354, rodata, avcodec]
+      - { start: 0x4454, type: prxpad, order: .rodata }
+  - name: avcodec_seg1
+    type: code
+    start: 0x4480
+    vram: 0x43C0
+    bss_size: 0x734
+    subsegments:
+      - [0x4480, data, avcodec_data]
+      - { start: 0x4484, type: bss, vram: 0x4400 }
+  - [0x4484, bin, elf_trailer]
+  - [0x59E4]

@@ -1,0 +1,9 @@
+// NID-derived names
+module_start = 0x00000000; // type:func
+sceKernelCpuSuspendIntr = 0x00000038; // type:func
+sceKernelCpuResumeIntr = 0x00000064; // type:func
+sceKernelCpuResumeIntrWithSync = 0x0000008C; // type:func
+sceKernelIsCpuIntrSuspended = 0x000000C4; // type:func
+sceKernelIsCpuIntrEnable = 0x000000CC; // type:func
+sceKernelRegisterUserSpaceIntrStack = 0x000000D8; // type:func
+SysMemUserForUser_A6848DF8 = 0x000000E0; // type:func
