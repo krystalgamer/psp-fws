@@ -676,9 +676,15 @@ s32 func_0000C540(s32 arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C560);
+s32 func_0000C560(s32 arg0, s32 arg1, s32 arg2) {
+    func_000211B8(arg0, arg1, arg2, 0);
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C580);
+s32 func_0000C580(s32 arg0, s32 arg1, s32 arg2) {
+    func_000211B8(arg0, arg1, arg2, 1);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C5A0);
 
@@ -1645,7 +1651,9 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F450);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F640);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F680);
+void func_0001F680(s32 arg0, s32 arg1, s32 arg2) {
+    func_0001EFBC(arg0, 1, arg1, arg2);
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F6A4);
 
