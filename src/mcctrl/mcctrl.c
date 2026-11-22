@@ -14,17 +14,38 @@ int func_00000EBC(u8 *buf, u32 size);
 int func_00000F70(u8 *buf);
 int func_00000FCC(u8 *cert);
 int func_000010A8(u8 *src, u8 *dst, u32 size);
+int func_000010F0(u8 *src, u8 *dst, u32 size);
 
-static inline void mcctrl_memclr(u8 *buf, u32 size) {
+static inline void mcctrl_memclr(void *p, u32 size) {
     u32 i;
+    u8 *buf = p;
 
     for (i = 0; i < size; i++) {
         buf[i] = 0;
     }
 }
 
-static inline void mcctrl_memcpy(u8 *dst, u8 *src, int size) {
+static inline int mcctrl_memcmp(void *p1, void *p2, int size) {
+    int ret = 0;
     int i;
+    s8 *a = p1;
+    s8 *b = p2;
+
+    for (i = 0; i < size; i++) {
+        if (*a != *b) {
+            ret = *a - *b;
+            break;
+        }
+        a++;
+        b++;
+    }
+    return ret;
+}
+
+static inline void mcctrl_memcpy(void *p1, void *p2, int size) {
+    int i;
+    u8 *dst = p1;
+    u8 *src = p2;
 
     for (i = 0; i < size; i++) {
         dst[i] = src[i];
@@ -120,7 +141,29 @@ int func_00000BC8(u8 *src, u8 *dst, u32 size) {
     return ret;
 }
 
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000C48);
+int func_00000C48(u8 *src, u8 *dst, u32 size) {
+    u8 mac[16];
+    int ret;
+
+    if (size & 0xF) {
+        return 0x80530002;
+    }
+    ret = func_00000D3C(src, size - 16, mac);
+    if (ret < 0) {
+        goto end;
+    }
+    if (mcctrl_memcmp(src + size - 16, mac, 16) != 0) {
+        ret = 0x80530006;
+        goto end;
+    }
+    ret = func_000010F0(src, dst, size - 16);
+    if (ret < 0) {
+        ret = 0x80530004;
+    }
+end:
+    func_00000EBC(mac, 0x10);
+    return ret;
+}
 
 INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", func_00000D3C);
 
