@@ -136,19 +136,20 @@ def main():
     assert not seg0_bss, "bss in segment 0 not handled"
 
     base = seg1["p_vaddr"]
-    out.append(f"  - name: {name}_seg1\n    type: code\n    start: 0x{seg1['p_offset']:X}\n    vram: 0x{base:X}\n")
     s1 = [s for s in secs if in_seg1(s) and s["sh_size"]]
-    bss = [s for s in s1 if s["sh_type"] == "SHT_NOBITS"]
-    if bss:
-        out.append(f"    bss_size: 0x{sum(s['sh_size'] for s in bss) + (bss[0]['sh_addr'] - (s1[0]['sh_addr'] if s1[0] is not bss[0] else bss[0]['sh_addr'])) - sum(s['sh_size'] for s in s1 if s['sh_type'] != 'SHT_NOBITS'):X}\n")
-    out.append("    subsegments:\n")
     fpos = seg1["p_offset"]
-    for s in s1:
-        if s["sh_type"] == "SHT_NOBITS":
-            out.append(f"      - {{ start: 0x{fpos:X}, type: bss, vram: 0x{s['sh_addr']:X} }}\n")
-        else:
-            out.append(f"      - [0x{s['sh_offset']:X}, data, {name}_data]\n")
-            fpos = s["sh_offset"] + s["sh_size"]
+    if s1:
+        out.append(f"  - name: {name}_seg1\n    type: code\n    start: 0x{seg1['p_offset']:X}\n    vram: 0x{base:X}\n")
+        bss = [s for s in s1 if s["sh_type"] == "SHT_NOBITS"]
+        if bss:
+            out.append(f"    bss_size: 0x{seg1['p_memsz'] - seg1['p_filesz']:X}\n")
+        out.append("    subsegments:\n")
+        for s in s1:
+            if s["sh_type"] == "SHT_NOBITS":
+                out.append(f"      - {{ start: 0x{fpos:X}, type: bss, vram: 0x{s['sh_addr']:X} }}\n")
+            else:
+                out.append(f"      - [0x{s['sh_offset']:X}, data, {name}_data]\n")
+                fpos = s["sh_offset"] + s["sh_size"]
     out.append(f"  - [0x{fpos:X}, bin, elf_trailer]\n  - [0x{len(data):X}]\n")
 
     text = "".join(out)
