@@ -25,6 +25,7 @@ typedef struct {
 extern s32 D_000012D0;
 extern McctrlBlock D_000012D4;
 extern McctrlBlock2 D_000013F4;
+extern u8 D_0000166C[0xD0];
 extern McctrlMacCtx D_0000173C;
 
 int func_00000BC8(u8 *src, u8 *dst, u32 size);
@@ -133,7 +134,105 @@ end:
 INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_1EDFD6BB);
 #endif
 
+#ifdef NON_MATCHING
+int sceMcctrl_7CAC25B2(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, u8 *arg4, u8 *arg5) {
+    McctrlBlock *buf1 = &D_000012D4;
+    u8 *buf2 = (u8 *)&D_000013F4;
+    u8 *in = buf2 + 0x28;
+    u8 *out = buf2 + 0x148;
+    int ret = 0x80530001;
+
+    if (D_000012D0 == 0) {
+        goto end;
+    }
+    mcctrl_memclr(out, 0x130);
+    ret = func_00000C48(arg1, in, 0x120);
+    if (ret != 0) {
+        goto end;
+    }
+    ret = func_00000C48(arg0, (u8 *)buf1, sizeof(McctrlBlock));
+    if (ret != 0) {
+        goto end;
+    }
+    ret = 0x80530013;
+    if (func_00000FCC(buf1->cert) != 0) {
+        goto end;
+    }
+    mcctrl_memcpy(D_0000166C, in + 0xAC, 0x38);
+    ret = 0x80530019;
+    if (func_00000FE8(in + 0xE4, buf1->cert + 0x60, D_0000166C, 0x38) != 0) {
+        goto end;
+    }
+    mcctrl_memcpy(D_0000166C, in + 0x10, 0x60);
+    ret = 0x8053001A;
+    if (func_00000FE8(in + 0x70, in + 0xBC, D_0000166C, 0x60) != 0) {
+        goto end;
+    }
+    ret = 0x80530029;
+    if (mcctrl_memcmp(in + 0x38, buf1->unk24, 0x28) != 0) {
+        goto end;
+    }
+    ret = 0x80530028;
+    if (mcctrl_memcmp(in + 0x60, buf1->cert, 0x10) != 0) {
+        goto end;
+    }
+    ret = 0x80530011;
+    if (func_00000F8C(buf2, in + 0x10, buf1->unk10) != 0) {
+        goto end;
+    }
+    mcctrl_memcpy(D_0000166C, buf2, 0x14);
+    mcctrl_memcpy(D_0000166C + 0x14, in + 0x10, 0x60);
+    if (func_00000FB0(D_0000166C, 0x74, D_0000166C) != 0) {
+        ret = 0x80530020;
+        goto end;
+    }
+    ret = 0x80530021;
+    if (mcctrl_memcmp(in + 0x98, D_0000166C, 0x14) != 0) {
+        goto end;
+    }
+    mcctrl_memcpy(out + 0x10, buf1->unk24, 0x28);
+    mcctrl_memcpy(out + 0x38, in + 0x10, 0x28);
+    mcctrl_memcpy(out + 0x60, in + 0xAC, 0x10);
+    mcctrl_memcpy(out + 0xAC, arg2, 0x20);
+    mcctrl_memcpy(out + 0xCC, arg3, 0x40);
+    mcctrl_memcpy(out + 0x10C, arg4, 0x10);
+    mcctrl_memcpy(D_0000166C, out + 0x10, 0x60);
+    mcctrl_memcpy(D_0000166C + 0x60, out + 0xAC, 0x20);
+    mcctrl_memcpy(D_0000166C + 0x80, out + 0xCC, 0x40);
+    mcctrl_memcpy(D_0000166C + 0xC0, out + 0x10C, 0x10);
+    ret = 0x80530018;
+    if (func_00001048(out + 0x70, buf1->cert + 0x88, D_0000166C, 0xD0) != 0) {
+        goto end;
+    }
+    mcctrl_memcpy(D_0000166C, buf2, 0x14);
+    mcctrl_memcpy(D_0000166C + 0x14, out + 0x10, 0x60);
+    if (func_00000FB0(D_0000166C, 0x74, D_0000166C) != 0) {
+        ret = 0x80530020;
+        goto end;
+    }
+    mcctrl_memcpy(out + 0x98, D_0000166C, 0x14);
+    mcctrl_memclr(buf1, sizeof(McctrlBlock));
+    mcctrl_memcpy(buf1->unk10, buf2, 0x14);
+    func_00000EBC(out, 0x10);
+    ret = func_00000BC8(out, arg5, 0x130);
+    if (ret != 0) {
+        goto end;
+    }
+    func_00000EBC(buf1->iv, sizeof(buf1->iv));
+    ret = func_00000BC8((u8 *)buf1, arg0, sizeof(McctrlBlock));
+
+end:
+    func_00000EBC((u8 *)&D_000012D4, sizeof(McctrlBlock));
+    func_00000EBC((u8 *)&D_000013F4, sizeof(McctrlBlock2));
+    func_00000EBC(D_0000166C, sizeof(D_0000166C));
+    if ((ret & 0xFFFF0000) == 0x80530000) {
+        ret |= 0x80530300;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_7CAC25B2);
+#endif
 
 int sceMcctrl_9618EE57(u8 *arg0, u8 *arg1, u32 arg2) {
     McctrlBlock *buf1 = &D_000012D4;
