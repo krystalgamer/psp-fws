@@ -1,0 +1,76 @@
+name: clockgen (260)
+sha1: 286387c55719f58c667fa2ef3dc266a27f52f4c2
+options:
+  basename: clockgen
+  target_path: tmp/baserom/260/clockgen.prx
+  elf_path: tmp/build/260/clockgen.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/260/clockgen
+  src_path: src/clockgen
+  build_path: tmp/build/260
+  ld_script_path: tmp/build/260/clockgen.ld
+  cache_path: tmp/build/260/.splat_cache.clockgen
+  symbol_addrs_path:
+    - config/260/symbol_addrs.clockgen.txt
+    - tmp/build/260/prx_syms.clockgen.txt
+  reloc_addrs_path: [tmp/build/260/reloc_addrs.clockgen.txt]
+  asset_path: tmp/assets/260/clockgen
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/260/undefined_funcs_auto.clockgen.txt
+  undefined_syms_auto_path: tmp/build/260/undefined_syms_auto.clockgen.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8040
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x990
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: clockgen
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, clockgen]
+      - { start: 0x794, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x7E4, type: prxpad, order: .text }
+      - { start: 0x7F0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x7F4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x814, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x818, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x81C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x858, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x85C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x890, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x964, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x98C, rodata, clockgen]
+      - { start: 0x9A4, type: prxpad, order: .rodata }
+  - name: clockgen_seg1
+    type: code
+    start: 0x9B0
+    vram: 0x930
+    subsegments:
+      - [0x9B0, data, clockgen_data]
+  - [0x9FC, bin, elf_trailer]
+  - [0x1370]

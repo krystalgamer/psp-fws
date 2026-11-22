@@ -1,0 +1,76 @@
+name: pspnet_apctl (260)
+sha1: 4d9d8283d53d302486ffc8dae539ef50381e77a2
+options:
+  basename: pspnet_apctl
+  target_path: tmp/baserom/260/pspnet_apctl.prx
+  elf_path: tmp/build/260/pspnet_apctl.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/260/pspnet_apctl
+  src_path: src/pspnet_apctl
+  build_path: tmp/build/260
+  ld_script_path: tmp/build/260/pspnet_apctl.ld
+  cache_path: tmp/build/260/.splat_cache.pspnet_apctl
+  symbol_addrs_path:
+    - config/260/symbol_addrs.pspnet_apctl.txt
+    - tmp/build/260/prx_syms.pspnet_apctl.txt
+  reloc_addrs_path: [tmp/build/260/reloc_addrs.pspnet_apctl.txt]
+  asset_path: tmp/assets/260/pspnet_apctl
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/260/undefined_funcs_auto.pspnet_apctl.txt
+  undefined_syms_auto_path: tmp/build/260/undefined_syms_auto.pspnet_apctl.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8150
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x17BFC
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: pspnet_apctl
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, pspnet_apctl]
+      - { start: 0x102C0, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x10560, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x10564, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x105A4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x105A8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x105AC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x10674, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x10678, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x106AC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x1085C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x109AC, rodata, pspnet_apctl]
+  - name: pspnet_apctl_seg1
+    type: code
+    start: 0x11C70
+    vram: 0x11BF0
+    bss_size: 0x5E9C
+    subsegments:
+      - [0x11C70, data, pspnet_apctl_data]
+      - { start: 0x11DD0, type: bss, vram: 0x11D50 }
+  - [0x11DD0, bin, elf_trailer]
+  - [0x17C38]

@@ -1,0 +1,75 @@
+name: sysmem (260)
+sha1: 4631f0d28255f9f97c08497fc9da3f7a4b8a3af4
+options:
+  basename: sysmem
+  target_path: tmp/baserom/260/sysmem.prx
+  elf_path: tmp/build/260/sysmem.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/260/sysmem
+  src_path: src/sysmem
+  build_path: tmp/build/260
+  ld_script_path: tmp/build/260/sysmem.ld
+  cache_path: tmp/build/260/.splat_cache.sysmem
+  symbol_addrs_path:
+    - config/260/symbol_addrs.sysmem.txt
+    - tmp/build/260/prx_syms.sysmem.txt
+  reloc_addrs_path: [tmp/build/260/reloc_addrs.sysmem.txt]
+  asset_path: tmp/assets/260/sysmem
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/260/undefined_funcs_auto.sysmem.txt
+  undefined_syms_auto_path: tmp/build/260/undefined_syms_auto.sysmem.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8070
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x13C20
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: sysmem
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, sysmem]
+      - { start: 0x10C24, type: prxpad, order: .text }
+      - { start: 0x10C30, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x10C34, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x10CEC, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x10CF0, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x10CF4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x10CF8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x10D2C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x1178C, type: prxpad, order: .rodata }
+      - [0x117C0, rodata, sysmem]
+  - name: sysmem_seg1
+    type: code
+    start: 0x13180
+    vram: 0x13100
+    bss_size: 0xA90
+    subsegments:
+      - [0x13180, data, sysmem_data]
+      - { start: 0x13200, type: bss, vram: 0x13180 }
+  - [0x13200, bin, elf_trailer]
+  - [0x1963C]

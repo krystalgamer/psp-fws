@@ -1,0 +1,76 @@
+name: pspnet_adhoc_discover (260)
+sha1: 921af0dd36c4cbd1fa3a196264b855c68dc66d19
+options:
+  basename: pspnet_adhoc_discover
+  target_path: tmp/baserom/260/pspnet_adhoc_discover.prx
+  elf_path: tmp/build/260/pspnet_adhoc_discover.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/260/pspnet_adhoc_discover
+  src_path: src/pspnet_adhoc_discover
+  build_path: tmp/build/260
+  ld_script_path: tmp/build/260/pspnet_adhoc_discover.ld
+  cache_path: tmp/build/260/.splat_cache.pspnet_adhoc_discover
+  symbol_addrs_path:
+    - config/260/symbol_addrs.pspnet_adhoc_discover.txt
+    - tmp/build/260/prx_syms.pspnet_adhoc_discover.txt
+  reloc_addrs_path: [tmp/build/260/reloc_addrs.pspnet_adhoc_discover.txt]
+  asset_path: tmp/assets/260/pspnet_adhoc_discover
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/260/undefined_funcs_auto.pspnet_adhoc_discover.txt
+  undefined_syms_auto_path: tmp/build/260/undefined_syms_auto.pspnet_adhoc_discover.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8000
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0xFB8
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: pspnet_adhoc_discover
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, pspnet_adhoc_discover]
+      - { start: 0xD20, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0xDB0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0xDB4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0xDD4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0xDD8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0xDDC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0xE40, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0xE44, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0xE78, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0xF30, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0xF78, rodata, pspnet_adhoc_discover]
+  - name: pspnet_adhoc_discover_seg1
+    type: code
+    start: 0xFD0
+    vram: 0xF50
+    bss_size: 0x54
+    subsegments:
+      - [0xFD0, data, pspnet_adhoc_discover_data]
+      - { start: 0xFD4, type: bss, vram: 0xF60 }
+  - [0xFD4, bin, elf_trailer]
+  - [0x2124]

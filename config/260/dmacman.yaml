@@ -1,0 +1,76 @@
+name: dmacman (260)
+sha1: 5b3798587809af853be356ea4b8da27029ba918e
+options:
+  basename: dmacman
+  target_path: tmp/baserom/260/dmacman.prx
+  elf_path: tmp/build/260/dmacman.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/260/dmacman
+  src_path: src/dmacman
+  build_path: tmp/build/260
+  ld_script_path: tmp/build/260/dmacman.ld
+  cache_path: tmp/build/260/.splat_cache.dmacman
+  symbol_addrs_path:
+    - config/260/symbol_addrs.dmacman.txt
+    - tmp/build/260/prx_syms.dmacman.txt
+  reloc_addrs_path: [tmp/build/260/reloc_addrs.dmacman.txt]
+  asset_path: tmp/assets/260/dmacman
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/260/undefined_funcs_auto.dmacman.txt
+  undefined_syms_auto_path: tmp/build/260/undefined_syms_auto.dmacman.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x7FF0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x4010
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: dmacman
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, dmacman]
+      - { start: 0x1C98, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1D10, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x1D14, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x1D38, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x1D3C, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x1D40, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x1DA8, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x1DAC, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x1DE0, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x1F58, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x1F94, rodata, dmacman]
+      - { start: 0x1FF4, type: prxpad, order: .rodata }
+  - name: dmacman_seg1
+    type: code
+    start: 0x2000
+    vram: 0x1F80
+    bss_size: 0x2080
+    subsegments:
+      - { start: 0x2000, type: bss, vram: 0x1F80 }
+  - [0x2000, bin, elf_trailer]
+  - [0x2C50]

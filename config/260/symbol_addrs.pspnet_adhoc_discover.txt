@@ -1,0 +1,25 @@
+// NID-derived names
+sceNetAdhocDiscoverInitStart = 0x00000000; // type:func
+sceNetAdhocDiscoverUpdate = 0x00000140; // type:func
+sceNetAdhocDiscoverGetStatus = 0x000005AC; // type:func
+sceNetAdhocDiscoverStop = 0x00000608; // type:func
+sceNetAdhocDiscoverTerm = 0x00000670; // type:func
+sceNetAdhocDiscoverRequestSuspend = 0x00000700; // type:func
+sceKernelGetSystemTimeWide = 0x00000CA0; // type:func
+sceKernelCheckThreadStack = 0x00000CA8; // type:func
+sceNetAdhocctlScan = 0x00000CB0; // type:func
+sceNetAdhocctlDisconnect = 0x00000CB8; // type:func
+sceNetAdhocctlJoin = 0x00000CC0; // type:func
+sceNetAdhocctlGetScanInfo = 0x00000CC8; // type:func
+sceNetAdhocctlGetPeerList = 0x00000CD0; // type:func
+sceNetAdhocctlCreate = 0x00000CD8; // type:func
+sceNetAdhocctl_lib_1572422C = 0x00000CE0; // type:func
+sceNetAdhocctl_lib_1A2B6D03 = 0x00000CE8; // type:func
+sceNetAdhocctl_lib_1C679240 = 0x00000CF0; // type:func
+sceNetAdhocctl_lib_F6057CC4 = 0x00000CF8; // type:func
+sceNetAdhocctl_lib_F8BABD85 = 0x00000D00; // type:func
+sceNetIfhandle_lib_15CFE3C0 = 0x00000D08; // type:func
+sceNetIfhandle_lib_76BAD213 = 0x00000D10; // type:func
+sceNet_lib_1858883D = 0x00000D18; // type:func
+sceNet_lib_E0A81C7C = 0x00000D20; // type:func
+sceNet_lib_EF097716 = 0x00000D28; // type:func
