@@ -5,8 +5,8 @@
 extern u8 *g_ddrdbBufPtr;
 extern u32 g_ddrdbBuf[];
 
-static inline void ddrdb_memcpy(void *p1, void *p2, int size) {
-    int i;
+static inline void ddrdb_memcpy(void *p1, void *p2, u32 size) {
+    u32 i;
     u8 *dst = p1;
     u8 *src = p2;
 
