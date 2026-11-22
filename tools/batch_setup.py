@@ -88,6 +88,7 @@ def main():
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--retry-failed", action="store_true")
+    ap.add_argument("--all", action="store_true", help="re-verify every binary, including passing ones")
     args = ap.parse_args()
 
     inv = json.loads((ROOT / "tmp/inventory.json").read_text())
@@ -96,9 +97,9 @@ def main():
     todo = []
     for item in inv:
         st = status.get(item["sha1"], {}).get("result")
-        if st == "ok" or (st and not args.retry_failed):
+        if not args.all and (st == "ok" or (st and not args.retry_failed)):
             continue
-        if item["sha1"] in have and st is None:
+        if not args.all and item["sha1"] in have and st is None:
             status[item["sha1"]] = {"result": "ok", "version": item["version"], "path": item["path"], "note": "pre-existing config"}
             continue
         todo.append(item)

@@ -38,7 +38,7 @@ def unsupported(op):
     # Every remaining VFPU mnemonic starts with "v"; base MIPS has none.
     return op in UNSUPPORTED or op.startswith("v")
 DATA_WORD_RE = re.compile(
-    r"^(?P<pre>\s*/\* (?P<rom>[0-9A-F]+) [0-9A-F]+ (?P<raw>[0-9A-F]{8}) \*/ )\.word (?P<val>[A-Za-z_][\w.+\- ]*)$"
+    r"^(?P<pre>\s*/\* (?P<rom>[0-9A-F]+) [0-9A-F]+ (?P<raw>[0-9A-F]{8}) \*/ )\.word (?P<val>[A-Za-z_.][\w.+\- ]*)$"
 )
 INSN_RE = re.compile(
     r"^(?P<pre>\s*/\* [0-9A-F]+ [0-9A-F]+ (?P<raw>[0-9A-F]{8}) \*/\s+)(?P<op>[a-z0-9.]+)\s"
@@ -69,11 +69,12 @@ def fix_unsupported(asm_dir: Path, reloc_roms=frozenset()):
             m = INSN_RE.match(line)
             bogus_reloc = (
                 m is not None and reloc_roms is not None
-                and ("%hi(" in line or "%lo(" in line or "%gp_rel(" in line)
+                and ("%hi(" in line or "%lo(" in line or "%gp_rel(" in line or m["op"] in ("j", "jal")
+                     or re.search(r"& 0xFFFF\)\(\$", line))
                 and int(line.split("/*", 1)[1].split()[0], 16) not in reloc_roms
             )
             dm = DATA_WORD_RE.match(line.rstrip("\n"))
-            if dm and reloc_roms and int(dm["rom"], 16) not in reloc_roms:
+            if dm and reloc_roms and (int(dm["rom"], 16) not in reloc_roms or dm["val"].startswith(".L")):
                 word = int.from_bytes(bytes.fromhex(dm["raw"]), "little")
                 lines[i] = f"{dm['pre']}.word 0x{word:08X} # {dm['val']}\n"
                 changed = True
