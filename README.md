@@ -41,8 +41,16 @@ make             # build and verify sha1
 | mcore | 2.50, 2.60 | matching (asm only) | – |
 | paf, pafmini | 1.00 | matching (asm only) | only 2 objects each are psp-1.3.1; the rest need the unavailable psp-1.5.1 |
 
+**All firmware modules below 3.60** (3,814 PRX files, 2,662 distinct binaries) have
+matching asm setups in `config/<ver>/`, one config per distinct binary under the latest
+version that ships it (`tmp/inventory.json` lists which versions share a binary).
+Only objects built with psp-gcc 1.3.1/1.7.1 can be matched as C; the other modules
+use compiler versions that aren't available.
+
 New modules: `tools/gen_config.py <ver> <path under F0>` then `tools/nid_names.py <ver> <name>`
-and `make split VERSION=<ver> MODULE=<name>`.
+and `make split VERSION=<ver> MODULE=<name>`. In bulk: `tools/batch_setup.py`
+(resumable; `--retry-failed`, `--all` to re-verify everything). After changing tools,
+check from scratch with `tools/regress.sh 360:mcctrl 340:mcore ...`.
 
 ## Decompiling
 
@@ -83,7 +91,15 @@ the `m2c` package on PyPI is an unrelated project.
 - NIDs are the first 4 bytes of SHA-1 of the name; `tools/nid_names.py`
   resolves them from identifiers in the SDK (extracted to `tmp/sdk`).
 - Data words reference symbols only through PRX relocations (value-based
-  pointer guessing is disabled in `tools/split.py`).
+  pointer guessing is disabled in `tools/split.py`); unrelocated words,
+  `%hi/%lo/%gp_rel` operands without a relocation, unrelocated `j/jal`, and
+  opcodes modern GAS rejects (Allegrex system ops, VFPU) are emitted as raw
+  `.word`s, which is always byte-exact because links reproduce original addresses.
+- From 3.50 PRXs have no section headers; `tools/prxinfo.py` rebuilds the layout
+  from module info (offset in segment 0's `p_paddr`), the export/import tables
+  and stubs, and reads relocations from the `0x700000A0` program header.
+- Relocation targets outside their segment or between sections (one-past-end
+  pointers, base-minus-offset arithmetic) use `PRX_ZERO + addend`.
 - Sony code here uses small inline helpers (memclr/memcpy/memcmp taking
   `void *` and casting to local byte pointers) and `goto end` error chains;
   reproducing those is usually what makes register allocation match.
