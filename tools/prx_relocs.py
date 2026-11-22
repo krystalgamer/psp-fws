@@ -106,7 +106,9 @@ def main():
     for f in sorted(funcs):
         extra = " can_be_referenced:False" if f == 0 else ""
         syms.append(f"func_{f:08X} = 0x{f:08X}; // type:func{extra}")
-    for d in sorted(data_syms):
+    # Data referenced inside code (e.g. embedded keys) stays a plain label so
+    # it doesn't split the enclosing function.
+    for d in sorted(x for x in data_syms if x >= text_end):
         syms.append(f"D_{d:08X} = 0x{d:08X};")
     for ph in sorted(phantoms - funcs - data_syms):
         syms.append(f"PHANTOM_{ph:08X} = 0x{ph:08X}; // ignore:True")

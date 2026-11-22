@@ -23,6 +23,7 @@ from splat.util import options
 UNSUPPORTED = {
     "ld", "sd", "ldl", "ldr", "sdl", "sdr", "lwu", "lld", "scd", "pref",
     "ldc1", "sdc1", "ldc2", "sdc2", "lwc2", "swc2", "daddi", "daddiu",
+    "lwl", "lwr", "swl", "swr",
 }
 INSN_RE = re.compile(
     r"^(?P<pre>\s*/\* [0-9A-F]+ [0-9A-F]+ (?P<raw>[0-9A-F]{8}) \*/\s+)(?P<op>[a-z0-9.]+)\s"
