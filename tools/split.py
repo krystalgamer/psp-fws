@@ -81,7 +81,8 @@ def fix_unsupported(asm_dir: Path, reloc_roms=frozenset()):
             bogus_reloc = (
                 m is not None and reloc_roms is not None
                 and ("%hi(" in line or "%lo(" in line or "%gp_rel(" in line or m["op"] in ("j", "jal")
-                     or re.search(r"& 0xFFFF\)\(\$", line))
+                     or re.search(r"& 0xFFFF\)\(\$", line)
+                     or (m["op"].startswith("b") and re.search(r",\s*D_[0-9A-F]+\s*$", line.split("/*")[-1].split("*/")[-1])))
                 and int(line.split("/*", 1)[1].split()[0], 16) not in reloc_roms
             )
             dm = DATA_WORD_RE.match(line.rstrip("\n"))
