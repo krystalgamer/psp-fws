@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "music_plugin_decls.h"
 
@@ -106,9 +107,25 @@ INCLUDE_ASM("tmp/asm/282/music_plugin/nonmatchings/music_plugin", func_00001290)
 
 INCLUDE_ASM("tmp/asm/282/music_plugin/nonmatchings/music_plugin", func_000012C0);
 
-INCLUDE_ASM("tmp/asm/282/music_plugin/nonmatchings/music_plugin", func_000012F0);
+void func_000012F0(s32 arg0, s32 arg1) {
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/music_plugin/nonmatchings/music_plugin", func_00001340);
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_0000150C(arg0, arg1, var_v0);
+}
+
+void func_00001340(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_000015C0(arg0, arg1, var_v0);
+}
 
 void func_00001390(void) {
     func_0000166C();

@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "pspnet_apctl_decls.h"
 
@@ -363,7 +364,11 @@ s32 func_0000A1F8(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000A200);
+s32 func_0000A200(void *arg0) {
+    sceNet_lib_57CC57DA(arg0 + 0x2520, 0, 0xBD8);
+    M2C_FIELD(arg0, s32 *, 0x30EC) = 5;
+    return 0;
+}
 
 s32 func_0000A23C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x30F4) = 0;
@@ -403,7 +408,12 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000A650)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000A74C);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000A808);
+s32 func_0000A808(void *arg0) {
+    sceNet_lib_57CC57DA(arg0 + 0x30F8, 0, 0x64C);
+    M2C_FIELD(arg0, s32 *, 0x3108) = 0xA;
+    func_0000B6A4(arg0);
+    return 0;
+}
 
 s32 func_0000A84C(void) {
     return 0;

@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
@@ -2153,21 +2154,7 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0001D47C);
 
-s32 func_0001D4D0(s32 arg0, void *arg1) {
-    s32 temp_a0;
-
-    if (arg1 != NULL) {
-        temp_a0 = M2C_FIELD(arg1, s32 *, 0x48);
-        if (temp_a0 != 0) {
-            if (arg0 != 0) {
-
-            } else {
-                func_0001E3E8(temp_a0, 6, arg1);
-            }
-        }
-    }
-    return 0;
-}
+INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0001D4D0);
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0001D518);
 
@@ -2390,16 +2377,7 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00020948);
 
-void func_00020990(void *arg0) {
-    s32 temp_s0;
-
-    temp_s0 = M2C_FIELD(arg0, s32 *, 0xC);
-    if (temp_s0 != 0) {
-        func_00022AD0(temp_s0);
-        scePaf_4E67BB08(temp_s0);
-        M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    }
-}
+INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00020990);
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000209DC);
 
@@ -3797,17 +3775,11 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00032030);
 
-void func_000320FC(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 8)();
-}
+INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000320FC);
 
-void func_00032120(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC)();
-}
+INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00032120);
 
-void func_00032144(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x10)();
-}
+INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00032144);
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00032168);
 
@@ -3873,7 +3845,15 @@ s32 func_0003310C(void) {
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00033114);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00033170);
+s32 func_00033170(s32 arg0) {
+    s32 var_v0;
+
+    var_v0 = -1;
+    if (arg0 != 0) {
+        var_v0 = func_00032F30(arg0, sceKernelGetThreadId());
+    }
+    return var_v0;
+}
 
 s32 func_000331AC(void *arg0) {
     s32 var_v0;
@@ -3939,7 +3919,18 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00033520);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000335BC);
+s32 func_000335BC(void) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+
+    temp_v0 = scePaf_B7E6052B(0x10);
+    func_000332CC(temp_v0);
+    temp_v0_2 = func_00034490();
+    if (temp_v0_2 != 0) {
+        func_0003449C(temp_v0_2, 1, temp_v0);
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00033610);
 
@@ -4525,7 +4516,15 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003B728);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003B77C);
+void func_0003B77C(void *arg0) {
+    void **temp_a0;
+    void *temp_a1;
+
+    temp_a0 = M2C_FIELD(arg0, void ***, 0x1C);
+    temp_a1 = *temp_a0;
+    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(temp_a0, temp_a1);
+    M2C_FIELD(arg0, s8 *, 0x1A) = 1;
+}
 
 void func_0003B7B8(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x1A) = 0;
@@ -4665,13 +4664,34 @@ s32 func_0003D908(void) {
     return -1;
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003D910);
+s32 func_0003D910(s32 arg0, s32 *arg1) {
+    s32 temp_s0;
+    s32 temp_v0;
+    s32 var_v0;
+
+    var_v0 = 0x16;
+    if (arg0 != 0) {
+        temp_s0 = scePaf_CA79D58B() + 1;
+        temp_v0 = scePaf_F13EBB78(temp_s0);
+        var_v0 = 0xC;
+        if (temp_v0 != 0) {
+            scePaf_F95EA3F1(temp_v0, arg0, temp_s0);
+            *arg1 = temp_v0;
+            var_v0 = 0;
+        }
+    }
+    return var_v0;
+}
 
 void func_0003D990(void) {
     func_0004BB50();
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003D9AC);
+void func_0003D9AC(s32 arg0) {
+    if (arg0 != 0) {
+        scePaf_B3D2C3BB();
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003D9CC);
 
@@ -5021,18 +5041,7 @@ s32 func_00041D28(void *arg0) {
     return arg0 + 0x34;
 }
 
-s32 func_00041D34(void *arg0, s32 arg1) {
-    s32 var_s2;
-
-    M2C_FIELD(arg0, s8 *, 4) = 0;
-    var_s2 = 0;
-    if (func_000446A0(arg0 + 8, arg1 + 8) != 0) {
-        if (func_00042494(arg0 + 0x1C, arg1 + 0x1C) != 0) {
-            var_s2 = func_0003DE20(arg0 + 0x34, arg1 + 0x34) != 0;
-        }
-    }
-    return var_s2;
-}
+INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00041D34);
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00041DB0);
 
@@ -5361,7 +5370,17 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00045A08);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00045B4C);
+s32 func_00045B4C(s32 arg0) {
+    s32 temp_s0;
+    s32 temp_v0;
+
+    temp_s0 = scePaf_CA79D58B() + 1;
+    temp_v0 = scePaf_F13EBB78(temp_s0);
+    if (temp_v0 != 0) {
+        scePaf_F95EA3F1(temp_v0, arg0, temp_s0);
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00045BAC);
 
@@ -5381,7 +5400,18 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000460A4);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00046174);
+s32 func_00046174(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_v0;
+
+    temp_v0 = scePaf_F13EBB78(arg2);
+    if (temp_v0 != 0) {
+        scePaf_F95EA3F1(temp_v0, arg0, arg1);
+        if (arg0 != 0) {
+            scePaf_B3D2C3BB(arg0);
+        }
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000461E0);
 

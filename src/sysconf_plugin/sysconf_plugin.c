@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "sysconf_plugin_decls.h"
 
@@ -440,7 +441,15 @@ void func_00001A68(void) {
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00001A88);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00001B08);
+void func_00001B08(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_00001B58(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00001B58);
 
@@ -534,7 +543,15 @@ void func_000037C4(void) {
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_000037E0);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_000038AC);
+void func_000038AC(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_00003BCC(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_000038FC);
 
@@ -1104,7 +1121,19 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00006
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00006C38);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00006CFC);
+s32 func_00006CFC(void *arg0) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (arg0 != NULL) {
+        temp_v0 = M2C_FIELD(arg0, s32 *, 0x1D0);
+        if (temp_v0 != 0) {
+            var_v1 = scePaf_8AB03D91(temp_v0, 1);
+        }
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00006D38);
 
@@ -1709,7 +1738,19 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0000D
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0000D500);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0000D604);
+s32 func_0000D604(void *arg0) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (arg0 != NULL) {
+        temp_v0 = M2C_FIELD(arg0, s32 *, 0x1D0);
+        if (temp_v0 != 0) {
+            var_v1 = scePaf_8AB03D91(temp_v0, 1);
+        }
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0000D640);
 
@@ -2058,27 +2099,7 @@ void func_00015F98(void **arg0) {
     scePaf_7EC15225(var_a0);
 }
 
-void func_00015FF0(void *arg0) {
-    M2C_UNK *temp_v0;
-    M2C_UNK *var_v1;
-    void *temp_s0;
-    void *var_v0;
-
-    var_v1 = M2C_FIELD(arg0, M2C_UNK **, 0);
-    var_v0 = M2C_FIELD(var_v1, void **, 4);
-    if (var_v0 != var_v1) {
-        do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_7EC15225(var_v0);
-            var_v1 = M2C_FIELD(arg0, M2C_UNK **, 0);
-            var_v0 = temp_s0;
-        } while (temp_s0 != var_v1);
-    }
-    M2C_FIELD(var_v1, M2C_UNK **, 4) = var_v1;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    temp_v0 = M2C_FIELD(arg0, M2C_UNK **, 0);
-    *temp_v0 = temp_v0;
-}
+INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00015FF0);
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0001604C);
 
@@ -2194,7 +2215,18 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017924);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017A18);
+s32 func_00017A18(void *arg0) {
+    s32 temp_s1;
+    s32 var_v0;
+
+    var_v0 = -1;
+    temp_s1 = M2C_FIELD(arg0, s32 *, 0x34);
+    if (temp_s1 != 0) {
+        sceVshCommonGui_607D5C82(M2C_FIELD(arg0, s32 *, 4), temp_s1, func_00017728());
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 s32 func_00017A68(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4);

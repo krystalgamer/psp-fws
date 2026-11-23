@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "netconf_plugin_auto_nec_decls.h"
 
@@ -75,7 +76,16 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", func_0000243C);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", func_000026FC);
+void func_000026FC(void *arg0, void *arg1, void *arg2) {
+    M2C_FIELD(arg2, s8 *, 0) = (s8) (M2C_FIELD(arg0, u8 *, 0) ^ M2C_FIELD(arg1, u8 *, 0));
+    M2C_FIELD(arg2, s8 *, 1) = (s8) (M2C_FIELD(arg0, u8 *, 1) ^ M2C_FIELD(arg1, u8 *, 1));
+    M2C_FIELD(arg2, s8 *, 2) = (s8) (M2C_FIELD(arg0, u8 *, 2) ^ M2C_FIELD(arg1, u8 *, 2));
+    M2C_FIELD(arg2, s8 *, 3) = (s8) (M2C_FIELD(arg0, u8 *, 3) ^ M2C_FIELD(arg1, u8 *, 3));
+    M2C_FIELD(arg2, s8 *, 4) = (s8) (M2C_FIELD(arg0, u8 *, 4) ^ M2C_FIELD(arg1, u8 *, 4));
+    M2C_FIELD(arg2, s8 *, 5) = (s8) (M2C_FIELD(arg0, u8 *, 5) ^ M2C_FIELD(arg1, u8 *, 5));
+    M2C_FIELD(arg2, s8 *, 6) = (s8) (M2C_FIELD(arg0, u8 *, 6) ^ M2C_FIELD(arg1, u8 *, 6));
+    M2C_FIELD(arg2, s8 *, 7) = (s8) (M2C_FIELD(arg0, u8 *, 7) ^ M2C_FIELD(arg1, u8 *, 7));
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", func_00002780);
 

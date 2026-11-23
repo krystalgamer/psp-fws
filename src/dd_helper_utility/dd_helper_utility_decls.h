@@ -15,8 +15,14 @@ M2C_UNK func_000006C8(M2C_UNK, M2C_UNK);
 void func_00000750(void);
 void func_00000770(void);
 void func_0000088C(void);
+s32 func_000008C4(s32 arg0, void *arg1);
+void func_00000944(s32 arg0, s32 arg1, M2C_UNK arg2);
 void func_00000F18(s32 arg0);
 void func_00001120(void *arg0);
+M2C_UNK func_00001CFC(s32, s32);
+M2C_UNK func_00001D4C(s32, s32, s32);
+void func_00001ECC(s32 arg0, s32 arg1);
+M2C_UNK func_00001F1C(s32, s32, s32);
 M2C_UNK func_000021C8(void *, s32);
 M2C_UNK func_000026C0(s32);
 s32 *func_00002760(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
@@ -37,7 +43,13 @@ M2C_UNK func_000032F0();
 s32 func_00003738(M2C_UNK, M2C_UNK);
 M2C_UNK func_00004100();
 s32 module_stop(void);
+M2C_UNK sceCccUTF8toUTF16(s32, s32, s32);
 M2C_UNK sceHtmlViewerHelper_F27998C2(s32);
+M2C_UNK scePaf_49A81B18(s32, s32, s32, M2C_UNK);
+M2C_UNK scePaf_545FE2DA(s32);
+s32 scePaf_5FAC9869(s32);
 M2C_UNK scePaf_7EC15225(s32);
+s32 scePaf_CA79D58B(s32);
+s32 scePaf_FD4C9F47(s32);
 
 #endif

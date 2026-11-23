@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "mgr_decls.h"
 
@@ -69,7 +70,18 @@ INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", func_00000898);
 
 INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", sceMgr_driver_ECBC76EF);
 
-INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", sceMgr_driver_D7293451);
+s32 sceMgr_driver_D7293451(void) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_v0 = func_00000898();
+    var_v0 = 0;
+    if (temp_v0 < 0) {
+        func_00000AC4();
+        var_v0 = temp_v0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", func_00000AC4);
 

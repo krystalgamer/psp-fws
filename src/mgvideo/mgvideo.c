@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "mgvideo_decls.h"
 
@@ -63,9 +64,73 @@ s32 func_00000410(void *arg0, u32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_0000043C);
 
-INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_000004DC);
+s32 func_000004DC(s32 arg0, M2C_UNK arg1) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_s0;
+    s32 var_s2;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_000005A0);
+    var_s2 = -1;
+    var_v0 = func_0000043C(arg1);
+    if (var_v0 >= 0) {
+        temp_v0 = sceMgr_driver_F30E22CF(3);
+        var_s0 = temp_v0;
+        if (temp_v0 >= 0) {
+            var_s2 = temp_v0;
+            temp_v0_2 = sceMgr_driver_4A14DD18(temp_v0, arg0, var_v0);
+            var_s0 = temp_v0_2;
+            if (temp_v0_2 >= 0) {
+                sceMgr_driver_1B8F3192(var_v0);
+                return temp_v0;
+            }
+        }
+        if (var_v0 >= 0) {
+            sceMgr_driver_1B8F3192(var_v0);
+        }
+        if (var_s2 >= 0) {
+            sceMgr_driver_1B8F3192(var_s2);
+        }
+        var_v0 = func_00000000(var_s0);
+        /* Duplicate return node #9. Try simplifying control flow for better match */
+        return var_v0;
+    }
+    return var_v0;
+}
+
+s32 func_000005A0(s32 arg0, s32 arg1) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_s0;
+    s32 var_s2;
+    s32 var_v0;
+
+    var_s2 = -1;
+    var_v0 = func_0000043C(arg1);
+    if (var_v0 >= 0) {
+        temp_v0 = sceMgr_driver_F30E22CF(3);
+        var_s0 = temp_v0;
+        if (temp_v0 >= 0) {
+            var_s2 = temp_v0;
+            temp_v0_2 = sceMgr_driver_DB12BB23(temp_v0, arg0, var_v0);
+            var_s0 = temp_v0_2;
+            if (temp_v0_2 >= 0) {
+                sceMgr_driver_1B8F3192(var_v0);
+                return temp_v0;
+            }
+        }
+        if (var_v0 >= 0) {
+            sceMgr_driver_1B8F3192(var_v0);
+        }
+        if (var_s2 >= 0) {
+            sceMgr_driver_1B8F3192(var_s2);
+        }
+        var_v0 = func_00000000(var_s0);
+        /* Duplicate return node #9. Try simplifying control flow for better match */
+        return var_v0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00000664);
 

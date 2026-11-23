@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "msaudio_decls.h"
 
@@ -5,13 +6,61 @@ INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00000000);
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00000194);
 
-INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00000234);
+s32 func_00000234(s32 arg0, M2C_UNK arg1) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_s0;
+    s32 var_s2;
+    s32 var_v0;
+
+    var_s2 = -1;
+    var_v0 = func_00000194(arg1);
+    if (var_v0 >= 0) {
+        temp_v0 = sceMgr_driver_F30E22CF(1);
+        var_s0 = temp_v0;
+        if (temp_v0 >= 0) {
+            var_s2 = temp_v0;
+            temp_v0_2 = sceMgr_driver_02F7AB01(temp_v0, arg0, var_v0);
+            var_s0 = temp_v0_2;
+            if (temp_v0_2 >= 0) {
+                sceMgr_driver_1B8F3192(var_v0);
+                return temp_v0;
+            }
+        }
+        if (var_v0 >= 0) {
+            sceMgr_driver_1B8F3192(var_v0);
+        }
+        if (var_s2 >= 0) {
+            sceMgr_driver_1B8F3192(var_s2);
+        }
+        var_v0 = func_00000000(var_s0);
+        /* Duplicate return node #9. Try simplifying control flow for better match */
+        return var_v0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_000002F8);
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00000478);
 
-INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00000570);
+s32 func_00000570(void *arg0, void *arg1) {
+    s32 temp_v1;
+    s32 var_a2;
+
+    temp_v1 = (M2C_FIELD(arg1, u8 *, 0x15) + (M2C_FIELD(arg1, u8 *, 0x14) << 8)) - 1;
+    var_a2 = 0x8050800D;
+    if (temp_v1 >= 0) {
+        var_a2 = temp_v1;
+        M2C_FIELD(arg0, s32 *, 0) = (s32) M2C_FIELD(arg1, s32 *, 0x28);
+        M2C_FIELD(arg0, s32 *, 4) = (s32) M2C_FIELD(arg1, s32 *, 0x2C);
+        if (temp_v1 > 0) {
+            M2C_FIELD(arg0, s32 *, 8) = (s32) M2C_FIELD(arg1, s32 *, 0x30);
+            M2C_FIELD(arg0, s32 *, 0xC) = (s32) M2C_FIELD(arg1, s32 *, 0x34);
+        }
+    }
+    return var_a2;
+}
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_000005C0);
 
@@ -47,7 +96,12 @@ INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00001600);
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00001820);
 
-INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00001908);
+s32 func_00001908(void *arg0) {
+    void *temp_v0;
+
+    temp_v0 = arg0 + 0xFFC;
+    return M2C_FIELD(temp_v0, u8 *, 3) + (M2C_FIELD(temp_v0, u8 *, 2) << 8) + (M2C_FIELD(temp_v0, u8 *, 1) << 0x10) + (M2C_FIELD(arg0, u8 *, 0xFFC) << 0x18);
+}
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00001938);
 

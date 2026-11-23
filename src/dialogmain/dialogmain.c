@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "dialogmain_decls.h"
 
@@ -72,7 +73,15 @@ void func_00001104(void) {
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00001120);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000011EC);
+void func_000011EC(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_0000150C(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_0000123C);
 
@@ -485,7 +494,15 @@ void func_000059A0(s32 *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000059C0);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000059F0);
+void func_000059F0(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_00005B94(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00005A40);
 

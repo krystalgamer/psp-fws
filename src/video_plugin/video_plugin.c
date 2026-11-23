@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "video_plugin_decls.h"
 
@@ -99,7 +100,15 @@ void func_00001864(void) {
 
 INCLUDE_ASM("tmp/asm/282/video_plugin/nonmatchings/video_plugin", func_00001880);
 
-INCLUDE_ASM("tmp/asm/282/video_plugin/nonmatchings/video_plugin", func_0000194C);
+void func_0000194C(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_00001D38(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/video_plugin/nonmatchings/video_plugin", func_0000199C);
 

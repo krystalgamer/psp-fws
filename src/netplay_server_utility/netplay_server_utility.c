@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "netplay_server_utility_decls.h"
 
@@ -149,7 +150,15 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_util
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_000017D0);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00001800);
+void func_00001800(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_000018EC(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00001850);
 
@@ -301,7 +310,15 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_util
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00003674);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_000036E8);
+void func_000036E8(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_000038F0(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00003738);
 

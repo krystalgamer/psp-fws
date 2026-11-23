@@ -11,9 +11,12 @@
   "func_000017F4": "void func_000017F4(void);",
   "func_00001814": "void func_00001814(void);",
   "func_00001864": "void func_00001864(void);",
+  "func_0000194C": "void func_0000194C(s32 arg0, s32 arg1);",
   "func_00001AFC": "M2C_UNK func_00001AFC();",
+  "func_00001D38": "M2C_UNK func_00001D38(s32, s32, s32);",
   "func_000020F8": "M2C_UNK func_000020F8();",
-  "module_stop": "s32 module_stop(void);"
+  "module_stop": "s32 module_stop(void);",
+  "scePaf_CA79D58B": "s32 scePaf_CA79D58B(s32);"
  },
  "vars": {}
 }

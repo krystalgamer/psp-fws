@@ -8,10 +8,16 @@
   "func_000011C4": "M2C_UNK func_000011C4(M2C_UNK, M2C_UNK);",
   "func_00001250": "void func_00001250(void);",
   "func_00001270": "void func_00001270(void);",
+  "func_000012F0": "void func_000012F0(s32 arg0, s32 arg1);",
+  "func_00001340": "void func_00001340(s32 arg0, s32 arg1);",
   "func_00001390": "void func_00001390(void);",
+  "func_0000150C": "M2C_UNK func_0000150C(s32, s32, s32);",
+  "func_000015C0": "M2C_UNK func_000015C0(s32, s32, s32);",
   "func_0000166C": "M2C_UNK func_0000166C();",
   "func_00001BBC": "M2C_UNK func_00001BBC();",
   "module_stop": "s32 module_stop(void);",
+  "scePaf_CA79D58B": "s32 scePaf_CA79D58B(s32);",
+  "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);",
   "sceVshCommonGui_1CF884A1": "M2C_UNK sceVshCommonGui_1CF884A1();"
  },
  "vars": {}

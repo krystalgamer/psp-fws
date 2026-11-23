@@ -1,11 +1,19 @@
 {
  "funcs": {
+  "func_00000000": "s32 func_00000000(s32);",
+  "func_00000194": "s32 func_00000194(M2C_UNK);",
+  "func_00000234": "s32 func_00000234(s32 arg0, M2C_UNK arg1);",
+  "func_00000570": "s32 func_00000570(void *arg0, void *arg1);",
+  "func_00001908": "s32 func_00001908(void *arg0);",
   "func_0000198C": "s32 func_0000198C(s32 *arg0);",
   "func_000026B0": "s32 func_000026B0(void *arg0);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
-  "sceMSAudio_driver_3872FBE5": "M2C_UNK sceMSAudio_driver_3872FBE5();"
+  "sceMSAudio_driver_3872FBE5": "M2C_UNK sceMSAudio_driver_3872FBE5();",
+  "sceMgr_driver_02F7AB01": "s32 sceMgr_driver_02F7AB01(s32, s32, s32);",
+  "sceMgr_driver_1B8F3192": "M2C_UNK sceMgr_driver_1B8F3192(s32);",
+  "sceMgr_driver_F30E22CF": "s32 sceMgr_driver_F30E22CF(M2C_UNK);"
  },
  "vars": {}
 }

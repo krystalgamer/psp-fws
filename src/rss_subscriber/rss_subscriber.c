@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "rss_subscriber_decls.h"
 
@@ -114,13 +115,7 @@ INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00001
 
 INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_000013CC);
 
-void func_00001670(s32 arg0, M2C_UNK arg1) {
-    if (arg0 == 0) {
-        func_00000C78(arg1);
-    } else {
-        func_00000B0C(arg1);
-    }
-}
+INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00001670);
 
 INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_000016A8);
 
@@ -159,13 +154,29 @@ void func_000027A4(s32 *arg0, s32 arg1) {
     func_00002A58();
 }
 
-INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_000027C4);
+void func_000027C4(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_00002A78(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00002814);
 
 INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_0000288C);
 
-INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_000028BC);
+void func_000028BC(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_00002B24(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_0000290C);
 

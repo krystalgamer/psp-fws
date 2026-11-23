@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "codec_decls.h"
 
@@ -5,13 +6,39 @@ INCLUDE_ASM("tmp/asm/282/codec/nonmatchings/codec", func_00000000);
 
 INCLUDE_ASM("tmp/asm/282/codec/nonmatchings/codec", func_0000004C);
 
-INCLUDE_ASM("tmp/asm/282/codec/nonmatchings/codec", func_00000094);
+void func_00000094(s32 arg0) {
+    if (arg0 != (sceSysreg_driver_E2A5D1EE() > 0x4FFFFF)) {
+        sceGpio_driver_103C3EB2(0x20);
+        return;
+    }
+    sceGpio_driver_310F0CCF(0x20);
+}
 
-INCLUDE_ASM("tmp/asm/282/codec/nonmatchings/codec", func_000000E4);
+void func_000000E4(void) {
+    if (sceSysreg_driver_E2A5D1EE() > 0x4FFFFF) {
+        func_0000004C(0x31, 0x37);
+        return;
+    }
+    sceGpio_driver_103C3EB2(2);
+}
 
-INCLUDE_ASM("tmp/asm/282/codec/nonmatchings/codec", func_00000130);
+void func_00000130(void) {
+    if (sceSysreg_driver_E2A5D1EE() > 0x4FFFFF) {
+        func_0000004C(0x31, 0xF7);
+        return;
+    }
+    sceGpio_driver_310F0CCF(2);
+}
 
-INCLUDE_ASM("tmp/asm/282/codec/nonmatchings/codec", func_0000017C);
+s32 func_0000017C(void) {
+    sceGpio_driver_317D9D2C(5, 0);
+    func_00000094(0);
+    if (sceSysreg_driver_E2A5D1EE() <= 0x4FFFFF) {
+        sceGpio_driver_317D9D2C(1, 0);
+        func_000000E4();
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/codec/nonmatchings/codec", func_000001D8);
 
@@ -43,7 +70,15 @@ void sceCodec_driver_31B2E41E(void) {
 
 INCLUDE_ASM("tmp/asm/282/codec/nonmatchings/codec", func_00000B68);
 
-INCLUDE_ASM("tmp/asm/282/codec/nonmatchings/codec", sceCodec_driver_28A49CCA);
+s32 sceCodec_driver_28A49CCA(void) {
+    s32 var_v0;
+
+    var_v0 = 1;
+    if (sceSysreg_driver_E2A5D1EE() <= 0x4FFFFF) {
+        var_v0 = sceSysreg_driver_DE170397();
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/codec/nonmatchings/codec", sceCodec_driver_BD8E0977);
 

@@ -8,9 +8,15 @@
 M2C_UNK func_0000207C(M2C_UNK, M2C_UNK);
 void func_0000218C(void);
 void func_000021AC(void);
+void func_0000222C(s32 arg0, s32 arg1);
+void func_0000227C(s32 arg0, s32 arg1);
 void func_000023A4(s32 *arg0, s32 arg1);
+M2C_UNK func_000024D8(s32, s32, s32);
+M2C_UNK func_00002584(s32, s32, s32);
 M2C_UNK func_00002638();
 M2C_UNK func_000026B0();
 s32 module_stop(void);
+s32 scePaf_CA79D58B(s32);
+s32 scePaf_FD4C9F47(s32);
 
 #endif

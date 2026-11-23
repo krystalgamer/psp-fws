@@ -1,8 +1,19 @@
 {
  "funcs": {
+  "func_0000004C": "M2C_UNK func_0000004C(M2C_UNK, M2C_UNK);",
+  "func_00000094": "void func_00000094(s32 arg0);",
+  "func_000000E4": "void func_000000E4(void);",
+  "func_00000130": "void func_00000130(void);",
+  "func_0000017C": "s32 func_0000017C(void);",
   "func_000002A8": "M2C_UNK func_000002A8(M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK);",
+  "sceCodec_driver_28A49CCA": "s32 sceCodec_driver_28A49CCA(void);",
   "sceCodec_driver_31B2E41E": "void sceCodec_driver_31B2E41E(void);",
-  "sceCodec_driver_359C2B9F": "void sceCodec_driver_359C2B9F(void);"
+  "sceCodec_driver_359C2B9F": "void sceCodec_driver_359C2B9F(void);",
+  "sceGpio_driver_103C3EB2": "M2C_UNK sceGpio_driver_103C3EB2(M2C_UNK);",
+  "sceGpio_driver_310F0CCF": "M2C_UNK sceGpio_driver_310F0CCF(M2C_UNK);",
+  "sceGpio_driver_317D9D2C": "M2C_UNK sceGpio_driver_317D9D2C(M2C_UNK, M2C_UNK);",
+  "sceSysreg_driver_DE170397": "s32 sceSysreg_driver_DE170397();",
+  "sceSysreg_driver_E2A5D1EE": "s32 sceSysreg_driver_E2A5D1EE();"
  },
  "vars": {}
 }

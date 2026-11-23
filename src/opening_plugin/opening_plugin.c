@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "opening_plugin_decls.h"
 
@@ -153,7 +154,15 @@ void func_00000ED8(s32 *arg0, s32 arg1) {
     func_00000F48();
 }
 
-INCLUDE_ASM("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", func_00000EF8);
+void func_00000EF8(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_00000F78(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", func_00000F48);
 

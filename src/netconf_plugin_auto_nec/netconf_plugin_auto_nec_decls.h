@@ -7,6 +7,7 @@
 
 M2C_UNK func_00000000();
 s32 func_00000194(void);
+void func_000026FC(void *arg0, void *arg1, void *arg2);
 s32 func_00004FE8(void);
 M2C_UNK func_000055BC();
 s32 module_start(void);

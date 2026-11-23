@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "dd_helper_utility_decls.h"
 
@@ -96,9 +97,32 @@ void func_0000088C(void) {
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00000894);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_000008C4);
+s32 func_000008C4(s32 arg0, void *arg1) {
+    s32 temp_s0;
+    s32 temp_v0;
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00000944);
+    temp_s0 = (M2C_FIELD(arg1, s32 *, 4) * 2) + 2;
+    temp_v0 = scePaf_5FAC9869(temp_s0);
+    if (temp_v0 != 0) {
+        sceCccUTF8toUTF16(temp_v0, temp_s0, M2C_FIELD(arg1, s32 *, 0));
+        func_00001CFC(arg0, temp_v0);
+        scePaf_545FE2DA(temp_v0);
+    }
+    return arg0;
+}
+
+void func_00000944(s32 arg0, s32 arg1, M2C_UNK arg2) {
+    s32 temp_s0;
+    s32 temp_v0;
+
+    temp_s0 = (scePaf_FD4C9F47(arg1) * 2) + 0x20;
+    temp_v0 = scePaf_5FAC9869(temp_s0);
+    if (temp_v0 != 0) {
+        scePaf_49A81B18(temp_v0, temp_s0, arg1, arg2);
+        func_00001D4C(arg0, temp_v0, scePaf_FD4C9F47(temp_v0));
+        scePaf_545FE2DA(temp_v0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_000009E4);
 
@@ -196,7 +220,15 @@ INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00001E18);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00001ECC);
+void func_00001ECC(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_00001F1C(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00001F1C);
 

@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "lftv_plugin_decls.h"
 
@@ -133,11 +134,27 @@ void func_00002334(void) {
 
 INCLUDE_ASM("tmp/asm/282/lftv_plugin/nonmatchings/lftv_plugin", func_00002350);
 
-INCLUDE_ASM("tmp/asm/282/lftv_plugin/nonmatchings/lftv_plugin", func_0000241C);
+void func_0000241C(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_000027BC(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_plugin/nonmatchings/lftv_plugin", func_0000246C);
 
-INCLUDE_ASM("tmp/asm/282/lftv_plugin/nonmatchings/lftv_plugin", func_00002500);
+void func_00002500(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_00002868(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_plugin/nonmatchings/lftv_plugin", func_00002550);
 

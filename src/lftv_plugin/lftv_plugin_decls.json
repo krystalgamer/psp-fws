@@ -7,12 +7,18 @@
   "func_000022C4": "void func_000022C4(void);",
   "func_000022E4": "void func_000022E4(void);",
   "func_00002334": "void func_00002334(void);",
+  "func_0000241C": "void func_0000241C(s32 arg0, s32 arg1);",
+  "func_00002500": "void func_00002500(s32 arg0, s32 arg1);",
   "func_00002580": "M2C_UNK func_00002580();",
+  "func_000027BC": "M2C_UNK func_000027BC(s32, s32, s32);",
+  "func_00002868": "M2C_UNK func_00002868(s32, s32, s32);",
   "func_00002CD8": "M2C_UNK func_00002CD8();",
   "module_stop": "s32 module_stop(void);",
   "sceKernelDelayThread": "M2C_UNK sceKernelDelayThread(M2C_UNK);",
   "sceKernelPowerLock": "M2C_UNK sceKernelPowerLock(M2C_UNK);",
-  "sceKernelPowerUnlock": "M2C_UNK sceKernelPowerUnlock(M2C_UNK);"
+  "sceKernelPowerUnlock": "M2C_UNK sceKernelPowerUnlock(M2C_UNK);",
+  "scePaf_CA79D58B": "s32 scePaf_CA79D58B(s32);",
+  "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);"
  },
  "vars": {}
 }

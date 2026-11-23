@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "netplay_server_plus_utility_decls.h"
 
@@ -138,7 +139,15 @@ void func_000014F8(void) {
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00001500);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00001530);
+void func_00001530(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_0000161C(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00001580);
 
@@ -146,7 +155,19 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_000016D0);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00001884);
+s32 func_00001884(u32 arg0, void *arg1) {
+    s32 var_v1;
+
+    var_v1 = -1;
+    if (arg0 < 4U) {
+        func_00001CC8();
+        func_00001DC4(arg0, arg1);
+        func_00001EF0(arg0, arg1);
+        func_00001D28(arg0, M2C_FIELD(arg1, s32 *, 0xC));
+        var_v1 = 0;
+    }
+    return var_v1;
+}
 
 INCLUDE_RODATA("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", D_000045AC);
 
@@ -313,7 +334,15 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00003824);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00003898);
+void func_00003898(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_00003AA0(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_000038E8);
 

@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "game_install_plugin_decls.h"
 
@@ -118,7 +119,15 @@ INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", 
 
 INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_000012B0);
 
-INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_000012E0);
+void func_000012E0(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_000013CC(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_00001330);
 

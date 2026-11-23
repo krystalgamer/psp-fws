@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "game_plugin_decls.h"
 
@@ -91,9 +92,7 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00000E78);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00000EA0);
 
-s32 func_00000ED0(s32 arg0, u32 arg1) {
-    return (((s32) (arg0 + 1) / (s32) (arg1 >> 5)) + 1) * arg1;
-}
+INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00000ED0);
 
 INCLUDE_RODATA("tmp/asm/282/game_plugin/nonmatchings/game_plugin", D_000115F0);
 
@@ -232,7 +231,15 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00003D58);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00003DC8);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00003DF8);
+void func_00003DF8(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_00003F78(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00003E48);
 
@@ -381,7 +388,15 @@ void func_000062D4(void) {
     func_00006340();
 }
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000062F0);
+void func_000062F0(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_0000636C(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00006340);
 
@@ -461,41 +476,9 @@ void func_00007584(void **arg0) {
     scePaf_7EC15225(var_a0);
 }
 
-void func_000075DC(void *arg0) {
-    M2C_UNK *temp_v0;
-    M2C_UNK *var_v1;
-    void *temp_s0;
-    void *var_v0;
+INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000075DC);
 
-    var_v1 = M2C_FIELD(arg0, M2C_UNK **, 0);
-    var_v0 = M2C_FIELD(var_v1, void **, 4);
-    if (var_v0 != var_v1) {
-        do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_7EC15225(var_v0);
-            var_v1 = M2C_FIELD(arg0, M2C_UNK **, 0);
-            var_v0 = temp_s0;
-        } while (temp_s0 != var_v1);
-    }
-    M2C_FIELD(var_v1, M2C_UNK **, 4) = var_v1;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    temp_v0 = M2C_FIELD(arg0, M2C_UNK **, 0);
-    *temp_v0 = temp_v0;
-}
-
-void ***func_00007638(void ***arg0, void *arg1, void **arg2) {
-    void **temp_s0;
-    void *temp_v1;
-
-    temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_7EC15225(temp_v1);
-    *arg0 = temp_s0;
-    M2C_FIELD(arg1, s32 *, 4) = (s32) (M2C_FIELD(arg1, s32 *, 4) - 1);
-    return arg0;
-}
+INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00007638);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000076A0);
 
@@ -553,7 +536,19 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000081A4);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000081FC);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00008274);
+s32 func_00008274(void *arg0) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_v0 = func_000081FC();
+    var_v0 = -1;
+    if (temp_v0 != 0) {
+        scePaf_F609FA81(M2C_FIELD(arg0, s32 *, 4), temp_v0, 0, 0);
+        scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4), temp_v0);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000082D0);
 
@@ -587,10 +582,12 @@ s32 func_00008488(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x1C);
 }
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00008490);
+void func_00008490(void *arg0, s32 arg1) {
+    scePaf_F609FA81(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
+}
 
-void func_000084B4(void *arg0) {
-    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4));
+void func_000084B4(void *arg0, s32 arg1) {
+    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4), arg1);
 }
 
 void func_000084D0(void *arg0) {
@@ -605,28 +602,7 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00008508);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00008530);
 
-s32 func_0000856C(s32 arg0) {
-    s32 var_v0;
-
-    switch (arg0) {                                 /* irregular */
-    default:
-        var_v0 = 0x801085F2;
-        break;
-    case 1:
-        var_v0 = func_0000896C();
-        break;
-    case 4:
-        var_v0 = func_000089DC();
-        break;
-    case 3:
-        var_v0 = func_000089D4();
-        break;
-    case 2:
-        var_v0 = func_000089A0();
-        break;
-    }
-    return var_v0;
-}
+INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_0000856C);
 
 s32 func_000085FC(void) {
     scePaf_545FE2DA();
@@ -641,9 +617,13 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_0000896C);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000089A0);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000089D4);
+s32 func_000089D4(void) {
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000089DC);
+s32 func_000089DC(void) {
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000089E4);
 

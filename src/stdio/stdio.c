@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "stdio_decls.h"
 
@@ -92,7 +93,9 @@ void syslib_D3744BE0(void) {
     func_00000C78();
 }
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", sceKernelStdin);
+s32 sceKernelStdin(void) {
+    return D_00001560;
+}
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", sceKernelStdout);
 

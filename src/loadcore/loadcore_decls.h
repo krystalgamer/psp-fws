@@ -7,8 +7,11 @@
 
 s32 LoadCoreForKernel_3BB7AC18(void);
 s32 LoadCoreForKernel_6B2371C2(void *arg0);
+M2C_UNK LoadCoreForKernel_8D8A8ACE(s32, s32);
 s32 LoadCoreForKernel_A8E2D53D(void);
+s32 LoadCoreForKernel_AFF947D4(s32 arg0);
 void LoadCoreForKernel_C0913394(void *arg0, M2C_UNK arg1, M2C_UNK arg2);
+s32 LoadCoreForKernel_CD0F3BAC();
 M2C_UNK LoadCoreForKernel_D8779AC6();
 s32 SysMemForKernel_8F20C4C0(s32);
 M2C_UNK SysMemForKernel_CE05CCB7();

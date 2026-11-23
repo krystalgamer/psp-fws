@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "loadcore_decls.h"
 
@@ -213,7 +214,18 @@ s32 LoadCoreForKernel_6B2371C2(void *arg0) {
     return temp_s0;
 }
 
-INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", LoadCoreForKernel_AFF947D4);
+s32 LoadCoreForKernel_AFF947D4(s32 arg0) {
+    s32 temp_s2;
+    s32 temp_v0;
+
+    temp_s2 = func_0000665C();
+    temp_v0 = LoadCoreForKernel_CD0F3BAC();
+    if (temp_v0 != 0) {
+        LoadCoreForKernel_8D8A8ACE(temp_v0, arg0);
+    }
+    func_00006688(temp_s2);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", LoadCoreForKernel_AE7C6E76);
 

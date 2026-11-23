@@ -1,3 +1,4 @@
+/* cflags: -Os */
 #include "common.h"
 #include "msgdialog_plugin_decls.h"
 
@@ -166,7 +167,15 @@ INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_0
 
 INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_00000E88);
 
-INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_00000EB8);
+void func_00000EB8(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_00000F08(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_00000F08);
 
