@@ -66,7 +66,14 @@ def fix_unsupported(asm_dir: Path, reloc_roms=frozenset()):
     for path in asm_dir.rglob("*.s"):
         defined_locals.update(re.findall(r"^\s*(\.L\w+):", path.read_text(), re.M))
     for path in asm_dir.rglob("*.s"):
-        lines = path.read_text().splitlines(keepends=True)
+        text = path.read_text()
+        # Layout is fixed by the original addresses, so .align above 4 bytes
+        # never moves anything; it only raises section alignment, which old
+        # psp-as turns into end-of-section padding.
+        new_text = re.sub(r"^\.align [3-9]$", ".align 2", text, flags=re.M)
+        if new_text != text:
+            path.write_text(new_text)
+        lines = new_text.splitlines(keepends=True)
         changed = False
         for i, line in enumerate(lines):
             m = INSN_RE.match(line)
