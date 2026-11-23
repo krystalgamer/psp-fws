@@ -5,6 +5,8 @@
 #include "m2c_macros.h"
 
 
+void ExceptionManagerForKernel_3FB264FC(s32 arg0, s32 arg1);
+s32 ExceptionManagerForKernel_5A837AD4(s32, s32, s32);
 s32 func_0000051C(void);
 void func_00000544(void);
 s32 func_00000A80();

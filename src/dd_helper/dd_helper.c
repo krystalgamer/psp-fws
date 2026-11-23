@@ -98,9 +98,32 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000900);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000930);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000964);
+s32 func_00000964(s32 arg0, void *arg1) {
+    s32 temp_s0;
+    void *temp_v0;
 
-INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000009E4);
+    temp_s0 = (M2C_FIELD(arg1, s32 *, 4) * 2) + 2;
+    temp_v0 = scePaf_5FAC9869(temp_s0);
+    if (temp_v0 != NULL) {
+        sceCccUTF8toUTF16(temp_v0, temp_s0, M2C_FIELD(arg1, void **, 0));
+        func_00002520(arg0, (s32) temp_v0);
+        scePaf_545FE2DA((s32) temp_v0);
+    }
+    return arg0;
+}
+
+void func_000009E4(s32 arg0, void *arg1, s32 arg2) {
+    s32 temp_s0;
+    void *temp_v0;
+
+    temp_s0 = (scePaf_FD4C9F47(arg1) * 2) + 0x20;
+    temp_v0 = scePaf_5FAC9869(temp_s0);
+    if (temp_v0 != NULL) {
+        scePaf_49A81B18(temp_v0, temp_s0, arg1, arg2);
+        func_00002570(arg0, (s32) temp_v0, scePaf_FD4C9F47(temp_v0));
+        scePaf_545FE2DA((s32) temp_v0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000A84);
 
@@ -531,9 +554,32 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00005FE0);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000060C0);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000060F0);
+s32 func_000060F0(s32 arg0, void *arg1) {
+    s32 temp_s0;
+    void *temp_v0;
 
-INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00006170);
+    temp_s0 = (M2C_FIELD(arg1, s32 *, 4) * 2) + 2;
+    temp_v0 = scePaf_5FAC9869(temp_s0);
+    if (temp_v0 != NULL) {
+        sceCccUTF8toUTF16(temp_v0, temp_s0, M2C_FIELD(arg1, void **, 0));
+        func_00002520(arg0, (s32) temp_v0);
+        scePaf_545FE2DA((s32) temp_v0);
+    }
+    return arg0;
+}
+
+void func_00006170(s32 arg0, void *arg1, s32 arg2) {
+    s32 temp_s0;
+    void *temp_v0;
+
+    temp_s0 = (scePaf_FD4C9F47(arg1) * 2) + 0x20;
+    temp_v0 = scePaf_5FAC9869(temp_s0);
+    if (temp_v0 != NULL) {
+        scePaf_49A81B18(temp_v0, temp_s0, arg1, arg2);
+        func_00002570(arg0, (s32) temp_v0, scePaf_FD4C9F47(temp_v0));
+        scePaf_545FE2DA((s32) temp_v0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00006210);
 

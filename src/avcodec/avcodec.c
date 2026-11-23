@@ -102,7 +102,9 @@ INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", sceJpegDecodeMJpeg);
 
 INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", sceJpegGetOutputInfo);
 
-INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", sceJpeg_0425B986);
+void sceJpeg_0425B986(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_00002AB0(arg0, arg1, arg2, arg3, 0);
+}
 
 s32 sceJpegCsc(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0x80000003;

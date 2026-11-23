@@ -66,9 +66,13 @@ void sceDisplayGetFramePerSec(void) {
     sceLcdc_driver_3107417C();
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplaySetFrameBuf);
+s32 sceDisplaySetFrameBuf(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    return sceDisplay_driver_63E22A26(2, (s32) arg0, arg1, arg2, arg3);
+}
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayGetFrameBuf);
+s32 sceDisplayGetFrameBuf(void *arg0, void *arg1, void *arg2, s32 arg3) {
+    return sceDisplay_driver_5B5AEFAD(2, (s32) arg0, (s32) arg1, (s32) arg2, arg3);
+}
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayIsForeground);
 

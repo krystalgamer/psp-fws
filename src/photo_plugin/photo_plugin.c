@@ -521,7 +521,9 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000514C)
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00005214);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000527C);
+void func_0000527C(s32 arg0) {
+    func_0000529C(arg0, 0, 0);
+}
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000529C);
 
@@ -2471,7 +2473,19 @@ void func_00026304(void) {
     func_00025F14(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00026324);
+void func_00026324(void *arg0) {
+    s32 temp_v0;
+    s32 temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0 = M2C_FIELD(arg0, s32 *, 4) - 1;
+    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+    if (temp_v0 >= (temp_v1 - 0x14)) {
+
+    } else {
+        func_00009C34((s32) arg0, temp_v1 - 0xA);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00026368);
 
@@ -2526,7 +2540,18 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00026A88)
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00026B80);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00026CEC);
+s32 func_00026CEC(void *arg0) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = sceIoOpen(arg0, 1, 0x1A4);
+    var_v1 = 0;
+    if (temp_v0 >= 0) {
+        sceIoClose((u32) temp_v0);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
 
 INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", D_000315DC);
 

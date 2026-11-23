@@ -1,8 +1,13 @@
 {
  "funcs": {
   "module_start": "s32 module_start(void);",
+  "sceNand_driver_0ADC8686": "s32 sceNand_driver_0ADC8686(s32, s32, s32, s32, s32);",
   "sceNand_driver_73A68408": "s32 sceNand_driver_73A68408(void);",
-  "sceNand_driver_A513BB12": "M2C_UNK sceNand_driver_A513BB12();"
+  "sceNand_driver_766756EF": "s32 sceNand_driver_766756EF(s32, s32, s32, s32, s32);",
+  "sceNand_driver_A513BB12": "M2C_UNK sceNand_driver_A513BB12();",
+  "sceNand_driver_BADD5D46": "void sceNand_driver_BADD5D46(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
+  "sceNand_driver_C478C1DE": "void sceNand_driver_C478C1DE(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
+  "sceNand_driver_E05AE88D": "void sceNand_driver_E05AE88D(s32 arg0, s32 arg1, s32 arg2, s32 arg3);"
  },
  "vars": {}
 }

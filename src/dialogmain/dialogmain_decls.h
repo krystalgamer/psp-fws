@@ -33,6 +33,8 @@ void func_000059A0(s32 *arg0, s32 arg1);
 void func_000059F0(s32 arg0, s32 arg1);
 M2C_UNK func_00005B74();
 M2C_UNK func_00005B94(s32, s32, s32);
+s32 func_00006744(s32, s32, s32, s32, s32);
+void func_00006A44(s32 arg0);
 M2C_UNK func_00006BC4();
 M2C_UNK func_00006D5C(M2C_UNK);
 s32 func_00006DF0(void);

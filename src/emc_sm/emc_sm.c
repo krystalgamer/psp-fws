@@ -48,13 +48,19 @@ INCLUDE_ASM("tmp/asm/282/emc_sm/nonmatchings/emc_sm", sceNand_driver_89BDCA08);
 
 INCLUDE_ASM("tmp/asm/282/emc_sm/nonmatchings/emc_sm", sceNand_driver_8AF0AB9F);
 
-INCLUDE_ASM("tmp/asm/282/emc_sm/nonmatchings/emc_sm", sceNand_driver_E05AE88D);
+void sceNand_driver_E05AE88D(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    sceNand_driver_766756EF(arg0, arg1, arg2, arg3, 0x20);
+}
 
 INCLUDE_ASM("tmp/asm/282/emc_sm/nonmatchings/emc_sm", sceNand_driver_8932166A);
 
-INCLUDE_ASM("tmp/asm/282/emc_sm/nonmatchings/emc_sm", sceNand_driver_C478C1DE);
+void sceNand_driver_C478C1DE(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    sceNand_driver_766756EF(arg0, arg1, arg2, arg3, 0x31);
+}
 
-INCLUDE_ASM("tmp/asm/282/emc_sm/nonmatchings/emc_sm", sceNand_driver_BADD5D46);
+void sceNand_driver_BADD5D46(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    sceNand_driver_0ADC8686(arg0, arg1, arg2, arg3, 0x31);
+}
 
 INCLUDE_ASM("tmp/asm/282/emc_sm/nonmatchings/emc_sm", func_00000F40);
 

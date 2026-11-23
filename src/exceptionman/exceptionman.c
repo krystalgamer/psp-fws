@@ -29,7 +29,9 @@ void func_00000544(void) {
     syslib_D3744BE0();
 }
 
-INCLUDE_ASM("tmp/asm/282/exceptionman/nonmatchings/exceptionman", ExceptionManagerForKernel_3FB264FC);
+void ExceptionManagerForKernel_3FB264FC(s32 arg0, s32 arg1) {
+    ExceptionManagerForKernel_5A837AD4(arg0, 2, arg1);
+}
 
 INCLUDE_ASM("tmp/asm/282/exceptionman/nonmatchings/exceptionman", ExceptionManagerForKernel_DF83875E);
 

@@ -544,7 +544,9 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006744);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000069E0);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006A44);
+void func_00006A44(s32 arg0) {
+    func_00006744(arg0, 0x200, 0x1E0, 0x110, 0x04000000);
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006A6C);
 
