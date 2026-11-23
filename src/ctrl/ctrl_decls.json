@@ -1,5 +1,10 @@
 {
  "funcs": {
+  "func_00001548": "s32 func_00001548(void);",
+  "func_00001554": "s32 func_00001554(void);",
+  "func_00001560": "s32 func_00001560(void);",
+  "func_0000156C": "s32 func_0000156C(void);",
+  "func_00001578": "s32 func_00001578(void);",
   "module_reboot_before": "s32 module_reboot_before(void);",
   "module_start": "s32 module_start(void);",
   "sceCtrl_driver_3E65A0EA": "M2C_UNK sceCtrl_driver_3E65A0EA();",

@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "ctrl_decls.h"
 
@@ -73,15 +74,25 @@ INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_5C56C779);
 
 INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlClearRapidFire);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_00001548);
+s32 func_00001548(void) {
+    return 0x80000003;
+}
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_00001554);
+s32 func_00001554(void) {
+    return 0x80000003;
+}
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_00001560);
+s32 func_00001560(void) {
+    return 0x80000003;
+}
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_0000156C);
+s32 func_0000156C(void) {
+    return 0x80000003;
+}
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_00001578);
+s32 func_00001578(void) {
+    return 0x80000003;
+}
 
 INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_00001584);
 
