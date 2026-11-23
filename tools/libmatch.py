@@ -96,8 +96,8 @@ def lib_sources(name):
     raise ValueError(name)
 
 
-def compile_funcs(src, incs, defs, opt, compiler="1.7.1"):
-    """{function name: masked words} for one source file."""
+def compile_funcs(src, incs, defs, opt, compiler="1.7.1", addrs=None):
+    """{function name: masked words} for one source file (addrs: name -> address)."""
     with tempfile.TemporaryDirectory() as td:
         i, s, o = Path(td) / "f.i", Path(td) / "f.s", Path(td) / "f.o"
         cpp = ["cpp", "-P", "-undef", "-nostdinc", "-D__psp__", "-D__mips__", "-D__MIPSEL__", "-D__GNUC__=3",
@@ -137,11 +137,22 @@ def compile_funcs(src, incs, defs, opt, compiler="1.7.1"):
                 if sym["st_info"]["type"] != "STT_FUNC" or sym["st_shndx"] != text_idx or not sym["st_size"]:
                     continue
                 a, n = sym["st_value"], sym["st_size"]
+                if addrs is not None:
+                    addrs[sym.name] = a
                 words = struct.unpack_from(f"<{n // 4}I", text, a)
                 out[sym.name] = tuple(
                     ad.mask(w, kinds.get(a + 4 * k) or ("26" if w >> 26 in (2, 3) else None))
                     for k, w in enumerate(words))
         return out, ""
+
+
+def compile_funcs_ordered(src, incs, defs, opt):
+    """[(name, size in bytes)] in .text order."""
+    addrs = {}
+    funcs, err = compile_funcs(src, incs, defs, opt, addrs=addrs)
+    if funcs is None:
+        return []
+    return [(n, 4 * len(funcs[n])) for n in sorted(funcs, key=addrs.get)]
 
 
 def main():
