@@ -55,6 +55,16 @@ segments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - { start: 0xC4, type: prxpad, order: .text }
       - [0xD0, c, lftv_middleware]
+      - [0x1B8, c, lftv_middleware_000118]
+      - [0x248, c, lftv_middleware_0001A8]
+      - [0x3A0, c, lftv_middleware_000300]
+      - [0x17D50, c, lftv_middleware_017CB0]
+      - [0x191B8, c, lftv_middleware_019118]
+      - [0x1C510, c, lftv_middleware_01C470]
+      - [0x2953C, c, lftv_middleware_02949C]
+      - [0x305C4, c, lftv_middleware_030524]
+      - [0x4B54C, c, lftv_middleware_04B4AC]
+      - [0x4C27C, c, lftv_middleware_04C1DC]
       - { start: 0x506C0, type: asm, name: fini, linker_section: .fini }
       - { start: 0x506DC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x50BA4, type: prxpad, order: .text }
@@ -74,6 +84,14 @@ segments:
       - { start: 0x5142C, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x514A4, type: prxpad, order: .rodata }
       - [0x514B0, .rodata, lftv_middleware]
+      - [0x514B0, .rodata, lftv_middleware_0001A8]
+      - [0x514BC, .rodata, lftv_middleware_000300]
+      - [0x54758, .rodata, lftv_middleware_019118]
+      - [0x54914, .rodata, lftv_middleware_01C470]
+      - [0x55D78, .rodata, lftv_middleware_02949C]
+      - [0x55E64, .rodata, lftv_middleware_030524]
+      - [0x56E90, .rodata, lftv_middleware_04B4AC]
+      - [0x570D0, .rodata, lftv_middleware_04C1DC]
       - { start: 0x57768, type: prxpad, order: .rodata }
   - name: lftv_middleware_seg1
     type: code
