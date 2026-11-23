@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "mscm_decls.h"
 
@@ -13,7 +14,15 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_68C14F25);
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00000B9C);
 
-INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00000C1C);
+s32 func_00000C1C(void *arg0) {
+    sceSysreg_driver_18172C6A(M2C_FIELD(arg0, s32 *, 4));
+    sceMScm_driver_F1924A06((s32) arg0, 1);
+    sceKernelDelayThread(0x186A0U);
+    sceMScm_driver_F1924A06((s32) arg0, 2);
+    sceKernelDelayThread(0x4E20U);
+    sceSysreg_driver_D74F1D48(M2C_FIELD(arg0, s32 *, 4));
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", module_reboot_before);
 
@@ -61,7 +70,10 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_6C8AEF0B);
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_907D7766);
 
-INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_B01C378C);
+s32 sceMScm_driver_B01C378C(void *arg0) {
+    sceKernelClearEventFlag(M2C_FIELD(M2C_FIELD(arg0, void **, 8), u32 *, 0x2C), 0U);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_2D7C40FA);
 
@@ -107,7 +119,9 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_34124B97);
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00004D94);
 
-INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_0A054CDA);
+s32 sceMScm_driver_0A054CDA(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x14);
+}
 
 void func_00004E4C(void) {
     sceKernelGetSystemTimeLow();
@@ -133,7 +147,9 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_4E4C3099);
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_6F4F7E4C);
 
-INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_CFD8F662);
+void sceMScm_driver_CFD8F662(s32 arg0) {
+    sceMScm_driver_AA67D87A(arg0, 4);
+}
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00005330);
 
@@ -185,9 +201,25 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_2AD0A649);
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00006684);
 
-INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_000066DC);
+s32 func_000066DC(void *arg0) {
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00006704);
+    var_v0 = 0x80220081;
+    if (arg0 != NULL) {
+        var_v0 = func_000064C8(M2C_FIELD(arg0, s32 *, 4));
+    }
+    return var_v0;
+}
+
+s32 func_00006704(void *arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0x80220081;
+    if (arg0 != NULL) {
+        var_v0 = func_0000652C(M2C_FIELD(arg0, s32 *, 4), arg1);
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_F0CC24D1);
 

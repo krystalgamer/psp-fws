@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "modulemgr_decls.h"
 
@@ -7,7 +8,24 @@ INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", func_000000D4);
 
 INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", func_00000194);
 
-INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", func_000004C0);
+void func_000004C0(void *arg0, void *arg1) {
+    if (arg1 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x14) = (s32) M2C_FIELD(arg1, s32 *, 4);
+        M2C_FIELD(arg0, s32 *, 0x18) = (s32) M2C_FIELD(arg1, s32 *, 8);
+        M2C_FIELD(arg0, u8 *, 2) = (u8) M2C_FIELD(arg1, u8 *, 0x10);
+        M2C_FIELD(arg0, u8 *, 3) = (u8) M2C_FIELD(arg1, u8 *, 0x11);
+    } else {
+        M2C_FIELD(arg0, u8 *, 3) = 1U;
+        M2C_FIELD(arg0, s32 *, 0x14) = 0;
+        M2C_FIELD(arg0, s32 *, 0x18) = 0;
+        M2C_FIELD(arg0, u8 *, 2) = 0U;
+    }
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x50) = 0;
+    M2C_FIELD(arg0, s32 *, 0x60) = 0;
+    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    func_0000552C((s32) arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", ModuleMgrForKernel_6DE9FF11);
 
@@ -63,7 +81,9 @@ s32 syslib_ADF12745(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", module_reboot_before);
+void module_reboot_before(void) {
+    sceKernelSuspendThread(D_00007160);
+}
 
 INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", syslib_D3744BE0);
 
@@ -93,13 +113,19 @@ INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", ModuleMgrForKernel_5
 
 INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", ModuleMgrForKernel_53CA70EE);
 
-INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", ModuleMgrForKernel_25E1F458);
+s32 ModuleMgrForKernel_25E1F458(void) {
+    return 0x80020149;
+}
 
 INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", ModuleMgrForKernel_EF7A7F02);
 
-INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", ModuleMgrForKernel_74690AEB);
+s32 ModuleMgrForKernel_74690AEB(void) {
+    return 0x80020149;
+}
 
-INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", ModuleMgrForKernel_F80F3C96);
+s32 ModuleMgrForKernel_F80F3C96(void) {
+    return 0x80020149;
+}
 
 INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", sceKernelUnloadModule);
 
@@ -109,7 +135,17 @@ INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", sceKernelStopUnloadS
 
 INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", ModuleMgrForKernel_04B7BD22);
 
-INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", ModuleMgrForKernel_54D9E02E);
+s32 ModuleMgrForKernel_54D9E02E(void) {
+    s32 var_v0;
+    void *temp_v0;
+
+    temp_v0 = LoadCoreForKernel_FB8AE27D();
+    var_v0 = 0x8002012E;
+    if (temp_v0 != NULL) {
+        var_v0 = M2C_FIELD(temp_v0, s32 *, 0x2C);
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", sceKernelGetModuleIdByAddress);
 

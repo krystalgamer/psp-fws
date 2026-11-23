@@ -1,6 +1,11 @@
 {
  "funcs": {
+  "func_00002BF8": "s32 func_00002BF8(s32);",
+  "func_00002C74": "s32 func_00002C74(void *arg0);",
   "func_00006D0C": "s32 func_00006D0C(void);",
+  "func_00009234": "s32 func_00009234(s32);",
+  "func_00009750": "u8 *func_00009750(u8 *arg0, u8 *arg1, s32 arg2);",
+  "func_00009FE4": "u8 *func_00009FE4(u8 *arg0, u8 *arg1);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceReg_0CAE832B": "void sceReg_0CAE832B(void);",

@@ -1,33 +1,17 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "lowio_decls.h"
 
-s32 module_start(s32 arg0, M2C_UNK arg1) {
-    func_000000E8();
-    func_0000233C(arg0, arg1);
-    func_00002DE0(arg0, arg1);
-    func_00003EA4(arg0, arg1);
-    func_0000470C(arg0, arg1);
-    func_000076D4(arg0, arg1);
-    func_0000869C(arg0, arg1);
-    func_00009F7C(arg0, arg1);
-    return 0;
-}
+INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", module_start);
 
-s32 module_reboot_before(s32 arg0) {
-    func_00009FA8();
-    func_000086BC(arg0);
-    func_000076F4(arg0);
-    func_00004790(arg0);
-    func_00003F70(arg0);
-    func_00002E00(arg0);
-    func_000023E8(arg0);
-    func_00000130(arg0);
-    return 0;
-}
+INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", module_reboot_before);
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_000000E8);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00000130);
+s32 func_00000130(void) {
+    sceSysreg_driver_4EE8E2C8();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceSysreg_driver_9C863542);
 
@@ -446,7 +430,10 @@ INCLUDE_RODATA("tmp/asm/352/lowio/nonmatchings/lowio", D_0000B6D8);
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceSysreg_driver_25673620);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceSysreg_driver_4EE8E2C8);
+s32 sceSysreg_driver_4EE8E2C8(void) {
+    InterruptManagerForKernel_F987B1F0(0x1F);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceSysreg_driver_083F56E2);
 
@@ -560,7 +547,10 @@ INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", scePwm_driver_F624C1A0);
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", scePwm_driver_93F30DAC);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00002DE0);
+s32 func_00002DE0(void) {
+    scePwm_driver_68BA9CC1();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00002E00);
 
@@ -606,7 +596,12 @@ INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceI2c_driver_DB6C4F9B);
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceI2c_driver_0397408B);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceI2c_driver_17B0DA59);
+s32 sceI2c_driver_17B0DA59(void) {
+    *(s32 *)0xBE200020 = 1;
+    sceKernelDelayThread(0x64U);
+    *(s32 *)0xBE200020 = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00004194);
 
@@ -728,9 +723,13 @@ INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceDmacplus_driver_F7DEC189)
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceDmacplus_driver_D0464B29);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceDmacplus_driver_FEE3392C);
+s32 sceDmacplus_driver_FEE3392C(void) {
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceDmacplus_driver_C5B75E09);
+s32 sceDmacplus_driver_C5B75E09(void) {
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00005F60);
 
@@ -746,9 +745,13 @@ INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceDmacplus_driver_D1E1567E)
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceDmacplus_driver_9393B40D);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceDmacplus_driver_6D4F8BD7);
+s32 sceDmacplus_driver_6D4F8BD7(void) {
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceDmacplus_driver_78A55D62);
+s32 sceDmacplus_driver_78A55D62(void) {
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceDmacplus_driver_2D5940FF);
 
@@ -776,7 +779,9 @@ s32 sceDmacplus_driver_410ED0DD(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceDmacplus_driver_97DCBBBF);
+s32 sceDmacplus_driver_97DCBBBF(void) {
+    return 0;
+}
 
 INCLUDE_RODATA("tmp/asm/352/lowio/nonmatchings/lowio", D_0000B80C);
 
@@ -798,7 +803,10 @@ INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceLcdc_driver_FE5A8859);
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceLcdc_driver_7BDC15C8);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_000076D4);
+s32 func_000076D4(void) {
+    sceLcdc_driver_B55500A3();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_000076F4);
 
@@ -830,7 +838,18 @@ INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceLcdc_driver_3107417C);
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceLcdc_driver_E08B076B);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00007990);
+s32 func_00007990(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 0x10004:
+        sceLcdc_driver_C6F10C77();
+        break;
+    case 0x4004:
+        sceSysreg_driver_F74F14E9();
+        sceSysreg_driver_E89243BE();
+        break;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceNand_driver_A513BB12);
 
@@ -858,7 +877,10 @@ INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceNand_driver_EB0A0022);
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceNand_driver_5182C394);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_0000869C);
+s32 func_0000869C(void) {
+    sceNand_driver_A513BB12();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_000086BC);
 
@@ -936,7 +958,11 @@ INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00009CD8);
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00009F7C);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00009FA8);
+s32 func_00009FA8(void) {
+    DmacManForKernel_32757C57(0);
+    sceDdr_driver_8698F5DA();
+    return 0;
+}
 
 s32 sceDdr_driver_17D39E17(void) {
     return 0;

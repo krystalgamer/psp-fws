@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "memlmd_decls.h"
 
@@ -9,9 +10,13 @@ INCLUDE_ASM("tmp/asm/352/memlmd/nonmatchings/memlmd", func_000000A8);
 
 INCLUDE_ASM("tmp/asm/352/memlmd/nonmatchings/memlmd", func_00000134);
 
-INCLUDE_ASM("tmp/asm/352/memlmd/nonmatchings/memlmd", memlmd_7CF1CD3E);
+void memlmd_7CF1CD3E(s32 arg0, s32 arg1, s32 arg2) {
+    func_00000134(arg0, arg1, arg2, 0);
+}
 
-INCLUDE_ASM("tmp/asm/352/memlmd/nonmatchings/memlmd", memlmd_6A811217);
+void memlmd_6A811217(s32 arg0, s32 arg1, s32 arg2) {
+    func_00000134(arg0, arg1, arg2, 1);
+}
 
 INCLUDE_ASM("tmp/asm/352/memlmd/nonmatchings/memlmd", func_00000E5C);
 

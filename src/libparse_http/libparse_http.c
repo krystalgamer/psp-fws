@@ -1,4 +1,6 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "libparse_http_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/libparse_http/nonmatchings/libparse_http", sceParseHttpStatusLine);
 
@@ -34,4 +36,23 @@ INCLUDE_ASM("tmp/asm/282/libparse_http/nonmatchings/libparse_http", func_00000BD
 
 INCLUDE_ASM("tmp/asm/282/libparse_http/nonmatchings/libparse_http", func_00000C00);
 
-INCLUDE_ASM("tmp/asm/282/libparse_http/nonmatchings/libparse_http", func_00000C48);
+u8 *func_00000C48(u8 *arg0, u8 *arg1) {
+    u8 *var_a1;
+    u8 *var_a2;
+    u8 *var_v0;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_v0 = NULL;
+    var_a2 = arg0;
+    if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
+        do {
+            temp_a3 = *var_a1;
+            var_a1 += 1;
+            *var_a2 = temp_a3;
+            var_a2 += 1;
+        } while (temp_a3 != 0);
+        var_v0 = arg0;
+    }
+    return var_v0;
+}

@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "mpeg_decls.h"
 
@@ -41,11 +42,17 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000E20);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000F70);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000FB4);
+void func_00000FB4(s32 arg0, s32 arg1) {
+    func_00000B54(arg0, 0, arg1);
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000FD4);
+s32 func_00000FD4(void) {
+    return 0x80618006;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000FE0);
+s32 func_00000FE0(void) {
+    return 0x80618006;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000FEC);
 
@@ -83,7 +90,19 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001A28);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001AF4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001B28);
+s32 func_00001B28(s32 arg0, s32 *arg1) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_v0 = func_00007B2C(arg0 + 0xC);
+    *arg1 = temp_v0;
+    var_v0 = 0;
+    if (temp_v0 & 0x7FF) {
+        *arg1 = 0;
+        var_v0 = 0x806101FE;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001B6C);
 
@@ -174,13 +193,15 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000053D4);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000542C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00005478);
-
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000054A0);
-
-u32 func_000054AC(s32 arg0) {
-    return func_00007B0C(arg0 + 1) >> 0x17;
+s32 func_00005478(s32 arg0) {
+    return ((func_00007AF4(arg0 + 2) & 0x3FF) * 8) + 8;
 }
+
+s32 func_000054A0(u8 *arg0) {
+    return *arg0 & 0xF;
+}
+
+INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000054AC);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000054CC);
 
@@ -192,19 +213,42 @@ u8 func_00005510(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 3);
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00005518);
+void *func_00005518(void *arg0, s32 arg1) {
+    void *var_v0;
+
+    var_v0 = NULL;
+    if (arg1 < (s32) M2C_FIELD(arg0, u8 *, 3)) {
+        var_v0 = arg0 + (arg1 * 4) + 4;
+    }
+    return var_v0;
+}
 
 u8 func_0000553C(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 1);
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00005544);
+s32 func_00005544(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 >= 4) {
+
+    } else {
+        var_v0 = func_00007AF4(arg0 + (arg1 * 2) + 2);
+    }
+    return var_v0;
+}
 
 s32 func_00005580(s32 arg0) {
     return arg0 + 0xE;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00005588);
+void *func_00005588(void **arg0) {
+    void *temp_a1;
+
+    temp_a1 = *arg0;
+    return temp_a1 + (M2C_FIELD(temp_a1, s32 *, 0x24) * 0x644) + 0x28;
+}
 
 s32 func_000055A8(void) {
     return 0;
@@ -308,15 +352,23 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegRingbufferAvailableSize
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006CF0);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006D44);
+s32 func_00006D44(u32 arg0) {
+    return (sceKernelDeleteSema(arg0) == 0) ? 0 : 0x80000041;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006D70);
+s32 func_00006D70(u32 arg0) {
+    return (sceKernelWaitSema(arg0, 1, NULL) == 0) ? 0 : 0x80000041;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006DA0);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006DD4);
+s32 func_00006DD4(u32 arg0) {
+    return (sceKernelPollSema(arg0, 0) == 0) ? 0 : 0x80000041;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006E00);
+s32 func_00006E00(u32 arg0) {
+    return (sceKernelSignalSema(arg0, 1) == 0) ? 0 : 0x80000041;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006E2C);
 
@@ -360,13 +412,39 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007648);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000076B0);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000076F8);
+u8 *func_000076F8(u8 *arg0, u8 *arg1, s32 arg2) {
+    s32 var_a2;
+    u8 *var_a1;
+    u8 *var_v0;
+    u8 *var_v1;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_a2 = arg2;
+    var_v0 = NULL;
+    if (arg0 != NULL) {
+        var_v1 = arg0;
+        if (var_a2 > 0) {
+            do {
+                temp_a3 = *var_a1;
+                var_a2 -= 1;
+                var_a1 += 1;
+                *var_v1 = temp_a3;
+                var_v1 += 1;
+            } while (var_a2 > 0);
+        }
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000772C);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007758);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000077D8);
+s32 func_000077D8(s32 arg0) {
+    return __builtin_allegrex_max(arg0, -arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000077E8);
 

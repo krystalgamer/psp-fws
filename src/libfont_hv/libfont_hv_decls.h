@@ -5,7 +5,12 @@
 #include "m2c_macros.h"
 
 
+s32 func_00002BF8(s32);
+s32 func_00002C74(void *arg0);
 s32 func_00006D0C(void);
+s32 func_00009234(s32);
+u8 *func_00009750(u8 *arg0, u8 *arg1, s32 arg2);
+u8 *func_00009FE4(u8 *arg0, u8 *arg1);
 s32 module_start(void);
 s32 module_stop(void);
 void sceReg_0CAE832B(void);

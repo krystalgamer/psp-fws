@@ -1,4 +1,6 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "libparse_uri_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00000000);
 
@@ -56,7 +58,31 @@ INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00001BA4)
 
 INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00001BDC);
 
-INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00001C24);
+u8 *func_00001C24(u8 *arg0, u8 *arg1, s32 arg2) {
+    s32 var_a2;
+    u8 *var_a1;
+    u8 *var_v0;
+    u8 *var_v1;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_a2 = arg2;
+    var_v0 = NULL;
+    if (arg0 != NULL) {
+        var_v1 = arg0;
+        if (var_a2 > 0) {
+            do {
+                temp_a3 = *var_a1;
+                var_a2 -= 1;
+                var_a1 += 1;
+                *var_v1 = temp_a3;
+                var_v1 += 1;
+            } while (var_a2 > 0);
+        }
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00001C58);
 
@@ -78,7 +104,26 @@ INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00002144)
 
 INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00002174);
 
-INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_000021BC);
+u8 *func_000021BC(u8 *arg0, u8 *arg1) {
+    u8 *var_a1;
+    u8 *var_a2;
+    u8 *var_v0;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_v0 = NULL;
+    var_a2 = arg0;
+    if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
+        do {
+            temp_a3 = *var_a1;
+            var_a1 += 1;
+            *var_a2 = temp_a3;
+            var_a2 += 1;
+        } while (temp_a3 != 0);
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_000021F4);
 

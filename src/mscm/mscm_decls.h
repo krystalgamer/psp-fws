@@ -5,10 +5,24 @@
 #include "m2c_macros.h"
 
 
+s32 func_00000C1C(void *arg0);
 void func_00004E4C(void);
 s32 func_00006484(void);
 s32 func_0000648C(void);
 s32 func_000064C0(void);
-M2C_UNK sceKernelGetSystemTimeLow();
+s32 func_000064C8(s32);
+s32 func_0000652C(s32, s32);
+s32 func_000066DC(void *arg0);
+s32 func_00006704(void *arg0, s32 arg1);
+s32 sceKernelClearEventFlag(u32, u32);
+s32 sceKernelDelayThread(u32);
+u32 sceKernelGetSystemTimeLow(void);
+s32 sceMScm_driver_0A054CDA(void *arg0);
+s32 sceMScm_driver_AA67D87A(s32, s32);
+s32 sceMScm_driver_B01C378C(void *arg0);
+void sceMScm_driver_CFD8F662(s32 arg0);
+s32 sceMScm_driver_F1924A06(s32, s32);
+M2C_UNK sceSysreg_driver_18172C6A(s32);
+M2C_UNK sceSysreg_driver_D74F1D48(s32);
 
 #endif

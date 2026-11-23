@@ -1,4 +1,6 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "libatrac3plus_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/libatrac3plus/nonmatchings/libatrac3plus", sceAtracReinit);
 
@@ -46,9 +48,13 @@ INCLUDE_ASM("tmp/asm/282/libatrac3plus/nonmatchings/libatrac3plus", sceAtracEndE
 
 INCLUDE_ASM("tmp/asm/282/libatrac3plus/nonmatchings/libatrac3plus", sceAtracReleaseAtracID);
 
-INCLUDE_ASM("tmp/asm/282/libatrac3plus/nonmatchings/libatrac3plus", sceAtracSetData);
+s32 sceAtracSetData(s32 arg0, void *arg1, u32 arg2) {
+    return sceAtracSetHalfwayBuffer(arg0, arg1, arg2, arg2);
+}
 
-INCLUDE_ASM("tmp/asm/282/libatrac3plus/nonmatchings/libatrac3plus", sceAtracSetDataAndGetID);
+s32 sceAtracSetDataAndGetID(void *arg0, u32 arg1) {
+    return sceAtracSetHalfwayBufferAndGetID(arg0, arg1, arg1);
+}
 
 INCLUDE_ASM("tmp/asm/282/libatrac3plus/nonmatchings/libatrac3plus", sceAtracSetAA3DataAndGetID);
 

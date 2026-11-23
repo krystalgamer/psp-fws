@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "libfont_hv_decls.h"
 
@@ -171,7 +172,37 @@ INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00002BB4);
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00002BF8);
 
-INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00002C74);
+s32 func_00002C74(void *arg0) {
+    s32 var_s1;
+    s32 var_s2;
+    s32 var_v1;
+    void *temp_a0;
+    void *temp_a1;
+    void *temp_s0;
+
+    var_v1 = M2C_FIELD(arg0, s32 *, 4);
+    var_s2 = 0;
+    if (var_v1 > 0) {
+        var_s1 = 0;
+        do {
+            var_s2 += 1;
+            temp_s0 = M2C_FIELD(arg0, s32 *, 0x2C) + var_s1;
+            var_s1 += 0x4C;
+            if (temp_s0 != NULL) {
+                if (M2C_FIELD(temp_s0, u8 *, 0) != 0) {
+                    M2C_FIELD(temp_s0, u8 *, 0) = 0U;
+                    temp_a0 = M2C_FIELD(temp_s0, void **, 4);
+                    temp_a1 = M2C_FIELD(temp_a0, void **, 0x48);
+                    M2C_FIELD(temp_a1, u16 *, 0x34) = (u16) (M2C_FIELD(temp_a1, u16 *, 0x34) - 1);
+                    func_00009234((s32) temp_a0);
+                    func_00002BF8((s32) temp_s0);
+                    var_v1 = M2C_FIELD(arg0, s32 *, 4);
+                }
+            }
+        } while (var_s2 < var_v1);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00002D14);
 
@@ -308,7 +339,31 @@ INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00009694);
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00009708);
 
-INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00009750);
+u8 *func_00009750(u8 *arg0, u8 *arg1, s32 arg2) {
+    s32 var_a2;
+    u8 *var_a1;
+    u8 *var_v0;
+    u8 *var_v1;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_a2 = arg2;
+    var_v0 = NULL;
+    if (arg0 != NULL) {
+        var_v1 = arg0;
+        if (var_a2 > 0) {
+            do {
+                temp_a3 = *var_a1;
+                var_a2 -= 1;
+                var_a1 += 1;
+                *var_v1 = temp_a3;
+                var_v1 += 1;
+            } while (var_a2 > 0);
+        }
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00009784);
 
@@ -340,7 +395,26 @@ INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00009E40);
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00009F10);
 
-INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00009FE4);
+u8 *func_00009FE4(u8 *arg0, u8 *arg1) {
+    u8 *var_a1;
+    u8 *var_a2;
+    u8 *var_v0;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_v0 = NULL;
+    var_a2 = arg0;
+    if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
+        do {
+            temp_a3 = *var_a1;
+            var_a1 += 1;
+            *var_a2 = temp_a3;
+            var_a2 += 1;
+        } while (temp_a3 != 0);
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_0000A01C);
 
