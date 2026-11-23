@@ -55,7 +55,7 @@ class Module:
         self.funcs = self._func_ranges()
         m = re.search(r"compiler: ([0-9.]+)", self.src.read_text()) if self.src.exists() else None
         self.compiler = m[1] if m else "1.7.1"
-        m = re.search(r"cflags: (-O[0-3s])", self.src.read_text()) if self.src.exists() else None
+        m = re.search(r"cflags: (-O[0-3s](?: -f[\w-]+)*)", self.src.read_text()) if self.src.exists() else None
         self.setting = f"{self.compiler} {m[1] if m else '-O2'}"
         self.stats = {}
         self.scores = {}
@@ -101,9 +101,11 @@ class Module:
         self.decls_h.write_text("\n".join(lines))
 
 
-COMPILERS = ("1.7.1", "1.3.1")
-OPTS = ("-O2", "-O1", "-Os", "-O0")
-SETTINGS = [f"{c} {o}" for c in COMPILERS for o in OPTS]
+# 1.3.1 and 1.7.1 have never differed, so only the module's compiler is tried.
+# -frename-registers (also implied by -O3) reproduces the original register
+# choice in many functions (e.g. `lui $3; ori $2,$3,...` for constants).
+OPTS = ("-O2", "-O1", "-Os", "-O0", "-O3", "-O2 -frename-registers", "-Os -frename-registers",
+        "-O1 -frename-registers")
 
 
 def compile_words(c_text, compiler="1.7.1", opt="-O2"):
@@ -114,7 +116,7 @@ def compile_words(c_text, compiler="1.7.1", opt="-O2"):
         if pre.returncode:
             return None, pre.stderr
         c.write_text(pre.stdout)
-        r = subprocess.run([str(TOOLS / f"cc1-{compiler}"), opt, "-G0", "-quiet", str(c), "-o", str(s)],
+        r = subprocess.run([str(TOOLS / f"cc1-{compiler}"), *opt.split(), "-G0", "-quiet", str(c), "-o", str(s)],
                            capture_output=True, text=True)
         if r.returncode or "warning: implicit" in r.stderr:
             return None, r.stderr
@@ -195,8 +197,8 @@ def try_func(mod, name, header_ctx):
     target = mod.target_words(name)
     matching = set()
     best = None
-    for setting in SETTINGS:
-        comp, opt = setting.split()
+    for setting in [f"{mod.compiler} {o}" for o in OPTS]:
+        comp, opt = setting.split(" ", 1)
         words, err = compile_words(text, comp, opt)
         if words is None:
             continue
