@@ -3,7 +3,7 @@
 # the result only if the module still matches and has more C functions.
 # Usage: tools/switch_opt.sh VERSION:MODULE -Os
 cd "$(dirname "$0")/.."
-v=${1%%:*}; m=${1##*:}; opt=$2
+v=${1%%:*}; m=${1##*:}; opt="${*:2}"
 f=src/$m/$m.c
 git diff --quiet -- src/$m || { echo "$1: src has local changes, skipping"; exit 1; }
 count() { grep -cE '^[A-Za-z][A-Za-z0-9_ *]*\b[A-Za-z0-9_]+\([^;{]*\)\s*\{' "$f" 2>/dev/null || echo 0; }
