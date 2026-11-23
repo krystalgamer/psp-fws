@@ -2189,7 +2189,7 @@ void func_0001F46C(void) {
 }
 
 void func_0001F488(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x4D0) = func_0002F310(0, 0, 0);
+    M2C_FIELD(arg0, s32 *, 0x4D0) = crc32(0, 0, 0);
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0001F4BC);
@@ -2217,7 +2217,7 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0001FBC8);
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0001FBD4);
 
 void func_0001FC54(s32 arg0) {
-    func_0002FD00(arg0 + 0x434);
+    inflateReset(arg0 + 0x434);
 }
 
 s32 func_0001FC70(void) {
@@ -2421,7 +2421,7 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00020B50);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", scePaf_07216006);
 
-u8 func_00020CA0(void *arg0) {
+u8 png_get_rgb_to_gray_status(void *arg0) {
     u8 var_v0;
 
     var_v0 = 0;
@@ -2431,7 +2431,7 @@ u8 func_00020CA0(void *arg0) {
     return var_v0;
 }
 
-s32 func_00020CB4(void *arg0) {
+s32 png_get_user_chunk_ptr(void *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -2441,7 +2441,7 @@ s32 func_00020CB4(void *arg0) {
     return var_v0;
 }
 
-s32 func_00020CC8(void *arg0) {
+s32 png_get_compression_buffer_size(void *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -2451,7 +2451,7 @@ s32 func_00020CC8(void *arg0) {
     return var_v0;
 }
 
-s32 func_00020CDC(void *arg0) {
+s32 png_get_asm_flags(void *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -2461,13 +2461,13 @@ s32 func_00020CDC(void *arg0) {
     return var_v0;
 }
 
-s32 func_00020CF0(s32 arg0) {
+s32 png_get_asm_flagmask(s32 arg0) {
     return !(arg0 & 1) ? 0 : 0xFC;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00020D00);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_get_mmx_flagmask);
 
-u8 func_00020D20(void *arg0) {
+u8 png_get_mmx_bitdepth_threshold(void *arg0) {
     u8 var_v0;
 
     var_v0 = 0;
@@ -2477,7 +2477,7 @@ u8 func_00020D20(void *arg0) {
     return var_v0;
 }
 
-s32 func_00020D34(void *arg0) {
+s32 png_get_mmx_rowbytes_threshold(void *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -2487,7 +2487,7 @@ s32 func_00020D34(void *arg0) {
     return var_v0;
 }
 
-s32 func_00020D48(void *arg0) {
+s32 png_get_user_width_max(void *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -2497,7 +2497,7 @@ s32 func_00020D48(void *arg0) {
     return var_v0;
 }
 
-s32 func_00020D5C(void *arg0) {
+s32 png_get_user_height_max(void *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -2630,11 +2630,11 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00023B4C);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00023C7C);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00024ACC);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_read_transform_info);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00024E20);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_read_transformations);
 
-void func_000252E8(void *arg0, s32 arg1) {
+void png_do_unpack(void *arg0, s32 arg1) {
     s32 var_v1;
     s32 var_v1_2;
     s32 var_v1_3;
@@ -2718,17 +2718,17 @@ void func_000252E8(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00025488);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_unshift);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_000256F0);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_chop);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00025770);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_read_swap_alpha);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00025968);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_read_invert_alpha);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00025AAC);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_read_filler);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00025EC0);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_gray_to_rgb);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00026138);
 
@@ -2736,15 +2736,15 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_000269DC);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00027C94);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_000281D8);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_expand_palette);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002851C);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_expand);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00028A84);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_dither);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00028C48);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_build_gamma_table);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002952C);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_read_intrapixel);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002963C);
 
@@ -2927,7 +2927,7 @@ void func_0002DE84(s32 arg0, void *arg1, M2C_UNK arg2) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002DEE0);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_set_sRGB);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002DF0C);
 
@@ -2993,21 +2993,21 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002EB90);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002EBB8);
 
-void func_0002EC54(void *arg0) {
+void png_set_swap_alpha(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x20000);
 }
 
-void func_0002EC68(void *arg0) {
+void png_set_invert_alpha(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x80000);
 }
 
-void func_0002EC7C(void *arg0) {
+void png_set_invert_mono(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x20);
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002EC8C);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_invert);
 
-void func_0002ED48(void *arg0, void *arg1) {
+void png_do_swap(void *arg0, void *arg1) {
     u32 temp_lo;
     u32 var_a2;
     u8 temp_v0;
@@ -3029,43 +3029,43 @@ void func_0002ED48(void *arg0, void *arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002ED9C);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_packswap);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002EE20);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_strip_filler);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002F1C0);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_do_bgr);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002F2EC);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", png_set_user_transform_info);
 
-s32 func_0002F2FC(void *arg0) {
+s32 png_get_user_transform_ptr(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x420);
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002F304);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", get_crc_table);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002F310);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", crc32);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002F33C);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", crc32_little);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002F730);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", crc32_big);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002FB68);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", gf2_matrix_times);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002FB94);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", gf2_matrix_square);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002FBFC);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", crc32_combine);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002FD00);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", inflateReset);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002FD70);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", inflatePrime);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002FDC8);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", inflateInit2_);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002FEE0);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", inflateInit_);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002FF04);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", fixedtables);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0002FF30);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", updatewindow);
 
 INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini", D_000D3B64);
 
@@ -3081,7 +3081,7 @@ INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini", D_000D6664);
 
 INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini", D_000D66E4);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0003008C);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", inflate);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00031824);
 
@@ -3101,15 +3101,15 @@ INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini", D_000D6A34);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_000322E0);
 
-s32 func_000323BC(void) {
+s32 zlibCompileFlags(void) {
     return 0x55;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_000323C4);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", zError);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_000323E4);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", zcalloc);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00032404);
+INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", zcfree);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_00032420);
 
