@@ -26,7 +26,13 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00000
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000002B4);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00000314);
+void func_00000314(s32 arg0, void *arg1, s32 arg2) {
+    if (arg1 != NULL) {
+        M2C_FIELD(arg1, s32 *, 4) = arg0;
+        M2C_FIELD(arg1, s32 *, 8) = 0;
+        scePaf_A0ED77C4(0, func_0000035C, arg1, -1, -1, arg2);
+    }
+}
 
 s32 func_0000035C(void *arg0) {
     s32 temp_v0;
@@ -78,7 +84,13 @@ s32 func_000004BC(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00000624);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00000784);
+void func_00000784(s32 arg0, void *arg1, s32 arg2) {
+    if (arg1 != NULL) {
+        M2C_FIELD(arg1, s32 *, 4) = arg0;
+        M2C_FIELD(arg1, s32 *, 8) = 0;
+        scePaf_A0ED77C4(0, func_000007CC, arg1, -1, -1, arg2);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000007CC);
 
@@ -202,7 +214,22 @@ s32 func_00001C5C(void) {
     return D_000203F8;
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001C68);
+s32 func_00001C68(void *arg0) {
+    s32 var_a1;
+    void *temp_a0;
+
+    var_a1 = 0;
+    if (func_000022DC() != 0) {
+        temp_a0 = M2C_FIELD(D_000203F4, void **, 0x34);
+        if (temp_a0 != NULL) {
+            var_a1 = 1;
+            M2C_FIELD(arg0, s32 *, 0) = (s32) M2C_FIELD(temp_a0, s32 *, 0);
+            M2C_FIELD(arg0, s32 *, 4) = (s32) M2C_FIELD(temp_a0, s32 *, 4);
+            M2C_FIELD(arg0, s32 *, 8) = (s32) M2C_FIELD(temp_a0, s32 *, 8);
+        }
+    }
+    return var_a1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001CC8);
 
@@ -1260,7 +1287,17 @@ void func_00006878(void **arg0, void *arg1) {
     func_00006858(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00006898);
+void func_00006898(void *arg0) {
+    func_00005B54();
+    if (func_000043F0() == 0) {
+        func_000022FC();
+        func_000065FC(1);
+        D_00020698 = M2C_FIELD(arg0, s32 *, 0x1D0);
+        func_000193A8((s32) &D_00020698, (s32) &func_0000691C);
+    } else {
+        func_0001177C((s32) "msgnetconf_error_set_connecting", 0x80110405, 0, 0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000691C);
 
