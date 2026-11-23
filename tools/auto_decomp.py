@@ -273,6 +273,7 @@ def main():
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--only")
     ap.add_argument("--grep", help="only functions whose asm matches this regex")
+    ap.add_argument("--names", help="file with function names to try (one per line)")
     args = ap.parse_args()
 
     mod = Module(args.version, args.module)
@@ -285,6 +286,9 @@ def main():
         names = [n for n in names if n == args.only]
     if args.grep:
         names = [n for n in names if re.search(args.grep, mod.funcs[n][2].read_text(), re.M)]
+    if args.names:
+        wanted = set(Path(args.names).read_text().split())
+        names = [n for n in names if n in wanted]
     if args.limit:
         names = names[:args.limit]
     mod.write_decls()
@@ -311,7 +315,7 @@ def main():
     stats_path = ROOT / "tmp/auto_stats" / f"{args.version}_{args.module}.json"
     stats_path.parent.mkdir(exist_ok=True)
     stats = {"compiler": mod.setting, "tried": len(names), "matched": matched, "funcs": mod.stats, "scores": mod.scores}
-    if (args.grep or args.only) and stats_path.exists():
+    if (args.grep or args.only or args.names) and stats_path.exists():
         old = json.loads(stats_path.read_text())
         old["funcs"].update(mod.stats)
         old["scores"].update(mod.scores)
@@ -353,24 +357,35 @@ def verify_and_revert(mod, args, accepted_now=()):
     print(f"reverted {len(rest)} more functions (full build mismatch)")
 
 
-def _verify_functions(mod, args):
-    """Build the whole module; revert accepted C functions that don't match in place."""
+def _verify_functions(mod, args, max_rounds=40):
+    """Build the whole module and revert accepted C functions that differ.
+
+    A single culprit (e.g. one whose literals shift .rodata) makes every later
+    function differ, so only the earliest differing function is reverted per
+    rebuild; after max_rounds the remaining differing ones are reverted at once.
+    """
     accepted = sorted(set(mod.store["funcs"]) & set(mod.funcs))
-    while True:
+    built_path = ROOT / "tmp/build" / args.version / f"{args.module}.prx"
+    for rnd in range(max_rounds + 1):
         subprocess.run(["make", f"VERSION={args.version}", f"MODULE={args.module}"], cwd=ROOT, capture_output=True)
+        built = built_path.read_bytes() if built_path.exists() else b""
         src = mod.src.read_text()
+        if built == mod.base:
+            print("full build verified")
+            return
         bad = []
         for name in accepted:
             if f", {name});" in src:
                 continue
-            r = subprocess.run([sys.executable, "tools/diff.py", name, "--version", args.version,
-                                "--module", args.module, "--score"], cwd=ROOT, capture_output=True, text=True)
-            if not r.stdout.startswith("score 0 "):
-                bad.append(name)
+            rom, end, _ = mod.funcs[name]
+            if built[rom:end] != mod.base[rom:end]:
+                bad.append((rom, name))
         if not bad:
-            print("full build verified")
+            print("full build differs outside accepted functions")
             return
-        for name in bad:
+        bad.sort()
+        names = [n for _, n in bad] if rnd == max_rounds else [bad[0][1]]
+        for name in names:
             m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", src, re.M | re.S)
             folder = f"tmp/asm/{args.version}/{args.module}/nonmatchings/{args.module}"
             src = src.replace(m.group(0), f'INCLUDE_ASM("{folder}", {name});\n', 1)
