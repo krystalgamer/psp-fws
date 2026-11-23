@@ -1645,7 +1645,9 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000186B0);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00018788);
+s32 func_00018788(void) {
+    return D_00057F9C;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00018794);
 
@@ -3079,17 +3081,29 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00027F1C);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00027FD8);
+void func_00027FD8(s32 arg0) {
+    func_00029210((s32) &D_0005BD50, arg0);
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00027FFC);
+void func_00027FFC(void) {
+    func_00029304((s32) &D_0005BD50);
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0002801C);
+void func_0002801C(void) {
+    func_0002935C((s32) &D_0005BD50);
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0002803C);
+void func_0002803C(void) {
+    func_00029364((s32) &D_0005BD50);
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0002805C);
+void func_0002805C(s32 arg0) {
+    func_000293C0((s32) &D_0005BD50, arg0);
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00028080);
+void func_00028080(void) {
+    func_0002940C((s32) &D_0005BD50);
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000280A0);
 
@@ -3567,7 +3581,9 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000309C8);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00030A38);
+s32 func_00030A38(void) {
+    return D_0005C1AC;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00030A44);
 
@@ -3761,7 +3777,9 @@ s32 func_0003136C(s32 arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000313AC);
+void func_000313AC(void) {
+    func_000313D0(sceKernelGetThreadId());
+}
 
 s32 func_000313D0(s32 arg0) {
     s32 temp_v0;
@@ -4149,7 +4167,9 @@ void func_00033CE8(s32 arg0, void *arg1, s32 arg2) {
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00033D04);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00033E3C);
+void func_00033E3C(s32 arg0, void *arg1, u32 arg2, s32 arg3, void *arg4, s32 arg5) {
+    sceNetInetSendto(arg0, arg1, arg2, arg3, arg4, arg5);
+}
 
 void func_00033E58(s32 arg0, void *arg1, u32 arg2, s32 arg3) {
     sceNetInetSend(arg0, arg1, arg2, arg3);
@@ -4159,7 +4179,9 @@ void func_00033E74(s32 arg0, void *arg1, s32 arg2) {
     sceNetInetSendmsg(arg0, arg1, arg2);
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00033E90);
+void func_00033E90(s32 arg0, void *arg1, u32 arg2, s32 arg3, void *arg4, void *arg5) {
+    sceNetInetRecvfrom(arg0, arg1, arg2, arg3, arg4, arg5);
+}
 
 void func_00033EAC(s32 arg0, void *arg1, u32 arg2, s32 arg3) {
     sceNetInetRecv(arg0, arg1, arg2, arg3);
@@ -4221,7 +4243,9 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00034420);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00034490);
+s32 func_00034490(void) {
+    return D_0005C5B8;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003449C);
 
@@ -4349,7 +4373,10 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00036D6C);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00036D78);
+s32 func_00036D78(s32 arg0) {
+    D_0005C5DC = arg0;
+    return arg0 != 0;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00036D88);
 
@@ -4471,9 +4498,13 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00038730);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00038838);
+void func_00038838(s32 arg0, s32 arg1) {
+    func_00039B34(arg0 + 0x10, arg1);
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00038854);
+void func_00038854(s32 arg0) {
+    func_00039B40(arg0 + 0x10);
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00038870);
 
@@ -4720,7 +4751,32 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003BF14);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003C01C);
+void func_0003C01C(void *arg0) {
+    s32 temp_v0;
+
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s16 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    M2C_FIELD(arg0, s8 *, 0x20) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    M2C_FIELD(arg0, s16 *, 0x28) = 0;
+    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x30) = 0;
+    M2C_FIELD(arg0, s32 *, 0x34) = 0;
+    M2C_FIELD(arg0, s32 *, 0x38) = 0;
+    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x50) = 0;
+    M2C_FIELD(arg0, s32 *, 0x54) = 0;
+    temp_v0 = scePaf_B7E6052B(0x414);
+    func_0004A268(temp_v0);
+    M2C_FIELD(arg0, s32 *, 0x3C) = temp_v0;
+    D_0005C5FC += 1;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003C0B4);
 
@@ -4806,7 +4862,12 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003D844);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0003D8D4);
+void func_0003D8D4(void) {
+    void *temp_a1;
+
+    temp_a1 = *D_0005C60C;
+    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(D_0005C60C, temp_a1);
+}
 
 s32 func_0003D900(void) {
     return -1;
@@ -5785,13 +5846,23 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00049590);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0004961C);
+s32 func_0004961C(void) {
+    s32 temp_v0;
+
+    temp_v0 = D_0005C618;
+    D_0005C618 = 0;
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_0004962C);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00049638);
+void func_00049638(void) {
+    D_0005C61C = 1;
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00049648);
+void func_00049648(void) {
+    D_0005C61C = 0;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00049654);
 
@@ -5801,7 +5872,21 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000497CC);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_00049830);
+s32 func_00049830(s32 arg0, s32 arg1, s32 arg2, u32 arg3, s32 *arg4) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = -2;
+    if (arg3 >= func_00049908(arg1)) {
+        temp_v0 = func_0004DFF0(arg2, arg0, arg1);
+        var_v1 = -1;
+        if (temp_v0 >= 0) {
+            *arg4 = temp_v0;
+            var_v1 = 0;
+        }
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware", func_000498BC);
 
