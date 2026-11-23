@@ -372,50 +372,55 @@ def verify_and_revert(mod, args, accepted_now=()):
     print(f"reverted {len(rest)} more functions (full build mismatch)")
 
 
-def _verify_functions(mod, args, max_rounds=40):
-    """Build the whole module and revert accepted C functions that differ.
+def first_displaced(mod, args):
+    """Lowest address whose func_/D_ symbol moved in the built ELF, or None."""
+    elf = ELFFile(open(ROOT / "tmp/build" / args.version / f"{args.module}.elf", "rb"))
+    low = None
+    shndx = next(i for i, s in enumerate(elf.iter_sections()) if s.name == f".{args.module}")
+    for sym in elf.get_section_by_name(".symtab").iter_symbols():
+        m = re.fullmatch(r"(?:func|D)_([0-9A-F]{8})", sym.name)
+        if m and sym["st_shndx"] == shndx and int(m[1], 16) != sym["st_value"] and (low is None or int(m[1], 16) < low):
+            low = int(m[1], 16)
+    return low
 
-    A single culprit (e.g. one whose literals shift .rodata) makes every later
-    function differ, so only the earliest differing function is reverted per
-    rebuild; after max_rounds the remaining differing ones are reverted at once.
+
+def _verify_functions(mod, args, max_rounds=200):
+    """Build the whole module and revert accepted C functions that don't match.
+
+    If a C function compiles to a different size in the full build (e.g. a call
+    to a function GCC found side-effect free in the same file is dropped), every
+    symbol after it moves and everything referencing those symbols differs: revert
+    the accepted function just before the first moved symbol and rebuild. Without
+    moved symbols, revert the functions whose own bytes differ.
     """
     accepted = sorted(set(mod.store["funcs"]) & set(mod.funcs))
     built_path = ROOT / "tmp/build" / args.version / f"{args.module}.prx"
-    for rnd in range(max_rounds + 1):
+    folder = f"tmp/asm/{args.version}/{args.module}/nonmatchings/{args.module}"
+    for rnd in range(max_rounds):
         subprocess.run(["make", f"VERSION={args.version}", f"MODULE={args.module}"], cwd=ROOT, capture_output=True)
         built = built_path.read_bytes() if built_path.exists() else b""
         src = mod.src.read_text()
         if built == mod.base:
             print("full build verified")
             return
-        bad = []
-        for name in accepted:
-            if f", {name});" in src:
-                continue
-            rom, end, _ = mod.funcs[name]
-            if built[rom:end] != mod.base[rom:end]:
-                bad.append((rom, name))
-        if not bad:
+        live = [n for n in accepted if f", {n});" not in src]
+        moved = first_displaced(mod, args)
+        if moved is not None:
+            before = [(mod.funcs[n][0] - mod.text_off, n) for n in live if mod.funcs[n][0] - mod.text_off < moved]
+            names = [max(before)[1]] if before else []
+        else:
+            names = [n for n in live if built[mod.funcs[n][0]:mod.funcs[n][1]] != mod.base[mod.funcs[n][0]:mod.funcs[n][1]]]
+        if not names:
             print("full build differs outside accepted functions")
             return
-        bad.sort()
-        names = [n for _, n in bad] if rnd == max_rounds else [bad[0][1]]
-        if rnd == 0:
-            # Functions emitting their own rodata (strings go to mergeable
-            # .rodata.str sections, floats to .rodata.cst4, switch tables)
-            # shift the layout for everything after them: revert those first.
-            emitting = [n for n in accepted if f", {n});" not in src and re.search(
-                rf"^[^\n;]*\b{n}\([^;{{]*\)\s*{{\n(?:(?!^}}).)*(\"|\bswitch\b|\b\d+\.\d*f?\b)", src, re.M | re.S)]
-            if emitting:
-                names = emitting
         for name in names:
             m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", src, re.M | re.S)
-            folder = f"tmp/asm/{args.version}/{args.module}/nonmatchings/{args.module}"
             src = src.replace(m.group(0), f'INCLUDE_ASM("{folder}", {name});\n', 1)
             del mod.store["funcs"][name]
             print(f"reverted {name} (differs in full build)")
         mod.src.write_text(src)
         mod.write_decls()
+    print("verification gave up")
 
 
 if __name__ == "__main__":
