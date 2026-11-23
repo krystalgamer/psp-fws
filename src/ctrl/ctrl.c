@@ -54,13 +54,21 @@ INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_C245B57B);
 
 INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlGetSamplingCycle);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlPeekBufferPositive);
+s32 sceCtrlPeekBufferPositive(void *arg0, s32 arg1) {
+    return func_0000161C((s32) arg0, arg1, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlPeekBufferNegative);
+s32 sceCtrlPeekBufferNegative(void *arg0, s32 arg1) {
+    return func_0000161C((s32) arg0, arg1, 1);
+}
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlReadBufferPositive);
+s32 sceCtrlReadBufferPositive(void *arg0, s32 arg1) {
+    return func_0000161C((s32) arg0, arg1, 2);
+}
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlReadBufferNegative);
+s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1) {
+    return func_0000161C((s32) arg0, arg1, 3);
+}
 
 INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_A88E8D22);
 

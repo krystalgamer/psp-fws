@@ -22,6 +22,9 @@ from pathlib import Path
 from elftools.elf.elffile import ELFFile
 from elftools.elf.relocation import RelocationSection
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import protos  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 TOOLS = ROOT / "tmp/toolchains/bin"
 ABI = ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7",
@@ -162,7 +165,30 @@ def split_m2c(out, name):
     return [l for l in out[:m.start()].splitlines() if l.strip()], out[m.start():].rstrip() + "\n"
 
 
+def guess_callees(mod, name):
+    """Prototypes (SDK or asm-derived) for callees without a known one."""
+    out = {}
+    for c in sorted(set(re.findall(r"\b(?:jal|j)\s+(\w+)", mod.funcs[name][2].read_text())) - {name}):
+        if c not in mod.store["funcs"]:
+            p = protos.guess(c, mod.funcs[c][2] if c in mod.funcs else None)
+            if p:
+                out[c] = p
+    return out
+
+
 def try_func(mod, name, header_ctx):
+    """Try with the SDK prototype of the function itself first, if any."""
+    own = protos.sdk_protos().get(name) if name not in mod.store["funcs"] else None
+    if own:
+        res = _try_func(mod, name, header_ctx + own + "\n")
+        if res:
+            return res
+    return _try_func(mod, name, header_ctx)
+
+
+def _try_func(mod, name, header_ctx):
+    guessed = guess_callees(mod, name)
+    header_ctx += "\n".join(guessed.values()) + "\n"
     out = run_m2c(mod, name, header_ctx)
     if not out:
         return None
@@ -182,6 +208,9 @@ def try_func(mod, name, header_ctx):
             new_vars[vm[1]] = d if d.startswith("extern") else "extern " + d.split(" ", 1)[1]
         else:
             return None
+    for k, v in guessed.items():
+        if re.search(rf"\b{k}\b", body):
+            new_funcs[k] = v
     sig = body.split("{", 1)[0].strip() + ";"
     for k, v in list(new_funcs.items()) + [(name, sig)]:
         if k in mod.store["funcs"] and mod.store["funcs"][k] != v:
