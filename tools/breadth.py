@@ -42,10 +42,9 @@ def representatives():
         src = ROOT / "src" / name
         existing = None
         if src.exists():
-            for d in items:
-                cfg = ROOT / "config" / d["version"] / f"{name}.yaml"
-                if cfg.exists() and re.search(rf"^\s+- \[0x[0-9A-F]+, c, {name}\]", cfg.read_text(), re.M):
-                    existing = d
+            for cfg in (ROOT / "config").glob(f"*/{name}.yaml"):
+                if re.search(rf"^\s+- \[0x[0-9A-F]+, c, {name}\]", cfg.read_text(), re.M):
+                    existing = {"version": cfg.parent.name, "path": items[0]["path"], "versions": []}
         reps[name] = existing or max(items, key=lambda d: (len(d["versions"]), d["version"]))
     return reps
 
@@ -73,9 +72,15 @@ def cleanup(ver, name):
 def process(name, d, max_size):
     ver = d["version"]
     cfg = ROOT / "config" / ver / f"{name}.yaml"
+    if not cfg.exists():
+        return {"result": "error", "version": ver, "note": "no config"}
     src_dir = ROOT / "src" / name
     orig_cfg = cfg.read_text()
     had_src = src_dir.exists()
+    snapshot = ROOT / "tmp/breadth_snap" / name
+    shutil.rmtree(snapshot, ignore_errors=True)
+    if had_src:
+        shutil.copytree(src_dir, snapshot)
     try:
         run(["make", "extract", f"VERSION={ver}", f"MODULE={name}"])
         converted = to_c(cfg, name)
@@ -99,8 +104,9 @@ def process(name, d, max_size):
                 "m131": sum("1.3.1" in v for v in funcs.values())}
     except Exception as e:  # noqa: BLE001
         cfg.write_text(orig_cfg)
-        if not had_src:
-            shutil.rmtree(src_dir, ignore_errors=True)
+        shutil.rmtree(src_dir, ignore_errors=True)
+        if had_src:
+            shutil.copytree(snapshot, src_dir)
         return {"result": "error", "version": ver, "note": str(e)[:200]}
     finally:
         cleanup(ver, name)
@@ -123,7 +129,10 @@ def main():
 
     def work(nd):
         name, d = nd
-        res = process(name, d, args.max_size)
+        try:
+            res = process(name, d, args.max_size)
+        except Exception as e:  # noqa: BLE001
+            res = {"result": "error", "version": d["version"], "note": f"crash: {e}"[:200]}
         with lock:
             status[name] = res
             STATUS.write_text(json.dumps(status, indent=0))

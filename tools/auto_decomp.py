@@ -57,6 +57,11 @@ class Module:
         self.compiler = m[1] if m else "1.7.1"
         self.stats = {}
         self.scores = {}
+        # Functions already defined in the source fix their own prototypes.
+        if self.src.exists():
+            for m in re.finditer(r"^((?!static)[\w \*]+?\b(\w+)\([^;{]*\))\s*\{", self.src.read_text(), re.M):
+                if m[2] not in self.store["funcs"] and not m[2].startswith("__"):
+                    self.store["funcs"][m[2]] = m[1].strip() + ";"
 
     def _func_ranges(self):
         asm = (ROOT / "tmp/asm" / self.ver / self.mod / "nonmatchings" / self.mod)
@@ -174,7 +179,10 @@ def try_func(mod, name, header_ctx):
     sig = body.split("{", 1)[0].strip() + ";"
     for k, v in list(new_funcs.items()) + [(name, sig)]:
         if k in mod.store["funcs"] and mod.store["funcs"][k] != v:
-            return None
+            # a function may replace its own (stale) prototype only if no C
+            # code already calls it under the old one
+            if k != name or re.search(rf"^(?!INCLUDE_ASM).*\b{k}\(", mod.src.read_text(), re.M):
+                return None
     for k, v in new_vars.items():
         if k in mod.store["vars"] and mod.store["vars"][k] != v:
             return None
@@ -220,6 +228,7 @@ def main():
         names = names[:args.limit]
     mod.write_decls()
     matched = 0
+    accepted_now = []
     for i, name in enumerate(names):
         header = f'#include "common.h"\n#include "m2c_macros.h"\n' + "\n".join(mod.store["vars"].values()) + "\n" + "\n".join(mod.store["funcs"].values()) + "\n"
         try:
@@ -235,16 +244,50 @@ def main():
             mod.src.write_text(src)
             mod.write_decls()
             matched += 1
+            accepted_now.append(name)
         print(f"[{i+1}/{len(names)}] {name}: {'MATCH' if res else '-'}", flush=True)
     print(f"matched {matched}/{len(names)}")
     stats_path = ROOT / "tmp/auto_stats" / f"{args.version}_{args.module}.json"
     stats_path.parent.mkdir(exist_ok=True)
     stats_path.write_text(json.dumps({"compiler": mod.compiler, "tried": len(names), "matched": matched,
                                       "funcs": mod.stats, "scores": mod.scores}))
-    verify_and_revert(mod, args)
+    verify_and_revert(mod, args, accepted_now)
 
 
-def verify_and_revert(mod, args):
+def revert(mod, args, names):
+    src = mod.src.read_text()
+    folder = f"tmp/asm/{args.version}/{args.module}/nonmatchings/{args.module}"
+    for name in names:
+        m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", src, re.M | re.S)
+        if m:
+            src = src.replace(m.group(0), f'INCLUDE_ASM("{folder}", {name});\n', 1)
+        mod.store["funcs"].pop(name, None)
+    mod.src.write_text(src)
+    mod.write_decls()
+
+
+def full_build_ok(args):
+    r = subprocess.run(["make", f"VERSION={args.version}", f"MODULE={args.module}"], cwd=ROOT, capture_output=True, text=True)
+    return ": OK" in r.stdout + r.stderr
+
+
+def verify_and_revert(mod, args, accepted_now=()):
+    _verify_functions(mod, args)
+    if full_build_ok(args):
+        return
+    src = mod.src.read_text()
+    strings = [n for n in accepted_now if re.search(rf"\b{n}\([^;{{]*\)\s*{{\n(?:(?!^}}).)*\"", src, re.M | re.S)]
+    if strings:
+        revert(mod, args, strings)
+        print(f"reverted {len(strings)} functions with string literals (data layout)")
+        if full_build_ok(args):
+            return
+    rest = [n for n in accepted_now if n not in strings]
+    revert(mod, args, rest)
+    print(f"reverted {len(rest)} more functions (full build mismatch)")
+
+
+def _verify_functions(mod, args):
     """Build the whole module; revert accepted C functions that don't match in place."""
     accepted = sorted(set(mod.store["funcs"]) & set(mod.funcs))
     while True:
