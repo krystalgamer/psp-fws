@@ -55,6 +55,8 @@ class Module:
         self.funcs = self._func_ranges()
         m = re.search(r"compiler: ([0-9.]+)", self.src.read_text()) if self.src.exists() else None
         self.compiler = m[1] if m else "1.7.1"
+        m = re.search(r"cflags: (-O[0-3s])", self.src.read_text()) if self.src.exists() else None
+        self.setting = f"{self.compiler} {m[1] if m else '-O2'}"
         self.stats = {}
         self.scores = {}
         # Functions already defined in the source fix their own prototypes.
@@ -100,9 +102,11 @@ class Module:
 
 
 COMPILERS = ("1.7.1", "1.3.1")
+OPTS = ("-O2", "-O1", "-Os", "-O0")
+SETTINGS = [f"{c} {o}" for c in COMPILERS for o in OPTS]
 
 
-def compile_words(c_text, compiler="1.7.1"):
+def compile_words(c_text, compiler="1.7.1", opt="-O2"):
     with tempfile.TemporaryDirectory() as td:
         c, s, o = Path(td) / "f.c", Path(td) / "f.s", Path(td) / "f.o"
         pre = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", f"-I{ROOT/'include'}", "-"],
@@ -110,7 +114,7 @@ def compile_words(c_text, compiler="1.7.1"):
         if pre.returncode:
             return None, pre.stderr
         c.write_text(pre.stdout)
-        r = subprocess.run([str(TOOLS / f"cc1-{compiler}"), "-O2", "-G0", "-quiet", str(c), "-o", str(s)],
+        r = subprocess.run([str(TOOLS / f"cc1-{compiler}"), opt, "-G0", "-quiet", str(c), "-o", str(s)],
                            capture_output=True, text=True)
         if r.returncode or "warning: implicit" in r.stderr:
             return None, r.stderr
@@ -191,18 +195,19 @@ def try_func(mod, name, header_ctx):
     target = mod.target_words(name)
     matching = set()
     best = None
-    for comp in COMPILERS:
-        words, err = compile_words(text, comp)
+    for setting in SETTINGS:
+        comp, opt = setting.split()
+        words, err = compile_words(text, comp, opt)
         if words is None:
             continue
         if words == target:
-            matching.add(comp)
+            matching.add(setting)
         sm = difflib.SequenceMatcher(None, target, words, autojunk=False)
         score = max(len(target), len(words)) - sum(b.size for b in sm.get_matching_blocks())
         best = score if best is None else min(best, score)
     mod.stats[name] = sorted(matching)
     mod.scores[name] = (best, len(target))
-    if mod.compiler not in matching:
+    if mod.setting not in matching:
         return None
     return new_funcs, new_vars, sig, body
 
@@ -249,7 +254,7 @@ def main():
     print(f"matched {matched}/{len(names)}")
     stats_path = ROOT / "tmp/auto_stats" / f"{args.version}_{args.module}.json"
     stats_path.parent.mkdir(exist_ok=True)
-    stats_path.write_text(json.dumps({"compiler": mod.compiler, "tried": len(names), "matched": matched,
+    stats_path.write_text(json.dumps({"compiler": mod.setting, "tried": len(names), "matched": matched,
                                       "funcs": mod.stats, "scores": mod.scores}))
     verify_and_revert(mod, args, accepted_now)
 

@@ -20,7 +20,7 @@ CPP     := cpp
 
 ASFLAGS := -EL -march=allegrex -G0 --no-pad-sections -Iinclude
 CPPFLAGS := -P -undef -nostdinc -Iinclude -Isrc -DVERSION=$(VERSION) -D__GNUC__=3 -D_LANGUAGE_C -D__psp__ -D__mips__ $(EXTRA_CPPFLAGS)
-CFLAGS  := -O2 -G0 -quiet
+CFLAGS  := -G0 -quiet
 
 S_FILES   = $(shell find tmp/asm/$(VERSION)/$(MODULE) -name '*.s' -not -path '*/nonmatchings/*' 2>/dev/null)
 C_FILES   = $(shell grep -oE 'src/[^ ()]+\.c' $(LD_SCRIPT) 2>/dev/null | sort -u)
@@ -60,7 +60,7 @@ $(BUILD)/%.bin.o: %.bin
 
 $(BUILD)/%.c.o: %.c
 	@mkdir -p $(@D)
-	$(CPP) $(CPPFLAGS) $< | $(TOOLS)/cc1-$$(grep -oP "compiler: \K[0-9.]+" $< || echo 1.7.1) $(CFLAGS) -o $(BUILD)/$*.c.s
+	$(CPP) $(CPPFLAGS) $< | $(TOOLS)/cc1-$$(grep -oP "compiler: \K[0-9.]+" $< || echo 1.7.1) $$(grep -oP "cflags: \K-O[0-3s]" $< || echo -O2) $(CFLAGS) -o $(BUILD)/$*.c.s
 	$(PSP_AS) -EL -G0 -Iinclude -o $@ $(BUILD)/$*.c.s
 	$(PYTHON) tools/fix_old_gas.py --text-align $$(grep -oP "text-align: \K[0-9]+" $< || echo 4) $@
 

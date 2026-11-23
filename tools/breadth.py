@@ -100,8 +100,8 @@ def process(name, d, max_size):
         funcs = stats.get("funcs", {})
         return {"result": "ok", "version": ver, "converted": converted,
                 "matched": int(m[1]) if m else 0, "tried": int(m[2]) if m else 0,
-                "m171": sum("1.7.1" in v for v in funcs.values()),
-                "m131": sum("1.3.1" in v for v in funcs.values())}
+                "by_setting": dict(collections.Counter(x for v in funcs.values() for x in v)),
+                "any": sum(1 for v in funcs.values() if v)}
     except Exception as e:  # noqa: BLE001
         cfg.write_text(orig_cfg)
         shutil.rmtree(src_dir, ignore_errors=True)
