@@ -5,5 +5,6 @@
 #include "m2c_macros.h"
 
 
+s32 sceSemawm_51E51869(void);
 
 #endif

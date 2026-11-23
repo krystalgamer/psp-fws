@@ -1,4 +1,6 @@
 {
- "funcs": {},
+ "funcs": {
+  "sceSemawm_51E51869": "s32 sceSemawm_51E51869(void);"
+ },
  "vars": {}
 }

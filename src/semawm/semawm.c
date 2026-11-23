@@ -1,4 +1,6 @@
+/* cflags: -O0 */
 #include "common.h"
+#include "semawm_decls.h"
 
 INCLUDE_ASM("tmp/asm/352/semawm/nonmatchings/semawm", func_00000000);
 
@@ -6,7 +8,13 @@ INCLUDE_ASM("tmp/asm/352/semawm/nonmatchings/semawm", func_000000D8);
 
 INCLUDE_ASM("tmp/asm/352/semawm/nonmatchings/semawm", sceSemawm_77C42467);
 
-INCLUDE_ASM("tmp/asm/352/semawm/nonmatchings/semawm", sceSemawm_51E51869);
+s32 sceSemawm_51E51869(void) {
+    s32 sp0;
+
+    sp0 = -1;
+    sp0 = 0;
+    return sp0;
+}
 
 INCLUDE_RODATA("tmp/asm/352/semawm/nonmatchings/semawm", D_00005718);
 

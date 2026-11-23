@@ -1,4 +1,6 @@
+/* cflags: -O0 */
 #include "common.h"
+#include "libdnas_decls.h"
 
 INCLUDE_ASM("tmp/asm/340/libdnas/nonmatchings/libdnas", sceDNAS_lib_0D560144);
 
@@ -10,7 +12,35 @@ INCLUDE_ASM("tmp/asm/340/libdnas/nonmatchings/libdnas", sceDNAS_lib_9FF48DD3);
 
 INCLUDE_ASM("tmp/asm/340/libdnas/nonmatchings/libdnas", sceDNAS_lib_45C1AAF5);
 
-INCLUDE_ASM("tmp/asm/340/libdnas/nonmatchings/libdnas", sceDNAS_lib_BE0998D7);
+void sceDNAS_lib_BE0998D7(void) {
+    if (D_000037B0 <= 0) {
+        return;
+    }
+    sceKernelSetEventFlag(D_000037B8, 4U);
+    if (D_000037D0 >= 0) {
+        sceNetResolverStop(D_000037D0);
+    }
+    if (D_000037CC >= 0) {
+        sceNetInetSocketAbort(D_000037CC);
+    }
+    if (D_000037B4 >= 0) {
+        sceKernelWaitThreadEnd(D_000037B4, NULL);
+        sceNetFreeThreadinfo(D_000037B4);
+        sceKernelTerminateDeleteThread(D_000037B4);
+        D_000037B4 = -1;
+    }
+    if (D_000037BC >= 0) {
+        sceKernelDeleteEventFlag(D_000037BC);
+        D_000037BC = -1;
+    }
+    if (D_000037B8 >= 0) {
+        sceKernelDeleteEventFlag(D_000037B8);
+        D_000037B8 = -1;
+    }
+    sceDNASCore_lib_D5E80301();
+    func_00002888((s32) &D_000037B4);
+    D_000037B0 = 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/libdnas/nonmatchings/libdnas", sceDNAS_lib_A646E771);
 

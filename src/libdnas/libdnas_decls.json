@@ -1,4 +1,22 @@
 {
- "funcs": {},
- "vars": {}
+ "funcs": {
+  "func_00002888": "s32 func_00002888(s32);",
+  "sceDNASCore_lib_D5E80301": "M2C_UNK sceDNASCore_lib_D5E80301();",
+  "sceDNAS_lib_BE0998D7": "void sceDNAS_lib_BE0998D7(void);",
+  "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
+  "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
+  "sceKernelTerminateDeleteThread": "s32 sceKernelTerminateDeleteThread(s32);",
+  "sceKernelWaitThreadEnd": "s32 sceKernelWaitThreadEnd(s32, void *);",
+  "sceNetFreeThreadinfo": "s32 sceNetFreeThreadinfo(s32);",
+  "sceNetInetSocketAbort": "s32 sceNetInetSocketAbort(s32);",
+  "sceNetResolverStop": "M2C_UNK sceNetResolverStop(s32);"
+ },
+ "vars": {
+  "D_000037B0": "extern s32 D_000037B0;",
+  "D_000037B4": "extern s32 D_000037B4;",
+  "D_000037B8": "extern s32 D_000037B8;",
+  "D_000037BC": "extern s32 D_000037BC;",
+  "D_000037CC": "extern s32 D_000037CC;",
+  "D_000037D0": "extern s32 D_000037D0;"
+ }
 }
