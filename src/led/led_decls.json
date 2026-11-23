@@ -1,4 +1,8 @@
 {
- "funcs": {},
+ "funcs": {
+  "func_00000800": "s32 func_00000800(s32 arg0);",
+  "sceLed_driver_A13B3D38": "s32 sceLed_driver_A13B3D38(void);",
+  "sceLed_driver_DE91D3A4": "s32 sceLed_driver_DE91D3A4(void);"
+ },
  "vars": {}
 }

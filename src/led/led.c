@@ -1,4 +1,6 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "led_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/led/nonmatchings/led", func_00000000);
 
@@ -20,4 +22,14 @@ INCLUDE_ASM("tmp/asm/282/led/nonmatchings/led", sceLed_driver_DE91D3A4);
 
 INCLUDE_ASM("tmp/asm/282/led/nonmatchings/led", sceLed_driver_A13B3D38);
 
-INCLUDE_ASM("tmp/asm/282/led/nonmatchings/led", func_00000800);
+s32 func_00000800(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 0x100000:
+        sceLed_driver_A13B3D38();
+        break;
+    case 0x400A:
+        sceLed_driver_DE91D3A4();
+        break;
+    }
+    return 0;
+}
