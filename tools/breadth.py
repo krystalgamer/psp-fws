@@ -117,13 +117,16 @@ def main():
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--max-size", type=lambda x: int(x, 0), default=0x400)
     ap.add_argument("--only")
+    ap.add_argument("--names", help="file with module names to process (one per line)")
     ap.add_argument("--redo", action="store_true")
     args = ap.parse_args()
 
     status = json.loads(STATUS.read_text()) if STATUS.exists() else {}
     reps = representatives()
+    names = set(Path(args.names).read_text().split()) if args.names else set()
     todo = [(n, d) for n, d in sorted(reps.items())
-            if (not args.only or n == args.only) and (args.redo or n not in status)]
+            if (not args.only or n == args.only) and (not names or n in names)
+            and (args.redo or n not in status)]
     # small modules first so results arrive early
     print(f"{len(todo)} modules", flush=True)
 
