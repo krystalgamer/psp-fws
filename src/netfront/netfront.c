@@ -15968,15 +15968,15 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000D86CC);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000D87CC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000D88F8);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", inflateReset);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000D8950);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", inflateInit2_);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", sceHVNetfront_Module_18CB51AB);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000D8A88);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", fixedtables);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000D8AB4);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", updatewindow);
 
 INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront", D_00129DF4);
 
@@ -16008,13 +16008,13 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", sceHVNetfront_Module_2
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", sceHVNetfront_Module_461C7724);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DA1C4);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", inflateSetDictionary);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DA2C8);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", syncsearch);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DA344);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", inflateSync);
 
-s32 func_000DA490(void *arg0) {
+s32 inflateSyncPoint(void *arg0) {
     s32 var_a1;
     s32 var_v0;
     void *temp_a0;
@@ -16033,7 +16033,7 @@ s32 func_000DA490(void *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DA4C8);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", inflateCopy);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DA690);
 
@@ -16081,15 +16081,15 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DAC74);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DAC94);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DACB0);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", adler32);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DAE34);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", get_crc_table);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DAE40);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", crc32);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DAE6C);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", crc32_little);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000DB268);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", crc32_big);
 
 INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront", D_0012B458);
 
@@ -17450,7 +17450,7 @@ void func_000F16C8(void) {
 }
 
 void func_000F16E4(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x4C4) = func_000DAE40(0, 0, 0);
+    M2C_FIELD(arg0, s32 *, 0x4C4) = crc32(0, 0, 0);
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F1718);
@@ -17486,7 +17486,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F1E18);
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F1E24);
 
 void func_000F1EAC(s32 arg0) {
-    func_000D88F8(arg0 + 0x428);
+    inflateReset(arg0 + 0x428);
 }
 
 s32 func_000F1EC8(void) {
@@ -17721,9 +17721,9 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F2A78);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F2ADC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F2B84);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_get_pHYs);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F2BEC);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_get_PLTE);
 
 s32 func_000F2C38(s32 arg0, void *arg1, void **arg2) {
     s32 var_a0;
@@ -17800,9 +17800,9 @@ s32 func_000F2DC0(s32 arg0) {
     return !(arg0 & 1) ? 0 : 0xFC;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F2DD0);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_get_mmx_flagmask);
 
-u8 func_000F2DF0(void *arg0) {
+u8 png_get_mmx_bitdepth_threshold(void *arg0) {
     u8 var_v0;
 
     var_v0 = 0;
@@ -17812,7 +17812,7 @@ u8 func_000F2DF0(void *arg0) {
     return var_v0;
 }
 
-s32 func_000F2E04(void *arg0) {
+s32 png_get_mmx_rowbytes_threshold(void *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -17822,7 +17822,7 @@ s32 func_000F2E04(void *arg0) {
     return var_v0;
 }
 
-s32 func_000F2E18(void *arg0) {
+s32 png_get_user_width_max(void *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -17832,7 +17832,7 @@ s32 func_000F2E18(void *arg0) {
     return var_v0;
 }
 
-s32 func_000F2E2C(void *arg0) {
+s32 png_get_user_height_max(void *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -17965,23 +17965,23 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F5DE0);
 
 INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront", D_0012E3C4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F5F30);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_read_row);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F63FC);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_read_rows);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F64F4);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_read_image);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F658C);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_read_end);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F6A44);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_destroy_read_struct);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F6B50);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_read_destroy);
 
-void func_000F6E50(void *arg0, s32 arg1) {
+void png_set_read_status_fn(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x540) = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F6E58);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_read_png);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F70A0);
 
@@ -18037,47 +18037,47 @@ void func_000F7CD4(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F7CE4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F7D30);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_set_rgb_to_gray_fixed);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F7E58);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_set_read_user_transform_fn);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F7E70);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_init_read_transformations);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F8C64);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_read_transform_info);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F8EEC);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_read_transformations);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F9368);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_unpack);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F9500);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_unshift);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F975C);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_chop);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F97D0);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_read_swap_alpha);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F99CC);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_read_invert_alpha);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F9B14);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_read_filler);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000F9F34);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_gray_to_rgb);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000FA1A4);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_rgb_to_gray);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000FA9C4);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_build_grayscale_palette);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000FAA4C);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_background);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000FBD10);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_gamma);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000FC268);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_expand_palette);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000FC598);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_expand);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000FCB08);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_dither);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000FCCBC);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_build_gamma_table);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000FD550);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_read_intrapixel);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000FD664);
 
@@ -18238,13 +18238,13 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_0010195C);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00101990);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00101B70);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_set_pHYs);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00101BA4);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_set_PLTE);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00101C64);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_set_sBIT);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00101CA4);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_set_sRGB);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00101CD0);
 
@@ -18296,32 +18296,32 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_001027E8);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_001027F4);
 
-void func_00102800(void *arg0) {
+void png_set_bgr(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x424) = (s32) (M2C_FIELD(arg0, s32 *, 0x424) | 1);
 }
 
-void func_00102810(void *arg0) {
+void png_set_swap(void *arg0) {
     if (M2C_FIELD(arg0, u8 *, 0x4DB) == 0x10) {
         M2C_FIELD(arg0, s32 *, 0x424) = (s32) (M2C_FIELD(arg0, s32 *, 0x424) | 0x10);
     }
 }
 
-void func_00102834(void *arg0) {
+void png_set_packing(void *arg0) {
     if ((u8) M2C_FIELD(arg0, u8 *, 0x4DB) < 8U) {
         M2C_FIELD(arg0, s8 *, 0x4DC) = 8;
         M2C_FIELD(arg0, s32 *, 0x424) = (s32) (M2C_FIELD(arg0, s32 *, 0x424) | 4);
     }
 }
 
-void func_0010285C(void *arg0) {
+void png_set_packswap(void *arg0) {
     if ((u8) M2C_FIELD(arg0, u8 *, 0x4DB) < 8U) {
         M2C_FIELD(arg0, s32 *, 0x424) = (s32) (M2C_FIELD(arg0, s32 *, 0x424) | 0x10000);
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00102880);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_set_shift);
 
-s32 func_001028A8(void *arg0) {
+s32 png_set_interlace_handling(void *arg0) {
     s32 var_v1;
 
     var_v1 = 1;
@@ -18332,23 +18332,23 @@ s32 func_001028A8(void *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_001028CC);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_set_filler);
 
-void func_00102938(void *arg0) {
+void png_set_swap_alpha(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x424) = (s32) (M2C_FIELD(arg0, s32 *, 0x424) | 0x20000);
 }
 
-void func_0010294C(void *arg0) {
+void png_set_invert_alpha(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x424) = (s32) (M2C_FIELD(arg0, s32 *, 0x424) | 0x80000);
 }
 
-void func_00102960(void *arg0) {
+void png_set_invert_mono(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x424) = (s32) (M2C_FIELD(arg0, s32 *, 0x424) | 0x20);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00102970);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_invert);
 
-void func_00102A2C(void *arg0, void *arg1) {
+void png_do_swap(void *arg0, void *arg1) {
     u32 temp_lo;
     u32 var_a2;
     u8 temp_v0;
@@ -18370,11 +18370,11 @@ void func_00102A2C(void *arg0, void *arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00102A7C);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_packswap);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00102AF8);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_strip_filler);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00102E3C);
+INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", png_do_bgr);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00102F68);
 
