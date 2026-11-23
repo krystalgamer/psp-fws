@@ -1,4 +1,4 @@
-/* cflags: -Os */
+/* cflags: -Os -frename-registers */
 #include "common.h"
 #include "stdio_decls.h"
 
@@ -16,30 +16,42 @@ INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_D2B2A2A7);
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_11A5127A);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", putchar);
+void putchar(s32 arg0) {
+    StdioForKernel_4F78930A(arg0, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_36B23B8B);
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", puts);
 
-void getchar(void) {
-    StdioForKernel_D2B2A2A7(0);
+INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", getchar);
+
+void gets(s32 arg0) {
+    StdioForKernel_11A5127A(arg0, 0);
 }
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", gets);
+s32 StdioForUser_3054D478(void) {
+    return 0x80020001;
+}
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForUser_3054D478);
-
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForUser_0CBB0571);
+s32 StdioForUser_0CBB0571(void) {
+    return 0x80020001;
+}
 
 void StdioForUser_A46785C9(void) {
 }
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForUser_A3B931DB);
+s32 StdioForUser_A3B931DB(void) {
+    return 0x80020001;
+}
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForUser_9D061C19);
+s32 StdioForUser_9D061C19(void) {
+    return 0x80020001;
+}
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForUser_924ABA61);
+s32 StdioForUser_924ABA61(void) {
+    return 0x80020001;
+}
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000768);
 
@@ -61,15 +73,21 @@ s32 func_00000A20(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000A28);
+s32 func_00000A28(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 4) < 3) ? 0 : 0x800203E8;
+}
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000A40);
+s32 func_00000A40(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 4) < 3) ? 0 : 0x800203E8;
+}
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000A58);
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000A68);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000AF0);
+s32 func_00000AF0(void) {
+    return 0x800203E9;
+}
 
 INCLUDE_RODATA("tmp/asm/282/stdio/nonmatchings/stdio", D_0000145C);
 
@@ -93,9 +111,7 @@ void syslib_D3744BE0(void) {
     func_00000C78();
 }
 
-s32 sceKernelStdin(void) {
-    return D_00001560;
-}
+INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", sceKernelStdin);
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", sceKernelStdout);
 

@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sysclib_decls.h"
 
@@ -37,9 +38,13 @@ INCLUDE_ASM("tmp/asm/201/sysclib/nonmatchings/sysclib", strtok);
 
 INCLUDE_ASM("tmp/asm/201/sysclib/nonmatchings/sysclib", SysclibForKernel_1D83F344);
 
-INCLUDE_ASM("tmp/asm/201/sysclib/nonmatchings/sysclib", bcmp);
+void bcmp(s32 arg0, s32 arg1, s32 arg2) {
+    memcmp(arg0, arg1, arg2);
+}
 
-INCLUDE_ASM("tmp/asm/201/sysclib/nonmatchings/sysclib", bcopy);
+void bcopy(s32 arg0, s32 arg1) {
+    memmove(arg1, arg0);
+}
 
 INCLUDE_ASM("tmp/asm/201/sysclib/nonmatchings/sysclib", bzero);
 
@@ -47,7 +52,26 @@ INCLUDE_ASM("tmp/asm/201/sysclib/nonmatchings/sysclib", strchr);
 
 INCLUDE_ASM("tmp/asm/201/sysclib/nonmatchings/sysclib", strcmp);
 
-INCLUDE_ASM("tmp/asm/201/sysclib/nonmatchings/sysclib", strcpy);
+u8 *strcpy(u8 *arg0, u8 *arg1) {
+    u8 *var_a1;
+    u8 *var_a2;
+    u8 *var_v0;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_v0 = NULL;
+    var_a2 = arg0;
+    if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
+        do {
+            temp_a3 = *var_a1;
+            var_a1 += 1;
+            *var_a2 = temp_a3;
+            var_a2 += 1;
+        } while (temp_a3 != 0);
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysclib/nonmatchings/sysclib", strncpy);
 

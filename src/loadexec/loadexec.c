@@ -58,9 +58,19 @@ s32 LoadExecForKernel_7B7C47EF(s32 arg0, s32 arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/201/loadexec/nonmatchings/loadexec", LoadExecForKernel_015DA036);
+void LoadExecForKernel_015DA036(s32 arg0, s32 arg1, s32 arg2) {
+    func_00002190(0x130, arg0, arg1, arg2, 0x10000);
+}
 
-INCLUDE_ASM("tmp/asm/201/loadexec/nonmatchings/loadexec", LoadExecForKernel_4F41E75E);
+s32 LoadExecForKernel_4F41E75E(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v1;
+
+    var_v1 = 0x80020002;
+    if (KDebugForKernel_428A8DA3() != 0) {
+        var_v1 = func_00002190(0x131, arg0, arg1, arg2, 0x10000);
+    }
+    return var_v1;
+}
 
 void LoadExecForKernel_31DF42BF(s32 arg0, s32 arg1) {
     func_00001FA8(0x140, arg0, arg1, 0x10000);

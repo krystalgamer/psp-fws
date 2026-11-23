@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "pwm_decls.h"
 
@@ -18,7 +19,10 @@ s32 module_start(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pwm/nonmatchings/pwm", module_reboot_before);
+s32 module_reboot_before(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_00000550);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pwm/nonmatchings/pwm", scePwm_driver_B3169427);
 

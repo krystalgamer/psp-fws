@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sysmem_decls.h"
 
@@ -13,15 +14,7 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00000724);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000075C);
 
-s32 SysMemForKernel_C9805775(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
-
-    temp_s1 = func_0000C908();
-    temp_s0 = SysMemForKernel_8F20C4C0(arg0);
-    func_0000C934(temp_s1);
-    return temp_s0;
-}
+INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_C9805775);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_EB7A74DB);
 
@@ -57,21 +50,57 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00000F98);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000010FC);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000011F4);
+s32 func_000011F4(void) {
+    return 0x80020002;
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00001200);
+s32 func_00001200(void) {
+    return 0x80020002;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_55A40B2C);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000012BC);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00001318);
+s32 func_00001318(void *arg0) {
+    u32 temp_a3;
+    u32 var_a1;
+    void *var_a0;
+
+    var_a0 = M2C_FIELD(arg0, s32 *, 0x10) + 4;
+    var_a1 = 0;
+    if (var_a0 != NULL) {
+        do {
+            if (!(M2C_FIELD(var_a0, s32 *, 4) & 1)) {
+                temp_a3 = (u32) M2C_FIELD(var_a0, u32 *, 8) >> 2;
+                var_a1 = (var_a1 < temp_a3) ? temp_a3 : var_a1;
+            }
+            var_a0 = M2C_FIELD(var_a0, void **, 0);
+        } while (var_a0 != NULL);
+    }
+    return var_a1 << 8;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_E6581468);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceKernelMaxFreeMemSize);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00001478);
+s32 func_00001478(void *arg0) {
+    s32 var_a0;
+    void *var_v1;
+
+    var_v1 = M2C_FIELD(arg0, s32 *, 0x10) + 4;
+    var_a0 = 0;
+    if (var_v1 != NULL) {
+        do {
+            if (!(M2C_FIELD(var_v1, s32 *, 4) & 1)) {
+                var_a0 += (u32) M2C_FIELD(var_v1, u32 *, 8) >> 2;
+            }
+            var_v1 = M2C_FIELD(var_v1, void **, 0);
+        } while (var_v1 != NULL);
+    }
+    return var_a0 << 8;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_9697CD32);
 
@@ -165,7 +194,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000049E0);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00004A38);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00004A60);
+s32 func_00004A60(void *arg0) {
+    return ((((u32) (M2C_FIELD(arg0, s32 *, 4) - 0x10) >> 3) - M2C_FIELD(arg0, s32 *, 8)) * 8) - 8;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceKernelMemset);
 
@@ -254,13 +285,19 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_E9E4D851);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00005C64);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_7B3E7441);
+void SysMemForKernel_7B3E7441(void) {
+    *(s32 *)0xBC100040 = (*(s32 *)0xBC100040 & ~3) | 2;
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_E0058030);
+void SysMemForKernel_E0058030(void) {
+    *(s32 *)0xBC100040 = (*(s32 *)0xBC100040 & ~3) | 1;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_719792F1);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_101C3E59);
+void SysMemForKernel_101C3E59(s32 arg0) {
+    *(s32 *)0xBC100040 = (*(s32 *)0xBC100040 & ~3) | (arg0 & 3);
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00005D94);
 
@@ -328,7 +365,20 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_CF4DE78C);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_41FFC7F9);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_82D3CEE3);
+s32 SysMemForKernel_82D3CEE3(void *arg0, s32 arg1) {
+    s32 var_a0;
+    s32 var_a2;
+
+    var_a0 = M2C_FIELD(arg0, s32 *, 8);
+    var_a2 = var_a0 ^ arg1;
+    if ((var_a0 != 0) & (var_a0 != arg1)) {
+        do {
+            var_a0 = M2C_FIELD(var_a0, s32 *, 0x1C);
+            var_a2 = var_a0 ^ arg1;
+        } while ((var_a0 != 0) & (var_a0 != arg1));
+    }
+    return var_a2 == 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_FC207849);
 
@@ -342,7 +392,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000075F4);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000764C);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000769C);
+s32 func_0000769C(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0xC);
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000076A8);
 
@@ -418,7 +470,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_2FF4E9F9);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_BD5941B4);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_80F25772);
+s32 SysMemForKernel_80F25772(s32 arg0, s32 arg1, s32 arg2) {
+    return SysMemForKernel_BD5941B4(arg0, arg1, 2, arg2) == 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000095C0);
 
@@ -506,7 +560,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_CDA3A2F7);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_960B888C);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemUserForUser_3FC9AE6A);
+s32 SysMemUserForUser_3FC9AE6A(void) {
+    return 0x02000010;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_452E3696);
 

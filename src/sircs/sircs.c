@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sircs_decls.h"
 
@@ -93,7 +94,11 @@ INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001AB0);
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001AD8);
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001B24);
+s32 func_00001B24(void) {
+    func_00001D5C();
+    sceSysEventForKernel_D7D3FDCD(&D_000026E0);
+    return 0;
+}
 
 void func_00001B50(void) {
     func_00001C34();

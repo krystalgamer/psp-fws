@@ -5,26 +5,63 @@
 #include "m2c_macros.h"
 
 
-M2C_UNK func_000038C4(M2C_UNK, s32);
+s32 func_00001444(s32, s32);
+s32 func_0000193C(s32, s32, s32);
+s32 func_00001CA0(s32, s32, s32);
+s32 func_000038C4(s32, s32);
+s32 func_00003B1C(void);
 s32 module_start(void);
 M2C_UNK sceKernelDisableSubIntr(M2C_UNK, M2C_UNK);
+void sceSyscon_driver_00E7B6C2(s32 arg0);
+void sceSyscon_driver_04EEFD03(s32 arg0, s32 arg1);
+void sceSyscon_driver_07A0C260(s32 arg0, s32 arg1);
 s32 sceSyscon_driver_081826B4(void);
-M2C_UNK sceSyscon_driver_0A771482();
+void sceSyscon_driver_09721F7F(s32 arg0);
+s32 sceSyscon_driver_0A771482(void);
+void sceSyscon_driver_25F47F96(s32 arg0);
 void sceSyscon_driver_284FE366(s32 arg0);
 s32 sceSyscon_driver_2B9E6A06(s32 *arg0);
 void sceSyscon_driver_373EC933(s32 arg0);
 void sceSyscon_driver_4C0EE2FA(s32 arg0);
 void sceSyscon_driver_4C539345(s32 arg0);
+void sceSyscon_driver_53072985(s32 arg0, s32 arg1);
+void sceSyscon_driver_58531E69(s32 arg0, s32 arg1);
+void sceSyscon_driver_6848D817(s32 arg0, s32 arg1);
+void sceSyscon_driver_6C911742(s32 arg0);
 void sceSyscon_driver_70C10E61(s32 arg0);
 void sceSyscon_driver_71135D7D(s32 arg0);
+void sceSyscon_driver_72EDA9AF(s32 arg0);
+void sceSyscon_driver_7479DB05(s32 arg0, s32 arg1);
 void sceSyscon_driver_75D22BF8(s32 arg0);
+void sceSyscon_driver_7A805EE4(s32 arg0);
 void sceSyscon_driver_7CBD4522(s32 arg0);
+void sceSyscon_driver_7EC5A957(s32 arg0);
+void sceSyscon_driver_805180D1(s32 arg0, s32 arg1);
+void sceSyscon_driver_806D4D6C(s32 arg0, s32 arg1);
 void sceSyscon_driver_82861DE2(s32 arg0);
 void sceSyscon_driver_87671B18(s32 arg0);
 void sceSyscon_driver_876CA580(s32 arg0);
+void sceSyscon_driver_882F0AAB(s32 arg0);
 void sceSyscon_driver_8BDEBB1E(s32 arg0);
+void sceSyscon_driver_A068B3D0(s32 arg0, s32 arg1);
+void sceSyscon_driver_A9AEF39F(s32 arg0);
+void sceSyscon_driver_AD555CE5(s32 arg0, s32 arg1);
 void sceSyscon_driver_B5105D51(s32 arg0);
 void sceSyscon_driver_B71B98A8(s32 arg0);
+void sceSyscon_driver_BAAECDF8(s32 arg0, s32 arg1);
+void sceSyscon_driver_BBFB70C0(s32 arg0, s32 arg1);
+void sceSyscon_driver_C4D66C1D(s32 arg0);
+void sceSyscon_driver_C68F1573(s32 arg0, s32 arg1, s32 arg2);
+void sceSyscon_driver_C7634A7A(s32 arg0);
+void sceSyscon_driver_D1B501E8(s32 arg0, s32 arg1);
 void sceSyscon_driver_D5340103(s32 arg0);
+s32 sceSyscon_driver_E00BFC9E(void);
+void sceSyscon_driver_E540E532(s32 arg0, s32 arg1);
+void sceSyscon_driver_E7E87741(s32 arg0);
+void sceSyscon_driver_F281805D(s32 arg0, s32 arg1);
+void sceSyscon_driver_F775BC34(s32 arg0);
+void sceSyscon_driver_F9193EC3(s32 arg0, s32 arg1);
+void sceSyscon_driver_FB148FB6(s32 arg0);
+void sceSyscon_driver_FC32141A(s32 arg0);
 
 #endif
