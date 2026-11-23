@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "np_decls.h"
 
@@ -69,13 +70,22 @@ INCLUDE_RODATA("tmp/asm/352/np/nonmatchings/np", D_00010A2C);
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00000030);
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00000078);
+void func_00000078(void) {
+    if (D_00012E50 > 0) {
+        sceKernelDeleteVpl((u32) D_00012E50);
+        D_00012E50 = -1;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_000000B4);
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", sceNp_3C69FC6A);
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", sceNp_6DED4963);
+void sceNp_6DED4963(void *arg0) {
+    if (arg0 != NULL) {
+        sceKernelFreeVpl((u32) D_00012E50, arg0);
+    }
+}
 
 s32 func_000001D4(void) {
     return 0;
@@ -85,8 +95,8 @@ INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_000001DC);
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00000398);
 
-void func_00000420(void) {
-    func_00000030();
+void func_00000420(s32 arg0, s32 arg1) {
+    func_00000030(arg0, arg1);
 }
 
 void func_0000043C(void) {
@@ -109,7 +119,26 @@ INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", sceNp_D3C4B400);
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", sceNp_1227E455);
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00000B9C);
+s32 func_00000B9C(void *arg0, s32 arg1) {
+    s32 temp_a0;
+    s32 var_s1;
+    s32 var_v0;
+    u8 temp_s2;
+
+    var_v0 = 0x80550303;
+    temp_s2 = arg1 & 0xFF;
+    var_s1 = 0x80550303;
+    if (arg0 != NULL) {
+        temp_a0 = sceKernelCpuSuspendIntr();
+        if (temp_s2 >= (u8) M2C_FIELD(arg0, u8 *, 8)) {
+            M2C_FIELD(arg0, u8 *, 8) = temp_s2;
+            var_s1 = 0;
+        }
+        sceKernelCpuResumeIntr(temp_a0);
+        var_v0 = var_s1;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00000C10);
 
@@ -253,33 +282,45 @@ INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_000063F4);
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_000065CC);
 
-void func_00006674(void) {
-    func_0000E300();
+void func_00006674(s32 arg0, s32 arg1, s32 arg2) {
+    func_0000E300(arg0, arg1, arg2);
 }
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00006690);
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00006704);
+s32 func_00006704(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 0xC) & 0x400) ? 0 : 0x80550708;
+}
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000671C);
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00006788);
+s32 func_00006788(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 0x14) & 0x20) ? 0 : 0x80550708;
+}
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_000067A0);
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_000067D0);
+s32 func_000067D0(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 4) & 4) ? 0 : 0x80550708;
+}
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_000067E8);
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00006818);
+s32 func_00006818(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 4) & 4) ? 0 : 0x80550708;
+}
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00006830);
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000687C);
+s32 func_0000687C(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 0x14) & 4) ? 0 : 0x80550708;
+}
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00006894);
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_000068C4);
+s32 func_000068C4(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 4) & 0x40) ? 0 : 0x80550708;
+}
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_000068DC);
 
@@ -395,7 +436,7 @@ s32 func_00008B74(void *arg0) {
     if (var_a0 != NULL) {
         do {
             temp_s0 = M2C_FIELD(var_a0, void **, 8);
-            func_0000DAE0(var_a0);
+            func_0000DAE0();
             var_a0 = temp_s0;
         } while (temp_s0 != NULL);
     }
@@ -448,15 +489,27 @@ void func_0000AAA4(void) {
     func_00008FCC();
 }
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", sceNp_E3EA7603);
+s32 sceNp_E3EA7603(s32 arg0) {
+    s32 var_a1;
+
+    var_a1 = 0x80550702;
+    if (func_00009090() == 1) {
+        var_a1 = func_0000DE44(arg0);
+    }
+    return var_a1;
+}
 
 void sceNp_3EA98556(void) {
     func_0000DF04();
 }
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", sceNp_A8BEBA34);
+void sceNp_A8BEBA34(s32 arg0) {
+    func_0000CF68(arg0, 1);
+}
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000AB44);
+void func_0000AB44(s32 arg0) {
+    func_0000CF68(arg0, 2);
+}
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000AB60);
 
@@ -604,23 +657,7 @@ INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000CD70);
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000CE0C);
 
-void func_0000CF00(void *arg0) {
-    void *temp_s0;
-    void *var_s1;
-
-    var_s1 = M2C_FIELD(arg0, void **, 0x20);
-    M2C_FIELD(arg0, void **, 0x20) = NULL;
-    if (var_s1 != NULL) {
-        do {
-            temp_s0 = M2C_FIELD(var_s1, void **, 4);
-            func_0000DAE0(M2C_FIELD(var_s1, void **, 0));
-            func_0000DAE0(var_s1);
-            var_s1 = temp_s0;
-        } while (temp_s0 != NULL);
-    }
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x3C));
-    func_0000DAE0(arg0);
-}
+INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000CF00);
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000CF68);
 
@@ -640,16 +677,7 @@ INCLUDE_RODATA("tmp/asm/352/np/nonmatchings/np", D_00012980);
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000D42C);
 
-s32 func_0000D4F4(void *arg0) {
-    s32 var_v0;
-
-    var_v0 = sceHttpCreateRequest(M2C_FIELD(arg0, s32 *, 0xC));
-    if (var_v0 >= 0) {
-        M2C_FIELD(arg0, s32 *, 0x10) = var_v0;
-        var_v0 = 0;
-    }
-    return var_v0;
-}
+INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000D4F4);
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000D528);
 
@@ -663,8 +691,8 @@ INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000DA78);
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000DAA0);
 
-void func_0000DAC4(void) {
-    sceNp_3C69FC6A();
+void func_0000DAC4(s32 arg0) {
+    sceNp_3C69FC6A(arg0);
 }
 
 INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_0000DAE0);

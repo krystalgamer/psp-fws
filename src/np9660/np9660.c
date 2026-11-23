@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "np9660_decls.h"
 
@@ -246,7 +247,9 @@ INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00002340);
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00002420);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00002474);
+s32 func_00002474(void) {
+    return 0x80020325;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00002480);
 
@@ -256,7 +259,16 @@ s32 func_00002578(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00002580);
+s32 func_00002580(void *arg0) {
+    s32 var_v0;
+
+    var_v0 = 0x80010016;
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 4) = 0x10;
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_000025A0);
 

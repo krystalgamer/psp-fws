@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "netconf_plugin_auto_bfl_decls.h"
 
@@ -49,7 +50,9 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00000F78);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00000FC0);
+void func_00000FC0(s32 arg0) {
+    sceKernelDelayThread(arg0 * 0x3E8);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00000FE4);
 
@@ -171,45 +174,41 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003E10);
 
-void func_00003E2C(void) {
-    sceNetInetRecvfrom();
+INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003E2C);
+
+INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003E48);
+
+INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003E64);
+
+INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003E80);
+
+void func_00003E9C(s32 arg0, s32 arg1, s32 arg2) {
+    sceNetInetSocket(arg0, arg1, arg2);
 }
 
-void func_00003E48(void) {
-    sceNetInetSelect();
+void func_00003EB8(s32 arg0, void *arg1, s32 arg2) {
+    sceNetInetBind(arg0, arg1, arg2);
 }
 
-void func_00003E64(void) {
-    sceNetInetSendto();
-}
-
-void func_00003E80(void) {
-    sceNetInetSetsockopt();
-}
-
-void func_00003E9C(void) {
-    sceNetInetSocket();
-}
-
-void func_00003EB8(void) {
-    sceNetInetBind();
-}
-
-void func_00003ED4(void) {
-    sceNetInetClose();
+void func_00003ED4(s32 arg0) {
+    sceNetInetClose(arg0);
 }
 
 s32 func_00003EF0(s32 arg0) {
     return __builtin_allegrex_wsbw(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003EF8);
+s32 func_00003EF8(s32 arg0) {
+    return __builtin_allegrex_wsbh(arg0 & 0xFFFF) & 0xFFFF;
+}
 
 s32 func_00003F08(s32 arg0) {
     return __builtin_allegrex_wsbw(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003F10);
+s32 func_00003F10(s32 arg0) {
+    return __builtin_allegrex_wsbh(arg0 & 0xFFFF) & 0xFFFF;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003F20);
 
@@ -217,11 +216,29 @@ void func_00003F3C(void) {
     rand();
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003F58);
+void func_00003F58(s8 *arg0) {
+    s8 *var_a0;
+    u32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003F78);
+    var_a0 = arg0;
+    var_v1 = 0;
+    do {
+        var_v1 += 1;
+        *var_a0 = 0;
+        var_a0 += 1;
+    } while (var_v1 < 0x20U);
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003FA0);
+void func_00003F78(u32 arg0, s32 arg1) {
+    s32 *temp_a3;
+
+    temp_a3 = ((arg0 >> 5) * 4) + arg1;
+    *temp_a3 |= 1 << (arg0 & 0x1F);
+}
+
+s32 func_00003FA0(void) {
+    return 0x02000767;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003FAC);
 
