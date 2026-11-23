@@ -13,5 +13,6 @@ void func_00005430(u8 *arg0, u8 *arg1);
 s32 func_000075EC(void *arg0);
 s32 func_0000C908();
 M2C_UNK func_0000C934(s32);
+s32 func_0000C994(s32 arg0);
 
 #endif

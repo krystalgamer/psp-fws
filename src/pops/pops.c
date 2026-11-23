@@ -383,9 +383,13 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000BBDC);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000BD60);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000BF1C);
+void func_0000BF1C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000BF24);
+s32 func_0000BF24(void) {
+    return 0x1FF;
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000BF2C);
 
@@ -397,7 +401,9 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000C3EC);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000C448);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000C478);
+s32 func_0000C478(void) {
+    return 0x1FF;
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000C480);
 
@@ -411,7 +417,9 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000C980);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000CA68);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000CC30);
+s32 func_0000CC30(void) {
+    return 0x1FF;
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000CC38);
 
@@ -475,13 +483,17 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000F078);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000F0D8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000F138);
+void func_0000F138(void) {
+    func_00010760();
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000F154);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000F224);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000F348);
+void func_0000F348(void) {
+    func_00010578(0);
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000F364);
 
@@ -497,15 +509,22 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000F5D4);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000F77C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FA20);
+void func_0000FA20(void) {
+    func_0000EBFC(1, 0xC672);
+    func_000104C8(1, 0x844C, 0);
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FA50);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FB24);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FC1C);
+void func_0000FC1C(void) {
+    func_00010934();
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FC38);
+void func_0000FC38(void) {
+    func_00010934();
+}
 
 INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops", D_00038924);
 
@@ -527,11 +546,17 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FD2C);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FD68);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FE1C);
+void func_0000FE1C(void) {
+    func_00010760();
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FE38);
+void func_0000FE38(void) {
+    func_00010578(1);
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FE54);
+void func_0000FE54(void) {
+    func_00010578(2);
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000FE70);
 
@@ -715,7 +740,9 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000179E4);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00017A00);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00017A48);
+s32 func_00017A48(void) {
+    return 1;
+}
 
 void func_00017A50(void) {
 }
@@ -737,11 +764,15 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00017B74);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00017C28);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00017EDC);
+void func_00017EDC(void) {
+    func_0001ADD8();
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00017EF8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00017F1C);
+void func_00017F1C(void) {
+    func_00018550();
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00017F38);
 
@@ -1677,39 +1708,69 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034518);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034608);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000347E4);
+s32 func_000347E4(void) {
+    return 1;
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000347EC);
+void func_000347EC(void) {
+    sceIoRename();
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034808);
+s32 func_00034808(void) {
+    return -1;
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034810);
+s32 func_00034810(void) {
+    return -1;
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034818);
+s32 func_00034818(void) {
+    return -1;
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034820);
+s32 func_00034820(void) {
+    return -1;
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034828);
+s32 func_00034828(void) {
+    return -1;
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034830);
+s32 func_00034830(void) {
+    return -1;
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034838);
+s32 func_00034838(void) {
+    return -1;
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034840);
+s32 func_00034840(void) {
+    return -1;
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034848);
+s32 func_00034848(void) {
+    return -1;
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034850);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000348A8);
+void func_000348A8(void) {
+    sceKernelLibcTime();
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000348C4);
+void func_000348C4(void) {
+    sceKernelLibcGettimeofday();
+}
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000348E0);
+s32 func_000348E0(void) {
+    return -1;
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000348E8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000348F8);
+s32 func_000348F8(void) {
+    return -1;
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00034900);
 
@@ -1751,7 +1812,15 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00035E18);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00035F54);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0003600C);
+void func_0003600C(void *arg0, void *arg1) {
+    void **temp_v0;
+
+    if (arg1 != NULL) {
+        temp_v0 = (M2C_FIELD(arg1, s32 *, 4) * 4) + M2C_FIELD(arg0, s32 *, 0x4C);
+        M2C_FIELD(arg1, void **, 0) = (void *) *temp_v0;
+        *temp_v0 = arg1;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00036038);
 

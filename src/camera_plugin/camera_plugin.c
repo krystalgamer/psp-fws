@@ -1499,9 +1499,13 @@ void func_0000D464(void) {
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_0000D480);
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_0000D50C);
+s32 func_0000D50C(void) {
+    return __builtin_allegrex_max(sceIoWrite(), -1);
+}
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_0000D530);
+s32 func_0000D530(void) {
+    return __builtin_allegrex_max(sceIoRead(), -1);
+}
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_0000D554);
 

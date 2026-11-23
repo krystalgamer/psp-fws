@@ -91,11 +91,17 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_000023C4);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00002448);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000261C);
+s32 func_0000261C(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00002644);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000275C);
+s32 func_0000275C(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00002784);
 
@@ -151,9 +157,15 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016630);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00004ADC);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00004B20);
+s32 func_00004B20(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00004B48);
+s32 func_00004B48(void) {
+    SysMemForKernel_CE05CCB7();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00004B68);
 
@@ -179,9 +191,15 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016664);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00005BF0);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00005C34);
+s32 func_00005C34(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00005C5C);
+s32 func_00005C5C(void) {
+    SysMemForKernel_CE05CCB7();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelCreateMutex);
 
@@ -205,9 +223,15 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016690);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00006D28);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00006D6C);
+s32 func_00006D6C(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00006D94);
+s32 func_00006D94(void) {
+    SysMemForKernel_CE05CCB7();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00006DB4);
 
@@ -233,9 +257,15 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00007BB8);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00007BFC);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00007CFC);
+s32 func_00007CFC(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00007D24);
+s32 func_00007D24(void) {
+    SysMemForKernel_CE05CCB7();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelCreateMsgPipe);
 
@@ -267,7 +297,10 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_0001671C);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00009B50);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00009B94);
+s32 func_00009B94(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00009BBC);
 
@@ -297,7 +330,10 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016754);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000AB94);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000ABD8);
+s32 func_0000ABD8(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000AC00);
 
@@ -327,7 +363,10 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016778);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000BC68);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000BCAC);
+s32 func_0000BCAC(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000BCD4);
 
@@ -379,7 +418,9 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelCancelVTime
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelReferVTimerStatus);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForUser_0E927AED);
+s32 ThreadManForUser_0E927AED(void) {
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelUSec2SysClockWide);
 
@@ -429,21 +470,42 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000EE74);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000EFF4);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000F140);
+s32 func_0000F140(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000F168);
+s32 func_0000F168(void) {
+    SysMemForKernel_CE05CCB7();
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000F188);
+s32 func_0000F188(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000F1B0);
+s32 func_0000F1B0(void) {
+    SysMemForKernel_CE05CCB7();
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000F1D0);
+s32 func_0000F1D0(void *arg0) {
+    SysMemForKernel_CE05CCB7();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000F1F8);
+s32 func_0000F1F8(void) {
+    SysMemForKernel_CE05CCB7();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000F218);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000F264);
+s32 func_0000F264(void) {
+    SysMemForKernel_CE05CCB7();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForKernel_04E72261);
 
@@ -457,7 +519,9 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForKernel_A
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", syslib_D3744BE0);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000FD6C);
+s32 func_0000FD6C(void) {
+    return -1;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000FD74);
 
@@ -567,7 +631,10 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelReferThread
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelReferGlobalProfiler);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0001444C);
+s32 func_0001444C(void) {
+    sceKernelExitDeleteThread(0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0001446C);
 

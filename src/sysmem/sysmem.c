@@ -530,7 +530,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000C934);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000C95C);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000C994);
+s32 func_0000C994(s32 arg0) {
+    return arg0 == 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000C99C);
 
