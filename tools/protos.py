@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SDK_INC = ROOT / "tmp/sdk/usr/local/psp/devkit/include"
 CACHE = ROOT / "tmp/sdk_protos.json"
 
-I64 = {"long long", "SceInt64", "SceUInt64", "SceLong64", "SceULong64", "u64", "s64", "unsigned long long",
+I64 = {"long long", "SceOff", "SceInt64_t", "SceInt64", "SceUInt64", "SceLong64", "SceULong64", "u64", "s64", "unsigned long long",
        "SceKernelSysClock", "SceRtcTick"}
 F32 = {"float", "SceFloat", "SceFloat32"}
 
@@ -101,8 +101,17 @@ def asm_arity(text):
 
 
 def arity_params(used):
-    """One s32 per argument register up to the highest one read."""
-    return ["s32"] * (max(used, default=-1) + 1)
+    """Parameter types for the used EABI argument register indices; an unused
+    odd register followed by a used pair is an aligned 64-bit value."""
+    used, ps, i, n = set(used), [], 0, max(used, default=-1) + 1
+    while i < n:
+        if i % 2 == 1 and i not in used and i + 1 in used and i + 2 in used:
+            ps.append("s64")
+            i += 3
+            continue
+        ps.append("s32")
+        i += 1
+    return ps
 
 
 def guess(name, asm_path=None):

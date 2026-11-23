@@ -168,6 +168,12 @@ def run_m2c(mod, name, ctx, target="mips-gcc-c"):
     return r.stdout if r.returncode == 0 and "M2C_ERROR" not in r.stdout else None
 
 
+def join_halves(out):
+    """Rejoin 64-bit values m2c splits into _unk0/_unk4 halves (EABI register pairs)."""
+    out = re.sub(r"\b(?:M2C_UNK|\?) (\w+)_unk0, (?:M2C_UNK|\?) \1_unk4\b", r"s64 \1", out)
+    return re.sub(r"/\* [^*]*\+0x0 \*/ (\w+)_unk0, /\* [^*]*\+0x4 \*/ \1_unk4\b", r"\1", out)
+
+
 def split_m2c(out, name):
     """Return (decl lines, function text)."""
     m = re.search(rf"^[^\n]*\b{name}\(.*\) {{$", out, re.M)
@@ -210,6 +216,7 @@ def _try_func(mod, name, header_ctx, target, seen):
     seen.add(out)
     if not out:
         return None
+    out = join_halves(out)
     decls, body = split_m2c(out, name)
     # Unknown stack usage can't match; gotos are rejected in favour of
     # structured control flow (those functions are left for manual work).
