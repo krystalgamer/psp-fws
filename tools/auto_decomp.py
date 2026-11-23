@@ -7,7 +7,7 @@ module's compiler, and compare the code against the original with relocated
 fields masked. Matches replace the INCLUDE_ASM line; their prototypes and
 global declarations go to src/<module>/<module>_decls.h.
 
-Usage: tools/auto_decomp.py <version> <module> [--max-size 0x100] [--limit N] [--only NAME]
+Usage: tools/auto_decomp.py <version> <module> [--max-size 0x100] [--limit N] [--only NAME] [--grep REGEX]
 """
 import argparse
 import difflib
@@ -140,13 +140,13 @@ def compile_words(c_text, compiler="1.7.1", opt="-O2"):
 
 
 def run_m2c(mod, name, ctx):
-    asm = re.sub(r"\$(\d+)\b", lambda m: "$" + ABI[int(m[1])], mod.funcs[name][2].read_text())
+    asm = re.sub(r"\$(\d+)\b", lambda m: "$" + ABI[int(m[1])] if int(m[1]) < 32 else m[0], mod.funcs[name][2].read_text())
     ctx = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", "-DM2CTX", f"-I{ROOT/'include'}", "-"],
                          input=ctx, capture_output=True, text=True).stdout
     with tempfile.TemporaryDirectory() as td:
         (Path(td) / "f.s").write_text(asm)
         (Path(td) / "ctx.c").write_text(ctx)
-        r = subprocess.run([sys.executable, "-m", "m2c.main", "-t", "mips-gcc-c", "--valid-syntax", "--globals", "used",
+        r = subprocess.run([sys.executable, str(ROOT / "tools/m2c_allegrex.py"), "-t", "mips-gcc-c", "--valid-syntax", "--globals", "used",
                             "--context", str(Path(td) / "ctx.c"), str(Path(td) / "f.s")],
                            capture_output=True, text=True, timeout=120)
     return r.stdout if r.returncode == 0 and "M2C_ERROR" not in r.stdout else None
@@ -219,6 +219,7 @@ def main():
     ap.add_argument("--max-size", type=lambda x: int(x, 0), default=0x200)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--only")
+    ap.add_argument("--grep", help="only functions whose asm matches this regex")
     args = ap.parse_args()
 
     mod = Module(args.version, args.module)
@@ -229,6 +230,8 @@ def main():
     names = [n for n in names if n in mod.funcs and mod.funcs[n][1] - mod.funcs[n][0] <= args.max_size]
     if args.only:
         names = [n for n in names if n == args.only]
+    if args.grep:
+        names = [n for n in names if re.search(args.grep, mod.funcs[n][2].read_text(), re.M)]
     if args.limit:
         names = names[:args.limit]
     mod.write_decls()
@@ -254,8 +257,13 @@ def main():
     print(f"matched {matched}/{len(names)}")
     stats_path = ROOT / "tmp/auto_stats" / f"{args.version}_{args.module}.json"
     stats_path.parent.mkdir(exist_ok=True)
-    stats_path.write_text(json.dumps({"compiler": mod.setting, "tried": len(names), "matched": matched,
-                                      "funcs": mod.stats, "scores": mod.scores}))
+    stats = {"compiler": mod.setting, "tried": len(names), "matched": matched, "funcs": mod.stats, "scores": mod.scores}
+    if (args.grep or args.only) and stats_path.exists():
+        old = json.loads(stats_path.read_text())
+        old["funcs"].update(mod.stats)
+        old["scores"].update(mod.scores)
+        stats = old
+    stats_path.write_text(json.dumps(stats))
     verify_and_revert(mod, args, accepted_now)
 
 

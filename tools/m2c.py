@@ -26,7 +26,7 @@ def main():
     args, rest = ap.parse_known_args()
 
     asm = ROOT / "tmp/asm" / args.version / args.module / "nonmatchings" / args.module / f"{args.function}.s"
-    text = re.sub(r"\$(\d+)\b", lambda m: "$" + ABI[int(m[1])], asm.read_text())
+    text = re.sub(r"\$(\d+)\b", lambda m: "$" + ABI[int(m[1])] if int(m[1]) < 32 else m[0], asm.read_text())
 
     src = ROOT / "src" / args.module
     ctx = subprocess.run(
@@ -39,7 +39,7 @@ def main():
         (Path(td) / "f.s").write_text(text)
         (Path(td) / "ctx.c").write_text(ctx)
         r = subprocess.run(
-            [sys.executable, "-m", "m2c.main", "-t", "mips-gcc-c", "--context", str(Path(td) / "ctx.c"),
+            [sys.executable, str(ROOT / "tools/m2c_allegrex.py"), "-t", "mips-gcc-c", "--context", str(Path(td) / "ctx.c"),
              *rest, str(Path(td) / "f.s")],
         )
     sys.exit(r.returncode)
