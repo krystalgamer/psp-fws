@@ -1,0 +1,100 @@
+#ifndef SAVEDATA_AUTO_DIALOG_DECLS_H
+#define SAVEDATA_AUTO_DIALOG_DECLS_H
+
+#include "common.h"
+#include "m2c_macros.h"
+
+
+M2C_UNK func_00000000();
+void func_0000010C(void);
+M2C_UNK func_000001A4();
+M2C_UNK func_00000238();
+void func_000002E0(void);
+M2C_UNK func_000002FC();
+void func_00000338(void);
+void func_00000340(void);
+void func_00000364(void);
+void func_00000398(void);
+M2C_UNK func_000004D8(M2C_UNK, M2C_UNK);
+void func_0000057C(void);
+void func_00000598(void);
+void func_000005B4(void);
+void func_00000A5C(void);
+void func_00000A64(void);
+s32 func_000017C8(void);
+M2C_UNK func_000040D8();
+void func_00004140(void *arg0, s32 arg1);
+void func_00004198(void *arg0, s32 arg1);
+s32 func_00004504(void);
+M2C_UNK func_0000456C(M2C_UNK);
+s32 func_00004584(void *arg0);
+s32 func_00004824(void *);
+s32 func_00004BDC(void *arg0);
+s32 func_00005720(void *arg0);
+s32 func_00005958(void *arg0);
+M2C_UNK func_00006AF0();
+void func_000072DC(void);
+s32 func_00007824();
+M2C_UNK func_00007FCC(s32);
+M2C_UNK func_000080B4();
+s32 func_0000957C(void);
+s32 func_0000983C();
+s32 func_000098BC();
+s32 func_00009918();
+s32 func_0000A174();
+M2C_UNK func_0000A284(s32);
+void func_0000A374(s32 arg0);
+void func_0000AC0C(s32 *arg0, s32 arg1, s32 arg2);
+void func_0000AC34(s32 *arg0, s32 arg1);
+void func_0000AF14(void *arg0);
+s32 func_0000B19C(void *arg0);
+M2C_UNK func_0000FEAC(s32);
+M2C_UNK func_00014270();
+M2C_UNK func_000142AC();
+M2C_UNK func_000142CC();
+M2C_UNK func_0001434C();
+void func_000143C4(void);
+void func_000143E0(void);
+void func_000143FC(void);
+M2C_UNK func_00014418();
+M2C_UNK func_000149A0();
+void func_00014E88(void *arg0, M2C_UNK *arg1);
+void func_00014EC0(void *arg0, s32 arg1);
+s32 func_00014EC8(void *arg0);
+M2C_UNK *func_00014EDC(M2C_UNK **arg0, s32 arg1);
+s32 *func_00014F18(s32 **arg0, s32 arg1);
+void func_00014F90(s32 arg0);
+void func_00014FB4(void);
+void func_00014FD0(void);
+void func_00014FEC(void);
+void func_00015008(void);
+M2C_UNK func_00015094();
+M2C_UNK func_00015118();
+M2C_UNK func_000152DC();
+M2C_UNK func_00015304();
+M2C_UNK func_00015698();
+s32 func_00015D54(void);
+void func_00015E84(s8 *arg0);
+M2C_UNK func_00017684();
+M2C_UNK func_000176EC(M2C_UNK, s32);
+M2C_UNK func_00017760(void *, M2C_UNK, M2C_UNK);
+void func_000177EC(s32 arg0, M2C_UNK arg1);
+void func_00017810(void *arg0, s32 arg1);
+void func_0001789C(void *arg0, s32 arg1);
+s32 func_00017D9C(void);
+void func_000181AC(void *arg0);
+s32 func_00018204(void *arg0);
+u8 *func_00018554(u8 *arg0, u8 *arg1);
+M2C_UNK func_00019B2C(M2C_UNK, M2C_UNK);
+void func_00019C5C(void);
+void func_00019C7C(void);
+M2C_UNK func_0001A5C8();
+s32 module_reboot_before(void);
+s32 module_start(void);
+s32 module_stop(void);
+M2C_UNK sceKernelCheckCallback();
+M2C_UNK sceKernelDelayThread(s32);
+M2C_UNK sceKernelResumeDispatchThread(s32);
+s32 sceKernelSuspendDispatchThread();
+
+#endif

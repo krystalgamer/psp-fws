@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, reboot]
+      - [0x80, c, reboot]
       - { start: 0x14678, type: prxpad, order: .text }
       - { start: 0x14680, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x14684, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -62,7 +62,7 @@ segments:
       - { start: 0x146B0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x146E4, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x1470C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x1476C, rodata, reboot]
+      - [0x1476C, .rodata, reboot]
   - name: reboot_seg1
     type: code
     start: 0x16E60

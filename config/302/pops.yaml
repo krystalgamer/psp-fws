@@ -54,7 +54,7 @@ segments:
     subsegments:
       - { start: 0xC0, type: asm, name: init, linker_section: .init }
       - { start: 0xE4, type: prxpad, order: .text }
-      - [0x100, asm, pops]
+      - [0x100, c, pops]
       - { start: 0x3794C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x37968, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x37D50, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -71,7 +71,7 @@ segments:
       - { start: 0x382FC, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x38300, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x38304, type: prxpad, order: .rodata }
-      - [0x38310, rodata, pops]
+      - [0x38310, .rodata, pops]
       - { start: 0x10DDF8, type: prxpad, order: .rodata }
   - name: pops_seg1
     type: code

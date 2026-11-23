@@ -1,0 +1,6 @@
+{
+ "funcs": {
+  "module_reboot_before": "s32 module_reboot_before(void);"
+ },
+ "vars": {}
+}

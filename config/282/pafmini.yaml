@@ -54,7 +54,7 @@ segments:
     subsegments:
       - { start: 0xC0, type: asm, name: init, linker_section: .init }
       - { start: 0xE4, type: prxpad, order: .text }
-      - [0xF0, asm, pafmini]
+      - [0xF0, c, pafmini]
       - { start: 0xCEE44, type: asm, name: fini, linker_section: .fini }
       - { start: 0xCEE60, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xCF058, type: prxpad, order: .text }
@@ -72,7 +72,7 @@ segments:
       - { start: 0xD12C4, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0xD12C8, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0xD12CC, type: prxpad, order: .rodata }
-      - [0xD1300, rodata, pafmini]
+      - [0xD1300, .rodata, pafmini]
       - { start: 0xE0718, type: prxpad, order: .rodata }
   - name: pafmini_seg1
     type: code

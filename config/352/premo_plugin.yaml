@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, premo_plugin]
+      - [0xA0, c, premo_plugin]
       - { start: 0x276A4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x280DC, type: prxpad, order: .text }
       - { start: 0x280E0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +62,7 @@ segments:
       - { start: 0x280FC, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x28298, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x2829C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x282D0, rodata, premo_plugin]
+      - [0x282D0, .rodata, premo_plugin]
   - name: premo_plugin_seg1
     type: code
     start: 0x2C520
