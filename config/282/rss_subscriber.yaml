@@ -54,7 +54,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - { start: 0xC4, type: prxpad, order: .text }
-      - [0xD0, asm, rss_subscriber]
+      - [0xD0, c, rss_subscriber]
       - { start: 0x3318, type: asm, name: fini, linker_section: .fini }
       - { start: 0x3334, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x365C, type: prxpad, order: .text }
@@ -72,7 +72,7 @@ segments:
       - { start: 0x3A04, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x3A10, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x3A14, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x3A18, rodata, rss_subscriber]
+      - [0x3A18, .rodata, rss_subscriber]
       - { start: 0x3DFC, type: prxpad, order: .rodata }
   - name: rss_subscriber_seg1
     type: code

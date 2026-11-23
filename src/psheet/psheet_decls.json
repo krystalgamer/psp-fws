@@ -1,0 +1,7 @@
+{
+ "funcs": {
+  "scePsheet_driver_302AB4B8": "M2C_UNK scePsheet_driver_302AB4B8(M2C_UNK, M2C_UNK);",
+  "scePsheet_driver_3CEC4078": "s32 scePsheet_driver_3CEC4078(void);"
+ },
+ "vars": {}
+}

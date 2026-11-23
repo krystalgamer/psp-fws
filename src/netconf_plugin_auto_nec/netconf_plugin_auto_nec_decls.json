@@ -1,0 +1,11 @@
+{
+ "funcs": {
+  "func_00000000": "M2C_UNK func_00000000();",
+  "func_00000194": "s32 func_00000194(void);",
+  "func_00004FE8": "s32 func_00004FE8(void);",
+  "func_000055BC": "M2C_UNK func_000055BC();",
+  "module_start": "s32 module_start(void);",
+  "module_stop": "s32 module_stop(void);"
+ },
+ "vars": {}
+}

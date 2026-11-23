@@ -1,0 +1,10 @@
+{
+ "funcs": {
+  "sceRtcTickAddMicroseconds": "void sceRtcTickAddMicroseconds(void);",
+  "sceRtcTickAddTicks": "M2C_UNK sceRtcTickAddTicks();",
+  "sceRtc_driver_48D07D70": "s32 sceRtc_driver_48D07D70(void);",
+  "sceRtc_driver_9CC2797E": "s32 sceRtc_driver_9CC2797E(void);",
+  "sceRtc_driver_F0B5571C": "M2C_UNK sceRtc_driver_F0B5571C();"
+ },
+ "vars": {}
+}

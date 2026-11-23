@@ -1,0 +1,8 @@
+{
+ "funcs": {
+  "sceMePower_driver_05B2C420": "M2C_UNK sceMePower_driver_05B2C420(M2C_UNK);",
+  "sceMePower_driver_B6FE3E62": "M2C_UNK sceMePower_driver_B6FE3E62(M2C_UNK);",
+  "sceVideocodec_driver_CB3312D1": "s32 sceVideocodec_driver_CB3312D1(void);"
+ },
+ "vars": {}
+}

@@ -1,0 +1,18 @@
+{
+ "funcs": {
+  "func_00000B6C": "void *func_00000B6C();",
+  "func_00003EA4": "void *func_00003EA4();",
+  "func_00003EE8": "s32 func_00003EE8(void);",
+  "func_00004024": "s32 func_00004024(void);",
+  "func_00006998": "s32 func_00006998(s32 arg0);",
+  "func_00006A0C": "void func_00006A0C(void);",
+  "func_00006AC0": "void func_00006AC0(s32 arg0);",
+  "module_reboot_before": "s32 module_reboot_before(void);",
+  "sceKernelDeleteVpl": "M2C_UNK sceKernelDeleteVpl(s32);",
+  "sceKernelFreeVpl": "M2C_UNK sceKernelFreeVpl(s32, s32);",
+  "sceReg_driver_9B25EDF1": "M2C_UNK sceReg_driver_9B25EDF1();"
+ },
+ "vars": {
+  "D_00006FB0": "extern s32 D_00006FB0;"
+ }
+}

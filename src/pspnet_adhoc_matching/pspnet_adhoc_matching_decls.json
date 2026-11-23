@@ -1,0 +1,16 @@
+{
+ "funcs": {
+  "func_0000113C": "void func_0000113C(void *arg0, s32 *arg1);",
+  "func_00002188": "void func_00002188(void *arg0);",
+  "func_00002794": "void func_00002794(void *arg0, s32 *arg1);",
+  "func_00002F24": "s32 func_00002F24();",
+  "func_00002F90": "M2C_UNK func_00002F90(s32);",
+  "sceKernelDeleteMbx": "M2C_UNK sceKernelDeleteMbx(s32);",
+  "sceKernelDeleteThread": "M2C_UNK sceKernelDeleteThread(s32);",
+  "sceKernelWaitThreadEnd": "M2C_UNK sceKernelWaitThreadEnd(s32, M2C_UNK);",
+  "sceNetAdhocPdpDelete": "M2C_UNK sceNetAdhocPdpDelete(s32, M2C_UNK);",
+  "sceNetAdhocSetSocketAlert": "M2C_UNK sceNetAdhocSetSocketAlert(s32, M2C_UNK);",
+  "sceNetFreeThreadinfo": "M2C_UNK sceNetFreeThreadinfo(s32);"
+ },
+ "vars": {}
+}

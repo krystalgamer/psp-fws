@@ -1,0 +1,10 @@
+{
+ "funcs": {
+  "module_start": "s32 module_start(void);",
+  "scePwm_driver_68BA9CC1": "M2C_UNK scePwm_driver_68BA9CC1();",
+  "scePwm_driver_E449F656": "s32 scePwm_driver_E449F656(void);",
+  "sceSysreg_driver_7A5D2D15": "M2C_UNK sceSysreg_driver_7A5D2D15();",
+  "sceSysreg_driver_7DCA8302": "M2C_UNK sceSysreg_driver_7DCA8302();"
+ },
+ "vars": {}
+}

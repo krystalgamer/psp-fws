@@ -1,0 +1,16 @@
+{
+ "funcs": {
+  "func_00001718": "s32 func_00001718(void);",
+  "func_00001B50": "void func_00001B50(void);",
+  "func_00001B6C": "void func_00001B6C(void);",
+  "func_00001C34": "M2C_UNK func_00001C34();",
+  "func_00001D5C": "M2C_UNK func_00001D5C();",
+  "module_reboot_before": "s32 module_reboot_before(void);",
+  "sceGpio_driver_310F0CCF": "M2C_UNK sceGpio_driver_310F0CCF(M2C_UNK);",
+  "sceSysreg_driver_20388C9E": "M2C_UNK sceSysreg_driver_20388C9E();",
+  "sceSysreg_driver_26FA0928": "M2C_UNK sceSysreg_driver_26FA0928();",
+  "sceSysreg_driver_7725CA08": "M2C_UNK sceSysreg_driver_7725CA08(M2C_UNK);",
+  "sceSysreg_driver_BB823481": "M2C_UNK sceSysreg_driver_BB823481(M2C_UNK);"
+ },
+ "vars": {}
+}

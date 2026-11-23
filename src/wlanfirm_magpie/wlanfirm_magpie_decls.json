@@ -1,0 +1,6 @@
+{
+ "funcs": {
+  "module_stop": "s32 module_stop(void);"
+ },
+ "vars": {}
+}

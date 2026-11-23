@@ -1,0 +1,12 @@
+{
+ "funcs": {
+  "func_000015B0": "void func_000015B0(void);",
+  "func_000018F0": "void func_000018F0(void);",
+  "func_00003F24": "void func_00003F24(s32 *arg0, s32 arg1);",
+  "func_00003F80": "M2C_UNK func_00003F80();",
+  "module_start": "s32 module_start(void);",
+  "module_stop": "s32 module_stop(void);",
+  "sceNetAdhocAuth_driver_2E6AA271": "M2C_UNK sceNetAdhocAuth_driver_2E6AA271();"
+ },
+ "vars": {}
+}

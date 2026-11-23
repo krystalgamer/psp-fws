@@ -1,0 +1,20 @@
+#ifndef PSPNET_ADHOC_MATCHING_DECLS_H
+#define PSPNET_ADHOC_MATCHING_DECLS_H
+
+#include "common.h"
+#include "m2c_macros.h"
+
+
+void func_0000113C(void *arg0, s32 *arg1);
+void func_00002188(void *arg0);
+void func_00002794(void *arg0, s32 *arg1);
+s32 func_00002F24();
+M2C_UNK func_00002F90(s32);
+M2C_UNK sceKernelDeleteMbx(s32);
+M2C_UNK sceKernelDeleteThread(s32);
+M2C_UNK sceKernelWaitThreadEnd(s32, M2C_UNK);
+M2C_UNK sceNetAdhocPdpDelete(s32, M2C_UNK);
+M2C_UNK sceNetAdhocSetSocketAlert(s32, M2C_UNK);
+M2C_UNK sceNetFreeThreadinfo(s32);
+
+#endif

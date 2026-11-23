@@ -1,7 +1,18 @@
 {
  "funcs": {
   "func_00000244": "s32 func_00000244(void);",
-  "func_0000024C": "s32 func_0000024C(void);"
+  "func_0000024C": "s32 func_0000024C(void);",
+  "module_start": "int module_start(SceSize args, void *argp);",
+  "sceDdrdbCertvry": "int sceDdrdbCertvry(u8 *cert);",
+  "sceDdrdbDecrypt": "int sceDdrdbDecrypt(u8 *buf, u32 size);",
+  "sceDdrdbEncrypt": "int sceDdrdbEncrypt(u8 *buf, u32 size);",
+  "sceDdrdbHash": "int sceDdrdbHash(u8 *data, u32 size, u8 *digest);",
+  "sceDdrdbMul1": "int sceDdrdbMul1(u8 *out);",
+  "sceDdrdbMul2": "int sceDdrdbMul2(u8 *a, u8 *b, u8 *out);",
+  "sceDdrdbPrngen": "int sceDdrdbPrngen(u8 *out);",
+  "sceDdrdbSiggen": "int sceDdrdbSiggen(u8 *privKey, u8 *digest, u8 *sig);",
+  "sceDdrdbSigvry": "int sceDdrdbSigvry(u8 *pubKey, u8 *digest, u8 *sig);",
+  "sceOpenPSIDGetOpenPSID": "int sceOpenPSIDGetOpenPSID(u8 *psid);"
  },
  "vars": {}
 }

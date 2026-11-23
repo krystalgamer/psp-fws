@@ -1,0 +1,11 @@
+{
+ "funcs": {
+  "func_000000B4": "s32 func_000000B4(void);",
+  "func_000000BC": "s32 func_000000BC(void);",
+  "func_000000C4": "s32 func_000000C4(void);",
+  "module_reboot_before": "s32 module_reboot_before(void);",
+  "sceSysreg_driver_4EE8E2C8": "M2C_UNK sceSysreg_driver_4EE8E2C8();",
+  "sceSysreg_driver_F2DEAA14": "s32 sceSysreg_driver_F2DEAA14(void);"
+ },
+ "vars": {}
+}

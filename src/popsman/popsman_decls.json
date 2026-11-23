@@ -1,0 +1,8 @@
+{
+ "funcs": {
+  "func_0000032C": "s32 func_0000032C(void);",
+  "scePopsMan_driver_8666B52F": "s32 scePopsMan_driver_8666B52F(void);",
+  "scePopsMan_driver_F74199F8": "s32 scePopsMan_driver_F74199F8(void);"
+ },
+ "vars": {}
+}

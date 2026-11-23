@@ -1,0 +1,6 @@
+{
+ "funcs": {
+  "sceVaudio_driver_DCC18F25": "s32 sceVaudio_driver_DCC18F25(void);"
+ },
+ "vars": {}
+}

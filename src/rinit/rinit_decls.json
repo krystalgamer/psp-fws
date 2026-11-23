@@ -1,0 +1,28 @@
+{
+ "funcs": {
+  "func_00001140": "s32 func_00001140(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);",
+  "func_000011E4": "s32 func_000011E4(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);",
+  "func_00001288": "void func_00001288(void);",
+  "func_00001340": "s32 func_00001340(s32 arg0);",
+  "func_00001530": "s32 func_00001530(void);",
+  "func_000015AC": "s32 func_000015AC(void);",
+  "func_000016B4": "s32 func_000016B4(void);",
+  "func_000016BC": "s32 func_000016BC(void);",
+  "func_000016C4": "void func_000016C4(void);",
+  "func_000016E0": "void func_000016E0(void);",
+  "func_000016FC": "void func_000016FC(void);",
+  "func_00007470": "void func_00007470(void *arg0, void *arg1);",
+  "func_000076CC": "s32 func_000076CC(s32 arg0);",
+  "sceIoClose": "s32 sceIoClose(s32);",
+  "sceIoOpen": "M2C_UNK sceIoOpen();",
+  "sceIoRead": "s32 sceIoRead(s32, M2C_UNK, M2C_UNK);",
+  "sceIoWrite": "s32 sceIoWrite(s32, M2C_UNK, M2C_UNK);",
+  "sceKernelLibcClock": "M2C_UNK sceKernelLibcClock();",
+  "sceKernelLibcGettimeofday": "M2C_UNK sceKernelLibcGettimeofday();",
+  "sceKernelLibcTime": "M2C_UNK sceKernelLibcTime();",
+  "sceKernelStderr": "s32 sceKernelStderr();",
+  "sceKernelStdin": "s32 sceKernelStdin();",
+  "sceKernelStdout": "s32 sceKernelStdout();"
+ },
+ "vars": {}
+}

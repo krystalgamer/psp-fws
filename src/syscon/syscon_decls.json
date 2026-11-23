@@ -1,0 +1,26 @@
+{
+ "funcs": {
+  "func_000038C4": "M2C_UNK func_000038C4(M2C_UNK, s32);",
+  "module_start": "s32 module_start(void);",
+  "sceKernelDisableSubIntr": "M2C_UNK sceKernelDisableSubIntr(M2C_UNK, M2C_UNK);",
+  "sceSyscon_driver_081826B4": "s32 sceSyscon_driver_081826B4(void);",
+  "sceSyscon_driver_0A771482": "M2C_UNK sceSyscon_driver_0A771482();",
+  "sceSyscon_driver_284FE366": "void sceSyscon_driver_284FE366(s32 arg0);",
+  "sceSyscon_driver_2B9E6A06": "s32 sceSyscon_driver_2B9E6A06(s32 *arg0);",
+  "sceSyscon_driver_373EC933": "void sceSyscon_driver_373EC933(s32 arg0);",
+  "sceSyscon_driver_4C0EE2FA": "void sceSyscon_driver_4C0EE2FA(s32 arg0);",
+  "sceSyscon_driver_4C539345": "void sceSyscon_driver_4C539345(s32 arg0);",
+  "sceSyscon_driver_70C10E61": "void sceSyscon_driver_70C10E61(s32 arg0);",
+  "sceSyscon_driver_71135D7D": "void sceSyscon_driver_71135D7D(s32 arg0);",
+  "sceSyscon_driver_75D22BF8": "void sceSyscon_driver_75D22BF8(s32 arg0);",
+  "sceSyscon_driver_7CBD4522": "void sceSyscon_driver_7CBD4522(s32 arg0);",
+  "sceSyscon_driver_82861DE2": "void sceSyscon_driver_82861DE2(s32 arg0);",
+  "sceSyscon_driver_87671B18": "void sceSyscon_driver_87671B18(s32 arg0);",
+  "sceSyscon_driver_876CA580": "void sceSyscon_driver_876CA580(s32 arg0);",
+  "sceSyscon_driver_8BDEBB1E": "void sceSyscon_driver_8BDEBB1E(s32 arg0);",
+  "sceSyscon_driver_B5105D51": "void sceSyscon_driver_B5105D51(s32 arg0);",
+  "sceSyscon_driver_B71B98A8": "void sceSyscon_driver_B71B98A8(s32 arg0);",
+  "sceSyscon_driver_D5340103": "void sceSyscon_driver_D5340103(s32 arg0);"
+ },
+ "vars": {}
+}

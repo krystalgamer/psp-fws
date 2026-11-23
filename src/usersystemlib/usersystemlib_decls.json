@@ -1,0 +1,6 @@
+{
+ "funcs": {
+  "sceKernelIsCpuIntrSuspended": "s32 sceKernelIsCpuIntrSuspended(s32 arg0);"
+ },
+ "vars": {}
+}

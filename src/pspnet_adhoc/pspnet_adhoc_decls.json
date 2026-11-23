@@ -1,0 +1,12 @@
+{
+ "funcs": {
+  "func_00000490": "void func_00000490(void);",
+  "func_00000FFC": "M2C_UNK func_00000FFC(void *);",
+  "func_00002D20": "s32 func_00002D20(void *arg0, s32 arg1);",
+  "func_00002D2C": "M2C_UNK func_00002D2C();",
+  "func_00003BB0": "void func_00003BB0(void *arg0);",
+  "func_00004AE4": "M2C_UNK func_00004AE4(void *);",
+  "func_00004B30": "M2C_UNK func_00004B30(s32);"
+ },
+ "vars": {}
+}

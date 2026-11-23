@@ -1,0 +1,13 @@
+{
+ "funcs": {
+  "func_000000E8": "s32 func_000000E8(void);",
+  "func_00000124": "s32 func_00000124(void);",
+  "func_00000160": "s32 func_00000160(void);",
+  "func_0000036C": "s32 func_0000036C(void);",
+  "sceKernelCpuResumeIntr": "M2C_UNK sceKernelCpuResumeIntr(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr();"
+ },
+ "vars": {
+  "D_000004B0": "extern s32 D_000004B0;"
+ }
+}

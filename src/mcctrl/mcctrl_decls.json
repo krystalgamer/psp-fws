@@ -1,0 +1,16 @@
+{
+ "funcs": {
+  "func_00000BC8": "int func_00000BC8(u8 *src, u8 *dst, u32 size);",
+  "func_00000C48": "int func_00000C48(u8 *src, u8 *dst, u32 size);",
+  "func_00000D3C": "int func_00000D3C(u8 *buf, u32 size, u8 *mac);",
+  "module_start": "int module_start(SceSize args, void *argp);",
+  "module_stop": "int module_stop(SceSize args, void *argp);",
+  "sceMcctrl_1EDFD6BB": "int sceMcctrl_1EDFD6BB(u8 *arg0, u8 *arg1);",
+  "sceMcctrl_3EF531DB": "int sceMcctrl_3EF531DB(void);",
+  "sceMcctrl_61550814": "int sceMcctrl_61550814(u8 *arg0, u8 *arg1, int size, u8 *out, u32 outSize);",
+  "sceMcctrl_7CAC25B2": "int sceMcctrl_7CAC25B2(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, u8 *arg4, u8 *arg5);",
+  "sceMcctrl_877CD3A5": "int sceMcctrl_877CD3A5(void);",
+  "sceMcctrl_9618EE57": "int sceMcctrl_9618EE57(u8 *arg0, u8 *arg1, u32 arg2);"
+ },
+ "vars": {}
+}

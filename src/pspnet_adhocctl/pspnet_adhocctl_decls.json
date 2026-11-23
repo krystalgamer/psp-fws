@@ -1,0 +1,10 @@
+{
+ "funcs": {
+  "func_00002068": "M2C_UNK func_00002068(s32, M2C_UNK, M2C_UNK, s32);",
+  "func_00002280": "void func_00002280(s32 arg0, M2C_UNK arg1);",
+  "func_00003360": "M2C_UNK func_00003360();",
+  "sceNetAdhocctl_lib_1572422C": "void sceNetAdhocctl_lib_1572422C(void);",
+  "sceNet_lib_57CC57DA": "M2C_UNK sceNet_lib_57CC57DA(M2C_UNK, M2C_UNK, M2C_UNK);"
+ },
+ "vars": {}
+}
