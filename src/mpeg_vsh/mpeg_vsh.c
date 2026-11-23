@@ -1,4 +1,4 @@
-/* cflags: -O2 -frename-registers */
+/* cflags: -Os -frename-registers */
 #include "common.h"
 #include "mpeg_vsh_decls.h"
 
@@ -136,26 +136,7 @@ s32 func_0000366C(void) {
     return 0;
 }
 
-s32 func_00003674(void *arg0) {
-    s32 *temp_v1;
-    s32 temp_s0;
-    s32 temp_v0;
-    s32 var_v0;
-    void *temp_s2;
-
-    temp_v1 = M2C_FIELD(arg0, s32 **, 0x28);
-    temp_s2 = *temp_v1;
-    temp_v0 = func_00001FC8(temp_v1);
-    if (temp_v0 != 0) {
-        var_v0 = temp_v0;
-    } else {
-        func_000079D8(M2C_FIELD(temp_s2, u32 *, 0x66C));
-        temp_s0 = M2C_FIELD(arg0, s32 *, 0xC);
-        func_00007A68(M2C_FIELD(temp_s2, u32 *, 0x66C));
-        var_v0 = temp_s0;
-    }
-    return var_v0;
-}
+INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00003674);
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_000036DC);
 
@@ -260,17 +241,7 @@ u8 func_00005C18(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 1);
 }
 
-s32 func_00005C20(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 >= 4) {
-
-    } else {
-        var_v0 = func_00009530(arg0 + (arg1 * 2) + 2);
-    }
-    return var_v0;
-}
+INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00005C20);
 
 s32 func_00005C5C(s32 arg0) {
     return arg0 + 0xE;
@@ -297,13 +268,45 @@ INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_000060A0);
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_0000617C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegQueryStreamOffset);
+s32 sceMpegQueryStreamOffset(void *arg0, void *arg1, void *arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegQueryStreamSize);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00001EFC((s32) arg0, (s32) arg1, (s32) arg2);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegInit);
+s32 sceMpegQueryStreamSize(void *arg0, void *arg1) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegFinish);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00001FFC((s32) arg0, (s32 *) arg1);
+    }
+    return var_v1;
+}
+
+s32 sceMpegInit(void) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_0000034C();
+    }
+    return var_v1;
+}
+
+s32 sceMpegFinish(void) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_0000041C();
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegQueryMemSize);
 
@@ -311,138 +314,466 @@ INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegCreate);
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegDelete);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegRegistStream);
+void *sceMpegRegistStream(void *arg0, s32 arg1, s32 arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegUnRegistStream);
+    var_v1 = 0;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_0000026C((s32) arg0, arg1, arg2);
+    }
+    return (void *) var_v1;
+}
+
+s32 sceMpegUnRegistStream(void *arg0, void *arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_000001B4((s32) arg0, (s32) arg1);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegMallocAvcEsBuf);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegFreeAvcEsBuf);
+s32 sceMpegFreeAvcEsBuf(void *arg0, s32 arg1) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegQueryAtracEsSize);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00005790((s32) arg0, arg1);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegQueryPcmEsSize);
+s32 sceMpegQueryAtracEsSize(void *arg0, void *arg1, void *arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegInitAu);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00005810((s32) arg0, (s32) arg1, (s32) arg2);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegChangeGetAvcAuMode);
+s32 sceMpegQueryPcmEsSize(void *arg0, void *arg1, void *arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegChangeGetAuMode);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00005A64((s32) arg0, (s32) arg1, (s32) arg2);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegNextAvcRpAu);
+s32 sceMpegInitAu(void *arg0, s32 arg1, void *arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegGetAvcAu);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00000B88((s32) arg0, arg1, (s32) arg2);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegGetPcmAu);
+s32 sceMpegChangeGetAvcAuMode(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegGetAtracAu);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_000060A0(arg0, arg1, arg2);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegFlushStream);
+s32 sceMpegChangeGetAuMode(void *arg0, void *arg1, s32 arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegFlushAllStream);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_0000617C((s32) arg0, (s32) arg1, arg2);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcDecode);
+s32 sceMpegNextAvcRpAu(void *arg0, void *arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00005CE4((s32) arg0, (s32) arg1);
+    }
+    return var_v1;
+}
+
+s32 sceMpegGetAvcAu(void *arg0, void *arg1, void *arg2, void *arg3) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_00004C18((s32) arg0, (s32) arg1, (s32) arg2, (s32) arg3);
+    }
+    return var_v1;
+}
+
+s32 sceMpegGetPcmAu(void *arg0, void *arg1, void *arg2, void *arg3) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_00003D7C((s32) arg0, (s32) arg1, (s32) arg2, (s32) arg3);
+    }
+    return var_v1;
+}
+
+s32 sceMpegGetAtracAu(void *arg0, void *arg1, void *arg2, void *arg3) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_00004818((s32) arg0, (s32) arg1, (s32) arg2, (s32) arg3);
+    }
+    return var_v1;
+}
+
+s32 sceMpegFlushStream(void *arg0, void *arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00000000((s32) arg0, (s32) arg1);
+    }
+    return var_v1;
+}
+
+s32 sceMpegFlushAllStream(void *arg0) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00000124((s32) arg0);
+    }
+    return var_v1;
+}
+
+s32 sceMpegAvcDecode(void *arg0, void *arg1, s32 arg2, void *arg3, void *arg4) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_00001058((s32) arg0, (s32) arg1, arg2, (s32) arg3, (s32) arg4);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcDecodeDetail);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcDecodeMode);
+s32 sceMpegAvcDecodeMode(void *arg0, void *arg1) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcDecodeStop);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00000D5C((s32) arg0, (s32) arg1);
+    }
+    return var_v1;
+}
+
+s32 sceMpegAvcDecodeStop(void *arg0, s32 arg1, void *arg2, void *arg3) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_000012D4((s32) arg0, arg1, (s32) arg2, (s32) arg3);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcDecodeFlush);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcQueryYCbCrSize);
+s32 sceMpegAvcQueryYCbCrSize(void *arg0, s32 arg1, s32 arg2, s32 arg3, void *arg4) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_00001674((s32) arg0, arg1, arg2, arg3, (s32) arg4);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcInitYCbCr);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcDecodeYCbCr);
+s32 sceMpegAvcDecodeYCbCr(void *arg0, void *arg1, void *arg2, void *arg3) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcDecodeStopYCbCr);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_000019E4((s32) arg0, (s32) arg1, (s32) arg2, (s32) arg3);
+    }
+    return var_v1;
+}
+
+s32 sceMpegAvcDecodeStopYCbCr(void *arg0, void *arg1, void *arg2) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00001B00((s32) arg0, (s32) arg1, (s32) arg2);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcCsc);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcCopyYCbCr);
+s32 sceMpegAvcCopyYCbCr(void *arg0, void *arg1, void *arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAtracDecode);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00001954((s32) arg0, (s32) arg1, (s32) arg2);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00006FCC);
+s32 sceMpegAtracDecode(void *arg0, void *arg1, void *arg2, s32 arg3) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00007044);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_00001E54((s32) arg0, (s32) arg1, (s32) arg2, arg3);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegQueryUserdataEsSize);
+s32 func_00006FCC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_000014C0(arg0, arg1, arg2, arg3);
+    }
+    return var_v1;
+}
+
+s32 func_00007044(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00001A88(arg0, arg1, arg2);
+    }
+    return var_v1;
+}
+
+s32 sceMpegQueryUserdataEsSize(void *arg0, void *arg1, void *arg2) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00005B08((s32) arg0, (s32) arg1, (s32) arg2);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegGetUserdataAu);
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegGetAvcEsAu);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegRingbufferQueryMemSize);
+s32 sceMpegRingbufferQueryMemSize(s32 arg0) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegRingbufferQueryPackNum);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00003560(arg0);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegRingbufferConstruct);
+s32 sceMpegRingbufferQueryPackNum(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00003578(arg0);
+    }
+    return var_v1;
+}
+
+s32 sceMpegRingbufferConstruct(void *arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, void *arg5) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_00003594((s32) arg0, arg1, (s32) arg2, arg3, arg4, (s32) arg5);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegRingbufferDestruct);
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegRingbufferPut);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegRingbufferAvailableSize);
+s32 sceMpegRingbufferAvailableSize(void *arg0) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_11CAB459);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00003290((s32) arg0);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_C2F02CDD);
+s32 sceMpeg_11CAB459(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_5AC68A41);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00005AB0(arg0, arg1, arg2);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_DBB60658);
+s32 sceMpeg_C2F02CDD(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_B27711A8);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_000033D0(arg0, arg1, arg2, arg3);
+    }
+    return var_v1;
+}
+
+s32 sceMpeg_5AC68A41(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_00003CC4(arg0, arg1, arg2, arg3);
+    }
+    return var_v1;
+}
+
+s32 sceMpeg_DBB60658(s32 arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00003C1C(arg0, arg1);
+    }
+    return var_v1;
+}
+
+s32 sceMpeg_B27711A8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3E0) {
+        var_v1 = func_00005E6C(arg0, arg1, arg2, arg3);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_D4DD6E75);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_C345DED2);
+s32 sceMpeg_C345DED2(s32 arg0, s32 arg1) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegGetAvcNalAu);
+    var_v1 = 0;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00004704(arg0, arg1);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpegAvcDecodeDetailIndex);
+s32 sceMpegGetAvcNalAu(void *arg0, void *arg1, void *arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_CF3547A2);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00005048((s32) arg0, (s32) arg1, (s32) arg2);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_6F314410);
+s32 sceMpegAvcDecodeDetailIndex(void *arg0, s32 arg1, void *arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_AE693D0B);
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00000E04((s32) arg0, arg1, (s32) arg2);
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", sceMpeg_988E9E12);
+s32 sceMpeg_CF3547A2(s32 arg0, s32 arg1) {
+    s32 var_v1;
 
-s32 func_00007958(s32 arg0, s32 arg1, void *arg2, u32 *arg3) {
-    u32 temp_v0;
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00000F10(arg0, arg1);
+    }
+    return var_v1;
+}
+
+s32 sceMpeg_6F314410(s32 arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00000F78(arg0, arg1);
+    }
+    return var_v1;
+}
+
+s32 sceMpeg_AE693D0B(s32 arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00000FE8(arg0, arg1);
+    }
+    return var_v1;
+}
+
+s32 sceMpeg_988E9E12(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v1;
+
+    var_v1 = 0x80618008;
+    if (func_00007ADC() >= 0x3F0) {
+        var_v1 = func_00005888(arg0, arg1, arg2);
+    }
+    return var_v1;
+}
+
+s32 func_00007958(s32 arg0, s32 arg1, void *arg2, s32 *arg3) {
+    s32 temp_v0;
 
     temp_v0 = sceKernelCreateSema(arg2, 0U, arg0, arg1, NULL);
     *arg3 = temp_v0;
-    return ((s32) temp_v0 >= 0) ? 0 : 0x80000041;
+    return (temp_v0 >= 0) ? 0 : 0x80000041;
 }
 
-s32 func_000079AC(u32 arg0) {
+s32 func_000079AC(s32 arg0) {
     return (sceKernelDeleteSema(arg0) == 0) ? 0 : 0x80000041;
 }
 
-s32 func_000079D8(u32 arg0) {
+s32 func_000079D8(s32 arg0) {
     return (sceKernelWaitSema(arg0, 1, NULL) == 0) ? 0 : 0x80000041;
 }
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00007A08);
 
-s32 func_00007A3C(u32 arg0) {
+s32 func_00007A3C(s32 arg0) {
     return (sceKernelPollSema(arg0, 0) == 0) ? 0 : 0x80000041;
 }
 
-s32 func_00007A68(u32 arg0) {
+s32 func_00007A68(s32 arg0) {
     return (sceKernelSignalSema(arg0, 1) == 0) ? 0 : 0x80000041;
 }
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00007A94);
 
-void func_00007ADC(void) {
-    sceKernelCheckThreadStack();
+s32 func_00007ADC(void) {
+    return sceKernelCheckThreadStack();
 }
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00007AF8);
@@ -464,9 +795,7 @@ s32 func_00007D94(s32 arg0) {
     return temp_s1;
 }
 
-s32 func_00007DE4(void) {
-    return M2C_FIELD(D_00009DC0, s32 *, 0x14);
-}
+INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00007DE4);
 
 s32 func_00007DF4(s32 arg0) {
     s32 temp_s1;
@@ -486,21 +815,7 @@ s32 func_00007E48(s32 arg0) {
     return temp_s1;
 }
 
-s32 func_00007E9C(s32 arg0) {
-    s32 temp_v0;
-    s32 var_v0;
-
-    func_000079D8(D_00009F80);
-    temp_v0 = sceVideocodec_307E6E1C(arg0, 0);
-    if (temp_v0 != 0) {
-        func_00007A68(D_00009F80);
-        var_v0 = temp_v0;
-    } else {
-        func_00007A68(D_00009F80);
-        var_v0 = 0;
-    }
-    return var_v0;
-}
+INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00007E9C);
 
 s32 func_00007F04(void *arg0, s32 arg1) {
     s32 temp_s1;
@@ -540,13 +855,7 @@ INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_000088AC);
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00008958);
 
-void func_00008A58(void) {
-    if (M2C_FIELD(D_00009EC0, s32 *, 0xC) == 0) {
-
-    } else {
-        sceAudiocodec_29681260(D_00009EC0);
-    }
-}
+INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00008A58);
 
 s32 func_00008A90(s32 arg0, s32 arg1) {
     s32 temp_s1;
@@ -557,12 +866,7 @@ s32 func_00008A90(s32 arg0, s32 arg1) {
     return temp_s1;
 }
 
-s32 func_00008AF0(s32 *arg0) {
-    if (arg0 != NULL) {
-        *arg0 = D_00009F6C;
-    }
-    return M2C_FIELD(D_00009EC0, s32 *, 0xC);
-}
+INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00008AF0);
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00008B10);
 
