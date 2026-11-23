@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "pspnet_resolver_decls.h"
 
@@ -13,7 +14,20 @@ INCLUDE_ASM("tmp/asm/282/pspnet_resolver/nonmatchings/pspnet_resolver", sceNetRe
 
 INCLUDE_ASM("tmp/asm/282/pspnet_resolver/nonmatchings/pspnet_resolver", sceNetResolverCreate);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_resolver/nonmatchings/pspnet_resolver", sceNetResolverDelete);
+s32 sceNetResolverDelete(s32 arg0) {
+    s32 var_a1;
+    s32 var_v1;
+
+    var_v1 = 0x80410005;
+    if (sceKernelCheckThreadStack() >= 0x13F0) {
+        var_a1 = 0x80410405;
+        if (arg0 >= 0) {
+            var_a1 = func_0000070C(arg0);
+        }
+        var_v1 = var_a1;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_resolver/nonmatchings/pspnet_resolver", func_00000508);
 
@@ -34,7 +48,9 @@ INCLUDE_ASM("tmp/asm/282/pspnet_resolver/nonmatchings/pspnet_resolver", func_000
 
 INCLUDE_ASM("tmp/asm/282/pspnet_resolver/nonmatchings/pspnet_resolver", func_00000F64);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_resolver/nonmatchings/pspnet_resolver", func_00000FA8);
+s32 func_00000FA8(void) {
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_resolver/nonmatchings/pspnet_resolver", func_00000FB0);
 

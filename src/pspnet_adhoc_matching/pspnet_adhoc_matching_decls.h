@@ -4,17 +4,31 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern s32 D_00003DB0;
 
 void func_0000113C(void *arg0, s32 *arg1);
 void func_00002188(void *arg0);
 void func_00002794(void *arg0, s32 *arg1);
-s32 func_00002F24();
-M2C_UNK func_00002F90(s32);
-M2C_UNK sceKernelDeleteMbx(s32);
-M2C_UNK sceKernelDeleteThread(s32);
-M2C_UNK sceKernelWaitThreadEnd(s32, M2C_UNK);
-M2C_UNK sceNetAdhocPdpDelete(s32, M2C_UNK);
-M2C_UNK sceNetAdhocSetSocketAlert(s32, M2C_UNK);
-M2C_UNK sceNetFreeThreadinfo(s32);
+void func_00002B68(void *arg0);
+void func_00002BB8(void *arg0);
+s32 func_00002C08(void *arg0);
+s32 func_00002C64(void *arg0);
+s32 func_00002CC0(void *arg0);
+s32 func_00002F24(void);
+s32 func_00002F90(s32);
+void func_000030C8(void);
+void func_00003178(void *arg0);
+s32 sceKernelCancelAlarm(u32);
+void sceKernelCpuResumeIntr(s32);
+s32 sceKernelCpuSuspendIntr(void);
+s32 sceKernelDeleteMbx(u32);
+s32 sceKernelDeleteThread(u32);
+s32 sceKernelDeleteVpl(u32);
+s32 sceKernelFreeVpl(u32, void *);
+s32 sceKernelSendMbx(u32, void *);
+s32 sceKernelWaitThreadEnd(u32, void *);
+s32 sceNetAdhocPdpDelete(s32, s32);
+s32 sceNetAdhocSetSocketAlert(s32, s32);
+s32 sceNetFreeThreadinfo(u32);
 
 #endif

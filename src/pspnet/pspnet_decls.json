@@ -10,13 +10,18 @@
   "func_000076B8": "s32 func_000076B8(void);",
   "func_0000791C": "s32 func_0000791C(void);",
   "func_00007924": "s32 func_00007924(void);",
+  "func_00008790": "s32 func_00008790(s32, s32, s32);",
   "sceNetIfhandle_lib_0C391E9F": "s32 sceNetIfhandle_lib_0C391E9F();",
   "sceNetIfhandle_lib_29ED84C5": "M2C_UNK sceNetIfhandle_lib_29ED84C5();",
   "sceNetIfhandle_lib_76BAD213": "M2C_UNK sceNetIfhandle_lib_76BAD213();",
+  "sceNet_lib_1FB2FDDD": "void sceNet_lib_1FB2FDDD(s32 arg0);",
   "sceNet_lib_41FD8B5C": "void sceNet_lib_41FD8B5C(void);",
+  "sceNet_lib_80C9F02A": "u8 *sceNet_lib_80C9F02A(u8 *arg0, u8 *arg1);",
   "sceNet_lib_8C55B410": "s32 sceNet_lib_8C55B410(void);",
+  "sceNet_lib_92633D8D": "void sceNet_lib_92633D8D(void *arg0, s32 *arg1);",
   "sceNet_lib_DCBC596E": "void sceNet_lib_DCBC596E(void);",
-  "sceNet_lib_EDCC871E": "void sceNet_lib_EDCC871E(void);"
+  "sceNet_lib_EDCC871E": "void sceNet_lib_EDCC871E(void);",
+  "sceNet_lib_EF097716": "u8 *sceNet_lib_EF097716(u8 *arg0, u8 *arg1, s32 arg2);"
  },
  "vars": {}
 }

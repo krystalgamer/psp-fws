@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "pspnet_adhocctl_decls.h"
 
@@ -85,7 +86,7 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000021BC);
 
-void func_00002280(s32 arg0, M2C_UNK arg1) {
+void func_00002280(s32 arg0, s32 arg1) {
     sceNet_lib_57CC57DA(arg1, 0, 0x21);
     func_00002068(arg0, arg1, 0x47, arg0 + 0x24);
 }
@@ -136,7 +137,9 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000032CC);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_00003360);
+s32 func_00003360(void) {
+    return scePowerRequestSuspend();
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_0000337C);
 
@@ -176,7 +179,12 @@ INCLUDE_RODATA("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", D_000
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_0000581C);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_00005870);
+void func_00005870(void) {
+    if (D_000062A0 >= 0) {
+        sceKernelDeleteSema((u32) D_000062A0);
+    }
+    D_000062A0 = -1;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000058AC);
 

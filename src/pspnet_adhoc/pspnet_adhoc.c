@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "pspnet_adhoc_decls.h"
 
@@ -11,13 +12,47 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_0000036C)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_0000047C);
 
-void func_00000490(void) {
-    func_00002D2C();
+void func_00000490(s32 arg0) {
+    func_00002D2C(arg0);
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhocPollSocket);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00000974);
+s32 func_00000974(void *arg0, s32 arg1) {
+    s32 var_s2;
+    s32 var_s3;
+    u8 temp_v1;
+    void *temp_a1;
+    void *temp_s0;
+    void *temp_s0_2;
+    void *temp_v0;
+    void *var_s1;
+
+    var_s3 = 0;
+    var_s1 = arg0;
+    if (arg1 > 0) {
+        var_s2 = arg1;
+        do {
+            temp_a1 = M2C_FIELD(var_s1, void **, 0);
+            temp_v1 = M2C_FIELD(temp_a1, u8 *, 0x10);
+            switch (temp_v1) {                      /* irregular */
+            case 2:
+                temp_s0 = M2C_FIELD(var_s1, void **, 4);
+                M2C_FIELD(temp_s0, s32 *, 8) = func_00005024((s32) temp_a1, M2C_FIELD(temp_s0, s32 *, 4));
+                break;
+            case 1:
+                temp_s0_2 = M2C_FIELD(var_s1, void **, 4);
+                M2C_FIELD(temp_s0_2, s32 *, 8) = func_00002D94((s32) temp_a1, M2C_FIELD(temp_s0_2, s32 *, 4));
+                break;
+            }
+            temp_v0 = M2C_FIELD(var_s1, void **, 4);
+            var_s2 -= 1;
+            var_s1 += 8;
+            var_s3 += M2C_FIELD(temp_v0, s32 *, 8) != 0;
+        } while (var_s2 != 0);
+    }
+    return var_s3;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhocSetSocketAlert);
 
@@ -106,8 +141,8 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00003A68)
 
 void func_00003BB0(void *arg0) {
     func_00004B30(M2C_FIELD(arg0, s32 *, 0x14));
-    func_00004AE4(arg0);
-    func_00000FFC(arg0);
+    func_00004AE4((s32) arg0);
+    func_00000FFC((s32) arg0);
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00003BE8);
@@ -154,9 +189,45 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_000055B0)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_000055BC);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_000056E4);
+s32 func_000056E4(void *arg0, s32 arg1) {
+    void *temp_a2;
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00005708);
+    M2C_FIELD(arg0, s32 *, 0x5C) = 1;
+    M2C_FIELD(arg0, s32 *, 0xDC) = arg1;
+    temp_a2 = M2C_FIELD(arg0, void **, 0x58);
+    M2C_FIELD(temp_a2, s32 *, 0xC) = (s32) (M2C_FIELD(temp_a2, s32 *, 0xC) | 0x1000);
+    return 0;
+}
+
+void func_00005708(void *arg0) {
+    s32 temp_s2;
+    void *temp_a1;
+    void *var_s0;
+
+    var_s0 = M2C_FIELD(arg0, void **, 0x10);
+    if (var_s0 != NULL) {
+        do {
+            temp_a1 = M2C_FIELD(var_s0, void **, 8);
+            temp_s2 = M2C_FIELD(var_s0, s32 *, 0x58);
+            if (temp_a1 != NULL) {
+                M2C_FIELD(temp_a1, void ***, 0xC) = (void **) M2C_FIELD(var_s0, void ***, 0xC);
+            } else {
+                M2C_FIELD(arg0, void ***, 0x14) = (void **) M2C_FIELD(var_s0, void ***, 0xC);
+            }
+            *M2C_FIELD(var_s0, void ***, 0xC) = temp_a1;
+            M2C_FIELD(arg0, s32 *, 0xD8) = (s32) (M2C_FIELD(arg0, s32 *, 0xD8) - 1);
+            func_00004E98((s32) var_s0);
+            func_00005708(var_s0);
+            func_00004AE4(temp_s2);
+            func_00000FFC(temp_s2);
+            var_s0 = M2C_FIELD(arg0, void **, 0x10);
+        } while (var_s0 != NULL);
+    }
+    sceNet_lib_57CC57DA(arg0 + 0x18, 0, 6);
+    sceNet_lib_57CC57DA(arg0 + 0x1E, 0, 6);
+    M2C_FIELD(arg0, s16 *, 0x24) = 0;
+    func_00004B30((s32) arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_000057CC);
 
@@ -194,7 +265,9 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00006F80)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_FA324B4E);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_AF6DFB15);
+void sceNetAdhoc_lib_AF6DFB15(s32 arg0, s32 arg1) {
+    func_00007298(arg0, arg1, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_0B2228E9);
 

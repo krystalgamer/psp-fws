@@ -15,12 +15,17 @@ s32 func_00007678(void);
 s32 func_000076B8(void);
 s32 func_0000791C(void);
 s32 func_00007924(void);
+s32 func_00008790(s32, s32, s32);
 s32 sceNetIfhandle_lib_0C391E9F();
 M2C_UNK sceNetIfhandle_lib_29ED84C5();
 M2C_UNK sceNetIfhandle_lib_76BAD213();
+void sceNet_lib_1FB2FDDD(s32 arg0);
 void sceNet_lib_41FD8B5C(void);
+u8 *sceNet_lib_80C9F02A(u8 *arg0, u8 *arg1);
 s32 sceNet_lib_8C55B410(void);
+void sceNet_lib_92633D8D(void *arg0, s32 *arg1);
 void sceNet_lib_DCBC596E(void);
 void sceNet_lib_EDCC871E(void);
+u8 *sceNet_lib_EF097716(u8 *arg0, u8 *arg1, s32 arg2);
 
 #endif

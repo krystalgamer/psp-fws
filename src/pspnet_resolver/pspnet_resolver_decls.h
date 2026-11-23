@@ -6,6 +6,9 @@
 
 
 s32 func_000006B0(void);
-M2C_UNK func_00000FA8();
+s32 func_0000070C(s32);
+s32 func_00000FA8(void);
+s32 sceKernelCheckThreadStack(void);
+s32 sceNetResolverDelete(s32 arg0);
 
 #endif

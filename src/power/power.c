@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "power_decls.h"
 
@@ -25,7 +26,16 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", module_start);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", module_reboot_before);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_AD5BB433);
+s32 scePower_driver_AD5BB433(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_00005F00);
+    sceSyscon_driver_E540E532(0, 0);
+    sceSyscon_driver_AD555CE5(0, 0);
+    func_00002E48();
+    func_00003A98();
+    func_00004BF8();
+    func_0000250C();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_C71EE866);
 
@@ -53,7 +63,9 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_FA97A599);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_B3EDD801);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_D6D016EF);
+void scePower_driver_D6D016EF(s32 arg0) {
+    func_000012B4(arg0, 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_000012B4);
 
@@ -79,7 +91,9 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_D6D016EF);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_CA3D34C1);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_CA3D34C1);
+void scePower_driver_CA3D34C1(s32 arg0) {
+    func_00002880(arg0, 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_7FA406DD);
 
@@ -180,12 +194,12 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerGetPllClockFrequency
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerGetPllClockFrequencyFloat);
 
-void scePowerSetClockFrequency(void) {
-    func_000032EC();
+s32 scePowerSetClockFrequency(s32 arg0, s32 arg1, s32 arg2) {
+    return func_000032EC(arg0, arg1, arg2);
 }
 
-void scePower_driver_A4E93389(void) {
-    func_000032EC();
+void scePower_driver_A4E93389(s32 arg0, s32 arg1, s32 arg2) {
+    func_000032EC(arg0, arg1, arg2);
 }
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00003DB8);
@@ -236,7 +250,12 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerIsPowerOnline);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerIsBatteryExist);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerIsBatteryCharging);
+s32 scePowerIsBatteryCharging(void) {
+    s32 temp_v0;
+
+    temp_v0 = scePower_driver_B4432BC8();
+    return ((temp_v0 ^ 2) == 0) ? 0 : temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerIsLowBattery);
 
@@ -248,6 +267,8 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_28E12023);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_483CE86B);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_23436A4A);
+s32 scePower_driver_23436A4A(void) {
+    return 0x802B0010;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00004FE0);

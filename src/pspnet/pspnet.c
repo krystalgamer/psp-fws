@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "pspnet_decls.h"
 
@@ -190,7 +191,9 @@ void sceNet_lib_41FD8B5C(void) {
     sceNetIfhandle_lib_76BAD213();
 }
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_92633D8D);
+void sceNet_lib_92633D8D(void *arg0, s32 *arg1) {
+    *arg1 = M2C_FIELD(arg0, s32 *, 8);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_B9C780C7);
 
@@ -382,7 +385,31 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00007BBC);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_E0A81C7C);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_EF097716);
+u8 *sceNet_lib_EF097716(u8 *arg0, u8 *arg1, s32 arg2) {
+    s32 var_a2;
+    u8 *var_a1;
+    u8 *var_v0;
+    u8 *var_v1;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_a2 = arg2;
+    var_v0 = NULL;
+    if (arg0 != NULL) {
+        var_v1 = arg0;
+        if (var_a2 > 0) {
+            do {
+                temp_a3 = *var_a1;
+                var_a2 -= 1;
+                var_a1 += 1;
+                *var_v1 = temp_a3;
+                var_v1 += 1;
+            } while (var_a2 > 0);
+        }
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_57CC57DA);
 
@@ -408,11 +435,32 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_2A73ADDC);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00008790);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_1FB2FDDD);
+void sceNet_lib_1FB2FDDD(s32 arg0) {
+    func_00008790(arg0, 0, 0xA);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_A0F16ABD);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_80C9F02A);
+u8 *sceNet_lib_80C9F02A(u8 *arg0, u8 *arg1) {
+    u8 *var_a1;
+    u8 *var_a2;
+    u8 *var_v0;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_v0 = NULL;
+    var_a2 = arg0;
+    if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
+        do {
+            temp_a3 = *var_a1;
+            var_a1 += 1;
+            *var_a2 = temp_a3;
+            var_a2 += 1;
+        } while (temp_a3 != 0);
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_D8722983);
 
