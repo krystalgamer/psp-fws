@@ -45,7 +45,25 @@ def fix(path, text_align=None, data_align=None):
         binds = [data[off + j * entsize + 12] >> 4 for j in range(count)]
         first_global = next((j for j, b in enumerate(binds) if b != 0), count)
         if any(b == 0 for b in binds[first_global:]):
-            raise SystemExit(f"{path}: locals interleaved with globals")
+            # Stable-partition locals before globals and renumber relocations.
+            order = [j for j in range(count) if binds[j] == 0] + [j for j in range(count) if binds[j] != 0]
+            remap = {old: new for new, old in enumerate(order)}
+            ents = [bytes(data[off + j * entsize: off + (j + 1) * entsize]) for j in range(count)]
+            for new_i, old_i in enumerate(order):
+                data[off + new_i * entsize: off + (new_i + 1) * entsize] = ents[old_i]
+            for k in range(shnum):
+                rsh = shoff + k * shentsize
+                rtype, = struct.unpack_from("<I", data, rsh + 4)
+                rlink, = struct.unpack_from("<I", data, rsh + 0x18)
+                if rtype not in (9, 4) or rlink != i:  # SHT_REL / SHT_RELA
+                    continue
+                roff, rsize, _, _, _, rent = struct.unpack_from("<IIIIII", data, rsh + 0x10)
+                for e in range(roff, roff + rsize, rent):
+                    info, = struct.unpack_from("<I", data, e + 4)
+                    struct.pack_into("<I", data, e + 4, (remap[info >> 8] << 8) | (info & 0xFF))
+            binds = [binds[j] for j in order]
+            first_global = binds.index(1) if 1 in binds else count
+            first_global = next((j for j, b in enumerate(binds) if b != 0), count)
         if first_global != info:
             struct.pack_into("<I", data, sh + 0x1C, first_global)
     open(path, "wb").write(data)

@@ -28,6 +28,7 @@ UNSUPPORTED = {
     # Allegrex system/debug instructions modern GAS doesn't know
     "mfie", "mtie", "sleep", "halt", "mfic", "mtic", "mfdr", "mtdr", "dbreak", "dret",
     "tgei", "tgeiu", "tlti", "tltiu", "teqi", "tnei",
+    "break", "syscall", "sdbbp", "teq", "tne", "tge", "tgeu", "tlt", "tltu",
     # VFPU loads/stores, moves and branches (other VFPU ops start with "v")
     "lv.s", "lv.q", "sv.s", "sv.q", "lvl.q", "lvr.q", "svl.q", "svr.q",
     "mfv", "mtv", "mfvc", "mtvc", "bvf", "bvt", "bvfl", "bvtl",
