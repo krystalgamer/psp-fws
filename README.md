@@ -33,19 +33,16 @@ make             # build and verify sha1
 
 ## Modules
 
-| Module | Builds covered | Setup | C status |
-|---|---|---|---|
-| mcctrl | 2.00–3.60 (one binary), config `360` | matching | 21/22 functions; `sceMcctrl_7CAC25B2` is a NON_MATCHING draft |
-| openpsid | 2.00–2.82 (psp-1.7.1 build), config `282` | matching | 12/14; Encrypt and GetOpenPSID are NON_MATCHING drafts |
-| mcore | 2.70–3.40, config `340` | matching | 84/707 (auto-decompiled) |
-| mcore | 2.50, 2.60 | matching (asm only) | – |
-| paf, pafmini | 1.00 | matching (asm only) | only 2 objects each are psp-1.3.1; the rest need the unavailable psp-1.5.1 |
-
 **All firmware modules below 3.60** (3,814 PRX files, 2,662 distinct binaries) have
 matching asm setups in `config/<ver>/`, one config per distinct binary under the latest
 version that ships it (`tmp/inventory.json` lists which versions share a binary).
-Only objects built with psp-gcc 1.3.1/1.7.1 can be matched as C; the other modules
-use compiler versions that aren't available.
+
+All 199 module names have one binary converted to C (`src/<module>/`, the version
+whose config has a `c` subsegment): auto-decompiled functions plus `INCLUDE_ASM`
+for the rest. mcctrl (3.60) and openpsid (2.82) are hand-decompiled
+(`sceMcctrl_7CAC25B2`, `sceDdrdbEncrypt` and `sceOpenPSIDGetOpenPSID` remain
+NON_MATCHING drafts). `.comment` names psp-gcc 1.5.1/1.10.2 for many objects; our
+1.3.1/1.7.1 `cc1` reproduce many of their functions with the right flags (see below).
 
 New modules: `tools/gen_config.py <ver> <path under F0>` then `tools/nid_names.py <ver> <name>`
 and `make split VERSION=<ver> MODULE=<name>`. In bulk: `tools/batch_setup.py`
@@ -62,6 +59,23 @@ check from scratch with `tools/regress.sh 360:mcctrl 340:mcore ...`.
 .venv/bin/python tools/try_variants.py <function> <variants.py>   # score source variants
 .venv/bin/python tools/permuter_setup.py <function>  # then run tmp/permuter (decomp-permuter)
 ```
+
+Per-module compiler flags live in a comment in the C file: `/* compiler: 1.3.1 */`
+(default 1.7.1), `/* cflags: -Os -frename-registers */` (default `-O2`),
+`/* text-align: 8 */`. Kernel/driver modules mostly match with
+`-O2 -frename-registers` (it gives the original register choice, e.g.
+`lui $3; ori $2,$3,...` for constants; `-O3` behaves the same), VSH plugins and
+libraries with plain `-O2` or `-Os`. `tools/switch_opt.sh VER:MOD <cflags>` redoes
+a module from scratch with other flags and keeps it only if more functions match;
+`tools/retry_pass.sh VER:MOD [regex]` retries remaining functions (add-only);
+`tools/flag_search.py` tests extra flags on near misses.
+
+auto_decomp details: m2c runs with the PSP's MIPS EABI (`mipsee` target:
+arguments in `$a0-$a3,$t0-$t3` and `$f12-$f19`) and falls back to o32;
+`tools/m2c_allegrex.py` adds Allegrex ops (`max/min/clz/ext/ins/wsbw/bitrev/rotr`)
+as the psp-gcc `__builtin_allegrex_*` intrinsics; unknown callees get prototypes
+from the SDK headers or from the argument registers their asm reads
+(`tools/protos.py`), and exported functions get their SDK signature.
 
 `diff.py --score` is alignment-aware (branch/jump targets masked). Use `--version/--module`
 for modules other than mcctrl 3.60.
