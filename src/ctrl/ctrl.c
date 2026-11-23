@@ -26,7 +26,21 @@ INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlPeekLatch);
 
 INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlReadLatch);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_B7CEAED4);
+s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
+    if (arg0 != NULL) {
+        *arg0 = D_000027A4;
+    }
+    if (arg1 != NULL) {
+        *arg1 = D_000027A8;
+    }
+    if (arg2 != NULL) {
+        *arg2 = D_000027AC;
+    }
+    if (arg3 != NULL) {
+        *arg3 = D_000027B0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlSetIdleCancelThreshold);
 
@@ -72,11 +86,16 @@ s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_A88E8D22);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_252D3A8D);
+s32 sceCtrl_driver_252D3A8D(s8 arg0) {
+    D_00001D7F = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_348D99D4);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_AF5960F3);
+s32 sceCtrl_driver_AF5960F3(void) {
+    return D_00001D88;
+}
 
 INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_5C56C779);
 

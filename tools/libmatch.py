@@ -52,6 +52,14 @@ TIF_VALUES = {"HOST_FILLORDER": "FILLORDER_LSB2MSB", "HOST_BIGENDIAN": "0", "SIZ
               "STRIP_SIZE_DEFAULT": "8192"}
 
 
+CPP_BASE = ["cpp", "-P", "-undef", "-nostdinc", "-D__psp__", "-D__mips__", "-D__MIPSEL__", "-D__GNUC__=3",
+           "-D__GNUC_MINOR__=3", "-D__STDC__", "-D__ELF__", "-D_MIPS_SZINT=32", "-D_MIPS_SZLONG=32",
+           "-D_MIPS_SZPTR=32", "-D__SIZE_TYPE__=unsigned int", "-D__PTRDIFF_TYPE__=int",
+           "-D__WCHAR_TYPE__=int", "-D__WINT_TYPE__=unsigned int", "-D__CHAR_BIT__=8",
+           "-D__INT_MAX__=2147483647", "-D__LONG_MAX__=2147483647L", "-D__SCHAR_MAX__=127",
+           "-D__SHRT_MAX__=32767", "-D__LONG_LONG_MAX__=9223372036854775807LL"]
+
+
 def prepare():
     j = LIB / "jpeg-6b/jconfig.h"
     if not j.exists():
@@ -104,12 +112,7 @@ def compile_funcs(src, incs, defs, opt, compiler="1.7.1", addrs=None):
     """{function name: masked words} for one source file (addrs: name -> address)."""
     with tempfile.TemporaryDirectory() as td:
         i, s, o = Path(td) / "f.i", Path(td) / "f.s", Path(td) / "f.o"
-        cpp = ["cpp", "-P", "-undef", "-nostdinc", "-D__psp__", "-D__mips__", "-D__MIPSEL__", "-D__GNUC__=3",
-               "-D__GNUC_MINOR__=3", "-D__STDC__", "-D__ELF__", "-D_MIPS_SZINT=32", "-D_MIPS_SZLONG=32",
-               "-D_MIPS_SZPTR=32", "-D__SIZE_TYPE__=unsigned int", "-D__PTRDIFF_TYPE__=int",
-               "-D__WCHAR_TYPE__=int", "-D__WINT_TYPE__=unsigned int", "-D__CHAR_BIT__=8",
-               "-D__INT_MAX__=2147483647", "-D__LONG_MAX__=2147483647L", "-D__SCHAR_MAX__=127",
-               "-D__SHRT_MAX__=32767", "-D__LONG_LONG_MAX__=9223372036854775807LL"]
+        cpp = list(CPP_BASE)
         cpp += [f"-I{d}" for d in incs] + [f"-I{d}" for d in SYS_INC] + defs + [str(src)]
         r = subprocess.run(cpp, capture_output=True, text=True)
         if r.returncode:

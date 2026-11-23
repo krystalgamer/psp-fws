@@ -54,7 +54,7 @@ class Module:
         self.text_off = elf.get_segment(0)["p_offset"]
         self.relocs = {}
         for line in (ROOT / "tmp/build" / ver / f"reloc_addrs.{mod}.txt").read_text().splitlines():
-            m = re.match(r"rom:(0x[0-9A-Fa-f]+) reloc:MIPS_(\w+)", line)
+            m = re.match(r"rom:(0[xX][0-9A-Fa-f]+) reloc:MIPS_(\w+)", line)
             if m:
                 self.relocs[int(m[1], 16)] = "16" if m[2] in ("HI16", "LO16") else m[2]
         self.funcs = self._func_ranges()

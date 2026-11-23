@@ -12,8 +12,18 @@
   "sceCtrlPeekBufferPositive": "s32 sceCtrlPeekBufferPositive(void *arg0, s32 arg1);",
   "sceCtrlReadBufferNegative": "s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1);",
   "sceCtrlReadBufferPositive": "s32 sceCtrlReadBufferPositive(void *arg0, s32 arg1);",
+  "sceCtrl_driver_252D3A8D": "s32 sceCtrl_driver_252D3A8D(s8 arg0);",
   "sceCtrl_driver_3E65A0EA": "M2C_UNK sceCtrl_driver_3E65A0EA();",
+  "sceCtrl_driver_AF5960F3": "s32 sceCtrl_driver_AF5960F3(void);",
+  "sceCtrl_driver_B7CEAED4": "s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3);",
   "sceCtrl_driver_E03956E9": "M2C_UNK sceCtrl_driver_E03956E9();"
  },
- "vars": {}
+ "vars": {
+  "D_00001D7F": "extern s8 D_00001D7F;",
+  "D_00001D88": "extern s32 D_00001D88;",
+  "D_000027A4": "extern s32 D_000027A4;",
+  "D_000027A8": "extern s32 D_000027A8;",
+  "D_000027AC": "extern s32 D_000027AC;",
+  "D_000027B0": "extern s32 D_000027B0;"
+ }
 }
