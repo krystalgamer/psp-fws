@@ -10,6 +10,7 @@ global declarations go to src/<module>/<module>_decls.h.
 Usage: tools/auto_decomp.py <version> <module> [--max-size 0x100] [--limit N] [--only NAME]
 """
 import argparse
+import difflib
 import json
 import re
 import struct
@@ -55,6 +56,7 @@ class Module:
         m = re.search(r"compiler: ([0-9.]+)", self.src.read_text()) if self.src.exists() else None
         self.compiler = m[1] if m else "1.7.1"
         self.stats = {}
+        self.scores = {}
 
     def _func_ranges(self):
         asm = (ROOT / "tmp/asm" / self.ver / self.mod / "nonmatchings" / self.mod)
@@ -76,7 +78,7 @@ class Module:
         out = []
         for i, w in enumerate(words):
             kind = self.relocs.get(rom + 4 * i)
-            if kind is None and w >> 26 == 3:
+            if kind is None and w >> 26 in (2, 3):
                 kind = "26"
             out.append(mask(w, kind))
         return out
@@ -122,6 +124,8 @@ def compile_words(c_text, compiler="1.7.1"):
         out = []
         for i, w in enumerate(words):
             k = kinds.get(4 * i)
+            if k is None and w >> 26 in (2, 3):
+                k = "26"
             out.append(mask(w, k))
         return out, ""
 
@@ -178,11 +182,18 @@ def try_func(mod, name, header_ctx):
         v for k, v in new_funcs.items() if k not in mod.store["funcs"]) + "\n" + body
     target = mod.target_words(name)
     matching = set()
+    best = None
     for comp in COMPILERS:
         words, err = compile_words(text, comp)
-        if words is not None and words == target:
+        if words is None:
+            continue
+        if words == target:
             matching.add(comp)
+        sm = difflib.SequenceMatcher(None, target, words, autojunk=False)
+        score = max(len(target), len(words)) - sum(b.size for b in sm.get_matching_blocks())
+        best = score if best is None else min(best, score)
     mod.stats[name] = sorted(matching)
+    mod.scores[name] = (best, len(target))
     if mod.compiler not in matching:
         return None
     return new_funcs, new_vars, sig, body
@@ -229,7 +240,7 @@ def main():
     stats_path = ROOT / "tmp/auto_stats" / f"{args.version}_{args.module}.json"
     stats_path.parent.mkdir(exist_ok=True)
     stats_path.write_text(json.dumps({"compiler": mod.compiler, "tried": len(names), "matched": matched,
-                                      "funcs": mod.stats}))
+                                      "funcs": mod.stats, "scores": mod.scores}))
     verify_and_revert(mod, args)
 
 

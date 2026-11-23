@@ -60,8 +60,13 @@ def to_c(cfg, name):
 
 
 def cleanup(ver, name):
-    for p in [ROOT / "tmp/asm" / ver / name, ROOT / "tmp/assets" / ver / name, ROOT / "tmp/build" / ver]:
+    b = ROOT / "tmp/build" / ver
+    for p in [ROOT / "tmp/asm" / ver / name, ROOT / "tmp/assets" / ver / name,
+              b / "tmp/asm" / ver / name, b / "tmp/assets" / ver / name, b / "src" / name,
+              b / f".splat_cache.{name}"]:
         shutil.rmtree(p, ignore_errors=True)
+    for p in list(b.glob(f"{name}.*")) + list(b.glob(f"*.{name}.txt")):
+        p.unlink(missing_ok=True)
     (ROOT / "tmp/baserom" / ver / f"{name}.prx").unlink(missing_ok=True)
 
 
