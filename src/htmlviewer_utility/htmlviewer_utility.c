@@ -77,7 +77,9 @@ s32 func_00001A4C(u32 arg0) {
     return (arg0 < 2U) ? 0 : -1;
 }
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", func_00001A5C);
+void func_00001A5C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_00003014(arg0, arg1, arg2, arg3, (sceUtility_private_4B677BA1() < 0x118) * 2);
+}
 
 void func_00001AC4(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
     func_000030E8(arg0, arg1, arg2, (sceUtility_private_4B677BA1() < 0x118) * 2);

@@ -530,7 +530,20 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000EACC);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000ED18);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000EDB8);
+void func_0000EDB8(void *arg0) {
+    void *temp_a0;
+    void *temp_v1;
+
+    temp_a0 = M2C_FIELD(arg0, void **, 8);
+    M2C_FIELD(temp_a0, s32 *, 0xC) = 0;
+    func_000023A8((s32) temp_a0);
+    temp_v1 = M2C_FIELD(arg0, void **, 0);
+    if (temp_v1 != NULL) {
+        M2C_FIELD(temp_v1, void ***, 4) = (void **) M2C_FIELD(arg0, void ***, 4);
+    }
+    *M2C_FIELD(arg0, void ***, 4) = temp_v1;
+    sceNetIfhandle_lib_76BAD213(arg0);
+}
 
 void func_0000EE04(void *arg0) {
     void *temp_v1;

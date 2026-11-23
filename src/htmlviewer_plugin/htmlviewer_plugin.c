@@ -21,7 +21,33 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000470);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_0000055C);
+s32 func_0000055C(void *arg0) {
+    s32 var_v1;
+
+    var_v1 = M2C_FIELD(arg0, s32 *, 8);
+    if (!(var_v1 & 1)) {
+        if (var_v1 & 2) {
+            func_0000156C(3);
+            var_v1 = M2C_FIELD(arg0, s32 *, 8);
+        }
+    } else {
+        func_00001368();
+        var_v1 = M2C_FIELD(arg0, s32 *, 8);
+    }
+    if (!(var_v1 & 4)) {
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    } else {
+        if (func_0000398C() >= 2) {
+            func_00003D48(0);
+            func_00001760();
+            func_000037A4(2);
+            func_00000140();
+        }
+        sceVshBridge_C58090DA(2);
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000614);
 

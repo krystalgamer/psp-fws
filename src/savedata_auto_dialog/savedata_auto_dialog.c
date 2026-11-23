@@ -196,7 +196,10 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00003ED0);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000040A8);
+void func_000040A8(void *arg0, s32 arg1) {
+    func_00004140(arg0, arg1);
+    M2C_FIELD(arg0, s32 *, 0x20) = (s32) (M2C_FIELD(arg0, s32 *, 0x20) + 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000040D8);
 
@@ -319,9 +322,13 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00005608);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000056E8);
+void func_000056E8(s32 arg0) {
+    func_00005608(arg0, 6);
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00005704);
+void func_00005704(s32 arg0) {
+    func_00005608(arg0, 8);
+}
 
 s32 func_00005720(void *arg0) {
     s32 var_v1;
@@ -401,7 +408,9 @@ void func_000072DC(void) {
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000072F8);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00007440);
+s32 func_00007440(s32 arg0) {
+    return (arg0 & 1) + __builtin_allegrex_ext(arg0, 1, 1) + __builtin_allegrex_ext(arg0, 2, 1) + __builtin_allegrex_ext(arg0, 3, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00007460);
 
@@ -531,9 +540,13 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00009DE0);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00009F64);
+void func_00009F64(s32 arg0, s32 arg1) {
+    func_00009DE0(arg0, arg1, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00009F80);
+void func_00009F80(s32 arg0, s32 arg1) {
+    func_00009DE0(arg0, arg1, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00009F9C);
 
@@ -628,7 +641,13 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000B270);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000B290);
+void func_0000B290(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    if (arg4 != 1) {
+        func_0000B2C4(arg0, arg1, arg2, arg3);
+    } else {
+        func_0000B4A4(arg0, arg1, arg2, arg3);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000B2C4);
 
@@ -636,7 +655,13 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000B7A4);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000B910);
+void func_0000B910(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    if (arg4 != 1) {
+        func_0000B944(arg0, arg1, arg2, arg3);
+    } else {
+        func_0000BA7C(arg0, arg1, arg2);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000B944);
 
@@ -1030,7 +1055,12 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0001574C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000157F4);
+s32 func_000157F4(s8 *arg0) {
+    if (arg0 != NULL) {
+        func_00015E84(arg0);
+    }
+    return 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00015818);
 
@@ -1161,7 +1191,15 @@ void func_000181AC(void *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000181D4);
+s32 func_000181D4(void *arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if ((arg0 != NULL) && (M2C_FIELD(arg0, s32 *, 0) != 0) && (M2C_FIELD(arg0, s32 *, 4) >= 0)) {
+        var_v1 = __builtin_allegrex_ext(M2C_FIELD(arg0, s32 *, 8), 1, 1);
+    }
+    return var_v1;
+}
 
 s32 func_00018204(void *arg0) {
     s32 var_v1;

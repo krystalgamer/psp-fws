@@ -37,6 +37,7 @@ void func_000026F0(s32 arg0);
 s32 func_0000271C(s32);
 s32 func_000027C0(s32);
 s32 func_00003B44(s32 arg0, s32 *arg1);
+void func_0000478C(void *arg0, s32 arg1);
 void func_000047C0(void *arg0);
 void func_00004A0C(void *arg0, s32 arg1);
 s32 func_00004AB8(s32, s32);

@@ -5,11 +5,16 @@
 #include "m2c_macros.h"
 
 
+s32 func_00000140(void);
+s32 func_0000055C(void *arg0);
 void func_00000920(void);
 void func_00000AD0(void);
 void func_00000D14(void);
 void func_00000F60(void);
 void func_00001238(void);
+s32 func_00001368(void);
+s32 func_0000156C(s32);
+s32 func_00001760(void);
 void func_000027E8(void);
 void func_0000280C(void);
 M2C_UNK func_00002D70(M2C_UNK, M2C_UNK);
@@ -17,11 +22,13 @@ void func_00002E44(void);
 void func_00002E64(void);
 void func_00002F04(void);
 M2C_UNK func_0000312C();
+s32 func_000037A4(s32);
 M2C_UNK func_00003980(M2C_UNK);
 s32 func_0000398C();
 M2C_UNK func_000039C8(s32);
 M2C_UNK func_00003A18();
 M2C_UNK func_00003B90(M2C_UNK, M2C_UNK);
+s32 func_00003D48(s32);
 M2C_UNK func_000049A4();
 void func_00004B54(void);
 M2C_UNK func_00005014();
@@ -37,6 +44,7 @@ M2C_UNK scePaf_66907719();
 M2C_UNK scePaf_7C2C2742();
 M2C_UNK scePaf_D0AD10FF();
 M2C_UNK scePaf_DF642973(M2C_UNK);
+M2C_UNK sceVshBridge_C58090DA(M2C_UNK);
 M2C_UNK vsh_AA8B9556();
 
 #endif

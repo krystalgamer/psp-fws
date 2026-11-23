@@ -56,7 +56,9 @@ s32 sceAtracSetDataAndGetID(void *arg0, u32 arg1) {
     return sceAtracSetHalfwayBufferAndGetID(arg0, arg1, arg1);
 }
 
-INCLUDE_ASM("tmp/asm/282/libatrac3plus/nonmatchings/libatrac3plus", sceAtracSetAA3DataAndGetID);
+s32 sceAtracSetAA3DataAndGetID(void *arg0, u32 arg1, u32 arg2, void *arg3) {
+    return sceAtracSetAA3HalfwayBufferAndGetID(arg0, arg1, arg1, arg2, arg3);
+}
 
 INCLUDE_ASM("tmp/asm/282/libatrac3plus/nonmatchings/libatrac3plus", sceAtracGetRemainFrame);
 

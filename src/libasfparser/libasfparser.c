@@ -385,7 +385,10 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00004568)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00004700);
 
-INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_0000478C);
+void func_0000478C(void *arg0, s32 arg1) {
+    func_000047C0(arg0);
+    M2C_FIELD(arg0, s32 *, 0x2CC) = arg1;
+}
 
 void func_000047C0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x2AC) = 0;

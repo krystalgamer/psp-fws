@@ -768,7 +768,9 @@ INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot", func_00011B40);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot", func_00011B64);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot", func_00011B80);
+void func_00011B80(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_000115B8(arg0, arg1, arg2, arg3, 0x31);
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot", func_00011B9C);
 

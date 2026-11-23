@@ -150,17 +150,35 @@ s32 sceIoWriteAsync(u32 arg0, void *arg1, u32 arg2) {
     return func_00003C34((s32) arg0, (s32) arg1, (s32) arg2, 1);
 }
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoLseek);
+void sceIoLseek(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    func_00003D94(arg0, arg1, arg2, arg3, arg4, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoLseekAsync);
+void sceIoLseekAsync(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    func_00003D94(arg0, arg1, arg2, arg3, arg4, 1);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoLseek32);
+s32 sceIoLseek32(u32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_a1;
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoLseek32Async);
+    temp_a1 = arg1 >> 0x1F;
+    return func_00003D94((s32) arg0, temp_a1, arg1, temp_a1, arg2, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoIoctl);
+s32 sceIoLseek32Async(u32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_a1;
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoIoctlAsync);
+    temp_a1 = arg1 >> 0x1F;
+    return func_00003D94((s32) arg0, temp_a1, arg1, temp_a1, arg2, 1);
+}
+
+s32 sceIoIoctl(u32 arg0, s32 arg1, void *arg2, u32 arg3, void *arg4, u32 arg5) {
+    return func_00003F24((s32) arg0, arg1, (s32) arg2, (s32) arg3, (s32) arg4, (s32) arg5, 0);
+}
+
+s32 sceIoIoctlAsync(u32 arg0, s32 arg1, void *arg2, u32 arg3, void *arg4, u32 arg5) {
+    return func_00003F24((s32) arg0, arg1, (s32) arg2, (s32) arg3, (s32) arg4, (s32) arg5, 1);
+}
 
 s32 sceIoMkdir(void *arg0, s32 arg1) {
     return func_00004114((s32) arg0, arg1, 1);

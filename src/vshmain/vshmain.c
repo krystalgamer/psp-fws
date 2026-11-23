@@ -2399,7 +2399,9 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_000233F4);
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00023688);
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_000236E8);
+void func_000236E8(s32 arg0) {
+    func_000233F4(arg0, 0x200, 0x110, 0x04000000);
+}
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_5452A47B);
 
@@ -2421,7 +2423,13 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_5E43E468);
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_0E20CEEC);
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00023AF4);
+void func_00023AF4(void *arg0, s32 arg1) {
+    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+
+    } else {
+        func_00023CB8((s32) arg0, arg1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00023B28);
 

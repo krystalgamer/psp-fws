@@ -50,7 +50,20 @@ INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_00001714);
 
 INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_00001828);
 
-INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_00001874);
+s32 func_00001874(s32 arg0, s32 *arg1) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = func_000065E4(arg0);
+    var_v1 = 0;
+    if (temp_v0 >= 0) {
+        *arg1 = temp_v0;
+    } else {
+        *arg1 = 0;
+        var_v1 = temp_v0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_000018B4);
 

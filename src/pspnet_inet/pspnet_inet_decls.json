@@ -38,6 +38,7 @@
   "func_0000DDCC": "void func_0000DDCC(s32 arg0, void *arg1, void *arg2);",
   "func_0000E3F0": "s32 func_0000E3F0(s32);",
   "func_0000E4E4": "s32 func_0000E4E4(s32, s32);",
+  "func_0000EDB8": "void func_0000EDB8(void *arg0);",
   "func_0000EE04": "void func_0000EE04(void *arg0);",
   "func_0000F274": "s32 func_0000F274(void);",
   "func_0000F27C": "void func_0000F27C(void *arg0, void *arg1);",

@@ -43,6 +43,7 @@ s32 func_0000D378(s32);
 void func_0000DDCC(s32 arg0, void *arg1, void *arg2);
 s32 func_0000E3F0(s32);
 s32 func_0000E4E4(s32, s32);
+void func_0000EDB8(void *arg0);
 void func_0000EE04(void *arg0);
 s32 func_0000F274(void);
 void func_0000F27C(void *arg0, void *arg1);

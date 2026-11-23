@@ -146,9 +146,13 @@ INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_00004C88);
 void func_00004C9C(void) {
 }
 
-INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGeListEnQueue);
+s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3) {
+    return func_00005140((s32) arg0, (s32) arg1, arg2, (s32) arg3, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGeListEnQueueHead);
+s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3) {
+    return func_00005140((s32) arg0, (s32) arg1, arg2, (s32) arg3, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGeUnsetCallback);
 

@@ -464,7 +464,15 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00006578);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0000671C);
+s32 func_0000671C(void **arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (scePaf_75062BCF(arg1) == 0) {
+        var_v1 = func_00011584(M2C_FIELD(*arg0, s32 (**)(void **), 0x10)(arg0), 0, 0x800, 0, 0);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00006784);
 
@@ -863,7 +871,18 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0000CF6C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0000CFD4);
+s32 func_0000CFD4(void *arg0) {
+    s32 var_a2;
+
+    var_a2 = 1;
+    if (M2C_FIELD(arg0, void **, 0x20) != NULL) {
+        func_0000CF6C((s32) arg0);
+        if ((func_00013558(M2C_FIELD(arg0, void **, 0x20)) != 0) || (var_a2 = 0, (M2C_FIELD(M2C_FIELD(arg0, void **, 0x20), s32 *, 8) == 1))) {
+            var_a2 = func_00016F4C((s32) arg0) != 0;
+        }
+    }
+    return var_a2;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0000D040);
 
@@ -975,9 +994,13 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0000E60C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0000E6EC);
+void func_0000E6EC(s32 arg0) {
+    func_0000E60C(arg0, 6);
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0000E708);
+void func_0000E708(s32 arg0) {
+    func_0000E60C(arg0, 8);
+}
 
 s32 func_0000E724(void *arg0) {
     s32 var_v1;
@@ -1043,7 +1066,9 @@ void func_000102E0(void) {
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_000102FC);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00010444);
+s32 func_00010444(s32 arg0) {
+    return (arg0 & 1) + __builtin_allegrex_ext(arg0, 1, 1) + __builtin_allegrex_ext(arg0, 2, 1) + __builtin_allegrex_ext(arg0, 3, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00010464);
 
@@ -1183,7 +1208,19 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00012000);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_000120A4);
+void func_000120A4(void *arg0) {
+    s32 temp_v0;
+    s32 temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0 = M2C_FIELD(arg0, s32 *, 4) - 1;
+    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+    if (temp_v0 >= (temp_v1 - 0x14)) {
+
+    } else {
+        func_000120E8((s32) arg0, temp_v1 - 0xA);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_000120E8);
 
@@ -1347,7 +1384,9 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_000134B8);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0001354C);
+s32 func_0001354C(void *arg0) {
+    return __builtin_allegrex_ext(M2C_FIELD(arg0, s32 *, 8), 4, 1);
+}
 
 s32 func_00013558(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 8) & 0xD8) != 0;
@@ -1435,7 +1474,11 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_000142C4);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00014344);
+void func_00014344(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+    func_000143E4(arg0);
+    M2C_FIELD(arg0, s32 *, 0xC) = arg3;
+    M2C_FIELD(arg0, s32 *, 0x10) = sceVshCommonGui_10906D79(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+}
 
 void func_000143E4(void *arg0) {
     s32 temp_v0;
@@ -1832,9 +1875,13 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0001948C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00019610);
+void func_00019610(s32 arg0, s32 arg1) {
+    func_0001948C(arg0, arg1, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0001962C);
+void func_0001962C(s32 arg0, s32 arg1) {
+    func_0001948C(arg0, arg1, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00019648);
 
@@ -1929,7 +1976,13 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0001A91C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0001A93C);
+void func_0001A93C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    if (arg4 != 1) {
+        func_0001A970(arg0, arg1, arg2, arg3);
+    } else {
+        func_0001AB50(arg0, arg1, arg2, arg3);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0001A970);
 
@@ -1937,7 +1990,13 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0001AE50);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0001AFBC);
+void func_0001AFBC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    if (arg4 != 1) {
+        func_0001AFF0(arg0, arg1, arg2, arg3);
+    } else {
+        func_0001B128(arg0, arg1, arg2);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0001AFF0);
 

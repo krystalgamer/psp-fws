@@ -573,7 +573,9 @@ void func_00007D2C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00007D34);
+void func_00007D34(void *arg0) {
+    scePaf_0AC29BBC(6, 0x19D, M2C_FIELD(arg0, s32 *, 8) * 2, 0, M2C_FIELD(arg0, s32 *, 4));
+}
 
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00007D64);
 
@@ -602,7 +604,11 @@ INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func
 
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_000080CC);
 
-INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_000081F0);
+void func_000081F0(void *arg0) {
+    if (func_0000837C((s32) arg0, M2C_FIELD(arg0, s32 *, 8)) != 0) {
+        M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) + 1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00008228);
 
@@ -610,7 +616,14 @@ void func_00008330(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00008338);
+void func_00008338(void *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    if (temp_v0 > 0) {
+        scePaf_0AC29BBC(3, 0x183, (temp_v0 * 0xC) + 6, 0, M2C_FIELD(arg0, s32 *, 4));
+    }
+}
 
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_0000837C);
 
@@ -704,7 +717,13 @@ INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func
 
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00009CA4);
 
-INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00009D18);
+void func_00009D18(void *arg0, s32 arg1) {
+    if (M2C_FIELD(arg0, u8 *, 0xC) != 0) {
+        func_00009D50((s32) arg0, arg1);
+    } else {
+        func_00009E78((s32) arg0, arg1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00009D50);
 

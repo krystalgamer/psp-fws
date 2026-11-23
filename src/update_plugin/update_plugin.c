@@ -279,7 +279,13 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00002D8
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00002F68);
 
-INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00002FE4);
+void func_00002FE4(s32 arg0, void *arg1) {
+    if ((u32) (M2C_FIELD(arg1, u8 *, 8) - 5) >= 2U) {
+
+    } else {
+        func_00000AB4(arg0, (s32) arg1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_0000301C);
 
@@ -390,7 +396,13 @@ void func_00004D0C(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00004D40);
 
-INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00004E0C);
+void func_00004E0C(void *arg0, s32 arg1) {
+    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+
+    } else {
+        func_00005130((s32) arg0, arg1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00004E40);
 

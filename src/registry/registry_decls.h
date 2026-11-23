@@ -7,9 +7,11 @@
 extern s32 D_00006FB0;
 
 void *func_00000B6C();
+s32 func_00001874(s32 arg0, s32 *arg1);
 void *func_00003EA4();
 s32 func_00003EE8(void);
 s32 func_00004024(void);
+s32 func_000065E4(s32);
 s32 func_00006998(s32 arg0);
 void func_00006A0C(void);
 void func_00006AC0(s32 arg0);
