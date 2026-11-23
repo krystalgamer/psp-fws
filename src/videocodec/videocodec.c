@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "videocodec_decls.h"
 
@@ -39,6 +40,21 @@ INCLUDE_ASM("tmp/asm/201/videocodec/nonmatchings/videocodec", func_00000C18);
 
 INCLUDE_ASM("tmp/asm/201/videocodec/nonmatchings/videocodec", func_00000CE8);
 
-INCLUDE_ASM("tmp/asm/201/videocodec/nonmatchings/videocodec", func_00000EB4);
+void func_00000EB4(void *arg0, s32 arg1) {
+    void *temp_s1;
+    void *temp_v0;
+
+    if (arg1 != 0) {
+
+    } else {
+        temp_s1 = M2C_FIELD(arg0, void **, 0x10);
+        sceKernelDcacheInvalidateRange(M2C_FIELD(arg0, void **, 0x2C), ((M2C_FIELD(temp_s1, s32 *, 0x20) * 0x2C) + 0x3F) & ~0x3F);
+        sceKernelDcacheInvalidateRange(M2C_FIELD(arg0, void **, 0x30), 0x40U);
+        temp_v0 = M2C_FIELD(arg0, void **, 0x38);
+        if (temp_v0 != NULL) {
+            sceKernelDcacheInvalidateRange(temp_v0, ((M2C_FIELD(temp_s1, s32 *, 0x20) * 0x148) + 0x3F) & ~0x3F);
+        }
+    }
+}
 
 INCLUDE_ASM("tmp/asm/201/videocodec/nonmatchings/videocodec", func_00000F4C);

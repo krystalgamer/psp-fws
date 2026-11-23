@@ -1,4 +1,6 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "vshbridge_decls.h"
 
 INCLUDE_RODATA("tmp/asm/282/vshbridge/nonmatchings/vshbridge", D_00003BB0);
 
@@ -46,7 +48,10 @@ INCLUDE_ASM("tmp/asm/282/vshbridge/nonmatchings/vshbridge", sceVshBridge_5C63B6D
 
 INCLUDE_ASM("tmp/asm/282/vshbridge/nonmatchings/vshbridge", sceVshBridge_39995897);
 
-INCLUDE_ASM("tmp/asm/282/vshbridge/nonmatchings/vshbridge", sceVshBridge_driver_92A3B940);
+s32 sceVshBridge_driver_92A3B940(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_00003C00);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/vshbridge/nonmatchings/vshbridge", sceVshBridge_A5628F0D);
 

@@ -1,4 +1,6 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "usbgps_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_00000000);
 
@@ -38,7 +40,10 @@ INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_000013B0);
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", module_stop);
 
-INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_00001504);
+s32 func_00001504(s32 arg0) {
+    func_00000F28(arg0);
+    return 0x11E1A300;
+}
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_00001528);
 

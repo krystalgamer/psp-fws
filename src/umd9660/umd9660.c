@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "umd9660_decls.h"
 
@@ -23,9 +24,13 @@ INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00000594);
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_0000090C);
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00000B34);
+s32 func_00000B34(s32 arg0) {
+    return !(arg0 & 0xF02) ? 0 : 0x8001B004;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00000B48);
+s32 func_00000B48(s32 arg0) {
+    return __builtin_allegrex_ext(arg0, 0x10, 4);
+}
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", module_start);
 
@@ -158,9 +163,19 @@ void func_00003FD4(void) {
     sceUmd_27A764A1();
 }
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00003FF0);
+s32 func_00003FF0(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x64), s32 *, 0xC);
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00003FFC);
+s32 func_00003FFC(void *arg0) {
+    s32 var_v0;
+
+    var_v0 = 0x80010016;
+    if (arg0 != NULL) {
+        var_v0 = sceUmdMan_driver_84410A8E(M2C_FIELD(arg0, s32 *, 0x64));
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00004024);
 
@@ -172,7 +187,15 @@ INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_000040E4);
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00004124);
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00004164);
+s32 func_00004164(void *arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if ((arg0 == NULL) || (M2C_FIELD(arg0, s32 *, 0x64) == 0)) {
+        var_v1 = 0x80010016;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00004188);
 
@@ -180,7 +203,16 @@ INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", module_reboot_before);
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00004238);
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00004264);
+s32 func_00004264(s32 *arg0) {
+    s32 var_v0;
+
+    var_v0 = 0x80010016;
+    if (arg0 != NULL) {
+        *arg0 = sceUmdMan_driver_85AEA6C5();
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_000042A0);
 

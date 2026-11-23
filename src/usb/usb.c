@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "usb_decls.h"
 
@@ -93,9 +94,13 @@ INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbGetState);
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbActivate);
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbWaitState);
+s32 sceUsbWaitState(u32 arg0, s32 arg1, void *arg2) {
+    return func_00002F64((s32) arg0, arg1, (s32) arg2, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbWaitStateCB);
+s32 sceUsbWaitStateCB(u32 arg0, s32 arg1, void *arg2) {
+    return func_00002F64((s32) arg0, arg1, (s32) arg2, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbWaitCancel);
 
@@ -239,7 +244,17 @@ INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_000074B4);
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00007504);
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00007554);
+s32 func_00007554(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 0x1000E:
+        func_000076B4();
+        break;
+    case 0x400E:
+        func_000075A4();
+        break;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_000075A4);
 
@@ -279,7 +294,30 @@ INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008244);
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_000082A4);
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008318);
+void *func_00008318(void *arg0, void *arg1) {
+    void *temp_a0;
+    void *temp_a2;
+    void *var_v0;
+    void *var_v1;
+
+    var_v0 = arg0;
+    if (arg0 != NULL) {
+        var_v1 = M2C_FIELD(arg0, void **, 0x40);
+        if (var_v1 == NULL) {
+            M2C_FIELD(arg0, void **, 0x40) = arg1;
+        } else {
+            do {
+                temp_a2 = M2C_FIELD(var_v1, void **, 0x40);
+                temp_a0 = var_v1;
+                var_v1 = temp_a2;
+            } while (temp_a2 != NULL);
+            M2C_FIELD(temp_a0, void **, 0x40) = arg1;
+            var_v0 = temp_a0;
+        }
+    }
+    M2C_FIELD(arg1, s32 *, 0x40) = 0;
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbBus_driver_B1644BE7);
 

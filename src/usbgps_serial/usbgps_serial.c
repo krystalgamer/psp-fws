@@ -1,7 +1,28 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "usbgps_serial_decls.h"
 
-INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00000000);
+s8 *func_00000000(s8 *arg0, s32 arg1) {
+    s32 temp_a5;
+    s8 *var_v1;
+    u32 var_a1;
+
+    var_a1 = arg1 & 0xFF;
+    var_v1 = arg0;
+    if (var_a1 != 0) {
+        do {
+            temp_a5 = var_a1 & 0xF;
+            if (temp_a5 < 0xA) {
+                *var_v1 = temp_a5 + 0x30;
+            } else {
+                *var_v1 = temp_a5 + 0x37;
+            }
+            var_a1 = var_a1 >> 4;
+            var_v1 += 1;
+        } while (var_a1 != 0);
+    }
+    return arg0;
+}
 
 INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00000040);
 
@@ -41,7 +62,10 @@ INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000013B
 
 INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", module_stop);
 
-INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00001504);
+s32 func_00001504(s32 arg0) {
+    func_00000F28(arg0);
+    return 0x11E1A300;
+}
 
 INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00001528);
 

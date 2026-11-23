@@ -1,4 +1,6 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "usbcam_decls.h"
 
 INCLUDE_RODATA("tmp/asm/282/usbcam/nonmatchings/usbcam", D_0000A2D8);
 
@@ -222,7 +224,9 @@ INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamGetBrightness);
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetContrast);
 
-INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamGetContrast);
+s32 sceUsbCamGetContrast(void *arg0) {
+    return sceUsbCam_driver_1E958148(0x80000002, (s32) arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetSharpness);
 
@@ -240,7 +244,9 @@ INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamGetReverseMode);
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetImageEffectMode);
 
-INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamGetImageEffectMode);
+s32 sceUsbCamGetImageEffectMode(void *arg0) {
+    return sceUsbCam_driver_1E958148(0x80000007, (s32) arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCam_driver_D865997B);
 

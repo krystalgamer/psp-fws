@@ -1,4 +1,9 @@
 {
- "funcs": {},
- "vars": {}
+ "funcs": {
+  "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
+  "sceVshBridge_driver_92A3B940": "s32 sceVshBridge_driver_92A3B940(void);"
+ },
+ "vars": {
+  "D_00003C00": "extern M2C_UNK D_00003C00;"
+ }
 }

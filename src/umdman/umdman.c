@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "umdman_decls.h"
 
@@ -23,8 +24,8 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_F6BE91FC)
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_47E2B6D8);
 
-void func_00000968(void) {
-    func_00007A30();
+void func_00000968(s32 arg0, s32 arg1) {
+    func_00007A30(arg0, arg1);
 }
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_B2368381);
@@ -69,18 +70,7 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001E18);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001E24);
 
-s32 sceUmdMan_driver_0D3EA203(void) {
-    sceAta_driver_B5982381();
-    sceUmd_4BA25F4A();
-    sceUmd_5469DC37();
-    sceUmd_319ED97C();
-    sceUmd_27A764A1();
-    func_0000AF50();
-    func_0000B0E0();
-    func_00007B94();
-    func_000090B8(0, 0);
-    return 0;
-}
+INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_0D3EA203);
 
 s32 func_00001E94(void) {
     s32 temp_s0;
@@ -253,7 +243,9 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00006C50);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00006CE0);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00006D30);
+M2C_UNK *func_00006D30(void) {
+    return &D_00011A80;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00006D3C);
 
@@ -279,7 +271,37 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007148);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007184);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_000072E0);
+s32 func_000072E0(void) {
+    s32 var_v0;
+
+    sceKernelDisableSubIntr(6, 1);
+    sceKernelDisableSubIntr(6, 2);
+    sceKernelDisableSubIntr(6, 3);
+    sceKernelDisableSubIntr(6, 4);
+    sceKernelDisableSubIntr(6, 5);
+    sceKernelDisableSubIntr(6, 6);
+    sceKernelDisableSubIntr(6, 7);
+    var_v0 = sceKernelReleaseSubIntrHandler(6, 1);
+    if (var_v0 >= 0) {
+        var_v0 = sceKernelReleaseSubIntrHandler(6, 2);
+        if (var_v0 >= 0) {
+            var_v0 = sceKernelReleaseSubIntrHandler(6, 3);
+            if (var_v0 >= 0) {
+                var_v0 = sceKernelReleaseSubIntrHandler(6, 4);
+                if (var_v0 >= 0) {
+                    var_v0 = sceKernelReleaseSubIntrHandler(6, 5);
+                    if (var_v0 >= 0) {
+                        var_v0 = sceKernelReleaseSubIntrHandler(6, 6);
+                        if (var_v0 >= 0) {
+                            var_v0 = __builtin_allegrex_min(sceKernelReleaseSubIntrHandler(6, 7), 0);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_000073D4);
 
@@ -331,8 +353,8 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007B94);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007BC8);
 
-void func_00007C08(void) {
-    func_00007F24();
+void func_00007C08(s32 arg0, s32 arg1) {
+    func_00007F24(arg0, arg1);
 }
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007C24);
@@ -373,7 +395,9 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007FC8);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_000081EC);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008274);
+s32 func_00008274(s32 arg0) {
+    return (arg0 != 0) ? 0 : 0x80010016;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008284);
 
@@ -391,7 +415,12 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008374);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008410);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_000084A0);
+s32 func_000084A0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    if (arg1 >= 0) {
+        return 0;
+    }
+    return (arg2 | arg3) == arg0;
+}
 
 INCLUDE_RODATA("tmp/asm/201/umdman/nonmatchings/umdman", D_00010F9C);
 
@@ -405,21 +434,135 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_000086D0);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000879C);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000888C);
+s32 func_0000888C(void *arg0, u8 *arg1) {
+    s32 var_a4;
+    s8 *temp_v1;
+    void *temp_v0;
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008958);
+    var_a4 = 0x80010016;
+    if (arg0 != NULL) {
+        temp_v0 = M2C_FIELD(arg0, void **, 0x18);
+        if (temp_v0 != NULL) {
+            temp_v1 = M2C_FIELD(temp_v0, s8 **, 0xC);
+            if (((temp_v1 == NULL) | (arg1 == NULL)) == 0) {
+                *temp_v1 = -0xC;
+                var_a4 = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 1) = (u8) *arg1;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 2) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 3) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 4) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 5) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 6) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 7) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 8) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 9) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 0xA) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 0xB) = 0;
+            }
+        }
+    }
+    return var_a4;
+}
+
+s32 func_00008958(void *arg0, void *arg1) {
+    s32 var_a3;
+    s8 *temp_v1;
+    void *temp_v0;
+
+    var_a3 = 0x80010016;
+    if (arg0 != NULL) {
+        temp_v0 = M2C_FIELD(arg0, void **, 0x18);
+        if (temp_v0 != NULL) {
+            temp_v1 = M2C_FIELD(temp_v0, s8 **, 0xC);
+            if (((temp_v1 == NULL) | (arg1 == NULL)) == 0) {
+                *temp_v1 = -0xD;
+                var_a3 = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 1) = (u8) M2C_FIELD(arg1, u8 *, 6);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 2) = (s8) ((u16) M2C_FIELD(arg1, u16 *, 0) >> 8);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 3) = (u8) M2C_FIELD(arg1, u16 *, 0);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 4) = (s8) ((u16) M2C_FIELD(arg1, u16 *, 2) >> 8);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 5) = (u8) M2C_FIELD(arg1, u16 *, 2);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 6) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 7) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 8) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 9) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 0xA) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 0xB) = 0;
+            }
+        }
+    }
+    return var_a3;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008A3C);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008B28);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008CA0);
+s32 func_00008CA0(void *arg0, void *arg1) {
+    s32 var_a3;
+    s8 *temp_v1;
+    void *temp_v0;
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008D8C);
+    var_a3 = 0x80010016;
+    if (arg0 != NULL) {
+        temp_v0 = M2C_FIELD(arg0, void **, 0x18);
+        if (temp_v0 != NULL) {
+            temp_v1 = M2C_FIELD(temp_v0, s8 **, 0xC);
+            if (((temp_v1 == NULL) | (arg1 == NULL)) == 0) {
+                *temp_v1 = -0xF;
+                var_a3 = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 1) = (u8) M2C_FIELD(arg1, u8 *, 4);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 2) = (u8) M2C_FIELD(arg1, u8 *, 5);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 3) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 4) = (s8) ((u16) M2C_FIELD(arg1, u16 *, 0) >> 8);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 5) = (u8) M2C_FIELD(arg1, u16 *, 0);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 6) = (s8) ((u16) M2C_FIELD(arg1, u16 *, 2) >> 8);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 7) = (u8) M2C_FIELD(arg1, u16 *, 2);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 8) = (u8) M2C_FIELD(arg1, u8 *, 6);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 9) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 0xA) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 0xB) = 0;
+            }
+        }
+    }
+    return var_a3;
+}
+
+s32 func_00008D8C(void *arg0, void *arg1) {
+    s32 var_a3;
+    s8 *temp_v1;
+    void *temp_v0;
+
+    var_a3 = 0x80010016;
+    if (arg0 != NULL) {
+        temp_v0 = M2C_FIELD(arg0, void **, 0x18);
+        if (temp_v0 != NULL) {
+            temp_v1 = M2C_FIELD(temp_v0, s8 **, 0xC);
+            if (((temp_v1 == NULL) | (arg1 == NULL)) == 0) {
+                *temp_v1 = -7;
+                var_a3 = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 1) = (u8) M2C_FIELD(arg1, u8 *, 0);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 2) = (s8) ((u16) M2C_FIELD(arg1, u16 *, 2) >> 8);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), u8 *, 3) = (u8) M2C_FIELD(arg1, u16 *, 2);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 4) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 5) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 6) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 7) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 8) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 9) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 0xA) = 0;
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), void **, 0xC), s8 *, 0xB) = 0;
+            }
+        }
+    }
+    return var_a3;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_B511F821);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008EC4);
+s32 func_00008EC4(void) {
+    return (sceGpio_driver_4250D44A() >> 0x18) & 1;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_736AE133);
 
@@ -453,17 +596,17 @@ s32 sceUmdMan_driver_7F482409(void) {
 
     sceSyscon_driver_8CBC7987(2, 1);
     sceClockgen_driver_DBE5F283();
-    sceKernelDelayThread(0x2710);
+    sceKernelDelayThread(0x2710U);
     sceSyscon_driver_8A4519F5(0);
-    sceKernelDelayThread(0x2710);
+    sceKernelDelayThread(0x2710U);
     temp_v0 = sceSyscon_driver_8A4519F5(1);
     var_s0 = temp_v0;
     if (temp_v0 >= 0) {
-        sceKernelDelayThread(0x2710);
+        sceKernelDelayThread(0x2710U);
         temp_v0_2 = sceClockgen_driver_7FF82F6F();
         var_s0 = temp_v0_2;
         if (temp_v0_2 >= 0) {
-            sceKernelDelayThread(0x2710);
+            sceKernelDelayThread(0x2710U);
             temp_v0_3 = sceSyscon_driver_8CBC7987(2, 0);
             var_s0 = temp_v0_3;
             if (temp_v0_3 >= 0) {
@@ -731,7 +874,15 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000E0AC);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000E0B8);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000E0C4);
+s32 func_0000E0C4(void) {
+    s32 temp_s1;
+    u32 temp_s0;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    temp_s0 = sceGpio_driver_4250D44A();
+    sceKernelCpuResumeIntr(temp_s1);
+    return (temp_s0 >> 0x1A) & 1;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000E10C);
 
@@ -810,6 +961,12 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_EFD566A8)
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000FD1C);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000FD4C);
+void func_0000FD4C(s32 arg0) {
+    if (arg0 != 2) {
+        func_0000FD80();
+    } else {
+        func_0000FBE4();
+    }
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000FD80);

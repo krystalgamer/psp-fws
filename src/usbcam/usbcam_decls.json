@@ -1,6 +1,9 @@
 {
  "funcs": {
-  "func_000039E8": "void func_000039E8(void);"
+  "func_000039E8": "void func_000039E8(void);",
+  "sceUsbCamGetContrast": "s32 sceUsbCamGetContrast(void *arg0);",
+  "sceUsbCamGetImageEffectMode": "s32 sceUsbCamGetImageEffectMode(void *arg0);",
+  "sceUsbCam_driver_1E958148": "s32 sceUsbCam_driver_1E958148(s32, s32);"
  },
  "vars": {}
 }

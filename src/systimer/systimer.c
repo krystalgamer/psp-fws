@@ -1,4 +1,6 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "systimer_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/systimer/nonmatchings/systimer", SysTimerForKernel_C99073E3);
 
@@ -6,7 +8,12 @@ INCLUDE_ASM("tmp/asm/282/systimer/nonmatchings/systimer", func_000000E0);
 
 INCLUDE_ASM("tmp/asm/282/systimer/nonmatchings/systimer", SysTimerForKernel_975D8E84);
 
-INCLUDE_ASM("tmp/asm/282/systimer/nonmatchings/systimer", func_000002B0);
+void func_000002B0(void **arg0) {
+    void *temp_a2;
+
+    temp_a2 = *arg0;
+    M2C_FIELD(temp_a2, s32 *, 0) = (s32) (M2C_FIELD(temp_a2, s32 *, 0x100) & 0x7F7FFFFF);
+}
 
 INCLUDE_ASM("tmp/asm/282/systimer/nonmatchings/systimer", func_000002CC);
 

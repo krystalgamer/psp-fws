@@ -1,4 +1,6 @@
 {
- "funcs": {},
+ "funcs": {
+  "func_000002B0": "void func_000002B0(void **arg0);"
+ },
  "vars": {}
 }

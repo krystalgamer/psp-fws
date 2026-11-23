@@ -5,9 +5,16 @@
 #include "m2c_macros.h"
 
 
+M2C_UNK SysMemForKernel_5367923C(s32, M2C_UNK);
 M2C_UNK SysMemForKernel_CE05CCB7();
+s32 ThreadManForKernel_3AD875C3(s32, s32, s32);
+void ThreadManForKernel_A249EAAE(s32 arg0);
 s32 ThreadManForUser_0E927AED(void);
+void func_000004CC(void *arg0);
+void func_00000534(s32 arg0);
+s32 func_000006C8(void *arg0, void *arg1);
 s32 func_000008C8(void);
+s32 func_000008D0(s32 arg0, void *arg1);
 s32 func_0000261C(void *arg0);
 s32 func_0000275C(void *arg0);
 s32 func_00004B20(void *arg0);
@@ -19,8 +26,10 @@ s32 func_00006D94(void);
 s32 func_00007CFC(void *arg0);
 s32 func_00007D24(void);
 s32 func_00009B94(void *arg0);
+s32 func_00009BBC(s32 arg0, void *arg1, s32 arg2, s32 arg3);
 s32 func_0000ABD8(void *arg0);
 s32 func_0000BCAC(void *arg0);
+s32 func_0000EA04(s32, s32);
 s32 func_0000F140(void *arg0);
 s32 func_0000F168(void);
 s32 func_0000F188(void *arg0);
@@ -29,7 +38,13 @@ s32 func_0000F1D0(void *arg0);
 s32 func_0000F1F8(void);
 s32 func_0000F264(void);
 s32 func_0000FD6C(void);
+void func_000127F8(void *arg0, s32 arg1);
 s32 func_0001444C(void);
-M2C_UNK sceKernelExitDeleteThread(M2C_UNK);
+void sceKernelCpuResumeIntr(s32);
+s32 sceKernelCpuSuspendIntr(void);
+s32 sceKernelExitDeleteThread(s32);
+M2C_UNK sceKernelFreePartitionMemory(s32, u8);
+void * sceKernelMemset(void *, s32, u32);
+s64 sceKernelUSec2SysClockWide(u32 arg0);
 
 #endif

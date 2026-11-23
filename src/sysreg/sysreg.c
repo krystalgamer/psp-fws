@@ -1,7 +1,14 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sysreg_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/sysreg/nonmatchings/sysreg", module_start);
+s32 module_start(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_000025C0);
+    sceSysreg_driver_25673620();
+    sceSysreg_driver_BB3623DF();
+    sceSysEventForKernel_CD9E4BB5(&D_000025C0);
+    return 0;
+}
 
 s32 module_reboot_before(void) {
     sceSysreg_driver_4EE8E2C8();
@@ -349,7 +356,10 @@ INCLUDE_RODATA("tmp/asm/282/sysreg/nonmatchings/sysreg", D_00002578);
 
 INCLUDE_ASM("tmp/asm/282/sysreg/nonmatchings/sysreg", sceSysreg_driver_25673620);
 
-INCLUDE_ASM("tmp/asm/282/sysreg/nonmatchings/sysreg", sceSysreg_driver_4EE8E2C8);
+s32 sceSysreg_driver_4EE8E2C8(void) {
+    InterruptManagerForKernel_F987B1F0(0x1F);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/sysreg/nonmatchings/sysreg", sceSysreg_driver_083F56E2);
 

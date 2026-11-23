@@ -1,5 +1,7 @@
 {
  "funcs": {
+  "func_00000EB4": "void func_00000EB4(void *arg0, s32 arg1);",
+  "sceKernelDcacheInvalidateRange": "s32 sceKernelDcacheInvalidateRange(void *, u32);",
   "sceMePower_driver_05B2C420": "M2C_UNK sceMePower_driver_05B2C420(M2C_UNK);",
   "sceMePower_driver_B6FE3E62": "M2C_UNK sceMePower_driver_B6FE3E62(M2C_UNK);",
   "sceVideocodec_driver_CB3312D1": "s32 sceVideocodec_driver_CB3312D1(void);",

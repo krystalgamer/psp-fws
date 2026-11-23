@@ -1,11 +1,19 @@
 {
  "funcs": {
+  "InterruptManagerForKernel_F987B1F0": "M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);",
   "func_000000B4": "s32 func_000000B4(void);",
   "func_000000BC": "s32 func_000000BC(void);",
   "func_000000C4": "s32 func_000000C4(void);",
   "module_reboot_before": "s32 module_reboot_before(void);",
-  "sceSysreg_driver_4EE8E2C8": "M2C_UNK sceSysreg_driver_4EE8E2C8();",
+  "module_start": "s32 module_start(void);",
+  "sceSysEventForKernel_CD9E4BB5": "M2C_UNK sceSysEventForKernel_CD9E4BB5(M2C_UNK *);",
+  "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
+  "sceSysreg_driver_25673620": "s32 sceSysreg_driver_25673620(void);",
+  "sceSysreg_driver_4EE8E2C8": "s32 sceSysreg_driver_4EE8E2C8(void);",
+  "sceSysreg_driver_BB3623DF": "s32 sceSysreg_driver_BB3623DF(void);",
   "sceSysreg_driver_F2DEAA14": "s32 sceSysreg_driver_F2DEAA14(void);"
  },
- "vars": {}
+ "vars": {
+  "D_000025C0": "extern M2C_UNK D_000025C0;"
+ }
 }

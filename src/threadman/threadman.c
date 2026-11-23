@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "threadman_decls.h"
 
@@ -15,9 +16,28 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000408);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000448);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_000004CC);
+void func_000004CC(void *arg0) {
+    s32 temp_v1;
+    s32 temp_v1_2;
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000534);
+    temp_v1 = M2C_FIELD(arg0, s32 *, 0x38);
+    M2C_FIELD(arg0, s32 *, 0x54) = 0;
+    if (temp_v1 != 0) {
+        func_0000EA04(temp_v1, M2C_FIELD(arg0, s32 *, 0x3C));
+        M2C_FIELD(arg0, s32 *, 0x38) = 0;
+        M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    }
+    temp_v1_2 = M2C_FIELD(arg0, s32 *, 0x20);
+    if (temp_v1_2 == 0) {
+
+    } else {
+        SysMemForKernel_5367923C(temp_v1_2, 0x5BD49380);
+    }
+}
+
+void func_00000534(s32 arg0) {
+    SysMemForKernel_5367923C(arg0, 0x85FE2B4C);
+}
 
 INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016414);
 
@@ -25,7 +45,20 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000554);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000590);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_000006C8);
+s32 func_000006C8(void *arg0, void *arg1) {
+    void *temp_a0;
+    void *temp_a1;
+
+    SysMemForKernel_CE05CCB7();
+    temp_a0 = arg0 + (M2C_FIELD(arg1, u8 *, 0x15) * 4);
+    M2C_FIELD(temp_a0, s32 *, 4) = 0;
+    temp_a1 = temp_a0 + 0xC;
+    M2C_FIELD(temp_a0, s32 *, 8) = 0;
+    M2C_FIELD(temp_a0, s32 *, 0) = 0;
+    M2C_FIELD(temp_a0, void **, 0xC) = temp_a1;
+    M2C_FIELD(temp_a1, void **, 4) = temp_a1;
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000720);
 
@@ -35,7 +68,13 @@ s32 func_000008C8(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_000008D0);
+s32 func_000008D0(s32 arg0, void *arg1) {
+    void *temp_a1;
+
+    temp_a1 = arg0 + (M2C_FIELD(arg1, u8 *, 0x15) * 4);
+    M2C_FIELD(temp_a1, s32 *, 8) = (s32) (M2C_FIELD(temp_a1, s32 *, 8) - 1);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_000008F0);
 
@@ -302,7 +341,20 @@ s32 func_00009B94(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xC);
 }
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00009BBC);
+s32 func_00009BBC(s32 arg0, void *arg1, s32 arg2, s32 arg3) {
+    u8 temp_a1;
+    void *temp_v0;
+
+    temp_a1 = M2C_FIELD(arg1, u8 *, 0x15);
+    temp_v0 = arg0 + (temp_a1 * 4);
+    if (M2C_FIELD(temp_v0, s32 *, 0x14) == 0) {
+
+    } else {
+        sceKernelFreePartitionMemory(M2C_FIELD(temp_v0, s32 *, 0x1C), temp_a1);
+    }
+    SysMemForKernel_CE05CCB7(arg0, arg1, arg2, arg3);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00009C3C);
 
@@ -422,7 +474,9 @@ s32 ThreadManForUser_0E927AED(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelUSec2SysClockWide);
+s64 sceKernelUSec2SysClockWide(u32 arg0) {
+    return (s64) arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelSysClock2USec);
 
@@ -515,7 +569,9 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForKernel_3
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000F698);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForKernel_A249EAAE);
+void ThreadManForKernel_A249EAAE(s32 arg0) {
+    ThreadManForKernel_3AD875C3(arg0, 0, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", syslib_D3744BE0);
 
@@ -573,7 +629,27 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelGetThreadEx
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForKernel_BC31C1B9);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_000127F8);
+void func_000127F8(void *arg0, s32 arg1) {
+    void *var_s0;
+
+    if (M2C_FIELD(arg0, s32 *, 0xD8) & 0x200000) {
+        sceKernelCpuResumeIntr(arg1);
+        sceKernelMemset(M2C_FIELD(arg0, void **, 0x78), 0, M2C_FIELD(arg0, u32 *, 0x7C));
+        if (M2C_FIELD(arg0, s32 *, 0xD8) < 0) {
+            sceKernelMemset(M2C_FIELD(arg0, void **, 0x84), 0, M2C_FIELD(arg0, u32 *, 0x88));
+            var_s0 = M2C_FIELD(arg0, void **, 0x8C);
+        } else {
+            var_s0 = M2C_FIELD(arg0, void **, 0x8C);
+        }
+        if (var_s0 != NULL) {
+            do {
+                sceKernelMemset(M2C_FIELD(var_s0, void **, 4), 0, M2C_FIELD(var_s0, u32 *, 0xC));
+                var_s0 = M2C_FIELD(var_s0, void **, 0);
+            } while (var_s0 != NULL);
+        }
+        sceKernelCpuSuspendIntr();
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0001289C);
 
