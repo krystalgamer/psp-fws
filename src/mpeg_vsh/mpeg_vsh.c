@@ -196,7 +196,9 @@ u32 func_00005B88(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00005BA8);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00005BCC);
+s32 func_00005BCC(s32 arg0) {
+    return __builtin_allegrex_ins(func_00009548(arg0 + 1), 0, 0x15, 0xB);
+}
 
 u8 func_00005BEC(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 3);

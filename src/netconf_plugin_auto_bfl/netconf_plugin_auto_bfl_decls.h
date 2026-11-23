@@ -17,6 +17,8 @@ void func_00003E80(void);
 void func_00003E9C(void);
 void func_00003EB8(void);
 void func_00003ED4(void);
+s32 func_00003EF0(s32 arg0);
+s32 func_00003F08(s32 arg0);
 void func_00003F3C(void);
 M2C_UNK func_000042A4();
 M2C_UNK malloc();

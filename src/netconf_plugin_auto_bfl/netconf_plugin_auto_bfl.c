@@ -199,11 +199,15 @@ void func_00003ED4(void) {
     sceNetInetClose();
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003EF0);
+s32 func_00003EF0(s32 arg0) {
+    return __builtin_allegrex_wsbw(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003EF8);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003F08);
+s32 func_00003F08(s32 arg0) {
+    return __builtin_allegrex_wsbw(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003F10);
 

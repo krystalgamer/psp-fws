@@ -2681,7 +2681,9 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0001E870);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0001E95C);
+s32 func_0001E95C(void *arg0) {
+    return __builtin_allegrex_ext(M2C_FIELD(M2C_FIELD(arg0, void **, 8), u8 *, 0x1B), 1, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0001E96C);
 
@@ -2689,7 +2691,9 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0001EA7C);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0001EAD8);
+s32 func_0001EAD8(void *arg0) {
+    return __builtin_allegrex_ext(M2C_FIELD(M2C_FIELD(arg0, void **, 8), u8 *, 0x1B), 3, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0001EAE8);
 
@@ -3812,7 +3816,9 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0002EA08);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0002EAC4);
+void func_0002EAC4(s32 arg0) {
+    func_0002E738(__builtin_allegrex_min(sceIoClose(arg0), 0));
+}
 
 s32 func_0002EAF0(void) {
     return 0;
@@ -5845,11 +5851,17 @@ void func_0004F6BC(void) {
     func_000229A8();
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0004F6D8);
+s32 func_0004F6D8(s32 arg0) {
+    return __builtin_allegrex_ext(arg0, 6, 1);
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0004F6E0);
+s32 func_0004F6E0(s32 arg0) {
+    return __builtin_allegrex_ext(arg0, 7, 1);
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0004F6E8);
+s32 func_0004F6E8(s32 arg0) {
+    return __builtin_allegrex_ext(arg0, 5, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0004F6F0);
 
@@ -8048,13 +8060,21 @@ s32 func_0006C594(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0006C5A4);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0006C5B4);
+s32 func_0006C5B4(s32 arg0) {
+    return (4 - __builtin_allegrex_ext(arg0, 3, 2)) & 0xFF;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0006C5C8);
+s32 func_0006C5C8(s32 arg0) {
+    return (4 - __builtin_allegrex_ext(arg0, 0x13, 2)) & 0xFF;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0006C5DC);
+s32 func_0006C5DC(s32 arg0) {
+    return (4 - __builtin_allegrex_ext(arg0, 1, 2)) & 0xFF;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0006C5F0);
+s32 func_0006C5F0(s32 arg0) {
+    return (4 - __builtin_allegrex_ext(arg0, 0x11, 2)) & 0xFF;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_0006C604);
 

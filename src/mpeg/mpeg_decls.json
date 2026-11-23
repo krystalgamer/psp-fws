@@ -4,6 +4,7 @@
   "func_00003198": "s32 func_00003198(void);",
   "func_00004E70": "s32 func_00004E70(void *arg0, s32 arg1);",
   "func_000054AC": "u32 func_000054AC(s32 arg0);",
+  "func_000054F0": "s32 func_000054F0(s32 arg0);",
   "func_00005510": "u8 func_00005510(void *arg0);",
   "func_0000553C": "u8 func_0000553C(void *arg0);",
   "func_00005580": "s32 func_00005580(s32 arg0);",

@@ -12,6 +12,8 @@
   "func_00003E9C": "void func_00003E9C(void);",
   "func_00003EB8": "void func_00003EB8(void);",
   "func_00003ED4": "void func_00003ED4(void);",
+  "func_00003EF0": "s32 func_00003EF0(s32 arg0);",
+  "func_00003F08": "s32 func_00003F08(s32 arg0);",
   "func_00003F3C": "void func_00003F3C(void);",
   "func_000042A4": "M2C_UNK func_000042A4();",
   "malloc": "M2C_UNK malloc();",

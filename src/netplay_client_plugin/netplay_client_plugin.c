@@ -439,7 +439,9 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00005710);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00005748);
+s32 func_00005748(void) {
+    return __builtin_allegrex_min(sceNetAdhocDownload_8A5500E0(), 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_0000576C);
 

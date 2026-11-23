@@ -184,7 +184,9 @@ u32 func_000054AC(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000054CC);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000054F0);
+s32 func_000054F0(s32 arg0) {
+    return __builtin_allegrex_ins(func_00007B0C(arg0 + 1), 0, 0x15, 0xB);
+}
 
 u8 func_00005510(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 3);

@@ -8,6 +8,7 @@
 s32 func_0000366C(void);
 s32 func_00005318(void *arg0, s32 arg1);
 u32 func_00005B88(s32 arg0);
+s32 func_00005BCC(s32 arg0);
 u8 func_00005BEC(void *arg0);
 u8 func_00005C18(void *arg0);
 s32 func_00005C5C(s32 arg0);
