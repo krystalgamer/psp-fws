@@ -16,23 +16,57 @@ INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000330);
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000003B4);
+void func_000003B4(void) {
+    func_0000733C((s32) &D_0000FEAC);
+}
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000003D4);
+void func_000003D4(s32 arg0) {
+    s32 *temp_v0;
+
+    scePaf_6B1E90C7();
+    D_00010048 = arg0;
+    temp_v0 = scePaf_B7E6052B(4);
+    *temp_v0 = 0;
+    scePaf_A0ED77C4(0, &func_0000015C, temp_v0, -1, -1, &func_00000330);
+    sceVshCommonGui_80271F41();
+}
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000438);
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000478);
+s32 func_00000478(s32 arg0) {
+    func_000072A0(&D_0000FEAC, arg0);
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000004A0);
+void func_000004A0(s32 arg0) {
+    sceVshCommonUtil_8584376D(&D_0000FF30, arg0);
+}
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000004C4);
+s32 func_000004C4(void) {
+    s32 temp_s0;
+    s32 temp_s0_2;
+
+    sceVshCommonUtil_9E42444E(&D_0000FF30, 1, 0);
+    func_00003E08();
+    temp_s0_2 = func_000057F0();
+    temp_s0 = temp_s0_2 | func_00003E40();
+    sceVshCommonUtil_0587F20C(&D_0000FF30, 1, temp_s0);
+    return temp_s0;
+}
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000530);
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000005D4);
+void func_000005D4(void) {
+    sceVshCommonUtil_622815DD(&D_0000FF30, func_000004C4);
+    func_00007274(&D_0000FEAC);
+}
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000608);
+void func_00000608(void) {
+    sceVshBridge_E1941520(0);
+    func_00000BB0();
+    func_000071B4(&D_0000FEAC);
+    func_0000668C((s32) &D_0000FF18);
+}
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000644);
 
@@ -50,7 +84,10 @@ INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_0000099C);
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000009F8);
+void func_000009F8(M2C_UNK **arg0) {
+    *arg0 = &D_0000F498;
+    scePaf_4E67BB08();
+}
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000A20);
 
@@ -60,7 +97,14 @@ INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000B00);
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00000BB0);
+s32 func_00000BB0(void) {
+    func_00000F5C();
+    if (D_00010050 != 0) {
+        scePaf_545FE2DA(D_00010050);
+        D_00010050 = 0;
+    }
+    return 0;
+}
 
 INCLUDE_RODATA("tmp/asm/330/license_plugin/nonmatchings/license_plugin", D_0000F490);
 
@@ -124,7 +168,15 @@ INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00001
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00001954);
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00001A48);
+s32 func_00001A48(s32 arg0) {
+    s32 var_a1;
+
+    var_a1 = 0;
+    if ((arg0 < 0) || (arg0 >= D_00010054)) {
+        var_a1 = 0x80108FF0;
+    }
+    return var_a1;
+}
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00001A74);
 
@@ -229,7 +281,15 @@ INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00003
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00003254);
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000033F0);
+s32 func_000033F0(void) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (D_000110C0 != 0) {
+        var_v0 = D_000110BC == 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00003414);
 
@@ -313,7 +373,10 @@ INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00004
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00004850);
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00004914);
+void func_00004914(M2C_UNK **arg0) {
+    *arg0 = &D_0000F890;
+    scePaf_4E67BB08();
+}
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_0000493C);
 
@@ -384,13 +447,21 @@ INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00005
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00005410);
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00005468);
+void func_00005468(s32 arg0, void *arg1) {
+    if (M2C_FIELD(arg1, u16 *, 4) == 0x409) {
+        if (M2C_FIELD(arg1, s32 *, 0xC) == 0) {
+            func_00005410(arg0, (s32) &func_000053B0, 0);
+        }
+    }
+}
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000054AC);
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_0000556C);
 
-INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000057E0);
+s32 func_000057E0(void) {
+    return D_000110DC == 0;
+}
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000057F0);
 

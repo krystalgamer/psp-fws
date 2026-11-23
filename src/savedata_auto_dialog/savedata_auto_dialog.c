@@ -31,7 +31,11 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00000238);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000002B4);
+s32 func_000002B4(s32 arg0) {
+    func_00000944(arg0);
+    D_0001C204 = 1;
+    return 0;
+}
 
 void func_000002E0(void) {
     func_00000A5C();
@@ -79,11 +83,21 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000007FC);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000008D8);
+void func_000008D8(void) {
+    if (D_0001C208 == 0) {
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00000928);
+    } else {
+        func_00014AA4(0, (s32) &func_000005D0, D_0001C208, -1, -1, (s32) &func_000007FC);
+    }
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00000938);
+void func_00000928(void) {
+    D_0001C21D = 1;
+}
+
+u8 func_00000938(void) {
+    return D_0001B5F8;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00000944);
 
@@ -158,7 +172,9 @@ INCLUDE_RODATA("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dial
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00002788);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000027E8);
+s32 func_000027E8(void) {
+    return D_0001C220 * D_0001C22C;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00002804);
 
@@ -244,7 +260,9 @@ s32 func_00004504(void) {
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000456C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00004578);
+s32 func_00004578(void) {
+    return D_0001C234;
+}
 
 s32 func_00004584(void *arg0) {
     s32 var_v1;
@@ -376,7 +394,15 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00006240);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000641C);
+u32 func_0000641C(void *arg0, u32 arg1) {
+    u32 var_v1;
+
+    var_v1 = 0;
+    if ((arg0 != NULL) && (M2C_FIELD(arg0, s32 *, 0) != 0) && (M2C_FIELD(arg0, s32 *, 4) != 0)) {
+        var_v1 = (u32) ((M2C_FIELD(arg0, s32 *, 8) + arg1) - 1) / arg1;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00006460);
 
@@ -440,7 +466,9 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00007EF4);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00007F68);
+M2C_UNK *func_00007F68(void) {
+    return &D_00047D34;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00007F74);
 
@@ -450,7 +478,13 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00008000);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00008040);
+s32 func_00008040(void *arg0) {
+    func_00017760(&D_00047D24, 0, 0x10);
+    func_00017684(&D_00047D24, arg0, 0x10);
+    func_00013644(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 8));
+    func_00017760(&D_00047E40, 0, 0xC);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000080B4);
 
@@ -474,7 +508,9 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00008810);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000088A8);
+s32 func_000088A8(s32 arg0, u32 arg1) {
+    return ((s32) (arg0 + 1) / (s32) (arg1 >> 5)) + 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000088C8);
 
@@ -512,7 +548,9 @@ s32 func_0000957C(void) {
     return 0x1330;
 }
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00009584);
+void func_00009584(s32 arg0, s32 arg1) {
+    func_00008724(arg0, (s32) &D_0001AE7C, arg1);
+}
 
 INCLUDE_RODATA("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", D_0001AE7C);
 
@@ -639,7 +677,15 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000B264);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000B270);
+s32 func_0000B270(void) {
+    s32 var_a0;
+
+    var_a0 = 0;
+    if (M2C_FIELD(&D_00047E40, s32 *, 0) != 0) {
+        var_a0 = M2C_FIELD(&D_00047E40, s32 *, 4);
+    }
+    return var_a0;
+}
 
 void func_0000B290(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     if (arg4 != 1) {
@@ -715,7 +761,15 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000CCB4);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000CD0C);
+M2C_UNK *func_0000CD0C(s32 arg0) {
+    M2C_UNK *var_v0;
+
+    var_v0 = NULL;
+    if (!(arg0 & 0xFF)) {
+        var_v0 = &D_0001B0CC;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000CD28);
 
@@ -891,7 +945,10 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014200);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0001425C);
+void func_0001425C(s32 arg0, s32 arg1) {
+    D_0001C23C = arg0;
+    D_0001C240 = arg1;
+}
 
 INCLUDE_RODATA("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", D_0001B114);
 
@@ -917,11 +974,31 @@ void func_000143FC(void) {
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014418);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0001445C);
+s32 func_0001445C(void *arg0) {
+    M2C_FIELD(&D_0001C24C, s32 *, 0) = (s32) M2C_FIELD(arg0, s32 *, 0);
+    M2C_FIELD(&D_0001C24C, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 4);
+    M2C_FIELD(&D_0001C24C, s32 *, 8) = (s32) M2C_FIELD(arg0, s32 *, 8);
+    M2C_FIELD(&D_0001C24C, s32 *, 0xC) = (s32) M2C_FIELD(arg0, s32 *, 0xC);
+    M2C_FIELD(&D_0001C24C, s32 *, 0x10) = (s32) M2C_FIELD(arg0, s32 *, 0x10);
+    M2C_FIELD(&D_0001C24C, s32 *, 0x14) = (s32) M2C_FIELD(arg0, s32 *, 0x14);
+    M2C_FIELD(&D_0001C24C, s32 *, 0x18) = (s32) M2C_FIELD(arg0, s32 *, 0x18);
+    M2C_FIELD(&D_0001C24C, s32 *, 0x1C) = (s32) M2C_FIELD(arg0, s32 *, 0x1C);
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000144AC);
+M2C_UNK *func_000144AC(void) {
+    return &D_0001C24C;
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000144B8);
+s32 func_000144B8(s32 arg0) {
+    s32 var_a1;
+
+    var_a1 = 1;
+    if ((arg0 < 0) || (arg0 >= D_0001C274)) {
+        var_a1 = 0;
+    }
+    return var_a1;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000144E0);
 
@@ -939,7 +1016,9 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014AA4);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014BA4);
+s32 func_00014BA4(void) {
+    return D_0001C274;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014BB0);
 
@@ -1091,7 +1170,20 @@ void func_00015E84(s8 *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00015E8C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00016014);
+s32 func_00016014(s32 arg0) {
+    s32 temp_v1;
+
+    if (arg0 == 0) {
+        return D_0001C288;
+    }
+    if ((D_0001C284 == 0) || (arg0 != D_0001C284)) {
+        return -1;
+    }
+    temp_v1 = D_0001C288;
+    D_0001C284 = 0;
+    D_0001C288 = temp_v1 + arg0;
+    return temp_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0001605C);
 
@@ -1113,7 +1205,10 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00016FB4);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0001728C);
+s32 func_0001728C(void) {
+    func_000169B4(D_0001C280);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000172B0);
 
@@ -1159,7 +1254,9 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000179A0);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000179D8);
+void func_000179D8(void) {
+    func_00017760(&D_0001FA8C, 0, 0x2020);
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00017A00);
 

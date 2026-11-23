@@ -4,10 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_00016DF1;
 
 void func_00002A00(u8 *arg0, u8 *arg1);
 s32 func_00002CB8(s32 arg0);
 void func_00002CF0(void);
+M2C_UNK *func_00002D84(void);
 M2C_UNK func_00002F14();
 M2C_UNK func_000040CC();
 void func_000043B8(void);

@@ -1,6 +1,8 @@
 {
  "funcs": {
+  "IoFileMgrForKernel_C7F35804": "M2C_UNK IoFileMgrForKernel_C7F35804(s32);",
   "func_00000020": "M2C_UNK func_00000020();",
+  "func_00000048": "void func_00000048(void);",
   "func_00000134": "M2C_UNK func_00000134();",
   "func_00000264": "M2C_UNK func_00000264();",
   "func_00000BFC": "M2C_UNK func_00000BFC();",
@@ -21,8 +23,15 @@
   "func_00004950": "void func_00004950(void);",
   "func_00004A58": "void func_00004A58(void);",
   "func_00004A74": "void func_00004A74(void);",
+  "func_000053FC": "void func_000053FC(void);",
+  "func_00006724": "s32 func_00006724(void);",
+  "func_000067D4": "s8 *func_000067D4(void);",
+  "func_000067E0": "s32 func_000067E0(void);",
+  "func_000067EC": "s32 func_000067EC(void);",
+  "func_00006960": "s32 func_00006960(void);",
   "func_000079A8": "s32 func_000079A8(s8 *arg0);",
   "func_0000E3C0": "s32 func_0000E3C0(void *arg0, s32 arg1);",
+  "func_0000E3D8": "s32 func_0000E3D8(void *arg0, u32 arg1);",
   "func_00013044": "s32 func_00013044(void *arg0);",
   "func_000135A8": "void func_000135A8(void *arg0);",
   "func_00013654": "void func_00013654(void *arg0);",
@@ -31,7 +40,20 @@
   "func_0002233C": "s32 func_0002233C(s32 arg0);",
   "func_00022344": "s8 func_00022344(s8 arg0);",
   "sceFatMS_driver_BCB9DEDB": "s32 sceFatMS_driver_BCB9DEDB(void);",
-  "sceKernelDeleteFpl": "M2C_UNK sceKernelDeleteFpl();"
+  "sceIoClose": "s32 sceIoClose(s32);",
+  "sceIoDevctl": "s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);",
+  "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
+  "sceKernelDeleteFpl": "M2C_UNK sceKernelDeleteFpl();",
+  "sceKernelDeleteMbx": "s32 sceKernelDeleteMbx(s32);"
  },
- "vars": {}
+ "vars": {
+  "D_0002411C": "extern M2C_UNK D_0002411C;",
+  "D_0002B568": "extern s32 D_0002B568;",
+  "D_0002B5CC": "extern s32 D_0002B5CC;",
+  "D_0002BAA0": "extern M2C_UNK D_0002BAA0;",
+  "D_0002BAC0": "extern s32 D_0002BAC0;",
+  "D_0002D730": "extern s8 D_0002D730;",
+  "D_0002DA00": "extern s32 D_0002DA00;",
+  "D_0002DC10": "extern s32 D_0002DC10;"
+ }
 }

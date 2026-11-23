@@ -8,6 +8,7 @@
   "func_00001D2C": "s32 func_00001D2C(s32 arg0);",
   "func_00001D68": "s32 func_00001D68(s32 arg0);",
   "func_00001DA4": "s32 func_00001DA4();",
+  "func_00001DB4": "M2C_UNK *func_00001DB4(void);",
   "func_00001ED0": "M2C_UNK func_00001ED0(M2C_UNK, s32);",
   "func_00001F44": "M2C_UNK func_00001F44();",
   "func_00003174": "M2C_UNK func_00003174();",
@@ -88,5 +89,7 @@
   "func_000127F8": "M2C_UNK func_000127F8(M2C_UNK, M2C_UNK);",
   "syslib_D3744BE0": "s32 syslib_D3744BE0(void);"
  },
- "vars": {}
+ "vars": {
+  "D_00014F21": "extern M2C_UNK D_00014F21;"
+ }
 }

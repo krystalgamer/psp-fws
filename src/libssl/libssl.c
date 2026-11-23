@@ -106,7 +106,9 @@ s32 func_00003258(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00003260);
+M2C_UNK *func_00003260(void) {
+    return &D_0002A698;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000326C);
 
@@ -276,13 +278,17 @@ INCLUDE_RODATA("tmp/asm/282/libssl/nonmatchings/libssl", D_0002BA10);
 
 INCLUDE_RODATA("tmp/asm/282/libssl/nonmatchings/libssl", D_0002BB10);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000AEB8);
+M2C_UNK *func_0000AEB8(void) {
+    return "rc4( f)";
+}
 
 INCLUDE_RODATA("tmp/asm/282/libssl/nonmatchings/libssl", D_0002BB44);
 
 INCLUDE_RODATA("tmp/asm/282/libssl/nonmatchings/libssl", D_0002BB70);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000AEC4);
+M2C_UNK *func_0000AEC4(void) {
+    return "md2(int)";
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000AED0);
 
@@ -318,9 +324,13 @@ void func_0000CD44(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CD68);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CDC8);
+M2C_UNK *func_0000CDC8(void) {
+    return &D_0002E3BC;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CDD4);
+M2C_UNK *func_0000CDD4(void) {
+    return &D_0002E3E4;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CDE0);
 
@@ -328,17 +338,25 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CE90);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CF20);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CF5C);
+M2C_UNK *func_0000CF5C(void) {
+    return &D_0002E40C;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CF68);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CFC8);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CFFC);
+M2C_UNK *func_0000CFFC(void) {
+    return &D_0002E434;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D008);
+M2C_UNK *func_0000D008(void) {
+    return &D_0002E45C;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D014);
+M2C_UNK *func_0000D014(void) {
+    return &D_0002E484;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D020);
 
@@ -362,15 +380,21 @@ s32 func_0000D2BC(s32 arg0, s32 arg1) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D328);
+M2C_UNK *func_0000D328(void) {
+    return &D_0002E4AC;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D334);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D340);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D36C);
+M2C_UNK *func_0000D36C(void) {
+    return &D_0002E4D4;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D378);
+M2C_UNK *func_0000D378(void) {
+    return &D_0002E4FC;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D384);
 
@@ -396,17 +420,29 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000DA38);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000DC00);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000DC6C);
+M2C_UNK *func_0000DC6C(void) {
+    return &D_0002E524;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000DC78);
+M2C_UNK *func_0000DC78(void) {
+    return &D_0002E560;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000DC84);
+M2C_UNK *func_0000DC84(void) {
+    return &D_0002E59C;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000DC90);
+M2C_UNK *func_0000DC90(void) {
+    return &D_0002E5D8;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000DC9C);
+M2C_UNK *func_0000DC9C(void) {
+    return &D_0002E614;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000DCA8);
+M2C_UNK *func_0000DCA8(void) {
+    return &D_0002E650;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000DCB4);
 
@@ -560,15 +596,21 @@ void *func_0000F0FC(void *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000F11C);
+void func_0000F11C(s32 arg0) {
+    D_000304D8 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_2FE7BB42);
+s32 sceSsl_lib_2FE7BB42(void) {
+    return D_000304D8;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_A7BED83B);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000F16C);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000F254);
+s32 func_0000F254(void) {
+    return D_000304DC;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_665D02F6);
 
@@ -590,7 +632,9 @@ INCLUDE_RODATA("tmp/asm/282/libssl/nonmatchings/libssl", D_0002C1DC);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000F298);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000F944);
+s32 func_0000F944(void) {
+    return D_000304E0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_9EF66756);
 
@@ -598,15 +642,21 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000F988);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000FA74);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00010110);
+s32 func_00010110(void) {
+    return D_000304E4;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_E7BFC0EF);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00010154);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_000101D4);
+void func_000101D4(s32 arg0) {
+    D_000304E8 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_000101E0);
+s32 func_000101E0(void) {
+    return D_000304E8;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_047AB6BB);
 
@@ -683,7 +733,9 @@ void func_00011EDC(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_3454E622);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00011F90);
+M2C_UNK *func_00011F90(void) {
+    return &D_0002E710;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00011F9C);
 
@@ -795,7 +847,9 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00012E08);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00012ED0);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00012F14);
+M2C_UNK *func_00012F14(void) {
+    return &D_0002E758;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_28B4DE33);
 
@@ -854,9 +908,13 @@ void func_00013A2C(void) {
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00013A34);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_9266C0D5);
+s32 sceSsl_lib_9266C0D5(void) {
+    return D_00030D00;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00013B08);
+s32 func_00013B08(void) {
+    return D_00030CFC;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00013B14);
 
@@ -968,7 +1026,9 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00015494);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_000154BC);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_A1C3AB31);
+M2C_UNK *sceSsl_lib_A1C3AB31(void) {
+    return &D_0002FACC;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_000154F0);
 
@@ -986,7 +1046,9 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_DEA6EDB2);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_21F2A35C);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00015C18);
+M2C_UNK *func_00015C18(void) {
+    return &D_0002FADC;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00015C24);
 
@@ -1009,7 +1071,9 @@ void func_00016D94(void) {
     func_00016DBC(0);
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00016DB0);
+void func_00016DB0(s32 arg0) {
+    D_00030D38 = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00016DBC);
 
@@ -1824,17 +1888,30 @@ void func_0001C408(void) {
     func_0001D31C();
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_6BA650E4);
+s32 sceSsl_lib_6BA650E4(void) {
+    return D_00030DF0;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_69105335);
+s32 sceSsl_lib_69105335(void) {
+    return D_00030DF4;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_A9191C17);
+void sceSsl_lib_A9191C17(s32 arg0) {
+    func_0001C408();
+    D_00030DF0 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_64AA4ED6);
+void sceSsl_lib_64AA4ED6(s32 arg0) {
+    D_00030DF4 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_6CDEB823);
+s32 sceSsl_lib_6CDEB823(void) {
+    return D_00030DF8;
+}
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_5AD14F0B);
+void sceSsl_lib_5AD14F0B(s32 arg0) {
+    D_00030DF8 = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_9D8A385E);
 
@@ -1857,7 +1934,9 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001CC80);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001CD78);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001D310);
+s32 func_0001D310(void) {
+    return D_0002FB80;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001D31C);
 
@@ -1968,7 +2047,9 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001E50C);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001E5B0);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001E770);
+s32 func_0001E770(void) {
+    return D_00030EF0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001E77C);
 
@@ -2220,7 +2301,15 @@ INCLUDE_RODATA("tmp/asm/282/libssl/nonmatchings/libssl", D_0002D95C);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00023810);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_A2CE8DCD);
+M2C_UNK *sceSsl_lib_A2CE8DCD(void *arg0) {
+    M2C_UNK *var_v0;
+
+    var_v0 = &D_0002D95C;
+    if (arg0 != NULL) {
+        var_v0 = M2C_FIELD(arg0, M2C_UNK **, 4);
+    }
+    return var_v0;
+}
 
 s32 func_00023868(s32 *arg0) {
     return *arg0;
@@ -2413,7 +2502,9 @@ s32 func_000263EC(void) {
     return 0x1C20;
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_000263F4);
+M2C_UNK *func_000263F4(void) {
+    return &D_000303F4;
+}
 
 s32 func_00026400(void) {
     return 0x23;
@@ -2793,7 +2884,9 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00028C20);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00028C38);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00028C54);
+s32 func_00028C54(s32 arg0) {
+    return D_00031164 & arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_C0ABBB57);
 

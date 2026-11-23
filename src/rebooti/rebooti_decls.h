@@ -4,6 +4,7 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_00014F21;
 
 M2C_UNK func_0000004C();
 void func_00000768(void);
@@ -13,6 +14,7 @@ void func_00001CF0(void);
 s32 func_00001D2C(s32 arg0);
 s32 func_00001D68(s32 arg0);
 s32 func_00001DA4();
+M2C_UNK *func_00001DB4(void);
 M2C_UNK func_00001ED0(M2C_UNK, s32);
 M2C_UNK func_00001F44();
 M2C_UNK func_00003174();

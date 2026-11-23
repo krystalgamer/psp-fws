@@ -144,7 +144,9 @@ INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot", func_00002D50);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot", func_00002D74);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot", func_00002D84);
+M2C_UNK *func_00002D84(void) {
+    return &D_00016DF1;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot", func_00002D90);
 

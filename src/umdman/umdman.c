@@ -52,23 +52,50 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_FCFEF5FE)
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001B8C);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001C40);
+void func_00001C40(s32 arg0) {
+    D_00012BDC = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001C4C);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001D7C);
+s32 func_00001D7C(void) {
+    return D_00011B40;
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_2C756C37);
+s32 sceUmdMan_driver_2C756C37(void) {
+    return D_00011B48;
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001D94);
+void func_00001D94(s32 arg0) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001DF4);
+    temp_a0 = sceKernelCpuSuspendIntr();
+    if ((u32) (arg0 + 0x7FDEEF60) < 2U) {
+        D_00011B48 = 0x80210003;
+    } else {
+        D_00011B48 = arg0;
+    }
+    sceKernelCpuResumeIntr(temp_a0);
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001E00);
+s32 func_00001DF4(void) {
+    return D_00011B44;
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001E18);
+void func_00001E00(s32 arg0) {
+    if (arg0 < 0) {
+        D_00011B44 = 0;
+    }
+    D_00011B44 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001E24);
+s32 func_00001E18(void) {
+    return D_00012BE0;
+}
+
+void func_00001E24(s32 arg0) {
+    D_00012BE0 = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_0D3EA203);
 
@@ -83,7 +110,9 @@ void func_00001EC0(void) {
     func_00007C78();
 }
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_0D14D540);
+s32 sceUmdMan_driver_0D14D540(void) {
+    return D_00012BDC;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00001EE8);
 
@@ -247,7 +276,9 @@ M2C_UNK *func_00006D30(void) {
     return &D_00011A80;
 }
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00006D3C);
+M2C_UNK *func_00006D3C(void) {
+    return &D_00012C40;
+}
 
 s32 func_00006D48(void) {
     return 0;
@@ -261,7 +292,9 @@ s32 func_00006D58(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00006D60);
+M2C_UNK *func_00006D60(void) {
+    return &D_00012C80;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00006D6C);
 
@@ -367,13 +400,19 @@ void func_00007C5C(void) {
     func_00006D6C();
 }
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007C78);
+s32 func_00007C78(void) {
+    return D_00012CD0;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007C84);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007CA8);
+void func_00007CA8(void) {
+    sceKernelWaitSema(D_00012C10, 1, NULL);
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007CD0);
+void func_00007CD0(void) {
+    sceKernelSignalSema(D_00012C10, 1);
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007CF4);
 
@@ -383,7 +422,9 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007E38);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_405B48A5);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_65D0DEC6);
+s32 sceUmdMan_driver_65D0DEC6(void) {
+    return D_00012CD4 + 0xFFFD0000;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_2E49311E);
 
@@ -568,11 +609,15 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_736AE133)
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008F50);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008FE8);
+M2C_UNK *func_00008FE8(void) {
+    return &D_0001BD00;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008FF4);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_000090AC);
+M2C_UNK *func_000090AC(void) {
+    return &D_0001BD38;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_000090B8);
 
@@ -586,7 +631,13 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00009A68);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_F4AFF62D);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00009F10);
+void func_00009F10(s32 arg0) {
+    s32 temp_a0;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_0001BE38 = arg0;
+    sceKernelCpuResumeIntr(temp_a0);
+}
 
 s32 sceUmdMan_driver_7F482409(void) {
     s32 temp_v0;
@@ -617,7 +668,9 @@ s32 sceUmdMan_driver_7F482409(void) {
     return var_s0;
 }
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00009FE8);
+s32 func_00009FE8(void) {
+    return D_0001BE38;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00009FF4);
 
@@ -649,7 +702,18 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000A420);
 
 INCLUDE_RODATA("tmp/asm/201/umdman/nonmatchings/umdman", D_00011254);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000A654);
+s32 func_0000A654(void) {
+    s32 temp_s1;
+    s32 temp_v0;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    temp_v0 = sceKernelEnableSubIntr(4, 0x1A);
+    if (temp_v0 < 0) {
+        KDebugForKernel_84F370BC(&D_00011254, &D_000110B4, "_sceUmdManEnableUMDDetectIntr", temp_v0);
+    }
+    sceKernelCpuResumeIntr(temp_s1);
+    return temp_v0;
+}
 
 INCLUDE_RODATA("tmp/asm/201/umdman/nonmatchings/umdman", D_000112A0);
 
@@ -711,7 +775,9 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000AB38);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000AB68);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000AC20);
+void func_0000AC20(s32 arg0) {
+    D_0001BE90 = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000AC2C);
 
@@ -729,17 +795,41 @@ void func_0000AD78(void) {
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000AD94);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_B0A6DC55);
+void sceUmdMan_driver_B0A6DC55(s32 arg0) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000AEA4);
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_0001BE6C = 0;
+    sceKernelCpuResumeIntr(temp_a0);
+    sceKernelCancelAlarm(arg0);
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_7DF2A18D);
+void func_0000AEA4(s32 arg0) {
+    D_0001BE68 = 0;
+    sceKernelCancelAlarm(arg0);
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000AF0C);
+void sceUmdMan_driver_7DF2A18D(u32 arg0) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000AF38);
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_0001BE6C = 0;
+    sceKernelCpuResumeIntr(temp_a0);
+    sceKernelSetAlarm(arg0, (s32) &func_0000B2FC, NULL);
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_D1D4F296);
+void func_0000AF0C(u32 arg0) {
+    D_0001BE68 = 0;
+    sceKernelSetAlarm(arg0, (s32) &func_0000B330, NULL);
+}
+
+s32 func_0000AF38(void) {
+    return D_0001BE68;
+}
+
+s32 sceUmdMan_driver_D1D4F296(void) {
+    return D_0001BE6C;
+}
 
 INCLUDE_RODATA("tmp/asm/201/umdman/nonmatchings/umdman", D_0001140C);
 
@@ -755,7 +845,9 @@ INCLUDE_RODATA("tmp/asm/201/umdman/nonmatchings/umdman", D_00011490);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000B1B0);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000B2A0);
+s32 func_0000B2A0(void) {
+    return D_0001BE90;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000B2AC);
 
@@ -802,15 +894,33 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000BF1C);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000BF6C);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000BFD0);
+void func_0000BFD0(s32 arg0) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000C004);
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_0001BF14 = arg0;
+    sceKernelCpuResumeIntr(temp_a0);
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000C010);
+s32 func_0000C004(void) {
+    return D_0001BF14;
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_42D28DD1);
+void func_0000C010(s32 arg0) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_E192C10A);
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_0001BF18 = arg0;
+    sceKernelCpuResumeIntr(temp_a0);
+}
+
+s32 sceUmdMan_driver_42D28DD1(void) {
+    return D_0001BF18;
+}
+
+M2C_UNK *sceUmdMan_driver_E192C10A(void) {
+    return &D_0001BE94;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000C05C);
 
@@ -818,9 +928,13 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000C124);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000C1D8);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000C2BC);
+void func_0000C2BC(s32 arg0) {
+    D_0001BF1C = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000C2C8);
+s32 func_0000C2C8(void) {
+    return D_0001BF1C;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000C2D4);
 
@@ -846,9 +960,19 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000C934);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000CCBC);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000CD24);
+s32 func_0000CD24(void) {
+    return D_00011B0C;
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_A869CAB3);
+void sceUmdMan_driver_A869CAB3(void) {
+    s32 temp_a0;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_0001BF3C = 0;
+    D_0001BF40 = 0;
+    D_0001BF24 = 0;
+    sceKernelCpuResumeIntr(temp_a0);
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_F65D819F);
 
@@ -870,9 +994,13 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000DA78);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000DE54);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000E0AC);
+s32 func_0000E0AC(void) {
+    return D_0001BF48;
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000E0B8);
+void func_0000E0B8(s32 arg0) {
+    D_0001BF48 = arg0;
+}
 
 s32 func_0000E0C4(void) {
     s32 temp_s1;
@@ -910,17 +1038,35 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000E9D0);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000EDD4);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_0DC8D26D);
+void sceUmdMan_driver_0DC8D26D(void) {
+    sceKernelWaitSema(D_0001C048, 1, NULL);
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_9F106F73);
+void sceUmdMan_driver_9F106F73(void) {
+    sceKernelPollSema(D_0001C048, 1);
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_B0A43DA7);
+void sceUmdMan_driver_B0A43DA7(void) {
+    sceKernelSignalSema(D_0001C048, 1);
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_BD13A488);
+s32 sceUmdMan_driver_BD13A488(void) {
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_3DCFAA71);
+    var_v0 = -1;
+    if (D_0001BF54 != NULL) {
+        var_v0 = *D_0001BF54;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_9814DCF3);
+s32 sceUmdMan_driver_3DCFAA71(s32 arg0) {
+    return (D_0001C034 & arg0) != 0;
+}
+
+s32 sceUmdMan_driver_9814DCF3(void) {
+    return D_0001C034;
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000F49C);
 
@@ -947,11 +1093,16 @@ INCLUDE_RODATA("tmp/asm/201/umdman/nonmatchings/umdman", D_000119CC);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000F964);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000FB08);
+void func_0000FB08(void) {
+    sceKernelTerminateDeleteThread(D_0001C050);
+    sceKernelDeleteEventFlag(D_0001C058);
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000FB38);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000FB64);
+void func_0000FB64(void) {
+    sceKernelTerminateThread(D_0001C050);
+}
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000FB88);
 
@@ -959,7 +1110,11 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000FBE4);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_EFD566A8);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000FD1C);
+s32 func_0000FD1C(void) {
+    sceUmd_4832ABF3(func_0000FD4C);
+    LoadExecForKernel_11412288(func_0000FBE4);
+    return 0;
+}
 
 void func_0000FD4C(s32 arg0) {
     if (arg0 != 2) {

@@ -14,7 +14,28 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000030C);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000408);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000448);
+s32 func_00000448(s32 arg0, s32 arg1) {
+    M2C_UNK *temp_s0;
+    M2C_UNK *var_s1;
+    s32 var_s2;
+    void *temp_s3;
+    void *temp_v1;
+
+    temp_v1 = arg0 + (M2C_FIELD(D_000172B4, u8 *, 0x15) * 4);
+    var_s1 = M2C_FIELD(temp_v1, M2C_UNK **, 0xC);
+    temp_s3 = temp_v1 + 0xC;
+    var_s2 = 0;
+    if (var_s1 != temp_s3) {
+        do {
+            temp_s0 = var_s1;
+            var_s1 = M2C_FIELD(var_s1, M2C_UNK **, 0);
+            func_0000022C((s32) temp_s0);
+            var_s2 += 1;
+            M2C_FIELD(temp_s0, s32 *, 0x40) = arg1;
+        } while (var_s1 != temp_s3);
+    }
+    return var_s2;
+}
 
 void func_000004CC(void *arg0) {
     s32 temp_v1;
@@ -41,7 +62,10 @@ void func_00000534(s32 arg0) {
 
 INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016414);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000554);
+s32 func_00000554(void) {
+    SysMemForKernel_FEFC8666("WaitQ", 0x14, &D_00016414, 0, &D_000172B4);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000590);
 
@@ -174,7 +198,16 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelDelaySysClo
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelDelaySysClockThreadCB);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00003CF8);
+void func_00003CF8(void *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = sceKernelCpuSuspendIntr();
+    M2C_FIELD(arg0, s32 *, 0x38) = 0;
+    if (func_0000022C((s32) arg0) > 0) {
+        D_00016C78 = 0;
+    }
+    sceKernelCpuResumeIntr(temp_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelCreateSema);
 

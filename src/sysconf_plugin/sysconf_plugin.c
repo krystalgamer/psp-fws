@@ -25,9 +25,14 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000274);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0000030C);
+s32 func_0000030C(s32 arg0) {
+    func_00017694((s32) &D_0001F31C, arg0);
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000334);
+void func_00000334(s32 arg0) {
+    D_0001F354 = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000340);
 
@@ -375,7 +380,9 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000AE8);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000B24);
+void func_00000B24(s32 arg0) {
+    vsh_53120F49(D_0001F394, arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000B48);
 
@@ -385,7 +392,11 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000DD8);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000E64);
+void func_00000E64(void) {
+    sceVshCommonGui_A0DE7090(0);
+    sceVshCommonGui_441D55D7(0);
+    func_00017A18(&D_0001F31C);
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000E94);
 
@@ -453,17 +464,41 @@ void func_00001B08(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00001B58);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00001C0C);
+void func_00001C0C(M2C_UNK **arg0) {
+    *arg0 = &D_0001A668;
+}
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00001C1C);
+void func_00001C1C(M2C_UNK **arg0) {
+    *arg0 = &D_0001A668;
+    scePaf_4E67BB08();
+}
 
 INCLUDE_RODATA("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", D_0001A668);
 
 INCLUDE_RODATA("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", D_0001A670);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00001C44);
+s32 func_00001C44(void) {
+    vsh_4A619A1D();
+    vsh_2695A5B8(0);
+    sceUsbStart(&D_0001A670, 0U, NULL);
+    D_0001F3DC = sceKernelCreateEventFlag("SceVshUsbBoot", 0U, 0U, NULL);
+    sceUsbStart(&D_0001A690, 0U, NULL);
+    sceUsbstorBoot_1F080078(D_0001F3DC);
+    sceUsbstorBoot_E58818A8(0x800000);
+    sceUsbActivate(0x1C8U);
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00001CD0);
+s32 func_00001CD0(void) {
+    sceUsbDeactivate();
+    sceUsbstorBoot_A55C9E16(D_0001F3DC);
+    sceUsbStop(&D_0001A690, 0U, NULL);
+    sceKernelDeleteEventFlag(D_0001F3DC);
+    sceUsbStop(&D_0001A670, 0U, NULL);
+    vsh_2695A5B8(1);
+    vsh_3E00F3B4();
+    return 0;
+}
 
 INCLUDE_RODATA("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", D_0001A690);
 
@@ -1067,7 +1102,10 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00005
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00005D30);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00005DBC);
+void func_00005DBC(void) {
+    func_00016A7C(D_0001F418, 0);
+    func_00016DD4(0);
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00005DE8);
 
@@ -1250,7 +1288,9 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00009
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_000093D8);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_000094F0);
+void func_000094F0(void) {
+    D_0001F55C = 0;
+}
 
 void func_000094FC(void) {
     func_00008DE0(0);
@@ -1264,7 +1304,11 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00009
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_000095A8);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_000096BC);
+void func_000096BC(void) {
+    D_0001F55C = scePaf_D4FAE7D0(&D_0001B720);
+    scePaf_66907719();
+    sceVshCommonGui_1CF884A1();
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_000096F0);
 
@@ -1282,7 +1326,14 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00009
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00009A78);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00009AC8);
+void func_00009AC8(void) {
+    s32 temp_v0;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_0001B730);
+    if (temp_v0 != 0) {
+        scePaf_1A45C860(temp_v0, &func_00009B00);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00009B00);
 
@@ -1768,7 +1819,9 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0000D
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0000D9CC);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0000DA24);
+void func_0000DA24(void) {
+    scePaf_A0ED77C4(0, func_0000DA5C, 0, -1, -1, func_0000DA7C);
+}
 
 s32 func_0000DA5C(void) {
     sceKernelPowerLock(0);
@@ -1957,7 +2010,11 @@ INCLUDE_RODATA("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", D_0001C
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00014240);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00014338);
+void func_00014338(void) {
+    sceVshCommonGui_A0DE7090(0);
+    sceVshCommonGui_441D55D7(0);
+    func_00017A18(&D_0001F31C);
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00014368);
 
@@ -2147,7 +2204,11 @@ void func_00016B5C(void) {
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00016B78);
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00016BEC);
+void func_00016BEC(s32 arg0) {
+    scePaf_6B1E90C7();
+    sceVshCommonGui_80271F41();
+    scePaf_A0ED77C4(0, (s32 (*)()) func_00016B5C, arg0, -1, -1, func_00016B78);
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00016C3C);
 
@@ -2191,7 +2252,9 @@ void func_00017644(void *arg0) {
     vsh_61FE226A();
 }
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017668);
+void func_00017668(void *arg0) {
+    scePaf_F609FA81(M2C_FIELD(arg0, s32 *, 4), &D_0001EE04, 0, 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017694);
 
@@ -2256,7 +2319,9 @@ s32 func_00017A98(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x1C);
 }
 
-INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017AA0);
+void func_00017AA0(void *arg0, s32 *arg1) {
+    scePaf_F609FA81(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
+}
 
 void func_00017AC4(void *arg0) {
     scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4));

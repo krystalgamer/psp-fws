@@ -217,7 +217,9 @@ INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", sceHttpsSetSslCallback);
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", sceHttpsGetCaList);
 
-INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00009ADC);
+s32 func_00009ADC(void) {
+    return D_0001A5C4;
+}
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", sceHttpsEnd);
 
@@ -355,7 +357,9 @@ INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", sceHttpInit);
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", sceHttpEnd);
 
-INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_0000E568);
+s32 func_0000E568(void) {
+    return D_0001AA44;
+}
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", module_reboot_before);
 
@@ -411,7 +415,10 @@ INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_000108A8);
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00010970);
 
-INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00010A74);
+void func_00010A74(void) {
+    sceNet_lib_57CC57DA(&D_0001AE08, 0, 0x194);
+    D_0001AE08 = 0x01000000;
+}
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00010AAC);
 
@@ -429,7 +436,10 @@ INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00011100);
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_000111BC);
 
-INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00011484);
+void func_00011484(void) {
+    sceNet_lib_57CC57DA(&D_0001AF9C, 0, 0xB0);
+    D_0001AF9C = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_000114B8);
 
@@ -527,11 +537,15 @@ INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00013164);
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_000131F4);
 
-INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00013294);
+s32 func_00013294(void) {
+    return D_0001B0CC;
+}
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_000132A0);
 
-INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_000132B0);
+s32 func_000132B0(void) {
+    return D_0001B0E0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_000132BC);
 

@@ -32,7 +32,10 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_FA30975D);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_56CA3080);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000514);
+s32 func_00000514(void) {
+    scePaf_6829D7AF((s32) &D_0002DC50, 0, 0x28);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00000540);
 
@@ -579,7 +582,18 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00003554);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000358C);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000362C);
+s32 func_0000362C(void *arg0, s32 arg1, s8 arg2, s8 arg3, s8 arg4, s32 arg5, s8 arg6, s32 arg7, s32 arg_sp0) {
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s8 *, 4) = arg2;
+    M2C_FIELD(arg0, s8 *, 5) = arg3;
+    M2C_FIELD(arg0, s8 *, 6) = arg4;
+    M2C_FIELD(arg0, s32 *, 8) = arg5;
+    M2C_FIELD(arg0, s8 *, 7) = arg6;
+    M2C_FIELD(arg0, s32 *, 0xC) = arg7;
+    M2C_FIELD(arg0, s32 *, 0x10) = arg_sp0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000365C);
 
@@ -1077,7 +1091,10 @@ s32 func_0000E1E0(s32 *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000E214);
+s32 func_0000E214(s32 arg0, s32 arg1, s32 arg2) {
+    func_000228C8(arg0, arg2, arg1);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000E23C);
 
@@ -1257,7 +1274,9 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00014BC8);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00014E18);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001503C);
+void func_0001503C(s32 arg0, void *arg1, s32 arg2, s32 arg3) {
+    func_00014E18(arg0, M2C_FIELD(arg1, s32 *, 8), arg2, arg3);
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00015058);
 
@@ -1946,11 +1965,17 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F29C);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F32C);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F36C);
+void func_0001F36C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_0001ED0C(0, arg0, arg0 + arg1, arg2, arg3);
+}
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F3A0);
+void func_0001F3A0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_0001ED0C(1, arg0, arg0 + arg1, arg2, arg3);
+}
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F3D4);
+void func_0001F3D4(s32 arg0, s32 arg1, s32 arg2) {
+    func_0001ED0C(2, arg0, arg0 + arg1, arg2, 0);
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F404);
 
@@ -1962,7 +1987,9 @@ void func_0001F680(s32 arg0, s32 arg1, s32 arg2) {
     func_0001EFBC(arg0, 1, arg1, arg2);
 }
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F6A4);
+void func_0001F6A4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    func_0001F640(arg0, 0, arg1, arg2, arg3, arg4);
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F6D8);
 
@@ -1983,7 +2010,9 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F97C);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001F9E4);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001FBA8);
+void func_0001FBA8(s32 arg0, s32 arg1, s32 arg2) {
+    func_0001F068(0, 0, 4, arg0, arg1, 0, arg2);
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001FBDC);
 
@@ -2269,7 +2298,22 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00024680);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00024764);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000248B0);
+s32 func_000248B0(void *arg0, void *arg1) {
+    s32 var_a2;
+
+    var_a2 = 1;
+    if (M2C_FIELD(arg0, u8 *, 1) == 0) {
+        if (M2C_FIELD(arg1, u8 *, 1) == 0) {
+            var_a2 = func_00023790((s32) arg0, (s32) arg1);
+        }
+    } else {
+        var_a2 = -1;
+        if (M2C_FIELD(arg1, u8 *, 1) != 0) {
+            var_a2 = -func_00023790((s32) arg0, (s32) arg1);
+        }
+    }
+    return var_a2;
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0002490C);
 
@@ -2341,7 +2385,9 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0002524C);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00025288);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000255B4);
+void func_000255B4(s32 arg0, s32 arg1, s32 arg2) {
+    func_000257C8(arg0, arg1, arg2, arg2);
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000255D0);
 
@@ -2387,9 +2433,13 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00026B3C);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00026BE0);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00026E04);
+void func_00026E04(s32 arg0, s32 arg1) {
+    func_00026BE0(arg0, 0, arg1);
+}
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00026E24);
+void func_00026E24(s32 arg0, s32 arg1) {
+    func_00026BE0(arg0, 1, arg1);
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00026E44);
 

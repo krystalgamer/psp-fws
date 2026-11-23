@@ -106,11 +106,17 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000012C0);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000012E8);
+s32 func_000012E8(void) {
+    return D_000203D8 != D_000203DC;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001304);
+s32 func_00001304(void) {
+    return D_000203D8;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001310);
+void func_00001310(s32 arg0) {
+    D_000203D8 = arg0;
+}
 
 void func_0000131C(void) {
     sceUtilityGetNetParamLatestID();
@@ -142,7 +148,10 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000016F8);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", sceVshNetconf_92136BE5);
+void sceVshNetconf_92136BE5(void) {
+    D_000203E0 = 1;
+    func_00000394();
+}
 
 void sceVshNetconf_AA073A3D(void) {
     func_00001088();
@@ -173,39 +182,76 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001C10);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001C34);
+void func_00001C34(s32 arg0) {
+    D_000203E8 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001C40);
+s32 func_00001C40(void) {
+    return D_000203E8;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001C4C);
+s32 func_00001C4C(s32 arg0) {
+    s32 temp_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001C5C);
+    temp_v0 = D_000203F8;
+    D_000203F8 = arg0;
+    return temp_v0;
+}
+
+s32 func_00001C5C(void) {
+    return D_000203F8;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001C68);
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001CC8);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001D60);
+void func_00001D60(s32 arg0) {
+    D_000203FC = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001D6C);
+s32 func_00001D6C(void) {
+    return D_000203FC;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001D78);
+s32 func_00001D78(s32 arg0, s32 *arg1) {
+    s32 var_a2;
+
+    var_a2 = 0;
+    if (((D_00020400 == NULL) | (arg1 == NULL)) == 0) {
+        if (arg0 == 0x11) {
+            var_a2 = 1;
+            *D_00020400 = *arg1;
+        }
+    }
+    return var_a2;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001DB4);
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001DF8);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001E44);
+s32 func_00001E44(void) {
+    return D_0002040C;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001E50);
+s32 func_00001E50(void) {
+    return D_00020410;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001E5C);
+s32 func_00001E5C(void) {
+    return D_00020414;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001E68);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001EC4);
+void func_00001EC4(s32 arg0) {
+    D_0001F648 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00001ED0);
+s32 func_00001ED0(void) {
+    return D_0001F648;
+}
 
 INCLUDE_RODATA("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", D_0001B2C8);
 
@@ -625,11 +671,15 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00002
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000021E0);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000022CC);
+s32 func_000022CC(void) {
+    return D_000203F0 & 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000022DC);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000022EC);
+s32 func_000022EC(void) {
+    return __builtin_allegrex_ext(D_000203F0, 1, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000022FC);
 
@@ -643,21 +693,35 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00002
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00002608);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00002650);
+s32 func_00002650(void) {
+    return D_00020424;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000265C);
+void func_0000265C(s32 arg0) {
+    D_00020424 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00002668);
+void func_00002668(s8 arg0) {
+    D_00020418 = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00002674);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00002680);
+void func_00002680(s8 arg0) {
+    D_0002041A = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000268C);
+u8 func_0000268C(void) {
+    return (u8) D_0002041A;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00002698);
+void func_00002698(s8 arg0) {
+    D_00020440 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000026A4);
+u8 func_000026A4(void) {
+    return (u8) D_00020440;
+}
 
 INCLUDE_RODATA("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", D_0001CD04);
 
@@ -693,25 +757,54 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000035F0);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000364C);
+void func_0000364C(void) {
+    D_00020444 = 0;
+    sceNetAdhocctlConnect(&D_0002044C);
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003674);
+void func_00003674(void) {
+    D_00020444 = 0;
+    sceNetAdhocctlCreate(&D_0002044C);
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000369C);
+void func_0000369C(void) {
+    D_00020444 = 0;
+    sceNetAdhocctlJoin(&D_00020458);
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000036C4);
+void func_000036C4(void) {
+    D_00020444 = 0;
+    sceNetAdhocctlScan();
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000036E4);
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003734);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003960);
+void func_00003960(void) {
+    D_00020444 = 0;
+    sceNetAdhocctlDisconnect();
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003980);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000039C8);
+s32 func_000039C8(s32 arg0) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000039EC);
+    temp_a0 = D_00020444 & arg0;
+    if (temp_a0 != 0) {
+        D_00020444 &= ~temp_a0;
+    }
+    return temp_a0;
+}
+
+s32 func_000039EC(void) {
+    s32 temp_v0;
+
+    temp_v0 = D_00020448;
+    D_00020448 = 0;
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000039FC);
 
@@ -719,55 +812,268 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003CF4);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003D8C);
+s32 func_00003D8C(s32 arg0) {
+    s32 temp_s0;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003E08);
+    if (func_00002674() != 0) {
+        var_v0 = 0x80110481;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        D_000204C8 = 0;
+        temp_s0 = sceNetApctlConnect(arg0);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003E74);
+s32 func_00003E08(void) {
+    s32 temp_s0;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003EE8);
+    if (func_00002674() != 0) {
+        var_v0 = 0x80110483;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        D_000204C8 = 0;
+        temp_s0 = sceNetApctlDisconnect();
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00003F6C);
+s32 func_00003E74(s32 arg0) {
+    s32 temp_s0;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004040);
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceNetApctlGetState(arg0);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000040B4);
+s32 func_00003EE8(s32 arg0, s32 arg1) {
+    s32 temp_s0;
+    s32 var_v0;
+
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceNetApctlGetInfo(arg0, arg1);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
+
+s32 func_00003F6C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    s32 temp_s0;
+    s32 var_v0;
+
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceVshNetconfRaku_42C68F08(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
+
+s32 func_00004040(s32 arg0) {
+    s32 temp_s0;
+    s32 var_v0;
+
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceVshNetconfRaku_F3AF9DD1(arg0);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
+
+s32 func_000040B4(s32 arg0) {
+    s32 temp_s0;
+    s32 var_v0;
+
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceVshNetconfRaku_D030086D(arg0);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004128);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004190);
+s32 func_00004190(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_s0;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004224);
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceVshNetconfAoss_50DF536D(arg0, arg1, arg2);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000428C);
+s32 func_00004224(void) {
+    s32 temp_s0;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000042F4);
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceVshNetconfAoss_D253B522();
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004388);
+s32 func_0000428C(void) {
+    s32 temp_s0;
+    s32 var_v0;
+
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceVshNetconfAoss_653D453F();
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
+
+s32 func_000042F4(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_s0;
+    s32 var_v0;
+
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceVshNetconfAoss_2AEE9D4D(arg0, arg1, arg2);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
+
+s32 func_00004388(void) {
+    s32 temp_s0;
+    s32 var_v0;
+
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceVshNetconfAoss_AC307152();
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000043F0);
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004484);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000044AC);
+s32 func_000044AC(void) {
+    s32 temp_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000044BC);
+    temp_v0 = D_000204CC;
+    D_000204CC = 0;
+    return temp_v0;
+}
+
+s32 func_000044BC(void) {
+    s32 temp_s0;
+    s32 var_v0;
+
+    if (func_00002674() != 0) {
+        var_v0 = 0x80110483;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        D_000204C8 = 0;
+        temp_s0 = sceNetApctl_lib_B3CF6849();
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004528);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004754);
+void func_00004754(void) {
+    D_000204C4 = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004760);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004794);
+s32 func_00004794(void) {
+    return D_000204C4;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000047A0);
+s32 func_000047A0(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_s0;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004834);
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceNetApctl_lib_96BEB231(arg0, arg1, arg2);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000048B8);
+s32 func_00004834(s32 arg0, s32 arg1) {
+    s32 temp_s0;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000048C4);
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = sceNetApctl_lib_0C7FFA5C(arg0, arg1);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
+
+void func_000048B8(void) {
+    D_000204D4 = 0;
+}
+
+void func_000048C4(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    sceCccUTF8toUTF16(&D_00020550, 0x100, arg0);
+    func_00004950((s32) &D_00020550, arg1, arg2, arg3, arg4, arg5);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00004950);
 
@@ -825,7 +1131,18 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00005
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00005798);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00005A14);
+void func_00005A14(void) {
+    if (D_0002065C != 0) {
+        if (D_00020658 != 0) {
+            sceVshCommonGui_4704D5BD(0);
+        } else {
+            func_00005A9C();
+        }
+        func_000067E0((s32) &D_0002065C, 0);
+        func_0000331C((s32) &D_00020660, (s32) &D_0001CF8C);
+        func_0000331C((s32) &D_0002066C, (s32) &D_0001CF8C);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00005A9C);
 
@@ -837,7 +1154,21 @@ void func_00005B20(void) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00005B54);
+void func_00005B54(void) {
+    s32 temp_s0;
+
+    temp_s0 = func_00010424();
+    func_00005798();
+    M2C_FIELD(temp_s0, s32 *, 0x9C) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0xA4) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0xC4) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0xC0) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0xBC) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0xD0) = 0;
+    scePaf_F609FA81(temp_s0, &D_0001D098, 0, 0);
+    func_000056A8(0);
+    func_00005C24(0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00005BBC);
 
@@ -908,7 +1239,10 @@ void func_000067A0(void) {
     func_00006668(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000067C0);
+void func_000067C0(void **arg0, void **arg1) {
+    *arg0 = *arg1;
+    func_00006858(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000067E0);
 
@@ -962,7 +1296,13 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00006
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000705C);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000071A0);
+void func_000071A0(s32 arg0, void *arg1) {
+    if ((u32) (M2C_FIELD(arg1, u8 *, 8) - 5) >= 2U) {
+
+    } else {
+        func_00007294(arg0, (s32) arg1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000071D8);
 
@@ -994,7 +1334,16 @@ INCLUDE_RODATA("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", D_0001D
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000073F0);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00007508);
+void func_00007508(void) {
+    func_00005B54();
+    if (func_00003980() == 0) {
+        func_000022FC();
+        func_000065FC(1);
+        func_00018ED0((s32) &D_000206A4, (s32) &func_0000757C);
+    } else {
+        func_0001177C((s32) &D_0001D294, 0x80110405, 0, 0);
+    }
+}
 
 INCLUDE_RODATA("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", D_0001D294);
 
@@ -1060,17 +1409,25 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00007
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00007EDC);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00007F54);
+void func_00007F54(s8 arg0) {
+    D_000206B4 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00007F60);
+u8 func_00007F60(void) {
+    return (u8) D_000206B4;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00007F6C);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00007F84);
+s32 func_00007F84(void) {
+    return D_000206B8;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00007F90);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00007FA8);
+s32 func_00007FA8(void) {
+    return D_000206BC;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00007FB4);
 
@@ -1124,9 +1481,13 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00008
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00008D44);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00008D84);
+void func_00008D84(s8 arg0) {
+    D_000206D8 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00008D90);
+u8 func_00008D90(void) {
+    return (u8) D_000206D8;
+}
 
 void func_00008D9C(void) {
     func_0000608C();
@@ -1208,7 +1569,9 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00009
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000098AC);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000098C4);
+s32 func_000098C4(void) {
+    return D_000206E4;
+}
 
 void func_000098D0(s32 arg0) {
     func_00013B24(arg0 & 0xFF);
@@ -1423,7 +1786,9 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000B
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000B874);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000B920);
+void func_0000B920(s32 arg0, void *arg1) {
+    func_00015300(arg0, (M2C_FIELD(arg1, s32 *, 0xC) << 0x10) | 0xC8);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000B944);
 
@@ -1435,7 +1800,9 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000B
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000BB48);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000BBD0);
+void func_0000BBD0(s32 arg0, void *arg1) {
+    func_000153C0(arg0, (M2C_FIELD(arg1, s32 *, 0xC) << 0x10) | 0xC8);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000BBF4);
 
@@ -1469,15 +1836,27 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C5E4);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C610);
+void func_0000C610(void) {
+    func_00010494((s32) &D_0001DD88);
+    func_0000C3A0();
+    D_0001FFE8 = 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C644);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C6B0);
+void func_0000C6B0(s32 arg0) {
+    func_0000C544(arg0, 9);
+    func_0000C3A0();
+    D_0001FFE8 = 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C6E0);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C74C);
+void func_0000C74C(s32 arg0) {
+    func_0000C544(arg0, 0xA);
+    func_0000C3A0();
+    D_0001FFE8 = 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C77C);
 
@@ -1487,27 +1866,51 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C87C);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C8A8);
+void func_0000C8A8(void) {
+    func_00010494((s32) &D_0001DD88);
+    func_0000C77C();
+    D_0001FFE8 = 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C8DC);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C948);
+void func_0000C948(s32 arg0) {
+    func_0000C544(arg0, 5);
+    func_0000C77C();
+    D_0001FFE8 = 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C978);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000C9E4);
+void func_0000C9E4(s32 arg0) {
+    func_0000C544(arg0, 6);
+    func_0000C77C();
+    D_0001FFE8 = 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000CA14);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000CA80);
+void func_0000CA80(s32 arg0) {
+    func_0000C544(arg0, 7);
+    func_0000C77C();
+    D_0001FFE8 = 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000CAB0);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000CB1C);
+void func_0000CB1C(s32 arg0) {
+    func_0000C544(arg0, 9);
+    func_0000C77C();
+    D_0001FFE8 = 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000CB4C);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000CBB8);
+void func_0000CBB8(s32 arg0) {
+    func_0000C544(arg0, 0xA);
+    func_0000C77C();
+    D_0001FFE8 = 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000CBE8);
 
@@ -1599,13 +2002,26 @@ void func_0000E644(void) {
     scePaf_545FE2DA();
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000E660);
+void func_0000E660(s8 arg0) {
+    D_00020704 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000E66C);
+u8 func_0000E66C(void) {
+    return (u8) D_00020704;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000E678);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000E6E4);
+void func_0000E6E4(void) {
+    s32 temp_s0;
+
+    temp_s0 = D_00020708;
+    if (temp_s0 != 0) {
+        scePaf_4612DB4B(temp_s0);
+        scePaf_4E67BB08(temp_s0);
+        D_00020708 = 0;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000E730);
 
@@ -1694,13 +2110,26 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000F
 void func_0000F104(void) {
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000F10C);
+void func_0000F10C(s8 arg0) {
+    D_00020750 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000F118);
+u8 func_0000F118(void) {
+    return (u8) D_00020750;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000F124);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000F190);
+void func_0000F190(void) {
+    s32 temp_s0;
+
+    temp_s0 = D_00020754;
+    if (temp_s0 != 0) {
+        scePaf_4612DB4B(temp_s0);
+        scePaf_4E67BB08(temp_s0);
+        D_00020754 = 0;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000F1DC);
 
@@ -1757,11 +2186,27 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00010
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0001038C);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000103F4);
+s32 func_000103F4(void) {
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00010414);
+    var_v0 = -1;
+    if (D_000207A0 != 0) {
+        var_v0 = D_000207B4;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00010424);
+s32 func_00010414(s32 arg0) {
+    s32 temp_v0;
+
+    temp_v0 = D_000207B4;
+    D_000207B4 = arg0;
+    return temp_v0;
+}
+
+s32 func_00010424(void) {
+    return D_000207A0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00010430);
 
@@ -1824,7 +2269,13 @@ void func_000110D0(void) {
     func_00011020(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000110F0);
+void func_000110F0(void *arg0, s32 arg1) {
+    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+
+    } else {
+        func_000112B4((s32) arg0, arg1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00011124);
 
@@ -1891,7 +2342,9 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012330);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012348);
+s32 func_00012348(void) {
+    return D_00020818;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012354);
 
@@ -1911,19 +2364,29 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000126EC);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0001272C);
+s32 func_0001272C(void) {
+    return D_00020858 == 4;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012740);
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000127F8);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012828);
+s32 func_00012828(void) {
+    return D_0002084C;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012834);
+s32 func_00012834(void) {
+    return D_00020850;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012840);
+s32 func_00012840(void) {
+    return D_00020854;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0001284C);
+s32 func_0001284C(void) {
+    return D_00020858;
+}
 
 INCLUDE_RODATA("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", D_0001E764);
 
@@ -1986,7 +2449,16 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012CBC);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012D34);
+void func_00012D34(void *arg0) {
+    s32 temp_a0;
+
+    func_000022FC();
+    func_000065FC(1);
+    func_000056A8(0);
+    temp_a0 = func_00012348();
+    D_0002085C = M2C_FIELD(arg0, s32 *, 0x1D0);
+    func_00000314(temp_a0, &D_0002085C, (s32) &func_00012D90);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012D90);
 
@@ -1994,9 +2466,13 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012F0C);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012F30);
+void func_00012F30(s8 arg0) {
+    D_00020868 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00012F3C);
+u8 func_00012F3C(void) {
+    return (u8) D_00020868;
+}
 
 INCLUDE_RODATA("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", D_0001E88C);
 
@@ -2032,7 +2508,16 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013464);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000134E4);
+void func_000134E4(void *arg0) {
+    if (func_000043F0() == 0) {
+        func_000022FC();
+        func_000065FC(1);
+        D_0002087C = M2C_FIELD(arg0, s32 *, 0x1D0);
+        func_000193A8((s32) &D_0002087C, (s32) &func_00013560);
+    } else {
+        func_0001177C((s32) &D_0001E8F8, 0x80110405, 0, 0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013560);
 
@@ -2052,17 +2537,32 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013B00);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013B18);
+s32 func_00013B18(void) {
+    return D_00020888;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013B24);
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013B40);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013B4C);
+void func_00013B4C(void *arg0) {
+    func_00005C24(0);
+    func_000056A8(0);
+    func_000022FC();
+    func_000065FC(1);
+    D_00020890 = M2C_FIELD(arg0, s32 *, 0x1D0);
+    func_00000E28(func_00013B18(), (s32) &D_00020890, (s32) &func_00013BB4);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013BB4);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013C5C);
+void func_00013C5C(s32 arg0, void *arg1) {
+    if ((u32) (M2C_FIELD(arg1, u8 *, 8) - 5) >= 2U) {
+
+    } else {
+        func_00013CD0(arg0, (s32) arg1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013C94);
 
@@ -2070,9 +2570,13 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013D20);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013DD8);
+void func_00013DD8(s8 arg0) {
+    D_000208A0 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00013DE4);
+u8 func_00013DE4(void) {
+    return (u8) D_000208A0;
+}
 
 void func_00013DF0(void) {
     func_0000608C();
@@ -2150,9 +2654,18 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00014
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00014A68);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00014A80);
+s32 func_00014A80(void) {
+    return D_000208A4;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00014A8C);
+void func_00014A8C(void *arg0) {
+    func_00005C24(0);
+    func_000056A8(0);
+    func_000022FC();
+    func_000065FC(1);
+    D_000208A8 = M2C_FIELD(arg0, s32 *, 0x1D0);
+    func_00000784(D_000208A4, &D_000208A8, (s32) &func_00014AF0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00014AF0);
 
@@ -2219,21 +2732,39 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00016
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0001616C);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00016250);
+void func_00016250(s8 arg0) {
+    D_000208BC = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0001625C);
+u8 func_0001625C(void) {
+    return (u8) D_000208BC;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00016268);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00016280);
+s32 func_00016280(void) {
+    return D_000208C0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0001628C);
+void func_0001628C(s32 arg0) {
+    D_000208B4 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00016298);
+s32 func_00016298(void) {
+    return D_000208B4;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000162A4);
+void func_000162A4(M2C_UNK *arg0) {
+    if (arg0 != NULL) {
+        D_0001FFEC = arg0;
+        return;
+    }
+    D_0001FFEC = &func_00017788;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000162C8);
+s32 func_000162C8(void) {
+    return D_0001FFEC;
+}
 
 INCLUDE_RODATA("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", D_0001EFC8);
 
@@ -2361,9 +2892,13 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00017
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00017788);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000177F8);
+void func_000177F8(s8 arg0) {
+    D_00020960 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00017804);
+u8 func_00017804(void) {
+    return (u8) D_00020960;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00017810);
 
@@ -2437,11 +2972,26 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000183E4);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018448);
+void func_00018448(void) {
+    if ((D_0001FFF4 >= 0) && (D_0001FFF0 >= 0)) {
+        func_00019CCC(D_0001FFF4);
+        func_00019C50(D_0001FFF4);
+        D_0001FFF4 = -1;
+        func_00019B3C(D_0001FFF0);
+        D_0001FFF0 = -1;
+        func_000197B4();
+        D_00020978 = 2;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000184C0);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018530);
+void func_00018530(void) {
+    scePaf_6B1E90C7();
+    func_00005C24(0);
+    func_000056A8(0);
+    scePaf_A0ED77C4(0, func_00018584, &D_0001FFF8, -1, -1, (s32) &func_00018638);
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018584);
 
@@ -2449,9 +2999,36 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018928);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018974);
+void func_00018974(s32 arg0) {
+    void *temp_v0;
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000189F4);
+    func_00002698(1);
+    temp_v0 = scePaf_338C3774(arg0, 1);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK *, M2C_UNK), 4)(&func_00018928, 0);
+    }
+    func_000065FC(0);
+    func_00002320();
+    func_000116C8();
+    func_00005B20();
+    scePaf_66907719();
+    sceKernelPowerUnlock(0);
+}
+
+void func_000189F4(void) {
+    s32 temp_s0;
+
+    func_00002698(0);
+    temp_s0 = D_0002097C;
+    if (temp_s0 == 0) {
+
+    } else {
+        scePaf_4612DB4B(temp_s0);
+        scePaf_4E67BB08(temp_s0);
+    }
+    D_0002097C = 0;
+    func_000100AC((s32) &D_0001F384);
+}
 
 void func_00018A58(void) {
     func_00016268(func_00017828());
@@ -2469,7 +3046,11 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018DA8);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018DE8);
+s32 func_00018DE8(void) {
+    scePaf_6829D7AF(&D_00020984, 0, 0xC);
+    scePaf_6829D7AF(&D_00020980, 1, 2);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018E28);
 
@@ -2489,7 +3070,12 @@ void func_00018F44(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00018F64);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0001901C);
+void func_0001901C(void *arg0, s32 arg1) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 4) = 0;
+        scePaf_A0ED77C4(0, func_0001905C, arg0, -1, -1, arg1);
+    }
+}
 
 s32 func_0001905C(void *arg0) {
     s32 temp_v0;
@@ -2519,7 +3105,9 @@ s32 func_000193E4(void *arg0) {
     return (temp_v0 == 0) ? 0 : 2;
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019418);
+void func_00019418(void) {
+    D_00020E18 = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019424);
 
@@ -2533,7 +3121,9 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000195C8);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019610);
+s32 func_00019610(void) {
+    return D_00020E18;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0001961C);
 
@@ -2556,7 +3146,20 @@ s32 func_000199F8(s32 arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019A48);
+s32 func_00019A48(s32 arg0) {
+    s32 temp_s0;
+    s32 var_v0;
+
+    if (func_00002674() != 0) {
+        var_v0 = 0x80410A0A;
+    } else {
+        sceKernelClearEventFlag(D_00020420, -2U);
+        temp_s0 = func_00019AC4(D_0001FFFC, arg0);
+        sceKernelSetEventFlag(D_00020420, 1U);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019AC4);
 
@@ -2568,9 +3171,25 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019CCC);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019D48);
+void func_00019D48(void *arg0, s32 arg1) {
+    if (arg0 != NULL) {
+        if (func_00002674() != 0) {
+            M2C_FIELD(arg0, s32 *, 8) = 0x80410A0A;
+        } else {
+            M2C_FIELD(arg0, s32 *, 8) = 0;
+            scePaf_A0ED77C4(0, func_00019DBC, arg0, -1, -1, arg1);
+        }
+    }
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019DBC);
+s32 func_00019DBC(void *arg0) {
+    s32 temp_s0;
+
+    sceKernelClearEventFlag(D_00020420, -2U);
+    temp_s0 = func_00019E14((s32) arg0);
+    sceKernelSetEventFlag(D_00020420, 1U);
+    return (temp_s0 != 0) ? 0 : 2;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00019E14);
 

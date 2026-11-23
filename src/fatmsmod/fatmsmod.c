@@ -8,7 +8,9 @@ s32 sceFatMS_driver_BCB9DEDB(void) {
 
 INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_00000020);
 
-INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_00000048);
+void func_00000048(void) {
+    IoFileMgrForKernel_C7F35804(D_0002B568);
+}
 
 INCLUDE_RODATA("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", D_00023950);
 
@@ -272,7 +274,10 @@ INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000052D0);
 
 INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_00005308);
 
-INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000053FC);
+void func_000053FC(void) {
+    sceIoDevctl(&D_0002411C, 0x0201D803, &D_0002BAA0, 4U, NULL, 0U);
+    sceKernelDeleteEventFlag(D_0002DC10);
+}
 
 INCLUDE_RODATA("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", D_00024110);
 
@@ -298,15 +303,27 @@ INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000065E4);
 
 INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_00006694);
 
-INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_00006724);
+s32 func_00006724(void) {
+    sceIoClose(D_0002B5CC);
+    D_0002B5CC = -1;
+    D_0002BAC0 = 0;
+    D_0002D730 = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_0000676C);
 
-INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000067D4);
+s8 *func_000067D4(void) {
+    return &D_0002D730;
+}
 
-INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000067E0);
+s32 func_000067E0(void) {
+    return D_0002BAC0;
+}
 
-INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000067EC);
+s32 func_000067EC(void) {
+    return D_0002B5CC;
+}
 
 INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000067F8);
 
@@ -318,7 +335,9 @@ INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000068C8);
 
 INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_00006918);
 
-INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_00006960);
+s32 func_00006960(void) {
+    return __builtin_allegrex_min(sceKernelDeleteMbx(D_0002DA00), 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_00006988);
 
@@ -484,7 +503,23 @@ s32 func_0000E3C0(void *arg0, s32 arg1) {
     return ((arg1 - 2) << M2C_FIELD(arg0, s32 *, 0x18)) + M2C_FIELD(arg0, s32 *, 4);
 }
 
-INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_0000E3D8);
+s32 func_0000E3D8(void *arg0, u32 arg1) {
+    s32 var_a3;
+    u16 temp_v0;
+    u32 temp_a2;
+
+    temp_a2 = M2C_FIELD(arg0, u32 *, 4);
+    var_a3 = 0;
+    if (arg1 < temp_a2) {
+        if (arg1 >= (u32) M2C_FIELD(arg0, u32 *, 0)) {
+            var_a3 = __builtin_allegrex_min(temp_a2 - arg1, M2C_FIELD(arg0, s32 *, 0x20));
+        }
+    } else {
+        temp_v0 = M2C_FIELD(arg0, u16 *, 0x26);
+        var_a3 = temp_v0 - ((u32) (arg1 - temp_a2) % temp_v0);
+    }
+    return var_a3;
+}
 
 INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_0000E428);
 

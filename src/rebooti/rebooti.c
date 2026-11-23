@@ -119,7 +119,9 @@ s32 func_00001D68(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/100/rebooti/nonmatchings/rebooti", func_00001DA4);
 
-INCLUDE_ASM("tmp/asm/100/rebooti/nonmatchings/rebooti", func_00001DB4);
+M2C_UNK *func_00001DB4(void) {
+    return &D_00014F21;
+}
 
 INCLUDE_ASM("tmp/asm/100/rebooti/nonmatchings/rebooti", func_00001DC0);
 

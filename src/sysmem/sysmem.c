@@ -10,7 +10,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_EFEEBAC7);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_2DB687E9);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00000724);
+void func_00000724(void) {
+    SysMemForKernel_FEFC8666((s32) "SceSysmemHeap", 0xC, (s32) &D_0000F390, 0, (s32) &D_0000FD88);
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000075C);
 
@@ -28,7 +30,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_A823047E);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_B2163AA1);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_EFF0C6DD);
+s32 SysMemForKernel_EFF0C6DD(void) {
+    return D_0000FD90;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00000BC0);
 
@@ -44,7 +48,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00000E08);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00000ED8);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00000F60);
+void func_00000F60(void) {
+    SysMemForKernel_FEFC8666((s32) "SceSysmemMemoryPartition", 0x18, (s32) &D_0000F3C0, 0, (s32) &D_0000FD8C);
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00000F98);
 
@@ -140,7 +146,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00002F48);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000035F4);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000373C);
+void func_0000373C(void) {
+    SysMemForKernel_FEFC8666((s32) "SceSysMemMemoryBlock", 0xC, (s32) &D_0000F3F0, 0, (s32) &D_0000F8C0);
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00003774);
 
@@ -265,7 +273,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_CBB05241);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_F91FE6AA);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_CD617A94);
+M2C_UNK *SysMemForKernel_CD617A94(void) {
+    return &D_0000F8C4;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemUserForUser_FC114573);
 
@@ -307,23 +317,38 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00005FD4);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000061F0);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000623C);
+s32 func_0000623C(s32 arg0) {
+    func_00000980((s32) &D_0000FD98, arg0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00006264);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000062BC);
+s32 func_000062BC(s32 arg0) {
+    func_00000980((s32) &D_0000FD98, arg0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000062E4);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000063B0);
+s32 func_000063B0(s32 arg0) {
+    func_00000980((s32) &D_0000FD98, arg0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000063D8);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00006424);
+s32 func_00006424(s32 arg0) {
+    func_00000980((s32) &D_0000FD98, arg0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000644C);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00006498);
+s32 func_00006498(s32 arg0) {
+    func_00000980((s32) &D_0000FD98, arg0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_6C1DCD41);
 
@@ -382,7 +407,9 @@ s32 SysMemForKernel_82D3CEE3(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_FC207849);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_536AD5E1);
+M2C_UNK *SysMemForKernel_536AD5E1(void) {
+    return &D_0000FDA4;
+}
 
 s32 func_000075EC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xC);
@@ -418,17 +445,25 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceSysEventForKernel_D7D3F
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceSysEventForKernel_36331294);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00008160);
+s32 func_00008160(void) {
+    D_0000F92C = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceSysEventForKernel_AEB300AE);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceSysEventForKernel_CD9E4BB5);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceSysEventForKernel_68D55505);
+s32 sceSysEventForKernel_68D55505(void) {
+    return D_0000F92C;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00008284);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceSuspendForKernel_BDE686CD);
+s32 sceSuspendForKernel_BDE686CD(s32 arg0) {
+    D_0000F934 = arg0;
+    return D_0000F930;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceKernelPowerLock);
 
@@ -464,7 +499,9 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceSuspendForKernel_67B590
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceSuspendForKernel_B2C9640B);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_E7A3874D);
+void KDebugForKernel_E7A3874D(s32 arg0) {
+    D_0000FC38 = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_2FF4E9F9);
 
@@ -490,25 +527,48 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_6D6200DD);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_621037F5);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000AD04);
+s32 func_0000AD04(s32 arg0, s32 arg1) {
+    D_0000FC3C = arg0;
+    D_0000FC40 = arg1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_24C32559);
+s32 KDebugForKernel_24C32559(u32 arg0) {
+    s32 var_a0;
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_D636B827);
+    var_a0 = 0x80020001;
+    if (arg0 < 0x20U) {
+        var_a0 = ((u32) D_0000FC3C >> arg0) & 1;
+    }
+    return var_a0;
+}
+
+s32 KDebugForKernel_D636B827(void) {
+    return D_0000FC3C;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_5282DD5E);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_EE75658D);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_9F8703E4);
+s32 KDebugForKernel_9F8703E4(void) {
+    return D_0000FC40;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_428A8DA3);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_FFD2F2B9);
+s32 KDebugForKernel_FFD2F2B9(void) {
+    return __builtin_allegrex_ext(D_0000FC3C, 0x1E, 1);
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_333DCEC7);
+s32 KDebugForKernel_333DCEC7(s32 arg0) {
+    D_0000FC44 = arg0;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_E892D9A1);
+s32 KDebugForKernel_E892D9A1(void) {
+    return D_0000FC44;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000ADF8);
 
@@ -518,21 +578,36 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceKernelPrintf);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_84F370BC);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_9B868276);
+s32 KDebugForKernel_9B868276(void) {
+    return D_0000FC48;
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_E146606D);
+void KDebugForKernel_E146606D(s32 arg0) {
+    D_0000FC48 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_7CEB2C09);
+void KDebugForKernel_7CEB2C09(s32 arg0, s32 arg1) {
+    D_0000F8B0 = arg0;
+    D_0000F8B4 = arg1;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_5CE9838B);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_66253C4E);
+s32 KDebugForKernel_66253C4E(s32 arg0) {
+    D_0000FC4C = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_DBB5597F);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_E6554FDA);
+s32 KDebugForKernel_E6554FDA(s32 arg0) {
+    D_0000FC50 = arg0;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_B9C643C9);
+s32 KDebugForKernel_B9C643C9(void) {
+    return D_0000F8B8;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_7D1C74F0);
 
@@ -552,25 +627,38 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_03072750);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_811BED79);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_A126F497);
+s32 KDebugForKernel_A126F497(s32 arg0) {
+    D_0000FC58 = arg0;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", KDebugForKernel_B7251823);
+s32 KDebugForKernel_B7251823(void) {
+    return D_0000FC58;
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_CDA3A2F7);
+s32 SysMemForKernel_CDA3A2F7(void) {
+    return D_0000FC90;
+}
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_960B888C);
+s32 SysMemForKernel_960B888C(void) {
+    return D_0000FC90 + 0x200000;
+}
 
 s32 SysMemUserForUser_3FC9AE6A(void) {
     return 0x02000010;
 }
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_452E3696);
+s32 SysMemForKernel_452E3696(void) {
+    return D_0000FC54;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_95F5E8DA);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemUserForUser_A6848DF8);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_EF2EE8C1);
+s32 SysMemForKernel_EF2EE8C1(void) {
+    return D_0000FF24;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000C6AC);
 

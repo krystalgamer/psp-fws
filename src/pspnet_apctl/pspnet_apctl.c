@@ -82,17 +82,25 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00001D64)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000201C);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_000020CC);
+s32 func_000020CC(s32 *arg0) {
+    *arg0 = D_00011DE4;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_000020E0);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00002204);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000228C);
+s32 func_0000228C(void) {
+    sceKernelSetEventFlag(D_00011DF0, 2U);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_000022B4);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000235C);
+void func_0000235C(s32 arg0, s32 arg1) {
+    func_00000B54((s32) &D_00011DD4, arg0, arg1);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00002388);
 
@@ -100,7 +108,10 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_000023BC)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00002480);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00002514);
+s32 func_00002514(s32 arg0) {
+    D_000125BC = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00002524);
 
@@ -280,7 +291,15 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00008834)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00008BE0);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00008E00);
+s32 func_00008E00(void) {
+    s32 var_v0;
+
+    var_v0 = 0x8041030B;
+    if (D_00013F20 != NULL) {
+        var_v0 = sceKernelSignalSema(M2C_FIELD(D_00013F20, s32 *, 4), 1);
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00008E34);
 
@@ -308,7 +327,10 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009374)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009500);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009588);
+s32 func_00009588(s32 arg0) {
+    D_00016528 = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009598);
 
@@ -346,7 +368,18 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009C50)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009CB4);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009CE0);
+s32 func_00009CE0(void *arg0) {
+    void *temp_a4;
+    void *temp_a6;
+
+    temp_a4 = arg0 + 0x24F4;
+    temp_a6 = arg0 + 0x24A0;
+    M2C_FIELD(temp_a6, s32 *, 0xC) = (s32) M2C_FIELD(temp_a4, s32 *, 0x18);
+    M2C_FIELD(temp_a4, s32 *, 0xC) = (s32) (M2C_FIELD(temp_a4, s32 *, 0xC) + 1);
+    M2C_FIELD(temp_a6, s32 *, 0x14) = 0;
+    func_00009098(M2C_FIELD(arg0, s32 *, 0x18), arg0 + 0x1C, arg0 + 0x10, arg0 + 0x2398, 1, 1, 1, 0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009D3C);
 
@@ -364,7 +397,12 @@ s32 func_00009D90(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009DA0);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009DB4);
+s32 func_00009DB4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x24DC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24FC) = 0;
+    func_00009098(M2C_FIELD(arg0, s32 *, 0x18), arg0 + 0x1C, arg0 + 0x10, arg0 + 0x2398, 1, 1, 2, 0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00009DF8);
 
@@ -401,7 +439,15 @@ s32 func_0000A248(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000A258);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000A354);
+s32 func_0000A354(void *arg0) {
+    void *temp_s1;
+
+    temp_s1 = arg0 + 0x2520;
+    sceNet_lib_EF097716(arg0 + 0x2E, arg0 + 0x2B0C, M2C_FIELD(temp_s1, s32 *, 0xBC8));
+    func_00009098(M2C_FIELD(arg0, s32 *, 0x18), (s32) (arg0 + 0x1C), (s32) (arg0 + 0x10), (s32) (arg0 + 0x2398), 1, 1, 0, (s32) (u16) M2C_FIELD(temp_s1, s32 *, 0xBC8));
+    M2C_FIELD(temp_s1, s32 *, 8) = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000A3C0);
 
@@ -526,7 +572,9 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000B5B8)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000B6A4);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000B720);
+void func_0000B720(void) {
+    sceNet_lib_57CC57DA(&D_000177A0, 0, 0x70);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000B748);
 
@@ -625,7 +673,9 @@ INCLUDE_RODATA("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", D_00010ECC)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000BD70);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000BE2C);
+void func_0000BE2C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    func_00009098(arg0, arg1, arg2, arg3, 0, 1, arg4 & 0xFF, arg5 & 0xFFFF);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000BE5C);
 
@@ -641,9 +691,13 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000C594)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000C638);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000C738);
+void func_0000C738(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    func_0000B974(arg2, arg3, arg0, arg1, arg4);
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000C768);
+void func_0000C768(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    func_0000B7FC(arg2, arg3, arg0, arg1, arg4);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000C798);
 

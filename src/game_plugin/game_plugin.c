@@ -19,7 +19,10 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000003DC);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_0000045C);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000004E8);
+s32 func_000004E8(s32 arg0) {
+    func_00008160(&D_0001247C, arg0);
+    return 0;
+}
 
 void func_00000510(void) {
     func_00006EF4(0);
@@ -39,7 +42,9 @@ INCLUDE_RODATA("tmp/asm/282/game_plugin/nonmatchings/game_plugin", D_000115C8);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00000664);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_0000076C);
+void func_0000076C(void) {
+    func_00008120(&D_0001247C);
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_0000078C);
 
@@ -86,13 +91,20 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00000DA8);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00000DEC);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00000E68);
+void func_00000E68(M2C_UNK **arg0) {
+    *arg0 = &D_00011890;
+}
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00000E78);
+void func_00000E78(M2C_UNK **arg0) {
+    *arg0 = &D_00011890;
+    scePaf_4E67BB08();
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00000EA0);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00000ED0);
+s32 func_00000ED0(s32 arg0, u32 arg1) {
+    return (((s32) (arg0 + 1) / (s32) (arg1 >> 5)) + 1) * arg1;
+}
 
 INCLUDE_RODATA("tmp/asm/282/game_plugin/nonmatchings/game_plugin", D_000115F0);
 
@@ -249,11 +261,17 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00003F1C);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00003F78);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_0000403C);
+void func_0000403C(M2C_UNK **arg0) {
+    *arg0 = &D_00011AD8;
+    scePaf_4E67BB08();
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00004064);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_0000412C);
+void func_0000412C(M2C_UNK **arg0) {
+    *arg0 = &D_00011AE8;
+    scePaf_4E67BB08();
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00004154);
 
@@ -368,7 +386,19 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_0000599C);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00005BF0);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00005C88);
+void func_00005C88(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_00011CFC);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK), 0xC)(0, &func_00005CE8, 0, 0);
+        }
+    }
+    scePaf_66907719();
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00005CE8);
 
@@ -406,7 +436,19 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00006418);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000064F4);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00006584);
+void func_00006584(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_00011D88);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK), 0xC)(0, &func_000064F4, 0, 0);
+        }
+    }
+    scePaf_66907719();
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000065E4);
 
@@ -416,7 +458,19 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00006638);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_000068E4);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00006974);
+void func_00006974(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_00011DEC);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK), 0xC)(0, &func_000068E4, 0, 0);
+        }
+    }
+    scePaf_66907719();
+}
 
 INCLUDE_RODATA("tmp/asm/282/game_plugin/nonmatchings/game_plugin", D_00011DEC);
 
@@ -434,7 +488,14 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00006EF4);
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00006F48);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00007024);
+void func_00007024(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = scePaf_338C3774(arg0, 1);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK *), 4)(&func_00007058);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin", func_00007058);
 
