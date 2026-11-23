@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 v=${1%%:*}; m=${1##*:}; opt="${*:2}"
 f=src/$m/$m.c
 git diff --quiet -- src/$m || { echo "$1: src has local changes, skipping"; exit 1; }
-count() { grep -cE '^[A-Za-z][A-Za-z0-9_ *]*\b[A-Za-z0-9_]+\([^;{]*\)\s*\{' "$f" 2>/dev/null || echo 0; }
+count() { local c; c=$(grep -cE '^[A-Za-z][A-Za-z0-9_ *]*\b[A-Za-z0-9_]+\([^;{]*\)\s*\{' "$f" 2>/dev/null); echo "${c:-0}"; }
 before=$(count)
 log=tmp/switch_${v}_${m}.log
 rm -rf src/$m
