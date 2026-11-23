@@ -154,9 +154,15 @@ M2C_TARGETS = [os.environ["M2C_TARGET"]] if os.environ.get("M2C_TARGET") else ["
 EABI = ABI[:8] + ["a4", "a5", "a6", "a7"] + ABI[12:]
 
 
+# Instructions split.py had to emit as raw words for modern GAS but m2c understands
+# (division-by-zero `break 7`, unaligned loads/stores, sync).
+UNWRAP = re.compile(r"\.word\s+0x[0-9A-Fa-f]{8}\s*#\s*((?:break|teq|tne|sync|lwl|lwr|swl|swr)\b[^\n]*)$", re.M)
+
+
 def run_m2c(mod, name, ctx, target="mips-gcc-c"):
     names = EABI if target.startswith("mipsee") else ABI
-    asm = re.sub(r"\$(\d+)\b", lambda m: "$" + names[int(m[1])] if int(m[1]) < 32 else m[0], mod.funcs[name][2].read_text())
+    asm = UNWRAP.sub(lambda m: m[1].strip(), mod.funcs[name][2].read_text())
+    asm = re.sub(r"\$(\d+)\b", lambda m: "$" + names[int(m[1])] if int(m[1]) < 32 else m[0], asm)
     ctx = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", "-DM2CTX", f"-I{ROOT/'include'}", "-"],
                          input=ctx, capture_output=True, text=True).stdout
     with tempfile.TemporaryDirectory() as td:
@@ -217,6 +223,8 @@ def _try_func(mod, name, header_ctx, target, seen):
     if not out:
         return None
     out = join_halves(out)
+    # cc1 emits its own divide-by-zero check (bnez + break 7)
+    out = re.sub(r"^\s*if \([^()]+ == 0\) \{\n\s*M2C_BREAK\((?:0, )?7\);\n\s*\}\n", "", out, flags=re.M)
     decls, body = split_m2c(out, name)
     # Unknown stack usage can't match; gotos are rejected in favour of
     # structured control flow (those functions are left for manual work).
