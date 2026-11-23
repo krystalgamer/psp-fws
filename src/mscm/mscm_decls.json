@@ -1,6 +1,7 @@
 {
  "funcs": {
   "func_00000C1C": "s32 func_00000C1C(void *arg0);",
+  "func_0000254C": "s32 func_0000254C(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);",
   "func_00004E4C": "void func_00004E4C(void);",
   "func_00006484": "s32 func_00006484(void);",
   "func_0000648C": "s32 func_0000648C(void);",
@@ -9,9 +10,11 @@
   "func_0000652C": "s32 func_0000652C(s32, s32);",
   "func_000066DC": "s32 func_000066DC(void *arg0);",
   "func_00006704": "s32 func_00006704(void *arg0, s32 arg1);",
+  "sceKernelChangeThreadPriority": "s32 sceKernelChangeThreadPriority(u32, s32);",
   "sceKernelClearEventFlag": "s32 sceKernelClearEventFlag(u32, u32);",
   "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
   "sceKernelGetSystemTimeLow": "u32 sceKernelGetSystemTimeLow(void);",
+  "sceKernelGetThreadCurrentPriority": "s32 sceKernelGetThreadCurrentPriority(void);",
   "sceMScm_driver_0A054CDA": "s32 sceMScm_driver_0A054CDA(void *arg0);",
   "sceMScm_driver_AA67D87A": "s32 sceMScm_driver_AA67D87A(s32, s32);",
   "sceMScm_driver_B01C378C": "s32 sceMScm_driver_B01C378C(void *arg0);",

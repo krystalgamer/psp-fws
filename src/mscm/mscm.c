@@ -56,7 +56,16 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00001F10);
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00002114);
 
-INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_0000254C);
+s32 func_0000254C(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    s32 temp_s2;
+    s32 temp_v0;
+
+    temp_v0 = sceKernelGetThreadCurrentPriority();
+    sceKernelChangeThreadPriority(0U, temp_v0 + 5);
+    temp_s2 = arg0(arg1, arg2, arg3, arg4, arg5);
+    sceKernelChangeThreadPriority(0U, temp_v0);
+    return temp_s2;
+}
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_000025F0);
 

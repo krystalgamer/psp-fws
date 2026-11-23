@@ -193,13 +193,30 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_000043C0)
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_000043F0);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_00004420);
+s32 func_00004420(void *arg0, s32 *arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x8000C0FF;
+    if (arg0 != NULL) {
+        var_v1 = func_00012834(arg0, arg1);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_00004450);
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_00004480);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_000044B0);
+s32 func_000044B0(void *arg0, s8 *arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x8000C0FF;
+    if (arg0 != NULL) {
+        *arg1 = func_0001280C(arg0);
+        var_v1 = 0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_000044F0);
 
@@ -554,9 +571,25 @@ void func_00006008(void *arg0) {
     func_00005CC4(arg0 + 0x18);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_00006040);
+void func_00006040(s32 arg0) {
+    music_common_74CC985E(arg0);
+    music_common_74CC985E(arg0 + 0x10);
+    music_common_74CC985E(arg0 + 0x20);
+    music_common_74CC985E(arg0 + 0x30);
+    music_common_74CC985E(arg0 + 0x40);
+    func_00005EE4(arg0 + 0x50);
+    M2C_FIELD(arg0, s32 *, 0x78) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", music_common_9370D7F7);
+void music_common_9370D7F7(s32 arg0) {
+    music_common_74CC985E(arg0);
+    music_common_74CC985E(arg0 + 0x10);
+    music_common_74CC985E(arg0 + 0x20);
+    music_common_74CC985E(arg0 + 0x30);
+    music_common_74CC985E(arg0 + 0x40);
+    func_00005EE4(arg0 + 0x50);
+    M2C_FIELD(arg0, s32 *, 0x78) = 0;
+}
 
 void func_000060E0(s32 arg0) {
     func_00005F64(arg0 + 0x50);
@@ -1094,13 +1127,31 @@ void func_0000E664(void) {
     func_0000E428(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000E684);
+void func_0000E684(void *arg0) {
+    s32 temp_v0;
+    s32 temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0 = M2C_FIELD(arg0, s32 *, 4) - 1;
+    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+    if (temp_v0 >= (temp_v1 - 0x14)) {
+
+    } else {
+        func_0000EC98((s32) arg0, temp_v1 - 0xA);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000E6C8);
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000E6D8);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000E718);
+void func_0000E718(void *arg0, s32 arg1) {
+    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+
+    } else {
+        func_0000EC98((s32) arg0, arg1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000E74C);
 
@@ -1118,7 +1169,13 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000E85C)
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000E86C);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000E8AC);
+void func_0000E8AC(void *arg0, s32 arg1) {
+    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+
+    } else {
+        func_0000EDE8((s32) arg0, arg1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000E8E0);
 
@@ -1144,7 +1201,19 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000EEF8)
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000EF38);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000EFB4);
+void func_0000EFB4(void *arg0) {
+    s32 temp_v0;
+    s32 temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0 = M2C_FIELD(arg0, s32 *, 4) - 1;
+    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+    if (temp_v0 >= (temp_v1 - 0x14)) {
+
+    } else {
+        func_0000F0B4((s32) arg0, temp_v1 - 0xA);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_0000EFF8);
 

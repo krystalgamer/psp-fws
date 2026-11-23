@@ -167,9 +167,13 @@ s32 func_00004E70(void *arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004E7C);
+void func_00004E7C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_00003E60(arg0, arg1, 3, arg2, arg3);
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004EA0);
+void func_00004EA0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_00003B00(arg0, arg1, 5, arg2, arg3);
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004EC4);
 
@@ -350,7 +354,13 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegRingbufferPut);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegRingbufferAvailableSize);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006CF0);
+s32 func_00006CF0(s32 arg0, s32 arg1, void *arg2, u32 *arg3) {
+    u32 temp_v0;
+
+    temp_v0 = sceKernelCreateSema(arg2, 0U, arg0, arg1, NULL);
+    *arg3 = temp_v0;
+    return ((s32) temp_v0 >= 0) ? 0 : 0x80000041;
+}
 
 s32 func_00006D44(u32 arg0) {
     return (sceKernelDeleteSema(arg0) == 0) ? 0 : 0x80000041;
