@@ -69,9 +69,13 @@ def prepare():
         t.write_text("\n".join(out) + "\n")
 
 
+VERSIONS = {"zlib": "1.2.3", "png": "1.2.10"}
+
+
 def lib_sources(name):
+    zlib = LIB / f"zlib-{VERSIONS['zlib']}"
     if name == "zlib":
-        d = LIB / "zlib-1.2.3"
+        d = zlib
         files = [d / f"{f}.c" for f in ("adler32 compress crc32 deflate gzio infback inffast inflate inftrees "
                                        "trees uncompr zutil").split()]
         return files, [d], []
@@ -82,9 +86,9 @@ def lib_sources(name):
                 "rdtarga", "wrbmp", "wrgif", "wrppm", "wrrle", "wrtarga", "rdswitch", "rdcolmap", "transupp"}
         return [f for f in sorted(d.glob("*.c")) if f.stem not in skip], [d], []
     if name == "png":
-        d = LIB / "libpng-1.2.10"
+        d = LIB / f"libpng-{VERSIONS['png']}"
         skip = {"example", "pngtest", "pnggccrd", "pngvcrd"}
-        return [f for f in sorted(d.glob("*.c")) if f.stem not in skip], [d, LIB / "zlib-1.2.3"], \
+        return [f for f in sorted(d.glob("*.c")) if f.stem not in skip], [d, zlib], \
             ["-DPNG_NO_MMX_CODE"]
     if name == "tiff":
         d = LIB / "tiff-3.8.2/libtiff"
@@ -92,7 +96,7 @@ def lib_sources(name):
                 "tif_acorn", "mkg3states", "mkspans", "tif_jpeg", "tif_ojpeg", "tif_pixarlog", "tif_zip",
                 "mkversion", "tif_fax3sm"}
         return [f for f in sorted(d.glob("*.c")) if f.stem not in skip] + [d / "tif_fax3sm.c"], \
-            [d, LIB / "zlib-1.2.3", LIB / "jpeg-6b"], []
+            [d, zlib, LIB / "jpeg-6b"], []
     raise ValueError(name)
 
 
@@ -161,7 +165,10 @@ def main():
     ap.add_argument("module")
     ap.add_argument("--opts", nargs="+", default=["-O2", "-Os", "-O2 -frename-registers", "-O1"])
     ap.add_argument("--libs", nargs="+", default=["zlib", "jpeg", "png", "tiff"])
+    ap.add_argument("--zlib", default=VERSIONS["zlib"])
+    ap.add_argument("--png", default=VERSIONS["png"])
     a = ap.parse_args()
+    VERSIONS.update(zlib=a.zlib, png=a.png)
     prepare()
     mod = ad.Module(a.version, a.module)
     by_words = collections.defaultdict(list)

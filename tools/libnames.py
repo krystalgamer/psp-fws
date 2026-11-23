@@ -47,7 +47,10 @@ def main():
     ap.add_argument("version")
     ap.add_argument("module")
     ap.add_argument("--opt", default="-O2")
+    ap.add_argument("--zlib", default=L.VERSIONS["zlib"])
+    ap.add_argument("--png", default=L.VERSIONS["png"])
     a = ap.parse_args()
+    L.VERSIONS.update(zlib=a.zlib, png=a.png)
     found = json.loads((ROOT / "tmp/libmatch" / f"{a.version}_{a.module}.json").read_text())
     funcs = module_funcs(a.version, a.module)
     idx = {f[1]: i for i, f in enumerate(funcs)}
