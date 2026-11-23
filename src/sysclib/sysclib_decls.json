@@ -1,0 +1,6 @@
+{
+ "funcs": {
+  "module_start": "s32 module_start(void);"
+ },
+ "vars": {}
+}

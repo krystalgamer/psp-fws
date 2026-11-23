@@ -1,0 +1,10 @@
+{
+ "funcs": {
+  "func_00004E4C": "void func_00004E4C(void);",
+  "func_00006484": "s32 func_00006484(void);",
+  "func_0000648C": "s32 func_0000648C(void);",
+  "func_000064C0": "s32 func_000064C0(void);",
+  "sceKernelGetSystemTimeLow": "M2C_UNK sceKernelGetSystemTimeLow();"
+ },
+ "vars": {}
+}

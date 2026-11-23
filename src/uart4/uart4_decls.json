@@ -1,0 +1,7 @@
+{
+ "funcs": {
+  "Uart4ForKernel_D00E3D06": "M2C_UNK Uart4ForKernel_D00E3D06();",
+  "func_00000398": "void func_00000398(void);"
+ },
+ "vars": {}
+}

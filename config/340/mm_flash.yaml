@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, mm_flash]
+      - [0x80, c, mm_flash]
       - { start: 0xB2EFC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xB325C, type: prxpad, order: .text }
       - { start: 0xB3260, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -67,7 +67,7 @@ segments:
       - { start: 0xB3630, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
       - { start: 0xB3644, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0xB442C, type: rodata, name: gcc_except_table, linker_section: .gcc_except_table }
-      - [0xB4480, rodata, mm_flash]
+      - [0xB4480, .rodata, mm_flash]
       - { start: 0xC5654, type: prxpad, order: .rodata }
   - name: mm_flash_seg1
     type: code

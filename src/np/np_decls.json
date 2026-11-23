@@ -1,0 +1,26 @@
+{
+ "funcs": {
+  "func_00000030": "M2C_UNK func_00000030();",
+  "func_00000078": "M2C_UNK func_00000078();",
+  "func_000001D4": "s32 func_000001D4(void);",
+  "func_00000420": "void func_00000420(void);",
+  "func_0000043C": "void func_0000043C(void);",
+  "func_00006674": "void func_00006674(void);",
+  "func_00008B74": "s32 func_00008B74(void *arg0);",
+  "func_00008F04": "M2C_UNK func_00008F04();",
+  "func_00008FCC": "M2C_UNK func_00008FCC();",
+  "func_0000AA88": "void func_0000AA88(void);",
+  "func_0000AAA4": "void func_0000AAA4(void);",
+  "func_0000CF00": "void func_0000CF00(void *arg0);",
+  "func_0000D4F4": "s32 func_0000D4F4(void *arg0);",
+  "func_0000DAC4": "void func_0000DAC4(void);",
+  "func_0000DAE0": "M2C_UNK func_0000DAE0(void *);",
+  "func_0000DF04": "M2C_UNK func_0000DF04();",
+  "func_0000E300": "M2C_UNK func_0000E300();",
+  "sceHttpCreateRequest": "s32 sceHttpCreateRequest(s32);",
+  "sceKernelDeleteSema": "M2C_UNK sceKernelDeleteSema(s32);",
+  "sceNp_3C69FC6A": "M2C_UNK sceNp_3C69FC6A();",
+  "sceNp_3EA98556": "void sceNp_3EA98556(void);"
+ },
+ "vars": {}
+}

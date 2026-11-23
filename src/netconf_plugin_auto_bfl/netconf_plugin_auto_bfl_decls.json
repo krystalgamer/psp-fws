@@ -1,0 +1,30 @@
+{
+ "funcs": {
+  "free": "M2C_UNK free();",
+  "func_00000000": "M2C_UNK func_00000000();",
+  "func_00000830": "s32 func_00000830(void);",
+  "func_00003D94": "void func_00003D94(void);",
+  "func_00003DB0": "void func_00003DB0(void);",
+  "func_00003E2C": "void func_00003E2C(void);",
+  "func_00003E48": "void func_00003E48(void);",
+  "func_00003E64": "void func_00003E64(void);",
+  "func_00003E80": "void func_00003E80(void);",
+  "func_00003E9C": "void func_00003E9C(void);",
+  "func_00003EB8": "void func_00003EB8(void);",
+  "func_00003ED4": "void func_00003ED4(void);",
+  "func_00003F3C": "void func_00003F3C(void);",
+  "func_000042A4": "M2C_UNK func_000042A4();",
+  "malloc": "M2C_UNK malloc();",
+  "module_start": "s32 module_start(void);",
+  "module_stop": "s32 module_stop(void);",
+  "rand": "M2C_UNK rand();",
+  "sceNetInetBind": "M2C_UNK sceNetInetBind();",
+  "sceNetInetClose": "M2C_UNK sceNetInetClose();",
+  "sceNetInetRecvfrom": "M2C_UNK sceNetInetRecvfrom();",
+  "sceNetInetSelect": "M2C_UNK sceNetInetSelect();",
+  "sceNetInetSendto": "M2C_UNK sceNetInetSendto();",
+  "sceNetInetSetsockopt": "M2C_UNK sceNetInetSetsockopt();",
+  "sceNetInetSocket": "M2C_UNK sceNetInetSocket();"
+ },
+ "vars": {}
+}

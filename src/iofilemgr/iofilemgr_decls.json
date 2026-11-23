@@ -1,0 +1,7 @@
+{
+ "funcs": {
+  "IoFileMgrForKernel_BD17474F": "s32 IoFileMgrForKernel_BD17474F(void *arg0);",
+  "func_0000467C": "s32 func_0000467C(void);"
+ },
+ "vars": {}
+}

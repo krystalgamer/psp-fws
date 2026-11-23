@@ -1,0 +1,169 @@
+#include "common.h"
+#include "usbgps_serial_decls.h"
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00000000);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00000040);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00000354);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00000488);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", module_start);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004C64);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", sceUsbGpsOpen);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", sceUsbGpsClose);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", sceUsbGps_driver_A259CD67);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", sceUsbGps_driver_268F95CA);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", sceUsbGps_driver_54D26AA4);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", sceUsbGps_driver_69E4AAA8);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", sceUsbGpsGetState);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", sceUsbGpsGetData);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00000E68);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00000F28);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00000F98);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00001274);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000013B0);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", module_stop);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00001504);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00001528);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000015B0);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000015D4);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000016FC);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00001AEC);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00001B4C);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00001DF0);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00001E54);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002014);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002280);
+
+void func_000022CC(void) {
+    func_00002E50();
+}
+
+void func_000022E8(void) {
+    func_00002928();
+}
+
+s32 func_00002304(void) {
+    return 0;
+}
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_0000230C);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002448);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000025DC);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004D74);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004D88);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004DA0);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004DB8);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004E00);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004E40);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002678);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002928);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002A74);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004EB8);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004EE0);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002D4C);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002D94);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002DDC);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002E50);
+
+s32 func_00002EB8(void) {
+    return 0;
+}
+
+s32 func_00002EC0(s32 *arg0) {
+    *arg0 = 0;
+    return 0;
+}
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002ECC);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002F14);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002F88);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002FE4);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000030D4);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000031F0);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_0000332C);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000035D4);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004FE4);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004FEC);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004FF4);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004FFC);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00005004);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00003784);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00003908);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00003BB4);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00003E80);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00003FE8);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000046D0);
+
+INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_000046F8);
+
+s32 func_00004754(void) {
+    return 0;
+}
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00005134);
+
+INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00005138);

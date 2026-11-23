@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, sysclib]
+      - [0x80, c, sysclib]
       - { start: 0x1F1C, type: prxpad, order: .text }
       - { start: 0x1F20, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x1F24, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -61,7 +61,7 @@ segments:
       - { start: 0x1F4C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x1F50, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x1F84, type: rodata, name: resident, linker_section: .rodata.sceResident }
-      - [0x2100, rodata, sysclib]
+      - [0x2100, .rodata, sysclib]
       - { start: 0x2334, type: prxpad, order: .rodata }
   - name: sysclib_seg1
     type: code

@@ -54,7 +54,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - { start: 0xC4, type: prxpad, order: .text }
-      - [0xD0, asm, music_common]
+      - [0xD0, c, music_common]
       - { start: 0x1E138, type: asm, name: fini, linker_section: .fini }
       - { start: 0x1E154, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1E5E4, type: prxpad, order: .text }
@@ -73,7 +73,7 @@ segments:
       - { start: 0x1EE1C, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x1EE20, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x1EE24, type: prxpad, order: .rodata }
-      - [0x1EE28, rodata, music_common]
+      - [0x1EE28, .rodata, music_common]
       - { start: 0x20394, type: prxpad, order: .rodata }
   - name: music_common_seg1
     type: code
