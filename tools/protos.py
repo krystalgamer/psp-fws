@@ -3,8 +3,9 @@
 
 - Imported/exported SCE functions: the SDK headers (tmp/sdk/.../include),
   reduced to basic types (pointers -> void *, 64-bit -> s64, float -> f32).
-- Functions with asm in the module: argument count from the $a0-$a3
-  registers read before being written on the straight-line entry path.
+- Functions with asm in the module: argument count from the EABI argument
+  registers ($4-$11) read before being written on the straight-line entry
+  path.
 """
 import json
 import re
@@ -66,7 +67,7 @@ def sdk_protos():
     return out
 
 
-ARGS = {"$4": 0, "$5": 1, "$6": 2, "$7": 3}
+ARGS = {f"${4 + i}": i for i in range(8)}  # EABI: $a0-$a3, $t0-$t3
 READ_ALL = re.compile(r"^(s[bhw]|swc1|sv\.|b|jr$|jalr$|mult|div|madd|msub|mtc1|mthi|mtlo|teq|tne|tge|tlt|mtic)")
 INSN = re.compile(r"^\s*/\*[^*]*\*/\s+([a-z0-9.]+)\s*(.*?)\s*(?:#.*)?$", re.M)
 
@@ -96,7 +97,12 @@ def asm_arity(text):
             seen.add(r)
         if op.startswith("b"):
             break
-    return max((ARGS[r] + 1 for r in read), default=0)
+    return sorted(ARGS[r] for r in read)
+
+
+def arity_params(used):
+    """One s32 per argument register up to the highest one read."""
+    return ["s32"] * (max(used, default=-1) + 1)
 
 
 def guess(name, asm_path=None):
@@ -104,8 +110,8 @@ def guess(name, asm_path=None):
     if p:
         return p
     if asm_path and Path(asm_path).exists():
-        n = asm_arity(Path(asm_path).read_text())
-        return f"s32 {name}({', '.join(['s32'] * n) or 'void'});"
+        ps = arity_params(asm_arity(Path(asm_path).read_text()))
+        return f"s32 {name}({', '.join(ps) or 'void'});"
     return None
 
 

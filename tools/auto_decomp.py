@@ -12,6 +12,7 @@ Usage: tools/auto_decomp.py <version> <module> [--max-size 0x100] [--limit N] [-
 import argparse
 import difflib
 import json
+import os
 import re
 import struct
 import subprocess
@@ -144,14 +145,22 @@ def compile_words(c_text, compiler="1.7.1", opt="-O2"):
         return out, ""
 
 
-def run_m2c(mod, name, ctx):
-    asm = re.sub(r"\$(\d+)\b", lambda m: "$" + ABI[int(m[1])] if int(m[1]) < 32 else m[0], mod.funcs[name][2].read_text())
+# The PSP uses the MIPS EABI ($4-$11 and $f12-$f19 for arguments), which m2c
+# implements as "mipsee" with $8-$11 named a4-a7.
+# Both are tried (EABI first); M2C_TARGET restricts to one.
+M2C_TARGETS = [os.environ["M2C_TARGET"]] if os.environ.get("M2C_TARGET") else ["mipsee-gcc-c", "mips-gcc-c"]
+EABI = ABI[:8] + ["a4", "a5", "a6", "a7"] + ABI[12:]
+
+
+def run_m2c(mod, name, ctx, target="mips-gcc-c"):
+    names = EABI if target.startswith("mipsee") else ABI
+    asm = re.sub(r"\$(\d+)\b", lambda m: "$" + names[int(m[1])] if int(m[1]) < 32 else m[0], mod.funcs[name][2].read_text())
     ctx = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", "-DM2CTX", f"-I{ROOT/'include'}", "-"],
                          input=ctx, capture_output=True, text=True).stdout
     with tempfile.TemporaryDirectory() as td:
         (Path(td) / "f.s").write_text(asm)
         (Path(td) / "ctx.c").write_text(ctx)
-        r = subprocess.run([sys.executable, str(ROOT / "tools/m2c_allegrex.py"), "-t", "mips-gcc-c", "--valid-syntax", "--globals", "used",
+        r = subprocess.run([sys.executable, str(ROOT / "tools/m2c_allegrex.py"), "-t", target, "--valid-syntax", "--globals", "used",
                             "--context", str(Path(td) / "ctx.c"), str(Path(td) / "f.s")],
                            capture_output=True, text=True, timeout=120)
     return r.stdout if r.returncode == 0 and "M2C_ERROR" not in r.stdout else None
@@ -165,31 +174,38 @@ def split_m2c(out, name):
     return [l for l in out[:m.start()].splitlines() if l.strip()], out[m.start():].rstrip() + "\n"
 
 
-def guess_callees(mod, name):
+def guess_callees(mod, name, target="mips-gcc-c"):
     """Prototypes (SDK or asm-derived) for callees without a known one."""
     out = {}
     for c in sorted(set(re.findall(r"\b(?:jal|j)\s+(\w+)", mod.funcs[name][2].read_text())) - {name}):
         if c not in mod.store["funcs"]:
             p = protos.guess(c, mod.funcs[c][2] if c in mod.funcs else None)
+            if p and not target.startswith("mipsee") and c in mod.funcs:
+                p = re.sub(r"\((s32(?:, s32){4,})\)", "(s32, s32, s32, s32)", p)  # o32: 4 register args
             if p:
                 out[c] = p
     return out
 
 
 def try_func(mod, name, header_ctx):
-    """Try with the SDK prototype of the function itself first, if any."""
+    """Try each m2c target, with the SDK prototype of the function first."""
     own = protos.sdk_protos().get(name) if name not in mod.store["funcs"] else None
-    if own:
-        res = _try_func(mod, name, header_ctx + own + "\n")
-        if res:
-            return res
-    return _try_func(mod, name, header_ctx)
+    seen = set()
+    for target in M2C_TARGETS:
+        for ctx in ([header_ctx + own + "\n"] if own else []) + [header_ctx]:
+            res = _try_func(mod, name, ctx, target, seen)
+            if res:
+                return res
+    return None
 
 
-def _try_func(mod, name, header_ctx):
-    guessed = guess_callees(mod, name)
+def _try_func(mod, name, header_ctx, target, seen):
+    guessed = guess_callees(mod, name, target)
     header_ctx += "\n".join(guessed.values()) + "\n"
-    out = run_m2c(mod, name, header_ctx)
+    out = run_m2c(mod, name, header_ctx, target)
+    if out in seen:
+        return None
+    seen.add(out)
     if not out:
         return None
     decls, body = split_m2c(out, name)
@@ -236,8 +252,12 @@ def _try_func(mod, name, header_ctx):
         sm = difflib.SequenceMatcher(None, target, words, autojunk=False)
         score = max(len(target), len(words)) - sum(b.size for b in sm.get_matching_blocks())
         best = score if best is None else min(best, score)
-    mod.stats[name] = sorted(matching)
-    mod.scores[name] = (best, len(target))
+    mod.stats[name] = sorted(set(mod.stats.get(name, [])) | matching)
+    prev = mod.scores.get(name)
+    if best is not None and (not prev or prev[0] is None or best < prev[0]):
+        mod.scores[name] = (best, len(target))
+    elif not prev:
+        mod.scores[name] = (best, len(target))
     if mod.setting not in matching:
         return None
     return new_funcs, new_vars, sig, body
