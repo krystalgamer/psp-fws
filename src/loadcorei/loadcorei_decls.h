@@ -5,17 +5,26 @@
 #include "m2c_macros.h"
 
 
+void LoadCoreForKernel_0DE1F600(s32 arg0, s32 arg1);
+void LoadCoreForKernel_0E760DBA(s32 arg0, s32 arg1);
+void LoadCoreForKernel_5873A31F(s32 arg0);
 void LoadCoreForKernel_6B2371C2(void *arg0);
+void LoadCoreForKernel_99A695F0(s32 arg0);
 void LoadCoreForKernel_BD61D4D5(void *arg0);
 s32 LoadCoreForKernel_CF8A41B1(s32 arg0);
 s32 LoadCoreForKernel_DA1B09AA(u32 arg0, u32 arg1);
 M2C_UNK SysMemForKernel_8F20C4C0(s32);
 M2C_UNK SysMemForKernel_CE05CCB7();
+void func_00000674(s32 arg0, s32 arg1);
+void func_00000690(s32 arg0, s32 arg1);
+s32 func_000008D0(s32, s32, s32);
 void func_00000AAC(void *arg0, void *arg1);
 s32 func_00000ACC(void *arg0, void *arg1);
 s32 func_00000ADC(void *arg0, void *arg1);
 void func_00000AEC(void *arg0, void *arg1);
 s32 func_00000B10(void *arg0, void *arg1);
+s32 func_000014F8(s32, s32);
+s32 func_00001B6C(s32, s32, s32);
 M2C_UNK func_00001D1C(void *);
 s32 func_00001ECC(void);
 M2C_UNK func_00001F94(M2C_UNK, void *);

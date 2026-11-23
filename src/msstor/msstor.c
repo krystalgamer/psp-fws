@@ -71,9 +71,13 @@ s32 func_00001558(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x4E60);
 }
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00001560);
+void func_00001560(s32 arg0) {
+    func_000008B8(arg0, 0x11, 0x3E8);
+}
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00001580);
+void func_00001580(s32 arg0) {
+    func_000008B8(arg0, 0x25, 0x5DC);
+}
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_000015A0);
 
@@ -137,7 +141,9 @@ INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00001F78);
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_0000263C);
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_000026A8);
+void func_000026A8(s32 arg0) {
+    func_000008B8(arg0, 0xC3, 1);
+}
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_000026C8);
 
@@ -186,9 +192,13 @@ INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00003CA4);
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00003E20);
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00003E88);
+void func_00003E88(s32 arg0) {
+    func_000008B8(arg0, 0x5A, 1);
+}
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00003EA8);
+void func_00003EA8(s32 arg0) {
+    func_000008B8(arg0, 0xCC, 5);
+}
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00003EC8);
 
@@ -206,7 +216,9 @@ INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00004664);
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_000046FC);
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00004750);
+void func_00004750(s32 arg0) {
+    func_000008B8(arg0, 0x5A, 1);
+}
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00004770);
 

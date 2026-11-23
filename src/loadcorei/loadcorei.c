@@ -25,9 +25,13 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00000488);
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00000570);
 
-INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00000674);
+void func_00000674(s32 arg0, s32 arg1) {
+    func_000008D0(arg0, arg1, 0);
+}
 
-INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00000690);
+void func_00000690(s32 arg0, s32 arg1) {
+    func_000008D0(arg0, arg1, 1);
+}
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_000006AC);
 
@@ -85,9 +89,13 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_000014B0);
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_000014F8);
 
-INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_99A695F0);
+void LoadCoreForKernel_99A695F0(s32 arg0) {
+    func_000014F8(arg0, 0);
+}
 
-INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_5873A31F);
+void LoadCoreForKernel_5873A31F(s32 arg0) {
+    func_000014F8(arg0, 1);
+}
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00001888);
 
@@ -99,9 +107,13 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_9B
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00001B6C);
 
-INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_0E760DBA);
+void LoadCoreForKernel_0E760DBA(s32 arg0, s32 arg1) {
+    func_00001B6C(arg0, arg1, 0);
+}
 
-INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_0DE1F600);
+void LoadCoreForKernel_0DE1F600(s32 arg0, s32 arg1) {
+    func_00001B6C(arg0, arg1, 1);
+}
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00001D1C);
 
