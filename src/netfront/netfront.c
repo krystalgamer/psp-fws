@@ -6151,7 +6151,16 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", sceHVNetfront_Module_F
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00046238);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_0004633C);
+s32 func_0004633C(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (func_00046144(arg0, arg1, (s32) &func_00046238, 0, arg2, arg3) != 0) {
+        M2C_FIELD(arg0, s32 *, 0x18) = 0;
+        var_v1 = 1;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00046388);
 
@@ -7867,11 +7876,15 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000577C4);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000578A4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00057908);
+void func_00057908(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_000577C4(arg0, arg1, arg2, arg3, (s32) &func_000578A4);
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00057928);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_0005798C);
+void func_0005798C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_000577C4(arg0, arg1, arg2, arg3, (s32) &func_00057928);
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000579AC);
 

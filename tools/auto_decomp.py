@@ -400,6 +400,14 @@ def _verify_functions(mod, args, max_rounds=40):
             return
         bad.sort()
         names = [n for _, n in bad] if rnd == max_rounds else [bad[0][1]]
+        if rnd == 0:
+            # Functions emitting their own rodata (strings go to mergeable
+            # .rodata.str sections, floats to .rodata.cst4, switch tables)
+            # shift the layout for everything after them: revert those first.
+            emitting = [n for n in accepted if f", {n});" not in src and re.search(
+                rf"^[^\n;]*\b{n}\([^;{{]*\)\s*{{\n(?:(?!^}}).)*(\"|\bswitch\b|\b\d+\.\d*f?\b)", src, re.M | re.S)]
+            if emitting:
+                names = emitting
         for name in names:
             m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", src, re.M | re.S)
             folder = f"tmp/asm/{args.version}/{args.module}/nonmatchings/{args.module}"
