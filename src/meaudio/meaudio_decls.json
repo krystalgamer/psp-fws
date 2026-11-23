@@ -1,0 +1,9 @@
+{
+ "funcs": {
+  "sceMeAudio_05115756": "void sceMeAudio_05115756(void);",
+  "sceMeAudio_5EDA8D33": "void sceMeAudio_5EDA8D33(void);",
+  "sceSysreg_driver_8BE2D520": "M2C_UNK sceSysreg_driver_8BE2D520();",
+  "sceSysreg_driver_9FC87ED4": "s32 sceSysreg_driver_9FC87ED4();"
+ },
+ "vars": {}
+}

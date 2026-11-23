@@ -1,0 +1,20 @@
+{
+ "funcs": {
+  "func_00000000": "M2C_UNK func_00000000();",
+  "func_00000978": "void func_00000978(void);",
+  "func_000083D0": "M2C_UNK func_000083D0();",
+  "module_start": "s32 module_start(void);",
+  "module_stop": "s32 module_stop(void);",
+  "sceReg_0CAE832B": "M2C_UNK sceReg_0CAE832B(s32);",
+  "sceReg_0D69BF40": "M2C_UNK sceReg_0D69BF40(s32);",
+  "sceReg_39461B4D": "M2C_UNK sceReg_39461B4D(s32);",
+  "sceReg_FA8A5739": "M2C_UNK sceReg_FA8A5739(s32);",
+  "sceVshCommonUtil_0AF412FC": "void sceVshCommonUtil_0AF412FC(void);",
+  "sceVshCommonUtil_107EDCD9": "void sceVshCommonUtil_107EDCD9(void);",
+  "sceVshCommonUtil_249059B5": "M2C_UNK sceVshCommonUtil_249059B5();",
+  "sceVshCommonUtil_686AAA1A": "void sceVshCommonUtil_686AAA1A(void);",
+  "sceVshCommonUtil_7683BE4D": "M2C_UNK sceVshCommonUtil_7683BE4D();",
+  "sceVshCommonUtil_98E57F6D": "void sceVshCommonUtil_98E57F6D(void *arg0);"
+ },
+ "vars": {}
+}

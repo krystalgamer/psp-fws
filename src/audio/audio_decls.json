@@ -1,0 +1,11 @@
+{
+ "funcs": {
+  "func_000029D4": "M2C_UNK func_000029D4();",
+  "sceAudioInput": "void sceAudioInput(void);",
+  "sceAudioOutput2OutputBlocking": "void sceAudioOutput2OutputBlocking(void);",
+  "sceAudioOutput2Release": "void sceAudioOutput2Release(void);",
+  "sceAudio_5C37C0AE": "M2C_UNK sceAudio_5C37C0AE();",
+  "sceAudio_E0727056": "M2C_UNK sceAudio_E0727056();"
+ },
+ "vars": {}
+}

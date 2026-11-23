@@ -1,0 +1,10 @@
+{
+ "funcs": {
+  "module_start": "s32 module_start(void);",
+  "sceLcdc_driver_B55500A3": "M2C_UNK sceLcdc_driver_B55500A3();",
+  "sceLcdc_driver_DCD51769": "s32 sceLcdc_driver_DCD51769(void);",
+  "sceSysreg_driver_E89243BE": "M2C_UNK sceSysreg_driver_E89243BE();",
+  "sceSysreg_driver_F74F14E9": "M2C_UNK sceSysreg_driver_F74F14E9();"
+ },
+ "vars": {}
+}

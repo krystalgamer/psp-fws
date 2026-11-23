@@ -1,0 +1,7 @@
+{
+ "funcs": {
+  "func_0000034C": "M2C_UNK func_0000034C();",
+  "module_stop": "s32 module_stop(void);"
+ },
+ "vars": {}
+}

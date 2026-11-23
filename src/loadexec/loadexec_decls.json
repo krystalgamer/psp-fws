@@ -1,0 +1,13 @@
+{
+ "funcs": {
+  "LoadExecForKernel_1B97BDB3": "void LoadExecForKernel_1B97BDB3(s32 arg0, M2C_UNK arg1);",
+  "LoadExecForKernel_28D0D249": "void LoadExecForKernel_28D0D249(s32 arg0, s32 arg1);",
+  "LoadExecForKernel_31DF42BF": "void LoadExecForKernel_31DF42BF(s32 arg0, s32 arg1);",
+  "LoadExecForKernel_70901231": "void LoadExecForKernel_70901231(s32 arg0, s32 arg1);",
+  "LoadExecForKernel_821BE114": "void LoadExecForKernel_821BE114(s32 arg0, s32 arg1);",
+  "LoadExecForUser_2AC9954B": "M2C_UNK LoadExecForUser_2AC9954B(M2C_UNK);",
+  "func_00001FA8": "M2C_UNK func_00001FA8(M2C_UNK, s32, M2C_UNK, M2C_UNK);",
+  "sceKernelExitGame": "void sceKernelExitGame(void);"
+ },
+ "vars": {}
+}

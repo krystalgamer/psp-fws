@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, mediaman]
+      - [0xA0, c, mediaman]
       - { start: 0xF30, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xFB8, type: prxpad, order: .text }
       - { start: 0xFC0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x106C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x10A0, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x12E8, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x132C, rodata, mediaman]
+      - [0x132C, .rodata, mediaman]
       - { start: 0x135C, type: prxpad, order: .rodata }
   - name: mediaman_seg1
     type: code

@@ -1,0 +1,90 @@
+#include "common.h"
+#include "me_wrapper_decls.h"
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeVideo_driver_B655AD4E);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeVideo_driver_06F0236A);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeVideo_driver_176BBE07);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeVideo_driver_DE2E7E89);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeVideo_driver_E67F4E0A);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeVideo_driver_1C6A60E1);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeAudio_driver_C00D873B);
+
+INCLUDE_RODATA("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", D_00001F8C);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeAudio_driver_FEE0A97D);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeAudio_driver_BAC7C2BE);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeAudio_driver_39F06790);
+
+void sceMeMemory_driver_A177798D(s32 arg0) {
+    sceMeCore_driver_3D5F109C(0x180, arg0);
+}
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeMemory_driver_C86500E3);
+
+void sceMeMemory_driver_5AD660FA(s32 arg0) {
+    sceMeCore_driver_3D5F109C(0x181, arg0);
+}
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_00000D28);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_00000D58);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_00000D84);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeCore_driver_4794C05C);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMePower_driver_05B2C420);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMePower_driver_B6FE3E62);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMePower_driver_55F11AF6);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMePower_driver_8EBBBBA3);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMePower_driver_579ACEA9);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_00001070);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_00001114);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_00001174);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeCore_driver_04AFF68E);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeCore_driver_B97B15D7);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_000012A4);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_000012D4);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeCore_driver_3D5F109C);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeCore_driver_D1EA3DFD);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_000014E4);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_00001588);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_00001624);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeWrapper_driver_63463F66);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", sceMeWrapper_driver_C3A1D6B2);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_000016D4);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_000017B0);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_000018B4);
+
+INCLUDE_ASM("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", func_00001918);
+
+INCLUDE_RODATA("tmp/asm/201/me_wrapper/nonmatchings/me_wrapper", D_00002048);

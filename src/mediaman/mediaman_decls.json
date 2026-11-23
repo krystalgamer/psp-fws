@@ -1,0 +1,7 @@
+{
+ "funcs": {
+  "sceUmdGetDriveStat": "void sceUmdGetDriveStat(void);",
+  "sceUmd_D45D1FE6": "M2C_UNK sceUmd_D45D1FE6();"
+ },
+ "vars": {}
+}

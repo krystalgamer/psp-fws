@@ -1,0 +1,14 @@
+{
+ "funcs": {
+  "func_0000070C": "s32 func_0000070C(void);",
+  "func_000025F0": "M2C_UNK func_000025F0(M2C_UNK);",
+  "func_000047EC": "M2C_UNK func_000047EC(s32, M2C_UNK);",
+  "func_000048AC": "M2C_UNK func_000048AC();",
+  "func_00004954": "M2C_UNK func_00004954();",
+  "sceAudioRoutingSetMode": "void sceAudioRoutingSetMode(void);",
+  "sceAudioRoutingSetVolumeMode": "void sceAudioRoutingSetVolumeMode(void);",
+  "sceImposeSetUMDPopup": "s32 sceImposeSetUMDPopup(s32 arg0);",
+  "sceImpose_driver_5595A71A": "s32 sceImpose_driver_5595A71A(s32 arg0);"
+ },
+ "vars": {}
+}

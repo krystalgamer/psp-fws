@@ -1,0 +1,7 @@
+{
+ "funcs": {
+  "module_start": "s32 module_start(void);",
+  "sceBLK_driver_6216FF5D": "M2C_UNK sceBLK_driver_6216FF5D();"
+ },
+ "vars": {}
+}

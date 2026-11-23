@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, impose]
+      - [0xA0, c, impose]
       - { start: 0x5D30, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x5F60, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x5F64, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -63,7 +63,7 @@ segments:
       - { start: 0x6108, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x613C, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x644C, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x6564, rodata, impose]
+      - [0x6564, .rodata, impose]
   - name: impose_seg1
     type: code
     start: 0xF5B0

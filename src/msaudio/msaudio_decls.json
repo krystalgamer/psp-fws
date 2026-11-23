@@ -1,0 +1,11 @@
+{
+ "funcs": {
+  "func_0000198C": "s32 func_0000198C(s32 *arg0);",
+  "func_000026B0": "s32 func_000026B0(void *arg0);",
+  "module_start": "s32 module_start(void);",
+  "module_stop": "s32 module_stop(void);",
+  "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
+  "sceMSAudio_driver_3872FBE5": "M2C_UNK sceMSAudio_driver_3872FBE5();"
+ },
+ "vars": {}
+}

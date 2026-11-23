@@ -1,0 +1,157 @@
+#include "common.h"
+#include "dnas_plugin_decls.h"
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000024);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000000AC);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", module_start);
+
+s32 module_stop(void) {
+    func_0000161C();
+    return 0;
+}
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_0000015C);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000001AC);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000001BC);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000210);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001A38);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001A4C);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001A64);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001A78);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001A90);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001AA0);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001AB4);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000220);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000002B8);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000003E8);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000448);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_0000046C);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001AE4);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001B08);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001B28);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001B48);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001B6C);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001B90);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001BB4);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001BD0);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001BF4);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001C0C);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001C28);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001C40);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001C54);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001C6C);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001C88);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001CA0);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_0000049C);
+
+void func_00000810(void) {
+}
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001D1C);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001D20);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001D30);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001D3C);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001D48);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001D50);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001D58);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001D70);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001D8C);
+
+INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001DA0);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000818);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000009FC);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000B14);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000C50);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000C6C);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000D84);
+
+void func_00000F58(void) {
+}
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000F60);
+
+void func_00001068(void) {
+}
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00001070);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_0000112C);
+
+void func_0000117C(void) {
+    func_00001198();
+}
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00001198);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_0000122C);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00001254);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000013B4);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000013D4);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00001404);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00001454);
+
+void func_000014F0(void **arg0) {
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    if (temp_a0 != NULL) {
+        M2C_FIELD(temp_a0, s32 *, 4) = (s32) (M2C_FIELD(temp_a0, s32 *, 4) + 1);
+    }
+}
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00001510);
+
+INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000015C4);

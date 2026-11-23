@@ -1,0 +1,7 @@
+{
+ "funcs": {
+  "ModuleMgrForKernel_61EC6AB0": "s32 ModuleMgrForKernel_61EC6AB0(void);",
+  "syslib_ADF12745": "s32 syslib_ADF12745(void);"
+ },
+ "vars": {}
+}

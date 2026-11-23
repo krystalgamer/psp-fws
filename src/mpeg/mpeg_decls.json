@@ -1,0 +1,16 @@
+{
+ "funcs": {
+  "func_00000918": "s32 func_00000918(void);",
+  "func_00003198": "s32 func_00003198(void);",
+  "func_00004E70": "s32 func_00004E70(void *arg0, s32 arg1);",
+  "func_000054AC": "u32 func_000054AC(s32 arg0);",
+  "func_00005510": "u8 func_00005510(void *arg0);",
+  "func_0000553C": "u8 func_0000553C(void *arg0);",
+  "func_00005580": "s32 func_00005580(s32 arg0);",
+  "func_000055A8": "s32 func_000055A8(void);",
+  "func_00006E74": "void func_00006E74(void);",
+  "func_00007B0C": "u32 func_00007B0C(s32);",
+  "sceKernelCheckThreadStack": "M2C_UNK sceKernelCheckThreadStack();"
+ },
+ "vars": {}
+}

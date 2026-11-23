@@ -1,0 +1,9 @@
+{
+ "funcs": {
+  "module_reboot_before": "s32 module_reboot_before(void);",
+  "module_start": "s32 module_start(void);",
+  "sceCtrl_driver_3E65A0EA": "M2C_UNK sceCtrl_driver_3E65A0EA();",
+  "sceCtrl_driver_E03956E9": "M2C_UNK sceCtrl_driver_E03956E9();"
+ },
+ "vars": {}
+}

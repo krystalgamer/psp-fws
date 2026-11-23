@@ -1,0 +1,8 @@
+{
+ "funcs": {
+  "func_000030AC": "s32 func_000030AC(s32 arg0);",
+  "func_000030B4": "s32 func_000030B4(void);",
+  "func_0000340C": "s32 func_0000340C(s32 arg0);"
+ },
+ "vars": {}
+}

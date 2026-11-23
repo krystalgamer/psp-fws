@@ -1,0 +1,8 @@
+{
+ "funcs": {
+  "sceI2c_driver_21A8282C": "s32 sceI2c_driver_21A8282C(void);",
+  "sceSysreg_driver_58F47EFD": "M2C_UNK sceSysreg_driver_58F47EFD();",
+  "sceSysreg_driver_94B0323C": "M2C_UNK sceSysreg_driver_94B0323C();"
+ },
+ "vars": {}
+}

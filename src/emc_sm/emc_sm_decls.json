@@ -1,0 +1,8 @@
+{
+ "funcs": {
+  "module_start": "s32 module_start(void);",
+  "sceNand_driver_73A68408": "s32 sceNand_driver_73A68408(void);",
+  "sceNand_driver_A513BB12": "M2C_UNK sceNand_driver_A513BB12();"
+ },
+ "vars": {}
+}

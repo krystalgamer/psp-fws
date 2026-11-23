@@ -1,0 +1,11 @@
+{
+ "funcs": {
+  "module_start": "s32 module_start(void);",
+  "sceIdStorage_driver_3AD32523": "M2C_UNK sceIdStorage_driver_3AD32523();",
+  "sceIdStorage_driver_AB129D20": "M2C_UNK sceIdStorage_driver_AB129D20();",
+  "sceIdStorage_driver_EB830733": "s32 sceIdStorage_driver_EB830733(void);",
+  "sceIdStorage_driver_F77565B6": "s32 sceIdStorage_driver_F77565B6(void);",
+  "sceIdStorage_driver_FE51173D": "s32 sceIdStorage_driver_FE51173D(void);"
+ },
+ "vars": {}
+}

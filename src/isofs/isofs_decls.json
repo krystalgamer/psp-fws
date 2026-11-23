@@ -1,0 +1,9 @@
+{
+ "funcs": {
+  "func_000004E4": "s32 func_000004E4(void *arg0);",
+  "func_000007FC": "M2C_UNK func_000007FC(s32);",
+  "func_000059DC": "s32 func_000059DC(void);",
+  "sceUmdMan_driver_4217E7F5": "M2C_UNK sceUmdMan_driver_4217E7F5(M2C_UNK);"
+ },
+ "vars": {}
+}

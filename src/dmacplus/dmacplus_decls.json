@@ -1,0 +1,21 @@
+{
+ "funcs": {
+  "sceDmacplus_driver_168836CF": "M2C_UNK sceDmacplus_driver_168836CF();",
+  "sceDmacplus_driver_3DB353DB": "M2C_UNK sceDmacplus_driver_3DB353DB();",
+  "sceDmacplus_driver_410ED0DD": "s32 sceDmacplus_driver_410ED0DD(void);",
+  "sceDmacplus_driver_42BEB349": "M2C_UNK sceDmacplus_driver_42BEB349();",
+  "sceDmacplus_driver_5E32C8AF": "M2C_UNK sceDmacplus_driver_5E32C8AF();",
+  "sceDmacplus_driver_6D4F8BD7": "M2C_UNK sceDmacplus_driver_6D4F8BD7();",
+  "sceDmacplus_driver_78A55D62": "M2C_UNK sceDmacplus_driver_78A55D62();",
+  "sceDmacplus_driver_853C5EC6": "s32 sceDmacplus_driver_853C5EC6(void);",
+  "sceDmacplus_driver_97DCBBBF": "M2C_UNK sceDmacplus_driver_97DCBBBF();",
+  "sceDmacplus_driver_C3236D69": "s32 sceDmacplus_driver_C3236D69(void);",
+  "sceDmacplus_driver_C5B75E09": "M2C_UNK sceDmacplus_driver_C5B75E09();",
+  "sceDmacplus_driver_C8336549": "M2C_UNK sceDmacplus_driver_C8336549();",
+  "sceDmacplus_driver_D49A5922": "s32 sceDmacplus_driver_D49A5922(void);",
+  "sceDmacplus_driver_FEE3392C": "M2C_UNK sceDmacplus_driver_FEE3392C();",
+  "sceSysreg_driver_168C09B8": "M2C_UNK sceSysreg_driver_168C09B8();",
+  "sceSysreg_driver_678AD3ED": "M2C_UNK sceSysreg_driver_678AD3ED();"
+ },
+ "vars": {}
+}

@@ -1,0 +1,7 @@
+{
+ "funcs": {
+  "module_start": "s32 module_start(void);",
+  "sceAmctrl_driver_525B8218": "s32 sceAmctrl_driver_525B8218(void *arg0, s32 arg1);"
+ },
+ "vars": {}
+}

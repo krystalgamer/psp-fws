@@ -1,0 +1,9 @@
+{
+ "funcs": {
+  "func_00001414": "M2C_UNK func_00001414();",
+  "func_0000145C": "M2C_UNK func_0000145C();",
+  "module_reboot_before": "void module_reboot_before(void);",
+  "module_start": "void module_start(void);"
+ },
+ "vars": {}
+}

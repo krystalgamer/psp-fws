@@ -1,0 +1,8 @@
+{
+ "funcs": {
+  "LflashFatfmt_B7A424A4": "void LflashFatfmt_B7A424A4(void);",
+  "func_000009A8": "M2C_UNK func_000009A8();",
+  "module_start": "s32 module_start(void);"
+ },
+ "vars": {}
+}

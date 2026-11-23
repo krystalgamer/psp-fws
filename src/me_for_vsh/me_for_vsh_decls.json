@@ -1,0 +1,7 @@
+{
+ "funcs": {
+  "sceMe4VSH_driver_99CBCF35": "s32 sceMe4VSH_driver_99CBCF35(void);",
+  "sceMeCore_driver_3D5F109C": "M2C_UNK sceMeCore_driver_3D5F109C(M2C_UNK);"
+ },
+ "vars": {}
+}

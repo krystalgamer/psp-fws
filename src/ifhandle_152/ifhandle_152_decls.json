@@ -1,0 +1,9 @@
+{
+ "funcs": {
+  "func_0000189C": "s32 func_0000189C(void);",
+  "module_start": "s32 module_start(void);",
+  "module_stop": "s32 module_stop(void);",
+  "sceNetIfhandle_driver_D5AD6DEA": "s32 sceNetIfhandle_driver_D5AD6DEA(void *arg0);"
+ },
+ "vars": {}
+}

@@ -1,0 +1,10 @@
+{
+ "funcs": {
+  "module_start": "s32 module_start(void);",
+  "sceHprm_driver_1C5BC5A0": "M2C_UNK sceHprm_driver_1C5BC5A0();",
+  "sceHprm_driver_526BB7F4": "s32 sceHprm_driver_526BB7F4(void);",
+  "sceSysreg_driver_7725CA08": "M2C_UNK sceSysreg_driver_7725CA08(M2C_UNK);",
+  "sceSysreg_driver_BB823481": "M2C_UNK sceSysreg_driver_BB823481(M2C_UNK);"
+ },
+ "vars": {}
+}

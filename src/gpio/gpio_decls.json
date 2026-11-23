@@ -1,0 +1,6 @@
+{
+ "funcs": {
+  "sceGpio_driver_17DAA8C2": "s32 sceGpio_driver_17DAA8C2(void);"
+ },
+ "vars": {}
+}

@@ -1,0 +1,8 @@
+{
+ "funcs": {
+  "func_000002A8": "M2C_UNK func_000002A8(M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK);",
+  "sceCodec_driver_31B2E41E": "void sceCodec_driver_31B2E41E(void);",
+  "sceCodec_driver_359C2B9F": "void sceCodec_driver_359C2B9F(void);"
+ },
+ "vars": {}
+}

@@ -1,0 +1,7 @@
+{
+ "funcs": {
+  "func_00000AF8": "s32 func_00000AF8(void);",
+  "sceAudiocodec_driver_62518B7E": "s32 sceAudiocodec_driver_62518B7E(void);"
+ },
+ "vars": {}
+}

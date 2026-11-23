@@ -1,0 +1,18 @@
+{
+ "funcs": {
+  "func_00003ACC": "void func_00003ACC(void);",
+  "func_00003B70": "void func_00003B70(void *arg0);",
+  "func_00003BB8": "void func_00003BB8(void *arg0);",
+  "func_00003BD8": "void func_00003BD8(void *arg0);",
+  "func_00003BF8": "void func_00003BF8(void *arg0);",
+  "func_00003CA0": "void func_00003CA0(void *arg0);",
+  "func_000045C8": "M2C_UNK func_000045C8();",
+  "func_00004BA8": "M2C_UNK func_00004BA8(s32, s32);",
+  "func_00005110": "M2C_UNK func_00005110(s32, s32);",
+  "func_00005388": "M2C_UNK func_00005388(s32, s32);",
+  "func_00005470": "M2C_UNK func_00005470(s32, s32);",
+  "func_00006600": "M2C_UNK func_00006600(s32, s32);",
+  "sceLFatFs_driver_8F0560E0": "s32 sceLFatFs_driver_8F0560E0(void);"
+ },
+ "vars": {}
+}

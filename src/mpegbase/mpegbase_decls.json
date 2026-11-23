@@ -1,0 +1,13 @@
+{
+ "funcs": {
+  "func_00000C04": "M2C_UNK func_00000C04();",
+  "func_00000C54": "M2C_UNK func_00000C54();",
+  "func_000014C0": "M2C_UNK func_000014C0();",
+  "func_00001500": "M2C_UNK func_00001500();",
+  "func_00001B98": "M2C_UNK func_00001B98();",
+  "func_00001BD4": "M2C_UNK func_00001BD4();",
+  "module_stop": "s32 module_stop(void);",
+  "sceMpegbase_driver_27A2982F": "s32 sceMpegbase_driver_27A2982F(void);"
+ },
+ "vars": {}
+}
