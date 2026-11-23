@@ -3,6 +3,10 @@
   "func_0000189C": "s32 func_0000189C(void);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
+  "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
+  "sceNetIfhandle_driver_16246B99": "void sceNetIfhandle_driver_16246B99(void *arg0, void *arg1);",
+  "sceNetIfhandle_driver_C6D14282": "s32 sceNetIfhandle_driver_C6D14282(void *arg0, s32 arg1);",
   "sceNetIfhandle_driver_D5AD6DEA": "s32 sceNetIfhandle_driver_D5AD6DEA(void *arg0);"
  },
  "vars": {}

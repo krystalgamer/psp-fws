@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "interruptman_decls.h"
 
@@ -53,7 +54,9 @@ INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManag
 
 INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_02314986);
 
-INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_00B6B0F3);
+M2C_UNK *InterruptManagerForKernel_00B6B0F3(void) {
+    return &D_00003E00;
+}
 
 INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", func_00001978);
 
@@ -63,7 +66,9 @@ INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManag
 
 INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_02475AAF);
 
-INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_D774BA45);
+void InterruptManagerForKernel_D774BA45(s32 arg0) {
+    InterruptManagerForKernel_750E2507(arg0, 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_2CD783A1);
 
@@ -85,7 +90,9 @@ INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", sceKernelResum
 
 INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", sceKernelIsSubInterruptOccurred);
 
-INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManager_D2E8363F);
+s32 InterruptManager_D2E8363F(void) {
+    return 0x80020001;
+}
 
 INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", sceKernelRegisterUserSpaceIntrStack);
 

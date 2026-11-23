@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "lcdc_decls.h"
 
@@ -26,7 +27,10 @@ s32 module_start(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/lcdc/nonmatchings/lcdc", module_reboot_before);
+s32 module_reboot_before(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_00000EF0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/lcdc/nonmatchings/lcdc", sceLcdc_driver_0E8E8774);
 

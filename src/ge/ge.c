@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "ge_decls.h"
 
@@ -58,13 +59,21 @@ INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGe_driver_9F2C2948);
 
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGe_driver_BAD6E1CA);
 
-INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGe_driver_9DA4A75F);
+s32 sceGe_driver_9DA4A75F(s32 arg0) {
+    s32 temp_a3;
+
+    temp_a3 = *(s32 *)0xBD400200;
+    *(s32 *)0xBD400200 = arg0 & 1;
+    return temp_a3 & 1;
+}
 
 void func_00001E9C(s32 arg0) {
     func_000017E0(1, arg0, 0, 0);
 }
 
-INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_00001EC4);
+void func_00001EC4(s32 arg0, s32 arg1, s32 arg2) {
+    func_000017E0(7, arg0, arg1, arg2);
+}
 
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_00001EF0);
 
@@ -78,8 +87,8 @@ INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGe_driver_114E1745);
 
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGe_driver_5BAA5439);
 
-s32 sceGeEdramGetAddr(void) {
-    return 0x04000000;
+void *sceGeEdramGetAddr(void) {
+    return (void *)0x04000000;
 }
 
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGeEdramSetAddrTranslation);

@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "hpremote_decls.h"
 
@@ -66,7 +67,18 @@ INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_7B03837
 
 INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_971AE8FB);
 
-INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", func_0000134C);
+s32 func_0000134C(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 0x1000C:
+        sceHprm_driver_2C7B8B05();
+        break;
+    case 0x400C:
+        sceSysreg_driver_BB823481(4);
+        sceSysreg_driver_7725CA08(4);
+        break;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", func_000013AC);
 

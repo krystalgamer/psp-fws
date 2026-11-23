@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "ifhandle_152_decls.h"
 
@@ -41,9 +42,31 @@ INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle
 
 INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_F94BAF52);
 
-INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_16246B99);
+void sceNetIfhandle_driver_16246B99(void *arg0, void *arg1) {
+    s32 temp_v0;
 
-INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_C6D14282);
+    if (arg0 != NULL) {
+        temp_v0 = sceKernelCpuSuspendIntr();
+        M2C_FIELD(arg1, void **, 4) = (void *) M2C_FIELD(arg0, void **, 0x18);
+        if (M2C_FIELD(arg0, void **, 0x1C) == NULL) {
+            M2C_FIELD(arg0, void **, 0x1C) = arg1;
+        }
+        M2C_FIELD(arg0, void **, 0x18) = arg1;
+        M2C_FIELD(arg0, s32 *, 0x20) = (s32) (M2C_FIELD(arg0, s32 *, 0x20) + 1);
+        sceKernelCpuResumeIntr(temp_v0);
+    }
+}
+
+s32 sceNetIfhandle_driver_C6D14282(void *arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0x80000103;
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 4) = arg1;
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 s32 sceNetIfhandle_driver_D5AD6DEA(void *arg0) {
     s32 var_v0;

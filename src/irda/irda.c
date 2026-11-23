@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "irda_decls.h"
 
@@ -60,7 +61,11 @@ INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000BE8);
 
 INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000C10);
 
-INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000C5C);
+s32 func_00000C5C(void) {
+    func_00000E94();
+    sceSysEventForKernel_D7D3FDCD(&D_00001740);
+    return 0;
+}
 
 void func_00000C88(void) {
     func_00000D6C();

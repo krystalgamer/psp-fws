@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "isofs_decls.h"
 
@@ -19,8 +20,8 @@ INCLUDE_RODATA("tmp/asm/201/isofs/nonmatchings/isofs", D_00005F38);
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00000440);
 
-s32 func_000004E4(void *arg0) {
-    func_000007FC(M2C_FIELD(arg0, s32 *, 0x98));
+s32 func_000004E4(void *arg0, s32 arg1) {
+    func_000007FC(M2C_FIELD(arg0, s32 *, 0x98), arg1);
     return 0;
 }
 
@@ -100,7 +101,10 @@ INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_000022B8);
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00002344);
 
-INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00002364);
+void func_00002364(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0) = 0x2E;
+    M2C_FIELD(arg0, s8 *, 1) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00002374);
 
@@ -154,7 +158,9 @@ INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00003DD4);
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00004024);
 
-INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00004064);
+s32 func_00004064(s32 arg0) {
+    return !(arg0 & 0xF02) ? 0 : 0x8001B004;
+}
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00004078);
 

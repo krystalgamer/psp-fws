@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "display_decls.h"
 
@@ -7,7 +8,12 @@ INCLUDE_RODATA("tmp/asm/282/display/nonmatchings/display", D_00003B94);
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_206276C2);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_7A10289D);
+s32 sceDisplay_driver_7A10289D(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_00003D10);
+    sceKernelReleaseSubIntrHandler(0x1E, 0x12);
+    func_00002A64();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_000009F8);
 

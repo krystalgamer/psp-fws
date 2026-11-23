@@ -4,15 +4,22 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern s32 D_00004640;
 
-s32 func_00000000(M2C_UNK);
-s32 func_000019F0(void);
+s32 KDebugForKernel_24C32559(M2C_UNK);
+s32 func_000022E0(void);
 s32 func_000022EC(void);
 void func_000022F4(void);
-M2C_UNK func_00003FB0();
-s32 module_start(void);
+void func_00003FB0(void);
+s32 func_0000408C(s32 *arg0);
+void sceAta_driver_110D3739(s32 arg0, s32 arg1);
+s32 sceAta_driver_52D9A4CA(s32);
+s32 sceAta_driver_6FC42083(void);
 void sceAta_driver_6FD8E2AB(void);
-M2C_UNK sceAta_driver_CDC50BF0(M2C_UNK);
-M2C_UNK sceSysreg_driver_F5B80837();
+void sceAta_driver_7BBA095C(s32 arg0, M2C_UNK arg1);
+s32 sceAta_driver_9AE67E14(s32 arg0);
+s32 sceAta_driver_DCC8A89E(void);
+void sceKernelCpuResumeIntr(s32);
+s32 sceKernelCpuSuspendIntr(void);
 
 #endif

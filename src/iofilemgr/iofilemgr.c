@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "iofilemgr_decls.h"
 
@@ -103,31 +104,51 @@ INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", syslib_D3744BE0);
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", module_reboot_before);
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoPollAsync);
+s32 sceIoPollAsync(u32 arg0, void *arg1) {
+    return func_00003570((s32) arg0, (s32) arg1, 1, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoWaitAsync);
+s32 sceIoWaitAsync(u32 arg0, void *arg1) {
+    return func_00003570((s32) arg0, (s32) arg1, 0, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoWaitAsyncCB);
+s32 sceIoWaitAsyncCB(u32 arg0, void *arg1) {
+    return func_00003570((s32) arg0, (s32) arg1, 0, 1);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", IoFileMgrForKernel_CB05F8D6);
+void IoFileMgrForKernel_CB05F8D6(s32 arg0, s32 arg1, s32 arg2) {
+    func_00003570(arg0, arg2, arg1, 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoSetAsyncCallback);
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoClose);
+s32 sceIoClose(u32 arg0) {
+    return func_00003748((s32) arg0, 0, 1);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoCloseAsync);
+s32 sceIoCloseAsync(u32 arg0) {
+    return func_00003748((s32) arg0, 1, 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoOpen);
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoOpenAsync);
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoRead);
+s32 sceIoRead(u32 arg0, void *arg1, u32 arg2) {
+    return func_00003AD4((s32) arg0, (s32) arg1, (s32) arg2, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoReadAsync);
+s32 sceIoReadAsync(u32 arg0, void *arg1, u32 arg2) {
+    return func_00003AD4((s32) arg0, (s32) arg1, (s32) arg2, 1);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoWrite);
+s32 sceIoWrite(u32 arg0, void *arg1, u32 arg2) {
+    return func_00003C34((s32) arg0, (s32) arg1, (s32) arg2, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoWriteAsync);
+s32 sceIoWriteAsync(u32 arg0, void *arg1, u32 arg2) {
+    return func_00003C34((s32) arg0, (s32) arg1, (s32) arg2, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoLseek);
 
@@ -141,15 +162,25 @@ INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoIoctl);
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoIoctlAsync);
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoMkdir);
+s32 sceIoMkdir(void *arg0, s32 arg1) {
+    return func_00004114((s32) arg0, arg1, 1);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoRmdir);
+s32 sceIoRmdir(void *arg0) {
+    return func_00004114((s32) arg0, 0, 2);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoChdir);
+s32 sceIoChdir(void *arg0) {
+    return func_00004114((s32) arg0, 0, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoGetstat);
+s32 sceIoGetstat(void *arg0, void *arg1) {
+    return func_00004374((s32) arg0, (s32) arg1, 0, 1);
+}
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoChstat);
+s32 sceIoChstat(void *arg0, void *arg1, u32 arg2) {
+    return func_00004374((s32) arg0, (s32) arg1, (s32) arg2, 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoSync);
 
@@ -167,7 +198,9 @@ s32 IoFileMgrForKernel_BD17474F(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_0000339C);
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_000033DC);
+s32 func_000033DC(void) {
+    return 0x80020328;
+}
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_000033E8);
 

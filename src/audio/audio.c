@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "audio_decls.h"
 
@@ -37,14 +38,16 @@ INCLUDE_ASM("tmp/asm/282/audio/nonmatchings/audio", sceAudioOutput2GetRestSample
 
 INCLUDE_ASM("tmp/asm/282/audio/nonmatchings/audio", sceAudio_E9D97901);
 
-INCLUDE_ASM("tmp/asm/282/audio/nonmatchings/audio", sceAudioOutput2Reserve);
-
-void sceAudioOutput2OutputBlocking(void) {
-    sceAudio_E0727056();
+s32 sceAudioOutput2Reserve(s32 arg0) {
+    return sceAudio_38553111(arg0, 0xAC44, 2);
 }
 
-void sceAudioOutput2Release(void) {
-    sceAudio_5C37C0AE();
+s32 sceAudioOutput2OutputBlocking(s32 arg0, void *arg1) {
+    return sceAudio_E0727056(arg0, (s32) arg1);
+}
+
+s32 sceAudioOutput2Release(void) {
+    return sceAudio_5C37C0AE();
 }
 
 INCLUDE_ASM("tmp/asm/282/audio/nonmatchings/audio", func_00001330);
@@ -87,8 +90,8 @@ INCLUDE_ASM("tmp/asm/282/audio/nonmatchings/audio", sceAudioInputInitEx);
 
 INCLUDE_ASM("tmp/asm/282/audio/nonmatchings/audio", sceAudioInputBlocking);
 
-void sceAudioInput(void) {
-    func_000029D4();
+s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2) {
+    return func_000029D4(arg0, arg1, (s32) arg2);
 }
 
 INCLUDE_ASM("tmp/asm/282/audio/nonmatchings/audio", sceAudioGetInputLength);

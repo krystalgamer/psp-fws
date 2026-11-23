@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "dmacplus_decls.h"
 
@@ -15,7 +16,16 @@ INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", func_00000288);
 
 INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", module_start);
 
-INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", module_reboot_before);
+s32 module_reboot_before(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_00002F40);
+    sceDmacplus_driver_4F1B8D26();
+    sceDmacplus_driver_D1E1567E();
+    sceDmacplus_driver_F7DEC189();
+    sceDmacplus_driver_7AAE5443();
+    sceDmacplus_driver_CDB039A7();
+    InterruptManagerForKernel_F987B1F0(0x15);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_DF32F547);
 
@@ -113,9 +123,13 @@ INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_F7D
 
 INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_D0464B29);
 
-INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_FEE3392C);
+s32 sceDmacplus_driver_FEE3392C(void) {
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_C5B75E09);
+s32 sceDmacplus_driver_C5B75E09(void) {
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", func_00001BD4);
 
@@ -131,9 +145,13 @@ INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_D1E
 
 INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_9393B40D);
 
-INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_6D4F8BD7);
+s32 sceDmacplus_driver_6D4F8BD7(void) {
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_78A55D62);
+s32 sceDmacplus_driver_78A55D62(void) {
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_2D5940FF);
 
@@ -157,7 +175,9 @@ s32 sceDmacplus_driver_410ED0DD(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_97DCBBBF);
+s32 sceDmacplus_driver_97DCBBBF(void) {
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", sceDmacplus_driver_C7D33466);
 

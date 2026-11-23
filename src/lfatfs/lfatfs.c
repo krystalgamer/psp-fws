@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "lfatfs_decls.h"
 
@@ -131,7 +132,9 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00002F6C);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003074);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_000031DC);
+s32 func_000031DC(void) {
+    return 0x80010086;
+}
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_000031E8);
 
@@ -147,23 +150,29 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_000037B4);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003890);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003AA0);
-
-void func_00003ACC(void) {
-    func_000045C8();
+void func_00003AA0(void *arg0) {
+    func_000042D8(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8), M2C_FIELD(arg0, s32 *, 0xC));
 }
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003AE8);
+void func_00003ACC(s32 arg0) {
+    func_000045C8(arg0);
+}
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003B14);
+void func_00003AE8(void *arg0) {
+    func_0000168C(M2C_FIELD(M2C_FIELD(arg0, void **, 0), s32 *, 0x10), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8), 0);
+}
+
+void func_00003B14(void *arg0) {
+    func_0000466C(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8));
+}
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003B3C);
 
-void func_00003B70(void *arg0) {
-    func_00004BA8(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4));
-}
+INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003B70);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003B90);
+void func_00003B90(void *arg0) {
+    func_00004CFC(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8));
+}
 
 void func_00003BB8(void *arg0) {
     func_00005110(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4));
@@ -177,15 +186,17 @@ void func_00003BF8(void *arg0) {
     func_00005470(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4));
 }
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003C18);
+void func_00003C18(void *arg0) {
+    func_000055FC(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8));
+}
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003C40);
+void func_00003C40(void *arg0) {
+    func_00005708(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8), M2C_FIELD(arg0, s32 *, 0xC));
+}
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003C6C);
 
-void func_00003CA0(void *arg0) {
-    func_00006600(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4));
-}
+INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003CA0);
 
 INCLUDE_RODATA("tmp/asm/282/lfatfs/nonmatchings/lfatfs", D_0000D218);
 
@@ -281,7 +292,9 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00008504);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000860C);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00008718);
+s32 func_00008718(void *arg0) {
+    return (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
+}
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000872C);
 
@@ -411,9 +424,13 @@ INCLUDE_RODATA("tmp/asm/282/lfatfs/nonmatchings/lfatfs", D_0000E100);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A2D4);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A320);
+s32 func_0000A320(void) {
+    return 0x80010086;
+}
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A32C);
+s32 func_0000A32C(void) {
+    return 0x80010086;
+}
 
 INCLUDE_RODATA("tmp/asm/282/lfatfs/nonmatchings/lfatfs", D_0000E130);
 
@@ -435,11 +452,17 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A494);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A4C8);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A4FC);
+s32 func_0000A4FC(void) {
+    return 0x80010086;
+}
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A508);
+s32 func_0000A508(void) {
+    return 0x80010086;
+}
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A514);
+s32 func_0000A514(void) {
+    return 0x80010086;
+}
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A520);
 

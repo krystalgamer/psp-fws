@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "emc_ddr_decls.h"
 
@@ -13,7 +14,9 @@ s32 sceDdr_driver_17D39E17(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/emc_ddr/nonmatchings/emc_ddr", sceDdr_driver_8698F5DA);
+s32 sceDdr_driver_8698F5DA(void) {
+    return 0;
+}
 
 s32 sceDdr_driver_623A233F(void) {
     return 0;

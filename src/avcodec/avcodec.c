@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "avcodec_decls.h"
 
@@ -103,11 +104,15 @@ INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", sceJpegGetOutputInfo);
 
 INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", sceJpeg_0425B986);
 
-INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", sceJpegCsc);
+s32 sceJpegCsc(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
+    return 0x80000003;
+}
 
 INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", sceJpegDecodeMJpegYCbCr);
 
-INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", sceJpeg_9B36444C);
+s32 sceJpeg_9B36444C(void) {
+    return 0x80000003;
+}
 
 INCLUDE_RODATA("tmp/asm/282/avcodec/nonmatchings/avcodec", D_00004078);
 
@@ -119,7 +124,10 @@ INCLUDE_RODATA("tmp/asm/282/avcodec/nonmatchings/avcodec", D_000040C4);
 
 INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", func_00002A38);
 
-INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", func_00002A88);
+s32 func_00002A88(void) {
+    sceKernelDeleteSema(D_00004140);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", func_00002AB0);
 

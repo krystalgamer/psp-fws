@@ -1,7 +1,10 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "impose_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", func_00000000);
+void func_00000000(u32 arg0) {
+    sceKernelSetEventFlag(*D_0000F510, arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", func_00000028);
 
@@ -121,9 +124,17 @@ INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", func_00001F2C);
 
 INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", func_00001FB0);
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceImpose_driver_1B6E3400);
+s32 sceImpose_driver_1B6E3400(void) {
+    return M2C_FIELD(D_0000F510, s32 *, 0x80);
+}
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceImpose_driver_B415FC59);
+s32 sceImpose_driver_B415FC59(void) {
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(D_0000F510, s32 *, 0x98);
+    M2C_FIELD(D_0000F510, s32 *, 0x98) = 0;
+    return temp_v0;
+}
 
 s32 sceImpose_driver_5595A71A(s32 arg0) {
     func_000047EC(arg0 ^ 1, 1);
@@ -143,27 +154,45 @@ INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceImpose_driver_381BD9E7)
 
 INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceImpose_driver_9DBCE0C4);
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceImpose_driver_7084E72C);
+s32 sceImpose_driver_7084E72C(void) {
+    return M2C_FIELD(D_0000F510, s32 *, 0x78);
+}
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceImpose_9BA61B49);
+s32 sceImpose_9BA61B49(void) {
+    return M2C_FIELD(D_0000F510, s32 *, 0x7C);
+}
 
 INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", module_start);
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", syslib_ADF12745);
+s32 syslib_ADF12745(s32 arg0) {
+    if (arg0 != 2) {
+
+    } else {
+        if (M2C_FIELD(D_0000F510, s32 *, 0x80) < 0) {
+            sceDisplaySetHoldMode(arg0);
+        }
+        sceImpose_driver_C7E36CC7();
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceImpose_driver_86924032);
 
-void sceAudioRoutingSetMode(void) {
-    func_000048AC();
+s32 sceAudioRoutingSetMode(s32 arg0) {
+    return func_000048AC(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceAudioRoutingGetMode);
-
-void sceAudioRoutingSetVolumeMode(void) {
-    func_00004954();
+s32 sceAudioRoutingGetMode(void) {
+    return M2C_FIELD(D_0000F510, s32 *, 0x4C);
 }
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceAudioRoutingGetVolumeMode);
+s32 sceAudioRoutingSetVolumeMode(s32 arg0) {
+    return func_00004954(arg0);
+}
+
+s32 sceAudioRoutingGetVolumeMode(void) {
+    return M2C_FIELD(D_0000F510, s32 *, 0x6C);
+}
 
 INCLUDE_RODATA("tmp/asm/282/impose/nonmatchings/impose", D_0000F36C);
 
@@ -177,9 +206,31 @@ INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", func_00002B0C);
 
 INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", func_00002C5C);
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", func_00002DC0);
+void func_00002DC0(s32 arg0) {
+    if ((M2C_FIELD(D_0000F510, s32 *, 0x80) != 0) && !(arg0 & 0x20000) && (M2C_FIELD(D_0000F510, s32 *, 0x6C) == 0)) {
+        if (arg0 & 0x100000) {
+            M2C_FIELD(D_0000F510, s32 *, 0xA0) = (s32) (M2C_FIELD(D_0000F510, s32 *, 0xA0) | 0x100000);
+        }
+        if (arg0 & 0x200000) {
+            M2C_FIELD(D_0000F510, s32 *, 0xA8) = 0;
+            M2C_FIELD(D_0000F510, s32 *, 0xA0) = (s32) (M2C_FIELD(D_0000F510, s32 *, 0xA0) | 0x200000);
+        }
+        M2C_FIELD(D_0000F510, s32 *, 0xF0) = 0;
+    }
+}
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", func_00002E2C);
+void func_00002E2C(s32 arg0) {
+    if (arg0 & 0x80000) {
+        M2C_FIELD(D_0000F510, s32 *, 0x48) = 1;
+    } else {
+        M2C_FIELD(D_0000F510, s32 *, 0x48) = 0;
+    }
+    if (M2C_FIELD(D_0000F510, s32 *, 0x9C) != 0) {
+
+    } else {
+        func_00000000(0x20U);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", func_00002E88);
 

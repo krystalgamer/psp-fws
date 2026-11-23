@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "i2c_decls.h"
 
@@ -31,7 +32,12 @@ INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_DB6C4F9B);
 
 INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_0397408B);
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_17B0DA59);
+s32 sceI2c_driver_17B0DA59(void) {
+    *(s32 *)0xBE200020 = 1;
+    sceKernelDelayThread(0x64U);
+    *(s32 *)0xBE200020 = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", func_00001264);
 

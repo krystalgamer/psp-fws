@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "gpio_decls.h"
 
@@ -17,7 +18,11 @@ INCLUDE_ASM("tmp/asm/282/gpio/nonmatchings/gpio", sceGpio_driver_F856CE46);
 
 INCLUDE_ASM("tmp/asm/282/gpio/nonmatchings/gpio", module_start);
 
-INCLUDE_ASM("tmp/asm/282/gpio/nonmatchings/gpio", module_reboot_before);
+s32 module_reboot_before(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_00000E40);
+    InterruptManagerForKernel_F987B1F0(4);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/gpio/nonmatchings/gpio", sceGpio_driver_EABDB328);
 

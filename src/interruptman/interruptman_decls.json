@@ -1,8 +1,14 @@
 {
  "funcs": {
+  "InterruptManagerForKernel_00B6B0F3": "M2C_UNK *InterruptManagerForKernel_00B6B0F3(void);",
+  "InterruptManagerForKernel_750E2507": "s32 InterruptManagerForKernel_750E2507(s32, s32);",
+  "InterruptManagerForKernel_D774BA45": "void InterruptManagerForKernel_D774BA45(s32 arg0);",
+  "InterruptManager_D2E8363F": "s32 InterruptManager_D2E8363F(void);",
   "func_000030AC": "s32 func_000030AC(s32 arg0);",
   "func_000030B4": "s32 func_000030B4(void);",
   "func_0000340C": "s32 func_0000340C(s32 arg0);"
  },
- "vars": {}
+ "vars": {
+  "D_00003E00": "extern M2C_UNK D_00003E00;"
+ }
 }

@@ -4,15 +4,29 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern u32 *D_0000F510;
 
+void func_00000000(u32 arg0);
 s32 func_0000070C(void);
-M2C_UNK func_000025F0(M2C_UNK);
-M2C_UNK func_000047EC(s32, M2C_UNK);
-M2C_UNK func_000048AC();
-M2C_UNK func_00004954();
-void sceAudioRoutingSetMode(void);
-void sceAudioRoutingSetVolumeMode(void);
+s32 func_000025F0(s32);
+void func_00002DC0(s32 arg0);
+void func_00002E2C(s32 arg0);
+s32 func_000047EC(s32, s32);
+s32 func_000048AC(s32);
+s32 func_00004954(s32);
+s32 sceAudioRoutingGetMode(void);
+s32 sceAudioRoutingGetVolumeMode(void);
+s32 sceAudioRoutingSetMode(s32 arg0);
+s32 sceAudioRoutingSetVolumeMode(s32 arg0);
+s32 sceDisplaySetHoldMode(s32);
 s32 sceImposeSetUMDPopup(s32 arg0);
+s32 sceImpose_9BA61B49(void);
+s32 sceImpose_driver_1B6E3400(void);
 s32 sceImpose_driver_5595A71A(s32 arg0);
+s32 sceImpose_driver_7084E72C(void);
+s32 sceImpose_driver_B415FC59(void);
+s32 sceImpose_driver_C7E36CC7(void);
+s32 sceKernelSetEventFlag(u32, u32);
+s32 syslib_ADF12745(s32 arg0);
 
 #endif
