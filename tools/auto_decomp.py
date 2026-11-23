@@ -58,22 +58,44 @@ class Module:
             if m:
                 self.relocs[int(m[1], 16)] = "16" if m[2] in ("HI16", "LO16") else m[2]
         self.funcs = self._func_ranges()
-        m = re.search(r"compiler: ([0-9.]+)", self.src.read_text()) if self.src.exists() else None
-        self.compiler = m[1] if m else "1.7.1"
-        m = re.search(r"cflags: (-O[0-3s](?: -f[\w-]+)*)", self.src.read_text()) if self.src.exists() else None
-        self.setting = f"{self.compiler} {m[1] if m else '-O2'}"
+        # A module may be split into several translation units (src/<mod>/*.c),
+        # each with its own `compiler:`/`cflags:` header comment.
+        self.files = [self.src] + sorted(f for f in (ROOT / "src" / mod).glob("*.c") if f != self.src)
+        self.compiler, self.setting = self.file_setting(self.src)
         self.stats = {}
         self.scores = {}
         # Functions already defined in the source fix their own prototypes.
-        if self.src.exists():
-            for m in re.finditer(r"^((?!static)[\w \*]+?\b(\w+)\([^;{]*\))\s*\{", self.src.read_text(), re.M):
-                if m[2] not in self.store["funcs"] and not m[2].startswith("__"):
-                    self.store["funcs"][m[2]] = m[1].strip() + ";"
+        for f in self.files:
+            if f.exists():
+                for m in re.finditer(r"^((?!static)[\w \*]+?\b(\w+)\([^;{]*\))\s*\{", f.read_text(), re.M):
+                    if m[2] not in self.store["funcs"] and not m[2].startswith("__"):
+                        self.store["funcs"][m[2]] = m[1].strip() + ";"
+
+    @staticmethod
+    def file_setting(path):
+        text = path.read_text() if path.exists() else ""
+        m = re.search(r"compiler: ([0-9.]+)", text)
+        compiler = m[1] if m else "1.7.1"
+        m = re.search(r"cflags: (-O[0-3s](?: -f[\w-]+)*)", text)
+        return compiler, f"{compiler} {m[1] if m else '-O2'}"
+
+    def all_text(self):
+        return "\n".join(f.read_text() for f in self.files if f.exists())
+
+    def file_of(self, name):
+        for f in self.files:
+            t = f.read_text()
+            if f", {name});" in t or re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{$", t, re.M):
+                return f
+        return self.src
+
+    def folder(self, path):
+        return f"tmp/asm/{self.ver}/{self.mod}/nonmatchings/{path.stem}"
 
     def _func_ranges(self):
-        asm = (ROOT / "tmp/asm" / self.ver / self.mod / "nonmatchings" / self.mod)
+        asm = (ROOT / "tmp/asm" / self.ver / self.mod / "nonmatchings")
         out = {}
-        for p in asm.glob("*.s"):
+        for p in asm.glob("*/*.s"):
             t = p.read_text()
             if f"glabel {p.stem}" not in t or f"endlabel {p.stem}" not in t:
                 continue
@@ -249,7 +271,7 @@ def _try_func(mod, name, header_ctx, target, seen):
         if k in mod.store["funcs"] and mod.store["funcs"][k] != v:
             # a function may replace its own (stale) prototype only if no C
             # code already calls it under the old one
-            if k != name or re.search(rf"^(?!INCLUDE_ASM).*\b{k}\(", mod.src.read_text(), re.M):
+            if k != name or re.search(rf"^(?!INCLUDE_ASM).*\b{k}\(", mod.all_text(), re.M):
                 return None
     for k, v in new_vars.items():
         if k in mod.store["vars"] and mod.store["vars"][k] != v:
@@ -259,7 +281,8 @@ def _try_func(mod, name, header_ctx, target, seen):
     target = mod.target_words(name)
     matching = set()
     best = None
-    for setting in [f"{mod.compiler} {o}" for o in OPTS]:
+    compiler, own_setting = Module.file_setting(mod.file_of(name))
+    for setting in [f"{compiler} {o}" for o in OPTS]:
         comp, opt = setting.split(" ", 1)
         words, err = compile_words(text, comp, opt)
         if words is None:
@@ -275,7 +298,7 @@ def _try_func(mod, name, header_ctx, target, seen):
         mod.scores[name] = (best, len(target))
     elif not prev:
         mod.scores[name] = (best, len(target))
-    if mod.setting not in matching:
+    if own_setting not in matching:
         return None
     return new_funcs, new_vars, sig, body
 
@@ -292,10 +315,14 @@ def main():
     args = ap.parse_args()
 
     mod = Module(args.version, args.module)
-    src = mod.src.read_text()
-    if f'#include "{args.module}_decls.h"' not in src:
-        src = src.replace('#include "common.h"\n', f'#include "common.h"\n#include "{args.module}_decls.h"\n', 1)
-    names = [m[2] for m in INC.finditer(src)]
+    srcs = {}
+    for f in mod.files:
+        s = f.read_text()
+        if f'#include "{args.module}_decls.h"' not in s:
+            s = s.replace('#include "common.h"\n', f'#include "common.h"\n#include "{args.module}_decls.h"\n', 1)
+        srcs[f] = s
+    owner = {m[2]: f for f, s in srcs.items() for m in INC.finditer(s)}
+    names = list(owner)
     names = [n for n in names if n in mod.funcs and mod.funcs[n][1] - mod.funcs[n][0] <= args.max_size]
     if args.only:
         names = [n for n in names if n == args.only]
@@ -320,8 +347,9 @@ def main():
             mod.store["funcs"].update(new_funcs)
             mod.store["funcs"][name] = sig
             mod.store["vars"].update(new_vars)
-            src = re.sub(rf'^INCLUDE_ASM\("[^"]+", {name}\);\n', lambda _: body, src, count=1, flags=re.M)
-            mod.src.write_text(src)
+            f = owner[name]
+            srcs[f] = re.sub(rf'^INCLUDE_ASM\("[^"]+", {name}\);\n', lambda _: body, srcs[f], count=1, flags=re.M)
+            f.write_text(srcs[f])
             mod.write_decls()
             matched += 1
             accepted_now.append(name)
@@ -340,14 +368,13 @@ def main():
 
 
 def revert(mod, args, names):
-    src = mod.src.read_text()
-    folder = f"tmp/asm/{args.version}/{args.module}/nonmatchings/{args.module}"
     for name in names:
+        f = mod.file_of(name)
+        src = f.read_text()
         m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", src, re.M | re.S)
         if m:
-            src = src.replace(m.group(0), f'INCLUDE_ASM("{folder}", {name});\n', 1)
+            f.write_text(src.replace(m.group(0), f'INCLUDE_ASM("{mod.folder(f)}", {name});\n', 1))
         mod.store["funcs"].pop(name, None)
-    mod.src.write_text(src)
     mod.write_decls()
 
 
@@ -360,7 +387,7 @@ def verify_and_revert(mod, args, accepted_now=()):
     _verify_functions(mod, args)
     if full_build_ok(args):
         return
-    src = mod.src.read_text()
+    src = mod.all_text()
     strings = [n for n in accepted_now if re.search(rf"\b{n}\([^;{{]*\)\s*{{\n(?:(?!^}}).)*\"", src, re.M | re.S)]
     if strings:
         revert(mod, args, strings)
@@ -395,11 +422,10 @@ def _verify_functions(mod, args, max_rounds=200):
     """
     accepted = sorted(set(mod.store["funcs"]) & set(mod.funcs))
     built_path = ROOT / "tmp/build" / args.version / f"{args.module}.prx"
-    folder = f"tmp/asm/{args.version}/{args.module}/nonmatchings/{args.module}"
     for rnd in range(max_rounds):
         subprocess.run(["make", f"VERSION={args.version}", f"MODULE={args.module}"], cwd=ROOT, capture_output=True)
         built = built_path.read_bytes() if built_path.exists() else b""
-        src = mod.src.read_text()
+        src = mod.all_text()
         if built == mod.base:
             print("full build verified")
             return
@@ -414,11 +440,12 @@ def _verify_functions(mod, args, max_rounds=200):
             print("full build differs outside accepted functions")
             return
         for name in names:
-            m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", src, re.M | re.S)
-            src = src.replace(m.group(0), f'INCLUDE_ASM("{folder}", {name});\n', 1)
+            f = mod.file_of(name)
+            text = f.read_text()
+            m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", text, re.M | re.S)
+            f.write_text(text.replace(m.group(0), f'INCLUDE_ASM("{mod.folder(f)}", {name});\n', 1))
             del mod.store["funcs"][name]
             print(f"reverted {name} (differs in full build)")
-        mod.src.write_text(src)
         mod.write_decls()
     print("verification gave up")
 
