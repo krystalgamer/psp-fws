@@ -16,7 +16,22 @@ INCLUDE_RODATA("tmp/asm/282/lfatfs/nonmatchings/lfatfs", D_0000CA38);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_000004C4);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00000584);
+s32 func_00000584(s32 arg0) {
+    s32 temp_v0;
+
+    if (arg0 != 0x200) {
+
+    } else {
+        temp_v0 = sceKernelWaitSema(D_0000EB24, 1, NULL);
+        if (temp_v0 != 0) {
+            KDebugForKernel_84F370BC("lfatfs.c:%s:sceKernelWaitSema -> 0x%08x\n", "_sceLfatfsSysEventHandler", temp_v0);
+        } else {
+            func_000004C4();
+            sceKernelSignalSema(D_0000EB24, 1);
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00000604);
 
@@ -72,7 +87,31 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000168C);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_000018E4);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00001980);
+s32 func_00001980(void *arg0) {
+    void **temp_v0;
+    void *temp_a1;
+    void *temp_a2;
+
+    if (arg0 != NULL) {
+        temp_a2 = M2C_FIELD(arg0, void **, 8);
+        temp_a1 = M2C_FIELD(arg0, void **, 0);
+        M2C_FIELD(temp_a2, s32 *, 8) = (s32) (M2C_FIELD(temp_a2, s32 *, 8) - 1);
+        if (temp_a1 != NULL) {
+            M2C_FIELD(temp_a1, void ***, 4) = (void **) M2C_FIELD(arg0, void ***, 4);
+        } else {
+            D_0000EDB0 = M2C_FIELD(arg0, void ***, 4);
+        }
+        temp_v0 = M2C_FIELD(arg0, void ***, 4);
+        if (temp_v0 == NULL) {
+            D_0000EDAC = temp_a1;
+        } else {
+            *temp_v0 = temp_a1;
+        }
+        M2C_FIELD(arg0, void **, 0) = (void *) D_0000EDB4;
+        D_0000EDB4 = arg0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_000019E8);
 
@@ -114,7 +153,29 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000265C);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00002774);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000286C);
+s32 func_0000286C(void *arg0) {
+    s32 temp_s0;
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_s0 = D_0000EB24;
+    sceKernelPowerLock(0);
+    temp_v0 = sceKernelWaitSema(temp_s0, 1, NULL);
+    if (temp_v0 != 0) {
+        KDebugForKernel_84F370BC(&D_0000CF6C, &D_0000CF5C, temp_v0);
+        sceKernelPowerUnlock(0);
+        KDebugForKernel_84F370BC(&D_0000CF9C, "UFatDclose", temp_v0);
+        var_v0 = 0x80010005;
+    } else {
+        func_00009F04();
+        func_00001980(M2C_FIELD(arg0, void **, 0x10));
+        func_00009F04();
+        sceKernelSignalSema(D_0000EB24, 1);
+        sceKernelPowerUnlock(0);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000293C);
 
@@ -400,7 +461,10 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00009EBC);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00009F04);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00009F74);
+s32 func_00009F74(void) {
+    IoFileMgrForKernel_8E982A74(&D_0000DA50);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00009F98);
 
@@ -440,9 +504,15 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A36C);
 
 INCLUDE_RODATA("tmp/asm/282/lfatfs/nonmatchings/lfatfs", D_0000E160);
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A3A0);
+s32 func_0000A3A0(void *arg0) {
+    KDebugForKernel_84F370BC(&D_0000E160, "df_dclose", **M2C_FIELD(arg0, s32 ***, 8));
+    return 0x80010086;
+}
 
-INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A3DC);
+s32 func_0000A3DC(void *arg0) {
+    KDebugForKernel_84F370BC(&D_0000E160, "df_dread", **M2C_FIELD(arg0, s32 ***, 8));
+    return 0x80010086;
+}
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A418);
 

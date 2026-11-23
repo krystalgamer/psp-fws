@@ -110,7 +110,22 @@ INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbBus_driver_C5E53685);
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00002E80);
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", module_start);
+s32 module_start(void) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_v0 = sceKernelCreateSema(&D_00009A3C, 1U, 1, 1, NULL);
+    if (temp_v0 >= 0) {
+        D_0000AFB0 = temp_v0;
+        func_00005CC0();
+        func_00008A30();
+        var_v0 = 0;
+    } else {
+        KDebugForKernel_84F370BC("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
+        var_v0 = 1;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00002F64);
 
@@ -240,9 +255,29 @@ INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00007414);
 
 INCLUDE_RODATA("tmp/asm/282/usb/nonmatchings/usb", D_0000A3E4);
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_000074B4);
+s32 func_000074B4(void) {
+    s32 temp_v0;
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00007504);
+    temp_v0 = sceSysEventForKernel_CD9E4BB5(&D_0000B014);
+    if (temp_v0 >= 0) {
+
+    } else {
+        KDebugForKernel_84F370BC("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
+    }
+    return temp_v0;
+}
+
+s32 func_00007504(void) {
+    s32 temp_v0;
+
+    temp_v0 = sceSysEventForKernel_D7D3FDCD(&D_0000B014);
+    if (temp_v0 >= 0) {
+
+    } else {
+        KDebugForKernel_84F370BC("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
+    }
+    return temp_v0;
+}
 
 s32 func_00007554(s32 arg0) {
     switch (arg0) {                                 /* irregular */
@@ -335,21 +370,38 @@ INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008634);
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_000088B0);
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008A30);
+s32 func_00008A30(void) {
+    D_0000B440 = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008A40);
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbBus_driver_FBA2072B);
+void sceUsbBus_driver_FBA2072B(void) {
+    if (D_0000B444 != 0) {
+        D_0000B44C = 1;
+    }
+}
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbBus_driver_8A3EB5D2);
+s32 sceUsbBus_driver_8A3EB5D2(void) {
+    return D_0000B44C;
+}
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008AA8);
+void func_00008AA8(void) {
+    D_0000B44C = 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbBus_driver_90B82F55);
+void sceUsbBus_driver_90B82F55(void) {
+    D_0000B444 = 1;
+}
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbBus_driver_7B87815D);
+void sceUsbBus_driver_7B87815D(void) {
+    D_0000B444 = 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbBus_driver_48CCE3C1);
+s32 sceUsbBus_driver_48CCE3C1(void) {
+    return D_0000B448;
+}
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008ADC);
 
@@ -357,7 +409,17 @@ INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008B28);
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008B70);
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008BD8);
+s32 func_00008BD8(void) {
+    s32 temp_v0;
+
+    temp_v0 = sceGpio_driver_317D9D2C(0x17, 2);
+    if (temp_v0 >= 0) {
+
+    } else {
+        KDebugForKernel_84F370BC("usbbd ERROR : cannot finalize GPIO for USB host power supply : 0x%08x\n", temp_v0);
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008C28);
 
@@ -365,4 +427,12 @@ INCLUDE_RODATA("tmp/asm/282/usb/nonmatchings/usb", D_0000ADD4);
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008CB4);
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008D38);
+s32 func_00008D38(s32 arg0) {
+    s32 var_v0;
+
+    var_v0 = 0x251;
+    if ((D_0000B450 == 0) || !(D_0000B450 & 1)) {
+        var_v0 = arg0;
+    }
+    return var_v0;
+}

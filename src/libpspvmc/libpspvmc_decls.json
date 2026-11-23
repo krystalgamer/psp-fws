@@ -2,17 +2,26 @@
  "funcs": {
   "func_00000AD0": "s32 func_00000AD0(void);",
   "func_00000B18": "s32 func_00000B18(s32 arg0, M2C_UNK arg1);",
+  "func_00000B40": "s32 func_00000B40(s32 arg0, s32 arg1);",
   "func_00000B88": "s32 func_00000B88(s32 arg0, M2C_UNK arg1);",
+  "func_00000BB0": "s32 func_00000BB0(s32, s32, s32);",
   "func_00000C70": "s32 func_00000C70(void);",
   "func_00000C90": "M2C_UNK func_00000C90(M2C_UNK, s32);",
   "func_00000DC8": "s32 func_00000DC8(void);",
   "func_00000DD0": "s32 func_00000DD0(void);",
   "func_00001410": "M2C_UNK func_00001410();",
   "func_00001420": "M2C_UNK func_00001420(M2C_UNK, s32);",
+  "func_00001430": "M2C_UNK *func_00001430(void);",
   "func_0000155C": "s32 func_0000155C(void);",
   "func_00002B6C": "s32 func_00002B6C(u8 *arg0, s32 arg1);",
   "func_00002B94": "void func_00002B94(s32 *arg0, s32 arg1, s32 arg2);",
+  "func_00003730": "s32 func_00003730(void);",
+  "func_000055B0": "M2C_UNK *func_000055B0(s32 arg0);",
   "func_000066D8": "M2C_UNK func_000066D8();"
  },
- "vars": {}
+ "vars": {
+  "D_0000FC80": "extern M2C_UNK D_0000FC80;",
+  "D_00010B14": "extern M2C_UNK D_00010B14;",
+  "D_00010C20": "extern s32 D_00010C20;"
+ }
 }

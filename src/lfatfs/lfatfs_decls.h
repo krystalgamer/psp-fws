@@ -4,8 +4,23 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern s32 D_0000CF5C;
+extern s32 D_0000CF6C;
+extern s32 D_0000CF9C;
+extern M2C_UNK D_0000DA50;
+extern s32 D_0000E160;
+extern s32 D_0000EB24;
+extern void *D_0000EDAC;
+extern void **D_0000EDB0;
+extern void *D_0000EDB4;
 
+M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);
+M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
+s32 func_000004C4(void);
+s32 func_00000584(s32 arg0);
 s32 func_0000168C(s32, s32, s32, s32);
+s32 func_00001980(void *arg0);
+s32 func_0000286C(void *arg0);
 s32 func_000031DC(void);
 void func_00003AA0(void *arg0);
 void func_00003ACC(s32 arg0);
@@ -29,11 +44,19 @@ s32 func_00005708(s32, s32, s32, s32);
 s32 func_00008718(void *arg0);
 void func_00009D0C(void);
 void func_00009D14(void);
+s32 func_00009F04(void);
+s32 func_00009F74(void);
 s32 func_0000A320(void);
 s32 func_0000A32C(void);
+s32 func_0000A3A0(void *arg0);
+s32 func_0000A3DC(void *arg0);
 s32 func_0000A4FC(void);
 s32 func_0000A508(void);
 s32 func_0000A514(void);
+s32 sceKernelPowerLock(s32);
+s32 sceKernelPowerUnlock(s32);
+s32 sceKernelSignalSema(s32, s32);
+s32 sceKernelWaitSema(s32, s32, void *);
 s32 sceLFatFs_driver_8F0560E0(void);
 
 #endif

@@ -230,9 +230,21 @@ void sceMSstor_driver_6FC1E8AE(void) {
     sceMSstor_driver_714782D6(0);
 }
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_000049E4);
+s32 func_000049E4(void) {
+    s32 temp_s1;
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00004A48);
+    temp_s1 = sceMScm_driver_12BD8FEC(0, &D_000098DC);
+    bzero(&D_00009B54, 0x4E94);
+    M2C_FIELD(&D_00009B54, s32 *, 0x4E88) = 0x1F4;
+    func_000077A0(&D_00009B54, 1);
+    return temp_s1;
+}
+
+s32 func_00004A48(void) {
+    IoFileMgrForKernel_C7F35804(&D_00009264);
+    IoFileMgrForKernel_C7F35804(&D_00009248);
+    return 0;
+}
 
 INCLUDE_RODATA("tmp/asm/201/msstor/nonmatchings/msstor", D_00009248);
 
@@ -250,9 +262,27 @@ INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", module_reboot_before);
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00004D14);
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00004E2C);
+s32 func_00004E2C(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 4) = &D_000099D4;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00004E40);
+s32 func_00004E40(void) {
+    if (M2C_FIELD(&D_000099D4, s32 *, 0) > 0) {
+        sceKernelDeleteSema(M2C_FIELD(&D_000099D4, s32 *, 0));
+    }
+    if (M2C_FIELD(&D_000099D4, s32 *, 0x18) > 0) {
+        sceKernelTerminateDeleteThread(M2C_FIELD(&D_000099D4, s32 *, 0x18));
+    }
+    if (M2C_FIELD(&D_000099D4, s32 *, 0x28) > 0) {
+        sceKernelTerminateDeleteThread(M2C_FIELD(&D_000099D4, s32 *, 0x28));
+    }
+    if (M2C_FIELD(&D_000099D4, s32 *, 0x24) > 0) {
+        sceKernelDeleteEventFlag(M2C_FIELD(&D_000099D4, s32 *, 0x24));
+    }
+    M2C_FIELD(&D_000099D4, s32 *, 0) = -1;
+    return 0;
+}
 
 s32 func_00004EC8(void) {
     return 0;

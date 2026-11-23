@@ -10,9 +10,29 @@ INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00000108);
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_000001B4);
 
-INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00000214);
+s32 func_00000214(u8 *arg0) {
+    s32 var_a1;
 
-INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00000244);
+    var_a1 = -3;
+    if (D_0000BBD0 == 0) {
+        D_0000BBD4 = (s32) *arg0;
+        var_a1 = 0;
+        D_0000BBD0 = 1;
+    }
+    return var_a1;
+}
+
+s32 func_00000244(void) {
+    s32 var_v1;
+
+    var_v1 = -2;
+    if (D_0000BBD0 != 0) {
+        D_0000BBD4 = -1;
+        var_v1 = 0;
+        D_0000BBD0 = 0;
+    }
+    return var_v1;
+}
 
 INCLUDE_RODATA("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", D_0000AFA4);
 
@@ -218,9 +238,27 @@ INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00003A04);
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00003CBC);
 
-INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00004204);
+s32 func_00004204(void *arg0, s32 *arg1) {
+    s32 temp_a5;
+    u8 temp_a3;
 
-INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00004254);
+    temp_a5 = ((u32) ((M2C_FIELD(arg0, u16 *, 0x1E8) * M2C_FIELD(arg0, s32 *, 0x1E4)) + 7) >> 3) * 2;
+    *arg1 = temp_a5;
+    temp_a3 = M2C_FIELD(arg0, u8 *, 0x1EA);
+    *arg1 = ((s32) ((temp_a5 + temp_a3) - 1) / (s32) temp_a3) * temp_a3;
+    return 0;
+}
+
+s32 func_00004254(void *arg0, s32 *arg1) {
+    s32 temp_a5;
+    u8 temp_a3;
+
+    temp_a5 = ((u32) ((M2C_FIELD(arg0, u16 *, 0x1F0) * M2C_FIELD(arg0, s32 *, 0x1EC)) + 7) >> 3) * 2;
+    *arg1 = temp_a5;
+    temp_a3 = M2C_FIELD(arg0, u8 *, 0x1F2);
+    *arg1 = ((s32) ((temp_a5 + temp_a3) - 1) / (s32) temp_a3) * temp_a3;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_000042A4);
 

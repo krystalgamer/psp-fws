@@ -1,9 +1,21 @@
 {
  "funcs": {
+  "KDebugForKernel_84F370BC": "M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);",
   "func_000039E8": "void func_000039E8(void);",
+  "func_000039F0": "void func_000039F0(void *arg0);",
+  "func_00008E1C": "s32 func_00008E1C(void);",
+  "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
+  "sceUsbBus_driver_C1E2A540": "s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);",
+  "sceUsbCamGetAutoImageReverseState": "s32 sceUsbCamGetAutoImageReverseState(void);",
   "sceUsbCamGetContrast": "s32 sceUsbCamGetContrast(void *arg0);",
   "sceUsbCamGetImageEffectMode": "s32 sceUsbCamGetImageEffectMode(void *arg0);",
   "sceUsbCam_driver_1E958148": "s32 sceUsbCam_driver_1E958148(s32, s32);"
  },
- "vars": {}
+ "vars": {
+  "D_0000A658": "extern M2C_UNK D_0000A658;",
+  "D_0000B454": "extern s32 D_0000B454;",
+  "D_0000BA80": "extern M2C_UNK D_0000BA80;",
+  "D_0000BC1C": "extern s32 D_0000BC1C;",
+  "D_0000BDB8": "extern s32 D_0000BDB8;"
+ }
 }

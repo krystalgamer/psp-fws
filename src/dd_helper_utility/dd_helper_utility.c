@@ -58,19 +58,37 @@ INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_000005BC);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_000005D4);
+void func_000005D4(M2C_UNK **arg0) {
+    *arg0 = &D_000047C8;
+}
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_000005E4);
+void func_000005E4(M2C_UNK **arg0) {
+    *arg0 = &D_000047C8;
+}
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_000005F4);
+void func_000005F4(M2C_UNK **arg0) {
+    *arg0 = &D_000047C8;
+    scePaf_4E67BB08();
+}
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_0000061C);
 
 INCLUDE_RODATA("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", D_00004770);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_0000063C);
+void func_0000063C(void) {
+    void *temp_v0;
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00000674);
+    temp_v0 = scePaf_D4FAE7D0("htmlviewer_plugin");
+    if (temp_v0 != NULL) {
+        scePaf_5EBC648F(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1B8));
+    }
+    sceHtmlViewerHelper_05E0C3D4(0);
+}
+
+void func_00000674(void *arg0) {
+    sceHtmlViewerHelper_05E0C3D4(1);
+    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4), &D_00004770);
+}
 
 void func_000006AC(void *arg0) {
     sceHtmlViewerHelper_F27998C2(M2C_FIELD(arg0, s32 *, 8));

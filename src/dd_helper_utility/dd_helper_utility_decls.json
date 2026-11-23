@@ -5,6 +5,11 @@
   "func_000004C0": "M2C_UNK func_000004C0(M2C_UNK);",
   "func_00000550": "void func_00000550(void);",
   "func_00000558": "void func_00000558(void);",
+  "func_000005D4": "void func_000005D4(M2C_UNK **arg0);",
+  "func_000005E4": "void func_000005E4(M2C_UNK **arg0);",
+  "func_000005F4": "void func_000005F4(M2C_UNK **arg0);",
+  "func_0000063C": "void func_0000063C(void);",
+  "func_00000674": "void func_00000674(void *arg0);",
   "func_000006AC": "void func_000006AC(void *arg0);",
   "func_000006C8": "M2C_UNK func_000006C8(M2C_UNK, M2C_UNK);",
   "func_00000750": "void func_00000750(void);",
@@ -39,13 +44,21 @@
   "func_00004100": "M2C_UNK func_00004100();",
   "module_stop": "s32 module_stop(void);",
   "sceCccUTF8toUTF16": "M2C_UNK sceCccUTF8toUTF16(s32, s32, s32);",
+  "sceHtmlViewerHelper_05E0C3D4": "M2C_UNK sceHtmlViewerHelper_05E0C3D4(M2C_UNK);",
   "sceHtmlViewerHelper_F27998C2": "M2C_UNK sceHtmlViewerHelper_F27998C2(s32);",
   "scePaf_49A81B18": "M2C_UNK scePaf_49A81B18(s32, s32, s32, M2C_UNK);",
+  "scePaf_4E67BB08": "M2C_UNK scePaf_4E67BB08();",
   "scePaf_545FE2DA": "M2C_UNK scePaf_545FE2DA(s32);",
+  "scePaf_5EBC648F": "M2C_UNK scePaf_5EBC648F(void *, s32);",
   "scePaf_5FAC9869": "s32 scePaf_5FAC9869(s32);",
   "scePaf_7EC15225": "M2C_UNK scePaf_7EC15225(s32);",
   "scePaf_CA79D58B": "s32 scePaf_CA79D58B(s32);",
+  "scePaf_CAF05F1D": "M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);",
+  "scePaf_D4FAE7D0": "void *scePaf_D4FAE7D0(M2C_UNK *);",
   "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);"
  },
- "vars": {}
+ "vars": {
+  "D_00004770": "extern M2C_UNK D_00004770;",
+  "D_000047C8": "extern M2C_UNK D_000047C8;"
+ }
 }

@@ -5,17 +5,63 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000000AC);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_0000010C);
+void func_0000010C(void) {
+    if (D_000081C0 == 0) {
+
+    } else {
+        vsh_388428D3(D_000081C0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000140);
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000001F4);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000274);
+void func_00000274(void *arg0) {
+    s32 temp_s1;
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000002F8);
+    temp_s1 = arg0 + 0x14;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00007200;
+    sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
+    M2C_FIELD(arg0, s8 *, 0xC) = 1;
+    scePaf_CA5EF446(temp_s1);
+    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
+    scePaf_5775283A(arg0);
+    scePaf_1B043852(temp_s1);
+    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
+    scePaf_E977B833(arg0);
+}
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_0000037C);
+void func_000002F8(void *arg0) {
+    s32 temp_s1;
+
+    temp_s1 = arg0 + 0x14;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00007200;
+    sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
+    M2C_FIELD(arg0, s8 *, 0xC) = 1;
+    scePaf_CA5EF446(temp_s1);
+    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
+    scePaf_5775283A(arg0);
+    scePaf_1B043852(temp_s1);
+    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
+    scePaf_E977B833(arg0);
+}
+
+void func_0000037C(void *arg0) {
+    s32 temp_s1;
+
+    temp_s1 = arg0 + 0x14;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00007200;
+    sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
+    M2C_FIELD(arg0, s8 *, 0xC) = 1;
+    scePaf_CA5EF446(temp_s1);
+    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
+    scePaf_5775283A(arg0);
+    scePaf_1B043852(temp_s1);
+    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
+    scePaf_E977B833(arg0);
+    scePaf_4E67BB08(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000408);
 
@@ -49,7 +95,12 @@ s32 func_0000055C(void *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000614);
+void func_00000614(void) {
+    scePaf_CAF05F1D(D_000080A4, D_00007E48);
+    func_00001304(0);
+    func_00001418(0, 0, 0, 0);
+    func_00003BDC(0);
+}
 
 INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", D_00006BB8);
 
@@ -201,11 +252,40 @@ INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", D
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000660);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000006DC);
+s32 func_000006DC(void) {
+    scePaf_FD9DE7B9(0x40);
+    D_000081C5 = 0;
+    if (D_000081CD != 0) {
+        func_00000660(0);
+    }
+    if (func_000039BC() != 2) {
+        if ((u32) (func_0000398C() - 2) >= 5U) {
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000770);
+        } else {
+            func_00000614();
+        }
+    } else {
+        func_000024FC();
+    }
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000784);
+void func_00000770(s32 arg0, s32 arg1) {
+    M2C_FIELD(&D_000081DC, s32 *, 0) = arg0;
+    M2C_FIELD(&D_000081DC, s32 *, 4) = arg1;
+}
+
+s32 func_00000784(s32 arg0) {
+    s32 var_v0;
+
+    if ((u32) (func_0000398C() - 2) < 5U) {
+        var_v0 = sceHVUI_Module_3A687520(arg0, 0);
+    } else {
+        func_00002EB4((s32) &D_0000819C, arg0);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000007DC);
 
@@ -219,7 +299,15 @@ void func_00000920(void) {
     func_00003B90(0, 0);
 }
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000940);
+void func_00000940(void *arg0) {
+    scePaf_FD9DE7B9(0x40);
+    scePaf_F47CA1C2(arg0, 0x80006, func_00000AD0, 0);
+    scePaf_F47CA1C2(arg0, 0x10001, func_00000888, 0);
+    scePaf_F47CA1C2(arg0, 0x10002, func_000008B4, 0);
+    scePaf_F47CA1C2(arg0, 0x10006, func_000008E0, 0);
+    scePaf_F47CA1C2(arg0, 0x10007, func_00000920, 0);
+    M2C_FIELD(arg0, s32 *, 0x14) = (s32) (M2C_FIELD(arg0, s32 *, 0x14) | 0x20);
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000A00);
 
@@ -262,7 +350,11 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00001174);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00001208);
+s32 func_00001208(void) {
+    func_00005354();
+    func_00000408((s32) &D_000081E4, 2);
+    return 5;
+}
 
 void func_00001238(void) {
     vsh_AA8B9556();
@@ -270,7 +362,9 @@ void func_00001238(void) {
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00001254);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000012BC);
+void func_000012BC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_000049E8(arg0, arg1, arg2, arg3, D_00007E88 != 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000012E0);
 
@@ -302,7 +396,12 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000023D8);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000024AC);
+void func_000024AC(void) {
+    func_00003980(1);
+    sceVshCommonGui_80271F41();
+    scePaf_6B1E90C7();
+    scePaf_A0ED77C4(0, &func_000018EC, 0, -1, -1, &func_00001A1C);
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000024FC);
 
@@ -325,7 +424,19 @@ void func_0000280C(void) {
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00002828);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00002930);
+s32 func_00002930(s32 arg0, s32 arg1, s32 arg2) {
+    if (func_0000398C() == 2) {
+        scePaf_CAF05F1D(D_000080A4, D_00007E48);
+    }
+    if (arg2 == 0) {
+        if (arg0 != 0) {
+            scePaf_1A45C860(arg0, func_0000280C);
+        } else {
+            scePaf_6844744A(arg1, func_0000280C);
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000029C8);
 
@@ -333,7 +444,17 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00002B08);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00002BF4);
+void func_00002BF4(void) {
+    if (D_000081CD != 0) {
+        func_00000660(0);
+    }
+    if (func_0000398C() >= 2) {
+        func_00001418(1, D_00007E4C != 0, D_00007E50 != 0, (s32) D_000081CC);
+    }
+    func_000052C8(0);
+    func_00005354();
+    func_00001890(0);
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00002C80);
 
@@ -458,39 +579,85 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_0000381C);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003910);
+s32 func_00003910(void) {
+    s32 temp_v0;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003950);
+    D_00008B94 = 1;
+    temp_v0 = sceHVUI_Module_F7038231();
+    var_v0 = 0;
+    if (temp_v0 != 0) {
+        D_00008240 = 0;
+        var_v0 = temp_v0;
+    }
+    return var_v0;
+}
+
+void func_00003950(void) {
+    D_00008240 = 8;
+    sceHVUI_Module_146CB797();
+    D_00008240 = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003980);
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_0000398C);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003998);
+void func_00003998(s32 arg0) {
+    D_00008244 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000039A4);
+s32 func_000039A4(void) {
+    return D_00008244;
+}
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000039B0);
+void func_000039B0(s32 arg0) {
+    D_00008B90 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000039BC);
+s32 func_000039BC(void) {
+    return D_00008B90;
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000039C8);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000039D4);
+u8 func_000039D4(void) {
+    return D_00007F51;
+}
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000039E0);
+void func_000039E0(void) {
+    if ((u32) (D_00008240 - 2) >= 4U) {
+
+    } else {
+        sceHVUI_Module_789FBBA8();
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003A18);
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003A8C);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003B28);
+void func_00003B28(void) {
+    switch (D_00008240) {                           /* irregular */
+    case 4:
+        if (D_00007F51 != 0) {
+        case 2:
+            if (D_00008BB8 != 0) {
+                sceHVUI_Module_3ADFED08(D_00008BB8, 0);
+                D_00008BB8 = 0;
+            }
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003B90);
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003BDC);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003D3C);
+void func_00003D3C(s8 arg0) {
+    D_00008B94 = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00003D48);
 
@@ -734,7 +901,9 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000052C8);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00005324);
+void func_00005324(void) {
+    sceKernelWaitEventFlag(D_00008E64, 0x100U, 0, NULL, NULL);
+}
 
 void func_00005354(void) {
     sceHtmlViewerHelper_C92C71B7(0);
@@ -750,7 +919,15 @@ INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", D
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000053D4);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00005488);
+void func_00005488(void) {
+    func_000052C8(0);
+    func_00005354();
+    func_00005324();
+    if (D_00008E64 != 0) {
+        sceKernelDeleteEventFlag(D_00008E64);
+        D_00008E64 = 0;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000054DC);
 
@@ -766,7 +943,15 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", sceH
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", sceHtmlViewerHelper_47F988E6);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", sceHtmlViewerHelper_55732F91);
+s32 sceHtmlViewerHelper_55732F91(s32 arg0) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg0 == 0) {
+        var_v0 = M2C_FIELD(D_00008C00, s32 *, 4);
+    }
+    return var_v0;
+}
 
 void sceHtmlViewerHelper_05E0C3D4(s32 arg0) {
     func_000039C8((arg0 & 0xFF) ^ 1);
@@ -780,7 +965,17 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00005B2C);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00005BA0);
+s32 func_00005BA0(M2C_UNK **arg0, s32 *arg1) {
+    s32 var_v1;
+
+    var_v1 = -1;
+    if (((arg0 == NULL) | (arg1 == NULL)) == 0) {
+        *arg1 = D_00009274;
+        *arg0 = &D_000091F4;
+        var_v1 = 0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00005BDC);
 

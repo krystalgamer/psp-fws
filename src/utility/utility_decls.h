@@ -4,8 +4,10 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern s32 D_00008014;
 
 M2C_UNK func_00001DC8();
+s32 func_000039B0(void);
 s32 func_00004FFC(void *arg0);
 s32 func_00005054(void *arg0);
 s32 func_0000553C(s32);
@@ -15,6 +17,7 @@ s32 func_000060B4();
 M2C_UNK func_0000613C();
 M2C_UNK func_00006190();
 M2C_UNK func_000061C0();
+M2C_UNK memset(s32 *, M2C_UNK, M2C_UNK);
 s32 module_start(void);
 void sceUtility_2995D020(void);
 void sceUtility_3AD50AE7(void);

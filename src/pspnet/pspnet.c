@@ -66,27 +66,79 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00001980);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00001CE0);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_7C3B86C5);
+void sceNet_lib_7C3B86C5(s32 arg0) {
+    D_0000AF40 |= 1 << arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_05D525E4);
+void sceNet_lib_05D525E4(s32 arg0) {
+    D_0000AF40 |= 1 << arg0;
+    sceKernelSetEventFlag(D_0000A864, 0x10U);
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00001E74);
+void func_00001E74(void) {
+    if (D_0000A860 >= 0) {
+        sceKernelTerminateThread(D_0000A860);
+        sceKernelDeleteThread(D_0000A860);
+    }
+    D_0000A860 = -1;
+    if (D_0000A864 >= 0) {
+        sceKernelDeleteEventFlag(D_0000A864);
+    }
+    D_0000A864 = -1;
+    sceNetIfhandle_lib_B9096E48();
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_13672F83);
+s32 sceNet_lib_13672F83(s32 arg0, s32 arg1) {
+    D_0000AF28 = arg0;
+    D_0000AF2C = arg1;
+    D_0000AF18 = 1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_5C7C7381);
+s32 sceNet_lib_5C7C7381(void) {
+    D_0000AF18 = 0;
+    D_0000AF28 = 0;
+    D_0000AF2C = 0;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_86B6DCD9);
+s32 sceNet_lib_86B6DCD9(s32 arg0) {
+    D_0000AF30 = arg0;
+    D_0000AF1C = 1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_7AE91FB4);
+s32 sceNet_lib_7AE91FB4(void) {
+    D_0000AF1C = 0;
+    D_0000AF30 = 0;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_572AD6ED);
+s32 sceNet_lib_572AD6ED(s32 arg0) {
+    D_0000AF34 = arg0;
+    D_0000AF20 = 1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_87DC7A7E);
+s32 sceNet_lib_87DC7A7E(void) {
+    D_0000AF20 = 0;
+    D_0000AF34 = 0;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_B3A48B7F);
+s32 sceNet_lib_B3A48B7F(s32 arg0, s32 arg1) {
+    D_0000AF38 = arg0;
+    D_0000AF3C = arg1;
+    D_0000AF24 = 1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_949F1FBB);
+s32 sceNet_lib_949F1FBB(void) {
+    D_0000AF24 = 0;
+    D_0000AF38 = 0;
+    D_0000AF3C = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_CA3CF5EB);
 
@@ -98,17 +150,58 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_BB2B3DDB);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_6D5D42D7);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_C21E18B2);
+void sceNet_lib_C21E18B2(void *arg0) {
+    sceKernelWaitSema(D_0000A868, 1, NULL);
+    M2C_FIELD(arg0, u16 *, 0xC) = (u16) (M2C_FIELD(arg0, u16 *, 0xC) - 1);
+    sceKernelSignalSema(D_0000A868, 1);
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_757085B0);
+s32 sceNet_lib_757085B0(void *arg0, s32 arg1) {
+    sceKernelWaitSema(D_0000A868, 1, NULL);
+    M2C_FIELD(arg0, s32 *, 0x10) = arg1;
+    M2C_FIELD(arg0, u16 *, 0xC) = (u16) (M2C_FIELD(arg0, u16 *, 0xC) - 1);
+    sceKernelSignalSema(D_0000A868, 1);
+    return (arg1 == 0) ? 0 : -1;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_435843CB);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_D861EF33);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_45452B7B);
+s32 sceNet_lib_45452B7B(void) {
+    s16 temp_a1;
+    s32 var_s0;
+    void *var_v1;
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_0000260C);
+    var_s0 = 0;
+    sceKernelWaitSema(D_0000A868, 1, NULL);
+    var_v1 = D_0000AF44;
+    if (var_v1 != NULL) {
+        do {
+            temp_a1 = M2C_FIELD(var_v1, s16 *, 0xC);
+            var_v1 = M2C_FIELD(var_v1, void **, 0);
+            var_s0 += temp_a1 > 0;
+        } while (var_v1 != NULL);
+    }
+    sceKernelSignalSema(D_0000A868, 1);
+    return (var_s0 == 0) ? 0 : 0x80410105;
+}
+
+void func_0000260C(void) {
+    void *var_s0;
+
+    if (D_0000A868 >= 0) {
+        var_s0 = D_0000AF44;
+        if (var_s0 != NULL) {
+            do {
+                sceKernelDeleteSema(M2C_FIELD(var_s0, s32 *, 0x4C));
+                var_s0 = M2C_FIELD(var_s0, void **, 0);
+            } while (var_s0 != NULL);
+        }
+        sceKernelDeleteSema(D_0000A868);
+    }
+    D_0000A868 = -1;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNetThreadAbort);
 
@@ -147,39 +240,94 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_F6DB0A0B);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_0000331C);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00003380);
+void func_00003380(void) {
+    if (D_0000A874 >= 0) {
+        sceKernelDeleteSema(D_0000A874);
+    }
+    D_0000A874 = -1;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_205E8D17);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00003400);
+void func_00003400(void *arg0) {
+    sceKernelWaitSema(D_0000A874, 1, NULL);
+    if (M2C_FIELD(arg0, s32 *, 0x20) == 0) {
+
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x20) = 0;
+        M2C_FIELD(arg0, s32 *, 0x48) = (s32) (M2C_FIELD(arg0, s32 *, 0x48) | 1);
+        sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x4C), 1);
+    }
+    sceKernelSignalSema(D_0000A874, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_7574FDA1);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_B8C4A858);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_C9C97945);
+void sceNet_lib_C9C97945(void *arg0) {
+    sceKernelWaitSema(D_0000A874, 1, NULL);
+    M2C_FIELD(arg0, s32 *, 0x48) = (s32) (M2C_FIELD(arg0, s32 *, 0x48) | 2);
+    if (M2C_FIELD(arg0, s32 *, 0x20) == 0) {
+
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x20) = 0;
+        sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x4C), 1);
+    }
+    sceKernelSignalSema(D_0000A874, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_6B294EE4);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_51C209B2);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_2E005032);
+s32 sceNet_lib_2E005032(s32 arg0) {
+    D_0000AF60 = arg0;
+    D_0000AF68 = 1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_33B230BD);
+s32 sceNet_lib_33B230BD(void) {
+    D_0000AF68 = 0;
+    D_0000AF60 = 0;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_E155112D);
+s32 sceNet_lib_E155112D(s32 arg0, s32 arg1) {
+    D_0000AF5C = arg0;
+    D_0000AF64 = arg1;
+    D_0000AF6C = 1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_41621EB0);
+s32 sceNet_lib_41621EB0(void) {
+    D_0000AF6C = 0;
+    D_0000AF5C = 0;
+    D_0000AF64 = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00003790);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_000037E4);
+void func_000037E4(void) {
+    if (D_0000A878 >= 0) {
+        sceKernelDeleteSema(D_0000A878);
+    }
+    D_0000A878 = -1;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_94B44F26);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_515B2F33);
+void sceNet_lib_515B2F33(s32 arg0) {
+    if (arg0 > 0) {
+        D_0000B370 = -1;
+        sceKernelSignalSema(D_0000A878, 1);
+    }
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_6DC71518);
+s32 sceNet_lib_6DC71518(void) {
+    return D_0000B370;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_4B2B3416);
 
@@ -195,9 +343,19 @@ void sceNet_lib_92633D8D(void *arg0, s32 *arg1) {
     *arg1 = M2C_FIELD(arg0, s32 *, 8);
 }
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_B9C780C7);
+void sceNet_lib_B9C780C7(s32 *arg0) {
+    s32 temp_v1;
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_B68E1EEA);
+    temp_v1 = *arg0;
+    if (temp_v1 != 0) {
+        sceNet_lib_B8C4A858(temp_v1, (s32) &D_0000BC0C);
+        *arg0 = 0;
+    }
+}
+
+M2C_UNK *sceNet_lib_B68E1EEA(void) {
+    return &D_0000BC0C;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00003B30);
 
@@ -209,7 +367,9 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_000041D8);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_000042FC);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00004430);
+void func_00004430(s32 arg0, u8 *arg1) {
+    sceNet_lib_EF097716(arg1, arg0 + 0x14, 0x10);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_0000445C);
 
@@ -227,7 +387,30 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00004820);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_000048F4);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00004974);
+u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2) {
+    u32 temp_a2;
+    u32 temp_s0;
+    u32 temp_s0_2;
+    u32 var_s1;
+    u8 *var_s3;
+    void *var_s2;
+
+    var_s3 = arg0;
+    var_s2 = arg1;
+    var_s1 = arg2;
+    if (arg2 != 0) {
+        do {
+            temp_s0 = M2C_FIELD(var_s2, u32 *, 0xC);
+            temp_s0_2 = (temp_s0 >= var_s1) ? var_s1 : temp_s0;
+            temp_a2 = temp_s0_2;
+            var_s1 -= temp_s0_2;
+            sceNet_lib_EF097716(var_s3, M2C_FIELD(var_s2, u8 **, 8), (s32) temp_a2);
+            var_s3 = &var_s3[temp_s0_2];
+            var_s2 = M2C_FIELD(var_s2, void **, 0);
+        } while (var_s1 != 0);
+    }
+    return arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_000049F4);
 
@@ -299,7 +482,21 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_710BD467);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_45945E8D);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_C2EC2EEA);
+s32 sceNet_lib_C2EC2EEA(s32 *arg0, s32 *arg1, s32 *arg2, u8 *arg3) {
+    if (arg0 != NULL) {
+        *arg0 = D_0000B3B4;
+    }
+    if (arg1 != NULL) {
+        *arg1 = D_0000B3BC;
+    }
+    if (arg2 != NULL) {
+        *arg2 = D_0000B3B8;
+    }
+    if (arg3 != NULL) {
+        sceNet_lib_EF097716(arg3, &D_0000BE54, 8);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_976AB1E9);
 
@@ -319,9 +516,17 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_5ED457BE);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_31F3CDA1);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_1F94AFD9);
+s32 sceNet_lib_1F94AFD9(s32 arg0) {
+    D_0000B3D0 = arg0;
+    D_0000B3D8 = 1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_0A5A8751);
+s32 sceNet_lib_0A5A8751(void) {
+    D_0000B3D8 = 0;
+    D_0000B3D0 = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00006C8C);
 
@@ -331,9 +536,17 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00007054);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_000075C0);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_991FF86D);
+s32 sceNet_lib_991FF86D(s32 arg0) {
+    D_0000B3DC = arg0;
+    D_0000B3E0 = 1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_5505D820);
+s32 sceNet_lib_5505D820(void) {
+    D_0000B3E0 = 0;
+    D_0000B3DC = 0;
+    return 0;
+}
 
 s32 func_00007678(void) {
     s32 temp_v0;
@@ -369,7 +582,13 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_75D9985C);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_0000795C);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNetEtherNtostr);
+void sceNetEtherNtostr(void *arg0, s32 arg1) {
+    if (((arg0 == NULL) | (arg1 == 0)) != 0) {
+
+    } else {
+        sceNet_lib_CF705E46(arg1, (s32) "%02x:%02x:%02x:%02x:%02x:%02x", (s32) M2C_FIELD(arg0, u8 *, 0), (s32) M2C_FIELD(arg0, u8 *, 1), (s32) M2C_FIELD(arg0, u8 *, 2), (s32) M2C_FIELD(arg0, u8 *, 3), (s32) M2C_FIELD(arg0, u8 *, 4), (s32) M2C_FIELD(arg0, u8 *, 5));
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNetEtherStrton);
 
@@ -381,7 +600,9 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_96EF9DA1);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_750F705D);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00007BBC);
+M2C_UNK *func_00007BBC(void) {
+    return &D_0000A88D;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_E0A81C7C);
 

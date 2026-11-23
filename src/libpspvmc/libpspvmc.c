@@ -31,7 +31,10 @@ s32 func_00000B18(s32 arg0, M2C_UNK arg1) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_00000B40);
+s32 func_00000B40(s32 arg0, s32 arg1) {
+    func_00000BB0(arg0, arg1, 0x14);
+    return 1;
+}
 
 INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_00000B60);
 
@@ -75,7 +78,9 @@ INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_00001418);
 
 INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_00001420);
 
-INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_00001430);
+M2C_UNK *func_00001430(void) {
+    return &D_00010B14;
+}
 
 INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_0000143C);
 
@@ -162,7 +167,9 @@ INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_00002CF0);
 
 INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_00003684);
 
-INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_00003730);
+s32 func_00003730(void) {
+    return D_00010C20;
+}
 
 INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_0000373C);
 
@@ -186,7 +193,15 @@ INCLUDE_RODATA("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", D_0000FC4C);
 
 INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_00005338);
 
-INCLUDE_ASM("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", func_000055B0);
+M2C_UNK *func_000055B0(s32 arg0) {
+    M2C_UNK *var_v0;
+
+    var_v0 = NULL;
+    if (!(arg0 & 0xFF)) {
+        var_v0 = &D_0000FC80;
+    }
+    return var_v0;
+}
 
 INCLUDE_RODATA("tmp/asm/352/libpspvmc/nonmatchings/libpspvmc", D_0000FC80);
 

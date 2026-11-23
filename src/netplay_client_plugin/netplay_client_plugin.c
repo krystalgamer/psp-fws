@@ -56,7 +56,9 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000001AC);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000001D4);
+u8 func_000001D4(void) {
+    return D_0000E904;
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000001E0);
 
@@ -108,7 +110,9 @@ void func_0000083C(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00000864);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000008D0);
+void func_000008D0(void) {
+    func_0000052C((s32) &D_0000E0B0, (s32) &D_0000E0C4);
+}
 
 INCLUDE_RODATA("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", D_0000E0B0);
 
@@ -194,7 +198,9 @@ void func_00000BAC(void) {
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00000BC8);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00000C50);
+void func_00000C50(void) {
+    func_0000052C((s32) &D_0000E140, (s32) &D_0000E158);
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00000C78);
 
@@ -218,7 +224,11 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000023B0);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000023F8);
+void func_000023F8(void) {
+    if ((D_0000E90C != 0) || (func_0000535C() == 0)) {
+        func_0000544C();
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00002434);
 
@@ -423,13 +433,24 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00005284);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000052C0);
+s32 func_000052C0(void) {
+    return __builtin_allegrex_min(D_0000EAD0, 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000052D4);
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_0000535C);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_0000544C);
+s32 func_0000544C(void) {
+    s32 var_v0;
+
+    var_v0 = sceNetAdhocDownload_314ED31E(0x40, 0x1000, 0x40, 0x1000);
+    if (var_v0 >= 0) {
+        D_0000EB00 = 5;
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00005488);
 
@@ -476,9 +497,28 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000061F0);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_0000638C);
+s32 func_0000638C(void) {
+    if (D_0000EB08 != 0) {
+        D_0000EAD4 = 0;
+        sceNetAdhocctlDisconnect();
+        func_000064A8();
+        D_0000EB08 = 0;
+    }
+    sceNetAdhocMatchingTerm();
+    if (D_0000EB04 >= 0) {
+        sceNetAdhocctlDelHandler(D_0000EB04);
+        D_0000EB04 = -1;
+    }
+    sceNetAdhocctlTerm();
+    sceNetAdhocTerm();
+    sceNetTerm();
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_0000641C);
+void func_0000641C(void) {
+    D_0000EAD4 = 0;
+    D_0000EAD0 = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006430);
 
@@ -490,7 +530,13 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000067F4);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000068C0);
+s32 func_000068C0(s32 arg0) {
+    if (arg0 != -1) {
+        sceKernelStopModule(arg0, 0U, NULL, NULL, NULL);
+        sceKernelUnloadModule(arg0);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_0000690C);
 
@@ -514,7 +560,13 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006CF4);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006D04);
+void func_00006D04(void *arg0, s32 arg1) {
+    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+
+    } else {
+        func_00006EC8((s32) arg0, arg1);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006D38);
 

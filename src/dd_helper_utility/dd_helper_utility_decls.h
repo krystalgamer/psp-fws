@@ -4,12 +4,19 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_00004770;
+extern M2C_UNK D_000047C8;
 
 void func_00000204(void);
 s32 func_00000320(void);
 M2C_UNK func_000004C0(M2C_UNK);
 void func_00000550(void);
 void func_00000558(void);
+void func_000005D4(M2C_UNK **arg0);
+void func_000005E4(M2C_UNK **arg0);
+void func_000005F4(M2C_UNK **arg0);
+void func_0000063C(void);
+void func_00000674(void *arg0);
 void func_000006AC(void *arg0);
 M2C_UNK func_000006C8(M2C_UNK, M2C_UNK);
 void func_00000750(void);
@@ -44,12 +51,17 @@ s32 func_00003738(M2C_UNK, M2C_UNK);
 M2C_UNK func_00004100();
 s32 module_stop(void);
 M2C_UNK sceCccUTF8toUTF16(s32, s32, s32);
+M2C_UNK sceHtmlViewerHelper_05E0C3D4(M2C_UNK);
 M2C_UNK sceHtmlViewerHelper_F27998C2(s32);
 M2C_UNK scePaf_49A81B18(s32, s32, s32, M2C_UNK);
+M2C_UNK scePaf_4E67BB08();
 M2C_UNK scePaf_545FE2DA(s32);
+M2C_UNK scePaf_5EBC648F(void *, s32);
 s32 scePaf_5FAC9869(s32);
 M2C_UNK scePaf_7EC15225(s32);
 s32 scePaf_CA79D58B(s32);
+M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);
+void *scePaf_D4FAE7D0(M2C_UNK *);
 s32 scePaf_FD4C9F47(s32);
 
 #endif

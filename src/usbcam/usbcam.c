@@ -252,7 +252,9 @@ INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCam_driver_D865997B)
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamAutoImageReverseSW);
 
-INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamGetAutoImageReverseState);
+s32 sceUsbCamGetAutoImageReverseState(void) {
+    return __builtin_allegrex_ext(D_0000BC1C, 0xC, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamUnregisterLensRotationCallback);
 
@@ -263,7 +265,17 @@ void func_000039E8(void) {
 
 INCLUDE_RODATA("tmp/asm/282/usbcam/nonmatchings/usbcam", D_0000AE58);
 
-INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", func_000039F0);
+void func_000039F0(void *arg0) {
+    s32 temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, s32 *, 0x18);
+    if (temp_v1 >= 0) {
+
+    } else {
+        KDebugForKernel_84F370BC("%sInterrupt IN Cmd. ret->status = %d\n", &D_0000A658, temp_v1);
+    }
+    sceKernelSignalSema(D_0000BDB8, 1);
+}
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", func_00003A40);
 
@@ -465,7 +477,18 @@ INCLUDE_RODATA("tmp/asm/282/usbcam/nonmatchings/usbcam", D_0000B678);
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", func_00008DC8);
 
-INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", func_00008E1C);
+s32 func_00008E1C(void) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = sceUsbBus_driver_C1E2A540(&D_0000BA80);
+    var_v1 = 0;
+    if (temp_v0 < 0) {
+        KDebugForKernel_84F370BC("%serror - cannot unregister : 0x%08x\n", &D_0000B454, temp_v0);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", func_00008E6C);
 

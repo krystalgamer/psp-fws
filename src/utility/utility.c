@@ -200,7 +200,11 @@ INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_000037F0);
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00003890);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_000039B0);
+s32 func_000039B0(void) {
+    memset(&D_00008014, 0xFF, 0x34);
+    D_00008014 = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_C629AF26);
 

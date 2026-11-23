@@ -88,7 +88,9 @@ INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_000080D0);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001A28);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001AF4);
+s32 func_00001AF4(s32 *arg0) {
+    return (func_00007758(*arg0, (s32) &D_000080D0) == 0) ? 0 : 0x806101FE;
+}
 
 s32 func_00001B28(s32 arg0, s32 *arg1) {
     s32 temp_v0;
@@ -136,7 +138,26 @@ s32 func_00003198(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000031A0);
+s32 func_000031A0(void *arg0) {
+    s32 *temp_v1;
+    s32 temp_s0;
+    s32 temp_v0;
+    s32 var_v0;
+    void *temp_s2;
+
+    temp_v1 = M2C_FIELD(arg0, s32 **, 0x28);
+    temp_s2 = *temp_v1;
+    temp_v0 = func_00001AF4(temp_v1);
+    if (temp_v0 != 0) {
+        var_v0 = temp_v0;
+    } else {
+        func_00006D70(M2C_FIELD(temp_s2, u32 *, 0x66C));
+        temp_s0 = M2C_FIELD(arg0, s32 *, 0xC);
+        func_00006E00(M2C_FIELD(temp_s2, u32 *, 0x66C));
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00003208);
 
@@ -392,19 +413,52 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006F44);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006F88);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007108);
+void func_00007108(void) {
+    sceVideocodec_4F160BF4(D_00008300);
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000712C);
+s32 func_0000712C(s32 arg0) {
+    s32 temp_s1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000717C);
+    func_00006D70(D_000084C0);
+    temp_s1 = func_00006F44(arg0);
+    func_00006E00(D_000084C0);
+    return temp_s1;
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000718C);
+s32 func_0000717C(void) {
+    return M2C_FIELD(D_00008300, s32 *, 0x14);
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000071E0);
+s32 func_0000718C(s32 arg0) {
+    s32 temp_s1;
+
+    func_00006D70(D_000084C0);
+    temp_s1 = sceVideocodec_DBA273FA(arg0, 0);
+    func_00006E00(D_000084C0);
+    return temp_s1;
+}
+
+s32 func_000071E0(s32 arg0) {
+    s32 temp_s1;
+
+    func_00006D70(D_000084C0);
+    temp_s1 = sceVideocodec_A2F0564E(arg0, 0);
+    func_00006E00(D_000084C0);
+    return temp_s1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007234);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000072FC);
+s32 func_000072FC(void *arg0, s32 arg1) {
+    s32 temp_s1;
+
+    func_00006D70(D_000084C0);
+    M2C_FIELD(arg0, s32 *, 0x54) = arg1;
+    temp_s1 = sceVideocodec_17CF7D2C(arg0, 0);
+    func_00006E00(D_000084C0);
+    return temp_s1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000735C);
 
@@ -412,13 +466,45 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000073E8);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007494);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007590);
+void func_00007590(void) {
+    if (M2C_FIELD(D_00008400, s32 *, 0xC) == 0) {
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000075C8);
+    } else {
+        sceAudiocodec_29681260(D_00008400);
+    }
+}
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007628);
+s32 func_000075C8(s32 arg0, s32 arg1) {
+    s32 temp_s1;
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007648);
+    func_00006D70(D_000084C4);
+    temp_s1 = func_000073E8(arg0, arg1, 0);
+    func_00006E00(D_000084C4);
+    return temp_s1;
+}
+
+s32 func_00007628(s32 *arg0) {
+    if (arg0 != NULL) {
+        *arg0 = D_000084AC;
+    }
+    return M2C_FIELD(D_00008400, s32 *, 0xC);
+}
+
+s32 func_00007648(s32 arg0) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    func_00006D70(D_000084C4);
+    temp_v0 = sceAudiocodec_70A703F8(arg0, 0x1000);
+    if (temp_v0 != 0) {
+        func_00006E00(D_000084C4);
+        var_v0 = temp_v0;
+    } else {
+        func_00006E00(D_000084C4);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000076B0);
 

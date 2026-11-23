@@ -334,7 +334,9 @@ s32 func_000015AC(void) {
     return -1;
 }
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_000015B4);
+void func_000015B4(void) {
+    sceKernelFreePartitionMemory(D_0000F598);
+}
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_000015D4);
 
@@ -408,9 +410,13 @@ INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_000057E0);
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00005854);
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00005938);
+void func_00005938(s32 arg0) {
+    func_000061C0(arg0, (s32) &func_00005694);
+}
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00005958);
+void func_00005958(void) {
+    func_00005938(D_0000F138);
+}
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_0000597C);
 
@@ -480,9 +486,13 @@ INCLUDE_RODATA("tmp/asm/100/rinit/nonmatchings/rinit", D_0000BEEC);
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_000062C8);
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00006368);
+M2C_UNK *func_00006368(void) {
+    return &D_0000BEBC;
+}
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00006374);
+void func_00006374(s32 arg0, s32 arg1) {
+    func_000062C8(D_0000F138, arg0, arg1);
+}
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_000063A0);
 
@@ -500,9 +510,27 @@ INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00006DF4);
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00006F40);
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00007340);
+void func_00007340(void) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_0000737C);
+    temp_a0 = sceKernelCpuSuspendIntr();
+    if (D_0000F5E0 == 0) {
+        D_0000F5E4 = temp_a0;
+    }
+    D_0000F5E0 += 1;
+}
+
+void func_0000737C(void) {
+    s32 temp_v0;
+
+    temp_v0 = D_0000F5E0 - 1;
+    D_0000F5E0 = temp_v0;
+    if (temp_v0 != 0) {
+
+    } else {
+        sceKernelCpuResumeIntr(D_0000F5E4);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_000073B8);
 
@@ -577,15 +605,48 @@ INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_0000882C);
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00008868);
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00008894);
+s32 func_00008894(s32 *arg0, s32 arg1) {
+    s32 temp_v0;
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_000088F0);
+    D_0000F5E8 = 0;
+    temp_v0 = func_000015D4(arg1);
+    if (temp_v0 != -1) {
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00008958);
+    } else if (D_0000F5E8 != 0) {
+        *arg0 = D_0000F5E8;
+    }
+    return temp_v0;
+}
+
+s32 func_000088F0(void *arg0, s32 arg1, s32 arg2) {
+    s32 temp_v0;
+
+    temp_v0 = func_00008E34(D_0000F138, (s32) M2C_FIELD(arg0, s16 *, 0xE), arg1, arg2);
+    if (temp_v0 >= 0) {
+        M2C_FIELD(arg0, s32 *, 0x50) = (s32) (M2C_FIELD(arg0, s32 *, 0x50) + temp_v0);
+    } else {
+        M2C_FIELD(arg0, u16 *, 0xC) = (u16) (M2C_FIELD(arg0, u16 *, 0xC) & 0xEFFF);
+    }
+    return temp_v0;
+}
+
+void func_00008958(void *arg0, s32 arg1, s32 arg2) {
+    u16 var_v1;
+
+    var_v1 = M2C_FIELD(arg0, u16 *, 0xC);
+    if (var_v1 & 0x100) {
+        func_00008DCC(D_0000F138, (s32) M2C_FIELD(arg0, s16 *, 0xE), 0, 2);
+        var_v1 = M2C_FIELD(arg0, u16 *, 0xC);
+    }
+    M2C_FIELD(arg0, u16 *, 0xC) = (u16) (var_v1 & 0xEFFF);
+    func_00008BE4(D_0000F138, (s32) M2C_FIELD(arg0, s16 *, 0xE), arg1, arg2);
+}
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_000089E0);
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00008A4C);
+void func_00008A4C(void *arg0) {
+    func_00008D0C(D_0000F138, (s32) M2C_FIELD(arg0, s16 *, 0xE));
+}
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00008A70);
 
@@ -597,7 +658,18 @@ INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00008C4C);
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00008D0C);
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00008D68);
+s32 func_00008D68(s32 *arg0, s32 arg1, s32 arg2) {
+    s32 temp_v0;
+
+    D_0000F5E8 = 0;
+    temp_v0 = func_00001520(arg1, arg2);
+    if (temp_v0 != -1) {
+
+    } else if (D_0000F5E8 != 0) {
+        *arg0 = D_0000F5E8;
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00008DCC);
 

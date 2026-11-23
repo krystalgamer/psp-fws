@@ -589,7 +589,17 @@ void func_0000664C(void *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00006678);
+u32 func_00006678(void *arg0) {
+    u32 temp_a0;
+    u32 var_v0;
+
+    temp_a0 = M2C_FIELD(arg0, u32 *, 0x10);
+    var_v0 = 0x86401012;
+    if (temp_a0 != 0) {
+        var_v0 = (u32) (M2C_FIELD(arg0, s32 *, 0x28) * 0x3E8) / temp_a0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000066B4);
 

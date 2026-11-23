@@ -37,19 +37,36 @@ s32 scePower_driver_AD5BB433(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_C71EE866);
+s32 scePower_driver_C71EE866(s8 arg0) {
+    D_0000614D = arg0;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_D66EF08D);
+s32 scePower_driver_D66EF08D(s32 arg0) {
+    s32 var_a0;
+
+    var_a0 = 0;
+    if ((((u8) D_0000614D == 1) & (arg0 >= 0xDF)) || (((u8) D_0000614D == 2) & (arg0 >= 0x10B))) {
+        var_a0 = 0x802B0300;
+    }
+    return var_a0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_6D2CA84B);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_23BB0A60);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_D7B9C925);
+u8 scePower_driver_D7B9C925(void) {
+    return D_0000614A;
+}
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_2B51FE2F);
+u8 scePower_driver_2B51FE2F(void) {
+    return D_00006149;
+}
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_E8685403);
+u8 scePower_driver_E8685403(void) {
+    return D_0000614E;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00000DD4);
 
@@ -81,9 +98,14 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00002414);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_0000250C);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_0CD21B1F);
+s32 scePower_driver_0CD21B1F(s32 arg0) {
+    D_0000618C = arg0 & 3;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_165CE085);
+s32 scePower_driver_165CE085(void) {
+    return D_0000618C;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_79DB9421);
 
@@ -109,11 +131,30 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_0442D852);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_0074EF9B);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_F535D928);
+s32 scePower_driver_F535D928(s32 arg0) {
+    D_000061B8 = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00002880);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00002944);
+void func_00002944(s32 arg0) {
+    s32 var_a0;
+    s32 var_a1;
+
+    if (arg0 != 0) {
+        sceKernelSetEventFlag(D_00006180, 1U);
+        sceKernelClearEventFlag(D_00006180, -3U);
+        var_a0 = 0;
+        var_a1 = 0x80000000;
+    } else {
+        sceKernelSetEventFlag(D_00006180, 2U);
+        sceKernelClearEventFlag(D_00006180, -2U);
+        var_a0 = 0x80000000;
+        var_a1 = 0;
+    }
+    func_0000096C(var_a0, var_a1, 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_000029BC);
 
@@ -150,9 +191,14 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_000032EC);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_E0B7A95D);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_C23AC778);
+s32 scePower_driver_C23AC778(void) {
+    return D_0000B3A4;
+}
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00003A98);
+s32 func_00003A98(void) {
+    sceKernelDeleteSema(D_0000B348);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00003AC0);
 
@@ -160,19 +206,43 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00003B14);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_57A098B4);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_55D2D789);
+s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
+    if (arg0 != NULL) {
+        *arg0 = (s32) D_0000B380;
+    }
+    if (arg1 != NULL) {
+        *arg1 = (s32) D_0000B382;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_DD27F119);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_75F91FE4);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_06C83A4F);
+s32 scePower_driver_06C83A4F(s32 *arg0, s32 *arg1) {
+    if (arg0 != NULL) {
+        *arg0 = (s32) D_0000B388;
+    }
+    if (arg1 != NULL) {
+        *arg1 = (s32) D_0000B38A;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_4E759486);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_53C1255D);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_8762BCE6);
+s32 scePower_driver_8762BCE6(s32 *arg0, s32 *arg1) {
+    if (arg0 != NULL) {
+        *arg0 = (s32) D_0000B390;
+    }
+    if (arg1 != NULL) {
+        *arg1 = (s32) D_0000B392;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_CAE2A4CA);
 
@@ -182,15 +252,21 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_35B7662E);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_F9B4DEA1);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerGetCpuClockFrequency);
+s32 scePowerGetCpuClockFrequency(void) {
+    return D_0000B358;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerGetCpuClockFrequencyFloat);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerGetBusClockFrequencyInt);
+s32 scePowerGetBusClockFrequencyInt(void) {
+    return D_0000B35C;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerGetBusClockFrequencyFloat);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerGetPllClockFrequencyInt);
+s32 scePowerGetPllClockFrequencyInt(void) {
+    return D_0000B354;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerGetPllClockFrequencyFloat);
 
@@ -226,29 +302,57 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerGetBatteryLifeTime);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_862AE1A6);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00004B54);
+s32 func_00004B54(void) {
+    M2C_UNK *temp_v0;
+    s32 temp_v0_2;
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00004BF8);
+    memset(&D_0000B3AC, 0, 0xBC);
+    temp_v0 = "ScePowerBattery";
+    M2C_FIELD(&D_0000B3AC, s32 *, 0x28) = -1;
+    M2C_FIELD(&D_0000B3AC, s32 *, 0) = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
+    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003F14, 0x40, 0x800U, 1U, NULL);
+    M2C_FIELD(&D_0000B3AC, s32 *, 4) = temp_v0_2;
+    sceKernelStartThread(temp_v0_2, 0U, NULL);
+    return 0;
+}
+
+s32 func_00004BF8(void) {
+    sceKernelSetEventFlag(M2C_FIELD(&D_0000B3AC, s32 *, 0), 0x80000000U);
+    sceKernelWaitThreadEnd(M2C_FIELD(&D_0000B3AC, s32 *, 4), NULL);
+    sceKernelDeleteThread(M2C_FIELD(&D_0000B3AC, s32 *, 4));
+    sceKernelDeleteEventFlag(M2C_FIELD(&D_0000B3AC, s32 *, 0));
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00004C50);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00004C6C);
+s32 func_00004C6C(void) {
+    return D_0000B3BC == 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00004C7C);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_27F3292C);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_E8E4E204);
+s32 scePower_driver_E8E4E204(void) {
+    return D_0000B3B4;
+}
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_B999184C);
+s32 scePower_driver_B999184C(void) {
+    return D_0000B3B8;
+}
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_680860E3);
+s32 scePower_driver_680860E3(void) {
+    return D_0000B3C4;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_166922EC);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerIsPowerOnline);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerIsBatteryExist);
+s32 scePowerIsBatteryExist(void) {
+    return D_0000B3DC != 0;
+}
 
 s32 scePowerIsBatteryCharging(void) {
     s32 temp_v0;
@@ -271,4 +375,7 @@ s32 scePower_driver_23436A4A(void) {
     return 0x802B0010;
 }
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00004FE0);
+s32 func_00004FE0(void) {
+    D_0000B404 = 0;
+    return 0;
+}

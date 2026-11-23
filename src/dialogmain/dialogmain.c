@@ -53,7 +53,14 @@ void func_00000DE0(void) {
     func_0000050C();
 }
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00000E04);
+void func_00000E04(s32 arg0) {
+    sceGeSaveContext(&D_00009A40);
+    scePaf_26DE971C();
+    scePaf_613E9AA2();
+    scePaf_F4AB3180(D_00009A00, arg0);
+    sceKernelCheckCallback();
+    sceGeRestoreContext(&D_00009A40);
+}
 
 void func_00000E6C(void) {
     sceVshCommonUtil_29B75E11();
@@ -355,7 +362,11 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_0000252C);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00002584);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000027AC);
+void func_000027AC(void) {
+    D_0000A290 = 0;
+    func_0000230C();
+    func_00002584(1);
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000027D4);
 
@@ -383,7 +394,19 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_0000304C);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003058);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003064);
+s32 func_00003064(void) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_v0 = scePaf_8FE88010(&D_00008A54, 0, 0, 0, 0);
+    var_v0 = 0;
+    if (temp_v0 != 0) {
+        scePaf_21A183A7(temp_v0);
+        scePaf_4E67BB08(temp_v0);
+        var_v0 = 1;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000030C0);
 
@@ -393,7 +416,32 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003258);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003294);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003660);
+void func_00003660(void *arg0) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x98) = scePaf_D7215544(D_0000A280, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0x9C) = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xA0) = scePaf_D7215544(D_0000A280, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xA4) = scePaf_D7215544(D_0000A280, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xA8) = scePaf_D7215544(D_0000A280, &D_00008D84);
+        M2C_FIELD(arg0, s32 *, 0xAC) = scePaf_D7215544(D_0000A280, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xB0) = scePaf_D7215544(D_0000A280, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xB4) = scePaf_D7215544(D_0000A280, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xB8) = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xBC) = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xC0) = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xC4) = scePaf_D7215544(D_0000A280, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xC8) = scePaf_D7215544(D_0000A280, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xCC) = scePaf_D7215544(D_0000A280, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xD0) = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xD4) = scePaf_D7215544(D_0000A280, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xD8) = scePaf_D7215544(D_0000A280, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xDC) = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xE0) = scePaf_D7215544(D_0000A280, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xE4) = scePaf_D7215544(D_0000A280, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xE8) = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xEC) = scePaf_D7215544(D_0000A280, &D_00008D78);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003824);
 
@@ -562,7 +610,14 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006CE4);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006CF0);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006CFC);
+s32 func_00006CFC(s32 arg0) {
+    if (arg0 != D_0000A3CC) {
+        scePaf_A69BABE3(0x401, arg0, D_0000A3CC);
+        D_0000A3CC = arg0;
+        D_0000A3D4 += 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006D5C);
 

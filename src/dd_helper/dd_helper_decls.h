@@ -4,12 +4,22 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_0000AA40;
+extern M2C_UNK D_0000AAB8;
+extern M2C_UNK D_0000B538;
+extern u8 D_0000B618;
 
 void func_00000230(void);
 s32 func_0000038C(void);
 M2C_UNK func_0000052C(M2C_UNK);
 void func_000005BC(void);
 void func_000005C4(void);
+u8 func_000005E0(void);
+void func_00000640(M2C_UNK **arg0);
+void func_00000650(M2C_UNK **arg0);
+void func_00000660(M2C_UNK **arg0);
+void func_000006A8(void);
+void func_000006E0(void *arg0);
 void func_00000718(void *arg0);
 M2C_UNK func_00000734(M2C_UNK, M2C_UNK);
 void func_000007BC(void);
@@ -43,6 +53,9 @@ void func_00006744(s32 arg0);
 void func_0000694C(void *arg0);
 M2C_UNK func_00007668(void *, s32);
 M2C_UNK func_00007B60(s32);
+void func_00007DE8(void *arg0);
+void func_00007E4C(void *arg0);
+void func_00007EB0(void *arg0);
 void func_00008408(void *arg0);
 void func_00008424(void *arg0);
 void func_00008440(void *arg0);
@@ -66,18 +79,27 @@ s32 func_00009BB8(s32 arg0, void *arg1, s32 arg2);
 M2C_UNK func_00009F6C();
 s32 module_stop(void);
 s32 sceCccUTF8toUTF16(void *, s32, void *);
+M2C_UNK sceHtmlViewerHelper_05E0C3D4(M2C_UNK);
 M2C_UNK sceHtmlViewerHelper_F27998C2(s32);
+s32 sceHttpDeleteConnection(s32);
+s32 sceHttpDeleteRequest(s32);
+s32 sceHttpDeleteTemplate(s32);
 M2C_UNK sceHttpGetContentLength(s32);
 M2C_UNK sceHttpGetNetworkPspError(s32);
 M2C_UNK sceHttpGetStatusCode(s32);
 M2C_UNK sceHttpReadData(s32);
 M2C_UNK sceHttpsGetSslError(s32);
+s32 sceKernelDeleteSema(s32);
 M2C_UNK sceKernelSetEventFlag(s32, M2C_UNK);
 M2C_UNK scePaf_49A81B18(void *, s32, void *, s32);
+M2C_UNK scePaf_4E67BB08();
 M2C_UNK scePaf_545FE2DA(s32);
+M2C_UNK scePaf_5EBC648F(void *, s32);
 void *scePaf_5FAC9869(s32);
 M2C_UNK scePaf_7EC15225(s32);
+M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);
 s32 scePaf_CE699963(s32, M2C_UNK);
+void *scePaf_D4FAE7D0(M2C_UNK *);
 M2C_UNK scePaf_F95EA3F1(s32, void *, s32);
 s32 scePaf_FD4C9F47(void *);
 
