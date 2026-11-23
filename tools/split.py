@@ -62,6 +62,9 @@ def fix_unsupported(asm_dir: Path, reloc_roms=frozenset()):
     operands spimdisasm inferred at offsets without a PRX relocation: those
     are plain constants (e.g. handwritten code using $gp as a register).
     """
+    defined_locals = set()
+    for path in asm_dir.rglob("*.s"):
+        defined_locals.update(re.findall(r"^\s*(\.L\w+):", path.read_text(), re.M))
     for path in asm_dir.rglob("*.s"):
         lines = path.read_text().splitlines(keepends=True)
         changed = False
@@ -74,7 +77,7 @@ def fix_unsupported(asm_dir: Path, reloc_roms=frozenset()):
                 and int(line.split("/*", 1)[1].split()[0], 16) not in reloc_roms
             )
             dm = DATA_WORD_RE.match(line.rstrip("\n"))
-            if dm and reloc_roms and (int(dm["rom"], 16) not in reloc_roms or dm["val"].startswith(".L")):
+            if dm and reloc_roms and (int(dm["rom"], 16) not in reloc_roms or (dm["val"].startswith(".L") and dm["val"].split()[0] not in defined_locals)):
                 word = int.from_bytes(bytes.fromhex(dm["raw"]), "little")
                 lines[i] = f"{dm['pre']}.word 0x{word:08X} # {dm['val']}\n"
                 changed = True
@@ -148,9 +151,8 @@ if __name__ == "__main__":
         if options.opts is not None and getattr(options.opts, "asm_path", None):
             relocs = set()
             for rp in options.opts.reloc_addrs_paths:
-                for rl in Path(rp).read_text().splitlines():
-                    if rl.startswith("rom:"):
-                        relocs.add(int(rl.split()[0][4:], 16))
+                roms = Path(str(rp).replace("reloc_addrs.", "reloc_roms."))
+                relocs.update(int(x, 16) for x in roms.read_text().split())
             fix_unsupported(options.opts.asm_path, relocs)
             fix_ld_script(options.opts.ld_script_path, Path(sys.argv[-1]))
             prune_undefined_syms(options.opts.asm_path, options.opts.undefined_syms_auto_path)

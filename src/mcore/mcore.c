@@ -204,30 +204,6 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002BC4);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002C20);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002C80);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002C8C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002CC4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002CD4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002CE4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002CF4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002D04);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002D14);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002D24);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002D34);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002D44);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002D54);
-
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002D64);
 
 s32 func_00002E04(void *arg0) {
@@ -497,14 +473,6 @@ INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_00028EC8);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00009490);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00009540);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000095DC);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000095E8);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000095F8);
-
 s32 func_00009624(void *arg0) {
     s32 var_v0;
 
@@ -648,22 +616,6 @@ INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_000291FC);
 INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_00029208);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000BFB8);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C014);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C0C4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C0CC);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C0F0);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C114);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C138);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C15C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C184);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000C198);
 
@@ -936,25 +888,7 @@ INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_000292E4);
 
 INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_000292EC);
 
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_000292F4);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_000292FC);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_00029304);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_00029310);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_0002931C);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_00029330);
-
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00013EF0);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00014010);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00014060);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00014090);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000141F8);
 
@@ -1139,14 +1073,6 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00017A94);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00017B00);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00017B78);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00017B90);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00017BA0);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00017BB0);
-
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00017BD0);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00017C48);
@@ -1196,43 +1122,7 @@ INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_00029758);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00018360);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000183B8);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000183BC);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000183C4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000183CC);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000183D4);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_000297C0);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_000297C4);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_000297D0);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_00029810);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_00029830);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_00029864);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_00029884);
-
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000183DC);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00018454);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000184F8);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001853C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000185C8);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000185E0);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00018638);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00018674);
 
@@ -1355,18 +1245,6 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00019D18);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00019DC0);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00019F60);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00019F74);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00019F7C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00019F8C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00019F9C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00019FAC);
-
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00019FBC);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001A000);
@@ -1386,72 +1264,6 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001A988);
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001A9E4);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001AE68);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B0A0);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B118);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B154);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B1A0);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B214);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B2C8);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B328);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B388);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B3E0);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B490);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B534);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B578);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B5E8);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B640);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B698);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B6F0);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B734);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B78C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B7E4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B840);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B8C4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B950);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B978);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001B9A4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BA60);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BACC);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BB58);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BBC4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BC4C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BC7C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BCEC);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BD4C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BD58);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BD74);
 
@@ -1489,16 +1301,6 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001BFC4);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C040);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C07C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C088);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C0B4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C0D0);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C0EC);
-
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C108);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C1E4);
@@ -1506,16 +1308,6 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C1E4);
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C2F0);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C400);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C4E4);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C550);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C59C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C5B8);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C5CC);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001C5E0);
 
@@ -1934,21 +1726,7 @@ INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_0002CA34);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00023A0C);
 
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_0002CA7C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00023B54);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00023D0C);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00023D18);
-
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00023D28);
-
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00023EBC);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_0002CAA0);
-
-INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_0002CB58);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00023F18);
 

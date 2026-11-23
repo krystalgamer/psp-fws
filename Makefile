@@ -60,7 +60,7 @@ $(BUILD)/%.bin.o: %.bin
 
 $(BUILD)/%.c.o: %.c
 	@mkdir -p $(@D)
-	$(CPP) $(CPPFLAGS) $< | $(CC1) $(CFLAGS) -o $(BUILD)/$*.c.s
+	$(CPP) $(CPPFLAGS) $< | $(TOOLS)/cc1-$$(grep -oP "compiler: \K[0-9.]+" $< || echo 1.7.1) $(CFLAGS) -o $(BUILD)/$*.c.s
 	$(PSP_AS) -EL -G0 -Iinclude -o $@ $(BUILD)/$*.c.s
 	$(PYTHON) tools/fix_old_gas.py --text-align $$(grep -oP "text-align: \K[0-9]+" $< || echo 4) $@
 

@@ -20,6 +20,7 @@ import prxinfo  # noqa: E402
 
 SHT_PRXRELOC = 0x700000A0
 R_MIPS_32 = 2
+R_MIPS_26 = 4
 R_MIPS_HI16 = 5
 R_MIPS_LO16 = 6
 REL_NAMES = {R_MIPS_32: "MIPS_32", R_MIPS_HI16: "MIPS_HI16", R_MIPS_LO16: "MIPS_LO16"}
@@ -92,15 +93,23 @@ def main():
         return f"D_{target:08X}"
 
     lines = []
+    all_roms = set()
+    resolved = []  # (typ, rom, loc_vram, target, link_value, addr_base)
+    jal_targets = set()
     for data in prxinfo.reloc_tables(elf):
         ents = [struct.unpack_from("<II", data, i) for i in range(0, len(data), 8)]
         hi_value = {}
         for i, (ofs, info) in enumerate(ents):
             typ, ofs_base, addr_base = info & 0xFF, (info >> 8) & 0xFF, (info >> 16) & 0xFF
-            if typ not in REL_NAMES:
+            if ofs_base >= len(segs):
                 continue
             rom = file_offset(ofs_base, ofs)
+            all_roms.add(rom)
             insn = word(rom)
+            if typ == R_MIPS_26 and insn >> 26 == 3 and addr_base < len(segs):
+                jal_targets.add(((insn & 0x3FFFFFF) << 2) + segs[addr_base]["p_vaddr"])
+            if typ not in REL_NAMES:
+                continue
             if typ == R_MIPS_32:
                 target = insn
             elif typ == R_MIPS_HI16:
@@ -120,25 +129,50 @@ def main():
                 phantoms.add(target)
             link_value = target
             target += segs[addr_base]["p_vaddr"]
-            seg = segs[addr_base]
-            in_seg = seg["p_vaddr"] <= target <= seg["p_vaddr"] + seg["p_memsz"]
-            in_section = any(x.addr <= target < x.addr + x.size for x in secs)
-            if target == gp_target:
-                in_range_elsewhere = True
-            elif typ != R_MIPS_32 and not in_seg:
-                in_range_elsewhere = False
-            else:
-                # targets between sections (e.g. one-past-end pointers) get no
-                # label from splat, so they must not become named symbols
-                in_range_elsewhere = in_section or target < text_end
-            if target < 0 or target > 0xFFFFFFFF or not in_range_elsewhere:
-                # base-minus-offset arithmetic: reference an absolute zero
-                # symbol with the link-space value as addend
-                lines.append(f"rom:{rom:#X} reloc:{REL_NAMES[typ]} symbol:PRX_ZERO addend:{link_value:#x}")
-                continue
-            lines.append(
-                f"rom:{rom:#X} reloc:{REL_NAMES[typ]} symbol:{sym_name(target, typ)}"
-            )
+            resolved.append((typ, rom, segs[ofs_base]["p_vaddr"] + ofs, target, link_value, addr_base))
+
+    # Jump tables: runs of R_MIPS_32 code pointers in read-only data, starting
+    # at an address the code loads with %hi/%lo, whose targets all lie inside
+    # one function. Their entries are case labels, not functions: they get no
+    # reloc entry here and spimdisasm labels them as a jump table.
+    hilo_code = {t: loc for typ, _, loc, t, _, _ in resolved if typ == R_MIPS_LO16 and loc < text_end}
+    func_starts = sorted(jal_targets | {t for t in hilo_code if t < text_end} | {0})
+    ptr32 = {loc: t for typ, _, loc, t, _, _ in resolved if typ == R_MIPS_32 and loc >= text_end and t < text_end}
+    jump_entries = set()
+    for base, site in hilo_code.items():
+        if base not in ptr32:
+            continue
+        run, loc = [], base
+        while loc in ptr32 and (loc == base or loc not in hilo_code):
+            run.append(loc)
+            loc += 4
+        targets = [ptr32[x] for x in run]
+        lo_t, hi_t = min(targets + [site]), max(targets + [site])
+        if not any(lo_t < f <= hi_t for f in func_starts):
+            jump_entries.update(run)
+
+    for typ, rom, loc, target, link_value, addr_base in resolved:
+        if typ == R_MIPS_32 and loc in jump_entries:
+            continue
+        seg = segs[addr_base]
+        in_seg = seg["p_vaddr"] <= target <= seg["p_vaddr"] + seg["p_memsz"]
+        in_section = any(x.addr <= target < x.addr + x.size for x in secs)
+        if target == gp_target:
+            in_range_elsewhere = True
+        elif typ != R_MIPS_32 and not in_seg:
+            in_range_elsewhere = False
+        else:
+            # targets between sections (e.g. one-past-end pointers) get no
+            # label from splat, so they must not become named symbols
+            in_range_elsewhere = in_section or target < text_end
+        if target < 0 or target > 0xFFFFFFFF or not in_range_elsewhere:
+            # base-minus-offset arithmetic: reference an absolute zero
+            # symbol with the link-space value as addend
+            lines.append(f"rom:{rom:#X} reloc:{REL_NAMES[typ]} symbol:PRX_ZERO addend:{link_value:#x}")
+            continue
+        lines.append(
+            f"rom:{rom:#X} reloc:{REL_NAMES[typ]} symbol:{sym_name(target, typ)}"
+        )
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text("\n".join(lines) + "\n")
@@ -156,6 +190,9 @@ def main():
         syms.append(f"D_{d:08X} = 0x{d:08X};")
     for ph in sorted(phantoms - funcs - data_syms - names.keys()):
         syms.append(f"PHANTOM_{ph:08X} = 0x{ph:08X}; // ignore:True")
+    # every relocated file offset (incl. R_MIPS_26), used by tools/split.py
+    args.out.with_name(args.out.name.replace("reloc_addrs.", "reloc_roms.")).write_text(
+        "".join(f"0x{r:X}\n" for r in sorted(all_roms)))
     abs_path = args.out.with_name(args.out.name.replace("reloc_addrs.", "abs_syms."))
     abs_path.write_text("PRX_ZERO = 0;\n" + "".join(f"D_{a:08X} = 0x{a:08X};\n" for a in sorted(absolute)))
     args.syms.write_text("\n".join(syms) + "\n")

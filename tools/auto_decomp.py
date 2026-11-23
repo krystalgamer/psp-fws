@@ -52,6 +52,9 @@ class Module:
             if m:
                 self.relocs[int(m[1], 16)] = "16" if m[2] in ("HI16", "LO16") else m[2]
         self.funcs = self._func_ranges()
+        m = re.search(r"compiler: ([0-9.]+)", self.src.read_text()) if self.src.exists() else None
+        self.compiler = m[1] if m else "1.7.1"
+        self.stats = {}
 
     def _func_ranges(self):
         asm = (ROOT / "tmp/asm" / self.ver / self.mod / "nonmatchings" / self.mod)
@@ -89,7 +92,10 @@ class Module:
         self.decls_h.write_text("\n".join(lines))
 
 
-def compile_words(c_text):
+COMPILERS = ("1.7.1", "1.3.1")
+
+
+def compile_words(c_text, compiler="1.7.1"):
     with tempfile.TemporaryDirectory() as td:
         c, s, o = Path(td) / "f.c", Path(td) / "f.s", Path(td) / "f.o"
         pre = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", f"-I{ROOT/'include'}", "-"],
@@ -97,7 +103,7 @@ def compile_words(c_text):
         if pre.returncode:
             return None, pre.stderr
         c.write_text(pre.stdout)
-        r = subprocess.run([str(TOOLS / "cc1-1.7.1"), "-O2", "-G0", "-quiet", str(c), "-o", str(s)],
+        r = subprocess.run([str(TOOLS / f"cc1-{compiler}"), "-O2", "-G0", "-quiet", str(c), "-o", str(s)],
                            capture_output=True, text=True)
         if r.returncode or "warning: implicit" in r.stderr:
             return None, r.stderr
@@ -170,8 +176,14 @@ def try_func(mod, name, header_ctx):
             return None
     text = header_ctx + "\n" + "\n".join(new_vars.values()) + "\n" + "\n".join(
         v for k, v in new_funcs.items() if k not in mod.store["funcs"]) + "\n" + body
-    words, err = compile_words(text)
-    if words is None or words != mod.target_words(name):
+    target = mod.target_words(name)
+    matching = set()
+    for comp in COMPILERS:
+        words, err = compile_words(text, comp)
+        if words is not None and words == target:
+            matching.add(comp)
+    mod.stats[name] = sorted(matching)
+    if mod.compiler not in matching:
         return None
     return new_funcs, new_vars, sig, body
 
@@ -214,6 +226,10 @@ def main():
             matched += 1
         print(f"[{i+1}/{len(names)}] {name}: {'MATCH' if res else '-'}", flush=True)
     print(f"matched {matched}/{len(names)}")
+    stats_path = ROOT / "tmp/auto_stats" / f"{args.version}_{args.module}.json"
+    stats_path.parent.mkdir(exist_ok=True)
+    stats_path.write_text(json.dumps({"compiler": mod.compiler, "tried": len(names), "matched": matched,
+                                      "funcs": mod.stats}))
     verify_and_revert(mod, args)
 
 
