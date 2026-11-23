@@ -24,6 +24,7 @@ from elftools.elf.elffile import ELFFile
 from elftools.elf.relocation import RelocationSection
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import asfix  # noqa: E402
 import protos  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -124,6 +125,7 @@ def compile_words(c_text, compiler="1.7.1", opt="-O2"):
                            capture_output=True, text=True)
         if r.returncode or "warning: implicit" in r.stderr:
             return None, r.stderr
+        s.write_text(asfix.fix(s.read_text()))
         r = subprocess.run([str(TOOLS / "psp-as-1.3.1"), "-EL", "-G0", "-o", str(o), str(s)], capture_output=True, text=True)
         if r.returncode:
             return None, r.stderr
