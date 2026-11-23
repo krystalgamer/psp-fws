@@ -9,6 +9,7 @@ s32 func_00000A78(void *arg0);
 s32 func_00000B08(void *arg0);
 M2C_UNK func_00000B9C(void *, s32);
 s32 func_00000BCC(M2C_UNK, s32);
+s32 func_00000C70(void *arg0, void *arg1);
 M2C_UNK func_00000CC8(void *);
 s32 func_00000D58(void *arg0);
 void func_000014E8(void **arg0, M2C_UNK arg1);

@@ -6,6 +6,8 @@
 
 
 void func_0000010C(void);
+void func_00000588(void);
+void func_00000590(void);
 void func_00000A00(void);
 void func_000014E0(void);
 void func_000014FC(void);

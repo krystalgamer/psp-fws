@@ -1,9 +1,13 @@
 {
  "funcs": {
   "func_00000000": "M2C_UNK func_00000000();",
+  "func_00000888": "void func_00000888(void **arg0, void **arg1);",
   "func_000008A8": "void func_000008A8(void **arg0);",
   "func_00000EFC": "void func_00000EFC(void *arg0, s32 arg1);",
   "func_00000F6C": "void func_00000F6C(void *arg0, s32 arg1);",
+  "func_000017BC": "void func_000017BC(void);",
+  "func_000017C4": "void func_000017C4(void);",
+  "func_000017CC": "void func_000017CC(void);",
   "func_00002C7C": "M2C_UNK func_00002C7C(M2C_UNK, M2C_UNK);",
   "func_00002CE8": "void func_00002CE8(void);",
   "func_00002D08": "void func_00002D08(void);",

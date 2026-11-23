@@ -87,7 +87,15 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00000BCC);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00000C70);
+s32 func_00000C70(void *arg0, void *arg1) {
+    s32 var_a2;
+
+    var_a2 = 0;
+    if (func_00000B08(arg0) == 7) {
+        var_a2 = func_00017598(arg0, arg1);
+    }
+    return var_a2;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00000CC8);
 

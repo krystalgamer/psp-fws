@@ -14,6 +14,7 @@ s32 func_00005C5C(s32 arg0);
 s32 func_00005C84(void);
 void func_00007ADC(void);
 s32 func_00008734(void);
+void func_00008FF0(void);
 s32 func_00009018(void *arg0);
 u32 func_00009548(s32);
 M2C_UNK sceKernelCheckThreadStack();

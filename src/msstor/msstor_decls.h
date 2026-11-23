@@ -6,11 +6,13 @@
 
 
 s32 func_00001558(void *arg0);
+void func_000017BC(s32 *arg0, s32 arg1);
 void func_000017E8(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 void func_0000181C(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 void func_00001850(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 void func_00001884(s32 *arg0);
 void func_000018AC(s32 *arg0, s32 arg1);
+void func_00001B28(s32 *arg0, s32 arg1);
 void func_00001B54(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 void func_00001B88(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 void func_00001BBC(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);

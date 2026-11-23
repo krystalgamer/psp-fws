@@ -82,7 +82,18 @@ INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_000
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_00000758);
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_000008C8);
+s32 func_000008C8(void *arg0) {
+    s32 temp_v0;
+
+    func_00013C90(arg0, 0);
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x10);
+    M2C_FIELD(arg0, s8 *, 0x4E) = 0;
+    M2C_FIELD(arg0, s8 *, 0x60) = 0;
+    if (temp_v0 != 0) {
+        func_00006DCC(temp_v0, 0);
+    }
+    return func_00013C5C(arg0) != 0;
+}
 
 void func_00000924(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x50) = 0;

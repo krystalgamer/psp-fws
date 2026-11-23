@@ -71,7 +71,10 @@ INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_47
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_071749CE);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", func_00000888);
+void func_00000888(void **arg0, void **arg1) {
+    *arg0 = *arg1;
+    func_000008A8(arg0);
+}
 
 void func_000008A8(void **arg0) {
     void *temp_a0;

@@ -5,6 +5,7 @@
 #include "m2c_macros.h"
 
 
+s32 func_000008C8(void *arg0);
 void func_00000924(void *arg0);
 s32 func_00000960();
 s32 func_00000A58(void *arg0);
@@ -29,6 +30,7 @@ M2C_UNK func_00005BC4();
 void func_00006B04(void);
 void func_00006B0C(void);
 void func_00006D50(void *arg0, M2C_UNK arg1);
+M2C_UNK func_00006DCC(s32, M2C_UNK);
 void func_000072F4(void);
 void func_0000763C(void *arg0);
 M2C_UNK func_0000947C(void *, M2C_UNK);
@@ -99,6 +101,7 @@ void func_00013764(void *arg0);
 void func_00013780(void *arg0);
 void func_0001379C(void *arg0);
 s32 func_00013C24(void *arg0, void *arg1);
+s32 func_00013C5C(void *);
 void func_00013C88(void);
 void func_00013C90(void *arg0, s8 arg1);
 s32 func_00013C98(void *arg0);

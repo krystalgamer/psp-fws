@@ -135,7 +135,10 @@ INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_0000122C);
 
 INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00001254);
 
-INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000013B4);
+void func_000013B4(void **arg0, void **arg1) {
+    *arg0 = *arg1;
+    func_000014F0(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000013D4);
 

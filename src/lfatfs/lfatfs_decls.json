@@ -12,6 +12,8 @@
   "func_00005388": "M2C_UNK func_00005388(s32, s32);",
   "func_00005470": "M2C_UNK func_00005470(s32, s32);",
   "func_00006600": "M2C_UNK func_00006600(s32, s32);",
+  "func_00009D0C": "void func_00009D0C(void);",
+  "func_00009D14": "void func_00009D14(void);",
   "sceLFatFs_driver_8F0560E0": "s32 sceLFatFs_driver_8F0560E0(void);"
  },
  "vars": {}

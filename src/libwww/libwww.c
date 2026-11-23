@@ -211,9 +211,33 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", sceHVWWW_Library_6DA7C2B5)
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000026E4);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00002760);
+s32 func_00002760(s32 arg0, M2C_UNK arg1) {
+    s32 *temp_v0;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000027C0);
+    temp_v0 = sceHVNetfront_Module_27D353B1(arg1);
+    var_v0 = 0;
+    if (temp_v0 != NULL) {
+        func_000359CC(arg0 + 0xE2EC, temp_v0);
+        sceHVNetfront_Module_0D525122(temp_v0);
+        var_v0 = 1;
+    }
+    return var_v0;
+}
+
+s32 func_000027C0(s32 arg0, s32 arg1) {
+    s32 *temp_v0;
+    s32 var_v0;
+
+    temp_v0 = sceHVNetfront_Module_27D353B1(arg1);
+    var_v0 = 0;
+    if (temp_v0 != NULL) {
+        func_00035A60(arg0 + 0xE2EC, temp_v0);
+        sceHVNetfront_Module_0D525122(temp_v0);
+        var_v0 = 1;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", sceHVWWW_Library_33DF0E15);
 
@@ -698,11 +722,39 @@ void func_00007854(void) {
 void func_0000785C(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00007864);
+void func_00007864(void *arg0) {
+    s32 *temp_v0;
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_0000788C);
+    temp_v0 = M2C_FIELD(arg0, s32 **, 0x18);
+    if (temp_v0 != NULL) {
+        sceHVNetfront_Module_0D525122(temp_v0);
+    }
+}
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000078B4);
+void func_0000788C(void *arg0) {
+    s32 *temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 **, 0x18);
+    if (temp_v0 != NULL) {
+        sceHVNetfront_Module_0D525122(temp_v0);
+    }
+}
+
+void func_000078B4(s32 arg0) {
+    s32 *temp_v0;
+    s32 *temp_v0_2;
+    void *temp_s0;
+
+    temp_s0 = arg0 + 0x10;
+    temp_v0 = M2C_FIELD(temp_s0, s32 **, 8);
+    if (temp_v0 != NULL) {
+        sceHVNetfront_Module_0D525122(temp_v0);
+    }
+    temp_v0_2 = M2C_FIELD(temp_s0, s32 **, 0xC);
+    if (temp_v0_2 != NULL) {
+        sceHVNetfront_Module_0D525122(temp_v0_2);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000078FC);
 
@@ -714,7 +766,19 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000079C4);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000079F0);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00007A1C);
+void func_00007A1C(void *arg0) {
+    s32 *temp_v0;
+    s32 *temp_v0_2;
+
+    temp_v0 = M2C_FIELD(arg0, s32 **, 0x20);
+    if (temp_v0 != NULL) {
+        sceHVNetfront_Module_0D525122(temp_v0);
+    }
+    temp_v0_2 = M2C_FIELD(arg0, s32 **, 0x24);
+    if (temp_v0_2 != NULL) {
+        sceHVNetfront_Module_0D525122(temp_v0_2);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00007A64);
 
@@ -918,7 +982,18 @@ void func_0000A3BC(s32 arg0) {
     sceHVWWW_Library_B6211E66(temp_s0);
 }
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_0000A3EC);
+s32 *func_0000A3EC(void) {
+    s32 *temp_v0;
+    s32 *var_v0;
+
+    temp_v0 = sceHVNetfront_Module_5CA39435(0x98);
+    var_v0 = NULL;
+    if (temp_v0 != NULL) {
+        func_0000A39C(temp_v0);
+        var_v0 = temp_v0;
+    }
+    return var_v0;
+}
 
 void func_0000A42C(s32 arg0) {
     func_0000A3BC(arg0);
@@ -3802,7 +3877,11 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_0003B758);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_0003B8CC);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_0003B948);
+void func_0003B948(s32 *arg0) {
+    if (arg0 != NULL) {
+        sceHVNetfront_Module_0D525122(arg0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_0003B968);
 
@@ -4155,7 +4234,20 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00042780);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000427E4);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000429D4);
+void func_000429D4(void *arg0) {
+    s32 *temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 **, 0x24);
+    if (temp_v0 != NULL) {
+        sceHVNetfront_Module_0D525122(temp_v0);
+    }
+    func_00042D7C(arg0, M2C_FIELD(arg0, s32 *, 0x20));
+    sceHVNetfront_Module_B8C28371((s32) arg0);
+    sceHVNetfront_Module_14411643((s32) (arg0 + 0x2C));
+    sceHVNetfront_Module_14411643((s32) (arg0 + 0x1B8));
+    sceHVNetfront_Module_14411643((s32) (arg0 + 0x2CC));
+    sceHVNetfront_Module_14411643((s32) (arg0 + 0x350));
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00042A3C);
 
@@ -4316,15 +4408,59 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00048290);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000483AC);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00048438);
+void func_00048438(void *arg0) {
+    s32 *temp_v0;
+    s32 *temp_v0_2;
+
+    temp_v0 = M2C_FIELD(arg0, s32 **, 8);
+    if (temp_v0 != NULL) {
+        sceHVNetfront_Module_0D525122(temp_v0);
+    }
+    temp_v0_2 = M2C_FIELD(arg0, s32 **, 0xC);
+    if (temp_v0_2 != NULL) {
+        sceHVNetfront_Module_0D525122(temp_v0_2);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00048480);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_0004868C);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000486D0);
+s32 func_000486D0(void *arg0, s32 arg1, s32 arg2) {
+    s32 *temp_v0_2;
+    s32 temp_v0;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00048730);
+    temp_v0 = sceHVNetfront_Module_D9FE99F5(arg1, arg2);
+    var_v0 = 0;
+    if (temp_v0 != 0) {
+        temp_v0_2 = M2C_FIELD(arg0, s32 **, 8);
+        if (temp_v0_2 != NULL) {
+            sceHVNetfront_Module_0D525122(temp_v0_2);
+        }
+        M2C_FIELD(arg0, s32 **, 8) = (s32 *) temp_v0;
+        var_v0 = 1;
+    }
+    return var_v0;
+}
+
+s32 func_00048730(void *arg0, s32 arg1, s32 arg2) {
+    s32 *temp_v0_2;
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_v0 = sceHVNetfront_Module_D9FE99F5(arg1, arg2);
+    var_v0 = 0;
+    if (temp_v0 != 0) {
+        temp_v0_2 = M2C_FIELD(arg0, s32 **, 0xC);
+        if (temp_v0_2 != NULL) {
+            sceHVNetfront_Module_0D525122(temp_v0_2);
+        }
+        M2C_FIELD(arg0, s32 **, 0xC) = (s32 *) temp_v0;
+        var_v0 = 1;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00048790);
 
@@ -9720,7 +9856,11 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000B57C0);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000B5810);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000B58E0);
+void func_000B58E0(void *arg0) {
+    func_000B5810(arg0, 1);
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    sceHVNetfront_Module_4C96FA60(arg0 + 0x1C, arg0 + 0x24, 0x20);
+}
 
 void func_000B5920(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
@@ -9909,7 +10049,16 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000BB374);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000BB3F4);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000BB4A0);
+void func_000BB4A0(void *arg0) {
+    s32 *temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 **, 0x1B0);
+    if (temp_v0 != NULL) {
+        sceHVNetfront_Module_0D525122(temp_v0);
+        M2C_FIELD(arg0, s32 **, 0x1B0) = NULL;
+    }
+    func_000B963C(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_000BB4E0);
 

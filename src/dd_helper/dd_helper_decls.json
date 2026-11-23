@@ -1,12 +1,15 @@
 {
  "funcs": {
+  "func_00000230": "void func_00000230(void);",
   "func_0000038C": "s32 func_0000038C(void);",
   "func_0000052C": "M2C_UNK func_0000052C(M2C_UNK);",
+  "func_000005BC": "void func_000005BC(void);",
   "func_000005C4": "void func_000005C4(void);",
   "func_00000718": "void func_00000718(void *arg0);",
   "func_00000734": "M2C_UNK func_00000734(M2C_UNK, M2C_UNK);",
   "func_000007BC": "void func_000007BC(void);",
   "func_000007DC": "void func_000007DC(void);",
+  "func_000008F8": "void func_000008F8(void);",
   "func_00001138": "void func_00001138(void *arg0);",
   "func_000014E0": "void func_000014E0(void *arg0);",
   "func_0000178C": "void func_0000178C(s32 arg0);",

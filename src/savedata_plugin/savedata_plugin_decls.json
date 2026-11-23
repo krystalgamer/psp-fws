@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "func_000008C8": "s32 func_000008C8(void *arg0);",
   "func_00000924": "void func_00000924(void *arg0);",
   "func_00000960": "s32 func_00000960();",
   "func_00000A58": "s32 func_00000A58(void *arg0);",
@@ -24,6 +25,7 @@
   "func_00006B04": "void func_00006B04(void);",
   "func_00006B0C": "void func_00006B0C(void);",
   "func_00006D50": "void func_00006D50(void *arg0, M2C_UNK arg1);",
+  "func_00006DCC": "M2C_UNK func_00006DCC(s32, M2C_UNK);",
   "func_000072F4": "void func_000072F4(void);",
   "func_0000763C": "void func_0000763C(void *arg0);",
   "func_0000947C": "M2C_UNK func_0000947C(void *, M2C_UNK);",
@@ -94,6 +96,7 @@
   "func_00013780": "void func_00013780(void *arg0);",
   "func_0001379C": "void func_0001379C(void *arg0);",
   "func_00013C24": "s32 func_00013C24(void *arg0, void *arg1);",
+  "func_00013C5C": "s32 func_00013C5C(void *);",
   "func_00013C88": "void func_00013C88(void);",
   "func_00013C90": "void func_00013C90(void *arg0, s8 arg1);",
   "func_00013C98": "s32 func_00013C98(void *arg0);",

@@ -6,9 +6,13 @@
 
 
 M2C_UNK func_00000000();
+void func_00000888(void **arg0, void **arg1);
 void func_000008A8(void **arg0);
 void func_00000EFC(void *arg0, s32 arg1);
 void func_00000F6C(void *arg0, s32 arg1);
+void func_000017BC(void);
+void func_000017C4(void);
+void func_000017CC(void);
 M2C_UNK func_00002C7C(M2C_UNK, M2C_UNK);
 void func_00002CE8(void);
 void func_00002D08(void);

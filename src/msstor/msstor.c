@@ -85,7 +85,9 @@ INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_0000172C);
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00001794);
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_000017BC);
+void func_000017BC(s32 *arg0, s32 arg1) {
+    func_000077C4(sceMScm_driver_BE455B5D(*arg0, arg1, 8, -1));
+}
 
 void func_000017E8(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
     func_000077C4(sceMScm_driver_BE455B5D(*arg0, arg2, arg1, -1));
@@ -113,7 +115,9 @@ INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_0000192C);
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_000019C8);
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor", func_00001B28);
+void func_00001B28(s32 *arg0, s32 arg1) {
+    func_000077C4(sceMScm_driver_21183216(*arg0, arg1, 8, -1));
+}
 
 void func_00001B54(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
     func_000077C4(sceMScm_driver_21183216(*arg0, arg2, arg1, -1));

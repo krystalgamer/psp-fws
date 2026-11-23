@@ -8,6 +8,8 @@
 M2C_UNK func_00000668(M2C_UNK, M2C_UNK);
 void func_000008DC(void);
 void func_000008FC(void);
+void func_000024C0(void);
+void func_0000417C(void);
 void func_00004790(s32 *arg0, s32 arg1);
 M2C_UNK func_00004830();
 M2C_UNK func_00004AC0();

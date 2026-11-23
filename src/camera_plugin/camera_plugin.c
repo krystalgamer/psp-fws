@@ -309,7 +309,10 @@ void func_00001F9C(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_00001FB8);
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_00001FE8);
+void func_00001FE8(void **arg0, void **arg1) {
+    *arg0 = *arg1;
+    func_00002008(arg0);
+}
 
 void func_00002008(void **arg0) {
     void *temp_a0;

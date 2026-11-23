@@ -1,5 +1,7 @@
 {
  "funcs": {
+  "func_00000290": "void func_00000290(void);",
+  "func_00000298": "void func_00000298(void);",
   "func_0000034C": "M2C_UNK func_0000034C();",
   "module_stop": "s32 module_stop(void);"
  },

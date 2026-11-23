@@ -9,6 +9,7 @@
   "func_00005C84": "s32 func_00005C84(void);",
   "func_00007ADC": "void func_00007ADC(void);",
   "func_00008734": "s32 func_00008734(void);",
+  "func_00008FF0": "void func_00008FF0(void);",
   "func_00009018": "s32 func_00009018(void *arg0);",
   "func_00009548": "u32 func_00009548(s32);",
   "sceKernelCheckThreadStack": "M2C_UNK sceKernelCheckThreadStack();"

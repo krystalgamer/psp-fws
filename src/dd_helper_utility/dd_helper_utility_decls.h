@@ -5,13 +5,16 @@
 #include "m2c_macros.h"
 
 
+void func_00000204(void);
 s32 func_00000320(void);
 M2C_UNK func_000004C0(M2C_UNK);
+void func_00000550(void);
 void func_00000558(void);
 void func_000006AC(void *arg0);
 M2C_UNK func_000006C8(M2C_UNK, M2C_UNK);
 void func_00000750(void);
 void func_00000770(void);
+void func_0000088C(void);
 void func_00000F18(s32 arg0);
 void func_00001120(void *arg0);
 M2C_UNK func_000021C8(void *, s32);

@@ -413,7 +413,20 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000040B4);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000040FC);
 
-INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00004134);
+s32 func_00004134(void *arg0, s32 *arg1) {
+    s32 temp_v0;
+    s32 var_a0;
+
+    temp_v0 = func_0000404C();
+    var_a0 = -1;
+    if (temp_v0 != 0) {
+        if (arg1 != NULL) {
+            sceHVSlim_Library_1A02495A(temp_v0, arg1, M2C_FIELD(arg0, s16 *, 0xC));
+        }
+        var_a0 = M2C_FIELD(arg0, s32 *, 0x14) - 1;
+    }
+    return var_a0;
+}
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_0000418C);
 
@@ -443,7 +456,20 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000044DC);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00004540);
 
-INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_0000457C);
+s32 func_0000457C(void *arg0, s32 *arg1) {
+    s32 temp_v0;
+    s32 var_a0;
+
+    temp_v0 = func_000044DC();
+    var_a0 = -1;
+    if (temp_v0 != 0) {
+        if (arg1 != NULL) {
+            sceHVSlim_Library_1A02495A(temp_v0, arg1, M2C_FIELD(arg0, s16 *, 0xC));
+        }
+        var_a0 = M2C_FIELD(arg0, s32 *, 0x10) - 1;
+    }
+    return var_a0;
+}
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000045D4);
 
@@ -742,13 +768,20 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", sceHVSlim_Library_24B1FC
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00008C10);
 
-INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", sceHVSlim_Library_A2F4AC9E);
+void sceHVSlim_Library_A2F4AC9E(s32 arg0) {
+    func_00008448(arg0, -1);
+    func_00007DB0(arg0, 1);
+}
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", sceHVSlim_Library_8BC25716);
 
-INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", sceHVSlim_Library_6D4EE418);
+void sceHVSlim_Library_6D4EE418(s32 arg0) {
+    func_00008890(arg0, 0);
+}
 
-INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", sceHVSlim_Library_D39BDE45);
+void sceHVSlim_Library_D39BDE45(s32 arg0) {
+    func_00008890(arg0, 1);
+}
 
 void func_00008DB8(s32 arg0, s32 arg1) {
     func_00008890(arg0 * arg1, 1);
