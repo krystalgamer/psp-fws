@@ -370,6 +370,7 @@ def main():
     ap.add_argument("--grep", help="only functions whose asm matches this regex")
     ap.add_argument("--names", help="file with function names to try (one per line)")
     ap.add_argument("--fast", action="store_true", help="only compile with each file's own setting")
+    ap.add_argument("--min-size", type=lambda x: int(x, 0), default=0)
     args = ap.parse_args()
     global FAST
     FAST = args.fast
@@ -383,7 +384,7 @@ def main():
         srcs[f] = s
     owner = {m[2]: f for f, s in srcs.items() for m in INC.finditer(s)}
     names = list(owner)
-    names = [n for n in names if n in mod.funcs and mod.funcs[n][1] - mod.funcs[n][0] <= args.max_size]
+    names = [n for n in names if n in mod.funcs and args.min_size < mod.funcs[n][1] - mod.funcs[n][0] <= args.max_size]
     if args.only:
         names = [n for n in names if n == args.only]
     if args.grep:
