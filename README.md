@@ -49,6 +49,31 @@ and `make split VERSION=<ver> MODULE=<name>`. In bulk: `tools/batch_setup.py`
 (resumable; `--retry-failed`, `--all` to re-verify everything). After changing tools,
 check from scratch with `tools/regress.sh 360:mcctrl 340:mcore ...`.
 
+### Several firmware versions, one source
+
+A module's `src/<module>/` serves every firmware version whose config points its
+`src_path` there. Builds get `-DFW_VERSION=<n>` (`200v1` → `FW_VERSION=200`,
+`FW_VARIANT=1`). `INCLUDE_ASM("nonmatchings/<tu>", f)` resolves in the version's own
+asm dir (`psp-as -Itmp/asm/<ver>/<module>`). Code that differs between versions
+sits in `#if FW_VERSION == N` / `#if FW_VERSION != N` (`#else`) blocks.
+
+`tools/fw_pass.sh REF NEW MODULE` adds version NEW to a module already built from C
+at REF:
+- `tools/add_version.py` aligns the two versions' functions and rodata by normalised
+  asm (symbol names and addresses abstracted):
+  - Identical units get REF's names in NEW, via the "shared names" block of
+    `config/NEW/symbol_addrs.<module>.txt` (with `rom:`/`segment:` where PRX
+    segment vrams overlap).
+  - Changed functions keep one name, matched by NID or by similar code.
+  - Everything else is wrapped for one version.
+- `tools/auto_decomp.py NEW MODULE` then decompiles NEW's own functions. On a
+  shared source it only edits code compiled for that version
+  (`tools/fwblocks.py`).
+
+Tools that edit a shared source verify all of its versions
+(`tools/regress.sh --shared VER:MOD`). 1.00 shares sources for all single-TU
+modules; multi-TU modules (paf, pafmini, pspnet_apctl, …) are not supported yet.
+
 ## Decompiling
 
 ```sh
@@ -141,3 +166,11 @@ the `m2c` package on PyPI is an unrelated project.
 - Sony code here uses small inline helpers (memclr/memcpy/memcmp taking
   `void *` and casting to local byte pointers) and `goto end` error chains;
   reproducing those is usually what makes register allocation match.
+
+Pre-1.00 devkit (`inputs/psp_devkit.zip`, **not committed**): the devkit 0.6.0
+static libraries (`pspnet_apctl.a`, `pspnet_resolver.a`, `pspnet_adhocctl.a`,
+`libhttp.a`, `libparse_uri.a`, …) were built by psp-gcc 1.4.0.internal with `-g`.
+`tools/dwarf_dump.py LIB.a > out.json` dumps their source files, prototypes,
+locals and struct/enum/typedef definitions, plus each function's code with
+relocated words masked. Many of these functions are byte-identical to the 1.00
+modules (e.g. 59/102 in pspnet_apctl, 20/25 in pspnet_resolver).
