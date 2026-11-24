@@ -1,0 +1,121 @@
+#include "common.h"
+#include "msvideo_plugin_decls.h"
+
+s32 func_00037A18(s32 arg0) {
+    s32 var_a1;
+
+    var_a1 = 0;
+    if (arg0 != 0x61766331) {
+        if (arg0 == 0x6D703476) {
+            var_a1 = 1;
+        }
+    } else {
+        var_a1 = 1;
+    }
+    return var_a1;
+}
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037A48);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037A58);
+
+INCLUDE_RODATA("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", D_00065150);
+
+INCLUDE_RODATA("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", D_00065210);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037A68);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037B3C);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037CCC);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037D44);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037E64);
+
+void func_00037EFC(void) {
+    sceMpegDelete();
+}
+
+INCLUDE_RODATA("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", D_0006538C);
+
+INCLUDE_RODATA("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", D_000653B4);
+
+INCLUDE_RODATA("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", D_000653D4);
+
+INCLUDE_RODATA("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", D_000653EC);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037F18);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037FF8);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_000381E8);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00038274);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_000383A8);
+
+s32 func_0003848C(void **arg0) {
+    s32 var_v1;
+    void *temp_v0;
+
+    var_v1 = 0x80610103;
+    if (arg0 != NULL) {
+        temp_v0 = *arg0;
+        var_v1 = (func_00038820(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 8)) == 0) ? 0 : 0x80618006;
+    }
+    return var_v1;
+}
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_000384CC);
+
+s32 func_00038514(void **arg0) {
+    s32 var_v1;
+    void *temp_v0;
+
+    var_v1 = 0x80610103;
+    if (arg0 != NULL) {
+        temp_v0 = *arg0;
+        var_v1 = (func_0003884C(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 8)) == 0) ? 0 : 0x80618006;
+    }
+    return var_v1;
+}
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00038554);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00038660);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_000386E8);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_0003877C);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00038820);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_0003884C);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00038890);
+
+s32 func_00038934(void *arg0, s32 arg1) {
+    s32 var_v0;
+    void *temp_a0;
+
+    var_v0 = 4;
+    if (arg0 != NULL) {
+        temp_a0 = M2C_FIELD(arg0, void **, 4);
+        if (temp_a0 != NULL) {
+            M2C_FIELD(temp_a0, s32 *, 0) = arg1;
+            M2C_FIELD(temp_a0, s32 *, 0x24) = 1;
+            var_v0 = 0;
+        }
+    }
+    return var_v0;
+}
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00038960);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_000389A4);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00038A08);
+
+INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00038A70);
+

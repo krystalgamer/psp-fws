@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/201/.splat_cache.msvideo_plugin
   symbol_addrs_path:
     - config/201/symbol_addrs.msvideo_plugin.txt
+    - config/201/func_starts.msvideo_plugin.txt
     - tmp/build/201/prx_syms.msvideo_plugin.txt
   reloc_addrs_path: [tmp/build/201/reloc_addrs.msvideo_plugin.txt]
   asset_path: tmp/assets/201/msvideo_plugin
@@ -54,6 +55,14 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, msvideo_plugin]
+      - [0x2004, c, msvideo_plugin_001F84]
+      - [0x52AC, c, msvideo_plugin_00522C]
+      - [0x37758, c, msvideo_plugin_0376D8]
+      - [0x37A98, c, msvideo_plugin_037A18]
+      - [0x39004, c, msvideo_plugin_038F84]
+      - [0x3A4FC, c, msvideo_plugin_03A47C]
+      - [0x56584, c, msvideo_plugin_056504]
+      - [0x56820, c, msvideo_plugin_0567A0]
       - { start: 0x5FFDC, type: asm, name: fini, linker_section: .fini }
       - { start: 0x5FFF8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x608F8, type: prxpad, order: .text }
@@ -72,6 +81,10 @@ segments:
       - { start: 0x612E8, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x612EC, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x612F0, .rodata, msvideo_plugin]
+      - [0x616C0, .rodata, msvideo_plugin_001F84]
+      - [0x61990, .rodata, msvideo_plugin_00522C]
+      - [0x651D0, .rodata, msvideo_plugin_037A18]
+      - [0x654D4, .rodata, msvideo_plugin_0567A0]
       - { start: 0x65B18, type: prxpad, order: .rodata }
   - name: msvideo_plugin_seg1
     type: code
