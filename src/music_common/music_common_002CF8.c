@@ -2,7 +2,14 @@
 #include "common.h"
 #include "music_common_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_002CF8", func_00002CF8);
+void func_00002CF8(void) {
+    s32 temp_v0;
+
+    temp_v0 = music_common_E79F4C9B();
+    if (temp_v0 != 0) {
+        func_00004100(temp_v0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_002CF8", func_00002D24);
 
@@ -38,7 +45,20 @@ u8 music_common_266E7951(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 8);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_002CF8", music_common_55F1B860);
+s32 music_common_55F1B860(void *arg0) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = -1;
+    if (M2C_FIELD(arg0, u8 *, 8) != 0) {
+        temp_v0 = func_00004450(M2C_FIELD(arg0, s32 *, 4), arg0 + 0x20);
+        var_v1 = temp_v0;
+        if (temp_v0 >= 0) {
+            var_v1 = M2C_FIELD(arg0, s32 *, 0x20);
+        }
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_002CF8", music_common_89CDD289);
 

@@ -17,7 +17,17 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_012A1C", func_00
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_012A1C", func_00012D5C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_012A1C", func_00012D7C);
+s32 func_00012D7C(s32 *arg0, s32 arg1) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = scePaf_D4FAE7D0(arg0);
+    var_v1 = 0;
+    if (temp_v0 != 0) {
+        var_v1 = scePaf_338C3774(temp_v0, arg1);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_012A1C", func_00012DC0);
 

@@ -2,7 +2,20 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_026D98", func_00026D98);
+void func_00026D98(void) {
+    s32 temp_s0;
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = vsh_81BBD0D1(vsh_34DA1B67(), &D_000315F4);
+    if (temp_v0 != 0) {
+        temp_s0 = M2C_FIELD(vsh_34DA1B67(), s32 *, 4);
+        temp_v0_2 = scePaf_B7E6052B(0x1C);
+        scePaf_93538664(temp_v0_2, temp_v0, 0x280000, 0);
+        D_00031E60 = temp_v0_2;
+        D_00031E5C = scePaf_6D491648(0, temp_s0 + 0xFFD7FC00, temp_v0 + 0x280100);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_026D98", func_00026E40);
 

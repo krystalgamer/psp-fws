@@ -2,9 +2,25 @@
 #include "common.h"
 #include "video_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_005B3C", func_00005B3C);
+void func_00005B3C(s32 arg0, s32 arg1) {
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_005B3C", func_00005B8C);
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_00005F6C(arg0, arg1, var_v0);
+}
+
+void func_00005B8C(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_00006018(arg0, arg1, var_v0);
+}
 
 void func_00005BDC(void) {
     func_000060CC();

@@ -2,7 +2,15 @@
 #include "common.h"
 #include "music_common_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005BFC", music_common_D29A7B4B);
+s32 music_common_D29A7B4B(void *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0xC);
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005BFC", func_00005C10);
 
