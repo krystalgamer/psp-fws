@@ -94,20 +94,20 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0207E4", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0207E4", func_00021C04);
 
-void func_00021C94(s32 arg0, s32 arg1, s32 arg2) {
+void func_00021C94(struct Unk_func_00021C94_0 *arg0, s32 arg1, s32 arg2) {
     func_00022700(arg0, arg1);
-    M2C_FIELD(arg0, s32 *, 0x14) = arg2;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00055558;
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+    arg0->unk14 = arg2;
+    arg0->unk0 = &D_00055558;
+    arg0->unk18 = 0;
+    arg0->unk8 = 0;
 }
 
-void func_00021CDC(s32 arg0, s32 arg1, s32 arg2) {
+void func_00021CDC(struct Unk_func_00021CDC_0 *arg0, s32 arg1, s32 arg2) {
     func_00022700(arg0, arg1);
-    M2C_FIELD(arg0, s32 *, 0x14) = arg2;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00055558;
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+    arg0->unk14 = arg2;
+    arg0->unk0 = &D_00055558;
+    arg0->unk18 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_RODATA("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0207E4", D_00055518);
@@ -133,16 +133,16 @@ void func_00022230(s32 **arg0) {
     func_00043840((s32) arg0);
 }
 
-void func_00022258(s32 arg0, s32 arg1) {
+void func_00022258(struct Unk_func_00022258_0 *arg0, s32 arg1) {
     func_0003E42C(arg0, (s32) &D_000555AC, (s32) &D_000555A8);
-    M2C_FIELD(arg0, s32 *, 0x18) = arg1;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00055590;
+    arg0->unk18 = arg1;
+    arg0->unk0 = &D_00055590;
 }
 
-void func_000222A8(s32 arg0, s32 arg1) {
+void func_000222A8(struct Unk_func_000222A8_0 *arg0, s32 arg1) {
     func_0003E42C(arg0, (s32) &D_000555AC, (s32) &D_000555A8);
-    M2C_FIELD(arg0, s32 *, 0x18) = arg1;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00055590;
+    arg0->unk18 = arg1;
+    arg0->unk0 = &D_00055590;
 }
 
 void func_000222F8(struct Unk_func_000222F8_0 *arg0, s32 arg1, s32 arg2) {

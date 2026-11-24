@@ -116,6 +116,11 @@ struct Unk_func_00008BCC_temp_a3 {
 
 };
 
+struct Unk_func_0000C7EC_0 {
+    u8 pad0[0x114];
+    s32 unk114;
+};
+
 struct Unk_func_0000E800_0 {
     u8 pad0[0x30];
     s32 unk30;
@@ -565,7 +570,7 @@ s32 func_0000C718(void);
 void func_0000C788(void);
 s32 func_0000C7AC(s32 arg0);
 s32 func_0000C7E0(void);
-void func_0000C7EC(s32 arg0);
+void func_0000C7EC(struct Unk_func_0000C7EC_0 *arg0);
 void func_0000CA3C(void);
 void func_0000CA68(void);
 s32 func_0000CA94();

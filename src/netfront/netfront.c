@@ -889,13 +889,13 @@ INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront", D_0011D94C);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", sceHVNetfront_Module_A04377E3);
 
-void sceHVNetfront_Module_F55D8699(s32 arg0) {
+void sceHVNetfront_Module_F55D8699(struct Unk_sceHVNetfront_Module_F55D8699_0 *arg0) {
     if (arg0 != 0) {
         sceHVNetfront_Module_19BA8C5E(arg0);
     }
-    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
-    M2C_FIELD(arg0, s32 *, 0x174) = 0;
-    M2C_FIELD(arg0, s32 *, 0x170) = 0;
+    arg0->unk2C = 0;
+    arg0->unk174 = 0;
+    arg0->unk170 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", sceHVNetfront_Module_16240448);

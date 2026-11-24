@@ -1298,10 +1298,10 @@ s32 func_0000C7E0(void) {
     return D_00166C38;
 }
 
-void func_0000C7EC(s32 arg0) {
+void func_0000C7EC(struct Unk_func_0000C7EC_0 *arg0) {
     D_00166C38 = arg0;
     func_0000EBFC((s32) &D_00166BF0, func_00014EF8(arg0));
-    func_0000EBCC((s32) &D_00166BF0, M2C_FIELD(arg0, s32 *, 0x114));
+    func_0000EBCC((s32) &D_00166BF0, arg0->unk114);
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_0000C840);

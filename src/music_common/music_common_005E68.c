@@ -39,24 +39,24 @@ void func_00006008(struct Unk_func_00006008_0 *arg0) {
     func_00005CC4((u8 *)arg0 + 0x18);
 }
 
-void func_00006040(s32 arg0) {
+void func_00006040(struct Unk_func_00006040_0 *arg0) {
     music_common_74CC985E(arg0);
-    music_common_74CC985E(arg0 + 0x10);
-    music_common_74CC985E(arg0 + 0x20);
-    music_common_74CC985E(arg0 + 0x30);
-    music_common_74CC985E(arg0 + 0x40);
-    func_00005EE4(arg0 + 0x50);
-    M2C_FIELD(arg0, s32 *, 0x78) = 0;
+    music_common_74CC985E((u8 *)arg0 + 0x10);
+    music_common_74CC985E((u8 *)arg0 + 0x20);
+    music_common_74CC985E((u8 *)arg0 + 0x30);
+    music_common_74CC985E((u8 *)arg0 + 0x40);
+    func_00005EE4((u8 *)arg0 + 0x50);
+    arg0->unk78 = 0;
 }
 
-void music_common_9370D7F7(s32 arg0) {
+void music_common_9370D7F7(struct Unk_music_common_9370D7F7_0 *arg0) {
     music_common_74CC985E(arg0);
-    music_common_74CC985E(arg0 + 0x10);
-    music_common_74CC985E(arg0 + 0x20);
-    music_common_74CC985E(arg0 + 0x30);
-    music_common_74CC985E(arg0 + 0x40);
-    func_00005EE4(arg0 + 0x50);
-    M2C_FIELD(arg0, s32 *, 0x78) = 0;
+    music_common_74CC985E((u8 *)arg0 + 0x10);
+    music_common_74CC985E((u8 *)arg0 + 0x20);
+    music_common_74CC985E((u8 *)arg0 + 0x30);
+    music_common_74CC985E((u8 *)arg0 + 0x40);
+    func_00005EE4((u8 *)arg0 + 0x50);
+    arg0->unk78 = 0;
 }
 
 void func_000060E0(s32 arg0) {

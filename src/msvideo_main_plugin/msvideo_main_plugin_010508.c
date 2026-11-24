@@ -2,11 +2,11 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-void func_00010508(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+void func_00010508(struct Unk_func_00010508_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0000FC70(arg0, arg1);
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg3;
-    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000AF5E8;
+    arg0->unk1C = arg3;
+    arg0->unk18 = arg2;
+    arg0->unk0 = &D_000AF5E8;
 }
 
 void func_00010558(M2C_UNK **arg0) {

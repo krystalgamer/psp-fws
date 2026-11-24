@@ -326,14 +326,14 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", jpeg_make_c_derived_tbl);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", jchuff_dump_buffer);
 
-s32 jchuff_flush_bits(s32 arg0) {
+s32 jchuff_flush_bits(struct Unk_jchuff_flush_bits_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0;
     if (jchuff_emit_bits(arg0, 0x7F, 7) != 0) {
         var_v1 = 1;
-        M2C_FIELD(arg0, s32 *, 8) = 0;
-        M2C_FIELD(arg0, s32 *, 0xC) = 0;
+        arg0->unk8 = 0;
+        arg0->unkC = 0;
     }
     return var_v1;
 }

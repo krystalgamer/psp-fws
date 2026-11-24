@@ -2,21 +2,21 @@
 #include "common.h"
 #include "savedata_utility_decls.h"
 
-void func_00015C1C(s32 arg0, s32 arg1, s32 arg2) {
+void func_00015C1C(struct Unk_func_0000B3C4_0 *arg0, s32 arg1, s32 arg2) {
     func_00013360(arg0, arg1);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00025300;
-    func_0000AC4C(arg0 + 0x20, 0);
-    M2C_FIELD(arg0, s32 *, 0x24) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    arg0->unk0 = &D_00025300;
+    func_0000AC4C((u8 *)arg0 + 0x20, 0);
+    arg0->unk24 = arg2;
+    arg0->unk1C = 0;
     func_00015E9C(arg0);
 }
 
-void func_00015C74(s32 arg0, s32 arg1, s32 arg2) {
+void func_00015C74(struct Unk_func_00015C74_0 *arg0, s32 arg1, s32 arg2) {
     func_00013360(arg0, arg1);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00025300;
-    func_0000AC4C(arg0 + 0x20, 0);
-    M2C_FIELD(arg0, s32 *, 0x24) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    arg0->unk0 = &D_00025300;
+    func_0000AC4C((u8 *)arg0 + 0x20, 0);
+    arg0->unk24 = arg2;
+    arg0->unk1C = 0;
     func_00015E9C(arg0);
 }
 

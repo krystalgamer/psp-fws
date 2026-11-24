@@ -426,10 +426,10 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000D5288);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000D536C);
 
-void func_000D5418(s32 arg0) {
+void func_000D5418(struct Unk_func_000D5418_0 *arg0) {
     sceHVNetfront_Module_D611E938(arg0, 0, 0x10);
-    sceHVNetfront_Module_D611E938(arg0 + 0x30, 0, 0x10);
-    M2C_FIELD(arg0, s32 *, 0x40) = 0;
+    sceHVNetfront_Module_D611E938((u8 *)arg0 + 0x30, 0, 0x10);
+    arg0->unk40 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000D5458);

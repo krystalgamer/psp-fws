@@ -94,6 +94,16 @@ struct Unk_func_0001DAE8_0 {
     u32 unk1C;
 };
 
+struct Unk_func_0001E6F4_0 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
+struct Unk_func_0001E73C_0 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
 struct Unk_func_0001FF84_0 {
     u8 pad0[0xC];
     void ** unkC;
@@ -141,6 +151,36 @@ struct Unk_func_00020FA4_0 {
     u8 pad0[0x18];
     s32 unk18;
     s32 unk1C;
+};
+
+struct Unk_func_00021C94_0 {
+    M2C_UNK *unk0;
+    u8 pad4[0x4];
+    s32 unk8;
+    u8 padC[0x8];
+    s32 unk14;
+    s32 unk18;
+};
+
+struct Unk_func_00021CDC_0 {
+    M2C_UNK *unk0;
+    u8 pad4[0x4];
+    s32 unk8;
+    u8 padC[0x8];
+    s32 unk14;
+    s32 unk18;
+};
+
+struct Unk_func_00022258_0 {
+    M2C_UNK *unk0;
+    u8 pad4[0x14];
+    s32 unk18;
+};
+
+struct Unk_func_000222A8_0 {
+    M2C_UNK *unk0;
+    u8 pad4[0x14];
+    s32 unk18;
 };
 
 struct Unk_func_000222F8_0 {
@@ -1178,8 +1218,8 @@ s32 func_0001D5EC(s32);
 void func_0001DAE8(struct Unk_func_0001DAE8_0 *arg0, s32 arg1, u32 arg2, s32 arg3);
 s32 func_0001E3E8(s32, s32, s32);
 void func_0001E6C8(s32 arg0);
-void func_0001E6F4(s32 arg0);
-void func_0001E73C(s32 arg0);
+void func_0001E6F4(struct Unk_func_0001E6F4_0 *arg0);
+void func_0001E73C(struct Unk_func_0001E73C_0 *arg0);
 s32 func_0001E7C4(s32);
 s32 func_0001E838(s32);
 s32 func_0001E8B4(s32);
@@ -1205,14 +1245,14 @@ void func_00020F1C(M2C_UNK **arg0);
 void func_00020F44(M2C_UNK **arg0);
 s32 func_00020FA4(struct Unk_func_00020FA4_0 *arg0, s32 arg1, s32 arg2);
 s32 func_00020FCC(s32);
-void func_00021C94(s32 arg0, s32 arg1, s32 arg2);
-void func_00021CDC(s32 arg0, s32 arg1, s32 arg2);
+void func_00021C94(struct Unk_func_00021C94_0 *arg0, s32 arg1, s32 arg2);
+void func_00021CDC(struct Unk_func_00021CDC_0 *arg0, s32 arg1, s32 arg2);
 void func_000221E8(void);
 void func_000221F0(void);
 void func_000221F8(s32 **arg0);
 void func_00022230(s32 **arg0);
-void func_00022258(s32 arg0, s32 arg1);
-void func_000222A8(s32 arg0, s32 arg1);
+void func_00022258(struct Unk_func_00022258_0 *arg0, s32 arg1);
+void func_000222A8(struct Unk_func_000222A8_0 *arg0, s32 arg1);
 void func_000222F8(struct Unk_func_000222F8_0 *arg0, s32 arg1, s32 arg2);
 void func_00022314(M2C_UNK **arg0);
 s32 func_00022374(void);

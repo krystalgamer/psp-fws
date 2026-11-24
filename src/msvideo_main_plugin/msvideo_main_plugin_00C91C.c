@@ -2,16 +2,16 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-void func_0000C91C(s32 arg0, s32 arg1) {
+void func_0000C91C(struct Unk_func_0000C91C_0 *arg0, s32 arg1) {
     func_00004C84(arg0, arg1, (s32) &D_000AF100, 2, 0x20);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000AF330;
-    M2C_FIELD(arg0, s32 *, 0x68) = 0;
+    arg0->unk0 = &D_000AF330;
+    arg0->unk68 = 0;
 }
 
-void func_0000C960(s32 arg0, s32 arg1) {
+void func_0000C960(struct Unk_func_0000C960_0 *arg0, s32 arg1) {
     func_00004C84(arg0, arg1, (s32) &D_000AF100, 2, 0x20);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000AF330;
-    M2C_FIELD(arg0, s32 *, 0x68) = 0;
+    arg0->unk0 = &D_000AF330;
+    arg0->unk68 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00C91C", func_0000C9A4);

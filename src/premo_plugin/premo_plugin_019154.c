@@ -1072,12 +1072,12 @@ s32 func_00020BFC(void) {
     return 0x1C;
 }
 
-s8 func_00020C04(s32 arg0) {
+s8 func_00020C04(struct Unk_func_00020C04_0 *arg0) {
     s8 var_v1;
 
     var_v1 = 0;
     if (scePaf_9C0245AF(arg0, (s32) &D_0002C854, 3) == 0) {
-        var_v1 = M2C_FIELD(arg0, s8 *, 3);
+        var_v1 = arg0->unk3;
     }
     return var_v1;
 }
@@ -1285,10 +1285,10 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_000230C0);
 
-s32 func_00023230(s32 arg0, s32 arg1, s32 arg2) {
+s32 func_00023230(struct Unk_func_00023230_0 *arg0, s32 arg1, s32 arg2) {
     if (arg1 == 1) {
-        scePaf_3308156F(arg0 + 0xD8, arg2, 0x10);
-        M2C_FIELD(arg0, s8 *, 0xE8) = (s8) arg1;
+        scePaf_3308156F((u8 *)arg0 + 0xD8, arg2, 0x10);
+        arg0->unkE8 = (s8) arg1;
     }
     return 0;
 }

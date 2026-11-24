@@ -841,16 +841,16 @@ s32 func_000114DC(struct Unk_func_000114DC_0 *arg0) {
     return var_v1;
 }
 
-s32 func_00011518(s32 arg0, s32 arg1) {
+s32 func_00011518(struct Unk_func_00011518_0 *arg0, s32 arg1) {
     s32 temp_v0;
 
-    func_0001184C(arg0, arg1, arg0 + 0x1C);
-    if (M2C_FIELD(arg0, s32 *, 0x1C) != 0) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 4);
+    func_0001184C(arg0, arg1, &arg0->unk1C);
+    if (arg0->unk1C != 0) {
+        temp_v0 = arg0->unk4;
         if (temp_v0 == 0) {
 
         } else {
-            func_00015250(temp_v0, arg0 + 0x20, 0);
+            func_00015250(temp_v0, (u8 *)arg0 + 0x20, 0);
         }
     }
     return 0;

@@ -303,23 +303,23 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00DD54", scePaf_12C50A9D);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00DD54", scePaf_1F43B8A2);
 
-s32 func_00012A50(s32 arg0, s32 arg1) {
+s32 func_00012A50(struct Unk_func_00012A50_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0;
     if (func_00012988(arg0, arg1) != 0) {
-        M2C_FIELD(arg0, s16 *, 0x74) = (s16) arg1;
+        arg0->unk74 = (s16) arg1;
         var_v1 = 1;
     }
     return var_v1;
 }
 
-s32 func_00012A94(s32 arg0, s32 arg1) {
+s32 func_00012A94(struct Unk_func_00012A94_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0;
     if (func_00012988(arg0, arg1) != 0) {
-        M2C_FIELD(arg0, s16 *, 0x76) = (s16) arg1;
+        arg0->unk76 = (s16) arg1;
         var_v1 = 1;
     }
     return var_v1;

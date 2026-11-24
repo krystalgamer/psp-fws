@@ -1018,17 +1018,17 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_0286EC
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_0286EC", func_00031A1C);
 
-s32 func_00031B18(s32 arg0) {
+s32 func_00031B18(struct Unk_func_00031B18_0 *arg0) {
     struct Unk_func_00031B18_temp_v1 *temp_v1;
 
     func_000001B8((s32) &func_000324B8, arg0);
-    temp_v1 = M2C_FIELD(arg0, void **, 0x20);
+    temp_v1 = arg0->unk20;
     if (temp_v1 != NULL) {
-        M2C_FIELD(arg0, s32 *, 0x30) = (s32) temp_v1->unk4D8;
+        arg0->unk30 = (s32) temp_v1->unk4D8;
     }
-    M2C_FIELD(arg0, void **, 0x20) = NULL;
-    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
-    M2C_FIELD(arg0, s32 *, 0x34) = 0;
+    arg0->unk20 = NULL;
+    arg0->unk2C = 0;
+    arg0->unk34 = 0;
     return 1;
 }
 

@@ -59,6 +59,13 @@ struct Unk_func_000047DC_temp_a0 {
     void **unk4;
 };
 
+struct Unk_func_00004A3C_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+};
+
 struct Unk_func_00005778_0 {
     u8 pad0[0x8];
     u16 unk8;
@@ -400,7 +407,7 @@ s32 func_00004124(struct Unk_func_00004124_0 *arg0, s32 arg1);
 void func_000044AC(s32 arg0);
 void func_000047DC(struct Unk_func_000047DC_0 *arg0, struct Unk_func_000047DC_1 *arg1, s32 arg2);
 s32 func_000048B8(s32, s32);
-void func_00004A3C(s32 arg0);
+void func_00004A3C(struct Unk_func_00004A3C_0 *arg0);
 s32 func_00005008(s32);
 void func_00005778(struct Unk_func_00005778_0 *arg0);
 void func_0000588C(struct Unk_func_0000588C_0 *arg0);

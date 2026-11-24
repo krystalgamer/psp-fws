@@ -80,7 +80,7 @@ void func_0001E6C8(s32 arg0) {
     func_0001ED90(arg0);
 }
 
-void func_0001E6F4(s32 arg0) {
+void func_0001E6F4(struct Unk_func_0001E6F4_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
@@ -88,13 +88,13 @@ void func_0001E6F4(s32 arg0) {
     if (temp_v0 != 0) {
         func_0003C974(temp_v0);
     }
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0xC);
+    temp_v1 = arg0->unkC;
     if (temp_v1 != 0) {
         func_0003C974(temp_v1);
     }
 }
 
-void func_0001E73C(s32 arg0) {
+void func_0001E73C(struct Unk_func_0001E73C_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
@@ -102,7 +102,7 @@ void func_0001E73C(s32 arg0) {
     if (temp_v0 != 0) {
         func_0003C694(temp_v0);
     }
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0xC);
+    temp_v1 = arg0->unkC;
     if (temp_v1 != 0) {
         func_0003C694(temp_v1);
     }

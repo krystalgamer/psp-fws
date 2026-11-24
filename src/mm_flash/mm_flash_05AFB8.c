@@ -148,7 +148,7 @@ void func_00060068(struct Unk_func_00060068_0 *arg0, s32 arg1) {
     arg0->unkC = 0;
 }
 
-void func_00060074(struct Unk_func_00060074_0 *arg0, s32 arg1) {
+void func_00060074(struct Unk_func_00060074_0 *arg0, struct Unk_func_00060074_1 *arg1) {
     arg0->unkC = arg1;
     arg0->unk10 = 0;
 }

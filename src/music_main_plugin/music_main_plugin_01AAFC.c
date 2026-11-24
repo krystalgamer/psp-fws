@@ -15,10 +15,10 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001ACAC);
 
-void func_0001ADA4(s32 arg0) {
+void func_0001ADA4(struct Unk_func_0001ADA4_0 *arg0) {
     func_00049EE0(arg0);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009BBD8;
-    M2C_FIELD(arg0, s32 *, 4) = 2;
+    arg0->unk0 = &D_0009BBD8;
+    arg0->unk4 = 2;
 }
 
 void func_0001ADDC(M2C_UNK **arg0) {
@@ -55,10 +55,10 @@ INCLUDE_RODATA("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01A
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001AEEC);
 
-void func_0001AF98(s32 arg0) {
+void func_0001AF98(struct Unk_func_0001AF98_0 *arg0) {
     func_00049EE0(arg0);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009BC50;
-    M2C_FIELD(arg0, s32 *, 4) = 1;
+    arg0->unk0 = &D_0009BC50;
+    arg0->unk4 = 1;
 }
 
 void func_0001AFD0(M2C_UNK **arg0) {

@@ -21,11 +21,11 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_060460", func_00060CAC);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_060460", func_00060ED4);
 
-s32 func_00060F3C(s32 arg0, s32 arg1, s32 arg2) {
+s32 func_00060F3C(struct Unk_func_00060F3C_0 *arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
 
     temp_v0 = func_00060F84(arg0, (s32) &D_000BE244, arg1, 0, (arg2 & 0xFF) | 3);
-    M2C_FIELD(arg0, s32 *, 0x88) = temp_v0;
+    arg0->unk88 = temp_v0;
     return temp_v0 != 0;
 }
 

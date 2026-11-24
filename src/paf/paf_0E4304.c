@@ -249,7 +249,7 @@ void scePaf_6DD28F44(void) {
     func_000FF044();
 }
 
-void func_000E9100(s32 arg0, s32 arg1, s32 arg2) {
+void func_000E9100(struct Unk_func_000E9100_0 *arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
     s32 var_a2;
 
@@ -260,8 +260,8 @@ void func_000E9100(s32 arg0, s32 arg1, s32 arg2) {
         var_a2 = temp_v0;
     }
     scePaf_87516C3B(arg0, arg1, var_a2);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0019A7B8;
-    M2C_FIELD(arg0, s32 *, 0x14) = 0x100;
+    arg0->unk0 = &D_0019A7B8;
+    arg0->unk14 = 0x100;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0E4304", scePaf_4ADAEF94);

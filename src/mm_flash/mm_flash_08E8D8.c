@@ -65,15 +65,15 @@ void func_0008EFCC(s32 arg0, M2C_UNK arg1) {
     func_0008F498(arg1, arg0);
 }
 
-void func_0008EFF0(s32 arg0) {
+void func_0008EFF0(struct Unk_func_0008EFF0_0 *arg0) {
     func_0000EF5C(arg0);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000C2F98;
-    M2C_FIELD(arg0, s32 *, 0x60) = 0;
+    arg0->unk0 = &D_000C2F98;
+    arg0->unk60 = 0;
 }
 
-void func_0008F024(s32 arg0) {
+void func_0008F024(struct Unk_func_0008F024_0 *arg0) {
     func_0000EF5C(arg0);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000C2F98;
-    M2C_FIELD(arg0, s32 *, 0x60) = 0;
+    arg0->unk0 = &D_000C2F98;
+    arg0->unk60 = 0;
 }
 

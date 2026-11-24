@@ -183,17 +183,17 @@ s32 func_00008240(struct Unk_func_00008208_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_00008278);
 
-s32 func_000083E8(s32 arg0, s32 arg1) {
+s32 func_000083E8(struct Unk_func_000083E8_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0x80070057;
     if (func_00007A40(arg0, arg1, 0xF) != 0) {
         var_v1 = 0x80004003;
-        if (M2C_FIELD(arg0, s32 *, 0xC) != 0) {
-            if (M2C_FIELD(arg0, s32 *, 0x28) != 2) {
+        if (arg0->unkC != 0) {
+            if (arg0->unk28 != 2) {
                 func_000080DC(arg0, 2, -1);
             }
-            var_v1 = __builtin_allegrex_min(func_0003E1F0(M2C_FIELD(arg0, s32 *, 0xC), arg1), 0);
+            var_v1 = __builtin_allegrex_min(func_0003E1F0(arg0->unkC, arg1), 0);
         }
     }
     return var_v1;

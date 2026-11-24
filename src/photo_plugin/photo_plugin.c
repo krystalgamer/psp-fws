@@ -1623,12 +1623,12 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00011288)
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0001132C);
 
-void func_00011388(s32 arg0, void **arg1) {
+void func_00011388(struct Unk_func_00011388_0 *arg0, void **arg1) {
     func_00011288(arg0, (s32) &D_0002FB8C);
     if (M2C_FIELD(*arg1, s32 (**)(void **), 0x10)(arg1) != 0) {
 
     } else {
-        M2C_FIELD(arg0, void ***, 8) = arg1;
+        arg0->unk8 = arg1;
         func_000044A8((s32) arg1, (s32) &func_00011470, arg0);
     }
 }
@@ -1663,12 +1663,12 @@ INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", D_0002FD00)
 
 INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", D_0002FD04);
 
-void func_0001206C(s32 arg0, void **arg1) {
+void func_0001206C(struct Unk_func_0001206C_0 *arg0, void **arg1) {
     func_00011288(arg0, (s32) "info_album_page");
     if (M2C_FIELD(*arg1, s32 (**)(void **), 0x10)(arg1) != 1) {
 
     } else {
-        M2C_FIELD(arg0, void ***, 8) = arg1;
+        arg0->unk8 = arg1;
         func_00012174(arg0);
     }
 }

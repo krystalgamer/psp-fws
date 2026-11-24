@@ -1454,12 +1454,12 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428", func_0004D78C);
 
-void func_0004D840(s32 arg0, s32 arg1) {
+void func_0004D840(struct Unk_func_0004D840_0 *arg0, s32 arg1) {
     func_00036B48(arg0, arg1, (s32) &D_00056780, 1, 4);
-    M2C_FIELD(arg0, s32 *, 0x28) = -1;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000567A0;
-    M2C_FIELD(arg0, s32 *, 0x24) = 0;
-    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    arg0->unk28 = -1;
+    arg0->unk0 = &D_000567A0;
+    arg0->unk24 = 0;
+    arg0->unk20 = 0;
 }
 
 void func_0004D890(void) {

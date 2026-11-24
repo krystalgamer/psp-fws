@@ -259,17 +259,17 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", emit_dht);
 void emit_dac(void) {
 }
 
-void emit_dri(s32 arg0) {
+void emit_dri(struct Unk_emit_dri_0 *arg0) {
     emit_marker(arg0, 0xDD);
     emit_2bytes(arg0, 4);
-    emit_2bytes(arg0, M2C_FIELD(arg0, s32 *, 0xC0));
+    emit_2bytes(arg0, arg0->unkC0);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", emit_sof);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", emit_sos);
 
-void emit_jfif_app0(s32 arg0) {
+void emit_jfif_app0(struct Unk_emit_jfif_app0_0 *arg0) {
     emit_marker(arg0, 0xE0);
     emit_2bytes(arg0, 0x10);
     emit_byte(arg0, 0x4AU);
@@ -277,11 +277,11 @@ void emit_jfif_app0(s32 arg0) {
     emit_byte(arg0, 0x49U);
     emit_byte(arg0, 0x46U);
     emit_byte(arg0, 0U);
-    emit_byte(arg0, M2C_FIELD(arg0, u8 *, 0xCC));
-    emit_byte(arg0, M2C_FIELD(arg0, u8 *, 0xCD));
-    emit_byte(arg0, M2C_FIELD(arg0, u8 *, 0xCE));
-    emit_2bytes(arg0, (s32) M2C_FIELD(arg0, u16 *, 0xD0));
-    emit_2bytes(arg0, (s32) M2C_FIELD(arg0, u16 *, 0xD2));
+    emit_byte(arg0, arg0->unkCC);
+    emit_byte(arg0, arg0->unkCD);
+    emit_byte(arg0, arg0->unkCE);
+    emit_2bytes(arg0, (s32) arg0->unkD0);
+    emit_2bytes(arg0, (s32) arg0->unkD2);
     emit_byte(arg0, 0U);
     emit_byte(arg0, 0U);
 }

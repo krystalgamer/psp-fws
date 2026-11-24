@@ -71,10 +71,10 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", start_pass_phuff);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jcphuff_dump_buffer);
 
-void jcphuff_flush_bits(s32 arg0) {
+void jcphuff_flush_bits(struct Unk_jcphuff_flush_bits_0 *arg0) {
     jcphuff_emit_bits(arg0, 0x7F, 7);
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    arg0->unk18 = 0;
+    arg0->unk1C = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", emit_buffered_bits);

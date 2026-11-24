@@ -883,7 +883,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014A94);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014AF4);
 
-s32 func_00014B50(s32 arg0) {
+s32 func_00014B50(struct Unk_func_00014B50_0 *arg0) {
     s32 temp_v0;
     s32 var_a1;
 
@@ -891,11 +891,11 @@ s32 func_00014B50(s32 arg0) {
     var_a1 = 0;
     if (func_000155E8(arg0) != 0) {
         func_0001570C(arg0);
-        temp_v0 = arg0 + 0x90;
+        temp_v0 = (u8 *)arg0 + 0x90;
         var_a1 = 1;
-        M2C_FIELD(arg0, s32 *, 0x20) = temp_v0;
-        M2C_FIELD(arg0, s32 *, 0x24) = temp_v0;
-        *M2C_FIELD(arg0, s8 **, 4) = 0;
+        arg0->unk20 = temp_v0;
+        arg0->unk24 = temp_v0;
+        *arg0->unk4 = 0;
     }
     return var_a1;
 }
@@ -909,18 +909,18 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014BE0);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014C3C);
 
-s32 func_00014D4C(s32 arg0, s32 arg1) {
+s32 func_00014D4C(struct Unk_func_00014D4C_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0;
     if (func_00015FE0(arg0) != 0) {
-        M2C_FIELD(arg0, s32 *, 0x40) = 1;
-        sceHVNetfront_Module_BB5E8F0E(arg0 + 0x48, (s32) &D_0011E1E4);
+        arg0->unk40 = 1;
+        sceHVNetfront_Module_BB5E8F0E((u8 *)arg0 + 0x48, (s32) &D_0011E1E4);
         do {
 
         } while (func_000161A4(arg0, arg1) != 0);
         func_00016404(arg0);
-        var_v1 = M2C_FIELD(arg0, s32 *, 0x44);
+        var_v1 = arg0->unk44;
     }
     return var_v1;
 }
@@ -2670,11 +2670,11 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002CDF8);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002CE84);
 
-void func_0002D43C(s32 arg0, s32 arg1) {
+void func_0002D43C(struct Unk_func_0002D43C_0 *arg0, s32 arg1) {
     func_0007B340(arg0, arg1);
-    M2C_FIELD(arg0, s32 *, 8) = 0x64;
-    M2C_FIELD(arg0, M2C_UNK **, 4) = &func_0002CE84;
-    M2C_FIELD(arg0, s32 *, 0x30) = 0;
+    arg0->unk8 = 0x64;
+    arg0->unk4 = &func_0002CE84;
+    arg0->unk30 = 0;
 }
 
 void func_0002D478(void) {

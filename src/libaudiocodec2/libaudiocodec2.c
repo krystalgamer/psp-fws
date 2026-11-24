@@ -24,7 +24,7 @@ INCLUDE_ASM("tmp/asm/352/libaudiocodec2/nonmatchings/libaudiocodec2", sceAudioco
 
 INCLUDE_ASM("tmp/asm/352/libaudiocodec2/nonmatchings/libaudiocodec2", sceAudiocodec2_21D5A83F);
 
-s32 func_0000010C(s32 arg0) {
+s32 func_0000010C(struct Unk_func_0000010C_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 var_a0;
@@ -33,11 +33,11 @@ s32 func_0000010C(s32 arg0) {
     temp_v0 = func_00000278(arg0);
     var_a0 = temp_v0;
     if (temp_v0 == 0) {
-        temp_v0_2 = func_0000030C(M2C_FIELD(arg0, s32 *, 0x28));
+        temp_v0_2 = func_0000030C(arg0->unk28);
         var_a0 = 0x807F00FF;
         if (temp_v0_2 != 0x270F) {
-            temp_a3 = M2C_FIELD(arg0, u32 *, 0x34);
-            var_a0 = (func_000003E4((s32) temp_a3, temp_v0_2, (s32) ((u32) M2C_FIELD(arg0, u32 *, 0x30) / temp_a3), M2C_FIELD(arg0, s32 *, 0xC)) != 0) ? 0 : 0x807F00FD;
+            temp_a3 = arg0->unk34;
+            var_a0 = (func_000003E4((s32) temp_a3, temp_v0_2, (s32) ((u32) arg0->unk30 / temp_a3), arg0->unkC) != 0) ? 0 : 0x807F00FD;
         }
     }
     return var_a0;

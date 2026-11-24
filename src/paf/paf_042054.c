@@ -92,23 +92,23 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_12C50A9D);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_1F43B8A2);
 
-s32 func_0004303C(s32 arg0, s32 arg1) {
+s32 func_0004303C(struct Unk_func_0004303C_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0;
     if (func_00042F74(arg0, arg1) != 0) {
-        M2C_FIELD(arg0, s16 *, 0x74) = (s16) arg1;
+        arg0->unk74 = (s16) arg1;
         var_v1 = 1;
     }
     return var_v1;
 }
 
-s32 func_00043080(s32 arg0, s32 arg1) {
+s32 func_00043080(struct Unk_func_00043080_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0;
     if (func_00042F74(arg0, arg1) != 0) {
-        M2C_FIELD(arg0, s16 *, 0x76) = (s16) arg1;
+        arg0->unk76 = (s16) arg1;
         var_v1 = 1;
     }
     return var_v1;

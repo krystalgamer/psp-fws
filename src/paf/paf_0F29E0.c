@@ -286,11 +286,11 @@ s32 func_000F6184(struct Unk_func_000F6184_0 *arg0, s32 arg1) {
     return var_v0;
 }
 
-void scePaf_F89014B3(s32 arg0, s32 arg1) {
+void scePaf_F89014B3(struct Unk_scePaf_F89014B3_0 *arg0, s32 arg1) {
     s32 temp_v1;
 
     scePaf_EAA5AFF6(arg0, 0x01000016);
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0x1E8);
+    temp_v1 = arg0->unk1E8;
     if (temp_v1 == 0) {
 
     } else {

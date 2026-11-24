@@ -2,16 +2,16 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-void func_00087A18(s32 arg0) {
+void func_00087A18(struct Unk_func_00087A18_0 *arg0) {
     func_00087374(arg0, 5);
-    M2C_FIELD(arg0, s32 **, 0) = &D_000A2130;
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    arg0->unk0 = &D_000A2130;
+    arg0->unk18 = 0;
 }
 
-void func_00087A50(s32 arg0) {
+void func_00087A50(struct Unk_func_00087A50_0 *arg0) {
     func_00087374(arg0, 5);
-    M2C_FIELD(arg0, s32 **, 0) = &D_000A2130;
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    arg0->unk0 = &D_000A2130;
+    arg0->unk18 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00087A88);

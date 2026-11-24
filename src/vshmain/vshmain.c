@@ -287,13 +287,13 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_C403411C);
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_58234CB0);
 
-void vsh_8727574A(s32 arg0, s32 arg1) {
+void vsh_8727574A(struct Unk_vsh_8727574A_0 *arg0, s32 arg1) {
     scePaf_6829D7AF(arg0, 0, 0x110);
-    M2C_FIELD(arg0, s32 *, 0) = 1;
-    scePaf_980228BA(arg0 + 4, &D_000283F4);
-    M2C_FIELD(arg0, s32 *, 0x104) = scePaf_CA79D58B(&D_000283F4);
-    M2C_FIELD(arg0, s32 *, 0x108) = 1;
-    M2C_FIELD(arg0, s32 *, 0x10C) = 1;
+    arg0->unk0 = 1;
+    scePaf_980228BA((u8 *)arg0 + 4, &D_000283F4);
+    arg0->unk104 = scePaf_CA79D58B(&D_000283F4);
+    arg0->unk108 = 1;
+    arg0->unk10C = 1;
     sceReg_92E41280(arg0, 2, arg1);
 }
 
@@ -1023,17 +1023,17 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0000B40C);
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0000B580);
 
-void func_0000B764(M2C_UNK **arg0, M2C_UNK *arg1) {
+void func_0000B764(M2C_UNK **arg0, struct Unk_func_0000B764_1 *arg1) {
     struct Unk_func_0000B764_temp_a2 *temp_a2;
     M2C_UNK *temp_v0;
     struct Unk_func_0000B764_temp_v1 *temp_v1;
 
-    temp_v1 = M2C_FIELD(arg1, M2C_UNK **, 8);
-    temp_a2 = M2C_FIELD(arg1, M2C_UNK **, 0);
+    temp_v1 = arg1->unk8;
+    temp_a2 = arg1->unk0;
     temp_v0 = temp_v1->unk4;
-    M2C_FIELD(arg1, M2C_UNK **, 0) = temp_v1;
+    arg1->unk0 = temp_v1;
     temp_v1->unk4 = arg1;
-    M2C_FIELD(arg1, M2C_UNK **, 8) = temp_v0;
+    arg1->unk8 = temp_v0;
     if (temp_v0 != NULL) {
         *temp_v0 = arg1;
     }
@@ -1047,16 +1047,16 @@ void func_0000B764(M2C_UNK **arg0, M2C_UNK *arg1) {
     temp_v1->unk0 = temp_a2;
 }
 
-void func_0000B7A4(M2C_UNK **arg0, M2C_UNK *arg1) {
+void func_0000B7A4(M2C_UNK **arg0, struct Unk_func_0000B7A4_1 *arg1) {
     struct Unk_func_0000B7A4_temp_a2 *temp_a2;
     M2C_UNK *temp_v0;
     struct Unk_func_0000B7A4_temp_v1 *temp_v1;
 
-    temp_v1 = M2C_FIELD(arg1, M2C_UNK **, 4);
-    temp_a2 = M2C_FIELD(arg1, M2C_UNK **, 0);
+    temp_v1 = arg1->unk4;
+    temp_a2 = arg1->unk0;
     temp_v0 = temp_v1->unk8;
-    M2C_FIELD(arg1, M2C_UNK **, 0) = temp_v1;
-    M2C_FIELD(arg1, M2C_UNK **, 4) = temp_v0;
+    arg1->unk0 = temp_v1;
+    arg1->unk4 = temp_v0;
     temp_v1->unk8 = arg1;
     if (temp_v0 != NULL) {
         *temp_v0 = arg1;

@@ -2,18 +2,18 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_00015F14(s32 arg0, s32 arg1, s32 arg2) {
+void func_00015F14(struct Unk_func_00015F14_0 *arg0, s32 arg1, s32 arg2) {
     func_00014DE0(arg0, arg1, arg2);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0016F610;
-    M2C_FIELD(arg0, s32 *, 0x28) = 0;
-    scePaf_D6F088EF(arg0 + 0x14, arg1 + 0x108);
+    arg0->unk0 = &D_0016F610;
+    arg0->unk28 = 0;
+    scePaf_D6F088EF((u8 *)arg0 + 0x14, arg1 + 0x108);
 }
 
-void func_00015F64(s32 arg0, s32 arg1, s32 arg2) {
+void func_00015F64(struct Unk_func_00015F64_0 *arg0, s32 arg1, s32 arg2) {
     func_00014DE0(arg0, arg1, arg2);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0016F610;
-    M2C_FIELD(arg0, s32 *, 0x28) = 0;
-    scePaf_D6F088EF(arg0 + 0x14, arg1 + 0x108);
+    arg0->unk0 = &D_0016F610;
+    arg0->unk28 = 0;
+    scePaf_D6F088EF((u8 *)arg0 + 0x14, arg1 + 0x108);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_015F14", func_00015FB4);

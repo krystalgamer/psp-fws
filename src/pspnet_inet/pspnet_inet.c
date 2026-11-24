@@ -180,10 +180,10 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00004944);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_000049EC);
 
-void func_00004A3C(s32 arg0) {
+void func_00004A3C(struct Unk_func_00004A3C_0 *arg0) {
     func_00005008(arg0);
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+    arg0->unkC = 0;
+    arg0->unk4 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00004A68);

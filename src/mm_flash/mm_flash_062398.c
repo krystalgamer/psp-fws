@@ -1,29 +1,29 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-void func_00062398(s32 arg0, struct Unk_func_0001E628_1 *arg1, s32 arg2) {
+void func_00062398(struct Unk_func_00062398_0 *arg0, struct Unk_func_0001E628_1 *arg1, s32 arg2) {
     struct Unk_func_00062398_temp_v0 *temp_v0;
 
     func_0006219C(arg0);
     temp_v0 = func_00090648(*func_0009F1C0(), 8, 0);
     func_0001E628(temp_v0, arg1, arg2);
-    M2C_FIELD(arg0, void **, 8) = temp_v0;
+    arg0->unk8 = temp_v0;
     if (temp_v0 != NULL) {
         temp_v0->unk4 = (s32) (temp_v0->unk4 + 1);
-        M2C_FIELD(arg0, s32 *, 0) = 2;
+        arg0->unk0 = 2;
     }
 }
 
-void func_00062424(s32 arg0, void **arg1) {
+void func_00062424(struct Unk_func_00062424_0 *arg0, void **arg1) {
     struct Unk_func_00062424_temp_v0 *temp_v0;
 
     func_0006219C(arg0);
     temp_v0 = func_00090648(*func_0009F1C0(), 8, 0);
     func_0001E994(temp_v0, arg1);
-    M2C_FIELD(arg0, void **, 8) = temp_v0;
+    arg0->unk8 = temp_v0;
     if (temp_v0 != NULL) {
         temp_v0->unk4 = (s32) (temp_v0->unk4 + 1);
-        M2C_FIELD(arg0, s32 *, 0) = 2;
+        arg0->unk0 = 2;
     }
 }
 
@@ -31,14 +31,14 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_062398", func_000624A0);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_062398", func_00062544);
 
-void func_00062598(s32 arg0, s32 arg1) {
+void func_00062598(struct Unk_func_00062598_0 *arg0, s32 arg1) {
     struct Unk_func_00062598_temp_v0 *temp_v0;
 
     func_0006219C(arg0);
     temp_v0 = func_00063D90(arg1 + 0x148);
-    M2C_FIELD(arg0, void **, 8) = temp_v0;
+    arg0->unk8 = temp_v0;
     if (temp_v0 != NULL) {
-        M2C_FIELD(arg0, s32 *, 0) = 4;
+        arg0->unk0 = 4;
         temp_v0->unk8 = (s32) (temp_v0->unk8 + 1);
     }
 }
@@ -47,20 +47,20 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_062398", func_000625F4);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_062398", func_00062620);
 
-void func_000626D0(s32 arg0, s32 arg1) {
+void func_000626D0(struct Unk_func_000626D0_0 *arg0, struct Unk_func_00060074_1 *arg1) {
     s32 temp_a1;
     s32 temp_v0;
 
     func_0006219C(arg0);
     temp_v0 = func_000637FC(arg1);
-    M2C_FIELD(arg0, s32 *, 8) = temp_v0;
+    arg0->unk8 = temp_v0;
     if (temp_v0 == 0) {
 
     } else {
-        M2C_FIELD(arg0, s32 *, 0) = 3;
+        arg0->unk0 = 3;
         func_00060074((void *) temp_v0, arg1);
-        temp_a1 = M2C_FIELD(arg0, s32 *, 8);
-        func_00022588(M2C_FIELD(arg1, s32 *, 0xBD0), temp_a1, temp_a1);
+        temp_a1 = arg0->unk8;
+        func_00022588(arg1->unkBD0, temp_a1, temp_a1);
     }
 }
 
