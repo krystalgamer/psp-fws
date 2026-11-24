@@ -55,6 +55,8 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, video_main_plugin]
+      - [0x5BDC, c, video_main_plugin_005B3C]
+      - [0x66EC, c, video_main_plugin_00664C]
       - [0x21908, c, video_main_plugin_021868]
       - [0x21B0C, c, video_main_plugin_021A6C]
       - [0x27A9C, c, video_main_plugin_0279FC]
@@ -80,6 +82,8 @@ segments:
       - { start: 0x5191C, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x51984, type: prxpad, order: .rodata }
       - [0x51988, .rodata, video_main_plugin]
+      - [0x51E6C, .rodata, video_main_plugin_005B3C]
+      - [0x51E78, .rodata, video_main_plugin_00664C]
       - [0x53284, .rodata, video_main_plugin_021A6C]
       - [0x53C54, .rodata, video_main_plugin_0279FC]
       - [0x53CB0, .rodata, video_main_plugin_0286EC]
