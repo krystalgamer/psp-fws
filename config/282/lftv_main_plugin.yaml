@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/282/.splat_cache.lftv_main_plugin
   symbol_addrs_path:
     - config/282/symbol_addrs.lftv_main_plugin.txt
+    - config/282/func_starts.lftv_main_plugin.txt
     - tmp/build/282/prx_syms.lftv_main_plugin.txt
   reloc_addrs_path: [tmp/build/282/reloc_addrs.lftv_main_plugin.txt]
   asset_path: tmp/assets/282/lftv_main_plugin
@@ -55,6 +56,8 @@ segments:
       - { start: 0xC0, type: asm, name: init, linker_section: .init }
       - { start: 0xE4, type: prxpad, order: .text }
       - [0xF0, c, lftv_main_plugin]
+      - [0x506C, c, lftv_main_plugin_004FAC]
+      - [0x76D8, c, lftv_main_plugin_007618]
       - { start: 0x53C68, type: asm, name: fini, linker_section: .fini }
       - { start: 0x53C84, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x549D4, type: prxpad, order: .text }
@@ -74,6 +77,8 @@ segments:
       - { start: 0x55B2C, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x55B30, type: prxpad, order: .rodata }
       - [0x55B40, .rodata, lftv_main_plugin]
+      - [0x574CC, .rodata, lftv_main_plugin_004FAC]
+      - [0x577A8, .rodata, lftv_main_plugin_007618]
       - { start: 0x5E12C, type: prxpad, order: .rodata }
   - name: lftv_main_plugin_seg1
     type: code
