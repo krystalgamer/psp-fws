@@ -2,7 +2,9 @@
 #include "common.h"
 #include "reboot_decls.h"
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001CB4);
+s32 func_00001CB4(void) {
+    return D_00016DEC;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001CC0);
 
@@ -10,17 +12,23 @@ INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001CD0);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001CE8);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001D14);
+s32 func_00001D14(void) {
+    return D_00017140;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001D20);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001D3C);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001D58);
+s32 func_00001D58(void) {
+    return D_00017144;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001D64);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001D74);
+s32 func_00001D74(void) {
+    return D_00017148;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_001CB4", func_00001D80);
 

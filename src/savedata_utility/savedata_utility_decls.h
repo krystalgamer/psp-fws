@@ -149,6 +149,8 @@ M2C_UNK func_0000FAF4();
 void func_000102E0(void);
 s32 func_00010444(s32 arg0);
 s32 func_00010828();
+void func_00010F6C(void *arg0, s32 arg1);
+void func_00010F9C(void *arg0, s32 arg1);
 void func_00010FCC(M2C_UNK **arg0);
 void func_00010FDC(M2C_UNK **arg0);
 void func_00010FEC(M2C_UNK **arg0);

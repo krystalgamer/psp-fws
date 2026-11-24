@@ -2,7 +2,14 @@
 #include "common.h"
 #include "reboot_decls.h"
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00008F5C);
+s32 func_00008F5C(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_s1;
+
+    func_0000E028();
+    temp_s1 = func_0000A3B4(arg0, arg1, arg2);
+    func_0000E028();
+    return temp_s1;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00008FB4);
 
@@ -10,13 +17,64 @@ INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000900C);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00009094);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_000090DC);
+s32 func_000090DC(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_s1;
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00009134);
+    func_0000E028();
+    temp_s1 = func_0000A7F4(arg0, arg1, arg2);
+    func_0000E028();
+    return temp_s1;
+}
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000917C);
+s32 func_00009134(s32 arg0, s32 arg1) {
+    s32 temp_s1;
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_000091C4);
+    func_0000E028();
+    temp_s1 = func_0000ABCC(arg0, arg1);
+    func_0000E028();
+    return temp_s1;
+}
+
+s32 func_0000917C(s32 arg0, s32 arg1) {
+    s32 temp_s1;
+
+    func_0000E028();
+    temp_s1 = func_0000AE8C(arg0, arg1);
+    func_0000E028();
+    return temp_s1;
+}
+
+s32 func_000091C4(void *arg0) {
+    void **temp_a2;
+    void **temp_v0;
+    void *temp_a0;
+    void *temp_a1;
+    void *temp_a3;
+
+    func_0000E028();
+    temp_a0 = M2C_FIELD(arg0, void **, 0x10);
+    if (temp_a0 != NULL) {
+        temp_a3 = M2C_FIELD(temp_a0, void **, 8);
+        temp_a1 = M2C_FIELD(temp_a0, void **, 0);
+        temp_a2 = M2C_FIELD(temp_a0, void ***, 4);
+        M2C_FIELD(temp_a3, s32 *, 8) = (s32) (M2C_FIELD(temp_a3, s32 *, 8) - 1);
+        if (temp_a1 != NULL) {
+            M2C_FIELD(temp_a1, void ***, 4) = temp_a2;
+        } else {
+            D_00017348 = temp_a2;
+        }
+        temp_v0 = M2C_FIELD(temp_a0, void ***, 4);
+        if (temp_v0 != NULL) {
+            *temp_v0 = temp_a1;
+        } else {
+            D_00017344 = temp_a1;
+        }
+        M2C_FIELD(temp_a0, void **, 0) = (void *) D_0001734C;
+        D_0001734C = temp_a0;
+    }
+    func_0000E028(temp_a0);
+    return 0;
+}
 
 void func_00009254(s32 arg0, M2C_UNK arg1) {
     func_0000E028();
@@ -32,7 +90,10 @@ INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_000092DC);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00009344);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00009384);
+s32 func_00009384(s32 arg0, s32 arg1) {
+    func_00001B78((s32) "%s: iob=%p name=%s\n", (s32) "UFatChdir", arg0, arg1);
+    return 0x8001B000;
+}
 
 s32 func_000093BC(void) {
     s32 temp_s0;
@@ -52,7 +113,9 @@ s32 func_000093E8(void) {
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00009414);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00009484);
+s32 func_00009484(void) {
+    return 0x8001B000;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00009490);
 
@@ -136,7 +199,9 @@ INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000D480);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000D588);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000D694);
+s32 func_0000D694(void *arg0) {
+    return (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000D6A8);
 
@@ -160,7 +225,17 @@ INCLUDE_RODATA("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", D_00015C64);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000DBB8);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000DC4C);
+s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v0;
+
+    if (&D_0002DBF4 != NULL) {
+        var_v0 = func_0000F78C(arg0, arg1, arg2, arg3, (s32) &D_0002DBF4);
+    } else {
+        func_00001B78((s32) "lflash.c:%s:Mallocfailed: 0x%08x\n", (s32) "df_open", 0, arg3);
+        var_v0 = 0x8001000C;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000DC9C);
 
@@ -191,9 +266,13 @@ s32 func_0000E098(void) {
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000E0B8);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000E0E8);
+void func_0000E0E8(void) {
+    func_0000E2F0((s32) &D_0001D890);
+}
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000E108);
+void func_0000E108(void) {
+    func_0000F3D8((s32) &D_0001D890);
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000E128);
 
@@ -205,7 +284,9 @@ INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000E230);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000E294);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000E2E4);
+s32 func_0000E2E4(void) {
+    return 0x8001B000;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000E2F0);
 
@@ -275,7 +356,17 @@ INCLUDE_RODATA("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", D_000167A4);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_000101D4);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00010328);
+void func_00010328(s32 arg0) {
+    s32 var_a1;
+    s8 *temp_v0;
+
+    var_a1 = 0;
+    do {
+        temp_v0 = arg0 + var_a1;
+        var_a1 += 1;
+        *temp_v0 = -1;
+    } while (var_a1 < 0xC);
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0001034C);
 
@@ -317,13 +408,19 @@ INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00010DA0);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00010DD4);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00010E08);
+s32 func_00010E08(void) {
+    return 0x8001B000;
+}
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00010E14);
+s32 func_00010E14(void) {
+    return 0x8001B000;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00010E20);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00010EBC);
+s32 func_00010EBC(void) {
+    return 0x8001B000;
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00010EC8);
 
@@ -401,9 +498,15 @@ INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_000128FC);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00012A30);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00012BE0);
+s32 func_00012BE0(void) {
+    return D_00018BCC;
+}
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00012BEC);
+s32 func_00012BEC(void) {
+    return D_00018BD0;
+}
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_00012BF8);
+s32 func_00012BF8(void) {
+    return D_00018BD4;
+}
 

@@ -2,7 +2,26 @@
 #include "common.h"
 #include "reboot_decls.h"
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002A4C);
+void func_00002A4C(u8 *arg0, u8 *arg1, u32 arg2) {
+    u32 var_a4;
+    u8 *var_a0;
+    u8 *var_a1;
+    u8 var_a3;
+
+    var_a0 = arg0;
+    var_a1 = arg1;
+    var_a3 = *var_a1;
+    var_a4 = 0;
+    if ((var_a3 != 0) & (arg2 != 0)) {
+        do {
+            *var_a0 = var_a3;
+            var_a1 += 1;
+            var_a4 += 1;
+            var_a3 = *var_a1;
+            var_a0 += 1;
+        } while ((var_a3 != 0) & (var_a4 < arg2));
+    }
+}
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002A90);
 
@@ -24,7 +43,9 @@ s32 func_00002CB8(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002CC0);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002CCC);
+void func_00002CCC(s32 arg0, s32 arg1) {
+    func_00002EA0(arg1, arg0);
+}
 
 void func_00002CF0(void) {
     func_00002F14();

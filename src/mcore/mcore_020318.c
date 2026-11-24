@@ -2,13 +2,57 @@
 #include "common.h"
 #include "mcore_decls.h"
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_00020318);
+s32 func_00020318(void *arg0, s32 arg1, s32 arg2) {
+    s32 var_a3;
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_00020354);
+    var_a3 = 0x10000000;
+    if (arg0 != NULL) {
+        var_a3 = 0x10000004;
+        if (M2C_FIELD(arg0, u8 *, 2) == 0x17) {
+            var_a3 = func_0001FF64((s32) arg0, arg1, arg2);
+        }
+    }
+    return var_a3;
+}
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_00020398);
+s32 func_00020354(void *arg0, s32 arg1) {
+    s32 var_a3;
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_000203D4);
+    var_a3 = 0x10000000;
+    if (arg0 != NULL) {
+        var_a3 = 0x10000004;
+        if (M2C_FIELD(arg0, u8 *, 2) == 0x18) {
+            var_a3 = func_0001FF64((s32) arg0, 0, arg1);
+        }
+    }
+    return var_a3;
+}
+
+s32 func_00020398(void *arg0, s32 arg1, s32 arg2) {
+    s32 var_a3;
+
+    var_a3 = 0x10000000;
+    if (arg0 != NULL) {
+        var_a3 = 0x10000004;
+        if (M2C_FIELD(arg0, u8 *, 2) == 0x17) {
+            var_a3 = func_000202B4((s32) arg0, arg1, arg2);
+        }
+    }
+    return var_a3;
+}
+
+s32 func_000203D4(void *arg0, s32 arg1) {
+    s32 var_a3;
+
+    var_a3 = 0x10000000;
+    if (arg0 != NULL) {
+        var_a3 = 0x10000004;
+        if (M2C_FIELD(arg0, u8 *, 2) == 0x18) {
+            var_a3 = func_000202B4((s32) arg0, 0, arg1);
+        }
+    }
+    return var_a3;
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_00020418);
 

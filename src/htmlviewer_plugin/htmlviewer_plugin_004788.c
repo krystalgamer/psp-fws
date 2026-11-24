@@ -2,7 +2,25 @@
 #include "common.h"
 #include "htmlviewer_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00004788);
+s32 func_00004788(s32 arg0) {
+    s32 temp_v0;
+    s32 var_a1;
+
+    var_a1 = -4;
+    if (D_00008240 == 2) {
+        var_a1 = -1;
+        if (arg0 == 0) {
+            temp_v0 = func_00000D38(2);
+            D_00008240 = temp_v0;
+            var_a1 = -5;
+            if ((u32) (temp_v0 - 3) < 2U) {
+                D_00008244 = 3;
+                var_a1 = 0;
+            }
+        }
+    }
+    return var_a1;
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_000047F8);
 

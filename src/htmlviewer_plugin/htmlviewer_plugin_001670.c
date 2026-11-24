@@ -2,7 +2,29 @@
 #include "common.h"
 #include "htmlviewer_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00001670);
+void func_00001670(void) {
+    s32 temp_v0;
+    s32 temp_v0_3;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_00006FA0);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK), 0xA4)(1);
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK), 0xBC)(1);
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK), 0xC8)(1);
+        }
+    }
+    temp_v0_3 = scePaf_B7E6052B(4);
+    scePaf_72A0044D(temp_v0_3, &D_00006FB0, 0, 0);
+    D_000080A0 = temp_v0_3;
+    if ((sceNetResolverInit() >= 0) && (sceHttpInit(0x25800U) >= 0) && (sceHttpsInit(0, NULL, NULL, NULL) >= 0)) {
+        if (sceHttpsLoadDefaultCert(0U, 0U) >= 0) {
+            sceHttpLoadSystemCookie();
+        }
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00001760);
 
@@ -33,11 +55,36 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00002614);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_000026F8);
+void func_000026F8(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_00007110);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *), 0xC)(0, &func_00002764, 0, &func_00002614);
+        }
+    }
+    func_000039B0(1);
+    scePaf_66907719();
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00002764);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_0000278C);
+void func_0000278C(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    D_000081C8 = 0;
+    temp_v0 = scePaf_D4FAE7D0(&D_00006E34);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            D_000081C8 = M2C_FIELD(temp_v0_2, s32 (**)(), 0x2C)();
+        }
+    }
+}
 
 void func_000027E8(void) {
     func_00005014();

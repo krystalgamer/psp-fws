@@ -2,9 +2,41 @@
 #include "common.h"
 #include "game_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_000075DC);
+void func_000075DC(void *arg0) {
+    M2C_UNK *temp_v0;
+    M2C_UNK *var_v1;
+    void *temp_s0;
+    void *var_v0;
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_00007638);
+    var_v1 = M2C_FIELD(arg0, M2C_UNK **, 0);
+    var_v0 = M2C_FIELD(var_v1, void **, 4);
+    if (var_v0 != var_v1) {
+        do {
+            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            scePaf_7EC15225(var_v0);
+            var_v1 = M2C_FIELD(arg0, M2C_UNK **, 0);
+            var_v0 = temp_s0;
+        } while (temp_s0 != var_v1);
+    }
+    M2C_FIELD(var_v1, M2C_UNK **, 4) = var_v1;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    temp_v0 = M2C_FIELD(arg0, M2C_UNK **, 0);
+    *temp_v0 = temp_v0;
+}
+
+void ***func_00007638(void ***arg0, void *arg1, void **arg2) {
+    void **temp_s0;
+    void *temp_v1;
+
+    temp_v1 = *arg2;
+    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
+    *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
+    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    scePaf_7EC15225(temp_v1);
+    *arg0 = temp_s0;
+    M2C_FIELD(arg1, s32 *, 4) = (s32) (M2C_FIELD(arg1, s32 *, 4) - 1);
+    return arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_000076A0);
 

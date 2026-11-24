@@ -2,9 +2,23 @@
 #include "common.h"
 #include "game_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0005CC", func_000005CC);
+void func_000005CC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    D_000125F0 = arg0;
+    D_000125F4 = arg1;
+    D_00012608 = arg2;
+    D_0001260C = arg3;
+    func_00008274(&D_0001247C);
+}
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0005CC", func_00000610);
+void func_00000610(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    D_000125F0 = arg0;
+    D_000125F4 = arg1;
+    D_000125F8 = arg2;
+    D_000125FC = arg3;
+    D_00012608 = arg4;
+    D_0001260C = arg5;
+    func_00008274(&D_0001247C);
+}
 
 INCLUDE_RODATA("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0005CC", D_000115C8);
 
@@ -174,5 +188,13 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0005CC", func_0000
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0005CC", func_00002AF8);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0005CC", func_00002B8C);
+s32 func_00002B8C(void) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (D_00012638 != 0) {
+        var_v0 = D_00012634 == 0;
+    }
+    return var_v0;
+}
 

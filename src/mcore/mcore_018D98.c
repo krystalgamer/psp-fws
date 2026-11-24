@@ -2,7 +2,23 @@
 #include "common.h"
 #include "mcore_decls.h"
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_018D98", func_00018D98);
+s32 func_00018D98(void *arg0, s32 arg1, s32 arg2, s32 *arg3) {
+    s32 temp_v0;
+    s32 var_v0;
+    s32 var_v1;
+
+    var_v0 = 4;
+    if (arg0 != NULL) {
+        temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+        var_v1 = 0;
+        if (temp_v0 != 0) {
+            var_v1 = func_000182A0(temp_v0, arg1, arg2) != 0;
+        }
+        *arg3 = var_v1;
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_018D98", func_00018DE4);
 
@@ -14,9 +30,17 @@ void func_00018EA0(void) {
     func_00018E58();
 }
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_018D98", func_00018EBC);
+void func_00018EBC(s32 arg0, s32 arg1, s32 arg2) {
+    if (func_00018DE4(arg0, arg2) == 0) {
+        func_0001E20C(arg2, arg0, arg1);
+    }
+}
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_018D98", func_00018F14);
+void func_00018F14(void *arg0, s32 arg1) {
+    if (func_00018DE4(M2C_FIELD(arg0, s32 *, 0), arg1) == 0) {
+        func_0001E20C(arg1, M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4));
+    }
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_018D98", func_00018F5C);
 
@@ -63,5 +87,9 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_018D98", func_00019750);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_018D98", func_00019834);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_018D98", func_00019934);
+void func_00019934(void *arg0, s32 arg1) {
+    if ((func_00018E28(1, arg1) == 0) && (func_00018E58(M2C_FIELD(arg0, s32 *, 0), arg1) == 0) && (func_00018DE4(0, arg1) == 0) && (func_00018DE4(0, arg1) == 0) && (func_00018E58(M2C_FIELD(arg0, s32 *, 4), arg1) == 0) && (func_00018E58(M2C_FIELD(arg0, s32 *, 8), arg1) == 0)) {
+        func_00018F14(M2C_FIELD(arg0, void **, 0xC), arg1);
+    }
+}
 
