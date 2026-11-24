@@ -339,7 +339,10 @@ def main():
     if subprocess.run(["git", "diff", "--quiet", "--no-ext-diff", "--", f"src/{mod}"], cwd=ROOT).returncode:
         print(f"{vm}: local changes, skipping")
         return
-    if "--locals" in sys.argv:
+    if "--nested" in sys.argv:
+        import structify_nested
+        phase = structify_nested.structify_nested
+    elif "--locals" in sys.argv:
         import structify_locals
         phase = structify_locals.structify_locals
     else:

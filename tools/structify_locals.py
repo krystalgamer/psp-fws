@@ -23,18 +23,25 @@ LOCAL_DECL = re.compile(r"^(\s+)(void|M2C_UNK) \*(\w+);$", re.M)
 PTR_FIELD = re.compile(r"M2C_FIELD\(([\w>-]+), (?:void|M2C_UNK) \*\*, (0x[0-9A-Fa-f]+|\d+)\)")
 
 
+def fsize(t):
+    """Size of a field type (qualifiers ignored)."""
+    t = t.replace("volatile ", "").strip()
+    return 4 if t.endswith("*") else S.size_of(t) or 4
+
+
 def parse_struct(text):
-    """{offset: type} of a generated struct definition."""
+    """{offset: type} of a generated struct definition (keeps volatile)."""
     fields, pos = {}, 0
     for line in text.splitlines()[1:-1]:
-        m = re.match(r"\s+(?:volatile )?(.+?) (\w+)(\[0x([0-9A-F]+)\])?;$", line)
+        m = re.match(r"\s+(.+?[\s*])(\w+)(\[0x([0-9A-F]+)\])?;$", line)
         if not m:
             continue
-        if m[2].startswith("pad"):
+        if m[2].startswith("pad") and m[3]:
             pos += int(m[4], 16)
             continue
-        fields[pos] = m[1]
-        pos += S.size_of(m[1].replace("struct ", "").strip() if not m[1].endswith("*") else "x *") or 4
+        t = re.sub(r"\s*\*", " *", m[1].strip()).replace("* *", "**")
+        fields[pos] = t
+        pos += fsize(t)
     return fields
 
 
@@ -45,7 +52,7 @@ def render(name, fields):
         if off > pos:
             body.append(f"    u8 pad{pos:X}[0x{off - pos:X}];")
         body.append(f"    {t}{'' if t.endswith('*') else ' '}unk{off:X};")
-        pos = off + (4 if t.endswith("*") else S.size_of(t) or 4)
+        pos = off + fsize(t)
     return f"struct {name} {{\n" + "\n".join(body) + "\n};"
 
 
@@ -148,7 +155,7 @@ def structify_locals(mod, only=None, skip=()):
                 continue
             lo = max((o for o in fields if o < off), default=None)
             hi = min((o for o in fields if o > off), default=None)
-            if lo is not None and lo + (4 if fields[lo].endswith("*") else S.size_of(fields[lo]) or 4) > off:
+            if lo is not None and lo + fsize(fields[lo]) > off:
                 continue
             if hi is not None and off + sz > hi:
                 continue
