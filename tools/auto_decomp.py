@@ -75,7 +75,7 @@ class Module:
         text = path.read_text() if path.exists() else ""
         m = re.search(r"compiler: ([0-9.]+)", text)
         compiler = m[1] if m else "1.7.1"
-        m = re.search(r"cflags: (-O[0-3s](?: -f[\w-]+)*)", text)
+        m = re.search(r"cflags: (-O[0-3s](?: -[fm][\w-]+)*)", text)
         return compiler, f"{compiler} {m[1] if m else '-O2'}"
 
     def all_text(self):

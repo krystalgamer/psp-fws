@@ -29,7 +29,7 @@ def main():
     a = ap.parse_args()
     stats = json.loads((ROOT / "tmp/auto_stats" / f"{a.version}_{a.module}.json").read_text())["funcs"]
     src = ROOT / "src" / a.module / f"{a.module}.c"
-    m = re.search(r"cflags: (-O[0-3s](?: -f[\w-]+)*)", src.read_text())
+    m = re.search(r"cflags: (-O[0-3s](?: -[fm][\w-]+)*)", src.read_text())
     own = f"1.7.1 {m[1] if m else '-O2'}"
     funcs = N.module_funcs(a.version, a.module)
     sets = [(addr, name, {x.split(" ", 1)[1] for x in stats.get(name, [])}) for addr, name, _ in funcs]
@@ -39,7 +39,7 @@ def main():
     in_c = {n for _, n, _ in funcs if f", {n});" not in asm_text}
     file_opt = {}
     for f, txt in texts.items():
-        mm = re.search(r"cflags: (-O[0-3s](?: -f[\w-]+)*)", txt)
+        mm = re.search(r"cflags: (-O[0-3s](?: -[fm][\w-]+)*)", txt)
         opt = mm[1] if mm else "-O2"
         for n in re.findall(r"INCLUDE_ASM\(\"[^\"]+\", (\w+)\)", txt) + re.findall(r"^[^\n;]*\b(\w+)\([^;{]*\)\s*\{$", txt, re.M):
             file_opt[n] = opt
