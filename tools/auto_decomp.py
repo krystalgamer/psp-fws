@@ -393,7 +393,8 @@ def _try_func(mod, name, header_ctx, target, seen):
     matching = set()
     best = None
     compiler, own_setting = Module.file_setting(mod.file_of(name))
-    settings = [own_setting] if FAST else [f"{compiler} {o}" for o in OPTS]
+    compilers = os.environ.get("AUTO_COMPILERS", compiler).split()
+    settings = [own_setting] if FAST else [f"{c} {o}" for c in compilers for o in OPTS]
     for setting in settings:
         comp, opt = setting.split(" ", 1)
         words, err = compile_words(text, comp, opt)
