@@ -315,9 +315,19 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00001D7C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00001DF0);
+void func_00001DF0(void *arg0, s32 arg1, s8 arg2, s8 arg3) {
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s8 *, 8) = arg2;
+    M2C_FIELD(arg0, s8 *, 9) = arg3;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00024CE8;
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00001E0C);
+void func_00001E0C(void *arg0, s32 arg1, s8 arg2, s8 arg3) {
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s8 *, 8) = arg2;
+    M2C_FIELD(arg0, s8 *, 9) = arg3;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00024CE8;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00001E28);
 
@@ -336,9 +346,15 @@ void func_000020F4(void *arg0, s32 arg1) {
     func_000068E4(arg1, scePaf_4842A808(M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 4), &D_000245E4));
 }
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00002134);
+void func_00002134(M2C_UNK **arg0, s32 arg1) {
+    func_00001DF0(arg0, arg1, 1, 0);
+    *arg0 = &D_00024C80;
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0000216C);
+void func_0000216C(M2C_UNK **arg0, s32 arg1) {
+    func_00001DF0(arg0, arg1, 1, 0);
+    *arg0 = &D_00024C80;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_000021A4);
 
@@ -352,7 +368,10 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00002624);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_000026EC);
+void func_000026EC(M2C_UNK **arg0, s32 arg1) {
+    func_00001DF0(arg0, arg1, 0, 1);
+    *arg0 = &D_00024C18;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00002724);
 
