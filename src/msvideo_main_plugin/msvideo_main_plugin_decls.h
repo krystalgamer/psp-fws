@@ -14,6 +14,16 @@ struct Unk_Unk_func_0003C8BC_0_6DC {
     s32 unk14;
 };
 
+struct Unk_Unk_func_0004D4AC_0_EA8 {
+    u8 pad0[0x3C];
+    s32 unk3C;
+};
+
+struct Unk_Unk_func_0004D4AC_0_EAC {
+    u8 pad0[0x3C];
+    s32 unk3C;
+};
+
 struct Unk_Unk_func_00051828_0_938 {
     u8 pad0[0x390];
     s32 unk390;
@@ -1243,8 +1253,8 @@ struct Unk_func_0004D4AC_0 {
     s32 unkE94;
     s32 unkE98;
     u8 padE9C[0xC];
-    void *unkEA8;
-    void *unkEAC;
+    struct Unk_Unk_func_0004D4AC_0_EA8 *unkEA8;
+    struct Unk_Unk_func_0004D4AC_0_EAC *unkEAC;
 };
 
 struct Unk_func_0004D4AC_temp_s2 {

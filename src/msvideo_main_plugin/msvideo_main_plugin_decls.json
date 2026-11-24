@@ -1769,6 +1769,8 @@
  "types": {
   "Unk_Unk_Unk_func_000A58E8_0_110_2AC": "struct Unk_Unk_Unk_func_000A58E8_0_110_2AC {\n    u8 pad0[0x90];\n    void *unk90;\n};",
   "Unk_Unk_func_0003C8BC_0_6DC": "struct Unk_Unk_func_0003C8BC_0_6DC {\n    u8 pad0[0x14];\n    s32 unk14;\n};",
+  "Unk_Unk_func_0004D4AC_0_EA8": "struct Unk_Unk_func_0004D4AC_0_EA8 {\n    u8 pad0[0x3C];\n    s32 unk3C;\n};",
+  "Unk_Unk_func_0004D4AC_0_EAC": "struct Unk_Unk_func_0004D4AC_0_EAC {\n    u8 pad0[0x3C];\n    s32 unk3C;\n};",
   "Unk_Unk_func_00051828_0_938": "struct Unk_Unk_func_00051828_0_938 {\n    u8 pad0[0x390];\n    s32 unk390;\n};",
   "Unk_Unk_func_0007AA8C_temp_a0_D0": "struct Unk_Unk_func_0007AA8C_temp_a0_D0 {\n    u8 pad0[0xC];\n    s32 unkC;\n};",
   "Unk_Unk_func_0009C524_temp_v0_90": "struct Unk_Unk_func_0009C524_temp_v0_90 {\n    u8 pad0[0x100];\n    s32 unk100;\n};",
@@ -1979,7 +1981,7 @@
   "Unk_func_0004871C_1": "struct Unk_func_0004871C_1 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
   "Unk_func_000491D8_0": "struct Unk_func_000491D8_0 {\n    u8 pad0[0x4C0];\n    s32 unk4C0;\n    s32 unk4C4;\n    u8 pad4C8[0x8];\n    s8 unk4D0;\n};",
   "Unk_func_0004D194_0": "struct Unk_func_0004D194_0 {\n    u8 pad0[0xFAC];\n    s32 unkFAC;\n    s32 unkFB0;\n    s32 unkFB4;\n    s32 unkFB8;\n};",
-  "Unk_func_0004D4AC_0": "struct Unk_func_0004D4AC_0 {\n    u8 pad0[0x4];\n    void *unk4;\n    u8 pad8[0xE7C];\n    s32 unkE84;\n    s32 unkE88;\n    s32 unkE8C;\n    s32 unkE90;\n    s32 unkE94;\n    s32 unkE98;\n    u8 padE9C[0xC];\n    void *unkEA8;\n    void *unkEAC;\n};",
+  "Unk_func_0004D4AC_0": "struct Unk_func_0004D4AC_0 {\n    u8 pad0[0x4];\n    void *unk4;\n    u8 pad8[0xE7C];\n    s32 unkE84;\n    s32 unkE88;\n    s32 unkE8C;\n    s32 unkE90;\n    s32 unkE94;\n    s32 unkE98;\n    u8 padE9C[0xC];\n    struct Unk_Unk_func_0004D4AC_0_EA8 *unkEA8;\n    struct Unk_Unk_func_0004D4AC_0_EAC *unkEAC;\n};",
   "Unk_func_0004D4AC_temp_s2": "struct Unk_func_0004D4AC_temp_s2 {\n    u8 pad0[0x341];\n    s8 unk341;\n};",
   "Unk_func_0004D7CC_0": "struct Unk_func_0004D7CC_0 {\n    u8 pad0[0xEA4];\n    u8 unkEA4;\n    u8 unkEA5;\n    u8 padEA6[0x4E];\n    s32 unkEF4;\n    s32 unkEF8;\n    s32 unkEFC;\n    s32 unkF00;\n    s32 unkF04;\n    s32 unkF08;\n    s32 unkF0C;\n    s32 unkF10;\n    u8 padF14[0x78];\n    s32 unkF8C;\n    s32 unkF90;\n    s32 unkF94;\n    s32 unkF98;\n    s32 unkF9C;\n    s32 unkFA0;\n    s32 unkFA4;\n    s32 unkFA8;\n};",
   "Unk_func_00050BDC_0": "struct Unk_func_00050BDC_0 {\n    u8 pad0[0x9E4];\n    s8 unk9E4;\n};",

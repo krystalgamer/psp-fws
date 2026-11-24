@@ -568,15 +568,15 @@ void func_0004D4AC(struct Unk_func_0004D4AC_0 *arg0) {
 
     temp_s2 = arg0->unk4;
     temp_v0 = scePaf_D7FA53D2(arg0->unkEA8, 0);
-    if (sceMpegbase_91929A21(temp_v0, 0, (s32) M2C_FIELD(arg0->unkEA8, s32 *, 0x3C) >> 2, (u8 *)arg0 + 0xF4C) != 0) {
+    if (sceMpegbase_91929A21(temp_v0, 0, (s32) arg0->unkEA8->unk3C >> 2, (u8 *)arg0 + 0xF4C) != 0) {
         temp_s2->unk341 = 1;
     }
-    func_0004C1C0(temp_v0, M2C_FIELD(arg0->unkEA8, s32 *, 0x3C), arg0->unkE94, arg0->unkE98, arg0->unkE84, arg0->unkE88, arg0->unkE8C, arg0->unkE90);
+    func_0004C1C0(temp_v0, arg0->unkEA8->unk3C, arg0->unkE94, arg0->unkE98, arg0->unkE84, arg0->unkE88, arg0->unkE8C, arg0->unkE90);
     temp_a3 = arg0->unkE98;
     if ((u32) temp_a3 < 0x110U) {
-        temp_a0 = M2C_FIELD(arg0->unkEA8, s32 *, 0x3C);
-        scePaf_3308156F(temp_v0 + (temp_a0 * temp_a3), temp_v0 + (temp_a0 * (temp_a3 - 1)), M2C_FIELD(arg0->unkEAC, s32 *, 0x3C));
-        temp_a1 = M2C_FIELD(arg0->unkEA8, s32 *, 0x3C);
+        temp_a0 = arg0->unkEA8->unk3C;
+        scePaf_3308156F(temp_v0 + (temp_a0 * temp_a3), temp_v0 + (temp_a0 * (temp_a3 - 1)), arg0->unkEAC->unk3C);
+        temp_a1 = arg0->unkEA8->unk3C;
         sceKernelDcacheWritebackRange(temp_v0 + (temp_a1 * arg0->unkE98), (u32) temp_a1);
     }
     scePaf_25DBB2B8(arg0->unkEA8);
