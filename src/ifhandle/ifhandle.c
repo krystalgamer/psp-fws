@@ -73,7 +73,17 @@ s32 sceNetIfhandle_driver_D5AD6DEA(void *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_0542835F);
+s32 sceNetIfhandle_driver_0542835F(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_a0;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_00003508 = arg0;
+    D_0000350C = arg1;
+    D_00003510 = arg2;
+    D_00003504 = 1;
+    sceKernelCpuResumeIntr(temp_a0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_773FC77C);
 

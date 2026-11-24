@@ -67,9 +67,17 @@ INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_0000
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_00008020);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_00008040);
+void func_00008040(void *arg0) {
+    vsh_5452A47B();
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00012158;
+    M2C_FIELD(arg0, s32 *, 0x30) = -1;
+}
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_00008078);
+void func_00008078(void *arg0) {
+    vsh_5452A47B();
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00012158;
+    M2C_FIELD(arg0, s32 *, 0x30) = -1;
+}
 
 INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_000080B0);
 

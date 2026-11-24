@@ -287,7 +287,15 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_C403411C);
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_58234CB0);
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_8727574A);
+void vsh_8727574A(s32 arg0, s32 arg1) {
+    scePaf_6829D7AF(arg0, 0, 0x110);
+    M2C_FIELD(arg0, s32 *, 0) = 1;
+    scePaf_980228BA(arg0 + 4, &D_000283F4);
+    M2C_FIELD(arg0, s32 *, 0x104) = scePaf_CA79D58B(&D_000283F4);
+    M2C_FIELD(arg0, s32 *, 0x108) = 1;
+    M2C_FIELD(arg0, s32 *, 0x10C) = 1;
+    sceReg_92E41280(arg0, 2, arg1);
+}
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_53CF01CA);
 
@@ -602,9 +610,17 @@ void *func_0000482C(void **arg0) {
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00004864);
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_000049D8);
+void func_000049D8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_000049E8);
+void func_000049E8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_000049F8);
 
@@ -690,7 +706,10 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00009114);
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_000091B8);
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_FA1DE461);
+void vsh_FA1DE461(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x20) = arg2;
+}
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0000928C);
 
@@ -1246,7 +1265,11 @@ void func_0000DD70(void) {
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_35183A6C);
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0000E06C);
+void func_0000E06C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0000E07C);
 
@@ -2814,7 +2837,20 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00023B28);
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00023BB0);
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00023C44);
+void func_00023C44(void *arg0) {
+    s32 temp_v0;
+    s32 temp_v1;
+
+    func_00003E3C((M2C_FIELD(arg0, s32 *, 0) + (M2C_FIELD(arg0, s32 *, 4) * 0xC)) - 0xC);
+    temp_v1 = M2C_FIELD(arg0, s32 *, 4) - 1;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    M2C_FIELD(arg0, s32 *, 4) = temp_v1;
+    if (temp_v1 >= (temp_v0 - 0x14)) {
+
+    } else {
+        func_00023CB8((s32) arg0, temp_v0 - 0xA);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00023CB8);
 

@@ -44,15 +44,18 @@ s32 func_00002884(s32);
 s32 func_00003B44(s32 arg0, s32 *arg1);
 void func_0000478C(void *arg0, s32 arg1);
 void func_000047C0(void *arg0);
+void func_000048C4(void *arg0);
 void func_00004A0C(void *arg0, s32 arg1);
 s32 func_00004AB8(s32, s32);
 s32 func_000056E8(u32 arg0);
+void func_00006638(void *arg0);
 void func_0000664C(void *arg0);
 u32 func_00006678(void *arg0);
 void func_000066EC(void *arg0, s32 arg1, s32 arg2);
 void func_0000672C(void *arg0);
 s32 func_00006760(void *arg0);
 u32 func_00006774(void *arg0);
+void func_00006780(void *arg0);
 s32 sceAsfParser_8B08301F(void);
 s32 sceAsfParser_B9E4BD9E(void);
 

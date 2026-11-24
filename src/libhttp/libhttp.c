@@ -139,7 +139,30 @@ INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_000057E4);
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00005A54);
 
-INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00005CD0);
+void func_00005CD0(void *arg0, void *arg1) {
+    void *temp_s0;
+    void *temp_s0_2;
+    void *var_a0;
+    void *var_s1;
+
+    var_s1 = arg1;
+    var_a0 = arg0;
+    if (var_a0 != NULL) {
+        do {
+            temp_s0 = M2C_FIELD(var_a0, void **, 0x7C);
+            func_0000B2C0((s32) var_a0);
+            var_a0 = temp_s0;
+        } while (temp_s0 != NULL);
+    }
+    if (var_s1 != NULL) {
+        do {
+            temp_s0_2 = M2C_FIELD(var_s1, void **, 4);
+            func_000057E4(M2C_FIELD(var_s1, s32 *, 0));
+            func_0000B2C0((s32) var_s1);
+            var_s1 = temp_s0_2;
+        } while (temp_s0_2 != NULL);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00005D30);
 

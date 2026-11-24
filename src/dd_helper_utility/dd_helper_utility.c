@@ -62,9 +62,17 @@ INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00000580);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_000005A4);
+void func_000005A4(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000047C8;
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 8) = arg2;
+}
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_000005BC);
+void func_000005BC(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000047C8;
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 8) = arg2;
+}
 
 void func_000005D4(M2C_UNK **arg0) {
     *arg0 = &D_000047C8;

@@ -410,7 +410,11 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00004880)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000048A4);
 
-INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000048C4);
+void func_000048C4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x2D4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x2D8) = 0;
+    M2C_FIELD(arg0, s32 *, 0x2DC) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000048D4);
 
@@ -584,7 +588,14 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00006474)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00006560);
 
-INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00006638);
+void func_00006638(void *arg0) {
+    u16 temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, u16 *, 0x28);
+    M2C_FIELD(arg0, s32 *, 0x2AC) = 0;
+    M2C_FIELD(arg0, u16 *, 0x2A2) = temp_v1;
+    M2C_FIELD(arg0, u16 *, 0x2A4) = temp_v1;
+}
 
 void func_0000664C(void *arg0) {
     s32 temp_v1;
@@ -647,7 +658,16 @@ u32 func_00006774(void *arg0) {
     return (u32) M2C_FIELD(arg0, u32 *, 8) >> 3;
 }
 
-INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00006780);
+void func_00006780(void *arg0) {
+    u32 temp_a3;
+    u32 temp_a4;
+
+    temp_a4 = M2C_FIELD(arg0, u32 *, 0);
+    temp_a3 = (((u32) M2C_FIELD(arg0, u32 *, 4) >> 3) * 8) + M2C_FIELD(arg0, s32 *, 8);
+    M2C_FIELD(arg0, u32 *, 4) = (u32) ((temp_a4 < temp_a3) ? temp_a4 : temp_a3);
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000067B0);
 

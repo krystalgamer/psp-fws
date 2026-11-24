@@ -5,8 +5,11 @@
 #include "m2c_macros.h"
 
 
+void func_0000015C(void *arg0);
+void func_00000180(void *arg0);
 void func_0000104C(void);
 M2C_UNK func_000010D0();
 s32 module_stop(void);
+M2C_UNK scePaf_86B41BA3();
 
 #endif

@@ -63,9 +63,17 @@ u8 func_000005E0(void) {
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000005EC);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000610);
+void func_00000610(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0000AAB8;
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 8) = arg2;
+}
 
-INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000628);
+void func_00000628(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0000AAB8;
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 8) = arg2;
+}
 
 void func_00000640(M2C_UNK **arg0) {
     *arg0 = &D_0000AAB8;
@@ -344,7 +352,13 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00002E2C);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00002E70);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00003100);
+void func_00003100(s32 arg0, s32 arg1, s32 arg2) {
+    void *temp_a0;
+
+    temp_a0 = arg0 + 0x14;
+    M2C_FIELD(temp_a0, s32 *, 0x10) = arg1;
+    M2C_FIELD(temp_a0, s32 *, 0x14) = arg2;
+}
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00003110);
 

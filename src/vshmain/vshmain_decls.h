@@ -4,6 +4,7 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern s32 D_000283F4;
 extern M2C_UNK D_00028D50;
 extern M2C_UNK D_0002A540;
 extern M2C_UNK D_0002ABF0;
@@ -87,6 +88,7 @@ void func_000039B8(void);
 M2C_UNK func_00003D18(M2C_UNK, M2C_UNK);
 void func_00003DFC(void);
 void func_00003E1C(void);
+s32 func_00003E3C(s32);
 void func_00003E6C(void);
 void func_00003F40(s32 arg0, s32 *arg1);
 M2C_UNK func_000041B4();
@@ -94,6 +96,8 @@ s32 *func_000041D0(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 s32 func_0000424C(s32, s32, s32);
 s32 func_00004524(M2C_UNK, M2C_UNK);
 void *func_0000482C(void **arg0);
+void func_000049D8(void *arg0);
+void func_000049E8(void *arg0);
 void func_00009464(s32 *arg0, s32 arg1);
 void func_00009484(s32 *arg0, s32 arg1);
 void func_000094A4(s32 *arg0, s32 arg1);
@@ -134,6 +138,7 @@ void func_0000C61C(s32 arg0);
 void func_0000C638(void);
 M2C_UNK func_0000CD00();
 void func_0000DD70(void);
+void func_0000E06C(void *arg0);
 void func_0000E340(void);
 s32 func_0000E688(void);
 void func_0000E918(void);
@@ -207,6 +212,7 @@ s32 func_000233F4(s32, s32, s32, s32);
 void func_000236E8(s32 arg0);
 void func_00023AF4(void *arg0, s32 arg1);
 M2C_UNK func_00023B28(void *);
+void func_00023C44(void *arg0);
 s32 func_00023CB8(s32, s32);
 s32 func_00023E40(void *arg0);
 s32 func_00023E48(void *arg0);
@@ -274,6 +280,7 @@ M2C_UNK scePaf_7EC15225(void *);
 s32 scePaf_81667058(void *, M2C_UNK);
 M2C_UNK scePaf_86B41BA3(void **);
 M2C_UNK scePaf_93538664(s32, s32, M2C_UNK, M2C_UNK);
+M2C_UNK scePaf_980228BA(s32, s32 *);
 M2C_UNK scePaf_A69BABE3(M2C_UNK, s32, s32);
 s32 scePaf_B7E6052B(M2C_UNK);
 M2C_UNK scePaf_C9831AFF(M2C_UNK *, s32);
@@ -285,6 +292,7 @@ M2C_UNK scePaf_F95EA3F1(void *, void *, s32);
 s32 scePaf_FCB4E053(s32);
 M2C_UNK scePaf_FF2F98C6(s32, M2C_UNK *, s32);
 s32 scePowerUnregisterCallback(s32);
+M2C_UNK sceReg_92E41280(s32, M2C_UNK, s32);
 s32 sceRtcGetCurrentTick(void *);
 M2C_UNK sceVshBridge_13AEE247(M2C_UNK, s32);
 M2C_UNK sceVshBridge_5D4213EA(M2C_UNK);
@@ -312,6 +320,8 @@ void vsh_78A67F41(void);
 void vsh_7ADF6A69(void *arg0);
 s32 vsh_7B9AA4D4(void);
 void vsh_8432F0B2(void);
+void vsh_8727574A(s32 arg0, s32 arg1);
 void vsh_8F76CA2A(void);
+void vsh_FA1DE461(void *arg0, s32 arg1, s32 arg2);
 
 #endif

@@ -12,9 +12,17 @@ s32 module_stop(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/impose_plugin/nonmatchings/impose_plugin", func_0000015C);
+void func_0000015C(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0x1FD) = 0;
+    M2C_FIELD(arg0, s8 *, 0x1FE) = 0;
+    scePaf_86B41BA3();
+}
 
-INCLUDE_ASM("tmp/asm/282/impose_plugin/nonmatchings/impose_plugin", func_00000180);
+void func_00000180(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0x1FD) = 0;
+    M2C_FIELD(arg0, s8 *, 0x1FE) = 0;
+    scePaf_86B41BA3();
+}
 
 INCLUDE_RODATA("tmp/asm/282/impose_plugin/nonmatchings/impose_plugin", D_00001378);
 

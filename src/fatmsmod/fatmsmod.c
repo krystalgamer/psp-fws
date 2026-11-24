@@ -681,7 +681,15 @@ INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_00013688);
 
 INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000136C4);
 
-INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_00013798);
+void func_00013798(void *arg0, u32 arg1) {
+    u32 temp_v1;
+
+    temp_v1 = M2C_FIELD(M2C_FIELD(arg0, void **, 0xFA78), u32 *, 0x40);
+    if ((temp_v1 < arg1) && (arg1 < (u32) (temp_v1 + M2C_FIELD(arg0, s32 *, 0x20)))) {
+        M2C_FIELD(arg0, s32 *, 0xFAC4) = 0;
+        M2C_FIELD(arg0, s32 *, 0xFAE0) = 0;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000137D8);
 

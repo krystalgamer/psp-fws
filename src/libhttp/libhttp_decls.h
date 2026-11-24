@@ -11,10 +11,13 @@ extern s32 D_0001AF9C;
 extern s32 D_0001B0CC;
 extern s32 D_0001B0E0;
 
+s32 func_000057E4(s32);
+void func_00005CD0(void *arg0, void *arg1);
 s32 func_00009ADC(void);
 void func_0000A08C(s32 arg0);
 s32 func_0000A0C0();
 M2C_UNK func_0000AA9C(s32);
+s32 func_0000B2C0(s32);
 s32 func_0000E568(void);
 void func_00010A74(void);
 void func_00011484(void);
