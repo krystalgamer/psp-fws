@@ -302,7 +302,16 @@ def variants(body, limit=24):
 
 
 def try_variants(text, body, target, setting):
-    for v in variants(body):
+    vs = variants(body)
+    # 64-bit returns: m2c types a function s32 when the $v1 half is unused
+    m = re.match(r"^(s32|u32|void) (\w+\()", body)
+    if m:
+        vs += [body.replace(m[0], f"{ty} {m[2]}", 1) for ty in ("s64", "u64")]
+    # comparisons computed into a temporary first: `t = a > b; return t == 0;`
+    mm = re.search(r"^(\s+)return \((.+?)\) (==|!=) 0;$", body, re.M)
+    if mm:
+        vs.append(body.replace(mm[0], f"{mm[1]}s32 cmp_tmp = {mm[2]};\n{mm[1]}return cmp_tmp {mm[3]} 0;", 1))
+    for v in vs:
         words, _ = compile_words(text.replace(body, v), *setting.split(" ", 1))
         if words == target:
             return v
