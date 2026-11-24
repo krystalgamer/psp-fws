@@ -112,7 +112,7 @@ def structify_globals(mod, only=None, skip=()):
             t, vol = fields[off]
             if off > pos:
                 body.append(f"    u8 pad{pos:X}[0x{off - pos:X}];")
-            body.append(f"    {'volatile ' if vol else ''}{t} unk{off:X};")
+            body.append(f"    {'volatile ' if vol else ''}{t}{'' if t.endswith('*') else ' '}unk{off:X};")
             pos = off + size_of(t)
         store["types"][f"{sym}_s"] = f"struct {sym}_s {{\n" + "\n".join(body) + "\n};"
         store["vars"][sym] = f"extern struct {sym}_s {sym};"
@@ -268,7 +268,7 @@ def structify_args(mod, only=None, skip=()):
         for off in sorted(fields):
             if off > pos:
                 body.append(f"    u8 pad{pos:X}[0x{off - pos:X}];")
-            body.append(f"    {fields[off]} unk{off:X};")
+            body.append(f"    {fields[off]}{'' if fields[off].endswith('*') else ' '}unk{off:X};")
             pos = off + size_of(fields[off])
         store["types"][sname] = f"struct {sname} {{\n" + "\n".join(body) + "\n};"
         accepted[sname] = fields

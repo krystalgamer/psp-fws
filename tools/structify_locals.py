@@ -44,7 +44,7 @@ def render(name, fields):
         t = fields[off]
         if off > pos:
             body.append(f"    u8 pad{pos:X}[0x{off - pos:X}];")
-        body.append(f"    {t} unk{off:X};")
+        body.append(f"    {t}{'' if t.endswith('*') else ' '}unk{off:X};")
         pos = off + (4 if t.endswith("*") else S.size_of(t) or 4)
     return f"struct {name} {{\n" + "\n".join(body) + "\n};"
 
