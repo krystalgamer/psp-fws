@@ -2,9 +2,23 @@
 #include "common.h"
 #include "savedata_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", func_00011C54);
+void func_00011C54(s32 arg0, s32 arg1, s32 arg2) {
+    func_0000F1A0(arg0, arg1);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00022718;
+    func_000020A4(arg0 + 0x20, 0);
+    M2C_FIELD(arg0, s32 *, 0x24) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    func_00011ED4(arg0);
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", func_00011CAC);
+void func_00011CAC(s32 arg0, s32 arg1, s32 arg2) {
+    func_0000F1A0(arg0, arg1);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00022718;
+    func_000020A4(arg0 + 0x20, 0);
+    M2C_FIELD(arg0, s32 *, 0x24) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    func_00011ED4(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", func_00011D04);
 

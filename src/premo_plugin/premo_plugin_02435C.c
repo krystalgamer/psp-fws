@@ -179,7 +179,9 @@ void func_000258C0(s32 arg0) {
     func_00025038(arg0 - 0x30);
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_000258DC);
+void func_000258DC(s32 arg0) {
+    func_00024E04(arg0, 0);
+}
 
 void func_000258F8(void *arg0) {
     func_00024E7C(arg0, 0);
@@ -287,7 +289,15 @@ s32 func_00026300(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_000263B8);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00026400);
+s32 func_00026400(void *arg0, s32 arg1, s32 arg2) {
+    s32 var_a3;
+
+    var_a3 = 0x80108C63;
+    if (M2C_FIELD(arg0, s32 *, 0x10) != 1) {
+        var_a3 = func_00023284(M2C_FIELD(arg0, s32 *, 0), arg1, arg2);
+    }
+    return var_a3;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00026438);
 
@@ -327,7 +337,19 @@ s32 func_00026BE4(void *arg0) {
     return 5 - M2C_FIELD(arg0, s32 *, 0x5C);
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00026BF4);
+s32 func_00026BF4(void *arg0, s32 arg1) {
+    s32 var_a3;
+
+    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    var_a3 = 0x80108C44;
+    if (M2C_FIELD(arg0, u8 *, 0x30) != 0) {
+        var_a3 = 0;
+        if ((u32) M2C_FIELD(arg0, u32 *, 0x5C) >= (u32) (5 - arg1)) {
+            var_a3 = func_00021BB8((s32) (arg0 + 4), arg1);
+        }
+    }
+    return var_a3;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00026C50);
 

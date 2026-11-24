@@ -2,11 +2,27 @@
 #include "common.h"
 #include "premo_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009380", func_00009380);
+s32 func_00009380(void) {
+    s32 temp_v0;
+
+    temp_v0 = func_00009688();
+    if (temp_v0 != 0) {
+        func_0000972C((void *) temp_v0);
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009380", func_000093BC);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009380", func_000093F8);
+s32 func_000093F8(void) {
+    s32 temp_v0;
+
+    temp_v0 = func_00009688();
+    if (temp_v0 != 0) {
+        func_00009808((void *) temp_v0);
+    }
+    return temp_v0;
+}
 
 u8 func_00009434(void) {
     s32 temp_v0;
