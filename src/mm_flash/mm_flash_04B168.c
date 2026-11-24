@@ -1819,5 +1819,8 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_04B168", func_00077944);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_04B168", func_000779B4);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_04B168", func_00077A74);
+s32 func_00077A74(s32 arg0, s32 arg1) {
+    void *sp0;
+    return (func_000226F0(arg0, arg1, &sp0) == 0) ? 0 : sp0;
+}
 

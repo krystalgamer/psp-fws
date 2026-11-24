@@ -139,7 +139,21 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_000797B8);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_00079AF4);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_00079B88);
+void func_00079B88(s32 arg0) {
+    void *sp0;
+    s32 temp_s0_2;
+    void *temp_s0;
+
+    temp_s0 = arg0 + 0x5C0;
+    func_0003F104(temp_s0);
+    temp_s0_2 = arg0 + 0x6D4;
+    func_0003EB68((s32) temp_s0, arg0 + 0x6E4, &sp0);
+    func_00020638(&sp0, temp_s0_2, &sp0);
+    if (sp0 != 0x80000000) {
+        func_0007952C(arg0, &sp0);
+        func_000203A4(temp_s0_2);
+    }
+}
 
 s32 func_00079C04(void) {
     return 1;
