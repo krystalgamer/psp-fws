@@ -80,6 +80,8 @@ s32 func_00004124(void *arg0, s32 arg1);
 void func_000044AC(s32 arg0);
 void func_000047DC(void *arg0, void *arg1, s32 arg2);
 s32 func_000048B8(s32, s32);
+void func_00004A3C(s32 arg0);
+s32 func_00005008(s32);
 void func_00005778(void *arg0);
 void func_0000588C(void *arg0);
 void func_000058CC(void *arg0);

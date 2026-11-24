@@ -111,11 +111,32 @@ void func_00003158(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1E4) = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000031DC);
+void func_000031DC(void *arg0) {
+    s32 temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, s32 *, 0x1DC);
+    if (temp_v1 != 0) {
+        sceKernelCancelAlarm(temp_v1);
+        M2C_FIELD(arg0, s32 *, 0x1DC) = 0;
+        M2C_FIELD(arg0, s32 *, 0x1E0) = 0;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000321C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003268);
+void func_00003268(void *arg0, s32 arg1) {
+    s32 temp_a3;
+    void *temp_a2;
+
+    sceKernelWaitSema(M2C_FIELD(arg0, u32 *, 0x134), 1, NULL);
+    temp_a3 = M2C_FIELD(arg0, s32 *, 0x140);
+    temp_a2 = temp_a3 + (((s32) (arg1 - (temp_a3 + (M2C_FIELD(arg0, s32 *, 0x13C) * 0x14))) / (s32) M2C_FIELD(arg0, s32 *, 0x138)) * 0x14);
+    if (M2C_FIELD(temp_a2, s32 *, 0x10) == arg1) {
+        M2C_FIELD(temp_a2, s32 *, 0) = 0;
+        M2C_FIELD(arg0, void **, 0x144) = temp_a2;
+    }
+    sceKernelSignalSema(M2C_FIELD(arg0, u32 *, 0x134), 1);
+}
 
 s32 func_00003304(void *arg0) {
     s32 temp_a2;
@@ -310,7 +331,11 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00007D78);
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008090);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000829C);
+s32 func_0000829C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    return 0;
+}
 
 void func_000082AC(void) {
 }

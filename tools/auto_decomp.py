@@ -261,6 +261,54 @@ def split_m2c(out, name):
     return [l for l in out[:m.start()].splitlines() if l.strip()], out[m.start():].rstrip() + "\n"
 
 
+STORE = re.compile(r"^(\s+)(M2C_FIELD\([^;]*\) = [^;=]+;|\w+ = [^;=]+;)$")
+
+
+def store_runs(body):
+    """Runs of consecutive simple assignments: [(start line, end line)]."""
+    lines = body.split("\n")
+    runs, i = [], 0
+    while i < len(lines):
+        j = i
+        while j < len(lines) and STORE.match(lines[j]) and "(" not in lines[j].split("=", 1)[1].replace("M2C_FIELD(", ""):
+            j += 1
+        if j - i >= 2:
+            runs.append((i, j))
+        i = max(j, i + 1)
+    return lines, runs
+
+
+def variants(body, limit=24):
+    """Source variants: reorder runs of independent assignments; merge
+    consecutive stores of the same value into a chained assignment."""
+    import itertools
+    lines, runs = store_runs(body)
+    out = []
+    for a, b in runs:
+        run = lines[a:b]
+        if len(run) <= 4:
+            for perm in itertools.permutations(run):
+                if list(perm) != run:
+                    out.append("\n".join(lines[:a] + list(perm) + lines[b:]))
+        else:
+            out.append("\n".join(lines[:a] + run[::-1] + lines[b:]))
+        vals = [l.split("=", 1)[1].strip() for l in run]
+        if len(set(vals)) == 1:
+            targets = [l.split("=", 1)[0].strip() for l in run]
+            for order in (targets, targets[::-1]):
+                ind = STORE.match(run[0])[1]
+                out.append("\n".join(lines[:a] + [ind + " = ".join(order) + " = " + vals[0]] + lines[b:]))
+    return out[:limit]
+
+
+def try_variants(text, body, target, setting):
+    for v in variants(body):
+        words, _ = compile_words(text.replace(body, v), *setting.split(" ", 1))
+        if words == target:
+            return v
+    return None
+
+
 def guess_callees(mod, name, target="mips-gcc-c"):
     """Prototypes (SDK or asm-derived) for callees without a known one."""
     out = {}
@@ -353,6 +401,12 @@ def _try_func(mod, name, header_ctx, target, seen):
         mod.scores[name] = (best, len(target))
     elif not prev:
         mod.scores[name] = (best, len(target))
+    if own_setting not in matching:
+        alt = try_variants(text, body, target, own_setting)
+        if alt:
+            body = alt
+            matching.add(own_setting)
+            mod.stats[name] = sorted(set(mod.stats[name]) | {own_setting + " variant"})
     if own_setting not in matching:
         # Kernel code often reads globals through volatile accesses, which keeps
         # the address in a register (lui/addiu, then lw off(reg)).

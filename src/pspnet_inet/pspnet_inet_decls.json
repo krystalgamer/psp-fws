@@ -12,6 +12,8 @@
   "func_000044AC": "void func_000044AC(s32 arg0);",
   "func_000047DC": "void func_000047DC(void *arg0, void *arg1, s32 arg2);",
   "func_000048B8": "s32 func_000048B8(s32, s32);",
+  "func_00004A3C": "void func_00004A3C(s32 arg0);",
+  "func_00005008": "s32 func_00005008(s32);",
   "func_00005778": "void func_00005778(void *arg0);",
   "func_0000588C": "void func_0000588C(void *arg0);",
   "func_000058CC": "void func_000058CC(void *arg0);",
