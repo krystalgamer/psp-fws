@@ -25,12 +25,12 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_079E90", func_0007A508);
 
 void func_0007A538(struct Unk_func_0007A538_0 *arg0) {
     s32 temp_v1;
-    void *temp_s0;
+    struct Unk_func_0007A538_temp_s0 *temp_s0;
 
     temp_s0 = arg0->unk15C;
-    temp_v1 = M2C_FIELD(temp_s0, s32 *, 0xC);
-    arg0->unk1B4 = (s32) M2C_FIELD(temp_s0, s32 *, 0x18);
-    arg0->unk1B0 = (s32) M2C_FIELD(temp_s0, s32 *, 0x1C);
+    temp_v1 = temp_s0->unkC;
+    arg0->unk1B4 = (s32) temp_s0->unk18;
+    arg0->unk1B0 = (s32) temp_s0->unk1C;
     if (temp_v1 != 0) {
         func_0006A618(temp_v1);
     }

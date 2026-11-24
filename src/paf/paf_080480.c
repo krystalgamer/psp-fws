@@ -50,11 +50,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", func_00081E60);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", func_00082078);
 
 void func_00082140(s32 arg0) {
-    void *temp_a0;
+    struct Unk_func_00082140_temp_a0 *temp_a0;
 
     temp_a0 = arg0 + 0x20;
-    M2C_FIELD(temp_a0, s16 *, 0x2C) = 8;
-    M2C_FIELD(temp_a0, s16 *, 0x2E) = 1;
+    temp_a0->unk2C = 8;
+    temp_a0->unk2E = 1;
 }
 
 void func_00082158(struct Unk_func_00082158_0 *arg0) {

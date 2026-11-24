@@ -116,23 +116,23 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_04A258", func_0004C1B4);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_04A258", func_0004C3F8);
 
 void func_0004C57C(void *arg0, s32 arg1) {
-    void *temp_v1;
+    struct Unk_func_0004C57C_temp_v1 *temp_v1;
 
     M2C_FIELD(arg0, s8 *, 0) = 1;
     temp_v1 = arg0 + 4;
     M2C_FIELD(arg0, M2C_UNK **, 4) = &D_001ABCF0;
-    M2C_FIELD(temp_v1, s32 *, 4) = 0;
+    temp_v1->unk4 = 0;
     func_00002AE4((s32) temp_v1, arg1);
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
 }
 
 void func_0004C5C4(void *arg0, s32 arg1) {
-    void *temp_v1;
+    struct Unk_func_0004C5C4_temp_v1 *temp_v1;
 
     M2C_FIELD(arg0, s8 *, 0) = 1;
     temp_v1 = arg0 + 4;
     M2C_FIELD(arg0, M2C_UNK **, 4) = &D_001ABCF0;
-    M2C_FIELD(temp_v1, s32 *, 4) = 0;
+    temp_v1->unk4 = 0;
     func_00002AE4((s32) temp_v1, arg1);
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
 }
@@ -556,12 +556,12 @@ INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_04A258", D_001718F0);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_04A258", func_000523A0);
 
 void func_000524AC(void *arg0) {
-    void *temp_v1;
+    struct Unk_func_000524AC_temp_v1 *temp_v1;
 
     temp_v1 = arg0 + 0x14;
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    M2C_FIELD(temp_v1, s32 *, 4) = 0;
-    M2C_FIELD(temp_v1, s32 *, 8) = 0;
+    temp_v1->unk4 = 0;
+    temp_v1->unk8 = 0;
     func_000523A0((s32) arg0);
 }
 

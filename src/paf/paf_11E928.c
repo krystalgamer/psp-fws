@@ -33,13 +33,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_11E928", func_0011F0FC);
 void ***func_0011F188(void ***arg0, struct Unk_func_0011F188_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
-    void *temp_v1;
+    struct Unk_func_0011F188_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    temp_a1 = M2C_FIELD(temp_v1, void **, 0);
+    temp_s0 = temp_v1->unk4;
+    temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);

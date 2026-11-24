@@ -1115,10 +1115,10 @@ void func_00139708(void) {
 }
 
 void func_00139724(void) {
-    void *temp_s0;
+    struct Unk_func_00139724_temp_s0 *temp_s0;
 
     temp_s0 = D_001E2988;
-    M2C_FIELD(temp_s0, s16 *, 0x28) = func_00139758(M2C_FIELD(temp_s0, s32 *, 0x2C), (s32) M2C_FIELD(temp_s0, s16 *, 4));
+    temp_s0->unk28 = func_00139758(temp_s0->unk2C, (s32) temp_s0->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_00139758);

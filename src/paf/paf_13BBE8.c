@@ -296,11 +296,11 @@ void func_001448F8(s32 arg0) {
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_00144924);
 
 void func_001449CC(struct Unk_func_001449CC_0 *arg0) {
-    void *temp_s0;
+    struct Unk_func_001449CC_temp_s0 *temp_s0;
 
     temp_s0 = arg0->unk4;
-    func_001494FC(M2C_FIELD(temp_s0, s32 *, 0x3A74));
-    M2C_FIELD(temp_s0, s32 *, 0x3A74) = 0;
+    func_001494FC(temp_s0->unk3A74);
+    temp_s0->unk3A74 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_001449F8);
@@ -465,7 +465,7 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_001494FC);
 
 u16 func_00149554(struct Unk_func_00149554_0 *arg0) {
     u16 var_a1;
-    void *temp_a0;
+    struct Unk_func_00149554_temp_a0 *temp_a0;
 
     var_a1 = 0;
     if (arg0->unk4 != -1) {
@@ -473,7 +473,7 @@ u16 func_00149554(struct Unk_func_00149554_0 *arg0) {
     } else {
         temp_a0 = arg0->unk0;
         if (temp_a0 != NULL) {
-            var_a1 = M2C_FIELD(temp_a0, u16 *, 0xE);
+            var_a1 = temp_a0->unkE;
         }
     }
     return var_a1;

@@ -445,14 +445,14 @@ void func_0015A290(s32 *arg0) {
 
 void func_0015A2A0(void **arg0) {
     void *temp_v0;
-    void *var_v1;
+    struct Unk_func_0015A2A0_var_v1 *var_v1;
 
     if (arg0 != NULL) {
         var_v1 = *arg0;
         if (var_v1 != NULL) {
             do {
-                temp_v0 = M2C_FIELD(var_v1, void **, 0);
-                M2C_FIELD(var_v1, s32 *, 4) = 0;
+                temp_v0 = var_v1->unk0;
+                var_v1->unk4 = 0;
                 var_v1 = temp_v0;
             } while (temp_v0 != NULL);
         }

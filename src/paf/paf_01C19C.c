@@ -3,43 +3,43 @@
 #include "paf_decls.h"
 
 void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
-    void *temp_a0;
+    struct Unk_scePaf_21A0C6E0_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 0xB4) = arg2;
-        M2C_FIELD(temp_a0, s32 *, 0xB0) = arg1;
+        temp_a0->unkB4 = arg2;
+        temp_a0->unkB0 = arg1;
     }
 }
 
 void scePaf_C1579C1D(void **arg0, s32 arg1, s32 arg2) {
-    void *temp_a0;
+    struct Unk_scePaf_C1579C1D_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 0xBC) = arg2;
-        M2C_FIELD(temp_a0, s32 *, 0xB8) = arg1;
+        temp_a0->unkBC = arg2;
+        temp_a0->unkB8 = arg1;
     }
 }
 
 void scePaf_ED2DF238(void **arg0, s32 arg1, s32 arg2) {
-    void *temp_a0;
+    struct Unk_scePaf_ED2DF238_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 0xC4) = arg2;
-        M2C_FIELD(temp_a0, s32 *, 0xC0) = arg1;
+        temp_a0->unkC4 = arg2;
+        temp_a0->unkC0 = arg1;
     }
 }
 
 void scePaf_EB5BDCE1(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
-    void *temp_a0;
+    struct Unk_scePaf_EB5BDCE1_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 0xCC) = arg3;
-        M2C_FIELD(temp_a0, s32 *, 0xD0) = arg1;
-        M2C_FIELD(temp_a0, s32 *, 0xC8) = arg2;
+        temp_a0->unkCC = arg3;
+        temp_a0->unkD0 = arg1;
+        temp_a0->unkC8 = arg2;
     }
 }
 

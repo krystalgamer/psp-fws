@@ -739,14 +739,14 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_02E9DC", func_0003B3A4);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_02E9DC", func_0003B414);
 
 s32 func_0003B488(void *arg0, s32 arg1, s32 *arg2) {
-    void *temp_s1;
+    struct Unk_func_0003B488_temp_s1 *temp_s1;
 
     temp_s1 = arg0 + 0x20;
-    if (arg1 >= M2C_FIELD(temp_s1, s32 *, 4)) {
+    if (arg1 >= temp_s1->unk4) {
         func_000278D0(temp_s1, arg1 + 1);
     }
     if (arg1 >= 0) {
-        if (arg1 >= M2C_FIELD(temp_s1, s32 *, 4)) {
+        if (arg1 >= temp_s1->unk4) {
 
         } else {
             scePaf_5148EFE2(M2C_FIELD(arg0, s32 *, 0x20) + (arg1 * 4), M2C_FIELD(arg0, s32 *, 0x18), *arg2);
@@ -792,14 +792,14 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_02E9DC", func_0003B9D0);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_02E9DC", func_0003BA10);
 
 s32 func_0003BA60(void *arg0, s32 arg1, s32 *arg2) {
-    void *temp_s1;
+    struct Unk_func_0003BA60_temp_s1 *temp_s1;
 
     temp_s1 = arg0 + 0x1C;
-    if (arg1 >= M2C_FIELD(temp_s1, s32 *, 4)) {
+    if (arg1 >= temp_s1->unk4) {
         func_000278D0(temp_s1, arg1 + 1);
     }
     if (arg1 >= 0) {
-        if (arg1 >= M2C_FIELD(temp_s1, s32 *, 4)) {
+        if (arg1 >= temp_s1->unk4) {
 
         } else {
             scePaf_5148EFE2(M2C_FIELD(arg0, s32 *, 0x1C) + (arg1 * 4), M2C_FIELD(arg0, s32 *, 0x18), *arg2);

@@ -271,11 +271,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F4D0);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F52C);
 
 void func_0008F660(struct Unk_func_0008F660_0 *arg0) {
-    void *temp_v1;
+    struct Unk_func_0008F660_temp_v1 *temp_v1;
 
     temp_v1 = arg0->unk1C0;
-    M2C_FIELD(temp_v1, s32 *, 0x24) = 0;
-    M2C_FIELD(temp_v1, s32 *, 0x2C) = (s32) arg0->unk70;
+    temp_v1->unk24 = 0;
+    temp_v1->unk2C = (s32) arg0->unk70;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F674);
@@ -313,11 +313,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00091010);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00091120);
 
 void func_00091208(struct Unk_func_00091208_0 *arg0) {
-    void *temp_a1;
+    struct Unk_func_00091208_temp_a1 *temp_a1;
 
     temp_a1 = arg0->unk1C0;
-    M2C_FIELD(temp_a1, s32 *, 0x5C) = (s32) arg0->unk134;
-    M2C_FIELD(temp_a1, s32 *, 0x60) = (s32) arg0->unk70;
+    temp_a1->unk5C = (s32) arg0->unk134;
+    temp_a1->unk60 = (s32) arg0->unk70;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00091220);
@@ -347,11 +347,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", emit_message);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", format_message);
 
 void reset_error_mgr(void **arg0) {
-    void *temp_v0;
+    struct Unk_reset_error_mgr_temp_v0 *temp_v0;
 
     temp_v0 = *arg0;
-    M2C_FIELD(temp_v0, s32 *, 0x6C) = 0;
-    M2C_FIELD(temp_v0, s32 *, 0x14) = 0;
+    temp_v0->unk6C = 0;
+    temp_v0->unk14 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_std_error);

@@ -1132,11 +1132,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_058100", func_000694F8);
 void TIFFStripSize(s32 arg0) {
     u32 temp_a1;
     u32 temp_a2;
-    void *temp_v0;
+    struct Unk_TIFFStripSize_temp_v0 *temp_v0;
 
     temp_v0 = arg0 + 0x20;
-    temp_a2 = M2C_FIELD(temp_v0, u32 *, 0x14);
-    temp_a1 = M2C_FIELD(temp_v0, u32 *, 0x3C);
+    temp_a2 = temp_v0->unk14;
+    temp_a1 = temp_v0->unk3C;
     func_000694F8(arg0, (s32) ((temp_a2 < temp_a1) ? temp_a2 : temp_a1));
 }
 

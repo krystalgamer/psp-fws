@@ -149,10 +149,10 @@ s32 *func_000C6840(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C52B8", func_000C6878);
 
 void func_000C68A8(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_000C68A8_temp_v0 *temp_v0;
 
     temp_v0 = func_000C68EC(arg0, arg1);
-    if (M2C_FIELD(temp_v0, s8 *, 0x15) != 0) {
+    if (temp_v0->unk15 != 0) {
 
     } else {
         func_000C6AB4(arg0, temp_v0);
@@ -321,13 +321,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C52B8", func_000C90D0);
 void ***func_000C917C(void ***arg0, struct Unk_func_000C917C_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
-    void *temp_v1;
+    struct Unk_func_000C917C_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    temp_a1 = M2C_FIELD(temp_v1, void **, 0);
+    temp_s0 = temp_v1->unk4;
+    temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -543,13 +543,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C52B8", func_000CC720);
 void ***func_000CC760(void ***arg0, struct Unk_func_000CC760_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
-    void *temp_v1;
+    struct Unk_func_000CC760_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    temp_a1 = M2C_FIELD(temp_v1, void **, 0);
+    temp_s0 = temp_v1->unk4;
+    temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -804,13 +804,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C52B8", func_000D16A0);
 void ***func_000D1798(void ***arg0, struct Unk_func_000D1798_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
-    void *temp_v1;
+    struct Unk_func_000D1798_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    temp_a1 = M2C_FIELD(temp_v1, void **, 0);
+    temp_s0 = temp_v1->unk4;
+    temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -968,14 +968,14 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C52B8", func_000D4B60);
 
 void func_000D4B9C(void **arg0) {
     void *temp_s0;
-    void *var_a0;
-    void *var_v0;
+    struct Unk_func_000D4B9C_var_a0 *var_a0;
+    struct Unk_func_000D4B9C_var_v0 *var_v0;
 
     var_a0 = *arg0;
-    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    var_v0 = var_a0->unk4;
     if (var_v0 != var_a0) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_545FE2DA(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
@@ -988,13 +988,13 @@ void func_000D4BF4(struct Unk_func_000D4BF4_0 *arg0) {
     M2C_UNK *temp_v0;
     M2C_UNK *var_v1;
     void *temp_s0;
-    void *var_v0;
+    struct Unk_func_000D4BF4_var_v0 *var_v0;
 
     var_v1 = arg0->unk0;
     var_v0 = M2C_FIELD(var_v1, void **, 4);
     if (var_v0 != var_v1) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_545FE2DA(var_v0);
             var_v1 = arg0->unk0;
             var_v0 = temp_s0;
@@ -1049,13 +1049,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C52B8", func_000D5720);
 void ***func_000D57AC(void ***arg0, struct Unk_func_000D57AC_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
-    void *temp_v1;
+    struct Unk_func_000D57AC_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    temp_a1 = M2C_FIELD(temp_v1, void **, 0);
+    temp_s0 = temp_v1->unk4;
+    temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);

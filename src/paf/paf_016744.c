@@ -226,25 +226,25 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_016744", scePaf_66E3AAA9);
 
 s32 scePaf_D8739C4C(void **arg0) {
     s32 var_v0;
-    void *temp_a0;
+    struct Unk_scePaf_D8739C4C_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     var_v0 = 0;
     if (temp_a0 != NULL) {
-        var_v0 = M2C_FIELD(temp_a0, s32 *, 0x13C);
+        var_v0 = temp_a0->unk13C;
     }
     return var_v0;
 }
 
 s32 scePaf_D7E925A1(void **arg0, s32 arg1) {
     s32 var_v0;
-    void *temp_a0;
+    struct Unk_scePaf_D7E925A1_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     var_v0 = 0;
     if (temp_a0 != NULL) {
-        var_v0 = M2C_FIELD(temp_a0, s32 *, 0x13C);
-        M2C_FIELD(temp_a0, s32 *, 0x13C) = arg1;
+        var_v0 = temp_a0->unk13C;
+        temp_a0->unk13C = arg1;
     }
     return var_v0;
 }
