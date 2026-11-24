@@ -1,0 +1,228 @@
+/* cflags: -Os */
+#include "common.h"
+#include "htmlviewer_plugin_decls.h"
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00004788);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_000047F8);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_000048C8);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_000049A4);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_000049E8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007558);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007568);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007574);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007580);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_0000758C);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_0000759C);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000075A8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000075B0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000075BC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000075C8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000075D4);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000075E0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000075EC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000075FC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007608);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007618);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007708);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007718);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007730);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007740);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007750);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007760);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007770);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007780);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_0000778C);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_0000779C);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000077B0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000077C0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000077D0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000077E0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000077F0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007800);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007810);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007820);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007830);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007840);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000078D0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000078DC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000078EC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000078F8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007904);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007910);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007924);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_0000793C);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007948);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007954);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_0000795C);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007968);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007970);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007978);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_0000798C);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079A0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079A4);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079AC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079B0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079B4);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079B8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079BC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079C4);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079C8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079CC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079D0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079D4);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079D8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079DC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079E0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079E4);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079E8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079EC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079F0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079F4);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_000079F8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007A98);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007AB0);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007AC4);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007ADC);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007AF4);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007B08);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007B20);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007B38);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007B50);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007B68);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007B70);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007B7C);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007B84);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007B90);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007BA8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007BC8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007BE8);
+
+INCLUDE_RODATA("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", D_00007C04);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00004ABC);
+
+void func_00004B54(void) {
+    func_000049A4();
+}
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00004B70);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00004CD4);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00004D58);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00004EDC);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00004F50);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00004FB4);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00005014);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_000050D0);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_00005238);
+
+INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_004788", func_000052C8);
+
+void func_00005324(void) {
+    sceKernelWaitEventFlag(D_00008E64, 0x100U, 0, NULL, NULL);
+}
+
+void func_00005354(void) {
+    sceHtmlViewerHelper_C92C71B7(0);
+}
+
