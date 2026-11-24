@@ -65,20 +65,20 @@ void func_0008F9B4(void) {
 s32 func_0008F9BC(struct Unk_func_0008F9BC_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
-    void *temp_s0;
+    struct Unk_func_0008F9BC_temp_s0 *temp_s0;
     void *temp_s1;
 
     temp_s0 = arg0->unk18;
-    temp_s1 = temp_s0 + 0x20;
-    temp_v0 = func_00053D4C(M2C_FIELD(temp_s0, s32 *, 0x1C), temp_s1, 0x200);
+    temp_s1 = &temp_s0->unk20;
+    temp_v0 = func_00053D4C(temp_s0->unk1C, temp_s1, 0x200);
     var_v1 = temp_v0;
     if (temp_v0 <= 0) {
-        M2C_FIELD(temp_s0, s8 *, 0x20) = -1;
+        temp_s0->unk20 = -1;
         var_v1 = 2;
-        M2C_FIELD(temp_s0, s8 *, 0x21) = -0x27;
+        temp_s0->unk21 = -0x27;
     }
-    M2C_FIELD(temp_s0, void **, 0) = temp_s1;
-    M2C_FIELD(temp_s0, s32 *, 4) = var_v1;
+    temp_s0->unk0 = temp_s1;
+    temp_s0->unk4 = var_v1;
     return 1;
 }
 

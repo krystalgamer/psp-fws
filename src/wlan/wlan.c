@@ -33,16 +33,16 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_482CAE9A);
 
 void sceWlanDrv_driver_C9A8CAB7(void) {
     u32 temp_s2;
-    void *temp_s0;
+    struct Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0 *temp_s0;
     void *temp_s1;
 
     temp_s0 = D_000191B0;
     temp_s2 = shiftK1();
-    temp_s1 = temp_s0 + 0x188;
+    temp_s1 = &temp_s0->unk188;
     if (temp_s0 != NULL) {
         sceNetIfhandle_driver_54D1AEA1(temp_s1);
         sceNetIfhandle_driver_C9344A59(temp_s1);
-        M2C_FIELD(temp_s0, s32 *, 0x188) = 0;
+        temp_s0->unk188 = 0;
     }
     setK1(temp_s2);
 }

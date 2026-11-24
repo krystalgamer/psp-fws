@@ -1459,21 +1459,21 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001763C);
 s32 func_0001768C(void **arg0) {
     s32 temp_v0;
     s32 temp_v1;
-    void *temp_s0;
+    struct Unk_func_0001768C_temp_s0 *temp_s0;
 
     temp_s0 = *arg0;
     if (temp_s0 != NULL) {
-        temp_v0 = M2C_FIELD(temp_s0, s32 *, 0);
+        temp_v0 = temp_s0->unk0;
         temp_v1 = temp_v0 - 1;
         if (temp_v0 >= 0) {
-            M2C_FIELD(temp_s0, s32 *, 0) = temp_v1;
+            temp_s0->unk0 = temp_v1;
             if (temp_v1 != -1) {
                 *arg0 = NULL;
             } else {
-                func_00002900(M2C_FIELD(temp_s0, s32 *, 4));
-                func_000175C0(temp_s0 + 8);
-                func_000175C0(temp_s0 + 0xC);
-                func_000173D8(temp_s0 + 0x10);
+                func_00002900(temp_s0->unk4);
+                func_000175C0((u8 *)temp_s0 + 8);
+                func_000175C0((u8 *)temp_s0 + 0xC);
+                func_000173D8((u8 *)temp_s0 + 0x10);
                 func_0000274C((s32) temp_s0);
                 *arg0 = NULL;
             }

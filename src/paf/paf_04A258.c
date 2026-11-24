@@ -348,10 +348,10 @@ void func_0004EDE4(M2C_UNK **arg0) {
 }
 
 void func_0004EE0C(void **arg0) {
-    void *temp_a0;
+    struct Unk_func_0004EE0C_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
-    scePaf_9F10613F(temp_a0 + 0x84, M2C_FIELD(temp_a0, s32 *, 0x14));
+    scePaf_9F10613F((u8 *)temp_a0 + 0x84, temp_a0->unk14);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_04A258", func_0004EE30);

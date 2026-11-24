@@ -950,18 +950,18 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0001C374);
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0001C448);
 
 void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1) {
-    void *var_a2;
+    struct Unk_func_0001C57C_var_a2 *var_a2;
 
     var_a2 = arg0->unk1C;
-    M2C_FIELD(var_a2, s16 *, 0x3C) = arg1;
-    if (M2C_FIELD(var_a2, u16 *, 0x64) & 0x3C) {
-        func_000048B8((s32) var_a2, (s32) (var_a2 + 0x44));
+    var_a2->unk3C = arg1;
+    if (var_a2->unk64 & 0x3C) {
+        func_000048B8((s32) var_a2, (s32) ((u8 *)var_a2 + 0x44));
         var_a2 = arg0->unk1C;
     }
-    if (!(M2C_FIELD(var_a2, u16 *, 0x8C) & 0x3C)) {
+    if (!(var_a2->unk8C & 0x3C)) {
 
     } else {
-        func_000048B8((s32) var_a2, (s32) (var_a2 + 0x6C));
+        func_000048B8((s32) var_a2, (s32) ((u8 *)var_a2 + 0x6C));
     }
 }
 

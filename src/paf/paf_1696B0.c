@@ -6,13 +6,13 @@ s32 func_001696B0(struct Unk_func_001696B0_0 *arg0, s32 arg1) {
     s32 var_s0;
     s32 var_s1;
     s32 var_v1;
-    void *temp_a0;
+    struct Unk_func_001696B0_temp_a0 *temp_a0;
     void *temp_s2;
 
     temp_a0 = arg0->unk28;
     var_v1 = 0x80615100;
-    if (arg1 < (s32) M2C_FIELD(temp_a0, u8 *, 0x11)) {
-        temp_s2 = temp_a0 + 0x12;
+    if (arg1 < (s32) temp_a0->unk11) {
+        temp_s2 = (u8 *)temp_a0 + 0x12;
         var_s1 = 0;
         if (arg1 > 0) {
             var_s0 = arg1;

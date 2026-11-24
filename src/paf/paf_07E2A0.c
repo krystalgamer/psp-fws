@@ -22,43 +22,43 @@ void func_0007E3A8(struct Unk_func_0007E3A8_0 *arg0) {
     s32 temp_a0_4;
     s32 temp_a0_5;
     s32 temp_a0_6;
-    void *temp_s0;
+    struct Unk_func_0007E3A8_temp_s0 *temp_s0;
 
     temp_s0 = arg0->unk15C;
     if (temp_s0 != NULL) {
-        if (scePaf_8F12B63A(temp_s0 + 0x250) != 0) {
+        if (scePaf_8F12B63A((u8 *)temp_s0 + 0x250) != 0) {
 
         } else {
             jpeg_destroy((s32) temp_s0);
         }
-        if (M2C_FIELD(temp_s0, s32 *, 0x6A8) != 0) {
-            func_0006A618(M2C_FIELD(temp_s0, s32 *, 0x6A8));
-            M2C_FIELD(temp_s0, s32 *, 0x6A8) = 0;
+        if (temp_s0->unk6A8 != 0) {
+            func_0006A618(temp_s0->unk6A8);
+            temp_s0->unk6A8 = 0;
         }
-        temp_a0 = M2C_FIELD(temp_s0, s32 *, 0x6E0);
+        temp_a0 = temp_s0->unk6E0;
         if (temp_a0 != 0) {
             func_0006A618(temp_a0);
-            M2C_FIELD(temp_s0, s32 *, 0x6E0) = 0;
+            temp_s0->unk6E0 = 0;
         }
-        temp_a0_2 = M2C_FIELD(temp_s0, s32 *, 0x6E8);
+        temp_a0_2 = temp_s0->unk6E8;
         if (temp_a0_2 != 0) {
             func_0006A618(temp_a0_2);
-            M2C_FIELD(temp_s0, s32 *, 0x6E8) = 0;
+            temp_s0->unk6E8 = 0;
         }
-        temp_a0_3 = M2C_FIELD(temp_s0, s32 *, 0x6F0);
+        temp_a0_3 = temp_s0->unk6F0;
         if (temp_a0_3 != 0) {
             func_0006A618(temp_a0_3);
-            M2C_FIELD(temp_s0, s32 *, 0x6F0) = 0;
+            temp_s0->unk6F0 = 0;
         }
-        temp_a0_4 = M2C_FIELD(temp_s0, s32 *, 0x700);
+        temp_a0_4 = temp_s0->unk700;
         if (temp_a0_4 != 0) {
             func_0006A618(temp_a0_4);
-            M2C_FIELD(temp_s0, s32 *, 0x700) = 0;
+            temp_s0->unk700 = 0;
         }
-        temp_a0_5 = M2C_FIELD(temp_s0, s32 *, 0x6F8);
+        temp_a0_5 = temp_s0->unk6F8;
         if (temp_a0_5 != 0) {
             func_0006A618(temp_a0_5);
-            M2C_FIELD(temp_s0, s32 *, 0x6F8) = 0;
+            temp_s0->unk6F8 = 0;
         }
         if (!(arg0->unkC & 0x800)) {
             temp_a0_6 = arg0->unk178;

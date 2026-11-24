@@ -248,7 +248,16 @@ struct Unk_func_0001AA20_0 {
 
 struct Unk_func_0001C57C_0 {
     u8 pad0[0x1C];
-    void * unk1C;
+    struct Unk_func_0001C57C_var_a2 *unk1C;
+};
+
+struct Unk_func_0001C57C_var_a2 {
+    u8 pad0[0x3C];
+    s16 unk3C;
+    u8 pad3E[0x26];
+    u16 unk64;
+    u8 pad66[0x26];
+    u16 unk8C;
 };
 
 struct Unk_func_000232C0_0 {

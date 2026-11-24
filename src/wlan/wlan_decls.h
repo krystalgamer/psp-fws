@@ -247,6 +247,11 @@ struct Unk_sceWlanDrv_driver_4C7F62E0_temp_s1 {
     s32 unk1CC;
 };
 
+struct Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0 {
+    u8 pad0[0x188];
+    s32 unk188;
+};
+
 extern void *D_000191B0;
 extern struct D_0001925C_s D_0001925C;
 extern s32 D_00019290;

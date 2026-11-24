@@ -764,6 +764,11 @@ struct Unk_func_0004E790_0 {
     s32 unk8;
 };
 
+struct Unk_func_0004EE0C_temp_a0 {
+    u8 pad0[0x14];
+    s32 unk14;
+};
+
 struct Unk_func_000507E8_0 {
     u8 pad0[0x18];
     void * unk18;
@@ -1246,10 +1251,25 @@ struct Unk_func_0007E3A8_0 {
     u8 pad0[0xC];
     s32 unkC;
     u8 pad10[0x14C];
-    void * unk15C;
+    struct Unk_func_0007E3A8_temp_s0 *unk15C;
     u8 pad160[0x18];
     s32 unk178;
     s32 unk17C;
+};
+
+struct Unk_func_0007E3A8_temp_s0 {
+    u8 pad0[0x6A8];
+    s32 unk6A8;
+    u8 pad6AC[0x34];
+    s32 unk6E0;
+    u8 pad6E4[0x4];
+    s32 unk6E8;
+    u8 pad6EC[0x4];
+    s32 unk6F0;
+    u8 pad6F4[0x4];
+    s32 unk6F8;
+    u8 pad6FC[0x4];
+    s32 unk700;
 };
 
 struct Unk_func_0007E854_0 {
@@ -1267,10 +1287,26 @@ struct Unk_func_00082158_0 {
     u8 pad0[0x8];
     s32 unk8;
     u8 padC[0x150];
-    void * unk15C;
+    struct Unk_func_00082158_temp_s0 *unk15C;
     u8 pad160[0x50];
     s32 unk1B0;
     s32 unk1B4;
+};
+
+struct Unk_func_00082158_temp_s0 {
+    u8 pad0[0x68];
+    s32 unk68;
+    u8 pad6C[0x4];
+    s32 unk70;
+    u8 pad74[0x8];
+    s32 unk7C;
+    s32 unk80;
+    s32 unk84;
+    s32 unk88;
+    s32 unk8C;
+    s32 unk90;
+    s32 unk94;
+    s32 unk98;
 };
 
 struct Unk_func_00083CC0_0 {
@@ -3200,15 +3236,25 @@ struct Unk_func_00168A04_0 {
 
 struct Unk_func_0016962C_0 {
     u8 pad0[0x20];
-    void * unk20;
+    struct Unk_func_0016962C_temp_a0 *unk20;
     u8 pad24[0x4];
-    void * unk28;
+    void *unk28;
+};
+
+struct Unk_func_0016962C_temp_a0 {
+    u8 pad0[0x19];
+    u8 unk19;
 };
 
 struct Unk_func_001696B0_0 {
     u8 pad0[0x28];
-    void * unk28;
-    void * unk2C;
+    struct Unk_func_001696B0_temp_a0 *unk28;
+    void *unk2C;
+};
+
+struct Unk_func_001696B0_temp_a0 {
+    u8 pad0[0x11];
+    u8 unk11;
 };
 
 struct Unk_func_00169784_0 {
@@ -3598,6 +3644,11 @@ struct Unk_scePaf_7116224C_0 {
 struct Unk_scePaf_75062BCF_0 {
     u8 pad0[0x18];
     s32 unk18;
+};
+
+struct Unk_scePaf_7796B70B_temp_a0 {
+    u8 pad0[0x174];
+    s32 unk174;
 };
 
 struct Unk_scePaf_79F4AE65_0 {

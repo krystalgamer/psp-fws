@@ -918,11 +918,11 @@ s32 func_000274C0(s32 *arg0) {
 }
 
 s32 func_00027500(void **arg0, struct Unk_func_00027500_1 *arg1) {
-    void *temp_s0;
+    struct Unk_func_00027500_temp_s0 *temp_s0;
 
     temp_s0 = *arg0;
-    scePaf_F95EA3F1(arg1, temp_s0 + 4, 4);
-    arg1->unk4 = (s32) M2C_FIELD(temp_s0, u8 *, 0x2E);
+    scePaf_F95EA3F1(arg1, (u8 *)temp_s0 + 4, 4);
+    arg1->unk4 = (s32) temp_s0->unk2E;
     return 0;
 }
 
@@ -965,25 +965,25 @@ s32 func_000276A4(struct Unk_func_000276A4_0 *arg0, struct Unk_func_000276A4_1 *
 }
 
 s32 func_000276E0(struct Unk_func_000276E0_0 *arg0, struct Unk_func_000276E0_1 *arg1) {
-    void *temp_s0;
+    struct Unk_func_000276E0_temp_s0 *temp_s0;
 
     temp_s0 = arg0->unk8;
-    arg1->unk0 = (s8) ((u8) M2C_FIELD(temp_s0, u8 *, 0) >> 4);
-    scePaf_F95EA3F1((u8 *)arg1 + 1, (s32) (temp_s0 + 2), 2);
-    arg1->unk3 = (u8) M2C_FIELD(temp_s0, u8 *, 4);
-    arg1->unk4 = (s8) ((u8) M2C_FIELD(temp_s0, u8 *, 5) >> 4);
-    arg1->unk5 = (s8) (M2C_FIELD(temp_s0, u8 *, 5) & 0xF);
+    arg1->unk0 = (s8) ((u8) temp_s0->unk0 >> 4);
+    scePaf_F95EA3F1((u8 *)arg1 + 1, (s32) ((u8 *)temp_s0 + 2), 2);
+    arg1->unk3 = (u8) temp_s0->unk4;
+    arg1->unk4 = (s8) ((u8) temp_s0->unk5 >> 4);
+    arg1->unk5 = (s8) (temp_s0->unk5 & 0xF);
     return 0;
 }
 
 s32 func_0002774C(struct Unk_func_0002774C_0 *arg0, struct Unk_func_0002774C_1 *arg1) {
-    void *temp_s0;
+    struct Unk_func_0002774C_temp_s0 *temp_s0;
 
     temp_s0 = arg0->unk8;
-    arg1->unk0 = (s8) ((u8) M2C_FIELD(temp_s0, u8 *, 0) >> 4);
-    scePaf_F95EA3F1((u8 *)arg1 + 1, (s32) (temp_s0 + 2), 2);
-    arg1->unk3 = (s8) ((u8) M2C_FIELD(temp_s0, u8 *, 5) >> 4);
-    arg1->unk4 = (s8) (M2C_FIELD(temp_s0, u8 *, 5) & 1);
+    arg1->unk0 = (s8) ((u8) temp_s0->unk0 >> 4);
+    scePaf_F95EA3F1((u8 *)arg1 + 1, (s32) ((u8 *)temp_s0 + 2), 2);
+    arg1->unk3 = (s8) ((u8) temp_s0->unk5 >> 4);
+    arg1->unk4 = (s8) (temp_s0->unk5 & 1);
     return 0;
 }
 

@@ -293,10 +293,10 @@ s32 func_00005580(s32 arg0) {
 }
 
 void *func_00005588(void **arg0) {
-    void *temp_a1;
+    struct Unk_func_00005588_temp_a1 *temp_a1;
 
     temp_a1 = *arg0;
-    return temp_a1 + (M2C_FIELD(temp_a1, s32 *, 0x24) * 0x644) + 0x28;
+    return (u8 *)temp_a1 + (temp_a1->unk24 * 0x644) + 0x28;
 }
 
 s32 func_000055A8(void) {

@@ -2163,6 +2163,7 @@
   "Unk_func_00088AC0_0": "struct Unk_func_00088AC0_0 {\n    u8 pad0[0xC];\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n    s32 unk18;\n    s16 unk1C;\n    s16 unk1E;\n};",
   "Unk_func_00088F64_0": "struct Unk_func_00088F64_0 {\n    u8 pad0[0x188];\n    s32 unk188;\n};",
   "Unk_func_000895C8_temp_v0": "struct Unk_func_000895C8_temp_v0 {\n    u8 pad0[0x1C];\n    void *unk1C;\n};",
+  "Unk_func_0008CDE4_var_v1": "struct Unk_func_0008CDE4_var_v1 {\n    u8 pad0[0x1C];\n    void *unk1C;\n};",
   "Unk_func_0008CE08_var_a0": "struct Unk_func_0008CE08_var_a0 {\n    u8 pad0[0x1C];\n    struct Unk_func_0008CE08_var_a0 *unk1C;\n};",
   "Unk_func_0008CE38_0": "struct Unk_func_0008CE38_0 {\n    u8 pad0[0x1C];\n    s32 unk1C;\n};",
   "Unk_func_0008E63C_0": "struct Unk_func_0008E63C_0 {\n    u8 pad0[0x10];\n    s32 unk10;\n};",

@@ -19,19 +19,49 @@ struct Unk_Unk_func_00003B58_0_0 {
     u32 unk4;
 };
 
+struct Unk_func_00003A54_var_v1 {
+    u8 pad0[0x4];
+    u32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    u8 pad10[0xB0];
+    s32 unkC0;
+};
+
 struct Unk_func_00003AA8_0 {
     struct Unk_Unk_func_00003AA8_0_0 *unk0;
-    void *unk4;
+    struct Unk_func_00003AA8_var_v1 *unk4;
+};
+
+struct Unk_func_00003AA8_var_v1 {
+    u8 pad0[0x4E0];
+    s32 unk4E0;
+    u8 pad4E4[0xC];
+    s32 unk4F0;
 };
 
 struct Unk_func_00003B00_0 {
     struct Unk_Unk_func_00003B00_0_0 *unk0;
-    void *unk4;
+    struct Unk_func_00003B00_var_v1 *unk4;
+};
+
+struct Unk_func_00003B00_var_v1 {
+    u8 pad0[0x4E8];
+    s32 unk4E8;
+    u8 pad4EC[0x4];
+    s32 unk4F0;
 };
 
 struct Unk_func_00003B58_0 {
     struct Unk_Unk_func_00003B58_0_0 *unk0;
-    void *unk4;
+    struct Unk_func_00003B58_var_v1 *unk4;
+};
+
+struct Unk_func_00003B58_var_v1 {
+    u8 pad0[0x4E4];
+    s32 unk4E4;
+    u8 pad4E8[0x8];
+    s32 unk4F0;
 };
 
 extern s32 D_00004600;

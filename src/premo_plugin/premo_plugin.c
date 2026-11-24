@@ -327,12 +327,12 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin", func_00000A1C)
 
 void func_00000AC4(M2C_UNK (*arg0)(M2C_UNK)) {
     void *temp_s0;
-    void *temp_v0;
+    struct Unk_func_00000AC4_temp_v0 *temp_v0;
 
     func_000053DC();
     temp_v0 = func_00002478();
-    M2C_FIELD(temp_v0, s8 *, 0x316) = 1;
-    temp_s0 = temp_v0 + 0x240;
+    temp_v0->unk316 = 1;
+    temp_s0 = (u8 *)temp_v0 + 0x240;
     func_0000903C(temp_s0, 4);
     func_00009080(temp_s0, 4, 0);
     if (arg0 != NULL) {

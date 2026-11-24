@@ -158,6 +158,7 @@
   "Unk_func_00005BEC_0": "struct Unk_func_00005BEC_0 {\n    u8 pad0[0x3];\n    u8 unk3;\n};",
   "Unk_func_00005BF4_0": "struct Unk_func_00005BF4_0 {\n    u8 pad0[0x3];\n    u8 unk3;\n};",
   "Unk_func_00005C18_0": "struct Unk_func_00005C18_0 {\n    u8 pad0[0x1];\n    u8 unk1;\n};",
+  "Unk_func_00005C64_temp_a1": "struct Unk_func_00005C64_temp_a1 {\n    u8 pad0[0x24];\n    s32 unk24;\n};",
   "Unk_func_00007F04_0": "struct Unk_func_00007F04_0 {\n    u8 pad0[0x50];\n    s32 unk50;\n};",
   "Unk_func_00007F64_0": "struct Unk_func_00007F64_0 {\n    u8 pad0[0x54];\n    s32 unk54;\n};",
   "Unk_func_00008FF8_0": "struct Unk_func_00008FF8_0 {\n    u8 pad0[0xC];\n    s32 unkC;\n};",

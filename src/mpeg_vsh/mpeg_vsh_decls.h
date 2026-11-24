@@ -24,6 +24,11 @@ struct Unk_func_00005C18_0 {
     u8 unk1;
 };
 
+struct Unk_func_00005C64_temp_a1 {
+    u8 pad0[0x24];
+    s32 unk24;
+};
+
 struct Unk_func_00007F04_0 {
     u8 pad0[0x50];
     s32 unk50;

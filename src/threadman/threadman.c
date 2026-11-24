@@ -19,11 +19,11 @@ s32 func_00000448(s32 arg0, s32 arg1) {
     struct Unk_func_00000448_temp_s0 *var_s1;
     s32 var_s2;
     void *temp_s3;
-    void *temp_v1;
+    struct Unk_func_00000448_temp_v1 *temp_v1;
 
     temp_v1 = arg0 + (M2C_FIELD(D_000172B4, u8 *, 0x15) * 4);
-    var_s1 = M2C_FIELD(temp_v1, M2C_UNK **, 0xC);
-    temp_s3 = temp_v1 + 0xC;
+    var_s1 = temp_v1->unkC;
+    temp_s3 = &temp_v1->unkC;
     var_s2 = 0;
     if (var_s1 != temp_s3) {
         do {
@@ -70,16 +70,16 @@ s32 func_00000554(void) {
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000590);
 
 s32 func_000006C8(struct Unk_func_000006C8_0 *arg0, struct Unk_func_000006C8_1 *arg1) {
-    void *temp_a0;
+    struct Unk_func_000006C8_temp_a0 *temp_a0;
     struct Unk_func_000006C8_temp_a1 *temp_a1;
 
     SysMemForKernel_CE05CCB7();
     temp_a0 = (u8 *)arg0 + (arg1->unk15 * 4);
-    M2C_FIELD(temp_a0, s32 *, 4) = 0;
-    temp_a1 = temp_a0 + 0xC;
-    M2C_FIELD(temp_a0, s32 *, 8) = 0;
-    M2C_FIELD(temp_a0, s32 *, 0) = 0;
-    M2C_FIELD(temp_a0, void **, 0xC) = temp_a1;
+    temp_a0->unk4 = 0;
+    temp_a1 = &temp_a0->unkC;
+    temp_a0->unk8 = 0;
+    temp_a0->unk0 = 0;
+    temp_a0->unkC = temp_a1;
     temp_a1->unk4 = temp_a1;
     return arg0->unkC;
 }

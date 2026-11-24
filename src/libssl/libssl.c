@@ -1979,18 +1979,18 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001D328);
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001D338);
 
 void *func_0001D3A0(void) {
-    void *temp_v0;
+    struct Unk_func_0001D3A0_temp_v0 *temp_v0;
     void *var_v0;
 
     temp_v0 = sceSsl_lib_0861D934(0xAC);
     var_v0 = NULL;
     if (temp_v0 != NULL) {
         func_00029D1C((s32) temp_v0, 0, 0xAC);
-        func_00001210(temp_v0 + 0x4C, 0, 0, 0);
-        func_00001210(temp_v0 + 0x28, 0, 0, 0);
-        M2C_FIELD(temp_v0, s32 *, 0x98) = 0;
-        M2C_FIELD(temp_v0, s32 *, 0xA4) = 0;
-        M2C_FIELD(temp_v0, s32 *, 0xA8) = 1;
+        func_00001210((u8 *)temp_v0 + 0x4C, 0, 0, 0);
+        func_00001210((u8 *)temp_v0 + 0x28, 0, 0, 0);
+        temp_v0->unk98 = 0;
+        temp_v0->unkA4 = 0;
+        temp_v0->unkA8 = 1;
         var_v0 = temp_v0;
     }
     return var_v0;

@@ -704,6 +704,18 @@ struct Unk_func_00033178_0 {
     s32 unkAC;
 };
 
+struct Unk_func_00033750_temp_s0 {
+    u8 pad0[0x4];
+    void *unk4;
+    void *unk8;
+};
+
+struct Unk_func_00033750_temp_s0_2 {
+    u8 pad0[0x4];
+    void *unk4;
+    void *unk8;
+};
+
 struct Unk_func_00033750_var_a0 {
     void *unk0;
     u8 pad4[0x4];
@@ -1346,6 +1358,11 @@ struct Unk_func_00050FD4_0 {
 };
 
 struct Unk_func_000515F4_temp_v0 {
+    u8 pad0[0x1C];
+    void *unk1C;
+};
+
+struct Unk_func_00054DDC_var_v1 {
     u8 pad0[0x1C];
     void *unk1C;
 };

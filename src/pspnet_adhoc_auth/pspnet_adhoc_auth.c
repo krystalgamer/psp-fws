@@ -126,61 +126,61 @@ INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", func
 
 s32 func_00003A54(void **arg0) {
     s32 temp_a3;
-    void *var_v1;
+    struct Unk_func_00003A54_var_v1 *var_v1;
 
     var_v1 = *arg0;
-    temp_a3 = M2C_FIELD(var_v1, s32 *, 0xC);
+    temp_a3 = var_v1->unkC;
     if (!(temp_a3 & 2)) {
-        M2C_FIELD(var_v1, s32 *, 0xC) = (s32) (temp_a3 | 2);
-        sceKernelSendMbx(M2C_FIELD(var_v1, u32 *, 4), var_v1 + 0xCC);
+        var_v1->unkC = (s32) (temp_a3 | 2);
+        sceKernelSendMbx(var_v1->unk4, (u8 *)var_v1 + 0xCC);
         var_v1 = *arg0;
     }
-    M2C_FIELD(var_v1, s32 *, 0xC0) = 0;
+    var_v1->unkC0 = 0;
     return 0;
 }
 
 s32 func_00003AA8(struct Unk_func_00003AA8_0 *arg0) {
     s32 temp_a3;
-    void *var_v1;
+    struct Unk_func_00003AA8_var_v1 *var_v1;
 
     var_v1 = arg0->unk4;
-    temp_a3 = M2C_FIELD(var_v1, s32 *, 0x4F0);
+    temp_a3 = var_v1->unk4F0;
     if (!(temp_a3 & 0x10)) {
-        M2C_FIELD(var_v1, s32 *, 0x4F0) = (s32) (temp_a3 | 0x10);
-        sceKernelSendMbx(arg0->unk0->unk4, var_v1 + 0x4A0);
+        var_v1->unk4F0 = (s32) (temp_a3 | 0x10);
+        sceKernelSendMbx(arg0->unk0->unk4, (u8 *)var_v1 + 0x4A0);
         var_v1 = arg0->unk4;
     }
-    M2C_FIELD(var_v1, s32 *, 0x4E0) = 0;
+    var_v1->unk4E0 = 0;
     return 0;
 }
 
 s32 func_00003B00(struct Unk_func_00003B00_0 *arg0) {
     s32 temp_a3;
-    void *var_v1;
+    struct Unk_func_00003B00_var_v1 *var_v1;
 
     var_v1 = arg0->unk4;
-    temp_a3 = M2C_FIELD(var_v1, s32 *, 0x4F0);
+    temp_a3 = var_v1->unk4F0;
     if (!(temp_a3 & 0x40)) {
-        M2C_FIELD(var_v1, s32 *, 0x4F0) = (s32) (temp_a3 | 0x40);
-        sceKernelSendMbx(arg0->unk0->unk4, var_v1 + 0x4D0);
+        var_v1->unk4F0 = (s32) (temp_a3 | 0x40);
+        sceKernelSendMbx(arg0->unk0->unk4, (u8 *)var_v1 + 0x4D0);
         var_v1 = arg0->unk4;
     }
-    M2C_FIELD(var_v1, s32 *, 0x4E8) = 0;
+    var_v1->unk4E8 = 0;
     return 0;
 }
 
 s32 func_00003B58(struct Unk_func_00003B58_0 *arg0) {
     s32 temp_a3;
-    void *var_v1;
+    struct Unk_func_00003B58_var_v1 *var_v1;
 
     var_v1 = arg0->unk4;
-    temp_a3 = M2C_FIELD(var_v1, s32 *, 0x4F0);
+    temp_a3 = var_v1->unk4F0;
     if (!(temp_a3 & 0x80)) {
-        M2C_FIELD(var_v1, s32 *, 0x4F0) = (s32) (temp_a3 | 0x80);
-        sceKernelSendMbx(arg0->unk0->unk4, var_v1 + 0x4B8);
+        var_v1->unk4F0 = (s32) (temp_a3 | 0x80);
+        sceKernelSendMbx(arg0->unk0->unk4, (u8 *)var_v1 + 0x4B8);
         var_v1 = arg0->unk4;
     }
-    M2C_FIELD(var_v1, s32 *, 0x4E4) = 0;
+    var_v1->unk4E4 = 0;
     return 0;
 }
 

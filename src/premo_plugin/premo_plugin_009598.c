@@ -742,12 +742,12 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009598", func_00
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009598", func_00010DB8);
 
 void func_00010E4C(void) {
-    void *temp_v0;
+    struct Unk_func_00010E4C_temp_v0 *temp_v0;
 
     temp_v0 = func_00002478();
-    if (M2C_FIELD(temp_v0, u8 *, 0x314) != 0) {
+    if (temp_v0->unk314 != 0) {
 
-    } else if (func_000090E0(temp_v0 + 0x240, 4) != 0x800201AF) {
+    } else if (func_000090E0((u8 *)temp_v0 + 0x240, 4) != 0x800201AF) {
         func_00006E3C((s32) temp_v0, 3);
         func_00010DB8();
     }

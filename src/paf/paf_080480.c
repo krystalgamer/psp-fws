@@ -59,52 +59,52 @@ void func_00082140(s32 arg0) {
 
 void func_00082158(struct Unk_func_00082158_0 *arg0) {
     s32 temp_a0;
-    void *temp_s0;
+    struct Unk_func_00082158_temp_s0 *temp_s0;
 
     temp_s0 = arg0->unk15C;
     func_00083940();
-    temp_a0 = M2C_FIELD(temp_s0, s32 *, 0x90);
-    arg0->unk1B4 = (s32) M2C_FIELD(temp_s0, s32 *, 0x7C);
-    arg0->unk1B0 = (s32) M2C_FIELD(temp_s0, s32 *, 0x80);
+    temp_a0 = temp_s0->unk90;
+    arg0->unk1B4 = (s32) temp_s0->unk7C;
+    arg0->unk1B0 = (s32) temp_s0->unk80;
     if (temp_a0 == 0) {
 
     } else {
         func_0006A618(temp_a0);
     }
-    if (M2C_FIELD(temp_s0, s32 *, 0x94) == 0) {
+    if (temp_s0->unk94 == 0) {
 
     } else {
-        func_0006A618(M2C_FIELD(temp_s0, s32 *, 0x94));
+        func_0006A618(temp_s0->unk94);
     }
-    if (M2C_FIELD(temp_s0, s32 *, 0x98) == 0) {
+    if (temp_s0->unk98 == 0) {
 
     } else {
-        func_0006A618(M2C_FIELD(temp_s0, s32 *, 0x98));
+        func_0006A618(temp_s0->unk98);
     }
-    if (M2C_FIELD(temp_s0, s32 *, 0x84) == 0) {
+    if (temp_s0->unk84 == 0) {
 
     } else {
-        func_0006A618(M2C_FIELD(temp_s0, s32 *, 0x84));
+        func_0006A618(temp_s0->unk84);
     }
-    if (M2C_FIELD(temp_s0, s32 *, 0x88) == 0) {
+    if (temp_s0->unk88 == 0) {
 
     } else {
-        func_0006A618(M2C_FIELD(temp_s0, s32 *, 0x88));
+        func_0006A618(temp_s0->unk88);
     }
-    if (M2C_FIELD(temp_s0, s32 *, 0x8C) == 0) {
+    if (temp_s0->unk8C == 0) {
 
     } else {
-        func_0006A618(M2C_FIELD(temp_s0, s32 *, 0x8C));
+        func_0006A618(temp_s0->unk8C);
     }
-    if (M2C_FIELD(temp_s0, s32 *, 0x70) & 1) {
+    if (temp_s0->unk70 & 1) {
         if (arg0->unk8 != 1) {
-            func_000B0DCC(temp_s0 + 0x30);
+            func_000B0DCC((u8 *)temp_s0 + 0x30);
         } else {
-            func_000B3E20(temp_s0 + 0x30);
+            func_000B3E20((u8 *)temp_s0 + 0x30);
         }
     }
-    if (M2C_FIELD(temp_s0, s32 *, 0x68) != 0) {
-        func_0006A618(M2C_FIELD(temp_s0, s32 *, 0x68));
+    if (temp_s0->unk68 != 0) {
+        func_0006A618(temp_s0->unk68);
     }
     func_0006A618((s32) temp_s0);
     arg0->unk15C = NULL;

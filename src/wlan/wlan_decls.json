@@ -116,7 +116,8 @@
   "Unk_func_00017EA4_temp_s1": "struct Unk_func_00017EA4_temp_s1 {\n    u8 pad0[0x112];\n    s16 unk112;\n    u8 pad114[0x7A];\n    u16 unk18E;\n    s32 unk190;\n    u8 pad194[0xC];\n    s32 unk1A0;\n};",
   "Unk_func_00017FC4_1": "struct Unk_func_00017FC4_1 {\n    u16 unk0;\n    u16 unk2;\n    u16 unk4;\n};",
   "Unk_func_00017FC4_temp_s0": "struct Unk_func_00017FC4_temp_s0 {\n    u8 pad0[0x12C];\n    u16 unk12C;\n    u16 unk12E;\n    u16 unk130;\n};",
-  "Unk_sceWlanDrv_driver_4C7F62E0_temp_s1": "struct Unk_sceWlanDrv_driver_4C7F62E0_temp_s1 {\n    u8 pad0[0x1CC];\n    s32 unk1CC;\n};"
+  "Unk_sceWlanDrv_driver_4C7F62E0_temp_s1": "struct Unk_sceWlanDrv_driver_4C7F62E0_temp_s1 {\n    u8 pad0[0x1CC];\n    s32 unk1CC;\n};",
+  "Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0": "struct Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0 {\n    u8 pad0[0x188];\n    s32 unk188;\n};"
  },
  "vars": {
   "D_000191B0": "extern void *D_000191B0;",

@@ -186,6 +186,11 @@ struct Unk_func_000174CC_temp_s0 {
     s32 unk8;
 };
 
+struct Unk_func_0001768C_temp_s0 {
+    s32 unk0;
+    s32 unk4;
+};
+
 struct Unk_func_00017764_temp_s0 {
     s32 unk0;
     s32 unk4;

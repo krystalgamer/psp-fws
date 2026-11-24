@@ -344,14 +344,14 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_08
 void **func_0008CDE4(void **arg0) {
     void **var_a0;
     void *temp_v0;
-    void *var_v1;
+    struct Unk_func_0008CDE4_var_v1 *var_v1;
 
     var_a0 = arg0;
     var_v1 = *var_a0;
     if (var_v1 != NULL) {
         do {
-            temp_v0 = M2C_FIELD(var_v1, void **, 0x1C);
-            var_a0 = var_v1 + 0x1C;
+            temp_v0 = var_v1->unk1C;
+            var_a0 = &var_v1->unk1C;
             var_v1 = temp_v0;
         } while (temp_v0 != NULL);
     }

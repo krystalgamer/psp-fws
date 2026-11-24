@@ -13,11 +13,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", func_00048F28);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", scePaf_6DFFCAAE);
 
 s32 scePaf_7796B70B(void **arg0, s32 arg1) {
-    void *temp_a0;
+    struct Unk_scePaf_7796B70B_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
-    M2C_FIELD(temp_a0, s32 *, 0x174) = arg1;
-    func_00084A70(temp_a0, temp_a0 + 0x174, 1);
+    temp_a0->unk174 = arg1;
+    func_00084A70(temp_a0, &temp_a0->unk174, 1);
     return 1;
 }
 

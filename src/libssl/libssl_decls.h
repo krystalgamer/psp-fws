@@ -193,6 +193,14 @@ struct Unk_func_000184E8_0 {
     s32 unk4;
 };
 
+struct Unk_func_0001D3A0_temp_v0 {
+    u8 pad0[0x98];
+    s32 unk98;
+    u8 pad9C[0x8];
+    s32 unkA4;
+    s32 unkA8;
+};
+
 struct Unk_func_0001E27C_0 {
     s32 unk0;
     s32 unk4;

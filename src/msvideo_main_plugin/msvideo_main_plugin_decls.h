@@ -2354,6 +2354,11 @@ struct Unk_func_000895C8_temp_v0 {
     void *unk1C;
 };
 
+struct Unk_func_0008CDE4_var_v1 {
+    u8 pad0[0x1C];
+    void *unk1C;
+};
+
 struct Unk_func_0008CE08_var_a0 {
     u8 pad0[0x1C];
     struct Unk_func_0008CE08_var_a0 *unk1C;

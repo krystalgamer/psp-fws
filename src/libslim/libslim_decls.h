@@ -29,6 +29,11 @@ struct Unk_Unk_func_00006CF0_1_8 {
     s32 unkC;
 };
 
+struct Unk_func_00000308_temp_a1 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
 struct Unk_func_00003E00_0 {
     u8 pad0[0x8];
     s32 unk8;
@@ -119,6 +124,13 @@ struct Unk_func_00005BA4_1 {
     s32 * unk8;
 };
 
+struct Unk_func_00005C68_sp0 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+};
+
 struct Unk_func_00006BDC_0 {
     u8 pad0[0x18];
     s32 unk18;
@@ -164,6 +176,26 @@ struct Unk_func_00009520_0 {
 struct Unk_func_00009884_temp_v1 {
     u8 pad0[0x8];
     s32 unk8;
+};
+
+struct Unk_func_00009B04_temp_a0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_00009B28_temp_s0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_00009B74_temp_a0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_00009BA4_temp_a0 {
+    u8 pad0[0x4];
+    s32 unk4;
 };
 
 struct Unk_func_0000AFF8_1 {

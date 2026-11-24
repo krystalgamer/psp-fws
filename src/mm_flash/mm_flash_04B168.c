@@ -279,17 +279,17 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_04B168", func_00052160);
 void *func_00052214(struct Unk_func_00052214_0 *arg0) {
     s32 temp_v0;
     u8 temp_a1;
-    void *temp_a3;
+    struct Unk_func_00052214_temp_a3 *temp_a3;
     void *var_v1;
 
     temp_a3 = arg0->unk10;
-    temp_a1 = M2C_FIELD(temp_a3, u8 *, 0xB);
+    temp_a1 = temp_a3->unkB;
     if (temp_a1 != 9) {
-        if ((((temp_a1 == 6) | (temp_a1 == 0x62)) != 0) || (var_v1 = temp_a3 + 0x14, (temp_a1 == 0x61))) {
+        if ((((temp_a1 == 6) | (temp_a1 == 0x62)) != 0) || (var_v1 = (u8 *)temp_a3 + 0x14, (temp_a1 == 0x61))) {
             temp_v0 = arg0->unkAC;
             var_v1 = temp_v0 + 0xC;
             if (temp_v0 == 0) {
-                var_v1 = temp_a3 + 0x14;
+                var_v1 = (u8 *)temp_a3 + 0x14;
             }
         }
     } else {
@@ -587,7 +587,7 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_04B168", func_00058958);
 void func_000589E4(struct Unk_func_000589E4_0 *arg0) {
     s32 temp_a0;
     s32 temp_a1;
-    void *temp_v0;
+    struct Unk_func_000589E4_temp_v0 *temp_v0;
     struct Unk_func_000589E4_temp_v1 *temp_v1;
 
     temp_a1 = arg0->unk4;
@@ -595,11 +595,11 @@ void func_000589E4(struct Unk_func_000589E4_0 *arg0) {
     temp_v1 = arg0->unk0 + temp_a1;
     temp_v0 = func_0005AA5C(arg0->unk34, (temp_v1->unk1 << 8) | temp_v1->unk0);
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s8 *, 0xB) = 9;
-        M2C_FIELD(temp_v0, u8 *, 0xC) = (u8) arg0->unk18;
-        func_00053EBC((s32) arg0, temp_v0 + 0x14);
+        temp_v0->unkB = 9;
+        temp_v0->unkC = (u8) arg0->unk18;
+        func_00053EBC((s32) arg0, (u8 *)temp_v0 + 0x14);
         temp_a0 = arg0->unk4;
-        M2C_FIELD(temp_v0, s32 *, 0x10) = (s32) (arg0->unk0 + temp_a0);
+        temp_v0->unk10 = (s32) (arg0->unk0 + temp_a0);
         arg0->unk4 = (s32) (temp_a0 + 2);
         if (!((M2C_FIELD((arg0->unk0 + temp_a0), u8 *, 1) << 8) & 0x100)) {
             arg0->unk70->unkF4 = 1;
