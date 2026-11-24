@@ -2,11 +2,30 @@
 #include "common.h"
 #include "common_gui_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", func_00000438);
+void func_00000438(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_00000488(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", func_00000488);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", sceVshCommonGui_80271F41);
+void sceVshCommonGui_80271F41(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_00003264);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(), 0x6C)();
+        }
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", sceVshCommonGui_1CF884A1);
 

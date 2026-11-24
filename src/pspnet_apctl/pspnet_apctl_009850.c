@@ -2,7 +2,19 @@
 #include "common.h"
 #include "pspnet_apctl_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_00009850);
+M2C_UNK *func_00009850(void *arg0) {
+    M2C_UNK *temp_a1;
+
+    temp_a1 = M2C_FIELD(arg0, M2C_UNK **, 0x2374);
+    if (M2C_FIELD(arg0, s32 *, 0x2378) == temp_a1) {
+        M2C_FIELD(arg0, s32 *, 0x2378) = 0;
+    }
+    if (temp_a1 != NULL) {
+        M2C_FIELD(arg0, M2C_UNK **, 0x2374) = (M2C_UNK *) *temp_a1;
+    }
+    M2C_FIELD(arg0, s32 *, 0x2390) = 0;
+    return temp_a1;
+}
 
 s32 func_00009880(s32 arg0) {
     func_000098A4(arg0);
@@ -92,7 +104,11 @@ s32 func_0000A1F8(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_0000A200);
+s32 func_0000A200(void *arg0) {
+    sceNet_lib_57CC57DA(arg0 + 0x2520, 0, 0xBD8);
+    M2C_FIELD(arg0, s32 *, 0x30EC) = 5;
+    return 0;
+}
 
 s32 func_0000A23C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x30F4) = 0;
@@ -145,7 +161,12 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_00
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_0000A74C);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_0000A808);
+s32 func_0000A808(void *arg0) {
+    sceNet_lib_57CC57DA(arg0 + 0x30F8, 0, 0x64C);
+    M2C_FIELD(arg0, s32 *, 0x3108) = 0xA;
+    func_0000B6A4((s32) arg0);
+    return 0;
+}
 
 s32 func_0000A84C(void) {
     return 0;
@@ -267,9 +288,23 @@ s32 func_0000BCD8(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_0000BCF8);
+s32 func_0000BCF8(void) {
+    if (D_00017820 == 0) {
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_0000BD34);
+    } else {
+        sceKernelSetEventFlag(D_00017820, 8U);
+    }
+    return 0;
+}
+
+s32 func_0000BD34(void) {
+    if (D_00017820 == 0) {
+
+    } else {
+        sceKernelSetEventFlag(D_00017820, 0x10U);
+    }
+    return 0;
+}
 
 INCLUDE_RODATA("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", D_00010E10);
 
@@ -427,7 +462,15 @@ s32 func_0000E4D8(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_0000E4E0);
+s32 func_0000E4E0(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x44) != 0) {
+
+    } else {
+        func_0000D184((s32) arg0);
+    }
+    M2C_FIELD(arg0, s32 *, 0) = 2;
+    return 0;
+}
 
 s32 func_0000E524(s32 *arg0) {
     func_0000BD70(4, 0x80411081);

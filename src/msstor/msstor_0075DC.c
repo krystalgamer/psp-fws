@@ -2,7 +2,17 @@
 #include "common.h"
 #include "msstor_decls.h"
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0075DC", func_000075DC);
+s32 func_000075DC(void *arg0) {
+    s32 var_v0;
+
+    var_v0 = 0xC0220100;
+    if (arg0 != NULL) {
+        sceKernelSetEventFlag(M2C_FIELD(arg0, s32 *, 0x24), 1U);
+        M2C_FIELD(arg0, s32 *, 0x20) = -1;
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0075DC", func_00007620);
 

@@ -2,23 +2,58 @@
 #include "common.h"
 #include "msstor_decls.h"
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_000001BC);
+s32 func_000001BC(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_00000220);
+    var_v1 = -0xD;
+    if (M2C_FIELD(D_00009B50, s32 *, 0x18) != 0) {
+        var_v1 = -0xC;
+        if (M2C_FIELD(D_00009B50, s32 *, 0x1C) == 0) {
+            var_v1 = M2C_FIELD(D_00009888, s32 (**)(void *, s32, M2C_UNK, M2C_UNK), 4)(D_00009B50, arg0 + M2C_FIELD(D_00009B50, s32 *, 4), arg1, arg2);
+        }
+    }
+    return var_v1;
+}
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_00000288);
+s32 func_00000220(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
+    s32 var_t0;
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_000002B8);
+    var_t0 = -0xD;
+    if (M2C_FIELD(D_00009B50, s32 *, 0x18) != 0) {
+        var_t0 = -0xC;
+        if (M2C_FIELD(D_00009B50, s32 *, 0x1C) == 0) {
+            var_t0 = M2C_FIELD(D_00009888, s32 (**)(void *, s32, M2C_UNK, M2C_UNK), 4)(D_00009B50, arg0, arg1, arg2);
+        }
+    }
+    return var_t0;
+}
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_000002E8);
+void func_00000288(void) {
+    M2C_FIELD(D_00009888, M2C_UNK (**)(void *), 0x10)(D_00009B50);
+}
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_00000318);
+void func_000002B8(void) {
+    M2C_FIELD(D_00009888, M2C_UNK (**)(void *), 0x14)(D_00009B50);
+}
+
+void func_000002E8(void) {
+    M2C_FIELD(D_00009888, M2C_UNK (**)(void *), 0x18)(D_00009B50);
+}
+
+void func_00000318(s32 arg0, s32 arg1, s32 arg2) {
+    func_00000340(arg0 + M2C_FIELD(D_00009B50, s32 *, 4), arg1, arg2);
+}
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_00000340);
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_000004B0);
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_00000518);
+void func_00000518(s32 *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x4E90) = -1;
+    M2C_FIELD(arg0, s32 *, 0x18) = 1;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    func_00001884(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_00000548);
 

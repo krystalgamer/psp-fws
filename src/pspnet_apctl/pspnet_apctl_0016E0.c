@@ -2,7 +2,15 @@
 #include "common.h"
 #include "pspnet_apctl_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_0016E0", func_000016E0);
+s32 func_000016E0(void *arg0, s32 arg1) {
+    if (arg1 == 6) {
+        if ((M2C_FIELD(arg0, s32 *, 0x7DC) & 0xA) == 2) {
+            func_00002480((s32) arg0);
+        }
+    }
+    sceWlanDrv_lib_C9A8CAB7();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_0016E0", func_0000172C);
 
@@ -97,7 +105,18 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_0016E0", func_00
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_0016E0", func_00003BAC);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_0016E0", func_00003C64);
+s32 func_00003C64(void) {
+    if (D_00012A0C > 0) {
+        func_00009500();
+        D_00012A0C = 0;
+    }
+    if (D_00012A10 > 0) {
+        func_0000BCD8();
+        D_00012A14 = 0;
+        D_00012A10 = 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_0016E0", func_00003CC8);
 

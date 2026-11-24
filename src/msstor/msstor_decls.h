@@ -6,12 +6,22 @@
 
 extern M2C_UNK D_00009248;
 extern M2C_UNK D_00009264;
+extern void *D_00009888;
 extern M2C_UNK D_000098DC;
 extern M2C_UNK D_000099D4;
+extern void *D_00009B50;
 extern M2C_UNK D_00009B54;
 
 M2C_UNK IoFileMgrForKernel_C7F35804(M2C_UNK *);
 M2C_UNK bzero(M2C_UNK *, M2C_UNK);
+s32 func_000001BC(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);
+s32 func_00000220(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);
+void func_00000288(void);
+void func_000002B8(void);
+void func_000002E8(void);
+void func_00000318(s32 arg0, s32 arg1, s32 arg2);
+s32 func_00000340(s32, s32, s32);
+void func_00000518(s32 *arg0);
 s32 func_000008B8(s32, s32, s32);
 s32 func_00001558(void *arg0);
 void func_00001560(s32 arg0);
@@ -36,12 +46,14 @@ s32 func_00004A48(void);
 s32 func_00004E2C(void *arg0);
 s32 func_00004E40(void);
 s32 func_00004EC8(void);
+s32 func_000075DC(void *arg0);
 void func_00007798(void *arg0);
 void func_000077A0(void *arg0, s32 arg1);
 s32 func_000077B8(void *arg0);
 M2C_UNK func_000077C4(s32);
 s32 sceKernelDeleteEventFlag(s32);
 s32 sceKernelDeleteSema(s32);
+s32 sceKernelSetEventFlag(s32, u32);
 s32 sceKernelTerminateDeleteThread(s32);
 s32 sceMScm_driver_12BD8FEC(M2C_UNK, M2C_UNK *);
 s32 sceMScm_driver_21183216(s32, M2C_UNK, M2C_UNK, M2C_UNK);
