@@ -1,12 +1,12 @@
 #include "common.h"
 #include "premo_plugin_decls.h"
 
-void func_0002435C(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x54)();
+void func_0002435C(struct Unk_vt_func_0002435C_arg0 **arg0) {
+    (*arg0)->unk54();
 }
 
-void func_00024380(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x58)();
+void func_00024380(struct Unk_vt_func_00024380_arg0 **arg0) {
+    (*arg0)->unk58();
 }
 
 void func_000243A4(struct Unk_func_000243A4_0 *arg0) {
@@ -145,7 +145,7 @@ s32 func_00024DE0(struct Unk_func_00024DE0_0 *arg0) {
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00024E04);
 
 s32 func_00024E7C(struct Unk_func_00024508_0 *arg0, s32 arg1) {
-    void **temp_a0;
+    struct Unk_vt_func_00024E7C_temp_a0 **temp_a0;
 
     if (!(arg1 & 0xFF)) {
         arg0->unk54 = 0;
@@ -154,7 +154,7 @@ s32 func_00024E7C(struct Unk_func_00024508_0 *arg0, s32 arg1) {
     sceHttpSetRecvTimeOut(arg0->unk4, 0x2DC6C0);
     sceHttpSetSendTimeOut(arg0->unk4, 0x2DC6C0);
     temp_a0 = arg0->unkF8;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **, M2C_UNK), 0x48)(temp_a0, 1);
+    (*temp_a0)->unk48(temp_a0, 1);
     if (arg0->unk8 >= 0) {
         func_00024554(arg0);
         func_00024508(arg0);
@@ -266,10 +266,10 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00026264);
 
 s32 func_000262B0(struct Unk_func_000262B0_0 *arg0) {
-    void **temp_a0;
+    struct Unk_vt_func_000262B0_temp_a0 **temp_a0;
 
     temp_a0 = arg0->unkC;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0x10)(temp_a0);
+    (*temp_a0)->unk10(temp_a0);
     func_000244BC(arg0->unkC);
     func_00024DE0(arg0->unkC);
     arg0->unk1C = 1;
@@ -277,11 +277,11 @@ s32 func_000262B0(struct Unk_func_000262B0_0 *arg0) {
 }
 
 s32 func_00026300(struct Unk_func_000262B0_0 *arg0) {
-    void **temp_a0;
+    struct Unk_vt_func_00026300_temp_a0 **temp_a0;
 
     if (arg0->unk20 != 0) {
         temp_a0 = arg0->unk0;
-        M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0x58)(temp_a0);
+        (*temp_a0)->unk58(temp_a0);
         arg0->unk20 = 0U;
     }
     if (arg0->unk1C != 0) {

@@ -134,12 +134,12 @@ void func_000260C0(struct Unk_func_000260C0_0 *arg0) {
     func_00023FF8(arg0->unk4);
 }
 
-void func_000260DC(void **arg0, void *arg1, s32 arg2) {
+void func_000260DC(struct Unk_vt_func_000260DC_arg0 **arg0, void *arg1, s32 arg2) {
     void *sp0;
     s32 temp_s0_2;
     u16 temp_s0;
 
-    temp_s0 = M2C_FIELD(*arg0, u16 *, 2);
+    temp_s0 = (*arg0)->unk2;
     temp_s0_2 = temp_s0 << 5;
     func_00023868(&sp0, func_0002385C(arg1) + temp_s0_2);
     func_00023F18(sp0, (s32) arg1);
@@ -152,9 +152,9 @@ INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore_02404C", D_0002CD48);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_02404C", func_00026170);
 
-void func_00026278(void **arg0, s32 arg1) {
+void func_00026278(struct Unk_vt_func_00026278_arg0 **arg0, s32 arg1) {
     void *sp0;
-    func_00023EBC(&sp0, M2C_FIELD(*arg0, u16 *, 2) << 5);
+    func_00023EBC(&sp0, (*arg0)->unk2 << 5);
     func_00024540(arg1, sp0, (s32) *arg0);
     func_00023FF8(sp0);
 }

@@ -104,7 +104,7 @@ INCLUDE_RODATA("tmp/asm/282/update_plugin/nonmatchings/update_plugin", D_000074C
 
 void func_0000086C(s32 arg0) {
     void *sp0;
-    void **temp_v0;
+    struct Unk_vt_func_0000086C_temp_v0 **temp_v0;
 
     M2C_FIELD(func_00005364(), s8 *, 0x84) = 0;
     func_00001714();
@@ -116,7 +116,7 @@ void func_0000086C(s32 arg0) {
     sceVshCommonGui_80271F41();
     scePaf_F47CA1C2(arg0, 0x10001, func_00002FE4, 0);
     temp_v0 = scePaf_72514A05(arg0, "update_network_check_version_text", 0);
-    M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 0xF, 0x20);
+    (*temp_v0)->unk70(temp_v0, 0xF, 0x20);
 }
 
 INCLUDE_RODATA("tmp/asm/282/update_plugin/nonmatchings/update_plugin", D_00007500);

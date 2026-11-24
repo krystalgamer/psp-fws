@@ -563,8 +563,8 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_058100", _TIFFSetupFieldInfo);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_058100", tagCompare);
 
-void func_0005C508(void **arg0, void **arg1) {
-    scePaf_66FE90D7(M2C_FIELD(*arg0, s32 *, 0x10), M2C_FIELD(*arg1, s32 *, 0x10));
+void func_0005C508(struct Unk_vt_func_0005C508_arg0 **arg0, struct Unk_vt_func_0005C508_arg1 **arg1) {
+    scePaf_66FE90D7((*arg0)->unk10, (*arg1)->unk10);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_058100", func_0005C530);

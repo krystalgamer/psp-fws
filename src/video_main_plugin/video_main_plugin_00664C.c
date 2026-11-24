@@ -119,9 +119,9 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C
 
 u8 func_00008DD8(struct Unk_func_00008DD8_0 *arg0) {
     u8 temp_v0;
-    void **temp_a0;
-    void **temp_a0_2;
-    void **temp_v0_2;
+    struct Unk_vt_func_00008DD8_temp_a0 **temp_a0;
+    struct Unk_vt_func_00008DD8_temp_a0_2 **temp_a0_2;
+    struct Unk_vt_func_00008DD8_temp_v0_2 **temp_v0_2;
 
     temp_v0 = func_0003824C(arg0->unkAC);
     arg0->unkC0 = temp_v0;
@@ -129,11 +129,11 @@ u8 func_00008DD8(struct Unk_func_00008DD8_0 *arg0) {
 
     } else {
         temp_v0_2 = arg0->unkB4;
-        M2C_FIELD(*temp_v0_2, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0xC8)(temp_v0_2, 2, 0, 0);
+        (*temp_v0_2)->unkC8(temp_v0_2, 2, 0, 0);
         temp_a0 = arg0->unkB4;
-        M2C_FIELD(*temp_a0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0xC8)(temp_a0, 1, 0, 0);
+        (*temp_a0)->unkC8(temp_a0, 1, 0, 0);
         temp_a0_2 = arg0->unkB4;
-        M2C_FIELD(*temp_a0_2, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0xC8)(temp_a0_2, 0, 0, 0);
+        (*temp_a0_2)->unkC8(temp_a0_2, 0, 0, 0);
     }
     return arg0->unkC0;
 }
@@ -309,162 +309,162 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_0000D2C0);
 
-s32 func_0000D3A0(void **arg0) {
+s32 func_0000D3A0(struct Unk_vt_func_0000D3A0_arg0 **arg0) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **), 0x78)(arg0);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unk78(arg0);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000D3FC(void **arg0) {
+s32 func_0000D3FC(struct Unk_vt_func_0000D3FC_arg0 **arg0) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **), 0x7C)(arg0);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unk7C(arg0);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000D458(void **arg0) {
+s32 func_0000D458(struct Unk_vt_func_0000D458_arg0 **arg0) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **), 0x80)(arg0);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unk80(arg0);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_0000D4B4);
 
-s32 func_0000D518(void **arg0, M2C_UNK arg1) {
+s32 func_0000D518(struct Unk_vt_func_0000D518_arg0 **arg0, M2C_UNK arg1) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK), 0x88)(arg0, arg1);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unk88(arg0, arg1);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000D57C(void **arg0, M2C_UNK arg1) {
+s32 func_0000D57C(struct Unk_vt_func_0000D57C_arg0 **arg0, M2C_UNK arg1) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK), 0x8C)(arg0, arg1);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unk8C(arg0, arg1);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_0000D5E0);
 
-s32 func_0000D644(void **arg0, M2C_UNK arg1, M2C_UNK arg2) {
+s32 func_0000D644(struct Unk_vt_func_0000D644_arg0 **arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK, M2C_UNK), 0x94)(arg0, arg1, arg2);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unk94(arg0, arg1, arg2);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000D6B8(void **arg0, M2C_UNK arg1, M2C_UNK arg2) {
+s32 func_0000D6B8(struct Unk_vt_func_0000D6B8_arg0 **arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK, M2C_UNK), 0x98)(arg0, arg1, arg2);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unk98(arg0, arg1, arg2);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000D72C(void **arg0) {
+s32 func_0000D72C(struct Unk_vt_func_0000D72C_arg0 **arg0) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **), 0x9C)(arg0);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unk9C(arg0);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_0000D788);
 
-s32 func_0000D834(void **arg0, M2C_UNK arg1, M2C_UNK arg2) {
+s32 func_0000D834(struct Unk_vt_func_0000D834_arg0 **arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK, M2C_UNK), 0xA4)(arg0, arg1, arg2);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unkA4(arg0, arg1, arg2);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000D8A8(void **arg0, M2C_UNK arg1, M2C_UNK arg2) {
+s32 func_0000D8A8(struct Unk_vt_func_0000D8A8_arg0 **arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK, M2C_UNK), 0xA8)(arg0, arg1, arg2);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unkA8(arg0, arg1, arg2);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000D91C(void **arg0, M2C_UNK arg1, M2C_UNK arg2) {
+s32 func_0000D91C(struct Unk_vt_func_0000D91C_arg0 **arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK, M2C_UNK), 0xAC)(arg0, arg1, arg2);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unkAC(arg0, arg1, arg2);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000D990(void **arg0, M2C_UNK arg1) {
+s32 func_0000D990(struct Unk_vt_func_0000D990_arg0 **arg0, M2C_UNK arg1) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK), 0xB0)(arg0, arg1);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unkB0(arg0, arg1);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000D9F4(void **arg0, M2C_UNK arg1) {
+s32 func_0000D9F4(struct Unk_vt_func_0000D9F4_arg0 **arg0, M2C_UNK arg1) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK), 0xB4)(arg0, arg1);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unkB4(arg0, arg1);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000DA58(void **arg0, M2C_UNK arg1) {
+s32 func_0000DA58(struct Unk_vt_func_0000DA58_arg0 **arg0, M2C_UNK arg1) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK), 0xB8)(arg0, arg1);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unkB8(arg0, arg1);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000DABC(void **arg0, M2C_UNK arg1) {
+s32 func_0000DABC(struct Unk_vt_func_0000DABC_arg0 **arg0, M2C_UNK arg1) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **, M2C_UNK), 0xBC)(arg0, arg1);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unkBC(arg0, arg1);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000DB20(void **arg0) {
+s32 func_0000DB20(struct Unk_vt_func_0000DB20_arg0 **arg0) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **), 0xC0)(arg0);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unkC0(arg0);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
-s32 func_0000DB7C(void **arg0) {
+s32 func_0000DB7C(struct Unk_vt_func_0000DB7C_arg0 **arg0) {
     s32 temp_s1;
 
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0xC8)();
-    temp_s1 = M2C_FIELD(*arg0, s32 (**)(void **), 0xC4)(arg0);
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0xCC)(arg0);
+    (*arg0)->unkC8();
+    temp_s1 = (*arg0)->unkC4(arg0);
+    (*arg0)->unkCC(arg0);
     return temp_s1;
 }
 
@@ -579,12 +579,12 @@ s32 func_0000FF90(struct Unk_func_0000FF90_0 *arg0) {
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_0000FFBC);
 
 s32 func_0000FFF4(struct Unk_func_0000FFF4_0 *arg0, s32 arg1) {
-    void **temp_a0;
+    struct Unk_vt_func_0000FFF4_temp_a0 **temp_a0;
 
     arg0->unkC78 = arg1;
     func_0003F4F4((u8 *)arg0 + 0x44);
     temp_a0 = arg0->unkA40;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **, s32), 0x78)(temp_a0, arg1);
+    (*temp_a0)->unk78(temp_a0, arg1);
     return 0;
 }
 
@@ -644,11 +644,11 @@ s32 func_00010504(void) {
 }
 
 s32 func_0001050C(struct Unk_func_0001050C_0 *arg0, s32 *arg1) {
-    void **temp_a0;
+    struct Unk_vt_func_0001050C_temp_a0 **temp_a0;
 
     if (arg1 != NULL) {
         temp_a0 = arg0->unkA4C;
-        *arg1 = M2C_FIELD(*temp_a0, s32 (**)(void **), 0xC)(temp_a0);
+        *arg1 = (*temp_a0)->unkC(temp_a0);
     }
     return 0;
 }
@@ -1235,10 +1235,10 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_00012D48);
 
 s32 func_000130D4(struct Unk_func_000130D4_0 *arg0) {
-    void **temp_a0;
+    struct Unk_vt_func_000130D4_temp_a0 **temp_a0;
 
     temp_a0 = arg0->unk44;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0x70)(temp_a0);
+    (*temp_a0)->unk70(temp_a0);
     return 0;
 }
 
@@ -1269,10 +1269,10 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_000133B8);
 
 s32 func_000137A0(struct Unk_func_000137A0_0 *arg0) {
-    void **temp_a0;
+    struct Unk_vt_func_000137A0_temp_a0 **temp_a0;
 
     temp_a0 = arg0->unk44;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0x70)(temp_a0);
+    (*temp_a0)->unk70(temp_a0);
     return 0;
 }
 
@@ -1976,11 +1976,11 @@ void func_0001E3D0(struct Unk_func_0001E3D0_0 *arg0) {
     func_000201A8((u8 *)arg0 + (arg0->unkC * 0x60) + 0x48);
 }
 
-void func_0001E400(void **arg0) {
+void func_0001E400(struct Unk_vt_func_0001E400_arg0 **arg0) {
     s32 temp_s1;
 
     temp_s1 = func_0001F998();
-    func_0001E450(arg0, temp_s1, M2C_FIELD(*arg0, s32 (**)(void **), 0x68)(arg0));
+    func_0001E450(arg0, temp_s1, (*arg0)->unk68(arg0));
 }
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_0001E450);

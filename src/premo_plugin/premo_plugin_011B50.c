@@ -233,30 +233,30 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00013C28);
 
-void func_00013C4C(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x10)();
+void func_00013C4C(struct Unk_vt_func_00013C4C_arg0 **arg0) {
+    (*arg0)->unk10();
 }
 
-void func_00013C70(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x14)();
+void func_00013C70(struct Unk_vt_func_00013C70_arg0 **arg0) {
+    (*arg0)->unk14();
 }
 
-void func_00013C94(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x18)();
+void func_00013C94(struct Unk_vt_func_00013C94_arg0 **arg0) {
+    (*arg0)->unk18();
 }
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00013CB8);
 
-void func_00013CDC(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x20)();
+void func_00013CDC(struct Unk_vt_func_00013CDC_arg0 **arg0) {
+    (*arg0)->unk20();
 }
 
-void func_00013D00(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x24)();
+void func_00013D00(struct Unk_vt_func_00013D00_arg0 **arg0) {
+    (*arg0)->unk24();
 }
 
-void func_00013D24(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x28)();
+void func_00013D24(struct Unk_vt_func_00013D24_arg0 **arg0) {
+    (*arg0)->unk28();
 }
 
 void func_00013D48(s32 arg0) {

@@ -36,13 +36,13 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_014B04", func_00
 
 s32 func_000155C0(void) {
     s32 var_v1;
-    void **temp_v0;
+    struct Unk_vt_func_000155C0_temp_v0 **temp_v0;
 
     D_00031BE4 = 1;
     temp_v0 = scePaf_4708AED4(D_00031B30, &D_0002FEDC);
     var_v1 = 0;
     if (temp_v0 != NULL) {
-        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0xBC)(temp_v0, 0, 0);
+        (*temp_v0)->unkBC(temp_v0, 0, 0);
         var_v1 = 1;
     }
     return var_v1;

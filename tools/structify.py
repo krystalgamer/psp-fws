@@ -28,6 +28,9 @@ ACCESS = re.compile(r"M2C_(V?)FIELD\(&(D_\w+), ([^,()]+?), (0x[0-9A-Fa-f]+|\d+)\
 def field_type(macro_v, t):
     t = t.strip()
     if not macro_v:  # M2C_FIELD takes a pointer type
+        fp = re.fullmatch(r"(.+?) \(\*\*\)(\(.*\))", t)
+        if fp:  # pointer to function pointer -> function pointer field
+            return f"{fp[1]} (*){fp[2]}"
         if not t.endswith("*"):
             return None
         t = t[:-1].strip()
@@ -35,9 +38,16 @@ def field_type(macro_v, t):
 
 
 def size_of(t):
-    if t.endswith("*"):
+    if t.endswith("*") or "(*)" in t:
         return 4
     return SIZES.get(t)
+
+
+def decl(t, name):
+    """Declaration of a field of type t (function pointers included)."""
+    if "(*)" in t:
+        return t.replace("(*)", f"(*{name})", 1)
+    return f"{t}{'' if t.endswith('*') else ' '}{name}"
 
 
 def write_decls(mod, store):
@@ -112,7 +122,7 @@ def structify_globals(mod, only=None, skip=()):
             t, vol = fields[off]
             if off > pos:
                 body.append(f"    u8 pad{pos:X}[0x{off - pos:X}];")
-            body.append(f"    {'volatile ' if vol else ''}{t}{'' if t.endswith('*') else ' '}unk{off:X};")
+            body.append(f"    {'volatile ' if vol else ''}{decl(t, f'unk{off:X}')};")
             pos = off + size_of(t)
         store["types"][f"{sym}_s"] = f"struct {sym}_s {{\n" + "\n".join(body) + "\n};"
         store["vars"][sym] = f"extern struct {sym}_s {sym};"
@@ -272,7 +282,7 @@ def structify_args(mod, only=None, skip=()):
         for off in sorted(fields):
             if off > pos:
                 body.append(f"    u8 pad{pos:X}[0x{off - pos:X}];")
-            body.append(f"    {fields[off]}{'' if fields[off].endswith('*') else ' '}unk{off:X};")
+            body.append(f"    {decl(fields[off], f'unk{off:X}')};")
             pos = off + size_of(fields[off])
         store["types"][sname] = f"struct {sname} {{\n" + "\n".join(body) + "\n};"
         accepted[sname] = fields
@@ -349,7 +359,10 @@ def main():
     if subprocess.run(["git", "diff", "--quiet", "--no-ext-diff", "--", f"src/{mod}"], cwd=ROOT).returncode:
         print(f"{vm}: local changes, skipping")
         return
-    if "--nested" in sys.argv:
+    if "--vtables" in sys.argv:
+        import structify_vtbl
+        phase = structify_vtbl.structify_vtables
+    elif "--nested" in sys.argv:
         import structify_nested
         phase = structify_nested.structify_nested
     elif "--locals" in sys.argv:

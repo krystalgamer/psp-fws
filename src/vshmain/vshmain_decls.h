@@ -314,6 +314,16 @@ struct Unk_vsh_FA1DE461_0 {
     s32 unk20;
 };
 
+struct Unk_vt_func_0001EBF0_temp_v0 {
+    u8 pad0[0x70];
+    M2C_UNK (*unk70)(void **, M2C_UNK, M2C_UNK);
+};
+
+struct Unk_vt_func_0002129C_temp_v0 {
+    u8 pad0[0xB0];
+    M2C_UNK (*unkB0)(void **, s32 *, M2C_UNK);
+};
+
 extern s32 D_000283F4;
 extern M2C_UNK D_00028D50;
 extern M2C_UNK D_0002A540;

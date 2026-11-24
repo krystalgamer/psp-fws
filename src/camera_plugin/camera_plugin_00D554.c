@@ -873,30 +873,30 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0001ABB8);
 
-void func_0001ABDC(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x10)();
+void func_0001ABDC(struct Unk_vt_func_0001ABDC_arg0 **arg0) {
+    (*arg0)->unk10();
 }
 
-void func_0001AC00(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x14)();
+void func_0001AC00(struct Unk_vt_func_0001AC00_arg0 **arg0) {
+    (*arg0)->unk14();
 }
 
-void func_0001AC24(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x18)();
+void func_0001AC24(struct Unk_vt_func_0001AC24_arg0 **arg0) {
+    (*arg0)->unk18();
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0001AC48);
 
-void func_0001AC6C(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x20)();
+void func_0001AC6C(struct Unk_vt_func_0001AC6C_arg0 **arg0) {
+    (*arg0)->unk20();
 }
 
-void func_0001AC90(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x24)();
+void func_0001AC90(struct Unk_vt_func_0001AC90_arg0 **arg0) {
+    (*arg0)->unk24();
 }
 
-void func_0001ACB4(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x28)();
+void func_0001ACB4(struct Unk_vt_func_0001ACB4_arg0 **arg0) {
+    (*arg0)->unk28();
 }
 
 void func_0001ACD8(s32 arg0) {

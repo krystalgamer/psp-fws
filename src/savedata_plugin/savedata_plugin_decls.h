@@ -553,6 +553,11 @@ struct Unk_func_0001906C_0 {
     s32 unk8;
 };
 
+struct Unk_vt_func_00010664_arg1 {
+    u8 pad0[0xAC];
+    M2C_UNK (*unkAC)(void **, s32 *, s32);
+};
+
 extern M2C_UNK D_00021DD0;
 extern M2C_UNK D_00021E38;
 extern M2C_UNK D_00022070;
@@ -722,7 +727,7 @@ M2C_UNK func_00010104(M2C_UNK, M2C_UNK);
 void func_00010184(struct Unk_func_00010184_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7);
 void func_00010224(struct Unk_func_00010184_0 *arg0);
 M2C_UNK func_00010260(s32);
-void func_00010664(s32 arg0, void **arg1, s32 arg2);
+void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2);
 s32 func_00011150(s32);
 void func_00011180(struct Unk_func_00011180_0 *arg0);
 void func_00011428(s32 *arg0, s32 arg1);

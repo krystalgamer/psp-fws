@@ -130,7 +130,7 @@ void func_00022A04(s32 arg0) {
     s32 temp_a1;
     s32 var_a1;
     s32 var_s1;
-    void **temp_v0;
+    struct Unk_vt_func_00022A04_temp_v0 **temp_v0;
     struct Unk_func_00022A04_temp_s2 *temp_s2;
 
     temp_s2 = arg0 + 0x20;
@@ -140,7 +140,7 @@ void func_00022A04(s32 arg0) {
         do {
             temp_v0 = func_00020BF8(temp_s2, var_a1);
             if (temp_v0 != NULL) {
-                func_00027E70(M2C_FIELD(*temp_v0, s32 *, 4));
+                func_00027E70((*temp_v0)->unk4);
                 scePaf_4E67BB08((s32) *temp_v0);
                 scePaf_4E67BB08((s32) temp_v0);
             }

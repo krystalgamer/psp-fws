@@ -993,8 +993,8 @@ void func_0001649C(s32 arg0) {
     func_00016E98(arg0);
 }
 
-s32 *func_000164CC(s32 *arg0, void **arg1) {
-    *arg0 = M2C_FIELD(*arg1, s32 *, 4);
+s32 *func_000164CC(s32 *arg0, struct Unk_vt_func_000164CC_arg1 **arg1) {
+    *arg0 = (*arg1)->unk4;
     return arg0;
 }
 
@@ -1443,10 +1443,10 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005E68", func_00
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005E68", func_0001A8FC);
 
 s32 func_0001A940(struct Unk_func_0001A940_0 *arg0, s32 arg1) {
-    void **temp_a0;
+    struct Unk_vt_func_0001A940_temp_a0 **temp_a0;
 
     temp_a0 = arg0->unkCC;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **, s32, s32), 0x28)(temp_a0, arg0->unkC8, arg1);
+    (*temp_a0)->unk28(temp_a0, arg0->unkC8, arg1);
     arg0->unkAC = arg1;
     return arg1;
 }

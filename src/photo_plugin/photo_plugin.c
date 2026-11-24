@@ -536,10 +536,10 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_000049D4)
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00004A3C);
 
 void func_00004ADC(void ***arg0) {
-    void **temp_a0;
+    struct Unk_vt_func_00004ADC_temp_a0 **temp_a0;
 
     temp_a0 = *arg0;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0x24)(temp_a0);
+    (*temp_a0)->unk24(temp_a0);
 }
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00004B04);
@@ -678,8 +678,8 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00006BF4)
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00006C34);
 
-void func_00006C40(void **arg0, void **arg1) {
-    scePaf_2FDC80B3(M2C_FIELD(*arg0, s32 *, 4), M2C_FIELD(*arg1, s32 *, 4));
+void func_00006C40(struct Unk_vt_func_00006C40_arg0 **arg0, struct Unk_vt_func_00006C40_arg1 **arg1) {
+    scePaf_2FDC80B3((*arg0)->unk4, (*arg1)->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00006C68);
@@ -970,8 +970,8 @@ s32 func_00009E5C(struct Unk_func_00009E5C_0 *arg0) {
 void func_00009E64(void) {
 }
 
-void func_00009E6C(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x18)();
+void func_00009E6C(struct Unk_vt_func_00009E6C_arg0 **arg0) {
+    (*arg0)->unk18();
 }
 
 void func_00009E90(void) {
@@ -1222,10 +1222,10 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000B458)
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000B4B4);
 
 void func_0000B518(struct Unk_func_0000B518_0 *arg0) {
-    void **temp_a0;
+    struct Unk_vt_func_0000B518_temp_a0 **temp_a0;
 
     temp_a0 = arg0->unk38;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 8)(temp_a0);
+    (*temp_a0)->unk8(temp_a0);
 }
 
 s32 func_0000B540(void) {
@@ -1268,10 +1268,10 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000C3AC)
 
 void func_0000C3E0(struct Unk_func_0000C3E0_0 *arg0) {
     s32 temp_v0;
-    void **temp_a0;
+    struct Unk_vt_func_0000C3E0_temp_a0 **temp_a0;
 
     temp_a0 = arg0->unk8;
-    if (M2C_FIELD(*temp_a0, s32 (**)(void **), 0x14)(temp_a0) != 0) {
+    if ((*temp_a0)->unk14(temp_a0) != 0) {
         temp_v0 = scePaf_D4FAE7D0(&D_0002F364);
         if (temp_v0 != 0) {
             scePaf_49CE42F7(temp_v0, &D_0002F374);
@@ -1503,10 +1503,10 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000EE58)
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000EF70);
 
-void func_0000EFA0(struct Unk_func_0000EFA0_0 *arg0, void **arg1) {
+void func_0000EFA0(struct Unk_func_0000EFA0_0 *arg0, struct Unk_vt_func_0000EFA0_arg1 **arg1) {
     s32 temp_v0;
 
-    if (M2C_FIELD(*arg1, s32 (**)(void **), 0x10)(arg1) == 0) {
+    if ((*arg1)->unk10(arg1) == 0) {
         temp_v0 = arg0->unkC;
         arg0->unk4 = arg1;
         if (temp_v0 != 0) {
@@ -1548,10 +1548,10 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000F2A4)
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000FD30);
 
-void func_000102F4(struct Unk_func_000102F4_0 *arg0, void **arg1) {
+void func_000102F4(struct Unk_func_000102F4_0 *arg0, struct Unk_vt_func_000102F4_arg1 **arg1) {
     s32 temp_v0;
 
-    if (M2C_FIELD(*arg1, s32 (**)(void **), 0x10)(arg1) == 1) {
+    if ((*arg1)->unk10(arg1) == 1) {
         temp_v0 = arg0->unk18;
         arg0->unk4 = arg1;
         if (temp_v0 != 0) {
@@ -1623,9 +1623,9 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00011288)
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0001132C);
 
-void func_00011388(struct Unk_func_00011388_0 *arg0, void **arg1) {
+void func_00011388(struct Unk_func_00011388_0 *arg0, struct Unk_vt_func_00011388_arg1 **arg1) {
     func_00011288(arg0, (s32) &D_0002FB8C);
-    if (M2C_FIELD(*arg1, s32 (**)(void **), 0x10)(arg1) != 0) {
+    if ((*arg1)->unk10(arg1) != 0) {
 
     } else {
         arg0->unk8 = arg1;
@@ -1663,9 +1663,9 @@ INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", D_0002FD00)
 
 INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", D_0002FD04);
 
-void func_0001206C(struct Unk_func_0001206C_0 *arg0, void **arg1) {
+void func_0001206C(struct Unk_func_0001206C_0 *arg0, struct Unk_vt_func_0001206C_arg1 **arg1) {
     func_00011288(arg0, (s32) "info_album_page");
-    if (M2C_FIELD(*arg1, s32 (**)(void **), 0x10)(arg1) != 1) {
+    if ((*arg1)->unk10(arg1) != 1) {
 
     } else {
         arg0->unk8 = arg1;

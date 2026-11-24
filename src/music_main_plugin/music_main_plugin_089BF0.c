@@ -409,12 +409,12 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_089BF0
 
 s32 func_0008D064(struct Unk_func_0008D064_0 *arg0) {
     s32 var_v0;
-    void **temp_v1;
+    struct Unk_vt_func_0008D064_temp_v1 **temp_v1;
 
     var_v0 = 0;
     temp_v1 = arg0->unk4;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(*temp_v1, s32 (**)(void **), 0x18)(temp_v1);
+        var_v0 = (*temp_v1)->unk18(temp_v1);
     }
     return var_v0;
 }

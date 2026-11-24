@@ -77,7 +77,9 @@
   "sceVshCommonUtil_EDED68FB": "M2C_UNK sceVshCommonUtil_EDED68FB();"
  },
  "types": {
-  "Unk_func_00003660_0": "struct Unk_func_00003660_0 {\n    u8 pad0[0x98];\n    s32 unk98;\n    s32 unk9C;\n    s32 unkA0;\n    s32 unkA4;\n    s32 unkA8;\n    s32 unkAC;\n    s32 unkB0;\n    s32 unkB4;\n    s32 unkB8;\n    s32 unkBC;\n    s32 unkC0;\n    s32 unkC4;\n    s32 unkC8;\n    s32 unkCC;\n    s32 unkD0;\n    s32 unkD4;\n    s32 unkD8;\n    s32 unkDC;\n    s32 unkE0;\n    s32 unkE4;\n    s32 unkE8;\n    s32 unkEC;\n};"
+  "Unk_func_00003660_0": "struct Unk_func_00003660_0 {\n    u8 pad0[0x98];\n    s32 unk98;\n    s32 unk9C;\n    s32 unkA0;\n    s32 unkA4;\n    s32 unkA8;\n    s32 unkAC;\n    s32 unkB0;\n    s32 unkB4;\n    s32 unkB8;\n    s32 unkBC;\n    s32 unkC0;\n    s32 unkC4;\n    s32 unkC8;\n    s32 unkCC;\n    s32 unkD0;\n    s32 unkD4;\n    s32 unkD8;\n    s32 unkDC;\n    s32 unkE0;\n    s32 unkE4;\n    s32 unkE8;\n    s32 unkEC;\n};",
+  "Unk_vt_func_00001950_temp_v0": "struct Unk_vt_func_00001950_temp_v0 {\n    u8 pad0[0x70];\n    M2C_UNK (*unk70)(void **, M2C_UNK, M2C_UNK);\n};",
+  "Unk_vt_func_00003FD4_temp_v0": "struct Unk_vt_func_00003FD4_temp_v0 {\n    u8 pad0[0xB0];\n    M2C_UNK (*unkB0)(void **, s32 *, M2C_UNK);\n};"
  },
  "vars": {
   "D_00008858": "extern M2C_UNK D_00008858;",

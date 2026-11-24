@@ -124,10 +124,10 @@ void func_000006D0(struct Unk_func_000006D0_0 *arg0) {
 }
 
 void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
-    void **temp_s0;
+    struct Unk_vt_func_000006EC_temp_s0 **temp_s0;
 
     temp_s0 = arg0->unk4;
-    M2C_FIELD(*temp_s0, M2C_UNK (**)(void **, M2C_UNK), 0x58)(temp_s0, 1);
+    (*temp_s0)->unk58(temp_s0, 1);
     scePaf_6A82A8C6(temp_s0, 0x01000003);
 }
 
@@ -154,10 +154,10 @@ void func_000007A0(struct Unk_func_000007A0_0 *arg0) {
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_000007BC);
 
 void func_00000820(struct Unk_func_00000820_0 *arg0) {
-    void **temp_a0;
+    struct Unk_vt_func_00000820_temp_a0 **temp_a0;
 
     temp_a0 = arg0->unk4;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0xC8)(temp_a0);
+    (*temp_a0)->unkC8(temp_a0);
 }
 
 void func_00000848(struct Unk_func_00000848_0 *arg0) {
@@ -378,30 +378,30 @@ INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func
 
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00001BBC);
 
-void func_00001BE0(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x10)();
+void func_00001BE0(struct Unk_vt_func_00001BE0_arg0 **arg0) {
+    (*arg0)->unk10();
 }
 
-void func_00001C04(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x14)();
+void func_00001C04(struct Unk_vt_func_00001C04_arg0 **arg0) {
+    (*arg0)->unk14();
 }
 
-void func_00001C28(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x18)();
+void func_00001C28(struct Unk_vt_func_00001C28_arg0 **arg0) {
+    (*arg0)->unk18();
 }
 
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00001C4C);
 
-void func_00001C70(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x20)();
+void func_00001C70(struct Unk_vt_func_00001C70_arg0 **arg0) {
+    (*arg0)->unk20();
 }
 
-void func_00001C94(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x24)();
+void func_00001C94(struct Unk_vt_func_00001C94_arg0 **arg0) {
+    (*arg0)->unk24();
 }
 
-void func_00001CB8(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x28)();
+void func_00001CB8(struct Unk_vt_func_00001CB8_arg0 **arg0) {
+    (*arg0)->unk28();
 }
 
 void func_00001CDC(s32 arg0) {

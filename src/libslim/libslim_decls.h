@@ -352,6 +352,11 @@ struct Unk_sceHVSlim_Library_E875CDC8_0 {
     s32 unk18;
 };
 
+struct Unk_vt_func_00009C10_arg0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
 extern M2C_UNK D_00016028;
 extern M2C_UNK D_00016318;
 extern s32 D_00016510;
@@ -482,7 +487,7 @@ void func_00009B04(void **arg0);
 void func_00009B28(void **arg0, s32 *arg1);
 void func_00009B74(void **arg0, s32 arg1, s32 arg2);
 void func_00009BA4(void **arg0, s32 arg1, s32 arg2);
-s32 func_00009C10(void **arg0);
+s32 func_00009C10(struct Unk_vt_func_00009C10_arg0 **arg0);
 M2C_UNK func_00009E44(s32, s32, s32);
 void func_00009F9C(s32 arg0, s32 arg1);
 M2C_UNK func_00009FE0(s32, s32, s32);

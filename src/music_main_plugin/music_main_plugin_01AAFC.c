@@ -174,9 +174,9 @@ s32 func_0001B914(struct Unk_func_0001B914_0 *arg0) {
     return arg0->unk30 + arg0->unk40;
 }
 
-s32 func_0001B924(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x4C)();
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0x48)(arg0);
+s32 func_0001B924(struct Unk_vt_func_0001B924_arg0 **arg0) {
+    (*arg0)->unk4C();
+    (*arg0)->unk48(arg0);
     return 0;
 }
 
@@ -188,8 +188,8 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001BB5C);
 
-void func_0001BBE0(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x28)();
+void func_0001BBE0(struct Unk_vt_func_0001BBE0_arg0 **arg0) {
+    (*arg0)->unk28();
 }
 
 void func_0001BC04(s32 arg0, s32 arg1, M2C_UNK arg2) {

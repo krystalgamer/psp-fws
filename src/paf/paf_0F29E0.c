@@ -272,13 +272,13 @@ s32 func_000F614C(struct Unk_func_000F614C_0 *arg0) {
 
 s32 func_000F6184(struct Unk_func_000F6184_0 *arg0, s32 arg1) {
     s32 var_v0;
-    void **temp_v1;
+    struct Unk_vt_func_000F6184_temp_v1 **temp_v1;
 
     if (arg1 > 0x01000008) {
         temp_v1 = arg0->unk1E8;
         var_v0 = -1;
         if (temp_v1 != NULL) {
-            var_v0 = M2C_FIELD(*temp_v1, s32 (**)(void **), 0x84)(temp_v1);
+            var_v0 = (*temp_v1)->unk84(temp_v1);
         }
     } else {
         var_v0 = scePaf_222526B6();
@@ -563,13 +563,13 @@ void func_000FC010(void) {
 
 s32 func_000FC018(struct Unk_func_000FC018_0 *arg0, s32 arg1) {
     s32 var_v0;
-    void **temp_v1;
+    struct Unk_vt_func_000FC018_temp_v1 **temp_v1;
 
     if (arg1 > 0x01000008) {
         temp_v1 = arg0->unk1E8;
         var_v0 = -1;
         if (temp_v1 != NULL) {
-            var_v0 = M2C_FIELD(*temp_v1, s32 (**)(void **), 0x84)(temp_v1);
+            var_v0 = (*temp_v1)->unk84(temp_v1);
         }
     } else {
         var_v0 = scePaf_222526B6();
@@ -658,10 +658,10 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F29E0", func_000FCB74);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F29E0", func_000FCBFC);
 
 void func_000FCC8C(struct Unk_func_000FCC8C_0 *arg0) {
-    void **temp_a0;
+    struct Unk_vt_func_000FCC8C_temp_a0 **temp_a0;
 
     temp_a0 = arg0->unk24;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0x28)(temp_a0);
+    (*temp_a0)->unk28(temp_a0);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F29E0", func_000FCCB4);

@@ -1248,8 +1248,8 @@ void func_00009BA4(void **arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00009BD4);
 
-s32 func_00009C10(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 4);
+s32 func_00009C10(struct Unk_vt_func_00009C10_arg0 **arg0) {
+    return (*arg0)->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00009C1C);

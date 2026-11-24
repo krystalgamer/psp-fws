@@ -202,12 +202,12 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0D6370", scePaf_CFF2B69C);
 
 s32 scePaf_4EA868E6(struct Unk_scePaf_4EA868E6_0 *arg0) {
     s32 var_v0;
-    void **temp_v1;
+    struct Unk_vt_scePaf_4EA868E6_temp_v1 **temp_v1;
 
     var_v0 = -1;
     temp_v1 = arg0->unk1E8;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(*temp_v1, s32 (**)(void **), 0x74)(temp_v1);
+        var_v0 = (*temp_v1)->unk74(temp_v1);
     }
     return var_v0;
 }
@@ -216,12 +216,12 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0D6370", scePaf_DB230BE1);
 
 s32 scePaf_C2E4423A(struct Unk_scePaf_C2E4423A_0 *arg0) {
     s32 var_v0;
-    void **temp_v1;
+    struct Unk_vt_scePaf_C2E4423A_temp_v1 **temp_v1;
 
     var_v0 = -1;
     temp_v1 = arg0->unk1E8;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(*temp_v1, s32 (**)(void **), 0x7C)(temp_v1);
+        var_v0 = (*temp_v1)->unk7C(temp_v1);
     }
     return var_v0;
 }
@@ -285,30 +285,30 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0D6370", func_000DA3C0);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0D6370", func_000DA400);
 
-void func_000DA424(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x10)();
+void func_000DA424(struct Unk_vt_func_000DA424_arg0 **arg0) {
+    (*arg0)->unk10();
 }
 
-void func_000DA448(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x14)();
+void func_000DA448(struct Unk_vt_func_000DA448_arg0 **arg0) {
+    (*arg0)->unk14();
 }
 
-void func_000DA46C(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x18)();
+void func_000DA46C(struct Unk_vt_func_000DA46C_arg0 **arg0) {
+    (*arg0)->unk18();
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0D6370", func_000DA490);
 
-void func_000DA4B4(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x20)();
+void func_000DA4B4(struct Unk_vt_func_000DA4B4_arg0 **arg0) {
+    (*arg0)->unk20();
 }
 
-void func_000DA4D8(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x24)();
+void func_000DA4D8(struct Unk_vt_func_000DA4D8_arg0 **arg0) {
+    (*arg0)->unk24();
 }
 
-void func_000DA4FC(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x28)();
+void func_000DA4FC(struct Unk_vt_func_000DA4FC_arg0 **arg0) {
+    (*arg0)->unk28();
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0D6370", func_000DA520);

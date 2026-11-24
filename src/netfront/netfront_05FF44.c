@@ -18,8 +18,8 @@ void func_0005FF54(void **arg0, s32 *arg1, s32 *arg2) {
     *arg2 = temp_v1->unk78;
 }
 
-s32 func_0005FF6C(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0x70);
+s32 func_0005FF6C(struct Unk_vt_func_0005FF6C_arg0 **arg0) {
+    return (*arg0)->unk70;
 }
 
 s32 func_0005FF78(s32 **arg0) {

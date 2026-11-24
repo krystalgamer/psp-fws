@@ -1542,6 +1542,31 @@ struct Unk_sceHVUI_Module_55C70B0A_temp_v0 {
     s32 unk1C34;
 };
 
+struct Unk_vt_func_00016C3C_arg0 {
+    u8 pad0[0xC0];
+    s32 unkC0;
+};
+
+struct Unk_vt_func_00016F20_arg0 {
+    u8 pad0[0xBC];
+    s32 unkBC;
+};
+
+struct Unk_vt_func_0001D344_arg0 {
+    u8 pad0[0xCC];
+    s32 unkCC;
+};
+
+struct Unk_vt_func_00020D04_arg0 {
+    u8 pad0[0xC0];
+    s32 unkC0;
+};
+
+struct Unk_vt_func_000212CC_arg0 {
+    u8 pad0[0x120];
+    s32 unk120;
+};
+
 extern M2C_UNK D_0005E250;
 extern M2C_UNK D_0005EDCC;
 extern M2C_UNK D_0005F364;
@@ -1884,10 +1909,10 @@ s32 func_00016684(s32 arg0);
 s32 func_00016C24(void);
 s32 func_00016C2C(void);
 s32 func_00016C34(void);
-s32 func_00016C3C(void **arg0);
+s32 func_00016C3C(struct Unk_vt_func_00016C3C_arg0 **arg0);
 s32 func_00016C48(s32, M2C_UNK);
 void func_00016CF0(s32 *arg0, s32 arg1);
-s32 func_00016F20(void **arg0);
+s32 func_00016F20(struct Unk_vt_func_00016F20_arg0 **arg0);
 s32 func_00016F2C(void **, s32);
 M2C_UNK func_000170D0(s32);
 M2C_UNK func_000171F0(s32 *, s32, M2C_UNK);
@@ -1929,7 +1954,7 @@ void func_0001CE38(s32 arg0, s32 arg1);
 s32 func_0001CE84(void);
 s32 func_0001D274(s32 arg0);
 void func_0001D304(s32 arg0);
-s32 func_0001D344(void **arg0);
+s32 func_0001D344(struct Unk_vt_func_0001D344_arg0 **arg0);
 void func_0001D350(s32 arg0, s32 arg1, s32 arg2);
 void func_0001D36C(s32 arg0, s32 arg1, s32 arg2);
 s32 func_0001D388(s32, s32, s32, s32);
@@ -1967,10 +1992,10 @@ s32 func_0001FF04(s32 arg0);
 void func_000200F4(s32 arg0, s32 arg1, s32 arg2);
 void func_00020140(s32 arg0);
 s32 func_00020AE8(void);
-s32 func_00020D04(void **arg0);
+s32 func_00020D04(struct Unk_vt_func_00020D04_arg0 **arg0);
 M2C_UNK func_00021098(s32);
 void func_0002128C(s32 arg0);
-s32 func_000212CC(void **arg0);
+s32 func_000212CC(struct Unk_vt_func_000212CC_arg0 **arg0);
 M2C_UNK func_000212D8();
 void func_0002134C(void *arg0);
 void func_00021378(s32 arg0);

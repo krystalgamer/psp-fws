@@ -105,7 +105,8 @@
   "Unk_func_00005BA4_0": "struct Unk_func_00005BA4_0 {\n    u8 pad0[0x5C];\n    s32 unk5C;\n};",
   "Unk_func_00005CA0_0": "struct Unk_func_00005CA0_0 {\n    u8 pad0[0x61];\n    u8 unk61;\n    u8 pad62[0x1E];\n    s32 unk80;\n};",
   "Unk_func_00005DD4_temp_v0": "struct Unk_func_00005DD4_temp_v0 {\n\n};",
-  "Unk_func_00006160_0": "struct Unk_func_00006160_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n};"
+  "Unk_func_00006160_0": "struct Unk_func_00006160_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n};",
+  "Unk_vt_func_0000086C_temp_v0": "struct Unk_vt_func_0000086C_temp_v0 {\n    u8 pad0[0x70];\n    M2C_UNK (*unk70)(void **, M2C_UNK, M2C_UNK);\n};"
  },
  "vars": {
   "D_00007520": "extern M2C_UNK D_00007520;",

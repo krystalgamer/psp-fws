@@ -121,7 +121,7 @@
   "func_00009B28": "void func_00009B28(void **arg0, s32 *arg1);",
   "func_00009B74": "void func_00009B74(void **arg0, s32 arg1, s32 arg2);",
   "func_00009BA4": "void func_00009BA4(void **arg0, s32 arg1, s32 arg2);",
-  "func_00009C10": "s32 func_00009C10(void **arg0);",
+  "func_00009C10": "s32 func_00009C10(struct Unk_vt_func_00009C10_arg0 **arg0);",
   "func_00009E44": "M2C_UNK func_00009E44(s32, s32, s32);",
   "func_00009F9C": "void func_00009F9C(s32 arg0, s32 arg1);",
   "func_00009FE0": "M2C_UNK func_00009FE0(s32, s32, s32);",
@@ -308,7 +308,8 @@
   "Unk_sceHVSlim_Library_59F62E22_0": "struct Unk_sceHVSlim_Library_59F62E22_0 {\n    s32 unk0;\n    s32 unk4;\n};",
   "Unk_sceHVSlim_Library_81130A27_0": "struct Unk_sceHVSlim_Library_81130A27_0 {\n    s32 unk0;\n    s16 unk4;\n    s16 unk6;\n};",
   "Unk_sceHVSlim_Library_B7DE4536_0": "struct Unk_sceHVSlim_Library_B7DE4536_0 {\n    u8 pad0[0x18];\n    s32 unk18;\n};",
-  "Unk_sceHVSlim_Library_E875CDC8_0": "struct Unk_sceHVSlim_Library_E875CDC8_0 {\n    u8 pad0[0x14];\n    s32 unk14;\n    s32 unk18;\n};"
+  "Unk_sceHVSlim_Library_E875CDC8_0": "struct Unk_sceHVSlim_Library_E875CDC8_0 {\n    u8 pad0[0x14];\n    s32 unk14;\n    s32 unk18;\n};",
+  "Unk_vt_func_00009C10_arg0": "struct Unk_vt_func_00009C10_arg0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};"
  },
  "vars": {
   "D_00016028": "extern M2C_UNK D_00016028;",

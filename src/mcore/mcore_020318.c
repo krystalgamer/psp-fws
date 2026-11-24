@@ -258,13 +258,13 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_000231B8);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_00023790);
 
-void func_00023810(void **arg0, s32 arg1) {
+void func_00023810(struct Unk_vt_func_00023810_arg0 **arg0, s32 arg1) {
     struct Unk_func_00023810_temp_v0 *temp_v0;
 
     temp_v0 = func_00025214(8);
     *arg0 = temp_v0;
     temp_v0->unk1 = 0;
-    M2C_FIELD(*arg0, s32 *, 4) = arg1;
+    (*arg0)->unk4 = arg1;
     temp_v0->unk2 = 1;
 }
 

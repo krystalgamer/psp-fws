@@ -66,10 +66,10 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EED10);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EED6C);
 
-void func_000EEDD0(void **arg0) {
+void func_000EEDD0(struct Unk_vt_func_000EEDD0_arg0 **arg0) {
     sceGumMatrixMode(2);
     sceGumLoadIdentity();
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0x60)(arg0);
+    (*arg0)->unk60(arg0);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EEE10);

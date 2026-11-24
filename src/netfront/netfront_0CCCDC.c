@@ -12,8 +12,8 @@ void func_000CCCDC(void **arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
     temp_v0->unk94 = arg3;
 }
 
-void func_000CCCF4(void **arg0, s32 arg1) {
-    M2C_FIELD(*arg0, s32 *, 0x98) = arg1;
+void func_000CCCF4(struct Unk_vt_func_000CCCF4_arg0 **arg0, s32 arg1) {
+    (*arg0)->unk98 = arg1;
 }
 
 s32 func_000CCD00(void) {
@@ -40,7 +40,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CCCDC", func_000CD158);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CCCDC", func_000CD408);
 
-s32 func_000CD494(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0x80);
+s32 func_000CD494(struct Unk_vt_func_000CD494_arg0 **arg0) {
+    return (*arg0)->unk80;
 }
 

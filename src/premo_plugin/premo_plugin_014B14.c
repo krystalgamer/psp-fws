@@ -202,16 +202,16 @@ s32 func_000163CC(struct Unk_func_000163CC_0 *arg0, s32 arg1) {
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000163E4);
 
 s32 func_00016720(struct Unk_func_00016720_0 *arg0, M2C_UNK arg1) {
-    void **temp_a0;
-    void **temp_a0_2;
-    void **temp_a0_3;
-    void **temp_a0_4;
-    void **temp_a0_5;
+    struct Unk_vt_func_00016720_temp_a0 **temp_a0;
+    struct Unk_vt_func_00016720_temp_a0_2 **temp_a0_2;
+    struct Unk_vt_func_00016720_temp_a0_3 **temp_a0_3;
+    struct Unk_vt_func_00016720_temp_a0_4 **temp_a0_4;
+    struct Unk_vt_func_00016720_temp_a0_5 **temp_a0_5;
 
     temp_a0 = arg0->unk30;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0x14)(temp_a0);
+    (*temp_a0)->unk14(temp_a0);
     temp_a0_2 = arg0->unk28;
-    M2C_FIELD(*temp_a0_2, M2C_UNK (**)(void **), 0x14)(temp_a0_2);
+    (*temp_a0_2)->unk14(temp_a0_2);
     func_00026218(arg0->unk0);
     func_0001B164(arg1, arg0->unk28, arg0->unk30);
     func_0001B164(arg1, arg0->unk20, arg0->unk28);
@@ -219,39 +219,39 @@ s32 func_00016720(struct Unk_func_00016720_0 *arg0, M2C_UNK arg1) {
     func_0001B004(arg1, arg0->unk30);
     func_0001B004(arg1, arg0->unk20);
     temp_a0_3 = arg0->unk30;
-    M2C_FIELD(*temp_a0_3, M2C_UNK (**)(void **), 0xC)(temp_a0_3);
+    (*temp_a0_3)->unkC(temp_a0_3);
     temp_a0_4 = arg0->unk28;
-    M2C_FIELD(*temp_a0_4, M2C_UNK (**)(void **), 0xC)(temp_a0_4);
+    (*temp_a0_4)->unkC(temp_a0_4);
     temp_a0_5 = arg0->unk20;
-    M2C_FIELD(*temp_a0_5, M2C_UNK (**)(void **), 0xC)(temp_a0_5);
+    (*temp_a0_5)->unkC(temp_a0_5);
     return 0;
 }
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000167FC);
 
 s32 func_00016ADC(struct Unk_func_00016ADC_0 *arg0, s32 arg1) {
-    void **temp_a0;
-    void **temp_a0_2;
-    void **temp_a0_3;
-    void **temp_a0_4;
-    void **temp_a0_5;
+    struct Unk_vt_func_00016ADC_temp_a0 **temp_a0;
+    struct Unk_vt_func_00016ADC_temp_a0_2 **temp_a0_2;
+    struct Unk_vt_func_00016ADC_temp_a0_3 **temp_a0_3;
+    struct Unk_vt_func_00016ADC_temp_a0_4 **temp_a0_4;
+    struct Unk_vt_func_00016ADC_temp_a0_5 **temp_a0_5;
 
     func_00026264(arg0->unk0);
     temp_a0 = arg0->unk2C;
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0x14)(temp_a0);
+    (*temp_a0)->unk14(temp_a0);
     temp_a0_2 = arg0->unk34;
-    M2C_FIELD(*temp_a0_2, M2C_UNK (**)(void **), 0x14)(temp_a0_2);
+    (*temp_a0_2)->unk14(temp_a0_2);
     func_0001B164(arg1, arg0->unk2C, arg0->unk34);
     func_0001B164(arg1, arg0->unk24, arg0->unk2C);
     func_0001B004(arg1, arg0->unk2C);
     func_0001B004(arg1, arg0->unk34);
     func_0001B004(arg1, arg0->unk24);
     temp_a0_3 = arg0->unk34;
-    M2C_FIELD(*temp_a0_3, M2C_UNK (**)(void **), 0xC)(temp_a0_3);
+    (*temp_a0_3)->unkC(temp_a0_3);
     temp_a0_4 = arg0->unk2C;
-    M2C_FIELD(*temp_a0_4, M2C_UNK (**)(void **), 0xC)(temp_a0_4);
+    (*temp_a0_4)->unkC(temp_a0_4);
     temp_a0_5 = arg0->unk24;
-    M2C_FIELD(*temp_a0_5, M2C_UNK (**)(void **), 0xC)(temp_a0_5);
+    (*temp_a0_5)->unkC(temp_a0_5);
     return 0;
 }
 

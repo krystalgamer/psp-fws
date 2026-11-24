@@ -263,8 +263,8 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_00005F58);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_00006108);
 
-void func_000062B0(void **arg0) {
-    M2C_FIELD(*arg0, s32 *, 0xCD0) = 1;
+void func_000062B0(struct Unk_vt_func_000062B0_arg0 **arg0) {
+    (*arg0)->unkCD0 = 1;
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_000062C0);

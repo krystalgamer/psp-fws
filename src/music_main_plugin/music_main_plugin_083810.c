@@ -181,36 +181,36 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810
 
 s32 func_000856C8(struct Unk_func_000856C8_0 *arg0) {
     s32 var_v0;
-    void **temp_v1;
+    struct Unk_vt_func_000856C8_temp_v1 **temp_v1;
 
     var_v0 = -1;
     temp_v1 = arg0->unk14;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(*temp_v1, s32 (**)(void **), 8)(temp_v1);
+        var_v0 = (*temp_v1)->unk8(temp_v1);
     }
     return var_v0;
 }
 
 s32 func_000856FC(struct Unk_func_000856FC_0 *arg0) {
     s32 var_v0;
-    void **temp_v1;
+    struct Unk_vt_func_000856FC_temp_v1 **temp_v1;
 
     var_v0 = -1;
     temp_v1 = arg0->unk14;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(*temp_v1, s32 (**)(void **), 0xC)(temp_v1);
+        var_v0 = (*temp_v1)->unkC(temp_v1);
     }
     return var_v0;
 }
 
 s32 func_00085730(struct Unk_func_00085730_0 *arg0) {
     s32 var_v0;
-    void **temp_v1;
+    struct Unk_vt_func_00085730_temp_v1 **temp_v1;
 
     var_v0 = 0;
     temp_v1 = arg0->unk14;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(*temp_v1, s32 (**)(void **), 0x18)(temp_v1);
+        var_v0 = (*temp_v1)->unk18(temp_v1);
     }
     return var_v0;
 }

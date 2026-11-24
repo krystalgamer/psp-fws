@@ -653,11 +653,11 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001D834);
 
 s32 func_0001D908(struct Unk_func_0001D908_0 *arg0) {
-    void **temp_a0;
+    struct Unk_vt_func_0001D908_temp_a0 **temp_a0;
 
     arg0->unk2C = 0;
     temp_a0 = M2C_FIELD(arg0->unk38, void ***, 0xC);
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0xC)(temp_a0);
+    (*temp_a0)->unkC(temp_a0);
     return 0;
 }
 
@@ -907,12 +907,12 @@ s32 func_0001F4C8(void) {
     return 0;
 }
 
-void func_0001F4D0(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x54)();
+void func_0001F4D0(struct Unk_vt_func_0001F4D0_arg0 **arg0) {
+    (*arg0)->unk54();
 }
 
-void func_0001F4F4(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x58)();
+void func_0001F4F4(struct Unk_vt_func_0001F4F4_arg0 **arg0) {
+    (*arg0)->unk58();
 }
 
 s32 func_0001F518(void) {
@@ -1058,12 +1058,12 @@ s32 func_00020AB4(void) {
     return 0;
 }
 
-void func_00020ABC(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x54)();
+void func_00020ABC(struct Unk_vt_func_00020ABC_arg0 **arg0) {
+    (*arg0)->unk54();
 }
 
-void func_00020AE0(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x58)();
+void func_00020AE0(struct Unk_vt_func_00020AE0_arg0 **arg0) {
+    (*arg0)->unk58();
 }
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00020B04);

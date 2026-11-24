@@ -126,7 +126,7 @@
   "func_00016268": "s32 func_00016268(struct Unk_func_00016268_0 *arg0, s32 arg1, s32 arg2);",
   "func_0001646C": "void func_0001646C(s32 arg0);",
   "func_0001649C": "void func_0001649C(s32 arg0);",
-  "func_000164CC": "s32 *func_000164CC(s32 *arg0, void **arg1);",
+  "func_000164CC": "s32 *func_000164CC(s32 *arg0, struct Unk_vt_func_000164CC_arg1 **arg1);",
   "func_000164E0": "s32 *func_000164E0(s32 *arg0, s32 *arg1);",
   "func_000164F0": "s32 func_000164F0(struct Unk_func_000164F0_0 *arg0);",
   "func_00016E98": "M2C_UNK func_00016E98(s32);",
@@ -327,7 +327,11 @@
   "Unk_music_common_907343F3_0": "struct Unk_music_common_907343F3_0 {\n    u8 pad0[0xC];\n    s32 unkC;\n};",
   "Unk_music_common_9370D7F7_0": "struct Unk_music_common_9370D7F7_0 {\n    u8 pad0[0x78];\n    s32 unk78;\n};",
   "Unk_music_common_D29A7B4B_0": "struct Unk_music_common_D29A7B4B_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
-  "Unk_music_common_DD1980DD_0": "struct Unk_music_common_DD1980DD_0 {\n    u8 pad0[0x78];\n    s32 unk78;\n};"
+  "Unk_music_common_DD1980DD_0": "struct Unk_music_common_DD1980DD_0 {\n    u8 pad0[0x78];\n    s32 unk78;\n};",
+  "Unk_vt_func_000164CC_arg1": "struct Unk_vt_func_000164CC_arg1 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
+  "Unk_vt_func_0001A940_temp_a0": "struct Unk_vt_func_0001A940_temp_a0 {\n    u8 pad0[0x28];\n    M2C_UNK (*unk28)(void **, s32, s32);\n};",
+  "Unk_vt_music_common_2C03147D_temp_v0": "struct Unk_vt_music_common_2C03147D_temp_v0 {\n    u8 pad0[0x8];\n    s32 (*unk8)(void **);\n};",
+  "Unk_vt_music_common_3B03E04A_temp_v0": "struct Unk_vt_music_common_3B03E04A_temp_v0 {\n    u8 pad0[0xC];\n    s32 (*unkC)(void **);\n};"
  },
  "vars": {
   "D_0001EF20": "extern M2C_UNK D_0001EF20;",

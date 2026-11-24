@@ -304,7 +304,9 @@
   "Unk_vsh_6286E89D_0": "struct Unk_vsh_6286E89D_0 {\n    u8 pad0[0x8];\n    s32 unk8;\n};",
   "Unk_vsh_7ADF6A69_0": "struct Unk_vsh_7ADF6A69_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n    u8 pad8[0x14];\n    s32 unk1C;\n};",
   "Unk_vsh_8727574A_0": "struct Unk_vsh_8727574A_0 {\n    s32 unk0;\n    u8 pad4[0x100];\n    s32 unk104;\n    s32 unk108;\n    s32 unk10C;\n};",
-  "Unk_vsh_FA1DE461_0": "struct Unk_vsh_FA1DE461_0 {\n    u8 pad0[0x1C];\n    s32 unk1C;\n    s32 unk20;\n};"
+  "Unk_vsh_FA1DE461_0": "struct Unk_vsh_FA1DE461_0 {\n    u8 pad0[0x1C];\n    s32 unk1C;\n    s32 unk20;\n};",
+  "Unk_vt_func_0001EBF0_temp_v0": "struct Unk_vt_func_0001EBF0_temp_v0 {\n    u8 pad0[0x70];\n    M2C_UNK (*unk70)(void **, M2C_UNK, M2C_UNK);\n};",
+  "Unk_vt_func_0002129C_temp_v0": "struct Unk_vt_func_0002129C_temp_v0 {\n    u8 pad0[0xB0];\n    M2C_UNK (*unkB0)(void **, s32 *, M2C_UNK);\n};"
  },
  "vars": {
   "D_000283F4": "extern s32 D_000283F4;",

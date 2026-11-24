@@ -107,13 +107,13 @@ s32 module_reboot_before(void) {
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000018F0);
 
 void func_00001950(void) {
-    void **temp_v0;
+    struct Unk_vt_func_00001950_temp_v0 **temp_v0;
     void **temp_v0_2;
 
     temp_v0 = scePaf_4708AED4(D_0000A284, &D_00008858);
     if (temp_v0 != NULL) {
-        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 0x19, 3);
-        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 7, 0x10);
+        (*temp_v0)->unk70(temp_v0, 0x19, 3);
+        (*temp_v0)->unk70(temp_v0, 7, 0x10);
     }
     temp_v0_2 = scePaf_4708AED4(D_0000A284, &D_00008870);
     if (temp_v0_2 != NULL) {
@@ -498,12 +498,12 @@ u8 func_00003FC8(void) {
 }
 
 s32 *func_00003FD4(s32 *arg0) {
-    void **temp_v0;
+    struct Unk_vt_func_00003FD4_temp_v0 **temp_v0;
 
     func_000059A0(arg0, 0);
     temp_v0 = scePaf_4708AED4(D_0000A288, &D_00008DC8);
     if (temp_v0 != NULL) {
-        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xB0)(temp_v0, arg0, 0);
+        (*temp_v0)->unkB0(temp_v0, arg0, 0);
     }
     return arg0;
 }

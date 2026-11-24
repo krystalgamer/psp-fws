@@ -3,24 +3,24 @@
 
 s32 music_common_2C03147D(struct Unk_music_common_2C03147D_0 *arg0) {
     s32 var_v1;
-    void **temp_v0;
+    struct Unk_vt_music_common_2C03147D_temp_v0 **temp_v0;
 
     var_v1 = 0x8010C701;
     if (arg0->unkAC != 0) {
         temp_v0 = arg0->unk0;
-        var_v1 = M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0);
+        var_v1 = (*temp_v0)->unk8(temp_v0);
     }
     return var_v1;
 }
 
 s32 music_common_3B03E04A(struct Unk_music_common_3B03E04A_0 *arg0) {
     s32 var_v1;
-    void **temp_v0;
+    struct Unk_vt_music_common_3B03E04A_temp_v0 **temp_v0;
 
     var_v1 = 0x8010C701;
     if (arg0->unkAC != 0) {
         temp_v0 = arg0->unk0;
-        var_v1 = M2C_FIELD(*temp_v0, s32 (**)(void **), 0xC)(temp_v0);
+        var_v1 = (*temp_v0)->unkC(temp_v0);
     }
     return var_v1;
 }

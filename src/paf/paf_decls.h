@@ -4052,6 +4052,106 @@ struct Unk_scePaf_FCABD0E7_0 {
     s32 unk1E8;
 };
 
+struct Unk_vt_func_0005C508_arg0 {
+    u8 pad0[0x10];
+    s32 unk10;
+};
+
+struct Unk_vt_func_0005C508_arg1 {
+    u8 pad0[0x10];
+    s32 unk10;
+};
+
+struct Unk_vt_func_000C754C_arg0 {
+    u8 pad0[0x18];
+    M2C_UNK (*unk18)();
+};
+
+struct Unk_vt_func_000C99E0_temp_a0 {
+    u8 pad0[0x98];
+    M2C_UNK (*unk98)(void **, M2C_UNK, s32);
+};
+
+struct Unk_vt_func_000DA424_arg0 {
+    u8 pad0[0x10];
+    M2C_UNK (*unk10)();
+};
+
+struct Unk_vt_func_000DA448_arg0 {
+    u8 pad0[0x14];
+    M2C_UNK (*unk14)();
+};
+
+struct Unk_vt_func_000DA46C_arg0 {
+    u8 pad0[0x18];
+    M2C_UNK (*unk18)();
+};
+
+struct Unk_vt_func_000DA4B4_arg0 {
+    u8 pad0[0x20];
+    M2C_UNK (*unk20)();
+};
+
+struct Unk_vt_func_000DA4D8_arg0 {
+    u8 pad0[0x24];
+    M2C_UNK (*unk24)();
+};
+
+struct Unk_vt_func_000DA4FC_arg0 {
+    u8 pad0[0x28];
+    M2C_UNK (*unk28)();
+};
+
+struct Unk_vt_func_000DD9C8_temp_v0 {
+    u8 pad0[0xBC];
+    M2C_UNK (*unkBC)(void **, M2C_UNK, M2C_UNK);
+};
+
+struct Unk_vt_func_000EA4DC_temp_v0 {
+    u8 pad0[0x70];
+    M2C_UNK (*unk70)(void **, s32, s32);
+};
+
+struct Unk_vt_func_000EA528_temp_v0 {
+    u8 pad0[0x74];
+    M2C_UNK (*unk74)(void **, s32);
+};
+
+struct Unk_vt_func_000EA570_temp_v0 {
+    u8 pad0[0x78];
+    M2C_UNK (*unk78)(void **, s32, s32);
+};
+
+struct Unk_vt_func_000EEDD0_arg0 {
+    u8 pad0[0x60];
+    M2C_UNK (*unk60)(void **);
+};
+
+struct Unk_vt_func_000F6184_temp_v1 {
+    u8 pad0[0x84];
+    s32 (*unk84)(void **);
+};
+
+struct Unk_vt_func_000FC018_temp_v1 {
+    u8 pad0[0x84];
+    s32 (*unk84)(void **);
+};
+
+struct Unk_vt_func_000FCC8C_temp_a0 {
+    u8 pad0[0x28];
+    M2C_UNK (*unk28)(void **);
+};
+
+struct Unk_vt_scePaf_4EA868E6_temp_v1 {
+    u8 pad0[0x74];
+    s32 (*unk74)(void **);
+};
+
+struct Unk_vt_scePaf_C2E4423A_temp_v1 {
+    u8 pad0[0x7C];
+    s32 (*unk7C)(void **);
+};
+
 extern M2C_UNK D_0016EE58;
 extern M2C_UNK D_0016EE68;
 extern M2C_UNK D_0016EFE0;
@@ -4769,7 +4869,7 @@ M2C_UNK func_00058D4C(s32);
 void func_0005C0BC(struct Unk_func_0005C0BC_0 *arg0, s32 arg1);
 s32 func_0005C0E0(struct Unk_func_0005C0E0_0 *arg0);
 s32 func_0005C0E8(struct Unk_func_0005C0E8_0 *arg0);
-void func_0005C508(void **arg0, void **arg1);
+void func_0005C508(struct Unk_vt_func_0005C508_arg0 **arg0, struct Unk_vt_func_0005C508_arg1 **arg1);
 M2C_UNK func_0005CB58();
 s32 func_0005FEFC(s32 arg0);
 s32 func_0005FFE0(s32, s32, s32, s32);
@@ -5062,7 +5162,7 @@ M2C_UNK func_000C7198();
 s32 func_000C7280(s32, s32);
 s32 func_000C7294(void);
 s32 func_000C72A0(void);
-void func_000C754C(void **arg0);
+void func_000C754C(struct Unk_vt_func_000C754C_arg0 **arg0);
 M2C_UNK func_000C7708();
 M2C_UNK func_000C8AB8(M2C_UNK, M2C_UNK);
 void func_000C8B50(void);
@@ -5152,12 +5252,12 @@ void func_000DA234(struct Unk_func_000DA234_0 *arg0);
 void func_000DA250(struct Unk_func_000DA250_0 *arg0);
 void func_000DA284(struct Unk_func_000DA284_0 *arg0, s32 arg1);
 void func_000DA2AC(s32 arg0);
-void func_000DA424(void **arg0);
-void func_000DA448(void **arg0);
-void func_000DA46C(void **arg0);
-void func_000DA4B4(void **arg0);
-void func_000DA4D8(void **arg0);
-void func_000DA4FC(void **arg0);
+void func_000DA424(struct Unk_vt_func_000DA424_arg0 **arg0);
+void func_000DA448(struct Unk_vt_func_000DA448_arg0 **arg0);
+void func_000DA46C(struct Unk_vt_func_000DA46C_arg0 **arg0);
+void func_000DA4B4(struct Unk_vt_func_000DA4B4_arg0 **arg0);
+void func_000DA4D8(struct Unk_vt_func_000DA4D8_arg0 **arg0);
+void func_000DA4FC(struct Unk_vt_func_000DA4FC_arg0 **arg0);
 void func_000DA53C(s32 arg0);
 void func_000DA690(void);
 s32 func_000DA698(void);
@@ -5270,7 +5370,7 @@ void func_000EE370(struct Unk_func_000EE370_0 *arg0);
 void func_000EE3AC(struct Unk_func_000EE3AC_0 *arg0);
 s32 func_000EE950(s32 arg0, s32 arg1);
 s32 func_000EE97C(void);
-void func_000EEDD0(void **arg0);
+void func_000EEDD0(struct Unk_vt_func_000EEDD0_arg0 **arg0);
 s32 func_000EEFFC(struct Unk_func_000EEFFC_0 *arg0);
 M2C_UNK func_000EF13C(s32);
 s32 func_000EF208(s32 arg0, M2C_UNK arg1);

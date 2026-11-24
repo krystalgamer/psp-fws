@@ -44,7 +44,7 @@ void func_000ECF20(struct Unk_func_000ECF20_0 *arg0) {
     func_000EE55C(arg0);
 }
 
-s32 func_000ECF7C(void **arg0, s32 arg1) {
+s32 func_000ECF7C(struct Unk_vt_func_000ECF7C_arg0 **arg0, s32 arg1) {
     s32 temp_s0;
     s32 temp_v0;
     s32 var_v1;
@@ -54,7 +54,7 @@ s32 func_000ECF7C(void **arg0, s32 arg1) {
     var_v1 = 0;
     if (temp_v0 > 0) {
         func_000EE45C(arg0, arg1, temp_v0);
-        M2C_FIELD(*arg0, M2C_UNK (**)(void **, s32), 0x38)(arg0, temp_s0);
+        (*arg0)->unk38(arg0, temp_s0);
         func_000EC040(arg0, temp_s0, 0, 1);
         var_v1 = 1;
     }
@@ -194,12 +194,12 @@ void func_000EEF40(struct Unk_func_000EEF40_0 *arg0, s32 arg1) {
     arg0->unk88 = arg1;
 }
 
-void func_000EEF48(void **arg0, s32 arg1) {
-    M2C_FIELD(*arg0, s32 *, 0xB0) = arg1;
+void func_000EEF48(struct Unk_vt_func_000EEF48_arg0 **arg0, s32 arg1) {
+    (*arg0)->unkB0 = arg1;
 }
 
-s32 func_000EEF54(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0xB0);
+s32 func_000EEF54(struct Unk_vt_func_000EEF54_arg0 **arg0) {
+    return (*arg0)->unkB0;
 }
 
 s32 func_000EEF60(struct Unk_func_000EEF60_0 *arg0) {

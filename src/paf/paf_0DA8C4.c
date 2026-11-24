@@ -184,11 +184,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0DA8C4", scePaf_E5BAC873);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0DA8C4", scePaf_38876947);
 
 void func_000DD9C8(struct Unk_func_000DD9C8_0 *arg0) {
-    void **temp_v0;
+    struct Unk_vt_func_000DD9C8_temp_v0 **temp_v0;
 
     temp_v0 = arg0->unk3CC;
     if (temp_v0 != NULL) {
-        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0xBC)(temp_v0, 0, 0);
+        (*temp_v0)->unkBC(temp_v0, 0, 0);
     } else {
         func_000DDFC8((s32) arg0, 1);
     }

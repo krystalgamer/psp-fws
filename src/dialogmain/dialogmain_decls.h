@@ -30,6 +30,16 @@ struct Unk_func_00003660_0 {
     s32 unkEC;
 };
 
+struct Unk_vt_func_00001950_temp_v0 {
+    u8 pad0[0x70];
+    M2C_UNK (*unk70)(void **, M2C_UNK, M2C_UNK);
+};
+
+struct Unk_vt_func_00003FD4_temp_v0 {
+    u8 pad0[0xB0];
+    M2C_UNK (*unkB0)(void **, s32 *, M2C_UNK);
+};
+
 extern M2C_UNK D_00008858;
 extern M2C_UNK D_00008870;
 extern M2C_UNK D_00008D60;

@@ -526,6 +526,26 @@ struct Unk_sceSsl_lib_EF5A4BD4_0 {
     s32 unkB8;
 };
 
+struct Unk_vt_func_0000E280_arg0 {
+    u8 pad0[0x14];
+    M2C_UNK (*unk14)();
+};
+
+struct Unk_vt_func_0000EDC4_arg0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
+struct Unk_vt_func_0000EDF0_arg0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_vt_sceSsl_lib_0FD2F220_arg0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
 extern M2C_UNK D_0002A698;
 extern M2C_UNK D_0002D95C;
 extern M2C_UNK D_0002E3BC;
@@ -601,15 +621,15 @@ void func_0000DE0C(s32 arg0);
 void func_0000DE28(void);
 s32 func_0000DF3C(void);
 s32 func_0000DF44(void);
-void func_0000E280(void **arg0);
+void func_0000E280(struct Unk_vt_func_0000E280_arg0 **arg0);
 s32 func_0000EAB0(s32 arg0);
 s32 func_0000EDBC(struct Unk_func_0000EDBC_0 *arg0);
-s32 func_0000EDC4(void **arg0);
+s32 func_0000EDC4(struct Unk_vt_func_0000EDC4_arg0 **arg0);
 s32 func_0000EDD0(s32 *arg0);
 s32 func_0000EDD8(struct Unk_func_0000EDD8_0 *arg0);
 s32 func_0000EDE0(struct Unk_func_0000EDE0_0 *arg0);
 s32 func_0000EDE8();
-s32 func_0000EDF0(void **arg0);
+s32 func_0000EDF0(struct Unk_vt_func_0000EDF0_arg0 **arg0);
 s32 func_0000EDFC(struct Unk_func_0000EDFC_0 *arg0);
 void func_0000EE18(struct Unk_func_0000EE18_0 *arg0, s32 arg1);
 s32 func_0000EE20(struct Unk_func_0000EE20_0 *arg0);
@@ -745,7 +765,7 @@ void sceSsl_lib_04E677AF(void);
 void sceSsl_lib_067173A8(struct Unk_sceSsl_lib_067173A8_0 *arg0);
 void *sceSsl_lib_0861D934(M2C_UNK);
 s32 sceSsl_lib_089FF1F1(struct Unk_sceSsl_lib_089FF1F1_0 *arg0);
-s32 sceSsl_lib_0FD2F220(void **arg0);
+s32 sceSsl_lib_0FD2F220(struct Unk_vt_sceSsl_lib_0FD2F220_arg0 **arg0);
 M2C_UNK sceSsl_lib_101D418A();
 s32 sceSsl_lib_104F749D(struct Unk_sceSsl_lib_104F749D_0 *arg0);
 s32 sceSsl_lib_19A0DB42(s32 **arg0);

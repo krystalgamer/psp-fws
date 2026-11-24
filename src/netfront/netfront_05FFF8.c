@@ -420,8 +420,8 @@ void func_00068BC0(struct Unk_func_00068BC0_0 *arg0) {
 void func_00068BC8(void) {
 }
 
-void func_00068BD0(void **arg0, s32 arg1) {
-    M2C_FIELD(*arg0, s32 *, 0xC0) = arg1;
+void func_00068BD0(struct Unk_vt_func_00068BD0_arg0 **arg0, s32 arg1) {
+    (*arg0)->unkC0 = arg1;
 }
 
 void func_00068BDC(struct Unk_func_00068BDC_0 *arg0, struct Unk_func_00068BDC_1 *arg1) {
@@ -457,8 +457,8 @@ void func_00068C6C(void **arg0) {
     temp_s0->unkC8 = 6;
 }
 
-void func_00068CC4(void **arg0, s32 arg1) {
-    M2C_FIELD(*arg0, s32 *, 0x4C) = arg1;
+void func_00068CC4(struct Unk_vt_func_00068CC4_arg0 **arg0, s32 arg1) {
+    (*arg0)->unk4C = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_00068CD0);
@@ -471,12 +471,12 @@ s32 func_00068CF0(s32 *arg0, s32 arg1) {
     return M2C_FIELD(((arg1 * 4) + *arg0), s32 *, 0x50);
 }
 
-void func_00068D04(void **arg0, s32 arg1) {
-    M2C_FIELD(*arg0, s32 *, 0x78) = arg1;
+void func_00068D04(struct Unk_vt_func_00068D04_arg0 **arg0, s32 arg1) {
+    (*arg0)->unk78 = arg1;
 }
 
-void func_00068D10(void **arg0, s32 arg1) {
-    M2C_FIELD(*arg0, s32 *, 0xE0) = arg1;
+void func_00068D10(struct Unk_vt_func_00068D10_arg0 **arg0, s32 arg1) {
+    (*arg0)->unkE0 = arg1;
 }
 
 s32 func_00068D1C(struct Unk_func_00068D1C_0 *arg0) {
@@ -565,9 +565,9 @@ void func_000693F0(void **arg0) {
     }
 }
 
-void func_00069440(struct Unk_func_00069440_0 *arg0, void **arg1, s32 arg2) {
+void func_00069440(struct Unk_func_00069440_0 *arg0, struct Unk_vt_func_00069440_arg1 **arg1, s32 arg2) {
     if (arg1 != NULL) {
-        M2C_FIELD(*arg1, s32 *, 0xEC) = arg2;
+        (*arg1)->unkEC = arg2;
         return;
     }
     arg0->unk17C4 = arg2;
@@ -1408,13 +1408,13 @@ void func_000758DC(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_00075904);
 
-s32 func_000759A8(void **arg0) {
-    sceHVNetfront_Module_9716DAAD(M2C_FIELD(*arg0, void ****, 0x1C), 4);
+s32 func_000759A8(struct Unk_vt_func_000759A8_arg0 **arg0) {
+    sceHVNetfront_Module_9716DAAD((*arg0)->unk1C, 4);
     return 6;
 }
 
-s32 func_000759D0(void **arg0) {
-    sceHVNetfront_Module_5D4D03A3(M2C_FIELD(*arg0, s32 *, 0x1C));
+s32 func_000759D0(struct Unk_vt_func_000759D0_arg0 **arg0) {
+    sceHVNetfront_Module_5D4D03A3((*arg0)->unk1C);
     return 7;
 }
 

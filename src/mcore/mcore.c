@@ -1370,11 +1370,11 @@ s32 func_00016A90(void **arg0, s32 arg1, s32 arg2) {
     return var_v0;
 }
 
-s32 func_00016ADC(void **arg0, M2C_UNK arg1) {
+s32 func_00016ADC(struct Unk_vt_func_00016ADC_arg0 **arg0, M2C_UNK arg1) {
     s32 var_v0;
     void *temp_v0;
 
-    temp_v0 = func_00002828(arg1, M2C_FIELD(*arg0, s32 *, 4));
+    temp_v0 = func_00002828(arg1, (*arg0)->unk4);
     var_v0 = 2;
     if (temp_v0 != NULL) {
         func_00002900(*arg0);

@@ -137,10 +137,10 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_00066DB4);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_00066E10);
 
-void func_00066E74(void **arg0) {
+void func_00066E74(struct Unk_vt_func_00066E74_arg0 **arg0) {
     sceGumMatrixMode(2);
     sceGumLoadIdentity();
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **), 0x60)(arg0);
+    (*arg0)->unk60(arg0);
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_00066EB4);

@@ -188,12 +188,12 @@ s32 func_0009CD50(s32 arg0) {
 
 s32 func_0009CD58(struct Unk_func_0009CD58_0 *arg0) {
     s32 var_s1;
-    void **temp_v0;
+    struct Unk_vt_func_0009CD58_temp_v0 **temp_v0;
 
     var_s1 = 0;
     temp_v0 = func_000000E8(arg0->unkFFC->unk4);
-    if ((temp_v0 != NULL) && (M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0) != 0)) {
-        var_s1 = M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0);
+    if ((temp_v0 != NULL) && ((*temp_v0)->unk8(temp_v0) != 0)) {
+        var_s1 = (*temp_v0)->unk8(temp_v0);
     }
     return var_s1;
 }

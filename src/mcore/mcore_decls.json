@@ -84,7 +84,7 @@
   "func_00014E18": "s32 func_00014E18(s32, s32, s32, s32);",
   "func_0001503C": "void func_0001503C(s32 arg0, struct Unk_func_0001503C_1 *arg1, s32 arg2, s32 arg3);",
   "func_00016A90": "s32 func_00016A90(void **arg0, s32 arg1, s32 arg2);",
-  "func_00016ADC": "s32 func_00016ADC(void **arg0, M2C_UNK arg1);",
+  "func_00016ADC": "s32 func_00016ADC(struct Unk_vt_func_00016ADC_arg0 **arg0, M2C_UNK arg1);",
   "func_0001726C": "void func_0001726C(void);",
   "func_000173D8": "M2C_UNK func_000173D8(void *);",
   "func_000174CC": "s32 func_000174CC(void **arg0);",
@@ -173,7 +173,7 @@
   "func_000228C8": "s32 func_000228C8(s32, s32, s32);",
   "func_00022998": "s32 func_00022998(s32 *arg0, u32 arg1, u32 arg2);",
   "func_00023790": "s32 func_00023790(s32, s32);",
-  "func_00023810": "void func_00023810(void **arg0, s32 arg1);",
+  "func_00023810": "void func_00023810(struct Unk_vt_func_00023810_arg0 **arg0, s32 arg1);",
   "func_0002385C": "s32 func_0002385C(struct Unk_func_0002385C_0 *arg0);",
   "func_00023868": "s32 func_00023868(s32, s32);",
   "func_00023EBC": "s32 func_00023EBC(s32, s32);",
@@ -191,8 +191,8 @@
   "func_000255B4": "void func_000255B4(s32 arg0, s32 arg1, s32 arg2);",
   "func_000257C8": "s32 func_000257C8(s32, s32, s32, s32);",
   "func_000260C0": "void func_000260C0(struct Unk_func_000260C0_0 *arg0);",
-  "func_000260DC": "void func_000260DC(void **arg0, void *arg1, s32 arg2);",
-  "func_00026278": "void func_00026278(void **arg0, s32 arg1);",
+  "func_000260DC": "void func_000260DC(struct Unk_vt_func_000260DC_arg0 **arg0, void *arg1, s32 arg2);",
+  "func_00026278": "void func_00026278(struct Unk_vt_func_00026278_arg0 **arg0, s32 arg1);",
   "func_00026BE0": "s32 func_00026BE0(s32, s32, s32);",
   "func_00026E04": "void func_00026E04(s32 arg0, s32 arg1);",
   "func_00026E24": "void func_00026E24(s32 arg0, s32 arg1);",
@@ -267,7 +267,11 @@
   "Unk_func_00024014_0": "struct Unk_func_00024014_0 {\n    u8 pad0[0x1];\n    u8 unk1;\n};",
   "Unk_func_000248B0_0": "struct Unk_func_000248B0_0 {\n    u8 pad0[0x1];\n    u8 unk1;\n};",
   "Unk_func_000248B0_1": "struct Unk_func_000248B0_1 {\n    u8 pad0[0x1];\n    u8 unk1;\n};",
-  "Unk_func_000260C0_0": "struct Unk_func_000260C0_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};"
+  "Unk_func_000260C0_0": "struct Unk_func_000260C0_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
+  "Unk_vt_func_00016ADC_arg0": "struct Unk_vt_func_00016ADC_arg0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
+  "Unk_vt_func_00023810_arg0": "struct Unk_vt_func_00023810_arg0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
+  "Unk_vt_func_000260DC_arg0": "struct Unk_vt_func_000260DC_arg0 {\n    u8 pad0[0x2];\n    u16 unk2;\n};",
+  "Unk_vt_func_00026278_arg0": "struct Unk_vt_func_00026278_arg0 {\n    u8 pad0[0x2];\n    u16 unk2;\n};"
  },
  "vars": {
   "D_0002DC50": "extern M2C_UNK D_0002DC50;"

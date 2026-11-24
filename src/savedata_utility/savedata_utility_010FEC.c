@@ -484,7 +484,7 @@ INCLUDE_RODATA("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_010FE
 
 INCLUDE_RODATA("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_010FEC", D_0002519C);
 
-void func_00014824(s32 arg0, void **arg1, s32 arg2) {
+void func_00014824(s32 arg0, struct Unk_vt_func_00014824_arg1 **arg1, s32 arg2) {
     struct Unk_func_00014824_sp0 *sp0;
     s32 temp_s0;
     s32 temp_v0;
@@ -494,7 +494,7 @@ void func_00014824(s32 arg0, void **arg1, s32 arg2) {
 
     func_0000AC4C(&sp0, 0);
     temp_s0 = arg2 << 0x10;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 1);
+    (*arg1)->unkAC(arg1, &sp0, temp_s0 | 1);
     if (sp0 != NULL) {
         temp_v0 = sp0->unk4 - 1;
         sp0->unk4 = temp_v0;
@@ -505,7 +505,7 @@ void func_00014824(s32 arg0, void **arg1, s32 arg2) {
         }
     }
     scePaf_DC2CA0F7(&sp0, arg0, "tex_broken_data");
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0);
+    (*arg1)->unkAC(arg1, &sp0, temp_s0);
     if (sp0 != NULL) {
         temp_v0_2 = sp0->unk4 - 1;
         sp0->unk4 = temp_v0_2;
@@ -516,7 +516,7 @@ void func_00014824(s32 arg0, void **arg1, s32 arg2) {
         }
     }
     scePaf_DC2CA0F7(&sp0, arg0, "tex_broken_data_f");
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 7);
+    (*arg1)->unkAC(arg1, &sp0, temp_s0 | 7);
     if (sp0 != NULL) {
         temp_v0_3 = sp0->unk4 - 1;
         sp0->unk4 = temp_v0_3;
@@ -527,7 +527,7 @@ void func_00014824(s32 arg0, void **arg1, s32 arg2) {
         }
     }
     scePaf_DC2CA0F7(&sp0, arg0, "tex_broken_data_s");
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 0xE);
+    (*arg1)->unkAC(arg1, &sp0, temp_s0 | 0xE);
     if (sp0 != NULL) {
         temp_v0_4 = sp0->unk4 - 1;
         sp0->unk4 = temp_v0_4;

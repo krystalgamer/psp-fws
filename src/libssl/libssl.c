@@ -512,8 +512,8 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000E160);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000E19C);
 
-void func_0000E280(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x14)();
+void func_0000E280(struct Unk_vt_func_0000E280_arg0 **arg0) {
+    (*arg0)->unk14();
 }
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000E2A4);
@@ -552,8 +552,8 @@ s32 func_0000EDBC(struct Unk_func_0000EDBC_0 *arg0) {
     return arg0->unk8;
 }
 
-s32 func_0000EDC4(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 8);
+s32 func_0000EDC4(struct Unk_vt_func_0000EDC4_arg0 **arg0) {
+    return (*arg0)->unk8;
 }
 
 s32 func_0000EDD0(s32 *arg0) {
@@ -570,8 +570,8 @@ s32 func_0000EDE0(struct Unk_func_0000EDE0_0 *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000EDE8);
 
-s32 func_0000EDF0(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 4);
+s32 func_0000EDF0(struct Unk_vt_func_0000EDF0_arg0 **arg0) {
+    return (*arg0)->unk4;
 }
 
 s32 func_0000EDFC(struct Unk_func_0000EDFC_0 *arg0) {
@@ -840,8 +840,8 @@ s32 sceSsl_lib_558CAA41(struct Unk_sceSsl_lib_558CAA41_0 *arg0) {
     return arg0->unk4;
 }
 
-s32 sceSsl_lib_0FD2F220(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 4);
+s32 sceSsl_lib_0FD2F220(struct Unk_vt_sceSsl_lib_0FD2F220_arg0 **arg0) {
+    return (*arg0)->unk4;
 }
 
 s32 sceSsl_lib_19A0DB42(s32 **arg0) {

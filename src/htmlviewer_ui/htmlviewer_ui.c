@@ -2693,8 +2693,8 @@ s32 func_00016C34(void) {
     return 0;
 }
 
-s32 func_00016C3C(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0xC0);
+s32 func_00016C3C(struct Unk_vt_func_00016C3C_arg0 **arg0) {
+    return (*arg0)->unkC0;
 }
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00016C48);
@@ -2717,8 +2717,8 @@ void func_00016CF0(s32 *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00016D48);
 
-s32 func_00016F20(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0xBC);
+s32 func_00016F20(struct Unk_vt_func_00016F20_arg0 **arg0) {
+    return (*arg0)->unkBC;
 }
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00016F2C);
@@ -3371,8 +3371,8 @@ void func_0001D304(s32 arg0) {
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
-s32 func_0001D344(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0xCC);
+s32 func_0001D344(struct Unk_vt_func_0001D344_arg0 **arg0) {
+    return (*arg0)->unkCC;
 }
 
 void func_0001D350(s32 arg0, s32 arg1, s32 arg2) {
@@ -3825,8 +3825,8 @@ s32 func_00020AE8(void) {
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00020AF0);
 
-s32 func_00020D04(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0xC0);
+s32 func_00020D04(struct Unk_vt_func_00020D04_arg0 **arg0) {
+    return (*arg0)->unkC0;
 }
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00020D10);
@@ -3851,8 +3851,8 @@ void func_0002128C(s32 arg0) {
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
-s32 func_000212CC(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0x120);
+s32 func_000212CC(struct Unk_vt_func_000212CC_arg0 **arg0) {
+    return (*arg0)->unk120;
 }
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000212D8);

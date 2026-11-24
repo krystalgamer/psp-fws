@@ -75,6 +75,11 @@ struct Unk_func_00006160_0 {
     s32 unk8;
 };
 
+struct Unk_vt_func_0000086C_temp_v0 {
+    u8 pad0[0x70];
+    M2C_UNK (*unk70)(void **, M2C_UNK, M2C_UNK);
+};
+
 extern M2C_UNK D_00007520;
 extern M2C_UNK D_000075BC;
 extern M2C_UNK D_00007788;

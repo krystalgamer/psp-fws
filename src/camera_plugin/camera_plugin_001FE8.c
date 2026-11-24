@@ -611,9 +611,9 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_
 
 void func_00005918(void) {
     if (func_0000241C() == 0) {
-        M2C_FIELD(*D_00166ACC, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_00166ACC, 7, 0xD, 1);
-        M2C_FIELD(*D_00166ACC, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_00166ACC, 1, 0xD, 1);
-        M2C_FIELD(*D_00166ACC, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_00166ACC, 2, 0xD, 1);
+        (*D_00166ACC)->unk7C(D_00166ACC, 7, 0xD, 1);
+        (*D_00166ACC)->unk7C(D_00166ACC, 1, 0xD, 1);
+        (*D_00166ACC)->unk7C(D_00166ACC, 2, 0xD, 1);
     }
     scePaf_648CA0C5();
 }
@@ -623,9 +623,9 @@ void func_000059AC(void) {
 
     } else {
         scePaf_0CFD27E9();
-        M2C_FIELD(*D_00166ACC, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_00166ACC, 7, 0xD, 0);
-        M2C_FIELD(*D_00166ACC, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_00166ACC, 1, 0xD, 0);
-        M2C_FIELD(*D_00166ACC, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_00166ACC, 2, 0xD, 0);
+        (*D_00166ACC)->unk7C(D_00166ACC, 7, 0xD, 0);
+        (*D_00166ACC)->unk7C(D_00166ACC, 1, 0xD, 0);
+        (*D_00166ACC)->unk7C(D_00166ACC, 2, 0xD, 0);
         scePaf_3EDD45EF(0, &func_0000586C, D_00166AD8, -1, -1, func_00005918);
     }
 }
@@ -642,7 +642,7 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_
 
 void func_00005D48(s32 arg0) {
     scePaf_0BF42D26(arg0, func_0000EBC4(func_0000BD64()));
-    M2C_FIELD(*D_00166AD0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0xBC)(D_00166AD0, 0, 0);
+    (*D_00166AD0)->unkBC(D_00166AD0, 0, 0);
     sceVshCommonGui_4D99D0C1(0);
     D_00166AD4 = 0;
 }
@@ -1132,11 +1132,11 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_0000ABF4);
 
 s32 func_0000ACC0(void) {
-    return M2C_FIELD(*D_00166C30, s32 (**)(void **), 0x18)(D_00166C30);
+    return (*D_00166C30)->unk18(D_00166C30);
 }
 
 void func_0000ACEC(void) {
-    M2C_FIELD(*D_00166C30, M2C_UNK (**)(void **), 8)(D_00166C30);
+    (*D_00166C30)->unk8(D_00166C30);
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_0000AD18);

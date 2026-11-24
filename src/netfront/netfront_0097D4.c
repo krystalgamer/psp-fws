@@ -3226,28 +3226,28 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_M
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_4AF43191);
 
-s32 sceHVNetfront_Module_9D42259B(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 8);
+s32 sceHVNetfront_Module_9D42259B(struct Unk_vt_sceHVNetfront_Module_9D42259B_arg0 **arg0) {
+    return (*arg0)->unk8;
 }
 
-s32 func_00036FCC(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0xC);
+s32 func_00036FCC(struct Unk_vt_func_00036FCC_arg0 **arg0) {
+    return (*arg0)->unkC;
 }
 
-s32 func_00036FD8(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0x1C);
+s32 func_00036FD8(struct Unk_vt_func_00036FD8_arg0 **arg0) {
+    return (*arg0)->unk1C;
 }
 
-s32 sceHVNetfront_Module_BA0F8BF7(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0x10);
+s32 sceHVNetfront_Module_BA0F8BF7(struct Unk_vt_sceHVNetfront_Module_BA0F8BF7_arg0 **arg0) {
+    return (*arg0)->unk10;
 }
 
-s32 sceHVNetfront_Module_6C319E19(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 0x14);
+s32 sceHVNetfront_Module_6C319E19(struct Unk_vt_sceHVNetfront_Module_6C319E19_arg0 **arg0) {
+    return (*arg0)->unk14;
 }
 
-s32 func_00036FFC(void **arg0) {
-    return M2C_FIELD(*arg0, s32 *, 4);
+s32 func_00036FFC(struct Unk_vt_func_00036FFC_arg0 **arg0) {
+    return (*arg0)->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037008);

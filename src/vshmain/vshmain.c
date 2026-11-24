@@ -2269,13 +2269,13 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0001EB14);
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0001EB90);
 
 void func_0001EBF0(void) {
-    void **temp_v0;
+    struct Unk_vt_func_0001EBF0_temp_v0 **temp_v0;
     void **temp_v0_2;
 
     temp_v0 = scePaf_4708AED4(D_000308B8, &D_0002ACEC);
     if (temp_v0 != NULL) {
-        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 0x19, 3);
-        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 7, 0x10);
+        (*temp_v0)->unk70(temp_v0, 0x19, 3);
+        (*temp_v0)->unk70(temp_v0, 7, 0x10);
     }
     temp_v0_2 = scePaf_4708AED4(D_000308B8, &D_0002AD04);
     if (temp_v0_2 != NULL) {
@@ -2655,12 +2655,12 @@ u8 func_00021290(void) {
 }
 
 s32 *func_0002129C(s32 *arg0) {
-    void **temp_v0;
+    struct Unk_vt_func_0002129C_temp_v0 **temp_v0;
 
     func_00009464(arg0, 0);
     temp_v0 = scePaf_4708AED4(D_000308BC, &D_0002B25C);
     if (temp_v0 != NULL) {
-        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xB0)(temp_v0, arg0, 0);
+        (*temp_v0)->unkB0(temp_v0, arg0, 0);
     }
     return arg0;
 }

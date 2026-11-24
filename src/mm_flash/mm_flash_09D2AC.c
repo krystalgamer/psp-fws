@@ -1,8 +1,8 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-void func_0009D2AC(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(), 8)();
+void func_0009D2AC(struct Unk_vt_func_0009D2AC_arg0 **arg0) {
+    (*arg0)->unk8();
 }
 
 void func_0009D2D0(struct Unk_func_000884D0_0 *arg0, s32 arg1, s32 arg2) {
@@ -31,8 +31,8 @@ void func_0009D324(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09D2AC", func_0009D344);
 
-void func_0009D368(void **arg0) {
-    M2C_FIELD(*arg0, M2C_UNK (**)(void **, s32), 0x3C)(arg0, func_00079454());
+void func_0009D368(struct Unk_vt_func_0009D368_arg0 **arg0) {
+    (*arg0)->unk3C(arg0, func_00079454());
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09D2AC", func_0009D3A0);
