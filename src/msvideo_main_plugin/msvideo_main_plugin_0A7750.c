@@ -53,19 +53,19 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0A
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0A7750", func_000A8C50);
 
-s32 func_000A8C58(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x18);
+s32 func_000A8C58(struct Unk_func_000A8C58_0 *arg0) {
+    return arg0->unk18;
 }
 
-void func_000A8C60(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x18) = arg1;
+void func_000A8C60(struct Unk_func_000A8C60_0 *arg0, s32 arg1) {
+    arg0->unk18 = arg1;
 }
 
-s32 func_000A8C68(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_000A8C68(struct Unk_func_000A8C68_0 *arg0) {
+    return arg0->unk1C;
 }
 
-void func_000A8C70(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
+void func_000A8C70(struct Unk_func_000A8C70_0 *arg0, s32 arg1) {
+    arg0->unk1C = arg1;
 }
 

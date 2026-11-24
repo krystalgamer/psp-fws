@@ -192,7 +192,7 @@ s32 func_00039618(s32 arg0) {
     return var_v1;
 }
 
-s32 func_00039644(void *arg0, s32 *arg1) {
+s32 func_00039644(struct Unk_func_00039644_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -212,7 +212,7 @@ s32 func_00039670(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return var_v1;
 }
 
-s32 func_0003969C(void *arg0, s32 *arg1) {
+s32 func_0003969C(struct Unk_func_0003969C_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -232,7 +232,7 @@ s32 func_000396C8(s32 arg0) {
     return var_v1;
 }
 
-s32 func_000396F4(void *arg0, s32 *arg1) {
+s32 func_000396F4(struct Unk_func_000396F4_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -262,7 +262,7 @@ s32 func_0003974C(s32 arg0, s32 arg1) {
     return var_v1;
 }
 
-s32 func_00039778(void *arg0, s32 *arg1) {
+s32 func_00039778(struct Unk_func_00039778_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -312,7 +312,7 @@ s32 func_00039828(s32 arg0) {
     return var_v1;
 }
 
-s32 func_00039854(void *arg0, s32 arg1) {
+s32 func_00039854(struct Unk_func_00039854_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -372,7 +372,7 @@ s32 func_0003993C(s32 arg0, s32 arg1, s32 arg2) {
     return var_v1;
 }
 
-s32 func_0003996C(void *arg0, s32 *arg1) {
+s32 func_0003996C(struct Unk_func_0003996C_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -404,7 +404,7 @@ s32 func_000399C4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_038F84", func_000399F0);
 
-s32 func_00039A48(void *arg0, s32 arg1) {
+s32 func_00039A48(struct Unk_func_00039A48_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 4;

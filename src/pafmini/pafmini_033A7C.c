@@ -2,32 +2,32 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-void func_00033A7C(void *arg0) {
-    M2C_FIELD(arg0, void **, 4) = arg0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
+void func_00033A7C(struct Unk_func_00033A7C_0 *arg0) {
+    arg0->unk4 = arg0;
+    arg0->unk0 = 0;
 }
 
-void func_00033A88(void *arg0, M2C_UNK *arg1) {
+void func_00033A88(struct Unk_func_00033A88_0 *arg0, M2C_UNK *arg1) {
     M2C_UNK *temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, M2C_UNK **, 4);
-    M2C_FIELD(arg0, M2C_UNK **, 4) = arg1;
+    temp_v1 = arg0->unk4;
+    arg0->unk4 = arg1;
     *arg1 = *temp_v1;
     *temp_v1 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_033A7C", func_00033AA0);
 
-void func_00033AC0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+void func_00033AC0(struct Unk_func_00033AC0_0 *arg0, s32 arg1) {
+    arg0->unk4 = arg1;
 }
 
-s32 func_00033AC8(void *arg0) {
+s32 func_00033AC8(struct Unk_func_00033AC8_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 4);
+        var_v0 = arg0->unk4;
     }
     return var_v0;
 }

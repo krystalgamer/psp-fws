@@ -2,12 +2,12 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-void func_00111AB8(void *arg0, void *arg1) {
+void func_00111AB8(struct Unk_func_00111AB8_0 *arg0, struct Unk_func_00111AB8_1 *arg1) {
     void **temp_v0;
 
     if (arg1 != NULL) {
-        temp_v0 = (M2C_FIELD(arg1, s32 *, 4) * 4) + M2C_FIELD(arg0, s32 *, 0x4C);
-        M2C_FIELD(arg1, void **, 0) = (void *) *temp_v0;
+        temp_v0 = (arg1->unk4 * 4) + arg0->unk4C;
+        arg1->unk0 = (void *) *temp_v0;
         *temp_v0 = arg1;
     }
 }
@@ -56,8 +56,8 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_0011321C);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_001132A8);
 
-void func_00113320(void *arg0) {
-    func_001134E8(func_0010BB64(), M2C_FIELD(arg0, s16 *, 0xE));
+void func_00113320(struct Unk_func_00113320_0 *arg0) {
+    func_001134E8(func_0010BB64(), arg0->unkE);
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_00113350);

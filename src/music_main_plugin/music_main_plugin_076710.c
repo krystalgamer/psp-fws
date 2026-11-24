@@ -2,12 +2,12 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-s32 func_00076710(void *arg0) {
+s32 func_00076710(struct Unk_func_00076710_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 4;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x6C);
+    temp_v0 = arg0->unk6C;
     if (temp_v0 != 0) {
         func_0008CFCC(temp_v0);
         var_v1 = 0;

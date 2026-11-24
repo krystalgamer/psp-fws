@@ -2,37 +2,37 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-void func_0000CC38(void *arg0) {
+void func_0000CC38(struct Unk_func_0000CC38_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    if (M2C_FIELD(arg0, u8 *, 0x1C) == 0) {
-        temp_v1 = M2C_FIELD(arg0, s32 *, 0x14);
-        M2C_FIELD(arg0, u8 *, 0x1C) = 1U;
-        M2C_FIELD(arg0, s32 *, 0x18) = temp_v1;
+    if (arg0->unk1C == 0) {
+        temp_v1 = arg0->unk14;
+        arg0->unk1C = 1U;
+        arg0->unk18 = temp_v1;
         if (temp_v1 > 0) {
             do {
                 scePaf_66907719();
-                temp_v0 = M2C_FIELD(arg0, s32 *, 0x14) - 1;
-                M2C_FIELD(arg0, s32 *, 0x14) = temp_v0;
+                temp_v0 = arg0->unk14 - 1;
+                arg0->unk14 = temp_v0;
             } while (temp_v0 > 0);
         }
     }
 }
 
-void func_0000CC8C(void *arg0) {
+void func_0000CC8C(struct Unk_func_0000CC8C_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
 
-    if (M2C_FIELD(arg0, u8 *, 0x1C) != 0) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 0x18);
-        M2C_FIELD(arg0, u8 *, 0x1C) = 0U;
-        M2C_FIELD(arg0, s32 *, 0x14) = temp_v0;
+    if (arg0->unk1C != 0) {
+        temp_v0 = arg0->unk18;
+        arg0->unk1C = 0U;
+        arg0->unk14 = temp_v0;
         if (temp_v0 > 0) {
             do {
                 scePaf_6B1E90C7();
-                temp_v0_2 = M2C_FIELD(arg0, s32 *, 0x18) - 1;
-                M2C_FIELD(arg0, s32 *, 0x18) = temp_v0_2;
+                temp_v0_2 = arg0->unk18 - 1;
+                arg0->unk18 = temp_v0_2;
             } while (temp_v0_2 > 0);
         }
     }

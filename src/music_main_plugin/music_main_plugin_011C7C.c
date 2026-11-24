@@ -221,7 +221,7 @@ s32 *func_000157C4(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
     return arg0;
 }
 
-void ***func_000157FC(void ***arg0, void *arg1, void **arg2) {
+void ***func_000157FC(void ***arg0, struct Unk_func_000157FC_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_v1;
 
@@ -231,7 +231,7 @@ void ***func_000157FC(void ***arg0, void *arg1, void **arg2) {
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1);
     *arg0 = temp_s0;
-    M2C_FIELD(arg1, s32 *, 4) = (s32) (M2C_FIELD(arg1, s32 *, 4) - 1);
+    arg1->unk4 = (s32) (arg1->unk4 - 1);
     return arg0;
 }
 
@@ -288,10 +288,10 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011C7C
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011C7C", func_00016564);
 
-void func_00016580(void *arg0) {
+void func_00016580(struct Unk_func_00016580_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x10);
+    temp_v0 = arg0->unk10;
     if (temp_v0 != 0) {
         scePaf_B3D2C3BB(temp_v0);
     }
@@ -299,10 +299,10 @@ void func_00016580(void *arg0) {
     func_00016B20(arg0);
 }
 
-void func_000165CC(void *arg0) {
+void func_000165CC(struct Unk_func_000165CC_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x10);
+    temp_v0 = arg0->unk10;
     if (temp_v0 != 0) {
         scePaf_B3D2C3BB(temp_v0);
     }
@@ -326,57 +326,57 @@ INCLUDE_RODATA("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011C7C", func_00016E18);
 
-s32 func_00017100(void *arg0) {
+s32 func_00017100(struct Unk_func_00017100_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 0;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0 = arg0->unk8;
     if (temp_v0 != 0) {
         var_v1 = sceIoClose(temp_v0);
     }
     return var_v1;
 }
 
-s32 func_00017138(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_00017138(struct Unk_func_00017138_0 *arg0) {
+    return arg0->unk10;
 }
 
-s32 func_00017140(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_00017140(struct Unk_func_00017140_0 *arg0) {
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011C7C", func_00017148);
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011C7C", func_000171E4);
 
-void func_00017280(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009B818;
+void func_00017280(struct Unk_func_00017280_0 *arg0) {
+    arg0->unk0 = &D_0009B818;
     func_00018594();
-    sceKernelDeleteSema(M2C_FIELD(arg0, u32 *, 0x90));
+    sceKernelDeleteSema(arg0->unk90);
     func_0001B730((s32) arg0);
 }
 
-void func_000172C0(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009B818;
+void func_000172C0(struct Unk_func_000172C0_0 *arg0) {
+    arg0->unk0 = &D_0009B818;
     func_00018594();
-    sceKernelDeleteSema(M2C_FIELD(arg0, u32 *, 0x90));
+    sceKernelDeleteSema(arg0->unk90);
     func_0001B730((s32) arg0);
 }
 
-void func_00017300(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009B818;
+void func_00017300(struct Unk_func_00017300_0 *arg0) {
+    arg0->unk0 = &D_0009B818;
     func_00018594();
-    sceKernelDeleteSema(M2C_FIELD(arg0, u32 *, 0x90));
+    sceKernelDeleteSema(arg0->unk90);
     func_0001B730((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011C7C", func_00017348);
 
-void func_00017E70(void *arg0) {
+void func_00017E70(struct Unk_func_00017E70_0 *arg0) {
     func_00018594();
-    M2C_FIELD(arg0, s32 *, 0x54) = 0;
+    arg0->unk54 = 0;
     func_0001B810(arg0);
 }
 
@@ -557,8 +557,8 @@ void func_00019760(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-s32 func_00019788(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_00019788(struct Unk_func_00019788_0 *arg0) {
+    return arg0->unkC;
 }
 
 void func_00019790(M2C_UNK **arg0) {

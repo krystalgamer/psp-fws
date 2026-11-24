@@ -26,13 +26,13 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_08
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_081074", func_000815B8);
 
-s32 func_000815F8(void *arg0, s32 *arg1) {
+s32 func_000815F8(struct Unk_func_000815F8_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 0x2002;
     if (arg0 != NULL) {
         var_v1 = 0;
-        *arg1 = M2C_FIELD(arg0, s32 *, 0x20);
+        *arg1 = arg0->unk20;
     }
     return var_v1;
 }
@@ -41,14 +41,14 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_08
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_081074", func_00081670);
 
-s32 func_0008174C(void *arg0, u32 arg1, u32 arg2, s32 arg3) {
+s32 func_0008174C(struct Unk_func_0008174C_0 *arg0, u32 arg1, u32 arg2, s32 arg3) {
     s32 var_v1;
 
     var_v1 = 0x5001;
     if (arg0 != NULL) {
         var_v1 = 0x500A;
-        if (((arg1 >= (u32) M2C_FIELD(arg0, u32 *, 0xC)) | (arg2 >= 3U)) == 0) {
-            var_v1 = (func_000A398C(M2C_FIELD(arg0, s32 *, 0x10), (s32) arg1, (s32) arg2, arg3) == 0) ? 0 : 0x5001;
+        if (((arg1 >= (u32) arg0->unkC) | (arg2 >= 3U)) == 0) {
+            var_v1 = (func_000A398C(arg0->unk10, (s32) arg1, (s32) arg2, arg3) == 0) ? 0 : 0x5001;
         }
     }
     return var_v1;

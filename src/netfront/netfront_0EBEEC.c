@@ -6,9 +6,9 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EBEEC", func_000EBEEC);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EBEEC", func_000EBEF8);
 
-void func_000EBFFC(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0x40) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x3C) = arg1;
+void func_000EBFFC(struct Unk_func_000EBFFC_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk40 = arg2;
+    arg0->unk3C = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EBEEC", func_000EC008);
@@ -21,12 +21,12 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EBEEC", func_000EC158);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EBEEC", func_000EC1C0);
 
-void func_000EC280(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) | 1);
+void func_000EC280(struct Unk_func_000EC280_0 *arg0) {
+    arg0->unk8 = (s32) (arg0->unk8 | 1);
 }
 
-void func_000EC290(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = __builtin_allegrex_ins(M2C_FIELD(arg0, s32 *, 8), 0, 0, 1);
+void func_000EC290(struct Unk_func_000EC290_0 *arg0) {
+    arg0->unk8 = __builtin_allegrex_ins(arg0->unk8, 0, 0, 1);
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EBEEC", func_000EC2A0);

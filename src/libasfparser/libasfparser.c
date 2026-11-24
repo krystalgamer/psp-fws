@@ -70,10 +70,10 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000007E8)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_0000080C);
 
-void func_0000083C(void *arg0) {
+void func_0000083C(struct Unk_func_0000083C_0 *arg0) {
     s32 temp_a1;
 
-    temp_a1 = M2C_FIELD(arg0, s32 *, 0);
+    temp_a1 = arg0->unk0;
     M2C_FIELD(arg0, M2C_UNK (**)(s32, s32), 8)(temp_a1, temp_a1);
 }
 
@@ -93,7 +93,7 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00000E5C)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00000F0C);
 
-s32 func_00000FB8(void *arg0) {
+s32 func_00000FB8(struct Unk_func_00000FB8_0 *arg0) {
     s32 temp_v0;
     s32 var_a3;
     u32 temp_t0;
@@ -101,14 +101,14 @@ s32 func_00000FB8(void *arg0) {
     u32 var_a2;
 
     var_a3 = 0;
-    var_a2 = M2C_FIELD(arg0, u32 *, 0x20);
-    temp_t0 = M2C_FIELD(arg0, u32 *, 8);
+    var_a2 = arg0->unk20;
+    temp_t0 = arg0->unk8;
     if (var_a2 < temp_t0) {
         temp_v0 = func_000016F4((s32) arg0, temp_t0 - var_a2);
-        var_a2 = M2C_FIELD(arg0, u32 *, 0x20);
+        var_a2 = arg0->unk20;
         var_a3 = temp_v0;
     }
-    temp_t1 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), u32 *, 0x40);
+    temp_t1 = M2C_FIELD(arg0->unk38, u32 *, 0x40);
     if (var_a2 < temp_t1) {
         var_a3 = func_000016F4((s32) arg0, temp_t1 - var_a2);
     }
@@ -147,24 +147,24 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000016C0)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000016F4);
 
-s32 func_00001728(void *arg0) {
-    return (u32) (M2C_FIELD(arg0, s32 *, 0x20) + M2C_FIELD(arg0, s32 *, 0xC)) >= (u32) M2C_FIELD(arg0, u32 *, 8);
+s32 func_00001728(struct Unk_func_00001728_0 *arg0) {
+    return (u32) (M2C_FIELD(arg0, s32 *, 0x20) + arg0->unkC) >= (u32) arg0->unk8;
 }
 
-s32 func_00001744(void *arg0) {
-    return (u32) M2C_FIELD(arg0, u32 *, 0x20) >= (u32) M2C_FIELD(arg0, u32 *, 0x28);
+s32 func_00001744(struct Unk_func_00001728_0 *arg0) {
+    return (u32) arg0->unk20 >= (u32) arg0->unk28;
 }
 
-s32 func_00001758(void *arg0) {
-    return (u32) M2C_FIELD(arg0, u32 *, 0x20) >= (u32) M2C_FIELD(arg0, u32 *, 0x24);
+s32 func_00001758(struct Unk_func_00001758_0 *arg0) {
+    return (u32) arg0->unk20 >= (u32) arg0->unk24;
 }
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_0000176C);
 
-s32 func_0000178C(void *arg0) {
+s32 func_0000178C(struct Unk_func_00001728_0 *arg0) {
     s32 var_v0;
 
-    if (M2C_FIELD(arg0, u8 *, 1) & 1) {
+    if (arg0->unk1 & 1) {
         var_v0 = func_00001744(arg0);
     } else {
         var_v0 = func_00001728(arg0);
@@ -178,58 +178,58 @@ s32 func_00001810(u8 *arg0, s32 arg1) {
     return arg1 == *arg0;
 }
 
-s32 func_00001820(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 2) & 0x80;
+s32 func_00001820(struct Unk_func_00001820_0 *arg0) {
+    return arg0->unk2 & 0x80;
 }
 
-s32 func_0000182C(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 2) & 0x60;
+s32 func_0000182C(struct Unk_func_0000182C_0 *arg0) {
+    return arg0->unk2 & 0x60;
 }
 
-s32 func_00001838(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 2) & 0xF;
+s32 func_00001838(struct Unk_func_00001838_0 *arg0) {
+    return arg0->unk2 & 0xF;
 }
 
-s32 func_00001844(void *arg0) {
-    return __builtin_allegrex_ext(M2C_FIELD(arg0, u8 *, 3), 5, 2);
+s32 func_00001844(struct Unk_func_00001844_0 *arg0) {
+    return __builtin_allegrex_ext(arg0->unk3, 5, 2);
 }
 
-s32 func_00001850(void *arg0) {
-    return __builtin_allegrex_ext(M2C_FIELD(arg0, u8 *, 3), 1, 2);
+s32 func_00001850(struct Unk_func_00001850_0 *arg0) {
+    return __builtin_allegrex_ext(arg0->unk3, 1, 2);
 }
 
-s32 func_0000185C(void *arg0) {
-    return __builtin_allegrex_ext(M2C_FIELD(arg0, u8 *, 3), 3, 2);
+s32 func_0000185C(struct Unk_func_0000185C_0 *arg0) {
+    return __builtin_allegrex_ext(arg0->unk3, 3, 2);
 }
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00001868);
 
-s32 func_00001874(void *arg0) {
-    return __builtin_allegrex_ext(M2C_FIELD(arg0, u8 *, 4), 4, 2);
+s32 func_00001874(struct Unk_func_00001874_0 *arg0) {
+    return __builtin_allegrex_ext(arg0->unk4, 4, 2);
 }
 
-s32 func_00001880(void *arg0) {
-    return __builtin_allegrex_ext(M2C_FIELD(arg0, u8 *, 4), 2, 2);
+s32 func_00001880(struct Unk_func_00001880_0 *arg0) {
+    return __builtin_allegrex_ext(arg0->unk4, 2, 2);
 }
 
-s32 func_0000188C(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 4) & 3;
+s32 func_0000188C(struct Unk_func_0000188C_0 *arg0) {
+    return arg0->unk4 & 3;
 }
 
-s32 func_00001898(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 0x17) & 0x3F;
+s32 func_00001898(struct Unk_func_00001898_0 *arg0) {
+    return arg0->unk17 & 0x3F;
 }
 
-u32 func_000018A4(void *arg0) {
-    return (u8) M2C_FIELD(arg0, u8 *, 0x17) >> 6;
+u32 func_000018A4(struct Unk_func_000018A4_0 *arg0) {
+    return (u8) arg0->unk17 >> 6;
 }
 
 void func_000018B0(s32 arg0, s32 arg1) {
     func_000016F4(arg0, arg1);
 }
 
-s32 func_000018CC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_000018CC(struct Unk_func_000018CC_0 *arg0) {
+    return arg0->unk10;
 }
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000018D4);
@@ -395,13 +395,13 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00004568)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00004700);
 
-void func_0000478C(void *arg0, s32 arg1) {
+void func_0000478C(struct Unk_func_0000478C_0 *arg0, s32 arg1) {
     func_000047C0(arg0);
-    M2C_FIELD(arg0, s32 *, 0x2CC) = arg1;
+    arg0->unk2CC = arg1;
 }
 
-void func_000047C0(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x2AC) = 0;
+void func_000047C0(struct Unk_func_0000478C_0 *arg0) {
+    arg0->unk2AC = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000047C8);
@@ -410,10 +410,10 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00004880)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000048A4);
 
-void func_000048C4(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x2D4) = 0;
-    M2C_FIELD(arg0, s32 *, 0x2D8) = 0;
-    M2C_FIELD(arg0, s32 *, 0x2DC) = 0;
+void func_000048C4(struct Unk_func_000048C4_0 *arg0) {
+    arg0->unk2D4 = 0;
+    arg0->unk2D8 = 0;
+    arg0->unk2DC = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000048D4);
@@ -424,9 +424,9 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_0000497C)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000049DC);
 
-void func_00004A0C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s16 *, 0xA) = 9;
-    M2C_FIELD(arg0, s32 *, 0x288) = 0;
+void func_00004A0C(struct Unk_func_00004A0C_0 *arg0, s32 arg1) {
+    arg0->unkA = 9;
+    arg0->unk288 = 0;
     func_00004AB8((s32) arg0, arg1);
 }
 
@@ -588,36 +588,36 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00006474)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00006560);
 
-void func_00006638(void *arg0) {
+void func_00006638(struct Unk_func_00006638_0 *arg0) {
     u16 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, u16 *, 0x28);
-    M2C_FIELD(arg0, s32 *, 0x2AC) = 0;
-    M2C_FIELD(arg0, u16 *, 0x2A2) = temp_v1;
-    M2C_FIELD(arg0, u16 *, 0x2A4) = temp_v1;
+    temp_v1 = arg0->unk28;
+    arg0->unk2AC = 0;
+    arg0->unk2A2 = temp_v1;
+    arg0->unk2A4 = temp_v1;
 }
 
-void func_0000664C(void *arg0) {
+void func_0000664C(struct Unk_func_0000664C_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0x14);
+    temp_v1 = arg0->unk14;
     if (temp_v1 != 0) {
-        M2C_FIELD(arg0, s16 *, 0x2A8) = 0;
+        arg0->unk2A8 = 0;
     }
-    M2C_FIELD(arg0, s32 *, 0x2AC) = 1;
+    arg0->unk2AC = 1;
     if (temp_v1 != 0) {
-        M2C_FIELD(arg0, u16 *, 0x2AA) = (u16) (M2C_FIELD(arg0, u16 *, 0x2AA) - 1);
+        arg0->unk2AA = (u16) (arg0->unk2AA - 1);
     }
 }
 
-u32 func_00006678(void *arg0) {
+u32 func_00006678(struct Unk_func_00006678_0 *arg0) {
     u32 temp_a0;
     u32 var_v0;
 
-    temp_a0 = M2C_FIELD(arg0, u32 *, 0x10);
+    temp_a0 = arg0->unk10;
     var_v0 = 0x86401012;
     if (temp_a0 != 0) {
-        var_v0 = (u32) (M2C_FIELD(arg0, s32 *, 0x28) * 0x3E8) / temp_a0;
+        var_v0 = (u32) (arg0->unk28 * 0x3E8) / temp_a0;
     }
     return var_v0;
 }
@@ -626,50 +626,50 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000066B4)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000066CC);
 
-void func_000066EC(void *arg0, s32 arg1, s32 arg2) {
+void func_000066EC(struct Unk_func_000066EC_0 *arg0, s32 arg1, s32 arg2) {
     s32 temp_a0;
     s32 temp_a3;
     u32 temp_v0;
 
-    temp_a3 = M2C_FIELD(arg0, s32 *, 4);
-    temp_v0 = M2C_FIELD(arg0, u32 *, 0);
+    temp_a3 = arg0->unk4;
+    temp_v0 = arg0->unk0;
     temp_a0 = temp_a3 & 7;
-    M2C_FIELD(arg0, s32 *, 0x10) = arg1;
-    M2C_FIELD(arg0, s32 *, 8) = temp_a0;
+    arg0->unk10 = arg1;
+    arg0->unk8 = temp_a0;
     if (temp_v0 >= (u32) (arg2 + temp_a3)) {
-        M2C_FIELD(arg0, s32 *, 0xC) = (s32) (arg2 + temp_a0);
+        arg0->unkC = (s32) (arg2 + temp_a0);
         return;
     }
-    M2C_FIELD(arg0, s32 *, 0xC) = (s32) ((temp_v0 - temp_a3) + temp_a0);
+    arg0->unkC = (s32) ((temp_v0 - temp_a3) + temp_a0);
 }
 
-void func_0000672C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 0);
+void func_0000672C(struct Unk_func_0000672C_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk4 = (s32) arg0->unk0;
 }
 
-s32 func_0000673C(void *arg0) {
-    s32 cmp_tmp = (u32) ((((u32) M2C_FIELD(arg0, u32 *, 4) >> 3) * 8) + M2C_FIELD(arg0, s32 *, 8)) < (u32) M2C_FIELD(arg0, u32 *, 0);
+s32 func_0000673C(struct Unk_func_0000673C_0 *arg0) {
+    s32 cmp_tmp = (u32) ((((u32) arg0->unk4 >> 3) * 8) + arg0->unk8) < (u32) arg0->unk0;
     return cmp_tmp == 0;
 }
 
-s32 func_00006760(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8) - (M2C_FIELD(arg0, s32 *, 4) & 7);
+s32 func_00006760(struct Unk_func_00006760_0 *arg0) {
+    return arg0->unk8 - (arg0->unk4 & 7);
 }
 
-u32 func_00006774(void *arg0) {
-    return (u32) M2C_FIELD(arg0, u32 *, 8) >> 3;
+u32 func_00006774(struct Unk_func_00006774_0 *arg0) {
+    return (u32) arg0->unk8 >> 3;
 }
 
-void func_00006780(void *arg0) {
+void func_00006780(struct Unk_func_00006780_0 *arg0) {
     u32 temp_a3;
     u32 temp_a4;
 
-    temp_a4 = M2C_FIELD(arg0, u32 *, 0);
-    temp_a3 = (((u32) M2C_FIELD(arg0, u32 *, 4) >> 3) * 8) + M2C_FIELD(arg0, s32 *, 8);
-    M2C_FIELD(arg0, u32 *, 4) = (u32) ((temp_a4 < temp_a3) ? temp_a4 : temp_a3);
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    temp_a4 = arg0->unk0;
+    temp_a3 = (((u32) arg0->unk4 >> 3) * 8) + arg0->unk8;
+    arg0->unk4 = (u32) ((temp_a4 < temp_a3) ? temp_a4 : temp_a3);
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000067B0);

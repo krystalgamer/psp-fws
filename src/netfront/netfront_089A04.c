@@ -42,7 +42,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_089A04", func_00089EB4);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_089A04", func_0008A010);
 
-s32 func_0008A040(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC) == 0;
+s32 func_0008A040(struct Unk_func_0008A040_0 *arg0) {
+    return arg0->unkC == 0;
 }
 

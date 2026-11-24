@@ -52,13 +52,13 @@ INCLUDE_RODATA("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0274D4", func_00027860);
 
-void func_00027C54(void *arg0) {
+void func_00027C54(struct Unk_func_00027C54_0 *arg0) {
     s32 temp_a1;
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x28);
+    temp_v0 = arg0->unk28;
     if (temp_v0 != 0) {
-        temp_a1 = M2C_FIELD(arg0, s32 *, 0x30);
+        temp_a1 = arg0->unk30;
         func_0002F6AC(temp_v0, (temp_a1 < 0) ? 3 : temp_a1);
     }
 }

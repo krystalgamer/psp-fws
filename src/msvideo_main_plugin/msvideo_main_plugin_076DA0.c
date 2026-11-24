@@ -138,7 +138,7 @@ s32 func_000773E8(void **arg0, u16 *arg1) {
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_076DA0", func_00077420);
 
-s32 func_0007747C(void *arg0, s32 arg1) {
+s32 func_0007747C(struct Unk_func_0007747C_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -194,7 +194,7 @@ s32 func_000775B8(s32 arg0, s32 arg1) {
     return var_v1;
 }
 
-s32 func_000775E4(void *arg0, s32 *arg1) {
+s32 func_000775E4(struct Unk_func_000775E4_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -214,7 +214,7 @@ s32 func_00077610(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return var_v1;
 }
 
-s32 func_0007763C(void *arg0, s32 *arg1) {
+s32 func_0007763C(struct Unk_func_0007763C_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -234,7 +234,7 @@ s32 func_00077668(s32 arg0) {
     return var_v1;
 }
 
-s32 func_00077694(void *arg0, s32 *arg1) {
+s32 func_00077694(struct Unk_func_00077694_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -264,7 +264,7 @@ s32 func_000776EC(s32 arg0, s32 arg1) {
     return var_v1;
 }
 
-s32 func_00077718(void *arg0, s32 *arg1) {
+s32 func_00077718(struct Unk_func_00077718_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -374,7 +374,7 @@ s32 func_000778DC(s32 arg0, s32 arg1, s32 arg2) {
     return var_v1;
 }
 
-s32 func_0007790C(void *arg0, s32 *arg1) {
+s32 func_0007790C(struct Unk_func_0007790C_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -416,7 +416,7 @@ s32 func_00077990(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_076DA0", func_000779BC);
 
-s32 func_00077A30(void *arg0, s32 *arg1) {
+s32 func_00077A30(struct Unk_func_00077A30_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -470,7 +470,7 @@ s32 func_00077C1C(void **arg0, s32 *arg1) {
     return var_v1;
 }
 
-s32 func_00077C54(void *arg0, s32 *arg1) {
+s32 func_00077C54(struct Unk_func_00077C54_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;
@@ -480,7 +480,7 @@ s32 func_00077C54(void *arg0, s32 *arg1) {
     return var_v1;
 }
 
-s32 func_00077C80(void *arg0, s32 *arg1) {
+s32 func_00077C80(struct Unk_func_00077C80_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 4;

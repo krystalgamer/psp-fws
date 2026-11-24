@@ -295,10 +295,10 @@ void func_000B6274(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B62A0);
 
-void func_000B6348(void *arg0) {
+void func_000B6348(struct Unk_func_000B6348_0 *arg0) {
     void *temp_s0;
 
-    temp_s0 = M2C_FIELD(arg0, void **, 4);
+    temp_s0 = arg0->unk4;
     func_000BAE78(M2C_FIELD(temp_s0, s32 *, 0x3A74));
     M2C_FIELD(temp_s0, s32 *, 0x3A74) = 0;
 }
@@ -363,14 +363,14 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B910C);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B918C);
 
-void func_000B924C(void *arg0) {
+void func_000B924C(struct Unk_func_000B924C_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0 = arg0->unk8;
     if (temp_v0 == 0) {
 
     } else {
-        func_000B9FB0(M2C_FIELD(arg0, s32 *, 0xC), temp_v0);
+        func_000B9FB0(arg0->unkC, temp_v0);
         func_000B92A8((s32) arg0, 0, 0, 0, 0, 0, 0);
     }
 }
@@ -441,8 +441,8 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B9E84);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B9EE0);
 
-s32 func_000B9F98(void *arg0) {
-    return (M2C_FIELD(arg0, u8 *, 8) & 0xF) + M2C_FIELD(arg0, u8 *, 6) + 9;
+s32 func_000B9F98(struct Unk_func_000B9F98_0 *arg0) {
+    return (arg0->unk8 & 0xF) + arg0->unk6 + 9;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B9FB0);
@@ -463,15 +463,15 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000BACCC);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000BAE78);
 
-u16 func_000BAED0(void *arg0) {
+u16 func_000BAED0(struct Unk_func_000BAED0_0 *arg0) {
     u16 var_a1;
     void *temp_a0;
 
     var_a1 = 0;
-    if (M2C_FIELD(arg0, s32 *, 4) != -1) {
-        var_a1 = M2C_FIELD(arg0, u16 *, 0x1CB8);
+    if (arg0->unk4 != -1) {
+        var_a1 = arg0->unk1CB8;
     } else {
-        temp_a0 = M2C_FIELD(arg0, void **, 0);
+        temp_a0 = arg0->unk0;
         if (temp_a0 != NULL) {
             var_a1 = M2C_FIELD(temp_a0, u16 *, 0xE);
         }

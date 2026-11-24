@@ -1,10 +1,10 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-void func_000785E4(void *arg0) {
+void func_000785E4(struct Unk_func_000785E4_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x1C);
+    temp_v0 = arg0->unk1C;
     if (temp_v0 == 0) {
 
     } else {

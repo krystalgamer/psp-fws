@@ -150,8 +150,8 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_019E80
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_019E80", func_0001A798);
 
-s32 func_0001A7D0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x80C);
+s32 func_0001A7D0(struct Unk_func_0001A7D0_0 *arg0) {
+    return arg0->unk80C;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_019E80", func_0001A7D8);

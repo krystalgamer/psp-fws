@@ -2,10 +2,10 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-void func_0001F970(void *arg0) {
-    if (M2C_FIELD(arg0, u8 *, 0xCC) != 0) {
-        M2C_FIELD(arg0, s32 *, 0xD0) = 0;
-        M2C_FIELD(arg0, u8 *, 0xCC) = 0U;
+void func_0001F970(struct Unk_func_0001F970_0 *arg0) {
+    if (arg0->unkCC != 0) {
+        arg0->unkD0 = 0;
+        arg0->unkCC = 0U;
     }
 }
 
@@ -45,7 +45,7 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_01
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_01F970", func_0001FFD0);
 
-void func_00020028(void *arg0) {
-    M2C_FIELD(arg0, s8 *, 0x24) = 1;
+void func_00020028(struct Unk_func_00020028_0 *arg0) {
+    arg0->unk24 = 1;
 }
 

@@ -22,20 +22,20 @@ s32 func_00077F88(void) {
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_077F48", func_00077FA8);
 
-s32 func_00077FF0(void *arg0) {
+s32 func_00077FF0(struct Unk_func_00077FF0_0 *arg0) {
     s32 temp_a1;
 
-    temp_a1 = M2C_FIELD(arg0, s32 *, 4);
+    temp_a1 = arg0->unk4;
     if (temp_a1 != -1) {
-        M2C_FIELD(arg0, s32 *, 0) = temp_a1;
+        arg0->unk0 = temp_a1;
     }
     return 0;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_077F48", func_0007800C);
 
-s32 func_00078030(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4) == 2;
+s32 func_00078030(struct Unk_func_00078030_0 *arg0) {
+    return arg0->unk4 == 2;
 }
 
 s32 func_00078040(s32 *arg0) {
@@ -114,17 +114,17 @@ s32 func_00078B44(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_077F48", func_00078B90);
 
-s32 func_00078C20(s32 arg0, void *arg1) {
+s32 func_00078C20(s32 arg0, struct Unk_func_00078C20_1 *arg1) {
     s32 temp_a1;
     s32 var_a0;
     void *temp_a1_2;
     void *temp_v1;
 
-    temp_a1 = M2C_FIELD(arg1, s32 *, 4);
+    temp_a1 = arg1->unk4;
     var_a0 = 0;
     if (temp_a1 != arg0) {
         if (((temp_a1 == 0x656E6376) | (temp_a1 == 0x656E6361)) != 0) {
-            temp_a1_2 = M2C_FIELD(arg1, void **, 0x30);
+            temp_a1_2 = arg1->unk30;
             if (temp_a1_2 != NULL) {
                 temp_v1 = M2C_FIELD(temp_a1_2, void **, 0xC);
                 var_a0 = ((M2C_FIELD(temp_v1, u8 *, 8) << 0x18) | (M2C_FIELD(temp_v1, u8 *, 9) << 0x10) | (M2C_FIELD(temp_v1, u8 *, 0xA) << 8) | M2C_FIELD(temp_v1, u8 *, 0xB)) == arg0;
@@ -186,8 +186,8 @@ s32 func_000795C8(void **arg0, u16 *arg1) {
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_077F48", func_000795EC);
 
-s32 func_00079688(void *arg0, M2C_UNK arg1) {
-    scePaf_3308156F(arg1, M2C_FIELD(arg0, s32 *, 0xC), M2C_FIELD(arg0, s32 *, 8));
+s32 func_00079688(struct Unk_func_0007747C_0 *arg0, M2C_UNK arg1) {
+    scePaf_3308156F(arg1, arg0->unkC, arg0->unk8);
     return 0;
 }
 

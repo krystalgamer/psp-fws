@@ -6,32 +6,32 @@ void func_000873D4(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-void func_000873FC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+void func_000873FC(struct Unk_func_000873FC_0 *arg0) {
+    arg0->unk14 = 0;
 }
 
-s32 func_00087404(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x14) == 1;
+s32 func_00087404(struct Unk_func_00087404_0 *arg0) {
+    return arg0->unk14 == 1;
 }
 
-s32 func_00087414(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8);
+s32 func_00087414(struct Unk_func_00087414_0 *arg0) {
+    return arg0->unk8;
 }
 
-s32 func_0008741C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_0008741C(struct Unk_func_0008741C_0 *arg0) {
+    return arg0->unkC;
 }
 
-void func_00087424(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A20D0;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 8) = arg2;
+void func_00087424(struct Unk_func_00087424_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk0 = &D_000A20D0;
+    arg0->unk4 = arg1;
+    arg0->unk8 = arg2;
 }
 
-void func_0008743C(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A20D0;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 8) = arg2;
+void func_0008743C(struct Unk_func_0008743C_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk0 = &D_000A20D0;
+    arg0->unk4 = arg1;
+    arg0->unk8 = arg2;
 }
 
 void func_00087454(M2C_UNK **arg0) {
@@ -57,24 +57,24 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0873D4
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0873D4", func_00087770);
 
-s32 func_000877D0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x30);
+s32 func_000877D0(struct Unk_func_000877D0_0 *arg0) {
+    return arg0->unk30;
 }
 
-u8 func_000877D8(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 0x18);
+u8 func_000877D8(struct Unk_func_000877D8_0 *arg0) {
+    return arg0->unk18;
 }
 
-u8 func_000877E0(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 0x19);
+u8 func_000877E0(struct Unk_func_000877E0_0 *arg0) {
+    return arg0->unk19;
 }
 
-s32 func_000877E8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_000877E8(struct Unk_func_000877E8_0 *arg0) {
+    return arg0->unk1C;
 }
 
-s32 func_000877F0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x24);
+s32 func_000877F0(struct Unk_func_000877F0_0 *arg0) {
+    return arg0->unk24;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0873D4", func_000877F8);

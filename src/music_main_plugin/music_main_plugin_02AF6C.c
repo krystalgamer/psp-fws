@@ -122,11 +122,11 @@ INCLUDE_RODATA("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02A
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02AF6C", func_0002C5C4);
 
-void func_0002C684(void *arg0) {
+void func_0002C684(struct Unk_func_0002C684_0 *arg0) {
     if (func_0002C894() != 0) {
 
     } else {
-        func_00034704(M2C_FIELD(arg0, s32 *, 4));
+        func_00034704(arg0->unk4);
     }
 }
 

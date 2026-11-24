@@ -1,18 +1,18 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-void func_0002FA08(void *arg0) {
-    func_0002FF54(M2C_FIELD(arg0, s32 *, 0x494));
+void func_0002FA08(struct Unk_func_0002FA08_0 *arg0) {
+    func_0002FF54(arg0->unk494);
 }
 
-void func_0002FA24(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_0002FA24(struct Unk_func_0002FA24_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
-void func_0002FA30(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_0002FA30(struct Unk_func_0002FA30_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
 void func_0002FA3C(void) {
@@ -25,12 +25,12 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0002FAAC);
 
-s32 func_0002FB28(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_0002FB28(struct Unk_func_0002FB28_0 *arg0) {
+    return arg0->unk4;
 }
 
-s32 func_0002FB30(void *arg0) {
-    return 0x11 - M2C_FIELD(arg0, s32 *, 4);
+s32 func_0002FB30(struct Unk_func_0002FB30_0 *arg0) {
+    return 0x11 - arg0->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0002FB40);
@@ -360,12 +360,12 @@ s32 func_000353BC(void) {
     return 0;
 }
 
-s32 func_000353C4(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x55C);
+s32 func_000353C4(struct Unk_func_000353C4_0 *arg0) {
+    return arg0->unk55C;
 }
 
-s32 func_000353CC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x560);
+s32 func_000353CC(struct Unk_func_000353CC_0 *arg0) {
+    return arg0->unk560;
 }
 
 s32 func_000353D4(void) {
@@ -516,8 +516,8 @@ s32 func_00035A58(void) {
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00035A60);
 
-void func_00035A8C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+void func_00035A8C(struct Unk_func_00035A8C_0 *arg0, s32 arg1) {
+    arg0->unk4 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00035A94);
@@ -562,31 +562,31 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00035FFC);
 
-void func_000360B4(void *arg0) {
+void func_000360B4(struct Unk_func_000360B4_0 *arg0) {
     s32 temp_v0;
 
     func_00031804(arg0);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B25E0;
+    arg0->unk0 = &D_000B25E0;
     temp_v0 = scePaf_3AC3E06A(0x1C8);
-    M2C_FIELD(arg0, s32 *, 0x6DC) = temp_v0;
-    M2C_FIELD(arg0, s32 *, 0x6E0) = -1;
+    arg0->unk6DC = temp_v0;
+    arg0->unk6E0 = -1;
 }
 
-void func_000360F8(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B25E0;
-    scePaf_4729E549(M2C_FIELD(arg0, s32 **, 0x6DC));
+void func_000360F8(struct Unk_func_000360F8_0 *arg0) {
+    arg0->unk0 = &D_000B25E0;
+    scePaf_4729E549(arg0->unk6DC);
     func_000318D4((s32) arg0);
 }
 
-void func_00036134(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B25E0;
-    scePaf_4729E549(M2C_FIELD(arg0, s32 **, 0x6DC));
+void func_00036134(struct Unk_func_00036134_0 *arg0) {
+    arg0->unk0 = &D_000B25E0;
+    scePaf_4729E549(arg0->unk6DC);
     func_000318D4((s32) arg0);
 }
 
-void func_00036170(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B25E0;
-    scePaf_4729E549(M2C_FIELD(arg0, s32 **, 0x6DC));
+void func_00036170(struct Unk_func_00036170_0 *arg0) {
+    arg0->unk0 = &D_000B25E0;
+    scePaf_4729E549(arg0->unk6DC);
     func_000318D4((s32) arg0);
     scePaf_6261C0A5((s32) arg0);
 }
@@ -611,10 +611,10 @@ s32 func_000361D0(void *arg0, s32 arg1, s32 arg2) {
     return 0;
 }
 
-s32 func_00036254(void *arg0) {
+s32 func_00036254(struct Unk_func_00036254_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x6E0);
+    temp_v0 = arg0->unk6E0;
     if (temp_v0 >= 0) {
         sceIoClose(temp_v0);
     }
@@ -654,19 +654,19 @@ s32 func_000365A0(void) {
     return 4;
 }
 
-void func_000365A8(void *arg0) {
+void func_000365A8(struct Unk_func_000365A8_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x6E0);
+    temp_v0 = arg0->unk6E0;
     if (temp_v0 >= 0) {
         sceIoClose(temp_v0);
-        M2C_FIELD(arg0, s32 *, 0x6E0) = -2;
+        arg0->unk6E0 = -2;
     }
     func_00032D00(arg0);
 }
 
-void func_000365EC(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+void func_000365EC(struct Unk_func_000365EC_0 *arg0, s32 arg1) {
+    arg0->unk4 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_000365F4);
@@ -756,9 +756,9 @@ s32 func_00037540(s32 arg0) {
     return ((u32) (temp_v0 - 1) >= 0x3E7U) ? 0 : temp_v0;
 }
 
-s32 func_000375BC(s32 arg0, void *arg1) {
+s32 func_000375BC(s32 arg0, struct Unk_func_000375BC_1 *arg1) {
     func_0000C1D0(arg1, arg0);
-    M2C_FIELD((M2C_FIELD(arg1, s32 *, 4) + M2C_FIELD(arg1, s32 *, 0)), s8 *, -1) = 0x4C;
+    M2C_FIELD((arg1->unk4 + arg1->unk0), s8 *, -1) = 0x4C;
     return 1;
 }
 
@@ -792,16 +792,16 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00037DC4);
 
-void func_00037F28(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B27F8;
-    M2C_FIELD(arg0, s32 *, 4) = -1;
-    M2C_FIELD(arg0, s32 *, 8) = 0xB;
+void func_00037F28(struct Unk_func_00037F28_0 *arg0) {
+    arg0->unk0 = &D_000B27F8;
+    arg0->unk4 = -1;
+    arg0->unk8 = 0xB;
 }
 
-void func_00037F48(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B27F8;
-    M2C_FIELD(arg0, s32 *, 4) = -1;
-    M2C_FIELD(arg0, s32 *, 8) = 0xB;
+void func_00037F48(struct Unk_func_00037F48_0 *arg0) {
+    arg0->unk0 = &D_000B27F8;
+    arg0->unk4 = -1;
+    arg0->unk8 = 0xB;
 }
 
 void func_00037F68(M2C_UNK **arg0) {
@@ -817,8 +817,8 @@ void func_00037F88(M2C_UNK **arg0) {
     scePaf_6261C0A5((s32) arg0);
 }
 
-s32 func_00037FB0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_00037FB0(struct Unk_func_00037FB0_0 *arg0) {
+    return arg0->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00037FB8);
@@ -833,17 +833,17 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003866C);
 
-s32 func_000386B0(void *arg0) {
+s32 func_000386B0(struct Unk_func_000386B0_0 *arg0) {
     s32 temp_v0;
     s32 var_s2;
 
     var_s2 = 1;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 4);
+    temp_v0 = arg0->unk4;
     if (temp_v0 != -1) {
         if (sceVshBridge_C86E65DC(temp_v0) < 0) {
             var_s2 = 0;
         } else {
-            M2C_FIELD(arg0, s32 *, 4) = -1;
+            arg0->unk4 = -1;
         }
     }
     return var_s2;
@@ -907,8 +907,8 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00039828);
 
-void func_0003996C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+void func_0003996C(struct Unk_func_0003996C_0 *arg0, s32 arg1) {
+    arg0->unk4 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00039974);
@@ -1051,8 +1051,8 @@ s32 func_0003A3C8(void) {
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003A3D0);
 
-void func_0003A624(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+void func_0003A624(struct Unk_func_0003A624_0 *arg0, s32 arg1) {
+    arg0->unk4 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003A62C);
@@ -1212,8 +1212,8 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003C874);
 
-s32 func_0003C8BC(void *arg0) {
-    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x6DC), s32 *, 0x14);
+s32 func_0003C8BC(struct Unk_func_0003C8BC_0 *arg0) {
+    return M2C_FIELD(arg0->unk6DC, s32 *, 0x14);
 }
 
 s32 func_0003C8C8(void) {
@@ -1422,8 +1422,8 @@ s32 func_0003E374(void) {
     return 0xA;
 }
 
-void func_0003E37C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+void func_0003E37C(struct Unk_func_0003E37C_0 *arg0, s32 arg1) {
+    arg0->unk4 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003E384);
@@ -1466,7 +1466,7 @@ void func_0003E684(s32 arg0) {
     }
 }
 
-void func_0003E6DC(void *arg0, void *arg1) {
+void func_0003E6DC(struct Unk_func_0003E6DC_0 *arg0, struct Unk_func_0003E6DC_1 *arg1) {
     u16 temp_a0;
     u16 temp_v1;
     u16 temp_v1_2;
@@ -1474,90 +1474,90 @@ void func_0003E6DC(void *arg0, void *arg1) {
     u16 temp_v1_4;
     u16 temp_v1_5;
 
-    temp_v1 = M2C_FIELD(arg0, u16 *, 0);
+    temp_v1 = arg0->unk0;
     if ((u32) (temp_v1 - 1) < 0x270FU) {
-        M2C_FIELD(arg1, u16 *, 0) = temp_v1;
+        arg1->unk0 = temp_v1;
     }
-    temp_v1_2 = M2C_FIELD(arg0, u16 *, 2);
+    temp_v1_2 = arg0->unk2;
     if ((u32) (temp_v1_2 - 1) < 0xCU) {
-        M2C_FIELD(arg1, u16 *, 2) = temp_v1_2;
+        arg1->unk2 = temp_v1_2;
     }
-    temp_v1_3 = M2C_FIELD(arg0, u16 *, 4);
+    temp_v1_3 = arg0->unk4;
     if ((u32) (temp_v1_3 - 1) < 0x1FU) {
-        M2C_FIELD(arg1, u16 *, 4) = temp_v1_3;
+        arg1->unk4 = temp_v1_3;
     }
-    temp_v1_4 = M2C_FIELD(arg0, u16 *, 6);
+    temp_v1_4 = arg0->unk6;
     if (temp_v1_4 < 0x18U) {
-        M2C_FIELD(arg1, u16 *, 6) = temp_v1_4;
+        arg1->unk6 = temp_v1_4;
     }
-    temp_v1_5 = M2C_FIELD(arg0, u16 *, 8);
+    temp_v1_5 = arg0->unk8;
     if (temp_v1_5 < 0x3CU) {
-        M2C_FIELD(arg1, u16 *, 8) = temp_v1_5;
+        arg1->unk8 = temp_v1_5;
     }
-    temp_a0 = M2C_FIELD(arg0, u16 *, 0xA);
+    temp_a0 = arg0->unkA;
     if (temp_a0 < 0x3CU) {
-        M2C_FIELD(arg1, u16 *, 0xA) = temp_a0;
+        arg1->unkA = temp_a0;
     }
-    M2C_FIELD(arg1, s32 *, 0xC) = 0;
+    arg1->unkC = 0;
 }
 
-void func_0003E750(void *arg0, void *arg1) {
-    M2C_FIELD(arg1, s32 *, 0xC) = 0;
-    M2C_FIELD(arg1, u16 *, 0) = (u16) M2C_FIELD(arg0, u16 *, 0);
-    M2C_FIELD(arg1, u16 *, 2) = (u16) M2C_FIELD(arg0, u16 *, 2);
-    M2C_FIELD(arg1, u16 *, 4) = (u16) M2C_FIELD(arg0, u16 *, 4);
-    M2C_FIELD(arg1, u16 *, 6) = (u16) M2C_FIELD(arg0, u16 *, 6);
-    M2C_FIELD(arg1, u16 *, 8) = (u16) M2C_FIELD(arg0, u16 *, 8);
-    M2C_FIELD(arg1, u16 *, 0xA) = (u16) M2C_FIELD(arg0, u16 *, 0xA);
+void func_0003E750(struct Unk_func_0003E750_0 *arg0, struct Unk_func_0003E750_1 *arg1) {
+    arg1->unkC = 0;
+    arg1->unk0 = (u16) arg0->unk0;
+    arg1->unk2 = (u16) arg0->unk2;
+    arg1->unk4 = (u16) arg0->unk4;
+    arg1->unk6 = (u16) arg0->unk6;
+    arg1->unk8 = (u16) arg0->unk8;
+    arg1->unkA = (u16) arg0->unkA;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003E788);
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003E7D8);
 
-s32 func_0003E828(void *arg0) {
+s32 func_0003E828(struct Unk_func_0003E828_0 *arg0) {
     u16 temp_a1;
     u16 temp_a2;
     u16 temp_a3;
 
-    temp_a1 = M2C_FIELD(arg0, u16 *, 4);
-    temp_a2 = M2C_FIELD(arg0, u16 *, 6);
-    temp_a3 = M2C_FIELD(arg0, u16 *, 8);
+    temp_a1 = arg0->unk4;
+    temp_a2 = arg0->unk6;
+    temp_a3 = arg0->unk8;
     return (((temp_a1 & 0xFF) << 8) | (temp_a1 >> 8)) + (((temp_a2 & 0xFF) << 8) | (temp_a2 >> 8)) + (((temp_a3 & 0xFF) << 8) | (temp_a3 >> 8));
 }
 
-s32 func_0003E870(void *arg0) {
+s32 func_0003E870(struct Unk_func_0003E870_0 *arg0) {
     u16 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, u16 *, 0xA);
+    temp_v1 = arg0->unkA;
     return ((temp_v1 & 0xFF) << 8) | (temp_v1 >> 8);
 }
 
-s32 func_0003E888(void *arg0) {
+s32 func_0003E888(struct Unk_func_0003E888_0 *arg0) {
     u16 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, u16 *, 0xC);
+    temp_v1 = arg0->unkC;
     return ((temp_v1 & 0xFF) << 8) | (temp_v1 >> 8);
 }
 
-s32 func_0003E8A0(void *arg0) {
+s32 func_0003E8A0(struct Unk_func_0003E8A0_0 *arg0) {
     u16 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, u16 *, 0xE);
+    temp_v1 = arg0->unkE;
     return ((temp_v1 & 0xFF) << 8) | (temp_v1 >> 8);
 }
 
-s32 func_0003E8B8(void *arg0) {
+s32 func_0003E8B8(struct Unk_func_0003E8B8_0 *arg0) {
     u16 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, u16 *, 0x10);
+    temp_v1 = arg0->unk10;
     return ((temp_v1 & 0xFF) << 8) | (temp_v1 >> 8);
 }
 
-s32 func_0003E8D0(void *arg0) {
+s32 func_0003E8D0(struct Unk_func_0003E8D0_0 *arg0) {
     u16 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, u16 *, 0x12);
+    temp_v1 = arg0->unk12;
     return ((temp_v1 & 0xFF) << 8) | (temp_v1 >> 8);
 }
 
@@ -1569,14 +1569,14 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003EA30);
 
-void func_0003EA64(void *arg0) {
+void func_0003EA64(struct Unk_func_0003EA64_0 *arg0) {
     s32 temp_v0;
 
     func_0003EEDC();
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x4C);
+    temp_v0 = arg0->unk4C;
     if (temp_v0 > 0) {
         func_0003EBF0(arg0, temp_v0);
-        M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+        arg0->unk4C = 0;
     }
 }
 
@@ -1648,8 +1648,8 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003F72C);
 
-s32 func_0003F768(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x120) != 0;
+s32 func_0003F768(struct Unk_func_0003F768_0 *arg0) {
+    return arg0->unk120 != 0;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003F774);
@@ -1686,7 +1686,7 @@ void func_00040238(void) {
     func_0003EC84();
 }
 
-void func_00040254(s32 arg0, void *arg1) {
+void func_00040254(s32 arg0, struct Unk_func_0003E6DC_0 *arg1) {
     void *sp0;
     func_0003E6DC(arg1, &sp0);
     func_0004028C(arg0, &sp0);
@@ -1704,11 +1704,11 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00040478);
 
-s32 func_00040528(void *arg0, M2C_UNK arg1) {
+s32 func_00040528(struct Unk_func_00040528_0 *arg0, M2C_UNK arg1) {
     s32 temp_v0;
 
     temp_v0 = func_000403B4(arg1);
-    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (temp_v0 == 1);
+    arg0->unk1C = (s32) (temp_v0 == 1);
     return ((temp_v0 ^ 1) == 0) ? 0 : -1;
 }
 
@@ -1716,11 +1716,11 @@ INCLUDE_RODATA("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00040568);
 
-s32 func_00040604(void *arg0, s32 arg1) {
+s32 func_00040604(struct Unk_func_00040604_0 *arg0, s32 arg1) {
     s32 temp_v0;
 
     temp_v0 = func_000403B4(arg1);
-    M2C_FIELD(arg0, s32 *, 0x18) = temp_v0;
+    arg0->unk18 = temp_v0;
     return (~temp_v0 != 0) ? 0 : -1;
 }
 
@@ -1772,22 +1772,22 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0004166C);
 
-void func_0004175C(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B2F00;
+void func_0004175C(struct Unk_func_0004175C_0 *arg0) {
+    arg0->unk0 = &D_000B2F00;
     func_000418D0((s32) arg0);
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+    arg0->unk4 = 0;
 }
 
-void func_00041790(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B2F00;
+void func_00041790(struct Unk_func_00041790_0 *arg0, s32 arg1) {
+    arg0->unk0 = &D_000B2F00;
     func_000418D0((s32) arg0);
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    arg0->unk4 = arg1;
 }
 
-void func_000417D0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B2F00;
+void func_000417D0(struct Unk_func_000417D0_0 *arg0, s32 arg1) {
+    arg0->unk0 = &D_000B2F00;
     func_000418D0((s32) arg0);
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    arg0->unk4 = arg1;
 }
 
 void func_00041810(M2C_UNK **arg0) {
@@ -1824,14 +1824,14 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_000419CC);
 
-void func_00041A10(void *arg0, s32 arg1) {
+void func_00041A10(struct Unk_func_00041A10_0 *arg0, s32 arg1) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x120);
+    temp_v0 = arg0->unk120;
     if (temp_v0 > 0) {
         sceKernelDeleteThread(temp_v0);
     }
-    M2C_FIELD(arg0, s32 *, 0x120) = arg1;
+    arg0->unk120 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00041A54);
@@ -1858,14 +1858,14 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00041E68);
 
-s32 func_00041F24(void *arg0, s32 arg1) {
+s32 func_00041F24(struct Unk_func_00041F24_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0;
     if (arg1 > 0) {
         var_v1 = sceIoClose(arg1);
-        if (arg1 == M2C_FIELD(arg0, s32 *, 0x11C)) {
-            M2C_FIELD(arg0, s32 *, 0x11C) = 0;
+        if (arg1 == arg0->unk11C) {
+            arg0->unk11C = 0;
         }
     }
     return var_v1;
@@ -1892,34 +1892,34 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00042390);
 
-s32 func_000423F0(void *arg0) {
+s32 func_000423F0(struct Unk_func_00041F24_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 var_s1;
 
     var_s1 = 0;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x120);
+    temp_v0 = arg0->unk120;
     if (temp_v0 > 0) {
         var_s1 = sceKernelWaitThreadEndCB(temp_v0);
         if (var_s1 != 0x800201A8) {
-            temp_v0_2 = M2C_FIELD(arg0, s32 *, 0x11C);
+            temp_v0_2 = arg0->unk11C;
             if (temp_v0_2 > 0) {
                 func_00041F24(arg0, temp_v0_2);
                 func_000419CC(arg0, 0);
             }
             if (var_s1 == 0x800200D2) {
-                var_s1 = M2C_FIELD(arg0, s32 *, 0x144);
+                var_s1 = arg0->unk144;
             }
         }
     }
     return var_s1;
 }
 
-s32 func_00042478(void *arg0, void *arg1, s32 arg2, s32 arg3, u32 arg4) {
+s32 func_00042478(struct Unk_func_00042478_0 *arg0, void *arg1, s32 arg2, s32 arg3, u32 arg4) {
     u32 temp_v0;
 
     temp_v0 = sceKernelCreateThread(arg1, arg2, arg3, arg4, 0U, NULL);
-    M2C_FIELD(arg0, u32 *, 0x120) = temp_v0;
+    arg0->unk120 = temp_v0;
     return __builtin_allegrex_min(temp_v0, 0);
 }
 
@@ -1947,8 +1947,8 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_000425E4);
 
-void func_00042608(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 8) = arg1;
+void func_00042608(struct Unk_func_00042608_0 *arg0, s32 arg1) {
+    arg0->unk8 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00042610);
@@ -1957,47 +1957,47 @@ INCLUDE_RODATA("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00042694);
 
-s32 func_0004276C(void *arg0) {
+s32 func_0004276C(struct Unk_func_0004276C_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0xC);
+    temp_v0 = arg0->unkC;
     if (temp_v0 > 0) {
         sceKernelDeleteSema(temp_v0);
-        M2C_FIELD(arg0, s32 *, 0xC) = 0;
+        arg0->unkC = 0;
     }
-    temp_v0_2 = M2C_FIELD(arg0, s32 *, 0x10);
+    temp_v0_2 = arg0->unk10;
     if (temp_v0_2 > 0) {
         sceKernelDeleteEventFlag(temp_v0_2);
-        M2C_FIELD(arg0, s32 *, 0x10) = 0;
+        arg0->unk10 = 0;
     }
     return 0;
 }
 
-s32 func_000427C0(void *arg0) {
+s32 func_000427C0(struct Unk_func_000427C0_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 0;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x10);
+    temp_v0 = arg0->unk10;
     if (temp_v0 > 0) {
         var_v1 = sceKernelSetEventFlag(temp_v0);
     }
     return var_v1;
 }
 
-s32 func_000427F4(void *arg0) {
+s32 func_000427F4(struct Unk_func_000427F4_0 *arg0) {
     s32 var_a2;
     u32 temp_a1;
     u32 temp_v0;
 
     var_a2 = 0;
-    if (M2C_FIELD(arg0, s32 *, 0x14) == 0) {
-        temp_a1 = M2C_FIELD(arg0, u32 *, 0x24);
-        temp_v0 = M2C_FIELD(arg0, u32 *, 0x20);
+    if (arg0->unk14 == 0) {
+        temp_a1 = arg0->unk24;
+        temp_v0 = arg0->unk20;
         var_a2 = temp_v0 - temp_a1;
         if (temp_a1 >= temp_v0) {
-            var_a2 = M2C_FIELD(arg0, s32 *, 0x1C) - temp_a1;
+            var_a2 = arg0->unk1C - temp_a1;
         }
     }
     return var_a2;
@@ -2009,36 +2009,36 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00042B14);
 
-s32 func_00042B50(void *arg0, void *arg1) {
+s32 func_00042B50(struct Unk_func_00042B50_0 *arg0, struct Unk_func_00042B50_1 *arg1) {
     s32 temp_v0;
     s32 var_s2;
     s32 var_v0;
 
     var_s2 = 0;
-    if (M2C_FIELD(arg0, s32 *, 4) == 0) {
+    if (arg0->unk4 == 0) {
         func_000425B0((s32) arg0, 0x8001000C);
         var_v0 = 0x8001000C;
     } else {
-        sceKernelWaitSemaCB(M2C_FIELD(arg0, s32 *, 0xC), 1, 0);
+        sceKernelWaitSemaCB(arg0->unkC, 1, 0);
         temp_v0 = func_00042B14(arg0);
-        M2C_FIELD(arg1, s32 *, 8) = temp_v0;
+        arg1->unk8 = temp_v0;
         if (temp_v0 != 0) {
-            M2C_FIELD(arg1, s32 *, 0) = (s32) M2C_FIELD(arg0, s32 *, 0x20);
+            arg1->unk0 = (s32) arg0->unk20;
         } else {
             var_s2 = -1;
         }
-        sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0xC), 1);
+        sceKernelSignalSema(arg0->unkC, 1);
         var_v0 = var_s2;
     }
     return var_v0;
 }
 
-s32 func_00042BEC(void *arg0) {
+s32 func_00042BEC(struct Unk_func_00042BEC_0 *arg0) {
     s32 temp_s1;
 
-    sceKernelWaitSemaCB(M2C_FIELD(arg0, s32 *, 0xC), 1, 0);
+    sceKernelWaitSemaCB(arg0->unkC, 1, 0);
     temp_s1 = func_00042B14(arg0);
-    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0xC), 1);
+    sceKernelSignalSema(arg0->unkC, 1);
     return temp_s1;
 }
 
@@ -2046,29 +2046,29 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00042D8C);
 
-u32 func_00042E18(void *arg0, s32 arg1, s32 arg2) {
+u32 func_00042E18(struct Unk_func_00042E18_0 *arg0, s32 arg1, s32 arg2) {
     u32 temp_a3;
     u32 var_a1;
 
-    temp_a3 = M2C_FIELD(arg0, u32 *, 0x1C);
+    temp_a3 = arg0->unk1C;
     var_a1 = arg1 + arg2;
     if (var_a1 >= temp_a3) {
-        var_a1 = M2C_FIELD(arg0, u32 *, 0x18) + (arg2 - (temp_a3 - arg1));
+        var_a1 = arg0->unk18 + (arg2 - (temp_a3 - arg1));
     }
     if (var_a1 == temp_a3) {
-        var_a1 = M2C_FIELD(arg0, u32 *, 0x18);
+        var_a1 = arg0->unk18;
     }
     return var_a1;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_00042E48);
 
-s32 func_00042E90(void *arg0) {
+s32 func_00042E90(struct Unk_func_00042E90_0 *arg0) {
     s32 temp_s1;
 
-    sceKernelWaitSemaCB(M2C_FIELD(arg0, s32 *, 0xC), 1, 0);
+    sceKernelWaitSemaCB(arg0->unkC, 1, 0);
     temp_s1 = func_00042E48(arg0);
-    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0xC), 1);
+    sceKernelSignalSema(arg0->unkC, 1);
     return temp_s1;
 }
 

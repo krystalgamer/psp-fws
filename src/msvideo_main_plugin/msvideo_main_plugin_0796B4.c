@@ -38,39 +38,39 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_000798F4);
 
-s32 func_000799C0(void *arg0, s32 *arg1) {
+s32 func_000799C0(struct Unk_func_000775E4_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 0x2002;
-    if ((M2C_FIELD(arg0, s32 *, 0x7C) != 0) && (M2C_FIELD(arg0, s32 *, 0x84) != 0)) {
+    if ((arg0->unk7C != 0) && (arg0->unk84 != 0)) {
         var_v1 = 0;
-        *arg1 = M2C_FIELD(arg0, s32 *, 0x90);
+        *arg1 = arg0->unk90;
     }
     return var_v1;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_000799EC);
 
-s32 func_00079AC0(void *arg0, s32 *arg1) {
+s32 func_00079AC0(struct Unk_func_0007763C_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 0x2003;
-    if (M2C_FIELD(arg0, s32 *, 0xA0) != 0) {
+    if (arg0->unkA0 != 0) {
         var_v1 = 0;
-        *arg1 = M2C_FIELD(arg0, s32 *, 0xB4);
+        *arg1 = arg0->unkB4;
     }
     return var_v1;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_00079AE0);
 
-s32 func_00079B74(void *arg0, s32 *arg1) {
+s32 func_00079B74(struct Unk_func_00077694_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 0x2003;
-    if (M2C_FIELD(arg0, s32 *, 0xC8) != 0) {
+    if (arg0->unkC8 != 0) {
         var_v1 = 0;
-        *arg1 = M2C_FIELD(arg0, s32 *, 0xD8);
+        *arg1 = arg0->unkD8;
     }
     return var_v1;
 }
@@ -89,13 +89,13 @@ s32 func_00079B94(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_00079BE4);
 
-s32 func_00079C58(void *arg0, s32 *arg1) {
+s32 func_00079C58(struct Unk_func_00077718_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 0x2003;
-    if (M2C_FIELD(arg0, s32 *, 0x194) != 0) {
+    if (arg0->unk194 != 0) {
         var_v1 = 0;
-        *arg1 = M2C_FIELD(arg0, s32 *, 0x1A0);
+        *arg1 = arg0->unk1A0;
     }
     return var_v1;
 }

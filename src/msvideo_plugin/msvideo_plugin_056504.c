@@ -2,13 +2,13 @@
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
-s32 func_00056504(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 func_00056504(struct Unk_func_00056504_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
     void *temp_a0;
 
     var_v0 = 0x2003;
     if (arg0 != NULL) {
-        temp_a0 = M2C_FIELD(arg0, void **, 0x160);
+        temp_a0 = arg0->unk160;
         var_v0 = 7;
         if (temp_a0 != NULL) {
             M2C_FIELD(temp_a0, s32 *, 0x24) = arg3;
@@ -46,83 +46,83 @@ s32 func_0005656C(s32 *arg0) {
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_056504", func_00056578);
 
-s32 func_000565E8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_000565E8(struct Unk_func_000565E8_0 *arg0) {
+    return arg0->unk10;
 }
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_056504", func_000565F0);
 
-s32 func_00056660(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_00056660(struct Unk_func_00056660_0 *arg0) {
+    return arg0->unk10;
 }
 
-s32 func_00056668(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_00056668(struct Unk_func_00056668_0 *arg0) {
+    return arg0->unk10;
 }
 
-void func_00056670(void *arg0, s32 *arg1, s32 *arg2, s32 *arg3, s32 *arg4) {
+void func_00056670(struct Unk_func_00056670_0 *arg0, s32 *arg1, s32 *arg2, s32 *arg3, s32 *arg4) {
     if (arg1 != NULL) {
-        *arg1 = M2C_FIELD(arg0, s32 *, 0x28);
+        *arg1 = arg0->unk28;
     }
     if (arg2 != NULL) {
-        *arg2 = M2C_FIELD(arg0, s32 *, 0x2C);
+        *arg2 = arg0->unk2C;
     }
     if (arg3 != NULL) {
-        *arg3 = M2C_FIELD(arg0, s32 *, 0x30);
+        *arg3 = arg0->unk30;
     }
     if (arg4 != NULL) {
-        *arg4 = M2C_FIELD(arg0, s32 *, 0x34);
+        *arg4 = arg0->unk34;
     }
 }
 
-void func_000566B8(void *arg0, s32 *arg1, s32 *arg2, s32 *arg3, s32 *arg4) {
+void func_000566B8(struct Unk_func_000566B8_0 *arg0, s32 *arg1, s32 *arg2, s32 *arg3, s32 *arg4) {
     if (arg1 != NULL) {
-        *arg1 = M2C_FIELD(arg0, s32 *, 0x28);
+        *arg1 = arg0->unk28;
     }
     if (arg2 != NULL) {
-        *arg2 = M2C_FIELD(arg0, s32 *, 0x2C);
+        *arg2 = arg0->unk2C;
     }
     if (arg3 != NULL) {
-        *arg3 = M2C_FIELD(arg0, s32 *, 0x30);
+        *arg3 = arg0->unk30;
     }
     if (arg4 != NULL) {
-        *arg4 = M2C_FIELD(arg0, s32 *, 0x34);
+        *arg4 = arg0->unk34;
     }
 }
 
-void func_00056700(void *arg0, s32 *arg1, s32 *arg2) {
+void func_00056700(struct Unk_func_00056700_0 *arg0, s32 *arg1, s32 *arg2) {
     if (arg1 != NULL) {
-        *arg1 = M2C_FIELD(arg0, s32 *, 0x20);
+        *arg1 = arg0->unk20;
     }
     if (arg2 != NULL) {
-        *arg2 = M2C_FIELD(arg0, s32 *, 0x24);
+        *arg2 = arg0->unk24;
     }
 }
 
-void func_00056728(void *arg0, s32 *arg1, s32 *arg2) {
+void func_00056728(struct Unk_func_00056728_0 *arg0, s32 *arg1, s32 *arg2) {
     if (arg1 != NULL) {
-        *arg1 = M2C_FIELD(arg0, s32 *, 0x20);
+        *arg1 = arg0->unk20;
     }
     if (arg2 != NULL) {
-        *arg2 = M2C_FIELD(arg0, s32 *, 0x24);
+        *arg2 = arg0->unk24;
     }
 }
 
-void func_00056750(void *arg0, s32 *arg1, s32 *arg2) {
+void func_00056750(struct Unk_func_00056750_0 *arg0, s32 *arg1, s32 *arg2) {
     if (arg1 != NULL) {
-        *arg1 = M2C_FIELD(arg0, s32 *, 0x28);
+        *arg1 = arg0->unk28;
     }
     if (arg2 != NULL) {
-        *arg2 = M2C_FIELD(arg0, s32 *, 0x2C);
+        *arg2 = arg0->unk2C;
     }
 }
 
-void func_00056778(void *arg0, s32 *arg1, s32 *arg2) {
+void func_00056778(struct Unk_func_00056778_0 *arg0, s32 *arg1, s32 *arg2) {
     if (arg1 != NULL) {
-        *arg1 = M2C_FIELD(arg0, s32 *, 0x28);
+        *arg1 = arg0->unk28;
     }
     if (arg2 != NULL) {
-        *arg2 = M2C_FIELD(arg0, s32 *, 0x2C);
+        *arg2 = arg0->unk2C;
     }
 }
 

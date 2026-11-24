@@ -2,28 +2,28 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-s32 func_000A6698(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x28) & 1;
+s32 func_000A6698(struct Unk_func_000A6698_0 *arg0) {
+    return arg0->unk28 & 1;
 }
 
-s32 func_000A66A4(void *arg0) {
-    return __builtin_allegrex_ext(M2C_FIELD(arg0, s32 *, 0x28), 1, 1);
+s32 func_000A66A4(struct Unk_func_000A66A4_0 *arg0) {
+    return __builtin_allegrex_ext(arg0->unk28, 1, 1);
 }
 
-s32 func_000A66B0(void *arg0) {
-    return __builtin_allegrex_ext(M2C_FIELD(arg0, s32 *, 0x28), 4, 1);
+s32 func_000A66B0(struct Unk_func_000A66B0_0 *arg0) {
+    return __builtin_allegrex_ext(arg0->unk28, 4, 1);
 }
 
-void func_000A66BC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x28) = (s32) (M2C_FIELD(arg0, s32 *, 0x28) | 1);
+void func_000A66BC(struct Unk_func_000A66BC_0 *arg0) {
+    arg0->unk28 = (s32) (arg0->unk28 | 1);
 }
 
-void func_000A66CC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x28) = (s32) (M2C_FIELD(arg0, s32 *, 0x28) | 2);
+void func_000A66CC(struct Unk_func_000A66CC_0 *arg0) {
+    arg0->unk28 = (s32) (arg0->unk28 | 2);
 }
 
-void func_000A66DC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x28) = (s32) (M2C_FIELD(arg0, s32 *, 0x28) | 0x10);
+void func_000A66DC(struct Unk_func_000A66DC_0 *arg0) {
+    arg0->unk28 = (s32) (arg0->unk28 | 0x10);
 }
 
 s32 func_000A66EC(s32 arg0) {
@@ -54,11 +54,11 @@ s32 func_000A671C(s32 arg0) {
     return arg0 + 0x1B0;
 }
 
-s32 func_000A6724(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x18C);
+s32 func_000A6724(struct Unk_func_000A6724_0 *arg0) {
+    return arg0->unk18C;
 }
 
-s32 func_000A672C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x190);
+s32 func_000A672C(struct Unk_func_000A672C_0 *arg0) {
+    return arg0->unk190;
 }
 

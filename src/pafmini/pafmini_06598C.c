@@ -2,26 +2,26 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-void func_0006598C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_0006598C(struct Unk_func_0006598C_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_0006599C);
 
-void func_000659DC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_000659DC(struct Unk_func_000659DC_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_000659EC);
 
-void func_00065A2C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_00065A2C(struct Unk_func_00065A2C_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_00065A3C);

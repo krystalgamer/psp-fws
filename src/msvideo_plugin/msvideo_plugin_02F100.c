@@ -2,9 +2,9 @@
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
-void func_0002F100(void *arg0) {
-    M2C_FIELD(arg0, s16 *, 0x33E) = 0;
-    M2C_FIELD(arg0, s16 *, 0x33C) = 0;
+void func_0002F100(struct Unk_func_0002F100_0 *arg0) {
+    arg0->unk33E = 0;
+    arg0->unk33C = 0;
 }
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_02F100", func_0002F10C);

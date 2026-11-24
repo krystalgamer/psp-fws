@@ -2,12 +2,12 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-s32 func_0006ED70(void *arg0, s32 arg1) {
+s32 func_0006ED70(struct Unk_func_0006ED70_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 2;
-    if (M2C_FIELD(arg0, s32 *, 0x1BC) != 0) {
-        var_v1 = (func_00071D68(M2C_FIELD(arg0, s32 *, 0xAC), arg1) == 0) ? 0 : 5;
+    if (arg0->unk1BC != 0) {
+        var_v1 = (func_00071D68(arg0->unkAC, arg1) == 0) ? 0 : 5;
     }
     return var_v1;
 }
@@ -24,17 +24,17 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_06
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_06ED70", func_0006EF1C);
 
-s32 func_0006EF60(void *arg0) {
-    func_00070E98(M2C_FIELD(arg0, s32 *, 0xAC));
+s32 func_0006EF60(struct Unk_func_0006EF60_0 *arg0) {
+    func_00070E98(arg0->unkAC);
     return 0;
 }
 
-s32 func_0006EF80(void *arg0) {
-    func_00071808(M2C_FIELD(arg0, s32 *, 0xAC));
+s32 func_0006EF80(struct Unk_func_0006EF80_0 *arg0) {
+    func_00071808(arg0->unkAC);
     return 0;
 }
 
-void func_0006EFA0(void *arg0) {
+void func_0006EFA0(struct Unk_func_0006EF80_0 *arg0) {
     func_0006EF80(arg0);
 }
 

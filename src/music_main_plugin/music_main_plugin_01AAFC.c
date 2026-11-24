@@ -1,10 +1,10 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-void func_0001AAFC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_0001AAFC(struct Unk_func_0001AAFC_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001AB0C);
@@ -91,50 +91,50 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001B344);
 
-void func_0001B3FC(void *arg0) {
+void func_0001B3FC(struct Unk_func_0001B3FC_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0x14);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009BC68;
+    temp_v1 = arg0->unk14;
+    arg0->unk0 = &D_0009BC68;
     if (temp_v1 != 0) {
         scePaf_B3D2C3BB(temp_v1);
-        M2C_FIELD(arg0, s32 *, 0x14) = 0;
+        arg0->unk14 = 0;
     }
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x24);
+    temp_v0 = arg0->unk24;
     if (temp_v0 != 0) {
         scePaf_B3D2C3BB(temp_v0);
-        M2C_FIELD(arg0, s32 *, 0x24) = 0;
+        arg0->unk24 = 0;
     }
-    temp_v0_2 = M2C_FIELD(arg0, s32 *, 0x18);
+    temp_v0_2 = arg0->unk18;
     if (temp_v0_2 != 0) {
         scePaf_B3D2C3BB(temp_v0_2);
-        M2C_FIELD(arg0, s32 *, 0x18) = 0;
+        arg0->unk18 = 0;
     }
-    temp_v0_3 = M2C_FIELD(arg0, s32 *, 0x1C);
+    temp_v0_3 = arg0->unk1C;
     if (temp_v0_3 != 0) {
         scePaf_B3D2C3BB(temp_v0_3);
-        M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+        arg0->unk1C = 0;
     }
-    M2C_FIELD(arg0, M2C_UNK **, 0x10) = &D_0009B888;
+    arg0->unk10 = &D_0009B888;
     D_000A43D4 -= 1;
     scePaf_4E67BB08(arg0);
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001B4BC);
 
-s32 func_0001B56C(void *arg0, void *arg1) {
+s32 func_0001B56C(struct Unk_func_0001B56C_0 *arg0, struct Unk_func_0001B56C_1 *arg1) {
     s32 var_v1;
 
     var_v1 = 0x8000FFFF;
     if (arg1 != NULL) {
         var_v1 = 0x80108F0E;
-        if ((M2C_FIELD(arg1, s32 *, 4) ^ 1) == 0) {
-            M2C_FIELD(arg0, void **, 0xC) = arg1;
+        if ((arg1->unk4 ^ 1) == 0) {
+            arg0->unkC = arg1;
             var_v1 = 0;
-            M2C_FIELD(arg0, s32 *, 8) = (s32) M2C_FIELD(arg1, s32 *, 8);
+            arg0->unk8 = (s32) arg1->unk8;
         }
     }
     return var_v1;
@@ -158,20 +158,20 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001B838);
 
-s32 func_0001B870(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x30);
+s32 func_0001B870(struct Unk_func_0001B870_0 *arg0) {
+    return arg0->unk30;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001B878);
 
-s32 func_0001B8B0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x40);
+s32 func_0001B8B0(struct Unk_func_0001B8B0_0 *arg0) {
+    return arg0->unk40;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001B8B8);
 
-s32 func_0001B914(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x30) + M2C_FIELD(arg0, s32 *, 0x40);
+s32 func_0001B914(struct Unk_func_0001B914_0 *arg0) {
+    return arg0->unk30 + arg0->unk40;
 }
 
 s32 func_0001B924(void **arg0) {
@@ -208,9 +208,9 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001BDB8);
 
-s32 func_0001BEB4(void *arg0) {
-    func_0001BEF4((s32) arg0, 0, M2C_FIELD(arg0, s32 *, 0x30));
-    func_0001BF5C((s32) arg0, 0, M2C_FIELD(arg0, s32 *, 0x40));
+s32 func_0001BEB4(struct Unk_func_0001BEB4_0 *arg0) {
+    func_0001BEF4((s32) arg0, 0, arg0->unk30);
+    func_0001BF5C((s32) arg0, 0, arg0->unk40);
     return 0;
 }
 
@@ -226,18 +226,18 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001C09C);
 
-void func_0001C17C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_0001C17C(struct Unk_func_0001C17C_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001C18C);
 
-void func_0001C1CC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_0001C1CC(struct Unk_func_0001C1CC_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001C1DC);
@@ -256,23 +256,23 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001C754);
 
-void func_0001C814(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_0001C814(struct Unk_func_0001C814_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001C824);
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001C864);
 
-void func_0001C8E0(void *arg0) {
+void func_0001C8E0(struct Unk_func_0001C8E0_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 8);
-    temp_v0 = M2C_FIELD(arg0, s32 *, 4) - 1;
-    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+    temp_v1 = arg0->unk8;
+    temp_v0 = arg0->unk4 - 1;
+    arg0->unk4 = temp_v0;
     if (temp_v0 >= (temp_v1 - 0x14)) {
 
     } else {
@@ -280,23 +280,23 @@ void func_0001C8E0(void *arg0) {
     }
 }
 
-void func_0001C924(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_0001C924(struct Unk_func_0001C924_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001C934);
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001C974);
 
-void func_0001C9F0(void *arg0) {
+void func_0001C9F0(struct Unk_func_0001C9F0_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 8);
-    temp_v0 = M2C_FIELD(arg0, s32 *, 4) - 1;
-    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+    temp_v1 = arg0->unk8;
+    temp_v0 = arg0->unk4 - 1;
+    arg0->unk4 = temp_v0;
     if (temp_v0 >= (temp_v1 - 0x14)) {
 
     } else {
@@ -310,14 +310,14 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001CC38);
 
-void func_0001CCAC(void *arg0) {
+void func_0001CCAC(struct Unk_func_0001CCAC_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0x408);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009BD28;
+    temp_v1 = arg0->unk408;
+    arg0->unk0 = &D_0009BD28;
     if (temp_v1 != 0) {
         scePaf_B3D2C3BB(temp_v1);
-        M2C_FIELD(arg0, s32 *, 0x408) = 0;
+        arg0->unk408 = 0;
     }
 }
 
@@ -345,14 +345,14 @@ void func_0001D100(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01AAFC", func_0001D11C);
 
-s32 func_0001D170(void *arg0) {
+s32 func_0001D170(struct Unk_func_0001D170_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 1;
-    if (M2C_FIELD(arg0, s32 *, 0x408) == 0) {
+    if (arg0->unk408 == 0) {
         temp_v0 = scePaf_F13EBB78(0x401);
-        M2C_FIELD(arg0, s32 *, 0x408) = temp_v0;
+        arg0->unk408 = temp_v0;
         var_v1 = 0;
         if (temp_v0 != 0) {
             scePaf_6829D7AF(temp_v0, 0, 0x401);

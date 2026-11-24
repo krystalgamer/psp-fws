@@ -45,18 +45,18 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_10C5E0", func_0010C930);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_10C5E0", func_0010CAB8);
 
-s32 func_0010CB14(s32 arg0, void *arg1) {
+s32 func_0010CB14(s32 arg0, struct Unk_func_0010CB14_1 *arg1) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_FIELD(arg1, s32 *, 8) == 0) {
-        M2C_FIELD(arg1, s32 *, 4) = 0;
+    if (arg1->unk8 == 0) {
+        arg1->unk4 = 0;
     } else {
         temp_v0 = func_00110EB0(arg0, (s32) arg1);
         var_v1 = temp_v0;
-        M2C_FIELD(arg1, s32 *, 8) = 0;
-        M2C_FIELD(arg1, s32 *, 4) = 0;
+        arg1->unk8 = 0;
+        arg1->unk4 = 0;
     }
     return var_v1;
 }

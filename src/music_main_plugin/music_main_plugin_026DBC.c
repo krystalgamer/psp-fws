@@ -2,24 +2,24 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-s32 func_00026DBC(void *arg0) {
+s32 func_00026DBC(struct Unk_func_00026DBC_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 4;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x5C);
+    temp_v0 = arg0->unk5C;
     if (temp_v0 != 0) {
         var_v1 = (func_00027840(temp_v0) >= 0) ? 0 : 0x11;
     }
     return var_v1;
 }
 
-s32 func_00026DF8(void *arg0) {
+s32 func_00026DF8(struct Unk_func_00026DF8_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 4;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x5C);
+    temp_v0 = arg0->unk5C;
     if (temp_v0 != 0) {
         var_v1 = (func_00027864(temp_v0) >= 0) ? 0 : 0x12;
     }
@@ -104,21 +104,21 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_000290D4);
 
-void func_000291A0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 8) = arg1;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009C3E0;
-    M2C_FIELD(arg0, s32 *, 0xC) = scePaf_F13EBB78(arg1 * 0x10);
-    M2C_FIELD(arg0, s32 *, 0x10) = scePaf_F13EBB78(arg1 * 4);
+void func_000291A0(struct Unk_func_000291A0_0 *arg0, s32 arg1) {
+    arg0->unk8 = arg1;
+    arg0->unk0 = &D_0009C3E0;
+    arg0->unkC = scePaf_F13EBB78(arg1 * 0x10);
+    arg0->unk10 = scePaf_F13EBB78(arg1 * 4);
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_000291F8);
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_0002932C);
 
-s32 func_00029368(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+s32 func_00029368(struct Unk_func_00029368_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     void *temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0xC) + (arg1 * 0x10);
+    temp_v1 = arg0->unkC + (arg1 * 0x10);
     M2C_FIELD(temp_v1, s32 *, 0) = arg2;
     M2C_FIELD(temp_v1, s32 *, 4) = arg3;
     M2C_FIELD(temp_v1, s32 *, 8) = arg4;

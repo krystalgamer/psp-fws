@@ -31,13 +31,13 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000001EC);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00000210);
 
-s32 func_00000250(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x690) = arg1;
+s32 func_00000250(struct Unk_func_00000250_0 *arg0, s32 arg1) {
+    arg0->unk690 = arg1;
     return arg1;
 }
 
-s32 func_0000025C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x690);
+s32 func_0000025C(struct Unk_func_0000025C_0 *arg0) {
+    return arg0->unk690;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00000264);
@@ -587,7 +587,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00005A0C);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00005A88);
 
-s32 func_00005B24(void *arg0) {
+s32 func_00005B24(struct Unk_func_00005B24_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
@@ -595,22 +595,22 @@ s32 func_00005B24(void *arg0) {
     s32 var_v1;
 
     var_v1 = -1;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0);
+    temp_v0 = arg0->unk0;
     if (temp_v0 != 0) {
         temp_v0_2 = func_00005A88(temp_v0, 0);
-        M2C_FIELD(arg0, s32 *, 4) = temp_v0_2;
+        arg0->unk4 = temp_v0_2;
         var_v1 = -3;
         if (temp_v0_2 > 0) {
             temp_v0_3 = sceHVNetfront_Module_24B1FCE6((temp_v0_2 * 4) + 4);
-            M2C_FIELD(arg0, s32 *, 8) = temp_v0_3;
+            arg0->unk8 = temp_v0_3;
             var_v1 = -4;
             if (temp_v0_3 != 0) {
-                func_00005A88(M2C_FIELD(arg0, s32 *, 0), temp_v0_3);
-                temp_v0_4 = sceHVNetfront_Module_24B1FCE6(M2C_FIELD(arg0, s32 *, 4));
-                M2C_FIELD(arg0, s32 *, 0xC) = temp_v0_4;
+                func_00005A88(arg0->unk0, temp_v0_3);
+                temp_v0_4 = sceHVNetfront_Module_24B1FCE6(arg0->unk4);
+                arg0->unkC = temp_v0_4;
                 var_v1 = -5;
                 if (temp_v0_4 != 0) {
-                    sceHVNetfront_Module_D611E938(temp_v0_4, 3, M2C_FIELD(arg0, s32 *, 4) - 1);
+                    sceHVNetfront_Module_D611E938(temp_v0_4, 3, arg0->unk4 - 1);
                     var_v1 = 0;
                 }
             }
@@ -630,21 +630,21 @@ s32 func_00005BC4(s32 arg0, M2C_UNK arg1) {
     return var_v1;
 }
 
-void func_00005C34(void *arg0) {
+void func_00005C34(struct Unk_func_00005C34_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
 
     if (arg0 != NULL) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 0xC);
+        temp_v0 = arg0->unkC;
         if (temp_v0 != 0) {
             sceHVNetfront_Module_A2F4AC9E(temp_v0);
         }
-        temp_v0_2 = M2C_FIELD(arg0, s32 *, 8);
+        temp_v0_2 = arg0->unk8;
         if (temp_v0_2 != 0) {
             sceHVNetfront_Module_A2F4AC9E(temp_v0_2);
         }
-        temp_v0_3 = M2C_FIELD(arg0, s32 *, 0);
+        temp_v0_3 = arg0->unk0;
         if (temp_v0_3 != 0) {
             sceHVNetfront_Module_A2F4AC9E(temp_v0_3);
         }
@@ -902,19 +902,19 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", sceHVNetfront_Module_1
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", sceHVNetfront_Module_19BA8C5E);
 
-s32 func_00007E60(void *arg0, void *arg1) {
+s32 func_00007E60(struct Unk_func_00007E60_0 *arg0, struct Unk_func_00007E60_1 *arg1) {
     if (arg1 != NULL) {
-        M2C_FIELD(arg1, s32 *, 0) = (s32) M2C_FIELD(arg0, s32 *, 8);
-        M2C_FIELD(arg1, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 0xC);
-        M2C_FIELD(arg1, s32 *, 8) = (s32) M2C_FIELD(arg0, s32 *, 0x10);
-        M2C_FIELD(arg1, s32 *, 0xC) = (s32) M2C_FIELD(arg0, s32 *, 0x14);
+        arg1->unk0 = (s32) arg0->unk8;
+        arg1->unk4 = (s32) arg0->unkC;
+        arg1->unk8 = (s32) arg0->unk10;
+        arg1->unkC = (s32) arg0->unk14;
     }
     return 1;
 }
 
-void sceHVNetfront_Module_1C77605A(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0x18) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg2;
+void sceHVNetfront_Module_1C77605A(struct Unk_sceHVNetfront_Module_1C77605A_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk18 = arg1;
+    arg0->unk1C = arg2;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00007E9C);
@@ -936,7 +936,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00008030);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_000082C8);
 
-void func_0000858C(void *arg0) {
+void func_0000858C(struct Unk_func_0000858C_0 *arg0) {
     if (D_00135898 == 0) {
         func_00008ABC(arg0);
         return;
@@ -972,8 +972,8 @@ void sceHVNetfront_Module_0FB2D27A(void) {
     sceKernelSignalSema((s32) D_0013588C, 1);
 }
 
-void func_00008ABC(void *arg0) {
-    func_000087C8(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8), M2C_FIELD(arg0, s32 *, 0xC));
+void func_00008ABC(struct Unk_func_0000858C_0 *arg0) {
+    func_000087C8(arg0->unk0, arg0->unk4, arg0->unk8, arg0->unkC);
 }
 
 void func_00008AE8(void) {
@@ -1000,16 +1000,16 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00009154);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00009188);
 
-void func_000092C4(void *arg0) {
+void func_000092C4(struct Unk_func_000092C4_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
 
     if (arg0 != NULL) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 0);
+        temp_v0 = arg0->unk0;
         if (temp_v0 != 0) {
             func_00008B58(temp_v0);
         }
-        temp_v0_2 = M2C_FIELD(arg0, s32 *, 4);
+        temp_v0_2 = arg0->unk4;
         if (temp_v0_2 != 0) {
             sceHVNetfront_Module_A2F4AC9E(temp_v0_2);
         }
@@ -1025,10 +1025,10 @@ s32 func_0000948C(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront", func_00009494);
 
-void func_000094F0(void *arg0) {
+void func_000094F0(struct Unk_func_000094F0_0 *arg0) {
     if (arg0 != NULL) {
         func_000095F4();
-        M2C_FIELD(arg0, M2C_UNK (**)(void *), 0x38)(M2C_FIELD(arg0, void **, 0x4C));
+        M2C_FIELD(arg0, M2C_UNK (**)(void *), 0x38)(arg0->unk4C);
         M2C_FIELD(arg0, M2C_UNK (**)(void *), 0x38)(arg0);
     }
 }
