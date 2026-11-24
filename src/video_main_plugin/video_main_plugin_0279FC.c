@@ -2,7 +2,12 @@
 #include "common.h"
 #include "video_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_0279FC", func_000279FC);
+s32 func_000279FC(s32 arg0) {
+    if (arg0 != 0) {
+        func_00027E70(arg0);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_0279FC", func_00027A20);
 
