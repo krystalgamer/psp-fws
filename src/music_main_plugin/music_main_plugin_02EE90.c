@@ -1015,7 +1015,11 @@ void func_00041444(void) {
     func_00041384(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00041464);
+void func_00041464(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00041474);
 
@@ -1524,9 +1528,21 @@ void func_00045DD0(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00045E08);
+void func_00045E08(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    func_00045F40(arg0, arg1, arg2, arg3);
+    M2C_FIELD(arg0, s32 *, 0x1C) = arg4;
+    M2C_FIELD(arg0, s32 *, 0x20) = arg5;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009DE70;
+    M2C_FIELD(arg0, s32 *, 4) = 6;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00045E60);
+void func_00045E60(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    func_00045F40(arg0, arg1, arg2, arg3);
+    M2C_FIELD(arg0, s32 *, 0x1C) = arg4;
+    M2C_FIELD(arg0, s32 *, 0x20) = arg5;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009DE70;
+    M2C_FIELD(arg0, s32 *, 4) = 6;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00045EB8);
 
@@ -1703,7 +1719,11 @@ s32 func_00049ED4(void) {
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00049EE0);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00049EF8);
+void func_00049EF8(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009E218;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00049F10);
 
@@ -1726,9 +1746,17 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00049FFC);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0004A044);
+void func_0004A044(s32 arg0) {
+    func_00049EE0(arg0);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009E470;
+    M2C_FIELD(arg0, s32 *, 4) = 3;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0004A07C);
+void func_0004A07C(s32 arg0) {
+    func_00049EE0(arg0);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009E470;
+    M2C_FIELD(arg0, s32 *, 4) = 3;
+}
 
 void func_0004A0B4(M2C_UNK **arg0) {
     *arg0 = &D_0009E470;
@@ -2210,7 +2238,11 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0004E63C);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0004E738);
+void func_0004E738(s32 arg0) {
+    func_0004E4B8(arg0);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009E628;
+    M2C_FIELD(arg0, s32 *, 4) = 1;
+}
 
 void func_0004E770(M2C_UNK **arg0) {
     *arg0 = &D_0009E628;
@@ -2235,9 +2267,17 @@ s32 func_0004E7F8(void *arg0) {
     return (temp_v1 == 0) ? 0 : (temp_v1 + 1);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0004E808);
+void func_0004E808(s32 arg0) {
+    func_0004E4B8(arg0);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009E638;
+    M2C_FIELD(arg0, s32 *, 4) = 2;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0004E840);
+void func_0004E840(s32 arg0) {
+    func_0004E4B8(arg0);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009E638;
+    M2C_FIELD(arg0, s32 *, 4) = 2;
+}
 
 void func_0004E878(M2C_UNK **arg0) {
     *arg0 = &D_0009E638;
@@ -2264,9 +2304,17 @@ s32 func_0004E900(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0004E910);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0004E980);
+void func_0004E980(s32 arg0) {
+    func_0004E4B8(arg0);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009E648;
+    M2C_FIELD(arg0, s32 *, 4) = 4;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0004E9B8);
+void func_0004E9B8(s32 arg0) {
+    func_0004E4B8(arg0);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0009E648;
+    M2C_FIELD(arg0, s32 *, 4) = 4;
+}
 
 void func_0004E9F0(M2C_UNK **arg0) {
     *arg0 = &D_0009E648;
@@ -3584,7 +3632,19 @@ s32 func_0005B9BC(s32 arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0005B9EC);
+s32 func_0005B9EC(void) {
+    s32 var_v1;
+
+    var_v1 = 0x80108300;
+    if (D_000A52C4 != 0) {
+        func_0005BAA0();
+        func_0005BB90();
+        D_000A52C0 = 0;
+        D_000A52C4 = 0;
+        var_v1 = 0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0005BA44);
 
@@ -4258,9 +4318,17 @@ void func_0006363C(s32 arg0) {
     func_0004D564(arg0 + 0x10);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00063658);
+void func_00063658(void *arg0) {
+    func_00080388();
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A03C8;
+    M2C_FIELD(arg0, s32 *, 0x28) = 5;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00063690);
+void func_00063690(void *arg0) {
+    func_00080388();
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A03C8;
+    M2C_FIELD(arg0, s32 *, 0x28) = 5;
+}
 
 void func_000636C8(M2C_UNK **arg0) {
     *arg0 = &D_000A03C8;
@@ -4404,9 +4472,17 @@ void func_000655BC(s32 arg0) {
     func_0004D564(arg0 + 0x10);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_000655D8);
+void func_000655D8(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A04F0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_000655F0);
+void func_000655F0(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A04F0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00065608);
 
@@ -4746,9 +4822,15 @@ void func_0006ACB4(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0006ACDC);
+void func_0006ACDC(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A0910;
+    M2C_FIELD(arg0, s32 *, 4) = 0xFF;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0006ACF4);
+void func_0006ACF4(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A0910;
+    M2C_FIELD(arg0, s32 *, 4) = 0xFF;
+}
 
 void func_0006AD0C(M2C_UNK **arg0) {
     *arg0 = &D_000A0910;
@@ -5154,7 +5236,10 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0006C9C4);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0006CA08);
+void func_0006CA08(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s8 *, 4) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0006CA14);
 

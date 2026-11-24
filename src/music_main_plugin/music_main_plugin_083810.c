@@ -10,9 +10,25 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810", func_00083BE0);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810", func_00083C30);
+void func_00083C30(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A1F80;
+    M2C_FIELD(arg0, s32 *, 4) = 0xFF;
+    M2C_FIELD(arg0, s32 *, 8) = -1;
+    func_0006CA14((s32) (arg0 + 0xC));
+    M2C_FIELD(arg0, s32 *, 0x14) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x1C) = arg3;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810", func_00083CA4);
+void func_00083CA4(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A1F80;
+    M2C_FIELD(arg0, s32 *, 4) = 0xFF;
+    M2C_FIELD(arg0, s32 *, 8) = -1;
+    func_0006CA14((s32) (arg0 + 0xC));
+    M2C_FIELD(arg0, s32 *, 0x14) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x1C) = arg3;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810", func_00083D18);
 
@@ -353,9 +369,17 @@ s32 func_00086B44(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810", func_00086B4C);
+void func_00086B4C(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A2078;
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 8) = arg2;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810", func_00086B64);
+void func_00086B64(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A2078;
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 8) = arg2;
+}
 
 void func_00086B7C(M2C_UNK **arg0) {
     *arg0 = &D_000A2078;

@@ -600,7 +600,16 @@ s32 func_0000F1F8(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000F218);
+s32 func_0000F218(void *arg0, void *arg1) {
+    void *temp_a0;
+
+    SysMemForKernel_CE05CCB7();
+    temp_a0 = arg0 + (M2C_FIELD(arg1, u8 *, 0x15) * 4);
+    M2C_FIELD(temp_a0, s32 *, 0x10) = 0;
+    M2C_FIELD(temp_a0, void **, 4) = temp_a0;
+    M2C_FIELD(temp_a0, void **, 0) = temp_a0;
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 
 s32 func_0000F264(void) {
     SysMemForKernel_CE05CCB7();

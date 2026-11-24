@@ -68,6 +68,7 @@ s32 func_0000F188(void *arg0);
 s32 func_0000F1B0(void);
 s32 func_0000F1D0(void *arg0);
 s32 func_0000F1F8(void);
+s32 func_0000F218(void *arg0, void *arg1);
 s32 func_0000F264(void);
 s32 func_0000FD6C(void);
 void func_000127F8(void *arg0, s32 arg1);

@@ -543,7 +543,20 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00004E4
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00004EC8);
 
-INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00004F5C);
+void func_00004F5C(void *arg0) {
+    s32 temp_v0;
+    s32 temp_v1;
+
+    func_000034F0((M2C_FIELD(arg0, s32 *, 0) + (M2C_FIELD(arg0, s32 *, 4) * 0xC)) - 0xC);
+    temp_v1 = M2C_FIELD(arg0, s32 *, 4) - 1;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    M2C_FIELD(arg0, s32 *, 4) = temp_v1;
+    if (temp_v1 >= (temp_v0 - 0x14)) {
+
+    } else {
+        func_00005130((s32) arg0, temp_v0 - 0xA);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00004FD0);
 
@@ -672,7 +685,11 @@ void func_00006118(void) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00006160);
+void func_00006160(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00006170);
 

@@ -115,7 +115,16 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_0002932C);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_00029368);
+s32 func_00029368(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    void *temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, s32 *, 0xC) + (arg1 * 0x10);
+    M2C_FIELD(temp_v1, s32 *, 0) = arg2;
+    M2C_FIELD(temp_v1, s32 *, 4) = arg3;
+    M2C_FIELD(temp_v1, s32 *, 8) = arg4;
+    M2C_FIELD(temp_v1, s32 *, 0xC) = arg5;
+    return 0;
+}
 
 s32 func_0002938C(void) {
     func_00029EFC();

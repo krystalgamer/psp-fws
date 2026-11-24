@@ -27,9 +27,15 @@ void func_00087AD8(s32 **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00087B10);
+void func_00087B10(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00087424(arg0, arg1, arg2);
+    *arg0 = &D_000A2120;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00087B40);
+void func_00087B40(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00087424(arg0, arg1, arg2);
+    *arg0 = &D_000A2120;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00087B70);
 
@@ -66,9 +72,15 @@ s32 func_00087D3C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00087D44);
+void func_00087D44(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00086B4C(arg0, arg1, arg2);
+    *arg0 = &D_000A2150;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00087D74);
+void func_00087D74(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00086B4C(arg0, arg1, arg2);
+    *arg0 = &D_000A2150;
+}
 
 void func_00087DA4(s32 **arg0) {
     *arg0 = &D_000A2150;
@@ -176,9 +188,15 @@ u8 func_000882C0(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x1A);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_000882C8);
+void func_000882C8(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00087424(arg0, arg1, arg2);
+    *arg0 = &D_000A21A8;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_000882F8);
+void func_000882F8(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00087424(arg0, arg1, arg2);
+    *arg0 = &D_000A21A8;
+}
 
 void func_00088328(s32 **arg0) {
     *arg0 = &D_000A21A8;
@@ -225,7 +243,10 @@ s32 func_00088648(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00088650);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00088680);
+void func_00088680(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00086B4C(arg0, arg1, arg2);
+    *arg0 = &D_000A21D0;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_000886B0);
 
@@ -369,9 +390,15 @@ s32 func_00089148(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00089150);
+void func_00089150(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00086B4C(arg0, arg1, arg2);
+    *arg0 = &D_000A2260;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00089180);
+void func_00089180(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00086B4C(arg0, arg1, arg2);
+    *arg0 = &D_000A2260;
+}
 
 void func_000891B0(s32 **arg0) {
     *arg0 = &D_000A2260;
@@ -406,9 +433,15 @@ s32 func_000893D0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_000893D8);
+void func_000893D8(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00086B4C(arg0, arg1, arg2);
+    *arg0 = &D_000A2290;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00089408);
+void func_00089408(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00086B4C(arg0, arg1, arg2);
+    *arg0 = &D_000A2290;
+}
 
 void func_00089438(s32 **arg0) {
     *arg0 = &D_000A2290;
@@ -443,9 +476,15 @@ s32 func_00089658(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00089660);
+void func_00089660(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00086B4C(arg0, arg1, arg2);
+    *arg0 = &D_000A22C0;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087A18", func_00089690);
+void func_00089690(s32 **arg0, s32 arg1, s32 arg2) {
+    func_00086B4C(arg0, arg1, arg2);
+    *arg0 = &D_000A22C0;
+}
 
 void func_000896C0(s32 **arg0) {
     *arg0 = &D_000A22C0;

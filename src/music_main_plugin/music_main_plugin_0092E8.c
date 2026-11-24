@@ -394,7 +394,19 @@ void func_0000B858(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0092E8", func_0000B8D8);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0092E8", func_0000B98C);
+void func_0000B98C(void *arg0) {
+    void **temp_v0;
+    void **temp_v0_2;
+
+    temp_v0 = scePaf_72514A05(M2C_FIELD(arg0, s32 *, 8), &D_0009A778, 0);
+    M2C_FIELD(temp_v0, s8 *, 0x1FD) = 1;
+    M2C_FIELD(temp_v0, s8 *, 0x1FE) = 1;
+    scePaf_86B41BA3(temp_v0);
+    temp_v0_2 = scePaf_72514A05(M2C_FIELD(arg0, s32 *, 8), &D_0009A790, 0);
+    M2C_FIELD(temp_v0_2, s8 *, 0x1FD) = 0;
+    M2C_FIELD(temp_v0_2, s8 *, 0x1FE) = 0;
+    scePaf_86B41BA3(temp_v0_2);
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0092E8", func_0000B9F8);
 
