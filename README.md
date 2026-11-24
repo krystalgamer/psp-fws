@@ -84,6 +84,13 @@ paf, pafmini and netfront statically link libtiff 3.8, libjpeg 6b, libpng and zl
 finds identical functions, `tools/libnames.py` names their neighbours by source
 order and `tools/apply_names.py` applies the names.
 
+Source patterns that reproduce the original code generation (applied automatically
+by auto_decomp when the plain m2c output misses): kernel exports use `$k1` through the
+inline-asm helpers in `include/k1.h`; reads of global structs are often `volatile`
+(`M2C_VFIELD`, keeps the address in a register before the offset load); field stores
+are reordered or chained (`a = b = 0;`). C is assembled with `psp-as -mulsw`, which
+enables `lwl/lwr/swl/swr` as the gcc driver does.
+
 auto_decomp details: m2c runs with the PSP's MIPS EABI (`mipsee` target:
 arguments in `$a0-$a3,$t0-$t3` and `$f12-$f19`) and falls back to o32;
 `tools/m2c_allegrex.py` adds Allegrex ops (`max/min/clz/ext/ins/wsbw/bitrev/rotr`)
