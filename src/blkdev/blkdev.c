@@ -9,6 +9,14 @@ INCLUDE_ASM("nonmatchings/blkdev", sceBLK_driver_2FD88F7C);
 
 INCLUDE_ASM("nonmatchings/blkdev", sceBLK_driver_39150835);
 
+#if FW_VERSION == 100
+INCLUDE_RODATA("nonmatchings/blkdev", D_00001014);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_RODATA("nonmatchings/blkdev", D_00001034);
+#endif
+
 INCLUDE_ASM("nonmatchings/blkdev", sceBLK_driver_46C91FF8);
 
 INCLUDE_ASM("nonmatchings/blkdev", sceBLK_driver_A86B6778);
@@ -21,7 +29,16 @@ INCLUDE_ASM("nonmatchings/blkdev", sceBLK_driver_DC4A18BC);
 
 INCLUDE_ASM("nonmatchings/blkdev", sceBLK_driver_06CD0A03);
 
+#if FW_VERSION == 100
 s32 module_start(void) {
     sceBLK_driver_6216FF5D();
     return 0;
 }
+#endif
+
+#if FW_VERSION != 100
+s32 module_start(void) {
+    sceBLK_driver_6216FF5D();
+    return 0;
+}
+#endif

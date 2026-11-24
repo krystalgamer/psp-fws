@@ -36,8 +36,16 @@ extern s32 D_00003548;
 extern s32 D_0000354C;
 extern s32 D_00003550;
 extern s32 D_00003554;
+extern s32 D_00003B28;
+extern s32 D_00003B2C;
+extern s32 D_000043C8;
+extern s32 D_000043CC;
+extern s32 D_000043D0;
+extern s32 D_000043D4;
 
 s32 func_00001330(void);
+s32 module_start(void);
+s32 module_stop(void);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelCreateVpl(void *, s32, u32, u32, void *);

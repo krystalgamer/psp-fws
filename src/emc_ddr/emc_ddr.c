@@ -2,33 +2,69 @@
 #include "common.h"
 #include "emc_ddr_decls.h"
 
+#if FW_VERSION == 100
+s32 sceDdr_driver_17D39E17(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
+s32 sceDdr_driver_8698F5DA(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
+s32 sceDdr_driver_623A233F(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
+s32 sceDdr_driver_92289EC0(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION != 100
 s32 module_start(void) {
     sceDdr_driver_17D39E17();
     DmacManForKernel_32757C57((s32) &sceDdr_driver_87D86769);
     return 0;
 }
+#endif
 
+#if FW_VERSION != 100
 s32 module_reboot_before(void) {
     DmacManForKernel_32757C57(0);
     sceDdr_driver_8698F5DA();
     return 0;
 }
+#endif
 
+#if FW_VERSION != 100
 s32 sceDdr_driver_17D39E17(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION != 100
 s32 sceDdr_driver_8698F5DA(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION != 100
 s32 sceDdr_driver_623A233F(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION != 100
 s32 sceDdr_driver_92289EC0(void) {
     return 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdr_driver_87D86769);
 
@@ -48,7 +84,9 @@ INCLUDE_ASM("nonmatchings/emc_ddr", sceDdr_driver_F23B7983);
 
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdr_driver_91CD8F94);
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdr_driver_888129E8);
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_ddr", func_000002A0);
 

@@ -2,6 +2,18 @@
 #include "common.h"
 #include "sysreg_decls.h"
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", module_start);
+#endif
+
+#if FW_VERSION == 100
+s32 module_reboot_before(void) {
+    sceSysreg_driver_4EE8E2C8();
+    return 0;
+}
+#endif
+
+#if FW_VERSION != 100
 s32 module_start(void) {
     sceSysEventForKernel_D7D3FDCD(&D_000025C0);
     sceSysreg_driver_25673620();
@@ -9,44 +21,86 @@ s32 module_start(void) {
     sceSysEventForKernel_CD9E4BB5(&D_000025C0);
     return 0;
 }
+#endif
 
+#if FW_VERSION != 100
 s32 module_reboot_before(void) {
     sceSysreg_driver_4EE8E2C8();
     return 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9C863542);
 
+#if FW_VERSION == 100
 s32 sceSysreg_driver_F2DEAA14(void) {
     sceSysreg_driver_4EE8E2C8();
     return 0;
 }
+#endif
 
+#if FW_VERSION == 100
 s32 func_000000B4(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION == 100
 s32 func_000000BC(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION == 100
 s32 func_000000C4(void) {
     return 0;
 }
+#endif
+
+#if FW_VERSION != 100
+s32 sceSysreg_driver_F2DEAA14(void) {
+    sceSysreg_driver_4EE8E2C8();
+    return 0;
+}
+#endif
+
+#if FW_VERSION != 100
+s32 func_000000B4(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION != 100
+s32 func_000000BC(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION != 100
+s32 func_000000C4(void) {
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_CD0F6715);
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F3443B9A);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E2A5D1EE);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E88B77ED);
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_312F9419);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_844AF6BD);
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_4F46EEDE);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8F4F4E96);
 
@@ -86,25 +140,53 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8A7F9EB4);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_C32F2491);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", func_00000588);
+#endif
+
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A23BC2C4);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F5EA8570);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_3E961C02);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_ACFA3764);
+#endif
 
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002520);
 
+#if FW_VERSION == 100
+INCLUDE_RODATA("nonmatchings/sysreg", D_00002B04);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BB3623DF);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DCA57573);
+#endif
+
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_53A6838B);
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BB3623DF);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B21B6CBF);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B4560C45);
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DCA57573);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_44F6CDA7);
 
@@ -162,29 +244,73 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_AA63C8BD);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_054AC8C6);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", func_00000B64);
+#endif
+
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E45BED6A);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_681B35C4);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E321F41A);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_4D2FFC60);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_6B01D71B);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_FC186A83);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B59DB832);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9155812C);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DA4FCA1D);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_228A73E1);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_31154490);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8E2D835D);
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", func_00000C58);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_6B01D71B);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_FC186A83);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7234EA80);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_38EC3281);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8835D1E1);
 
@@ -210,9 +336,21 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7DCA8302);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_45225F8F);
 
+#if FW_VERSION == 100
+s32 sceSysreg_driver_D74D3AB6(void) {
+    return 0x80000004;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_D74D3AB6);
+#endif
 
+#if FW_VERSION == 100
+s32 sceSysreg_driver_AD7C4ACB(void) {
+    return 0x80000004;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_AD7C4ACB);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DC68A93F);
 
@@ -230,9 +368,17 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_C1DA05D2);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DE170397);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7234EA80);
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", func_00001104);
+#endif
 
+#if FW_VERSION != 100
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7234EA80);
+#endif
+
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_38EC3281);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_1969E840);
 
@@ -242,15 +388,23 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_03340297);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9100B4E5);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_0A83FC7B);
+#endif
+
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_D6628A48);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_1E18EA43);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_833E6FB1);
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8CE2F97A);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_0A83FC7B);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9DD1F821);
 
@@ -288,17 +442,33 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F844DDF3);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_29A119A1);
 
+#if FW_VERSION == 100
+s32 sceSysreg_driver_77DED992(void) {
+    return 0x80000004;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_77DED992);
+#endif
 
+#if FW_VERSION == 100
+s32 sceSysreg_driver_6879790B(void) {
+    return 0x80000004;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_6879790B);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7A5D2D15);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_25B0AC52);
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8B95C17F);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_CCF911C0);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7FD7A631);
 
@@ -308,13 +478,37 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8C5C53DE);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A16E55F4);
 
+#if FW_VERSION == 100
+void sceSysreg_driver_B627582E(s32 arg0) {
+    func_00001A68(arg0, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B627582E);
+#endif
 
+#if FW_VERSION == 100
+void sceSysreg_driver_1E9C3607(s32 arg0) {
+    func_00001A68(arg0, 0);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_1E9C3607);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", func_00001A68);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", func_00001AF8);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_55B18B84);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_2112E686);
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", func_00001BF4);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7B9E9A53);
 
@@ -324,21 +518,52 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8D0FED1E);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A46E9CA8);
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_633595F2);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_32471457);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_692F31FF);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_FFEB6E00);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_87C2BA20);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_D43E98F6);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BF91FBDA);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_36A75390);
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_633595F2);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_32471457);
+#endif
+
+#if FW_VERSION == 100
+s32 sceSysreg_driver_692F31FF(s32 arg0) {
+    s32 temp_a0;
+    s32 temp_s0;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    temp_s0 = __builtin_allegrex_ext(*(s32 *)0xBC100080, 1, 4);
+    *(s32 *)0xBC100080 = (arg0 & temp_s0) * 2;
+    sceKernelCpuResumeIntrWithSync(temp_a0);
+    return temp_s0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_61BFF85F);
 
@@ -350,16 +575,37 @@ INCLUDE_ASM("nonmatchings/sysreg", func_00001814);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_3EA188AD);
 
+#if FW_VERSION != 100
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002538);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002578);
+#endif
 
+#if FW_VERSION == 100
+s32 sceSysreg_driver_25673620(void) {
+    InterruptManagerForKernel_58DD8978(0x1F, 1, &func_00001814, 0, &D_00002BD0);
+    InterruptManagerForKernel_4D6E7305(0x1F);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_25673620);
+#endif
 
+#if FW_VERSION == 100
 s32 sceSysreg_driver_4EE8E2C8(void) {
     InterruptManagerForKernel_F987B1F0(0x1F);
     return 0;
 }
+#endif
+
+#if FW_VERSION != 100
+s32 sceSysreg_driver_4EE8E2C8(void) {
+    InterruptManagerForKernel_F987B1F0(0x1F);
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_083F56E2);
 

@@ -73,3 +73,18 @@ sceKernelTryAllocateVpl = 0x000034E4; // type:func
 sceKernelFreeVpl = 0x000034EC; // type:func
 sceKernelReferVplStatus = 0x000034F4; // type:func
 sceKernelGetSystemTimeLow = 0x000034FC; // type:func
+// shared names (tools/add_version.py) begin
+D_00003470 = 0x00003A44; // rom:0x3AC4
+D_0000347C = 0x00003A50; // rom:0x3AD0
+D_000034F0 = 0x00003B30;
+D_00003504 = 0x00003B44;
+D_00003508 = 0x00003B48;
+D_0000350C = 0x00003B4C;
+D_00003510 = 0x00003B50;
+D_00003514 = 0x00003B54;
+D_00003534 = 0x00003B74;
+func_00001E90 = 0x00002434; // type:func rom:0x24B4
+func_00002690 = 0x00002C58; // type:func
+D_00003510_v100 = 0x00003510; // rom:0x3590
+D_00003514_v100 = 0x00003514; // rom:0x3594
+// shared names (tools/add_version.py) end

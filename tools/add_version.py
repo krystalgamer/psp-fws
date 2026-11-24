@@ -294,7 +294,10 @@ def main():
             attrs = (t + where(y, addr)).strip()
             lines.append(f"{x} = 0x{addr:08X};" + (f" // {attrs}" if attrs else ""))
         # auto names of NEW that collide with a canonical name used for another address
-        for nn, _, _, _ in N:
+        vlabels = set()
+        for p in (ROOT / "tmp/asm" / new / mod).rglob("*.s"):
+            vlabels.update(AUTO.findall(p.read_text()))
+        for nn in sorted(vlabels | {n for n, _, _, _ in N}):
             if nn in canon_taken and mapping.get(nn) != nn and nn not in rev.values():
                 m = re.fullmatch(r"(func|D|jtbl)_([0-9A-F]{8})", nn)
                 if m:

@@ -39,3 +39,9 @@ sceKernelCreateThread = 0x00001C04; // type:func
 sceKernelStartThread = 0x00001C0C; // type:func
 sceKernelExitDeleteThread = 0x00001C14; // type:func
 sceKernelGetThreadId = 0x00001C1C; // type:func
+// shared names (tools/add_version.py) begin
+D_00001DC8 = 0x00001EE8; // rom:0x1F68
+D_00001E44 = 0x00001F64; // rom:0x1FE4
+D_00002248 = 0x000024B8;
+D_00002248_v100 = 0x00002248; // rom:0x22C8
+// shared names (tools/add_version.py) end

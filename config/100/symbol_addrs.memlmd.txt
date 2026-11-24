@@ -25,3 +25,22 @@ sceKernelDcacheWritebackInvalidateAll = 0x000010D0; // type:func
 sceKernelDcacheWritebackInvalidateRange = 0x000010D8; // type:func
 sceSysEventForKernel_CD9E4BB5 = 0x000010E0; // type:func
 sceSysEventForKernel_D7D3FDCD = 0x000010E8; // type:func
+// shared names (tools/add_version.py) begin
+D_00001F44 = 0x00001344; // rom:0x13C4
+D_00002004 = 0x00001348; // rom:0x13C8
+D_00002134 = 0x000013D8; // rom:0x1458
+D_00002AF0 = 0x000013DC; // rom:0x145C
+D_00002B44 = 0x000013F0; // rom:0x1480
+D_00002BC0 = 0x00001440;
+D_00003040 = 0x00001640;
+D_0000305C = 0x0000165C;
+func_00001198 = 0x000005F0; // type:func rom:0x670
+func_00001218 = 0x00000670; // type:func rom:0x6F0
+func_00001270 = 0x000006C8; // type:func rom:0x748
+func_0000133C = 0x00000780; // type:func rom:0x800
+func_000013C8 = 0x0000080C; // type:func rom:0x88C
+func_00001414 = 0x00000858; // type:func rom:0x8D8
+func_0000145C = 0x00000890; // type:func rom:0x910
+func_000015E8 = 0x00000A1C; // type:func rom:0xA9C
+func_00001760 = 0x00000BA0; // type:func rom:0xC20
+// shared names (tools/add_version.py) end

@@ -1,19 +1,33 @@
 {
  "funcs": {
+  "InterruptManagerForKernel_4D6E7305": "M2C_UNK InterruptManagerForKernel_4D6E7305(M2C_UNK);",
+  "InterruptManagerForKernel_58DD8978": "M2C_UNK InterruptManagerForKernel_58DD8978(M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);",
   "InterruptManagerForKernel_F987B1F0": "M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);",
   "func_000000B4": "s32 func_000000B4(void);",
   "func_000000BC": "s32 func_000000BC(void);",
   "func_000000C4": "s32 func_000000C4(void);",
+  "func_00001A68": "s32 func_00001A68(s32, s32);",
   "module_reboot_before": "s32 module_reboot_before(void);",
   "module_start": "s32 module_start(void);",
+  "sceKernelCpuResumeIntrWithSync": "void sceKernelCpuResumeIntrWithSync(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceSysEventForKernel_CD9E4BB5": "M2C_UNK sceSysEventForKernel_CD9E4BB5(M2C_UNK *);",
   "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
+  "sceSysreg_driver_1E9C3607": "void sceSysreg_driver_1E9C3607(s32 arg0);",
   "sceSysreg_driver_25673620": "s32 sceSysreg_driver_25673620(void);",
   "sceSysreg_driver_4EE8E2C8": "s32 sceSysreg_driver_4EE8E2C8(void);",
+  "sceSysreg_driver_6879790B": "s32 sceSysreg_driver_6879790B(void);",
+  "sceSysreg_driver_692F31FF": "s32 sceSysreg_driver_692F31FF(s32 arg0);",
+  "sceSysreg_driver_77DED992": "s32 sceSysreg_driver_77DED992(void);",
+  "sceSysreg_driver_AD7C4ACB": "s32 sceSysreg_driver_AD7C4ACB(void);",
+  "sceSysreg_driver_B627582E": "void sceSysreg_driver_B627582E(s32 arg0);",
   "sceSysreg_driver_BB3623DF": "s32 sceSysreg_driver_BB3623DF(void);",
+  "sceSysreg_driver_D74D3AB6": "s32 sceSysreg_driver_D74D3AB6(void);",
   "sceSysreg_driver_F2DEAA14": "s32 sceSysreg_driver_F2DEAA14(void);"
  },
  "vars": {
-  "D_000025C0": "extern M2C_UNK D_000025C0;"
+  "D_000025C0": "extern M2C_UNK D_000025C0;",
+  "D_00002BD0": "extern M2C_UNK D_00002BD0;",
+  "func_00001814": "extern M2C_UNK func_00001814;"
  }
 }

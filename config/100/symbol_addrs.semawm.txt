@@ -7,3 +7,12 @@ sceSemawm_6FEA0A45 = 0x00001074; // type:func
 module_start = 0x000055E0; // type:func
 module_stop = 0x00005608; // type:func
 semaphore_4C537C72 = 0x00005630; // type:func
+// shared names (tools/add_version.py) begin
+D_00005718 = 0x0000570C; // rom:0x578C
+D_00005724 = 0x00005718; // rom:0x5798
+D_00005730 = 0x00005724; // rom:0x57A4
+D_00005738 = 0x0000572C; // rom:0x57AC
+D_00005740 = 0x00005734; // rom:0x57B4
+D_00005748 = 0x0000573C; // rom:0x57BC
+D_00005748_v100 = 0x00005748;
+// shared names (tools/add_version.py) end

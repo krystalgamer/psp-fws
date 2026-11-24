@@ -8,6 +8,7 @@ INCLUDE_ASM("nonmatchings/semawm", func_000000D8);
 
 INCLUDE_ASM("nonmatchings/semawm", sceSemawm_77C42467);
 
+#if FW_VERSION == 100
 s32 sceSemawm_51E51869(void) {
     s32 sp0;
 
@@ -15,6 +16,17 @@ s32 sceSemawm_51E51869(void) {
     sp0 = 0;
     return sp0;
 }
+#endif
+
+#if FW_VERSION != 100
+s32 sceSemawm_51E51869(void) {
+    s32 sp0;
+
+    sp0 = -1;
+    sp0 = 0;
+    return sp0;
+}
+#endif
 
 INCLUDE_RODATA("nonmatchings/semawm", D_00005718);
 
