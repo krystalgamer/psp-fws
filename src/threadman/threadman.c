@@ -102,7 +102,20 @@ s32 func_000008D0(s32 arg0, void *arg1) {
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_000008F0);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_000009F8);
+s32 func_000009F8(void) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (M2C_VFIELD(&D_00016C74, s32, 0x418) == 0) {
+        temp_v0 = M2C_VFIELD(&D_00016C74, s32, 4) != (s32) M2C_FIELD(&D_00016C74, void **, 0);
+        if (temp_v0 != 0) {
+            M2C_FIELD(M2C_FIELD(&D_00016C74, void **, 0), void **, 0xF4) = (void *) (M2C_FIELD(&D_00016C74, void **, 0) + 0xF8);
+        }
+        var_v1 = temp_v0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000A34);
 

@@ -13,12 +13,14 @@
   "sceUsbCamGetImageEffectMode": "s32 sceUsbCamGetImageEffectMode(void *arg0);",
   "sceUsbCamGetReverseMode": "s32 sceUsbCamGetReverseMode(void *arg0);",
   "sceUsbCamGetZoom": "s32 sceUsbCamGetZoom(void *arg0);",
-  "sceUsbCam_driver_1E958148": "s32 sceUsbCam_driver_1E958148(s32, s32);"
+  "sceUsbCam_driver_1E958148": "s32 sceUsbCam_driver_1E958148(s32, s32);",
+  "sceUsbCam_driver_95F8901E": "s32 sceUsbCam_driver_95F8901E(void);"
  },
  "vars": {
   "D_0000A658": "extern M2C_UNK D_0000A658;",
   "D_0000B454": "extern s32 D_0000B454;",
   "D_0000BA80": "extern M2C_UNK D_0000BA80;",
+  "D_0000BC08": "extern M2C_UNK D_0000BC08;",
   "D_0000BC1C": "extern s32 D_0000BC1C;",
   "D_0000BDB8": "extern s32 D_0000BDB8;"
  }

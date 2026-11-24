@@ -108,7 +108,20 @@ s32 scePower_driver_165CE085(void) {
     return D_0000618C;
 }
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_79DB9421);
+s32 scePower_driver_79DB9421(void) {
+    s32 temp_s1;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_000012B4(0, 1);
+    setK1(temp_s0);
+    M2C_VFIELD(&D_00006180, s32, 0x30) = 1;
+    temp_s1 = sceKernelCpuSuspendIntr();
+    sceKernelClearEventFlag(M2C_VFIELD(&D_00006180, s32, 0), 0xFFFEFFFFU);
+    sceKernelSetEventFlag(M2C_VFIELD(&D_00006180, s32, 0), 0x40000U);
+    sceKernelCpuResumeIntr(temp_s1);
+    return 0;
+}
 
 void scePower_D6D016EF(s32 arg0) {
     u32 temp_s0;
@@ -124,9 +137,20 @@ void scePower_driver_CA3D34C1(s32 arg0) {
     func_00002880(arg0, 0);
 }
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_7FA406DD);
+s32 scePower_driver_7FA406DD(void) {
+    return (M2C_VFIELD(&D_00006180, s32, 0x28) | M2C_VFIELD(&D_00006180, s32, 0x2C)) != 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_DB62C9CF);
+s32 scePower_driver_DB62C9CF(void) {
+    s32 temp_s0;
+    s32 temp_v0;
+
+    temp_v0 = sceKernelCpuSuspendIntr();
+    temp_s0 = M2C_VFIELD(&D_00006180, s32, 0x28);
+    M2C_VFIELD(&D_00006180, s32, 0x28) = 0;
+    sceKernelCpuResumeIntr(temp_v0);
+    return temp_s0;
+}
 
 s32 scePower_driver_2B7C7CF4(void) {
     u32 temp_s0;
@@ -157,7 +181,9 @@ s32 scePower_driver_2875994B(void) {
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_0442D852);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_0074EF9B);
+s32 scePower_driver_0074EF9B(void) {
+    return M2C_VFIELD(&D_00006180, s32, 0x3C);
+}
 
 s32 scePower_driver_F535D928(s32 arg0) {
     D_000061B8 = arg0;
@@ -352,7 +378,12 @@ s32 func_00004BF8(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", func_00004C50);
+s32 func_00004C50(s32 arg0, s32 arg1, s32 arg2) {
+    M2C_VFIELD(&D_0000B3AC, s32, 0x18) = arg2;
+    M2C_VFIELD(&D_0000B3AC, s32, 8) = arg0;
+    M2C_VFIELD(&D_0000B3AC, s32, 0xC) = arg1;
+    return 0;
+}
 
 s32 func_00004C6C(void) {
     return D_0000B3BC == 0;

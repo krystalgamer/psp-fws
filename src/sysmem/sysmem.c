@@ -253,7 +253,19 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_97B18FA8);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00005724);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00005850);
+void func_00005850(void) {
+    M2C_VFIELD(&D_0000F8C4, s32, 0) = 0x68;
+    M2C_VFIELD(&D_0000F8C4, s32, 0x64) = -1;
+    M2C_VFIELD(&D_0000F8C4, s32, 4) = 0;
+    M2C_VFIELD(&D_0000F8C4, s8, 8) = 0;
+    M2C_VFIELD(&D_0000F8C4, s8, 0x18) = 0;
+    M2C_VFIELD(&D_0000F8C4, s32, 0x40) = 0;
+    M2C_VFIELD(&D_0000F8C4, s8, 0x44) = 0;
+    M2C_VFIELD(&D_0000F8C4, s32, 0x54) = 0;
+    M2C_VFIELD(&D_0000F8C4, s32, 0x58) = 0;
+    M2C_VFIELD(&D_0000F8C4, s32, 0x5C) = 0;
+    M2C_VFIELD(&D_0000F8C4, s32, 0x60) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_E40D3A1D);
 
@@ -267,7 +279,16 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_6D8E0CDF);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_C7E57B9C);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_A262FEF0);
+s32 SysMemForKernel_A262FEF0(s32 *arg0) {
+    s32 var_a1;
+
+    var_a1 = 0x80020001;
+    if (M2C_VFIELD(&D_0000F8C4, s32, 4) & 0x10) {
+        var_a1 = 0;
+        *arg0 = M2C_VFIELD(&D_0000F8C4, s32, 0x40);
+    }
+    return var_a1;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_CBB05241);
 
@@ -277,19 +298,51 @@ M2C_UNK *SysMemForKernel_CD617A94(void) {
     return &D_0000F8C4;
 }
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemUserForUser_FC114573);
+s32 SysMemUserForUser_FC114573(void) {
+    s32 var_a0;
+
+    var_a0 = 0;
+    if (M2C_VFIELD(&D_0000F8C4, s32, 4) & 0x1000) {
+        var_a0 = M2C_VFIELD(&D_0000F8C4, s32, 0x58);
+    }
+    return var_a0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceKernelSetCompiledSdkVersion);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_DEC0A0D8);
+s32 SysMemForKernel_DEC0A0D8(void) {
+    s32 var_a0;
+
+    var_a0 = 0;
+    if (M2C_VFIELD(&D_0000F8C4, s32, 4) & 0x2000) {
+        var_a0 = M2C_VFIELD(&D_0000F8C4, s32, 0x5C);
+    }
+    return var_a0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceKernelSetCompilerVersion);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_7ECBDBD9);
+s32 SysMemForKernel_7ECBDBD9(void) {
+    s32 var_a0;
+
+    var_a0 = 0;
+    if (M2C_VFIELD(&D_0000F8C4, s32, 4) & 0x10000) {
+        var_a0 = M2C_VFIELD(&D_0000F8C4, s32, 0x60);
+    }
+    return var_a0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_9C304ED7);
 
-INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_8C0CC205);
+s32 SysMemForKernel_8C0CC205(void) {
+    s32 var_a0;
+
+    var_a0 = -1;
+    if (M2C_VFIELD(&D_0000F8C4, s32, 4) & 0x100000) {
+        var_a0 = M2C_VFIELD(&D_0000F8C4, s32, 0x64);
+    }
+    return var_a0;
+}
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_E9E4D851);
 

@@ -281,7 +281,50 @@ INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00001F5C);
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00002004);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_0000207C);
+s32 func_0000207C(void) {
+    M2C_VFIELD(&D_00007F4C, s32, 0) = 0;
+    M2C_VFIELD(&D_00007F4C, s32, 4) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 8) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0xC) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x10) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x14) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x18) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x1C) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x20) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x24) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x28) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x2C) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x30) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x34) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x38) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x3C) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x48) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x4C) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x50) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x54) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x58) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x5C) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x60) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x64) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x68) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x6C) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x70) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x74) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x78) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x7C) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x80) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x84) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x88) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x8C) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0xA8) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x90) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x94) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x98) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0x9C) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0xA0) = -1;
+    M2C_VFIELD(&D_00007F4C, s32, 0xA4) = -1;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_1579A159);
 
@@ -319,7 +362,16 @@ INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_000033D4);
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00003474);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00003520);
+s32 func_00003520(void) {
+    M2C_VFIELD(&D_00007FF8, s32, 0x18) = -1;
+    M2C_VFIELD(&D_00007FF8, s32, 0) = 0;
+    M2C_VFIELD(&D_00007FF8, s32, 4) = -1;
+    M2C_VFIELD(&D_00007FF8, s32, 8) = -1;
+    M2C_VFIELD(&D_00007FF8, s32, 0xC) = -1;
+    M2C_VFIELD(&D_00007FF8, s32, 0x10) = -1;
+    M2C_VFIELD(&D_00007FF8, s32, 0x14) = -1;
+    return 0;
+}
 
 s32 sceUtility_0D5BC6D2(s32 arg0) {
     s32 var_v1;

@@ -4,6 +4,7 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_00006B80;
 
 s32 func_00000000(s32);
 s32 func_00000194(M2C_UNK);
@@ -17,6 +18,7 @@ s32 module_stop(void);
 s32 sceKernelDeleteSema(s32);
 M2C_UNK sceMSAudio_driver_3872FBE5();
 s32 sceMSAudio_driver_67E58C07(void);
+s32 sceMSAudio_driver_DA34AB8F(void);
 s32 sceMSAudio_driver_E8B25D38(void);
 s32 sceMgr_driver_02F7AB01(s32, s32, s32);
 M2C_UNK sceMgr_driver_1B8F3192(s32);

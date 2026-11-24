@@ -33,7 +33,21 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_005370
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_005370", sceHtmlViewerHelper_F27998C2);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_005370", sceHtmlViewerHelper_47F988E6);
+s32 sceHtmlViewerHelper_47F988E6(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v0;
+
+    sceKernelWaitEventFlag(D_00008E64, 1U, 0x20, NULL, NULL);
+    if (arg0 == 0) {
+        M2C_VFIELD(&D_00008C00, s32, 0x25C) = arg2;
+        M2C_VFIELD(&D_00008C00, s32, 0x258) = arg1;
+        sceKernelSetEventFlag(D_00008E64, 1U);
+        var_v0 = 0;
+    } else {
+        sceKernelSetEventFlag(D_00008E64, 1U);
+        var_v0 = 0x80000100;
+    }
+    return var_v0;
+}
 
 s32 sceHtmlViewerHelper_55732F91(s32 arg0) {
     s32 var_v0;

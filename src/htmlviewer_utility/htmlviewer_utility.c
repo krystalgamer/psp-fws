@@ -15,7 +15,24 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", fu
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", func_00000270);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", func_000002F0);
+s32 func_000002F0(void) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    func_00004520((s32) &D_0000616C, 0, 0x34);
+    func_00000180((s32) &D_0000616C, (s32) D_000060E4, 0x34);
+    M2C_FIELD(&D_0000616C, s32 *, 0x30) = 0;
+    temp_v0 = sceUtility_943CBA46(&D_0000616C);
+    if (temp_v0 != 0) {
+        M2C_FIELD(D_000060E4, s32 *, 0x1C) = temp_v0;
+        func_00001FDC(2);
+        var_v0 = temp_v0;
+    } else {
+        func_00001FDC(1);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", func_00000378);
 
@@ -77,7 +94,14 @@ s32 func_000019F8(void) {
     return 7;
 }
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", func_00001A0C);
+void func_00001A0C(s32 arg0) {
+    M2C_FIELD(D_000060E4, s32 *, 0x1C) = arg0;
+    if (func_00001FB8() < 2) {
+
+    } else {
+        func_00001FAC(7);
+    }
+}
 
 s32 func_00001A4C(u32 arg0) {
     return (arg0 < 2U) ? 0 : -1;
@@ -587,7 +611,21 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", sc
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", sceHtmlViewerHelper_F27998C2);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", sceHtmlViewerHelper_47F988E6);
+s32 sceHtmlViewerHelper_47F988E6(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v0;
+
+    sceKernelWaitEventFlag(D_00006F24, 1U, 0x20, NULL, NULL);
+    if (arg0 == 0) {
+        M2C_VFIELD(&D_00006CC0, s32, 0x25C) = arg2;
+        M2C_VFIELD(&D_00006CC0, s32, 0x258) = arg1;
+        sceKernelSetEventFlag(D_00006F24, 1U);
+        var_v0 = 0;
+    } else {
+        sceKernelSetEventFlag(D_00006F24, 1U);
+        var_v0 = 0x80000100;
+    }
+    return var_v0;
+}
 
 s32 sceHtmlViewerHelper_55732F91(s32 arg0) {
     s32 var_v0;

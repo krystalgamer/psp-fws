@@ -156,7 +156,18 @@ INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_3872FB
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_107D83D4);
 
-INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_DA34AB8F);
+s32 sceMSAudio_driver_DA34AB8F(void) {
+    s32 var_v1;
+    u32 temp_a0;
+
+    temp_a0 = shiftK1();
+    var_v1 = 0x80508004;
+    if ((u32) M2C_VFIELD(&D_00006B80, u32, 0x138) >= 2U) {
+        var_v1 = M2C_VFIELD(&D_00006B80, s32, 0x2D4);
+    }
+    setK1(temp_a0);
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_47F7DAFC);
 

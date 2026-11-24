@@ -86,9 +86,15 @@ void InterruptManagerForKernel_2CD783A1(s32 arg0, s32 arg1) {
     sceKernelCpuResumeIntr(temp_a0);
 }
 
-INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_7A05D976);
+void InterruptManagerForKernel_7A05D976(s32 arg0, s32 arg1) {
+    M2C_VFIELD(&D_00003E00, s32, 0x1084) = arg1;
+    M2C_VFIELD(&D_00003E00, s32, 0x1080) = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_7EF7500F);
+void InterruptManagerForKernel_7EF7500F(void) {
+    M2C_VFIELD(&D_00003E00, s32, 0x1084) = 0;
+    M2C_VFIELD(&D_00003E00, s32, 0x1080) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_27BC9A45);
 
@@ -110,7 +116,23 @@ s32 InterruptManager_D2E8363F(void) {
     return 0x80020001;
 }
 
-INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", sceKernelRegisterUserSpaceIntrStack);
+s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1) {
+    s32 temp_a0;
+    s32 var_s0;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    var_s0 = 0x8002006D;
+    if (M2C_VFIELD(&D_00003E00, s32, 0x1AC) == 0) {
+        var_s0 = 0x8002006C;
+        if (arg0 >= 0) {
+            M2C_VFIELD(&D_00003E00, s32, 0x1B0) = arg1;
+            var_s0 = 0;
+            M2C_VFIELD(&D_00003E00, s32, 0x1AC) = arg0;
+        }
+    }
+    sceKernelCpuResumeIntr(temp_a0);
+    return var_s0;
+}
 
 INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_30C08374);
 

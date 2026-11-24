@@ -7,6 +7,7 @@
 extern s8 D_00005FC4;
 extern u8 D_00005FC5;
 extern void *D_000060E4;
+extern M2C_UNK D_0000616C;
 extern s32 D_00006300;
 extern s32 D_00006304;
 extern s32 D_00006C50;
@@ -19,8 +20,11 @@ extern M2C_UNK D_000072B4;
 extern s32 D_00007334;
 
 M2C_UNK func_00000000();
+s32 func_00000180(s32, s32, s32);
+s32 func_000002F0(void);
 s32 func_000019E4(void);
 s32 func_000019F8(void);
+void func_00001A0C(s32 arg0);
 s32 func_00001A4C(u32 arg0);
 void func_00001A5C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_00001AC4(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);
@@ -52,6 +56,7 @@ s32 func_00003FC0(void *arg0);
 s32 func_000041CC(M2C_UNK **arg0, s32 *arg1);
 M2C_UNK func_00004350(s8 *);
 s8 *func_00004398(s8 *arg0);
+s32 func_00004520(s32, s32, s32);
 M2C_UNK func_000047E8();
 s32 module_start(void);
 s32 module_stop(void);
@@ -61,10 +66,13 @@ M2C_UNK sceHVUI_Module_789FBBA8();
 M2C_UNK sceHVUI_Module_A4C50591();
 s32 sceHVUI_Module_F7038231();
 void sceHtmlViewerHelper_05E0C3D4(s32 arg0);
+s32 sceHtmlViewerHelper_47F988E6(s32 arg0, s32 arg1, s32 arg2);
 s32 sceHtmlViewerHelper_55732F91(s32 arg0);
 M2C_UNK sceHtmlViewerHelper_C92C71B7(M2C_UNK);
 s32 sceKernelDeleteEventFlag(s32);
+s32 sceKernelSetEventFlag(s32, u32);
 s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);
+s32 sceUtility_943CBA46(M2C_UNK *);
 s32 sceUtility_private_4B677BA1();
 
 #endif

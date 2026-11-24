@@ -258,7 +258,22 @@ INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00001604);
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdMan_driver_BF8AED79);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdMan_driver_4217E7F5);
+s32 sceUmdMan_driver_4217E7F5(s32 arg0) {
+    s32 temp_a0;
+    s32 var_s1;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    var_s1 = 0x80010002;
+    if (M2C_VFIELD(&D_00004CF8, s32, 0) == arg0) {
+        M2C_VFIELD(&D_00004CF8, s32, 0) = 0;
+        var_s1 = 0;
+        M2C_VFIELD(&D_00004CF8, s32, 8) = 0;
+        M2C_VFIELD(&D_00004CF8, s32, 0xC) = 0;
+        M2C_VFIELD(&D_00004CF8, s32, 4) = 0;
+    }
+    sceKernelCpuResumeIntr(temp_a0);
+    return var_s1;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdMan_driver_F65D819F);
 

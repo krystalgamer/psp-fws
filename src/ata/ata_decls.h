@@ -29,6 +29,7 @@ void sceAta_driver_6FD8E2AB(void);
 void sceAta_driver_7BBA095C(s32 arg0, M2C_UNK arg1);
 void sceAta_driver_7F551D66(s32 arg0);
 s32 sceAta_driver_9AE67E14(s32 arg0);
+void sceAta_driver_AE100256(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 void sceAta_driver_B5982381(void);
 void sceAta_driver_B7F5B2CA(s32 arg0);
 s32 sceAta_driver_D8E525CB(void);

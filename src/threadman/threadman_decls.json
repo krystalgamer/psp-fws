@@ -18,6 +18,7 @@
   "func_000006C8": "s32 func_000006C8(void *arg0, void *arg1);",
   "func_000008C8": "s32 func_000008C8(void);",
   "func_000008D0": "s32 func_000008D0(s32 arg0, void *arg1);",
+  "func_000009F8": "s32 func_000009F8(void);",
   "func_0000261C": "s32 func_0000261C(void *arg0);",
   "func_0000275C": "s32 func_0000275C(void *arg0);",
   "func_00003CF8": "void func_00003CF8(void *arg0);",

@@ -917,7 +917,22 @@ INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", func_00007364);
 
 INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", sceMgr_driver_D3A061BE);
 
-INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", sceMgr_driver_4F4AE686);
+s32 sceMgr_driver_4F4AE686(s32 arg0) {
+    s32 temp_v0;
+    s32 var_s1;
+
+    temp_v0 = func_00006030();
+    var_s1 = temp_v0;
+    if (temp_v0 >= 0) {
+        var_s1 = func_00007644(arg0);
+        if (var_s1 >= 0) {
+            var_s1 = 0;
+            M2C_VFIELD(&D_0000AFF8, s32, 0xC) = (s32) (M2C_VFIELD(&D_0000AFF8, s32, 0xC) & ~0x208);
+        }
+        func_0000608C();
+    }
+    return var_s1;
+}
 
 INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", func_00007644);
 

@@ -175,7 +175,18 @@ INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamRegisterLensRotat
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCam_driver_C72ED6D3);
 
-INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCam_driver_95F8901E);
+s32 sceUsbCam_driver_95F8901E(void) {
+    s32 var_a1;
+    u32 temp_a0;
+
+    temp_a0 = shiftK1();
+    var_a1 = 1;
+    if (!(M2C_VFIELD(&D_0000BC08, s32, 0x14) & 0x800) && (M2C_VFIELD(&D_0000BC08, s32, 0x1D4) == 0)) {
+        var_a1 = M2C_VFIELD(&D_0000BC08, s32, 0x1D8);
+    }
+    setK1(temp_a0);
+    return var_a1;
+}
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", module_start);
 

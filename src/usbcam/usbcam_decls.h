@@ -7,6 +7,7 @@
 extern M2C_UNK D_0000A658;
 extern s32 D_0000B454;
 extern M2C_UNK D_0000BA80;
+extern M2C_UNK D_0000BC08;
 extern s32 D_0000BC1C;
 extern s32 D_0000BDB8;
 
@@ -24,5 +25,6 @@ s32 sceUsbCamGetImageEffectMode(void *arg0);
 s32 sceUsbCamGetReverseMode(void *arg0);
 s32 sceUsbCamGetZoom(void *arg0);
 s32 sceUsbCam_driver_1E958148(s32, s32);
+s32 sceUsbCam_driver_95F8901E(void);
 
 #endif
