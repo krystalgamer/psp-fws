@@ -2,7 +2,15 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00C098", func_0000C098);
+void func_0000C098(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_5E4447F6(arg1);
+    }
+    func_0000C2B4(arg0, arg1, var_v0);
+}
 
 void func_0000C0E8(void) {
     func_0000C368();

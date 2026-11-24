@@ -2,7 +2,15 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_06ED70", func_0006ED70);
+s32 func_0006ED70(void *arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 2;
+    if (M2C_FIELD(arg0, s32 *, 0x1BC) != 0) {
+        var_v1 = (func_00071D68(M2C_FIELD(arg0, s32 *, 0xAC), arg1) == 0) ? 0 : 5;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_06ED70", func_0006EDA4);
 
