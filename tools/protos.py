@@ -8,11 +8,14 @@
   path.
 """
 import json
+import os
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SDK_INC = ROOT / "tmp/sdk/usr/local/psp/devkit/include"
+# uOFW (MIT, tmp/uofw) declares many kernel-only exports; the SDK wins on conflicts.
+UOFW_INC = ROOT / "tmp/uofw/include"
 CACHE = ROOT / "tmp/sdk_protos.json"
 
 I64 = {"long long", "SceOff", "SceInt64_t", "SceInt64", "SceUInt64", "SceLong64", "SceULong64", "u64", "s64", "unsigned long long",
@@ -42,7 +45,7 @@ def sdk_protos():
     if CACHE.exists():
         return json.loads(CACHE.read_text())
     out = {}
-    for h in SDK_INC.rglob("*.h"):
+    for h in list(UOFW_INC.rglob("*.h")) + list(SDK_INC.rglob("*.h")):
         t = h.read_text(errors="ignore")
         t = re.sub(r"/\*.*?\*/|//[^\n]*", " ", t, flags=re.S)
         t = re.sub(r"^\s*#.*$", " ", t, flags=re.M)
@@ -63,7 +66,9 @@ def sdk_protos():
                         p = re.sub(r"\b\w+\s*$", "", p)  # drop the parameter name
                     ps.append(basic(p))
             out[name] = f"{basic(ret)} {name}({', '.join(ps) or 'void'});"
-    CACHE.write_text(json.dumps(out))
+    tmp = CACHE.with_suffix(f".{os.getpid()}.tmp")
+    tmp.write_text(json.dumps(out))
+    os.replace(tmp, CACHE)
     return out
 
 
