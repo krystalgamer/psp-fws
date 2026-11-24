@@ -6,7 +6,10 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EBEEC", func_000EBEEC);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EBEEC", func_000EBEF8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EBEEC", func_000EBFFC);
+void func_000EBFFC(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x40) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x3C) = arg1;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EBEEC", func_000EC008);
 

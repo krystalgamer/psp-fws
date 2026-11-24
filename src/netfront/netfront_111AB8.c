@@ -2,7 +2,15 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_00111AB8);
+void func_00111AB8(void *arg0, void *arg1) {
+    void **temp_v0;
+
+    if (arg1 != NULL) {
+        temp_v0 = (M2C_FIELD(arg1, s32 *, 4) * 4) + M2C_FIELD(arg0, s32 *, 0x4C);
+        M2C_FIELD(arg1, void **, 0) = (void *) *temp_v0;
+        *temp_v0 = arg1;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_00111AE4);
 
@@ -54,7 +62,18 @@ void func_00113320(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_00113350);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_001133C4);
+s32 func_001133C4(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 temp_v0;
+
+    D_00135FE0 = 0;
+    temp_v0 = func_0011A4E0(arg1, arg2, arg3);
+    if (temp_v0 != -1) {
+
+    } else if (D_00135FE0 != 0) {
+        *arg0 = D_00135FE0;
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_0011342C);
 
@@ -62,7 +81,18 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_001134E8);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_00113544);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_001135A8);
+s32 func_001135A8(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 temp_v0;
+
+    D_00135FE0 = 0;
+    temp_v0 = func_0011A154(arg1, arg2, arg3);
+    if (temp_v0 != -1) {
+
+    } else if (D_00135FE0 != 0) {
+        *arg0 = D_00135FE0;
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_00113610);
 

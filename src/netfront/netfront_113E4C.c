@@ -2,7 +2,10 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_113E4C", func_00113E4C);
+void func_00113E4C(s32 arg0, s32 arg1) {
+    D_0013447C = arg0;
+    D_00134478 = arg1;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_113E4C", func_00113E60);
 
@@ -34,7 +37,10 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_113E4C", func_001144D8);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_113E4C", func_00114584);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_113E4C", func_001145AC);
+void func_001145AC(s32 arg0, s32 arg1) {
+    D_00134488 = arg0;
+    D_00134484 = arg1;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_113E4C", func_001145C0);
 
@@ -66,7 +72,10 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_113E4C", func_00114C70);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_113E4C", func_00114D20);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_113E4C", func_00114D58);
+void func_00114D58(s32 arg0, s32 arg1) {
+    D_00134494 = arg0;
+    D_00134490 = arg1;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_113E4C", func_00114D6C);
 

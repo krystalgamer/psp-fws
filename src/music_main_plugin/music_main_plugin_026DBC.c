@@ -2,9 +2,29 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_00026DBC);
+s32 func_00026DBC(void *arg0) {
+    s32 temp_v0;
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_00026DF8);
+    var_v1 = 4;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x5C);
+    if (temp_v0 != 0) {
+        var_v1 = (func_00027840(temp_v0) >= 0) ? 0 : 0x11;
+    }
+    return var_v1;
+}
+
+s32 func_00026DF8(void *arg0) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 4;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x5C);
+    if (temp_v0 != 0) {
+        var_v1 = (func_00027864(temp_v0) >= 0) ? 0 : 0x12;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_00026E34);
 
@@ -180,7 +200,9 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_0002A090);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_0002A138);
+void func_0002A138(void) {
+    func_0005B140((s32) &func_00029F44);
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_026DBC", func_0002A158);
 
