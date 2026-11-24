@@ -1000,6 +1000,9 @@
   "sceVshCommonGui_E9930C29": "s32 sceVshCommonGui_E9930C29(M2C_UNK);",
   "sceVshCommonGui_F4D1E387": "M2C_UNK sceVshCommonGui_F4D1E387(s32, s32, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK);"
  },
+ "types": {
+  "D_00065E24_s": "struct D_00065E24_s {\n    s8 unk0;\n    u8 pad1[0x7F];\n    s32 unk80;\n};"
+ },
  "vars": {
   "D_000615CC": "extern M2C_UNK D_000615CC;",
   "D_00061A80": "extern M2C_UNK D_00061A80;",
@@ -1038,7 +1041,7 @@
   "D_00065DE0": "extern s32 D_00065DE0;",
   "D_00065E04": "extern void *D_00065E04;",
   "D_00065E18": "extern s32 D_00065E18;",
-  "D_00065E24": "extern M2C_UNK D_00065E24;",
+  "D_00065E24": "extern struct D_00065E24_s D_00065E24;",
   "D_00065EB0": "extern M2C_UNK D_00065EB0;",
   "D_00065FB0": "extern s32 D_00065FB0;",
   "D_00065FB4": "extern s32 D_00065FB4;",

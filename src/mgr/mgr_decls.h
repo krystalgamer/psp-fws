@@ -4,21 +4,39 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_0000AFF8_s {
+    s32 unk0;
+    u8 pad4[0x8];
+    volatile s32 unkC;
+};
+
+struct D_0000B050_s {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+};
+
+struct D_0000B708_s {
+    s32 unk0;
+    s32 unk4;
+};
+
 extern M2C_UNK D_0000AEE0;
 extern M2C_UNK D_0000AFA0;
 extern M2C_UNK D_0000AFCC;
 extern M2C_UNK D_0000AFD0;
-extern s32 D_0000AFF8;
+extern struct D_0000AFF8_s D_0000AFF8;
 extern s32 D_0000AFFC;
 extern s32 D_0000B004;
-extern M2C_UNK D_0000B050;
+extern struct D_0000B050_s D_0000B050;
 extern s32 D_0000B6AC;
 extern M2C_UNK D_0000B6C8;
 extern M2C_UNK D_0000B6D8;
 extern M2C_UNK D_0000B6E0;
 extern M2C_UNK D_0000B6E8;
 extern M2C_UNK D_0000B6F8;
-extern M2C_UNK D_0000B708;
+extern struct D_0000B708_s D_0000B708;
 
 M2C_UNK InterruptManagerForKernel_FE28C6D9();
 s32 func_0000015C(s32, s32);

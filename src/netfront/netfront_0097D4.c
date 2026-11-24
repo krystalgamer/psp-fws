@@ -1672,9 +1672,9 @@ void func_0001F18C(void) {
 }
 
 void func_0001F194(s32 arg0) {
-    M2C_VFIELD(&D_00133BC8, s32, 8) = func_0001C934(2, 0x48, func_000AFB7C(arg0, 0));
-    M2C_VFIELD(&D_00133BE0, s32, 8) = func_0001C934(3, 0x48, func_000AFB7C(arg0, 1));
-    M2C_VFIELD(&D_00133BF8, s32, 8) = func_0001C934(4, 0x48, func_000AFB7C(arg0, 2));
+    D_00133BC8.unk8 = func_0001C934(2, 0x48, func_000AFB7C(arg0, 0));
+    D_00133BE0.unk8 = func_0001C934(3, 0x48, func_000AFB7C(arg0, 1));
+    D_00133BF8.unk8 = func_0001C934(4, 0x48, func_000AFB7C(arg0, 2));
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F228);
@@ -1696,7 +1696,7 @@ M2C_UNK *func_0001F6B0(void *arg0) {
     temp_s4 = func_000B2114(arg0);
     temp_s2_2 = func_000D4268((s32) arg0, (s32) &D_00133C10, temp_s2, (s32) &func_0001F5F0);
     M2C_FIELD(&D_00133C10, s32 *, 8) = func_0001C934(6, 0xA0, temp_s3);
-    M2C_FIELD(&D_00133C10, s32 *, 0xC) = temp_s4;
+    D_00133C10.unkC = temp_s4;
     func_000D4428((s32) arg0, temp_s2_2, (s32) "SkinChoice");
     return &D_00133C10;
 }
@@ -1705,7 +1705,7 @@ void func_0001F764(void) {
 }
 
 void func_0001F76C(void *arg0) {
-    M2C_VFIELD(&D_00133C10, s32, 8) = func_0001C934(6, 0xA0, func_000B20DC(arg0));
+    D_00133C10.unk8 = func_0001C934(6, 0xA0, func_000B20DC(arg0));
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F7A4);
@@ -1729,7 +1729,7 @@ M2C_UNK *func_000202C8(void *arg0) {
     temp_s4 = func_000D10A8(arg0);
     temp_s2_2 = func_000D4268((s32) arg0, (s32) &D_00133C28, temp_s2, (s32) &func_00020208);
     M2C_FIELD(&D_00133C28, s32 *, 8) = func_0001C934(5, 0x60, temp_s3);
-    M2C_FIELD(&D_00133C28, s32 *, 0xC) = temp_s4;
+    D_00133C28.unkC = temp_s4;
     func_000D4428((s32) arg0, temp_s2_2, (s32) "SkinList");
     return &D_00133C28;
 }
@@ -1738,7 +1738,7 @@ void func_0002037C(void) {
 }
 
 void func_00020384(void *arg0) {
-    M2C_VFIELD(&D_00133C28, s32, 8) = func_0001C934(5, 0x60, func_000D1070(arg0));
+    D_00133C28.unk8 = func_0001C934(5, 0x60, func_000D1070(arg0));
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000203BC);
@@ -1782,7 +1782,7 @@ M2C_UNK *func_000227B0(void *arg0) {
     temp_s4 = func_000B7A28(arg0);
     temp_s2_2 = func_000D4268((s32) arg0, (s32) &D_00133C58, temp_s2, (s32) &func_000226F0);
     M2C_FIELD(&D_00133C58, s32 *, 8) = func_0001C934(0xD, 0x58, temp_s3);
-    M2C_FIELD(&D_00133C58, s32 *, 0xC) = temp_s4;
+    D_00133C58.unkC = temp_s4;
     func_000D4428((s32) arg0, temp_s2_2, (s32) "SkinTable");
     return &D_00133C58;
 }
@@ -1791,7 +1791,7 @@ void func_00022864(void) {
 }
 
 void func_0002286C(void *arg0) {
-    M2C_VFIELD(&D_00133C58, s32, 8) = func_0001C934(0xD, 0x58, func_000B79F4(arg0));
+    D_00133C58.unk8 = func_0001C934(0xD, 0x58, func_000B79F4(arg0));
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000228A4);
@@ -1813,7 +1813,7 @@ M2C_UNK *func_00022BE8(void *arg0) {
     temp_s4 = func_000BB844(arg0);
     temp_s2_2 = func_000D4268((s32) arg0, (s32) &D_00133C70, temp_s2, (s32) &func_00022B20);
     M2C_FIELD(&D_00133C70, s32 *, 8) = func_0001C934(7, 0x54, temp_s3);
-    M2C_FIELD(&D_00133C70, s32 *, 0xC) = temp_s4;
+    D_00133C70.unkC = temp_s4;
     func_000D4428((s32) arg0, temp_s2_2, (s32) "SkinTextBox");
     return &D_00133C70;
 }
@@ -1822,7 +1822,7 @@ void func_00022C9C(void) {
 }
 
 void func_00022CA4(void *arg0) {
-    M2C_VFIELD(&D_00133C70, s32, 8) = func_0001C934(7, 0x54, func_000BB80C(arg0));
+    D_00133C70.unk8 = func_0001C934(7, 0x54, func_000BB80C(arg0));
 }
 
 M2C_UNK *func_00022CDC(void) {
@@ -2064,8 +2064,8 @@ M2C_UNK *func_00025790(void *arg0) {
     temp_s2 = M2C_FIELD(temp_v1, s32 *, 8);
     temp_s3 = M2C_FIELD(temp_v1, s32 *, 0xC);
     temp_v0_2 = func_000D4268((s32) arg0, (s32) &D_00133D08, temp_v0, (s32) &func_000256C8);
-    M2C_FIELD(&D_00133D08, s32 *, 8) = temp_s2;
-    M2C_FIELD(&D_00133D08, s32 *, 0xC) = temp_s3;
+    D_00133D08.unk8 = temp_s2;
+    D_00133D08.unkC = temp_s3;
     func_000D4428((s32) arg0, temp_v0_2, (s32) "PSPPane");
     return &D_00133D08;
 }

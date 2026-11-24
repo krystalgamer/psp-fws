@@ -15,8 +15,8 @@ s32 module_reboot_before(void) {
     if (M2C_FIELD(&D_00002A80, s32 *, 0) > 0) {
         sceKernelDeleteSema(M2C_FIELD(&D_00002A80, s32 *, 0));
     }
-    if (M2C_FIELD(&D_00002A80, s32 *, 4) > 0) {
-        sceKernelDeleteSema(M2C_FIELD(&D_00002A80, s32 *, 4));
+    if (D_00002A80.unk4 > 0) {
+        sceKernelDeleteSema(D_00002A80.unk4);
     }
     memset(&D_00002A80, 0, 0x40);
     memset(&D_00002AC0, 0, 0x4D0);
@@ -56,8 +56,8 @@ s32 func_0000127C(void *arg0) {
     s32 var_v0;
     s32 var_v1;
 
-    var_v0 = sceKernelWaitSema(M2C_FIELD(&D_00002A80, u32 *, 0), 1, NULL);
-    if ((var_v0 < 0) || (M2C_FIELD(arg0, s32 *, 0) = (s32) M2C_FIELD(&D_00002A80, s32 *, 8), M2C_FIELD(arg0, s32 *, 4) = (s32) M2C_FIELD(&D_00002A80, s32 *, 0xC), var_v0 = sceKernelSignalSema(M2C_FIELD(&D_00002A80, u32 *, 0), 1), var_v1 = 0, (var_v0 < 0))) {
+    var_v0 = sceKernelWaitSema(D_00002A80.unk0, 1, NULL);
+    if ((var_v0 < 0) || (M2C_FIELD(arg0, s32 *, 0) = (s32) D_00002A80.unk8, M2C_FIELD(arg0, s32 *, 4) = (s32) M2C_FIELD(&D_00002A80, s32 *, 0xC), var_v0 = sceKernelSignalSema(D_00002A80.unk0, 1), var_v1 = 0, (var_v0 < 0))) {
         var_v1 = var_v0;
     }
     return var_v1;
@@ -67,8 +67,8 @@ s32 func_000012F0(s32 arg0) {
     s32 var_v0;
     s32 var_v1;
 
-    var_v0 = sceKernelWaitSema(M2C_FIELD(&D_00002A80, u32 *, 0), 1, NULL);
-    if ((var_v0 < 0) || (M2C_FIELD(&D_00002A80, s32 *, 8) = (s32) (M2C_FIELD(&D_00002A80, s32 *, 8) + arg0), var_v0 = sceKernelSignalSema(M2C_FIELD(&D_00002A80, u32 *, 0), 1), var_v1 = 0, (var_v0 < 0))) {
+    var_v0 = sceKernelWaitSema(D_00002A80.unk0, 1, NULL);
+    if ((var_v0 < 0) || (D_00002A80.unk8 = (s32) (D_00002A80.unk8 + arg0), var_v0 = sceKernelSignalSema(D_00002A80.unk0, 1), var_v1 = 0, (var_v0 < 0))) {
         var_v1 = var_v0;
     }
     return var_v1;
@@ -79,7 +79,7 @@ s32 func_00001360(s32 arg0, s32 arg1) {
     s32 var_v1;
 
     var_v0 = sceKernelWaitSema(M2C_VFIELD(&D_00002A80, u32, 0), 1, NULL);
-    if ((var_v0 < 0) || (M2C_VFIELD(&D_00002A80, s32, 0xC) = arg1, M2C_VFIELD(&D_00002A80, s32, 8) = arg0, var_v0 = sceKernelSignalSema(M2C_VFIELD(&D_00002A80, u32, 0), 1), var_v1 = 0, (var_v0 < 0))) {
+    if ((var_v0 < 0) || (D_00002A80.unkC = arg1, M2C_VFIELD(&D_00002A80, s32, 8) = arg0, var_v0 = sceKernelSignalSema(M2C_VFIELD(&D_00002A80, u32, 0), 1), var_v1 = 0, (var_v0 < 0))) {
         var_v1 = var_v0;
     }
     return var_v1;
@@ -90,8 +90,8 @@ s32 func_000013D8(void) {
     s32 var_s1;
     s32 var_v0;
 
-    var_s1 = sceKernelWaitSema(M2C_FIELD(&D_00002A80, u32 *, 0), 1, NULL);
-    if ((var_s1 < 0) || (temp_s0 = M2C_FIELD(&D_00002A80, s32 *, 0x18), var_s1 = sceKernelSignalSema(M2C_FIELD(&D_00002A80, u32 *, 0), 1), var_v0 = temp_s0, (var_s1 < 0))) {
+    var_s1 = sceKernelWaitSema(D_00002A80.unk0, 1, NULL);
+    if ((var_s1 < 0) || (temp_s0 = D_00002A80.unk18, var_s1 = sceKernelSignalSema(D_00002A80.unk0, 1), var_v0 = temp_s0, (var_s1 < 0))) {
         KDebugForKernel_84F370BC(&D_000027EC, &D_00002804, "get_state", var_s1);
         var_v0 = var_s1;
     }

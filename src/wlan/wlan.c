@@ -93,13 +93,13 @@ void func_00003158(void *arg0) {
     s32 temp_v0;
 
     if (M2C_FIELD(arg0, s32 *, 0x1DC) == 0) {
-        M2C_FIELD(&D_0001925C, s32 *, 0) = 0;
-        M2C_FIELD(&D_0001925C, s32 *, 4) = 0;
-        M2C_FIELD(&D_0001925C, s32 *, 8) = 0;
-        M2C_FIELD(&D_0001925C, s32 *, 0xC) = 0;
-        M2C_FIELD(&D_0001925C, s32 *, 0x10) = 0;
-        M2C_FIELD(&D_0001925C, s32 *, 0x14) = 0;
-        M2C_FIELD(&D_0001925C, s32 *, 0x18) = 0;
+        D_0001925C.unk0 = 0;
+        D_0001925C.unk4 = 0;
+        D_0001925C.unk8 = 0;
+        D_0001925C.unkC = 0;
+        D_0001925C.unk10 = 0;
+        D_0001925C.unk14 = 0;
+        D_0001925C.unk18 = 0;
         temp_v0 = sceKernelSetAlarm(0x30D40U, (s32) func_00003CE0, arg0);
         if (temp_v0 < 0) {
             M2C_FIELD(arg0, s32 *, 0x1DC) = 0;

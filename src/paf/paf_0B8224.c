@@ -61,7 +61,7 @@ void func_000B87B0(void) {
 
 s32 func_000B87D0(void) {
     sceCtrlReadBufferPositive(&D_001A52C4, 1);
-    return M2C_FIELD(&D_001A52C4, s32 *, 4);
+    return D_001A52C4.unk4;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0B8224", func_000B8804);

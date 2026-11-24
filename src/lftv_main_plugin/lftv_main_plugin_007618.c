@@ -403,7 +403,7 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618",
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_0000A99C);
 
 s32 func_0000AA88(void) {
-    if ((&D_0005EEA0 == NULL) || (__builtin_allegrex_ext(M2C_FIELD(&D_0005EEA0, s32 *, 0x160), 0xC, 1) != 1)) {
+    if ((&D_0005EEA0 == NULL) || (__builtin_allegrex_ext(D_0005EEA0.unk160, 0xC, 1) != 1)) {
 
     } else {
         func_00002048((s32) &D_0005EEA0);

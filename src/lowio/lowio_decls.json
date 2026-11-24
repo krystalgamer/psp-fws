@@ -55,8 +55,11 @@
   "sceSysreg_driver_F2DEAA14": "s32 sceSysreg_driver_F2DEAA14(void);",
   "sceSysreg_driver_F74F14E9": "s32 sceSysreg_driver_F74F14E9(void);"
  },
+ "types": {
+  "D_0000BD34_s": "struct D_0000BD34_s {\n    u8 pad0[0x10];\n    volatile s32 unk10;\n    volatile s32 unk14;\n};"
+ },
  "vars": {
   "D_0000BAC4": "extern M2C_UNK D_0000BAC4;",
-  "D_0000BD34": "extern M2C_UNK D_0000BD34;"
+  "D_0000BD34": "extern struct D_0000BD34_s D_0000BD34;"
  }
 }

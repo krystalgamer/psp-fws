@@ -209,8 +209,8 @@ s32 func_00003BB4(void *arg0) {
             temp_s0 = sceKernelCpuSuspendIntr();
             func_00004E30(temp_s1);
             sceKernelCpuResumeIntr(temp_s0);
-            sceKernelFreeFpl(M2C_VFIELD(&D_00007608, s32, 0x20), M2C_FIELD(temp_s1, void **, 8));
-            SysMemForKernel_7B749390(M2C_VFIELD(&D_00007608, s32, 0x1C), temp_s1);
+            sceKernelFreeFpl(D_00007608.unk20, M2C_FIELD(temp_s1, void **, 8));
+            SysMemForKernel_7B749390(D_00007608.unk1C, temp_s1);
             M2C_FIELD(arg0, s32 *, 0x10) = 0;
             sceKernelSignalSema(M2C_FIELD(temp_v0, s32 *, 0x58), 1);
             var_v0 = temp_v0_2;

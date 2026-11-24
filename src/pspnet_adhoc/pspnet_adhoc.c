@@ -273,8 +273,8 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_98
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_A0229362);
 
 s32 func_00006F68(void) {
-    M2C_FIELD(&D_000079C0, s32 *, 0) = 0;
-    M2C_FIELD(&D_000079C0, M2C_UNK **, 4) = &D_000079C0;
+    D_000079C0.unk0 = 0;
+    D_000079C0.unk4 = &D_000079C0;
     return 0;
 }
 

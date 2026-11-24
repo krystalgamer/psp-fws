@@ -301,6 +301,9 @@
   "sceVshNetconf_E5C98505": "void sceVshNetconf_E5C98505(void);",
   "sceVshNetconf_ED56BC38": "void sceVshNetconf_ED56BC38(void);"
  },
+ "types": {
+  "D_000207F0_s": "struct D_000207F0_s {\n    u8 pad0[0x1C];\n    volatile s32 unk1C;\n};"
+ },
  "vars": {
   "D_0001CF8C": "extern M2C_UNK D_0001CF8C;",
   "D_0001D098": "extern M2C_UNK D_0001D098;",
@@ -363,7 +366,7 @@
   "D_00020754": "extern s32 D_00020754;",
   "D_000207A0": "extern s32 D_000207A0;",
   "D_000207B4": "extern s32 D_000207B4;",
-  "D_000207F0": "extern M2C_UNK D_000207F0;",
+  "D_000207F0": "extern struct D_000207F0_s D_000207F0;",
   "D_00020818": "extern s32 D_00020818;",
   "D_0002084C": "extern s32 D_0002084C;",
   "D_00020850": "extern s32 D_00020850;",

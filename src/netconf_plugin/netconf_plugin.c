@@ -2369,8 +2369,8 @@ void func_000113E0(void *arg0) {
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000113F0);
 
 void func_0001146C(void) {
-    if (M2C_VFIELD(&D_000207F0, s32, 0x1C) != 0) {
-        M2C_VFIELD(&D_000207F0, s32, 0x1C) = 0;
+    if (D_000207F0.unk1C != 0) {
+        D_000207F0.unk1C = 0;
     }
 }
 

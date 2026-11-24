@@ -4,8 +4,19 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_00004580_s {
+    volatile s32 unk0;
+    volatile s32 unk4;
+    volatile s32 unk8;
+    volatile s32 unkC;
+    volatile s32 unk10;
+    volatile s32 unk14;
+    u8 pad18[0x4];
+    volatile s32 unk1C;
+};
+
 extern M2C_UNK D_00004540;
-extern M2C_UNK D_00004580;
+extern struct D_00004580_s D_00004580;
 extern M2C_UNK func_00000000;
 extern M2C_UNK func_00003D10;
 extern M2C_UNK func_00003DD4;

@@ -410,8 +410,8 @@ s32 func_00016FA8(void) {
     s32 var_a0;
 
     var_a0 = 0;
-    if (M2C_FIELD(&D_00023028, s32 *, 0) != 0) {
-        var_a0 = M2C_FIELD(&D_00023028, s32 *, 4);
+    if (D_00023028.unk0 != 0) {
+        var_a0 = D_00023028.unk4;
     }
     return var_a0;
 }

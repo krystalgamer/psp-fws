@@ -104,21 +104,26 @@
   "sceMgr_driver_E22F96A0": "s32 sceMgr_driver_E22F96A0(s32 arg0, s32 arg1, s32 arg2);",
   "sceMgr_driver_F98874E9": "s32 sceMgr_driver_F98874E9(s32 arg0, s32 arg1, s32 arg2);"
  },
+ "types": {
+  "D_0000AFF8_s": "struct D_0000AFF8_s {\n    s32 unk0;\n    u8 pad4[0x8];\n    volatile s32 unkC;\n};",
+  "D_0000B050_s": "struct D_0000B050_s {\n    u8 unk0;\n    u8 unk1;\n    u8 unk2;\n    u8 unk3;\n};",
+  "D_0000B708_s": "struct D_0000B708_s {\n    s32 unk0;\n    s32 unk4;\n};"
+ },
  "vars": {
   "D_0000AEE0": "extern M2C_UNK D_0000AEE0;",
   "D_0000AFA0": "extern M2C_UNK D_0000AFA0;",
   "D_0000AFCC": "extern M2C_UNK D_0000AFCC;",
   "D_0000AFD0": "extern M2C_UNK D_0000AFD0;",
-  "D_0000AFF8": "extern s32 D_0000AFF8;",
+  "D_0000AFF8": "extern struct D_0000AFF8_s D_0000AFF8;",
   "D_0000AFFC": "extern s32 D_0000AFFC;",
   "D_0000B004": "extern s32 D_0000B004;",
-  "D_0000B050": "extern M2C_UNK D_0000B050;",
+  "D_0000B050": "extern struct D_0000B050_s D_0000B050;",
   "D_0000B6AC": "extern s32 D_0000B6AC;",
   "D_0000B6C8": "extern M2C_UNK D_0000B6C8;",
   "D_0000B6D8": "extern M2C_UNK D_0000B6D8;",
   "D_0000B6E0": "extern M2C_UNK D_0000B6E0;",
   "D_0000B6E8": "extern M2C_UNK D_0000B6E8;",
   "D_0000B6F8": "extern M2C_UNK D_0000B6F8;",
-  "D_0000B708": "extern M2C_UNK D_0000B708;"
+  "D_0000B708": "extern struct D_0000B708_s D_0000B708;"
  }
 }

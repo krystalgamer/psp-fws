@@ -22,8 +22,11 @@
   "sceNetAdhoc_lib_F9240FBA": "void sceNetAdhoc_lib_F9240FBA(void);",
   "sceNet_lib_57CC57DA": "M2C_UNK sceNet_lib_57CC57DA(void *, M2C_UNK, M2C_UNK);"
  },
+ "types": {
+  "D_000079C0_s": "struct D_000079C0_s {\n    s32 unk0;\n    M2C_UNK * unk4;\n};"
+ },
  "vars": {
-  "D_000079C0": "extern M2C_UNK D_000079C0;",
+  "D_000079C0": "extern struct D_000079C0_s D_000079C0;",
   "D_000079CC": "extern M2C_UNK D_000079CC;",
   "D_000079E8": "extern M2C_UNK D_000079E8;"
  }

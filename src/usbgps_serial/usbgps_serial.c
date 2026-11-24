@@ -48,13 +48,13 @@ s32 sceUsbGps_driver_268F95CA(u32 arg0) {
 
     var_s0 = 0;
     temp_s1 = shiftK1();
-    if (M2C_FIELD(&D_00005260, s32 *, 0) == 0) {
+    if (D_00005260.unk0 == 0) {
         var_s0 = 0x80244002;
     } else if (arg0 >= 3U) {
         var_s0 = 0x80244007;
     } else {
         temp_a0 = sceKernelCpuSuspendIntr();
-        M2C_FIELD(&D_00005260, u32 *, 0x157C) = arg0;
+        D_00005260.unk157C = arg0;
         sceKernelCpuResumeIntr(temp_a0);
     }
     setK1(temp_s1);

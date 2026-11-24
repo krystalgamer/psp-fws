@@ -31,12 +31,16 @@
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelSetAlarm": "s32 sceKernelSetAlarm(u32, s32, void *);"
  },
+ "types": {
+  "D_000046A8_s": "struct D_000046A8_s {\n    s32 unk0;\n    s32 unk4;\n};",
+  "D_00004700_s": "struct D_00004700_s {\n    u8 pad0[0x4];\n    volatile s32 unk4;\n    volatile s32 unk8;\n    volatile s32 unkC;\n    volatile s32 unk10;\n    volatile s32 unk14;\n    volatile s32 unk18;\n};"
+ },
  "vars": {
   "D_00004640": "extern s32 D_00004640;",
-  "D_000046A8": "extern M2C_UNK D_000046A8;",
+  "D_000046A8": "extern struct D_000046A8_s D_000046A8;",
   "D_000046E8": "extern s32 D_000046E8;",
   "D_000046EC": "extern s32 D_000046EC;",
-  "D_00004700": "extern M2C_UNK D_00004700;",
+  "D_00004700": "extern struct D_00004700_s D_00004700;",
   "D_00004728": "extern s32 D_00004728;"
  }
 }

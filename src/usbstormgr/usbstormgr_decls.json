@@ -6,7 +6,10 @@
   "func_000017C4": "s32 func_000017C4(void);",
   "func_00003B58": "void func_00003B58(void);"
  },
+ "types": {
+  "D_00005150_s": "struct D_00005150_s {\n    u8 pad0[0x48];\n    volatile s32 unk48;\n    volatile s32 unk4C;\n    volatile s32 unk50;\n    u8 pad54[0x10];\n    volatile s32 unk64;\n    volatile s32 unk68;\n    u8 pad6C[0x4];\n    volatile s32 unk70;\n    volatile s32 unk74;\n};"
+ },
  "vars": {
-  "D_00005150": "extern M2C_UNK D_00005150;"
+  "D_00005150": "extern struct D_00005150_s D_00005150;"
  }
 }

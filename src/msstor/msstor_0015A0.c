@@ -157,7 +157,7 @@ s32 func_000049E4(void) {
 
     temp_s1 = sceMScm_driver_12BD8FEC(0, &D_000098DC);
     bzero(&D_00009B54, 0x4E94);
-    M2C_FIELD(&D_00009B54, s32 *, 0x4E88) = 0x1F4;
+    D_00009B54.unk4E88 = 0x1F4;
     func_000077A0(&D_00009B54, 1);
     return temp_s1;
 }
@@ -190,19 +190,19 @@ s32 func_00004E2C(void *arg0) {
 }
 
 s32 func_00004E40(void) {
-    if (M2C_FIELD(&D_000099D4, s32 *, 0) > 0) {
-        sceKernelDeleteSema(M2C_FIELD(&D_000099D4, s32 *, 0));
+    if (D_000099D4.unk0 > 0) {
+        sceKernelDeleteSema(D_000099D4.unk0);
     }
-    if (M2C_FIELD(&D_000099D4, s32 *, 0x18) > 0) {
-        sceKernelTerminateDeleteThread(M2C_FIELD(&D_000099D4, s32 *, 0x18));
+    if (D_000099D4.unk18 > 0) {
+        sceKernelTerminateDeleteThread(D_000099D4.unk18);
     }
-    if (M2C_FIELD(&D_000099D4, s32 *, 0x28) > 0) {
-        sceKernelTerminateDeleteThread(M2C_FIELD(&D_000099D4, s32 *, 0x28));
+    if (D_000099D4.unk28 > 0) {
+        sceKernelTerminateDeleteThread(D_000099D4.unk28);
     }
-    if (M2C_FIELD(&D_000099D4, s32 *, 0x24) > 0) {
-        sceKernelDeleteEventFlag(M2C_FIELD(&D_000099D4, s32 *, 0x24));
+    if (D_000099D4.unk24 > 0) {
+        sceKernelDeleteEventFlag(D_000099D4.unk24);
     }
-    M2C_FIELD(&D_000099D4, s32 *, 0) = -1;
+    D_000099D4.unk0 = -1;
     return 0;
 }
 

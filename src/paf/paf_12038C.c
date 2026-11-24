@@ -355,8 +355,8 @@ void func_00123C90(s32 arg0, M2C_UNK arg1) {
 s32 func_00123CB4(s32 arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_VFIELD(&D_001A7E2C, s32, 0x9C);
-    M2C_VFIELD(&D_001A7E2C, s32, 0x9C) = arg0;
+    temp_v0 = D_001A7E2C.unk9C;
+    D_001A7E2C.unk9C = arg0;
     return temp_v0;
 }
 
@@ -383,8 +383,8 @@ void func_00123D78(s32 arg0, s32 arg1) {
 s32 func_00123D9C(s32 arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_VFIELD(&D_001A7E2C, s32, 0xA8);
-    M2C_VFIELD(&D_001A7E2C, s32, 0xA8) = arg0;
+    temp_v0 = D_001A7E2C.unkA8;
+    D_001A7E2C.unkA8 = arg0;
     return temp_v0;
 }
 

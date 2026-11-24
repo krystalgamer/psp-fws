@@ -326,12 +326,12 @@ s32 sceGuSetCallback(s32 arg0, s32 arg1) {
     var_a2 = 0;
     if (arg0 != 1) {
         if (arg0 == 4) {
-            var_a2 = M2C_VFIELD(&D_001D7A10, s32, 4);
-            M2C_VFIELD(&D_001D7A10, s32, 4) = arg1;
+            var_a2 = D_001D7A10.unk4;
+            D_001D7A10.unk4 = arg1;
         }
     } else {
-        var_a2 = M2C_VFIELD(&D_001D7A10, s32, 0);
-        M2C_VFIELD(&D_001D7A10, s32, 0) = arg1;
+        var_a2 = D_001D7A10.unk0;
+        D_001D7A10.unk0 = arg1;
     }
     return var_a2;
 }

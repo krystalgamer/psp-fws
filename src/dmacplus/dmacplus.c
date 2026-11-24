@@ -16,7 +16,7 @@ INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", func_00000288);
 
 s32 module_start(void) {
     sceSysreg_driver_678AD3ED();
-    D_0000404C = 0;
+    D_0000404C.unk0 = 0;
     InterruptManagerForKernel_58DD8978(0x15, 1, &func_00000288, 0, &D_00002EC8);
     InterruptManagerForKernel_4D6E7305(0x15);
     sceDmacplus_driver_FE3F3228();
@@ -138,7 +138,7 @@ INCLUDE_ASM("tmp/asm/282/dmacplus/nonmatchings/dmacplus", func_00001698);
 
 s32 func_00001798(void) {
     sceKernelSetEventFlag(D_00003FC0, 1U);
-    M2C_VFIELD(&D_0000404C, u16, 2) = (u16) (M2C_VFIELD(&D_0000404C, u16, 2) & 0x7FFD);
+    D_0000404C.unk2 = (u16) (D_0000404C.unk2 & 0x7FFD);
     return -1;
 }
 
@@ -208,8 +208,8 @@ s32 sceDmacplus_driver_B6592A56(void) {
 
     temp_s2 = sceKernelCpuSuspendIntr();
     temp_v0 = "SceDmacplusSc128";
-    M2C_VFIELD(&D_00004034, s32, 0) = sceKernelCreateSema(temp_v0, 1U, 1, 1, NULL);
-    M2C_VFIELD(&D_00004034, s32, 4) = sceKernelCreateEventFlag(temp_v0, 0x201U, 0U, NULL);
+    D_00004034.unk0 = sceKernelCreateSema(temp_v0, 1U, 1, 1, NULL);
+    D_00004034.unk4 = sceKernelCreateEventFlag(temp_v0, 0x201U, 0U, NULL);
     sceKernelRegisterSubIntrHandler(0x15, 8, &func_00002198, 0);
     sceKernelRegisterSubIntrHandler(0x15, 9, &func_000021EC, 0);
     sceKernelEnableSubIntr(0x15, 8);

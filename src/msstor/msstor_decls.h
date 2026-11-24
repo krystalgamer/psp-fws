@@ -4,13 +4,27 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_000099D4_s {
+    s32 unk0;
+    u8 pad4[0x14];
+    s32 unk18;
+    u8 pad1C[0x8];
+    s32 unk24;
+    s32 unk28;
+};
+
+struct D_00009B54_s {
+    u8 pad0[0x4E88];
+    s32 unk4E88;
+};
+
 extern M2C_UNK D_00009248;
 extern M2C_UNK D_00009264;
 extern void *D_00009888;
 extern M2C_UNK D_000098DC;
-extern M2C_UNK D_000099D4;
+extern struct D_000099D4_s D_000099D4;
 extern void *D_00009B50;
-extern M2C_UNK D_00009B54;
+extern struct D_00009B54_s D_00009B54;
 
 M2C_UNK IoFileMgrForKernel_C7F35804(M2C_UNK *);
 M2C_UNK bzero(M2C_UNK *, M2C_UNK);

@@ -83,8 +83,8 @@ void sceAta_driver_68DEA2FF(s32 arg0) {
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_638EEA14);
 
 void sceAta_driver_B5982381(void) {
-    M2C_FIELD(&D_000046A8, s32 *, 0) = 0;
-    M2C_FIELD(&D_000046A8, s32 *, 4) = 0;
+    D_000046A8.unk0 = 0;
+    D_000046A8.unk4 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", func_000019F0);
@@ -173,12 +173,12 @@ void func_000022F4(void) {
 }
 
 void sceAta_driver_AE100256(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    M2C_VFIELD(&D_00004700, s32, 0x18) = arg5;
-    M2C_VFIELD(&D_00004700, s32, 4) = arg0;
-    M2C_VFIELD(&D_00004700, s32, 8) = arg1;
-    M2C_VFIELD(&D_00004700, s32, 0xC) = arg2;
-    M2C_VFIELD(&D_00004700, s32, 0x10) = arg3;
-    M2C_VFIELD(&D_00004700, s32, 0x14) = arg4;
+    D_00004700.unk18 = arg5;
+    D_00004700.unk4 = arg0;
+    D_00004700.unk8 = arg1;
+    D_00004700.unkC = arg2;
+    D_00004700.unk10 = arg3;
+    D_00004700.unk14 = arg4;
 }
 
 M2C_UNK *sceAta_driver_F76A5B9C(void) {

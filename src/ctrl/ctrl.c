@@ -85,10 +85,10 @@ s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1) {
 }
 
 s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    M2C_VFIELD(&D_00001D70, s32, 0xA40) = arg3;
-    M2C_VFIELD(&D_00001D70, s32, 0xA34) = arg0;
-    M2C_VFIELD(&D_00001D70, s32, 0xA38) = arg1;
-    M2C_VFIELD(&D_00001D70, s32, 0xA3C) = arg2;
+    D_00001D70.unkA40 = arg3;
+    D_00001D70.unkA34 = arg0;
+    D_00001D70.unkA38 = arg1;
+    D_00001D70.unkA3C = arg2;
     return 0;
 }
 

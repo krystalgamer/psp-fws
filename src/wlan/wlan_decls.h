@@ -4,8 +4,18 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_0001925C_s {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+};
+
 extern void *D_000191B0;
-extern M2C_UNK D_0001925C;
+extern struct D_0001925C_s D_0001925C;
 extern s32 D_00019290;
 extern s32 D_0001929C;
 extern s32 D_000192A0;

@@ -573,8 +573,8 @@ INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00002EB8);
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00002F38);
 
 s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1) {
-    M2C_VFIELD(&D_0000BD34, s32, 0x14) = arg1;
-    M2C_VFIELD(&D_0000BD34, s32, 0x10) = arg0;
+    D_0000BD34.unk14 = arg1;
+    D_0000BD34.unk10 = arg0;
     return 0;
 }
 

@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_00007608_s {
+    u8 pad0[0x1C];
+    volatile s32 unk1C;
+    volatile s32 unk20;
+};
+
 extern M2C_UNK D_00005F30;
 extern s32 D_00005F98;
 extern s32 D_00005FE0;
@@ -11,7 +17,7 @@ extern s32 D_00006200;
 extern s32 D_00006224;
 extern s32 D_000065C0;
 extern s32 D_000065C4;
-extern M2C_UNK D_00007608;
+extern struct D_00007608_s D_00007608;
 extern M2C_UNK func_000048CC;
 
 M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);

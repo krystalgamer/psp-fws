@@ -120,8 +120,8 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00003F68);
 void func_000040FC(void) {
     D_0002BEC0 = 0x80;
     D_0002C504 = 0;
-    M2C_FIELD(&D_0002CC9C, s32 *, 0) = 0;
-    M2C_FIELD(&D_0002CC9C, M2C_UNK **, 4) = &D_0002CC9C;
+    D_0002CC9C.unk0 = 0;
+    D_0002CC9C.unk4 = &D_0002CC9C;
 }
 
 s32 func_00004124(void *arg0, s32 arg1) {

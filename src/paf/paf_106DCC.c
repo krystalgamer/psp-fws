@@ -39,10 +39,10 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_00106F04);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_00106F18);
 
 void scePaf_D4C6CC7A(void *arg0) {
-    M2C_FIELD(&D_001A7CC0, s32 *, 0) = (s32) M2C_FIELD(arg0, s32 *, 0);
-    M2C_FIELD(&D_001A7CC0, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(&D_001A7CC0, s32 *, 8) = (s32) M2C_FIELD(arg0, s32 *, 8);
-    M2C_FIELD(&D_001A7CC0, s32 *, 0xC) = (s32) M2C_FIELD(arg0, s32 *, 0xC);
+    D_001A7CC0.unk0 = (s32) M2C_FIELD(arg0, s32 *, 0);
+    D_001A7CC0.unk4 = (s32) M2C_FIELD(arg0, s32 *, 4);
+    D_001A7CC0.unk8 = (s32) M2C_FIELD(arg0, s32 *, 8);
+    D_001A7CC0.unkC = (s32) M2C_FIELD(arg0, s32 *, 0xC);
 }
 
 INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_106DCC", D_0019C1F8);

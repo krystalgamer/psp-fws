@@ -54,6 +54,9 @@
   "sceKernelMemset": "void * sceKernelMemset(void *, s32, u32);",
   "sceKernelUSec2SysClockWide": "s64 sceKernelUSec2SysClockWide(u32 arg0);"
  },
+ "types": {
+  "D_00016C74_s": "struct D_00016C74_s {\n    void * unk0;\n    volatile s32 unk4;\n    u8 pad8[0x410];\n    volatile s32 unk418;\n};"
+ },
  "vars": {
   "D_00016414": "extern M2C_UNK D_00016414;",
   "D_00016630": "extern M2C_UNK D_00016630;",
@@ -64,7 +67,7 @@
   "D_00016754": "extern s32 D_00016754;",
   "D_00016778": "extern s32 D_00016778;",
   "D_000169E0": "extern s32 D_000169E0;",
-  "D_00016C74": "extern void *D_00016C74;",
+  "D_00016C74": "extern struct D_00016C74_s D_00016C74;",
   "D_00016C78": "extern s32 D_00016C78;",
   "D_000172B4": "extern void *D_000172B4;",
   "D_000172B8": "extern s32 D_000172B8;",

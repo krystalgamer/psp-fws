@@ -778,6 +778,10 @@
   "sceNetApctlGetInfo": "s32 sceNetApctlGetInfo();",
   "sceNetApctlGetState": "s32 sceNetApctlGetState();"
  },
+ "types": {
+  "D_000644E4_s": "struct D_000644E4_s {\n    u8 pad0[0x2C];\n    volatile s32 unk2C;\n};",
+  "D_0006E670_s": "struct D_0006E670_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n};"
+ },
  "vars": {
   "D_0005E250": "extern M2C_UNK D_0005E250;",
   "D_0005EDCC": "extern M2C_UNK D_0005EDCC;",
@@ -825,7 +829,7 @@
   "D_00064390": "extern s32 D_00064390;",
   "D_000644D8": "extern s32 D_000644D8;",
   "D_000644E0": "extern void *D_000644E0;",
-  "D_000644E4": "extern M2C_UNK D_000644E4;",
+  "D_000644E4": "extern struct D_000644E4_s D_000644E4;",
   "D_00064510": "extern s32 D_00064510;",
   "D_00064514": "extern s32 D_00064514;",
   "D_0006D9D4": "extern s32 D_0006D9D4;",
@@ -834,7 +838,7 @@
   "D_0006DA64": "extern s32 D_0006DA64;",
   "D_0006DA68": "extern s32 D_0006DA68;",
   "D_0006DA6C": "extern s32 D_0006DA6C;",
-  "D_0006E670": "extern M2C_UNK D_0006E670;",
+  "D_0006E670": "extern struct D_0006E670_s D_0006E670;",
   "func_00008DC0": "extern M2C_UNK func_00008DC0;",
   "func_000099EC": "extern M2C_UNK func_000099EC;",
   "func_00009F80": "extern M2C_UNK func_00009F80;",

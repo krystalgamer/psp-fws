@@ -4,6 +4,88 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_000E164C_s {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct D_000E2000_s {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+};
+
+struct D_000E202C_s {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+};
+
+struct D_000E216C_s {
+    u8 pad0[0x9C];
+    volatile s32 unk9C;
+    u8 padA0[0x8];
+    volatile s32 unkA8;
+};
+
+struct D_000FDAC0_s {
+    volatile s32 unk0;
+    volatile s32 unk4;
+};
+
+struct D_00106F70_s {
+    u8 pad0[0x14];
+    void * unk14;
+    u8 pad18[0xB4];
+    s32 unkCC;
+    u8 padD0[0x8];
+    volatile s16 unkD8;
+    u8 padDA[0x2];
+    volatile s16 unkDC;
+    volatile s16 unkDE;
+    u8 padE0[0x2];
+    volatile s16 unkE2;
+    u8 padE4[0x1C];
+    volatile s16 unk100;
+    u8 pad102[0x17CE];
+    volatile u16 unk18D0;
+    u8 pad18D2[0x18];
+    volatile s16 unk18EA;
+    u8 pad18EC[0x1E];
+    volatile s16 unk190A;
+    volatile s16 unk190C;
+    u8 pad190E[0x1AE];
+    void * unk1ABC;
+    u8 pad1AC0[0x23C6];
+    volatile s16 unk3E86;
+    volatile s16 unk3E88;
+    u8 pad3E8A[0xEC];
+    volatile s16 unk3F76;
+    u8 pad3F78[0x182];
+    volatile s16 unk40FA;
+    u8 pad40FC[0x10];
+    volatile s8 unk410C;
+    volatile s8 unk410D;
+    volatile s8 unk410E;
+    volatile s8 unk410F;
+    volatile s8 unk4110;
+    volatile s8 unk4111;
+    u8 pad4112[0x6C];
+    volatile s8 unk417E;
+    u8 pad417F[0x43];
+    volatile s8 unk41C2;
+    u8 pad41C3[0xFB];
+    volatile s16 unk42BE;
+    u8 pad42C0[0x6560];
+    volatile s32 unkA820;
+};
+
 extern M2C_UNK D_000D1930;
 extern M2C_UNK D_000D1940;
 extern M2C_UNK D_000D1B28;
@@ -89,7 +171,7 @@ extern s32 D_000E1604;
 extern s32 D_000E1608;
 extern s32 D_000E1644;
 extern s32 D_000E1648;
-extern M2C_UNK D_000E164C;
+extern struct D_000E164C_s D_000E164C;
 extern s32 D_000E165C;
 extern s32 D_000E1664;
 extern s32 D_000E1684;
@@ -111,8 +193,8 @@ extern s32 D_000E1F08;
 extern s32 D_000E1F28;
 extern s32 D_000E1F2C;
 extern s32 D_000E1F30;
-extern M2C_UNK D_000E2000;
-extern M2C_UNK D_000E202C;
+extern struct D_000E2000_s D_000E2000;
+extern struct D_000E202C_s D_000E202C;
 extern M2C_UNK D_000E2050;
 extern u8 D_000E20A0;
 extern s8 D_000E20C8;
@@ -126,7 +208,7 @@ extern s32 D_000E2154;
 extern s32 D_000E2158;
 extern s32 D_000E2160;
 extern s32 D_000E2164;
-extern M2C_UNK D_000E216C;
+extern struct D_000E216C_s D_000E216C;
 extern void *D_000E2220;
 extern M2C_UNK D_000E6030;
 extern M2C_UNK D_000E6034;
@@ -137,13 +219,13 @@ extern s32 D_000E6044;
 extern s32 D_000E6048;
 extern M2C_UNK D_000E984C;
 extern s32 D_000FDAB4;
-extern M2C_UNK D_000FDAC0;
+extern struct D_000FDAC0_s D_000FDAC0;
 extern s32 D_000FDAEC;
 extern void *D_000FDB04;
 extern s32 D_000FDB08;
 extern s32 D_000FDB14;
 extern s32 D_000FDB18;
-extern M2C_UNK D_00106F70;
+extern struct D_00106F70_s D_00106F70;
 extern M2C_UNK D_00108130;
 extern s16 D_0010883E;
 extern s16 D_00108846;

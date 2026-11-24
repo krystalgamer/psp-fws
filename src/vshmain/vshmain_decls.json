@@ -251,6 +251,9 @@
   "vsh_8F76CA2A": "void vsh_8F76CA2A(void);",
   "vsh_FA1DE461": "void vsh_FA1DE461(void *arg0, s32 arg1, s32 arg2);"
  },
+ "types": {
+  "D_00030398_s": "struct D_00030398_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    volatile s32 unk8;\n    M2C_UNK * unkC;\n    volatile s32 unk10;\n    volatile s32 unk14;\n    volatile s32 unk18;\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};"
+ },
  "vars": {
   "D_000283F4": "extern s32 D_000283F4;",
   "D_00028D50": "extern M2C_UNK D_00028D50;",
@@ -280,7 +283,7 @@
   "D_0003038C": "extern s32 D_0003038C;",
   "D_00030390": "extern s32 D_00030390;",
   "D_00030394": "extern s32 D_00030394;",
-  "D_00030398": "extern M2C_UNK D_00030398;",
+  "D_00030398": "extern struct D_00030398_s D_00030398;",
   "D_000303BC": "extern M2C_UNK D_000303BC;",
   "D_00030444": "extern s32 D_00030444;",
   "D_00030448": "extern s32 D_00030448;",

@@ -776,6 +776,9 @@
   "sceVshNetconf_C721AEF6": "s32 sceVshNetconf_C721AEF6();",
   "sceVshNetconf_ED56BC38": "M2C_UNK sceVshNetconf_ED56BC38();"
  },
+ "types": {
+  "D_0005EEA0_s": "struct D_0005EEA0_s {\n    u8 pad0[0x160];\n    s32 unk160;\n};"
+ },
  "vars": {
   "D_00057270": "extern M2C_UNK D_00057270;",
   "D_00057280": "extern M2C_UNK D_00057280;",
@@ -858,7 +861,7 @@
   "D_0005EBD4": "extern s32 D_0005EBD4;",
   "D_0005EBDC": "extern s32 D_0005EBDC;",
   "D_0005EE50": "extern s32 D_0005EE50;",
-  "D_0005EEA0": "extern M2C_UNK D_0005EEA0;",
+  "D_0005EEA0": "extern struct D_0005EEA0_s D_0005EEA0;",
   "D_0005EED8": "extern void *D_0005EED8;",
   "D_0005EEE4": "extern void *D_0005EEE4;",
   "D_0005F028": "extern M2C_UNK D_0005F028;",

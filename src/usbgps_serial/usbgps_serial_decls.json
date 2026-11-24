@@ -20,8 +20,11 @@
   "sceUsbBus_driver_C1E2A540": "s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);",
   "sceUsbGps_driver_268F95CA": "s32 sceUsbGps_driver_268F95CA(u32 arg0);"
  },
+ "types": {
+  "D_00005260_s": "struct D_00005260_s {\n    s32 unk0;\n    u8 pad4[0x1578];\n    u32 unk157C;\n};"
+ },
  "vars": {
   "D_00005210": "extern M2C_UNK D_00005210;",
-  "D_00005260": "extern M2C_UNK D_00005260;"
+  "D_00005260": "extern struct D_00005260_s D_00005260;"
  }
 }

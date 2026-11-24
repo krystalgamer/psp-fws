@@ -4,7 +4,14 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-extern M2C_UNK D_00006B80;
+struct D_00006B80_s {
+    u8 pad0[0x138];
+    volatile u32 unk138;
+    u8 pad13C[0x198];
+    volatile s32 unk2D4;
+};
+
+extern struct D_00006B80_s D_00006B80;
 
 s32 func_00000000(s32);
 s32 func_00000194(M2C_UNK);

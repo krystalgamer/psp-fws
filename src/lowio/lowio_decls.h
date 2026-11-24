@@ -4,8 +4,14 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_0000BD34_s {
+    u8 pad0[0x10];
+    volatile s32 unk10;
+    volatile s32 unk14;
+};
+
 extern M2C_UNK D_0000BAC4;
-extern M2C_UNK D_0000BD34;
+extern struct D_0000BD34_s D_0000BD34;
 
 M2C_UNK DmacManForKernel_32757C57(M2C_UNK);
 M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);

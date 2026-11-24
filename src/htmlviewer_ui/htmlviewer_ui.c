@@ -7597,8 +7597,8 @@ s32 func_00049C70(void) {
 }
 
 void func_00049C90(void) {
-    M2C_VFIELD(&D_0006E670, s32, 0) = -1;
-    M2C_VFIELD(&D_0006E670, s32, 4) = -1;
+    D_0006E670.unk0 = -1;
+    D_0006E670.unk4 = -1;
 }
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00049CA8);
@@ -7870,7 +7870,7 @@ s32 func_0004C664(void) {
     D_000644E0 = sceGeEdramGetAddr();
     D_000644D8 = sceGeListEnQueue((void *) ((s32) &D_0005FE58 & 0x1FFFFFFF), NULL, D_00064514, NULL);
     func_0004C430();
-    M2C_VFIELD(&D_000644E4, s32, 0x2C) = sceKernelCreateEventFlag("SceGuSignal", 0x200U, 3U, NULL);
+    D_000644E4.unk2C = sceKernelCreateEventFlag("SceGuSignal", 0x200U, 3U, NULL);
     sceGeListSync(D_000644D8, 0);
     return 0;
 }

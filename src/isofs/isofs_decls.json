@@ -25,6 +25,9 @@
   "sceUmdMan_driver_4217E7F5": "M2C_UNK sceUmdMan_driver_4217E7F5(M2C_UNK);",
   "sceUmdMan_driver_BF8AED79": "s32 sceUmdMan_driver_BF8AED79(M2C_UNK, M2C_UNK *, s32);"
  },
+ "types": {
+  "D_00007608_s": "struct D_00007608_s {\n    u8 pad0[0x1C];\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};"
+ },
  "vars": {
   "D_00005F30": "extern M2C_UNK D_00005F30;",
   "D_00005F98": "extern s32 D_00005F98;",
@@ -33,7 +36,7 @@
   "D_00006224": "extern s32 D_00006224;",
   "D_000065C0": "extern s32 D_000065C0;",
   "D_000065C4": "extern s32 D_000065C4;",
-  "D_00007608": "extern M2C_UNK D_00007608;",
+  "D_00007608": "extern struct D_00007608_s D_00007608;",
   "func_000048CC": "extern M2C_UNK func_000048CC;"
  }
 }

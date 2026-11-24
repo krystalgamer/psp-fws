@@ -155,9 +155,9 @@ INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_0000479C);
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_00004B58);
 
 s32 func_00004C44(void) {
-    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00007AC0, s32, 0x18));
-    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00007AC0, s32, 0x1C));
-    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00007AC0, s32, 0x20));
+    sceKernelDeleteEventFlag(D_00007AC0.unk18);
+    sceKernelDeleteEventFlag(D_00007AC0.unk1C);
+    sceKernelDeleteEventFlag(D_00007AC0.unk20);
     return 0;
 }
 

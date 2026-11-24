@@ -107,10 +107,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_VFIELD(&D_00016C74, s32, 0x418) == 0) {
-        temp_v0 = M2C_VFIELD(&D_00016C74, s32, 4) != (s32) M2C_FIELD(&D_00016C74, void **, 0);
+    if (D_00016C74.unk418 == 0) {
+        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
         if (temp_v0 != 0) {
-            M2C_FIELD(M2C_FIELD(&D_00016C74, void **, 0), void **, 0xF4) = (void *) (M2C_FIELD(&D_00016C74, void **, 0) + 0xF8);
+            M2C_FIELD(D_00016C74.unk0, void **, 0xF4) = (void *) (D_00016C74.unk0 + 0xF8);
         }
         var_v1 = temp_v0;
     }
@@ -739,7 +739,7 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00013D58);
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00013DB0);
 
 void ThreadManForUser_532A522E(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74, void **, 0x110), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x110), s32 *, 0x18));
 }
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelGetThreadId);

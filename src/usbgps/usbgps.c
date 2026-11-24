@@ -26,13 +26,13 @@ s32 sceUsbGps_driver_268F95CA(u32 arg0) {
 
     var_s0 = 0;
     temp_s1 = shiftK1();
-    if (M2C_FIELD(&D_000059B0, s32 *, 0) == 0) {
+    if (D_000059B0.unk0 == 0) {
         var_s0 = 0x80244002;
     } else if (arg0 >= 3U) {
         var_s0 = 0x80244007;
     } else {
         temp_a0 = sceKernelCpuSuspendIntr();
-        M2C_FIELD(&D_000059B0, u32 *, 0x157C) = arg0;
+        D_000059B0.unk157C = arg0;
         sceKernelCpuResumeIntr(temp_a0);
     }
     setK1(temp_s1);
@@ -112,12 +112,12 @@ s32 func_000027AC(void) {
     s32 temp_a3;
 
     temp_a3 = (sceUsbBus_driver_B1644BE7(&D_00005960) >= 0) ? 0 : -1;
-    M2C_VFIELD(&D_00008478, s32, 0xB8) = 0x4E200;
-    M2C_VFIELD(&D_00008478, s8, 0xB1) = 0;
-    M2C_VFIELD(&D_00008478, s32, 0xBC) = 0;
-    M2C_VFIELD(&D_00008478, s32, 0xC0) = 0;
-    M2C_VFIELD(&D_00008478, s8, 0xB0) = 0;
-    M2C_VFIELD(&D_00008478, s32, 0xB4) = 0;
+    D_00008478.unkB8 = 0x4E200;
+    D_00008478.unkB1 = 0;
+    D_00008478.unkBC = 0;
+    D_00008478.unkC0 = 0;
+    D_00008478.unkB0 = 0;
+    D_00008478.unkB4 = 0;
     return temp_a3;
 }
 

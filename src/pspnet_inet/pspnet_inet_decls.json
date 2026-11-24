@@ -104,6 +104,9 @@
   "sceNet_lib_C4261339": "s32 sceNet_lib_C4261339(s32, void *);",
   "sceNet_lib_E155112D": "M2C_UNK sceNet_lib_E155112D(M2C_UNK *, void (*)(void *));"
  },
+ "types": {
+  "D_0002CC9C_s": "struct D_0002CC9C_s {\n    s32 unk0;\n    M2C_UNK * unk4;\n};"
+ },
  "vars": {
   "D_0002BEC0": "extern s32 D_0002BEC0;",
   "D_0002BF8C": "extern s32 D_0002BF8C;",
@@ -141,7 +144,7 @@
   "D_0002C57C": "extern s32 D_0002C57C;",
   "D_0002C5BC": "extern s32 D_0002C5BC;",
   "D_0002C5D8": "extern s32 D_0002C5D8;",
-  "D_0002CC9C": "extern M2C_UNK D_0002CC9C;",
+  "D_0002CC9C": "extern struct D_0002CC9C_s D_0002CC9C;",
   "D_0002CD80": "extern s32 D_0002CD80;",
   "D_0002CEB0": "extern s32 D_0002CEB0;",
   "D_0002CEB4": "extern s32 D_0002CEB4;",

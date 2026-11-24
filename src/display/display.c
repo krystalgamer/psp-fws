@@ -20,11 +20,11 @@ s32 func_000009F8(void) {
     s32 temp_v0;
     s32 temp_v0_2;
 
-    if (M2C_VFIELD(&D_00003DB0, s32, 0x60) != 0) {
-        if (M2C_VFIELD(&D_00003DB0, s32, 0x60) == 1) {
+    if (D_00003DB0.unk60 != 0) {
+        if (D_00003DB0.unk60 == 1) {
             do {
                 sceDisplayWaitVblankStart();
-            } while (M2C_VFIELD(&D_00003DB0, s32, 0x60) == 1);
+            } while (D_00003DB0.unk60 == 1);
         }
         func_0000315C();
     }
@@ -166,7 +166,7 @@ s32 sceDisplayIsVblank(void) {
 }
 
 s32 sceDisplay_driver_69B53541(void) {
-    return __builtin_allegrex_max(M2C_VFIELD(&D_00003EC8, s32, 0x20) - sceDisplayGetCurrentHcount(), -1);
+    return __builtin_allegrex_max(D_00003EC8.unk20 - sceDisplayGetCurrentHcount(), -1);
 }
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_21038913);

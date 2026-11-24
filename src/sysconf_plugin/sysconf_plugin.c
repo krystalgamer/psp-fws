@@ -2126,7 +2126,7 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00015
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00015484);
 
 void func_000155D8(void) {
-    scePaf_49CE42F7(M2C_VFIELD(&D_0001F31C, s32, 8), &D_0001CE90);
+    scePaf_49CE42F7(D_0001F31C.unk8, &D_0001CE90);
     func_00017A18(&D_0001F31C);
     scePaf_66907719();
 }

@@ -73,6 +73,9 @@
   "sceNet_lib_EDCC871E": "void sceNet_lib_EDCC871E(void);",
   "sceNet_lib_EF097716": "u8 *sceNet_lib_EF097716(u8 *arg0, u8 *arg1, s32 arg2);"
  },
+ "types": {
+  "D_0000AF44_s": "struct D_0000AF44_s {\n    void * unk0;\n    void ** unk4;\n};"
+ },
  "vars": {
   "D_0000A860": "extern s32 D_0000A860;",
   "D_0000A864": "extern s32 D_0000A864;",
@@ -91,7 +94,7 @@
   "D_0000AF38": "extern s32 D_0000AF38;",
   "D_0000AF3C": "extern s32 D_0000AF3C;",
   "D_0000AF40": "extern s32 D_0000AF40;",
-  "D_0000AF44": "extern void *D_0000AF44;",
+  "D_0000AF44": "extern struct D_0000AF44_s D_0000AF44;",
   "D_0000AF5C": "extern s32 D_0000AF5C;",
   "D_0000AF60": "extern s32 D_0000AF60;",
   "D_0000AF64": "extern s32 D_0000AF64;",

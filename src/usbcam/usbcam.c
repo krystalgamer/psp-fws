@@ -181,8 +181,8 @@ s32 sceUsbCam_driver_95F8901E(void) {
 
     temp_a0 = shiftK1();
     var_a1 = 1;
-    if (!(M2C_VFIELD(&D_0000BC08, s32, 0x14) & 0x800) && (M2C_VFIELD(&D_0000BC08, s32, 0x1D4) == 0)) {
-        var_a1 = M2C_VFIELD(&D_0000BC08, s32, 0x1D8);
+    if (!(D_0000BC08.unk14 & 0x800) && (D_0000BC08.unk1D4 == 0)) {
+        var_a1 = D_0000BC08.unk1D8;
     }
     setK1(temp_a0);
     return var_a1;

@@ -6,7 +6,7 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0340C4", func_000340C4);
 
 s32 func_00034114(void) {
     sceCtrlReadBufferPositive(&D_000E164C, 1);
-    return M2C_FIELD(&D_000E164C, s32 *, 4);
+    return D_000E164C.unk4;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0340C4", func_00034148);

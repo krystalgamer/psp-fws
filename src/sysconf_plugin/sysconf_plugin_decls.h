@@ -4,6 +4,11 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_0001F31C_s {
+    u8 pad0[0x8];
+    volatile s32 unk8;
+};
+
 extern M2C_UNK D_0001A668;
 extern M2C_UNK D_0001A670;
 extern M2C_UNK D_0001A690;
@@ -11,7 +16,7 @@ extern M2C_UNK D_0001B720;
 extern s32 D_0001B730;
 extern M2C_UNK D_0001CE90;
 extern M2C_UNK D_0001EE04;
-extern M2C_UNK D_0001F31C;
+extern struct D_0001F31C_s D_0001F31C;
 extern s32 D_0001F354;
 extern s32 D_0001F394;
 extern s32 D_0001F3DC;

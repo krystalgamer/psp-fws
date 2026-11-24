@@ -150,6 +150,9 @@
   "vsh_7ADF6A69": "M2C_UNK vsh_7ADF6A69();",
   "vsh_8F76CA2A": "M2C_UNK vsh_8F76CA2A();"
  },
+ "types": {
+  "D_0001F31C_s": "struct D_0001F31C_s {\n    u8 pad0[0x8];\n    volatile s32 unk8;\n};"
+ },
  "vars": {
   "D_0001A668": "extern M2C_UNK D_0001A668;",
   "D_0001A670": "extern M2C_UNK D_0001A670;",
@@ -158,7 +161,7 @@
   "D_0001B730": "extern s32 D_0001B730;",
   "D_0001CE90": "extern M2C_UNK D_0001CE90;",
   "D_0001EE04": "extern M2C_UNK D_0001EE04;",
-  "D_0001F31C": "extern M2C_UNK D_0001F31C;",
+  "D_0001F31C": "extern struct D_0001F31C_s D_0001F31C;",
   "D_0001F354": "extern s32 D_0001F354;",
   "D_0001F394": "extern s32 D_0001F394;",
   "D_0001F3DC": "extern s32 D_0001F3DC;",

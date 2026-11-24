@@ -919,15 +919,15 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_595F8E64);
 
 void vsh_8F76CA2A(void) {
     scePaf_6829D7AF((s32) &D_00030398, 0, 0x24);
-    M2C_VFIELD(&D_00030398, s32, 0) = 0x24;
-    M2C_FIELD(&D_00030398, M2C_UNK **, 0xC) = &D_00028D50;
-    M2C_VFIELD(&D_00030398, s32, 0x20) = 0;
-    M2C_VFIELD(&D_00030398, s32, 4) = 0;
-    M2C_VFIELD(&D_00030398, s32, 8) = 0;
-    M2C_VFIELD(&D_00030398, s32, 0x10) = 0;
-    M2C_VFIELD(&D_00030398, s32, 0x14) = 0;
-    M2C_VFIELD(&D_00030398, s32, 0x18) = 0;
-    M2C_VFIELD(&D_00030398, s32, 0x1C) = 0;
+    D_00030398.unk0 = 0x24;
+    D_00030398.unkC = &D_00028D50;
+    D_00030398.unk20 = 0;
+    D_00030398.unk4 = 0;
+    D_00030398.unk8 = 0;
+    D_00030398.unk10 = 0;
+    D_00030398.unk14 = 0;
+    D_00030398.unk18 = 0;
+    D_00030398.unk1C = 0;
     func_00009D54(8);
 }
 

@@ -64,8 +64,8 @@ INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_001F84", fun
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_001F84", func_00003948);
 
 void func_00003A6C(void) {
-    M2C_FIELD(&D_00065E24, s8 *, 0) = 0;
-    M2C_FIELD(&D_00065E24, s32 *, 0x80) = -1;
+    D_00065E24.unk0 = 0;
+    D_00065E24.unk80 = -1;
 }
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_001F84", func_00003A84);

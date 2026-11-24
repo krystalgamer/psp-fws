@@ -34,13 +34,16 @@
   "sceSysreg_driver_7725CA08": "M2C_UNK sceSysreg_driver_7725CA08(M2C_UNK);",
   "sceSysreg_driver_BB823481": "M2C_UNK sceSysreg_driver_BB823481(M2C_UNK);"
  },
+ "types": {
+  "D_00002770_s": "struct D_00002770_s {\n    s32 unk0;\n    u8 pad4[0x18];\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};"
+ },
  "vars": {
   "D_000026A8": "extern M2C_UNK D_000026A8;",
   "D_000026E0": "extern M2C_UNK D_000026E0;",
   "D_00002724": "extern s32 D_00002724;",
   "D_00002728": "extern s32 D_00002728;",
   "D_00002768": "extern s32 D_00002768;",
-  "D_00002770": "extern s32 D_00002770;",
+  "D_00002770": "extern struct D_00002770_s D_00002770;",
   "D_00002794": "extern s32 D_00002794;",
   "func_00002044": "extern M2C_UNK func_00002044;"
  }

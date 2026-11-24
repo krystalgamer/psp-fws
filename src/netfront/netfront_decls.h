@@ -4,6 +4,51 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_00133BC8_s {
+    u8 pad0[0x8];
+    volatile s32 unk8;
+};
+
+struct D_00133BE0_s {
+    u8 pad0[0x8];
+    volatile s32 unk8;
+};
+
+struct D_00133BF8_s {
+    u8 pad0[0x8];
+    volatile s32 unk8;
+};
+
+struct D_00133C10_s {
+    u8 pad0[0x8];
+    volatile s32 unk8;
+    s32 unkC;
+};
+
+struct D_00133C28_s {
+    u8 pad0[0x8];
+    volatile s32 unk8;
+    s32 unkC;
+};
+
+struct D_00133C58_s {
+    u8 pad0[0x8];
+    volatile s32 unk8;
+    s32 unkC;
+};
+
+struct D_00133C70_s {
+    u8 pad0[0x8];
+    volatile s32 unk8;
+    s32 unkC;
+};
+
+struct D_00133D08_s {
+    u8 pad0[0x8];
+    s32 unk8;
+    s32 unkC;
+};
+
 extern M2C_UNK D_0011E1E4;
 extern M2C_UNK D_0011E390;
 extern M2C_UNK D_0011E460;
@@ -78,14 +123,14 @@ extern s32 D_00131C08;
 extern s32 D_00131C0C;
 extern s32 D_001322BC;
 extern M2C_UNK D_001322CC;
-extern M2C_UNK D_00133BC8;
-extern M2C_UNK D_00133BE0;
-extern M2C_UNK D_00133BF8;
-extern M2C_UNK D_00133C10;
-extern M2C_UNK D_00133C28;
-extern M2C_UNK D_00133C58;
-extern M2C_UNK D_00133C70;
-extern M2C_UNK D_00133D08;
+extern struct D_00133BC8_s D_00133BC8;
+extern struct D_00133BE0_s D_00133BE0;
+extern struct D_00133BF8_s D_00133BF8;
+extern struct D_00133C10_s D_00133C10;
+extern struct D_00133C28_s D_00133C28;
+extern struct D_00133C58_s D_00133C58;
+extern struct D_00133C70_s D_00133C70;
+extern struct D_00133D08_s D_00133D08;
 extern s32 D_00133DE8;
 extern s32 D_00133ED8;
 extern s32 D_00133EE0;

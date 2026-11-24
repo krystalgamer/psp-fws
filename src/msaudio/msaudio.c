@@ -162,8 +162,8 @@ s32 sceMSAudio_driver_DA34AB8F(void) {
 
     temp_a0 = shiftK1();
     var_v1 = 0x80508004;
-    if ((u32) M2C_VFIELD(&D_00006B80, u32, 0x138) >= 2U) {
-        var_v1 = M2C_VFIELD(&D_00006B80, s32, 0x2D4);
+    if ((u32) D_00006B80.unk138 >= 2U) {
+        var_v1 = D_00006B80.unk2D4;
     }
     setK1(temp_a0);
     return var_v1;

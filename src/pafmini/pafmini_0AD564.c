@@ -108,9 +108,9 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B2040);
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B20FC);
 
 void func_000B2144(void) {
-    M2C_VFIELD(&D_00106F70, s16, 0x190C) = 0;
-    M2C_VFIELD(&D_00106F70, s16, 0x190A) = 0;
-    M2C_VFIELD(&D_00106F70, s16, 0x18EA) = 0;
+    D_00106F70.unk190C = 0;
+    D_00106F70.unk190A = 0;
+    D_00106F70.unk18EA = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B215C);
@@ -170,7 +170,7 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B2750);
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B2798);
 
 s32 func_000B29F8(void) {
-    return M2C_VFIELD(&D_00106F70, s32, 0xA820);
+    return D_00106F70.unkA820;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0AD564", func_000B2A10);

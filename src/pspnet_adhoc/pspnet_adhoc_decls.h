@@ -4,7 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-extern M2C_UNK D_000079C0;
+struct D_000079C0_s {
+    s32 unk0;
+    M2C_UNK * unk4;
+};
+
+extern struct D_000079C0_s D_000079C0;
 extern M2C_UNK D_000079CC;
 extern M2C_UNK D_000079E8;
 

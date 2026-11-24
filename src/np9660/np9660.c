@@ -264,12 +264,12 @@ s32 sceUmdMan_driver_4217E7F5(s32 arg0) {
 
     temp_a0 = sceKernelCpuSuspendIntr();
     var_s1 = 0x80010002;
-    if (M2C_VFIELD(&D_00004CF8, s32, 0) == arg0) {
-        M2C_VFIELD(&D_00004CF8, s32, 0) = 0;
+    if (D_00004CF8.unk0 == arg0) {
+        D_00004CF8.unk0 = 0;
         var_s1 = 0;
-        M2C_VFIELD(&D_00004CF8, s32, 8) = 0;
-        M2C_VFIELD(&D_00004CF8, s32, 0xC) = 0;
-        M2C_VFIELD(&D_00004CF8, s32, 4) = 0;
+        D_00004CF8.unk8 = 0;
+        D_00004CF8.unkC = 0;
+        D_00004CF8.unk4 = 0;
     }
     sceKernelCpuResumeIntr(temp_a0);
     return var_s1;

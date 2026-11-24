@@ -681,8 +681,8 @@ s32 func_0000B270(void) {
     s32 var_a0;
 
     var_a0 = 0;
-    if (M2C_FIELD(&D_00047E40, s32 *, 0) != 0) {
-        var_a0 = M2C_FIELD(&D_00047E40, s32 *, 4);
+    if (D_00047E40.unk0 != 0) {
+        var_a0 = D_00047E40.unk4;
     }
     return var_a0;
 }
@@ -986,14 +986,14 @@ void func_000143FC(void) {
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014418);
 
 s32 func_0001445C(void *arg0) {
-    M2C_FIELD(&D_0001C24C, s32 *, 0) = (s32) M2C_FIELD(arg0, s32 *, 0);
-    M2C_FIELD(&D_0001C24C, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(&D_0001C24C, s32 *, 8) = (s32) M2C_FIELD(arg0, s32 *, 8);
-    M2C_FIELD(&D_0001C24C, s32 *, 0xC) = (s32) M2C_FIELD(arg0, s32 *, 0xC);
-    M2C_FIELD(&D_0001C24C, s32 *, 0x10) = (s32) M2C_FIELD(arg0, s32 *, 0x10);
-    M2C_FIELD(&D_0001C24C, s32 *, 0x14) = (s32) M2C_FIELD(arg0, s32 *, 0x14);
-    M2C_FIELD(&D_0001C24C, s32 *, 0x18) = (s32) M2C_FIELD(arg0, s32 *, 0x18);
-    M2C_FIELD(&D_0001C24C, s32 *, 0x1C) = (s32) M2C_FIELD(arg0, s32 *, 0x1C);
+    D_0001C24C.unk0 = (s32) M2C_FIELD(arg0, s32 *, 0);
+    D_0001C24C.unk4 = (s32) M2C_FIELD(arg0, s32 *, 4);
+    D_0001C24C.unk8 = (s32) M2C_FIELD(arg0, s32 *, 8);
+    D_0001C24C.unkC = (s32) M2C_FIELD(arg0, s32 *, 0xC);
+    D_0001C24C.unk10 = (s32) M2C_FIELD(arg0, s32 *, 0x10);
+    D_0001C24C.unk14 = (s32) M2C_FIELD(arg0, s32 *, 0x14);
+    D_0001C24C.unk18 = (s32) M2C_FIELD(arg0, s32 *, 0x18);
+    D_0001C24C.unk1C = (s32) M2C_FIELD(arg0, s32 *, 0x1C);
     return 0;
 }
 

@@ -61,6 +61,9 @@
   "sceSuspendForKernel_BDE686CD": "s32 sceSuspendForKernel_BDE686CD(s32 arg0);",
   "sceSysEventForKernel_68D55505": "s32 sceSysEventForKernel_68D55505(void);"
  },
+ "types": {
+  "D_0000F8C4_s": "struct D_0000F8C4_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    volatile s8 unk8;\n    u8 pad9[0xF];\n    volatile s8 unk18;\n    u8 pad19[0x27];\n    volatile s32 unk40;\n    volatile s8 unk44;\n    u8 pad45[0xF];\n    volatile s32 unk54;\n    volatile s32 unk58;\n    volatile s32 unk5C;\n    volatile s32 unk60;\n    volatile s32 unk64;\n};"
+ },
  "vars": {
   "D_0000F390": "extern M2C_UNK D_0000F390;",
   "D_0000F3C0": "extern M2C_UNK D_0000F3C0;",
@@ -69,7 +72,7 @@
   "D_0000F8B4": "extern s32 D_0000F8B4;",
   "D_0000F8B8": "extern s32 D_0000F8B8;",
   "D_0000F8C0": "extern M2C_UNK D_0000F8C0;",
-  "D_0000F8C4": "extern M2C_UNK D_0000F8C4;",
+  "D_0000F8C4": "extern struct D_0000F8C4_s D_0000F8C4;",
   "D_0000F92C": "extern s32 D_0000F92C;",
   "D_0000F930": "extern s32 D_0000F930;",
   "D_0000F934": "extern s32 D_0000F934;",

@@ -20,12 +20,12 @@ s32 func_00000AF4(void) {
     s32 temp_v0;
 
     temp_v0 = sceKernelCpuSuspendIntr();
-    M2C_VFIELD(&D_00002080, s32, 0x1D8) = 1;
-    M2C_VFIELD(&D_00002080, s32, 0x1C4) = 0;
-    M2C_VFIELD(&D_00002080, s32, 0x1D0) = 0;
-    M2C_VFIELD(&D_00002080, s32, 0x1D4) = 0;
-    M2C_VFIELD(&D_00002080, s32, 0x1C8) = 0;
-    M2C_VFIELD(&D_00002080, s32, 0x1CC) = 0;
+    D_00002080.unk1D8 = 1;
+    D_00002080.unk1C4 = 0;
+    D_00002080.unk1D0 = 0;
+    D_00002080.unk1D4 = 0;
+    D_00002080.unk1C8 = 0;
+    D_00002080.unk1CC = 0;
     sceKernelCpuResumeIntr(temp_v0);
     return 0;
 }
@@ -93,7 +93,7 @@ s32 sceHprm_driver_7B038374(M2C_UNK **arg0) {
     if (arg0 != NULL) {
         *arg0 = &D_00002080;
     }
-    return M2C_VFIELD(&D_00002080, s32, 0x120);
+    return D_00002080.unk120;
 }
 
 s32 sceHprm_driver_971AE8FB(s32 *arg0) {

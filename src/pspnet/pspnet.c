@@ -148,8 +148,8 @@ s32 func_00002248(void) {
     s32 temp_v0;
     s32 temp_v0_2;
 
-    M2C_FIELD(&D_0000AF44, void **, 0) = NULL;
-    M2C_FIELD(&D_0000AF44, void ***, 4) = &D_0000AF44;
+    D_0000AF44.unk0 = NULL;
+    D_0000AF44.unk4 = &D_0000AF44;
     temp_v0_2 = sceKernelCreateSema("SceNetThreadList", 0U, 1, 1, NULL);
     temp_v0 = __builtin_allegrex_min(temp_v0_2, 0);
     D_0000A868 = temp_v0_2;
@@ -185,7 +185,7 @@ s32 sceNet_lib_45452B7B(void) {
 
     var_s0 = 0;
     sceKernelWaitSema(D_0000A868, 1, NULL);
-    var_v1 = D_0000AF44;
+    var_v1 = D_0000AF44.unk0;
     if (var_v1 != NULL) {
         do {
             temp_a1 = M2C_FIELD(var_v1, s16 *, 0xC);
@@ -201,7 +201,7 @@ void func_0000260C(void) {
     void *var_s0;
 
     if (D_0000A868 >= 0) {
-        var_s0 = D_0000AF44;
+        var_s0 = D_0000AF44.unk0;
         if (var_s0 != NULL) {
             do {
                 sceKernelDeleteSema(M2C_FIELD(var_s0, s32 *, 0x4C));

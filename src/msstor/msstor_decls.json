@@ -55,13 +55,17 @@
   "sceMSstor_driver_6FC1E8AE": "void sceMSstor_driver_6FC1E8AE(void);",
   "sceMSstor_driver_714782D6": "M2C_UNK sceMSstor_driver_714782D6(M2C_UNK);"
  },
+ "types": {
+  "D_000099D4_s": "struct D_000099D4_s {\n    s32 unk0;\n    u8 pad4[0x14];\n    s32 unk18;\n    u8 pad1C[0x8];\n    s32 unk24;\n    s32 unk28;\n};",
+  "D_00009B54_s": "struct D_00009B54_s {\n    u8 pad0[0x4E88];\n    s32 unk4E88;\n};"
+ },
  "vars": {
   "D_00009248": "extern M2C_UNK D_00009248;",
   "D_00009264": "extern M2C_UNK D_00009264;",
   "D_00009888": "extern void *D_00009888;",
   "D_000098DC": "extern M2C_UNK D_000098DC;",
-  "D_000099D4": "extern M2C_UNK D_000099D4;",
+  "D_000099D4": "extern struct D_000099D4_s D_000099D4;",
   "D_00009B50": "extern void *D_00009B50;",
-  "D_00009B54": "extern M2C_UNK D_00009B54;"
+  "D_00009B54": "extern struct D_00009B54_s D_00009B54;"
  }
 }

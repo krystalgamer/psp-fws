@@ -22,11 +22,14 @@
   "sceGe_driver_C576E897": "s32 sceGe_driver_C576E897(void);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);"
  },
+ "types": {
+  "D_00007AC0_s": "struct D_00007AC0_s {\n    u8 pad0[0x18];\n    volatile s32 unk18;\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};"
+ },
  "vars": {
   "D_00006240": "extern s32 D_00006240;",
   "D_00006A80": "extern s32 D_00006A80;",
   "D_00006A84": "extern u32 D_00006A84;",
-  "D_00007AC0": "extern M2C_UNK D_00007AC0;",
+  "D_00007AC0": "extern struct D_00007AC0_s D_00007AC0;",
   "D_00007AC8": "extern s32 D_00007AC8;",
   "D_00007FC0": "extern s32 D_00007FC0;"
  }

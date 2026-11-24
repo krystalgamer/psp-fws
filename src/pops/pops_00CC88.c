@@ -91,9 +91,9 @@ void func_0000F58C(void) {
     void *temp_v0;
 
     temp_v0 = func_0000EBFC(5, 0xC672);
-    M2C_FIELD(temp_v0, u8 *, 1) = (u8) M2C_FIELD(&D_00169648, u8 *, 0);
-    M2C_FIELD(temp_v0, u8 *, 2) = (u8) M2C_FIELD(&D_00169648, u8 *, 0x2D);
-    M2C_FIELD(temp_v0, u8 *, 3) = (u8) M2C_FIELD(&D_00169648, u8 *, 2);
-    M2C_FIELD(temp_v0, u8 *, 4) = (u8) M2C_FIELD(&D_00169648, u8 *, 3);
+    M2C_FIELD(temp_v0, u8 *, 1) = (u8) D_00169648.unk0;
+    M2C_FIELD(temp_v0, u8 *, 2) = (u8) D_00169648.unk2D;
+    M2C_FIELD(temp_v0, u8 *, 3) = (u8) D_00169648.unk2;
+    M2C_FIELD(temp_v0, u8 *, 4) = (u8) D_00169648.unk3;
 }
 

@@ -46,6 +46,9 @@
   "sceUmd_9B22AED7": "void sceUmd_9B22AED7(s32 arg0);",
   "sceUmd_D45D1FE6": "s32 sceUmd_D45D1FE6(void);"
  },
+ "types": {
+  "D_00004CF8_s": "struct D_00004CF8_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    volatile s32 unk8;\n    volatile s32 unkC;\n};"
+ },
  "vars": {
   "D_00004CA0": "extern s32 D_00004CA0;",
   "D_00004CA4": "extern s32 D_00004CA4;",
@@ -56,7 +59,7 @@
   "D_00004CEC": "extern s32 D_00004CEC;",
   "D_00004CF0": "extern s32 D_00004CF0;",
   "D_00004CF4": "extern s32 D_00004CF4;",
-  "D_00004CF8": "extern M2C_UNK D_00004CF8;",
+  "D_00004CF8": "extern struct D_00004CF8_s D_00004CF8;",
   "D_00004D08": "extern s32 D_00004D08;",
   "D_00004D0C": "extern s32 D_00004D0C;",
   "D_00004D10": "extern s32 D_00004D10;",

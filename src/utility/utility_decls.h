@@ -4,6 +4,61 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_00007F4C_s {
+    volatile s32 unk0;
+    volatile s32 unk4;
+    volatile s32 unk8;
+    volatile s32 unkC;
+    volatile s32 unk10;
+    volatile s32 unk14;
+    volatile s32 unk18;
+    volatile s32 unk1C;
+    volatile s32 unk20;
+    volatile s32 unk24;
+    volatile s32 unk28;
+    volatile s32 unk2C;
+    volatile s32 unk30;
+    volatile s32 unk34;
+    volatile s32 unk38;
+    volatile s32 unk3C;
+    u8 pad40[0x8];
+    volatile s32 unk48;
+    volatile s32 unk4C;
+    volatile s32 unk50;
+    volatile s32 unk54;
+    volatile s32 unk58;
+    volatile s32 unk5C;
+    volatile s32 unk60;
+    volatile s32 unk64;
+    volatile s32 unk68;
+    volatile s32 unk6C;
+    volatile s32 unk70;
+    volatile s32 unk74;
+    volatile s32 unk78;
+    volatile s32 unk7C;
+    volatile s32 unk80;
+    volatile s32 unk84;
+    volatile s32 unk88;
+    volatile s32 unk8C;
+    volatile s32 unk90;
+    volatile s32 unk94;
+    volatile s32 unk98;
+    volatile s32 unk9C;
+    volatile s32 unkA0;
+    volatile s32 unkA4;
+    volatile s32 unkA8;
+};
+
+struct D_00007FF8_s {
+    volatile s32 unk0;
+    volatile s32 unk4;
+    volatile s32 unk8;
+    volatile s32 unkC;
+    volatile s32 unk10;
+    volatile s32 unk14;
+    volatile s32 unk18;
+};
+
 extern M2C_UNK D_00007980;
 extern M2C_UNK D_000079A0;
 extern M2C_UNK D_00007BF0;
@@ -22,8 +77,8 @@ extern s32 D_00007EF4;
 extern s32 D_00007EF8;
 extern s32 D_00007EFC;
 extern s32 D_00007F00;
-extern M2C_UNK D_00007F4C;
-extern M2C_UNK D_00007FF8;
+extern struct D_00007F4C_s D_00007F4C;
+extern struct D_00007FF8_s D_00007FF8;
 extern s32 D_00008014;
 extern s32 D_0000804C;
 extern s32 D_00008050;
