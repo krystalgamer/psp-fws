@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/282/.splat_cache.paf
   symbol_addrs_path:
     - config/282/symbol_addrs.paf.txt
+    - config/282/func_starts.paf.txt
     - tmp/build/282/prx_syms.paf.txt
   reloc_addrs_path: [tmp/build/282/reloc_addrs.paf.txt]
   asset_path: tmp/assets/282/paf
@@ -55,6 +56,18 @@ segments:
       - { start: 0xC0, type: asm, name: init, linker_section: .init }
       - { start: 0xE4, type: prxpad, order: .text }
       - [0xF0, c, paf]
+      - [0x1C25C, c, paf_01C19C]
+      - [0x1CA3C, c, paf_01C97C]
+      - [0x467B4, c, paf_0466F4]
+      - [0x48FCC, c, paf_048F0C]
+      - [0x9DC18, c, paf_09DB58]
+      - [0x9E00C, c, paf_09DF4C]
+      - [0x1497BC, c, paf_1496FC]
+      - [0x14A104, c, paf_14A044]
+      - [0x15B7E0, c, paf_15B720]
+      - [0x15BF7C, c, paf_15BEBC]
+      - [0x168350, c, paf_168290]
+      - [0x16B170, c, paf_16B0B0]
       - { start: 0x16BECC, type: asm, name: fini, linker_section: .fini }
       - { start: 0x16BEE8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x16C1F0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -72,6 +85,16 @@ segments:
       - { start: 0x16E590, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x16E594, type: prxpad, order: .rodata }
       - [0x16E5C0, .rodata, paf]
+      - [0x16F698, .rodata, paf_01C19C]
+      - [0x16F86C, .rodata, paf_01C97C]
+      - [0x171570, .rodata, paf_0466F4]
+      - [0x171624, .rodata, paf_048F0C]
+      - [0x192FF8, .rodata, paf_09DF4C]
+      - [0x1A1414, .rodata, paf_14A044]
+      - [0x1A2218, .rodata, paf_15B720]
+      - [0x1A22B8, .rodata, paf_15BEBC]
+      - [0x1A2C3C, .rodata, paf_168290]
+      - [0x1A2D00, .rodata, paf_16B0B0]
       - { start: 0x1A2E68, type: prxpad, order: .rodata }
   - name: paf_seg1
     type: code
