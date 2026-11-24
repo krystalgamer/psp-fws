@@ -11,6 +11,11 @@ struct D_00004CF8_s {
     volatile s32 unkC;
 };
 
+struct Unk_func_00002580_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
 extern s32 D_00004CA0;
 extern s32 D_00004CA4;
 extern s32 D_00004CA8;
@@ -47,7 +52,7 @@ s32 func_000022CC(void);
 s32 func_00002474(void);
 s32 func_00002528(void);
 s32 func_00002578(void);
-s32 func_00002580(void *arg0);
+s32 func_00002580(struct Unk_func_00002580_0 *arg0);
 s32 func_00002634(void);
 s32 func_00002674(void);
 s32 func_000042F8(void);

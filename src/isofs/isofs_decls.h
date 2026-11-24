@@ -10,6 +10,32 @@ struct D_00007608_s {
     volatile s32 unk20;
 };
 
+struct Unk_func_00000440_0 {
+    u8 pad0[0x40];
+    s32 unk40;
+    u8 pad44[0xC];
+    u8 unk50;
+    u8 pad51[0x47];
+    s32 unk98;
+};
+
+struct Unk_func_000004E4_0 {
+    u8 pad0[0x98];
+    s32 unk98;
+};
+
+struct Unk_func_00002364_0 {
+    s8 unk0;
+    s8 unk1;
+};
+
+struct Unk_func_00003BB4_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+    u8 pad8[0x8];
+    s32 unk10;
+};
+
 extern M2C_UNK D_00005F30;
 extern s32 D_00005F98;
 extern s32 D_00005FE0;
@@ -22,14 +48,14 @@ extern M2C_UNK func_000048CC;
 
 M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);
 s32 SysMemForKernel_7B749390(s32, s32);
-s32 func_00000440(void *arg0);
-s32 func_000004E4(void *arg0, s32 arg1);
+s32 func_00000440(struct Unk_func_00000440_0 *arg0);
+s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1);
 s32 func_00000620(void);
 s32 func_000006EC(void);
 s32 func_00000790(s32);
 s32 func_000007FC(s32, s32);
-void func_00002364(void *arg0);
-s32 func_00003BB4(void *arg0);
+void func_00002364(struct Unk_func_00002364_0 *arg0);
+s32 func_00003BB4(struct Unk_func_00003BB4_0 *arg0);
 s32 func_00004064(s32 arg0);
 s32 func_00004DB0(void);
 s32 func_00004E30(s32);

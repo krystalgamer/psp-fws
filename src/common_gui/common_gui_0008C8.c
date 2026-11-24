@@ -2,28 +2,28 @@
 #include "common.h"
 #include "common_gui_decls.h"
 
-void func_000008C8(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x10) = arg5;
-    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg3;
-    M2C_FIELD(arg0, s32 *, 0x20) = arg4;
-    M2C_FIELD(arg0, s32 *, 0x24) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+void func_000008C8(struct Unk_func_000008C8_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    arg0->unk4 = arg1;
+    arg0->unk10 = arg5;
+    arg0->unk18 = arg2;
+    arg0->unk1C = arg3;
+    arg0->unk20 = arg4;
+    arg0->unk24 = 0;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk14 = 0;
 }
 
-void func_000008F0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x10) = arg5;
-    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg3;
-    M2C_FIELD(arg0, s32 *, 0x20) = arg4;
-    M2C_FIELD(arg0, s32 *, 0x24) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+void func_000008F0(struct Unk_func_000008F0_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    arg0->unk4 = arg1;
+    arg0->unk10 = arg5;
+    arg0->unk18 = arg2;
+    arg0->unk1C = arg3;
+    arg0->unk20 = arg4;
+    arg0->unk24 = 0;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk14 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000918);
@@ -46,14 +46,14 @@ INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000E
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000EB4);
 
-void func_00000EFC(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 8) = arg1;
+void func_00000EFC(struct Unk_func_00000EFC_0 *arg0, s32 arg1) {
+    arg0->unk8 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000F04);
 
-void func_00000F6C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x24) = arg1;
+void func_00000F6C(struct Unk_func_00000F6C_0 *arg0, s32 arg1) {
+    arg0->unk24 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", sceVshCommonGui_10906D79);
@@ -90,8 +90,8 @@ s32 sceVshCommonGui_ACFE7BE7(void **arg0) {
     return var_v0;
 }
 
-void sceVshCommonGui_88F5E3A8(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0x14) = arg2;
-    M2C_FIELD(arg0, s32 *, 0xC) = arg1;
+void sceVshCommonGui_88F5E3A8(struct Unk_sceVshCommonGui_88F5E3A8_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk14 = arg2;
+    arg0->unkC = arg1;
 }
 

@@ -7,7 +7,7 @@
   "func_00009A58": "M2C_UNK func_00009A58();",
   "func_0000B784": "s32 func_0000B784(void);",
   "func_0000B8DC": "void func_0000B8DC(s32 arg0, s32 arg1);",
-  "func_0000BF1C": "void func_0000BF1C(void *arg0);",
+  "func_0000BF1C": "void func_0000BF1C(struct Unk_func_0000BF1C_0 *arg0);",
   "func_0000BF24": "s32 func_0000BF24(void);",
   "func_0000C478": "s32 func_0000C478(void);",
   "func_0000CC30": "s32 func_0000CC30(void);",
@@ -61,7 +61,7 @@
   "func_00035298": "void func_00035298(void);",
   "func_00035ACC": "s32 func_00035ACC(s32 *arg0, s32 arg1);",
   "func_00035F54": "s32 func_00035F54(s32, s32);",
-  "func_0003600C": "void func_0003600C(void *arg0, void *arg1);",
+  "func_0003600C": "void func_0003600C(struct Unk_func_0003600C_0 *arg0, struct Unk_func_0003600C_1 *arg1);",
   "func_000363A8": "void func_000363A8(s32 arg0, s32 arg1);",
   "sceIoRename": "M2C_UNK sceIoRename();",
   "sceKernelCancelAlarm": "s32 sceKernelCancelAlarm(s32);",
@@ -73,7 +73,10 @@
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);"
  },
  "types": {
-  "D_00169648_s": "struct D_00169648_s {\n    u8 unk0;\n    u8 pad1[0x1];\n    u8 unk2;\n    u8 unk3;\n    u8 pad4[0x29];\n    u8 unk2D;\n};"
+  "D_00169648_s": "struct D_00169648_s {\n    u8 unk0;\n    u8 pad1[0x1];\n    u8 unk2;\n    u8 unk3;\n    u8 pad4[0x29];\n    u8 unk2D;\n};",
+  "Unk_func_0000BF1C_0": "struct Unk_func_0000BF1C_0 {\n    u8 pad0[0x18];\n    s32 unk18;\n};",
+  "Unk_func_0003600C_0": "struct Unk_func_0003600C_0 {\n    u8 pad0[0x4C];\n    s32 unk4C;\n};",
+  "Unk_func_0003600C_1": "struct Unk_func_0003600C_1 {\n    void * unk0;\n    s32 unk4;\n};"
  },
  "vars": {
   "D_001212C0": "extern s32 D_001212C0;",

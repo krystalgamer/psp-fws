@@ -4,6 +4,83 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00005468_1 {
+    u8 pad0[0x4];
+    u16 unk4;
+    u8 pad6[0x6];
+    s32 unkC;
+};
+
+struct Unk_func_00006808_0 {
+    M2C_UNK * unk0;
+    s32 unk4;
+};
+
+struct Unk_func_00006864_1 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_000072A0_0 {
+    u8 pad0[0x30];
+    s32 unk30;
+};
+
+struct Unk_func_000072C0_0 {
+    u8 pad0[0x30];
+    s32 unk30;
+};
+
+struct Unk_func_000076F8_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_00007700_0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
+struct Unk_func_00007708_0 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
+struct Unk_func_00007710_0 {
+    u8 pad0[0x10];
+    s32 unk10;
+};
+
+struct Unk_func_00007718_0 {
+    u8 pad0[0x14];
+    s32 unk14;
+};
+
+struct Unk_func_00007720_0 {
+    u8 pad0[0x18];
+    s32 unk18;
+};
+
+struct Unk_func_00007728_0 {
+    u8 pad0[0x1C];
+    s32 unk1C;
+};
+
+struct Unk_func_00007754_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_00007770_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_0000778C_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
 extern M2C_UNK D_0000F498;
 extern M2C_UNK D_0000F890;
 extern M2C_UNK D_0000FEAC;
@@ -44,31 +121,31 @@ void func_00004914(M2C_UNK **arg0);
 M2C_UNK func_00004AC0();
 void func_00004DFC(void);
 s32 func_00005410(s32, s32, s32);
-void func_00005468(s32 arg0, void *arg1);
+void func_00005468(s32 arg0, struct Unk_func_00005468_1 *arg1);
 s32 func_000057E0(void);
 s32 func_000057F0(void);
 s32 func_0000668C(s32);
 void func_000067B0(void **arg0);
-void func_00006808(void *arg0);
-void ***func_00006864(void ***arg0, void *arg1, void **arg2);
+void func_00006808(struct Unk_func_00006808_0 *arg0);
+void ***func_00006864(void ***arg0, struct Unk_func_00006864_1 *arg1, void **arg2);
 M2C_UNK func_000068CC();
 void func_000068F8(void);
 void func_000071B4(void *arg0);
 M2C_UNK func_00007274();
-void func_000072A0(void *arg0, s32 arg1);
-void func_000072C0(void *arg0);
+void func_000072A0(struct Unk_func_000072A0_0 *arg0, s32 arg1);
+void func_000072C0(struct Unk_func_000072C0_0 *arg0);
 s32 func_0000733C(s32);
 M2C_UNK func_00007680(s32, M2C_UNK);
-s32 func_000076F8(void *arg0);
-s32 func_00007700(void *arg0);
-s32 func_00007708(void *arg0);
-s32 func_00007710(void *arg0);
-s32 func_00007718(void *arg0);
-s32 func_00007720(void *arg0);
-s32 func_00007728(void *arg0);
-void func_00007754(void *arg0);
-void func_00007770(void *arg0);
-void func_0000778C(void *arg0);
+s32 func_000076F8(struct Unk_func_000076F8_0 *arg0);
+s32 func_00007700(struct Unk_func_00007700_0 *arg0);
+s32 func_00007708(struct Unk_func_00007708_0 *arg0);
+s32 func_00007710(struct Unk_func_00007710_0 *arg0);
+s32 func_00007718(struct Unk_func_00007718_0 *arg0);
+s32 func_00007720(struct Unk_func_00007720_0 *arg0);
+s32 func_00007728(struct Unk_func_00007728_0 *arg0);
+void func_00007754(struct Unk_func_00007754_0 *arg0);
+void func_00007770(struct Unk_func_00007770_0 *arg0);
+void func_0000778C(struct Unk_func_0000778C_0 *arg0);
 M2C_UNK func_0000EB40();
 s32 module_stop(void);
 M2C_UNK scePaf_3481F595(s32);

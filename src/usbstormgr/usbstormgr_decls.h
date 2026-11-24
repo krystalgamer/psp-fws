@@ -17,11 +17,48 @@ struct D_00005150_s {
     volatile s32 unk74;
 };
 
+struct Unk_func_00000170_0 {
+    u8 pad0[0x7];
+    u8 unk7;
+};
+
+struct Unk_func_00000170_1 {
+    u8 pad0[0x1];
+    s8 unk1;
+    s8 unk2;
+    s8 unk3;
+};
+
+struct Unk_func_0000019C_0 {
+    u8 pad0[0xA];
+    u8 unkA;
+};
+
+struct Unk_func_0000019C_1 {
+    u8 pad0[0x1];
+    s8 unk1;
+    s8 unk2;
+    s8 unk3;
+};
+
+struct Unk_func_000001CC_0 {
+    u8 pad0[0x8];
+    u8 unk8;
+    u8 unk9;
+};
+
+struct Unk_func_000001CC_1 {
+    u8 pad0[0x1];
+    s8 unk1;
+    s8 unk2;
+    s8 unk3;
+};
+
 extern struct D_00005150_s D_00005150;
 
-s32 func_00000170(void *arg0, void *arg1, s32 arg2);
-s32 func_0000019C(void *arg0, void *arg1, s32 arg2);
-s32 func_000001CC(void *arg0, void *arg1, s32 arg2);
+s32 func_00000170(struct Unk_func_00000170_0 *arg0, struct Unk_func_00000170_1 *arg1, s32 arg2);
+s32 func_0000019C(struct Unk_func_0000019C_0 *arg0, struct Unk_func_0000019C_1 *arg1, s32 arg2);
+s32 func_000001CC(struct Unk_func_000001CC_0 *arg0, struct Unk_func_000001CC_1 *arg1, s32 arg2);
 s32 func_000017C4(void);
 void func_00003B58(void);
 

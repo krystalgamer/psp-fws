@@ -22,42 +22,42 @@ INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_000002F4);
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00000324);
 
-s32 func_0000038C(void *arg0) {
+s32 func_0000038C(struct Unk_func_0000038C_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0x8050C002;
-    if (M2C_FIELD(arg0, s32 *, 0) != 0) {
-        var_v1 = ((u32) M2C_FIELD(arg0, u32 *, 4) >= 0x50U) ? 0 : 0x8050C031;
+    if (arg0->unk0 != 0) {
+        var_v1 = ((u32) arg0->unk4 >= 0x50U) ? 0 : 0x8050C031;
     }
     return var_v1;
 }
 
-s32 func_000003B8(void *arg0) {
+s32 func_000003B8(struct Unk_func_000003B8_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0x8050C002;
-    if (M2C_FIELD(arg0, s32 *, 0) != 0) {
-        var_v1 = ((M2C_FIELD(arg0, s32 *, 4) ^ 0x3EB0) == 0) ? 0 : 0x8050C003;
+    if (arg0->unk0 != 0) {
+        var_v1 = ((arg0->unk4 ^ 0x3EB0) == 0) ? 0 : 0x8050C003;
     }
     return var_v1;
 }
 
-s32 func_000003E4(void *arg0) {
+s32 func_000003E4(struct Unk_func_000003E4_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0x8050C002;
-    if (M2C_FIELD(arg0, s32 *, 0) != 0) {
-        var_v1 = ((u32) M2C_FIELD(arg0, u32 *, 4) >= 0x50U) ? 0 : 0x8050C003;
+    if (arg0->unk0 != 0) {
+        var_v1 = ((u32) arg0->unk4 >= 0x50U) ? 0 : 0x8050C003;
     }
     return var_v1;
 }
 
-s32 func_00000410(void *arg0, u32 arg1) {
+s32 func_00000410(struct Unk_func_00000410_0 *arg0, u32 arg1) {
     s32 var_v1;
 
     var_v1 = 0x8050C002;
-    if (M2C_FIELD(arg0, s32 *, 0) != 0) {
-        var_v1 = ((u32) M2C_FIELD(arg0, u32 *, 4) >= arg1) ? 0 : 0x8050C003;
+    if (arg0->unk0 != 0) {
+        var_v1 = ((u32) arg0->unk4 >= arg1) ? 0 : 0x8050C003;
     }
     return var_v1;
 }
@@ -297,8 +297,8 @@ s32 func_000049D0(void *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00004A88);
 
-s32 func_00004BEC(void *arg0) {
-    return (M2C_FIELD(arg0, u8 *, 1) == 0) ? 0 : -2;
+s32 func_00004BEC(struct Unk_func_00004BEC_0 *arg0) {
+    return (arg0->unk1 == 0) ? 0 : -2;
 }
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00004BFC);

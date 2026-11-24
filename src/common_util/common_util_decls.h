@@ -4,6 +4,15 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_sceVshCommonUtil_98E57F6D_0 {
+    u8 unk0;
+    u8 pad1[0x3];
+    s32 unk4;
+    s32 unk8;
+    u8 padC[0x4];
+    u8 unk10;
+};
+
 extern s32 D_00008BF0;
 extern s32 D_00008BF4;
 extern s32 D_00008BF8;
@@ -33,7 +42,7 @@ void sceVshCommonUtil_3FAF35EC(void);
 void sceVshCommonUtil_5A0B7762(s32 arg0, s32 arg1);
 void sceVshCommonUtil_686AAA1A(void);
 M2C_UNK sceVshCommonUtil_7683BE4D();
-void sceVshCommonUtil_98E57F6D(void *arg0);
+void sceVshCommonUtil_98E57F6D(struct Unk_sceVshCommonUtil_98E57F6D_0 *arg0);
 void sceVshCommonUtil_D4D66154(s32 *arg0);
 
 #endif

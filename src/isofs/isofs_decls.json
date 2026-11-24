@@ -2,14 +2,14 @@
  "funcs": {
   "KDebugForKernel_84F370BC": "M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);",
   "SysMemForKernel_7B749390": "s32 SysMemForKernel_7B749390(s32, s32);",
-  "func_00000440": "s32 func_00000440(void *arg0);",
-  "func_000004E4": "s32 func_000004E4(void *arg0, s32 arg1);",
+  "func_00000440": "s32 func_00000440(struct Unk_func_00000440_0 *arg0);",
+  "func_000004E4": "s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1);",
   "func_00000620": "s32 func_00000620(void);",
   "func_000006EC": "s32 func_000006EC(void);",
   "func_00000790": "s32 func_00000790(s32);",
   "func_000007FC": "s32 func_000007FC(s32, s32);",
-  "func_00002364": "void func_00002364(void *arg0);",
-  "func_00003BB4": "s32 func_00003BB4(void *arg0);",
+  "func_00002364": "void func_00002364(struct Unk_func_00002364_0 *arg0);",
+  "func_00003BB4": "s32 func_00003BB4(struct Unk_func_00003BB4_0 *arg0);",
   "func_00004064": "s32 func_00004064(s32 arg0);",
   "func_00004DB0": "s32 func_00004DB0(void);",
   "func_00004E30": "s32 func_00004E30(s32);",
@@ -26,7 +26,11 @@
   "sceUmdMan_driver_BF8AED79": "s32 sceUmdMan_driver_BF8AED79(M2C_UNK, M2C_UNK *, s32);"
  },
  "types": {
-  "D_00007608_s": "struct D_00007608_s {\n    u8 pad0[0x1C];\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};"
+  "D_00007608_s": "struct D_00007608_s {\n    u8 pad0[0x1C];\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};",
+  "Unk_func_00000440_0": "struct Unk_func_00000440_0 {\n    u8 pad0[0x40];\n    s32 unk40;\n    u8 pad44[0xC];\n    u8 unk50;\n    u8 pad51[0x47];\n    s32 unk98;\n};",
+  "Unk_func_000004E4_0": "struct Unk_func_000004E4_0 {\n    u8 pad0[0x98];\n    s32 unk98;\n};",
+  "Unk_func_00002364_0": "struct Unk_func_00002364_0 {\n    s8 unk0;\n    s8 unk1;\n};",
+  "Unk_func_00003BB4_0": "struct Unk_func_00003BB4_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n    u8 pad8[0x8];\n    s32 unk10;\n};"
  },
  "vars": {
   "D_00005F30": "extern M2C_UNK D_00005F30;",

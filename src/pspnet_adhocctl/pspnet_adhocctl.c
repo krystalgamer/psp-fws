@@ -94,11 +94,11 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_00001F90);
 
-void func_00002014(void *arg0) {
+void func_00002014(struct Unk_func_00002014_0 *arg0) {
     sceNet_lib_AB7DD9A5(&D_0000610C, 0, 0);
     sceNet_lib_D2422E4D(&D_0000610C);
     sceWlanDrv_lib_C9A8CAB7();
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_RODATA("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", D_0000610C);

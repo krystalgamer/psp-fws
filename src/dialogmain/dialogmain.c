@@ -446,30 +446,30 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003258);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003294);
 
-void func_00003660(void *arg0) {
+void func_00003660(struct Unk_func_00003660_0 *arg0) {
     if (arg0 != NULL) {
-        M2C_FIELD(arg0, s32 *, 0x98) = scePaf_D7215544(D_0000A280, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0x9C) = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xA0) = scePaf_D7215544(D_0000A280, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xA4) = scePaf_D7215544(D_0000A280, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xA8) = scePaf_D7215544(D_0000A280, &D_00008D84);
-        M2C_FIELD(arg0, s32 *, 0xAC) = scePaf_D7215544(D_0000A280, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xB0) = scePaf_D7215544(D_0000A280, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xB4) = scePaf_D7215544(D_0000A280, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xB8) = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xBC) = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xC0) = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xC4) = scePaf_D7215544(D_0000A280, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xC8) = scePaf_D7215544(D_0000A280, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xCC) = scePaf_D7215544(D_0000A280, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xD0) = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xD4) = scePaf_D7215544(D_0000A280, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xD8) = scePaf_D7215544(D_0000A280, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xDC) = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xE0) = scePaf_D7215544(D_0000A280, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xE4) = scePaf_D7215544(D_0000A280, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xE8) = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xEC) = scePaf_D7215544(D_0000A280, &D_00008D78);
+        arg0->unk98 = scePaf_D7215544(D_0000A280, &D_00008D60);
+        arg0->unk9C = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        arg0->unkA0 = scePaf_D7215544(D_0000A280, &D_00008D78);
+        arg0->unkA4 = scePaf_D7215544(D_0000A280, &D_00008D78);
+        arg0->unkA8 = scePaf_D7215544(D_0000A280, &D_00008D84);
+        arg0->unkAC = scePaf_D7215544(D_0000A280, &D_00008D78);
+        arg0->unkB0 = scePaf_D7215544(D_0000A280, &D_00008D60);
+        arg0->unkB4 = scePaf_D7215544(D_0000A280, &D_00008D78);
+        arg0->unkB8 = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        arg0->unkBC = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        arg0->unkC0 = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        arg0->unkC4 = scePaf_D7215544(D_0000A280, &D_00008D60);
+        arg0->unkC8 = scePaf_D7215544(D_0000A280, &D_00008D78);
+        arg0->unkCC = scePaf_D7215544(D_0000A280, &D_00008D60);
+        arg0->unkD0 = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        arg0->unkD4 = scePaf_D7215544(D_0000A280, &D_00008D78);
+        arg0->unkD8 = scePaf_D7215544(D_0000A280, &D_00008D60);
+        arg0->unkDC = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        arg0->unkE0 = scePaf_D7215544(D_0000A280, &D_00008D78);
+        arg0->unkE4 = scePaf_D7215544(D_0000A280, &D_00008D60);
+        arg0->unkE8 = scePaf_D7215544(D_0000A280, &D_00008D6C);
+        arg0->unkEC = scePaf_D7215544(D_0000A280, &D_00008D78);
     }
 }
 

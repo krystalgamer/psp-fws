@@ -169,16 +169,16 @@ void func_00003FD4(void) {
     sceUmd_27A764A1();
 }
 
-s32 func_00003FF0(void *arg0) {
-    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x64), s32 *, 0xC);
+s32 func_00003FF0(struct Unk_func_00003FF0_0 *arg0) {
+    return M2C_FIELD(arg0->unk64, s32 *, 0xC);
 }
 
-s32 func_00003FFC(void *arg0) {
+s32 func_00003FFC(struct Unk_func_00003FFC_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0x80010016;
     if (arg0 != NULL) {
-        var_v0 = sceUmdMan_driver_84410A8E(M2C_FIELD(arg0, s32 *, 0x64));
+        var_v0 = sceUmdMan_driver_84410A8E(arg0->unk64);
     }
     return var_v0;
 }
@@ -193,11 +193,11 @@ INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_000040E4);
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00004124);
 
-s32 func_00004164(void *arg0) {
+s32 func_00004164(struct Unk_func_00004164_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0;
-    if ((arg0 == NULL) || (M2C_FIELD(arg0, s32 *, 0x64) == 0)) {
+    if ((arg0 == NULL) || (arg0->unk64 == 0)) {
         var_v1 = 0x80010016;
     }
     return var_v1;

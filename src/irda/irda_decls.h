@@ -4,6 +4,11 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00000A1C_0 {
+    u8 pad0[0x4C];
+    s32 unk4C;
+};
+
 extern M2C_UNK D_00001710;
 extern M2C_UNK D_00001740;
 extern s32 D_00001784;
@@ -14,7 +19,7 @@ extern M2C_UNK func_0000117C;
 M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);
 s32 func_00000528(void);
 s32 func_00000850(void);
-s32 func_00000A1C(void *arg0);
+s32 func_00000A1C(struct Unk_func_00000A1C_0 *arg0);
 s32 func_00000AF8(void);
 s32 func_00000BAC(void);
 void func_00000BB8(s32 arg0);

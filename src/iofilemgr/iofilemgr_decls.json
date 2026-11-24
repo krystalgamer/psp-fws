@@ -1,6 +1,6 @@
 {
  "funcs": {
-  "IoFileMgrForKernel_BD17474F": "s32 IoFileMgrForKernel_BD17474F(void *arg0);",
+  "IoFileMgrForKernel_BD17474F": "s32 IoFileMgrForKernel_BD17474F(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0);",
   "IoFileMgrForKernel_CB05F8D6": "void IoFileMgrForKernel_CB05F8D6(s32 arg0, s32 arg1, s32 arg2);",
   "SysMemForKernel_7B749390": "M2C_UNK SysMemForKernel_7B749390(s32, s32);",
   "func_00001B9C": "void func_00001B9C(s32 arg0);",
@@ -38,6 +38,9 @@
   "sceIoWaitAsyncCB": "s32 sceIoWaitAsyncCB(u32 arg0, void *arg1);",
   "sceIoWrite": "s32 sceIoWrite(u32 arg0, void *arg1, u32 arg2);",
   "sceIoWriteAsync": "s32 sceIoWriteAsync(u32 arg0, void *arg1, u32 arg2);"
+ },
+ "types": {
+  "Unk_IoFileMgrForKernel_BD17474F_0": "struct Unk_IoFileMgrForKernel_BD17474F_0 {\n    u8 pad0[0x80];\n    s32 unk80;\n};"
  },
  "vars": {
   "D_00005870": "extern s32 D_00005870;"

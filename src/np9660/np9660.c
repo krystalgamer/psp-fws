@@ -383,12 +383,12 @@ s32 func_00002578(void) {
     return 0;
 }
 
-s32 func_00002580(void *arg0) {
+s32 func_00002580(struct Unk_func_00002580_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0x80010016;
     if (arg0 != NULL) {
-        M2C_FIELD(arg0, s32 *, 4) = 0x10;
+        arg0->unk4 = 0x10;
         var_v0 = 0;
     }
     return var_v0;

@@ -44,15 +44,15 @@ INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000880);
 
 INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000968);
 
-s32 func_00000A1C(void *arg0) {
+s32 func_00000A1C(struct Unk_func_00000A1C_0 *arg0) {
     s32 temp_v0;
 
-    if (M2C_FIELD(arg0, s32 *, 0x4C) == 0) {
+    if (arg0->unk4C == 0) {
         func_00000AF8();
         temp_v0 = sceKernelSetAlarm(0x64U, (s32) &func_0000117C, arg0);
-        M2C_FIELD(arg0, s32 *, 0x4C) = temp_v0;
+        arg0->unk4C = temp_v0;
         if (temp_v0 < 0) {
-            M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+            arg0->unk4C = 0;
         }
     }
     return 0;

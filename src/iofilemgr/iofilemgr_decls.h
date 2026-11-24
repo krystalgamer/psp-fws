@@ -4,9 +4,14 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_IoFileMgrForKernel_BD17474F_0 {
+    u8 pad0[0x80];
+    s32 unk80;
+};
+
 extern s32 D_00005870;
 
-s32 IoFileMgrForKernel_BD17474F(void *arg0);
+s32 IoFileMgrForKernel_BD17474F(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0);
 void IoFileMgrForKernel_CB05F8D6(s32 arg0, s32 arg1, s32 arg2);
 M2C_UNK SysMemForKernel_7B749390(s32, s32);
 void func_00001B9C(s32 arg0);

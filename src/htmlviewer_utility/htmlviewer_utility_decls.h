@@ -15,6 +15,12 @@ struct D_00006F28_s {
     s32 unk8;
 };
 
+struct Unk_func_00003FC0_0 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+};
+
 extern s8 D_00005FC4;
 extern u8 D_00005FC5;
 extern void *D_000060E4;
@@ -63,7 +69,7 @@ s32 func_000038F4(s32);
 void func_00003950(void);
 void func_00003980(void);
 void func_00003AB4(void);
-s32 func_00003FC0(void *arg0);
+s32 func_00003FC0(struct Unk_func_00003FC0_0 *arg0);
 s32 func_000041CC(M2C_UNK **arg0, s32 *arg1);
 M2C_UNK func_00004350(s8 *);
 s8 *func_00004398(s8 *arg0);

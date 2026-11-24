@@ -18,7 +18,7 @@
   "func_00002474": "s32 func_00002474(void);",
   "func_00002528": "s32 func_00002528(void);",
   "func_00002578": "s32 func_00002578(void);",
-  "func_00002580": "s32 func_00002580(void *arg0);",
+  "func_00002580": "s32 func_00002580(struct Unk_func_00002580_0 *arg0);",
   "func_00002634": "s32 func_00002634(void);",
   "func_00002674": "s32 func_00002674(void);",
   "func_000042F8": "s32 func_000042F8(void);",
@@ -47,7 +47,8 @@
   "sceUmd_D45D1FE6": "s32 sceUmd_D45D1FE6(void);"
  },
  "types": {
-  "D_00004CF8_s": "struct D_00004CF8_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    volatile s32 unk8;\n    volatile s32 unkC;\n};"
+  "D_00004CF8_s": "struct D_00004CF8_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    volatile s32 unk8;\n    volatile s32 unkC;\n};",
+  "Unk_func_00002580_0": "struct Unk_func_00002580_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};"
  },
  "vars": {
   "D_00004CA0": "extern s32 D_00004CA0;",

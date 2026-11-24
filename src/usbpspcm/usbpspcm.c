@@ -187,10 +187,10 @@ INCLUDE_ASM("tmp/asm/352/usbpspcm/nonmatchings/usbpspcm", func_000033F0);
 
 INCLUDE_ASM("tmp/asm/352/usbpspcm/nonmatchings/usbpspcm", func_000036B4);
 
-s32 func_0000377C(void *arg0) {
+s32 func_0000377C(struct Unk_func_0000377C_0 *arg0) {
     void *temp_s0;
 
-    temp_s0 = M2C_FIELD(arg0, void **, 0x10);
+    temp_s0 = arg0->unk10;
     sceKernelSetEventFlag(M2C_FIELD(temp_s0, s32 *, 0xF0), 0x40);
     func_000006BC(temp_s0);
     M2C_FIELD(temp_s0, s32 *, 0x14) = 0;

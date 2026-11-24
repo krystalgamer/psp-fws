@@ -836,18 +836,18 @@ INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00004F98);
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00004FFC);
 
-s32 func_00005054(void *arg0) {
+s32 func_00005054(struct Unk_func_00005054_0 *arg0) {
     s32 temp_v0;
     s32 var_s0;
 
     temp_v0 = func_000060B4();
     var_s0 = temp_v0;
     if (temp_v0 >= 0) {
-        var_s0 = func_0000553C(M2C_FIELD(arg0, s32 *, 0));
+        var_s0 = func_0000553C(arg0->unk0);
     }
     func_000061C0();
     func_0000613C();
-    M2C_FIELD(arg0, s32 *, 4) = var_s0;
+    arg0->unk4 = var_s0;
     return var_s0;
 }
 

@@ -45,19 +45,19 @@ INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_000002F8);
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00000478);
 
-s32 func_00000570(void *arg0, void *arg1) {
+s32 func_00000570(struct Unk_func_00000570_0 *arg0, struct Unk_func_00000570_1 *arg1) {
     s32 temp_v1;
     s32 var_a2;
 
-    temp_v1 = (M2C_FIELD(arg1, u8 *, 0x15) + (M2C_FIELD(arg1, u8 *, 0x14) << 8)) - 1;
+    temp_v1 = (arg1->unk15 + (arg1->unk14 << 8)) - 1;
     var_a2 = 0x8050800D;
     if (temp_v1 >= 0) {
         var_a2 = temp_v1;
-        M2C_FIELD(arg0, s32 *, 0) = (s32) M2C_FIELD(arg1, s32 *, 0x28);
-        M2C_FIELD(arg0, s32 *, 4) = (s32) M2C_FIELD(arg1, s32 *, 0x2C);
+        arg0->unk0 = (s32) arg1->unk28;
+        arg0->unk4 = (s32) arg1->unk2C;
         if (temp_v1 > 0) {
-            M2C_FIELD(arg0, s32 *, 8) = (s32) M2C_FIELD(arg1, s32 *, 0x30);
-            M2C_FIELD(arg0, s32 *, 0xC) = (s32) M2C_FIELD(arg1, s32 *, 0x34);
+            arg0->unk8 = (s32) arg1->unk30;
+            arg0->unkC = (s32) arg1->unk34;
         }
     }
     return var_a2;
@@ -175,11 +175,11 @@ INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_7B953C
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_80BD1592);
 
-s32 func_000026B0(void *arg0) {
+s32 func_000026B0(struct Unk_func_000026B0_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0x80508016;
-    if (!(M2C_FIELD(arg0, u8 *, 0x2D) & 0x40) && ((var_v1 = 0, (M2C_FIELD(arg0, s32 *, 0x44) != 0)) || (M2C_FIELD(arg0, s32 *, 0x48) != 0))) {
+    if (!(arg0->unk2D & 0x40) && ((var_v1 = 0, (arg0->unk44 != 0)) || (arg0->unk48 != 0))) {
         var_v1 = 0x80508016;
     }
     return var_v1;

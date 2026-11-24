@@ -42,24 +42,24 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_000008D0);
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00000A7C);
 
-void func_00000AAC(void *arg0, void *arg1) {
-    func_00005BF8(M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg1, s32 *, 4));
+void func_00000AAC(struct Unk_func_00000AAC_0 *arg0, struct Unk_func_00000AAC_1 *arg1) {
+    func_00005BF8(arg0->unk4, arg1->unk4);
 }
 
-s32 func_00000ACC(void *arg0, void *arg1) {
-    return M2C_FIELD(arg0, u16 *, 8) - M2C_FIELD(arg1, u16 *, 8);
+s32 func_00000ACC(struct Unk_func_00000ACC_0 *arg0, struct Unk_func_00000ACC_1 *arg1) {
+    return arg0->unk8 - arg1->unk8;
 }
 
-s32 func_00000ADC(void *arg0, void *arg1) {
-    return M2C_FIELD(arg0, u16 *, 8) - M2C_FIELD(arg1, u16 *, 0xC);
+s32 func_00000ADC(struct Unk_func_00000ADC_0 *arg0, struct Unk_func_00000ADC_1 *arg1) {
+    return arg0->unk8 - arg1->unkC;
 }
 
-void func_00000AEC(void *arg0, void *arg1) {
-    func_00005BF8(M2C_FIELD(arg1, s32 *, 8), M2C_FIELD(arg0, s32 *, 4));
+void func_00000AEC(struct Unk_func_00000AEC_0 *arg0, struct Unk_func_00000AEC_1 *arg1) {
+    func_00005BF8(arg1->unk8, arg0->unk4);
 }
 
-s32 func_00000B10(void *arg0, void *arg1) {
-    return ((u16) M2C_FIELD(arg0, u16 *, 8) >> 8) - ((u16) M2C_FIELD(arg1, u16 *, 0xC) >> 8);
+s32 func_00000B10(struct Unk_func_00000B10_0 *arg0, struct Unk_func_00000B10_1 *arg1) {
+    return ((u16) arg0->unk8 >> 8) - ((u16) arg1->unkC >> 8);
 }
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00000B28);
@@ -180,16 +180,16 @@ s32 func_000029D8(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_ACE23476);
 
-void func_00002B24(void *arg0, s32 arg1) {
+void func_00002B24(struct Unk_func_00002B24_0 *arg0, s32 arg1) {
     if (arg1 == 0) {
-        M2C_FIELD(arg0, s32 *, 0x48) = 1;
+        arg0->unk48 = 1;
         return;
     }
-    M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    arg0->unk48 = 0;
 }
 
-s32 func_00002B3C(void *arg0) {
-    return M2C_FIELD(arg0, u16 *, 4) & 0x1E00;
+s32 func_00002B3C(struct Unk_func_00002B3C_0 *arg0) {
+    return arg0->unk4 & 0x1E00;
 }
 
 INCLUDE_RODATA("tmp/asm/100/loadcorei/nonmatchings/loadcorei", D_0000756C);
@@ -204,12 +204,12 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00002B48);
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00003760);
 
-s32 func_000039A8(void *arg0) {
+s32 func_000039A8(struct Unk_func_000039A8_0 *arg0) {
     s32 var_a1;
 
     var_a1 = 0;
-    if (M2C_FIELD(arg0, s32 *, 0) == 0x4543537E) {
-        var_a1 = M2C_FIELD(arg0, s32 *, 4);
+    if (arg0->unk0 == 0x4543537E) {
+        var_a1 = arg0->unk4;
     }
     return var_a1;
 }
@@ -256,9 +256,9 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00005324);
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00005344);
 
-s32 func_000053CC(void *arg0) {
+s32 func_000053CC(struct Unk_func_000053CC_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_000053F4);
@@ -269,8 +269,8 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_F3
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_CD0F3BAC);
 
-void LoadCoreForKernel_6B2371C2(void *arg0) {
-    SysMemForKernel_8F20C4C0(M2C_FIELD(arg0, s32 *, 0x2C));
+void LoadCoreForKernel_6B2371C2(struct Unk_LoadCoreForKernel_6B2371C2_0 *arg0) {
+    SysMemForKernel_8F20C4C0(arg0->unk2C);
 }
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00005660);
@@ -279,7 +279,7 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_73
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_44B292AB);
 
-void LoadCoreForKernel_BD61D4D5(void *arg0) {
+void LoadCoreForKernel_BD61D4D5(struct Unk_LoadCoreForKernel_6B2371C2_0 *arg0) {
     LoadCoreForKernel_6B2371C2(arg0);
 }
 

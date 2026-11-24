@@ -4,8 +4,11 @@
   "func_000020F4": "s32 func_000020F4(s32 *arg0);",
   "func_000033E0": "s32 func_000033E0(void);",
   "func_000033E8": "s32 func_000033E8(void);",
-  "func_0000377C": "s32 func_0000377C(void *arg0);",
+  "func_0000377C": "s32 func_0000377C(struct Unk_func_0000377C_0 *arg0);",
   "sceKernelSetEventFlag": "M2C_UNK sceKernelSetEventFlag(s32, M2C_UNK);"
+ },
+ "types": {
+  "Unk_func_0000377C_0": "struct Unk_func_0000377C_0 {\n    u8 pad0[0x10];\n    void * unk10;\n};"
  },
  "vars": {}
 }

@@ -103,15 +103,15 @@ INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001748);
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001830);
 
-s32 func_000018E4(void *arg0) {
+s32 func_000018E4(struct Unk_func_000018E4_0 *arg0) {
     s32 temp_v0;
 
-    if (M2C_FIELD(arg0, s32 *, 0x4C) == 0) {
+    if (arg0->unk4C == 0) {
         func_000019C0();
         temp_v0 = sceKernelSetAlarm(0x64U, (s32) &func_00002044, arg0);
-        M2C_FIELD(arg0, s32 *, 0x4C) = temp_v0;
+        arg0->unk4C = temp_v0;
         if (temp_v0 < 0) {
-            M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+            arg0->unk4C = 0;
         }
     }
     return 0;

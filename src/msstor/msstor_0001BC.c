@@ -93,8 +93,8 @@ INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_00001474);
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0001BC", func_0000149C);
 
-s32 func_00001558(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x4E60);
+s32 func_00001558(struct Unk_func_00001558_0 *arg0) {
+    return arg0->unk4E60;
 }
 
 void func_00001560(s32 arg0) {

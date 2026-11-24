@@ -2,7 +2,7 @@
 #include "common.h"
 #include "libaudiocodec2_decls.h"
 
-s32 sceAudiocodec2_AA2ED267(void *arg0, s32 arg1) {
+s32 sceAudiocodec2_AA2ED267(struct Unk_sceAudiocodec2_AA2ED267_0 *arg0, s32 arg1) {
     s32 var_v0;
     s32 var_v1;
 
@@ -10,9 +10,9 @@ s32 sceAudiocodec2_AA2ED267(void *arg0, s32 arg1) {
     if (arg0 != NULL) {
         var_v1 = 0x807F00FF;
         if (arg1 == 0x1001) {
-            M2C_FIELD(arg0, s32 *, 8) = 0;
-            M2C_FIELD(arg0, s32 *, 0xC) = 0;
-            M2C_FIELD(arg0, s32 *, 0x10) = 0x36A8;
+            arg0->unk8 = 0;
+            arg0->unkC = 0;
+            arg0->unk10 = 0x36A8;
             var_v1 = 0;
         }
         var_v0 = var_v1;

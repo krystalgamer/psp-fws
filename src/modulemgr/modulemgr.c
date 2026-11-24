@@ -8,22 +8,22 @@ INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", func_000000D4);
 
 INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", func_00000194);
 
-void func_000004C0(void *arg0, void *arg1) {
+void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 *arg1) {
     if (arg1 != NULL) {
-        M2C_FIELD(arg0, s32 *, 0x14) = (s32) M2C_FIELD(arg1, s32 *, 4);
-        M2C_FIELD(arg0, s32 *, 0x18) = (s32) M2C_FIELD(arg1, s32 *, 8);
-        M2C_FIELD(arg0, u8 *, 2) = (u8) M2C_FIELD(arg1, u8 *, 0x10);
-        M2C_FIELD(arg0, u8 *, 3) = (u8) M2C_FIELD(arg1, u8 *, 0x11);
+        arg0->unk14 = (s32) arg1->unk4;
+        arg0->unk18 = (s32) arg1->unk8;
+        arg0->unk2 = (u8) arg1->unk10;
+        arg0->unk3 = (u8) arg1->unk11;
     } else {
-        M2C_FIELD(arg0, u8 *, 3) = 1U;
-        M2C_FIELD(arg0, s32 *, 0x14) = 0;
-        M2C_FIELD(arg0, s32 *, 0x18) = 0;
-        M2C_FIELD(arg0, u8 *, 2) = 0U;
+        arg0->unk3 = 1U;
+        arg0->unk14 = 0;
+        arg0->unk18 = 0;
+        arg0->unk2 = 0U;
     }
-    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
-    M2C_FIELD(arg0, s32 *, 0x50) = 0;
-    M2C_FIELD(arg0, s32 *, 0x60) = 0;
-    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    arg0->unk4C = 0;
+    arg0->unk50 = 0;
+    arg0->unk60 = 0;
+    arg0->unk3C = 0;
     func_0000552C((s32) arg0);
 }
 

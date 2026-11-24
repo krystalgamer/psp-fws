@@ -4,6 +4,21 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00003BB4_0 {
+    u8 pad0[0x48];
+    s32 unk48;
+};
+
+struct Unk_func_00003ED8_0 {
+    s32 unk0;
+    s32 unk4;
+};
+
+struct Unk_func_00007EF0_0 {
+    u8 pad0[0x10];
+    s32 unk10;
+};
+
 extern M2C_UNK D_00014F21;
 
 M2C_UNK func_0000004C();
@@ -26,8 +41,8 @@ void func_00003470(void);
 void func_0000348C(s8 arg0);
 s32 func_000034E8(void);
 s32 func_000034F0(void);
-void func_00003BB4(void *arg0, s32 arg1);
-s32 func_00003ED8(void *arg0);
+void func_00003BB4(struct Unk_func_00003BB4_0 *arg0, s32 arg1);
+s32 func_00003ED8(struct Unk_func_00003ED8_0 *arg0);
 s32 func_00006114(void);
 s32 func_000061C4(void);
 M2C_UNK func_000069D4(s32, M2C_UNK, M2C_UNK, M2C_UNK);
@@ -39,7 +54,7 @@ s32 func_00007E4C(void);
 s32 func_00007E54(void);
 void func_00007E5C(s32 arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3);
 s32 func_00007EB8(s32 arg0);
-void func_00007EF0(void *arg0, M2C_UNK arg1, M2C_UNK arg2);
+void func_00007EF0(struct Unk_func_00007EF0_0 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 void func_00008238(s32 arg0, M2C_UNK arg1);
 void func_00008274(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);
 s32 func_000083A0(void);

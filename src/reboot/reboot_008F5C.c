@@ -44,7 +44,7 @@ s32 func_0000917C(s32 arg0, s32 arg1) {
     return temp_s1;
 }
 
-s32 func_000091C4(void *arg0) {
+s32 func_000091C4(struct Unk_func_000091C4_0 *arg0) {
     void **temp_a2;
     void **temp_v0;
     void *temp_a0;
@@ -52,7 +52,7 @@ s32 func_000091C4(void *arg0) {
     void *temp_a3;
 
     func_0000E028();
-    temp_a0 = M2C_FIELD(arg0, void **, 0x10);
+    temp_a0 = arg0->unk10;
     if (temp_a0 != NULL) {
         temp_a3 = M2C_FIELD(temp_a0, void **, 8);
         temp_a1 = M2C_FIELD(temp_a0, void **, 0);
@@ -199,8 +199,8 @@ INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000D480);
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000D588);
 
-s32 func_0000D694(void *arg0) {
-    return (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
+s32 func_0000D694(struct Unk_func_0000D694_0 *arg0) {
+    return (arg0->unk2 << 8) | arg0->unk3;
 }
 
 INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_008F5C", func_0000D6A8);

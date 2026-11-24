@@ -30,21 +30,21 @@ INCLUDE_RODATA("tmp/asm/201/isofs/nonmatchings/isofs", D_00005F30);
 
 INCLUDE_RODATA("tmp/asm/201/isofs/nonmatchings/isofs", D_00005F38);
 
-s32 func_00000440(void *arg0) {
+s32 func_00000440(struct Unk_func_00000440_0 *arg0) {
     s32 temp_v0;
     s32 var_s1;
     s32 var_s2;
 
     var_s2 = 0;
-    if (M2C_FIELD(arg0, u8 *, 0x50) != 0) {
+    if (arg0->unk50 != 0) {
         var_s1 = 0;
         do {
             var_s2 += 1;
-            func_00000790(M2C_FIELD(arg0, s32 *, 0x98) + var_s1 + 8);
+            func_00000790(arg0->unk98 + var_s1 + 8);
             var_s1 += 0x2C;
-        } while (var_s2 < (s32) M2C_FIELD(arg0, u8 *, 0x50));
+        } while (var_s2 < (s32) arg0->unk50);
     }
-    temp_v0 = SysMemForKernel_7B749390(M2C_FIELD(arg0, s32 *, 0x40), M2C_FIELD(arg0, s32 *, 0x98));
+    temp_v0 = SysMemForKernel_7B749390(arg0->unk40, arg0->unk98);
     if (temp_v0 >= 0) {
 
     } else {
@@ -53,8 +53,8 @@ s32 func_00000440(void *arg0) {
     return temp_v0;
 }
 
-s32 func_000004E4(void *arg0, s32 arg1) {
-    func_000007FC(M2C_FIELD(arg0, s32 *, 0x98), arg1);
+s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1) {
+    func_000007FC(arg0->unk98, arg1);
     return 0;
 }
 
@@ -146,9 +146,9 @@ INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_000022B8);
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00002344);
 
-void func_00002364(void *arg0) {
-    M2C_FIELD(arg0, s8 *, 0) = 0x2E;
-    M2C_FIELD(arg0, s8 *, 1) = 0;
+void func_00002364(struct Unk_func_00002364_0 *arg0) {
+    arg0->unk0 = 0x2E;
+    arg0->unk1 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00002374);
@@ -193,7 +193,7 @@ INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_000037A4);
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00003ADC);
 
-s32 func_00003BB4(void *arg0) {
+s32 func_00003BB4(struct Unk_func_00003BB4_0 *arg0) {
     s32 temp_s0;
     s32 temp_s1;
     s32 temp_v0_2;
@@ -202,16 +202,16 @@ s32 func_00003BB4(void *arg0) {
 
     var_v0 = 0x80010016;
     if (arg0 != NULL) {
-        temp_v0 = sceIsofs_driver_19F9734D(M2C_FIELD(arg0, s32 *, 4));
+        temp_v0 = sceIsofs_driver_19F9734D(arg0->unk4);
         temp_v0_2 = sceKernelWaitSema(M2C_FIELD(temp_v0, s32 *, 0x58), 1, NULL);
         if (temp_v0_2 >= 0) {
-            temp_s1 = M2C_FIELD(arg0, s32 *, 0x10);
+            temp_s1 = arg0->unk10;
             temp_s0 = sceKernelCpuSuspendIntr();
             func_00004E30(temp_s1);
             sceKernelCpuResumeIntr(temp_s0);
             sceKernelFreeFpl(D_00007608.unk20, M2C_FIELD(temp_s1, void **, 8));
             SysMemForKernel_7B749390(D_00007608.unk1C, temp_s1);
-            M2C_FIELD(arg0, s32 *, 0x10) = 0;
+            arg0->unk10 = 0;
             sceKernelSignalSema(M2C_FIELD(temp_v0, s32 *, 0x58), 1);
             var_v0 = temp_v0_2;
         } else {

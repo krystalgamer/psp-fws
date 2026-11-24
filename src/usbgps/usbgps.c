@@ -136,10 +136,10 @@ INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_0000289C);
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_000028E0);
 
-void func_00002978(void *arg0) {
+void func_00002978(struct Unk_func_00002978_0 *arg0) {
     void *temp_a2;
 
-    temp_a2 = M2C_FIELD(arg0, void **, 0x20);
+    temp_a2 = arg0->unk20;
     if (((u8) D_00008529 < 0x16U) || (M2C_FIELD(M2C_FIELD(temp_a2, void **, 0x28), u8 *, 2) != 3)) {
         sceKernelSetEventFlag(M2C_FIELD(temp_a2, s32 *, 0xA8), 2U);
     }

@@ -4,6 +4,16 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00000A28_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_00000A40_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
 
 s32 StdioForKernel_11A5127A(s32, s32);
 s32 StdioForKernel_4F78930A(s32, s32);
@@ -15,8 +25,8 @@ s32 StdioForUser_A3B931DB(void);
 void StdioForUser_A46785C9(void);
 s32 func_00000A18(void);
 s32 func_00000A20(void);
-s32 func_00000A28(void *arg0);
-s32 func_00000A40(void *arg0);
+s32 func_00000A28(struct Unk_func_00000A28_0 *arg0);
+s32 func_00000A40(struct Unk_func_00000A40_0 *arg0);
 s32 func_00000AF0(void);
 s32 func_00000AFC(s32, s32);
 s32 func_00000C78(void);

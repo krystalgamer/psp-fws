@@ -8,7 +8,7 @@
   "func_000009F4": "s32 func_000009F4(void);",
   "func_000013F0": "s32 func_000013F0(void);",
   "func_00001718": "s32 func_00001718(void);",
-  "func_000018E4": "s32 func_000018E4(void *arg0);",
+  "func_000018E4": "s32 func_000018E4(struct Unk_func_000018E4_0 *arg0);",
   "func_000019C0": "s32 func_000019C0(void);",
   "func_00001A74": "s32 func_00001A74(void);",
   "func_00001A80": "void func_00001A80(s32 arg0);",
@@ -35,7 +35,8 @@
   "sceSysreg_driver_BB823481": "M2C_UNK sceSysreg_driver_BB823481(M2C_UNK);"
  },
  "types": {
-  "D_00002770_s": "struct D_00002770_s {\n    s32 unk0;\n    u8 pad4[0x18];\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};"
+  "D_00002770_s": "struct D_00002770_s {\n    s32 unk0;\n    u8 pad4[0x18];\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};",
+  "Unk_func_000018E4_0": "struct Unk_func_000018E4_0 {\n    u8 pad0[0x4C];\n    s32 unk4C;\n};"
  },
  "vars": {
   "D_000026A8": "extern M2C_UNK D_000026A8;",

@@ -63,12 +63,12 @@ void func_00001BC8(void) {
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00001BE4);
 
-void func_00001C28(void *arg0) {
+void func_00001C28(struct Unk_func_00001C28_0 *arg0) {
     void *temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, void **, 0xB4);
+    temp_v1 = arg0->unkB4;
     if ((temp_v1 == NULL) || (M2C_FIELD(temp_v1, s32 *, 0x20) == 0)) {
-        M2C_FIELD(arg0, u16 *, 8) = (u16) (M2C_FIELD(arg0, u16 *, 8) | 0x800);
+        arg0->unk8 = (u16) (arg0->unk8 | 0x800);
     } else {
         M2C_FIELD(temp_v1, s32 *, 0x20) = 0;
         M2C_FIELD(temp_v1, s32 *, 0x48) = (s32) (M2C_FIELD(temp_v1, s32 *, 0x48) | 2);
@@ -124,12 +124,12 @@ void func_000040FC(void) {
     D_0002CC9C.unk4 = &D_0002CC9C;
 }
 
-s32 func_00004124(void *arg0, s32 arg1) {
+s32 func_00004124(struct Unk_func_00004124_0 *arg0, s32 arg1) {
     s32 temp_s1;
     s32 temp_s2;
 
     temp_s2 = sceNet_lib_94B44F26();
-    temp_s1 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x10), s32 (**)(void *, M2C_UNK, M2C_UNK, s32, M2C_UNK), 0x1C)(arg0, 2, 0, arg1, 0);
+    temp_s1 = M2C_FIELD(arg0->unk10, s32 (**)(void *, M2C_UNK, M2C_UNK, s32, M2C_UNK), 0x1C)(arg0, 2, 0, arg1, 0);
     sceNet_lib_515B2F33(temp_s2);
     return temp_s1;
 }
@@ -204,8 +204,8 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000562C);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00005700);
 
-void func_00005778(void *arg0) {
-    M2C_FIELD(arg0, u16 *, 8) = (u16) ((M2C_FIELD(arg0, u16 *, 8) & 0xFFF5) | 4);
+void func_00005778(struct Unk_func_00005778_0 *arg0) {
+    arg0->unk8 = (u16) ((arg0->unk8 & 0xFFF5) | 4);
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000578C);
@@ -328,11 +328,11 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00008E40);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00008FC8);
 
-s32 func_000090FC(void *arg0, s32 arg1) {
-    if (M2C_FIELD(arg0, s32 *, 0x40) != arg1) {
+s32 func_000090FC(struct Unk_func_000090FC_0 *arg0, s32 arg1) {
+    if (arg0->unk40 != arg1) {
 
     } else {
-        func_0000BEE0(2, M2C_FIELD(arg0, s32 *, 0xC), M2C_FIELD(arg0, s32 *, 0x30), M2C_FIELD(arg0, s32 *, 0x10), M2C_FIELD(arg0, s32 *, 0x34), 0);
+        func_0000BEE0(2, arg0->unkC, arg0->unk30, arg0->unk10, arg0->unk34, 0);
     }
     return 0;
 }
@@ -359,10 +359,10 @@ void func_000096C8(s32 arg0) {
     func_0000E4E4(arg0, 1);
 }
 
-void func_000096E4(void *arg0) {
+void func_000096E4(struct Unk_func_000096E4_0 *arg0) {
     void *var_s0;
 
-    var_s0 = M2C_FIELD(arg0, void **, 0xC);
+    var_s0 = arg0->unkC;
     if (var_s0 != NULL) {
         do {
             func_00002028(0, M2C_FIELD(var_s0, s32 *, 0));
@@ -496,8 +496,8 @@ void func_0000D330(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
 }
 
-s32 func_0000D338(void *arg0, s32 arg1) {
-    if ((M2C_FIELD(arg0, s32 *, 0x34) & 0x2000) && (M2C_FIELD(arg0, s32 *, 0x80) == arg1)) {
+s32 func_0000D338(struct Unk_func_0000D338_0 *arg0, s32 arg1) {
+    if ((arg0->unk34 & 0x2000) && (arg0->unk80 == arg1)) {
         func_0000D378((s32) arg0);
     }
     return 0;
@@ -509,30 +509,30 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000D484);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000D6D0);
 
-void func_0000DDCC(s32 arg0, void *arg1, void *arg2) {
+void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0000DDCC_2 *arg2) {
     if (arg0 & 8) {
-        M2C_FIELD(arg2, s32 *, 0x10) = (s32) M2C_FIELD(arg1, s32 *, 0x10);
+        arg2->unk10 = (s32) arg1->unk10;
     }
     if (arg0 & 0x10) {
-        M2C_FIELD(arg2, s32 *, 0x14) = (s32) M2C_FIELD(arg1, s32 *, 0x14);
+        arg2->unk14 = (s32) arg1->unk14;
     }
     if (arg0 & 0x20) {
-        M2C_FIELD(arg2, s32 *, 0x18) = (s32) M2C_FIELD(arg1, s32 *, 0x18);
+        arg2->unk18 = (s32) arg1->unk18;
     }
     if (arg0 & 0x40) {
-        M2C_FIELD(arg2, s32 *, 0x1C) = (s32) M2C_FIELD(arg1, s32 *, 0x1C);
+        arg2->unk1C = (s32) arg1->unk1C;
     }
     if (arg0 & 0x80) {
-        M2C_FIELD(arg2, s32 *, 0x20) = (s32) M2C_FIELD(arg1, s32 *, 0x20);
+        arg2->unk20 = (s32) arg1->unk20;
     }
     if (arg0 & 2) {
-        M2C_FIELD(arg2, s32 *, 8) = (s32) M2C_FIELD(arg1, s32 *, 8);
+        arg2->unk8 = (s32) arg1->unk8;
     }
     if (arg0 & 1) {
-        M2C_FIELD(arg2, s32 *, 4) = (s32) M2C_FIELD(arg1, s32 *, 4);
+        arg2->unk4 = (s32) arg1->unk4;
     }
     if (arg0 & 4) {
-        M2C_FIELD(arg2, s32 *, 0xC) = (s32) M2C_FIELD(arg1, s32 *, 0xC);
+        arg2->unkC = (s32) arg1->unkC;
     }
 }
 
@@ -558,36 +558,36 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000EACC);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000ED18);
 
-void func_0000EDB8(void *arg0) {
+void func_0000EDB8(struct Unk_func_0000EDB8_0 *arg0) {
     void *temp_a0;
     void *temp_v1;
 
-    temp_a0 = M2C_FIELD(arg0, void **, 8);
+    temp_a0 = arg0->unk8;
     M2C_FIELD(temp_a0, s32 *, 0xC) = 0;
     func_000023A8((s32) temp_a0);
-    temp_v1 = M2C_FIELD(arg0, void **, 0);
+    temp_v1 = arg0->unk0;
     if (temp_v1 != NULL) {
-        M2C_FIELD(temp_v1, void ***, 4) = (void **) M2C_FIELD(arg0, void ***, 4);
+        M2C_FIELD(temp_v1, void ***, 4) = (void **) arg0->unk4;
     }
-    *M2C_FIELD(arg0, void ***, 4) = temp_v1;
+    *arg0->unk4 = temp_v1;
     sceNetIfhandle_lib_76BAD213(arg0);
 }
 
-void func_0000EE04(void *arg0) {
+void func_0000EE04(struct Unk_func_0000EE04_0 *arg0) {
     void *temp_v1;
     void *temp_v1_2;
 
-    temp_v1 = M2C_FIELD(arg0, void **, 8);
+    temp_v1 = arg0->unk8;
     if (!(M2C_FIELD(temp_v1, u16 *, 8) & 1)) {
 
     } else {
         M2C_FIELD(temp_v1, s32 *, 0xC) = 0;
         func_000023A8((s32) temp_v1);
-        temp_v1_2 = M2C_FIELD(arg0, void **, 0);
+        temp_v1_2 = arg0->unk0;
         if (temp_v1_2 != NULL) {
-            M2C_FIELD(temp_v1_2, void ***, 4) = (void **) M2C_FIELD(arg0, void ***, 4);
+            M2C_FIELD(temp_v1_2, void ***, 4) = (void **) arg0->unk4;
         }
-        *M2C_FIELD(arg0, void ***, 4) = temp_v1_2;
+        *arg0->unk4 = temp_v1_2;
         sceNetIfhandle_lib_76BAD213(arg0);
     }
 }
@@ -606,24 +606,24 @@ s32 func_0000F274(void) {
     return 0;
 }
 
-void func_0000F27C(void *arg0, void *arg1) {
+void func_0000F27C(struct Unk_func_0000F27C_0 *arg0, struct Unk_func_0000F27C_1 *arg1) {
     u8 *temp_a0;
     u8 temp_a2;
 
-    temp_a0 = M2C_FIELD(arg0, u8 **, 0x10);
+    temp_a0 = arg0->unk10;
     temp_a2 = *temp_a0;
-    M2C_FIELD(arg1, s32 *, 0xC) = (s32) temp_a2;
-    sceNet_lib_2F305274(temp_a0, M2C_FIELD(arg1, s32 *, 8), temp_a2);
+    arg1->unkC = (s32) temp_a2;
+    sceNet_lib_2F305274(temp_a0, arg1->unk8, temp_a2);
 }
 
-void func_0000F2A8(void *arg0, void *arg1) {
+void func_0000F2A8(struct Unk_func_0000F2A8_0 *arg0, struct Unk_func_0000F2A8_1 *arg1) {
     u8 *temp_a0;
     u8 temp_a2;
 
-    temp_a0 = M2C_FIELD(arg0, u8 **, 0xC);
+    temp_a0 = arg0->unkC;
     temp_a2 = *temp_a0;
-    M2C_FIELD(arg1, s32 *, 0xC) = (s32) temp_a2;
-    sceNet_lib_2F305274(temp_a0, M2C_FIELD(arg1, s32 *, 8), temp_a2);
+    arg1->unkC = (s32) temp_a2;
+    sceNet_lib_2F305274(temp_a0, arg1->unk8, temp_a2);
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000F2D4);
@@ -712,13 +712,13 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0001358C);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_000137AC);
 
-void func_000138B4(void *arg0) {
+void func_000138B4(struct Unk_func_000138B4_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0x20);
+    temp_v1 = arg0->unk20;
     if (temp_v1 != 0) {
         func_0000D15C(temp_v1);
-        M2C_FIELD(arg0, s32 *, 0x20) = 0;
+        arg0->unk20 = 0;
     }
 }
 
@@ -770,7 +770,7 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0001486C);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_000150C8);
 
-void func_00015654(void *arg0) {
+void func_00015654(struct Unk_func_00015654_0 *arg0) {
     void **temp_a1;
     void *temp_a0;
     void *temp_s1;
@@ -778,7 +778,7 @@ void func_00015654(void *arg0) {
     void *temp_v1_2;
     void *var_s0;
 
-    var_s0 = M2C_FIELD(arg0, void **, 0xC);
+    var_s0 = arg0->unkC;
     if (var_s0 != NULL) {
         do {
             temp_s1 = M2C_FIELD(var_s0, void **, 0);
@@ -794,11 +794,11 @@ void func_00015654(void *arg0) {
             sceNetIfhandle_lib_76BAD213(temp_a0);
         } while (temp_s1 != NULL);
     }
-    temp_v1_2 = M2C_FIELD(arg0, void **, 0);
+    temp_v1_2 = arg0->unk0;
     if (temp_v1_2 != NULL) {
-        M2C_FIELD(temp_v1_2, void ***, 4) = (void **) M2C_FIELD(arg0, void ***, 4);
+        M2C_FIELD(temp_v1_2, void ***, 4) = (void **) arg0->unk4;
     }
-    *M2C_FIELD(arg0, void ***, 4) = temp_v1_2;
+    *arg0->unk4 = temp_v1_2;
     sceNetIfhandle_lib_76BAD213(arg0);
     D_0002C57C -= 1;
 }
@@ -869,16 +869,16 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00019AA0);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00019B24);
 
-void func_00019C00(void *arg0) {
+void func_00019C00(struct Unk_func_00019C00_0 *arg0) {
     s32 temp_a1;
 
-    temp_a1 = M2C_FIELD(arg0, s32 *, 0x34);
+    temp_a1 = arg0->unk34;
     if ((temp_a1 & 0x14) != 0x14) {
-        if (!(M2C_FIELD(arg0, s32 *, 0x50) & 1)) {
-            M2C_FIELD(arg0, s32 *, 0x54) = 0;
+        if (!(arg0->unk50 & 1)) {
+            arg0->unk54 = 0;
         }
     } else {
-        func_0000BEE0(2, M2C_FIELD(arg0, s32 *, 0xC), M2C_FIELD(arg0, s32 *, 0x30), M2C_FIELD(arg0, s32 *, 0x10), temp_a1, 0);
+        func_0000BEE0(2, arg0->unkC, arg0->unk30, arg0->unk10, temp_a1, 0);
     }
 }
 
@@ -896,14 +896,14 @@ void func_0001A8AC(void) {
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0001A8E4);
 
-void func_0001AA20(void *arg0) {
+void func_0001AA20(struct Unk_func_0001AA20_0 *arg0) {
     s32 temp_a3;
     s32 temp_v1_2;
     u32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, u32 *, 0x1C);
+    temp_v1 = arg0->unk1C;
     if ((temp_v1 != 0) && (temp_a3 = __builtin_allegrex_wsbw(-0x100), temp_v1_2 = __builtin_allegrex_wsbw(0xE0000000), ((temp_v1 < 3U) != 0))) {
-        if (((M2C_FIELD(arg0, s32 *, 0) & temp_a3) != temp_v1_2) && !(M2C_FIELD(M2C_FIELD(arg0, void **, 4), u16 *, 0x30) & 8) && (M2C_FIELD(M2C_FIELD(arg0, void **, 0x20), s32 *, 4) != 1)) {
+        if (((arg0->unk0 & temp_a3) != temp_v1_2) && !(M2C_FIELD(arg0->unk4, u16 *, 0x30) & 8) && (M2C_FIELD(arg0->unk20, s32 *, 4) != 1)) {
             func_0001A714((s32) arg0, 0x17);
         }
     }
@@ -949,14 +949,14 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0001C374);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0001C448);
 
-void func_0001C57C(void *arg0, s16 arg1) {
+void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1) {
     void *var_a2;
 
-    var_a2 = M2C_FIELD(arg0, void **, 0x1C);
+    var_a2 = arg0->unk1C;
     M2C_FIELD(var_a2, s16 *, 0x3C) = arg1;
     if (M2C_FIELD(var_a2, u16 *, 0x64) & 0x3C) {
         func_000048B8((s32) var_a2, (s32) (var_a2 + 0x44));
-        var_a2 = M2C_FIELD(arg0, void **, 0x1C);
+        var_a2 = arg0->unk1C;
     }
     if (!(M2C_FIELD(var_a2, u16 *, 0x8C) & 0x3C)) {
 
@@ -1013,14 +1013,14 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00022E84);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00023030);
 
-s32 func_000232C0(void *arg0) {
+s32 func_000232C0(struct Unk_func_000232C0_0 *arg0) {
     s32 var_v0;
     void *temp_v1;
     void *temp_v1_2;
     void *var_s0;
 
     var_v0 = 0;
-    var_s0 = M2C_FIELD(arg0, void **, 4);
+    var_s0 = arg0->unk4;
     if (var_s0 != NULL) {
         do {
             temp_v1 = M2C_FIELD(var_s0, void **, 0);
@@ -1035,7 +1035,7 @@ s32 func_000232C0(void *arg0) {
             *M2C_FIELD(var_s0, void ***, 0x18) = temp_v1_2;
             sceNetIfhandle_lib_F56FAC82(M2C_FIELD(var_s0, s32 *, 0xC));
             sceNetIfhandle_lib_76BAD213(var_s0);
-            var_s0 = M2C_FIELD(arg0, void **, 4);
+            var_s0 = arg0->unk4;
             var_v0 = 1;
         } while (var_s0 != NULL);
     }
@@ -1048,8 +1048,8 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_000235D0);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00023704);
 
-s32 func_00023828(void *arg0) {
-    return (((M2C_FIELD(arg0, u16 *, 0x2A) & 0x188) ^ 0x180) != 0) ? 0 : 0xC;
+s32 func_00023828(struct Unk_func_00023828_0 *arg0) {
+    return (((arg0->unk2A & 0x188) ^ 0x180) != 0) ? 0 : 0xC;
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00023840);
@@ -1058,10 +1058,10 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00023908);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_000239E4);
 
-void func_00023AB8(void *arg0) {
+void func_00023AB8(struct Unk_func_00023AB8_0 *arg0) {
     void *temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, void **, 0x10);
+    temp_v1 = arg0->unk10;
     if (temp_v1 != NULL) {
         M2C_FIELD(temp_v1, s32 *, 0x78) = (s32) M2C_FIELD(temp_v1, u16 *, 0x26);
     }
@@ -1177,14 +1177,14 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_000276A4);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_000277E0);
 
-s32 func_00027830(void *arg0) {
+s32 func_00027830(struct Unk_func_00027830_0 *arg0) {
     s32 temp_a0;
     s32 var_s1;
 
     var_s1 = 0;
     temp_a0 = sceNet_lib_94B44F26();
-    if (M2C_FIELD(arg0, s32 *, 0x130) == 0) {
-        var_s1 = M2C_FIELD(arg0, s32 *, 0xD4) == 0;
+    if (arg0->unk130 == 0) {
+        var_s1 = arg0->unkD4 == 0;
     }
     sceNet_lib_515B2F33(temp_a0);
     return var_s1;
@@ -1231,8 +1231,8 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_000286C8);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00028758);
 
-void func_00028768(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) | 2);
+void func_00028768(struct Unk_func_00028768_0 *arg0) {
+    arg0->unk254 = (s32) (arg0->unk254 | 2);
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00028778);
@@ -1253,8 +1253,8 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_000288EC);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00028930);
 
-void func_000289B0(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) | 8);
+void func_000289B0(struct Unk_func_000289B0_0 *arg0) {
+    arg0->unk254 = (s32) (arg0->unk254 | 8);
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_000289C0);

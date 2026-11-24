@@ -4,6 +4,31 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_0000038C_0 {
+    s32 unk0;
+    u32 unk4;
+};
+
+struct Unk_func_000003B8_0 {
+    s32 unk0;
+    s32 unk4;
+};
+
+struct Unk_func_000003E4_0 {
+    s32 unk0;
+    u32 unk4;
+};
+
+struct Unk_func_00000410_0 {
+    s32 unk0;
+    u32 unk4;
+};
+
+struct Unk_func_00004BEC_0 {
+    u8 pad0[0x1];
+    u8 unk1;
+};
+
 extern M2C_UNK D_000060F0;
 extern M2C_UNK D_000060F8;
 extern M2C_UNK D_00006100;
@@ -13,10 +38,10 @@ extern M2C_UNK func_00002D8C;
 M2C_UNK ThreadManForKernel_BC31C1B9(M2C_UNK, M2C_UNK *, s32);
 s32 func_00000000(s32);
 s32 func_00000108(void);
-s32 func_0000038C(void *arg0);
-s32 func_000003B8(void *arg0);
-s32 func_000003E4(void *arg0);
-s32 func_00000410(void *arg0, u32 arg1);
+s32 func_0000038C(struct Unk_func_0000038C_0 *arg0);
+s32 func_000003B8(struct Unk_func_000003B8_0 *arg0);
+s32 func_000003E4(struct Unk_func_000003E4_0 *arg0);
+s32 func_00000410(struct Unk_func_00000410_0 *arg0, u32 arg1);
 s32 func_0000043C(M2C_UNK);
 s32 func_000004DC(s32 arg0, M2C_UNK arg1);
 s32 func_000005A0(s32 arg0, s32 arg1);
@@ -24,7 +49,7 @@ s32 func_00001084(void);
 void func_00002F54(s32 arg0);
 s32 func_00004834(s32, s32, s32);
 s32 func_000049D0(void *arg0, s32 *arg1, s32 *arg2, s32 *arg3);
-s32 func_00004BEC(void *arg0);
+s32 func_00004BEC(struct Unk_func_00004BEC_0 *arg0);
 s32 func_000055A8(s32, s32);
 s32 func_00005850(s32 arg0);
 M2C_UNK sceMgVideo_driver_02CD7137();

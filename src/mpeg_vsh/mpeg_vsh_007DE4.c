@@ -40,21 +40,21 @@ s32 func_00007E9C(s32 arg0) {
     return var_v0;
 }
 
-s32 func_00007F04(void *arg0, s32 arg1) {
+s32 func_00007F04(struct Unk_func_00007F04_0 *arg0, s32 arg1) {
     s32 temp_s1;
 
     func_000079D8(D_00009F80);
-    M2C_FIELD(arg0, s32 *, 0x50) = arg1;
+    arg0->unk50 = arg1;
     temp_s1 = sceVideocodec_627B7D42(arg0, 0);
     func_00007A68(D_00009F80);
     return temp_s1;
 }
 
-s32 func_00007F64(void *arg0, s32 arg1) {
+s32 func_00007F64(struct Unk_func_00007F64_0 *arg0, s32 arg1) {
     s32 temp_s1;
 
     func_000079D8(D_00009F80);
-    M2C_FIELD(arg0, s32 *, 0x54) = arg1;
+    arg0->unk54 = arg1;
     temp_s1 = sceVideocodec_17CF7D2C(arg0, 0);
     func_00007A68(D_00009F80);
     return temp_s1;

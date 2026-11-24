@@ -14,6 +14,115 @@ struct D_0001925C_s {
     s32 unk18;
 };
 
+struct Unk_func_00003114_0 {
+    s32 unk0;
+    u8 pad4[0x170];
+    u32 unk174;
+    u8 pad178[0xC];
+    void * unk184;
+};
+
+struct Unk_func_00003158_0 {
+    u8 pad0[0x1DC];
+    s32 unk1DC;
+    M2C_UNK * unk1E0;
+    s32 unk1E4;
+};
+
+struct Unk_func_000031DC_0 {
+    u8 pad0[0x1DC];
+    s32 unk1DC;
+    s32 unk1E0;
+};
+
+struct Unk_func_00003268_0 {
+    u8 pad0[0x134];
+    u32 unk134;
+    s32 unk138;
+    s32 unk13C;
+    s32 unk140;
+    void * unk144;
+};
+
+struct Unk_func_00003304_0 {
+    u8 pad0[0x134];
+    u32 unk134;
+    u8 pad138[0xC];
+    void * unk144;
+};
+
+struct Unk_func_00003374_0 {
+    u8 pad0[0x134];
+    u32 unk134;
+    u8 pad138[0xC];
+    void * unk144;
+};
+
+struct Unk_func_000033E4_0 {
+    u8 pad0[0x15C];
+    void * unk15C;
+};
+
+struct Unk_func_00003CE0_0 {
+    u8 pad0[0x178];
+    u32 unk178;
+    u8 pad17C[0x64];
+    void * unk1E0;
+};
+
+struct Unk_func_0000829C_0 {
+    s32 unk0;
+    s32 unk4;
+};
+
+struct Unk_func_00008470_0 {
+    u8 pad0[0x17C];
+    u32 unk17C;
+};
+
+struct Unk_func_00008470_1 {
+    u8 pad0[0xC];
+    u32 unkC;
+    u32 unk10;
+    u8 pad14[0xD4];
+    s32 unkE8;
+    void * unkEC;
+    u8 padF0[0x8];
+    u32 unkF8;
+    u32 unkFC;
+    void * unk100;
+    void * unk104;
+    void * unk108;
+};
+
+struct Unk_func_0000B3CC_1 {
+    u8 pad0[0x30];
+    u16 * unk30;
+};
+
+struct Unk_func_0000F370_0 {
+    u8 pad0[0xB8];
+    void * unkB8;
+};
+
+struct Unk_func_00015958_0 {
+    u8 pad0[0xB8];
+    void * unkB8;
+    u8 padBC[0x6C];
+    s32 unk128;
+};
+
+struct Unk_func_00017EA4_1 {
+    s32 unk0;
+    u16 unk4;
+};
+
+struct Unk_func_00017FC4_1 {
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+};
+
 extern void *D_000191B0;
 extern struct D_0001925C_s D_0001925C;
 extern s32 D_00019290;
@@ -27,45 +136,45 @@ extern s32 D_000192B4;
 
 M2C_UNK DmacManForKernel_745E19EF(s32);
 M2C_UNK InterruptManagerForKernel_CDC86B64(s32, M2C_UNK, s32, M2C_UNK);
-void func_00003114(void *arg0);
-void func_00003138(void *arg0);
-void func_00003158(void *arg0);
-void func_000031DC(void *arg0);
-void func_00003268(void *arg0, s32 arg1);
-s32 func_00003304(void *arg0);
-void func_00003374(void *arg0);
-void func_000033E4(void *arg0);
-s32 func_00003CE0(void *arg0);
+void func_00003114(struct Unk_func_00003114_0 *arg0);
+void func_00003138(struct Unk_func_00003114_0 *arg0);
+void func_00003158(struct Unk_func_00003158_0 *arg0);
+void func_000031DC(struct Unk_func_000031DC_0 *arg0);
+void func_00003268(struct Unk_func_00003268_0 *arg0, s32 arg1);
+s32 func_00003304(struct Unk_func_00003304_0 *arg0);
+void func_00003374(struct Unk_func_00003374_0 *arg0);
+void func_000033E4(struct Unk_func_000033E4_0 *arg0);
+s32 func_00003CE0(struct Unk_func_00003CE0_0 *arg0);
 s32 func_00004A04(s32);
 s32 func_00004B20(s32 *arg0);
-s32 func_0000829C(void *arg0);
+s32 func_0000829C(struct Unk_func_0000829C_0 *arg0);
 void func_000082AC(void);
 s32 func_000083B4(s32 *arg0);
 void func_000083C0(u32 arg0);
 void func_000083F0(u32 arg0);
-void func_00008470(void *arg0, void *arg1);
+void func_00008470(struct Unk_func_00008470_0 *arg0, struct Unk_func_00008470_1 *arg1);
 s32 func_000090E8(void *arg0, s32 arg1, s8 *arg2);
 s32 func_00009160(void *arg0, s32 arg1, u8 *arg2);
-void func_0000AB18(void *arg0);
+void func_0000AB18(struct Unk_func_00008470_1 *arg0);
 void func_0000AC3C(void);
 void func_0000AC90(void *arg0);
 s32 func_0000AF1C(void *arg0, s32 arg1, u16 *arg2);
 s32 func_0000B018(void *arg0, s32 arg1, s32 *arg2);
 void func_0000B24C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-s32 func_0000B3CC(s32 arg0, void *arg1, M2C_UNK arg2);
+s32 func_0000B3CC(s32 arg0, struct Unk_func_0000B3CC_1 *arg1, M2C_UNK arg2);
 s32 func_0000BD90(s32, s32, s32, s32);
 s32 func_0000BE8C(s32, s32, s32, s32);
 s32 func_0000BF70(void);
 s32 func_0000D18C(void);
 s32 func_0000E5F0(s32, s32, s32);
-s32 func_0000F370(void *arg0);
-void func_00015958(void *arg0);
+s32 func_0000F370(struct Unk_func_0000F370_0 *arg0);
+void func_00015958(struct Unk_func_00015958_0 *arg0);
 s32 func_000161A4(s32, s32, s32, s32, s32);
 s32 func_00017880(s32);
-s32 func_00017A3C(void *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4);
-s32 func_00017BCC(void *arg0, s32 arg1, s32 arg2);
-s32 func_00017EA4(void *arg0, void *arg1);
-s32 func_00017FC4(void *arg0, void *arg1);
+s32 func_00017A3C(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4);
+s32 func_00017BCC(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2);
+s32 func_00017EA4(struct Unk_func_00003114_0 *arg0, struct Unk_func_00017EA4_1 *arg1);
+s32 func_00017FC4(struct Unk_func_00003114_0 *arg0, struct Unk_func_00017FC4_1 *arg1);
 s32 module_reboot_before(void);
 s32 sceKernelCancelAlarm(s32);
 s32 sceKernelCancelCallback(s32);

@@ -13,6 +13,21 @@ struct D_00169648_s {
     u8 unk2D;
 };
 
+struct Unk_func_0000BF1C_0 {
+    u8 pad0[0x18];
+    s32 unk18;
+};
+
+struct Unk_func_0003600C_0 {
+    u8 pad0[0x4C];
+    s32 unk4C;
+};
+
+struct Unk_func_0003600C_1 {
+    void * unk0;
+    s32 unk4;
+};
+
 extern s32 D_001212C0;
 extern s32 D_001613D4;
 extern s32 D_001613D8;
@@ -35,7 +50,7 @@ void func_0000825C(void);
 M2C_UNK func_00009A58();
 s32 func_0000B784(void);
 void func_0000B8DC(s32 arg0, s32 arg1);
-void func_0000BF1C(void *arg0);
+void func_0000BF1C(struct Unk_func_0000BF1C_0 *arg0);
 s32 func_0000BF24(void);
 s32 func_0000C478(void);
 s32 func_0000CC30(void);
@@ -89,7 +104,7 @@ s32 func_000348F8(void);
 void func_00035298(void);
 s32 func_00035ACC(s32 *arg0, s32 arg1);
 s32 func_00035F54(s32, s32);
-void func_0003600C(void *arg0, void *arg1);
+void func_0003600C(struct Unk_func_0003600C_0 *arg0, struct Unk_func_0003600C_1 *arg1);
 void func_000363A8(s32 arg0, s32 arg1);
 M2C_UNK sceIoRename();
 s32 sceKernelCancelAlarm(s32);

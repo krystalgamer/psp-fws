@@ -74,12 +74,12 @@ s32 func_000009E8(void) {
     return 0;
 }
 
-s32 func_000009F0(void *arg0) {
-    return (M2C_FIELD(arg0, s32 *, 4) < 3) ? 0 : 0x80010006;
+s32 func_000009F0(struct Unk_func_000009F0_0 *arg0) {
+    return (arg0->unk4 < 3) ? 0 : 0x80010006;
 }
 
-s32 func_00000A08(void *arg0) {
-    return (M2C_FIELD(arg0, s32 *, 4) < 3) ? 0 : 0x80010006;
+s32 func_00000A08(struct Unk_func_00000A08_0 *arg0) {
+    return (arg0->unk4 < 3) ? 0 : 0x80010006;
 }
 
 INCLUDE_ASM("tmp/asm/340/idcheck/nonmatchings/idcheck", func_00000A20);

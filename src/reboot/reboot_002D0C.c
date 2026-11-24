@@ -261,8 +261,8 @@ s32 func_00008ED4(s32 arg0) {
     return temp_s0;
 }
 
-void func_00008F0C(void *arg0, M2C_UNK arg1, M2C_UNK arg2) {
+void func_00008F0C(struct Unk_func_00008F0C_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
     func_0000E028();
-    func_000079E4(M2C_FIELD(arg0, s32 *, 0x10), arg1, arg2, 0);
+    func_000079E4(arg0->unk10, arg1, arg2, 0);
 }
 

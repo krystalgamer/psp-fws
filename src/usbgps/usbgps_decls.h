@@ -21,6 +21,11 @@ struct D_00008478_s {
     volatile s32 unkC0;
 };
 
+struct Unk_func_00002978_0 {
+    u8 pad0[0x20];
+    void * unk20;
+};
+
 extern M2C_UNK D_00005960;
 extern struct D_000059B0_s D_000059B0;
 extern struct D_00008478_s D_00008478;
@@ -32,7 +37,7 @@ s32 func_00001504(s32 arg0);
 s32 func_000027AC(void);
 s32 func_00002804(void);
 s32 func_00002888(s32 *arg0);
-void func_00002978(void *arg0);
+void func_00002978(struct Unk_func_00002978_0 *arg0);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelSetEventFlag(s32, u32);

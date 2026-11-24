@@ -15,7 +15,7 @@
   "func_00007554": "s32 func_00007554(s32 arg0);",
   "func_000075A4": "s32 func_000075A4(void);",
   "func_000076B4": "s32 func_000076B4(void);",
-  "func_00008318": "void *func_00008318(void *arg0, void *arg1);",
+  "func_00008318": "void *func_00008318(struct Unk_func_00008318_0 *arg0, struct Unk_func_00008318_1 *arg1);",
   "func_00008A30": "s32 func_00008A30(void);",
   "func_00008AA8": "void func_00008AA8(void);",
   "func_00008BD8": "s32 func_00008BD8(void);",
@@ -39,6 +39,10 @@
   "sceUsbBus_driver_FBA2072B": "void sceUsbBus_driver_FBA2072B(void);",
   "sceUsbWaitState": "s32 sceUsbWaitState(u32 arg0, s32 arg1, void *arg2);",
   "sceUsbWaitStateCB": "s32 sceUsbWaitStateCB(u32 arg0, s32 arg1, void *arg2);"
+ },
+ "types": {
+  "Unk_func_00008318_0": "struct Unk_func_00008318_0 {\n    u8 pad0[0x40];\n    void * unk40;\n};",
+  "Unk_func_00008318_1": "struct Unk_func_00008318_1 {\n    u8 pad0[0x40];\n    s32 unk40;\n};"
  },
  "vars": {
   "D_00009A3C": "extern M2C_UNK D_00009A3C;",

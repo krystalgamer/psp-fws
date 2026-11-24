@@ -99,21 +99,21 @@ INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", func_000009F4);
 
 INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", sceVshCommonUtil_2ACAD845);
 
-void sceVshCommonUtil_98E57F6D(void *arg0) {
+void sceVshCommonUtil_98E57F6D(struct Unk_sceVshCommonUtil_98E57F6D_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 8);
+    temp_a0 = arg0->unk8;
     if (temp_a0 != 0) {
-        if (M2C_FIELD(arg0, u8 *, 0x10) != 0) {
+        if (arg0->unk10 != 0) {
             sceReg_0D69BF40(temp_a0);
         }
-        sceReg_0CAE832B(M2C_FIELD(arg0, s32 *, 8));
+        sceReg_0CAE832B(arg0->unk8);
     }
-    if (M2C_FIELD(arg0, u8 *, 0) != 0) {
-        if (M2C_FIELD(arg0, u8 *, 0x10) != 0) {
-            sceReg_39461B4D(M2C_FIELD(arg0, s32 *, 4));
+    if (arg0->unk0 != 0) {
+        if (arg0->unk10 != 0) {
+            sceReg_39461B4D(arg0->unk4);
         }
-        sceReg_FA8A5739(M2C_FIELD(arg0, s32 *, 4));
+        sceReg_FA8A5739(arg0->unk4);
     }
 }
 

@@ -139,46 +139,46 @@ s32 func_00003A54(void **arg0) {
     return 0;
 }
 
-s32 func_00003AA8(void *arg0) {
+s32 func_00003AA8(struct Unk_func_00003AA8_0 *arg0) {
     s32 temp_a3;
     void *var_v1;
 
-    var_v1 = M2C_FIELD(arg0, void **, 4);
+    var_v1 = arg0->unk4;
     temp_a3 = M2C_FIELD(var_v1, s32 *, 0x4F0);
     if (!(temp_a3 & 0x10)) {
         M2C_FIELD(var_v1, s32 *, 0x4F0) = (s32) (temp_a3 | 0x10);
-        sceKernelSendMbx(M2C_FIELD(M2C_FIELD(arg0, void **, 0), u32 *, 4), var_v1 + 0x4A0);
-        var_v1 = M2C_FIELD(arg0, void **, 4);
+        sceKernelSendMbx(M2C_FIELD(arg0->unk0, u32 *, 4), var_v1 + 0x4A0);
+        var_v1 = arg0->unk4;
     }
     M2C_FIELD(var_v1, s32 *, 0x4E0) = 0;
     return 0;
 }
 
-s32 func_00003B00(void *arg0) {
+s32 func_00003B00(struct Unk_func_00003B00_0 *arg0) {
     s32 temp_a3;
     void *var_v1;
 
-    var_v1 = M2C_FIELD(arg0, void **, 4);
+    var_v1 = arg0->unk4;
     temp_a3 = M2C_FIELD(var_v1, s32 *, 0x4F0);
     if (!(temp_a3 & 0x40)) {
         M2C_FIELD(var_v1, s32 *, 0x4F0) = (s32) (temp_a3 | 0x40);
-        sceKernelSendMbx(M2C_FIELD(M2C_FIELD(arg0, void **, 0), u32 *, 4), var_v1 + 0x4D0);
-        var_v1 = M2C_FIELD(arg0, void **, 4);
+        sceKernelSendMbx(M2C_FIELD(arg0->unk0, u32 *, 4), var_v1 + 0x4D0);
+        var_v1 = arg0->unk4;
     }
     M2C_FIELD(var_v1, s32 *, 0x4E8) = 0;
     return 0;
 }
 
-s32 func_00003B58(void *arg0) {
+s32 func_00003B58(struct Unk_func_00003B58_0 *arg0) {
     s32 temp_a3;
     void *var_v1;
 
-    var_v1 = M2C_FIELD(arg0, void **, 4);
+    var_v1 = arg0->unk4;
     temp_a3 = M2C_FIELD(var_v1, s32 *, 0x4F0);
     if (!(temp_a3 & 0x80)) {
         M2C_FIELD(var_v1, s32 *, 0x4F0) = (s32) (temp_a3 | 0x80);
-        sceKernelSendMbx(M2C_FIELD(M2C_FIELD(arg0, void **, 0), u32 *, 4), var_v1 + 0x4B8);
-        var_v1 = M2C_FIELD(arg0, void **, 4);
+        sceKernelSendMbx(M2C_FIELD(arg0->unk0, u32 *, 4), var_v1 + 0x4B8);
+        var_v1 = arg0->unk4;
     }
     M2C_FIELD(var_v1, s32 *, 0x4E4) = 0;
     return 0;

@@ -4,6 +4,21 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00003AA8_0 {
+    void * unk0;
+    void * unk4;
+};
+
+struct Unk_func_00003B00_0 {
+    void * unk0;
+    void * unk4;
+};
+
+struct Unk_func_00003B58_0 {
+    void * unk0;
+    void * unk4;
+};
+
 extern s32 D_00004600;
 extern s32 D_00004604;
 extern s32 D_00004608;
@@ -17,9 +32,9 @@ void func_00001650(void);
 s32 func_000018BC(void);
 void func_000018F0(void);
 s32 func_00003A54(void **arg0);
-s32 func_00003AA8(void *arg0);
-s32 func_00003B00(void *arg0);
-s32 func_00003B58(void *arg0);
+s32 func_00003AA8(struct Unk_func_00003AA8_0 *arg0);
+s32 func_00003B00(struct Unk_func_00003B00_0 *arg0);
+s32 func_00003B58(struct Unk_func_00003B58_0 *arg0);
 void func_00003F24(s32 *arg0, s32 arg1);
 s32 func_00003F2C(void);
 s32 func_00003F80(void);

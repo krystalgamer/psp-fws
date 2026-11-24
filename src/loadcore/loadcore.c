@@ -87,8 +87,8 @@ void LoadCoreForKernel_0DE1F600(s32 arg0, s32 arg1) {
     func_0000175C(arg0, arg1, 1, 0);
 }
 
-void LoadCoreForKernel_C0913394(void *arg0, s32 arg1, s32 arg2) {
-    func_0000175C(arg1, arg2, 1, M2C_FIELD(arg0, s32 *, 0xD4));
+void LoadCoreForKernel_C0913394(struct Unk_LoadCoreForKernel_C0913394_0 *arg0, s32 arg1, s32 arg2) {
+    func_0000175C(arg1, arg2, 1, arg0->unkD4);
 }
 
 s32 LoadCoreForKernel_A8E2D53D(void) {
@@ -245,9 +245,9 @@ INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", LoadCoreForKernel_CCE4
 
 INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", func_00006280);
 
-s32 func_0000630C(void *arg0) {
+s32 func_0000630C(struct Unk_func_0000630C_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", sceKernelDcacheWBinvAll);

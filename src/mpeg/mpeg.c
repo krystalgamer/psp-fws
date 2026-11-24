@@ -162,21 +162,21 @@ s32 func_00003198(void) {
     return 0;
 }
 
-s32 func_000031A0(void *arg0) {
+s32 func_000031A0(struct Unk_func_000031A0_0 *arg0) {
     s32 *temp_v1;
     s32 temp_s0;
     s32 temp_v0;
     s32 var_v0;
     void *temp_s2;
 
-    temp_v1 = M2C_FIELD(arg0, s32 **, 0x28);
+    temp_v1 = arg0->unk28;
     temp_s2 = *temp_v1;
     temp_v0 = func_00001AF4(temp_v1);
     if (temp_v0 != 0) {
         var_v0 = temp_v0;
     } else {
         func_00006D70(M2C_FIELD(temp_s2, u32 *, 0x66C));
-        temp_s0 = M2C_FIELD(arg0, s32 *, 0xC);
+        temp_s0 = arg0->unkC;
         func_00006E00(M2C_FIELD(temp_s2, u32 *, 0x66C));
         var_v0 = temp_s0;
     }
@@ -207,8 +207,8 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004AC0);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004E3C);
 
-s32 func_00004E70(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 8) = arg1;
+s32 func_00004E70(struct Unk_func_00004E70_0 *arg0, s32 arg1) {
+    arg0->unk8 = arg1;
     return 0;
 }
 
@@ -258,8 +258,8 @@ s32 func_000054F0(s32 arg0) {
     return __builtin_allegrex_ins(func_00007B0C(arg0 + 1), 0, 0x15, 0xB);
 }
 
-u8 func_00005510(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 3);
+u8 func_00005510(struct Unk_func_00005510_0 *arg0) {
+    return arg0->unk3;
 }
 
 void *func_00005518(void *arg0, s32 arg1) {
@@ -272,8 +272,8 @@ void *func_00005518(void *arg0, s32 arg1) {
     return var_v0;
 }
 
-u8 func_0000553C(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 1);
+u8 func_0000553C(struct Unk_func_0000553C_0 *arg0) {
+    return arg0->unk1;
 }
 
 s32 func_00005544(s32 arg0, s32 arg1) {
@@ -474,11 +474,11 @@ s32 func_000071E0(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007234);
 
-s32 func_000072FC(void *arg0, s32 arg1) {
+s32 func_000072FC(struct Unk_func_000072FC_0 *arg0, s32 arg1) {
     s32 temp_s1;
 
     func_00006D70(D_000084C0);
-    M2C_FIELD(arg0, s32 *, 0x54) = arg1;
+    arg0->unk54 = arg1;
     temp_s1 = sceVideocodec_17CF7D2C(arg0, 0);
     func_00006E00(D_000084C0);
     return temp_s1;

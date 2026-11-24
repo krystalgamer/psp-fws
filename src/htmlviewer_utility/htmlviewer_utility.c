@@ -645,11 +645,11 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", fu
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", func_00003F74);
 
-s32 func_00003FC0(void *arg0) {
+s32 func_00003FC0(struct Unk_func_00003FC0_0 *arg0) {
     if (arg0 != NULL) {
-        D_00006F28.unk0 = (s32) M2C_FIELD(arg0, s32 *, 0);
-        D_00006F28.unk4 = (s32) M2C_FIELD(arg0, s32 *, 4);
-        D_00006F28.unk8 = (s32) M2C_FIELD(arg0, s32 *, 8);
+        D_00006F28.unk0 = (s32) arg0->unk0;
+        D_00006F28.unk4 = (s32) arg0->unk4;
+        D_00006F28.unk8 = (s32) arg0->unk8;
     }
     return 0;
 }

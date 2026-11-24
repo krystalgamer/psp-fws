@@ -90,12 +90,12 @@ s32 func_00000A20(void) {
     return 0;
 }
 
-s32 func_00000A28(void *arg0) {
-    return (M2C_FIELD(arg0, s32 *, 4) < 3) ? 0 : 0x800203E8;
+s32 func_00000A28(struct Unk_func_00000A28_0 *arg0) {
+    return (arg0->unk4 < 3) ? 0 : 0x800203E8;
 }
 
-s32 func_00000A40(void *arg0) {
-    return (M2C_FIELD(arg0, s32 *, 4) < 3) ? 0 : 0x800203E8;
+s32 func_00000A40(struct Unk_func_00000A40_0 *arg0) {
+    return (arg0->unk4 < 3) ? 0 : 0x800203E8;
 }
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000A58);

@@ -168,8 +168,8 @@ INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_00005048);
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh", func_000052E4);
 
-s32 func_00005318(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 8) = arg1;
+s32 func_00005318(struct Unk_func_00005318_0 *arg0, s32 arg1) {
+    arg0->unk8 = arg1;
     return 0;
 }
 
@@ -223,8 +223,8 @@ s32 func_00005BCC(s32 arg0) {
     return __builtin_allegrex_ins(func_00009548(arg0 + 1), 0, 0x15, 0xB);
 }
 
-u8 func_00005BEC(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 3);
+u8 func_00005BEC(struct Unk_func_00005BEC_0 *arg0) {
+    return arg0->unk3;
 }
 
 void *func_00005BF4(void *arg0, s32 arg1) {
@@ -237,7 +237,7 @@ void *func_00005BF4(void *arg0, s32 arg1) {
     return var_v0;
 }
 
-u8 func_00005C18(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 1);
+u8 func_00005C18(struct Unk_func_00005C18_0 *arg0) {
+    return arg0->unk1;
 }
 

@@ -33,7 +33,7 @@
   "func_00003950": "void func_00003950(void);",
   "func_00003980": "void func_00003980(void);",
   "func_00003AB4": "void func_00003AB4(void);",
-  "func_00003FC0": "s32 func_00003FC0(void *arg0);",
+  "func_00003FC0": "s32 func_00003FC0(struct Unk_func_00003FC0_0 *arg0);",
   "func_000041CC": "s32 func_000041CC(M2C_UNK **arg0, s32 *arg1);",
   "func_00004350": "M2C_UNK func_00004350(s8 *);",
   "func_00004398": "s8 *func_00004398(s8 *arg0);",
@@ -58,7 +58,8 @@
  },
  "types": {
   "D_0000616C_s": "struct D_0000616C_s {\n    u8 pad0[0x30];\n    s32 unk30;\n};",
-  "D_00006F28_s": "struct D_00006F28_s {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n};"
+  "D_00006F28_s": "struct D_00006F28_s {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n};",
+  "Unk_func_00003FC0_0": "struct Unk_func_00003FC0_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n};"
  },
  "vars": {
   "D_00005FC4": "extern s8 D_00005FC4;",

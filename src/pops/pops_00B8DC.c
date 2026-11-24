@@ -24,8 +24,8 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00B8DC", func_0000BBDC);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00B8DC", func_0000BD60);
 
-void func_0000BF1C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+void func_0000BF1C(struct Unk_func_0000BF1C_0 *arg0) {
+    arg0->unk18 = 0;
 }
 
 s32 func_0000BF24(void) {

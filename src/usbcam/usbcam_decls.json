@@ -2,7 +2,7 @@
  "funcs": {
   "KDebugForKernel_84F370BC": "M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);",
   "func_000039E8": "void func_000039E8(void);",
-  "func_000039F0": "void func_000039F0(void *arg0);",
+  "func_000039F0": "void func_000039F0(struct Unk_func_000039F0_0 *arg0);",
   "func_00008E1C": "s32 func_00008E1C(void);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceUsbBus_driver_C1E2A540": "s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);",
@@ -17,7 +17,8 @@
   "sceUsbCam_driver_95F8901E": "s32 sceUsbCam_driver_95F8901E(void);"
  },
  "types": {
-  "D_0000BC08_s": "struct D_0000BC08_s {\n    u8 pad0[0x14];\n    volatile s32 unk14;\n    u8 pad18[0x1BC];\n    volatile s32 unk1D4;\n    volatile s32 unk1D8;\n};"
+  "D_0000BC08_s": "struct D_0000BC08_s {\n    u8 pad0[0x14];\n    volatile s32 unk14;\n    u8 pad18[0x1BC];\n    volatile s32 unk1D4;\n    volatile s32 unk1D8;\n};",
+  "Unk_func_000039F0_0": "struct Unk_func_000039F0_0 {\n    u8 pad0[0x18];\n    s32 unk18;\n};"
  },
  "vars": {
   "D_0000A658": "extern M2C_UNK D_0000A658;",

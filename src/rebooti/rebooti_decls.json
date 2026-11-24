@@ -20,8 +20,8 @@
   "func_0000348C": "void func_0000348C(s8 arg0);",
   "func_000034E8": "s32 func_000034E8(void);",
   "func_000034F0": "s32 func_000034F0(void);",
-  "func_00003BB4": "void func_00003BB4(void *arg0, s32 arg1);",
-  "func_00003ED8": "s32 func_00003ED8(void *arg0);",
+  "func_00003BB4": "void func_00003BB4(struct Unk_func_00003BB4_0 *arg0, s32 arg1);",
+  "func_00003ED8": "s32 func_00003ED8(struct Unk_func_00003ED8_0 *arg0);",
   "func_00006114": "s32 func_00006114(void);",
   "func_000061C4": "s32 func_000061C4(void);",
   "func_000069D4": "M2C_UNK func_000069D4(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
@@ -33,7 +33,7 @@
   "func_00007E54": "s32 func_00007E54(void);",
   "func_00007E5C": "void func_00007E5C(s32 arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3);",
   "func_00007EB8": "s32 func_00007EB8(s32 arg0);",
-  "func_00007EF0": "void func_00007EF0(void *arg0, M2C_UNK arg1, M2C_UNK arg2);",
+  "func_00007EF0": "void func_00007EF0(struct Unk_func_00007EF0_0 *arg0, M2C_UNK arg1, M2C_UNK arg2);",
   "func_00008238": "void func_00008238(s32 arg0, M2C_UNK arg1);",
   "func_00008274": "void func_00008274(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);",
   "func_000083A0": "s32 func_000083A0(void);",
@@ -88,6 +88,11 @@
   "func_00012644": "void func_00012644(void);",
   "func_000127F8": "M2C_UNK func_000127F8(M2C_UNK, M2C_UNK);",
   "syslib_D3744BE0": "s32 syslib_D3744BE0(void);"
+ },
+ "types": {
+  "Unk_func_00003BB4_0": "struct Unk_func_00003BB4_0 {\n    u8 pad0[0x48];\n    s32 unk48;\n};",
+  "Unk_func_00003ED8_0": "struct Unk_func_00003ED8_0 {\n    s32 unk0;\n    s32 unk4;\n};",
+  "Unk_func_00007EF0_0": "struct Unk_func_00007EF0_0 {\n    u8 pad0[0x10];\n    s32 unk10;\n};"
  },
  "vars": {
   "D_00014F21": "extern M2C_UNK D_00014F21;"

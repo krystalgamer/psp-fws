@@ -4,13 +4,18 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00002014_0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
 extern M2C_UNK D_0000610C;
 extern s32 D_000062A0;
 extern s32 D_000062A4;
 extern s32 D_000062B0;
 extern s32 D_000062BC;
 
-void func_00002014(void *arg0);
+void func_00002014(struct Unk_func_00002014_0 *arg0);
 s32 func_00002068(s32, s32, s32, s32);
 void func_00002280(s32 arg0, s32 arg1);
 s32 func_000030BC(s32 *arg0);

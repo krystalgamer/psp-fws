@@ -59,6 +59,11 @@ struct D_00007FF8_s {
     volatile s32 unk18;
 };
 
+struct Unk_func_00005054_0 {
+    s32 unk0;
+    s32 unk4;
+};
+
 extern M2C_UNK D_00007980;
 extern M2C_UNK D_000079A0;
 extern M2C_UNK D_00007BF0;
@@ -100,7 +105,7 @@ s32 func_000035F0(s32);
 s32 func_000036F8(s32);
 s32 func_000039B0(void);
 s32 func_00004A80(s32, s32, s32, s32);
-s32 func_00005054(void *arg0);
+s32 func_00005054(struct Unk_func_00005054_0 *arg0);
 s32 func_00005260(s32, s32, s32);
 s32 func_0000535C(s32, s32, s32);
 s32 func_0000553C(s32);

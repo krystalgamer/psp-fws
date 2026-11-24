@@ -28,12 +28,12 @@
   "func_00008E70": "s32 func_00008E70(void);",
   "func_00008E78": "void func_00008E78(s32 arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3);",
   "func_00008ED4": "s32 func_00008ED4(s32 arg0);",
-  "func_00008F0C": "void func_00008F0C(void *arg0, M2C_UNK arg1, M2C_UNK arg2);",
+  "func_00008F0C": "void func_00008F0C(struct Unk_func_00008F0C_0 *arg0, M2C_UNK arg1, M2C_UNK arg2);",
   "func_00008F5C": "s32 func_00008F5C(s32 arg0, s32 arg1, s32 arg2);",
   "func_000090DC": "s32 func_000090DC(s32 arg0, s32 arg1, s32 arg2);",
   "func_00009134": "s32 func_00009134(s32 arg0, s32 arg1);",
   "func_0000917C": "s32 func_0000917C(s32 arg0, s32 arg1);",
-  "func_000091C4": "s32 func_000091C4(void *arg0);",
+  "func_000091C4": "s32 func_000091C4(struct Unk_func_000091C4_0 *arg0);",
   "func_00009254": "void func_00009254(s32 arg0, M2C_UNK arg1);",
   "func_00009290": "void func_00009290(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);",
   "func_00009384": "s32 func_00009384(s32 arg0, s32 arg1);",
@@ -46,7 +46,7 @@
   "func_0000AE8C": "s32 func_0000AE8C(s32, s32);",
   "func_0000AFCC": "M2C_UNK func_0000AFCC(s32, M2C_UNK);",
   "func_0000B148": "M2C_UNK func_0000B148(s32, M2C_UNK, M2C_UNK);",
-  "func_0000D694": "s32 func_0000D694(void *arg0);",
+  "func_0000D694": "s32 func_0000D694(struct Unk_func_0000D694_0 *arg0);",
   "func_0000DC4C": "s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
   "func_0000E020": "s32 func_0000E020(void);",
   "func_0000E028": "M2C_UNK func_0000E028();",
@@ -110,6 +110,11 @@
   "func_000138F8": "void func_000138F8(void);",
   "func_00013AAC": "M2C_UNK func_00013AAC(M2C_UNK, M2C_UNK);",
   "syslib_D3744BE0": "s32 syslib_D3744BE0(void);"
+ },
+ "types": {
+  "Unk_func_00008F0C_0": "struct Unk_func_00008F0C_0 {\n    u8 pad0[0x10];\n    s32 unk10;\n};",
+  "Unk_func_000091C4_0": "struct Unk_func_000091C4_0 {\n    u8 pad0[0x10];\n    void * unk10;\n};",
+  "Unk_func_0000D694_0": "struct Unk_func_0000D694_0 {\n    u8 pad0[0x2];\n    u8 unk2;\n    u8 unk3;\n};"
  },
  "vars": {
   "D_00016DEC": "extern s32 D_00016DEC;",

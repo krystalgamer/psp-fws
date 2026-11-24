@@ -4,6 +4,49 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_000008C8_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    s32 unk24;
+};
+
+struct Unk_func_000008F0_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    s32 unk24;
+};
+
+struct Unk_func_00000EFC_0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
+struct Unk_func_00000F6C_0 {
+    u8 pad0[0x24];
+    s32 unk24;
+};
+
+struct Unk_sceVshCommonGui_88F5E3A8_0 {
+    u8 pad0[0xC];
+    s32 unkC;
+    u8 pad10[0x4];
+    s32 unk14;
+};
+
 extern M2C_UNK D_00003264;
 extern M2C_UNK D_000037F0;
 extern M2C_UNK D_00003920;
@@ -18,10 +61,10 @@ void func_0000063C(void);
 void func_000006DC(void);
 void func_00000888(void **arg0, void **arg1);
 void func_000008A8(void **arg0);
-void func_000008C8(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
-void func_000008F0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
-void func_00000EFC(void *arg0, s32 arg1);
-void func_00000F6C(void *arg0, s32 arg1);
+void func_000008C8(struct Unk_func_000008C8_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+void func_000008F0(struct Unk_func_000008F0_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+void func_00000EFC(struct Unk_func_00000EFC_0 *arg0, s32 arg1);
+void func_00000F6C(struct Unk_func_00000F6C_0 *arg0, s32 arg1);
 void func_000017BC(void);
 void func_000017C4(void);
 void func_000017CC(void);
@@ -47,7 +90,7 @@ void sceVshCommonGui_68778E5A(void);
 void sceVshCommonGui_72E652AA(s32 *arg0);
 void sceVshCommonGui_764A5495(void);
 void sceVshCommonGui_80271F41(void);
-void sceVshCommonGui_88F5E3A8(void *arg0, s32 arg1, s32 arg2);
+void sceVshCommonGui_88F5E3A8(struct Unk_sceVshCommonGui_88F5E3A8_0 *arg0, s32 arg1, s32 arg2);
 void sceVshCommonGui_93107A60(void);
 s32 sceVshCommonGui_ACFE7BE7(void **arg0);
 void sceVshCommonGui_B45ED019(void);

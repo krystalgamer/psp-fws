@@ -309,10 +309,10 @@ void func_000039E8(void) {
 
 INCLUDE_RODATA("tmp/asm/282/usbcam/nonmatchings/usbcam", D_0000AE58);
 
-void func_000039F0(void *arg0) {
+void func_000039F0(struct Unk_func_000039F0_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0x18);
+    temp_v1 = arg0->unk18;
     if (temp_v1 >= 0) {
 
     } else {

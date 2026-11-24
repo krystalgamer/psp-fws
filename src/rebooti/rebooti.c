@@ -264,24 +264,24 @@ INCLUDE_RODATA("tmp/asm/100/rebooti/nonmatchings/rebooti", D_00012FEC);
 
 INCLUDE_ASM("tmp/asm/100/rebooti/nonmatchings/rebooti", func_00003AD8);
 
-void func_00003BB4(void *arg0, s32 arg1) {
+void func_00003BB4(struct Unk_func_00003BB4_0 *arg0, s32 arg1) {
     if (arg1 == 0) {
-        M2C_FIELD(arg0, s32 *, 0x48) = 1;
+        arg0->unk48 = 1;
         return;
     }
-    M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    arg0->unk48 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/100/rebooti/nonmatchings/rebooti", func_00003BCC);
 
 INCLUDE_ASM("tmp/asm/100/rebooti/nonmatchings/rebooti", func_00003C8C);
 
-s32 func_00003ED8(void *arg0) {
+s32 func_00003ED8(struct Unk_func_00003ED8_0 *arg0) {
     s32 var_a1;
 
     var_a1 = 0;
-    if (M2C_FIELD(arg0, s32 *, 0) == 0x4543537E) {
-        var_a1 = M2C_FIELD(arg0, s32 *, 4);
+    if (arg0->unk0 == 0x4543537E) {
+        var_a1 = arg0->unk4;
     }
     return var_a1;
 }
@@ -420,9 +420,9 @@ s32 func_00007EB8(s32 arg0) {
     return temp_s0;
 }
 
-void func_00007EF0(void *arg0, M2C_UNK arg1, M2C_UNK arg2) {
+void func_00007EF0(struct Unk_func_00007EF0_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
     func_0000CE50();
-    func_000069D4(M2C_FIELD(arg0, s32 *, 0x10), arg1, arg2, 0);
+    func_000069D4(arg0->unk10, arg1, arg2, 0);
 }
 
 INCLUDE_ASM("tmp/asm/100/rebooti/nonmatchings/rebooti", func_00007F40);

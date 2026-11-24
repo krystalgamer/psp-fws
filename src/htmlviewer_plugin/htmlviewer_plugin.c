@@ -67,21 +67,21 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000470);
 
-s32 func_0000055C(void *arg0) {
+s32 func_0000055C(struct Unk_func_0000055C_0 *arg0) {
     s32 var_v1;
 
-    var_v1 = M2C_FIELD(arg0, s32 *, 8);
+    var_v1 = arg0->unk8;
     if (!(var_v1 & 1)) {
         if (var_v1 & 2) {
             func_0000156C(3);
-            var_v1 = M2C_FIELD(arg0, s32 *, 8);
+            var_v1 = arg0->unk8;
         }
     } else {
         func_00001368();
-        var_v1 = M2C_FIELD(arg0, s32 *, 8);
+        var_v1 = arg0->unk8;
     }
     if (!(var_v1 & 4)) {
-        M2C_FIELD(arg0, s32 *, 8) = 0;
+        arg0->unk8 = 0;
     } else {
         if (func_0000398C() >= 2) {
             func_00003D48(0);
@@ -90,7 +90,7 @@ s32 func_0000055C(void *arg0) {
             func_00000140();
         }
         sceVshBridge_C58090DA(2);
-        M2C_FIELD(arg0, s32 *, 8) = 0;
+        arg0->unk8 = 0;
     }
     return 0;
 }
@@ -299,14 +299,14 @@ void func_00000920(void) {
     func_00003B90(0, 0);
 }
 
-void func_00000940(void *arg0) {
+void func_00000940(struct Unk_func_00000940_0 *arg0) {
     scePaf_FD9DE7B9(0x40);
     scePaf_F47CA1C2(arg0, 0x80006, func_00000AD0, 0);
     scePaf_F47CA1C2(arg0, 0x10001, func_00000888, 0);
     scePaf_F47CA1C2(arg0, 0x10002, func_000008B4, 0);
     scePaf_F47CA1C2(arg0, 0x10006, func_000008E0, 0);
     scePaf_F47CA1C2(arg0, 0x10007, func_00000920, 0);
-    M2C_FIELD(arg0, s32 *, 0x14) = (s32) (M2C_FIELD(arg0, s32 *, 0x14) | 0x20);
+    arg0->unk14 = (s32) (arg0->unk14 | 0x20);
 }
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_00000A00);

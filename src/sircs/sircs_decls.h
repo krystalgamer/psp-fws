@@ -11,6 +11,11 @@ struct D_00002770_s {
     volatile s32 unk20;
 };
 
+struct Unk_func_000018E4_0 {
+    u8 pad0[0x4C];
+    s32 unk4C;
+};
+
 extern M2C_UNK D_000026A8;
 extern M2C_UNK D_000026E0;
 extern s32 D_00002724;
@@ -28,7 +33,7 @@ s32 func_00000910(void);
 s32 func_000009F4(void);
 s32 func_000013F0(void);
 s32 func_00001718(void);
-s32 func_000018E4(void *arg0);
+s32 func_000018E4(struct Unk_func_000018E4_0 *arg0);
 s32 func_000019C0(void);
 s32 func_00001A74(void);
 void func_00001A80(s32 arg0);

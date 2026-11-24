@@ -11,15 +11,41 @@ struct D_00006B80_s {
     volatile s32 unk2D4;
 };
 
+struct Unk_func_00000570_0 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+};
+
+struct Unk_func_00000570_1 {
+    u8 pad0[0x14];
+    u8 unk14;
+    u8 unk15;
+    u8 pad16[0x12];
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+};
+
+struct Unk_func_000026B0_0 {
+    u8 pad0[0x2D];
+    u8 unk2D;
+    u8 pad2E[0x16];
+    s32 unk44;
+    s32 unk48;
+};
+
 extern struct D_00006B80_s D_00006B80;
 
 s32 func_00000000(s32);
 s32 func_00000194(M2C_UNK);
 s32 func_00000234(s32 arg0, M2C_UNK arg1);
-s32 func_00000570(void *arg0, void *arg1);
+s32 func_00000570(struct Unk_func_00000570_0 *arg0, struct Unk_func_00000570_1 *arg1);
 s32 func_00001908(void *arg0);
 s32 func_0000198C(s32 *arg0);
-s32 func_000026B0(void *arg0);
+s32 func_000026B0(struct Unk_func_000026B0_0 *arg0);
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelDeleteSema(s32);

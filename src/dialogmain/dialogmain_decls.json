@@ -22,7 +22,7 @@
   "func_00002A98": "void func_00002A98(void);",
   "func_0000304C": "s32 func_0000304C(void);",
   "func_00003058": "u8 func_00003058(void);",
-  "func_00003660": "void func_00003660(void *arg0);",
+  "func_00003660": "void func_00003660(struct Unk_func_00003660_0 *arg0);",
   "func_00003FC8": "u8 func_00003FC8(void);",
   "func_00003FD4": "s32 *func_00003FD4(s32 *arg0);",
   "func_00004F1C": "void func_00004F1C(void);",
@@ -75,6 +75,9 @@
   "sceVshCommonUtil_29B75E11": "M2C_UNK sceVshCommonUtil_29B75E11();",
   "sceVshCommonUtil_3FAF35EC": "M2C_UNK sceVshCommonUtil_3FAF35EC();",
   "sceVshCommonUtil_EDED68FB": "M2C_UNK sceVshCommonUtil_EDED68FB();"
+ },
+ "types": {
+  "Unk_func_00003660_0": "struct Unk_func_00003660_0 {\n    u8 pad0[0x98];\n    s32 unk98;\n    s32 unk9C;\n    s32 unkA0;\n    s32 unkA4;\n    s32 unkA8;\n    s32 unkAC;\n    s32 unkB0;\n    s32 unkB4;\n    s32 unkB8;\n    s32 unkBC;\n    s32 unkC0;\n    s32 unkC4;\n    s32 unkC8;\n    s32 unkCC;\n    s32 unkD0;\n    s32 unkD4;\n    s32 unkD8;\n    s32 unkDC;\n    s32 unkE0;\n    s32 unkE4;\n    s32 unkE8;\n    s32 unkEC;\n};"
  },
  "vars": {
   "D_00008858": "extern M2C_UNK D_00008858;",

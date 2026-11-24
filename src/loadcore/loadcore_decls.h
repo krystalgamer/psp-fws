@@ -4,6 +4,16 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_LoadCoreForKernel_C0913394_0 {
+    u8 pad0[0xD4];
+    s32 unkD4;
+};
+
+struct Unk_func_0000630C_0 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
 extern M2C_UNK D_000073A0;
 extern s32 D_000074B4;
 extern s32 D_000074B8;
@@ -17,7 +27,7 @@ s32 LoadCoreForKernel_3BB7AC18(void);
 void LoadCoreForKernel_5873A31F(s32 arg0);
 void LoadCoreForKernel_99A695F0(s32 arg0);
 s32 LoadCoreForKernel_A8E2D53D(void);
-void LoadCoreForKernel_C0913394(void *arg0, s32 arg1, s32 arg2);
+void LoadCoreForKernel_C0913394(struct Unk_LoadCoreForKernel_C0913394_0 *arg0, s32 arg1, s32 arg2);
 M2C_UNK *LoadCoreForKernel_C99DD47A(void);
 s32 LoadCoreForKernel_D8779AC6(void);
 M2C_UNK SysMemForKernel_CE05CCB7();
@@ -41,7 +51,7 @@ s32 func_00004D04(s32 arg0);
 s32 func_00004D14(s32 arg0);
 s32 func_00004D24(void);
 void func_00005E20(void);
-s32 func_0000630C(void *arg0);
+s32 func_0000630C(struct Unk_func_0000630C_0 *arg0);
 u8 *func_00006434(u8 *arg0, u8 *arg1);
 s32 func_000066E8(s32 arg0);
 s32 sceKernelDcacheWBinvAll(void);

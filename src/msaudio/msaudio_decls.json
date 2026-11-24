@@ -3,10 +3,10 @@
   "func_00000000": "s32 func_00000000(s32);",
   "func_00000194": "s32 func_00000194(M2C_UNK);",
   "func_00000234": "s32 func_00000234(s32 arg0, M2C_UNK arg1);",
-  "func_00000570": "s32 func_00000570(void *arg0, void *arg1);",
+  "func_00000570": "s32 func_00000570(struct Unk_func_00000570_0 *arg0, struct Unk_func_00000570_1 *arg1);",
   "func_00001908": "s32 func_00001908(void *arg0);",
   "func_0000198C": "s32 func_0000198C(s32 *arg0);",
-  "func_000026B0": "s32 func_000026B0(void *arg0);",
+  "func_000026B0": "s32 func_000026B0(struct Unk_func_000026B0_0 *arg0);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
@@ -19,7 +19,10 @@
   "sceMgr_driver_F30E22CF": "s32 sceMgr_driver_F30E22CF(M2C_UNK);"
  },
  "types": {
-  "D_00006B80_s": "struct D_00006B80_s {\n    u8 pad0[0x138];\n    volatile u32 unk138;\n    u8 pad13C[0x198];\n    volatile s32 unk2D4;\n};"
+  "D_00006B80_s": "struct D_00006B80_s {\n    u8 pad0[0x138];\n    volatile u32 unk138;\n    u8 pad13C[0x198];\n    volatile s32 unk2D4;\n};",
+  "Unk_func_00000570_0": "struct Unk_func_00000570_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
+  "Unk_func_00000570_1": "struct Unk_func_00000570_1 {\n    u8 pad0[0x14];\n    u8 unk14;\n    u8 unk15;\n    u8 pad16[0x12];\n    s32 unk28;\n    s32 unk2C;\n    s32 unk30;\n    s32 unk34;\n};",
+  "Unk_func_000026B0_0": "struct Unk_func_000026B0_0 {\n    u8 pad0[0x2D];\n    u8 unk2D;\n    u8 pad2E[0x16];\n    s32 unk44;\n    s32 unk48;\n};"
  },
  "vars": {
   "D_00006B80": "extern struct D_00006B80_s D_00006B80;"

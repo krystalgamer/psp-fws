@@ -6,9 +6,9 @@
   "func_000018BC": "s32 func_000018BC(void);",
   "func_000018F0": "void func_000018F0(void);",
   "func_00003A54": "s32 func_00003A54(void **arg0);",
-  "func_00003AA8": "s32 func_00003AA8(void *arg0);",
-  "func_00003B00": "s32 func_00003B00(void *arg0);",
-  "func_00003B58": "s32 func_00003B58(void *arg0);",
+  "func_00003AA8": "s32 func_00003AA8(struct Unk_func_00003AA8_0 *arg0);",
+  "func_00003B00": "s32 func_00003B00(struct Unk_func_00003B00_0 *arg0);",
+  "func_00003B58": "s32 func_00003B58(struct Unk_func_00003B58_0 *arg0);",
   "func_00003F24": "void func_00003F24(s32 *arg0, s32 arg1);",
   "func_00003F2C": "s32 func_00003F2C(void);",
   "func_00003F80": "s32 func_00003F80(void);",
@@ -24,6 +24,11 @@
   "sceNetAdhocAuth_driver_2E6AA271": "s32 sceNetAdhocAuth_driver_2E6AA271(void);",
   "sceNetAdhocAuth_driver_6074D8F1": "s32 sceNetAdhocAuth_driver_6074D8F1(void);",
   "sceNetIfhandle_driver_773FC77C": "M2C_UNK sceNetIfhandle_driver_773FC77C();"
+ },
+ "types": {
+  "Unk_func_00003AA8_0": "struct Unk_func_00003AA8_0 {\n    void * unk0;\n    void * unk4;\n};",
+  "Unk_func_00003B00_0": "struct Unk_func_00003B00_0 {\n    void * unk0;\n    void * unk4;\n};",
+  "Unk_func_00003B58_0": "struct Unk_func_00003B58_0 {\n    void * unk0;\n    void * unk4;\n};"
  },
  "vars": {
   "D_00004600": "extern s32 D_00004600;",

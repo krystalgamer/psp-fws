@@ -184,8 +184,8 @@ INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0015A0", module_reboot_befor
 
 INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0015A0", func_00004D14);
 
-s32 func_00004E2C(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 4) = &D_000099D4;
+s32 func_00004E2C(struct Unk_func_00004E2C_0 *arg0) {
+    arg0->unk4 = &D_000099D4;
     return 0;
 }
 

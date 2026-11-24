@@ -87,27 +87,27 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000168C);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_000018E4);
 
-s32 func_00001980(void *arg0) {
+s32 func_00001980(struct Unk_func_00001980_0 *arg0) {
     void **temp_v0;
     void *temp_a1;
     void *temp_a2;
 
     if (arg0 != NULL) {
-        temp_a2 = M2C_FIELD(arg0, void **, 8);
-        temp_a1 = M2C_FIELD(arg0, void **, 0);
+        temp_a2 = arg0->unk8;
+        temp_a1 = arg0->unk0;
         M2C_FIELD(temp_a2, s32 *, 8) = (s32) (M2C_FIELD(temp_a2, s32 *, 8) - 1);
         if (temp_a1 != NULL) {
-            M2C_FIELD(temp_a1, void ***, 4) = (void **) M2C_FIELD(arg0, void ***, 4);
+            M2C_FIELD(temp_a1, void ***, 4) = (void **) arg0->unk4;
         } else {
-            D_0000EDB0 = M2C_FIELD(arg0, void ***, 4);
+            D_0000EDB0 = arg0->unk4;
         }
-        temp_v0 = M2C_FIELD(arg0, void ***, 4);
+        temp_v0 = arg0->unk4;
         if (temp_v0 == NULL) {
             D_0000EDAC = temp_a1;
         } else {
             *temp_v0 = temp_a1;
         }
-        M2C_FIELD(arg0, void **, 0) = (void *) D_0000EDB4;
+        arg0->unk0 = (void *) D_0000EDB4;
         D_0000EDB4 = arg0;
     }
     return 0;
@@ -153,7 +153,7 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000265C);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00002774);
 
-s32 func_0000286C(void *arg0) {
+s32 func_0000286C(struct Unk_func_0000286C_0 *arg0) {
     s32 temp_s0;
     s32 temp_v0;
     s32 var_v0;
@@ -168,7 +168,7 @@ s32 func_0000286C(void *arg0) {
         var_v0 = 0x80010005;
     } else {
         func_00009F04();
-        func_00001980(M2C_FIELD(arg0, void **, 0x10));
+        func_00001980(arg0->unk10);
         func_00009F04();
         sceKernelSignalSema(D_0000EB24, 1);
         sceKernelPowerUnlock(0);
@@ -211,48 +211,48 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_000037B4);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003890);
 
-void func_00003AA0(void *arg0) {
-    func_000042D8(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8), M2C_FIELD(arg0, s32 *, 0xC));
+void func_00003AA0(struct Unk_func_00003AA0_0 *arg0) {
+    func_000042D8(arg0->unk0, arg0->unk4, arg0->unk8, arg0->unkC);
 }
 
 void func_00003ACC(s32 arg0) {
     func_000045C8(arg0);
 }
 
-void func_00003AE8(void *arg0) {
-    func_0000168C(M2C_FIELD(M2C_FIELD(arg0, void **, 0), s32 *, 0x10), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8), 0);
+void func_00003AE8(struct Unk_func_00003AE8_0 *arg0) {
+    func_0000168C(M2C_FIELD(arg0->unk0, s32 *, 0x10), arg0->unk4, arg0->unk8, 0);
 }
 
-void func_00003B14(void *arg0) {
-    func_0000466C(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8));
+void func_00003B14(struct Unk_func_00003B14_0 *arg0) {
+    func_0000466C(arg0->unk0, arg0->unk4, arg0->unk8);
 }
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003B3C);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003B70);
 
-void func_00003B90(void *arg0) {
-    func_00004CFC(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8));
+void func_00003B90(struct Unk_func_00003B90_0 *arg0) {
+    func_00004CFC(arg0->unk0, arg0->unk4, arg0->unk8);
 }
 
-void func_00003BB8(void *arg0) {
-    func_00005110(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4));
+void func_00003BB8(struct Unk_func_00003BB8_0 *arg0) {
+    func_00005110(arg0->unk0, arg0->unk4);
 }
 
-void func_00003BD8(void *arg0) {
-    func_00005388(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4));
+void func_00003BD8(struct Unk_func_00003BD8_0 *arg0) {
+    func_00005388(arg0->unk0, arg0->unk4);
 }
 
-void func_00003BF8(void *arg0) {
-    func_00005470(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4));
+void func_00003BF8(struct Unk_func_00003BF8_0 *arg0) {
+    func_00005470(arg0->unk0, arg0->unk4);
 }
 
-void func_00003C18(void *arg0) {
-    func_000055FC(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8));
+void func_00003C18(struct Unk_func_00003C18_0 *arg0) {
+    func_000055FC(arg0->unk0, arg0->unk4, arg0->unk8);
 }
 
-void func_00003C40(void *arg0) {
-    func_00005708(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8), M2C_FIELD(arg0, s32 *, 0xC));
+void func_00003C40(struct Unk_func_00003C40_0 *arg0) {
+    func_00005708(arg0->unk0, arg0->unk4, arg0->unk8, arg0->unkC);
 }
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00003C6C);
@@ -353,8 +353,8 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_00008504);
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000860C);
 
-s32 func_00008718(void *arg0) {
-    return (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
+s32 func_00008718(struct Unk_func_00008718_0 *arg0) {
+    return (arg0->unk2 << 8) | arg0->unk3;
 }
 
 INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000872C);
@@ -504,13 +504,13 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_0000A36C);
 
 INCLUDE_RODATA("tmp/asm/282/lfatfs/nonmatchings/lfatfs", D_0000E160);
 
-s32 func_0000A3A0(void *arg0) {
-    KDebugForKernel_84F370BC(&D_0000E160, "df_dclose", **M2C_FIELD(arg0, s32 ***, 8));
+s32 func_0000A3A0(struct Unk_func_0000A3A0_0 *arg0) {
+    KDebugForKernel_84F370BC(&D_0000E160, "df_dclose", **arg0->unk8);
     return 0x80010086;
 }
 
-s32 func_0000A3DC(void *arg0) {
-    KDebugForKernel_84F370BC(&D_0000E160, "df_dread", **M2C_FIELD(arg0, s32 ***, 8));
+s32 func_0000A3DC(struct Unk_func_0000A3DC_0 *arg0) {
+    KDebugForKernel_84F370BC(&D_0000E160, "df_dread", **arg0->unk8);
     return 0x80010086;
 }
 

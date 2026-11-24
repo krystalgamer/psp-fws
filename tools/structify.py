@@ -344,10 +344,10 @@ def main():
     # one global at a time, keeping those that still match
     revert(mod)
     if phase is structify_args:
-        syms = sorted(json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text())["types"])
+        syms = sorted(json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text()).get("types", {}))
         syms = [s for s in syms if s.startswith("Unk_")]
         structify_args(mod)  # recompute names, then revert and go one by one
-        syms = sorted(json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text())["types"])
+        syms = sorted(json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text()).get("types", {}))
         syms = [s for s in syms if s.startswith("Unk_")]
         revert(mod)
     else:

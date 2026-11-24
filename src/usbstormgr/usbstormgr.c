@@ -3,41 +3,41 @@
 
 INCLUDE_ASM("tmp/asm/340/usbstormgr/nonmatchings/usbstormgr", func_00000000);
 
-s32 func_00000170(void *arg0, void *arg1, s32 arg2) {
+s32 func_00000170(struct Unk_func_00000170_0 *arg0, struct Unk_func_00000170_1 *arg1, s32 arg2) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_FIELD(arg0, u8 *, 7) != arg2) {
-        M2C_FIELD(arg1, s8 *, 1) = 5;
+    if (arg0->unk7 != arg2) {
+        arg1->unk1 = 5;
         var_v1 = -1;
-        M2C_FIELD(arg1, s8 *, 2) = 0x24;
-        M2C_FIELD(arg1, s8 *, 3) = 0;
+        arg1->unk2 = 0x24;
+        arg1->unk3 = 0;
     }
     return var_v1;
 }
 
-s32 func_0000019C(void *arg0, void *arg1, s32 arg2) {
+s32 func_0000019C(struct Unk_func_0000019C_0 *arg0, struct Unk_func_0000019C_1 *arg1, s32 arg2) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (((u8) M2C_FIELD(arg0, u8 *, 0xA) >> 6) != arg2) {
-        M2C_FIELD(arg1, s8 *, 1) = 5;
+    if (((u8) arg0->unkA >> 6) != arg2) {
+        arg1->unk1 = 5;
         var_v1 = -1;
-        M2C_FIELD(arg1, s8 *, 2) = 0x6F;
-        M2C_FIELD(arg1, s8 *, 3) = 0;
+        arg1->unk2 = 0x6F;
+        arg1->unk3 = 0;
     }
     return var_v1;
 }
 
-s32 func_000001CC(void *arg0, void *arg1, s32 arg2) {
+s32 func_000001CC(struct Unk_func_000001CC_0 *arg0, struct Unk_func_000001CC_1 *arg1, s32 arg2) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (((M2C_FIELD(arg0, u8 *, 8) << 8) | M2C_FIELD(arg0, u8 *, 9)) != arg2) {
-        M2C_FIELD(arg1, s8 *, 1) = 5;
+    if (((arg0->unk8 << 8) | arg0->unk9) != arg2) {
+        arg1->unk1 = 5;
         var_v1 = -1;
-        M2C_FIELD(arg1, s8 *, 2) = 0x24;
-        M2C_FIELD(arg1, s8 *, 3) = 0;
+        arg1->unk2 = 0x24;
+        arg1->unk3 = 0;
     }
     return var_v1;
 }

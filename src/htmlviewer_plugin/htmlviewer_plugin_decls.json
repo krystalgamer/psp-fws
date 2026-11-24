@@ -6,7 +6,7 @@
   "func_000002F8": "void func_000002F8(void *arg0);",
   "func_0000037C": "void func_0000037C(void *arg0);",
   "func_00000408": "s32 func_00000408(s32, s32);",
-  "func_0000055C": "s32 func_0000055C(void *arg0);",
+  "func_0000055C": "s32 func_0000055C(struct Unk_func_0000055C_0 *arg0);",
   "func_00000614": "void func_00000614(void);",
   "func_00000660": "s32 func_00000660(s32);",
   "func_000006DC": "s32 func_000006DC(void);",
@@ -16,7 +16,7 @@
   "func_000008B4": "void func_000008B4();",
   "func_000008E0": "void func_000008E0();",
   "func_00000920": "void func_00000920(void);",
-  "func_00000940": "void func_00000940(void *arg0);",
+  "func_00000940": "void func_00000940(struct Unk_func_00000940_0 *arg0);",
   "func_00000AD0": "void func_00000AD0(void);",
   "func_00000D14": "void func_00000D14(void);",
   "func_00000D38": "s32 func_00000D38(s32);",
@@ -124,7 +124,9 @@
   "vsh_AA8B9556": "M2C_UNK vsh_AA8B9556();"
  },
  "types": {
-  "D_000081DC_s": "struct D_000081DC_s {\n    s32 unk0;\n    s32 unk4;\n};"
+  "D_000081DC_s": "struct D_000081DC_s {\n    s32 unk0;\n    s32 unk4;\n};",
+  "Unk_func_0000055C_0": "struct Unk_func_0000055C_0 {\n    u8 pad0[0x8];\n    s32 unk8;\n};",
+  "Unk_func_00000940_0": "struct Unk_func_00000940_0 {\n    u8 pad0[0x14];\n    s32 unk14;\n};"
  },
  "vars": {
   "D_00006E34": "extern s32 D_00006E34;",

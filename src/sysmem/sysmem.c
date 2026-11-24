@@ -68,12 +68,12 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_55A40B2C);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000012BC);
 
-s32 func_00001318(void *arg0) {
+s32 func_00001318(struct Unk_func_00001318_0 *arg0) {
     u32 temp_a3;
     u32 var_a1;
     void *var_a0;
 
-    var_a0 = M2C_FIELD(arg0, s32 *, 0x10) + 4;
+    var_a0 = arg0->unk10 + 4;
     var_a1 = 0;
     if (var_a0 != NULL) {
         do {
@@ -91,11 +91,11 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_E6581468);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceKernelMaxFreeMemSize);
 
-s32 func_00001478(void *arg0) {
+s32 func_00001478(struct Unk_func_00001478_0 *arg0) {
     s32 var_a0;
     void *var_v1;
 
-    var_v1 = M2C_FIELD(arg0, s32 *, 0x10) + 4;
+    var_v1 = arg0->unk10 + 4;
     var_a0 = 0;
     if (var_v1 != NULL) {
         do {
@@ -118,12 +118,12 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000168C);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000016EC);
 
-s32 func_000017D8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_000017D8(struct Unk_func_000017D8_0 *arg0) {
+    return arg0->unkC;
 }
 
-s32 func_000017E0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_000017E0(struct Unk_func_000017E0_0 *arg0) {
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000017E8);
@@ -202,8 +202,8 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000049E0);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_00004A38);
 
-s32 func_00004A60(void *arg0) {
-    return ((((u32) (M2C_FIELD(arg0, s32 *, 4) - 0x10) >> 3) - M2C_FIELD(arg0, s32 *, 8)) * 8) - 8;
+s32 func_00004A60(struct Unk_func_00004A60_0 *arg0) {
+    return ((((u32) (arg0->unk4 - 0x10) >> 3) - arg0->unk8) * 8) - 8;
 }
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceKernelMemset);
@@ -443,11 +443,11 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_CF4DE78C);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", SysMemForKernel_41FFC7F9);
 
-s32 SysMemForKernel_82D3CEE3(void *arg0, s32 arg1) {
+s32 SysMemForKernel_82D3CEE3(struct Unk_SysMemForKernel_82D3CEE3_0 *arg0, s32 arg1) {
     s32 var_a0;
     s32 var_a2;
 
-    var_a0 = M2C_FIELD(arg0, s32 *, 8);
+    var_a0 = arg0->unk8;
     var_a2 = var_a0 ^ arg1;
     if ((var_a0 != 0) & (var_a0 != arg1)) {
         do {
@@ -464,16 +464,16 @@ M2C_UNK *SysMemForKernel_536AD5E1(void) {
     return &D_0000FDA4;
 }
 
-s32 func_000075EC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_000075EC(struct Unk_func_000075EC_0 *arg0) {
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000075F4);
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000764C);
 
-s32 func_0000769C(void *arg0) {
-    return M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0xC);
+s32 func_0000769C(struct Unk_func_0000769C_0 *arg0) {
+    return M2C_FIELD(arg0->unk8, s32 *, 0xC);
 }
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000076A8);

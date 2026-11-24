@@ -52,8 +52,8 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_transfer_int/nonmatchings/pspnet_adhoc_tra
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_transfer_int/nonmatchings/pspnet_adhoc_transfer_int", func_00000D30);
 
-s32 func_00000D58(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x20);
+s32 func_00000D58(struct Unk_func_00000D58_0 *arg0) {
+    return arg0->unk20;
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_transfer_int/nonmatchings/pspnet_adhoc_transfer_int", func_00000D60);

@@ -447,9 +447,9 @@ INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00005
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00005410);
 
-void func_00005468(s32 arg0, void *arg1) {
-    if (M2C_FIELD(arg1, u16 *, 4) == 0x409) {
-        if (M2C_FIELD(arg1, s32 *, 0xC) == 0) {
+void func_00005468(s32 arg0, struct Unk_func_00005468_1 *arg1) {
+    if (arg1->unk4 == 0x409) {
+        if (arg1->unkC == 0) {
             func_00005410(arg0, (s32) &func_000053B0, 0);
         }
     }
@@ -531,29 +531,29 @@ void func_000067B0(void **arg0) {
     scePaf_7EC15225(var_a0);
 }
 
-void func_00006808(void *arg0) {
+void func_00006808(struct Unk_func_00006808_0 *arg0) {
     M2C_UNK *temp_v0;
     M2C_UNK *var_v1;
     void *temp_s0;
     void *var_v0;
 
-    var_v1 = M2C_FIELD(arg0, M2C_UNK **, 0);
+    var_v1 = arg0->unk0;
     var_v0 = M2C_FIELD(var_v1, void **, 4);
     if (var_v0 != var_v1) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
             scePaf_7EC15225(var_v0);
-            var_v1 = M2C_FIELD(arg0, M2C_UNK **, 0);
+            var_v1 = arg0->unk0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_v1);
     }
     M2C_FIELD(var_v1, M2C_UNK **, 4) = var_v1;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    temp_v0 = M2C_FIELD(arg0, M2C_UNK **, 0);
+    arg0->unk4 = 0;
+    temp_v0 = arg0->unk0;
     *temp_v0 = temp_v0;
 }
 
-void ***func_00006864(void ***arg0, void *arg1, void **arg2) {
+void ***func_00006864(void ***arg0, struct Unk_func_00006864_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_v1;
 
@@ -563,7 +563,7 @@ void ***func_00006864(void ***arg0, void *arg1, void **arg2) {
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1);
     *arg0 = temp_s0;
-    M2C_FIELD(arg1, s32 *, 4) = (s32) (M2C_FIELD(arg1, s32 *, 4) - 1);
+    arg1->unk4 = (s32) (arg1->unk4 - 1);
     return arg0;
 }
 
@@ -604,13 +604,13 @@ void func_000071B4(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00007274);
 
-void func_000072A0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x30) = arg1;
+void func_000072A0(struct Unk_func_000072A0_0 *arg0, s32 arg1) {
+    arg0->unk30 = arg1;
     func_00007274();
 }
 
-void func_000072C0(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x30) = -1;
+void func_000072C0(struct Unk_func_000072C0_0 *arg0) {
+    arg0->unk30 = -1;
     vsh_7ADF6A69();
 }
 
@@ -626,46 +626,46 @@ INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00007
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00007680);
 
-s32 func_000076F8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_000076F8(struct Unk_func_000076F8_0 *arg0) {
+    return arg0->unk4;
 }
 
-s32 func_00007700(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8);
+s32 func_00007700(struct Unk_func_00007700_0 *arg0) {
+    return arg0->unk8;
 }
 
-s32 func_00007708(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_00007708(struct Unk_func_00007708_0 *arg0) {
+    return arg0->unkC;
 }
 
-s32 func_00007710(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_00007710(struct Unk_func_00007710_0 *arg0) {
+    return arg0->unk10;
 }
 
-s32 func_00007718(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x14);
+s32 func_00007718(struct Unk_func_00007718_0 *arg0) {
+    return arg0->unk14;
 }
 
-s32 func_00007720(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x18);
+s32 func_00007720(struct Unk_func_00007720_0 *arg0) {
+    return arg0->unk18;
 }
 
-s32 func_00007728(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_00007728(struct Unk_func_00007728_0 *arg0) {
+    return arg0->unk1C;
 }
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00007730);
 
-void func_00007754(void *arg0) {
-    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4));
+void func_00007754(struct Unk_func_00007754_0 *arg0) {
+    scePaf_CAF05F1D(arg0->unk4);
 }
 
-void func_00007770(void *arg0) {
-    scePaf_3481F595(M2C_FIELD(arg0, s32 *, 4));
+void func_00007770(struct Unk_func_00007770_0 *arg0) {
+    scePaf_3481F595(arg0->unk4);
 }
 
-void func_0000778C(void *arg0) {
-    scePaf_DAB59652(M2C_FIELD(arg0, s32 *, 4));
+void func_0000778C(struct Unk_func_0000778C_0 *arg0) {
+    scePaf_DAB59652(arg0->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_000077A8);

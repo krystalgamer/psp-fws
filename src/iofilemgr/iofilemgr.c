@@ -229,8 +229,8 @@ INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", IoFileMgrForKernel_5
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", IoFileMgrForKernel_42F954D4);
 
-s32 IoFileMgrForKernel_BD17474F(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x80);
+s32 IoFileMgrForKernel_BD17474F(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0) {
+    return arg0->unk80;
 }
 
 void func_0000339C(s32 *arg0) {

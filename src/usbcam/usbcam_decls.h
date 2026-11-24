@@ -12,6 +12,11 @@ struct D_0000BC08_s {
     volatile s32 unk1D8;
 };
 
+struct Unk_func_000039F0_0 {
+    u8 pad0[0x18];
+    s32 unk18;
+};
+
 extern M2C_UNK D_0000A658;
 extern s32 D_0000B454;
 extern M2C_UNK D_0000BA80;
@@ -21,7 +26,7 @@ extern s32 D_0000BDB8;
 
 M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
 void func_000039E8(void);
-void func_000039F0(void *arg0);
+void func_000039F0(struct Unk_func_000039F0_0 *arg0);
 s32 func_00008E1C(void);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);

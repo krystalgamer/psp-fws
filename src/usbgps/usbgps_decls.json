@@ -5,7 +5,7 @@
   "func_000027AC": "s32 func_000027AC(void);",
   "func_00002804": "s32 func_00002804(void);",
   "func_00002888": "s32 func_00002888(s32 *arg0);",
-  "func_00002978": "void func_00002978(void *arg0);",
+  "func_00002978": "void func_00002978(struct Unk_func_00002978_0 *arg0);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
@@ -15,7 +15,8 @@
  },
  "types": {
   "D_000059B0_s": "struct D_000059B0_s {\n    s32 unk0;\n    u8 pad4[0x1578];\n    u32 unk157C;\n};",
-  "D_00008478_s": "struct D_00008478_s {\n    u8 pad0[0xB0];\n    volatile s8 unkB0;\n    volatile s8 unkB1;\n    u8 padB2[0x2];\n    volatile s32 unkB4;\n    volatile s32 unkB8;\n    volatile s32 unkBC;\n    volatile s32 unkC0;\n};"
+  "D_00008478_s": "struct D_00008478_s {\n    u8 pad0[0xB0];\n    volatile s8 unkB0;\n    volatile s8 unkB1;\n    u8 padB2[0x2];\n    volatile s32 unkB4;\n    volatile s32 unkB8;\n    volatile s32 unkBC;\n    volatile s32 unkC0;\n};",
+  "Unk_func_00002978_0": "struct Unk_func_00002978_0 {\n    u8 pad0[0x20];\n    void * unk20;\n};"
  },
  "vars": {
   "D_00005960": "extern M2C_UNK D_00005960;",

@@ -17,24 +17,24 @@ INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_008B10", func_00008FD4);
 void func_00008FF0(void) {
 }
 
-s32 func_00008FF8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC) == 0;
+s32 func_00008FF8(struct Unk_func_00008FF8_0 *arg0) {
+    return arg0->unkC == 0;
 }
 
-s32 func_00009004(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC) == M2C_FIELD(arg0, s32 *, 0);
+s32 func_00009004(struct Unk_func_00009004_0 *arg0) {
+    return arg0->unkC == arg0->unk0;
 }
 
-s32 func_00009018(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_00009018(struct Unk_func_00009018_0 *arg0) {
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_008B10", func_00009020);
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_008B10", func_00009074);
 
-s32 func_000090DC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0) - M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_000090DC(struct Unk_func_000090DC_0 *arg0) {
+    return arg0->unk0 - arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_008B10", func_000090EC);

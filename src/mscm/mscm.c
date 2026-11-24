@@ -14,13 +14,13 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_68C14F25);
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00000B9C);
 
-s32 func_00000C1C(void *arg0) {
-    sceSysreg_driver_18172C6A(M2C_FIELD(arg0, s32 *, 4));
+s32 func_00000C1C(struct Unk_func_00000C1C_0 *arg0) {
+    sceSysreg_driver_18172C6A(arg0->unk4);
     sceMScm_driver_F1924A06((s32) arg0, 1);
     sceKernelDelayThread(0x186A0U);
     sceMScm_driver_F1924A06((s32) arg0, 2);
     sceKernelDelayThread(0x4E20U);
-    sceSysreg_driver_D74F1D48(M2C_FIELD(arg0, s32 *, 4));
+    sceSysreg_driver_D74F1D48(arg0->unk4);
     return 0;
 }
 
@@ -79,8 +79,8 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_6C8AEF0B);
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_907D7766);
 
-s32 sceMScm_driver_B01C378C(void *arg0) {
-    sceKernelClearEventFlag(M2C_FIELD(M2C_FIELD(arg0, void **, 8), u32 *, 0x2C), 0U);
+s32 sceMScm_driver_B01C378C(struct Unk_sceMScm_driver_B01C378C_0 *arg0) {
+    sceKernelClearEventFlag(M2C_FIELD(arg0->unk8, u32 *, 0x2C), 0U);
     return 0;
 }
 
@@ -128,8 +128,8 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_34124B97);
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00004D94);
 
-s32 sceMScm_driver_0A054CDA(void *arg0) {
-    return M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x14);
+s32 sceMScm_driver_0A054CDA(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
+    return M2C_FIELD(arg0->unk8, s32 *, 0x14);
 }
 
 void func_00004E4C(void) {
@@ -199,11 +199,11 @@ s32 func_0000648C(void) {
     return 0;
 }
 
-s32 func_00006494(void *arg0) {
+s32 func_00006494(struct Unk_func_00006494_0 *arg0) {
     s32 var_a0;
 
     var_a0 = 0x80220081;
-    if (M2C_FIELD(arg0, s32 *, 4) == 0) {
+    if (arg0->unk4 == 0) {
         var_a0 = (D_00007880 != 0) ? 0 : 0x80220083;
     }
     return var_a0;
@@ -223,22 +223,22 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_2AD0A649);
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00006684);
 
-s32 func_000066DC(void *arg0) {
+s32 func_000066DC(struct Unk_func_000066DC_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
     if (arg0 != NULL) {
-        var_v0 = func_000064C8(M2C_FIELD(arg0, s32 *, 4));
+        var_v0 = func_000064C8(arg0->unk4);
     }
     return var_v0;
 }
 
-s32 func_00006704(void *arg0, s32 arg1) {
+s32 func_00006704(struct Unk_func_00006704_0 *arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
     if (arg0 != NULL) {
-        var_v0 = func_0000652C(M2C_FIELD(arg0, s32 *, 4), arg1);
+        var_v0 = func_0000652C(arg0->unk4, arg1);
     }
     return var_v0;
 }

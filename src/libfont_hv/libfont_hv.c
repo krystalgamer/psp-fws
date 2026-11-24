@@ -192,7 +192,7 @@ INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00002BB4);
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00002BF8);
 
-s32 func_00002C74(void *arg0) {
+s32 func_00002C74(struct Unk_func_00002C74_0 *arg0) {
     s32 var_s1;
     s32 var_s2;
     s32 var_v1;
@@ -200,13 +200,13 @@ s32 func_00002C74(void *arg0) {
     void *temp_a1;
     void *temp_s0;
 
-    var_v1 = M2C_FIELD(arg0, s32 *, 4);
+    var_v1 = arg0->unk4;
     var_s2 = 0;
     if (var_v1 > 0) {
         var_s1 = 0;
         do {
             var_s2 += 1;
-            temp_s0 = M2C_FIELD(arg0, s32 *, 0x2C) + var_s1;
+            temp_s0 = arg0->unk2C + var_s1;
             var_s1 += 0x4C;
             if (temp_s0 != NULL) {
                 if (M2C_FIELD(temp_s0, u8 *, 0) != 0) {
@@ -216,7 +216,7 @@ s32 func_00002C74(void *arg0) {
                     M2C_FIELD(temp_a1, u16 *, 0x34) = (u16) (M2C_FIELD(temp_a1, u16 *, 0x34) - 1);
                     func_00009234((s32) temp_a0);
                     func_00002BF8((s32) temp_s0);
-                    var_v1 = M2C_FIELD(arg0, s32 *, 4);
+                    var_v1 = arg0->unk4;
                 }
             }
         } while (var_s2 < var_v1);
@@ -238,24 +238,24 @@ INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00003A04);
 
 INCLUDE_ASM("tmp/asm/340/libfont_hv/nonmatchings/libfont_hv", func_00003CBC);
 
-s32 func_00004204(void *arg0, s32 *arg1) {
+s32 func_00004204(struct Unk_func_00004204_0 *arg0, s32 *arg1) {
     s32 temp_a5;
     u8 temp_a3;
 
-    temp_a5 = ((u32) ((M2C_FIELD(arg0, u16 *, 0x1E8) * M2C_FIELD(arg0, s32 *, 0x1E4)) + 7) >> 3) * 2;
+    temp_a5 = ((u32) ((arg0->unk1E8 * arg0->unk1E4) + 7) >> 3) * 2;
     *arg1 = temp_a5;
-    temp_a3 = M2C_FIELD(arg0, u8 *, 0x1EA);
+    temp_a3 = arg0->unk1EA;
     *arg1 = ((s32) ((temp_a5 + temp_a3) - 1) / (s32) temp_a3) * temp_a3;
     return 0;
 }
 
-s32 func_00004254(void *arg0, s32 *arg1) {
+s32 func_00004254(struct Unk_func_00004254_0 *arg0, s32 *arg1) {
     s32 temp_a5;
     u8 temp_a3;
 
-    temp_a5 = ((u32) ((M2C_FIELD(arg0, u16 *, 0x1F0) * M2C_FIELD(arg0, s32 *, 0x1EC)) + 7) >> 3) * 2;
+    temp_a5 = ((u32) ((arg0->unk1F0 * arg0->unk1EC) + 7) >> 3) * 2;
     *arg1 = temp_a5;
-    temp_a3 = M2C_FIELD(arg0, u8 *, 0x1F2);
+    temp_a3 = arg0->unk1F2;
     *arg1 = ((s32) ((temp_a5 + temp_a3) - 1) / (s32) temp_a3) * temp_a3;
     return 0;
 }

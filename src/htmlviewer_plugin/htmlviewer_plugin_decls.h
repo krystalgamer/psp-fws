@@ -9,6 +9,16 @@ struct D_000081DC_s {
     s32 unk4;
 };
 
+struct Unk_func_0000055C_0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
+struct Unk_func_00000940_0 {
+    u8 pad0[0x14];
+    s32 unk14;
+};
+
 extern s32 D_00006E34;
 extern M2C_UNK D_00006FA0;
 extern M2C_UNK D_00006FB0;
@@ -49,7 +59,7 @@ void func_00000274(void *arg0);
 void func_000002F8(void *arg0);
 void func_0000037C(void *arg0);
 s32 func_00000408(s32, s32);
-s32 func_0000055C(void *arg0);
+s32 func_0000055C(struct Unk_func_0000055C_0 *arg0);
 void func_00000614(void);
 s32 func_00000660(s32);
 s32 func_000006DC(void);
@@ -59,7 +69,7 @@ void func_00000888();
 void func_000008B4();
 void func_000008E0();
 void func_00000920(void);
-void func_00000940(void *arg0);
+void func_00000940(struct Unk_func_00000940_0 *arg0);
 void func_00000AD0(void);
 void func_00000D14(void);
 s32 func_00000D38(s32);
