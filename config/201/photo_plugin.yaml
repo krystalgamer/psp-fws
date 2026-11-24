@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/201/.splat_cache.photo_plugin
   symbol_addrs_path:
     - config/201/symbol_addrs.photo_plugin.txt
+    - config/201/func_starts.photo_plugin.txt
     - tmp/build/201/prx_syms.photo_plugin.txt
   reloc_addrs_path: [tmp/build/201/reloc_addrs.photo_plugin.txt]
   asset_path: tmp/assets/201/photo_plugin
@@ -54,6 +55,14 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, photo_plugin]
+      - [0x12A9C, c, photo_plugin_012A1C]
+      - [0x14B84, c, photo_plugin_014B04]
+      - [0x16C80, c, photo_plugin_016C00]
+      - [0x171F8, c, photo_plugin_017178]
+      - [0x26E18, c, photo_plugin_026D98]
+      - [0x29330, c, photo_plugin_0292B0]
+      - [0x2B81C, c, photo_plugin_02B79C]
+      - [0x2BCC0, c, photo_plugin_02BC40]
       - { start: 0x2D2C8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x2D2E4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2DA8C, type: prxpad, order: .text }
@@ -73,6 +82,12 @@ segments:
       - { start: 0x2E598, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x2E59C, type: prxpad, order: .rodata }
       - [0x2E5A0, .rodata, photo_plugin]
+      - [0x2FE2C, .rodata, photo_plugin_012A1C]
+      - [0x30220, .rodata, photo_plugin_014B04]
+      - [0x30240, .rodata, photo_plugin_017178]
+      - [0x31674, .rodata, photo_plugin_026D98]
+      - [0x31694, .rodata, photo_plugin_0292B0]
+      - [0x316C8, .rodata, photo_plugin_02BC40]
   - name: photo_plugin_seg1
     type: code
     start: 0x317C0
