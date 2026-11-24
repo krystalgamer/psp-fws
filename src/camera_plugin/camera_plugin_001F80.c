@@ -18,5 +18,5 @@ void func_00001F9C(struct Unk_func_00001F9C_0 *arg0) {
     func_0001A948(arg0->unk330);
 }
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001F80", func_00001FB8);
+INCLUDE_ASM("nonmatchings/camera_plugin_001F80", func_00001FB8);
 

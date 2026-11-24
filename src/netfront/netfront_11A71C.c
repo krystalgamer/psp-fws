@@ -2,12 +2,12 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_11A71C", func_0011A71C);
+INCLUDE_ASM("nonmatchings/netfront_11A71C", func_0011A71C);
 
 s32 func_0011A72C(void) {
     return -1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_11A71C", func_0011A734);
+INCLUDE_ASM("nonmatchings/netfront_11A71C", func_0011A734);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_11A71C", func_0011A804);
+INCLUDE_ASM("nonmatchings/netfront_11A71C", func_0011A804);

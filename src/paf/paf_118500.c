@@ -39,7 +39,7 @@ s32 scePaf_EB346F51(struct Unk_scePaf_EB346F51_0 *arg0, s32 arg1, s32 arg2) {
     return temp_s1;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_118500", func_00118674);
+INCLUDE_ASM("nonmatchings/paf_118500", func_00118674);
 
 void func_001186F0(void) {
     func_00118674(1, 0xFFFF);
@@ -49,27 +49,27 @@ void func_00118710(void) {
     func_00118674(0, 0xFFFF);
 }
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_118500", D_0019CE48);
+INCLUDE_RODATA("nonmatchings/paf_118500", D_0019CE48);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_118500", D_0019CEE0);
+INCLUDE_RODATA("nonmatchings/paf_118500", D_0019CEE0);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_118500", D_0019CEF8);
+INCLUDE_RODATA("nonmatchings/paf_118500", D_0019CEF8);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_118500", D_0019CFCC);
+INCLUDE_RODATA("nonmatchings/paf_118500", D_0019CFCC);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_118500", D_0019CFE8);
+INCLUDE_RODATA("nonmatchings/paf_118500", D_0019CFE8);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_118500", D_0019D0C8);
+INCLUDE_RODATA("nonmatchings/paf_118500", D_0019D0C8);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_118500", D_0019D160);
+INCLUDE_RODATA("nonmatchings/paf_118500", D_0019D160);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_118500", D_0019D1F0);
+INCLUDE_RODATA("nonmatchings/paf_118500", D_0019D1F0);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_118500", D_0019D204);
+INCLUDE_RODATA("nonmatchings/paf_118500", D_0019D204);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_118500", D_0019D210);
+INCLUDE_RODATA("nonmatchings/paf_118500", D_0019D210);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_118500", scePaf_96857E81);
+INCLUDE_ASM("nonmatchings/paf_118500", scePaf_96857E81);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_118500", scePaf_E977B833);
+INCLUDE_ASM("nonmatchings/paf_118500", scePaf_E977B833);
 

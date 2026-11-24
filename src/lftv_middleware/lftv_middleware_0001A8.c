@@ -7,7 +7,7 @@ s32 sceVshLftvMw_304BB1BA(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0001A8", sceVshLftvMw_C758B54C);
+INCLUDE_ASM("nonmatchings/lftv_middleware_0001A8", sceVshLftvMw_C758B54C);
 
 s32 sceVshLftvMw_77C766AF(void) {
     sceVshLftvMw_B45A02C2();

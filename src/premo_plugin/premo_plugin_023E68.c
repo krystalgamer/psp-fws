@@ -7,11 +7,11 @@ void func_00023E68(struct Unk_func_00023E68_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unkF4 = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_023E68", func_00023E74);
+INCLUDE_ASM("nonmatchings/premo_plugin_023E68", func_00023E74);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_023E68", func_00023FB8);
+INCLUDE_ASM("nonmatchings/premo_plugin_023E68", func_00023FB8);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_023E68", func_000240C8);
+INCLUDE_ASM("nonmatchings/premo_plugin_023E68", func_000240C8);
 
 void func_00024200(s32 arg0) {
     func_0002259C(arg0 - 0x84);

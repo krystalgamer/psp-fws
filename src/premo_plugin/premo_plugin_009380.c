@@ -12,7 +12,7 @@ s32 func_00009380(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009380", func_000093BC);
+INCLUDE_ASM("nonmatchings/premo_plugin_009380", func_000093BC);
 
 s32 func_000093F8(void) {
     s32 temp_v0;
@@ -36,9 +36,9 @@ u8 func_00009434(void) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009380", func_00009460);
+INCLUDE_ASM("nonmatchings/premo_plugin_009380", func_00009460);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009380", func_0000948C);
+INCLUDE_ASM("nonmatchings/premo_plugin_009380", func_0000948C);
 
 void func_000094B8(struct Unk_func_000094B8_0 *arg0) {
     arg0->unk0 = sceKernelCreateSema(&D_0002A070, 0x100U, 1, 1, NULL);

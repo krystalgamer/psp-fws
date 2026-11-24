@@ -14,7 +14,7 @@ void func_0002743C(struct Unk_func_0002743C_0 *arg0) {
     arg0->unk4 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_02742C", func_0002744C);
+INCLUDE_ASM("nonmatchings/paf_02742C", func_0002744C);
 
 void func_0002748C(void) {
     func_00027AE4();

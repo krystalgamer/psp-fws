@@ -3,29 +3,29 @@
 #include "k1.h"
 #include "stdio_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000000);
+INCLUDE_ASM("nonmatchings/stdio", func_00000000);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_2CCF071A);
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_2CCF071A);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", printf);
+INCLUDE_ASM("nonmatchings/stdio", printf);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_000001E8);
+INCLUDE_ASM("nonmatchings/stdio", func_000001E8);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_4F78930A);
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_4F78930A);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_D2B2A2A7);
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_D2B2A2A7);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_11A5127A);
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_11A5127A);
 
 void putchar(s32 arg0) {
     StdioForKernel_4F78930A(arg0, 1);
 }
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_36B23B8B);
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_36B23B8B);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", puts);
+INCLUDE_ASM("nonmatchings/stdio", puts);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", getchar);
+INCLUDE_ASM("nonmatchings/stdio", getchar);
 
 void gets(s32 arg0) {
     StdioForKernel_11A5127A(arg0, 0);
@@ -54,13 +54,13 @@ s32 StdioForUser_924ABA61(void) {
     return 0x80020001;
 }
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000768);
+INCLUDE_ASM("nonmatchings/stdio", func_00000768);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000870);
+INCLUDE_ASM("nonmatchings/stdio", func_00000870);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000960);
+INCLUDE_ASM("nonmatchings/stdio", func_00000960);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000988);
+INCLUDE_ASM("nonmatchings/stdio", func_00000988);
 
 s32 sceKernelRegisterStdoutPipe(s32 arg0) {
     s32 temp_v0;
@@ -98,50 +98,50 @@ s32 func_00000A40(struct Unk_func_00000A40_0 *arg0) {
     return (arg0->unk4 < 3) ? 0 : 0x800203E8;
 }
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000A58);
+INCLUDE_ASM("nonmatchings/stdio", func_00000A58);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000A68);
+INCLUDE_ASM("nonmatchings/stdio", func_00000A68);
 
 s32 func_00000AF0(void) {
     return 0x800203E9;
 }
 
-INCLUDE_RODATA("tmp/asm/282/stdio/nonmatchings/stdio", D_0000145C);
+INCLUDE_RODATA("nonmatchings/stdio", D_0000145C);
 
-INCLUDE_RODATA("tmp/asm/282/stdio/nonmatchings/stdio", D_00001464);
+INCLUDE_RODATA("nonmatchings/stdio", D_00001464);
 
-INCLUDE_RODATA("tmp/asm/282/stdio/nonmatchings/stdio", D_000014BC);
+INCLUDE_RODATA("nonmatchings/stdio", D_000014BC);
 
-INCLUDE_RODATA("tmp/asm/282/stdio/nonmatchings/stdio", D_000014C8);
+INCLUDE_RODATA("nonmatchings/stdio", D_000014C8);
 
-INCLUDE_RODATA("tmp/asm/282/stdio/nonmatchings/stdio", D_000014DC);
+INCLUDE_RODATA("nonmatchings/stdio", D_000014DC);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000AFC);
+INCLUDE_ASM("nonmatchings/stdio", func_00000AFC);
 
-INCLUDE_RODATA("tmp/asm/282/stdio/nonmatchings/stdio", D_00001508);
+INCLUDE_RODATA("nonmatchings/stdio", D_00001508);
 
-INCLUDE_RODATA("tmp/asm/282/stdio/nonmatchings/stdio", D_0000151C);
+INCLUDE_RODATA("nonmatchings/stdio", D_0000151C);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000C78);
+INCLUDE_ASM("nonmatchings/stdio", func_00000C78);
 
 void syslib_D3744BE0(void) {
     func_00000C78();
 }
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", sceKernelStdin);
+INCLUDE_ASM("nonmatchings/stdio", sceKernelStdin);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", sceKernelStdout);
+INCLUDE_ASM("nonmatchings/stdio", sceKernelStdout);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", sceKernelStderr);
+INCLUDE_ASM("nonmatchings/stdio", sceKernelStderr);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_98220F3E);
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_98220F3E);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_FB5380C5);
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_FB5380C5);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_2D8551AB);
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_2D8551AB);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", StdioForKernel_9662BF86);
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_9662BF86);
 
-INCLUDE_RODATA("tmp/asm/282/stdio/nonmatchings/stdio", D_0000154C);
+INCLUDE_RODATA("nonmatchings/stdio", D_0000154C);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000FB8);
+INCLUDE_ASM("nonmatchings/stdio", func_00000FB8);

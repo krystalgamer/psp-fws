@@ -8,20 +8,20 @@ s32 func_00037308(struct Unk_func_00037308_0 *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037318);
+INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_00037318);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_000373B8);
+INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_000373B8);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037438);
+INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_00037438);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_000376B8);
+INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_000376B8);
 
 void func_00037730(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037738);
+INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_00037738);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037798);
+INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_00037798);
 
 void func_000377E8(struct Unk_func_000377E8_0 *arg0) {
     func_00039DEC(arg0);
@@ -67,13 +67,13 @@ s32 func_00037938(struct Unk_func_00037938_0 *arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037944);
+INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_00037944);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037ABC);
+INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_00037ABC);
 
 s32 func_00037B38(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037B40);
+INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_00037B40);
 

@@ -28,15 +28,15 @@ s32 func_000796B4(void **arg0, s32 arg1, void **arg2) {
     return var_a2;
 }
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_00079720);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0796B4", func_00079720);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_0007977C);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0796B4", func_0007977C);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_000797F0);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0796B4", func_000797F0);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_0007989C);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0796B4", func_0007989C);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_000798F4);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0796B4", func_000798F4);
 
 s32 func_000799C0(struct Unk_func_000775E4_0 *arg0, s32 *arg1) {
     s32 var_v1;
@@ -49,7 +49,7 @@ s32 func_000799C0(struct Unk_func_000775E4_0 *arg0, s32 *arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_000799EC);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0796B4", func_000799EC);
 
 s32 func_00079AC0(struct Unk_func_0007763C_0 *arg0, s32 *arg1) {
     s32 var_v1;
@@ -62,7 +62,7 @@ s32 func_00079AC0(struct Unk_func_0007763C_0 *arg0, s32 *arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_00079AE0);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0796B4", func_00079AE0);
 
 s32 func_00079B74(struct Unk_func_00077694_0 *arg0, s32 *arg1) {
     s32 var_v1;
@@ -87,7 +87,7 @@ s32 func_00079B94(s32 arg0, s32 arg1) {
     return var_a1;
 }
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0796B4", func_00079BE4);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0796B4", func_00079BE4);
 
 s32 func_00079C58(struct Unk_func_00077718_0 *arg0, s32 *arg1) {
     s32 var_v1;

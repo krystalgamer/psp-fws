@@ -12,9 +12,9 @@ void func_00008B64(s32 arg0, s32 arg1) {
     func_00008F40(arg0, arg1, var_v0);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_00008BB4);
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_00008BB4);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_00008C48);
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_00008C48);
 
 void func_00008CE4(void **arg0) {
     struct Unk_func_00008CE4_temp_a0 *temp_a0;
@@ -25,21 +25,21 @@ void func_00008CE4(void **arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_00008D04);
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_00008D04);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_00008D30);
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_00008D30);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_00008F40);
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_00008F40);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_00008FEC);
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_00008FEC);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_000090C8);
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_000090C8);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_00009200);
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_00009200);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_00009254);
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_00009254);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_000092A8);
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_000092A8);
 
 s32 func_000092C8(void) {
     return 1;

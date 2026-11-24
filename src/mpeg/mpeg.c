@@ -2,45 +2,45 @@
 #include "common.h"
 #include "mpeg_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000000);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000000);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000124);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000124);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000001B4);
+INCLUDE_ASM("nonmatchings/mpeg", func_000001B4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000026C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000026C);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_00008018);
+INCLUDE_RODATA("nonmatchings/mpeg", D_00008018);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_00008030);
+INCLUDE_RODATA("nonmatchings/mpeg", D_00008030);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000034C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000034C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000414);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000414);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000498);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000498);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000824);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000824);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000008D0);
+INCLUDE_ASM("nonmatchings/mpeg", func_000008D0);
 
 s32 func_00000918(void) {
     return 0x10000;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000920);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000920);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000AAC);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000AAC);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000B54);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000B54);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000C3C);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000C3C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000C88);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000C88);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000E20);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000E20);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000F70);
+INCLUDE_ASM("nonmatchings/mpeg", func_00000F70);
 
 void func_00000FB4(s32 arg0, s32 arg1) {
     func_00000B54(arg0, 0, arg1);
@@ -68,15 +68,15 @@ void func_00000FEC(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001074);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001074);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000011A0);
+INCLUDE_ASM("nonmatchings/mpeg", func_000011A0);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001264);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001264);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001480);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001480);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001510);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001510);
 
 void func_000015B4(s32 *arg0, s32 arg1, s32 arg2) {
     void *sp0;
@@ -92,25 +92,25 @@ void func_000015B4(s32 *arg0, s32 arg1, s32 arg2) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000162C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000162C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001690);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001690);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001734);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001734);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000017E4);
+INCLUDE_ASM("nonmatchings/mpeg", func_000017E4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000188C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000188C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001980);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001980);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_000080B8);
+INCLUDE_RODATA("nonmatchings/mpeg", D_000080B8);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_000080C0);
+INCLUDE_RODATA("nonmatchings/mpeg", D_000080C0);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_000080D0);
+INCLUDE_RODATA("nonmatchings/mpeg", D_000080D0);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001A28);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001A28);
 
 s32 func_00001AF4(s32 *arg0) {
     return (func_00007758(*arg0, (s32) &D_000080D0) == 0) ? 0 : 0x806101FE;
@@ -130,33 +130,33 @@ s32 func_00001B28(s32 arg0, s32 *arg1) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001B6C);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001B6C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001C14);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001C14);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001DE0);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001DE0);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001EA8);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001EA8);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001F28);
+INCLUDE_ASM("nonmatchings/mpeg", func_00001F28);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00002290);
+INCLUDE_ASM("nonmatchings/mpeg", func_00002290);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000023A4);
+INCLUDE_ASM("nonmatchings/mpeg", func_000023A4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00002548);
+INCLUDE_ASM("nonmatchings/mpeg", func_00002548);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00002BC8);
+INCLUDE_ASM("nonmatchings/mpeg", func_00002BC8);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00002C34);
+INCLUDE_ASM("nonmatchings/mpeg", func_00002C34);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00002DBC);
+INCLUDE_ASM("nonmatchings/mpeg", func_00002DBC);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000308C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000308C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000030A4);
+INCLUDE_ASM("nonmatchings/mpeg", func_000030A4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000030C0);
+INCLUDE_ASM("nonmatchings/mpeg", func_000030C0);
 
 s32 func_00003198(void) {
     return 0;
@@ -183,29 +183,29 @@ s32 func_000031A0(struct Unk_func_000031A0_0 *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00003208);
+INCLUDE_ASM("nonmatchings/mpeg", func_00003208);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000032C0);
+INCLUDE_ASM("nonmatchings/mpeg", func_000032C0);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00003370);
+INCLUDE_ASM("nonmatchings/mpeg", func_00003370);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000038D4);
+INCLUDE_ASM("nonmatchings/mpeg", func_000038D4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00003B00);
+INCLUDE_ASM("nonmatchings/mpeg", func_00003B00);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00003E60);
+INCLUDE_ASM("nonmatchings/mpeg", func_00003E60);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000425C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000425C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004370);
+INCLUDE_ASM("nonmatchings/mpeg", func_00004370);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000466C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000466C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004770);
+INCLUDE_ASM("nonmatchings/mpeg", func_00004770);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004AC0);
+INCLUDE_ASM("nonmatchings/mpeg", func_00004AC0);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004E3C);
+INCLUDE_ASM("nonmatchings/mpeg", func_00004E3C);
 
 s32 func_00004E70(struct Unk_func_00004E70_0 *arg0, s32 arg1) {
     arg0->unk8 = arg1;
@@ -220,27 +220,27 @@ void func_00004EA0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_00003B00(arg0, arg1, 5, arg2, arg3);
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004EC4);
+INCLUDE_ASM("nonmatchings/mpeg", func_00004EC4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004F1C);
+INCLUDE_ASM("nonmatchings/mpeg", func_00004F1C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00004FD0);
+INCLUDE_ASM("nonmatchings/mpeg", func_00004FD0);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00005128);
+INCLUDE_ASM("nonmatchings/mpeg", func_00005128);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000051F4);
+INCLUDE_ASM("nonmatchings/mpeg", func_000051F4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000527C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000527C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000052FC);
+INCLUDE_ASM("nonmatchings/mpeg", func_000052FC);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00005338);
+INCLUDE_ASM("nonmatchings/mpeg", func_00005338);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00005388);
+INCLUDE_ASM("nonmatchings/mpeg", func_00005388);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000053D4);
+INCLUDE_ASM("nonmatchings/mpeg", func_000053D4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000542C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000542C);
 
 s32 func_00005478(s32 arg0) {
     return ((func_00007AF4(arg0 + 2) & 0x3FF) * 8) + 8;
@@ -250,9 +250,9 @@ s32 func_000054A0(u8 *arg0) {
     return *arg0 & 0xF;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000054AC);
+INCLUDE_ASM("nonmatchings/mpeg", func_000054AC);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000054CC);
+INCLUDE_ASM("nonmatchings/mpeg", func_000054CC);
 
 s32 func_000054F0(s32 arg0) {
     return __builtin_allegrex_ins(func_00007B0C(arg0 + 1), 0, 0x15, 0xB);
@@ -303,101 +303,101 @@ s32 func_000055A8(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000055B0);
+INCLUDE_ASM("nonmatchings/mpeg", func_000055B0);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000596C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000596C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00005A48);
+INCLUDE_ASM("nonmatchings/mpeg", func_00005A48);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegQueryStreamOffset);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegQueryStreamOffset);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegQueryStreamSize);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegQueryStreamSize);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegInit);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegInit);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegFinish);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegFinish);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegQueryMemSize);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegQueryMemSize);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegCreate);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegCreate);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegDelete);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegDelete);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegRegistStream);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegRegistStream);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegUnRegistStream);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegUnRegistStream);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegMallocAvcEsBuf);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegMallocAvcEsBuf);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegFreeAvcEsBuf);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegFreeAvcEsBuf);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegQueryAtracEsSize);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegQueryAtracEsSize);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegQueryPcmEsSize);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegQueryPcmEsSize);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegInitAu);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegInitAu);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegChangeGetAvcAuMode);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegChangeGetAvcAuMode);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegChangeGetAuMode);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegChangeGetAuMode);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegNextAvcRpAu);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegNextAvcRpAu);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegGetAvcAu);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegGetAvcAu);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegGetPcmAu);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegGetPcmAu);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegGetAtracAu);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegGetAtracAu);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegFlushStream);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegFlushStream);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegFlushAllStream);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegFlushAllStream);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcDecode);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcDecode);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcDecodeDetail);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcDecodeDetail);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcDecodeMode);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcDecodeMode);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcDecodeStop);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcDecodeStop);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcDecodeFlush);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcDecodeFlush);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcQueryYCbCrSize);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcQueryYCbCrSize);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcInitYCbCr);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcInitYCbCr);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcDecodeYCbCr);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcDecodeYCbCr);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcDecodeStopYCbCr);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcDecodeStopYCbCr);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcCsc);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcCsc);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAvcCopyYCbCr);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAvcCopyYCbCr);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegAtracDecode);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegAtracDecode);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006898);
+INCLUDE_ASM("nonmatchings/mpeg", func_00006898);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006910);
+INCLUDE_ASM("nonmatchings/mpeg", func_00006910);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegQueryUserdataEsSize);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegQueryUserdataEsSize);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegGetUserdataAu);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegGetUserdataAu);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006A58);
+INCLUDE_ASM("nonmatchings/mpeg", func_00006A58);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegRingbufferQueryMemSize);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegRingbufferQueryMemSize);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegRingbufferQueryPackNum);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegRingbufferQueryPackNum);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegRingbufferConstruct);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegRingbufferConstruct);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegRingbufferDestruct);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegRingbufferDestruct);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegRingbufferPut);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegRingbufferPut);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", sceMpegRingbufferAvailableSize);
+INCLUDE_ASM("nonmatchings/mpeg", sceMpegRingbufferAvailableSize);
 
 s32 func_00006CF0(s32 arg0, s32 arg1, void *arg2, u32 *arg3) {
     u32 temp_v0;
@@ -415,7 +415,7 @@ s32 func_00006D70(u32 arg0) {
     return (sceKernelWaitSema(arg0, 1, NULL) == 0) ? 0 : 0x80000041;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006DA0);
+INCLUDE_ASM("nonmatchings/mpeg", func_00006DA0);
 
 s32 func_00006DD4(u32 arg0) {
     return (sceKernelPollSema(arg0, 0) == 0) ? 0 : 0x80000041;
@@ -425,17 +425,17 @@ s32 func_00006E00(u32 arg0) {
     return (sceKernelSignalSema(arg0, 1) == 0) ? 0 : 0x80000041;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006E2C);
+INCLUDE_ASM("nonmatchings/mpeg", func_00006E2C);
 
 void func_00006E74(void) {
     sceKernelCheckThreadStack();
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006E90);
+INCLUDE_ASM("nonmatchings/mpeg", func_00006E90);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006F44);
+INCLUDE_ASM("nonmatchings/mpeg", func_00006F44);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00006F88);
+INCLUDE_ASM("nonmatchings/mpeg", func_00006F88);
 
 void func_00007108(void) {
     sceVideocodec_4F160BF4(D_00008300);
@@ -472,7 +472,7 @@ s32 func_000071E0(s32 arg0) {
     return temp_s1;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007234);
+INCLUDE_ASM("nonmatchings/mpeg", func_00007234);
 
 s32 func_000072FC(struct Unk_func_000072FC_0 *arg0, s32 arg1) {
     s32 temp_s1;
@@ -484,11 +484,11 @@ s32 func_000072FC(struct Unk_func_000072FC_0 *arg0, s32 arg1) {
     return temp_s1;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000735C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000735C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000073E8);
+INCLUDE_ASM("nonmatchings/mpeg", func_000073E8);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007494);
+INCLUDE_ASM("nonmatchings/mpeg", func_00007494);
 
 void func_00007590(void) {
     if (D_00008400->unkC == 0) {
@@ -530,7 +530,7 @@ s32 func_00007648(s32 arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000076B0);
+INCLUDE_ASM("nonmatchings/mpeg", func_000076B0);
 
 u8 *func_000076F8(u8 *arg0, u8 *arg1, s32 arg2) {
     s32 var_a2;
@@ -558,38 +558,38 @@ u8 *func_000076F8(u8 *arg0, u8 *arg1, s32 arg2) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000772C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000772C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007758);
+INCLUDE_ASM("nonmatchings/mpeg", func_00007758);
 
 s32 func_000077D8(s32 arg0) {
     return __builtin_allegrex_max(arg0, -arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000077E8);
+INCLUDE_ASM("nonmatchings/mpeg", func_000077E8);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000787C);
+INCLUDE_ASM("nonmatchings/mpeg", func_0000787C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007AC8);
+INCLUDE_ASM("nonmatchings/mpeg", func_00007AC8);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007AF4);
+INCLUDE_ASM("nonmatchings/mpeg", func_00007AF4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007B0C);
+INCLUDE_ASM("nonmatchings/mpeg", func_00007B0C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007B2C);
+INCLUDE_ASM("nonmatchings/mpeg", func_00007B2C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007B58);
+INCLUDE_ASM("nonmatchings/mpeg", func_00007B58);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_00008100);
+INCLUDE_RODATA("nonmatchings/mpeg", D_00008100);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_00008110);
+INCLUDE_RODATA("nonmatchings/mpeg", D_00008110);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_00008190);
+INCLUDE_RODATA("nonmatchings/mpeg", D_00008190);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_000081E4);
+INCLUDE_RODATA("nonmatchings/mpeg", D_000081E4);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_000081E8);
+INCLUDE_RODATA("nonmatchings/mpeg", D_000081E8);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_000081EC);
+INCLUDE_RODATA("nonmatchings/mpeg", D_000081EC);
 
-INCLUDE_RODATA("tmp/asm/282/mpeg/nonmatchings/mpeg", D_000081F4);
+INCLUDE_RODATA("nonmatchings/mpeg", D_000081F4);

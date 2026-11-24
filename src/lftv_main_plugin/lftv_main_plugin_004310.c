@@ -21,32 +21,32 @@ void func_0000434C(struct Unk_func_0000434C_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_0000437C);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_0000437C);
 
-INCLUDE_RODATA("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", D_00057364);
+INCLUDE_RODATA("nonmatchings/lftv_main_plugin_004310", D_00057364);
 
-INCLUDE_RODATA("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", D_00057378);
+INCLUDE_RODATA("nonmatchings/lftv_main_plugin_004310", D_00057378);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_00004414);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004414);
 
 s32 func_000045FC(struct Unk_func_0000434C_0 *arg0) {
     func_0000434C(arg0);
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_0000461C);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_0000461C);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_0000467C);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_0000467C);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_000046BC);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_000046BC);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_00004794);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004794);
 
 s32 func_00004858(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_00004860);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004860);
 
 s32 func_00004914(struct Unk_func_00004914_0 *arg0) {
     s32 var_v0;
@@ -60,11 +60,11 @@ s32 func_00004914(struct Unk_func_00004914_0 *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_00004934);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004934);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_00004A38);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004A38);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_00004A78);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004A78);
 
 s32 func_00004AB8(struct Unk_func_00004AB8_0 *arg0) {
     s32 var_v0;
@@ -90,11 +90,11 @@ s32 func_00004AD0(struct Unk_func_00004AD0_0 *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_00004AE8);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004AE8);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_00004C04);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004C04);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_00004E08);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004E08);
 
 void func_00004E84(void) {
     func_00004E08(1, 0xFFFF);
@@ -108,5 +108,5 @@ void func_00004EC4(void) {
     func_00005090();
 }
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004310", func_00004EE0);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004EE0);
 

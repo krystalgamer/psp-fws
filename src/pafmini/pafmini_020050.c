@@ -108,13 +108,13 @@ u8 func_00020194(s32 arg0, struct Unk_func_00020194_1 *arg1) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020050", func_000201B4);
+INCLUDE_ASM("nonmatchings/pafmini_020050", func_000201B4);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020050", func_000201F0);
+INCLUDE_ASM("nonmatchings/pafmini_020050", func_000201F0);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020050", func_0002022C);
+INCLUDE_ASM("nonmatchings/pafmini_020050", func_0002022C);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020050", func_00020360);
+INCLUDE_ASM("nonmatchings/pafmini_020050", func_00020360);
 
 s32 func_0002039C(s32 arg0, struct Unk_func_0002039C_1 *arg1) {
     s32 var_v1;

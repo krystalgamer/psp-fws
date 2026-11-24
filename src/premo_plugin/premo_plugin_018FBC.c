@@ -12,9 +12,9 @@ s32 func_00018FBC(struct Unk_func_00018FBC_0 *arg0, s32 arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_018FBC", func_00018FD4);
+INCLUDE_ASM("nonmatchings/premo_plugin_018FBC", func_00018FD4);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_018FBC", func_00019074);
+INCLUDE_ASM("nonmatchings/premo_plugin_018FBC", func_00019074);
 
 void func_0001910C(struct Unk_func_0001910C_0 *arg0) {
     func_00018FD4(arg0->unk4);

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_087374", func_00087374);
+INCLUDE_ASM("nonmatchings/music_main_plugin_087374", func_00087374);
 
 void func_00087394(struct Unk_func_00087394_0 *arg0, s8 arg1) {
     arg0->unk0 = &D_000A20E0;

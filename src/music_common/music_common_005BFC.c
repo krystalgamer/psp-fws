@@ -12,7 +12,7 @@ s32 music_common_D29A7B4B(struct Unk_music_common_D29A7B4B_0 *arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005BFC", func_00005C10);
+INCLUDE_ASM("nonmatchings/music_common_005BFC", func_00005C10);
 
 void func_00005CC4(struct Unk_func_00005CC4_0 *arg0) {
     s8 *temp_v1;
@@ -24,15 +24,15 @@ void func_00005CC4(struct Unk_func_00005CC4_0 *arg0) {
     arg0->unk8 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005BFC", func_00005CE4);
+INCLUDE_ASM("nonmatchings/music_common_005BFC", func_00005CE4);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005BFC", music_common_28010044);
+INCLUDE_ASM("nonmatchings/music_common_005BFC", music_common_28010044);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005BFC", func_00005D74);
+INCLUDE_ASM("nonmatchings/music_common_005BFC", func_00005D74);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005BFC", music_common_D27DF99A);
+INCLUDE_ASM("nonmatchings/music_common_005BFC", music_common_D27DF99A);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005BFC", func_00005E04);
+INCLUDE_ASM("nonmatchings/music_common_005BFC", func_00005E04);
 
 s32 music_common_90D09602(s32 arg0) {
     return arg0 + 4;

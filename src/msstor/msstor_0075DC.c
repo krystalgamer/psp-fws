@@ -14,9 +14,9 @@ s32 func_000075DC(struct Unk_func_000075DC_0 *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0075DC", func_00007620);
+INCLUDE_ASM("nonmatchings/msstor_0075DC", func_00007620);
 
-INCLUDE_ASM("tmp/asm/201/msstor/nonmatchings/msstor_0075DC", func_000076E4);
+INCLUDE_ASM("nonmatchings/msstor_0075DC", func_000076E4);
 
 void func_00007798(struct Unk_func_00007798_0 *arg0) {
     arg0->unk4E84 = 0;

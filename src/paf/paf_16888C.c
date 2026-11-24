@@ -7,5 +7,5 @@ s32 func_0016888C(s32 arg0, s32 arg1, s32 *arg2) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_16888C", func_001688A4);
+INCLUDE_ASM("nonmatchings/paf_16888C", func_001688A4);
 

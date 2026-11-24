@@ -1,33 +1,33 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_0001C97C);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001C97C);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016F7AC);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016F7AC);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_0001CA78);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001CA78);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016F890);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016F890);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016F8A4);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016F8A4);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016F9E0);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016F9E0);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016FA10);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FA10);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_00024B9C);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024B9C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_00024E24);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024E24);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_00024E74);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024E74);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", scePaf_752F182C);
+INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_752F182C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", scePaf_81817B66);
+INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_81817B66);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", scePaf_10C1DB70);
+INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_10C1DB70);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", scePaf_01C2FC36);
+INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_01C2FC36);
 
 void func_000254C0(void) {
     sceKernelWaitSema(*D_001A4E30, 1, NULL);
@@ -37,39 +37,39 @@ void func_000254EC(void) {
     sceKernelSignalSema((s32) *D_001A4E30, 1);
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_00025514);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_00025514);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_000255E8);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_000255E8);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_000256E4);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_000256E4);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_000257A4);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_000257A4);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_00025874);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_00025874);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_00025B20);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_00025B20);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016FAC8);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FAC8);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016FAE4);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FAE4);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016FAF0);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FAF0);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016FB04);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FB04);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016FB1C);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FB1C);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016FB3C);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FB3C);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016FB54);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FB54);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_01C97C", D_0016FB68);
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FB68);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", scePaf_AAE8A6B6);
+INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_AAE8A6B6);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", scePaf_CEFBDE33);
+INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_CEFBDE33);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_0002722C);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_0002722C);
 
 void func_000272A0(struct Unk_func_000272A0_0 *arg0) {
     arg0->unk0 = 0;
@@ -77,7 +77,7 @@ void func_000272A0(struct Unk_func_000272A0_0 *arg0) {
     arg0->unk8 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_000272B0);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_000272B0);
 
 void func_00027324(struct Unk_func_00027324_0 *arg0) {
     arg0->unk0 = 0;
@@ -85,7 +85,7 @@ void func_00027324(struct Unk_func_00027324_0 *arg0) {
     arg0->unk8 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_01C97C", func_00027334);
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_00027334);
 
 void func_000273A8(struct Unk_func_000273A8_0 *arg0) {
     arg0->unk0 = 0;

@@ -2,17 +2,17 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000097D4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000097D4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000098C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000098C8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000991C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000991C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000099E4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000099E4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00009AAC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00009AAC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00009B74);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00009B74);
 
 s32 func_00009C3C(struct Unk_func_00009C3C_0 *arg0, struct Unk_func_00009C3C_1 *arg1, M2C_UNK arg2) {
     s32 temp_v0;
@@ -98,9 +98,9 @@ s32 func_00009D8C(struct Unk_func_00009D8C_0 *arg0, struct Unk_func_00009D8C_1 *
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00009DFC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00009DFC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00009E08);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00009E08);
 
 s32 func_00009E14(void) {
     s32 *temp_v0;
@@ -114,52 +114,52 @@ s32 func_00009E14(void) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00009E40);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00009E40);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00009E7C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00009E7C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00009E9C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00009E9C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00009EC0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00009EC0);
 
 s32 func_00009ECC(void) {
     return D_001322BC;
 }
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011D988);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011D988);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011D9B4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011D9B4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DDC0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DDC0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00009ED8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00009ED8);
 
 M2C_UNK *func_00009F4C(void) {
     return &D_001322CC;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00009F58);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00009F58);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_6CAE4020);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_6CAE4020);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000A240);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000A240);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000A288);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000A288);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000A2B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000A2B8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000A318);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000A318);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000A348);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000A348);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000A448);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000A448);
 
 void func_0000A494(s32 arg0) {
     func_00023780();
     func_00023880(arg0, 0x1E0, 0x110);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000A4C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000A4C8);
 
 void func_0000A700(void) {
 }
@@ -187,28 +187,28 @@ void func_0000A740(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000A760);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000A760);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000A828);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000A828);
 
 void func_0000A92C(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000A934);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000A934);
 
 s32 func_0000AA38(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000AA40);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000AA40);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000ABE8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000ABE8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000AC50);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000AC50);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000AD18);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000AD18);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000AD94);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000AD94);
 
 void func_0000ADD4(struct Unk_func_0000ADD4_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
@@ -218,11 +218,11 @@ void func_0000ADD4(struct Unk_func_0000ADD4_0 *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000AE24);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000AE24);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000AEC8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000AEC8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000AF44);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000AF44);
 
 s32 func_0000AF68(struct Unk_func_0000AF68_0 *arg0) {
     s32 var_v0;
@@ -234,9 +234,9 @@ s32 func_0000AF68(struct Unk_func_0000AF68_0 *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000AF7C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000AF7C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000B07C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000B07C);
 
 s32 func_0000B13C(void) {
     return 0;
@@ -246,9 +246,9 @@ s32 func_0000B144(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000B14C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000B14C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000B290);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000B290);
 
 void func_0000B2E8(struct Unk_func_0000B2E8_0 *arg0) {
     arg0->unk4 = 2;
@@ -258,39 +258,39 @@ void func_0000B2E8(struct Unk_func_0000B2E8_0 *arg0) {
 void func_0000B2F8(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000B300);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000B300);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000B5A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000B5A4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DE90);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DE90);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DE98);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DE98);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DEA0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DEA0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DEA8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DEA8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DEB0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DEB0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DEB8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DEB8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DEC4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DEC4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DECC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DECC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DED4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DED4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DEDC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DEDC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000B61C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000B61C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DEF4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DEF4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000B724);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000B724);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000BCEC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000BCEC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000BD18);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000BD18);
 
 void func_0000BECC(struct Unk_func_0000BECC_0 *arg0) {
     sceHVWWW_Library_52782A62(arg0->unk44, 0);
@@ -304,41 +304,41 @@ s32 func_0000BF08(struct Unk_func_0000BF08_0 *arg0) {
     return arg0->unk68C;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000BF10);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000BF10);
 
 void func_0000BFD0(struct Unk_func_0000BFD0_0 *arg0, s32 arg1) {
     arg0->unk878 = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000BFD8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000BFD8);
 
 void func_0000C100(struct Unk_func_0000C100_0 *arg0, s32 arg1) {
     arg0->unk87C = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C108);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C108);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C318);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C318);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C358);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C358);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C3A0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C3A0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C3E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C3E8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C430);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C430);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C478);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C478);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C51C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C51C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C584);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C584);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C5EC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C5EC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C654);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C654);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C69C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C69C);
 
 s32 func_0000C700(struct Unk_func_0000C700_0 *arg0) {
     if (arg0->unk6B8 == 0) {
@@ -347,109 +347,109 @@ s32 func_0000C700(struct Unk_func_0000C700_0 *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C734);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C734);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C77C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C77C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C804);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C804);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C884);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C884);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C924);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C924);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000C9F0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000C9F0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000CAFC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000CAFC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000CDB8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000CDB8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000CEC8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000CEC8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D0FC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D0FC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D18C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D18C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D2C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D2C0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D334);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D334);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D36C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D36C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D3A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D3A4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D444);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D444);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D4BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D4BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D534);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D534);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D614);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D614);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D6BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D6BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D784);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D784);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D7DC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D7DC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D858);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D858);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000D9F0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000D9F0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DA58);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DA58);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DAF4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DAF4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DBA4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DBA4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DC54);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DC54);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DD04);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DD04);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DD5C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DD5C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DDB4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DDB4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DE0C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DE0C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DE64);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DE64);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DECC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DECC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DF44);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DF44);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000DFF4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000DFF4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000E0A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000E0A4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000E10C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000E10C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000E36C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000E36C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000E3B4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000E3B4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000E520);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000E520);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_CAA4BDD4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_CAA4BDD4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_6BA06056);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_6BA06056);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_E25ACBBB);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_E25ACBBB);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_A72A9616);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_A72A9616);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_DBF36A05);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_DBF36A05);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_C1CBF794);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_C1CBF794);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_2764F63A);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_2764F63A);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_B5E28668);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_B5E28668);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000EC38);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000EC38);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000EC88);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000EC88);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000ED64);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000ED64);
 
 void func_0000EE48(s32 arg0, s32 arg1, s32 arg2) {
     func_0000DF44(arg0, arg1);
@@ -471,7 +471,7 @@ void func_0000EF38(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     func_0000EC88(arg0, 0x10009, arg6);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000EF7C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000EF7C);
 
 void func_0000EFC0(s32 arg0, s32 arg1) {
     func_0000D784();
@@ -517,7 +517,7 @@ void func_0000F160(s32 arg0, s32 arg1, s32 arg2) {
     func_0000EC88(arg0, var_a1, arg2);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000F1C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000F1C0);
 
 void func_0000F288(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     func_0000E3B4(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
@@ -529,7 +529,7 @@ void func_0000F2CC(s32 arg0, s32 arg1, s32 arg2) {
     func_0000EC88(arg0, 0x10013, arg2);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000F310);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000F310);
 
 void func_0000F354(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     func_0000D6BC(arg0, arg1, arg2, arg3);
@@ -541,25 +541,25 @@ void func_0000F398(s32 arg0, s32 arg1, s32 arg2) {
     func_0000EC88(arg0, 0x10027, arg2);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000F3DC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000F3DC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000F52C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000F52C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000F568);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000F568);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DF34);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DF34);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DF5C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DF5C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DF60);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DF60);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_D7F88071);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_D7F88071);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000F798);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000F798);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000F7E0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000F7E0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000F86C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000F86C);
 
 s32 func_0000F914(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0_2;
@@ -577,21 +577,21 @@ s32 func_0000F914(s32 arg0, s32 arg1, s32 arg2) {
     return var_s0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000F9A0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000F9A0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000FA34);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000FA34);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000FAB4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000FAB4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000FB64);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000FB64);
 
 s32 sceHVNetfront_Module_E0BC5E08(void) {
     return func_00009DFC()->unk908;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000FC40);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000FC40);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000FD1C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000FD1C);
 
 s32 func_0000FE90(struct Unk_func_0000FE90_0 *arg0) {
     void *sp0;
@@ -599,11 +599,11 @@ s32 func_0000FE90(struct Unk_func_0000FE90_0 *arg0) {
     return sp0 - arg0->unkB0;
 }
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011DF98);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011DF98);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0000FEC4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0000FEC4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00010AA8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00010AA8);
 
 void func_00010AFC(struct Unk_func_00010AFC_0 *arg0) {
     s32 temp_v0;
@@ -622,25 +622,25 @@ void func_00010AFC(struct Unk_func_00010AFC_0 *arg0) {
     sceHVNetfront_Module_D611E938((s32) arg0, 0, 0x14);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00010B5C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00010B5C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00010CB8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00010CB8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00010CF4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00010CF4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00010DA8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00010DA8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00010E98);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00010E98);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00010F28);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00010F28);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011140);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011140);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011184);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011184);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011304);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011304);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000113C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000113C8);
 
 s32 func_00011574(struct Unk_func_00011574_0 *arg0) {
     s32 temp_s0;
@@ -654,15 +654,15 @@ s32 func_00011574(struct Unk_func_00011574_0 *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000115C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000115C0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011698);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011698);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000116BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000116BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011760);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011760);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000117A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000117A4);
 
 void func_00011838(struct Unk_func_00011838_0 *arg0) {
     s32 temp_a0;
@@ -683,7 +683,7 @@ void func_00011838(struct Unk_func_00011838_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001189C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001189C);
 
 s32 func_000118A4(struct Unk_func_000118A4_0 *arg0) {
     return arg0->unk4;
@@ -697,13 +697,13 @@ void func_000118B4(struct Unk_func_000118B4_0 *arg0, s32 arg1) {
     arg0->unk4 = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000118BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000118BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001198C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001198C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011B30);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011B30);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011CFC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011CFC);
 
 void func_00011D74(struct Unk_func_00011D74_0 *arg0) {
     sceKernelWaitSema(arg0->unk40, 1, 0);
@@ -713,7 +713,7 @@ void func_00011D98(struct Unk_func_00011D98_0 *arg0) {
     sceKernelSignalSema(arg0->unk40, 1);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011DB8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011DB8);
 
 void func_00011E38(struct Unk_func_00011E38_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
@@ -747,15 +747,15 @@ s32 func_00011E6C(struct Unk_func_00011E6C_0 *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011E80);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011E80);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011E90);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011E90);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00011FCC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00011FCC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00012130);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00012130);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00012188);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00012188);
 
 void func_00012340(s32 arg0) {
     if (arg0 != 0) {
@@ -763,25 +763,25 @@ void func_00012340(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00012360);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00012360);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001249C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001249C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00012608);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00012608);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000127C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000127C0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00012908);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00012908);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000129B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000129B8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E0C0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E0C0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E0E4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E0E4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00012A68);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00012A68);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00012DF4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00012DF4);
 
 s32 func_00013158(s32 arg0, s32 arg1, s32 *arg2) {
     s32 temp_v0;
@@ -791,23 +791,23 @@ s32 func_00013158(s32 arg0, s32 arg1, s32 *arg2) {
     return (temp_v0 != 0) ? 0 : -1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000131C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000131C0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00013324);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00013324);
 
 void func_0001345C(s32 arg0) {
     func_00013324((u8 *)func_00009DFC() + 0x880, arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00013490);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00013490);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00013614);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00013614);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000136F8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000136F8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00013888);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00013888);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000139A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000139A4);
 
 void func_00013B34(struct Unk_func_00013B34_0 *arg0) {
     s32 temp_v0;
@@ -821,31 +821,31 @@ void func_00013B34(struct Unk_func_00013B34_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00013B80);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00013B80);
 
 s32 func_00013CCC(s32 arg0, M2C_UNK arg1) {
     return (func_00013B80(arg0 + 0x89C, 0, arg1) != 0) ? 0 : -1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00013CFC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00013CFC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00013DB0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00013DB0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00013E9C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00013E9C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00013F10);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00013F10);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014170);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014170);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000142EC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000142EC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000143E0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000143E0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014428);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014428);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014470);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014470);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014794);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014794);
 
 s32 sceHVNetfront_Module_D9956972(void) {
     return func_00009DFC()->unk910;
@@ -863,7 +863,7 @@ s32 func_00014920(void) {
     return func_00009DFC()->unk6A4;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014940);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014940);
 
 s32 func_000149F4(void) {
     return 0;
@@ -877,11 +877,11 @@ void func_000149FC(struct Unk_func_000149FC_0 *arg0) {
 void func_00014A2C(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014A34);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014A34);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014A94);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014A94);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014AF4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014AF4);
 
 s32 func_00014B50(struct Unk_func_00014B50_0 *arg0) {
     s32 temp_v0;
@@ -905,9 +905,9 @@ void func_00014BB4(s32 arg0) {
     func_0001576C(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014BE0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014BE0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014C3C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014C3C);
 
 s32 func_00014D4C(struct Unk_func_00014D4C_0 *arg0, s32 arg1) {
     s32 var_v1;
@@ -925,7 +925,7 @@ s32 func_00014D4C(struct Unk_func_00014D4C_0 *arg0, s32 arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014DC0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014DC0);
 
 s32 func_00014E24(s32 arg0) {
     s32 var_v1;
@@ -938,7 +938,7 @@ s32 func_00014E24(s32 arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014E64);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014E64);
 
 s32 func_00014F40(s32 arg0) {
     s32 var_v1;
@@ -950,17 +950,17 @@ s32 func_00014F40(s32 arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014F80);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014F80);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014FC0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00014FC0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015064);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015064);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015160);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015160);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000151E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000151E8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001523C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001523C);
 
 s32 func_0001529C(s32 arg0) {
     s32 temp_v0;
@@ -974,15 +974,15 @@ s32 func_0001529C(s32 arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000152E0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000152E0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015368);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015368);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000153BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000153BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000153F8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000153F8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015430);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015430);
 
 void func_000154C8(struct Unk_func_000154C8_0 *arg0) {
     struct Unk_func_000154C8_temp_a0 *temp_a0;
@@ -991,15 +991,15 @@ void func_000154C8(struct Unk_func_000154C8_0 *arg0) {
     sceHVNetfront_Module_1DF9F3CD(temp_a0, temp_a0->unk18);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000154E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000154E8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015558);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015558);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000155E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000155E8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001570C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001570C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001576C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001576C);
 
 s32 func_000157BC(s32 arg0, struct Unk_func_000157BC_1 *arg1) {
     arg1->unk0 = 0;
@@ -1008,9 +1008,9 @@ s32 func_000157BC(s32 arg0, struct Unk_func_000157BC_1 *arg1) {
     return func_00018200(arg0, (u8 *)arg1 + 0x4C) != 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015810);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015810);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000158A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000158A4);
 
 s32 func_000158D8(struct Unk_func_000158D8_0 *arg0) {
     s32 temp_v0;
@@ -1032,9 +1032,9 @@ s32 func_000158D8(struct Unk_func_000158D8_0 *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015938);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015938);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015A34);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015A34);
 
 s32 func_00015B38(void **arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
     s32 temp_v0;
@@ -1059,74 +1059,74 @@ s32 func_00015B38(void **arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
     return temp_v0 | temp_v0_2;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015BFC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015BFC);
 
 void func_00015C5C(struct Unk_func_000158D8_0 *arg0) {
     func_000158D8(arg0);
     sceHVNetfront_Module_A2F4AC9E((s32) arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015C88);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015C88);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015DFC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015DFC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015F24);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015F24);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015FAC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015FAC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015FE0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00015FE0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000161A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000161A4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00016374);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00016374);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00016404);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00016404);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00016438);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00016438);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E160);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E160);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E1C0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E1C0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E1E4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E1E4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E1EC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E1EC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E210);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E210);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00016538);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00016538);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000165F0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000165F0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00017044);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00017044);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E274);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E274);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E278);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E278);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E27C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E27C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E280);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E280);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E288);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E288);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E294);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E294);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E2A4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E2A4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E2B0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E2B0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E2C0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E2C0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E2C4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E2C4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E2CC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E2CC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001711C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001711C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00017848);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00017848);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000178BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000178BC);
 
 s32 func_000179CC(struct Unk_func_000179CC_0 *arg0) {
     s32 temp_v0;
@@ -1146,51 +1146,51 @@ s32 func_000179CC(struct Unk_func_000179CC_0 *arg0) {
     return var_s1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00017A3C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00017A3C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00017AFC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00017AFC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E378);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E378);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E37C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E37C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E390);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E390);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E394);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E394);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E3A4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E3A4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E3A8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E3A8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E3B4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E3B4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E3C8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E3C8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E3CC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E3CC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E3E0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E3E0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E3E4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E3E4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E3EC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E3EC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E3F8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E3F8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E400);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E400);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E408);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E408);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E430);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E430);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E43C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E43C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E44C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E44C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E450);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E450);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E454);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E454);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00017BBC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00017BBC);
 
 void func_00017C98(s32 arg0, s32 arg1, s32 arg2) {
     sceHVNetfront_Module_BB5E8F0E(arg0, (s32) &D_0011E464);
@@ -1200,13 +1200,13 @@ void func_00017C98(s32 arg0, s32 arg1, s32 arg2) {
     sceHVNetfront_Module_56988A48(arg0, (s32) &D_0011E390);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00017D1C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00017D1C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E460);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E460);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E464);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E464);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00017DB0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00017DB0);
 
 void func_00017F3C(s32 *arg0, struct Unk_func_00017F3C_1 *arg1) {
     func_00017FC4(arg0, arg1->unk0);
@@ -1289,55 +1289,55 @@ void func_000180BC(s32 arg0, struct Unk_func_000180BC_1 *arg1) {
     arg1->unk1C = func_000181F8(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018168);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018168);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001819C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001819C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000181D0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000181D0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000181D8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000181D8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000181E0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000181E0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000181E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000181E8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000181F0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000181F0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000181F8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000181F8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018200);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018200);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000182E4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000182E4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018370);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018370);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018414);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018414);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_F9401A23);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_F9401A23);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018514);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018514);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_5EBA1D34);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_5EBA1D34);
 
 s32 func_00018618(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018620);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018620);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018680);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018680);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000187C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000187C8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001890C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001890C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018C24);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018C24);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E4A8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E4A8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018C68);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018C68);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018CFC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018CFC);
 
 s32 func_00018D70(s32 *arg0) {
     s32 temp_v0;
@@ -1349,33 +1349,33 @@ s32 func_00018D70(s32 *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018D9C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018D9C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018F14);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018F14);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00018FD0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00018FD0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019038);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019038);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019108);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019108);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019158);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019158);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019398);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019398);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001946C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001946C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000197E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000197E8);
 
 s32 func_00019880(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019888);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019888);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019A10);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019A10);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019AAC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019AAC);
 
 void func_00019CD0(struct Unk_func_00019CD0_0 *arg0, M2C_UNK arg1) {
     sceHVNetfront_Module_65813EA4(arg0->unk0, arg0->unk4, arg1);
@@ -1394,73 +1394,73 @@ void func_00019D00(struct Unk_func_00019D00_0 *arg0) {
 void func_00019D30(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019D38);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019D38);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019D78);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019D78);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019EB0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019EB0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E4C4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E4C4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E4D0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E4D0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E4DC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E4DC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E4E4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E4E4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E4F0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E4F0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E4FC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E4FC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E50C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E50C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E514);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E514);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E51C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E51C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E524);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E524);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E52C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E52C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E530);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E530);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E538);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E538);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E544);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E544);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E550);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E550);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E5F8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E5F8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E5FC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E5FC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E604);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E604);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E60C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E60C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019F84);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00019F84);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001A0F4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001A0F4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001A1AC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001A1AC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001A3C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001A3C8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001A490);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001A490);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001A5BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001A5BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001A72C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001A72C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001A89C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001A89C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001A8C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001A8C0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001AA78);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001AA78);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001AB2C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001AB2C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001AC2C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001AC2C);
 
 void func_0001ACA4(void) {
 }
@@ -1471,25 +1471,25 @@ void func_0001ACAC(void) {
 void func_0001ACB4(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001ACBC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001ACBC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001AD3C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001AD3C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001ADD8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001ADD8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001AE7C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001AE7C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001AEF8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001AEF8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001AF98);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001AF98);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001B1D4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001B1D4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001B384);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001B384);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E698);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E698);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001B4E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001B4E8);
 
 void func_0001B824(void) {
 }
@@ -1502,20 +1502,20 @@ void func_0001B848(s32 *arg0) {
     sceHVWWW_Library_4881039E(*arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001B864);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001B864);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001B8BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001B8BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001B980);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001B980);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001BC40);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001BC40);
 
 void func_0001C008(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001C010);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001C010);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001C458);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001C458);
 
 void func_0001C500(void) {
 }
@@ -1568,44 +1568,44 @@ void func_0001C530(void *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001C61C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001C61C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001C710);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001C710);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001C744);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001C744);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001C7E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001C7E8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001C88C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001C88C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001C934);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001C934);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001C990);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001C990);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001D200);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001D200);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001D304);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001D304);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001D408);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001D408);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001DD8C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001DD8C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001DFE8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001DFE8);
 
 s32 func_0001E058(void *arg0) {
     sceHVNetfront_Module_0F5AA1D5(arg0, 0x14);
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001E078);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001E078);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001E108);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001E108);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001E19C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001E19C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001E2B4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001E2B4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001E514);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001E514);
 
 void func_0001E5F0(s32 ***arg0, struct Unk_func_0001E5F0_1 *arg1) {
     s32 temp_v1;
@@ -1624,9 +1624,9 @@ void func_0001E5F0(s32 ***arg0, struct Unk_func_0001E5F0_1 *arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001E684);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001E684);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001E9F8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001E9F8);
 
 void func_0001EABC(s32 ***arg0, struct Unk_func_0001EABC_1 *arg1) {
     s32 temp_v1;
@@ -1645,9 +1645,9 @@ void func_0001EABC(s32 ***arg0, struct Unk_func_0001EABC_1 *arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001EB50);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001EB50);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001EEC4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001EEC4);
 
 void func_0001EF88(s32 ***arg0, struct Unk_func_0001EF88_1 *arg1) {
     s32 temp_v1;
@@ -1666,7 +1666,7 @@ void func_0001EF88(s32 ***arg0, struct Unk_func_0001EF88_1 *arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F01C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001F01C);
 
 void func_0001F18C(void) {
 }
@@ -1677,13 +1677,13 @@ void func_0001F194(s32 arg0) {
     D_00133BF8.unk8 = func_0001C934(4, 0x48, func_000AFB7C(arg0, 2));
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F228);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001F228);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F3A8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001F3A8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F500);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001F500);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F5F0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001F5F0);
 
 M2C_UNK *func_0001F6B0(struct Unk_func_0001F6B0_0 *arg0) {
     s32 temp_s2;
@@ -1708,15 +1708,15 @@ void func_0001F76C(void *arg0) {
     D_00133C10.unk8 = func_0001C934(6, 0xA0, func_000B20DC(arg0));
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F7A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001F7A4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001FEBC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001FEBC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001FFB0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0001FFB0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00020114);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00020114);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00020208);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00020208);
 
 M2C_UNK *func_000202C8(struct Unk_func_000202C8_0 *arg0) {
     s32 temp_s2;
@@ -1741,35 +1741,35 @@ void func_00020384(void *arg0) {
     D_00133C28.unk8 = func_0001C934(5, 0x60, func_000D1070(arg0));
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000203BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000203BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002096C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002096C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00020AEC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00020AEC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00020BA4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00020BA4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00020DB8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00020DB8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00020E54);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00020E54);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00020F80);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00020F80);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00020FD0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00020FD0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00021048);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00021048);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00021138);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00021138);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00021500);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00021500);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00021D44);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00021D44);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00022618);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00022618);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000226F0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000226F0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E724);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E724);
 
 M2C_UNK *func_000227B0(struct Unk_func_000227B0_0 *arg0) {
     s32 temp_s2;
@@ -1794,13 +1794,13 @@ void func_0002286C(void *arg0) {
     D_00133C58.unk8 = func_0001C934(0xD, 0x58, func_000B79F4(arg0));
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000228A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000228A4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000229DC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000229DC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00022ABC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00022ABC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00022B20);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00022B20);
 
 M2C_UNK *func_00022BE8(struct Unk_func_00022BE8_0 *arg0) {
     s32 temp_s2;
@@ -1829,9 +1829,9 @@ M2C_UNK *func_00022CDC(void) {
     return &D_001358DC;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00022CE8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00022CE8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00022D24);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00022D24);
 
 void func_00022E24(void) {
     func_00077818();
@@ -1845,29 +1845,29 @@ s32 func_00022E64(void) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00022E6C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00022E6C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00022FB8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00022FB8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000232AC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000232AC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023320);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023320);
 
 s32 func_00023778(void) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023780);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023780);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023880);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023880);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023978);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023978);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000239D4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000239D4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023A08);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023A08);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023A28);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023A28);
 
 void func_00023A58(s32 arg0, M2C_UNK arg1) {
     func_00005DBC();
@@ -1881,9 +1881,9 @@ void func_00023A9C(void) {
     func_00005DDC();
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023AC8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023AC8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023B0C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023B0C);
 
 s32 func_00023B7C(s32 arg0) {
     s32 temp_v0;
@@ -1899,25 +1899,25 @@ s32 func_00023B7C(s32 arg0) {
     return var_s0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023BC0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023BC0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023C10);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023C10);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023C8C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023C8C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023D18);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023D18);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023DC0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023DC0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023E18);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023E18);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023EE0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023EE0);
 
 void func_00023F38(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_00035B88(arg0, 0, arg1, arg2, arg3);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00023F64);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00023F64);
 
 void func_00023FC4(s32 arg0) {
     func_000AF940(arg0);
@@ -1942,57 +1942,57 @@ void func_00024074(s32 arg0) {
     func_000AFB3C(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000240C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000240C8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024184);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024184);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024298);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024298);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024308);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024308);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024344);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024344);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024520);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024520);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024590);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024590);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024600);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024600);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024670);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024670);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000246F4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000246F4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024780);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024780);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E740);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E740);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E748);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E748);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E8D4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E8D4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E8F8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E8F8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011E944);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011E944);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EB84);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EB84);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EBB4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EBB4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EBBC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EBBC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EBE0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EBE0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EC38);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EC38);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EC3C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EC3C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EC40);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EC40);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EC44);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EC44);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000247B4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000247B4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024AA4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024AA4);
 
 s32 func_00024AE8(s32 arg0) {
     s32 var_v1;
@@ -2004,7 +2004,7 @@ s32 func_00024AE8(s32 arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024B28);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024B28);
 
 void func_00024B9C(s32 arg0, s32 arg1) {
     if (func_00024AA4() != 0) {
@@ -2022,35 +2022,35 @@ void func_00024C0C(void) {
     func_0002841C();
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024C28);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024C28);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00024F8C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00024F8C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025034);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025034);
 
 void func_000250C4(void) {
     func_00024F8C();
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000250E0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000250E0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025160);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025160);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025268);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025268);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000252CC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000252CC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025400);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025400);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025430);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025430);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000254C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000254C0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000255D0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000255D0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002564C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002564C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000256C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000256C8);
 
 M2C_UNK *func_00025790(void *arg0) {
     s32 temp_s2;
@@ -2070,25 +2070,25 @@ M2C_UNK *func_00025790(void *arg0) {
     return &D_00133D08;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025828);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025828);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025874);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025874);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000258C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000258C8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025938);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025938);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025B54);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025B54);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025BB4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025BB4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025C78);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025C78);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025C94);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025C94);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025CB0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025CB0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025D60);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00025D60);
 
 s32 func_00025FD4(void **arg0, struct Unk_func_00025FD4_1 *arg1) {
     void *sp0;
@@ -2120,9 +2120,9 @@ s32 func_000260A0(void) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000260A8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000260A8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00026118);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00026118);
 
 s32 func_000261C0(s32 arg0) {
     if (func_00025874(arg0) != 0) {
@@ -2131,9 +2131,9 @@ s32 func_000261C0(s32 arg0) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000261F8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000261F8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000263BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000263BC);
 
 void func_0002645C(struct Unk_func_0002645C_0 *arg0) {
     s32 temp_v0;
@@ -2145,11 +2145,11 @@ void func_0002645C(struct Unk_func_0002645C_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002649C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002649C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000264F8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000264F8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00026548);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00026548);
 
 s32 *func_00026598(s32 arg0) {
     s32 *temp_v0;
@@ -2163,25 +2163,25 @@ s32 *func_00026598(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000265F4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000265F4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00026644);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00026644);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000266CC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000266CC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000267CC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000267CC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00026898);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00026898);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00026940);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00026940);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000269E4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000269E4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00026A5C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00026A5C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00026C5C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00026C5C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00026CC8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00026CC8);
 
 s32 func_00026DCC(s32 arg0, s32 arg1) {
     func_00026CC8(arg0, arg1, -0xA);
@@ -2230,9 +2230,9 @@ s32 func_00026E4C(s32 **arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00026F58);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00026F58);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00026FB4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00026FB4);
 
 s32 func_0002703C(s32 arg0, s32 arg1, s32 arg2, struct Unk_func_0002703C_3 *arg3) {
     s32 temp_s0;
@@ -2245,23 +2245,23 @@ s32 func_0002703C(s32 arg0, s32 arg1, s32 arg2, struct Unk_func_0002703C_3 *arg3
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000270D4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000270D4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000271E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000271E8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000272B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000272B8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00027394);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00027394);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00027460);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00027460);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00027560);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00027560);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00027600);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00027600);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000276A0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000276A0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000276EC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000276EC);
 
 void func_000277D4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *sp0;
@@ -2271,7 +2271,7 @@ void func_000277D4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_000276EC(arg0, arg1, arg2, arg3, sp0, sp4);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00027840);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00027840);
 
 void func_00027890(s32 arg0, struct Unk_func_00027890_1 *arg1) {
     struct Unk_func_00027890_temp_a0 *temp_a0;
@@ -2281,19 +2281,19 @@ void func_00027890(s32 arg0, struct Unk_func_00027890_1 *arg1) {
     arg1->unk4 = (s32) (arg1->unk4 - temp_a0->unk1EC);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000278B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000278B8);
 
 s32 func_00027AB4(void) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00027ABC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00027ABC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00027D5C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00027D5C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00027E44);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00027E44);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000281B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000281B8);
 
 void func_00028298(struct Unk_func_00028298_0 *arg0) {
     s32 temp_v0;
@@ -2325,25 +2325,25 @@ s32 func_00028330(void *arg0) {
     return M2C_FIELD(M2C_FIELD(((M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D0), void **, 0x38), s32 *, 0x18) * 0xC) + arg0), void **, 0xA8), s32 *, 0xC);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028358);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028358);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002841C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002841C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002846C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002846C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000284BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000284BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002850C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002850C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002855C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002855C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000285B4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000285B4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028618);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028618);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028794);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028794);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000287E4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000287E4);
 
 void func_00028834(struct Unk_func_00028834_0 *arg0, s32 arg1) {
     arg0->unk4D0->unk38->unk34 = arg1;
@@ -2357,49 +2357,49 @@ void func_00028844(struct Unk_func_00028844_0 *arg0, s32 arg1, s32 arg2) {
     temp_v0->unk3C = arg2;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028858);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028858);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000288A8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000288A8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000289C4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000289C4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028A14);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028A14);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028AD0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028AD0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028B54);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028B54);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028C94);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028C94);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028EAC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028EAC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028F0C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028F0C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028F9C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00028F9C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000290BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000290BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002910C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002910C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002915C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002915C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000291E4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000291E4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00029250);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00029250);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000292A0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000292A0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00029318);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00029318);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002939C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002939C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000293EC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000293EC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000294A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000294A4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00029540);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00029540);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000295A0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000295A0);
 
 s32 func_0002963C(s32 arg0) {
     func_000295A0(arg0, 1);
@@ -2411,9 +2411,9 @@ s32 func_0002965C(s32 arg0) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002967C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002967C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002969C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002969C);
 
 s32 func_00029908(void ****arg0, s32 arg1, s32 arg2) {
     struct Unk_func_00029908_temp_v0 *temp_v0;
@@ -2430,9 +2430,9 @@ s32 func_00029908(void ****arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000299A8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000299A8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00029A54);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00029A54);
 
 s32 func_00029B00(void) {
     return 0;
@@ -2450,11 +2450,11 @@ s32 func_00029B18(void) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00029B20);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00029B20);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00029BAC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00029BAC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00029DD8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00029DD8);
 
 void func_00029E78(struct Unk_func_00029E78_0 *arg0) {
     s32 temp_v0;
@@ -2466,7 +2466,7 @@ void func_00029E78(struct Unk_func_00029E78_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00029EB8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00029EB8);
 
 void func_00029F88(s32 ***arg0) {
     func_000BF15C(***arg0, (s32) arg0, (s32) func_00029F88);
@@ -2474,19 +2474,19 @@ void func_00029F88(s32 ***arg0) {
     func_000CA758(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00029FDC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00029FDC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A074);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A074);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A0C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A0C0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A13C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A13C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A19C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A19C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A290);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A290);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A350);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A350);
 
 void func_0002A458(struct Unk_func_0002A458_0 *arg0) {
     s32 temp_v0;
@@ -2498,17 +2498,17 @@ void func_0002A458(struct Unk_func_0002A458_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A498);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A498);
 
 void func_0002A4DC(void) {
     func_000C9E70();
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A4F8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A4F8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A518);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A518);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A634);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A634);
 
 void func_0002A6EC(s32 ***arg0) {
     func_000BF15C(***arg0, (s32) arg0, (s32) func_00029F88);
@@ -2545,26 +2545,26 @@ s32 func_0002A7E8(void *arg0) {
     return M2C_FIELD(M2C_FIELD(((M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D0), void **, 0x50), s32 *, 0x44) * 0xC) + arg0), void **, 0xA8), s32 *, 8);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A810);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A810);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A864);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A864);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A8B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A8B8);
 
 s32 func_0002A944(void) {
     func_0002A8B8();
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A964);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A964);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002A9D0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002A9D0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002AA54);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002AA54);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002ACF8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002ACF8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002ADE0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002ADE0);
 
 void func_0002AE9C(struct Unk_func_0002AE9C_0 *arg0) {
     s32 temp_v0;
@@ -2576,7 +2576,7 @@ void func_0002AE9C(struct Unk_func_0002AE9C_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002AEDC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002AEDC);
 
 s32 func_0002AF28(struct Unk_func_0002AF28_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 temp_v0;
@@ -2590,41 +2590,41 @@ s32 func_0002AF28(struct Unk_func_0002AF28_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) 
     return temp_v0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002AF88);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002AF88);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002AFD8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002AFD8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B028);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B028);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B078);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B078);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B0D0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B0D0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B14C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B14C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B1AC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B1AC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B1FC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B1FC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B288);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B288);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B350);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B350);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B3B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B3B8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B40C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B40C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B558);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B558);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B5AC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B5AC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B60C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B60C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B678);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B678);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B72C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B72C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B7D8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B7D8);
 
 void func_0002B854(s32 arg0, s32 arg1) {
     func_0002B7D8(arg0, 0, arg1);
@@ -2634,25 +2634,25 @@ void func_0002B874(s32 arg0, s32 arg1) {
     func_0002B7D8(arg0, 1, arg1);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B894);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B894);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B934);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B934);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002B9AC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002B9AC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002BB1C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002BB1C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002BCC0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002BCC0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002BE80);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002BE80);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002BF2C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002BF2C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002C264);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002C264);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002C4C4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002C4C4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002C71C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002C71C);
 
 void func_0002CACC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u32 arg5, s32 arg6) {
     if (arg5 < 2U) {
@@ -2662,13 +2662,13 @@ void func_0002CACC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u32 arg5, s
     func_0002BF2C(arg0, arg1, arg2, arg3, arg4, (s32) arg5, arg6);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002CB00);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002CB00);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002CDF0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002CDF0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002CDF8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002CDF8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002CE84);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002CE84);
 
 void func_0002D43C(struct Unk_func_0002D43C_0 *arg0, s32 arg1) {
     func_0007B340(arg0, arg1);
@@ -2680,20 +2680,20 @@ void func_0002D43C(struct Unk_func_0002D43C_0 *arg0, s32 arg1) {
 void func_0002D478(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002D480);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002D480);
 
 void func_0002D4EC(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002D4F4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002D4F4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002D56C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002D56C);
 
 s32 func_0002D61C(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002D624);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002D624);
 
 void func_0002D720(s32 ***arg0, s32 arg1) {
     if (arg1 != 0) {
@@ -2704,21 +2704,21 @@ void func_0002D720(s32 ***arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002D784);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002D784);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002D844);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002D844);
 
 void func_0002D894(void) {
     func_0002846C();
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002D8B0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002D8B0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002D8F4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002D8F4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002D918);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002D918);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002D98C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002D98C);
 
 void func_0002DB68(void) {
     func_000292A0();
@@ -2728,23 +2728,23 @@ void func_0002DB84(s32 ***arg0) {
     func_000BED5C(***arg0, 0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002DBAC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002DBAC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002DBDC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002DBDC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002DCC0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002DCC0);
 
 void func_0002DD1C(void) {
     func_000250C4();
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002DD38);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002DD38);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002DEEC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002DEEC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002DFEC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002DFEC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002E0EC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002E0EC);
 
 void func_0002E28C(s32 arg0) {
     func_0002B288(func_000284BC(), arg0);
@@ -2753,7 +2753,7 @@ void func_0002E28C(s32 arg0) {
     func_000C9644(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002E2E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002E2E8);
 
 void func_0002E3C8(s32 arg0, s32 arg1) {
     func_0002B288(func_000284BC(arg1), arg1);
@@ -2766,9 +2766,9 @@ void func_0002E410(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_00028C94(arg1, arg2, arg3);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002E474);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002E474);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002E4A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002E4A4);
 
 void func_0002E4C4(s32 arg0, s32 *arg1) {
     s32 temp_v1;
@@ -2781,7 +2781,7 @@ void func_0002E4C4(s32 arg0, s32 *arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002E528);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002E528);
 
 s32 func_0002E62C(void) {
     s32 **temp_v0;
@@ -2795,19 +2795,19 @@ s32 func_0002E62C(void) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002E65C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002E65C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002E758);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002E758);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002E854);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002E854);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002E900);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002E900);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002E990);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002E990);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002EA74);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002EA74);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002ED04);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002ED04);
 
 void func_0002EE38(s32 arg0) {
     s32 **temp_v0;
@@ -2830,49 +2830,49 @@ void func_0002EE38(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002EEC8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002EEC8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002EF38);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002EF38);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002F040);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002F040);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002F16C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002F16C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002F298);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002F298);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002F3AC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002F3AC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002F478);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002F478);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002F598);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002F598);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002F6A8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002F6A8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002F7A0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002F7A0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002F834);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002F834);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002F988);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002F988);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002FD4C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002FD4C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002FD94);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002FD94);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011ED10);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011ED10);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011ED1C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011ED1C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011ED9C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011ED9C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EDD4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EDD4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002FDDC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002FDDC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002FEC8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0002FEC8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00030118);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00030118);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00030388);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00030388);
 
 s32 func_000304E0(void **arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_a2;
@@ -2922,17 +2922,17 @@ s32 func_000305E8(void **arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000306F0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000306F0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000307E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000307E8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000308D0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000308D0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000309B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000309B8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00030ACC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00030ACC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00030BEC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00030BEC);
 
 void func_00030CE8(void) {
     func_000306F0();
@@ -2946,115 +2946,115 @@ void func_00030D20(void) {
     func_000308D0();
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00030D3C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00030D3C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00030E28);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00030E28);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00030F88);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00030F88);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000310C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000310C8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00031214);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00031214);
 
 s32 func_000313A0(void) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000313A8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000313A8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000316DC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000316DC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000317D8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000317D8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00031898);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00031898);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000319E0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000319E0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00031AE4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00031AE4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00031E54);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00031E54);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00032008);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00032008);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00032124);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00032124);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00032208);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00032208);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00032274);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00032274);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000322E0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000322E0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003234C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003234C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000323DC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000323DC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000324C4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000324C4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00032630);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00032630);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000327C4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000327C4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000328AC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000328AC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00032968);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00032968);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00032D10);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00032D10);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00032DB0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00032DB0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00033094);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00033094);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000333AC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000333AC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00033488);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00033488);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000336A0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000336A0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003386C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003386C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003391C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003391C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000339D4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000339D4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00033A70);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00033A70);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00033BB8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00033BB8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00033D94);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00033D94);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00033F50);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00033F50);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034250);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034250);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034310);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034310);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034394);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034394);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000343C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000343C0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034780);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034780);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034A38);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034A38);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034C6C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034C6C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034C98);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034C98);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034D1C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034D1C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034F04);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034F04);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034F24);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034F24);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034F48);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034F48);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00034FE0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00034FE0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00035088);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00035088);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000350AC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000350AC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000350E0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000350E0);
 
 void func_00035104(s32 arg0) {
     func_000C9644(arg0);
@@ -3071,21 +3071,21 @@ s32 func_0003513C(void) {
 void func_00035144(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003514C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003514C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000352D4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000352D4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00035498);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00035498);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00035684);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00035684);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000357B4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000357B4);
 
 s32 func_00035A20(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00035A28);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00035A28);
 
 void func_00035A44(s32 arg0) {
     if (arg0 != 0) {
@@ -3113,7 +3113,7 @@ void func_00035A7C(s32 arg0) {
     func_00028320((void *) arg0, (s32) &D_0011ED10);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00035AE4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00035AE4);
 
 s32 func_00035B38(void **arg0) {
     return func_000C9EE4(arg0) == (s32) &func_000324C4;
@@ -3123,7 +3123,7 @@ void func_00035B64(void) {
     func_000CA00C(func_000CA00C());
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00035B88);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00035B88);
 
 s32 func_00035F18(void) {
     return 1;
@@ -3133,13 +3133,13 @@ s32 func_00035F20(void) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00035F28);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00035F28);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EF28);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EF28);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EF2C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EF2C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00035FB4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00035FB4);
 
 void func_00036054(struct Unk_func_00036054_0 *arg0) {
     s32 temp_v0;
@@ -3151,15 +3151,15 @@ void func_00036054(struct Unk_func_00036054_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036094);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036094);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000360F4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000360F4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003613C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003613C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003615C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003615C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003617C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003617C);
 
 s32 func_000362B4(void) {
     return 1;
@@ -3169,19 +3169,19 @@ s32 func_000362BC(void) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000362C4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000362C4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000363A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000363A4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036454);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036454);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000366B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000366B8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036718);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036718);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036834);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036834);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000369F4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000369F4);
 
 void func_00036A94(struct Unk_func_00036A94_0 *arg0) {
     s32 temp_v0;
@@ -3193,38 +3193,38 @@ void func_00036A94(struct Unk_func_00036A94_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036AD4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036AD4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036B50);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036B50);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036BA0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036BA0);
 
 s32 func_00036BF4(struct Unk_func_00036BF4_0 *arg0) {
     return arg0->unk4D0->unk48->unk18;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036C04);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036C04);
 
 void func_00036C3C(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK (**)(), 4)();
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036C5C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036C5C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036D00);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036D00);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036D44);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036D44);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00036D98);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00036D98);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_18F4C8FC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_18F4C8FC);
 
 void sceHVNetfront_Module_DFCBF9BC(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_7EC69C94);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_7EC69C94);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_4AF43191);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_4AF43191);
 
 s32 sceHVNetfront_Module_9D42259B(struct Unk_vt_sceHVNetfront_Module_9D42259B_arg0 **arg0) {
     return (*arg0)->unk8;
@@ -3250,11 +3250,11 @@ s32 func_00036FFC(struct Unk_vt_func_00036FFC_arg0 **arg0) {
     return (*arg0)->unk4;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037008);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037008);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037100);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037100);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_D091BFB4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_D091BFB4);
 
 void sceHVNetfront_Module_6F26FEF5(s32 **arg0, s32 arg1) {
     s32 *temp_a0;
@@ -3313,47 +3313,47 @@ s32 sceHVNetfront_Module_30FFB4C9(s32 **arg0) {
     return var_s3;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037458);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037458);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_5ECEBC07);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_5ECEBC07);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_BBD560F1);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_BBD560F1);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_115D847D);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_115D847D);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037A24);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037A24);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037B14);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037B14);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037BC4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037BC4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037C60);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037C60);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037CF8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037CF8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037D54);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037D54);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EF48);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EF48);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EF58);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EF58);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EF68);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EF68);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EF78);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EF78);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EFB0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EFB0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011EFB8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011EFB8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037DB0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037DB0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037ED0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037ED0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00037F5C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00037F5C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00038048);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00038048);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000380E0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000380E0);
 
 void func_00038160(struct Unk_func_00038160_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 var_a3;
@@ -3376,25 +3376,25 @@ void func_00038160(struct Unk_func_00038160_0 *arg0, s32 arg1, s32 arg2, s32 arg
     sceHVNetfront_Module_754AA115((s32) arg0, var_a6, var_t4, var_a3, var_a7);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00038210);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00038210);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00038734);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00038734);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000387BC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000387BC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00038B64);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00038B64);
 
 s32 func_0003908C(void) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00039094);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00039094);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000391B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000391B8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00039274);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00039274);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000392C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000392C8);
 
 s32 func_00039454(s32 **arg0, M2C_UNK arg1) {
     sceHVNetfront_Module_D5A24BD1(sceHVNetfront_Module_896E55F6(arg0) + 0x24, arg1);
@@ -3402,9 +3402,9 @@ s32 func_00039454(s32 **arg0, M2C_UNK arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000394A0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000394A0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_34CDE779);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_34CDE779);
 
 void sceHVNetfront_Module_B642A9C7(void) {
 }
@@ -3428,22 +3428,22 @@ void sceHVNetfront_Module_9AA96525(s32 arg0) {
 void func_00039624(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003962C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003962C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00039770);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00039770);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000397C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000397C0);
 
 void func_00039848(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00039850);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00039850);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000398EC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_000398EC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00039904);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00039904);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00039AA4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00039AA4);
 
 void func_00039B10(s32 **arg0) {
     struct Unk_func_00039B10_temp_v0 *temp_v0;
@@ -3461,9 +3461,9 @@ void func_00039B10(s32 **arg0) {
     sceHVNetfront_Module_880239D0(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00039B74);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00039B74);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00039C74);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_00039C74);
 
 s32 func_0003A3D8(s32 **arg0, s32 **arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     s32 temp_v0;
@@ -3482,53 +3482,53 @@ s32 func_0003A3D8(s32 **arg0, s32 **arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return temp_v0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003A4B4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003A4B4);
 
 s32 func_0003A5B0(void) {
     return -1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003A5B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003A5B8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_B8A3F5EA);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_B8A3F5EA);
 
 void sceHVNetfront_Module_78614BE7(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003A62C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003A62C);
 
 void func_0003A678(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003A680);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003A680);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003A69C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003A69C);
 
 void func_0003A6B8(s32 arg0) {
     png_set_filler(arg0, 0, 0);
 }
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F064);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F064);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003A6D8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003A6D8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003AA10);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003AA10);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003AA74);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003AA74);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003AAD0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003AAD0);
 
 void func_0003ABF0(void) {
     func_000F503C()->unk20 = 5;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003AC14);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003AC14);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003ADB8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003ADB8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003AE00);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003AE00);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003AF64);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003AF64);
 
 s32 func_0003AFA0(s32 arg0, u32 arg1) {
     s32 var_v1;
@@ -3540,9 +3540,9 @@ s32 func_0003AFA0(s32 arg0, u32 arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003AFE0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003AFE0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003B0B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003B0B8);
 
 void func_0003B16C(s32 **arg0) {
     struct Unk_func_0003B16C_temp_v0 *temp_v0;
@@ -3556,20 +3556,20 @@ void func_0003B16C(s32 **arg0) {
     sceHVNetfront_Module_880239D0(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003B1C8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003B1C8);
 
 s32 func_0003B344(void) {
     return -1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003B34C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003B34C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_56DB958B);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_56DB958B);
 
 void sceHVNetfront_Module_77986A50(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003B3C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003B3C0);
 
 void func_0003B4D8(s32 **arg0) {
     M2C_FIELD(sceHVNetfront_Module_896E55F6(arg0), s32 *, 0xB0) = 1;
@@ -3598,7 +3598,7 @@ void sceHVNetfront_Module_FB59447A(s32 arg0) {
     sceHVNetfront_Module_A2F4AC9E(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003B590);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003B590);
 
 void sceHVNetfront_Module_58F4BEAC(s32 *arg0) {
     *arg0 = 0;
@@ -3607,21 +3607,21 @@ void sceHVNetfront_Module_58F4BEAC(s32 *arg0) {
 void sceHVNetfront_Module_7C778057(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_8CA61859);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_8CA61859);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_90958874);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_90958874);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F160);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F160);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_52F39350);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_52F39350);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003B69C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003B69C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003B6E8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003B6E8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_1805333D);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_1805333D);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_661699B9);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_661699B9);
 
 void func_0003B820(struct Unk_func_0003B820_0 *arg0) {
     s32 temp_s1;
@@ -3647,9 +3647,9 @@ void func_0003B820(struct Unk_func_0003B820_0 *arg0) {
     sceHVNetfront_Module_8CA61859(arg0, temp_s1);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003B8A4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003B8A4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_F26EE3F7);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_F26EE3F7);
 
 void sceHVNetfront_Module_9FDE9873(struct Unk_sceHVNetfront_Module_9FDE9873_0 *arg0) {
     s32 temp_v0;
@@ -3668,7 +3668,7 @@ void sceHVNetfront_Module_9FDE9873(struct Unk_sceHVNetfront_Module_9FDE9873_0 *a
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003B9F0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003B9F0);
 
 void func_0003BA64(struct Unk_func_0003BA64_0 *arg0) {
     M2C_UNK (*temp_v0)();
@@ -3688,11 +3688,11 @@ void func_0003BA90(struct Unk_func_0003BA90_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003BABC);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003BABC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003BB90);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003BB90);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003BD40);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003BD40);
 
 void func_0003BE70(struct Unk_func_0003BE70_0 *arg0) {
     M2C_UNK (*temp_v0)();
@@ -3703,7 +3703,7 @@ void func_0003BE70(struct Unk_func_0003BE70_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003BE9C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003BE9C);
 
 void func_0003BF24(struct Unk_func_0003BF24_0 *arg0) {
     M2C_UNK (*temp_v0)();
@@ -3714,37 +3714,37 @@ void func_0003BF24(struct Unk_func_0003BF24_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003BF50);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003BF50);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_C9A6CC1B);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_C9A6CC1B);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_C2595823);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_C2595823);
 
 s32 func_0003C2B8(struct Unk_func_0003C2B8_0 *arg0) {
     return __builtin_allegrex_ext(arg0->unk10, 4, 1);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003C2C4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003C2C4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003C374);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003C374);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003C42C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003C42C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003C888);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003C888);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003CA50);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003CA50);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003CB78);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003CB78);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003CCF0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003CCF0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003D2E4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003D2E4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003D3F8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003D3F8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003D564);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003D564);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_823748DE);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_823748DE);
 
 void func_0003D690(void) {
 }
@@ -3753,21 +3753,21 @@ s32 func_0003D698(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003D6A0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003D6A0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003D948);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003D948);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003DA90);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003DA90);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003DB9C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003DB9C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003DCA4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003DCA4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003DCF8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003DCF8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003DD40);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003DD40);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003DE5C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003DE5C);
 
 void func_0003E444(struct Unk_func_0003E444_0 *arg0) {
     s32 temp_v0;
@@ -3780,25 +3780,25 @@ void func_0003E444(struct Unk_func_0003E444_0 *arg0) {
     arg0->unk4 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003E484);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003E484);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003E510);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003E510);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F354);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F354);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F388);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F388);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003E578);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003E578);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003E6D0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003E6D0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003E7B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003E7B8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003E8B8);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003E8B8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003E8F4);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003E8F4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003E9C0);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003E9C0);
 
 s32 func_0003EB14(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *sp0;
@@ -3831,39 +3831,39 @@ void func_0003EBF8(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003EC1C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003EC1C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3C8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3C8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3CC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3CC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3D0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3D0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3D4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3D4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3D8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3D8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3DC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3DC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3E0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3E0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3E4);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3E4);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3E8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3E8);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3EC);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3EC);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3F0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3F0);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F3F8);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F3F8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003EE40);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003EE40);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003F220);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003F220);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003F28C);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003F28C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003F544);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", func_0003F544);
 
 void func_0003F56C(s32 **arg0) {
     sceHVNetfront_Module_896E55F6(arg0);
@@ -3903,21 +3903,21 @@ s32 func_0003F5D8(void) {
     return 0;
 }
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F440);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F440);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F444);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F444);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F464);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F464);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F46C);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F46C);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F478);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F478);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F488);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F488);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F490);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F490);
 
-INCLUDE_RODATA("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", D_0011F4A0);
+INCLUDE_RODATA("nonmatchings/netfront_0097D4", D_0011F4A0);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", sceHVNetfront_Module_3D7606EA);
+INCLUDE_ASM("nonmatchings/netfront_0097D4", sceHVNetfront_Module_3D7606EA);
 

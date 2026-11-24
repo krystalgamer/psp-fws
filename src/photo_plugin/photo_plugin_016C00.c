@@ -18,9 +18,9 @@ void func_00016C50(void) {
     func_00016ECC();
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_016C00", func_00016C74);
+INCLUDE_ASM("nonmatchings/photo_plugin_016C00", func_00016C74);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_016C00", func_00016E18);
+INCLUDE_ASM("nonmatchings/photo_plugin_016C00", func_00016E18);
 
 s32 func_00016E94(void) {
     s32 var_v1;
@@ -34,9 +34,9 @@ s32 func_00016E94(void) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_016C00", func_00016ECC);
+INCLUDE_ASM("nonmatchings/photo_plugin_016C00", func_00016ECC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_016C00", func_00016F70);
+INCLUDE_ASM("nonmatchings/photo_plugin_016C00", func_00016F70);
 
 void func_00016FF0(s32 arg0) {
     void *sp0;
@@ -51,7 +51,7 @@ void func_00016FF0(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_016C00", func_00017050);
+INCLUDE_ASM("nonmatchings/photo_plugin_016C00", func_00017050);
 
 void func_00017138(void) {
     func_00017050(1, 0xFFFF);

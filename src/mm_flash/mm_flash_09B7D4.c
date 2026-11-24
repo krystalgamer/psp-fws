@@ -1,7 +1,7 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009B7D4);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009B7D4);
 
 void func_0009B7FC(struct Unk_func_0009B7FC_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk14 = arg1;
@@ -15,7 +15,7 @@ void func_0009B7FC(struct Unk_func_0009B7FC_0 *arg0, s32 arg1, s32 arg2) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009B85C);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009B85C);
 
 s32 func_0009B8F4(s32 *arg0, s32 *arg1) {
     s32 temp_s1;
@@ -35,27 +35,27 @@ s32 func_0009B8F4(s32 *arg0, s32 *arg1) {
     return var_a0;
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009B968);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009B968);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009BA58);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009BA58);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009BA98);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009BA98);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009BAEC);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009BAEC);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009BB48);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009BB48);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009BBB0);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009BBB0);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009BC3C);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009BC3C);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009BCC0);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009BCC0);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009BD40);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009BD40);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009BD94);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009BD94);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009BF04);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009BF04);
 
 void func_0009C0FC(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
     sceHVNetfront_Module_4C5A5066(1, arg0, arg1, arg2);
@@ -84,7 +84,7 @@ s32 func_0009C1F0(struct Unk_func_0009C1F0_0 *arg0) {
     return arg0->unk104 != 0;
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C1FC);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009C1FC);
 
 void func_0009C290(void) {
     func_0004B81C();
@@ -102,7 +102,7 @@ void func_0009C2E4(void) {
     func_000916DC();
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C300);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009C300);
 
 void func_0009C350(void) {
     func_0006C390();
@@ -136,21 +136,21 @@ void func_0009C3A0(void) {
     func_0009174C();
 }
 
-INCLUDE_RODATA("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", D_000C3E00);
+INCLUDE_RODATA("nonmatchings/mm_flash_09B7D4", D_000C3E00);
 
-INCLUDE_RODATA("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", D_000C3E04);
+INCLUDE_RODATA("nonmatchings/mm_flash_09B7D4", D_000C3E04);
 
-INCLUDE_RODATA("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", D_000C3E08);
+INCLUDE_RODATA("nonmatchings/mm_flash_09B7D4", D_000C3E08);
 
-INCLUDE_RODATA("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", D_000C3E0C);
+INCLUDE_RODATA("nonmatchings/mm_flash_09B7D4", D_000C3E0C);
 
-INCLUDE_RODATA("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", D_000C3E10);
+INCLUDE_RODATA("nonmatchings/mm_flash_09B7D4", D_000C3E10);
 
-INCLUDE_RODATA("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", D_000C3E14);
+INCLUDE_RODATA("nonmatchings/mm_flash_09B7D4", D_000C3E14);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C3BC);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009C3BC);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C4D0);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009C4D0);
 
 s32 func_0009C518(struct Unk_func_0009C518_0 *arg0) {
     s32 temp_s0;
@@ -159,7 +159,7 @@ s32 func_0009C518(struct Unk_func_0009C518_0 *arg0) {
     return temp_s0 + func_0009C4D0(arg0->unk1);
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C55C);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009C55C);
 
 void func_0009CCCC(void) {
     func_0006C30C();
@@ -198,7 +198,7 @@ s32 func_0009CD58(struct Unk_func_0009CD58_0 *arg0) {
     return var_s1;
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009CDCC);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009CDCC);
 
 void func_0009CE3C(s32 arg0) {
     func_0009F1FC(arg0, 1);
@@ -208,11 +208,11 @@ s32 func_0009CE58(struct Unk_func_0009CE58_0 *arg0) {
     return arg0->unk1098 != 0;
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009CE64);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009CE64);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009CFCC);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009CFCC);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009D044);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009D044);
 
 s32 func_0009D110(struct Unk_func_0009D110_0 *arg0) {
     return arg0->unk8;
@@ -230,9 +230,9 @@ void func_0009D128(struct Unk_func_0009D128_0 *arg0, s32 arg1) {
     arg0->unk10E0 = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009D130);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009D130);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009D150);
+INCLUDE_ASM("nonmatchings/mm_flash_09B7D4", func_0009D150);
 
 void func_0009D174(void) {
     func_00088484();

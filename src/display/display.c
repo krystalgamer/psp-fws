@@ -3,11 +3,11 @@
 #include "k1.h"
 #include "display_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", module_reboot_before);
+INCLUDE_ASM("nonmatchings/display", module_reboot_before);
 
-INCLUDE_RODATA("tmp/asm/282/display/nonmatchings/display", D_00003B94);
+INCLUDE_RODATA("nonmatchings/display", D_00003B94);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_206276C2);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_206276C2);
 
 s32 sceDisplay_driver_7A10289D(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00003D10);
@@ -44,55 +44,55 @@ s32 func_000009F8(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00000AF8);
+INCLUDE_ASM("nonmatchings/display", func_00000AF8);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00000EAC);
+INCLUDE_ASM("nonmatchings/display", func_00000EAC);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00001220);
+INCLUDE_ASM("nonmatchings/display", func_00001220);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_000012C0);
+INCLUDE_ASM("nonmatchings/display", func_000012C0);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00001398);
+INCLUDE_ASM("nonmatchings/display", func_00001398);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00001480);
+INCLUDE_ASM("nonmatchings/display", func_00001480);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplaySetMode);
+INCLUDE_ASM("nonmatchings/display", sceDisplaySetMode);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayGetMode);
+INCLUDE_ASM("nonmatchings/display", sceDisplayGetMode);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_63E22A26);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_63E22A26);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_5B5AEFAD);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_5B5AEFAD);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_96CFAC38);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_96CFAC38);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_9E3C6DC6);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_9E3C6DC6);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_31C4BAA8);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_31C4BAA8);
 
 s32 module_start(void) {
     sceDisplay_driver_206276C2();
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_432D133F);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_432D133F);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_681EE6A7);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_681EE6A7);
 
 s8 sceDisplay_driver_23CE8C51(void) {
     return D_00003E1A;
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_E4E4C018);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_E4E4C018);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplaySetHoldMode);
+INCLUDE_ASM("nonmatchings/display", sceDisplaySetHoldMode);
 
 s32 sceDisplay_driver_A544C486(s32 arg0) {
     D_00003EB0 = arg0;
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_BF79F646);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_BF79F646);
 
 void sceDisplayGetFramePerSec(void) {
     sceLcdc_driver_3107417C();
@@ -114,29 +114,29 @@ s8 sceDisplay_driver_AC14F1FF(void) {
     return D_00003E14;
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_E55F0D50);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_E55F0D50);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002258);
+INCLUDE_ASM("nonmatchings/display", func_00002258);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_000022A8);
+INCLUDE_ASM("nonmatchings/display", func_000022A8);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_000023B8);
+INCLUDE_ASM("nonmatchings/display", func_000023B8);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayWaitVblank);
+INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblank);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayWaitVblankCB);
+INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankCB);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_A83EF139);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_A83EF139);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayGetAccumulatedHcount);
+INCLUDE_ASM("nonmatchings/display", sceDisplayGetAccumulatedHcount);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayGetCurrentHcount);
+INCLUDE_ASM("nonmatchings/display", sceDisplayGetCurrentHcount);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_AE0E8972);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_AE0E8972);
 
-INCLUDE_RODATA("tmp/asm/282/display/nonmatchings/display", D_00003C50);
+INCLUDE_RODATA("nonmatchings/display", D_00003C50);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002968);
+INCLUDE_ASM("nonmatchings/display", func_00002968);
 
 s32 func_00002A64(void) {
     sceSysreg_driver_F6D83AD0(1);
@@ -152,14 +152,14 @@ s32 func_00002AA0(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002AC8);
+INCLUDE_ASM("nonmatchings/display", func_00002AC8);
 
 s32 func_00002B20(s32 arg0) {
     D_00003EF4 = arg0;
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayGetVcount);
+INCLUDE_ASM("nonmatchings/display", sceDisplayGetVcount);
 
 s32 sceDisplayIsVblank(void) {
     return sceDisplayGetCurrentHcount() < D_00003EE8;
@@ -169,7 +169,7 @@ s32 sceDisplay_driver_69B53541(void) {
     return __builtin_allegrex_max(D_00003EC8.unk20 - sceDisplayGetCurrentHcount(), -1);
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_21038913);
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_21038913);
 
 s32 sceDisplayWaitVblankStart(void) {
     s32 temp_v0;
@@ -195,26 +195,26 @@ s32 sceDisplay_driver_92C8F8B7(void) {
     return D_00003EF0 != 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002C7C);
+INCLUDE_ASM("nonmatchings/display", func_00002C7C);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002C9C);
+INCLUDE_ASM("nonmatchings/display", func_00002C9C);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002CC0);
+INCLUDE_ASM("nonmatchings/display", func_00002CC0);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002CF8);
+INCLUDE_ASM("nonmatchings/display", func_00002CF8);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002D14);
+INCLUDE_ASM("nonmatchings/display", func_00002D14);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002D48);
+INCLUDE_ASM("nonmatchings/display", func_00002D48);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002E84);
+INCLUDE_ASM("nonmatchings/display", func_00002E84);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002F98);
+INCLUDE_ASM("nonmatchings/display", func_00002F98);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_0000315C);
+INCLUDE_ASM("nonmatchings/display", func_0000315C);
 
-INCLUDE_RODATA("tmp/asm/282/display/nonmatchings/display", D_00003C88);
+INCLUDE_RODATA("nonmatchings/display", D_00003C88);
 
-INCLUDE_RODATA("tmp/asm/282/display/nonmatchings/display", D_00003CA8);
+INCLUDE_RODATA("nonmatchings/display", D_00003CA8);
 
-INCLUDE_RODATA("tmp/asm/282/display/nonmatchings/display", D_00003CBC);
+INCLUDE_RODATA("nonmatchings/display", D_00003CBC);

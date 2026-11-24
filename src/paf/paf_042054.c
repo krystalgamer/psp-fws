@@ -9,23 +9,23 @@ s32 func_00042054(s32 arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042078);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042078);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042208);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042208);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_0004222C);
+INCLUDE_ASM("nonmatchings/paf_042054", func_0004222C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_000422EC);
+INCLUDE_ASM("nonmatchings/paf_042054", func_000422EC);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042360);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042360);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_000423DC);
+INCLUDE_ASM("nonmatchings/paf_042054", func_000423DC);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042458);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042458);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_21A183A7);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_21A183A7);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_8FE88010);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_8FE88010);
 
 void scePaf_94136997(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *temp_v0;
@@ -51,17 +51,17 @@ void scePaf_50B0C0A1(s32 arg0, s32 arg1) {
     func_00042800((s32) temp_v0, 0, 6);
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042800);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042800);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_F247A0BD);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_F247A0BD);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_3D451DE8);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_3D451DE8);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_ABEBF18D);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_ABEBF18D);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042C04);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042C04);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042C70);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042C70);
 
 s32 scePaf_537D04C6(s32 arg0) {
     s32 **temp_v0;
@@ -76,21 +76,21 @@ s32 scePaf_537D04C6(s32 arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042D64);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042D64);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042DF4);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042DF4);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042E48);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042E48);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042EE4);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042EE4);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_910A6B7B);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_910A6B7B);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042F74);
+INCLUDE_ASM("nonmatchings/paf_042054", func_00042F74);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_12C50A9D);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_12C50A9D);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_1F43B8A2);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_1F43B8A2);
 
 s32 func_0004303C(struct Unk_func_0004303C_0 *arg0, s32 arg1) {
     s32 var_v1;
@@ -114,9 +114,9 @@ s32 func_00043080(struct Unk_func_00043080_0 *arg0, s32 arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_7E304DCF);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_7E304DCF);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_14D80C40);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_14D80C40);
 
 s32 scePaf_9F60CB01(s32 arg0) {
     s32 **temp_v0;
@@ -144,7 +144,7 @@ s32 scePaf_91E82C1B(s32 arg0, s32 arg1, s32 arg2) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_A25BDAA2);
+INCLUDE_ASM("nonmatchings/paf_042054", scePaf_A25BDAA2);
 
 s32 func_00043458(s32 arg0) {
     D_001A34E4 = arg0;

@@ -24,17 +24,17 @@ void func_00046798(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0466F4", D_001714B0);
+INCLUDE_RODATA("nonmatchings/paf_0466F4", D_001714B0);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000467D0);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_000467D0);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000469A0);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_000469A0);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00046A58);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00046A58);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00046D28);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00046D28);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00046FF8);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00046FF8);
 
 void func_000472DC(struct Unk_func_000472DC_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0->unk0 = &D_001715C4;
@@ -60,11 +60,11 @@ void func_0004738C(struct Unk_func_0004738C_0 *arg0, s32 arg1, s32 arg2, s32 arg
     arg0->unk20 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000473E4);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_000473E4);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00047448);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00047448);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000474AC);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_000474AC);
 
 s32 func_00047518(struct Unk_func_00047518_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_v0;
@@ -74,13 +74,13 @@ s32 func_00047518(struct Unk_func_00047518_0 *arg0, s32 arg1, s32 arg2, s32 arg3
     return temp_v0 != 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_0004756C);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_0004756C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000476A4);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_000476A4);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00047B60);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00047B60);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00047ED0);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00047ED0);
 
 void func_00048064(struct Unk_func_00048064_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk0 = &D_001715A8;
@@ -89,11 +89,11 @@ void func_00048064(struct Unk_func_00048064_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unkC = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00048080);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00048080);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000480DC);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_000480DC);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00048138);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00048138);
 
 s32 func_0004819C(struct Unk_func_0004819C_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_v0;
@@ -103,7 +103,7 @@ s32 func_0004819C(struct Unk_func_0004819C_0 *arg0, s32 arg1, s32 arg2, s32 arg3
     return temp_v0 != 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000481F0);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_000481F0);
 
 void func_00048404(struct Unk_func_00048404_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk0 = &D_0017158C;
@@ -112,11 +112,11 @@ void func_00048404(struct Unk_func_00048404_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unkC = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00048420);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00048420);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_0004847C);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_0004847C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000484D8);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_000484D8);
 
 s32 func_0004853C(struct Unk_func_0004853C_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_v0;
@@ -126,9 +126,9 @@ s32 func_0004853C(struct Unk_func_0004853C_0 *arg0, s32 arg1, s32 arg2, s32 arg3
     return temp_v0 != 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00048590);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00048590);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000486AC);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_000486AC);
 
 void func_000486FC(M2C_UNK **arg0) {
     *arg0 = &D_001715E0;
@@ -146,11 +146,11 @@ void func_0004874C(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00048784);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00048784);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000488C0);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_000488C0);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00048EE8);
+INCLUDE_ASM("nonmatchings/paf_0466F4", func_00048EE8);
 
 s32 func_00048F04(void) {
     return 0;

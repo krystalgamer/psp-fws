@@ -29,7 +29,7 @@ s32 func_00117484(void) {
     return D_001A4934;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_117408", func_00117490);
+INCLUDE_ASM("nonmatchings/paf_117408", func_00117490);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_117408", func_00117510);
+INCLUDE_ASM("nonmatchings/paf_117408", func_00117510);
 

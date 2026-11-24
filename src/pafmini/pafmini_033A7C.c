@@ -16,7 +16,7 @@ void func_00033A88(struct Unk_func_00033A88_0 *arg0, M2C_UNK *arg1) {
     *temp_v1 = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_033A7C", func_00033AA0);
+INCLUDE_ASM("nonmatchings/pafmini_033A7C", func_00033AA0);
 
 void func_00033AC0(struct Unk_func_00033AC0_0 *arg0, s32 arg1) {
     arg0->unk4 = arg1;

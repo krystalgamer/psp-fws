@@ -84,7 +84,7 @@ int sceOpenPSIDGetOpenPSID(u8 *psid) {
     return ret;
 }
 #else
-INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceOpenPSIDGetOpenPSID);
+INCLUDE_ASM("nonmatchings/openpsid", sceOpenPSIDGetOpenPSID);
 #endif
 
 s32 func_00000244(void) {
@@ -284,7 +284,7 @@ int sceDdrdbEncrypt(u8 *buf, u32 size) {
     return ret;
 }
 #else
-INCLUDE_ASM("tmp/asm/282/openpsid/nonmatchings/openpsid", sceDdrdbEncrypt);
+INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbEncrypt);
 #endif
 
 int sceDdrdbDecrypt(u8 *buf, u32 size) {

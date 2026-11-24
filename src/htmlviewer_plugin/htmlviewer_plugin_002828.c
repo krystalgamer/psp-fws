@@ -1,7 +1,7 @@
 #include "common.h"
 #include "htmlviewer_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_002828", func_00002828);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00002828);
 
 s32 func_00002930(s32 arg0, s32 arg1, s32 arg2) {
     if (func_0000398C() == 2) {
@@ -17,11 +17,11 @@ s32 func_00002930(s32 arg0, s32 arg1, s32 arg2) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_002828", func_000029C8);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_000029C8);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_002828", func_00002A28);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00002A28);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_002828", func_00002B08);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00002B08);
 
 void func_00002BF4(void) {
     if (D_000081CD != 0) {
@@ -35,11 +35,11 @@ void func_00002BF4(void) {
     func_00001890(0);
 }
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_002828", func_00002C80);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00002C80);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_002828", func_00002D4C);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00002D4C);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_002828", func_00002D70);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00002D70);
 
 void func_00002E44(void) {
     func_00002D70(1, 0xFFFF);
@@ -49,5 +49,5 @@ void func_00002E64(void) {
     func_00002D70(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_002828", func_00002E84);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00002E84);
 

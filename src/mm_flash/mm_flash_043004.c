@@ -86,15 +86,15 @@ void func_000430CC(struct Unk_func_000430CC_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_043004", func_00043104);
+INCLUDE_ASM("nonmatchings/mm_flash_043004", func_00043104);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_043004", func_00043218);
+INCLUDE_ASM("nonmatchings/mm_flash_043004", func_00043218);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_043004", func_000432B8);
+INCLUDE_ASM("nonmatchings/mm_flash_043004", func_000432B8);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_043004", func_00043444);
+INCLUDE_ASM("nonmatchings/mm_flash_043004", func_00043444);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_043004", func_00043484);
+INCLUDE_ASM("nonmatchings/mm_flash_043004", func_00043484);
 
 void func_000434BC(void) {
     func_000435EC();

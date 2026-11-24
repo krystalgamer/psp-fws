@@ -3,33 +3,33 @@
 #include "k1.h"
 #include "wlan_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00000000);
+INCLUDE_ASM("nonmatchings/wlan", func_00000000);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018A00);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018A00);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018A3C);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018A3C);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018A48);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018A48);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018A9C);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018A9C);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018AB0);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018AB0);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018AD8);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018AD8);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018AEC);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018AEC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_6D89822C);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_6D89822C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000003E8);
+INCLUDE_ASM("nonmatchings/wlan", func_000003E8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00000620);
+INCLUDE_ASM("nonmatchings/wlan", func_00000620);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018B14);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018B14);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018B20);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018B20);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_482CAE9A);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_482CAE9A);
 
 void sceWlanDrv_driver_C9A8CAB7(void) {
     u32 temp_s2;
@@ -47,39 +47,39 @@ void sceWlanDrv_driver_C9A8CAB7(void) {
     setK1(temp_s2);
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_19E51F54);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_19E51F54);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanGetEtherAddr);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanGetEtherAddr);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00000A08);
+INCLUDE_ASM("nonmatchings/wlan", func_00000A08);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00000AE4);
+INCLUDE_ASM("nonmatchings/wlan", func_00000AE4);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018B3C);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018B3C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00000BC0);
+INCLUDE_ASM("nonmatchings/wlan", func_00000BC0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000011AC);
+INCLUDE_ASM("nonmatchings/wlan", func_000011AC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000122C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000122C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00001468);
+INCLUDE_ASM("nonmatchings/wlan", func_00001468);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000026F8);
+INCLUDE_ASM("nonmatchings/wlan", func_000026F8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00002818);
+INCLUDE_ASM("nonmatchings/wlan", func_00002818);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000028D0);
+INCLUDE_ASM("nonmatchings/wlan", func_000028D0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_FE8A0B46);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_FE8A0B46);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_749B813A);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_749B813A);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_7FF54BD2);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_7FF54BD2);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_05FE320C);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_05FE320C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00002E78);
+INCLUDE_ASM("nonmatchings/wlan", func_00002E78);
 
 void func_00003114(struct Unk_func_00003114_0 *arg0) {
     sceKernelWaitSema(arg0->unk174, 1, NULL);
@@ -122,7 +122,7 @@ void func_000031DC(struct Unk_func_000031DC_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000321C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000321C);
 
 void func_00003268(struct Unk_func_00003268_0 *arg0, s32 arg1) {
     s32 temp_a3;
@@ -196,26 +196,26 @@ void func_000033E4(struct Unk_func_000033E4_0 *arg0) {
     temp_v1->unk0 = (u16) (temp_v1->unk0 | 2);
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_EC9232F0);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_EC9232F0);
 
 s32 module_reboot_before(void) {
     sceWlanDrv_driver_EC9232F0();
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_93440B11);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_93440B11);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_5E7C8D94);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_5E7C8D94);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_5ED4049A);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_5ED4049A);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_6D5C839E);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_6D5C839E);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_B4D7CB74);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_B4D7CB74);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_A447103A);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_A447103A);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_9658C9F7);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_9658C9F7);
 
 s32 sceWlanDrv_driver_4C7F62E0(void) {
     s32 temp_v1;
@@ -233,41 +233,41 @@ s32 sceWlanDrv_driver_4C7F62E0(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_81579D36);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_81579D36);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_5BAA1FE5);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_5BAA1FE5);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_4C14BACA);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_4C14BACA);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_2D0FAE4E);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_2D0FAE4E);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_56F467CA);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_56F467CA);
 
 s32 sceWlanGetSwitchState(void) {
     return D_000191B0->unk1D0 == 1;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003A20);
+INCLUDE_ASM("nonmatchings/wlan", func_00003A20);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003A88);
+INCLUDE_ASM("nonmatchings/wlan", func_00003A88);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003AC0);
+INCLUDE_ASM("nonmatchings/wlan", func_00003AC0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003AE4);
+INCLUDE_ASM("nonmatchings/wlan", func_00003AE4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003B60);
+INCLUDE_ASM("nonmatchings/wlan", func_00003B60);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003B78);
+INCLUDE_ASM("nonmatchings/wlan", func_00003B78);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_40B0AA4A);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_40B0AA4A);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_8D5F551B);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_8D5F551B);
 
 void sceWlanDrv_driver_E50312AB(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0000B24C(D_000191B0->unk184, arg0, arg1, arg2, arg3);
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003C68);
+INCLUDE_ASM("nonmatchings/wlan", func_00003C68);
 
 s32 func_00003CE0(struct Unk_func_00003CE0_0 *arg0) {
     s32 temp_s1;
@@ -284,52 +284,52 @@ s32 func_00003CE0(struct Unk_func_00003CE0_0 *arg0) {
     return 0x30D40;
 }
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018CC8);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018CC8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003D64);
+INCLUDE_ASM("nonmatchings/wlan", func_00003D64);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003E7C);
+INCLUDE_ASM("nonmatchings/wlan", func_00003E7C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00004050);
+INCLUDE_ASM("nonmatchings/wlan", func_00004050);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000041F8);
+INCLUDE_ASM("nonmatchings/wlan", func_000041F8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00004270);
+INCLUDE_ASM("nonmatchings/wlan", func_00004270);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00004668);
+INCLUDE_ASM("nonmatchings/wlan", func_00004668);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00004974);
+INCLUDE_ASM("nonmatchings/wlan", func_00004974);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00004A04);
+INCLUDE_ASM("nonmatchings/wlan", func_00004A04);
 
 s32 func_00004B20(s32 *arg0) {
     func_00004A04(*arg0);
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00004B40);
+INCLUDE_ASM("nonmatchings/wlan", func_00004B40);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00004BD4);
+INCLUDE_ASM("nonmatchings/wlan", func_00004BD4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00004C00);
+INCLUDE_ASM("nonmatchings/wlan", func_00004C00);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00004D6C);
+INCLUDE_ASM("nonmatchings/wlan", func_00004D6C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00006BBC);
+INCLUDE_ASM("nonmatchings/wlan", func_00006BBC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00006CA4);
+INCLUDE_ASM("nonmatchings/wlan", func_00006CA4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00006DF8);
+INCLUDE_ASM("nonmatchings/wlan", func_00006DF8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00007210);
+INCLUDE_ASM("nonmatchings/wlan", func_00007210);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000765C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000765C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000079E4);
+INCLUDE_ASM("nonmatchings/wlan", func_000079E4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00007D78);
+INCLUDE_ASM("nonmatchings/wlan", func_00007D78);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008090);
+INCLUDE_ASM("nonmatchings/wlan", func_00008090);
 
 s32 func_0000829C(struct Unk_func_0000829C_0 *arg0) {
     arg0->unk0 = 0;
@@ -340,27 +340,27 @@ s32 func_0000829C(struct Unk_func_0000829C_0 *arg0) {
 void func_000082AC(void) {
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000082B4);
+INCLUDE_ASM("nonmatchings/wlan", func_000082B4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008308);
+INCLUDE_ASM("nonmatchings/wlan", func_00008308);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000835C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000835C);
 
 s32 func_000083B4(s32 *arg0) {
     return *arg0 != 0;
 }
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018CE4);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018CE4);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018CF0);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018CF0);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018D00);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018D00);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018D10);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018D10);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018D20);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018D20);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018D48);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018D48);
 
 void func_000083C0(u32 arg0) {
     sceKernelCreateVpl("SceWlanDrvHeap", 1, 1U, arg0, NULL);
@@ -370,39 +370,39 @@ void func_000083F0(u32 arg0) {
     sceKernelDeleteVpl(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000840C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000840C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008440);
+INCLUDE_ASM("nonmatchings/wlan", func_00008440);
 
 void func_00008470(struct Unk_func_00008470_0 *arg0, struct Unk_func_00008470_1 *arg1) {
     sceKernelFreeVpl(arg0->unk17C, arg1);
 }
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018D64);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018D64);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018D90);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018D90);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018D9C);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018D9C);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018DB0);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018DB0);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018DE4);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018DE4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000848C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000848C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000086B0);
+INCLUDE_ASM("nonmatchings/wlan", func_000086B0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008834);
+INCLUDE_ASM("nonmatchings/wlan", func_00008834);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000894C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000894C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008A5C);
+INCLUDE_ASM("nonmatchings/wlan", func_00008A5C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008CE4);
+INCLUDE_ASM("nonmatchings/wlan", func_00008CE4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008D74);
+INCLUDE_ASM("nonmatchings/wlan", func_00008D74);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008F08);
+INCLUDE_ASM("nonmatchings/wlan", func_00008F08);
 
 s32 func_000090E8(struct Unk_func_000090E8_0 *arg0, s32 arg1, s8 *arg2) {
     s32 temp_s1;
@@ -425,23 +425,23 @@ s32 func_00009160(struct Unk_func_00009160_0 *arg0, s32 arg1, u8 *arg2) {
     return temp_s1;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000091D4);
+INCLUDE_ASM("nonmatchings/wlan", func_000091D4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00009468);
+INCLUDE_ASM("nonmatchings/wlan", func_00009468);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000097DC);
+INCLUDE_ASM("nonmatchings/wlan", func_000097DC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00009B20);
+INCLUDE_ASM("nonmatchings/wlan", func_00009B20);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00009DF4);
+INCLUDE_ASM("nonmatchings/wlan", func_00009DF4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000A07C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000A07C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000A3C4);
+INCLUDE_ASM("nonmatchings/wlan", func_0000A3C4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000A5D4);
+INCLUDE_ASM("nonmatchings/wlan", func_0000A5D4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000A908);
+INCLUDE_ASM("nonmatchings/wlan", func_0000A908);
 
 void func_0000AB18(struct Unk_func_00008470_1 *arg0) {
     void *temp_s1;
@@ -460,7 +460,7 @@ void func_0000AB18(struct Unk_func_00008470_1 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000ABA0);
+INCLUDE_ASM("nonmatchings/wlan", func_0000ABA0);
 
 void func_0000AC3C(void) {
     sceSysreg_driver_00C2628E(1);
@@ -488,13 +488,13 @@ void func_0000AC90(struct Unk_func_0000AC90_0 *arg0) {
     *temp_a3 |= 0x400;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000ACEC);
+INCLUDE_ASM("nonmatchings/wlan", func_0000ACEC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000AD1C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000AD1C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000ADB0);
+INCLUDE_ASM("nonmatchings/wlan", func_0000ADB0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000AE60);
+INCLUDE_ASM("nonmatchings/wlan", func_0000AE60);
 
 s32 func_0000AF1C(struct Unk_func_0000AF1C_0 *arg0, s32 arg1, u16 *arg2) {
     s32 temp_s2;
@@ -507,7 +507,7 @@ s32 func_0000AF1C(struct Unk_func_0000AF1C_0 *arg0, s32 arg1, u16 *arg2) {
     return temp_s2;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000AF9C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000AF9C);
 
 s32 func_0000B018(struct Unk_func_0000B018_0 *arg0, s32 arg1, s32 *arg2) {
     s32 temp_s2;
@@ -519,19 +519,19 @@ s32 func_0000B018(struct Unk_func_0000B018_0 *arg0, s32 arg1, s32 *arg2) {
     return temp_s2;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000B08C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000B08C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000B120);
+INCLUDE_ASM("nonmatchings/wlan", func_0000B120);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000B194);
+INCLUDE_ASM("nonmatchings/wlan", func_0000B194);
 
 void func_0000B24C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     func_000161A4(arg0, arg1, arg2, arg3, arg4);
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000B268);
+INCLUDE_ASM("nonmatchings/wlan", func_0000B268);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000B30C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000B30C);
 
 s32 func_0000B3CC(s32 arg0, struct Unk_func_0000B3CC_1 *arg1, M2C_UNK arg2) {
     s32 temp_s3;
@@ -544,264 +544,264 @@ s32 func_0000B3CC(s32 arg0, struct Unk_func_0000B3CC_1 *arg1, M2C_UNK arg2) {
     return -1;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000B450);
+INCLUDE_ASM("nonmatchings/wlan", func_0000B450);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000B524);
+INCLUDE_ASM("nonmatchings/wlan", func_0000B524);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000B670);
+INCLUDE_ASM("nonmatchings/wlan", func_0000B670);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000B8CC);
+INCLUDE_ASM("nonmatchings/wlan", func_0000B8CC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000B9D8);
+INCLUDE_ASM("nonmatchings/wlan", func_0000B9D8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000BAD0);
+INCLUDE_ASM("nonmatchings/wlan", func_0000BAD0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000BD90);
+INCLUDE_ASM("nonmatchings/wlan", func_0000BD90);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000BE8C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000BE8C);
 
 s32 func_0000BF70(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000BF78);
+INCLUDE_ASM("nonmatchings/wlan", func_0000BF78);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000C210);
+INCLUDE_ASM("nonmatchings/wlan", func_0000C210);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000C508);
+INCLUDE_ASM("nonmatchings/wlan", func_0000C508);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000C800);
+INCLUDE_ASM("nonmatchings/wlan", func_0000C800);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000CBA4);
+INCLUDE_ASM("nonmatchings/wlan", func_0000CBA4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000CCC8);
+INCLUDE_ASM("nonmatchings/wlan", func_0000CCC8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000CE48);
+INCLUDE_ASM("nonmatchings/wlan", func_0000CE48);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000CFEC);
+INCLUDE_ASM("nonmatchings/wlan", func_0000CFEC);
 
 s32 func_0000D18C(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000D194);
+INCLUDE_ASM("nonmatchings/wlan", func_0000D194);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000D2F4);
+INCLUDE_ASM("nonmatchings/wlan", func_0000D2F4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000D658);
+INCLUDE_ASM("nonmatchings/wlan", func_0000D658);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000D924);
+INCLUDE_ASM("nonmatchings/wlan", func_0000D924);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000DBA4);
+INCLUDE_ASM("nonmatchings/wlan", func_0000DBA4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000DF00);
+INCLUDE_ASM("nonmatchings/wlan", func_0000DF00);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000E088);
+INCLUDE_ASM("nonmatchings/wlan", func_0000E088);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000E180);
+INCLUDE_ASM("nonmatchings/wlan", func_0000E180);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000E2CC);
+INCLUDE_ASM("nonmatchings/wlan", func_0000E2CC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000E378);
+INCLUDE_ASM("nonmatchings/wlan", func_0000E378);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000E4EC);
+INCLUDE_ASM("nonmatchings/wlan", func_0000E4EC);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018E98);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018E98);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018FD8);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018FD8);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018FEC);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018FEC);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018FFC);
+INCLUDE_RODATA("nonmatchings/wlan", D_00018FFC);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00019000);
+INCLUDE_RODATA("nonmatchings/wlan", D_00019000);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00019004);
+INCLUDE_RODATA("nonmatchings/wlan", D_00019004);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00019008);
+INCLUDE_RODATA("nonmatchings/wlan", D_00019008);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_0001900C);
+INCLUDE_RODATA("nonmatchings/wlan", D_0001900C);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00019010);
+INCLUDE_RODATA("nonmatchings/wlan", D_00019010);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_0001901C);
+INCLUDE_RODATA("nonmatchings/wlan", D_0001901C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000E5F0);
+INCLUDE_ASM("nonmatchings/wlan", func_0000E5F0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000E99C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000E99C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000EAD4);
+INCLUDE_ASM("nonmatchings/wlan", func_0000EAD4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000ECD0);
+INCLUDE_ASM("nonmatchings/wlan", func_0000ECD0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000EDC8);
+INCLUDE_ASM("nonmatchings/wlan", func_0000EDC8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F008);
+INCLUDE_ASM("nonmatchings/wlan", func_0000F008);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F190);
+INCLUDE_ASM("nonmatchings/wlan", func_0000F190);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F2A4);
+INCLUDE_ASM("nonmatchings/wlan", func_0000F2A4);
 
 s32 func_0000F370(struct Unk_func_0000F370_0 *arg0) {
     sceKernelSignalSema(*arg0->unkB8->unk40, 1);
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F39C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000F39C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F4B8);
+INCLUDE_ASM("nonmatchings/wlan", func_0000F4B8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F5A8);
+INCLUDE_ASM("nonmatchings/wlan", func_0000F5A8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F6C8);
+INCLUDE_ASM("nonmatchings/wlan", func_0000F6C8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F81C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000F81C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F984);
+INCLUDE_ASM("nonmatchings/wlan", func_0000F984);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000FA98);
+INCLUDE_ASM("nonmatchings/wlan", func_0000FA98);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000FBC4);
+INCLUDE_ASM("nonmatchings/wlan", func_0000FBC4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000FCDC);
+INCLUDE_ASM("nonmatchings/wlan", func_0000FCDC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000FF9C);
+INCLUDE_ASM("nonmatchings/wlan", func_0000FF9C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010068);
+INCLUDE_ASM("nonmatchings/wlan", func_00010068);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000101BC);
+INCLUDE_ASM("nonmatchings/wlan", func_000101BC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010310);
+INCLUDE_ASM("nonmatchings/wlan", func_00010310);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010464);
+INCLUDE_ASM("nonmatchings/wlan", func_00010464);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000105B0);
+INCLUDE_ASM("nonmatchings/wlan", func_000105B0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010778);
+INCLUDE_ASM("nonmatchings/wlan", func_00010778);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010850);
+INCLUDE_ASM("nonmatchings/wlan", func_00010850);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010954);
+INCLUDE_ASM("nonmatchings/wlan", func_00010954);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010A20);
+INCLUDE_ASM("nonmatchings/wlan", func_00010A20);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010B08);
+INCLUDE_ASM("nonmatchings/wlan", func_00010B08);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010BC4);
+INCLUDE_ASM("nonmatchings/wlan", func_00010BC4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010CD0);
+INCLUDE_ASM("nonmatchings/wlan", func_00010CD0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010DCC);
+INCLUDE_ASM("nonmatchings/wlan", func_00010DCC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010EBC);
+INCLUDE_ASM("nonmatchings/wlan", func_00010EBC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00010FCC);
+INCLUDE_ASM("nonmatchings/wlan", func_00010FCC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0001115C);
+INCLUDE_ASM("nonmatchings/wlan", func_0001115C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011304);
+INCLUDE_ASM("nonmatchings/wlan", func_00011304);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011440);
+INCLUDE_ASM("nonmatchings/wlan", func_00011440);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011574);
+INCLUDE_ASM("nonmatchings/wlan", func_00011574);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011688);
+INCLUDE_ASM("nonmatchings/wlan", func_00011688);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011798);
+INCLUDE_ASM("nonmatchings/wlan", func_00011798);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000118AC);
+INCLUDE_ASM("nonmatchings/wlan", func_000118AC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011948);
+INCLUDE_ASM("nonmatchings/wlan", func_00011948);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000119C8);
+INCLUDE_ASM("nonmatchings/wlan", func_000119C8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011A4C);
+INCLUDE_ASM("nonmatchings/wlan", func_00011A4C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011AE4);
+INCLUDE_ASM("nonmatchings/wlan", func_00011AE4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011BB0);
+INCLUDE_ASM("nonmatchings/wlan", func_00011BB0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011C30);
+INCLUDE_ASM("nonmatchings/wlan", func_00011C30);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011CB0);
+INCLUDE_ASM("nonmatchings/wlan", func_00011CB0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011D44);
+INCLUDE_ASM("nonmatchings/wlan", func_00011D44);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011DF8);
+INCLUDE_ASM("nonmatchings/wlan", func_00011DF8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011E78);
+INCLUDE_ASM("nonmatchings/wlan", func_00011E78);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011EF8);
+INCLUDE_ASM("nonmatchings/wlan", func_00011EF8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00011FE0);
+INCLUDE_ASM("nonmatchings/wlan", func_00011FE0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012070);
+INCLUDE_ASM("nonmatchings/wlan", func_00012070);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012138);
+INCLUDE_ASM("nonmatchings/wlan", func_00012138);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012200);
+INCLUDE_ASM("nonmatchings/wlan", func_00012200);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000122AC);
+INCLUDE_ASM("nonmatchings/wlan", func_000122AC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012344);
+INCLUDE_ASM("nonmatchings/wlan", func_00012344);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012430);
+INCLUDE_ASM("nonmatchings/wlan", func_00012430);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000124EC);
+INCLUDE_ASM("nonmatchings/wlan", func_000124EC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012584);
+INCLUDE_ASM("nonmatchings/wlan", func_00012584);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012614);
+INCLUDE_ASM("nonmatchings/wlan", func_00012614);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000126AC);
+INCLUDE_ASM("nonmatchings/wlan", func_000126AC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0001276C);
+INCLUDE_ASM("nonmatchings/wlan", func_0001276C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012814);
+INCLUDE_ASM("nonmatchings/wlan", func_00012814);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000128A4);
+INCLUDE_ASM("nonmatchings/wlan", func_000128A4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012934);
+INCLUDE_ASM("nonmatchings/wlan", func_00012934);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000129EC);
+INCLUDE_ASM("nonmatchings/wlan", func_000129EC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012ABC);
+INCLUDE_ASM("nonmatchings/wlan", func_00012ABC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012B4C);
+INCLUDE_ASM("nonmatchings/wlan", func_00012B4C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012BDC);
+INCLUDE_ASM("nonmatchings/wlan", func_00012BDC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012C6C);
+INCLUDE_ASM("nonmatchings/wlan", func_00012C6C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012CFC);
+INCLUDE_ASM("nonmatchings/wlan", func_00012CFC);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00012D8C);
+INCLUDE_ASM("nonmatchings/wlan", func_00012D8C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00013620);
+INCLUDE_ASM("nonmatchings/wlan", func_00013620);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000136A0);
+INCLUDE_ASM("nonmatchings/wlan", func_000136A0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0001374C);
+INCLUDE_ASM("nonmatchings/wlan", func_0001374C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0001381C);
+INCLUDE_ASM("nonmatchings/wlan", func_0001381C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00013A00);
+INCLUDE_ASM("nonmatchings/wlan", func_00013A00);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00014A98);
+INCLUDE_ASM("nonmatchings/wlan", func_00014A98);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00014CA0);
+INCLUDE_ASM("nonmatchings/wlan", func_00014CA0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00014ED4);
+INCLUDE_ASM("nonmatchings/wlan", func_00014ED4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00014FC4);
+INCLUDE_ASM("nonmatchings/wlan", func_00014FC4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000151C8);
+INCLUDE_ASM("nonmatchings/wlan", func_000151C8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000152B4);
+INCLUDE_ASM("nonmatchings/wlan", func_000152B4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000153A8);
+INCLUDE_ASM("nonmatchings/wlan", func_000153A8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0001558C);
+INCLUDE_ASM("nonmatchings/wlan", func_0001558C);
 
 void func_00015958(struct Unk_func_00015958_0 *arg0) {
     struct Unk_func_00015958_temp_s0 *temp_s0;
@@ -821,53 +821,53 @@ void func_00015958(struct Unk_func_00015958_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00015A1C);
+INCLUDE_ASM("nonmatchings/wlan", func_00015A1C);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00019078);
+INCLUDE_RODATA("nonmatchings/wlan", D_00019078);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_0001907C);
+INCLUDE_RODATA("nonmatchings/wlan", D_0001907C);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00019080);
+INCLUDE_RODATA("nonmatchings/wlan", D_00019080);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00019088);
+INCLUDE_RODATA("nonmatchings/wlan", D_00019088);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00019090);
+INCLUDE_RODATA("nonmatchings/wlan", D_00019090);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_000190C4);
+INCLUDE_RODATA("nonmatchings/wlan", D_000190C4);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_000190EC);
+INCLUDE_RODATA("nonmatchings/wlan", D_000190EC);
 
-INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_000190F8);
+INCLUDE_RODATA("nonmatchings/wlan", D_000190F8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00015B48);
+INCLUDE_ASM("nonmatchings/wlan", func_00015B48);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00015C9C);
+INCLUDE_ASM("nonmatchings/wlan", func_00015C9C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00015E14);
+INCLUDE_ASM("nonmatchings/wlan", func_00015E14);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00016010);
+INCLUDE_ASM("nonmatchings/wlan", func_00016010);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00016060);
+INCLUDE_ASM("nonmatchings/wlan", func_00016060);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000160E0);
+INCLUDE_ASM("nonmatchings/wlan", func_000160E0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000161A4);
+INCLUDE_ASM("nonmatchings/wlan", func_000161A4);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000161D0);
+INCLUDE_ASM("nonmatchings/wlan", func_000161D0);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00016780);
+INCLUDE_ASM("nonmatchings/wlan", func_00016780);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000168E8);
+INCLUDE_ASM("nonmatchings/wlan", func_000168E8);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00016D98);
+INCLUDE_ASM("nonmatchings/wlan", func_00016D98);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00016F70);
+INCLUDE_ASM("nonmatchings/wlan", func_00016F70);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00017048);
+INCLUDE_ASM("nonmatchings/wlan", func_00017048);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0001712C);
+INCLUDE_ASM("nonmatchings/wlan", func_0001712C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_FBD385FB);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_FBD385FB);
 
 s32 sceWlanDrv_driver_44A99F9D(s32 *arg0, s32 *arg1) {
     s32 var_a2;
@@ -904,7 +904,7 @@ s32 sceWlanDrv_driver_EB3235B5(u32 arg0, s32 arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00017880);
+INCLUDE_ASM("nonmatchings/wlan", func_00017880);
 
 s32 func_00017A3C(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
     M2C_UNK (*temp_v0)(void *, s32, s32, u32, s32);
@@ -928,7 +928,7 @@ s32 func_00017A3C(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2, u32 arg3
     return var_s0;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00017B2C);
+INCLUDE_ASM("nonmatchings/wlan", func_00017B2C);
 
 s32 func_00017BCC(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2) {
     s32 (*temp_v0)(void *, s32, s32);
@@ -951,11 +951,11 @@ s32 func_00017BCC(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2) {
     return var_s0;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00017C7C);
+INCLUDE_ASM("nonmatchings/wlan", func_00017C7C);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00017D40);
+INCLUDE_ASM("nonmatchings/wlan", func_00017D40);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00017E04);
+INCLUDE_ASM("nonmatchings/wlan", func_00017E04);
 
 s32 func_00017EA4(struct Unk_func_00003114_0 *arg0, struct Unk_func_00017EA4_1 *arg1) {
     s32 temp_v1;
@@ -981,7 +981,7 @@ s32 func_00017EA4(struct Unk_func_00003114_0 *arg0, struct Unk_func_00017EA4_1 *
     return var_s2;
 }
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00017F40);
+INCLUDE_ASM("nonmatchings/wlan", func_00017F40);
 
 s32 func_00017FC4(struct Unk_func_00003114_0 *arg0, struct Unk_func_00017FC4_1 *arg1) {
     struct Unk_func_00017FC4_temp_s0 *temp_s0;

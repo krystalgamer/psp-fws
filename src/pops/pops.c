@@ -1,371 +1,371 @@
 #include "common.h"
 #include "pops_decls.h"
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00000040);
+INCLUDE_ASM("nonmatchings/pops", func_00000040);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000000C8);
+INCLUDE_ASM("nonmatchings/pops", func_000000C8);
 
-INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops", D_00038250);
+INCLUDE_RODATA("nonmatchings/pops", D_00038250);
 
-INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops", D_00038268);
+INCLUDE_RODATA("nonmatchings/pops", D_00038268);
 
-INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops", D_00038278);
+INCLUDE_RODATA("nonmatchings/pops", D_00038278);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", module_start);
+INCLUDE_ASM("nonmatchings/pops", module_start);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000001FC);
+INCLUDE_ASM("nonmatchings/pops", func_000001FC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", module_stop);
+INCLUDE_ASM("nonmatchings/pops", module_stop);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000004F0);
+INCLUDE_ASM("nonmatchings/pops", func_000004F0);
 
 s32 func_00000668(void) {
     sceKernelExitGame();
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00000688);
+INCLUDE_ASM("nonmatchings/pops", func_00000688);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000076C);
+INCLUDE_ASM("nonmatchings/pops", func_0000076C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000078C);
+INCLUDE_ASM("nonmatchings/pops", func_0000078C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000008C4);
+INCLUDE_ASM("nonmatchings/pops", func_000008C4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000009C0);
+INCLUDE_ASM("nonmatchings/pops", func_000009C0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00000B00);
+INCLUDE_ASM("nonmatchings/pops", func_00000B00);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00000BB0);
+INCLUDE_ASM("nonmatchings/pops", func_00000BB0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00000C34);
+INCLUDE_ASM("nonmatchings/pops", func_00000C34);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00000E00);
+INCLUDE_ASM("nonmatchings/pops", func_00000E00);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00000E80);
+INCLUDE_ASM("nonmatchings/pops", func_00000E80);
 
 s32 func_00000F24(void) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00000F2C);
+INCLUDE_ASM("nonmatchings/pops", func_00000F2C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00000FDC);
+INCLUDE_ASM("nonmatchings/pops", func_00000FDC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00001088);
+INCLUDE_ASM("nonmatchings/pops", func_00001088);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000010DC);
+INCLUDE_ASM("nonmatchings/pops", func_000010DC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00001148);
+INCLUDE_ASM("nonmatchings/pops", func_00001148);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000011B0);
+INCLUDE_ASM("nonmatchings/pops", func_000011B0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000011EC);
+INCLUDE_ASM("nonmatchings/pops", func_000011EC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00001224);
+INCLUDE_ASM("nonmatchings/pops", func_00001224);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00001324);
+INCLUDE_ASM("nonmatchings/pops", func_00001324);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000013FC);
+INCLUDE_ASM("nonmatchings/pops", func_000013FC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000147C);
+INCLUDE_ASM("nonmatchings/pops", func_0000147C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00001518);
+INCLUDE_ASM("nonmatchings/pops", func_00001518);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00001564);
+INCLUDE_ASM("nonmatchings/pops", func_00001564);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000015D0);
+INCLUDE_ASM("nonmatchings/pops", func_000015D0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000016B8);
+INCLUDE_ASM("nonmatchings/pops", func_000016B8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000017B8);
+INCLUDE_ASM("nonmatchings/pops", func_000017B8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000197C);
+INCLUDE_ASM("nonmatchings/pops", func_0000197C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00001D70);
+INCLUDE_ASM("nonmatchings/pops", func_00001D70);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000216C);
+INCLUDE_ASM("nonmatchings/pops", func_0000216C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000230C);
+INCLUDE_ASM("nonmatchings/pops", func_0000230C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000023F4);
+INCLUDE_ASM("nonmatchings/pops", func_000023F4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00002434);
+INCLUDE_ASM("nonmatchings/pops", func_00002434);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000024B8);
+INCLUDE_ASM("nonmatchings/pops", func_000024B8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00002568);
+INCLUDE_ASM("nonmatchings/pops", func_00002568);
 
-INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops", D_000382DC);
+INCLUDE_RODATA("nonmatchings/pops", D_000382DC);
 
-INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops", D_000382FC);
+INCLUDE_RODATA("nonmatchings/pops", D_000382FC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000025F4);
+INCLUDE_ASM("nonmatchings/pops", func_000025F4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00002CA4);
+INCLUDE_ASM("nonmatchings/pops", func_00002CA4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003000);
+INCLUDE_ASM("nonmatchings/pops", func_00003000);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003430);
+INCLUDE_ASM("nonmatchings/pops", func_00003430);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000034C0);
+INCLUDE_ASM("nonmatchings/pops", func_000034C0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003524);
+INCLUDE_ASM("nonmatchings/pops", func_00003524);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003550);
+INCLUDE_ASM("nonmatchings/pops", func_00003550);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000035B4);
+INCLUDE_ASM("nonmatchings/pops", func_000035B4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000035DC);
+INCLUDE_ASM("nonmatchings/pops", func_000035DC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003800);
+INCLUDE_ASM("nonmatchings/pops", func_00003800);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000399C);
+INCLUDE_ASM("nonmatchings/pops", func_0000399C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003A94);
+INCLUDE_ASM("nonmatchings/pops", func_00003A94);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003AF8);
+INCLUDE_ASM("nonmatchings/pops", func_00003AF8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003B24);
+INCLUDE_ASM("nonmatchings/pops", func_00003B24);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003B48);
+INCLUDE_ASM("nonmatchings/pops", func_00003B48);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003B9C);
+INCLUDE_ASM("nonmatchings/pops", func_00003B9C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003C20);
+INCLUDE_ASM("nonmatchings/pops", func_00003C20);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003C8C);
+INCLUDE_ASM("nonmatchings/pops", func_00003C8C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003D08);
+INCLUDE_ASM("nonmatchings/pops", func_00003D08);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003DF8);
+INCLUDE_ASM("nonmatchings/pops", func_00003DF8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003EA4);
+INCLUDE_ASM("nonmatchings/pops", func_00003EA4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003F24);
+INCLUDE_ASM("nonmatchings/pops", func_00003F24);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003F48);
+INCLUDE_ASM("nonmatchings/pops", func_00003F48);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00003F68);
+INCLUDE_ASM("nonmatchings/pops", func_00003F68);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000041DC);
+INCLUDE_ASM("nonmatchings/pops", func_000041DC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00004420);
+INCLUDE_ASM("nonmatchings/pops", func_00004420);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000044C8);
+INCLUDE_ASM("nonmatchings/pops", func_000044C8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00004608);
+INCLUDE_ASM("nonmatchings/pops", func_00004608);
 
-INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops", D_0003856C);
+INCLUDE_RODATA("nonmatchings/pops", D_0003856C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000471C);
+INCLUDE_ASM("nonmatchings/pops", func_0000471C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00004AA4);
+INCLUDE_ASM("nonmatchings/pops", func_00004AA4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00005168);
+INCLUDE_ASM("nonmatchings/pops", func_00005168);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000051E0);
+INCLUDE_ASM("nonmatchings/pops", func_000051E0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000065C0);
+INCLUDE_ASM("nonmatchings/pops", func_000065C0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000067D4);
+INCLUDE_ASM("nonmatchings/pops", func_000067D4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00006900);
+INCLUDE_ASM("nonmatchings/pops", func_00006900);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00006AEC);
+INCLUDE_ASM("nonmatchings/pops", func_00006AEC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00006B40);
+INCLUDE_ASM("nonmatchings/pops", func_00006B40);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00006CD0);
+INCLUDE_ASM("nonmatchings/pops", func_00006CD0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00006D98);
+INCLUDE_ASM("nonmatchings/pops", func_00006D98);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00006F74);
+INCLUDE_ASM("nonmatchings/pops", func_00006F74);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000712C);
+INCLUDE_ASM("nonmatchings/pops", func_0000712C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000073A4);
+INCLUDE_ASM("nonmatchings/pops", func_000073A4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007404);
+INCLUDE_ASM("nonmatchings/pops", func_00007404);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000075B0);
+INCLUDE_ASM("nonmatchings/pops", func_000075B0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000779C);
+INCLUDE_ASM("nonmatchings/pops", func_0000779C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007850);
+INCLUDE_ASM("nonmatchings/pops", func_00007850);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000078CC);
+INCLUDE_ASM("nonmatchings/pops", func_000078CC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007954);
+INCLUDE_ASM("nonmatchings/pops", func_00007954);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000079E4);
+INCLUDE_ASM("nonmatchings/pops", func_000079E4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007A44);
+INCLUDE_ASM("nonmatchings/pops", func_00007A44);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007AEC);
+INCLUDE_ASM("nonmatchings/pops", func_00007AEC);
 
 void func_00007BF0(void) {
     func_00009A58();
 }
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007C0C);
+INCLUDE_ASM("nonmatchings/pops", func_00007C0C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007D2C);
+INCLUDE_ASM("nonmatchings/pops", func_00007D2C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007D48);
+INCLUDE_ASM("nonmatchings/pops", func_00007D48);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007E2C);
+INCLUDE_ASM("nonmatchings/pops", func_00007E2C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007E88);
+INCLUDE_ASM("nonmatchings/pops", func_00007E88);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00007EC8);
+INCLUDE_ASM("nonmatchings/pops", func_00007EC8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00008010);
+INCLUDE_ASM("nonmatchings/pops", func_00008010);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00008070);
+INCLUDE_ASM("nonmatchings/pops", func_00008070);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000080E8);
+INCLUDE_ASM("nonmatchings/pops", func_000080E8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000081D0);
+INCLUDE_ASM("nonmatchings/pops", func_000081D0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000822C);
+INCLUDE_ASM("nonmatchings/pops", func_0000822C);
 
 void func_0000825C(void) {
 }
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00008264);
+INCLUDE_ASM("nonmatchings/pops", func_00008264);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000082E4);
+INCLUDE_ASM("nonmatchings/pops", func_000082E4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00008374);
+INCLUDE_ASM("nonmatchings/pops", func_00008374);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00008608);
+INCLUDE_ASM("nonmatchings/pops", func_00008608);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00008824);
+INCLUDE_ASM("nonmatchings/pops", func_00008824);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000889C);
+INCLUDE_ASM("nonmatchings/pops", func_0000889C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00008B30);
+INCLUDE_ASM("nonmatchings/pops", func_00008B30);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00008DC4);
+INCLUDE_ASM("nonmatchings/pops", func_00008DC4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009058);
+INCLUDE_ASM("nonmatchings/pops", func_00009058);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000090B4);
+INCLUDE_ASM("nonmatchings/pops", func_000090B4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000922C);
+INCLUDE_ASM("nonmatchings/pops", func_0000922C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000093A4);
+INCLUDE_ASM("nonmatchings/pops", func_000093A4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000951C);
+INCLUDE_ASM("nonmatchings/pops", func_0000951C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009570);
+INCLUDE_ASM("nonmatchings/pops", func_00009570);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000095C4);
+INCLUDE_ASM("nonmatchings/pops", func_000095C4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000095F8);
+INCLUDE_ASM("nonmatchings/pops", func_000095F8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000963C);
+INCLUDE_ASM("nonmatchings/pops", func_0000963C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009678);
+INCLUDE_ASM("nonmatchings/pops", func_00009678);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000096DC);
+INCLUDE_ASM("nonmatchings/pops", func_000096DC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009718);
+INCLUDE_ASM("nonmatchings/pops", func_00009718);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009760);
+INCLUDE_ASM("nonmatchings/pops", func_00009760);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000097C0);
+INCLUDE_ASM("nonmatchings/pops", func_000097C0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000097EC);
+INCLUDE_ASM("nonmatchings/pops", func_000097EC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009814);
+INCLUDE_ASM("nonmatchings/pops", func_00009814);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009874);
+INCLUDE_ASM("nonmatchings/pops", func_00009874);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_000098D4);
+INCLUDE_ASM("nonmatchings/pops", func_000098D4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000993C);
+INCLUDE_ASM("nonmatchings/pops", func_0000993C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009988);
+INCLUDE_ASM("nonmatchings/pops", func_00009988);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009A58);
+INCLUDE_ASM("nonmatchings/pops", func_00009A58);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009CF8);
+INCLUDE_ASM("nonmatchings/pops", func_00009CF8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009E74);
+INCLUDE_ASM("nonmatchings/pops", func_00009E74);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009EB8);
+INCLUDE_ASM("nonmatchings/pops", func_00009EB8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_00009F9C);
+INCLUDE_ASM("nonmatchings/pops", func_00009F9C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A3D4);
+INCLUDE_ASM("nonmatchings/pops", func_0000A3D4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A3F8);
+INCLUDE_ASM("nonmatchings/pops", func_0000A3F8);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A464);
+INCLUDE_ASM("nonmatchings/pops", func_0000A464);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A478);
+INCLUDE_ASM("nonmatchings/pops", func_0000A478);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A4B0);
+INCLUDE_ASM("nonmatchings/pops", func_0000A4B0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A54C);
+INCLUDE_ASM("nonmatchings/pops", func_0000A54C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A60C);
+INCLUDE_ASM("nonmatchings/pops", func_0000A60C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A744);
+INCLUDE_ASM("nonmatchings/pops", func_0000A744);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A804);
+INCLUDE_ASM("nonmatchings/pops", func_0000A804);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A82C);
+INCLUDE_ASM("nonmatchings/pops", func_0000A82C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A894);
+INCLUDE_ASM("nonmatchings/pops", func_0000A894);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A944);
+INCLUDE_ASM("nonmatchings/pops", func_0000A944);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000A9CC);
+INCLUDE_ASM("nonmatchings/pops", func_0000A9CC);
 
-INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops", D_00038760);
+INCLUDE_RODATA("nonmatchings/pops", D_00038760);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000AA58);
+INCLUDE_ASM("nonmatchings/pops", func_0000AA58);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000AAB4);
+INCLUDE_ASM("nonmatchings/pops", func_0000AAB4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000ABC0);
+INCLUDE_ASM("nonmatchings/pops", func_0000ABC0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000AD30);
+INCLUDE_ASM("nonmatchings/pops", func_0000AD30);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000ADC0);
+INCLUDE_ASM("nonmatchings/pops", func_0000ADC0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B018);
+INCLUDE_ASM("nonmatchings/pops", func_0000B018);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B194);
+INCLUDE_ASM("nonmatchings/pops", func_0000B194);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B28C);
+INCLUDE_ASM("nonmatchings/pops", func_0000B28C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B2D4);
+INCLUDE_ASM("nonmatchings/pops", func_0000B2D4);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B34C);
+INCLUDE_ASM("nonmatchings/pops", func_0000B34C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B384);
+INCLUDE_ASM("nonmatchings/pops", func_0000B384);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B470);
+INCLUDE_ASM("nonmatchings/pops", func_0000B470);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B4E0);
+INCLUDE_ASM("nonmatchings/pops", func_0000B4E0);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B560);
+INCLUDE_ASM("nonmatchings/pops", func_0000B560);
 
 s32 func_0000B784(void) {
     return D_001212C0;
 }
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B790);
+INCLUDE_ASM("nonmatchings/pops", func_0000B790);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B7BC);
+INCLUDE_ASM("nonmatchings/pops", func_0000B7BC);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B80C);
+INCLUDE_ASM("nonmatchings/pops", func_0000B80C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B860);
+INCLUDE_ASM("nonmatchings/pops", func_0000B860);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops", func_0000B8A8);
+INCLUDE_ASM("nonmatchings/pops", func_0000B8A8);
 

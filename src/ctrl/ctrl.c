@@ -2,29 +2,29 @@
 #include "common.h"
 #include "ctrl_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_3E65A0EA);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_3E65A0EA);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_E03956E9);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_E03956E9);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_000001C0);
+INCLUDE_ASM("nonmatchings/ctrl", func_000001C0);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_000002F0);
+INCLUDE_ASM("nonmatchings/ctrl", func_000002F0);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_000003B0);
+INCLUDE_ASM("nonmatchings/ctrl", func_000003B0);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_00000470);
+INCLUDE_ASM("nonmatchings/ctrl", func_00000470);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_00000804);
+INCLUDE_ASM("nonmatchings/ctrl", func_00000804);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlSetSamplingMode);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSamplingMode);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlGetSamplingMode);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetSamplingMode);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlSetSamplingCycle);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSamplingCycle);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlPeekLatch);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlPeekLatch);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlReadLatch);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlReadLatch);
 
 s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     if (arg0 != NULL) {
@@ -42,15 +42,15 @@ s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlSetIdleCancelThreshold);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetIdleCancelThreshold);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlGetIdleCancelThreshold);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetIdleCancelThreshold);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_7CA723DC);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_7CA723DC);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_5E77BC8A);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_5E77BC8A);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlSetRapidFire);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetRapidFire);
 
 s32 module_start(void) {
     sceCtrl_driver_3E65A0EA();
@@ -62,11 +62,11 @@ s32 module_reboot_before(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_C3F607F3);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_C3F607F3);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_C245B57B);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_C245B57B);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlGetSamplingCycle);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetSamplingCycle);
 
 s32 sceCtrlPeekBufferPositive(void *arg0, s32 arg1) {
     return func_0000161C((s32) arg0, arg1, 0);
@@ -97,15 +97,15 @@ s32 sceCtrl_driver_252D3A8D(s8 arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_348D99D4);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_348D99D4);
 
 s32 sceCtrl_driver_AF5960F3(void) {
     return D_00001D88;
 }
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_5C56C779);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_5C56C779);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrlClearRapidFire);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlClearRapidFire);
 
 s32 func_00001548(void) {
     return 0x80000003;
@@ -127,10 +127,10 @@ s32 func_00001578(void) {
     return 0x80000003;
 }
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_00001584);
+INCLUDE_ASM("nonmatchings/ctrl", func_00001584);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_00001600);
+INCLUDE_ASM("nonmatchings/ctrl", func_00001600);
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", func_0000161C);
+INCLUDE_ASM("nonmatchings/ctrl", func_0000161C);
 
-INCLUDE_RODATA("tmp/asm/282/ctrl/nonmatchings/ctrl", D_00001D20);
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001D20);

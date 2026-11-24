@@ -134,7 +134,7 @@ def main():
                     h = re.sub(r"/\* cflags: [^*]*\*/", f"/* cflags: {cflags} */", h)
                 else:
                     h = f"/* cflags: {cflags} */\n" + h
-            text = h + "".join(body).replace(f'/nonmatchings/{owner.stem}"', f'/nonmatchings/{stem}"')
+            text = h + "".join(body).replace(f'nonmatchings/{owner.stem}"', f'nonmatchings/{stem}"')
             (src_dir / f"{stem}.c").write_text(text)
             new_c.append(f"      - [0x{addr[name] + text_off:X}, c, {stem}]")
             if ro is not None:

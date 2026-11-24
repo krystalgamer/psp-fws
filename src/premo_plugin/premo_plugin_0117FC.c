@@ -26,7 +26,7 @@ s32 func_00011830(struct Unk_func_00011830_0 *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_0117FC", func_0001184C);
+INCLUDE_ASM("nonmatchings/premo_plugin_0117FC", func_0001184C);
 
 void func_00011B18(M2C_UNK **arg0) {
     *arg0 = &D_0002A7A8;

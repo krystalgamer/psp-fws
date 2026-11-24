@@ -38,15 +38,15 @@ s32 func_00155AC0(struct Unk_func_00155AC0_0 *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155A78", func_00155AD4);
+INCLUDE_ASM("nonmatchings/paf_155A78", func_00155AD4);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155A78", func_00155B04);
+INCLUDE_ASM("nonmatchings/paf_155A78", func_00155B04);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155A78", func_00155B34);
+INCLUDE_ASM("nonmatchings/paf_155A78", func_00155B34);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155A78", func_00155BC0);
+INCLUDE_ASM("nonmatchings/paf_155A78", func_00155BC0);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155A78", func_00155C2C);
+INCLUDE_ASM("nonmatchings/paf_155A78", func_00155C2C);
 
 void func_00155D04(struct Unk_func_00155D04_0 *arg0) {
     if (arg0 != NULL) {

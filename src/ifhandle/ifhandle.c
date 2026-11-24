@@ -3,39 +3,39 @@
 #include "k1.h"
 #include "ifhandle_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_B9096E48);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_B9096E48);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_B1F5BB87);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_B1F5BB87);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_16042084);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_16042084);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_AE81C0CB);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_AE81C0CB);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_54D1AEA1);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_54D1AEA1);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_263767F6);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_263767F6);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_E2F4F1C9);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_E2F4F1C9);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_C28F6FF2);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_C28F6FF2);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_30F69334);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_30F69334);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_B8188F96);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_B8188F96);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_4FB43BCE);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_4FB43BCE);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_8FCB05A1);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_8FCB05A1);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_EAD3A759);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_EAD3A759);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_0296C7D6);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_0296C7D6);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_E440A7D8);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_E440A7D8);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_C9344A59);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_C9344A59);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_F94BAF52);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_F94BAF52);
 
 void sceNetIfhandle_driver_16246B99(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1) {
     s32 temp_v0;
@@ -85,15 +85,15 @@ s32 sceNetIfhandle_driver_0542835F(s32 arg0, s32 arg1, s32 arg2) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_773FC77C);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_773FC77C);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_9CBA24D4);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_9CBA24D4);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_C5623112);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_C5623112);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetGetDropRate);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetGetDropRate);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetSetDropRate);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetSetDropRate);
 
 s32 sceNetIfhandle_driver_0C391E9F(s32 arg0, u32 arg1) {
     s32 temp_v0;
@@ -121,39 +121,39 @@ s32 sceNetIfhandle_driver_29ED84C5(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_4C2886CB);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_4C2886CB);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_15CFE3C0);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_15CFE3C0);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_76BAD213);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_76BAD213);
 
 s32 func_00001330(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_59F0D619);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_59F0D619);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_F8825DC4);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_F8825DC4);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_F56FAC82);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_F56FAC82);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_C3325FDC);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_C3325FDC);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_955F2924);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_955F2924);
 
-INCLUDE_RODATA("tmp/asm/282/ifhandle/nonmatchings/ifhandle", D_00003470);
+INCLUDE_RODATA("nonmatchings/ifhandle", D_00003470);
 
-INCLUDE_RODATA("tmp/asm/282/ifhandle/nonmatchings/ifhandle", D_0000347C);
+INCLUDE_RODATA("nonmatchings/ifhandle", D_0000347C);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_9A6261EC);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_9A6261EC);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_BFF3CEA5);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_BFF3CEA5);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_49EDBB18);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_49EDBB18);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", func_00001E90);
+INCLUDE_ASM("nonmatchings/ifhandle", func_00001E90);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_1560F143);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_1560F143);
 
 void sceNetIfhandle_driver_0FB8AE0D(void) {
     u32 temp_a1;
@@ -166,17 +166,17 @@ void sceNetIfhandle_driver_0FB8AE0D(void) {
     setK1(temp_a1);
 }
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_A493AA5F);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_A493AA5F);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_4CF15C43);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_4CF15C43);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_456E3146);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_456E3146);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_6AB53C27);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_6AB53C27);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_3E8DD3F8);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_3E8DD3F8);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_5FB31C72);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_5FB31C72);
 
 s32 sceNetIfhandle_driver_62B20015(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     u32 temp_a5;
@@ -190,6 +190,6 @@ s32 sceNetIfhandle_driver_62B20015(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", func_00002690);
+INCLUDE_ASM("nonmatchings/ifhandle", func_00002690);
 
-INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_E80F00A4);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_E80F00A4);

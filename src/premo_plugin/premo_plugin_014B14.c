@@ -69,15 +69,15 @@ void func_00014BC0(struct Unk_func_00014BC0_0 *arg0) {
     }
 }
 
-INCLUDE_RODATA("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", D_0002AAE0);
+INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AAE0);
 
-INCLUDE_RODATA("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", D_0002AAF0);
+INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AAF0);
 
-INCLUDE_RODATA("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", D_0002AAF8);
+INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AAF8);
 
-INCLUDE_RODATA("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", D_0002AB04);
+INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AB04);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00014C6C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014C6C);
 
 s32 func_00014D6C(struct Unk_func_00014D6C_0 *arg0) {
     s32 temp_a0;
@@ -122,39 +122,39 @@ s32 func_00014D6C(struct Unk_func_00014D6C_0 *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00014E48);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014E48);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00014FC8);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014FC8);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00015004);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00015004);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00015124);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00015124);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00015160);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00015160);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000151A4);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000151A4);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000151E0);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000151E0);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_0001521C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_0001521C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00015250);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00015250);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_0001528C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_0001528C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00015354);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00015354);
 
 void func_000153E4(s32 arg0) {
     func_0001AEDC(arg0 + 8);
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00015400);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00015400);
 
-INCLUDE_RODATA("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", D_0002AB70);
+INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AB70);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_0001541C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_0001541C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000156C8);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000156C8);
 
 s32 func_00015870(s32 *arg0) {
     s32 temp_v0;
@@ -168,25 +168,25 @@ s32 func_00015870(s32 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000158AC);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000158AC);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00015B80);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00015B80);
 
 void func_00015C70(struct Unk_func_00015C70_0 *arg0) {
     func_00024F1C(arg0->unk38);
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00015C8C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00015C8C);
 
-INCLUDE_RODATA("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", D_0002AB94);
+INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AB94);
 
-INCLUDE_RODATA("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", D_0002ABA4);
+INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002ABA4);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00015DB4);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00015DB4);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00016238);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016238);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00016390);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016390);
 
 s32 func_000163CC(struct Unk_func_000163CC_0 *arg0, s32 arg1) {
     struct Unk_func_000163CC_temp_v0 *temp_v0;
@@ -199,7 +199,7 @@ s32 func_000163CC(struct Unk_func_000163CC_0 *arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000163E4);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000163E4);
 
 s32 func_00016720(struct Unk_func_00016720_0 *arg0, M2C_UNK arg1) {
     struct Unk_vt_func_00016720_temp_a0 **temp_a0;
@@ -227,7 +227,7 @@ s32 func_00016720(struct Unk_func_00016720_0 *arg0, M2C_UNK arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000167FC);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000167FC);
 
 s32 func_00016ADC(struct Unk_func_00016ADC_0 *arg0, s32 arg1) {
     struct Unk_vt_func_00016ADC_temp_a0 **temp_a0;
@@ -265,29 +265,29 @@ s32 func_00016BBC(struct Unk_func_00016BBC_0 *arg0) {
     return var_a2;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00016BEC);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016BEC);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00016D1C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016D1C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00016E4C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016E4C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00016EE0);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016EE0);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00016F74);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016F74);
 
-INCLUDE_RODATA("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", D_0002AC88);
+INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AC88);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00017010);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017010);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000172A4);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000172A4);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00017360);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017360);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_0001742C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_0001742C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_0001757C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_0001757C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00017660);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017660);
 
 s32 func_000176F4(struct Unk_func_000176F4_0 *arg0) {
     void *sp0;
@@ -295,19 +295,19 @@ s32 func_000176F4(struct Unk_func_000176F4_0 *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_0001771C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_0001771C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000177BC);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000177BC);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00017878);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017878);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000178A4);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000178A4);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000178C8);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000178C8);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00017B38);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017B38);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00017E74);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017E74);
 
 s32 func_00017F2C(struct Unk_func_00017F2C_0 *arg0) {
     s32 temp_v0;
@@ -326,7 +326,7 @@ s32 func_00017F2C(struct Unk_func_00017F2C_0 *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00017F88);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017F88);
 
 s32 func_00018058(struct Unk_func_00018058_0 *arg0) {
     s32 temp_a1;
@@ -396,9 +396,9 @@ s32 func_000181A8(s32 arg0) {
     return arg0 + 8;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000181B0);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000181B0);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018224);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018224);
 
 s32 func_000182A0(struct Unk_func_000182A0_0 *arg0) {
     return arg0->unk4;
@@ -463,7 +463,7 @@ s32 func_00018338(struct Unk_func_00018338_0 *arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018344);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018344);
 
 s32 func_0001840C(struct Unk_func_0001840C_0 *arg0) {
     return arg0->unk20;
@@ -590,27 +590,27 @@ void func_000185AC(M2C_UNK **arg0) {
     scePaf_6261C0A5((s32) arg0);
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000185D4);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000185D4);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018640);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018640);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000186AC);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000186AC);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000186EC);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000186EC);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_0001872C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_0001872C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018774);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018774);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018930);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018930);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018A40);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018A40);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018AAC);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018AAC);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018C08);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018C08);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018C74);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018C74);
 
 s32 func_00018DBC(struct Unk_func_00018DBC_0 *arg0) {
     return arg0->unk50;
@@ -628,7 +628,7 @@ s32 func_00018DDC(struct Unk_func_00018DDC_0 *arg0) {
     return arg0->unk40 - arg0->unk4C;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018DEC);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018DEC);
 
 s32 func_00018E78(struct Unk_func_00018E78_0 *arg0, u32 arg1) {
     s32 var_v1;
@@ -644,9 +644,9 @@ void func_00018EE0(s32 arg0) {
     func_00021E28(arg0 + 4);
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018EFC);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018EFC);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018F50);
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018F50);
 
 s32 func_00018F94(s32 arg0, s32 arg1, s32 *arg2) {
     s32 var_v1;

@@ -28,17 +28,17 @@ s32 func_000CCD10(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CCCDC", func_000CCD18);
+INCLUDE_ASM("nonmatchings/netfront_0CCCDC", func_000CCD18);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CCCDC", func_000CCE14);
+INCLUDE_ASM("nonmatchings/netfront_0CCCDC", func_000CCE14);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CCCDC", func_000CCF08);
+INCLUDE_ASM("nonmatchings/netfront_0CCCDC", func_000CCF08);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CCCDC", func_000CCFB8);
+INCLUDE_ASM("nonmatchings/netfront_0CCCDC", func_000CCFB8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CCCDC", func_000CD158);
+INCLUDE_ASM("nonmatchings/netfront_0CCCDC", func_000CD158);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CCCDC", func_000CD408);
+INCLUDE_ASM("nonmatchings/netfront_0CCCDC", func_000CD408);
 
 s32 func_000CD494(struct Unk_vt_func_000CD494_arg0 **arg0) {
     return (*arg0)->unk80;

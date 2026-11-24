@@ -14,7 +14,7 @@ s32 func_00106CC8(struct Unk_func_00106CC8_0 *arg0, s32 arg1, s32 arg2) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106CC8", func_00106CFC);
+INCLUDE_ASM("nonmatchings/paf_106CC8", func_00106CFC);
 
 s32 func_00106D30(struct Unk_func_00106D30_0 *arg0, s32 arg1) {
     s32 temp_v0;

@@ -16,7 +16,7 @@ void func_00015F64(struct Unk_func_00015F64_0 *arg0, s32 arg1, s32 arg2) {
     scePaf_D6F088EF((u8 *)arg0 + 0x14, arg1 + 0x108);
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_015F14", func_00015FB4);
+INCLUDE_ASM("nonmatchings/paf_015F14", func_00015FB4);
 
 s32 func_00015FC8(s32 arg0, s32 arg1) {
     s32 var_a2;
@@ -32,15 +32,15 @@ M2C_UNK *func_00015FFC(void) {
     return &D_0016F410;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_015F14", func_00016008);
+INCLUDE_ASM("nonmatchings/paf_015F14", func_00016008);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_015F14", func_000161B0);
+INCLUDE_ASM("nonmatchings/paf_015F14", func_000161B0);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_015F14", func_00016360);
+INCLUDE_ASM("nonmatchings/paf_015F14", func_00016360);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_015F14", func_000165A4);
+INCLUDE_ASM("nonmatchings/paf_015F14", func_000165A4);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_015F14", func_000166F0);
+INCLUDE_ASM("nonmatchings/paf_015F14", func_000166F0);
 
 s32 func_00016704(s32 arg0, s32 arg1) {
     s32 var_a2;

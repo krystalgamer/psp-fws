@@ -2,24 +2,24 @@
 #include "common.h"
 #include "auth_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000024);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000024);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000000AC);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000000AC);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", module_start);
+INCLUDE_ASM("nonmatchings/auth_plugin", module_start);
 
 s32 module_stop(void) {
     func_000026B0();
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_0000015C);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000194);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000194);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000328);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000328);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000004B0);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000004B0);
 
 void func_00000574(void) {
     func_0000222C((s32) &D_00002C88, (s32) &D_00002AEC);
@@ -29,9 +29,9 @@ void func_00000574(void) {
     scePaf_CAF05F1D(D_00002C7C, &D_00002AE0);
 }
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000005F8);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000005F8);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000954);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000954);
 
 void func_0000098C(void) {
     func_000004B0(1);
@@ -40,47 +40,47 @@ void func_0000098C(void) {
     }
 }
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AB4);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AB4);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AB8);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AB8);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002ABC);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002ABC);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AC0);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AC0);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AC4);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AC4);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AC8);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AC8);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002ACC);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002ACC);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AD0);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AD0);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AD4);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AD4);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AD8);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AD8);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002ADC);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002ADC);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AE0);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AE0);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AEC);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AEC);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000009BC);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000009BC);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000B3C);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000B3C);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000D38);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000D38);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000F40);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000F40);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001034);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00001034);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_0000105C);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_0000105C);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000010C4);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000010C4);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001D54);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00001D54);
 
 void func_00001D7C(void) {
     s32 var_a0;
@@ -99,19 +99,19 @@ void func_00001DB8(void) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001DE8);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00001DE8);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001DF4);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00001DF4);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001EBC);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00001EBC);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001F64);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00001F64);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001FCC);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00001FCC);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00002058);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00002058);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_0000207C);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_0000207C);
 
 void func_0000218C(void) {
     func_0000207C(1, 0xFFFF);
@@ -121,9 +121,9 @@ void func_000021AC(void) {
     func_0000207C(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000021CC);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000021CC);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000021FC);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000021FC);
 
 void func_0000222C(s32 arg0, s32 arg1) {
     s32 var_v0;
@@ -145,25 +145,25 @@ void func_0000227C(s32 arg0, s32 arg1) {
     func_00002584(arg0, arg1, var_v0);
 }
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000022CC);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000022CC);
 
 void func_000023A4(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00002638();
 }
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000023C4);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000023C4);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00002460);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00002460);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000024D8);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000024D8);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00002584);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00002584);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00002638);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00002638);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00002658);
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00002658);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002C00);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002C00);
 
-INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002C10);
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002C10);

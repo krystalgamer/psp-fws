@@ -1,19 +1,19 @@
 #include "common.h"
 #include "meaudio_decls.h"
 
-INCLUDE_ASM("tmp/asm/302/meaudio/nonmatchings/meaudio", func_00000000);
+INCLUDE_ASM("nonmatchings/meaudio", func_00000000);
 
-INCLUDE_ASM("tmp/asm/302/meaudio/nonmatchings/meaudio", func_000000B0);
+INCLUDE_ASM("nonmatchings/meaudio", func_000000B0);
 
-INCLUDE_ASM("tmp/asm/302/meaudio/nonmatchings/meaudio", func_00000280);
+INCLUDE_ASM("nonmatchings/meaudio", func_00000280);
 
-INCLUDE_ASM("tmp/asm/302/meaudio/nonmatchings/meaudio", func_000004B4);
+INCLUDE_ASM("nonmatchings/meaudio", func_000004B4);
 
-INCLUDE_ASM("tmp/asm/302/meaudio/nonmatchings/meaudio", sceMeAudio_148E487D);
+INCLUDE_ASM("nonmatchings/meaudio", sceMeAudio_148E487D);
 
-INCLUDE_ASM("tmp/asm/302/meaudio/nonmatchings/meaudio", sceMeAudio_29798EF3);
+INCLUDE_ASM("nonmatchings/meaudio", sceMeAudio_29798EF3);
 
-INCLUDE_ASM("tmp/asm/302/meaudio/nonmatchings/meaudio", module_start);
+INCLUDE_ASM("nonmatchings/meaudio", module_start);
 
 void sceMeAudio_5EDA8D33(void) {
     do {
@@ -25,9 +25,9 @@ void sceMeAudio_05115756(void) {
     sceSysreg_driver_8BE2D520();
 }
 
-INCLUDE_ASM("tmp/asm/302/meaudio/nonmatchings/meaudio", module_reboot_before);
+INCLUDE_ASM("nonmatchings/meaudio", module_reboot_before);
 
-INCLUDE_ASM("tmp/asm/302/meaudio/nonmatchings/meaudio", func_000007B8);
+INCLUDE_ASM("nonmatchings/meaudio", func_000007B8);
 
 void sceAudioOutput(void) {
 }
@@ -110,4 +110,4 @@ void sceAudio_E9D97901(void) {
 void sceAudio_41EFADE7(void) {
 }
 
-INCLUDE_RODATA("tmp/asm/302/meaudio/nonmatchings/meaudio", D_00000EE0);
+INCLUDE_RODATA("nonmatchings/meaudio", D_00000EE0);

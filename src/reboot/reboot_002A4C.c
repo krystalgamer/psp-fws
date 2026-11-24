@@ -23,25 +23,25 @@ void func_00002A4C(u8 *arg0, u8 *arg1, u32 arg2) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002A90);
+INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002A90);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002AC4);
+INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002AC4);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002B0C);
+INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002B0C);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002B44);
+INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002B44);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002C2C);
+INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002C2C);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002C58);
+INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002C58);
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002C80);
+INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002C80);
 
 s32 func_00002CB8(s32 arg0) {
     return arg0 == 0;
 }
 
-INCLUDE_ASM("tmp/asm/151/reboot/nonmatchings/reboot_002A4C", func_00002CC0);
+INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002CC0);
 
 void func_00002CCC(s32 arg0, s32 arg1) {
     func_00002EA0(arg1, arg0);

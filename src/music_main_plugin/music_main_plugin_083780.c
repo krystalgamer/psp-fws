@@ -16,9 +16,9 @@ void func_0008379C(struct Unk_func_0008379C_0 *arg0) {
     arg0->unk8 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083780", func_000837B8);
+INCLUDE_ASM("nonmatchings/music_main_plugin_083780", func_000837B8);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083780", func_000837D4);
+INCLUDE_ASM("nonmatchings/music_main_plugin_083780", func_000837D4);
 
 void func_000837F0(M2C_UNK **arg0) {
     *arg0 = &D_000A1F70;

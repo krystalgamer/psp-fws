@@ -2,13 +2,13 @@
 #include "common.h"
 #include "savedata_utility_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_0068E4", func_000068E4);
+INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_000068E4);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_0068E4", func_00006934);
+INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006934);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_0068E4", func_00006964);
+INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006964);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_0068E4", func_00006A00);
+INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006A00);
 
 void func_00006AB4(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;

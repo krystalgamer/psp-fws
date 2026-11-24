@@ -250,7 +250,7 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("tmp/asm/360/mcctrl/nonmatchings/mcctrl", sceMcctrl_7CAC25B2);
+INCLUDE_ASM("nonmatchings/mcctrl", sceMcctrl_7CAC25B2);
 #endif
 
 int sceMcctrl_9618EE57(u8 *arg0, u8 *arg1, u32 arg2) {

@@ -21,9 +21,9 @@ void func_0001CB50(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_01CAD8", func_0001CB94);
+INCLUDE_ASM("nonmatchings/music_common_01CAD8", func_0001CB94);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_01CAD8", func_0001CBD4);
+INCLUDE_ASM("nonmatchings/music_common_01CAD8", func_0001CBD4);
 
 void func_0001CC14(void) {
     func_0001CD88();

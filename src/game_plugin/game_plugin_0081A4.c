@@ -2,9 +2,9 @@
 #include "common.h"
 #include "game_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0081A4", func_000081A4);
+INCLUDE_ASM("nonmatchings/game_plugin_0081A4", func_000081A4);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0081A4", func_000081FC);
+INCLUDE_ASM("nonmatchings/game_plugin_0081A4", func_000081FC);
 
 s32 func_00008274(struct Unk_func_00008274_0 *arg0) {
     s32 temp_v0;
@@ -20,9 +20,9 @@ s32 func_00008274(struct Unk_func_00008274_0 *arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0081A4", func_000082D0);
+INCLUDE_ASM("nonmatchings/game_plugin_0081A4", func_000082D0);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0081A4", func_00008394);
+INCLUDE_ASM("nonmatchings/game_plugin_0081A4", func_00008394);
 
 s32 func_00008458(struct Unk_func_00008458_0 *arg0) {
     return arg0->unk4;
@@ -68,7 +68,7 @@ void func_000084EC(struct Unk_func_000084EC_0 *arg0) {
     scePaf_DAB59652(arg0->unk4);
 }
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0081A4", func_00008508);
+INCLUDE_ASM("nonmatchings/game_plugin_0081A4", func_00008508);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0081A4", func_00008530);
+INCLUDE_ASM("nonmatchings/game_plugin_0081A4", func_00008530);
 

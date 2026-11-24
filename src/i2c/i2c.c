@@ -2,7 +2,7 @@
 #include "common.h"
 #include "i2c_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", func_00000000);
+INCLUDE_ASM("nonmatchings/i2c", func_00000000);
 
 s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1) {
     D_00001730.unk14 = arg1;
@@ -10,13 +10,13 @@ s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_E9463B99);
+INCLUDE_ASM("nonmatchings/i2c", sceI2c_driver_E9463B99);
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_F87D1ED6);
+INCLUDE_ASM("nonmatchings/i2c", sceI2c_driver_F87D1ED6);
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_6536B1B6);
+INCLUDE_ASM("nonmatchings/i2c", sceI2c_driver_6536B1B6);
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", module_start);
+INCLUDE_ASM("nonmatchings/i2c", module_start);
 
 s32 module_reboot_before(void) {
     sceSysEventForKernel_D7D3FDCD(&D_000016F0);
@@ -26,9 +26,9 @@ s32 module_reboot_before(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_20ADF12A);
+INCLUDE_ASM("nonmatchings/i2c", sceI2c_driver_20ADF12A);
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_4809D85F);
+INCLUDE_ASM("nonmatchings/i2c", sceI2c_driver_4809D85F);
 
 s32 sceI2c_driver_21A8282C(void) {
     sceSysreg_driver_58F47EFD();
@@ -36,7 +36,7 @@ s32 sceI2c_driver_21A8282C(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_B952BA65);
+INCLUDE_ASM("nonmatchings/i2c", sceI2c_driver_B952BA65);
 
 s32 sceI2c_driver_DB6C4F9B(s32 arg0) {
     D_0000173C = arg0;
@@ -55,8 +55,8 @@ s32 sceI2c_driver_17B0DA59(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", func_00001264);
+INCLUDE_ASM("nonmatchings/i2c", func_00001264);
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", func_000012BC);
+INCLUDE_ASM("nonmatchings/i2c", func_000012BC);
 
-INCLUDE_RODATA("tmp/asm/282/i2c/nonmatchings/i2c", D_000016E0);
+INCLUDE_RODATA("nonmatchings/i2c", D_000016E0);

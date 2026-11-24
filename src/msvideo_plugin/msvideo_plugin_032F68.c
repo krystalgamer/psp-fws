@@ -12,17 +12,17 @@ s32 func_00032F68(struct Unk_func_00032F68_0 *arg0, s32 arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_032F68", func_00032F9C);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_00032F9C);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_032F68", func_00032FEC);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_00032FEC);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_032F68", func_00033030);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_00033030);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_032F68", func_00033090);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_00033090);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_032F68", func_000330CC);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_000330CC);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_032F68", func_00033114);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_00033114);
 
 s32 func_00033158(struct Unk_func_00033158_0 *arg0) {
     func_00034C48(arg0->unkAC);

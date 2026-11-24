@@ -165,3 +165,10 @@ if __name__ == "__main__":
             fix_unsupported(options.opts.asm_path, relocs)
             fix_ld_script(options.opts.ld_script_path, Path(sys.argv[-1]))
             prune_undefined_syms(options.opts.asm_path, options.opts.undefined_syms_auto_path)
+            # INCLUDE_ASM folders are relative to the version's asm dir (psp-as -I),
+            # so one source can serve every firmware version
+            for c in Path(options.opts.src_path).glob("*.c"):
+                t = c.read_text()
+                n = re.sub(r'(INCLUDE_(?:ASM|RODATA)\(")tmp/asm/[^/"]+/[^/"]+/(nonmatchings/)', r"\1\2", t)
+                if n != t:
+                    c.write_text(n)

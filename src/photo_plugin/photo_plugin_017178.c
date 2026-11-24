@@ -1,11 +1,11 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00017178);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00017178);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000171CC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000171CC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001726C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001726C);
 
 void func_00017360(struct Unk_func_00017360_0 *arg0) {
     arg0->unk0 = 0;
@@ -13,213 +13,213 @@ void func_00017360(struct Unk_func_00017360_0 *arg0) {
     arg0->unk8 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00017370);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00017370);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000173B0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000173B0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00017428);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00017428);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000174A0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000174A0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000301C0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000301C0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000301C4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000301C4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000301D4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000301D4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000301E8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000301E8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030200);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030200);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030214);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030214);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030224);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030224);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030234);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030234);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030244);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030244);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003025C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003025C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030274);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030274);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003028C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003028C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000302A8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000302A8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000302C0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000302C0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000302C8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000302C8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000302D8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000302D8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000302EC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000302EC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000302FC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000302FC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030318);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030318);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003031C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003031C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030324);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030324);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003033C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003033C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030354);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030354);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030374);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030374);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003038C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003038C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000303AC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000303AC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000303CC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000303CC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000303F0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000303F0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030414);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030414);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003042C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003042C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030450);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030450);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030474);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030474);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003048C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003048C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000304A4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000304A4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000304B4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000304B4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000304CC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000304CC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000304F0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000304F0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030504);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030504);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030510);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030510);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030520);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030520);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030538);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030538);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030544);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030544);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003055C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003055C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030568);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030568);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030584);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030584);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003059C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003059C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000305B8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000305B8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000305D8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000305D8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000305F4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000305F4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030604);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030604);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030620);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030620);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003063C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003063C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030658);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030658);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030670);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030670);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030680);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030680);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003068C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003068C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030698);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030698);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000306A4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000306A4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000306B0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000306B0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000306D4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000306D4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000306F8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000306F8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030710);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030710);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030724);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030724);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003073C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003073C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003075C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003075C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030780);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030780);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030790);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030790);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003079C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003079C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000307AC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000307AC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000307CC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000307CC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000307D8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000307D8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000307DC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000307DC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000307E4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000307E4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000307E8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000307E8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000307EC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000307EC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000307F0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000307F0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030808);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030808);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030818);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030818);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030828);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030828);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030844);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030844);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030864);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030864);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030884);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030884);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000308A4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000308A4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000308B8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000308B8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000308D0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000308D0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000308DC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000308DC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000308EC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000308EC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000308FC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000308FC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030918);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030918);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030934);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030934);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030A70);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030A70);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030A88);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030A88);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030A94);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030A94);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030A98);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030A98);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030AA0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030AA0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030AC4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030AC4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000175B0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000175B0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00017678);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00017678);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000178E0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000178E0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000179B4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000179B4);
 
 void func_00017A3C(void) {
     if (D_00031C40 != 0) {
@@ -267,19 +267,19 @@ void func_00017AD4(struct Unk_func_00017AD4_0 *arg0, s32 arg1) {
     func_000186D0(arg0, 0);
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00017B5C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00017B5C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00017ECC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00017ECC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00018148);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00018148);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000181D4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000181D4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000182F8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000182F8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000183B8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000183B8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000186D0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000186D0);
 
 void func_000191D0(void) {
     void **temp_v0;
@@ -295,29 +295,29 @@ void func_000191D0(void) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00019258);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00019258);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00019DFC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00019DFC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00019E78);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00019E78);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001A320);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001A320);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001A988);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001A988);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001AC60);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001AC60);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001B1CC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001B1CC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001B2F8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001B2F8);
 
 void func_0001B350(void) {
     D_00031C48 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001B35C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001B35C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001B4E8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001B4E8);
 
 void func_0001B674(struct Unk_func_0001B674_0 *arg0) {
     struct Unk_func_0001B674_temp_a0 *temp_a0;
@@ -332,18 +332,18 @@ void func_0001B674(struct Unk_func_0001B674_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001B6D0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001B6D0);
 
 void func_0001B74C(struct Unk_func_0001B74C_0 *arg0) {
     sceVshCommonGui_4704D5BD(0);
     arg0->unk1F = 0;
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001B778);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001B778);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001B7B4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001B7B4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001BAB4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001BAB4);
 
 void func_0001BDB4(struct Unk_func_0001BDB4_0 *arg0, s32 arg1) {
     s32 temp_s0;
@@ -358,15 +358,15 @@ void func_0001BDB4(struct Unk_func_0001BDB4_0 *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001BE10);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001BE10);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001BFDC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001BFDC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001C394);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001C394);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001C4F4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001C4F4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001C5A0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001C5A0);
 
 void func_0001C81C(struct Unk_func_0001BDB4_0 *arg0) {
     arg0->unk18 = 0;
@@ -374,11 +374,11 @@ void func_0001C81C(struct Unk_func_0001BDB4_0 *arg0) {
     func_0001BDB4(arg0, 0);
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001C840);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001C840);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001C904);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001C904);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001C954);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001C954);
 
 void func_0001D0BC(s32 arg0) {
     scePaf_980228BA(arg0 + 0x21);
@@ -399,45 +399,45 @@ void func_0001D0D8(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001D144);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001D144);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001D298);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001D298);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001D3FC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001D3FC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001D564);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001D564);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001D7EC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001D7EC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001DA04);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001DA04);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001DABC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001DABC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001DBA4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001DBA4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001DBFC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001DBFC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001DCAC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001DCAC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001DD90);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001DD90);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001DE44);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001DE44);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001DEA4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001DEA4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001DF7C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001DF7C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001E020);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001E020);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001E190);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001E190);
 
 void func_0001E428(void) {
     func_0001DEA4();
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001E444);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001E444);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001ECF8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001ECF8);
 
 void func_0001EEBC(s32 arg0) {
     if (arg0 != -1) {
@@ -452,63 +452,63 @@ void func_0001EEBC(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001EF1C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001EF1C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001F048);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001F048);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001F314);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001F314);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001F3A8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001F3A8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001F3EC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001F3EC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001F424);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001F424);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001F444);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001F444);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001FBB0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001FBB0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001FC40);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001FC40);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001FCA4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001FCA4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001FCEC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001FCEC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001FF2C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001FF2C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001FFA8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0001FFA8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020250);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020250);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000202C0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000202C0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0002042C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0002042C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020458);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020458);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020500);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020500);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000205C0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000205C0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020678);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020678);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020778);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020778);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0002080C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0002080C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020848);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020848);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000208E4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000208E4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000209F4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000209F4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020B30);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020B30);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020BA4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020BA4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020C78);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020C78);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020D2C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020D2C);
 
 void func_00020E58(void) {
     func_00020D2C(1, 0xFFFF);
@@ -518,197 +518,197 @@ void func_00020E78(void) {
     func_00020D2C(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020E98);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020E98);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020EB8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020EB8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00020F80);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00020F80);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00021004);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021004);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0002106C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0002106C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030C60);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030C60);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030C68);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030C68);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030C74);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030C74);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030C84);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030C84);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030C94);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030C94);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030CAC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030CAC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030CC0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030CC0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030CCC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030CCC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030CD8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030CD8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030CF4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030CF4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030D10);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030D10);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030D20);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030D20);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030D2C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030D2C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030D3C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030D3C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030D5C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030D5C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030D78);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030D78);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030D94);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030D94);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030DBC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030DBC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030DE8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030DE8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030DF4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030DF4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030E04);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030E04);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030E1C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030E1C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030E34);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030E34);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030E4C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030E4C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030E64);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030E64);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030E80);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030E80);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030E94);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030E94);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030EB0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030EB0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030ECC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030ECC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030EF0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030EF0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030F0C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030F0C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030F18);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030F18);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030F2C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030F2C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030F44);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030F44);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030F58);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030F58);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030F6C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030F6C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030F88);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030F88);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030FA4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030FA4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030FC8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030FC8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00030FE4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00030FE4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00031000);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00031000);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00031018);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00031018);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00031034);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00031034);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003104C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003104C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00031064);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00031064);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003107C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003107C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000311B8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000311B8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000311C4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000311C4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000311EC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000311EC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00031200);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00031200);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00031218);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00031218);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00031230);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00031230);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00031254);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00031254);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00031264);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00031264);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003128C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003128C);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000312B0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000312B0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000312DC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000312DC);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000312F4);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000312F4);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_00031318);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_00031318);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_0003131C);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_0003131C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00021128);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021128);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000212B0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000212B0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00021390);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021390);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00021450);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021450);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000214B8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000214B8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00021A70);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021A70);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00021B78);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021B78);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00021E58);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021E58);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00021EC4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021EC4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00021EFC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021EFC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00022260);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00022260);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000225C8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000225C8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00022604);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00022604);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00022734);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00022734);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0002291C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0002291C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00022D9C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00022D9C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00022E30);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00022E30);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00022EB8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00022EB8);
 
 void func_00022F64(s32 arg0) {
     func_00022F88(arg0, D_00031B40->unk4);
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00022F88);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00022F88);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00022FD0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00022FD0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000235E4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000235E4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00023834);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00023834);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00023A5C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00023A5C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00023E24);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00023E24);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00023F14);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00023F14);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00024004);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00024004);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00024208);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00024208);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00024298);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00024298);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0002468C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0002468C);
 
 void func_00024724(void) {
     if (D_00031DF0 != 0) {
@@ -717,15 +717,15 @@ void func_00024724(void) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00024760);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00024760);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000247D4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000247D4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000248FC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000248FC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000249C0);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000249C0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00024B1C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00024B1C);
 
 void func_00024B7C(void) {
     if (D_00031B30 == 0) {
@@ -740,7 +740,7 @@ void func_00024BD0(void) {
     D_00031DEC = 0;
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00024BDC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00024BDC);
 
 void func_00024C30(void) {
     sceKernelPowerTick(0);
@@ -771,15 +771,15 @@ void func_00024CB8(struct Unk_func_00024CB8_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00024CFC);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00024CFC);
 
 void func_00024FA0(s32 arg0, M2C_UNK arg1) {
     func_00024FC4(arg1, arg0);
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00024FC4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00024FC4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00025028);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00025028);
 
 void func_0002550C(struct Unk_func_0002550C_0 *arg0, struct Unk_vt_func_0002550C_arg1 **arg1) {
     s32 temp_v0;
@@ -806,9 +806,9 @@ void func_00025584(struct Unk_func_00025584_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000255C8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000255C8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00025900);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00025900);
 
 void func_0002591C(struct Unk_func_0002591C_0 *arg0, s32 arg1) {
     s32 temp_v0;
@@ -824,11 +824,11 @@ void func_00025968(void) {
     func_00025984();
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00025984);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00025984);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000259F8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000259F8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00025F14);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00025F14);
 
 void func_000262E4(void) {
     func_00025F14(1, 0xFFFF);
@@ -913,34 +913,34 @@ s32 func_000264C8(void) {
     return D_00031E04;
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000264D4);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000264D4);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000264F8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000264F8);
 
 void func_00026534(void) {
     sceNetAdhocTerm();
     func_00026558();
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00026558);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00026558);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0002657C);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_0002657C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00026590);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00026590);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00026618);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00026618);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00026698);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00026698);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000314A8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000314A8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000314B8);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000314B8);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000314C0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000314C0);
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000314D0);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000314D0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000266F8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000266F8);
 
 s32 func_0002687C(void) {
     s32 var_v0;
@@ -970,15 +970,15 @@ s32 func_0002687C(void) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00026928);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00026928);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_000269D8);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000269D8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00026A38);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00026A38);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00026A88);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00026A88);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00026B80);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00026B80);
 
 s32 func_00026CEC(void *arg0) {
     s32 temp_v0;
@@ -993,7 +993,7 @@ s32 func_00026CEC(void *arg0) {
     return var_v1;
 }
 
-INCLUDE_RODATA("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", D_000315DC);
+INCLUDE_RODATA("nonmatchings/photo_plugin_017178", D_000315DC);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00026D28);
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00026D28);
 

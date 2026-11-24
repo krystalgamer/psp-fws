@@ -60,23 +60,23 @@ s32 func_00007F64(struct Unk_func_00007F64_0 *arg0, s32 arg1) {
     return temp_s1;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_007DE4", func_00007FC4);
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00007FC4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_007DE4", func_000081C4);
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000081C4);
 
 s32 func_00008734(void) {
     return 0x588;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_007DE4", func_0000873C);
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_0000873C);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_007DE4", func_000087A4);
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000087A4);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_007DE4", func_00008820);
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00008820);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_007DE4", func_000088AC);
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000088AC);
 
-INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_007DE4", func_00008958);
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00008958);
 
 void func_00008A58(void) {
     if (D_00009EC0->unkC == 0) {

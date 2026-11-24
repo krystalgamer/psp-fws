@@ -19,7 +19,7 @@ s32 scePaf_CEAC29F3(void) {
     return D_001A480C;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EDEDC", func_000EDF20);
+INCLUDE_ASM("nonmatchings/paf_0EDEDC", func_000EDF20);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EDEDC", scePaf_275BCDC6);
+INCLUDE_ASM("nonmatchings/paf_0EDEDC", scePaf_275BCDC6);
 

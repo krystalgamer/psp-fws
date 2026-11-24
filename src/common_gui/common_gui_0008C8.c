@@ -26,45 +26,45 @@ void func_000008F0(struct Unk_func_000008F0_0 *arg0, s32 arg1, s32 arg2, s32 arg
     arg0->unk14 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000918);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000918);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_000009F0);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_000009F0);
 
-INCLUDE_RODATA("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", D_00003314);
+INCLUDE_RODATA("nonmatchings/common_gui_0008C8", D_00003314);
 
-INCLUDE_RODATA("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", D_00003324);
+INCLUDE_RODATA("nonmatchings/common_gui_0008C8", D_00003324);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000AC8);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000AC8);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000BE4);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000BE4);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000D4C);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000D4C);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000E24);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000E24);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000E54);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000E54);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000EB4);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000EB4);
 
 void func_00000EFC(struct Unk_func_00000EFC_0 *arg0, s32 arg1) {
     arg0->unk8 = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00000F04);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000F04);
 
 void func_00000F6C(struct Unk_func_00000F6C_0 *arg0, s32 arg1) {
     arg0->unk24 = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", sceVshCommonGui_10906D79);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_10906D79);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", sceVshCommonGui_0D5D87F2);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_0D5D87F2);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", sceVshCommonGui_4B8E817A);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_4B8E817A);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", func_00001100);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00001100);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_0008C8", sceVshCommonGui_FE305D6D);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_FE305D6D);
 
 void sceVshCommonGui_72E652AA(s32 *arg0) {
     scePaf_41BCFB59(*arg0);

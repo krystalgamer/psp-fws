@@ -28,15 +28,15 @@ s32 func_0003AF58(void **arg0, s32 arg1, s32 *arg2) {
     return var_a2;
 }
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03AF58", func_0003AFC4);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003AFC4);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03AF58", func_0003B020);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B020);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03AF58", func_0003B094);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B094);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03AF58", func_0003B13C);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B13C);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03AF58", func_0003B180);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B180);
 
 s32 func_0003B214(struct Unk_func_00039644_0 *arg0, s32 *arg1) {
     s32 var_v1;
@@ -49,7 +49,7 @@ s32 func_0003B214(struct Unk_func_00039644_0 *arg0, s32 *arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03AF58", func_0003B240);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B240);
 
 s32 func_0003B314(struct Unk_func_0003969C_0 *arg0, s32 *arg1) {
     s32 var_v1;
@@ -62,7 +62,7 @@ s32 func_0003B314(struct Unk_func_0003969C_0 *arg0, s32 *arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03AF58", func_0003B334);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B334);
 
 s32 func_0003B3C8(struct Unk_func_000396F4_0 *arg0, s32 *arg1) {
     s32 var_v1;
@@ -87,7 +87,7 @@ s32 func_0003B3E8(s32 arg0, s32 arg1) {
     return var_a1;
 }
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03AF58", func_0003B438);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B438);
 
 s32 func_0003B4AC(struct Unk_func_00039778_0 *arg0, s32 *arg1) {
     s32 var_v1;

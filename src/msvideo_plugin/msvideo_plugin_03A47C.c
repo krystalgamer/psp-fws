@@ -1,11 +1,11 @@
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03A47C", func_0003A47C);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003A47C);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03A47C", func_0003A540);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003A540);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03A47C", func_0003A5D8);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003A5D8);
 
 s32 func_0003A674(s32 arg0, s32 *arg1, s32 *arg2) {
     s32 temp_v0;
@@ -31,13 +31,13 @@ s32 func_0003A6D4(s32 arg0) {
     return var_a1;
 }
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03A47C", func_0003A720);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003A720);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03A47C", func_0003A7B0);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003A7B0);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03A47C", func_0003AC0C);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003AC0C);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03A47C", func_0003AD1C);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003AD1C);
 
 s32 func_0003AE38(void **arg0, s32 *arg1, s32 *arg2) {
     s32 var_a3;
@@ -53,7 +53,7 @@ s32 func_0003AE38(void **arg0, s32 *arg1, s32 *arg2) {
     return var_a3;
 }
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03A47C", func_0003AE64);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003AE64);
 
 s32 func_0003AEC0(void **arg0, s32 *arg1) {
     s32 var_v1;

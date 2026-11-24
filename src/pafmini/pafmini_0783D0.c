@@ -1,7 +1,7 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0783D0", func_000783D0);
+INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_000783D0);
 
 void func_00078408(struct Unk_func_00078408_0 *arg0) {
     s32 temp_v0;
@@ -14,7 +14,7 @@ void func_00078408(struct Unk_func_00078408_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0783D0", func_00078438);
+INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_00078438);
 
 void func_00078450(struct Unk_func_00078450_0 *arg0) {
     s32 temp_v0;
@@ -27,11 +27,11 @@ void func_00078450(struct Unk_func_00078450_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0783D0", func_00078480);
+INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_00078480);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0783D0", func_00078498);
+INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_00078498);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0783D0", func_000784B0);
+INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_000784B0);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0783D0", func_000784C8);
+INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_000784C8);
 

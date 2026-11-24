@@ -22,9 +22,9 @@ void func_0001700C(struct Unk_func_0001700C_0 *arg0) {
     func_000170A8((s32) ((u8 *)arg0 + 0x38), *arg0->unk20);
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_016F9C", func_00017050);
+INCLUDE_ASM("nonmatchings/mm_flash_016F9C", func_00017050);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_016F9C", func_000170A8);
+INCLUDE_ASM("nonmatchings/mm_flash_016F9C", func_000170A8);
 
 s32 func_00017118(struct Unk_func_00017118_0 *arg0) {
     s32 var_v1;
@@ -36,15 +36,15 @@ s32 func_00017118(struct Unk_func_00017118_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_016F9C", func_00017134);
+INCLUDE_ASM("nonmatchings/mm_flash_016F9C", func_00017134);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_016F9C", func_000171C4);
+INCLUDE_ASM("nonmatchings/mm_flash_016F9C", func_000171C4);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_016F9C", func_00017254);
+INCLUDE_ASM("nonmatchings/mm_flash_016F9C", func_00017254);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_016F9C", func_000172E0);
+INCLUDE_ASM("nonmatchings/mm_flash_016F9C", func_000172E0);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_016F9C", func_0001736C);
+INCLUDE_ASM("nonmatchings/mm_flash_016F9C", func_0001736C);
 
 void func_000177F4(struct Unk_func_000177F4_0 *arg0, s32 arg1) {
     s32 var_a2;

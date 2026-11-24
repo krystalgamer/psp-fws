@@ -38,34 +38,34 @@ void ***func_00007638(void ***arg0, struct Unk_func_00007638_1 *arg1, void **arg
     return arg0;
 }
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_000076A0);
+INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000076A0);
 
 void func_000076CC(void) {
     func_000076A0();
 }
 
-INCLUDE_RODATA("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", D_00011F38);
+INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00011F38);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_000076E8);
+INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000076E8);
 
-INCLUDE_RODATA("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", D_00012038);
+INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012038);
 
-INCLUDE_RODATA("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", D_00012050);
+INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012050);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_000078F8);
+INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000078F8);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_00007AF4);
+INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007AF4);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_00007ED0);
+INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007ED0);
 
 void func_00007F88(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00008020();
 }
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_00007FA8);
+INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007FA8);
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_00008020);
+INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00008020);
 
 void func_00008040(struct Unk_func_00008040_0 *arg0) {
     vsh_5452A47B();
@@ -79,14 +79,14 @@ void func_00008078(struct Unk_func_00008078_0 *arg0) {
     arg0->unk30 = -1;
 }
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_000080B0);
+INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000080B0);
 
 void func_000080FC(struct Unk_func_000080FC_0 *arg0) {
     arg0->unk30 = -1;
     vsh_61FE226A();
 }
 
-INCLUDE_ASM("tmp/asm/282/game_plugin/nonmatchings/game_plugin_0075DC", func_00008120);
+INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00008120);
 
 void func_00008160(struct Unk_func_00008160_0 *arg0, s32 arg1) {
     arg0->unk30 = arg1;

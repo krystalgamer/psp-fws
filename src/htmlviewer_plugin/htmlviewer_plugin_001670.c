@@ -26,23 +26,23 @@ void func_00001670(void) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00001760);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001760);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00001840);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001840);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00001890);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001890);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_000018EC);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_000018EC);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00001A1C);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001A1C);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00001B94);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001B94);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00002178);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00002178);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_000022A4);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_000022A4);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_000023D8);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_000023D8);
 
 void func_000024AC(void) {
     func_00003980(1);
@@ -51,9 +51,9 @@ void func_000024AC(void) {
     scePaf_A0ED77C4(0, &func_000018EC, 0, -1, -1, &func_00001A1C);
 }
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_000024FC);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_000024FC);
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00002614);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00002614);
 
 void func_000026F8(void) {
     s32 temp_v0;
@@ -70,7 +70,7 @@ void func_000026F8(void) {
     scePaf_66907719();
 }
 
-INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670", func_00002764);
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00002764);
 
 void func_0000278C(void) {
     s32 temp_v0;

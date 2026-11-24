@@ -14,11 +14,11 @@ s32 func_000781A8(struct Unk_func_000781A8_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0781A8", func_000781DC);
+INCLUDE_ASM("nonmatchings/pafmini_0781A8", func_000781DC);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0781A8", func_00078254);
+INCLUDE_ASM("nonmatchings/pafmini_0781A8", func_00078254);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0781A8", func_00078294);
+INCLUDE_ASM("nonmatchings/pafmini_0781A8", func_00078294);
 
 s32 func_000782CC(struct Unk_func_000782CC_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_v0;

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "premo_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_0149C4", func_000149C4);
+INCLUDE_ASM("nonmatchings/premo_plugin_0149C4", func_000149C4);
 
 s32 func_00014A10(struct Unk_func_00014A10_0 *arg0, s32 arg1) {
     s32 var_v1;

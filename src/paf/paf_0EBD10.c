@@ -101,73 +101,73 @@ s32 scePaf_9A8E343E(void) {
     return D_001A4808;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000EBFA0);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000EBFA0);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", scePaf_D1159069);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_D1159069);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000EC168);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000EC168);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000EC220);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000EC220);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000EC2D8);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000EC2D8);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019AA10);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019AA10);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019AA20);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019AA20);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019AAF8);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019AAF8);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019AB08);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019AB08);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019ABDC);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019ABDC);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019ABE0);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019ABE0);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019ABE4);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019ABE4);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019ABE8);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019ABE8);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019ABEC);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019ABEC);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019ABF0);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019ABF0);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019ABF4);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019ABF4);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019ABF8);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019ABF8);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019ABFC);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019ABFC);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019AC00);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019AC00);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EBD10", D_0019AC04);
+INCLUDE_RODATA("nonmatchings/paf_0EBD10", D_0019AC04);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000EC398);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000EC398);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000ECA00);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ECA00);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000ECAD0);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ECAD0);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000ECB18);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ECB18);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000ECC4C);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ECC4C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000ECC98);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ECC98);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000ECD7C);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ECD7C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000ECE64);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ECE64);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000ED018);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ED018);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000ED100);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ED100);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", scePaf_AE02F241);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_AE02F241);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", scePaf_95040C08);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_95040C08);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", scePaf_07BA4C80);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_07BA4C80);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", scePaf_252F37A3);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_252F37A3);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000ED864);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ED864);
 

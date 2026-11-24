@@ -1,7 +1,7 @@
 #include "common.h"
 #include "premo_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014458", func_00014458);
+INCLUDE_ASM("nonmatchings/premo_plugin_014458", func_00014458);
 
 s32 func_000145C8(struct Unk_func_000145C8_0 *arg0) {
     s32 temp_v0;
@@ -34,7 +34,7 @@ void func_00014640(struct Unk_func_00014640_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014458", func_0001468C);
+INCLUDE_ASM("nonmatchings/premo_plugin_014458", func_0001468C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014458", func_000148E4);
+INCLUDE_ASM("nonmatchings/premo_plugin_014458", func_000148E4);
 

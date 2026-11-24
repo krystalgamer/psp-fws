@@ -7,7 +7,7 @@ s32 func_00169860(struct Unk_func_00169860_0 *arg0, s32 *arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_169860", func_00169894);
+INCLUDE_ASM("nonmatchings/paf_169860", func_00169894);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_169860", func_001698BC);
+INCLUDE_ASM("nonmatchings/paf_169860", func_001698BC);
 

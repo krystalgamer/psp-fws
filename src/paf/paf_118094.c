@@ -42,7 +42,7 @@ void scePaf_539F2583(struct Unk_scePaf_539F2583_0 *arg0) {
     sceKernelSetEventFlag((s32) arg0->unk0, 1);
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_118094", func_0011820C);
+INCLUDE_ASM("nonmatchings/paf_118094", func_0011820C);
 
 void func_00118288(void) {
     func_0011820C(1, 0xFFFF);

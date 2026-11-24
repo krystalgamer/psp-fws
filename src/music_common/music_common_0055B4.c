@@ -25,19 +25,19 @@ s32 music_common_3B03E04A(struct Unk_music_common_3B03E04A_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0055B4", func_00005644);
+INCLUDE_ASM("nonmatchings/music_common_0055B4", func_00005644);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0055B4", func_000056CC);
+INCLUDE_ASM("nonmatchings/music_common_0055B4", func_000056CC);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0055B4", music_common_9E5A3EE2);
+INCLUDE_ASM("nonmatchings/music_common_0055B4", music_common_9E5A3EE2);
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0055B4", music_common_74CC985E);
+INCLUDE_ASM("nonmatchings/music_common_0055B4", music_common_74CC985E);
 
 void func_00005B40(M2C_UNK **arg0) {
     *arg0 = &D_0001F2C8;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0055B4", func_00005B50);
+INCLUDE_ASM("nonmatchings/music_common_0055B4", func_00005B50);
 
 void func_00005B60(M2C_UNK **arg0) {
     *arg0 = &D_0001F2C8;
@@ -56,5 +56,5 @@ s32 music_common_703558A2(struct Unk_music_common_703558A2_0 *arg0) {
     return arg0->unk8;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0055B4", music_common_575CEC09);
+INCLUDE_ASM("nonmatchings/music_common_0055B4", music_common_575CEC09);
 

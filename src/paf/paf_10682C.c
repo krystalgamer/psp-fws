@@ -14,11 +14,11 @@ s32 func_0010682C(struct Unk_func_0010682C_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_10682C", func_00106860);
+INCLUDE_ASM("nonmatchings/paf_10682C", func_00106860);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_10682C", func_001068D8);
+INCLUDE_ASM("nonmatchings/paf_10682C", func_001068D8);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_10682C", func_00106918);
+INCLUDE_ASM("nonmatchings/paf_10682C", func_00106918);
 
 s32 func_00106950(struct Unk_func_00106950_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_v0;

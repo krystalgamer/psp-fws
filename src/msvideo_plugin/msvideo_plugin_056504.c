@@ -44,13 +44,13 @@ s32 func_0005656C(s32 *arg0) {
     return *arg0 != 0;
 }
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_056504", func_00056578);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_056504", func_00056578);
 
 s32 func_000565E8(struct Unk_func_000565E8_0 *arg0) {
     return arg0->unk10;
 }
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_056504", func_000565F0);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_056504", func_000565F0);
 
 s32 func_00056660(struct Unk_func_00056660_0 *arg0) {
     return arg0->unk10;

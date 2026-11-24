@@ -25,17 +25,17 @@ s32 scePaf_503FA456(void) {
     return D_001A4810;
 }
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EE100", D_0019AC58);
+INCLUDE_RODATA("nonmatchings/paf_0EE100", D_0019AC58);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EE100", D_0019AD28);
+INCLUDE_RODATA("nonmatchings/paf_0EE100", D_0019AD28);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EE100", D_0019AD38);
+INCLUDE_RODATA("nonmatchings/paf_0EE100", D_0019AD38);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EE100", D_0019AE0C);
+INCLUDE_RODATA("nonmatchings/paf_0EE100", D_0019AE0C);
 
-INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0EE100", D_0019AE18);
+INCLUDE_RODATA("nonmatchings/paf_0EE100", D_0019AE18);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE100", func_000EE17C);
+INCLUDE_ASM("nonmatchings/paf_0EE100", func_000EE17C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE100", func_000EE258);
+INCLUDE_ASM("nonmatchings/paf_0EE100", func_000EE258);
 

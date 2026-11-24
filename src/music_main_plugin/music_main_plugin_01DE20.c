@@ -14,13 +14,13 @@ s32 func_0001DE20(struct Unk_func_0001DE20_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01DE20", func_0001DE54);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01DE20", func_0001DE54);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01DE20", func_0001DEC0);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01DE20", func_0001DEC0);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01DE20", func_0001DEFC);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01DE20", func_0001DEFC);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01DE20", func_0001DF4C);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01DE20", func_0001DF4C);
 
 s32 func_0001DFBC(struct Unk_func_0001DFBC_0 *arg0) {
     s32 var_v1;
@@ -32,7 +32,7 @@ s32 func_0001DFBC(struct Unk_func_0001DFBC_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01DE20", func_0001DFF0);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01DE20", func_0001DFF0);
 
 s32 func_0001E024(struct Unk_func_0001E024_0 *arg0) {
     s32 var_v1;
@@ -44,13 +44,13 @@ s32 func_0001E024(struct Unk_func_0001E024_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01DE20", func_0001E060);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01DE20", func_0001E060);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01DE20", func_0001E098);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01DE20", func_0001E098);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01DE20", func_0001E0D0);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01DE20", func_0001E0D0);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_01DE20", func_0001E108);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01DE20", func_0001E108);
 
 s32 func_0001E140(struct Unk_func_0001E140_0 *arg0) {
     s32 var_v1;

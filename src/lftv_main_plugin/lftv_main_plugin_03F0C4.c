@@ -33,9 +33,9 @@ void func_0003F118(struct Unk_func_0003F118_0 *arg0) {
     }
 }
 
-INCLUDE_RODATA("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F0C4", D_0005C9B4);
+INCLUDE_RODATA("nonmatchings/lftv_main_plugin_03F0C4", D_0005C9B4);
 
-INCLUDE_RODATA("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F0C4", D_0005C9C8);
+INCLUDE_RODATA("nonmatchings/lftv_main_plugin_03F0C4", D_0005C9C8);
 
 s32 func_0003F168(void) {
     s32 temp_v0;
@@ -50,9 +50,9 @@ s32 func_0003F168(void) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F0C4", func_0003F1B0);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F0C4", func_0003F1B0);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F0C4", func_0003F1F8);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F0C4", func_0003F1F8);
 
 s32 func_0003F238(void) {
     return (sceKernelSignalSema(D_0005F9D4, 1) == 0) ? 0 : -1;

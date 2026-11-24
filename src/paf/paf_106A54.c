@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106A54", func_00106A54);
+INCLUDE_ASM("nonmatchings/paf_106A54", func_00106A54);
 
 void func_00106A8C(struct Unk_func_00106A8C_0 *arg0) {
     s32 temp_v0;
@@ -14,7 +14,7 @@ void func_00106A8C(struct Unk_func_00106A8C_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106A54", func_00106ABC);
+INCLUDE_ASM("nonmatchings/paf_106A54", func_00106ABC);
 
 void func_00106AD4(struct Unk_func_00106AD4_0 *arg0) {
     s32 temp_v0;
@@ -27,11 +27,11 @@ void func_00106AD4(struct Unk_func_00106AD4_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106A54", func_00106B04);
+INCLUDE_ASM("nonmatchings/paf_106A54", func_00106B04);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106A54", func_00106B1C);
+INCLUDE_ASM("nonmatchings/paf_106A54", func_00106B1C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106A54", func_00106B34);
+INCLUDE_ASM("nonmatchings/paf_106A54", func_00106B34);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106A54", func_00106B4C);
+INCLUDE_ASM("nonmatchings/paf_106A54", func_00106B4C);
 

@@ -8,7 +8,7 @@ void func_0006598C(struct Unk_func_0006598C_0 *arg0) {
     arg0->unk4 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_0006599C);
+INCLUDE_ASM("nonmatchings/pafmini_06598C", func_0006599C);
 
 void func_000659DC(struct Unk_func_000659DC_0 *arg0) {
     arg0->unk8 = 0;
@@ -16,7 +16,7 @@ void func_000659DC(struct Unk_func_000659DC_0 *arg0) {
     arg0->unk4 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_000659EC);
+INCLUDE_ASM("nonmatchings/pafmini_06598C", func_000659EC);
 
 void func_00065A2C(struct Unk_func_00065A2C_0 *arg0) {
     arg0->unk8 = 0;
@@ -24,17 +24,17 @@ void func_00065A2C(struct Unk_func_00065A2C_0 *arg0) {
     arg0->unk4 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_00065A3C);
+INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065A3C);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_00065B24);
+INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065B24);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_00065C14);
+INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065C14);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_00065D04);
+INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065D04);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_00065DC8);
+INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065DC8);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_00065E88);
+INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065E88);
 
 void func_00065F48(void) {
     func_00068F38();

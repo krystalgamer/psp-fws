@@ -1,25 +1,25 @@
 #include "common.h"
 #include "amctrl_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", func_00000000);
+INCLUDE_ASM("nonmatchings/amctrl", func_00000000);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", func_00000054);
+INCLUDE_ASM("nonmatchings/amctrl", func_00000054);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", func_000000A8);
+INCLUDE_ASM("nonmatchings/amctrl", func_000000A8);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", func_00000100);
+INCLUDE_ASM("nonmatchings/amctrl", func_00000100);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", func_00000158);
+INCLUDE_ASM("nonmatchings/amctrl", func_00000158);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", func_000001F8);
+INCLUDE_ASM("nonmatchings/amctrl", func_000001F8);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", func_000002A8);
+INCLUDE_ASM("nonmatchings/amctrl", func_000002A8);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", func_00000344);
+INCLUDE_ASM("nonmatchings/amctrl", func_00000344);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", func_000003F0);
+INCLUDE_ASM("nonmatchings/amctrl", func_000003F0);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", func_00000428);
+INCLUDE_ASM("nonmatchings/amctrl", func_00000428);
 
 s32 module_start(void) {
     return 0;
@@ -49,15 +49,15 @@ s32 sceAmctrl_driver_525B8218(struct Unk_sceAmctrl_driver_525B8218_0 *arg0, s32 
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", sceAmctrl_driver_58163FBE);
+INCLUDE_ASM("nonmatchings/amctrl", sceAmctrl_driver_58163FBE);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", sceAmctrl_driver_EF95A213);
+INCLUDE_ASM("nonmatchings/amctrl", sceAmctrl_driver_EF95A213);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", sceAmctrl_driver_F5186D8E);
+INCLUDE_ASM("nonmatchings/amctrl", sceAmctrl_driver_F5186D8E);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", sceAmctrl_driver_1CCB66D2);
+INCLUDE_ASM("nonmatchings/amctrl", sceAmctrl_driver_1CCB66D2);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", sceAmctrl_driver_0785C974);
+INCLUDE_ASM("nonmatchings/amctrl", sceAmctrl_driver_0785C974);
 
 s32 sceAmctrl_driver_9951C50F(struct Unk_sceAmctrl_driver_9951C50F_0 *arg0) {
     u32 var_a1;
@@ -74,8 +74,8 @@ s32 sceAmctrl_driver_9951C50F(struct Unk_sceAmctrl_driver_9951C50F_0 *arg0) {
     return 0;
 }
 
-INCLUDE_RODATA("tmp/asm/352/amctrl/nonmatchings/amctrl", D_000012E8);
+INCLUDE_RODATA("nonmatchings/amctrl", D_000012E8);
 
-INCLUDE_RODATA("tmp/asm/352/amctrl/nonmatchings/amctrl", D_000012F8);
+INCLUDE_RODATA("nonmatchings/amctrl", D_000012F8);
 
-INCLUDE_RODATA("tmp/asm/352/amctrl/nonmatchings/amctrl", D_00001308);
+INCLUDE_RODATA("nonmatchings/amctrl", D_00001308);

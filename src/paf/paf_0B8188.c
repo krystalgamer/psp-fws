@@ -16,7 +16,7 @@ void func_000B8194(struct Unk_func_000B8194_0 *arg0, M2C_UNK *arg1) {
     *temp_v1 = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0B8188", func_000B81AC);
+INCLUDE_ASM("nonmatchings/paf_0B8188", func_000B81AC);
 
 void func_000B81CC(struct Unk_func_000B81CC_0 *arg0, s32 arg1) {
     arg0->unk4 = arg1;

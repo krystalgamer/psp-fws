@@ -2,25 +2,25 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003BBB8);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BBB8);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003BBD0);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BBD0);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003BBE8);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BBE8);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003BC40);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BC40);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003BC98);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BC98);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003BD24);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BD24);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003BD50);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BD50);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003BD78);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BD78);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003BE50);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BE50);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003BF14);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BF14);
 
 void func_0003C01C(void *arg0) {
     s32 temp_v0;
@@ -49,31 +49,31 @@ void func_0003C01C(void *arg0) {
     D_0005C5FC += 1;
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003C0B4);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C0B4);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003C14C);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C14C);
 
-INCLUDE_RODATA("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", D_00056628);
+INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_00056628);
 
-INCLUDE_RODATA("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", D_00056648);
+INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_00056648);
 
-INCLUDE_RODATA("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", D_00056660);
+INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_00056660);
 
-INCLUDE_RODATA("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", D_00056690);
+INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_00056690);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003C1E4);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C1E4);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003C694);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C694);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003C870);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C870);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003C8C8);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C8C8);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003C974);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C974);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003C9EC);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C9EC);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003CA48);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003CA48);
 
 u16 func_0003CACC(struct Unk_func_0003CACC_0 *arg0) {
     u16 var_v1;
@@ -101,7 +101,7 @@ s32 func_0003CAEC(struct Unk_func_0003CAEC_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003CB20);
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003CB20);
 
 s32 func_0003CBB0(void) {
     s32 temp_v0;

@@ -13,19 +13,19 @@ s32 func_0003E2F8(void) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03E2F8", func_0003E32C);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_03E2F8", func_0003E32C);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03E2F8", func_0003E368);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_03E2F8", func_0003E368);
 
 void func_0003E3C8(s32 arg0) {
     func_0003E32C(arg0, sceVshLftvMw_21257ACD());
 }
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03E2F8", func_0003E3F8);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_03E2F8", func_0003E3F8);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03E2F8", func_0003E438);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_03E2F8", func_0003E438);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03E2F8", func_0003E524);
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_03E2F8", func_0003E524);
 
 s32 func_0003E5C0(struct Unk_func_0003E5C0_0 *arg0) {
     return arg0->unk1DC > 0;

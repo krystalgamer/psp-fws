@@ -38,29 +38,29 @@ void func_0000CC8C(struct Unk_func_0000CC8C_0 *arg0) {
     }
 }
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", D_000D1930);
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D1930);
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", D_000D1940);
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D1940);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", func_0000CCDC);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000CCDC);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", func_0000CD50);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000CD50);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", func_0000CDBC);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000CDBC);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", func_0000D2D0);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D2D0);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", func_0000D2EC);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D2EC);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", func_0000D438);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D438);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", func_0000D644);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D644);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", func_0000D704);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D704);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", scePaf_72A0044D);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_72A0044D);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", scePaf_4612DB4B);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_4612DB4B);
 
 s32 scePaf_78219D10(s32 arg0) {
     s32 temp_v0;
@@ -70,17 +70,17 @@ s32 scePaf_78219D10(s32 arg0) {
     return temp_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", scePaf_97FDA760);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_97FDA760);
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", D_000D19F4);
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D19F4);
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", D_000D1A0C);
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D1A0C);
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", D_000D1A24);
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D1A24);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", scePaf_298246CD);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_298246CD);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00CC38", func_0000DC68);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000DC68);
 
 void func_0000DD14(void) {
     func_0000DC68(1, 0xFFFF);

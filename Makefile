@@ -10,6 +10,9 @@ CONFIG  := config/$(VERSION)/$(MODULE).yaml
 LD_SCRIPT := $(BUILD)/$(MODULE).ld
 ELF     := $(BUILD)/$(MODULE).elf
 TARGET  := $(BUILD)/$(MODULE).prx
+# numeric firmware version for #if in shared sources: 200v1 -> FW_VERSION=200, FW_VARIANT=1
+FW_VERSION := $(shell echo $(VERSION) | grep -oE '^[0-9]+')
+FW_VARIANT := $(or $(shell echo $(VERSION) | grep -oP 'v\K[0-9]+'),0)
 
 AS      := $(TOOLS)/mips-as
 LD      := $(TOOLS)/mips-ld
@@ -19,7 +22,7 @@ PSP_AS  := $(TOOLS)/psp-as-1.3.1
 CPP     := cpp
 
 ASFLAGS := -EL -march=allegrex -G0 --no-pad-sections -Iinclude
-CPPFLAGS := -P -undef -nostdinc -Iinclude -Isrc -DVERSION=$(VERSION) -D__GNUC__=3 -D_LANGUAGE_C -D__psp__ -D__mips__ $(EXTRA_CPPFLAGS)
+CPPFLAGS := -P -undef -nostdinc -Iinclude -Isrc -DVERSION=$(VERSION) -DFW_VERSION=$(FW_VERSION) -DFW_VARIANT=$(FW_VARIANT) -D__GNUC__=3 -D_LANGUAGE_C -D__psp__ -D__mips__ $(EXTRA_CPPFLAGS)
 CFLAGS  := -G0 -quiet
 
 S_FILES   = $(shell find tmp/asm/$(VERSION)/$(MODULE) -name '*.s' -not -path '*/nonmatchings/*' 2>/dev/null)
@@ -61,7 +64,7 @@ $(BUILD)/%.bin.o: %.bin
 $(BUILD)/%.c.o: %.c
 	@mkdir -p $(@D)
 	$(CPP) $(CPPFLAGS) $< | $(TOOLS)/cc1-$$(grep -oP "compiler: \K[0-9.]+" $< || echo 1.7.1) $$(grep -oP "cflags: \K-O[0-3s](?: -[fm][\w-]+)*" $< || echo -O2) $(CFLAGS) -o $(BUILD)/$*.c.s
-	$(PSP_AS) -EL -G0 -mulsw -Iinclude -o $@ $(BUILD)/$*.c.s
+	$(PSP_AS) -EL -G0 -mulsw -Iinclude -Itmp/asm/$(VERSION)/$(MODULE) -o $@ $(BUILD)/$*.c.s
 	$(PYTHON) tools/fix_old_gas.py --text-align $$(grep -oP "text-align: \K[0-9]+" $< || echo 4) --data-align 4 $@
 
 $(ELF): $(O_FILES) $(LD_SCRIPT)

@@ -1,9 +1,9 @@
 #include "common.h"
 #include "heaparea1_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/heaparea1/nonmatchings/heaparea1", func_00000024);
+INCLUDE_ASM("nonmatchings/heaparea1", func_00000024);
 
-INCLUDE_ASM("tmp/asm/282/heaparea1/nonmatchings/heaparea1", func_000000AC);
+INCLUDE_ASM("nonmatchings/heaparea1", func_000000AC);
 
 s32 module_start(void) {
     func_00000000();
@@ -15,11 +15,11 @@ s32 module_stop(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/heaparea1/nonmatchings/heaparea1", scePafHeaparea_F50AAE41);
+INCLUDE_ASM("nonmatchings/heaparea1", scePafHeaparea_F50AAE41);
 
-INCLUDE_ASM("tmp/asm/282/heaparea1/nonmatchings/heaparea1", scePafHeaparea_ACCE25B2);
+INCLUDE_ASM("nonmatchings/heaparea1", scePafHeaparea_ACCE25B2);
 
-INCLUDE_ASM("tmp/asm/282/heaparea1/nonmatchings/heaparea1", func_0000018C);
+INCLUDE_ASM("nonmatchings/heaparea1", func_0000018C);
 
 void func_000002BC(void) {
     func_0000018C(1, 0xFFFF);
@@ -29,4 +29,4 @@ void func_000002DC(void) {
     func_0000018C(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/282/heaparea1/nonmatchings/heaparea1", func_000002FC);
+INCLUDE_ASM("nonmatchings/heaparea1", func_000002FC);

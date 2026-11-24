@@ -91,7 +91,7 @@ class Module:
         return self.src
 
     def folder(self, path):
-        return f"tmp/asm/{self.ver}/{self.mod}/nonmatchings/{path.stem}"
+        return f"nonmatchings/{path.stem}"
 
     def _func_ranges(self):
         asm = (ROOT / "tmp/asm" / self.ver / self.mod / "nonmatchings")

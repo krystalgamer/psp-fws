@@ -30,9 +30,9 @@ void func_0001E728(struct Unk_func_0001E728_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk4 = 0;
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_01E6A0", func_0001E7B0);
+INCLUDE_ASM("nonmatchings/mm_flash_01E6A0", func_0001E7B0);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_01E6A0", func_0001E890);
+INCLUDE_ASM("nonmatchings/mm_flash_01E6A0", func_0001E890);
 
 void func_0001E994(struct Unk_func_0001E994_0 *arg0, void **arg1) {
     struct Unk_func_0001E994_temp_a1 *temp_a1;

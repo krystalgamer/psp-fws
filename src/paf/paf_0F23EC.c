@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F23EC", scePaf_B2ED6CAA);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_B2ED6CAA);
 
 s32 scePaf_1232B7A3(struct Unk_scePaf_1232B7A3_0 *arg0, s32 arg1, s32 arg2) {
     s32 var_a3;
@@ -16,9 +16,9 @@ s32 scePaf_1232B7A3(struct Unk_scePaf_1232B7A3_0 *arg0, s32 arg1, s32 arg2) {
     return var_a3;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F23EC", func_000F2484);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F2484);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F23EC", scePaf_37DD37B8);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_37DD37B8);
 
 s32 scePaf_B9BE69FD(struct Unk_scePaf_B9BE69FD_0 *arg0, s32 arg1) {
     s32 var_a2;
@@ -81,9 +81,9 @@ s32 scePaf_AEEF2A7C(struct Unk_scePaf_AEEF2A7C_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F23EC", scePaf_B711DC69);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_B711DC69);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F23EC", scePaf_ECE59E24);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_ECE59E24);
 
 void scePaf_A574DB92(struct Unk_scePaf_A574DB92_0 *arg0) {
     s32 temp_v0;
@@ -107,9 +107,9 @@ void scePaf_F639E5E1(struct Unk_scePaf_F639E5E1_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F23EC", scePaf_7F2442DC);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_7F2442DC);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F23EC", func_000F2828);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F2828);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0F23EC", func_000F2978);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F2978);
 

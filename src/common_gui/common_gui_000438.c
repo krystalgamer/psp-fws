@@ -12,7 +12,7 @@ void func_00000438(s32 arg0, s32 arg1) {
     func_00000488(arg0, arg1, var_v0);
 }
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", func_00000488);
+INCLUDE_ASM("nonmatchings/common_gui_000438", func_00000488);
 
 void sceVshCommonGui_80271F41(void) {
     s32 temp_v0;
@@ -27,17 +27,17 @@ void sceVshCommonGui_80271F41(void) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", sceVshCommonGui_1CF884A1);
+INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_1CF884A1);
 
-INCLUDE_RODATA("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", D_00003250);
+INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003250);
 
-INCLUDE_RODATA("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", D_00003260);
+INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003260);
 
-INCLUDE_RODATA("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", D_00003264);
+INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003264);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", func_000005CC);
+INCLUDE_ASM("nonmatchings/common_gui_000438", func_000005CC);
 
-INCLUDE_RODATA("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", D_00003284);
+INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003284);
 
 void func_0000061C(void) {
     func_000005CC((s32) "msgsystem_yes");
@@ -71,11 +71,11 @@ void sceVshCommonGui_E9B8D6AB(void) {
     func_000005CC((s32) "msgshare_opt_edit");
 }
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", sceVshCommonGui_D4353F96);
+INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_D4353F96);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", sceVshCommonGui_4704D5BD);
+INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_4704D5BD);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", sceVshCommonGui_071749CE);
+INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_071749CE);
 
 void func_00000888(void **arg0, void **arg1) {
     *arg0 = *arg1;

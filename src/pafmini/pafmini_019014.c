@@ -16,11 +16,11 @@ s32 func_00019014(struct Unk_func_00019014_0 *arg0) {
     return var_a1;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", func_00019048);
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_00019048);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", func_00019128);
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_00019128);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", func_000191D0);
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_000191D0);
 
 void func_00019278(struct Unk_func_00019278_0 *arg0) {
     arg0->unk50 = -1;
@@ -47,29 +47,29 @@ void func_00019278(struct Unk_func_00019278_0 *arg0) {
     arg0->unk4C = 0;
 }
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", D_000D1D54);
+INCLUDE_RODATA("nonmatchings/pafmini_019014", D_000D1D54);
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", D_000D1D70);
+INCLUDE_RODATA("nonmatchings/pafmini_019014", D_000D1D70);
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", D_000D1D7C);
+INCLUDE_RODATA("nonmatchings/pafmini_019014", D_000D1D7C);
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", D_000D1D98);
+INCLUDE_RODATA("nonmatchings/pafmini_019014", D_000D1D98);
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", D_000D1DB4);
+INCLUDE_RODATA("nonmatchings/pafmini_019014", D_000D1DB4);
 
-INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", D_000D1DD0);
+INCLUDE_RODATA("nonmatchings/pafmini_019014", D_000D1DD0);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", func_000192D8);
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_000192D8);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", func_00019330);
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_00019330);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", func_000193E0);
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_000193E0);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", func_000194EC);
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_000194EC);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", func_00019580);
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_00019580);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_019014", func_000195D0);
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_000195D0);
 
 void func_00019670(M2C_UNK **arg0) {
     func_00013B68(arg0);

@@ -27,7 +27,7 @@ void func_00009598(struct Unk_func_00009598_0 *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_009598", func_000095F4);
+INCLUDE_ASM("nonmatchings/netfront_009598", func_000095F4);
 
 void func_00009668(struct Unk_func_00009668_0 *arg0, s32 arg1) {
     s32 temp_v0;
@@ -40,7 +40,7 @@ void func_00009668(struct Unk_func_00009668_0 *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_009598", func_000096A4);
+INCLUDE_ASM("nonmatchings/netfront_009598", func_000096A4);
 
 s32 func_00009750(struct Unk_func_00009750_0 *arg0, struct Unk_func_00009750_1 *arg1) {
     s32 var_a2;

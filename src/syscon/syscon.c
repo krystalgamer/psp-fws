@@ -2,39 +2,39 @@
 #include "common.h"
 #include "syscon_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_0A771482);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_0A771482);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00000350);
+INCLUDE_ASM("nonmatchings/syscon", func_00000350);
 
-INCLUDE_RODATA("tmp/asm/282/syscon/nonmatchings/syscon", D_0000453C);
+INCLUDE_RODATA("nonmatchings/syscon", D_0000453C);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_0000050C);
+INCLUDE_ASM("nonmatchings/syscon", func_0000050C);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_5B9ACC97);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_5B9ACC97);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_3AC3D2A4);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3AC3D2A4);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_1602ED0D);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_1602ED0D);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_F350F666);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_F350F666);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001444);
+INCLUDE_ASM("nonmatchings/syscon", func_00001444);
 
 s32 module_start(void) {
     sceSyscon_driver_0A771482();
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", module_reboot_before);
+INCLUDE_ASM("nonmatchings/syscon", module_reboot_before);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_92D16FC7);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_92D16FC7);
 
 s32 sceSyscon_driver_081826B4(void) {
     sceKernelDisableSubIntr(4, 4);
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_56931095);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_56931095);
 
 s32 sceSyscon_driver_5EE92F3C(s32 arg0) {
     D_00004600.unk24 = arg0;
@@ -55,7 +55,7 @@ s32 sceSyscon_driver_E00BFC9E(void) {
     return D_00004600.unk10C;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_C8D97773);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_C8D97773);
 
 s32 func_000017C0(void) {
     return D_00004600.unk130;
@@ -113,7 +113,7 @@ void sceSyscon_driver_6848D817(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 7);
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_0000193C);
+INCLUDE_ASM("nonmatchings/syscon", func_0000193C);
 
 s32 sceSyscon_driver_86D4CAD8(void) {
     return D_00004600.unk48 & 0xFF;
@@ -123,13 +123,13 @@ s32 sceSyscon_driver_204F23FF(void) {
     return D_00004600.unk4A & 0xFF;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_3357EE5C);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3357EE5C);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_32CFD20F);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_32CFD20F);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_EC0DE439);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EC0DE439);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_EA5B9823);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EA5B9823);
 
 s32 sceSyscon_driver_E20D08FE(void) {
     return D_00004600.unk48 & 1;
@@ -151,113 +151,113 @@ s8 sceSyscon_driver_138747DE(void) {
     return (s8) D_00004600.unk3B;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_71AE1BCE);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_71AE1BCE);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_7016161C);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_7016161C);
 
 s32 sceSyscon_driver_F9FDAFA5(void) {
     return D_00004600.unk4A & 1;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_56A73EDD);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_56A73EDD);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001AC0);
+INCLUDE_ASM("nonmatchings/syscon", func_00001AC0);
 
 s8 sceSyscon_driver_48AB0E44(void) {
     return (s8) D_00004600.unk3C;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001AE8);
+INCLUDE_ASM("nonmatchings/syscon", func_00001AE8);
 
 s8 sceSyscon_driver_628F2351(void) {
     return (s8) D_00004600.unk3D;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001B10);
+INCLUDE_ASM("nonmatchings/syscon", func_00001B10);
 
 s8 sceSyscon_driver_EC37C549(void) {
     return (s8) D_00004600.unk3E;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001B38);
+INCLUDE_ASM("nonmatchings/syscon", func_00001B38);
 
 s8 sceSyscon_driver_051186F3(void) {
     return (s8) D_00004600.unk3F;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001B60);
+INCLUDE_ASM("nonmatchings/syscon", func_00001B60);
 
 s8 sceSyscon_driver_CE76F93E(void) {
     return (s8) D_00004600.unk40;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001B88);
+INCLUDE_ASM("nonmatchings/syscon", func_00001B88);
 
 s8 sceSyscon_driver_8EDF1AD7(void) {
     return (s8) D_00004600.unk41;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001BB0);
+INCLUDE_ASM("nonmatchings/syscon", func_00001BB0);
 
 s8 sceSyscon_driver_8DDA4CA6(void) {
     return (s8) D_00004600.unk42;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001BD8);
+INCLUDE_ASM("nonmatchings/syscon", func_00001BD8);
 
 s8 sceSyscon_driver_52B74B6C(void) {
     return (s8) D_00004600.unk43;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001C00);
+INCLUDE_ASM("nonmatchings/syscon", func_00001C00);
 
 s8 sceSyscon_driver_1B17D3E3(void) {
     return (s8) D_00004600.unk44;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001C28);
+INCLUDE_ASM("nonmatchings/syscon", func_00001C28);
 
 s8 sceSyscon_driver_5F19C00F(void) {
     return (s8) D_00004600.unk45;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001C50);
+INCLUDE_ASM("nonmatchings/syscon", func_00001C50);
 
 s8 sceSyscon_driver_3C739F57(void) {
     return (s8) D_00004600.unk46;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001C78);
+INCLUDE_ASM("nonmatchings/syscon", func_00001C78);
 
 s8 sceSyscon_driver_CC04A978(void) {
     return (s8) D_00004600.unk47;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001CA0);
+INCLUDE_ASM("nonmatchings/syscon", func_00001CA0);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001D14);
+INCLUDE_ASM("nonmatchings/syscon", func_00001D14);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00001E60);
+INCLUDE_ASM("nonmatchings/syscon", func_00001E60);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_7BCC5EAE);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_7BCC5EAE);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_59CD0449);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_59CD0449);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_65EB6096);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_65EB6096);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_EB277C88);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EB277C88);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_992C22C2);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_992C22C2);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_08234E6D);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_08234E6D);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_2EE82492);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_2EE82492);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_8CBC7987);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_8CBC7987);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_91E183CB);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_91E183CB);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_E6B74CB9);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E6B74CB9);
 
 void sceSyscon_driver_7EC5A957(s32 arg0) {
     func_00001444(arg0, 1);
@@ -267,7 +267,7 @@ void sceSyscon_driver_FC32141A(s32 arg0) {
     func_00001444(arg0, 0xB);
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_565EF519);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_565EF519);
 
 void sceSyscon_driver_F775BC34(s32 arg0) {
     func_00001444(arg0, 0xE);
@@ -297,7 +297,7 @@ void sceSyscon_driver_6C911742(s32 arg0) {
     func_0000193C(arg0, 0x22, 6);
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_E9FF8226);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E9FF8226);
 
 void sceSyscon_driver_882F0AAB(s32 arg0) {
     func_00001444(arg0, 0xC);
@@ -307,17 +307,17 @@ void sceSyscon_driver_00E7B6C2(s32 arg0) {
     func_0000193C(arg0, 0x33, 3);
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_44439604);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_44439604);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_C8439C57);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_C8439C57);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_BE27FE66);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_BE27FE66);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_18BFBE65);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_18BFBE65);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_1A08CD66);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_1A08CD66);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_E5E35721);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E5E35721);
 
 void sceSyscon_driver_E7E87741(s32 arg0) {
     func_00001444(arg0, 0x40);
@@ -327,7 +327,7 @@ void sceSyscon_driver_FB148FB6(s32 arg0) {
     func_00001444(arg0, 0x41);
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_01677F91);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_01677F91);
 
 void sceSyscon_driver_72EDA9AF(s32 arg0) {
     func_00001444(arg0, 0x43);
@@ -345,7 +345,7 @@ void sceSyscon_driver_D1B501E8(s32 arg0, s32 arg1) {
     func_0000193C(((arg1 & 0xFFFF) << 8) | (arg0 & 0xFF), 0x48, 5);
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_3DE38336);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3DE38336);
 
 s32 sceSyscon_driver_2B9E6A06(s32 *arg0) {
     if (arg0 != NULL) {
@@ -354,53 +354,53 @@ s32 sceSyscon_driver_2B9E6A06(s32 *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_8A4519F5);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_8A4519F5);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_99BBB24C);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_99BBB24C);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_F0ED3255);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_F0ED3255);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_A975F224);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_A975F224);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_9C4266FC);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_9C4266FC);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_3C6DB1C5);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3C6DB1C5);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_B2558E37);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_B2558E37);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_9478F399);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_9478F399);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_05727A0B);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_05727A0B);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_7C8A5503);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_7C8A5503);
 
 void sceSyscon_driver_806D4D6C(s32 arg0, s32 arg1) {
     func_0000193C(((arg1 & 0xFFFF) << 8) | (arg0 & 0xFF), 0x4E, 5);
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_D8471760);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_D8471760);
 
 void sceSyscon_driver_07A0C260(s32 arg0, s32 arg1) {
     func_0000193C(((arg1 & 0xFFFF) << 8) | (arg0 & 0xFF), 0x50, 5);
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_3AB3AEEF);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3AB3AEEF);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_EAB13FBE);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EAB13FBE);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_C5075828);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_C5075828);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_6A53F3F8);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_6A53F3F8);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_FA4C4518);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_FA4C4518);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_1165C864);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_1165C864);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_68EF0BEF);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_68EF0BEF);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_36E28C5F);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_36E28C5F);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_E448FD3F);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E448FD3F);
 
 void sceSyscon_driver_70C10E61(s32 arg0) {
     func_000038C4(0x62, arg0);
@@ -434,7 +434,7 @@ void sceSyscon_driver_284FE366(s32 arg0) {
     func_000038C4(0x69, arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_75025299);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_75025299);
 
 void sceSyscon_driver_B5105D51(s32 arg0) {
     func_000038C4(0x6B, arg0);
@@ -464,11 +464,11 @@ void sceSyscon_driver_4C0EE2FA(s32 arg0) {
     func_000038C4(0x72, arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_000038C4);
+INCLUDE_ASM("nonmatchings/syscon", func_000038C4);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_08DA3752);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_08DA3752);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00003AB0);
+INCLUDE_ASM("nonmatchings/syscon", func_00003AB0);
 
 s32 func_00003B1C(void) {
     s32 var_s0;
@@ -480,8 +480,8 @@ s32 func_00003B1C(void) {
     return var_s0;
 }
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", sceSyscon_driver_34C36FF9);
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_34C36FF9);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00003BC4);
+INCLUDE_ASM("nonmatchings/syscon", func_00003BC4);
 
-INCLUDE_ASM("tmp/asm/282/syscon/nonmatchings/syscon", func_00003D18);
+INCLUDE_ASM("nonmatchings/syscon", func_00003D18);

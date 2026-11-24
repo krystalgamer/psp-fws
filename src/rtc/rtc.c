@@ -2,29 +2,29 @@
 #include "common.h"
 #include "rtc_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00000000);
+INCLUDE_ASM("nonmatchings/rtc", func_00000000);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtc_driver_F0B5571C);
+INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_F0B5571C);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtc_driver_9763C138);
+INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_9763C138);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtc_driver_17C26C00);
+INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_17C26C00);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcSetAlarmTick);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSetAlarmTick);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcIsAlarmed);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcIsAlarmed);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcRegisterCallback);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcRegisterCallback);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcUnregisterCallback);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcUnregisterCallback);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetCurrentTick);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentTick);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtc_driver_B44BDAED);
+INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_B44BDAED);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetLastReincarnatedTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastReincarnatedTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetLastAdjustedTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastAdjustedTime);
 
 s32 module_start(void) {
     memset(&D_00004580, 0, 0x60);
@@ -46,9 +46,9 @@ s32 module_reboot_before(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtc_driver_912BEE56);
+INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_912BEE56);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtc_driver_CE27DE2F);
+INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_CE27DE2F);
 
 s32 sceRtc_driver_9CC2797E(void) {
     return 0;
@@ -65,19 +65,19 @@ s32 sceRtc_driver_C499AF2F(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtc_driver_759937C5);
+INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_759937C5);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetAlarmTick);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetAlarmTick);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetCurrentClock);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentClock);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetCurrentClockLocalTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentClockLocalTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtc_driver_029CA3B3);
+INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_029CA3B3);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcConvertUtcToLocalTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcConvertUtcToLocalTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcConvertLocalTimeToUTC);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcConvertLocalTimeToUTC);
 
 s32 func_0000138C(s32 arg0) {
     switch (arg0) {                                 /* irregular */
@@ -106,25 +106,25 @@ s32 sceRtcIsLeapYear(s32 arg0) {
     return var_a1;
 }
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetDaysInMonth);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetDaysInMonth);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcCheckValid);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcCheckValid);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetDosTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetDosTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetWin32FileTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetWin32FileTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetTime64_t);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetTime64_t);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetTime_t);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetTime_t);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcSetTick);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTick);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetTick);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetTick);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcTickAddMonths);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddMonths);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcTickAddYears);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddYears);
 
 u32 sceRtcGetTickResolution(void) {
     return 0xF4240U;
@@ -143,15 +143,15 @@ s32 sceRtcGetDayOfWeek(s32 arg0, s32 arg1, s32 arg2) {
     return (((var_a4 + ((s32) (var_a4 + ((u32) (var_a4 >> 0x1F) >> 0x1E)) >> 2)) - (var_a4 / 100)) + (var_a4 / 400) + (((var_a3 * 0xD) + 8) / 5) + arg2) % 7;
 }
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcSetDosTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSetDosTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcSetWin32FileTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSetWin32FileTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcSetTime64_t);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime64_t);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcSetTime_t);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime_t);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcTickAddTicks);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddTicks);
 
 s32 sceRtcTickAddMicroseconds(void *arg0, void *arg1, s64 arg2) {
     return sceRtcTickAddTicks(arg0, arg1, arg2);
@@ -165,31 +165,31 @@ s32 sceRtcTickAddMinutes(void *arg0, void *arg1, s64 arg2) {
     return sceRtcTickAddTicks(arg0, arg1, arg2 * 0x03938700);
 }
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcTickAddHours);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddHours);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcTickAddDays);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddDays);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcTickAddWeeks);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddWeeks);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcCompareTick);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcCompareTick);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcParseDateTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcParseDateTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcParseRFC3339);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcParseRFC3339);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_000030C4);
+INCLUDE_ASM("nonmatchings/rtc", func_000030C4);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00003188);
+INCLUDE_ASM("nonmatchings/rtc", func_00003188);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_0000328C);
+INCLUDE_ASM("nonmatchings/rtc", func_0000328C);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_000032D4);
+INCLUDE_ASM("nonmatchings/rtc", func_000032D4);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00003374);
+INCLUDE_ASM("nonmatchings/rtc", func_00003374);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcFormatRFC2822);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC2822);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcFormatRFC3339);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC3339);
 
 s32 func_00003AF8(struct Unk_func_00003AF8_0 *arg0, s32 arg1) {
     arg0->unk0 = (s8) (((arg1 / 10) % 10) + 0x30);
@@ -197,26 +197,26 @@ s32 func_00003AF8(struct Unk_func_00003AF8_0 *arg0, s32 arg1) {
     return (u8 *)arg0 + 2;
 }
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00003B60);
+INCLUDE_ASM("nonmatchings/rtc", func_00003B60);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcFormatRFC2822LocalTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC2822LocalTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcFormatRFC3339LocalTime);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC3339LocalTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00003D10);
+INCLUDE_ASM("nonmatchings/rtc", func_00003D10);
 
 void func_00003D9C(void) {
     UtilsForKernel_23A0C5BA(&func_00003DD4, &func_00003DF4, &func_00003D10, &sceRtc_driver_B44BDAED);
 }
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00003DD4);
+INCLUDE_ASM("nonmatchings/rtc", func_00003DD4);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00003DF4);
+INCLUDE_ASM("nonmatchings/rtc", func_00003DF4);
 
-INCLUDE_RODATA("tmp/asm/282/rtc/nonmatchings/rtc", D_000044D4);
+INCLUDE_RODATA("nonmatchings/rtc", D_000044D4);
 
-INCLUDE_RODATA("tmp/asm/282/rtc/nonmatchings/rtc", D_000044DC);
+INCLUDE_RODATA("nonmatchings/rtc", D_000044DC);
 
-INCLUDE_RODATA("tmp/asm/282/rtc/nonmatchings/rtc", D_000044F4);
+INCLUDE_RODATA("nonmatchings/rtc", D_000044F4);
 
-INCLUDE_RODATA("tmp/asm/282/rtc/nonmatchings/rtc", D_0000450C);
+INCLUDE_RODATA("nonmatchings/rtc", D_0000450C);

@@ -47,15 +47,15 @@ void func_00087474(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0873D4", func_0008749C);
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_0008749C);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0873D4", func_0008766C);
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_0008766C);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0873D4", func_000876C0);
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000876C0);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0873D4", func_00087718);
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00087718);
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0873D4", func_00087770);
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00087770);
 
 s32 func_000877D0(struct Unk_func_000877D0_0 *arg0) {
     return arg0->unk30;
@@ -77,7 +77,7 @@ s32 func_000877F0(struct Unk_func_000877F0_0 *arg0) {
     return arg0->unk24;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0873D4", func_000877F8);
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000877F8);
 
 void func_00087800(s32 **arg0, s32 arg1, s32 arg2) {
     func_00087424(arg0, arg1, arg2);
@@ -105,5 +105,5 @@ void func_000878B0(s32 **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0873D4", func_000878E8);
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000878E8);
 

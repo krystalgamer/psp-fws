@@ -32,7 +32,7 @@ s32 func_00011C2C(void) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011BE4", func_00011C50);
+INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_00011C50);
 
 s32 func_00011C5C(void) {
     return scePaf_75062BCF() != 0;

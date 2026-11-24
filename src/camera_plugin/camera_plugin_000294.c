@@ -21,9 +21,9 @@ void func_00000300(void) {
     func_0000BEAC();
 }
 
-INCLUDE_RODATA("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_000294", D_00021640);
+INCLUDE_RODATA("nonmatchings/camera_plugin_000294", D_00021640);
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_000294", func_0000031C);
+INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_0000031C);
 
 s32 func_000004F8(void) {
     sceVshCommonUtil_DA88D006(&D_00024C5C, 1, 0);
@@ -33,9 +33,9 @@ s32 func_000004F8(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_000294", func_00000550);
+INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_00000550);
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_000294", func_00000578);
+INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_00000578);
 
 void func_000005F4(void) {
     func_00000578(1, 0xFFFF);
