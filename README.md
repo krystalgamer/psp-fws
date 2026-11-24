@@ -70,12 +70,29 @@ a module from scratch with other flags and keeps it only if more functions match
 `tools/retry_pass.sh VER:MOD [regex]` retries remaining functions (add-only);
 `tools/flag_search.py` tests extra flags on near misses.
 
+Modules can be split into several translation units (`src/<mod>/<mod>_<VRAM>.c`,
+each a `c` + `.rodata` subsegment with its own cflags) with
+`tools/split_tu.py VER MOD FUNC[:CFLAGS] ...`; `tools/tu_candidates.py` proposes cuts
+from runs of functions that only match another setting. Evidence for TU boundaries:
+-O0 objects (every function sets up `$fp`), functions matching only -Os/-O1 inside
+-O2 modules, and calls GCC would delete if the callee were in the same file (it
+marks side-effect-free functions const). `config/<ver>/func_starts.<mod>.txt` pins
+function starts so splat keeps the same boundaries across segments.
+
+paf, pafmini and netfront statically link libtiff 3.8, libjpeg 6b, libpng and zlib:
+`tools/libmatch.py` compiles the upstream sources (fetched into `tmp/libsrc`) and
+finds identical functions, `tools/libnames.py` names their neighbours by source
+order and `tools/apply_names.py` applies the names.
+
 auto_decomp details: m2c runs with the PSP's MIPS EABI (`mipsee` target:
 arguments in `$a0-$a3,$t0-$t3` and `$f12-$f19`) and falls back to o32;
 `tools/m2c_allegrex.py` adds Allegrex ops (`max/min/clz/ext/ins/wsbw/bitrev/rotr`)
 as the psp-gcc `__builtin_allegrex_*` intrinsics; unknown callees get prototypes
 from the SDK headers or from the argument registers their asm reads
-(`tools/protos.py`), and exported functions get their SDK signature.
+(`tools/protos.py`), and exported functions get their SDK signature. Matches are
+verified in the full build; when a function compiles differently there (every later
+symbol moves), the one before the first moved symbol is reverted and the module rebuilt
+(`tools/reverify.sh` retries functions reverted by earlier runs).
 
 `diff.py --score` is alignment-aware (branch/jump targets masked). Use `--version/--module`
 for modules other than mcctrl 3.60.
