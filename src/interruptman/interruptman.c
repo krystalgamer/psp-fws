@@ -18,7 +18,14 @@ INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManag
 
 INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_494D6D2B);
 
-INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_55242A8B);
+void InterruptManagerForKernel_55242A8B(void) {
+    s32 temp_a0;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_00003F9C = (s32) func_000030AC;
+    D_00003FA0 = (s32) func_000030B4;
+    sceKernelCpuResumeIntr(temp_a0);
+}
 
 INCLUDE_ASM("tmp/asm/282/interruptman/nonmatchings/interruptman", InterruptManagerForKernel_272766F8);
 

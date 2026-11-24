@@ -53,7 +53,10 @@ INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_000011E4);
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001390);
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_000013F0);
+s32 func_000013F0(void) {
+    void *sp0;
+    return __builtin_allegrex_min(sceKernelWaitEventFlag(D_00002768, 0x10U, 1, &sp0, NULL), 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001428);
 

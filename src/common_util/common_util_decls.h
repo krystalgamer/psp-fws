@@ -17,7 +17,9 @@ s32 module_stop(void);
 s32 sceKernelClearEventFlag(s32, u32);
 s32 sceKernelCreateEventFlag(void *, u32, u32, void *);
 s32 sceKernelDeleteEventFlag(s32);
+s32 sceKernelPowerUnlock(s32);
 s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);
+M2C_UNK scePower_DB62C9CF();
 M2C_UNK sceReg_0CAE832B(s32);
 M2C_UNK sceReg_0D69BF40(s32);
 M2C_UNK sceReg_39461B4D(s32);
@@ -32,5 +34,6 @@ void sceVshCommonUtil_5A0B7762(s32 arg0, s32 arg1);
 void sceVshCommonUtil_686AAA1A(void);
 M2C_UNK sceVshCommonUtil_7683BE4D();
 void sceVshCommonUtil_98E57F6D(void *arg0);
+void sceVshCommonUtil_D4D66154(s32 *arg0);
 
 #endif

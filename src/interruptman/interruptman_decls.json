@@ -4,6 +4,7 @@
   "InterruptManagerForKernel_20804B41": "s32 InterruptManagerForKernel_20804B41(void);",
   "InterruptManagerForKernel_2CD783A1": "void InterruptManagerForKernel_2CD783A1(s32 arg0, s32 arg1);",
   "InterruptManagerForKernel_2DC9709B": "s32 InterruptManagerForKernel_2DC9709B(void);",
+  "InterruptManagerForKernel_55242A8B": "void InterruptManagerForKernel_55242A8B(void);",
   "InterruptManagerForKernel_750E2507": "s32 InterruptManagerForKernel_750E2507(s32, s32);",
   "InterruptManagerForKernel_D774BA45": "void InterruptManagerForKernel_D774BA45(s32 arg0);",
   "InterruptManagerForKernel_E9E652A9": "s32 InterruptManagerForKernel_E9E652A9(void);",

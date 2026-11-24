@@ -6,7 +6,10 @@
 
 extern M2C_UNK D_00004770;
 extern M2C_UNK D_000047C8;
+extern M2C_UNK D_00004B7C;
+extern M2C_UNK D_00004B88;
 
+void func_00000198(void);
 void func_00000204(void);
 s32 func_00000320(void);
 M2C_UNK func_000004C0(M2C_UNK);
@@ -21,6 +24,8 @@ void func_000006AC(void *arg0);
 M2C_UNK func_000006C8(M2C_UNK, M2C_UNK);
 void func_00000750(void);
 void func_00000770(void);
+s32 func_000007C0(s32);
+s32 func_000007F0(s32, s32);
 void func_0000088C(void);
 s32 func_000008C4(s32 arg0, void *arg1);
 void func_00000944(s32 arg0, s32 arg1, M2C_UNK arg2);
@@ -63,5 +68,9 @@ s32 scePaf_CA79D58B(s32);
 M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);
 void *scePaf_D4FAE7D0(M2C_UNK *);
 s32 scePaf_FD4C9F47(s32);
+M2C_UNK sceVshCommonGui_54BC644C(void *, s32);
+M2C_UNK sceVshCommonGui_6C81492F(void *, s32);
+s32 sceVshCommonGui_764A5495();
+s32 sceVshCommonGui_DBEE94DC();
 
 #endif

@@ -185,7 +185,14 @@ INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_22DA99
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_5D1C9867);
 
-INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_67E58C07);
+s32 sceMSAudio_driver_67E58C07(void) {
+    u32 temp_v0;
+
+    temp_v0 = k1;
+    k1 = (u32) k1 >> 0x10;
+    k1 = temp_v0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_38178F2F);
 

@@ -32,7 +32,23 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", sceNetAd
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", sceNetAdhocctlDelHandler);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetState);
+s32 sceNetAdhocctlGetState(s32 *arg0) {
+    s32 var_a1;
+    s32 var_v1;
+
+    var_v1 = 0x80410005;
+    if (sceKernelCheckThreadStack() >= 0xBF0) {
+        var_a1 = 0x80410B08;
+        if (D_000062B0 != 0) {
+            var_a1 = 0x80410B04;
+            if (arg0 != NULL) {
+                var_a1 = func_000030BC(arg0);
+            }
+        }
+        var_v1 = var_a1;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetAdhocId);
 
@@ -155,7 +171,12 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_00003840);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_00003958);
+void func_00003958(s32 arg0) {
+    void *sp0;
+    M2C_UNK sp4;
+
+    func_00003A00(arg0, &sp0, (s32) &sp4);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_00003978);
 

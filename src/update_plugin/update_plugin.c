@@ -102,7 +102,22 @@ INCLUDE_RODATA("tmp/asm/282/update_plugin/nonmatchings/update_plugin", D_000074C
 
 INCLUDE_RODATA("tmp/asm/282/update_plugin/nonmatchings/update_plugin", D_000074CC);
 
-INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_0000086C);
+void func_0000086C(s32 arg0) {
+    void *sp0;
+    void **temp_v0;
+
+    M2C_FIELD(func_00005364(), s8 *, 0x84) = 0;
+    func_00001714();
+    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    func_000036EC(&sp0);
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_B45ED019());
+    func_000036EC(&sp0);
+    sceVshCommonGui_441D55D7(1);
+    sceVshCommonGui_80271F41();
+    scePaf_F47CA1C2(arg0, 0x10001, func_00002FE4, 0);
+    temp_v0 = scePaf_72514A05(arg0, "update_network_check_version_text", 0);
+    M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 0xF, 0x20);
+}
 
 INCLUDE_RODATA("tmp/asm/282/update_plugin/nonmatchings/update_plugin", D_00007500);
 

@@ -2,6 +2,7 @@
  "funcs": {
   "func_0000113C": "void func_0000113C(void *arg0, s32 *arg1);",
   "func_00002188": "void func_00002188(void *arg0);",
+  "func_00002420": "s32 func_00002420(void *arg0);",
   "func_0000256C": "s32 func_0000256C(void *arg0, s32 arg1);",
   "func_00002794": "void func_00002794(void *arg0, s32 *arg1);",
   "func_000029F8": "void func_000029F8(void *arg0, void *arg1);",
@@ -33,7 +34,8 @@
   "sceNetAdhocPdpDelete": "s32 sceNetAdhocPdpDelete(s32, s32);",
   "sceNetAdhocPdpSend": "s32 sceNetAdhocPdpSend(s32, void *, u32, void *, s32, u32, s32);",
   "sceNetAdhocSetSocketAlert": "s32 sceNetAdhocSetSocketAlert(s32, s32);",
-  "sceNetFreeThreadinfo": "s32 sceNetFreeThreadinfo(u32);"
+  "sceNetFreeThreadinfo": "s32 sceNetFreeThreadinfo(u32);",
+  "sceNet_lib_57CC57DA": "M2C_UNK sceNet_lib_57CC57DA(void *, M2C_UNK, M2C_UNK);"
  },
  "vars": {
   "D_00003DB0": "extern s32 D_00003DB0;",

@@ -15,6 +15,7 @@ M2C_UNK *InterruptManagerForKernel_00B6B0F3(void);
 s32 InterruptManagerForKernel_20804B41(void);
 void InterruptManagerForKernel_2CD783A1(s32 arg0, s32 arg1);
 s32 InterruptManagerForKernel_2DC9709B(void);
+void InterruptManagerForKernel_55242A8B(void);
 s32 InterruptManagerForKernel_750E2507(s32, s32);
 void InterruptManagerForKernel_D774BA45(s32 arg0);
 s32 InterruptManagerForKernel_E9E652A9(void);

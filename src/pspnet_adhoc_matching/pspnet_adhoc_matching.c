@@ -62,7 +62,14 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_matching/nonmatchings/pspnet_adhoc_matchin
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_matching/nonmatchings/pspnet_adhoc_matching", func_000023E8);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_matching/nonmatchings/pspnet_adhoc_matching", func_00002420);
+s32 func_00002420(void *arg0) {
+    void *sp0;
+    s32 temp_v0;
+
+    sceNet_lib_57CC57DA(&sp0, 0xFF, 6);
+    temp_v0 = sceNetAdhocPdpSend(M2C_FIELD(arg0, s32 *, 0x38), &sp0, (u32) M2C_FIELD(arg0, u16 *, 0x14), M2C_FIELD(arg0, void **, 0x4C), M2C_FIELD(arg0, s32 *, 0x48), 0U, 1);
+    return ((temp_v0 ^ 0x80410709) == 0) ? 0 : temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_matching/nonmatchings/pspnet_adhoc_matching", func_00002480);
 

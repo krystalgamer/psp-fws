@@ -15,7 +15,15 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_0000015C);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00000198);
+void func_00000198(void) {
+    void *sp0;
+    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    func_000007F0((s32) &D_00004B7C, &sp0);
+    func_000007C0(&sp0);
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    func_000007F0((s32) &D_00004B88, &sp0);
+    func_000007C0(&sp0);
+}
 
 void func_00000204(void) {
 }

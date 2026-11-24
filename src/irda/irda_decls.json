@@ -1,6 +1,7 @@
 {
  "funcs": {
   "IoFileMgrForKernel_8E982A74": "M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);",
+  "func_00000528": "s32 func_00000528(void);",
   "func_00000850": "s32 func_00000850(void);",
   "func_00000A1C": "s32 func_00000A1C(void *arg0);",
   "func_00000AF8": "s32 func_00000AF8(void);",
@@ -17,6 +18,7 @@
   "module_start": "s32 module_start(void);",
   "sceGpio_driver_310F0CCF": "M2C_UNK sceGpio_driver_310F0CCF(M2C_UNK);",
   "sceKernelSetAlarm": "s32 sceKernelSetAlarm(u32, s32, void *);",
+  "sceKernelWaitEventFlag": "s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);",
   "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
   "sceSysreg_driver_7725CA08": "M2C_UNK sceSysreg_driver_7725CA08(M2C_UNK);",
   "sceSysreg_driver_BB823481": "M2C_UNK sceSysreg_driver_BB823481(M2C_UNK);"
@@ -26,6 +28,7 @@
   "D_00001740": "extern M2C_UNK D_00001740;",
   "D_00001784": "extern s32 D_00001784;",
   "D_00001788": "extern s32 D_00001788;",
+  "D_000017C8": "extern s32 D_000017C8;",
   "func_0000117C": "extern M2C_UNK func_0000117C;"
  }
 }

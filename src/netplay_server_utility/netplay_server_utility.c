@@ -151,7 +151,14 @@ void func_0000171C(void) {
 void func_00001724(void) {
 }
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_0000172C);
+void func_0000172C(s32 arg0) {
+    void *sp0;
+    D_000045E4 = 4;
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_B45ED019());
+    func_000017D0(&sp0);
+    sceVshCommonGui_A0DE7090(0);
+    scePaf_A0ED77C4(0, &func_00000E38, arg0, -1, -1, &func_00000F58);
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_0000179C);
 

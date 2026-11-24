@@ -39,7 +39,18 @@ INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", func_000006B4);
 
 INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", sceVshCommonUtil_FA969B6A);
 
-INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", sceVshCommonUtil_D4D66154);
+void sceVshCommonUtil_D4D66154(s32 *arg0) {
+    if (!(*arg0 & 1)) {
+
+    } else {
+        scePower_DB62C9CF();
+    }
+    if (D_00008BF4 != 0) {
+        ((M2C_UNK (*)(M2C_UNK)) D_00008BF4)(0);
+    } else {
+        sceKernelPowerUnlock(0);
+    }
+}
 
 void sceVshCommonUtil_5A0B7762(s32 arg0, s32 arg1) {
     D_00008BF0 = arg0;

@@ -10,7 +10,10 @@ INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_0000031C);
 
 INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_000004C8);
 
-INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000528);
+s32 func_00000528(void) {
+    void *sp0;
+    return __builtin_allegrex_min(sceKernelWaitEventFlag(D_000017C8, 0x10U, 1, &sp0, NULL), 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000560);
 
