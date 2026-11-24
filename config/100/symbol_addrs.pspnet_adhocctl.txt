@@ -76,3 +76,22 @@ sceWlanDrv_lib_C9A8CAB7 = 0x00005EA8; // type:func
 sceWlanDrv_lib_5BAA1FE5 = 0x00005EB0; // type:func
 sceWlanDrv_lib_2D0FAE4E = 0x00005EB8; // type:func
 sceWlanDrv_lib_56F467CA = 0x00005EC0; // type:func
+// shared names (tools/add_version.py) begin
+D_0000610C = 0x00006238; // rom:0x62B8
+D_00006138 = 0x0000625C; // rom:0x62DC
+D_00006140 = 0x00006264; // rom:0x62E4
+D_00006144 = 0x00006268; // rom:0x62E8
+D_00006284 = 0x00006308; // rom:0x6388
+D_000062B0 = 0x000063F0;
+func_00000F98 = 0x00000864; // type:func rom:0x8E4
+func_00001580 = 0x00000CD0; // type:func rom:0xD50
+func_00001F90 = 0x0000130C; // type:func rom:0x138C
+func_00002D28 = 0x00001D84; // type:func rom:0x1E04
+func_00002E3C = 0x00001EF8; // type:func rom:0x1F78
+func_00002F2C = 0x00002048; // type:func rom:0x20C8
+func_00003190 = 0x00002364; // type:func rom:0x23E4
+func_00003978 = 0x000029A4; // type:func rom:0x2A24
+func_000051D0 = 0x00003DE4; // type:func rom:0x3E64
+func_000052A8 = 0x00004364; // type:func rom:0x43E4
+func_00005640 = 0x0000471C; // type:func rom:0x479C
+// shared names (tools/add_version.py) end

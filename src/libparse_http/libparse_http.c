@@ -6,21 +6,69 @@ INCLUDE_ASM("nonmatchings/libparse_http", sceParseHttpStatusLine);
 
 INCLUDE_ASM("nonmatchings/libparse_http", sceParseHttpResponseHeader);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/libparse_http", func_000002D8);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/libparse_http", func_0000044C);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/libparse_http", func_000004DC);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/libparse_http", func_00000564);
+#endif
+
+#if FW_VERSION == 100
+s32 module_start(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
+s32 module_stop(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/libparse_http", func_000005F0);
+#endif
+
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/libparse_http", func_000003A0);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/libparse_http", func_00000510);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/libparse_http", func_000005A0);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/libparse_http", func_0000061C);
+#endif
 
 INCLUDE_ASM("nonmatchings/libparse_http", func_000006C4);
 
 INCLUDE_ASM("nonmatchings/libparse_http", func_000006F0);
 
+#if FW_VERSION == 100
+M2C_UNK *func_0000065C(void) {
+    return &D_00000C41;
+}
+#endif
+
+#if FW_VERSION != 100
 M2C_UNK *func_00000704(void) {
     return &D_00000D61;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/libparse_http", func_00000710);
 
@@ -36,8 +84,34 @@ INCLUDE_ASM("nonmatchings/libparse_http", func_000009F0);
 
 INCLUDE_ASM("nonmatchings/libparse_http", func_00000BD0);
 
-INCLUDE_ASM("nonmatchings/libparse_http", func_00000C00);
+#if FW_VERSION == 100
+u8 *func_00000B4C(u8 *arg0, u8 *arg1) {
+    u8 *var_a1;
+    u8 *var_a2;
+    u8 *var_v0;
+    u8 temp_a3;
 
+    var_a1 = arg1;
+    var_v0 = NULL;
+    var_a2 = arg0;
+    if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
+        do {
+            temp_a3 = *var_a1;
+            var_a1 += 1;
+            *var_a2 = temp_a3;
+            var_a2 += 1;
+        } while (temp_a3 != 0);
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION != 100
+INCLUDE_ASM("nonmatchings/libparse_http", func_00000C00);
+#endif
+
+#if FW_VERSION != 100
 u8 *func_00000C48(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;
@@ -58,3 +132,4 @@ u8 *func_00000C48(u8 *arg0, u8 *arg1) {
     }
     return var_v0;
 }
+#endif

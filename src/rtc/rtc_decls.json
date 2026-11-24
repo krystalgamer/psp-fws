@@ -1,7 +1,11 @@
 {
  "funcs": {
   "UtilsForKernel_23A0C5BA": "M2C_UNK UtilsForKernel_23A0C5BA(M2C_UNK *, M2C_UNK *, M2C_UNK *, M2C_UNK *);",
+  "UtilsForKernel_7B7ED3FD": "s32 UtilsForKernel_7B7ED3FD(M2C_UNK *, M2C_UNK *, M2C_UNK *);",
+  "func_00000DB0": "s32 func_00000DB0(s32 arg0);",
   "func_0000138C": "s32 func_0000138C(s32 arg0);",
+  "func_000032D0": "s32 func_000032D0(void *arg0, s32 arg1);",
+  "func_0000358C": "s32 func_0000358C(void);",
   "func_00003AF8": "s32 func_00003AF8(struct Unk_func_00003AF8_0 *arg0, s32 arg1);",
   "func_00003D9C": "void func_00003D9C(void);",
   "memset": "M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);",
@@ -15,8 +19,10 @@
   "sceRtcTickAddSeconds": "s32 sceRtcTickAddSeconds(void *arg0, void *arg1, s64 arg2);",
   "sceRtcTickAddTicks": "s32 sceRtcTickAddTicks(void *, void *, s64);",
   "sceRtc_driver_48D07D70": "s32 sceRtc_driver_48D07D70(void);",
+  "sceRtc_driver_912BEE56": "s32 sceRtc_driver_912BEE56(void);",
   "sceRtc_driver_9CC2797E": "s32 sceRtc_driver_9CC2797E(void);",
   "sceRtc_driver_C499AF2F": "s32 sceRtc_driver_C499AF2F(void);",
+  "sceRtc_driver_CE27DE2F": "s32 sceRtc_driver_CE27DE2F(void);",
   "sceRtc_driver_F0B5571C": "s32 sceRtc_driver_F0B5571C(void);",
   "sceSysEventForKernel_CD9E4BB5": "M2C_UNK sceSysEventForKernel_CD9E4BB5(M2C_UNK *);",
   "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
@@ -27,6 +33,7 @@
   "Unk_func_00003AF8_0": "struct Unk_func_00003AF8_0 {\n    s8 unk0;\n    s8 unk1;\n};"
  },
  "vars": {
+  "D_00003BF0": "extern s32 D_00003BF0;",
   "D_00004540": "extern M2C_UNK D_00004540;",
   "D_00004580": "extern struct D_00004580_s D_00004580;",
   "func_00000000": "extern M2C_UNK func_00000000;",

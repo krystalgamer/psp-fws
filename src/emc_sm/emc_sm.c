@@ -1,15 +1,29 @@
 #include "common.h"
 #include "emc_sm_decls.h"
 
+#if FW_VERSION == 100
+INCLUDE_RODATA("nonmatchings/emc_sm", D_000026F0);
+#endif
+
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_A513BB12);
 
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000014C);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/emc_sm", func_00000160);
+#endif
+
+#if FW_VERSION != 100
 INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000015C);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_84EE5D76);
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_AE4438C7);
 
@@ -27,20 +41,41 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_EB0A0022);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_5182C394);
 
+#if FW_VERSION == 100
 s32 module_start(void) {
     sceNand_driver_A513BB12();
     return 0;
 }
+#endif
+
+#if FW_VERSION != 100
+s32 module_start(void) {
+    sceNand_driver_A513BB12();
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_D305870E);
 
+#if FW_VERSION == 100
 s32 sceNand_driver_73A68408(void) {
     return 0;
 }
+#endif
+
+#if FW_VERSION != 100
+s32 sceNand_driver_73A68408(void) {
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_0F9BBBBD);
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_84EE5D76);
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_E41A11DE);
 
@@ -48,23 +83,59 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_89BDCA08);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_8AF0AB9F);
 
+#if FW_VERSION == 100
 void sceNand_driver_E05AE88D(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     sceNand_driver_766756EF(arg0, arg1, arg2, arg3, 0x20);
 }
+#endif
+
+#if FW_VERSION != 100
+void sceNand_driver_E05AE88D(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    sceNand_driver_766756EF(arg0, arg1, arg2, arg3, 0x20);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_8932166A);
 
+#if FW_VERSION == 100
 void sceNand_driver_C478C1DE(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     sceNand_driver_766756EF(arg0, arg1, arg2, arg3, 0x31);
 }
+#endif
 
+#if FW_VERSION == 100
 void sceNand_driver_BADD5D46(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     sceNand_driver_0ADC8686(arg0, arg1, arg2, arg3, 0x31);
 }
+#endif
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/emc_sm", func_00000F18);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/emc_sm", func_00000F58);
+#endif
+
+#if FW_VERSION != 100
+void sceNand_driver_C478C1DE(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    sceNand_driver_766756EF(arg0, arg1, arg2, arg3, 0x31);
+}
+#endif
+
+#if FW_VERSION != 100
+void sceNand_driver_BADD5D46(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    sceNand_driver_0ADC8686(arg0, arg1, arg2, arg3, 0x31);
+}
+#endif
+
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000F40);
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000FEC);
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", func_00001180);
 

@@ -1,15 +1,29 @@
 {
  "funcs": {
+  "func_0000055C": "s32 func_0000055C(void);",
+  "func_000005B0": "s32 func_000005B0(void);",
   "func_0000065C": "s32 func_0000065C(void);",
   "func_000006B0": "s32 func_000006B0(void);",
   "func_0000070C": "s32 func_0000070C(s32);",
+  "func_00000E2C": "s32 func_00000E2C(void);",
   "func_00000F64": "s32 func_00000F64(void);",
   "func_00000FA8": "s32 func_00000FA8(void);",
+  "func_00001BC0": "M2C_UNK *func_00001BC0(void);",
+  "func_00001C04": "s32 func_00001C04(s32, s32);",
+  "func_00001CB8": "u8 *func_00001CB8(u8 *arg0, u8 *arg1, s32 arg2);",
+  "func_00001D58": "void func_00001D58(s32 arg0, s32 arg1);",
+  "func_00001FE0": "u8 *func_00001FE0(u8 *arg0, u8 *arg1);",
+  "module_start": "s32 module_start(void);",
+  "module_stop": "s32 module_stop(void);",
   "sceKernelCheckThreadStack": "s32 sceKernelCheckThreadStack(void);",
-  "sceNetResolverDelete": "s32 sceNetResolverDelete(s32 arg0);"
+  "sceNetResolverDelete": "s32 sceNetResolverDelete(s32 arg0);",
+  "sceNetResolverTerm": "s32 sceNetResolverTerm(void);"
  },
  "vars": {
   "D_00001F74": "extern s32 D_00001F74;",
-  "D_00001F78": "extern s32 D_00001F78;"
+  "D_00001F78": "extern s32 D_00001F78;",
+  "D_000022B1": "extern M2C_UNK D_000022B1;",
+  "D_00002340": "extern s32 D_00002340;",
+  "D_00002344": "extern s32 D_00002344;"
  }
 }

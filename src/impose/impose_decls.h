@@ -6,15 +6,20 @@
 
 extern u32 *D_0000F510;
 extern M2C_UNK D_0000F514;
+extern u32 *D_00018648;
 
 void func_00000000(u32 arg0);
+s32 func_000004C4(void);
 s32 func_0000070C(void);
+void func_00001E08(s32 arg0);
+void func_00001E78(s32 arg0);
 s32 func_000025F0(s32);
 void func_00002DC0(s32 arg0);
 void func_00002E2C(s32 arg0);
 s32 func_000047EC(s32, s32);
 s32 func_000048AC(s32);
 s32 func_00004954(s32);
+s32 module_reboot_before(void);
 s32 sceAudioRoutingGetMode(void);
 s32 sceAudioRoutingGetVolumeMode(void);
 s32 sceAudioRoutingSetMode(s32 arg0);

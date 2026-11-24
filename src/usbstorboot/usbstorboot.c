@@ -8,7 +8,13 @@ INCLUDE_ASM("nonmatchings/usbstorboot", func_000000B4);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_00000108);
 
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstorboot", func_00000180);
+#endif
+
+#if FW_VERSION != 100
+INCLUDE_ASM("nonmatchings/usbstorboot", func_00000180);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_00000530);
 
@@ -38,13 +44,21 @@ INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_1F080078);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_A55C9E16);
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_8A4F36E5);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbstorboot", module_start);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", module_stop);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/usbstorboot", func_00000CC8);
+#endif
+
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstorboot", func_00000CF0);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_00001068);
 
@@ -56,8 +70,20 @@ INCLUDE_ASM("nonmatchings/usbstorboot", func_000012B4);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_0000137C);
 
-INCLUDE_ASM("nonmatchings/usbstorboot", func_00001434);
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/usbstorboot", func_000013F0);
+#endif
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/usbstorboot", func_000014CC);
+#endif
+
+#if FW_VERSION != 100
+INCLUDE_ASM("nonmatchings/usbstorboot", func_00001434);
+#endif
+
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstorboot", func_0000150C);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_00001754);

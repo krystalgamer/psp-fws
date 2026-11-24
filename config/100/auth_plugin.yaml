@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, auth_plugin]
+      - [0xA4, c, auth_plugin]
       - { start: 0x1960, type: asm, name: fini, linker_section: .fini }
       - { start: 0x197C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1AAC, type: prxpad, order: .text }
@@ -71,7 +71,7 @@ segments:
       - { start: 0x1CA4, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x1CB0, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x1CB4, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x1CB8, rodata, auth_plugin]
+      - [0x1CB8, .rodata, auth_plugin]
       - { start: 0x1E88, type: prxpad, order: .rodata }
   - name: auth_plugin_seg1
     type: code

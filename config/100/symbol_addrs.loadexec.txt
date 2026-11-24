@@ -55,3 +55,7 @@ sceKernelCreateThread = 0x00002500; // type:func
 sceKernelStartThread = 0x00002508; // type:func
 sceKernelExitThread = 0x00002510; // type:func
 ThreadManForKernel_F6427665 = 0x00002518; // type:func
+// shared names (tools/add_version.py) begin
+func_00000AD0 = 0x0000093C; // type:func
+func_00000C18 = 0x00000AE8; // type:func
+// shared names (tools/add_version.py) end

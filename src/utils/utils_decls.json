@@ -1,4 +1,16 @@
 {
- "funcs": {},
- "vars": {}
+ "funcs": {
+  "UtilsForKernel_193D4036": "void UtilsForKernel_193D4036(s32 arg0, s32 arg1);",
+  "UtilsForKernel_6151A7C3": "s32 UtilsForKernel_6151A7C3(void);",
+  "UtilsForKernel_7B7ED3FD": "s32 UtilsForKernel_7B7ED3FD(s32 arg0, s32 arg1, s32 arg2);",
+  "UtilsForKernel_95035FEF": "void UtilsForKernel_95035FEF(s32 arg0, s32 arg1);",
+  "func_000026B4": "s32 func_000026B4(void);"
+ },
+ "vars": {
+  "D_00004700": "extern s32 D_00004700;",
+  "D_00004704": "extern s32 D_00004704;",
+  "D_00004764": "extern s32 D_00004764;",
+  "D_00004768": "extern s32 D_00004768;",
+  "D_0000476C": "extern s32 D_0000476C;"
+ }
 }

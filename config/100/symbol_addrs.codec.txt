@@ -24,3 +24,6 @@ sceGpio_driver_317D9D2C = 0x00000F4C; // type:func
 sceI2c_driver_E9463B99 = 0x00000F54; // type:func
 sceSysEventForKernel_CD9E4BB5 = 0x00000F5C; // type:func
 sceSysEventForKernel_D7D3FDCD = 0x00000F64; // type:func
+// shared names (tools/add_version.py) begin
+D_0000108C = 0x000011E4;
+// shared names (tools/add_version.py) end

@@ -17,3 +17,12 @@ sceMeWrapper_driver_BAC7C2BE = 0x00000AB8; // type:func
 sceMeWrapper_driver_39F06790 = 0x00000AC0; // type:func
 sceMeWrapper_driver_A177798D = 0x00000AC8; // type:func
 sceMeWrapper_driver_5AD660FA = 0x00000AD0; // type:func
+// shared names (tools/add_version.py) begin
+D_00000D1C = 0x00000C8C;
+D_00000D94 = 0x00000D04;
+func_000007D4 = 0x0000076C; // type:func
+func_000008B4 = 0x00000848; // type:func
+func_00000970 = 0x00000908; // type:func
+func_00000A58 = 0x000009F0; // type:func
+func_00000AAC = 0x00000A44; // type:func
+// shared names (tools/add_version.py) end

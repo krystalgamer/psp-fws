@@ -12,6 +12,7 @@ M2C_UNK func_00001500();
 M2C_UNK func_00001B98();
 M2C_UNK func_00001BD4();
 s32 module_stop(void);
+M2C_UNK sceMeWrapper_driver_3D5F109C(M2C_UNK);
 s32 sceMpegbase_driver_27A2982F(void);
 
 #endif

@@ -1,6 +1,18 @@
 {
  "funcs": {
+  "func_00000138": "s32 func_00000138(void);",
+  "module_start": "s32 module_start(void);",
+  "sceGpio_driver_317D9D2C": "s32 sceGpio_driver_317D9D2C(M2C_UNK, M2C_UNK);",
+  "sceGpio_driver_37C8DADC": "M2C_UNK sceGpio_driver_37C8DADC(M2C_UNK, M2C_UNK);",
+  "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
+  "sceKernelDisableSubIntr": "s32 sceKernelDisableSubIntr(M2C_UNK, M2C_UNK);",
+  "sceKernelEnableSubIntr": "s32 sceKernelEnableSubIntr(M2C_UNK, M2C_UNK);",
   "sceUmdGetDriveStat": "void sceUmdGetDriveStat(void);",
+  "sceUmd_1A2485D2": "void sceUmd_1A2485D2(void);",
+  "sceUmd_3BA4EC53": "void sceUmd_3BA4EC53(void);",
+  "sceUmd_725DFB14": "s32 sceUmd_725DFB14(void);",
+  "sceUmd_7F40CC41": "s32 sceUmd_7F40CC41(void);",
   "sceUmd_D45D1FE6": "M2C_UNK sceUmd_D45D1FE6();"
  },
  "vars": {}

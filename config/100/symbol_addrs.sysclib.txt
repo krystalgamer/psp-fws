@@ -42,3 +42,9 @@ module_start = 0x00001B60; // type:func
 setjmp = 0x00001B84; // type:func
 longjmp = 0x00001BC0; // type:func
 wmemset = 0x00001C78; // type:func
+// shared names (tools/add_version.py) begin
+D_000022C1 = 0x00002101;
+D_00002350 = 0x00002190;
+func_00001CE4 = 0x00001B2C; // type:func rom:0x1BAC
+func_00001DC0 = 0x00001BFC; // type:func rom:0x1C7C
+// shared names (tools/add_version.py) end

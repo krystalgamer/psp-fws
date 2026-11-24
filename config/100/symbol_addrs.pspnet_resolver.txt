@@ -22,3 +22,15 @@ sceNetInetSocket = 0x0000209C; // type:func
 sceNetInetSocketAbort = 0x000020A4; // type:func
 sceNetInetGetErrno = 0x000020AC; // type:func
 sceNetInet_lib_AC9D90A5 = 0x000020B4; // type:func
+// shared names (tools/add_version.py) begin
+D_00001F78 = 0x00002348;
+D_00001F7C = 0x0000234C;
+func_000006D0 = 0x000005D0; // type:func rom:0x650
+func_0000070C = 0x0000060C; // type:func rom:0x68C
+func_00000F64 = 0x00000DE8; // type:func rom:0xE68
+func_000010C8 = 0x0000104C; // type:func rom:0x10CC
+func_000011E8 = 0x00001184; // type:func rom:0x1204
+func_000013E8 = 0x00001380; // type:func rom:0x1400
+func_000019A4 = 0x0000185C; // type:func rom:0x18DC
+func_00001B9C = 0x00001A50; // type:func rom:0x1AD0
+// shared names (tools/add_version.py) end

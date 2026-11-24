@@ -14,6 +14,12 @@ struct D_00003EC8_s {
     volatile s32 unk20;
 };
 
+extern M2C_UNK D_00002060;
+extern s32 D_000020D0;
+extern s32 D_000021CC;
+extern s32 D_000021E0;
+extern s32 D_000021EC;
+extern s32 D_000021F0;
 extern M2C_UNK D_00003D10;
 extern struct D_00003DB0_s D_00003DB0;
 extern s8 D_00003E14;
@@ -28,8 +34,13 @@ extern s32 D_00003EF8;
 s32 InitForKernel_7A2333AD();
 M2C_UNK InterruptManagerForKernel_D774BA45(M2C_UNK);
 M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);
+M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
 M2C_UNK SysMemForKernel_2F808748(void *, M2C_UNK, s32);
 s32 func_000009F8(void);
+s32 func_000016F4(void);
+s32 func_00001728(void);
+s32 func_00001748(void);
+s32 func_000023B8(void);
 s32 func_00002A64(void);
 s32 func_00002AA0(void);
 s32 func_00002B20(s32 arg0);
@@ -38,9 +49,11 @@ s32 module_start(void);
 s32 sceDisplayGetCurrentHcount(void);
 s32 sceDisplayGetFrameBuf(void *arg0, void *arg1, void *arg2, s32 arg3);
 void sceDisplayGetFramePerSec(void);
+s32 sceDisplayGetVcount(void);
 s32 sceDisplayIsForeground(void);
 s32 sceDisplayIsVblank(void);
 s32 sceDisplaySetFrameBuf(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+s32 sceDisplaySetHoldMode(s32 arg0);
 s32 sceDisplayWaitVblankStart(void);
 s32 sceDisplayWaitVblankStartCB(void);
 s32 sceDisplay_driver_206276C2(void);
@@ -63,6 +76,7 @@ s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);
 s32 sceKernelWaitEventFlagCB(s32, u32, s32, void *, void *);
 M2C_UNK sceLcdc_driver_3107417C();
 M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);
+M2C_UNK sceSysreg_driver_E88B77ED(M2C_UNK);
 M2C_UNK sceSysreg_driver_F6D83AD0(M2C_UNK);
 
 #endif

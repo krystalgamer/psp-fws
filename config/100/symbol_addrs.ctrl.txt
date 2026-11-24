@@ -47,3 +47,9 @@ sceKernelPowerTick = 0x00001524; // type:func
 sceSysEventForKernel_CD9E4BB5 = 0x0000152C; // type:func
 sceSysEventForKernel_D7D3FDCD = 0x00001534; // type:func
 sceSyscon_driver_3AC3D2A4 = 0x0000153C; // type:func
+// shared names (tools/add_version.py) begin
+D_00001D20 = 0x000018CC;
+D_00001D70 = 0x00001920;
+func_000001C0 = 0x00000178; // type:func
+func_00000804 = 0x00000698; // type:func
+// shared names (tools/add_version.py) end

@@ -47,10 +47,16 @@ struct Unk_sceMScm_driver_B01C378C_0 {
 extern s32 D_00007880;
 extern s32 D_00007AF4;
 
+void func_00000930(s32 arg0);
 s32 func_00000C1C(struct Unk_func_00000C1C_0 *arg0);
 s32 func_0000254C(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+s32 func_00004870(void);
+s32 func_0000488C(s32, s32);
 void func_00004E4C(void);
 s32 func_00004E68(s32 arg0, s32 arg1);
+s32 func_000052F4(void);
+s32 func_000053EC(void);
+s32 func_000059D8(void);
 s32 func_00006484(void);
 s32 func_0000648C(void);
 s32 func_00006494(struct Unk_func_00006494_0 *arg0);

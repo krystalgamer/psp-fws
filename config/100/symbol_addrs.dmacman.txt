@@ -35,3 +35,5 @@ sceKernelSetEventFlag = 0x00001CDC; // type:func
 sceKernelWaitEventFlag = 0x00001CE4; // type:func
 sceSuspendForKernel_91A77137 = 0x00001CEC; // type:func
 sceSuspendForKernel_B43D1A8C = 0x00001CF4; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

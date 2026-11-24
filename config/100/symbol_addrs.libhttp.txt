@@ -138,3 +138,21 @@ sceSsl_lib_69F1B678 = 0x0000D110; // type:func
 sceSsl_lib_3E3133D6 = 0x0000D118; // type:func
 sceSsl_lib_B7CA8717 = 0x0000D120; // type:func
 sceSsl_lib_B40D11EA = 0x0000D128; // type:func
+// shared names (tools/add_version.py) begin
+D_000173A4 = 0x0000D6FC;
+D_000173A8 = 0x0000D70C;
+D_000173B0 = 0x0000D94C;
+D_000173B8 = 0x0000D954;
+D_000173C0 = 0x0000D95C;
+D_000173C8 = 0x0000D964;
+D_000173D0 = 0x0000D99C;
+D_0001746C = 0x0000DA54;
+D_000179D0 = 0x0000DB14;
+func_000050F4 = 0x00008F34; // type:func
+func_000097A4 = 0x0000B514; // type:func
+func_00009CA4 = 0x0000B760; // type:func
+func_00009D54 = 0x0000B810; // type:func
+func_00015A10 = 0x0000C358; // type:func
+func_00015C90 = 0x0000C378; // type:func
+func_00016204 = 0x0000C8C8; // type:func
+// shared names (tools/add_version.py) end

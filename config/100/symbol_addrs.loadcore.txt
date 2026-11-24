@@ -54,3 +54,15 @@ sceMesgLed_driver_07E152BE = 0x0000616C; // type:func
 sceMesgLed_driver_67A5ECDF = 0x00006174; // type:func
 sceMesgLed_driver_951F4A5B = 0x0000617C; // type:func
 sceMesgLed_driver_9FC926A0 = 0x00006184; // type:func
+// shared names (tools/add_version.py) begin
+func_0000019C = 0x00000154; // type:func
+func_0000646C = 0x000053F0; // type:func
+func_000064E8 = 0x0000546C; // type:func
+func_00006550 = 0x000054D4; // type:func
+func_00006584 = 0x00005508; // type:func
+func_000065EC = 0x00005570; // type:func
+func_0000665C = 0x0000590C; // type:func
+func_00006688 = 0x00005938; // type:func
+func_000066B0 = 0x00005960; // type:func
+func_000066F0 = 0x000059A0; // type:func
+// shared names (tools/add_version.py) end

@@ -16,7 +16,12 @@ struct D_00002080_s {
     volatile s32 unk1D8;
 };
 
+extern s32 D_00002078;
 extern struct D_00002080_s D_00002080;
+extern s32 D_0000213C;
+extern s8 D_00002141;
+extern s8 D_00002142;
+extern s8 D_00002143;
 extern s32 D_00002198;
 extern u8 D_00002226;
 extern s32 D_0000225C;
@@ -24,6 +29,7 @@ extern s8 D_00002261;
 extern s8 D_00002262;
 extern s8 D_00002263;
 
+s32 func_00000AE4(void);
 s32 func_00000AF4(void);
 s32 func_0000134C(s32 arg0);
 s32 module_start(void);

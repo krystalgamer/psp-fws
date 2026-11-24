@@ -31,6 +31,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import auto_decomp as AD  # noqa: E402
 
 SYM = re.compile(r"\b(?:func|D|jtbl|L)_[0-9A-F]{8}\b|\.L[0-9A-F]{8}\b")
+AUTO = re.compile(r"(?:func|D|jtbl)_[0-9A-F]{8}")
 LINES = {}  # hash -> normalised lines (for similarity pairing)
 BEGIN, END = "// shared names (tools/add_version.py) begin", "// shared names (tools/add_version.py) end"
 
@@ -224,6 +225,8 @@ def main():
         def consistent(rs, ns):
             loc = {}
             for x, y in zip(rs, ns):
+                if (not AUTO.fullmatch(x) or not AUTO.fullmatch(y)) and x != y:
+                    return None
                 if mapping.get(y, x) != x or rev.get(x, y) != y or loc.get(y, x) != x:
                     return None
                 loc[y] = x
@@ -246,7 +249,9 @@ def main():
                     status[R[i1 + i][0]] = "modified"
                     nmap[N[j1 + j][0]] = R[i1 + i][0]
         for nn, rn in nmap.items():
-            if status[rn] == "modified" and mapping.get(nn, rn) == rn and rev.get(rn, nn) == nn:
+            if status[rn] == "modified" and (not AUTO.fullmatch(nn) or not AUTO.fullmatch(rn)) and nn != rn:
+                del status[rn]
+            elif status[rn] == "modified" and mapping.get(nn, rn) == rn and rev.get(rn, nn) == nn:
                 mapping[nn], rev[rn] = rn, nn
             elif status[rn] == "modified":
                 del status[rn]
@@ -260,6 +265,22 @@ def main():
             for m in re.finditer(r"/\* [0-9A-F]+ ([0-9A-F]{8})[^\n]*\*/[^\n]*\n?", p.read_text()[:400]):
                 nsyms[p.stem] = int(m[1], 16)
                 break
+        roms = {}
+        for p in (ROOT / "tmp/asm" / new / mod).rglob("*.s"):
+            for m in re.finditer(r"(?:glabel|dlabel|jlabel|alabel|nonmatching)\s+(\w+)[^\n]*\n(?:[^\n]*\n)*?\s*/\* ([0-9A-F]+) ([0-9A-F]{8})", p.read_text()):
+                roms.setdefault(m[1], (int(m[2], 16), int(m[3], 16)))
+        segs = []  # (name, vram start, vram end) of the code segments
+        for m in re.finditer(r"- name: (\w+)\n\s+type: code\n\s+start: (0x[0-9A-Fa-f]+)\n\s+vram: (0x[0-9A-Fa-f]+)\n(?:\s+bss_size: (0x[0-9A-Fa-f]+)\n)?", ntext):
+            segs.append([m[1], int(m[2], 16), int(m[3], 16), int(m[4] or "0", 16)])
+        starts = sorted(x[1] for x in segs) + [1 << 32]
+        seg_range = [(nm, vr, vr + (min(t for t in starts if t > st) - st if any(t > st for t in starts) else 0) + bss)
+                     for nm, st, vr, bss in segs]
+
+        def where(y, addr):
+            if y in roms and roms[y][1] == addr:
+                return f" rom:0x{roms[y][0]:X}"
+            inside = [nm for nm, lo, hi in seg_range if lo <= addr < hi]
+            return f" segment:{inside[-1]}" if len(inside) > 1 else ""
         lines = []
         canon_taken = set(mapping.values())
         for y, x in sorted(mapping.items()):
@@ -269,14 +290,16 @@ def main():
             addr = int(m[1], 16) if m else nsyms.get(y)
             if addr is None:
                 raise RuntimeError(f"no address for {y}")
-            t = " // type:func" if x.startswith("func_") or y.startswith("func_") else ""
-            lines.append(f"{x} = 0x{addr:08X};{t}")
+            t = " type:func" if x.startswith("func_") or y.startswith("func_") else ""
+            attrs = (t + where(y, addr)).strip()
+            lines.append(f"{x} = 0x{addr:08X};" + (f" // {attrs}" if attrs else ""))
         # auto names of NEW that collide with a canonical name used for another address
         for nn, _, _, _ in N:
             if nn in canon_taken and mapping.get(nn) != nn and nn not in rev.values():
                 m = re.fullmatch(r"(func|D|jtbl)_([0-9A-F]{8})", nn)
                 if m:
-                    lines.append(f"{nn}_v{nv} = 0x{m[2]};{' // type:func' if m[1] == 'func' else ''}")
+                    attrs = ((" type:func" if m[1] == "func" else "") + where(nn, int(m[2], 16))).strip()
+                    lines.append(f"{nn}_v{nv} = 0x{m[2]};" + (f" // {attrs}" if attrs else ""))
         body = sym0
         if BEGIN in body:
             body = body[:body.index(BEGIN)] + body[body.index(END) + len(END) + 1:]

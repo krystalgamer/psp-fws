@@ -16,6 +16,7 @@ struct Unk_func_00000A40_0 {
 
 
 s32 StdioForKernel_11A5127A(s32, s32);
+s32 StdioForKernel_36B23B8B(s32, s32);
 s32 StdioForKernel_4F78930A(s32, s32);
 s32 StdioForUser_0CBB0571(void);
 s32 StdioForUser_3054D478(void);
@@ -32,6 +33,7 @@ s32 func_00000AFC(s32, s32);
 s32 func_00000C78(void);
 void gets(s32 arg0);
 void putchar(s32 arg0);
+void puts(s32 arg0);
 s32 sceKernelRegisterStderrPipe(s32 arg0);
 s32 sceKernelRegisterStdoutPipe(s32 arg0);
 void syslib_D3744BE0(void);

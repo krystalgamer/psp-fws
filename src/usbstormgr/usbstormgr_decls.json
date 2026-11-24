@@ -4,6 +4,7 @@
   "func_0000019C": "s32 func_0000019C(struct Unk_func_0000019C_0 *arg0, struct Unk_func_0000019C_1 *arg1, s32 arg2);",
   "func_000001CC": "s32 func_000001CC(struct Unk_func_000001CC_0 *arg0, struct Unk_func_000001CC_1 *arg1, s32 arg2);",
   "func_000017C4": "s32 func_000017C4(void);",
+  "func_00003610": "void func_00003610(void);",
   "func_00003B58": "void func_00003B58(void);"
  },
  "types": {
@@ -16,6 +17,7 @@
   "Unk_func_000001CC_1": "struct Unk_func_000001CC_1 {\n    u8 pad0[0x1];\n    s8 unk1;\n    s8 unk2;\n    s8 unk3;\n};"
  },
  "vars": {
+  "D_00004B00": "extern M2C_UNK D_00004B00;",
   "D_00005150": "extern struct D_00005150_s D_00005150;"
  }
 }

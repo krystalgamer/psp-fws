@@ -1,5 +1,13 @@
 {
  "funcs": {
+  "func_00000804": "s32 func_00000804(s32, s32, s32);",
+  "func_000011E4": "s32 func_000011E4(void);",
+  "func_000011F0": "s32 func_000011F0(void);",
+  "func_000011FC": "s32 func_000011FC(void);",
+  "func_00001208": "s32 func_00001208(void);",
+  "func_00001214": "s32 func_00001214(void);",
+  "func_00001220": "s32 func_00001220(void);",
+  "func_00001298": "s32 func_00001298(s32, s32, s32);",
   "func_00001548": "s32 func_00001548(void);",
   "func_00001554": "s32 func_00001554(void);",
   "func_00001560": "s32 func_00001560(void);",
@@ -17,7 +25,8 @@
   "sceCtrl_driver_A88E8D22": "s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
   "sceCtrl_driver_AF5960F3": "s32 sceCtrl_driver_AF5960F3(void);",
   "sceCtrl_driver_B7CEAED4": "s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3);",
-  "sceCtrl_driver_E03956E9": "M2C_UNK sceCtrl_driver_E03956E9();"
+  "sceCtrl_driver_E03956E9": "M2C_UNK sceCtrl_driver_E03956E9();",
+  "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);"
  },
  "types": {
   "D_00001D70_s": "struct D_00001D70_s {\n    u8 pad0[0xA34];\n    volatile s32 unkA34;\n    volatile s32 unkA38;\n    volatile s32 unkA3C;\n    volatile s32 unkA40;\n};"
@@ -26,6 +35,8 @@
   "D_00001D70": "extern struct D_00001D70_s D_00001D70;",
   "D_00001D7F": "extern s8 D_00001D7F;",
   "D_00001D88": "extern s32 D_00001D88;",
+  "D_00002354": "extern s32 D_00002354;",
+  "D_00002358": "extern s32 D_00002358;",
   "D_000027A4": "extern s32 D_000027A4;",
   "D_000027A8": "extern s32 D_000027A8;",
   "D_000027AC": "extern s32 D_000027AC;",

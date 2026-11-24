@@ -55,3 +55,17 @@ sceNetAdhocMatchingDelete = 0x00001FE8; // type:func
 sceNetAdhocMatchingSelectTarget = 0x00001FF0; // type:func
 sceNetAdhocMatchingCancelTarget = 0x00001FF8; // type:func
 sceUtilityGetSystemParamString = 0x00002000; // type:func
+// shared names (tools/add_version.py) begin
+D_00003BEC = 0x00002368; // rom:0x23E8
+D_00003D64 = 0x000023CC;
+D_00003D90 = 0x000023F8;
+func_00001950 = 0x000012F4; // type:func
+func_00001CC8 = 0x00001704; // type:func rom:0x1784
+func_00001D24 = 0x00001760; // type:func rom:0x17E0
+func_00001D68 = 0x000017A4; // type:func rom:0x1824
+func_000020D4 = 0x00001BAC; // type:func
+func_00002118 = 0x00001BF0; // type:func rom:0x1C70
+func_00002150 = 0x00001C28; // type:func rom:0x1CA8
+func_000021C4 = 0x00001CA0; // type:func rom:0x1D20
+func_00001CC8_v100 = 0x00001CC8; // type:func rom:0x1D48
+// shared names (tools/add_version.py) end

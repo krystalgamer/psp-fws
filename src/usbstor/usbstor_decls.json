@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "func_00001A40": "void func_00001A40(void);",
   "func_00001BE4": "void func_00001BE4(void);"
  },
  "vars": {}

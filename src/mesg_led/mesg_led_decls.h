@@ -4,6 +4,8 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern s32 D_00002714;
+extern s32 D_00002718;
 extern s32 D_00006F94;
 extern s32 D_00006F98;
 

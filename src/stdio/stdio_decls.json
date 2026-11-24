@@ -1,6 +1,7 @@
 {
  "funcs": {
   "StdioForKernel_11A5127A": "s32 StdioForKernel_11A5127A(s32, s32);",
+  "StdioForKernel_36B23B8B": "s32 StdioForKernel_36B23B8B(s32, s32);",
   "StdioForKernel_4F78930A": "s32 StdioForKernel_4F78930A(s32, s32);",
   "StdioForUser_0CBB0571": "s32 StdioForUser_0CBB0571(void);",
   "StdioForUser_3054D478": "s32 StdioForUser_3054D478(void);",
@@ -17,6 +18,7 @@
   "func_00000C78": "s32 func_00000C78(void);",
   "gets": "void gets(s32 arg0);",
   "putchar": "void putchar(s32 arg0);",
+  "puts": "void puts(s32 arg0);",
   "sceKernelRegisterStderrPipe": "s32 sceKernelRegisterStderrPipe(s32 arg0);",
   "sceKernelRegisterStdoutPipe": "s32 sceKernelRegisterStdoutPipe(s32 arg0);",
   "syslib_D3744BE0": "void syslib_D3744BE0(void);"

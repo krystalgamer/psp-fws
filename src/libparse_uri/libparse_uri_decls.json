@@ -1,10 +1,16 @@
 {
  "funcs": {
+  "func_0000181C": "M2C_UNK *func_0000181C(void);",
+  "func_000018A0": "u8 *func_000018A0(u8 *arg0, u8 *arg1, s32 arg2);",
   "func_00001B98": "M2C_UNK *func_00001B98(void);",
   "func_00001C24": "u8 *func_00001C24(u8 *arg0, u8 *arg1, s32 arg2);",
-  "func_000021BC": "u8 *func_000021BC(u8 *arg0, u8 *arg1);"
+  "func_00001DE4": "u8 *func_00001DE4(u8 *arg0, u8 *arg1);",
+  "func_000021BC": "u8 *func_000021BC(u8 *arg0, u8 *arg1);",
+  "module_start": "s32 module_start(void);",
+  "module_stop": "s32 module_stop(void);"
  },
  "vars": {
+  "D_00002A19": "extern M2C_UNK D_00002A19;",
   "D_00002E11": "extern M2C_UNK D_00002E11;"
  }
 }

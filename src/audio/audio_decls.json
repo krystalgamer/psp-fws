@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "func_0000243C": "s32 func_0000243C(s32, s32, s32);",
   "func_000029D4": "s32 func_000029D4(s32, s32, s32);",
   "sceAudioInput": "s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2);",
   "sceAudioOutput2OutputBlocking": "s32 sceAudioOutput2OutputBlocking(s32 arg0, void *arg1);",
@@ -7,7 +8,14 @@
   "sceAudioOutput2Reserve": "s32 sceAudioOutput2Reserve(s32 arg0);",
   "sceAudio_38553111": "s32 sceAudio_38553111(s32, s32, s32);",
   "sceAudio_5C37C0AE": "s32 sceAudio_5C37C0AE(void);",
-  "sceAudio_E0727056": "s32 sceAudio_E0727056(s32, s32);"
+  "sceAudio_E0727056": "s32 sceAudio_E0727056(s32, s32);",
+  "sceAudio_driver_927AC32B": "s32 sceAudio_driver_927AC32B(s32 arg0);",
+  "sceCodec_driver_EEB91526": "M2C_UNK sceCodec_driver_EEB91526(s32);",
+  "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);"
  },
- "vars": {}
+ "vars": {
+  "D_0000339D": "extern s8 D_0000339D;",
+  "D_000033B5": "extern s8 D_000033B5;"
+ }
 }

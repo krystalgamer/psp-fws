@@ -20,7 +20,9 @@ struct Unk_func_00000EB4_temp_s1 {
 };
 
 
+void func_00000D48(void *arg0, s32 arg1);
 void func_00000EB4(struct Unk_func_00000EB4_0 *arg0, s32 arg1);
+s32 module_stop(void);
 s32 sceKernelDcacheInvalidateRange(void *, u32);
 M2C_UNK sceMePower_driver_05B2C420(M2C_UNK);
 M2C_UNK sceMePower_driver_B6FE3E62(M2C_UNK);

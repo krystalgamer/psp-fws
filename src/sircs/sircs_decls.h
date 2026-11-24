@@ -16,6 +16,11 @@ struct Unk_func_000018E4_0 {
     s32 unk4C;
 };
 
+extern s32 D_00002050;
+extern s32 D_00002100;
+extern s32 D_00002140;
+extern s32 D_00002148;
+extern s32 D_00002160;
 extern M2C_UNK D_000026A8;
 extern M2C_UNK D_000026E0;
 extern s32 D_00002724;
@@ -27,11 +32,19 @@ extern M2C_UNK func_00002044;
 
 M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);
 M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);
+void func_000004D8(void);
+void func_00000518(void);
+s32 func_00000554(void);
 void func_00000894(void);
 void func_000008D4(void);
 s32 func_00000910(void);
 s32 func_000009F4(void);
+s32 func_000011F8(void *arg0);
+s32 func_00001394(void);
 s32 func_000013F0(void);
+s32 func_000014F8(void);
+void func_00001524(void);
+void func_00001540(void);
 s32 func_00001718(void);
 s32 func_000018E4(struct Unk_func_000018E4_0 *arg0);
 s32 func_000019C0(void);

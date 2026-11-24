@@ -19,6 +19,8 @@ struct Unk_func_00000180_0 {
 
 void func_0000015C(struct Unk_func_0000015C_0 *arg0);
 void func_00000180(struct Unk_func_00000180_0 *arg0);
+void func_00000D64(void);
+M2C_UNK func_00000DE8();
 void func_0000104C(void);
 M2C_UNK func_000010D0();
 s32 module_stop(void);

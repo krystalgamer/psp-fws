@@ -5,6 +5,8 @@
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);"
  },
  "vars": {
+  "D_00002714": "extern s32 D_00002714;",
+  "D_00002718": "extern s32 D_00002718;",
   "D_00006F94": "extern s32 D_00006F94;",
   "D_00006F98": "extern s32 D_00006F98;"
  }

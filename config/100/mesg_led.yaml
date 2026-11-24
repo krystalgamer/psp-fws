@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, mesg_led]
+      - [0x80, c, mesg_led]
       - { start: 0x1894, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x18C4, type: prxpad, order: .text }
       - { start: 0x18D0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -61,7 +61,7 @@ segments:
       - { start: 0x199C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x19D0, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x1B80, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x1B98, rodata, mesg_led]
+      - [0x1B98, .rodata, mesg_led]
       - { start: 0x23D0, type: prxpad, order: .rodata }
   - name: mesg_led_seg1
     type: code

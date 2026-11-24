@@ -1,6 +1,9 @@
 {
  "funcs": {
+  "LflashFatfmt_B7A424A4": "void LflashFatfmt_B7A424A4(void);",
+  "sceImpose_driver_9C8C6C81": "M2C_UNK sceImpose_driver_9C8C6C81(M2C_UNK);",
   "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
+  "sceVshBridge_driver_39B14120": "s32 sceVshBridge_driver_39B14120(void);",
   "sceVshBridge_driver_92A3B940": "s32 sceVshBridge_driver_92A3B940(void);"
  },
  "vars": {

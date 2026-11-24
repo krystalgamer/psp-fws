@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, usbstor]
+      - [0x80, c, usbstor]
       - { start: 0x217C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x225C, type: prxpad, order: .text }
       - { start: 0x2260, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x233C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x2370, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x249C, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x250C, rodata, usbstor]
+      - [0x250C, .rodata, usbstor]
   - name: usbstor_seg1
     type: code
     start: 0x28E0

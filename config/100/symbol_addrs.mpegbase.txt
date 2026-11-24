@@ -25,3 +25,27 @@ sceDmacplus_driver_BE693828 = 0x00001328; // type:func
 sceDmacplus_driver_AB49D2CB = 0x00001330; // type:func
 sceMeWrapper_driver_3D5F109C = 0x00001338; // type:func
 sceSysreg_driver_E2A5D1EE = 0x00001340; // type:func
+// shared names (tools/add_version.py) begin
+D_00002010 = 0x00001590;
+D_0000203C = 0x000015BC;
+D_00002080 = 0x000015D0;
+D_000020A0 = 0x000015F0;
+D_00002710 = 0x000015F4;
+D_00002740 = 0x00001C88;
+func_00000C04 = 0x00000838; // type:func
+func_00000C54 = 0x00000888; // type:func
+func_00000C7C = 0x000008B0; // type:func
+func_00000CA4 = 0x000008D8; // type:func
+func_00000CC8 = 0x000008FC; // type:func
+func_000014C0 = 0x00000BB4; // type:func
+func_00001500 = 0x00000BF0; // type:func
+func_00001528 = 0x00000C18; // type:func
+func_00001550 = 0x00000C40; // type:func
+func_00001574 = 0x00000C64; // type:func
+func_00001B98 = 0x00001138; // type:func
+func_00001BD4 = 0x00001174; // type:func
+func_00001BFC = 0x0000119C; // type:func
+func_00001C24 = 0x000011C4; // type:func
+func_00001C48 = 0x000011E8; // type:func
+func_00001C6C = 0x0000120C; // type:func
+// shared names (tools/add_version.py) end

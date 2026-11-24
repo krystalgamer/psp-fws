@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "func_00000AE4": "s32 func_00000AE4(void);",
   "func_00000AF4": "s32 func_00000AF4(void);",
   "func_0000134C": "s32 func_0000134C(s32 arg0);",
   "module_start": "s32 module_start(void);",
@@ -24,7 +25,12 @@
   "D_00002080_s": "struct D_00002080_s {\n    u8 pad0[0x120];\n    volatile s32 unk120;\n    u8 pad124[0xA0];\n    volatile s32 unk1C4;\n    volatile s32 unk1C8;\n    volatile s32 unk1CC;\n    volatile s32 unk1D0;\n    volatile s32 unk1D4;\n    volatile s32 unk1D8;\n};"
  },
  "vars": {
+  "D_00002078": "extern s32 D_00002078;",
   "D_00002080": "extern struct D_00002080_s D_00002080;",
+  "D_0000213C": "extern s32 D_0000213C;",
+  "D_00002141": "extern s8 D_00002141;",
+  "D_00002142": "extern s8 D_00002142;",
+  "D_00002143": "extern s8 D_00002143;",
   "D_00002198": "extern s32 D_00002198;",
   "D_00002226": "extern u8 D_00002226;",
   "D_0000225C": "extern s32 D_0000225C;",

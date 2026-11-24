@@ -6,6 +6,7 @@
 
 
 s32 func_00000AF8(void);
+s32 module_stop(void);
 s32 sceAudiocodec_driver_62518B7E(void);
 
 #endif

@@ -5,3 +5,25 @@ sceUriParse = 0x000003C4; // type:func
 sceUriBuild = 0x00000770; // type:func
 module_start = 0x000017A0; // type:func
 module_stop = 0x000017A8; // type:func
+// shared names (tools/add_version.py) begin
+D_00002A98 = 0x00002698;
+D_00002BAC = 0x000027B0;
+D_00002C20 = 0x0000281C;
+D_00002E10 = 0x00002A18;
+func_00001B2C = 0x000017B0; // type:func
+func_00001B58 = 0x000017DC; // type:func
+func_00001B84 = 0x00001808; // type:func
+func_00001BA4 = 0x00001828; // type:func
+func_00001C58 = 0x000018D4; // type:func
+func_00001C84 = 0x00001900; // type:func
+func_00001D24 = 0x000019A0; // type:func
+func_00001DA4 = 0x00001A20; // type:func
+func_00001E80 = 0x00001AF8; // type:func
+func_00001EC8 = 0x00001B40; // type:func
+func_00001EFC = 0x00001B74; // type:func
+func_00001F64 = 0x00001BDC; // type:func
+func_00002144 = 0x00001DB4; // type:func
+func_000021F4 = 0x00001E1C; // type:func
+func_00002240 = 0x00001E68; // type:func
+func_00002984 = 0x000025C4; // type:func
+// shared names (tools/add_version.py) end

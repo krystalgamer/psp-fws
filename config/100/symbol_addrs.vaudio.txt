@@ -22,3 +22,6 @@ sceAudio_driver_E0727056 = 0x000006BC; // type:func
 scePEQ_FC45514B = 0x000006C4; // type:func
 scePEQ_F7EA0632 = 0x000006CC; // type:func
 scePEQ_ED13C3B5 = 0x000006D4; // type:func
+// shared names (tools/add_version.py) begin
+D_00000D9C = 0x0000089C; // rom:0x91C
+// shared names (tools/add_version.py) end

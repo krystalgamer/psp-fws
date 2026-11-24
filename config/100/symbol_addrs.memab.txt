@@ -18,3 +18,10 @@ sceKernelSignalSema = 0x000026D0; // type:func
 sceKernelWaitSema = 0x000026D8; // type:func
 sceIdStorageLookup = 0x000026E0; // type:func
 semaphore_4C537C72 = 0x000026E8; // type:func
+// shared names (tools/add_version.py) begin
+func_000005A4 = 0x00000558; // type:func
+func_000005F8 = 0x000005AC; // type:func
+func_00000648 = 0x000005FC; // type:func
+func_00000708 = 0x000006BC; // type:func
+func_000008C4 = 0x00000878; // type:func
+// shared names (tools/add_version.py) end

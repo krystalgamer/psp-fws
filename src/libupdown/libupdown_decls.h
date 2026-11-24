@@ -10,6 +10,8 @@ M2C_UNK func_00000564();
 M2C_UNK func_00000D70();
 M2C_UNK func_0000191C(s32);
 void func_0000258C(void);
+s32 module_start(void);
+s32 module_stop(void);
 M2C_UNK sceKernelGetSystemTimeLow();
 s32 sceLibUpdateDL_88FF3935(s32 arg0);
 void sceLibUpdateDL_B5DB018D(s32 arg0);

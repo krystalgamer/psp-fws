@@ -1,20 +1,11 @@
 #include "common.h"
 #include "chnnlsv_decls.h"
 
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/chnnlsv", func_00000000);
+#endif
 
-INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019A0);
-
-INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019B0);
-
-INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019C0);
-
-INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019D0);
-
-INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019E0);
-
-INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019F0);
-
+#if FW_VERSION == 100
 s32 module_start(void) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -34,6 +25,57 @@ s32 module_start(void) {
     }
     return var_v1;
 }
+#endif
+
+#if FW_VERSION != 100
+INCLUDE_ASM("nonmatchings/chnnlsv", func_00000000);
+#endif
+
+#if FW_VERSION != 100
+INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019A0);
+#endif
+
+#if FW_VERSION != 100
+INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019B0);
+#endif
+
+#if FW_VERSION != 100
+INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019C0);
+#endif
+
+#if FW_VERSION != 100
+INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019D0);
+#endif
+
+#if FW_VERSION != 100
+INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019E0);
+#endif
+
+#if FW_VERSION != 100
+INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019F0);
+#endif
+
+#if FW_VERSION != 100
+s32 module_start(void) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_v1;
+
+    temp_v0 = sceKernelCreateSema("SceChnnlsv1", 0U, 1, 1, NULL);
+    D_00002AD4 = temp_v0;
+    var_v1 = 1;
+    if (temp_v0 > 0) {
+        temp_v0_2 = sceKernelCreateSema("SceChnnlsv2", 0U, 1, 1, NULL);
+        D_00002AD8 = temp_v0_2;
+        var_v1 = 0;
+        if (temp_v0_2 <= 0) {
+            sceKernelDeleteSema(D_00002AD4);
+            var_v1 = 1;
+        }
+    }
+    return var_v1;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/chnnlsv", module_stop);
 

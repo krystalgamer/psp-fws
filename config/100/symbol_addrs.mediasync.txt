@@ -21,3 +21,7 @@ sceUmdWaitDriveStat = 0x0000057C; // type:func
 sceUmdGetErrorStat = 0x00000584; // type:func
 sceUmdRegisterUMDCallBack = 0x0000058C; // type:func
 sceUmdUnRegisterUMDCallBack = 0x00000594; // type:func
+// shared names (tools/add_version.py) begin
+D_00006E10 = 0x000007E0;
+D_00006E38 = 0x00000820;
+// shared names (tools/add_version.py) end

@@ -31,3 +31,6 @@ sceAudiocodec_5B37EB1D = 0x000036B4; // type:func
 sceAudiocodec_70A703F8 = 0x000036BC; // type:func
 sceAudiocodec_3A20A200 = 0x000036C4; // type:func
 sceAudiocodec_29681260 = 0x000036CC; // type:func
+// shared names (tools/add_version.py) begin
+D_00003810 = 0x000038A0;
+// shared names (tools/add_version.py) end

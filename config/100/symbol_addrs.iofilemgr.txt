@@ -90,3 +90,21 @@ sceKernelPowerLock = 0x00003EEC; // type:func
 sceSuspendForKernel_B53B2147 = 0x00003EF4; // type:func
 sceKernelPowerUnlock = 0x00003EFC; // type:func
 sceSuspendForKernel_C7C928C7 = 0x00003F04; // type:func
+// shared names (tools/add_version.py) begin
+D_00005118 = 0x000045C8;
+D_00005130 = 0x000045F8;
+D_0000563C = 0x00004C48;
+D_00005650 = 0x00004C5C;
+func_00001A24 = 0x00003000; // type:func
+func_00001AA8 = 0x00003088; // type:func
+func_00001AE4 = 0x000030C4; // type:func
+func_00001B50 = 0x00003134; // type:func
+func_00001BC4 = 0x00003234; // type:func
+func_00001C00 = 0x00003270; // type:func
+func_00001C6C = 0x000032E0; // type:func
+func_000022D8 = 0x00003654; // type:func
+func_00002328 = 0x000036A4; // type:func
+func_000028C0 = 0x00003B6C; // type:func
+func_00002960 = 0x00003C08; // type:func
+func_000029D8 = 0x00003C80; // type:func
+// shared names (tools/add_version.py) end

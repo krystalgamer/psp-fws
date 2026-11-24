@@ -49,18 +49,28 @@ struct Unk_func_000026B0_0 {
     s32 unk48;
 };
 
+extern s32 D_00003088;
 extern struct D_00006B80_s D_00006B80;
 
+M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
 s32 func_00000000(s32);
 s32 func_00000194(M2C_UNK);
 s32 func_00000234(s32 arg0, M2C_UNK arg1);
+s32 func_000002D8(void *arg0);
+s32 func_0000035C(s32 *arg0);
+s32 func_000003A4(s32 *arg0);
+s32 func_00000424(s32 *arg0);
 s32 func_00000570(struct Unk_func_00000570_0 *arg0, struct Unk_func_00000570_1 *arg1);
 s32 func_00001908(struct Unk_func_00001908_0 *arg0);
 s32 func_0000198C(s32 *arg0);
+s32 func_00001B78(s32);
 s32 func_000026B0(struct Unk_func_000026B0_0 *arg0);
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelDeleteSema(s32);
+s32 sceKernelSignalSema(s32, s32);
+s32 sceKernelWaitSema(s32, s32, void *);
+s32 sceMSAudio_driver_135F2225(u32 arg0);
 M2C_UNK sceMSAudio_driver_3872FBE5();
 s32 sceMSAudio_driver_67E58C07(void);
 s32 sceMSAudio_driver_DA34AB8F(void);

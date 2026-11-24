@@ -33,3 +33,19 @@ sceUsbstor_internal_FC4D0080 = 0x000018CC; // type:func
 sceUsbstor_internal_489E6BF1 = 0x000018D4; // type:func
 sceUsbstor_internal_2CAFEFF1 = 0x000018DC; // type:func
 sceUsbstor_internal_50F99EAD = 0x000018E4; // type:func
+// shared names (tools/add_version.py) begin
+D_00001B60 = 0x00001B58; // rom:0x1BD8
+D_00001B70 = 0x00001B68; // rom:0x1BE8
+D_00001B90 = 0x00001B88; // rom:0x1C08
+D_00001BB4 = 0x00001BAC; // rom:0x1C2C
+D_00001BD8 = 0x00001BD0; // rom:0x1C50
+func_00000530 = 0x00000524; // type:func rom:0x5A4
+func_000005B8 = 0x000005AC; // type:func
+func_000007B0 = 0x00000790; // type:func
+func_00001068 = 0x0000103C; // type:func rom:0x10BC
+func_00001128 = 0x000010FC; // type:func rom:0x117C
+func_00001234 = 0x000011FC; // type:func rom:0x127C
+func_000012B4 = 0x00001278; // type:func rom:0x12F8
+func_0000137C = 0x00001334; // type:func rom:0x13B4
+func_00001754 = 0x00001740; // type:func rom:0x17C0
+// shared names (tools/add_version.py) end
