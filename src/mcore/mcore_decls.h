@@ -167,6 +167,7 @@ s32 func_00020318(void *arg0, s32 arg1, s32 arg2);
 s32 func_00020354(void *arg0, s32 arg1);
 s32 func_00020398(void *arg0, s32 arg1, s32 arg2);
 s32 func_000203D4(void *arg0, s32 arg1);
+s32 func_00020418(s8 arg0, void *arg1);
 M2C_UNK func_00020A00(M2C_UNK, s32);
 M2C_UNK func_00020CA0(M2C_UNK, M2C_UNK, s32, s16);
 void func_00021194(s32 arg0, M2C_UNK arg1);

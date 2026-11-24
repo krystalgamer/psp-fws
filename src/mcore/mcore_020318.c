@@ -54,7 +54,11 @@ s32 func_000203D4(void *arg0, s32 arg1) {
     return var_a3;
 }
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_00020418);
+s32 func_00020418(s8 arg0, void *arg1) {
+    M2C_FIELD(arg1, s8 *, 0) = 2;
+    M2C_FIELD(arg1, s8 *, 2) = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_0002042C);
 
