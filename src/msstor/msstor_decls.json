@@ -58,6 +58,8 @@
  "types": {
   "D_000099D4_s": "struct D_000099D4_s {\n    s32 unk0;\n    u8 pad4[0x14];\n    s32 unk18;\n    u8 pad1C[0x8];\n    s32 unk24;\n    s32 unk28;\n};",
   "D_00009B54_s": "struct D_00009B54_s {\n    u8 pad0[0x4E88];\n    s32 unk4E88;\n};",
+  "Unk_D_00009888": "struct Unk_D_00009888 {\n    u8 pad0[0x4];\n    s32 (*unk4)(void *, s32, M2C_UNK, M2C_UNK);\n    u8 pad8[0x8];\n    M2C_UNK (*unk10)(void *);\n    M2C_UNK (*unk14)(void *);\n    M2C_UNK (*unk18)(void *);\n};",
+  "Unk_D_00009B50": "struct Unk_D_00009B50 {\n    u8 pad0[0x4];\n    s32 unk4;\n    u8 pad8[0x10];\n    s32 unk18;\n    s32 unk1C;\n};",
   "Unk_func_00001558_0": "struct Unk_func_00001558_0 {\n    u8 pad0[0x4E60];\n    s32 unk4E60;\n};",
   "Unk_func_00004E2C_0": "struct Unk_func_00004E2C_0 {\n    u8 pad0[0x4];\n    M2C_UNK * unk4;\n};",
   "Unk_func_000075DC_0": "struct Unk_func_000075DC_0 {\n    u8 pad0[0x20];\n    s32 unk20;\n    s32 unk24;\n};",
@@ -68,10 +70,10 @@
  "vars": {
   "D_00009248": "extern M2C_UNK D_00009248;",
   "D_00009264": "extern M2C_UNK D_00009264;",
-  "D_00009888": "extern void *D_00009888;",
+  "D_00009888": "extern struct Unk_D_00009888 *D_00009888;",
   "D_000098DC": "extern M2C_UNK D_000098DC;",
   "D_000099D4": "extern struct D_000099D4_s D_000099D4;",
-  "D_00009B50": "extern void *D_00009B50;",
+  "D_00009B50": "extern struct Unk_D_00009B50 *D_00009B50;",
   "D_00009B54": "extern struct D_00009B54_s D_00009B54;"
  }
 }

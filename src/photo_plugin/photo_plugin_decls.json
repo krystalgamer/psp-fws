@@ -305,6 +305,8 @@
   "vsh_81BBD0D1": "s32 vsh_81BBD0D1(void *, M2C_UNK *);"
  },
  "types": {
+  "Unk_D_00031B40": "struct Unk_D_00031B40 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
+  "Unk_D_00031B84": "struct Unk_D_00031B84 {\n    u8 pad0[0x4C];\n    s32 unk4C;\n};",
   "Unk_func_00003D94_0": "struct Unk_func_00003D94_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
   "Unk_func_00003DB0_0": "struct Unk_func_00003DB0_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
   "Unk_func_00003DCC_0": "struct Unk_func_00003DCC_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    u8 pad8[0x8];\n    s32 unk10;\n    u8 pad14[0x10];\n    s32 unk24;\n};",
@@ -429,8 +431,8 @@
   "D_000316C0": "extern M2C_UNK D_000316C0;",
   "D_00031AEC": "extern s32 D_00031AEC;",
   "D_00031B30": "extern s32 D_00031B30;",
-  "D_00031B40": "extern s32 D_00031B40;",
-  "D_00031B84": "extern void *D_00031B84;",
+  "D_00031B40": "extern struct Unk_D_00031B40 *D_00031B40;",
+  "D_00031B84": "extern struct Unk_D_00031B84 *D_00031B84;",
   "D_00031BB9": "extern u8 D_00031BB9;",
   "D_00031BE4": "extern s8 D_00031BE4;",
   "D_00031BE8": "extern s32 D_00031BE8;",

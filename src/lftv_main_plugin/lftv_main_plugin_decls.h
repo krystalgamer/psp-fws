@@ -9,6 +9,77 @@ struct D_0005EEA0_s {
     s32 unk160;
 };
 
+struct Unk_D_0005F10C {
+    u8 pad0[0x34];
+    s8 unk34;
+};
+
+struct Unk_D_0005F114 {
+    u8 pad0[0x24];
+    s32 unk24;
+};
+
+struct Unk_D_0005F118 {
+    u8 pad0[0x20];
+    s8 unk20;
+};
+
+struct Unk_D_0005F11C {
+    u8 pad0[0x1C];
+    u8 unk1C;
+};
+
+struct Unk_D_0005F7B4 {
+    u8 pad0[0x1C];
+    s8 unk1C;
+};
+
+struct Unk_D_0005F7B8 {
+    u8 pad0[0x28];
+    u8 unk28;
+};
+
+struct Unk_D_0005F7C8 {
+    u8 pad0[0x28];
+    s8 unk28;
+    u8 pad29[0xCB];
+    s32 unkF4;
+};
+
+struct Unk_D_0005F82C {
+    u8 pad0[0x20];
+    s32 unk20;
+};
+
+struct Unk_D_0005F858 {
+    u8 pad0[0xC];
+    u8 unkC;
+};
+
+struct Unk_D_0005F85C {
+    u8 pad0[0xC];
+    u8 unkC;
+    u8 padD[0xF];
+    void *unk1C;
+};
+
+struct Unk_D_0005F860 {
+    u8 pad0[0x1C];
+    s8 unk1C;
+};
+
+struct Unk_D_0005F870 {
+    u8 pad0[0x1C];
+    s8 unk1C;
+};
+
+struct Unk_D_0005F8E8 {
+    u8 pad0[0x4];
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+};
+
 struct Unk_func_00000F60_0 {
     M2C_UNK * unk0;
     u8 pad4[0xB0];
@@ -1399,31 +1470,31 @@ extern void *D_0005EED8;
 extern void *D_0005EEE4;
 extern M2C_UNK D_0005F028;
 extern s32 D_0005F104;
-extern void *D_0005F10C;
+extern struct Unk_D_0005F10C *D_0005F10C;
 extern s32 D_0005F110;
-extern void *D_0005F114;
-extern void *D_0005F118;
-extern s32 D_0005F11C;
+extern struct Unk_D_0005F114 *D_0005F114;
+extern struct Unk_D_0005F118 *D_0005F118;
+extern struct Unk_D_0005F11C *D_0005F11C;
 extern s32 D_0005F7B0;
-extern void *D_0005F7B4;
-extern void *D_0005F7B8;
-extern void *D_0005F7C8;
+extern struct Unk_D_0005F7B4 *D_0005F7B4;
+extern struct Unk_D_0005F7B8 *D_0005F7B8;
+extern struct Unk_D_0005F7C8 *D_0005F7C8;
 extern void *D_0005F7D4;
 extern s32 D_0005F7D8;
-extern s32 D_0005F82C;
+extern struct Unk_D_0005F82C *D_0005F82C;
 extern s32 D_0005F834;
 extern s32 D_0005F83C;
 extern s32 D_0005F840;
 extern void *D_0005F848;
 extern s32 D_0005F850;
-extern void *D_0005F858;
-extern s32 D_0005F85C;
-extern s32 D_0005F860;
+extern struct Unk_D_0005F858 *D_0005F858;
+extern struct Unk_D_0005F85C *D_0005F85C;
+extern struct Unk_D_0005F860 *D_0005F860;
 extern s32 D_0005F868;
 extern s32 D_0005F86C;
-extern void *D_0005F870;
+extern struct Unk_D_0005F870 *D_0005F870;
 extern s32 D_0005F874;
-extern void *D_0005F8E8;
+extern struct Unk_D_0005F8E8 *D_0005F8E8;
 extern s32 D_0005F8F4;
 extern s32 D_0005F940;
 extern s32 D_0005F9D4;

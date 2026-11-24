@@ -383,11 +383,11 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_000030DC);
 
 void func_00003168(void) {
-    M2C_FIELD(D_000A4074, s32 *, 0x18) = 0;
+    D_000A4074->unk18 = 0;
 }
 
 void func_00003178(void) {
-    M2C_FIELD(D_000A4074, s32 *, 0x1C) = 0;
+    D_000A4074->unk1C = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_00003188);
@@ -478,7 +478,7 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_00003B68);
 
 void func_00003BD4(void) {
-    M2C_FIELD(D_000A423C, M2C_UNK (**)(M2C_UNK), 0x10)(0xD);
+    D_000A423C->unk10(0xD);
     sceVshCommonGui_441D55D7(0);
     D_000A4234 = 0;
 }

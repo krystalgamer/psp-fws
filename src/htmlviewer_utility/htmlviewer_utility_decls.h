@@ -15,6 +15,11 @@ struct D_00006F28_s {
     s32 unk8;
 };
 
+struct Unk_D_000060E4 {
+    u8 pad0[0x1C];
+    s32 unk1C;
+};
+
 struct Unk_func_00003FC0_0 {
     s32 unk0;
     s32 unk4;
@@ -23,7 +28,7 @@ struct Unk_func_00003FC0_0 {
 
 extern s8 D_00005FC4;
 extern u8 D_00005FC5;
-extern void *D_000060E4;
+extern struct Unk_D_000060E4 *D_000060E4;
 extern struct D_0000616C_s D_0000616C;
 extern s32 D_00006300;
 extern s32 D_00006304;

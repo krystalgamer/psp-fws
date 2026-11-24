@@ -63,7 +63,7 @@ s32 func_00000E24(void) {
 
     var_v0 = -1;
     if (D_00065E04 != NULL) {
-        var_v0 = M2C_FIELD(D_00065E04, s32 *, 0x2C);
+        var_v0 = D_00065E04->unk2C;
     }
     return var_v0;
 }

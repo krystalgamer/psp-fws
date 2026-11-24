@@ -91,9 +91,38 @@ struct D_001E0ECC_s {
     volatile s32 unkA820;
 };
 
+struct Unk_D_001A4E1C {
+    u8 pad0[0x98];
+    s32 unk98;
+};
+
+struct Unk_D_001A7EE0 {
+    u8 pad0[0xE0];
+    s32 (*unkE0)(void *, s32);
+    M2C_UNK (*unkE4)(void *, s32, s32, s32, M2C_UNK);
+    u8 padE8[0x4];
+    s32 (*unkEC)(void *, s32);
+};
+
+struct Unk_D_001D7A54 {
+    s32 unk0;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+};
+
 struct Unk_D_001E0ECC_s_1ABC {
     u8 pad0[0x2];
     u16 unk2;
+};
+
+struct Unk_D_001E2988 {
+    u8 pad0[0x4];
+    u16 unk4;
+    u8 pad6[0x2];
+    u16 unk8;
+    u8 padA[0x32];
+    s16 unk3C;
 };
 
 struct Unk_TIFFCheckpointDirectory_0 {
@@ -4282,7 +4311,7 @@ extern s32 D_001A482C;
 extern s32 D_001A4930;
 extern s32 D_001A4934;
 extern s32 D_001A4BF4;
-extern s32 D_001A4E1C;
+extern struct Unk_D_001A4E1C *D_001A4E1C;
 extern u32 *D_001A4E30;
 extern s32 D_001A4E34;
 extern s32 D_001A4E38;
@@ -4343,7 +4372,7 @@ extern s32 D_001A7E18;
 extern s32 D_001A7E20;
 extern s32 D_001A7E24;
 extern struct D_001A7E2C_s D_001A7E2C;
-extern void *D_001A7EE0;
+extern struct Unk_D_001A7EE0 *D_001A7EE0;
 extern M2C_UNK D_001ABCF0;
 extern M2C_UNK D_001ABCF4;
 extern s32 D_001ABCF8;
@@ -4358,7 +4387,7 @@ extern s32 D_001D77A0;
 extern s32 D_001D7A04;
 extern struct D_001D7A10_s D_001D7A10;
 extern s32 D_001D7A3C;
-extern void *D_001D7A54;
+extern struct Unk_D_001D7A54 *D_001D7A54;
 extern s32 D_001D7A58;
 extern s32 D_001D7A64;
 extern s32 D_001D7A68;
@@ -4366,7 +4395,7 @@ extern struct D_001E0ECC_s D_001E0ECC;
 extern M2C_UNK D_001E208C;
 extern s16 D_001E279A;
 extern s16 D_001E27A2;
-extern void *D_001E2988;
+extern struct Unk_D_001E2988 *D_001E2988;
 extern s16 D_001E4FC6;
 extern M2C_UNK D_001E504A;
 extern s16 D_001E50B0;

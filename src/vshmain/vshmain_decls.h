@@ -16,6 +16,22 @@ struct D_00030398_s {
     volatile s32 unk20;
 };
 
+struct Unk_D_0003089C {
+    u8 pad0[0x84];
+    s32 unk84;
+    u8 pad88[0x18];
+    s32 unkA0;
+    s32 unkA4;
+    u8 padA8[0x8];
+    s32 unkB0;
+    u8 padB4[0x18];
+    u8 unkCC;
+    u8 padCD[0x3DF];
+    void *unk4AC;
+    u8 pad4B0[0x70];
+    s32 unk520;
+};
+
 struct Unk_func_00002760_temp_v0 {
 
 };
@@ -361,7 +377,7 @@ extern u8 D_00030464;
 extern s32 D_00030468;
 extern M2C_UNK D_0003046C;
 extern s32 D_0003086C;
-extern void *D_0003089C;
+extern struct Unk_D_0003089C *D_0003089C;
 extern s32 D_000308B4;
 extern s32 D_000308B8;
 extern s32 D_000308BC;

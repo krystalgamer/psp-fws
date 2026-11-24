@@ -4,6 +4,27 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_D_000B5FC0 {
+    u8 pad0[0x10];
+    u8 unk10;
+};
+
+struct Unk_D_000B5FD4 {
+    u8 pad0[0x34];
+    s32 unk34;
+    s32 unk38;
+};
+
+struct Unk_D_000B6140 {
+    u8 pad0[0x20];
+    s32 unk20;
+};
+
+struct Unk_D_000B61FC {
+    u8 pad0[0x2C];
+    s32 unk2C;
+};
+
 struct Unk_Unk_Unk_func_000A58E8_0_110_2AC {
     u8 pad0[0x90];
     void *unk90;
@@ -3134,8 +3155,8 @@ extern s32 D_000B5C18;
 extern u8 D_000B5C88;
 extern u8 D_000B5C89;
 extern s32 D_000B5FA0;
-extern void *D_000B5FC0;
-extern void *D_000B5FD4;
+extern struct Unk_D_000B5FC0 *D_000B5FC0;
+extern struct Unk_D_000B5FD4 *D_000B5FD4;
 extern s32 D_000B5FE4;
 extern s32 D_000B5FE8;
 extern M2C_UNK D_000B5FEC;
@@ -3157,12 +3178,12 @@ extern s32 D_000B60F8;
 extern s32 D_000B6110;
 extern s32 D_000B6114;
 extern s32 D_000B6118;
-extern s32 D_000B6140;
+extern struct Unk_D_000B6140 *D_000B6140;
 extern s32 D_000B61E4;
 extern s32 D_000B61F0;
 extern s32 D_000B61F4;
 extern s32 D_000B61F8;
-extern void *D_000B61FC;
+extern struct Unk_D_000B61FC *D_000B61FC;
 extern s32 D_000B6200;
 extern s32 D_000B6204;
 extern s32 D_000B6208;

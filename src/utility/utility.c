@@ -990,7 +990,7 @@ s32 func_00006350(void) {
 
     var_v0 = 0;
     if (D_00008054 != 0) {
-        var_v0 = M2C_FIELD(D_00008054, s32 *, 0xC);
+        var_v0 = D_00008054->unkC;
     }
     return var_v0;
 }

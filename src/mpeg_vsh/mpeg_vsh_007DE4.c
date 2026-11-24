@@ -3,7 +3,7 @@
 #include "mpeg_vsh_decls.h"
 
 s32 func_00007DE4(void) {
-    return M2C_FIELD(D_00009DC0, s32 *, 0x14);
+    return D_00009DC0->unk14;
 }
 
 s32 func_00007DF4(s32 arg0) {
@@ -79,7 +79,7 @@ INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_007DE4", func_000088AC);
 INCLUDE_ASM("tmp/asm/282/mpeg_vsh/nonmatchings/mpeg_vsh_007DE4", func_00008958);
 
 void func_00008A58(void) {
-    if (M2C_FIELD(D_00009EC0, s32 *, 0xC) == 0) {
+    if (D_00009EC0->unkC == 0) {
 
     } else {
         sceAudiocodec_29681260(D_00009EC0);
@@ -99,6 +99,6 @@ s32 func_00008AF0(s32 *arg0) {
     if (arg0 != NULL) {
         *arg0 = D_00009F6C;
     }
-    return M2C_FIELD(D_00009EC0, s32 *, 0xC);
+    return D_00009EC0->unkC;
 }
 

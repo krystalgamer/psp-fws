@@ -14,6 +14,13 @@ struct D_0001925C_s {
     s32 unk18;
 };
 
+struct Unk_D_000191B0 {
+    u8 pad0[0x184];
+    s32 unk184;
+    u8 pad188[0x48];
+    s32 unk1D0;
+};
+
 struct Unk_Unk_func_0000F370_0_B8 {
     u8 pad0[0x40];
     u32 *unk40;
@@ -252,7 +259,7 @@ struct Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0 {
     s32 unk188;
 };
 
-extern void *D_000191B0;
+extern struct Unk_D_000191B0 *D_000191B0;
 extern struct D_0001925C_s D_0001925C;
 extern s32 D_00019290;
 extern s32 D_0001929C;

@@ -4,6 +4,26 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_D_000571FC {
+    u8 pad0[0x94];
+    u8 unk94;
+};
+
+struct Unk_D_0005721C {
+    u8 pad0[0x20];
+    s32 unk20;
+};
+
+struct Unk_D_00081D70 {
+    u8 pad0[0x94];
+    u8 unk94;
+};
+
+struct Unk_D_00081E50 {
+    u8 pad0[0x10];
+    u8 unk10;
+};
+
 struct Unk_Unk_Unk_func_000209A0_0_8_1C {
     u8 pad0[0x4];
     s32 unk4;
@@ -1680,12 +1700,12 @@ extern u8 D_000571E8;
 extern u8 D_000571F0;
 extern s8 D_000571F1;
 extern u8 D_000571F4;
-extern void *D_000571FC;
+extern struct Unk_D_000571FC *D_000571FC;
 extern void *D_00057200;
 extern s32 D_00057204;
 extern s32 D_00057208;
 extern s8 D_00057211;
-extern s32 D_0005721C;
+extern struct Unk_D_0005721C *D_0005721C;
 extern s32 D_00057220;
 extern u8 D_00057224;
 extern s32 D_00057238;
@@ -1693,11 +1713,11 @@ extern s32 D_0005723C;
 extern s32 D_00057240;
 extern s32 D_00057254;
 extern s32 D_00057270;
-extern void *D_00081D70;
+extern struct Unk_D_00081D70 *D_00081D70;
 extern s32 D_00081D7C;
 extern s32 D_00081D84;
 extern s32 D_00081DF0;
-extern s32 D_00081E50;
+extern struct Unk_D_00081E50 *D_00081E50;
 extern s32 D_00081E84;
 extern s32 D_00081EA0;
 extern s32 D_00081EA4;

@@ -59,12 +59,13 @@
  "types": {
   "D_0000616C_s": "struct D_0000616C_s {\n    u8 pad0[0x30];\n    s32 unk30;\n};",
   "D_00006F28_s": "struct D_00006F28_s {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n};",
+  "Unk_D_000060E4": "struct Unk_D_000060E4 {\n    u8 pad0[0x1C];\n    s32 unk1C;\n};",
   "Unk_func_00003FC0_0": "struct Unk_func_00003FC0_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n};"
  },
  "vars": {
   "D_00005FC4": "extern s8 D_00005FC4;",
   "D_00005FC5": "extern u8 D_00005FC5;",
-  "D_000060E4": "extern void *D_000060E4;",
+  "D_000060E4": "extern struct Unk_D_000060E4 *D_000060E4;",
   "D_0000616C": "extern struct D_0000616C_s D_0000616C;",
   "D_00006300": "extern s32 D_00006300;",
   "D_00006304": "extern s32 D_00006304;",

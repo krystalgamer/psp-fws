@@ -9,6 +9,11 @@ struct D_00023028_s {
     s32 unk4;
 };
 
+struct Unk_D_00022EE0 {
+    u8 pad0[0x58];
+    void *unk58;
+};
+
 struct Unk_Unk_Unk_func_00004A94_0_10_24 {
     u8 pad0[0x1C];
     s32 unk1C;
@@ -573,7 +578,7 @@ extern M2C_UNK D_000226A0;
 extern M2C_UNK D_00022718;
 extern M2C_UNK D_000228C8;
 extern M2C_UNK D_00022B18;
-extern void *D_00022EE0;
+extern struct Unk_D_00022EE0 *D_00022EE0;
 extern s32 D_00022EF0;
 extern M2C_UNK D_00022F0C;
 extern M2C_UNK D_00022F1C;

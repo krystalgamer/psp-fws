@@ -685,7 +685,7 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00022EB8);
 
 void func_00022F64(s32 arg0) {
-    func_00022F88(arg0, M2C_FIELD(D_00031B40, s32 *, 4));
+    func_00022F88(arg0, D_00031B40->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00022F88);

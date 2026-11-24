@@ -309,7 +309,7 @@ INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_000
 void func_00003B18(s32 arg0, s32 arg1) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(M2C_FIELD(D_00022EE0, void **, 0x58), s32 *, 0x30);
+    temp_v1 = M2C_FIELD(D_00022EE0->unk58, s32 *, 0x30);
     switch (temp_v1) {                              /* irregular */
     case 1:
         func_00009D4C(arg0, arg1, (s32) D_00022EE0);

@@ -9,6 +9,11 @@ struct D_000207F0_s {
     volatile s32 unk1C;
 };
 
+struct Unk_D_000203F4 {
+    u8 pad0[0x34];
+    void *unk34;
+};
+
 struct Unk_func_00000314_1 {
     u8 pad0[0x4];
     s32 unk4;
@@ -168,7 +173,7 @@ extern s32 D_000203DC;
 extern s8 D_000203E0;
 extern s32 D_000203E8;
 extern s32 D_000203F0;
-extern void *D_000203F4;
+extern struct Unk_D_000203F4 *D_000203F4;
 extern s32 D_000203F8;
 extern s32 D_000203FC;
 extern s32 *D_00020400;

@@ -4,12 +4,19 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_D_00002D50 {
+    u8 pad0[0x1C];
+    s32 unk1C;
+    u8 pad20[0x10];
+    s32 unk30;
+};
+
 extern M2C_UNK D_00002AE0;
 extern M2C_UNK D_00002AEC;
 extern s32 D_00002C7C;
 extern M2C_UNK D_00002C88;
 extern M2C_UNK D_00002C94;
-extern void *D_00002D50;
+extern struct Unk_D_00002D50 *D_00002D50;
 
 s32 func_000004B0(s32);
 void func_00000574(void);

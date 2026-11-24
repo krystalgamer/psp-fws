@@ -3508,7 +3508,7 @@ s32 func_0005A3DC(s32 arg0) {
     var_v0 = 0;
     if (arg0 != D_000A524C.unk18) {
         func_0005B0A8(arg0, &sp0, &sp4);
-        var_v0 = M2C_FIELD(D_000A5248, s32 (**)(s32, s32), 0xC)(sp4, sp0);
+        var_v0 = D_000A5248->unkC(sp4, sp0);
         if (var_v0 == 0) {
             D_000A524C.unk18 = arg0;
         }

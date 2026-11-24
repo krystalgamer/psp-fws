@@ -4,6 +4,11 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_D_0001D580 {
+    u8 pad0[0x10];
+    s32 unk10;
+};
+
 struct Unk_func_0000601C_0 {
     s32 unk0;
     u8 pad4[0x30];
@@ -110,7 +115,7 @@ extern M2C_UNK D_00012220;
 extern M2C_UNK D_00012228;
 extern M2C_UNK D_00012230;
 extern s32 D_00016F8C;
-extern void *D_0001D580;
+extern struct Unk_D_0001D580 *D_0001D580;
 extern s32 D_0001D590;
 extern s8 D_0001D6B3;
 extern s8 D_0001D6B4;

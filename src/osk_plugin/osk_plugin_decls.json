@@ -85,6 +85,7 @@
   "sceVshCommonUtil_7683BE4D": "M2C_UNK sceVshCommonUtil_7683BE4D();"
  },
  "types": {
+  "Unk_D_0001D580": "struct Unk_D_0001D580 {\n    u8 pad0[0x10];\n    s32 unk10;\n};",
   "Unk_func_0000601C_0": "struct Unk_func_0000601C_0 {\n    s32 unk0;\n    u8 pad4[0x30];\n    s32 unk34;\n};",
   "Unk_func_00006344_temp_v0": "struct Unk_func_00006344_temp_v0 {\n    u8 pad0[0x1B8];\n    s32 unk1B8;\n};",
   "Unk_func_0000A164_0": "struct Unk_func_0000A164_0 {\n    u8 pad0[0x41C];\n    s32 unk41C;\n};",
@@ -108,7 +109,7 @@
   "D_00012228": "extern M2C_UNK D_00012228;",
   "D_00012230": "extern M2C_UNK D_00012230;",
   "D_00016F8C": "extern s32 D_00016F8C;",
-  "D_0001D580": "extern void *D_0001D580;",
+  "D_0001D580": "extern struct Unk_D_0001D580 *D_0001D580;",
   "D_0001D590": "extern s32 D_0001D590;",
   "D_0001D6B3": "extern s8 D_0001D6B3;",
   "D_0001D6B4": "extern s8 D_0001D6B4;",

@@ -145,7 +145,7 @@ void func_00009C5C(void) {
         ((M2C_UNK (*)()) D_0002CB38)();
     }
     if (D_0002CB34 != NULL) {
-        M2C_FIELD(D_0002CB34, s32 *, 4) = -1;
+        D_0002CB34->unk4 = -1;
     }
 }
 

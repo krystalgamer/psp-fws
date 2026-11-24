@@ -87,7 +87,7 @@ s32 func_00025848(struct Unk_func_00025848_0 *arg0) {
     if (arg0->unk20 != 0) {
         var_v1 = 1;
     } else if (D_0005F858 != NULL) {
-        var_v1 = M2C_FIELD(D_0005F858, u8 *, 0xC) != 0;
+        var_v1 = D_0005F858->unkC != 0;
     }
     return var_v1;
 }
@@ -171,8 +171,8 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_02433C",
 void func_00026338(void) {
     struct Unk_func_00026338_temp_v0 *temp_v0;
 
-    if ((D_0005F85C != 0) && (M2C_FIELD(D_0005F85C, u8 *, 0xC) != 0)) {
-        temp_v0 = M2C_FIELD(D_0005F85C, void **, 0x1C);
+    if ((D_0005F85C != 0) && (D_0005F85C->unkC != 0)) {
+        temp_v0 = D_0005F85C->unk1C;
         if (temp_v0 != NULL) {
             temp_v0->unk1FD = 1;
             temp_v0->unk1FE = 1;
@@ -246,7 +246,7 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_02433C",
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_02433C", func_000266A4);
 
 void func_000266E8(void) {
-    M2C_FIELD(D_0005F860, s8 *, 0x1C) = 0;
+    D_0005F860->unk1C = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_02433C", func_000266F8);
@@ -877,7 +877,7 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_02433C",
 
 void func_0002B030(void) {
     if (D_0005F870 != NULL) {
-        M2C_FIELD(D_0005F870, s8 *, 0x1C) = 0;
+        D_0005F870->unk1C = 0;
     }
 }
 
@@ -1592,7 +1592,7 @@ void func_00033BDC(s32 arg0, s32 arg1) {
 
     if (arg1 != 1) {
         if (D_0005F8E8 != NULL) {
-            if (M2C_FIELD(D_0005F8E8, s32 *, 4) != 4) {
+            if (D_0005F8E8->unk4 != 4) {
                 temp_v0 = func_00008F70();
                 if (temp_v0 != 0) {
                     M2C_FIELD(temp_v0, s8 *, 0xC) = 1;
@@ -1600,7 +1600,7 @@ void func_00033BDC(s32 arg0, s32 arg1) {
             }
             if (D_0005F874 != 0) {
                 if (arg0 != 0) {
-                    if (M2C_FIELD(D_0005F8E8, s32 *, 4) != 0) {
+                    if (D_0005F8E8->unk4 != 0) {
 
                     } else if (((sceNetApctlGetState(&sp0) != 0) || (sp0 != 4)) && (temp_s0 = D_0005F110, (temp_s0 != 0))) {
                         func_0002CF90(temp_s0);
@@ -1624,7 +1624,7 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_02433C",
 
 void func_00033DB4(s32 arg0) {
     if (D_0005F8E8 != NULL) {
-        M2C_FIELD(D_0005F8E8, s32 *, 0xC) = 0;
+        D_0005F8E8->unkC = 0;
     }
     scePaf_66907719();
     sceVshCommonGui_1CF884A1();

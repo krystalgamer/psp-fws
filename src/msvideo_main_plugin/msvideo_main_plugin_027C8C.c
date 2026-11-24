@@ -268,7 +268,7 @@ s32 func_000296F0(struct Unk_func_000296F0_0 *arg0) {
 
 void func_00029734(void) {
     if (D_000B61FC != NULL) {
-        M2C_FIELD(D_000B61FC, s32 *, 0x2C) = 0;
+        D_000B61FC->unk2C = 0;
     }
 }
 

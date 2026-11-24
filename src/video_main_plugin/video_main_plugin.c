@@ -109,7 +109,7 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin", func
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin", func_00000F9C);
 
 void func_00000FFC(void) {
-    if ((D_000571FC == NULL) || (M2C_FIELD(D_000571FC, u8 *, 0x94) == 0)) {
+    if ((D_000571FC == NULL) || (D_000571FC->unk94 == 0)) {
         func_00002180();
     }
 }
@@ -195,7 +195,7 @@ void func_00001C88(void) {
     s32 temp_v0;
 
     if (D_0005721C != 0) {
-        temp_v0 = M2C_FIELD(D_0005721C, s32 *, 0x20);
+        temp_v0 = D_0005721C->unk20;
         if (temp_v0 == 0) {
 
         } else {
@@ -210,7 +210,7 @@ void func_00001CEC(void) {
     s32 temp_v0;
 
     if (D_0005721C != 0) {
-        temp_v0 = M2C_FIELD(D_0005721C, s32 *, 0x20);
+        temp_v0 = D_0005721C->unk20;
         if (temp_v0 == 0) {
 
         } else {
@@ -506,7 +506,7 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin", func
 
 void func_000053B0(void) {
     if (D_000571F4 == 0) {
-        if ((D_000571FC == NULL) || (M2C_FIELD(D_000571FC, u8 *, 0x94) == 0)) {
+        if ((D_000571FC == NULL) || (D_000571FC->unk94 == 0)) {
             func_000293E0();
             D_000571E2 = 0;
             func_00002180();

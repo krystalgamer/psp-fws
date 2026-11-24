@@ -1286,11 +1286,11 @@ void func_0000C68C(void) {
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_0000C718);
 
 void func_0000C788(void) {
-    func_00014198(M2C_FIELD(D_00166C28, s32 *, 4));
+    func_00014198(D_00166C28->unk4);
 }
 
 s32 func_0000C7AC(s32 arg0) {
-    func_0001426C(arg0, M2C_FIELD(D_00166C28, s32 *, 4));
+    func_0001426C(arg0, D_00166C28->unk4);
     return arg0;
 }
 

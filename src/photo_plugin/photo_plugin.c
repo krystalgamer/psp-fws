@@ -645,7 +645,7 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00005834)
 void func_00005870(void) {
     struct Unk_func_00005870_temp_s0 *temp_s0;
 
-    if ((D_00031B84 == NULL) || (M2C_FIELD(D_00031B84, s32 *, 0x4C) == 0)) {
+    if ((D_00031B84 == NULL) || (D_00031B84->unk4C == 0)) {
         func_0000608C((s32) D_00031B84);
         temp_s0 = D_00031B84;
         temp_s0->unk4C = scePaf_A0ED77C4(0, func_00006BF4, NULL, -1, -1, &func_00006C34);

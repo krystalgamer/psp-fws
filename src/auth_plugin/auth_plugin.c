@@ -36,7 +36,7 @@ INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000954);
 void func_0000098C(void) {
     func_000004B0(1);
     if (D_00002D50 != NULL) {
-        M2C_FIELD(D_00002D50, s32 *, 0x1C) = 1;
+        D_00002D50->unk1C = 1;
     }
 }
 
@@ -87,7 +87,7 @@ void func_00001D7C(void) {
 
     var_a0 = 0;
     if (D_00002D50 != NULL) {
-        var_a0 = M2C_FIELD(D_00002D50, s32 *, 0x30);
+        var_a0 = D_00002D50->unk30;
     }
     func_00001DF4(var_a0, 0, 0, 0);
 }
@@ -95,7 +95,7 @@ void func_00001D7C(void) {
 void func_00001DB8(void) {
     func_000004B0(2);
     if (D_00002D50 != NULL) {
-        M2C_FIELD(D_00002D50, s32 *, 0x1C) = 2;
+        D_00002D50->unk1C = 2;
     }
 }
 

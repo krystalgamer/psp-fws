@@ -260,6 +260,7 @@
  },
  "types": {
   "D_00023028_s": "struct D_00023028_s {\n    s32 unk0;\n    s32 unk4;\n};",
+  "Unk_D_00022EE0": "struct Unk_D_00022EE0 {\n    u8 pad0[0x58];\n    void *unk58;\n};",
   "Unk_Unk_Unk_func_00004A94_0_10_24": "struct Unk_Unk_Unk_func_00004A94_0_10_24 {\n    u8 pad0[0x1C];\n    s32 unk1C;\n};",
   "Unk_Unk_func_00004A94_0_10": "struct Unk_Unk_func_00004A94_0_10 {\n    u8 pad0[0x24];\n    struct Unk_Unk_Unk_func_00004A94_0_10_24 *unk24;\n};",
   "Unk_func_000008C8_0": "struct Unk_func_000008C8_0 {\n    u8 pad0[0x10];\n    s32 unk10;\n    u8 pad14[0x39];\n    s8 unk4D;\n    s8 unk4E;\n    u8 pad4F[0x11];\n    s8 unk60;\n};",
@@ -371,7 +372,7 @@
   "D_00022718": "extern M2C_UNK D_00022718;",
   "D_000228C8": "extern M2C_UNK D_000228C8;",
   "D_00022B18": "extern M2C_UNK D_00022B18;",
-  "D_00022EE0": "extern void *D_00022EE0;",
+  "D_00022EE0": "extern struct Unk_D_00022EE0 *D_00022EE0;",
   "D_00022EF0": "extern s32 D_00022EF0;",
   "D_00022F0C": "extern M2C_UNK D_00022F0C;",
   "D_00022F1C": "extern M2C_UNK D_00022F1C;",

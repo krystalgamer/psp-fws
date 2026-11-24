@@ -926,7 +926,7 @@ void func_00009424(struct Unk_func_00009424_0 *arg0, s32 arg1) {
 
     var_a1 = arg1;
     if (var_a1 < 0) {
-        var_a1 = M2C_FIELD(D_000E15A8, s32 *, 0x98);
+        var_a1 = D_000E15A8->unk98;
     }
     scePaf_E3020CA3(arg0->unk58, var_a1);
 }

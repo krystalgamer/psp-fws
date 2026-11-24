@@ -519,7 +519,7 @@ void func_00006344(void) {
     if (D_0001D590 != 0) {
 
     } else {
-        temp_v0 = scePaf_D4FAE7D0(M2C_FIELD(D_0001D580, s32 *, 0x10));
+        temp_v0 = scePaf_D4FAE7D0(D_0001D580->unk10);
         if (temp_v0 != NULL) {
             scePaf_5EBC648F(temp_v0, temp_v0->unk1B8);
         }

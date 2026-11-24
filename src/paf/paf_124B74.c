@@ -187,7 +187,7 @@ INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_124B74", D_0019D484);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_0012597C);
 
 s32 func_001259CC(s32 arg0) {
-    return (M2C_FIELD(D_001A7EE0, s32 (**)(void *, s32), 0xE0)(D_001A7EE0, arg0) == 0) ? 0 : -1;
+    return (D_001A7EE0->unkE0(D_001A7EE0, arg0) == 0) ? 0 : -1;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_00125A04);
@@ -195,9 +195,9 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_00125A04);
 s32 func_00125A9C(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_s4;
 
-    temp_s4 = M2C_FIELD(D_001A7EE0, s32 (**)(void *, s32), 0xEC)(D_001A7EE0, arg0);
-    M2C_FIELD(D_001A7EE0, M2C_UNK (**)(void *, s32, s32, s32, M2C_UNK), 0xE4)(D_001A7EE0, arg0, arg1, arg2, 1);
-    return M2C_FIELD(D_001A7EE0, s32 (**)(void *, s32), 0xEC)(D_001A7EE0, arg0) - temp_s4;
+    temp_s4 = D_001A7EE0->unkEC(D_001A7EE0, arg0);
+    D_001A7EE0->unkE4(D_001A7EE0, arg0, arg1, arg2, 1);
+    return D_001A7EE0->unkEC(D_001A7EE0, arg0) - temp_s4;
 }
 
 s32 func_00125B30(void *arg0, s32 arg1, s32 arg2) {
@@ -927,7 +927,7 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_00137D88);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_00137F9C);
 
 void func_001380A8(void) {
-    M2C_FIELD(D_001E2988, u16 *, 8) = (u16) M2C_FIELD(D_001E2988, u16 *, 4);
+    D_001E2988->unk8 = (u16) D_001E2988->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_001380BC);
@@ -1132,7 +1132,7 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_00139A60);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_00139B10);
 
 void func_00139B5C(s16 arg0) {
-    M2C_FIELD(D_001E2988, s16 *, 0x3C) = arg0;
+    D_001E2988->unk3C = arg0;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_00139B6C);

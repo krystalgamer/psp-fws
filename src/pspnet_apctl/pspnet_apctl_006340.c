@@ -69,7 +69,7 @@ s32 func_00008E00(void) {
 
     var_v0 = 0x8041030B;
     if (D_00013F20 != NULL) {
-        var_v0 = sceKernelSignalSema(M2C_FIELD(D_00013F20, s32 *, 4), 1);
+        var_v0 = sceKernelSignalSema(D_00013F20->unk4, 1);
     }
     return var_v0;
 }

@@ -86,9 +86,38 @@ struct D_00106F70_s {
     volatile s32 unkA820;
 };
 
+struct Unk_D_000E15A8 {
+    u8 pad0[0x98];
+    s32 unk98;
+};
+
+struct Unk_D_000E2220 {
+    u8 pad0[0xE0];
+    s32 (*unkE0)(void *, s32);
+    M2C_UNK (*unkE4)(void *, s32, s32, s32, M2C_UNK);
+    u8 padE8[0x4];
+    s32 (*unkEC)(void *, s32);
+};
+
+struct Unk_D_000FDB04 {
+    s32 unk0;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+};
+
 struct Unk_D_00106F70_s_1ABC {
     u8 pad0[0x2];
     u16 unk2;
+};
+
+struct Unk_D_00108A2C {
+    u8 pad0[0x4];
+    u16 unk4;
+    u8 pad6[0x2];
+    u16 unk8;
+    u8 padA[0x32];
+    s16 unk3C;
 };
 
 struct Unk_Unk_Unk_func_0005C7E4_0_1E8_20 {
@@ -2529,7 +2558,7 @@ extern s32 D_000E128C;
 extern s32 D_000E1290;
 extern s32 D_000E1294;
 extern s32 D_000E1554;
-extern s32 D_000E15A8;
+extern struct Unk_D_000E15A8 *D_000E15A8;
 extern s32 D_000E15C8;
 extern M2C_UNK D_000E15CC;
 extern M2C_UNK D_000E15D8;
@@ -2579,7 +2608,7 @@ extern s32 D_000E2158;
 extern s32 D_000E2160;
 extern s32 D_000E2164;
 extern struct D_000E216C_s D_000E216C;
-extern void *D_000E2220;
+extern struct Unk_D_000E2220 *D_000E2220;
 extern M2C_UNK D_000E6030;
 extern M2C_UNK D_000E6034;
 extern s32 D_000E6038;
@@ -2591,7 +2620,7 @@ extern M2C_UNK D_000E984C;
 extern s32 D_000FDAB4;
 extern struct D_000FDAC0_s D_000FDAC0;
 extern s32 D_000FDAEC;
-extern void *D_000FDB04;
+extern struct Unk_D_000FDB04 *D_000FDB04;
 extern s32 D_000FDB08;
 extern s32 D_000FDB14;
 extern s32 D_000FDB18;
@@ -2599,7 +2628,7 @@ extern struct D_00106F70_s D_00106F70;
 extern M2C_UNK D_00108130;
 extern s16 D_0010883E;
 extern s16 D_00108846;
-extern void *D_00108A2C;
+extern struct Unk_D_00108A2C *D_00108A2C;
 extern s16 D_0010B06A;
 extern M2C_UNK D_0010B0EE;
 extern s16 D_0010B154;

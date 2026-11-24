@@ -18,6 +18,23 @@ struct D_00009B54_s {
     s32 unk4E88;
 };
 
+struct Unk_D_00009888 {
+    u8 pad0[0x4];
+    s32 (*unk4)(void *, s32, M2C_UNK, M2C_UNK);
+    u8 pad8[0x8];
+    M2C_UNK (*unk10)(void *);
+    M2C_UNK (*unk14)(void *);
+    M2C_UNK (*unk18)(void *);
+};
+
+struct Unk_D_00009B50 {
+    u8 pad0[0x4];
+    s32 unk4;
+    u8 pad8[0x10];
+    s32 unk18;
+    s32 unk1C;
+};
+
 struct Unk_func_00001558_0 {
     u8 pad0[0x4E60];
     s32 unk4E60;
@@ -51,10 +68,10 @@ struct Unk_func_000077B8_0 {
 
 extern M2C_UNK D_00009248;
 extern M2C_UNK D_00009264;
-extern void *D_00009888;
+extern struct Unk_D_00009888 *D_00009888;
 extern M2C_UNK D_000098DC;
 extern struct D_000099D4_s D_000099D4;
-extern void *D_00009B50;
+extern struct Unk_D_00009B50 *D_00009B50;
 extern struct D_00009B54_s D_00009B54;
 
 M2C_UNK IoFileMgrForKernel_C7F35804(M2C_UNK *);

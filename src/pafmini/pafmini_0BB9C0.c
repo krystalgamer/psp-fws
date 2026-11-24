@@ -662,13 +662,13 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0BB9C0", func_000C41F4);
 
 s32 func_000C429C(s32 *arg0) {
     if (arg0 != NULL) {
-        *arg0 = M2C_FIELD(D_000FDB04, s32 *, 0xC) - (M2C_FIELD(D_000FDB04, s32 *, 4) - M2C_FIELD(D_000FDB04, s32 *, 0));
+        *arg0 = D_000FDB04->unkC - (D_000FDB04->unk4 - D_000FDB04->unk0);
     }
-    return M2C_FIELD(D_000FDB04, s32 *, 4);
+    return D_000FDB04->unk4;
 }
 
 void func_000C42D0(s32 arg0) {
-    M2C_FIELD(D_000FDB04, s32 *, 4) = arg0;
+    D_000FDB04->unk4 = arg0;
 }
 
 s32 func_000C42E0(void) {

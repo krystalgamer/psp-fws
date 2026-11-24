@@ -804,7 +804,7 @@ s32 func_00003B7C(void) {
 
     var_v0 = 0;
     if (D_0002C9D0 != NULL) {
-        temp_v1 = M2C_FIELD(D_0002C9D0, void **, 0x254);
+        temp_v1 = D_0002C9D0->unk254;
         if (temp_v1 != NULL) {
             var_v0 = temp_v1->unk348;
         }

@@ -145,13 +145,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_15BEBC", func_0015E730);
 
 s32 func_0015E7D8(s32 *arg0) {
     if (arg0 != NULL) {
-        *arg0 = M2C_FIELD(D_001D7A54, s32 *, 0xC) - (M2C_FIELD(D_001D7A54, s32 *, 4) - M2C_FIELD(D_001D7A54, s32 *, 0));
+        *arg0 = D_001D7A54->unkC - (D_001D7A54->unk4 - D_001D7A54->unk0);
     }
-    return M2C_FIELD(D_001D7A54, s32 *, 4);
+    return D_001D7A54->unk4;
 }
 
 void func_0015E80C(s32 arg0) {
-    M2C_FIELD(D_001D7A54, s32 *, 4) = arg0;
+    D_001D7A54->unk4 = arg0;
 }
 
 s32 func_0015E81C(void) {

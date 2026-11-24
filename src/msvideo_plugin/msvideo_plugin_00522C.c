@@ -723,8 +723,8 @@ void func_0000C94C(void) {
     s32 temp_a0;
 
     if (D_000663E8 != NULL) {
-        temp_a0 = M2C_FIELD(D_000663E8, s32 *, 0x20);
-        if ((temp_a0 != 0) && (M2C_FIELD(D_000663E8, u8 *, 0x43) != 0)) {
+        temp_a0 = D_000663E8->unk20;
+        if ((temp_a0 != 0) && (D_000663E8->unk43 != 0)) {
             func_00002DE0(temp_a0);
         }
     }
@@ -733,9 +733,9 @@ void func_0000C94C(void) {
 void func_0000C994(void) {
     s32 temp_v0;
 
-    M2C_FIELD(D_000663E8, s32 *, 0x19C) = 2;
+    D_000663E8->unk19C = 2;
     if (D_000663E8 != NULL) {
-        temp_v0 = M2C_FIELD(D_000663E8, s32 *, 0x20);
+        temp_v0 = D_000663E8->unk20;
         if (temp_v0 != 0) {
             func_00002DE0(temp_v0);
         }
@@ -908,7 +908,7 @@ void func_0000FDD4(void) {
     s32 temp_v0;
 
     if (D_000663F8 != 0) {
-        temp_v0 = M2C_FIELD(D_000663F8, s32 *, 0x20);
+        temp_v0 = D_000663F8->unk20;
         if (temp_v0 == 0) {
 
         } else {
@@ -2399,7 +2399,7 @@ s32 func_0001BA0C(struct Unk_func_0001BA0C_0 *arg0) {
 
 void func_0001BA50(void) {
     if (D_0007E590 != NULL) {
-        M2C_FIELD(D_0007E590, s32 *, 0x2C) = 0;
+        D_0007E590->unk2C = 0;
     }
 }
 

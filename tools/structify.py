@@ -85,8 +85,8 @@ def structify_globals(mod, only=None, skip=()):
     for sym, acc in uses.items():
         if (only is not None and sym not in only) or sym in skip:
             continue
-        decl = store["vars"].get(sym, "")
-        if f"struct {sym}_s" in decl:
+        vdecl = store["vars"].get(sym, "")
+        if f"struct {sym}_s" in vdecl:
             continue
         rest = ACCESS.sub("", code)
         if re.search(rf"&\(?{sym}\)?\s*[-+\[]|\(&{sym}\)\s*[-+\[]|\({sym}\)\s*[-+\[]", rest):
@@ -94,7 +94,7 @@ def structify_globals(mod, only=None, skip=()):
         bare = re.findall(rf"(?<![&\w]){sym}\b(?!\s*\()", rest)
         base_t = None
         if bare:
-            dm = re.match(rf"extern (?:volatile )?([\w ]+?\**) ?{sym};$", decl)
+            dm = re.match(rf"extern (?:volatile )?([\w ]+?\**) ?{sym};$", vdecl)
             if not dm or dm[1].strip() in ("M2C_UNK", "") or size_of(dm[1].strip()) is None:
                 continue
             base_t = dm[1].strip()
@@ -359,7 +359,10 @@ def main():
     if subprocess.run(["git", "diff", "--quiet", "--no-ext-diff", "--", f"src/{mod}"], cwd=ROOT).returncode:
         print(f"{vm}: local changes, skipping")
         return
-    if "--vtables" in sys.argv:
+    if "--gptr" in sys.argv:
+        import structify_gptr
+        phase = structify_gptr.structify_gptr
+    elif "--vtables" in sys.argv:
         import structify_vtbl
         phase = structify_vtbl.structify_vtables
     elif "--nested" in sys.argv:

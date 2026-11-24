@@ -253,6 +253,7 @@
  },
  "types": {
   "D_00030398_s": "struct D_00030398_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    volatile s32 unk8;\n    M2C_UNK * unkC;\n    volatile s32 unk10;\n    volatile s32 unk14;\n    volatile s32 unk18;\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};",
+  "Unk_D_0003089C": "struct Unk_D_0003089C {\n    u8 pad0[0x84];\n    s32 unk84;\n    u8 pad88[0x18];\n    s32 unkA0;\n    s32 unkA4;\n    u8 padA8[0x8];\n    s32 unkB0;\n    u8 padB4[0x18];\n    u8 unkCC;\n    u8 padCD[0x3DF];\n    void *unk4AC;\n    u8 pad4B0[0x70];\n    s32 unk520;\n};",
   "Unk_func_00002760_temp_v0": "struct Unk_func_00002760_temp_v0 {\n\n};",
   "Unk_func_0000362C_temp_v0": "struct Unk_func_0000362C_temp_v0 {\n\n};",
   "Unk_func_0000482C_var_a0": "struct Unk_func_0000482C_var_a0 {\n    u8 pad0[0x4];\n    void *unk4;\n};",
@@ -346,7 +347,7 @@
   "D_00030468": "extern s32 D_00030468;",
   "D_0003046C": "extern M2C_UNK D_0003046C;",
   "D_0003086C": "extern s32 D_0003086C;",
-  "D_0003089C": "extern void *D_0003089C;",
+  "D_0003089C": "extern struct Unk_D_0003089C *D_0003089C;",
   "D_000308B4": "extern s32 D_000308B4;",
   "D_000308B8": "extern s32 D_000308B8;",
   "D_000308BC": "extern s32 D_000308BC;",

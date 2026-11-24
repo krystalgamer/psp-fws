@@ -154,6 +154,8 @@
   "sceVideocodec_DBA273FA": "s32 sceVideocodec_DBA273FA(s32, M2C_UNK);"
  },
  "types": {
+  "Unk_D_00009DC0": "struct Unk_D_00009DC0 {\n    u8 pad0[0x14];\n    s32 unk14;\n};",
+  "Unk_D_00009EC0": "struct Unk_D_00009EC0 {\n    u8 pad0[0xC];\n    s32 unkC;\n};",
   "Unk_func_00005318_0": "struct Unk_func_00005318_0 {\n    u8 pad0[0x8];\n    s32 unk8;\n};",
   "Unk_func_00005BEC_0": "struct Unk_func_00005BEC_0 {\n    u8 pad0[0x3];\n    u8 unk3;\n};",
   "Unk_func_00005BF4_0": "struct Unk_func_00005BF4_0 {\n    u8 pad0[0x3];\n    u8 unk3;\n};",
@@ -168,8 +170,8 @@
  },
  "vars": {
   "D_00009B98": "extern M2C_UNK D_00009B98;",
-  "D_00009DC0": "extern s32 D_00009DC0;",
-  "D_00009EC0": "extern void *D_00009EC0;",
+  "D_00009DC0": "extern struct Unk_D_00009DC0 *D_00009DC0;",
+  "D_00009EC0": "extern struct Unk_D_00009EC0 *D_00009EC0;",
   "D_00009F6C": "extern s32 D_00009F6C;",
   "D_00009F80": "extern s32 D_00009F80;",
   "D_00009F84": "extern s32 D_00009F84;"

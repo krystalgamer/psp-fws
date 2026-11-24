@@ -89,6 +89,7 @@
   "sceWlanDrv_lib_C9A8CAB7": "M2C_UNK sceWlanDrv_lib_C9A8CAB7();"
  },
  "types": {
+  "Unk_D_00013F20": "struct Unk_D_00013F20 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_000016E0_0": "struct Unk_func_000016E0_0 {\n    u8 pad0[0x7DC];\n    s32 unk7DC;\n};",
   "Unk_func_00009850_0": "struct Unk_func_00009850_0 {\n    u8 pad0[0x2374];\n    M2C_UNK * unk2374;\n    s32 unk2378;\n    u8 pad237C[0x14];\n    s32 unk2390;\n};",
   "Unk_func_00009BEC_0": "struct Unk_func_00009BEC_0 {\n    u8 pad0[0x2508];\n    s32 unk2508;\n    s32 unk250C;\n    s32 unk2510;\n};",
@@ -128,7 +129,7 @@
   "D_00012A0C": "extern s32 D_00012A0C;",
   "D_00012A10": "extern s32 D_00012A10;",
   "D_00012A14": "extern s32 D_00012A14;",
-  "D_00013F20": "extern void *D_00013F20;",
+  "D_00013F20": "extern struct Unk_D_00013F20 *D_00013F20;",
   "D_00016528": "extern s32 D_00016528;",
   "D_000177A0": "extern M2C_UNK D_000177A0;",
   "D_00017820": "extern u32 D_00017820;"

@@ -150,7 +150,7 @@ void func_0002174C(void) {
     s32 temp_v0;
 
     if (D_000B6140 != 0) {
-        temp_v0 = M2C_FIELD(D_000B6140, s32 *, 0x20);
+        temp_v0 = D_000B6140->unk20;
         if (temp_v0 == 0) {
 
         } else {

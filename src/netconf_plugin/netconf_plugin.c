@@ -220,7 +220,7 @@ s32 func_00001C68(struct Unk_func_00001C68_0 *arg0) {
 
     var_a1 = 0;
     if (func_000022DC() != 0) {
-        temp_a0 = M2C_FIELD(D_000203F4, void **, 0x34);
+        temp_a0 = D_000203F4->unk34;
         if (temp_a0 != NULL) {
             var_a1 = 1;
             arg0->unk0 = (s32) temp_a0->unk0;

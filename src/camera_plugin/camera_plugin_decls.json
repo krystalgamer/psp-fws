@@ -400,6 +400,7 @@
   "vsh_F6CF5A1C": "M2C_UNK vsh_F6CF5A1C(s32, M2C_UNK *);"
  },
  "types": {
+  "Unk_D_00166C28": "struct Unk_D_00166C28 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_Unk_func_00001F08_0_330": "struct Unk_Unk_func_00001F08_0_330 {\n    u8 pad0[0x20];\n    s32 unk20;\n};",
   "Unk_Unk_func_00001F30_0_330": "struct Unk_Unk_func_00001F30_0_330 {\n    u8 pad0[0x44];\n    s8 unk44;\n};",
   "Unk_Unk_func_00001F3C_0_330": "struct Unk_Unk_func_00001F3C_0_330 {\n    u8 pad0[0x46];\n    s8 unk46;\n};",
@@ -532,7 +533,7 @@
   "D_00166BE0": "extern s32 D_00166BE0;",
   "D_00166BEC": "extern s32 D_00166BEC;",
   "D_00166BF0": "extern M2C_UNK D_00166BF0;",
-  "D_00166C28": "extern void *D_00166C28;",
+  "D_00166C28": "extern struct Unk_D_00166C28 *D_00166C28;",
   "D_00166C30": "extern struct Unk_vt_D_00166C30 **D_00166C30;",
   "D_00166C38": "extern s32 D_00166C38;",
   "D_00166C3C": "extern s32 D_00166C3C;",

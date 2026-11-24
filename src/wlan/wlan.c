@@ -244,7 +244,7 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_2D0FAE4E);
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_56F467CA);
 
 s32 sceWlanGetSwitchState(void) {
-    return M2C_FIELD(D_000191B0, s32 *, 0x1D0) == 1;
+    return D_000191B0->unk1D0 == 1;
 }
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003A20);
@@ -264,7 +264,7 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_40B0AA4A);
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_8D5F551B);
 
 void sceWlanDrv_driver_E50312AB(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_0000B24C(M2C_FIELD(D_000191B0, s32 *, 0x184), arg0, arg1, arg2, arg3);
+    func_0000B24C(D_000191B0->unk184, arg0, arg1, arg2, arg3);
 }
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003C68);

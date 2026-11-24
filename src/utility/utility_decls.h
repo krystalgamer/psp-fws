@@ -59,6 +59,11 @@ struct D_00007FF8_s {
     volatile s32 unk18;
 };
 
+struct Unk_D_00008054 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
 struct Unk_func_00001CB8_var_a2 {
     u8 pad0[0x4C];
     s32 unk4C;
@@ -92,7 +97,7 @@ extern struct D_00007FF8_s D_00007FF8;
 extern s32 D_00008014;
 extern s32 D_0000804C;
 extern s32 D_00008050;
-extern s32 D_00008054;
+extern struct Unk_D_00008054 *D_00008054;
 
 M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, s32, s32, s32);
 s32 func_000000C4(s32, s32);

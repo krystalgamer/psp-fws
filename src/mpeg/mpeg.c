@@ -451,7 +451,7 @@ s32 func_0000712C(s32 arg0) {
 }
 
 s32 func_0000717C(void) {
-    return M2C_FIELD(D_00008300, s32 *, 0x14);
+    return D_00008300->unk14;
 }
 
 s32 func_0000718C(s32 arg0) {
@@ -491,7 +491,7 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000073E8);
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00007494);
 
 void func_00007590(void) {
-    if (M2C_FIELD(D_00008400, s32 *, 0xC) == 0) {
+    if (D_00008400->unkC == 0) {
 
     } else {
         sceAudiocodec_29681260(D_00008400);
@@ -511,7 +511,7 @@ s32 func_00007628(s32 *arg0) {
     if (arg0 != NULL) {
         *arg0 = D_000084AC;
     }
-    return M2C_FIELD(D_00008400, s32 *, 0xC);
+    return D_00008400->unkC;
 }
 
 s32 func_00007648(s32 arg0) {

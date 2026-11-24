@@ -2,11 +2,11 @@
 #include "music_main_plugin_decls.h"
 
 void func_000092E8(s32 arg0) {
-    M2C_FIELD(D_000A4238, M2C_UNK (**)(M2C_UNK, s32), 0xE0)(2, arg0 & 0xFF);
+    D_000A4238->unkE0(2, arg0 & 0xFF);
 }
 
 void func_00009318(s32 arg0) {
-    M2C_FIELD(D_000A4238, M2C_UNK (**)(M2C_UNK, s32), 0xE0)(0x11, arg0 & 0xFF);
+    D_000A4238->unkE0(0x11, arg0 & 0xFF);
 }
 
 void func_00009348(void **arg0, void *arg1) {
