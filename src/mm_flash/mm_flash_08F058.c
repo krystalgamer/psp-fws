@@ -451,9 +451,13 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_00091634);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_00091668);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_0009168C);
+void func_0009168C(void) {
+    func_0008C7E8();
+}
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_000916A8);
+void func_000916A8(void) {
+    func_0008C7F8();
+}
 
 void func_000916C4(void) {
 }

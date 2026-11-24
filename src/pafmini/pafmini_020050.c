@@ -2,7 +2,11 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020050", func_00020050);
+void func_00020050(void *arg0, s32 arg1) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x42C) = __builtin_allegrex_ins(M2C_FIELD(arg0, s32 *, 0x42C) & arg1, 0, 0x12, 2);
+    }
+}
 
 s32 func_00020070(s32 arg0, void *arg1, s32 arg2) {
     s32 var_v0;

@@ -2,7 +2,16 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_04AC08", func_0004AC08);
+s32 func_0004AC08(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 temp_a2;
+
+    if (arg1 != 0) {
+        temp_a2 = M2C_FIELD(arg0, s32 *, 0x10);
+        sceHVNetfront_Module_1A02495A(arg1, M2C_FIELD(arg0, s32 *, 4) + (M2C_FIELD(arg0, s32 *, 0xC) * temp_a2), arg2 * temp_a2, arg3);
+    }
+    M2C_FIELD(arg0, s32 *, 0xC) = (s32) (M2C_FIELD(arg0, s32 *, 0xC) + arg2);
+    return arg2;
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_04AC08", func_0004AC70);
 

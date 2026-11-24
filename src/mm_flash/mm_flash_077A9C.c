@@ -2,11 +2,30 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_00077A9C);
+void func_00077A9C(M2C_UNK **arg0) {
+    *arg0 = &D_000C05A8;
+    func_000224B8();
+    *arg0 = &D_000B66B8;
+    func_000224B8(arg0);
+    func_00022254((s32) arg0);
+}
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_00077AE8);
+void func_00077AE8(M2C_UNK **arg0) {
+    *arg0 = &D_000C05A8;
+    func_000224B8();
+    *arg0 = &D_000B66B8;
+    func_000224B8(arg0);
+    func_00022254((s32) arg0);
+}
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_00077B34);
+void func_00077B34(M2C_UNK **arg0) {
+    *arg0 = &D_000C05A8;
+    func_000224B8();
+    *arg0 = &D_000B66B8;
+    func_000224B8(arg0);
+    func_00022254((s32) arg0);
+    func_00090730(*func_0009F1C0(), (s32) arg0, 0);
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_00077B98);
 
@@ -180,13 +199,39 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_0007AE5C);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_0007AE9C);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_0007AF1C);
+void func_0007AF1C(void *arg0) {
+    s32 temp_s1;
+    void *temp_s2;
+    void *var_s0;
+
+    var_s0 = M2C_FIELD(arg0, void **, 0x1024);
+    M2C_FIELD(arg0, void **, 0x1024) = NULL;
+    if (var_s0 != NULL) {
+        do {
+            temp_s1 = M2C_FIELD(var_s0, s32 *, 0);
+            temp_s2 = M2C_FIELD(var_s0, void **, 4);
+            if (temp_s1 != 0) {
+                func_00090730(*func_0009F1C0(), temp_s1, 0);
+            }
+            func_00090730(*func_0009F1C0(), (s32) var_s0, 0);
+            var_s0 = temp_s2;
+        } while (temp_s2 != NULL);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_0007AF98);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_0007B03C);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_0007B0E8);
+s32 func_0007B0E8(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v1;
+
+    var_v1 = 1;
+    if (arg1 != 0) {
+        var_v1 = func_0007B11C(arg0, arg1 + 0x148, arg2);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_0007B11C);
 

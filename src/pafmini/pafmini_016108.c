@@ -2,7 +2,11 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_016108", func_00016108);
+void func_00016108(void *arg0, s32 arg1) {
+    func_00013B68(arg0);
+    M2C_FIELD(arg0, s32 *, 8) = (s32) (arg1 - __builtin_allegrex_ins(arg1 + ((u32) (arg1 >> 0x1F) >> 0x1E), 0, 0, 2));
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000D1D54;
+}
 
 void func_0001615C(M2C_UNK **arg0) {
     *arg0 = &D_000D1D54;
@@ -32,7 +36,13 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_016108", func_0001673C);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_016108", func_00016A0C);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_016108", func_00016CF0);
+void func_00016CF0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000D1DB4;
+    func_0001BA3C(arg0 + 4, arg1);
+    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x1C) = arg3;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+}
 
 void func_00016D48(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000D1DB4;
