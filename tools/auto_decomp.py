@@ -24,6 +24,7 @@ from elftools.elf.elffile import ELFFile
 from elftools.elf.relocation import RelocationSection
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import fwblocks as FB  # noqa: E402
 import protos  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -45,7 +46,11 @@ class Module:
     def __init__(self, ver, mod):
         self.ver, self.mod = ver, mod
         from srcdir import src_dir
+        from srcdir import sharing_versions
         self.srcdir = src_dir(ver, mod)
+        # the source is shared with other firmware versions: only edit code
+        # compiled for this one (tools/fwblocks.py)
+        self.shared = len(sharing_versions(ver, mod)) > 1
         self.src = self.srcdir / f"{mod}.c"
         self.decls_h = self.srcdir / f"{mod}_decls.h"
         self.store_path = self.srcdir / f"{mod}_decls.json"
@@ -89,6 +94,24 @@ class Module:
             if f", {name});" in t or re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{$", t, re.M):
                 return f
         return self.src
+
+    def defined_elsewhere(self, name):
+        """A shared source still defines `name` in C (for another version)."""
+        return self.shared and any(re.search(FB.DEF.format(name=name), f.read_text(), re.M | re.S)
+                                   for f in self.files if f.exists())
+
+    def revert_def(self, f, name):
+        """Put INCLUDE_ASM back for the C definition of `name` (this version's, if shared)."""
+        text = f.read_text()
+        inc = f'INCLUDE_ASM("{self.folder(f)}", {name});\n'
+        if self.shared:
+            sp = FB.def_span(text, self.ver, name)
+            if sp:
+                f.write_text(FB.simplify(text[:sp[0]] + inc + text[sp[1]:]))
+            return
+        m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", text, re.M | re.S)
+        if m:
+            f.write_text(text.replace(m.group(0), inc, 1))
 
     def folder(self, path):
         return f"nonmatchings/{path.stem}"
@@ -463,7 +486,10 @@ def main():
         if f'#include "{args.module}_decls.h"' not in s:
             s = s.replace('#include "common.h"\n', f'#include "common.h"\n#include "{args.module}_decls.h"\n', 1)
         srcs[f] = s
-    owner = {m[2]: f for f, s in srcs.items() for m in INC.finditer(s)}
+    if mod.shared:
+        owner = {n: f for f, s in srcs.items() for n in FB.asm_sites(s, args.version)}
+    else:
+        owner = {m[2]: f for f, s in srcs.items() for m in INC.finditer(s)}
     names = list(owner)
     names = [n for n in names if n in mod.funcs and args.min_size < mod.funcs[n][1] - mod.funcs[n][0] <= args.max_size]
     if args.only:
@@ -490,7 +516,13 @@ def main():
             mod.store["funcs"][name] = sig
             mod.store["vars"].update(new_vars)
             f = owner[name]
-            srcs[f] = re.sub(rf'^INCLUDE_ASM\("[^"]+", {name}\);\n', lambda _: body, srcs[f], count=1, flags=re.M)
+            if mod.shared:
+                st, en, excl = FB.asm_sites(srcs[f], args.version)[name]
+                if not excl:
+                    body = f"#if FW_VERSION == {FB.fwnum(args.version)}\n{body}#else\n{srcs[f][st:en]}#endif\n"
+                srcs[f] = srcs[f][:st] + body + srcs[f][en:]
+            else:
+                srcs[f] = re.sub(rf'^INCLUDE_ASM\("[^"]+", {name}\);\n', lambda _: body, srcs[f], count=1, flags=re.M)
             if re.search(r"\b(shiftK1|k1IsUserMode|getK1|setK1)\(", body) and '#include "k1.h"' not in srcs[f]:
                 srcs[f] = srcs[f].replace('#include "common.h"\n', '#include "common.h"\n#include "k1.h"\n', 1)
             f.write_text(srcs[f])
@@ -515,11 +547,9 @@ def main():
 def revert(mod, args, names):
     for name in names:
         f = mod.file_of(name)
-        src = f.read_text()
-        m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", src, re.M | re.S)
-        if m:
-            f.write_text(src.replace(m.group(0), f'INCLUDE_ASM("{mod.folder(f)}", {name});\n', 1))
-        mod.store["funcs"].pop(name, None)
+        mod.revert_def(f, name)
+        if not mod.defined_elsewhere(name):
+            mod.store["funcs"].pop(name, None)
     mod.write_decls()
 
 
@@ -574,7 +604,10 @@ def _verify_functions(mod, args, max_rounds=200):
         if built == mod.base:
             print("full build verified")
             return
-        live = [n for n in accepted if f", {n});" not in src]
+        if mod.shared:
+            live = [n for n in accepted if any(FB.def_span(f.read_text(), args.version, n) for f in mod.files if f.exists())]
+        else:
+            live = [n for n in accepted if f", {n});" not in src]
         moved = first_displaced(mod, args)
         why = "differs in full build"
         text_end = max(e for _, e, _ in mod.funcs.values()) - mod.text_off
@@ -596,10 +629,9 @@ def _verify_functions(mod, args, max_rounds=200):
             return
         for name in names:
             f = mod.file_of(name)
-            text = f.read_text()
-            m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", text, re.M | re.S)
-            f.write_text(text.replace(m.group(0), f'INCLUDE_ASM("{mod.folder(f)}", {name});\n', 1))
-            del mod.store["funcs"][name]
+            mod.revert_def(f, name)
+            if not mod.defined_elsewhere(name):
+                mod.store["funcs"].pop(name, None)
             print(f"reverted {name} ({why})")
         mod.write_decls()
     print("verification gave up")

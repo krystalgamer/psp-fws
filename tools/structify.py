@@ -346,7 +346,7 @@ def structify_args(mod, only=None, skip=()):
 
 
 def verify(vm):
-    return subprocess.run(["tools/regress.sh", vm], cwd=ROOT, capture_output=True, text=True).returncode == 0
+    return subprocess.run(["tools/regress.sh", "--shared", vm], cwd=ROOT, capture_output=True, text=True).returncode == 0
 
 
 def revert(mod):

@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
 # Re-split and rebuild the given VERSION:MODULE pairs from scratch and report.
-# Usage: tools/regress.sh 360:mcctrl 340:mcore ...
+# Usage: tools/regress.sh [--shared] 360:mcctrl 340:mcore ...
 cd "$(dirname "$0")/.."
 rc=0
+# --shared: also rebuild every other version built from the same source dir
+if [ "$1" = "--shared" ]; then
+    shift
+    set -- $(.venv/bin/python -c 'import sys; sys.path.insert(0, "tools"); from srcdir import sharing_versions
+out = []
+for vm in sys.argv[1:]:
+    v, m = vm.split(":")
+    out += [vm] + [f"{x}:{m}" for x in sharing_versions(v, m) if x != v]
+print(" ".join(dict.fromkeys(out)))' "$@")
+fi
 for vm in "$@"; do
     v=${vm%%:*}; m=${vm##*:}
 S=$(grep -oP "^\s*src_path:\s*\K\S+" config/$v/$m.yaml 2>/dev/null || echo src/$m)

@@ -158,7 +158,7 @@ def main():
         if new_ro:
             cfg_text = insert(cfg_text, ".rodata", new_ro)
     cfg.write_text(cfg_text)
-    rc, out = run("tools/regress.sh", f"{ver}:{mod}")
+    rc, out = run("tools/regress.sh", "--shared", f"{ver}:{mod}")
     print(out.strip())
     sys.exit(rc)
 

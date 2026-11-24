@@ -20,3 +20,10 @@ sceI2c_driver_E9463B99 = 0x000005F4; // type:func
 sceI2c_driver_6536B1B6 = 0x000005FC; // type:func
 sceSysEventForKernel_CD9E4BB5 = 0x00000604; // type:func
 sceSysEventForKernel_D7D3FDCD = 0x0000060C; // type:func
+// shared names (tools/add_version.py) begin
+D_00000930 = 0x000007C0;
+D_0000093C = 0x000007C8;
+func_0000041C = 0x00000320; // type:func
+func_00000614 = 0x000004CC; // type:func
+func_000006C0 = 0x00000578; // type:func
+// shared names (tools/add_version.py) end

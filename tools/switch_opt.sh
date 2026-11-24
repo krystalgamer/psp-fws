@@ -13,7 +13,7 @@ rm -rf src/$m
 { make extract split VERSION=$v MODULE=$m && sed -i "1i /* cflags: $opt */" "$f" \
   && .venv/bin/python tools/auto_decomp.py $v $m --max-size 0x400; } >"$log" 2>&1
 after=$(count)
-if [ "$after" -gt "$before" ] && tools/regress.sh "$1" >>"$log" 2>&1; then
+if [ "$after" -gt "$before" ] && tools/regress.sh --shared "$1" >>"$log" 2>&1; then
     echo "$1 $opt: OK $before -> $after"
 else
     rm -rf src/$m; git checkout -q -- src/$m
