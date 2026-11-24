@@ -2,17 +2,29 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0A6698", func_000A6698);
+s32 func_000A6698(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x28) & 1;
+}
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0A6698", func_000A66A4);
+s32 func_000A66A4(void *arg0) {
+    return __builtin_allegrex_ext(M2C_FIELD(arg0, s32 *, 0x28), 1, 1);
+}
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0A6698", func_000A66B0);
+s32 func_000A66B0(void *arg0) {
+    return __builtin_allegrex_ext(M2C_FIELD(arg0, s32 *, 0x28), 4, 1);
+}
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0A6698", func_000A66BC);
+void func_000A66BC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x28) = (s32) (M2C_FIELD(arg0, s32 *, 0x28) | 1);
+}
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0A6698", func_000A66CC);
+void func_000A66CC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x28) = (s32) (M2C_FIELD(arg0, s32 *, 0x28) | 2);
+}
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_0A6698", func_000A66DC);
+void func_000A66DC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x28) = (s32) (M2C_FIELD(arg0, s32 *, 0x28) | 0x10);
+}
 
 s32 func_000A66EC(s32 arg0) {
     return arg0 + 0x84;

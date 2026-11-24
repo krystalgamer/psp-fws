@@ -192,9 +192,17 @@ void func_0000676C(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00006774);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_000067AC);
+void func_000067AC(s32 arg0, s32 arg1) {
+    if (arg1 != 0) {
+        scePaf_6BA9C299(arg1, arg0 + 0x548, 0x60);
+    }
+}
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_000067DC);
+void func_000067DC(s32 arg0, s32 arg1) {
+    if (arg1 != 0) {
+        scePaf_6BA9C299(arg0 + 0x548, arg1, 0x60);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00006804);
 
@@ -224,11 +232,15 @@ void func_00007350(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00007358);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_0000736C);
+void func_0000736C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x440) = (s32) (__builtin_allegrex_ins(M2C_FIELD(arg0, s32 *, 0x440), 0, 0, 0x10) | (arg1 & 0xFFFF));
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00007384);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00007398);
+void func_00007398(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x444) = (s32) (__builtin_allegrex_ins(M2C_FIELD(arg0, s32 *, 0x444), 0, 0, 0x10) | (arg1 & 0xFFFF));
+}
 
 void func_000073B0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x448) = arg1;

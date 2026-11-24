@@ -2,7 +2,15 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_044564", func_00044564);
+s32 func_00044564(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v1;
+
+    var_v1 = -1;
+    if (arg1 != 0) {
+        var_v1 = func_000445B4(arg0, arg1, arg2);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_044564", func_00044590);
 

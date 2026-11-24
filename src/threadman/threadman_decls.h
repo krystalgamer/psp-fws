@@ -32,8 +32,11 @@ M2C_UNK SysMemForKernel_AD09C397(M2C_UNK *, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_U
 M2C_UNK SysMemForKernel_CE05CCB7();
 M2C_UNK SysMemForKernel_FEFC8666(M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, void **);
 s32 ThreadManForKernel_3AD875C3(s32, s32, s32);
+s32 ThreadManForKernel_80CA77BA(s32 arg0);
 void ThreadManForKernel_A249EAAE(s32 arg0);
+s32 ThreadManForKernel_FCB5EB49(void);
 s32 ThreadManForUser_0E927AED(void);
+void ThreadManForUser_532A522E(void);
 s32 func_0000022C(s32);
 s32 func_00000448(s32 arg0, s32 arg1);
 void func_000004CC(void *arg0);

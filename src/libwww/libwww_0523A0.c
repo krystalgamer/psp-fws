@@ -2,7 +2,15 @@
 #include "common.h"
 #include "libwww_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_0523A0", func_000523A0);
+void func_000523A0(void *arg0) {
+    void *temp_v1;
+    void *temp_v1_2;
+
+    temp_v1 = M2C_FIELD(arg0, void **, 0x90);
+    M2C_FIELD(temp_v1, s32 *, 0x20) = __builtin_allegrex_ins(M2C_FIELD(temp_v1, s32 *, 0x20), 0, 3, 1);
+    temp_v1_2 = M2C_FIELD(arg0, void **, 0x90);
+    M2C_FIELD(temp_v1_2, s32 *, 0x20) = (s32) (M2C_FIELD(temp_v1_2, s32 *, 0x20) | 0x80);
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_0523A0", func_000523C4);
 

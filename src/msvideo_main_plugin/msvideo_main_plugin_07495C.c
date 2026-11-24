@@ -2,11 +2,24 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07495C", func_0007495C);
+void func_0007495C(M2C_UNK **arg0) {
+    *arg0 = &D_000B48E0;
+    func_00075144();
+    *arg0 = &D_000AF3E8;
+}
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07495C", func_00074998);
+void func_00074998(M2C_UNK **arg0) {
+    *arg0 = &D_000B48E0;
+    func_00075144();
+    *arg0 = &D_000AF3E8;
+}
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07495C", func_000749D4);
+void func_000749D4(M2C_UNK **arg0) {
+    *arg0 = &D_000B48E0;
+    func_00075144();
+    *arg0 = &D_000AF3E8;
+    scePaf_6261C0A5((s32) arg0);
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07495C", func_00074A18);
 
@@ -70,9 +83,16 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07495C", func_00076178);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07495C", func_000761A4);
+void func_000761A4(M2C_UNK **arg0) {
+    *arg0 = &D_000B4A08;
+}
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07495C", func_000761B4);
+void func_000761B4(M2C_UNK **arg0) {
+    *arg0 = &D_000B4A08;
+}
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07495C", func_000761C4);
+void func_000761C4(M2C_UNK **arg0) {
+    *arg0 = &D_000B4A08;
+    scePaf_6261C0A5((s32) arg0);
+}
 

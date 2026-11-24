@@ -2,7 +2,10 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_04B4AC", func_0004B4AC);
+s32 *func_0004B4AC(void) {
+    D_0005C640 = sceNetInetGetErrno();
+    return &D_0005C640;
+}
 
 INCLUDE_RODATA("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_04B4AC", D_00056DF0);
 
@@ -36,7 +39,18 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_04B4AC", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_04B4AC", func_0004B5AC);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_04B4AC", sceVshLftvMw_323FA41B);
+void sceVshLftvMw_323FA41B(void) {
+    scePaf_6829D7AF(&D_0005C680, 0, 0x2020);
+    D_0005C680 = 0x8002;
+    D_0005C684 = 0;
+    D_0005E6A0 = 0x4002;
+    D_0005E6A4 = 1;
+    D_000606C0 = 0x4002;
+    D_000606C4 = 2;
+    D_000626E8 = &D_0005C680;
+    D_000626E0 = &D_0005E6A0;
+    D_000626E4 = &D_000606C0;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_04B4AC", sceVshLftvMw_948EDB31);
 
@@ -50,7 +64,9 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_04B4AC", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_04B4AC", func_0004BA34);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_04B4AC", func_0004BAB8);
+void func_0004BAB8(void) {
+    sceKernelExitThread(0);
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_04B4AC", func_0004BAE4);
 

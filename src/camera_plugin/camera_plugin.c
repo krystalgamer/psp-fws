@@ -2681,13 +2681,19 @@ s32 func_0001AE80(void) {
 void func_0001AE88(void) {
 }
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_0001AE90);
+void func_0001AE90(M2C_UNK **arg0) {
+    *arg0 = &D_000241E0;
+}
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_0001AEA0);
+void func_0001AEA0(M2C_UNK **arg0) {
+    *arg0 = &D_000241E0;
+}
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_0001AEB0);
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_0001AEC0);
+void func_0001AEC0(M2C_UNK **arg0) {
+    *arg0 = &D_000241E0;
+}
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin", func_0001AED0);
 

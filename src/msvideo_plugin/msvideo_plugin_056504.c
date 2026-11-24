@@ -2,7 +2,23 @@
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_056504", func_00056504);
+s32 func_00056504(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v0;
+    void *temp_a0;
+
+    var_v0 = 0x2003;
+    if (arg0 != NULL) {
+        temp_a0 = M2C_FIELD(arg0, void **, 0x160);
+        var_v0 = 7;
+        if (temp_a0 != NULL) {
+            M2C_FIELD(temp_a0, s32 *, 0x24) = arg3;
+            var_v0 = 0;
+            M2C_FIELD(temp_a0, s32 *, 0x1C) = arg1;
+            M2C_FIELD(temp_a0, s32 *, 0x20) = arg2;
+        }
+    }
+    return var_v0;
+}
 
 s32 func_00056530(s32 *arg0) {
     return *arg0 != 0;

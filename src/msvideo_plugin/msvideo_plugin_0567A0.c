@@ -390,7 +390,17 @@ INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_0567A0", fun
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_0567A0", func_0005A044);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_0567A0", func_0005A084);
+void func_0005A084(void *arg0) {
+    s32 temp_a1;
+
+    temp_a1 = M2C_FIELD(arg0, s32 *, 0x780);
+    M2C_FIELD(arg0, s32 **, 0) = &D_000657F8;
+    if (temp_a1 == 0) {
+
+    } else {
+        scePaf_B3D2C3BB(temp_a1);
+    }
+}
 
 void func_0005A0C4(s32 **arg0) {
     s32 temp_v1;

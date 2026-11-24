@@ -7737,9 +7737,65 @@ s32 func_000C8718(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", sceHVWWW_Library_0E71B25C);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000C8750);
+void func_000C8750(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    s32 temp_lo;
+    s32 var_a6;
+    s32 var_a7;
+    s32 var_t4;
+    void *temp_v1;
+    void *var_v1;
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000C87E0);
+    var_a6 = arg3;
+    var_t4 = -1;
+    var_a7 = 0;
+    if (arg2 > 0) {
+        var_v1 = (arg1 * 0x18) + arg0;
+        do {
+            if (M2C_FIELD(var_v1, s32 *, 0x14) == arg4) {
+                var_t4 = var_a7;
+                temp_lo = (s32) (arg3 * M2C_FIELD(var_v1, s32 *, 0x10)) / arg5;
+                M2C_FIELD(var_v1, s32 *, 0x24) = temp_lo;
+                var_a6 -= temp_lo;
+            }
+            var_a7 += 1;
+            var_v1 += 0x18;
+        } while (var_a7 < arg2);
+    }
+    if (var_a6 != 0) {
+        temp_v1 = ((arg1 + var_t4) * 0x18) + arg0;
+        M2C_FIELD(temp_v1, s32 *, 0x24) = (s32) (M2C_FIELD(temp_v1, s32 *, 0x24) + var_a6);
+    }
+}
+
+void func_000C87E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    s32 temp_lo;
+    s32 var_a6;
+    s32 var_a7;
+    s32 var_t4;
+    void *temp_v1;
+    void *var_v1;
+
+    var_a6 = arg3;
+    var_t4 = -1;
+    var_a7 = 0;
+    if (arg2 > 0) {
+        var_v1 = (arg1 * 0x18) + arg0 + 0x10;
+        do {
+            if (M2C_FIELD(var_v1, s32 *, 4) == arg4) {
+                temp_lo = arg3 / arg5;
+                var_t4 = var_a7;
+                M2C_FIELD(var_v1, s32 *, 0x14) = temp_lo;
+                var_a6 -= temp_lo;
+            }
+            var_a7 += 1;
+            var_v1 += 0x18;
+        } while (var_a7 < arg2);
+    }
+    if (var_a6 != 0) {
+        temp_v1 = ((arg1 + var_t4) * 0x18) + arg0;
+        M2C_FIELD(temp_v1, s32 *, 0x24) = (s32) (M2C_FIELD(temp_v1, s32 *, 0x24) + var_a6);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000C8868);
 

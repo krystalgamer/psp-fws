@@ -716,7 +716,9 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00013D58);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00013DB0);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForUser_532A522E);
+void ThreadManForUser_532A522E(void) {
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74, void **, 0x110), s32 *, 0x18));
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelGetThreadId);
 
@@ -730,9 +732,14 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00014130);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForKernel_4FE44D5E);
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForKernel_FCB5EB49);
+s32 ThreadManForKernel_FCB5EB49(void) {
+    return D_000172F4;
+}
 
-INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForKernel_80CA77BA);
+s32 ThreadManForKernel_80CA77BA(s32 arg0) {
+    D_000173BC = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelReferSystemStatus);
 
