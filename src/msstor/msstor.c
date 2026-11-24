@@ -11,3 +11,23 @@ INCLUDE_ASM("nonmatchings/msstor", func_00000134);
 
 INCLUDE_ASM("nonmatchings/msstor", func_0000017C);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/msstor", func_000001BC);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/msstor", func_00000220);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/msstor", func_00000288);
+#endif
+
+#if FW_VERSION == 100
+void func_00000518(s32 *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x18) = 1;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    func_00001568();
+}
+#endif
+

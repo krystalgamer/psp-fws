@@ -30,6 +30,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 import auto_decomp as AD  # noqa: E402
+import fwmodel as FM  # noqa: E402
+from srcdir import sharing_versions  # noqa: E402
 
 SYM = re.compile(r"\b(?:func|D|jtbl|L)_[0-9A-F]{8}\b|\.L[0-9A-F]{8}\b")
 AUTO = re.compile(r"(?:func|D|jtbl)_[0-9A-F]{8}")
@@ -94,14 +96,21 @@ def normalise(path, names):
     return h, syms, kind
 
 
-def units(ver, mod, stem, cfile):
+def units(ver, mod, stem, cfile, versions=None):
     """[(name, hash, syms, kind)] of the functions/rodata of one TU, in the
-    order of the C file's entries (splat's placement of INCLUDE_RODATA)."""
+    order of the C file's entries compiled for `ver` (splat's placement of
+    INCLUDE_RODATA). `versions`: FW numbers sharing the file (None: all entries)."""
     d = ROOT / "tmp/asm" / ver / mod / "nonmatchings" / stem
     items = []
-    for kind, name, _ in entries(cfile.read_text()):
-        if kind == "other" or not (d / f"{name}.s").exists():
+    if versions:
+        ents = [(e.kind, e.name, e.text) for e in FM.parse(cfile.read_text(), versions) if fwnum(ver) in e.vers]
+    else:
+        ents = entries(cfile.read_text())
+    seen = set()
+    for kind, name, _ in ents:
+        if kind == "other" or name in seen or not (d / f"{name}.s").exists():
             continue
+        seen.add(name)
         h, syms, k = normalise(d / f"{name}.s", None)
         items.append((name, h, syms, k))
     return items
@@ -273,9 +282,10 @@ def main():
         run("make", "extract", f"VERSION={new}", f"MODULE={mod}")
         run("rm", "-rf", f"tmp/asm/{new}/{mod}")
         run("make", "split", f"VERSION={new}", f"MODULE={mod}", check=True)
+        S = sorted({fwnum(v) for v in sharing_versions(ref, mod)})
         R, r_tu = [], {}
         for st in stems:
-            for u in units(ref, mod, st, src / f"{st}.c"):
+            for u in units(ref, mod, st, src / f"{st}.c", S):
                 R.append(u)
                 r_tu[u[0]] = st
         N = units(new, mod, rstem_new, scratch / f"{rstem_new}.c")
@@ -397,46 +407,54 @@ def main():
                 last_ref = nmap[nn]
             else:
                 after.setdefault(last_ref, []).append((nn, nk))
-        V = f"FW_VERSION == {nv}"
+        rv = fwnum(ref)
+        S2 = sorted(set(S) | {nv})
+        NV = frozenset([nv])
 
-        def new_only(lst, folder):
-            s = []
-            for nn, nk in lst:
-                macro = "INCLUDE_ASM" if nk == "func" else "INCLUDE_RODATA"
-                s.append(f'#if {V}\n{macro}("{folder}", {renamed(nn)});\n#endif\n')
-            return "\n".join(s)
+        def asm_entry(nn, nk, folder):
+            macro = "INCLUDE_ASM" if nk == "func" else "INCLUDE_RODATA"
+            return FM.Entry(NV, "asm" if nk == "func" else "rodata", renamed(nn), f'{macro}("{folder}", {renamed(nn)});\n')
         lead = after.pop(None, [])
         stats = {"shared": 0, "modified": 0, "ref_only": 0, "new_only": sum(len(v) for v in after.values()) + len(lead)}
+        done = set()
         for st in stems:
             cfile = src / f"{st}.c"
             folder = f"nonmatchings/{st}"
             out = []
             placed_lead = st != stems[0]
-            for kind, name, text in entries(cfile.read_text()):
-                if kind == "other":
-                    out.append(text)
+            for e in FM.parse(cfile.read_text(), S):
+                if e.kind == "other":
+                    if rv in e.vers:
+                        e.vers = e.vers | NV
+                    out.append(e)
                     continue
                 if not placed_lead and lead:
-                    out.append(new_only(lead, folder) + "\n")
+                    out += [asm_entry(nn, nk, folder) for nn, nk in lead]
                     placed_lead = True
-                stt = status.get(name)
+                if rv not in e.vers or e.name in done:
+                    out.append(e)
+                    continue
+                done.add(e.name)
+                stt = status.get(e.name)
                 if stt == "shared":
-                    out.append(text)
+                    e.vers = e.vers | NV
                     stats["shared"] += 1
+                    out.append(e)
                 elif stt == "modified":
                     stats["modified"] += 1
-                    if kind == "cfunc":
-                        out.append(f'#if {V}\nINCLUDE_ASM("{folder}", {name});\n#else\n{text}#endif\n')
+                    if e.kind == "cfunc":
+                        out.append(FM.Entry(NV, "asm", e.name, f'INCLUDE_ASM("{folder}", {e.name});\n'))
                     else:
-                        out.append(text)
+                        e.vers = e.vers | NV
+                    out.append(e)
                 else:
                     stats["ref_only"] += 1
-                    out.append(f"#if FW_VERSION != {nv}\n{text}#endif\n")
-                if name in after:
-                    out.append("\n" + new_only(after.pop(name), folder))
+                    out.append(e)
+                if e.name in after:
+                    out += [asm_entry(nn, nk, folder) for nn, nk in after.pop(e.name)]
             if st == stems[-1] and after:
-                out.append("\n" + "\n".join(new_only(v, folder) for v in after.values()))
-            cfile.write_text("".join(out))
+                out += [asm_entry(nn, nk, folder) for v in after.values() for nn, nk in v]
+            cfile.write_text(FM.emit(out, S2))
         cfiles = [src / f"{st}.c" for st in stems]
         ncfg.write_text(ntext)
         nf = sum(1 for n, _, _, k in N if k == "func")
@@ -447,6 +465,7 @@ def main():
             return
         # 5. verify NEW; demote shared C functions that differ, then REF
         mods = AD.Module.__new__(AD.Module)
+        demoted = set()
         for rnd in range(60):
             run("rm", "-rf", f"tmp/asm/{new}/{mod}", f"tmp/build/{new}/src/{mod}")
             run("make", "split", f"VERSION={new}", f"MODULE={mod}", check=True)
@@ -464,15 +483,18 @@ def main():
                 bad = [max(before)[1]] if before else []
             else:
                 bad = [n for n in live if built[mods.funcs[n][0]:mods.funcs[n][1]] != mods.base[mods.funcs[n][0]:mods.funcs[n][1]]]
-            bad = [n for n in bad if not re.search(rf"#if {V}\nINCLUDE_ASM\(\"[^\"]+\", {n}\);\n#else\n", text)]
+            bad = [n for n in bad if n not in demoted]
+            demoted.update(bad)
             if not bad:
                 raise RuntimeError(f"{new} mismatch outside shared C functions:\n{outp[-800:]}")
             for n in bad:
                 for cf in cfiles:
-                    t = cf.read_text()
-                    m = re.search(rf"^(?!static)[^\n;#]*\b{n}\([^;{{}}]*\)\s*\{{\n.*?^\}}\n", t, re.M | re.S)
-                    if m:
-                        cf.write_text(t.replace(m[0], f'#if {V}\nINCLUDE_ASM("nonmatchings/{cf.stem}", {n});\n#else\n{m[0]}#endif\n', 1))
+                    ents = FM.parse(cf.read_text(), S2)
+                    hit = next((k for k, e in enumerate(ents) if e.kind == "cfunc" and e.name == n and nv in e.vers), None)
+                    if hit is not None:
+                        ents[hit].vers = ents[hit].vers - NV
+                        ents.insert(hit, FM.Entry(NV, "asm", n, f'INCLUDE_ASM("nonmatchings/{cf.stem}", {n});\n'))
+                        cf.write_text(FM.emit(ents, S2))
                         break
                 print(f"  {n}: C differs in {new}, asm there")
         else:

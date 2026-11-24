@@ -50,7 +50,8 @@ class Module:
         self.srcdir = src_dir(ver, mod)
         # the source is shared with other firmware versions: only edit code
         # compiled for this one (tools/fwblocks.py)
-        self.shared = len(sharing_versions(ver, mod)) > 1
+        self.fwvers = sorted({FB.fwnum(x) for x in sharing_versions(ver, mod)})
+        self.shared = len(self.fwvers) > 1
         self.src = self.srcdir / f"{mod}.c"
         self.decls_h = self.srcdir / f"{mod}_decls.h"
         self.store_path = self.srcdir / f"{mod}_decls.json"
@@ -105,9 +106,7 @@ class Module:
         text = f.read_text()
         inc = f'INCLUDE_ASM("{self.folder(f)}", {name});\n'
         if self.shared:
-            sp = FB.def_span(text, self.ver, name)
-            if sp:
-                f.write_text(FB.simplify(text[:sp[0]] + inc + text[sp[1]:]))
+            f.write_text(FB.put_asm(text, self.ver, self.fwvers, name, self.folder(f)))
             return
         m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", text, re.M | re.S)
         if m:
@@ -487,7 +486,7 @@ def main():
             s = s.replace('#include "common.h"\n', f'#include "common.h"\n#include "{args.module}_decls.h"\n', 1)
         srcs[f] = s
     if mod.shared:
-        owner = {n: f for f, s in srcs.items() for n in FB.asm_sites(s, args.version)}
+        owner = {n: f for f, s in srcs.items() for n in FB.asm_names(s, args.version, mod.fwvers)}
     else:
         owner = {m[2]: f for f, s in srcs.items() for m in INC.finditer(s)}
     names = list(owner)
@@ -517,10 +516,7 @@ def main():
             mod.store["vars"].update(new_vars)
             f = owner[name]
             if mod.shared:
-                st, en, excl = FB.asm_sites(srcs[f], args.version)[name]
-                if not excl:
-                    body = f"#if FW_VERSION == {FB.fwnum(args.version)}\n{body}#else\n{srcs[f][st:en]}#endif\n"
-                srcs[f] = srcs[f][:st] + body + srcs[f][en:]
+                srcs[f] = FB.put_c(srcs[f], args.version, mod.fwvers, name, body)
             else:
                 srcs[f] = re.sub(rf'^INCLUDE_ASM\("[^"]+", {name}\);\n', lambda _: body, srcs[f], count=1, flags=re.M)
             if re.search(r"\b(shiftK1|k1IsUserMode|getK1|setK1)\(", body) and '#include "k1.h"' not in srcs[f]:
@@ -605,7 +601,7 @@ def _verify_functions(mod, args, max_rounds=200):
             print("full build verified")
             return
         if mod.shared:
-            live = [n for n in accepted if any(FB.def_span(f.read_text(), args.version, n) for f in mod.files if f.exists())]
+            live = [n for n in accepted if any(FB.has_c(f.read_text(), args.version, mod.fwvers, n) for f in mod.files if f.exists())]
         else:
             live = [n for n in accepted if f", {n});" not in src]
         moved = first_displaced(mod, args)

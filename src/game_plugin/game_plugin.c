@@ -8,29 +8,78 @@ INCLUDE_ASM("nonmatchings/game_plugin", func_000000AC);
 
 INCLUDE_ASM("nonmatchings/game_plugin", module_start);
 
+#if FW_VERSION == 100
+s32 module_stop(void) {
+    func_0000FC3C();
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/game_plugin", func_0000015C);
+#endif
+
+#if FW_VERSION != 100
 s32 module_stop(void) {
     func_00010A38();
     return 0;
 }
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/game_plugin", func_0000015C);
+#endif
 
 INCLUDE_ASM("nonmatchings/game_plugin", func_000003DC);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/game_plugin", func_00000458);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/game_plugin", func_00000474);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00010698);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/game_plugin", func_000004D0);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/game_plugin", func_000005D4);
+#endif
+
 INCLUDE_ASM("nonmatchings/game_plugin", func_0000045C);
 
+#if FW_VERSION == 100
+void func_000006B8(void) {
+    vsh_B55C095C(&D_000115D8);
+}
+#endif
+
+#if FW_VERSION != 100
 s32 func_000004E8(s32 arg0) {
     func_00008160(&D_0001247C, arg0);
     return 0;
 }
+#endif
 
+#if FW_VERSION != 100
 void func_00000510(void) {
     func_00006EF4(0);
 }
+#endif
 
+#if FW_VERSION != 100
 void func_0000052C(void) {
     func_00006EF4(1);
 }
+#endif
 
+#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/game_plugin", func_00000548);
+#endif
 
