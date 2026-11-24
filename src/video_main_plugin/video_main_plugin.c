@@ -528,7 +528,11 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin", func_00005944);
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin", func_00005964);
+void func_00005964(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin", func_00005974);
 

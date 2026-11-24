@@ -348,7 +348,15 @@ INCLUDE_RODATA("tmp/asm/282/pafmini/nonmatchings/pafmini_0196D0", D_000D1FB0);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0196D0", func_0001E0BC);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0196D0", func_0001E1C8);
+void func_0001E1C8(void *arg0) {
+    void *temp_v1;
+
+    temp_v1 = arg0 + 0x14;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    M2C_FIELD(temp_v1, s32 *, 4) = 0;
+    M2C_FIELD(temp_v1, s32 *, 8) = 0;
+    func_0001E0BC((s32) arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0196D0", func_0001E1F4);
 
@@ -567,7 +575,13 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0196D0", func_0001FFFC);
 void func_00020018(void) {
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0196D0", func_00020020);
+void func_00020020(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x408) = arg1;
+        M2C_FIELD(arg0, s32 *, 0x400) = arg2;
+        M2C_FIELD(arg0, s32 *, 0x404) = arg3;
+    }
+}
 
 s32 func_0002003C(void *arg0) {
     s32 var_v0;

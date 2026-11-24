@@ -989,9 +989,16 @@ void func_0004A234(M2C_UNK **arg0) {
     scePaf_4E67BB08((s32) arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428", func_0004A25C);
+void func_0004A25C(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00055F88;
+    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_00055220;
+}
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428", func_0004A278);
+void func_0004A278(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00055F88;
+    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_00055220;
+    scePaf_4E67BB08((s32) arg0);
+}
 
 void func_0004A2AC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
@@ -1190,7 +1197,11 @@ void func_0004C260(void *arg0, u32 arg1) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428", func_0004C28C);
+void func_0004C28C(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x534) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x538) = arg2;
+    func_0004C484();
+}
 
 void func_0004C2B0(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 0x53C) = arg1;
@@ -1443,7 +1454,13 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428", func_0004D78C);
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428", func_0004D840);
+void func_0004D840(s32 arg0, s32 arg1) {
+    func_00036B48(arg0, arg1, (s32) &D_00056780, 1, 4);
+    M2C_FIELD(arg0, s32 *, 0x28) = -1;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000567A0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+}
 
 void func_0004D890(void) {
     void *sp0;

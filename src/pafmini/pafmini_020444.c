@@ -136,7 +136,11 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_0002100C);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_00021030);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_00021054);
+void func_00021054(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, s32 *, 0x600) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x604) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x608) = arg3;
+}
 
 s32 func_00021064(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x600);
@@ -575,7 +579,10 @@ void func_0002EABC(void) {
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_0002EAC4);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_0002EADC);
+void func_0002EADC(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x620) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x624) = arg2;
+}
 
 void func_0002EAE8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 1);
@@ -643,7 +650,11 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", png_do_strip_fill
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", png_do_bgr);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", png_set_user_transform_info);
+void png_set_user_transform_info(void *arg0, s32 arg1, s8 arg2, s8 arg3) {
+    M2C_FIELD(arg0, s32 *, 0x420) = arg1;
+    M2C_FIELD(arg0, s8 *, 0x424) = arg2;
+    M2C_FIELD(arg0, s8 *, 0x425) = arg3;
+}
 
 s32 png_get_user_transform_ptr(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x420);
@@ -673,7 +684,12 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", inflateInit2_);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", inflateInit_);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", fixedtables);
+void fixedtables(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0x4C) = &D_000D5E64;
+    M2C_FIELD(arg0, s32 *, 0x54) = 9;
+    M2C_FIELD(arg0, M2C_UNK **, 0x50) = &D_000D6664;
+    M2C_FIELD(arg0, s32 *, 0x58) = 5;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", updatewindow);
 

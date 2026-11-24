@@ -355,7 +355,11 @@ s32 scePaf_D3AB4076(void) {
     return D_000E067C;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00DD54", scePaf_87E5F9C7);
+s32 scePaf_87E5F9C7(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0xA0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0xA4) = arg2;
+    return 1;
+}
 
 s32 scePaf_D726DDD3(s32 arg0) {
     s32 **temp_v0;

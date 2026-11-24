@@ -167,7 +167,11 @@ s32 func_000672AC(s32 arg0, M2C_UNK arg1) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_000672F4);
+void func_000672F4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_00067304);
 
@@ -336,7 +340,17 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", scePaf_A9970EF5);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_000698E4);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_0006996C);
+s32 func_0006996C(void *arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = -1;
+    if (M2C_FIELD(arg0, u8 *, 0x332) != 0) {
+        var_v1 = 0;
+        M2C_FIELD(arg0, s32 *, 0x438) = arg1;
+        M2C_FIELD(arg0, s32 *, 0x5B8) = arg1;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_0006998C);
 
@@ -394,16 +408,34 @@ void func_0006A0F4(void *arg0) {
     scePaf_672036FE();
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_0006A118);
+void func_0006A118(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0x334) = 1;
+    M2C_FIELD(arg0, s8 *, 0x335) = 1;
+    scePaf_1C286704((s32) arg0);
+}
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_0006A140);
+void func_0006A140(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0x334) = 1;
+    M2C_FIELD(arg0, s8 *, 0x335) = 1;
+    scePaf_2E6CA751((s32) arg0);
+}
 
 void func_0006A168(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x334) = 1;
     scePaf_DB230BE1();
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", scePaf_D1EE972C);
+s32 scePaf_D1EE972C(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v1;
+    void *temp_v0;
+
+    var_v1 = -1;
+    temp_v0 = M2C_FIELD(arg0, void **, 0x1E8);
+    if (temp_v0 != NULL) {
+        var_v1 = func_000782CC(temp_v0, arg1, arg2, arg3);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", scePaf_E732CF74);
 

@@ -215,7 +215,11 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_00023120);
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_00023130);
+void func_00023130(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00053518;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_00023148);
 
@@ -241,7 +245,11 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_00023684);
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_0002369C);
+void func_0002369C(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000534D8;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_000236B4);
 
@@ -381,9 +389,17 @@ void func_00024280(M2C_UNK **arg0) {
     scePaf_4E67BB08((s32) arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_000242A8);
+void func_000242A8(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00053668;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_000242C0);
+void func_000242C0(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00053668;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 void func_000242D8(void *arg0) {
     void *temp_s0;
@@ -691,7 +707,11 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_00025ECC);
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_00025F14);
+void func_00025F14(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000538B8;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 void func_00025F2C(M2C_UNK **arg0) {
     *arg0 = &D_000538B8;
@@ -754,7 +774,11 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_00026954);
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_021A6C", func_0002699C);
+void func_0002699C(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00053B58;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 void func_000269B4(M2C_UNK **arg0) {
     *arg0 = &D_00053B58;

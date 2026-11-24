@@ -3,15 +3,48 @@
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", scePaf_B2ED6CAA);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", scePaf_1232B7A3);
+s32 scePaf_1232B7A3(void *arg0, s32 arg1, s32 arg2) {
+    s32 var_a3;
+    void *temp_v0;
+
+    var_a3 = -1;
+    temp_v0 = M2C_FIELD(arg0, void **, 0x1E8);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(arg0, s8 *, 0x334) = 1;
+        var_a3 = func_00078644(temp_v0, arg1, arg2);
+    }
+    return var_a3;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", func_0006A528);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", scePaf_37DD37B8);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", scePaf_B9BE69FD);
+s32 scePaf_B9BE69FD(void *arg0, s32 arg1) {
+    s32 var_a2;
+    void *temp_v0;
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", scePaf_8D7FC7DB);
+    var_a2 = -1;
+    temp_v0 = M2C_FIELD(arg0, void **, 0x1E8);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(arg0, s8 *, 0x334) = 1;
+        var_a2 = func_000786E0(temp_v0, arg1);
+    }
+    return var_a2;
+}
+
+s32 scePaf_8D7FC7DB(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_a4;
+    void *temp_v0;
+
+    var_a4 = -1;
+    temp_v0 = M2C_FIELD(arg0, void **, 0x1E8);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(arg0, s8 *, 0x334) = 1;
+        var_a4 = func_00078714(temp_v0, arg1, arg2, arg3);
+    }
+    return var_a4;
+}
 
 void scePaf_905CF2A7(void *arg0, s32 arg1) {
     s32 temp_v0;
@@ -674,7 +707,16 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", func_000745F0);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", func_00074730);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", func_00074830);
+void func_00074830(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000D9B60;
+    if (M2C_FIELD(arg0, u8 *, 0x1C) == 0) {
+
+    } else {
+        func_00049968(M2C_FIELD(arg0, s32 *, 0x20));
+    }
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000D80D8;
+    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_000D1930;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", func_0007488C);
 
