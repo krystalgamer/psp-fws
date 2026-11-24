@@ -5,12 +5,12 @@ INCLUDE_ASM("nonmatchings/common_util", func_00000024);
 
 INCLUDE_ASM("nonmatchings/common_util", func_000000AC);
 
-#if FW_VERSION < 282
 s32 module_start(void) {
     func_00000000();
     return 0;
 }
 
+#if FW_VERSION < 282
 s32 module_stop(void) {
     func_00009F60();
     return 0;
@@ -318,11 +318,6 @@ INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_9845E69B);
 
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_36BA6A54);
 #else
-s32 module_start(void) {
-    func_00000000();
-    return 0;
-}
-
 s32 module_stop(void) {
     func_000083D0();
     return 0;
@@ -345,19 +340,17 @@ INCLUDE_ASM("nonmatchings/common_util", func_000004BC);
 
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_7A1C6D74);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_FC8E3CEF);
 
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_BFC546B6);
+#endif
 
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_9DF53F2F);
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_FC8E3CEF);
-
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_BFC546B6);
-
 INCLUDE_ASM("nonmatchings/common_util", func_000006B4);
 
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_FA969B6A);
@@ -522,7 +515,7 @@ INCLUDE_ASM("nonmatchings/common_util", func_000009F4);
 
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_2ACAD845);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150
 void sceVshCommonUtil_98E57F6D(struct Unk_sceVshCommonUtil_98E57F6D_0 *arg0) {
     s32 temp_a0;
 
@@ -540,9 +533,7 @@ void sceVshCommonUtil_98E57F6D(struct Unk_sceVshCommonUtil_98E57F6D_0 *arg0) {
         sceReg_FA8A5739(arg0->unk4);
     }
 }
-#endif
-
-#if FW_VERSION == 100
+#else
 void sceVshCommonUtil_98E57F6D(struct Unk_sceVshCommonUtil_98E57F6D_0 *arg0) {
     s32 temp_a0;
     s32 temp_a0_2;
@@ -565,24 +556,6 @@ void sceVshCommonUtil_98E57F6D(struct Unk_sceVshCommonUtil_98E57F6D_0 *arg0) {
 #endif
 
 #if FW_VERSION == 282
-void sceVshCommonUtil_98E57F6D(struct Unk_sceVshCommonUtil_98E57F6D_0 *arg0) {
-    s32 temp_a0;
-
-    temp_a0 = arg0->unk8;
-    if (temp_a0 != 0) {
-        if (arg0->unk10 != 0) {
-            sceReg_0D69BF40(temp_a0);
-        }
-        sceReg_0CAE832B(arg0->unk8);
-    }
-    if (arg0->unk0 != 0) {
-        if (arg0->unk10 != 0) {
-            sceReg_39461B4D(arg0->unk4);
-        }
-        sceReg_FA8A5739(arg0->unk4);
-    }
-}
-
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_63FFE887);
 #endif
 

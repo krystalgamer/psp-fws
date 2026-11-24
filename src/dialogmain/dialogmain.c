@@ -371,20 +371,15 @@ s32 module_stop(void) {
 }
 #endif
 
-#if FW_VERSION == 150
-s32 module_reboot_before(void) {
-    sceVshCommonUtil_3FAF35EC();
-    return 0;
-}
-#endif
-
 #if FW_VERSION == 282
 s32 module_stop(void) {
     func_00007940();
     sceVshCommonUtil_0713D516();
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 150
 s32 module_reboot_before(void) {
     sceVshCommonUtil_3FAF35EC();
     return 0;
@@ -907,21 +902,7 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_00003294);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dialogmain", func_00003150);
-#endif
-
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/dialogmain", func_00003824);
-
-INCLUDE_ASM("nonmatchings/dialogmain", func_000038C4);
-#endif
-
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/dialogmain", func_00003824);
-
-INCLUDE_ASM("nonmatchings/dialogmain", func_000038C4);
-#endif
-
-#if FW_VERSION == 282
+#else
 void func_00003660(struct Unk_func_00003660_0 *arg0) {
     if (arg0 != NULL) {
         arg0->unk98 = scePaf_D7215544(D_0000A280, &D_00008D60);
@@ -948,11 +929,11 @@ void func_00003660(struct Unk_func_00003660_0 *arg0) {
         arg0->unkEC = scePaf_D7215544(D_0000A280, &D_00008D78);
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00003824);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_000038C4);
-#endif
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00003998);
 

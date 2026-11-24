@@ -2,17 +2,15 @@
 #include "common.h"
 #include "audio_decls.h"
 
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", func_00000000);
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", func_00000220);
 
 INCLUDE_ASM("nonmatchings/audio", func_0000028C);
 
 INCLUDE_ASM("nonmatchings/audio", func_000004CC);
 #else
-INCLUDE_ASM("nonmatchings/audio", func_00000000);
-
 INCLUDE_ASM("nonmatchings/audio", func_000001E8);
 
 INCLUDE_ASM("nonmatchings/audio", func_00000274);

@@ -3,7 +3,6 @@
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000000);
 
-#if FW_VERSION == 100
 s32 func_00000170(struct Unk_func_00000170_0 *arg0, struct Unk_func_00000170_1 *arg1, s32 arg2) {
     s32 var_v1;
 
@@ -16,9 +15,7 @@ s32 func_00000170(struct Unk_func_00000170_0 *arg0, struct Unk_func_00000170_1 *
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 func_0000019C(struct Unk_func_0000019C_0 *arg0, struct Unk_func_0000019C_1 *arg1, s32 arg2) {
     s32 var_v1;
 
@@ -31,9 +28,7 @@ s32 func_0000019C(struct Unk_func_0000019C_0 *arg0, struct Unk_func_0000019C_1 *
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 func_000001CC(struct Unk_func_000001CC_0 *arg0, struct Unk_func_000001CC_1 *arg1, s32 arg2) {
     s32 var_v1;
 
@@ -46,52 +41,6 @@ s32 func_000001CC(struct Unk_func_000001CC_0 *arg0, struct Unk_func_000001CC_1 *
     }
     return var_v1;
 }
-#endif
-
-#if FW_VERSION != 100
-s32 func_00000170(struct Unk_func_00000170_0 *arg0, struct Unk_func_00000170_1 *arg1, s32 arg2) {
-    s32 var_v1;
-
-    var_v1 = 0;
-    if (arg0->unk7 != arg2) {
-        arg1->unk1 = 5;
-        var_v1 = -1;
-        arg1->unk2 = 0x24;
-        arg1->unk3 = 0;
-    }
-    return var_v1;
-}
-#endif
-
-#if FW_VERSION != 100
-s32 func_0000019C(struct Unk_func_0000019C_0 *arg0, struct Unk_func_0000019C_1 *arg1, s32 arg2) {
-    s32 var_v1;
-
-    var_v1 = 0;
-    if (((u8) arg0->unkA >> 6) != arg2) {
-        arg1->unk1 = 5;
-        var_v1 = -1;
-        arg1->unk2 = 0x6F;
-        arg1->unk3 = 0;
-    }
-    return var_v1;
-}
-#endif
-
-#if FW_VERSION != 100
-s32 func_000001CC(struct Unk_func_000001CC_0 *arg0, struct Unk_func_000001CC_1 *arg1, s32 arg2) {
-    s32 var_v1;
-
-    var_v1 = 0;
-    if (((arg0->unk8 << 8) | arg0->unk9) != arg2) {
-        arg1->unk1 = 5;
-        var_v1 = -1;
-        arg1->unk2 = 0x24;
-        arg1->unk3 = 0;
-    }
-    return var_v1;
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000204);
 
@@ -99,17 +48,11 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_000002F8);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000003C8);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000468);
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000003C4);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000480);
 #endif
 
@@ -127,9 +70,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00000764);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000085C);
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000086C);
 #endif
 
@@ -147,17 +88,11 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00000FD4);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000105C);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000012E8);
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000109C);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001304);
 #endif
 
@@ -165,51 +100,29 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_000013FC);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001444);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001868);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000018B8);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001D04);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001F6C);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002038);
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001450);
-#endif
 
-#if FW_VERSION != 100
 s32 func_000017C4(void) {
     return -1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000017CC);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001B88);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001D30);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001E58);
 #endif
 
@@ -217,9 +130,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00002370);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002644);
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002464);
 #endif
 
@@ -227,9 +138,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00002638);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002948);
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000272C);
 #endif
 
@@ -241,9 +150,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00002BF0);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002F1C);
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002CE8);
 #endif
 
@@ -263,25 +170,15 @@ void func_00003610(void) {
     M2C_VFIELD(&D_00004B00, s32, 0x38) = -1;
     M2C_VFIELD(&D_00004B00, s32, 0x5C) = 0;
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00003398);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000035F4);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00003628);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000368C);
-#endif
 
-#if FW_VERSION != 100
 void func_00003B58(void) {
     D_00005150.unk74 = -1;
     D_00005150.unk50 = 0;

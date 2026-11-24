@@ -9,25 +9,15 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003A5D8);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002D800);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002D8C0);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002D964);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002D9B4);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002DA04);
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 func_0003A674(s32 arg0, s32 *arg1, s32 *arg2) {
     s32 temp_v0;
 
@@ -39,9 +29,7 @@ s32 func_0003A674(s32 arg0, s32 *arg1, s32 *arg2) {
     }
     return ((temp_v0 ^ 7) != 0) ? temp_v0 : 0x2003;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_0003A6D4(s32 arg0) {
     s32 temp_v0;
     s32 var_a1;
@@ -53,13 +41,9 @@ s32 func_0003A6D4(s32 arg0) {
     }
     return var_a1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003A720);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003A7B0);
 #endif
 
@@ -69,9 +53,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003AD1C);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002DF2C);
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 func_0003AE38(void **arg0, s32 *arg1, s32 *arg2) {
     s32 var_a3;
     struct Unk_func_0003AE38_temp_a0 *temp_a0;
@@ -91,21 +73,13 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003AE64);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002DFB4);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002DFD8);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002E02C);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003AF58);
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 func_0003AEC0(void **arg0, s32 *arg1) {
     s32 var_v1;
     struct Unk_func_0003AEC0_temp_a0 *temp_a0;
@@ -118,9 +92,7 @@ s32 func_0003AEC0(void **arg0, s32 *arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_0003AEE4(s32 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_a1;
@@ -132,9 +104,7 @@ s32 func_0003AEE4(s32 *arg0, s32 arg1) {
     }
     return var_a1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_0003AF34(void **arg0, u16 *arg1) {
     s32 var_v1;
     struct Unk_func_0003AF34_temp_a0 *temp_a0;
@@ -148,4 +118,3 @@ s32 func_0003AF34(void **arg0, u16 *arg1) {
     return var_v1;
 }
 #endif
-

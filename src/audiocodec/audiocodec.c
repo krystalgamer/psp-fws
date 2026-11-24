@@ -27,19 +27,15 @@ INCLUDE_ASM("nonmatchings/audiocodec", func_00000A58);
 
 INCLUDE_ASM("nonmatchings/audiocodec", func_00000AAC);
 
-#if FW_VERSION < 201
 s32 sceAudiocodec_driver_62518B7E(void) {
     return 0;
 }
 
+#if FW_VERSION < 201
 s32 module_stop(void) {
     return 0;
 }
 #else
-s32 sceAudiocodec_driver_62518B7E(void) {
-    return 0;
-}
-
 s32 func_00000AF8(void) {
     return 0;
 }

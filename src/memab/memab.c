@@ -11,7 +11,7 @@ INCLUDE_ASM("nonmatchings/memab", func_0000026C);
 
 INCLUDE_ASM("nonmatchings/memab", func_000002F8);
 
-#if FW_VERSION != 100
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/memab", func_00000558);
 #endif
 
@@ -33,9 +33,7 @@ s32 module_start(void) {
     D_000028E0 = temp_v0;
     return temp_v0 < 1;
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 module_start(void) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -88,14 +86,10 @@ INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_F1D2B9B0);
 
 INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_4DF566D3);
 
-#if FW_VERSION != 100
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_F94CA9B8);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_34EBFB6A);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_531E144B);
 #endif

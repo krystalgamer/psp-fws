@@ -60,10 +60,6 @@ s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     }
     return 0;
 }
-
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetIdleCancelThreshold);
-
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetIdleCancelThreshold);
 #endif
 
 #if FW_VERSION == 282
@@ -82,7 +78,9 @@ s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetIdleCancelThreshold);
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetIdleCancelThreshold);
@@ -94,7 +92,6 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_5E77BC8A);
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetRapidFire);
 
-#if FW_VERSION < 282
 s32 module_start(void) {
     sceCtrl_driver_3E65A0EA();
     return 0;
@@ -104,17 +101,6 @@ s32 module_reboot_before(void) {
     sceCtrl_driver_E03956E9();
     return 0;
 }
-#else
-s32 module_start(void) {
-    sceCtrl_driver_3E65A0EA();
-    return 0;
-}
-
-s32 module_reboot_before(void) {
-    sceCtrl_driver_E03956E9();
-    return 0;
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_C3F607F3);
 

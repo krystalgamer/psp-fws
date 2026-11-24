@@ -48,7 +48,6 @@ INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_B9716D48);
 
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_4EB657D5);
 
-#if FW_VERSION < 282
 void sceClockgen_driver_5F8328FD(void) {
     func_00000614(0x10, 1);
 }
@@ -64,7 +63,6 @@ void sceClockgen_driver_7FF82F6F(void) {
 void sceClockgen_driver_DBE5F283(void) {
     func_00000614(8, 0);
 }
-#endif
 
 #if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/clockgen", func_0000047C);
@@ -75,22 +73,6 @@ INCLUDE_ASM("nonmatchings/clockgen", func_00000468);
 #endif
 
 #if FW_VERSION == 282
-void sceClockgen_driver_5F8328FD(void) {
-    func_00000614(0x10, 1);
-}
-
-void sceClockgen_driver_B9FE99D1(void) {
-    func_00000614(0x10, 0);
-}
-
-void sceClockgen_driver_7FF82F6F(void) {
-    func_00000614(8, 1);
-}
-
-void sceClockgen_driver_DBE5F283(void) {
-    func_00000614(8, 0);
-}
-
 INCLUDE_ASM("nonmatchings/clockgen", func_00000578);
 #endif
 

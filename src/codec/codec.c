@@ -70,15 +70,13 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_DFBCACF3);
 
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_C513C747);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_3064C53D);
 #endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_56494D70);
 #else
-INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_3064C53D);
-
 void sceCodec_driver_31B2E41E(void) {
     func_000002A8(0, 0, -1, 0);
 }
@@ -140,15 +138,17 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_02133959);
 
 #if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/codec", func_00000B70);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/codec", func_00000924);
+#endif
 
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/codec", func_00000EC4);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/codec", func_00000924);
-
 INCLUDE_ASM("nonmatchings/codec", func_00000C50);
 #endif
 

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
-#if FW_VERSION != 100
+#if FW_VERSION == 201
 s32 func_0003AF58(void **arg0, s32 arg1, s32 *arg2) {
     s32 temp_v0;
     s32 var_a2;
@@ -42,9 +42,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B180);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0002E310);
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 func_0003B214(struct Unk_func_00039644_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
@@ -61,9 +59,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B240);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0002E414);
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 func_0003B314(struct Unk_func_0003969C_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
@@ -80,25 +76,15 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B334);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0002E4CC);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0002E4EC);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0002E540);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0002E5BC);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0002E5DC);
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 func_0003B3C8(struct Unk_func_000396F4_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
@@ -109,9 +95,7 @@ s32 func_0003B3C8(struct Unk_func_000396F4_0 *arg0, s32 *arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_0003B3E8(s32 arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_a1;
@@ -123,13 +107,9 @@ s32 func_0003B3E8(s32 arg0, s32 arg1) {
     }
     return var_a1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03AF58", func_0003B438);
-#endif
 
-#if FW_VERSION != 100
 s32 func_0003B4AC(struct Unk_func_00039778_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
@@ -141,4 +121,3 @@ s32 func_0003B4AC(struct Unk_func_00039778_0 *arg0, s32 *arg1) {
     return var_v1;
 }
 #endif
-
