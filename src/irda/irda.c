@@ -41,7 +41,19 @@ INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000880);
 
 INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000968);
 
-INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000A1C);
+s32 func_00000A1C(void *arg0) {
+    s32 temp_v0;
+
+    if (M2C_FIELD(arg0, s32 *, 0x4C) == 0) {
+        func_00000AF8();
+        temp_v0 = sceKernelSetAlarm(0x64U, (s32) &func_0000117C, arg0);
+        M2C_FIELD(arg0, s32 *, 0x4C) = temp_v0;
+        if (temp_v0 < 0) {
+            M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000A74);
 
@@ -51,11 +63,18 @@ INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000AF8);
 
 INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000B4C);
 
-INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000BAC);
+s32 func_00000BAC(void) {
+    return D_00001784;
+}
 
-INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000BB8);
+void func_00000BB8(s32 arg0) {
+    D_00001788 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000BC4);
+s32 func_00000BC4(void) {
+    IoFileMgrForKernel_8E982A74(&D_00001710);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/irda/nonmatchings/irda", func_00000BE8);
 

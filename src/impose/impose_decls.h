@@ -5,6 +5,7 @@
 #include "m2c_macros.h"
 
 extern u32 *D_0000F510;
+extern M2C_UNK D_0000F514;
 
 void func_00000000(u32 arg0);
 s32 func_0000070C(void);
@@ -26,7 +27,13 @@ s32 sceImpose_driver_5595A71A(s32 arg0);
 s32 sceImpose_driver_7084E72C(void);
 s32 sceImpose_driver_B415FC59(void);
 s32 sceImpose_driver_C7E36CC7(void);
+s32 sceKernelDelayThread(u32);
+s32 sceKernelDeleteEventFlag(s32);
+s32 sceKernelDeleteThread(s32);
+M2C_UNK sceKernelReleaseSubIntrHandler(M2C_UNK, M2C_UNK);
 s32 sceKernelSetEventFlag(u32, u32);
+s32 sceKernelWaitThreadEnd(s32, void *);
+M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);
 s32 syslib_ADF12745(s32 arg0);
 
 #endif

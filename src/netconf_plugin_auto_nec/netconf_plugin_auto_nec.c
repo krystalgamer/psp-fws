@@ -18,7 +18,10 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_70A22EF2);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", func_00000180);
+s32 func_00000180(void) {
+    D_000084A4 = -1;
+    return 1;
+}
 
 s32 func_00000194(void) {
     return 1;
@@ -30,7 +33,22 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", func_0000098C);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", func_00000B1C);
+void func_00000B1C(void) {
+    if (D_000084A0 == 0) {
+        D_000084A0 = 0;
+        sceNetApctlDisconnect();
+        if (D_000084A0 == 0) {
+            do {
+                sceKernelDelayThread(0x7A120U);
+            } while (D_000084A0 == 0);
+        }
+        D_00008540 = 0;
+    }
+    if (D_00008538 != 0) {
+        sceUtility_netparam_internal_9CE50172(0);
+        D_00008538 = 0;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", func_00000B98);
 
@@ -129,7 +147,18 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_B29274F1);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_F3AF9DD1);
+s32 sceVshNetconfRaku_F3AF9DD1(void *arg0) {
+    s32 var_v1;
+
+    var_v1 = D_00008498;
+    M2C_FIELD(arg0, s32 *, 0) = (s32) D_00008530;
+    if (var_v1 != -1) {
+        var_v1 = D_00008498 - func_00004A38();
+    }
+    M2C_FIELD(arg0, s32 *, 4) = var_v1;
+    M2C_FIELD(arg0, s32 *, 8) = (s32) D_00008534;
+    return 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_D030086D);
 

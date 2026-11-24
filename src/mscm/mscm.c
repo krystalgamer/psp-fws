@@ -136,7 +136,12 @@ void func_00004E4C(void) {
     sceKernelGetSystemTimeLow();
 }
 
-INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00004E68);
+s32 func_00004E68(s32 arg0, s32 arg1) {
+    u32 temp_s0;
+
+    temp_s0 = arg1 * D_00007AF4;
+    return temp_s0 < (u32) (sceKernelGetSystemTimeLow() - arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_E24B5D0C);
 
@@ -194,7 +199,15 @@ s32 func_0000648C(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00006494);
+s32 func_00006494(void *arg0) {
+    s32 var_a0;
+
+    var_a0 = 0x80220081;
+    if (M2C_FIELD(arg0, s32 *, 4) == 0) {
+        var_a0 = (D_00007880 != 0) ? 0 : 0x80220083;
+    }
+    return var_a0;
+}
 
 s32 func_000064C0(void) {
     return 0;

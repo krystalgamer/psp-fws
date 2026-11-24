@@ -10,7 +10,17 @@ INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", scePsheet_driver_E16F3A48)
 
 INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", module_start);
 
-INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", module_reboot_before);
+s32 module_reboot_before(void) {
+    if (M2C_FIELD(&D_00002A80, s32 *, 0) > 0) {
+        sceKernelDeleteSema(M2C_FIELD(&D_00002A80, s32 *, 0));
+    }
+    if (M2C_FIELD(&D_00002A80, s32 *, 4) > 0) {
+        sceKernelDeleteSema(M2C_FIELD(&D_00002A80, s32 *, 4));
+    }
+    memset(&D_00002A80, 0, 0x40);
+    memset(&D_00002AC0, 0, 0x4D0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", scePsheet_driver_302AB4B8);
 
@@ -59,7 +69,18 @@ s32 func_000012F0(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00001360);
 
-INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_000013D8);
+s32 func_000013D8(void) {
+    s32 temp_s0;
+    s32 var_s1;
+    s32 var_v0;
+
+    var_s1 = sceKernelWaitSema(M2C_FIELD(&D_00002A80, u32 *, 0), 1, NULL);
+    if ((var_s1 < 0) || (temp_s0 = M2C_FIELD(&D_00002A80, s32 *, 0x18), var_s1 = sceKernelSignalSema(M2C_FIELD(&D_00002A80, u32 *, 0), 1), var_v0 = temp_s0, (var_s1 < 0))) {
+        KDebugForKernel_84F370BC(&D_000027EC, &D_00002804, "get_state", var_s1);
+        var_v0 = var_s1;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00001460);
 
@@ -95,7 +116,17 @@ INCLUDE_RODATA("tmp/asm/340/psheet/nonmatchings/psheet", D_000029E0);
 
 INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00002048);
 
-INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_0000217C);
+s32 func_0000217C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 var_v0;
+    s32 var_v1;
+
+    var_v0 = sceAmctrl_driver_1CCB66D2(&D_00002F30, 1, 2, arg4, arg3, arg2);
+    if ((var_v0 < 0) || (var_v0 = sceAmctrl_driver_0785C974(&D_00002F30, arg0, arg1), (var_v0 < 0)) || (var_v0 = sceAmctrl_driver_9951C50F(&D_00002F30), var_v1 = 0, (var_v0 < 0))) {
+        KDebugForKernel_84F370BC("%s: %s(): error 0x%08X\n\n", &D_00002A1C, &D_00002A30, var_v0);
+        var_v1 = 0x80510102;
+    }
+    return var_v1;
+}
 
 INCLUDE_RODATA("tmp/asm/340/psheet/nonmatchings/psheet", D_00002A1C);
 

@@ -22,10 +22,17 @@ s32 sceVaudio_driver_DCC18F25(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/201/vaudio_game/nonmatchings/vaudio_game", sceVaudio_driver_82EF2F9D);
+M2C_UNK *sceVaudio_driver_82EF2F9D(s32 arg0) {
+    if (arg0 == 0) {
+        return "THRU";
+    }
+    return NULL;
+}
 
 s32 sceVaudio_driver_5A7435B7(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/201/vaudio_game/nonmatchings/vaudio_game", sceVaudio_driver_72749E84);
+s32 sceVaudio_driver_72749E84(void) {
+    return 0;
+}

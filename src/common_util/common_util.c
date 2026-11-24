@@ -41,7 +41,10 @@ INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", sceVshCommonUtil
 
 INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", sceVshCommonUtil_D4D66154);
 
-INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", sceVshCommonUtil_5A0B7762);
+void sceVshCommonUtil_5A0B7762(s32 arg0, s32 arg1) {
+    D_00008BF0 = arg0;
+    D_00008BF4 = arg1;
+}
 
 INCLUDE_RODATA("tmp/asm/282/common_util/nonmatchings/common_util", D_00008A14);
 
@@ -51,9 +54,14 @@ INCLUDE_RODATA("tmp/asm/282/common_util/nonmatchings/common_util", D_00008A30);
 
 INCLUDE_RODATA("tmp/asm/282/common_util/nonmatchings/common_util", D_00008A3C);
 
-INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", sceVshCommonUtil_12F5429A);
+void sceVshCommonUtil_12F5429A(void) {
+    D_00008BF8 = 0;
+    D_00008BFC = sceKernelCreateEventFlag("SceVshRebootLock", 0x200U, 3U, NULL);
+}
 
-INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", sceVshCommonUtil_0713D516);
+void sceVshCommonUtil_0713D516(void) {
+    sceKernelDeleteEventFlag(D_00008BFC);
+}
 
 INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", sceVshCommonUtil_249059B5);
 
@@ -71,7 +79,10 @@ void sceVshCommonUtil_686AAA1A(void) {
     sceVshCommonUtil_7683BE4D();
 }
 
-INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", sceVshCommonUtil_3FAF35EC);
+void sceVshCommonUtil_3FAF35EC(void) {
+    sceKernelClearEventFlag(D_00008BFC, -3U);
+    sceKernelWaitEventFlag(D_00008BFC, 1U, 0, NULL, NULL);
+}
 
 INCLUDE_ASM("tmp/asm/282/common_util/nonmatchings/common_util", func_000009F4);
 

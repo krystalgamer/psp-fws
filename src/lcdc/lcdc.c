@@ -40,15 +40,25 @@ s32 sceLcdc_driver_DCD51769(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/lcdc/nonmatchings/lcdc", sceLcdc_driver_A182B32C);
+s32 sceLcdc_driver_A182B32C(void) {
+    sceSysreg_driver_63B1AADF();
+    D_00000F30 = 1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/lcdc/nonmatchings/lcdc", sceLcdc_driver_A0032C3D);
+s32 sceLcdc_driver_A0032C3D(void) {
+    sceSysreg_driver_F74F14E9();
+    D_00000F30 = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/lcdc/nonmatchings/lcdc", sceLcdc_driver_A2E70DA6);
 
 INCLUDE_ASM("tmp/asm/282/lcdc/nonmatchings/lcdc", sceLcdc_driver_236095AC);
 
-INCLUDE_ASM("tmp/asm/282/lcdc/nonmatchings/lcdc", sceLcdc_driver_825DB9C5);
+s32 sceLcdc_driver_825DB9C5(void) {
+    return D_00000F3C;
+}
 
 INCLUDE_ASM("tmp/asm/282/lcdc/nonmatchings/lcdc", sceLcdc_driver_965D1633);
 

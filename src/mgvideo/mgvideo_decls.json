@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "ThreadManForKernel_BC31C1B9": "M2C_UNK ThreadManForKernel_BC31C1B9(M2C_UNK, M2C_UNK *, s32);",
   "func_00000000": "s32 func_00000000(s32);",
   "func_00000108": "s32 func_00000108(void);",
   "func_0000038C": "s32 func_0000038C(void *arg0);",
@@ -9,6 +10,10 @@
   "func_0000043C": "s32 func_0000043C(M2C_UNK);",
   "func_000004DC": "s32 func_000004DC(s32 arg0, M2C_UNK arg1);",
   "func_000005A0": "s32 func_000005A0(s32 arg0, s32 arg1);",
+  "func_00001084": "s32 func_00001084(void);",
+  "func_00002F54": "void func_00002F54(s32 arg0);",
+  "func_00004834": "s32 func_00004834(s32, s32, s32);",
+  "func_000049D0": "s32 func_000049D0(void *arg0, s32 *arg1, s32 *arg2, s32 *arg3);",
   "func_00004BEC": "s32 func_00004BEC(void *arg0);",
   "sceMgVideo_driver_02CD7137": "M2C_UNK sceMgVideo_driver_02CD7137();",
   "sceMgVideo_driver_585F5755": "s32 sceMgVideo_driver_585F5755(void);",
@@ -18,5 +23,11 @@
   "sceMgr_driver_DB12BB23": "s32 sceMgr_driver_DB12BB23(s32, s32, s32);",
   "sceMgr_driver_F30E22CF": "s32 sceMgr_driver_F30E22CF(M2C_UNK);"
  },
- "vars": {}
+ "vars": {
+  "D_000060F0": "extern M2C_UNK D_000060F0;",
+  "D_000060F8": "extern M2C_UNK D_000060F8;",
+  "D_00006100": "extern M2C_UNK D_00006100;",
+  "D_0000BE84": "extern s32 D_0000BE84;",
+  "func_00002D8C": "extern M2C_UNK func_00002D8C;"
+ }
 }

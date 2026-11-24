@@ -19,7 +19,10 @@ INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00000
 
 INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00000218);
 
-INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_0000028C);
+s32 func_0000028C(void) {
+    func_00000818((s32) &D_00003DB0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_000002B0);
 
@@ -220,13 +223,18 @@ INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00002
 
 INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00002C5C);
 
-INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00002D28);
+void func_00002D28(M2C_UNK **arg0) {
+    *arg0 = &D_00003D40;
+    scePaf_4E67BB08();
+}
 
 s32 func_00002D50(void) {
     return scePaf_75062BCF() != 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00002D70);
+void func_00002D70(M2C_UNK **arg0) {
+    *arg0 = &D_00003D30;
+}
 
 INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00002D80);
 

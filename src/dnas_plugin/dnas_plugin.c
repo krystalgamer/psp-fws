@@ -12,13 +12,20 @@ s32 module_stop(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_0000015C);
+void func_0000015C(void) {
+    scePaf_F609FA81(D_00001F4C, &D_00001AB4, 0, 0);
+    scePaf_CAF05F1D(D_00001F4C, &D_00001AB4);
+}
 
-INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000001AC);
+void func_000001AC(void) {
+    D_00001F50 = -1;
+}
 
 INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_000001BC);
 
-INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00000210);
+s32 func_00000210(void) {
+    return D_00001F50 != 0;
+}
 
 INCLUDE_RODATA("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", D_00001A38);
 

@@ -60,15 +60,32 @@ INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_C7B02795);
 
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_EFE3C7FA);
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_1C29566B);
+s32 sceAta_driver_1C29566B(void) {
+    return D_000046EC;
+}
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_7F551D66);
+void sceAta_driver_7F551D66(s32 arg0) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_68DEA2FF);
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_000046EC |= arg0;
+    sceKernelCpuResumeIntr(temp_a0);
+}
+
+void sceAta_driver_68DEA2FF(s32 arg0) {
+    s32 temp_a0;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_000046EC &= ~arg0;
+    sceKernelCpuResumeIntr(temp_a0);
+}
 
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_638EEA14);
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_B5982381);
+void sceAta_driver_B5982381(void) {
+    M2C_FIELD(&D_000046A8, s32 *, 0) = 0;
+    M2C_FIELD(&D_000046A8, s32 *, 4) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", func_000019F0);
 
@@ -86,7 +103,9 @@ INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_9D98086E);
 
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_689FCB7D);
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_FCF939D9);
+M2C_UNK *sceAta_driver_FCF939D9(void) {
+    return &D_000046A8;
+}
 
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_C144826E);
 
@@ -106,9 +125,13 @@ INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_ACFF7CB5);
 
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_3A61BF97);
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_B7F5B2CA);
+void sceAta_driver_B7F5B2CA(s32 arg0) {
+    D_000046E8 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_D8E525CB);
+s32 sceAta_driver_D8E525CB(void) {
+    return D_000046E8;
+}
 
 void sceAta_driver_7BBA095C(s32 arg0, M2C_UNK arg1) {
     s32 temp_s1;
@@ -151,7 +174,9 @@ void func_000022F4(void) {
 
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_AE100256);
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_F76A5B9C);
+M2C_UNK *sceAta_driver_F76A5B9C(void) {
+    return &D_00004700;
+}
 
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_4222D6F3);
 
@@ -250,11 +275,27 @@ s32 sceAta_driver_6FC42083(void) {
     return D_00004640;
 }
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", func_00003FF0);
+void func_00003FF0(u32 arg0) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", func_00004044);
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_00004728 = 0;
+    sceKernelCpuResumeIntr(temp_a0);
+    sceKernelSetAlarm(arg0, (s32) func_0000408C, &D_00004728);
+}
 
-INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", func_00004080);
+void func_00004044(s32 arg0) {
+    s32 temp_a0;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_00004728 = 0;
+    sceKernelCpuResumeIntr(temp_a0);
+    sceKernelCancelAlarm(arg0);
+}
+
+s32 func_00004080(void) {
+    return D_00004728;
+}
 
 s32 func_0000408C(s32 *arg0) {
     *arg0 = 1;

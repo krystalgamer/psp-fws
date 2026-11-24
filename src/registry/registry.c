@@ -10,7 +10,16 @@ s32 module_reboot_before(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", syslib_ADF12745);
+s32 syslib_ADF12745(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 0:
+        break;
+    case 2:
+        sceKernelWaitSema(D_00006FDC, 1, NULL);
+        break;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", sceReg_driver_92E41280);
 
@@ -67,7 +76,15 @@ s32 func_00001874(s32 arg0, s32 *arg1) {
 
 INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_000018B4);
 
-INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_00001A44);
+void func_00001A44(s32 arg0, M2C_UNK **arg1, M2C_UNK **arg2) {
+    if (arg0 == 1) {
+        *arg1 = "/registry/system.ireg";
+        *arg2 = "/registry/system.dreg";
+        return;
+    }
+    *arg1 = NULL;
+    *arg2 = NULL;
+}
 
 INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_00001A74);
 
@@ -224,7 +241,15 @@ INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_00006524);
 
 INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_000065E4);
 
-INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_00006674);
+s32 func_00006674(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = -1;
+    if (sceIoClose(arg0) >= 0) {
+        var_v1 = (sceIoDevctl(&D_00006F8C, 0x5802, NULL, 0U, NULL, 0U) >= 0) ? 0 : 0x80084E2B;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_000066D0);
 

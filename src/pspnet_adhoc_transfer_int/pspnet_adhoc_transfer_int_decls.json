@@ -1,15 +1,20 @@
 {
  "funcs": {
+  "func_0000043C": "void func_0000043C(s32 arg0);",
+  "func_00000464": "s32 func_00000464(u32 arg0);",
   "func_000004A8": "void func_000004A8(void);",
   "func_000004E4": "s32 func_000004E4(s32);",
   "func_00000558": "void func_00000558(void *arg0);",
   "func_00000D58": "s32 func_00000D58(void *arg0);",
   "func_00001984": "s32 func_00001984(void *arg0, M2C_UNK arg1, s32 arg2, M2C_UNK arg3);",
+  "sceKernelCreateVpl": "s32 sceKernelCreateVpl(void *, s32, u32, u32, void *);",
   "sceKernelDeleteVpl": "s32 sceKernelDeleteVpl(u32);",
   "sceKernelFreeVpl": "s32 sceKernelFreeVpl(u32, void *);",
+  "sceNetAdhocSetSocketAlert": "s32 sceNetAdhocSetSocketAlert(s32, s32);",
   "sceNet_lib_EF097716": "M2C_UNK sceNet_lib_EF097716(s32, M2C_UNK, s32);"
  },
  "vars": {
-  "D_00002410": "extern s32 D_00002410;"
+  "D_00002410": "extern s32 D_00002410;",
+  "D_00002424": "extern s32 D_00002424;"
  }
 }

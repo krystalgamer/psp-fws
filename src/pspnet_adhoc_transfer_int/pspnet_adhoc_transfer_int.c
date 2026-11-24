@@ -6,9 +6,20 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_transfer_int/nonmatchings/pspnet_adhoc_tra
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_transfer_int/nonmatchings/pspnet_adhoc_transfer_int", func_00000218);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_transfer_int/nonmatchings/pspnet_adhoc_transfer_int", func_0000043C);
+void func_0000043C(s32 arg0) {
+    D_00002424 = 1;
+    sceNetAdhocSetSocketAlert(arg0, 0x3F0);
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_transfer_int/nonmatchings/pspnet_adhoc_transfer_int", func_00000464);
+s32 func_00000464(u32 arg0) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+
+    temp_v0_2 = sceKernelCreateVpl("SceNetAdhocTransferMemoryPool", 2, 0U, arg0, NULL);
+    temp_v0 = __builtin_allegrex_min(temp_v0_2, 0);
+    D_00002410 = temp_v0_2;
+    return temp_v0;
+}
 
 void func_000004A8(void) {
     if (D_00002410 >= 0) {

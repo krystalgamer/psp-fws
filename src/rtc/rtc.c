@@ -189,7 +189,9 @@ INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcFormatRFC3339LocalTime);
 
 INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00003D10);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00003D9C);
+void func_00003D9C(void) {
+    UtilsForKernel_23A0C5BA(&func_00003DD4, &func_00003DF4, &func_00003D10, &sceRtc_driver_B44BDAED);
+}
 
 INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00003DD4);
 

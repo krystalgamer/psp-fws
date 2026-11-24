@@ -1,5 +1,8 @@
 {
  "funcs": {
+  "func_0000015C": "void func_0000015C(void);",
+  "func_000001AC": "void func_000001AC(void);",
+  "func_00000210": "s32 func_00000210(void);",
   "func_00000810": "void func_00000810(void);",
   "func_00000F58": "void func_00000F58(void);",
   "func_00001068": "void func_00001068(void);",
@@ -8,7 +11,13 @@
   "func_000013B4": "void func_000013B4(void **arg0, void **arg1);",
   "func_000014F0": "void func_000014F0(void **arg0);",
   "func_0000161C": "M2C_UNK func_0000161C();",
-  "module_stop": "s32 module_stop(void);"
+  "module_stop": "s32 module_stop(void);",
+  "scePaf_CAF05F1D": "M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);",
+  "scePaf_F609FA81": "M2C_UNK scePaf_F609FA81(s32, M2C_UNK *, M2C_UNK, M2C_UNK);"
  },
- "vars": {}
+ "vars": {
+  "D_00001AB4": "extern M2C_UNK D_00001AB4;",
+  "D_00001F4C": "extern s32 D_00001F4C;",
+  "D_00001F50": "extern s32 D_00001F50;"
+ }
 }

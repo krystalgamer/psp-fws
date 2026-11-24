@@ -98,7 +98,13 @@ s32 sceUmd9660_driver_44EF600C(void) {
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmd_230666E3);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmd_9B22AED7);
+void sceUmd_9B22AED7(s32 arg0) {
+    s32 temp_a0;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_00004CA8 = arg0;
+    sceKernelCpuResumeIntr(temp_a0);
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmd_659587F7);
 
@@ -114,19 +120,42 @@ INCLUDE_RODATA("tmp/asm/352/np9660/nonmatchings/np9660", D_00004AD4);
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_0000067C);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00000718);
+s32 func_00000718(void) {
+    if (D_00004CB0 > 0) {
+        sceKernelDeleteEventFlag(D_00004CB0);
+        D_00004CB0 = 0;
+    }
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmd_D45D1FE6);
+s32 sceUmd_D45D1FE6(void) {
+    return D_00004CA4;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmd_AE53DC2D);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmd_71F81482);
+s32 sceUmd_71F81482(void) {
+    return D_00004CA8;
+}
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_000007C8);
+s32 func_000007C8(void) {
+    return D_00004CA0;
+}
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_000007D4);
+void func_000007D4(s32 arg0) {
+    D_00004CA0 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_000007E0);
+void func_000007E0(s32 arg0) {
+    s32 temp_s0;
+
+    temp_s0 = D_00004CAC;
+    if (temp_s0 == 0) {
+
+    } else if (sceKernelGetThreadmanIdType(temp_s0) == 8) {
+        sceKernelNotifyCallback(temp_s0, arg0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdCheckMedium);
 
@@ -164,7 +193,9 @@ INCLUDE_RODATA("tmp/asm/352/np9660/nonmatchings/np9660", D_00004B24);
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00000E50);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00000F88);
+s32 func_00000F88(void) {
+    return D_00004CD4;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00000F94);
 
@@ -192,13 +223,30 @@ INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdMan_driver_4217E7F5)
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdMan_driver_F65D819F);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdMan_driver_2787078E);
+s32 sceUmdMan_driver_2787078E(void) {
+    s32 temp_a0;
+
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_00004CEC = 0;
+    D_00004CF0 = 0;
+    D_00004CF4 = 0;
+    sceKernelCpuResumeIntr(temp_a0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_000017E0);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00001874);
+void func_00001874(s32 arg0) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_000018A8);
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_00004D08 = arg0;
+    sceKernelCpuResumeIntr(temp_a0);
+}
+
+s32 func_000018A8(void) {
+    return D_00004D08;
+}
 
 s32 func_000018B4(void) {
     return 0;
@@ -209,13 +257,35 @@ s32 func_000018BC(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_000018DC);
+s32 func_000018DC(s32 arg0) {
+    s32 temp_a0;
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00001914);
+    temp_a0 = sceKernelCpuSuspendIntr();
+    D_00004D0C = arg0;
+    sceKernelCpuResumeIntr(temp_a0);
+    return 0;
+}
+
+s32 func_00001914(void) {
+    return D_00004D0C;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00001920);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00001A78);
+s32 func_00001A78(void) {
+    if (D_00004D10 > 0) {
+        sceKernelDeleteMutex(D_00004D10);
+        D_00004D10 = 0;
+    }
+    memset(&D_00004D1C, 0, 0x3C);
+    func_000042F8();
+    func_00002634();
+    if (D_00004D14 > 0) {
+        sceKernelDeleteFpl(D_00004D14);
+        D_00004D14 = 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00001AFC);
 
@@ -272,9 +342,19 @@ s32 func_00002580(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_000025A0);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00002634);
+s32 func_00002634(void) {
+    func_00002674();
+    if (D_00004DD8 > 0) {
+        sceKernelDeleteMutex(D_00004DD8);
+        D_00004DD8 = 0;
+    }
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00002674);
+s32 func_00002674(void) {
+    D_00004DE0 = -1;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00002688);
 

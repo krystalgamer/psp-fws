@@ -41,7 +41,18 @@ INCLUDE_RODATA("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", D_00001
 
 INCLUDE_RODATA("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", D_00001434);
 
-INCLUDE_ASM("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", func_00000790);
+void func_00000790(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0("topmenu_plugin");
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK), 0x10)(0xD);
+        }
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", func_000007D8);
 
@@ -135,7 +146,9 @@ INCLUDE_ASM("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", func_00000
 
 INCLUDE_ASM("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", func_000009FC);
 
-INCLUDE_ASM("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", func_00000A24);
+void func_00000A24(s32 arg0) {
+    D_000017FC = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", func_00000A30);
 

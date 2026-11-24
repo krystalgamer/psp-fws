@@ -21,13 +21,24 @@ INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000328);
 
 INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000004B0);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000574);
+void func_00000574(void) {
+    func_0000222C((s32) &D_00002C88, (s32) &D_00002AEC);
+    func_0000222C((s32) &D_00002C94, (s32) &D_00002AEC);
+    scePaf_3481F595(D_00002C7C, &D_00002AE0);
+    scePaf_F609FA81(D_00002C7C, &D_00002AE0, 0, 0);
+    scePaf_CAF05F1D(D_00002C7C, &D_00002AE0);
+}
 
 INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000005F8);
 
 INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00000954);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_0000098C);
+void func_0000098C(void) {
+    func_000004B0(1);
+    if (D_00002D50 != NULL) {
+        M2C_FIELD(D_00002D50, s32 *, 0x1C) = 1;
+    }
+}
 
 INCLUDE_RODATA("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", D_00002AB4);
 
@@ -71,9 +82,22 @@ INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_000010C4);
 
 INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001D54);
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001D7C);
+void func_00001D7C(void) {
+    s32 var_a0;
 
-INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001DB8);
+    var_a0 = 0;
+    if (D_00002D50 != NULL) {
+        var_a0 = M2C_FIELD(D_00002D50, s32 *, 0x30);
+    }
+    func_00001DF4(var_a0, 0, 0, 0);
+}
+
+void func_00001DB8(void) {
+    func_000004B0(2);
+    if (D_00002D50 != NULL) {
+        M2C_FIELD(D_00002D50, s32 *, 0x1C) = 2;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/auth_plugin/nonmatchings/auth_plugin", func_00001DE8);
 

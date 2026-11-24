@@ -43,7 +43,9 @@ void func_00000588(void) {
 void func_00000590(void) {
 }
 
-INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_00000598);
+s32 func_00000598(void) {
+    return __builtin_allegrex_min(func_00001744(D_000040C8, (s32) &D_000040DC, 0x100), 0);
+}
 
 INCLUDE_RODATA("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", D_00003A00);
 
@@ -133,7 +135,10 @@ INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", 
 
 INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_000013CC);
 
-INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_00001490);
+void func_00001490(M2C_UNK **arg0) {
+    *arg0 = &D_00003CC0;
+    scePaf_4E67BB08();
+}
 
 INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_000014B8);
 
@@ -149,7 +154,9 @@ void func_000014FC(void) {
 
 INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_00001518);
 
-INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_000015B8);
+void func_000015B8(s32 arg0) {
+    D_000041E4 = arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_000015C4);
 
@@ -185,7 +192,10 @@ INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", 
 
 INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_0000193C);
 
-INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_000019F0);
+void func_000019F0(void) {
+    func_000015B8(1);
+    scePaf_A0ED77C4(0, &func_00001A34, D_000040C8, -1, -1, &func_00001B1C);
+}
 
 INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_00001A34);
 
@@ -239,7 +249,9 @@ INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", 
 
 INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_00002C10);
 
-INCLUDE_ASM("tmp/asm/282/game_install_plugin/nonmatchings/game_install_plugin", func_00002CF8);
+M2C_UNK *func_00002CF8(void) {
+    return &D_000041FC;
+}
 
 void func_00002D04(void) {
     scePsheet_226D9099();

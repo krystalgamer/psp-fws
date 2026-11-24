@@ -44,7 +44,10 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00000CC0);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00000ECC);
+s32 func_00000ECC(s32 arg0) {
+    D_00004BA4 = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00000EDC);
 
@@ -78,9 +81,13 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00001E88);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00001F28);
+void func_00001F28(s32 arg0) {
+    D_00004BF8 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00001F34);
+s32 func_00001F34(void) {
+    return D_00004BF8;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00001F40);
 
@@ -146,7 +153,9 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_000039DC);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003A50);
+s32 func_00003A50(s32 arg0, s32 arg1) {
+    return ~func_00003A88(-1, arg0, arg1, 0, (s32) &D_00004BFC) & 0xFF;
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003A88);
 
@@ -174,13 +183,21 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003E10);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003E2C);
+void func_00003E2C(s32 arg0, void *arg1, u32 arg2, s32 arg3, void *arg4, void *arg5) {
+    sceNetInetRecvfrom(arg0, arg1, arg2, arg3, arg4, arg5);
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003E48);
+void func_00003E48(s32 arg0, void *arg1, void *arg2, void *arg3, void *arg4) {
+    sceNetInetSelect(arg0, arg1, arg2, arg3, arg4);
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003E64);
+void func_00003E64(s32 arg0, void *arg1, u32 arg2, s32 arg3, void *arg4, s32 arg5) {
+    sceNetInetSendto(arg0, arg1, arg2, arg3, arg4, arg5);
+}
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_bfl/nonmatchings/netconf_plugin_auto_bfl", func_00003E80);
+void func_00003E80(s32 arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4) {
+    sceNetInetSetsockopt(arg0, arg1, arg2, arg3, arg4);
+}
 
 void func_00003E9C(s32 arg0, s32 arg1, s32 arg2) {
     sceNetInetSocket(arg0, arg1, arg2);

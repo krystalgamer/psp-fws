@@ -20,10 +20,17 @@
   "sceImpose_driver_7084E72C": "s32 sceImpose_driver_7084E72C(void);",
   "sceImpose_driver_B415FC59": "s32 sceImpose_driver_B415FC59(void);",
   "sceImpose_driver_C7E36CC7": "s32 sceImpose_driver_C7E36CC7(void);",
+  "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
+  "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
+  "sceKernelDeleteThread": "s32 sceKernelDeleteThread(s32);",
+  "sceKernelReleaseSubIntrHandler": "M2C_UNK sceKernelReleaseSubIntrHandler(M2C_UNK, M2C_UNK);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(u32, u32);",
+  "sceKernelWaitThreadEnd": "s32 sceKernelWaitThreadEnd(s32, void *);",
+  "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
   "syslib_ADF12745": "s32 syslib_ADF12745(s32 arg0);"
  },
  "vars": {
-  "D_0000F510": "extern u32 *D_0000F510;"
+  "D_0000F510": "extern u32 *D_0000F510;",
+  "D_0000F514": "extern M2C_UNK D_0000F514;"
  }
 }

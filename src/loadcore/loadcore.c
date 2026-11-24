@@ -20,7 +20,10 @@ INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", func_00000444);
 
 INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", func_00000560);
 
-INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", func_000007D0);
+s32 func_000007D0(void) {
+    KDebugForKernel_84F370BC("systable.c:%s: is called.\n", "UndefSyscall");
+    return 0x80020001;
+}
 
 void func_00000800(s32 arg0, s32 arg1, s32 arg2) {
     func_00000840(arg0, arg1, 0, arg2);
@@ -92,7 +95,9 @@ s32 LoadCoreForKernel_A8E2D53D(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", LoadCoreForKernel_C99DD47A);
+M2C_UNK *LoadCoreForKernel_C99DD47A(void) {
+    return &D_000097AC;
+}
 
 s32 func_000027F8(void) {
     return 0;
@@ -180,9 +185,15 @@ INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", LoadCoreForKernel_B4D6
 
 INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", LoadCoreForKernel_54AB2675);
 
-INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", func_00004D04);
+s32 func_00004D04(s32 arg0) {
+    D_000074B4 = arg0;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", func_00004D14);
+s32 func_00004D14(s32 arg0) {
+    D_000074B8 = arg0;
+    return 0;
+}
 
 s32 func_00004D24(void) {
     return 0;
@@ -212,7 +223,9 @@ INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", LoadCoreForKernel_929B
 
 INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", LoadCoreForKernel_05D915DB);
 
-INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", func_00005E20);
+void func_00005E20(void) {
+    SysMemForKernel_FEFC8666("SceModule", 0xD8, &D_000073A0, 0, &D_000077C4);
+}
 
 INCLUDE_ASM("tmp/asm/282/loadcore/nonmatchings/loadcore", LoadCoreForKernel_52A86C21);
 

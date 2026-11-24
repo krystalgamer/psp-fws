@@ -78,7 +78,12 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_00001F90);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_00002014);
+void func_00002014(void *arg0) {
+    sceNet_lib_AB7DD9A5(&D_0000610C, 0, 0);
+    sceNet_lib_D2422E4D(&D_0000610C);
+    sceWlanDrv_lib_C9A8CAB7();
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_RODATA("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", D_0000610C);
 
@@ -123,7 +128,10 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_00003050);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000030BC);
+s32 func_000030BC(s32 *arg0) {
+    *arg0 = D_000062BC;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000030D0);
 
@@ -188,4 +196,11 @@ void func_00005870(void) {
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_000058AC);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhocctl/nonmatchings/pspnet_adhocctl", func_00005918);
+void func_00005918(s32 arg0) {
+    if (arg0 == 0) {
+
+    } else {
+        D_000062A4 = -1;
+        sceKernelSignalSema(D_000062A0, 1);
+    }
+}

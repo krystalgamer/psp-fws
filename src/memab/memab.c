@@ -1,4 +1,5 @@
 #include "common.h"
+#include "memab_decls.h"
 
 INCLUDE_ASM("tmp/asm/352/memab/nonmatchings/memab", func_00000000);
 
@@ -22,7 +23,25 @@ INCLUDE_ASM("tmp/asm/352/memab/nonmatchings/memab", func_00000708);
 
 INCLUDE_ASM("tmp/asm/352/memab/nonmatchings/memab", func_000008C4);
 
-INCLUDE_ASM("tmp/asm/352/memab/nonmatchings/memab", module_start);
+s32 module_start(void) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_v1;
+
+    temp_v0 = sceKernelCreateSema("SceMemab1", 0U, 1, 1, NULL);
+    D_00002EA0 = temp_v0;
+    var_v1 = 1;
+    if (temp_v0 > 0) {
+        temp_v0_2 = sceKernelCreateSema("SceMemab2", 0U, 1, 1, NULL);
+        D_00003A78 = temp_v0_2;
+        var_v1 = 0;
+        if (temp_v0_2 <= 0) {
+            sceKernelDeleteSema(D_00002EA0);
+            var_v1 = 1;
+        }
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/352/memab/nonmatchings/memab", module_stop);
 

@@ -1,18 +1,30 @@
 {
  "funcs": {
+  "SysMemForKernel_EF2EE8C1": "s32 SysMemForKernel_EF2EE8C1();",
   "func_00001790": "void func_00001790(s32 arg0);",
   "func_000017B8": "void func_000017B8(s32 arg0);",
   "func_000017E0": "s32 func_000017E0(s32, s32, s32, s32);",
   "func_00001E9C": "void func_00001E9C(s32 arg0);",
   "func_00001EC4": "void func_00001EC4(s32 arg0, s32 arg1, s32 arg2);",
+  "func_00001EF0": "s32 func_00001EF0(void);",
+  "func_00004C88": "s32 func_00004C88(void);",
   "func_00004C9C": "void func_00004C9C(void);",
   "func_00005140": "s32 func_00005140(s32, s32, s32, s32, s32);",
   "module_start": "s32 module_start(void);",
   "sceGeEdramGetAddr": "void *sceGeEdramGetAddr(void);",
+  "sceGeEdramGetSize": "u32 sceGeEdramGetSize(void);",
   "sceGeListEnQueue": "s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3);",
   "sceGeListEnQueueHead": "s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3);",
   "sceGe_driver_71FCD1D6": "s32 sceGe_driver_71FCD1D6(void);",
-  "sceGe_driver_9DA4A75F": "s32 sceGe_driver_9DA4A75F(s32 arg0);"
+  "sceGe_driver_9DA4A75F": "s32 sceGe_driver_9DA4A75F(s32 arg0);",
+  "sceGe_driver_BAD6E1CA": "s32 sceGe_driver_BAD6E1CA(s32 arg0);",
+  "sceGe_driver_C576E897": "s32 sceGe_driver_C576E897(void);"
  },
- "vars": {}
+ "vars": {
+  "D_00006240": "extern s32 D_00006240;",
+  "D_00006A80": "extern s32 D_00006A80;",
+  "D_00006A84": "extern u32 D_00006A84;",
+  "D_00007AC8": "extern s32 D_00007AC8;",
+  "D_00007FC0": "extern s32 D_00007FC0;"
+ }
 }

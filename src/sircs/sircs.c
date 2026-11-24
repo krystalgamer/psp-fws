@@ -8,11 +8,23 @@ INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", sceSircs_driver_71EEF62D);
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", sceSircs_driver_83381633);
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00000894);
+void func_00000894(void) {
+    if (D_00002770 == 0) {
+        sceKernelPowerLock(0);
+        D_00002770 = 1;
+    }
+}
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_000008D4);
+void func_000008D4(void) {
+    if (D_00002770 != 0) {
+        sceKernelPowerUnlock(0);
+        D_00002770 = 0;
+    }
+}
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00000910);
+s32 func_00000910(void) {
+    return D_00002794;
+}
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", module_start);
 
@@ -74,7 +86,19 @@ INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001748);
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001830);
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_000018E4);
+s32 func_000018E4(void *arg0) {
+    s32 temp_v0;
+
+    if (M2C_FIELD(arg0, s32 *, 0x4C) == 0) {
+        func_000019C0();
+        temp_v0 = sceKernelSetAlarm(0x64U, (s32) &func_00002044, arg0);
+        M2C_FIELD(arg0, s32 *, 0x4C) = temp_v0;
+        if (temp_v0 < 0) {
+            M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_0000193C);
 
@@ -84,11 +108,18 @@ INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_000019C0);
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001A14);
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001A74);
+s32 func_00001A74(void) {
+    return D_00002724;
+}
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001A80);
+void func_00001A80(s32 arg0) {
+    D_00002728 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001A8C);
+s32 func_00001A8C(void) {
+    IoFileMgrForKernel_8E982A74(&D_000026A8);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00001AB0);
 

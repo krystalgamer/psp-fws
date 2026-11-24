@@ -4,7 +4,10 @@
 
 INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", func_00000000);
 
-INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", func_00000050);
+s32 func_00000050(void) {
+    sceKernelDeleteSema(D_00004830);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/avcodec/nonmatchings/avcodec", sceAudiocodec_9D3F790C);
 

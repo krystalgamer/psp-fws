@@ -13,9 +13,16 @@
   "func_00005024": "s32 func_00005024(s32, s32);",
   "func_000056E4": "s32 func_000056E4(void *arg0, s32 arg1);",
   "func_00005708": "void func_00005708(void *arg0);",
+  "func_00006F68": "s32 func_00006F68(void);",
   "func_00007298": "s32 func_00007298(s32, s32, s32);",
+  "sceNetAdhoc_lib_62B875A8": "void sceNetAdhoc_lib_62B875A8(void);",
   "sceNetAdhoc_lib_AF6DFB15": "void sceNetAdhoc_lib_AF6DFB15(s32 arg0, s32 arg1);",
+  "sceNetAdhoc_lib_F9240FBA": "void sceNetAdhoc_lib_F9240FBA(void);",
   "sceNet_lib_57CC57DA": "M2C_UNK sceNet_lib_57CC57DA(void *, M2C_UNK, M2C_UNK);"
  },
- "vars": {}
+ "vars": {
+  "D_000079C0": "extern M2C_UNK D_000079C0;",
+  "D_000079CC": "extern M2C_UNK D_000079CC;",
+  "D_000079E8": "extern M2C_UNK D_000079E8;"
+ }
 }

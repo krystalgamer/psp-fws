@@ -91,17 +91,29 @@ INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_0000268C);
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_000027AC);
 
-INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_00002804);
+s32 func_00002804(void) {
+    return (sceUsbBus_driver_C1E2A540(&D_00005960) >= 0) ? 0 : -1;
+}
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_00002830);
 
-INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_00002888);
+s32 func_00002888(s32 *arg0) {
+    *arg0 = D_0000852C;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_0000289C);
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_000028E0);
 
-INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_00002978);
+void func_00002978(void *arg0) {
+    void *temp_a2;
+
+    temp_a2 = M2C_FIELD(arg0, void **, 0x20);
+    if (((u8) D_00008529 < 0x16U) || (M2C_FIELD(M2C_FIELD(temp_a2, void **, 0x28), u8 *, 2) != 3)) {
+        sceKernelSetEventFlag(M2C_FIELD(temp_a2, s32 *, 0xA8), 2U);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_000029C0);
 

@@ -49,21 +49,37 @@ INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", func_000005CC);
 
 INCLUDE_RODATA("tmp/asm/282/common_gui/nonmatchings/common_gui", D_00003284);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", func_0000061C);
+void func_0000061C(void) {
+    func_000005CC((s32) "msgsystem_yes");
+}
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", func_0000063C);
+void func_0000063C(void) {
+    func_000005CC((s32) "msgsystem_no");
+}
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_764A5495);
+void sceVshCommonGui_764A5495(void) {
+    func_000005CC((s32) "msgsystem_enter");
+}
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_DBEE94DC);
+void sceVshCommonGui_DBEE94DC(void) {
+    func_000005CC((s32) "msgsystem_back");
+}
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_93107A60);
+void sceVshCommonGui_93107A60(void) {
+    func_000005CC((s32) "msgsystem_option");
+}
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_B45ED019);
+void sceVshCommonGui_B45ED019(void) {
+    func_000005CC((s32) "msgsystem_cancel");
+}
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", func_000006DC);
+void func_000006DC(void) {
+    func_000005CC((s32) "msgsystem_ok");
+}
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_E9B8D6AB);
+void sceVshCommonGui_E9B8D6AB(void) {
+    func_000005CC((s32) "msgshare_opt_edit");
+}
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_D4353F96);
 
@@ -210,9 +226,13 @@ INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_7C
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_8EB783F5);
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_F7A03543);
+s32 sceVshCommonGui_F7A03543(void) {
+    return D_00003934 != 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", sceVshCommonGui_25D6E91D);
+M2C_UNK *sceVshCommonGui_25D6E91D(void) {
+    return &D_00003920;
+}
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", func_0000295C);
 
@@ -230,9 +250,14 @@ void func_00002D08(void) {
     func_00002C7C(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", func_00002D28);
+void func_00002D28(M2C_UNK **arg0) {
+    *arg0 = &D_000037F0;
+}
 
-INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", func_00002D38);
+void func_00002D38(M2C_UNK **arg0) {
+    *arg0 = &D_000037F0;
+    scePaf_4E67BB08();
+}
 
 INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui", func_00002D60);
 

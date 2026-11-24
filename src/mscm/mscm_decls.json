@@ -3,8 +3,10 @@
   "func_00000C1C": "s32 func_00000C1C(void *arg0);",
   "func_0000254C": "s32 func_0000254C(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);",
   "func_00004E4C": "void func_00004E4C(void);",
+  "func_00004E68": "s32 func_00004E68(s32 arg0, s32 arg1);",
   "func_00006484": "s32 func_00006484(void);",
   "func_0000648C": "s32 func_0000648C(void);",
+  "func_00006494": "s32 func_00006494(void *arg0);",
   "func_000064C0": "s32 func_000064C0(void);",
   "func_000064C8": "s32 func_000064C8(s32);",
   "func_0000652C": "s32 func_0000652C(s32, s32);",
@@ -23,5 +25,8 @@
   "sceSysreg_driver_18172C6A": "M2C_UNK sceSysreg_driver_18172C6A(s32);",
   "sceSysreg_driver_D74F1D48": "M2C_UNK sceSysreg_driver_D74F1D48(s32);"
  },
- "vars": {}
+ "vars": {
+  "D_00007880": "extern s32 D_00007880;",
+  "D_00007AF4": "extern s32 D_00007AF4;"
+ }
 }

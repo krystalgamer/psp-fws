@@ -48,7 +48,9 @@ INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", sceUmd9660_driver_EB75B9
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00001814);
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_000019D0);
+M2C_UNK *func_000019D0(void) {
+    return &D_00005C88;
+}
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_000019DC);
 
@@ -116,7 +118,9 @@ s32 func_00003BFC(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00003C04);
+M2C_UNK *func_00003C04(void) {
+    return &D_00005CA0;
+}
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00003C10);
 
@@ -157,7 +161,9 @@ s32 func_00003F70(void) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00003FAC);
+void func_00003FAC(void) {
+    sceUmd_7850F057(&func_000036D8, &D_00005C80);
+}
 
 void func_00003FD4(void) {
     sceUmd_27A764A1();
@@ -240,28 +246,52 @@ INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_0000506C);
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_000050D4);
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00005334);
+void func_00005334(s32 arg0) {
+    D_000070D4 = arg0;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00005340);
+s32 func_00005340(void) {
+    return D_000070B8;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", sceUmd9660_driver_F42C0AEE);
+s32 sceUmd9660_driver_F42C0AEE(void) {
+    return D_000070C0;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00005358);
+u8 func_00005358(void) {
+    return D_000070B0;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00005364);
+u8 func_00005364(void) {
+    return D_000070B2;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_00005370);
+u8 func_00005370(void) {
+    return D_000070B1;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_0000537C);
+u8 func_0000537C(void) {
+    return D_000070B3;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", sceUmd9660_driver_2C6C3F4C);
+s32 sceUmd9660_driver_2C6C3F4C(void) {
+    return D_000070BC;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", sceUmd9660_driver_C7CD9CE8);
+s32 sceUmd9660_driver_C7CD9CE8(void) {
+    return D_000070D0;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", sceUmd9660_driver_44EF600C);
+s32 sceUmd9660_driver_44EF600C(void) {
+    return D_000070CC;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", sceUmd9660_driver_CAAFFE8D);
+s32 sceUmd9660_driver_CAAFFE8D(void) {
+    return D_000070D4;
+}
 
-INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_000053B8);
+s32 func_000053B8(void) {
+    return D_000070D8;
+}
 
 INCLUDE_ASM("tmp/asm/282/umd9660/nonmatchings/umd9660", func_000053C4);

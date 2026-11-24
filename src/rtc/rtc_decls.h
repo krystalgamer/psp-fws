@@ -5,9 +5,15 @@
 #include "m2c_macros.h"
 
 extern M2C_UNK D_00004540;
+extern M2C_UNK func_00003D10;
+extern M2C_UNK func_00003DD4;
+extern M2C_UNK func_00003DF4;
+extern M2C_UNK sceRtc_driver_B44BDAED;
 
+M2C_UNK UtilsForKernel_23A0C5BA(M2C_UNK *, M2C_UNK *, M2C_UNK *, M2C_UNK *);
 s32 func_0000138C(s32 arg0);
 s32 func_00003AF8(void *arg0, s32 arg1);
+void func_00003D9C(void);
 s32 module_reboot_before(void);
 s32 sceRtcGetDayOfWeek(s32 arg0, s32 arg1, s32 arg2);
 u32 sceRtcGetTickResolution(void);

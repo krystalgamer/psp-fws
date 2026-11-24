@@ -44,7 +44,9 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_000002B4);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00000470);
+void func_00000470(void) {
+    D_00004894 = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_0000047C);
 
@@ -108,7 +110,12 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00000EB8);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00000F3C);
+s32 func_00000F3C(void) {
+    func_00002CBC();
+    scePaf_C4BAD564(0xC8);
+    scePaf_27F64616(D_00004890);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00000F70);
 

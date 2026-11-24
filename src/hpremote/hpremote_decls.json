@@ -2,11 +2,26 @@
  "funcs": {
   "func_0000134C": "s32 func_0000134C(s32 arg0);",
   "module_start": "s32 module_start(void);",
+  "sceHprmIsHeadphoneExist": "s32 sceHprmIsHeadphoneExist(void);",
+  "sceHprmIsMicrophoneExist": "s32 sceHprmIsMicrophoneExist(void);",
+  "sceHprmIsRemoteExist": "s32 sceHprmIsRemoteExist(void);",
   "sceHprm_driver_1C5BC5A0": "s32 sceHprm_driver_1C5BC5A0(void);",
   "sceHprm_driver_2C7B8B05": "s32 sceHprm_driver_2C7B8B05(void);",
+  "sceHprm_driver_4D1E622C": "s32 sceHprm_driver_4D1E622C(void);",
   "sceHprm_driver_526BB7F4": "s32 sceHprm_driver_526BB7F4(void);",
+  "sceHprm_driver_71B5FB67": "u8 sceHprm_driver_71B5FB67(void);",
+  "sceHprm_driver_971AE8FB": "s32 sceHprm_driver_971AE8FB(s32 *arg0);",
+  "sceHprm_driver_F04591FA": "s32 sceHprm_driver_F04591FA(s32 arg0);",
+  "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
   "sceSysreg_driver_7725CA08": "M2C_UNK sceSysreg_driver_7725CA08(M2C_UNK);",
   "sceSysreg_driver_BB823481": "M2C_UNK sceSysreg_driver_BB823481(M2C_UNK);"
  },
- "vars": {}
+ "vars": {
+  "D_00002198": "extern s32 D_00002198;",
+  "D_00002226": "extern u8 D_00002226;",
+  "D_0000225C": "extern s32 D_0000225C;",
+  "D_00002261": "extern s8 D_00002261;",
+  "D_00002262": "extern s8 D_00002262;",
+  "D_00002263": "extern s8 D_00002263;"
+ }
 }

@@ -52,7 +52,9 @@ INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00001B58)
 
 INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00001B84);
 
-INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00001B98);
+M2C_UNK *func_00001B98(void) {
+    return &D_00002E11;
+}
 
 INCLUDE_ASM("tmp/asm/282/libparse_uri/nonmatchings/libparse_uri", func_00001BA4);
 

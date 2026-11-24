@@ -3,6 +3,7 @@
   "func_0000158C": "s32 func_0000158C(void);",
   "func_000015B0": "void func_000015B0(void);",
   "func_00001650": "void func_00001650(void);",
+  "func_000018BC": "s32 func_000018BC(void);",
   "func_000018F0": "void func_000018F0(void);",
   "func_00003A54": "s32 func_00003A54(void **arg0);",
   "func_00003AA8": "s32 func_00003AA8(void *arg0);",
@@ -11,14 +12,22 @@
   "func_00003F24": "void func_00003F24(s32 *arg0, s32 arg1);",
   "func_00003F2C": "s32 func_00003F2C(void);",
   "func_00003F80": "s32 func_00003F80(void);",
+  "func_00004028": "void func_00004028(s32 arg0);",
+  "func_00004064": "void func_00004064(void);",
+  "memset": "M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(u32);",
   "sceKernelSendMbx": "s32 sceKernelSendMbx(u32, void *);",
+  "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceMemab_driver_0C134D3F": "M2C_UNK sceMemab_driver_0C134D3F();",
   "sceNetAdhocAuth_driver_2E6AA271": "s32 sceNetAdhocAuth_driver_2E6AA271(void);"
  },
  "vars": {
-  "D_00004600": "extern s32 D_00004600;"
+  "D_00004600": "extern s32 D_00004600;",
+  "D_00004604": "extern s32 D_00004604;",
+  "D_00004608": "extern s32 D_00004608;",
+  "D_00004784": "extern s32 D_00004784;",
+  "D_00004788": "extern M2C_UNK D_00004788;"
  }
 }

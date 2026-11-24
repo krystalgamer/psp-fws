@@ -16,6 +16,7 @@
   "sceMePower_driver_B6FE3E62": "M2C_UNK sceMePower_driver_B6FE3E62(M2C_UNK);"
  },
  "vars": {
-  "D_00004140": "extern u32 D_00004140;"
+  "D_00004140": "extern u32 D_00004140;",
+  "D_00004830": "extern u32 D_00004830;"
  }
 }

@@ -1,12 +1,27 @@
 {
  "funcs": {
   "func_00000000": "M2C_UNK func_00000000();",
+  "func_00000180": "s32 func_00000180(void);",
   "func_00000194": "s32 func_00000194(void);",
+  "func_00000B1C": "void func_00000B1C(void);",
   "func_000026FC": "void func_000026FC(void *arg0, void *arg1, void *arg2);",
+  "func_00004A38": "s32 func_00004A38(void);",
   "func_00004FE8": "s32 func_00004FE8(void);",
   "func_000055BC": "M2C_UNK func_000055BC();",
   "module_start": "s32 module_start(void);",
-  "module_stop": "s32 module_stop(void);"
+  "module_stop": "s32 module_stop(void);",
+  "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
+  "sceNetApctlDisconnect": "M2C_UNK sceNetApctlDisconnect();",
+  "sceUtility_netparam_internal_9CE50172": "M2C_UNK sceUtility_netparam_internal_9CE50172(M2C_UNK);",
+  "sceVshNetconfRaku_F3AF9DD1": "s32 sceVshNetconfRaku_F3AF9DD1(void *arg0);"
  },
- "vars": {}
+ "vars": {
+  "D_00008498": "extern s32 D_00008498;",
+  "D_000084A0": "extern s32 D_000084A0;",
+  "D_000084A4": "extern s32 D_000084A4;",
+  "D_00008530": "extern s32 D_00008530;",
+  "D_00008534": "extern s32 D_00008534;",
+  "D_00008538": "extern s32 D_00008538;",
+  "D_00008540": "extern s32 D_00008540;"
+ }
 }

@@ -50,7 +50,15 @@ INCLUDE_ASM("tmp/asm/282/gpio/nonmatchings/gpio", sceGpio_driver_31F34AE6);
 
 INCLUDE_ASM("tmp/asm/282/gpio/nonmatchings/gpio", sceGpio_driver_BE77D1D0);
 
-INCLUDE_ASM("tmp/asm/282/gpio/nonmatchings/gpio", sceGpio_driver_C6928224);
+s32 sceGpio_driver_C6928224(u32 arg0) {
+    s32 var_v0;
+
+    var_v0 = 0x80000102;
+    if (arg0 < 4U) {
+        var_v0 = ((u32) D_00000E94 >> (arg0 * 8)) & 0x1F;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/gpio/nonmatchings/gpio", sceGpio_driver_6B38B826);
 

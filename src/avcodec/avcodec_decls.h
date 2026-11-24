@@ -5,6 +5,7 @@
 #include "m2c_macros.h"
 
 extern u32 D_00004140;
+extern u32 D_00004830;
 
 s32 func_00000000(void);
 s32 func_00000050(void);

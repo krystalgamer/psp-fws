@@ -55,7 +55,11 @@ INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", func
 
 INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", func_00001848);
 
-INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", func_000018BC);
+s32 func_000018BC(void) {
+    D_00004784 = 0;
+    memset(&D_00004788, 0, 0x10);
+    return 0;
+}
 
 void func_000018F0(void) {
 }
@@ -184,9 +188,20 @@ INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", func
 
 INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", func_00003FBC);
 
-INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", func_00004028);
+void func_00004028(s32 arg0) {
+    if (arg0 == 0) {
 
-INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", func_00004064);
+    } else {
+        D_00004608 = -1;
+        sceKernelSignalSema(D_00004604, 1);
+    }
+}
+
+void func_00004064(void) {
+    if (D_00004604 >= 0) {
+        sceKernelSignalSema(D_00004604, 1);
+    }
+}
 
 s32 module_start(void) {
     return 0;

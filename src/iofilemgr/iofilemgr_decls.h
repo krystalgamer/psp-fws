@@ -4,9 +4,14 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern s32 D_00005870;
 
 s32 IoFileMgrForKernel_BD17474F(void *arg0);
 void IoFileMgrForKernel_CB05F8D6(s32 arg0, s32 arg1, s32 arg2);
+M2C_UNK SysMemForKernel_7B749390(s32, s32);
+void func_00001B9C(s32 arg0);
+void func_00001CB8(s32 arg0);
+void func_0000339C(s32 *arg0);
 s32 func_000033DC(void);
 s32 func_00003570(s32, s32, s32, s32);
 s32 func_00003748(s32, s32, s32);

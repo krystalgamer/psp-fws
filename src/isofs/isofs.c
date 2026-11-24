@@ -10,7 +10,19 @@ INCLUDE_RODATA("tmp/asm/201/isofs/nonmatchings/isofs", D_00005EA8);
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_000001B8);
 
-INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", sceIsofs_driver_19F9734D);
+s32 sceIsofs_driver_19F9734D(s32 arg0) {
+    s32 temp_v0;
+    s32 var_a0;
+
+    temp_v0 = func_00004DB0();
+    var_a0 = 0;
+    if (arg0 >= 0) {
+        if (arg0 < M2C_FIELD(temp_v0, s32 *, 0xC)) {
+            var_a0 = D_000065C0 + (arg0 * 0xA8);
+        }
+    }
+    return var_a0;
+}
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_000002F8);
 
@@ -18,7 +30,28 @@ INCLUDE_RODATA("tmp/asm/201/isofs/nonmatchings/isofs", D_00005F30);
 
 INCLUDE_RODATA("tmp/asm/201/isofs/nonmatchings/isofs", D_00005F38);
 
-INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00000440);
+s32 func_00000440(void *arg0) {
+    s32 temp_v0;
+    s32 var_s1;
+    s32 var_s2;
+
+    var_s2 = 0;
+    if (M2C_FIELD(arg0, u8 *, 0x50) != 0) {
+        var_s1 = 0;
+        do {
+            var_s2 += 1;
+            func_00000790(M2C_FIELD(arg0, s32 *, 0x98) + var_s1 + 8);
+            var_s1 += 0x2C;
+        } while (var_s2 < (s32) M2C_FIELD(arg0, u8 *, 0x50));
+    }
+    temp_v0 = SysMemForKernel_7B749390(M2C_FIELD(arg0, s32 *, 0x40), M2C_FIELD(arg0, s32 *, 0x98));
+    if (temp_v0 >= 0) {
+
+    } else {
+        KDebugForKernel_84F370BC("%sERROR: %s: sceKernelFreeHeapMemory(%x)\n", &D_00005F30, "sceIsofsLbTerm", temp_v0);
+    }
+    return temp_v0;
+}
 
 s32 func_000004E4(void *arg0, s32 arg1) {
     func_000007FC(M2C_FIELD(arg0, s32 *, 0x98), arg1);
@@ -37,7 +70,19 @@ INCLUDE_RODATA("tmp/asm/201/isofs/nonmatchings/isofs", D_00005FE0);
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00000620);
 
-INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_000006EC);
+s32 func_000006EC(void) {
+    s32 temp_s0;
+    s32 temp_v0;
+
+    temp_s0 = func_00004DB0();
+    func_00000620();
+    temp_v0 = SysMemForKernel_7B749390(M2C_FIELD(temp_s0, s32 *, 0x1C), D_000065C4);
+    if (temp_v0 != 0) {
+        KDebugForKernel_84F370BC(&D_00005FE0, &D_00005F98, "sceIsofsCacheTerm", temp_v0);
+    }
+    sceKernelDeleteFpl(M2C_FIELD(temp_s0, s32 *, 0x20));
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00000760);
 
@@ -176,7 +221,9 @@ INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_000048CC);
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", module_start);
 
-INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00004DB0);
+s32 func_00004DB0(void) {
+    return (s32) &D_00007608;
+}
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", module_reboot_before);
 
@@ -194,7 +241,18 @@ INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00005400);
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00005878);
 
-INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00005970);
+s32 func_00005970(s32 arg0) {
+    s32 temp_s0;
+    s32 var_v0;
+
+    temp_s0 = __builtin_allegrex_min(sceUmdMan_driver_BF8AED79(0x20, &func_000048CC, arg0), 0);
+    var_v0 = 0;
+    if (temp_s0 != 0) {
+        KDebugForKernel_84F370BC("%sERROR: %s: sceIsofsIntrRegisterMediumCallBack(%x)\n", "isofs: ", "sceIsofsIntrInit", temp_s0);
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
 
 s32 func_000059DC(void) {
     sceUmdMan_driver_4217E7F5(0x20);

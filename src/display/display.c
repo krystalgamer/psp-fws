@@ -52,13 +52,18 @@ INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_432D13
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_681EE6A7);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_23CE8C51);
+s8 sceDisplay_driver_23CE8C51(void) {
+    return D_00003E1A;
+}
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_E4E4C018);
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplaySetHoldMode);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_A544C486);
+s32 sceDisplay_driver_A544C486(s32 arg0) {
+    D_00003EB0 = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_BF79F646);
 
@@ -74,9 +79,13 @@ s32 sceDisplayGetFrameBuf(void *arg0, void *arg1, void *arg2, s32 arg3) {
     return sceDisplay_driver_5B5AEFAD(2, (s32) arg0, (s32) arg1, (s32) arg2, arg3);
 }
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayIsForeground);
+s32 sceDisplayIsForeground(void) {
+    return D_00003E14 == 2;
+}
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_AC14F1FF);
+s8 sceDisplay_driver_AC14F1FF(void) {
+    return D_00003E14;
+}
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_E55F0D50);
 
@@ -102,7 +111,13 @@ INCLUDE_RODATA("tmp/asm/282/display/nonmatchings/display", D_00003C50);
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002968);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002A64);
+s32 func_00002A64(void) {
+    sceSysreg_driver_F6D83AD0(1);
+    InterruptManagerForKernel_F987B1F0(0x1E);
+    InterruptManagerForKernel_F987B1F0(0x32);
+    sceKernelDeleteEventFlag(D_00003EF8);
+    return 0;
+}
 
 s32 func_00002AA0(void) {
     sceSysreg_driver_F6D83AD0(1);
@@ -112,11 +127,16 @@ s32 func_00002AA0(void) {
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002AC8);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002B20);
+s32 func_00002B20(s32 arg0) {
+    D_00003EF4 = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayGetVcount);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayIsVblank);
+s32 sceDisplayIsVblank(void) {
+    return sceDisplayGetCurrentHcount() < D_00003EE8;
+}
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_69B53541);
 
@@ -126,7 +146,9 @@ INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayWaitVblankStar
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayWaitVblankStartCB);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_92C8F8B7);
+s32 sceDisplay_driver_92C8F8B7(void) {
+    return D_00003EF0 != 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", func_00002C7C);
 

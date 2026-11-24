@@ -1,4 +1,5 @@
 #include "common.h"
+#include "mesg_led_decls.h"
 
 INCLUDE_ASM("tmp/asm/303/mesg_led/nonmatchings/mesg_led", func_00000000);
 
@@ -8,7 +9,25 @@ INCLUDE_ASM("tmp/asm/303/mesg_led/nonmatchings/mesg_led", func_000000E0);
 
 INCLUDE_ASM("tmp/asm/303/mesg_led/nonmatchings/mesg_led", func_000012E0);
 
-INCLUDE_ASM("tmp/asm/303/mesg_led/nonmatchings/mesg_led", module_start);
+s32 module_start(void) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_v1;
+
+    temp_v0 = sceKernelCreateSema("SceUtils4096", 0U, 1, 1, NULL);
+    D_00006F94 = temp_v0;
+    var_v1 = 1;
+    if (temp_v0 > 0) {
+        temp_v0_2 = sceKernelCreateSema("SceUtils5120", 0U, 1, 1, NULL);
+        D_00006F98 = temp_v0_2;
+        var_v1 = 0;
+        if (temp_v0_2 <= 0) {
+            sceKernelDeleteSema(D_00006F94);
+            var_v1 = 1;
+        }
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/303/mesg_led/nonmatchings/mesg_led", sceMesgLed_driver_55E4F665);
 

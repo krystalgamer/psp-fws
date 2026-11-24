@@ -31,7 +31,21 @@ s32 sceNetResolverDelete(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/pspnet_resolver/nonmatchings/pspnet_resolver", func_00000508);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_resolver/nonmatchings/pspnet_resolver", func_0000065C);
+s32 func_0000065C(void) {
+    s32 temp_v0;
+    s32 var_a0;
+
+    temp_v0 = func_00000F64();
+    var_a0 = 0;
+    if (temp_v0 >= 0) {
+        D_00001F78 = 0;
+        D_00001F74 = 0;
+    } else {
+        func_00000FA8();
+        var_a0 = temp_v0;
+    }
+    return var_a0;
+}
 
 s32 func_000006B0(void) {
     func_00000FA8();

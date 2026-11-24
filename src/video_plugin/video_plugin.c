@@ -27,7 +27,19 @@ void func_00000540(void) {
 void func_00000548(void) {
 }
 
-INCLUDE_ASM("tmp/asm/282/video_plugin/nonmatchings/video_plugin", func_00000550);
+void func_00000550(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    func_00001174(0);
+    temp_v0 = scePaf_D4FAE7D0(&D_00002614);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK), 8)(0);
+        }
+    }
+}
 
 INCLUDE_RODATA("tmp/asm/282/video_plugin/nonmatchings/video_plugin", D_000025EC);
 
@@ -43,7 +55,15 @@ INCLUDE_RODATA("tmp/asm/282/video_plugin/nonmatchings/video_plugin", D_00002624)
 
 INCLUDE_ASM("tmp/asm/282/video_plugin/nonmatchings/video_plugin", func_000005A0);
 
-INCLUDE_ASM("tmp/asm/282/video_plugin/nonmatchings/video_plugin", func_00000B84);
+void func_00000B84(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = scePaf_338C3774(arg0, 1);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK *, M2C_UNK), 4)(&func_00000C18, 0);
+        scePaf_A0ED77C4(0, &func_00000D70, 0, -1, -1, func_00000DF8);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/video_plugin/nonmatchings/video_plugin", func_00000BE0);
 

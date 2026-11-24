@@ -4,12 +4,30 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_00005F30;
+extern s32 D_00005F98;
+extern s32 D_00005FE0;
+extern s32 D_000065C0;
+extern s32 D_000065C4;
+extern M2C_UNK D_00007608;
+extern M2C_UNK func_000048CC;
 
+M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);
+s32 SysMemForKernel_7B749390(s32, s32);
+s32 func_00000440(void *arg0);
 s32 func_000004E4(void *arg0, s32 arg1);
+s32 func_00000620(void);
+s32 func_000006EC(void);
+s32 func_00000790(s32);
 s32 func_000007FC(s32, s32);
 void func_00002364(void *arg0);
 s32 func_00004064(s32 arg0);
+s32 func_00004DB0(void);
+s32 func_00005970(s32 arg0);
 s32 func_000059DC(void);
+s32 sceIsofs_driver_19F9734D(s32 arg0);
+s32 sceKernelDeleteFpl(s32);
 M2C_UNK sceUmdMan_driver_4217E7F5(M2C_UNK);
+s32 sceUmdMan_driver_BF8AED79(M2C_UNK, M2C_UNK *, s32);
 
 #endif

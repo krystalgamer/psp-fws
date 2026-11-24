@@ -18,7 +18,9 @@ INCLUDE_ASM("tmp/asm/282/libparse_http/nonmatchings/libparse_http", func_000006C
 
 INCLUDE_ASM("tmp/asm/282/libparse_http/nonmatchings/libparse_http", func_000006F0);
 
-INCLUDE_ASM("tmp/asm/282/libparse_http/nonmatchings/libparse_http", func_00000704);
+M2C_UNK *func_00000704(void) {
+    return &D_00000D61;
+}
 
 INCLUDE_ASM("tmp/asm/282/libparse_http/nonmatchings/libparse_http", func_00000710);
 

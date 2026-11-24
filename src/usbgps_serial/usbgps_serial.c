@@ -127,9 +127,31 @@ INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004EB
 
 INCLUDE_RODATA("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", D_00004EE0);
 
-INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002D4C);
+s32 func_00002D4C(void) {
+    s32 temp_v0;
+    s32 var_v1;
 
-INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002D94);
+    temp_v0 = sceUsbBus_driver_B1644BE7(&D_00005210);
+    var_v1 = 0;
+    if (temp_v0 < 0) {
+        KDebugForKernel_84F370BC("usbserial ERROR : cannot register : 0x%08x\n", temp_v0);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+
+s32 func_00002D94(void) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = sceUsbBus_driver_C1E2A540(&D_00005210);
+    var_v1 = 0;
+    if (temp_v0 < 0) {
+        KDebugForKernel_84F370BC("usbserial ERROR : cannot unregister : 0x%08x\n", temp_v0);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/270/usbgps_serial/nonmatchings/usbgps_serial", func_00002DDC);
 

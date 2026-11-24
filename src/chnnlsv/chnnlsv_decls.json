@@ -1,4 +1,11 @@
 {
- "funcs": {},
- "vars": {}
+ "funcs": {
+  "module_start": "s32 module_start(void);",
+  "sceKernelCreateSema": "s32 sceKernelCreateSema(void *, u32, s32, s32, void *);",
+  "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);"
+ },
+ "vars": {
+  "D_00002AD4": "extern s32 D_00002AD4;",
+  "D_00002AD8": "extern s32 D_00002AD8;"
+ }
 }

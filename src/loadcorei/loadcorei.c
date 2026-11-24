@@ -17,7 +17,10 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00000280);
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_000002CC);
 
-INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00000340);
+s32 func_00000340(void) {
+    KDebugForKernel_84F370BC("systable.c:%s: is called.\n", "UndefSyscall");
+    return 0x80020001;
+}
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00000370);
 
@@ -134,7 +137,9 @@ s32 LoadCoreForKernel_DA1B09AA(u32 arg0, u32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_C99DD47A);
+M2C_UNK *LoadCoreForKernel_C99DD47A(void) {
+    return &D_0000967C;
+}
 
 s32 func_00001ECC(void) {
     return 0;
@@ -168,7 +173,10 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_00002284);
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_616FCCCD);
 
-INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", func_000029D8);
+s32 func_000029D8(s32 arg0) {
+    D_00007FF0 = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_ACE23476);
 
@@ -293,7 +301,9 @@ INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_FB
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_CCE4A157);
 
-INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_82CE54ED);
+s32 LoadCoreForKernel_82CE54ED(void) {
+    return D_00009694;
+}
 
 INCLUDE_ASM("tmp/asm/100/loadcorei/nonmatchings/loadcorei", LoadCoreForKernel_C0584F0C);
 

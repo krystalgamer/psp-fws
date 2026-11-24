@@ -4,7 +4,9 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern u8 D_00000540;
 
+u8 func_00000230(void);
 void func_00000290(void);
 void func_00000298(void);
 M2C_UNK func_0000034C();

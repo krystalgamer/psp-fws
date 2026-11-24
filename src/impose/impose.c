@@ -106,7 +106,22 @@ INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", func_00000EEC);
 
 INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceImpose_driver_BDBC42A6);
 
-INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceImpose_driver_C7E36CC7);
+s32 sceImpose_driver_C7E36CC7(void) {
+    if (M2C_FIELD(D_0000F510, s32 *, 0x80) >= 0) {
+        M2C_FIELD(D_0000F510, s32 *, 0xBC) = 1;
+        func_00000000(8U);
+        do {
+            sceKernelDelayThread(0x186A0U);
+        } while (M2C_FIELD(D_0000F510, s32 *, 0xBC) != 0);
+    }
+    sceSysEventForKernel_D7D3FDCD(&D_0000F514);
+    sceKernelSetEventFlag(M2C_FIELD(D_0000F510, u32 *, 0), 0x80000000U);
+    sceKernelWaitThreadEnd(M2C_FIELD(D_0000F510, s32 *, 4), NULL);
+    sceKernelDeleteThread(M2C_FIELD(D_0000F510, s32 *, 4));
+    sceKernelDeleteEventFlag((s32) M2C_FIELD(D_0000F510, u32 *, 0));
+    sceKernelReleaseSubIntrHandler(0x1E, 0x14);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/impose/nonmatchings/impose", sceImpose_driver_1AEED8FE);
 

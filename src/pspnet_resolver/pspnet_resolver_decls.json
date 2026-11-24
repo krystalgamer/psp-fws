@@ -1,10 +1,15 @@
 {
  "funcs": {
+  "func_0000065C": "s32 func_0000065C(void);",
   "func_000006B0": "s32 func_000006B0(void);",
   "func_0000070C": "s32 func_0000070C(s32);",
+  "func_00000F64": "s32 func_00000F64(void);",
   "func_00000FA8": "s32 func_00000FA8(void);",
   "sceKernelCheckThreadStack": "s32 sceKernelCheckThreadStack(void);",
   "sceNetResolverDelete": "s32 sceNetResolverDelete(s32 arg0);"
  },
- "vars": {}
+ "vars": {
+  "D_00001F74": "extern s32 D_00001F74;",
+  "D_00001F78": "extern s32 D_00001F78;"
+ }
 }

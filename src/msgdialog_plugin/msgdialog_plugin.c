@@ -13,7 +13,10 @@ s32 module_stop(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_0000015C);
+void func_0000015C(void) {
+    scePaf_F609FA81(D_00001A5C, &D_000012F0, 0, 0);
+    scePaf_CAF05F1D(D_00001A5C, &D_000012F0);
+}
 
 INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_000001AC);
 
@@ -31,7 +34,10 @@ INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_0
 
 INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_000002E8);
 
-INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_000003C8);
+void func_000003C8(void) {
+    scePaf_27F64616(D_00001A5C);
+    D_00001A68 = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_000003F0);
 

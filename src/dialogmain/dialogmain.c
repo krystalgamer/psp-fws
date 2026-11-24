@@ -1,4 +1,4 @@
-/* cflags: -Os */
+/* cflags: -O2 */
 #include "common.h"
 #include "dialogmain_decls.h"
 
@@ -53,14 +53,7 @@ void func_00000DE0(void) {
     func_0000050C();
 }
 
-void func_00000E04(s32 arg0) {
-    sceGeSaveContext(&D_00009A40);
-    scePaf_26DE971C();
-    scePaf_613E9AA2();
-    scePaf_F4AB3180(D_00009A00, arg0);
-    sceKernelCheckCallback();
-    sceGeRestoreContext(&D_00009A40);
-}
+INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00000E04);
 
 void func_00000E6C(void) {
     sceVshCommonUtil_29B75E11();
@@ -80,15 +73,7 @@ void func_00001104(void) {
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00001120);
 
-void func_000011EC(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = scePaf_CA79D58B(arg1);
-    }
-    func_0000150C(arg0, arg1, var_v0);
-}
+INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000011EC);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_0000123C);
 
@@ -106,12 +91,7 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000017CC);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00001820);
 
-s32 module_start(void) {
-    sceVshCommonUtil_12F5429A();
-    func_00000000();
-    func_00001024(0, 0);
-    return 0;
-}
+INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", module_start);
 
 s32 module_stop(void) {
     func_00007940();
@@ -126,7 +106,23 @@ s32 module_reboot_before(void) {
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000018F0);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00001950);
+void func_00001950(void) {
+    void **temp_v0;
+    void **temp_v0_2;
+
+    temp_v0 = scePaf_4708AED4(D_0000A284, &D_00008858);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 0x19, 3);
+        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 7, 0x10);
+    }
+    temp_v0_2 = scePaf_4708AED4(D_0000A284, &D_00008870);
+    if (temp_v0_2 != NULL) {
+        M2C_FIELD(M2C_FIELD(temp_v0_2, void **, 0), M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0_2, 0x19, 9);
+        M2C_FIELD(temp_v0_2, s8 *, 0x1FD) = 0;
+        M2C_FIELD(temp_v0_2, s8 *, 0x1FE) = 0;
+        scePaf_86B41BA3(temp_v0_2);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00001A08);
 
@@ -356,9 +352,31 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_0000230C);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00002334);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00002500);
+void func_00002500(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    D_0000A29C = arg0;
+    D_0000A2A0 = arg1;
+    D_0000A2A4 = arg2;
+    D_0000A2A8 = arg3;
+    D_0000A2AC = arg4;
+}
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_0000252C);
+void func_0000252C(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3, s32 *arg4) {
+    if (arg0 != NULL) {
+        *arg0 = D_0000A29C;
+    }
+    if (arg1 != NULL) {
+        *arg1 = D_0000A2A0;
+    }
+    if (arg2 != NULL) {
+        *arg2 = D_0000A2A4;
+    }
+    if (arg3 != NULL) {
+        *arg3 = D_0000A2A8;
+    }
+    if (arg4 != NULL) {
+        *arg4 = D_0000A2AC;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00002584);
 
@@ -370,7 +388,22 @@ void func_000027AC(void) {
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000027D4);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00002808);
+void func_00002808(void) {
+    s32 temp_v0;
+
+    if (D_0000A2A4 == 0) {
+
+    } else if (((s32 (*)()) D_0000A2AC)() != 0) {
+        if (D_0000A2B8 == 0) {
+            D_0000A2B8 = ((s32 (*)(s32)) D_0000A2A4)(D_0000A2B0);
+        }
+        if (D_0000A2BC == 0) {
+            temp_v0 = scePaf_B7E6052B(0x1C);
+            scePaf_93538664(temp_v0, D_0000A2B8, 0x81400, 0);
+            D_0000A2BC = temp_v0;
+        }
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000028B8);
 
@@ -382,7 +415,12 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000029F0);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00002A34);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00002A98);
+void func_00002A98(void) {
+    if (D_0000A2A0 != 0) {
+        ((M2C_UNK (*)(s32)) D_0000A2A0)(D_0000A2B0);
+        D_0000A2B0 = 0;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00002AD4);
 
@@ -390,23 +428,15 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00002E88);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00002F8C);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_0000304C);
-
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003058);
-
-s32 func_00003064(void) {
-    s32 temp_v0;
-    s32 var_v0;
-
-    temp_v0 = scePaf_8FE88010(&D_00008A54, 0, 0, 0, 0);
-    var_v0 = 0;
-    if (temp_v0 != 0) {
-        scePaf_21A183A7(temp_v0);
-        scePaf_4E67BB08(temp_v0);
-        var_v0 = 1;
-    }
-    return var_v0;
+s32 func_0000304C(void) {
+    return D_0000A290;
 }
+
+u8 func_00003058(void) {
+    return D_0000A298;
+}
+
+INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003064);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000030C0);
 
@@ -463,7 +493,9 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003D00);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003F24);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003FC8);
+u8 func_00003FC8(void) {
+    return D_0000A2C8;
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003FD4);
 
@@ -537,22 +569,17 @@ void func_00005980(void) {
 
 void func_000059A0(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
-    func_00005B74();
+    func_00005B74((s32) arg0);
 }
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000059C0);
 
-void func_000059F0(s32 arg0, s32 arg1) {
-    s32 var_v0;
+INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000059F0);
 
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = scePaf_FD4C9F47(arg1);
-    }
-    func_00005B94(arg0, arg1, var_v0);
+void func_00005A40(s32 *arg0, s32 *arg1) {
+    *arg0 = *arg1;
+    func_00005B74((s32) arg0);
 }
-
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00005A40);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00005A60);
 
@@ -566,25 +593,85 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00005C48);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00005D80);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00005EA0);
+s32 func_00005EA0(void) {
+    return D_0000A35C != 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00005EB0);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_0000602C);
+s32 func_0000602C(void) {
+    s32 temp_s0;
+    s32 temp_s0_2;
+    s32 temp_s0_3;
+    s32 temp_s0_4;
+    s32 temp_v0;
+    s32 var_s2;
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006164);
+    var_s2 = 0;
+    if (D_0000A360 == 1) {
+        temp_v0 = sceNetAdhocctlTerm();
+        var_s2 = temp_v0;
+        if (temp_v0 == 0) {
+
+        } else {
+            scePaf_C9831AFF("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
+        }
+        temp_s0 = D_0000A388;
+        if (temp_s0 == 0) {
+
+        } else {
+            scePaf_4612DB4B(temp_s0);
+            scePaf_4E67BB08(temp_s0);
+        }
+        temp_s0_2 = D_0000A394;
+        D_0000A388 = 0;
+        if (temp_s0_2 == 0) {
+
+        } else {
+            scePaf_4612DB4B(temp_s0_2);
+            scePaf_4E67BB08(temp_s0_2);
+        }
+        temp_s0_3 = D_0000A390;
+        D_0000A394 = 0;
+        if (temp_s0_3 == 0) {
+
+        } else {
+            scePaf_4612DB4B(temp_s0_3);
+            scePaf_4E67BB08(temp_s0_3);
+        }
+        temp_s0_4 = D_0000A38C;
+        D_0000A390 = 0;
+        if (temp_s0_4 == 0) {
+            D_0000A38C = 0;
+        } else {
+            scePaf_4612DB4B(temp_s0_4);
+            scePaf_4E67BB08(temp_s0_4);
+            D_0000A38C = 0;
+        }
+    }
+    D_0000A360 -= 1;
+    return var_s2;
+}
+
+s32 func_00006164(void) {
+    return D_0000A360 != 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006174);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000062D8);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006430);
+s32 func_00006430(void) {
+    return D_0000A364 != 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006440);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000065A4);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_000066FC);
+s32 func_000066FC(void) {
+    return D_0000A368 != 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_0000670C);
 
@@ -602,13 +689,21 @@ INCLUDE_RODATA("tmp/asm/282/dialogmain/nonmatchings/dialogmain", D_000095A0);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006BC4);
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006CCC);
+s32 func_00006CCC(void) {
+    return D_0000A3D0;
+}
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006CD8);
+s32 func_00006CD8(void) {
+    return D_0000A3CC;
+}
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006CE4);
+s32 func_00006CE4(void) {
+    return D_0000A3D4;
+}
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006CF0);
+s32 func_00006CF0(void) {
+    return D_0000A3D8;
+}
 
 s32 func_00006CFC(s32 arg0) {
     if (arg0 != D_0000A3CC) {
@@ -651,8 +746,8 @@ INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006F4C);
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00006FF8);
 
-void func_000070DC(void) {
-    sceIoClose();
+void func_000070DC(s32 arg0) {
+    sceIoClose(arg0);
 }
 
 INCLUDE_RODATA("tmp/asm/282/dialogmain/nonmatchings/dialogmain", D_000095E8);

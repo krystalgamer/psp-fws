@@ -160,7 +160,15 @@ INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00000F24);
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00000F74);
 
-INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00001084);
+s32 func_00001084(void) {
+    s32 var_v1;
+
+    var_v1 = 0x8050C026;
+    if (!(D_0000BE84 & 1)) {
+        var_v1 = !(D_0000BE84 & 2) ? 0 : 0x8050C025;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_000010B4);
 
@@ -229,7 +237,9 @@ INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00002BB8);
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00002D8C);
 
-INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00002F54);
+void func_00002F54(s32 arg0) {
+    ThreadManForKernel_BC31C1B9(0x1400, &func_00002D8C, arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", sceMgVideo_driver_10DA1B19);
 
@@ -269,7 +279,21 @@ INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00004834);
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_000048B0);
 
-INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_000049D0);
+s32 func_000049D0(void *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
+    s32 var_s0;
+    void *var_s1;
+
+    var_s1 = NULL;
+    var_s0 = 0;
+    if (arg0 != NULL) {
+        var_s1 = arg0 + 0x10;
+        var_s0 = ((M2C_FIELD(arg0, u8 *, 0xE) << 8) | M2C_FIELD(arg0, u8 *, 0xF)) * 0x10;
+    }
+    *arg1 = func_00004834((s32) var_s1, var_s0, (s32) &D_000060F0);
+    *arg2 = func_00004834((s32) var_s1, var_s0, (s32) &D_000060F8);
+    *arg3 = func_00004834((s32) var_s1, var_s0, (s32) &D_00006100);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00004A88);
 

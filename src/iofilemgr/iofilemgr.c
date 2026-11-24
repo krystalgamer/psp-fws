@@ -56,7 +56,9 @@ INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_00001AE4);
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_00001B50);
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_00001B9C);
+void func_00001B9C(s32 arg0) {
+    SysMemForKernel_7B749390(D_00005870, arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_00001BC4);
 
@@ -64,7 +66,9 @@ INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_00001C00);
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_00001C6C);
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_00001CB8);
+void func_00001CB8(s32 arg0) {
+    SysMemForKernel_7B749390(D_00005870, arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_00001CE0);
 
@@ -214,7 +218,15 @@ s32 IoFileMgrForKernel_BD17474F(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x80);
 }
 
-INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", func_0000339C);
+void func_0000339C(s32 *arg0) {
+    s32 temp_v1;
+
+    temp_v1 = *arg0;
+    if (temp_v1 != 0) {
+        SysMemForKernel_7B749390(D_00005870, temp_v1);
+        *arg0 = 0;
+    }
+}
 
 s32 func_000033DC(void) {
     return 0x80020328;

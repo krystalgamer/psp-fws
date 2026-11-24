@@ -4,7 +4,19 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_00002AE0;
+extern M2C_UNK D_00002AEC;
+extern s32 D_00002C7C;
+extern M2C_UNK D_00002C88;
+extern M2C_UNK D_00002C94;
+extern void *D_00002D50;
 
+s32 func_000004B0(s32);
+void func_00000574(void);
+void func_0000098C(void);
+void func_00001D7C(void);
+void func_00001DB8(void);
+s32 func_00001DF4(s32, s32, s32, s32);
 M2C_UNK func_0000207C(M2C_UNK, M2C_UNK);
 void func_0000218C(void);
 void func_000021AC(void);
@@ -16,7 +28,10 @@ M2C_UNK func_00002584(s32, s32, s32);
 M2C_UNK func_00002638();
 M2C_UNK func_000026B0();
 s32 module_stop(void);
+M2C_UNK scePaf_3481F595(s32, M2C_UNK *);
 s32 scePaf_CA79D58B(s32);
+M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);
+M2C_UNK scePaf_F609FA81(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
 s32 scePaf_FD4C9F47(s32);
 
 #endif

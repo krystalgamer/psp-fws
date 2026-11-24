@@ -57,7 +57,10 @@ INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", module_reboot_before);
 
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGe_driver_9F2C2948);
 
-INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGe_driver_BAD6E1CA);
+s32 sceGe_driver_BAD6E1CA(s32 arg0) {
+    D_00006240 = arg0;
+    return 0;
+}
 
 s32 sceGe_driver_9DA4A75F(s32 arg0) {
     s32 temp_a3;
@@ -75,7 +78,15 @@ void func_00001EC4(s32 arg0, s32 arg1, s32 arg2) {
     func_000017E0(7, arg0, arg1, arg2);
 }
 
-INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_00001EF0);
+s32 func_00001EF0(void) {
+    s32 temp_a1;
+
+    temp_a1 = __builtin_allegrex_ins(0x40000000, SysMemForKernel_EF2EE8C1(), 0, 0x1D);
+    M2C_FIELD(temp_a1, s32 *, 4) = 0x0C000000;
+    D_00007FC0 = temp_a1;
+    M2C_FIELD(temp_a1, s32 *, 0) = 0x0F000000;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_00001F34);
 
@@ -95,9 +106,13 @@ INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGeEdramSetAddrTranslation);
 
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_0000254C);
 
-INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGeEdramGetSize);
+u32 sceGeEdramGetSize(void) {
+    return D_00006A84;
+}
 
-INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", sceGe_driver_C576E897);
+s32 sceGe_driver_C576E897(void) {
+    return D_00006A80;
+}
 
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_000025F0);
 
@@ -141,7 +156,9 @@ INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_00004B58);
 
 INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_00004C44);
 
-INCLUDE_ASM("tmp/asm/282/ge/nonmatchings/ge", func_00004C88);
+s32 func_00004C88(void) {
+    return (D_00007AC8 == 0) ? 0 : -1;
+}
 
 void func_00004C9C(void) {
 }

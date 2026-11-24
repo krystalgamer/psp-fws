@@ -26,7 +26,10 @@ INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprmUnregitserCallb
 
 INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_BAD0828E);
 
-INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_F04591FA);
+s32 sceHprm_driver_F04591FA(s32 arg0) {
+    D_0000225C = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_1910B327);
 
@@ -53,19 +56,35 @@ INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_2C7B8B0
 
 INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_D22913DB);
 
-INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_71B5FB67);
+u8 sceHprm_driver_71B5FB67(void) {
+    return D_00002226;
+}
 
-INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprmIsHeadphoneExist);
+s32 sceHprmIsHeadphoneExist(void) {
+    return (s32) D_00002261;
+}
 
-INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprmIsRemoteExist);
+s32 sceHprmIsRemoteExist(void) {
+    return __builtin_allegrex_max(D_00002262, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprmIsMicrophoneExist);
+s32 sceHprmIsMicrophoneExist(void) {
+    return __builtin_allegrex_max(D_00002263, 0);
+}
 
-INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_4D1E622C);
+s32 sceHprm_driver_4D1E622C(void) {
+    sceKernelSetEventFlag(D_00002198, 8U);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_7B038374);
 
-INCLUDE_ASM("tmp/asm/282/hpremote/nonmatchings/hpremote", sceHprm_driver_971AE8FB);
+s32 sceHprm_driver_971AE8FB(s32 *arg0) {
+    if (arg0 != NULL) {
+        *arg0 = D_0000225C;
+    }
+    return 0;
+}
 
 s32 func_0000134C(s32 arg0) {
     switch (arg0) {                                 /* irregular */

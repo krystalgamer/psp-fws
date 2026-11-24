@@ -2,11 +2,13 @@
  "funcs": {
   "func_0000015C": "M2C_UNK func_0000015C();",
   "func_000001FC": "s32 func_000001FC(void);",
+  "func_00000470": "void func_00000470(void);",
   "func_000004A0": "M2C_UNK func_000004A0(M2C_UNK, M2C_UNK);",
   "func_0000052C": "void func_0000052C(void);",
   "func_0000054C": "void func_0000054C(void);",
   "func_00000674": "M2C_UNK func_00000674(M2C_UNK);",
   "func_00000BBC": "void func_00000BBC(void);",
+  "func_00000F3C": "s32 func_00000F3C(void);",
   "func_00001480": "void func_00001480(void);",
   "func_000014F0": "void func_000014F0(void);",
   "func_000014F8": "void func_000014F8(void);",
@@ -33,6 +35,7 @@
   "func_00002600": "void func_00002600(void *arg0);",
   "func_0000261C": "void func_0000261C(void *arg0);",
   "func_00002C9C": "s32 func_00002C9C(void);",
+  "func_00002CBC": "s32 func_00002CBC(void);",
   "func_00002DE4": "void func_00002DE4(void);",
   "func_000033BC": "M2C_UNK func_000033BC();",
   "func_00003450": "M2C_UNK func_00003450();",
@@ -46,10 +49,14 @@
   "sceNetAdhocDownload_4C542FD1": "M2C_UNK sceNetAdhocDownload_4C542FD1();",
   "scePaf_27F64616": "M2C_UNK scePaf_27F64616(s32);",
   "scePaf_3481F595": "M2C_UNK scePaf_3481F595(s32);",
+  "scePaf_C4BAD564": "M2C_UNK scePaf_C4BAD564(M2C_UNK);",
   "scePaf_CA79D58B": "s32 scePaf_CA79D58B(s32);",
   "scePaf_CAF05F1D": "M2C_UNK scePaf_CAF05F1D(s32);",
   "scePaf_DAB59652": "M2C_UNK scePaf_DAB59652(s32);",
   "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);"
  },
- "vars": {}
+ "vars": {
+  "D_00004890": "extern s32 D_00004890;",
+  "D_00004894": "extern s8 D_00004894;"
+ }
 }

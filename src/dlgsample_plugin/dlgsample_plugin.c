@@ -18,7 +18,9 @@ INCLUDE_ASM("tmp/asm/100/dlgsample_plugin/nonmatchings/dlgsample_plugin", func_0
 
 INCLUDE_ASM("tmp/asm/100/dlgsample_plugin/nonmatchings/dlgsample_plugin", func_00000200);
 
-INCLUDE_ASM("tmp/asm/100/dlgsample_plugin/nonmatchings/dlgsample_plugin", func_00000230);
+u8 func_00000230(void) {
+    return D_00000540;
+}
 
 INCLUDE_ASM("tmp/asm/100/dlgsample_plugin/nonmatchings/dlgsample_plugin", func_0000023C);
 

@@ -88,7 +88,9 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhocPdp
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_67346A2A);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_F9240FBA);
+void sceNetAdhoc_lib_F9240FBA(void) {
+    sceNet_lib_57CC57DA(&D_000079CC, 0, 0x18);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_1059683E);
 
@@ -155,7 +157,9 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00004408)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_0000473C);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_62B875A8);
+void sceNetAdhoc_lib_62B875A8(void) {
+    sceNet_lib_57CC57DA(&D_000079E8, 0, 0x7C);
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_2CA12790);
 
@@ -259,7 +263,11 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_98
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhoc_A0229362);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00006F68);
+s32 func_00006F68(void) {
+    M2C_FIELD(&D_000079C0, s32 *, 0) = 0;
+    M2C_FIELD(&D_000079C0, M2C_UNK **, 4) = &D_000079C0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00006F80);
 

@@ -1,22 +1,39 @@
 {
  "funcs": {
   "InterruptManagerForKernel_D774BA45": "M2C_UNK InterruptManagerForKernel_D774BA45(M2C_UNK);",
+  "InterruptManagerForKernel_F987B1F0": "M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);",
   "func_00002A64": "s32 func_00002A64(void);",
   "func_00002AA0": "s32 func_00002AA0(void);",
+  "func_00002B20": "s32 func_00002B20(s32 arg0);",
   "module_start": "s32 module_start(void);",
+  "sceDisplayGetCurrentHcount": "s32 sceDisplayGetCurrentHcount(void);",
   "sceDisplayGetFrameBuf": "s32 sceDisplayGetFrameBuf(void *arg0, void *arg1, void *arg2, s32 arg3);",
   "sceDisplayGetFramePerSec": "void sceDisplayGetFramePerSec(void);",
+  "sceDisplayIsForeground": "s32 sceDisplayIsForeground(void);",
+  "sceDisplayIsVblank": "s32 sceDisplayIsVblank(void);",
   "sceDisplaySetFrameBuf": "s32 sceDisplaySetFrameBuf(void *arg0, s32 arg1, s32 arg2, s32 arg3);",
   "sceDisplay_driver_206276C2": "s32 sceDisplay_driver_206276C2(void);",
+  "sceDisplay_driver_23CE8C51": "s8 sceDisplay_driver_23CE8C51(void);",
   "sceDisplay_driver_5B5AEFAD": "s32 sceDisplay_driver_5B5AEFAD(s32, s32, s32, s32, s32);",
   "sceDisplay_driver_63E22A26": "s32 sceDisplay_driver_63E22A26(s32, s32, s32, s32, s32);",
   "sceDisplay_driver_7A10289D": "s32 sceDisplay_driver_7A10289D(void);",
+  "sceDisplay_driver_92C8F8B7": "s32 sceDisplay_driver_92C8F8B7(void);",
+  "sceDisplay_driver_A544C486": "s32 sceDisplay_driver_A544C486(s32 arg0);",
+  "sceDisplay_driver_AC14F1FF": "s8 sceDisplay_driver_AC14F1FF(void);",
+  "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelReleaseSubIntrHandler": "M2C_UNK sceKernelReleaseSubIntrHandler(M2C_UNK, M2C_UNK);",
   "sceLcdc_driver_3107417C": "M2C_UNK sceLcdc_driver_3107417C();",
   "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
   "sceSysreg_driver_F6D83AD0": "M2C_UNK sceSysreg_driver_F6D83AD0(M2C_UNK);"
  },
  "vars": {
-  "D_00003D10": "extern M2C_UNK D_00003D10;"
+  "D_00003D10": "extern M2C_UNK D_00003D10;",
+  "D_00003E14": "extern s8 D_00003E14;",
+  "D_00003E1A": "extern s8 D_00003E1A;",
+  "D_00003EB0": "extern s32 D_00003EB0;",
+  "D_00003EE8": "extern s32 D_00003EE8;",
+  "D_00003EF0": "extern s32 D_00003EF0;",
+  "D_00003EF4": "extern s32 D_00003EF4;",
+  "D_00003EF8": "extern s32 D_00003EF8;"
  }
 }

@@ -2,7 +2,11 @@
 #include "common.h"
 #include "emc_ddr_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/emc_ddr/nonmatchings/emc_ddr", module_start);
+s32 module_start(void) {
+    sceDdr_driver_17D39E17();
+    DmacManForKernel_32757C57((s32) &sceDdr_driver_87D86769);
+    return 0;
+}
 
 s32 module_reboot_before(void) {
     DmacManForKernel_32757C57(0);

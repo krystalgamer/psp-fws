@@ -46,7 +46,9 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_util
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_000002B4);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_000004D0);
+void func_000004D0(void) {
+    D_000045D4 = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_000004DC);
 
@@ -118,7 +120,12 @@ INCLUDE_RODATA("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_u
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00000F58);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00001048);
+s32 func_00001048(void) {
+    scePaf_C4BAD564(0xC8);
+    scePaf_27F64616(D_000045D0);
+    func_00002A38();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_0000107C);
 
@@ -250,11 +257,16 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_util
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_000025AC);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00002638);
+s32 func_00002638(void) {
+    D_00004608 = 2;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_0000264C);
 
-INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_000026F8);
+s32 func_000026F8(void) {
+    return __builtin_allegrex_min(sceNetAdhocDownload_C421875C(), 0);
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_0000271C);
 

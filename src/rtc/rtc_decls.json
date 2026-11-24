@@ -1,7 +1,9 @@
 {
  "funcs": {
+  "UtilsForKernel_23A0C5BA": "M2C_UNK UtilsForKernel_23A0C5BA(M2C_UNK *, M2C_UNK *, M2C_UNK *, M2C_UNK *);",
   "func_0000138C": "s32 func_0000138C(s32 arg0);",
   "func_00003AF8": "s32 func_00003AF8(void *arg0, s32 arg1);",
+  "func_00003D9C": "void func_00003D9C(void);",
   "module_reboot_before": "s32 module_reboot_before(void);",
   "sceRtcGetDayOfWeek": "s32 sceRtcGetDayOfWeek(s32 arg0, s32 arg1, s32 arg2);",
   "sceRtcGetTickResolution": "u32 sceRtcGetTickResolution(void);",
@@ -17,6 +19,10 @@
   "sceSyscon_driver_A068B3D0": "M2C_UNK sceSyscon_driver_A068B3D0(M2C_UNK, M2C_UNK);"
  },
  "vars": {
-  "D_00004540": "extern M2C_UNK D_00004540;"
+  "D_00004540": "extern M2C_UNK D_00004540;",
+  "func_00003D10": "extern M2C_UNK func_00003D10;",
+  "func_00003DD4": "extern M2C_UNK func_00003DD4;",
+  "func_00003DF4": "extern M2C_UNK func_00003DF4;",
+  "sceRtc_driver_B44BDAED": "extern M2C_UNK sceRtc_driver_B44BDAED;"
  }
 }
