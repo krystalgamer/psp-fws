@@ -1,0 +1,86 @@
+/* cflags: -Os -frename-registers */
+#include "common.h"
+#include "pops_decls.h"
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000CC88);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000CCCC);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000CD14);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000CD6C);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000CE34);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000CEA8);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000CED8);
+
+INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops_00CC88", D_00038850);
+
+INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops_00CC88", D_00038860);
+
+INCLUDE_RODATA("tmp/asm/302/pops/nonmatchings/pops_00CC88", D_000388A0);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000CF50);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000D028);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000D104);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000DD8C);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000DDD4);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000DE0C);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000DE94);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000DF50);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000E1FC);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000E7B4);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000E8FC);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000E97C);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000EA94);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000EBFC);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000ECD4);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000ED60);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000ED98);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000EE84);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F078);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F0D8);
+
+void func_0000F138(void) {
+    func_00010760();
+}
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F154);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F224);
+
+void func_0000F348(void) {
+    func_00010578(0);
+}
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F364);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F3A4);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F3E8);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F44C);
+
+INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F58C);
+
