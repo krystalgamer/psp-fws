@@ -129,11 +129,20 @@ void scePaf_1B043852(void *arg0) {
     sceKernelDeleteEventFlag(M2C_FIELD(arg0, s32 *, 4));
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1175E0", scePaf_0B0959FC);
+s32 scePaf_0B0959FC(void *arg0) {
+    void *sp0;
+    sceKernelSignalSema(*M2C_FIELD(arg0, s32 **, 0), 1);
+    sceKernelWaitEventFlag(M2C_FIELD(arg0, u32 *, 4), 1U, 0x10, &sp0, NULL);
+    sceKernelWaitSema(*M2C_FIELD(arg0, s32 **, 0), 1, NULL);
+    return 0;
+}
 
 void scePaf_CA5EF446(void *arg0) {
     sceKernelSetEventFlag(M2C_FIELD(arg0, s32 *, 4), 1);
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1175E0", func_0011802C);
+void func_0011802C(void *arg0) {
+    void *sp0;
+    sceKernelCancelEventFlag(M2C_FIELD(arg0, s32 *, 4), 0U, &sp0);
+}
 
