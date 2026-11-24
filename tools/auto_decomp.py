@@ -169,6 +169,9 @@ def compile_words(c_text, compiler="1.7.1", opt="-O2"):
         return out, ""
 
 
+# --fast: only compile with each file's own setting (no per-setting stats)
+FAST = False
+
 # The PSP uses the MIPS EABI ($4-$11 and $f12-$f19 for arguments), which m2c
 # implements as "mipsee" with $8-$11 named a4-a7.
 # Both are tried (EABI first); M2C_TARGET restricts to one.
@@ -323,7 +326,8 @@ def _try_func(mod, name, header_ctx, target, seen):
     matching = set()
     best = None
     compiler, own_setting = Module.file_setting(mod.file_of(name))
-    for setting in [f"{compiler} {o}" for o in OPTS]:
+    settings = [own_setting] if FAST else [f"{compiler} {o}" for o in OPTS]
+    for setting in settings:
         comp, opt = setting.split(" ", 1)
         words, err = compile_words(text, comp, opt)
         if words is None:
@@ -353,7 +357,10 @@ def main():
     ap.add_argument("--only")
     ap.add_argument("--grep", help="only functions whose asm matches this regex")
     ap.add_argument("--names", help="file with function names to try (one per line)")
+    ap.add_argument("--fast", action="store_true", help="only compile with each file's own setting")
     args = ap.parse_args()
+    global FAST
+    FAST = args.fast
 
     mod = Module(args.version, args.module)
     srcs = {}
@@ -404,7 +411,8 @@ def main():
         old["funcs"].update(mod.stats)
         old["scores"].update(mod.scores)
         stats = old
-    stats_path.write_text(json.dumps(stats))
+    if not FAST:  # keep the per-setting evidence of full runs
+        stats_path.write_text(json.dumps(stats))
     verify_and_revert(mod, args, accepted_now)
 
 
