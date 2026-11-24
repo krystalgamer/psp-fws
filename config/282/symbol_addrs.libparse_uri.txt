@@ -6,3 +6,5 @@ sceUriBuild = 0x00000708; // type:func
 sceUriMerge = 0x00000C4C; // type:func
 sceUriSweepPath = 0x00000E64; // type:func
 sceKernelCheckThreadStack = 0x000029AC; // type:func
+// real names (devkit DWARF, tools/dwarf_names.py)
+_is_scheme_char = 0x00000000; // type:func

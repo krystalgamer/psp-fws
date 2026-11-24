@@ -2,7 +2,7 @@
 #include "common.h"
 #include "libparse_uri_decls.h"
 
-INCLUDE_ASM("nonmatchings/libparse_uri", func_00000000);
+INCLUDE_ASM("nonmatchings/libparse_uri", _is_scheme_char);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", sceUriEscape);
 
@@ -21,23 +21,23 @@ INCLUDE_ASM("nonmatchings/libparse_uri", sceUriBuild);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libparse_uri", func_00000CDC);
+INCLUDE_ASM("nonmatchings/libparse_uri", uri_encoded_lenN);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libparse_uri", func_00000D1C);
+INCLUDE_ASM("nonmatchings/libparse_uri", uri_decoded_len);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libparse_uri", func_00000DE8);
+INCLUDE_ASM("nonmatchings/libparse_uri", _userinfo_parse);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libparse_uri", func_000010AC);
+INCLUDE_ASM("nonmatchings/libparse_uri", _scheme_parse);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libparse_uri", func_000011FC);
+INCLUDE_ASM("nonmatchings/libparse_uri", _hostname_parse);
 #endif
 
 #if FW_VERSION != 100
@@ -55,19 +55,19 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_00001310);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libparse_uri", func_00001490);
+INCLUDE_ASM("nonmatchings/libparse_uri", _path_parse);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libparse_uri", func_00001554);
+INCLUDE_ASM("nonmatchings/libparse_uri", _fragment_parse);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libparse_uri", func_000015FC);
+INCLUDE_ASM("nonmatchings/libparse_uri", _portnum_parse);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libparse_uri", func_000016A0);
+INCLUDE_ASM("nonmatchings/libparse_uri", _query_parse);
 #endif
 
 #if FW_VERSION == 100

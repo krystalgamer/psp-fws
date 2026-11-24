@@ -21,7 +21,7 @@ extern s32 D_00006400;
 void func_00002014(struct Unk_func_00002014_0 *arg0);
 s32 func_00002068(s32, s32, s32, s32);
 void func_00002280(s32 arg0, s32 arg1);
-s32 func_00002290(s32 *arg0);
+s32 _sce_pspnet_adhocctl_get_state(s32 *arg0);
 s32 func_000022A4(void *arg0);
 void func_00002984(s32 arg0);
 s32 func_00002A24(s32, s32, s32);

@@ -371,11 +371,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00004FA0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_0000520C);
+INCLUDE_ASM("nonmatchings/libhttp", CopyHttpHeaderList);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_00005384);
+INCLUDE_ASM("nonmatchings/libhttp", HttpWhichId);
 #endif
 
 #if FW_VERSION == 100
@@ -403,11 +403,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00005DE0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_00005E6C);
+INCLUDE_ASM("nonmatchings/libhttp", _sceHttpMallocInternal);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_00005ED4);
+INCLUDE_ASM("nonmatchings/libhttp", _sceHttpFreeInternal);
 #endif
 
 #if FW_VERSION == 100
@@ -415,11 +415,11 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetMallocFunction);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_00005FE4);
+INCLUDE_ASM("nonmatchings/libhttp", _HttpAtoi64);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_00006068);
+INCLUDE_ASM("nonmatchings/libhttp", _HttpI64toa);
 #endif
 
 #if FW_VERSION == 100
@@ -453,11 +453,11 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpInitCache);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_0000658C);
+INCLUDE_ASM("nonmatchings/libhttp", _sceHttpReallocInternal);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_000065C0);
+INCLUDE_ASM("nonmatchings/libhttp", __HttpI64toa);
 #endif
 
 #if FW_VERSION == 100
@@ -473,7 +473,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00006B7C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_00006DBC);
+INCLUDE_ASM("nonmatchings/libhttp", DeleteHttpHeader);
 #endif
 
 #if FW_VERSION == 100
@@ -493,7 +493,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000074AC);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_00007630);
+INCLUDE_ASM("nonmatchings/libhttp", _try_build_header);
 #endif
 
 #if FW_VERSION == 100

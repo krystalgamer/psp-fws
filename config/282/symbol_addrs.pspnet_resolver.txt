@@ -27,3 +27,10 @@ sceNet_lib_B5CE388A = 0x00001D28; // type:func
 sceNet_lib_BCBE14CF = 0x00001D30; // type:func
 sceNet_lib_D8722983 = 0x00001D38; // type:func
 sceNet_lib_EF097716 = 0x00001D40; // type:func
+// real names (devkit DWARF, tools/dwarf_names.py)
+_sce_pspnet_resolver_get_resolver_ctx = 0x000006D0; // type:func
+_sce_pspnet_resolver_delete_ctx = 0x0000070C; // type:func
+_sce_pspnet_resolver_net_init = 0x00000F64; // type:func
+send_query_message = 0x000010C8; // type:func
+skip_question_section = 0x000013E8; // type:func
+set_domain_name = 0x00001B9C; // type:func

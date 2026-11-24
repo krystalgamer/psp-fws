@@ -15,3 +15,5 @@ func_00000988 = 0x000008DC; // type:func
 func_000009F0 = 0x00000944; // type:func
 func_00000BD0 = 0x00000B1C; // type:func
 // shared names (tools/add_version.py) end
+// real names (devkit DWARF, tools/dwarf_names.py)
+strncmp_uc = 0x000004DC; // type:func

@@ -48,3 +48,9 @@ sceNet_lib_57CC57DA = 0x000039D8; // type:func
 sceNet_lib_E0A81C7C = 0x000039E0; // type:func
 sceNet_lib_EF097716 = 0x000039E8; // type:func
 sceWlanGetEtherAddr = 0x000039F0; // type:func
+// real names (devkit DWARF, tools/dwarf_names.py)
+_sce_pspnet_pmp_lockinit = 0x00002E94; // type:func
+_sce_pspnet_pmp_lock = 0x00002F24; // type:func
+_sce_pspnet_pmp_unlock = 0x00002F90; // type:func
+_sce_pspnet_pmp_malloc_init = 0x00003078; // type:func
+_sce_pspnet_pmp_get_ctx = 0x000033F4; // type:func

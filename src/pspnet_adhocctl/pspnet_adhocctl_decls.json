@@ -3,7 +3,7 @@
   "func_00002014": "void func_00002014(struct Unk_func_00002014_0 *arg0);",
   "func_00002068": "s32 func_00002068(s32, s32, s32, s32);",
   "func_00002280": "void func_00002280(s32 arg0, s32 arg1);",
-  "func_00002290": "s32 func_00002290(s32 *arg0);",
+  "_sce_pspnet_adhocctl_get_state": "s32 _sce_pspnet_adhocctl_get_state(s32 *arg0);",
   "func_000022A4": "s32 func_000022A4(void *arg0);",
   "func_00002984": "void func_00002984(s32 arg0);",
   "func_00002A24": "s32 func_00002A24(s32, s32, s32);",

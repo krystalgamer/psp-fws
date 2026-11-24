@@ -95,3 +95,6 @@ func_000051D0 = 0x00003DE4; // type:func rom:0x3E64
 func_000052A8 = 0x00004364; // type:func rom:0x43E4
 func_00005640 = 0x0000471C; // type:func rom:0x479C
 // shared names (tools/add_version.py) end
+// real names (devkit DWARF, tools/dwarf_names.py)
+_sce_pspnet_adhocctl_get_state = 0x00002290; // type:func
+get_taginfo = 0x0000482C; // type:func

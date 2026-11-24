@@ -156,3 +156,14 @@ func_00015A10 = 0x0000C358; // type:func
 func_00015C90 = 0x0000C378; // type:func
 func_00016204 = 0x0000C8C8; // type:func
 // shared names (tools/add_version.py) end
+// real names (devkit DWARF, tools/dwarf_names.py)
+CopyHttpHeaderList = 0x0000520C; // type:func
+HttpWhichId = 0x00005384; // type:func
+_sceHttpMallocInternal = 0x00005E6C; // type:func
+_sceHttpFreeInternal = 0x00005ED4; // type:func
+_HttpAtoi64 = 0x00005FE4; // type:func
+_HttpI64toa = 0x00006068; // type:func
+__HttpI64toa = 0x000065C0; // type:func
+_sceHttpReallocInternal = 0x0000658C; // type:func
+DeleteHttpHeader = 0x00006DBC; // type:func
+_try_build_header = 0x00007630; // type:func

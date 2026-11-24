@@ -301,7 +301,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_0000220C);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00002290(s32 *arg0) {
+s32 _sce_pspnet_adhocctl_get_state(s32 *arg0) {
     *arg0 = D_00006400;
     return 0;
 }
@@ -455,7 +455,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_000052A8);
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_00005640);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_0000482C);
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", get_taginfo);
 #endif
 
 #if FW_VERSION == 100

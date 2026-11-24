@@ -27,3 +27,14 @@ func_000021F4 = 0x00001E1C; // type:func
 func_00002240 = 0x00001E68; // type:func
 func_00002984 = 0x000025C4; // type:func
 // shared names (tools/add_version.py) end
+// real names (devkit DWARF, tools/dwarf_names.py)
+_is_scheme_char = 0x00000000; // type:func
+uri_encoded_lenN = 0x00000CDC; // type:func
+uri_decoded_len = 0x00000D1C; // type:func
+_userinfo_parse = 0x00000DE8; // type:func
+_scheme_parse = 0x000010AC; // type:func
+_hostname_parse = 0x000011FC; // type:func
+_path_parse = 0x00001490; // type:func
+_fragment_parse = 0x00001554; // type:func
+_portnum_parse = 0x000015FC; // type:func
+_query_parse = 0x000016A0; // type:func

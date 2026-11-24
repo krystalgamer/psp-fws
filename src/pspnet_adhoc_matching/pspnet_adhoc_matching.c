@@ -42,7 +42,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", sceNetAdhocMatchingCancelTarge
 
 #if FW_VERSION == 100
 void sceNetAdhocMatchingGetPoolMaxAlloc(void) {
-    func_0000284C();
+    _sce_pspnet_adhoc_matching_pool_maxalloc();
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", sceNetAdhocMatchingGetPoolMaxAlloc);
@@ -61,9 +61,9 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00001054);
 #if FW_VERSION == 100
 void func_00000D58(void *arg0, s32 *arg1) {
     sceKernelDeleteMbx(M2C_FIELD(arg0, u32 *, 0x3C));
-    func_00002F90(*arg1);
+    _sce_pspnet_pmp_unlock(*arg1);
     sceKernelWaitThreadEnd(M2C_FIELD(arg0, u32 *, 0x38), NULL);
-    *arg1 = func_00002F24();
+    *arg1 = _sce_pspnet_pmp_lock();
     sceNetFreeThreadinfo(M2C_FIELD(arg0, u32 *, 0x38));
     sceKernelDeleteThread(M2C_FIELD(arg0, u32 *, 0x38));
 }
@@ -80,9 +80,9 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00001030);
 #if FW_VERSION != 100
 void func_0000113C(struct Unk_func_0000113C_0 *arg0, s32 *arg1) {
     sceKernelDeleteMbx(arg0->unk40);
-    func_00002F90(*arg1);
+    _sce_pspnet_pmp_unlock(*arg1);
     sceKernelWaitThreadEnd(arg0->unk3C, NULL);
-    *arg1 = func_00002F24();
+    *arg1 = _sce_pspnet_pmp_lock();
     sceNetFreeThreadinfo(arg0->unk3C);
     sceKernelDeleteThread(arg0->unk3C);
 }
@@ -227,9 +227,9 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002700);
 #if FW_VERSION == 100
 void func_00001E50(void *arg0, s32 *arg1) {
     sceNetAdhocSetSocketAlert(M2C_FIELD(arg0, s32 *, 0x34), 0x20);
-    func_00002F90(*arg1);
+    _sce_pspnet_pmp_unlock(*arg1);
     sceKernelWaitThreadEnd(M2C_FIELD(arg0, u32 *, 0x40), NULL);
-    *arg1 = func_00002F24();
+    *arg1 = _sce_pspnet_pmp_lock();
     sceNetFreeThreadinfo(M2C_FIELD(arg0, u32 *, 0x40));
     sceKernelDeleteThread(M2C_FIELD(arg0, u32 *, 0x40));
 }
@@ -238,9 +238,9 @@ void func_00001E50(void *arg0, s32 *arg1) {
 #if FW_VERSION != 100
 void func_00002794(struct Unk_func_00002794_0 *arg0, s32 *arg1) {
     sceNetAdhocSetSocketAlert(arg0->unk38, 0x20);
-    func_00002F90(*arg1);
+    _sce_pspnet_pmp_unlock(*arg1);
     sceKernelWaitThreadEnd(arg0->unk44, NULL);
-    *arg1 = func_00002F24();
+    *arg1 = _sce_pspnet_pmp_lock();
     sceNetFreeThreadinfo(arg0->unk44);
     sceKernelDeleteThread(arg0->unk44);
 }
@@ -260,7 +260,7 @@ void func_000020AC(void *arg0, void *arg1) {
         M2C_FIELD(arg1, s32 *, 0x50) = 0;
     }
     sceKernelCpuResumeIntr(temp_s1);
-    M2C_FIELD(arg1, s32 *, 0x50) = sceKernelSetAlarm(M2C_FIELD(arg0, u32 *, 0x2C), (s32) &func_000022BC, arg1);
+    M2C_FIELD(arg1, s32 *, 0x50) = sceKernelSetAlarm(M2C_FIELD(arg0, u32 *, 0x2C), (s32) &pmp_rexmt_handler, arg1);
 }
 #endif
 
@@ -299,7 +299,7 @@ void func_000021A8(void *arg0, u32 arg1) {
 #endif
 
 #if FW_VERSION == 100
-void func_0000221C(void *arg0) {
+void _sce_pspnet_pmp_stoptimer(void *arg0) {
     s32 temp_s1;
     s32 temp_v1;
 
@@ -329,11 +329,11 @@ void func_0000226C(void *arg0) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_000022BC);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", pmp_rexmt_handler);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00002318(void *arg0) {
+s32 pmp_keepalive_handler(void *arg0) {
     s32 temp_a2;
 
     temp_a2 = M2C_FIELD(arg0, s32 *, 0x4C);
@@ -468,10 +468,10 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002528);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002DC8);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002E94);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", _sce_pspnet_pmp_lockinit);
 
 #if FW_VERSION == 100
-void func_00002624(void) {
+void _sce_pspnet_pmp_lockterm(void) {
     if (D_000033F4 > 0) {
         sceKernelDeleteSema(D_000033F4);
     }
@@ -489,7 +489,7 @@ void func_00002EE8(void) {
 #endif
 
 #if FW_VERSION == 100
-s32 func_00002F24(void) {
+s32 _sce_pspnet_pmp_lock(void) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -503,10 +503,10 @@ s32 func_00002F24(void) {
     return var_v1;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002F24);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", _sce_pspnet_pmp_lock);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002F90);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", _sce_pspnet_pmp_unlock);
 
 #if FW_VERSION == 100
 s32 func_000026F8(void) {
@@ -552,7 +552,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00003040);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00003078(u32 arg0) {
+s32 _sce_pspnet_pmp_malloc_init(u32 arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
 
@@ -562,11 +562,11 @@ s32 func_00003078(u32 arg0) {
     return temp_v0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00003078);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", _sce_pspnet_pmp_malloc_init);
 #endif
 
 #if FW_VERSION == 100
-void func_00002770(void) {
+void _sce_pspnet_pmp_malloc_term(void) {
     if (D_00003DB0 > 0) {
         sceKernelDeleteVpl((u32) D_00003DB0);
         D_00003DB0 = -1;
@@ -590,7 +590,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002824);
 #endif
 
 #if FW_VERSION == 100
-s32 func_0000284C(void) {
+s32 _sce_pspnet_adhoc_matching_pool_maxalloc(void) {
     return D_00003404;
 }
 #endif
@@ -621,7 +621,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00003210);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00003388);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_000033F4);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", _sce_pspnet_pmp_get_ctx);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002A74);

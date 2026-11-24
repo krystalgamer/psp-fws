@@ -13,7 +13,7 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", sceNetResolverInit);
 #if FW_VERSION == 100
 s32 sceNetResolverTerm(void) {
     if (D_00002340 != 0) {
-        func_000005B0();
+        _sce_pspnet_resolver_term();
         D_00002340 = 0;
     }
     return 0;
@@ -30,7 +30,7 @@ s32 sceNetResolverDelete(s32 arg0) {
 
     var_v1 = 0x80410405;
     if (arg0 >= 0) {
-        var_v1 = func_0000070C(arg0);
+        var_v1 = _sce_pspnet_resolver_delete_ctx(arg0);
     }
     return var_v1;
 }
@@ -41,11 +41,11 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000003FC);
 #endif
 
 #if FW_VERSION == 100
-s32 func_0000055C(void) {
+s32 _sce_pspnet_resolver_init(void) {
     s32 temp_v0;
     s32 var_a0;
 
-    temp_v0 = func_00000F64();
+    temp_v0 = _sce_pspnet_resolver_net_init();
     var_a0 = 0;
     if (temp_v0 >= 0) {
         D_00001F78 = 0;
@@ -59,7 +59,7 @@ s32 func_0000055C(void) {
 #endif
 
 #if FW_VERSION == 100
-s32 func_000005B0(void) {
+s32 _sce_pspnet_resolver_term(void) {
     func_00000E2C();
     return 0;
 }
@@ -74,7 +74,7 @@ s32 sceNetResolverDelete(s32 arg0) {
     if (sceKernelCheckThreadStack() >= 0x13F0) {
         var_a1 = 0x80410405;
         if (arg0 >= 0) {
-            var_a1 = func_0000070C(arg0);
+            var_a1 = _sce_pspnet_resolver_delete_ctx(arg0);
         }
         var_v1 = var_a1;
     }
@@ -91,7 +91,7 @@ s32 func_0000065C(void) {
     s32 temp_v0;
     s32 var_a0;
 
-    temp_v0 = func_00000F64();
+    temp_v0 = _sce_pspnet_resolver_net_init();
     var_a0 = 0;
     if (temp_v0 >= 0) {
         D_00001F78 = 0;
@@ -111,12 +111,12 @@ s32 func_000006B0(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000006D0);
+INCLUDE_ASM("nonmatchings/pspnet_resolver", _sce_pspnet_resolver_get_resolver_ctx);
 
-INCLUDE_ASM("nonmatchings/pspnet_resolver", func_0000070C);
+INCLUDE_ASM("nonmatchings/pspnet_resolver", _sce_pspnet_resolver_delete_ctx);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000006E0);
+INCLUDE_ASM("nonmatchings/pspnet_resolver", _sce_pspnet_resolver_strncasecmp);
 #endif
 
 #if FW_VERSION == 100
@@ -131,7 +131,7 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000007E0);
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000908);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000F64);
+INCLUDE_ASM("nonmatchings/pspnet_resolver", _sce_pspnet_resolver_net_init);
 
 #if FW_VERSION == 100
 s32 func_00000E2C(void) {
@@ -140,7 +140,7 @@ s32 func_00000E2C(void) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000E34);
+INCLUDE_ASM("nonmatchings/pspnet_resolver", create_query_message);
 #endif
 
 #if FW_VERSION != 100
@@ -153,26 +153,26 @@ s32 func_00000FA8(void) {
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000FB0);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000010C8);
+INCLUDE_ASM("nonmatchings/pspnet_resolver", send_query_message);
 
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000011E8);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001210);
+INCLUDE_ASM("nonmatchings/pspnet_resolver", parse_dns_header);
 #endif
 
 #if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001278);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000013E8);
+INCLUDE_ASM("nonmatchings/pspnet_resolver", skip_question_section);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001470);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000016D4);
+INCLUDE_ASM("nonmatchings/pspnet_resolver", get_domain_name);
 #endif
 
 #if FW_VERSION == 100
@@ -195,7 +195,7 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001818);
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000019A4);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001B9C);
+INCLUDE_ASM("nonmatchings/pspnet_resolver", set_domain_name);
 
 #if FW_VERSION == 100
 s32 module_start(void) {
