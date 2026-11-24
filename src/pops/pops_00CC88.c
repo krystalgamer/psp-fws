@@ -2,7 +2,12 @@
 #include "common.h"
 #include "pops_decls.h"
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000CC88);
+s32 func_0000CC88(void) {
+    sceKernelSignalSema(D_001613D4, 1);
+    sceKernelCancelAlarm(D_001613D8);
+    D_001613D8 = -1;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000CCCC);
 
@@ -82,5 +87,13 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F3E8);
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F44C);
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F58C);
+void func_0000F58C(void) {
+    void *temp_v0;
+
+    temp_v0 = func_0000EBFC(5, 0xC672);
+    M2C_FIELD(temp_v0, u8 *, 1) = (u8) M2C_FIELD(&D_00169648, u8 *, 0);
+    M2C_FIELD(temp_v0, u8 *, 2) = (u8) M2C_FIELD(&D_00169648, u8 *, 0x2D);
+    M2C_FIELD(temp_v0, u8 *, 3) = (u8) M2C_FIELD(&D_00169648, u8 *, 2);
+    M2C_FIELD(temp_v0, u8 *, 4) = (u8) M2C_FIELD(&D_00169648, u8 *, 3);
+}
 

@@ -2,17 +2,29 @@
 #include "common.h"
 #include "camera_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_01BC8C", func_0001BC8C);
+s32 func_0001BC8C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x28) & 1;
+}
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_01BC8C", func_0001BC98);
+s32 func_0001BC98(void *arg0) {
+    return __builtin_allegrex_ext(M2C_FIELD(arg0, s32 *, 0x28), 1, 1);
+}
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_01BC8C", func_0001BCA4);
+s32 func_0001BCA4(void *arg0) {
+    return __builtin_allegrex_ext(M2C_FIELD(arg0, s32 *, 0x28), 4, 1);
+}
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_01BC8C", func_0001BCB0);
+void func_0001BCB0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x28) = (s32) (M2C_FIELD(arg0, s32 *, 0x28) | 1);
+}
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_01BC8C", func_0001BCC0);
+void func_0001BCC0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x28) = (s32) (M2C_FIELD(arg0, s32 *, 0x28) | 2);
+}
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_01BC8C", func_0001BCD0);
+void func_0001BCD0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x28) = (s32) (M2C_FIELD(arg0, s32 *, 0x28) | 0x10);
+}
 
 s32 func_0001BCE0(s32 arg0) {
     return arg0 + 0x84;

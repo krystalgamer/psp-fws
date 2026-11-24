@@ -2,7 +2,9 @@
 #include "common.h"
 #include "pops_decls.h"
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_01154C", func_0001154C);
+M2C_UNK *func_0001154C(void) {
+    return &D_00218940;
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_01154C", func_00011558);
 

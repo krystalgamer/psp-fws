@@ -2,7 +2,20 @@
 #include "common.h"
 #include "camera_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_01E024", func_0001E024);
+void func_0001E024(s8 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 var_v1;
+    s8 *var_v0;
+
+    var_v0 = arg0;
+    var_v1 = 0x1C8;
+    do {
+        var_v1 -= 1;
+        *var_v0 = 0;
+        var_v0 += 1;
+    } while (var_v1 > 0);
+    M2C_FIELD(arg0, s32 *, 0x34) = 8;
+    func_0001F500((s32) arg0, arg1, arg2, arg3, arg4);
+}
 
 void func_0001E05C(void) {
     func_0001EC10();

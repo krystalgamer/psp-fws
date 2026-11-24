@@ -2,7 +2,13 @@
 #include "common.h"
 #include "pops_decls.h"
 
-INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00B8DC", func_0000B8DC);
+void func_0000B8DC(s32 arg0, s32 arg1) {
+    if (!(arg0 & 0xF)) {
+        func_00017B74(arg1);
+    } else {
+        func_00017EDC();
+    }
+}
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00B8DC", func_0000B914);
 

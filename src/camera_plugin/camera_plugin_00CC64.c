@@ -2,7 +2,15 @@
 #include "common.h"
 #include "camera_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00CC64", func_0000CC64);
+void func_0000CC64(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_C1B0AA0D(arg1);
+    }
+    func_0000CEF0(arg0, arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00CC64", func_0000CCB4);
 
