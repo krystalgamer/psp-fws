@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/352/.splat_cache.premo_plugin
   symbol_addrs_path:
     - config/352/symbol_addrs.premo_plugin.txt
+    - config/352/func_starts.premo_plugin.txt
     - tmp/build/352/prx_syms.premo_plugin.txt
   reloc_addrs_path: [tmp/build/352/reloc_addrs.premo_plugin.txt]
   asset_path: tmp/assets/352/premo_plugin
@@ -53,6 +54,10 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, premo_plugin]
+      - [0x9420, c, premo_plugin_009380]
+      - [0x9638, c, premo_plugin_009598]
+      - [0x23F08, c, premo_plugin_023E68]
+      - [0x243FC, c, premo_plugin_02435C]
       - { start: 0x276A4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x280DC, type: prxpad, order: .text }
       - { start: 0x280E0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -63,6 +68,8 @@ segments:
       - { start: 0x28298, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x2829C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - [0x282D0, .rodata, premo_plugin]
+      - [0x2A100, .rodata, premo_plugin_009598]
+      - [0x2C120, .rodata, premo_plugin_02435C]
   - name: premo_plugin_seg1
     type: code
     start: 0x2C520
