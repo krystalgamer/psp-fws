@@ -173,9 +173,9 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0BDD58", scePaf_D96449B4);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0BDD58", scePaf_FDB98CAC);
 
-void func_000C1CA0(void *arg0, s32 *arg1, s32 arg2) {
-    func_0000C8BC(arg0 + 0x64, *arg1);
-    M2C_FIELD(arg0, s32 *, 0x60) = arg2;
+void func_000C1CA0(struct Unk_func_000C1CA0_0 *arg0, s32 *arg1, s32 arg2) {
+    func_0000C8BC((u8 *)arg0 + 0x64, *arg1);
+    arg0->unk60 = arg2;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0BDD58", scePaf_BA1F20EE);

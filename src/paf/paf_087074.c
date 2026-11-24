@@ -34,14 +34,14 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_default_colorspace);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_set_colorspace);
 
-s32 fill_a_scan(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    M2C_FIELD(arg0, s32 *, 0) = 1;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x14) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x18) = arg3;
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg4;
-    M2C_FIELD(arg0, s32 *, 0x20) = arg5;
-    return arg0 + 0x24;
+s32 fill_a_scan(struct Unk_fill_a_scan_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    arg0->unk0 = 1;
+    arg0->unk4 = arg1;
+    arg0->unk14 = arg2;
+    arg0->unk18 = arg3;
+    arg0->unk1C = arg4;
+    arg0->unk20 = arg5;
+    return (u8 *)arg0 + 0x24;
 }
 
 void *fill_scans(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {

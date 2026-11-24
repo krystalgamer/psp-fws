@@ -387,22 +387,22 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00002C2C);
 
-void func_00002D04(void *arg0, s32 arg1, s8 arg2) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s8 *, 9) = arg2;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00024BB0;
-    M2C_FIELD(arg0, s8 *, 8) = 0;
-    scePaf_6829D7AF((s32) (arg0 + 0xC), 0, 0x10);
-    M2C_FIELD(arg0, s8 *, 0x1C) = 0;
+void func_00002D04(struct Unk_func_00002D04_0 *arg0, s32 arg1, s8 arg2) {
+    arg0->unk4 = arg1;
+    arg0->unk9 = arg2;
+    arg0->unk0 = &D_00024BB0;
+    arg0->unk8 = 0;
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0xC), 0, 0x10);
+    arg0->unk1C = 0;
 }
 
-void func_00002D50(void *arg0, s32 arg1, s8 arg2) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s8 *, 9) = arg2;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00024BB0;
-    M2C_FIELD(arg0, s8 *, 8) = 0;
-    scePaf_6829D7AF((s32) (arg0 + 0xC), 0, 0x10);
-    M2C_FIELD(arg0, s8 *, 0x1C) = 0;
+void func_00002D50(struct Unk_func_00002D50_0 *arg0, s32 arg1, s8 arg2) {
+    arg0->unk4 = arg1;
+    arg0->unk9 = arg2;
+    arg0->unk0 = &D_00024BB0;
+    arg0->unk8 = 0;
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0xC), 0, 0x10);
+    arg0->unk1C = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00002D9C);

@@ -14,7 +14,7 @@
   "func_00005594": "s32 func_00005594(struct Unk_func_00005594_0 *arg0, s32 arg1, s32 arg2);",
   "func_000055B0": "void func_000055B0(struct Unk_func_000055B0_0 *arg0, s32 arg1, s32 arg2);",
   "func_000056E4": "s32 func_000056E4(struct Unk_func_000056E4_0 *arg0, s32 arg1);",
-  "func_00005708": "void func_00005708(void *arg0);",
+  "func_00005708": "void func_00005708(struct Unk_func_00005708_0 *arg0);",
   "func_00006F68": "s32 func_00006F68(void);",
   "func_00007298": "s32 func_00007298(s32, s32, s32);",
   "sceNetAdhoc_lib_62B875A8": "void sceNetAdhoc_lib_62B875A8(void);",
@@ -34,6 +34,7 @@
   "Unk_func_000055B0_0": "struct Unk_func_000055B0_0 {\n    u8 pad0[0xCC];\n    s32 unkCC;\n    s32 unkD0;\n};",
   "Unk_func_000056E4_0": "struct Unk_func_000056E4_0 {\n    u8 pad0[0x58];\n    struct Unk_func_000056E4_temp_a2 *unk58;\n    s32 unk5C;\n    u8 pad60[0x7C];\n    s32 unkDC;\n};",
   "Unk_func_000056E4_temp_a2": "struct Unk_func_000056E4_temp_a2 {\n    u8 pad0[0xC];\n    s32 unkC;\n};",
+  "Unk_func_00005708_0": "struct Unk_func_00005708_0 {\n    u8 pad0[0x10];\n    void *unk10;\n    void **unk14;\n    u8 pad18[0xC];\n    s16 unk24;\n    u8 pad26[0xB2];\n    s32 unkD8;\n};",
   "Unk_func_00005708_temp_a1": "struct Unk_func_00005708_temp_a1 {\n    u8 pad0[0xC];\n    void **unkC;\n};",
   "Unk_func_00005708_var_s0": "struct Unk_func_00005708_var_s0 {\n    u8 pad0[0x8];\n    struct Unk_func_00005708_temp_a1 *unk8;\n    void **unkC;\n    u8 pad10[0x48];\n    s32 unk58;\n};"
  },

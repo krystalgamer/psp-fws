@@ -117,13 +117,13 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", func_00003C00);
 
-void func_00003CFC(s32 arg0, void *arg1) {
+void func_00003CFC(s32 arg0, struct Unk_func_00003CFC_1 *arg1) {
     void *sp0;
     s32 var_a2;
     u32 temp_a3;
 
-    func_000048E4(&sp0, arg1 + 0x10, 8);
-    temp_a3 = ((u32) M2C_FIELD(arg1, u32 *, 0x10) >> 3) & 0x3F;
+    func_000048E4(&sp0, &arg1->unk10, 8);
+    temp_a3 = ((u32) arg1->unk10 >> 3) & 0x3F;
     var_a2 = 0x38 - temp_a3;
     if (temp_a3 >= 0x38U) {
         var_a2 = 0x78 - temp_a3;

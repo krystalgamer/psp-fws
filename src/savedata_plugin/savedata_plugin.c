@@ -334,16 +334,16 @@ INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_000
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_00003F50);
 
-void func_00004048(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
-    func_00005A64(arg0 + 0x20, 0);
-    func_00005ADC(arg0 + 0x24, 0);
-    func_00005B38(arg0 + 0x28, 0);
-    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
-    M2C_FIELD(arg0, s32 *, 0x30) = 0;
-    M2C_FIELD(arg0, s32 *, 0x34) = 0;
-    M2C_FIELD(arg0, s8 *, 0x38) = 0;
+void func_00004048(struct Unk_func_00004048_0 *arg0) {
+    arg0->unk18 = 0;
+    arg0->unk1C = 0;
+    func_00005A64((u8 *)arg0 + 0x20, 0);
+    func_00005ADC((u8 *)arg0 + 0x24, 0);
+    func_00005B38((u8 *)arg0 + 0x28, 0);
+    arg0->unk2C = 0;
+    arg0->unk30 = 0;
+    arg0->unk34 = 0;
+    arg0->unk38 = 0;
     func_000040D0(arg0);
 }
 

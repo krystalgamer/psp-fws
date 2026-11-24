@@ -688,12 +688,12 @@ s32 func_00074FB4(s32 arg0) {
     return var_v1;
 }
 
-s32 func_00074FFC(void *arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
+s32 func_00074FFC(struct Unk_func_00074FFC_0 *arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
-        var_v1 = M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 (**)(void *, M2C_UNK, M2C_UNK, M2C_UNK), 8)(arg0, arg1, arg2, arg3);
+    if (scePaf_8F12B63A((u8 *)arg0 + 0x254) == 0) {
+        var_v1 = M2C_FIELD(arg0->unk4, s32 (**)(void *, M2C_UNK, M2C_UNK, M2C_UNK), 8)(arg0, arg1, arg2, arg3);
     }
     return var_v1;
 }

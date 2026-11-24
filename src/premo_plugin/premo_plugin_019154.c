@@ -126,38 +126,38 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001A8D8);
 
-s32 func_0001AA34(void *arg0) {
+s32 func_0001AA34(struct Unk_func_0001AA34_0 *arg0) {
     s32 temp_a0;
     s32 temp_a0_2;
     s32 temp_a0_3;
     s32 temp_a0_4;
     s32 temp_a0_5;
 
-    func_00020F88(M2C_FIELD(arg0, s32 *, 0xB4), arg0 + 0x90);
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xC8);
+    func_00020F88(arg0->unkB4, (u8 *)arg0 + 0x90);
+    temp_a0 = arg0->unkC8;
     if (temp_a0 != 0) {
         scePaf_CCFF20ED(temp_a0);
-        M2C_FIELD(arg0, s32 *, 0xC8) = 0;
+        arg0->unkC8 = 0;
     }
-    temp_a0_2 = M2C_FIELD(arg0, s32 *, 0xA8);
+    temp_a0_2 = arg0->unkA8;
     if (temp_a0_2 != 0) {
         scePaf_CCFF20ED(temp_a0_2);
-        M2C_FIELD(arg0, s32 *, 0xA8) = 0;
+        arg0->unkA8 = 0;
     }
-    temp_a0_3 = M2C_FIELD(arg0, s32 *, 0xA4);
+    temp_a0_3 = arg0->unkA4;
     if (temp_a0_3 != 0) {
         scePaf_CCFF20ED(temp_a0_3);
-        M2C_FIELD(arg0, s32 *, 0xA4) = 0;
+        arg0->unkA4 = 0;
     }
-    temp_a0_4 = M2C_FIELD(arg0, s32 *, 0xC0);
+    temp_a0_4 = arg0->unkC0;
     if (temp_a0_4 != 0) {
         scePaf_CCFF20ED(temp_a0_4);
-        M2C_FIELD(arg0, s32 *, 0xC0) = 0;
+        arg0->unkC0 = 0;
     }
-    temp_a0_5 = M2C_FIELD(arg0, s32 *, 0xB8);
+    temp_a0_5 = arg0->unkB8;
     if (temp_a0_5 != 0) {
         scePaf_CCFF20ED(temp_a0_5);
-        M2C_FIELD(arg0, s32 *, 0xB8) = 0;
+        arg0->unkB8 = 0;
     }
     return 0;
 }
@@ -792,19 +792,19 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001E788);
 
-s32 func_0001E81C(void *arg0) {
+s32 func_0001E81C(struct Unk_func_0001E81C_0 *arg0) {
     s32 temp_v1;
 
-    M2C_FIELD(arg0, s32 *, 0x60) = 0;
-    sceKernelChangeThreadPriority(M2C_FIELD(arg0, s32 *, 0x74), 0x33);
-    sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0xBC), 1, 0);
-    func_0001B284(arg0 + 0x68);
-    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0xBC), 1);
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0xBC);
+    arg0->unk60 = 0;
+    sceKernelChangeThreadPriority(arg0->unk74, 0x33);
+    sceKernelWaitSema(arg0->unkBC, 1, 0);
+    func_0001B284((u8 *)arg0 + 0x68);
+    sceKernelSignalSema(arg0->unkBC, 1);
+    temp_v1 = arg0->unkBC;
     if (temp_v1 > 0) {
         sceKernelDeleteSema(temp_v1);
     }
-    M2C_FIELD(arg0, s32 *, 0xBC) = 0;
+    arg0->unkBC = 0;
     return 0;
 }
 
@@ -958,19 +958,19 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001FC10);
 
-s32 func_0001FCA4(void *arg0) {
+s32 func_0001FCA4(struct Unk_func_0001FCA4_0 *arg0) {
     s32 temp_v1;
 
-    M2C_FIELD(arg0, s32 *, 0x60) = 0;
-    sceKernelChangeThreadPriority(M2C_FIELD(arg0, s32 *, 0x74), 0x33);
-    sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x104), 1, 0);
-    func_0001B284(arg0 + 0x68);
-    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x104), 1);
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0x104);
+    arg0->unk60 = 0;
+    sceKernelChangeThreadPriority(arg0->unk74, 0x33);
+    sceKernelWaitSema(arg0->unk104, 1, 0);
+    func_0001B284((u8 *)arg0 + 0x68);
+    sceKernelSignalSema(arg0->unk104, 1);
+    temp_v1 = arg0->unk104;
     if (temp_v1 > 0) {
         sceKernelDeleteSema(temp_v1);
     }
-    M2C_FIELD(arg0, s32 *, 0x104) = 0;
+    arg0->unk104 = 0;
     return 0;
 }
 
@@ -1263,14 +1263,14 @@ INCLUDE_RODATA("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", D_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00022C50);
 
-s32 func_00022E5C(void *arg0, s32 arg1) {
+s32 func_00022E5C(struct Unk_func_00022E5C_0 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = func_0001B1C4(arg0 + 0x68, arg1, 0x2C00, (s32) &D_0002BDD8);
+    temp_v0 = func_0001B1C4((u8 *)arg0 + 0x68, arg1, 0x2C00, (s32) &D_0002BDD8);
     var_v1 = 0;
     if (temp_v0 != 0) {
-        M2C_FIELD(arg0, s32 *, 0x28) = temp_v0;
+        arg0->unk28 = temp_v0;
         var_v1 = 0x80108C10;
     }
     return var_v1;

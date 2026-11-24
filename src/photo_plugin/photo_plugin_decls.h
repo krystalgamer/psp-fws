@@ -331,6 +331,14 @@ struct Unk_func_00026324_0 {
     s32 unk8;
 };
 
+struct Unk_func_00027FD0_0 {
+    s32 unk0;
+    u8 pad4[0x4];
+    s32 unk8;
+    u8 padC[0x4];
+    u8 unk10;
+};
+
 struct Unk_func_00029278_var_a0 {
     u8 pad0[0x4];
     void *unk4;
@@ -701,7 +709,7 @@ s32 func_00026CEC(void *arg0);
 void func_00026D98(void);
 M2C_UNK func_00027044(s32);
 s32 func_00027978(s32, u8, s32, M2C_UNK);
-s32 func_00027FD0(void *arg0, M2C_UNK arg1);
+s32 func_00027FD0(struct Unk_func_00027FD0_0 *arg0, M2C_UNK arg1);
 s32 func_000288C0(void);
 M2C_UNK func_00029134(M2C_UNK, M2C_UNK);
 void func_00029238(void);

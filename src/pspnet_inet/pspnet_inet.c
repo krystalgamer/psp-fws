@@ -152,23 +152,23 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000453C);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00004620);
 
-void func_000047DC(void *arg0, void *arg1, s32 arg2) {
+void func_000047DC(struct Unk_func_000047DC_0 *arg0, struct Unk_func_000047DC_1 *arg1, s32 arg2) {
     void **temp_v0;
     struct Unk_func_000047DC_temp_a0 *temp_a0;
 
-    M2C_FIELD(arg1, void **, 0x14) = arg0;
+    arg1->unk14 = arg0;
     if (arg2 == 0) {
-        M2C_FIELD(arg1, void **, 0x18) = (void *) (arg0 + 0x1C);
-        M2C_FIELD(arg0, u16 *, 0x34) = (u16) (M2C_FIELD(arg0, u16 *, 0x34) + 1);
+        arg1->unk18 = (void *) ((u8 *)arg0 + 0x1C);
+        arg0->unk34 = (u16) (arg0->unk34 + 1);
     } else {
-        M2C_FIELD(arg1, void **, 0x18) = (void *) (arg0 + 0x24);
-        M2C_FIELD(arg0, u16 *, 0x36) = (u16) (M2C_FIELD(arg0, u16 *, 0x36) + 1);
+        arg1->unk18 = (void *) ((u8 *)arg0 + 0x24);
+        arg0->unk36 = (u16) (arg0->unk36 + 1);
     }
-    temp_a0 = M2C_FIELD(arg1, void **, 0x18);
-    M2C_FIELD(arg1, s32 *, 0x2C) = 0;
-    M2C_FIELD(arg1, void ***, 0x30) = (void **) temp_a0->unk4;
+    temp_a0 = arg1->unk18;
+    arg1->unk2C = 0;
+    arg1->unk30 = (void **) temp_a0->unk4;
     temp_v0 = temp_a0->unk4;
-    temp_a0->unk4 = (void **) (arg1 + 0x2C);
+    temp_a0->unk4 = (void **) (&arg1->unk2C);
     *temp_v0 = arg1;
 }
 
@@ -212,21 +212,21 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000578C);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0000580C);
 
-void func_0000588C(void *arg0) {
-    M2C_FIELD(arg0, u16 *, 8) = (u16) (M2C_FIELD(arg0, u16 *, 8) | 0x10);
-    if (!(M2C_FIELD(arg0, u16 *, 0x8C) & 0x3C)) {
+void func_0000588C(struct Unk_func_0000588C_0 *arg0) {
+    arg0->unk8 = (u16) (arg0->unk8 | 0x10);
+    if (!(arg0->unk8C & 0x3C)) {
 
     } else {
-        func_000048B8((s32) arg0, arg0 + 0x6C);
+        func_000048B8((s32) arg0, (u8 *)arg0 + 0x6C);
     }
 }
 
-void func_000058CC(void *arg0) {
-    M2C_FIELD(arg0, u16 *, 8) = (u16) (M2C_FIELD(arg0, u16 *, 8) | 0x20);
-    if (!(M2C_FIELD(arg0, u16 *, 0x64) & 0x3C)) {
+void func_000058CC(struct Unk_func_000058CC_0 *arg0) {
+    arg0->unk8 = (u16) (arg0->unk8 | 0x20);
+    if (!(arg0->unk64 & 0x3C)) {
 
     } else {
-        func_000048B8((s32) arg0, arg0 + 0x44);
+        func_000048B8((s32) arg0, (u8 *)arg0 + 0x44);
     }
 }
 
@@ -732,16 +732,16 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00013BAC);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00013CC4);
 
-void func_00013ED4(void *arg0, s32 arg1, s32 arg2) {
+void func_00013ED4(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
 
-    M2C_FIELD(arg0, void **, 0) = arg0;
-    M2C_FIELD(arg0, void **, 4) = arg0;
-    M2C_FIELD(arg0, s32 *, 8) = sceNet_lib_C4261339(arg1, arg0 + 0x10);
-    temp_v0 = sceNet_lib_C4261339(arg2, arg0 + 0x14);
-    M2C_FIELD(arg0, s16 *, 0x1A) = 0x3FF;
-    M2C_FIELD(arg0, s32 *, 0xC) = temp_v0;
-    M2C_FIELD(arg0, s16 *, 0x18) = (s16) ((u16) D_0002C02C + (sceNet_lib_1858883D() % (u32) ((D_0002C030 - D_0002C02C) + 1)));
+    arg0->unk0 = arg0;
+    arg0->unk4 = arg0;
+    arg0->unk8 = sceNet_lib_C4261339(arg1, (u8 *)arg0 + 0x10);
+    temp_v0 = sceNet_lib_C4261339(arg2, (u8 *)arg0 + 0x14);
+    arg0->unk1A = 0x3FF;
+    arg0->unkC = temp_v0;
+    arg0->unk18 = (s16) ((u16) D_0002C02C + (sceNet_lib_1858883D() % (u32) ((D_0002C030 - D_0002C02C) + 1)));
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00013F68);
@@ -1302,12 +1302,12 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_00029C28);
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", func_0002A1B0);
 
-void func_0002A244(void *arg0) {
-    if (M2C_FIELD(arg0, s32 *, 0x4BC) < 3) {
+void func_0002A244(struct Unk_func_0002A244_0 *arg0) {
+    if (arg0->unk4BC < 3) {
 
     } else {
-        M2C_FIELD(arg0, s32 *, 0x4BC) = 4;
-        sceNet_lib_7C86FBA4(arg0 + 0x4D8, 2, &func_00029280, arg0);
+        arg0->unk4BC = 4;
+        sceNet_lib_7C86FBA4((u8 *)arg0 + 0x4D8, 2, &func_00029280, arg0);
     }
 }
 

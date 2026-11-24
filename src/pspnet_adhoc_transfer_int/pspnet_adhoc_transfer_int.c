@@ -88,16 +88,16 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_transfer_int/nonmatchings/pspnet_adhoc_tra
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_transfer_int/nonmatchings/pspnet_adhoc_transfer_int", func_00001724);
 
-s32 func_00001984(void *arg0, M2C_UNK arg1, s32 arg2, M2C_UNK arg3) {
+s32 func_00001984(struct Unk_func_00001984_0 *arg0, M2C_UNK arg1, s32 arg2, M2C_UNK arg3) {
     s32 temp_v0;
     s32 var_v1;
 
-    M2C_FIELD(arg0, s32 *, 4) = arg2;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    if ((arg2 == 0) || (temp_v0 = func_000004E4(arg2), M2C_FIELD(arg0, s32 *, 8) = temp_v0, var_v1 = -1, (temp_v0 != 0))) {
-        M2C_FIELD(arg0, s32 *, 4) = arg2;
-        sceNet_lib_EF097716(M2C_FIELD(arg0, s32 *, 8), arg3, arg2);
-        sceNet_lib_EF097716((s32) (arg0 + 0xC), arg1, 6);
+    arg0->unk4 = arg2;
+    arg0->unk8 = 0;
+    if ((arg2 == 0) || (temp_v0 = func_000004E4(arg2), arg0->unk8 = temp_v0, var_v1 = -1, (temp_v0 != 0))) {
+        arg0->unk4 = arg2;
+        sceNet_lib_EF097716(arg0->unk8, arg3, arg2);
+        sceNet_lib_EF097716((s32) ((u8 *)arg0 + 0xC), arg1, 6);
         var_v1 = 0;
     }
     return var_v1;

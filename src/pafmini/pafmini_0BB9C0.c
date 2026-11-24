@@ -41,7 +41,7 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0BB9C0", func_000BBDF8);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0BB9C0", func_000BBE20);
 
-u32 func_000BBE64(void *arg0) {
+u32 func_000BBE64(struct Unk_func_000BBE64_0 *arg0) {
     u16 temp_a3;
     u16 temp_v1;
     u16 var_t0;
@@ -49,9 +49,9 @@ u32 func_000BBE64(void *arg0) {
     u32 var_t1;
     void *var_a0;
 
-    temp_a3 = M2C_FIELD(arg0, u16 *, 0x3C60);
+    temp_a3 = arg0->unk3C60;
     var_t0 = 0;
-    var_a0 = arg0 + 0x3C64;
+    var_a0 = (u8 *)arg0 + 0x3C64;
     var_t1 = 0;
     var_a1 = 0;
     if (temp_a3 != 0) {

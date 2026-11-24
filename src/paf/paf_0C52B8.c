@@ -378,11 +378,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C52B8", func_000C98D8);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C52B8", func_000C990C);
 
-void func_000C99E0(void *arg0) {
+void func_000C99E0(struct Unk_func_000C99E0_0 *arg0) {
     void **temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, void ***, 0x8C);
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **, M2C_UNK, s32), 0x98)(temp_a0, 0x12, arg0 + 0x60);
+    temp_a0 = arg0->unk8C;
+    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **, M2C_UNK, s32), 0x98)(temp_a0, 0x12, (u8 *)arg0 + 0x60);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C52B8", func_000C9A10);

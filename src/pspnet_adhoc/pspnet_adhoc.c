@@ -212,12 +212,12 @@ s32 func_000056E4(struct Unk_func_000056E4_0 *arg0, s32 arg1) {
     return 0;
 }
 
-void func_00005708(void *arg0) {
+void func_00005708(struct Unk_func_00005708_0 *arg0) {
     s32 temp_s2;
     struct Unk_func_00005708_temp_a1 *temp_a1;
     struct Unk_func_00005708_var_s0 *var_s0;
 
-    var_s0 = M2C_FIELD(arg0, void **, 0x10);
+    var_s0 = arg0->unk10;
     if (var_s0 != NULL) {
         do {
             temp_a1 = var_s0->unk8;
@@ -225,20 +225,20 @@ void func_00005708(void *arg0) {
             if (temp_a1 != NULL) {
                 temp_a1->unkC = (void **) var_s0->unkC;
             } else {
-                M2C_FIELD(arg0, void ***, 0x14) = (void **) var_s0->unkC;
+                arg0->unk14 = (void **) var_s0->unkC;
             }
             *var_s0->unkC = temp_a1;
-            M2C_FIELD(arg0, s32 *, 0xD8) = (s32) (M2C_FIELD(arg0, s32 *, 0xD8) - 1);
+            arg0->unkD8 = (s32) (arg0->unkD8 - 1);
             func_00004E98((s32) var_s0);
             func_00005708(var_s0);
             func_00004AE4(temp_s2);
             func_00000FFC(temp_s2);
-            var_s0 = M2C_FIELD(arg0, void **, 0x10);
+            var_s0 = arg0->unk10;
         } while (var_s0 != NULL);
     }
-    sceNet_lib_57CC57DA(arg0 + 0x18, 0, 6);
-    sceNet_lib_57CC57DA(arg0 + 0x1E, 0, 6);
-    M2C_FIELD(arg0, s16 *, 0x24) = 0;
+    sceNet_lib_57CC57DA((u8 *)arg0 + 0x18, 0, 6);
+    sceNet_lib_57CC57DA((u8 *)arg0 + 0x1E, 0, 6);
+    arg0->unk24 = 0;
     func_00004B30((s32) arg0);
 }
 

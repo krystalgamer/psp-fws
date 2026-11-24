@@ -198,8 +198,8 @@ INCLUDE_RODATA("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", D
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00000FD8);
 
-void func_00001120(void *arg0) {
-    func_000021C8(arg0 + 0xC, M2C_FIELD(arg0, s32 *, 0x24));
+void func_00001120(struct Unk_func_00001120_0 *arg0) {
+    func_000021C8((u8 *)arg0 + 0xC, arg0->unk24);
 }
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00001140);

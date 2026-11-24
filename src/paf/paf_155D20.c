@@ -123,12 +123,12 @@ s32 func_001578CC(struct Unk_func_001578CC_0 *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155D20", func_001578E0);
 
-s32 func_0015792C(void *arg0) {
+s32 func_0015792C(struct Unk_func_0015792C_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = !(M2C_FIELD(arg0, s32 *, 8) & 1) ? 0 : (arg0 + 0x2C);
+        var_v0 = !(arg0->unk8 & 1) ? 0 : ((u8 *)arg0 + 0x2C);
     }
     return var_v0;
 }

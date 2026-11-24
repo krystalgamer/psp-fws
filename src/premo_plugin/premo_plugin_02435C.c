@@ -136,9 +136,9 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00024D94);
 
-s32 func_00024DE0(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x28) = 0;
-    func_0001B284(arg0 + 0x30);
+s32 func_00024DE0(struct Unk_func_00024DE0_0 *arg0) {
+    arg0->unk28 = 0;
+    func_0001B284((u8 *)arg0 + 0x30);
     return 0;
 }
 
@@ -357,15 +357,15 @@ s32 func_00026BE4(struct Unk_func_00026BE4_0 *arg0) {
     return 5 - arg0->unk5C;
 }
 
-s32 func_00026BF4(void *arg0, s32 arg1) {
+s32 func_00026BF4(struct Unk_func_00026BF4_0 *arg0, s32 arg1) {
     s32 var_a3;
 
-    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    arg0->unk2C = 0;
     var_a3 = 0x80108C44;
-    if (M2C_FIELD(arg0, u8 *, 0x30) != 0) {
+    if (arg0->unk30 != 0) {
         var_a3 = 0;
-        if ((u32) M2C_FIELD(arg0, u32 *, 0x5C) >= (u32) (5 - arg1)) {
-            var_a3 = func_00021BB8((s32) (arg0 + 4), arg1);
+        if ((u32) arg0->unk5C >= (u32) (5 - arg1)) {
+            var_a3 = func_00021BB8((s32) ((u8 *)arg0 + 4), arg1);
         }
     }
     return var_a3;
@@ -377,8 +377,8 @@ void func_00026C90(s32 arg0) {
     func_00021E28(arg0 + 4);
 }
 
-void *func_00026CAC(void *arg0) {
-    return arg0 + (M2C_FIELD(arg0, s32 *, 0x68) * 0x1C) + 0x80;
+void *func_00026CAC(struct Unk_func_00026CAC_0 *arg0) {
+    return (u8 *)arg0 + (arg0->unk68 * 0x1C) + 0x80;
 }
 
 s32 func_00026CCC(void) {

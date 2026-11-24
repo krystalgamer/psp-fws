@@ -163,11 +163,11 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000EE45C);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000EE55C);
 
-s32 func_000EE5C0(void *arg0) {
+s32 func_000EE5C0(struct Unk_func_000EE5C0_0 *arg0) {
     s32 temp_s0;
 
-    temp_s0 = arg0 + 0x8C;
-    return M2C_FIELD((sceHVNetfront_Module_234F9191(temp_s0, sceHVNetfront_Module_1461AF80(temp_s0)) + M2C_FIELD(arg0, s16 *, 0x98)), s32 *, 8);
+    temp_s0 = (u8 *)arg0 + 0x8C;
+    return M2C_FIELD((sceHVNetfront_Module_234F9191(temp_s0, sceHVNetfront_Module_1461AF80(temp_s0)) + arg0->unk98), s32 *, 8);
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000EE60C);
@@ -397,7 +397,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F0FD4);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F118C);
 
-void func_000F1234(void *arg0) {
+void func_000F1234(struct Unk_func_000F1234_0 *arg0) {
     s32 *temp_s3;
     s32 *temp_v0;
     s32 *temp_v0_2;
@@ -405,26 +405,26 @@ void func_000F1234(void *arg0) {
     s32 temp_s1;
     s32 var_v0;
 
-    temp_s1 = arg0 + 0x38;
-    temp_s0 = arg0 + 0x14;
+    temp_s1 = (u8 *)arg0 + 0x38;
+    temp_s0 = (u8 *)arg0 + 0x14;
     temp_v0 = sceHVNetfront_Module_83191313(temp_s0, temp_s1);
     temp_s3 = temp_v0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 **, 0x44) = temp_v0;
+    arg0->unk8 = 0;
+    arg0->unk44 = temp_v0;
     if (temp_v0 == NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 4);
-        M2C_FIELD(arg0, s32 *, 0x10) = 0;
+        var_v0 = arg0->unk4;
+        arg0->unk10 = 0;
     } else {
-        M2C_FIELD(arg0, s32 *, 0x10) = (s32) M2C_FIELD(temp_v0, s32 *, 4);
+        arg0->unk10 = (s32) M2C_FIELD(temp_v0, s32 *, 4);
         temp_v0_2 = sceHVNetfront_Module_12E3C14E(temp_s0, temp_s1);
-        M2C_FIELD(arg0, s32 **, 0x44) = temp_v0_2;
+        arg0->unk44 = temp_v0_2;
         if (temp_v0_2 == NULL) {
-            var_v0 = M2C_FIELD(arg0, s32 *, 4);
+            var_v0 = arg0->unk4;
         } else {
             var_v0 = M2C_FIELD(temp_s3, s32 *, 0);
         }
     }
-    M2C_FIELD(arg0, s32 *, 0xC) = var_v0;
+    arg0->unkC = var_v0;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F12C8);
@@ -719,11 +719,11 @@ s32 func_000F2560(s32 arg0, s32 arg1) {
     return !((arg0 != 0) & (arg1 != 0)) ? 0 : (arg1 + 0x20);
 }
 
-s32 func_000F2578(s32 arg0, void *arg1, void **arg2) {
+s32 func_000F2578(s32 arg0, struct Unk_func_000F2578_1 *arg1, void **arg2) {
     s32 var_a0;
 
-    if (((arg0 != 0) & (arg1 != NULL)) && (var_a0 = 0x20, ((((u32) M2C_FIELD(arg1, u32 *, 8) >> 5) & 1 & (arg2 != NULL)) != 0))) {
-        *arg2 = arg1 + 0x52;
+    if (((arg0 != 0) & (arg1 != NULL)) && (var_a0 = 0x20, ((((u32) arg1->unk8 >> 5) & 1 & (arg2 != NULL)) != 0))) {
+        *arg2 = (u8 *)arg1 + 0x52;
     } else {
         var_a0 = 0;
     }
@@ -842,11 +842,11 @@ s32 png_get_pHYs(s32 arg0, struct Unk_png_get_pHYs_1 *arg1, s32 *arg2, s32 *arg3
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", png_get_PLTE);
 
-s32 func_000F2C38(s32 arg0, void *arg1, void **arg2) {
+s32 func_000F2C38(s32 arg0, struct Unk_func_000F2C38_1 *arg1, void **arg2) {
     s32 var_a0;
 
-    if (((arg0 != 0) & (arg1 != NULL)) && (var_a0 = 2, ((((u32) M2C_FIELD(arg1, u32 *, 8) >> 1) & 1 & (arg2 != NULL)) != 0))) {
-        *arg2 = arg1 + 0x3C;
+    if (((arg0 != 0) & (arg1 != NULL)) && (var_a0 = 2, ((((u32) arg1->unk8 >> 1) & 1 & (arg2 != NULL)) != 0))) {
+        *arg2 = (u8 *)arg1 + 0x3C;
     } else {
         var_a0 = 0;
     }
@@ -874,22 +874,22 @@ s32 func_000F2C7C(s32 arg0, struct Unk_func_000F2C7C_1 *arg1, s32 *arg2, s32 *ar
     return 0;
 }
 
-s32 func_000F2CCC(s32 arg0, void *arg1, s32 *arg2, s32 *arg3, void **arg4) {
+s32 func_000F2CCC(s32 arg0, struct Unk_func_000F2CCC_1 *arg1, s32 *arg2, s32 *arg3, void **arg4) {
     s32 var_a5;
 
     var_a5 = 0;
-    if (((arg0 != 0) & (arg1 != NULL)) && (M2C_FIELD(arg1, s32 *, 8) & 0x10)) {
-        if (M2C_FIELD(arg1, u8 *, 0x19) == 3) {
+    if (((arg0 != 0) & (arg1 != NULL)) && (arg1->unk8 & 0x10)) {
+        if (arg1->unk19 == 3) {
             if (arg2 != NULL) {
                 var_a5 = 0x10;
-                *arg2 = M2C_FIELD(arg1, s32 *, 0x44);
+                *arg2 = arg1->unk44;
             }
             if (arg4 != NULL) {
-                *arg4 = arg1 + 0x48;
+                *arg4 = (u8 *)arg1 + 0x48;
             }
         } else {
             if (arg4 != NULL) {
-                *arg4 = arg1 + 0x48;
+                *arg4 = (u8 *)arg1 + 0x48;
                 var_a5 = 0x10;
             }
             if (arg2 != NULL) {
@@ -898,7 +898,7 @@ s32 func_000F2CCC(s32 arg0, void *arg1, s32 *arg2, s32 *arg3, void **arg4) {
         }
         if (arg3 != NULL) {
             var_a5 |= 0x10;
-            *arg3 = (s32) M2C_FIELD(arg1, u16 *, 0x16);
+            *arg3 = (s32) arg1->unk16;
         }
     }
     return var_a5;

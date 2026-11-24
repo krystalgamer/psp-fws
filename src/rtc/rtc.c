@@ -191,10 +191,10 @@ INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcFormatRFC2822);
 
 INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcFormatRFC3339);
 
-s32 func_00003AF8(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s8 *, 0) = (s8) (((arg1 / 10) % 10) + 0x30);
-    M2C_FIELD(arg0, s8 *, 1) = (s8) ((arg1 % 10) + 0x30);
-    return arg0 + 2;
+s32 func_00003AF8(struct Unk_func_00003AF8_0 *arg0, s32 arg1) {
+    arg0->unk0 = (s8) (((arg1 / 10) % 10) + 0x30);
+    arg0->unk1 = (s8) ((arg1 % 10) + 0x30);
+    return (u8 *)arg0 + 2;
 }
 
 INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", func_00003B60);

@@ -1839,13 +1839,13 @@ void func_00012CD8(struct Unk_func_00012CD8_0 *arg0) {
     arg0->unk70 = (s32) arg0->unk2C;
 }
 
-void func_00012CEC(void *arg0) {
+void func_00012CEC(struct Unk_func_00012CEC_0 *arg0) {
     s32 temp_s1;
 
-    temp_s1 = arg0 + 4;
-    func_000124AC(temp_s1, M2C_FIELD(arg0, s32 *, 0x6C), 0);
-    func_00012A08(temp_s1, M2C_FIELD(arg0, s32 *, 0x6C));
-    M2C_FIELD(arg0, s32 *, 0x2C) = (s32) M2C_FIELD(arg0, s32 *, 0x70);
+    temp_s1 = (u8 *)arg0 + 4;
+    func_000124AC(temp_s1, arg0->unk6C, 0);
+    func_00012A08(temp_s1, arg0->unk6C);
+    arg0->unk2C = (s32) arg0->unk70;
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00012D3C);
@@ -1910,8 +1910,8 @@ void func_000137FC(struct Unk_func_000137FC_0 *arg0) {
     arg0->unk6C = (s32) arg0->unk20;
 }
 
-void func_00013808(void *arg0) {
-    func_000124AC((s32) (arg0 + 4), M2C_FIELD(arg0, s32 *, 0x6C), 0);
+void func_00013808(struct Unk_func_00013808_0 *arg0) {
+    func_000124AC((s32) ((u8 *)arg0 + 4), arg0->unk6C, 0);
 }
 
 void func_0001382C(struct Unk_func_000137FC_0 *arg0) {

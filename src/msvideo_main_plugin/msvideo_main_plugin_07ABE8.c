@@ -113,13 +113,13 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07ABE8", func_0007DF4C);
 
-void func_0007E4AC(void *arg0, M2C_UNK arg1) {
-    func_0007B1D4(arg0 + 9, 3, arg1);
-    M2C_FIELD(arg0, s32 *, 0xC) = func_0007B094(arg1);
+void func_0007E4AC(struct Unk_func_0007E4AC_0 *arg0, M2C_UNK arg1) {
+    func_0007B1D4((u8 *)arg0 + 9, 3, arg1);
+    arg0->unkC = func_0007B094(arg1);
 }
 
-void func_0007E4F4(void *arg0, s32 arg1) {
-    func_0007B1D4(arg0 + 9, 3, arg1);
-    M2C_FIELD(arg0, s32 *, 0xC) = func_0007B094(arg1);
+void func_0007E4F4(struct Unk_func_0007E4F4_0 *arg0, s32 arg1) {
+    func_0007B1D4((u8 *)arg0 + 9, 3, arg1);
+    arg0->unkC = func_0007B094(arg1);
 }
 

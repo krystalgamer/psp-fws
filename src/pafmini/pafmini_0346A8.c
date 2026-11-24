@@ -523,9 +523,9 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0346A8", scePaf_D96449B4);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0346A8", scePaf_FDB98CAC);
 
-void func_0003D5A4(void *arg0, s32 *arg1, s32 arg2) {
-    func_0000AC60(arg0 + 0x64, *arg1);
-    M2C_FIELD(arg0, s32 *, 0x60) = arg2;
+void func_0003D5A4(struct Unk_func_0003D5A4_0 *arg0, s32 *arg1, s32 arg2) {
+    func_0000AC60((u8 *)arg0 + 0x64, *arg1);
+    arg0->unk60 = arg2;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0346A8", scePaf_BA1F20EE);
@@ -1215,11 +1215,11 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0346A8", func_000451D8);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0346A8", func_0004520C);
 
-void func_000452E0(void *arg0) {
+void func_000452E0(struct Unk_func_000452E0_0 *arg0) {
     void **temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, void ***, 0x8C);
-    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **, M2C_UNK, s32), 0x98)(temp_a0, 0x12, arg0 + 0x60);
+    temp_a0 = arg0->unk8C;
+    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **, M2C_UNK, s32), 0x98)(temp_a0, 0x12, (u8 *)arg0 + 0x60);
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0346A8", func_00045310);
@@ -1899,21 +1899,21 @@ void ***func_0005106C(void ***arg0, struct Unk_func_0005106C_1 *arg1, void **arg
     return arg0;
 }
 
-void func_000510D4(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000D7E70;
-    scePaf_1B043852(arg0 + 0x28);
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x24));
-    func_00051184((s32) (arg0 + 0x14));
-    func_00051184((s32) (arg0 + 8));
+void func_000510D4(struct Unk_func_000510D4_0 *arg0) {
+    arg0->unk0 = &D_000D7E70;
+    scePaf_1B043852((u8 *)arg0 + 0x28);
+    sceKernelDeleteSema(arg0->unk24);
+    func_00051184((s32) ((u8 *)arg0 + 0x14));
+    func_00051184((s32) ((u8 *)arg0 + 8));
     scePaf_E977B833((s32) arg0);
 }
 
-void func_00051128(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000D7E70;
-    scePaf_1B043852(arg0 + 0x28);
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x24));
-    func_00051184((s32) (arg0 + 0x14));
-    func_00051184((s32) (arg0 + 8));
+void func_00051128(struct Unk_func_00051128_0 *arg0) {
+    arg0->unk0 = &D_000D7E70;
+    scePaf_1B043852((u8 *)arg0 + 0x28);
+    sceKernelDeleteSema(arg0->unk24);
+    func_00051184((s32) ((u8 *)arg0 + 0x14));
+    func_00051184((s32) ((u8 *)arg0 + 8));
     scePaf_E977B833((s32) arg0);
     scePaf_4E67BB08(arg0);
 }

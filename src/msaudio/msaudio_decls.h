@@ -29,6 +29,11 @@ struct Unk_func_00000570_1 {
     s32 unk34;
 };
 
+struct Unk_func_00001908_0 {
+    u8 pad0[0xFFC];
+    u8 unkFFC;
+};
+
 struct Unk_func_00001908_temp_v0 {
     u8 pad0[0x1];
     u8 unk1;
@@ -50,7 +55,7 @@ s32 func_00000000(s32);
 s32 func_00000194(M2C_UNK);
 s32 func_00000234(s32 arg0, M2C_UNK arg1);
 s32 func_00000570(struct Unk_func_00000570_0 *arg0, struct Unk_func_00000570_1 *arg1);
-s32 func_00001908(void *arg0);
+s32 func_00001908(struct Unk_func_00001908_0 *arg0);
 s32 func_0000198C(s32 *arg0);
 s32 func_000026B0(struct Unk_func_000026B0_0 *arg0);
 s32 module_start(void);

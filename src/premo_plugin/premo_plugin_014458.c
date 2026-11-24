@@ -26,8 +26,8 @@ s32 func_000145C8(struct Unk_func_000145C8_0 *arg0) {
     return 0;
 }
 
-void func_00014640(void *arg0) {
-    if (sceNetInetSendto(M2C_FIELD(arg0, s32 *, 0x2C), M2C_FIELD(arg0, void **, 4), 4U, 0, arg0 + 0xC, 0x10) >= 0) {
+void func_00014640(struct Unk_func_00014640_0 *arg0) {
+    if (sceNetInetSendto(arg0->unk2C, arg0->unk4, 4U, 0, (u8 *)arg0 + 0xC, 0x10) >= 0) {
 
     } else {
         sceNetInetGetPspError();

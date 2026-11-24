@@ -183,9 +183,9 @@ void func_000010C0(struct Unk_func_000006E0_0 *arg0) {
     }
 }
 
-void func_00001138(void *arg0) {
-    func_00003830(arg0 + 0xC);
-    sceKernelSetEventFlag(M2C_FIELD(arg0, s32 *, 0xC0), 1);
+void func_00001138(struct Unk_func_00001138_0 *arg0) {
+    func_00003830((u8 *)arg0 + 0xC);
+    sceKernelSetEventFlag(arg0->unkC0, 1);
 }
 
 INCLUDE_RODATA("tmp/asm/282/dd_helper/nonmatchings/dd_helper", D_0000AA64);
@@ -228,8 +228,8 @@ INCLUDE_RODATA("tmp/asm/282/dd_helper/nonmatchings/dd_helper", D_0000ABBC);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_0000136C);
 
-void func_000014E0(void *arg0) {
-    func_00002B2C(arg0 + 0xC, M2C_FIELD(arg0, s32 *, 0x6C));
+void func_000014E0(struct Unk_func_000014E0_0 *arg0) {
+    func_00002B2C((u8 *)arg0 + 0xC, arg0->unk6C);
 }
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00001500);
@@ -539,14 +539,14 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000054AC);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000055E8);
 
-s32 func_00005908(struct Unk_func_00005908_0 *arg0, void *arg1) {
+s32 func_00005908(struct Unk_func_00005908_0 *arg0, struct Unk_func_00005908_1 *arg1) {
     s32 temp_a1;
     s32 temp_v0;
     s32 var_v1;
 
-    arg0->unk28 = (s32) ((M2C_FIELD(arg1, u8 *, 0x10) << 0x18) + (M2C_FIELD(arg1, u8 *, 0x11) << 0x10) + (M2C_FIELD(arg1, u8 *, 0x12) << 8) + M2C_FIELD(arg1, u8 *, 0x13));
+    arg0->unk28 = (s32) ((arg1->unk10 << 0x18) + (arg1->unk11 << 0x10) + (arg1->unk12 << 8) + arg1->unk13);
     temp_a1 = arg0->unk20;
-    arg0->unk24 = (s32) ((M2C_FIELD(arg1, u8 *, 0x20) << 8) + M2C_FIELD(arg1, u8 *, 0x21));
+    arg0->unk24 = (s32) ((arg1->unk20 << 8) + arg1->unk21);
     if (temp_a1 == 0) {
 
     } else {
@@ -556,7 +556,7 @@ s32 func_00005908(struct Unk_func_00005908_0 *arg0, void *arg1) {
     arg0->unk20 = temp_v0;
     var_v1 = 0x80108B01;
     if (temp_v0 != 0) {
-        scePaf_F95EA3F1(temp_v0, arg1 + 0x22, arg0->unk24);
+        scePaf_F95EA3F1(temp_v0, (u8 *)arg1 + 0x22, arg0->unk24);
         var_v1 = 0;
     }
     return var_v1;
@@ -671,8 +671,8 @@ INCLUDE_RODATA("tmp/asm/282/dd_helper/nonmatchings/dd_helper", D_0000B204);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00006804);
 
-void func_0000694C(void *arg0) {
-    func_00007668(arg0 + 0xC, M2C_FIELD(arg0, s32 *, 0x24));
+void func_0000694C(struct Unk_func_0000694C_0 *arg0) {
+    func_00007668((u8 *)arg0 + 0xC, arg0->unk24);
 }
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_0000696C);

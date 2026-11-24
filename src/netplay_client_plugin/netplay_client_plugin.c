@@ -559,10 +559,10 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006A80);
 
-void func_00006AA0(void *arg0) {
-    scePaf_27F64616(M2C_FIELD(arg0, s32 *, 4));
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
-    func_00006D38(arg0 + 0x20);
+void func_00006AA0(struct Unk_func_00006AA0_0 *arg0) {
+    scePaf_27F64616(arg0->unk4);
+    arg0->unk1C = 0;
+    func_00006D38((u8 *)arg0 + 0x20);
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006AD8);

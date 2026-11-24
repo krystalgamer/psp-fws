@@ -41,7 +41,7 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_14A044", func_0014A47C);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_14A044", func_0014A4A4);
 
-u32 func_0014A4E8(void *arg0) {
+u32 func_0014A4E8(struct Unk_func_0014A4E8_0 *arg0) {
     u16 temp_a3;
     u16 temp_v1;
     u16 var_t0;
@@ -49,9 +49,9 @@ u32 func_0014A4E8(void *arg0) {
     u32 var_t1;
     void *var_a0;
 
-    temp_a3 = M2C_FIELD(arg0, u16 *, 0x3C60);
+    temp_a3 = arg0->unk3C60;
     var_t0 = 0;
-    var_a0 = arg0 + 0x3C64;
+    var_a0 = (u8 *)arg0 + 0x3C64;
     var_t1 = 0;
     var_a1 = 0;
     if (temp_a3 != 0) {
@@ -667,12 +667,12 @@ s32 func_00152EC0(struct Unk_func_00152EC0_0 *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_14A044", func_00152ED4);
 
-s32 func_00152F40(void *arg0) {
+s32 func_00152F40(struct Unk_func_00152F40_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = !(M2C_FIELD(arg0, s32 *, 0x14) & 8) ? 0 : (arg0 + 0x100);
+        var_v0 = !(arg0->unk14 & 8) ? 0 : ((u8 *)arg0 + 0x100);
     }
     return var_v0;
 }
@@ -709,32 +709,32 @@ s32 func_00152FC0(struct Unk_func_00152FC0_0 *arg0) {
     return var_v0;
 }
 
-s32 func_00152FD4(void *arg0) {
+s32 func_00152FD4(struct Unk_func_00152FD4_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = !(M2C_FIELD(arg0, s32 *, 0x14) & 1) ? 0 : (arg0 + 0x98);
+        var_v0 = !(arg0->unk14 & 1) ? 0 : ((u8 *)arg0 + 0x98);
     }
     return var_v0;
 }
 
-s32 func_00152FF8(void *arg0) {
+s32 func_00152FF8(struct Unk_func_00152FF8_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = !(M2C_FIELD(arg0, s32 *, 0x14) & 2) ? 0 : (arg0 + 0xB0);
+        var_v0 = !(arg0->unk14 & 2) ? 0 : ((u8 *)arg0 + 0xB0);
     }
     return var_v0;
 }
 
-s32 func_0015301C(void *arg0) {
+s32 func_0015301C(struct Unk_func_0015301C_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = !(M2C_FIELD(arg0, s32 *, 0x14) & 4) ? 0 : (arg0 + 0xF0);
+        var_v0 = !(arg0->unk14 & 4) ? 0 : ((u8 *)arg0 + 0xF0);
     }
     return var_v0;
 }

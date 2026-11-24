@@ -33,6 +33,11 @@ struct Unk_func_00004584_0 {
     u32 unk38;
 };
 
+struct Unk_func_00004BDC_0 {
+    u8 pad0[0x64];
+    s8 unk64;
+};
+
 struct Unk_func_00005720_0 {
     u8 pad0[0x5EC];
     u32 unk5EC;
@@ -175,7 +180,7 @@ M2C_UNK func_0000456C(M2C_UNK);
 s32 func_00004578(void);
 s32 func_00004584(struct Unk_func_00004584_0 *arg0);
 s32 func_00004824(void *);
-s32 func_00004BDC(void *arg0);
+s32 func_00004BDC(struct Unk_func_00004BDC_0 *arg0);
 s32 func_00005608(s32, s32);
 void func_000056E8(s32 arg0);
 void func_00005704(s32 arg0);

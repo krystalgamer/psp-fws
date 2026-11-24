@@ -2,24 +2,24 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-void func_00051C5C(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0005DAA0;
-    M2C_FIELD(arg0, M2C_UNK **, 0x2C) = &D_0005DAD0;
-    func_00050DFC(arg0 + 0x2C);
-    M2C_FIELD(arg0, M2C_UNK **, 0x14) = &D_0005DAD0;
-    func_00050DFC(arg0 + 0x14);
-    func_00051884((s32) (arg0 + 4));
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0005DB00;
+void func_00051C5C(struct Unk_func_00051C5C_0 *arg0) {
+    arg0->unk0 = &D_0005DAA0;
+    arg0->unk2C = &D_0005DAD0;
+    func_00050DFC(&arg0->unk2C);
+    arg0->unk14 = &D_0005DAD0;
+    func_00050DFC(&arg0->unk14);
+    func_00051884((s32) ((u8 *)arg0 + 4));
+    arg0->unk0 = &D_0005DB00;
 }
 
-void func_00051CC4(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0005DAA0;
-    M2C_FIELD(arg0, M2C_UNK **, 0x2C) = &D_0005DAD0;
-    func_00050DFC(arg0 + 0x2C);
-    M2C_FIELD(arg0, M2C_UNK **, 0x14) = &D_0005DAD0;
-    func_00050DFC(arg0 + 0x14);
-    func_00051884((s32) (arg0 + 4));
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0005DB00;
+void func_00051CC4(struct Unk_func_00051CC4_0 *arg0) {
+    arg0->unk0 = &D_0005DAA0;
+    arg0->unk2C = &D_0005DAD0;
+    func_00050DFC(&arg0->unk2C);
+    arg0->unk14 = &D_0005DAD0;
+    func_00050DFC(&arg0->unk14);
+    func_00051884((s32) ((u8 *)arg0 + 4));
+    arg0->unk0 = &D_0005DB00;
     scePaf_4E67BB08(arg0);
 }
 

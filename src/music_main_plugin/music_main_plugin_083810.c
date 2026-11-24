@@ -10,24 +10,24 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810", func_00083BE0);
 
-void func_00083C30(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A1F80;
-    M2C_FIELD(arg0, s32 *, 4) = 0xFF;
-    M2C_FIELD(arg0, s32 *, 8) = -1;
-    func_0006CA14((s32) (arg0 + 0xC));
-    M2C_FIELD(arg0, s32 *, 0x14) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg3;
+void func_00083C30(struct Unk_func_00083C30_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0->unk0 = &D_000A1F80;
+    arg0->unk4 = 0xFF;
+    arg0->unk8 = -1;
+    func_0006CA14((s32) ((u8 *)arg0 + 0xC));
+    arg0->unk14 = arg1;
+    arg0->unk18 = arg2;
+    arg0->unk1C = arg3;
 }
 
-void func_00083CA4(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A1F80;
-    M2C_FIELD(arg0, s32 *, 4) = 0xFF;
-    M2C_FIELD(arg0, s32 *, 8) = -1;
-    func_0006CA14((s32) (arg0 + 0xC));
-    M2C_FIELD(arg0, s32 *, 0x14) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg3;
+void func_00083CA4(struct Unk_func_00083CA4_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0->unk0 = &D_000A1F80;
+    arg0->unk4 = 0xFF;
+    arg0->unk8 = -1;
+    func_0006CA14((s32) ((u8 *)arg0 + 0xC));
+    arg0->unk14 = arg1;
+    arg0->unk18 = arg2;
+    arg0->unk1C = arg3;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810", func_00083D18);
@@ -322,22 +322,22 @@ void func_000868D4(M2C_UNK **arg0) {
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083810", func_0008690C);
 
-void func_00086A54(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A2088;
-    M2C_FIELD(arg0, s32 *, 4) = -1;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    scePaf_F95EA3F1(arg0 + 8, arg1, 4);
+void func_00086A54(struct Unk_func_00086A54_0 *arg0, s32 arg1) {
+    arg0->unk0 = &D_000A2088;
+    arg0->unk4 = -1;
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
+    arg0->unk14 = 0;
+    scePaf_F95EA3F1((u8 *)arg0 + 8, arg1, 4);
 }
 
-void func_00086A98(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A2088;
-    M2C_FIELD(arg0, s32 *, 4) = -1;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    scePaf_F95EA3F1(arg0 + 8, arg1, 4);
+void func_00086A98(struct Unk_func_00086A98_0 *arg0, s32 arg1) {
+    arg0->unk0 = &D_000A2088;
+    arg0->unk4 = -1;
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
+    arg0->unk14 = 0;
+    scePaf_F95EA3F1((u8 *)arg0 + 8, arg1, 4);
 }
 
 void func_00086ADC(M2C_UNK **arg0) {

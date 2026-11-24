@@ -15,6 +15,11 @@ struct D_00004580_s {
     volatile s32 unk1C;
 };
 
+struct Unk_func_00003AF8_0 {
+    s8 unk0;
+    s8 unk1;
+};
+
 extern M2C_UNK D_00004540;
 extern struct D_00004580_s D_00004580;
 extern M2C_UNK func_00000000;
@@ -25,7 +30,7 @@ extern M2C_UNK sceRtc_driver_B44BDAED;
 
 M2C_UNK UtilsForKernel_23A0C5BA(M2C_UNK *, M2C_UNK *, M2C_UNK *, M2C_UNK *);
 s32 func_0000138C(s32 arg0);
-s32 func_00003AF8(void *arg0, s32 arg1);
+s32 func_00003AF8(struct Unk_func_00003AF8_0 *arg0, s32 arg1);
 void func_00003D9C(void);
 M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);
 s32 module_reboot_before(void);

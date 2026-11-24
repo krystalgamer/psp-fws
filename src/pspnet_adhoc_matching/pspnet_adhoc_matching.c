@@ -167,50 +167,50 @@ void func_00002BB8(struct Unk_func_00002BB8_0 *arg0) {
     sceKernelCpuResumeIntr(temp_s1);
 }
 
-s32 func_00002C08(void *arg0) {
+s32 func_00002C08(struct Unk_func_00002C08_0 *arg0) {
     s32 temp_a2;
 
-    temp_a2 = M2C_FIELD(arg0, s32 *, 0x50);
+    temp_a2 = arg0->unk50;
     if (temp_a2 & 1) {
-        M2C_FIELD(arg0, s32 *, 0x54) = 0;
+        arg0->unk54 = 0;
     } else {
-        M2C_FIELD(arg0, s32 *, 0x50) = (s32) (temp_a2 | 1);
-        M2C_FIELD(arg0, s32 *, 0x48) = 2;
-        M2C_FIELD(arg0, void **, 0x4C) = arg0;
-        sceKernelSendMbx(M2C_FIELD(arg0, u32 *, 0x60), arg0 + 0x40);
-        M2C_FIELD(arg0, s32 *, 0x54) = 0;
+        arg0->unk50 = (s32) (temp_a2 | 1);
+        arg0->unk48 = 2;
+        arg0->unk4C = arg0;
+        sceKernelSendMbx(arg0->unk60, (u8 *)arg0 + 0x40);
+        arg0->unk54 = 0;
     }
     return 0;
 }
 
-s32 func_00002C64(void *arg0) {
+s32 func_00002C64(struct Unk_func_00002C64_0 *arg0) {
     s32 temp_a2;
 
-    temp_a2 = M2C_FIELD(arg0, s32 *, 0x50);
+    temp_a2 = arg0->unk50;
     if (temp_a2 & 1) {
-        M2C_FIELD(arg0, s32 *, 0x54) = 0;
+        arg0->unk54 = 0;
     } else {
-        M2C_FIELD(arg0, s32 *, 0x50) = (s32) (temp_a2 | 1);
-        M2C_FIELD(arg0, s32 *, 0x48) = 3;
-        M2C_FIELD(arg0, void **, 0x4C) = arg0;
-        sceKernelSendMbx(M2C_FIELD(arg0, u32 *, 0x60), arg0 + 0x40);
-        M2C_FIELD(arg0, s32 *, 0x54) = 0;
+        arg0->unk50 = (s32) (temp_a2 | 1);
+        arg0->unk48 = 3;
+        arg0->unk4C = arg0;
+        sceKernelSendMbx(arg0->unk60, (u8 *)arg0 + 0x40);
+        arg0->unk54 = 0;
     }
     return 0;
 }
 
-s32 func_00002CC0(void *arg0) {
+s32 func_00002CC0(struct Unk_func_00002CC0_0 *arg0) {
     s32 temp_a2;
 
-    temp_a2 = M2C_FIELD(arg0, s32 *, 0x60);
+    temp_a2 = arg0->unk60;
     if (temp_a2 & 1) {
-        M2C_FIELD(arg0, s32 *, 0x6C) = 0;
+        arg0->unk6C = 0;
     } else {
-        M2C_FIELD(arg0, s32 *, 0x60) = (s32) (temp_a2 | 1);
-        M2C_FIELD(arg0, s32 *, 0x58) = 4;
-        M2C_FIELD(arg0, s32 *, 0x5C) = 0;
-        sceKernelSendMbx(M2C_FIELD(arg0, u32 *, 0x40), arg0 + 0x50);
-        M2C_FIELD(arg0, s32 *, 0x6C) = 0;
+        arg0->unk60 = (s32) (temp_a2 | 1);
+        arg0->unk58 = 4;
+        arg0->unk5C = 0;
+        sceKernelSendMbx(arg0->unk40, (u8 *)arg0 + 0x50);
+        arg0->unk6C = 0;
     }
     return 0;
 }

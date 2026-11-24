@@ -253,16 +253,16 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0308D4", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0308D4", func_00031490);
 
-void func_000314B4(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00056230;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    func_00030544((s32) (arg0 + 8));
+void func_000314B4(struct Unk_func_000314B4_0 *arg0) {
+    arg0->unk0 = &D_00056230;
+    arg0->unk4 = 0;
+    func_00030544((s32) ((u8 *)arg0 + 8));
 }
 
-void func_000314E4(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00056230;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    func_00030544((s32) (arg0 + 8));
+void func_000314E4(struct Unk_func_000314E4_0 *arg0) {
+    arg0->unk0 = &D_00056230;
+    arg0->unk4 = 0;
+    func_00030544((s32) ((u8 *)arg0 + 8));
 }
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0308D4", func_00031514);

@@ -25,27 +25,27 @@ s32 module_start(void) {
     return 0;
 }
 
-s32 sceAmctrl_driver_525B8218(void *arg0, s32 arg1) {
+s32 sceAmctrl_driver_525B8218(struct Unk_sceAmctrl_driver_525B8218_0 *arg0, s32 arg1) {
     s8 *var_v1;
     u32 var_a1;
     u32 var_a1_2;
     struct Unk_sceAmctrl_driver_525B8218_temp_v1 *temp_v1;
 
-    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    arg0->unk0 = arg1;
     var_a1 = 0;
     do {
-        temp_v1 = arg0 + var_a1;
+        temp_v1 = (u8 *)arg0 + var_a1;
         var_a1 += 1;
         temp_v1->unk4 = 0;
     } while (var_a1 < 0x10U);
     var_a1_2 = 0;
-    var_v1 = arg0 + 0x14;
+    var_v1 = (u8 *)arg0 + 0x14;
     do {
         var_a1_2 += 1;
         *var_v1 = 0;
         var_v1 += 1;
     } while (var_a1_2 < 0x10U);
-    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    arg0->unk24 = 0;
     return 0;
 }
 
@@ -59,18 +59,18 @@ INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", sceAmctrl_driver_1CCB66D2)
 
 INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", sceAmctrl_driver_0785C974);
 
-s32 sceAmctrl_driver_9951C50F(void *arg0) {
+s32 sceAmctrl_driver_9951C50F(struct Unk_sceAmctrl_driver_9951C50F_0 *arg0) {
     u32 var_a1;
     struct Unk_sceAmctrl_driver_9951C50F_temp_v1 *temp_v1;
 
     var_a1 = 0;
     do {
-        temp_v1 = arg0 + var_a1;
+        temp_v1 = (u8 *)arg0 + var_a1;
         var_a1 += 1;
         temp_v1->unk8 = 0;
     } while (var_a1 < 0x10U);
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
     return 0;
 }
 

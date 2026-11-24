@@ -39,6 +39,21 @@ struct Unk_func_00004124_0 {
     void * unk10;
 };
 
+struct Unk_func_000047DC_0 {
+    u8 pad0[0x34];
+    u16 unk34;
+    u16 unk36;
+};
+
+struct Unk_func_000047DC_1 {
+    u8 pad0[0x14];
+    void *unk14;
+    void *unk18;
+    u8 pad1C[0x10];
+    s32 unk2C;
+    void **unk30;
+};
+
 struct Unk_func_000047DC_temp_a0 {
     u8 pad0[0x4];
     void **unk4;
@@ -47,6 +62,20 @@ struct Unk_func_000047DC_temp_a0 {
 struct Unk_func_00005778_0 {
     u8 pad0[0x8];
     u16 unk8;
+};
+
+struct Unk_func_0000588C_0 {
+    u8 pad0[0x8];
+    u16 unk8;
+    u8 padA[0x82];
+    u16 unk8C;
+};
+
+struct Unk_func_000058CC_0 {
+    u8 pad0[0x8];
+    u16 unk8;
+    u8 padA[0x5A];
+    u16 unk64;
 };
 
 struct Unk_func_000090FC_0 {
@@ -163,6 +192,16 @@ struct Unk_func_000138B4_0 {
     s32 unk20;
 };
 
+struct Unk_func_00013ED4_0 {
+    void *unk0;
+    void *unk4;
+    s32 unk8;
+    s32 unkC;
+    u8 pad10[0x8];
+    s16 unk18;
+    s16 unk1A;
+};
+
 struct Unk_func_00015654_0 {
     struct Unk_func_00015654_temp_v1_2 *unk0;
     void **unk4;
@@ -271,6 +310,11 @@ struct Unk_func_000289B0_0 {
     s32 unk254;
 };
 
+struct Unk_func_0002A244_0 {
+    u8 pad0[0x4BC];
+    s32 unk4BC;
+};
+
 extern s32 D_0002BEC0;
 extern s32 D_0002BF8C;
 extern s32 D_0002C01C;
@@ -345,13 +389,13 @@ s32 func_000023A8(s32);
 void func_000040FC(void);
 s32 func_00004124(struct Unk_func_00004124_0 *arg0, s32 arg1);
 void func_000044AC(s32 arg0);
-void func_000047DC(void *arg0, void *arg1, s32 arg2);
+void func_000047DC(struct Unk_func_000047DC_0 *arg0, struct Unk_func_000047DC_1 *arg1, s32 arg2);
 s32 func_000048B8(s32, s32);
 void func_00004A3C(s32 arg0);
 s32 func_00005008(s32);
 void func_00005778(struct Unk_func_00005778_0 *arg0);
-void func_0000588C(void *arg0);
-void func_000058CC(void *arg0);
+void func_0000588C(struct Unk_func_0000588C_0 *arg0);
+void func_000058CC(struct Unk_func_000058CC_0 *arg0);
 s32 func_00005B8C(void);
 void func_00007A88(s32 arg0, s32 arg1, s32 arg2);
 void func_00007AA4(s32 arg0, s32 arg1, s32 arg2);
@@ -389,7 +433,7 @@ void func_0000F27C(struct Unk_func_0000F27C_0 *arg0, struct Unk_func_0000F27C_1 
 void func_0000F2A8(struct Unk_func_0000F2A8_0 *arg0, struct Unk_func_0000F2A8_1 *arg1);
 s32 func_00010700(void);
 void func_000138B4(struct Unk_func_000138B4_0 *arg0);
-void func_00013ED4(void *arg0, s32 arg1, s32 arg2);
+void func_00013ED4(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2);
 void func_00015654(struct Unk_func_00015654_0 *arg0);
 s32 func_00019A98(void);
 void func_00019C00(struct Unk_func_00019C00_0 *arg0);
@@ -412,7 +456,7 @@ void func_00028A18(void);
 void func_00028B30(void);
 void func_00028B7C(void);
 s32 func_00028D50(void);
-void func_0002A244(void *arg0);
+void func_0002A244(struct Unk_func_0002A244_0 *arg0);
 s32 func_0002AA4C(s32, s32, s32);
 void func_0002AF14(void);
 s32 sceKernelSignalSema(u32, s32);

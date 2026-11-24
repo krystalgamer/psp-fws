@@ -25,7 +25,7 @@
   "func_00001420": "M2C_UNK *func_00001420(void);",
   "func_0000142C": "s32 func_0000142C(s32 arg0, s32 arg1);",
   "func_000015A4": "s32 func_000015A4(s32, s32, s32, s32, s32, s32);",
-  "func_000018F4": "s32 func_000018F4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, void *arg4, s32 arg5);",
+  "func_000018F4": "s32 func_000018F4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, struct Unk_func_000018F4_4 *arg4, s32 arg5);",
   "func_00001980": "void func_00001980(void);",
   "func_00001A44": "void func_00001A44(void);",
   "func_00001B90": "s32 func_00001B90(void);",
@@ -108,6 +108,7 @@
   "D_0000AFF8_s": "struct D_0000AFF8_s {\n    s32 unk0;\n    u8 pad4[0x8];\n    volatile s32 unkC;\n};",
   "D_0000B050_s": "struct D_0000B050_s {\n    u8 unk0;\n    u8 unk1;\n    u8 unk2;\n    u8 unk3;\n};",
   "D_0000B708_s": "struct D_0000B708_s {\n    s32 unk0;\n    s32 unk4;\n};",
+  "Unk_func_000018F4_4": "struct Unk_func_000018F4_4 {\n    u8 pad0[0x20];\n    u8 unk20;\n};",
   "Unk_func_000018F4_temp_a4": "struct Unk_func_000018F4_temp_a4 {\n    u8 pad0[0x1];\n    u8 unk1;\n    u8 unk2;\n    u8 unk3;\n};"
  },
  "vars": {

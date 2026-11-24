@@ -227,12 +227,12 @@ u8 func_00005BEC(struct Unk_func_00005BEC_0 *arg0) {
     return arg0->unk3;
 }
 
-void *func_00005BF4(void *arg0, s32 arg1) {
+void *func_00005BF4(struct Unk_func_00005BF4_0 *arg0, s32 arg1) {
     void *var_v0;
 
     var_v0 = NULL;
-    if (arg1 < (s32) M2C_FIELD(arg0, u8 *, 3)) {
-        var_v0 = arg0 + (arg1 * 4) + 4;
+    if (arg1 < (s32) arg0->unk3) {
+        var_v0 = (u8 *)arg0 + (arg1 * 4) + 4;
     }
     return var_v0;
 }

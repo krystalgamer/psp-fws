@@ -57,13 +57,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_15BEBC", func_0015D924);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_15BEBC", func_0015D9B0);
 
-s32 func_0015D9E8(void *arg0, s32 arg1) {
+s32 func_0015D9E8(struct Unk_func_0015D9E8_0 *arg0, s32 arg1) {
     s32 var_a2;
     void *temp_a3;
     void *var_a0;
 
-    temp_a3 = arg0 + M2C_FIELD(arg0, s32 *, 4);
-    var_a0 = arg0 + M2C_FIELD(arg0, s32 *, 8);
+    temp_a3 = (u8 *)arg0 + arg0->unk4;
+    var_a0 = (u8 *)arg0 + arg0->unk8;
     var_a2 = 0;
     if ((u32) var_a0 < (u32) temp_a3) {
         do {

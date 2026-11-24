@@ -332,12 +332,12 @@ INCLUDE_RODATA("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009598", D_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009598", func_0000B8D8);
 
-s32 func_0000BBD8(void *arg0, s32 arg1) {
+s32 func_0000BBD8(struct Unk_func_0000BBD8_0 *arg0, s32 arg1) {
     s32 temp_s1;
 
-    sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 4), 1, 0);
-    temp_s1 = scePaf_9C0245AF((s32) (arg0 + 8), arg1, 0x10);
-    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 4), 1);
+    sceKernelWaitSema(arg0->unk4, 1, 0);
+    temp_s1 = scePaf_9C0245AF((s32) ((u8 *)arg0 + 8), arg1, 0x10);
+    sceKernelSignalSema(arg0->unk4, 1);
     return temp_s1;
 }
 
@@ -856,14 +856,14 @@ s32 func_00011518(s32 arg0, s32 arg1) {
     return 0;
 }
 
-s32 func_00011574(void *arg0, s32 arg1) {
+s32 func_00011574(struct Unk_func_00011574_0 *arg0, s32 arg1) {
     s32 temp_a0;
     s32 temp_s1;
 
-    temp_s1 = arg0 + 0x20;
+    temp_s1 = (u8 *)arg0 + 0x20;
     scePaf_9479C11B(temp_s1, 0, 0x80);
-    temp_a0 = M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0x84;
+    temp_a0 = arg0->unk4;
+    arg0->unk1C = 0x84;
     if ((temp_a0 == 0) || ((u32) (arg1 - 1) >= 3U)) {
 
     } else {

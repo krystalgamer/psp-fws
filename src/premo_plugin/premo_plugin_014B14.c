@@ -630,12 +630,12 @@ s32 func_00018DDC(struct Unk_func_00018DDC_0 *arg0) {
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00018DEC);
 
-s32 func_00018E78(void *arg0, u32 arg1) {
+s32 func_00018E78(struct Unk_func_00018E78_0 *arg0, u32 arg1) {
     s32 var_v1;
 
-    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
-    if ((M2C_FIELD(M2C_FIELD(arg0, void **, 0), u32 (**)(), 0x20)() < arg1) || (var_v1 = 0, (M2C_FIELD(arg0, s32 *, 0x70) == 0))) {
-        var_v1 = func_00021CF0(arg0 + 4, arg1);
+    arg0->unk2C = 0;
+    if ((M2C_FIELD(arg0->unk0, u32 (**)(), 0x20)() < arg1) || (var_v1 = 0, (arg0->unk70 == 0))) {
+        var_v1 = func_00021CF0((u8 *)arg0 + 4, arg1);
     }
     return var_v1;
 }

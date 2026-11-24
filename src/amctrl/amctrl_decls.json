@@ -1,11 +1,13 @@
 {
  "funcs": {
   "module_start": "s32 module_start(void);",
-  "sceAmctrl_driver_525B8218": "s32 sceAmctrl_driver_525B8218(void *arg0, s32 arg1);",
-  "sceAmctrl_driver_9951C50F": "s32 sceAmctrl_driver_9951C50F(void *arg0);"
+  "sceAmctrl_driver_525B8218": "s32 sceAmctrl_driver_525B8218(struct Unk_sceAmctrl_driver_525B8218_0 *arg0, s32 arg1);",
+  "sceAmctrl_driver_9951C50F": "s32 sceAmctrl_driver_9951C50F(struct Unk_sceAmctrl_driver_9951C50F_0 *arg0);"
  },
  "types": {
+  "Unk_sceAmctrl_driver_525B8218_0": "struct Unk_sceAmctrl_driver_525B8218_0 {\n    s32 unk0;\n    u8 pad4[0x20];\n    s32 unk24;\n};",
   "Unk_sceAmctrl_driver_525B8218_temp_v1": "struct Unk_sceAmctrl_driver_525B8218_temp_v1 {\n    u8 pad0[0x4];\n    s8 unk4;\n};",
+  "Unk_sceAmctrl_driver_9951C50F_0": "struct Unk_sceAmctrl_driver_9951C50F_0 {\n    s32 unk0;\n    s32 unk4;\n};",
   "Unk_sceAmctrl_driver_9951C50F_temp_v1": "struct Unk_sceAmctrl_driver_9951C50F_temp_v1 {\n    u8 pad0[0x8];\n    s8 unk8;\n};"
  },
  "vars": {}

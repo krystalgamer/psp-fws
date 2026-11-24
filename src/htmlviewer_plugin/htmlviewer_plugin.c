@@ -17,48 +17,48 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func
 
 INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin", func_000001F4);
 
-void func_00000274(void *arg0) {
+void func_00000274(struct Unk_func_00000274_0 *arg0) {
     s32 temp_s1;
 
-    temp_s1 = arg0 + 0x14;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00007200;
-    sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
-    M2C_FIELD(arg0, s8 *, 0xC) = 1;
+    temp_s1 = (u8 *)arg0 + 0x14;
+    arg0->unk0 = &D_00007200;
+    sceKernelWaitSema(arg0->unk10, 1, NULL);
+    arg0->unkC = 1;
     scePaf_CA5EF446(temp_s1);
-    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
+    sceKernelSignalSema(arg0->unk10, 1);
     scePaf_5775283A(arg0);
     scePaf_1B043852(temp_s1);
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
+    sceKernelDeleteSema(arg0->unk10);
     scePaf_E977B833(arg0);
 }
 
-void func_000002F8(void *arg0) {
+void func_000002F8(struct Unk_func_000002F8_0 *arg0) {
     s32 temp_s1;
 
-    temp_s1 = arg0 + 0x14;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00007200;
-    sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
-    M2C_FIELD(arg0, s8 *, 0xC) = 1;
+    temp_s1 = (u8 *)arg0 + 0x14;
+    arg0->unk0 = &D_00007200;
+    sceKernelWaitSema(arg0->unk10, 1, NULL);
+    arg0->unkC = 1;
     scePaf_CA5EF446(temp_s1);
-    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
+    sceKernelSignalSema(arg0->unk10, 1);
     scePaf_5775283A(arg0);
     scePaf_1B043852(temp_s1);
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
+    sceKernelDeleteSema(arg0->unk10);
     scePaf_E977B833(arg0);
 }
 
-void func_0000037C(void *arg0) {
+void func_0000037C(struct Unk_func_0000037C_0 *arg0) {
     s32 temp_s1;
 
-    temp_s1 = arg0 + 0x14;
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00007200;
-    sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
-    M2C_FIELD(arg0, s8 *, 0xC) = 1;
+    temp_s1 = (u8 *)arg0 + 0x14;
+    arg0->unk0 = &D_00007200;
+    sceKernelWaitSema(arg0->unk10, 1, NULL);
+    arg0->unkC = 1;
     scePaf_CA5EF446(temp_s1);
-    sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
+    sceKernelSignalSema(arg0->unk10, 1);
     scePaf_5775283A(arg0);
     scePaf_1B043852(temp_s1);
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
+    sceKernelDeleteSema(arg0->unk10);
     scePaf_E977B833(arg0);
     scePaf_4E67BB08(arg0);
 }

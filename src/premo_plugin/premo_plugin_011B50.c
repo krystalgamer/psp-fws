@@ -100,19 +100,19 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00012A70);
 
-void func_00012BF8(void *arg0) {
+void func_00012BF8(struct Unk_func_00012BF8_0 *arg0) {
     struct Unk_func_00012BF8_temp_v0 *temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, void **, 4);
+    temp_v0 = arg0->unk4;
     if (temp_v0 != NULL) {
         temp_v0->unk348 = 0;
     }
-    func_000086F0((s32) (arg0 + 0xB4), 0);
-    func_000086F0((s32) (arg0 + 0x664), 0);
-    func_000086F0((s32) (arg0 + 0x660), 0);
-    func_0001391C(arg0 + 0x66C, 0);
-    func_000086F0((s32) (arg0 + 0x6D4), 0);
-    func_000086F0((s32) (arg0 + 0x668), 0);
+    func_000086F0((s32) ((u8 *)arg0 + 0xB4), 0);
+    func_000086F0((s32) ((u8 *)arg0 + 0x664), 0);
+    func_000086F0((s32) ((u8 *)arg0 + 0x660), 0);
+    func_0001391C((u8 *)arg0 + 0x66C, 0);
+    func_000086F0((s32) ((u8 *)arg0 + 0x6D4), 0);
+    func_000086F0((s32) ((u8 *)arg0 + 0x668), 0);
 }
 
 void func_00012C70(struct Unk_func_00012C70_0 *arg0) {

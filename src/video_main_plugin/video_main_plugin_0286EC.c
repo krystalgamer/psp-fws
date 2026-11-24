@@ -578,14 +578,14 @@ s32 func_0002F8BC(void) {
     return D_00081D7C < 1;
 }
 
-void func_0002F8CC(void *arg0) {
-    scePaf_3067FC77(M2C_FIELD(arg0, s32 *, 4), &func_0002F8F8, arg0 + 0x2C);
+void func_0002F8CC(struct Unk_func_0002F8CC_0 *arg0) {
+    scePaf_3067FC77(arg0->unk4, &func_0002F8F8, (u8 *)arg0 + 0x2C);
 }
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_0286EC", func_0002F8F8);
 
-void func_0002F954(void *arg0) {
-    scePaf_3067FC77(M2C_FIELD(arg0, s32 *, 4), &func_0002F980, arg0 + 0x2C);
+void func_0002F954(struct Unk_func_0002F954_0 *arg0) {
+    scePaf_3067FC77(arg0->unk4, &func_0002F980, (u8 *)arg0 + 0x2C);
 }
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_0286EC", func_0002F980);

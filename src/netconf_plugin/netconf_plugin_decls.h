@@ -27,6 +27,11 @@ struct Unk_func_00000784_1 {
     s32 unk8;
 };
 
+struct Unk_func_00000EE0_0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
 struct Unk_func_00001C68_0 {
     s32 unk0;
     s32 unk4;
@@ -255,7 +260,7 @@ void func_00000784(s32 arg0, struct Unk_func_00000784_1 *arg1, s32 arg2);
 s32 func_000007CC(void *);
 s32 func_0000097C(s32);
 s32 func_00000E28(s32, s32, s32);
-s32 func_00000EE0(void *arg0);
+s32 func_00000EE0(struct Unk_func_00000EE0_0 *arg0);
 M2C_UNK func_00001088();
 s32 func_000012E8(void);
 s32 func_00001304(void);

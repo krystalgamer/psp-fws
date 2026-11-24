@@ -22,6 +22,11 @@ struct D_0000B708_s {
     s32 unk4;
 };
 
+struct Unk_func_000018F4_4 {
+    u8 pad0[0x20];
+    u8 unk20;
+};
+
 struct Unk_func_000018F4_temp_a4 {
     u8 pad0[0x1];
     u8 unk1;
@@ -70,7 +75,7 @@ M2C_UNK *func_00001414(void);
 M2C_UNK *func_00001420(void);
 s32 func_0000142C(s32 arg0, s32 arg1);
 s32 func_000015A4(s32, s32, s32, s32, s32, s32);
-s32 func_000018F4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, void *arg4, s32 arg5);
+s32 func_000018F4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, struct Unk_func_000018F4_4 *arg4, s32 arg5);
 void func_00001980(void);
 void func_00001A44(void);
 s32 func_00001B90(void);

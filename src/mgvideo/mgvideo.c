@@ -279,15 +279,15 @@ INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_00004834);
 
 INCLUDE_ASM("tmp/asm/282/mgvideo/nonmatchings/mgvideo", func_000048B0);
 
-s32 func_000049D0(void *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
+s32 func_000049D0(struct Unk_func_000049D0_0 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     s32 var_s0;
     void *var_s1;
 
     var_s1 = NULL;
     var_s0 = 0;
     if (arg0 != NULL) {
-        var_s1 = arg0 + 0x10;
-        var_s0 = ((M2C_FIELD(arg0, u8 *, 0xE) << 8) | M2C_FIELD(arg0, u8 *, 0xF)) * 0x10;
+        var_s1 = (u8 *)arg0 + 0x10;
+        var_s0 = ((arg0->unkE << 8) | arg0->unkF) * 0x10;
     }
     *arg1 = func_00004834((s32) var_s1, var_s0, (s32) &D_000060F0);
     *arg2 = func_00004834((s32) var_s1, var_s0, (s32) &D_000060F8);

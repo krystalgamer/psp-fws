@@ -356,34 +356,34 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00034010);
 
-void func_000340F0(void *arg0, struct Unk_func_000340F0_1 *arg1) {
+void func_000340F0(struct Unk_func_000340F0_0 *arg0, struct Unk_func_000340F0_1 *arg1) {
     void *sp0;
     u8 temp_s0;
     u8 temp_v0;
 
     temp_s0 = arg1->unk34C;
-    M2C_FIELD(arg0, s32 *, 0x114) = (s32) ((arg1->unk18 << 0x18) | (arg1->unk19 << 0x10) | (arg1->unk1A << 8) | arg1->unk1B);
-    func_000320E4((s32) arg1, &sp0, (s32) (arg0 + 0x134));
-    M2C_FIELD(arg0, s8 *, 0x12E) = 0;
-    M2C_FIELD(arg0, u8 *, 0x12C) = sp0;
+    arg0->unk114 = (s32) ((arg1->unk18 << 0x18) | (arg1->unk19 << 0x10) | (arg1->unk1A << 8) | arg1->unk1B);
+    func_000320E4((s32) arg1, &sp0, (s32) ((u8 *)arg0 + 0x134));
+    arg0->unk12E = 0;
+    arg0->unk12C = sp0;
     if (func_0002FC3C((s32) sp0) != 0) {
-        M2C_FIELD(arg0, s8 *, 0x12E) = 1;
+        arg0->unk12E = 1;
     }
-    temp_v0 = M2C_FIELD(arg0, u8 *, 0x12C);
-    M2C_FIELD(arg0, s8 *, 0x12D) = 0;
+    temp_v0 = arg0->unk12C;
+    arg0->unk12D = 0;
     if (temp_v0 < 8U) {
-        M2C_FIELD(arg0, s8 *, 0x12D) = (s8) (temp_s0 >> 7);
+        arg0->unk12D = (s8) (temp_s0 >> 7);
     }
-    func_000327A4((s32) (arg0 + 0x122), (s32) (arg0 + 0x120), (s32) temp_v0);
+    func_000327A4((s32) ((u8 *)arg0 + 0x122), (s32) ((u8 *)arg0 + 0x120), (s32) temp_v0);
 }
 
 INCLUDE_RODATA("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", D_0009CD90);
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_000341A4);
 
-s32 func_000343A4(void *arg0) {
-    func_0005C5C0(M2C_FIELD(arg0, u8 *, 0x12C), M2C_FIELD(arg0, u8 *, 0x12D), arg0 + 0x134);
-    M2C_FIELD(arg0, u16 *, 0x15C) = (u16) (M2C_FIELD(arg0, u16 *, 0x15C) | 8);
+s32 func_000343A4(struct Unk_func_000343A4_0 *arg0) {
+    func_0005C5C0(arg0->unk12C, arg0->unk12D, (u8 *)arg0 + 0x134);
+    arg0->unk15C = (u16) (arg0->unk15C | 8);
     return 0;
 }
 
@@ -2736,13 +2736,13 @@ void func_00051EBC(struct Unk_func_00051EBC_0 *arg0, s32 arg1) {
     arg0->unk8 = arg1;
 }
 
-s32 func_00051EC4(void *arg0) {
+s32 func_00051EC4(struct Unk_func_00051EC4_0 *arg0) {
     s32 var_a0;
 
     var_a0 = 0;
-    if (func_000535DC(arg0 + 0x40) != 0) {
-        if (M2C_FIELD(arg0, s32 *, 0x14) != 0) {
-            var_a0 = M2C_FIELD(arg0, s32 *, 0x18) != 0;
+    if (func_000535DC((u8 *)arg0 + 0x40) != 0) {
+        if (arg0->unk14 != 0) {
+            var_a0 = arg0->unk18 != 0;
         }
     }
     return var_a0;
@@ -2983,13 +2983,13 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00053A50);
 
-s32 func_00053D2C(void *arg0) {
+s32 func_00053D2C(struct Unk_func_00053D2C_0 *arg0) {
     s32 var_a0;
 
     var_a0 = 0;
-    if (func_000535DC(arg0 + 0x2C) != 0) {
-        if (M2C_FIELD(arg0, s32 *, 0xC) != 0) {
-            var_a0 = M2C_FIELD(arg0, s32 *, 0x10) != 0;
+    if (func_000535DC((u8 *)arg0 + 0x2C) != 0) {
+        if (arg0->unkC != 0) {
+            var_a0 = arg0->unk10 != 0;
         }
     }
     return var_a0;
@@ -3139,13 +3139,13 @@ void func_00054FD0(struct Unk_func_00054FD0_0 *arg0, s32 arg1) {
     arg0->unk1C = arg1;
 }
 
-s32 func_00054FD8(void *arg0) {
+s32 func_00054FD8(struct Unk_func_00054FD8_0 *arg0) {
     s32 var_s1;
 
     var_s1 = 0;
-    if ((M2C_FIELD(arg0, s32 *, 0x24) >= 0) && (func_000535DC(arg0 + 0x28) != 0)) {
-        if ((func_00052AC4(arg0 + 0x30) != 0) && (func_000535DC(arg0 + 0x138) != 0)) {
-            var_s1 = func_00052AC4(arg0 + 0x130) != 0;
+    if ((arg0->unk24 >= 0) && (func_000535DC((u8 *)arg0 + 0x28) != 0)) {
+        if ((func_00052AC4((u8 *)arg0 + 0x30) != 0) && (func_000535DC((u8 *)arg0 + 0x138) != 0)) {
+            var_s1 = func_00052AC4((u8 *)arg0 + 0x130) != 0;
         }
     }
     return var_s1;
@@ -4800,15 +4800,15 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0006AB24);
 
-void func_0006AC48(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A08F0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    scePaf_6829D7AF((s32) (arg0 + 0x1C), 0, 6);
+void func_0006AC48(struct Unk_func_0006AC48_0 *arg0) {
+    arg0->unk0 = &D_000A08F0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
+    arg0->unk14 = 0;
+    arg0->unk18 = 0;
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x1C), 0, 6);
 }
 
 void func_0006AC94(M2C_UNK **arg0) {
@@ -5664,13 +5664,13 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_000706C0);
 
-s32 func_00070784(void *arg0) {
+s32 func_00070784(struct Unk_func_00070784_0 *arg0) {
     s32 var_s1;
 
     var_s1 = 0;
-    if ((M2C_FIELD(arg0, s32 *, 0x14) >= 0) && (func_000535DC(arg0 + 0xC) != 0)) {
-        if ((func_00052AC4(arg0 + 4) != 0) && (func_000535DC(arg0 + 0x2C) != 0)) {
-            var_s1 = func_00052AC4(arg0 + 0x24) != 0;
+    if ((arg0->unk14 >= 0) && (func_000535DC((u8 *)arg0 + 0xC) != 0)) {
+        if ((func_00052AC4((u8 *)arg0 + 4) != 0) && (func_000535DC((u8 *)arg0 + 0x2C) != 0)) {
+            var_s1 = func_00052AC4((u8 *)arg0 + 0x24) != 0;
         }
     }
     return var_s1;
@@ -5805,12 +5805,12 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_000724B4);
 
-s32 func_000725B4(void *arg0) {
+s32 func_000725B4(struct Unk_func_000725B4_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_FIELD(arg0, u8 *, 0x7C) != 0) {
-        var_v1 = func_000505F8(arg0 + 4) != 0;
+    if (arg0->unk7C != 0) {
+        var_v1 = func_000505F8((u8 *)arg0 + 4) != 0;
     }
     return var_v1;
 }

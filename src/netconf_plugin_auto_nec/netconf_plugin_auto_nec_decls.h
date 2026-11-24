@@ -37,6 +37,11 @@ struct Unk_func_000026FC_2 {
     s8 unk7;
 };
 
+struct Unk_func_00003CFC_1 {
+    u8 pad0[0x10];
+    u32 unk10;
+};
+
 extern s32 D_00008498;
 extern s32 D_000084A0;
 extern s32 D_000084A4;
@@ -52,7 +57,7 @@ s32 func_00000194(void);
 void func_00000B1C(void);
 void func_000026FC(struct Unk_func_000026FC_0 *arg0, struct Unk_func_000026FC_1 *arg1, struct Unk_func_000026FC_2 *arg2);
 s32 func_00003C00(s32, s32, s32);
-void func_00003CFC(s32 arg0, void *arg1);
+void func_00003CFC(s32 arg0, struct Unk_func_00003CFC_1 *arg1);
 s32 func_000048E4(s32, s32, s32);
 s32 func_000049B8(s32, s32, s32);
 s32 func_00004A38(void);

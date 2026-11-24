@@ -66,6 +66,11 @@ struct Unk_func_00006000_0 {
     s32 unk14;
 };
 
+struct Unk_func_00006008_0 {
+    u8 pad0[0x14];
+    s32 unk14;
+};
+
 struct Unk_func_000061B8_0 {
     u8 pad0[0x78];
     s32 unk78;
@@ -157,6 +162,24 @@ struct Unk_func_0001053C_0 {
     s8 unk4;
 };
 
+struct Unk_func_00010DB0_0 {
+    M2C_UNK *unk0;
+    u8 pad4[0xAF];
+    s8 unkB3;
+};
+
+struct Unk_func_00010E00_0 {
+    M2C_UNK *unk0;
+    u8 pad4[0xAF];
+    s8 unkB3;
+};
+
+struct Unk_func_00010E50_0 {
+    M2C_UNK *unk0;
+    u8 pad4[0xAF];
+    s8 unkB3;
+};
+
 struct Unk_func_000125D8_0 {
     u8 pad0[0xB3];
     u8 unkB3;
@@ -243,6 +266,13 @@ struct Unk_func_00018448_0 {
     s32 unk4;
 };
 
+struct Unk_func_000184B8_0 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+};
+
 struct Unk_func_000187D4_0 {
     u8 pad0[0x4];
     struct Unk_func_000187D4_var_s1 *unk4;
@@ -258,6 +288,17 @@ struct Unk_func_000187D4_var_s1 {
 struct Unk_func_00018830_0 {
     u8 pad0[0xC];
     s32 unkC;
+};
+
+struct Unk_func_00018AA0_0 {
+    u8 pad0[0x78];
+    s32 unk78;
+    u8 pad7C[0x8];
+    s32 unk84;
+    u8 pad88[0x18];
+    s32 unkA0;
+    s32 unkA4;
+    s32 unkA8;
 };
 
 struct Unk_func_00018CD0_0 {
@@ -341,6 +382,14 @@ struct Unk_music_common_3B03E04A_0 {
     u8 unkAC;
 };
 
+struct Unk_music_common_55F1B860_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+    u8 unk8;
+    u8 pad9[0x17];
+    s32 unk20;
+};
+
 struct Unk_music_common_703558A2_0 {
     u8 pad0[0x8];
     s32 unk8;
@@ -368,6 +417,11 @@ struct Unk_music_common_D29A7B4B_0 {
     s32 unk4;
     s32 unk8;
     s32 unkC;
+};
+
+struct Unk_music_common_DD1980DD_0 {
+    u8 pad0[0x78];
+    s32 unk78;
 };
 
 extern M2C_UNK D_0001EF20;
@@ -423,7 +477,7 @@ s32 func_00005EE4(s32);
 M2C_UNK func_00005F64(s32);
 s32 func_00005FF0(struct Unk_func_00005FF0_0 *arg0);
 void func_00006000(struct Unk_func_00006000_0 *arg0, s32 arg1);
-void func_00006008(void *arg0);
+void func_00006008(struct Unk_func_00006008_0 *arg0);
 void func_00006040(s32 arg0);
 void func_000060E0(s32 arg0);
 s32 func_00006188(s32 arg0);
@@ -491,9 +545,9 @@ void func_00010530(struct Unk_func_00010530_0 *arg0, s32 arg1, s8 arg2);
 void func_0001053C(struct Unk_func_0001053C_0 *arg0, s32 arg1, s8 arg2);
 void func_00010548(void);
 void func_00010550(void);
-void func_00010DB0(void *arg0);
-void func_00010E00(void *arg0);
-void func_00010E50(void *arg0);
+void func_00010DB0(struct Unk_func_00010DB0_0 *arg0);
+void func_00010E00(struct Unk_func_00010E00_0 *arg0);
+void func_00010E50(struct Unk_func_00010E50_0 *arg0);
 s32 func_000115E8(s32);
 s32 func_00011CE8(s32);
 s32 func_000122D8(s32);
@@ -532,13 +586,13 @@ void func_00018338(struct Unk_func_00018338_0 *arg0);
 s32 func_000183A4(s32 arg0);
 s32 func_000183AC(struct Unk_func_000183AC_0 *arg0);
 s32 func_00018448(struct Unk_func_00018448_0 *arg0);
-s32 func_000184B8(void *arg0);
+s32 func_000184B8(struct Unk_func_000184B8_0 *arg0);
 M2C_UNK func_00018518(s32);
 void *func_000187D4(struct Unk_func_000187D4_0 *arg0, s32 arg1);
 s32 func_00018830(struct Unk_func_00018830_0 *arg0);
 M2C_UNK func_00018904(s32);
 s32 func_00018968(s32);
-void func_00018AA0(void *arg0);
+void func_00018AA0(struct Unk_func_00018AA0_0 *arg0);
 void func_00018CD0(struct Unk_func_00018CD0_0 *arg0, s8 arg1);
 M2C_UNK func_00018CD8(void *, void *);
 s32 func_00018CE8(struct Unk_func_00018CE8_0 *arg0);
@@ -601,7 +655,7 @@ s32 music_common_3B03E04A(struct Unk_music_common_3B03E04A_0 *arg0);
 void music_common_41A6A685(M2C_UNK **arg0);
 s32 music_common_4DA67FC0(s32 arg0);
 s32 music_common_53E5691D(s32 arg0);
-s32 music_common_55F1B860(void *arg0);
+s32 music_common_55F1B860(struct Unk_music_common_55F1B860_0 *arg0);
 void music_common_65CD3924(s32 arg0);
 s32 music_common_703558A2(struct Unk_music_common_703558A2_0 *arg0);
 void music_common_730D5E67(struct Unk_music_common_730D5E67_0 *arg0, struct Unk_music_common_730D5E67_1 *arg1);
@@ -616,7 +670,7 @@ s32 music_common_9418F6B2(s32 arg0);
 void music_common_9677CC87(M2C_UNK **arg0);
 void music_common_B58BD58B(s32 arg0);
 s32 music_common_D29A7B4B(struct Unk_music_common_D29A7B4B_0 *arg0);
-void music_common_DD1980DD(void *arg0);
+void music_common_DD1980DD(struct Unk_music_common_DD1980DD_0 *arg0);
 s32 music_common_E0EB40AC(s32 arg0);
 s32 music_common_E79F4C9B(void);
 s32 music_common_EE5C2594(s32 arg0);

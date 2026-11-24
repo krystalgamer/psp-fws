@@ -227,7 +227,7 @@ void func_00065038(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_00065058);
 
-s32 func_000651A8(void *arg0, s32 arg1) {
+s32 func_000651A8(struct Unk_func_00053CCC_0 *arg0, s32 arg1) {
     return sceHVNetfront_Module_52564790(arg0, arg1) == (s32) &D_00123260;
 }
 
@@ -401,7 +401,7 @@ void func_00068950(s32 arg0, s32 arg1) {
     func_0005EFBC(arg0, arg1, (s32) &D_0012374C);
 }
 
-s32 func_00068970(void *arg0, s32 arg1) {
+s32 func_00068970(struct Unk_func_00053CCC_0 *arg0, s32 arg1) {
     return sceHVNetfront_Module_52564790(arg0, arg1) == (s32) &D_00123308;
 }
 
@@ -691,15 +691,15 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_0006A1F8);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_0006A2FC);
 
-void func_0006A3FC(s32 arg0, void *arg1, s32 arg2, s32 arg3) {
-    if (sceHVNetfront_Module_350ABDEC(arg1 + 0x88, arg1 + 8) == -1) {
+void func_0006A3FC(s32 arg0, struct Unk_func_0006A3FC_1 *arg1, s32 arg2, s32 arg3) {
+    if (sceHVNetfront_Module_350ABDEC((u8 *)arg1 + 0x88, (u8 *)arg1 + 8) == -1) {
         sceHVNetfront_Module_5D4D03A3(arg0);
         return;
     }
-    M2C_FIELD(arg1, s32 *, 0x4C) = 3;
-    M2C_FIELD(arg1, s32 *, 0x50) = arg2;
-    M2C_FIELD(arg1, s32 *, 0x54) = arg3;
-    M2C_FIELD(arg1, s32 *, 0x58) = 0;
+    arg1->unk4C = 3;
+    arg1->unk50 = arg2;
+    arg1->unk54 = arg3;
+    arg1->unk58 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_0006A480);
@@ -1203,7 +1203,7 @@ M2C_UNK *func_0007355C(void) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_00073568);
 
-s32 func_0007368C(void *arg0, s32 arg1) {
+s32 func_0007368C(struct Unk_func_00053CCC_0 *arg0, s32 arg1) {
     return sceHVNetfront_Module_52564790(arg0, arg1) == (s32) &D_00124928;
 }
 
@@ -1398,7 +1398,7 @@ void func_00075890(s32 arg0, s32 arg1) {
     func_0005EFBC(arg0, arg1, (s32) &D_00124B10);
 }
 
-s32 func_000758B0(void *arg0, s32 arg1) {
+s32 func_000758B0(struct Unk_func_00053CCC_0 *arg0, s32 arg1) {
     return sceHVNetfront_Module_52564790(arg0, arg1) == (s32) &D_00124AA8;
 }
 

@@ -81,15 +81,15 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EF6AC", func_000F0C3C);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EF6AC", func_000F0D20);
 
-s32 func_000F0DB8(void *arg0, s32 arg1) {
+s32 func_000F0DB8(struct Unk_func_000F0DB8_0 *arg0, s32 arg1) {
     s32 temp_s0;
 
     temp_s0 = arg1 == 5;
-    scePaf_ED83B18F(arg0 + 0x370, 0xD, temp_s0);
-    scePaf_ED83B18F(arg0 + 0x430, 0xD, temp_s0);
-    scePaf_ED83B18F(arg0 + 0x4F0, 0xD, temp_s0);
-    scePaf_ED83B18F(arg0 + 0x5B0, 0xD, temp_s0);
-    M2C_FIELD(arg0, s32 *, 0x1EC) = arg1;
+    scePaf_ED83B18F((u8 *)arg0 + 0x370, 0xD, temp_s0);
+    scePaf_ED83B18F((u8 *)arg0 + 0x430, 0xD, temp_s0);
+    scePaf_ED83B18F((u8 *)arg0 + 0x4F0, 0xD, temp_s0);
+    scePaf_ED83B18F((u8 *)arg0 + 0x5B0, 0xD, temp_s0);
+    arg0->unk1EC = arg1;
     return 0;
 }
 

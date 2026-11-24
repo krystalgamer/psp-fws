@@ -295,14 +295,14 @@ M2C_UNK *func_0000AEC4(void) {
     return "md2(int)";
 }
 
-void func_0000AED0(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    func_00029D1C((s32) (arg0 + 0x54), 0, 0x40);
-    func_00029D1C((s32) (arg0 + 0x14), 0, 0x40);
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+void func_0000AED0(struct Unk_func_0000AED0_0 *arg0) {
+    arg0->unk0 = 0;
+    func_00029D1C((s32) ((u8 *)arg0 + 0x54), 0, 0x40);
+    func_00029D1C((s32) ((u8 *)arg0 + 0x14), 0, 0x40);
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000AF24);

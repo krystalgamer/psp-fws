@@ -36,6 +36,11 @@ struct Unk_func_000008C4_1 {
     s32 unk4;
 };
 
+struct Unk_func_00001120_0 {
+    u8 pad0[0x24];
+    s32 unk24;
+};
+
 extern M2C_UNK D_00004770;
 extern M2C_UNK D_000047C8;
 extern M2C_UNK D_00004B7C;
@@ -64,7 +69,7 @@ void func_0000088C(void);
 s32 func_000008C4(s32 arg0, struct Unk_func_000008C4_1 *arg1);
 void func_00000944(s32 arg0, s32 arg1, M2C_UNK arg2);
 void func_00000F18(s32 arg0);
-void func_00001120(void *arg0);
+void func_00001120(struct Unk_func_00001120_0 *arg0);
 M2C_UNK func_00001CFC(s32, s32);
 M2C_UNK func_00001D4C(s32, s32, s32);
 void func_00001ECC(s32 arg0, s32 arg1);

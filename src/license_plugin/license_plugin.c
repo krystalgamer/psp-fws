@@ -585,20 +585,20 @@ INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00006
 
 INCLUDE_ASM("tmp/asm/330/license_plugin/nonmatchings/license_plugin", func_00006D28);
 
-void func_000071B4(void *arg0) {
-    func_00007680(arg0 + 0x34, 0);
-    func_00007680(arg0 + 0x38, 0);
-    func_00007680(arg0 + 0x3C, 0);
-    func_00007680(arg0 + 0x40, 0);
-    func_00007680(arg0 + 0x44, 0);
-    func_00007680(arg0 + 0x48, 0);
-    func_00007680(arg0 + 0x4C, 0);
-    func_00007680(arg0 + 0x50, 0);
-    func_00007680(arg0 + 0x54, 0);
-    func_00007680(arg0 + 0x58, 0);
-    func_00007680(arg0 + 0x5C, 0);
-    func_00007680(arg0 + 0x60, 0);
-    M2C_FIELD(arg0, s32 *, 0x30) = -1;
+void func_000071B4(struct Unk_func_000071B4_0 *arg0) {
+    func_00007680((u8 *)arg0 + 0x34, 0);
+    func_00007680((u8 *)arg0 + 0x38, 0);
+    func_00007680((u8 *)arg0 + 0x3C, 0);
+    func_00007680((u8 *)arg0 + 0x40, 0);
+    func_00007680((u8 *)arg0 + 0x44, 0);
+    func_00007680((u8 *)arg0 + 0x48, 0);
+    func_00007680((u8 *)arg0 + 0x4C, 0);
+    func_00007680((u8 *)arg0 + 0x50, 0);
+    func_00007680((u8 *)arg0 + 0x54, 0);
+    func_00007680((u8 *)arg0 + 0x58, 0);
+    func_00007680((u8 *)arg0 + 0x5C, 0);
+    func_00007680((u8 *)arg0 + 0x60, 0);
+    arg0->unk30 = -1;
     vsh_61FE226A(arg0);
 }
 

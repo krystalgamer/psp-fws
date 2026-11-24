@@ -923,12 +923,12 @@ INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000CDFC);
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000D160);
 
-s32 func_0000D2AC(void *arg0) {
+s32 func_0000D2AC(struct Unk_func_0000D2AC_0 *arg0) {
     s32 var_a1;
 
     var_a1 = 0;
-    if (M2C_FIELD(arg0, s32 *, 4) != 1) {
-        func_0000C79C(arg0 + 0x18);
+    if (arg0->unk4 != 1) {
+        func_0000C79C((u8 *)arg0 + 0x18);
         func_0000D160((s32) arg0);
         func_0000D380((s32) arg0);
         var_a1 = 1;

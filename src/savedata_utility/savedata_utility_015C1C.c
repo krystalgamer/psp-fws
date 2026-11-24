@@ -60,11 +60,11 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_015C1C",
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_015C1C", func_000165D8);
 
-void func_00016678(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0x18) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg2;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    func_00017068(arg0 + 0xC);
+void func_00016678(struct Unk_func_00016678_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk18 = arg1;
+    arg0->unk1C = arg2;
+    arg0->unk8 = 0;
+    func_00017068((u8 *)arg0 + 0xC);
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_015C1C", func_000166A4);

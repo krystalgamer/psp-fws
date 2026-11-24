@@ -1001,11 +1001,11 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001570C);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001576C);
 
-s32 func_000157BC(s32 arg0, void *arg1) {
-    M2C_FIELD(arg1, s32 *, 0) = 0;
-    M2C_FIELD(arg1, s8 *, 4) = 0;
-    func_000158A4(arg1 + 0x28);
-    return func_00018200(arg0, arg1 + 0x4C) != 0;
+s32 func_000157BC(s32 arg0, struct Unk_func_000157BC_1 *arg1) {
+    arg1->unk0 = 0;
+    arg1->unk4 = 0;
+    func_000158A4((u8 *)arg1 + 0x28);
+    return func_00018200(arg0, (u8 *)arg1 + 0x4C) != 0;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00015810);

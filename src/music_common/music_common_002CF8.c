@@ -45,16 +45,16 @@ u8 music_common_266E7951(struct Unk_music_common_266E7951_0 *arg0) {
     return arg0->unk8;
 }
 
-s32 music_common_55F1B860(void *arg0) {
+s32 music_common_55F1B860(struct Unk_music_common_55F1B860_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = -1;
-    if (M2C_FIELD(arg0, u8 *, 8) != 0) {
-        temp_v0 = func_00004450(M2C_FIELD(arg0, s32 *, 4), arg0 + 0x20);
+    if (arg0->unk8 != 0) {
+        temp_v0 = func_00004450(arg0->unk4, &arg0->unk20);
         var_v1 = temp_v0;
         if (temp_v0 >= 0) {
-            var_v1 = M2C_FIELD(arg0, s32 *, 0x20);
+            var_v1 = arg0->unk20;
         }
     }
     return var_v1;

@@ -102,11 +102,11 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00000
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00000E28);
 
-s32 func_00000EE0(void *arg0) {
+s32 func_00000EE0(struct Unk_func_00000EE0_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = func_0000097C(arg0 + 4);
-    M2C_FIELD(arg0, s32 *, 8) = temp_v0;
+    temp_v0 = func_0000097C((u8 *)arg0 + 4);
+    arg0->unk8 = temp_v0;
     return (temp_v0 == 0) ? 0 : 2;
 }
 

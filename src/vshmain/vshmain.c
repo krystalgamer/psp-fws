@@ -2813,10 +2813,10 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_0F2F6718);
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_61FE226A);
 
-void vsh_7ADF6A69(void *arg0) {
-    scePaf_27F64616(M2C_FIELD(arg0, s32 *, 4));
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
-    func_00023B28(arg0 + 0x20);
+void vsh_7ADF6A69(struct Unk_vsh_7ADF6A69_0 *arg0) {
+    scePaf_27F64616(arg0->unk4);
+    arg0->unk1C = 0;
+    func_00023B28((u8 *)arg0 + 0x20);
 }
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_0B8DE38E);

@@ -39,11 +39,11 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_026D98", func_00
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_026D98", func_00027F08);
 
-s32 func_00027FD0(void *arg0, M2C_UNK arg1) {
+s32 func_00027FD0(struct Unk_func_00027FD0_0 *arg0, M2C_UNK arg1) {
     s32 temp_v0;
 
-    temp_v0 = func_00027978(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, u8 *, 0x10), arg0 + 0x14, arg1);
-    M2C_FIELD(arg0, s32 *, 8) = temp_v0;
+    temp_v0 = func_00027978(arg0->unk0, arg0->unk10, (u8 *)arg0 + 0x14, arg1);
+    arg0->unk8 = temp_v0;
     return (temp_v0 != 0) ? 0 : -1;
 }
 

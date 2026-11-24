@@ -404,24 +404,24 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008D74);
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00008F08);
 
-s32 func_000090E8(void *arg0, s32 arg1, s8 *arg2) {
+s32 func_000090E8(struct Unk_func_000090E8_0 *arg0, s32 arg1, s8 *arg2) {
     s32 temp_s1;
 
     *arg2 = 0;
-    sceKernelWaitSema(M2C_FIELD(arg0, u32 *, 0xC), 1, NULL);
-    temp_s1 = __builtin_allegrex_max(func_0000BD90((s32) (arg0 + 0xC), arg1, 1, (s32) arg2), -1);
-    sceKernelSignalSema(M2C_FIELD(arg0, u32 *, 0xC), 1);
+    sceKernelWaitSema(arg0->unkC, 1, NULL);
+    temp_s1 = __builtin_allegrex_max(func_0000BD90((s32) (&arg0->unkC), arg1, 1, (s32) arg2), -1);
+    sceKernelSignalSema(arg0->unkC, 1);
     return temp_s1;
 }
 
-s32 func_00009160(void *arg0, s32 arg1, u8 *arg2) {
+s32 func_00009160(struct Unk_func_00009160_0 *arg0, s32 arg1, u8 *arg2) {
     s32 temp_s1;
     u8 temp_s2;
 
     temp_s2 = *arg2;
-    sceKernelWaitSema(M2C_FIELD(arg0, u32 *, 0xC), 1, NULL);
-    temp_s1 = __builtin_allegrex_max(func_0000BE8C((s32) (arg0 + 0xC), arg1, (s32) temp_s2, 1), -1);
-    sceKernelSignalSema(M2C_FIELD(arg0, u32 *, 0xC), 1);
+    sceKernelWaitSema(arg0->unkC, 1, NULL);
+    temp_s1 = __builtin_allegrex_max(func_0000BE8C((s32) (&arg0->unkC), arg1, (s32) temp_s2, 1), -1);
+    sceKernelSignalSema(arg0->unkC, 1);
     return temp_s1;
 }
 
@@ -472,19 +472,19 @@ void func_0000AC3C(void) {
     sceSysreg_driver_EC4BF81F(1);
 }
 
-void func_0000AC90(void *arg0) {
+void func_0000AC90(struct Unk_func_0000AC90_0 *arg0) {
     s32 *temp_a3;
     s32 *temp_t6;
     struct Unk_func_0000AC90_temp_t9 *temp_t9;
 
-    temp_t9 = arg0 + 0xC;
+    temp_t9 = (u8 *)arg0 + 0xC;
     temp_t6 = temp_t9->unk18;
     temp_a3 = temp_t9->unk1C;
     *temp_t6 |= 0x2020;
     *temp_a3 |= 0x10000;
-    M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) | 4);
+    arg0->unk8 = (s32) (arg0->unk8 | 4);
     *temp_a3 |= 0x20;
-    M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) | 8);
+    arg0->unk8 = (s32) (arg0->unk8 | 8);
     *temp_a3 |= 0x400;
 }
 
@@ -496,26 +496,26 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000ADB0);
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000AE60);
 
-s32 func_0000AF1C(void *arg0, s32 arg1, u16 *arg2) {
+s32 func_0000AF1C(struct Unk_func_0000AF1C_0 *arg0, s32 arg1, u16 *arg2) {
     s32 temp_s2;
 
     *arg2 = 0;
-    sceKernelWaitSema(M2C_FIELD(arg0, u32 *, 0xC), 1, NULL);
-    temp_s2 = func_0000BD90((s32) (arg0 + 0xC), arg1, 2, (s32) arg2);
+    sceKernelWaitSema(arg0->unkC, 1, NULL);
+    temp_s2 = func_0000BD90((s32) (&arg0->unkC), arg1, 2, (s32) arg2);
     *arg2 = __builtin_allegrex_wsbh(*arg2);
-    sceKernelSignalSema(M2C_FIELD(arg0, u32 *, 0xC), 1);
+    sceKernelSignalSema(arg0->unkC, 1);
     return temp_s2;
 }
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000AF9C);
 
-s32 func_0000B018(void *arg0, s32 arg1, s32 *arg2) {
+s32 func_0000B018(struct Unk_func_0000B018_0 *arg0, s32 arg1, s32 *arg2) {
     s32 temp_s2;
 
     *arg2 = 0;
-    sceKernelWaitSema(M2C_FIELD(arg0, u32 *, 0xC), 1, NULL);
-    temp_s2 = func_0000BD90((s32) (arg0 + 0xC), arg1, 4, (s32) arg2);
-    sceKernelSignalSema(M2C_FIELD(arg0, u32 *, 0xC), 1);
+    sceKernelWaitSema(arg0->unkC, 1, NULL);
+    temp_s2 = func_0000BD90((s32) (&arg0->unkC), arg1, 4, (s32) arg2);
+    sceKernelSignalSema(arg0->unkC, 1);
     return temp_s2;
 }
 

@@ -292,7 +292,7 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00004950);
 
-s32 func_00004BDC(void *arg0) {
+s32 func_00004BDC(struct Unk_func_00004BDC_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0;
@@ -300,8 +300,8 @@ s32 func_00004BDC(void *arg0) {
         var_v1 = 0x80103002;
         if (arg0 != NULL) {
             var_v1 = 0;
-            if (M2C_FIELD(arg0, s8 *, 0x64) != 0) {
-                var_v1 = func_00004824(arg0 + 0x64);
+            if (arg0->unk64 != 0) {
+                var_v1 = func_00004824(&arg0->unk64);
             }
         }
     }

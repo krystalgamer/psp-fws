@@ -36,25 +36,25 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_059D50", func_0005ABC0);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_059D50", func_0005AE6C);
 
-void func_0005AF10(void *arg0) {
+void func_0005AF10(struct Unk_func_0005AF10_0 *arg0) {
     s32 temp_s1;
 
-    temp_s1 = M2C_FIELD(arg0, s32 *, 8);
+    temp_s1 = arg0->unk8;
     if (temp_s1 != 0) {
         func_00090730(*func_0009F1C0(), temp_s1, 0);
     }
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    sceHVNetfront_Module_461C7724(arg0 + 0x10);
+    arg0->unk8 = 0;
+    sceHVNetfront_Module_461C7724((u8 *)arg0 + 0x10);
 }
 
-void func_0005AF64(void *arg0) {
+void func_0005AF64(struct Unk_func_0005AF64_0 *arg0) {
     s32 temp_s1;
 
-    temp_s1 = M2C_FIELD(arg0, s32 *, 8);
+    temp_s1 = arg0->unk8;
     if (temp_s1 != 0) {
         func_00090730(*func_0009F1C0(), temp_s1, 0);
     }
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    sceHVNetfront_Module_461C7724(arg0 + 0x10);
+    arg0->unk8 = 0;
+    sceHVNetfront_Module_461C7724((u8 *)arg0 + 0x10);
 }
 

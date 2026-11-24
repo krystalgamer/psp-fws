@@ -68,19 +68,19 @@ s32 func_00020B30(struct Unk_func_00020B30_0 *arg0, s32 arg1) {
     return 0;
 }
 
-void func_00020B3C(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B04F8;
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x360));
-    func_00020C14((s32) (arg0 + 0x340));
-    func_00020C14((s32) (arg0 + 0x330));
+void func_00020B3C(struct Unk_func_00020B3C_0 *arg0) {
+    arg0->unk0 = &D_000B04F8;
+    sceKernelDeleteSema(arg0->unk360);
+    func_00020C14((s32) ((u8 *)arg0 + 0x340));
+    func_00020C14((s32) ((u8 *)arg0 + 0x330));
     scePaf_9E0CA28F(arg0);
 }
 
-void func_00020B88(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B04F8;
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x360));
-    func_00020C14((s32) (arg0 + 0x340));
-    func_00020C14((s32) (arg0 + 0x330));
+void func_00020B88(struct Unk_func_00020B88_0 *arg0) {
+    arg0->unk0 = &D_000B04F8;
+    sceKernelDeleteSema(arg0->unk360);
+    func_00020C14((s32) ((u8 *)arg0 + 0x340));
+    func_00020C14((s32) ((u8 *)arg0 + 0x330));
     scePaf_9E0CA28F(arg0);
     scePaf_6261C0A5((s32) arg0);
 }

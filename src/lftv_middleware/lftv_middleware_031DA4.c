@@ -68,13 +68,13 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_031DA4", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_031DA4", func_00032EA8);
 
-s32 func_00032F30(void *arg0, s32 arg1) {
+s32 func_00032F30(struct Unk_func_00032F30_0 *arg0, s32 arg1) {
     s32 var_s0;
 
     var_s0 = -1;
-    if (sceKernelWaitSema(M2C_FIELD(arg0, u32 *, 0x2C), 1, NULL) == 0) {
-        var_s0 = func_000305F0((s32) (arg0 + 0x10), arg1);
-        sceKernelSignalSema(M2C_FIELD(arg0, u32 *, 0x2C), 1);
+    if (sceKernelWaitSema(arg0->unk2C, 1, NULL) == 0) {
+        var_s0 = func_000305F0((s32) ((u8 *)arg0 + 0x10), arg1);
+        sceKernelSignalSema(arg0->unk2C, 1);
     }
     return var_s0;
 }
@@ -119,7 +119,7 @@ s32 func_0003310C(void) {
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_031DA4", func_00033114);
 
-s32 func_00033170(void *arg0) {
+s32 func_00033170(struct Unk_func_00032F30_0 *arg0) {
     s32 var_v0;
 
     var_v0 = -1;

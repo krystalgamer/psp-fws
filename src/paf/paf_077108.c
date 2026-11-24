@@ -1,14 +1,14 @@
 #include "common.h"
 #include "paf_decls.h"
 
-u32 func_00077108(void *arg0) {
+u32 func_00077108(struct Unk_func_00077108_0 *arg0) {
     u16 temp_a0;
     u32 temp_v1;
     u32 var_a1;
     struct Unk_func_00077108_temp_s0 *temp_s0;
 
-    temp_s0 = arg0 + 0x20;
-    var_a1 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x15C), u32 (**)(), 0x6CC)();
+    temp_s0 = (u8 *)arg0 + 0x20;
+    var_a1 = M2C_FIELD(arg0->unk15C, u32 (**)(), 0x6CC)();
     if (var_a1 < (u32) temp_s0->unk14) {
         temp_a0 = temp_s0->unk9A;
         temp_v1 = temp_a0 * 8;

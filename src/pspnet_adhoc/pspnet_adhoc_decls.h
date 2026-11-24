@@ -69,6 +69,16 @@ struct Unk_func_000056E4_temp_a2 {
     s32 unkC;
 };
 
+struct Unk_func_00005708_0 {
+    u8 pad0[0x10];
+    void *unk10;
+    void **unk14;
+    u8 pad18[0xC];
+    s16 unk24;
+    u8 pad26[0xB2];
+    s32 unkD8;
+};
+
 struct Unk_func_00005708_temp_a1 {
     u8 pad0[0xC];
     void **unkC;
@@ -100,7 +110,7 @@ s32 func_00005024(s32, s32);
 s32 func_00005594(struct Unk_func_00005594_0 *arg0, s32 arg1, s32 arg2);
 void func_000055B0(struct Unk_func_000055B0_0 *arg0, s32 arg1, s32 arg2);
 s32 func_000056E4(struct Unk_func_000056E4_0 *arg0, s32 arg1);
-void func_00005708(void *arg0);
+void func_00005708(struct Unk_func_00005708_0 *arg0);
 s32 func_00006F68(void);
 s32 func_00007298(s32, s32, s32);
 void sceNetAdhoc_lib_62B875A8(void);

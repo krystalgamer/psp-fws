@@ -23,24 +23,24 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037798);
 
-void func_000377E8(void *arg0) {
+void func_000377E8(struct Unk_func_000377E8_0 *arg0) {
     func_00039DEC(arg0);
-    M2C_FIELD(arg0, s32 **, 0) = &D_00056460;
-    memset(arg0 + 0x40, 0, 0x6C);
-    M2C_FIELD(arg0, s32 *, 0xAC) = 0;
-    M2C_FIELD(arg0, s32 *, 0xB0) = 0;
-    M2C_FIELD(arg0, s32 *, 0xB4) = 0;
-    M2C_FIELD(arg0, s32 *, 0xB8) = 0;
+    arg0->unk0 = &D_00056460;
+    memset((u8 *)arg0 + 0x40, 0, 0x6C);
+    arg0->unkAC = 0;
+    arg0->unkB0 = 0;
+    arg0->unkB4 = 0;
+    arg0->unkB8 = 0;
 }
 
-void func_00037838(void *arg0) {
+void func_00037838(struct Unk_func_00037838_0 *arg0) {
     func_00039DEC(arg0);
-    M2C_FIELD(arg0, s32 **, 0) = &D_00056460;
-    memset(arg0 + 0x40, 0, 0x6C);
-    M2C_FIELD(arg0, s32 *, 0xAC) = 0;
-    M2C_FIELD(arg0, s32 *, 0xB0) = 0;
-    M2C_FIELD(arg0, s32 *, 0xB4) = 0;
-    M2C_FIELD(arg0, s32 *, 0xB8) = 0;
+    arg0->unk0 = &D_00056460;
+    memset((u8 *)arg0 + 0x40, 0, 0x6C);
+    arg0->unkAC = 0;
+    arg0->unkB0 = 0;
+    arg0->unkB4 = 0;
+    arg0->unkB8 = 0;
 }
 
 void func_00037888(s32 **arg0) {

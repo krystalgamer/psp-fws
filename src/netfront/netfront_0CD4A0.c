@@ -434,13 +434,13 @@ void func_000D5418(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000D5458);
 
-void func_000D5524(void *arg0, s32 arg1) {
+void func_000D5524(struct Unk_func_000D5524_0 *arg0, s32 arg1) {
     s32 temp_a0;
     s32 temp_a1;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0x40);
+    temp_a0 = arg0->unk40;
     temp_a1 = 0x10 - temp_a0;
-    sceHVNetfront_Module_D611E938((s32) (arg0 + temp_a0 + 0x10), temp_a1, temp_a1);
+    sceHVNetfront_Module_D611E938((s32) ((u8 *)arg0 + temp_a0 + 0x10), temp_a1, temp_a1);
     func_000D5288(arg0);
     func_000D536C(arg0);
     if (arg1 != 0) {

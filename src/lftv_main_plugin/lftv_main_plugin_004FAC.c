@@ -276,18 +276,18 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_000074F0);
 
-void func_00007540(void *arg0) {
+void func_00007540(struct Unk_func_00007540_0 *arg0) {
     s8 *var_v1;
     u32 var_a1;
 
     var_a1 = 0;
-    var_v1 = arg0 + 0x5E8;
+    var_v1 = (u8 *)arg0 + 0x5E8;
     do {
         var_a1 += 1;
         *var_v1 = 0;
         var_v1 += 1;
     } while (var_a1 < 3U);
-    M2C_FIELD(arg0, s8 *, 0x5EB) = 0;
+    arg0->unk5EB = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00007564);

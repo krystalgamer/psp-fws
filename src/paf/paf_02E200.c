@@ -2,16 +2,16 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_0002E200(void *arg0) {
+void func_0002E200(struct Unk_func_0002E200_0 *arg0) {
     s32 temp_v0;
 
-    func_00013BF8(arg0 + 8);
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x14);
+    func_00013BF8((u8 *)arg0 + 8);
+    temp_v0 = arg0->unk14;
     if (temp_v0 == 0) {
-        M2C_FIELD(arg0, s32 *, 0x14) = 0;
+        arg0->unk14 = 0;
     } else {
         scePaf_48B5C1C0(temp_v0);
-        M2C_FIELD(arg0, s32 *, 0x14) = 0;
+        arg0->unk14 = 0;
     }
 }
 

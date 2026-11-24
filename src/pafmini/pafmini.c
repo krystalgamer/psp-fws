@@ -1259,8 +1259,8 @@ void func_0000CB28(struct Unk_func_0000CB28_0 *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0000CB68);
 
-void func_0000CBA8(void *arg0) {
-    scePaf_FE4D4112(M2C_FIELD(arg0, s32 *, 8), arg0 + 0xC);
+void func_0000CBA8(struct Unk_func_0000CBA8_0 *arg0) {
+    scePaf_FE4D4112(arg0->unk8, (u8 *)arg0 + 0xC);
     func_0000CDBC(arg0);
 }
 

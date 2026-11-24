@@ -319,10 +319,10 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00003450);
 
-void func_00003470(void *arg0) {
-    scePaf_27F64616(M2C_FIELD(arg0, s32 *, 4));
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
-    func_00003708(arg0 + 0x20);
+void func_00003470(struct Unk_func_00003470_0 *arg0) {
+    scePaf_27F64616(arg0->unk4);
+    arg0->unk1C = 0;
+    func_00003708((u8 *)arg0 + 0x20);
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_000034A8);

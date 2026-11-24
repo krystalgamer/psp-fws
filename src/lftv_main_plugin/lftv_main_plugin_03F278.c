@@ -114,8 +114,8 @@ void func_00040F04(void) {
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278", func_00040F0C);
 
-s32 func_0004109C(void *arg0) {
-    return (func_000403E0((s32) arg0, arg0 + 0x1CC, M2C_FIELD(arg0, s32 *, 0x1F8), M2C_FIELD(arg0, s32 *, 0x280), arg0 + 0x200) >= 0) ? 0 : -1;
+s32 func_0004109C(struct Unk_func_0004109C_0 *arg0) {
+    return (func_000403E0((s32) arg0, (u8 *)arg0 + 0x1CC, arg0->unk1F8, arg0->unk280, (u8 *)arg0 + 0x200) >= 0) ? 0 : -1;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278", func_000410D0);
@@ -152,8 +152,8 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278", func_0004228C);
 
-s32 func_000422E0(void *arg0) {
-    sceVshLftvMw_89DC95D4(arg0 + 0xC, M2C_FIELD(arg0, s32 *, 8), arg0 + 0x40C);
+s32 func_000422E0(struct Unk_func_000422E0_0 *arg0) {
+    sceVshLftvMw_89DC95D4((u8 *)arg0 + 0xC, arg0->unk8, (u8 *)arg0 + 0x40C);
     return 0;
 }
 
@@ -803,20 +803,20 @@ INCLUDE_RODATA("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F27
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278", func_00048B58);
 
-void func_00048C7C(void *arg0) {
-    M2C_FIELD(arg0, s8 *, 0x18) = 0;
-    M2C_FIELD(arg0, s32 *, 0x3C) = -1;
-    M2C_FIELD(arg0, s32 *, 0xE0) = -1;
-    M2C_FIELD(arg0, s32 *, 0xE4) = 0;
+void func_00048C7C(struct Unk_func_00048C7C_0 *arg0) {
+    arg0->unk18 = 0;
+    arg0->unk3C = -1;
+    arg0->unkE0 = -1;
+    arg0->unkE4 = 0;
     scePaf_6829D7AF((s32) arg0, 0, 0x18);
-    scePaf_6829D7AF((s32) (arg0 + 0x19), 0, 0x21);
-    scePaf_6829D7AF((s32) (arg0 + 0x40), 0, 0x21);
-    scePaf_6829D7AF((s32) (arg0 + 0x61), 0, 0xD);
-    scePaf_6829D7AF((s32) (arg0 + 0x6E), 0, 0x10);
-    scePaf_6829D7AF((s32) (arg0 + 0x7E), 0, 0x21);
-    scePaf_6829D7AF((s32) (arg0 + 0x9F), 0, 0x40);
-    scePaf_6829D7AF((s32) (arg0 + 0xE8), 0, 0x80);
-    scePaf_6829D7AF((s32) (arg0 + 0x168), 0, 7);
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x19), 0, 0x21);
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x40), 0, 0x21);
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x61), 0, 0xD);
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x6E), 0, 0x10);
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x7E), 0, 0x21);
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x9F), 0, 0x40);
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0xE8), 0, 0x80);
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x168), 0, 7);
 }
 
 void func_00048D40(void) {
@@ -932,28 +932,28 @@ void func_00049A5C(void) {
     scePaf_545FE2DA();
 }
 
-void func_00049A78(void *arg0) {
+void func_00049A78(struct Unk_func_00049A78_0 *arg0) {
     M2C_FIELD(arg0, void (**)(), 0x50) = func_00049A40;
     M2C_FIELD(arg0, void (**)(), 0x54) = func_00049A5C;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
-    M2C_FIELD(arg0, s32 *, 0x40) = 0;
-    M2C_FIELD(arg0, s32 *, 0x44) = 0;
-    M2C_FIELD(arg0, s32 *, 0x48) = 0;
-    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
-    scePaf_6829D7AF((s32) (arg0 + 4), 0, 0x38);
+    arg0->unk0 = 0;
+    arg0->unk3C = 0;
+    arg0->unk40 = 0;
+    arg0->unk44 = 0;
+    arg0->unk48 = 0;
+    arg0->unk4C = 0;
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 4), 0, 0x38);
 }
 
-void func_00049AD0(void *arg0) {
+void func_00049AD0(struct Unk_func_00049AD0_0 *arg0) {
     M2C_FIELD(arg0, void (**)(), 0x50) = func_00049A40;
     M2C_FIELD(arg0, void (**)(), 0x54) = func_00049A5C;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
-    M2C_FIELD(arg0, s32 *, 0x40) = 0;
-    M2C_FIELD(arg0, s32 *, 0x44) = 0;
-    M2C_FIELD(arg0, s32 *, 0x48) = 0;
-    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
-    scePaf_6829D7AF((s32) (arg0 + 4), 0, 0x38);
+    arg0->unk0 = 0;
+    arg0->unk3C = 0;
+    arg0->unk40 = 0;
+    arg0->unk44 = 0;
+    arg0->unk48 = 0;
+    arg0->unk4C = 0;
+    scePaf_6829D7AF((s32) ((u8 *)arg0 + 4), 0, 0x38);
 }
 
 void func_00049B28(void) {
@@ -1737,22 +1737,22 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278", func_0004F5DC);
 
-void func_0004F650(void *arg0) {
+void func_0004F650(struct Unk_func_0004F650_0 *arg0) {
     void **temp_v0;
 
     temp_v0 = scePaf_B7E6052B(0xC);
-    func_000515E0(temp_v0, M2C_FIELD(arg0, s32 *, 0x10), M2C_FIELD(arg0, u16 *, 8));
-    scePaf_F95EA3F1((s32) (arg0 + 0xC), M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0), 4);
+    func_000515E0(temp_v0, arg0->unk10, arg0->unk8);
+    scePaf_F95EA3F1((s32) ((u8 *)arg0 + 0xC), M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0), 4);
     M2C_FIELD(*temp_v0, M2C_UNK (**)(void **), 4)(temp_v0);
 }
 
-s32 func_0004F6C8(void *arg0) {
+s32 func_0004F6C8(struct Unk_func_0004F6C8_0 *arg0) {
     s32 temp_s0;
     void **temp_v0;
 
     temp_v0 = scePaf_B7E6052B(0xC);
-    func_000515E0(temp_v0, M2C_FIELD(arg0, s32 *, 0x10), M2C_FIELD(arg0, u16 *, 8));
-    temp_s0 = scePaf_3FBD9639(arg0 + 0xC, M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0), 4) == 0;
+    func_000515E0(temp_v0, arg0->unk10, arg0->unk8);
+    temp_s0 = scePaf_3FBD9639((u8 *)arg0 + 0xC, M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0), 4) == 0;
     M2C_FIELD(*temp_v0, M2C_UNK (**)(void **), 4)(temp_v0);
     return temp_s0;
 }
@@ -2237,22 +2237,22 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278", func_000519A4);
 
-void func_00051ADC(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0005DAA0;
-    func_00051824(arg0 + 4, arg2);
-    func_00050CDC(arg0 + 0x14, arg1, arg2, 0x10, 0);
-    M2C_FIELD(arg0, M2C_UNK **, 0x14) = &D_0005DAD0;
-    func_00050BD4(arg0 + 0x2C, arg2, 0x10, 0);
-    M2C_FIELD(arg0, M2C_UNK **, 0x2C) = &D_0005DAD0;
+void func_00051ADC(struct Unk_func_00051ADC_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk0 = &D_0005DAA0;
+    func_00051824((u8 *)arg0 + 4, arg2);
+    func_00050CDC(&arg0->unk14, arg1, arg2, 0x10, 0);
+    arg0->unk14 = &D_0005DAD0;
+    func_00050BD4(&arg0->unk2C, arg2, 0x10, 0);
+    arg0->unk2C = &D_0005DAD0;
 }
 
-void func_00051B68(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0005DAA0;
-    func_00051824(arg0 + 4, arg2);
-    func_00050CDC(arg0 + 0x14, arg1, arg2, 0x10, 0);
-    M2C_FIELD(arg0, M2C_UNK **, 0x14) = &D_0005DAD0;
-    func_00050BD4(arg0 + 0x2C, arg2, 0x10, 0);
-    M2C_FIELD(arg0, M2C_UNK **, 0x2C) = &D_0005DAD0;
+void func_00051B68(struct Unk_func_00051B68_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk0 = &D_0005DAA0;
+    func_00051824((u8 *)arg0 + 4, arg2);
+    func_00050CDC(&arg0->unk14, arg1, arg2, 0x10, 0);
+    arg0->unk14 = &D_0005DAD0;
+    func_00050BD4(&arg0->unk2C, arg2, 0x10, 0);
+    arg0->unk2C = &D_0005DAD0;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278", func_00051BF4);

@@ -24,6 +24,12 @@ struct Unk_func_00000410_0 {
     u32 unk4;
 };
 
+struct Unk_func_000049D0_0 {
+    u8 pad0[0xE];
+    u8 unkE;
+    u8 unkF;
+};
+
 struct Unk_func_00004BEC_0 {
     u8 pad0[0x1];
     u8 unk1;
@@ -48,7 +54,7 @@ s32 func_000005A0(s32 arg0, s32 arg1);
 s32 func_00001084(void);
 void func_00002F54(s32 arg0);
 s32 func_00004834(s32, s32, s32);
-s32 func_000049D0(void *arg0, s32 *arg1, s32 *arg2, s32 *arg3);
+s32 func_000049D0(struct Unk_func_000049D0_0 *arg0, s32 *arg1, s32 *arg2, s32 *arg3);
 s32 func_00004BEC(struct Unk_func_00004BEC_0 *arg0);
 s32 func_000055A8(s32, s32);
 s32 func_00005850(s32 arg0);

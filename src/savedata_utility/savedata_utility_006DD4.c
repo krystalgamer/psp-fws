@@ -460,7 +460,7 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_006DD4",
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_006DD4", func_0000D954);
 
-s32 func_0000DBE0(void *arg0) {
+s32 func_0000DBE0(struct Unk_func_0000DBE0_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0;
@@ -468,8 +468,8 @@ s32 func_0000DBE0(void *arg0) {
         var_v1 = 0x80103002;
         if (arg0 != NULL) {
             var_v1 = 0;
-            if (M2C_FIELD(arg0, s8 *, 0x64) != 0) {
-                var_v1 = func_0000D828(arg0 + 0x64);
+            if (arg0->unk64 != 0) {
+                var_v1 = func_0000D828(&arg0->unk64);
             }
         }
     }

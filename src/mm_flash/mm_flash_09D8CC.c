@@ -99,10 +99,10 @@ s32 func_0009DAD8(struct Unk_func_0009DAD8_0 *arg0) {
     return arg0->unk1000;
 }
 
-void func_0009DAE0(void *arg0) {
-    func_0003E4E4(arg0 + 0x5C0);
-    func_0005A5D4(arg0 + 8);
-    func_0004CCFC(M2C_FIELD(M2C_FIELD(arg0, void **, 0xFFC), s32 *, 8));
+void func_0009DAE0(struct Unk_func_0009DAE0_0 *arg0) {
+    func_0003E4E4((u8 *)arg0 + 0x5C0);
+    func_0005A5D4((u8 *)arg0 + 8);
+    func_0004CCFC(M2C_FIELD(arg0->unkFFC, s32 *, 8));
 }
 
 void func_0009DB1C(void) {

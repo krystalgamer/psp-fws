@@ -71,6 +71,11 @@ struct Unk_func_0000C828_0 {
     u16 unk4;
 };
 
+struct Unk_func_0000D2AC_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
 struct Unk_func_0000D814_0 {
     u8 pad0[0xC];
     s32 unkC;
@@ -159,7 +164,7 @@ s32 func_0000C800(struct Unk_func_0000C800_0 *arg0);
 u16 func_0000C828(struct Unk_func_0000C828_0 *arg0);
 s32 func_0000C960(s32 arg0);
 s32 func_0000D160(s32);
-s32 func_0000D2AC(void *arg0);
+s32 func_0000D2AC(struct Unk_func_0000D2AC_0 *arg0);
 s32 func_0000D380(s32);
 s32 func_0000D814(struct Unk_func_0000D814_0 *arg0);
 s32 func_0000D81C(struct Unk_func_0000D81C_0 *arg0);

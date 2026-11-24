@@ -1,17 +1,17 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-void func_0005AFB8(void *arg0, s32 arg1, M2C_UNK arg2, s32 arg3) {
+void func_0005AFB8(struct Unk_func_0005AFB8_0 *arg0, s32 arg1, M2C_UNK arg2, s32 arg3) {
     s32 temp_s1;
     s32 temp_v1;
     struct Unk_func_0005AFB8_temp_a0 *temp_a0;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0);
-    M2C_FIELD(arg0, s8 *, 0xC) = 0;
-    temp_s1 = __builtin_allegrex_min(arg2, M2C_FIELD(arg0, s32 *, 4) - temp_v1);
-    sceHVNetfront_Module_1A02495A(M2C_FIELD(arg0, s32 *, 8) + temp_v1, arg1, temp_s1, arg3);
-    temp_a0 = arg0 + 0x10;
-    M2C_FIELD(arg0, s32 *, 0) = (s32) (M2C_FIELD(arg0, s32 *, 0) + temp_s1);
+    temp_v1 = arg0->unk0;
+    arg0->unkC = 0;
+    temp_s1 = __builtin_allegrex_min(arg2, arg0->unk4 - temp_v1);
+    sceHVNetfront_Module_1A02495A(arg0->unk8 + temp_v1, arg1, temp_s1, arg3);
+    temp_a0 = (u8 *)arg0 + 0x10;
+    arg0->unk0 = (s32) (arg0->unk0 + temp_s1);
     temp_a0->unk4 = (s32) (temp_a0->unk4 + temp_s1);
 }
 

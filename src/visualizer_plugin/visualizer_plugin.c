@@ -296,17 +296,17 @@ INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func
 
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_0000125C);
 
-void func_000012BC(void *arg0, s32 arg1) {
+void func_000012BC(struct Unk_func_000012BC_0 *arg0, s32 arg1) {
     s32 temp_s0;
 
-    temp_s0 = arg0 + 0x4C;
+    temp_s0 = (u8 *)arg0 + 0x4C;
     if (func_00009238(temp_s0) == 0) {
-        M2C_FIELD(arg0, s32 *, 0x28) = arg1;
-        if (M2C_FIELD(arg0, s32 *, 0x1C) != 1) {
+        arg0->unk28 = arg1;
+        if (arg0->unk1C != 1) {
             if (arg1 == 1) {
-                M2C_FIELD(arg0, s32 *, 0x20) = 0;
+                arg0->unk20 = 0;
             }
-            M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+            arg0->unk1C = 0;
         }
         func_00009274(temp_s0);
     }

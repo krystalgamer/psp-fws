@@ -282,6 +282,13 @@ struct Unk_vsh_6286E89D_0 {
     s32 unk8;
 };
 
+struct Unk_vsh_7ADF6A69_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+    u8 pad8[0x14];
+    s32 unk1C;
+};
+
 struct Unk_vsh_FA1DE461_0 {
     u8 pad0[0x1C];
     s32 unk1C;
@@ -601,7 +608,7 @@ M2C_UNK vsh_595F8E64();
 void vsh_5F6E172F(void);
 void vsh_6286E89D(struct Unk_vsh_6286E89D_0 *arg0);
 void vsh_78A67F41(void);
-void vsh_7ADF6A69(void *arg0);
+void vsh_7ADF6A69(struct Unk_vsh_7ADF6A69_0 *arg0);
 s32 vsh_7B9AA4D4(void);
 void vsh_8432F0B2(void);
 void vsh_8727574A(s32 arg0, s32 arg1);

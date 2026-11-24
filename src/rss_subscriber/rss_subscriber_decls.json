@@ -4,8 +4,8 @@
   "func_000002B0": "M2C_UNK func_000002B0(M2C_UNK, M2C_UNK);",
   "func_0000032C": "void func_0000032C(void);",
   "func_0000034C": "void func_0000034C(void);",
-  "func_0000036C": "void func_0000036C(void *arg0);",
-  "func_0000044C": "void func_0000044C(void *arg0);",
+  "func_0000036C": "void func_0000036C(struct Unk_func_0000036C_0 *arg0);",
+  "func_0000044C": "void func_0000044C(struct Unk_func_0000044C_0 *arg0);",
   "func_00000818": "s32 func_00000818(s32);",
   "func_0000273C": "M2C_UNK func_0000273C(M2C_UNK, M2C_UNK);",
   "func_00002784": "void func_00002784(void);",
@@ -34,6 +34,8 @@
   "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);"
  },
  "types": {
+  "Unk_func_0000036C_0": "struct Unk_func_0000036C_0 {\n    M2C_UNK *unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n    s32 unk18;\n    u8 pad1C[0x4];\n    s32 unk20;\n    s32 unk24;\n    s32 unk28;\n    u8 pad2C[0x100];\n    s32 unk12C;\n    u8 pad130[0x304];\n    s32 unk434;\n    u8 pad438[0x400];\n    s32 unk838;\n    u8 pad83C[0x304];\n    s32 unkB40;\n    u8 padB44[0x100];\n    s32 unkC44;\n    s32 unkC48;\n};",
+  "Unk_func_0000044C_0": "struct Unk_func_0000044C_0 {\n    M2C_UNK *unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n    s32 unk18;\n    u8 pad1C[0x4];\n    s32 unk20;\n    s32 unk24;\n    s32 unk28;\n    u8 pad2C[0x100];\n    s32 unk12C;\n    u8 pad130[0x304];\n    s32 unk434;\n    u8 pad438[0x400];\n    s32 unk838;\n    u8 pad83C[0x304];\n    s32 unkB40;\n    u8 padB44[0x100];\n    s32 unkC44;\n    s32 unkC48;\n};",
   "Unk_func_00002948_var_a0": "struct Unk_func_00002948_var_a0 {\n    u8 pad0[0x4];\n    struct Unk_func_00002948_var_v0 *unk4;\n};",
   "Unk_func_00002948_var_v0": "struct Unk_func_00002948_var_v0 {\n    u8 pad0[0x4];\n    void *unk4;\n};"
  },
