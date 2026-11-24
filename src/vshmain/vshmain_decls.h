@@ -4,6 +4,7 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_00028D50;
 extern M2C_UNK D_0002A540;
 extern M2C_UNK D_0002ABF0;
 extern M2C_UNK D_0002ACEC;
@@ -30,6 +31,7 @@ extern s32 D_00030388;
 extern s32 D_0003038C;
 extern s32 D_00030390;
 extern s32 D_00030394;
+extern M2C_UNK D_00030398;
 extern M2C_UNK D_000303BC;
 extern s32 D_00030444;
 extern s32 D_00030448;
@@ -310,5 +312,6 @@ void vsh_78A67F41(void);
 void vsh_7ADF6A69(void *arg0);
 s32 vsh_7B9AA4D4(void);
 void vsh_8432F0B2(void);
+void vsh_8F76CA2A(void);
 
 #endif

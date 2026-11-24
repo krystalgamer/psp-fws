@@ -239,9 +239,11 @@
   "vsh_78A67F41": "void vsh_78A67F41(void);",
   "vsh_7ADF6A69": "void vsh_7ADF6A69(void *arg0);",
   "vsh_7B9AA4D4": "s32 vsh_7B9AA4D4(void);",
-  "vsh_8432F0B2": "void vsh_8432F0B2(void);"
+  "vsh_8432F0B2": "void vsh_8432F0B2(void);",
+  "vsh_8F76CA2A": "void vsh_8F76CA2A(void);"
  },
  "vars": {
+  "D_00028D50": "extern M2C_UNK D_00028D50;",
   "D_0002A540": "extern M2C_UNK D_0002A540;",
   "D_0002ABF0": "extern M2C_UNK D_0002ABF0;",
   "D_0002ACEC": "extern M2C_UNK D_0002ACEC;",
@@ -268,6 +270,7 @@
   "D_0003038C": "extern s32 D_0003038C;",
   "D_00030390": "extern s32 D_00030390;",
   "D_00030394": "extern s32 D_00030394;",
+  "D_00030398": "extern M2C_UNK D_00030398;",
   "D_000303BC": "extern M2C_UNK D_000303BC;",
   "D_00030444": "extern s32 D_00030444;",
   "D_00030448": "extern s32 D_00030448;",
