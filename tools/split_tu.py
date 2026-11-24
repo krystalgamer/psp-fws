@@ -43,6 +43,20 @@ def main():
         cuts.setdefault(owner, []).append((name, cflags))
 
     cfg_text = cfg.read_text()
+    # Function boundaries found through calls from other segments must survive
+    # the split: pin every current function start as a symbol.
+    starts_file = ROOT / "config" / ver / f"func_starts.{mod}.txt"
+    shndx = next(i for i, s in enumerate(elf.iter_sections()) if s.name == f".{mod}")
+    known = set(re.findall(r"^\s*(\w+)\s*=", (ROOT / "config" / ver / f"symbol_addrs.{mod}.txt").read_text(), re.M))
+    lines_ = sorted({(s["st_value"], s.name) for s in elf.get_section_by_name(".symtab").iter_symbols()
+                     if s["st_shndx"] == shndx and s["st_info"]["type"] == "STT_FUNC" and "." not in s.name
+                     and s.name not in known})
+    starts_file.write_text("// function starts pinned by tools/split_tu.py\n" + "".join(
+        f"{n} = 0x{a:08X}; // type:func\n" for a, n in lines_))
+    rel = f"config/{ver}/func_starts.{mod}.txt"
+    if rel not in cfg_text:
+        cfg_text = cfg_text.replace(f"    - config/{ver}/symbol_addrs.{mod}.txt\n",
+                                    f"    - config/{ver}/symbol_addrs.{mod}.txt\n    - {rel}\n", 1)
     for owner, cut_list in cuts.items():
         lines = owner.read_text().splitlines(keepends=True)
         first = next(i for i, l in enumerate(lines) if l.startswith(("INCLUDE_ASM", "INCLUDE_RODATA")) or re.match(r"^\w[\w \*]*\b\w+\(.*\)\s*\{$", l))
