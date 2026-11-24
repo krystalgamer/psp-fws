@@ -589,7 +589,7 @@ void func_000920D0(struct Unk_func_000920D0_0 *arg0) {
     s32 temp_v0;
     struct Unk_func_000920D0_var_s0 *var_s0;
 
-    var_s0 = *M2C_FIELD(arg0->unkFFC, void ***, 4);
+    var_s0 = *arg0->unkFFC->unk4;
     if (var_s0 != NULL) {
         do {
             temp_v0 = M2C_FIELD(var_s0->unk0, s32 (**)(void *), 0xC)(var_s0);

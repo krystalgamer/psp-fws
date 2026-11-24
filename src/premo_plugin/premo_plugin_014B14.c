@@ -259,8 +259,8 @@ s32 func_00016BBC(struct Unk_func_00016BBC_0 *arg0) {
     s32 var_a2;
 
     var_a2 = 0;
-    if (M2C_FIELD(arg0->unk20, s32 *, 0xB4) != 1) {
-        var_a2 = M2C_FIELD(arg0->unk24, s32 *, 0xB4) != 1;
+    if (arg0->unk20->unkB4 != 1) {
+        var_a2 = arg0->unk24->unkB4 != 1;
     }
     return var_a2;
 }

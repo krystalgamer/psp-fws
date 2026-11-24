@@ -99,7 +99,7 @@ s32 func_0003C1B8(void **arg0, s32 *arg1) {
         var_a2 = 0x2002;
         if (temp_a0->unkBC != 0) {
             var_a2 = 0;
-            *arg1 = M2C_FIELD(temp_a0->unkC8, s32 *, 0xC);
+            *arg1 = temp_a0->unkC8->unkC;
         }
     }
     return var_a2;

@@ -363,7 +363,7 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_006DD4",
 void func_0000CDAC(struct Unk_func_0000CDAC_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_DAB59652(M2C_FIELD(arg0->unk18, s32 *, 4), &D_00024F48);
+    temp_v0 = scePaf_DAB59652(arg0->unk18->unk4, &D_00024F48);
     if (temp_v0 == 0) {
 
     } else {
@@ -381,7 +381,7 @@ s32 func_0000CFD4(struct Unk_func_0000CFD4_0 *arg0) {
     var_a2 = 1;
     if (arg0->unk20 != NULL) {
         func_0000CF6C((s32) arg0);
-        if ((func_00013558(arg0->unk20) != 0) || (var_a2 = 0, (M2C_FIELD(arg0->unk20, s32 *, 8) == 1))) {
+        if ((func_00013558(arg0->unk20) != 0) || (var_a2 = 0, (arg0->unk20->unk8 == 1))) {
             var_a2 = func_00016F4C((s32) arg0) != 0;
         }
     }

@@ -4,6 +4,36 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_Unk_Unk_func_000A58E8_0_110_2AC {
+    u8 pad0[0x90];
+    void *unk90;
+};
+
+struct Unk_Unk_func_0003C8BC_0_6DC {
+    u8 pad0[0x14];
+    s32 unk14;
+};
+
+struct Unk_Unk_func_00051828_0_938 {
+    u8 pad0[0x390];
+    s32 unk390;
+};
+
+struct Unk_Unk_func_0007AA8C_temp_a0_D0 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
+struct Unk_Unk_func_0009C524_temp_v0_90 {
+    u8 pad0[0x100];
+    s32 unk100;
+};
+
+struct Unk_Unk_func_000A58E8_0_110 {
+    u8 pad0[0x2AC];
+    struct Unk_Unk_Unk_func_000A58E8_0_110_2AC *unk2AC;
+};
+
 struct Unk_func_00000B68_1 {
     u8 pad0[0x8];
     u32 unk8;
@@ -870,7 +900,7 @@ struct Unk_func_0003A624_0 {
 
 struct Unk_func_0003C8BC_0 {
     u8 pad0[0x6DC];
-    void * unk6DC;
+    struct Unk_Unk_func_0003C8BC_0_6DC *unk6DC;
 };
 
 struct Unk_func_0003E37C_0 {
@@ -1151,7 +1181,7 @@ struct Unk_func_000517F4_0 {
 
 struct Unk_func_00051828_0 {
     u8 pad0[0x938];
-    void * unk938;
+    struct Unk_Unk_func_00051828_0_938 *unk938;
 };
 
 struct Unk_func_00051E08_0 {
@@ -1749,7 +1779,7 @@ struct Unk_func_0007AA8C_temp_a0 {
     u8 padAC[0x18];
     s32 unkC4;
     u8 padC8[0x8];
-    void *unkD0;
+    struct Unk_Unk_func_0007AA8C_temp_a0_D0 *unkD0;
 };
 
 struct Unk_func_0007AAC0_temp_v0 {
@@ -2096,7 +2126,7 @@ struct Unk_func_0009C524_temp_v0 {
     u8 pad0[0x88];
     s32 unk88;
     u8 pad8C[0x4];
-    void *unk90;
+    struct Unk_Unk_func_0009C524_temp_v0_90 *unk90;
 };
 
 struct Unk_func_0009C524_temp_v0_2 {
@@ -2202,7 +2232,7 @@ struct Unk_func_000A50C0_0 {
 
 struct Unk_func_000A58E8_0 {
     u8 pad0[0x110];
-    void * unk110;
+    struct Unk_Unk_func_000A58E8_0_110 *unk110;
 };
 
 struct Unk_func_000A665C_0 {

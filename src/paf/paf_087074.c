@@ -520,7 +520,7 @@ void func_0009568C(void) {
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00095694);
 
 void func_0009584C(struct Unk_func_0009584C_0 *arg0) {
-    M2C_FIELD(arg0->unk1C8, s32 *, 0x1C) = 1;
+    arg0->unk1C8->unk1C = 1;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0009585C);

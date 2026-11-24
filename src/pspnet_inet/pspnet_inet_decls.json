@@ -106,6 +106,8 @@
  },
  "types": {
   "D_0002CC9C_s": "struct D_0002CC9C_s {\n    s32 unk0;\n    M2C_UNK * unk4;\n};",
+  "Unk_Unk_func_0001AA20_0_20": "struct Unk_Unk_func_0001AA20_0_20 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
+  "Unk_Unk_func_0001AA20_0_4": "struct Unk_Unk_func_0001AA20_0_4 {\n    u8 pad0[0x30];\n    u16 unk30;\n};",
   "Unk_func_00001C28_0": "struct Unk_func_00001C28_0 {\n    u8 pad0[0x8];\n    u16 unk8;\n    u8 padA[0xAA];\n    struct Unk_func_00001C28_temp_v1 *unkB4;\n};",
   "Unk_func_00001C28_temp_v1": "struct Unk_func_00001C28_temp_v1 {\n    u8 pad0[0x20];\n    s32 unk20;\n    u8 pad24[0x24];\n    s32 unk48;\n    u32 unk4C;\n};",
   "Unk_func_00004124_0": "struct Unk_func_00004124_0 {\n    u8 pad0[0x10];\n    void * unk10;\n};",
@@ -133,7 +135,7 @@
   "Unk_func_00015654_temp_v1_2": "struct Unk_func_00015654_temp_v1_2 {\n    u8 pad0[0x4];\n    void **unk4;\n};",
   "Unk_func_00015654_var_s0": "struct Unk_func_00015654_var_s0 {\n    struct Unk_func_00015654_temp_v1 *unk0;\n    void **unk4;\n    u8 pad8[0x4];\n    s32 unkC;\n};",
   "Unk_func_00019C00_0": "struct Unk_func_00019C00_0 {\n    u8 pad0[0xC];\n    s32 unkC;\n    s32 unk10;\n    u8 pad14[0x1C];\n    s32 unk30;\n    s32 unk34;\n    u8 pad38[0x18];\n    s32 unk50;\n    s32 unk54;\n};",
-  "Unk_func_0001AA20_0": "struct Unk_func_0001AA20_0 {\n    s32 unk0;\n    void * unk4;\n    u8 pad8[0x14];\n    u32 unk1C;\n    void * unk20;\n};",
+  "Unk_func_0001AA20_0": "struct Unk_func_0001AA20_0 {\n    s32 unk0;\n    struct Unk_Unk_func_0001AA20_0_4 *unk4;\n    u8 pad8[0x14];\n    u32 unk1C;\n    struct Unk_Unk_func_0001AA20_0_20 *unk20;\n};",
   "Unk_func_0001C57C_0": "struct Unk_func_0001C57C_0 {\n    u8 pad0[0x1C];\n    void * unk1C;\n};",
   "Unk_func_000232C0_0": "struct Unk_func_000232C0_0 {\n    u8 pad0[0x4];\n    void *unk4;\n};",
   "Unk_func_000232C0_temp_v1": "struct Unk_func_000232C0_temp_v1 {\n    u8 pad0[0x4];\n    void **unk4;\n};",

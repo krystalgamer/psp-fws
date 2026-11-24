@@ -96,7 +96,7 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", scePaf_18D51B42);
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", scePaf_03064559);
 
 void scePaf_2A5DDF04(struct Unk_scePaf_2A5DDF04_0 *arg0, s32 arg1) {
-    M2C_FIELD(arg0->unk1E8, s32 *, 0x3F8) = arg1;
+    arg0->unk1E8->unk3F8 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_065F80", func_00066980);

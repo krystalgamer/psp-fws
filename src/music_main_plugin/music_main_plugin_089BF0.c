@@ -857,7 +857,7 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_089BF0
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_089BF0", func_00090358);
 
 void func_0009044C(struct Unk_func_0009044C_0 *arg0) {
-    M2C_FIELD(arg0->unk44, s32 *, 0x28) = 4;
+    arg0->unk44->unk28 = 4;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_089BF0", func_0009045C);

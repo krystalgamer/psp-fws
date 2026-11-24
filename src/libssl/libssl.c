@@ -579,7 +579,7 @@ s32 func_0000EDFC(struct Unk_func_0000EDFC_0 *arg0) {
 
     var_v0 = arg0->unk80;
     if (var_v0 == 0) {
-        var_v0 = M2C_FIELD(arg0->unk0, s32 *, 8);
+        var_v0 = arg0->unk0->unk8;
     }
     return var_v0;
 }
@@ -1590,7 +1590,7 @@ s32 func_000171E0(struct Unk_func_000171E0_0 *arg0) {
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0->unk8, s32 *, 0x24);
+        var_v0 = arg0->unk8->unk24;
     }
     return var_v0;
 }
@@ -1793,7 +1793,7 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_959557F5);
 
 void sceSsl_lib_624CB314(struct Unk_func_00012994_0 *arg0) {
     func_00012994(arg0, sceSsl_lib_CA6A3C74(arg0->unk24));
-    arg0->unk18 = (s32) M2C_FIELD(arg0->unk24, s32 *, 0x18);
+    arg0->unk18 = (s32) arg0->unk24->unk18;
 }
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0001A7A8);

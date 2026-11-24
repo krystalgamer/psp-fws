@@ -80,7 +80,7 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_6C8AEF0B);
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_907D7766);
 
 s32 sceMScm_driver_B01C378C(struct Unk_sceMScm_driver_B01C378C_0 *arg0) {
-    sceKernelClearEventFlag(M2C_FIELD(arg0->unk8, u32 *, 0x2C), 0U);
+    sceKernelClearEventFlag(arg0->unk8->unk2C, 0U);
     return 0;
 }
 
@@ -129,7 +129,7 @@ INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", sceMScm_driver_34124B97);
 INCLUDE_ASM("tmp/asm/282/mscm/nonmatchings/mscm", func_00004D94);
 
 s32 sceMScm_driver_0A054CDA(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
-    return M2C_FIELD(arg0->unk8, s32 *, 0x14);
+    return arg0->unk8->unk14;
 }
 
 void func_00004E4C(void) {

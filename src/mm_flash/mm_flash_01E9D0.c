@@ -1068,7 +1068,7 @@ void func_0002F9F0(struct Unk_func_0002F9F0_0 *arg0, M2C_UNK arg1) {
         func_0001D0C4(arg1, temp_v1);
     }
     if (arg0->unk60 != NULL) {
-        if (M2C_FIELD(arg0->unk60, s32 *, 4) == 0) {
+        if (arg0->unk60->unk4 == 0) {
 
         } else {
             func_0001D0C4(arg1, arg0->unk60);

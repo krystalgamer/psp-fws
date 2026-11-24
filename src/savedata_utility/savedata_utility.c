@@ -84,13 +84,13 @@ s32 func_00000A78(struct Unk_func_00000A78_0 *arg0) {
 }
 
 s32 func_00000B08(struct Unk_func_00000B08_0 *arg0) {
-    return M2C_FIELD(arg0->unk50, s32 *, 0x30);
+    return arg0->unk50->unk30;
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00000B14);
 
 void func_00000B34(struct Unk_func_00000B34_0 *arg0) {
-    if (M2C_FIELD(arg0->unkC, s32 *, 0x38) != 0) {
+    if (arg0->unkC->unk38 != 0) {
         func_000175E0((s32) arg0, 2);
     } else {
         func_000175E0((s32) arg0, 0);

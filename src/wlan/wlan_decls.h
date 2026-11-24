@@ -14,6 +14,11 @@ struct D_0001925C_s {
     s32 unk18;
 };
 
+struct Unk_Unk_func_0000F370_0_B8 {
+    u8 pad0[0x40];
+    u32 *unk40;
+};
+
 struct Unk_func_00003114_0 {
     s32 unk0;
     u8 pad4[0x170];
@@ -153,7 +158,7 @@ struct Unk_func_0000B3CC_1 {
 
 struct Unk_func_0000F370_0 {
     u8 pad0[0xB8];
-    void * unkB8;
+    struct Unk_Unk_func_0000F370_0_B8 *unkB8;
 };
 
 struct Unk_func_00015958_0 {

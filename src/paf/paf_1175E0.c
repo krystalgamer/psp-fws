@@ -8,7 +8,7 @@ void func_001175E0(M2C_UNK **arg0) {
 }
 
 void func_00117618(struct Unk_func_00117618_0 *arg0, s32 arg1) {
-    M2C_FIELD(arg0->unk1E8, s32 *, 0x28) = arg1;
+    arg0->unk1E8->unk28 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1175E0", func_00117624);

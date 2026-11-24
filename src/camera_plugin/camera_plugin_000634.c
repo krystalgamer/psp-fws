@@ -160,17 +160,17 @@ void func_00001EEC(struct Unk_func_00001EEC_0 *arg0) {
 }
 
 void func_00001F08(struct Unk_func_00001F08_0 *arg0, s32 arg1) {
-    M2C_FIELD(arg0->unk330, s32 *, 0x20) = arg1;
+    arg0->unk330->unk20 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_000634", func_00001F14);
 
 void func_00001F30(struct Unk_func_00001F30_0 *arg0, s8 arg1) {
-    M2C_FIELD(arg0->unk330, s8 *, 0x44) = arg1;
+    arg0->unk330->unk44 = arg1;
 }
 
 void func_00001F3C(struct Unk_func_00001F3C_0 *arg0, s8 arg1) {
-    M2C_FIELD(arg0->unk330, s8 *, 0x46) = arg1;
+    arg0->unk330->unk46 = arg1;
 }
 
 void func_00001F48(struct Unk_func_00001F48_0 *arg0) {

@@ -8,7 +8,7 @@ void func_00117408(M2C_UNK **arg0) {
 }
 
 void func_00117440(struct Unk_func_00117440_0 *arg0, s32 arg1) {
-    M2C_FIELD(arg0->unk1E8, s32 *, 0x28) = arg1;
+    arg0->unk1E8->unk28 = arg1;
 }
 
 s32 func_0011744C(s32 arg0, s32 arg1) {

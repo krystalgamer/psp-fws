@@ -4,6 +4,16 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_Unk_sceMScm_driver_0A054CDA_0_8 {
+    u8 pad0[0x14];
+    s32 unk14;
+};
+
+struct Unk_Unk_sceMScm_driver_B01C378C_0_8 {
+    u8 pad0[0x2C];
+    u32 unk2C;
+};
+
 struct Unk_func_00000C1C_0 {
     u8 pad0[0x4];
     s32 unk4;
@@ -26,12 +36,12 @@ struct Unk_func_00006704_0 {
 
 struct Unk_sceMScm_driver_0A054CDA_0 {
     u8 pad0[0x8];
-    void * unk8;
+    struct Unk_Unk_sceMScm_driver_0A054CDA_0_8 *unk8;
 };
 
 struct Unk_sceMScm_driver_B01C378C_0 {
     u8 pad0[0x8];
-    void * unk8;
+    struct Unk_Unk_sceMScm_driver_B01C378C_0_8 *unk8;
 };
 
 extern s32 D_00007880;

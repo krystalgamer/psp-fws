@@ -9,6 +9,16 @@ struct D_0002CC9C_s {
     M2C_UNK * unk4;
 };
 
+struct Unk_Unk_func_0001AA20_0_20 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_Unk_func_0001AA20_0_4 {
+    u8 pad0[0x30];
+    u16 unk30;
+};
+
 struct Unk_func_00001C28_0 {
     u8 pad0[0x8];
     u16 unk8;
@@ -191,10 +201,10 @@ struct Unk_func_00019C00_0 {
 
 struct Unk_func_0001AA20_0 {
     s32 unk0;
-    void * unk4;
+    struct Unk_Unk_func_0001AA20_0_4 *unk4;
     u8 pad8[0x14];
     u32 unk1C;
-    void * unk20;
+    struct Unk_Unk_func_0001AA20_0_20 *unk20;
 };
 
 struct Unk_func_0001C57C_0 {

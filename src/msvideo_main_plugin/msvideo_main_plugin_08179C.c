@@ -1356,7 +1356,7 @@ s32 func_0009C524(struct Unk_func_0009C524_0 *arg0, struct Unk_func_0009C524_1 *
     var_a1 = 7;
     if (temp_a2 != 0) {
         var_a1 = 0x1012;
-        if (M2C_FIELD(temp_v0->unk90, s32 *, 0x100) != 1) {
+        if (temp_v0->unk90->unk100 != 1) {
             temp_v0_2 = arg1->unk0;
             var_a1 = 0x1017;
             if (temp_v0_2 != NULL) {

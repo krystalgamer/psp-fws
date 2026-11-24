@@ -338,7 +338,7 @@ INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_05B564", fun
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_05B564", func_0005EC60);
 
 s32 func_0005ECC4(struct Unk_func_0005ECC4_0 *arg0) {
-    return M2C_FIELD(M2C_FIELD(M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0->unk10C, void **, 0x298), void **, 0x8C), void **, 0xFC), void **, 4), s32 *, 0x28);
+    return M2C_FIELD(arg0->unk10C->unk298->unk8C->unkFC->unk4, s32 *, 0x28);
 }
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_05B564", func_0005ECE0);

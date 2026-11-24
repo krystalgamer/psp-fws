@@ -12,39 +12,39 @@ void func_000E433C(struct Unk_func_000E433C_0 *arg0) {
 }
 
 s32 func_000E4358(struct Unk_func_000E4358_0 *arg0) {
-    return M2C_FIELD(M2C_FIELD(arg0->unk1E8, void **, 0x20), s32 *, 0x148);
+    return M2C_FIELD(arg0->unk1E8->unk20, s32 *, 0x148);
 }
 
 void func_000E4368(struct Unk_func_000E4368_0 *arg0) {
-    func_000CEE18(M2C_FIELD(arg0->unk1E8, s32 *, 0x20));
+    func_000CEE18(arg0->unk1E8->unk20);
 }
 
 void scePaf_6E1B5B50(struct Unk_scePaf_6E1B5B50_0 *arg0) {
-    func_000D0648(M2C_FIELD(arg0->unk1E8, s32 *, 0x20));
+    func_000D0648(arg0->unk1E8->unk20);
 }
 
 void func_000E43A8(struct Unk_func_000E43A8_0 *arg0) {
-    func_000D0580(M2C_FIELD(arg0->unk1E8, s32 *, 0x20));
+    func_000D0580(arg0->unk1E8->unk20);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0E4304", func_000E43C8);
 
 void scePaf_BFFAEE83(struct Unk_scePaf_BFFAEE83_0 *arg0) {
-    scePaf_14CE7F6F(M2C_FIELD(arg0->unk1E8, s32 *, 0x20));
+    scePaf_14CE7F6F(arg0->unk1E8->unk20);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0E4304", scePaf_9AFD4AD4);
 
 void func_000E4408(struct Unk_func_000E4408_0 *arg0) {
-    func_000D0E94(M2C_FIELD(arg0->unk1E8, s32 *, 0x20));
+    func_000D0E94(arg0->unk1E8->unk20);
 }
 
 void scePaf_7116224C(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
-    M2C_FIELD(M2C_FIELD(arg0->unk1E8, void **, 0x20), s32 *, 0x194) = arg1;
+    M2C_FIELD(arg0->unk1E8->unk20, s32 *, 0x194) = arg1;
 }
 
 void func_000E4438(struct Unk_func_000E4438_0 *arg0, s32 arg1, s32 arg2) {
-    func_000CEEAC(M2C_FIELD(arg0->unk1E8, s32 *, 0x20), arg1, arg2 & 0xFF);
+    func_000CEEAC(arg0->unk1E8->unk20, arg1, arg2 & 0xFF);
 }
 
 s32 func_000E445C(s32 arg0, s32 arg1) {

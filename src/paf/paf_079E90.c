@@ -76,11 +76,11 @@ void func_0007BABC(struct Unk_func_0007BABC_0 *arg0) {
     s32 temp_v0_2;
 
     func_00083940();
-    temp_v0 = M2C_FIELD(arg0->unk15C, s32 *, 0x64);
+    temp_v0 = arg0->unk15C->unk64;
     if (temp_v0 != 0) {
         func_0006A618(temp_v0);
     }
-    temp_v0_2 = M2C_FIELD(arg0->unk15C, s32 *, 0x80);
+    temp_v0_2 = arg0->unk15C->unk80;
     if (temp_v0_2 != 0) {
         func_0006A618(temp_v0_2);
     }

@@ -577,7 +577,7 @@ void func_00088D84(M2C_UNK **arg0) {
 }
 
 void func_00088DBC(struct Unk_func_00088DBC_0 *arg0, s32 arg1) {
-    M2C_FIELD(arg0->unk1E8, s32 *, 0x28) = arg1;
+    arg0->unk1E8->unk28 = arg1;
 }
 
 s32 func_00088DC8(s32 arg0, s32 arg1) {
@@ -614,7 +614,7 @@ void func_00088F5C(M2C_UNK **arg0) {
 }
 
 void func_00088F94(struct Unk_func_00088F94_0 *arg0, s32 arg1) {
-    M2C_FIELD(arg0->unk1E8, s32 *, 0x28) = arg1;
+    arg0->unk1E8->unk28 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_078748", func_00088FA0);
@@ -2956,7 +2956,7 @@ void func_000AA1C0(void) {
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_078748", func_000AA1C8);
 
 void func_000AA284(void) {
-    D_00106F70.unk18D0 = (u16) M2C_FIELD(D_00106F70.unk1ABC, u16 *, 2);
+    D_00106F70.unk18D0 = (u16) D_00106F70.unk1ABC->unk2;
     func_000AA6DC();
     func_000AA338();
 }

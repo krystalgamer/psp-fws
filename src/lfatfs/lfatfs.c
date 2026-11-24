@@ -220,7 +220,7 @@ void func_00003ACC(s32 arg0) {
 }
 
 void func_00003AE8(struct Unk_func_00003AE8_0 *arg0) {
-    func_0000168C(M2C_FIELD(arg0->unk0, s32 *, 0x10), arg0->unk4, arg0->unk8, 0);
+    func_0000168C(arg0->unk0->unk10, arg0->unk4, arg0->unk8, 0);
 }
 
 void func_00003B14(struct Unk_func_00003B14_0 *arg0) {

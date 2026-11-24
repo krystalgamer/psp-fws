@@ -26,12 +26,14 @@
   "sceSysreg_driver_D74F1D48": "M2C_UNK sceSysreg_driver_D74F1D48(s32);"
  },
  "types": {
+  "Unk_Unk_sceMScm_driver_0A054CDA_0_8": "struct Unk_Unk_sceMScm_driver_0A054CDA_0_8 {\n    u8 pad0[0x14];\n    s32 unk14;\n};",
+  "Unk_Unk_sceMScm_driver_B01C378C_0_8": "struct Unk_Unk_sceMScm_driver_B01C378C_0_8 {\n    u8 pad0[0x2C];\n    u32 unk2C;\n};",
   "Unk_func_00000C1C_0": "struct Unk_func_00000C1C_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_00006494_0": "struct Unk_func_00006494_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_000066DC_0": "struct Unk_func_000066DC_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_00006704_0": "struct Unk_func_00006704_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
-  "Unk_sceMScm_driver_0A054CDA_0": "struct Unk_sceMScm_driver_0A054CDA_0 {\n    u8 pad0[0x8];\n    void * unk8;\n};",
-  "Unk_sceMScm_driver_B01C378C_0": "struct Unk_sceMScm_driver_B01C378C_0 {\n    u8 pad0[0x8];\n    void * unk8;\n};"
+  "Unk_sceMScm_driver_0A054CDA_0": "struct Unk_sceMScm_driver_0A054CDA_0 {\n    u8 pad0[0x8];\n    struct Unk_Unk_sceMScm_driver_0A054CDA_0_8 *unk8;\n};",
+  "Unk_sceMScm_driver_B01C378C_0": "struct Unk_sceMScm_driver_B01C378C_0 {\n    u8 pad0[0x8];\n    struct Unk_Unk_sceMScm_driver_B01C378C_0_8 *unk8;\n};"
  },
  "vars": {
   "D_00007880": "extern s32 D_00007880;",

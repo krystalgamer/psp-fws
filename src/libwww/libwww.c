@@ -3,14 +3,14 @@
 #include "libwww_decls.h"
 
 s32 func_00000000(struct Unk_func_00000000_0 *arg0) {
-    return M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), s32 *, 8);
+    return M2C_FIELD(arg0->unkB54->unkC, s32 *, 8);
 }
 
 s32 func_00000010(struct Unk_func_00000010_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 (*temp_v1)(s32, s32, s32, s32);
     s32 var_v0;
 
-    temp_v1 = M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), s32 (**)(s32, s32, s32, s32), 0xC);
+    temp_v1 = M2C_FIELD(arg0->unkB54->unkC, s32 (**)(s32, s32, s32, s32), 0xC);
     var_v0 = 0;
     if (temp_v1 != NULL) {
         var_v0 = temp_v1(arg1, arg2, arg3, arg4);
@@ -19,27 +19,27 @@ s32 func_00000010(struct Unk_func_00000010_0 *arg0, s32 arg1, s32 arg2, s32 arg3
 }
 
 void func_00000050(struct Unk_func_00000050_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x10)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x10)(arg0->unkB5C);
 }
 
 void func_00000078(struct Unk_func_00000078_0 *arg0, M2C_UNK arg1) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(M2C_UNK), 0x14)(arg1);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(M2C_UNK), 0x14)(arg1);
 }
 
 void func_000000A0(struct Unk_func_000000A0_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x18)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x18)(arg0->unkB5C);
 }
 
 void func_000000C8(struct Unk_func_000000C8_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x1C)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x1C)(arg0->unkB5C);
 }
 
 void func_000000F0(struct Unk_func_000000F0_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x20)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x20)(arg0->unkB5C);
 }
 
 void func_00000118(struct Unk_func_00000118_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0xC0)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0xC0)(arg0->unkB5C);
 }
 
 s32 func_00000140(void *arg0) {
@@ -54,7 +54,7 @@ s32 func_00000140(void *arg0) {
 }
 
 void func_000001B0(struct Unk_func_000001B0_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x28)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x28)(arg0->unkB5C);
 }
 
 void func_000001D8(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg_sp0, s32 arg_sp4, s32 arg_sp8, s32 arg_spC) {
@@ -94,7 +94,7 @@ void func_0000066C(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 void func_00000708(struct Unk_func_00000708_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0xC8)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0xC8)(arg0->unkB5C);
 }
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00000730);
@@ -103,7 +103,7 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00000804);
 
 void func_00000870(struct Unk_func_00000870_0 *arg0) {
     if (!(arg0->unk4 & 0x1000)) {
-        M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x48)(arg0->unkB5C);
+        M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x48)(arg0->unkB5C);
         arg0->unk4 = __builtin_allegrex_ins(arg0->unk4, 0, 0x14, 1);
     }
 }
@@ -116,23 +116,23 @@ void func_00000910(void *arg0, M2C_UNK arg1, M2C_UNK arg2) {
 }
 
 void func_00000978(struct Unk_func_00000978_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x54)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x54)(arg0->unkB5C);
 }
 
 void func_000009A0(struct Unk_func_000009A0_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x58)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x58)(arg0->unkB5C);
 }
 
 void func_000009C8(struct Unk_func_000009C8_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x5C)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x5C)(arg0->unkB5C);
 }
 
 void func_000009F0(struct Unk_func_000009F0_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x34)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x34)(arg0->unkB5C);
 }
 
 void func_00000A18(struct Unk_func_00000A18_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0xB0)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0xB0)(arg0->unkB5C);
 }
 
 void func_00000A40(struct Unk_func_00000A40_0 *arg0, s32 arg1, s32 arg2) {
@@ -143,73 +143,73 @@ void func_00000A40(struct Unk_func_00000A40_0 *arg0, s32 arg1, s32 arg2) {
 }
 
 void func_00000A7C(struct Unk_func_00000A7C_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x64)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x64)(arg0->unkB5C);
 }
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww", func_00000AA4);
 
 void func_00000AE4(struct Unk_func_00000AE4_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32, s32), 0x6C)(arg0->unkB58, arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32, s32), 0x6C)(arg0->unkB58, arg0->unkB5C);
 }
 
 void func_00000B10(struct Unk_func_00000B10_0 *arg0, M2C_UNK arg1) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32, s32, M2C_UNK), 0x70)(arg0->unkB58, arg0->unkB5C, arg1);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32, s32, M2C_UNK), 0x70)(arg0->unkB58, arg0->unkB5C, arg1);
 }
 
 void func_00000B40(struct Unk_func_00000B40_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 0x74)(arg0->unkB58, arg0->unkB5C, arg1, arg2);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 0x74)(arg0->unkB58, arg0->unkB5C, arg1, arg2);
 }
 
 void func_00000B78(struct Unk_func_00000B78_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 0x78)(arg0->unkB58, arg0->unkB5C, arg1, arg2);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 0x78)(arg0->unkB58, arg0->unkB5C, arg1, arg2);
 }
 
 void func_00000BB0(struct Unk_func_00000BB0_0 *arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(arg1, arg2, arg3);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(arg1, arg2, arg3);
 }
 
 void sceHVWWW_Library_F22D3CC3(struct Unk_sceHVWWW_Library_F22D3CC3_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x80)(arg1, arg2);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x80)(arg1, arg2);
 }
 
 void func_00000C0C(struct Unk_func_00000C0C_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x84)(arg1, arg2);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x84)(arg1, arg2);
 }
 
 void func_00000C38(struct Unk_func_00000C38_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x88)(arg1, arg2);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x88)(arg1, arg2);
 }
 
 void func_00000C64(struct Unk_func_00000C64_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x8C)(arg1, arg2);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x8C)(arg1, arg2);
 }
 
 void func_00000C90(struct Unk_func_00000C90_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x98)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x98)(arg0->unkB5C);
 }
 
 void func_00000CB8(struct Unk_func_00000CB8_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0x9C)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0x9C)(arg0->unkB5C);
 }
 
 void func_00000CE0(struct Unk_func_00000CE0_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0xA0)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0xA0)(arg0->unkB5C);
 }
 
 void sceHVWWW_Library_C71B2574(struct Unk_sceHVWWW_Library_C71B2574_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0xB8)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0xB8)(arg0->unkB5C);
 }
 
 void func_00000D30(struct Unk_func_00000D30_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32, s32, s32, s32, s32, s32), 0xBC)(arg1, arg2, arg3, arg4, arg5, arg6);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32, s32, s32, s32, s32, s32), 0xBC)(arg1, arg2, arg3, arg4, arg5, arg6);
 }
 
 void func_00000D6C(struct Unk_func_00000D6C_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0xD0)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0xD0)(arg0->unkB5C);
 }
 
 void func_00000D94(struct Unk_func_00000D94_0 *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0->unkB54, void **, 0xC), M2C_UNK (**)(s32), 0xD4)(arg0->unkB5C);
+    M2C_FIELD(arg0->unkB54->unkC, M2C_UNK (**)(s32), 0xD4)(arg0->unkB5C);
 }
 
 void func_00000DBC(struct Unk_func_00000DBC_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
@@ -4201,7 +4201,7 @@ void func_0002C758(struct Unk_func_0002C758_0 *arg0, s32 arg1) {
     if (arg1 != 0) {
         temp_a2 = arg0->unk24;
         arg0->unk20 = (s32) (arg0->unk20 | 0x200);
-        if (!(temp_a2->unk8 & 1) && (M2C_FIELD(temp_a2->unkB54, s32 *, 0x8C) >= 0)) {
+        if (!(temp_a2->unk8 & 1) && (temp_a2->unkB54->unk8C >= 0)) {
             func_00027688((s32) arg0, arg1, 0);
         }
     }
@@ -4622,7 +4622,7 @@ s32 func_00035AF4(struct Unk_func_00035AF4_0 *arg0, M2C_UNK arg1) {
     var_s3 = 0x7FFFFFFF;
     temp_s1 = **arg0->unk24;
     *temp_s1 |= 2;
-    if (M2C_FIELD(arg0->unk1C, s32 *, 0x20C) > 0) {
+    if (arg0->unk1C->unk20C > 0) {
         var_s0 = arg0;
         do {
             temp_a0 = var_s0 + 0x54C;
@@ -4630,7 +4630,7 @@ s32 func_00035AF4(struct Unk_func_00035AF4_0 *arg0, M2C_UNK arg1) {
             var_s4 += 1;
             var_s0 += 0xF4;
             var_s3 = __builtin_allegrex_min(var_s3, temp_v0(temp_a0, arg1));
-        } while (var_s4 < M2C_FIELD(arg0->unk1C, s32 *, 0x20C));
+        } while (var_s4 < arg0->unk1C->unk20C);
     }
     *temp_s1 = __builtin_allegrex_ins(*temp_s1, 0, 1, 1);
     return var_s3;

@@ -277,7 +277,7 @@ s32 func_00066634(struct Unk_func_00066634_0 *arg0) {
 
     var_v0 = arg0->unk102C;
     if (var_v0 != 0) {
-        func_000001FC(M2C_FIELD(arg0->unkFFC, s32 *, 4), arg0);
+        func_000001FC(arg0->unkFFC->unk4, arg0);
         func_00067F14(arg0);
         var_v0 = arg0->unk102C;
     }
@@ -708,7 +708,7 @@ s32 func_00072CF0(struct Unk_func_00072CF0_0 *arg0) {
     temp_a0 = arg0->unkC70;
     var_v0 = 0;
     if (temp_a0 != NULL) {
-        var_v0 = M2C_FIELD(temp_a0->unkA0, s32 *, 8) != 0;
+        var_v0 = temp_a0->unkA0->unk8 != 0;
     }
     return var_v0;
 }
@@ -865,10 +865,10 @@ s32 func_000753DC(struct Unk_func_000753DC_0 *arg0, s32 arg1) {
     temp_s0 = arg0->unkD08;
     var_v0 = 0;
     if (temp_s0 != NULL) {
-        if ((arg1 != 0) && (M2C_FIELD(temp_s0->unk44, s32 *, 0x48) == 0)) {
+        if ((arg1 != 0) && (temp_s0->unk44->unk48 == 0)) {
             func_00074DB4((s32) arg0);
         }
-        var_v0 = M2C_FIELD(temp_s0->unk44, s32 *, 0x48);
+        var_v0 = temp_s0->unk44->unk48;
     }
     return var_v0;
 }

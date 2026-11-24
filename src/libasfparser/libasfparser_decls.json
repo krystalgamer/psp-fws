@@ -56,9 +56,10 @@
   "sceAsfParser_B9E4BD9E": "s32 sceAsfParser_B9E4BD9E(void);"
  },
  "types": {
+  "Unk_Unk_func_00000FB8_0_38": "struct Unk_Unk_func_00000FB8_0_38 {\n    u8 pad0[0x40];\n    u32 unk40;\n};",
   "Unk_func_00000214_temp_v0": "struct Unk_func_00000214_temp_v0 {\n    u8 pad0[0x8];\n    s32 unk8;\n};",
   "Unk_func_0000083C_0": "struct Unk_func_0000083C_0 {\n    s32 unk0;\n};",
-  "Unk_func_00000FB8_0": "struct Unk_func_00000FB8_0 {\n    u8 pad0[0x8];\n    u32 unk8;\n    u8 padC[0x14];\n    u32 unk20;\n    u8 pad24[0x14];\n    void * unk38;\n};",
+  "Unk_func_00000FB8_0": "struct Unk_func_00000FB8_0 {\n    u8 pad0[0x8];\n    u32 unk8;\n    u8 padC[0x14];\n    u32 unk20;\n    u8 pad24[0x14];\n    struct Unk_Unk_func_00000FB8_0_38 *unk38;\n};",
   "Unk_func_00001728_0": "struct Unk_func_00001728_0 {\n    u8 pad0[0x1];\n    u8 unk1;\n    u8 pad2[0x6];\n    u32 unk8;\n    s32 unkC;\n    u8 pad10[0x10];\n    u32 unk20;\n    u8 pad24[0x4];\n    u32 unk28;\n};",
   "Unk_func_00001758_0": "struct Unk_func_00001758_0 {\n    u8 pad0[0x20];\n    u32 unk20;\n    u32 unk24;\n};",
   "Unk_func_00001820_0": "struct Unk_func_00001820_0 {\n    u8 pad0[0x2];\n    u8 unk2;\n};",

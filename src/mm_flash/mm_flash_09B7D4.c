@@ -191,7 +191,7 @@ s32 func_0009CD58(struct Unk_func_0009CD58_0 *arg0) {
     void **temp_v0;
 
     var_s1 = 0;
-    temp_v0 = func_000000E8(M2C_FIELD(arg0->unkFFC, s32 *, 4));
+    temp_v0 = func_000000E8(arg0->unkFFC->unk4);
     if ((temp_v0 != NULL) && (M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0) != 0)) {
         var_s1 = M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0);
     }

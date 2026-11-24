@@ -22,7 +22,7 @@ void func_0005B0A8(struct Unk_func_0005B0A8_0 *arg0, s32 arg1) {
 
     arg0->unk58C = arg1;
     if (arg0->unk2F8 != 0) {
-        temp_a0 = M2C_FIELD(arg0->unk2DC, void **, 0x1018);
+        temp_a0 = arg0->unk2DC->unk1018;
         if (temp_a0 != NULL) {
             temp_a0->unk28 = arg1;
         }

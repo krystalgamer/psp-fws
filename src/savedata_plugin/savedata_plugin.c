@@ -396,7 +396,7 @@ void func_0000463C(struct Unk_func_0000463C_0 *arg0, M2C_UNK arg1, s32 arg2, M2C
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_0000468C);
 
 void func_00004A94(struct Unk_func_00004A94_0 *arg0) {
-    vsh_FA1DE461(M2C_FIELD(M2C_FIELD(arg0->unk10, void **, 0x24), s32 *, 0x1C), &func_00004AC4, arg0);
+    vsh_FA1DE461(arg0->unk10->unk24->unk1C, &func_00004AC4, arg0);
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_00004AC4);

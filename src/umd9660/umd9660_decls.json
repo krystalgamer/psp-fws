@@ -36,7 +36,8 @@
   "sceUmd_7850F057": "M2C_UNK sceUmd_7850F057(M2C_UNK *, M2C_UNK *);"
  },
  "types": {
-  "Unk_func_00003FF0_0": "struct Unk_func_00003FF0_0 {\n    u8 pad0[0x64];\n    void * unk64;\n};",
+  "Unk_Unk_func_00003FF0_0_64": "struct Unk_Unk_func_00003FF0_0_64 {\n    u8 pad0[0xC];\n    s32 unkC;\n};",
+  "Unk_func_00003FF0_0": "struct Unk_func_00003FF0_0 {\n    u8 pad0[0x64];\n    struct Unk_Unk_func_00003FF0_0_64 *unk64;\n};",
   "Unk_func_00003FFC_0": "struct Unk_func_00003FFC_0 {\n    u8 pad0[0x64];\n    s32 unk64;\n};",
   "Unk_func_00004164_0": "struct Unk_func_00004164_0 {\n    u8 pad0[0x64];\n    s32 unk64;\n};"
  },

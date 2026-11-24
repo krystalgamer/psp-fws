@@ -990,7 +990,7 @@ void func_00138844(void) {
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_0013884C);
 
 void func_00138908(void) {
-    D_001E0ECC.unk18D0 = (u16) M2C_FIELD(D_001E0ECC.unk1ABC, u16 *, 2);
+    D_001E0ECC.unk18D0 = (u16) D_001E0ECC.unk1ABC->unk2;
     func_00138D60();
     func_001389BC();
 }

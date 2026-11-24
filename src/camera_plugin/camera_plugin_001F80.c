@@ -11,7 +11,7 @@ void func_00001F80(struct Unk_func_00001F80_0 *arg0, s32 arg1, s32 arg2) {
 }
 
 void func_00001F90(struct Unk_func_00001F90_0 *arg0, s8 arg1) {
-    M2C_FIELD(arg0->unk330, s8 *, 0x47) = arg1;
+    arg0->unk330->unk47 = arg1;
 }
 
 void func_00001F9C(struct Unk_func_00001F9C_0 *arg0) {

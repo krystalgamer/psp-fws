@@ -48,11 +48,12 @@
   "sceKernelDeleteMbx": "s32 sceKernelDeleteMbx(s32);"
  },
  "types": {
+  "Unk_Unk_func_00013798_0_FA78": "struct Unk_Unk_func_00013798_0_FA78 {\n    u8 pad0[0x40];\n    u32 unk40;\n};",
   "Unk_func_0000E3C0_0": "struct Unk_func_0000E3C0_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n    u8 pad8[0x10];\n    s32 unk18;\n};",
   "Unk_func_0000E3D8_0": "struct Unk_func_0000E3D8_0 {\n    u32 unk0;\n    u32 unk4;\n    u8 pad8[0x18];\n    s32 unk20;\n    u8 pad24[0x2];\n    u16 unk26;\n};",
   "Unk_func_00013044_0": "struct Unk_func_00013044_0 {\n    s8 unk0;\n    s8 unk1;\n};",
   "Unk_func_000135A8_0": "struct Unk_func_000135A8_0 {\n    s8 unk0;\n    s8 unk1;\n};",
-  "Unk_func_00013798_0": "struct Unk_func_00013798_0 {\n    u8 pad0[0x20];\n    s32 unk20;\n    u8 pad24[0xFA54];\n    void * unkFA78;\n    u8 padFA7C[0x48];\n    s32 unkFAC4;\n    u8 padFAC8[0x18];\n    s32 unkFAE0;\n};"
+  "Unk_func_00013798_0": "struct Unk_func_00013798_0 {\n    u8 pad0[0x20];\n    s32 unk20;\n    u8 pad24[0xFA54];\n    struct Unk_Unk_func_00013798_0_FA78 *unkFA78;\n    u8 padFA7C[0x48];\n    s32 unkFAC4;\n    u8 padFAC8[0x18];\n    s32 unkFAE0;\n};"
  },
  "vars": {
   "D_0002411C": "extern M2C_UNK D_0002411C;",

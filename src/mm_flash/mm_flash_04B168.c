@@ -550,19 +550,19 @@ void func_00057E78(struct Unk_func_00057E78_0 *arg0) {
         temp_v0 = func_00090648(*func_0009F1C0(), 0x478, 1);
         func_0008FD94(temp_v0);
         temp_s1->unk2CC = temp_v0;
-        temp_v1 = M2C_FIELD(arg0->unk34, s32 *, 0x2CC);
+        temp_v1 = arg0->unk34->unk2CC;
         if (temp_v1 != 0) {
             if (func_0008FE1C(temp_v1, arg0) == 0) {
-                temp_v0_2 = M2C_FIELD(arg0->unk34, s32 *, 0x2CC);
+                temp_v0_2 = arg0->unk34->unk2CC;
                 if (temp_v0_2 != 0) {
                     sceHVNetfront_Module_09FA691C(temp_v0_2);
                 }
-                temp_s0 = M2C_FIELD(arg0->unk34, s32 *, 0x2CC);
+                temp_s0 = arg0->unk34->unk2CC;
                 if (temp_s0 != 0) {
                     func_0008FDE8(temp_s0);
                     func_00090730(*func_0009F1C0(), temp_s0, 1);
                 }
-                M2C_FIELD(arg0->unk34, s32 *, 0x2CC) = 0;
+                arg0->unk34->unk2CC = 0;
             }
         }
     }
@@ -602,7 +602,7 @@ void func_000589E4(struct Unk_func_000589E4_0 *arg0) {
         M2C_FIELD(temp_v0, s32 *, 0x10) = (s32) (arg0->unk0 + temp_a0);
         arg0->unk4 = (s32) (temp_a0 + 2);
         if (!((M2C_FIELD((arg0->unk0 + temp_a0), u8 *, 1) << 8) & 0x100)) {
-            M2C_FIELD(arg0->unk70, s32 *, 0xF4) = 1;
+            arg0->unk70->unkF4 = 1;
         }
     }
 }

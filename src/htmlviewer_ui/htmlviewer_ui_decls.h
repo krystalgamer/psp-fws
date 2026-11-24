@@ -14,6 +14,11 @@ struct D_0006E670_s {
     volatile s32 unk4;
 };
 
+struct Unk_Unk_func_00008E8C_0_14 {
+    u8 pad0[0x80];
+    s32 unk80;
+};
+
 struct Unk_func_00000EDC_temp_v0 {
     u8 pad0[0x1B24];
     s32 unk1B24;
@@ -90,7 +95,7 @@ struct Unk_func_00008E80_0 {
 
 struct Unk_func_00008E8C_0 {
     u8 pad0[0x14];
-    void * unk14;
+    struct Unk_Unk_func_00008E8C_0_14 *unk14;
 };
 
 struct Unk_func_00008E98_0 {

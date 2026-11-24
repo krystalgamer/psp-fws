@@ -437,7 +437,7 @@ s32 func_00003E00(struct Unk_func_00003E00_0 *arg0) {
 s32 func_00003E0C(struct Unk_func_00003E0C_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0->unk0, s32 *, 0x1C);
+    temp_v1 = arg0->unk0->unk1C;
     arg0->unk8 = temp_v1;
     return temp_v1 != 0;
 }
@@ -748,7 +748,7 @@ s32 func_00005B64(struct Unk_func_00005B64_0 *arg0, struct Unk_func_00005B64_1 *
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = M2C_FIELD(arg1->unk8, s32 *, 4);
+    temp_v0 = arg1->unk8->unk4;
     var_v1 = 0;
     if (temp_v0 != arg0->unk1C) {
         var_v1 = func_00005A64((s32) arg0, temp_v0, (s32) arg1);
@@ -860,7 +860,7 @@ s32 func_00006BFC(s32 arg0, struct Unk_func_00006BFC_1 *arg1) {
     s32 var_v1;
 
     var_v1 = 0;
-    temp_v0 = M2C_FIELD(arg1->unk8, s32 *, 4);
+    temp_v0 = arg1->unk8->unk4;
     if (temp_v0 != 0) {
         var_v1 = func_00006B38(arg0, temp_v0, (s32) arg1);
     }
@@ -874,7 +874,7 @@ s32 func_00006CB4(s32 arg0, struct Unk_func_00006CB4_1 *arg1) {
     s32 var_v1;
 
     var_v1 = 0;
-    temp_v0 = M2C_FIELD(arg1->unk8, s32 *, 8);
+    temp_v0 = arg1->unk8->unk8;
     if (temp_v0 != 0) {
         var_v1 = func_00006B38(arg0, temp_v0, (s32) arg1);
     }
@@ -886,7 +886,7 @@ s32 func_00006CF0(s32 arg0, struct Unk_func_00006CF0_1 *arg1) {
     s32 var_v1;
 
     var_v1 = 0;
-    temp_v0 = M2C_FIELD(arg1->unk8, s32 *, 0xC);
+    temp_v0 = arg1->unk8->unkC;
     if (temp_v0 != 0) {
         var_v1 = func_00006B38(arg0, temp_v0, (s32) arg1);
     }

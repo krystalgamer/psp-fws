@@ -26,9 +26,12 @@
   "sceNetIfhandle_driver_773FC77C": "M2C_UNK sceNetIfhandle_driver_773FC77C();"
  },
  "types": {
-  "Unk_func_00003AA8_0": "struct Unk_func_00003AA8_0 {\n    void * unk0;\n    void * unk4;\n};",
-  "Unk_func_00003B00_0": "struct Unk_func_00003B00_0 {\n    void * unk0;\n    void * unk4;\n};",
-  "Unk_func_00003B58_0": "struct Unk_func_00003B58_0 {\n    void * unk0;\n    void * unk4;\n};"
+  "Unk_Unk_func_00003AA8_0_0": "struct Unk_Unk_func_00003AA8_0_0 {\n    u8 pad0[0x4];\n    u32 unk4;\n};",
+  "Unk_Unk_func_00003B00_0_0": "struct Unk_Unk_func_00003B00_0_0 {\n    u8 pad0[0x4];\n    u32 unk4;\n};",
+  "Unk_Unk_func_00003B58_0_0": "struct Unk_Unk_func_00003B58_0_0 {\n    u8 pad0[0x4];\n    u32 unk4;\n};",
+  "Unk_func_00003AA8_0": "struct Unk_func_00003AA8_0 {\n    struct Unk_Unk_func_00003AA8_0_0 *unk0;\n    void *unk4;\n};",
+  "Unk_func_00003B00_0": "struct Unk_func_00003B00_0 {\n    struct Unk_Unk_func_00003B00_0_0 *unk0;\n    void *unk4;\n};",
+  "Unk_func_00003B58_0": "struct Unk_func_00003B58_0 {\n    struct Unk_Unk_func_00003B58_0_0 *unk0;\n    void *unk4;\n};"
  },
  "vars": {
   "D_00004600": "extern s32 D_00004600;",

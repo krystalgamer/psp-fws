@@ -821,7 +821,7 @@ s32 func_00051828(struct Unk_func_00051828_0 *arg0, s32 arg1) {
     var_v1 = 1;
     if (arg1 != 0) {
         var_v1 = 0;
-        M2C_FIELD(arg0->unk938, s32 *, 0x390) = arg1;
+        arg0->unk938->unk390 = arg1;
     }
     return var_v1;
 }

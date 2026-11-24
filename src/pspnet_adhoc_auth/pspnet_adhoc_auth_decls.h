@@ -4,19 +4,34 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_Unk_func_00003AA8_0_0 {
+    u8 pad0[0x4];
+    u32 unk4;
+};
+
+struct Unk_Unk_func_00003B00_0_0 {
+    u8 pad0[0x4];
+    u32 unk4;
+};
+
+struct Unk_Unk_func_00003B58_0_0 {
+    u8 pad0[0x4];
+    u32 unk4;
+};
+
 struct Unk_func_00003AA8_0 {
-    void * unk0;
-    void * unk4;
+    struct Unk_Unk_func_00003AA8_0_0 *unk0;
+    void *unk4;
 };
 
 struct Unk_func_00003B00_0 {
-    void * unk0;
-    void * unk4;
+    struct Unk_Unk_func_00003B00_0_0 *unk0;
+    void *unk4;
 };
 
 struct Unk_func_00003B58_0 {
-    void * unk0;
-    void * unk4;
+    struct Unk_Unk_func_00003B58_0_0 *unk0;
+    void *unk4;
 };
 
 extern s32 D_00004600;

@@ -903,7 +903,7 @@ void func_0001AA20(struct Unk_func_0001AA20_0 *arg0) {
 
     temp_v1 = arg0->unk1C;
     if ((temp_v1 != 0) && (temp_a3 = __builtin_allegrex_wsbw(-0x100), temp_v1_2 = __builtin_allegrex_wsbw(0xE0000000), ((temp_v1 < 3U) != 0))) {
-        if (((arg0->unk0 & temp_a3) != temp_v1_2) && !(M2C_FIELD(arg0->unk4, u16 *, 0x30) & 8) && (M2C_FIELD(arg0->unk20, s32 *, 4) != 1)) {
+        if (((arg0->unk0 & temp_a3) != temp_v1_2) && !(arg0->unk4->unk30 & 8) && (arg0->unk20->unk4 != 1)) {
             func_0001A714((s32) arg0, 0x17);
         }
     }

@@ -16,8 +16,9 @@
  "types": {
   "D_000059B0_s": "struct D_000059B0_s {\n    s32 unk0;\n    u8 pad4[0x1578];\n    u32 unk157C;\n};",
   "D_00008478_s": "struct D_00008478_s {\n    u8 pad0[0xB0];\n    volatile s8 unkB0;\n    volatile s8 unkB1;\n    u8 padB2[0x2];\n    volatile s32 unkB4;\n    volatile s32 unkB8;\n    volatile s32 unkBC;\n    volatile s32 unkC0;\n};",
+  "Unk_Unk_func_00002978_temp_a2_28": "struct Unk_Unk_func_00002978_temp_a2_28 {\n    u8 pad0[0x2];\n    u8 unk2;\n};",
   "Unk_func_00002978_0": "struct Unk_func_00002978_0 {\n    u8 pad0[0x20];\n    struct Unk_func_00002978_temp_a2 *unk20;\n};",
-  "Unk_func_00002978_temp_a2": "struct Unk_func_00002978_temp_a2 {\n    u8 pad0[0x28];\n    void *unk28;\n    u8 pad2C[0x7C];\n    s32 unkA8;\n};"
+  "Unk_func_00002978_temp_a2": "struct Unk_func_00002978_temp_a2 {\n    u8 pad0[0x28];\n    struct Unk_Unk_func_00002978_temp_a2_28 *unk28;\n    u8 pad2C[0x7C];\n    s32 unkA8;\n};"
  },
  "vars": {
   "D_00005960": "extern M2C_UNK D_00005960;",

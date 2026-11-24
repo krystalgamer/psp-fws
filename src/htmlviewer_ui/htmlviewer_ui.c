@@ -967,7 +967,7 @@ void func_00008E80(struct Unk_func_00008E80_0 *arg0, s32 arg1, s32 arg2) {
 }
 
 s32 func_00008E8C(struct Unk_func_00008E8C_0 *arg0) {
-    return M2C_FIELD(arg0->unk14, s32 *, 0x80);
+    return arg0->unk14->unk80;
 }
 
 s32 func_00008E98(struct Unk_func_00008E98_0 *arg0) {

@@ -9,7 +9,7 @@ void func_0009D1AC(s32 arg0) {
 }
 
 void func_0009D1E8(struct Unk_func_0009D1E8_0 *arg0) {
-    func_000000E8(M2C_FIELD(arg0->unkFFC, s32 *, 4));
+    func_000000E8(arg0->unkFFC->unk4);
 }
 
 void func_0009D208(struct Unk_func_00088558_0 *arg0) {

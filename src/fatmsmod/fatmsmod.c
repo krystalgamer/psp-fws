@@ -684,7 +684,7 @@ INCLUDE_ASM("tmp/asm/282/fatmsmod/nonmatchings/fatmsmod", func_000136C4);
 void func_00013798(struct Unk_func_00013798_0 *arg0, u32 arg1) {
     u32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0->unkFA78, u32 *, 0x40);
+    temp_v1 = arg0->unkFA78->unk40;
     if ((temp_v1 < arg1) && (arg1 < (u32) (temp_v1 + arg0->unk20))) {
         arg0->unkFAC4 = 0;
         arg0->unkFAE0 = 0;

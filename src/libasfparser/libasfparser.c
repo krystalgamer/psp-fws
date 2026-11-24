@@ -108,7 +108,7 @@ s32 func_00000FB8(struct Unk_func_00000FB8_0 *arg0) {
         var_a2 = arg0->unk20;
         var_a3 = temp_v0;
     }
-    temp_t1 = M2C_FIELD(arg0->unk38, u32 *, 0x40);
+    temp_t1 = arg0->unk38->unk40;
     if (var_a2 < temp_t1) {
         var_a3 = func_000016F4((s32) arg0, temp_t1 - var_a2);
     }

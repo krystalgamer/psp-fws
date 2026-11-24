@@ -4,6 +4,21 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_Unk_func_0000EDFC_0_0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
+struct Unk_Unk_func_00012994_0_24 {
+    u8 pad0[0x18];
+    s32 unk18;
+};
+
+struct Unk_Unk_func_000171E0_0_8 {
+    u8 pad0[0x24];
+    s32 unk24;
+};
+
 struct Unk_func_000007F0_0 {
     s32 unk0;
     s32 unk4;
@@ -64,7 +79,7 @@ struct Unk_func_0000EDE0_0 {
 };
 
 struct Unk_func_0000EDFC_0 {
-    void * unk0;
+    struct Unk_Unk_func_0000EDFC_0_0 *unk0;
     u8 pad4[0x7C];
     s32 unk80;
 };
@@ -105,7 +120,7 @@ struct Unk_func_00012994_0 {
     s32 unk14;
     s32 unk18;
     u8 pad1C[0x8];
-    void * unk24;
+    struct Unk_Unk_func_00012994_0_24 *unk24;
 };
 
 struct Unk_func_000129A4_0 {
@@ -145,7 +160,7 @@ struct Unk_func_00016EE8_0 {
 
 struct Unk_func_000171E0_0 {
     u8 pad0[0x8];
-    void * unk8;
+    struct Unk_Unk_func_000171E0_0_8 *unk8;
 };
 
 struct Unk_func_00017544_0 {

@@ -643,7 +643,7 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F190);
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000F2A4);
 
 s32 func_0000F370(struct Unk_func_0000F370_0 *arg0) {
-    sceKernelSignalSema(*M2C_FIELD(arg0->unkB8, u32 **, 0x40), 1);
+    sceKernelSignalSema(*arg0->unkB8->unk40, 1);
     return 0;
 }
 

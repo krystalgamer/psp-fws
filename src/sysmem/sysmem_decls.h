@@ -26,6 +26,11 @@ struct Unk_SysMemForKernel_82D3CEE3_0 {
     s32 unk8;
 };
 
+struct Unk_Unk_func_0000769C_0_8 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
 struct Unk_func_00001318_0 {
     u8 pad0[0x10];
     s32 unk10;
@@ -71,7 +76,7 @@ struct Unk_func_000075EC_0 {
 
 struct Unk_func_0000769C_0 {
     u8 pad0[0x8];
-    void * unk8;
+    struct Unk_Unk_func_0000769C_0_8 *unk8;
 };
 
 extern M2C_UNK D_0000F390;

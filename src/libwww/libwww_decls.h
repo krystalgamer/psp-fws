@@ -4,66 +4,266 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_Unk_func_00000000_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000010_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000050_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000078_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_000000A0_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_000000C8_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_000000F0_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000118_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_000001B0_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000708_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000870_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000978_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_000009A0_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_000009C8_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_000009F0_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000A18_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000A7C_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000AE4_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000B10_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000B40_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000B78_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000BB0_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000C0C_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000C38_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000C64_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000C90_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000CB8_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000CE0_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000D30_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000D6C_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_00000D94_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_func_0002C758_temp_a2_B54 {
+    u8 pad0[0x8C];
+    s32 unk8C;
+};
+
+struct Unk_Unk_func_00035AF4_0_1C {
+    u8 pad0[0x20C];
+    s32 unk20C;
+};
+
+struct Unk_Unk_func_000994A4_0_8 {
+    u8 pad0[0x10];
+    s16 unk10;
+};
+
+struct Unk_Unk_func_000B0CDC_0_10 {
+    u8 pad0[0x34];
+    s32 unk34;
+};
+
+struct Unk_Unk_func_000B263C_0_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_Unk_func_000B2990_0_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_Unk_sceHVWWW_Library_BF5437BC_0_8 {
+    u8 pad0[0x10];
+    s16 unk10;
+};
+
+struct Unk_Unk_sceHVWWW_Library_C71B2574_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
+struct Unk_Unk_sceHVWWW_Library_F22D3CC3_0_B54 {
+    u8 pad0[0xC];
+    void *unkC;
+};
+
 struct Unk_func_00000000_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000000_0_B54 *unkB54;
 };
 
 struct Unk_func_00000010_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000010_0_B54 *unkB54;
 };
 
 struct Unk_func_00000050_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000050_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_00000078_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000078_0_B54 *unkB54;
 };
 
 struct Unk_func_000000A0_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_000000A0_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_000000C8_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_000000C8_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_000000F0_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_000000F0_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_00000118_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000118_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_000001B0_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_000001B0_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_00000708_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000708_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
@@ -72,42 +272,42 @@ struct Unk_func_00000870_0 {
     u8 pad0[0x4];
     s32 unk4;
     u8 pad8[0xB4C];
-    void * unkB54;
+    struct Unk_Unk_func_00000870_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_00000978_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000978_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_000009A0_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_000009A0_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_000009C8_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_000009C8_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_000009F0_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_000009F0_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_00000A18_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000A18_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
@@ -128,95 +328,95 @@ struct Unk_func_00000A40_temp_v0 {
 
 struct Unk_func_00000A7C_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000A7C_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_00000AE4_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000AE4_0_B54 *unkB54;
     s32 unkB58;
     s32 unkB5C;
 };
 
 struct Unk_func_00000B10_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000B10_0_B54 *unkB54;
     s32 unkB58;
     s32 unkB5C;
 };
 
 struct Unk_func_00000B40_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000B40_0_B54 *unkB54;
     s32 unkB58;
     s32 unkB5C;
 };
 
 struct Unk_func_00000B78_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000B78_0_B54 *unkB54;
     s32 unkB58;
     s32 unkB5C;
 };
 
 struct Unk_func_00000BB0_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000BB0_0_B54 *unkB54;
 };
 
 struct Unk_func_00000C0C_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000C0C_0_B54 *unkB54;
 };
 
 struct Unk_func_00000C38_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000C38_0_B54 *unkB54;
 };
 
 struct Unk_func_00000C64_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000C64_0_B54 *unkB54;
 };
 
 struct Unk_func_00000C90_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000C90_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_00000CB8_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000CB8_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_00000CE0_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000CE0_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_00000D30_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000D30_0_B54 *unkB54;
 };
 
 struct Unk_func_00000D6C_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000D6C_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
 
 struct Unk_func_00000D94_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_func_00000D94_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
@@ -668,7 +868,7 @@ struct Unk_func_0002C758_temp_a2 {
     u8 pad0[0x8];
     s32 unk8;
     u8 padC[0xB48];
-    void *unkB54;
+    struct Unk_Unk_func_0002C758_temp_a2_B54 *unkB54;
 };
 
 struct Unk_func_0002D3F4_0 {
@@ -725,9 +925,9 @@ struct Unk_func_00033114_0 {
 
 struct Unk_func_00035AF4_0 {
     u8 pad0[0x1C];
-    void * unk1C;
+    struct Unk_Unk_func_00035AF4_0_1C *unk1C;
     u8 pad20[0x4];
-    s32 *** unk24;
+    s32 ** *unk24;
 };
 
 struct Unk_func_00035DFC_0 {
@@ -1274,7 +1474,7 @@ struct Unk_func_0009907C_temp_v0 {
 
 struct Unk_func_000994A4_0 {
     u8 pad0[0x8];
-    void * unk8;
+    struct Unk_Unk_func_000994A4_0_8 *unk8;
 };
 
 struct Unk_func_00099748_0 {
@@ -1420,9 +1620,9 @@ struct Unk_func_000B0B84_1 {
 };
 
 struct Unk_func_000B0CDC_0 {
-    void * unk0;
+    void *unk0;
     u8 pad4[0xC];
-    void * unk10;
+    struct Unk_Unk_func_000B0CDC_0_10 *unk10;
 };
 
 struct Unk_func_000B106C_0 {
@@ -1489,8 +1689,8 @@ struct Unk_func_000B259C_0 {
 };
 
 struct Unk_func_000B263C_0 {
-    void * unk0;
-    void ** unk4;
+    struct Unk_Unk_func_000B263C_0_0 *unk0;
+    void **unk4;
 };
 
 struct Unk_func_000B28C0_0 {
@@ -1524,7 +1724,7 @@ struct Unk_func_000B2938_1 {
 };
 
 struct Unk_func_000B2990_0 {
-    void * unk0;
+    struct Unk_Unk_func_000B2990_0_0 *unk0;
     s32 unk4;
 };
 
@@ -1645,7 +1845,9 @@ struct Unk_func_000BD218_0 {
 };
 
 struct Unk_func_000BD218_temp_v0 {
-    u8 pad0[0x3C];
+    u8 pad0[0x18];
+    s32 unk18;
+    u8 pad1C[0x20];
     s32 unk3C;
     s32 unk40;
 };
@@ -1887,7 +2089,7 @@ struct Unk_sceHVWWW_Library_B6EB5E02_0 {
 
 struct Unk_sceHVWWW_Library_BF5437BC_0 {
     u8 pad0[0x8];
-    void * unk8;
+    struct Unk_Unk_sceHVWWW_Library_BF5437BC_0_8 *unk8;
 };
 
 struct Unk_sceHVWWW_Library_BF864242_0 {
@@ -1904,7 +2106,7 @@ struct Unk_sceHVWWW_Library_C55FC86E_0 {
 
 struct Unk_sceHVWWW_Library_C71B2574_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_sceHVWWW_Library_C71B2574_0_B54 *unkB54;
     u8 padB58[0x4];
     s32 unkB5C;
 };
@@ -1921,7 +2123,7 @@ struct Unk_sceHVWWW_Library_E3FEA7A9_1 {
 
 struct Unk_sceHVWWW_Library_F22D3CC3_0 {
     u8 pad0[0xB54];
-    void * unkB54;
+    struct Unk_Unk_sceHVWWW_Library_F22D3CC3_0_B54 *unkB54;
 };
 
 extern M2C_UNK D_000CC400;

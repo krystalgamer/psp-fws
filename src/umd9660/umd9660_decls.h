@@ -4,9 +4,14 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_Unk_func_00003FF0_0_64 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
 struct Unk_func_00003FF0_0 {
     u8 pad0[0x64];
-    void * unk64;
+    struct Unk_Unk_func_00003FF0_0_64 *unk64;
 };
 
 struct Unk_func_00003FFC_0 {

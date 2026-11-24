@@ -480,7 +480,7 @@ void func_00072988(struct Unk_func_00072988_0 *arg0) {
     } else {
         func_0006A618(temp_s1->unk5C);
     }
-    temp_v1_2 = M2C_FIELD(arg0->unk15C, s32 *, 0x24);
+    temp_v1_2 = arg0->unk15C->unk24;
     if (temp_v1_2 != 0) {
         func_0006A618(temp_v1_2);
     }

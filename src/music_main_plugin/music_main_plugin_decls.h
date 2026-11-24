@@ -61,6 +61,21 @@ struct D_000A54A0_s {
     volatile s32 unk110;
 };
 
+struct Unk_Unk_func_0001E95C_0_8 {
+    u8 pad0[0x1B];
+    u8 unk1B;
+};
+
+struct Unk_Unk_func_0001EAD8_0_8 {
+    u8 pad0[0x1B];
+    u8 unk1B;
+};
+
+struct Unk_Unk_func_0009044C_0_44 {
+    u8 pad0[0x28];
+    s32 unk28;
+};
+
 struct Unk_func_00002FB0_0 {
     u8 pad0[0x14];
     s32 unk14;
@@ -384,12 +399,12 @@ struct Unk_func_0001E774_0 {
 
 struct Unk_func_0001E95C_0 {
     u8 pad0[0x8];
-    void * unk8;
+    struct Unk_Unk_func_0001E95C_0_8 *unk8;
 };
 
 struct Unk_func_0001EAD8_0 {
     u8 pad0[0x8];
-    void * unk8;
+    struct Unk_Unk_func_0001EAD8_0_8 *unk8;
 };
 
 struct Unk_func_0001F690_0 {
@@ -1730,7 +1745,7 @@ struct Unk_func_0008FD40_0 {
 
 struct Unk_func_0009044C_0 {
     u8 pad0[0x44];
-    void * unk44;
+    struct Unk_Unk_func_0009044C_0_44 *unk44;
 };
 
 struct Unk_func_000916EC_0 {

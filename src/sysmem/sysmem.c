@@ -473,7 +473,7 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000075F4);
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_0000764C);
 
 s32 func_0000769C(struct Unk_func_0000769C_0 *arg0) {
-    return M2C_FIELD(arg0->unk8, s32 *, 0xC);
+    return arg0->unk8->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000076A8);

@@ -170,7 +170,7 @@ void func_00003FD4(void) {
 }
 
 s32 func_00003FF0(struct Unk_func_00003FF0_0 *arg0) {
-    return M2C_FIELD(arg0->unk64, s32 *, 0xC);
+    return arg0->unk64->unkC;
 }
 
 s32 func_00003FFC(struct Unk_func_00003FFC_0 *arg0) {

@@ -1875,7 +1875,7 @@ s32 func_0001D448(struct Unk_func_0001D448_0 *arg0, s32 arg1) {
 }
 
 s32 func_0001D464(struct Unk_func_0001D464_0 *arg0) {
-    return M2C_FIELD(arg0->unk8, s32 *, 0x11C);
+    return arg0->unk8->unk11C;
 }
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_0001D470);
@@ -2321,7 +2321,7 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_00020994);
 
 s32 func_000209A0(struct Unk_func_000209A0_0 *arg0) {
-    return M2C_FIELD(M2C_FIELD(arg0->unk8, void **, 0x1C), s32 *, 4);
+    return arg0->unk8->unk1C->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_00664C", func_000209B0);

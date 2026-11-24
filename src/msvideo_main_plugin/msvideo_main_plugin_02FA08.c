@@ -1213,7 +1213,7 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02FA08", func_0003C874);
 
 s32 func_0003C8BC(struct Unk_func_0003C8BC_0 *arg0) {
-    return M2C_FIELD(arg0->unk6DC, s32 *, 0x14);
+    return arg0->unk6DC->unk14;
 }
 
 s32 func_0003C8C8(void) {
