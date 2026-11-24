@@ -1366,7 +1366,6 @@ func_0003AE00 = 0x0003AE00; // type:func
 func_0003AF88 = 0x0003AF88; // type:func
 func_0003B110 = 0x0003B110; // type:func
 func_0003B124 = 0x0003B124; // type:func
-func_0003B158 = 0x0003B158; // type:func
 func_0003B164 = 0x0003B164; // type:func
 func_0003B268 = 0x0003B268; // type:func
 func_0003B558 = 0x0003B558; // type:func

@@ -56,8 +56,20 @@ segments:
       - { start: 0xC0, type: asm, name: init, linker_section: .init }
       - { start: 0xE4, type: prxpad, order: .text }
       - [0xF0, c, lftv_main_plugin]
+      - [0x3B9C, c, lftv_main_plugin_003ADC]
+      - [0x43D0, c, lftv_main_plugin_004310]
       - [0x506C, c, lftv_main_plugin_004FAC]
       - [0x76D8, c, lftv_main_plugin_007618]
+      - [0x233D8, c, lftv_main_plugin_023318]
+      - [0x243FC, c, lftv_main_plugin_02433C]
+      - [0x36E20, c, lftv_main_plugin_036D60]
+      - [0x376F4, c, lftv_main_plugin_037634]
+      - [0x3E3B8, c, lftv_main_plugin_03E2F8]
+      - [0x3E748, c, lftv_main_plugin_03E688]
+      - [0x3F184, c, lftv_main_plugin_03F0C4]
+      - [0x3F338, c, lftv_main_plugin_03F278]
+      - [0x51D1C, c, lftv_main_plugin_051C5C]
+      - [0x523D4, c, lftv_main_plugin_052314]
       - { start: 0x53C68, type: asm, name: fini, linker_section: .fini }
       - { start: 0x53C84, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x549D4, type: prxpad, order: .text }
@@ -77,8 +89,18 @@ segments:
       - { start: 0x55B2C, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x55B30, type: prxpad, order: .rodata }
       - [0x55B40, .rodata, lftv_main_plugin]
+      - [0x57388, .rodata, lftv_main_plugin_003ADC]
+      - [0x57424, .rodata, lftv_main_plugin_004310]
       - [0x574CC, .rodata, lftv_main_plugin_004FAC]
       - [0x577A8, .rodata, lftv_main_plugin_007618]
+      - [0x5A7C4, .rodata, lftv_main_plugin_023318]
+      - [0x5A948, .rodata, lftv_main_plugin_02433C]
+      - [0x5BE0C, .rodata, lftv_main_plugin_036D60]
+      - [0x5BFD0, .rodata, lftv_main_plugin_037634]
+      - [0x5CA3C, .rodata, lftv_main_plugin_03E688]
+      - [0x5CA74, .rodata, lftv_main_plugin_03F0C4]
+      - [0x5CAB0, .rodata, lftv_main_plugin_03F278]
+      - [0x5DA70, .rodata, lftv_main_plugin_052314]
       - { start: 0x5E12C, type: prxpad, order: .rodata }
   - name: lftv_main_plugin_seg1
     type: code
