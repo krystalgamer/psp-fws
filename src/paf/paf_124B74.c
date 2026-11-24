@@ -1,7 +1,19 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_00124B74);
+s32 func_00124B74(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 temp_v0;
+
+    func_001257F0(arg0, arg1, arg2, arg3);
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    if (temp_v0 != 0) {
+        M2C_FIELD(arg0, M2C_UNK (**)(s32, s32), 0xD0)(arg0, temp_v0);
+        M2C_FIELD(arg0, s32 *, 0xDBC) = 0;
+        M2C_FIELD(arg0, s32 *, 0xDC0) = 0;
+    }
+    D_001A7EE0 = (((s32) D_001A7EE0 ^ arg0) == 0) ? NULL : D_001A7EE0;
+    return 0;
+}
 
 s32 func_00124BD8(void) {
     return 0;

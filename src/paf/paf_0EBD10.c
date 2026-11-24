@@ -1,7 +1,11 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EBD10", func_000EBD10);
+void func_000EBD10(M2C_UNK **arg0) {
+    *arg0 = &D_0019AB08;
+    scePaf_715E8DAB((s32) arg0);
+    scePaf_4E67BB08(arg0);
+}
 
 void scePaf_22B0D7D8(void *arg0) {
     func_00102B50(M2C_FIELD(arg0, s32 *, 0x1E8));

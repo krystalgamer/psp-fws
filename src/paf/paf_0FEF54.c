@@ -1,7 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0FEF54", func_000FEF54);
+void func_000FEF54(void *arg0) {
+    func_000D0574(M2C_FIELD(arg0, void **, 0x20));
+}
 
 void scePaf_8DEB3DB3(void *arg0) {
     sceKernelWaitSema(D_001A5C80, 1, NULL);

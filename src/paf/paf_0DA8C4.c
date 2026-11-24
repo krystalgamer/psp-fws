@@ -1,7 +1,11 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0DA8C4", func_000DA8C4);
+void func_000DA8C4(M2C_UNK **arg0) {
+    *arg0 = &D_00199D28;
+    scePaf_715E8DAB((s32) arg0);
+    scePaf_4E67BB08(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0DA8C4", scePaf_8BA04801);
 

@@ -1,5 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_11E918", func_0011E918);
+void func_0011E918(M2C_UNK **arg0) {
+    *arg0 = &D_0019D390;
+}
 

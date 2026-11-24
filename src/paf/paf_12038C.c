@@ -1,7 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_12038C", func_0012038C);
+void func_0012038C(s32 arg0) {
+    sceCccIsValidUCS4(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_12038C", func_001203A8);
 

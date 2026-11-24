@@ -2,7 +2,20 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_168290", func_00168290);
+s32 func_00168290(s32 *arg0) {
+    s32 temp_a1;
+    s32 var_a1;
+
+    temp_a1 = *arg0;
+    var_a1 = 0x80615001;
+    if ((temp_a1 & 0xF) == 0xF) {
+        var_a1 = 0x80615002;
+        if ((u32) (temp_a1 >> 4) < 4U) {
+            var_a1 = func_00169950((s32) arg0);
+        }
+    }
+    return var_a1;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_168290", func_001682E4);
 

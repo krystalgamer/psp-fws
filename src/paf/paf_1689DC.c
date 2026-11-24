@@ -2,5 +2,14 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1689DC", func_001689DC);
+s32 func_001689DC(void *arg0, s32 *arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x80615001;
+    if (M2C_FIELD(arg0, s32 *, 0) & 8) {
+        var_v1 = 0;
+        *arg1 = M2C_FIELD(arg0, s32 *, 8);
+    }
+    return var_v1;
+}
 

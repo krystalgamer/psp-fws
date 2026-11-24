@@ -1,7 +1,12 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EE3AC);
+void func_000EE3AC(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0019AE48;
+    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x370));
+    scePaf_715E8DAB((s32) arg0);
+    scePaf_4E67BB08(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EE3F0);
 

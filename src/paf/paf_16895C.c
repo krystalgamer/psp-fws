@@ -2,5 +2,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_16895C", func_0016895C);
+s32 func_0016895C(s32 arg0, s32 *arg1, s32 *arg2) {
+    *arg1 = func_0016B084(arg0 + 0x10);
+    *arg2 = func_0016B084(arg0 + 0x14);
+    return 0;
+}
 

@@ -1,7 +1,32 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_101AC0", func_00101AC0);
+void func_00101AC0(void *arg0, s32 arg1, s32 arg2) {
+    s32 temp_v0;
+    s32 temp_v0_3;
+    u32 temp_v0_2;
+
+    M2C_FIELD(arg0, s32 *, 0x10) = (s32) (arg1 * arg2 * 4);
+    M2C_FIELD(arg0, s8 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, u32 *, 8) = 0U;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    temp_v0 = sceKernelCreateSema(&D_0019BCFC, 0U, 3, 0xFF, NULL);
+    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+    if (temp_v0 > 0) {
+        temp_v0_2 = sceKernelCreateSema(&D_0019BD0C, 0U, 0, 0xFF, NULL);
+        M2C_FIELD(arg0, u32 *, 8) = temp_v0_2;
+        if ((s32) temp_v0_2 > 0) {
+            temp_v0_3 = scePaf_3586BE05(0x40, M2C_FIELD(arg0, s32 *, 0x10) * 4);
+            M2C_FIELD(arg0, s32 *, 0xC) = temp_v0_3;
+            if (temp_v0_3 != 0) {
+                M2C_FIELD(arg0, s8 *, 0) = 1;
+            }
+        }
+    }
+}
 
 void func_00101B74(void *arg0) {
     s32 temp_v0;

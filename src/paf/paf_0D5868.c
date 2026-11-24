@@ -1,7 +1,15 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0D5868", func_000D5868);
+void func_000D5868(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00199A10;
+    scePaf_1B043852(arg0 + 0x28);
+    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x24));
+    func_000D58C4((s32) (arg0 + 0x14));
+    func_000D58C4((s32) (arg0 + 8));
+    scePaf_E977B833((s32) arg0);
+    scePaf_4E67BB08(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0D5868", func_000D58C4);
 

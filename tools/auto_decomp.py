@@ -432,11 +432,19 @@ def _verify_functions(mod, args, max_rounds=200):
         live = [n for n in accepted if f", {n});" not in src]
         moved = first_displaced(mod, args)
         why = "differs in full build"
-        if moved is not None:
+        text_end = max(e for _, e, _ in mod.funcs.values()) - mod.text_off
+        if moved is not None and moved >= text_end:
+            # rodata moved: C functions with their own literals/tables are to blame
+            names = [n for n in live if re.search(
+                rf"^[^\n;]*\b{n}\([^;{{]*\)\s*{{\n(?:(?!^}}).)*(\"|\bswitch\b|\b\d+\.\d*f?\b)", src, re.M | re.S)]
+            why = "differs in full build; moves rodata"
+            if not names:
+                moved = None
+        if moved is not None and moved < text_end:
             before = [(mod.funcs[n][0] - mod.text_off, n) for n in live if mod.funcs[n][0] - mod.text_off < moved]
             names = [max(before)[1]] if before else []
             why = "differs in full build; moves later symbols"
-        else:
+        elif moved is None:
             names = [n for n in live if built[mod.funcs[n][0]:mod.funcs[n][1]] != mod.base[mod.funcs[n][0]:mod.funcs[n][1]]]
         if not names:
             print("full build differs outside accepted functions")

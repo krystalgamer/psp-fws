@@ -2,5 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_16980C", func_0016980C);
+void func_0016980C(void *arg0) {
+    func_0016B084(M2C_FIELD(arg0, s32 *, 0x20) + 0x14);
+}
 
