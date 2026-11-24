@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/282/.splat_cache.savedata_plugin
   symbol_addrs_path:
     - config/282/symbol_addrs.savedata_plugin.txt
+    - config/282/func_starts.savedata_plugin.txt
     - tmp/build/282/prx_syms.savedata_plugin.txt
   reloc_addrs_path: [tmp/build/282/reloc_addrs.savedata_plugin.txt]
   asset_path: tmp/assets/282/savedata_plugin
@@ -54,6 +55,8 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, savedata_plugin]
+      - [0x11CF4, c, savedata_plugin_011C54]
+      - [0x13140, c, savedata_plugin_0130A0]
       - { start: 0x20BDC, type: asm, name: fini, linker_section: .fini }
       - { start: 0x20BF8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x21148, type: prxpad, order: .text }
@@ -72,6 +75,8 @@ segments:
       - { start: 0x217E0, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x217E4, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x21818, .rodata, savedata_plugin]
+      - [0x22740, .rodata, savedata_plugin_011C54]
+      - [0x22798, .rodata, savedata_plugin_0130A0]
   - name: savedata_plugin_seg1
     type: code
     start: 0x22D80
