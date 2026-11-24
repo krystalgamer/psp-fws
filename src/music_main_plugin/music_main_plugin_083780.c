@@ -2,9 +2,19 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083780", func_00083780);
+void func_00083780(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A1F70;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083780", func_0008379C);
+void func_0008379C(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000A1F70;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_083780", func_000837B8);
 

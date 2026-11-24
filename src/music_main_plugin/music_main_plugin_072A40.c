@@ -2,7 +2,10 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_072A40", func_00072A40);
+void func_00072A40(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s8 *, 0x5C) = 1;
+    M2C_FIELD(arg0, s32 *, 0x40) = arg1;
+}
 
 s32 func_00072A50(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x40);

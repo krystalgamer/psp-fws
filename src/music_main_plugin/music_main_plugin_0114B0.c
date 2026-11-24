@@ -2,7 +2,15 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0114B0", func_000114B0);
+s32 func_000114B0(s32 arg0) {
+    s32 var_v0;
+
+    var_v0 = 3;
+    if (arg0 != 0) {
+        var_v0 = func_000114E8(func_00014CC4(D_000A43C8, arg0, 1));
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0114B0", func_000114E8);
 
