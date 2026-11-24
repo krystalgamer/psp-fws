@@ -56,10 +56,20 @@ segments:
       - { start: 0xC0, type: asm, name: init, linker_section: .init }
       - { start: 0xE4, type: prxpad, order: .text }
       - [0x100, c, netfront]
+      - [0x9658, c, netfront_009598]
+      - [0x9894, c, netfront_0097D4]
+      - [0x3F8E0, c, netfront_03F820]
+      - [0x3F930, c, netfront_03F870]
+      - [0x60004, c, netfront_05FF44]
+      - [0x600B8, c, netfront_05FFF8]
       - [0x89AC4, c, netfront_089A04]
       - [0x8A10C, c, netfront_08A04C]
+      - [0xCCD9C, c, netfront_0CCCDC]
+      - [0xCD560, c, netfront_0CD4A0]
       - [0xEBFAC, c, netfront_0EBEEC]
       - [0xEC458, c, netfront_0EC398]
+      - [0x10C6A0, c, netfront_10C5E0]
+      - [0x111544, c, netfront_111484]
       - [0x111B78, c, netfront_111AB8]
       - [0x113E9C, c, netfront_113DDC]
       - [0x113F0C, c, netfront_113E4C]
@@ -80,8 +90,14 @@ segments:
       - { start: 0x11D4E4, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x11D4E8, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x11D560, .rodata, netfront]
+      - [0x11DA48, .rodata, netfront_0097D4]
+      - [0x11F5B8, .rodata, netfront_03F870]
+      - [0x12267C, .rodata, netfront_05FFF8]
       - [0x1262A4, .rodata, netfront_08A04C]
+      - [0x129DAC, .rodata, netfront_0CCCDC]
+      - [0x129DD4, .rodata, netfront_0CD4A0]
       - [0x12DBC8, .rodata, netfront_0EC398]
+      - [0x1308E8, .rodata, netfront_10C5E0]
       - [0x130D38, .rodata, netfront_113E4C]
       - { start: 0x131014, type: prxpad, order: .rodata }
   - name: netfront_seg1
