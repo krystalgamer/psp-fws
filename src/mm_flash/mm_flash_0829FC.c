@@ -2,7 +2,15 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0829FC", func_000829FC);
+s32 func_000829FC(s32 arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (arg1 < 2) {
+        var_v1 = M2C_FIELD(((arg1 * 4) + arg0), s32 *, 0x30);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0829FC", func_00082A1C);
 

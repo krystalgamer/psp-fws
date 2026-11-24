@@ -2,9 +2,23 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_043004", func_00043004);
+void func_00043004(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_043004", func_00043020);
+void func_00043020(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
 
 void func_0004303C(void *arg0) {
     void *temp_v0;

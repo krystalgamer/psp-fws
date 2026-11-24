@@ -2,7 +2,12 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_060460", func_00060460);
+void func_00060460(s32 arg0) {
+    if (arg0 != 0) {
+        func_00061A64(arg0);
+        func_00090730(*func_0009F1C0(), arg0, 0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_060460", func_000604A4);
 

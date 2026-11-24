@@ -98,7 +98,9 @@ void func_0009C2C8(void) {
     func_0006808C();
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C2E4);
+void func_0009C2E4(void) {
+    func_000916DC();
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C300);
 

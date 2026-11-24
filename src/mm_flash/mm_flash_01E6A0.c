@@ -2,9 +2,33 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_01E6A0", func_0001E6A0);
+void func_0001E6A0(void *arg0, s32 arg1, s32 arg2) {
+    s32 temp_s1;
+    s32 var_v0;
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_01E6A0", func_0001E728);
+    temp_s1 = func_00090648(*func_0009F1C0(), 0x14, 0);
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = sceHVNetfront_Module_15875ED4(arg1);
+    }
+    func_0001F990(temp_s1, arg1, var_v0, arg2 < 6);
+    M2C_FIELD(arg0, s32 *, 0) = temp_s1;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
+
+void func_0001E728(void *arg0, s32 arg1, s32 arg2) {
+    s32 temp_s1;
+    s32 var_v0;
+
+    temp_s1 = func_00090648(*func_0009F1C0(), 0x14, 0);
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = sceHVNetfront_Module_15875ED4(arg1);
+    }
+    func_0001F990(temp_s1, arg1, var_v0, arg2 < 6);
+    M2C_FIELD(arg0, s32 *, 0) = temp_s1;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_01E6A0", func_0001E7B0);
 
