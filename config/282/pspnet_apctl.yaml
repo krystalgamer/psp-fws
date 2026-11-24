@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/282/.splat_cache.pspnet_apctl
   symbol_addrs_path:
     - config/282/symbol_addrs.pspnet_apctl.txt
+    - config/282/func_starts.pspnet_apctl.txt
     - tmp/build/282/prx_syms.pspnet_apctl.txt
   reloc_addrs_path: [tmp/build/282/reloc_addrs.pspnet_apctl.txt]
   asset_path: tmp/assets/282/pspnet_apctl
@@ -53,6 +54,10 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, pspnet_apctl]
+      - [0x1780, c, pspnet_apctl_0016E0]
+      - [0x63E0, c, pspnet_apctl_006340]
+      - [0x98F0, c, pspnet_apctl_009850]
+      - [0xE9AC, c, pspnet_apctl_00E90C]
       - { start: 0x10320, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x105C8, type: prxpad, order: .text }
       - { start: 0x105D0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -65,6 +70,10 @@ segments:
       - { start: 0x10730, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x108F8, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - [0x10A4C, .rodata, pspnet_apctl]
+      - [0x10AD4, .rodata, pspnet_apctl_0016E0]
+      - [0x10C00, .rodata, pspnet_apctl_006340]
+      - [0x10EB0, .rodata, pspnet_apctl_009850]
+      - [0x110BC, .rodata, pspnet_apctl_00E90C]
   - name: pspnet_apctl_seg1
     type: code
     start: 0x11D10
