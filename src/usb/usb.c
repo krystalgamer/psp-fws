@@ -339,10 +339,10 @@ INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_00008244);
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", func_000082A4);
 
 void *func_00008318(struct Unk_func_00008318_0 *arg0, struct Unk_func_00008318_1 *arg1) {
-    void *temp_a0;
+    struct Unk_func_00008318_temp_a0 *temp_a0;
     void *temp_a2;
     void *var_v0;
-    void *var_v1;
+    struct Unk_func_00008318_temp_a0 *var_v1;
 
     var_v0 = arg0;
     if (arg0 != NULL) {
@@ -351,11 +351,11 @@ void *func_00008318(struct Unk_func_00008318_0 *arg0, struct Unk_func_00008318_1
             arg0->unk40 = arg1;
         } else {
             do {
-                temp_a2 = M2C_FIELD(var_v1, void **, 0x40);
+                temp_a2 = var_v1->unk40;
                 temp_a0 = var_v1;
                 var_v1 = temp_a2;
             } while (temp_a2 != NULL);
-            M2C_FIELD(temp_a0, void **, 0x40) = arg1;
+            temp_a0->unk40 = arg1;
             var_v0 = temp_a0;
         }
     }

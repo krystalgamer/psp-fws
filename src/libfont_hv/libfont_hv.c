@@ -196,9 +196,9 @@ s32 func_00002C74(struct Unk_func_00002C74_0 *arg0) {
     s32 var_s1;
     s32 var_s2;
     s32 var_v1;
-    void *temp_a0;
-    void *temp_a1;
-    void *temp_s0;
+    struct Unk_func_00002C74_temp_a0 *temp_a0;
+    struct Unk_func_00002C74_temp_a1 *temp_a1;
+    struct Unk_func_00002C74_temp_s0 *temp_s0;
 
     var_v1 = arg0->unk4;
     var_s2 = 0;
@@ -209,11 +209,11 @@ s32 func_00002C74(struct Unk_func_00002C74_0 *arg0) {
             temp_s0 = arg0->unk2C + var_s1;
             var_s1 += 0x4C;
             if (temp_s0 != NULL) {
-                if (M2C_FIELD(temp_s0, u8 *, 0) != 0) {
-                    M2C_FIELD(temp_s0, u8 *, 0) = 0U;
-                    temp_a0 = M2C_FIELD(temp_s0, void **, 4);
-                    temp_a1 = M2C_FIELD(temp_a0, void **, 0x48);
-                    M2C_FIELD(temp_a1, u16 *, 0x34) = (u16) (M2C_FIELD(temp_a1, u16 *, 0x34) - 1);
+                if (temp_s0->unk0 != 0) {
+                    temp_s0->unk0 = 0U;
+                    temp_a0 = temp_s0->unk4;
+                    temp_a1 = temp_a0->unk48;
+                    temp_a1->unk34 = (u16) (temp_a1->unk34 - 1);
                     func_00009234((s32) temp_a0);
                     func_00002BF8((s32) temp_s0);
                     var_v1 = arg0->unk4;

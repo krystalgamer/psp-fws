@@ -6,12 +6,17 @@
 
 struct Unk_func_00008318_0 {
     u8 pad0[0x40];
-    void * unk40;
+    struct Unk_func_00008318_temp_a0 *unk40;
 };
 
 struct Unk_func_00008318_1 {
     u8 pad0[0x40];
     s32 unk40;
+};
+
+struct Unk_func_00008318_temp_a0 {
+    u8 pad0[0x40];
+    void *unk40;
 };
 
 extern M2C_UNK D_00009A3C;

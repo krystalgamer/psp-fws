@@ -25,6 +25,9 @@
   "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);",
   "sceVshCommonGui_1CF884A1": "M2C_UNK sceVshCommonGui_1CF884A1();"
  },
+ "types": {
+  "Unk_func_00000F3C_temp_v0": "struct Unk_func_00000F3C_temp_v0 {\n\n};"
+ },
  "vars": {
   "D_0000206C": "extern M2C_UNK D_0000206C;",
   "func_00000FF8": "extern M2C_UNK func_00000FF8;"

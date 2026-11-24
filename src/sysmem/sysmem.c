@@ -71,17 +71,17 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", func_000012BC);
 s32 func_00001318(struct Unk_func_00001318_0 *arg0) {
     u32 temp_a3;
     u32 var_a1;
-    void *var_a0;
+    struct Unk_func_00001318_var_a0 *var_a0;
 
     var_a0 = arg0->unk10 + 4;
     var_a1 = 0;
     if (var_a0 != NULL) {
         do {
-            if (!(M2C_FIELD(var_a0, s32 *, 4) & 1)) {
-                temp_a3 = (u32) M2C_FIELD(var_a0, u32 *, 8) >> 2;
+            if (!(var_a0->unk4 & 1)) {
+                temp_a3 = (u32) var_a0->unk8 >> 2;
                 var_a1 = (var_a1 < temp_a3) ? temp_a3 : var_a1;
             }
-            var_a0 = M2C_FIELD(var_a0, void **, 0);
+            var_a0 = var_a0->unk0;
         } while (var_a0 != NULL);
     }
     return var_a1 << 8;
@@ -93,16 +93,16 @@ INCLUDE_ASM("tmp/asm/201/sysmem/nonmatchings/sysmem", sceKernelMaxFreeMemSize);
 
 s32 func_00001478(struct Unk_func_00001478_0 *arg0) {
     s32 var_a0;
-    void *var_v1;
+    struct Unk_func_00001478_var_v1 *var_v1;
 
     var_v1 = arg0->unk10 + 4;
     var_a0 = 0;
     if (var_v1 != NULL) {
         do {
-            if (!(M2C_FIELD(var_v1, s32 *, 4) & 1)) {
-                var_a0 += (u32) M2C_FIELD(var_v1, u32 *, 8) >> 2;
+            if (!(var_v1->unk4 & 1)) {
+                var_a0 += (u32) var_v1->unk8 >> 2;
             }
-            var_v1 = M2C_FIELD(var_v1, void **, 0);
+            var_v1 = var_v1->unk0;
         } while (var_v1 != NULL);
     }
     return var_a0 << 8;

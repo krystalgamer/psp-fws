@@ -126,13 +126,13 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0000321C);
 
 void func_00003268(struct Unk_func_00003268_0 *arg0, s32 arg1) {
     s32 temp_a3;
-    void *temp_a2;
+    struct Unk_func_00003268_temp_a2 *temp_a2;
 
     sceKernelWaitSema(arg0->unk134, 1, NULL);
     temp_a3 = arg0->unk140;
     temp_a2 = temp_a3 + (((s32) (arg1 - (temp_a3 + (arg0->unk13C * 0x14))) / (s32) arg0->unk138) * 0x14);
-    if (M2C_FIELD(temp_a2, s32 *, 0x10) == arg1) {
-        M2C_FIELD(temp_a2, s32 *, 0) = 0;
+    if (temp_a2->unk10 == arg1) {
+        temp_a2->unk0 = 0;
         arg0->unk144 = temp_a2;
     }
     sceKernelSignalSema(arg0->unk134, 1);
@@ -141,17 +141,17 @@ void func_00003268(struct Unk_func_00003268_0 *arg0, s32 arg1) {
 s32 func_00003304(struct Unk_func_00003304_0 *arg0) {
     s32 temp_a2;
     s32 var_s0;
-    void *temp_a0;
-    void *var_v1;
+    struct Unk_func_00003304_temp_a0 *temp_a0;
+    struct Unk_func_00003304_var_v1 *var_v1;
 
     sceKernelWaitSema(arg0->unk134, 1, NULL);
     temp_a0 = arg0->unk144;
-    var_v1 = M2C_FIELD(temp_a0, void **, 4);
-    var_s0 = M2C_FIELD(temp_a0, s32 *, 0) == 0;
+    var_v1 = temp_a0->unk4;
+    var_s0 = temp_a0->unk0 == 0;
     if (var_v1 != temp_a0) {
         do {
-            temp_a2 = M2C_FIELD(var_v1, s32 *, 0);
-            var_v1 = M2C_FIELD(var_v1, void **, 4);
+            temp_a2 = var_v1->unk0;
+            var_v1 = var_v1->unk4;
             var_s0 += temp_a2 == 0;
         } while (var_v1 != temp_a0);
     }
@@ -160,40 +160,40 @@ s32 func_00003304(struct Unk_func_00003304_0 *arg0) {
 }
 
 void func_00003374(struct Unk_func_00003374_0 *arg0) {
-    void *temp_a0;
-    void *var_v1;
+    struct Unk_func_00003374_temp_a0 *temp_a0;
+    struct Unk_func_00003374_var_v1 *var_v1;
 
     sceKernelWaitSema(arg0->unk134, 1, NULL);
     temp_a0 = arg0->unk144;
-    if (M2C_FIELD(temp_a0, s32 *, 0) != 0) {
-        M2C_FIELD(temp_a0, s32 *, 0) = 0;
+    if (temp_a0->unk0 != 0) {
+        temp_a0->unk0 = 0;
     }
-    var_v1 = M2C_FIELD(temp_a0, void **, 4);
+    var_v1 = temp_a0->unk4;
     if (var_v1 != temp_a0) {
         do {
-            if (M2C_FIELD(var_v1, s32 *, 0) != 0) {
-                M2C_FIELD(var_v1, s32 *, 0) = 0;
+            if (var_v1->unk0 != 0) {
+                var_v1->unk0 = 0;
             }
-            var_v1 = M2C_FIELD(var_v1, void **, 4);
+            var_v1 = var_v1->unk4;
         } while (var_v1 != temp_a0);
     }
     sceKernelSignalSema(arg0->unk134, 1);
 }
 
 void func_000033E4(struct Unk_func_000033E4_0 *arg0) {
-    void *temp_v1;
-    void *var_v0;
+    struct Unk_func_000033E4_temp_v1 *temp_v1;
+    struct Unk_func_000033E4_var_v0 *var_v0;
 
     temp_v1 = arg0->unk15C;
-    var_v0 = M2C_FIELD(temp_v1, void **, 4);
+    var_v0 = temp_v1->unk4;
     if (var_v0 != temp_v1) {
         do {
-            M2C_FIELD(var_v0, s16 *, 0) = 0;
-            M2C_FIELD(var_v0, s16 *, 2) = 0;
-            var_v0 = M2C_FIELD(var_v0, void **, 4);
+            var_v0->unk0 = 0;
+            var_v0->unk2 = 0;
+            var_v0 = var_v0->unk4;
         } while (var_v0 != temp_v1);
     }
-    M2C_FIELD(temp_v1, u16 *, 0) = (u16) (M2C_FIELD(temp_v1, u16 *, 0) | 2);
+    temp_v1->unk0 = (u16) (temp_v1->unk0 | 2);
 }
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_EC9232F0);
@@ -220,14 +220,14 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_9658C9F7);
 s32 sceWlanDrv_driver_4C7F62E0(void) {
     s32 temp_v1;
     u32 temp_s0;
-    void *temp_s1;
+    struct Unk_sceWlanDrv_driver_4C7F62E0_temp_s1 *temp_s1;
 
     temp_s1 = D_000191B0;
     temp_s0 = shiftK1();
-    temp_v1 = M2C_FIELD(temp_s1, s32 *, 0x1CC);
+    temp_v1 = temp_s1->unk1CC;
     if (temp_v1 > 0) {
         sceKernelCancelCallback(temp_v1);
-        M2C_FIELD(temp_s1, s32 *, 0x1CC) = 0;
+        temp_s1->unk1CC = 0;
     }
     setK1(temp_s0);
     return 0;
@@ -271,13 +271,13 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00003C68);
 
 s32 func_00003CE0(struct Unk_func_00003CE0_0 *arg0) {
     s32 temp_s1;
-    void *temp_s0;
+    struct Unk_func_00003CE0_temp_s0 *temp_s0;
 
     temp_s0 = arg0->unk1E0;
     temp_s1 = sceKernelCpuSuspendIntr();
-    if ((temp_s0 != NULL) && !(M2C_FIELD(temp_s0, s32 *, 0x18) & 1)) {
-        M2C_FIELD(temp_s0, s32 *, 8) = 0x80000012;
-        M2C_FIELD(temp_s0, s32 *, 0x18) = 3;
+    if ((temp_s0 != NULL) && !(temp_s0->unk18 & 1)) {
+        temp_s0->unk8 = 0x80000012;
+        temp_s0->unk18 = 3;
         sceKernelSendMbx(arg0->unk178, temp_s0);
     }
     sceKernelCpuResumeIntr(temp_s1);
@@ -475,11 +475,11 @@ void func_0000AC3C(void) {
 void func_0000AC90(void *arg0) {
     s32 *temp_a3;
     s32 *temp_t6;
-    void *temp_t9;
+    struct Unk_func_0000AC90_temp_t9 *temp_t9;
 
     temp_t9 = arg0 + 0xC;
-    temp_t6 = M2C_FIELD(temp_t9, s32 **, 0x18);
-    temp_a3 = M2C_FIELD(temp_t9, s32 **, 0x1C);
+    temp_t6 = temp_t9->unk18;
+    temp_a3 = temp_t9->unk1C;
     *temp_t6 |= 0x2020;
     *temp_a3 |= 0x10000;
     M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) | 4);
@@ -804,20 +804,20 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_000153A8);
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_0001558C);
 
 void func_00015958(struct Unk_func_00015958_0 *arg0) {
-    void *temp_s0;
+    struct Unk_func_00015958_temp_s0 *temp_s0;
 
     temp_s0 = arg0->unkB8;
-    if (M2C_FIELD(temp_s0, s32 *, 0x74) == 0) {
-        sceKernelClearEventFlag(M2C_FIELD(temp_s0, s32 *, 0x38), -0x201U);
-        M2C_FIELD(temp_s0, s32 *, 0x30) = 1;
-        M2C_FIELD(temp_s0, s32 *, 0x6C) = -1;
+    if (temp_s0->unk74 == 0) {
+        sceKernelClearEventFlag(temp_s0->unk38, -0x201U);
+        temp_s0->unk30 = 1;
+        temp_s0->unk6C = -1;
         if ((u32) (sceKernelGetSystemTimeLow() - D_00019290) >= (u32) (arg0->unk128 * 0x3E8)) {
 
-        } else if (sceKernelPollEventFlag(M2C_FIELD(temp_s0, s32 *, 0x34), 0x400U, 1, NULL) != 0) {
+        } else if (sceKernelPollEventFlag(temp_s0->unk34, 0x400U, 1, NULL) != 0) {
             func_0000E5F0((s32) arg0, 2, 0);
         }
-        sceKernelSetEventFlag(M2C_FIELD(temp_s0, s32 *, 0x38), 0x400U);
-        M2C_FIELD(temp_s0, s32 *, 0x74) = 1;
+        sceKernelSetEventFlag(temp_s0->unk38, 0x400U);
+        temp_s0->unk74 = 1;
     }
 }
 
@@ -909,14 +909,14 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00017880);
 s32 func_00017A3C(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
     M2C_UNK (*temp_v0)(void *, s32, s32, u32, s32);
     s32 var_s0;
-    void *temp_s2;
+    struct Unk_func_00017A3C_temp_s2 *temp_s2;
 
     var_s0 = 0;
     temp_s2 = arg0->unk184;
     func_00003114(arg0);
     if ((arg0->unk0 & 0x3800) != 0x800) {
         var_s0 = 0x80410D14;
-    } else if ((M2C_FIELD(temp_s2, s16 *, 0x10E) < arg1) || ((u32) M2C_FIELD(temp_s2, s16 *, 0x110) < arg3)) {
+    } else if ((temp_s2->unk10E < arg1) || ((u32) temp_s2->unk110 < arg3)) {
         var_s0 = 0x80410D13;
     } else if (sceWlanDrv_driver_FBD385FB() <= 0) {
         temp_v0 = M2C_FIELD(temp_s2, M2C_UNK (**)(void *, s32, s32, u32, s32), 0xD8);
@@ -934,7 +934,7 @@ s32 func_00017BCC(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2) {
     s32 (*temp_v0)(void *, s32, s32);
     s32 temp_v0_2;
     s32 var_s0;
-    void *temp_s2;
+    struct Unk_func_00017BCC_temp_s2 *temp_s2;
 
     temp_s2 = arg0->unk184;
     func_00003114(arg0);
@@ -961,7 +961,7 @@ s32 func_00017EA4(struct Unk_func_00003114_0 *arg0, struct Unk_func_00017EA4_1 *
     s32 temp_v1;
     s32 var_s2;
     u16 temp_a0;
-    void *temp_s1;
+    struct Unk_func_00017EA4_temp_s1 *temp_s1;
 
     var_s2 = 0;
     temp_s1 = arg0->unk184;
@@ -969,12 +969,12 @@ s32 func_00017EA4(struct Unk_func_00003114_0 *arg0, struct Unk_func_00017EA4_1 *
     if ((arg0->unk0 & 0x3800) != 0x800) {
         var_s2 = 0x80410D14;
     } else {
-        temp_a0 = M2C_FIELD(temp_s1, u16 *, 0x18E);
-        arg1->unk0 = (s32) M2C_FIELD(temp_s1, s32 *, 0x190);
-        temp_v1 = M2C_FIELD(temp_s1, s32 *, 0x1A0);
+        temp_a0 = temp_s1->unk18E;
+        arg1->unk0 = (s32) temp_s1->unk190;
+        temp_v1 = temp_s1->unk1A0;
         arg1->unk4 = temp_a0;
         if (temp_v1 == 1) {
-            arg1->unk4 = (u16) (temp_a0 | (temp_v1 << M2C_FIELD(temp_s1, s16 *, 0x112)));
+            arg1->unk4 = (u16) (temp_a0 | (temp_v1 << temp_s1->unk112));
         }
     }
     func_00003138(arg0);
@@ -984,13 +984,13 @@ s32 func_00017EA4(struct Unk_func_00003114_0 *arg0, struct Unk_func_00017EA4_1 *
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00017F40);
 
 s32 func_00017FC4(struct Unk_func_00003114_0 *arg0, struct Unk_func_00017FC4_1 *arg1) {
-    void *temp_s0;
+    struct Unk_func_00017FC4_temp_s0 *temp_s0;
 
     temp_s0 = arg0->unk184;
     func_00003114(arg0);
-    arg1->unk0 = (u16) M2C_FIELD(temp_s0, u16 *, 0x12C);
-    arg1->unk2 = (u16) M2C_FIELD(temp_s0, u16 *, 0x12E);
-    arg1->unk4 = (u16) M2C_FIELD(temp_s0, u16 *, 0x130);
+    arg1->unk0 = (u16) temp_s0->unk12C;
+    arg1->unk2 = (u16) temp_s0->unk12E;
+    arg1->unk4 = (u16) temp_s0->unk130;
     func_00003138(arg0);
     return 0;
 }

@@ -80,12 +80,12 @@ void sceVshCommonGui_450F3CF0(s32 *arg0) {
 
 s32 sceVshCommonGui_ACFE7BE7(void **arg0) {
     s32 var_v0;
-    void *temp_a0;
+    struct Unk_sceVshCommonGui_ACFE7BE7_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     var_v0 = 0;
     if (temp_a0 != NULL) {
-        var_v0 = M2C_FIELD(temp_a0, s32 *, 0x84);
+        var_v0 = temp_a0->unk84;
     }
     return var_v0;
 }

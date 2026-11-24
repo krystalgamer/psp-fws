@@ -321,13 +321,22 @@ def verify(vm):
 
 
 def revert(mod):
-    subprocess.run(["git", "checkout", "-q", "--", f"src/{mod}"], cwd=ROOT)
+    """Restore src/<mod> to HEAD without touching the git index (parallel-safe)."""
+    tracked = subprocess.run(["git", "ls-tree", "-r", "--name-only", "HEAD", f"src/{mod}"], cwd=ROOT,
+                             capture_output=True, text=True).stdout.split()
+    for path in tracked:
+        data = subprocess.run(["git", "show", f"HEAD:{path}"], cwd=ROOT, capture_output=True).stdout
+        if (ROOT / path).read_bytes() != data:
+            (ROOT / path).write_bytes(data)
+    for f in (ROOT / "src" / mod).iterdir():
+        if f.is_file() and str(f.relative_to(ROOT)) not in tracked:
+            f.unlink()
 
 
 def main():
     vm = sys.argv[1]
     v, mod = vm.split(":")
-    if subprocess.run(["git", "diff", "--quiet", "--", f"src/{mod}"], cwd=ROOT).returncode:
+    if subprocess.run(["git", "diff", "--quiet", "--no-ext-diff", "--", f"src/{mod}"], cwd=ROOT).returncode:
         print(f"{vm}: local changes, skipping")
         return
     if "--locals" in sys.argv:

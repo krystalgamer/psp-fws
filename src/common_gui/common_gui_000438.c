@@ -16,7 +16,7 @@ INCLUDE_ASM("tmp/asm/282/common_gui/nonmatchings/common_gui_000438", func_000004
 
 void sceVshCommonGui_80271F41(void) {
     s32 temp_v0;
-    void *temp_v0_2;
+    struct Unk_sceVshCommonGui_80271F41_temp_v0_2 *temp_v0_2;
 
     temp_v0 = scePaf_D4FAE7D0(&D_00003264);
     if (temp_v0 != 0) {
@@ -83,11 +83,11 @@ void func_00000888(void **arg0, void **arg1) {
 }
 
 void func_000008A8(void **arg0) {
-    void *temp_a0;
+    struct Unk_func_000008A8_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 4) = (s32) (M2C_FIELD(temp_a0, s32 *, 4) + 1);
+        temp_a0->unk4 = (s32) (temp_a0->unk4 + 1);
     }
 }
 

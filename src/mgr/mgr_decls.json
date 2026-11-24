@@ -107,7 +107,8 @@
  "types": {
   "D_0000AFF8_s": "struct D_0000AFF8_s {\n    s32 unk0;\n    u8 pad4[0x8];\n    volatile s32 unkC;\n};",
   "D_0000B050_s": "struct D_0000B050_s {\n    u8 unk0;\n    u8 unk1;\n    u8 unk2;\n    u8 unk3;\n};",
-  "D_0000B708_s": "struct D_0000B708_s {\n    s32 unk0;\n    s32 unk4;\n};"
+  "D_0000B708_s": "struct D_0000B708_s {\n    s32 unk0;\n    s32 unk4;\n};",
+  "Unk_func_000018F4_temp_a4": "struct Unk_func_000018F4_temp_a4 {\n    u8 pad0[0x1];\n    u8 unk1;\n    u8 unk2;\n    u8 unk3;\n};"
  },
  "vars": {
   "D_0000AEE0": "extern M2C_UNK D_0000AEE0;",

@@ -43,7 +43,7 @@ INCLUDE_RODATA("tmp/asm/282/opening_plugin/nonmatchings/opening_plugin", D_00001
 
 void func_00000790(void) {
     s32 temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_00000790_temp_v0_2 *temp_v0_2;
 
     temp_v0 = scePaf_D4FAE7D0("topmenu_plugin");
     if (temp_v0 != 0) {

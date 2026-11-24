@@ -251,7 +251,7 @@ s32 func_00001CB8(s32 arg0, s32 arg1, void *arg2) {
     s32 var_a1;
     s32 var_a3;
     s32 var_s0;
-    void *var_a2;
+    struct Unk_func_00001CB8_var_a2 *var_a2;
 
     var_a2 = arg2;
     var_a3 = arg1 < 0x10E;
@@ -259,7 +259,7 @@ s32 func_00001CB8(s32 arg0, s32 arg1, void *arg2) {
     if (arg0 == 1) {
         var_s0 = 0x380000;
         if (var_a3 == 0) {
-            var_a3 = M2C_FIELD(var_a2, s32 *, 0x4C);
+            var_a3 = var_a2->unk4C;
             var_a2 = (void *) (var_a3 & 0x400);
             var_s0 = (var_a2 != NULL) ? 0x480000 : 0x380000;
         }

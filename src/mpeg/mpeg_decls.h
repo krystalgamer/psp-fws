@@ -4,11 +4,26 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00000FEC_temp_s4 {
+    u8 pad0[0x34];
+    s32 unk34;
+};
+
+struct Unk_func_000015B4_temp_s3 {
+    u8 pad0[0x34];
+    s32 unk34;
+};
+
 struct Unk_func_000031A0_0 {
     u8 pad0[0xC];
     s32 unkC;
     u8 pad10[0x18];
     s32 * unk28;
+};
+
+struct Unk_func_000031A0_temp_s2 {
+    u8 pad0[0x66C];
+    u32 unk66C;
 };
 
 struct Unk_func_00004E70_0 {

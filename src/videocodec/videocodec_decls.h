@@ -6,12 +6,17 @@
 
 struct Unk_func_00000EB4_0 {
     u8 pad0[0x10];
-    void * unk10;
+    struct Unk_func_00000EB4_temp_s1 *unk10;
     u8 pad14[0x18];
-    void * unk2C;
-    void * unk30;
+    void *unk2C;
+    void *unk30;
     u8 pad34[0x4];
-    void * unk38;
+    void *unk38;
+};
+
+struct Unk_func_00000EB4_temp_s1 {
+    u8 pad0[0x20];
+    s32 unk20;
 };
 
 

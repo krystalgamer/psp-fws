@@ -83,11 +83,11 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_0348E8", func_00036268);
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_0348E8", func_000362F0);
 
 void func_000363A8(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_000363A8_temp_v0 *temp_v0;
 
     temp_v0 = func_00035F54(arg0, 1);
-    M2C_FIELD(temp_v0, s32 *, 0x14) = arg1;
-    M2C_FIELD(temp_v0, s32 *, 0x10) = 1;
+    temp_v0->unk14 = arg1;
+    temp_v0->unk10 = 1;
 }
 
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_0348E8", func_000363DC);

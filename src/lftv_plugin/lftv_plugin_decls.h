@@ -4,6 +4,10 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_0000186C_temp_v0_2 {
+
+};
+
 extern M2C_UNK D_000031AC;
 extern M2C_UNK D_0000329C;
 extern s8 D_000033F9;

@@ -154,15 +154,15 @@ INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_00003EA4);
 
 s32 func_00003EE8(void) {
     s32 var_v0;
-    void *temp_v0;
+    struct Unk_func_00003EE8_temp_v0 *temp_v0;
 
     temp_v0 = func_00000B6C();
     var_v0 = 0x80082715;
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s8 *, 7) = 0;
-        M2C_FIELD(temp_v0, s8 *, 5) = 0;
-        M2C_FIELD(temp_v0, s8 *, 6) = 0;
-        M2C_FIELD(temp_v0, s8 *, 4) = 1;
+        temp_v0->unk7 = 0;
+        temp_v0->unk5 = 0;
+        temp_v0->unk6 = 0;
+        temp_v0->unk4 = 1;
         var_v0 = 0;
     }
     return var_v0;
@@ -174,12 +174,12 @@ INCLUDE_ASM("tmp/asm/282/registry/nonmatchings/registry", func_00003FE4);
 
 s32 func_00004024(void) {
     s32 var_v0;
-    void *temp_v0;
+    struct Unk_func_00004024_temp_v0 *temp_v0;
 
     temp_v0 = func_00003EA4();
     var_v0 = 0x8008272E;
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s32 *, 4) = 0;
+        temp_v0->unk4 = 0;
         var_v0 = 0;
     }
     return var_v0;

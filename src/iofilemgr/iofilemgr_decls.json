@@ -40,7 +40,8 @@
   "sceIoWriteAsync": "s32 sceIoWriteAsync(u32 arg0, void *arg1, u32 arg2);"
  },
  "types": {
-  "Unk_IoFileMgrForKernel_BD17474F_0": "struct Unk_IoFileMgrForKernel_BD17474F_0 {\n    u8 pad0[0x80];\n    s32 unk80;\n};"
+  "Unk_IoFileMgrForKernel_BD17474F_0": "struct Unk_IoFileMgrForKernel_BD17474F_0 {\n    u8 pad0[0x80];\n    s32 unk80;\n};",
+  "Unk_sceIoGetDevType_sp0": "struct Unk_sceIoGetDevType_sp0 {\n    u8 pad0[0xC];\n    u8 unkC;\n};"
  },
  "vars": {
   "D_00005870": "extern s32 D_00005870;"

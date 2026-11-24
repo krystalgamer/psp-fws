@@ -22,6 +22,7 @@
   "D_00006B80_s": "struct D_00006B80_s {\n    u8 pad0[0x138];\n    volatile u32 unk138;\n    u8 pad13C[0x198];\n    volatile s32 unk2D4;\n};",
   "Unk_func_00000570_0": "struct Unk_func_00000570_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
   "Unk_func_00000570_1": "struct Unk_func_00000570_1 {\n    u8 pad0[0x14];\n    u8 unk14;\n    u8 unk15;\n    u8 pad16[0x12];\n    s32 unk28;\n    s32 unk2C;\n    s32 unk30;\n    s32 unk34;\n};",
+  "Unk_func_00001908_temp_v0": "struct Unk_func_00001908_temp_v0 {\n    u8 pad0[0x1];\n    u8 unk1;\n    u8 unk2;\n    u8 unk3;\n};",
   "Unk_func_000026B0_0": "struct Unk_func_000026B0_0 {\n    u8 pad0[0x2D];\n    u8 unk2D;\n    u8 pad2E[0x16];\n    s32 unk44;\n    s32 unk48;\n};"
  },
  "vars": {

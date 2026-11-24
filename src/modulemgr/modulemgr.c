@@ -137,12 +137,12 @@ INCLUDE_ASM("tmp/asm/282/modulemgr/nonmatchings/modulemgr", ModuleMgrForKernel_0
 
 s32 ModuleMgrForKernel_54D9E02E(void) {
     s32 var_v0;
-    void *temp_v0;
+    struct Unk_ModuleMgrForKernel_54D9E02E_temp_v0 *temp_v0;
 
     temp_v0 = LoadCoreForKernel_FB8AE27D();
     var_v0 = 0x8002012E;
     if (temp_v0 != NULL) {
-        var_v0 = M2C_FIELD(temp_v0, s32 *, 0x2C);
+        var_v0 = temp_v0->unk2C;
     }
     return var_v0;
 }

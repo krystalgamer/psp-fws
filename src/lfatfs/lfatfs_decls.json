@@ -46,7 +46,8 @@
   "sceLFatFs_driver_8F0560E0": "s32 sceLFatFs_driver_8F0560E0(void);"
  },
  "types": {
-  "Unk_func_00001980_0": "struct Unk_func_00001980_0 {\n    void * unk0;\n    void ** unk4;\n    void * unk8;\n};",
+  "Unk_func_00001980_0": "struct Unk_func_00001980_0 {\n    void *unk0;\n    void **unk4;\n    struct Unk_func_00001980_temp_a2 *unk8;\n};",
+  "Unk_func_00001980_temp_a2": "struct Unk_func_00001980_temp_a2 {\n    u8 pad0[0x8];\n    s32 unk8;\n};",
   "Unk_func_0000286C_0": "struct Unk_func_0000286C_0 {\n    u8 pad0[0x10];\n    void * unk10;\n};",
   "Unk_func_00003AA0_0": "struct Unk_func_00003AA0_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
   "Unk_func_00003AE8_0": "struct Unk_func_00003AE8_0 {\n    void * unk0;\n    s32 unk4;\n    s32 unk8;\n};",

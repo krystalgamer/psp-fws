@@ -5,9 +5,14 @@
 #include "m2c_macros.h"
 
 struct Unk_func_00001980_0 {
-    void * unk0;
-    void ** unk4;
-    void * unk8;
+    void *unk0;
+    void **unk4;
+    struct Unk_func_00001980_temp_a2 *unk8;
+};
+
+struct Unk_func_00001980_temp_a2 {
+    u8 pad0[0x8];
+    s32 unk8;
 };
 
 struct Unk_func_0000286C_0 {

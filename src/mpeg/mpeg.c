@@ -57,14 +57,14 @@ s32 func_00000FE0(void) {
 void func_00000FEC(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *sp0;
     s32 temp_s1;
-    void *temp_s4;
+    struct Unk_func_00000FEC_temp_s4 *temp_s4;
 
     temp_s4 = M2C_FIELD(*arg0, void **, 0x68C);
     if (func_00001AF4(arg0) == 0) {
-        temp_s1 = M2C_FIELD(temp_s4, s32 *, 0x34);
-        M2C_FIELD(temp_s4, s32 *, 0x34) = 1;
+        temp_s1 = temp_s4->unk34;
+        temp_s4->unk34 = 1;
         func_00000C88((s32) arg0, arg1, arg2, arg3, &sp0);
-        M2C_FIELD(temp_s4, s32 *, 0x34) = temp_s1;
+        temp_s4->unk34 = temp_s1;
     }
 }
 
@@ -81,14 +81,14 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001510);
 void func_000015B4(s32 *arg0, s32 arg1, s32 arg2) {
     void *sp0;
     s32 temp_s1;
-    void *temp_s3;
+    struct Unk_func_000015B4_temp_s3 *temp_s3;
 
     temp_s3 = M2C_FIELD(*arg0, void **, 0x68C);
     if (func_00001AF4(arg0) == 0) {
-        temp_s1 = M2C_FIELD(temp_s3, s32 *, 0x34);
-        M2C_FIELD(temp_s3, s32 *, 0x34) = 1;
+        temp_s1 = temp_s3->unk34;
+        temp_s3->unk34 = 1;
         func_00001510((s32) arg0, arg1, arg2, &sp0);
-        M2C_FIELD(temp_s3, s32 *, 0x34) = temp_s1;
+        temp_s3->unk34 = temp_s1;
     }
 }
 
@@ -167,7 +167,7 @@ s32 func_000031A0(struct Unk_func_000031A0_0 *arg0) {
     s32 temp_s0;
     s32 temp_v0;
     s32 var_v0;
-    void *temp_s2;
+    struct Unk_func_000031A0_temp_s2 *temp_s2;
 
     temp_v1 = arg0->unk28;
     temp_s2 = *temp_v1;
@@ -175,9 +175,9 @@ s32 func_000031A0(struct Unk_func_000031A0_0 *arg0) {
     if (temp_v0 != 0) {
         var_v0 = temp_v0;
     } else {
-        func_00006D70(M2C_FIELD(temp_s2, u32 *, 0x66C));
+        func_00006D70(temp_s2->unk66C);
         temp_s0 = arg0->unkC;
-        func_00006E00(M2C_FIELD(temp_s2, u32 *, 0x66C));
+        func_00006E00(temp_s2->unk66C);
         var_v0 = temp_s0;
     }
     return var_v0;

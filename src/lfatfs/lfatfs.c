@@ -90,12 +90,12 @@ INCLUDE_ASM("tmp/asm/282/lfatfs/nonmatchings/lfatfs", func_000018E4);
 s32 func_00001980(struct Unk_func_00001980_0 *arg0) {
     void **temp_v0;
     void *temp_a1;
-    void *temp_a2;
+    struct Unk_func_00001980_temp_a2 *temp_a2;
 
     if (arg0 != NULL) {
         temp_a2 = arg0->unk8;
         temp_a1 = arg0->unk0;
-        M2C_FIELD(temp_a2, s32 *, 8) = (s32) (M2C_FIELD(temp_a2, s32 *, 8) - 1);
+        temp_a2->unk8 = (s32) (temp_a2->unk8 - 1);
         if (temp_a1 != NULL) {
             M2C_FIELD(temp_a1, void ***, 4) = (void **) arg0->unk4;
         } else {

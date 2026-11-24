@@ -111,7 +111,7 @@ INCLUDE_ASM("tmp/asm/282/lftv_plugin/nonmatchings/lftv_plugin", func_00001770);
 void func_0000186C(void) {
     s32 temp_v0;
     s32 temp_v0_3;
-    void *temp_v0_2;
+    struct Unk_func_0000186C_temp_v0_2 *temp_v0_2;
 
     temp_v0 = scePaf_D4FAE7D0(&D_000031AC);
     if (temp_v0 != 0) {

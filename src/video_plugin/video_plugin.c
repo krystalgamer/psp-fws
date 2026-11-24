@@ -29,7 +29,7 @@ void func_00000548(void) {
 
 void func_00000550(void) {
     s32 temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_00000550_temp_v0_2 *temp_v0_2;
 
     func_00001174(0);
     temp_v0 = scePaf_D4FAE7D0(&D_00002614);
@@ -56,7 +56,7 @@ INCLUDE_RODATA("tmp/asm/282/video_plugin/nonmatchings/video_plugin", D_00002624)
 INCLUDE_ASM("tmp/asm/282/video_plugin/nonmatchings/video_plugin", func_000005A0);
 
 void func_00000B84(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00000B84_temp_v0 *temp_v0;
 
     temp_v0 = scePaf_338C3774(arg0, 1);
     if (temp_v0 != NULL) {

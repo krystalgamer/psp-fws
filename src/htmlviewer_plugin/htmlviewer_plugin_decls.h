@@ -19,6 +19,18 @@ struct Unk_func_00000940_0 {
     s32 unk14;
 };
 
+struct Unk_func_00001670_temp_v0_2 {
+
+};
+
+struct Unk_func_000026F8_temp_v0_2 {
+
+};
+
+struct Unk_func_0000278C_temp_v0_2 {
+
+};
+
 extern s32 D_00006E34;
 extern M2C_UNK D_00006FA0;
 extern M2C_UNK D_00006FB0;

@@ -4,6 +4,11 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_ModuleMgrForKernel_54D9E02E_temp_v0 {
+    u8 pad0[0x2C];
+    s32 unk2C;
+};
+
 struct Unk_func_000004C0_0 {
     u8 pad0[0x2];
     u8 unk2;

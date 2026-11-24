@@ -36,6 +36,11 @@ struct Unk_func_00003BB4_0 {
     s32 unk10;
 };
 
+struct Unk_func_00003BB4_temp_v0 {
+    u8 pad0[0x58];
+    s32 unk58;
+};
+
 extern M2C_UNK D_00005F30;
 extern s32 D_00005F98;
 extern s32 D_00005FE0;

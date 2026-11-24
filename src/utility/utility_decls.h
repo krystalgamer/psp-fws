@@ -59,6 +59,11 @@ struct D_00007FF8_s {
     volatile s32 unk18;
 };
 
+struct Unk_func_00001CB8_var_a2 {
+    u8 pad0[0x4C];
+    s32 unk4C;
+};
+
 struct Unk_func_00005054_0 {
     s32 unk0;
     s32 unk4;

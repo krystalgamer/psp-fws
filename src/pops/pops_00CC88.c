@@ -88,12 +88,12 @@ INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F3E8);
 INCLUDE_ASM("tmp/asm/302/pops/nonmatchings/pops_00CC88", func_0000F44C);
 
 void func_0000F58C(void) {
-    void *temp_v0;
+    struct Unk_func_0000F58C_temp_v0 *temp_v0;
 
     temp_v0 = func_0000EBFC(5, 0xC672);
-    M2C_FIELD(temp_v0, u8 *, 1) = (u8) D_00169648.unk0;
-    M2C_FIELD(temp_v0, u8 *, 2) = (u8) D_00169648.unk2D;
-    M2C_FIELD(temp_v0, u8 *, 3) = (u8) D_00169648.unk2;
-    M2C_FIELD(temp_v0, u8 *, 4) = (u8) D_00169648.unk3;
+    temp_v0->unk1 = (u8) D_00169648.unk0;
+    temp_v0->unk2 = (u8) D_00169648.unk2D;
+    temp_v0->unk3 = (u8) D_00169648.unk2;
+    temp_v0->unk4 = (u8) D_00169648.unk3;
 }
 

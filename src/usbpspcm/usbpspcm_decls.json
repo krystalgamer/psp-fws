@@ -8,7 +8,8 @@
   "sceKernelSetEventFlag": "M2C_UNK sceKernelSetEventFlag(s32, M2C_UNK);"
  },
  "types": {
-  "Unk_func_0000377C_0": "struct Unk_func_0000377C_0 {\n    u8 pad0[0x10];\n    void * unk10;\n};"
+  "Unk_func_0000377C_0": "struct Unk_func_0000377C_0 {\n    u8 pad0[0x10];\n    struct Unk_func_0000377C_temp_s0 *unk10;\n};",
+  "Unk_func_0000377C_temp_s0": "struct Unk_func_0000377C_temp_s0 {\n    u8 pad0[0x14];\n    s32 unk14;\n    u8 pad18[0xD8];\n    s32 unkF0;\n};"
  },
  "vars": {}
 }

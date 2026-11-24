@@ -154,11 +154,11 @@ INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00001404);
 INCLUDE_ASM("tmp/asm/282/dnas_plugin/nonmatchings/dnas_plugin", func_00001454);
 
 void func_000014F0(void **arg0) {
-    void *temp_a0;
+    struct Unk_func_000014F0_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 4) = (s32) (M2C_FIELD(temp_a0, s32 *, 4) + 1);
+        temp_a0->unk4 = (s32) (temp_a0->unk4 + 1);
     }
 }
 

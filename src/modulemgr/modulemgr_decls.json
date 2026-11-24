@@ -13,6 +13,7 @@
   "syslib_ADF12745": "s32 syslib_ADF12745(void);"
  },
  "types": {
+  "Unk_ModuleMgrForKernel_54D9E02E_temp_v0": "struct Unk_ModuleMgrForKernel_54D9E02E_temp_v0 {\n    u8 pad0[0x2C];\n    s32 unk2C;\n};",
   "Unk_func_000004C0_0": "struct Unk_func_000004C0_0 {\n    u8 pad0[0x2];\n    u8 unk2;\n    u8 unk3;\n    u8 pad4[0x10];\n    s32 unk14;\n    s32 unk18;\n    u8 pad1C[0x20];\n    s32 unk3C;\n    u8 pad40[0xC];\n    s32 unk4C;\n    s32 unk50;\n    u8 pad54[0xC];\n    s32 unk60;\n};",
   "Unk_func_000004C0_1": "struct Unk_func_000004C0_1 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n    u8 padC[0x4];\n    u8 unk10;\n    u8 unk11;\n};"
  },

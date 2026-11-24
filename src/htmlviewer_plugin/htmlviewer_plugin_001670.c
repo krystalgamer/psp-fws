@@ -5,7 +5,7 @@
 void func_00001670(void) {
     s32 temp_v0;
     s32 temp_v0_3;
-    void *temp_v0_2;
+    struct Unk_func_00001670_temp_v0_2 *temp_v0_2;
 
     temp_v0 = scePaf_D4FAE7D0(&D_00006FA0);
     if (temp_v0 != 0) {
@@ -57,7 +57,7 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670
 
 void func_000026F8(void) {
     s32 temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_000026F8_temp_v0_2 *temp_v0_2;
 
     temp_v0 = scePaf_D4FAE7D0(&D_00007110);
     if (temp_v0 != 0) {
@@ -74,7 +74,7 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_plugin/nonmatchings/htmlviewer_plugin_001670
 
 void func_0000278C(void) {
     s32 temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_0000278C_temp_v0_2 *temp_v0_2;
 
     D_000081C8 = 0;
     temp_v0 = scePaf_D4FAE7D0(&D_00006E34);

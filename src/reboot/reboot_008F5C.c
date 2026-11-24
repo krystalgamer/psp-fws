@@ -47,29 +47,29 @@ s32 func_0000917C(s32 arg0, s32 arg1) {
 s32 func_000091C4(struct Unk_func_000091C4_0 *arg0) {
     void **temp_a2;
     void **temp_v0;
-    void *temp_a0;
+    struct Unk_func_000091C4_temp_a0 *temp_a0;
     void *temp_a1;
-    void *temp_a3;
+    struct Unk_func_000091C4_temp_a3 *temp_a3;
 
     func_0000E028();
     temp_a0 = arg0->unk10;
     if (temp_a0 != NULL) {
-        temp_a3 = M2C_FIELD(temp_a0, void **, 8);
-        temp_a1 = M2C_FIELD(temp_a0, void **, 0);
-        temp_a2 = M2C_FIELD(temp_a0, void ***, 4);
-        M2C_FIELD(temp_a3, s32 *, 8) = (s32) (M2C_FIELD(temp_a3, s32 *, 8) - 1);
+        temp_a3 = temp_a0->unk8;
+        temp_a1 = temp_a0->unk0;
+        temp_a2 = temp_a0->unk4;
+        temp_a3->unk8 = (s32) (temp_a3->unk8 - 1);
         if (temp_a1 != NULL) {
             M2C_FIELD(temp_a1, void ***, 4) = temp_a2;
         } else {
             D_00017348 = temp_a2;
         }
-        temp_v0 = M2C_FIELD(temp_a0, void ***, 4);
+        temp_v0 = temp_a0->unk4;
         if (temp_v0 != NULL) {
             *temp_v0 = temp_a1;
         } else {
             D_00017344 = temp_a1;
         }
-        M2C_FIELD(temp_a0, void **, 0) = (void *) D_0001734C;
+        temp_a0->unk0 = (void *) D_0001734C;
         D_0001734C = temp_a0;
     }
     func_0000E028(temp_a0);

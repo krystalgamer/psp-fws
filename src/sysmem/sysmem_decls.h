@@ -31,9 +31,21 @@ struct Unk_func_00001318_0 {
     s32 unk10;
 };
 
+struct Unk_func_00001318_var_a0 {
+    struct Unk_func_00001318_var_a0 *unk0;
+    s32 unk4;
+    u32 unk8;
+};
+
 struct Unk_func_00001478_0 {
     u8 pad0[0x10];
     s32 unk10;
+};
+
+struct Unk_func_00001478_var_v1 {
+    struct Unk_func_00001478_var_v1 *unk0;
+    s32 unk4;
+    u32 unk8;
 };
 
 struct Unk_func_000017D8_0 {

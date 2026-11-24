@@ -170,13 +170,13 @@ INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", func_000015A4);
 
 s32 func_000018F4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, void *arg4, s32 arg5) {
     s32 var_t4;
-    void *temp_a4;
+    struct Unk_func_000018F4_temp_a4 *temp_a4;
     void *temp_v0;
     void *temp_v1;
 
     temp_a4 = arg4 + 0x20;
     temp_v1 = arg4 + 0x2C;
-    temp_v0 = temp_v1 + ((M2C_FIELD(arg4, u8 *, 0x20) << 0x18) | (M2C_FIELD(temp_a4, u8 *, 1) << 0x10) | (M2C_FIELD(temp_a4, u8 *, 2) << 8) | M2C_FIELD(temp_a4, u8 *, 3));
+    temp_v0 = temp_v1 + ((M2C_FIELD(arg4, u8 *, 0x20) << 0x18) | (temp_a4->unk1 << 0x10) | (temp_a4->unk2 << 8) | temp_a4->unk3);
     var_t4 = 0x80501002;
     if ((u32) (arg4 + arg5) >= (u32) temp_v0) {
         var_t4 = func_000015A4(arg3, (s32) temp_v1, (s32) temp_v0, arg0, arg1, arg2);

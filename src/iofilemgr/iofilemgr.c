@@ -208,7 +208,7 @@ s32 sceIoChstat(void *arg0, void *arg1, u32 arg2) {
 INCLUDE_ASM("tmp/asm/282/iofilemgr/nonmatchings/iofilemgr", sceIoSync);
 
 s32 sceIoGetDevType(s32 arg0) {
-    void *sp0;
+    struct Unk_sceIoGetDevType_sp0 *sp0;
     s32 var_v0;
     u32 temp_s0;
 
@@ -216,7 +216,7 @@ s32 sceIoGetDevType(s32 arg0) {
     var_v0 = func_00001DAC(arg0, 0, 1, 0, &sp0);
     if (var_v0 >= 0) {
         setK1(temp_s0);
-        var_v0 = (s32) M2C_FIELD(sp0, u8 *, 0xC);
+        var_v0 = (s32) sp0->unkC;
     } else {
         setK1(temp_s0);
     }

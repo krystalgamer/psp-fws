@@ -75,8 +75,10 @@
  "types": {
   "D_00169648_s": "struct D_00169648_s {\n    u8 unk0;\n    u8 pad1[0x1];\n    u8 unk2;\n    u8 unk3;\n    u8 pad4[0x29];\n    u8 unk2D;\n};",
   "Unk_func_0000BF1C_0": "struct Unk_func_0000BF1C_0 {\n    u8 pad0[0x18];\n    s32 unk18;\n};",
+  "Unk_func_0000F58C_temp_v0": "struct Unk_func_0000F58C_temp_v0 {\n    u8 pad0[0x1];\n    u8 unk1;\n    u8 unk2;\n    u8 unk3;\n    u8 unk4;\n};",
   "Unk_func_0003600C_0": "struct Unk_func_0003600C_0 {\n    u8 pad0[0x4C];\n    s32 unk4C;\n};",
-  "Unk_func_0003600C_1": "struct Unk_func_0003600C_1 {\n    void * unk0;\n    s32 unk4;\n};"
+  "Unk_func_0003600C_1": "struct Unk_func_0003600C_1 {\n    void * unk0;\n    s32 unk4;\n};",
+  "Unk_func_000363A8_temp_v0": "struct Unk_func_000363A8_temp_v0 {\n    u8 pad0[0x10];\n    s32 unk10;\n    s32 unk14;\n};"
  },
  "vars": {
   "D_001212C0": "extern s32 D_001212C0;",

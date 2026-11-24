@@ -198,12 +198,12 @@ s32 func_00003BB4(struct Unk_func_00003BB4_0 *arg0) {
     s32 temp_s1;
     s32 temp_v0_2;
     s32 var_v0;
-    void *temp_v0;
+    struct Unk_func_00003BB4_temp_v0 *temp_v0;
 
     var_v0 = 0x80010016;
     if (arg0 != NULL) {
         temp_v0 = sceIsofs_driver_19F9734D(arg0->unk4);
-        temp_v0_2 = sceKernelWaitSema(M2C_FIELD(temp_v0, s32 *, 0x58), 1, NULL);
+        temp_v0_2 = sceKernelWaitSema(temp_v0->unk58, 1, NULL);
         if (temp_v0_2 >= 0) {
             temp_s1 = arg0->unk10;
             temp_s0 = sceKernelCpuSuspendIntr();
@@ -212,7 +212,7 @@ s32 func_00003BB4(struct Unk_func_00003BB4_0 *arg0) {
             sceKernelFreeFpl(D_00007608.unk20, M2C_FIELD(temp_s1, void **, 8));
             SysMemForKernel_7B749390(D_00007608.unk1C, temp_s1);
             arg0->unk10 = 0;
-            sceKernelSignalSema(M2C_FIELD(temp_v0, s32 *, 0x58), 1);
+            sceKernelSignalSema(temp_v0->unk58, 1);
             var_v0 = temp_v0_2;
         } else {
             KDebugForKernel_84F370BC(&D_00006200, &D_00006224, "isofs_dclose", temp_v0_2);

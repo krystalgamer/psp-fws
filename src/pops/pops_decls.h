@@ -18,6 +18,14 @@ struct Unk_func_0000BF1C_0 {
     s32 unk18;
 };
 
+struct Unk_func_0000F58C_temp_v0 {
+    u8 pad0[0x1];
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+};
+
 struct Unk_func_0003600C_0 {
     u8 pad0[0x4C];
     s32 unk4C;
@@ -26,6 +34,12 @@ struct Unk_func_0003600C_0 {
 struct Unk_func_0003600C_1 {
     void * unk0;
     s32 unk4;
+};
+
+struct Unk_func_000363A8_temp_v0 {
+    u8 pad0[0x10];
+    s32 unk10;
+    s32 unk14;
 };
 
 extern s32 D_001212C0;

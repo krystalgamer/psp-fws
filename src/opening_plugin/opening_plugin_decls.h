@@ -4,6 +4,10 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00000790_temp_v0_2 {
+
+};
+
 extern s32 D_000017FC;
 
 void func_00000790(void);

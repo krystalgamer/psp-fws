@@ -6,7 +6,14 @@
 
 struct Unk_func_0000377C_0 {
     u8 pad0[0x10];
-    void * unk10;
+    struct Unk_func_0000377C_temp_s0 *unk10;
+};
+
+struct Unk_func_0000377C_temp_s0 {
+    u8 pad0[0x14];
+    s32 unk14;
+    u8 pad18[0xD8];
+    s32 unkF0;
 };
 
 

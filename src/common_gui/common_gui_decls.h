@@ -4,6 +4,11 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_000008A8_temp_a0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
 struct Unk_func_000008C8_0 {
     u8 pad0[0x4];
     s32 unk4;
@@ -40,11 +45,20 @@ struct Unk_func_00000F6C_0 {
     s32 unk24;
 };
 
+struct Unk_sceVshCommonGui_80271F41_temp_v0_2 {
+
+};
+
 struct Unk_sceVshCommonGui_88F5E3A8_0 {
     u8 pad0[0xC];
     s32 unkC;
     u8 pad10[0x4];
     s32 unk14;
+};
+
+struct Unk_sceVshCommonGui_ACFE7BE7_temp_a0 {
+    u8 pad0[0x84];
+    s32 unk84;
 };
 
 extern M2C_UNK D_00003264;

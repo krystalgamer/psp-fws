@@ -22,6 +22,13 @@ struct D_0000B708_s {
     s32 unk4;
 };
 
+struct Unk_func_000018F4_temp_a4 {
+    u8 pad0[0x1];
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+};
+
 extern M2C_UNK D_0000AEE0;
 extern M2C_UNK D_0000AFA0;
 extern M2C_UNK D_0000AFCC;

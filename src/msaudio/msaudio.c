@@ -98,10 +98,10 @@ INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00001600);
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00001820);
 
 s32 func_00001908(void *arg0) {
-    void *temp_v0;
+    struct Unk_func_00001908_temp_v0 *temp_v0;
 
     temp_v0 = arg0 + 0xFFC;
-    return M2C_FIELD(temp_v0, u8 *, 3) + (M2C_FIELD(temp_v0, u8 *, 2) << 8) + (M2C_FIELD(temp_v0, u8 *, 1) << 0x10) + (M2C_FIELD(arg0, u8 *, 0xFFC) << 0x18);
+    return temp_v0->unk3 + (temp_v0->unk2 << 8) + (temp_v0->unk1 << 0x10) + (M2C_FIELD(arg0, u8 *, 0xFFC) << 0x18);
 }
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00001938);

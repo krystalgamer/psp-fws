@@ -2,5 +2,8 @@
  "funcs": {
   "func_000002B0": "void func_000002B0(void **arg0);"
  },
+ "types": {
+  "Unk_func_000002B0_temp_a2": "struct Unk_func_000002B0_temp_a2 {\n    s32 unk0;\n    u8 pad4[0xFC];\n    s32 unk100;\n};"
+ },
  "vars": {}
 }

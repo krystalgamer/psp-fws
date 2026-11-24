@@ -71,7 +71,7 @@ void func_00000F20(void) {
 }
 
 void func_00000F3C(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00000F3C_temp_v0 *temp_v0;
 
     sceVshCommonGui_1CF884A1();
     temp_v0 = scePaf_338C3774(arg0, 1);
