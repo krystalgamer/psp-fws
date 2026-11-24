@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/340/.splat_cache.mm_flash
   symbol_addrs_path:
     - config/340/symbol_addrs.mm_flash.txt
+    - config/340/func_starts.mm_flash.txt
     - tmp/build/340/prx_syms.mm_flash.txt
   reloc_addrs_path: [tmp/build/340/reloc_addrs.mm_flash.txt]
   asset_path: tmp/assets/340/mm_flash
@@ -53,6 +54,16 @@ segments:
     vram: 0x0
     subsegments:
       - [0x80, c, mm_flash]
+      - [0x4AC88, c, mm_flash_04AC08]
+      - [0x4B1E8, c, mm_flash_04B168]
+      - [0x77B1C, c, mm_flash_077A9C]
+      - [0x7B568, c, mm_flash_07B4E8]
+      - [0x8E958, c, mm_flash_08E8D8]
+      - [0x8F0D8, c, mm_flash_08F058]
+      - [0x9D22C, c, mm_flash_09D1AC]
+      - [0x9D32C, c, mm_flash_09D2AC]
+      - [0x9D94C, c, mm_flash_09D8CC]
+      - [0x9F148, c, mm_flash_09F0C8]
       - { start: 0xB2EFC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xB325C, type: prxpad, order: .text }
       - { start: 0xB3260, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -68,6 +79,11 @@ segments:
       - { start: 0xB3644, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0xB442C, type: rodata, name: gcc_except_table, linker_section: .gcc_except_table }
       - [0xB4480, .rodata, mm_flash]
+      - [0xBDBB0, .rodata, mm_flash_04B168]
+      - [0xBEBA4, .rodata, mm_flash_077A9C]
+      - [0xBF008, .rodata, mm_flash_07B4E8]
+      - [0xC2FC0, .rodata, mm_flash_08F058]
+      - [0xC3F5C, .rodata, mm_flash_09F0C8]
       - { start: 0xC5654, type: prxpad, order: .rodata }
   - name: mm_flash_seg1
     type: code
