@@ -347,7 +347,11 @@ void func_00004048(void *arg0) {
     func_000040D0(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_000040AC);
+void func_000040AC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x34) = 0;
+    M2C_FIELD(arg0, s8 *, 0x38) = 0;
+    func_0000F280(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_000040D0);
 
@@ -839,7 +843,11 @@ void func_0000AB7C(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_0000ABBC);
+void func_0000ABBC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0xA34) = 0;
+    M2C_FIELD(arg0, s32 *, 0xA38) = 0;
+    M2C_FIELD(arg0, s32 *, 0xA3C) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_0000ABCC);
 
@@ -953,7 +961,12 @@ s32 func_0000C420(void) {
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_0000C450);
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin", func_0000C50C);
+void func_0000C50C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000224C8;
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
 
 void func_0000C528(M2C_UNK **arg0) {
     *arg0 = &D_000224C8;

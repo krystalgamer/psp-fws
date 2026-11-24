@@ -118,7 +118,11 @@ INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", f
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000DD2C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000DDAC);
+void func_0000DDAC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000DDBC);
 
@@ -172,15 +176,27 @@ void func_0000E768(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x38) = scePaf_A0ED77C4(0, &func_0000E2F8, arg0, -1, -1, &func_0000E34C);
 }
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000E7B0);
+void func_0000E7B0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000E7C0);
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000E83C);
+void func_0000E83C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000E84C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000E88C);
+void func_0000E88C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000E89C);
 
@@ -278,7 +294,13 @@ void func_0000F184(void) {
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000F1A0);
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000F1EC);
+void func_0000F1EC(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00022578;
+    func_0000F280(arg0);
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x10) = -1;
+    M2C_FIELD(arg0, s32 *, 0x14) = -1;
+}
 
 void func_0000F238(M2C_UNK **arg0) {
     *arg0 = &D_00022578;
@@ -354,7 +376,10 @@ void func_0000F4D4(s32 **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000F50C);
+void func_0000F50C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000F518);
 
@@ -384,7 +409,11 @@ INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", f
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000FB58);
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000FB84);
+void func_0000FB84(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000226A0;
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    func_0000FBF8((s32) arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_0000FBB0);
 
@@ -528,7 +557,11 @@ INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", f
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_00011150);
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_00011180);
+void func_00011180(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_00011190);
 
@@ -580,7 +613,17 @@ INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", f
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_000119F0);
 
-INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_00011AA0);
+void func_00011AA0(void *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0xA20);
+    if (temp_v0 != 0) {
+        scePaf_B3D2C3BB(temp_v0);
+        M2C_FIELD(arg0, s32 *, 0xA20) = 0;
+        M2C_FIELD(arg0, s32 *, 0xA24) = 0;
+        M2C_FIELD(arg0, s32 *, 0xA28) = 0;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_00CE3C", func_00011AE4);
 
