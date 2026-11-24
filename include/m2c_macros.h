@@ -12,6 +12,8 @@ typedef s32 M2C_UNK32;
 typedef s64 M2C_UNK64;
 
 #define M2C_FIELD(expr, type, offset) (*(type)((u8 *)(expr) + (offset)))
+/* Field of a volatile object (keeps the base address in a register). */
+#define M2C_VFIELD(expr, type, offset) (((volatile struct { u8 pad[offset]; type x; } *)(expr))->x)
 #define M2C_BITWISE(type, expr) ((type)(expr))
 
 #endif

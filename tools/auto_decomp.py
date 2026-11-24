@@ -356,7 +356,17 @@ def _try_func(mod, name, header_ctx, target, seen):
     elif not prev:
         mod.scores[name] = (best, len(target))
     if own_setting not in matching:
-        return None
+        # Kernel code often reads globals through volatile accesses, which keeps
+        # the address in a register (lui/addiu, then lw off(reg)).
+        vbody = re.sub(r"M2C_FIELD\((&D_\w+), ([\w ]+?) \*, ", r"M2C_VFIELD(\1, \2, ", body)
+        if vbody == body:
+            return None
+        vtext = text.replace(body, vbody)
+        words, _ = compile_words(vtext, *own_setting.split(" ", 1))
+        if words != target:
+            return None
+        body = vbody
+        mod.stats[name] = sorted(set(mod.stats[name]) | {own_setting + " volatile"})
     return new_funcs, new_vars, sig, body
 
 
