@@ -929,6 +929,7 @@ void func_00091810(void *arg0);
 void func_0009182C(void *arg0);
 s32 func_00091848(s32, s32, s32);
 s32 func_000918E4(s32, s32, s32);
+s32 func_00091CF8(u32 arg0);
 s32 func_0009213C(s32 arg0);
 M2C_UNK func_00092328(s32);
 M2C_UNK func_0009282C(s32);

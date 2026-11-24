@@ -709,6 +709,8 @@ M2C_UNK func_000378F0(s32);
 s32 func_00037938(s32 *arg0);
 s32 func_00037A08(void *arg0);
 s32 func_00037A18(s32 arg0);
+s32 func_00037A48(void *arg0, u32 arg1);
+s32 func_00037A58(void *arg0, u32 arg1);
 void func_00037EFC(void);
 s32 func_0003848C(void **arg0);
 s32 func_00038514(void **arg0);

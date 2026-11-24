@@ -15,9 +15,15 @@ s32 func_00037A18(s32 arg0) {
     return var_a1;
 }
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037A48);
+s32 func_00037A48(void *arg0, u32 arg1) {
+    s32 cmp_tmp = (u32) M2C_FIELD(arg0, u32 *, 0x34) < arg1;
+    return cmp_tmp == 0;
+}
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", func_00037A58);
+s32 func_00037A58(void *arg0, u32 arg1) {
+    s32 cmp_tmp = arg1 < (u32) M2C_FIELD(arg0, u32 *, 0x34);
+    return cmp_tmp == 0;
+}
 
 INCLUDE_RODATA("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_037A18", D_00065150);
 

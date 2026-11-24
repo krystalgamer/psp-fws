@@ -420,7 +420,10 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007DC0);
 
 INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00007E38);
 
-INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", sceUmdMan_driver_405B48A5);
+s32 sceUmdMan_driver_405B48A5(void) {
+    s32 cmp_tmp = func_000076B4() > 0x10001;
+    return cmp_tmp == 0;
+}
 
 s32 sceUmdMan_driver_65D0DEC6(void) {
     return D_00012CD4 + 0xFFFD0000;

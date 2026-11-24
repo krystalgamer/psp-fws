@@ -773,6 +773,7 @@
   "func_0009182C": "void func_0009182C(void *arg0);",
   "func_00091848": "s32 func_00091848(s32, s32, s32);",
   "func_000918E4": "s32 func_000918E4(s32, s32, s32);",
+  "func_00091CF8": "s32 func_00091CF8(u32 arg0);",
   "func_0009213C": "s32 func_0009213C(s32 arg0);",
   "func_00092328": "M2C_UNK func_00092328(s32);",
   "func_0009282C": "M2C_UNK func_0009282C(s32);",

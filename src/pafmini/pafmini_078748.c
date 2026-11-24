@@ -1482,7 +1482,10 @@ u32 sceCccIsValidUCS4(s32 arg0) {
     return (u32) ~arg0 >> 0x1F;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_078748", func_00091CF8);
+s32 func_00091CF8(u32 arg0) {
+    s32 cmp_tmp = arg0 > 0xFFFFU;
+    return cmp_tmp == 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_078748", func_00091D08);
 
