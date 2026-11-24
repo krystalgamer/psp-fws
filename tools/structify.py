@@ -202,11 +202,14 @@ def structify_args(mod, only=None, skip=()):
     eligible = {}
     for name, (f, params, body) in funcs.items():
         for k, prm in enumerate(params):
-            pm = re.fullmatch(r"void \*(arg\d+)", prm)
+            pm = re.fullmatch(r"(void \*|M2C_UNK \*|s32 |u32 )(arg\d+)", prm)
             if not pm:
                 continue
-            a = pm[1]
+            a = pm[2]
             rest = ARGACC.sub("", body)
+            if pm[1].strip() in ("s32", "u32") and re.search(
+                    rf"\b{a}\s*(?:[*/%&|^]|<<|>>|[<>]=?\s*(?!0\b)\w)|(?:[*/%&|^]|<<|>>)\s*{a}\b|\({a}\)\s*[*/%&|^<>]", rest):
+                continue
             # byte arithmetic (arg + n) is kept as (u8 *)arg + n; anything else excludes
             if re.search(rf"\b{a}\s*\[|[-+]\s*{a}\b|\b{a}\s*[-+]=|\b{a}\s*(?:\+\+|--)|\({a}\)\s*[-+\[]", rest):
                 continue
@@ -316,7 +319,7 @@ def structify_args(mod, only=None, skip=()):
             continue
         for k in range(len(params)):
             sname = renames.get((name, k))
-            if sname and re.fullmatch(r"void \*(?:\s*arg\d+)?", params[k]):
+            if sname and re.fullmatch(r"(?:void \*|M2C_UNK \*|s32|u32)(?:\s*arg\d+)?", params[k]):
                 params[k] = f"struct {sname} *" + (re.search(r"arg\d+", params[k])[0] if "arg" in params[k] else "")
         store["funcs"][name] = re.sub(r"\(.*\);$", "(" + ", ".join(params) + ");", proto)
     write_decls(mod, store)
