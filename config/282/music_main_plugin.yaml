@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/282/.splat_cache.music_main_plugin
   symbol_addrs_path:
     - config/282/symbol_addrs.music_main_plugin.txt
+    - config/282/func_starts.music_main_plugin.txt
     - tmp/build/282/prx_syms.music_main_plugin.txt
   reloc_addrs_path: [tmp/build/282/reloc_addrs.music_main_plugin.txt]
   asset_path: tmp/assets/282/music_main_plugin
@@ -55,6 +56,12 @@ segments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - { start: 0xC4, type: prxpad, order: .text }
       - [0xD0, c, music_main_plugin]
+      - [0x1DEC0, c, music_main_plugin_01DE20]
+      - [0x1E280, c, music_main_plugin_01E1E0]
+      - [0x26E5C, c, music_main_plugin_026DBC]
+      - [0x2B00C, c, music_main_plugin_02AF6C]
+      - [0x87AB8, c, music_main_plugin_087A18]
+      - [0x89C90, c, music_main_plugin_089BF0]
       - { start: 0x96C50, type: asm, name: fini, linker_section: .fini }
       - { start: 0x96C6C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x9788C, type: prxpad, order: .text }
@@ -73,6 +80,10 @@ segments:
       - { start: 0x9854C, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x98550, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x985B0, .rodata, music_main_plugin]
+      - [0x9C01C, .rodata, music_main_plugin_01E1E0]
+      - [0x9C3A4, .rodata, music_main_plugin_026DBC]
+      - [0x9C4BC, .rodata, music_main_plugin_02AF6C]
+      - [0xA20A0, .rodata, music_main_plugin_089BF0]
       - { start: 0xA2C98, type: prxpad, order: .rodata }
   - name: music_main_plugin_seg1
     type: code
