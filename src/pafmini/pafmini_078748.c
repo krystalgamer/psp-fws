@@ -888,8 +888,8 @@ void func_00089EE0(s32 *arg0) {
 
 void func_00089EFC(struct Unk_func_00089EFC_0 *arg0) {
     if (sceKernelPollEventFlag(arg0->unk0, 1, 0x20, 0) >= 0) {
-        arg0->unkC = M2C_FIELD(arg0, s32 (**)(s32), 4)(arg0->unk8);
-        M2C_FIELD(arg0, s32 (**)(s32), 4) = NULL;
+        arg0->unkC = arg0->unk4(arg0->unk8);
+        arg0->unk4 = NULL;
         arg0->unk8 = 0;
         sceKernelSetEventFlag(arg0->unk0, 2);
     }
@@ -1628,7 +1628,7 @@ s32 func_0009363C(struct Unk_func_0009363C_0 *arg0) {
     struct Unk_func_0009363C_temp_a0 *temp_a0;
 
     temp_a0 = *arg0->unk7C;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD88)(temp_a0);
+    temp_a0->unkD88(temp_a0);
     return 0;
 }
 
@@ -1638,7 +1638,7 @@ s32 func_0009369C(struct Unk_func_0009369C_0 *arg0) {
     struct Unk_func_0009369C_temp_a0 *temp_a0;
 
     temp_a0 = *arg0->unk7C;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD90)(temp_a0);
+    temp_a0->unkD90(temp_a0);
     return 0;
 }
 
@@ -1646,7 +1646,7 @@ s32 func_000936C8(struct Unk_func_000936C8_0 *arg0) {
     struct Unk_func_000936C8_temp_a0 *temp_a0;
 
     temp_a0 = *arg0->unk7C;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD98)(temp_a0);
+    temp_a0->unkD98(temp_a0);
     return 0;
 }
 
@@ -1913,7 +1913,7 @@ s32 func_00095D98(struct Unk_func_00095D98_0 *arg0) {
     } else {
         func_00095F78(temp_v0);
     }
-    M2C_FIELD(arg0, M2C_UNK (**)(M2C_UNK, void *), 8)(0, arg0);
+    arg0->unk8(0, arg0);
     return 0;
 }
 
@@ -1923,7 +1923,7 @@ s32 func_00095E08(void **arg0) {
     struct Unk_func_00095E08_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xF8)(temp_a0);
+    temp_a0->unkF8(temp_a0);
     return 0;
 }
 

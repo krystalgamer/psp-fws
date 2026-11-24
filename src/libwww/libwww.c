@@ -1310,7 +1310,7 @@ void func_00007B20(struct Unk_func_00007B20_0 *arg0) {
     M2C_UNK (*temp_v0)();
     s32 temp_v0_2;
 
-    temp_v0 = M2C_FIELD(arg0, M2C_UNK (**)(), 0x18);
+    temp_v0 = arg0->unk18;
     if (temp_v0 != NULL) {
         temp_v0();
     }
@@ -1344,7 +1344,7 @@ void sceHVWWW_Library_082F1A05(struct Unk_sceHVWWW_Library_082F1A05_0 *arg0) {
 
     if (arg0->unk0 != -1) {
         if (!(arg0->unk8 & 1)) {
-            temp_v1 = M2C_FIELD(arg0, M2C_UNK (**)(), 0xC);
+            temp_v1 = arg0->unkC;
             if (temp_v1 != NULL) {
                 temp_v1();
             }
@@ -4843,7 +4843,7 @@ void func_00039630(struct Unk_func_00039630_0 *arg0) {
 
     temp_v0 = arg0->unk0;
     if (temp_v0 != NULL) {
-        temp_v0_2 = M2C_FIELD(temp_v0, M2C_UNK (**)(), 0xC);
+        temp_v0_2 = temp_v0->unkC;
         if (temp_v0_2 != NULL) {
             temp_v0_2();
         }
@@ -5733,8 +5733,8 @@ s32 func_00041A88(struct Unk_func_00041A88_0 *arg0, s32 arg1, s32 arg2, s32 arg3
     if (func_00018FC0(arg0, arg1, arg2, arg3) != 0) {
         var_v1 = 1;
         arg0->unkAC = 0xE0;
-        M2C_FIELD(arg0, s32 (**)(void *), 0xB0) = func_00041A60;
-        M2C_FIELD(arg0, void (**)(), 0xB4) = func_00041A80;
+        arg0->unkB0 = func_00041A60;
+        arg0->unkB4 = func_00041A80;
     }
     return var_v1;
 }

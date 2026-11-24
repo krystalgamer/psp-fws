@@ -1171,9 +1171,9 @@ void func_00009528(struct Unk_func_00009528_0 *arg0) {
     } else {
         scePaf_6A82A8C6(temp_v0, 0x03000014);
     }
-    if (M2C_FIELD(arg0, M2C_UNK (**)(s32), 0x54) != NULL) {
-        M2C_FIELD(arg0, M2C_UNK (**)(s32), 0x54)(arg0->unk58);
-        M2C_FIELD(arg0, M2C_UNK (**)(s32), 0x54) = NULL;
+    if (arg0->unk54 != NULL) {
+        arg0->unk54(arg0->unk58);
+        arg0->unk54 = NULL;
     }
 }
 
@@ -1190,10 +1190,10 @@ void func_0000966C(struct Unk_func_0000966C_0 *arg0) {
 
     } else {
         scePaf_6A82A8C6(temp_v0, 0x03000015);
-        temp_v0_2 = M2C_FIELD(arg0, M2C_UNK (**)(s32), 0x5C);
+        temp_v0_2 = arg0->unk5C;
         if (temp_v0_2 != NULL) {
             temp_v0_2(arg0->unk60);
-            M2C_FIELD(arg0, M2C_UNK (**)(s32), 0x5C) = NULL;
+            arg0->unk5C = NULL;
         }
     }
 }

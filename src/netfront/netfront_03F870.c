@@ -160,7 +160,7 @@ void func_00040AD8(struct Unk_func_00040AD8_0 *arg0) {
     temp_v0 = arg0->unk8;
     temp_s1 = arg0->unk0;
     if (temp_v0 != -1) {
-        M2C_FIELD(temp_s1, M2C_UNK (**)(s32), 0x38)(temp_v0);
+        temp_s1->unk38(temp_v0);
         arg0->unk8 = -1;
         temp_s1->unk2C = (s32) (temp_s1->unk2C - 1);
     }
@@ -1295,7 +1295,7 @@ s32 func_0004584C(void *****arg0) {
         var_v1 = 1;
         temp_v0 = M2C_FIELD(****arg0, void **, 0x4E4);
         if (temp_v0 != NULL) {
-            var_v1 = M2C_FIELD(temp_v0, s32 (**)(void *, void *****), 4)(temp_v0, arg0);
+            var_v1 = temp_v0->unk4(temp_v0, arg0);
         }
     }
     return var_v1;
@@ -1973,9 +1973,9 @@ s32 func_00049A40(s32 arg0, s32 arg1, s32 ***arg2) {
 void func_00049AD0(struct Unk_func_00049AD0_0 *arg0, struct Unk_func_00049AD0_1 *arg1) {
     sceHVNetfront_Module_77FCD4C1(arg0, arg1);
     arg0->unk4 = &func_00049914;
-    M2C_FIELD(arg0, void (**)(s32, s32), 8) = func_00049984;
+    arg0->unk8 = func_00049984;
     arg0->unkC = &func_000499A8;
-    M2C_FIELD(arg0, void (**)(s32), 0x10) = func_00049A24;
+    arg0->unk10 = func_00049A24;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_03F870", func_00049B24);
@@ -2045,7 +2045,7 @@ void sceHVNetfront_Module_9FF54B2A(struct Unk_func_00049AD0_1 *arg0, s32 arg1, s
 
     sceHVNetfront_Module_015932EE(arg0, arg1, arg2, arg3);
     arg0->unk8 = 1;
-    M2C_FIELD(arg0, void (**)(void *), 0x18) = func_0004A8A4;
+    arg0->unk18 = func_0004A8A4;
     arg0->unk14 = &func_0004A61C;
     arg0->unk1C = &func_0004A918;
     arg0->unk20 = &func_0004A968;
@@ -3884,10 +3884,10 @@ s32 func_0005C614(struct Unk_func_0005C614_0 *arg0, struct Unk_func_0005C614_1 *
     var_a0 = 0;
     if (arg1->unk4 == arg2->unk4) {
         if (arg1->unk8 == arg2->unk8) {
-            temp_v0 = M2C_FIELD(arg0, M2C_UNK (**)(void *, s32), 0xB4);
+            temp_v0 = arg0->unkB4;
             if (temp_v0 != NULL) {
                 temp_v0(arg1, arg0->unkB8);
-                M2C_FIELD(arg0, M2C_UNK (**)(void *, s32), 0xB4) = NULL;
+                arg0->unkB4 = NULL;
                 arg2->unk0 = (s32) arg1->unk0;
                 arg2->unk4 = (s32) arg1->unk4;
                 arg2->unk8 = (s32) arg1->unk8;

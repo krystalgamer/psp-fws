@@ -213,7 +213,7 @@ s32 func_0006D618(s32 arg0, s32 arg1) {
     func_0006D55C(arg0);
     var_v0 = 1;
     if (temp_s2 != NULL) {
-        var_v0 = M2C_FIELD(temp_s2, s32 (**)(s32, s32), 8)(arg0, arg1);
+        var_v0 = temp_s2->unk8(arg0, arg1);
     }
     return var_v0;
 }
@@ -237,7 +237,7 @@ s32 TIFFCheckpointDirectory(struct Unk_TIFFCheckpointDirectory_0 *arg0) {
         func_0006B3D8();
     }
     temp_s0 = _TIFFWriteDirectory(arg0, 0);
-    func_0006BBAC(arg0, M2C_FIELD(arg0, s32 (**)(s32, M2C_UNK, M2C_UNK), 0x194)(arg0->unk188, 0, 2));
+    func_0006BBAC(arg0, arg0->unk194(arg0->unk188, 0, 2));
     return temp_s0;
 }
 

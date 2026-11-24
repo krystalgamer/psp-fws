@@ -76,7 +76,7 @@ void func_00000F3C(s32 arg0) {
     sceVshCommonGui_1CF884A1();
     temp_v0 = scePaf_338C3774(arg0, 1);
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK *, M2C_UNK), 4)(&func_00000FF8, 0);
+        temp_v0->unk4(&func_00000FF8, 0);
     }
 }
 

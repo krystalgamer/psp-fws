@@ -5,7 +5,8 @@
 #include "m2c_macros.h"
 
 struct Unk_func_0000186C_temp_v0_2 {
-
+    u8 pad0[0x70];
+    M2C_UNK (*unk70)();
 };
 
 extern M2C_UNK D_000031AC;

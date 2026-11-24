@@ -127,7 +127,8 @@ struct Unk_func_00014A8C_0 {
 };
 
 struct Unk_func_00018974_temp_v0 {
-
+    u8 pad0[0x4];
+    M2C_UNK (*unk4)(M2C_UNK *, M2C_UNK);
 };
 
 struct Unk_func_00018F10_0 {

@@ -49,7 +49,7 @@ void func_00000790(void) {
     if (temp_v0 != 0) {
         temp_v0_2 = scePaf_338C3774(temp_v0, 1);
         if (temp_v0_2 != NULL) {
-            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK), 0x10)(0xD);
+            temp_v0_2->unk10(0xD);
         }
     }
 }

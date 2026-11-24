@@ -114,7 +114,7 @@ void func_0003B6C8(struct Unk_func_0003B6C8_0 *arg0) {
     arg0->unk18 = 1;
     temp_a0 = arg0->unk20;
     temp_a1 = *temp_a0;
-    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(temp_a0, temp_a1);
+    temp_a1->unk8(temp_a0, temp_a1);
 }
 
 void func_0003B6F8(struct Unk_func_0003B6F8_0 *arg0) {
@@ -124,7 +124,7 @@ void func_0003B6F8(struct Unk_func_0003B6F8_0 *arg0) {
     arg0->unk19 = 1;
     temp_a0 = arg0->unk1C;
     temp_a1 = *temp_a0;
-    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(temp_a0, temp_a1);
+    temp_a1->unk8(temp_a0, temp_a1);
 }
 
 void func_0003B728(struct Unk_func_0003B728_0 *arg0) {
@@ -136,7 +136,7 @@ void func_0003B728(struct Unk_func_0003B728_0 *arg0) {
     arg0->unk19 = 1;
     temp_a0 = arg0->unk1C;
     temp_a1 = *temp_a0;
-    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(temp_a0, temp_a1);
+    temp_a1->unk8(temp_a0, temp_a1);
     temp_a0_2 = arg0->unk20;
     (*temp_a0_2)->unk8(temp_a0_2);
 }
@@ -147,7 +147,7 @@ void func_0003B77C(struct Unk_func_0003B77C_0 *arg0) {
 
     temp_a0 = arg0->unk1C;
     temp_a1 = *temp_a0;
-    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(temp_a0, temp_a1);
+    temp_a1->unk8(temp_a0, temp_a1);
     arg0->unk1A = 1;
 }
 

@@ -919,7 +919,7 @@ s32 func_00017A3C(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2, u32 arg3
     } else if ((temp_s2->unk10E < arg1) || ((u32) temp_s2->unk110 < arg3)) {
         var_s0 = 0x80410D13;
     } else if (sceWlanDrv_driver_FBD385FB() <= 0) {
-        temp_v0 = M2C_FIELD(temp_s2, M2C_UNK (**)(void *, s32, s32, u32, s32), 0xD8);
+        temp_v0 = temp_s2->unkD8;
         if (temp_v0 != NULL) {
             temp_v0(temp_s2, arg1, arg2, arg3, arg4);
         }
@@ -940,7 +940,7 @@ s32 func_00017BCC(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2) {
     func_00003114(arg0);
     var_s0 = 0x80410D14;
     if ((arg0->unk0 & 0x3800) == 0x800) {
-        temp_v0 = M2C_FIELD(temp_s2, s32 (**)(void *, s32, s32), 0xE4);
+        temp_v0 = temp_s2->unkE4;
         var_s0 = 0x80410D13;
         if (temp_v0 != NULL) {
             temp_v0_2 = temp_v0(temp_s2, arg1, arg2);

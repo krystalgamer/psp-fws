@@ -26,7 +26,7 @@
   "sceVshCommonGui_1CF884A1": "M2C_UNK sceVshCommonGui_1CF884A1();"
  },
  "types": {
-  "Unk_func_00000F3C_temp_v0": "struct Unk_func_00000F3C_temp_v0 {\n\n};"
+  "Unk_func_00000F3C_temp_v0": "struct Unk_func_00000F3C_temp_v0 {\n    u8 pad0[0x4];\n    M2C_UNK (*unk4)(M2C_UNK *, M2C_UNK);\n};"
  },
  "vars": {
   "D_0000206C": "extern M2C_UNK D_0000206C;",

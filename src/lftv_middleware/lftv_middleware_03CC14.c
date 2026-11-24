@@ -34,7 +34,7 @@ void func_0003D8D4(void) {
     struct Unk_func_0003D8D4_temp_a1 *temp_a1;
 
     temp_a1 = *D_0005C60C;
-    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(D_0005C60C, temp_a1);
+    temp_a1->unk8(D_0005C60C, temp_a1);
 }
 
 s32 func_0003D900(void) {

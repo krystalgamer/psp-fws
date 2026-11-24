@@ -190,7 +190,7 @@ void func_0001FF84(struct Unk_func_0001FF84_0 *arg0) {
 
     temp_a0 = arg0->unkC;
     temp_a1 = *temp_a0;
-    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 0x10)(temp_a0, temp_a1);
+    temp_a1->unk10(temp_a0, temp_a1);
 }
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_01D5EC", func_0001FFAC);

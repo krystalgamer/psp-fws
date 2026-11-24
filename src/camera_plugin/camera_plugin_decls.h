@@ -118,7 +118,8 @@ struct Unk_func_00006CE8_0 {
 };
 
 struct Unk_func_00008BCC_temp_a3 {
-
+    u8 pad0[0xB4];
+    M2C_UNK (*unkB4)(void **, s32, M2C_UNK, void *);
 };
 
 struct Unk_func_0000C7EC_0 {

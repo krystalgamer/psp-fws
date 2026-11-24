@@ -381,7 +381,7 @@ void func_00002760(void) {
     } else {
         temp_v0 = scePaf_338C3774(D_00030304, 1);
         if (temp_v0 != NULL) {
-            M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK), 0xC)(0);
+            temp_v0->unkC(0);
         }
     }
 }
@@ -497,7 +497,7 @@ void func_0000362C(s32 arg0) {
 
     temp_v0 = scePaf_338C3774(arg0, 1);
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, M2C_UNK (**)(void (*)()), 4)(func_00003994);
+        temp_v0->unk4(func_00003994);
     }
     func_00003668();
 }

@@ -37,7 +37,7 @@ s32 func_0014981C(struct Unk_func_0014981C_0 *arg0) {
 
     var_v0 = -1;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 (**)(s32, M2C_UNK), 0xC)(arg0->unk0, 1);
+        var_v0 = arg0->unkC(arg0->unk0, 1);
     }
     return var_v0;
 }

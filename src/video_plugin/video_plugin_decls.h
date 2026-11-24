@@ -5,11 +5,13 @@
 #include "m2c_macros.h"
 
 struct Unk_func_00000550_temp_v0_2 {
-
+    u8 pad0[0x8];
+    M2C_UNK (*unk8)(M2C_UNK);
 };
 
 struct Unk_func_00000B84_temp_v0 {
-
+    u8 pad0[0x4];
+    M2C_UNK (*unk4)(M2C_UNK *, M2C_UNK);
 };
 
 extern M2C_UNK D_00002614;

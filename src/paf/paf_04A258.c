@@ -410,7 +410,7 @@ s32 func_00050C38(void) {
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_04A258", func_00050C40);
 
 void func_00050DD4(struct Unk_func_00050DD4_0 *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, M2C_UNK (**)(s32, s32, void *, void *, s32, s32, s32), 0x67C)(arg1, arg2, (u8 *)arg0 + 8, (u8 *)arg0 + 0x1D4, arg0->unk66C, arg0->unk674, arg0->unk678);
+    arg0->unk67C(arg1, arg2, (u8 *)arg0 + 8, (u8 *)arg0 + 0x1D4, arg0->unk66C, arg0->unk674, arg0->unk678);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_04A258", func_00050E10);
@@ -907,6 +907,6 @@ s32 func_00057FF0(s32 arg0, u32 arg1, s32 arg2, u32 arg3) {
 }
 
 void func_00058030(struct Unk_func_00058030_0 *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, M2C_UNK (**)(s32, s32, s32, s32, s32, s32, s32, s32), 0x2C)(arg1, arg2, arg0->unkC, arg0->unk20, arg0->unk1C, arg0->unk24, arg0->unk28, arg0->unk30);
+    arg0->unk2C(arg1, arg2, arg0->unkC, arg0->unk20, arg0->unk1C, arg0->unk24, arg0->unk28, arg0->unk30);
 }
 

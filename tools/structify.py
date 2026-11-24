@@ -359,7 +359,10 @@ def main():
     if subprocess.run(["git", "diff", "--quiet", "--no-ext-diff", "--", f"src/{mod}"], cwd=ROOT).returncode:
         print(f"{vm}: local changes, skipping")
         return
-    if "--gptr" in sys.argv:
+    if "--extend" in sys.argv:
+        import structify_extend
+        phase = structify_extend.structify_extend
+    elif "--gptr" in sys.argv:
         import structify_gptr
         phase = structify_gptr.structify_gptr
     elif "--vtables" in sys.argv:

@@ -11,7 +11,7 @@ void func_00001F84(void) {
     if (temp_v0 != 0) {
         temp_v0_2 = scePaf_338C3774(temp_v0, 1);
         if (temp_v0_2 != NULL) {
-            D_00065E18 = M2C_FIELD(temp_v0_2, s32 (**)(), 0x30)();
+            D_00065E18 = temp_v0_2->unk30();
         }
     }
 }

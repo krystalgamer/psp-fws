@@ -175,7 +175,7 @@ s32 func_000391A4(void) {
     temp_v0 = func_00038A04(1);
     var_v1 = 1;
     if (temp_v0 != NULL) {
-        var_v1 = M2C_FIELD(temp_v0, s32 (**)(), 0x14)();
+        var_v1 = temp_v0->unk14();
     }
     return var_v1;
 }

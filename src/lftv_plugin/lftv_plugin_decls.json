@@ -29,7 +29,7 @@
   "sceVshCommonGui_72E652AA": "M2C_UNK sceVshCommonGui_72E652AA(s32);"
  },
  "types": {
-  "Unk_func_0000186C_temp_v0_2": "struct Unk_func_0000186C_temp_v0_2 {\n\n};"
+  "Unk_func_0000186C_temp_v0_2": "struct Unk_func_0000186C_temp_v0_2 {\n    u8 pad0[0x70];\n    M2C_UNK (*unk70)();\n};"
  },
  "vars": {
   "D_000031AC": "extern M2C_UNK D_000031AC;",

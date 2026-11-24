@@ -933,8 +933,8 @@ void func_00049A5C(void) {
 }
 
 void func_00049A78(struct Unk_func_00049A78_0 *arg0) {
-    M2C_FIELD(arg0, void (**)(), 0x50) = func_00049A40;
-    M2C_FIELD(arg0, void (**)(), 0x54) = func_00049A5C;
+    arg0->unk50 = func_00049A40;
+    arg0->unk54 = func_00049A5C;
     arg0->unk0 = 0;
     arg0->unk3C = 0;
     arg0->unk40 = 0;
@@ -945,8 +945,8 @@ void func_00049A78(struct Unk_func_00049A78_0 *arg0) {
 }
 
 void func_00049AD0(struct Unk_func_00049AD0_0 *arg0) {
-    M2C_FIELD(arg0, void (**)(), 0x50) = func_00049A40;
-    M2C_FIELD(arg0, void (**)(), 0x54) = func_00049A5C;
+    arg0->unk50 = func_00049A40;
+    arg0->unk54 = func_00049A5C;
     arg0->unk0 = 0;
     arg0->unk3C = 0;
     arg0->unk40 = 0;

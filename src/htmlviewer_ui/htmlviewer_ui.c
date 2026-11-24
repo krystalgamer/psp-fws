@@ -1071,12 +1071,12 @@ void func_000096F4(struct Unk_func_000096F4_0 *arg0, s32 arg1) {
     M2C_UNK (*temp_v0_2)(s32, M2C_UNK, s32);
 
     func_00008DE4();
-    temp_v0 = M2C_FIELD(arg0, M2C_UNK (**)(s32, M2C_UNK, s32), 0xC);
+    temp_v0 = arg0->unkC;
     if (temp_v0 != NULL) {
         temp_v0(arg0->unk14, 1, arg0->unk10);
     }
     func_00008C98(arg0);
-    temp_v0_2 = M2C_FIELD(arg0, M2C_UNK (**)(s32, M2C_UNK, s32), 0xC);
+    temp_v0_2 = arg0->unkC;
     arg0->unk14 = arg1;
     if (temp_v0_2 != NULL) {
         temp_v0_2(arg1, 0, arg0->unk10);
@@ -1967,7 +1967,7 @@ s32 func_00012564(struct Unk_func_00012564_0 *arg0, struct Unk_func_00012564_1 *
         if (arg1 != NULL) {
             temp_v0 = arg1->unk18;
             if (temp_v0 != 0) {
-                M2C_FIELD(arg0, M2C_UNK (**)(M2C_UNK, s32, s32), 0x3C)(arg2, temp_v0, arg1->unk14);
+                arg0->unk3C(arg2, temp_v0, arg1->unk14);
                 var_v1 = 0;
                 temp_v0_2 = arg0->unk40 + 1;
                 arg0->unk40 = temp_v0_2;
@@ -1988,7 +1988,7 @@ s32 func_000125D4(struct Unk_func_000125D4_0 *arg0, struct Unk_func_000125D4_1 *
         if (arg1 != NULL) {
             temp_v0 = arg1->unk20;
             if (temp_v0 != 0) {
-                M2C_FIELD(arg0, M2C_UNK (**)(M2C_UNK, s32, s32), 0x3C)(arg2, temp_v0, arg1->unk1C);
+                arg0->unk3C(arg2, temp_v0, arg1->unk1C);
                 var_v1 = 0;
                 temp_v0_2 = arg0->unk40 + 1;
                 arg0->unk40 = temp_v0_2;
@@ -2009,7 +2009,7 @@ s32 func_00012644(struct Unk_func_00012644_0 *arg0, struct Unk_func_00012644_1 *
         if (arg1 != NULL) {
             temp_v0 = arg1->unk28;
             if (temp_v0 != 0) {
-                M2C_FIELD(arg0, M2C_UNK (**)(M2C_UNK, s32, s32), 0x3C)(arg2, temp_v0, arg1->unk24);
+                arg0->unk3C(arg2, temp_v0, arg1->unk24);
                 var_v1 = 0;
                 temp_v0_2 = arg0->unk40 + 1;
                 arg0->unk40 = temp_v0_2;
@@ -2030,7 +2030,7 @@ s32 func_000126B4(struct Unk_func_000126B4_0 *arg0, struct Unk_func_000126B4_1 *
         if (arg1 != NULL) {
             temp_v0 = arg1->unk30;
             if (temp_v0 != 0) {
-                M2C_FIELD(arg0, M2C_UNK (**)(M2C_UNK, s32, s32), 0x3C)(arg2, temp_v0, arg1->unk2C);
+                arg0->unk3C(arg2, temp_v0, arg1->unk2C);
                 var_v1 = 0;
                 temp_v0_2 = arg0->unk40 + 1;
                 arg0->unk40 = temp_v0_2;
@@ -4364,7 +4364,7 @@ void func_00024ECC(s32 arg0) {
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
     func_0002481C(temp_v0);
     func_00010564(func_00003D10() + 0x14DC, temp_v0->unk0);
-    temp_v0_2 = M2C_FIELD(temp_v0, M2C_UNK (**)(s32), 0x27C);
+    temp_v0_2 = temp_v0->unk27C;
     if (temp_v0_2 != NULL) {
         temp_v0_2(temp_v0->unk280);
     }

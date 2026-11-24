@@ -74,7 +74,7 @@ void func_0000083C(struct Unk_func_0000083C_0 *arg0) {
     s32 temp_a1;
 
     temp_a1 = arg0->unk0;
-    M2C_FIELD(arg0, M2C_UNK (**)(s32, s32), 8)(temp_a1, temp_a1);
+    arg0->unk8(temp_a1, temp_a1);
 }
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00000860);

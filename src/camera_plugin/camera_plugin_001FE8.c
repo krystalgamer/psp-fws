@@ -1088,7 +1088,7 @@ void func_00008BCC(s32 arg0) {
     struct Unk_func_00008BCC_temp_a3 *temp_a3;
 
     temp_a3 = *D_00166B5C;
-    M2C_FIELD(temp_a3, M2C_UNK (**)(void **, s32, M2C_UNK, void *), 0xB4)(D_00166B5C, arg0, 0, temp_a3);
+    temp_a3->unkB4(D_00166B5C, arg0, 0, temp_a3);
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_00008C00);

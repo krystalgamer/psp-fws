@@ -833,11 +833,11 @@ void func_000E25A0(void **arg0, s32 arg1) {
     temp_s0 = *arg0;
     if (arg1 < 0) {
         if ((temp_s0->unk6C == 0) || (temp_s0->unk68 >= 3)) {
-            M2C_FIELD(temp_s0, M2C_UNK (**)(), 8)();
+            temp_s0->unk8();
         }
         temp_s0->unk6C = (s32) (temp_s0->unk6C + 1);
     } else if (temp_s0->unk68 >= arg1) {
-        M2C_FIELD(temp_s0, M2C_UNK (**)(), 8)();
+        temp_s0->unk8();
     }
 }
 
@@ -898,7 +898,7 @@ void func_000E3AD4(void **arg0) {
 
     temp_v1 = *arg0;
     temp_v1->unk14 = 0x31;
-    M2C_FIELD(temp_v1, M2C_UNK (**)(), 0)();
+    temp_v1->unk0();
 }
 
 s32 func_000E3B00(void) {
@@ -944,7 +944,7 @@ void func_000E495C(void **arg0) {
 
     temp_v1 = *arg0;
     temp_v1->unk14 = 0x2E;
-    M2C_FIELD(temp_v1, M2C_UNK (**)(), 0)();
+    temp_v1->unk0();
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000E4988);

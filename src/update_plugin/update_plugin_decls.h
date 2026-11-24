@@ -10,15 +10,18 @@ struct Unk_func_000002A4_temp_v0 {
 };
 
 struct Unk_func_00002360_temp_v0 {
-
+    u8 pad0[0x4];
+    M2C_UNK (*unk4)(M2C_UNK *, M2C_UNK);
 };
 
 struct Unk_func_0000292C_temp_v0 {
-
+    u8 pad0[0x10];
+    M2C_UNK (*unk10)(void (*)(s32));
 };
 
 struct Unk_func_00002960_temp_v0 {
-
+    u8 pad0[0xC];
+    M2C_UNK (*unkC)(M2C_UNK *, M2C_UNK *, M2C_UNK);
 };
 
 struct Unk_func_00002FE4_1 {
@@ -66,7 +69,8 @@ struct Unk_func_00005CA0_0 {
 };
 
 struct Unk_func_00005DD4_temp_v0 {
-
+    u8 pad0[0x7C];
+    s32 (*unk7C)();
 };
 
 struct Unk_func_00006160_0 {

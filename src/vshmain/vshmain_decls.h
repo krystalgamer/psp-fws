@@ -33,11 +33,13 @@ struct Unk_D_0003089C {
 };
 
 struct Unk_func_00002760_temp_v0 {
-
+    u8 pad0[0xC];
+    M2C_UNK (*unkC)(M2C_UNK);
 };
 
 struct Unk_func_0000362C_temp_v0 {
-
+    u8 pad0[0x4];
+    M2C_UNK (*unk4)(void (*)());
 };
 
 struct Unk_func_0000482C_var_a0 {

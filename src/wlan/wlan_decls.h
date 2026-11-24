@@ -212,13 +212,16 @@ struct Unk_func_00015958_temp_s0 {
 };
 
 struct Unk_func_00017A3C_temp_s2 {
-    u8 pad0[0x10E];
+    u8 pad0[0xD8];
+    M2C_UNK (*unkD8)(void *, s32, s32, u32, s32);
+    u8 padDC[0x32];
     s16 unk10E;
     s16 unk110;
 };
 
 struct Unk_func_00017BCC_temp_s2 {
-
+    u8 pad0[0xE4];
+    s32 (*unkE4)(void *, s32, s32);
 };
 
 struct Unk_func_00017EA4_1 {

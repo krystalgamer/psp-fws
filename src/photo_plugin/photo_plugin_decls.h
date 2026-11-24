@@ -258,15 +258,19 @@ struct Unk_func_0001206C_0 {
 };
 
 struct Unk_func_00012A1C_temp_v0 {
-
+    u8 pad0[0x14];
+    M2C_UNK (*unk14)(s32);
 };
 
 struct Unk_func_00016C00_temp_v0 {
-
+    M2C_UNK (*unk0)(M2C_UNK);
+    u8 pad4[0x10];
+    M2C_UNK (*unk14)(M2C_UNK);
 };
 
 struct Unk_func_00016E94_temp_v0 {
-
+    u8 pad0[0x3C];
+    s32 (*unk3C)();
 };
 
 struct Unk_func_00017360_0 {

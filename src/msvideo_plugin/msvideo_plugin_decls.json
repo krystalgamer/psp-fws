@@ -1011,7 +1011,7 @@
   "Unk_Unk_Unk_func_0005ECC4_0_10C_298": "struct Unk_Unk_Unk_func_0005ECC4_0_10C_298 {\n    u8 pad0[0x8C];\n    struct Unk_Unk_Unk_Unk_func_0005ECC4_0_10C_298_8C *unk8C;\n};",
   "Unk_Unk_func_0003C1B8_temp_a0_C8": "struct Unk_Unk_func_0003C1B8_temp_a0_C8 {\n    u8 pad0[0xC];\n    s32 unkC;\n};",
   "Unk_Unk_func_0005ECC4_0_10C": "struct Unk_Unk_func_0005ECC4_0_10C {\n    u8 pad0[0x298];\n    struct Unk_Unk_Unk_func_0005ECC4_0_10C_298 *unk298;\n};",
-  "Unk_func_00001F84_temp_v0_2": "struct Unk_func_00001F84_temp_v0_2 {\n\n};",
+  "Unk_func_00001F84_temp_v0_2": "struct Unk_func_00001F84_temp_v0_2 {\n    u8 pad0[0x30];\n    s32 (*unk30)();\n};",
   "Unk_func_00003E88_0": "struct Unk_func_00003E88_0 {\n    u8 pad0[0x20];\n    s8 unk20;\n};",
   "Unk_func_00003E94_0": "struct Unk_func_00003E94_0 {\n    u8 pad0[0x20];\n    s8 unk20;\n};",
   "Unk_func_00004C5C_0": "struct Unk_func_00004C5C_0 {\n    u8 pad0[0x18];\n    u8 unk18;\n};",

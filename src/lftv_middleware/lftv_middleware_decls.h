@@ -110,7 +110,8 @@ struct Unk_func_0001FF84_0 {
 };
 
 struct Unk_func_0001FF84_temp_a1 {
-
+    u8 pad0[0x10];
+    M2C_UNK (*unk10)(void **, void *);
 };
 
 struct Unk_func_0002049C_0 {
@@ -559,7 +560,8 @@ struct Unk_func_0003B6C8_0 {
 };
 
 struct Unk_func_0003B6C8_temp_a1 {
-
+    u8 pad0[0x8];
+    M2C_UNK (*unk8)(void **, void *);
 };
 
 struct Unk_func_0003B6F8_0 {
@@ -570,7 +572,8 @@ struct Unk_func_0003B6F8_0 {
 };
 
 struct Unk_func_0003B6F8_temp_a1 {
-
+    u8 pad0[0x8];
+    M2C_UNK (*unk8)(void **, void *);
 };
 
 struct Unk_func_0003B728_0 {
@@ -583,7 +586,8 @@ struct Unk_func_0003B728_0 {
 };
 
 struct Unk_func_0003B728_temp_a1 {
-
+    u8 pad0[0x8];
+    M2C_UNK (*unk8)(void **, void *);
 };
 
 struct Unk_func_0003B77C_0 {
@@ -594,7 +598,8 @@ struct Unk_func_0003B77C_0 {
 };
 
 struct Unk_func_0003B77C_temp_a1 {
-
+    u8 pad0[0x8];
+    M2C_UNK (*unk8)(void **, void *);
 };
 
 struct Unk_func_0003B7B8_0 {
@@ -645,7 +650,8 @@ struct Unk_func_0003CAEC_0 {
 };
 
 struct Unk_func_0003D8D4_temp_a1 {
-
+    u8 pad0[0x8];
+    M2C_UNK (*unk8)(void **, void *);
 };
 
 struct Unk_func_0003DD50_0 {
@@ -701,11 +707,13 @@ struct Unk_func_0003FA30_0 {
 };
 
 struct Unk_func_0003FA30_temp_a2 {
-
+    u8 pad0[0x4];
+    M2C_UNK (*unk4)(void **, M2C_UNK, void *);
 };
 
 struct Unk_func_0003FA58_temp_a1 {
-
+    u8 pad0[0x8];
+    M2C_UNK (*unk8)(void **, void *);
 };
 
 struct Unk_func_00040808_0 {

@@ -422,7 +422,7 @@
   "Unk_func_00002084_0": "struct Unk_func_00002084_0 {\n    u8 pad0[0x1EC];\n    s32 unk1EC;\n};",
   "Unk_func_00005FE8_0": "struct Unk_func_00005FE8_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n};",
   "Unk_func_00006CE8_0": "struct Unk_func_00006CE8_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n};",
-  "Unk_func_00008BCC_temp_a3": "struct Unk_func_00008BCC_temp_a3 {\n\n};",
+  "Unk_func_00008BCC_temp_a3": "struct Unk_func_00008BCC_temp_a3 {\n    u8 pad0[0xB4];\n    M2C_UNK (*unkB4)(void **, s32, M2C_UNK, void *);\n};",
   "Unk_func_0000C7EC_0": "struct Unk_func_0000C7EC_0 {\n    u8 pad0[0x114];\n    s32 unk114;\n};",
   "Unk_func_0000E800_0": "struct Unk_func_0000E800_0 {\n    u8 pad0[0x30];\n    s32 unk30;\n};",
   "Unk_func_0000E834_0": "struct Unk_func_0000E834_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",

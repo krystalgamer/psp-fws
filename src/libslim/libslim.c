@@ -457,7 +457,7 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00003EDC);
 
 void func_00003F10(s32 arg0, struct Unk_func_00003F10_1 *arg1) {
     func_00003E68(arg0, arg1);
-    M2C_FIELD(arg1, s32 (**)(void *), 0x18) = func_00003EA4;
+    arg1->unk18 = func_00003EA4;
     arg1->unk1C = &func_00003EDC;
 }
 

@@ -132,6 +132,8 @@ struct Unk_TIFFCheckpointDirectory_0 {
     s32 unkF8;
     u8 padFC[0x8C];
     s32 unk188;
+    u8 pad18C[0x8];
+    s32 (*unk194)(s32, M2C_UNK, M2C_UNK);
 };
 
 struct Unk_TIFFNumberOfTiles_temp_s1 {
@@ -846,6 +848,7 @@ struct Unk_func_00050DD4_0 {
     u8 pad670[0x4];
     s32 unk674;
     s32 unk678;
+    M2C_UNK (*unk67C)(s32, s32, void *, void *, s32, s32, s32);
 };
 
 struct Unk_func_00051108_0 {
@@ -956,7 +959,7 @@ struct Unk_func_00058030_0 {
     s32 unk20;
     s32 unk24;
     s32 unk28;
-    u8 pad2C[0x4];
+    M2C_UNK (*unk2C)(s32, s32, s32, s32, s32, s32, s32, s32);
     s32 unk30;
 };
 
@@ -1161,7 +1164,8 @@ struct Unk_func_000693AC_0 {
 };
 
 struct Unk_func_0006D618_temp_s2 {
-
+    u8 pad0[0x8];
+    s32 (*unk8)(s32, s32);
 };
 
 struct Unk_func_0006F9EC_temp_v0 {
@@ -1684,10 +1688,14 @@ struct Unk_func_000BC724_0 {
 
 struct Unk_func_000BC724_temp_v1 {
     s32 unk0;
+    u8 pad4[0xC];
+    M2C_UNK (*unk10)(s32, s32);
 };
 
 struct Unk_func_000BC724_temp_v1_2 {
     s32 unk0;
+    u8 pad4[0xC];
+    M2C_UNK (*unk10)(s32, s32);
 };
 
 struct Unk_func_000BC7A0_0 {
@@ -2710,7 +2718,7 @@ struct Unk_func_00118500_0 {
 
 struct Unk_func_00118580_0 {
     s32 unk0;
-    u8 pad4[0x4];
+    s32 (*unk4)(s32);
     s32 unk8;
     s32 unkC;
 };
@@ -2814,7 +2822,8 @@ struct Unk_func_00121CC0_0 {
 };
 
 struct Unk_func_00121CC0_temp_a0 {
-
+    u8 pad0[0xD88];
+    M2C_UNK (*unkD88)(void *);
 };
 
 struct Unk_func_00121D20_0 {
@@ -2823,7 +2832,8 @@ struct Unk_func_00121D20_0 {
 };
 
 struct Unk_func_00121D20_temp_a0 {
-
+    u8 pad0[0xD90];
+    M2C_UNK (*unkD90)(void *);
 };
 
 struct Unk_func_00121D4C_0 {
@@ -2832,15 +2842,19 @@ struct Unk_func_00121D4C_0 {
 };
 
 struct Unk_func_00121D4C_temp_a0 {
-
+    u8 pad0[0xD98];
+    M2C_UNK (*unkD98)(void *);
 };
 
 struct Unk_func_0012441C_0 {
     s32 unk0;
+    u8 pad4[0x4];
+    M2C_UNK (*unk8)(M2C_UNK, void *);
 };
 
 struct Unk_func_0012448C_temp_a0 {
-
+    u8 pad0[0xF8];
+    M2C_UNK (*unkF8)(void *);
 };
 
 struct Unk_func_0012480C_0 {
@@ -2957,6 +2971,8 @@ struct Unk_func_00149554_temp_a0 {
 
 struct Unk_func_0014981C_0 {
     s32 unk0;
+    u8 pad4[0x8];
+    s32 (*unkC)(s32, M2C_UNK);
 };
 
 struct Unk_func_0014A000_0 {

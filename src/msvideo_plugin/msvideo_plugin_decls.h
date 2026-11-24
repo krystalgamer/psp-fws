@@ -60,7 +60,8 @@ struct Unk_Unk_func_0005ECC4_0_10C {
 };
 
 struct Unk_func_00001F84_temp_v0_2 {
-
+    u8 pad0[0x30];
+    s32 (*unk30)();
 };
 
 struct Unk_func_00003E88_0 {

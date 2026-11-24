@@ -159,7 +159,7 @@ void func_00009CA4(s32 arg0) {
     }
     temp_v0 = scePaf_DCE3D225(arg0, 1);
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, M2C_UNK (**)(void (*)()), 0x10)(func_00009C5C);
+        temp_v0->unk10(func_00009C5C);
     }
 }
 

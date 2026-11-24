@@ -3085,7 +3085,7 @@ void func_00018974(s32 arg0) {
     func_00002698(1);
     temp_v0 = scePaf_338C3774(arg0, 1);
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK *, M2C_UNK), 4)(&func_00018928, 0);
+        temp_v0->unk4(&func_00018928, 0);
     }
     func_000065FC(0);
     func_00002320();

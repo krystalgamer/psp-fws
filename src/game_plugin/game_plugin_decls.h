@@ -5,19 +5,23 @@
 #include "m2c_macros.h"
 
 struct Unk_func_00005C88_temp_v0_2 {
-
+    u8 pad0[0xC];
+    M2C_UNK (*unkC)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK);
 };
 
 struct Unk_func_00006584_temp_v0_2 {
-
+    u8 pad0[0xC];
+    M2C_UNK (*unkC)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK);
 };
 
 struct Unk_func_00006974_temp_v0_2 {
-
+    u8 pad0[0xC];
+    M2C_UNK (*unkC)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK);
 };
 
 struct Unk_func_00007024_temp_v0 {
-
+    u8 pad0[0x4];
+    M2C_UNK (*unk4)(M2C_UNK *);
 };
 
 struct Unk_func_00007584_var_a0 {

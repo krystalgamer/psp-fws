@@ -4142,7 +4142,7 @@ void func_0009907C(void **arg0) {
 
     temp_v0 = *arg0;
     if (temp_v0 != NULL) {
-        temp_v0_2 = M2C_FIELD(temp_v0, M2C_UNK (**)(), 4);
+        temp_v0_2 = temp_v0->unk4;
         if (temp_v0_2 != NULL) {
             temp_v0_2();
         }
@@ -6296,7 +6296,7 @@ void func_000BB4A0(struct Unk_func_000BB4A0_0 *arg0) {
 
 void func_000BB4E0(struct Unk_func_000BB4E0_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     func_000B98C8(arg0, arg1, arg2, arg3, arg4, arg5);
-    M2C_FIELD(arg0, void (**)(void *), 0x18) = func_000BB4A0;
+    arg0->unk18 = func_000BB4A0;
     arg0->unk10 = &func_000BB374;
     arg0->unk1C = &func_000BB3F4;
     arg0->unk24 = 0;
@@ -6361,9 +6361,9 @@ void func_000BBF14(struct Unk_func_000BBF14_0 *arg0) {
 
 void func_000BBF30(struct Unk_func_000BBF30_0 *arg0) {
     func_00098FE4(arg0);
-    M2C_FIELD(arg0, void (**)(s32), 0x10) = func_000BBEF0;
+    arg0->unk10 = func_000BBEF0;
     arg0->unk8 = &func_000BBE8C;
-    M2C_FIELD(arg0, void (**)(void *), 4) = func_000BBF14;
+    arg0->unk4 = func_000BBF14;
     arg0->unkC = &func_000BBBE4;
     arg0->unk0 = 0;
 }

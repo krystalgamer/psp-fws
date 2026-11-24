@@ -219,14 +219,16 @@ struct Unk_func_00009420_0 {
 struct Unk_func_00009528_0 {
     u8 pad0[0x14];
     s32 unk14;
-    u8 pad18[0x40];
+    u8 pad18[0x3C];
+    M2C_UNK (*unk54)(s32);
     s32 unk58;
 };
 
 struct Unk_func_0000966C_0 {
     u8 pad0[0x14];
     s32 unk14;
-    u8 pad18[0x48];
+    u8 pad18[0x44];
+    M2C_UNK (*unk5C)(s32);
     s32 unk60;
 };
 

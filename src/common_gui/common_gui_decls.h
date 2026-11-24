@@ -46,7 +46,8 @@ struct Unk_func_00000F6C_0 {
 };
 
 struct Unk_sceVshCommonGui_80271F41_temp_v0_2 {
-
+    u8 pad0[0x6C];
+    M2C_UNK (*unk6C)();
 };
 
 struct Unk_sceVshCommonGui_88F5E3A8_0 {

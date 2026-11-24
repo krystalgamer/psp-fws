@@ -776,7 +776,7 @@
   "Unk_func_00009840_0": "struct Unk_func_00009840_0 {\n    u8 pad0[0x10];\n    s32 unk10;\n};",
   "Unk_func_00009908_0": "struct Unk_func_00009908_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
   "Unk_func_0000994C_0": "struct Unk_func_0000994C_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
-  "Unk_func_00009CA4_temp_v0": "struct Unk_func_00009CA4_temp_v0 {\n\n};",
+  "Unk_func_00009CA4_temp_v0": "struct Unk_func_00009CA4_temp_v0 {\n    u8 pad0[0x10];\n    M2C_UNK (*unk10)(void (*)());\n};",
   "Unk_func_0000A91C_0": "struct Unk_func_0000A91C_0 {\n    u8 pad0[0x8];\n    s32 unk8;\n};",
   "Unk_func_0000A958_0": "struct Unk_func_0000A958_0 {\n    u8 pad0[0x10];\n    s32 unk10;\n};",
   "Unk_func_0000A9F8_0": "struct Unk_func_0000A9F8_0 {\n    u8 pad0[0xC];\n    s32 unkC;\n};",

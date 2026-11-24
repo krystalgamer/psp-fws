@@ -18,8 +18,8 @@ void func_00118564(s32 *arg0) {
 
 void func_00118580(struct Unk_func_00118580_0 *arg0) {
     if (sceKernelPollEventFlag(arg0->unk0, 1, 0x20, 0) >= 0) {
-        arg0->unkC = M2C_FIELD(arg0, s32 (**)(s32), 4)(arg0->unk8);
-        M2C_FIELD(arg0, s32 (**)(s32), 4) = NULL;
+        arg0->unkC = arg0->unk4(arg0->unk8);
+        arg0->unk4 = NULL;
         arg0->unk8 = 0;
         sceKernelSetEventFlag(arg0->unk0, 2);
     }

@@ -22,7 +22,7 @@ void sceVshCommonGui_80271F41(void) {
     if (temp_v0 != 0) {
         temp_v0_2 = scePaf_338C3774(temp_v0, 1);
         if (temp_v0_2 != NULL) {
-            M2C_FIELD(temp_v0_2, M2C_UNK (**)(), 0x6C)();
+            temp_v0_2->unk6C();
         }
     }
 }

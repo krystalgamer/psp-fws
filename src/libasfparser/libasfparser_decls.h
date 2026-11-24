@@ -16,6 +16,8 @@ struct Unk_func_00000214_temp_v0 {
 
 struct Unk_func_0000083C_0 {
     s32 unk0;
+    u8 pad4[0x4];
+    M2C_UNK (*unk8)(s32, s32);
 };
 
 struct Unk_func_00000FB8_0 {

@@ -7,8 +7,8 @@ void func_00016C00(void) {
 
     temp_v0 = func_00012DE4();
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK), 0x14)(0xD);
-        M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK), 0)(6);
+        temp_v0->unk14(0xD);
+        temp_v0->unk0(6);
     }
     func_00016ECC();
 }
@@ -29,7 +29,7 @@ s32 func_00016E94(void) {
     temp_v0 = func_00012DE4();
     var_v1 = 0;
     if (temp_v0 != NULL) {
-        var_v1 = M2C_FIELD(temp_v0, s32 (**)(), 0x3C)();
+        var_v1 = temp_v0->unk3C();
     }
     return var_v1;
 }

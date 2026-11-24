@@ -2817,7 +2817,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_000868D0);
 
 void sceHVNetfront_Module_B3AF6022(s32 arg0, struct Unk_sceHVNetfront_Module_B3AF6022_1 *arg1) {
     func_0008685C(arg0, arg1);
-    M2C_FIELD(arg1, s32 (**)(void *), 0x18) = func_00086898;
+    arg1->unk18 = func_00086898;
     arg1->unk1C = &func_000868D0;
 }
 

@@ -254,7 +254,7 @@ void func_0003FA30(struct Unk_func_0003FA30_0 *arg0) {
 
     temp_a0 = arg0->unk8;
     temp_a2 = *temp_a0;
-    M2C_FIELD(temp_a2, M2C_UNK (**)(void **, M2C_UNK, void *), 4)(temp_a0, -1, temp_a2);
+    temp_a2->unk4(temp_a0, -1, temp_a2);
 }
 
 void func_0003FA58(struct Unk_func_0003FA30_0 *arg0) {
@@ -263,7 +263,7 @@ void func_0003FA58(struct Unk_func_0003FA30_0 *arg0) {
 
     temp_a0 = arg0->unk8;
     temp_a1 = *temp_a0;
-    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(temp_a0, temp_a1);
+    temp_a1->unk8(temp_a0, temp_a1);
 }
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03D910", func_0003FA80);

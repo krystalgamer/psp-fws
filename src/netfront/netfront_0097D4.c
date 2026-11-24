@@ -24,7 +24,7 @@ s32 func_00009C3C(struct Unk_func_00009C3C_0 *arg0, struct Unk_func_00009C3C_1 *
         if (arg1 != NULL) {
             temp_v0 = arg1->unk18;
             if (temp_v0 != 0) {
-                M2C_FIELD(arg0, M2C_UNK (**)(M2C_UNK, s32, s32), 0x3C)(arg2, temp_v0, arg1->unk14);
+                arg0->unk3C(arg2, temp_v0, arg1->unk14);
                 var_v1 = 0;
                 temp_v0_2 = arg0->unk40 + 1;
                 arg0->unk40 = temp_v0_2;
@@ -45,7 +45,7 @@ s32 func_00009CAC(struct Unk_func_00009CAC_0 *arg0, struct Unk_func_00009CAC_1 *
         if (arg1 != NULL) {
             temp_v0 = arg1->unk20;
             if (temp_v0 != 0) {
-                M2C_FIELD(arg0, M2C_UNK (**)(M2C_UNK, s32, s32), 0x3C)(arg2, temp_v0, arg1->unk1C);
+                arg0->unk3C(arg2, temp_v0, arg1->unk1C);
                 var_v1 = 0;
                 temp_v0_2 = arg0->unk40 + 1;
                 arg0->unk40 = temp_v0_2;
@@ -66,7 +66,7 @@ s32 func_00009D1C(struct Unk_func_00009D1C_0 *arg0, struct Unk_func_00009D1C_1 *
         if (arg1 != NULL) {
             temp_v0 = arg1->unk28;
             if (temp_v0 != 0) {
-                M2C_FIELD(arg0, M2C_UNK (**)(M2C_UNK, s32, s32), 0x3C)(arg2, temp_v0, arg1->unk24);
+                arg0->unk3C(arg2, temp_v0, arg1->unk24);
                 var_v1 = 0;
                 temp_v0_2 = arg0->unk40 + 1;
                 arg0->unk40 = temp_v0_2;
@@ -87,7 +87,7 @@ s32 func_00009D8C(struct Unk_func_00009D8C_0 *arg0, struct Unk_func_00009D8C_1 *
         if (arg1 != NULL) {
             temp_v0 = arg1->unk30;
             if (temp_v0 != 0) {
-                M2C_FIELD(arg0, M2C_UNK (**)(M2C_UNK, s32, s32), 0x3C)(arg2, temp_v0, arg1->unk2C);
+                arg0->unk3C(arg2, temp_v0, arg1->unk2C);
                 var_v1 = 0;
                 temp_v0_2 = arg0->unk40 + 1;
                 arg0->unk40 = temp_v0_2;

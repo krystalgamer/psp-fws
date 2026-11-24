@@ -144,7 +144,7 @@ s32 func_00121CC0(struct Unk_func_00121CC0_0 *arg0) {
     struct Unk_func_00121CC0_temp_a0 *temp_a0;
 
     temp_a0 = *arg0->unk7C;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD88)(temp_a0);
+    temp_a0->unkD88(temp_a0);
     return 0;
 }
 
@@ -154,7 +154,7 @@ s32 func_00121D20(struct Unk_func_00121D20_0 *arg0) {
     struct Unk_func_00121D20_temp_a0 *temp_a0;
 
     temp_a0 = *arg0->unk7C;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD90)(temp_a0);
+    temp_a0->unkD90(temp_a0);
     return 0;
 }
 
@@ -162,7 +162,7 @@ s32 func_00121D4C(struct Unk_func_00121D4C_0 *arg0) {
     struct Unk_func_00121D4C_temp_a0 *temp_a0;
 
     temp_a0 = *arg0->unk7C;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD98)(temp_a0);
+    temp_a0->unkD98(temp_a0);
     return 0;
 }
 
@@ -429,7 +429,7 @@ s32 func_0012441C(struct Unk_func_0012441C_0 *arg0) {
     } else {
         func_001245FC(temp_v0);
     }
-    M2C_FIELD(arg0, M2C_UNK (**)(M2C_UNK, void *), 8)(0, arg0);
+    arg0->unk8(0, arg0);
     return 0;
 }
 
@@ -439,7 +439,7 @@ s32 func_0012448C(void **arg0) {
     struct Unk_func_0012448C_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xF8)(temp_a0);
+    temp_a0->unkF8(temp_a0);
     return 0;
 }
 

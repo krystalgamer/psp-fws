@@ -7,7 +7,7 @@ void func_00012A1C(s32 arg0) {
 
     temp_v0 = func_00012DE4();
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, M2C_UNK (**)(s32), 0x14)(arg0);
+        temp_v0->unk14(arg0);
     }
 }
 

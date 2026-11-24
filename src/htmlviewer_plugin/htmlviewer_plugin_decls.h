@@ -44,15 +44,22 @@ struct Unk_func_00000940_0 {
 };
 
 struct Unk_func_00001670_temp_v0_2 {
-
+    u8 pad0[0xA4];
+    M2C_UNK (*unkA4)(M2C_UNK);
+    u8 padA8[0x14];
+    M2C_UNK (*unkBC)(M2C_UNK);
+    u8 padC0[0x8];
+    M2C_UNK (*unkC8)(M2C_UNK);
 };
 
 struct Unk_func_000026F8_temp_v0_2 {
-
+    u8 pad0[0xC];
+    M2C_UNK (*unkC)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);
 };
 
 struct Unk_func_0000278C_temp_v0_2 {
-
+    u8 pad0[0x2C];
+    s32 (*unk2C)();
 };
 
 extern s32 D_00006E34;
