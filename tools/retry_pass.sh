@@ -12,7 +12,7 @@ count() { cat src/$m/*.c | grep -cE '^[A-Za-z][A-Za-z0-9_ *]*\b[A-Za-z0-9_]+\([^
 before=$(count)
 log=tmp/retry_${v}_${m}.log
 { make extract split VERSION=$v MODULE=$m && .venv/bin/python tools/op_census.py $v $m \
-  && .venv/bin/python tools/auto_decomp.py $v $m --max-size 0x400 --grep "$re" ${3:+--names "$3"} ${FAST:+--fast}; } >"$log" 2>&1
+  && .venv/bin/python tools/auto_decomp.py $v $m --max-size ${MAXSIZE:-0x400} --grep "$re" ${3:+--names "$3"} ${FAST:+--fast}; } >"$log" 2>&1
 after=$(count)
 if [ "$after" -gt "$before" ] && tools/regress.sh "$1" >>"$log" 2>&1; then
     echo "$1: OK $before -> $after"
