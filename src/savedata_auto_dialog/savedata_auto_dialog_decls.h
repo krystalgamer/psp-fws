@@ -101,6 +101,7 @@ s32 func_0000BA7C(s32, s32, s32);
 M2C_UNK *func_0000CD0C(s32 arg0);
 M2C_UNK func_0000FEAC(s32);
 s32 func_00013644(s32, s32);
+void func_00014200(s32 *arg0);
 void func_0001425C(s32 arg0, s32 arg1);
 M2C_UNK func_00014270();
 M2C_UNK func_000142AC();
@@ -158,7 +159,9 @@ s32 module_start(void);
 s32 module_stop(void);
 M2C_UNK sceKernelCheckCallback();
 M2C_UNK sceKernelDelayThread(s32);
+s32 sceKernelPowerUnlock(s32);
 M2C_UNK sceKernelResumeDispatchThread(s32);
 s32 sceKernelSuspendDispatchThread();
+M2C_UNK scePower_DB62C9CF();
 
 #endif

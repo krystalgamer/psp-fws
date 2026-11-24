@@ -1330,7 +1330,10 @@ INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", sceNetInetInetNt
 
 INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", sceNetInetInetPton);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_inet/nonmatchings/pspnet_inet", sceNetInetInetAddr);
+s32 sceNetInetInetAddr(s32 arg0) {
+    void *sp0;
+    return (func_0002AA4C(arg0, &sp0, 0) != 0) ? sp0 : -1;
+}
 
 void sceNetInetInetAton(s32 arg0, s32 arg1) {
     func_0002AA4C(arg0, arg1, 0);

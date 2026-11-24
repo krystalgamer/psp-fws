@@ -74,6 +74,7 @@
   "func_0000CD0C": "M2C_UNK *func_0000CD0C(s32 arg0);",
   "func_0000FEAC": "M2C_UNK func_0000FEAC(s32);",
   "func_00013644": "s32 func_00013644(s32, s32);",
+  "func_00014200": "void func_00014200(s32 *arg0);",
   "func_0001425C": "void func_0001425C(s32 arg0, s32 arg1);",
   "func_00014270": "M2C_UNK func_00014270();",
   "func_000142AC": "M2C_UNK func_000142AC();",
@@ -131,8 +132,10 @@
   "module_stop": "s32 module_stop(void);",
   "sceKernelCheckCallback": "M2C_UNK sceKernelCheckCallback();",
   "sceKernelDelayThread": "M2C_UNK sceKernelDelayThread(s32);",
+  "sceKernelPowerUnlock": "s32 sceKernelPowerUnlock(s32);",
   "sceKernelResumeDispatchThread": "M2C_UNK sceKernelResumeDispatchThread(s32);",
-  "sceKernelSuspendDispatchThread": "s32 sceKernelSuspendDispatchThread();"
+  "sceKernelSuspendDispatchThread": "s32 sceKernelSuspendDispatchThread();",
+  "scePower_DB62C9CF": "M2C_UNK scePower_DB62C9CF();"
  },
  "vars": {
   "D_0001AE7C": "extern M2C_UNK D_0001AE7C;",

@@ -535,7 +535,15 @@ void func_00003E6C(void) {
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00003E88);
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00003F40);
+void func_00003F40(s32 arg0, s32 *arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != NULL) {
+        var_v0 = scePaf_CA79D58B(arg1);
+    }
+    func_0000424C(arg0, (s32) arg1, var_v0);
+}
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00003F90);
 
@@ -759,21 +767,79 @@ s32 func_0000973C(void) {
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_58925420);
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_78A67F41);
+void vsh_78A67F41(void) {
+    void *sp0;
+    sceVshCommonUtil_FA969B6A(&sp0, 0);
+    func_0000966C();
+    sceVshBridge_CBDA2613();
+    func_00009544((s32) "flash0:/kd/mebooter_umdvideo.prx", 0, 0, 0);
+    sceVshBridge_A7F0E8E0();
+    func_0000973C();
+    sceVshCommonUtil_D4D66154(&sp0);
+}
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00009908);
+void func_00009908(void) {
+    void *sp0;
+    sceVshCommonUtil_FA969B6A(&sp0, 0);
+    func_000095F0(D_00030370);
+    D_00030370 = 0;
+    func_0000966C();
+    sceVshCommonUtil_D4D66154(&sp0);
+}
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0000994C);
+void func_0000994C(void) {
+    void *sp0;
+    sceVshCommonUtil_FA969B6A(&sp0, 0);
+    D_00030378 = func_00009544((s32) "flash0:/kd/usbstor.prx", 0, 0, 0);
+    D_0003037C = func_00009544((s32) "flash0:/kd/usbstormgr.prx", 0, 0, 0);
+    D_00030380 = func_00009544((s32) "flash0:/kd/usbstorms.prx", 0, 0, 0);
+    D_00030384 = func_00009544((s32) "flash0:/kd/usbstorboot.prx", 0, 0, 0);
+    sceVshCommonUtil_D4D66154(&sp0);
+}
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_000099F4);
+void func_000099F4(void) {
+    void *sp0;
+    sceVshCommonUtil_FA969B6A(&sp0, 0);
+    func_000095F0(D_00030384);
+    D_00030384 = 0;
+    func_000095F0(D_00030380);
+    D_00030380 = 0;
+    func_000095F0(D_0003037C);
+    D_0003037C = 0;
+    func_000095F0(D_00030378);
+    D_00030378 = 0;
+    sceVshCommonUtil_D4D66154(&sp0);
+}
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_5F6E172F);
+void vsh_5F6E172F(void) {
+    void *sp0;
+    sceVshCommonUtil_FA969B6A(&sp0, 0);
+    D_00030388 = func_00009544((s32) "flash0:/kd/usbserial.prx", 0, 0, 0);
+    sceVshCommonUtil_D4D66154(&sp0);
+}
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_8432F0B2);
+void vsh_8432F0B2(void) {
+    void *sp0;
+    sceVshCommonUtil_FA969B6A(&sp0, 0);
+    func_000095F0(D_00030388);
+    D_00030388 = 0;
+    sceVshCommonUtil_D4D66154(&sp0);
+}
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00009B04);
+void func_00009B04(void) {
+    void *sp0;
+    sceVshCommonUtil_FA969B6A(&sp0, 0);
+    D_0003038C = func_00009544((s32) "flash0:/kd/lflash_fatfmt.prx", 0, 0, 0);
+    sceVshCommonUtil_D4D66154(&sp0);
+}
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_00009B4C);
+void func_00009B4C(void) {
+    void *sp0;
+    sceVshCommonUtil_FA969B6A(&sp0, 0);
+    func_000095F0(D_0003038C);
+    D_0003038C = 0;
+    sceVshCommonUtil_D4D66154(&sp0);
+}
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", vsh_AA8B9556);
 
@@ -1191,7 +1257,10 @@ INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0000E39C);
 
 INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0000E5EC);
 
-INCLUDE_ASM("tmp/asm/201/vshmain/nonmatchings/vshmain", func_0000E688);
+s32 func_0000E688(void) {
+    void *sp0;
+    return sceRtcGetCurrentTick(&sp0) != 0;
+}
 
 INCLUDE_RODATA("tmp/asm/201/vshmain/nonmatchings/vshmain", D_00029B54);
 

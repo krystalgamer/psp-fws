@@ -19,7 +19,10 @@ s32 mcore_4D094AD7(void) {
     return (func_0000068C() == 0) ? 0 : 0x80000000;
 }
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", mcore_6264E827);
+s32 mcore_6264E827(s32 arg0, s32 arg1) {
+    void *sp0;
+    return (func_0000075C(arg0, arg1, &sp0) == 0) ? sp0 : 0x80000000;
+}
 
 s32 mcore_EA2E7E4D(s32 arg0) {
     func_0000095C(arg0 / 3, arg0 % 3);
@@ -107,7 +110,12 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0000190C);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00001994);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000019C8);
+s32 func_000019C8(s32 *arg0) {
+    void *sp0;
+    sceRtcGetCurrentTick(&sp0);
+    *arg0 = sp0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000019FC);
 
@@ -139,7 +147,21 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00001E24);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00001EB0);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00001EE4);
+s32 func_00001EE4(s32 *arg0) {
+    void *sp0;
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 4;
+    if (arg0 != NULL) {
+        temp_v0 = func_00001E24(&sp0);
+        var_v1 = temp_v0;
+        if (temp_v0 == 0) {
+            *arg0 = sp0;
+        }
+    }
+    return var_v1;
+}
 
 void func_00001F2C(void) {
     func_00001D68();
@@ -2415,13 +2437,30 @@ void func_000260C0(void *arg0) {
     func_00023FF8(M2C_FIELD(arg0, s32 *, 4));
 }
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000260DC);
+void func_000260DC(void **arg0, void *arg1, s32 arg2) {
+    void *sp0;
+    s32 temp_s0_2;
+    u16 temp_s0;
+
+    temp_s0 = M2C_FIELD(*arg0, u16 *, 2);
+    temp_s0_2 = temp_s0 << 5;
+    func_00023868(&sp0, func_0002385C(arg1) + temp_s0_2);
+    func_00023F18(sp0, (s32) arg1);
+    func_00024680(sp0, temp_s0_2);
+    func_00024540(arg2, sp0, (s32) *arg0);
+    func_00023FF8(sp0);
+}
 
 INCLUDE_RODATA("tmp/asm/340/mcore/nonmatchings/mcore", D_0002CD48);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00026170);
 
-INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00026278);
+void func_00026278(void **arg0, s32 arg1) {
+    void *sp0;
+    func_00023EBC(&sp0, M2C_FIELD(*arg0, u16 *, 2) << 5);
+    func_00024540(arg1, sp0, (s32) *arg0);
+    func_00023FF8(sp0);
+}
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000262D0);
 

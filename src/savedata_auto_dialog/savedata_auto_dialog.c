@@ -943,7 +943,18 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014160);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014200);
+void func_00014200(s32 *arg0) {
+    if (!(*arg0 & 1)) {
+
+    } else {
+        scePower_DB62C9CF();
+    }
+    if (D_0001C240 != 0) {
+        ((M2C_UNK (*)(M2C_UNK)) D_0001C240)(0);
+    } else {
+        sceKernelPowerUnlock(0);
+    }
+}
 
 void func_0001425C(s32 arg0, s32 arg1) {
     D_0001C23C = arg0;
