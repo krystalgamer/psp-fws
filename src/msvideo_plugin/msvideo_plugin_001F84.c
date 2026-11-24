@@ -4,7 +4,7 @@
 
 void func_00001F84(void) {
     s32 temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_00001F84_temp_v0_2 *temp_v0_2;
 
     D_00065E18 = 0;
     temp_v0 = scePaf_D4FAE7D0(&D_000615CC);

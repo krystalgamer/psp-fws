@@ -4,17 +4,17 @@
 
 s32 func_00056504(struct Unk_func_00056504_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
-    void *temp_a0;
+    struct Unk_func_00056504_temp_a0 *temp_a0;
 
     var_v0 = 0x2003;
     if (arg0 != NULL) {
         temp_a0 = arg0->unk160;
         var_v0 = 7;
         if (temp_a0 != NULL) {
-            M2C_FIELD(temp_a0, s32 *, 0x24) = arg3;
+            temp_a0->unk24 = arg3;
             var_v0 = 0;
-            M2C_FIELD(temp_a0, s32 *, 0x1C) = arg1;
-            M2C_FIELD(temp_a0, s32 *, 0x20) = arg2;
+            temp_a0->unk1C = arg1;
+            temp_a0->unk20 = arg2;
         }
     }
     return var_v0;

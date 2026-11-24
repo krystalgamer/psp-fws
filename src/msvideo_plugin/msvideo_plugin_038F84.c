@@ -488,12 +488,12 @@ INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_038F84", fun
 
 s32 func_0003A3E4(void **arg0) {
     s32 var_v1;
-    void *temp_a0;
+    struct Unk_func_0003A3E4_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     var_v1 = 0x2003;
-    if (M2C_FIELD(temp_a0, s32 *, 0) != 0) {
-        var_v1 = (M2C_FIELD(temp_a0, s32 *, 0xC) != 0) ? 0 : 0x2003;
+    if (temp_a0->unk0 != 0) {
+        var_v1 = (temp_a0->unkC != 0) ? 0 : 0x2003;
     }
     return var_v1;
 }

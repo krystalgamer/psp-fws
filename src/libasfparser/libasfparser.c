@@ -12,7 +12,7 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", sceAsfParser_6
 
 s32 func_00000214(s32 arg0, s32 arg1, void **arg2) {
     s32 var_v1;
-    void *temp_v0;
+    struct Unk_func_00000214_temp_v0 *temp_v0;
 
     *arg2 = NULL;
     var_v1 = 0x86400001;
@@ -23,7 +23,7 @@ s32 func_00000214(s32 arg0, s32 arg1, void **arg2) {
             var_v1 = 0x86400403;
             *arg2 = temp_v0;
             if (temp_v0 != NULL) {
-                var_v1 = ((M2C_FIELD(temp_v0, s32 *, 8) ^ 3) == 0) ? 0 : 0x86400401;
+                var_v1 = ((temp_v0->unk8 ^ 3) == 0) ? 0 : 0x86400401;
             }
         }
     }
@@ -357,12 +357,12 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000039E8)
 
 s32 func_00003B44(s32 arg0, s32 *arg1) {
     s32 var_a2;
-    void *temp_v0;
+    struct Unk_func_00003B44_temp_v0 *temp_v0;
 
     temp_v0 = (*arg1 * 4) + arg0 + 0x300C;
     var_a2 = 0;
-    if (M2C_FIELD(temp_v0, s32 **, 8) == NULL) {
-        M2C_FIELD(temp_v0, s32 **, 8) = arg1;
+    if (temp_v0->unk8 == NULL) {
+        temp_v0->unk8 = arg1;
     } else {
         var_a2 = 0x86400174;
     }

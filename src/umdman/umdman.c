@@ -481,13 +481,13 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_0000879C);
 s32 func_0000888C(struct Unk_func_0000888C_0 *arg0, u8 *arg1) {
     s32 var_a4;
     s8 *temp_v1;
-    void *temp_v0;
+    struct Unk_func_0000888C_temp_v0 *temp_v0;
 
     var_a4 = 0x80010016;
     if (arg0 != NULL) {
         temp_v0 = arg0->unk18;
         if (temp_v0 != NULL) {
-            temp_v1 = M2C_FIELD(temp_v0, s8 **, 0xC);
+            temp_v1 = temp_v0->unkC;
             if (((temp_v1 == NULL) | (arg1 == NULL)) == 0) {
                 *temp_v1 = -0xC;
                 var_a4 = 0;
@@ -511,13 +511,13 @@ s32 func_0000888C(struct Unk_func_0000888C_0 *arg0, u8 *arg1) {
 s32 func_00008958(struct Unk_func_00008958_0 *arg0, struct Unk_func_00008958_1 *arg1) {
     s32 var_a3;
     s8 *temp_v1;
-    void *temp_v0;
+    struct Unk_func_00008958_temp_v0 *temp_v0;
 
     var_a3 = 0x80010016;
     if (arg0 != NULL) {
         temp_v0 = arg0->unk18;
         if (temp_v0 != NULL) {
-            temp_v1 = M2C_FIELD(temp_v0, s8 **, 0xC);
+            temp_v1 = temp_v0->unkC;
             if (((temp_v1 == NULL) | (arg1 == NULL)) == 0) {
                 *temp_v1 = -0xD;
                 var_a3 = 0;
@@ -545,13 +545,13 @@ INCLUDE_ASM("tmp/asm/201/umdman/nonmatchings/umdman", func_00008B28);
 s32 func_00008CA0(struct Unk_func_00008CA0_0 *arg0, struct Unk_func_00008CA0_1 *arg1) {
     s32 var_a3;
     s8 *temp_v1;
-    void *temp_v0;
+    struct Unk_func_00008CA0_temp_v0 *temp_v0;
 
     var_a3 = 0x80010016;
     if (arg0 != NULL) {
         temp_v0 = arg0->unk18;
         if (temp_v0 != NULL) {
-            temp_v1 = M2C_FIELD(temp_v0, s8 **, 0xC);
+            temp_v1 = temp_v0->unkC;
             if (((temp_v1 == NULL) | (arg1 == NULL)) == 0) {
                 *temp_v1 = -0xF;
                 var_a3 = 0;
@@ -575,13 +575,13 @@ s32 func_00008CA0(struct Unk_func_00008CA0_0 *arg0, struct Unk_func_00008CA0_1 *
 s32 func_00008D8C(struct Unk_func_00008D8C_0 *arg0, struct Unk_func_00008D8C_1 *arg1) {
     s32 var_a3;
     s8 *temp_v1;
-    void *temp_v0;
+    struct Unk_func_00008D8C_temp_v0 *temp_v0;
 
     var_a3 = 0x80010016;
     if (arg0 != NULL) {
         temp_v0 = arg0->unk18;
         if (temp_v0 != NULL) {
-            temp_v1 = M2C_FIELD(temp_v0, s8 **, 0xC);
+            temp_v1 = temp_v0->unkC;
             if (((temp_v1 == NULL) | (arg1 == NULL)) == 0) {
                 *temp_v1 = -7;
                 var_a3 = 0;

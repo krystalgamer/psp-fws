@@ -50,12 +50,12 @@ void func_0004396C(void *arg0) {
 
 s32 func_000439BC(void *arg0, s32 *arg1, s32 arg2) {
     s32 var_a3;
-    void *temp_v0;
+    struct Unk_func_000439BC_temp_v0 *temp_v0;
 
     var_a3 = 0x2003;
     if (M2C_FIELD(arg0, s32 *, 0xA0) != 0) {
         temp_v0 = M2C_FIELD(arg0, void **, 0x298);
-        if ((temp_v0 != NULL) && (var_a3 = 0, (M2C_FIELD(temp_v0, s32 *, 0x84) == 0))) {
+        if ((temp_v0 != NULL) && (var_a3 = 0, (temp_v0->unk84 == 0))) {
             *arg1 = M2C_FIELD(arg0, s32 *, 0xB8);
         } else {
             var_a3 = func_0004D0F4((s32) (arg0 + 0x174), (s32) arg1, arg2);
@@ -676,13 +676,13 @@ INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_042460", fun
 
 s32 func_000515F4(void **arg0, void **arg1) {
     s32 var_a2;
-    void *temp_v0;
+    struct Unk_func_000515F4_temp_v0 *temp_v0;
 
     temp_v0 = *arg1;
     var_a2 = 0xA;
     if (temp_v0 != NULL) {
         var_a2 = 0;
-        M2C_FIELD(temp_v0, void **, 0x1C) = (void *) *arg0;
+        temp_v0->unk1C = (void *) *arg0;
         *arg0 = *arg1;
         *arg1 = NULL;
     }
@@ -770,14 +770,14 @@ void **func_00054DDC(void **arg0) {
 
 void *func_00054E00(void *arg0) {
     void *temp_v0;
-    void *var_a0;
-    void *var_v1;
+    struct Unk_func_00054E00_var_a0 *var_a0;
+    struct Unk_func_00054E00_var_a0 *var_v1;
 
     var_a0 = arg0;
-    var_v1 = M2C_FIELD(var_a0, void **, 0x1C);
+    var_v1 = var_a0->unk1C;
     if (var_v1 != NULL) {
         do {
-            temp_v0 = M2C_FIELD(var_v1, void **, 0x1C);
+            temp_v0 = var_v1->unk1C;
             var_a0 = var_v1;
             var_v1 = temp_v0;
         } while (temp_v0 != NULL);

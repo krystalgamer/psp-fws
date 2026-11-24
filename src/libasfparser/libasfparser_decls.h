@@ -4,6 +4,11 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00000214_temp_v0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
 struct Unk_func_0000083C_0 {
     s32 unk0;
 };
@@ -93,6 +98,11 @@ struct Unk_func_000018A4_0 {
 struct Unk_func_000018CC_0 {
     u8 pad0[0x10];
     s32 unk10;
+};
+
+struct Unk_func_00003B44_temp_v0 {
+    u8 pad0[0x8];
+    s32 *unk8;
 };
 
 struct Unk_func_0000478C_0 {
