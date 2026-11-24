@@ -127,7 +127,19 @@ void func_0003B6F8(void *arg0) {
     M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(temp_a0, temp_a1);
 }
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_039E64", func_0003B728);
+void func_0003B728(void *arg0) {
+    void **temp_a0;
+    void **temp_a0_2;
+    void *temp_a1;
+
+    M2C_FIELD(arg0, s8 *, 0x18) = 1;
+    M2C_FIELD(arg0, s8 *, 0x19) = 1;
+    temp_a0 = M2C_FIELD(arg0, void ***, 0x1C);
+    temp_a1 = *temp_a0;
+    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(temp_a0, temp_a1);
+    temp_a0_2 = M2C_FIELD(arg0, void ***, 0x20);
+    M2C_FIELD(*temp_a0_2, M2C_UNK (**)(void **), 8)(temp_a0_2);
+}
 
 void func_0003B77C(void *arg0) {
     void **temp_a0;

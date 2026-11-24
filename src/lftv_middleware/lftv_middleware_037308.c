@@ -2,7 +2,11 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037308);
+s32 func_00037308(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037318);
 
@@ -19,9 +23,25 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037798);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_000377E8);
+void func_000377E8(void *arg0) {
+    func_00039DEC(arg0);
+    M2C_FIELD(arg0, s32 **, 0) = &D_00056460;
+    memset(arg0 + 0x40, 0, 0x6C);
+    M2C_FIELD(arg0, s32 *, 0xAC) = 0;
+    M2C_FIELD(arg0, s32 *, 0xB0) = 0;
+    M2C_FIELD(arg0, s32 *, 0xB4) = 0;
+    M2C_FIELD(arg0, s32 *, 0xB8) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_037308", func_00037838);
+void func_00037838(void *arg0) {
+    func_00039DEC(arg0);
+    M2C_FIELD(arg0, s32 **, 0) = &D_00056460;
+    memset(arg0 + 0x40, 0, 0x6C);
+    M2C_FIELD(arg0, s32 *, 0xAC) = 0;
+    M2C_FIELD(arg0, s32 *, 0xB0) = 0;
+    M2C_FIELD(arg0, s32 *, 0xB4) = 0;
+    M2C_FIELD(arg0, s32 *, 0xB8) = 0;
+}
 
 void func_00037888(s32 **arg0) {
     *arg0 = &D_00056460;

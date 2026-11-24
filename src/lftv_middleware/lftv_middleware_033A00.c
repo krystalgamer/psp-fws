@@ -24,7 +24,29 @@ s32 func_00033AA0(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_033A00", func_00033AC8);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_033A00", func_00033B94);
+void func_00033B94(s32 arg0, s32 arg1) {
+    s32 temp_a6;
+    s32 var_a3;
+    s32 var_a4;
+    s8 *temp_v1;
+    s8 temp_a2;
+    u8 *temp_a1;
+
+    var_a4 = 0;
+    var_a3 = arg1 - 1;
+    temp_a6 = arg1 >> 1;
+    if (temp_a6 > 0) {
+        do {
+            temp_v1 = arg0 + var_a4;
+            temp_a1 = arg0 + var_a3;
+            temp_a2 = *temp_v1;
+            var_a4 += 1;
+            *temp_v1 = *temp_a1;
+            var_a3 -= 1;
+            *temp_a1 = (u8) temp_a2;
+        } while (var_a4 < temp_a6);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_033A00", func_00033BD8);
 
