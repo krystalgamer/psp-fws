@@ -431,9 +431,11 @@ def _verify_functions(mod, args, max_rounds=200):
             return
         live = [n for n in accepted if f", {n});" not in src]
         moved = first_displaced(mod, args)
+        why = "differs in full build"
         if moved is not None:
             before = [(mod.funcs[n][0] - mod.text_off, n) for n in live if mod.funcs[n][0] - mod.text_off < moved]
             names = [max(before)[1]] if before else []
+            why = "differs in full build; moves later symbols"
         else:
             names = [n for n in live if built[mod.funcs[n][0]:mod.funcs[n][1]] != mod.base[mod.funcs[n][0]:mod.funcs[n][1]]]
         if not names:
@@ -445,7 +447,7 @@ def _verify_functions(mod, args, max_rounds=200):
             m = re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{\n.*?^}}\n", text, re.M | re.S)
             f.write_text(text.replace(m.group(0), f'INCLUDE_ASM("{mod.folder(f)}", {name});\n', 1))
             del mod.store["funcs"][name]
-            print(f"reverted {name} (differs in full build)")
+            print(f"reverted {name} ({why})")
         mod.write_decls()
     print("verification gave up")
 
