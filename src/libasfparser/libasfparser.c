@@ -648,7 +648,10 @@ void func_0000672C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 0);
 }
 
-INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_0000673C);
+s32 func_0000673C(void *arg0) {
+    s32 cmp_tmp = (u32) ((((u32) M2C_FIELD(arg0, u32 *, 4) >> 3) * 8) + M2C_FIELD(arg0, s32 *, 8)) < (u32) M2C_FIELD(arg0, u32 *, 0);
+    return cmp_tmp == 0;
+}
 
 s32 func_00006760(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 8) - (M2C_FIELD(arg0, s32 *, 4) & 7);

@@ -48,6 +48,7 @@
   "func_00006678": "u32 func_00006678(void *arg0);",
   "func_000066EC": "void func_000066EC(void *arg0, s32 arg1, s32 arg2);",
   "func_0000672C": "void func_0000672C(void *arg0);",
+  "func_0000673C": "s32 func_0000673C(void *arg0);",
   "func_00006760": "s32 func_00006760(void *arg0);",
   "func_00006774": "u32 func_00006774(void *arg0);",
   "func_00006780": "void func_00006780(void *arg0);",
