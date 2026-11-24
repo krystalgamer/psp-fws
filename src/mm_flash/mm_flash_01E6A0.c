@@ -35,13 +35,13 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_01E6A0", func_0001E7B0);
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_01E6A0", func_0001E890);
 
 void func_0001E994(struct Unk_func_0001E994_0 *arg0, void **arg1) {
-    void *temp_a1;
+    struct Unk_func_0001E994_temp_a1 *temp_a1;
 
     temp_a1 = *arg1;
     arg0->unk4 = 0;
     arg0->unk0 = temp_a1;
     if (temp_a1 != NULL) {
-        M2C_FIELD(temp_a1, s32 *, 8) = (s32) (M2C_FIELD(temp_a1, s32 *, 8) + 1);
+        temp_a1->unk8 = (s32) (temp_a1->unk8 + 1);
     }
 }
 

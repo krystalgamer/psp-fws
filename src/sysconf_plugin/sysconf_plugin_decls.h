@@ -9,6 +9,11 @@ struct D_0001F31C_s {
     volatile s32 unk8;
 };
 
+struct Unk_func_00000824_temp_a0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
 struct Unk_func_00006CFC_0 {
     u8 pad0[0x1D0];
     s32 unk1D0;
@@ -17,6 +22,16 @@ struct Unk_func_00006CFC_0 {
 struct Unk_func_0000D604_0 {
     u8 pad0[0x1D0];
     s32 unk1D0;
+};
+
+struct Unk_func_00015F98_var_a0 {
+    u8 pad0[0x4];
+    struct Unk_func_00015F98_var_v0 *unk4;
+};
+
+struct Unk_func_00015F98_var_v0 {
+    u8 pad0[0x4];
+    void *unk4;
 };
 
 struct Unk_func_00017644_0 {

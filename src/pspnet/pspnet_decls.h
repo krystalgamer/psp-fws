@@ -9,6 +9,12 @@ struct D_0000AF44_s {
     void ** unk4;
 };
 
+struct Unk_func_0000260C_var_s0 {
+    struct Unk_func_0000260C_var_s0 *unk0;
+    u8 pad4[0x48];
+    s32 unk4C;
+};
+
 struct Unk_func_00003400_0 {
     u8 pad0[0x20];
     s32 unk20;
@@ -17,10 +23,22 @@ struct Unk_func_00003400_0 {
     s32 unk4C;
 };
 
+struct Unk_func_00004974_var_s2 {
+    struct Unk_func_00004974_var_s2 *unk0;
+    u8 pad4[0x4];
+    u8 *unk8;
+    u32 unkC;
+};
+
 struct Unk_func_00005744_0 {
-    void * unk0;
+    struct Unk_func_00005744_var_s0 *unk0;
     s32 unk4;
     s32 unk8;
+};
+
+struct Unk_func_00005744_var_s0 {
+    u8 pad0[0x4];
+    struct Unk_func_00005744_var_s0 *unk4;
 };
 
 struct Unk_sceNetEtherNtostr_0 {
@@ -30,6 +48,12 @@ struct Unk_sceNetEtherNtostr_0 {
     u8 unk3;
     u8 unk4;
     u8 unk5;
+};
+
+struct Unk_sceNet_lib_45452B7B_var_v1 {
+    struct Unk_sceNet_lib_45452B7B_var_v1 *unk0;
+    u8 pad4[0x8];
+    s16 unkC;
 };
 
 struct Unk_sceNet_lib_757085B0_0 {

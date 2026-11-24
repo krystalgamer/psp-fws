@@ -4,14 +4,14 @@
 
 s32 func_00038D9C(struct Unk_func_00038D9C_0 *arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
-    void *temp_v1;
+    struct Unk_func_00038D9C_temp_v1 *temp_v1;
 
     temp_v1 = arg0->unk98;
     var_v0 = -1;
     if (temp_v1 != NULL) {
-        M2C_FIELD(temp_v1, s32 *, 0x1950) = arg2;
+        temp_v1->unk1950 = arg2;
         var_v0 = 0;
-        M2C_FIELD(temp_v1, s32 *, 0x1954) = arg1;
+        temp_v1->unk1954 = arg1;
     }
     return var_v0;
 }

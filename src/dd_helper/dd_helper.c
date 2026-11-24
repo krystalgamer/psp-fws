@@ -93,11 +93,11 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000688);
 INCLUDE_RODATA("tmp/asm/282/dd_helper/nonmatchings/dd_helper", D_0000AA40);
 
 void func_000006A8(void) {
-    void *temp_v0;
+    struct Unk_func_000006A8_temp_v0 *temp_v0;
 
     temp_v0 = scePaf_D4FAE7D0("htmlviewer_plugin");
     if (temp_v0 != NULL) {
-        scePaf_5EBC648F(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1B8));
+        scePaf_5EBC648F(temp_v0, temp_v0->unk1B8);
     }
     sceHtmlViewerHelper_05E0C3D4(0);
 }
@@ -353,11 +353,11 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00002E2C);
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00002E70);
 
 void func_00003100(s32 arg0, s32 arg1, s32 arg2) {
-    void *temp_a0;
+    struct Unk_func_00003100_temp_a0 *temp_a0;
 
     temp_a0 = arg0 + 0x14;
-    M2C_FIELD(temp_a0, s32 *, 0x10) = arg1;
-    M2C_FIELD(temp_a0, s32 *, 0x14) = arg2;
+    temp_a0->unk10 = arg1;
+    temp_a0->unk14 = arg2;
 }
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00003110);

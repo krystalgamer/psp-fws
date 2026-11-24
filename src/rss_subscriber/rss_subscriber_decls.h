@@ -4,6 +4,16 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00002948_var_a0 {
+    u8 pad0[0x4];
+    struct Unk_func_00002948_var_v0 *unk4;
+};
+
+struct Unk_func_00002948_var_v0 {
+    u8 pad0[0x4];
+    void *unk4;
+};
+
 extern M2C_UNK D_000039F4;
 extern M2C_UNK D_00003D20;
 extern M2C_UNK D_00003D30;

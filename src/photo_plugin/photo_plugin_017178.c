@@ -320,15 +320,15 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001B4E8);
 
 void func_0001B674(struct Unk_func_0001B674_0 *arg0) {
-    void *temp_a0;
-    void *temp_s0;
+    struct Unk_func_0001B674_temp_a0 *temp_a0;
+    struct Unk_func_0001B674_temp_s0 *temp_s0;
 
     func_0001D298();
     temp_a0 = arg0->unk4;
-    if (M2C_FIELD(M2C_FIELD(temp_a0, void **, 0), s32 (**)(void *), 0x10)(temp_a0) == 0) {
+    if (M2C_FIELD(temp_a0->unk0, s32 (**)(void *), 0x10)(temp_a0) == 0) {
         temp_s0 = arg0->unk4;
         func_00004460(temp_s0);
-        func_00020EB8(M2C_FIELD(temp_s0, s32 *, 8), temp_s0);
+        func_00020EB8(temp_s0->unk8, temp_s0);
     }
 }
 

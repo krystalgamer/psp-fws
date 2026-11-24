@@ -152,8 +152,11 @@
  },
  "types": {
   "D_0001F31C_s": "struct D_0001F31C_s {\n    u8 pad0[0x8];\n    volatile s32 unk8;\n};",
+  "Unk_func_00000824_temp_a0": "struct Unk_func_00000824_temp_a0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_00006CFC_0": "struct Unk_func_00006CFC_0 {\n    u8 pad0[0x1D0];\n    s32 unk1D0;\n};",
   "Unk_func_0000D604_0": "struct Unk_func_0000D604_0 {\n    u8 pad0[0x1D0];\n    s32 unk1D0;\n};",
+  "Unk_func_00015F98_var_a0": "struct Unk_func_00015F98_var_a0 {\n    u8 pad0[0x4];\n    struct Unk_func_00015F98_var_v0 *unk4;\n};",
+  "Unk_func_00015F98_var_v0": "struct Unk_func_00015F98_var_v0 {\n    u8 pad0[0x4];\n    void *unk4;\n};",
   "Unk_func_00017644_0": "struct Unk_func_00017644_0 {\n    u8 pad0[0x30];\n    s32 unk30;\n};",
   "Unk_func_00017668_0": "struct Unk_func_00017668_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_000176C4_0": "struct Unk_func_000176C4_0 {\n    u8 pad0[0x30];\n    s32 unk30;\n    s32 unk34;\n};",

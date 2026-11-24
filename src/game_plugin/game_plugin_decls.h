@@ -4,14 +4,50 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_func_00005C88_temp_v0_2 {
+
+};
+
+struct Unk_func_00006584_temp_v0_2 {
+
+};
+
+struct Unk_func_00006974_temp_v0_2 {
+
+};
+
+struct Unk_func_00007024_temp_v0 {
+
+};
+
+struct Unk_func_00007584_var_a0 {
+    u8 pad0[0x4];
+    struct Unk_func_00007584_var_v0 *unk4;
+};
+
+struct Unk_func_00007584_var_v0 {
+    u8 pad0[0x4];
+    void *unk4;
+};
+
 struct Unk_func_000075DC_0 {
-    M2C_UNK * unk0;
+    M2C_UNK *unk0;
     s32 unk4;
+};
+
+struct Unk_func_000075DC_var_v0 {
+    u8 pad0[0x4];
+    void *unk4;
 };
 
 struct Unk_func_00007638_1 {
     u8 pad0[0x4];
     s32 unk4;
+};
+
+struct Unk_func_00007638_temp_v1 {
+    void *unk0;
+    void **unk4;
 };
 
 struct Unk_func_00008040_0 {

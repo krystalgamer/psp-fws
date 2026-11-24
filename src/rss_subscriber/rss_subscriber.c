@@ -231,14 +231,14 @@ INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_00002
 
 void func_00002948(void **arg0) {
     void *temp_s0;
-    void *var_a0;
-    void *var_v0;
+    struct Unk_func_00002948_var_a0 *var_a0;
+    struct Unk_func_00002948_var_v0 *var_v0;
 
     var_a0 = *arg0;
-    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    var_v0 = var_a0->unk4;
     if (var_v0 != var_a0) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;

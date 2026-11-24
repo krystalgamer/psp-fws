@@ -214,14 +214,14 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_010FEC",
 
 void func_00012BB4(void **arg0) {
     void *temp_s0;
-    void *var_a0;
-    void *var_v0;
+    struct Unk_func_00012BB4_var_a0 *var_a0;
+    struct Unk_func_00012BB4_var_v0 *var_v0;
 
     var_a0 = *arg0;
-    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    var_v0 = var_a0->unk4;
     if (var_v0 != var_a0) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
@@ -234,13 +234,13 @@ void func_00012C0C(struct Unk_func_00012C0C_0 *arg0) {
     M2C_UNK *temp_v0;
     M2C_UNK *var_v1;
     void *temp_s0;
-    void *var_v0;
+    struct Unk_func_00012C0C_var_v0 *var_v0;
 
     var_v1 = arg0->unk0;
     var_v0 = M2C_FIELD(var_v1, void **, 4);
     if (var_v0 != var_v1) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_v1 = arg0->unk0;
             var_v0 = temp_s0;
@@ -262,12 +262,12 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_010FEC",
 
 void ***func_00012F10(void ***arg0, struct Unk_func_00012F10_1 *arg1, void **arg2) {
     void **temp_s0;
-    void *temp_v1;
+    struct Unk_func_00012F10_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    temp_s0 = temp_v1->unk4;
+    *temp_s0 = temp_v1->unk0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -485,7 +485,7 @@ INCLUDE_RODATA("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_010FE
 INCLUDE_RODATA("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_010FEC", D_0002519C);
 
 void func_00014824(s32 arg0, void **arg1, s32 arg2) {
-    void *sp0;
+    struct Unk_func_00014824_sp0 *sp0;
     s32 temp_s0;
     s32 temp_v0;
     s32 temp_v0_2;
@@ -496,45 +496,45 @@ void func_00014824(s32 arg0, void **arg1, s32 arg2) {
     temp_s0 = arg2 << 0x10;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 1);
     if (sp0 != NULL) {
-        temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0;
+        temp_v0 = sp0->unk4 - 1;
+        sp0->unk4 = temp_v0;
         if (temp_v0 > 0) {
 
         } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
+            M2C_FIELD(sp0->unk0, M2C_UNK (**)(void *), 4)(sp0);
         }
     }
     scePaf_DC2CA0F7(&sp0, arg0, "tex_broken_data");
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0);
     if (sp0 != NULL) {
-        temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_2;
+        temp_v0_2 = sp0->unk4 - 1;
+        sp0->unk4 = temp_v0_2;
         if (temp_v0_2 > 0) {
 
         } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
+            M2C_FIELD(sp0->unk0, M2C_UNK (**)(void *), 4)(sp0);
         }
     }
     scePaf_DC2CA0F7(&sp0, arg0, "tex_broken_data_f");
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 7);
     if (sp0 != NULL) {
-        temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_3;
+        temp_v0_3 = sp0->unk4 - 1;
+        sp0->unk4 = temp_v0_3;
         if (temp_v0_3 > 0) {
 
         } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
+            M2C_FIELD(sp0->unk0, M2C_UNK (**)(void *), 4)(sp0);
         }
     }
     scePaf_DC2CA0F7(&sp0, arg0, "tex_broken_data_s");
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 0xE);
     if (sp0 != NULL) {
-        temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
+        temp_v0_4 = sp0->unk4 - 1;
+        sp0->unk4 = temp_v0_4;
         if (temp_v0_4 > 0) {
 
         } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
+            M2C_FIELD(sp0->unk0, M2C_UNK (**)(void *), 4)(sp0);
         }
     }
 }

@@ -118,18 +118,18 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02BC40", func_00
 void *func_0002CCEC(void **arg0) {
     void *temp_v0;
     void *temp_v0_2;
-    void *var_a0;
+    struct Unk_func_0002CCEC_var_a0 *var_a0;
     void *var_v0;
-    void *var_v1;
+    struct Unk_func_0002CCEC_var_a0 *var_v1;
 
     var_a0 = *arg0;
     var_v0 = NULL;
     if (var_a0 != NULL) {
-        temp_v0 = M2C_FIELD(var_a0, void **, 4);
+        temp_v0 = var_a0->unk4;
         if (temp_v0 != NULL) {
             var_v1 = temp_v0;
             do {
-                temp_v0_2 = M2C_FIELD(var_v1, void **, 4);
+                temp_v0_2 = var_v1->unk4;
                 var_a0 = var_v1;
                 var_v1 = temp_v0_2;
             } while (temp_v0_2 != NULL);

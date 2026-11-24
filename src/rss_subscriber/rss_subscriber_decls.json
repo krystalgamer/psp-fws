@@ -33,6 +33,10 @@
   "scePaf_CA79D58B": "s32 scePaf_CA79D58B(s32);",
   "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);"
  },
+ "types": {
+  "Unk_func_00002948_var_a0": "struct Unk_func_00002948_var_a0 {\n    u8 pad0[0x4];\n    struct Unk_func_00002948_var_v0 *unk4;\n};",
+  "Unk_func_00002948_var_v0": "struct Unk_func_00002948_var_v0 {\n    u8 pad0[0x4];\n    void *unk4;\n};"
+ },
  "vars": {
   "D_000039F4": "extern M2C_UNK D_000039F4;",
   "D_00003D20": "extern M2C_UNK D_00003D20;",

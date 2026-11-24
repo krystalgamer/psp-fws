@@ -6,13 +6,13 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_07C92C", func_0007C92C);
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_07C92C", func_0007C9A0);
 
 void func_0007CA14(void **arg0) {
-    void *var_s0;
+    struct Unk_func_0007CA14_var_s0 *var_s0;
 
     var_s0 = *arg0;
     if (var_s0 != NULL) {
         do {
-            func_00060368(M2C_FIELD(var_s0, void **, 0));
-            var_s0 = M2C_FIELD(var_s0, void **, 4);
+            func_00060368(var_s0->unk0);
+            var_s0 = var_s0->unk4;
         } while (var_s0 != NULL);
     }
 }
@@ -141,14 +141,14 @@ s32 func_0007CB40(struct Unk_func_000753DC_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_3;
     s32 var_s0;
-    void *temp_v0_2;
+    struct Unk_func_0007CB40_temp_v0_2 *temp_v0_2;
 
     temp_v0 = func_000753DC(arg0, 1);
     var_s0 = temp_v0;
     temp_v0_2 = func_000608F4(temp_v0, "System");
     if (temp_v0_2 != NULL) {
-        if (M2C_FIELD(temp_v0_2, s32 *, 0) == 3) {
-            temp_v0_3 = M2C_FIELD(temp_v0_2, s32 *, 8);
+        if (temp_v0_2->unk0 == 3) {
+            temp_v0_3 = temp_v0_2->unk8;
             var_s0 = (temp_v0_3 != 0) ? temp_v0_3 : var_s0;
         }
     }

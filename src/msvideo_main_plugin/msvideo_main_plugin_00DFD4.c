@@ -77,12 +77,12 @@ void func_0000E540(struct Unk_func_0000E540_0 *arg0) {
 }
 
 void func_0000E570(struct Unk_func_0000E570_0 *arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_0000E570_temp_v0 *temp_v0;
 
     temp_v0 = arg0->unk68;
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s32 *, 0x350) = arg1;
-        M2C_FIELD(temp_v0, s32 *, 0x354) = arg2;
+        temp_v0->unk350 = arg1;
+        temp_v0->unk354 = arg2;
     }
 }
 

@@ -128,12 +128,12 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 u8 func_0002148C(struct Unk_func_0002148C_0 *arg0) {
     u8 var_v0;
-    void *temp_v1;
+    struct Unk_func_0002148C_temp_v1 *temp_v1;
 
     temp_v1 = arg0->unk24;
     var_v0 = 0;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(temp_v1, u8 *, 0x342);
+        var_v0 = temp_v1->unk342;
     }
     return var_v0;
 }
@@ -407,7 +407,7 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 void func_000258A0(struct Unk_func_000258A0_0 *arg0) {
     s32 temp_a0;
     s32 temp_s1;
-    void *temp_v0;
+    struct Unk_func_000258A0_temp_v0 *temp_v0;
 
     temp_a0 = arg0->unk20;
     if (temp_a0 != 0) {
@@ -415,8 +415,8 @@ void func_000258A0(struct Unk_func_000258A0_0 *arg0) {
         if (temp_s1 != 0) {
             if (arg0->unkCC != 1) {
                 temp_v0 = arg0->unk48;
-                M2C_FIELD(temp_v0, s8 *, 0x1FD) = 0;
-                M2C_FIELD(temp_v0, s8 *, 0x1FE) = 0;
+                temp_v0->unk1FD = 0;
+                temp_v0->unk1FE = 0;
                 scePaf_BE0D7212(temp_v0);
             } else {
                 scePaf_0BF42D26(temp_s1, func_0001EBE0(temp_a0));

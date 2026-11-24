@@ -4,7 +4,7 @@
 void func_0005AFB8(void *arg0, s32 arg1, M2C_UNK arg2, s32 arg3) {
     s32 temp_s1;
     s32 temp_v1;
-    void *temp_a0;
+    struct Unk_func_0005AFB8_temp_a0 *temp_a0;
 
     temp_v1 = M2C_FIELD(arg0, s32 *, 0);
     M2C_FIELD(arg0, s8 *, 0xC) = 0;
@@ -12,19 +12,19 @@ void func_0005AFB8(void *arg0, s32 arg1, M2C_UNK arg2, s32 arg3) {
     sceHVNetfront_Module_1A02495A(M2C_FIELD(arg0, s32 *, 8) + temp_v1, arg1, temp_s1, arg3);
     temp_a0 = arg0 + 0x10;
     M2C_FIELD(arg0, s32 *, 0) = (s32) (M2C_FIELD(arg0, s32 *, 0) + temp_s1);
-    M2C_FIELD(temp_a0, s32 *, 4) = (s32) (M2C_FIELD(temp_a0, s32 *, 4) + temp_s1);
+    temp_a0->unk4 = (s32) (temp_a0->unk4 + temp_s1);
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_05AFB8", func_0005B020);
 
 void func_0005B0A8(struct Unk_func_0005B0A8_0 *arg0, s32 arg1) {
-    void *temp_a0;
+    struct Unk_func_0005B0A8_temp_a0 *temp_a0;
 
     arg0->unk58C = arg1;
     if (arg0->unk2F8 != 0) {
         temp_a0 = M2C_FIELD(arg0->unk2DC, void **, 0x1018);
         if (temp_a0 != NULL) {
-            M2C_FIELD(temp_a0, s32 *, 0x28) = arg1;
+            temp_a0->unk28 = arg1;
         }
     }
 }

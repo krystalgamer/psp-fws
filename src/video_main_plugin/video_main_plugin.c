@@ -371,7 +371,7 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin", func
 
 void func_000027A0(void) {
     void *temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_000027A0_temp_v0_2 *temp_v0_2;
 
     D_00057220 = 0;
     temp_v0 = scePaf_D4FAE7D0(&D_00051904);
@@ -393,7 +393,7 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin", func
 
 void func_00002ADC(void) {
     void *temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_00002ADC_temp_v0_2 *temp_v0_2;
 
     temp_v0 = scePaf_D4FAE7D0(&D_00051A1C);
     if (temp_v0 != NULL) {
@@ -406,7 +406,7 @@ void func_00002ADC(void) {
 
 void func_00002B24(void) {
     void *temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_00002B24_temp_v0_2 *temp_v0_2;
 
     temp_v0 = scePaf_D4FAE7D0(&D_00051A1C);
     if (temp_v0 != NULL) {
@@ -479,7 +479,7 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin", func
 
 void func_00004C14(void) {
     void *temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_00004C14_temp_v0_2 *temp_v0_2;
 
     func_00002B24();
     func_00029404();

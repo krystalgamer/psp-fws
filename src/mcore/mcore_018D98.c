@@ -73,12 +73,12 @@ void func_0001950C(void) {
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_018D98", func_00019528);
 
 void func_000195FC(void **arg0, void **arg1) {
-    void *temp_v0;
-    void *temp_v1;
+    struct Unk_func_000195FC_temp_v0 *temp_v0;
+    struct Unk_func_000195FC_temp_v1 *temp_v1;
 
     temp_v1 = *arg1;
     temp_v0 = *arg0;
-    func_000029B4(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 4), M2C_FIELD(temp_v1, s32 *, 0), M2C_FIELD(temp_v1, s32 *, 4));
+    func_000029B4(temp_v0->unk0, temp_v0->unk4, temp_v1->unk0, temp_v1->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_018D98", func_0001962C);

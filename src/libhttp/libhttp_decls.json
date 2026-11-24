@@ -41,6 +41,8 @@
   "sceRtcTickAddSeconds": "M2C_UNK sceRtcTickAddSeconds();"
  },
  "types": {
+  "Unk_func_00005CD0_var_a0": "struct Unk_func_00005CD0_var_a0 {\n    u8 pad0[0x7C];\n    void *unk7C;\n};",
+  "Unk_func_00005CD0_var_s1": "struct Unk_func_00005CD0_var_s1 {\n    s32 unk0;\n    void *unk4;\n};",
   "Unk_func_00011B3C_0": "struct Unk_func_00011B3C_0 {\n    u8 pad0[0x28];\n    s32 unk28;\n    s32 unk2C;\n};",
   "Unk_func_00011B3C_1": "struct Unk_func_00011B3C_1 {\n    u8 pad0[0x34];\n    s32 unk34;\n    s32 unk38;\n};"
  },

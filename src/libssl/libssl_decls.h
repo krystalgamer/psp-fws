@@ -11,6 +11,16 @@ struct Unk_func_000007F0_0 {
     s32 unkC;
 };
 
+struct Unk_func_0000349C_temp_v0 {
+    u8 pad0[0x108];
+    s32 unk108;
+};
+
+struct Unk_func_0000546C_temp_v0 {
+    u8 pad0[0x4C];
+    s32 unk4C;
+};
+
 struct Unk_func_0000CD44_0 {
     void * unk0;
     u8 pad4[0x8];
@@ -198,11 +208,21 @@ struct Unk_func_00027CE8_0 {
     void * unkE4;
 };
 
+struct Unk_func_00027CE8_temp_v0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
 struct Unk_func_00027D1C_0 {
     u8 pad0[0x6C];
     s32 unk6C;
     u8 pad70[0x74];
     void * unkE4;
+};
+
+struct Unk_func_00027D1C_temp_v0 {
+    u8 pad0[0xC];
+    s32 unkC;
 };
 
 struct Unk_func_00028BAC_0 {
@@ -233,6 +253,12 @@ struct Unk_func_00028BF0_0 {
 struct Unk_func_00028BF8_0 {
     u8 pad0[0xD8];
     s32 unkD8;
+};
+
+struct Unk_sceSsl_lib_04E677AF_temp_v0 {
+    u8 pad0[0x144];
+    s32 unk144;
+    s32 unk148;
 };
 
 struct Unk_sceSsl_lib_067173A8_0 {
@@ -328,7 +354,12 @@ struct Unk_sceSsl_lib_86D4034D_0 {
 
 struct Unk_sceSsl_lib_88897D26_0 {
     u8 pad0[0xB8];
-    void * unkB8;
+    struct Unk_sceSsl_lib_88897D26_temp_v0 *unkB8;
+};
+
+struct Unk_sceSsl_lib_88897D26_temp_v0 {
+    u8 pad0[0xAC];
+    s32 unkAC;
 };
 
 struct Unk_sceSsl_lib_8A2F6963_0 {

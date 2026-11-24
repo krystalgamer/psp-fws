@@ -359,12 +359,12 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_01
 s32 func_000169D0(void) {
     s32 temp_v0_2;
     s32 var_v1;
-    void *temp_v0;
+    struct Unk_func_000169D0_temp_v0 *temp_v0;
 
     temp_v0 = func_000165F0();
     var_v1 = 4;
     if (temp_v0 != NULL) {
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x10);
+        temp_v0_2 = temp_v0->unk10;
         if (temp_v0_2 != 0) {
             scePaf_47B886E3(0, temp_v0_2);
             var_v1 = 0;
@@ -377,7 +377,7 @@ s32 func_00016A18(void *arg0, s32 arg1) {
     s32 temp_a1;
     s32 var_s1;
     s32 var_s3;
-    void *temp_v0;
+    struct Unk_func_00016A18_temp_v0 *temp_v0;
     void *var_s0;
 
     var_s3 = 0;
@@ -391,7 +391,7 @@ s32 func_00016A18(void *arg0, s32 arg1) {
             scePaf_47B886E3(0, temp_a1);
             temp_v0 = M2C_FIELD(var_s0, void **, 8);
             if (temp_v0 != NULL) {
-                M2C_FIELD(temp_v0, s8 *, 0x65) = 1;
+                temp_v0->unk65 = 1;
             }
         }
         var_s0 += 0x14;
@@ -403,7 +403,7 @@ s32 func_00016AA8(void *arg0) {
     s32 temp_v0;
     s32 var_s1;
     s32 var_s2;
-    void *temp_v0_2;
+    struct Unk_func_00016AA8_temp_v0_2 *temp_v0_2;
     void *var_s0;
 
     var_s2 = 0;
@@ -417,7 +417,7 @@ s32 func_00016AA8(void *arg0) {
             scePaf_47B886E3(0, temp_v0);
             temp_v0_2 = M2C_FIELD(var_s0, void **, 8);
             if (temp_v0_2 != NULL) {
-                M2C_FIELD(temp_v0_2, s8 *, 0x65) = 1;
+                temp_v0_2->unk65 = 1;
             }
         }
         var_s0 += 0x14;

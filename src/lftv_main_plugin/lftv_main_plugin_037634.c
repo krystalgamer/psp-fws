@@ -170,7 +170,7 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_037634",
 
 s32 func_000391A4(void) {
     s32 var_v1;
-    void *temp_v0;
+    struct Unk_func_000391A4_temp_v0 *temp_v0;
 
     temp_v0 = func_00038A04(1);
     var_v1 = 1;

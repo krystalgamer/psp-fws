@@ -101,11 +101,11 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00012A70);
 
 void func_00012BF8(void *arg0) {
-    void *temp_v0;
+    struct Unk_func_00012BF8_temp_v0 *temp_v0;
 
     temp_v0 = M2C_FIELD(arg0, void **, 4);
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s32 *, 0x348) = 0;
+        temp_v0->unk348 = 0;
     }
     func_000086F0((s32) (arg0 + 0xB4), 0);
     func_000086F0((s32) (arg0 + 0x664), 0);

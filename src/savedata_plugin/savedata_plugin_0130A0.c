@@ -5,13 +5,13 @@ void func_000130A0(struct Unk_func_000130A0_0 *arg0) {
     M2C_UNK *temp_v0;
     M2C_UNK *var_v1;
     void *temp_s0;
-    void *var_v0;
+    struct Unk_func_000130A0_var_v0 *var_v0;
 
     var_v1 = arg0->unk0;
     var_v0 = M2C_FIELD(var_v1, void **, 4);
     if (var_v0 != var_v1) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_v1 = arg0->unk0;
             var_v0 = temp_s0;
@@ -31,12 +31,12 @@ INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_0130A0", f
 
 void ***func_000132BC(void ***arg0, struct Unk_func_000132BC_1 *arg1, void **arg2) {
     void **temp_s0;
-    void *temp_v1;
+    struct Unk_func_000132BC_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    temp_s0 = temp_v1->unk4;
+    *temp_s0 = temp_v1->unk0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -66,10 +66,10 @@ s32 func_0001348C(void) {
 }
 
 void func_000134AC(void *arg0) {
-    void *temp_s1;
+    struct Unk_func_000134AC_temp_s1 *temp_s1;
 
     temp_s1 = arg0 + 0x20;
-    if (M2C_FIELD(temp_s1, s32 *, 4) == 0) {
+    if (temp_s1->unk4 == 0) {
         M2C_FIELD(arg0, s32 *, 0x1C) = 0;
     } else {
         scePaf_27F64616(M2C_FIELD(arg0, s32 *, 4));

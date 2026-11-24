@@ -180,11 +180,11 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_000015C0);
 
 void func_000015EC(struct Unk_func_000015EC_0 *arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_000015EC_temp_v0 *temp_v0;
 
     temp_v0 = M2C_FIELD(arg0->unk4, void **, 0x50);
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s32 *, 0x1C) = arg1;
+        temp_v0->unk1C = arg1;
     }
 }
 
@@ -197,10 +197,10 @@ void func_00001674(void) {
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00001690);
 
 void func_00001718(struct Unk_func_00001718_0 *arg0, s32 arg1) {
-    void *temp_a0;
+    struct Unk_func_00001718_temp_a0 *temp_a0;
 
     temp_a0 = arg0->unk4;
-    M2C_FIELD(temp_a0, s8 *, 0x4E) = 1;
+    temp_a0->unk4E = 1;
     func_00000B9C(arg0->unk4, func_00000BCC(arg1, func_00000B08(temp_a0)));
     if (arg0->unk9 == 0) {
 
@@ -211,10 +211,10 @@ void func_00001718(struct Unk_func_00001718_0 *arg0, s32 arg1) {
 }
 
 void func_000017BC(struct Unk_func_000017BC_0 *arg0, M2C_UNK arg1) {
-    void *temp_a0;
+    struct Unk_func_000017BC_temp_a0 *temp_a0;
 
     temp_a0 = arg0->unk4;
-    M2C_FIELD(temp_a0, s8 *, 0x4E) = 1;
+    temp_a0->unk4E = 1;
     func_00000B9C(arg0->unk4, func_00000BCC(arg1, func_00000B08(temp_a0)));
     func_0000181C(arg0->unk4, 0);
 }

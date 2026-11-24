@@ -150,7 +150,7 @@ void func_00009C5C(void) {
 }
 
 void func_00009CA4(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00009CA4_temp_v0 *temp_v0;
 
     if (D_0002CB40 == 0) {
 
@@ -890,11 +890,11 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009598", func_00
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009598", func_00011768);
 
 void func_000117C8(struct Unk_func_000117C8_0 *arg0) {
-    void *temp_v1;
+    struct Unk_func_000117C8_temp_v1 *temp_v1;
 
     temp_v1 = arg0->unkA0;
     if (temp_v1 != NULL) {
-        M2C_FIELD(temp_v1, s8 *, 0x34) = 1;
+        temp_v1->unk34 = 1;
     }
 }
 

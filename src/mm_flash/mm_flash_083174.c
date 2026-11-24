@@ -533,12 +533,12 @@ void func_0008BB90(void) {
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_083174", func_0008BBAC);
 
 s32 func_0008BC28(struct Unk_func_0008BC28_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    void *temp_t0;
+    struct Unk_func_0008BC28_temp_t0 *temp_t0;
 
     func_0008BBAC();
     temp_t0 = arg0->unk44;
-    arg0->unk4C = (s32) M2C_FIELD(temp_t0, s32 *, 0x1070);
-    arg0->unk50 = (s32) M2C_FIELD(temp_t0, s32 *, 0x1074);
+    arg0->unk4C = (s32) temp_t0->unk1070;
+    arg0->unk50 = (s32) temp_t0->unk1074;
     return func_0008BC90(arg0, arg1, arg2, 0) != 0;
 }
 

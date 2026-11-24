@@ -44,34 +44,34 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_060460", func_00061790);
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_060460", func_00061870);
 
 void func_000618DC(void *arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
-    void *temp_s1;
-    void *temp_s2;
+    struct Unk_func_000618DC_temp_s1 *temp_s1;
+    struct Unk_func_000618DC_temp_s2 *temp_s2;
 
     temp_s2 = arg0 + 0x18;
     temp_s1 = arg0 + 8;
     M2C_FIELD(arg0, s32 *, 0x18) = 6;
-    M2C_FIELD(temp_s1, s32 *, 8) = 0;
-    M2C_FIELD(temp_s1, s32 *, 4) = 0;
+    temp_s1->unk8 = 0;
+    temp_s1->unk4 = 0;
     M2C_FIELD(arg0, s32 *, 8) = 6;
-    M2C_FIELD(temp_s2, s32 *, 8) = 0;
-    M2C_FIELD(temp_s2, s32 *, 4) = 0;
+    temp_s2->unk8 = 0;
+    temp_s2->unk4 = 0;
     M2C_FIELD(arg0, s32 *, 0) = func_0001E044(arg1);
     func_000628A8(temp_s1, arg2, 1);
     func_000628A8(temp_s2, arg3, 1);
 }
 
 void func_00061974(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    void *temp_s1;
-    void *temp_s2;
+    struct Unk_func_00061974_temp_s1 *temp_s1;
+    struct Unk_func_00061974_temp_s2 *temp_s2;
 
     temp_s2 = arg0 + 0x18;
     temp_s1 = arg0 + 8;
     M2C_FIELD(arg0, s32 *, 0x18) = 6;
-    M2C_FIELD(temp_s1, s32 *, 8) = 0;
-    M2C_FIELD(temp_s1, s32 *, 4) = 0;
+    temp_s1->unk8 = 0;
+    temp_s1->unk4 = 0;
     M2C_FIELD(arg0, s32 *, 8) = 6;
-    M2C_FIELD(temp_s2, s32 *, 8) = 0;
-    M2C_FIELD(temp_s2, s32 *, 4) = 0;
+    temp_s2->unk8 = 0;
+    temp_s2->unk4 = 0;
     M2C_FIELD(arg0, s32 *, 0) = func_0001E044(arg1);
     func_000628A8(temp_s1, arg2, 1);
     func_000628A8(temp_s2, arg3, 1);

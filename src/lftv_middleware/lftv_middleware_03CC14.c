@@ -31,7 +31,7 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03CC14", f
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03CC14", func_0003D844);
 
 void func_0003D8D4(void) {
-    void *temp_a1;
+    struct Unk_func_0003D8D4_temp_a1 *temp_a1;
 
     temp_a1 = *D_0005C60C;
     M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(D_0005C60C, temp_a1);

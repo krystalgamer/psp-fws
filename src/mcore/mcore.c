@@ -220,11 +220,11 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_000027D8);
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00002828);
 
 void *func_000028A4(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_000028A4_temp_v0 *temp_v0;
 
     temp_v0 = func_00002828(arg0, 0);
     if (temp_v0 != NULL) {
-        scePaf_6829D7AF(M2C_FIELD(temp_v0, s32 *, 4), arg1 & 0xFF, arg0);
+        scePaf_6829D7AF(temp_v0->unk4, arg1 & 0xFF, arg0);
     }
     return temp_v0;
 }
@@ -1426,19 +1426,19 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_00017484);
 s32 func_000174CC(void **arg0) {
     s32 temp_v0;
     s32 temp_v1;
-    void *temp_s0;
+    struct Unk_func_000174CC_temp_s0 *temp_s0;
 
     temp_s0 = *arg0;
     if (temp_s0 != NULL) {
-        temp_v0 = M2C_FIELD(temp_s0, s32 *, 0);
+        temp_v0 = temp_s0->unk0;
         temp_v1 = temp_v0 - 1;
         if (temp_v0 >= 0) {
-            M2C_FIELD(temp_s0, s32 *, 0) = temp_v1;
+            temp_s0->unk0 = temp_v1;
             if (temp_v1 != -1) {
                 *arg0 = NULL;
             } else {
-                func_00002900(M2C_FIELD(temp_s0, s32 *, 4));
-                func_00002900(M2C_FIELD(temp_s0, s32 *, 8));
+                func_00002900(temp_s0->unk4);
+                func_00002900(temp_s0->unk8);
                 func_0000274C((s32) temp_s0);
                 *arg0 = NULL;
             }
@@ -1490,19 +1490,19 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore", func_0001771C);
 s32 func_00017764(void **arg0) {
     s32 temp_v0;
     s32 temp_v1;
-    void *temp_s0;
+    struct Unk_func_00017764_temp_s0 *temp_s0;
 
     temp_s0 = *arg0;
     if (temp_s0 != NULL) {
-        temp_v0 = M2C_FIELD(temp_s0, s32 *, 0);
+        temp_v0 = temp_s0->unk0;
         temp_v1 = temp_v0 - 1;
         if (temp_v0 >= 0) {
-            M2C_FIELD(temp_s0, s32 *, 0) = temp_v1;
+            temp_s0->unk0 = temp_v1;
             if (temp_v1 != -1) {
                 *arg0 = NULL;
             } else {
-                func_00002900(M2C_FIELD(temp_s0, s32 *, 4));
-                func_00002900(M2C_FIELD(temp_s0, s32 *, 8));
+                func_00002900(temp_s0->unk4);
+                func_00002900(temp_s0->unk8);
                 func_0000274C((s32) temp_s0);
                 *arg0 = NULL;
             }

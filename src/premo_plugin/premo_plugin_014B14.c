@@ -189,12 +189,12 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00016390);
 
 s32 func_000163CC(struct Unk_func_000163CC_0 *arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_000163CC_temp_v0 *temp_v0;
 
     temp_v0 = arg0->unk0;
     arg0->unk44 = arg1;
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s32 *, 0x58) = arg1;
+        temp_v0->unk58 = arg1;
     }
     return 0;
 }

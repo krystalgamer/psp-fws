@@ -57,11 +57,11 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00000
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_000007AC);
 
 void func_00000824(void **arg0) {
-    void *temp_a0;
+    struct Unk_func_00000824_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 4) = (s32) (M2C_FIELD(temp_a0, s32 *, 4) + 1);
+        temp_a0->unk4 = (s32) (temp_a0->unk4 + 1);
     }
 }
 
@@ -2187,14 +2187,14 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00015
 
 void func_00015F98(void **arg0) {
     void *temp_s0;
-    void *var_a0;
-    void *var_v0;
+    struct Unk_func_00015F98_var_a0 *var_a0;
+    struct Unk_func_00015F98_var_v0 *var_v0;
 
     var_a0 = *arg0;
-    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    var_v0 = var_a0->unk4;
     if (var_v0 != var_a0) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;

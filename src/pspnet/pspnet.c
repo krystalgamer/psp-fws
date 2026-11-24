@@ -181,15 +181,15 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_D861EF33);
 s32 sceNet_lib_45452B7B(void) {
     s16 temp_a1;
     s32 var_s0;
-    void *var_v1;
+    struct Unk_sceNet_lib_45452B7B_var_v1 *var_v1;
 
     var_s0 = 0;
     sceKernelWaitSema(D_0000A868, 1, NULL);
     var_v1 = D_0000AF44.unk0;
     if (var_v1 != NULL) {
         do {
-            temp_a1 = M2C_FIELD(var_v1, s16 *, 0xC);
-            var_v1 = M2C_FIELD(var_v1, void **, 0);
+            temp_a1 = var_v1->unkC;
+            var_v1 = var_v1->unk0;
             var_s0 += temp_a1 > 0;
         } while (var_v1 != NULL);
     }
@@ -198,14 +198,14 @@ s32 sceNet_lib_45452B7B(void) {
 }
 
 void func_0000260C(void) {
-    void *var_s0;
+    struct Unk_func_0000260C_var_s0 *var_s0;
 
     if (D_0000A868 >= 0) {
         var_s0 = D_0000AF44.unk0;
         if (var_s0 != NULL) {
             do {
-                sceKernelDeleteSema(M2C_FIELD(var_s0, s32 *, 0x4C));
-                var_s0 = M2C_FIELD(var_s0, void **, 0);
+                sceKernelDeleteSema(var_s0->unk4C);
+                var_s0 = var_s0->unk0;
             } while (var_s0 != NULL);
         }
         sceKernelDeleteSema(D_0000A868);
@@ -403,20 +403,20 @@ u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2) {
     u32 temp_s0_2;
     u32 var_s1;
     u8 *var_s3;
-    void *var_s2;
+    struct Unk_func_00004974_var_s2 *var_s2;
 
     var_s3 = arg0;
     var_s2 = arg1;
     var_s1 = arg2;
     if (arg2 != 0) {
         do {
-            temp_s0 = M2C_FIELD(var_s2, u32 *, 0xC);
+            temp_s0 = var_s2->unkC;
             temp_s0_2 = (temp_s0 >= var_s1) ? var_s1 : temp_s0;
             temp_a2 = temp_s0_2;
             var_s1 -= temp_s0_2;
-            sceNet_lib_EF097716(var_s3, M2C_FIELD(var_s2, u8 **, 8), (s32) temp_a2);
+            sceNet_lib_EF097716(var_s3, var_s2->unk8, (s32) temp_a2);
             var_s3 = &var_s3[temp_s0_2];
-            var_s2 = M2C_FIELD(var_s2, void **, 0);
+            var_s2 = var_s2->unk0;
         } while (var_s1 != 0);
     }
     return arg0;
@@ -440,13 +440,13 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_EDB11CB4);
 
 void func_00005744(struct Unk_func_00005744_0 *arg0) {
     void *var_a0;
-    void *var_s0;
+    struct Unk_func_00005744_var_s0 *var_s0;
 
     var_s0 = arg0->unk0;
     var_a0 = var_s0;
     if (var_s0 != NULL) {
         do {
-            var_s0 = M2C_FIELD(var_s0, void **, 4);
+            var_s0 = var_s0->unk4;
             sceNetIfhandle_lib_F56FAC82(var_a0);
             var_a0 = var_s0;
         } while (var_s0 != NULL);

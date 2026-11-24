@@ -46,7 +46,13 @@ struct Unk_func_00001F64_0 {
 
 struct Unk_func_00001F80_0 {
     u8 pad0[0x330];
-    void * unk330;
+    struct Unk_func_00001F80_temp_v0 *unk330;
+};
+
+struct Unk_func_00001F80_temp_v0 {
+    u8 pad0[0x64];
+    s32 unk64;
+    s32 unk68;
 };
 
 struct Unk_func_00001F90_0 {
@@ -57,6 +63,11 @@ struct Unk_func_00001F90_0 {
 struct Unk_func_00001F9C_0 {
     u8 pad0[0x330];
     s32 unk330;
+};
+
+struct Unk_func_00002008_temp_a0 {
+    u8 pad0[0x4];
+    s32 unk4;
 };
 
 struct Unk_func_00002028_0 {
@@ -79,6 +90,10 @@ struct Unk_func_00006CE8_0 {
     s32 unk0;
     s32 unk4;
     s32 unk8;
+};
+
+struct Unk_func_00008BCC_temp_a3 {
+
 };
 
 struct Unk_func_0000E800_0 {

@@ -62,12 +62,12 @@ void func_0009D548(s32 arg0) {
 
 s32 func_0009D564(s32 arg0) {
     s32 var_v1;
-    void *temp_a0;
+    struct Unk_func_0009D564_temp_a0 *temp_a0;
 
     temp_a0 = arg0 + 8;
     var_v1 = 0;
-    if (M2C_FIELD(temp_a0, s32 *, 0x64) == 0) {
-        var_v1 = M2C_FIELD(temp_a0, s32 *, 0x2A0) != 0;
+    if (temp_a0->unk64 == 0) {
+        var_v1 = temp_a0->unk2A0 != 0;
     }
     return var_v1;
 }
@@ -124,12 +124,12 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09D2AC", func_0009D750);
 
 s32 func_0009D890(s32 arg0) {
     s32 var_v1;
-    void *temp_a0;
+    struct Unk_func_0009D890_temp_a0 *temp_a0;
 
     temp_a0 = arg0 + 8;
     var_v1 = 0;
-    if (M2C_FIELD(temp_a0, s32 *, 0x64) == 0) {
-        var_v1 = M2C_FIELD(temp_a0, s32 *, 0x2A0) != 0;
+    if (temp_a0->unk64 == 0) {
+        var_v1 = temp_a0->unk2A0 != 0;
     }
     return var_v1;
 }

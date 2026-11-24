@@ -226,11 +226,11 @@ void func_0000AE08(M2C_UNK **arg0) {
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_006DD4", func_0000AE40);
 
 void func_0000AED4(struct Unk_func_0000AED4_0 *arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_0000AED4_temp_v0 *temp_v0;
 
     temp_v0 = arg0->unk24;
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s32 *, 0x5C) = arg1;
+        temp_v0->unk5C = arg1;
     }
 }
 

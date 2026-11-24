@@ -64,12 +64,12 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07
 
 s32 func_000787E4(void **arg0) {
     s32 var_v1;
-    void *temp_a0;
+    struct Unk_func_000787E4_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     var_v1 = 0x2003;
-    if (M2C_FIELD(temp_a0, s32 *, 0) != 0) {
-        var_v1 = (M2C_FIELD(temp_a0, s32 *, 0xC) != 0) ? 0 : 0x2003;
+    if (temp_a0->unk0 != 0) {
+        var_v1 = (temp_a0->unkC != 0) ? 0 : 0x2003;
     }
     return var_v1;
 }
@@ -117,8 +117,8 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07
 s32 func_00078C20(s32 arg0, struct Unk_func_00078C20_1 *arg1) {
     s32 temp_a1;
     s32 var_a0;
-    void *temp_a1_2;
-    void *temp_v1;
+    struct Unk_func_00078C20_temp_a1_2 *temp_a1_2;
+    struct Unk_func_00078C20_temp_v1 *temp_v1;
 
     temp_a1 = arg1->unk4;
     var_a0 = 0;
@@ -126,8 +126,8 @@ s32 func_00078C20(s32 arg0, struct Unk_func_00078C20_1 *arg1) {
         if (((temp_a1 == 0x656E6376) | (temp_a1 == 0x656E6361)) != 0) {
             temp_a1_2 = arg1->unk30;
             if (temp_a1_2 != NULL) {
-                temp_v1 = M2C_FIELD(temp_a1_2, void **, 0xC);
-                var_a0 = ((M2C_FIELD(temp_v1, u8 *, 8) << 0x18) | (M2C_FIELD(temp_v1, u8 *, 9) << 0x10) | (M2C_FIELD(temp_v1, u8 *, 0xA) << 8) | M2C_FIELD(temp_v1, u8 *, 0xB)) == arg0;
+                temp_v1 = temp_a1_2->unkC;
+                var_a0 = ((temp_v1->unk8 << 0x18) | (temp_v1->unk9 << 0x10) | (temp_v1->unkA << 8) | temp_v1->unkB) == arg0;
             }
         }
     } else {
@@ -148,13 +148,13 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07
 
 s32 func_00079554(void **arg0, s32 *arg1) {
     s32 var_v1;
-    void *temp_a0;
+    struct Unk_func_00079554_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     var_v1 = 0x2003;
-    if (M2C_FIELD(temp_a0, s32 *, 0xC) != 0) {
+    if (temp_a0->unkC != 0) {
         var_v1 = 0;
-        *arg1 = M2C_FIELD(temp_a0, s32 *, 0x20);
+        *arg1 = temp_a0->unk20;
     }
     return var_v1;
 }
@@ -173,13 +173,13 @@ s32 func_00079578(s32 *arg0, s32 arg1) {
 
 s32 func_000795C8(void **arg0, u16 *arg1) {
     s32 var_v1;
-    void *temp_a0;
+    struct Unk_func_000795C8_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     var_v1 = 0x2003;
-    if (M2C_FIELD(temp_a0, s32 *, 0) != 0) {
+    if (temp_a0->unk0 != 0) {
         var_v1 = 0;
-        *arg1 = M2C_FIELD(temp_a0, u16 *, 8);
+        *arg1 = temp_a0->unk8;
     }
     return var_v1;
 }

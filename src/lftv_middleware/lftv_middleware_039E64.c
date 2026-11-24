@@ -109,7 +109,7 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_039E64", f
 
 void func_0003B6C8(struct Unk_func_0003B6C8_0 *arg0) {
     void **temp_a0;
-    void *temp_a1;
+    struct Unk_func_0003B6C8_temp_a1 *temp_a1;
 
     arg0->unk18 = 1;
     temp_a0 = arg0->unk20;
@@ -119,7 +119,7 @@ void func_0003B6C8(struct Unk_func_0003B6C8_0 *arg0) {
 
 void func_0003B6F8(struct Unk_func_0003B6F8_0 *arg0) {
     void **temp_a0;
-    void *temp_a1;
+    struct Unk_func_0003B6F8_temp_a1 *temp_a1;
 
     arg0->unk19 = 1;
     temp_a0 = arg0->unk1C;
@@ -130,7 +130,7 @@ void func_0003B6F8(struct Unk_func_0003B6F8_0 *arg0) {
 void func_0003B728(struct Unk_func_0003B728_0 *arg0) {
     void **temp_a0;
     void **temp_a0_2;
-    void *temp_a1;
+    struct Unk_func_0003B728_temp_a1 *temp_a1;
 
     arg0->unk18 = 1;
     arg0->unk19 = 1;
@@ -143,7 +143,7 @@ void func_0003B728(struct Unk_func_0003B728_0 *arg0) {
 
 void func_0003B77C(struct Unk_func_0003B77C_0 *arg0) {
     void **temp_a0;
-    void *temp_a1;
+    struct Unk_func_0003B77C_temp_a1 *temp_a1;
 
     temp_a0 = arg0->unk1C;
     temp_a1 = *temp_a0;

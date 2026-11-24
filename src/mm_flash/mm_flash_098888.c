@@ -5,10 +5,10 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_098888", func_00098888);
 
 s32 func_000988C8(void *arg0) {
     s32 var_a0;
-    void *temp_v0;
+    struct Unk_func_000988C8_temp_v0 *temp_v0;
 
     temp_v0 = arg0 + 0x3C;
-    var_a0 = (M2C_FIELD(arg0, u8 *, 0x3C) << 0x10) | (M2C_FIELD(temp_v0, u8 *, 1) << 8) | M2C_FIELD(temp_v0, u8 *, 2);
+    var_a0 = (M2C_FIELD(arg0, u8 *, 0x3C) << 0x10) | (temp_v0->unk1 << 8) | temp_v0->unk2;
     if (var_a0 == 0xFFFFFF) {
         var_a0 = (M2C_FIELD(arg0, u8 *, 0x47) << 0x18) + (M2C_FIELD(arg0, u8 *, 0x48) << 0x10) + (M2C_FIELD(arg0, u8 *, 0x49) << 8) + M2C_FIELD(arg0, u8 *, 0x4A);
     }
@@ -16,10 +16,10 @@ s32 func_000988C8(void *arg0) {
 }
 
 s32 func_0009892C(void *arg0) {
-    void *temp_a1;
+    struct Unk_func_0009892C_temp_a1 *temp_a1;
 
     temp_a1 = arg0 + 0x3F;
-    return (M2C_FIELD(arg0, u8 *, 0x3F) << 0x10) | (M2C_FIELD(temp_a1, u8 *, 1) << 8) | M2C_FIELD(temp_a1, u8 *, 2);
+    return (M2C_FIELD(arg0, u8 *, 0x3F) << 0x10) | (temp_a1->unk1 << 8) | temp_a1->unk2;
 }
 
 s8 func_00098950(struct Unk_func_00098950_0 *arg0) {
@@ -51,10 +51,10 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_098888", func_00098BB8);
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_098888", func_00098C0C);
 
 s32 func_00098C1C(void *arg0) {
-    void *temp_v1;
+    struct Unk_func_00098C1C_temp_v1 *temp_v1;
 
     temp_v1 = arg0 + 0x3C;
-    return ((M2C_FIELD(arg0, u8 *, 0x3C) << 0x10) | (M2C_FIELD(temp_v1, u8 *, 1) << 8) | M2C_FIELD(temp_v1, u8 *, 2)) == 0xFFFFFF;
+    return ((M2C_FIELD(arg0, u8 *, 0x3C) << 0x10) | (temp_v1->unk1 << 8) | temp_v1->unk2) == 0xFFFFFF;
 }
 
 void func_00098C50(struct Unk_func_00098C50_0 *arg0, s32 arg1, s32 arg2) {
@@ -112,13 +112,13 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_098888", func_00099AB8);
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_098888", func_00099B60);
 
 void func_00099B74(void *arg0) {
-    void *var_v0;
+    struct Unk_func_00099B74_var_v0 *var_v0;
 
     var_v0 = M2C_FIELD(arg0, void **, 0);
     if (var_v0 != NULL) {
         do {
-            M2C_FIELD(var_v0, s32 *, 0x14) = 0;
-            var_v0 = M2C_FIELD(var_v0, void **, 0);
+            var_v0->unk14 = 0;
+            var_v0 = var_v0->unk0;
         } while (var_v0 != NULL);
     }
     sceHVNetfront_Module_D611E938((s32) (arg0 + 0x10), 0, 0x64);
@@ -143,10 +143,10 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_098888", func_0009A534);
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_098888", func_0009A5D4);
 
 void func_0009A650(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    void *temp_v0;
+    struct Unk_func_0009A650_temp_v0 *temp_v0;
 
     temp_v0 = func_0009850C();
-    M2C_FIELD(temp_v0, s8 *, 8) = 4;
+    temp_v0->unk8 = 4;
     func_0009B380(temp_v0, arg1, arg2);
     func_0009AE40(arg0, temp_v0);
 }

@@ -592,11 +592,11 @@ s32 func_000076CC(s32 arg0) {
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_0000774C);
 
 void func_00007804(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_00007804_temp_v0 *temp_v0;
 
     temp_v0 = func_000073B8(arg0, 1);
-    M2C_FIELD(temp_v0, s32 *, 0x14) = arg1;
-    M2C_FIELD(temp_v0, s32 *, 0x10) = 1;
+    temp_v0->unk14 = arg1;
+    temp_v0->unk10 = 1;
 }
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00007838);

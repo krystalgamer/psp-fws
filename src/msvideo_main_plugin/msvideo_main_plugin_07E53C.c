@@ -104,7 +104,7 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_07
 
 s32 func_0007ED7C(struct Unk_func_0007ED7C_0 *arg0) {
     u32 var_s2;
-    void *temp_s0;
+    struct Unk_func_0007ED7C_temp_s0 *temp_s0;
 
     var_s2 = 0;
     if (arg0->unk8 == 0) {
@@ -113,7 +113,7 @@ s32 func_0007ED7C(struct Unk_func_0007ED7C_0 *arg0) {
         do {
             if (func_000815B8(arg0, var_s2) != NULL) {
                 temp_s0 = func_000815B8(arg0, var_s2);
-                if (M2C_FIELD(temp_s0, s32 *, 0x29C) != (func_000815B8(arg0, var_s2) + 0x180)) {
+                if (temp_s0->unk29C != (func_000815B8(arg0, var_s2) + 0x180)) {
                     func_000A4400(M2C_FIELD(func_000815B8(arg0, var_s2), s32 *, 0x29C));
                 }
                 M2C_FIELD(func_000815B8(arg0, var_s2), s32 *, 0x29C) = 0;

@@ -186,7 +186,7 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_01D5EC", f
 
 void func_0001FF84(struct Unk_func_0001FF84_0 *arg0) {
     void **temp_a0;
-    void *temp_a1;
+    struct Unk_func_0001FF84_temp_a1 *temp_a1;
 
     temp_a0 = arg0->unkC;
     temp_a1 = *temp_a0;
@@ -215,12 +215,12 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_01D5EC", f
 
 u8 func_0002049C(struct Unk_func_0002049C_0 *arg0) {
     u8 var_v0;
-    void *temp_v1;
+    struct Unk_func_0002049C_temp_v1 *temp_v1;
 
     temp_v1 = arg0->unk10;
     var_v0 = 0;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(temp_v1, u8 *, 4);
+        var_v0 = temp_v1->unk4;
     }
     return var_v0;
 }

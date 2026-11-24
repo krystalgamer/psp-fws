@@ -23,14 +23,14 @@ void func_00043020(struct Unk_func_00043020_0 *arg0, s32 arg1) {
 void func_0004303C(struct Unk_func_0004303C_0 *arg0) {
     void *temp_v0;
     void *temp_v0_2;
-    void *var_v1;
-    void *var_v1_2;
+    struct Unk_func_0004303C_var_v1 *var_v1;
+    struct Unk_func_0004303C_var_v1_2 *var_v1_2;
 
     var_v1 = arg0->unk14;
     if (var_v1 != NULL) {
         do {
-            temp_v0 = M2C_FIELD(var_v1, void **, 0x50);
-            M2C_FIELD(var_v1, s32 *, 0x48) = 0;
+            temp_v0 = var_v1->unk50;
+            var_v1->unk48 = 0;
             var_v1 = temp_v0;
             arg0->unk14 = temp_v0;
         } while (temp_v0 != NULL);
@@ -38,8 +38,8 @@ void func_0004303C(struct Unk_func_0004303C_0 *arg0) {
     var_v1_2 = arg0->unkC;
     if (var_v1_2 != NULL) {
         do {
-            temp_v0_2 = M2C_FIELD(var_v1_2, void **, 0x5C);
-            M2C_FIELD(var_v1_2, s32 *, 0x44) = 0;
+            temp_v0_2 = var_v1_2->unk5C;
+            var_v1_2->unk44 = 0;
             var_v1_2 = temp_v0_2;
             arg0->unkC = temp_v0_2;
         } while (temp_v0_2 != NULL);
@@ -50,14 +50,14 @@ void func_0004303C(struct Unk_func_0004303C_0 *arg0) {
 void func_00043084(struct Unk_func_00043084_0 *arg0) {
     void *temp_v0;
     void *temp_v0_2;
-    void *var_v1;
-    void *var_v1_2;
+    struct Unk_func_00043084_var_v1 *var_v1;
+    struct Unk_func_00043084_var_v1_2 *var_v1_2;
 
     var_v1 = arg0->unk14;
     if (var_v1 != NULL) {
         do {
-            temp_v0 = M2C_FIELD(var_v1, void **, 0x50);
-            M2C_FIELD(var_v1, s32 *, 0x48) = 0;
+            temp_v0 = var_v1->unk50;
+            var_v1->unk48 = 0;
             var_v1 = temp_v0;
             arg0->unk14 = temp_v0;
         } while (temp_v0 != NULL);
@@ -65,8 +65,8 @@ void func_00043084(struct Unk_func_00043084_0 *arg0) {
     var_v1_2 = arg0->unkC;
     if (var_v1_2 != NULL) {
         do {
-            temp_v0_2 = M2C_FIELD(var_v1_2, void **, 0x5C);
-            M2C_FIELD(var_v1_2, s32 *, 0x44) = 0;
+            temp_v0_2 = var_v1_2->unk5C;
+            var_v1_2->unk44 = 0;
             var_v1_2 = temp_v0_2;
             arg0->unkC = temp_v0_2;
         } while (temp_v0_2 != NULL);
@@ -75,13 +75,13 @@ void func_00043084(struct Unk_func_00043084_0 *arg0) {
 }
 
 void func_000430CC(struct Unk_func_000430CC_0 *arg0) {
-    void *var_s0;
+    struct Unk_func_000430CC_var_s0 *var_s0;
 
     var_s0 = arg0->unkC;
     if (var_s0 != NULL) {
         do {
             func_00042B8C(var_s0);
-            var_s0 = M2C_FIELD(var_s0, void **, 0x5C);
+            var_s0 = var_s0->unk5C;
         } while (var_s0 != NULL);
     }
 }

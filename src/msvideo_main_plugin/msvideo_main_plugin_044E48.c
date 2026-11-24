@@ -564,12 +564,12 @@ void func_0004D4AC(void *arg0) {
     s32 temp_a1;
     s32 temp_a3;
     s32 temp_v0;
-    void *temp_s2;
+    struct Unk_func_0004D4AC_temp_s2 *temp_s2;
 
     temp_s2 = M2C_FIELD(arg0, void **, 4);
     temp_v0 = scePaf_D7FA53D2(M2C_FIELD(arg0, void **, 0xEA8), 0);
     if (sceMpegbase_91929A21(temp_v0, 0, (s32) M2C_FIELD(M2C_FIELD(arg0, void **, 0xEA8), s32 *, 0x3C) >> 2, arg0 + 0xF4C) != 0) {
-        M2C_FIELD(temp_s2, s8 *, 0x341) = 1;
+        temp_s2->unk341 = 1;
     }
     func_0004C1C0(temp_v0, M2C_FIELD(M2C_FIELD(arg0, void **, 0xEA8), s32 *, 0x3C), M2C_FIELD(arg0, s32 *, 0xE94), M2C_FIELD(arg0, s32 *, 0xE98), M2C_FIELD(arg0, s32 *, 0xE84), M2C_FIELD(arg0, s32 *, 0xE88), M2C_FIELD(arg0, s32 *, 0xE8C), M2C_FIELD(arg0, s32 *, 0xE90));
     temp_a3 = M2C_FIELD(arg0, s32 *, 0xE98);
@@ -1003,14 +1003,14 @@ s32 func_00051E08(struct Unk_func_00051E08_0 *arg0) {
 }
 
 s32 func_00051E20(struct Unk_func_00051E20_0 *arg0, u32 arg1, s32 *arg2) {
-    void *temp_a0;
+    struct Unk_func_00051E20_temp_a0 *temp_a0;
 
     if (arg2 != NULL) {
         temp_a0 = arg0->unk14;
         if (temp_a0 == NULL) {
             *arg2 = 0;
-        } else if ((u32) M2C_FIELD(temp_a0, u32 *, 0) >= arg1) {
-            *arg2 = M2C_FIELD(((arg1 * 4) + M2C_FIELD(temp_a0, s32 *, 4)), s32 *, -4);
+        } else if ((u32) temp_a0->unk0 >= arg1) {
+            *arg2 = M2C_FIELD(((arg1 * 4) + temp_a0->unk4), s32 *, -4);
         } else {
             *arg2 = 0;
         }
@@ -2096,7 +2096,7 @@ s32 func_0005FE0C(void *arg0, struct Unk_func_0005FE0C_1 *arg1) {
     s32 temp_s2;
     s32 temp_v1;
     s32 var_s3;
-    void *temp_v0;
+    struct Unk_func_0005FE0C_temp_v0 *temp_v0;
 
     temp_s2 = arg0 + 0x1C;
     var_s3 = 0;
@@ -2110,10 +2110,10 @@ s32 func_0005FE0C(void *arg0, struct Unk_func_0005FE0C_1 *arg1) {
             M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 0x18) - 1);
         }
         temp_v0 = (M2C_FIELD(arg0, s32 *, 4) * 0x10) + M2C_FIELD(arg0, s32 *, 0x10);
-        M2C_FIELD(temp_v0, s32 *, 0) = (s32) arg1->unk0;
-        M2C_FIELD(temp_v0, s32 *, 4) = (s32) arg1->unk4;
-        M2C_FIELD(temp_v0, s32 *, 8) = (s32) arg1->unk8;
-        M2C_FIELD(temp_v0, s32 *, 0xC) = (s32) arg1->unkC;
+        temp_v0->unk0 = (s32) arg1->unk0;
+        temp_v0->unk4 = (s32) arg1->unk4;
+        temp_v0->unk8 = (s32) arg1->unk8;
+        temp_v0->unkC = (s32) arg1->unkC;
         func_000612DC(M2C_FIELD(arg0, s32 *, 0xC), 1);
     }
     func_000610B0(temp_s2);
@@ -2184,14 +2184,14 @@ void func_00060340(struct Unk_func_00060340_0 *arg0) {
 
 void func_00060358(struct Unk_func_00060358_0 *arg0) {
     void *temp_s0;
-    void *var_v0;
+    struct Unk_func_00060358_var_v0 *var_v0;
 
     arg0->unk0 = &D_000B40B8;
     if (arg0->unk4 != 0) {
         var_v0 = arg0->unk8;
         if (var_v0 != NULL) {
             do {
-                temp_s0 = M2C_FIELD(var_v0, void **, 8);
+                temp_s0 = var_v0->unk8;
                 if (var_v0 != NULL) {
                     scePaf_6261C0A5((s32) var_v0);
                 }
@@ -2203,14 +2203,14 @@ void func_00060358(struct Unk_func_00060358_0 *arg0) {
 
 void func_000603B0(struct Unk_func_000603B0_0 *arg0) {
     void *temp_s0;
-    void *var_v0;
+    struct Unk_func_000603B0_var_v0 *var_v0;
 
     arg0->unk0 = &D_000B40B8;
     if (arg0->unk4 != 0) {
         var_v0 = arg0->unk8;
         if (var_v0 != NULL) {
             do {
-                temp_s0 = M2C_FIELD(var_v0, void **, 8);
+                temp_s0 = var_v0->unk8;
                 if (var_v0 != NULL) {
                     scePaf_6261C0A5((s32) var_v0);
                 }
@@ -2222,14 +2222,14 @@ void func_000603B0(struct Unk_func_000603B0_0 *arg0) {
 
 void func_00060408(struct Unk_func_00060408_0 *arg0) {
     void *temp_s0;
-    void *var_v0;
+    struct Unk_func_00060408_var_v0 *var_v0;
 
     arg0->unk0 = &D_000B40B8;
     if (arg0->unk4 != 0) {
         var_v0 = arg0->unk8;
         if (var_v0 != NULL) {
             do {
-                temp_s0 = M2C_FIELD(var_v0, void **, 8);
+                temp_s0 = var_v0->unk8;
                 if (var_v0 != NULL) {
                     scePaf_6261C0A5((s32) var_v0);
                 }
@@ -2786,21 +2786,21 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_04
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_044E48", func_00063448);
 
 s32 func_0006368C(struct Unk_func_0006368C_0 *arg0) {
-    void *temp_v0;
+    struct Unk_func_0006368C_temp_v0 *temp_v0;
 
     temp_v0 = arg0->unkB0;
     if (temp_v0 != NULL) {
-        return M2C_FIELD(temp_v0, s32 *, 8);
+        return temp_v0->unk8;
     }
     return arg0->unkC0;
 }
 
 s32 func_000636A8(struct Unk_func_000636A8_0 *arg0) {
-    void *temp_v0;
+    struct Unk_func_000636A8_temp_v0 *temp_v0;
 
     temp_v0 = arg0->unkB0;
     if (temp_v0 != NULL) {
-        return M2C_FIELD(temp_v0, s32 *, 0xC);
+        return temp_v0->unkC;
     }
     return arg0->unkC4;
 }

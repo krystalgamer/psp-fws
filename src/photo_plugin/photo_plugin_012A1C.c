@@ -3,7 +3,7 @@
 #include "photo_plugin_decls.h"
 
 void func_00012A1C(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00012A1C_temp_v0 *temp_v0;
 
     temp_v0 = func_00012DE4();
     if (temp_v0 != NULL) {

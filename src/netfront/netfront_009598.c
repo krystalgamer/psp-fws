@@ -4,25 +4,25 @@
 
 void func_00009598(struct Unk_func_00009598_0 *arg0, s32 arg1) {
     s32 temp_a0;
-    void *temp_v0;
+    struct Unk_func_00009598_temp_v0 *temp_v0;
 
     if (arg0 != NULL) {
         temp_a0 = arg0->unk4C;
         if (temp_a0 != 0) {
             temp_v0 = temp_a0 + (arg1 * 0x34);
-            M2C_FIELD(temp_v0, s32 *, 0x10) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x14) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x18) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x1C) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x20) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x24) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x28) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x2C) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x30) = 0;
-            M2C_FIELD(temp_v0, s32 *, 4) = 0;
-            M2C_FIELD(temp_v0, s32 *, 8) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0xC) = 0;
+            temp_v0->unk10 = 0;
+            temp_v0->unk0 = 0;
+            temp_v0->unk14 = 0;
+            temp_v0->unk18 = 0;
+            temp_v0->unk1C = 0;
+            temp_v0->unk20 = 0;
+            temp_v0->unk24 = 0;
+            temp_v0->unk28 = 0;
+            temp_v0->unk2C = 0;
+            temp_v0->unk30 = 0;
+            temp_v0->unk4 = 0;
+            temp_v0->unk8 = 0;
+            temp_v0->unkC = 0;
         }
     }
 }

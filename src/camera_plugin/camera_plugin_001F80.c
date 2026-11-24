@@ -3,11 +3,11 @@
 #include "camera_plugin_decls.h"
 
 void func_00001F80(struct Unk_func_00001F80_0 *arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_00001F80_temp_v0 *temp_v0;
 
     temp_v0 = arg0->unk330;
-    M2C_FIELD(temp_v0, s32 *, 0x64) = arg2;
-    M2C_FIELD(temp_v0, s32 *, 0x68) = arg1;
+    temp_v0->unk64 = arg2;
+    temp_v0->unk68 = arg1;
 }
 
 void func_00001F90(struct Unk_func_00001F90_0 *arg0, s8 arg1) {

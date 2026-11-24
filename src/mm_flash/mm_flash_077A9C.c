@@ -216,14 +216,14 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_077A9C", func_0007AE9C);
 void func_0007AF1C(struct Unk_func_0007AF1C_0 *arg0) {
     s32 temp_s1;
     void *temp_s2;
-    void *var_s0;
+    struct Unk_func_0007AF1C_var_s0 *var_s0;
 
     var_s0 = arg0->unk1024;
     arg0->unk1024 = NULL;
     if (var_s0 != NULL) {
         do {
-            temp_s1 = M2C_FIELD(var_s0, s32 *, 0);
-            temp_s2 = M2C_FIELD(var_s0, void **, 4);
+            temp_s1 = var_s0->unk0;
+            temp_s2 = var_s0->unk4;
             if (temp_s1 != 0) {
                 func_00090730(*func_0009F1C0(), temp_s1, 0);
             }

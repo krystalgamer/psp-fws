@@ -53,14 +53,14 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_00
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_00009CB4);
 
 s32 func_00009CE0(void *arg0) {
-    void *temp_a4;
-    void *temp_a6;
+    struct Unk_func_00009CE0_temp_a4 *temp_a4;
+    struct Unk_func_00009CE0_temp_a6 *temp_a6;
 
     temp_a4 = arg0 + 0x24F4;
     temp_a6 = arg0 + 0x24A0;
-    M2C_FIELD(temp_a6, s32 *, 0xC) = (s32) M2C_FIELD(temp_a4, s32 *, 0x18);
-    M2C_FIELD(temp_a4, s32 *, 0xC) = (s32) (M2C_FIELD(temp_a4, s32 *, 0xC) + 1);
-    M2C_FIELD(temp_a6, s32 *, 0x14) = 0;
+    temp_a6->unkC = (s32) temp_a4->unk18;
+    temp_a4->unkC = (s32) (temp_a4->unkC + 1);
+    temp_a6->unk14 = 0;
     func_00009098(M2C_FIELD(arg0, s32 *, 0x18), arg0 + 0x1C, arg0 + 0x10, arg0 + 0x2398, 1, 1, 1, 0);
     return 0;
 }
@@ -132,12 +132,12 @@ s32 func_0000A248(struct Unk_func_0000A248_0 *arg0) {
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_0000A258);
 
 s32 func_0000A354(void *arg0) {
-    void *temp_s1;
+    struct Unk_func_0000A354_temp_s1 *temp_s1;
 
     temp_s1 = arg0 + 0x2520;
-    sceNet_lib_EF097716(arg0 + 0x2E, arg0 + 0x2B0C, M2C_FIELD(temp_s1, s32 *, 0xBC8));
-    func_00009098(M2C_FIELD(arg0, s32 *, 0x18), (s32) (arg0 + 0x1C), (s32) (arg0 + 0x10), (s32) (arg0 + 0x2398), 1, 1, 0, (s32) (u16) M2C_FIELD(temp_s1, s32 *, 0xBC8));
-    M2C_FIELD(temp_s1, s32 *, 8) = 0;
+    sceNet_lib_EF097716(arg0 + 0x2E, arg0 + 0x2B0C, temp_s1->unkBC8);
+    func_00009098(M2C_FIELD(arg0, s32 *, 0x18), (s32) (arg0 + 0x1C), (s32) (arg0 + 0x10), (s32) (arg0 + 0x2398), 1, 1, 0, (s32) (u16) temp_s1->unkBC8);
+    temp_s1->unk8 = 0;
     return 0;
 }
 
@@ -151,11 +151,11 @@ s32 func_0000A448(struct Unk_func_0000A448_0 *arg0) {
 }
 
 s32 func_0000A458(s32 arg0) {
-    void *temp_v1;
+    struct Unk_func_0000A458_temp_v1 *temp_v1;
 
     temp_v1 = arg0 + 0x24A0;
-    M2C_FIELD(temp_v1, s32 *, 0x14) = 0;
-    M2C_FIELD(temp_v1, s32 *, 0x40) = 0;
+    temp_v1->unk14 = 0;
+    temp_v1->unk40 = 0;
     return 0;
 }
 

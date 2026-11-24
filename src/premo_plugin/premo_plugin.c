@@ -462,24 +462,24 @@ void func_00001958(void) {
 
 u8 func_00001974(void) {
     u8 var_v1;
-    void *temp_v0;
+    struct Unk_func_00001974_temp_v0 *temp_v0;
 
     temp_v0 = func_00001C04();
     var_v1 = 0;
     if (temp_v0 != NULL) {
-        var_v1 = M2C_FIELD(temp_v0, u8 *, 0xC);
+        var_v1 = temp_v0->unkC;
     }
     return var_v1;
 }
 
 s32 func_000019A0(void) {
     s32 var_v1;
-    void *temp_v0;
+    struct Unk_func_000019A0_temp_v0 *temp_v0;
 
     temp_v0 = func_00001C04();
     var_v1 = 0;
     if (temp_v0 != NULL) {
-        var_v1 = M2C_FIELD(temp_v0, s32 *, 0x10);
+        var_v1 = temp_v0->unk10;
     }
     return var_v1;
 }
@@ -800,13 +800,13 @@ void func_00003B60(void) {
 
 s32 func_00003B7C(void) {
     s32 var_v0;
-    void *temp_v1;
+    struct Unk_func_00003B7C_temp_v1 *temp_v1;
 
     var_v0 = 0;
     if (D_0002C9D0 != NULL) {
         temp_v1 = M2C_FIELD(D_0002C9D0, void **, 0x254);
         if (temp_v1 != NULL) {
-            var_v0 = M2C_FIELD(temp_v1, s32 *, 0x348);
+            var_v0 = temp_v1->unk348;
         }
     }
     return var_v0;

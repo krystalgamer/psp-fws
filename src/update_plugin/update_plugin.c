@@ -51,11 +51,11 @@ void func_00000258(void) {
 }
 
 void func_000002A4(void) {
-    void *temp_v0;
+    struct Unk_func_000002A4_temp_v0 *temp_v0;
 
     D_00007ED0 = 1;
     temp_v0 = func_00005364();
-    if (M2C_FIELD(temp_v0, u8 *, 0x61) == 0) {
+    if (temp_v0->unk61 == 0) {
 
     } else {
         sceLibUpdateDL_4F49C9C1();
@@ -296,7 +296,7 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_0000231
 
 void func_00002360(s32 arg0) {
     s32 temp_s0;
-    void *temp_v0;
+    struct Unk_func_00002360_temp_v0 *temp_v0;
 
     temp_s0 = func_00005364();
     sceVshCommonGui_4704D5BD(0);
@@ -366,7 +366,7 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_0000287
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_000028A8);
 
 void func_0000292C(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0000292C_temp_v0 *temp_v0;
 
     temp_v0 = scePaf_338C3774(arg0, 1);
     if (temp_v0 != NULL) {
@@ -375,7 +375,7 @@ void func_0000292C(s32 arg0) {
 }
 
 void func_00002960(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00002960_temp_v0 *temp_v0;
 
     temp_v0 = scePaf_338C3774(arg0, 1);
     if (temp_v0 != NULL) {
@@ -418,10 +418,10 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_0000328
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00003318);
 
 void func_00003358(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00003358_temp_v0 *temp_v0;
 
     temp_v0 = func_00005364();
-    if (M2C_FIELD(temp_v0, u8 *, 0x84) != 0) {
+    if (temp_v0->unk84 != 0) {
 
     } else {
         scePaf_EAA5AFF6(arg0, 1);
@@ -659,7 +659,7 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00005D1
 
 s32 func_00005DD4(void) {
     s32 var_v1;
-    void *temp_v0;
+    struct Unk_func_00005DD4_temp_v0 *temp_v0;
 
     temp_v0 = scePaf_338C3774(scePaf_D4FAE7D0("system_plugin"), 1);
     var_v1 = 0;

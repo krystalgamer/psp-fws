@@ -112,9 +112,11 @@
  "types": {
   "Unk_func_00000610_0": "struct Unk_func_00000610_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n};",
   "Unk_func_00000628_0": "struct Unk_func_00000628_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n};",
+  "Unk_func_000006A8_temp_v0": "struct Unk_func_000006A8_temp_v0 {\n    u8 pad0[0x1B8];\n    s32 unk1B8;\n};",
   "Unk_func_000006E0_0": "struct Unk_func_000006E0_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n};",
   "Unk_func_00000718_0": "struct Unk_func_00000718_0 {\n    u8 pad0[0x8];\n    s32 unk8;\n};",
   "Unk_func_00000964_1": "struct Unk_func_00000964_1 {\n    void * unk0;\n    s32 unk4;\n};",
+  "Unk_func_00003100_temp_a0": "struct Unk_func_00003100_temp_a0 {\n    u8 pad0[0x10];\n    s32 unk10;\n    s32 unk14;\n};",
   "Unk_func_00003BE4_0": "struct Unk_func_00003BE4_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n    s32 unk18;\n    s32 unk1C;\n    s32 unk20;\n    u8 pad24[0x4];\n    s32 unk28;\n};",
   "Unk_func_00003CB8_0": "struct Unk_func_00003CB8_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n    s32 unk18;\n    s32 unk1C;\n    s32 unk20;\n    u8 pad24[0x4];\n    s32 unk28;\n};",
   "Unk_func_00005908_0": "struct Unk_func_00005908_0 {\n    u8 pad0[0x20];\n    s32 unk20;\n    s32 unk24;\n    s32 unk28;\n};",

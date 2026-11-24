@@ -16,12 +16,12 @@ s32 func_000117FC(struct Unk_func_000117FC_0 *arg0, s32 arg1) {
 
 s32 func_00011830(struct Unk_func_00011830_0 *arg0) {
     s32 var_v0;
-    void *temp_v1;
+    struct Unk_func_00011830_temp_v1 *temp_v1;
 
     temp_v1 = arg0->unkA0;
     var_v0 = 0;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(temp_v1, s32 *, 0x38) & 1;
+        var_v0 = temp_v1->unk38 & 1;
     }
     return var_v0;
 }

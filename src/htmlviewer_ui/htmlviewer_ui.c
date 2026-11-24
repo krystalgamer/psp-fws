@@ -137,12 +137,12 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00000D3
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00000E04);
 
 void func_00000EDC(void) {
-    void *temp_v0;
+    struct Unk_func_00000EDC_temp_v0 *temp_v0;
 
     temp_v0 = func_00003D10();
-    M2C_FIELD(temp_v0, s32 *, 0x1C38) = -1;
-    M2C_FIELD(temp_v0, s32 *, 0x1B28) = 0;
-    M2C_FIELD(temp_v0, s32 *, 0x1B24) = 0;
+    temp_v0->unk1C38 = -1;
+    temp_v0->unk1B28 = 0;
+    temp_v0->unk1B24 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00000F08);
@@ -195,18 +195,18 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", sceHVUI_Modu
 
 s32 sceHVUI_Module_55C70B0A(s32 arg0) {
     s32 var_a2;
-    void *temp_v0;
+    struct Unk_sceHVUI_Module_55C70B0A_temp_v0 *temp_v0;
 
     temp_v0 = func_00003D10();
     var_a2 = 0x80110001;
-    if (M2C_FIELD(temp_v0, s32 *, 0x1B24) == 2) {
+    if (temp_v0->unk1B24 == 2) {
         func_00004060(arg0 == 0, 9);
-        M2C_FIELD(temp_v0, s32 *, 0x1BF4) = arg0;
+        temp_v0->unk1BF4 = arg0;
         if (arg0 != 0) {
             func_000267A8(0);
             var_a2 = 0;
         } else {
-            M2C_FIELD(temp_v0, s32 *, 0x1C34) = 0;
+            temp_v0->unk1C34 = 0;
             var_a2 = 0;
         }
     }
@@ -216,20 +216,20 @@ s32 sceHVUI_Module_55C70B0A(s32 arg0) {
 void func_00002298(void) {
     s32 temp_a0;
     s32 temp_v0_3;
-    void *temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_00002298_temp_v0 *temp_v0;
+    struct Unk_func_00002298_temp_v0_2 *temp_v0_2;
 
     temp_v0 = func_00003D10();
-    temp_a0 = M2C_FIELD(temp_v0, s32 *, 0x1B3C);
+    temp_a0 = temp_v0->unk1B3C;
     if (temp_a0 != 0) {
-        if ((M2C_FIELD(temp_v0, s32 *, 0x1B34) == 0) && (M2C_FIELD(temp_v0, s32 *, 0x1B98) == 0)) {
+        if ((temp_v0->unk1B34 == 0) && (temp_v0->unk1B98 == 0)) {
             temp_v0_2 = sceHVSlim_Library_896E55F6(temp_a0);
             if (temp_v0_2 != NULL) {
-                temp_v0_3 = M2C_FIELD(temp_v0_2, s32 *, 0x154);
+                temp_v0_3 = temp_v0_2->unk154;
                 if (temp_v0_3 != 0) {
                     func_0002649C(temp_v0_3, 0);
                 }
-                sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0x1B3C));
+                sceHVSlim_Library_B29BE9CE(temp_v0->unk1B3C);
             }
         }
     }
@@ -342,21 +342,21 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00003AC
 s32 module_reboot_before(void) {
     s32 temp_a0;
     s32 temp_a0_2;
-    void *temp_s0;
+    struct Unk_module_reboot_before_temp_s0 *temp_s0;
 
     temp_s0 = func_00003D10();
     sceKernelWaitSema(D_0006DA5C, 1, NULL);
-    if (M2C_FIELD(temp_s0, s32 *, 0x1C38) >= 0) {
-        temp_a0 = M2C_FIELD(temp_s0, s32 *, 0x1C3C);
+    if (temp_s0->unk1C38 >= 0) {
+        temp_a0 = temp_s0->unk1C3C;
         if (temp_a0 >= 0) {
             sceKernelSetEventFlag(temp_a0, 0x10U);
             do {
                 func_00049CA8(0x3E8);
-            } while (M2C_FIELD(temp_s0, s32 *, 0x1C3C) >= 0);
+            } while (temp_s0->unk1C3C >= 0);
         }
-        sceKernelDeleteThread(M2C_FIELD(temp_s0, s32 *, 0x1C38));
+        sceKernelDeleteThread(temp_s0->unk1C38);
     }
-    temp_a0_2 = M2C_FIELD(temp_s0, s32 *, 0x1C40);
+    temp_a0_2 = temp_s0->unk1C40;
     if (temp_a0_2 != 0) {
         sceHVSlim_Library_A2F4AC9E(temp_a0_2);
     }
@@ -403,16 +403,16 @@ void func_00003D98(s32 arg0) {
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00003DA4);
 
 s32 func_00003E24(s32 arg0, s32 *arg1, s32 *arg2) {
-    void *sp0;
+    struct Unk_func_00003E24_sp0 *sp0;
     s32 temp_v0;
 
     temp_v0 = func_00006188((s32) &D_00061A2C, arg0, 0, &sp0);
     if (temp_v0 == 0) {
         if (arg1 != NULL) {
-            *arg1 = (s32) M2C_FIELD(sp0, u16 *, 0x14);
+            *arg1 = (s32) sp0->unk14;
         }
         if (arg2 != NULL) {
-            *arg2 = (s32) M2C_FIELD(sp0, u16 *, 0x16);
+            *arg2 = (s32) sp0->unk16;
         }
     }
     return temp_v0;
@@ -695,11 +695,11 @@ s32 func_00004CBC(s32 *arg0) {
 }
 
 void func_00004D04(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00004D04_temp_v0 *temp_v0;
 
     temp_v0 = func_00003D10();
-    if (M2C_FIELD(temp_v0, s32 *, 0x1C70) != arg0) {
-        M2C_FIELD(temp_v0, s32 *, 0x1C70) = arg0;
+    if (temp_v0->unk1C70 != arg0) {
+        temp_v0->unk1C70 = arg0;
     }
 }
 
@@ -784,12 +784,12 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0000621
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00006250);
 
 s32 func_000062A4(void) {
-    void *temp_v0;
+    struct Unk_func_000062A4_temp_v0 *temp_v0;
 
     temp_v0 = func_00005EB0();
     if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s16 *, 0x1A) = 1;
-        M2C_FIELD(temp_v0, s32 *, 0x1C) = 0;
+        temp_v0->unk1A = 1;
+        temp_v0->unk1C = 0;
     }
     return 0;
 }
@@ -813,12 +813,12 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000063B
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000064E4);
 
 void func_000066C0(void *arg0) {
-    void *temp_s0;
+    struct Unk_func_000066C0_temp_s0 *temp_s0;
 
     temp_s0 = arg0 + 4;
     sceFontDoneLib(M2C_FIELD(arg0, s32 *, 4));
-    func_00011DC0(M2C_FIELD(temp_s0, s32 *, 0x14D0));
-    func_0001275C(M2C_FIELD(temp_s0, s32 *, 0x14D4));
+    func_00011DC0(temp_s0->unk14D0);
+    func_0001275C(temp_s0->unk14D4);
 }
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000066FC);
@@ -854,9 +854,9 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00007AD
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00007C48);
 
 void func_00007F3C(s32 arg0, s32 *arg1) {
-    void *sp0;
+    struct Unk_func_00007F3C_sp0 *sp0;
     if (func_00006188(arg0, *arg1, 0, &sp0) == 0) {
-        sceHVSlim_Library_D611E938(M2C_FIELD(sp0, void **, 8), 0, ((u16) M2C_FIELD(sp0, u16 *, 6) >> 1) * M2C_FIELD(sp0, u16 *, 4));
+        sceHVSlim_Library_D611E938(sp0->unk8, 0, ((u16) sp0->unk6 >> 1) * sp0->unk4);
     }
 }
 
@@ -1014,13 +1014,13 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0000914
 s32 func_0000916C(void) {
     s32 temp_v0;
     s32 var_v0;
-    void *temp_v0_2;
+    struct Unk_func_0000916C_temp_v0_2 *temp_v0_2;
 
     temp_v0 = sceHVSlim_Library_D39BDE45(0x30);
     var_v0 = 0;
     if (temp_v0 != 0) {
         temp_v0_2 = sceHVSlim_Library_896E55F6(temp_v0);
-        M2C_FIELD(temp_v0_2, s32 *, 0x24) = 2;
+        temp_v0_2->unk24 = 2;
         func_00009148(temp_v0_2);
         sceHVSlim_Library_B29BE9CE(temp_v0);
         var_v0 = temp_v0;
@@ -1171,15 +1171,15 @@ void func_00009FA4(s32 arg0) {
 
 void func_0000A020(s32 arg0) {
     s32 temp_v0_2;
-    void *temp_v0;
+    struct Unk_func_0000A020_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
     func_00009E5C(temp_v0);
-    temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x54);
+    temp_v0_2 = temp_v0->unk54;
     if (temp_v0_2 != 0) {
         sceHVSlim_Library_0D525122(temp_v0_2);
     }
-    func_0000EC10(M2C_FIELD(temp_v0, s32 *, 0x58));
+    func_0000EC10(temp_v0->unk58);
     sceHVSlim_Library_B29BE9CE(arg0);
     sceHVSlim_Library_880239D0(arg0);
 }
@@ -1278,8 +1278,8 @@ s32 func_0000B384(s32 arg0) {
     s32 temp_v0;
     s32 temp_v0_3;
     s32 var_v0;
-    void *temp_s0;
-    void *temp_v0_2;
+    struct Unk_func_0000B384_temp_s0 *temp_s0;
+    struct Unk_func_0000B384_temp_v0_2 *temp_v0_2;
 
     temp_v0 = func_0000916C();
     var_v0 = 0;
@@ -1287,9 +1287,9 @@ s32 func_0000B384(s32 arg0) {
         temp_s0 = sceHVSlim_Library_896E55F6(temp_v0);
         temp_v0_2 = sceHVSlim_Library_896E55F6(arg0);
         sceHVSlim_Library_1A02495A((s32) temp_s0, temp_v0_2, 0x30);
-        temp_v0_3 = sceHVSlim_Library_8C9ECF26(M2C_FIELD(temp_v0_2, s32 *, 4));
-        M2C_FIELD(temp_s0, s32 *, 4) = temp_v0_3;
-        M2C_FIELD(temp_s0, s32 *, 0) = 0;
+        temp_v0_3 = sceHVSlim_Library_8C9ECF26(temp_v0_2->unk4);
+        temp_s0->unk4 = temp_v0_3;
+        temp_s0->unk0 = 0;
         if (temp_v0_3 == 0) {
             sceHVSlim_Library_B29BE9CE(temp_v0);
             sceHVSlim_Library_B29BE9CE(arg0);
@@ -2078,25 +2078,25 @@ void func_00012EC0(s32 arg0) {
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 temp_v0_4;
-    void *temp_v0;
+    struct Unk_func_00012EC0_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x98);
+        temp_v0_2 = temp_v0->unk98;
         if (temp_v0_2 != 0) {
             sceHVSlim_Library_0D525122(temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0x98) = 0;
+            temp_v0->unk98 = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xE4);
+        temp_v0_3 = temp_v0->unkE4;
         if (temp_v0_3 != 0) {
             func_0000AE28(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xE4) = 0;
+            temp_v0->unkE4 = 0;
         }
-        temp_v0_4 = M2C_FIELD(temp_v0, s32 *, 0xE0);
+        temp_v0_4 = temp_v0->unkE0;
         if (temp_v0_4 != 0) {
             func_0000AE44(temp_s2, temp_v0_4);
-            M2C_FIELD(temp_v0, s32 *, 0xE0) = 0;
+            temp_v0->unkE0 = 0;
         }
         func_0001EBE0(temp_v0);
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -2105,12 +2105,12 @@ void func_00012EC0(s32 arg0) {
 }
 
 void func_00012F74(s32 arg0, struct Unk_func_00012F74_1 *arg1) {
-    void *temp_v0;
+    struct Unk_func_00012F74_temp_v0 *temp_v0;
 
     if ((arg0 != 0) & (arg1 != NULL)) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0) + 0x18;
-        M2C_FIELD(temp_v0, u8 *, 0x24) = (u8) arg1->unkAE;
-        M2C_FIELD(temp_v0, u16 *, 0x28) = (u16) arg1->unkAC;
+        temp_v0->unk24 = (u8) arg1->unkAE;
+        temp_v0->unk28 = (u16) arg1->unkAC;
         sceHVSlim_Library_B29BE9CE(arg0);
     }
 }
@@ -2196,20 +2196,20 @@ s32 func_00013874(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_00013874_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xE4);
+        temp_v0_2 = temp_v0->unkE4;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xE4) = 0;
+            temp_v0->unkE4 = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xE0);
+        temp_v0_3 = temp_v0->unkE0;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xE0) = 0;
+            temp_v0->unkE0 = 0;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -2231,24 +2231,24 @@ void func_00013AF8(s32 arg0) {
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 temp_v0_4;
-    void *temp_v0;
+    struct Unk_func_00013AF8_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xA0);
+        temp_v0_2 = temp_v0->unkA0;
         if (temp_v0_2 != 0) {
             sceHVSlim_Library_0D525122(temp_v0_2);
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xD8);
+        temp_v0_3 = temp_v0->unkD8;
         if (temp_v0_3 != 0) {
             func_0000AE28(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xD8) = 0;
+            temp_v0->unkD8 = 0;
         }
-        temp_v0_4 = M2C_FIELD(temp_v0, s32 *, 0xD4);
+        temp_v0_4 = temp_v0->unkD4;
         if (temp_v0_4 != 0) {
             func_0000AE44(temp_s2, temp_v0_4);
-            M2C_FIELD(temp_v0, s32 *, 0xD4) = 0;
+            temp_v0->unkD4 = 0;
         }
         func_0001EC68(temp_v0);
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -2261,11 +2261,11 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00013BA
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00013C34);
 
 void func_00013D90(s32 arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_00013D90_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    M2C_FIELD(temp_v0, s32 *, 0xB0) = arg1;
-    M2C_FIELD(temp_v0, s32 *, 0xB4) = arg2;
+    temp_v0->unkB0 = arg1;
+    temp_v0->unkB4 = arg2;
     func_00013C34(temp_v0);
     sceHVSlim_Library_B29BE9CE(arg0);
 }
@@ -2280,12 +2280,12 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00013E2
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00013E8C);
 
 void func_00013F3C(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_00013F3C_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if (M2C_FIELD(temp_v0, s32 *, 0xC4) != arg1) {
-            M2C_FIELD(temp_v0, s32 *, 0xC4) = arg1;
+        if (temp_v0->unkC4 != arg1) {
+            temp_v0->unkC4 = arg1;
             func_00013C34(temp_v0);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -2293,11 +2293,11 @@ void func_00013F3C(s32 arg0, s32 arg1) {
 }
 
 s32 func_00013F94(s32 arg0, struct Unk_func_00013F94_1 *arg1) {
-    void *temp_v0;
+    struct Unk_func_00013F94_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if ((M2C_FIELD(temp_v0, s32 *, 0x98) != 0) && (M2C_FIELD(temp_v0, s32 *, 0xC4) == 0) && (arg1->unk10 & 0x400)) {
-        func_000108B4(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 0x80), 0, 0);
+    if ((temp_v0->unk98 != 0) && (temp_v0->unkC4 == 0) && (arg1->unk10 & 0x400)) {
+        func_000108B4(temp_v0->unk0, temp_v0->unk80, 0, 0);
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -2317,20 +2317,20 @@ s32 func_00014280(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_00014280_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xD8);
+        temp_v0_2 = temp_v0->unkD8;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xD8) = 0;
+            temp_v0->unkD8 = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xD4);
+        temp_v0_3 = temp_v0->unkD4;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xD4) = 0;
+            temp_v0->unkD4 = 0;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -2343,20 +2343,20 @@ void func_00014474(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_00014474_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xBC);
+        temp_v0_2 = temp_v0->unkBC;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xBC) = 0;
+            temp_v0->unkBC = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xB8);
+        temp_v0_3 = temp_v0->unkB8;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xB8) = 0;
+            temp_v0->unkB8 = 0;
         }
         func_0001EBE0(temp_v0);
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -2367,13 +2367,13 @@ void func_00014474(s32 arg0) {
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00014510);
 
 void func_0001463C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    void *temp_v0;
+    struct Unk_func_0001463C_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    M2C_FIELD(temp_v0, s32 *, 0x98) = arg1;
-    M2C_FIELD(temp_v0, s32 *, 0x9C) = arg2;
-    M2C_FIELD(temp_v0, s32 *, 0xA0) = arg3;
-    M2C_FIELD(temp_v0, s32 *, 0xA4) = arg4;
+    temp_v0->unk98 = arg1;
+    temp_v0->unk9C = arg2;
+    temp_v0->unkA0 = arg3;
+    temp_v0->unkA4 = arg4;
     func_00014510((s32) temp_v0);
     sceHVSlim_Library_B29BE9CE(arg0);
 }
@@ -2392,20 +2392,20 @@ s32 func_00014924(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_00014924_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xBC);
+        temp_v0_2 = temp_v0->unkBC;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xBC) = 0;
+            temp_v0->unkBC = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xB8);
+        temp_v0_3 = temp_v0->unkB8;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xB8) = 0;
+            temp_v0->unkB8 = 0;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -2437,24 +2437,24 @@ void func_00014DA8(s32 arg0) {
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 temp_v0_4;
-    void *temp_v0;
+    struct Unk_func_00014DA8_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xA4);
+        temp_v0_2 = temp_v0->unkA4;
         if (temp_v0_2 != 0) {
             sceHVSlim_Library_0D525122(temp_v0_2);
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0x10C);
+        temp_v0_3 = temp_v0->unk10C;
         if (temp_v0_3 != 0) {
             func_0000AE28(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0x10C) = 0;
+            temp_v0->unk10C = 0;
         }
-        temp_v0_4 = M2C_FIELD(temp_v0, s32 *, 0x108);
+        temp_v0_4 = temp_v0->unk108;
         if (temp_v0_4 != 0) {
             func_0000AE44(temp_s2, temp_v0_4);
-            M2C_FIELD(temp_v0, s32 *, 0x108) = 0;
+            temp_v0->unk108 = 0;
         }
         func_0001EC68(temp_v0);
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -2489,12 +2489,12 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001542
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001549C);
 
 void func_0001550C(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_0001550C_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if (M2C_FIELD(temp_v0, s32 *, 0xBC) != arg1) {
-            M2C_FIELD(temp_v0, s32 *, 0xBC) = arg1;
+        if (temp_v0->unkBC != arg1) {
+            temp_v0->unkBC = arg1;
             func_00014E58(temp_v0, 3);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -2503,14 +2503,14 @@ void func_0001550C(s32 arg0, s32 arg1) {
 
 s32 func_00015568(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_s2;
-    void *temp_v0;
+    struct Unk_func_00015568_temp_v0 *temp_v0;
 
     var_s2 = 0;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        var_s2 = M2C_FIELD(temp_v0, s32 *, 0xE4);
-        M2C_FIELD(temp_v0, s32 *, 0xE8) = arg2;
-        M2C_FIELD(temp_v0, s32 *, 0xE4) = arg1;
+        var_s2 = temp_v0->unkE4;
+        temp_v0->unkE8 = arg2;
+        temp_v0->unkE4 = arg1;
         sceHVSlim_Library_B29BE9CE(arg0);
     }
     return var_s2;
@@ -2518,14 +2518,14 @@ s32 func_00015568(s32 arg0, s32 arg1, s32 arg2) {
 
 s32 func_000155D0(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_s2;
-    void *temp_v0;
+    struct Unk_func_000155D0_temp_v0 *temp_v0;
 
     var_s2 = 0;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        var_s2 = M2C_FIELD(temp_v0, s32 *, 0xC8);
-        M2C_FIELD(temp_v0, s32 *, 0xCC) = arg2;
-        M2C_FIELD(temp_v0, s32 *, 0xC8) = arg1;
+        var_s2 = temp_v0->unkC8;
+        temp_v0->unkCC = arg2;
+        temp_v0->unkC8 = arg1;
         sceHVSlim_Library_B29BE9CE(arg0);
     }
     return var_s2;
@@ -2533,14 +2533,14 @@ s32 func_000155D0(s32 arg0, s32 arg1, s32 arg2) {
 
 s32 func_00015638(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_s2;
-    void *temp_v0;
+    struct Unk_func_00015638_temp_v0 *temp_v0;
 
     var_s2 = 0;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        var_s2 = M2C_FIELD(temp_v0, s32 *, 0xEC);
-        M2C_FIELD(temp_v0, s32 *, 0xF0) = arg2;
-        M2C_FIELD(temp_v0, s32 *, 0xEC) = arg1;
+        var_s2 = temp_v0->unkEC;
+        temp_v0->unkF0 = arg2;
+        temp_v0->unkEC = arg1;
         sceHVSlim_Library_B29BE9CE(arg0);
     }
     return var_s2;
@@ -2548,14 +2548,14 @@ s32 func_00015638(s32 arg0, s32 arg1, s32 arg2) {
 
 s32 func_000156A0(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_s2;
-    void *temp_v0;
+    struct Unk_func_000156A0_temp_v0 *temp_v0;
 
     var_s2 = 0;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        var_s2 = M2C_FIELD(temp_v0, s32 *, 0xF4);
-        M2C_FIELD(temp_v0, s32 *, 0xF8) = arg2;
-        M2C_FIELD(temp_v0, s32 *, 0xF4) = arg1;
+        var_s2 = temp_v0->unkF4;
+        temp_v0->unkF8 = arg2;
+        temp_v0->unkF4 = arg1;
         sceHVSlim_Library_B29BE9CE(arg0);
     }
     return var_s2;
@@ -2575,20 +2575,20 @@ s32 func_00015D6C(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_00015D6C_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x10C);
+        temp_v0_2 = temp_v0->unk10C;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0x10C) = 0;
+            temp_v0->unk10C = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0x108);
+        temp_v0_3 = temp_v0->unk108;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0x108) = 0;
+            temp_v0->unk108 = 0;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -2732,12 +2732,12 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000170D
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000171F0);
 
 void func_00017330(s32 arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_00017330_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        M2C_FIELD(temp_v0, s32 *, 0xE4) = arg1;
-        M2C_FIELD(temp_v0, s32 *, 0xE0) = arg2;
+        temp_v0->unkE4 = arg1;
+        temp_v0->unkE0 = arg2;
         sceHVSlim_Library_B29BE9CE(arg0);
     }
 }
@@ -2746,12 +2746,12 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001738
 
 s32 func_000174AC(s32 arg0) {
     s32 var_s1;
-    void *temp_v0;
+    struct Unk_func_000174AC_temp_v0 *temp_v0;
 
     var_s1 = 0;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        var_s1 = M2C_FIELD(temp_v0, s32 *, 0xF0) != M2C_FIELD(temp_v0, s32 *, 0xC0);
+        var_s1 = temp_v0->unkF0 != temp_v0->unkC0;
         sceHVSlim_Library_B29BE9CE(arg0);
     }
     return var_s1;
@@ -2782,13 +2782,13 @@ s32 func_000181B0(s32 arg0) {
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 var_s0;
-    void *temp_v0;
+    struct Unk_func_000181B0_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v0_2 = func_000180BC(arg0, 1, M2C_FIELD(temp_v0, s32 *, 0xCC));
+    temp_v0_2 = func_000180BC(arg0, 1, temp_v0->unkCC);
     var_s0 = temp_v0_2;
     if (temp_v0_2 == 0) {
-        temp_v0_3 = func_000180BC(arg0, 0, M2C_FIELD(temp_v0, s32 *, 0xCC));
+        temp_v0_3 = func_000180BC(arg0, 0, temp_v0->unkCC);
         var_s0 = temp_v0_3;
         if (temp_v0_3 == 0) {
             sceHVSlim_Library_B29BE9CE(arg0);
@@ -2847,11 +2847,11 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000185A
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000185C0);
 
 void func_0001865C(s32 arg0, s32 *arg1, s32 *arg2) {
-    void *temp_v0;
+    struct Unk_func_0001865C_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    *arg1 = M2C_FIELD(temp_v0, s32 *, 0x90);
-    *arg2 = M2C_FIELD(temp_v0, s32 *, 0x94);
+    *arg1 = temp_v0->unk90;
+    *arg2 = temp_v0->unk94;
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
@@ -2959,13 +2959,13 @@ void func_0001A4C0(s32 arg0, s32 arg1) {
 
 void func_0001A504(s32 arg0, s32 arg1) {
     s32 var_s2;
-    void *temp_v0;
+    struct Unk_func_0001A504_temp_v0 *temp_v0;
 
     var_s2 = 0;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if (M2C_FIELD(temp_v0, s32 *, 0x104) != arg1) {
-            M2C_FIELD(temp_v0, s32 *, 0x104) = arg1;
+        if (temp_v0->unk104 != arg1) {
+            temp_v0->unk104 = arg1;
             var_s2 = 1;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -3027,20 +3027,20 @@ void func_0001BF98(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_0001BF98_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xDC);
+        temp_v0_2 = temp_v0->unkDC;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xDC) = 0;
+            temp_v0->unkDC = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xD8);
+        temp_v0_3 = temp_v0->unkD8;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xD8) = 0;
+            temp_v0->unkD8 = 0;
         }
         func_0001EBE0(temp_v0);
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -3058,12 +3058,12 @@ void func_0001C0D4(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001C128);
 
 void func_0001C1EC(s32 arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_0001C1EC_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        M2C_FIELD(temp_v0, s32 *, 0xC4) = arg1;
-        M2C_FIELD(temp_v0, s32 *, 0xC8) = arg2;
+        temp_v0->unkC4 = arg1;
+        temp_v0->unkC8 = arg2;
         sceHVSlim_Library_B29BE9CE(arg0);
     }
 }
@@ -3094,11 +3094,11 @@ s32 func_0001C590(void) {
 }
 
 void func_0001C598(s32 arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_0001C598_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    M2C_FIELD(temp_v0, s32 *, 0xE0) = arg1;
-    M2C_FIELD(temp_v0, s32 *, 0xE4) = arg2;
+    temp_v0->unkE0 = arg1;
+    temp_v0->unkE4 = arg2;
     sceHVSlim_Library_B29BE9CE(arg0);
     func_00004D04(1);
 }
@@ -3246,20 +3246,20 @@ s32 func_0001CA64(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_0001CA64_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xDC);
+        temp_v0_2 = temp_v0->unkDC;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xDC) = 0;
+            temp_v0->unkDC = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xD8);
+        temp_v0_3 = temp_v0->unkD8;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xD8) = 0;
+            temp_v0->unkD8 = 0;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -3280,20 +3280,20 @@ void func_0001CCE0(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_0001CCE0_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xC8);
+        temp_v0_2 = temp_v0->unkC8;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xC8) = 0;
+            temp_v0->unkC8 = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xC4);
+        temp_v0_3 = temp_v0->unkC4;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xC4) = 0;
+            temp_v0->unkC4 = 0;
         }
         func_0001EBE0(temp_v0);
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -3302,23 +3302,23 @@ void func_0001CCE0(s32 arg0) {
 }
 
 void func_0001CD7C(s32 arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_0001CD7C_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    M2C_FIELD(temp_v0, s32 *, 0x9C) = arg1;
-    M2C_FIELD(temp_v0, s32 *, 0xA0) = arg2;
+    temp_v0->unk9C = arg1;
+    temp_v0->unkA0 = arg2;
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001CDC8);
 
 void func_0001CE38(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_0001CE38_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        M2C_FIELD(temp_v0, s32 *, 0xAC) = arg1;
-        M2C_FIELD(temp_v0, s32 *, 0xB0) = 1;
+        temp_v0->unkAC = arg1;
+        temp_v0->unkB0 = 1;
         sceHVSlim_Library_B29BE9CE(arg0);
     }
 }
@@ -3343,20 +3343,20 @@ s32 func_0001D274(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_0001D274_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xC8);
+        temp_v0_2 = temp_v0->unkC8;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xC8) = 0;
+            temp_v0->unkC8 = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xC4);
+        temp_v0_3 = temp_v0->unkC4;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xC4) = 0;
+            temp_v0->unkC4 = 0;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -3364,10 +3364,10 @@ s32 func_0001D274(s32 arg0) {
 }
 
 void func_0001D304(s32 arg0) {
-    void *temp_s0;
+    struct Unk_func_0001D304_temp_s0 *temp_s0;
 
     temp_s0 = sceHVSlim_Library_896E55F6(arg0);
-    M2C_FIELD(temp_s0, s32 *, 0xCC) = func_0004C0DC();
+    temp_s0->unkCC = func_0004C0DC();
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
@@ -3389,20 +3389,20 @@ void func_0001D52C(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_0001D52C_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xC4);
+        temp_v0_2 = temp_v0->unkC4;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xC4) = 0;
+            temp_v0->unkC4 = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xC0);
+        temp_v0_3 = temp_v0->unkC0;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xC0) = 0;
+            temp_v0->unkC0 = 0;
         }
         func_0001EC68(temp_v0);
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -3432,12 +3432,12 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001D83
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001D898);
 
 void func_0001D9AC(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_0001D9AC_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if (M2C_FIELD(temp_v0, s32 *, 0xB0) != arg1) {
-            M2C_FIELD(temp_v0, s32 *, 0xB0) = arg1;
+        if (temp_v0->unkB0 != arg1) {
+            temp_v0->unkB0 = arg1;
             func_0001D5C8(temp_v0, 3);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -3451,11 +3451,11 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001DB0
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001DB78);
 
 s32 func_0001DCA4(s32 arg0, struct Unk_func_0001DCA4_1 *arg1) {
-    void *temp_v0;
+    struct Unk_func_0001DCA4_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if ((M2C_FIELD(temp_v0, s32 *, 0x98) != 0) && (M2C_FIELD(temp_v0, s32 *, 0xB0) == 0) && (arg1->unk10 & 0x400)) {
-        M2C_FIELD(temp_v0, s32 *, 0xA0) = (s32) (M2C_FIELD(temp_v0, s32 *, 0xA0) == 0);
+    if ((temp_v0->unk98 != 0) && (temp_v0->unkB0 == 0) && (arg1->unk10 & 0x400)) {
+        temp_v0->unkA0 = (s32) (temp_v0->unkA0 == 0);
         func_0001D898(arg0);
     }
     sceHVSlim_Library_B29BE9CE(arg0);
@@ -3466,20 +3466,20 @@ s32 func_0001DD1C(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_0001DD1C_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xC4);
+        temp_v0_2 = temp_v0->unkC4;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xC4) = 0;
+            temp_v0->unkC4 = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xC0);
+        temp_v0_3 = temp_v0->unkC0;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xC0) = 0;
+            temp_v0->unkC0 = 0;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -3533,20 +3533,20 @@ void func_0001E3E0(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_0001E3E0_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xBC);
+        temp_v0_2 = temp_v0->unkBC;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xBC) = 0;
+            temp_v0->unkBC = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xB8);
+        temp_v0_3 = temp_v0->unkB8;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xB8) = 0;
+            temp_v0->unkB8 = 0;
         }
         func_0001EBE0(temp_v0);
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -3558,18 +3558,18 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001E47
 
 void func_0001E520(s32 arg0, s32 arg1) {
     s32 temp_s2;
-    void *temp_v0;
+    struct Unk_func_0001E520_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if (M2C_FIELD(temp_v0, s32 *, 0xA8) != arg1) {
-            M2C_FIELD(temp_v0, s32 *, 0xA8) = arg1;
-            if (M2C_FIELD(temp_v0, s32 *, 0xBC) != 0) {
-                func_0000BA58(temp_s2, M2C_FIELD(temp_v0, s32 *, 0xB8), 0);
-                func_0001E6B4(temp_v0, M2C_FIELD(temp_v0, s32 *, 0xBC));
+        if (temp_v0->unkA8 != arg1) {
+            temp_v0->unkA8 = arg1;
+            if (temp_v0->unkBC != 0) {
+                func_0000BA58(temp_s2, temp_v0->unkB8, 0);
+                func_0001E6B4(temp_v0, temp_v0->unkBC);
             }
-            func_0001E6B4(temp_v0, M2C_FIELD(temp_v0, s32 *, 0xB8));
+            func_0001E6B4(temp_v0, temp_v0->unkB8);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -3597,20 +3597,20 @@ s32 func_0001EA8C(s32 arg0) {
     s32 temp_s2;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_0001EA8C_temp_v0 *temp_v0;
 
     temp_s2 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xBC);
+        temp_v0_2 = temp_v0->unkBC;
         if (temp_v0_2 != 0) {
             func_0000AE28(temp_s2, temp_v0_2);
-            M2C_FIELD(temp_v0, s32 *, 0xBC) = 0;
+            temp_v0->unkBC = 0;
         }
-        temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xB8);
+        temp_v0_3 = temp_v0->unkB8;
         if (temp_v0_3 != 0) {
             func_0000AE44(temp_s2, temp_v0_3);
-            M2C_FIELD(temp_v0, s32 *, 0xB8) = 0;
+            temp_v0->unkB8 = 0;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -3679,11 +3679,11 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001F47
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001F9D4);
 
 s32 func_0001FACC(s32 arg0, M2C_UNK arg1) {
-    void *temp_v0;
+    struct Unk_func_0001FACC_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    func_0001F9D4(arg0, 1, arg1, M2C_FIELD(temp_v0, s32 *, 0xC0));
-    func_0001F9D4(arg0, 0, arg1, M2C_FIELD(temp_v0, s32 *, 0xC0));
+    func_0001F9D4(arg0, 1, arg1, temp_v0->unkC0);
+    func_0001F9D4(arg0, 0, arg1, temp_v0->unkC0);
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
 }
@@ -3758,20 +3758,20 @@ s32 func_0001FF04(s32 arg0) {
     s32 temp_v0_3;
     s32 temp_v0_4;
     s32 var_s2;
-    void *temp_v0;
+    struct Unk_func_0001FF04_temp_v0 *temp_v0;
 
     var_s2 = -1;
     temp_s1 = func_00003D10() + 0x14DC;
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x118);
+    temp_v0_2 = temp_v0->unk118;
     if (temp_v0_2 != 0) {
         var_s2 = func_000099D0(temp_s1, temp_v0_2);
     }
-    temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xF0);
+    temp_v0_3 = temp_v0->unkF0;
     if (temp_v0_3 != 0) {
         var_s2 = func_000099D0(temp_s1, temp_v0_3);
     }
-    temp_v0_4 = M2C_FIELD(temp_v0, s32 *, 0x104);
+    temp_v0_4 = temp_v0->unk104;
     if (temp_v0_4 != 0) {
         var_s2 = func_000099D0(temp_s1, temp_v0_4);
     }
@@ -3784,11 +3784,11 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0001FFB
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00020090);
 
 void func_000200F4(s32 arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_000200F4_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    M2C_FIELD(temp_v0, s32 *, 0xD8) = arg1;
-    M2C_FIELD(temp_v0, s32 *, 0xDC) = arg2;
+    temp_v0->unkD8 = arg1;
+    temp_v0->unkDC = arg2;
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
@@ -3844,10 +3844,10 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0002109
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00021188);
 
 void func_0002128C(s32 arg0) {
-    void *temp_s0;
+    struct Unk_func_0002128C_temp_s0 *temp_s0;
 
     temp_s0 = sceHVSlim_Library_896E55F6(arg0);
-    M2C_FIELD(temp_s0, s32 *, 0x120) = func_0004C0DC();
+    temp_s0->unk120 = func_0004C0DC();
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
@@ -3883,11 +3883,11 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000215B
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000217D0);
 
 void func_000218F0(s32 arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_000218F0_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    M2C_FIELD(temp_v0, s32 *, 0xB4) = arg1;
-    M2C_FIELD(temp_v0, s32 *, 0xB8) = arg2;
+    temp_v0->unkB4 = arg1;
+    temp_v0->unkB8 = arg2;
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
@@ -3931,11 +3931,11 @@ s32 func_00021C44(void) {
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00021C64);
 
 void func_00021CC8(s32 arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_00021CC8_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    M2C_FIELD(temp_v0, s32 *, 0xB4) = arg1;
-    M2C_FIELD(temp_v0, s32 *, 0xB8) = arg2;
+    temp_v0->unkB4 = arg1;
+    temp_v0->unkB8 = arg2;
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
@@ -4359,14 +4359,14 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00024CA
 
 void func_00024ECC(s32 arg0) {
     M2C_UNK (*temp_v0_2)(s32);
-    void *temp_v0;
+    struct Unk_func_00024ECC_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
     func_0002481C(temp_v0);
-    func_00010564(func_00003D10() + 0x14DC, M2C_FIELD(temp_v0, s32 *, 0));
+    func_00010564(func_00003D10() + 0x14DC, temp_v0->unk0);
     temp_v0_2 = M2C_FIELD(temp_v0, M2C_UNK (**)(s32), 0x27C);
     if (temp_v0_2 != NULL) {
-        temp_v0_2(M2C_FIELD(temp_v0, s32 *, 0x280));
+        temp_v0_2(temp_v0->unk280);
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     sceHVSlim_Library_880239D0(arg0);
@@ -4472,15 +4472,15 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00025AC
 
 s32 func_00025BD8(s32 arg0, struct Unk_func_00025BD8_1 *arg1) {
     void *temp_s1;
-    void *temp_v0;
+    struct Unk_func_00025BD8_temp_v0 *temp_v0;
 
     if (arg1->unk10 == 4) {
         if (arg1->unk14 == 1) {
             temp_s1 = func_00003D10();
             temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-            M2C_FIELD(temp_v0, s32 *, 0x25C) = func_0003E4A0(M2C_FIELD(temp_v0, s32 *, 0), 3, 0);
-            func_00010A68(temp_s1 + 0x14DC, M2C_FIELD(temp_v0, s32 *, 0));
-            M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
+            temp_v0->unk25C = func_0003E4A0(temp_v0->unk0, 3, 0);
+            func_00010A68(temp_s1 + 0x14DC, temp_v0->unk0);
+            temp_v0->unk274 = 0x32;
             sceHVSlim_Library_B29BE9CE(arg0);
             sceHttpFlushAuthList();
             sceHttp_DD6E7857();
@@ -4491,15 +4491,15 @@ s32 func_00025BD8(s32 arg0, struct Unk_func_00025BD8_1 *arg1) {
 
 s32 func_00025C84(s32 arg0, struct Unk_func_00025C84_1 *arg1) {
     void *temp_s1;
-    void *temp_v0;
+    struct Unk_func_00025C84_temp_v0 *temp_v0;
 
     if (arg1->unk10 == 4) {
         if (arg1->unk14 == 1) {
             temp_s1 = func_00003D10();
             temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-            M2C_FIELD(temp_v0, s32 *, 0x25C) = func_0003E4A0(M2C_FIELD(temp_v0, s32 *, 0), 3, 0);
-            func_00010A68(temp_s1 + 0x14DC, M2C_FIELD(temp_v0, s32 *, 0));
-            M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
+            temp_v0->unk25C = func_0003E4A0(temp_v0->unk0, 3, 0);
+            func_00010A68(temp_s1 + 0x14DC, temp_v0->unk0);
+            temp_v0->unk274 = 0x32;
             sceHttp_B0257723();
             sceHVSlim_Library_B29BE9CE(arg0);
         }
@@ -4509,15 +4509,15 @@ s32 func_00025C84(s32 arg0, struct Unk_func_00025C84_1 *arg1) {
 
 s32 func_00025D24(s32 arg0, struct Unk_func_00025D24_1 *arg1) {
     void *temp_s1;
-    void *temp_v0;
+    struct Unk_func_00025D24_temp_v0 *temp_v0;
 
     if (arg1->unk10 == 4) {
         if (arg1->unk14 == 1) {
             temp_s1 = func_00003D10();
             temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-            M2C_FIELD(temp_v0, s32 *, 0x25C) = func_0003E4A0(M2C_FIELD(temp_v0, s32 *, 0), 3, 0);
-            func_00010A68(temp_s1 + 0x14DC, M2C_FIELD(temp_v0, s32 *, 0));
-            M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
+            temp_v0->unk25C = func_0003E4A0(temp_v0->unk0, 3, 0);
+            func_00010A68(temp_s1 + 0x14DC, temp_v0->unk0);
+            temp_v0->unk274 = 0x32;
             sceHVSlim_Library_B29BE9CE(arg0);
             sceHttp_457D221D();
             sceHttpSaveSystemCookie();
@@ -4534,20 +4534,20 @@ s32 func_00026108(void) {
 
 s32 func_00026110(s32 arg0) {
     s32 temp_v0;
-    void *temp_s0;
+    struct Unk_func_00026110_temp_s0 *temp_s0;
     void *temp_s1;
 
     temp_s0 = sceHVSlim_Library_896E55F6(arg0);
     temp_s1 = func_00003D10();
-    if (M2C_FIELD(temp_s0, s32 *, 0x25C) != 0) {
-        temp_v0 = M2C_FIELD(temp_s0, s32 *, 0x274);
+    if (temp_s0->unk25C != 0) {
+        temp_v0 = temp_s0->unk274;
         if (temp_v0 > 0) {
-            M2C_FIELD(temp_s0, s32 *, 0x274) = (s32) (temp_v0 - 1);
+            temp_s0->unk274 = (s32) (temp_v0 - 1);
         } else {
             func_00047C48((s32) &func_00023838);
-            func_0003E480(M2C_FIELD(temp_s0, s32 *, 0x25C));
-            func_00010A88((s32) (temp_s1 + 0x14DC), M2C_FIELD(temp_s0, s32 *, 0));
-            M2C_FIELD(temp_s0, s32 *, 0x25C) = 0;
+            func_0003E480(temp_s0->unk25C);
+            func_00010A88((s32) (temp_s1 + 0x14DC), temp_s0->unk0);
+            temp_s0->unk25C = 0;
         }
     }
     sceHVSlim_Library_B29BE9CE(arg0);
@@ -4597,13 +4597,13 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0002654
 s32 func_000265F8(s32 arg0) {
     s32 var_s1;
     s32 var_v0;
-    void *temp_v0;
+    struct Unk_func_000265F8_temp_v0 *temp_v0;
 
     var_v0 = 0;
     var_s1 = 0;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if (M2C_FIELD(temp_v0, s32 *, 0x284) != 0) {
+        if (temp_v0->unk284 != 0) {
             var_s1 = func_00026414(temp_v0, 0);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -4617,14 +4617,14 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0002665
 s32 func_000266C8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_v0;
     s32 var_v0;
-    void *temp_v0_2;
+    struct Unk_func_000266C8_temp_v0_2 *temp_v0_2;
 
     temp_v0 = func_00024CAC(0, arg0, arg1, arg2, arg3);
     var_v0 = 0;
     if (temp_v0 != 0) {
         temp_v0_2 = sceHVSlim_Library_896E55F6(temp_v0);
-        M2C_FIELD(temp_v0_2, s32 *, 0x278) = 0;
-        func_00010670(func_00003D10() + 0x14DC, M2C_FIELD(temp_v0_2, s32 *, 0));
+        temp_v0_2->unk278 = 0;
+        func_00010670(func_00003D10() + 0x14DC, temp_v0_2->unk0);
         sceHVSlim_Library_B29BE9CE(temp_v0);
         var_v0 = temp_v0;
     }
@@ -4632,12 +4632,12 @@ s32 func_000266C8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 void func_00026748(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00026748_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        func_00015EFC(M2C_FIELD(temp_v0, s32 *, 0xB4));
-        func_000106D0(func_00003D10() + 0x14DC, M2C_FIELD(temp_v0, s32 *, 0));
+        func_00015EFC(temp_v0->unkB4);
+        func_000106D0(func_00003D10() + 0x14DC, temp_v0->unk0);
         sceHVSlim_Library_B29BE9CE(arg0);
     }
 }
@@ -4681,63 +4681,63 @@ void func_00026E84(s32 arg0) {
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 var_s2;
-    void *temp_v0;
+    struct Unk_func_00026E84_temp_v0 *temp_v0;
     void *var_s1;
 
     temp_s1 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_a1 = M2C_FIELD(temp_v0, s32 *, 0xBC);
+        temp_a1 = temp_v0->unkBC;
         if (temp_a1 != 0) {
             func_0000AE28(temp_s1, temp_a1);
-            M2C_FIELD(temp_v0, s32 *, 0xBC) = 0;
+            temp_v0->unkBC = 0;
         }
-        temp_a1_2 = M2C_FIELD(temp_v0, s32 *, 0xC0);
+        temp_a1_2 = temp_v0->unkC0;
         if (temp_a1_2 != 0) {
             func_0000AE28(temp_s1, temp_a1_2);
-            M2C_FIELD(temp_v0, s32 *, 0xC0) = 0;
+            temp_v0->unkC0 = 0;
         }
-        temp_a1_3 = M2C_FIELD(temp_v0, s32 *, 0xC4);
+        temp_a1_3 = temp_v0->unkC4;
         if (temp_a1_3 != 0) {
             func_0000AE28(temp_s1, temp_a1_3);
-            M2C_FIELD(temp_v0, s32 *, 0xC4) = 0;
+            temp_v0->unkC4 = 0;
         }
-        temp_a1_4 = M2C_FIELD(temp_v0, s32 *, 0xB8);
+        temp_a1_4 = temp_v0->unkB8;
         if (temp_a1_4 != 0) {
             func_0000AE44(temp_s1, temp_a1_4);
-            M2C_FIELD(temp_v0, s32 *, 0xB8) = 0;
+            temp_v0->unkB8 = 0;
         }
-        temp_a1_5 = M2C_FIELD(temp_v0, s32 *, 0xCC);
+        temp_a1_5 = temp_v0->unkCC;
         if (temp_a1_5 != 0) {
             func_0000AE28(temp_s1, temp_a1_5);
-            M2C_FIELD(temp_v0, s32 *, 0xCC) = 0;
+            temp_v0->unkCC = 0;
         }
-        temp_a1_6 = M2C_FIELD(temp_v0, s32 *, 0xC8);
+        temp_a1_6 = temp_v0->unkC8;
         if (temp_a1_6 != 0) {
             func_0000AE44(temp_s1, temp_a1_6);
-            M2C_FIELD(temp_v0, s32 *, 0xC8) = 0;
+            temp_v0->unkC8 = 0;
         }
-        temp_a1_7 = M2C_FIELD(temp_v0, s32 *, 0x104);
+        temp_a1_7 = temp_v0->unk104;
         if (temp_a1_7 != 0) {
             func_0000AE28(temp_s1, temp_a1_7);
-            M2C_FIELD(temp_v0, s32 *, 0x104) = 0;
+            temp_v0->unk104 = 0;
         }
-        temp_a1_8 = M2C_FIELD(temp_v0, s32 *, 0x100);
+        temp_a1_8 = temp_v0->unk100;
         if (temp_a1_8 != 0) {
             func_0000AE44(temp_s1, temp_a1_8);
-            M2C_FIELD(temp_v0, s32 *, 0x100) = 0;
+            temp_v0->unk100 = 0;
         }
-        temp_a1_9 = M2C_FIELD(temp_v0, s32 *, 0xB4);
+        temp_a1_9 = temp_v0->unkB4;
         if (temp_a1_9 != 0) {
             func_0000AE28(temp_s1, temp_a1_9);
-            M2C_FIELD(temp_v0, s32 *, 0xB4) = 0;
+            temp_v0->unkB4 = 0;
         }
-        temp_a1_10 = M2C_FIELD(temp_v0, s32 *, 0xB0);
+        temp_a1_10 = temp_v0->unkB0;
         if (temp_a1_10 != 0) {
             func_0000AE44(temp_s1, temp_a1_10);
-            M2C_FIELD(temp_v0, s32 *, 0xB0) = 0;
+            temp_v0->unkB0 = 0;
         }
-        temp_a0 = M2C_FIELD(temp_v0, s32 *, 0x154);
+        temp_a0 = temp_v0->unk154;
         var_s1 = temp_v0;
         if (temp_a0 != 0) {
             func_00026748(temp_a0);
@@ -4755,7 +4755,7 @@ void func_00026E84(s32 arg0) {
                 sceHVSlim_Library_0D525122(temp_v0_3);
             }
         } while (var_s2 >= 0);
-        temp_a0_2 = M2C_FIELD(temp_v0, s32 *, 0x1CC);
+        temp_a0_2 = temp_v0->unk1CC;
         if (temp_a0_2 != 0) {
             sceHVSlim_Library_0D525122(temp_a0_2);
         }
@@ -4782,50 +4782,50 @@ s32 func_000274E0(s32 arg0) {
     s32 temp_a1_7;
     s32 temp_a1_8;
     s32 temp_s1;
-    void *temp_v0;
+    struct Unk_func_000274E0_temp_v0 *temp_v0;
 
     temp_s1 = func_00003D10() + 0x14DC;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_a1 = M2C_FIELD(temp_v0, s32 *, 0xBC);
+        temp_a1 = temp_v0->unkBC;
         if (temp_a1 != 0) {
             func_0000AE28(temp_s1, temp_a1);
-            M2C_FIELD(temp_v0, s32 *, 0xBC) = 0;
+            temp_v0->unkBC = 0;
         }
-        temp_a1_2 = M2C_FIELD(temp_v0, s32 *, 0xC0);
+        temp_a1_2 = temp_v0->unkC0;
         if (temp_a1_2 != 0) {
             func_0000AE28(temp_s1, temp_a1_2);
-            M2C_FIELD(temp_v0, s32 *, 0xC0) = 0;
+            temp_v0->unkC0 = 0;
         }
-        temp_a1_3 = M2C_FIELD(temp_v0, s32 *, 0xC4);
+        temp_a1_3 = temp_v0->unkC4;
         if (temp_a1_3 != 0) {
             func_0000AE28(temp_s1, temp_a1_3);
-            M2C_FIELD(temp_v0, s32 *, 0xC4) = 0;
+            temp_v0->unkC4 = 0;
         }
-        temp_a1_4 = M2C_FIELD(temp_v0, s32 *, 0xB8);
+        temp_a1_4 = temp_v0->unkB8;
         if (temp_a1_4 != 0) {
             func_0000AE44(temp_s1, temp_a1_4);
-            M2C_FIELD(temp_v0, s32 *, 0xB8) = 0;
+            temp_v0->unkB8 = 0;
         }
-        temp_a1_5 = M2C_FIELD(temp_v0, s32 *, 0xCC);
+        temp_a1_5 = temp_v0->unkCC;
         if (temp_a1_5 != 0) {
             func_0000AE28(temp_s1, temp_a1_5);
-            M2C_FIELD(temp_v0, s32 *, 0xCC) = 0;
+            temp_v0->unkCC = 0;
         }
-        temp_a1_6 = M2C_FIELD(temp_v0, s32 *, 0xC8);
+        temp_a1_6 = temp_v0->unkC8;
         if (temp_a1_6 != 0) {
             func_0000AE44(temp_s1, temp_a1_6);
-            M2C_FIELD(temp_v0, s32 *, 0xC8) = 0;
+            temp_v0->unkC8 = 0;
         }
-        temp_a1_7 = M2C_FIELD(temp_v0, s32 *, 0x104);
+        temp_a1_7 = temp_v0->unk104;
         if (temp_a1_7 != 0) {
             func_0000AE28(temp_s1, temp_a1_7);
-            M2C_FIELD(temp_v0, s32 *, 0x104) = 0;
+            temp_v0->unk104 = 0;
         }
-        temp_a1_8 = M2C_FIELD(temp_v0, s32 *, 0x100);
+        temp_a1_8 = temp_v0->unk100;
         if (temp_a1_8 != 0) {
             func_0000AE44(temp_s1, temp_a1_8);
-            M2C_FIELD(temp_v0, s32 *, 0x100) = 0;
+            temp_v0->unk100 = 0;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -4833,40 +4833,40 @@ s32 func_000274E0(s32 arg0) {
 }
 
 void func_000275F0(void **arg0) {
-    void *temp_s0;
+    struct Unk_func_000275F0_temp_s0 *temp_s0;
 
     temp_s0 = *arg0;
     sceHVNetfront_Module_831B4A41();
-    M2C_FIELD(temp_s0, s32 *, 0x1BC) = (s32) (M2C_FIELD(temp_s0, s32 *, 0x1BC) + 1);
+    temp_s0->unk1BC = (s32) (temp_s0->unk1BC + 1);
 }
 
 void func_00027624(void **arg0) {
-    void *temp_v1;
+    struct Unk_func_00027624_temp_v1 *temp_v1;
 
     temp_v1 = *arg0;
-    M2C_FIELD(temp_v1, s32 *, 0x1BC) = (s32) (M2C_FIELD(temp_v1, s32 *, 0x1BC) - 1);
+    temp_v1->unk1BC = (s32) (temp_v1->unk1BC - 1);
     sceHVNetfront_Module_6F1E32E6();
 }
 
 void func_0002764C(void **arg0) {
-    void *temp_s0;
+    struct Unk_func_0002764C_temp_s0 *temp_s0;
 
     temp_s0 = *arg0;
-    if (M2C_FIELD(temp_s0, s32 *, 0x1BC) > 0) {
+    if (temp_s0->unk1BC > 0) {
         do {
             func_00027624(arg0);
-        } while (M2C_FIELD(temp_s0, s32 *, 0x1BC) > 0);
+        } while (temp_s0->unk1BC > 0);
     }
 }
 
 s32 func_00027694(void **arg0, s32 arg1) {
     s32 temp_v0;
     s32 temp_v1;
-    void *temp_v0_2;
+    struct Unk_func_00027694_temp_v0_2 *temp_v0_2;
 
     temp_v0_2 = *arg0;
-    temp_v0 = M2C_FIELD(temp_v0_2, s32 *, 0xD0);
-    temp_v1 = M2C_FIELD(temp_v0_2, s32 *, 0xD4);
+    temp_v0 = temp_v0_2->unkD0;
+    temp_v1 = temp_v0_2->unkD4;
     if (arg1 != 0) {
         return (s32) (temp_v0 + 1) % temp_v1;
     }
@@ -4955,19 +4955,19 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00029E5
 
 void func_0002A3D4(s32 arg0, s32 arg1) {
     s32 temp_v0_2;
-    void *temp_v0;
+    struct Unk_func_0002A3D4_temp_v0 *temp_v0;
 
     M2C_FIELD(func_00003D10(), s32 *, 0x1C20) = 0;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if (M2C_FIELD(temp_v0, s32 *, 0x158) >= 0) {
-            M2C_FIELD(temp_v0, s32 *, 0x158) = 0;
+        if (temp_v0->unk158 >= 0) {
+            temp_v0->unk158 = 0;
         } else if (arg1 != 0) {
-            temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x1CC);
+            temp_v0_2 = temp_v0->unk1CC;
             if (temp_v0_2 != 0) {
                 sceHVSlim_Library_0D525122(temp_v0_2);
             }
-            M2C_FIELD(temp_v0, s32 *, 0x1CC) = sceHVSlim_Library_27D353B1(arg1);
+            temp_v0->unk1CC = sceHVSlim_Library_27D353B1(arg1);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -5020,14 +5020,14 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0002AF3
 s32 func_0002AF8C(s32 arg0) {
     s32 temp_s0;
     s32 var_s2;
-    void *temp_v0;
+    struct Unk_func_0002AF8C_temp_v0 *temp_v0;
 
     var_s2 = 0;
     temp_s0 = M2C_FIELD(func_00003D10(), s32 *, 0x1B3C);
     if ((temp_s0 != 0) & (arg0 != 0)) {
         temp_v0 = sceHVSlim_Library_896E55F6(temp_s0);
-        if (M2C_FIELD(temp_v0, s32 *, 0x1A8) == 0) {
-            M2C_FIELD(temp_v0, s32 *, 0x1A8) = arg0;
+        if (temp_v0->unk1A8 == 0) {
+            temp_v0->unk1A8 = arg0;
             var_s2 = 1;
         }
         sceHVSlim_Library_B29BE9CE(temp_s0);
@@ -5038,11 +5038,11 @@ s32 func_0002AF8C(s32 arg0) {
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0002B008);
 
 s32 func_0002B9EC(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0002B9EC_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xB4) == 3) {
-        M2C_FIELD(temp_v0, s32 *, 0xB4) = 4;
+    if (temp_v0->unkB4 == 3) {
+        temp_v0->unkB4 = 4;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     func_00003D4C(1);
@@ -5051,10 +5051,10 @@ s32 func_0002B9EC(s32 arg0) {
 
 void func_0002BA40(s32 arg0) {
     s32 temp_v1;
-    void *temp_v0;
+    struct Unk_func_0002BA40_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v1 = M2C_FIELD(temp_v0, s32 *, 0xB4);
+    temp_v1 = temp_v0->unkB4;
     if ((temp_v1 != 4) & (temp_v1 != 0)) {
         sceHVSlim_Library_B29BE9CE(arg0);
         return;
@@ -5075,21 +5075,21 @@ void func_0002BAAC(s32 arg0) {
     s32 temp_v1_2;
     s32 var_s2;
     s32 var_s2_2;
-    void *temp_v0;
+    struct Unk_func_0002BAAC_temp_v0 *temp_v0;
     void *var_s0;
     void *var_s0_2;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_a0 = M2C_FIELD(temp_v0, s32 *, 4);
+        temp_a0 = temp_v0->unk4;
         if (temp_a0 != 0) {
             sceHVSlim_Library_0D525122(temp_a0);
         }
-        temp_a0_2 = M2C_FIELD(temp_v0, s32 *, 8);
+        temp_a0_2 = temp_v0->unk8;
         if (temp_a0_2 != 0) {
             sceHVSlim_Library_0D525122(temp_a0_2);
         }
-        temp_v1 = M2C_FIELD(temp_v0, s32 *, 0x14);
+        temp_v1 = temp_v0->unk14;
         if ((u32) (temp_v1 - 1) < 5U) {
             var_s2 = 0;
             if (temp_v1 > 0) {
@@ -5106,10 +5106,10 @@ void func_0002BAAC(s32 arg0) {
                         sceHVSlim_Library_880239D0(M2C_FIELD(var_s0, s32 *, 0x1C));
                     }
                     var_s0 += 4;
-                } while (var_s2 < M2C_FIELD(temp_v0, s32 *, 0x14));
+                } while (var_s2 < temp_v0->unk14);
             }
         }
-        temp_v1_2 = M2C_FIELD(temp_v0, s32 *, 0x30);
+        temp_v1_2 = temp_v0->unk30;
         if ((u32) (temp_v1_2 - 1) < 3U) {
             var_s2_2 = 0;
             if (temp_v1_2 > 0) {
@@ -5126,7 +5126,7 @@ void func_0002BAAC(s32 arg0) {
                         sceHVSlim_Library_880239D0(M2C_FIELD(var_s0_2, s32 *, 0x34));
                     }
                     var_s0_2 += 4;
-                } while (var_s2_2 < M2C_FIELD(temp_v0, s32 *, 0x30));
+                } while (var_s2_2 < temp_v0->unk30);
             }
         }
         if (temp_v0 != NULL) {
@@ -5213,17 +5213,17 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0002D05
 void func_0002D254(s32 arg0) {
     s32 temp_v0_2;
     s32 temp_v1;
-    void *temp_v0;
+    struct Unk_func_0002D254_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v1 = M2C_FIELD(temp_v0, s32 *, 0xA8);
+    temp_v1 = temp_v0->unkA8;
     if ((temp_v1 != 5) & (temp_v1 != 0)) {
         sceHVSlim_Library_B29BE9CE(arg0);
         return;
     }
     func_0001EBE0(temp_v0);
-    sceHVSlim_Library_880239D0(M2C_FIELD(temp_v0, s32 *, 0xB0));
-    temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x98);
+    sceHVSlim_Library_880239D0(temp_v0->unkB0);
+    temp_v0_2 = temp_v0->unk98;
     if (temp_v0_2 != 0) {
         sceHVSlim_Library_0D525122(temp_v0_2);
     }
@@ -5232,43 +5232,43 @@ void func_0002D254(s32 arg0) {
 }
 
 s32 func_0002D2E8(s32 arg0) {
-    void *temp_s0;
+    struct Unk_func_0002D2E8_temp_s0 *temp_s0;
     void *temp_s1;
 
     temp_s0 = sceHVSlim_Library_896E55F6(arg0);
     temp_s1 = func_00003D10() + 0x14DC;
-    if (M2C_FIELD(temp_s0, s32 *, 0xA8) == 0) {
-        func_0002F35C(M2C_FIELD(temp_s0, s32 *, 0xB0), 0);
-        M2C_FIELD(temp_s0, s32 *, 0xA8) = 1;
-        func_00010A68(temp_s1, M2C_FIELD(temp_s0, s32 *, 0));
+    if (temp_s0->unkA8 == 0) {
+        func_0002F35C(temp_s0->unkB0, 0);
+        temp_s0->unkA8 = 1;
+        func_00010A68(temp_s1, temp_s0->unk0);
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
 }
 
 void func_0002D35C(s32 arg0) {
-    void *temp_a0;
-    void *temp_v0;
+    struct Unk_func_0002D35C_temp_a0 *temp_a0;
+    struct Unk_func_0002D35C_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_a0 = sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xB0));
-    if (M2C_FIELD(temp_v0, s32 *, 0xA4) == 7) {
-        func_00015EFC(M2C_FIELD(temp_a0, s32 *, 0x170));
+    temp_a0 = sceHVSlim_Library_896E55F6(temp_v0->unkB0);
+    if (temp_v0->unkA4 == 7) {
+        func_00015EFC(temp_a0->unk170);
     }
-    sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xB0));
+    sceHVSlim_Library_B29BE9CE(temp_v0->unkB0);
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
 s32 func_0002D3C0(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0002D3C0_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if ((u32) (M2C_FIELD(temp_v0, s32 *, 0xA8) - 2) >= 2U) {
+    if ((u32) (temp_v0->unkA8 - 2) >= 2U) {
         sceHVSlim_Library_B29BE9CE(arg0);
     } else {
-        func_0002F99C(M2C_FIELD(temp_v0, s32 *, 0xB0));
-        func_0002F488(M2C_FIELD(temp_v0, s32 *, 0xB0), 0);
-        M2C_FIELD(temp_v0, s32 *, 0xA8) = 4;
+        func_0002F99C(temp_v0->unkB0);
+        func_0002F488(temp_v0->unkB0, 0);
+        temp_v0->unkA8 = 4;
         sceHVSlim_Library_B29BE9CE(arg0);
         func_0002D35C(arg0);
         func_00047E70(arg0);
@@ -5277,12 +5277,12 @@ s32 func_0002D3C0(s32 arg0) {
 }
 
 s32 func_0002D44C(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0002D44C_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xA8) == 4) {
-        func_0002F99C(M2C_FIELD(temp_v0, s32 *, 0xB0));
-        M2C_FIELD(temp_v0, s32 *, 0xA8) = 5;
+    if (temp_v0->unkA8 == 4) {
+        func_0002F99C(temp_v0->unkB0);
+        temp_v0->unkA8 = 5;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -5417,25 +5417,25 @@ void func_00030350(struct Unk_func_00030350_0 *arg0, M2C_UNK arg1, M2C_UNK arg2)
 
 s32 func_000303A8(s32 arg0) {
     s32 temp_s0;
-    void *temp_v0;
+    struct Unk_func_000303A8_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_s0 = M2C_FIELD(sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xE0)), s32 *, 0x170);
+    temp_s0 = M2C_FIELD(sceHVSlim_Library_896E55F6(temp_v0->unkE0), s32 *, 0x170);
     func_00019E48(temp_s0);
     func_000181B0(temp_s0);
-    sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xE0));
+    sceHVSlim_Library_B29BE9CE(temp_v0->unkE0);
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
 }
 
 s32 func_00030410(s32 arg0) {
     s32 temp_s0;
-    void *temp_v0;
+    struct Unk_func_00030410_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_s0 = M2C_FIELD(sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xE0)), s32 *, 0x170);
+    temp_s0 = M2C_FIELD(sceHVSlim_Library_896E55F6(temp_v0->unkE0), s32 *, 0x170);
     func_000181B0(temp_s0);
-    sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xE0));
+    sceHVSlim_Library_B29BE9CE(temp_v0->unkE0);
     func_000185A4(temp_s0, 0x14, 0x5A);
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -5444,15 +5444,15 @@ s32 func_00030410(s32 arg0) {
 s32 func_00030480(s32 arg0, s32 arg1) {
     s32 temp_s1;
     s32 var_v0;
-    void *temp_v0;
+    struct Unk_func_00030480_temp_v0 *temp_v0;
 
     var_v0 = -1;
     if (arg1 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_s1 = M2C_FIELD(sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xE0)), s32 *, 0x170);
+        temp_s1 = M2C_FIELD(sceHVSlim_Library_896E55F6(temp_v0->unkE0), s32 *, 0x170);
         func_000177CC(temp_s1, arg1);
         func_00019718(temp_s1, arg1);
-        sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xE0));
+        sceHVSlim_Library_B29BE9CE(temp_v0->unkE0);
         sceHVSlim_Library_B29BE9CE(arg0);
         var_v0 = 0;
     }
@@ -5474,13 +5474,13 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003072
 s32 func_00030A40(s32 arg0) {
     s32 temp_v0_2;
     s32 var_s0;
-    void *temp_v0;
+    struct Unk_func_00030A40_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
     temp_v0_2 = func_0002FC9C(temp_v0);
     var_s0 = temp_v0_2;
     if (temp_v0_2 == 0) {
-        if (M2C_FIELD(temp_v0, s32 *, 0xB4) == 0) {
+        if (temp_v0->unkB4 == 0) {
             var_s0 = func_00030554(arg0);
         } else {
             var_s0 = func_0003072C(arg0);
@@ -5499,11 +5499,11 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00030BF
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00030C1C);
 
 s32 func_00030CE8(s32 arg0) {
-    void *temp_s0;
+    struct Unk_func_00030CE8_temp_s0 *temp_s0;
 
     temp_s0 = sceHVSlim_Library_896E55F6(arg0);
     func_00047C48((s32) &func_00030BFC);
-    func_0002F488(M2C_FIELD(temp_s0, s32 *, 0xE0), 0);
+    func_0002F488(temp_s0->unkE0, 0);
     func_00047E70(arg0);
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -5532,10 +5532,10 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00030EE
 
 s32 func_00030F40(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_s0;
-    void *temp_v0;
+    struct Unk_func_00030F40_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_s0 = func_000108B4(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 0xA0), arg1, arg2);
+    temp_s0 = func_000108B4(temp_v0->unk0, temp_v0->unkA0, arg1, arg2);
     sceHVSlim_Library_B29BE9CE(arg0);
     return temp_s0;
 }
@@ -5594,13 +5594,13 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00031C7
 
 s32 func_00031DAC(struct Unk_func_00031DAC_0 *arg0) {
     s32 temp_v0;
-    void *temp_s0;
+    struct Unk_func_00031DAC_temp_s0 *temp_s0;
 
     temp_s0 = arg0->unk34;
     if (temp_s0 != NULL) {
         func_000029C0((s32) &func_00031708);
         if (arg0->unk40 == 2) {
-            temp_v0 = func_00031778(M2C_FIELD(temp_s0, s32 *, 8), M2C_FIELD(temp_s0, s32 *, 4));
+            temp_v0 = func_00031778(temp_s0->unk8, temp_s0->unk4);
             if (temp_v0 < 0) {
                 func_000316EC(temp_v0);
             }
@@ -5677,25 +5677,25 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003327
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00033348);
 
 void func_00033408(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00033408_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (!(M2C_FIELD(temp_v0, s32 *, 0x108) & 0x04000000)) {
-        func_00015EFC(M2C_FIELD(sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xEC)), s32 *, 0x16C));
-        sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xEC));
+    if (!(temp_v0->unk108 & 0x04000000)) {
+        func_00015EFC(M2C_FIELD(sceHVSlim_Library_896E55F6(temp_v0->unkEC), s32 *, 0x16C));
+        sceHVSlim_Library_B29BE9CE(temp_v0->unkEC);
     }
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
 s32 func_0003346C(s32 arg0) {
-    void *temp_s1;
+    struct Unk_func_0003346C_temp_s1 *temp_s1;
 
     temp_s1 = sceHVSlim_Library_896E55F6(arg0);
     func_00033CA8(arg0, 4, 0x3C2);
     func_00047C48((s32) &func_00032FEC);
     func_00033408(arg0);
-    if (!(M2C_FIELD(temp_s1, s32 *, 0x108) & 0x04000000)) {
-        func_0002F488(M2C_FIELD(temp_s1, s32 *, 0xEC), 0);
+    if (!(temp_s1->unk108 & 0x04000000)) {
+        func_0002F488(temp_s1->unkEC, 0);
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     func_00047E70(arg0);
@@ -5705,22 +5705,22 @@ s32 func_0003346C(s32 arg0) {
 s32 func_000334F0(s32 arg0) {
     s32 temp_v0;
     s32 temp_v1;
-    void *temp_s0;
-    void *temp_s1;
+    struct Unk_func_000334F0_temp_s0 *temp_s0;
+    struct Unk_func_000334F0_temp_s1 *temp_s1;
 
     temp_s0 = sceHVSlim_Library_896E55F6(arg0);
     temp_s1 = func_00003D10();
-    temp_v0 = M2C_FIELD(temp_s0, s32 *, 0xD8);
+    temp_v0 = temp_s0->unkD8;
     if (temp_v0 > 0) {
         sceKernelWaitThreadEnd(temp_v0, 0);
-        sceKernelDeleteThread(M2C_FIELD(temp_s0, s32 *, 0xD8));
-        temp_v1 = M2C_FIELD(temp_s1, s32 *, 0x1C40);
-        M2C_FIELD(temp_s0, s32 *, 0xD8) = -1;
+        sceKernelDeleteThread(temp_s0->unkD8);
+        temp_v1 = temp_s1->unk1C40;
+        temp_s0->unkD8 = -1;
         if (temp_v1 != 0) {
             func_0004BAE8(temp_v1);
-            sceHVSlim_Library_A2F4AC9E(M2C_FIELD(temp_s1, s32 *, 0x1C40));
+            sceHVSlim_Library_A2F4AC9E(temp_s1->unk1C40);
         }
-        M2C_FIELD(temp_s1, s32 *, 0x1C40) = 0;
+        temp_s1->unk1C40 = 0;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     sceHVNetfront_Module_DB246B1D(0);
@@ -5755,10 +5755,10 @@ void func_00033C8C(struct Unk_func_00033C8C_0 *arg0) {
 
 s32 func_00033CA8(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_s0;
-    void *temp_v0;
+    struct Unk_func_00033CA8_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_s0 = func_000108B4(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 0xA0), arg1, arg2);
+    temp_s0 = func_000108B4(temp_v0->unk0, temp_v0->unkA0, arg1, arg2);
     sceHVSlim_Library_B29BE9CE(arg0);
     return temp_s0;
 }
@@ -5931,11 +5931,11 @@ s32 func_000369F4(s32 arg0, void **arg1) {
     s32 temp_s0;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_000369F4_temp_v0 *temp_v0;
 
     if ((arg0 != 0) & (arg1 != NULL)) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x98);
+        temp_v0_2 = temp_v0->unk98;
         if (temp_v0_2 != 0) {
             temp_s0 = M2C_FIELD(sceHVSlim_Library_896E55F6(temp_v0_2), s32 *, 0x178);
             if (func_000369BC(arg1) == 0) {
@@ -5948,7 +5948,7 @@ s32 func_000369F4(s32 arg0, void **arg1) {
                 func_00017500(temp_s0, 0);
                 func_00015F78(temp_s0);
             }
-            sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0x98));
+            sceHVSlim_Library_B29BE9CE(temp_v0->unk98);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -5979,17 +5979,17 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003820
 
 s32 func_00038390(s32 arg0) {
     s32 temp_v0_2;
-    void *temp_v0;
+    struct Unk_func_00038390_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x98);
+        temp_v0_2 = temp_v0->unk98;
         if (temp_v0_2 != 0) {
             func_0002F35C(temp_v0_2, 0);
         }
-        M2C_FIELD(temp_v0, s32 *, 0xA0) = (s32) (M2C_FIELD(temp_v0, s32 *, 0xA0) | 1);
-        M2C_FIELD(temp_v0, s32 *, 0xA4) = 1;
-        func_00010A68(func_00003D10() + 0x14DC, M2C_FIELD(temp_v0, s32 *, 0));
+        temp_v0->unkA0 = (s32) (temp_v0->unkA0 | 1);
+        temp_v0->unkA4 = 1;
+        func_00010A68(func_00003D10() + 0x14DC, temp_v0->unk0);
         sceHVSlim_Library_B29BE9CE(arg0);
     }
     return 0;
@@ -5998,15 +5998,15 @@ s32 func_00038390(s32 arg0) {
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00038414);
 
 void func_000385A8(struct Unk_func_000385A8_0 *arg0) {
-    void *temp_s0;
+    struct Unk_func_000385A8_temp_s0 *temp_s0;
 
     temp_s0 = sceHVSlim_Library_896E55F6(arg0->unk98);
     if (arg0->unkA8 != 0) {
-        func_00015EFC(M2C_FIELD(temp_s0, s32 *, 0x170));
+        func_00015EFC(temp_s0->unk170);
     }
     if (arg0->unkB0 != 0) {
-        func_00015EFC(M2C_FIELD(temp_s0, s32 *, 0x178));
-        func_00015EFC(M2C_FIELD(temp_s0, s32 *, 0x180));
+        func_00015EFC(temp_s0->unk178);
+        func_00015EFC(temp_s0->unk180);
     }
     sceHVSlim_Library_B29BE9CE(arg0->unk98);
 }
@@ -6058,15 +6058,15 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003A0A
 s32 func_0003A128(s32 arg0, s32 arg1) {
     s32 temp_v0_2;
     s32 var_s3;
-    void *temp_v0;
+    struct Unk_func_0003A128_temp_v0 *temp_v0;
 
     var_s3 = 0;
     if ((arg0 != 0) & (arg1 != 0)) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x98);
+        temp_v0_2 = temp_v0->unk98;
         if (temp_v0_2 != 0) {
-            var_s3 = func_0003A0A0(sceHVSlim_Library_896E55F6(temp_v0_2), arg1, M2C_FIELD(temp_v0, s32 *, 0xC4));
-            sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0x98));
+            var_s3 = func_0003A0A0(sceHVSlim_Library_896E55F6(temp_v0_2), arg1, temp_v0->unkC4);
+            sceHVSlim_Library_B29BE9CE(temp_v0->unk98);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -6078,15 +6078,15 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003A1C
 s32 func_0003A260(s32 arg0, s32 arg1) {
     s32 temp_v0_2;
     s32 var_s3;
-    void *temp_v0;
+    struct Unk_func_0003A260_temp_v0 *temp_v0;
 
     var_s3 = 0;
     if ((arg0 != 0) & (arg1 != 0)) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x98);
+        temp_v0_2 = temp_v0->unk98;
         if (temp_v0_2 != 0) {
-            var_s3 = func_0003A1C0(sceHVSlim_Library_896E55F6(temp_v0_2), arg1, M2C_FIELD(temp_v0, s32 *, 0xC4));
-            sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0x98));
+            var_s3 = func_0003A1C0(sceHVSlim_Library_896E55F6(temp_v0_2), arg1, temp_v0->unkC4);
+            sceHVSlim_Library_B29BE9CE(temp_v0->unk98);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -6125,15 +6125,15 @@ s32 func_0003AE10(s32 arg0, struct Unk_func_0003AE10_1 *arg1) {
     s32 temp_v1;
     s32 temp_v1_2;
     s32 var_s2;
-    void *temp_v0;
+    struct Unk_func_0003AE10_temp_v0 *temp_v0;
 
     var_s2 = -1;
     if ((arg0 != 0) & (arg1 != NULL)) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if (M2C_FIELD(temp_v0, s32 *, 0xA4) <= 0) {
+        if (temp_v0->unkA4 <= 0) {
             temp_v1 = arg1->unk0;
             if ((temp_v1 == 6) && (arg1->unk4 == temp_v1)) {
-                temp_v1_2 = M2C_FIELD(temp_v0, s32 *, 0x9C);
+                temp_v1_2 = temp_v0->unk9C;
                 switch (temp_v1_2) {                /* irregular */
                 case 1:
                     var_s2 = -4;
@@ -6180,11 +6180,11 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003B77
 
 void func_0003B7F0(s32 arg0) {
     s32 temp_v0_2;
-    void *temp_v0;
+    struct Unk_func_0003B7F0_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x98);
+        temp_v0_2 = temp_v0->unk98;
         if (temp_v0_2 != 0) {
             sceHVSlim_Library_880239D0(temp_v0_2);
         }
@@ -6240,16 +6240,16 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003BB5
 void func_0003C140(s32 arg0) {
     s32 temp_v0_2;
     s32 temp_v1;
-    void *temp_v0;
+    struct Unk_func_0003C140_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v1 = M2C_FIELD(temp_v0, s32 *, 0xB0);
+    temp_v1 = temp_v0->unkB0;
     if ((temp_v1 != 4) & (temp_v1 != 0)) {
         sceHVSlim_Library_B29BE9CE(arg0);
         return;
     }
     func_0001EBE0(temp_v0);
-    temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xB4);
+    temp_v0_2 = temp_v0->unkB4;
     if (temp_v0_2 != 0) {
         sceHVSlim_Library_880239D0(temp_v0_2);
     }
@@ -6260,16 +6260,16 @@ void func_0003C140(s32 arg0) {
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003C1CC);
 
 s32 func_0003C264(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003C264_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if ((u32) (M2C_FIELD(temp_v0, s32 *, 0xB0) - 1) >= 2U) {
+    if ((u32) (temp_v0->unkB0 - 1) >= 2U) {
         sceHVSlim_Library_B29BE9CE(arg0);
     } else {
-        func_0002F488(M2C_FIELD(temp_v0, s32 *, 0xB4), 0);
-        M2C_FIELD(temp_v0, s32 *, 0xB0) = 3;
-        if (M2C_FIELD(temp_v0, s32 *, 0xA8) == 6) {
-            func_00010A88(func_00003D10() + 0x14DC, M2C_FIELD(temp_v0, s32 *, 0));
+        func_0002F488(temp_v0->unkB4, 0);
+        temp_v0->unkB0 = 3;
+        if (temp_v0->unkA8 == 6) {
+            func_00010A88(func_00003D10() + 0x14DC, temp_v0->unk0);
             func_000029C0((s32) &func_0003BB4C);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -6279,11 +6279,11 @@ s32 func_0003C264(s32 arg0) {
 }
 
 s32 func_0003C314(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003C314_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xB0) == 3) {
-        M2C_FIELD(temp_v0, s32 *, 0xB0) = 4;
+    if (temp_v0->unkB0 == 3) {
+        temp_v0->unkB0 = 4;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -6357,29 +6357,29 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003DDA
 
 void func_0003DF44(s32 arg0) {
     s32 temp_v1;
-    void *temp_v0;
+    struct Unk_func_0003DF44_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v1 = M2C_FIELD(temp_v0, s32 *, 0xB0);
+    temp_v1 = temp_v0->unkB0;
     if ((temp_v1 != 4) & (temp_v1 != 0)) {
         sceHVSlim_Library_B29BE9CE(arg0);
         return;
     }
     func_0001EBE0(temp_v0);
-    sceHVSlim_Library_880239D0(M2C_FIELD(temp_v0, s32 *, 0xB4));
+    sceHVSlim_Library_880239D0(temp_v0->unkB4);
     sceHVSlim_Library_B29BE9CE(arg0);
     sceHVSlim_Library_880239D0(arg0);
 }
 
 s32 func_0003DFC4(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003DFC4_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xB0) == 0) {
-        func_0002F35C(M2C_FIELD(temp_v0, s32 *, 0xB4), 0);
-        M2C_FIELD(temp_v0, s32 *, 0xB0) = 1;
-        if (M2C_FIELD(temp_v0, s32 *, 0xA8) != 4) {
-            func_000048E0(M2C_FIELD(temp_v0, s32 *, 0), 1, 1);
+    if (temp_v0->unkB0 == 0) {
+        func_0002F35C(temp_v0->unkB4, 0);
+        temp_v0->unkB0 = 1;
+        if (temp_v0->unkA8 != 4) {
+            func_000048E0(temp_v0->unk0, 1, 1);
         }
         func_00003D4C(0);
     }
@@ -6388,16 +6388,16 @@ s32 func_0003DFC4(s32 arg0) {
 }
 
 s32 func_0003E040(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003E040_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if ((u32) (M2C_FIELD(temp_v0, s32 *, 0xB0) - 1) >= 2U) {
+    if ((u32) (temp_v0->unkB0 - 1) >= 2U) {
         sceHVSlim_Library_B29BE9CE(arg0);
     } else {
-        func_0002F488(M2C_FIELD(temp_v0, s32 *, 0xB4), 0);
-        M2C_FIELD(temp_v0, s32 *, 0xB0) = 3;
-        if (M2C_FIELD(temp_v0, s32 *, 0xA8) != 4) {
-            func_000049B8(M2C_FIELD(temp_v0, s32 *, 0), 1, 1);
+        func_0002F488(temp_v0->unkB4, 0);
+        temp_v0->unkB0 = 3;
+        if (temp_v0->unkA8 != 4) {
+            func_000049B8(temp_v0->unk0, 1, 1);
         }
         func_00003D4C(1);
         sceHVSlim_Library_B29BE9CE(arg0);
@@ -6407,11 +6407,11 @@ s32 func_0003E040(s32 arg0) {
 }
 
 s32 func_0003E0E0(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003E0E0_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xB0) == 3) {
-        M2C_FIELD(temp_v0, s32 *, 0xB0) = 4;
+    if (temp_v0->unkB0 == 3) {
+        temp_v0->unkB0 = 4;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -6422,14 +6422,14 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003E12
 s32 func_0003E1D0(s32 arg0) {
     s32 var_s0;
     s32 var_v0;
-    void *temp_v0;
+    struct Unk_func_0003E1D0_temp_v0 *temp_v0;
 
     var_v0 = -1;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
         var_s0 = -1;
-        if (M2C_FIELD(temp_v0, s32 *, 0xB0) > 0) {
-            var_s0 = M2C_FIELD(temp_v0, s32 *, 0xAC);
+        if (temp_v0->unkB0 > 0) {
+            var_s0 = temp_v0->unkAC;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
         var_v0 = var_s0;
@@ -6442,17 +6442,17 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003E22
 s32 func_0003E3A8(s32 arg0) {
     s32 temp_v0_2;
     s32 var_v0;
-    void *temp_v0;
+    struct Unk_func_0003E3A8_temp_v0 *temp_v0;
 
     var_v0 = -1;
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if ((M2C_FIELD(temp_v0, s32 *, 0xB0) > 0) && (M2C_FIELD(temp_v0, s32 *, 0xA8) == 4)) {
-            temp_v0_2 = M2C_FIELD(sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xB4)), s32 *, 0x170);
+        if ((temp_v0->unkB0 > 0) && (temp_v0->unkA8 == 4)) {
+            temp_v0_2 = M2C_FIELD(sceHVSlim_Library_896E55F6(temp_v0->unkB4), s32 *, 0x170);
             if (temp_v0_2 != 0) {
                 func_0001E520(temp_v0_2, 0x64);
             }
-            sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xB4));
+            sceHVSlim_Library_B29BE9CE(temp_v0->unkB4);
         }
         sceHVSlim_Library_B29BE9CE(arg0);
         var_v0 = 0;
@@ -6461,12 +6461,12 @@ s32 func_0003E3A8(s32 arg0) {
 }
 
 void func_0003E430(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003E430_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if (M2C_FIELD(temp_v0, s32 *, 0xB0) == 2) {
-            M2C_FIELD(temp_v0, s32 *, 0xB0) = 1;
+        if (temp_v0->unkB0 == 2) {
+            temp_v0->unkB0 = 1;
         }
         sceHVSlim_Library_B29BE9CE(arg0);
     }
@@ -6488,62 +6488,62 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003E7F
 
 void func_0003EA20(s32 arg0) {
     s32 temp_v1;
-    void *temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_0003EA20_temp_v0 *temp_v0;
+    struct Unk_func_0003EA20_temp_v0_2 *temp_v0_2;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v1 = M2C_FIELD(temp_v0, s32 *, 0xA8);
+    temp_v1 = temp_v0->unkA8;
     if ((temp_v1 != 4) & (temp_v1 != 0)) {
         sceHVSlim_Library_B29BE9CE(arg0);
         return;
     }
     func_0001EBE0(temp_v0);
-    sceHVSlim_Library_880239D0(M2C_FIELD(temp_v0, s32 *, 0xB0));
-    temp_v0_2 = sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xAC));
-    sceHVSlim_Library_A2F4AC9E(M2C_FIELD(temp_v0_2, s32 *, 8));
-    sceHVSlim_Library_A2F4AC9E(M2C_FIELD(temp_v0_2, s32 *, 0xC));
-    sceHVSlim_Library_A2F4AC9E(M2C_FIELD(temp_v0_2, s32 *, 0x10));
-    sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xAC));
-    sceHVSlim_Library_880239D0(M2C_FIELD(temp_v0, s32 *, 0xAC));
+    sceHVSlim_Library_880239D0(temp_v0->unkB0);
+    temp_v0_2 = sceHVSlim_Library_896E55F6(temp_v0->unkAC);
+    sceHVSlim_Library_A2F4AC9E(temp_v0_2->unk8);
+    sceHVSlim_Library_A2F4AC9E(temp_v0_2->unkC);
+    sceHVSlim_Library_A2F4AC9E(temp_v0_2->unk10);
+    sceHVSlim_Library_B29BE9CE(temp_v0->unkAC);
+    sceHVSlim_Library_880239D0(temp_v0->unkAC);
     sceHVSlim_Library_B29BE9CE(arg0);
     sceHVSlim_Library_880239D0(arg0);
 }
 
 s32 func_0003EADC(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003EADC_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xA8) == 0) {
-        func_0002F35C(M2C_FIELD(temp_v0, s32 *, 0xB0), 0);
-        M2C_FIELD(temp_v0, s32 *, 0xA8) = 1;
+    if (temp_v0->unkA8 == 0) {
+        func_0002F35C(temp_v0->unkB0, 0);
+        temp_v0->unkA8 = 1;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
 }
 
 void func_0003EB34(s32 arg0) {
-    void *temp_s1;
-    void *temp_v0;
+    struct Unk_func_0003EB34_temp_s1 *temp_s1;
+    struct Unk_func_0003EB34_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_s1 = sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xB0));
-    if (M2C_FIELD(temp_v0, s32 *, 0xA4) == 1) {
-        func_00015EFC(M2C_FIELD(temp_s1, s32 *, 0x178));
-        func_00015EFC(M2C_FIELD(temp_s1, s32 *, 0x180));
+    temp_s1 = sceHVSlim_Library_896E55F6(temp_v0->unkB0);
+    if (temp_v0->unkA4 == 1) {
+        func_00015EFC(temp_s1->unk178);
+        func_00015EFC(temp_s1->unk180);
     }
-    sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xB0));
+    sceHVSlim_Library_B29BE9CE(temp_v0->unkB0);
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
 s32 func_0003EBA8(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003EBA8_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if ((u32) (M2C_FIELD(temp_v0, s32 *, 0xA8) - 1) >= 2U) {
+    if ((u32) (temp_v0->unkA8 - 1) >= 2U) {
         sceHVSlim_Library_B29BE9CE(arg0);
     } else {
-        func_0002F488(M2C_FIELD(temp_v0, s32 *, 0xB0), 0);
-        M2C_FIELD(temp_v0, s32 *, 0xA8) = 3;
+        func_0002F488(temp_v0->unkB0, 0);
+        temp_v0->unkA8 = 3;
         sceHVSlim_Library_B29BE9CE(arg0);
         func_0003EB34(arg0);
         func_00047E70(arg0);
@@ -6552,11 +6552,11 @@ s32 func_0003EBA8(s32 arg0) {
 }
 
 s32 func_0003EC2C(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003EC2C_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xA8) == 3) {
-        M2C_FIELD(temp_v0, s32 *, 0xA8) = 4;
+    if (temp_v0->unkA8 == 3) {
+        temp_v0->unkA8 = 4;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -6584,12 +6584,12 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003F3E
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0003F5BC);
 
 s32 func_0003F6FC(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003F6FC_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0x9C) == 0) {
-        func_0002F35C(M2C_FIELD(temp_v0, s32 *, 0xC8), 0);
-        M2C_FIELD(temp_v0, s32 *, 0x9C) = 1;
+    if (temp_v0->unk9C == 0) {
+        func_0002F35C(temp_v0->unkC8, 0);
+        temp_v0->unk9C = 1;
         func_00047BE8((s32) &func_00040B08, arg0);
         func_00040CD8((s32) temp_v0);
     }
@@ -6599,18 +6599,18 @@ s32 func_0003F6FC(s32 arg0) {
 
 s32 func_0003F76C(s32 arg0) {
     s32 temp_v0_2;
-    void *temp_v0;
+    struct Unk_func_0003F76C_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x9C);
+    temp_v0_2 = temp_v0->unk9C;
     if ((temp_v0_2 != 6) & (temp_v0_2 != 1)) {
         sceHVSlim_Library_B29BE9CE(arg0);
     } else {
         func_00047C48((s32) &func_00040B08);
-        func_0003FDE8(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 0x80), 4, 2);
+        func_0003FDE8(temp_v0->unk0, temp_v0->unk80, 4, 2);
         func_00040E10((s32) temp_v0);
-        func_0002F488(M2C_FIELD(temp_v0, s32 *, 0xC8), 0);
-        M2C_FIELD(temp_v0, s32 *, 0x9C) = 7;
+        func_0002F488(temp_v0->unkC8, 0);
+        temp_v0->unk9C = 7;
         sceHVSlim_Library_B29BE9CE(arg0);
         func_00047E70(arg0);
     }
@@ -6618,11 +6618,11 @@ s32 func_0003F76C(s32 arg0) {
 }
 
 s32 func_0003F81C(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0003F81C_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0x9C) == 7) {
-        M2C_FIELD(temp_v0, s32 *, 0x9C) = 8;
+    if (temp_v0->unk9C == 7) {
+        temp_v0->unk9C = 8;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -6699,7 +6699,7 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0004025
 void func_00040420(struct Unk_func_00040420_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
-    void *temp_v0_3;
+    struct Unk_func_00040420_temp_v0_3 *temp_v0_3;
 
     temp_v0 = arg0->unkD4;
     if (temp_v0 != 0) {
@@ -6710,7 +6710,7 @@ void func_00040420(struct Unk_func_00040420_0 *arg0) {
     if (temp_v0_2 != 0) {
         temp_v0_3 = sceHVSlim_Library_896E55F6(temp_v0_2);
         if (temp_v0_3 != NULL) {
-            func_0001A504(M2C_FIELD(temp_v0_3, s32 *, 0x168), 0);
+            func_0001A504(temp_v0_3->unk168, 0);
         }
         sceHVSlim_Library_B29BE9CE(arg0->unkC8);
     }
@@ -6754,28 +6754,28 @@ void func_00041240(s32 arg0) {
     s32 temp_v0_3;
     s32 temp_v0_4;
     s32 temp_v1;
-    void *temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_00041240_temp_v0 *temp_v0;
+    struct Unk_func_00041240_temp_v0_2 *temp_v0_2;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v1 = M2C_FIELD(temp_v0, s32 *, 0xA8);
+    temp_v1 = temp_v0->unkA8;
     if ((temp_v1 != 6) & (temp_v1 != 0)) {
         sceHVSlim_Library_B29BE9CE(arg0);
         return;
     }
     func_0001EBE0(temp_v0);
-    sceHVSlim_Library_880239D0(M2C_FIELD(temp_v0, s32 *, 0xB0));
-    temp_v0_2 = sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xAC));
-    temp_v0_3 = M2C_FIELD(temp_v0_2, s32 *, 4);
+    sceHVSlim_Library_880239D0(temp_v0->unkB0);
+    temp_v0_2 = sceHVSlim_Library_896E55F6(temp_v0->unkAC);
+    temp_v0_3 = temp_v0_2->unk4;
     if (temp_v0_3 != 0) {
         sceHVSlim_Library_A2F4AC9E(temp_v0_3);
     }
-    temp_v0_4 = M2C_FIELD(temp_v0_2, s32 *, 8);
+    temp_v0_4 = temp_v0_2->unk8;
     if (temp_v0_4 != 0) {
         sceHVSlim_Library_A2F4AC9E(temp_v0_4);
     }
-    sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xAC));
-    sceHVSlim_Library_880239D0(M2C_FIELD(temp_v0, s32 *, 0xAC));
+    sceHVSlim_Library_B29BE9CE(temp_v0->unkAC);
+    sceHVSlim_Library_880239D0(temp_v0->unkAC);
     sceHVSlim_Library_B29BE9CE(arg0);
     sceHVSlim_Library_880239D0(arg0);
 }
@@ -6784,61 +6784,61 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0004130
 
 s32 func_000414AC(s32 arg0) {
     s32 temp_v0_3;
-    void *temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_000414AC_temp_v0 *temp_v0;
+    struct Unk_func_000414AC_temp_v0_2 *temp_v0_2;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xA8) == 0) {
-        func_0002F35C(M2C_FIELD(temp_v0, s32 *, 0xB0), 0);
-        temp_v0_2 = sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xB0));
+    if (temp_v0->unkA8 == 0) {
+        func_0002F35C(temp_v0->unkB0, 0);
+        temp_v0_2 = sceHVSlim_Library_896E55F6(temp_v0->unkB0);
         if (temp_v0_2 != NULL) {
-            temp_v0_3 = M2C_FIELD(temp_v0_2, s32 *, 0x174);
+            temp_v0_3 = temp_v0_2->unk174;
             if (temp_v0_3 != 0) {
                 func_000155D0(temp_v0_3, (s32) &func_0004130C, arg0);
             }
         }
-        func_000155D0(M2C_FIELD(temp_v0_2, s32 *, 0x16C), (s32) &func_00040ECC, arg0);
-        func_000156A0(M2C_FIELD(temp_v0_2, s32 *, 0x16C), (s32) &func_00040F2C, arg0);
-        func_000156A0(M2C_FIELD(temp_v0_2, s32 *, 0x174), (s32) &func_00040F2C, arg0);
-        sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xB0));
-        M2C_FIELD(temp_v0, s32 *, 0xA8) = 1;
+        func_000155D0(temp_v0_2->unk16C, (s32) &func_00040ECC, arg0);
+        func_000156A0(temp_v0_2->unk16C, (s32) &func_00040F2C, arg0);
+        func_000156A0(temp_v0_2->unk174, (s32) &func_00040F2C, arg0);
+        sceHVSlim_Library_B29BE9CE(temp_v0->unkB0);
+        temp_v0->unkA8 = 1;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
 }
 
 void func_00041588(s32 arg0) {
-    void *temp_v0;
-    void *temp_v0_2;
+    struct Unk_func_00041588_temp_v0 *temp_v0;
+    struct Unk_func_00041588_temp_v0_2 *temp_v0_2;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v0_2 = sceHVSlim_Library_896E55F6(M2C_FIELD(temp_v0, s32 *, 0xB0));
-    func_00015EFC(M2C_FIELD(temp_v0_2, s32 *, 0x16C));
-    func_00015EFC(M2C_FIELD(temp_v0_2, s32 *, 0x174));
-    sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xB0));
+    temp_v0_2 = sceHVSlim_Library_896E55F6(temp_v0->unkB0);
+    func_00015EFC(temp_v0_2->unk16C);
+    func_00015EFC(temp_v0_2->unk174);
+    sceHVSlim_Library_B29BE9CE(temp_v0->unkB0);
     sceHVSlim_Library_B29BE9CE(arg0);
 }
 
 s32 func_000415EC(s32 arg0) {
     s32 temp_v0_2;
     s32 temp_v0_3;
-    void *temp_v0;
+    struct Unk_func_000415EC_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xB4);
+    temp_v0_2 = temp_v0->unkB4;
     if (temp_v0_2 != 0) {
         M2C_FIELD(sceHVSlim_Library_896E55F6(temp_v0_2), s32 *, 0xB4) = 2;
-        sceHVSlim_Library_B29BE9CE(M2C_FIELD(temp_v0, s32 *, 0xB4));
-        func_0002C3FC(M2C_FIELD(temp_v0, s32 *, 0xB4));
-        M2C_FIELD(temp_v0, s32 *, 0xA8) = 1;
-        M2C_FIELD(temp_v0, s32 *, 0xB4) = 0;
+        sceHVSlim_Library_B29BE9CE(temp_v0->unkB4);
+        func_0002C3FC(temp_v0->unkB4);
+        temp_v0->unkA8 = 1;
+        temp_v0->unkB4 = 0;
     }
-    temp_v0_3 = M2C_FIELD(temp_v0, s32 *, 0xA8);
+    temp_v0_3 = temp_v0->unkA8;
     if ((temp_v0_3 != 4) & (temp_v0_3 != 1)) {
         sceHVSlim_Library_B29BE9CE(arg0);
     } else {
-        func_0002F488(M2C_FIELD(temp_v0, s32 *, 0xB0), 0);
-        M2C_FIELD(temp_v0, s32 *, 0xA8) = 5;
+        func_0002F488(temp_v0->unkB0, 0);
+        temp_v0->unkA8 = 5;
         sceHVSlim_Library_B29BE9CE(arg0);
         func_00041588(arg0);
         func_00047E70(arg0);
@@ -6847,11 +6847,11 @@ s32 func_000415EC(s32 arg0) {
 }
 
 s32 func_000416B4(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_000416B4_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xA8) == 5) {
-        M2C_FIELD(temp_v0, s32 *, 0xA8) = 6;
+    if (temp_v0->unkA8 == 5) {
+        temp_v0->unkA8 = 6;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -6861,26 +6861,26 @@ s32 func_00041700(s32 arg0, struct Unk_func_00041700_1 *arg1) {
     s32 temp_a0;
     s32 temp_s0;
     s32 temp_v0_2;
-    void *temp_v0;
+    struct Unk_func_00041700_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xA8) == 1) {
+    if (temp_v0->unkA8 == 1) {
         temp_a0 = arg1->unk10;
         if (temp_a0 != 0) {
             if (((temp_a0 == 0x20) | (temp_a0 == 8)) != 0) {
-                temp_s0 = M2C_FIELD(temp_v0, s32 *, 0xA0);
-                temp_v0_2 = func_0002F680(temp_s0, arg1, M2C_FIELD(temp_v0, s32 *, 0xB0));
-                M2C_FIELD(temp_v0, s32 *, 0xA0) = temp_v0_2;
+                temp_s0 = temp_v0->unkA0;
+                temp_v0_2 = func_0002F680(temp_s0, arg1, temp_v0->unkB0);
+                temp_v0->unkA0 = temp_v0_2;
                 if (temp_s0 != temp_v0_2) {
                     func_00004408(0);
                 }
             }
-            if ((arg1->unk10 == 0x800) && (M2C_FIELD(temp_v0, s32 *, 0x98) == 1)) {
+            if ((arg1->unk10 == 0x800) && (temp_v0->unk98 == 1)) {
                 func_00004408(2);
-                func_0002F99C(M2C_FIELD(temp_v0, s32 *, 0xB0));
+                func_0002F99C(temp_v0->unkB0);
                 func_00041588(arg0);
-                func_000108B4(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 0x80), 0, 0);
-                M2C_FIELD(temp_v0, s32 *, 0xA8) = 4;
+                func_000108B4(temp_v0->unk0, temp_v0->unk80, 0, 0);
+                temp_v0->unkA8 = 4;
             }
         }
     }
@@ -6928,33 +6928,33 @@ void func_00042330(s32 arg0) {
     s32 temp_a0_4;
     s32 temp_a0_5;
     s32 temp_a0_6;
-    void *temp_v0;
+    struct Unk_func_00042330_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
     func_0001EBE0(temp_v0);
-    sceHVSlim_Library_880239D0(M2C_FIELD(temp_v0, s32 *, 0xDC));
-    temp_a0 = M2C_FIELD(temp_v0, s32 *, 0xB4);
+    sceHVSlim_Library_880239D0(temp_v0->unkDC);
+    temp_a0 = temp_v0->unkB4;
     if (temp_a0 != 0) {
         sceHVSlim_Library_0D525122(temp_a0);
     }
-    temp_a0_2 = M2C_FIELD(temp_v0, s32 *, 0xB8);
+    temp_a0_2 = temp_v0->unkB8;
     if (temp_a0_2 != 0) {
         sceHVSlim_Library_0D525122(temp_a0_2);
     }
-    temp_a0_3 = M2C_FIELD(temp_v0, s32 *, 0xC4);
-    M2C_FIELD(temp_v0, s32 *, 0xBC) = 0;
+    temp_a0_3 = temp_v0->unkC4;
+    temp_v0->unkBC = 0;
     if (temp_a0_3 != 0) {
         sceHVSlim_Library_0D525122(temp_a0_3);
     }
-    temp_a0_4 = M2C_FIELD(temp_v0, s32 *, 0xC8);
+    temp_a0_4 = temp_v0->unkC8;
     if (temp_a0_4 != 0) {
         sceHVSlim_Library_0D525122(temp_a0_4);
     }
-    temp_a0_5 = M2C_FIELD(temp_v0, s32 *, 0xC0);
+    temp_a0_5 = temp_v0->unkC0;
     if (temp_a0_5 != 0) {
         sceHVSlim_Library_0D525122(temp_a0_5);
     }
-    temp_a0_6 = M2C_FIELD(temp_v0, s32 *, 0xD0);
+    temp_a0_6 = temp_v0->unkD0;
     if (temp_a0_6 != 0) {
         sceHVSlim_Library_A2F4AC9E(temp_a0_6);
     }
@@ -6963,18 +6963,18 @@ void func_00042330(s32 arg0) {
 }
 
 s32 func_000423F8(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_000423F8_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0x9C) == 0) {
-        M2C_FIELD(temp_v0, s32 *, 0x9C) = 2;
-        func_00010A68(func_00003D10() + 0x14DC, M2C_FIELD(temp_v0, s32 *, 0));
-        func_0002F35C(M2C_FIELD(temp_v0, s32 *, 0xDC), 0);
-        func_00047DB0(M2C_FIELD(temp_v0, s32 *, 0xE0));
+    if (temp_v0->unk9C == 0) {
+        temp_v0->unk9C = 2;
+        func_00010A68(func_00003D10() + 0x14DC, temp_v0->unk0);
+        func_0002F35C(temp_v0->unkDC, 0);
+        func_00047DB0(temp_v0->unkE0);
         func_00044678((s32) temp_v0);
         func_00044808(temp_v0, 0);
         func_00047BE8((s32) &func_00044E94, arg0);
-        func_000048E0(M2C_FIELD(temp_v0, s32 *, 0), 1, 1);
+        func_000048E0(temp_v0->unk0, 1, 1);
         func_00003D4C(0);
     }
     sceHVSlim_Library_B29BE9CE(arg0);
@@ -6984,35 +6984,35 @@ s32 func_000423F8(s32 arg0) {
 s32 func_000424A8(s32 arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
-    void *temp_s0;
+    struct Unk_func_000424A8_temp_s0 *temp_s0;
 
     temp_s0 = sceHVSlim_Library_896E55F6(arg0);
     func_00047C48((s32) &func_00044E94);
-    temp_v0 = M2C_FIELD(temp_s0, s32 *, 0xF4);
+    temp_v0 = temp_s0->unkF4;
     if (temp_v0 != 0) {
         func_0003E480(temp_v0);
-        M2C_FIELD(temp_s0, s32 *, 0xF4) = 0;
+        temp_s0->unkF4 = 0;
     }
-    temp_v0_2 = M2C_FIELD(temp_s0, s32 *, 0xE8);
+    temp_v0_2 = temp_s0->unkE8;
     if (temp_v0_2 != 0) {
         func_00047E10(temp_v0_2);
     }
-    func_000049B8(M2C_FIELD(temp_s0, s32 *, 0), 1, 1);
-    func_00047E10(M2C_FIELD(temp_s0, s32 *, 0xE0));
+    func_000049B8(temp_s0->unk0, 1, 1);
+    func_00047E10(temp_s0->unkE0);
     func_000447B4((s32) temp_s0);
-    func_0002F488(M2C_FIELD(temp_s0, s32 *, 0xDC), 0);
-    M2C_FIELD(temp_s0, s32 *, 0x9C) = 0x10;
+    func_0002F488(temp_s0->unkDC, 0);
+    temp_s0->unk9C = 0x10;
     sceHVSlim_Library_B29BE9CE(arg0);
     func_00047E70(arg0);
     return 0;
 }
 
 s32 func_00042558(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00042558_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0x9C) == 0x10) {
-        M2C_FIELD(temp_v0, s32 *, 0x9C) = 0x11;
+    if (temp_v0->unk9C == 0x10) {
+        temp_v0->unk9C = 0x11;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -7022,24 +7022,24 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000425A
 
 s32 func_0004262C(s32 arg0, struct Unk_func_0004262C_1 *arg1) {
     s32 temp_s2;
-    void *temp_v0;
+    struct Unk_func_0004262C_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if ((M2C_FIELD(temp_v0, s32 *, 0x9C) == 0x12) || (arg1->unk18 & 0x28)) {
+    if ((temp_v0->unk9C == 0x12) || (arg1->unk18 & 0x28)) {
         if (arg1->unk10 == 0x800) {
-            temp_s2 = M2C_FIELD(temp_v0, s32 *, 0xB0);
+            temp_s2 = temp_v0->unkB0;
             if (temp_s2 == 1) {
                 func_00004408(2);
-                func_00042FEC(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 0x80), 4, 1);
-                M2C_FIELD(temp_v0, s32 *, 0x9C) = 0xF;
-                if (M2C_FIELD(temp_v0, s32 *, 0x98) == temp_s2) {
-                    func_00042FEC(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 0x80), 0, 0);
-                    M2C_FIELD(temp_v0, s32 *, 0x9C) = 0xF;
+                func_00042FEC(temp_v0->unk0, temp_v0->unk80, 4, 1);
+                temp_v0->unk9C = 0xF;
+                if (temp_v0->unk98 == temp_s2) {
+                    func_00042FEC(temp_v0->unk0, temp_v0->unk80, 0, 0);
+                    temp_v0->unk9C = 0xF;
                 }
             }
         }
         if (arg1->unk10 == 0x200) {
-            if ((M2C_FIELD(temp_v0, s32 *, 0xAC) == 1) && (M2C_FIELD(temp_v0, s32 *, 0xD4) == 0)) {
+            if ((temp_v0->unkAC == 1) && (temp_v0->unkD4 == 0)) {
                 func_00044808(temp_v0, 0);
                 func_00043538(temp_v0, arg0);
             }
@@ -7061,15 +7061,15 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00042FE
 
 void func_00043008(s32 arg0) {
     s32 temp_v0_2;
-    void *temp_v0;
+    struct Unk_func_00043008_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-        if (M2C_FIELD(temp_v0, s32 *, 0x98) == 0) {
-            temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0xD8);
+        if (temp_v0->unk98 == 0) {
+            temp_v0_2 = temp_v0->unkD8;
             if (temp_v0_2 != 0) {
                 sceHVNetfront_Module_76411162(8, -1, temp_v0_2);
-                M2C_FIELD(temp_v0, s32 *, 0xD8) = 0;
+                temp_v0->unkD8 = 0;
             }
         }
         func_00047E10(arg0);
@@ -7200,23 +7200,23 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0004510
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0004536C);
 
 s32 func_00045460(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00045460_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xA4) == 0) {
-        func_0002F35C(M2C_FIELD(temp_v0, s32 *, 0xB4), 0);
-        M2C_FIELD(temp_v0, s32 *, 0xA4) = 1;
+    if (temp_v0->unkA4 == 0) {
+        func_0002F35C(temp_v0->unkB4, 0);
+        temp_v0->unkA4 = 1;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
 }
 
 s32 func_000454B8(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_000454B8_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xA4) == 3) {
-        func_0002F488(M2C_FIELD(temp_v0, s32 *, 0xB4), 0);
+    if (temp_v0->unkA4 == 3) {
+        func_0002F488(temp_v0->unkB4, 0);
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     func_00047E70(arg0);
@@ -7224,11 +7224,11 @@ s32 func_000454B8(s32 arg0) {
 }
 
 s32 func_0004550C(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_0004550C_temp_v0 *temp_v0;
 
     temp_v0 = sceHVSlim_Library_896E55F6(arg0);
-    if (M2C_FIELD(temp_v0, s32 *, 0xA4) == 3) {
-        M2C_FIELD(temp_v0, s32 *, 0xA4) = 4;
+    if (temp_v0->unkA4 == 3) {
+        temp_v0->unkA4 = 4;
     }
     sceHVSlim_Library_B29BE9CE(arg0);
     return 0;
@@ -7237,12 +7237,12 @@ s32 func_0004550C(s32 arg0) {
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00045558);
 
 void func_000456F4(s32 arg0) {
-    void *temp_s1;
+    struct Unk_func_000456F4_temp_s1 *temp_s1;
 
     temp_s1 = sceHVSlim_Library_896E55F6(arg0);
     if (arg0 != 0) {
         func_00047E10(arg0);
-        M2C_FIELD(temp_s1, s32 *, 0xA4) = 3;
+        temp_s1->unkA4 = 3;
         sceHVSlim_Library_B29BE9CE(arg0);
     }
 }
@@ -7255,13 +7255,13 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00045C2
 
 void func_00045E20(s32 arg0) {
     s32 temp_v0_2;
-    void *temp_v0;
+    struct Unk_func_00045E20_temp_v0 *temp_v0;
 
     if (arg0 != 0) {
         temp_v0 = sceHVSlim_Library_896E55F6(arg0);
         if (temp_v0 != NULL) {
             func_0001EBE0(temp_v0);
-            temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x128);
+            temp_v0_2 = temp_v0->unk128;
             if (temp_v0_2 != 0) {
                 sceHVSlim_Library_880239D0(temp_v0_2);
             }
@@ -8326,11 +8326,11 @@ INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0005982
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000598B4);
 
 void func_0005996C(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_0005996C_temp_v0 *temp_v0;
 
     temp_v0 = func_00059518(arg0, 1);
-    M2C_FIELD(temp_v0, s32 *, 0x14) = arg1;
-    M2C_FIELD(temp_v0, s32 *, 0x10) = 1;
+    temp_v0->unk14 = arg1;
+    temp_v0->unk10 = 1;
 }
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_000599A0);

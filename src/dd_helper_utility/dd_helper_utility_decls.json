@@ -69,6 +69,7 @@
  "types": {
   "Unk_func_000005A4_0": "struct Unk_func_000005A4_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n};",
   "Unk_func_000005BC_0": "struct Unk_func_000005BC_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n};",
+  "Unk_func_0000063C_temp_v0": "struct Unk_func_0000063C_temp_v0 {\n    u8 pad0[0x1B8];\n    s32 unk1B8;\n};",
   "Unk_func_00000674_0": "struct Unk_func_00000674_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_000006AC_0": "struct Unk_func_000006AC_0 {\n    u8 pad0[0x8];\n    s32 unk8;\n};",
   "Unk_func_000008C4_1": "struct Unk_func_000008C4_1 {\n    s32 unk0;\n    s32 unk4;\n};"

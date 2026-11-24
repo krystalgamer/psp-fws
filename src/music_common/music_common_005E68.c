@@ -231,13 +231,13 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005E68", func_00
 void ***func_000079E4(void ***arg0, struct Unk_func_000079E4_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
-    void *temp_v1;
+    struct Unk_func_000079E4_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    temp_a1 = M2C_FIELD(temp_v1, void **, 0);
+    temp_s0 = temp_v1->unk4;
+    temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -257,10 +257,10 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005E68", func_00
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005E68", func_00007C50);
 
 void func_00007E20(s32 arg0) {
-    void *temp_v0;
+    struct Unk_func_00007E20_temp_v0 *temp_v0;
 
     temp_v0 = func_00007F9C();
-    if (M2C_FIELD(temp_v0, s8 *, 0x21) != 0) {
+    if (temp_v0->unk21 != 0) {
 
     } else {
         func_00008048(arg0, temp_v0);
@@ -1050,10 +1050,10 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005E68", func_00
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005E68", func_000170FC);
 
 void func_00017140(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_00017140_temp_v0 *temp_v0;
 
     temp_v0 = func_00017398(arg0, arg1);
-    if (M2C_FIELD(temp_v0, s8 *, 0x19) != 0) {
+    if (temp_v0->unk19 != 0) {
 
     } else {
         func_000175D4(arg0, temp_v0);
@@ -1063,13 +1063,13 @@ void func_00017140(s32 arg0, s32 arg1) {
 void ***func_00017184(void ***arg0, struct Unk_func_00017184_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
-    void *temp_v1;
+    struct Unk_func_00017184_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    temp_a1 = M2C_FIELD(temp_v1, void **, 0);
+    temp_s0 = temp_v1->unk4;
+    temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -1212,7 +1212,7 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005E68", func_00
 
 void *func_000187D4(struct Unk_func_000187D4_0 *arg0, s32 arg1) {
     s32 var_s0;
-    void *var_s1;
+    struct Unk_func_000187D4_var_s1 *var_s1;
 
     var_s0 = arg1;
     func_0001BDF4(arg0->unk10);
@@ -1220,7 +1220,7 @@ void *func_000187D4(struct Unk_func_000187D4_0 *arg0, s32 arg1) {
     if (var_s0 != 0) {
         do {
             var_s0 -= 1;
-            var_s1 = M2C_FIELD(var_s1, void **, 0x18);
+            var_s1 = var_s1->unk18;
         } while (var_s0 != 0);
     }
     func_0001BEDC(arg0->unk10);

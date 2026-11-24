@@ -7,11 +7,11 @@ void func_00001FE8(void **arg0, void **arg1) {
 }
 
 void func_00002008(void **arg0) {
-    void *temp_a0;
+    struct Unk_func_00002008_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 4) = (s32) (M2C_FIELD(temp_a0, s32 *, 4) + 1);
+        temp_a0->unk4 = (s32) (temp_a0->unk4 + 1);
     }
 }
 
@@ -1085,7 +1085,7 @@ void func_00008BBC(void) {
 }
 
 void func_00008BCC(s32 arg0) {
-    void *temp_a3;
+    struct Unk_func_00008BCC_temp_a3 *temp_a3;
 
     temp_a3 = *D_00166B5C;
     M2C_FIELD(temp_a3, M2C_UNK (**)(void **, s32, M2C_UNK, void *), 0xB4)(D_00166B5C, arg0, 0, temp_a3);

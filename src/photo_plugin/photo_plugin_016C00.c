@@ -3,7 +3,7 @@
 #include "photo_plugin_decls.h"
 
 void func_00016C00(void) {
-    void *temp_v0;
+    struct Unk_func_00016C00_temp_v0 *temp_v0;
 
     temp_v0 = func_00012DE4();
     if (temp_v0 != NULL) {
@@ -24,7 +24,7 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_016C00", func_00
 
 s32 func_00016E94(void) {
     s32 var_v1;
-    void *temp_v0;
+    struct Unk_func_00016E94_temp_v0 *temp_v0;
 
     temp_v0 = func_00012DE4();
     var_v1 = 0;

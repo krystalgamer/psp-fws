@@ -3,19 +3,19 @@
 #include "netfront_decls.h"
 
 void func_0005FF44(void **arg0, s32 arg1, s32 arg2) {
-    void *temp_v0;
+    struct Unk_func_0005FF44_temp_v0 *temp_v0;
 
     temp_v0 = *arg0;
-    M2C_FIELD(temp_v0, s32 *, 0x78) = arg2;
-    M2C_FIELD(temp_v0, s32 *, 0x74) = arg1;
+    temp_v0->unk78 = arg2;
+    temp_v0->unk74 = arg1;
 }
 
 void func_0005FF54(void **arg0, s32 *arg1, s32 *arg2) {
-    void *temp_v1;
+    struct Unk_func_0005FF54_temp_v1 *temp_v1;
 
     temp_v1 = *arg0;
-    *arg1 = M2C_FIELD(temp_v1, s32 *, 0x74);
-    *arg2 = M2C_FIELD(temp_v1, s32 *, 0x78);
+    *arg1 = temp_v1->unk74;
+    *arg2 = temp_v1->unk78;
 }
 
 s32 func_0005FF6C(void **arg0) {

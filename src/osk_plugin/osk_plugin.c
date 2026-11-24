@@ -514,14 +514,14 @@ INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000620C);
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_000062F4);
 
 void func_00006344(void) {
-    void *temp_v0;
+    struct Unk_func_00006344_temp_v0 *temp_v0;
 
     if (D_0001D590 != 0) {
 
     } else {
         temp_v0 = scePaf_D4FAE7D0(M2C_FIELD(D_0001D580, s32 *, 0x10));
         if (temp_v0 != NULL) {
-            scePaf_5EBC648F(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1B8));
+            scePaf_5EBC648F(temp_v0, temp_v0->unk1B8);
         }
         scePaf_1A45C860(D_0001D580, 0);
     }

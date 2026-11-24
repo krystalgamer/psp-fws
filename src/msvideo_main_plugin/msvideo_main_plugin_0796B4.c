@@ -5,7 +5,7 @@
 s32 func_000796B4(void **arg0, s32 arg1, void **arg2) {
     s32 var_a2;
     u32 temp_v1;
-    void *temp_a0;
+    struct Unk_func_000796B4_temp_a0 *temp_a0;
     void *temp_v0;
 
     temp_v1 = arg1 & 0xFFFF;
@@ -13,9 +13,9 @@ s32 func_000796B4(void **arg0, s32 arg1, void **arg2) {
     if (temp_v1 != 0) {
         temp_a0 = *arg0;
         var_a2 = 0x2003;
-        if (M2C_FIELD(temp_a0, s32 *, 0) != 0) {
+        if (temp_a0->unk0 != 0) {
             var_a2 = 0x200B;
-            if ((u32) M2C_FIELD(temp_a0, u32 *, 8) >= temp_v1) {
+            if ((u32) temp_a0->unk8 >= temp_v1) {
                 temp_v0 = func_000815B8(temp_a0, temp_v1 - 1);
                 var_a2 = 0x2003;
                 if (temp_v0 != NULL) {

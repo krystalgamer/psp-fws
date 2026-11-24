@@ -593,12 +593,12 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin", func_0
 
 s32 func_00002C18(struct Unk_func_00002C18_0 *arg0) {
     s32 var_v0;
-    void *temp_v1;
+    struct Unk_func_00002C18_temp_v1 *temp_v1;
 
     temp_v1 = arg0->unk90;
     var_v0 = 0;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(temp_v1, s32 *, 0x1C);
+        var_v0 = temp_v1->unk1C;
     }
     return var_v0;
 }
@@ -660,64 +660,64 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin", func_0
 
 s32 func_00003388(struct Unk_func_00003388_0 *arg0) {
     s32 temp_a0;
-    void *temp_s0;
+    struct Unk_func_00003388_temp_s0 *temp_s0;
 
     if (arg0->unk6D == 0) {
         temp_s0 = arg0->unk80;
         if (temp_s0 != NULL) {
-            temp_a0 = M2C_FIELD(temp_s0, s32 *, 0x28);
+            temp_a0 = temp_s0->unk28;
             if (temp_a0 == 0) {
 
             } else {
                 scePaf_BE5B0791(temp_a0);
             }
-            if (M2C_FIELD(temp_s0, s32 *, 0x24) == 0) {
+            if (temp_s0->unk24 == 0) {
 
             } else {
-                scePaf_BE5B0791(M2C_FIELD(temp_s0, s32 *, 0x24));
+                scePaf_BE5B0791(temp_s0->unk24);
             }
-            if (M2C_FIELD(temp_s0, s32 *, 0x20) == 0) {
+            if (temp_s0->unk20 == 0) {
 
             } else {
-                scePaf_BE5B0791(M2C_FIELD(temp_s0, s32 *, 0x20));
+                scePaf_BE5B0791(temp_s0->unk20);
             }
-            if (M2C_FIELD(temp_s0, s32 *, 0x1C) == 0) {
+            if (temp_s0->unk1C == 0) {
 
             } else {
-                scePaf_BE5B0791(M2C_FIELD(temp_s0, s32 *, 0x1C));
+                scePaf_BE5B0791(temp_s0->unk1C);
             }
-            if (M2C_FIELD(temp_s0, s32 *, 0x18) == 0) {
+            if (temp_s0->unk18 == 0) {
 
             } else {
-                scePaf_BE5B0791(M2C_FIELD(temp_s0, s32 *, 0x18));
+                scePaf_BE5B0791(temp_s0->unk18);
             }
-            if (M2C_FIELD(temp_s0, s32 *, 0x14) == 0) {
+            if (temp_s0->unk14 == 0) {
 
             } else {
-                scePaf_BE5B0791(M2C_FIELD(temp_s0, s32 *, 0x14));
+                scePaf_BE5B0791(temp_s0->unk14);
             }
-            if (M2C_FIELD(temp_s0, s32 *, 0x10) == 0) {
+            if (temp_s0->unk10 == 0) {
 
             } else {
-                scePaf_BE5B0791(M2C_FIELD(temp_s0, s32 *, 0x10));
+                scePaf_BE5B0791(temp_s0->unk10);
             }
-            if (M2C_FIELD(temp_s0, s32 *, 0xC) == 0) {
+            if (temp_s0->unkC == 0) {
 
             } else {
-                scePaf_BE5B0791(M2C_FIELD(temp_s0, s32 *, 0xC));
+                scePaf_BE5B0791(temp_s0->unkC);
             }
-            if (M2C_FIELD(temp_s0, s32 *, 8) == 0) {
+            if (temp_s0->unk8 == 0) {
 
             } else {
-                scePaf_BE5B0791(M2C_FIELD(temp_s0, s32 *, 8));
+                scePaf_BE5B0791(temp_s0->unk8);
             }
-            if (M2C_FIELD(temp_s0, s32 *, 4) == 0) {
+            if (temp_s0->unk4 == 0) {
 
             } else {
-                scePaf_48B5C1C0(M2C_FIELD(temp_s0, s32 *, 4));
+                scePaf_48B5C1C0(temp_s0->unk4);
             }
-            if (M2C_FIELD(temp_s0, s32 *, 0) != 0) {
-                scePaf_48B5C1C0(M2C_FIELD(temp_s0, s32 *, 0));
+            if (temp_s0->unk0 != 0) {
+                scePaf_48B5C1C0(temp_s0->unk0);
             }
             scePaf_4E67BB08(temp_s0);
             arg0->unk80 = NULL;
@@ -732,12 +732,12 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin", func_0
 
 s32 func_00003714(struct Unk_func_00003714_0 *arg0) {
     s32 var_v0;
-    void *temp_v1;
+    struct Unk_func_00003714_temp_v1 *temp_v1;
 
     temp_v1 = arg0->unkC4;
     var_v0 = 0;
     if (temp_v1 != NULL) {
-        var_v0 = M2C_FIELD(temp_v1, s32 *, 4);
+        var_v0 = temp_v1->unk4;
     }
     return var_v0;
 }
