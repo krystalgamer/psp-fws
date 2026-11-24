@@ -28,7 +28,14 @@ s32 func_00000910(void) {
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", module_start);
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_000009F4);
+s32 func_000009F4(void) {
+    InterruptManagerForKernel_F987B1F0(0xE);
+    sceKernelDeleteSema(M2C_VFIELD(&D_00002770, s32, 0x1C));
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00002770, s32, 0x20));
+    func_00001AB0();
+    func_000008D4();
+    return 0;
+}
 
 s32 module_reboot_before(void) {
     sceGpio_driver_310F0CCF(4);
@@ -39,7 +46,14 @@ s32 module_reboot_before(void) {
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", sceSircs_driver_62411801);
 
-INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", sceSircs_driver_19155A2F);
+s32 sceSircs_driver_19155A2F(void) {
+    InterruptManagerForKernel_F987B1F0(0xE);
+    sceKernelDeleteSema(M2C_VFIELD(&D_00002770, s32, 0x1C));
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00002770, s32, 0x20));
+    func_00001AB0();
+    func_000008D4();
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/sircs/nonmatchings/sircs", func_00000BA4);
 

@@ -4,7 +4,11 @@
 
 INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", func_00000000);
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_D6E9836A);
+s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1) {
+    M2C_VFIELD(&D_00001730, s32, 0x14) = arg1;
+    M2C_VFIELD(&D_00001730, s32, 0x10) = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_E9463B99);
 
@@ -14,7 +18,13 @@ INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_6536B1B6);
 
 INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", module_start);
 
-INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", module_reboot_before);
+s32 module_reboot_before(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_000016F0);
+    InterruptManagerForKernel_F987B1F0(0xC);
+    sceKernelDeleteSema(M2C_VFIELD(&D_00001730, s32, 4));
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00001730, s32, 0));
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/i2c/nonmatchings/i2c", sceI2c_driver_20ADF12A);
 

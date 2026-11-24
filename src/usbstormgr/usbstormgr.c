@@ -126,7 +126,15 @@ INCLUDE_ASM("tmp/asm/340/usbstormgr/nonmatchings/usbstormgr", func_00003628);
 
 INCLUDE_ASM("tmp/asm/340/usbstormgr/nonmatchings/usbstormgr", func_0000368C);
 
-INCLUDE_ASM("tmp/asm/340/usbstormgr/nonmatchings/usbstormgr", func_00003B58);
+void func_00003B58(void) {
+    M2C_VFIELD(&D_00005150, s32, 0x74) = -1;
+    M2C_VFIELD(&D_00005150, s32, 0x50) = 0;
+    M2C_VFIELD(&D_00005150, s32, 0x68) = -1;
+    M2C_VFIELD(&D_00005150, s32, 0x64) = -1;
+    M2C_VFIELD(&D_00005150, s32, 0x48) = -1;
+    M2C_VFIELD(&D_00005150, s32, 0x4C) = -1;
+    M2C_VFIELD(&D_00005150, s32, 0x70) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/usbstormgr/nonmatchings/usbstormgr", func_00003B84);
 

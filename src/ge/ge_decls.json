@@ -7,6 +7,7 @@
   "func_00001E9C": "void func_00001E9C(s32 arg0);",
   "func_00001EC4": "void func_00001EC4(s32 arg0, s32 arg1, s32 arg2);",
   "func_00001EF0": "s32 func_00001EF0(void);",
+  "func_00004C44": "s32 func_00004C44(void);",
   "func_00004C88": "s32 func_00004C88(void);",
   "func_00004C9C": "void func_00004C9C(void);",
   "func_00005140": "s32 func_00005140(s32, s32, s32, s32, s32);",
@@ -18,12 +19,14 @@
   "sceGe_driver_71FCD1D6": "s32 sceGe_driver_71FCD1D6(void);",
   "sceGe_driver_9DA4A75F": "s32 sceGe_driver_9DA4A75F(s32 arg0);",
   "sceGe_driver_BAD6E1CA": "s32 sceGe_driver_BAD6E1CA(s32 arg0);",
-  "sceGe_driver_C576E897": "s32 sceGe_driver_C576E897(void);"
+  "sceGe_driver_C576E897": "s32 sceGe_driver_C576E897(void);",
+  "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);"
  },
  "vars": {
   "D_00006240": "extern s32 D_00006240;",
   "D_00006A80": "extern s32 D_00006A80;",
   "D_00006A84": "extern u32 D_00006A84;",
+  "D_00007AC0": "extern M2C_UNK D_00007AC0;",
   "D_00007AC8": "extern s32 D_00007AC8;",
   "D_00007FC0": "extern s32 D_00007FC0;"
  }

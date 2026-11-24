@@ -26,7 +26,19 @@ INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetLastReincarnatedTime);
 
 INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtcGetLastAdjustedTime);
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", module_start);
+s32 module_start(void) {
+    memset(&D_00004580, 0, 0x60);
+    M2C_VFIELD(&D_00004580, s32, 0x1C) = -1;
+    M2C_VFIELD(&D_00004580, s32, 0) = 0;
+    M2C_VFIELD(&D_00004580, s32, 8) = 0;
+    M2C_VFIELD(&D_00004580, s32, 4) = 0;
+    M2C_VFIELD(&D_00004580, s32, 0xC) = 0;
+    sceRtc_driver_F0B5571C();
+    func_00003D9C();
+    sceSyscon_driver_A068B3D0((s32) &func_00000000, 0);
+    sceSysEventForKernel_CD9E4BB5(&D_00004540);
+    return 0;
+}
 
 s32 module_reboot_before(void) {
     sceSyscon_driver_A068B3D0(0, 0);
@@ -47,7 +59,11 @@ s32 sceRtc_driver_48D07D70(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtc_driver_C499AF2F);
+s32 sceRtc_driver_C499AF2F(void) {
+    M2C_VFIELD(&D_00004580, s32, 0x14) = 0;
+    M2C_VFIELD(&D_00004580, s32, 0x10) = 0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/rtc/nonmatchings/rtc", sceRtc_driver_759937C5);
 

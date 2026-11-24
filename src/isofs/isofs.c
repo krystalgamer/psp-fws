@@ -193,7 +193,34 @@ INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_000037A4);
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00003ADC);
 
-INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00003BB4);
+s32 func_00003BB4(void *arg0) {
+    s32 temp_s0;
+    s32 temp_s1;
+    s32 temp_v0_2;
+    s32 var_v0;
+    void *temp_v0;
+
+    var_v0 = 0x80010016;
+    if (arg0 != NULL) {
+        temp_v0 = sceIsofs_driver_19F9734D(M2C_FIELD(arg0, s32 *, 4));
+        temp_v0_2 = sceKernelWaitSema(M2C_FIELD(temp_v0, s32 *, 0x58), 1, NULL);
+        if (temp_v0_2 >= 0) {
+            temp_s1 = M2C_FIELD(arg0, s32 *, 0x10);
+            temp_s0 = sceKernelCpuSuspendIntr();
+            func_00004E30(temp_s1);
+            sceKernelCpuResumeIntr(temp_s0);
+            sceKernelFreeFpl(M2C_VFIELD(&D_00007608, s32, 0x20), M2C_FIELD(temp_s1, void **, 8));
+            SysMemForKernel_7B749390(M2C_VFIELD(&D_00007608, s32, 0x1C), temp_s1);
+            M2C_FIELD(arg0, s32 *, 0x10) = 0;
+            sceKernelSignalSema(M2C_FIELD(temp_v0, s32 *, 0x58), 1);
+            var_v0 = temp_v0_2;
+        } else {
+            KDebugForKernel_84F370BC(&D_00006200, &D_00006224, "isofs_dclose", temp_v0_2);
+            var_v0 = temp_v0_2;
+        }
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/201/isofs/nonmatchings/isofs", func_00003CA0);
 

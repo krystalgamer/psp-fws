@@ -3,7 +3,10 @@
   "func_00000170": "s32 func_00000170(void *arg0, void *arg1, s32 arg2);",
   "func_0000019C": "s32 func_0000019C(void *arg0, void *arg1, s32 arg2);",
   "func_000001CC": "s32 func_000001CC(void *arg0, void *arg1, s32 arg2);",
-  "func_000017C4": "s32 func_000017C4(void);"
+  "func_000017C4": "s32 func_000017C4(void);",
+  "func_00003B58": "void func_00003B58(void);"
  },
- "vars": {}
+ "vars": {
+  "D_00005150": "extern M2C_UNK D_00005150;"
+ }
 }

@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "func_00000AF4": "s32 func_00000AF4(void);",
   "func_0000134C": "s32 func_0000134C(s32 arg0);",
   "module_start": "s32 module_start(void);",
   "sceHprmIsHeadphoneExist": "s32 sceHprmIsHeadphoneExist(void);",
@@ -10,13 +11,17 @@
   "sceHprm_driver_4D1E622C": "s32 sceHprm_driver_4D1E622C(void);",
   "sceHprm_driver_526BB7F4": "s32 sceHprm_driver_526BB7F4(void);",
   "sceHprm_driver_71B5FB67": "u8 sceHprm_driver_71B5FB67(void);",
+  "sceHprm_driver_7B038374": "s32 sceHprm_driver_7B038374(M2C_UNK **arg0);",
   "sceHprm_driver_971AE8FB": "s32 sceHprm_driver_971AE8FB(s32 *arg0);",
   "sceHprm_driver_F04591FA": "s32 sceHprm_driver_F04591FA(s32 arg0);",
+  "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
   "sceSysreg_driver_7725CA08": "M2C_UNK sceSysreg_driver_7725CA08(M2C_UNK);",
   "sceSysreg_driver_BB823481": "M2C_UNK sceSysreg_driver_BB823481(M2C_UNK);"
  },
  "vars": {
+  "D_00002080": "extern M2C_UNK D_00002080;",
   "D_00002198": "extern s32 D_00002198;",
   "D_00002226": "extern u8 D_00002226;",
   "D_0000225C": "extern s32 D_0000225C;",

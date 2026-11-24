@@ -7,6 +7,7 @@
 extern s32 D_00006240;
 extern s32 D_00006A80;
 extern u32 D_00006A84;
+extern M2C_UNK D_00007AC0;
 extern s32 D_00007AC8;
 extern s32 D_00007FC0;
 
@@ -17,6 +18,7 @@ s32 func_000017E0(s32, s32, s32, s32);
 void func_00001E9C(s32 arg0);
 void func_00001EC4(s32 arg0, s32 arg1, s32 arg2);
 s32 func_00001EF0(void);
+s32 func_00004C44(void);
 s32 func_00004C88(void);
 void func_00004C9C(void);
 s32 func_00005140(s32, s32, s32, s32, s32);
@@ -29,5 +31,6 @@ s32 sceGe_driver_71FCD1D6(void);
 s32 sceGe_driver_9DA4A75F(s32 arg0);
 s32 sceGe_driver_BAD6E1CA(s32 arg0);
 s32 sceGe_driver_C576E897(void);
+s32 sceKernelDeleteEventFlag(s32);
 
 #endif

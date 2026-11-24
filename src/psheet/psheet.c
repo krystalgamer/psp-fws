@@ -74,7 +74,16 @@ s32 func_000012F0(s32 arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00001360);
+s32 func_00001360(s32 arg0, s32 arg1) {
+    s32 var_v0;
+    s32 var_v1;
+
+    var_v0 = sceKernelWaitSema(M2C_VFIELD(&D_00002A80, u32, 0), 1, NULL);
+    if ((var_v0 < 0) || (M2C_VFIELD(&D_00002A80, s32, 0xC) = arg1, M2C_VFIELD(&D_00002A80, s32, 8) = arg0, var_v0 = sceKernelSignalSema(M2C_VFIELD(&D_00002A80, u32, 0), 1), var_v1 = 0, (var_v0 < 0))) {
+        var_v1 = var_v0;
+    }
+    return var_v1;
+}
 
 s32 func_000013D8(void) {
     s32 temp_s0;

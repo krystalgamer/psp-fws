@@ -84,7 +84,13 @@ s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1) {
     return func_0000161C((s32) arg0, arg1, 3);
 }
 
-INCLUDE_ASM("tmp/asm/282/ctrl/nonmatchings/ctrl", sceCtrl_driver_A88E8D22);
+s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_VFIELD(&D_00001D70, s32, 0xA40) = arg3;
+    M2C_VFIELD(&D_00001D70, s32, 0xA34) = arg0;
+    M2C_VFIELD(&D_00001D70, s32, 0xA38) = arg1;
+    M2C_VFIELD(&D_00001D70, s32, 0xA3C) = arg2;
+    return 0;
+}
 
 s32 sceCtrl_driver_252D3A8D(s8 arg0) {
     D_00001D7F = arg0;

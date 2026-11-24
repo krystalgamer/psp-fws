@@ -108,7 +108,18 @@ INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_00002620);
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_0000268C);
 
-INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_000027AC);
+s32 func_000027AC(void) {
+    s32 temp_a3;
+
+    temp_a3 = (sceUsbBus_driver_B1644BE7(&D_00005960) >= 0) ? 0 : -1;
+    M2C_VFIELD(&D_00008478, s32, 0xB8) = 0x4E200;
+    M2C_VFIELD(&D_00008478, s8, 0xB1) = 0;
+    M2C_VFIELD(&D_00008478, s32, 0xBC) = 0;
+    M2C_VFIELD(&D_00008478, s32, 0xC0) = 0;
+    M2C_VFIELD(&D_00008478, s8, 0xB0) = 0;
+    M2C_VFIELD(&D_00008478, s32, 0xB4) = 0;
+    return temp_a3;
+}
 
 s32 func_00002804(void) {
     return (sceUsbBus_driver_C1E2A540(&D_00005960) >= 0) ? 0 : -1;
