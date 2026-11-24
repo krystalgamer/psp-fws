@@ -320,7 +320,21 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_15BEBC", func_001616A8);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_15BEBC", sceGuDebugPrint);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_15BEBC", sceGuSetCallback);
+s32 sceGuSetCallback(s32 arg0, s32 arg1) {
+    s32 var_a2;
+
+    var_a2 = 0;
+    if (arg0 != 1) {
+        if (arg0 == 4) {
+            var_a2 = M2C_VFIELD(&D_001D7A10, s32, 4);
+            M2C_VFIELD(&D_001D7A10, s32, 4) = arg1;
+        }
+    } else {
+        var_a2 = M2C_VFIELD(&D_001D7A10, s32, 0);
+        M2C_VFIELD(&D_001D7A10, s32, 0) = arg1;
+    }
+    return var_a2;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_15BEBC", sceGumSetMatrixStack);
 

@@ -107,7 +107,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_001406C4);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_00140780);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_001407C8);
+void func_001407C8(void) {
+    M2C_VFIELD(&D_001E0ECC, s16, 0x190C) = 0;
+    M2C_VFIELD(&D_001E0ECC, s16, 0x190A) = 0;
+    M2C_VFIELD(&D_001E0ECC, s16, 0x18EA) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_001407E0);
 
@@ -165,7 +169,9 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_00140DD4);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_00140E1C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_0014107C);
+s32 func_0014107C(void) {
+    return M2C_VFIELD(&D_001E0ECC, s32, 0xA820);
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_13BBE8", func_00141094);
 
