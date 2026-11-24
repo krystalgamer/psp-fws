@@ -181,10 +181,38 @@ EABI = ABI[:8] + ["a4", "a5", "a6", "a7"] + ABI[12:]
 UNWRAP = re.compile(r"\.word\s+0x[0-9A-Fa-f]{8}\s*#\s*((?:break|teq|tne|sync|lwl|lwr|swl|swr)\b[^\n]*)$", re.M)
 
 
+K1_WRITE = re.compile(r"^(\s*/\*[^*]*\*/\s+)(?!s[bhw]\b|sw[lr]\b|b\w*\b|j\w*\b|mt\w*\b)\w[\w.]*\s+\$k1\b", re.M)
+BRANCH = re.compile(r"^\s*/\*[^*]*\*/\s+(?:b\w*|j\w*)\s", re.M)
+
+
+def k1_as_global(asm):
+    """Show m2c $k1 as the global `k1` (a register variable in real compiles):
+    load it at entry and store it after every write. A write in a branch delay
+    slot is moved before the branch (with its store), leaving a nop."""
+    out = []
+    store = ["    lui $at, %hi(k1)", "    sw $k1, %lo(k1)($at)"]
+    for line in asm.splitlines():
+        if re.match(r"^\s*glabel\s", line) and not any("%lo(k1)" in o for o in out):
+            out += [line, "    lui $at, %hi(k1)", "    lw $k1, %lo(k1)($at)"]
+            continue
+        if K1_WRITE.match(line):
+            prev = max((i for i, o in enumerate(out) if o.lstrip().startswith("/*")), default=None)
+            if prev is not None and BRANCH.match(out[prev]):
+                out[prev:prev] = [line] + store
+                out.append("    nop")
+                continue
+            out += [line] + store
+            continue
+        out.append(line)
+    return "\n".join(out) + "\n"
+
+
 def run_m2c(mod, name, ctx, target="mips-gcc-c"):
     names = EABI if target.startswith("mipsee") else ABI
     asm = UNWRAP.sub(lambda m: m[1].strip(), mod.funcs[name][2].read_text())
     asm = re.sub(r"\$(\d+)\b", lambda m: "$" + names[int(m[1])] if int(m[1]) < 32 else m[0], asm)
+    if "$k1" in asm:
+        asm = k1_as_global(asm)
     ctx = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", "-DM2CTX", f"-I{ROOT/'include'}", "-"],
                          input=ctx, capture_output=True, text=True).stdout
     with tempfile.TemporaryDirectory() as td:
@@ -194,6 +222,18 @@ def run_m2c(mod, name, ctx, target="mips-gcc-c"):
                             "--context", str(Path(td) / "ctx.c"), str(Path(td) / "f.s")],
                            capture_output=True, text=True, timeout=120)
     return r.stdout if r.returncode == 0 and "M2C_ERROR" not in r.stdout else None
+
+
+def stack_base_local(out, name):
+    """m2c prints the address of a local at sp+0 as bare `sp` and leaves `sp0`
+    undeclared; make it a declared local whose address is taken."""
+    m = re.search(rf"^[^\n]*\b{name}\(.*\) {{\n", out, re.M)
+    if not m:
+        return out
+    body = out[m.end():]
+    if re.search(r"\bsp\b", body) and not re.search(r"^\s+[\w *]+\bsp0;$", body, re.M):
+        body = "    void *sp0;\n" + re.sub(r"(\(\w+\) )?\bsp\b", "&sp0", body)
+    return out[:m.end()] + body
 
 
 def join_halves(out):
@@ -245,6 +285,7 @@ def _try_func(mod, name, header_ctx, target, seen):
     if not out:
         return None
     out = join_halves(out)
+    out = stack_base_local(out, name)
     # cc1 emits its own divide-by-zero check (bnez + break 7)
     out = re.sub(r"^\s*if \([^()]+ == 0\) \{\n\s*M2C_BREAK\((?:0, )?7\);\n\s*\}\n", "", out, flags=re.M)
     decls, body = split_m2c(out, name)
