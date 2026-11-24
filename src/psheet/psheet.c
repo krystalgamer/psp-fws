@@ -108,7 +108,17 @@ INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00001F40);
 
 INCLUDE_RODATA("tmp/asm/340/psheet/nonmatchings/psheet", D_000029AC);
 
-INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00001F94);
+s32 func_00001F94(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v0;
+    s32 var_v1;
+
+    var_v0 = sceAmctrl_driver_1CCB66D2(&D_00002F48, 2, 1, arg3, arg2, 0);
+    if ((var_v0 < 0) || (var_v0 = sceAmctrl_driver_0785C974(&D_00002F48, arg0, arg1), (var_v0 < 0)) || (var_v0 = sceAmctrl_driver_9951C50F(&D_00002F48), var_v1 = 0, (var_v0 < 0))) {
+        KDebugForKernel_84F370BC(&D_000029C4, &D_000029E0, "data_encrypt", var_v0);
+        var_v1 = 0x80510102;
+    }
+    return var_v1;
+}
 
 INCLUDE_RODATA("tmp/asm/340/psheet/nonmatchings/psheet", D_000029C4);
 

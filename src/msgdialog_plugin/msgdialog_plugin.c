@@ -167,7 +167,13 @@ void func_00000BC8(void) {
 
 INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_00000BE4);
 
-INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_00000C0C);
+void func_00000C0C(void) {
+    void *sp0;
+    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    func_00000E88(&sp0);
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    func_00000E88(&sp0);
+}
 
 INCLUDE_ASM("tmp/asm/282/msgdialog_plugin/nonmatchings/msgdialog_plugin", func_00000C58);
 

@@ -14,7 +14,14 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("tmp/asm/100/dlgsample_plugin/nonmatchings/dlgsample_plugin", func_0000015C);
 
-INCLUDE_ASM("tmp/asm/100/dlgsample_plugin/nonmatchings/dlgsample_plugin", func_0000018C);
+void func_0000018C(void) {
+    void *sp0;
+    scePaf_F609FA81(D_0000053C, &D_000004CC, 0, 0);
+    scePaf_CAF05F1D(D_0000053C, &D_000004CC);
+    sceVshCommonGui_441D55D7(1);
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_5C161337(-1));
+    func_000002C4(&sp0);
+}
 
 INCLUDE_ASM("tmp/asm/100/dlgsample_plugin/nonmatchings/dlgsample_plugin", func_00000200);
 
