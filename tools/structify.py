@@ -148,6 +148,174 @@ def structify_globals(mod, only=None, skip=()):
     return len(changed), n_fields
 
 
+FUNC = re.compile(r"^((?!static)[\w \*]+?)\b(\w+)\(([^;{}]*)\) \{\n(.*?)^\}\n", re.M | re.S)
+ARGACC = re.compile(r"M2C_FIELD\((arg\d+), ([^,()]+?), (0x[0-9A-Fa-f]+|\d+)\)")
+
+
+class DSU:
+    def __init__(self):
+        self.p = {}
+
+    def find(self, x):
+        self.p.setdefault(x, x)
+        while self.p[x] != x:
+            self.p[x] = self.p[self.p[x]]
+            x = self.p[x]
+        return x
+
+    def union(self, a, b):
+        self.p[self.find(a)] = self.find(b)
+
+
+def split_args(s):
+    out, depth, cur = [], 0, ""
+    for ch in s:
+        if ch == "," and depth == 0:
+            out.append(cur.strip())
+            cur = ""
+            continue
+        depth += ch in "(["
+        depth -= ch in ")]"
+        cur += ch
+    if cur.strip():
+        out.append(cur.strip())
+    return out
+
+
+def proto_params(proto):
+    m = re.match(r"^[\w \*]+?\b\w+\((.*)\);$", proto.strip())
+    return split_args(m[1]) if m else None
+
+
+def structify_args(mod, only=None, skip=()):
+    """Turn `void *argN` parameters accessed through M2C_FIELD into struct pointers."""
+    src = ROOT / "src" / mod
+    store = json.loads((src / f"{mod}_decls.json").read_text())
+    store.setdefault("types", {})
+    files = sorted(src.glob("*.c"))
+    texts = {f: f.read_text() for f in files}
+    funcs = {}  # name -> (file, params list, body)
+    for f, text in texts.items():
+        for m in FUNC.finditer(text):
+            funcs[m[2]] = (f, split_args(m[3]), m[4])
+    dsu = DSU()
+    eligible = {}
+    for name, (f, params, body) in funcs.items():
+        for k, prm in enumerate(params):
+            pm = re.fullmatch(r"void \*(arg\d+)", prm)
+            if not pm:
+                continue
+            a = pm[1]
+            rest = ARGACC.sub("", body)
+            if re.search(rf"\b{a}\s*[-+\[]|[-+]\s*{a}\b|\b{a}\s*[-+]=|\({a}\)\s*[-+\[]", rest):
+                continue
+            eligible[(name, k)] = a
+            dsu.find((name, k))
+    # unify parameters passed straight through to other functions
+    for name, (f, params, body) in funcs.items():
+        args = {a: k for (n, k), a in eligible.items() if n == name}
+        if not args:
+            continue
+        for cm in re.finditer(r"\b(\w+)\(", body):
+            callee = cm[1]
+            if callee not in funcs and callee not in store["funcs"]:
+                continue
+            depth, j = 1, cm.end()
+            while j < len(body) and depth:
+                depth += body[j] == "("
+                depth -= body[j] == ")"
+                j += 1
+            for pos, expr in enumerate(split_args(body[cm.end():j - 1])):
+                em = re.fullmatch(r"(?:\([\w \*]+\) )?(arg\d+)", expr)
+                if em and em[1] in args and (callee, pos) in eligible:
+                    dsu.union((name, args[em[1]]), (callee, pos))
+    comps = collections.defaultdict(list)
+    for key in eligible:
+        comps[dsu.find(key)].append(key)
+    n_types = n_lines = 0
+    renames = {}  # (func, arg) -> struct name
+    accepted = {}  # struct -> fields
+    for root, members in sorted(comps.items(), key=lambda kv: min(kv[1])):
+        acc = collections.Counter()
+        for name, k in members:
+            a = eligible[(name, k)]
+            for m in ARGACC.finditer(funcs[name][2]):
+                if m[1] == a:
+                    t = field_type(False, m[2])
+                    if t:
+                        acc[(int(m[3], 0), t)] += 1
+        if not acc:
+            continue
+        sname = "Unk_" + min(members)[0] + f"_{min(members)[1]}"
+        if (only is not None and sname != only) or sname in skip:
+            continue
+        by_off = collections.defaultdict(list)
+        for (off, t), n in acc.items():
+            by_off[off].append((n, t))
+        fields = {}
+        for off in sorted(by_off):
+            n, t = max(by_off[off])
+            sz = size_of(t)
+            if sz is None or off % min(sz, 4):
+                continue
+            prev = max((o for o in fields if o < off), default=None)
+            if prev is not None and prev + size_of(fields[prev]) > off:
+                continue
+            fields[off] = t
+        if not fields:
+            continue
+        body, pos = [], 0
+        for off in sorted(fields):
+            if off > pos:
+                body.append(f"    u8 pad{pos:X}[0x{off - pos:X}];")
+            body.append(f"    {fields[off]} unk{off:X};")
+            pos = off + size_of(fields[off])
+        store["types"][sname] = f"struct {sname} {{\n" + "\n".join(body) + "\n};"
+        accepted[sname] = fields
+        for name, k in members:
+            renames[(name, k)] = sname
+        n_types += 1
+    if not renames:
+        return 0, 0
+    # rewrite definitions, bodies and prototypes
+    for f, text in texts.items():
+        def fix_func(m):
+            nonlocal n_lines
+            name, params, body = m[2], split_args(m[3]), m[4]
+            for k, prm in enumerate(params):
+                sname = renames.get((name, k))
+                if not sname:
+                    continue
+                a = eligible[(name, k)]
+                params[k] = f"struct {sname} *{a}"
+                fields = accepted[sname]
+
+                def acc_repl(am, a=a, fields=fields):
+                    if am[1] != a:
+                        return am[0]
+                    off, t = int(am[3], 0), field_type(False, am[2])
+                    return f"{a}->unk{off:X}" if fields.get(off) == t else am[0]
+                new = ARGACC.sub(acc_repl, body)
+                n_lines += new != body
+                body = new
+            return f"{m[1]}{name}({', '.join(params)}) {{\n{body}}}\n"
+        new = FUNC.sub(fix_func, text)
+        if new != text:
+            f.write_text(new)
+    for name in {n for n, _ in renames}:
+        proto = store["funcs"].get(name)
+        params = proto_params(proto) if proto else None
+        if not params:
+            continue
+        for k in range(len(params)):
+            sname = renames.get((name, k))
+            if sname and re.fullmatch(r"void \*(?:\s*arg\d+)?", params[k]):
+                params[k] = f"struct {sname} *" + (re.search(r"arg\d+", params[k])[0] if "arg" in params[k] else "")
+        store["funcs"][name] = re.sub(r"\(.*\);$", "(" + ", ".join(params) + ");", proto)
+    write_decls(mod, store)
+    return n_types, n_lines
+
+
 def verify(vm):
     return subprocess.run(["tools/regress.sh", vm], cwd=ROOT, capture_output=True, text=True).returncode == 0
 
@@ -162,7 +330,8 @@ def main():
     if subprocess.run(["git", "diff", "--quiet", "--", f"src/{mod}"], cwd=ROOT).returncode:
         print(f"{vm}: local changes, skipping")
         return
-    n, lines = structify_globals(mod)
+    phase = structify_args if "--args" in sys.argv else structify_globals
+    n, lines = phase(mod)
     if not n:
         print(f"{vm}: nothing to do")
         return
@@ -174,11 +343,19 @@ def main():
         return
     # one global at a time, keeping those that still match
     revert(mod)
-    syms = sorted(set(m[2] for f in (ROOT / "src" / mod).glob("*.c") for m in ACCESS.finditer(f.read_text())))
+    if phase is structify_args:
+        syms = sorted(json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text())["types"])
+        syms = [s for s in syms if s.startswith("Unk_")]
+        structify_args(mod)  # recompute names, then revert and go one by one
+        syms = sorted(json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text())["types"])
+        syms = [s for s in syms if s.startswith("Unk_")]
+        revert(mod)
+    else:
+        syms = sorted(set(m[2] for f in (ROOT / "src" / mod).glob("*.c") for m in ACCESS.finditer(f.read_text())))
     bad, good = [], 0
     for sym in syms:
         before = {f: f.read_text() for f in (ROOT / "src" / mod).iterdir() if f.is_file()}
-        k, _ = structify_globals(mod, only=sym)
+        k, _ = phase(mod, only=sym)
         if not k:
             continue
         if verify(vm):
@@ -187,7 +364,7 @@ def main():
             for f, txt in before.items():
                 f.write_text(txt)
             bad.append(sym)
-    print(f"{vm}: {'OK' if good else 'FAILED'}, {good} globals as structs one by one; kept macros for {', '.join(bad)}")
+    print(f"{vm}: {'OK' if good else 'FAILED'}, {good} structs one by one; kept macros for {', '.join(bad)}")
 
 
 if __name__ == "__main__":
