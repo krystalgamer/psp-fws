@@ -1445,7 +1445,13 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428", func_0004D840);
 
-INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428", func_0004D890);
+void func_0004D890(void) {
+    void *sp0;
+    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    func_00005878(&sp0);
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    func_00005878(&sp0);
+}
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_03D428", func_0004D8DC);
 

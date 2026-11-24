@@ -1150,7 +1150,29 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00005
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000054F8);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0000554C);
+void func_0000554C(void) {
+    void *sp0;
+    if (!(D_00020654 & 0x80)) {
+        sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+        func_000032EC(&sp0);
+        sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+        func_000032EC(&sp0);
+        sceVshCommonGui_BAA1F762(&sp0, sceVshCommonGui_93107A60());
+        func_000032EC(&sp0);
+        D_00020650 = 0;
+        D_00020654 = 0;
+        if (sceVshCommonGui_A0DE7090(0) != 0) {
+            D_00020654 |= 1;
+        }
+        if (sceVshCommonGui_441D55D7(0) != 0) {
+            D_00020654 |= 2;
+        }
+        if (sceVshCommonGui_EEB86F0E(0) != 0) {
+            D_00020654 |= 8;
+        }
+        D_00020654 |= 0x80;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00005638);
 

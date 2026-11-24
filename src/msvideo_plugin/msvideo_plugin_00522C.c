@@ -111,7 +111,16 @@ INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", fun
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", func_00006904);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", func_00006988);
+s32 func_00006988(void) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceIoDevctl(&D_00061A80, 0x02125802, NULL, 0U, &sp0, 4U) == 0) {
+        var_v1 = (sp0 == 0x11) | (sp0 == 0x41);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", func_000069E4);
 
@@ -213,7 +222,12 @@ INCLUDE_RODATA("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", 
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", func_000070BC);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", func_000075F4);
+void func_000075F4(void) {
+    void *sp0;
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_5C161337(-1));
+    func_00006A14(&sp0);
+    sceVshCommonGui_441D55D7(1);
+}
 
 INCLUDE_RODATA("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", D_00061B08);
 
@@ -2616,7 +2630,16 @@ s32 func_0001EFE8(s32 *arg0) {
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", func_0001F008);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", func_0001F080);
+s32 func_0001F080(void **arg0) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = -1;
+    if (func_00039C34(arg0, &sp0) == 0) {
+        var_v1 = sp0 != 0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_00522C", func_0001F0B0);
 

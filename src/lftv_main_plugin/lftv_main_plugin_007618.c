@@ -4134,7 +4134,42 @@ void func_00033B00(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_00033B24);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_00033BDC);
+void func_00033BDC(s32 arg0, s32 arg1) {
+    void *sp0;
+    s32 temp_s0;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    void *temp_s0_2;
+
+    if (arg1 != 1) {
+        if (D_0005F8E8 != NULL) {
+            if (M2C_FIELD(D_0005F8E8, s32 *, 4) != 4) {
+                temp_v0 = func_00008F70();
+                if (temp_v0 != 0) {
+                    M2C_FIELD(temp_v0, s8 *, 0xC) = 1;
+                }
+            }
+            if (D_0005F874 != 0) {
+                if (arg0 != 0) {
+                    if (M2C_FIELD(D_0005F8E8, s32 *, 4) != 0) {
+
+                    } else if (((sceNetApctlGetState(&sp0) != 0) || (sp0 != 4)) && (temp_s0 = D_0005F110, (temp_s0 != 0))) {
+                        func_0002CF90(temp_s0);
+                        func_0002D0DC((void *) temp_s0);
+                    }
+                } else {
+                    sceVshCommonGui_80271F41();
+                    scePaf_6B1E90C7();
+                    temp_s0_2 = D_0005F8E8;
+                    if ((temp_s0_2 == NULL) || (temp_v0_2 = scePaf_A0ED77C4(0, &func_00033D08, 0, -1, -1, (s32 *) func_00033DB4), M2C_FIELD(temp_s0_2, s32 *, 0xC) = temp_v0_2, (temp_v0_2 == 0))) {
+                        scePaf_66907719();
+                        sceVshCommonGui_1CF884A1();
+                    }
+                }
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_00033D08);
 
@@ -5977,11 +6012,23 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_00049380);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_000493F0);
+s32 func_000493F0(s32 arg0, s32 arg1, s32 arg2, u32 arg3) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = -4;
+    if (func_000497E0(arg0, arg1, arg2, &sp0) != 0) {
+        var_v1 = (arg3 >= sp0) ? 0 : -4;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_00049430);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_000494AC);
+s32 func_000494AC(s32 arg0, s32 arg1, s32 arg2) {
+    void *sp0;
+    return (func_00049878(arg0, arg1, &sp0, arg2) != 0) ? 0 : -4;
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_000494D8);
 
