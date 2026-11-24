@@ -1441,7 +1441,16 @@ void func_0000DF84(void **arg0, s32 arg1) {
     M2C_FIELD(*arg0, M2C_UNK (**)(void **, M2C_UNK *), 0x34)(arg0, &func_0000E054);
 }
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin", func_0000DFD4);
+void func_0000DFD4(s32 arg0) {
+    void *sp0;
+    sceNetApctlGetState(&sp0);
+    if (sp0 == 0) {
+
+    } else {
+        D_000B60AC = 1;
+        func_0002D754((s32) &func_0000A214, arg0);
+    }
+}
 
 s32 func_0000E028(void *arg0) {
     s32 var_a1;
@@ -2475,7 +2484,16 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin", 
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin", func_0001B020);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin", func_0001B0A4);
+s32 func_0001B0A4(void) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceIoDevctl(&D_000AFEE4, 0x02125802, NULL, 0U, &sp0, 4U) == 0) {
+        var_v1 = (sp0 == 0x11) | (sp0 == 0x41);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin", func_0001B100);
 

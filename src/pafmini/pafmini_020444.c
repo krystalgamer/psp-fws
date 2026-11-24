@@ -1262,9 +1262,27 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_00038E08);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_000390C4);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_0003960C);
+s32 func_0003960C(void *arg0, s32 *arg1) {
+    s32 temp_v1;
+    u8 temp_a2;
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_0003965C);
+    temp_v1 = ((u32) ((M2C_FIELD(arg0, u16 *, 0x1E8) * M2C_FIELD(arg0, s32 *, 0x1E4)) + 7) >> 3) * 2;
+    *arg1 = temp_v1;
+    temp_a2 = M2C_FIELD(arg0, u8 *, 0x1EA);
+    *arg1 = ((s32) ((temp_v1 + temp_a2) - 1) / (s32) temp_a2) * temp_a2;
+    return 0;
+}
+
+s32 func_0003965C(void *arg0, s32 *arg1) {
+    s32 temp_v1;
+    u8 temp_a2;
+
+    temp_v1 = ((u32) ((M2C_FIELD(arg0, u16 *, 0x1F0) * M2C_FIELD(arg0, s32 *, 0x1EC)) + 7) >> 3) * 2;
+    *arg1 = temp_v1;
+    temp_a2 = M2C_FIELD(arg0, u8 *, 0x1F2);
+    *arg1 = ((s32) ((temp_v1 + temp_a2) - 1) / (s32) temp_a2) * temp_a2;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_000396AC);
 
@@ -6557,13 +6575,22 @@ void scePaf_1B043852(void *arg0) {
     sceKernelDeleteEventFlag(M2C_FIELD(arg0, s32 *, 4));
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", scePaf_0B0959FC);
+s32 scePaf_0B0959FC(void *arg0) {
+    void *sp0;
+    sceKernelSignalSema(*M2C_FIELD(arg0, s32 **, 0), 1);
+    sceKernelWaitEventFlag(M2C_FIELD(arg0, u32 *, 4), 1U, 0x10, &sp0, NULL);
+    sceKernelWaitSema(*M2C_FIELD(arg0, s32 **, 0), 1, NULL);
+    return 0;
+}
 
 void scePaf_CA5EF446(void *arg0) {
     sceKernelSetEventFlag(M2C_FIELD(arg0, s32 *, 4), 1);
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_000899A8);
+void func_000899A8(void *arg0) {
+    void *sp0;
+    sceKernelCancelEventFlag(M2C_FIELD(arg0, s32 *, 4), 0U, &sp0);
+}
 
 void func_000899CC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = 0;
@@ -7772,7 +7799,19 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_0009628C);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_00096410);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_020444", func_000964F0);
+s32 func_000964F0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 temp_v0;
+
+    func_0009716C(arg0, arg1, arg2, arg3);
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    if (temp_v0 != 0) {
+        M2C_FIELD(arg0, M2C_UNK (**)(s32, s32), 0xD0)(arg0, temp_v0);
+        M2C_FIELD(arg0, s32 *, 0xDBC) = 0;
+        M2C_FIELD(arg0, s32 *, 0xDC0) = 0;
+    }
+    D_000E2220 = (((s32) D_000E2220 ^ arg0) == 0) ? NULL : D_000E2220;
+    return 0;
+}
 
 s32 func_00096554(void) {
     return 0;

@@ -2681,7 +2681,16 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_04
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_044E48", func_00062AE8);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_044E48", func_00062B9C);
+s32 func_00062B9C(void) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceDisplayGetMode(&sp0, NULL, NULL) == 0) {
+        var_v1 = (sp0 == 0xD1) | (sp0 == 0x1D1);
+    }
+    return var_v1;
+}
 
 INCLUDE_RODATA("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_044E48", D_000B4104);
 

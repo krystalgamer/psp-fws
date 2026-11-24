@@ -840,13 +840,24 @@ INCLUDE_RODATA("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_0002D498);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_0002D4CC);
+void func_0002D4CC(void) {
+    void *sp0;
+    sceVshCommonUtil_094B0219(&sp0, 0);
+    func_0002D550();
+    sceVshCommonUtil_D24DD449(&sp0);
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_0002D4FC);
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_0002D550);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_0002D5BC);
+s32 func_0002D5BC(void) {
+    void *sp0;
+    sceVshCommonUtil_094B0219(&sp0, 0);
+    func_0002D4FC();
+    sceVshCommonUtil_D24DD449(&sp0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_0002D5F0);
 
@@ -1347,7 +1358,10 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_02
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_00034A30);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_00034E80);
+void func_00034E80(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    void *sp0;
+    func_00034A30(arg0, arg1, arg2, arg3, arg4, &sp0);
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_00034E9C);
 
@@ -2417,7 +2431,19 @@ void func_0003E674(void) {
 void func_0003E67C(void) {
 }
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_0003E684);
+void func_0003E684(s32 arg0) {
+    void *sp0;
+    M2C_UNK sp4;
+    s32 sp8;
+    s32 spC;
+
+    func_0003F6D4(arg0, &sp0, (s32) &sp4);
+    if (func_0003F680(arg0, (s32) &sp8, (s32) &spC) != 0) {
+
+    } else {
+        func_0003E644(arg0, sp8, spC);
+    }
+}
 
 void func_0003E6DC(void *arg0, void *arg1) {
     u16 temp_a0;
@@ -2639,7 +2665,11 @@ void func_00040238(void) {
     func_0003EC84();
 }
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_00040254);
+void func_00040254(s32 arg0, void *arg1) {
+    void *sp0;
+    func_0003E6DC(arg1, &sp0);
+    func_0004028C(arg0, &sp0);
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_0004028C);
 
