@@ -202,7 +202,12 @@ s32 func_000EEF54(void **arg0) {
     return M2C_FIELD(*arg0, s32 *, 0xB0);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000EEF60);
+s32 func_000EEF60(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x70) = 3;
+    M2C_FIELD(arg0, s32 *, 0x74) = 0;
+    M2C_FIELD(arg0, s32 *, 0x78) = 0;
+    return 1;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000EEF78);
 
@@ -574,7 +579,11 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F2138);
 void func_000F2148(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F2150);
+void func_000F2150(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, s32 *, 0x408) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x400) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x404) = arg3;
+}
 
 s32 func_000F2160(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x408);
@@ -1019,7 +1028,11 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F30D0);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F3104);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F3128);
+void func_000F3128(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, s32 *, 0x5D0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x5D4) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x5D8) = arg3;
+}
 
 s32 func_000F3138(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x5D0);
@@ -1033,7 +1046,10 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F3240);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F3324);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_000F3A44);
+void func_000F3A44(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x57C) = 3;
+    M2C_FIELD(arg0, s32 *, 0x568) = arg1;
+}
 
 void func_000F3A54(void *arg0) {
     u32 temp_a0;
@@ -1235,7 +1251,32 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", png_do_unpack);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", png_do_unshift);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", png_do_chop);
+void png_do_chop(void *arg0, u8 *arg1) {
+    u32 temp_lo;
+    u32 var_a3;
+    u8 *var_a0;
+    u8 *var_a1;
+    u8 temp_v0;
+
+    var_a1 = arg1;
+    if (M2C_FIELD(arg0, u8 *, 9) == 0x10) {
+        temp_lo = M2C_FIELD(arg0, s32 *, 0) * M2C_FIELD(arg0, u8 *, 0xA);
+        var_a0 = var_a1;
+        var_a3 = 0;
+        if (temp_lo != 0) {
+            do {
+                var_a3 += 1;
+                *var_a1 = *var_a0;
+                var_a0 += 2;
+                var_a1 += 1;
+            } while (var_a3 < temp_lo);
+        }
+        temp_v0 = M2C_FIELD(arg0, u8 *, 0xA);
+        M2C_FIELD(arg0, u8 *, 9) = 8U;
+        M2C_FIELD(arg0, s8 *, 0xB) = (s8) (temp_v0 * 8);
+        M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 0) * temp_v0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", png_do_read_swap_alpha);
 
@@ -1467,7 +1508,10 @@ s32 func_001025D0(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_001025EC);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_00102740);
+void func_00102740(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x5A8) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x5A4) = arg1;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_0010274C);
 
@@ -1480,9 +1524,15 @@ void func_001027B8(s32 arg0, void *arg1, M2C_UNK arg2) {
 void func_001027E0(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_001027E8);
+void func_001027E8(void *arg0, s8 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s8 *, 0x5C5) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x5C8) = arg2;
+}
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0EC398", func_001027F4);
+void func_001027F4(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x5F0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x5F4) = arg2;
+}
 
 void png_set_bgr(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x424) = (s32) (M2C_FIELD(arg0, s32 *, 0x424) | 1);

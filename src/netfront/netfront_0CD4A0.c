@@ -516,7 +516,12 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", inflateInit2_);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_18CB51AB);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", fixedtables);
+void fixedtables(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0x44) = &D_0012A78C;
+    M2C_FIELD(arg0, s32 *, 0x4C) = 9;
+    M2C_FIELD(arg0, M2C_UNK **, 0x48) = &D_0012AF8C;
+    M2C_FIELD(arg0, s32 *, 0x50) = 5;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", updatewindow);
 
@@ -838,7 +843,13 @@ void func_000E25A0(void **arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000E2618);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000E2734);
+void func_000E2734(void **arg0) {
+    void *temp_v0;
+
+    temp_v0 = *arg0;
+    M2C_FIELD(temp_v0, s32 *, 0x6C) = 0;
+    M2C_FIELD(temp_v0, s32 *, 0x14) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000E2744);
 

@@ -883,7 +883,22 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014A94);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014AF4);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00014B50);
+s32 func_00014B50(s32 arg0) {
+    s32 temp_v0;
+    s32 var_a1;
+
+    sceHVNetfront_Module_D611E938(arg0, 0, 0xD4);
+    var_a1 = 0;
+    if (func_000155E8(arg0) != 0) {
+        func_0001570C(arg0);
+        temp_v0 = arg0 + 0x90;
+        var_a1 = 1;
+        M2C_FIELD(arg0, s32 *, 0x20) = temp_v0;
+        M2C_FIELD(arg0, s32 *, 0x24) = temp_v0;
+        *M2C_FIELD(arg0, s8 **, 4) = 0;
+    }
+    return var_a1;
+}
 
 void func_00014BB4(s32 arg0) {
     func_000182E4();
@@ -1366,7 +1381,10 @@ void func_00019CD0(void *arg0, M2C_UNK arg1) {
     sceHVNetfront_Module_65813EA4(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), arg1);
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00019CF4);
+void func_00019CF4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
 void func_00019D00(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = func_00009E08();
@@ -1653,7 +1671,11 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F01C);
 void func_0001F18C(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F194);
+void func_0001F194(s32 arg0) {
+    M2C_VFIELD(&D_00133BC8, s32, 8) = func_0001C934(2, 0x48, func_000AFB7C(arg0, 0));
+    M2C_VFIELD(&D_00133BE0, s32, 8) = func_0001C934(3, 0x48, func_000AFB7C(arg0, 1));
+    M2C_VFIELD(&D_00133BF8, s32, 8) = func_0001C934(4, 0x48, func_000AFB7C(arg0, 2));
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F228);
 
@@ -1682,7 +1704,9 @@ M2C_UNK *func_0001F6B0(void *arg0) {
 void func_0001F764(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F76C);
+void func_0001F76C(void *arg0) {
+    M2C_VFIELD(&D_00133C10, s32, 8) = func_0001C934(6, 0xA0, func_000B20DC(arg0));
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0001F7A4);
 
@@ -1713,7 +1737,9 @@ M2C_UNK *func_000202C8(void *arg0) {
 void func_0002037C(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00020384);
+void func_00020384(void *arg0) {
+    M2C_VFIELD(&D_00133C28, s32, 8) = func_0001C934(5, 0x60, func_000D1070(arg0));
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000203BC);
 
@@ -1764,7 +1790,9 @@ M2C_UNK *func_000227B0(void *arg0) {
 void func_00022864(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002286C);
+void func_0002286C(void *arg0) {
+    M2C_VFIELD(&D_00133C58, s32, 8) = func_0001C934(0xD, 0x58, func_000B79F4(arg0));
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000228A4);
 
@@ -1793,7 +1821,9 @@ M2C_UNK *func_00022BE8(void *arg0) {
 void func_00022C9C(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00022CA4);
+void func_00022CA4(void *arg0) {
+    M2C_VFIELD(&D_00133C70, s32, 8) = func_0001C934(7, 0x54, func_000BB80C(arg0));
+}
 
 M2C_UNK *func_00022CDC(void) {
     return &D_001358DC;
@@ -2303,7 +2333,13 @@ void func_00028834(void *arg0, s32 arg1) {
     M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D0), void **, 0x38), s32 *, 0x34) = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028844);
+void func_00028844(void *arg0, s32 arg1, s32 arg2) {
+    void *temp_v0;
+
+    temp_v0 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D0), void **, 0x38);
+    M2C_FIELD(temp_v0, s32 *, 0x38) = arg1;
+    M2C_FIELD(temp_v0, s32 *, 0x3C) = arg2;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00028858);
 
@@ -3772,7 +3808,12 @@ s32 func_0003EB14(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return var_s1;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003EBF8);
+void func_0003EBF8(s32 arg0) {
+    if (D_00130F80 == arg0) {
+        D_00130F80 = -1;
+        D_00130F84 = -1;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0003EC1C);
 
