@@ -2,7 +2,13 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0230EC", func_000230EC);
+s32 func_000230EC(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x24) == 0) {
+        M2C_FIELD(arg0, s32 *, 0x24) = scePaf_F13EBB78(D_00055600);
+    }
+    func_00023138((s32) arg0, 0);
+    return M2C_FIELD(arg0, s32 *, 0x24);
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0230EC", func_00023138);
 

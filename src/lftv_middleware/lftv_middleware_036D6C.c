@@ -2,7 +2,9 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_036D6C", func_00036D6C);
+s32 func_00036D6C(void) {
+    return D_0005C5DC;
+}
 
 s32 func_00036D78(s32 arg0) {
     D_0005C5DC = arg0;
@@ -31,7 +33,11 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_036D6C", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_036D6C", func_000372A0);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_036D6C", func_000372E0);
+s32 func_000372E0(void *arg0, void *arg1) {
+    M2C_FIELD(arg0, s32 *, 0x48) = (s32) M2C_FIELD(arg1, s32 *, 0);
+    M2C_FIELD(arg0, s32 *, 0x4C) = (s32) M2C_FIELD(arg1, s32 *, 4);
+    return 0;
+}
 
 s32 func_000372F8(void) {
     return 0;

@@ -2,9 +2,17 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_039E64", func_00039E64);
+void func_00039E64(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 8) = 1;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00056648;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_039E64", func_00039E80);
+void func_00039E80(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 8) = 1;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00056648;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
 void func_00039E9C(M2C_UNK **arg0) {
     *arg0 = &D_00056648;
@@ -121,7 +129,15 @@ void func_0003B6F8(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_039E64", func_0003B728);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_039E64", func_0003B77C);
+void func_0003B77C(void *arg0) {
+    void **temp_a0;
+    void *temp_a1;
+
+    temp_a0 = M2C_FIELD(arg0, void ***, 0x1C);
+    temp_a1 = *temp_a0;
+    M2C_FIELD(temp_a1, M2C_UNK (**)(void **, void *), 8)(temp_a0, temp_a1);
+    M2C_FIELD(arg0, s8 *, 0x1A) = 1;
+}
 
 void func_0003B7B8(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x1A) = 0;

@@ -2,7 +2,22 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_023ABC", func_00023ABC);
+s32 func_00023ABC(void *arg0, s32 arg1) {
+    s32 var_a2;
+    u32 temp_v0;
+    u32 temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, u32 *, 4);
+    var_a2 = 0;
+    if (temp_v1 != 0) {
+        temp_v0 = M2C_FIELD(arg0, u32 *, 8) + arg1;
+        if (temp_v1 >= temp_v0) {
+            M2C_FIELD(arg0, u32 *, 8) = temp_v0;
+            var_a2 = 1;
+        }
+    }
+    return var_a2;
+}
 
 s32 func_00023AEC(void *arg0, u32 arg1) {
     s32 var_a2;
@@ -47,7 +62,12 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_023ABC", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_023ABC", func_000240BC);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_023ABC", func_000240E8);
+void func_000240E8(void *arg0, s32 arg1) {
+    if (M2C_FIELD(arg0, u8 *, 0x30) == 1) {
+        M2C_FIELD(arg0, s32 *, 0x2C) = arg1;
+        M2C_FIELD(arg0, u8 *, 0x30) = 0U;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_023ABC", func_00024108);
 
@@ -157,7 +177,24 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_023ABC", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_023ABC", func_00025D70);
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_023ABC", func_00025E54);
+void func_00025E54(void *arg0, s32 arg1) {
+    s32 temp_a4;
+    u8 temp_a3;
+
+    temp_a3 = M2C_FIELD(arg0, u8 *, 0x14);
+    if (temp_a3 == 1) {
+        temp_a4 = M2C_FIELD(arg0, s32 *, 0x10);
+        if ((temp_a4 + 1) != arg1) {
+            if ((temp_a4 != 0xFFFF) & (~temp_a4 != 0)) {
+                M2C_FIELD(arg0, u8 *, 0xC) = temp_a3;
+            } else if (arg1 != 0) {
+                M2C_FIELD(arg0, u8 *, 0xC) = temp_a3;
+            }
+        }
+    }
+    M2C_FIELD(arg0, s32 *, 0x10) = arg1;
+    M2C_FIELD(arg0, u8 *, 0x14) = 1U;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_023ABC", func_00025EAC);
 

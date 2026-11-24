@@ -2,7 +2,9 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_038348", func_00038348);
+s32 func_00038348(void) {
+    return D_0005C5E4;
+}
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_038348", func_00038354);
 
