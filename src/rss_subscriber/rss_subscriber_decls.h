@@ -4,6 +4,8 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_000039F4;
+extern M2C_UNK D_00003D20;
 extern M2C_UNK D_00003D30;
 extern M2C_UNK D_00003D40;
 extern M2C_UNK D_00003DB0;
@@ -12,6 +14,8 @@ s32 func_0000028C(void);
 M2C_UNK func_000002B0(M2C_UNK, M2C_UNK);
 void func_0000032C(void);
 void func_0000034C(void);
+void func_0000036C(void *arg0);
+void func_0000044C(void *arg0);
 s32 func_00000818(s32);
 M2C_UNK func_0000273C(M2C_UNK, M2C_UNK);
 void func_00002784(void);
@@ -30,7 +34,9 @@ void func_00002D28(M2C_UNK **arg0);
 s32 func_00002D50(void);
 void func_00002D70(M2C_UNK **arg0);
 M2C_UNK func_00003278();
+M2C_UNK memset(void *, M2C_UNK, M2C_UNK);
 s32 module_stop(void);
+s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
 M2C_UNK scePaf_4E67BB08();
 s32 scePaf_75062BCF();
 M2C_UNK scePaf_7EC15225(void *);

@@ -34,9 +34,55 @@ void func_0000034C(void) {
     func_000002B0(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_0000036C);
+void func_0000036C(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00003D20;
+    M2C_FIELD(arg0, s32 *, 4) = sceKernelCreateSema(&D_000039F4, 0x100U, 1, 1, NULL);
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    func_000027A4(arg0 + 0x1C, 0);
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
+    memset(arg0 + 0x2C, 0, 0x100);
+    M2C_FIELD(arg0, s32 *, 0x12C) = 0;
+    memset(arg0 + 0x130, 0, 0x304);
+    M2C_FIELD(arg0, s32 *, 0x434) = 0;
+    memset(arg0 + 0x438, 0, 0x400);
+    M2C_FIELD(arg0, s32 *, 0x838) = 0;
+    memset(arg0 + 0x83C, 0, 0x304);
+    M2C_FIELD(arg0, s32 *, 0xB40) = 0;
+    memset(arg0 + 0xB44, 0, 0x100);
+    M2C_FIELD(arg0, s32 *, 0xC44) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC48) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_0000044C);
+void func_0000044C(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00003D20;
+    M2C_FIELD(arg0, s32 *, 4) = sceKernelCreateSema(&D_000039F4, 0x100U, 1, 1, NULL);
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    func_000027A4(arg0 + 0x1C, 0);
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
+    memset(arg0 + 0x2C, 0, 0x100);
+    M2C_FIELD(arg0, s32 *, 0x12C) = 0;
+    memset(arg0 + 0x130, 0, 0x304);
+    M2C_FIELD(arg0, s32 *, 0x434) = 0;
+    memset(arg0 + 0x438, 0, 0x400);
+    M2C_FIELD(arg0, s32 *, 0x838) = 0;
+    memset(arg0 + 0x83C, 0, 0x304);
+    M2C_FIELD(arg0, s32 *, 0xB40) = 0;
+    memset(arg0 + 0xB44, 0, 0x100);
+    M2C_FIELD(arg0, s32 *, 0xC44) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC48) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/rss_subscriber/nonmatchings/rss_subscriber", func_0000052C);
 

@@ -11,8 +11,10 @@ extern s32 D_00003DC8;
 
 void func_0000113C(void *arg0, s32 *arg1);
 void func_00002188(void *arg0);
+void func_000023E8(void *arg0);
 s32 func_00002420(void *arg0);
 s32 func_0000256C(void *arg0, s32 arg1);
+void func_00002648(void *arg0);
 void func_00002794(void *arg0, s32 *arg1);
 void func_000029F8(void *arg0, void *arg1);
 void func_00002AF4(void *arg0, u32 arg1);

@@ -1035,7 +1035,10 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014BF8);
 
-INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014E7C);
+void func_00014E7C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, void **, 4) = arg0;
+}
 
 void func_00014E88(void *arg0, M2C_UNK *arg1) {
     M2C_UNK *temp_v1;

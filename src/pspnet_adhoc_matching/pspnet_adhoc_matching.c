@@ -60,7 +60,13 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_matching/nonmatchings/pspnet_adhoc_matchin
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_matching/nonmatchings/pspnet_adhoc_matching", func_000022B4);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_matching/nonmatchings/pspnet_adhoc_matching", func_000023E8);
+void func_000023E8(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x48) > 0) {
+        func_00003178(M2C_FIELD(arg0, void **, 0x4C));
+        M2C_FIELD(arg0, s32 *, 0x48) = 0;
+        M2C_FIELD(arg0, void **, 0x4C) = NULL;
+    }
+}
 
 s32 func_00002420(void *arg0) {
     void *sp0;
@@ -82,7 +88,13 @@ s32 func_0000256C(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_matching/nonmatchings/pspnet_adhoc_matching", func_000025B4);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_matching/nonmatchings/pspnet_adhoc_matching", func_00002648);
+void func_00002648(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x64) > 0) {
+        func_00003178(M2C_FIELD(arg0, void **, 0x68));
+        M2C_FIELD(arg0, s32 *, 0x64) = 0;
+        M2C_FIELD(arg0, void **, 0x68) = NULL;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc_matching/nonmatchings/pspnet_adhoc_matching", func_00002680);
 

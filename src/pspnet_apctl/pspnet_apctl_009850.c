@@ -31,7 +31,13 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_00
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_00009A48);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_00009BEC);
+s32 func_00009BEC(void *arg0) {
+    sceNet_lib_57CC57DA(arg0 + 0x24F4, 0, 0x2C);
+    M2C_FIELD(arg0, s32 *, 0x2508) = 5;
+    M2C_FIELD(arg0, s32 *, 0x250C) = 5;
+    M2C_FIELD(arg0, s32 *, 0x2510) = 3;
+    return 0;
+}
 
 s32 func_00009C34(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x2518) = 0;
@@ -73,7 +79,11 @@ s32 func_00009D90(void *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_00009DA0);
+s32 func_00009DA0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x24DC) = 1;
+    M2C_FIELD(arg0, s32 *, 0x24FC) = 1;
+    return 0;
+}
 
 s32 func_00009DB4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x24DC) = 0;
@@ -140,7 +150,14 @@ s32 func_0000A448(void *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl_009850", func_0000A458);
+s32 func_0000A458(s32 arg0) {
+    void *temp_v1;
+
+    temp_v1 = arg0 + 0x24A0;
+    M2C_FIELD(temp_v1, s32 *, 0x14) = 0;
+    M2C_FIELD(temp_v1, s32 *, 0x40) = 0;
+    return 0;
+}
 
 s32 func_0000A46C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x24D4) = 0;
