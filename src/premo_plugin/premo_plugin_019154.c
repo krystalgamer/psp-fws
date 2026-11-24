@@ -774,7 +774,11 @@ s32 func_0001E59C(void *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001E5BC);
+s32 func_0001E5BC(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0xB8) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x5C) = arg2;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001E5CC);
 
@@ -932,7 +936,11 @@ s32 func_0001FA70(void *arg0) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001FA90);
+s32 func_0001FA90(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0xB8) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x5C) = arg2;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001FAA0);
 
@@ -1224,7 +1232,12 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0002263C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_000226E4);
+s32 func_000226E4(void *arg0, s32 arg1, s32 arg2, s8 arg3) {
+    M2C_FIELD(arg0, s32 *, 0xFC) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x5C) = arg2;
+    M2C_FIELD(arg0, s8 *, 0xF0) = arg3;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_000226F8);
 

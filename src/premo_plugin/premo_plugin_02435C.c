@@ -74,7 +74,22 @@ s32 func_00024554(void *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_0002458C);
+s32 func_0002458C(void *arg0) {
+    void *sp0;
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    var_v1 = 0x80108C31;
+    if (temp_v0 >= 0) {
+        var_v1 = sceHttpSendRequest(temp_v0, NULL, 0U);
+    }
+    if (var_v1 == 0x80431063) {
+        sceHttpGetNetworkPspError(M2C_FIELD(arg0, s32 *, 8), &sp0);
+        var_v1 = sp0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_000245F8);
 
@@ -96,7 +111,12 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_000249A4);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00024A24);
+void func_00024A24(s32 **arg0) {
+    M2C_FIELD(arg0, s32 **, 0) = &D_0002C1D0;
+    M2C_FIELD(arg0, M2C_UNK **, 0x4C) = &D_0002B7F0;
+    M2C_FIELD(arg0, M2C_UNK **, 0x30) = &D_0002AE78;
+    func_000243CC(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_02435C", func_00024A64);
 

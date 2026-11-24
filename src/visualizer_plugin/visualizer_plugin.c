@@ -236,9 +236,17 @@ s32 func_00000D4C(void *arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00000D58);
+void func_00000D58(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0000CFD8;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00000D70);
+void func_00000D70(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0000CFD8;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+}
 
 void func_00000D88(M2C_UNK **arg0) {
     *arg0 = &D_0000CFD8;
@@ -335,7 +343,10 @@ void func_000019C8(M2C_UNK **arg0) {
     scePaf_6261C0A5();
 }
 
-INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_000019F0);
+void func_000019F0(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0000D138;
+    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_0000D1D0;
+}
 
 INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00001A0C);
 
@@ -641,7 +652,12 @@ void func_00007D34(void *arg0) {
     scePaf_0AC29BBC(6, 0x19D, M2C_FIELD(arg0, s32 *, 8) * 2, 0, M2C_FIELD(arg0, s32 *, 4));
 }
 
-INCLUDE_ASM("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", func_00007D64);
+void func_00007D64(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 8) = arg2;
+    M2C_FIELD(arg0, s32 *, 0xC) = arg3;
+    M2C_FIELD(arg0, s32 *, 0x10) = arg4;
+}
 
 INCLUDE_RODATA("tmp/asm/352/visualizer_plugin/nonmatchings/visualizer_plugin", D_0000D8E8);
 

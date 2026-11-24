@@ -194,9 +194,16 @@ void func_00013A34(M2C_UNK **arg0) {
     scePaf_6261C0A5((s32) arg0);
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00013A5C);
+void func_00013A5C(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0002A910;
+    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_0002A9C0;
+}
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00013A78);
+void func_00013A78(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0002A910;
+    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_0002A9C0;
+    scePaf_6261C0A5((s32) arg0);
+}
 
 void func_00013AAC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
