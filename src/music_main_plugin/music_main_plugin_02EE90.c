@@ -1027,12 +1027,12 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 void ***func_00041530(void ***arg0, struct Unk_func_00041530_1 *arg1, void **arg2) {
     void **temp_s0;
-    void *temp_v1;
+    struct Unk_func_00041530_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    temp_s0 = temp_v1->unk4;
+    *temp_s0 = temp_v1->unk0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -1041,12 +1041,12 @@ void ***func_00041530(void ***arg0, struct Unk_func_00041530_1 *arg1, void **arg
 
 void ***func_00041598(void ***arg0, struct Unk_func_00041598_1 *arg1, void **arg2) {
     void **temp_s0;
-    void *temp_v1;
+    struct Unk_func_00041598_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    temp_s0 = temp_v1->unk4;
+    *temp_s0 = temp_v1->unk0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -1065,13 +1065,13 @@ void func_000417D8(struct Unk_func_000417D8_0 *arg0) {
     M2C_UNK *temp_v0;
     M2C_UNK *var_v1;
     void *temp_s0;
-    void *var_v0;
+    struct Unk_func_000417D8_var_v0 *var_v0;
 
     var_v1 = arg0->unk0;
     var_v0 = M2C_FIELD(var_v1, void **, 4);
     if (var_v0 != var_v1) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_v1 = arg0->unk0;
             var_v0 = temp_s0;
@@ -1087,13 +1087,13 @@ void func_00041834(struct Unk_func_00041834_0 *arg0) {
     M2C_UNK *temp_v0;
     M2C_UNK *var_v1;
     void *temp_s0;
-    void *var_v0;
+    struct Unk_func_00041834_var_v0 *var_v0;
 
     var_v1 = arg0->unk0;
     var_v0 = M2C_FIELD(var_v1, void **, 4);
     if (var_v0 != var_v1) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_v1 = arg0->unk0;
             var_v0 = temp_s0;
@@ -1117,14 +1117,14 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 void func_000419D4(void **arg0) {
     void *temp_s0;
-    void *var_a0;
-    void *var_v0;
+    struct Unk_func_000419D4_var_a0 *var_a0;
+    struct Unk_func_000419D4_var_v0 *var_v0;
 
     var_a0 = *arg0;
-    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    var_v0 = var_a0->unk4;
     if (var_v0 != var_a0) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
@@ -1135,14 +1135,14 @@ void func_000419D4(void **arg0) {
 
 void func_00041A2C(void **arg0) {
     void *temp_s0;
-    void *var_a0;
-    void *var_v0;
+    struct Unk_func_00041A2C_var_a0 *var_a0;
+    struct Unk_func_00041A2C_var_v0 *var_v0;
 
     var_a0 = *arg0;
-    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    var_v0 = var_a0->unk4;
     if (var_v0 != var_a0) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
@@ -2076,24 +2076,24 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 s32 func_0004D924(struct Unk_func_0004D77C_0 *arg0, s32 arg1) {
     s32 var_v1;
-    void *temp_v0;
+    struct Unk_func_0004D924_temp_v0 *temp_v0;
 
     var_v1 = 0;
     if ((arg1 >= 0) && (arg0->unk14 >= (arg1 + 2))) {
         temp_v0 = arg0->unkC + arg1;
-        var_v1 = (M2C_FIELD(temp_v0, u8 *, 0) << 8) | M2C_FIELD(temp_v0, u8 *, 1);
+        var_v1 = (temp_v0->unk0 << 8) | temp_v0->unk1;
     }
     return var_v1;
 }
 
 s32 func_0004D960(struct Unk_func_0004D77C_0 *arg0, s32 arg1) {
     s32 var_a2;
-    void *temp_v1;
+    struct Unk_func_0004D960_temp_v1 *temp_v1;
 
     var_a2 = 0;
     if ((arg1 >= 0) && (arg0->unk14 >= (arg1 + 4))) {
         temp_v1 = arg0->unkC + arg1;
-        var_a2 = (M2C_FIELD(temp_v1, u8 *, 0) << 0x18) | (M2C_FIELD(temp_v1, u8 *, 1) << 0x10) | (M2C_FIELD(temp_v1, u8 *, 2) << 8) | M2C_FIELD(temp_v1, u8 *, 3);
+        var_a2 = (temp_v1->unk0 << 0x18) | (temp_v1->unk1 << 0x10) | (temp_v1->unk2 << 8) | temp_v1->unk3;
     }
     return var_a2;
 }

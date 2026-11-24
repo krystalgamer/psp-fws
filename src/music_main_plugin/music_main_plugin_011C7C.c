@@ -190,14 +190,14 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011C7C
 
 void func_00015514(void **arg0) {
     void *temp_s0;
-    void *var_a0;
-    void *var_v0;
+    struct Unk_func_00015514_var_a0 *var_a0;
+    struct Unk_func_00015514_var_v0 *var_v0;
 
     var_a0 = *arg0;
-    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    var_v0 = var_a0->unk4;
     if (var_v0 != var_a0) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
@@ -223,12 +223,12 @@ s32 *func_000157C4(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
 
 void ***func_000157FC(void ***arg0, struct Unk_func_000157FC_1 *arg1, void **arg2) {
     void **temp_s0;
-    void *temp_v1;
+    struct Unk_func_000157FC_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    temp_s0 = temp_v1->unk4;
+    *temp_s0 = temp_v1->unk0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -240,10 +240,10 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011C7C
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011C7C", func_000158E4);
 
 void func_00015928(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_00015928_temp_v0 *temp_v0;
 
     temp_v0 = func_00015C9C(arg0, arg1);
-    if (M2C_FIELD(temp_v0, s8 *, 0x3D) != 0) {
+    if (temp_v0->unk3D != 0) {
 
     } else {
         func_00015CF4(arg0, temp_v0);
@@ -524,14 +524,14 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_011C7C
 
 void func_00019538(void **arg0) {
     void *temp_s0;
-    void *var_a0;
-    void *var_v0;
+    struct Unk_func_00019538_var_a0 *var_a0;
+    struct Unk_func_00019538_var_v0 *var_v0;
 
     var_a0 = *arg0;
-    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    var_v0 = var_a0->unk4;
     if (var_v0 != var_a0) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;

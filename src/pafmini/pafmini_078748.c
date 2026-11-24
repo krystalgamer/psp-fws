@@ -1396,13 +1396,13 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_078748", func_00090A78);
 void ***func_00090B04(void ***arg0, struct Unk_func_00090B04_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
-    void *temp_v1;
+    struct Unk_func_00090B04_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    temp_a1 = M2C_FIELD(temp_v1, void **, 0);
+    temp_s0 = temp_v1->unk4;
+    temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -1625,7 +1625,7 @@ s32 func_00093634(void) {
 }
 
 s32 func_0009363C(struct Unk_func_0009363C_0 *arg0) {
-    void *temp_a0;
+    struct Unk_func_0009363C_temp_a0 *temp_a0;
 
     temp_a0 = *arg0->unk7C;
     M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD88)(temp_a0);
@@ -1635,7 +1635,7 @@ s32 func_0009363C(struct Unk_func_0009363C_0 *arg0) {
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_078748", func_00093668);
 
 s32 func_0009369C(struct Unk_func_0009369C_0 *arg0) {
-    void *temp_a0;
+    struct Unk_func_0009369C_temp_a0 *temp_a0;
 
     temp_a0 = *arg0->unk7C;
     M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD90)(temp_a0);
@@ -1643,7 +1643,7 @@ s32 func_0009369C(struct Unk_func_0009369C_0 *arg0) {
 }
 
 s32 func_000936C8(struct Unk_func_000936C8_0 *arg0) {
-    void *temp_a0;
+    struct Unk_func_000936C8_temp_a0 *temp_a0;
 
     temp_a0 = *arg0->unk7C;
     M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD98)(temp_a0);
@@ -1920,7 +1920,7 @@ s32 func_00095D98(struct Unk_func_00095D98_0 *arg0) {
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_078748", func_00095DE8);
 
 s32 func_00095E08(void **arg0) {
-    void *temp_a0;
+    struct Unk_func_00095E08_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xF8)(temp_a0);
@@ -3081,10 +3081,10 @@ void func_000AB084(void) {
 }
 
 void func_000AB0A0(void) {
-    void *temp_s0;
+    struct Unk_func_000AB0A0_temp_s0 *temp_s0;
 
     temp_s0 = D_00108A2C;
-    M2C_FIELD(temp_s0, s16 *, 0x28) = func_000AB0D4(M2C_FIELD(temp_s0, s32 *, 0x2C), (s32) M2C_FIELD(temp_s0, s16 *, 4));
+    temp_s0->unk28 = func_000AB0D4(temp_s0->unk2C, (s32) temp_s0->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_078748", func_000AB0D4);

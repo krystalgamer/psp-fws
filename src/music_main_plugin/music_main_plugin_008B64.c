@@ -17,11 +17,11 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_008B64", func_00008C48);
 
 void func_00008CE4(void **arg0) {
-    void *temp_a0;
+    struct Unk_func_00008CE4_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
     if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 4) = (s32) (M2C_FIELD(temp_a0, s32 *, 4) + 1);
+        temp_a0->unk4 = (s32) (temp_a0->unk4 + 1);
     }
 }
 

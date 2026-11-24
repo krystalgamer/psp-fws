@@ -559,13 +559,13 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", func_00071DF4);
 void ***func_00071E74(void ***arg0, struct Unk_func_00071E74_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
-    void *temp_v1;
+    struct Unk_func_00071E74_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    temp_a1 = M2C_FIELD(temp_v1, void **, 0);
+    temp_s0 = temp_v1->unk4;
+    temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
@@ -575,13 +575,13 @@ void ***func_00071E74(void ***arg0, struct Unk_func_00071E74_1 *arg1, void **arg
 void ***func_00071EDC(void ***arg0, struct Unk_func_00071EDC_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
-    void *temp_v1;
+    struct Unk_func_00071EDC_temp_v1 *temp_v1;
 
     temp_v1 = *arg2;
-    temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
-    temp_a1 = M2C_FIELD(temp_v1, void **, 0);
+    temp_s0 = temp_v1->unk4;
+    temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
-    M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
+    M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);

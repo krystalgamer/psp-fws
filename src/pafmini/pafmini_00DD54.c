@@ -9,10 +9,10 @@ s32 *func_0000DD54(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00DD54", func_0000DD8C);
 
 void func_0000DDF4(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_0000DDF4_temp_v0 *temp_v0;
 
     temp_v0 = func_0000DE70(arg0, arg1);
-    if (M2C_FIELD(temp_v0, s8 *, 0x1D) != 0) {
+    if (temp_v0->unk1D != 0) {
 
     } else {
         func_0000E138(arg0, temp_v0);

@@ -489,13 +489,13 @@ void func_0000EA30(struct Unk_func_0000EA30_0 *arg0) {
     M2C_UNK *temp_v0;
     M2C_UNK *var_v1;
     void *temp_s0;
-    void *var_v0;
+    struct Unk_func_0000EA30_var_v0 *var_v0;
 
     var_v1 = arg0->unk0;
     var_v0 = M2C_FIELD(var_v1, void **, 4);
     if (var_v0 != var_v1) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_v1 = arg0->unk0;
             var_v0 = temp_s0;
@@ -515,14 +515,14 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_0092E8
 
 void func_0000EAD0(void **arg0) {
     void *temp_s0;
-    void *var_a0;
-    void *var_v0;
+    struct Unk_func_0000EAD0_var_a0 *var_a0;
+    struct Unk_func_0000EAD0_var_v0 *var_v0;
 
     var_a0 = *arg0;
-    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    var_v0 = var_a0->unk4;
     if (var_v0 != var_a0) {
         do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            temp_s0 = var_v0->unk4;
             scePaf_7EC15225(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;

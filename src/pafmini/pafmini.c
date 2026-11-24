@@ -1150,10 +1150,10 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0000B128);
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0000B298);
 
 void func_0000B2F0(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_0000B2F0_temp_v0 *temp_v0;
 
     temp_v0 = func_0000B298(arg0, arg1);
-    if (M2C_FIELD(temp_v0, s8 *, 0x15) != 0) {
+    if (temp_v0->unk15 != 0) {
 
     } else {
         func_0000BCD4(arg0, temp_v0);
@@ -1163,10 +1163,10 @@ void func_0000B2F0(s32 arg0, s32 arg1) {
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini", func_0000B334);
 
 void func_0000B38C(s32 arg0, s32 arg1) {
-    void *temp_v0;
+    struct Unk_func_0000B38C_temp_v0 *temp_v0;
 
     temp_v0 = func_0000B334(arg0, arg1);
-    if (M2C_FIELD(temp_v0, s8 *, 0x15) != 0) {
+    if (temp_v0->unk15 != 0) {
 
     } else {
         func_0000BF00(arg0, temp_v0);
