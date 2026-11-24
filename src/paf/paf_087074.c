@@ -1,7 +1,12 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", std_huff_tables);
+void std_huff_tables(s32 arg0) {
+    add_huff_table(arg0, arg0 + 0x50, (s32) &D_00191098, (s32) &D_001910AC);
+    add_huff_table(arg0, arg0 + 0x60, (s32) &D_001910D8, (s32) &D_001910EC);
+    add_huff_table(arg0, arg0 + 0x54, (s32) &D_001910B8, (s32) &D_001910CC);
+    add_huff_table(arg0, arg0 + 0x64, (s32) &D_00191190, (s32) &D_001911A4);
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_set_defaults);
 

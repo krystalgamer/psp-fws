@@ -1,7 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", func_00095A44);
+s32 func_00095A44(s32 arg0, s32 arg1) {
+    return (s32) ((arg0 + arg1) - 1) / arg1;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", func_00095A64);
 

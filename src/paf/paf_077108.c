@@ -1,7 +1,21 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_077108", func_00077108);
+u32 func_00077108(void *arg0) {
+    u16 temp_a0;
+    u32 temp_v1;
+    u32 var_a1;
+    void *temp_s0;
+
+    temp_s0 = arg0 + 0x20;
+    var_a1 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x15C), u32 (**)(), 0x6CC)();
+    if (var_a1 < (u32) M2C_FIELD(temp_s0, u32 *, 0x14)) {
+        temp_a0 = M2C_FIELD(temp_s0, u16 *, 0x9A);
+        temp_v1 = temp_a0 * 8;
+        var_a1 = ((u32) ((var_a1 + temp_v1) - 1) / temp_v1) * temp_a0 * 8;
+    }
+    return var_a1;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_077108", func_00077178);
 

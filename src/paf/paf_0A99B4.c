@@ -1,7 +1,17 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", func_000A99B4);
+void func_000A99B4(s32 arg0, void *arg1) {
+    u8 temp_v1;
+    u8 temp_v1_2;
+    u8 temp_v1_3;
+    u8 temp_v1_4;
+
+    temp_v1 = M2C_FIELD(arg1, u8 *, 0);
+    if (((((u32) (temp_v1 - 0x41) >= 0x3AU) | ((u32) (temp_v1 - 0x5B) < 6U)) != 0) || (temp_v1_2 = M2C_FIELD(arg1, u8 *, 1), ((((u32) (temp_v1_2 - 0x41) >= 0x3AU) | ((u32) (temp_v1_2 - 0x5B) < 6U)) != 0)) || (temp_v1_3 = M2C_FIELD(arg1, u8 *, 2), ((((u32) (temp_v1_3 - 0x41) >= 0x3AU) | ((u32) (temp_v1_3 - 0x5B) < 6U)) != 0)) || (temp_v1_4 = M2C_FIELD(arg1, u8 *, 3), ((((u32) (temp_v1_4 - 0x41) >= 0x3AU) | ((u32) (temp_v1_4 - 0x5B) < 6U)) != 0))) {
+        func_0009DA4C(arg0, (s32) "invalid chunk type");
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", func_000A9A68);
 

@@ -1,7 +1,17 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A7144", func_000A7144);
+s32 func_000A7144(s32 arg0, void *arg1) {
+    s32 temp_v0;
+
+    temp_v0 = func_000A719C(arg1);
+    if (temp_v0 >= 0) {
+
+    } else {
+        scePaf_7894B61F(arg0, (s32) "PNG unsigned integer out of range.");
+    }
+    return temp_v0;
+}
 
 s32 func_000A719C(void *arg0) {
     return (M2C_FIELD(arg0, u8 *, 0) << 0x18) + (M2C_FIELD(arg0, u8 *, 1) << 0x10) + (M2C_FIELD(arg0, u8 *, 2) << 8) + M2C_FIELD(arg0, u8 *, 3);

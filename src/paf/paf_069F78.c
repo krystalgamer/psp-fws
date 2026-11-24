@@ -1,7 +1,37 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_069F78", TIFFNumberOfTiles);
+s32 TIFFNumberOfTiles(void *arg0) {
+    M2C_UNK *temp_s0;
+    u32 var_a1;
+    u32 var_a3;
+    u32 var_a4;
+    u32 var_s2;
+    void *temp_s1;
+
+    temp_s1 = arg0 + 0x20;
+    var_a3 = M2C_FIELD(temp_s1, u32 *, 0x1C);
+    var_a4 = M2C_FIELD(temp_s1, u32 *, 0x20);
+    var_s2 = M2C_FIELD(temp_s1, u32 *, 0x24);
+    if (var_a3 == -1U) {
+        var_a3 = M2C_FIELD(temp_s1, u32 *, 0x10);
+    }
+    if (var_a4 == -1U) {
+        var_a4 = M2C_FIELD(temp_s1, u32 *, 0x14);
+    }
+    if (var_s2 == -1U) {
+        var_s2 = M2C_FIELD(temp_s1, u32 *, 0x18);
+    }
+    var_a1 = 0;
+    if (((var_a3 != 0) & (var_a4 != 0)) && (var_s2 != 0)) {
+        temp_s0 = "TIFFNumberOfTiles";
+        var_a1 = multiply(arg0, multiply(arg0, (s32) ((u32) ((M2C_FIELD(temp_s1, u32 *, 0x10) + var_a3) - 1) / var_a3), (u32) ((M2C_FIELD(temp_s1, u32 *, 0x14) + var_a4) - 1) / var_a4, (s32) temp_s0), (u32) ((M2C_FIELD(temp_s1, u32 *, 0x18) + var_s2) - 1) / var_s2, (s32) temp_s0);
+    }
+    if (M2C_FIELD(temp_s1, u16 *, 0x56) == 2) {
+        var_a1 = multiply(arg0, (s32) var_a1, (u32) M2C_FIELD(temp_s1, u16 *, 0x3A), (s32) "TIFFNumberOfTiles");
+    }
+    return (s32) var_a1;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_069F78", TIFFTileRowSize);
 

@@ -1,7 +1,15 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_079E90", func_00079E90);
+u32 func_00079E90(u32 arg0, s32 arg1) {
+    u32 var_v1;
+
+    var_v1 = arg0 * arg1;
+    if (arg0 != 0) {
+        var_v1 = (((var_v1 / arg0) ^ arg1) != 0) ? 0U : var_v1;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_079E90", func_00079EBC);
 

@@ -1,7 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09D6D0", func_0009D6D0);
+M2C_UNK *func_0009D6D0(void) {
+    return " libpng version 1.2.10 - April 23, 2006 (header)\n";
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09D6D0", func_0009D6DC);
 
