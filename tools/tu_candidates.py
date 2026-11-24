@@ -33,13 +33,23 @@ def main():
     own = f"1.7.1 {m[1] if m else '-O2'}"
     funcs = N.module_funcs(a.version, a.module)
     sets = [(addr, name, {x.split(" ", 1)[1] for x in stats.get(name, [])}) for addr, name, _ in funcs]
-    own_opt = own.split(" ", 1)[1]
-    asm_text = "".join(f.read_text() for f in (ROOT / "src" / a.module).glob("*.c"))
+    files = sorted((ROOT / "src" / a.module).glob("*.c"))
+    texts = {f: f.read_text() for f in files}
+    asm_text = "".join(texts.values())
     in_c = {n for _, n, _ in funcs if f", {n});" not in asm_text}
+    file_opt = {}
+    for f, txt in texts.items():
+        mm = re.search(r"cflags: (-O[0-3s](?: -f[\w-]+)*)", txt)
+        opt = mm[1] if mm else "-O2"
+        for n in re.findall(r"INCLUDE_ASM\(\"[^\"]+\", (\w+)\)", txt) + re.findall(r"^[^\n;]*\b(\w+)\([^;{]*\)\s*\{$", txt, re.M):
+            file_opt[n] = opt
+    starts = {int(f.stem.rsplit("_", 1)[1], 16) for f in files if re.fullmatch(rf"{a.module}_[0-9A-F]{{6}}", f.stem)}
+    own_opt = own.split(" ", 1)[1]
     cuts = []
     i = 0
     while i < len(sets):
         s = sets[i][2]
+        own_opt = file_opt.get(sets[i][1], own_opt)
         if not s or own_opt in s:
             i += 1
             continue
@@ -55,9 +65,9 @@ def main():
             elif sets[j][2]:
                 break
             j += 1
-        if count >= a.min:
+        if count >= a.min and sets[i][0] not in starts:
             cuts.append(f"{sets[i][1]}:{lab}")
-            if end + 1 < len(sets):
+            if end + 1 < len(sets) and sets[end + 1][0] not in starts:
                 cuts.append(sets[end + 1][1])
             print(f"# {lab}: {count} functions 0x{sets[i][0]:X}-0x{sets[end][0]:X}", file=sys.stderr)
         i = max(j, i + 1)
