@@ -75,9 +75,8 @@ def main():
 set -e
 IN="$1"; OUT="$3"
 {TOOLS}/cc1-{compiler} {opt} -G0 -quiet "$IN" -o "$OUT.s"
-{ROOT}/.venv/bin/python {ROOT}/tools/asfix.py < "$OUT.s" > "$OUT.fixed.s"
-{TOOLS}/psp-as-1.3.1 -EL -G0 -I{ROOT} -o "$OUT" "$OUT.fixed.s"
-rm -f "$OUT.s" "$OUT.fixed.s"
+{TOOLS}/psp-as-1.3.1 -EL -G0 -mulsw -I{ROOT} -o "$OUT" "$OUT.s"
+rm -f "$OUT.s"
 """)
         (d / "compile.sh").chmod(0o755)
         (d / "settings.toml").write_text(

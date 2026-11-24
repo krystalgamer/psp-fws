@@ -23,7 +23,6 @@ from elftools.elf.relocation import RelocationSection
 from elftools.elf.sections import SymbolTableSection
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import asfix  # noqa: E402
 import auto_decomp as ad  # noqa: E402
 
 ROOT = ad.ROOT
@@ -122,8 +121,7 @@ def compile_funcs(src, incs, defs, opt, compiler="1.7.1", addrs=None):
                            capture_output=True, text=True)
         if r.returncode:
             return None, r.stderr[-400:]
-        s.write_text(asfix.fix(s.read_text()))
-        r = subprocess.run([str(ad.TOOLS / "psp-as-1.3.1"), "-EL", "-G0", "-o", str(o), str(s)],
+        r = subprocess.run([str(ad.TOOLS / "psp-as-1.3.1"), "-EL", "-G0", "-mulsw", "-o", str(o), str(s)],
                            capture_output=True, text=True)
         if r.returncode:
             return None, r.stderr[-400:]

@@ -19,7 +19,6 @@ from elftools.elf.elffile import ELFFile
 from elftools.elf.relocation import RelocationSection
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import asfix  # noqa: E402
 import auto_decomp as ad  # noqa: E402
 import libmatch as L  # noqa: E402
 
@@ -38,8 +37,7 @@ def compile_object(src, incs, defs, opt, outdir):
                        capture_output=True, text=True)
     if r.returncode:
         return None
-    s.write_text(asfix.fix(s.read_text()))
-    r = subprocess.run([str(ad.TOOLS / "psp-as-1.3.1"), "-EL", "-G0", "-o", str(o), str(s)], capture_output=True)
+    r = subprocess.run([str(ad.TOOLS / "psp-as-1.3.1"), "-EL", "-G0", "-mulsw", "-o", str(o), str(s)], capture_output=True)
     if r.returncode:
         return None
     elf = ELFFile(open(o, "rb"))
