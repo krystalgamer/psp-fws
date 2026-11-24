@@ -34,6 +34,30 @@ def main():
     text_off = ELFFile(open(ROOT / "tmp/baserom" / ver / f"{mod}.prx", "rb")).get_segment(0)["p_offset"]
     asm_dir = ROOT / "tmp/asm" / ver / mod / "nonmatchings"
 
+    # Functions branching to labels of other functions share their object:
+    # drop cuts that would separate them.
+    label_owner, branches = {}, {}
+    for s in asm_dir.glob("*/*.s"):
+        text = s.read_text()
+        for lab in re.findall(r"^\s*(\.L[0-9A-Fa-f_]+):", text, re.M):
+            label_owner[lab] = s.stem
+        branches[s.stem] = set(re.findall(r"^\s*/\*[^*]*\*/\s+(?:b\w*|j)\s+[^\n]*?(\.L[0-9A-Fa-f_]+)\s*$", text, re.M))
+    cut_addrs = sorted(addr[spec.partition(":")[0]] for spec in specs)
+
+    def piece(a):
+        return sum(1 for c in cut_addrs if c <= a)
+
+    bad = set()
+    for f, labs in branches.items():
+        for lab in labs:
+            g = label_owner.get(lab)
+            if g and g != f and f in addr and g in addr and piece(addr[f]) != piece(addr[g]):
+                lo, hi = sorted((addr[f], addr[g]))
+                bad |= {c for c in cut_addrs if lo < c <= hi}
+    if bad:
+        specs = [s for s in specs if addr[s.partition(":")[0]] not in bad]
+        print(f"dropped {len(bad)} cuts separating functions that share labels", file=sys.stderr)
+
     # The file that currently holds each boundary function.
     files = sorted(src_dir.glob("*.c"))
     cuts = {}
@@ -48,6 +72,8 @@ def main():
     starts_file = ROOT / "config" / ver / f"func_starts.{mod}.txt"
     shndx = next(i for i, s in enumerate(elf.iter_sections()) if s.name == f".{mod}")
     known = set(re.findall(r"^\s*(\w+)\s*=", (ROOT / "config" / ver / f"symbol_addrs.{mod}.txt").read_text(), re.M))
+    # alternate entry labels inside functions are not function starts
+    known |= {n for s in asm_dir.glob("*/*.s") for n in re.findall(r"^\s*alabel\s+(\w+)", s.read_text(), re.M)}
     lines_ = sorted({(s["st_value"], s.name) for s in elf.get_section_by_name(".symtab").iter_symbols()
                      if s["st_shndx"] == shndx and s["st_info"]["type"] == "STT_FUNC" and "." not in s.name
                      and s.name not in known})
