@@ -1,0 +1,270 @@
+/* cflags: -Os */
+#include "common.h"
+#include "music_common_decls.h"
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000043C0);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000043F0);
+
+s32 func_00004420(void *arg0, s32 *arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x8000C0FF;
+    if (arg0 != NULL) {
+        var_v1 = func_00012834(arg0, arg1);
+    }
+    return var_v1;
+}
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004450);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004480);
+
+s32 func_000044B0(void *arg0, s8 *arg1) {
+    s32 var_v1;
+
+    var_v1 = 0x8000C0FF;
+    if (arg0 != NULL) {
+        *arg1 = func_0001280C(arg0);
+        var_v1 = 0;
+    }
+    return var_v1;
+}
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000044F0);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004520);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004550);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004584);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000045C8);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000045FC);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004648);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004694);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000046B0);
+
+void func_000046CC(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001EF20;
+    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 4));
+}
+
+void func_000046F4(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001EF20;
+    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 4));
+}
+
+void func_0000471C(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001EF20;
+    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 4));
+    scePaf_4E67BB08(arg0);
+}
+
+s32 func_00004758(s32 arg0) {
+    return arg0;
+}
+
+s32 func_00004760(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 4) > 0;
+}
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_0000476C);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000047A8);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000047E4);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004874);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000048B0);
+
+void func_000048E8(void) {
+    sceKernelDelayThread();
+}
+
+s32 func_00004904(void) {
+    return -1;
+}
+
+void func_0000490C(void) {
+    sceKernelGetThreadId();
+}
+
+u32 func_00004928(s32 arg0) {
+    return (u32) ~arg0 >> 0x1F;
+}
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004934);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004970);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000049AC);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000049F0);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004A04);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004A48);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004A60);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004A78);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004A94);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004AB0);
+
+s32 func_00004AD0(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 1;
+    if (arg0 != 0) {
+        var_v1 = 0;
+        if (arg0 != 1) {
+            var_v1 = arg0 != 2;
+        }
+    }
+    return var_v1;
+}
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", music_common_79F370C1);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", music_common_5C2678FA);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", music_common_A14CA640);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", music_common_BD897CD8);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF10);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF20);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF28);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF34);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF40);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF4C);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF58);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF68);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF78);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF84);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF90);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EF9C);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EFAC);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EFBC);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EFCC);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EFD4);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EFE0);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EFEC);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001EFF8);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F004);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F010);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F01C);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F028);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F034);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F040);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F048);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F054);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F060);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F06C);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F078);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F084);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F090);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F09C);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F0AC);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F0BC);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F0C4);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F0CC);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F0D8);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F0E0);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F0E8);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F0F4);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F0FC);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F108);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F110);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F11C);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F124);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F12C);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F138);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F140);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F144);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F150);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F158);
+
+INCLUDE_RODATA("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", D_0001F164);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", music_common_299CB545);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004D88);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004E1C);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004E68);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004EAC);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00004FB8);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", music_common_07771D45);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", music_common_9F1B5B95);
+
+INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", music_common_A0472F68);
+
+u8 func_000055AC(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0xAC);
+}
+
