@@ -14,7 +14,9 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0000015C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_000001B4);
+void func_000001B4(void) {
+    func_00000B34((void *) D_00025B10);
+}
 
 u8 func_000001D8(void) {
     return D_00025B14;

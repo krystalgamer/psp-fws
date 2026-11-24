@@ -2351,7 +2351,11 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00011
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_000113F0);
 
-INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_0001146C);
+void func_0001146C(void) {
+    if (M2C_VFIELD(&D_000207F0, s32, 0x1C) != 0) {
+        M2C_VFIELD(&D_000207F0, s32, 0x1C) = 0;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin/nonmatchings/netconf_plugin", func_00011488);
 

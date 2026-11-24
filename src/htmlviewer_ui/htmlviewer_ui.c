@@ -395,7 +395,21 @@ void func_00003D98(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00003DA4);
 
-INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00003E24);
+s32 func_00003E24(s32 arg0, s32 *arg1, s32 *arg2) {
+    void *sp0;
+    s32 temp_v0;
+
+    temp_v0 = func_00006188((s32) &D_00061A2C, arg0, 0, &sp0);
+    if (temp_v0 == 0) {
+        if (arg1 != NULL) {
+            *arg1 = (s32) M2C_FIELD(sp0, u16 *, 0x14);
+        }
+        if (arg2 != NULL) {
+            *arg2 = (s32) M2C_FIELD(sp0, u16 *, 0x16);
+        }
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00003E98);
 
@@ -7480,11 +7494,28 @@ s32 func_00049C70(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00049C90);
+void func_00049C90(void) {
+    M2C_VFIELD(&D_0006E670, s32, 0) = -1;
+    M2C_VFIELD(&D_0006E670, s32, 4) = -1;
+}
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00049CA8);
 
-INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00049D54);
+s32 func_00049D54(void) {
+    void *sp0;
+    s32 var_a1;
+    s32 var_v1;
+
+    var_a1 = 1;
+    var_v1 = 0;
+    if (sceIoDevctl(&D_0005FB0C, 0x02125802, NULL, 0U, &sp0, 4U) >= 0) {
+        if (sp0 != 0x11) {
+            var_a1 = sp0 == 0x41;
+        }
+        var_v1 = var_a1;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_00049DB4);
 
@@ -7732,7 +7763,15 @@ INCLUDE_RODATA("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", D_0006022
 
 INCLUDE_RODATA("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", D_00060270);
 
-INCLUDE_ASM("tmp/asm/303/htmlviewer_ui/nonmatchings/htmlviewer_ui", func_0004C664);
+s32 func_0004C664(void) {
+    D_00064514 = -1;
+    D_000644E0 = sceGeEdramGetAddr();
+    D_000644D8 = sceGeListEnQueue((void *) ((s32) &D_0005FE58 & 0x1FFFFFFF), NULL, D_00064514, NULL);
+    func_0004C430();
+    M2C_VFIELD(&D_000644E4, s32, 0x2C) = sceKernelCreateEventFlag("SceGuSignal", 0x200U, 3U, NULL);
+    sceGeListSync(D_000644D8, 0);
+    return 0;
+}
 
 s32 func_0004C6FC(void) {
     sceKernelDeleteEventFlag(D_00064510);

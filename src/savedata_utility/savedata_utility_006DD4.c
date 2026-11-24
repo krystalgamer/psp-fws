@@ -273,9 +273,17 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_006DD4",
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_006DD4", func_0000B35C);
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_006DD4", func_0000B3C4);
+void func_0000B3C4(s32 arg0, s32 arg1, s32 arg2) {
+    func_00015C1C(arg0, arg1, arg2);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00024FC8;
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_006DD4", func_0000B3F8);
+void func_0000B3F8(s32 arg0, s32 arg1, s32 arg2) {
+    func_00015C1C(arg0, arg1, arg2);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00024FC8;
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility_006DD4", func_0000B42C);
 

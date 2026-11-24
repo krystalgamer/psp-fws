@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "func_000001B4": "void func_000001B4(void);",
   "func_000001D8": "u8 func_000001D8(void);",
   "func_000003D8": "void func_000003D8(void);",
   "func_00000A78": "s32 func_00000A78(void *arg0);",
@@ -85,6 +86,8 @@
   "func_0000AFB8": "void func_0000AFB8(M2C_UNK **arg0);",
   "func_0000AFE0": "void func_0000AFE0(M2C_UNK **arg0);",
   "func_0000B0CC": "void func_0000B0CC(void *arg0, void *arg1);",
+  "func_0000B3C4": "void func_0000B3C4(s32 arg0, s32 arg1, s32 arg2);",
+  "func_0000B3F8": "void func_0000B3F8(s32 arg0, s32 arg1, s32 arg2);",
   "func_0000B560": "void func_0000B560(void *arg0);",
   "func_0000B644": "void func_0000B644(void);",
   "func_0000BCEC": "M2C_UNK func_0000BCEC(s32, M2C_UNK);",
@@ -269,6 +272,7 @@
   "D_00024F10": "extern M2C_UNK D_00024F10;",
   "D_00024F40": "extern M2C_UNK D_00024F40;",
   "D_00024F48": "extern s32 D_00024F48;",
+  "D_00024FC8": "extern M2C_UNK D_00024FC8;",
   "D_00024FE8": "extern M2C_UNK D_00024FE8;",
   "D_000250E0": "extern M2C_UNK D_000250E0;",
   "D_000250F0": "extern M2C_UNK D_000250F0;",
