@@ -44,9 +44,11 @@ def mask(word, kind):
 class Module:
     def __init__(self, ver, mod):
         self.ver, self.mod = ver, mod
-        self.src = ROOT / "src" / mod / f"{mod}.c"
-        self.decls_h = ROOT / "src" / mod / f"{mod}_decls.h"
-        self.store_path = ROOT / "src" / mod / f"{mod}_decls.json"
+        from srcdir import src_dir
+        self.srcdir = src_dir(ver, mod)
+        self.src = self.srcdir / f"{mod}.c"
+        self.decls_h = self.srcdir / f"{mod}_decls.h"
+        self.store_path = self.srcdir / f"{mod}_decls.json"
         self.store = json.loads(self.store_path.read_text()) if self.store_path.exists() else {"funcs": {}, "vars": {}}
         self.base = (ROOT / "tmp/baserom" / ver / f"{mod}.prx").read_bytes()
         elf = ELFFile(open(ROOT / "tmp/baserom" / ver / f"{mod}.prx", "rb"))
@@ -59,7 +61,7 @@ class Module:
         self.funcs = self._func_ranges()
         # A module may be split into several translation units (src/<mod>/*.c),
         # each with its own `compiler:`/`cflags:` header comment.
-        self.files = [self.src] + sorted(f for f in (ROOT / "src" / mod).glob("*.c") if f != self.src)
+        self.files = [self.src] + sorted(f for f in self.srcdir.glob("*.c") if f != self.src)
         self.compiler, self.setting = self.file_setting(self.src)
         self.stats = {}
         self.scores = {}

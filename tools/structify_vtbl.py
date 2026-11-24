@@ -32,7 +32,7 @@ def macro_calls(text):
 
 
 def structify_vtables(mod, only=None, skip=()):
-    src = S.ROOT / "src" / mod
+    src = S.sdir(mod)
     store = json.loads((src / f"{mod}_decls.json").read_text())
     types = store.setdefault("types", {})
     files = sorted(src.glob("*.c"))

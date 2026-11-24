@@ -28,12 +28,12 @@ def main():
     ap.add_argument("--min", type=int, default=4)
     a = ap.parse_args()
     stats = json.loads((ROOT / "tmp/auto_stats" / f"{a.version}_{a.module}.json").read_text())["funcs"]
-    src = ROOT / "src" / a.module / f"{a.module}.c"
+    src = __import__("srcdir").src_dir(a.version, a.module) / f"{a.module}.c"
     m = re.search(r"cflags: (-O[0-3s](?: -[fm][\w-]+)*)", src.read_text())
     own = f"1.7.1 {m[1] if m else '-O2'}"
     funcs = N.module_funcs(a.version, a.module)
     sets = [(addr, name, {x.split(" ", 1)[1] for x in stats.get(name, [])}) for addr, name, _ in funcs]
-    files = sorted((ROOT / "src" / a.module).glob("*.c"))
+    files = sorted(__import__("srcdir").src_dir(a.version, a.module).glob("*.c"))
     texts = {f: f.read_text() for f in files}
     asm_text = "".join(texts.values())
     in_c = {n for _, n, _ in funcs if f", {n});" not in asm_text}

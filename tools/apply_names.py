@@ -32,7 +32,7 @@ def main():
                 if m:
                     existing[m[1]] = int(m[2], 16)
     by_addr = {v: k for k, v in existing.items()}
-    src_dir = ROOT / "src" / a.module
+    src_dir = __import__("srcdir").src_dir(a.version, a.module)
     src_text = "\n".join(p.read_text() for p in src_dir.glob("*") if p.is_file())
     taken = set(existing) | set(re.findall(r"\b[A-Za-z_]\w*\b", src_text))
     new, renames = [], {}

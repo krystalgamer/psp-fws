@@ -45,7 +45,7 @@ def main():
     ap.add_argument("--module", default="mcctrl")
     args = ap.parse_args()
 
-    src = next(p for p in (ROOT / "src" / args.module).rglob("*.c") if re.search(rf"\b{args.function}\(", p.read_text()))
+    src = next(p for p in __import__("srcdir").src_dir(args.version, args.module).rglob("*.c") if re.search(rf"\b{args.function}\(", p.read_text()))
     out = ROOT / "tmp/perm" / args.function
     out.mkdir(parents=True, exist_ok=True)
 

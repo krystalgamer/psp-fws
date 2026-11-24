@@ -73,7 +73,7 @@ def main():
     args = ap.parse_args()
 
     elf = ROOT / "tmp/build" / args.version / f"{args.module}.elf"
-    srcs = list((ROOT / "src" / args.module).rglob("*.[ch]"))
+    srcs = list(__import__("srcdir").src_dir(args.version, args.module).rglob("*.[ch]"))
     if elf.exists() and srcs and max(p.stat().st_mtime for p in srcs) > elf.stat().st_mtime:
         print(f"warning: {elf.name} is older than src/{args.module}; rebuild first", file=sys.stderr)
     base = (ROOT / "tmp/baserom" / args.version / f"{args.module}.prx").read_bytes()

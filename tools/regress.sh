@@ -5,8 +5,9 @@ cd "$(dirname "$0")/.."
 rc=0
 for vm in "$@"; do
     v=${vm%%:*}; m=${vm##*:}
+S=$(grep -oP "^\s*src_path:\s*\K\S+" config/$v/$m.yaml 2>/dev/null || echo src/$m)
     [ -f tmp/baserom/$v/$m.prx ] || .venv/bin/python tools/extract_baserom.py "$v" "$m" >/dev/null || { echo "$vm: EXTRACT FAILED"; rc=1; continue; }
-    rm -rf tmp/asm/$v/$m tmp/build/$v/tmp/asm/$v/$m tmp/build/$v/src/$m
+    rm -rf tmp/asm/$v/$m tmp/build/$v/tmp/asm/$v/$m tmp/build/$v/$S
     if ! make split VERSION=$v MODULE=$m >/tmp/regress_split.log 2>&1; then
         echo "$vm: SPLIT FAILED: $(grep -m1 -E 'Error|error' /tmp/regress_split.log)"; rc=1; continue
     fi

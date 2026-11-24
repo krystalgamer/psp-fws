@@ -28,7 +28,8 @@ def main():
     asm = ROOT / "tmp/asm" / args.version / args.module / "nonmatchings" / args.module / f"{args.function}.s"
     text = re.sub(r"\$(\d+)\b", lambda m: "$" + ABI[int(m[1])] if int(m[1]) < 32 else m[0], asm.read_text())
 
-    src = ROOT / "src" / args.module
+    from srcdir import src_dir
+    src = src_dir(args.version, args.module)
     ctx = subprocess.run(
         ["cpp", "-P", "-undef", "-nostdinc", "-DM2CTX", f"-I{ROOT / 'include'}", f"-I{src}", "-"],
         input="".join(p.read_text() for p in sorted(src.glob("*.c"))),

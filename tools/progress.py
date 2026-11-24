@@ -41,7 +41,7 @@ def main():
     syms = {m[2]: int(m[1], 16) for m in re.finditer(r"^\s+0x([0-9a-f]+)\s+(\w+)$", mp, re.M)}
     base = (ROOT / "tmp/baserom" / args.version / f"{args.module}.prx").read_bytes()
     build = (build_dir / f"{args.module}.prx").read_bytes()
-    src = (ROOT / "src" / args.module).rglob("*.c")
+    src = __import__("srcdir").src_dir(args.version, args.module).rglob("*.c")
     asm_funcs = set(re.findall(r"INCLUDE_ASM\([^,]+,\s*(\w+)\)", "".join(p.read_text() for p in src)))
 
     orig = sorted(

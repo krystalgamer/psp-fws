@@ -22,7 +22,7 @@ FUNC = re.compile(r"^(?:#ifdef NON_MATCHING\n(?:/\*.*?\*/\n)?)?[^\n;#/]*?\b(\w+)
 
 def main():
     ver, mod = sys.argv[1], sys.argv[2]
-    src_dir = ROOT / "src" / mod
+    src_dir = __import__("srcdir").src_dir(ver, mod)
     src = src_dir / f"{mod}.c"
     old = src.read_text()
     first = re.search(r"^(INCLUDE_ASM|INCLUDE_RODATA|#ifdef NON_MATCHING|[^\n;#/ ][^\n;]*\([^;{]*\)\s*\{)", old, re.M)

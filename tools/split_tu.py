@@ -28,7 +28,8 @@ def run(*cmd):
 def main():
     ver, mod, specs = sys.argv[1], sys.argv[2], sys.argv[3:]
     cfg = ROOT / "config" / ver / f"{mod}.yaml"
-    src_dir = ROOT / "src" / mod
+    from srcdir import src_dir as _sd
+    src_dir = _sd(ver, mod)
     elf = ELFFile(open(ROOT / "tmp/build" / ver / f"{mod}.elf", "rb"))
     addr = {s.name: s["st_value"] for s in elf.get_section_by_name(".symtab").iter_symbols() if s.name}
     text_off = ELFFile(open(ROOT / "tmp/baserom" / ver / f"{mod}.prx", "rb")).get_segment(0)["p_offset"]

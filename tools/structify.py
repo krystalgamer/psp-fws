@@ -20,6 +20,15 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+SRC = {}  # mod -> source dir (from config src_path), set by main
+
+
+def sdir(mod):
+    return SRC.get(mod, ROOT / "src" / mod)
+
+
+def rel(mod):
+    return str(sdir(mod).relative_to(ROOT))
 SIZES = {"s8": 1, "u8": 1, "char": 1, "s16": 2, "u16": 2, "s32": 4, "u32": 4, "int": 4, "f32": 4,
          "M2C_UNK": 4, "s64": 8, "u64": 8, "f64": 8}
 ACCESS = re.compile(r"M2C_(V?)FIELD\(&(D_\w+), ([^,()]+?), (0x[0-9A-Fa-f]+|\d+)\)")
@@ -51,7 +60,7 @@ def decl(t, name):
 
 
 def write_decls(mod, store):
-    src = ROOT / "src" / mod
+    src = sdir(mod)
     (src / f"{mod}_decls.json").write_text(json.dumps(store, indent=1, sort_keys=True))
     lines = [f"#ifndef {mod.upper()}_DECLS_H", f"#define {mod.upper()}_DECLS_H", "",
              '#include "common.h"', '#include "m2c_macros.h"', ""]
@@ -69,7 +78,7 @@ def body_text(text):
 
 
 def structify_globals(mod, only=None, skip=()):
-    src = ROOT / "src" / mod
+    src = sdir(mod)
     store_path = src / f"{mod}_decls.json"
     store = json.loads(store_path.read_text())
     store.setdefault("types", {})
@@ -199,7 +208,7 @@ def proto_params(proto):
 
 def structify_args(mod, only=None, skip=()):
     """Turn `void *argN` parameters accessed through M2C_FIELD into struct pointers."""
-    src = ROOT / "src" / mod
+    src = sdir(mod)
     store = json.loads((src / f"{mod}_decls.json").read_text())
     store.setdefault("types", {})
     files = sorted(src.glob("*.c"))
@@ -342,13 +351,13 @@ def verify(vm):
 
 def revert(mod):
     """Restore src/<mod> to HEAD without touching the git index (parallel-safe)."""
-    tracked = subprocess.run(["git", "ls-tree", "-r", "--name-only", "HEAD", f"src/{mod}"], cwd=ROOT,
+    tracked = subprocess.run(["git", "ls-tree", "-r", "--name-only", "HEAD", rel(mod)], cwd=ROOT,
                              capture_output=True, text=True).stdout.split()
     for path in tracked:
         data = subprocess.run(["git", "show", f"HEAD:{path}"], cwd=ROOT, capture_output=True).stdout
         if (ROOT / path).read_bytes() != data:
             (ROOT / path).write_bytes(data)
-    for f in (ROOT / "src" / mod).iterdir():
+    for f in (sdir(mod)).iterdir():
         if f.is_file() and str(f.relative_to(ROOT)) not in tracked:
             f.unlink()
 
@@ -356,7 +365,9 @@ def revert(mod):
 def main():
     vm = sys.argv[1]
     v, mod = vm.split(":")
-    if subprocess.run(["git", "diff", "--quiet", "--no-ext-diff", "--", f"src/{mod}"], cwd=ROOT).returncode:
+    from srcdir import src_dir
+    SRC[mod] = src_dir(v, mod)
+    if subprocess.run(["git", "diff", "--quiet", "--no-ext-diff", "--", rel(mod)], cwd=ROOT).returncode:
         print(f"{vm}: local changes, skipping")
         return
     if "--ret" in sys.argv:
@@ -390,8 +401,8 @@ def main():
         print(f"{vm}: OK, {n} globals as structs, {lines} lines rewritten")
         return
     # bisect: keep the largest verified subsets of the new structs
-    now = json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text()).get("types", {})
-    head = json.loads(subprocess.run(["git", "show", f"HEAD:src/{mod}/{mod}_decls.json"], cwd=ROOT,
+    now = json.loads((sdir(mod) / f"{mod}_decls.json").read_text()).get("types", {})
+    head = json.loads(subprocess.run(["git", "show", f"HEAD:{rel(mod)}/{mod}_decls.json"], cwd=ROOT,
                                      capture_output=True, text=True).stdout or "{}").get("types", {})
     names = sorted(k for k, v in now.items() if head.get(k) != v)
     if phase is structify_globals:

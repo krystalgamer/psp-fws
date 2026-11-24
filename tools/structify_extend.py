@@ -45,7 +45,7 @@ def _sites(texts, store):
 
 
 def structify_extend(mod, only=None, skip=()):
-    src = S.ROOT / "src" / mod
+    src = S.sdir(mod)
     store = json.loads((src / f"{mod}_decls.json").read_text())
     types = store.setdefault("types", {})
     texts = {f: f.read_text() for f in sorted(src.glob("*.c"))}

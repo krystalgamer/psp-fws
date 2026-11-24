@@ -20,7 +20,7 @@ OFF = r"0x[0-9A-Fa-f]+|\d+"
 
 
 def structify_gptr(mod, only=None, skip=()):
-    src = S.ROOT / "src" / mod
+    src = S.sdir(mod)
     store = json.loads((src / f"{mod}_decls.json").read_text())
     types = store.setdefault("types", {})
     texts = {f: f.read_text() for f in sorted(src.glob("*.c"))}

@@ -33,7 +33,7 @@ def var_types(func_sig, body, store):
 
 
 def structify_nested(mod, only=None, skip=()):
-    src = S.ROOT / "src" / mod
+    src = S.sdir(mod)
     store = json.loads((src / f"{mod}_decls.json").read_text())
     stypes = store.setdefault("types", {})
     globals_ = {}
