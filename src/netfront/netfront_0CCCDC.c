@@ -2,7 +2,15 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CCCDC", func_000CCCDC);
+void func_000CCCDC(void **arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
+    void *temp_v0;
+
+    temp_v0 = *arg0;
+    M2C_FIELD(temp_v0, s16 *, 0x96) = arg4;
+    M2C_FIELD(temp_v0, s16 *, 0x90) = arg1;
+    M2C_FIELD(temp_v0, s16 *, 0x92) = arg2;
+    M2C_FIELD(temp_v0, s16 *, 0x94) = arg3;
+}
 
 void func_000CCCF4(void **arg0, s32 arg1) {
     M2C_FIELD(*arg0, s32 *, 0x98) = arg1;

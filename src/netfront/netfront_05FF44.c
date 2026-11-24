@@ -2,7 +2,13 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FF44", func_0005FF44);
+void func_0005FF44(void **arg0, s32 arg1, s32 arg2) {
+    void *temp_v0;
+
+    temp_v0 = *arg0;
+    M2C_FIELD(temp_v0, s32 *, 0x78) = arg2;
+    M2C_FIELD(temp_v0, s32 *, 0x74) = arg1;
+}
 
 void func_0005FF54(void **arg0, s32 *arg1, s32 *arg2) {
     void *temp_v1;

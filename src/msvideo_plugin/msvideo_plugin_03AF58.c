@@ -2,7 +2,31 @@
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03AF58", func_0003AF58);
+s32 func_0003AF58(void **arg0, s32 arg1, s32 *arg2) {
+    s32 temp_v0;
+    s32 var_a2;
+    u32 temp_v1;
+    void *temp_a0;
+
+    temp_v1 = arg1 & 0xFFFF;
+    var_a2 = 0x200B;
+    if (temp_v1 != 0) {
+        temp_a0 = *arg0;
+        var_a2 = 0x2003;
+        if (M2C_FIELD(temp_a0, s32 *, 0) != 0) {
+            var_a2 = 0x200B;
+            if ((u32) M2C_FIELD(temp_a0, u32 *, 8) >= temp_v1) {
+                temp_v0 = func_00042278((s32) temp_a0, temp_v1 - 1);
+                var_a2 = 0x2003;
+                if (temp_v0 != 0) {
+                    *arg2 = temp_v0;
+                    var_a2 = 0;
+                }
+            }
+        }
+    }
+    return var_a2;
+}
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_03AF58", func_0003AFC4);
 

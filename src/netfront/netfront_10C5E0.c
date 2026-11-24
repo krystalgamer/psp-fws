@@ -2,9 +2,30 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_10C5E0", func_0010C5E0);
+void func_0010C5E0(void) {
+    s32 temp_v0;
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_10C5E0", func_0010C61C);
+    temp_v0 = D_00134458 - 1;
+    D_00134458 = temp_v0;
+    if (temp_v0 != 0) {
+
+    } else {
+        sceKernelCpuResumeIntr(D_0013445C);
+    }
+}
+
+s32 func_0010C61C(s32 *arg0, s32 arg1) {
+    s32 temp_v0;
+
+    D_00135FE0 = 0;
+    temp_v0 = func_0011A34C(arg1);
+    if (temp_v0 != -1) {
+
+    } else if (D_00135FE0 != 0) {
+        *arg0 = D_00135FE0;
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_10C5E0", func_0010C678);
 
