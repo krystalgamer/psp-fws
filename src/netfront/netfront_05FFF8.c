@@ -2008,7 +2008,16 @@ s32 func_0007C5B8(s32 arg0, M2C_UNK arg1) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_0007C61C);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_0007C66C);
+s32 func_0007C66C(s32 arg0, s32 arg1) {
+    u16 temp_v1;
+    void *temp_a0;
+
+    temp_a0 = sceHVNetfront_Module_234F9191(arg0, __builtin_allegrex_ins(arg1, 0, 0x16, 0xA) * 4) + M2C_FIELD(arg0, s16 *, 0x10);
+    temp_v1 = M2C_FIELD(temp_a0, u16 *, 2);
+    M2C_FIELD(temp_a0, u16 *, 2) = (u16) (temp_v1 | 0x800);
+    s32 cmp_tmp = temp_v1 & 0x800;
+    return cmp_tmp == 0;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_0007C6B8);
 

@@ -2052,7 +2052,23 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_0002564C);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_000256C8);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025790);
+M2C_UNK *func_00025790(void *arg0) {
+    s32 temp_s2;
+    s32 temp_s3;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    void *temp_v1;
+
+    temp_v0 = func_000282D8(arg0);
+    temp_v1 = M2C_FIELD(((temp_v0 * 0xC) + arg0), void **, 0xA8);
+    temp_s2 = M2C_FIELD(temp_v1, s32 *, 8);
+    temp_s3 = M2C_FIELD(temp_v1, s32 *, 0xC);
+    temp_v0_2 = func_000D4268((s32) arg0, (s32) &D_00133D08, temp_v0, (s32) &func_000256C8);
+    M2C_FIELD(&D_00133D08, s32 *, 8) = temp_s2;
+    M2C_FIELD(&D_00133D08, s32 *, 0xC) = temp_s3;
+    func_000D4428((s32) arg0, temp_v0_2, (s32) "PSPPane");
+    return &D_00133D08;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0097D4", func_00025828);
 

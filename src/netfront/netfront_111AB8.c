@@ -102,7 +102,10 @@ u32 func_001136F0(s32 arg0) {
     return (u32) ~arg0 >> 0x1F;
 }
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_001136FC);
+s32 func_001136FC(u32 arg0) {
+    s32 cmp_tmp = arg0 > 0xFFFFU;
+    return cmp_tmp == 0;
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_111AB8", func_0011370C);
 

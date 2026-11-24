@@ -3577,7 +3577,22 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_08A04C", func_000BF2A8);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_08A04C", func_000BF398);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_08A04C", func_000BF3D0);
+s32 func_000BF3D0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, s32 *, 0x14) = arg1;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    if (arg2 != 0) {
+        M2C_FIELD(arg0, s32 *, 0) = sceHVNetfront_Module_D9FE99F5(arg2, sceHVNetfront_Module_15875ED4(arg2));
+    }
+    if (arg3 != 0) {
+        sceHVNetfront_Module_1A02495A((s32) (arg0 + 4), arg3, 0xC);
+    }
+    M2C_FIELD(arg0, M2C_UNK **, 0x4A8) = &sceHVNetfront_Module_4C5A5066;
+    M2C_FIELD(arg0, M2C_UNK **, 0x4AC) = &sceHVNetfront_Module_AF7B3F4B;
+    M2C_FIELD(arg0, M2C_UNK **, 0x4B0) = &sceHVNetfront_Module_BA0DA285;
+    M2C_FIELD(arg0, s32 *, 0x4A0) = 0;
+    func_000C7190(arg0);
+    return 0;
+}
 
 s32 func_000BF47C(s32 *arg0) {
     s32 temp_v0;

@@ -3777,7 +3777,9 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_03F870", func_0005C008);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_03F870", func_0005C084);
 
-INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_03F870", func_0005C140);
+void func_0005C140(s32 arg0, s32 arg1) {
+    func_00087D24(arg0, 4, arg1);
+}
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_03F870", func_0005C160);
 
