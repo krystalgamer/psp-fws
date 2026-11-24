@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/282/.splat_cache.video_main_plugin
   symbol_addrs_path:
     - config/282/symbol_addrs.video_main_plugin.txt
+    - config/282/func_starts.video_main_plugin.txt
     - tmp/build/282/prx_syms.video_main_plugin.txt
   reloc_addrs_path: [tmp/build/282/reloc_addrs.video_main_plugin.txt]
   asset_path: tmp/assets/282/video_main_plugin
@@ -54,6 +55,12 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, video_main_plugin]
+      - [0x21908, c, video_main_plugin_021868]
+      - [0x21B0C, c, video_main_plugin_021A6C]
+      - [0x27A9C, c, video_main_plugin_0279FC]
+      - [0x2878C, c, video_main_plugin_0286EC]
+      - [0x38E3C, c, video_main_plugin_038D9C]
+      - [0x3D4C8, c, video_main_plugin_03D428]
       - { start: 0x4FFF8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x50014, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x50C7C, type: prxpad, order: .text }
@@ -73,6 +80,11 @@ segments:
       - { start: 0x5191C, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x51984, type: prxpad, order: .rodata }
       - [0x51988, .rodata, video_main_plugin]
+      - [0x53284, .rodata, video_main_plugin_021A6C]
+      - [0x53C54, .rodata, video_main_plugin_0279FC]
+      - [0x53CB0, .rodata, video_main_plugin_0286EC]
+      - [0x553EC, .rodata, video_main_plugin_038D9C]
+      - [0x55698, .rodata, video_main_plugin_03D428]
   - name: video_main_plugin_seg1
     type: code
     start: 0x56A40
