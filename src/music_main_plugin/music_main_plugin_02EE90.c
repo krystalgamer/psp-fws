@@ -244,16 +244,16 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00031FB0);
 
 void func_00032090(s32 arg0) {
-    M2C_VFIELD(&D_000A3690, s32, 4) = arg0;
+    D_000A3690.unk4 = arg0;
     M2C_VFIELD(&D_000A3690, s32, 0) = 0x8010961B;
 }
 
 void func_000320AC(s32 arg0) {
-    D_000A3690 = arg0;
+    D_000A3690.unk0 = arg0;
 }
 
 s32 func_000320B8(void) {
-    return D_000A3690;
+    return D_000A3690.unk0;
 }
 
 void func_000320C4(s32 arg0, s32 arg1) {
@@ -3447,33 +3447,33 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 
 void func_00059C9C(void) {
     D_000A5248 = &D_000A5220;
-    M2C_VFIELD(&D_000A524C, s32, 0) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x14) = 3;
-    M2C_VFIELD(&D_000A524C, s32, 0x18) = 1;
-    M2C_VFIELD(&D_000A524C, s32, 0x3C) = -1;
-    M2C_VFIELD(&D_000A524C, s32, 0x68) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 4) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 8) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0xC) = -1;
-    M2C_VFIELD(&D_000A524C, s32, 0x10) = -1;
-    M2C_VFIELD(&D_000A524C, s32, 0x1C) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x20) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x24) = -1;
-    M2C_VFIELD(&D_000A524C, s32, 0x28) = -1;
-    M2C_VFIELD(&D_000A524C, s32, 0x2C) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x30) = -1;
-    M2C_VFIELD(&D_000A524C, s32, 0x34) = -1;
-    M2C_VFIELD(&D_000A524C, s32, 0x38) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x40) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x44) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x48) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x4C) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x50) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x54) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x58) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x5C) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x60) = 0;
-    M2C_VFIELD(&D_000A524C, s32, 0x64) = 0;
+    D_000A524C.unk0 = 0;
+    D_000A524C.unk14 = 3;
+    D_000A524C.unk18 = 1;
+    D_000A524C.unk3C = -1;
+    D_000A524C.unk68 = 0;
+    D_000A524C.unk4 = 0;
+    D_000A524C.unk8 = 0;
+    D_000A524C.unkC = -1;
+    D_000A524C.unk10 = -1;
+    D_000A524C.unk1C = 0;
+    D_000A524C.unk20 = 0;
+    D_000A524C.unk24 = -1;
+    D_000A524C.unk28 = -1;
+    D_000A524C.unk2C = 0;
+    D_000A524C.unk30 = -1;
+    D_000A524C.unk34 = -1;
+    D_000A524C.unk38 = 0;
+    D_000A524C.unk40 = 0;
+    D_000A524C.unk44 = 0;
+    D_000A524C.unk48 = 0;
+    D_000A524C.unk4C = 0;
+    D_000A524C.unk50 = 0;
+    D_000A524C.unk54 = 0;
+    D_000A524C.unk58 = 0;
+    D_000A524C.unk5C = 0;
+    D_000A524C.unk60 = 0;
+    D_000A524C.unk64 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_00059D30);
@@ -3506,11 +3506,11 @@ s32 func_0005A3DC(s32 arg0) {
     s32 var_v0;
 
     var_v0 = 0;
-    if (arg0 != M2C_VFIELD(&D_000A524C, s32, 0x18)) {
+    if (arg0 != D_000A524C.unk18) {
         func_0005B0A8(arg0, &sp0, &sp4);
         var_v0 = M2C_FIELD(D_000A5248, s32 (**)(s32, s32), 0xC)(sp4, sp0);
         if (var_v0 == 0) {
-            M2C_VFIELD(&D_000A524C, s32, 0x18) = arg0;
+            D_000A524C.unk18 = arg0;
         }
     }
     return var_v0;
@@ -3671,9 +3671,9 @@ s32 func_0005BF74(void) {
 
     var_v1 = 0x80109609;
     if (D_000A5400 != 0) {
-        M2C_VFIELD(&D_000A5300, s32, 0xF4) = 0;
+        D_000A5300.unkF4 = 0;
         var_v1 = 0;
-        M2C_VFIELD(&D_000A5300, s32, 0x74) = 0;
+        D_000A5300.unk74 = 0;
     }
     return var_v1;
 }
@@ -3869,13 +3869,13 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02EE90", func_0005D258);
 
 s32 func_0005D3B0(void *arg0) {
-    M2C_VFIELD(&D_000A54A0, s32, 0x104) = (s32) M2C_FIELD(arg0, s32 *, 0x24);
-    M2C_VFIELD(&D_000A54A0, s32, 0x108) = (s32) M2C_FIELD(arg0, s32 *, 0x28);
-    M2C_VFIELD(&D_000A54A0, s32, 0x10C) = (s32) M2C_FIELD(arg0, s32 *, 0x2C);
-    M2C_VFIELD(&D_000A54A0, s32, 0x110) = (s32) M2C_FIELD(arg0, s32 *, 0x30);
+    D_000A54A0.unk104 = (s32) M2C_FIELD(arg0, s32 *, 0x24);
+    D_000A54A0.unk108 = (s32) M2C_FIELD(arg0, s32 *, 0x28);
+    D_000A54A0.unk10C = (s32) M2C_FIELD(arg0, s32 *, 0x2C);
+    D_000A54A0.unk110 = (s32) M2C_FIELD(arg0, s32 *, 0x30);
     func_0002CCEC(1);
-    if (M2C_VFIELD(&D_000A54A0, u8, 0x100) != 0) {
-        M2C_VFIELD(&D_000A54A0, u8, 0x100) = 0U;
+    if (D_000A54A0.unk100 != 0) {
+        D_000A54A0.unk100 = 0U;
     }
     func_000319E0((s32) arg0, 0);
     return 0;

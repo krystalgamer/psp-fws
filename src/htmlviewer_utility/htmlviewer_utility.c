@@ -21,7 +21,7 @@ s32 func_000002F0(void) {
 
     func_00004520((s32) &D_0000616C, 0, 0x34);
     func_00000180((s32) &D_0000616C, (s32) D_000060E4, 0x34);
-    M2C_FIELD(&D_0000616C, s32 *, 0x30) = 0;
+    D_0000616C.unk30 = 0;
     temp_v0 = sceUtility_943CBA46(&D_0000616C);
     if (temp_v0 != 0) {
         M2C_FIELD(D_000060E4, s32 *, 0x1C) = temp_v0;
@@ -647,9 +647,9 @@ INCLUDE_ASM("tmp/asm/282/htmlviewer_utility/nonmatchings/htmlviewer_utility", fu
 
 s32 func_00003FC0(void *arg0) {
     if (arg0 != NULL) {
-        M2C_FIELD(&D_00006F28, s32 *, 0) = (s32) M2C_FIELD(arg0, s32 *, 0);
-        M2C_FIELD(&D_00006F28, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 4);
-        M2C_FIELD(&D_00006F28, s32 *, 8) = (s32) M2C_FIELD(arg0, s32 *, 8);
+        D_00006F28.unk0 = (s32) M2C_FIELD(arg0, s32 *, 0);
+        D_00006F28.unk4 = (s32) M2C_FIELD(arg0, s32 *, 4);
+        D_00006F28.unk8 = (s32) M2C_FIELD(arg0, s32 *, 8);
     }
     return 0;
 }

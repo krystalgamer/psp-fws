@@ -4,6 +4,63 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_000A3690_s {
+    s32 unk0;
+    volatile s32 unk4;
+};
+
+struct D_000A4558_s {
+    s32 unk0;
+    s32 unk4;
+};
+
+struct D_000A524C_s {
+    volatile s32 unk0;
+    volatile s32 unk4;
+    volatile s32 unk8;
+    volatile s32 unkC;
+    volatile s32 unk10;
+    volatile s32 unk14;
+    volatile s32 unk18;
+    volatile s32 unk1C;
+    volatile s32 unk20;
+    volatile s32 unk24;
+    volatile s32 unk28;
+    volatile s32 unk2C;
+    volatile s32 unk30;
+    volatile s32 unk34;
+    volatile s32 unk38;
+    volatile s32 unk3C;
+    volatile s32 unk40;
+    volatile s32 unk44;
+    volatile s32 unk48;
+    volatile s32 unk4C;
+    volatile s32 unk50;
+    volatile s32 unk54;
+    volatile s32 unk58;
+    volatile s32 unk5C;
+    volatile s32 unk60;
+    volatile s32 unk64;
+    volatile s32 unk68;
+};
+
+struct D_000A5300_s {
+    u8 pad0[0x74];
+    volatile s32 unk74;
+    u8 pad78[0x7C];
+    volatile s32 unkF4;
+};
+
+struct D_000A54A0_s {
+    u8 pad0[0x100];
+    volatile u8 unk100;
+    u8 pad101[0x3];
+    volatile s32 unk104;
+    volatile s32 unk108;
+    volatile s32 unk10C;
+    volatile s32 unk110;
+};
+
 extern M2C_UNK D_00098D20;
 extern M2C_UNK D_00098D40;
 extern M2C_UNK D_00098D90;
@@ -165,7 +222,7 @@ extern M2C_UNK D_000A2AA0;
 extern M2C_UNK D_000A2AB0;
 extern s32 D_000A2FA4;
 extern s32 D_000A3254;
-extern s32 D_000A3690;
+extern struct D_000A3690_s D_000A3690;
 extern s32 D_000A37A4;
 extern u32 D_000A3D58;
 extern void *D_000A4074;
@@ -199,7 +256,7 @@ extern s32 D_000A451C;
 extern s32 D_000A4520;
 extern s32 D_000A4524;
 extern s32 D_000A4528;
-extern M2C_UNK D_000A4558;
+extern struct D_000A4558_s D_000A4558;
 extern s32 D_000A505C;
 extern s32 D_000A5060;
 extern s32 D_000A5064;
@@ -211,15 +268,15 @@ extern M2C_UNK D_000A51D4;
 extern s32 D_000A51F0;
 extern M2C_UNK D_000A5220;
 extern M2C_UNK *D_000A5248;
-extern M2C_UNK D_000A524C;
+extern struct D_000A524C_s D_000A524C;
 extern s32 D_000A527C;
 extern s32 D_000A52B8;
 extern s32 D_000A52BC;
 extern s32 D_000A52C0;
 extern s32 D_000A52C4;
-extern M2C_UNK D_000A5300;
+extern struct D_000A5300_s D_000A5300;
 extern s32 D_000A5400;
-extern M2C_UNK D_000A54A0;
+extern struct D_000A54A0_s D_000A54A0;
 extern s32 D_000A55FC;
 extern M2C_UNK D_000A5628;
 extern s32 D_000A562C;

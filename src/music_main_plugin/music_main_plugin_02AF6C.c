@@ -216,9 +216,9 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02AF6C
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin_02AF6C", func_0002D138);
 
 s32 func_0002D18C(s32 arg0) {
-    if (M2C_FIELD(&D_000A4558, s32 *, 0) == 0) {
-        M2C_FIELD(&D_000A4558, s32 *, 0) = 1;
-        M2C_FIELD(&D_000A4558, s32 *, 4) = arg0;
+    if (D_000A4558.unk0 == 0) {
+        D_000A4558.unk0 = 1;
+        D_000A4558.unk4 = arg0;
     }
     return 0;
 }

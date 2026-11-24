@@ -271,8 +271,8 @@ s32 func_000006DC(void) {
 }
 
 void func_00000770(s32 arg0, s32 arg1) {
-    M2C_FIELD(&D_000081DC, s32 *, 0) = arg0;
-    M2C_FIELD(&D_000081DC, s32 *, 4) = arg1;
+    D_000081DC.unk0 = arg0;
+    D_000081DC.unk4 = arg1;
 }
 
 s32 func_00000784(s32 arg0) {

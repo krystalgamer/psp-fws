@@ -58,7 +58,7 @@ def body_text(text):
     return "\n".join(l for l in text.splitlines() if not l.startswith(("INCLUDE_ASM", "INCLUDE_RODATA")))
 
 
-def structify_globals(mod):
+def structify_globals(mod, only=None, skip=()):
     src = ROOT / "src" / mod
     store_path = src / f"{mod}_decls.json"
     store = json.loads(store_path.read_text())
@@ -73,6 +73,8 @@ def structify_globals(mod):
         uses[m[2]][(int(m[4], 0), t, m[1] == "V")] += 1
     changed = {}
     for sym, acc in uses.items():
+        if (only is not None and sym != only) or sym in skip:
+            continue
         decl = store["vars"].get(sym, "")
         if f"struct {sym}_s" in decl:
             continue
@@ -146,6 +148,14 @@ def structify_globals(mod):
     return len(changed), n_fields
 
 
+def verify(vm):
+    return subprocess.run(["tools/regress.sh", vm], cwd=ROOT, capture_output=True, text=True).returncode == 0
+
+
+def revert(mod):
+    subprocess.run(["git", "checkout", "-q", "--", f"src/{mod}"], cwd=ROOT)
+
+
 def main():
     vm = sys.argv[1]
     v, mod = vm.split(":")
@@ -159,12 +169,25 @@ def main():
     if "--no-verify" in sys.argv:
         print(f"{vm}: {n} globals, {lines} lines (unverified)")
         return
-    r = subprocess.run(["tools/regress.sh", vm], cwd=ROOT, capture_output=True, text=True)
-    if r.returncode:
-        subprocess.run(["git", "checkout", "-q", "--", f"src/{mod}"], cwd=ROOT)
-        print(f"{vm}: FAILED, reverted ({r.stdout.strip()[-150:]})")
-    else:
+    if verify(vm):
         print(f"{vm}: OK, {n} globals as structs, {lines} lines rewritten")
+        return
+    # one global at a time, keeping those that still match
+    revert(mod)
+    syms = sorted(set(m[2] for f in (ROOT / "src" / mod).glob("*.c") for m in ACCESS.finditer(f.read_text())))
+    bad, good = [], 0
+    for sym in syms:
+        before = {f: f.read_text() for f in (ROOT / "src" / mod).iterdir() if f.is_file()}
+        k, _ = structify_globals(mod, only=sym)
+        if not k:
+            continue
+        if verify(vm):
+            good += 1
+        else:
+            for f, txt in before.items():
+                f.write_text(txt)
+            bad.append(sym)
+    print(f"{vm}: {'OK' if good else 'FAILED'}, {good} globals as structs one by one; kept macros for {', '.join(bad)}")
 
 
 if __name__ == "__main__":
