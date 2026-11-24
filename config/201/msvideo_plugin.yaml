@@ -57,12 +57,22 @@ segments:
       - [0xA4, c, msvideo_plugin]
       - [0x2004, c, msvideo_plugin_001F84]
       - [0x52AC, c, msvideo_plugin_00522C]
+      - [0x2F180, c, msvideo_plugin_02F100]
+      - [0x30700, c, msvideo_plugin_030680]
+      - [0x32FE8, c, msvideo_plugin_032F68]
+      - [0x33234, c, msvideo_plugin_0331B4]
       - [0x37758, c, msvideo_plugin_0376D8]
       - [0x37A98, c, msvideo_plugin_037A18]
       - [0x39004, c, msvideo_plugin_038F84]
       - [0x3A4FC, c, msvideo_plugin_03A47C]
+      - [0x3AFD8, c, msvideo_plugin_03AF58]
+      - [0x3B54C, c, msvideo_plugin_03B4CC]
+      - [0x41D68, c, msvideo_plugin_041CE8]
+      - [0x424E0, c, msvideo_plugin_042460]
       - [0x56584, c, msvideo_plugin_056504]
       - [0x56820, c, msvideo_plugin_0567A0]
+      - [0x5AF10, c, msvideo_plugin_05AE90]
+      - [0x5B5E4, c, msvideo_plugin_05B564]
       - { start: 0x5FFDC, type: asm, name: fini, linker_section: .fini }
       - { start: 0x5FFF8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x608F8, type: prxpad, order: .text }
@@ -83,8 +93,12 @@ segments:
       - [0x612F0, .rodata, msvideo_plugin]
       - [0x616C0, .rodata, msvideo_plugin_001F84]
       - [0x61990, .rodata, msvideo_plugin_00522C]
+      - [0x64E88, .rodata, msvideo_plugin_02F100]
+      - [0x65080, .rodata, msvideo_plugin_030680]
       - [0x651D0, .rodata, msvideo_plugin_037A18]
       - [0x654D4, .rodata, msvideo_plugin_0567A0]
+      - [0x658AC, .rodata, msvideo_plugin_05AE90]
+      - [0x65974, .rodata, msvideo_plugin_05B564]
       - { start: 0x65B18, type: prxpad, order: .rodata }
   - name: msvideo_plugin_seg1
     type: code
