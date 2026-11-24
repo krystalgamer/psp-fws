@@ -813,7 +813,10 @@ INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", func_00005BC8);
 
 INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", sceMgr_driver_843ECFA2);
 
-INCLUDE_ASM("tmp/asm/340/mgr/nonmatchings/mgr", func_00005E30);
+s32 func_00005E30(void) {
+    void *sp0;
+    return sceIoDevctl(&D_0000AFA0, 0x02125802, NULL, 0U, &sp0, 4U) == 0x80020321;
+}
 
 INCLUDE_RODATA("tmp/asm/340/mgr/nonmatchings/mgr", D_0000AFA0);
 

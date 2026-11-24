@@ -14,7 +14,15 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_0000015C);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000001C4);
+void func_000001C4(void) {
+    void *sp0;
+    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    func_0000085C((s32) &D_0000B61C, &sp0);
+    func_0000082C(&sp0);
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    func_0000085C((s32) &D_0000B628, &sp0);
+    func_0000082C(&sp0);
+}
 
 void func_00000230(void) {
 }
@@ -157,7 +165,15 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000F88);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00001020);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000010C0);
+void func_000010C0(void *arg0) {
+    void *sp0;
+    if ((sceNetApctlGetState(&sp0) != 0) || (sp0 != 0)) {
+        func_000006E0(arg0);
+        scePaf_A0ED77C4(0, func_000014E0, arg0, -1, -1, &func_00001500);
+    } else {
+        sceHtmlViewerHelper_C92C71B7(M2C_FIELD(arg0, s32 *, 8));
+    }
+}
 
 void func_00001138(void *arg0) {
     func_00003830(arg0 + 0xC);
@@ -613,7 +629,15 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00006594);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_0000662C);
 
-INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000066CC);
+void func_000066CC(void *arg0) {
+    void *sp0;
+    if ((sceNetApctlGetState(&sp0) != 0) || (sp0 != 0)) {
+        func_000006E0(arg0);
+        scePaf_A0ED77C4(0, func_0000694C, arg0, -1, -1, &func_0000696C);
+    } else {
+        sceHtmlViewerHelper_C92C71B7(M2C_FIELD(arg0, s32 *, 8));
+    }
+}
 
 void func_00006744(s32 arg0) {
     func_00007B60(arg0 + 0xC);

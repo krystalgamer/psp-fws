@@ -497,7 +497,16 @@ u8 func_00003FC8(void) {
     return D_0000A2C8;
 }
 
-INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00003FD4);
+s32 *func_00003FD4(s32 *arg0) {
+    void **temp_v0;
+
+    func_000059A0(arg0, 0);
+    temp_v0 = scePaf_4708AED4(D_0000A288, &D_00008DC8);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xB0)(temp_v0, arg0, 0);
+    }
+    return arg0;
+}
 
 INCLUDE_ASM("tmp/asm/282/dialogmain/nonmatchings/dialogmain", func_00004034);
 

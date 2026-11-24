@@ -13,9 +13,13 @@ extern u32 D_000084C4;
 
 s32 func_00000918(void);
 s32 func_00000B54(s32, s32, s32);
+s32 func_00000C88(s32, s32, s32, s32, s32);
 void func_00000FB4(s32 arg0, s32 arg1);
 s32 func_00000FD4(void);
 s32 func_00000FE0(void);
+void func_00000FEC(s32 *arg0, s32 arg1, s32 arg2, s32 arg3);
+s32 func_00001510(s32, s32, s32, s32);
+void func_000015B4(s32 *arg0, s32 arg1, s32 arg2);
 s32 func_00001AF4(s32 *arg0);
 s32 func_00001B28(s32 arg0, s32 *arg1);
 s32 func_00003198(void);

@@ -46,7 +46,15 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", sceNetApctl_A7
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", sceNetApctl_6F5D2981);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", sceNetApctl_lib_C519EDCD);
+s32 sceNetApctl_lib_C519EDCD(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0x80410005;
+    if (sceKernelCheckThreadStack() >= 0x13F0) {
+        var_v1 = func_00002514(arg0);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00000964);
 
@@ -265,7 +273,11 @@ INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_00006FC8)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_0000708C);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_000070C0);
+void func_000070C0(s32 *arg0) {
+    if (arg0 != NULL) {
+        sceNet_lib_57CC57DA(arg0, 0, 0x404);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_apctl/nonmatchings/pspnet_apctl", func_000070E8);
 

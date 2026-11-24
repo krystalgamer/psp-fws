@@ -297,9 +297,19 @@ INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_0000271C)
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_000027C0);
 
-INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_0000282C);
+void func_0000282C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void *sp0;
+    if (func_00001CAC(arg0, arg1, arg2, arg3, &sp0) >= 0) {
+        func_00002884(sp0);
+    }
+}
 
-INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00002858);
+void func_00002858(s32 arg0, s32 arg1) {
+    void *sp0;
+    if (func_00001BFC(arg0, arg1, &sp0) >= 0) {
+        func_00002884(sp0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/libasfparser/nonmatchings/libasfparser", func_00002884);
 

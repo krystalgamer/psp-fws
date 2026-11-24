@@ -54,7 +54,19 @@ s32 func_00000FE0(void) {
     return 0x80618006;
 }
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00000FEC);
+void func_00000FEC(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void *sp0;
+    s32 temp_s1;
+    void *temp_s4;
+
+    temp_s4 = M2C_FIELD(*arg0, void **, 0x68C);
+    if (func_00001AF4(arg0) == 0) {
+        temp_s1 = M2C_FIELD(temp_s4, s32 *, 0x34);
+        M2C_FIELD(temp_s4, s32 *, 0x34) = 1;
+        func_00000C88((s32) arg0, arg1, arg2, arg3, &sp0);
+        M2C_FIELD(temp_s4, s32 *, 0x34) = temp_s1;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001074);
 
@@ -66,7 +78,19 @@ INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001480);
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_00001510);
 
-INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_000015B4);
+void func_000015B4(s32 *arg0, s32 arg1, s32 arg2) {
+    void *sp0;
+    s32 temp_s1;
+    void *temp_s3;
+
+    temp_s3 = M2C_FIELD(*arg0, void **, 0x68C);
+    if (func_00001AF4(arg0) == 0) {
+        temp_s1 = M2C_FIELD(temp_s3, s32 *, 0x34);
+        M2C_FIELD(temp_s3, s32 *, 0x34) = 1;
+        func_00001510((s32) arg0, arg1, arg2, &sp0);
+        M2C_FIELD(temp_s3, s32 *, 0x34) = temp_s1;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/mpeg/nonmatchings/mpeg", func_0000162C);
 

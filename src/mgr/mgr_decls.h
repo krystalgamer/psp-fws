@@ -5,6 +5,7 @@
 #include "m2c_macros.h"
 
 extern M2C_UNK D_0000AEE0;
+extern M2C_UNK D_0000AFA0;
 extern M2C_UNK D_0000AFCC;
 extern M2C_UNK D_0000AFD0;
 extern s32 D_0000AFF8;
@@ -64,6 +65,7 @@ s32 func_00004664(M2C_UNK, M2C_UNK);
 s32 func_00004CBC(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_00005834(s32);
 s32 func_00005B88(void);
+s32 func_00005E30(void);
 M2C_UNK func_00005F7C();
 s32 func_00006030(void);
 s32 func_0000608C(void);
@@ -82,6 +84,7 @@ s32 func_0000A1C8(s32 arg0, s32 arg1, s32 arg2);
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceIoClose(s32);
+s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
 s32 sceIoIoctl(s32, s32, void *, u32, void *, u32);
 s32 sceKernelDeleteEventFlag(s32);
 s32 sceKernelDeleteSema(s32);

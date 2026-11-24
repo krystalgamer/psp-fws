@@ -241,7 +241,12 @@ s32 func_0000260C(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_0000262C);
+void func_0000262C(void) {
+    void *sp0;
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    func_00003E08(&sp0);
+    func_00005150((s32) &D_0000E8CC);
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00002668);
 
