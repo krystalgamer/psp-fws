@@ -227,6 +227,16 @@ def run_m2c(mod, name, ctx, target="mips-gcc-c"):
     return r.stdout if r.returncode == 0 and "M2C_ERROR" not in r.stdout else None
 
 
+def k1_helpers(body):
+    """Rewrite m2c's view of $k1 into the inline-asm helpers of k1.h."""
+    body = re.sub(r"(\w+) = k1;\n(\s*)(\w+) = \(u32\) k1 >> 0x10;\n\s*k1 = \3;\n", lambda m: f"{m[1]} = shiftK1();\n", body)
+    body = re.sub(r"(\w+) = k1;\n(\s*)k1 = \(u32\) (?:k1|\1) >> 0x10;\n", lambda m: f"{m[1]} = shiftK1();\n", body)
+    shifted = set(re.findall(r"(\w+) = \(u32\) k1 >> 0x10;", body))
+    body = re.sub(r"\b(\w+) & 0x18\b", lambda m: "k1IsUserMode()" if m[1] in shifted | {"k1"} else m[0], body)
+    body = re.sub(r"^(\s*)k1 = ([^;]+);$", r"\1setK1(\2);", body, flags=re.M)
+    return re.sub(r"\bk1\b", "getK1()", body)
+
+
 def stack_base_local(out, name):
     """m2c prints the address of a local at sp+0 as bare `sp` and leaves `sp0`
     undeclared; make it a declared local whose address is taken."""
@@ -292,6 +302,8 @@ def _try_func(mod, name, header_ctx, target, seen):
     # cc1 emits its own divide-by-zero check (bnez + break 7)
     out = re.sub(r"^\s*if \([^()]+ == 0\) \{\n\s*M2C_BREAK\((?:0, )?7\);\n\s*\}\n", "", out, flags=re.M)
     decls, body = split_m2c(out, name)
+    if body is not None and re.search(r"\bk1\b", body):
+        body = k1_helpers(body)
     # Unknown stack usage can't match; gotos are rejected in favour of
     # structured control flow (those functions are left for manual work).
     if body is None or re.search(r"\b(sp|subroutine_arg\d+|saved_reg_\w+|unksp\w*|goto|k1)\b", body):
@@ -385,7 +397,7 @@ def main():
     matched = 0
     accepted_now = []
     for i, name in enumerate(names):
-        header = f'#include "common.h"\n#include "m2c_macros.h"\n' + "\n".join(mod.store["vars"].values()) + "\n" + "\n".join(mod.store["funcs"].values()) + "\n"
+        header = f'#include "common.h"\n#include "k1.h"\n#include "m2c_macros.h"\n' + "\n".join(mod.store["vars"].values()) + "\n" + "\n".join(mod.store["funcs"].values()) + "\n"
         try:
             res = try_func(mod, name, header)
         except subprocess.TimeoutExpired:
@@ -397,6 +409,8 @@ def main():
             mod.store["vars"].update(new_vars)
             f = owner[name]
             srcs[f] = re.sub(rf'^INCLUDE_ASM\("[^"]+", {name}\);\n', lambda _: body, srcs[f], count=1, flags=re.M)
+            if re.search(r"\b(shiftK1|k1IsUserMode|getK1|setK1)\(", body) and '#include "k1.h"' not in srcs[f]:
+                srcs[f] = srcs[f].replace('#include "common.h"\n', '#include "common.h"\n#include "k1.h"\n', 1)
             f.write_text(srcs[f])
             mod.write_decls()
             matched += 1

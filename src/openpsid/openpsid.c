@@ -1,29 +1,11 @@
 #include "common.h"
+#include "k1.h"
 #include "openpsid_decls.h"
 #include "kirk.h"
 
 extern u8 *g_ddrdbBufPtr;
 extern SceUID g_openPsidSema;
 extern u8 g_openPsidCert[0xB8];
-
-/* The kernel keeps the caller's privilege level in $k1. */
-static inline u32 shiftK1(void) {
-    u32 oldK1;
-
-    __asm__ __volatile__("move %0, $27\n\tsrl $27, $27, 16" : "=r"(oldK1));
-    return oldK1;
-}
-
-static inline int k1IsUserMode(void) {
-    int ret;
-
-    __asm__ __volatile__("andi %0, $27, 0x18" : "=r"(ret));
-    return ret;
-}
-
-static inline void setK1(u32 k1) {
-    __asm__ __volatile__("move $27, %0" : : "r"(k1));
-}
 
 int sceIdStorageLookup(u16 key, u32 offset, void *buf, u32 len);
 SceUID sceKernelCreateSema(const char *name, u32 attr, int initVal, int maxVal, void *option);
