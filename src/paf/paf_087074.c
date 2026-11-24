@@ -1,0 +1,512 @@
+#include "common.h"
+#include "paf_decls.h"
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", std_huff_tables);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_set_defaults);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_00190E98);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_00190F98);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_00191098);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_001910AC);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_001910B8);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_001910CC);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_001910D8);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_001910EC);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_00191190);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_001911A4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_default_colorspace);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_set_colorspace);
+
+s32 fill_a_scan(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    M2C_FIELD(arg0, s32 *, 0) = 1;
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x14) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x18) = arg3;
+    M2C_FIELD(arg0, s32 *, 0x1C) = arg4;
+    M2C_FIELD(arg0, s32 *, 0x20) = arg5;
+    return arg0 + 0x24;
+}
+
+void *fill_scans(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    s32 var_v1;
+    void *var_a0;
+
+    var_a0 = arg0;
+    var_v1 = 0;
+    if (arg1 > 0) {
+        do {
+            M2C_FIELD(var_a0, s32 *, 4) = var_v1;
+            var_v1 += 1;
+            M2C_FIELD(var_a0, s32 *, 0) = 1;
+            M2C_FIELD(var_a0, s32 *, 0x14) = arg2;
+            M2C_FIELD(var_a0, s32 *, 0x18) = arg3;
+            M2C_FIELD(var_a0, s32 *, 0x1C) = arg4;
+            M2C_FIELD(var_a0, s32 *, 0x20) = arg5;
+            var_a0 += 0x24;
+        } while (var_v1 < arg1);
+    }
+    return var_a0;
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00087674);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", start_pass_phuff);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jcphuff_dump_buffer);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jcphuff_flush_bits);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", emit_buffered_bits);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", emit_eobrun);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jcphuff_emit_restart);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", encode_mcu_DC_first);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", encode_mcu_AC_first);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", encode_mcu_DC_refine);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", encode_mcu_AC_refine);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", finish_pass_phuff);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", finish_pass_gather_phuff);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jinit_phuff_encoder);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jcphuff_emit_bits);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", start_pass_prep);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", expand_bottom_edge);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", pre_process_data);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", pre_process_context);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", create_context_buffer);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jinit_c_prep_controller);
+
+void start_pass_downsample(void) {
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", expand_right_edge);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", sep_downsample);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", int_downsample);
+
+void fullsize_downsample(void *arg0, void *arg1, s32 arg2, s32 arg3) {
+    func_00095A84(arg2, 0, arg3, 0, M2C_FIELD(arg0, s32 *, 0xE4), M2C_FIELD(arg0, s32 *, 0x1C));
+    expand_right_edge(arg3, M2C_FIELD(arg0, s32 *, 0xE4), M2C_FIELD(arg0, s32 *, 0x1C), M2C_FIELD(arg1, s32 *, 0x1C) * 8);
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", h2v1_downsample);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", h2v2_downsample);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", h2v2_smooth_downsample);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", fullsize_smooth_downsample);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jinit_downsampler);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_CreateDecompress);
+
+void jpeg_destroy_decompress(s32 arg0) {
+    jpeg_destroy(arg0);
+}
+
+void jpeg_abort_decompress(s32 arg0) {
+    jpeg_abort(arg0);
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", default_decompress_parms);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_read_header);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008A3BC);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008A588);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008A69C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008A7F4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008A928);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008AA20);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008AB50);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008ABEC);
+
+void func_0008ACDC(void *arg0) {
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), s32 *, 0x24) = 1;
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008ACEC);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008ADB8);
+
+void func_0008AE3C(void) {
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008AE44);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", start_pass_huff_decoder);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_make_d_derived_tbl);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_fill_bit_buffer);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_huff_decode);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", process_restart);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", decode_mcu);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jinit_huff_decoder);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008BD60);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008BDA4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008C024);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008C224);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008C324);
+
+void func_0008C380(void *arg0) {
+    *M2C_FIELD(arg0, M2C_UNK ***, 0x1B0) = &func_0008C394;
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008C394);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008C4B8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008C518);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008C590);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008C658);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008CAB4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008CE6C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008D224);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008D580);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008D6F0);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008D9D8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008DAF0);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008DCB8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008DFE0);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008E0F4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008E28C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008E3A4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008E66C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008E728);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008E8B4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008E8D8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008E980);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008EAE0);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_001912A8);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_087074", D_001912E8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008EBBC);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008EE8C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008EF3C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F1E8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F3D4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F4D0);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F52C);
+
+void func_0008F660(void *arg0) {
+    void *temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, void **, 0x1C0);
+    M2C_FIELD(temp_v1, s32 *, 0x24) = 0;
+    M2C_FIELD(temp_v1, s32 *, 0x2C) = (s32) M2C_FIELD(arg0, s32 *, 0x70);
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F674);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F790);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F7F4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008F9A8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008FC24);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008FCF4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008FFFC);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_000900A8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00090368);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00090630);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0009077C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00090C70);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00090D28);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00090E48);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00090EF0);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00091010);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00091120);
+
+void func_00091208(void *arg0) {
+    void *temp_a1;
+
+    temp_a1 = M2C_FIELD(arg0, void **, 0x1C0);
+    M2C_FIELD(temp_a1, s32 *, 0x5C) = (s32) M2C_FIELD(arg0, s32 *, 0x134);
+    M2C_FIELD(temp_a1, s32 *, 0x60) = (s32) M2C_FIELD(arg0, s32 *, 0x70);
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00091220);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00091394);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0009139C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_000913A4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_000914A8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00091520);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_000915E4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_000916D0);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0009184C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00091B0C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00091B40);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", emit_message);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", format_message);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", reset_error_mgr);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_std_error);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", out_of_memory);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", alloc_small);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", alloc_large);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", alloc_sarray);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", alloc_barray);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", request_virt_sarray);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", request_virt_barray);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", realize_virt_arrays);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", do_sarray_io);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", do_barray_io);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", access_virt_sarray);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", access_virt_barray);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", free_pool);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", self_destruct);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00092F40);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_get_small);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_free_small);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_get_large);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_free_large);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_mem_available);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_open_backing_store);
+
+s32 jpeg_mem_init(void) {
+    return 0;
+}
+
+void jpeg_mem_term(void) {
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", select_ncolors);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", output_value);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", largest_input_value);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", create_colormap);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", create_colorindex);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", make_odither_array);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", create_odither_tables);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", color_quantize);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", color_quantize3);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", quantize_ord_dither);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", quantize3_ord_dither);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", quantize_fs_dither);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", alloc_fs_workspace);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", start_pass_1_quant);
+
+void finish_pass_1_quant(void) {
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", new_color_map_1_quant);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jinit_1pass_quantizer);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00094168);
+
+void *func_000941F8(void *arg0, s32 arg1) {
+    s32 temp_v1;
+    s32 var_a1;
+    s32 var_a2;
+    void *var_a0;
+    void *var_a3;
+
+    var_a0 = arg0;
+    var_a1 = arg1;
+    var_a2 = 0;
+    var_a3 = NULL;
+    if (var_a1 > 0) {
+        do {
+            temp_v1 = M2C_FIELD(var_a0, s32 *, 0x1C);
+            var_a1 -= 1;
+            if ((var_a2 < temp_v1) && (M2C_FIELD(var_a0, s32 *, 0x18) > 0)) {
+                var_a2 = temp_v1;
+                var_a3 = var_a0;
+            }
+            var_a0 += 0x20;
+        } while (var_a1 != 0);
+    }
+    return var_a3;
+}
+
+void *func_00094238(void *arg0, s32 arg1) {
+    s32 temp_v1;
+    s32 var_a1;
+    s32 var_a2;
+    void *var_a0;
+    void *var_a3;
+
+    var_a0 = arg0;
+    var_a1 = arg1;
+    var_a2 = 0;
+    var_a3 = NULL;
+    if (var_a1 > 0) {
+        do {
+            temp_v1 = M2C_FIELD(var_a0, s32 *, 0x18);
+            var_a1 -= 1;
+            if (var_a2 < temp_v1) {
+                var_a2 = temp_v1;
+                var_a3 = var_a0;
+            }
+            var_a0 += 0x20;
+        } while (var_a1 != 0);
+    }
+    return var_a3;
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0009426C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0009470C);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_000948E0);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00094AD4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00094BC8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00094E08);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00094F98);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_000950C8);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_000951F0);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00095578);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00095654);
+
+void func_0009568C(void) {
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_00095694);
+
+void func_0009584C(void *arg0) {
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x1C8), s32 *, 0x1C) = 1;
+}
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0009585C);
+

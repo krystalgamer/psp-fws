@@ -1,0 +1,21 @@
+#include "common.h"
+#include "paf_decls.h"
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C2FA4", func_000C2FA4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C2FA4", func_000C2FCC);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C2FA4", func_000C3050);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C2FA4", func_000C30D4);
+
+INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0C2FA4", func_000C3118);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0C2FA4", D_001990A8);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0C2FA4", D_001990E0);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0C2FA4", D_001990E8);
+
+INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_0C2FA4", D_00199128);
+
