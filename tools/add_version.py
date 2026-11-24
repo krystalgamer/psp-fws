@@ -18,6 +18,7 @@ Both versions are rebuilt from scratch and must match; on failure everything is
 restored. Single-TU modules only (one c subsegment) for now.
 """
 import argparse
+import os
 import difflib
 import hashlib
 import re
@@ -158,6 +159,57 @@ def entries(text):
     return out
 
 
+def label_roms(d):
+    """{label: (rom, vram)} of every label in the asm files under d."""
+    out = {}
+    lab = re.compile(r"^\s*(?:glabel|dlabel|jlabel|alabel|nonmatching)\s+(\w+)")
+    com = re.compile(r"^\s*/\* ([0-9A-F]+) ([0-9A-F]{8})\b")
+    for p in d.rglob("*.s"):
+        pending = []
+        for line in p.read_text().splitlines():
+            m = lab.match(line)
+            if m:
+                pending.append(m[1])
+                continue
+            m = com.match(line)
+            if m and pending:
+                for n in pending:
+                    out.setdefault(n, (int(m[1], 16), int(m[2], 16)))
+                pending = []
+    return out
+
+
+def split_config(ntext, mod, stems, N, n_tu, new, stem0):
+    """NEW's config with one c (and .rodata) subsegment per TU."""
+    d = ROOT / "tmp/asm" / new / mod / "nonmatchings" / stem0
+    text_start, ro_start = {}, {}
+    order = []
+    for nn, _, _, k in N:
+        tu = n_tu[nn]
+        t = (d / f"{nn}.s").read_text()
+        if k == "func":
+            m = re.search(r"glabel \w+\n\s*/\* ([0-9A-F]+) ", t)
+            text_start.setdefault(tu, int(m[1], 16))
+        for m in re.finditer(r"dlabel \w+\n\s*/\* ([0-9A-F]+) ", t):
+            r = int(m[1], 16)
+            ro_start[tu] = min(ro_start.get(tu, r), r)
+            order.append((r, stems.index(tu)))
+    order.sort()
+    if any(b[1] < a[1] for a, b in zip(order, order[1:])):
+        raise RuntimeError("rodata order of the TUs differs between versions")
+    cm = re.search(rf"^(\s+)- \[(0x[0-9A-Fa-f]+), c, {stem0}\]\n", ntext, re.M)
+    rm = re.search(rf"^(\s+)- \[(0x[0-9A-Fa-f]+), \.rodata, {stem0}\]\n", ntext, re.M)
+    tus = [st for st in stems if st in text_start]
+    if text_start[tus[0]] != int(cm[2], 16):
+        raise RuntimeError("first TU does not start the text")
+    ntext = ntext.replace(cm[0], "".join(f"{cm[1]}- [0x{text_start[st]:X}, c, {st}]\n" for st in tus))
+    if rm:
+        rtus = [st for st in stems if st in ro_start]
+        starts = [int(rm[2], 16)] + [ro_start[st] for st in rtus[1:]]
+        ntext = ntext.replace(rm[0], "".join(f"{rm[1]}- [0x{a:X}, .rodata, {st}]\n" for a, st in zip(starts, rtus)))
+    return ntext
+
+
 def c_count(cfile, ver):
     """C function definitions the file has for one version."""
     r = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", "-Iinclude", f"-I{cfile.parent}", f"-DFW_VERSION={fwnum(ver)}",
@@ -180,8 +232,8 @@ def main():
     rcfg, ncfg = cfg_path(ref, mod), cfg_path(new, mod)
     rtext, ntext0 = rcfg.read_text(), ncfg.read_text()
     rsub = [s for s in c_subsegs(rtext, mod) if s[1] == "c"]
-    if len(rsub) != 1 or len(c_subsegs(ntext0, mod)) != 1:
-        sys.exit(f"{mod}: only single-TU modules are supported")
+    if not rsub or len(c_subsegs(ntext0, mod)) != 1:
+        sys.exit(f"{mod}: {new} must be a single asm subsegment")
     if "src_path: src/" + mod + "\n" not in rtext:
         sys.exit(f"{mod}: {ref} does not build from src/{mod}")
     if "src_path: src/" + mod + "\n" in ntext0 and c_subsegs(ntext0, mod)[0][1] == "c":
@@ -190,14 +242,20 @@ def main():
     if run("git", "diff", "--quiet", "--", f"src/{mod}", f"config/{new}/{mod}.yaml", f"config/{ref}/{mod}.yaml",
            f"config/{new}/symbol_addrs.{mod}.txt")[0]:
         sys.exit(f"{mod}: local changes, aborting")
-    stem = rsub[0][2]
+    stems = [x[2] for x in rsub]
     symf = ROOT / "config" / new / f"symbol_addrs.{mod}.txt"
     sym0 = symf.read_text() if symf.exists() else ""
+    pinf = ROOT / "config" / new / f"func_starts.{mod}.txt"
+    pin0 = pinf.read_text() if pinf.exists() else None
 
     def restore():
         shutil.rmtree(ROOT / "tmp/av_src" / new / mod, ignore_errors=True)
         ncfg.write_text(ntext0)
         symf.write_text(sym0) if sym0 or symf.exists() else None
+        if pin0 is None:
+            pinf.unlink(missing_ok=True)
+        else:
+            pinf.write_text(pin0)
         run("git", "checkout", "-q", "--", f"src/{mod}")
 
     try:
@@ -215,7 +273,12 @@ def main():
         run("make", "extract", f"VERSION={new}", f"MODULE={mod}")
         run("rm", "-rf", f"tmp/asm/{new}/{mod}")
         run("make", "split", f"VERSION={new}", f"MODULE={mod}", check=True)
-        R, N = units(ref, mod, stem, src / f"{stem}.c"), units(new, mod, rstem_new, scratch / f"{rstem_new}.c")
+        R, r_tu = [], {}
+        for st in stems:
+            for u in units(ref, mod, st, src / f"{st}.c"):
+                R.append(u)
+                r_tu[u[0]] = st
+        N = units(new, mod, rstem_new, scratch / f"{rstem_new}.c")
         # 2. align
         sm = difflib.SequenceMatcher(None, [h for _, h, _, _ in R], [h for _, h, _, _ in N], autojunk=False)
         pair, mapping, rev = {}, {}, {}
@@ -265,10 +328,7 @@ def main():
             for m in re.finditer(r"/\* [0-9A-F]+ ([0-9A-F]{8})[^\n]*\*/[^\n]*\n?", p.read_text()[:400]):
                 nsyms[p.stem] = int(m[1], 16)
                 break
-        roms = {}
-        for p in (ROOT / "tmp/asm" / new / mod).rglob("*.s"):
-            for m in re.finditer(r"(?:glabel|dlabel|jlabel|alabel|nonmatching)\s+(\w+)[^\n]*\n(?:[^\n]*\n)*?\s*/\* ([0-9A-F]+) ([0-9A-F]{8})", p.read_text()):
-                roms.setdefault(m[1], (int(m[2], 16), int(m[3], 16)))
+        roms = label_roms(ROOT / "tmp/asm" / new / mod)
         segs = []  # (name, vram start, vram end) of the code segments
         for m in re.finditer(r"- name: (\w+)\n\s+type: code\n\s+start: (0x[0-9A-Fa-f]+)\n\s+vram: (0x[0-9A-Fa-f]+)\n(?:\s+bss_size: (0x[0-9A-Fa-f]+)\n)?", ntext):
             segs.append([m[1], int(m[2], 16), int(m[3], 16), int(m[4] or "0", 16)])
@@ -308,58 +368,76 @@ def main():
             body = body[:body.index(BEGIN)] + body[body.index(END) + len(END) + 1:]
         symf.write_text(body.rstrip("\n") + ("\n" if body.strip() else "") + "\n".join([BEGIN] + lines + [END]) + "\n")
         renamed = lambda n: (mapping.get(n) if mapping.get(n) else (f"{n}_v{nv}" if n in canon_taken and n not in rev.values() else n))  # noqa: E731
-        # 4. shared C file
-        cfile = src / f"{stem}.c"
-        ents = entries(cfile.read_text())
-        rnames = [n for n, _, _, _ in R]
-        r_index = {n: i for i, n in enumerate(rnames)}
-        # NEW-only units, keyed by the REF unit they follow
+        dbg = os.environ.get("AVDEBUG")
+        if dbg:
+            print("DEBUG", dbg, "status", status.get(dbg), "mapping", mapping.get(dbg), "rev", rev.get(dbg),
+                  "nmap", nmap.get(dbg), [k for k, v in nmap.items() if v == dbg], "renamed", renamed(dbg), "canon", dbg in canon_taken, "roms", roms.get(dbg), "inN", [u[3] for u in N if u[0] == dbg])
+        # 4. TU of every NEW unit: that of the REF unit it is paired with or follows
+        n_tu, cur = {}, stems[0]
+        for nn, _, _, _ in N:
+            if nn in nmap:
+                if stems.index(r_tu[nmap[nn]]) < stems.index(cur):
+                    raise RuntimeError(f"{nn}: TU order differs between versions")
+                cur = r_tu[nmap[nn]]
+            n_tu[nn] = cur
+        if len(stems) > 1:
+            ntext = split_config(ntext, mod, stems, N, n_tu, new, rstem_new)
+            pins = [f"{nn} = 0x{roms[nn][1]:08X}; // type:func" for nn, _, _, k in N
+                    if k == "func" and AUTO.fullmatch(nn) and renamed(nn) == nn and nn in roms]
+            pinf.write_text("// function starts pinned by tools/add_version.py\n" + "\n".join(pins) + "\n")
+            rel = f"config/{new}/func_starts.{mod}.txt"
+            if rel not in ntext:
+                ntext = ntext.replace(f"    - config/{new}/symbol_addrs.{mod}.txt\n",
+                                      f"    - config/{new}/symbol_addrs.{mod}.txt\n    - {rel}\n", 1)
+        # 5. shared C files
         after = {}
         last_ref = None
-        paired_new = set(nmap)
         for nn, _, _, nk in N:
-            if nn in paired_new:
+            if nn in nmap:
                 last_ref = nmap[nn]
             else:
                 after.setdefault(last_ref, []).append((nn, nk))
         V = f"FW_VERSION == {nv}"
-        out = []
-        folder = f"nonmatchings/{stem}"
 
-        def new_only(lst):
+        def new_only(lst, folder):
             s = []
             for nn, nk in lst:
                 macro = "INCLUDE_ASM" if nk == "func" else "INCLUDE_RODATA"
                 s.append(f'#if {V}\n{macro}("{folder}", {renamed(nn)});\n#endif\n')
             return "\n".join(s)
         lead = after.pop(None, [])
-        placed_lead = False
         stats = {"shared": 0, "modified": 0, "ref_only": 0, "new_only": sum(len(v) for v in after.values()) + len(lead)}
-        for kind, name, text in ents:
-            if kind == "other":
-                out.append(text)
-                continue
-            if not placed_lead and lead:
-                out.append(new_only(lead) + "\n")
-                placed_lead = True
-            st = status.get(name)
-            if st == "shared":
-                out.append(text)
-                stats["shared"] += 1
-            elif st == "modified":
-                stats["modified"] += 1
-                if kind == "cfunc":
-                    out.append(f'#if {V}\nINCLUDE_ASM("{folder}", {name});\n#else\n{text}#endif\n')
-                else:
+        for st in stems:
+            cfile = src / f"{st}.c"
+            folder = f"nonmatchings/{st}"
+            out = []
+            placed_lead = st != stems[0]
+            for kind, name, text in entries(cfile.read_text()):
+                if kind == "other":
                     out.append(text)
-            else:
-                stats["ref_only"] += 1
-                out.append(f"#if FW_VERSION != {nv}\n{text}#endif\n")
-            if name in after:
-                out.append("\n" + new_only(after.pop(name)))
-        if after:
-            out.append("\n" + "\n".join(new_only(v) for v in after.values()))
-        cfile.write_text("".join(out))
+                    continue
+                if not placed_lead and lead:
+                    out.append(new_only(lead, folder) + "\n")
+                    placed_lead = True
+                stt = status.get(name)
+                if stt == "shared":
+                    out.append(text)
+                    stats["shared"] += 1
+                elif stt == "modified":
+                    stats["modified"] += 1
+                    if kind == "cfunc":
+                        out.append(f'#if {V}\nINCLUDE_ASM("{folder}", {name});\n#else\n{text}#endif\n')
+                    else:
+                        out.append(text)
+                else:
+                    stats["ref_only"] += 1
+                    out.append(f"#if FW_VERSION != {nv}\n{text}#endif\n")
+                if name in after:
+                    out.append("\n" + new_only(after.pop(name), folder))
+            if st == stems[-1] and after:
+                out.append("\n" + "\n".join(new_only(v, folder) for v in after.values()))
+            cfile.write_text("".join(out))
+        cfiles = [src / f"{st}.c" for st in stems]
         ncfg.write_text(ntext)
         nf = sum(1 for n, _, _, k in N if k == "func")
         shared_f = sum(1 for n, _, _, k in R if k == "func" and status.get(n) == "shared")
@@ -377,7 +455,7 @@ def main():
                 break
             mods = AD.Module(new, mod)
             built = (ROOT / "tmp/build" / new / f"{mod}.prx").read_bytes() if (ROOT / "tmp/build" / new / f"{mod}.prx").exists() else b""
-            text = cfile.read_text()
+            text = "".join(f.read_text() for f in cfiles)
             live = [n for n in mods.funcs if status.get(n) == "shared" and re.search(rf"^(?!static)[^\n;#]*\b{n}\([^;{{}}]*\)\s*\{{", text, re.M)]
             cls = argparse.Namespace(version=new, module=mod)
             moved = AD.first_displaced(mods, cls) if built else None
@@ -390,10 +468,13 @@ def main():
             if not bad:
                 raise RuntimeError(f"{new} mismatch outside shared C functions:\n{outp[-800:]}")
             for n in bad:
-                m = re.search(rf"^(?!static)[^\n;#]*\b{n}\([^;{{}}]*\)\s*\{{\n.*?^\}}\n", text, re.M | re.S)
-                text = text.replace(m[0], f'#if {V}\nINCLUDE_ASM("{folder}", {n});\n#else\n{m[0]}#endif\n', 1)
+                for cf in cfiles:
+                    t = cf.read_text()
+                    m = re.search(rf"^(?!static)[^\n;#]*\b{n}\([^;{{}}]*\)\s*\{{\n.*?^\}}\n", t, re.M | re.S)
+                    if m:
+                        cf.write_text(t.replace(m[0], f'#if {V}\nINCLUDE_ASM("nonmatchings/{cf.stem}", {n});\n#else\n{m[0]}#endif\n', 1))
+                        break
                 print(f"  {n}: C differs in {new}, asm there")
-            cfile.write_text(text)
         else:
             raise RuntimeError("verification gave up")
         rc, outp = run("tools/regress.sh", f"{ref}:{mod}")
@@ -402,7 +483,7 @@ def main():
         rc, outp = run("tools/regress.sh", f"{new}:{mod}")
         if ": OK" not in outp:
             raise RuntimeError(f"{new} from scratch failed:\n{outp[-800:]}")
-        print(f"{mod}: OK, {new} shares src/{mod} (C functions: {ref} {c_count(cfile, ref)}, {new} {c_count(cfile, new)})")
+        print(f"{mod}: OK, {new} shares src/{mod} (C functions: {ref} {sum(c_count(f, ref) for f in cfiles)}, {new} {sum(c_count(f, new) for f in cfiles)})")
     except Exception as e:  # noqa: BLE001
         if not a.keep:
             restore()
