@@ -3202,8 +3202,8 @@ s32 func_0006A0F4(struct Unk_func_0006A0F4_0 *arg0) {
     arg0->unk54 = 0;
     arg0->unk7C = 0;
     func_0006A300(arg0);
-    temp_s1 = M2C_FIELD(arg0->unk0, s32 (**)(void *), 0x30)(arg0);
-    M2C_FIELD(arg0->unk0, M2C_UNK (**)(void *, M2C_UNK), 0x2C)(arg0, 0);
+    temp_s1 = arg0->unk0->unk30(arg0);
+    arg0->unk0->unk2C(arg0, 0);
     func_000610B0(temp_s2);
     return temp_s1;
 }

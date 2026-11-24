@@ -281,14 +281,14 @@ s32 func_00038028(struct Unk_func_00038028_0 *arg0) {
     if (temp_v0 == 0) {
 
     } else {
-        temp_v1 = M2C_FIELD(arg0->unk4, void **, 0x48);
+        temp_v1 = arg0->unk4->unk48;
         temp_v1->unk10(temp_v1->unk0, temp_v0);
     }
     arg0->unk8 = 0;
     if (arg0->unkC == 0) {
         arg0->unkC = 0;
     } else {
-        temp_v1_2 = M2C_FIELD(arg0->unk4, void **, 0x48);
+        temp_v1_2 = arg0->unk4->unk48;
         temp_v1_2->unk10(temp_v1_2->unk0, arg0->unkC);
         arg0->unkC = 0;
     }
@@ -2993,7 +2993,7 @@ void scePaf_44EB8C62(struct Unk_scePaf_44EB8C62_0 *arg0) {
         do {
             temp_a1 = var_s0;
             var_s0 += 1;
-            M2C_FIELD(arg0->unk0, M2C_UNK (**)(void *, s32), 0xD0)(arg0, temp_a1);
+            arg0->unk0->unkD0(arg0, temp_a1);
         } while (arg0->unk34C >= var_s0);
     }
 }

@@ -486,7 +486,7 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_0012AD20);
 s32 func_0012AD7C(void) {
     s32 temp_v0;
 
-    temp_v0 = func_00127568((s32) &D_001E0ECC, (s32) &D_001E8ED8, M2C_FIELD(D_001E0ECC.unk14, s32 *, 0x14), (s32) (s16) (M2C_FIELD(D_001E0ECC.unk14, s16 *, 0x26) * (M2C_FIELD(D_001E0ECC.unk14, s16 *, 0x2C) + 1)));
+    temp_v0 = func_00127568((s32) &D_001E0ECC, (s32) &D_001E8ED8, D_001E0ECC.unk14->unk14, (s32) (s16) (D_001E0ECC.unk14->unk26 * (D_001E0ECC.unk14->unk2C + 1)));
     D_001E0ECC.unkCC = temp_v0;
     return (temp_v0 != 0) ? 0 : -1;
 }

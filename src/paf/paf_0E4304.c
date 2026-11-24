@@ -12,7 +12,7 @@ void func_000E433C(struct Unk_func_000E433C_0 *arg0) {
 }
 
 s32 func_000E4358(struct Unk_func_000E4358_0 *arg0) {
-    return M2C_FIELD(arg0->unk1E8->unk20, s32 *, 0x148);
+    return arg0->unk1E8->unk20->unk148;
 }
 
 void func_000E4368(struct Unk_func_000E4368_0 *arg0) {
@@ -40,7 +40,7 @@ void func_000E4408(struct Unk_func_000E4408_0 *arg0) {
 }
 
 void scePaf_7116224C(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
-    M2C_FIELD(arg0->unk1E8->unk20, s32 *, 0x194) = arg1;
+    arg0->unk1E8->unk20->unk194 = arg1;
 }
 
 void func_000E4438(struct Unk_func_000E4438_0 *arg0, s32 arg1, s32 arg2) {
@@ -172,7 +172,7 @@ void scePaf_44EB8C62(struct Unk_scePaf_44EB8C62_0 *arg0) {
         do {
             temp_a1 = var_s0;
             var_s0 += 1;
-            M2C_FIELD(arg0->unk0, M2C_UNK (**)(void *, s32), 0xD0)(arg0, temp_a1);
+            arg0->unk0->unkD0(arg0, temp_a1);
         } while (arg0->unk34C >= var_s0);
     }
 }

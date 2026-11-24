@@ -1060,7 +1060,7 @@ s32 func_0002D0DC(struct Unk_func_0002D0DC_0 *arg0) {
         } else {
             func_0002D09C();
         }
-        M2C_FIELD(arg0->unk0, M2C_UNK (**)(void *), 0x10)(arg0);
+        arg0->unk0->unk10(arg0);
     }
     return 0;
 }
@@ -1074,7 +1074,7 @@ s32 func_0002D134(struct Unk_func_0002D134_0 *arg0) {
         } else if ((func_0002D370() == 0) && (temp_v0 = func_0002D43C(arg0), (temp_v0 != 0))) {
             func_0002D09C(temp_v0);
         }
-        M2C_FIELD(arg0->unk0, M2C_UNK (**)(void *), 0x14)(arg0);
+        arg0->unk0->unk14(arg0);
     }
     return 0;
 }

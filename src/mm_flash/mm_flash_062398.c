@@ -229,7 +229,7 @@ s32 func_000647A0(struct Unk_func_000647A0_0 *arg0, struct Unk_func_000647A0_1 *
     s32 var_v0;
 
     if (arg0 != NULL) {
-        return M2C_FIELD(arg0->unk34, s32 *, 0x228);
+        return arg0->unk34->unk228;
     }
     var_v0 = 0;
     if (arg1 != NULL) {

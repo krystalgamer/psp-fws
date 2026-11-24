@@ -166,7 +166,7 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008AB50);
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008ABEC);
 
 void func_0008ACDC(struct Unk_func_0008ACDC_0 *arg0) {
-    M2C_FIELD(arg0->unk18, s32 *, 0x24) = 1;
+    arg0->unk18->unk24 = 1;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", func_0008ACEC);

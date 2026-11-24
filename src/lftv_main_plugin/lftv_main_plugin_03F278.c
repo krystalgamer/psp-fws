@@ -2123,7 +2123,7 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278",
 
 void func_00051018(struct Unk_func_00051018_0 *arg0) {
     scePaf_6829D7AF(arg0->unk4, 0, arg0->unk8);
-    M2C_FIELD(arg0->unk0, M2C_UNK (**)(void *), 8)(arg0);
+    arg0->unk0->unk8(arg0);
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F278", func_00051058);

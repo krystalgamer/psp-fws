@@ -5,7 +5,7 @@
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_05FFF8", func_0005FFF8);
 
 s32 func_00060220(struct Unk_func_00060220_0 *arg0) {
-    sceHVNetfront_Module_5D4D03A3(M2C_FIELD(arg0->unk4, s32 *, 0x1C));
+    sceHVNetfront_Module_5D4D03A3(arg0->unk4->unk1C);
     return 7;
 }
 
@@ -2797,7 +2797,7 @@ s32 func_000867F4(struct Unk_func_000867F4_0 *arg0) {
 s32 func_00086800(struct Unk_func_00086800_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0->unk0, s32 *, 0x1C);
+    temp_v1 = arg0->unk0->unk1C;
     arg0->unk8 = temp_v1;
     return temp_v1 != 0;
 }

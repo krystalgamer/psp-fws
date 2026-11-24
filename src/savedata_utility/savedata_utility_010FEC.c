@@ -501,7 +501,7 @@ void func_00014824(s32 arg0, struct Unk_vt_func_00014824_arg1 **arg1, s32 arg2) 
         if (temp_v0 > 0) {
 
         } else {
-            M2C_FIELD(sp0->unk0, M2C_UNK (**)(void *), 4)(sp0);
+            sp0->unk0->unk4(sp0);
         }
     }
     scePaf_DC2CA0F7(&sp0, arg0, "tex_broken_data");
@@ -512,7 +512,7 @@ void func_00014824(s32 arg0, struct Unk_vt_func_00014824_arg1 **arg1, s32 arg2) 
         if (temp_v0_2 > 0) {
 
         } else {
-            M2C_FIELD(sp0->unk0, M2C_UNK (**)(void *), 4)(sp0);
+            sp0->unk0->unk4(sp0);
         }
     }
     scePaf_DC2CA0F7(&sp0, arg0, "tex_broken_data_f");
@@ -523,7 +523,7 @@ void func_00014824(s32 arg0, struct Unk_vt_func_00014824_arg1 **arg1, s32 arg2) 
         if (temp_v0_3 > 0) {
 
         } else {
-            M2C_FIELD(sp0->unk0, M2C_UNK (**)(void *), 4)(sp0);
+            sp0->unk0->unk4(sp0);
         }
     }
     scePaf_DC2CA0F7(&sp0, arg0, "tex_broken_data_s");
@@ -534,7 +534,7 @@ void func_00014824(s32 arg0, struct Unk_vt_func_00014824_arg1 **arg1, s32 arg2) 
         if (temp_v0_4 > 0) {
 
         } else {
-            M2C_FIELD(sp0->unk0, M2C_UNK (**)(void *), 4)(sp0);
+            sp0->unk0->unk4(sp0);
         }
     }
 }

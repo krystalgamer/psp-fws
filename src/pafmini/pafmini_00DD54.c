@@ -473,7 +473,7 @@ s32 func_00013BE4(struct Unk_func_00013BE4_0 *arg0, void *arg1, s32 arg2, s32 ar
     var_v1 = 0;
     if (func_00012F40(arg1) != 0) {
         arg0->unk4 = arg1;
-        var_v1 = M2C_FIELD(arg0->unk0, s32 (**)(void *, void *, void *, void *, s32, s32, s32), 0x18)(arg0, arg1 + 0x2C, arg1 + 4, arg1 + 0x18, arg4, arg2, arg3);
+        var_v1 = arg0->unk0->unk18(arg0, arg1 + 0x2C, arg1 + 4, arg1 + 0x18, arg4, arg2, arg3);
     }
     return var_v1;
 }

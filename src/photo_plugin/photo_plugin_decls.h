@@ -14,6 +14,16 @@ struct Unk_D_00031B84 {
     s32 unk4C;
 };
 
+struct Unk_Unk_func_0000EE0C_0_0 {
+    u8 pad0[0x8];
+    M2C_UNK (*unk8)(void *, M2C_UNK, M2C_UNK, M2C_UNK);
+};
+
+struct Unk_Unk_func_0001B674_temp_a0_0 {
+    u8 pad0[0x10];
+    s32 (*unk10)(void *);
+};
+
 struct Unk_func_00003D94_0 {
     M2C_UNK * unk0;
     s32 unk4;
@@ -202,7 +212,7 @@ struct Unk_func_0000D3BC_0 {
 };
 
 struct Unk_func_0000EE0C_0 {
-    void * unk0;
+    struct Unk_Unk_func_0000EE0C_0_0 *unk0;
     u8 pad4[0x10];
     s8 unk14;
 };
@@ -295,7 +305,7 @@ struct Unk_func_0001B674_0 {
 };
 
 struct Unk_func_0001B674_temp_a0 {
-    void *unk0;
+    struct Unk_Unk_func_0001B674_temp_a0_0 *unk0;
 };
 
 struct Unk_func_0001B674_temp_s0 {

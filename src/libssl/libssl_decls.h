@@ -4,6 +4,11 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct Unk_Unk_func_0000CD44_0_0 {
+    u8 pad0[0x10];
+    M2C_UNK (*unk10)(s32);
+};
+
 struct Unk_Unk_func_0000EDFC_0_0 {
     u8 pad0[0x8];
     s32 unk8;
@@ -17,6 +22,11 @@ struct Unk_Unk_func_00012994_0_24 {
 struct Unk_Unk_func_000171E0_0_8 {
     u8 pad0[0x24];
     s32 unk24;
+};
+
+struct Unk_Unk_sceSsl_lib_D49A570C_0_8 {
+    u8 pad0[0x50];
+    M2C_UNK (*unk50)();
 };
 
 struct Unk_func_000007F0_0 {
@@ -45,7 +55,7 @@ struct Unk_func_0000AED0_0 {
 };
 
 struct Unk_func_0000CD44_0 {
-    void * unk0;
+    struct Unk_Unk_func_0000CD44_0_0 *unk0;
     u8 pad4[0x8];
     s32 unkC;
 };
@@ -483,7 +493,7 @@ struct Unk_sceSsl_lib_D1205C58_0 {
 
 struct Unk_sceSsl_lib_D49A570C_0 {
     u8 pad0[0x8];
-    void * unk8;
+    struct Unk_Unk_sceSsl_lib_D49A570C_0_8 *unk8;
 };
 
 struct Unk_sceSsl_lib_D5ABC603_0 {

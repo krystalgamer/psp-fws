@@ -1032,7 +1032,7 @@ s32 func_000780C0(struct Unk_func_000780C0_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) 
 
     temp_v0 = arg0->unk1C;
     if ((temp_v0 == 0) || (var_v1 = 0, (func_0004A0A4(temp_v0) != 0))) {
-        var_v1 = M2C_FIELD(arg0->unk0, s32 (**)(void *, M2C_UNK, M2C_UNK), 0x10)(arg0, arg1, arg2);
+        var_v1 = arg0->unk0->unk10(arg0, arg1, arg2);
     }
     return var_v1;
 }
@@ -1043,7 +1043,7 @@ s32 func_00078134(struct Unk_func_00078134_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) 
 
     temp_v0 = arg0->unk1C;
     if ((temp_v0 == 0) || (var_v1 = 0, (func_0004A290(temp_v0) != 0))) {
-        var_v1 = M2C_FIELD(arg0->unk0, s32 (**)(void *, M2C_UNK, M2C_UNK), 0x18)(arg0, arg1, arg2);
+        var_v1 = arg0->unk0->unk18(arg0, arg1, arg2);
     }
     return var_v1;
 }

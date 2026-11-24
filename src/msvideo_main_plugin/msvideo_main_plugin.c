@@ -132,7 +132,7 @@ void func_00000CF4(s32 arg0) {
     temp_v0 = func_00004E9C();
     if (temp_v0 != NULL) {
         temp_v0->unk14 = arg0;
-        M2C_FIELD(temp_v0->unk0, M2C_UNK (**)(void *), 0x1C)(temp_v0);
+        temp_v0->unk0->unk1C(temp_v0);
     }
 }
 
@@ -199,7 +199,7 @@ void func_00000F34(s32 arg0) {
     temp_v0 = func_00016F50();
     if (temp_v0 != NULL) {
         temp_v0->unk14 = arg0;
-        M2C_FIELD(temp_v0->unk0, M2C_UNK (**)(void *), 0x1C)(temp_v0);
+        temp_v0->unk0->unk1C(temp_v0);
     }
 }
 
@@ -228,7 +228,7 @@ void func_0000111C(s32 arg0) {
     temp_v0 = func_00017384();
     if (temp_v0 != NULL) {
         temp_v0->unk14 = arg0;
-        M2C_FIELD(temp_v0->unk0, M2C_UNK (**)(void *), 0x1C)(temp_v0);
+        temp_v0->unk0->unk1C(temp_v0);
     }
 }
 
@@ -257,7 +257,7 @@ void func_00001304(s32 arg0) {
     temp_v0 = func_0001761C();
     if (temp_v0 != NULL) {
         temp_v0->unk14 = arg0;
-        M2C_FIELD(temp_v0->unk0, M2C_UNK (**)(void *), 0x1C)(temp_v0);
+        temp_v0->unk0->unk1C(temp_v0);
     }
 }
 
@@ -280,7 +280,7 @@ void func_000013B4(s32 arg0) {
     temp_v0 = func_0001A044();
     if (temp_v0 != NULL) {
         temp_v0->unk14 = arg0;
-        M2C_FIELD(temp_v0->unk0, M2C_UNK (**)(void *), 0x1C)(temp_v0);
+        temp_v0->unk0->unk1C(temp_v0);
     }
 }
 
@@ -290,7 +290,7 @@ void func_000013F4(s32 arg0) {
     temp_v0 = func_0001B320();
     if (temp_v0 != NULL) {
         temp_v0->unk14 = arg0;
-        M2C_FIELD(temp_v0->unk0, M2C_UNK (**)(void *), 0x1C)(temp_v0);
+        temp_v0->unk0->unk1C(temp_v0);
     }
 }
 
@@ -920,7 +920,7 @@ s32 func_00005210(struct Unk_func_00005210_0 *arg0, M2C_UNK arg1) {
 
     var_v1 = 6;
     if (arg0 != NULL) {
-        M2C_FIELD(arg0->unk0, M2C_UNK (**)(), 0x70)();
+        arg0->unk0->unk70();
         temp_v0 = func_00005274(arg0, arg1);
         var_v1 = temp_v0;
         if (temp_v0 == 0) {

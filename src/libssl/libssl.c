@@ -332,7 +332,7 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CA48);
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CC88);
 
 void func_0000CD44(struct Unk_func_0000CD44_0 *arg0) {
-    M2C_FIELD(arg0->unk0, M2C_UNK (**)(s32), 0x10)(arg0->unkC);
+    arg0->unk0->unk10(arg0->unkC);
 }
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000CD68);
@@ -2720,7 +2720,7 @@ s32 sceSsl_lib_868C15DF(struct Unk_sceSsl_lib_868C15DF_0 *arg0) {
 }
 
 void sceSsl_lib_D49A570C(struct Unk_sceSsl_lib_D49A570C_0 *arg0) {
-    M2C_FIELD(arg0->unk8, M2C_UNK (**)(), 0x50)();
+    arg0->unk8->unk50();
 }
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_E7C29542);

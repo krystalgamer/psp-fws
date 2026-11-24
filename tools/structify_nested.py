@@ -16,7 +16,8 @@ import re
 import structify as S
 from structify_locals import fsize, parse_struct, render
 
-ACC = re.compile(r"M2C_FIELD\(((\w+)((?:(?:->|\.)unk[0-9A-F]+)+)), ([^,()]+?), (0x[0-9A-Fa-f]+|\d+)\)")
+ACC = re.compile(r"M2C_FIELD\(((\w+)((?:(?:->|\.)unk[0-9A-F]+)+)), ((?:[^,()]|\((?:[^()]|\([^()]*\))*\))+?), (0x[0-9A-Fa-f]+|\d+)\)")
+ARITH = re.compile(r"(?<![\w>.])(\w+)((?:(?:->|\.)unk[0-9A-F]+)+)\)?\s*(?:[-+]=?|\[|\+\+|--)(?!>)|[-+]\s*\(?(\w+)((?:(?:->|\.)unk[0-9A-F]+)+)")
 OPAQUE = ("void *", "M2C_UNK *")
 
 
@@ -49,6 +50,25 @@ def structify_nested(mod, only=None, skip=()):
         # targets: (struct, field off) -> struct the field points to
         acc = collections.defaultdict(collections.Counter)
         plans = []
+        arith = set()  # (struct, off) fields used in pointer arithmetic or indexing
+        for text in texts.values():
+            for fm in S.FUNC.finditer(text):
+                vt = dict(globals_)
+                vt.update(var_types(fm[3], fm[4], store))
+                for xm in ARITH.finditer(fm[4]):
+                    base, chain = (xm[1], xm[2]) if xm[1] else (xm[3], xm[4])
+                    if base not in vt:
+                        continue
+                    sname = vt[base][0]
+                    steps = re.findall(r"(?:->|\.)unk([0-9A-F]+)", chain)
+                    for i, st in enumerate(steps):
+                        if i == len(steps) - 1:
+                            arith.add((sname, int(st, 16)))
+                            break
+                        pm = re.fullmatch(r"struct (\w+) \*", fields.get(sname, {}).get(int(st, 16), ""))
+                        if not pm:
+                            break
+                        sname = pm[1]
         for f, text in texts.items():
             for fm in S.FUNC.finditer(text):
                 vt = dict(globals_)
@@ -84,7 +104,7 @@ def structify_nested(mod, only=None, skip=()):
                         if not pm:
                             continue
                         target = pm[1]
-                    if re.search(rf"(?:->|\.)unk{last:X}\b\s*[-+\[]|\((?:[^()]*?)(?:->|\.)unk{last:X}\)\s*[-+\[]", code):
+                    if (sname, last) in arith:
                         continue
                     if (only is not None and target not in only) or target in skip:
                         continue

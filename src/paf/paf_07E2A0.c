@@ -5,7 +5,7 @@ u32 func_0007E2A0(struct Unk_func_0007E2A0_0 *arg0) {
     u32 temp_v0;
     u32 var_v1;
 
-    var_v1 = M2C_FIELD(arg0->unk15C, u32 (**)(), 0x6A0)();
+    var_v1 = arg0->unk15C->unk6A0();
     if (var_v1 < (u32) arg0->unk34) {
         temp_v0 = arg0->unkBA * 0x10;
         var_v1 = ((u32) ((var_v1 + temp_v0) - 1) / temp_v0) * temp_v0;

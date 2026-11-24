@@ -2460,7 +2460,7 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_078748", func_0009C69C);
 s32 func_0009C6F8(void) {
     s32 temp_v0;
 
-    temp_v0 = func_00098EE4((s32) &D_00106F70, (s32) &D_0010EF7C, M2C_FIELD(D_00106F70.unk14, s32 *, 0x14), (s32) (s16) (M2C_FIELD(D_00106F70.unk14, s16 *, 0x26) * (M2C_FIELD(D_00106F70.unk14, s16 *, 0x2C) + 1)));
+    temp_v0 = func_00098EE4((s32) &D_00106F70, (s32) &D_0010EF7C, D_00106F70.unk14->unk14, (s32) (s16) (D_00106F70.unk14->unk26 * (D_00106F70.unk14->unk2C + 1)));
     D_00106F70.unkCC = temp_v0;
     return (temp_v0 != 0) ? 0 : -1;
 }

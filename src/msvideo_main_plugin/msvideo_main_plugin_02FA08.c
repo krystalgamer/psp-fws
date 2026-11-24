@@ -635,7 +635,7 @@ s32 func_00036280(struct Unk_func_00036280_0 *arg0) {
             arg0->unk40 = func_00036848(arg0, arg0->unk54, (u8 *)arg0 + 0x7C);
         }
         arg0->unk44 = func_000369F4(arg0, (u8 *)arg0 + 0x564);
-        arg0->unk48 = M2C_FIELD(arg0->unk0, s32 (**)(void *), 0x7C)(arg0);
+        arg0->unk48 = arg0->unk0->unk7C(arg0);
     }
     return 0;
 }

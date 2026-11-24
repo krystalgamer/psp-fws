@@ -9,6 +9,11 @@ struct D_0002CC9C_s {
     M2C_UNK * unk4;
 };
 
+struct Unk_Unk_func_00004124_0_10 {
+    u8 pad0[0x1C];
+    s32 (*unk1C)(void *, M2C_UNK, M2C_UNK, s32, M2C_UNK);
+};
+
 struct Unk_Unk_func_0001AA20_0_20 {
     u8 pad0[0x4];
     s32 unk4;
@@ -36,7 +41,7 @@ struct Unk_func_00001C28_temp_v1 {
 
 struct Unk_func_00004124_0 {
     u8 pad0[0x10];
-    void * unk10;
+    struct Unk_Unk_func_00004124_0_10 *unk10;
 };
 
 struct Unk_func_000047DC_0 {

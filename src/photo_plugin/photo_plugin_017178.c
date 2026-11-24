@@ -325,7 +325,7 @@ void func_0001B674(struct Unk_func_0001B674_0 *arg0) {
 
     func_0001D298();
     temp_a0 = arg0->unk4;
-    if (M2C_FIELD(temp_a0->unk0, s32 (**)(void *), 0x10)(temp_a0) == 0) {
+    if (temp_a0->unk0->unk10(temp_a0) == 0) {
         temp_s0 = arg0->unk4;
         func_00004460(temp_s0);
         func_00020EB8(temp_s0->unk8, temp_s0);

@@ -182,7 +182,7 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 void func_000015EC(struct Unk_func_000015EC_0 *arg0, s32 arg1) {
     struct Unk_func_000015EC_temp_v0 *temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0->unk4, void **, 0x50);
+    temp_v0 = arg0->unk4->unk50;
     if (temp_v0 != NULL) {
         temp_v0->unk1C = arg1;
     }
@@ -207,7 +207,7 @@ void func_00001718(struct Unk_func_00001718_0 *arg0, s32 arg1) {
     } else {
         scePaf_49CE42F7(scePaf_D4FAE7D0("system_plugin"), "snd_cancel");
     }
-    func_00012848(M2C_FIELD(arg0->unk4, s32 *, 0xC), (s32) func_0000181C, (s32) arg0->unk4, 0, 0);
+    func_00012848(arg0->unk4->unkC, (s32) func_0000181C, (s32) arg0->unk4, 0, 0);
 }
 
 void func_000017BC(struct Unk_func_000017BC_0 *arg0, M2C_UNK arg1) {
@@ -343,7 +343,7 @@ void func_00002084(struct Unk_func_00002084_0 *arg0, s32 arg1) {
 }
 
 void func_000020F4(struct Unk_func_000020F4_0 *arg0, s32 arg1) {
-    func_000068E4(arg1, scePaf_4842A808(M2C_FIELD(arg0->unk4, s32 *, 4), &D_000245E4));
+    func_000068E4(arg1, scePaf_4842A808(arg0->unk4->unk4, &D_000245E4));
 }
 
 void func_00002134(M2C_UNK **arg0, s32 arg1) {
@@ -419,7 +419,7 @@ void func_000030D4(struct Unk_func_000030D4_0 *arg0, s32 arg1) {
 }
 
 void func_00003144(struct Unk_func_00003144_0 *arg0, s32 arg1) {
-    func_000068E4(arg1, scePaf_4842A808(M2C_FIELD(arg0->unk4, s32 *, 4), &D_0002474C));
+    func_000068E4(arg1, scePaf_4842A808(arg0->unk4->unk4, &D_0002474C));
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00003184);
@@ -436,7 +436,7 @@ void func_00003520(struct Unk_func_00003520_0 *arg0) {
         temp_v0 = arg0->unk54;
         arg0->unk54 = 0;
         arg0->unk58 = temp_v0;
-        M2C_FIELD(arg0->unk0, M2C_UNK (**)(), 0xC)();
+        arg0->unk0->unkC();
         temp_a0 = arg0->unk60;
         (*temp_a0)->unk30(temp_a0);
     }
@@ -520,7 +520,7 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00005474);
 
 void func_00005510(struct Unk_func_00005510_0 *arg0, s32 arg1) {
-    func_000068E4(arg1, scePaf_4842A808(M2C_FIELD(arg0->unk4, s32 *, 4), &D_000248A0));
+    func_000068E4(arg1, scePaf_4842A808(arg0->unk4->unk4, &D_000248A0));
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_00005550);
@@ -536,7 +536,7 @@ INCLUDE_ASM("tmp/asm/282/savedata_utility/nonmatchings/savedata_utility", func_0
 void func_00005A4C(struct Unk_func_00005A4C_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_DAB59652(M2C_FIELD(arg0->unk4, s32 *, 4), &D_00024494);
+    temp_v0 = scePaf_DAB59652(arg0->unk4->unk4, &D_00024494);
     if (temp_v0 != 0) {
         func_0000AAC8(temp_v0, (s32) arg0->unk4, 0);
     }

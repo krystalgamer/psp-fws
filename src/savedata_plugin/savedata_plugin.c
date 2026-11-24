@@ -169,7 +169,7 @@ s32 func_00001478(struct Unk_func_00001478_0 *arg0, s32 arg1) {
         if (arg0->unk60 == 0) {
             var_v1 = -1;
             if (scePaf_75062BCF(arg1) == 0) {
-                var_v1 = func_0000D3D4(M2C_FIELD(arg0->unk0, s32 (**)(void *), 0x10)(arg0), 0, 0x800, (s32) &func_000011A8, arg1);
+                var_v1 = func_0000D3D4(arg0->unk0->unk10(arg0), 0, 0x800, (s32) &func_000011A8, arg1);
             }
         }
     }

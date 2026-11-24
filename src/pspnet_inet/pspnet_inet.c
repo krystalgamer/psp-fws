@@ -129,7 +129,7 @@ s32 func_00004124(struct Unk_func_00004124_0 *arg0, s32 arg1) {
     s32 temp_s2;
 
     temp_s2 = sceNet_lib_94B44F26();
-    temp_s1 = M2C_FIELD(arg0->unk10, s32 (**)(void *, M2C_UNK, M2C_UNK, s32, M2C_UNK), 0x1C)(arg0, 2, 0, arg1, 0);
+    temp_s1 = arg0->unk10->unk1C(arg0, 2, 0, arg1, 0);
     sceNet_lib_515B2F33(temp_s2);
     return temp_s1;
 }

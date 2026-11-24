@@ -81,7 +81,7 @@ void func_0004D0F8(struct Unk_func_0004D0F8_0 *arg0, struct Unk_func_0004D0F8_1 
     if (var_a0 != NULL) {
         do {
             if (var_a0->unk14 == arg1) {
-                temp_v1 = M2C_FIELD(arg1->unk34, s32 *, 0x2DC) + 8;
+                temp_v1 = arg1->unk34->unk2DC + 8;
                 var_a0->unk14 = (s32) ((((s32) arg1 ^ temp_v1) == 0) ? 0 : temp_v1);
             }
             var_a0 = var_a0->unk4;

@@ -34,9 +34,14 @@ struct Unk_D_0007E590 {
     s32 unk2C;
 };
 
+struct Unk_Unk_Unk_Unk_Unk_Unk_func_0005ECC4_0_10C_298_8C_FC_4 {
+    u8 pad0[0x28];
+    s32 unk28;
+};
+
 struct Unk_Unk_Unk_Unk_Unk_func_0005ECC4_0_10C_298_8C_FC {
     u8 pad0[0x4];
-    void *unk4;
+    struct Unk_Unk_Unk_Unk_Unk_Unk_func_0005ECC4_0_10C_298_8C_FC_4 *unk4;
 };
 
 struct Unk_Unk_Unk_Unk_func_0005ECC4_0_10C_298_8C {

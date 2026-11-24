@@ -503,7 +503,7 @@ void func_00000FA0(struct Unk_func_00000FA0_0 *arg0) {
 
 void func_00000FD8(struct Unk_func_00000FD8_0 *arg0) {
     arg0->unk8 = 1;
-    M2C_FIELD(arg0->unk0, M2C_UNK (**)(), 0x10)();
+    arg0->unk0->unk10();
     arg0->unk8 = 2;
 }
 

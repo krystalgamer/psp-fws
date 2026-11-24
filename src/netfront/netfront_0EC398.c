@@ -79,9 +79,9 @@ void func_000ED0CC(struct Unk_func_000ED0CC_0 *arg0, s32 arg1) {
             arg0->unk8 = (s32) (arg0->unk8 | 0x100);
             return;
         }
-        temp_s0 = M2C_FIELD(arg0->unk0, s32 (**)(void *), 0x30)(arg0);
+        temp_s0 = arg0->unk0->unk30(arg0);
         func_000EE45C(arg0, 0, 0);
-        M2C_FIELD(arg0->unk0, M2C_UNK (**)(void *, s32), 0x38)(arg0, temp_s0);
+        arg0->unk0->unk38(arg0, temp_s0);
         func_000EE55C(arg0);
         func_000EC478(arg0);
     }
@@ -94,9 +94,9 @@ void func_000ED178(struct Unk_func_000EC280_0 *arg0) {
     if (func_000EC2A0(arg0) == 0) {
         temp_s2 = arg0->unk8 & 0x100;
         if (temp_s2 != 0) {
-            temp_s0 = M2C_FIELD(arg0->unk0, s32 (**)(void *), 0x30)(arg0);
+            temp_s0 = arg0->unk0->unk30(arg0);
             func_000EE45C(arg0, 0, 0);
-            M2C_FIELD(arg0->unk0, M2C_UNK (**)(void *, s32), 0x38)(arg0, temp_s0);
+            arg0->unk0->unk38(arg0, temp_s0);
         }
         func_000EC478(arg0);
         func_000EC280(arg0);
@@ -220,12 +220,12 @@ s32 func_000EF068(struct Unk_func_000EF068_0 *arg0, s32 arg1, s32 *arg2) {
     s32 var_v1;
 
     temp_v0 = sceHVNetfront_Module_E459881C(arg0->unkC);
-    temp_s0 = M2C_FIELD(arg0->unk0, s32 (**)(void *, s32, s32, M2C_UNK), 0x54)(arg0, temp_v0, sceHVNetfront_Module_15875ED4(temp_v0), 0);
+    temp_s0 = arg0->unk0->unk54(arg0, temp_v0, sceHVNetfront_Module_15875ED4(temp_v0), 0);
     sceHVNetfront_Module_08549708(arg0->unkC);
     temp_v0_2 = func_000EBCD4((s32) arg0, arg1, arg2, temp_s0);
     var_v1 = 0;
     if (temp_v0_2 > 0) {
-        M2C_FIELD(arg0->unk0, M2C_UNK (**)(void *, s32), 0x38)(arg0, arg1 + temp_v0_2);
+        arg0->unk0->unk38(arg0, arg1 + temp_v0_2);
         var_v1 = 1;
     }
     return var_v1;
@@ -295,7 +295,7 @@ s32 func_000EFA90(struct Unk_func_000EFA90_0 *arg0, s32 arg1) {
         temp_a3 = arg0->unk78 + arg0->unk70;
         arg0->unk78 = temp_a3;
         if (func_000EC4C4(arg0, temp_s3, temp_s1, temp_a3) == 0) {
-            arg0->unk78 = M2C_FIELD(arg0->unk0, s32 (**)(void *, s32, s32, s32), 0x50)(arg0, temp_s3, temp_s1, arg0->unk78);
+            arg0->unk78 = arg0->unk0->unk50(arg0, temp_s3, temp_s1, arg0->unk78);
         }
         if (temp_s1 < arg0->unk78) {
             arg0->unk78 = temp_s1;

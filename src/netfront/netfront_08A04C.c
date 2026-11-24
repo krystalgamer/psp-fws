@@ -1354,7 +1354,7 @@ s32 func_0009D39C(struct Unk_func_0009D39C_0 *arg0) {
     s32 var_v0;
     s32 var_v1;
 
-    temp_a1 = M2C_FIELD(arg0->unk44, s32 **, 4);
+    temp_a1 = arg0->unk44->unk4;
     temp_s0 = *temp_a1;
     temp_s3 = (arg0->unk2C + arg0->unk30) - arg0->unk58;
     temp_v0 = sceHVNetfront_Module_3EDA77E7((s32) temp_a1);
@@ -3091,7 +3091,7 @@ s32 func_000B4960(struct Unk_func_000B4960_0 *arg0) {
 }
 
 s32 func_000B4970(struct Unk_func_000B4970_0 *arg0) {
-    return M2C_FIELD(arg0->unk4D0->unk10, s32 *, 0x84);
+    return arg0->unk4D0->unk10->unk84;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_08A04C", func_000B4980);
@@ -3166,7 +3166,7 @@ s32 func_000B7A28(void *arg0) {
 }
 
 s32 func_000B7A50(struct Unk_func_000227B0_0 *arg0) {
-    return M2C_FIELD(arg0->unk4D0->unk30, s32 *, 0x64);
+    return arg0->unk4D0->unk30->unk64;
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_08A04C", func_000B7A60);
@@ -3623,7 +3623,7 @@ void func_000BF9C4(void **arg0) {
     struct Unk_func_000BF9C4_temp_v0 *temp_v0;
 
     temp_v0 = *arg0;
-    M2C_FIELD(temp_v0->unk0, M2C_UNK (**)(s32), 0x4A8)(temp_v0->unk4);
+    temp_v0->unk0->unk4A8(temp_v0->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_08A04C", func_000BF9F0);
@@ -3632,7 +3632,7 @@ void func_000BFA88(void **arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     struct Unk_func_000BFA88_temp_v0 *temp_v0;
 
     temp_v0 = *arg0;
-    M2C_FIELD(temp_v0->unk0, M2C_UNK (**)(s32, s32, s32, s32), 0x4B0)(temp_v0->unk4, arg2 + arg3, arg4, arg1);
+    temp_v0->unk0->unk4B0(temp_v0->unk4, arg2 + arg3, arg4, arg1);
 }
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_08A04C", func_000BFAC0);
@@ -4267,7 +4267,7 @@ void func_000C9CD0(void **arg0, s32 *arg1, s32 *arg2, void **arg3) {
 
     temp_v0 = *arg0;
     *arg1 = temp_v0->unk34;
-    temp_v1 = M2C_FIELD(temp_v0->unk0, void ***, 0x38);
+    temp_v1 = temp_v0->unk0->unk38;
     *arg2 = temp_v0->unk38;
     if (temp_v1 != arg3) {
         func_000C9AB0(temp_v1, arg1, arg2, arg3);
@@ -4282,7 +4282,7 @@ void func_000C9D80(void **arg0, s32 *arg1, s32 *arg2, void **arg3) {
 
     temp_v0 = *arg0;
     *arg1 = temp_v0->unk24;
-    temp_v1 = M2C_FIELD(temp_v0->unk0, void ***, 0x38);
+    temp_v1 = temp_v0->unk0->unk38;
     *arg2 = temp_v0->unk28;
     if (temp_v1 != arg3) {
         func_000C9AB0(temp_v1, arg1, arg2, arg3);

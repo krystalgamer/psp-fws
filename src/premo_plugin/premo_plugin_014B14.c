@@ -634,7 +634,7 @@ s32 func_00018E78(struct Unk_func_00018E78_0 *arg0, u32 arg1) {
     s32 var_v1;
 
     arg0->unk2C = 0;
-    if ((M2C_FIELD(arg0->unk0, u32 (**)(), 0x20)() < arg1) || (var_v1 = 0, (arg0->unk70 == 0))) {
+    if ((arg0->unk0->unk20() < arg1) || (var_v1 = 0, (arg0->unk70 == 0))) {
         var_v1 = func_00021CF0((u8 *)arg0 + 4, arg1);
     }
     return var_v1;

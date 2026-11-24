@@ -225,7 +225,7 @@ s32 func_00045DBC(struct Unk_func_00045DBC_0 *arg0) {
 
     var_a1 = 0;
     if (arg0->unk0 == 3) {
-        temp_v1 = M2C_FIELD(arg0->unk8, s32 *, 0x7C);
+        temp_v1 = arg0->unk8->unk7C;
         switch (temp_v1) {                          /* irregular */
         case 0:
             var_a1 = 1;

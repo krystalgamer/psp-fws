@@ -534,7 +534,7 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_01E9D0", func_00025D40);
 void func_0002629C(struct Unk_func_0002629C_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0->unkC, s32 *, 0x1014);
+    temp_v0 = arg0->unkC->unk1014;
     if (temp_v0 == 0) {
 
     } else {

@@ -361,14 +361,14 @@ s32 func_000BC724(struct Unk_func_000BC724_0 *arg0) {
     if (temp_v0 == 0) {
 
     } else {
-        temp_v1 = M2C_FIELD(arg0->unk4, void **, 0x48);
+        temp_v1 = arg0->unk4->unk48;
         temp_v1->unk10(temp_v1->unk0, temp_v0);
     }
     arg0->unk8 = 0;
     if (arg0->unkC == 0) {
         arg0->unkC = 0;
     } else {
-        temp_v1_2 = M2C_FIELD(arg0->unk4, void **, 0x48);
+        temp_v1_2 = arg0->unk4->unk48;
         temp_v1_2->unk10(temp_v1_2->unk0, arg0->unkC);
         arg0->unkC = 0;
     }

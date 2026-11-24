@@ -447,7 +447,7 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001C4F8);
 
 s32 func_0001CAEC(struct Unk_func_0001CAEC_0 *arg0) {
-    return M2C_FIELD(arg0->unk4, s32 *, 0x94);
+    return arg0->unk4->unk94;
 }
 
 s32 func_0001CAF8(struct Unk_func_0001CAF8_0 *arg0) {
@@ -656,7 +656,7 @@ s32 func_0001D908(struct Unk_func_0001D908_0 *arg0) {
     struct Unk_vt_func_0001D908_temp_a0 **temp_a0;
 
     arg0->unk2C = 0;
-    temp_a0 = M2C_FIELD(arg0->unk38, void ***, 0xC);
+    temp_a0 = arg0->unk38->unkC;
     (*temp_a0)->unkC(temp_a0);
     return 0;
 }

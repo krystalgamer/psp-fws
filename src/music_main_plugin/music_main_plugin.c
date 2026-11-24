@@ -634,7 +634,7 @@ INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func
 
 void func_00006E74(struct Unk_func_00006E74_0 *arg0) {
     scePaf_5EBC648F(D_000A422C, arg0->unk4);
-    D_000A2FA4 = M2C_FIELD(arg0->unk0, s32 (**)(void *), 8)(arg0);
+    D_000A2FA4 = arg0->unk0->unk8(arg0);
 }
 
 INCLUDE_ASM("tmp/asm/282/music_main_plugin/nonmatchings/music_main_plugin", func_00006EBC);

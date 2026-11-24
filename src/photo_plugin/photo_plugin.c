@@ -1496,7 +1496,7 @@ void func_0000EE0C(struct Unk_func_0000EE0C_0 *arg0) {
     sceVshCommonGui_1CF884A1();
     scePaf_66907719();
     arg0->unk14 = 0;
-    M2C_FIELD(arg0->unk0, M2C_UNK (**)(void *, M2C_UNK, M2C_UNK, M2C_UNK), 8)(arg0, 0, 0, 0);
+    arg0->unk0->unk8(arg0, 0, 0, 0);
 }
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_0000EE58);
