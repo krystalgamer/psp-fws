@@ -270,6 +270,17 @@ def main():
     try:
         # 1. both versions split per function (NEW as C pointing at the shared source)
         run("tools/regress.sh", f"{ref}:{mod}", check=True)
+        # REF's asm for every function, also those it builds from C
+        rscratch = ROOT / "tmp/av_src" / f"{ref}_ref" / mod
+        shutil.rmtree(rscratch, ignore_errors=True)
+        rscratch.mkdir(parents=True)
+        try:
+            rcfg.write_text(re.sub(r"^(\s*src_path:\s*)\S+", rf"\1{rscratch.relative_to(ROOT)}", rtext, flags=re.M))
+            run("rm", "-rf", f"tmp/asm/{ref}/{mod}")
+            run("make", "split", f"VERSION={ref}", f"MODULE={mod}", check=True)
+        finally:
+            rcfg.write_text(rtext)
+            shutil.rmtree(rscratch, ignore_errors=True)
         ntext = re.sub(rf"^(\s+- \[0x[0-9A-Fa-f]+, )asm(, {mod}\])$", r"\1c\2", ntext0, flags=re.M)
         ntext = re.sub(rf"^(\s+- \[0x[0-9A-Fa-f]+, )rodata(, {mod}\])$", r"\1.rodata\2", ntext, flags=re.M)
         scratch = ROOT / "tmp/av_src" / new / mod
