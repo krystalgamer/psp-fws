@@ -785,7 +785,11 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_00006C58);
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_00006CE8);
+void func_00006CE8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_00006CF8);
 

@@ -6,6 +6,10 @@
 
 extern s32 D_00003AD8;
 extern s32 D_00003ADC;
+extern s32 D_00003AF4;
+extern s32 D_00003AF8;
+extern s32 D_00003AFC;
+extern s32 D_00003B00;
 extern s32 D_00004378;
 extern s32 D_0000437C;
 extern s32 D_00004380;
@@ -18,6 +22,7 @@ void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelCreateVpl(void *, s32, u32, u32, void *);
 s32 sceKernelDeleteVpl(s32);
+s32 sceNetIfhandle_driver_0542835F(s32 arg0, s32 arg1, s32 arg2);
 s32 sceNetIfhandle_driver_0C391E9F(u32 arg0);
 void sceNetIfhandle_driver_0FB8AE0D(void);
 void sceNetIfhandle_driver_16246B99(void *arg0, void *arg1);

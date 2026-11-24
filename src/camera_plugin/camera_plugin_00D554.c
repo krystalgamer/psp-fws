@@ -253,7 +253,11 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0001059C);
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_000105F8);
+void func_000105F8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00010608);
 
@@ -434,9 +438,17 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00015CD0);
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00015DE0);
+void func_00015DE0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00015DF0);
+void func_00015DF0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00015E00);
 
@@ -621,7 +633,10 @@ void func_00017E44(M2C_UNK **arg0) {
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00017E54);
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00017E7C);
+void func_00017E7C(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 8) = arg2;
+}
 
 void func_00017E88(void) {
 }
@@ -824,7 +839,11 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0001A974);
 
-INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0001AA08);
+void func_0001AA08(s32 **arg0) {
+    M2C_FIELD(arg0, s32 **, 0) = &D_00024148;
+    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_00022AE8;
+    scePaf_6261C0A5(arg0);
+}
 
 void func_0001AA3C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;

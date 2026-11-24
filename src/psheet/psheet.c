@@ -120,7 +120,14 @@ INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00001D3C);
 
 INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00001E64);
 
-INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00001F40);
+s32 func_00001F40(s32 *arg0) {
+    memset(arg0, 0, 0x90);
+    M2C_FIELD(arg0, s32 *, 0) = D_000029AC;
+    M2C_FIELD(arg0, s32 *, 4) = 1;
+    M2C_FIELD(arg0, s32 *, 0x48) = 0x400;
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0x90;
+    return 0;
+}
 
 INCLUDE_RODATA("tmp/asm/340/psheet/nonmatchings/psheet", D_000029AC);
 

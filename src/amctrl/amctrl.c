@@ -59,7 +59,20 @@ INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", sceAmctrl_driver_1CCB66D2)
 
 INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", sceAmctrl_driver_0785C974);
 
-INCLUDE_ASM("tmp/asm/352/amctrl/nonmatchings/amctrl", sceAmctrl_driver_9951C50F);
+s32 sceAmctrl_driver_9951C50F(void *arg0) {
+    u32 var_a1;
+    void *temp_v1;
+
+    var_a1 = 0;
+    do {
+        temp_v1 = arg0 + var_a1;
+        var_a1 += 1;
+        M2C_FIELD(temp_v1, s8 *, 8) = 0;
+    } while (var_a1 < 0x10U);
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    return 0;
+}
 
 INCLUDE_RODATA("tmp/asm/352/amctrl/nonmatchings/amctrl", D_000012E8);
 

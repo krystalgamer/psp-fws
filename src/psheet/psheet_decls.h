@@ -6,6 +6,7 @@
 
 extern M2C_UNK D_000027EC;
 extern M2C_UNK D_00002804;
+extern s32 D_000029AC;
 extern s32 D_000029C4;
 extern s32 D_000029E0;
 extern s32 D_00002A1C;
@@ -21,6 +22,7 @@ s32 func_000012F0(s32 arg0);
 s32 func_00001360(s32 arg0, s32 arg1);
 s32 func_000013D8(void);
 s32 func_00001460(s32);
+s32 func_00001F40(s32 *arg0);
 s32 func_00001F94(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_0000217C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);

@@ -7,5 +7,6 @@
 
 s32 module_start(void);
 s32 sceAmctrl_driver_525B8218(void *arg0, s32 arg1);
+s32 sceAmctrl_driver_9951C50F(void *arg0);
 
 #endif
