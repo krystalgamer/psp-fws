@@ -4,7 +4,7 @@
   "func_00000180": "s32 func_00000180(void);",
   "func_00000194": "s32 func_00000194(void);",
   "func_00000B1C": "void func_00000B1C(void);",
-  "func_000026FC": "void func_000026FC(void *arg0, void *arg1, void *arg2);",
+  "func_000026FC": "void func_000026FC(struct Unk_func_000026FC_0 *arg0, struct Unk_func_000026FC_1 *arg1, struct Unk_func_000026FC_2 *arg2);",
   "func_00003C00": "s32 func_00003C00(s32, s32, s32);",
   "func_00003CFC": "void func_00003CFC(s32 arg0, void *arg1);",
   "func_000048E4": "s32 func_000048E4(s32, s32, s32);",
@@ -18,6 +18,11 @@
   "sceNetApctlDisconnect": "M2C_UNK sceNetApctlDisconnect();",
   "sceUtility_netparam_internal_9CE50172": "M2C_UNK sceUtility_netparam_internal_9CE50172(M2C_UNK);",
   "sceVshNetconfRaku_F3AF9DD1": "s32 sceVshNetconfRaku_F3AF9DD1(void *arg0);"
+ },
+ "types": {
+  "Unk_func_000026FC_0": "struct Unk_func_000026FC_0 {\n    u8 unk0;\n    u8 unk1;\n    u8 unk2;\n    u8 unk3;\n    u8 unk4;\n    u8 unk5;\n    u8 unk6;\n    u8 unk7;\n};",
+  "Unk_func_000026FC_1": "struct Unk_func_000026FC_1 {\n    u8 unk0;\n    u8 unk1;\n    u8 unk2;\n    u8 unk3;\n    u8 unk4;\n    u8 unk5;\n    u8 unk6;\n    u8 unk7;\n};",
+  "Unk_func_000026FC_2": "struct Unk_func_000026FC_2 {\n    s8 unk0;\n    s8 unk1;\n    s8 unk2;\n    s8 unk3;\n    s8 unk4;\n    s8 unk5;\n    s8 unk6;\n    s8 unk7;\n};"
  },
  "vars": {
   "D_00008498": "extern s32 D_00008498;",

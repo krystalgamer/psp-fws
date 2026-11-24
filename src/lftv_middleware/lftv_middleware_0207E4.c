@@ -48,14 +48,14 @@ void func_00020F44(M2C_UNK **arg0) {
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0207E4", func_00020F6C);
 
-s32 func_00020FA4(void *arg0, s32 arg1, s32 arg2) {
+s32 func_00020FA4(struct Unk_func_00020FA4_0 *arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
 
     var_v0 = 4;
     if (((arg1 == 0) | (arg2 == 0)) == 0) {
         var_v0 = 0;
-        M2C_FIELD(arg0, s32 *, 0x18) = arg1;
-        M2C_FIELD(arg0, s32 *, 0x1C) = arg2;
+        arg0->unk18 = arg1;
+        arg0->unk1C = arg2;
     }
     return var_v0;
 }
@@ -145,8 +145,8 @@ void func_000222A8(s32 arg0, s32 arg1) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00055590;
 }
 
-void func_000222F8(void *arg0, s32 arg1, s32 arg2) {
-    func_00022DF0(M2C_FIELD(arg0, s32 *, 0x18), arg1, arg2);
+void func_000222F8(struct Unk_func_000222F8_0 *arg0, s32 arg1, s32 arg2) {
+    func_00022DF0(arg0->unk18, arg1, arg2);
 }
 
 void func_00022314(M2C_UNK **arg0) {

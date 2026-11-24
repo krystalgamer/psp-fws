@@ -20,9 +20,9 @@ INCLUDE_RODATA("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0346EC"
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0346EC", func_000349B4);
 
-void func_00034B00(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s8 *, 4) = 0;
+void func_00034B00(struct Unk_func_00034B00_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
 void func_00034B0C(s32 *arg0, s32 arg1) {

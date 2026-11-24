@@ -73,7 +73,7 @@ def structify_globals(mod, only=None, skip=()):
         uses[m[2]][(int(m[4], 0), t, m[1] == "V")] += 1
     changed = {}
     for sym, acc in uses.items():
-        if (only is not None and sym != only) or sym in skip:
+        if (only is not None and sym not in only) or sym in skip:
             continue
         decl = store["vars"].get(sym, "")
         if f"struct {sym}_s" in decl:
@@ -247,7 +247,7 @@ def structify_args(mod, only=None, skip=()):
         if not acc:
             continue
         sname = "Unk_" + min(members)[0] + f"_{min(members)[1]}"
-        if (only is not None and sname != only) or sname in skip:
+        if (only is not None and sname not in only) or sname in skip:
             continue
         by_off = collections.defaultdict(list)
         for (off, t), n in acc.items():
@@ -341,30 +341,38 @@ def main():
     if verify(vm):
         print(f"{vm}: OK, {n} globals as structs, {lines} lines rewritten")
         return
-    # one global at a time, keeping those that still match
+    # bisect: keep the largest verified subsets of the new structs
+    names = sorted(set(json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text()).get("types", {}))
+                   - set(json.loads(subprocess.run(["git", "show", f"HEAD:src/{mod}/{mod}_decls.json"], cwd=ROOT,
+                                                   capture_output=True, text=True).stdout or "{}").get("types", {})))
+    if phase is structify_globals:
+        names = [n[:-2] for n in names if n.endswith("_s")]
     revert(mod)
-    if phase is structify_args:
-        syms = sorted(json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text()).get("types", {}))
-        syms = [s for s in syms if s.startswith("Unk_")]
-        structify_args(mod)  # recompute names, then revert and go one by one
-        syms = sorted(json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text()).get("types", {}))
-        syms = [s for s in syms if s.startswith("Unk_")]
+    good, bad = [], []
+
+    def test(extra):
         revert(mod)
-    else:
-        syms = sorted(set(m[2] for f in (ROOT / "src" / mod).glob("*.c") for m in ACCESS.finditer(f.read_text())))
-    bad, good = [], 0
-    for sym in syms:
-        before = {f: f.read_text() for f in (ROOT / "src" / mod).iterdir() if f.is_file()}
-        k, _ = phase(mod, only=sym)
-        if not k:
-            continue
-        if verify(vm):
-            good += 1
+        phase(mod, only=set(good + extra))
+        return verify(vm)
+
+    def solve(s):
+        if not s:
+            return
+        if test(s):
+            good.extend(s)
+        elif len(s) == 1:
+            bad.extend(s)
         else:
-            for f, txt in before.items():
-                f.write_text(txt)
-            bad.append(sym)
-    print(f"{vm}: {'OK' if good else 'FAILED'}, {good} structs one by one; kept macros for {', '.join(bad)}")
+            solve(s[:len(s) // 2])
+            solve(s[len(s) // 2:])
+    solve(names)
+    revert(mod)
+    if good:
+        phase(mod, only=set(good))
+        if not verify(vm):
+            revert(mod)
+            good = []
+    print(f"{vm}: {'OK' if good else 'FAILED'}, {len(good)} structs after bisection; kept macros for {', '.join(bad)}")
 
 
 if __name__ == "__main__":

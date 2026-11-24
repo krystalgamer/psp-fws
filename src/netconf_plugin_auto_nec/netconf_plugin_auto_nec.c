@@ -94,15 +94,15 @@ INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_aut
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", func_0000243C);
 
-void func_000026FC(void *arg0, void *arg1, void *arg2) {
-    M2C_FIELD(arg2, s8 *, 0) = (s8) (M2C_FIELD(arg0, u8 *, 0) ^ M2C_FIELD(arg1, u8 *, 0));
-    M2C_FIELD(arg2, s8 *, 1) = (s8) (M2C_FIELD(arg0, u8 *, 1) ^ M2C_FIELD(arg1, u8 *, 1));
-    M2C_FIELD(arg2, s8 *, 2) = (s8) (M2C_FIELD(arg0, u8 *, 2) ^ M2C_FIELD(arg1, u8 *, 2));
-    M2C_FIELD(arg2, s8 *, 3) = (s8) (M2C_FIELD(arg0, u8 *, 3) ^ M2C_FIELD(arg1, u8 *, 3));
-    M2C_FIELD(arg2, s8 *, 4) = (s8) (M2C_FIELD(arg0, u8 *, 4) ^ M2C_FIELD(arg1, u8 *, 4));
-    M2C_FIELD(arg2, s8 *, 5) = (s8) (M2C_FIELD(arg0, u8 *, 5) ^ M2C_FIELD(arg1, u8 *, 5));
-    M2C_FIELD(arg2, s8 *, 6) = (s8) (M2C_FIELD(arg0, u8 *, 6) ^ M2C_FIELD(arg1, u8 *, 6));
-    M2C_FIELD(arg2, s8 *, 7) = (s8) (M2C_FIELD(arg0, u8 *, 7) ^ M2C_FIELD(arg1, u8 *, 7));
+void func_000026FC(struct Unk_func_000026FC_0 *arg0, struct Unk_func_000026FC_1 *arg1, struct Unk_func_000026FC_2 *arg2) {
+    arg2->unk0 = (s8) (arg0->unk0 ^ arg1->unk0);
+    arg2->unk1 = (s8) (arg0->unk1 ^ arg1->unk1);
+    arg2->unk2 = (s8) (arg0->unk2 ^ arg1->unk2);
+    arg2->unk3 = (s8) (arg0->unk3 ^ arg1->unk3);
+    arg2->unk4 = (s8) (arg0->unk4 ^ arg1->unk4);
+    arg2->unk5 = (s8) (arg0->unk5 ^ arg1->unk5);
+    arg2->unk6 = (s8) (arg0->unk6 ^ arg1->unk6);
+    arg2->unk7 = (s8) (arg0->unk7 ^ arg1->unk7);
 }
 
 INCLUDE_ASM("tmp/asm/282/netconf_plugin_auto_nec/nonmatchings/netconf_plugin_auto_nec", func_00002780);

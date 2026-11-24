@@ -14,17 +14,17 @@ void func_00023A3C(void) {
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_02399C", func_00023A44);
 
-s32 func_00023A90(void *arg0) {
+s32 func_00023A90(struct Unk_func_00023A90_0 *arg0) {
     s32 var_a1;
     u32 temp_v0;
     u32 temp_v1;
 
-    temp_v0 = M2C_FIELD(arg0, u32 *, 4);
+    temp_v0 = arg0->unk4;
     var_a1 = 0;
     if (temp_v0 != 0) {
-        temp_v1 = M2C_FIELD(arg0, u32 *, 8);
+        temp_v1 = arg0->unk8;
         if (temp_v1 < temp_v0) {
-            var_a1 = M2C_FIELD(arg0, s32 *, 0) + temp_v1;
+            var_a1 = arg0->unk0 + temp_v1;
         }
     }
     return var_a1;

@@ -192,26 +192,26 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_049660", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_049660", func_0004A91C);
 
-void func_0004A934(void *arg0) {
+void func_0004A934(struct Unk_func_0004A934_0 *arg0) {
     s32 temp_a1;
 
-    temp_a1 = M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00056EA0;
+    temp_a1 = arg0->unk4;
+    arg0->unk0 = &D_00056EA0;
     if (temp_a1 > 0) {
         sceKernelDeleteSema((u32) temp_a1);
     }
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00056EC8;
+    arg0->unk0 = &D_00056EC8;
 }
 
-void func_0004A980(void *arg0) {
+void func_0004A980(struct Unk_func_0004A980_0 *arg0) {
     s32 temp_a1;
 
-    temp_a1 = M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00056EA0;
+    temp_a1 = arg0->unk4;
+    arg0->unk0 = &D_00056EA0;
     if (temp_a1 > 0) {
         sceKernelDeleteSema((u32) temp_a1);
     }
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00056EC8;
+    arg0->unk0 = &D_00056EC8;
 }
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_049660", func_0004A9CC);
@@ -238,20 +238,20 @@ void func_0004AFA0(void) {
     sceKernelGetThreadId();
 }
 
-s32 func_0004AFBC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_0004AFBC(struct Unk_func_0004AFBC_0 *arg0) {
+    return arg0->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_049660", func_0004AFC4);
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_049660", func_0004B080);
 
-s32 func_0004B1CC(void *arg0) {
+s32 func_0004B1CC(struct Unk_func_0004B1CC_0 *arg0) {
     s32 temp_a1;
     s32 var_v1;
 
     var_v1 = 0;
-    temp_a1 = M2C_FIELD(arg0, s32 *, 4);
+    temp_a1 = arg0->unk4;
     if (temp_a1 > 0) {
         var_v1 = sceNetThreadAbort((u32) temp_a1);
     }

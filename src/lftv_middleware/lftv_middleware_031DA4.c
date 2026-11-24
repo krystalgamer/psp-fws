@@ -34,8 +34,8 @@ void func_00032450(s32 arg0) {
     func_000315C0(arg0, sceKernelGetThreadId());
 }
 
-s32 func_00032480(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_00032480(struct Unk_func_00032480_0 *arg0) {
+    return arg0->unk4;
 }
 
 s32 func_00032488(void) {
@@ -129,12 +129,12 @@ s32 func_00033170(void *arg0) {
     return var_v0;
 }
 
-s32 func_000331AC(void *arg0) {
+s32 func_000331AC(struct Unk_func_000331AC_0 *arg0) {
     s32 var_v0;
 
     var_v0 = -1;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x34);
+        var_v0 = arg0->unk34;
     }
     return var_v0;
 }

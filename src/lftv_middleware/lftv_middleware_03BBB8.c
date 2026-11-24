@@ -75,26 +75,26 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_03BBB8", func_0003CA48);
 
-u16 func_0003CACC(void *arg0) {
+u16 func_0003CACC(struct Unk_func_0003CACC_0 *arg0) {
     u16 var_v1;
 
     var_v1 = 0xFFFF;
-    if (M2C_FIELD(arg0, s32 *, 0x34) != 0) {
-        var_v1 = M2C_FIELD(arg0, u16 *, 8);
+    if (arg0->unk34 != 0) {
+        var_v1 = arg0->unk8;
     }
     return var_v1;
 }
 
-s32 func_0003CAE4(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x54);
+s32 func_0003CAE4(struct Unk_func_0003CAE4_0 *arg0) {
+    return arg0->unk54;
 }
 
-s32 func_0003CAEC(void *arg0) {
+s32 func_0003CAEC(struct Unk_func_0003CAEC_0 *arg0) {
     s32 temp_a1;
     s32 var_v1;
 
     var_v1 = 0;
-    temp_a1 = M2C_FIELD(arg0, s32 *, 0x18);
+    temp_a1 = arg0->unk18;
     if (temp_a1 != 0) {
         var_v1 = func_0003F654(temp_a1);
     }

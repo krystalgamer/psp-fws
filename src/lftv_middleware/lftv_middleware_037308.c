@@ -2,9 +2,9 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-s32 func_00037308(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
-    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+s32 func_00037308(struct Unk_func_00037308_0 *arg0) {
+    arg0->unk1C = 0;
+    arg0->unk20 = 0;
     return 0;
 }
 
@@ -62,8 +62,8 @@ void func_000378F8(s32 **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-s32 func_00037938(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0xB0) = arg1;
+s32 func_00037938(struct Unk_func_00037938_0 *arg0, s32 arg1) {
+    arg0->unkB0 = arg1;
     return 0;
 }
 

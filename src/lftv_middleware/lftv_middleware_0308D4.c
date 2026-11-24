@@ -41,8 +41,8 @@ INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0308D4", f
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0308D4", func_00030C50);
 
-s32 func_00030CF8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_00030CF8(struct Unk_func_00030CF8_0 *arg0) {
+    return arg0->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_0308D4", func_00030D00);
