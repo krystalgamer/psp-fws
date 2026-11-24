@@ -63,16 +63,16 @@ u8 func_000005E0(void) {
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000005EC);
 
-void func_00000610(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0000AAB8;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 8) = arg2;
+void func_00000610(struct Unk_func_00000610_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk0 = &D_0000AAB8;
+    arg0->unk4 = arg1;
+    arg0->unk8 = arg2;
 }
 
-void func_00000628(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0000AAB8;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 8) = arg2;
+void func_00000628(struct Unk_func_00000628_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk0 = &D_0000AAB8;
+    arg0->unk4 = arg1;
+    arg0->unk8 = arg2;
 }
 
 void func_00000640(M2C_UNK **arg0) {
@@ -102,13 +102,13 @@ void func_000006A8(void) {
     sceHtmlViewerHelper_05E0C3D4(0);
 }
 
-void func_000006E0(void *arg0) {
+void func_000006E0(struct Unk_func_000006E0_0 *arg0) {
     sceHtmlViewerHelper_05E0C3D4(1);
-    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4), &D_0000AA40);
+    scePaf_CAF05F1D(arg0->unk4, &D_0000AA40);
 }
 
-void func_00000718(void *arg0) {
-    sceHtmlViewerHelper_F27998C2(M2C_FIELD(arg0, s32 *, 8));
+void func_00000718(struct Unk_func_00000718_0 *arg0) {
+    sceHtmlViewerHelper_F27998C2(arg0->unk8);
 }
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000734);
@@ -134,14 +134,14 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000900);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000930);
 
-s32 func_00000964(s32 arg0, void *arg1) {
+s32 func_00000964(s32 arg0, struct Unk_func_00000964_1 *arg1) {
     s32 temp_s0;
     void *temp_v0;
 
-    temp_s0 = (M2C_FIELD(arg1, s32 *, 4) * 2) + 2;
+    temp_s0 = (arg1->unk4 * 2) + 2;
     temp_v0 = scePaf_5FAC9869(temp_s0);
     if (temp_v0 != NULL) {
-        sceCccUTF8toUTF16(temp_v0, temp_s0, M2C_FIELD(arg1, void **, 0));
+        sceCccUTF8toUTF16(temp_v0, temp_s0, arg1->unk0);
         func_00002520(arg0, (s32) temp_v0);
         scePaf_545FE2DA((s32) temp_v0);
     }
@@ -173,13 +173,13 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00000F88);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00001020);
 
-void func_000010C0(void *arg0) {
+void func_000010C0(struct Unk_func_000006E0_0 *arg0) {
     void *sp0;
     if ((sceNetApctlGetState(&sp0) != 0) || (sp0 != 0)) {
         func_000006E0(arg0);
         scePaf_A0ED77C4(0, func_000014E0, arg0, -1, -1, &func_00001500);
     } else {
-        sceHtmlViewerHelper_C92C71B7(M2C_FIELD(arg0, s32 *, 8));
+        sceHtmlViewerHelper_C92C71B7(arg0->unk8);
     }
 }
 
@@ -395,79 +395,79 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00003AB4);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00003BB8);
 
-void func_00003BE4(void *arg0) {
+void func_00003BE4(struct Unk_func_00003BE4_0 *arg0) {
     s32 temp_a0;
     s32 temp_a0_2;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0x10);
+    temp_a0 = arg0->unk10;
     if (temp_a0 == 0) {
 
     } else {
         scePaf_545FE2DA(temp_a0);
     }
-    if (M2C_FIELD(arg0, s32 *, 0x14) == 0) {
+    if (arg0->unk14 == 0) {
 
     } else {
-        scePaf_545FE2DA(M2C_FIELD(arg0, s32 *, 0x14));
+        scePaf_545FE2DA(arg0->unk14);
     }
-    if (M2C_FIELD(arg0, s32 *, 0x18) == 0) {
+    if (arg0->unk18 == 0) {
 
     } else {
-        scePaf_545FE2DA(M2C_FIELD(arg0, s32 *, 0x18));
+        scePaf_545FE2DA(arg0->unk18);
     }
-    if (M2C_FIELD(arg0, s32 *, 0x1C) == 0) {
+    if (arg0->unk1C == 0) {
 
     } else {
-        scePaf_545FE2DA(M2C_FIELD(arg0, s32 *, 0x1C));
+        scePaf_545FE2DA(arg0->unk1C);
     }
-    func_00004EC8(arg0, M2C_FIELD(arg0, s32 *, 4));
-    func_00004EC8(arg0, M2C_FIELD(arg0, s32 *, 8));
-    func_00004F30(arg0, M2C_FIELD(arg0, s32 *, 0xC));
-    temp_a0_2 = M2C_FIELD(arg0, s32 *, 0x20);
-    M2C_FIELD(arg0, s32 *, 0) = 0;
+    func_00004EC8(arg0, arg0->unk4);
+    func_00004EC8(arg0, arg0->unk8);
+    func_00004F30(arg0, arg0->unkC);
+    temp_a0_2 = arg0->unk20;
+    arg0->unk0 = 0;
     if (temp_a0_2 == 0) {
-        M2C_FIELD(arg0, s32 *, 0x28) = 0;
+        arg0->unk28 = 0;
     } else {
         scePaf_545FE2DA(temp_a0_2);
-        M2C_FIELD(arg0, s32 *, 0x28) = 0;
+        arg0->unk28 = 0;
     }
 }
 
-void func_00003CB8(void *arg0) {
+void func_00003CB8(struct Unk_func_00003CB8_0 *arg0) {
     s32 temp_a0;
     s32 temp_a0_2;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0x10);
+    temp_a0 = arg0->unk10;
     if (temp_a0 == 0) {
 
     } else {
         scePaf_545FE2DA(temp_a0);
     }
-    if (M2C_FIELD(arg0, s32 *, 0x14) == 0) {
+    if (arg0->unk14 == 0) {
 
     } else {
-        scePaf_545FE2DA(M2C_FIELD(arg0, s32 *, 0x14));
+        scePaf_545FE2DA(arg0->unk14);
     }
-    if (M2C_FIELD(arg0, s32 *, 0x18) == 0) {
+    if (arg0->unk18 == 0) {
 
     } else {
-        scePaf_545FE2DA(M2C_FIELD(arg0, s32 *, 0x18));
+        scePaf_545FE2DA(arg0->unk18);
     }
-    if (M2C_FIELD(arg0, s32 *, 0x1C) == 0) {
+    if (arg0->unk1C == 0) {
 
     } else {
-        scePaf_545FE2DA(M2C_FIELD(arg0, s32 *, 0x1C));
+        scePaf_545FE2DA(arg0->unk1C);
     }
-    func_00004EC8(arg0, M2C_FIELD(arg0, s32 *, 4));
-    func_00004EC8(arg0, M2C_FIELD(arg0, s32 *, 8));
-    func_00004F30(arg0, M2C_FIELD(arg0, s32 *, 0xC));
-    temp_a0_2 = M2C_FIELD(arg0, s32 *, 0x20);
-    M2C_FIELD(arg0, s32 *, 0) = 0;
+    func_00004EC8(arg0, arg0->unk4);
+    func_00004EC8(arg0, arg0->unk8);
+    func_00004F30(arg0, arg0->unkC);
+    temp_a0_2 = arg0->unk20;
+    arg0->unk0 = 0;
     if (temp_a0_2 == 0) {
-        M2C_FIELD(arg0, s32 *, 0x28) = 0;
+        arg0->unk28 = 0;
     } else {
         scePaf_545FE2DA(temp_a0_2);
-        M2C_FIELD(arg0, s32 *, 0x28) = 0;
+        arg0->unk28 = 0;
     }
 }
 
@@ -539,24 +539,24 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000054AC);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000055E8);
 
-s32 func_00005908(void *arg0, void *arg1) {
+s32 func_00005908(struct Unk_func_00005908_0 *arg0, void *arg1) {
     s32 temp_a1;
     s32 temp_v0;
     s32 var_v1;
 
-    M2C_FIELD(arg0, s32 *, 0x28) = (s32) ((M2C_FIELD(arg1, u8 *, 0x10) << 0x18) + (M2C_FIELD(arg1, u8 *, 0x11) << 0x10) + (M2C_FIELD(arg1, u8 *, 0x12) << 8) + M2C_FIELD(arg1, u8 *, 0x13));
-    temp_a1 = M2C_FIELD(arg0, s32 *, 0x20);
-    M2C_FIELD(arg0, s32 *, 0x24) = (s32) ((M2C_FIELD(arg1, u8 *, 0x20) << 8) + M2C_FIELD(arg1, u8 *, 0x21));
+    arg0->unk28 = (s32) ((M2C_FIELD(arg1, u8 *, 0x10) << 0x18) + (M2C_FIELD(arg1, u8 *, 0x11) << 0x10) + (M2C_FIELD(arg1, u8 *, 0x12) << 8) + M2C_FIELD(arg1, u8 *, 0x13));
+    temp_a1 = arg0->unk20;
+    arg0->unk24 = (s32) ((M2C_FIELD(arg1, u8 *, 0x20) << 8) + M2C_FIELD(arg1, u8 *, 0x21));
     if (temp_a1 == 0) {
 
     } else {
         scePaf_545FE2DA(temp_a1);
     }
-    temp_v0 = scePaf_CE699963(M2C_FIELD(arg0, s32 *, 0x24) + 1, 1);
-    M2C_FIELD(arg0, s32 *, 0x20) = temp_v0;
+    temp_v0 = scePaf_CE699963(arg0->unk24 + 1, 1);
+    arg0->unk20 = temp_v0;
     var_v1 = 0x80108B01;
     if (temp_v0 != 0) {
-        scePaf_F95EA3F1(temp_v0, arg1 + 0x22, M2C_FIELD(arg0, s32 *, 0x24));
+        scePaf_F95EA3F1(temp_v0, arg1 + 0x22, arg0->unk24);
         var_v1 = 0;
     }
     return var_v1;
@@ -604,14 +604,14 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00005FE0);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000060C0);
 
-s32 func_000060F0(s32 arg0, void *arg1) {
+s32 func_000060F0(s32 arg0, struct Unk_func_000060F0_1 *arg1) {
     s32 temp_s0;
     void *temp_v0;
 
-    temp_s0 = (M2C_FIELD(arg1, s32 *, 4) * 2) + 2;
+    temp_s0 = (arg1->unk4 * 2) + 2;
     temp_v0 = scePaf_5FAC9869(temp_s0);
     if (temp_v0 != NULL) {
-        sceCccUTF8toUTF16(temp_v0, temp_s0, M2C_FIELD(arg1, void **, 0));
+        sceCccUTF8toUTF16(temp_v0, temp_s0, arg1->unk0);
         func_00002520(arg0, (s32) temp_v0);
         scePaf_545FE2DA((s32) temp_v0);
     }
@@ -643,13 +643,13 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00006594);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_0000662C);
 
-void func_000066CC(void *arg0) {
+void func_000066CC(struct Unk_func_000006E0_0 *arg0) {
     void *sp0;
     if ((sceNetApctlGetState(&sp0) != 0) || (sp0 != 0)) {
         func_000006E0(arg0);
         scePaf_A0ED77C4(0, func_0000694C, arg0, -1, -1, &func_0000696C);
     } else {
-        sceHtmlViewerHelper_C92C71B7(M2C_FIELD(arg0, s32 *, 8));
+        sceHtmlViewerHelper_C92C71B7(arg0->unk8);
     }
 }
 
@@ -769,55 +769,55 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00007CE0);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00007D64);
 
-void func_00007DE8(void *arg0) {
+void func_00007DE8(struct Unk_func_00007DE8_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0xC);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0000B538;
+    temp_v1 = arg0->unkC;
+    arg0->unk0 = &D_0000B538;
     if (temp_v1 > 0) {
         sceHttpDeleteRequest(temp_v1);
     }
-    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0 = arg0->unk8;
     if (temp_v0 > 0) {
         sceHttpDeleteConnection(temp_v0);
     }
-    sceHttpDeleteTemplate(M2C_FIELD(arg0, s32 *, 4));
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x18));
+    sceHttpDeleteTemplate(arg0->unk4);
+    sceKernelDeleteSema(arg0->unk18);
 }
 
-void func_00007E4C(void *arg0) {
+void func_00007E4C(struct Unk_func_00007E4C_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0xC);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0000B538;
+    temp_v1 = arg0->unkC;
+    arg0->unk0 = &D_0000B538;
     if (temp_v1 > 0) {
         sceHttpDeleteRequest(temp_v1);
     }
-    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0 = arg0->unk8;
     if (temp_v0 > 0) {
         sceHttpDeleteConnection(temp_v0);
     }
-    sceHttpDeleteTemplate(M2C_FIELD(arg0, s32 *, 4));
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x18));
+    sceHttpDeleteTemplate(arg0->unk4);
+    sceKernelDeleteSema(arg0->unk18);
 }
 
-void func_00007EB0(void *arg0) {
+void func_00007EB0(struct Unk_func_00007EB0_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0xC);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0000B538;
+    temp_v1 = arg0->unkC;
+    arg0->unk0 = &D_0000B538;
     if (temp_v1 > 0) {
         sceHttpDeleteRequest(temp_v1);
     }
-    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0 = arg0->unk8;
     if (temp_v0 > 0) {
         sceHttpDeleteConnection(temp_v0);
     }
-    sceHttpDeleteTemplate(M2C_FIELD(arg0, s32 *, 4));
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x18));
+    sceHttpDeleteTemplate(arg0->unk4);
+    sceKernelDeleteSema(arg0->unk18);
     scePaf_4E67BB08(arg0);
 }
 
@@ -851,24 +851,24 @@ INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00008070);
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_000081AC);
 
-void func_00008408(void *arg0) {
-    sceHttpGetStatusCode(M2C_FIELD(arg0, s32 *, 0xC));
+void func_00008408(struct Unk_func_00008408_0 *arg0) {
+    sceHttpGetStatusCode(arg0->unkC);
 }
 
-void func_00008424(void *arg0) {
-    sceHttpGetNetworkPspError(M2C_FIELD(arg0, s32 *, 0xC));
+void func_00008424(struct Unk_func_00008424_0 *arg0) {
+    sceHttpGetNetworkPspError(arg0->unkC);
 }
 
-void func_00008440(void *arg0) {
-    sceHttpsGetSslError(M2C_FIELD(arg0, s32 *, 0xC));
+void func_00008440(struct Unk_func_00008440_0 *arg0) {
+    sceHttpsGetSslError(arg0->unkC);
 }
 
-void func_0000845C(void *arg0) {
-    sceHttpReadData(M2C_FIELD(arg0, s32 *, 0xC));
+void func_0000845C(struct Unk_func_0000845C_0 *arg0) {
+    sceHttpReadData(arg0->unkC);
 }
 
-void func_00008478(void *arg0) {
-    sceHttpGetContentLength(M2C_FIELD(arg0, s32 *, 0xC));
+void func_00008478(struct Unk_func_00008478_0 *arg0) {
+    sceHttpGetContentLength(arg0->unkC);
 }
 
 INCLUDE_ASM("tmp/asm/282/dd_helper/nonmatchings/dd_helper", func_00008494);

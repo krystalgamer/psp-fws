@@ -65,19 +65,19 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_01E024", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_01E024", func_0001F524);
 
-s32 func_0001F52C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x18);
+s32 func_0001F52C(struct Unk_func_0001F52C_0 *arg0) {
+    return arg0->unk18;
 }
 
-void func_0001F534(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x18) = arg1;
+void func_0001F534(struct Unk_func_0001F534_0 *arg0, s32 arg1) {
+    arg0->unk18 = arg1;
 }
 
-s32 func_0001F53C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_0001F53C(struct Unk_func_0001F53C_0 *arg0) {
+    return arg0->unk1C;
 }
 
-void func_0001F544(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
+void func_0001F544(struct Unk_func_0001F544_0 *arg0, s32 arg1) {
+    arg0->unk1C = arg1;
 }
 

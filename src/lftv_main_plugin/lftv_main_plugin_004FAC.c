@@ -120,20 +120,20 @@ void func_00006344(s32 arg0) {
     scePaf_F95EA3F1(arg0 + 0x4B0, arg0 + 0x1BC, 0x7D);
 }
 
-u16 func_00006398(void *arg0) {
-    return M2C_FIELD(arg0, u16 *, 0x442);
+u16 func_00006398(struct Unk_func_00006398_0 *arg0) {
+    return arg0->unk442;
 }
 
-u16 func_000063A0(void *arg0) {
-    return M2C_FIELD(arg0, u16 *, 0x440);
+u16 func_000063A0(struct Unk_func_000063A0_0 *arg0) {
+    return arg0->unk440;
 }
 
-u16 func_000063A8(void *arg0) {
-    return M2C_FIELD(arg0, u16 *, 0x446);
+u16 func_000063A8(struct Unk_func_000063A8_0 *arg0) {
+    return arg0->unk446;
 }
 
-u16 func_000063B0(void *arg0) {
-    return M2C_FIELD(arg0, u16 *, 0x444);
+u16 func_000063B0(struct Unk_func_000063B0_0 *arg0) {
+    return arg0->unk444;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_000063B8);
@@ -166,28 +166,28 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_0000671C);
 
-s32 func_0000673C(void *arg0, s8 arg1) {
-    M2C_FIELD(arg0, s8 *, 0x52D) = arg1;
+s32 func_0000673C(struct Unk_func_0000673C_0 *arg0, s8 arg1) {
+    arg0->unk52D = arg1;
     return 0;
 }
 
-s32 func_00006748(void *arg0, s8 arg1) {
-    M2C_FIELD(arg0, s8 *, 0x52E) = arg1;
+s32 func_00006748(struct Unk_func_00006748_0 *arg0, s8 arg1) {
+    arg0->unk52E = arg1;
     return 0;
 }
 
-s32 func_00006754(void *arg0, s8 arg1) {
-    M2C_FIELD(arg0, s8 *, 0x52F) = arg1;
+s32 func_00006754(struct Unk_func_00006754_0 *arg0, s8 arg1) {
+    arg0->unk52F = arg1;
     return 0;
 }
 
-s32 func_00006760(void *arg0, s8 arg1) {
-    M2C_FIELD(arg0, s8 *, 0x530) = arg1;
+s32 func_00006760(struct Unk_func_00006760_0 *arg0, s8 arg1) {
+    arg0->unk530 = arg1;
     return 0;
 }
 
-void func_0000676C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x53C) = arg1;
+void func_0000676C(struct Unk_func_0000676C_0 *arg0, s32 arg1) {
+    arg0->unk53C = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00006774);
@@ -214,58 +214,58 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_000072B0);
 
-void func_000072E0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x40C) = arg1;
+void func_000072E0(struct Unk_func_000072E0_0 *arg0, s32 arg1) {
+    arg0->unk40C = arg1;
 }
 
-void func_000072E8(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x410) = arg1;
+void func_000072E8(struct Unk_func_000072E8_0 *arg0, s32 arg1) {
+    arg0->unk410 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_000072F0);
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00007320);
 
-void func_00007350(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x43C) = arg1;
+void func_00007350(struct Unk_func_00007350_0 *arg0, s32 arg1) {
+    arg0->unk43C = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00007358);
 
-void func_0000736C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x440) = (s32) (__builtin_allegrex_ins(M2C_FIELD(arg0, s32 *, 0x440), 0, 0, 0x10) | (arg1 & 0xFFFF));
+void func_0000736C(struct Unk_func_0000736C_0 *arg0, s32 arg1) {
+    arg0->unk440 = (s32) (__builtin_allegrex_ins(arg0->unk440, 0, 0, 0x10) | (arg1 & 0xFFFF));
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00007384);
 
-void func_00007398(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x444) = (s32) (__builtin_allegrex_ins(M2C_FIELD(arg0, s32 *, 0x444), 0, 0, 0x10) | (arg1 & 0xFFFF));
+void func_00007398(struct Unk_func_00007398_0 *arg0, s32 arg1) {
+    arg0->unk444 = (s32) (__builtin_allegrex_ins(arg0->unk444, 0, 0, 0x10) | (arg1 & 0xFFFF));
 }
 
-void func_000073B0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x448) = arg1;
+void func_000073B0(struct Unk_func_000073B0_0 *arg0, s32 arg1) {
+    arg0->unk448 = arg1;
 }
 
-void func_000073B8(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x44C) = arg1;
+void func_000073B8(struct Unk_func_000073B8_0 *arg0, s32 arg1) {
+    arg0->unk44C = arg1;
 }
 
-void func_000073C0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x450) = arg1;
+void func_000073C0(struct Unk_func_000073C0_0 *arg0, s32 arg1) {
+    arg0->unk450 = arg1;
 }
 
-void func_000073C8(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x534) = arg1;
+void func_000073C8(struct Unk_func_000073C8_0 *arg0, s32 arg1) {
+    arg0->unk534 = arg1;
 }
 
-void func_000073D0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x538) = arg1;
+void func_000073D0(struct Unk_func_000073D0_0 *arg0, s32 arg1) {
+    arg0->unk538 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_000073D8);
 
-void func_00007408(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x5CC) = arg1;
+void func_00007408(struct Unk_func_00007408_0 *arg0, s32 arg1) {
+    arg0->unk5CC = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_004FAC", func_00007410);

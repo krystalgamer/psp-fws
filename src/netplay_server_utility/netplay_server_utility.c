@@ -204,46 +204,46 @@ void func_00001E50(void) {
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00001E6C);
 
-s32 func_00001EC8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_00001EC8(struct Unk_func_00001EC8_0 *arg0) {
+    return arg0->unk4;
 }
 
-s32 func_00001ED0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8);
+s32 func_00001ED0(struct Unk_func_00001ED0_0 *arg0) {
+    return arg0->unk8;
 }
 
-s32 func_00001ED8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_00001ED8(struct Unk_func_00001ED8_0 *arg0) {
+    return arg0->unkC;
 }
 
-s32 func_00001EE0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_00001EE0(struct Unk_func_00001EE0_0 *arg0) {
+    return arg0->unk10;
 }
 
-s32 func_00001EE8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x14);
+s32 func_00001EE8(struct Unk_func_00001EE8_0 *arg0) {
+    return arg0->unk14;
 }
 
-s32 func_00001EF0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x18);
+s32 func_00001EF0(struct Unk_func_00001EF0_0 *arg0) {
+    return arg0->unk18;
 }
 
-s32 func_00001EF8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_00001EF8(struct Unk_func_00001EF8_0 *arg0) {
+    return arg0->unk1C;
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00001F00);
 
-void func_00001F24(void *arg0) {
-    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4));
+void func_00001F24(struct Unk_func_00001F24_0 *arg0) {
+    scePaf_CAF05F1D(arg0->unk4);
 }
 
-void func_00001F40(void *arg0) {
-    scePaf_3481F595(M2C_FIELD(arg0, s32 *, 4));
+void func_00001F40(struct Unk_func_00001F40_0 *arg0) {
+    scePaf_3481F595(arg0->unk4);
 }
 
-void func_00001F5C(void *arg0) {
-    scePaf_DAB59652(M2C_FIELD(arg0, s32 *, 4));
+void func_00001F5C(struct Unk_func_00001F5C_0 *arg0) {
+    scePaf_DAB59652(arg0->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00001F78);
@@ -319,10 +319,10 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_util
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00003450);
 
-void func_00003514(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_00003514(struct Unk_func_00003514_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_utility/nonmatchings/netplay_server_utility", func_00003524);

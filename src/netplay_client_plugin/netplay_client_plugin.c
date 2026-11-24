@@ -354,16 +354,16 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00004B54);
 
-void func_00004BA8(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_00004BA8(struct Unk_func_00004BA8_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
-void func_00004BB8(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_00004BB8(struct Unk_func_00004BB8_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00004BC8);
@@ -400,46 +400,46 @@ void func_00005134(void) {
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00005150);
 
-s32 func_000051AC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_000051AC(struct Unk_func_000051AC_0 *arg0) {
+    return arg0->unk4;
 }
 
-s32 func_000051B4(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8);
+s32 func_000051B4(struct Unk_func_000051B4_0 *arg0) {
+    return arg0->unk8;
 }
 
-s32 func_000051BC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_000051BC(struct Unk_func_000051BC_0 *arg0) {
+    return arg0->unkC;
 }
 
-s32 func_000051C4(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_000051C4(struct Unk_func_000051C4_0 *arg0) {
+    return arg0->unk10;
 }
 
-s32 func_000051CC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x14);
+s32 func_000051CC(struct Unk_func_000051CC_0 *arg0) {
+    return arg0->unk14;
 }
 
-s32 func_000051D4(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x18);
+s32 func_000051D4(struct Unk_func_000051D4_0 *arg0) {
+    return arg0->unk18;
 }
 
-s32 func_000051DC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_000051DC(struct Unk_func_000051DC_0 *arg0) {
+    return arg0->unk1C;
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_000051E4);
 
-void func_00005208(void *arg0) {
-    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4));
+void func_00005208(struct Unk_func_00005208_0 *arg0) {
+    scePaf_CAF05F1D(arg0->unk4);
 }
 
-void func_00005224(void *arg0) {
-    scePaf_3481F595(M2C_FIELD(arg0, s32 *, 4));
+void func_00005224(struct Unk_func_00005224_0 *arg0) {
+    scePaf_3481F595(arg0->unk4);
 }
 
-void func_00005240(void *arg0) {
-    scePaf_DAB59652(M2C_FIELD(arg0, s32 *, 4));
+void func_00005240(struct Unk_func_00005240_0 *arg0) {
+    scePaf_DAB59652(arg0->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_0000525C);
@@ -571,14 +571,14 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006C30);
 
-void func_00006CF4(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_00006CF4(struct Unk_func_00006CF4_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
-void func_00006D04(void *arg0, s32 arg1) {
-    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+void func_00006D04(struct Unk_func_00006D04_0 *arg0, s32 arg1) {
+    if (arg0->unk8 >= arg1) {
 
     } else {
         func_00006EC8((s32) arg0, arg1);
@@ -589,14 +589,14 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006DC0);
 
-void func_00006E54(void *arg0) {
+void func_00006E54(struct Unk_func_00006E54_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    func_00000480((M2C_FIELD(arg0, s32 *, 0) + (M2C_FIELD(arg0, s32 *, 4) * 0xC)) - 0xC);
-    temp_v1 = M2C_FIELD(arg0, s32 *, 4) - 1;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
-    M2C_FIELD(arg0, s32 *, 4) = temp_v1;
+    func_00000480((arg0->unk0 + (arg0->unk4 * 0xC)) - 0xC);
+    temp_v1 = arg0->unk4 - 1;
+    temp_v0 = arg0->unk8;
+    arg0->unk4 = temp_v1;
     if (temp_v1 >= (temp_v0 - 0x14)) {
 
     } else {

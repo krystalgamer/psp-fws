@@ -9,6 +9,127 @@ struct D_000207F0_s {
     volatile s32 unk1C;
 };
 
+struct Unk_func_00000314_1 {
+    u8 pad0[0x4];
+    s32 unk4;
+    s32 unk8;
+};
+
+struct Unk_func_0000035C_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+    s32 unk8;
+};
+
+struct Unk_func_00000784_1 {
+    u8 pad0[0x4];
+    s32 unk4;
+    s32 unk8;
+};
+
+struct Unk_func_00001C68_0 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+};
+
+struct Unk_func_00006898_0 {
+    u8 pad0[0x1D0];
+    s32 unk1D0;
+};
+
+struct Unk_func_000069C8_1 {
+    u8 pad0[0x8];
+    u8 unk8;
+};
+
+struct Unk_func_000071A0_1 {
+    u8 pad0[0x8];
+    u8 unk8;
+};
+
+struct Unk_func_0000918C_1 {
+    u8 pad0[0x8];
+    u8 unk8;
+};
+
+struct Unk_func_0000B920_1 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
+struct Unk_func_0000BBD0_1 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
+struct Unk_func_000110F0_0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
+struct Unk_func_000111AC_0 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+};
+
+struct Unk_func_000113E0_0 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+};
+
+struct Unk_func_00012D34_0 {
+    u8 pad0[0x1D0];
+    s32 unk1D0;
+};
+
+struct Unk_func_000134E4_0 {
+    u8 pad0[0x1D0];
+    s32 unk1D0;
+};
+
+struct Unk_func_00013B4C_0 {
+    u8 pad0[0x1D0];
+    s32 unk1D0;
+};
+
+struct Unk_func_00013C5C_1 {
+    u8 pad0[0x8];
+    u8 unk8;
+};
+
+struct Unk_func_00014A8C_0 {
+    u8 pad0[0x1D0];
+    s32 unk1D0;
+};
+
+struct Unk_func_00018F10_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_0001901C_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_0001905C_0 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
+struct Unk_func_000193E4_0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
+struct Unk_func_00019D48_0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
 extern M2C_UNK D_0001CF8C;
 extern M2C_UNK D_0001D098;
 extern M2C_UNK D_0001D294;
@@ -110,12 +231,12 @@ s32 func_0000015C(void);
 s32 func_00000164(void);
 M2C_UNK func_0000022C(M2C_UNK);
 s32 func_000002B4(s32);
-void func_00000314(s32 arg0, void *arg1, s32 arg2);
-s32 func_0000035C(void *arg0);
+void func_00000314(s32 arg0, struct Unk_func_00000314_1 *arg1, s32 arg2);
+s32 func_0000035C(struct Unk_func_0000035C_0 *arg0);
 M2C_UNK func_00000394();
 s32 func_000004BC(s32 arg0);
 M2C_UNK func_00000624(s32, M2C_UNK);
-void func_00000784(s32 arg0, void *arg1, s32 arg2);
+void func_00000784(s32 arg0, struct Unk_func_00000784_1 *arg1, s32 arg2);
 s32 func_000007CC(void *);
 s32 func_0000097C(s32);
 s32 func_00000E28(s32, s32, s32);
@@ -131,7 +252,7 @@ void func_00001C34(s32 arg0);
 s32 func_00001C40(void);
 s32 func_00001C4C(s32 arg0);
 s32 func_00001C5C(void);
-s32 func_00001C68(void *arg0);
+s32 func_00001C68(struct Unk_func_00001C68_0 *arg0);
 void func_00001D60(s32 arg0);
 s32 func_00001D6C(void);
 s32 func_00001D78(s32 arg0, s32 *arg1);
@@ -213,10 +334,10 @@ void func_000067C0(void **arg0, void **arg1);
 s32 func_000067E0(s32, s32);
 void func_00006858(void **arg0);
 void func_00006878(void **arg0, void *arg1);
-void func_00006898(void *arg0);
-void func_000069C8(s32 arg0, void *arg1, M2C_UNK arg2);
+void func_00006898(struct Unk_func_00006898_0 *arg0);
+void func_000069C8(s32 arg0, struct Unk_func_000069C8_1 *arg1, M2C_UNK arg2);
 M2C_UNK func_00006D90(s32, void *, M2C_UNK);
-void func_000071A0(s32 arg0, void *arg1);
+void func_000071A0(s32 arg0, struct Unk_func_000071A0_1 *arg1);
 s32 func_00007294(s32, s32);
 void func_00007508(void);
 void func_00007F54(s8 arg0);
@@ -227,15 +348,15 @@ void func_00008D84(s8 arg0);
 u8 func_00008D90(void);
 void func_00008D9C(void);
 M2C_UNK func_0000914C(s32, void *, M2C_UNK);
-void func_0000918C(s32 arg0, void *arg1, M2C_UNK arg2);
+void func_0000918C(s32 arg0, struct Unk_func_0000918C_1 *arg1, M2C_UNK arg2);
 s32 func_000098C4(void);
 void func_000098D0(s32 arg0);
 void func_000098EC(void);
 void func_000099C8(void);
 M2C_UNK func_00009BD8();
 void func_0000AB30(void);
-void func_0000B920(s32 arg0, void *arg1);
-void func_0000BBD0(s32 arg0, void *arg1);
+void func_0000B920(s32 arg0, struct Unk_func_0000B920_1 *arg1);
+void func_0000BBD0(s32 arg0, struct Unk_func_0000BBD0_1 *arg1);
 s32 func_0000C3A0(void);
 s32 func_0000C544(s32, s32);
 void func_0000C610(void);
@@ -272,11 +393,11 @@ void func_00010B08(void);
 M2C_UNK func_00011020(M2C_UNK, M2C_UNK);
 void func_000110B0(void);
 void func_000110D0(void);
-void func_000110F0(void *arg0, s32 arg1);
-void func_000111AC(void *arg0);
+void func_000110F0(struct Unk_func_000110F0_0 *arg0, s32 arg1);
+void func_000111AC(struct Unk_func_000111AC_0 *arg0);
 s32 func_000112B4(s32, s32);
 void func_000113D8(void);
-void func_000113E0(void *arg0);
+void func_000113E0(struct Unk_func_000113E0_0 *arg0);
 void func_0001146C(void);
 s32 func_00011488(s32, s32, s32, s32, s32);
 s32 func_000116C8(void);
@@ -290,21 +411,21 @@ s32 func_00012840(void);
 s32 func_0001284C(void);
 void func_00012A70(void);
 void func_00012B1C(void);
-void func_00012D34(void *arg0);
+void func_00012D34(struct Unk_func_00012D34_0 *arg0);
 void func_00012F30(s8 arg0);
 u8 func_00012F3C(void);
-void func_000134E4(void *arg0);
+void func_000134E4(struct Unk_func_000134E4_0 *arg0);
 s32 func_00013B18(void);
 M2C_UNK func_00013B24(s32);
 M2C_UNK func_00013B40();
-void func_00013B4C(void *arg0);
-void func_00013C5C(s32 arg0, void *arg1);
+void func_00013B4C(struct Unk_func_00013B4C_0 *arg0);
+void func_00013C5C(s32 arg0, struct Unk_func_00013C5C_1 *arg1);
 s32 func_00013CD0(s32, s32);
 void func_00013DD8(s8 arg0);
 u8 func_00013DE4(void);
 void func_00013DF0(void);
 s32 func_00014A80(void);
-void func_00014A8C(void *arg0);
+void func_00014A8C(struct Unk_func_00014A8C_0 *arg0);
 void func_00014B78(void);
 s32 func_00015300(s32, s32);
 s32 func_000153C0(s32, s32);
@@ -328,14 +449,14 @@ void func_00018A58(void);
 s32 func_00018DE8(void);
 s32 func_00018E28();
 s32 func_00018ED0(s32, s32);
-s32 func_00018F10(void *arg0);
+s32 func_00018F10(struct Unk_func_00018F10_0 *arg0);
 void func_00018F44(s32 arg0);
 s32 func_00018F64();
-void func_0001901C(void *arg0, s32 arg1);
-s32 func_0001905C(void *arg0);
+void func_0001901C(struct Unk_func_0001901C_0 *arg0, s32 arg1);
+s32 func_0001905C(struct Unk_func_0001905C_0 *arg0);
 s32 func_000191F0();
 s32 func_000193A8(s32, s32);
-s32 func_000193E4(void *arg0);
+s32 func_000193E4(struct Unk_func_000193E4_0 *arg0);
 void func_00019418(void);
 s32 func_00019610(void);
 s32 func_000197B4(void);
@@ -345,7 +466,7 @@ s32 func_00019AC4(s32, s32);
 s32 func_00019B3C(s32);
 s32 func_00019C50(s32);
 s32 func_00019CCC(s32);
-void func_00019D48(void *arg0, s32 arg1);
+void func_00019D48(struct Unk_func_00019D48_0 *arg0, s32 arg1);
 s32 func_00019DBC(void *arg0);
 s32 func_00019E14(s32);
 M2C_UNK func_0001A060();

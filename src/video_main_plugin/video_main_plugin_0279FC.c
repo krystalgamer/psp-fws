@@ -11,8 +11,8 @@ s32 func_000279FC(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_0279FC", func_00027A20);
 
-s32 func_00027D70(void *arg0, s32 arg1) {
-    return M2C_FIELD(arg0, s32 *, 4) + (arg1 * 0xA);
+s32 func_00027D70(struct Unk_func_00027D70_0 *arg0, s32 arg1) {
+    return arg0->unk4 + (arg1 * 0xA);
 }
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_0279FC", func_00027D88);

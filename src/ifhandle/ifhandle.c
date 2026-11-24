@@ -37,38 +37,38 @@ INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_
 
 INCLUDE_ASM("tmp/asm/282/ifhandle/nonmatchings/ifhandle", sceNetIfhandle_driver_F94BAF52);
 
-void sceNetIfhandle_driver_16246B99(void *arg0, void *arg1) {
+void sceNetIfhandle_driver_16246B99(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1) {
     s32 temp_v0;
 
     if (arg0 != NULL) {
         temp_v0 = sceKernelCpuSuspendIntr();
-        M2C_FIELD(arg1, void **, 4) = (void *) M2C_FIELD(arg0, void **, 0x18);
-        if (M2C_FIELD(arg0, void **, 0x1C) == NULL) {
-            M2C_FIELD(arg0, void **, 0x1C) = arg1;
+        arg1->unk4 = (void *) arg0->unk18;
+        if (arg0->unk1C == NULL) {
+            arg0->unk1C = arg1;
         }
-        M2C_FIELD(arg0, void **, 0x18) = arg1;
-        M2C_FIELD(arg0, s32 *, 0x20) = (s32) (M2C_FIELD(arg0, s32 *, 0x20) + 1);
+        arg0->unk18 = arg1;
+        arg0->unk20 = (s32) (arg0->unk20 + 1);
         sceKernelCpuResumeIntr(temp_v0);
     }
 }
 
-s32 sceNetIfhandle_driver_C6D14282(void *arg0, s32 arg1) {
+s32 sceNetIfhandle_driver_C6D14282(struct Unk_sceNetIfhandle_driver_C6D14282_0 *arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = 0x80000103;
     if (arg0 != NULL) {
-        M2C_FIELD(arg0, s32 *, 4) = arg1;
+        arg0->unk4 = arg1;
         var_v0 = 0;
     }
     return var_v0;
 }
 
-s32 sceNetIfhandle_driver_D5AD6DEA(void *arg0) {
+s32 sceNetIfhandle_driver_D5AD6DEA(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 4);
+        var_v0 = arg0->unk4;
     }
     return var_v0;
 }

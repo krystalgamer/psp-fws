@@ -2,16 +2,16 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-void func_0002B79C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_0002B79C(struct Unk_func_0002B79C_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
-void func_0002B7AC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_0002B7AC(struct Unk_func_0002B7AC_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02B79C", func_0002B7BC);
@@ -20,16 +20,16 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02B79C", func_00
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02B79C", func_0002B8A4);
 
-void func_0002B918(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_0002B918(struct Unk_func_0002B918_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
-void func_0002B928(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_0002B928(struct Unk_func_0002B928_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02B79C", func_0002B938);
@@ -40,7 +40,7 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02B79C", func_00
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02B79C", func_0002BB78);
 
-s32 func_0002BC38(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_0002BC38(struct Unk_func_0002BC38_0 *arg0) {
+    return arg0->unk4;
 }
 

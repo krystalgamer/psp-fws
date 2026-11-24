@@ -72,36 +72,36 @@ void func_0001BED8(void) {
     func_0001BDEC();
 }
 
-s32 func_0001BEF4(void *arg0) {
+s32 func_0001BEF4(struct Unk_func_0001BEF4_0 *arg0) {
     s32 temp_v0;
 
     if (arg0 != NULL) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 0);
+        temp_v0 = arg0->unk0;
         if (temp_v0 == 0) {
 
         } else {
             func_00002900(temp_v0);
         }
-        if (M2C_FIELD(arg0, s32 *, 4) != 0) {
-            func_0001C040(M2C_FIELD(arg0, s32 *, 4));
+        if (arg0->unk4 != 0) {
+            func_0001C040(arg0->unk4);
         }
         func_0000274C((s32) arg0);
     }
     return 0;
 }
 
-s32 func_0001BF5C(void *arg0) {
+s32 func_0001BF5C(struct Unk_func_0001BF5C_0 *arg0) {
     s32 temp_v0;
 
     if (arg0 != NULL) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 0);
+        temp_v0 = arg0->unk0;
         if (temp_v0 == 0) {
 
         } else {
             func_00002900(temp_v0);
         }
-        if (M2C_FIELD(arg0, s32 *, 4) != 0) {
-            func_0001C040(M2C_FIELD(arg0, s32 *, 4));
+        if (arg0->unk4 != 0) {
+            func_0001C040(arg0->unk4);
         }
         func_0000274C((s32) arg0);
     }
@@ -122,9 +122,9 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_0199D0", func_0001C400);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_0199D0", func_0001C5E0);
 
-s32 func_0001C7B0(void *arg0) {
+s32 func_0001C7B0(struct Unk_func_0001C7B0_0 *arg0) {
     if (arg0 != NULL) {
-        func_0001BFC4(M2C_FIELD(arg0, s32 *, 0x18));
+        func_0001BFC4(arg0->unk18);
         func_0000274C((s32) arg0);
     }
     return 0;
@@ -186,23 +186,23 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_0199D0", func_0001E20C);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_0199D0", func_0001E2E0);
 
-s32 func_0001E314(void *arg0, void *arg1) {
+s32 func_0001E314(struct Unk_func_0001E314_0 *arg0, struct Unk_func_0001E314_1 *arg1) {
     s32 var_v1;
 
     var_v1 = 0;
     if (((arg0 == NULL) | (arg1 == NULL)) == 0) {
-        var_v1 = func_000029B4(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg1, s32 *, 0), M2C_FIELD(arg1, s32 *, 4));
+        var_v1 = func_000029B4(arg0->unk0, arg0->unk4, arg1->unk0, arg1->unk4);
     }
     return var_v1;
 }
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_0199D0", func_0001E360);
 
-void func_0001E4A8(void *arg0) {
+void func_0001E4A8(struct Unk_func_0001E4A8_0 *arg0) {
     s32 temp_v0;
 
     if (arg0 != NULL) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 4);
+        temp_v0 = arg0->unk4;
         if (temp_v0 != 0) {
             func_0000274C(temp_v0);
         }

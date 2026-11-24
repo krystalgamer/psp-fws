@@ -40,27 +40,27 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0434F4", func_00043858);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0434F4", func_0004388C);
 
-void func_000438C0(void *arg0, void *arg1) {
+void func_000438C0(struct Unk_func_000438C0_0 *arg0, struct Unk_func_000438C0_1 *arg1) {
     void *temp_v0;
 
-    temp_v0 = M2C_FIELD(arg1, void **, 0xD08);
-    M2C_FIELD(arg0, void **, 4) = temp_v0;
+    temp_v0 = arg1->unkD08;
+    arg0->unk4 = temp_v0;
     if (temp_v0 != NULL) {
         func_000425E8(temp_v0);
     }
-    M2C_FIELD(arg0, void **, 0) = arg1;
+    arg0->unk0 = arg1;
     func_0007B03C(arg1, 0);
 }
 
-void func_00043914(void *arg0, void *arg1) {
+void func_00043914(struct Unk_func_00043914_0 *arg0, struct Unk_func_00043914_1 *arg1) {
     void *temp_v0;
 
-    temp_v0 = M2C_FIELD(arg1, void **, 0xD08);
-    M2C_FIELD(arg0, void **, 4) = temp_v0;
+    temp_v0 = arg1->unkD08;
+    arg0->unk4 = temp_v0;
     if (temp_v0 != NULL) {
         func_000425E8(temp_v0);
     }
-    M2C_FIELD(arg0, void **, 0) = arg1;
+    arg0->unk0 = arg1;
     func_0007B03C(arg1, 0);
 }
 
@@ -78,10 +78,10 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0434F4", func_00043BE8);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0434F4", func_00043FE8);
 
-void func_0004437C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 8) = arg1;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
+void func_0004437C(struct Unk_func_0004437C_0 *arg0, s32 arg1) {
+    arg0->unk8 = arg1;
+    arg0->unk4 = 0;
+    arg0->unk0 = 0;
 }
 
 void func_0004438C(void) {
@@ -90,8 +90,8 @@ void func_0004438C(void) {
 void func_00044394(void) {
 }
 
-void func_0004439C(void **arg0, void *arg1) {
-    M2C_FIELD(arg1, void **, 0x6C) = (void *) *arg0;
+void func_0004439C(void **arg0, struct Unk_func_0004439C_1 *arg1) {
+    arg1->unk6C = (void *) *arg0;
     *arg0 = arg1;
 }
 
@@ -175,10 +175,10 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0434F4", func_00044FF8);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0434F4", func_000451B0);
 
-void func_000452E8(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_000452E8(struct Unk_func_000452E8_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0434F4", func_000452F8);
@@ -219,13 +219,13 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0434F4", func_00045BD4);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_0434F4", func_00045CF8);
 
-s32 func_00045DBC(void *arg0) {
+s32 func_00045DBC(struct Unk_func_00045DBC_0 *arg0) {
     s32 temp_v1;
     s32 var_a1;
 
     var_a1 = 0;
-    if (M2C_FIELD(arg0, s32 *, 0) == 3) {
-        temp_v1 = M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x7C);
+    if (arg0->unk0 == 3) {
+        temp_v1 = M2C_FIELD(arg0->unk8, s32 *, 0x7C);
         switch (temp_v1) {                          /* irregular */
         case 0:
             var_a1 = 1;

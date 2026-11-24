@@ -2,14 +2,14 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-s32 func_0004AC08(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 func_0004AC08(struct Unk_func_0004AC08_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_a2;
 
     if (arg1 != 0) {
-        temp_a2 = M2C_FIELD(arg0, s32 *, 0x10);
-        sceHVNetfront_Module_1A02495A(arg1, M2C_FIELD(arg0, s32 *, 4) + (M2C_FIELD(arg0, s32 *, 0xC) * temp_a2), arg2 * temp_a2, arg3);
+        temp_a2 = arg0->unk10;
+        sceHVNetfront_Module_1A02495A(arg1, arg0->unk4 + (arg0->unkC * temp_a2), arg2 * temp_a2, arg3);
     }
-    M2C_FIELD(arg0, s32 *, 0xC) = (s32) (M2C_FIELD(arg0, s32 *, 0xC) + arg2);
+    arg0->unkC = (s32) (arg0->unkC + arg2);
     return arg2;
 }
 
@@ -52,7 +52,7 @@ void func_0004B150(M2C_UNK **arg0) {
     *arg0 = &D_000BDB40;
 }
 
-void func_0004B160(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 8) = arg1;
+void func_0004B160(struct Unk_func_0004B160_0 *arg0, s32 arg1) {
+    arg0->unk8 = arg1;
 }
 

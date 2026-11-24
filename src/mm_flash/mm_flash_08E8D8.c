@@ -2,34 +2,34 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-void func_0008E8D8(void *arg0) {
+void func_0008E8D8(struct Unk_func_0008E8D8_0 *arg0) {
     s32 temp_s0;
 
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000C2FB0;
+    arg0->unk0 = &D_000C2FB0;
     func_0008E9F4();
-    temp_s0 = M2C_FIELD(arg0, s32 *, 0x10);
+    temp_s0 = arg0->unk10;
     if (temp_s0 != 0) {
         func_00090730(*func_0009F1C0(), temp_s0, 0);
     }
 }
 
-void func_0008E92C(void *arg0) {
+void func_0008E92C(struct Unk_func_0008E92C_0 *arg0) {
     s32 temp_s0;
 
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000C2FB0;
+    arg0->unk0 = &D_000C2FB0;
     func_0008E9F4();
-    temp_s0 = M2C_FIELD(arg0, s32 *, 0x10);
+    temp_s0 = arg0->unk10;
     if (temp_s0 != 0) {
         func_00090730(*func_0009F1C0(), temp_s0, 0);
     }
 }
 
-void func_0008E980(void *arg0) {
+void func_0008E980(struct Unk_func_0008E980_0 *arg0) {
     s32 temp_s1;
 
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000C2FB0;
+    arg0->unk0 = &D_000C2FB0;
     func_0008E9F4();
-    temp_s1 = M2C_FIELD(arg0, s32 *, 0x10);
+    temp_s1 = arg0->unk10;
     if (temp_s1 != 0) {
         func_00090730(*func_0009F1C0(), temp_s1, 0);
     }

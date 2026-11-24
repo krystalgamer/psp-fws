@@ -162,7 +162,7 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_000016D0);
 
-s32 func_00001884(u32 arg0, void *arg1) {
+s32 func_00001884(u32 arg0, struct Unk_func_00001884_1 *arg1) {
     s32 var_v1;
 
     var_v1 = -1;
@@ -170,7 +170,7 @@ s32 func_00001884(u32 arg0, void *arg1) {
         func_00001CC8();
         func_00001DC4(arg0, arg1);
         func_00001EF0(arg0, arg1);
-        func_00001D28(arg0, M2C_FIELD(arg1, s32 *, 0xC));
+        func_00001D28(arg0, arg1->unkC);
         var_v1 = 0;
     }
     return var_v1;
@@ -238,46 +238,46 @@ void func_00002510(void) {
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_0000252C);
 
-s32 func_00002588(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_00002588(struct Unk_func_00002588_0 *arg0) {
+    return arg0->unk4;
 }
 
-s32 func_00002590(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8);
+s32 func_00002590(struct Unk_func_00002590_0 *arg0) {
+    return arg0->unk8;
 }
 
-s32 func_00002598(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_00002598(struct Unk_func_00002598_0 *arg0) {
+    return arg0->unkC;
 }
 
-s32 func_000025A0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_000025A0(struct Unk_func_000025A0_0 *arg0) {
+    return arg0->unk10;
 }
 
-s32 func_000025A8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x14);
+s32 func_000025A8(struct Unk_func_000025A8_0 *arg0) {
+    return arg0->unk14;
 }
 
-s32 func_000025B0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x18);
+s32 func_000025B0(struct Unk_func_000025B0_0 *arg0) {
+    return arg0->unk18;
 }
 
-s32 func_000025B8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_000025B8(struct Unk_func_000025B8_0 *arg0) {
+    return arg0->unk1C;
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_000025C0);
 
-void func_000025E4(void *arg0) {
-    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4));
+void func_000025E4(struct Unk_func_000025E4_0 *arg0) {
+    scePaf_CAF05F1D(arg0->unk4);
 }
 
-void func_00002600(void *arg0) {
-    scePaf_3481F595(M2C_FIELD(arg0, s32 *, 4));
+void func_00002600(struct Unk_func_00002600_0 *arg0) {
+    scePaf_3481F595(arg0->unk4);
 }
 
-void func_0000261C(void *arg0) {
-    scePaf_DAB59652(M2C_FIELD(arg0, s32 *, 4));
+void func_0000261C(struct Unk_func_0000261C_0 *arg0) {
+    scePaf_DAB59652(arg0->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00002638);
@@ -331,10 +331,10 @@ INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_00003600);
 
-void func_000036C4(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_000036C4(struct Unk_func_000036C4_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/netplay_server_plus_utility/nonmatchings/netplay_server_plus_utility", func_000036D4);

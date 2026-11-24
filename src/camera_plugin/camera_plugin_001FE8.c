@@ -15,8 +15,8 @@ void func_00002008(void **arg0) {
     }
 }
 
-s32 func_00002028(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1D4);
+s32 func_00002028(struct Unk_func_00002028_0 *arg0) {
+    return arg0->unk1D4;
 }
 
 INCLUDE_RODATA("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", D_000217DC);
@@ -25,8 +25,8 @@ INCLUDE_RODATA("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", D_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_00002030);
 
-s32 func_00002084(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x1EC) = arg1;
+s32 func_00002084(struct Unk_func_00002084_0 *arg0, s32 arg1) {
+    arg0->unk1EC = arg1;
     return 0;
 }
 
@@ -670,17 +670,17 @@ void func_00005FB0(M2C_UNK **arg0) {
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_00005FC0);
 
-void func_00005FE8(void *arg0) {
+void func_00005FE8(struct Unk_func_00005FE8_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
 
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00022B70;
+    arg0->unk0 = &D_00022B70;
     temp_v0 = scePaf_61A8E8EC(4);
     scePaf_99F6554D(temp_v0, &D_00022AF0, 0, 0, 0, 0);
-    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+    arg0->unk4 = temp_v0;
     temp_v0_2 = scePaf_61A8E8EC(4);
     scePaf_99F6554D(temp_v0_2, &D_00022B08, 0, 0, 0, 0);
-    M2C_FIELD(arg0, s32 *, 8) = temp_v0_2;
+    arg0->unk8 = temp_v0_2;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_0000607C);
@@ -785,10 +785,10 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_00006C58);
 
-void func_00006CE8(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_00006CE8(struct Unk_func_00006CE8_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_001FE8", func_00006CF8);

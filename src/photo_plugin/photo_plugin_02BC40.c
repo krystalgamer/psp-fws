@@ -81,22 +81,22 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02BC40", func_00
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02BC40", func_0002CA60);
 
-u16 func_0002CA9C(void *arg0) {
-    return *M2C_FIELD(arg0, u16 **, 4);
+u16 func_0002CA9C(struct Unk_func_0002CA9C_0 *arg0) {
+    return *arg0->unk4;
 }
 
-s32 func_0002CAA8(void *arg0) {
-    return *M2C_FIELD(arg0, s32 **, 4);
+s32 func_0002CAA8(struct Unk_func_0002CAA8_0 *arg0) {
+    return *arg0->unk4;
 }
 
-s32 func_0002CAB4(void *arg0) {
-    return *M2C_FIELD(arg0, s32 **, 4);
+s32 func_0002CAB4(struct Unk_func_0002CAB4_0 *arg0) {
+    return *arg0->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02BC40", func_0002CAC0);
 
-s32 func_0002CAFC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_0002CAFC(struct Unk_func_0002CAFC_0 *arg0) {
+    return arg0->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_02BC40", func_0002CB04);

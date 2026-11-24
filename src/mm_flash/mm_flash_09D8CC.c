@@ -9,8 +9,8 @@ void func_0009D8CC(s32 arg0) {
     }
 }
 
-s32 func_0009D910(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x4C);
+s32 func_0009D910(struct Unk_func_0009D910_0 *arg0) {
+    return arg0->unk4C;
 }
 
 void func_0009D918(s32 arg0) {
@@ -53,50 +53,50 @@ s32 func_0009DA14(void) {
     return func_00079454() == 4;
 }
 
-s32 func_0009DA38(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xBE4);
+s32 func_0009DA38(struct Unk_func_0009DA38_0 *arg0) {
+    return arg0->unkBE4;
 }
 
-s32 func_0009DA40(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x68);
+s32 func_0009DA40(struct Unk_func_0009DA40_0 *arg0) {
+    return arg0->unk68;
 }
 
-s32 func_0009DA48(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC70);
+s32 func_0009DA48(struct Unk_func_0009DA48_0 *arg0) {
+    return arg0->unkC70;
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09D8CC", func_0009DA50);
 
-s32 func_0009DA78(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC1C) == 0x80000000;
+s32 func_0009DA78(struct Unk_func_0009DA78_0 *arg0) {
+    return arg0->unkC1C == 0x80000000;
 }
 
-s32 func_0009DA8C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC10) == 3;
+s32 func_0009DA8C(struct Unk_func_0009DA8C_0 *arg0) {
+    return arg0->unkC10 == 3;
 }
 
-s32 func_0009DA9C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xBD4) == 2;
+s32 func_0009DA9C(struct Unk_func_0009DA9C_0 *arg0) {
+    return arg0->unkBD4 == 2;
 }
 
-s32 func_0009DAAC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xBD4) == 1;
+s32 func_0009DAAC(struct Unk_func_0009DAAC_0 *arg0) {
+    return arg0->unkBD4 == 1;
 }
 
-s32 func_0009DABC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xBD4) == 0;
+s32 func_0009DABC(struct Unk_func_0009DABC_0 *arg0) {
+    return arg0->unkBD4 == 0;
 }
 
-s32 func_0009DAC8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x30);
+s32 func_0009DAC8(struct Unk_func_0009DAC8_0 *arg0) {
+    return arg0->unk30;
 }
 
-s32 func_0009DAD0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x54);
+s32 func_0009DAD0(struct Unk_func_0009DAD0_0 *arg0) {
+    return arg0->unk54;
 }
 
-s32 func_0009DAD8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1000);
+s32 func_0009DAD8(struct Unk_func_0009DAD8_0 *arg0) {
+    return arg0->unk1000;
 }
 
 void func_0009DAE0(void *arg0) {
@@ -160,13 +160,13 @@ void func_0009EC94(s32 arg0) {
     }
 }
 
-void func_0009ECC8(void *arg0) {
+void func_0009ECC8(struct Unk_func_000907D8_0 *arg0) {
     if (arg0 != NULL) {
         func_000907D8(arg0);
     }
 }
 
-void func_0009ECE8(void *arg0) {
+void func_0009ECE8(struct Unk_func_0009081C_0 *arg0) {
     if (arg0 != NULL) {
         func_0009081C(arg0);
     }

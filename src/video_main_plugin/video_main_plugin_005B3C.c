@@ -61,14 +61,14 @@ INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_005B3C
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_005B3C", func_00006590);
 
-s32 func_000065E4(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1D4);
+s32 func_000065E4(struct Unk_func_000065E4_0 *arg0) {
+    return arg0->unk1D4;
 }
 
 INCLUDE_ASM("tmp/asm/282/video_main_plugin/nonmatchings/video_main_plugin_005B3C", func_000065EC);
 
-s32 func_00006640(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x1EC) = arg1;
+s32 func_00006640(struct Unk_func_00006640_0 *arg0, s32 arg1) {
+    arg0->unk1EC = arg1;
     return 0;
 }
 

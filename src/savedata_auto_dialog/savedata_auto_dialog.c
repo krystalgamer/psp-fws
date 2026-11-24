@@ -212,25 +212,25 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00003ED0);
 
-void func_000040A8(void *arg0, s32 arg1) {
+void func_000040A8(struct Unk_func_000040A8_0 *arg0, s32 arg1) {
     func_00004140(arg0, arg1);
-    M2C_FIELD(arg0, s32 *, 0x20) = (s32) (M2C_FIELD(arg0, s32 *, 0x20) + 1);
+    arg0->unk20 = (s32) (arg0->unk20 + 1);
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_000040D8);
 
-void func_00004140(void *arg0, s32 arg1) {
+void func_00004140(struct Unk_func_000040A8_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
-        if (M2C_FIELD(arg0, u8 *, 0x24) != 0) {
+        if (arg0->unk24 != 0) {
 
         } else {
             func_000040D8();
         }
-        M2C_FIELD(arg0, s32 *, 0x14) = (s32) (M2C_FIELD(arg0, s32 *, 0x14) + arg1);
+        arg0->unk14 = (s32) (arg0->unk14 + arg1);
     }
 }
 
-void func_00004198(void *arg0, s32 arg1) {
+void func_00004198(struct Unk_func_000040A8_0 *arg0, s32 arg1) {
     func_00004140(arg0, arg1);
 }
 
@@ -264,13 +264,13 @@ s32 func_00004578(void) {
     return D_0001C234;
 }
 
-s32 func_00004584(void *arg0) {
+s32 func_00004584(struct Unk_func_00004584_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0x80103002;
     if (arg0 != NULL) {
         var_v1 = 0;
-        if ((u32) M2C_FIELD(arg0, u32 *, 0x38) >= 2U) {
+        if ((u32) arg0->unk38 >= 2U) {
             func_0000456C(1);
             var_v1 = 0x80103008;
         }
@@ -348,13 +348,13 @@ void func_00005704(s32 arg0) {
     func_00005608(arg0, 8);
 }
 
-s32 func_00005720(void *arg0) {
+s32 func_00005720(struct Unk_func_00005720_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0x80103002;
     if (arg0 != NULL) {
         var_v1 = 0;
-        if ((u32) M2C_FIELD(arg0, u32 *, 0x5EC) >= 4U) {
+        if ((u32) arg0->unk5EC >= 4U) {
             func_0000456C(0x2F);
             var_v1 = 0x80103008;
         }
@@ -368,13 +368,13 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000589C);
 
-s32 func_00005958(void *arg0) {
+s32 func_00005958(struct Unk_func_00005958_0 *arg0) {
     s32 var_v1;
     u32 *temp_v0;
 
     var_v1 = 0x80103002;
     if (arg0 != NULL) {
-        temp_v0 = M2C_FIELD(arg0, u32 **, 0x5F4);
+        temp_v0 = arg0->unk5F4;
         var_v1 = 0;
         if ((temp_v0 != NULL) && ((u32) *temp_v0 >= 0x801U)) {
             func_0000456C(0x31);
@@ -394,12 +394,12 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00006240);
 
-u32 func_0000641C(void *arg0, u32 arg1) {
+u32 func_0000641C(struct Unk_func_0000641C_0 *arg0, u32 arg1) {
     u32 var_v1;
 
     var_v1 = 0;
-    if ((arg0 != NULL) && (M2C_FIELD(arg0, s32 *, 0) != 0) && (M2C_FIELD(arg0, s32 *, 4) != 0)) {
-        var_v1 = (u32) ((M2C_FIELD(arg0, s32 *, 8) + arg1) - 1) / arg1;
+    if ((arg0 != NULL) && (arg0->unk0 != 0) && (arg0->unk4 != 0)) {
+        var_v1 = (u32) ((arg0->unk8 + arg1) - 1) / arg1;
     }
     return var_v1;
 }
@@ -478,10 +478,10 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00008000);
 
-s32 func_00008040(void *arg0) {
+s32 func_00008040(struct Unk_func_00008040_0 *arg0) {
     func_00017760(&D_00047D24, 0, 0x10);
     func_00017684(&D_00047D24, arg0, 0x10);
-    func_00013644(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 8));
+    func_00013644(arg0->unk0, arg0->unk8);
     func_00017760(&D_00047E40, 0, 0xC);
     return 0;
 }
@@ -643,15 +643,15 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000AEF0);
 
-void func_0000AF14(void *arg0) {
+void func_0000AF14(struct Unk_func_0000AF14_0 *arg0) {
     s32 temp_v1;
 
     if (arg0 != NULL) {
-        func_0000FEAC(M2C_FIELD(arg0, s32 *, 8));
-        temp_v1 = M2C_FIELD(arg0, s32 *, 0);
+        func_0000FEAC(arg0->unk8);
+        temp_v1 = arg0->unk0;
         if (temp_v1 != 0) {
             func_00007FCC(temp_v1);
-            M2C_FIELD(arg0, s32 *, 0) = 0;
+            arg0->unk0 = 0;
         }
         func_00017760(arg0, 0, 0x10C);
     }
@@ -661,12 +661,12 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_0000B034);
 
-s32 func_0000B19C(void *arg0) {
+s32 func_0000B19C(struct Unk_func_0000B19C_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0x80084002;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x100);
+        var_v0 = arg0->unk100;
     }
     return var_v0;
 }
@@ -985,15 +985,15 @@ void func_000143FC(void) {
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014418);
 
-s32 func_0001445C(void *arg0) {
-    D_0001C24C.unk0 = (s32) M2C_FIELD(arg0, s32 *, 0);
-    D_0001C24C.unk4 = (s32) M2C_FIELD(arg0, s32 *, 4);
-    D_0001C24C.unk8 = (s32) M2C_FIELD(arg0, s32 *, 8);
-    D_0001C24C.unkC = (s32) M2C_FIELD(arg0, s32 *, 0xC);
-    D_0001C24C.unk10 = (s32) M2C_FIELD(arg0, s32 *, 0x10);
-    D_0001C24C.unk14 = (s32) M2C_FIELD(arg0, s32 *, 0x14);
-    D_0001C24C.unk18 = (s32) M2C_FIELD(arg0, s32 *, 0x18);
-    D_0001C24C.unk1C = (s32) M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_0001445C(struct Unk_func_0001445C_0 *arg0) {
+    D_0001C24C.unk0 = (s32) arg0->unk0;
+    D_0001C24C.unk4 = (s32) arg0->unk4;
+    D_0001C24C.unk8 = (s32) arg0->unk8;
+    D_0001C24C.unkC = (s32) arg0->unkC;
+    D_0001C24C.unk10 = (s32) arg0->unk10;
+    D_0001C24C.unk14 = (s32) arg0->unk14;
+    D_0001C24C.unk18 = (s32) arg0->unk18;
+    D_0001C24C.unk1C = (s32) arg0->unk1C;
     return 0;
 }
 
@@ -1035,32 +1035,32 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014BF8);
 
-void func_00014E7C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, void **, 4) = arg0;
+void func_00014E7C(struct Unk_func_00014E7C_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = arg0;
 }
 
-void func_00014E88(void *arg0, M2C_UNK *arg1) {
+void func_00014E88(struct Unk_func_00014E88_0 *arg0, M2C_UNK *arg1) {
     M2C_UNK *temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, M2C_UNK **, 4);
-    M2C_FIELD(arg0, M2C_UNK **, 4) = arg1;
+    temp_v1 = arg0->unk4;
+    arg0->unk4 = arg1;
     *arg1 = *temp_v1;
     *temp_v1 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00014EA0);
 
-void func_00014EC0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+void func_00014EC0(struct Unk_func_00014EC0_0 *arg0, s32 arg1) {
+    arg0->unk4 = arg1;
 }
 
-s32 func_00014EC8(void *arg0) {
+s32 func_00014EC8(struct Unk_func_00014EC8_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 4);
+        var_v0 = arg0->unk4;
     }
     return var_v0;
 }
@@ -1254,9 +1254,9 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00017854);
 
-void func_0001789C(void *arg0, s32 arg1) {
+void func_0001789C(struct Unk_func_0001789C_0 *arg0, s32 arg1) {
     if (arg1 < 0x100) {
-        M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) + 1);
+        arg0->unk4 = (s32) (arg0->unk4 + 1);
     }
 }
 
@@ -1296,28 +1296,28 @@ INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog"
 
 INCLUDE_ASM("tmp/asm/282/savedata_auto_dialog/nonmatchings/savedata_auto_dialog", func_00018160);
 
-void func_000181AC(void *arg0) {
-    if ((arg0 != NULL) && (M2C_FIELD(arg0, s32 *, 0) != 0) && (M2C_FIELD(arg0, s32 *, 4) >= 0)) {
-        M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_000181AC(struct Unk_func_000181AC_0 *arg0) {
+    if ((arg0 != NULL) && (arg0->unk0 != 0) && (arg0->unk4 >= 0)) {
+        arg0->unk8 = 0;
     }
 }
 
-s32 func_000181D4(void *arg0) {
+s32 func_000181D4(struct Unk_func_000181D4_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 0;
-    if ((arg0 != NULL) && (M2C_FIELD(arg0, s32 *, 0) != 0) && (M2C_FIELD(arg0, s32 *, 4) >= 0)) {
-        var_v1 = __builtin_allegrex_ext(M2C_FIELD(arg0, s32 *, 8), 1, 1);
+    if ((arg0 != NULL) && (arg0->unk0 != 0) && (arg0->unk4 >= 0)) {
+        var_v1 = __builtin_allegrex_ext(arg0->unk8, 1, 1);
     }
     return var_v1;
 }
 
-s32 func_00018204(void *arg0) {
+s32 func_00018204(struct Unk_func_00018204_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 1;
-    if ((arg0 != NULL) && (M2C_FIELD(arg0, s32 *, 0) != 0) && (M2C_FIELD(arg0, s32 *, 4) >= 0)) {
-        var_v1 = M2C_FIELD(arg0, s32 *, 8) & 1;
+    if ((arg0 != NULL) && (arg0->unk0 != 0) && (arg0->unk4 >= 0)) {
+        var_v1 = arg0->unk8 & 1;
     }
     return var_v1;
 }

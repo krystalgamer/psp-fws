@@ -30,12 +30,12 @@
   "func_000067EC": "s32 func_000067EC(void);",
   "func_00006960": "s32 func_00006960(void);",
   "func_000079A8": "s32 func_000079A8(s8 *arg0);",
-  "func_0000E3C0": "s32 func_0000E3C0(void *arg0, s32 arg1);",
-  "func_0000E3D8": "s32 func_0000E3D8(void *arg0, u32 arg1);",
-  "func_00013044": "s32 func_00013044(void *arg0);",
-  "func_000135A8": "void func_000135A8(void *arg0);",
+  "func_0000E3C0": "s32 func_0000E3C0(struct Unk_func_0000E3C0_0 *arg0, s32 arg1);",
+  "func_0000E3D8": "s32 func_0000E3D8(struct Unk_func_0000E3D8_0 *arg0, u32 arg1);",
+  "func_00013044": "s32 func_00013044(struct Unk_func_00013044_0 *arg0);",
+  "func_000135A8": "void func_000135A8(struct Unk_func_000135A8_0 *arg0);",
   "func_00013654": "void func_00013654(void *arg0);",
-  "func_00013798": "void func_00013798(void *arg0, u32 arg1);",
+  "func_00013798": "void func_00013798(struct Unk_func_00013798_0 *arg0, u32 arg1);",
   "func_000149E0": "void func_000149E0(void);",
   "func_0002214C": "s32 func_0002214C(s32 arg0);",
   "func_0002233C": "s32 func_0002233C(s32 arg0);",
@@ -46,6 +46,13 @@
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelDeleteFpl": "M2C_UNK sceKernelDeleteFpl();",
   "sceKernelDeleteMbx": "s32 sceKernelDeleteMbx(s32);"
+ },
+ "types": {
+  "Unk_func_0000E3C0_0": "struct Unk_func_0000E3C0_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n    u8 pad8[0x10];\n    s32 unk18;\n};",
+  "Unk_func_0000E3D8_0": "struct Unk_func_0000E3D8_0 {\n    u32 unk0;\n    u32 unk4;\n    u8 pad8[0x18];\n    s32 unk20;\n    u8 pad24[0x2];\n    u16 unk26;\n};",
+  "Unk_func_00013044_0": "struct Unk_func_00013044_0 {\n    s8 unk0;\n    s8 unk1;\n};",
+  "Unk_func_000135A8_0": "struct Unk_func_000135A8_0 {\n    s8 unk0;\n    s8 unk1;\n};",
+  "Unk_func_00013798_0": "struct Unk_func_00013798_0 {\n    u8 pad0[0x20];\n    s32 unk20;\n    u8 pad24[0xFA54];\n    void * unkFA78;\n    u8 padFA7C[0x48];\n    s32 unkFAC4;\n    u8 padFAC8[0x18];\n    s32 unkFAE0;\n};"
  },
  "vars": {
   "D_0002411C": "extern M2C_UNK D_0002411C;",

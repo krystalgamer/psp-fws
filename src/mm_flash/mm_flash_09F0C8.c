@@ -169,8 +169,8 @@ s32 func_0009FB04(void) {
     return 0;
 }
 
-s32 func_0009FB0C(void *arg0, void *arg1) {
-    return M2C_FIELD(arg0, s32 *, 4) == M2C_FIELD(arg1, s32 *, 4);
+s32 func_0009FB0C(struct Unk_func_0009FB0C_0 *arg0, struct Unk_func_0009FB0C_1 *arg1) {
+    return arg0->unk4 == arg1->unk4;
 }
 
 s32 func_0009FB20(void) {
@@ -243,13 +243,13 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_0009FFF8);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000A04C4);
 
-s32 func_000A04F4(void *arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
+s32 func_000A04F4(struct Unk_func_000A04F4_0 *arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
     s32 var_v1;
     void **temp_v0;
 
     var_v1 = 1;
     if (func_000A04C4() == 0) {
-        temp_v0 = M2C_FIELD(arg0, void ***, 8);
+        temp_v0 = arg0->unk8;
         var_v1 = M2C_FIELD(*temp_v0, s32 (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x18)(temp_v0, arg1, arg2, arg3);
     }
     return var_v1;
@@ -397,9 +397,9 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000A0E74);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000A0F0C);
 
-s32 func_000A0F9C(void *arg0, s32 arg1) {
+s32 func_000A0F9C(struct Unk_func_000A0F9C_0 *arg0, s32 arg1) {
     void *sp0;
-    func_000A0B4C((M2C_FIELD(arg0, s32 *, 0xC) - arg1) - 1, &sp0);
+    func_000A0B4C((arg0->unkC - arg1) - 1, &sp0);
     return sp0 == 0;
 }
 
@@ -770,12 +770,12 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000AB240);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000AB540);
 
-void func_000AB5F8(void *arg0, void *arg1) {
+void func_000AB5F8(struct Unk_func_000AB5F8_0 *arg0, struct Unk_func_000AB5F8_1 *arg1) {
     void **temp_v0;
 
     if (arg1 != NULL) {
-        temp_v0 = (M2C_FIELD(arg1, s32 *, 4) * 4) + M2C_FIELD(arg0, s32 *, 0x4C);
-        M2C_FIELD(arg1, void **, 0) = (void *) *temp_v0;
+        temp_v0 = (arg1->unk4 * 4) + arg0->unk4C;
+        arg1->unk0 = (void *) *temp_v0;
         *temp_v0 = arg1;
     }
 }
@@ -838,8 +838,8 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000AD2E8);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000AD374);
 
-void func_000AD3EC(void *arg0) {
-    func_000AD484(func_000A9898(), M2C_FIELD(arg0, s16 *, 0xE));
+void func_000AD3EC(struct Unk_func_000AD3EC_0 *arg0) {
+    func_000AD484(func_000A9898(), arg0->unkE);
 }
 
 s32 func_000AD41C(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -1656,22 +1656,22 @@ INCLUDE_RODATA("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", D_000C50F0);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000AED74);
 
-s32 func_000AEEC0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x354);
+s32 func_000AEEC0(struct Unk_func_000AEEC0_0 *arg0) {
+    return arg0->unk354;
 }
 
-s32 func_000AEEC8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x360);
+s32 func_000AEEC8(struct Unk_func_000AEEC8_0 *arg0) {
+    return arg0->unk360;
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000AEED0);
 
-s32 func_000AEEFC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x35C);
+s32 func_000AEEFC(struct Unk_func_000AEEFC_0 *arg0) {
+    return arg0->unk35C;
 }
 
-s32 func_000AEF04(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x358);
+s32 func_000AEF04(struct Unk_func_000AEF04_0 *arg0) {
+    return arg0->unk358;
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000AEF0C);
@@ -1712,12 +1712,12 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000B0E14);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_000B0E28);
 
-s32 func_000B0E3C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x350);
+s32 func_000B0E3C(struct Unk_func_000B0E3C_0 *arg0) {
+    return arg0->unk350;
 }
 
-void func_000B0E44(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x350) = arg1;
+void func_000B0E44(struct Unk_func_000B0E44_0 *arg0, s32 arg1) {
+    arg0->unk350 = arg1;
 }
 
 void func_000B0E4C(void) {

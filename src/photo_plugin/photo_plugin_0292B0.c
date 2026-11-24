@@ -82,10 +82,10 @@ void func_00029E14(void) {
     func_00029E40();
 }
 
-void func_00029E30(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_00029E30(struct Unk_func_00029E30_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_0292B0", func_00029E40);
@@ -140,36 +140,36 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_0292B0", func_00
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_0292B0", func_0002B44C);
 
-void func_0002B53C(void *arg0) {
+void func_0002B53C(struct Unk_func_0002B53C_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00031648;
+    temp_v1 = arg0->unk4;
+    arg0->unk0 = &D_00031648;
     if (temp_v1 != 0) {
         scePaf_B3D2C3BB(temp_v1);
-        M2C_FIELD(arg0, s32 *, 4) = 0;
+        arg0->unk4 = 0;
     }
 }
 
-void func_0002B584(void *arg0) {
+void func_0002B584(struct Unk_func_0002B584_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00031648;
+    temp_v1 = arg0->unk4;
+    arg0->unk0 = &D_00031648;
     if (temp_v1 != 0) {
         scePaf_B3D2C3BB(temp_v1);
-        M2C_FIELD(arg0, s32 *, 4) = 0;
+        arg0->unk4 = 0;
     }
 }
 
-void func_0002B5CC(void *arg0) {
+void func_0002B5CC(struct Unk_func_0002B5CC_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00031648;
+    temp_v1 = arg0->unk4;
+    arg0->unk0 = &D_00031648;
     if (temp_v1 != 0) {
         scePaf_B3D2C3BB(temp_v1);
-        M2C_FIELD(arg0, s32 *, 4) = 0;
+        arg0->unk4 = 0;
     }
     scePaf_4E67BB08((s32) arg0);
 }

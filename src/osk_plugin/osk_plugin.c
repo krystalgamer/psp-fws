@@ -496,11 +496,11 @@ INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_00005B8C);
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_00005D34);
 
-s32 func_0000601C(void *arg0, s32 arg1) {
-    if (M2C_FIELD(arg0, s32 *, 0) != 0x40) {
-        return M2C_FIELD(arg0, s32 *, 0x34) + (arg1 * 0x44);
+s32 func_0000601C(struct Unk_func_0000601C_0 *arg0, s32 arg1) {
+    if (arg0->unk0 != 0x40) {
+        return arg0->unk34 + (arg1 * 0x44);
     }
-    return M2C_FIELD(arg0, s32 *, 0x34) + (arg1 * 0x34);
+    return arg0->unk34 + (arg1 * 0x34);
 }
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000605C);
@@ -691,8 +691,8 @@ INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_00009FF0);
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000A064);
 
-void func_0000A164(void *arg0, M2C_UNK arg1) {
-    scePaf_D1EE972C(M2C_FIELD(arg0, s32 *, 0x41C), arg1, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
+void func_0000A164(struct Unk_func_0000A164_0 *arg0, M2C_UNK arg1) {
+    scePaf_D1EE972C(arg0->unk41C, arg1, 0, scePaf_DC8B0309(arg0->unk41C));
 }
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000A1AC);
@@ -721,32 +721,32 @@ INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000A7A4);
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000AA0C);
 
-s32 func_0000AAC4(void *arg0) {
-    func_0000B80C(M2C_FIELD(arg0, s32 *, 8));
+s32 func_0000AAC4(struct Unk_func_0000AAC4_0 *arg0) {
+    func_0000B80C(arg0->unk8);
     return 1;
 }
 
-void func_0000AAE4(void *arg0) {
+void func_0000AAE4(struct Unk_func_0000AAE4_0 *arg0) {
     s32 temp_a0;
     s32 temp_v1;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0x418);
+    temp_a0 = arg0->unk418;
     if (temp_a0 == 0) {
 
     } else {
-        if (M2C_FIELD(arg0, s32 *, 0x41C) == 0) {
-            M2C_FIELD(arg0, s32 *, 0x41C) = scePaf_4708AED4(temp_a0, &D_00012230);
+        if (arg0->unk41C == 0) {
+            arg0->unk41C = scePaf_4708AED4(temp_a0, &D_00012230);
         }
-        if (M2C_FIELD(arg0, s32 *, 0x410) == 0) {
-            M2C_FIELD(arg0, s32 *, 0x410) = scePaf_4708AED4(M2C_FIELD(arg0, s32 *, 0x418), &D_00012228);
+        if (arg0->unk410 == 0) {
+            arg0->unk410 = scePaf_4708AED4(arg0->unk418, &D_00012228);
         }
-        if ((M2C_FIELD(arg0, s32 *, 0x41C) != 0) && (M2C_FIELD(arg0, s32 *, 0x410) != 0)) {
-            if (M2C_FIELD(arg0, s32 *, 0x470) == 1) {
-                temp_v1 = M2C_FIELD(arg0, s32 *, 0x484);
-                M2C_FIELD(arg0, s32 *, 0x474) = 0;
+        if ((arg0->unk41C != 0) && (arg0->unk410 != 0)) {
+            if (arg0->unk470 == 1) {
+                temp_v1 = arg0->unk484;
+                arg0->unk474 = 0;
                 if (temp_v1 > 0) {
-                    M2C_FIELD(arg0, s32 *, 0x484) = 0;
-                    M2C_FIELD(arg0, s32 *, 0x47C) = (s32) (M2C_FIELD(arg0, s32 *, 0x47C) + temp_v1);
+                    arg0->unk484 = 0;
+                    arg0->unk47C = (s32) (arg0->unk47C + temp_v1);
                 }
                 func_0000BDF4((s32) arg0);
             }
@@ -764,20 +764,20 @@ INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000AD44);
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000AD68);
 
-void func_0000AEF8(void *arg0) {
-    scePaf_AEEF2A7C(M2C_FIELD(arg0, s32 *, 0x41C), 0, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
-    scePaf_AEEF2A7C(M2C_FIELD(arg0, s32 *, 0x41C), 1, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
+void func_0000AEF8(struct Unk_func_0000AEF8_0 *arg0) {
+    scePaf_AEEF2A7C(arg0->unk41C, 0, 0, scePaf_DC8B0309(arg0->unk41C));
+    scePaf_AEEF2A7C(arg0->unk41C, 1, 0, scePaf_DC8B0309(arg0->unk41C));
 }
 
-void func_0000AF50(void *arg0) {
-    scePaf_37DD37B8(M2C_FIELD(arg0, s32 *, 0x41C), 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
+void func_0000AF50(struct Unk_func_0000AF50_0 *arg0) {
+    scePaf_37DD37B8(arg0->unk41C, 0, scePaf_DC8B0309(arg0->unk41C));
 }
 
-s32 func_0000AF88(void *arg0) {
+s32 func_0000AF88(struct Unk_func_0000AF88_0 *arg0) {
     s32 temp_s1;
 
-    temp_s1 = scePaf_79F4AE65(M2C_FIELD(arg0, s32 *, 0x41C));
-    scePaf_B2ED6CAA(M2C_FIELD(arg0, s32 *, 0x41C));
+    temp_s1 = scePaf_79F4AE65(arg0->unk41C);
+    scePaf_B2ED6CAA(arg0->unk41C);
     return temp_s1;
 }
 
@@ -825,16 +825,16 @@ INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000C560);
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000C67C);
 
-s32 func_0000C710(void *arg0) {
+s32 func_0000C710(struct Unk_func_0000C710_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0);
+    temp_v0 = arg0->unk0;
     if (temp_v0 != 0) {
         scePaf_545FE2DA(temp_v0);
-        M2C_FIELD(arg0, s32 *, 0) = 0;
+        arg0->unk0 = 0;
     }
-    M2C_FIELD(arg0, s16 *, 4) = 0;
-    M2C_FIELD(arg0, s16 *, 6) = 0;
+    arg0->unk4 = 0;
+    arg0->unk6 = 0;
     return 1;
 }
 
@@ -844,22 +844,22 @@ INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000C79C);
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000C7D8);
 
-s32 func_0000C800(void *arg0) {
+s32 func_0000C800(struct Unk_func_0000C800_0 *arg0) {
     s32 var_a1;
     u16 temp_v0;
 
     var_a1 = 0;
     if (arg0 != NULL) {
-        temp_v0 = M2C_FIELD(arg0, u16 *, 4);
+        temp_v0 = arg0->unk4;
         if (temp_v0 != 0) {
-            var_a1 = M2C_FIELD(((temp_v0 * 4) + M2C_FIELD(arg0, s32 *, 0)), s32 *, -4);
+            var_a1 = M2C_FIELD(((temp_v0 * 4) + arg0->unk0), s32 *, -4);
         }
     }
     return var_a1;
 }
 
-u16 func_0000C828(void *arg0) {
-    return M2C_FIELD(arg0, u16 *, 4);
+u16 func_0000C828(struct Unk_func_0000C828_0 *arg0) {
+    return arg0->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000C830);
@@ -948,25 +948,25 @@ INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000D6F8);
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000D7A0);
 
-s32 func_0000D814(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_0000D814(struct Unk_func_0000D814_0 *arg0) {
+    return arg0->unkC;
 }
 
-s32 func_0000D81C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_0000D81C(struct Unk_func_0000D81C_0 *arg0) {
+    return arg0->unk10;
 }
 
-void func_0000D824(void *arg0, void *arg1) {
-    M2C_FIELD(arg0, s32 *, 8) = (s32) M2C_FIELD(arg1, s32 *, 0);
-    M2C_FIELD(arg0, s32 *, 0xC) = (s32) M2C_FIELD(arg1, s32 *, 4);
-    M2C_FIELD(arg0, s32 *, 0x10) = (s32) M2C_FIELD(arg1, s32 *, 8);
-    M2C_FIELD(arg0, s32 *, 0x14) = (s32) M2C_FIELD(arg1, s32 *, 0xC);
+void func_0000D824(struct Unk_func_0000D824_0 *arg0, struct Unk_func_0000D824_1 *arg1) {
+    arg0->unk8 = (s32) arg1->unk0;
+    arg0->unkC = (s32) arg1->unk4;
+    arg0->unk10 = (s32) arg1->unk8;
+    arg0->unk14 = (s32) arg1->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000D848);
 
-u16 func_0000D85C(void *arg0) {
-    return M2C_FIELD(arg0, u16 *, 0x14);
+u16 func_0000D85C(struct Unk_func_0000D85C_0 *arg0) {
+    return arg0->unk14;
 }
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000D864);

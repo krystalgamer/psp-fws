@@ -2,26 +2,26 @@
 #include "common.h"
 #include "music_common_decls.h"
 
-s32 music_common_D29A7B4B(void *arg0) {
+s32 music_common_D29A7B4B(struct Unk_music_common_D29A7B4B_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0xC);
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+    temp_v0 = arg0->unkC;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk4 = 0;
     return temp_v0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005BFC", func_00005C10);
 
-void func_00005CC4(void *arg0) {
+void func_00005CC4(struct Unk_func_00005CC4_0 *arg0) {
     s8 *temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s8 **, 0xC);
-    if ((temp_v1 != NULL) && (M2C_FIELD(arg0, s32 *, 4) != 0)) {
+    temp_v1 = arg0->unkC;
+    if ((temp_v1 != NULL) && (arg0->unk4 != 0)) {
         *temp_v1 = 0;
     }
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_005BFC", func_00005CE4);

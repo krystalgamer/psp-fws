@@ -2,32 +2,32 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-void func_0003F0C4(void *arg0, s32 arg1) {
+void func_0003F0C4(struct Unk_func_0003F0C4_0 *arg0, s32 arg1) {
     s32 temp_v0;
 
-    M2C_FIELD(arg0, s32 *, 4) = -1;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s8 *, 8) = 0;
+    arg0->unk4 = -1;
+    arg0->unk0 = 0;
+    arg0->unk8 = 0;
     if (arg1 != 0) {
         temp_v0 = sceNetApctl_A7BB73DF(arg1, 0);
-        M2C_FIELD(arg0, s32 *, 0) = temp_v0;
+        arg0->unk0 = temp_v0;
         if (temp_v0 >= 0) {
-            M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+            arg0->unk4 = temp_v0;
         }
     }
 }
 
-void func_0003F118(void *arg0) {
+void func_0003F118(struct Unk_func_0003F118_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
 
-    if (M2C_FIELD(arg0, u8 *, 8) != 1) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 4);
+    if (arg0->unk8 != 1) {
+        temp_v0 = arg0->unk4;
         if (temp_v0 >= 0) {
             temp_v0_2 = sceNetApctl_6F5D2981(temp_v0);
-            M2C_FIELD(arg0, s32 *, 0) = temp_v0_2;
+            arg0->unk0 = temp_v0_2;
             if (temp_v0_2 >= 0) {
-                M2C_FIELD(arg0, s32 *, 4) = -1;
+                arg0->unk4 = -1;
             }
         }
     }

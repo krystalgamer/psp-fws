@@ -3,25 +3,25 @@
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014458", func_00014458);
 
-s32 func_000145C8(void *arg0) {
+s32 func_000145C8(struct Unk_func_000145C8_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x2C);
+    temp_v0 = arg0->unk2C;
     if (temp_v0 >= 0) {
         sceNetInetClose(temp_v0);
-        M2C_FIELD(arg0, s32 *, 0x2C) = -1;
+        arg0->unk2C = -1;
     }
-    temp_v0_2 = M2C_FIELD(arg0, s32 *, 4);
+    temp_v0_2 = arg0->unk4;
     if (temp_v0_2 != 0) {
         scePaf_CCFF20ED(temp_v0_2);
-        M2C_FIELD(arg0, s32 *, 4) = 0;
+        arg0->unk4 = 0;
     }
-    temp_v0_3 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0_3 = arg0->unk8;
     if (temp_v0_3 != 0) {
         scePaf_CCFF20ED(temp_v0_3);
-        M2C_FIELD(arg0, s32 *, 8) = 0;
+        arg0->unk8 = 0;
     }
     return 0;
 }

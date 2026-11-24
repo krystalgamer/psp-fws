@@ -115,24 +115,24 @@ void func_00012BF8(void *arg0) {
     func_000086F0((s32) (arg0 + 0x668), 0);
 }
 
-void func_00012C70(void *arg0) {
-    M2C_FIELD(arg0, s8 *, 0x40) = 1;
+void func_00012C70(struct Unk_func_00012C70_0 *arg0) {
+    arg0->unk40 = 1;
     func_00012BF8(arg0);
 }
 
-void func_00012C94(void *arg0) {
-    if (M2C_FIELD(arg0, s32 *, 0x664) != 0) {
-        M2C_FIELD(arg0, s8 *, 0x40) = 0;
+void func_00012C94(struct Unk_func_00012C94_0 *arg0) {
+    if (arg0->unk664 != 0) {
+        arg0->unk40 = 0;
     } else if (func_00012A70() == 0) {
-        M2C_FIELD(arg0, s8 *, 0x40) = 0;
+        arg0->unk40 = 0;
     }
 }
 
-void func_00012CD8(void *arg0, void *arg1) {
-    M2C_FIELD(arg0, s32 *, 0x30) = (s32) M2C_FIELD(arg1, s32 *, 0);
-    M2C_FIELD(arg0, s32 *, 0x34) = (s32) M2C_FIELD(arg1, s32 *, 4);
-    M2C_FIELD(arg0, s32 *, 0x38) = (s32) M2C_FIELD(arg1, s32 *, 8);
-    M2C_FIELD(arg0, s32 *, 0x3C) = (s32) M2C_FIELD(arg1, s32 *, 0xC);
+void func_00012CD8(struct Unk_func_00012CD8_0 *arg0, struct Unk_func_00012CD8_1 *arg1) {
+    arg0->unk30 = (s32) arg1->unk0;
+    arg0->unk34 = (s32) arg1->unk4;
+    arg0->unk38 = (s32) arg1->unk8;
+    arg0->unk3C = (s32) arg1->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00012CFC);
@@ -194,19 +194,19 @@ void func_00013A34(M2C_UNK **arg0) {
     scePaf_6261C0A5((s32) arg0);
 }
 
-void func_00013A5C(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0002A910;
-    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_0002A9C0;
+void func_00013A5C(struct Unk_func_00013A5C_0 *arg0) {
+    arg0->unk0 = &D_0002A910;
+    arg0->unk8 = &D_0002A9C0;
 }
 
-void func_00013A78(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0002A910;
-    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_0002A9C0;
+void func_00013A78(struct Unk_func_00013A78_0 *arg0) {
+    arg0->unk0 = &D_0002A910;
+    arg0->unk8 = &D_0002A9C0;
     scePaf_6261C0A5((s32) arg0);
 }
 
-void func_00013AAC(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+void func_00013AAC(struct Unk_func_00013AAC_0 *arg0, s32 arg1) {
+    arg0->unk4 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_011B50", func_00013AB4);

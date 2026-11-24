@@ -19,6 +19,16 @@ struct D_00004700_s {
     volatile s32 unk18;
 };
 
+struct Unk_func_0000277C_0 {
+    u8 pad0[0x1C];
+    void * unk1C;
+};
+
+struct Unk_func_0000277C_1 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
 extern s32 D_00004640;
 extern struct D_000046A8_s D_000046A8;
 extern s32 D_000046E8;
@@ -30,7 +40,7 @@ s32 KDebugForKernel_24C32559(M2C_UNK);
 s32 func_000022E0(void);
 s32 func_000022EC(void);
 void func_000022F4(void);
-s32 func_0000277C(void *arg0, void *arg1, s32 arg2);
+s32 func_0000277C(struct Unk_func_0000277C_0 *arg0, struct Unk_func_0000277C_1 *arg1, s32 arg2);
 void func_00003FB0(void);
 void func_00003FF0(u32 arg0);
 void func_00004044(s32 arg0);

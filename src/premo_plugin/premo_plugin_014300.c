@@ -2,23 +2,23 @@
 #include "common.h"
 #include "premo_plugin_decls.h"
 
-void func_00014300(void *arg0) {
+void func_00014300(struct Unk_func_00014300_0 *arg0) {
     void *temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, void **, 0x1E8);
+    temp_v0 = arg0->unk1E8;
     if (temp_v0 != NULL) {
-        M2C_FIELD(arg0, s8 *, 0x344) = 0;
+        arg0->unk344 = 0;
         func_00012C70(temp_v0);
     }
 }
 
-void func_0001432C(void *arg0) {
+void func_0001432C(struct Unk_func_0001432C_0 *arg0) {
     void *temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, void **, 0x1E8);
+    temp_v0 = arg0->unk1E8;
     if (temp_v0 != NULL) {
         func_00012C94(temp_v0);
-        M2C_FIELD(arg0, s8 *, 0x344) = 1;
+        arg0->unk344 = 1;
     }
 }
 

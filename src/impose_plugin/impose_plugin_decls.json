@@ -1,11 +1,15 @@
 {
  "funcs": {
-  "func_0000015C": "void func_0000015C(void *arg0);",
-  "func_00000180": "void func_00000180(void *arg0);",
+  "func_0000015C": "void func_0000015C(struct Unk_func_0000015C_0 *arg0);",
+  "func_00000180": "void func_00000180(struct Unk_func_00000180_0 *arg0);",
   "func_0000104C": "void func_0000104C(void);",
   "func_000010D0": "M2C_UNK func_000010D0();",
   "module_stop": "s32 module_stop(void);",
   "scePaf_86B41BA3": "M2C_UNK scePaf_86B41BA3();"
+ },
+ "types": {
+  "Unk_func_0000015C_0": "struct Unk_func_0000015C_0 {\n    u8 pad0[0x1FD];\n    s8 unk1FD;\n    s8 unk1FE;\n};",
+  "Unk_func_00000180_0": "struct Unk_func_00000180_0 {\n    u8 pad0[0x1FD];\n    s8 unk1FD;\n    s8 unk1FE;\n};"
  },
  "vars": {}
 }

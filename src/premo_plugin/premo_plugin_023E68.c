@@ -2,9 +2,9 @@
 #include "common.h"
 #include "premo_plugin_decls.h"
 
-void func_00023E68(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0xF8) = arg2;
-    M2C_FIELD(arg0, s32 *, 0xF4) = arg1;
+void func_00023E68(struct Unk_func_00023E68_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unkF8 = arg2;
+    arg0->unkF4 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_023E68", func_00023E74);

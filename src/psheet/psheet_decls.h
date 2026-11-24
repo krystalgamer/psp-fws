@@ -13,6 +13,11 @@ struct D_00002A80_s {
     s32 unk18;
 };
 
+struct Unk_func_0000127C_0 {
+    s32 unk0;
+    s32 unk4;
+};
+
 extern M2C_UNK D_000027EC;
 extern M2C_UNK D_00002804;
 extern s32 D_000029AC;
@@ -26,7 +31,7 @@ extern M2C_UNK D_00002F30;
 extern s32 D_00002F48;
 
 M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);
-s32 func_0000127C(void *arg0);
+s32 func_0000127C(struct Unk_func_0000127C_0 *arg0);
 s32 func_000012F0(s32 arg0);
 s32 func_00001360(s32 arg0, s32 arg1);
 s32 func_000013D8(void);

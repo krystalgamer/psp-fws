@@ -18,7 +18,7 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_059D50", func_0005A5D4);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_059D50", func_0005A674);
 
-void func_0005A7A4(void *arg0) {
+void func_0005A7A4(struct Unk_func_0005A7A4_0 *arg0) {
     if (arg0 != NULL) {
         func_000632B8(arg0);
     }

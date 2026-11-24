@@ -3,17 +3,17 @@
   "func_00000490": "void func_00000490(s32 arg0);",
   "func_00000974": "s32 func_00000974(void *arg0, s32 arg1);",
   "func_00000FFC": "s32 func_00000FFC(s32);",
-  "func_00002D20": "s32 func_00002D20(void *arg0, s32 arg1);",
+  "func_00002D20": "s32 func_00002D20(struct Unk_func_00002D20_0 *arg0, s32 arg1);",
   "func_00002D2C": "s32 func_00002D2C(s32);",
   "func_00002D94": "s32 func_00002D94(s32, s32);",
-  "func_00003BB0": "void func_00003BB0(void *arg0);",
+  "func_00003BB0": "void func_00003BB0(struct Unk_func_00003BB0_0 *arg0);",
   "func_00004AE4": "s32 func_00004AE4(s32);",
   "func_00004B30": "s32 func_00004B30(s32);",
   "func_00004E98": "s32 func_00004E98(s32);",
   "func_00005024": "s32 func_00005024(s32, s32);",
-  "func_00005594": "s32 func_00005594(void *arg0, s32 arg1, s32 arg2);",
-  "func_000055B0": "void func_000055B0(void *arg0, s32 arg1, s32 arg2);",
-  "func_000056E4": "s32 func_000056E4(void *arg0, s32 arg1);",
+  "func_00005594": "s32 func_00005594(struct Unk_func_00005594_0 *arg0, s32 arg1, s32 arg2);",
+  "func_000055B0": "void func_000055B0(struct Unk_func_000055B0_0 *arg0, s32 arg1, s32 arg2);",
+  "func_000056E4": "s32 func_000056E4(struct Unk_func_000056E4_0 *arg0, s32 arg1);",
   "func_00005708": "void func_00005708(void *arg0);",
   "func_00006F68": "s32 func_00006F68(void);",
   "func_00007298": "s32 func_00007298(s32, s32, s32);",
@@ -23,7 +23,12 @@
   "sceNet_lib_57CC57DA": "M2C_UNK sceNet_lib_57CC57DA(void *, M2C_UNK, M2C_UNK);"
  },
  "types": {
-  "D_000079C0_s": "struct D_000079C0_s {\n    s32 unk0;\n    M2C_UNK * unk4;\n};"
+  "D_000079C0_s": "struct D_000079C0_s {\n    s32 unk0;\n    M2C_UNK * unk4;\n};",
+  "Unk_func_00002D20_0": "struct Unk_func_00002D20_0 {\n    u8 pad0[0x1C];\n    s32 unk1C;\n};",
+  "Unk_func_00003BB0_0": "struct Unk_func_00003BB0_0 {\n    u8 pad0[0x14];\n    s32 unk14;\n};",
+  "Unk_func_00005594_0": "struct Unk_func_00005594_0 {\n    u8 pad0[0x34];\n    s32 unk34;\n    s32 unk38;\n    u8 pad3C[0x10];\n    s32 unk4C;\n    s32 unk50;\n};",
+  "Unk_func_000055B0_0": "struct Unk_func_000055B0_0 {\n    u8 pad0[0xCC];\n    s32 unkCC;\n    s32 unkD0;\n};",
+  "Unk_func_000056E4_0": "struct Unk_func_000056E4_0 {\n    u8 pad0[0x58];\n    void * unk58;\n    s32 unk5C;\n    u8 pad60[0x7C];\n    s32 unkDC;\n};"
  },
  "vars": {
   "D_000079C0": "extern struct D_000079C0_s D_000079C0;",

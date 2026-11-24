@@ -23,15 +23,15 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_01CC30", music_c
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_01CC30", func_0001D334);
 
-void music_common_730D5E67(void *arg0, void *arg1) {
+void music_common_730D5E67(struct Unk_music_common_730D5E67_0 *arg0, struct Unk_music_common_730D5E67_1 *arg1) {
     s32 temp_a0;
     s32 temp_v0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 4);
-    if ((temp_a0 == 0) || (temp_v0 = M2C_FIELD(arg1, s32 *, 4), (temp_v0 == 0))) {
-        func_0001D4BC(M2C_FIELD(arg0, s32 *, 8), M2C_FIELD(arg1, s32 *, 8));
+    temp_a0 = arg0->unk4;
+    if ((temp_a0 == 0) || (temp_v0 = arg1->unk4, (temp_v0 == 0))) {
+        func_0001D4BC(arg0->unk8, arg1->unk8);
     } else if (scePaf_ED2B47FA(temp_a0, temp_v0) == 0) {
-        scePaf_66FE90D7(M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg1, s32 *, 4));
+        scePaf_66FE90D7(arg0->unk4, arg1->unk4);
     }
 }
 

@@ -9,6 +9,54 @@ struct D_0000AF44_s {
     void ** unk4;
 };
 
+struct Unk_func_00003400_0 {
+    u8 pad0[0x20];
+    s32 unk20;
+    u8 pad24[0x24];
+    s32 unk48;
+    s32 unk4C;
+};
+
+struct Unk_func_00005744_0 {
+    void * unk0;
+    s32 unk4;
+    s32 unk8;
+};
+
+struct Unk_sceNetEtherNtostr_0 {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+};
+
+struct Unk_sceNet_lib_757085B0_0 {
+    u8 pad0[0xC];
+    u16 unkC;
+    u8 padE[0x2];
+    s32 unk10;
+};
+
+struct Unk_sceNet_lib_92633D8D_0 {
+    u8 pad0[0x8];
+    s32 unk8;
+};
+
+struct Unk_sceNet_lib_C21E18B2_0 {
+    u8 pad0[0xC];
+    u16 unkC;
+};
+
+struct Unk_sceNet_lib_C9C97945_0 {
+    u8 pad0[0x20];
+    s32 unk20;
+    u8 pad24[0x24];
+    s32 unk48;
+    s32 unk4C;
+};
+
 extern s32 D_0000A860;
 extern s32 D_0000A864;
 extern s32 D_0000A868;
@@ -52,11 +100,11 @@ void func_00001E74(void);
 s32 func_00002248(void);
 void func_0000260C(void);
 void func_00003380(void);
-void func_00003400(void *arg0);
+void func_00003400(struct Unk_func_00003400_0 *arg0);
 void func_000037E4(void);
 void func_00004430(s32 arg0, u8 *arg1);
 u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2);
-void func_00005744(void *arg0);
+void func_00005744(struct Unk_func_00005744_0 *arg0);
 void func_00005C28(void);
 void func_00005C30(void);
 s32 func_00005C38(void);
@@ -77,7 +125,7 @@ s32 sceKernelSetEventFlag(s32, u32);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelTerminateThread(s32);
 s32 sceKernelWaitSema(s32, s32, void *);
-void sceNetEtherNtostr(void *arg0, s32 arg1);
+void sceNetEtherNtostr(struct Unk_sceNetEtherNtostr_0 *arg0, s32 arg1);
 s32 sceNetIfhandle_lib_0C391E9F();
 M2C_UNK sceNetIfhandle_lib_29ED84C5();
 M2C_UNK sceNetIfhandle_lib_76BAD213();
@@ -98,23 +146,23 @@ s32 sceNet_lib_5505D820(void);
 s32 sceNet_lib_572AD6ED(s32 arg0);
 s32 sceNet_lib_5C7C7381(void);
 s32 sceNet_lib_6DC71518(void);
-s32 sceNet_lib_757085B0(void *arg0, s32 arg1);
+s32 sceNet_lib_757085B0(struct Unk_sceNet_lib_757085B0_0 *arg0, s32 arg1);
 s32 sceNet_lib_7AE91FB4(void);
 void sceNet_lib_7C3B86C5(s32 arg0);
 u8 *sceNet_lib_80C9F02A(u8 *arg0, u8 *arg1);
 s32 sceNet_lib_86B6DCD9(s32 arg0);
 s32 sceNet_lib_87DC7A7E(void);
 s32 sceNet_lib_8C55B410(void);
-void sceNet_lib_92633D8D(void *arg0, s32 *arg1);
+void sceNet_lib_92633D8D(struct Unk_sceNet_lib_92633D8D_0 *arg0, s32 *arg1);
 s32 sceNet_lib_949F1FBB(void);
 s32 sceNet_lib_991FF86D(s32 arg0);
 s32 sceNet_lib_B3A48B7F(s32 arg0, s32 arg1);
 M2C_UNK *sceNet_lib_B68E1EEA(void);
 s32 sceNet_lib_B8C4A858(s32, s32);
 void sceNet_lib_B9C780C7(s32 *arg0);
-void sceNet_lib_C21E18B2(void *arg0);
+void sceNet_lib_C21E18B2(struct Unk_sceNet_lib_C21E18B2_0 *arg0);
 s32 sceNet_lib_C2EC2EEA(s32 *arg0, s32 *arg1, s32 *arg2, u8 *arg3);
-void sceNet_lib_C9C97945(void *arg0);
+void sceNet_lib_C9C97945(struct Unk_sceNet_lib_C9C97945_0 *arg0);
 s32 sceNet_lib_CF705E46(s32, s32, s32, s32, s32, s32, s32, s32);
 void sceNet_lib_DCBC596E(void);
 s32 sceNet_lib_E155112D(s32 arg0, s32 arg1);

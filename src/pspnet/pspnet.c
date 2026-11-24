@@ -160,16 +160,16 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_BB2B3DDB);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_6D5D42D7);
 
-void sceNet_lib_C21E18B2(void *arg0) {
+void sceNet_lib_C21E18B2(struct Unk_sceNet_lib_C21E18B2_0 *arg0) {
     sceKernelWaitSema(D_0000A868, 1, NULL);
-    M2C_FIELD(arg0, u16 *, 0xC) = (u16) (M2C_FIELD(arg0, u16 *, 0xC) - 1);
+    arg0->unkC = (u16) (arg0->unkC - 1);
     sceKernelSignalSema(D_0000A868, 1);
 }
 
-s32 sceNet_lib_757085B0(void *arg0, s32 arg1) {
+s32 sceNet_lib_757085B0(struct Unk_sceNet_lib_757085B0_0 *arg0, s32 arg1) {
     sceKernelWaitSema(D_0000A868, 1, NULL);
-    M2C_FIELD(arg0, s32 *, 0x10) = arg1;
-    M2C_FIELD(arg0, u16 *, 0xC) = (u16) (M2C_FIELD(arg0, u16 *, 0xC) - 1);
+    arg0->unk10 = arg1;
+    arg0->unkC = (u16) (arg0->unkC - 1);
     sceKernelSignalSema(D_0000A868, 1);
     return (arg1 == 0) ? 0 : -1;
 }
@@ -259,14 +259,14 @@ void func_00003380(void) {
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_205E8D17);
 
-void func_00003400(void *arg0) {
+void func_00003400(struct Unk_func_00003400_0 *arg0) {
     sceKernelWaitSema(D_0000A874, 1, NULL);
-    if (M2C_FIELD(arg0, s32 *, 0x20) == 0) {
+    if (arg0->unk20 == 0) {
 
     } else {
-        M2C_FIELD(arg0, s32 *, 0x20) = 0;
-        M2C_FIELD(arg0, s32 *, 0x48) = (s32) (M2C_FIELD(arg0, s32 *, 0x48) | 1);
-        sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x4C), 1);
+        arg0->unk20 = 0;
+        arg0->unk48 = (s32) (arg0->unk48 | 1);
+        sceKernelSignalSema(arg0->unk4C, 1);
     }
     sceKernelSignalSema(D_0000A874, 1);
 }
@@ -275,14 +275,14 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_7574FDA1);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_B8C4A858);
 
-void sceNet_lib_C9C97945(void *arg0) {
+void sceNet_lib_C9C97945(struct Unk_sceNet_lib_C9C97945_0 *arg0) {
     sceKernelWaitSema(D_0000A874, 1, NULL);
-    M2C_FIELD(arg0, s32 *, 0x48) = (s32) (M2C_FIELD(arg0, s32 *, 0x48) | 2);
-    if (M2C_FIELD(arg0, s32 *, 0x20) == 0) {
+    arg0->unk48 = (s32) (arg0->unk48 | 2);
+    if (arg0->unk20 == 0) {
 
     } else {
-        M2C_FIELD(arg0, s32 *, 0x20) = 0;
-        sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x4C), 1);
+        arg0->unk20 = 0;
+        sceKernelSignalSema(arg0->unk4C, 1);
     }
     sceKernelSignalSema(D_0000A874, 1);
 }
@@ -349,8 +349,8 @@ void sceNet_lib_41FD8B5C(void) {
     sceNetIfhandle_lib_76BAD213();
 }
 
-void sceNet_lib_92633D8D(void *arg0, s32 *arg1) {
-    *arg1 = M2C_FIELD(arg0, s32 *, 8);
+void sceNet_lib_92633D8D(struct Unk_sceNet_lib_92633D8D_0 *arg0, s32 *arg1) {
+    *arg1 = arg0->unk8;
 }
 
 void sceNet_lib_B9C780C7(s32 *arg0) {
@@ -438,11 +438,11 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_D5A03BC0);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_EDB11CB4);
 
-void func_00005744(void *arg0) {
+void func_00005744(struct Unk_func_00005744_0 *arg0) {
     void *var_a0;
     void *var_s0;
 
-    var_s0 = M2C_FIELD(arg0, void **, 0);
+    var_s0 = arg0->unk0;
     var_a0 = var_s0;
     if (var_s0 != NULL) {
         do {
@@ -451,9 +451,9 @@ void func_00005744(void *arg0) {
             var_a0 = var_s0;
         } while (var_s0 != NULL);
     }
-    M2C_FIELD(arg0, void **, 0) = NULL;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+    arg0->unk0 = NULL;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_13A8B98A);
@@ -608,11 +608,11 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_75D9985C);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_0000795C);
 
-void sceNetEtherNtostr(void *arg0, s32 arg1) {
+void sceNetEtherNtostr(struct Unk_sceNetEtherNtostr_0 *arg0, s32 arg1) {
     if (((arg0 == NULL) | (arg1 == 0)) != 0) {
 
     } else {
-        sceNet_lib_CF705E46(arg1, (s32) "%02x:%02x:%02x:%02x:%02x:%02x", (s32) M2C_FIELD(arg0, u8 *, 0), (s32) M2C_FIELD(arg0, u8 *, 1), (s32) M2C_FIELD(arg0, u8 *, 2), (s32) M2C_FIELD(arg0, u8 *, 3), (s32) M2C_FIELD(arg0, u8 *, 4), (s32) M2C_FIELD(arg0, u8 *, 5));
+        sceNet_lib_CF705E46(arg1, (s32) "%02x:%02x:%02x:%02x:%02x:%02x", (s32) arg0->unk0, (s32) arg0->unk1, (s32) arg0->unk2, (s32) arg0->unk3, (s32) arg0->unk4, (s32) arg0->unk5);
     }
 }
 

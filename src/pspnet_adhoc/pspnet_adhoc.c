@@ -112,8 +112,8 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00002AFC)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00002CD4);
 
-s32 func_00002D20(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
+s32 func_00002D20(struct Unk_func_00002D20_0 *arg0, s32 arg1) {
+    arg0->unk1C = arg1;
     return 0;
 }
 
@@ -141,8 +141,8 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", sceNetAdhocPtp
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00003A68);
 
-void func_00003BB0(void *arg0) {
-    func_00004B30(M2C_FIELD(arg0, s32 *, 0x14));
+void func_00003BB0(struct Unk_func_00003BB0_0 *arg0) {
+    func_00004B30(arg0->unk14);
     func_00004AE4((s32) arg0);
     func_00000FFC((s32) arg0);
 }
@@ -187,27 +187,27 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_0000532C)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_000053EC);
 
-s32 func_00005594(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0x34) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x4C) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x38) = 1;
-    M2C_FIELD(arg0, s32 *, 0x50) = 1;
+s32 func_00005594(struct Unk_func_00005594_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk34 = arg1;
+    arg0->unk4C = arg2;
+    arg0->unk38 = 1;
+    arg0->unk50 = 1;
     return 0;
 }
 
-void func_000055B0(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0xCC) = arg1;
-    M2C_FIELD(arg0, s32 *, 0xD0) = arg2;
+void func_000055B0(struct Unk_func_000055B0_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unkCC = arg1;
+    arg0->unkD0 = arg2;
 }
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_000055BC);
 
-s32 func_000056E4(void *arg0, s32 arg1) {
+s32 func_000056E4(struct Unk_func_000056E4_0 *arg0, s32 arg1) {
     void *temp_a2;
 
-    M2C_FIELD(arg0, s32 *, 0x5C) = 1;
-    M2C_FIELD(arg0, s32 *, 0xDC) = arg1;
-    temp_a2 = M2C_FIELD(arg0, void **, 0x58);
+    arg0->unk5C = 1;
+    arg0->unkDC = arg1;
+    temp_a2 = arg0->unk58;
     M2C_FIELD(temp_a2, s32 *, 0xC) = (s32) (M2C_FIELD(temp_a2, s32 *, 0xC) | 0x1000);
     return 0;
 }

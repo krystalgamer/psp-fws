@@ -2,10 +2,10 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-void func_0009B194(void *arg0) {
+void func_0009B194(struct Unk_func_0009B194_0 *arg0) {
     s32 temp_s0;
 
-    temp_s0 = M2C_FIELD(arg0, s32 *, 0x14);
+    temp_s0 = arg0->unk14;
     if (temp_s0 != 0) {
         func_00090730(*func_0009F1C0(), temp_s0, 0);
     }
@@ -59,11 +59,11 @@ void func_0009B6F8(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B194", func_0009B73C);
 
-void func_0009B788(void *arg0) {
+void func_0009B788(struct Unk_func_0009B788_0 *arg0) {
     s32 temp_s0;
 
-    if (M2C_FIELD(arg0, s32 *, 4) != 0) {
-        temp_s0 = M2C_FIELD(arg0, s32 *, 8);
+    if (arg0->unk4 != 0) {
+        temp_s0 = arg0->unk8;
         if (temp_s0 != 0) {
             func_00090730(*func_0009F1C0(), temp_s0, 0);
         }

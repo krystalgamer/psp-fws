@@ -12,15 +12,15 @@ s32 module_stop(void) {
     return 0;
 }
 
-void func_0000015C(void *arg0) {
-    M2C_FIELD(arg0, s8 *, 0x1FD) = 0;
-    M2C_FIELD(arg0, s8 *, 0x1FE) = 0;
+void func_0000015C(struct Unk_func_0000015C_0 *arg0) {
+    arg0->unk1FD = 0;
+    arg0->unk1FE = 0;
     scePaf_86B41BA3();
 }
 
-void func_00000180(void *arg0) {
-    M2C_FIELD(arg0, s8 *, 0x1FD) = 0;
-    M2C_FIELD(arg0, s8 *, 0x1FE) = 0;
+void func_00000180(struct Unk_func_00000180_0 *arg0) {
+    arg0->unk1FD = 0;
+    arg0->unk1FE = 0;
     scePaf_86B41BA3();
 }
 

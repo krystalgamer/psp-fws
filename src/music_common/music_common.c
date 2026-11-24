@@ -77,8 +77,8 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_00002208)
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", func_000022A4);
 
-u8 func_00002340(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 8);
+u8 func_00002340(struct Unk_func_00002340_0 *arg0) {
+    return arg0->unk8;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common", music_common_8442A3B0);

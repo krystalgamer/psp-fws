@@ -3,10 +3,10 @@
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009B7D4);
 
-void func_0009B7FC(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0x14) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x18) = (s32) M2C_FIELD(arg0, s32 *, 0xC);
-    M2C_FIELD(arg0, s32 *, 0x20) = arg2;
+void func_0009B7FC(struct Unk_func_0009B7FC_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk14 = arg1;
+    arg0->unk18 = (s32) arg0->unkC;
+    arg0->unk20 = arg2;
     func_0009BB48((s32) arg0, 0);
     if (arg2 == 0) {
 
@@ -76,12 +76,12 @@ void func_0009C180(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     sceHVNetfront_Module_74FB57AC(1, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg_sp0);
 }
 
-s32 func_0009C1E8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8);
+s32 func_0009C1E8(struct Unk_func_0009C1E8_0 *arg0) {
+    return arg0->unk8;
 }
 
-s32 func_0009C1F0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x104) != 0;
+s32 func_0009C1F0(struct Unk_func_0009C1F0_0 *arg0) {
+    return arg0->unk104 != 0;
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C1FC);
@@ -108,28 +108,28 @@ void func_0009C350(void) {
     func_0006C390();
 }
 
-void func_0009C36C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s8 *, 0x1052) = (s8) (arg1 != 0);
+void func_0009C36C(struct Unk_func_0009C36C_0 *arg0, s32 arg1) {
+    arg0->unk1052 = (s8) (arg1 != 0);
 }
 
-void func_0009C378(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0xB60) = arg1;
+void func_0009C378(struct Unk_func_0009C378_0 *arg0, s32 arg1) {
+    arg0->unkB60 = arg1;
 }
 
-void func_0009C380(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x10D4) = arg1;
+void func_0009C380(struct Unk_func_0009C380_0 *arg0, s32 arg1) {
+    arg0->unk10D4 = arg1;
 }
 
-void func_0009C388(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0xBD8) = arg1;
+void func_0009C388(struct Unk_func_0009C388_0 *arg0, s32 arg1) {
+    arg0->unkBD8 = arg1;
 }
 
-void func_0009C390(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x10D0) = arg1;
+void func_0009C390(struct Unk_func_0009C390_0 *arg0, s32 arg1) {
+    arg0->unk10D0 = arg1;
 }
 
-void func_0009C398(void *arg0, s16 arg1) {
-    M2C_FIELD(arg0, s16 *, 0x10E4) = arg1;
+void func_0009C398(struct Unk_func_0009C398_0 *arg0, s16 arg1) {
+    arg0->unk10E4 = arg1;
 }
 
 void func_0009C3A0(void) {
@@ -152,11 +152,11 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C3BC);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C4D0);
 
-s32 func_0009C518(void *arg0) {
+s32 func_0009C518(struct Unk_func_0009C518_0 *arg0) {
     s32 temp_s0;
 
-    temp_s0 = func_0009C4D0(M2C_FIELD(arg0, s8 *, 0)) * 0x10;
-    return temp_s0 + func_0009C4D0(M2C_FIELD(arg0, s8 *, 1));
+    temp_s0 = func_0009C4D0(arg0->unk0) * 0x10;
+    return temp_s0 + func_0009C4D0(arg0->unk1);
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009C55C);
@@ -165,12 +165,12 @@ void func_0009CCCC(void) {
     func_0006C30C();
 }
 
-void func_0009CCE8(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x1070) = 9;
-    M2C_FIELD(arg0, s32 *, 0x1074) = 1;
+void func_0009CCE8(struct Unk_func_0009CCE8_0 *arg0) {
+    arg0->unk1070 = 9;
+    arg0->unk1074 = 1;
 }
 
-void func_0009CCFC(void *arg0) {
+void func_0009CCFC(struct Unk_func_000725B0_0 *arg0) {
     func_000725B0(arg0);
 }
 
@@ -186,12 +186,12 @@ s32 func_0009CD50(s32 arg0) {
     return arg0 + 0x10B0;
 }
 
-s32 func_0009CD58(void *arg0) {
+s32 func_0009CD58(struct Unk_func_0009CD58_0 *arg0) {
     s32 var_s1;
     void **temp_v0;
 
     var_s1 = 0;
-    temp_v0 = func_000000E8(M2C_FIELD(M2C_FIELD(arg0, void **, 0xFFC), s32 *, 4));
+    temp_v0 = func_000000E8(M2C_FIELD(arg0->unkFFC, s32 *, 4));
     if ((temp_v0 != NULL) && (M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0) != 0)) {
         var_s1 = M2C_FIELD(*temp_v0, s32 (**)(void **), 8)(temp_v0);
     }
@@ -204,8 +204,8 @@ void func_0009CE3C(s32 arg0) {
     func_0009F1FC(arg0, 1);
 }
 
-s32 func_0009CE58(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1098) != 0;
+s32 func_0009CE58(struct Unk_func_0009CE58_0 *arg0) {
+    return arg0->unk1098 != 0;
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009CE64);
@@ -214,20 +214,20 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009CFCC);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009D044);
 
-s32 func_0009D110(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8);
+s32 func_0009D110(struct Unk_func_0009D110_0 *arg0) {
+    return arg0->unk8;
 }
 
-s32 func_0009D118(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10D0);
+s32 func_0009D118(struct Unk_func_0009D118_0 *arg0) {
+    return arg0->unk10D0;
 }
 
-void func_0009D120(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x1098) = arg1;
+void func_0009D120(struct Unk_func_0009D120_0 *arg0, s32 arg1) {
+    arg0->unk1098 = arg1;
 }
 
-void func_0009D128(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x10E0) = arg1;
+void func_0009D128(struct Unk_func_0009D128_0 *arg0, s32 arg1) {
+    arg0->unk10E0 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009D130);

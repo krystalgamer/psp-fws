@@ -223,14 +223,14 @@ INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", sceAta_driver_010F750B);
 
 INCLUDE_ASM("tmp/asm/282/ata/nonmatchings/ata", func_00002718);
 
-s32 func_0000277C(void *arg0, void *arg1, s32 arg2) {
+s32 func_0000277C(struct Unk_func_0000277C_0 *arg0, struct Unk_func_0000277C_1 *arg1, s32 arg2) {
     s32 var_v0;
 
     var_v0 = 0x80211008;
     if (((arg0 == NULL) | (arg1 == NULL)) == 0) {
         var_v0 = 0;
-        M2C_FIELD(arg0, void **, 0x1C) = arg1;
-        M2C_FIELD(arg1, s32 *, 0xC) = arg2;
+        arg0->unk1C = arg1;
+        arg1->unkC = arg2;
     }
     return var_v0;
 }

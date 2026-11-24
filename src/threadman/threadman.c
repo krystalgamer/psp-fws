@@ -37,18 +37,18 @@ s32 func_00000448(s32 arg0, s32 arg1) {
     return var_s2;
 }
 
-void func_000004CC(void *arg0) {
+void func_000004CC(struct Unk_func_000004CC_0 *arg0) {
     s32 temp_v1;
     s32 temp_v1_2;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0x38);
-    M2C_FIELD(arg0, s32 *, 0x54) = 0;
+    temp_v1 = arg0->unk38;
+    arg0->unk54 = 0;
     if (temp_v1 != 0) {
-        func_0000EA04(temp_v1, M2C_FIELD(arg0, s32 *, 0x3C));
-        M2C_FIELD(arg0, s32 *, 0x38) = 0;
-        M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+        func_0000EA04(temp_v1, arg0->unk3C);
+        arg0->unk38 = 0;
+        arg0->unk3C = 0;
     }
-    temp_v1_2 = M2C_FIELD(arg0, s32 *, 0x20);
+    temp_v1_2 = arg0->unk20;
     if (temp_v1_2 == 0) {
 
     } else {
@@ -69,12 +69,12 @@ s32 func_00000554(void) {
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00000590);
 
-s32 func_000006C8(void *arg0, void *arg1) {
+s32 func_000006C8(void *arg0, struct Unk_func_000006C8_1 *arg1) {
     void *temp_a0;
     void *temp_a1;
 
     SysMemForKernel_CE05CCB7();
-    temp_a0 = arg0 + (M2C_FIELD(arg1, u8 *, 0x15) * 4);
+    temp_a0 = arg0 + (arg1->unk15 * 4);
     M2C_FIELD(temp_a0, s32 *, 4) = 0;
     temp_a1 = temp_a0 + 0xC;
     M2C_FIELD(temp_a0, s32 *, 8) = 0;
@@ -92,10 +92,10 @@ s32 func_000008C8(void) {
     return 0;
 }
 
-s32 func_000008D0(s32 arg0, void *arg1) {
+s32 func_000008D0(s32 arg0, struct Unk_func_000008D0_1 *arg1) {
     void *temp_a1;
 
-    temp_a1 = arg0 + (M2C_FIELD(arg1, u8 *, 0x15) * 4);
+    temp_a1 = arg0 + (arg1->unk15 * 4);
     M2C_FIELD(temp_a1, s32 *, 8) = (s32) (M2C_FIELD(temp_a1, s32 *, 8) - 1);
     return 0;
 }
@@ -167,16 +167,16 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_000023C4);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00002448);
 
-s32 func_0000261C(void *arg0) {
+s32 func_0000261C(struct Unk_func_0000261C_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00002644);
 
-s32 func_0000275C(void *arg0) {
+s32 func_0000275C(struct Unk_func_0000275C_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00002784);
@@ -211,11 +211,11 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelDelaySysClo
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelDelaySysClockThreadCB);
 
-void func_00003CF8(void *arg0) {
+void func_00003CF8(struct Unk_func_00003CF8_0 *arg0) {
     s32 temp_v0;
 
     temp_v0 = sceKernelCpuSuspendIntr();
-    M2C_FIELD(arg0, s32 *, 0x38) = 0;
+    arg0->unk38 = 0;
     if (func_0000022C((s32) arg0) > 0) {
         D_00016C78 = 0;
     }
@@ -242,9 +242,9 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016630);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00004ADC);
 
-s32 func_00004B20(void *arg0) {
+s32 func_00004B20(struct Unk_func_00004B20_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 s32 func_00004B48(void) {
@@ -276,9 +276,9 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016664);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00005BF0);
 
-s32 func_00005C34(void *arg0) {
+s32 func_00005C34(struct Unk_func_00005C34_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 s32 func_00005C5C(void) {
@@ -308,9 +308,9 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016690);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00006D28);
 
-s32 func_00006D6C(void *arg0) {
+s32 func_00006D6C(struct Unk_func_00006D6C_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 s32 func_00006D94(void) {
@@ -342,9 +342,9 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00007BB8);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00007BFC);
 
-s32 func_00007CFC(void *arg0) {
+s32 func_00007CFC(struct Unk_func_00007CFC_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 s32 func_00007D24(void) {
@@ -382,16 +382,16 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_0001671C);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_00009B50);
 
-s32 func_00009B94(void *arg0) {
+s32 func_00009B94(struct Unk_func_00009B94_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
-s32 func_00009BBC(s32 arg0, void *arg1, s32 arg2, s32 arg3) {
+s32 func_00009BBC(s32 arg0, struct Unk_func_00009BBC_1 *arg1, s32 arg2, s32 arg3) {
     u8 temp_a1;
     void *temp_v0;
 
-    temp_a1 = M2C_FIELD(arg1, u8 *, 0x15);
+    temp_a1 = arg1->unk15;
     temp_v0 = arg0 + (temp_a1 * 4);
     if (M2C_FIELD(temp_v0, s32 *, 0x14) == 0) {
 
@@ -428,9 +428,9 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016754);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000AB94);
 
-s32 func_0000ABD8(void *arg0) {
+s32 func_0000ABD8(struct Unk_func_0000ABD8_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000AC00);
@@ -461,9 +461,9 @@ INCLUDE_RODATA("tmp/asm/282/threadman/nonmatchings/threadman", D_00016778);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000BC68);
 
-s32 func_0000BCAC(void *arg0) {
+s32 func_0000BCAC(struct Unk_func_0000BCAC_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000BCD4);
@@ -570,9 +570,9 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000EE74);
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", func_0000EFF4);
 
-s32 func_0000F140(void *arg0) {
+s32 func_0000F140(struct Unk_func_0000F140_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 s32 func_0000F168(void) {
@@ -580,9 +580,9 @@ s32 func_0000F168(void) {
     return 0;
 }
 
-s32 func_0000F188(void *arg0) {
+s32 func_0000F188(struct Unk_func_0000F188_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 s32 func_0000F1B0(void) {
@@ -590,9 +590,9 @@ s32 func_0000F1B0(void) {
     return 0;
 }
 
-s32 func_0000F1D0(void *arg0) {
+s32 func_0000F1D0(struct Unk_func_0000F1D0_0 *arg0) {
     SysMemForKernel_CE05CCB7();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+    return arg0->unkC;
 }
 
 s32 func_0000F1F8(void) {
@@ -600,11 +600,11 @@ s32 func_0000F1F8(void) {
     return 0;
 }
 
-s32 func_0000F218(void *arg0, void *arg1) {
+s32 func_0000F218(void *arg0, struct Unk_func_0000F218_1 *arg1) {
     void *temp_a0;
 
     SysMemForKernel_CE05CCB7();
-    temp_a0 = arg0 + (M2C_FIELD(arg1, u8 *, 0x15) * 4);
+    temp_a0 = arg0 + (arg1->unk15 * 4);
     M2C_FIELD(temp_a0, s32 *, 0x10) = 0;
     M2C_FIELD(temp_a0, void **, 4) = temp_a0;
     M2C_FIELD(temp_a0, void **, 0) = temp_a0;
@@ -684,17 +684,17 @@ INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", sceKernelGetThreadEx
 
 INCLUDE_ASM("tmp/asm/282/threadman/nonmatchings/threadman", ThreadManForKernel_BC31C1B9);
 
-void func_000127F8(void *arg0, s32 arg1) {
+void func_000127F8(struct Unk_func_000127F8_0 *arg0, s32 arg1) {
     void *var_s0;
 
-    if (M2C_FIELD(arg0, s32 *, 0xD8) & 0x200000) {
+    if (arg0->unkD8 & 0x200000) {
         sceKernelCpuResumeIntr(arg1);
-        sceKernelMemset(M2C_FIELD(arg0, void **, 0x78), 0, M2C_FIELD(arg0, u32 *, 0x7C));
-        if (M2C_FIELD(arg0, s32 *, 0xD8) < 0) {
-            sceKernelMemset(M2C_FIELD(arg0, void **, 0x84), 0, M2C_FIELD(arg0, u32 *, 0x88));
-            var_s0 = M2C_FIELD(arg0, void **, 0x8C);
+        sceKernelMemset(arg0->unk78, 0, arg0->unk7C);
+        if (arg0->unkD8 < 0) {
+            sceKernelMemset(arg0->unk84, 0, arg0->unk88);
+            var_s0 = arg0->unk8C;
         } else {
-            var_s0 = M2C_FIELD(arg0, void **, 0x8C);
+            var_s0 = arg0->unk8C;
         }
         if (var_s0 != NULL) {
             do {

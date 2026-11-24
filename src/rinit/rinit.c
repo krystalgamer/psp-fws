@@ -374,18 +374,18 @@ INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00001908);
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00001A90);
 
-s32 func_00001AF8(s32 arg0, void *arg1) {
+s32 func_00001AF8(s32 arg0, struct Unk_func_00001AF8_1 *arg1) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_FIELD(arg1, s32 *, 8) == 0) {
-        M2C_FIELD(arg1, s32 *, 4) = 0;
+    if (arg1->unk8 == 0) {
+        arg1->unk4 = 0;
     } else {
         temp_v0 = func_00005DD4(arg0, (s32) arg1);
         var_v1 = temp_v0;
-        M2C_FIELD(arg1, s32 *, 8) = 0;
-        M2C_FIELD(arg1, s32 *, 4) = 0;
+        arg1->unk8 = 0;
+        arg1->unk4 = 0;
     }
     return var_v1;
 }
@@ -548,12 +548,12 @@ void func_0000737C(void) {
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_000073B8);
 
-void func_00007470(void *arg0, void *arg1) {
+void func_00007470(struct Unk_func_00007470_0 *arg0, struct Unk_func_00007470_1 *arg1) {
     void **temp_v0;
 
     if (arg1 != NULL) {
-        temp_v0 = (M2C_FIELD(arg1, s32 *, 4) * 4) + M2C_FIELD(arg0, s32 *, 0x4C);
-        M2C_FIELD(arg1, void **, 0) = (void *) *temp_v0;
+        temp_v0 = (arg1->unk4 * 4) + arg0->unk4C;
+        arg1->unk0 = (void *) *temp_v0;
         *temp_v0 = arg1;
     }
 }
@@ -632,34 +632,34 @@ s32 func_00008894(s32 *arg0, s32 arg1) {
     return temp_v0;
 }
 
-s32 func_000088F0(void *arg0, s32 arg1, s32 arg2) {
+s32 func_000088F0(struct Unk_func_000088F0_0 *arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
 
-    temp_v0 = func_00008E34(D_0000F138, (s32) M2C_FIELD(arg0, s16 *, 0xE), arg1, arg2);
+    temp_v0 = func_00008E34(D_0000F138, (s32) arg0->unkE, arg1, arg2);
     if (temp_v0 >= 0) {
-        M2C_FIELD(arg0, s32 *, 0x50) = (s32) (M2C_FIELD(arg0, s32 *, 0x50) + temp_v0);
+        arg0->unk50 = (s32) (arg0->unk50 + temp_v0);
     } else {
-        M2C_FIELD(arg0, u16 *, 0xC) = (u16) (M2C_FIELD(arg0, u16 *, 0xC) & 0xEFFF);
+        arg0->unkC = (u16) (arg0->unkC & 0xEFFF);
     }
     return temp_v0;
 }
 
-void func_00008958(void *arg0, s32 arg1, s32 arg2) {
+void func_00008958(struct Unk_func_00008958_0 *arg0, s32 arg1, s32 arg2) {
     u16 var_v1;
 
-    var_v1 = M2C_FIELD(arg0, u16 *, 0xC);
+    var_v1 = arg0->unkC;
     if (var_v1 & 0x100) {
-        func_00008DCC(D_0000F138, (s32) M2C_FIELD(arg0, s16 *, 0xE), 0, 2);
-        var_v1 = M2C_FIELD(arg0, u16 *, 0xC);
+        func_00008DCC(D_0000F138, (s32) arg0->unkE, 0, 2);
+        var_v1 = arg0->unkC;
     }
-    M2C_FIELD(arg0, u16 *, 0xC) = (u16) (var_v1 & 0xEFFF);
-    func_00008BE4(D_0000F138, (s32) M2C_FIELD(arg0, s16 *, 0xE), arg1, arg2);
+    arg0->unkC = (u16) (var_v1 & 0xEFFF);
+    func_00008BE4(D_0000F138, (s32) arg0->unkE, arg1, arg2);
 }
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_000089E0);
 
-void func_00008A4C(void *arg0) {
-    func_00008D0C(D_0000F138, (s32) M2C_FIELD(arg0, s16 *, 0xE));
+void func_00008A4C(struct Unk_func_00008A4C_0 *arg0) {
+    func_00008D0C(D_0000F138, (s32) arg0->unkE);
 }
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00008A70);

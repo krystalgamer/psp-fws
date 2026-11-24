@@ -2,61 +2,61 @@
 #include "common.h"
 #include "mcore_decls.h"
 
-s32 func_00020318(void *arg0, s32 arg1, s32 arg2) {
+s32 func_00020318(struct Unk_func_00020318_0 *arg0, s32 arg1, s32 arg2) {
     s32 var_a3;
 
     var_a3 = 0x10000000;
     if (arg0 != NULL) {
         var_a3 = 0x10000004;
-        if (M2C_FIELD(arg0, u8 *, 2) == 0x17) {
+        if (arg0->unk2 == 0x17) {
             var_a3 = func_0001FF64((s32) arg0, arg1, arg2);
         }
     }
     return var_a3;
 }
 
-s32 func_00020354(void *arg0, s32 arg1) {
+s32 func_00020354(struct Unk_func_00020354_0 *arg0, s32 arg1) {
     s32 var_a3;
 
     var_a3 = 0x10000000;
     if (arg0 != NULL) {
         var_a3 = 0x10000004;
-        if (M2C_FIELD(arg0, u8 *, 2) == 0x18) {
+        if (arg0->unk2 == 0x18) {
             var_a3 = func_0001FF64((s32) arg0, 0, arg1);
         }
     }
     return var_a3;
 }
 
-s32 func_00020398(void *arg0, s32 arg1, s32 arg2) {
+s32 func_00020398(struct Unk_func_00020398_0 *arg0, s32 arg1, s32 arg2) {
     s32 var_a3;
 
     var_a3 = 0x10000000;
     if (arg0 != NULL) {
         var_a3 = 0x10000004;
-        if (M2C_FIELD(arg0, u8 *, 2) == 0x17) {
+        if (arg0->unk2 == 0x17) {
             var_a3 = func_000202B4((s32) arg0, arg1, arg2);
         }
     }
     return var_a3;
 }
 
-s32 func_000203D4(void *arg0, s32 arg1) {
+s32 func_000203D4(struct Unk_func_000203D4_0 *arg0, s32 arg1) {
     s32 var_a3;
 
     var_a3 = 0x10000000;
     if (arg0 != NULL) {
         var_a3 = 0x10000004;
-        if (M2C_FIELD(arg0, u8 *, 2) == 0x18) {
+        if (arg0->unk2 == 0x18) {
             var_a3 = func_000202B4((s32) arg0, 0, arg1);
         }
     }
     return var_a3;
 }
 
-s32 func_00020418(s8 arg0, void *arg1) {
-    M2C_FIELD(arg1, s8 *, 0) = 2;
-    M2C_FIELD(arg1, s8 *, 2) = arg0;
+s32 func_00020418(s8 arg0, struct Unk_func_00020418_1 *arg1) {
+    arg1->unk0 = 2;
+    arg1->unk2 = arg0;
     return 0;
 }
 
@@ -268,8 +268,8 @@ void func_00023810(void **arg0, s32 arg1) {
     M2C_FIELD(temp_v0, s16 *, 2) = 1;
 }
 
-s32 func_0002385C(void *arg0) {
-    return M2C_FIELD(arg0, u16 *, 2) << 5;
+s32 func_0002385C(struct Unk_func_0002385C_0 *arg0) {
+    return arg0->unk2 << 5;
 }
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_00023868);
@@ -286,9 +286,9 @@ INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_00023F18);
 
 INCLUDE_ASM("tmp/asm/340/mcore/nonmatchings/mcore_020318", func_00023FF8);
 
-void func_00024014(void *arg0) {
+void func_00024014(struct Unk_func_00024014_0 *arg0) {
     if (func_00024994() == 0) {
-        M2C_FIELD(arg0, u8 *, 1) = (u8) (1 - M2C_FIELD(arg0, u8 *, 1));
+        arg0->unk1 = (u8) (1 - arg0->unk1);
     }
 }
 

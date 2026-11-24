@@ -40,21 +40,21 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009380", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_009380", func_0000948C);
 
-void func_000094B8(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = sceKernelCreateSema(&D_0002A070, 0x100U, 1, 1, NULL);
-    M2C_FIELD(arg0, s32 *, 4) = -1;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s8 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = sceKernelCreateEventFlag(&D_0002A07C, 0x200U, 1U, NULL);
+void func_000094B8(struct Unk_func_000094B8_0 *arg0) {
+    arg0->unk0 = sceKernelCreateSema(&D_0002A070, 0x100U, 1, 1, NULL);
+    arg0->unk4 = -1;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
+    arg0->unk4 = sceKernelCreateEventFlag(&D_0002A07C, 0x200U, 1U, NULL);
 }
 
-void func_00009528(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = sceKernelCreateSema(&D_0002A070, 0x100U, 1, 1, NULL);
-    M2C_FIELD(arg0, s32 *, 4) = -1;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s8 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = sceKernelCreateEventFlag(&D_0002A07C, 0x200U, 1U, NULL);
+void func_00009528(struct Unk_func_00009528_0 *arg0) {
+    arg0->unk0 = sceKernelCreateSema(&D_0002A070, 0x100U, 1, 1, NULL);
+    arg0->unk4 = -1;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
+    arg0->unk4 = sceKernelCreateEventFlag(&D_0002A07C, 0x200U, 1U, NULL);
 }
 

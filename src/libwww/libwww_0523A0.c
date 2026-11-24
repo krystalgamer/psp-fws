@@ -2,13 +2,13 @@
 #include "common.h"
 #include "libwww_decls.h"
 
-void func_000523A0(void *arg0) {
+void func_000523A0(struct Unk_func_000523A0_0 *arg0) {
     void *temp_v1;
     void *temp_v1_2;
 
-    temp_v1 = M2C_FIELD(arg0, void **, 0x90);
+    temp_v1 = arg0->unk90;
     M2C_FIELD(temp_v1, s32 *, 0x20) = __builtin_allegrex_ins(M2C_FIELD(temp_v1, s32 *, 0x20), 0, 3, 1);
-    temp_v1_2 = M2C_FIELD(arg0, void **, 0x90);
+    temp_v1_2 = arg0->unk90;
     M2C_FIELD(temp_v1_2, s32 *, 0x20) = (s32) (M2C_FIELD(temp_v1_2, s32 *, 0x20) | 0x80);
 }
 

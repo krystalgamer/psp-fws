@@ -36,8 +36,8 @@ INCLUDE_RODATA("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54"
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", func_00011ED4);
 
-void func_00011F54(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
+void func_00011F54(struct Unk_func_00011F54_0 *arg0, s32 arg1) {
+    arg0->unk1C = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", func_00011F5C);
@@ -66,8 +66,8 @@ INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", f
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", func_000126DC);
 
-void func_00012764(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
+void func_00012764(struct Unk_func_00012764_0 *arg0, s32 arg1) {
+    arg0->unk1C = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", func_0001276C);
@@ -90,8 +90,8 @@ INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", f
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", func_00012D18);
 
-s32 func_00012D8C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_00012D8C(struct Unk_func_00012D8C_0 *arg0) {
+    return arg0->unk10;
 }
 
 INCLUDE_ASM("tmp/asm/282/savedata_plugin/nonmatchings/savedata_plugin_011C54", func_00012D94);

@@ -81,40 +81,40 @@ void func_0000E7C8(M2C_UNK **arg0) {
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000E7D8);
 
-void func_0000E800(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x30) = 0xA;
+void func_0000E800(struct Unk_func_0000E800_0 *arg0) {
+    arg0->unk30 = 0xA;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000E80C);
 
-s32 func_0000E834(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_0000E834(struct Unk_func_0000E834_0 *arg0) {
+    return arg0->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000E83C);
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000E8D4);
 
-s32 func_0000E8FC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8);
+s32 func_0000E8FC(struct Unk_func_0000E8FC_0 *arg0) {
+    return arg0->unk8;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000E904);
 
-s32 func_0000E92C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_0000E92C(struct Unk_func_0000E92C_0 *arg0) {
+    return arg0->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000E934);
 
-s32 func_0000E95C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_0000E95C(struct Unk_func_0000E95C_0 *arg0) {
+    return arg0->unk10;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000E964);
 
-s32 func_0000E98C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x14);
+s32 func_0000E98C(struct Unk_func_0000E98C_0 *arg0) {
+    return arg0->unk14;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000E994);
@@ -149,8 +149,8 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000EA90);
 
-s32 func_0000EAB8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_0000EAB8(struct Unk_func_0000EAB8_0 *arg0) {
+    return arg0->unk1C;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000EAC0);
@@ -159,8 +159,8 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000EB8C);
 
-s32 func_0000EB94(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x30);
+s32 func_0000EB94(struct Unk_func_0000EB94_0 *arg0) {
+    return arg0->unk30;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000EB9C);
@@ -169,20 +169,20 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000EBCC);
 
-s32 func_0000EBF4(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x20);
+s32 func_0000EBF4(struct Unk_func_0000EBF4_0 *arg0) {
+    return arg0->unk20;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000EBFC);
 
-s32 func_0000EC24(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x24);
+s32 func_0000EC24(struct Unk_func_0000EC24_0 *arg0) {
+    return arg0->unk24;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000EC2C);
 
-s32 func_0000EC54(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x28);
+s32 func_0000EC54(struct Unk_func_0000EC54_0 *arg0) {
+    return arg0->unk28;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0000EC5C);
@@ -253,10 +253,10 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0001059C);
 
-void func_000105F8(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_000105F8(struct Unk_func_000105F8_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00010608);
@@ -396,25 +396,25 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_000157FC);
 
-void func_000158EC(void *arg0) {
+void func_000158EC(struct Unk_func_000158EC_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00023D78;
+    temp_v1 = arg0->unk4;
+    arg0->unk0 = &D_00023D78;
     if (temp_v1 != 0) {
         scePaf_CCFF20ED(temp_v1);
-        M2C_FIELD(arg0, s32 *, 4) = 0;
+        arg0->unk4 = 0;
     }
 }
 
-void func_00015934(void *arg0) {
+void func_00015934(struct Unk_func_00015934_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00023D78;
+    temp_v1 = arg0->unk4;
+    arg0->unk0 = &D_00023D78;
     if (temp_v1 != 0) {
         scePaf_CCFF20ED(temp_v1);
-        M2C_FIELD(arg0, s32 *, 4) = 0;
+        arg0->unk4 = 0;
     }
 }
 
@@ -438,27 +438,27 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00015CD0);
 
-void func_00015DE0(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_00015DE0(struct Unk_func_00015DE0_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
-void func_00015DF0(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_00015DF0(struct Unk_func_00015DF0_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00015E00);
 
-void func_00015E74(void *arg0) {
+void func_00015E74(struct Unk_func_00015E74_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 8);
-    temp_v0 = M2C_FIELD(arg0, s32 *, 4) - 1;
-    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+    temp_v1 = arg0->unk8;
+    temp_v0 = arg0->unk4 - 1;
+    arg0->unk4 = temp_v0;
     if (temp_v0 >= (temp_v1 - 0x14)) {
 
     } else {
@@ -478,8 +478,8 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00016258);
 
-s32 func_00016318(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_00016318(struct Unk_func_00016318_0 *arg0) {
+    return arg0->unk4;
 }
 
 void func_00016320(M2C_UNK **arg0) {
@@ -552,22 +552,22 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00017154);
 
-u16 func_00017190(void *arg0) {
-    return *M2C_FIELD(arg0, u16 **, 4);
+u16 func_00017190(struct Unk_func_00017190_0 *arg0) {
+    return *arg0->unk4;
 }
 
-s32 func_0001719C(void *arg0) {
-    return *M2C_FIELD(arg0, s32 **, 4);
+s32 func_0001719C(struct Unk_func_0001719C_0 *arg0) {
+    return *arg0->unk4;
 }
 
-s32 func_000171A8(void *arg0) {
-    return *M2C_FIELD(arg0, s32 **, 4);
+s32 func_000171A8(struct Unk_func_000171A8_0 *arg0) {
+    return *arg0->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_000171B4);
 
-s32 func_000171F0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_000171F0(struct Unk_func_000171F0_0 *arg0) {
+    return arg0->unk4;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_000171F8);
@@ -633,9 +633,9 @@ void func_00017E44(M2C_UNK **arg0) {
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00017E54);
 
-void func_00017E7C(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 8) = arg2;
+void func_00017E7C(struct Unk_func_00017E7C_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk4 = arg1;
+    arg0->unk8 = arg2;
 }
 
 void func_00017E88(void) {
@@ -787,16 +787,16 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00019D74);
 
-u8 func_00019DC4(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 0x11);
+u8 func_00019DC4(struct Unk_func_00019DC4_0 *arg0) {
+    return arg0->unk11;
 }
 
 INCLUDE_RODATA("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", D_00023FE8);
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_00019DCC);
 
-s32 func_00019DD8(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 0x10) ^ 1;
+s32 func_00019DD8(struct Unk_func_00019DD8_0 *arg0) {
+    return arg0->unk10 ^ 1;
 }
 
 INCLUDE_RODATA("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", D_00024008);
@@ -845,8 +845,8 @@ void func_0001AA08(s32 **arg0) {
     scePaf_6261C0A5(arg0);
 }
 
-void func_0001AA3C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+void func_0001AA3C(struct Unk_func_0001AA3C_0 *arg0, s32 arg1) {
+    arg0->unk4 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0001AA44);
@@ -977,8 +977,8 @@ INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_00D554", func_0001B510);
 
-void func_0001BC50(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x34) = arg1;
+void func_0001BC50(struct Unk_func_0001BC50_0 *arg0, s32 arg1) {
+    arg0->unk34 = arg1;
 }
 
 s32 func_0001BC58(s32 arg0) {
@@ -989,11 +989,11 @@ void func_0001BC60(void) {
     func_0001F524();
 }
 
-s32 func_0001BC7C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x60);
+s32 func_0001BC7C(struct Unk_func_0001BC7C_0 *arg0) {
+    return arg0->unk60;
 }
 
-s32 func_0001BC84(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x30);
+s32 func_0001BC84(struct Unk_func_0001BC84_0 *arg0) {
+    return arg0->unk30;
 }
 

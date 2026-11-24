@@ -2,23 +2,23 @@
 #include "common.h"
 #include "mm_flash_decls.h"
 
-void func_0007B4F8(void *arg0, void *arg1, s32 arg2) {
+void func_0007B4F8(struct Unk_func_0007B4F8_0 *arg0, struct Unk_func_0007B4F8_1 *arg1, s32 arg2) {
     s32 var_v1;
 
-    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
+    arg0->unk18 = arg2;
     var_v1 = 1;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, void **, 0) = arg1;
+    arg0->unk10 = 0;
+    arg0->unk4 = 0;
+    arg0->unk14 = 0;
+    arg0->unk1C = 0;
+    arg0->unkC = 0;
+    arg0->unk8 = 0;
+    arg0->unk0 = arg1;
     if (arg1 != NULL) {
-        var_v1 = M2C_FIELD(arg1, s32 *, 0x188);
+        var_v1 = arg1->unk188;
     }
-    M2C_FIELD(arg0, s32 *, 0x10) = 2;
-    M2C_FIELD(arg0, s32 *, 0x64) = var_v1;
+    arg0->unk10 = 2;
+    arg0->unk64 = var_v1;
 }
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_07B4F8", func_0007B534);

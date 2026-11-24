@@ -2,10 +2,10 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-void func_00036D60(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_00036D60(struct Unk_func_00036D60_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_036D60", func_00036D70);
@@ -36,8 +36,8 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_036D60",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_036D60", func_0003752C);
 
-s32 func_000375F0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x30);
+s32 func_000375F0(struct Unk_func_000375F0_0 *arg0) {
+    return arg0->unk30;
 }
 
 s32 func_000375F8(void) {
@@ -68,7 +68,7 @@ INCLUDE_RODATA("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_036D6
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_036D60", func_00037600);
 
-s32 func_0003762C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x38);
+s32 func_0003762C(struct Unk_func_0003762C_0 *arg0) {
+    return arg0->unk38;
 }
 

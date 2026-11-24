@@ -52,12 +52,12 @@ INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00000784);
 
 INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", func_00000900);
 
-s32 func_0000127C(void *arg0) {
+s32 func_0000127C(struct Unk_func_0000127C_0 *arg0) {
     s32 var_v0;
     s32 var_v1;
 
     var_v0 = sceKernelWaitSema(D_00002A80.unk0, 1, NULL);
-    if ((var_v0 < 0) || (M2C_FIELD(arg0, s32 *, 0) = (s32) D_00002A80.unk8, M2C_FIELD(arg0, s32 *, 4) = (s32) M2C_FIELD(&D_00002A80, s32 *, 0xC), var_v0 = sceKernelSignalSema(D_00002A80.unk0, 1), var_v1 = 0, (var_v0 < 0))) {
+    if ((var_v0 < 0) || (arg0->unk0 = (s32) D_00002A80.unk8, arg0->unk4 = (s32) M2C_FIELD(&D_00002A80, s32 *, 0xC), var_v0 = sceKernelSignalSema(D_00002A80.unk0, 1), var_v1 = 0, (var_v0 < 0))) {
         var_v1 = var_v0;
     }
     return var_v1;

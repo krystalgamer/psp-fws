@@ -2,9 +2,9 @@
 #include "common.h"
 #include "pspnet_apctl_decls.h"
 
-s32 func_000016E0(void *arg0, s32 arg1) {
+s32 func_000016E0(struct Unk_func_000016E0_0 *arg0, s32 arg1) {
     if (arg1 == 6) {
-        if ((M2C_FIELD(arg0, s32 *, 0x7DC) & 0xA) == 2) {
+        if ((arg0->unk7DC & 0xA) == 2) {
             func_00002480((s32) arg0);
         }
     }

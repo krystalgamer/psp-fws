@@ -62,16 +62,16 @@ INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00000580);
 
-void func_000005A4(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000047C8;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 8) = arg2;
+void func_000005A4(struct Unk_func_000005A4_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk0 = &D_000047C8;
+    arg0->unk4 = arg1;
+    arg0->unk8 = arg2;
 }
 
-void func_000005BC(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000047C8;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 8) = arg2;
+void func_000005BC(struct Unk_func_000005BC_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unk0 = &D_000047C8;
+    arg0->unk4 = arg1;
+    arg0->unk8 = arg2;
 }
 
 void func_000005D4(M2C_UNK **arg0) {
@@ -101,13 +101,13 @@ void func_0000063C(void) {
     sceHtmlViewerHelper_05E0C3D4(0);
 }
 
-void func_00000674(void *arg0) {
+void func_00000674(struct Unk_func_00000674_0 *arg0) {
     sceHtmlViewerHelper_05E0C3D4(1);
-    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4), &D_00004770);
+    scePaf_CAF05F1D(arg0->unk4, &D_00004770);
 }
 
-void func_000006AC(void *arg0) {
-    sceHtmlViewerHelper_F27998C2(M2C_FIELD(arg0, s32 *, 8));
+void func_000006AC(struct Unk_func_000006AC_0 *arg0) {
+    sceHtmlViewerHelper_F27998C2(arg0->unk8);
 }
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_000006C8);
@@ -131,14 +131,14 @@ void func_0000088C(void) {
 
 INCLUDE_ASM("tmp/asm/282/dd_helper_utility/nonmatchings/dd_helper_utility", func_00000894);
 
-s32 func_000008C4(s32 arg0, void *arg1) {
+s32 func_000008C4(s32 arg0, struct Unk_func_000008C4_1 *arg1) {
     s32 temp_s0;
     s32 temp_v0;
 
-    temp_s0 = (M2C_FIELD(arg1, s32 *, 4) * 2) + 2;
+    temp_s0 = (arg1->unk4 * 2) + 2;
     temp_v0 = scePaf_5FAC9869(temp_s0);
     if (temp_v0 != 0) {
-        sceCccUTF8toUTF16(temp_v0, temp_s0, M2C_FIELD(arg1, s32 *, 0));
+        sceCccUTF8toUTF16(temp_v0, temp_s0, arg1->unk0);
         func_00001CFC(arg0, temp_v0);
         scePaf_545FE2DA(temp_v0);
     }

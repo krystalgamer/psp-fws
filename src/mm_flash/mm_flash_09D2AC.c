@@ -5,16 +5,16 @@ void func_0009D2AC(void **arg0) {
     M2C_FIELD(*arg0, M2C_UNK (**)(), 8)();
 }
 
-void func_0009D2D0(void *arg0, s32 arg1, s32 arg2) {
+void func_0009D2D0(struct Unk_func_000884D0_0 *arg0, s32 arg1, s32 arg2) {
     func_000884D0(arg0, arg1, arg2);
 }
 
-s32 func_0009D2EC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xB60);
+s32 func_0009D2EC(struct Unk_func_0009D2EC_0 *arg0) {
+    return arg0->unkB60;
 }
 
-s32 func_0009D2F4(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x40);
+s32 func_0009D2F4(struct Unk_func_0009D2F4_0 *arg0) {
+    return arg0->unk40;
 }
 
 s32 func_0009D2FC(s32 arg0) {
@@ -44,12 +44,12 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09D2AC", func_0009D494);
 void func_0009D4FC(void) {
 }
 
-s32 func_0009D504(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x2C);
+s32 func_0009D504(struct Unk_func_0009D504_0 *arg0) {
+    return arg0->unk2C;
 }
 
-void func_0009D50C(void *arg0) {
-    func_00031D5C(M2C_FIELD(arg0, s32 *, 0x1000));
+void func_0009D50C(struct Unk_func_0009D50C_0 *arg0) {
+    func_00031D5C(arg0->unk1000);
 }
 
 void func_0009D528(s32 arg0) {
@@ -72,8 +72,8 @@ s32 func_0009D564(s32 arg0) {
     return var_v1;
 }
 
-s32 func_0009D584(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x54);
+s32 func_0009D584(struct Unk_func_0009D584_0 *arg0) {
+    return arg0->unk54;
 }
 
 void func_0009D58C(void) {
@@ -84,12 +84,12 @@ void func_0009D5A8(void) {
     func_00071D88();
 }
 
-s32 func_0009D5C4(void *arg0) {
-    return (s32) (M2C_FIELD(arg0, s32 *, 0x4C) * 0x64) / (s32) M2C_FIELD(arg0, s32 *, 0x294);
+s32 func_0009D5C4(struct Unk_func_0009D5C4_0 *arg0) {
+    return (s32) (arg0->unk4C * 0x64) / (s32) arg0->unk294;
 }
 
-s32 func_0009D5EC(void *arg0, s32 arg1) {
-    return M2C_FIELD(arg0, s32 *, 0x2AC) >= arg1;
+s32 func_0009D5EC(struct Unk_func_0009D5EC_0 *arg0, s32 arg1) {
+    return arg0->unk2AC >= arg1;
 }
 
 void func_0009D5FC(void) {
@@ -110,8 +110,8 @@ void func_0009D6EC(void) {
     func_00059D50();
 }
 
-s32 func_0009D708(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xCAC);
+s32 func_0009D708(struct Unk_func_0009D708_0 *arg0) {
+    return arg0->unkCAC;
 }
 
 void func_0009D710(s32 arg0) {

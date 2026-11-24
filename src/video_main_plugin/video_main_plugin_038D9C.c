@@ -2,11 +2,11 @@
 #include "common.h"
 #include "video_main_plugin_decls.h"
 
-s32 func_00038D9C(void *arg0, s32 arg1, s32 arg2) {
+s32 func_00038D9C(struct Unk_func_00038D9C_0 *arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
     void *temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, void **, 0x98);
+    temp_v1 = arg0->unk98;
     var_v0 = -1;
     if (temp_v1 != NULL) {
         M2C_FIELD(temp_v1, s32 *, 0x1950) = arg2;
@@ -98,16 +98,16 @@ M2C_UNK *func_0003B634(void) {
     return "play";
 }
 
-void func_0003B640(void *arg0, void *arg1) {
-    func_0003807C(M2C_FIELD(arg1, s32 *, 0x28), M2C_FIELD(arg0, s32 *, 8), M2C_FIELD(arg0, u8 *, 0xC), M2C_FIELD(arg0, u8 *, 0xD));
+void func_0003B640(struct Unk_func_0003B640_0 *arg0, struct Unk_func_0003B640_1 *arg1) {
+    func_0003807C(arg1->unk28, arg0->unk8, arg0->unkC, arg0->unkD);
 }
 
 M2C_UNK *func_0003B66C(void) {
     return "stop";
 }
 
-void func_0003B678(void *arg0, void *arg1) {
-    func_00037FC0(M2C_FIELD(arg1, s32 *, 0x28), M2C_FIELD(arg0, u8 *, 6));
+void func_0003B678(struct Unk_func_0003B678_0 *arg0, struct Unk_func_0003B678_1 *arg1) {
+    func_00037FC0(arg1->unk28, arg0->unk6);
 }
 
 M2C_UNK *func_0003B69C(void) {

@@ -1168,13 +1168,13 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00006
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00006C38);
 
-s32 func_00006CFC(void *arg0) {
+s32 func_00006CFC(struct Unk_func_00006CFC_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 0;
     if (arg0 != NULL) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 0x1D0);
+        temp_v0 = arg0->unk1D0;
         if (temp_v0 != 0) {
             var_v1 = scePaf_8AB03D91(temp_v0, 1);
         }
@@ -1814,13 +1814,13 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0000D
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_0000D500);
 
-s32 func_0000D604(void *arg0) {
+s32 func_0000D604(struct Unk_func_0000D604_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 0;
     if (arg0 != NULL) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 0x1D0);
+        temp_v0 = arg0->unk1D0;
         if (temp_v0 != 0) {
             var_v1 = scePaf_8AB03D91(temp_v0, 1);
         }
@@ -2294,20 +2294,20 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_000175F8);
 
-void func_00017644(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x30) = -1;
+void func_00017644(struct Unk_func_00017644_0 *arg0) {
+    arg0->unk30 = -1;
     vsh_61FE226A();
 }
 
-void func_00017668(void *arg0) {
-    scePaf_F609FA81(M2C_FIELD(arg0, s32 *, 4), &D_0001EE04, 0, 0);
+void func_00017668(struct Unk_func_00017668_0 *arg0) {
+    scePaf_F609FA81(arg0->unk4, &D_0001EE04, 0, 0);
 }
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017694);
 
-void func_000176C4(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x30) = -1;
-    M2C_FIELD(arg0, s32 *, 0x34) = 0;
+void func_000176C4(struct Unk_func_000176C4_0 *arg0) {
+    arg0->unk30 = -1;
+    arg0->unk34 = 0;
     vsh_7ADF6A69();
 }
 
@@ -2325,61 +2325,61 @@ INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017924);
 
-s32 func_00017A18(void *arg0) {
+s32 func_00017A18(struct Unk_func_00017A18_0 *arg0) {
     s32 temp_s1;
     s32 var_v0;
 
     var_v0 = -1;
-    temp_s1 = M2C_FIELD(arg0, s32 *, 0x34);
+    temp_s1 = arg0->unk34;
     if (temp_s1 != 0) {
-        sceVshCommonGui_607D5C82(M2C_FIELD(arg0, s32 *, 4), temp_s1, func_00017728());
+        sceVshCommonGui_607D5C82(arg0->unk4, temp_s1, func_00017728());
         var_v0 = 0;
     }
     return var_v0;
 }
 
-s32 func_00017A68(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_00017A68(struct Unk_func_00017A68_0 *arg0) {
+    return arg0->unk4;
 }
 
-s32 func_00017A70(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8);
+s32 func_00017A70(struct Unk_func_00017A70_0 *arg0) {
+    return arg0->unk8;
 }
 
-s32 func_00017A78(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC);
+s32 func_00017A78(struct Unk_func_00017A78_0 *arg0) {
+    return arg0->unkC;
 }
 
-s32 func_00017A80(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x10);
+s32 func_00017A80(struct Unk_func_00017A80_0 *arg0) {
+    return arg0->unk10;
 }
 
-s32 func_00017A88(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x14);
+s32 func_00017A88(struct Unk_func_00017A88_0 *arg0) {
+    return arg0->unk14;
 }
 
-s32 func_00017A90(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x18);
+s32 func_00017A90(struct Unk_func_00017A90_0 *arg0) {
+    return arg0->unk18;
 }
 
-s32 func_00017A98(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_00017A98(struct Unk_func_00017A98_0 *arg0) {
+    return arg0->unk1C;
 }
 
-void func_00017AA0(void *arg0, s32 *arg1) {
-    scePaf_F609FA81(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
+void func_00017AA0(struct Unk_func_00017AA0_0 *arg0, s32 *arg1) {
+    scePaf_F609FA81(arg0->unk4, arg1, 0, 0);
 }
 
-void func_00017AC4(void *arg0) {
-    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4));
+void func_00017AC4(struct Unk_func_00017AC4_0 *arg0) {
+    scePaf_CAF05F1D(arg0->unk4);
 }
 
-void func_00017AE0(void *arg0) {
-    scePaf_3481F595(M2C_FIELD(arg0, s32 *, 4));
+void func_00017AE0(struct Unk_func_00017AE0_0 *arg0) {
+    scePaf_3481F595(arg0->unk4);
 }
 
-void func_00017AFC(void *arg0) {
-    scePaf_DAB59652(M2C_FIELD(arg0, s32 *, 4));
+void func_00017AFC(struct Unk_func_00017AFC_0 *arg0) {
+    scePaf_DAB59652(arg0->unk4);
 }
 
 INCLUDE_ASM("tmp/asm/282/sysconf_plugin/nonmatchings/sysconf_plugin", func_00017B18);

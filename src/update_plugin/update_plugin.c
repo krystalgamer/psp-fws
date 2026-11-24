@@ -397,8 +397,8 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00002D8
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00002F68);
 
-void func_00002FE4(s32 arg0, void *arg1) {
-    if ((u32) (M2C_FIELD(arg1, u8 *, 8) - 5) >= 2U) {
+void func_00002FE4(s32 arg0, struct Unk_func_00002FE4_1 *arg1) {
+    if ((u32) (arg1->unk8 - 5) >= 2U) {
 
     } else {
         func_00000AB4(arg0, (s32) arg1);
@@ -531,8 +531,8 @@ void func_00004D0C(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00004D40);
 
-void func_00004E0C(void *arg0, s32 arg1) {
-    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+void func_00004E0C(struct Unk_func_00004E0C_0 *arg0, s32 arg1) {
+    if (arg0->unk8 >= arg1) {
 
     } else {
         func_00005130((s32) arg0, arg1);
@@ -543,14 +543,14 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00004E4
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00004EC8);
 
-void func_00004F5C(void *arg0) {
+void func_00004F5C(struct Unk_func_00004F5C_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    func_000034F0((M2C_FIELD(arg0, s32 *, 0) + (M2C_FIELD(arg0, s32 *, 4) * 0xC)) - 0xC);
-    temp_v1 = M2C_FIELD(arg0, s32 *, 4) - 1;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
-    M2C_FIELD(arg0, s32 *, 4) = temp_v1;
+    func_000034F0((arg0->unk0 + (arg0->unk4 * 0xC)) - 0xC);
+    temp_v1 = arg0->unk4 - 1;
+    temp_v0 = arg0->unk8;
+    arg0->unk4 = temp_v1;
     if (temp_v1 >= (temp_v0 - 0x14)) {
 
     } else {
@@ -585,8 +585,8 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_0000541
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_000054B4);
 
-void func_0000553C(void *arg0) {
-    sceVshCommonGui_72E652AA(M2C_FIELD(arg0, s32 *, 0x58));
+void func_0000553C(struct Unk_func_0000553C_0 *arg0) {
+    sceVshCommonGui_72E652AA(arg0->unk58);
 }
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00005558);
@@ -603,19 +603,19 @@ INCLUDE_RODATA("tmp/asm/282/update_plugin/nonmatchings/update_plugin", D_00007C6
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_000058D8);
 
-void func_00005B74(void *arg0) {
-    if (M2C_FIELD(arg0, u8 *, 0x60) != 0) {
-        M2C_FIELD(arg0, u8 *, 0x60) = 0U;
-        sceIoClose(M2C_FIELD(arg0, s32 *, 0x5C));
+void func_00005B74(struct Unk_func_00005B74_0 *arg0) {
+    if (arg0->unk60 != 0) {
+        arg0->unk60 = 0U;
+        sceIoClose(arg0->unk5C);
     }
 }
 
-s32 func_00005BA4(void *arg0) {
+s32 func_00005BA4(struct Unk_func_00005BA4_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = -1;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x5C);
+    temp_v0 = arg0->unk5C;
     if (temp_v0 >= 0) {
         var_v1 = sceIoWrite(temp_v0);
     }
@@ -636,20 +636,20 @@ INCLUDE_RODATA("tmp/asm/282/update_plugin/nonmatchings/update_plugin", D_00007C8
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00005C10);
 
-s32 func_00005CA0(void *arg0) {
+s32 func_00005CA0(struct Unk_func_00005CA0_0 *arg0) {
     s32 temp_s1;
 
-    if (M2C_FIELD(arg0, u8 *, 0x61) != 0) {
-        M2C_FIELD(arg0, u8 *, 0x61) = 0U;
+    if (arg0->unk61 != 0) {
+        arg0->unk61 = 0U;
         sceHttpEnd();
         sceLibUpdateDL_D6A09757();
-        temp_s1 = M2C_FIELD(arg0, s32 *, 0x80);
+        temp_s1 = arg0->unk80;
         if (temp_s1 == 0) {
-            M2C_FIELD(arg0, s32 *, 0x80) = 0;
+            arg0->unk80 = 0;
         } else {
             scePaf_4612DB4B(temp_s1);
             scePaf_4E67BB08(temp_s1);
-            M2C_FIELD(arg0, s32 *, 0x80) = 0;
+            arg0->unk80 = 0;
         }
     }
     return 0;
@@ -685,10 +685,10 @@ void func_00006118(void) {
     }
 }
 
-void func_00006160(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_00006160(struct Unk_func_00006160_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00006170);

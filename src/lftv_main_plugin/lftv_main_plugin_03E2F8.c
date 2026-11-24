@@ -27,26 +27,26 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03E2F8",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03E2F8", func_0003E524);
 
-s32 func_0003E5C0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x1DC) > 0;
+s32 func_0003E5C0(struct Unk_func_0003E5C0_0 *arg0) {
+    return arg0->unk1DC > 0;
 }
 
-s32 func_0003E5CC(void *arg0, s32 arg1) {
+s32 func_0003E5CC(struct Unk_func_0003E5C0_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = -1;
     if (func_0003E5C0(arg0) != 0) {
-        var_v1 = sceKernelSetEventFlag(M2C_FIELD(arg0, s32 *, 0x1DC), arg1);
+        var_v1 = sceKernelSetEventFlag(arg0->unk1DC, arg1);
     }
     return var_v1;
 }
 
-s32 func_0003E618(void *arg0, u32 arg1, void *arg2, void *arg3) {
+s32 func_0003E618(struct Unk_func_0003E5C0_0 *arg0, u32 arg1, void *arg2, void *arg3) {
     s32 var_v1;
 
     var_v1 = -1;
     if (func_0003E5C0(arg0) != 0) {
-        var_v1 = sceKernelWaitEventFlag(M2C_FIELD(arg0, s32 *, 0x1DC), arg1, 1, arg2, arg3);
+        var_v1 = sceKernelWaitEventFlag(arg0->unk1DC, arg1, 1, arg2, arg3);
     }
     return var_v1;
 }

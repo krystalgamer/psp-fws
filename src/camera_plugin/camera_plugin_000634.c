@@ -147,37 +147,37 @@ void func_00001E7C(M2C_UNK **arg0) {
     scePaf_6261C0A5(arg0);
 }
 
-void func_00001EB4(void *arg0) {
-    func_0001A4BC(M2C_FIELD(arg0, s32 *, 0x330));
+void func_00001EB4(struct Unk_func_00001EB4_0 *arg0) {
+    func_0001A4BC(arg0->unk330);
 }
 
-void func_00001ED0(void *arg0) {
-    func_0001A4F8(M2C_FIELD(arg0, s32 *, 0x330));
+void func_00001ED0(struct Unk_func_00001ED0_0 *arg0) {
+    func_0001A4F8(arg0->unk330);
 }
 
-void func_00001EEC(void *arg0) {
-    func_0001A504(M2C_FIELD(arg0, s32 *, 0x330));
+void func_00001EEC(struct Unk_func_00001EEC_0 *arg0) {
+    func_0001A504(arg0->unk330);
 }
 
-void func_00001F08(void *arg0, s32 arg1) {
-    M2C_FIELD(M2C_FIELD(arg0, void **, 0x330), s32 *, 0x20) = arg1;
+void func_00001F08(struct Unk_func_00001F08_0 *arg0, s32 arg1) {
+    M2C_FIELD(arg0->unk330, s32 *, 0x20) = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/352/camera_plugin/nonmatchings/camera_plugin_000634", func_00001F14);
 
-void func_00001F30(void *arg0, s8 arg1) {
-    M2C_FIELD(M2C_FIELD(arg0, void **, 0x330), s8 *, 0x44) = arg1;
+void func_00001F30(struct Unk_func_00001F30_0 *arg0, s8 arg1) {
+    M2C_FIELD(arg0->unk330, s8 *, 0x44) = arg1;
 }
 
-void func_00001F3C(void *arg0, s8 arg1) {
-    M2C_FIELD(M2C_FIELD(arg0, void **, 0x330), s8 *, 0x46) = arg1;
+void func_00001F3C(struct Unk_func_00001F3C_0 *arg0, s8 arg1) {
+    M2C_FIELD(arg0->unk330, s8 *, 0x46) = arg1;
 }
 
-void func_00001F48(void *arg0) {
-    func_0001A50C(M2C_FIELD(arg0, s32 *, 0x330));
+void func_00001F48(struct Unk_func_00001F48_0 *arg0) {
+    func_0001A50C(arg0->unk330);
 }
 
-void func_00001F64(void *arg0) {
-    func_0001A600(M2C_FIELD(arg0, s32 *, 0x330));
+void func_00001F64(struct Unk_func_00001F64_0 *arg0) {
+    func_0001A600(arg0->unk330);
 }
 

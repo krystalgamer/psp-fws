@@ -22,7 +22,7 @@ s32 func_000043F0(s32 arg0, s32 arg1) {
     return var_v1;
 }
 
-s32 func_00004420(void *arg0, s32 *arg1) {
+s32 func_00004420(struct Unk_func_00004420_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 0x8000C0FF;
@@ -52,7 +52,7 @@ s32 func_00004480(s32 arg0) {
     return var_v1;
 }
 
-s32 func_000044B0(void *arg0, s8 *arg1) {
+s32 func_000044B0(struct Unk_func_000044B0_0 *arg0, s8 *arg1) {
     s32 var_v1;
 
     var_v1 = 0x8000C0FF;
@@ -113,19 +113,19 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_00
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_000046B0);
 
-void func_000046CC(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001EF20;
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 4));
+void func_000046CC(struct Unk_func_000046CC_0 *arg0) {
+    arg0->unk0 = &D_0001EF20;
+    sceKernelDeleteSema(arg0->unk4);
 }
 
-void func_000046F4(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001EF20;
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 4));
+void func_000046F4(struct Unk_func_000046F4_0 *arg0) {
+    arg0->unk0 = &D_0001EF20;
+    sceKernelDeleteSema(arg0->unk4);
 }
 
-void func_0000471C(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001EF20;
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 4));
+void func_0000471C(struct Unk_func_0000471C_0 *arg0) {
+    arg0->unk0 = &D_0001EF20;
+    sceKernelDeleteSema(arg0->unk4);
     scePaf_4E67BB08(arg0);
 }
 
@@ -133,8 +133,8 @@ s32 func_00004758(s32 arg0) {
     return arg0;
 }
 
-s32 func_00004760(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4) > 0;
+s32 func_00004760(struct Unk_func_00004760_0 *arg0) {
+    return arg0->unk4 > 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", func_0000476C);
@@ -328,7 +328,7 @@ INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", music_c
 
 INCLUDE_ASM("tmp/asm/282/music_common/nonmatchings/music_common_0043C0", music_common_A0472F68);
 
-u8 func_000055AC(void *arg0) {
-    return M2C_FIELD(arg0, u8 *, 0xAC);
+u8 func_000055AC(struct Unk_func_000055AC_0 *arg0) {
+    return arg0->unkAC;
 }
 

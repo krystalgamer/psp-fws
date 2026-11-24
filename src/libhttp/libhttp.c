@@ -482,19 +482,19 @@ INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_000119A4);
 
 INCLUDE_ASM("tmp/asm/282/libhttp/nonmatchings/libhttp", func_00011A84);
 
-void func_00011B3C(void *arg0, void *arg1) {
+void func_00011B3C(struct Unk_func_00011B3C_0 *arg0, struct Unk_func_00011B3C_1 *arg1) {
     s32 temp_v0;
     s32 temp_v0_2;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x28);
+    temp_v0 = arg0->unk28;
     if (temp_v0 != 0) {
-        M2C_FIELD(arg1, s32 *, 0x34) = temp_v0;
-        M2C_FIELD(arg0, s32 *, 0x28) = 0;
+        arg1->unk34 = temp_v0;
+        arg0->unk28 = 0;
     }
-    temp_v0_2 = M2C_FIELD(arg0, s32 *, 0x2C);
+    temp_v0_2 = arg0->unk2C;
     if (temp_v0_2 != 0) {
-        M2C_FIELD(arg1, s32 *, 0x38) = temp_v0_2;
-        M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+        arg1->unk38 = temp_v0_2;
+        arg0->unk2C = 0;
     }
 }
 

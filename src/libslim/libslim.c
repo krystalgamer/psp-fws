@@ -257,7 +257,7 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00002560);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000026E4);
 
-s32 sceHVSlim_Library_59F62E22(void *arg0, s32 arg1, s32 arg2) {
+s32 sceHVSlim_Library_59F62E22(struct Unk_sceHVSlim_Library_59F62E22_0 *arg0, s32 arg1, s32 arg2) {
     s32 temp_a6;
     s32 temp_a7;
     s32 temp_s0;
@@ -265,9 +265,9 @@ s32 sceHVSlim_Library_59F62E22(void *arg0, s32 arg1, s32 arg2) {
     s32 var_a1;
     s32 var_a2;
 
-    temp_v0 = func_0000101C(M2C_FIELD(arg0, s32 *, 0), arg1, M2C_FIELD(arg0, s32 *, 4));
-    temp_a7 = M2C_FIELD(arg0, s32 *, 0);
-    temp_a6 = M2C_FIELD(arg0, s32 *, 4);
+    temp_v0 = func_0000101C(arg0->unk0, arg1, arg0->unk4);
+    temp_a7 = arg0->unk0;
+    temp_a6 = arg0->unk4;
     temp_s0 = temp_v0 != 0;
     var_a1 = temp_v0;
     var_a2 = temp_a6 - (temp_v0 - temp_a7);
@@ -430,15 +430,15 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00003BB4);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", sceHVSlim_Library_6DAD1415);
 
-s32 func_00003E00(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 8) == 0;
+s32 func_00003E00(struct Unk_func_00003E00_0 *arg0) {
+    return arg0->unk8 == 0;
 }
 
-s32 func_00003E0C(void *arg0) {
+s32 func_00003E0C(struct Unk_func_00003E0C_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(M2C_FIELD(arg0, void **, 0), s32 *, 0x1C);
-    M2C_FIELD(arg0, s32 *, 8) = temp_v1;
+    temp_v1 = M2C_FIELD(arg0->unk0, s32 *, 0x1C);
+    arg0->unk8 = temp_v1;
     return temp_v1 != 0;
 }
 
@@ -446,11 +446,11 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00003E20);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00003E68);
 
-s32 func_00003EA4(void *arg0) {
+s32 func_00003EA4(struct Unk_func_00003EA4_0 *arg0) {
     void *temp_s0;
 
-    temp_s0 = M2C_FIELD(arg0, void **, 0);
-    return sceHVSlim_Library_440B8F87(temp_s0, M2C_FIELD(arg0, s32 *, 8), 0) + M2C_FIELD(temp_s0, s16 *, 0xC);
+    temp_s0 = arg0->unk0;
+    return sceHVSlim_Library_440B8F87(temp_s0, arg0->unk8, 0) + M2C_FIELD(temp_s0, s16 *, 0xC);
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00003EDC);
@@ -480,7 +480,7 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000040B4);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000040FC);
 
-s32 func_00004134(void *arg0, s32 arg1) {
+s32 func_00004134(struct Unk_func_00004134_0 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_a0;
 
@@ -488,9 +488,9 @@ s32 func_00004134(void *arg0, s32 arg1) {
     var_a0 = -1;
     if (temp_v0 != 0) {
         if (arg1 != 0) {
-            sceHVSlim_Library_1A02495A(temp_v0, arg1, M2C_FIELD(arg0, s16 *, 0xC));
+            sceHVSlim_Library_1A02495A(temp_v0, arg1, arg0->unkC);
         }
-        var_a0 = M2C_FIELD(arg0, s32 *, 0x14) - 1;
+        var_a0 = arg0->unk14 - 1;
     }
     return var_a0;
 }
@@ -521,19 +521,19 @@ void func_000044C0(void) {
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000044DC);
 
-void func_00004540(void *arg0) {
+void func_00004540(struct Unk_func_00004540_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0x10) - 1;
-    temp_v0 = temp_v1 << M2C_FIELD(arg0, s16 *, 0xE);
-    M2C_FIELD(arg0, s32 *, 0x10) = temp_v1;
+    temp_v1 = arg0->unk10 - 1;
+    temp_v0 = temp_v1 << arg0->unkE;
+    arg0->unk10 = temp_v1;
     if (!(temp_v0 & 0x3FF)) {
         func_000096E4((s32) arg0, temp_v0);
     }
 }
 
-s32 func_0000457C(void *arg0, s32 arg1) {
+s32 func_0000457C(struct Unk_func_0000457C_0 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_a0;
 
@@ -541,29 +541,29 @@ s32 func_0000457C(void *arg0, s32 arg1) {
     var_a0 = -1;
     if (temp_v0 != 0) {
         if (arg1 != 0) {
-            sceHVSlim_Library_1A02495A(temp_v0, arg1, M2C_FIELD(arg0, s16 *, 0xC));
+            sceHVSlim_Library_1A02495A(temp_v0, arg1, arg0->unkC);
         }
-        var_a0 = M2C_FIELD(arg0, s32 *, 0x10) - 1;
+        var_a0 = arg0->unk10 - 1;
     }
     return var_a0;
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000045D4);
 
-void func_0000461C(void *arg0, s32 arg1, s32 arg2) {
-    sceHVSlim_Library_1A02495A(arg2, func_000095F4((s32) arg0, arg1 << M2C_FIELD(arg0, s16 *, 0xE)), M2C_FIELD(arg0, s16 *, 0xC));
+void func_0000461C(struct Unk_func_0000461C_0 *arg0, s32 arg1, s32 arg2) {
+    sceHVSlim_Library_1A02495A(arg2, func_000095F4((s32) arg0, arg1 << arg0->unkE), arg0->unkC);
 }
 
-void func_00004664(void *arg0, s32 arg1, s32 arg2) {
-    sceHVSlim_Library_1A02495A(func_000095F4((s32) arg0, arg1 << M2C_FIELD(arg0, s16 *, 0xE)), arg2, M2C_FIELD(arg0, s16 *, 0xC));
+void func_00004664(struct Unk_func_00004664_0 *arg0, s32 arg1, s32 arg2) {
+    sceHVSlim_Library_1A02495A(func_000095F4((s32) arg0, arg1 << arg0->unkE), arg2, arg0->unkC);
 }
 
-s32 func_000046AC(void *arg0, s32 arg1) {
-    return *func_000095F4((s32) arg0, arg1 << M2C_FIELD(arg0, s16 *, 0xE));
+s32 func_000046AC(struct Unk_func_000046AC_0 *arg0, s32 arg1) {
+    return *func_000095F4((s32) arg0, arg1 << arg0->unkE);
 }
 
-void func_000046D0(void *arg0, s32 arg1, s32 arg2) {
-    *func_000095F4((s32) arg0, arg1 << M2C_FIELD(arg0, s16 *, 0xE)) = arg2;
+void func_000046D0(struct Unk_func_000046D0_0 *arg0, s32 arg1, s32 arg2) {
+    *func_000095F4((s32) arg0, arg1 << arg0->unkE) = arg2;
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00004700);
@@ -738,30 +738,30 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00005A3C);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00005A64);
 
-void func_00005AF4(void *arg0, s32 arg1) {
-    func_00005A64((s32) arg0, M2C_FIELD(arg0, s32 *, 0x1C), arg1);
+void func_00005AF4(struct Unk_func_00005AF4_0 *arg0, s32 arg1) {
+    func_00005A64((s32) arg0, arg0->unk1C, arg1);
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00005B14);
 
-s32 func_00005B64(void *arg0, void *arg1) {
+s32 func_00005B64(struct Unk_func_00005B64_0 *arg0, struct Unk_func_00005B64_1 *arg1) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = M2C_FIELD(M2C_FIELD(arg1, void **, 8), s32 *, 4);
+    temp_v0 = M2C_FIELD(arg1->unk8, s32 *, 4);
     var_v1 = 0;
-    if (temp_v0 != M2C_FIELD(arg0, s32 *, 0x1C)) {
+    if (temp_v0 != arg0->unk1C) {
         var_v1 = func_00005A64((s32) arg0, temp_v0, (s32) arg1);
     }
     return var_v1;
 }
 
-s32 func_00005BA4(void *arg0, void *arg1) {
+s32 func_00005BA4(struct Unk_func_00005BA4_0 *arg0, struct Unk_func_00005BA4_1 *arg1) {
     s32 var_a3;
 
     var_a3 = 0;
-    if (M2C_FIELD(arg1, s32 *, 0) != M2C_FIELD(arg0, s32 *, 0x1C)) {
-        var_a3 = func_00005A64((s32) arg0, *M2C_FIELD(arg1, s32 **, 8), (s32) arg1);
+    if (arg1->unk0 != arg0->unk1C) {
+        var_a3 = func_00005A64((s32) arg0, *arg1->unk8, (s32) arg1);
     }
     return var_a3;
 }
@@ -771,9 +771,9 @@ void sceHVSlim_Library_34C99643(s32 arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
 
-void sceHVSlim_Library_B7DE4536(void *arg0) {
+void sceHVSlim_Library_B7DE4536(struct Unk_sceHVSlim_Library_B7DE4536_0 *arg0) {
     func_0000761C();
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    arg0->unk18 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", sceHVSlim_Library_0F61EC8E);
@@ -811,14 +811,14 @@ s32 func_00006054(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", sceHVSlim_Library_EE1C1283);
 
-void sceHVSlim_Library_05F33A6C(void *arg0, s32 arg1) {
+void sceHVSlim_Library_05F33A6C(struct Unk_sceHVSlim_Library_05F33A6C_0 *arg0, s32 arg1) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x18);
+    temp_v0 = arg0->unk18;
     if (temp_v0 != 0) {
         func_00005F60((s32) arg0, temp_v0);
     }
-    M2C_FIELD(arg0, s32 *, 0x18) = arg1;
+    arg0->unk18 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", sceHVSlim_Library_1DF9F3CD);
@@ -851,16 +851,16 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00006B10);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00006B38);
 
-void func_00006BDC(void *arg0, s32 arg1) {
-    func_00006B38((s32) arg0, M2C_FIELD(arg0, s32 *, 0x18), arg1);
+void func_00006BDC(struct Unk_func_00006BDC_0 *arg0, s32 arg1) {
+    func_00006B38((s32) arg0, arg0->unk18, arg1);
 }
 
-s32 func_00006BFC(s32 arg0, void *arg1) {
+s32 func_00006BFC(s32 arg0, struct Unk_func_00006BFC_1 *arg1) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 0;
-    temp_v0 = M2C_FIELD(M2C_FIELD(arg1, void **, 8), s32 *, 4);
+    temp_v0 = M2C_FIELD(arg1->unk8, s32 *, 4);
     if (temp_v0 != 0) {
         var_v1 = func_00006B38(arg0, temp_v0, (s32) arg1);
     }
@@ -869,24 +869,24 @@ s32 func_00006BFC(s32 arg0, void *arg1) {
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00006C38);
 
-s32 func_00006CB4(s32 arg0, void *arg1) {
+s32 func_00006CB4(s32 arg0, struct Unk_func_00006CB4_1 *arg1) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 0;
-    temp_v0 = M2C_FIELD(M2C_FIELD(arg1, void **, 8), s32 *, 8);
+    temp_v0 = M2C_FIELD(arg1->unk8, s32 *, 8);
     if (temp_v0 != 0) {
         var_v1 = func_00006B38(arg0, temp_v0, (s32) arg1);
     }
     return var_v1;
 }
 
-s32 func_00006CF0(s32 arg0, void *arg1) {
+s32 func_00006CF0(s32 arg0, struct Unk_func_00006CF0_1 *arg1) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 0;
-    temp_v0 = M2C_FIELD(M2C_FIELD(arg1, void **, 8), s32 *, 0xC);
+    temp_v0 = M2C_FIELD(arg1->unk8, s32 *, 0xC);
     if (temp_v0 != 0) {
         var_v1 = func_00006B38(arg0, temp_v0, (s32) arg1);
     }
@@ -895,10 +895,10 @@ s32 func_00006CF0(s32 arg0, void *arg1) {
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00006D2C);
 
-void sceHVSlim_Library_81130A27(void *arg0, s32 arg1, s16 arg2) {
-    M2C_FIELD(arg0, s32 *, 0) = arg1;
-    M2C_FIELD(arg0, s16 *, 4) = arg2;
-    M2C_FIELD(arg0, s16 *, 6) = 0;
+void sceHVSlim_Library_81130A27(struct Unk_sceHVSlim_Library_81130A27_0 *arg0, s32 arg1, s16 arg2) {
+    arg0->unk0 = arg1;
+    arg0->unk4 = arg2;
+    arg0->unk6 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", sceHVSlim_Library_BFE8268F);
@@ -949,8 +949,8 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000074C0);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_0000761C);
 
-s32 func_0000764C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xC) == 0;
+s32 func_0000764C(struct Unk_func_0000764C_0 *arg0) {
+    return arg0->unkC == 0;
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00007658);
@@ -1154,17 +1154,17 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00009138);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00009214);
 
-s32 func_00009520(void *arg0) {
+s32 func_00009520(struct Unk_func_00009520_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     temp_v0 = sceHVSlim_Library_24B1FCE6(8);
     var_v1 = 0;
-    M2C_FIELD(arg0, s32 *, 0) = temp_v0;
+    arg0->unk0 = temp_v0;
     if (temp_v0 != 0) {
-        M2C_FIELD(arg0, s32 *, 4) = 2;
+        arg0->unk4 = 2;
         var_v1 = 1;
-        M2C_FIELD(arg0, s32 *, 8) = 0;
+        arg0->unk8 = 0;
     }
     return var_v1;
 }
@@ -1377,25 +1377,25 @@ void func_0000AFE8(s32 *arg0, s32 arg1) {
 void func_0000AFF0(void) {
 }
 
-void func_0000AFF8(s32 arg0, void *arg1) {
-    M2C_FIELD(arg1, s32 *, 0) = arg0;
-    M2C_FIELD(arg1, s32 *, 4) = -1;
-    M2C_FIELD(arg1, s16 *, 8) = -1;
-    M2C_FIELD(arg1, s16 *, 0xA) = -1;
+void func_0000AFF8(s32 arg0, struct Unk_func_0000AFF8_1 *arg1) {
+    arg1->unk0 = arg0;
+    arg1->unk4 = -1;
+    arg1->unk8 = -1;
+    arg1->unkA = -1;
 }
 
 void func_0000B010(void) {
 }
 
-void func_0000B018(void *arg0, M2C_UNK arg1, M2C_UNK arg2) {
+void func_0000B018(struct Unk_func_0000B018_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s16 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s16 *, 0xA);
+    temp_v1 = arg0->unkA;
     if (temp_v1 == -1) {
         func_0000BDB8(arg1, arg2);
         return;
     }
-    sceHVSlim_Library_6DDF3D61(arg1, arg2, *func_0000AF14(temp_v1, arg2), M2C_FIELD(arg0, s16 *, 8));
+    sceHVSlim_Library_6DDF3D61(arg1, arg2, *func_0000AF14(temp_v1, arg2), arg0->unk8);
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_0000B090);
@@ -1484,19 +1484,19 @@ void func_0000C8A8(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_0000C8C4);
 
-void func_0000CC84(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    M2C_FIELD(arg0, s32 *, 0x20) = 0;
-    M2C_FIELD(arg0, s32 *, 0x24) = 0;
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+void func_0000CC84(struct Unk_func_0000CC84_0 *arg0, s32 arg1) {
+    arg0->unkC = 0;
+    arg0->unk8 = 0;
+    arg0->unk4 = 0;
+    arg0->unk0 = 0;
+    arg0->unk14 = 0;
+    arg0->unk10 = 0;
+    arg0->unk20 = 0;
+    arg0->unk24 = 0;
+    arg0->unk1C = 0;
+    arg0->unk18 = 0;
     if (arg1 == 3) {
-        M2C_FIELD(arg0, s32 *, 0xC) = 2;
+        arg0->unkC = 2;
     }
 }
 
@@ -1756,25 +1756,25 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00011F14);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00011F8C);
 
-void func_00012028(void *arg0) {
+void func_00012028(struct Unk_func_00012028_0 *arg0) {
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0);
+    temp_v1 = arg0->unk0;
     switch (temp_v1) {                              /* irregular */
     case 0:
-        sceHVSlim_Library_A2F4AC9E(M2C_FIELD(arg0, void ***, 4));
+        sceHVSlim_Library_A2F4AC9E(arg0->unk4);
         return;
     case 1:
-        sceHVSlim_Library_0D525122(M2C_FIELD(arg0, void ***, 4));
+        sceHVSlim_Library_0D525122(arg0->unk4);
         return;
     }
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00012070);
 
-void func_00012124(void *arg0, void *arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0) = (s32) (arg2 * 8);
-    M2C_FIELD(arg0, void **, 4) = arg1;
+void func_00012124(struct Unk_func_00012124_0 *arg0, void *arg1, s32 arg2) {
+    arg0->unk0 = (s32) (arg2 * 8);
+    arg0->unk4 = arg1;
     sceHVSlim_Library_D611E938(arg1, 0, arg2);
 }
 
@@ -1826,17 +1826,17 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00012BAC);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00012C60);
 
-void func_00012CB0(void *arg0) {
+void func_00012CB0(struct Unk_func_00012028_0 *arg0) {
     func_00012028(arg0);
 }
 
-void func_00012CCC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x28) = (s32) M2C_FIELD(arg0, s32 *, 0x20);
+void func_00012CCC(struct Unk_func_00012CCC_0 *arg0) {
+    arg0->unk28 = (s32) arg0->unk20;
 }
 
-void func_00012CD8(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x6C) = (s32) M2C_FIELD(arg0, s32 *, 0x20);
-    M2C_FIELD(arg0, s32 *, 0x70) = (s32) M2C_FIELD(arg0, s32 *, 0x2C);
+void func_00012CD8(struct Unk_func_00012CD8_0 *arg0) {
+    arg0->unk6C = (s32) arg0->unk20;
+    arg0->unk70 = (s32) arg0->unk2C;
 }
 
 void func_00012CEC(void *arg0) {
@@ -1856,8 +1856,8 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00012E64);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00012EEC);
 
-s32 func_00012FC8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x14);
+s32 func_00012FC8(struct Unk_func_00012FC8_0 *arg0) {
+    return arg0->unk14;
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00012FD0);
@@ -1906,16 +1906,16 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00013694);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000136F0);
 
-void func_000137FC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x6C) = (s32) M2C_FIELD(arg0, s32 *, 0x20);
+void func_000137FC(struct Unk_func_000137FC_0 *arg0) {
+    arg0->unk6C = (s32) arg0->unk20;
 }
 
 void func_00013808(void *arg0) {
     func_000124AC((s32) (arg0 + 4), M2C_FIELD(arg0, s32 *, 0x6C), 0);
 }
 
-void func_0001382C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x28) = (s32) M2C_FIELD(arg0, s32 *, 0x20);
+void func_0001382C(struct Unk_func_000137FC_0 *arg0) {
+    arg0->unk28 = (s32) arg0->unk20;
     func_000137FC(arg0);
 }
 
@@ -1925,8 +1925,8 @@ INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000138F8);
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_000139F8);
 
-s32 func_00013B58(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x14);
+s32 func_00013B58(struct Unk_func_00013B58_0 *arg0) {
+    return arg0->unk14;
 }
 
 INCLUDE_ASM("tmp/asm/303/libslim/nonmatchings/libslim", func_00013B60);
