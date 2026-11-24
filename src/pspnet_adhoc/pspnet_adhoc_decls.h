@@ -19,6 +19,8 @@ s32 func_00004AE4(s32);
 s32 func_00004B30(s32);
 s32 func_00004E98(s32);
 s32 func_00005024(s32, s32);
+s32 func_00005594(void *arg0, s32 arg1, s32 arg2);
+void func_000055B0(void *arg0, s32 arg1, s32 arg2);
 s32 func_000056E4(void *arg0, s32 arg1);
 void func_00005708(void *arg0);
 s32 func_00006F68(void);

@@ -354,9 +354,17 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00004B54);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00004BA8);
+void func_00004BA8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00004BB8);
+void func_00004BB8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00004BC8);
 
@@ -563,7 +571,11 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006C30);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006CF4);
+void func_00006CF4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 void func_00006D04(void *arg0, s32 arg1) {
     if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
@@ -577,7 +589,20 @@ INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugi
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006DC0);
 
-INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006E54);
+void func_00006E54(void *arg0) {
+    s32 temp_v0;
+    s32 temp_v1;
+
+    func_00000480((M2C_FIELD(arg0, s32 *, 0) + (M2C_FIELD(arg0, s32 *, 4) * 0xC)) - 0xC);
+    temp_v1 = M2C_FIELD(arg0, s32 *, 4) - 1;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    M2C_FIELD(arg0, s32 *, 4) = temp_v1;
+    if (temp_v1 >= (temp_v0 - 0x14)) {
+
+    } else {
+        func_00006EC8((s32) arg0, temp_v0 - 0xA);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/netplay_client_plugin/nonmatchings/netplay_client_plugin", func_00006EC8);
 

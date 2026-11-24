@@ -144,7 +144,17 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_CA3CF5EB);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNetFreeThreadinfo);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00002248);
+s32 func_00002248(void) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+
+    M2C_FIELD(&D_0000AF44, void **, 0) = NULL;
+    M2C_FIELD(&D_0000AF44, void ***, 4) = &D_0000AF44;
+    temp_v0_2 = sceKernelCreateSema("SceNetThreadList", 0U, 1, 1, NULL);
+    temp_v0 = __builtin_allegrex_min(temp_v0_2, 0);
+    D_0000A868 = temp_v0_2;
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_BB2B3DDB);
 
@@ -428,7 +438,23 @@ INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_D5A03BC0);
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_EDB11CB4);
 
-INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", func_00005744);
+void func_00005744(void *arg0) {
+    void *var_a0;
+    void *var_s0;
+
+    var_s0 = M2C_FIELD(arg0, void **, 0);
+    var_a0 = var_s0;
+    if (var_s0 != NULL) {
+        do {
+            var_s0 = M2C_FIELD(var_s0, void **, 4);
+            sceNetIfhandle_lib_F56FAC82(var_a0);
+            var_a0 = var_s0;
+        } while (var_s0 != NULL);
+    }
+    M2C_FIELD(arg0, void **, 0) = NULL;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet/nonmatchings/pspnet", sceNet_lib_13A8B98A);
 

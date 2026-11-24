@@ -453,7 +453,11 @@ s32 func_0000ADB8(void) {
 void func_0000ADC0(void) {
 }
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_0000ADC8);
+void func_0000ADC8(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00057B10;
+    M2C_FIELD(arg0, M2C_UNK **, 0x20) = &D_00057B50;
+    func_0002CD70((s32) arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_0000ADFC);
 
@@ -603,7 +607,11 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_0000C9AC);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_0000CA98);
+void func_0000CA98(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00057FF0;
+    M2C_FIELD(arg0, M2C_UNK **, 0x20) = &D_00057B50;
+    func_0002CD70((s32) arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_007618", func_0000CACC);
 

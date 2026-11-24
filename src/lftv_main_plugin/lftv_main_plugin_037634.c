@@ -192,7 +192,12 @@ INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_037634",
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_037634", func_00039620);
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_037634", func_00039730);
+void func_00039730(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x364) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x368) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x36C) = arg2;
+    func_00039758();
+}
 
 void func_00039758(void) {
 }

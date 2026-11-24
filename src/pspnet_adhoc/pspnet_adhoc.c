@@ -187,9 +187,18 @@ INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_0000532C)
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_000053EC);
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_00005594);
+s32 func_00005594(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x34) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x4C) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x38) = 1;
+    M2C_FIELD(arg0, s32 *, 0x50) = 1;
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_000055B0);
+void func_000055B0(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0xCC) = arg1;
+    M2C_FIELD(arg0, s32 *, 0xD0) = arg2;
+}
 
 INCLUDE_ASM("tmp/asm/282/pspnet_adhoc/nonmatchings/pspnet_adhoc", func_000055BC);
 

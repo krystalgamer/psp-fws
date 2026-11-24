@@ -825,7 +825,18 @@ INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000C560);
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000C67C);
 
-INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000C710);
+s32 func_0000C710(void *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0);
+    if (temp_v0 != 0) {
+        scePaf_545FE2DA(temp_v0);
+        M2C_FIELD(arg0, s32 *, 0) = 0;
+    }
+    M2C_FIELD(arg0, s16 *, 4) = 0;
+    M2C_FIELD(arg0, s16 *, 6) = 0;
+    return 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/osk_plugin/nonmatchings/osk_plugin", func_0000C758);
 
