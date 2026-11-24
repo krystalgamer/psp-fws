@@ -36,8 +36,7 @@ def main():
     src = mod.all_text()
     near = [n for n, (s, _) in stats["scores"].items()
             if s is not None and 0 < s <= a.max_score and f", {n});" in src and n in mod.funcs][:a.limit]
-    header = '#include "common.h"\n#include "k1.h"\n#include "m2c_macros.h"\n' + \
-        "\n".join(mod.store["vars"].values()) + "\n" + "\n".join(mod.store["funcs"].values()) + "\n"
+    header = mod.header()
     made = []
     for n in near:
         compiler, setting = ad.Module.file_setting(mod.file_of(n))

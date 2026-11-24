@@ -83,7 +83,10 @@
   "sceSyscon_driver_FB148FB6": "void sceSyscon_driver_FB148FB6(s32 arg0);",
   "sceSyscon_driver_FC32141A": "void sceSyscon_driver_FC32141A(s32 arg0);"
  },
+ "types": {
+  "D_00004600_s": "struct D_00004600_s {\n    u8 pad0[0x24];\n    volatile s32 unk24;\n    u8 pad28[0x10];\n    volatile u8 unk38;\n    volatile u8 unk39;\n    volatile u8 unk3A;\n    volatile u8 unk3B;\n    volatile u8 unk3C;\n    volatile u8 unk3D;\n    volatile u8 unk3E;\n    volatile u8 unk3F;\n    volatile u8 unk40;\n    volatile u8 unk41;\n    volatile u8 unk42;\n    volatile u8 unk43;\n    volatile u8 unk44;\n    volatile u8 unk45;\n    volatile u8 unk46;\n    volatile u8 unk47;\n    volatile u8 unk48;\n    u8 pad49[0x1];\n    volatile u8 unk4A;\n    u8 pad4B[0xC1];\n    volatile s32 unk10C;\n    u8 pad110[0x20];\n    volatile s32 unk130;\n    volatile s32 unk134;\n    volatile s32 unk138;\n};"
+ },
  "vars": {
-  "D_00004600": "extern M2C_UNK D_00004600;"
+  "D_00004600": "extern struct D_00004600_s D_00004600;"
  }
 }

@@ -116,10 +116,17 @@ class Module:
             out.append(mask(w, kind))
         return out
 
+    def header(self, extra=""):
+        """C context for m2c and test compiles: struct types, globals, prototypes."""
+        return ('#include "common.h"\n#include "k1.h"\n#include "m2c_macros.h"\n'
+                + "\n".join(self.store.get("types", {})[k] for k in sorted(self.store.get("types", {}))) + "\n"
+                + "\n".join(self.store["vars"].values()) + "\n" + "\n".join(self.store["funcs"].values()) + "\n" + extra)
+
     def write_decls(self):
         self.store_path.write_text(json.dumps(self.store, indent=1, sort_keys=True))
         lines = [f"#ifndef {self.mod.upper()}_DECLS_H", f"#define {self.mod.upper()}_DECLS_H", "",
                  '#include "common.h"', '#include "m2c_macros.h"', ""]
+        lines += [self.store["types"][k] + "\n" for k in sorted(self.store.get("types", {}))]
         lines += [self.store["vars"][k] for k in sorted(self.store["vars"])]
         lines.append("")
         lines += [self.store["funcs"][k] for k in sorted(self.store["funcs"])]
@@ -470,7 +477,7 @@ def main():
     matched = 0
     accepted_now = []
     for i, name in enumerate(names):
-        header = f'#include "common.h"\n#include "k1.h"\n#include "m2c_macros.h"\n' + "\n".join(mod.store["vars"].values()) + "\n" + "\n".join(mod.store["funcs"].values()) + "\n"
+        header = mod.header()
         try:
             res = try_func(mod, name, header)
         except subprocess.TimeoutExpired:

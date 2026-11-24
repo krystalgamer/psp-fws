@@ -41,8 +41,7 @@ def main():
     near = [n for n in names if n in mod.funcs and stats["scores"].get(n)
             and stats["scores"][n][0] is not None and 0 < stats["scores"][n][0] <= a.max_score]
     near = near[:a.limit]
-    header = '#include "common.h"\n#include "m2c_macros.h"\n' + "\n".join(mod.store["vars"].values()) + "\n" + \
-        "\n".join(mod.store["funcs"].values()) + "\n"
+    header = mod.header()
     wins = collections.Counter()
     per = {}
     for n in near:
