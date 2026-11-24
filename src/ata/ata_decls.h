@@ -15,6 +15,7 @@ s32 KDebugForKernel_24C32559(M2C_UNK);
 s32 func_000022E0(void);
 s32 func_000022EC(void);
 void func_000022F4(void);
+s32 func_0000277C(void *arg0, void *arg1, s32 arg2);
 void func_00003FB0(void);
 void func_00003FF0(u32 arg0);
 void func_00004044(s32 arg0);

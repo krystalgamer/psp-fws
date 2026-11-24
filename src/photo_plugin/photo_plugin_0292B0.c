@@ -82,7 +82,11 @@ void func_00029E14(void) {
     func_00029E40();
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_0292B0", func_00029E30);
+void func_00029E30(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_0292B0", func_00029E40);
 

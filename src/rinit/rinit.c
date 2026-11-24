@@ -374,7 +374,21 @@ INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00001908);
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00001A90);
 
-INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00001AF8);
+s32 func_00001AF8(s32 arg0, void *arg1) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (M2C_FIELD(arg1, s32 *, 8) == 0) {
+        M2C_FIELD(arg1, s32 *, 4) = 0;
+    } else {
+        temp_v0 = func_00005DD4(arg0, (s32) arg1);
+        var_v1 = temp_v0;
+        M2C_FIELD(arg1, s32 *, 8) = 0;
+        M2C_FIELD(arg1, s32 *, 4) = 0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/100/rinit/nonmatchings/rinit", func_00001B44);
 

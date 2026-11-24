@@ -393,9 +393,19 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00003C34)
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00003CE8);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00003D94);
+void func_00003D94(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0002F158;
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00003DB0);
+void func_00003DB0(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0002F158;
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
 
 void func_00003DCC(void *arg0) {
     s32 temp_v1;
@@ -873,13 +883,21 @@ void func_00009518(void) {
     func_0000942C(0, 0xFFFF);
 }
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00009538);
+void func_00009538(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00009548);
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00009588);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00009648);
+void func_00009648(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin", func_00009658);
 

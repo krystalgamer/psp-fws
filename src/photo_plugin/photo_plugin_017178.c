@@ -7,7 +7,11 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001726C);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00017360);
+void func_00017360(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00017370);
 
@@ -364,7 +368,11 @@ INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_00
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001C5A0);
 
-INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001C81C);
+void func_0001C81C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s8 *, 0x1C) = 0;
+    func_0001BDB4(arg0, 0);
+}
 
 INCLUDE_ASM("tmp/asm/201/photo_plugin/nonmatchings/photo_plugin_017178", func_0001C840);
 
