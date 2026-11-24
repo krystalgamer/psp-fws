@@ -2,7 +2,7 @@
 #include "common.h"
 #include "rtc_decls.h"
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/rtc", func_00000000);
 #endif
 
@@ -14,15 +14,11 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_17C26C00);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetAlarmTick);
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/rtc", sceRtcIsAlarmed);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/rtc", sceRtcRegisterCallback);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/rtc", sceRtcUnregisterCallback);
 #endif
 
@@ -30,7 +26,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentTick);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_B44BDAED);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 s32 module_start(void) {
     memset(&D_00004580.unk0, 0, 0x58);
     func_0000358C();
@@ -42,24 +38,16 @@ s32 module_start(void) {
     sceSysEventForKernel_CD9E4BB5(&D_00003BF0);
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 module_reboot_before(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00003BF0);
     return 0;
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastReincarnatedTime);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastAdjustedTime);
-#endif
 
-#if FW_VERSION != 100
 s32 module_start(void) {
     memset(&D_00004580, 0, 0x60);
     D_00004580.unk1C = -1;
@@ -73,9 +61,7 @@ s32 module_start(void) {
     sceSysEventForKernel_CD9E4BB5(&D_00004540);
     return 0;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 module_reboot_before(void) {
     sceSyscon_driver_A068B3D0(0, 0);
     sceSysEventForKernel_D7D3FDCD(&D_00004540);
@@ -83,7 +69,7 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 s32 sceRtc_driver_912BEE56(void) {
     memset(&D_00004580.unk0, 0, 0x58);
     func_0000358C();
@@ -99,7 +85,7 @@ s32 sceRtc_driver_912BEE56(void) {
 INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_912BEE56);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 s32 sceRtc_driver_CE27DE2F(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00003BF0);
     return 0;
@@ -108,33 +94,16 @@ s32 sceRtc_driver_CE27DE2F(void) {
 INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_CE27DE2F);
 #endif
 
-#if FW_VERSION == 100
 s32 sceRtc_driver_9CC2797E(void) {
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 sceRtc_driver_48D07D70(void) {
     sceRtc_driver_F0B5571C();
     return 0;
 }
-#endif
 
-#if FW_VERSION != 100
-s32 sceRtc_driver_9CC2797E(void) {
-    return 0;
-}
-#endif
-
-#if FW_VERSION != 100
-s32 sceRtc_driver_48D07D70(void) {
-    sceRtc_driver_F0B5571C();
-    return 0;
-}
-#endif
-
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 s32 sceRtc_driver_C499AF2F(void) {
     D_00004580.unk14 = 0;
     D_00004580.unk10 = 0;
@@ -156,7 +125,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcConvertUtcToLocalTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcConvertLocalTimeToUTC);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 s32 func_00000DB0(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x400:
@@ -167,27 +136,7 @@ s32 func_00000DB0(s32 arg0) {
     }
     return 0;
 }
-#endif
-
-#if FW_VERSION == 100
-s32 sceRtcIsLeapYear(s32 arg0) {
-    s32 var_a1;
-
-    var_a1 = 0x800001FF;
-    if (arg0 > 0) {
-        var_a1 = 1;
-        if (arg0 != ((arg0 / 400) * 0x190)) {
-            var_a1 = 0;
-            if (arg0 != ((arg0 / 100) * 0x64)) {
-                var_a1 = (arg0 & 3) == 0;
-            }
-        }
-    }
-    return var_a1;
-}
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 func_0000138C(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x400:
@@ -200,7 +149,6 @@ s32 func_0000138C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION != 100
 s32 sceRtcIsLeapYear(s32 arg0) {
     s32 var_a1;
 
@@ -216,7 +164,6 @@ s32 sceRtcIsLeapYear(s32 arg0) {
     }
     return var_a1;
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetDaysInMonth);
 
@@ -226,7 +173,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetDosTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetWin32FileTime);
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetTime64_t);
 #endif
 
@@ -240,13 +187,10 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddMonths);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddYears);
 
-#if FW_VERSION == 100
 u32 sceRtcGetTickResolution(void) {
     return 0xF4240U;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 sceRtcGetDayOfWeek(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_a3;
     s32 var_a4;
@@ -259,34 +203,12 @@ s32 sceRtcGetDayOfWeek(s32 arg0, s32 arg1, s32 arg2) {
     }
     return (((var_a4 + ((s32) (var_a4 + ((u32) (var_a4 >> 0x1F) >> 0x1E)) >> 2)) - (var_a4 / 100)) + (var_a4 / 400) + (((var_a3 * 0xD) + 8) / 5) + arg2) % 7;
 }
-#endif
-
-#if FW_VERSION != 100
-u32 sceRtcGetTickResolution(void) {
-    return 0xF4240U;
-}
-#endif
-
-#if FW_VERSION != 100
-s32 sceRtcGetDayOfWeek(s32 arg0, s32 arg1, s32 arg2) {
-    s32 var_a3;
-    s32 var_a4;
-
-    var_a4 = arg0 - 1;
-    var_a3 = arg1 + 0xC;
-    if ((u32) (arg1 - 1) >= 2U) {
-        var_a4 = arg0;
-        var_a3 = arg1;
-    }
-    return (((var_a4 + ((s32) (var_a4 + ((u32) (var_a4 >> 0x1F) >> 0x1E)) >> 2)) - (var_a4 / 100)) + (var_a4 / 400) + (((var_a3 * 0xD) + 8) / 5) + arg2) % 7;
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetDosTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetWin32FileTime);
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime64_t);
 #endif
 
@@ -294,33 +216,19 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime_t);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddTicks);
 
-#if FW_VERSION == 100
 s32 sceRtcTickAddMicroseconds(void *arg0, void *arg1, s64 arg2) {
     return sceRtcTickAddTicks(arg0, arg1, arg2);
 }
-#endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddSeconds);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddMinutes);
-#endif
-
-#if FW_VERSION != 100
-s32 sceRtcTickAddMicroseconds(void *arg0, void *arg1, s64 arg2) {
-    return sceRtcTickAddTicks(arg0, arg1, arg2);
-}
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 sceRtcTickAddSeconds(void *arg0, void *arg1, s64 arg2) {
     return sceRtcTickAddTicks(arg0, arg1, arg2 * 0xF4240);
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceRtcTickAddMinutes(void *arg0, void *arg1, s64 arg2) {
     return sceRtcTickAddTicks(arg0, arg1, arg2 * 0x03938700);
 }
@@ -352,15 +260,13 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC2822);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC3339);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 s32 func_000032D0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s8 *, 0) = (s8) (((arg1 / 10) % 10) + 0x30);
     M2C_FIELD(arg0, s8 *, 1) = (s8) ((arg1 % 10) + 0x30);
     return arg0 + 2;
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 func_00003AF8(struct Unk_func_00003AF8_0 *arg0, s32 arg1) {
     arg0->unk0 = (s8) (((arg1 / 10) % 10) + 0x30);
     arg0->unk1 = (s8) ((arg1 % 10) + 0x30);
@@ -376,13 +282,11 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC3339LocalTime);
 
 INCLUDE_ASM("nonmatchings/rtc", func_00003D10);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 s32 func_0000358C(void) {
     return UtilsForKernel_7B7ED3FD(&func_00003DD4, &func_00003DF4, &func_00003D10);
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 void func_00003D9C(void) {
     UtilsForKernel_23A0C5BA(&func_00003DD4, &func_00003DF4, &func_00003D10, &sceRtc_driver_B44BDAED);
 }

@@ -2,27 +2,17 @@
 #include "common.h"
 #include "mpeg_vsh_decls.h"
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005C8C);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005CE4);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005E6C);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000060A0);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_0000617C);
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegQueryStreamOffset(void *arg0, void *arg1, void *arg2) {
     s32 var_v1;
 
@@ -32,9 +22,7 @@ s32 sceMpegQueryStreamOffset(void *arg0, void *arg1, void *arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegQueryStreamSize(void *arg0, void *arg1) {
     s32 var_v1;
 
@@ -44,9 +32,7 @@ s32 sceMpegQueryStreamSize(void *arg0, void *arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegInit(void) {
     s32 var_v1;
 
@@ -56,9 +42,7 @@ s32 sceMpegInit(void) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegFinish(void) {
     s32 var_v1;
 
@@ -68,21 +52,13 @@ s32 sceMpegFinish(void) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegQueryMemSize);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegCreate);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegDelete);
-#endif
 
-#if FW_VERSION != 100
 void *sceMpegRegistStream(void *arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -92,9 +68,7 @@ void *sceMpegRegistStream(void *arg0, s32 arg1, s32 arg2) {
     }
     return (void *) var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegUnRegistStream(void *arg0, void *arg1) {
     s32 var_v1;
 
@@ -104,13 +78,9 @@ s32 sceMpegUnRegistStream(void *arg0, void *arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegMallocAvcEsBuf);
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegFreeAvcEsBuf(void *arg0, s32 arg1) {
     s32 var_v1;
 
@@ -120,9 +90,7 @@ s32 sceMpegFreeAvcEsBuf(void *arg0, s32 arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegQueryAtracEsSize(void *arg0, void *arg1, void *arg2) {
     s32 var_v1;
 
@@ -132,9 +100,7 @@ s32 sceMpegQueryAtracEsSize(void *arg0, void *arg1, void *arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegQueryPcmEsSize(void *arg0, void *arg1, void *arg2) {
     s32 var_v1;
 
@@ -144,9 +110,7 @@ s32 sceMpegQueryPcmEsSize(void *arg0, void *arg1, void *arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegInitAu(void *arg0, s32 arg1, void *arg2) {
     s32 var_v1;
 
@@ -156,9 +120,7 @@ s32 sceMpegInitAu(void *arg0, s32 arg1, void *arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegChangeGetAvcAuMode(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -168,9 +130,7 @@ s32 sceMpegChangeGetAvcAuMode(s32 arg0, s32 arg1, s32 arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegChangeGetAuMode(void *arg0, void *arg1, s32 arg2) {
     s32 var_v1;
 
@@ -180,9 +140,7 @@ s32 sceMpegChangeGetAuMode(void *arg0, void *arg1, s32 arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegNextAvcRpAu(void *arg0, void *arg1) {
     s32 var_v1;
 
@@ -192,9 +150,7 @@ s32 sceMpegNextAvcRpAu(void *arg0, void *arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegGetAvcAu(void *arg0, void *arg1, void *arg2, void *arg3) {
     s32 var_v1;
 
@@ -204,9 +160,7 @@ s32 sceMpegGetAvcAu(void *arg0, void *arg1, void *arg2, void *arg3) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegGetPcmAu(void *arg0, void *arg1, void *arg2, void *arg3) {
     s32 var_v1;
 
@@ -216,9 +170,7 @@ s32 sceMpegGetPcmAu(void *arg0, void *arg1, void *arg2, void *arg3) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegGetAtracAu(void *arg0, void *arg1, void *arg2, void *arg3) {
     s32 var_v1;
 
@@ -228,9 +180,7 @@ s32 sceMpegGetAtracAu(void *arg0, void *arg1, void *arg2, void *arg3) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegFlushStream(void *arg0, void *arg1) {
     s32 var_v1;
 
@@ -240,9 +190,7 @@ s32 sceMpegFlushStream(void *arg0, void *arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegFlushAllStream(void *arg0) {
     s32 var_v1;
 
@@ -252,9 +200,7 @@ s32 sceMpegFlushAllStream(void *arg0) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegAvcDecode(void *arg0, void *arg1, s32 arg2, void *arg3, void *arg4) {
     s32 var_v1;
 
@@ -264,13 +210,9 @@ s32 sceMpegAvcDecode(void *arg0, void *arg1, s32 arg2, void *arg3, void *arg4) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegAvcDecodeDetail);
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegAvcDecodeMode(void *arg0, void *arg1) {
     s32 var_v1;
 
@@ -280,9 +222,7 @@ s32 sceMpegAvcDecodeMode(void *arg0, void *arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegAvcDecodeStop(void *arg0, s32 arg1, void *arg2, void *arg3) {
     s32 var_v1;
 
@@ -292,13 +232,9 @@ s32 sceMpegAvcDecodeStop(void *arg0, s32 arg1, void *arg2, void *arg3) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegAvcDecodeFlush);
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegAvcQueryYCbCrSize(void *arg0, s32 arg1, s32 arg2, s32 arg3, void *arg4) {
     s32 var_v1;
 
@@ -308,13 +244,9 @@ s32 sceMpegAvcQueryYCbCrSize(void *arg0, s32 arg1, s32 arg2, s32 arg3, void *arg
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegAvcInitYCbCr);
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegAvcDecodeYCbCr(void *arg0, void *arg1, void *arg2, void *arg3) {
     s32 var_v1;
 
@@ -324,9 +256,7 @@ s32 sceMpegAvcDecodeYCbCr(void *arg0, void *arg1, void *arg2, void *arg3) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegAvcDecodeStopYCbCr(void *arg0, void *arg1, void *arg2) {
     s32 var_v1;
 
@@ -336,13 +266,9 @@ s32 sceMpegAvcDecodeStopYCbCr(void *arg0, void *arg1, void *arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegAvcCsc);
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegAvcCopyYCbCr(void *arg0, void *arg1, void *arg2) {
     s32 var_v1;
 
@@ -352,9 +278,7 @@ s32 sceMpegAvcCopyYCbCr(void *arg0, void *arg1, void *arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegAtracDecode(void *arg0, void *arg1, void *arg2, s32 arg3) {
     s32 var_v1;
 
@@ -364,9 +288,7 @@ s32 sceMpegAtracDecode(void *arg0, void *arg1, void *arg2, s32 arg3) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_00006FCC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v1;
 
@@ -376,9 +298,7 @@ s32 func_00006FCC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_00007044(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -388,9 +308,7 @@ s32 func_00007044(s32 arg0, s32 arg1, s32 arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegQueryUserdataEsSize(void *arg0, void *arg1, void *arg2) {
     s32 var_v1;
 
@@ -400,17 +318,11 @@ s32 sceMpegQueryUserdataEsSize(void *arg0, void *arg1, void *arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegGetUserdataAu);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegGetAvcEsAu);
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegRingbufferQueryMemSize(s32 arg0) {
     s32 var_v1;
 
@@ -420,9 +332,7 @@ s32 sceMpegRingbufferQueryMemSize(s32 arg0) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegRingbufferQueryPackNum(s32 arg0) {
     s32 var_v1;
 
@@ -432,9 +342,7 @@ s32 sceMpegRingbufferQueryPackNum(s32 arg0) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegRingbufferConstruct(void *arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, void *arg5) {
     s32 var_v1;
 
@@ -444,17 +352,11 @@ s32 sceMpegRingbufferConstruct(void *arg0, s32 arg1, void *arg2, s32 arg3, s32 a
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegRingbufferDestruct);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpegRingbufferPut);
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegRingbufferAvailableSize(void *arg0) {
     s32 var_v1;
 
@@ -464,9 +366,7 @@ s32 sceMpegRingbufferAvailableSize(void *arg0) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpeg_11CAB459(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -476,9 +376,7 @@ s32 sceMpeg_11CAB459(s32 arg0, s32 arg1, s32 arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpeg_C2F02CDD(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v1;
 
@@ -488,9 +386,7 @@ s32 sceMpeg_C2F02CDD(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpeg_5AC68A41(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v1;
 
@@ -500,9 +396,7 @@ s32 sceMpeg_5AC68A41(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpeg_DBB60658(s32 arg0, s32 arg1) {
     s32 var_v1;
 
@@ -512,9 +406,7 @@ s32 sceMpeg_DBB60658(s32 arg0, s32 arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpeg_B27711A8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v1;
 
@@ -524,13 +416,9 @@ s32 sceMpeg_B27711A8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", sceMpeg_D4DD6E75);
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpeg_C345DED2(s32 arg0, s32 arg1) {
     s32 var_v1;
 
@@ -540,9 +428,7 @@ s32 sceMpeg_C345DED2(s32 arg0, s32 arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegGetAvcNalAu(void *arg0, void *arg1, void *arg2) {
     s32 var_v1;
 
@@ -552,9 +438,7 @@ s32 sceMpegGetAvcNalAu(void *arg0, void *arg1, void *arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpegAvcDecodeDetailIndex(void *arg0, s32 arg1, void *arg2) {
     s32 var_v1;
 
@@ -564,9 +448,7 @@ s32 sceMpegAvcDecodeDetailIndex(void *arg0, s32 arg1, void *arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpeg_CF3547A2(s32 arg0, s32 arg1) {
     s32 var_v1;
 
@@ -576,9 +458,7 @@ s32 sceMpeg_CF3547A2(s32 arg0, s32 arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpeg_6F314410(s32 arg0, s32 arg1) {
     s32 var_v1;
 
@@ -588,9 +468,7 @@ s32 sceMpeg_6F314410(s32 arg0, s32 arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpeg_AE693D0B(s32 arg0, s32 arg1) {
     s32 var_v1;
 
@@ -600,9 +478,7 @@ s32 sceMpeg_AE693D0B(s32 arg0, s32 arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 sceMpeg_988E9E12(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -612,9 +488,7 @@ s32 sceMpeg_988E9E12(s32 arg0, s32 arg1, s32 arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_00007958(s32 arg0, s32 arg1, void *arg2, s32 *arg3) {
     s32 temp_v0;
 
@@ -622,15 +496,11 @@ s32 func_00007958(s32 arg0, s32 arg1, void *arg2, s32 *arg3) {
     *arg3 = temp_v0;
     return (temp_v0 >= 0) ? 0 : 0x80000041;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_000079AC(s32 arg0) {
     return (sceKernelDeleteSema(arg0) == 0) ? 0 : 0x80000041;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_000079D8(s32 arg0) {
     return (sceKernelWaitSema(arg0, 1, NULL) == 0) ? 0 : 0x80000041;
 }
@@ -638,21 +508,15 @@ s32 func_000079D8(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A08);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005DB8);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A68);
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 func_00007A3C(s32 arg0) {
     return (sceKernelPollSema(arg0, 0) == 0) ? 0 : 0x80000041;
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_00007A68(s32 arg0) {
     return (sceKernelSignalSema(arg0, 1) == 0) ? 0 : 0x80000041;
 }
@@ -660,41 +524,29 @@ s32 func_00007A68(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A94);
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 s32 func_00007ADC(void) {
     return sceKernelCheckThreadStack();
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007AF8);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007BAC);
 #endif
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007BF0);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005FC8);
-#endif
 
-#if FW_VERSION == 100
 void func_00006048(void) {
 
 }
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006050);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000060C0);
-#endif
 
-#if FW_VERSION == 100
 void func_000060D0(s32 arg0, s32 arg1) {
     s32 temp_a1;
     s32 var_s0;
@@ -711,9 +563,7 @@ void func_000060D0(s32 arg0, s32 arg1) {
         } while (var_s0 != 0);
     }
 }
-#endif
 
-#if FW_VERSION == 100
 s32 func_00006124(s32 arg0) {
     s32 temp_s1;
 
@@ -722,9 +572,7 @@ s32 func_00006124(s32 arg0) {
     func_00007A68(D_00007F04);
     return temp_s1;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 func_00006178(s32 arg0) {
     s32 temp_s1;
 
@@ -733,23 +581,15 @@ s32 func_00006178(s32 arg0) {
     func_00007A68(D_00007F04);
     return temp_s1;
 }
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000061CC);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006234);
-#endif
-
-#if FW_VERSION != 100
+#else
 void func_00007D70(void) {
     sceVideocodec_4F160BF4(D_00009DC0);
 }
-#endif
 
-#if FW_VERSION != 100
 s32 func_00007D94(s32 arg0) {
     s32 temp_s1;
 
@@ -759,4 +599,3 @@ s32 func_00007D94(s32 arg0) {
     return temp_s1;
 }
 #endif
-

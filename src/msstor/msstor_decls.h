@@ -125,6 +125,7 @@ s32 func_00004990(void);
 s32 func_000049E4(void);
 s32 func_00004A04(void);
 s32 func_00004A48(void);
+s32 func_00004C88(void *arg0);
 s32 func_00004E2C(struct Unk_func_00004E2C_0 *arg0);
 s32 func_00004E40(void);
 s32 func_00004EC8(void);

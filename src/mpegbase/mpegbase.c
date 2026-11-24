@@ -1,7 +1,14 @@
 #include "common.h"
 #include "mpegbase_decls.h"
 
-#if FW_VERSION == 100
+#if FW_VERSION >= 150
+s32 sceMpegbase_driver_27A2982F(void) {
+    func_000014C0();
+    func_00000C04();
+    func_00001B98();
+    return 0;
+}
+#else
 s32 sceMpegbase_driver_27A2982F(void) {
     func_000014C0();
     func_00000C04();
@@ -11,30 +18,19 @@ s32 sceMpegbase_driver_27A2982F(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION >= 150
+s32 module_stop(void) {
+    func_00001BD4();
+    func_00001500();
+    func_00000C54();
+    return 0;
+}
+#else
 s32 module_stop(void) {
     func_00001BD4();
     func_00001500();
     func_00000C54();
     sceMeWrapper_driver_3D5F109C(0x184);
-    return 0;
-}
-#endif
-
-#if FW_VERSION != 100
-s32 sceMpegbase_driver_27A2982F(void) {
-    func_000014C0();
-    func_00000C04();
-    func_00001B98();
-    return 0;
-}
-#endif
-
-#if FW_VERSION != 100
-s32 module_stop(void) {
-    func_00001BD4();
-    func_00001500();
-    func_00000C54();
     return 0;
 }
 #endif
@@ -47,7 +43,7 @@ INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_91929A21);
 
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_CE8EB837);
 
-#if FW_VERSION != 100
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_304882E1);
 #endif
 
@@ -63,23 +59,27 @@ INCLUDE_ASM("nonmatchings/mpegbase", func_00000CC8);
 
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_0530BE4E);
 
-#if FW_VERSION != 100
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/mpegbase", func_00000D48);
+
+INCLUDE_ASM("nonmatchings/mpegbase", func_00000D74);
+
+INCLUDE_ASM("nonmatchings/mpegbase", func_00000E34);
+
+INCLUDE_ASM("nonmatchings/mpegbase", func_00000FEC);
+
+INCLUDE_ASM("nonmatchings/mpegbase", func_000010FC);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000D78);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000DA8);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000E68);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001020);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001130);
 #endif
 
@@ -97,7 +97,7 @@ INCLUDE_ASM("nonmatchings/mpegbase", func_00001574);
 
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_7AC0321A);
 
-#if FW_VERSION != 100
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_BE45C284);
 #endif
 

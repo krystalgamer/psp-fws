@@ -2,6 +2,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
+#if FW_VERSION == 201
 void func_0002B79C(struct Unk_func_0002B79C_0 *arg0) {
     arg0->unk8 = 0;
     arg0->unk0 = 0;
@@ -43,4 +44,4 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02B79C", func_0002BB78);
 s32 func_0002BC38(struct Unk_func_0002BC38_0 *arg0) {
     return arg0->unk4;
 }
-
+#endif

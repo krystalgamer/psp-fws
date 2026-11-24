@@ -13,6 +13,10 @@ struct D_00003E00_s {
     volatile s32 unk1084;
 };
 
+extern M2C_UNK D_00003910;
+extern s32 D_00003AA8;
+extern s32 D_00003AAC;
+extern s32 D_00003AB0;
 extern struct D_00003E00_s D_00003E00;
 extern s32 D_00003F94;
 extern s32 D_00003F98;

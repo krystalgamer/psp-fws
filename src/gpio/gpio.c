@@ -8,11 +8,9 @@ INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_CA8BE2EA);
 
 INCLUDE_RODATA("nonmatchings/gpio", D_00000DE4);
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/gpio", D_00000DEC);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_RODATA("nonmatchings/gpio", D_00000E18);
 #endif
 
@@ -22,53 +20,35 @@ INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_F856CE46);
 
 INCLUDE_ASM("nonmatchings/gpio", module_start);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 s32 module_reboot_before(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00000CB0);
     InterruptManagerForKernel_F987B1F0(4);
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_EABDB328);
-#endif
 
-#if FW_VERSION == 100
 s32 sceGpio_driver_4A992B24(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00000CB0);
     InterruptManagerForKernel_F987B1F0(4);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 100
-s32 sceGpio_driver_17DAA8C2(void) {
-    return 0;
-}
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 module_reboot_before(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00000E40);
     InterruptManagerForKernel_F987B1F0(4);
     return 0;
 }
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_EABDB328);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_4A992B24);
 #endif
 
-#if FW_VERSION != 100
 s32 sceGpio_driver_17DAA8C2(void) {
     return 0;
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_64CD4536);
 
@@ -88,7 +68,7 @@ INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_31F34AE6);
 
 INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_BE77D1D0);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 s32 sceGpio_driver_C6928224(u32 arg0) {
     s32 var_v0;
 
@@ -98,9 +78,7 @@ s32 sceGpio_driver_C6928224(u32 arg0) {
     }
     return var_v0;
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 s32 sceGpio_driver_C6928224(u32 arg0) {
     s32 var_v0;
 
@@ -114,11 +92,9 @@ s32 sceGpio_driver_C6928224(u32 arg0) {
 
 INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_6B38B826);
 
-#if FW_VERSION != 100
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_5691CEFA);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/gpio", sceGpio_driver_2CDC8EDC);
 #endif
 

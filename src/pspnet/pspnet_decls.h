@@ -224,5 +224,6 @@ void sceNet_lib_DCBC596E(void);
 s32 sceNet_lib_E155112D(s32 arg0, s32 arg1);
 void sceNet_lib_EDCC871E(void);
 u8 *sceNet_lib_EF097716(u8 *arg0, u8 *arg1, s32 arg2);
+M2C_UNK sceWlanDrv_lib_8D5F551B(M2C_UNK);
 
 #endif

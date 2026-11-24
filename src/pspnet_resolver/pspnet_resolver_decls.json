@@ -1,12 +1,16 @@
 {
  "funcs": {
+  "_sce_pspnet_resolver_delete_ctx": "s32 _sce_pspnet_resolver_delete_ctx(s32);",
   "_sce_pspnet_resolver_init": "s32 _sce_pspnet_resolver_init(void);",
+  "_sce_pspnet_resolver_net_init": "s32 _sce_pspnet_resolver_net_init(void);",
   "_sce_pspnet_resolver_term": "s32 _sce_pspnet_resolver_term(void);",
+  "func_0000055C": "s32 func_0000055C(void);",
+  "func_000005B0": "s32 func_000005B0(void);",
+  "func_0000060C": "s32 func_0000060C(s32);",
   "func_0000065C": "s32 func_0000065C(void);",
   "func_000006B0": "s32 func_000006B0(void);",
-  "_sce_pspnet_resolver_delete_ctx": "s32 _sce_pspnet_resolver_delete_ctx(s32);",
+  "func_00000DE8": "s32 func_00000DE8(void);",
   "func_00000E2C": "s32 func_00000E2C(void);",
-  "_sce_pspnet_resolver_net_init": "s32 _sce_pspnet_resolver_net_init(void);",
   "func_00000FA8": "s32 func_00000FA8(void);",
   "func_00001BC0": "M2C_UNK *func_00001BC0(void);",
   "func_00001C04": "s32 func_00001C04(s32, s32);",

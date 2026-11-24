@@ -46,4 +46,3 @@ INCLUDE_ASM("nonmatchings/reboot", func_00001C64);
 INCLUDE_ASM("nonmatchings/reboot", func_00001C74);
 
 INCLUDE_ASM("nonmatchings/reboot", func_00001CA4);
-

@@ -516,6 +516,7 @@ M2C_UNK sceNet_lib_7C86FBA4(void *, M2C_UNK, M2C_UNK *, void *);
 M2C_UNK sceNet_lib_87DC7A7E();
 s32 sceNet_lib_94B44F26();
 M2C_UNK sceNet_lib_976AB1E9(M2C_UNK *, void (*)(), void (*)(s32), void (*)(s32), M2C_UNK *, M2C_UNK *, void (*)(s32), void (*)(void *), void (*)(s32), void (*)(s32), s32 (*)(), M2C_UNK *, M2C_UNK *);
+M2C_UNK sceNet_lib_A93A93E9(void *);
 M2C_UNK sceNet_lib_B9C780C7(s32);
 s32 sceNet_lib_C4261339(s32, void *);
 M2C_UNK sceNet_lib_E155112D(M2C_UNK *, void (*)(void *));

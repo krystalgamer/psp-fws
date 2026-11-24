@@ -265,4 +265,3 @@ void func_00008F0C(struct Unk_func_00008F0C_0 *arg0, M2C_UNK arg1, M2C_UNK arg2)
     func_0000E028();
     func_000079E4(arg0->unk10, arg1, arg2, 0);
 }
-

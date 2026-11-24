@@ -79,7 +79,8 @@
   "sceNet_lib_DCBC596E": "void sceNet_lib_DCBC596E(void);",
   "sceNet_lib_E155112D": "s32 sceNet_lib_E155112D(s32 arg0, s32 arg1);",
   "sceNet_lib_EDCC871E": "void sceNet_lib_EDCC871E(void);",
-  "sceNet_lib_EF097716": "u8 *sceNet_lib_EF097716(u8 *arg0, u8 *arg1, s32 arg2);"
+  "sceNet_lib_EF097716": "u8 *sceNet_lib_EF097716(u8 *arg0, u8 *arg1, s32 arg2);",
+  "sceWlanDrv_lib_8D5F551B": "M2C_UNK sceWlanDrv_lib_8D5F551B(M2C_UNK);"
  },
  "types": {
   "D_0000AF44_s": "struct D_0000AF44_s {\n    void * unk0;\n    void ** unk4;\n};",

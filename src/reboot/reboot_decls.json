@@ -132,6 +132,7 @@
   "D_00018BD0": "extern s32 D_00018BD0;",
   "D_00018BD4": "extern s32 D_00018BD4;",
   "D_0001D890": "extern M2C_UNK D_0001D890;",
+  "D_0002DB34": "extern M2C_UNK D_0002DB34;",
   "D_0002DBF4": "extern M2C_UNK D_0002DBF4;"
  }
 }

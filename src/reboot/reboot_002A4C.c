@@ -50,4 +50,3 @@ void func_00002CCC(s32 arg0, s32 arg1) {
 void func_00002CF0(void) {
     func_00002F14();
 }
-

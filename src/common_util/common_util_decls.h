@@ -19,11 +19,16 @@ extern s32 D_00008BF8;
 extern s32 D_00008BFC;
 extern M2C_UNK D_0000ADD8;
 extern M2C_UNK D_0000DBFC;
+extern s32 D_0000E79C;
+extern s32 D_0000E7A0;
+extern s32 D_0000E7A4;
+extern s32 D_0000E7A8;
 
 M2C_UNK func_00000000();
 void func_00000978(void);
 void func_000012C0(void);
 void func_000012F8(void);
+void func_00001D08(void);
 M2C_UNK func_000083D0();
 M2C_UNK func_00009F60();
 s32 module_start(void);

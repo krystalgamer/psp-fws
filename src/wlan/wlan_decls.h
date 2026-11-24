@@ -275,6 +275,8 @@ extern s32 D_000192B4;
 
 M2C_UNK DmacManForKernel_745E19EF(s32);
 M2C_UNK InterruptManagerForKernel_CDC86B64(s32, M2C_UNK, s32, M2C_UNK);
+void func_00002188(void *arg0);
+void func_000021AC(void *arg0);
 void func_0000227C(void *arg0);
 void func_000022A0(void *arg0);
 void func_000022C0(void *arg0);
@@ -290,6 +292,8 @@ void func_00003268(struct Unk_func_00003268_0 *arg0, s32 arg1);
 s32 func_00003304(struct Unk_func_00003304_0 *arg0);
 void func_00003374(struct Unk_func_00003374_0 *arg0);
 void func_000033E4(struct Unk_func_000033E4_0 *arg0);
+s32 func_000036EC(s32);
+s32 func_000037A4(s32 *arg0);
 s32 func_00003CE0(struct Unk_func_00003CE0_0 *arg0);
 s32 func_00004A04(s32);
 s32 func_00004B20(s32 *arg0);

@@ -21,8 +21,11 @@ struct Unk_func_00008318_temp_a0 {
 
 extern M2C_UNK D_00009A3C;
 extern s32 D_0000A9DC;
+extern s32 D_0000A9EC;
 extern s32 D_0000AA3C;
+extern s32 D_0000AA4C;
 extern s32 D_0000AE40_v100;
+extern s32 D_0000AE80;
 extern s32 D_0000AFB0;
 extern M2C_UNK D_0000B014;
 extern s32 D_0000B440;
@@ -39,6 +42,7 @@ s32 func_00002F64(s32, s32, s32, s32);
 s32 func_00005A70(void);
 s32 func_00005AF0(void);
 s32 func_00005B10(void);
+s32 func_00005B6C(void);
 s32 func_00005C38(void);
 s32 func_00005CC0(void);
 s32 func_00005CC8(void);

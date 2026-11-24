@@ -62,7 +62,7 @@ def normalise(path, names):
     """(hash, [symbols in order], kind) of one splat asm file. Symbols that are
     named (NIDs etc.) stay literal; func_/D_ style names are abstracted."""
     syms, out, base = [], [], None
-    kind = "func" if "glabel" in path.read_text() else "data"
+    kind = "func" if re.search(r"^(?:glabel|jlabel) ", path.read_text(), re.M) else "data"
     for line in path.read_text().splitlines():
         line = line.split("#")[0] if "/*" not in line.split("#")[0][-3:] else line
         m = re.match(r"\s*/\* ([0-9A-F]+) ([0-9A-F]+)(?: [0-9A-F]+)? \*/\s*(.*)", line)
@@ -87,10 +87,10 @@ def normalise(path, names):
             return "@"
         body = SYM.sub(sub, body)
         # named symbols (not func_/D_) must match literally; record them too
-        for nm in re.findall(r"\b(?:glabel|dlabel|endlabel|enddlabel)\s+(\w+)", line):
+        for nm in re.findall(r"\b(?:glabel|jlabel|dlabel|endlabel|enddlabel)\s+(\w+)", line):
             if not SYM.fullmatch(nm):
                 syms.append(nm)
-        out.append(re.sub(r"\b(glabel|dlabel|endlabel|enddlabel)\s+\w+", r"\1 @", body))
+        out.append(re.sub(r"\b(glabel|jlabel|dlabel|endlabel|enddlabel)\s+\w+", r"\1 @", body))
     h = hashlib.sha1("\n".join(out).encode()).hexdigest()
     LINES[h] = out
     return h, syms, kind
@@ -197,7 +197,7 @@ def split_config(ntext, mod, stems, N, n_tu, new, stem0):
         tu = n_tu[nn]
         t = (d / f"{nn}.s").read_text()
         if k == "func":
-            m = re.search(r"glabel \w+\n\s*/\* ([0-9A-F]+) ", t)
+            m = re.search(r"(?:glabel|jlabel) \w+\n\s*/\* ([0-9A-F]+) ", t)
             text_start.setdefault(tu, int(m[1], 16))
         for m in re.finditer(r"dlabel \w+\n\s*/\* ([0-9A-F]+) ", t):
             r = int(m[1], 16)
@@ -465,7 +465,7 @@ def main():
                     out += [asm_entry(nn, nk, folder) for nn, nk in after.pop(e.name)]
             if st == stems[-1] and after:
                 out += [asm_entry(nn, nk, folder) for v in after.values() for nn, nk in v]
-            cfile.write_text(FM.emit(out, S2))
+            cfile.write_text(FM.emit(FM.dedupe(out), S2))
         cfiles = [src / f"{st}.c" for st in stems]
         ncfg.write_text(ntext)
         nf = sum(1 for n, _, _, k in N if k == "func")
@@ -505,7 +505,7 @@ def main():
                     if hit is not None:
                         ents[hit].vers = ents[hit].vers - NV
                         ents.insert(hit, FM.Entry(NV, "asm", n, f'INCLUDE_ASM("nonmatchings/{cf.stem}", {n});\n'))
-                        cf.write_text(FM.emit(ents, S2))
+                        cf.write_text(FM.emit(FM.dedupe(ents), S2))
                         break
                 print(f"  {n}: C differs in {new}, asm there")
         else:

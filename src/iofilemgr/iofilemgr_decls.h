@@ -14,6 +14,7 @@ struct Unk_sceIoGetDevType_sp0 {
     u8 unkC;
 };
 
+extern s32 D_00004E4C;
 extern s32 D_00005870;
 
 s32 IoFileMgrForKernel_BD17474F(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0);

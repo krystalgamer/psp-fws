@@ -225,6 +225,19 @@ INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015C64);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DBB8);
 
+#if FW_VERSION == 150
+s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v0;
+
+    if (&D_0002DB34 != NULL) {
+        var_v0 = func_0000F78C(arg0, arg1, arg2, arg3, (s32) &D_0002DB34);
+    } else {
+        func_00001B78((s32) "lflash.c:%s:Mallocfailed: 0x%08x\n", (s32) "df_open", 0, arg3);
+        var_v0 = 0x8001000C;
+    }
+    return var_v0;
+}
+#else
 s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
 
@@ -236,6 +249,7 @@ s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return var_v0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DC9C);
 
@@ -509,4 +523,3 @@ s32 func_00012BEC(void) {
 s32 func_00012BF8(void) {
     return D_00018BD4;
 }
-

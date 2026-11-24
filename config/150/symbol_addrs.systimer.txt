@@ -19,3 +19,5 @@ InterruptManagerForKernel_4D6E7305 = 0x000009AC; // type:func
 InterruptManagerForKernel_D774BA45 = 0x000009B4; // type:func
 sceSuspendForKernel_91A77137 = 0x000009BC; // type:func
 sceSuspendForKernel_B43D1A8C = 0x000009C4; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

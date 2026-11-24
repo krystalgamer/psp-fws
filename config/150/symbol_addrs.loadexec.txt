@@ -60,3 +60,15 @@ sceKernelIcacheInvalidateAll = 0x00002730; // type:func
 UtilsForKernel_78934841 = 0x00002738; // type:func
 memlmd_8BDB1A3E = 0x00002740; // type:func
 sceSuspendForKernel_98A1D061 = 0x00002748; // type:func
+// shared names (tools/add_version.py) begin
+D_00002E40 = 0x00002D60; // rom:0x2DE0
+D_00002E78 = 0x00002D68; // rom:0x2DE8
+D_00002EA4 = 0x00002D94; // rom:0x2E14
+D_00002ED4 = 0x00002DDC; // rom:0x2E5C
+D_00002FD4 = 0x00002E80; // rom:0x2F00
+D_00003060 = 0x0000FA60;
+func_00000AD0 = 0x00000A0C; // type:func rom:0xA8C
+func_00000C18 = 0x00000B38; // type:func rom:0xBB8
+func_00000CA4 = 0x00000DB8; // type:func rom:0xE38
+func_00001934 = 0x00001B34; // type:func rom:0x1BB4
+// shared names (tools/add_version.py) end

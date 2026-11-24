@@ -1,8 +1,11 @@
 {
  "funcs": {
+  "func_0000030C": "s32 func_0000030C(void);",
   "func_00000AE4": "s32 func_00000AE4(void);",
   "func_00000AF4": "s32 func_00000AF4(void);",
+  "func_00001250": "s32 func_00001250(s32 arg0);",
   "func_0000134C": "s32 func_0000134C(s32 arg0);",
+  "func_00001924": "s32 func_00001924(void);",
   "module_start": "s32 module_start(void);",
   "sceHprmIsHeadphoneExist": "s32 sceHprmIsHeadphoneExist(void);",
   "sceHprmIsMicrophoneExist": "s32 sceHprmIsMicrophoneExist(void);",
@@ -31,6 +34,7 @@
   "D_00002141": "extern s8 D_00002141;",
   "D_00002142": "extern s8 D_00002142;",
   "D_00002143": "extern s8 D_00002143;",
+  "D_00002176": "extern u8 D_00002176;",
   "D_00002198": "extern s32 D_00002198;",
   "D_00002226": "extern u8 D_00002226;",
   "D_0000225C": "extern s32 D_0000225C;",

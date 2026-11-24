@@ -6,6 +6,7 @@
 
 extern s8 D_0000339D;
 extern s8 D_000033B5;
+extern s8 D_0000379D;
 
 s32 func_0000243C(s32, s32, s32);
 s32 func_000029D4(s32, s32, s32);

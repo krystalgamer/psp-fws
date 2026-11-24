@@ -33,61 +33,27 @@ INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageLookup);
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_683AAC10);
 
-#if FW_VERSION == 100
 s32 module_start(void) {
     sceIdStorage_driver_AB129D20();
     return 0;
 }
-#endif
-
-#if FW_VERSION != 100
-s32 module_start(void) {
-    sceIdStorage_driver_AB129D20();
-    return 0;
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/idstorage", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_2CE0BE69);
 
-#if FW_VERSION == 100
 s32 sceIdStorage_driver_F77565B6(void) {
     sceIdStorage_driver_3AD32523();
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 sceIdStorage_driver_FE51173D(void) {
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 sceIdStorage_driver_EB830733(void) {
     return 0x200;
 }
-#endif
-
-#if FW_VERSION != 100
-s32 sceIdStorage_driver_F77565B6(void) {
-    sceIdStorage_driver_3AD32523();
-    return 0;
-}
-#endif
-
-#if FW_VERSION != 100
-s32 sceIdStorage_driver_FE51173D(void) {
-    return 0;
-}
-#endif
-
-#if FW_VERSION != 100
-s32 sceIdStorage_driver_EB830733(void) {
-    return 0x200;
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_FEFA40C2);
 

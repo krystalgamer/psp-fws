@@ -12,11 +12,16 @@ struct D_00001D70_s {
     volatile s32 unkA40;
 };
 
+extern u32 D_00001BFC;
 extern struct D_00001D70_s D_00001D70;
 extern s8 D_00001D7F;
 extern s32 D_00001D88;
 extern s32 D_00002354;
 extern s32 D_00002358;
+extern s32 D_00002618;
+extern s32 D_0000261C;
+extern s32 D_00002620;
+extern s32 D_00002624;
 extern s32 D_000027A4;
 extern s32 D_000027A8;
 extern s32 D_000027AC;
@@ -43,6 +48,7 @@ s32 sceCtrlPeekBufferPositive(void *arg0, s32 arg1);
 s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1);
 s32 sceCtrlReadBufferPositive(void *arg0, s32 arg1);
 s32 sceCtrl_driver_252D3A8D(s8 arg0);
+s32 sceCtrl_driver_348D99D4(u32 arg0);
 M2C_UNK sceCtrl_driver_3E65A0EA();
 s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 sceCtrl_driver_AF5960F3(void);

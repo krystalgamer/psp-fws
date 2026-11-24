@@ -12,3 +12,8 @@ sceNetApctl_lib_E11BAFAB = 0x00000830; // type:func
 sceUtility_netparam_internal_072DEBF2 = 0x00000838; // type:func
 sceUtility_netparam_internal_9CE50172 = 0x00000840; // type:func
 sceUtility_netparam_internal_FC4516F3 = 0x00000848; // type:func
+// shared names (tools/add_version.py) begin
+D_00000804 = 0x000009B4;
+D_00000808 = 0x000009B8;
+D_0000080C = 0x000009BC;
+// shared names (tools/add_version.py) end

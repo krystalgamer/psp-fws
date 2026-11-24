@@ -2,7 +2,7 @@
 #include "common.h"
 #include "game_plugin_decls.h"
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 void func_000075DC(struct Unk_func_000075DC_0 *arg0) {
     M2C_UNK *temp_v0;
     M2C_UNK *var_v1;
@@ -24,9 +24,7 @@ void func_000075DC(struct Unk_func_000075DC_0 *arg0) {
     temp_v0 = arg0->unk0;
     *temp_v0 = temp_v0;
 }
-#endif
 
-#if FW_VERSION != 100
 void ***func_00007638(void ***arg0, struct Unk_func_00007638_1 *arg1, void **arg2) {
     void **temp_s0;
     struct Unk_func_00007638_temp_v1 *temp_v1;
@@ -44,7 +42,7 @@ void ***func_00007638(void ***arg0, struct Unk_func_00007638_1 *arg1, void **arg
 
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000076A0);
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 void func_000076CC(void) {
     func_000076A0();
 }
@@ -52,19 +50,13 @@ void func_000076CC(void) {
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00011F38);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006790);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00010FE4);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00010FF4);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_0001100C);
 #endif
 
@@ -72,11 +64,9 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_0001100C);
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00011034);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00011058);
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000076E8);
 #endif
 
@@ -84,33 +74,33 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012038);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012050);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_000110B8);
+#endif
+
+#if FW_VERSION == 150
+INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_000124D8);
+
+INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_000124F0);
+
+INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012508);
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_000110D8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006994);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006B24);
-#endif
 
-#if FW_VERSION == 100
 void func_00006B84(void) {
     func_00006B24(0);
 }
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006BA0);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006BE4);
 #endif
 
@@ -118,7 +108,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006BE4);
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006C00);
 #endif
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000078F8);
 #endif
 
@@ -126,14 +116,12 @@ INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007AF4);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007ED0);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 void func_0000731C(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00008020();
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 void func_00007F88(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00008020();
@@ -144,31 +132,25 @@ INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007FA8);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00008020);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 void func_000073D4(void *arg0) {
     vsh_5452A47B();
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00012158;
     M2C_FIELD(arg0, s32 *, 0x30) = -1;
 }
-#endif
 
-#if FW_VERSION == 100
 void func_0000740C(void *arg0) {
     vsh_5452A47B();
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00012158;
     M2C_FIELD(arg0, s32 *, 0x30) = -1;
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 void func_00008040(struct Unk_func_00008040_0 *arg0) {
     vsh_5452A47B();
     arg0->unk0 = &D_00012158;
     arg0->unk30 = -1;
 }
-#endif
 
-#if FW_VERSION != 100
 void func_00008078(struct Unk_func_00008078_0 *arg0) {
     vsh_5452A47B();
     arg0->unk0 = &D_00012158;
@@ -178,11 +160,9 @@ void func_00008078(struct Unk_func_00008078_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000080B0);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007490);
-#endif
-
-#if FW_VERSION != 100
+#else
 void func_000080FC(struct Unk_func_000080FC_0 *arg0) {
     arg0->unk30 = -1;
     vsh_61FE226A();
@@ -191,31 +171,24 @@ void func_000080FC(struct Unk_func_000080FC_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00008120);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 void func_000074E0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x30) = arg1;
     func_00008120();
 }
-#endif
 
-#if FW_VERSION == 100
 void func_00007500(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x30) = -1;
     vsh_7ADF6A69();
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 void func_00008160(struct Unk_func_00008160_0 *arg0, s32 arg1) {
     arg0->unk30 = arg1;
     func_00008120();
 }
-#endif
 
-#if FW_VERSION != 100
 void func_00008180(struct Unk_func_00008180_0 *arg0) {
     arg0->unk30 = -1;
     vsh_7ADF6A69();
 }
 #endif
-

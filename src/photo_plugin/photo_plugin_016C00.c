@@ -2,6 +2,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
+#if FW_VERSION == 201
 void func_00016C00(void) {
     struct Unk_func_00016C00_temp_v0 *temp_v0;
 
@@ -60,4 +61,4 @@ void func_00017138(void) {
 void func_00017158(void) {
     func_00017050(0, 0xFFFF);
 }
-
+#endif

@@ -185,3 +185,37 @@ def emit(entries, versions):
         out.append(f"#if {condition(e.vers, versions)}\n{block}#endif\n\n")
         i = j
     return "".join(out).rstrip("\n") + "\n"
+
+
+def dedupe(entries):
+    """Merge identical items compiled by disjoint version sets when no version
+    of one compiles anything between them (each version's code is unchanged)."""
+    ents = merge(entries)
+    changed = True
+    while changed:
+        changed = False
+        seen = {}
+        for j, e in enumerate(ents):
+            if e.kind == "other":
+                continue
+            key = (e.kind, e.name, e.text)
+            for i in seen.get(key, []):
+                a, b = ents[i], e
+                if a.vers & b.vers:
+                    continue
+                between = ents[i + 1:j]
+                if not any(x.vers & b.vers for x in between):
+                    a.vers = a.vers | b.vers
+                    del ents[j]
+                elif not any(x.vers & a.vers for x in between):
+                    b.vers = b.vers | a.vers
+                    del ents[i]
+                else:
+                    continue
+                changed = True
+                break
+            if changed:
+                break
+            seen.setdefault(key, []).append(j)
+        ents = merge(ents)
+    return ents

@@ -7,3 +7,5 @@ sceVaudio_driver_DCC18F25 = 0x0000003C; // type:func
 sceVaudio_driver_82EF2F9D = 0x00000044; // type:func
 sceVaudio_driver_5A7435B7 = 0x00000060; // type:func
 sceVaudio_driver_72749E84 = 0x00000068; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

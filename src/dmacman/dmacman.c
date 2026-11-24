@@ -7,21 +7,15 @@ INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_1C46158A);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/dmacman", func_00000328);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/dmacman", func_00000400);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_D8BC3120);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_2E3BC333);
 #endif
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_32757C57);
 #endif
 
@@ -35,9 +29,7 @@ INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_745E19EF);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_F64BAB99);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/dmacman", func_00000800);
 #endif
 
@@ -57,11 +49,15 @@ INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_7D21A2EF);
 
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_DB286D65);
 
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/dmacman", func_00000B5C);
+#endif
+
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/dmacman", func_00000F68);
 #endif
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/dmacman", func_00000B10);
 #endif
 
@@ -90,41 +86,39 @@ s32 func_00001388(void **arg0, u32 arg1) {
 
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_904110FC);
 
-#if FW_VERSION == 100
-s32 DmacManForKernel_D3F62265(void) {
-    return 0;
-}
-#endif
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/dmacman", func_00001114);
 
-#if FW_VERSION != 100
-INCLUDE_ASM("nonmatchings/dmacman", func_0000108C);
-#endif
+INCLUDE_ASM("nonmatchings/dmacman", func_000014C8);
 
-#if FW_VERSION != 100
-INCLUDE_ASM("nonmatchings/dmacman", func_00001418);
-#endif
-
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_D8BC3120);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_2E3BC333);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_59615199);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_F64BAB99);
 #endif
 
-#if FW_VERSION != 100
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_1FC036B7);
-#endif
+#if FW_VERSION < 282
+s32 DmacManForKernel_D3F62265(void) {
+    return 0;
+}
+#else
+INCLUDE_ASM("nonmatchings/dmacman", func_0000108C);
 
-#if FW_VERSION != 100
+INCLUDE_ASM("nonmatchings/dmacman", func_00001418);
+
+INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_D8BC3120);
+
+INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_2E3BC333);
+
+INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_59615199);
+
+INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_F64BAB99);
+
+INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_1FC036B7);
+
 s32 DmacManForKernel_D3F62265(void) {
     return 0;
 }
@@ -132,26 +126,26 @@ s32 DmacManForKernel_D3F62265(void) {
 
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_A893DA2C);
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/dmacman", func_000015A8);
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/dmacman", func_00001A08);
+
+INCLUDE_ASM("nonmatchings/dmacman", func_00001A8C);
+
+INCLUDE_ASM("nonmatchings/dmacman", func_00001B00);
 #endif
 
 #if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/dmacman", func_000015A8);
+
 INCLUDE_ASM("nonmatchings/dmacman", func_00001860);
 #endif
 
-#if FW_VERSION != 100
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/dmacman", func_00001A78);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/dmacman", func_00001B08);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/dmacman", func_00001B88);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/dmacman", func_00001BA8);
 #endif

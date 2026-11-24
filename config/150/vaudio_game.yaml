@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, vaudio_game]
+      - [0x80, c, vaudio_game]
       - { start: 0xF0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0xF4, type: rodata, name: lib_ent, linker_section: .lib.ent }
       - { start: 0x124, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
@@ -60,7 +60,7 @@ segments:
       - { start: 0x12C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x130, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x164, type: rodata, name: resident, linker_section: .rodata.sceResident }
-      - [0x1FC, rodata, vaudio_game]
+      - [0x1FC, .rodata, vaudio_game]
       - { start: 0x204, type: prxpad, order: .rodata }
   - [0x210, bin, elf_trailer]
   - [0x730]

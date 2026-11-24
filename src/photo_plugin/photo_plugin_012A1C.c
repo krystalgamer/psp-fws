@@ -2,6 +2,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
+#if FW_VERSION == 201
 void func_00012A1C(s32 arg0) {
     struct Unk_func_00012A1C_temp_v0 *temp_v0;
 
@@ -200,4 +201,4 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000149E4);
 void func_00014AE8(void) {
     sceVshCommonGui_A0DE7090(1);
 }
-
+#endif

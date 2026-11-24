@@ -34,7 +34,7 @@ def put_c(text, ver, versions, name, body):
             e.vers = e.vers - {v}
             ents.insert(k + 1, FM.Entry(frozenset([v]), "cfunc", name, body))
             break
-    return FM.emit(ents, versions)
+    return FM.emit(FM.dedupe(ents), versions)
 
 
 def put_asm(text, ver, versions, name, folder):
@@ -46,4 +46,4 @@ def put_asm(text, ver, versions, name, folder):
             e.vers = e.vers - {v}
             ents.insert(k, FM.Entry(frozenset([v]), "asm", name, f'INCLUDE_ASM("{folder}", {name});\n'))
             break
-    return FM.emit(ents, versions)
+    return FM.emit(FM.dedupe(ents), versions)

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
+#if FW_VERSION == 201
 void func_00026D98(void) {
     s32 temp_s0;
     s32 temp_v0;
@@ -104,4 +105,4 @@ void *func_00029278(void **arg0) {
     }
     return var_v0;
 }
-
+#endif

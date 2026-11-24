@@ -46,3 +46,6 @@ sceKernelWaitEventFlag = 0x00000CAC; // type:func
 sceKernelWaitEventFlagCB = 0x00000CB4; // type:func
 sceKernelCancelEventFlag = 0x00000CBC; // type:func
 sceKernelGetThreadmanIdType = 0x00000CC4; // type:func
+// shared names (tools/add_version.py) begin
+func_000019AC = 0x00000438; // type:func rom:0x4B8
+// shared names (tools/add_version.py) end

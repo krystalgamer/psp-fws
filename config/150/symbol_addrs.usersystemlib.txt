@@ -6,3 +6,6 @@ sceKernelCpuResumeIntrWithSync = 0x00000080; // type:func
 sceKernelIsCpuIntrSuspended = 0x000000B8; // type:func
 sceKernelIsCpuIntrEnable = 0x000000C0; // type:func
 sceKernelRegisterUserSpaceIntrStack = 0x000000CC; // type:func
+// shared names (tools/add_version.py) begin
+D_000001FC = 0x000001BC; // rom:0x23C
+// shared names (tools/add_version.py) end

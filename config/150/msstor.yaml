@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/150/.splat_cache.msstor
   symbol_addrs_path:
     - config/150/symbol_addrs.msstor.txt
+    - config/150/func_starts.msstor.txt
     - tmp/build/150/prx_syms.msstor.txt
   reloc_addrs_path: [tmp/build/150/reloc_addrs.msstor.txt]
   asset_path: tmp/assets/150/msstor
@@ -52,7 +53,10 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, msstor]
+      - [0x80, c, msstor]
+      - [0x360, c, msstor_0001BC]
+      - [0x1388, c, msstor_0015A0]
+      - [0x6C14, c, msstor_0077C4]
       - { start: 0x7F20, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x80F0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x80F4, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -63,7 +67,8 @@ segments:
       - { start: 0x81C0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x81F4, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x82EC, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x83D4, rodata, msstor]
+      - [0x83D4, .rodata, msstor_0015A0]
+      - [0x85C0, .rodata, msstor_0077C4]
   - name: msstor_seg1
     type: code
     start: 0x8B00

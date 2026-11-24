@@ -68,4 +68,3 @@ void func_00002A00(u8 *arg0, u8 *arg1) {
     }
     *var_a0 = 0;
 }
-

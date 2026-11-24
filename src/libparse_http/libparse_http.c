@@ -6,51 +6,39 @@ INCLUDE_ASM("nonmatchings/libparse_http", sceParseHttpStatusLine);
 
 INCLUDE_ASM("nonmatchings/libparse_http", sceParseHttpResponseHeader);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_http", func_000002D8);
+
+INCLUDE_ASM("nonmatchings/libparse_http", func_0000044C);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libparse_http", func_0000044C);
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/libparse_http", func_000004DC);
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/libparse_http", strncmp_uc);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_http", func_00000564);
-#endif
 
-#if FW_VERSION == 100
 s32 module_start(void) {
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 module_stop(void) {
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/libparse_http", func_000005F0);
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/libparse_http", func_000003A0);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/libparse_http", func_00000510);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/libparse_http", func_000005A0);
-#endif
 
-#if FW_VERSION != 100
 INCLUDE_ASM("nonmatchings/libparse_http", func_0000061C);
 #endif
 
@@ -58,13 +46,11 @@ INCLUDE_ASM("nonmatchings/libparse_http", func_000006C4);
 
 INCLUDE_ASM("nonmatchings/libparse_http", func_000006F0);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 M2C_UNK *func_0000065C(void) {
     return &D_00000C41;
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 M2C_UNK *func_00000704(void) {
     return &D_00000D61;
 }
@@ -84,7 +70,7 @@ INCLUDE_ASM("nonmatchings/libparse_http", func_000009F0);
 
 INCLUDE_ASM("nonmatchings/libparse_http", func_00000BD0);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 u8 *func_00000B4C(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;
@@ -105,13 +91,9 @@ u8 *func_00000B4C(u8 *arg0, u8 *arg1) {
     }
     return var_v0;
 }
-#endif
-
-#if FW_VERSION != 100
+#else
 INCLUDE_ASM("nonmatchings/libparse_http", func_00000C00);
-#endif
 
-#if FW_VERSION != 100
 u8 *func_00000C48(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;

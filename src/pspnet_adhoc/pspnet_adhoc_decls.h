@@ -96,6 +96,7 @@ extern M2C_UNK D_00007450;
 extern struct D_000079C0_s D_000079C0;
 extern M2C_UNK D_000079CC;
 extern M2C_UNK D_000079E8;
+extern M2C_UNK D_00007A8C;
 
 void func_00000444(s32 arg0);
 void func_00000490(s32 arg0);

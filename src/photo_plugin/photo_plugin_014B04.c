@@ -1,6 +1,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_00014B04);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_00014D3C);
@@ -83,4 +84,4 @@ INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_000169B0);
 INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_00016B54);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_00016BC4);
-
+#endif

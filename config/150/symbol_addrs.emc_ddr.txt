@@ -21,3 +21,11 @@ sceKernelCpuResumeIntrWithSync = 0x0000064C; // type:func
 memcpy = 0x00000654; // type:func
 sceKernelDcacheWritebackAll = 0x0000065C; // type:func
 sceSysreg_driver_BB3623DF = 0x00000664; // type:func
+// shared names (tools/add_version.py) begin
+D_000008C0 = 0x00000880; // rom:0x900
+D_00000900 = 0x000008C0; // rom:0x940
+func_000002A0 = 0x00000270; // type:func rom:0x2F0
+func_00000390 = 0x00000360; // type:func rom:0x3E0
+func_00000480 = 0x00000450; // type:func rom:0x4D0
+D_00000900_v150 = 0x00000900; // rom:0x980
+// shared names (tools/add_version.py) end

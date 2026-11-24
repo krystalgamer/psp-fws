@@ -4,6 +4,7 @@
   "func_00000978": "void func_00000978(void);",
   "func_000012C0": "void func_000012C0(void);",
   "func_000012F8": "void func_000012F8(void);",
+  "func_00001D08": "void func_00001D08(void);",
   "func_000083D0": "M2C_UNK func_000083D0();",
   "func_00009F60": "M2C_UNK func_00009F60();",
   "module_start": "s32 module_start(void);",
@@ -46,6 +47,10 @@
   "D_00008BF8": "extern s32 D_00008BF8;",
   "D_00008BFC": "extern s32 D_00008BFC;",
   "D_0000ADD8": "extern M2C_UNK D_0000ADD8;",
-  "D_0000DBFC": "extern M2C_UNK D_0000DBFC;"
+  "D_0000DBFC": "extern M2C_UNK D_0000DBFC;",
+  "D_0000E79C": "extern s32 D_0000E79C;",
+  "D_0000E7A0": "extern s32 D_0000E7A0;",
+  "D_0000E7A4": "extern s32 D_0000E7A4;",
+  "D_0000E7A8": "extern s32 D_0000E7A8;"
  }
 }

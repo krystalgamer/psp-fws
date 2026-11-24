@@ -19,6 +19,7 @@
   "SysMemForKernel_8F20C4C0": "M2C_UNK SysMemForKernel_8F20C4C0(s32);",
   "SysMemForKernel_CE05CCB7": "M2C_UNK SysMemForKernel_CE05CCB7();",
   "SysMemForKernel_FEFC8666": "M2C_UNK SysMemForKernel_FEFC8666(M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);",
+  "func_00000340": "s32 func_00000340(void);",
   "func_00000674": "void func_00000674(s32 arg0, s32 arg1);",
   "func_00000690": "void func_00000690(s32 arg0, s32 arg1);",
   "func_000007D0": "s32 func_000007D0(void);",
@@ -41,6 +42,7 @@
   "func_00002BE4": "void func_00002BE4(void *arg0, u32 arg1);",
   "func_00002C20": "void func_00002C20(void);",
   "func_00002C3C": "void func_00002C3C(void *arg0, u32 arg1);",
+  "func_000039F4": "s32 func_000039F4(s32 arg0);",
   "func_00004B28": "s32 func_00004B28(void *arg0);",
   "func_00004D04": "s32 func_00004D04(s32 arg0);",
   "func_00004D14": "s32 func_00004D14(s32 arg0);",
@@ -65,6 +67,7 @@
   "D_000073A0": "extern M2C_UNK D_000073A0;",
   "D_000074B4": "extern s32 D_000074B4;",
   "D_000074B8": "extern s32 D_000074B8;",
+  "D_000075B4": "extern s32 D_000075B4;",
   "D_000077C4": "extern M2C_UNK D_000077C4;",
   "D_00008914": "extern s32 D_00008914;",
   "D_000097AC": "extern M2C_UNK D_000097AC;"

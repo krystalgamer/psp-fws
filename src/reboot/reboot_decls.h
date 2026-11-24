@@ -48,6 +48,7 @@ extern s32 D_00018BCC;
 extern s32 D_00018BD0;
 extern s32 D_00018BD4;
 extern M2C_UNK D_0001D890;
+extern M2C_UNK D_0002DB34;
 extern M2C_UNK D_0002DBF4;
 
 s32 func_00001B78(s32, s32, s32, s32);

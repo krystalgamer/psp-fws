@@ -3,3 +3,15 @@ sceParseHttpStatusLine = 0x00000000; // type:func
 sceParseHttpResponseHeader = 0x000000AC; // type:func
 module_start = 0x000005E0; // type:func
 module_stop = 0x000005E8; // type:func
+// shared names (tools/add_version.py) begin
+D_00000D60 = 0x00000C40; // rom:0xCC0
+func_000006C4 = 0x0000061C; // type:func rom:0x69C
+func_000006F0 = 0x00000648; // type:func rom:0x6C8
+func_00000710 = 0x00000668; // type:func rom:0x6E8
+func_000007B0 = 0x00000708; // type:func rom:0x788
+func_0000090C = 0x00000860; // type:func rom:0x8E0
+func_00000954 = 0x000008A8; // type:func rom:0x928
+func_00000988 = 0x000008DC; // type:func rom:0x95C
+func_000009F0 = 0x00000944; // type:func rom:0x9C4
+func_00000BD0 = 0x00000B1C; // type:func rom:0xB9C
+// shared names (tools/add_version.py) end

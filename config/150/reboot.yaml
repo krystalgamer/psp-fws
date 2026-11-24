@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/150/.splat_cache.reboot
   symbol_addrs_path:
     - config/150/symbol_addrs.reboot.txt
+    - config/150/func_starts.reboot.txt
     - tmp/build/150/prx_syms.reboot.txt
   reloc_addrs_path: [tmp/build/150/reloc_addrs.reboot.txt]
   asset_path: tmp/assets/150/reboot
@@ -52,7 +53,13 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, reboot]
+      - [0x80, c, reboot]
+      - [0x1D34, c, reboot_001CB4]
+      - [0x2AA8, c, reboot_002A28]
+      - [0x2ACC, c, reboot_002A4C]
+      - [0x2D8C, c, reboot_002D0C]
+      - [0x8F18, c, reboot_008F5C]
+      - [0x12BC0, c, reboot_012C04]
       - { start: 0x145B4, type: prxpad, order: .text }
       - { start: 0x145C0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x145C4, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -62,7 +69,11 @@ segments:
       - { start: 0x145F0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x14624, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x1464C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x146AC, rodata, reboot]
+      - [0x146AC, .rodata, reboot]
+      - [0x14AD0, .rodata, reboot_001CB4]
+      - [0x14B60, .rodata, reboot_002D0C]
+      - [0x158A4, .rodata, reboot_008F5C]
+      - [0x16BD4, .rodata, reboot_012C04]
   - name: reboot_seg1
     type: code
     start: 0x16DA0

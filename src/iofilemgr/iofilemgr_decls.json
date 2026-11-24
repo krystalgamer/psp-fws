@@ -52,6 +52,7 @@
   "Unk_sceIoGetDevType_sp0": "struct Unk_sceIoGetDevType_sp0 {\n    u8 pad0[0xC];\n    u8 unkC;\n};"
  },
  "vars": {
+  "D_00004E4C": "extern s32 D_00004E4C;",
   "D_00005870": "extern s32 D_00005870;"
  }
 }

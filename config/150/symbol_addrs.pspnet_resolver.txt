@@ -22,3 +22,8 @@ sceNetInetSocket = 0x0000209C; // type:func
 sceNetInetSocketAbort = 0x000020A4; // type:func
 sceNetInetGetErrno = 0x000020AC; // type:func
 sceNetInet_lib_AC9D90A5 = 0x000020B4; // type:func
+// shared names (tools/add_version.py) begin
+D_00001F78 = 0x00002348;
+func_000011E8 = 0x00001184; // type:func rom:0x1204
+func_000019A4 = 0x0000185C; // type:func rom:0x18DC
+// shared names (tools/add_version.py) end

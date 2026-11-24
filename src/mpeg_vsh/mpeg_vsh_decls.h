@@ -212,6 +212,7 @@ s32 sceKernelWaitSema(s32, s32, void *);
 s32 sceMpegAtracDecode(void *arg0, void *arg1, void *arg2, s32 arg3);
 s32 sceMpegAvcCopyYCbCr(void *arg0, void *arg1, void *arg2);
 s32 sceMpegAvcDecode(void *arg0, void *arg1, s32 arg2, void *arg3, void *arg4);
+s32 sceMpegAvcDecodeDetail(void *arg0, void *arg1);
 s32 sceMpegAvcDecodeDetailIndex(void *arg0, s32 arg1, void *arg2);
 s32 sceMpegAvcDecodeMode(void *arg0, void *arg1);
 s32 sceMpegAvcDecodeStop(void *arg0, s32 arg1, void *arg2, void *arg3);
