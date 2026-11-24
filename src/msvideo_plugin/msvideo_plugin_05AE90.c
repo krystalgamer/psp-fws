@@ -6,7 +6,10 @@ INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_05AE90", fun
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_05AE90", func_0005AECC);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_05AE90", func_0005B424);
+void func_0005B424(M2C_UNK **arg0) {
+    func_00059F54(arg0);
+    *arg0 = &D_00065968;
+}
 
 void func_0005B454(M2C_UNK **arg0) {
     *arg0 = &D_00065968;

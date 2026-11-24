@@ -3,7 +3,11 @@
 
 INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_05B564", func_0005B564);
 
-INCLUDE_ASM("tmp/asm/201/msvideo_plugin/nonmatchings/msvideo_plugin_05B564", func_0005BAA4);
+void func_0005BAA4(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00065A58;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 void func_0005BABC(void *arg0) {
     s32 **temp_s0;

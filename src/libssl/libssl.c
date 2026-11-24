@@ -18,7 +18,12 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00000664);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_000007B4);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_000007F0);
+void func_000007F0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00000804);
 
@@ -290,7 +295,15 @@ M2C_UNK *func_0000AEC4(void) {
     return "md2(int)";
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000AED0);
+void func_0000AED0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    func_00029D1C((s32) (arg0 + 0x54), 0, 0x40);
+    func_00029D1C((s32) (arg0 + 0x14), 0, 0x40);
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000AF24);
 
@@ -384,7 +397,10 @@ M2C_UNK *func_0000D328(void) {
     return &D_0002E4AC;
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D334);
+void func_0000D334(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x78) = 0;
+    M2C_FIELD(arg0, s32 *, 0x74) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D340);
 
@@ -406,13 +422,22 @@ void func_0000D480(void) {
     sceSsl_lib_5E5C873A();
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D49C);
+void func_0000D49C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 4) = 0x30;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x58) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D4B0);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D698);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D7D0);
+void func_0000D7D0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 4) = 0x1E;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x58) = 0;
+    M2C_FIELD(arg0, s32 *, 0x5C) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_0000D7E8);
 
@@ -853,7 +878,13 @@ M2C_UNK *func_00012F14(void) {
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_28B4DE33);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00012F88);
+s32 func_00012F88(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    return 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_00012FA0);
 
@@ -1566,7 +1597,10 @@ s32 func_000171E0(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", func_000171F8);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_A87C65C7);
+void sceSsl_lib_A87C65C7(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x4C) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x50) = arg2;
+}
 
 s32 func_00017544(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x4C);
@@ -2057,7 +2091,13 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_101D418A);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_9CDCA0D7);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_04E677AF);
+void sceSsl_lib_04E677AF(void) {
+    void *temp_v0;
+
+    temp_v0 = func_0001EC18();
+    M2C_FIELD(temp_v0, s32 *, 0x148) = 0;
+    M2C_FIELD(temp_v0, s32 *, 0x144) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_E78AD94D);
 
@@ -2733,7 +2773,10 @@ INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_FB8273FE);
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_588F2FE8);
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_529A9477);
+void sceSsl_lib_529A9477(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x84) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x88) = arg2;
+}
 
 INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_AEBF278B);
 
@@ -2826,7 +2869,10 @@ void sceSsl_lib_C270B3A8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC8) = arg1;
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_BE423CD1);
+void sceSsl_lib_BE423CD1(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0xCC) = arg1;
+    M2C_FIELD(arg0, s32 *, 0xD0) = arg2;
+}
 
 s32 sceSsl_lib_95E346AB(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xC8);
@@ -2840,7 +2886,10 @@ s32 func_00028BB4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xD0);
 }
 
-INCLUDE_ASM("tmp/asm/282/libssl/nonmatchings/libssl", sceSsl_lib_9CB1A62F);
+void sceSsl_lib_9CB1A62F(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0xD4) = arg1;
+    M2C_FIELD(arg0, s32 *, 0xD8) = arg2;
+}
 
 s32 func_00028BC8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xD4);
