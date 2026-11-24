@@ -2754,6 +2754,47 @@ struct Unk_func_000C87E0_temp_v1 {
     s32 unk24;
 };
 
+struct Unk_ret_func_000B4E08 {
+    u8 pad0[0x8];
+    s16 unk8;
+};
+
+struct Unk_ret_func_000BFECC {
+    u8 pad0[0x194];
+    s32 unk194;
+    u8 pad198[0x24];
+    s32 unk1BC;
+    s32 unk1C0;
+    void **unk1C4;
+    u8 pad1C8[0x48];
+    u8 unk210;
+    u8 pad211[0x7];
+    u8 unk218;
+};
+
+struct Unk_ret_sceHVNetfront_Module_E459881C {
+    u8 pad0[0x4];
+    s32 unk4;
+    u8 pad8[0x1C];
+    s32 unk24;
+    s32 unk28;
+};
+
+struct Unk_ret_sceHVWWW_Library_AFE281B5 {
+    u8 pad0[0x24];
+    M2C_UNK (*unk24)(M2C_UNK);
+    M2C_UNK (*unk28)(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
+    M2C_UNK (*unk2C)(s32, s32, s32, s32);
+    M2C_UNK (*unk30)(s32, s32, s32, s32, s32, s32);
+    M2C_UNK (*unk34)(M2C_UNK, M2C_UNK);
+    M2C_UNK (*unk38)(M2C_UNK);
+};
+
+struct Unk_ret_sceHVWWW_Library_B6D816EE {
+    u8 pad0[0x74];
+    s32 unk74;
+};
+
 struct Unk_sceHVWWW_Library_031DE469_1 {
     u8 pad0[0x24];
     s32 unk24;
@@ -4044,7 +4085,7 @@ s32 func_000B3CA4(struct Unk_func_000B3CA4_0 *arg0, M2C_UNK arg1);
 s32 func_000B4B88(struct Unk_func_000B4B88_0 *arg0, s32 arg1);
 M2C_UNK func_000B4BDC();
 void func_000B4D50(s32 arg0);
-void *func_000B4E08(M2C_UNK);
+struct Unk_ret_func_000B4E08 *func_000B4E08(M2C_UNK);
 s32 func_000B4EC0(s32);
 void func_000B520C(struct Unk_func_000B2990_0 *arg0);
 void func_000B5228(struct Unk_func_000B5228_0 *arg0, s32 arg1);
@@ -4155,7 +4196,7 @@ s32 func_000BFCA0(s32, s32, s32);
 s32 func_000BFD5C(s32, s32);
 void **func_000BFE78();
 void **func_000BFE98();
-void *func_000BFECC();
+struct Unk_ret_func_000BFECC *func_000BFECC();
 s32 func_000BFFE8(struct Unk_func_000BFFE8_0 *arg0);
 void func_000C00C0(struct Unk_func_000C00C0_0 *arg0, M2C_UNK arg1);
 void func_000C00F0(struct Unk_func_000C00C0_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg_sp0, s32 arg_sp4, s32 arg_sp8, s32 arg_spC);
@@ -4332,7 +4373,7 @@ M2C_UNK sceHVNetfront_Module_D77AFB32();
 s32 sceHVNetfront_Module_D9FE99F5(s32, s32);
 s32 sceHVNetfront_Module_E1280750(s32, M2C_UNK, s32);
 M2C_UNK sceHVNetfront_Module_E2C79DAF(s32);
-s32 sceHVNetfront_Module_E459881C(s32);
+struct Unk_ret_sceHVNetfront_Module_E459881C *sceHVNetfront_Module_E459881C(s32);
 s32 sceHVNetfront_Module_EA8FFAF4(s32);
 s32 sceHVNetfront_Module_EAB56A29(void **, s32, s32, M2C_UNK, M2C_UNK, s32, M2C_UNK);
 M2C_UNK sceHVNetfront_Module_EB9C36E9(s32);
@@ -4388,10 +4429,10 @@ void sceHVWWW_Library_A596909E(void);
 void sceHVWWW_Library_AAF3C102(s32 arg0, M2C_UNK arg1);
 void sceHVWWW_Library_ABCB2674(struct Unk_func_00019784_0 *arg0);
 void sceHVWWW_Library_AC4DE680(s32 arg0);
-s32 sceHVWWW_Library_AFE281B5(struct Unk_func_000C00C0_0 *arg0);
+struct Unk_ret_sceHVWWW_Library_AFE281B5 *sceHVWWW_Library_AFE281B5(struct Unk_func_000C00C0_0 *arg0);
 s32 sceHVWWW_Library_B38EC1CB(s32 arg0);
 M2C_UNK sceHVWWW_Library_B6211E66(void *);
-void *sceHVWWW_Library_B6D816EE();
+struct Unk_ret_sceHVWWW_Library_B6D816EE *sceHVWWW_Library_B6D816EE();
 s32 sceHVWWW_Library_B6EB5E02(struct Unk_sceHVWWW_Library_B6EB5E02_0 *arg0, s32 arg1, s32 arg2, s32 arg3);
 void sceHVWWW_Library_BDD85781(void);
 s32 sceHVWWW_Library_BF5437BC(struct Unk_sceHVWWW_Library_BF5437BC_0 *arg0, M2C_UNK arg1);

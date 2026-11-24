@@ -3487,6 +3487,56 @@ struct Unk_png_set_swap_alpha_0 {
     s32 unk424;
 };
 
+struct Unk_ret_func_00009DFC {
+    u8 pad0[0x70];
+    s32 unk70;
+    s32 unk74;
+    u8 pad78[0xD8];
+    s32 unk150;
+    u8 pad154[0x538];
+    s32 unk68C;
+    u8 pad690[0x4];
+    s32 unk694;
+    s32 unk698;
+    s32 unk69C;
+    s32 unk6A0;
+    s32 unk6A4;
+    s32 unk6A8;
+    u8 pad6AC[0x21C];
+    s32 unk8C8;
+    u8 pad8CC[0x3C];
+    s32 unk908;
+    u8 pad90C[0x4];
+    s32 unk910;
+    u8 pad914[0xC];
+    s32 unk920;
+};
+
+struct Unk_ret_func_0005C460 {
+    u8 pad0[0x24];
+    void *unk24;
+};
+
+struct Unk_ret_func_000CA098 {
+    u8 pad0[0xC];
+    s32 unkC;
+};
+
+struct Unk_ret_func_000D45B0 {
+    u8 pad0[0x14];
+    M2C_UNK (*unk14)(s32 ***, void *);
+};
+
+struct Unk_ret_func_000F503C {
+    u8 pad0[0x20];
+    s32 unk20;
+};
+
+struct Unk_ret_sceHVNetfront_Module_52564790 {
+    u8 pad0[0x24];
+    M2C_UNK (*unk24)(void *, s32);
+};
+
 struct Unk_sceHVNetfront_Module_05F33A6C_0 {
     u8 pad0[0x18];
     s32 unk18;
@@ -4898,7 +4948,7 @@ s32 func_00009C3C(struct Unk_func_00009C3C_0 *arg0, struct Unk_func_00009C3C_1 *
 s32 func_00009CAC(struct Unk_func_00009CAC_0 *arg0, struct Unk_func_00009CAC_1 *arg1, M2C_UNK arg2);
 s32 func_00009D1C(struct Unk_func_00009D1C_0 *arg0, struct Unk_func_00009D1C_1 *arg1, M2C_UNK arg2);
 s32 func_00009D8C(struct Unk_func_00009D8C_0 *arg0, struct Unk_func_00009D8C_1 *arg1, M2C_UNK arg2);
-void *func_00009DFC();
+struct Unk_ret_func_00009DFC *func_00009DFC();
 s32 func_00009E08();
 s32 func_00009E14(void);
 void *func_00009E40();
@@ -5653,7 +5703,7 @@ s32 func_0005C2A0(s32, s32);
 s32 func_0005C3A4(struct Unk_func_0005C3A4_0 *arg0, struct Unk_func_0005C3A4_1 *arg1);
 void func_0005C3E4(void *arg0, s32 arg1, struct Unk_func_0005C3E4_2 *arg2);
 void func_0005C40C(s32 arg0, struct Unk_func_0005C40C_1 *arg1);
-s32 func_0005C460(s32, s32, s32);
+struct Unk_ret_func_0005C460 *func_0005C460(s32, s32, s32);
 void func_0005C4D0(struct Unk_func_0005C4D0_0 *arg0);
 void func_0005C510(struct Unk_func_0005C510_0 *arg0);
 s32 func_0005C5B8(s32 arg0);
@@ -6363,7 +6413,7 @@ void func_000CA000(struct Unk_vt_func_000CA000_arg0 **arg0, s32 arg1);
 s32 **func_000CA00C();
 M2C_UNK func_000CA018(s32, M2C_UNK);
 s32 func_000CA024(struct Unk_vt_func_000CA024_arg0 **arg0);
-s32 func_000CA098(struct Unk_vt_func_000CA098_arg0 **arg0);
+struct Unk_ret_func_000CA098 *func_000CA098(struct Unk_vt_func_000CA098_arg0 **arg0);
 void func_000CA0A4(struct Unk_vt_func_000CA0A4_arg0 **arg0, s32 arg1);
 s32 func_000CA0B0(s32, s32);
 void func_000CA128(s32 **arg0);
@@ -6450,7 +6500,7 @@ M2C_UNK func_000D409C(void *);
 s32 func_000D4170(s32, s32, s32, s32, s32);
 s32 func_000D4268(s32, s32, s32, s32);
 s32 func_000D4428(s32, s32, s32);
-s32 func_000D45B0(s32 arg0, struct Unk_func_000D45B0_1 *arg1);
+struct Unk_ret_func_000D45B0 *func_000D45B0(s32 arg0, struct Unk_func_000D45B0_1 *arg1);
 s32 func_000D45F4(s32 arg0, s32 arg1, M2C_UNK arg2);
 s32 func_000D4718(s32 *arg0, struct Unk_func_000D4718_1 *arg1);
 M2C_UNK func_000D484C();
@@ -6665,7 +6715,7 @@ s32 func_000F3138(struct Unk_func_000F3138_0 *arg0);
 void func_000F3A44(struct Unk_func_000F3A44_0 *arg0, s32 arg1);
 void func_000F3A54(struct Unk_func_000F3A54_0 *arg0);
 s32 func_000F3C54(s32);
-void *func_000F503C();
+struct Unk_ret_func_000F503C *func_000F503C();
 s32 func_000F53B4(s32, s32, s32, s32);
 void func_000F5C34(struct Unk_func_000F5C34_0 *arg0);
 M2C_UNK func_000F70A0();
@@ -6915,7 +6965,7 @@ void sceHVNetfront_Module_4EA9EF34(s32 **arg0);
 s32 sceHVNetfront_Module_50475141(struct Unk_sceHVNetfront_Module_50475141_0 *arg0, s32 arg1, s32 arg2);
 void sceHVNetfront_Module_50CD0162(struct Unk_sceHVNetfront_Module_50CD0162_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void **sceHVNetfront_Module_51CAE7B4(void **arg0);
-s32 sceHVNetfront_Module_52564790(struct Unk_func_00053CCC_0 *arg0, s32 arg1);
+struct Unk_ret_sceHVNetfront_Module_52564790 *sceHVNetfront_Module_52564790(struct Unk_func_00053CCC_0 *arg0, s32 arg1);
 s32 sceHVNetfront_Module_52E49519(s32 *arg0);
 void sceHVNetfront_Module_533FF02B(s32 arg0);
 void sceHVNetfront_Module_5412D662(void);

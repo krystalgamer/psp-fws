@@ -3222,7 +3222,7 @@ s32 func_00055D80(void ***arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
 s32 func_00055E28(void ***arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 (*temp_s1)(void ***, s32, s32, s32);
 
-    temp_s1 = M2C_FIELD(M2C_FIELD(func_0005C460(**arg0 + 4, arg2, arg4), void **, 0x24), s32 (**)(void ***, s32, s32, s32), 0x2C);
+    temp_s1 = M2C_FIELD(func_0005C460(**arg0 + 4, arg2, arg4)->unk24, s32 (**)(void ***, s32, s32, s32), 0x2C);
     if (temp_s1 == NULL) {
         sceHVNetfront_Module_9716DAAD(arg0, 5);
         return 0;
@@ -3248,7 +3248,7 @@ s32 func_00055ECC(void ***arg0, M2C_UNK arg1, s32 arg2, M2C_UNK arg3) {
 s32 func_00055F74(void ***arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 (*temp_s1)(void ***, s32, s32, s32);
 
-    temp_s1 = M2C_FIELD(M2C_FIELD(func_0005C460(**arg0 + 4, arg2, arg4), void **, 0x24), s32 (**)(void ***, s32, s32, s32), 0x28);
+    temp_s1 = M2C_FIELD(func_0005C460(**arg0 + 4, arg2, arg4)->unk24, s32 (**)(void ***, s32, s32, s32), 0x28);
     if (temp_s1 == NULL) {
         sceHVNetfront_Module_9716DAAD(arg0, 5);
         return 0;
@@ -4171,7 +4171,7 @@ void sceHVNetfront_Module_67FC33F8(struct Unk_func_00053CCC_0 *arg0, s32 arg1, s
     M2C_FIELD((sceHVNetfront_Module_234F9191((u8 *)arg0 + 4, arg1) + arg0->unk10), s32 *, 0x24) = arg2;
 }
 
-s32 sceHVNetfront_Module_52564790(struct Unk_func_00053CCC_0 *arg0, s32 arg1) {
+struct Unk_ret_sceHVNetfront_Module_52564790 *sceHVNetfront_Module_52564790(struct Unk_func_00053CCC_0 *arg0, s32 arg1) {
     return M2C_FIELD((sceHVNetfront_Module_234F9191((u8 *)arg0 + 4, arg1) + arg0->unk10), s32 *, 0x24);
 }
 
@@ -4384,7 +4384,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_03F870", func_0005E7FC);
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_03F870", func_0005E940);
 
 void sceHVNetfront_Module_58E21566(struct Unk_func_00053CCC_0 *arg0, s32 arg1) {
-    M2C_FIELD(sceHVNetfront_Module_52564790(arg0, arg1), M2C_UNK (**)(void *, s32), 0x24)(arg0, arg1);
+    sceHVNetfront_Module_52564790(arg0, arg1)->unk24(arg0, arg1);
     sceHVNetfront_Module_9D9CB3AF(arg0, arg1, 0);
     sceHVNetfront_Module_67FC33F8(arg0, arg1, (s32) &D_00121CA8);
 }

@@ -71,7 +71,7 @@ void func_00001294(void) {
     if (D_0016697C == 0) {
 
     } else {
-        func_000027BC((s32) &D_000216CC, M2C_FIELD(func_0000C7E0(), s32 *, 0x114), 0);
+        func_000027BC((s32) &D_000216CC, func_0000C7E0()->unk114, 0);
     }
 }
 

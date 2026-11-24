@@ -871,7 +871,7 @@ void vsh_2569E27F(s32 arg0) {
 }
 
 void func_00009C18(void) {
-    M2C_FIELD(func_0000BA80(1), s8 *, 2) = 1;
+    func_0000BA80(1)->unk2 = 1;
     vsh_595F8E64();
 }
 

@@ -1294,7 +1294,7 @@ s32 func_0000C7AC(s32 arg0) {
     return arg0;
 }
 
-s32 func_0000C7E0(void) {
+struct Unk_ret_func_0000C7E0 *func_0000C7E0(void) {
     return D_00166C38;
 }
 

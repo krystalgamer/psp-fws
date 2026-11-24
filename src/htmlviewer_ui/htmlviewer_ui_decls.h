@@ -1539,6 +1539,56 @@ struct Unk_module_reboot_before_temp_s0 {
     s32 unk1C40;
 };
 
+struct Unk_ret_func_00003D10 {
+    u8 pad0[0x1B24];
+    s32 unk1B24;
+    u8 pad1B28[0x14];
+    s32 unk1B3C;
+    u8 pad1B40[0x6];
+    u16 unk1B46;
+    u8 pad1B48[0xD8];
+    s32 unk1C20;
+    u8 pad1C24[0x68];
+    s32 unk1C8C;
+};
+
+struct Unk_ret_sceHVSlim_Library_896E55F6 {
+    u8 pad0[0x4];
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    u8 pad10[0x4];
+    s32 unk14;
+    u8 pad18[0x88];
+    s32 unkA0;
+    u8 padA4[0xC];
+    s32 unkB0;
+    s32 unkB4;
+    u8 padB8[0xC];
+    s32 unkC4;
+    u8 padC8[0x4];
+    s32 unkCC;
+    u8 padD0[0x8];
+    s32 unkD8;
+    u8 padDC[0x4];
+    s32 unkE0;
+    u8 padE4[0x4];
+    s32 unkE8;
+    u8 padEC[0x8];
+    s32 unkF4;
+    u8 padF8[0x8];
+    s32 unk100;
+    u8 pad104[0x50];
+    s32 unk154;
+    u8 pad158[0xC];
+    s32 unk164;
+    u8 pad168[0x4];
+    s32 unk16C;
+    s32 unk170;
+    u8 pad174[0x4];
+    s32 unk178;
+};
+
 struct Unk_sceHVUI_Module_55C70B0A_temp_v0 {
     u8 pad0[0x1B24];
     s32 unk1B24;
@@ -1680,7 +1730,7 @@ s32 func_000029C0(s32);
 void *func_00003480(struct Unk_func_00003480_0 *arg0, s32 *arg1);
 void *func_000034B8(u8 *arg0);
 s32 func_00003AC4(s32);
-void *func_00003D10();
+struct Unk_ret_func_00003D10 *func_00003D10();
 s32 func_00003D1C(void);
 s32 func_00003D28(void);
 s32 func_00003D34(void);
@@ -2369,7 +2419,7 @@ M2C_UNK sceHVSlim_Library_5CA39435();
 M2C_UNK sceHVSlim_Library_6DC3FDE4(s32, s32);
 M2C_UNK sceHVSlim_Library_700625E1(s32, M2C_UNK, s32);
 M2C_UNK sceHVSlim_Library_880239D0(s32);
-void *sceHVSlim_Library_896E55F6(s32);
+struct Unk_ret_sceHVSlim_Library_896E55F6 *sceHVSlim_Library_896E55F6(s32);
 s32 sceHVSlim_Library_8C9ECF26(s32);
 s32 sceHVSlim_Library_9D38B11B(s32, s32, s32, s32, M2C_UNK);
 M2C_UNK sceHVSlim_Library_A2F4AC9E();

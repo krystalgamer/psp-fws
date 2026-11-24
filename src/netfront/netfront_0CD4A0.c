@@ -322,7 +322,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000D4488);
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000D4530);
 
-s32 func_000D45B0(s32 arg0, struct Unk_func_000D45B0_1 *arg1) {
+struct Unk_ret_func_000D45B0 *func_000D45B0(s32 arg0, struct Unk_func_000D45B0_1 *arg1) {
     s32 temp_v1;
     s32 var_a2;
     s32 var_v1;
@@ -356,7 +356,7 @@ INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_0CD4A0", func_000D4638);
 s32 func_000D4718(s32 *arg0, struct Unk_func_000D4718_1 *arg1) {
     void *sp0;
     func_000C9C24(arg0, &sp0);
-    arg1->unkC = (s32) M2C_FIELD(func_000CA098((void **) arg0), s32 *, 0xC);
+    arg1->unkC = (s32) func_000CA098((void **) arg0)->unkC;
     func_000C12D0((s32) arg1, &sp0);
     return 1;
 }

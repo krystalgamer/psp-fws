@@ -602,7 +602,7 @@ void func_0002B788(void) {
 }
 
 s32 func_0002B7B8(void) {
-    return M2C_FIELD(scePaf_F77E3DC0(), s32 *, 0x9C);
+    return scePaf_F77E3DC0()->unk9C;
 }
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_027C8C", func_0002B7D8);

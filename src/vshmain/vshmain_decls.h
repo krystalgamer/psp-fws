@@ -300,6 +300,11 @@ struct Unk_module_start_1 {
     s32 unk4;
 };
 
+struct Unk_ret_func_0000BA80 {
+    u8 pad0[0x2];
+    s8 unk2;
+};
+
 struct Unk_vsh_0F553311_0 {
     u8 pad0[0x4];
     s32 unk4;
@@ -469,7 +474,7 @@ M2C_UNK func_0000B828();
 s32 func_0000B89C(void);
 s32 func_0000B9C8(void);
 void func_0000BA58(void);
-void *func_0000BA80(M2C_UNK);
+struct Unk_ret_func_0000BA80 *func_0000BA80(M2C_UNK);
 void func_0000C184(struct Unk_func_0000C184_0 *arg0);
 void func_0000C600(s32 arg0);
 void func_0000C61C(s32 arg0);

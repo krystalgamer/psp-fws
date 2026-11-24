@@ -113,10 +113,10 @@ s32 func_0007ED7C(struct Unk_func_0007ED7C_0 *arg0) {
         do {
             if (func_000815B8(arg0, var_s2) != NULL) {
                 temp_s0 = func_000815B8(arg0, var_s2);
-                if (temp_s0->unk29C != (func_000815B8(arg0, var_s2) + 0x180)) {
-                    func_000A4400(M2C_FIELD(func_000815B8(arg0, var_s2), s32 *, 0x29C));
+                if (temp_s0->unk29C != ((u8 *)func_000815B8(arg0, var_s2) + 0x180)) {
+                    func_000A4400(func_000815B8(arg0, var_s2)->unk29C);
                 }
-                M2C_FIELD(func_000815B8(arg0, var_s2), s32 *, 0x29C) = 0;
+                func_000815B8(arg0, var_s2)->unk29C = 0;
             }
             var_s2 += 1;
         } while (var_s2 < (u32) arg0->unk8);

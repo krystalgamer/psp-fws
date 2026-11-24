@@ -24,6 +24,11 @@ struct Unk_func_00004164_0 {
     s32 unk64;
 };
 
+struct Unk_ret_sceUmdMan_driver_E192C10A {
+    u8 pad0[0x74];
+    s32 unk74;
+};
+
 extern M2C_UNK D_00005C80;
 extern M2C_UNK D_00005C88;
 extern M2C_UNK D_00005CA0;
@@ -71,7 +76,7 @@ s32 sceUmd9660_driver_F42C0AEE(void);
 s32 sceUmdMan_driver_60933ECD();
 s32 sceUmdMan_driver_84410A8E(s32);
 s32 sceUmdMan_driver_85AEA6C5();
-void *sceUmdMan_driver_E192C10A();
+struct Unk_ret_sceUmdMan_driver_E192C10A *sceUmdMan_driver_E192C10A();
 M2C_UNK sceUmd_27A764A1();
 M2C_UNK sceUmd_7850F057(M2C_UNK *, M2C_UNK *);
 

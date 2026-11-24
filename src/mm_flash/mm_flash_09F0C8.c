@@ -8,7 +8,7 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_0009F124);
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09F0C8", func_0009F1C0);
 
 s32 func_0009F1CC(void) {
-    return M2C_FIELD(M2C_FIELD(sceHVWWW_Library_6E00402C(), void **, 0x29C), s32 *, 0x28);
+    return M2C_FIELD(sceHVWWW_Library_6E00402C()->unk29C, s32 *, 0x28);
 }
 
 M2C_UNK *func_0009F1F0(void) {

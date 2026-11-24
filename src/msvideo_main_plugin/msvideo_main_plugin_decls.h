@@ -3097,6 +3097,16 @@ struct Unk_func_000A8C70_0 {
     s32 unk1C;
 };
 
+struct Unk_ret_func_000815B8 {
+    u8 pad0[0x29C];
+    s32 unk29C;
+};
+
+struct Unk_ret_scePaf_F77E3DC0 {
+    u8 pad0[0x9C];
+    s32 unk9C;
+};
+
 struct Unk_vt_func_0000DEE4_arg0 {
     u8 pad0[0x34];
     M2C_UNK (*unk34)(void **, M2C_UNK *);
@@ -4718,7 +4728,7 @@ s32 func_00080F7C(s32 arg0, s32 arg1, struct Unk_func_00080F7C_2 *arg2, s32 arg3
 s32 func_0008102C(s32 *arg0, s32 arg1);
 s32 func_00081074(s32 arg0, s32 arg1);
 void func_000810FC(void);
-void *func_000815B8(void *, u32);
+struct Unk_ret_func_000815B8 *func_000815B8(void *, u32);
 s32 func_000815F8(struct Unk_func_000815F8_0 *arg0, s32 *arg1);
 s32 func_0008174C(struct Unk_func_0008174C_0 *arg0, u32 arg1, u32 arg2, s32 arg3);
 M2C_UNK func_00082394();
@@ -5042,7 +5052,7 @@ s32 scePaf_D7FA53D2(void *, M2C_UNK);
 s32 scePaf_DCE3D225(s32, M2C_UNK);
 M2C_UNK scePaf_ECB65734(s32);
 M2C_UNK scePaf_F042CC8B();
-void *scePaf_F77E3DC0();
+struct Unk_ret_scePaf_F77E3DC0 *scePaf_F77E3DC0();
 M2C_UNK scePaf_F86BD417(s32, s32, M2C_UNK, M2C_UNK);
 M2C_UNK scePower_EBD177D6(M2C_UNK, M2C_UNK, M2C_UNK);
 M2C_UNK sceVshBridge_5317A582();

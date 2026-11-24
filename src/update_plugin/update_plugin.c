@@ -106,7 +106,7 @@ void func_0000086C(s32 arg0) {
     void *sp0;
     struct Unk_vt_func_0000086C_temp_v0 **temp_v0;
 
-    M2C_FIELD(func_00005364(), s8 *, 0x84) = 0;
+    func_00005364()->unk84 = 0;
     func_00001714();
     sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
     func_000036EC(&sp0);
@@ -274,7 +274,7 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00001EB
 
 void func_0000214C(s32 arg0) {
     sceKernelPowerTick(0);
-    func_00001EB4(arg0, M2C_FIELD(func_00005364(), s32 *, 0x4C));
+    func_00001EB4(arg0, func_00005364()->unk4C);
 }
 
 INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00002188);
@@ -430,7 +430,7 @@ void func_00003358(s32 arg0) {
 }
 
 void func_000033B8(s32 arg0) {
-    if (M2C_FIELD(func_00005364(), u8 *, 0x40) != 0) {
+    if (func_00005364()->unk40 != 0) {
 
     } else {
         scePaf_EAA5AFF6(arg0, 3);
@@ -676,7 +676,7 @@ INCLUDE_ASM("tmp/asm/282/update_plugin/nonmatchings/update_plugin", func_00005F3
 void func_00006118(void) {
     s32 temp_s0;
 
-    temp_s0 = M2C_FIELD(func_00005364(), s32 *, 0x44);
+    temp_s0 = func_00005364()->unk44;
     if (temp_s0 == 0) {
 
     } else {

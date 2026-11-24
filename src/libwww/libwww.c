@@ -5122,7 +5122,7 @@ s32 func_0003BD94(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
 
     var_v0 = 0;
     if (arg0 != 0) {
-        temp_s0 = sceHVNetfront_Module_700625E1(M2C_FIELD(sceHVNetfront_Module_E459881C(arg0), s32 *, 4), arg1, arg2);
+        temp_s0 = sceHVNetfront_Module_700625E1(sceHVNetfront_Module_E459881C(arg0)->unk4, arg1, arg2);
         sceHVNetfront_Module_08549708(arg0);
         var_v0 = temp_s0;
     }
@@ -5221,7 +5221,7 @@ s32 func_0003C48C(s32 arg0, s32 arg1, s32 arg2) {
 
     var_v0 = 0;
     if (arg0 != 0) {
-        temp_s0 = func_0003BD94(M2C_FIELD(sceHVNetfront_Module_E459881C(arg0), s32 *, 0x28), arg1, arg2);
+        temp_s0 = func_0003BD94(sceHVNetfront_Module_E459881C(arg0)->unk28, arg1, arg2);
         sceHVNetfront_Module_08549708(arg0);
         var_v0 = temp_s0;
     }
@@ -5230,7 +5230,7 @@ s32 func_0003C48C(s32 arg0, s32 arg1, s32 arg2) {
 
 void func_0003C4F4(s32 arg0, s32 arg1) {
     if (arg0 != 0) {
-        M2C_FIELD(sceHVNetfront_Module_E459881C(arg0), s32 *, 0x24) = arg1;
+        sceHVNetfront_Module_E459881C(arg0)->unk24 = arg1;
         sceHVNetfront_Module_08549708(arg0);
     }
 }
@@ -5241,7 +5241,7 @@ s32 func_0003C538(s32 arg0) {
 
     var_v0 = 0;
     if (arg0 != 0) {
-        temp_s0 = M2C_FIELD(sceHVNetfront_Module_E459881C(arg0), s32 *, 0x24);
+        temp_s0 = sceHVNetfront_Module_E459881C(arg0)->unk24;
         sceHVNetfront_Module_08549708(arg0);
         var_v0 = temp_s0;
     }
@@ -5380,7 +5380,7 @@ s32 func_0003D1B8(s32 arg0, M2C_UNK arg1) {
 
     var_v0 = 0;
     if (arg0 != 0) {
-        temp_s0 = func_0003CCA8(M2C_FIELD(sceHVNetfront_Module_E459881C(arg0), s32 *, 4), arg1);
+        temp_s0 = func_0003CCA8(sceHVNetfront_Module_E459881C(arg0)->unk4, arg1);
         sceHVNetfront_Module_08549708(arg0);
         var_v0 = temp_s0;
     }
@@ -5440,7 +5440,7 @@ s32 func_0003D460(s32 arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
 
     var_v0 = 0;
     if (arg0 != 0) {
-        temp_s0 = func_0003CBF8(M2C_FIELD(sceHVNetfront_Module_E459881C(arg0), s32 *, 4), arg1, arg2, arg3);
+        temp_s0 = func_0003CBF8(sceHVNetfront_Module_E459881C(arg0)->unk4, arg1, arg2, arg3);
         sceHVNetfront_Module_08549708(arg0);
         var_v0 = temp_s0;
     }

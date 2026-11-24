@@ -156,7 +156,7 @@ s32 func_00003F70(void) {
     if (sceUmdMan_driver_60933ECD() != 0) {
         var_v0 = sceUmd9660_driver_F42C0AEE();
     } else {
-        var_v0 = M2C_FIELD(sceUmdMan_driver_E192C10A(), s32 *, 0x74);
+        var_v0 = sceUmdMan_driver_E192C10A()->unk74;
     }
     return var_v0;
 }

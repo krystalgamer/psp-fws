@@ -841,7 +841,7 @@ void func_00093AF0(void) {
 s32 func_00093AF8(s32 arg0) {
     s32 temp_s1;
 
-    temp_s1 = M2C_FIELD(sceHVWWW_Library_B6D816EE(), s32 *, 0xA0);
+    temp_s1 = sceHVWWW_Library_B6D816EE()->unkA0;
     sceHVWWW_Library_FED7C11F(arg0);
     return temp_s1;
 }
@@ -849,7 +849,7 @@ s32 func_00093AF8(s32 arg0) {
 s32 func_00093B34(s32 arg0) {
     s32 temp_s1;
 
-    temp_s1 = M2C_FIELD(sceHVWWW_Library_B6D816EE(), s32 *, 0xA4);
+    temp_s1 = sceHVWWW_Library_B6D816EE()->unkA4;
     sceHVWWW_Library_FED7C11F(arg0);
     return temp_s1;
 }

@@ -2635,6 +2635,17 @@ struct Unk_func_000B0E44_0 {
     s32 unk350;
 };
 
+struct Unk_ret_sceHVWWW_Library_6E00402C {
+    u8 pad0[0x29C];
+    void *unk29C;
+};
+
+struct Unk_ret_sceHVWWW_Library_B6D816EE {
+    u8 pad0[0xA0];
+    s32 unkA0;
+    s32 unkA4;
+};
+
 struct Unk_vt_func_000062B0_arg0 {
     u8 pad0[0xCD0];
     s32 unkCD0;
@@ -3802,8 +3813,8 @@ M2C_UNK sceHVNetfront_Module_D611E938(s32, M2C_UNK, M2C_UNK);
 s32 sceHVWWW_Library_0DBCA9CE();
 s32 sceHVWWW_Library_27C4AC1F(M2C_UNK);
 M2C_UNK sceHVWWW_Library_2E58A543(s32);
-void *sceHVWWW_Library_6E00402C();
-void *sceHVWWW_Library_B6D816EE();
+struct Unk_ret_sceHVWWW_Library_6E00402C *sceHVWWW_Library_6E00402C();
+struct Unk_ret_sceHVWWW_Library_B6D816EE *sceHVWWW_Library_B6D816EE();
 M2C_UNK sceHVWWW_Library_FED7C11F(s32);
 M2C_UNK sceIoRename();
 void sceKernelCpuResumeIntr(s32);

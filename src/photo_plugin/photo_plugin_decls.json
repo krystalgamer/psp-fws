@@ -301,7 +301,7 @@
   "sceVshCommonGui_4704D5BD": "M2C_UNK sceVshCommonGui_4704D5BD(M2C_UNK);",
   "sceVshCommonGui_54BC644C": "M2C_UNK sceVshCommonGui_54BC644C(void *, s32);",
   "sceVshCommonGui_A0DE7090": "M2C_UNK sceVshCommonGui_A0DE7090(M2C_UNK);",
-  "vsh_34DA1B67": "void *vsh_34DA1B67();",
+  "vsh_34DA1B67": "struct Unk_ret_vsh_34DA1B67 *vsh_34DA1B67();",
   "vsh_81BBD0D1": "s32 vsh_81BBD0D1(void *, M2C_UNK *);"
  },
  "types": {
@@ -389,6 +389,7 @@
   "Unk_func_0002CAB4_0": "struct Unk_func_0002CAB4_0 {\n    u8 pad0[0x4];\n    s32 * unk4;\n};",
   "Unk_func_0002CAFC_0": "struct Unk_func_0002CAFC_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_0002CCEC_var_a0": "struct Unk_func_0002CCEC_var_a0 {\n    u8 pad0[0x4];\n    void *unk4;\n};",
+  "Unk_ret_vsh_34DA1B67": "struct Unk_ret_vsh_34DA1B67 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_vt_func_00004ADC_temp_a0": "struct Unk_vt_func_00004ADC_temp_a0 {\n    u8 pad0[0x24];\n    M2C_UNK (*unk24)(void **);\n};",
   "Unk_vt_func_00006C40_arg0": "struct Unk_vt_func_00006C40_arg0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_vt_func_00006C40_arg1": "struct Unk_vt_func_00006C40_arg1 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",

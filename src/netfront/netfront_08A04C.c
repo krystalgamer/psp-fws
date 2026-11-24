@@ -4397,7 +4397,7 @@ s32 func_000CA024(struct Unk_vt_func_000CA024_arg0 **arg0) {
 
 INCLUDE_ASM("tmp/asm/303/netfront/nonmatchings/netfront_08A04C", func_000CA030);
 
-s32 func_000CA098(struct Unk_vt_func_000CA098_arg0 **arg0) {
+struct Unk_ret_func_000CA098 *func_000CA098(struct Unk_vt_func_000CA098_arg0 **arg0) {
     return (*arg0)->unk7C;
 }
 

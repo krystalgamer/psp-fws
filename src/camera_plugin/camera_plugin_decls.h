@@ -337,6 +337,11 @@ struct Unk_func_0001F544_0 {
     s32 unk1C;
 };
 
+struct Unk_ret_func_0000C7E0 {
+    u8 pad0[0x114];
+    s32 unk114;
+};
+
 struct Unk_vt_D_00166ACC {
     u8 pad0[0x7C];
     M2C_UNK (*unk7C)(void **, M2C_UNK, M2C_UNK, M2C_UNK);
@@ -622,7 +627,7 @@ void func_0000C68C(void);
 s32 func_0000C718(void);
 void func_0000C788(void);
 s32 func_0000C7AC(s32 arg0);
-s32 func_0000C7E0(void);
+struct Unk_ret_func_0000C7E0 *func_0000C7E0(void);
 void func_0000C7EC(struct Unk_func_0000C7EC_0 *arg0);
 void func_0000CA3C(void);
 void func_0000CA68(void);

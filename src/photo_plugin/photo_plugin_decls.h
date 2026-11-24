@@ -487,6 +487,11 @@ struct Unk_func_0002CCEC_var_a0 {
     void *unk4;
 };
 
+struct Unk_ret_vsh_34DA1B67 {
+    u8 pad0[0x4];
+    s32 unk4;
+};
+
 struct Unk_vt_func_00004ADC_temp_a0 {
     u8 pad0[0x24];
     M2C_UNK (*unk24)(void **);
@@ -914,7 +919,7 @@ M2C_UNK sceVshCommonGui_441D55D7(M2C_UNK);
 M2C_UNK sceVshCommonGui_4704D5BD(M2C_UNK);
 M2C_UNK sceVshCommonGui_54BC644C(void *, s32);
 M2C_UNK sceVshCommonGui_A0DE7090(M2C_UNK);
-void *vsh_34DA1B67();
+struct Unk_ret_vsh_34DA1B67 *vsh_34DA1B67();
 s32 vsh_81BBD0D1(void *, M2C_UNK *);
 
 #endif
