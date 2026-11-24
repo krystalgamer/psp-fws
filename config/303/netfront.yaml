@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/303/.splat_cache.netfront
   symbol_addrs_path:
     - config/303/symbol_addrs.netfront.txt
+    - config/303/func_starts.netfront.txt
     - tmp/build/303/prx_syms.netfront.txt
   reloc_addrs_path: [tmp/build/303/reloc_addrs.netfront.txt]
   asset_path: tmp/assets/303/netfront
@@ -55,6 +56,14 @@ segments:
       - { start: 0xC0, type: asm, name: init, linker_section: .init }
       - { start: 0xE4, type: prxpad, order: .text }
       - [0x100, c, netfront]
+      - [0x89AC4, c, netfront_089A04]
+      - [0x8A10C, c, netfront_08A04C]
+      - [0xEBFAC, c, netfront_0EBEEC]
+      - [0xEC458, c, netfront_0EC398]
+      - [0x111B78, c, netfront_111AB8]
+      - [0x113E9C, c, netfront_113DDC]
+      - [0x113F0C, c, netfront_113E4C]
+      - [0x11A7DC, c, netfront_11A71C]
       - { start: 0x11A91C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x11A938, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x11B210, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -71,6 +80,9 @@ segments:
       - { start: 0x11D4E4, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x11D4E8, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x11D560, .rodata, netfront]
+      - [0x1262A4, .rodata, netfront_08A04C]
+      - [0x12DBC8, .rodata, netfront_0EC398]
+      - [0x130D38, .rodata, netfront_113E4C]
       - { start: 0x131014, type: prxpad, order: .rodata }
   - name: netfront_seg1
     type: code
