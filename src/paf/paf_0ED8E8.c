@@ -2,15 +2,27 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0ED8E8", func_000ED8E8);
+void func_000ED8E8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0ED8E8", func_000ED8F8);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0ED8E8", func_000ED938);
+void func_000ED938(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0ED8E8", func_000ED948);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0ED8E8", func_000ED988);
+void func_000ED988(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0ED8E8", func_000ED998);
 

@@ -2,7 +2,12 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042054);
+s32 func_00042054(s32 arg0) {
+    if (arg0 != 0) {
+        scePaf_545FE2DA();
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", func_00042078);
 
@@ -126,7 +131,18 @@ s32 scePaf_9F60CB01(s32 arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_91E82C1B);
+s32 scePaf_91E82C1B(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_v0 = scePaf_B7E6052B(0x14);
+    func_00044714(temp_v0, arg1, arg2);
+    var_v0 = 0;
+    if (temp_v0 != 0) {
+        var_v0 = func_00042C70(arg0, temp_v0);
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_042054", scePaf_A25BDAA2);
 

@@ -2,7 +2,14 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_02CFF4", func_0002CFF4);
+void func_0002CFF4(s32 arg0, s32 arg1) {
+    s32 temp_v0;
+
+    temp_v0 = func_0002CF30(arg0, arg1);
+    if (temp_v0 != 0) {
+        func_0002D1D8(arg0, temp_v0);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_02CFF4", func_0002D02C);
 

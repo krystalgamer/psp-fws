@@ -2,7 +2,11 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155A78", func_00155A78);
+void func_00155A78(s32 arg0) {
+    if (arg0 != 0) {
+        func_0015A1E8(arg0);
+    }
+}
 
 s32 func_00155A98(void *arg0) {
     s32 var_v0;
@@ -44,5 +48,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155A78", func_00155BC0);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155A78", func_00155C2C);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155A78", func_00155D04);
+void func_00155D04(void *arg0) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x14) = 0;
+        M2C_FIELD(arg0, s32 *, 0) = 0;
+        M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    }
+}
 
