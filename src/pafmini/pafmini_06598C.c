@@ -2,15 +2,27 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_0006598C);
+void func_0006598C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_0006599C);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_000659DC);
+void func_000659DC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_000659EC);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_00065A2C);
+void func_00065A2C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06598C", func_00065A3C);
 

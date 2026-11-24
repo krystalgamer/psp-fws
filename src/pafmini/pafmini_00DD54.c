@@ -370,7 +370,18 @@ s32 scePaf_D726DDD3(s32 arg0) {
     return var_v0;
 }
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_00DD54", scePaf_8A8FE0A1);
+s32 scePaf_8A8FE0A1(s32 arg0) {
+    s32 **temp_v0;
+    s32 var_v0;
+
+    temp_v0 = scePaf_B7E6052B(8);
+    func_00013410(temp_v0);
+    var_v0 = 0;
+    if (temp_v0 != NULL) {
+        var_v0 = func_00012684(arg0, (s32) temp_v0);
+    }
+    return var_v0;
+}
 
 s32 func_00012F40(void *arg0) {
     s32 var_v1;

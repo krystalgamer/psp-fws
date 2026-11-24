@@ -720,7 +720,9 @@ INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", func_00074AE4);
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", func_00074B10);
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_06A490", func_00074B34);
+void func_00074B34(void *arg0) {
+    func_0004BE34(M2C_FIELD(arg0, void **, 0x20));
+}
 
 void scePaf_8DEB3DB3(void) {
 }

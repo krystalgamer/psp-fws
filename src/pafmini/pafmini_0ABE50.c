@@ -2,7 +2,11 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0ABE50", func_000ABE50);
+void func_000ABE50(void) {
+    func_000AEF78();
+    D_00108846 = 0;
+    func_000B5810();
+}
 
 INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_0ABE50", func_000ABE78);
 

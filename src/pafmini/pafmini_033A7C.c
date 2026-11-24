@@ -2,7 +2,10 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/pafmini/nonmatchings/pafmini_033A7C", func_00033A7C);
+void func_00033A7C(void *arg0) {
+    M2C_FIELD(arg0, void **, 4) = arg0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+}
 
 void func_00033A88(void *arg0, M2C_UNK *arg1) {
     M2C_UNK *temp_v1;
