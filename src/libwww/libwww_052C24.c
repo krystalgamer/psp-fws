@@ -3506,7 +3506,29 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_0007E644);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_0007E698);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_0007E858);
+void func_0007E858(void *arg0, s32 arg1, s32 *arg2, s32 *arg3) {
+    s32 temp_a0;
+    s32 temp_v1;
+    s32 var_a4;
+    s32 var_a5;
+
+    var_a4 = 0;
+    var_a5 = 0;
+    if (*M2C_FIELD(arg0, s32 **, 0) == 0x14) {
+        temp_a0 = M2C_FIELD(arg0, s32 *, 8);
+        temp_v1 = M2C_FIELD(arg0, s32 *, 0xC);
+        if (arg1 < (temp_a0 + temp_v1)) {
+            var_a5 = temp_v1;
+            var_a4 = temp_a0;
+            if (temp_a0 < arg1) {
+                var_a5 -= arg1 - temp_a0;
+                var_a4 = arg1;
+            }
+        }
+    }
+    *arg2 = var_a4;
+    *arg3 = var_a5;
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_0007E8B0);
 
@@ -3952,7 +3974,10 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_00094278);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000949B0);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_00094BDC);
+void func_00094BDC(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0) = arg2;
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_00094BE8);
 
@@ -4147,7 +4172,18 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_0009950C);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_00099530);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_00099554);
+void func_00099554(void *arg0) {
+    s32 temp_s1;
+
+    temp_s1 = M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x18);
+    sceHVNetfront_Module_81130A27(arg0 + 0x28, temp_s1, 1);
+    sceHVNetfront_Module_81130A27(arg0 + 0x30, temp_s1, 1);
+    sceHVNetfront_Module_81130A27(arg0 + 0x38, temp_s1, 1);
+    M2C_FIELD(arg0, s32 *, 0x40) = 0;
+    M2C_FIELD(arg0, s32 *, 0x44) = 1;
+    M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    M2C_FIELD(arg0, s32 *, 0x4C) = 1;
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000995C8);
 
@@ -4895,7 +4931,10 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000AA7AC);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000AA7E4);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000AA820);
+void func_000AA820(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &func_000AA7E4;
+    M2C_FIELD(arg0, M2C_UNK **, 4) = &func_0009C41C;
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000AA83C);
 
@@ -4966,7 +5005,13 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000AC114);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000AC220);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000AC2F8);
+s32 func_000AC2F8(s32 arg0, s32 arg1) {
+    func_000995C8(arg0, arg1);
+    M2C_FIELD(arg0, s32 *, 0x78) = -1;
+    M2C_FIELD(arg0, s32 *, 0x74) = -1;
+    M2C_FIELD(arg0, s32 *, 0x70) = -1;
+    return 1;
+}
 
 s32 func_000AC330(void) {
     return 0;
@@ -5316,7 +5361,12 @@ s32 func_000AEF4C(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000AEFAC);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000AF04C);
+void func_000AF04C(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0) = 0x59;
+    M2C_FIELD(arg0, s8 *, 3) = -0x62;
+    M2C_FIELD(arg0, s8 *, 1) = 0;
+    M2C_FIELD(arg0, s8 *, 2) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000AF068);
 
@@ -5648,7 +5698,11 @@ void func_000B2310(s32 *arg0, s32 arg1) {
 void func_000B2318(void) {
 }
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000B2320);
+void func_000B2320(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x248) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24C) = 0;
+}
 
 void func_000B2330(void) {
 }
@@ -6321,7 +6375,10 @@ INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000BBF90);
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000BBFC8);
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000BBFD0);
+void func_000BBFD0(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &func_000BBF90;
+    M2C_FIELD(arg0, M2C_UNK **, 4) = &func_000BBFC8;
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", sceHVWWW_Library_CB4942DD);
 
@@ -6403,7 +6460,14 @@ s32 func_000BD2F8(void *arg0, void *arg1) {
     return (func_000BD0D4(arg0, M2C_FIELD(arg1, s32 *, 8), M2C_FIELD(arg1, s32 *, 0xC)) != 0) ? 0 : 3;
 }
 
-INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000BD324);
+s32 func_000BD324(s32 arg0, void *arg1) {
+    s32 temp_a1;
+    s32 temp_a2;
+
+    temp_a1 = M2C_FIELD(arg1, s32 *, 8);
+    temp_a2 = M2C_FIELD(arg1, s32 *, 0xC);
+    return (func_000BD270(arg0, temp_a1, temp_a2, temp_a1, temp_a2) != 0) ? 0 : 3;
+}
 
 INCLUDE_ASM("tmp/asm/303/libwww/nonmatchings/libwww_052C24", func_000BD358);
 
