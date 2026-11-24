@@ -4,6 +4,8 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_0000BAC4;
+extern M2C_UNK D_0000BD34;
 
 M2C_UNK DmacManForKernel_32757C57(M2C_UNK);
 M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);
@@ -37,6 +39,7 @@ s32 sceDmacplus_driver_FEE3392C(void);
 s32 sceGpio_driver_17DAA8C2(void);
 s32 sceI2c_driver_17B0DA59(void);
 s32 sceI2c_driver_21A8282C(void);
+s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1);
 s32 sceKernelDelayThread(u32);
 s32 sceLcdc_driver_B55500A3(void);
 s32 sceLcdc_driver_C6F10C77(void);
@@ -45,13 +48,16 @@ s32 sceNand_driver_73A68408(void);
 s32 sceNand_driver_A513BB12(void);
 s32 scePwm_driver_68BA9CC1(void);
 s32 scePwm_driver_E449F656(void);
+M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);
 s32 sceSysreg_driver_168C09B8(void);
+s32 sceSysreg_driver_25673620(void);
 s32 sceSysreg_driver_4EE8E2C8(void);
 s32 sceSysreg_driver_58F47EFD(void);
 s32 sceSysreg_driver_678AD3ED(void);
 s32 sceSysreg_driver_7A5D2D15(void);
 s32 sceSysreg_driver_7DCA8302(void);
 s32 sceSysreg_driver_94B0323C(void);
+s32 sceSysreg_driver_9C863542(void);
 s32 sceSysreg_driver_E89243BE(void);
 s32 sceSysreg_driver_F2DEAA14(void);
 s32 sceSysreg_driver_F74F14E9(void);

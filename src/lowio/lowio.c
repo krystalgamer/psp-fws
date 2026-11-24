@@ -13,7 +13,11 @@ s32 func_00000130(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceSysreg_driver_9C863542);
+s32 sceSysreg_driver_9C863542(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_0000BAC4);
+    sceSysreg_driver_25673620();
+    return 0;
+}
 
 s32 sceSysreg_driver_F2DEAA14(void) {
     sceSysreg_driver_4EE8E2C8();
@@ -568,7 +572,11 @@ INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00002EB8);
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", func_00002F38);
 
-INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceI2c_driver_D6E9836A);
+s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1) {
+    M2C_VFIELD(&D_0000BD34, s32, 0x14) = arg1;
+    M2C_VFIELD(&D_0000BD34, s32, 0x10) = arg0;
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/lowio/nonmatchings/lowio", sceI2c_driver_E9463B99);
 

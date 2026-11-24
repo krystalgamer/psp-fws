@@ -119,5 +119,8 @@ u32 sceCccIsValidUCS4(s32 arg0) {
     return (u32) ~arg0 >> 0x1F;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_11E928", func_0012037C);
+s32 func_0012037C(u32 arg0) {
+    s32 cmp_tmp = arg0 > 0xFFFFU;
+    return cmp_tmp == 0;
+}
 

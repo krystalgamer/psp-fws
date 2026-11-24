@@ -1509,6 +1509,7 @@ void func_0011FE94(void *arg0);
 void func_0011FEB0(void *arg0);
 s32 func_0011FECC(s32, s32, s32);
 s32 func_0011FF68(s32, s32, s32);
+s32 func_0012037C(u32 arg0);
 void func_0012038C(s32 arg0);
 s32 func_001207C0(s32 arg0);
 M2C_UNK func_001209AC(s32);
