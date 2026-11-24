@@ -23,7 +23,12 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_0008F6C4);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_0008F798);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_0008F864);
+void func_0008F864(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x7BC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x7C0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x7C4) = 0;
+    sceHVNetfront_Module_D611E938((s32) arg0, 0, 0x7C8);
+}
 
 void func_0008F890(void) {
 }
@@ -31,7 +36,11 @@ void func_0008F890(void) {
 void func_0008F898(void) {
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_0008F8A0);
+void func_0008F8A0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x7BC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x7C0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x7C4) = 0;
+}
 
 void func_0008F8B0(void) {
     func_0008DF24();
@@ -654,7 +663,11 @@ u8 func_0009241C(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_00092424);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_00092484);
+void func_00092484(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000C3640;
+    M2C_FIELD(arg0, s32 *, 0x104) = 0;
+    M2C_FIELD(arg0, s32 *, 0x108) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_08F058", func_0009249C);
 

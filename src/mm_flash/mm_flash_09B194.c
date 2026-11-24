@@ -45,9 +45,17 @@ void func_0009B688(s32 arg0) {
     M2C_FIELD(arg0, s32 *, 4) = 1;
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B194", func_0009B6B4);
+void func_0009B6B4(s32 arg0, s32 arg1, s32 arg2) {
+    func_0009B7D4(arg0);
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x10) = arg2;
+}
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B194", func_0009B6F8);
+void func_0009B6F8(s32 arg0, s32 arg1, s32 arg2) {
+    func_0009B7D4(arg0);
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x10) = arg2;
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B194", func_0009B73C);
 

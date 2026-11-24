@@ -10,6 +10,7 @@
   "func_00003484": "s32 func_00003484(void);",
   "func_00003650": "M2C_UNK *func_00003650(void);",
   "func_00006674": "void func_00006674(s32 arg0, s32 arg1, s32 arg2);",
+  "func_00006690": "void func_00006690(s32 arg0, s32 arg1, void *arg2);",
   "func_00006704": "s32 func_00006704(void *arg0);",
   "func_00006788": "s32 func_00006788(void *arg0);",
   "func_000067A0": "void func_000067A0(s32 arg0, void *arg1);",
@@ -48,6 +49,7 @@
   "sceKernelFreeVpl": "s32 sceKernelFreeVpl(u32, void *);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
+  "sceNet_lib_57CC57DA": "M2C_UNK sceNet_lib_57CC57DA(void *, M2C_UNK, M2C_UNK);",
   "sceNp_20EC7964": "s32 sceNp_20EC7964(s32 *arg0);",
   "sceNp_3C69FC6A": "s32 sceNp_3C69FC6A(s32);",
   "sceNp_3EA98556": "void sceNp_3EA98556(void);",
@@ -57,6 +59,7 @@
   "sceNp_E3EA7603": "s32 sceNp_E3EA7603(s32 arg0);"
  },
  "vars": {
+  "D_00010D00": "extern M2C_UNK D_00010D00;",
   "D_000115B0": "extern M2C_UNK D_000115B0;",
   "D_0001189C": "extern M2C_UNK D_0001189C;",
   "D_00011BA8": "extern M2C_UNK D_00011BA8;",
@@ -73,6 +76,7 @@
   "D_000139A4": "extern void *D_000139A4;",
   "D_000139BC": "extern s32 D_000139BC;",
   "D_000139C0": "extern s32 D_000139C0;",
+  "func_000068DC": "extern M2C_UNK func_000068DC;",
   "func_000070F4": "extern M2C_UNK func_000070F4;",
   "func_0000728C": "extern M2C_UNK func_0000728C;",
   "func_00007448": "extern M2C_UNK func_00007448;",

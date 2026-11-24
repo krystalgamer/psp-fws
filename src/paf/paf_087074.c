@@ -71,7 +71,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", start_pass_phuff);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jcphuff_dump_buffer);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jcphuff_flush_bits);
+void jcphuff_flush_bits(s32 arg0) {
+    jcphuff_emit_bits(arg0, 0x7F, 7);
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", emit_buffered_bits);
 
@@ -342,7 +346,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", emit_message);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", format_message);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", reset_error_mgr);
+void reset_error_mgr(void **arg0) {
+    void *temp_v0;
+
+    temp_v0 = *arg0;
+    M2C_FIELD(temp_v0, s32 *, 0x6C) = 0;
+    M2C_FIELD(temp_v0, s32 *, 0x14) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_087074", jpeg_std_error);
 

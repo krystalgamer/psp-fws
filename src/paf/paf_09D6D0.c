@@ -38,7 +38,13 @@ void func_0009DB04(void *arg0) {
 void func_0009DB20(void) {
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09D6D0", func_0009DB28);
+void func_0009DB28(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x408) = arg1;
+        M2C_FIELD(arg0, s32 *, 0x400) = arg2;
+        M2C_FIELD(arg0, s32 *, 0x404) = arg3;
+    }
+}
 
 s32 func_0009DB44(void *arg0) {
     s32 var_v0;

@@ -310,7 +310,18 @@ void func_00006674(s32 arg0, s32 arg1, s32 arg2) {
     func_0000E300(arg0, arg1, arg2);
 }
 
-INCLUDE_ASM("tmp/asm/352/np/nonmatchings/np", func_00006690);
+void func_00006690(s32 arg0, s32 arg1, void *arg2) {
+    void *temp_a1;
+
+    M2C_FIELD(arg2, s32 *, 0) = arg1;
+    M2C_FIELD(arg2, s32 *, 0xC) = 0;
+    sceNet_lib_57CC57DA(M2C_FIELD(arg2, void **, 4), 0, 0x130);
+    temp_a1 = M2C_FIELD(arg2, void **, 4);
+    M2C_FIELD(temp_a1, s32 *, 0xE0) = -1;
+    M2C_FIELD(temp_a1, s32 *, 0xE4) = -1;
+    M2C_FIELD(temp_a1, s32 *, 0xE8) = -1;
+    func_0000EA4C(arg0, (s32) &D_00010D00, (s32) &func_000068DC, (s32) arg2);
+}
 
 s32 func_00006704(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 0xC) & 0x400) ? 0 : 0x80550708;

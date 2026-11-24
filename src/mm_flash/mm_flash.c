@@ -122,7 +122,11 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_00000F54);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_00001114);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_0000119C);
+void func_0000119C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x40C) = 0;
+}
 
 void func_000011AC(void) {
 }
@@ -791,7 +795,10 @@ void func_0000DC84(void *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_0000DD00);
+void func_0000DD00(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0x14) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_0000DD0C);
 
@@ -961,9 +968,17 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_0000FEA8);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_0000FF0C);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_0000FF58);
+void func_0000FF58(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    func_00010164((s32) arg0);
+}
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_0000FF7C);
+void func_0000FF7C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    func_00010164((s32) arg0);
+}
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_0000FFA0);
 
@@ -991,7 +1006,11 @@ INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_00010200);
 
 INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_00010254);
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash", func_00010310);
+void func_00010310(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    func_00010380((s32) arg0, arg1);
+}
 
 s32 func_00010334(void *arg0) {
     s32 var_v1;

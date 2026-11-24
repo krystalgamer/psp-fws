@@ -476,7 +476,13 @@ s32 func_00124804(void) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_12038C", func_0012480C);
+s32 func_0012480C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x60C) = 0x80;
+    M2C_FIELD(arg0, s32 *, 0x604) = 0;
+    M2C_FIELD(arg0, s32 *, 0x600) = 0;
+    M2C_FIELD(arg0, s32 *, 0x608) = 0;
+    return 0;
+}
 
 s32 func_00124828(void) {
     return 0;

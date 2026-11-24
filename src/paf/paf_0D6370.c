@@ -250,9 +250,16 @@ s32 func_000DA228(void *arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0D6370", func_000DA234);
+void func_000DA234(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00199C78;
+    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_0016EE58;
+}
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0D6370", func_000DA250);
+void func_000DA250(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00199C78;
+    M2C_FIELD(arg0, M2C_UNK **, 8) = &D_0016EE58;
+    scePaf_4E67BB08(arg0);
+}
 
 void func_000DA284(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;

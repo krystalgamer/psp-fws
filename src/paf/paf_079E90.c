@@ -93,7 +93,12 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_079E90", func_0007BB30);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_079E90", func_0007BC14);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_079E90", func_0007BE50);
+s32 func_0007BE50(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0x130) = &func_0007BC14;
+    M2C_FIELD(arg0, M2C_UNK **, 0x138) = &func_0007BC14;
+    M2C_FIELD(arg0, M2C_UNK **, 0x140) = &func_0007BC14;
+    return 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_079E90", func_0007BE6C);
 

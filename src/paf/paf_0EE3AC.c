@@ -96,7 +96,11 @@ s32 func_000EF208(s32 arg0, M2C_UNK arg1) {
     return 1;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EF250);
+void func_000EF250(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EF260);
 

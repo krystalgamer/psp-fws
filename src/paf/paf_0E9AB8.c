@@ -144,7 +144,22 @@ s32 scePaf_C6F44EF9(void) {
     return D_001A47DC;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0E9AB8", func_000EBBB8);
+void func_000EBBB8(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_v0;
+    s32 var_a2;
+
+    var_a2 = arg2;
+    if (var_a2 == 0) {
+        temp_v0 = scePaf_B7E6052B(0x1AC);
+        func_001026B4(temp_v0, arg0);
+        var_a2 = temp_v0;
+    }
+    scePaf_87516C3B(arg0, arg1, var_a2);
+    M2C_FIELD(arg0, s32 *, 0x14) = 0x100;
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0019AB08;
+    M2C_FIELD(arg0, s32 *, 0x334) = 0;
+    M2C_FIELD(arg0, s32 *, 0x330) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0E9AB8", scePaf_D180ACBA);
 

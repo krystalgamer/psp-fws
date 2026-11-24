@@ -477,7 +477,16 @@ s32 *func_0002CE98(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
     return arg0;
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0274C4", func_0002CED0);
+void func_0002CED0(s32 arg0, s32 *arg1) {
+    s32 temp_v0;
+
+    temp_v0 = *arg1;
+    if (temp_v0 == 0) {
+
+    } else {
+        func_0002CFF4(arg0, temp_v0 + 8);
+    }
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0274C4", func_0002CF00);
 

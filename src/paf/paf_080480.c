@@ -49,7 +49,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", func_00081E60);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", func_00082078);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", func_00082140);
+void func_00082140(s32 arg0) {
+    void *temp_a0;
+
+    temp_a0 = arg0 + 0x20;
+    M2C_FIELD(temp_a0, s16 *, 0x2C) = 8;
+    M2C_FIELD(temp_a0, s16 *, 0x2E) = 1;
+}
 
 void func_00082158(void *arg0) {
     s32 temp_a0;
@@ -166,7 +172,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", func_00083974);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", func_00083C54);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", func_00083CC0);
+s32 func_00083CC0(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0x130) = &func_00083C54;
+    M2C_FIELD(arg0, M2C_UNK **, 0x138) = &func_00083C54;
+    return 1;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_080480", func_00083CD8);
 

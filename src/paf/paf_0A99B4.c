@@ -163,7 +163,10 @@ void func_000AC5C4(void) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", func_000AC5CC);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", func_000AC5E4);
+void func_000AC5E4(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x620) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x624) = arg2;
+}
 
 void func_000AC5F0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 1);
@@ -231,7 +234,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", png_do_strip_filler);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", png_do_bgr);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", png_set_user_transform_info);
+void png_set_user_transform_info(void *arg0, s32 arg1, s8 arg2, s8 arg3) {
+    M2C_FIELD(arg0, s32 *, 0x420) = arg1;
+    M2C_FIELD(arg0, s8 *, 0x424) = arg2;
+    M2C_FIELD(arg0, s8 *, 0x425) = arg3;
+}
 
 s32 png_get_user_transform_ptr(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x420);
@@ -364,7 +371,12 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", inflateInit2_);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", inflateInit_);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", func_000B2500);
+void func_000B2500(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0x4C) = &D_00196FCC;
+    M2C_FIELD(arg0, s32 *, 0x54) = 9;
+    M2C_FIELD(arg0, M2C_UNK **, 0x50) = &D_001977CC;
+    M2C_FIELD(arg0, s32 *, 0x58) = 5;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0A99B4", func_000B252C);
 

@@ -405,7 +405,12 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_0012946C);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_001294C0);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_124B74", func_001295FC);
+void func_001295FC(void) {
+    func_0012962C();
+    M2C_VFIELD(&D_001E0ECC, s8, 0x15F3) = 0;
+    M2C_VFIELD(&D_001E0ECC, s8, 0x4138) = 0;
+    M2C_VFIELD(&D_001E0ECC, s16, 0x417C) = 0;
+}
 
 void func_0012962C(void) {
     M2C_VFIELD(&D_001E0ECC, s8, 0x4110) = 0;

@@ -412,7 +412,12 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155D20", func_0015A1C8);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155D20", func_0015A1E8);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_155D20", func_0015A210);
+void func_0015A210(void *arg0) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 4) = 0;
+        M2C_FIELD(arg0, s32 *, 0) = 0;
+    }
+}
 
 void func_0015A228(s32 arg0) {
     func_0015A26C(arg0, 0);

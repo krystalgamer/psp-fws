@@ -165,7 +165,10 @@ void func_0009CCCC(void) {
     func_0006C30C();
 }
 
-INCLUDE_ASM("tmp/asm/340/mm_flash/nonmatchings/mm_flash_09B7D4", func_0009CCE8);
+void func_0009CCE8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x1070) = 9;
+    M2C_FIELD(arg0, s32 *, 0x1074) = 1;
+}
 
 void func_0009CCFC(void *arg0) {
     func_000725B0(arg0);
