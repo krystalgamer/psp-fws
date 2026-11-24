@@ -17,12 +17,11 @@ typedef int SceUID;
 
 #define NULL ((void *)0)
 
-/* $k1 holds the caller's privilege bits in kernel exports (saved, shifted
-   and restored around calls); GCC never allocates it. */
+/* m2c context only: $k1 (caller privilege bits in kernel exports) is shown to
+   m2c as a global. A global register variable for it would change register
+   save order elsewhere in a file, so C using it is not accepted yet. */
 #ifdef M2CTX
 extern u32 k1;
-#else
-register u32 k1 __asm__("$27");
 #endif
 
 #endif

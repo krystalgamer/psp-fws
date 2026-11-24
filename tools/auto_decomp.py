@@ -294,7 +294,7 @@ def _try_func(mod, name, header_ctx, target, seen):
     decls, body = split_m2c(out, name)
     # Unknown stack usage can't match; gotos are rejected in favour of
     # structured control flow (those functions are left for manual work).
-    if body is None or re.search(r"\b(sp|subroutine_arg\d+|saved_reg_\w+|unksp\w*|goto)\b", body):
+    if body is None or re.search(r"\b(sp|subroutine_arg\d+|saved_reg_\w+|unksp\w*|goto|k1)\b", body):
         return None
     new_funcs, new_vars = {}, {}
     for d in decls:
