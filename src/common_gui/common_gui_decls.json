@@ -22,6 +22,13 @@
   "func_00002D28": "void func_00002D28(M2C_UNK **arg0);",
   "func_00002D38": "void func_00002D38(M2C_UNK **arg0);",
   "func_00002DB8": "M2C_UNK func_00002DB8();",
+  "func_00003508": "void func_00003508(void **arg0, void *arg1);",
+  "func_00003528": "void func_00003528(s32 *arg0, s32 arg1);",
+  "func_00003548": "void func_00003548(s32 *arg0, s32 arg1);",
+  "func_00003588": "s32 func_00003588(s32);",
+  "func_000035B8": "s32 func_000035B8(s32);",
+  "func_00003878": "void func_00003878(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);",
+  "func_00003894": "void func_00003894(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "scePaf_338C3774": "void *scePaf_338C3774(s32, M2C_UNK);",
@@ -29,6 +36,7 @@
   "scePaf_4E67BB08": "M2C_UNK scePaf_4E67BB08();",
   "scePaf_6C3BBB68": "M2C_UNK scePaf_6C3BBB68(s32);",
   "scePaf_D4FAE7D0": "s32 scePaf_D4FAE7D0(M2C_UNK *);",
+  "scePaf_FA05BF7B": "M2C_UNK scePaf_FA05BF7B(s32);",
   "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);",
   "scePaf_FE575092": "M2C_UNK scePaf_FE575092(s32);",
   "sceVshCommonGui_0131C97D": "void sceVshCommonGui_0131C97D(s32 *arg0);",
@@ -40,11 +48,14 @@
   "sceVshCommonGui_80271F41": "void sceVshCommonGui_80271F41(void);",
   "sceVshCommonGui_88F5E3A8": "void sceVshCommonGui_88F5E3A8(struct Unk_sceVshCommonGui_88F5E3A8_0 *arg0, s32 arg1, s32 arg2);",
   "sceVshCommonGui_93107A60": "void sceVshCommonGui_93107A60(void);",
+  "sceVshCommonGui_9F196654": "void sceVshCommonGui_9F196654(s32 *arg0);",
+  "sceVshCommonGui_A0334323": "void sceVshCommonGui_A0334323(void);",
   "sceVshCommonGui_ACFE7BE7": "s32 sceVshCommonGui_ACFE7BE7(void **arg0);",
   "sceVshCommonGui_B45ED019": "void sceVshCommonGui_B45ED019(void);",
   "sceVshCommonGui_DBEE94DC": "void sceVshCommonGui_DBEE94DC(void);",
   "sceVshCommonGui_E9B8D6AB": "void sceVshCommonGui_E9B8D6AB(void);",
-  "sceVshCommonGui_F7A03543": "s32 sceVshCommonGui_F7A03543(void);"
+  "sceVshCommonGui_F7A03543": "s32 sceVshCommonGui_F7A03543(void);",
+  "sceVshCommonGui_FA1DE461": "void sceVshCommonGui_FA1DE461(void *arg0, s32 arg1, s32 arg2);"
  },
  "types": {
   "Unk_func_000008A8_temp_a0": "struct Unk_func_000008A8_temp_a0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
@@ -58,6 +69,7 @@
  },
  "vars": {
   "D_00003264": "extern M2C_UNK D_00003264;",
+  "D_00003314": "extern s32 D_00003314;",
   "D_000037F0": "extern M2C_UNK D_000037F0;",
   "D_00003920": "extern M2C_UNK D_00003920;",
   "D_00003934": "extern s32 D_00003934;"

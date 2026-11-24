@@ -30,4 +30,3 @@ INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_6C81492F);
 INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_54BC644C);
 
 INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_BAA1F762);
-

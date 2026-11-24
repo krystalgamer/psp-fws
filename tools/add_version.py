@@ -188,6 +188,52 @@ def label_roms(d):
     return out
 
 
+def unit_rodata(d, name):
+    return [int(m[1], 16) for m in re.finditer(r"dlabel \w+\n\s*/\* ([0-9A-F]+) ", (d / f"{name}.s").read_text())]
+
+
+def address_order(N, d):
+    """Functions in text order; standalone rodata after the function whose
+    migrated rodata precedes it (splat's stub lists unmigrated rodata first)."""
+    funcs = [u for u in N if u[3] == "func"]
+    data = [u for u in N if u[3] != "func"]
+    out, last = [], []
+    fro = [(max(unit_rodata(d, u[0]), default=-1), k) for k, u in enumerate(funcs)]
+    slots = {}
+    for u in data:
+        r = min(unit_rodata(d, u[0]), default=-1)
+        k = max((k for m, k in fro if 0 <= m < r), default=-1)
+        slots.setdefault(k, []).append((r, u))
+    for v in slots.values():
+        v.sort(key=lambda x: x[0])
+    out += [u for _, u in slots.get(-1, [])]
+    for k, f in enumerate(funcs):
+        out.append(f)
+        out += [u for _, u in slots.get(k, [])]
+    return out
+
+
+def fix_boundaries(N, n_tu, nmap, stems, d):
+    """Unpaired units between the last paired unit of one TU and the first of the
+    next go to whichever TU keeps every TU's rodata in order."""
+    ro = {nn: unit_rodata(d, nn) for nn, _, _, _ in N}
+    idx = [k for k, u in enumerate(N) if u[0] in nmap]
+    for a, b in zip(idx, idx[1:]):
+        ta, tb = n_tu[N[a][0]], n_tu[N[b][0]]
+        run = [u[0] for u in N[a + 1:b]]
+        if ta == tb or not run:
+            continue
+        rest = lambda tu: [r for nn, t in n_tu.items() if t == tu and nn not in run for r in ro[nn]]  # noqa: E731
+        maxa, minb = max(rest(ta), default=-1), min(rest(tb), default=1 << 32)
+        for c in range(len(run), -1, -1):
+            p1 = [r for nn in run[:c] for r in ro[nn]]
+            p2 = [r for nn in run[c:] for r in ro[nn]]
+            if all(x < minb for x in p1) and all(x > maxa for x in p2) and (not p1 or not p2 or max(p1) < min(p2)):
+                for nn in run[c:]:
+                    n_tu[nn] = tb
+                break
+
+
 def split_config(ntext, mod, stems, N, n_tu, new, stem0):
     """NEW's config with one c (and .rodata) subsegment per TU."""
     d = ROOT / "tmp/asm" / new / mod / "nonmatchings" / stem0
@@ -202,10 +248,13 @@ def split_config(ntext, mod, stems, N, n_tu, new, stem0):
         for m in re.finditer(r"dlabel \w+\n\s*/\* ([0-9A-F]+) ", t):
             r = int(m[1], 16)
             ro_start[tu] = min(ro_start.get(tu, r), r)
-            order.append((r, stems.index(tu)))
+            order.append((r, stems.index(tu), nn))
     order.sort()
-    if any(b[1] < a[1] for a, b in zip(order, order[1:])):
-        raise RuntimeError("rodata order of the TUs differs between versions")
+    bad = [(a, b) for a, b in zip(order, order[1:]) if b[1] < a[1]]
+    if bad:
+        (ra, ta, na), (rb, tb, nb) = bad[0]
+        raise RuntimeError(f"rodata order of the TUs differs between versions: {na}@{ra:X} ({stems[ta]}) "
+                           f"before {nb}@{rb:X} ({stems[tb]}); {len(bad)} inversions")
     cm = re.search(rf"^(\s+)- \[(0x[0-9A-Fa-f]+), c, {stem0}\]\n", ntext, re.M)
     rm = re.search(rf"^(\s+)- \[(0x[0-9A-Fa-f]+), \.rodata, {stem0}\]\n", ntext, re.M)
     tus = [st for st in stems if st in text_start]
@@ -251,7 +300,7 @@ def main():
     if run("git", "diff", "--quiet", "--", f"src/{mod}", f"config/{new}/{mod}.yaml", f"config/{ref}/{mod}.yaml",
            f"config/{new}/symbol_addrs.{mod}.txt")[0]:
         sys.exit(f"{mod}: local changes, aborting")
-    stems = [x[2] for x in rsub]
+    stems = list(dict.fromkeys(x[2] for x in rsub))
     symf = ROOT / "config" / new / f"symbol_addrs.{mod}.txt"
     sym0 = symf.read_text() if symf.exists() else ""
     pinf = ROOT / "config" / new / f"func_starts.{mod}.txt"
@@ -401,7 +450,20 @@ def main():
                     raise RuntimeError(f"{nn}: TU order differs between versions")
                 cur = r_tu[nmap[nn]]
             n_tu[nn] = cur
+        place_after = {}
         if len(stems) > 1:
+            dn = ROOT / "tmp/asm" / new / mod / "nonmatchings" / rstem_new
+            fix_boundaries(N, n_tu, nmap, stems, dn)
+            # unpaired rodata goes after the paired unit whose rodata precedes it
+            pro = sorted((r, nn) for nn, _, _, _ in N if nn in nmap for r in unit_rodata(dn, nn))
+            for nn, _, _, k in N:
+                if nn in nmap or k == "func":
+                    continue
+                r = min(unit_rodata(dn, nn), default=None)
+                below = [x for x in pro if x[0] < r] if r is not None else []
+                if below:
+                    place_after[nn] = nmap[below[-1][1]]
+                    n_tu[nn] = r_tu[place_after[nn]]
             ntext = split_config(ntext, mod, stems, N, n_tu, new, rstem_new)
             pins = [f"{nn} = 0x{roms[nn][1]:08X}; // type:func" for nn, _, _, k in N
                     if k == "func" and AUTO.fullmatch(nn) and renamed(nn) == nn and nn in roms]
@@ -416,6 +478,8 @@ def main():
         for nn, _, _, nk in N:
             if nn in nmap:
                 last_ref = nmap[nn]
+            elif nn in place_after:
+                after.setdefault(place_after[nn], []).append((nn, nk))
             else:
                 after.setdefault(last_ref, []).append((nn, nk))
         rv = fwnum(ref)
