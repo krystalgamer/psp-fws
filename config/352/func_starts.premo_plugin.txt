@@ -884,7 +884,6 @@ func_0001D93C = 0x0001D93C; // type:func
 func_0001D9D4 = 0x0001D9D4; // type:func
 func_0001DA9C = 0x0001DA9C; // type:func
 func_0001DB50 = 0x0001DB50; // type:func
-func_0001DC44 = 0x0001DC44; // type:func
 func_0001DC88 = 0x0001DC88; // type:func
 func_0001DEF4 = 0x0001DEF4; // type:func
 func_0001DF18 = 0x0001DF18; // type:func
