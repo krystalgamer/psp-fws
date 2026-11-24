@@ -55,6 +55,8 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, savedata_plugin]
+      - [0xCE5C, c, savedata_plugin_00CDBC]
+      - [0xCEDC, c, savedata_plugin_00CE3C]
       - [0x11CF4, c, savedata_plugin_011C54]
       - [0x13140, c, savedata_plugin_0130A0]
       - { start: 0x20BDC, type: asm, name: fini, linker_section: .fini }
@@ -75,6 +77,7 @@ segments:
       - { start: 0x217E0, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x217E4, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x21818, .rodata, savedata_plugin]
+      - [0x22568, .rodata, savedata_plugin_00CE3C]
       - [0x22740, .rodata, savedata_plugin_011C54]
       - [0x22798, .rodata, savedata_plugin_0130A0]
   - name: savedata_plugin_seg1
