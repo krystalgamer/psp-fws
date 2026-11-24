@@ -207,7 +207,8 @@ def structify_args(mod, only=None, skip=()):
                 continue
             a = pm[1]
             rest = ARGACC.sub("", body)
-            if re.search(rf"\b{a}\s*[-+\[]|[-+]\s*{a}\b|\b{a}\s*[-+]=|\({a}\)\s*[-+\[]", rest):
+            # byte arithmetic (arg + n) is kept as (u8 *)arg + n; anything else excludes
+            if re.search(rf"\b{a}\s*\[|[-+]\s*{a}\b|\b{a}\s*[-+]=|\b{a}\s*(?:\+\+|--)|\({a}\)\s*[-+\[]", rest):
                 continue
             eligible[(name, k)] = a
             dsu.find((name, k))
@@ -296,6 +297,12 @@ def structify_args(mod, only=None, skip=()):
                     off, t = int(am[3], 0), field_type(False, am[2])
                     return f"{a}->unk{off:X}" if fields.get(off) == t else am[0]
                 new = ARGACC.sub(acc_repl, body)
+
+                def addr_repl(om, a=a, fields=fields):
+                    off = int(om[1], 0)
+                    return f"&{a}->unk{off:X}" if off in fields else om[0]
+                new = re.sub(rf"\b{a}\s*([-+])(?![-+=>])", rf"(u8 *){a} \1", new)
+                new = re.sub(rf"\(u8 \*\){a} \+ (0x[0-9A-Fa-f]+|\d+)(?=[),;])", addr_repl, new)
                 n_lines += new != body
                 body = new
             return f"{m[1]}{name}({', '.join(params)}) {{\n{body}}}\n"

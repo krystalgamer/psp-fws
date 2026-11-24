@@ -89,7 +89,7 @@ def structify_locals(mod, only=None, skip=()):
             if not re.search(rf"M2C_FIELD\({re.escape(name)}, ", body):
                 continue
             rest = re.sub(rf"M2C_FIELD\({re.escape(name)}, [^,()]+?, (?:0x[0-9A-Fa-f]+|\d+)\)", "", body)
-            if re.search(rf"\b{name}\s*[-+\[]|[-+]\s*{name}\b|\b{name}\s*[-+]=|\b{name}\+\+|\({name}\)\s*[-+\[]", rest):
+            if re.search(rf"\b{name}\s*\[|[-+]\s*{name}\b|\b{name}\s*[-+]=|\b{name}\s*(?:\+\+|--)|\({name}\)\s*[-+\[]", rest):
                 continue
             node = ("L", func, name)
             locals_[node] = True
@@ -203,6 +203,12 @@ def structify_locals(mod, only=None, skip=()):
                     off, t = int(am[2], 0), S.field_type(False, am[1])
                     return f"{name}->unk{off:X}" if fields.get(off) == t else am[0]
                 new = re.sub(rf"M2C_FIELD\({re.escape(name)}, ([^,()]+?), (0x[0-9A-Fa-f]+|\d+)\)", acc_repl, new)
+
+                def addr_repl(om, name=name, fields=fields):
+                    off = int(om[1], 0)
+                    return f"&{name}->unk{off:X}" if off in fields else om[0]
+                new = re.sub(rf"\b{name}\s*([-+])(?![-+=>])", rf"(u8 *){name} \1", new)
+                new = re.sub(rf"\(u8 \*\){name} \+ (0x[0-9A-Fa-f]+|\d+)(?=[),;])", addr_repl, new)
             # pointer-field loads/stores through typed bases
             def pf_repl(pm):
                 base, off = pm[1], int(pm[2], 0)
