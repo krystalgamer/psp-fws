@@ -330,7 +330,11 @@ def main():
     if subprocess.run(["git", "diff", "--quiet", "--", f"src/{mod}"], cwd=ROOT).returncode:
         print(f"{vm}: local changes, skipping")
         return
-    phase = structify_args if "--args" in sys.argv else structify_globals
+    if "--locals" in sys.argv:
+        import structify_locals
+        phase = structify_locals.structify_locals
+    else:
+        phase = structify_args if "--args" in sys.argv else structify_globals
     n, lines = phase(mod)
     if not n:
         print(f"{vm}: nothing to do")
@@ -342,9 +346,10 @@ def main():
         print(f"{vm}: OK, {n} globals as structs, {lines} lines rewritten")
         return
     # bisect: keep the largest verified subsets of the new structs
-    names = sorted(set(json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text()).get("types", {}))
-                   - set(json.loads(subprocess.run(["git", "show", f"HEAD:src/{mod}/{mod}_decls.json"], cwd=ROOT,
-                                                   capture_output=True, text=True).stdout or "{}").get("types", {})))
+    now = json.loads((ROOT / "src" / mod / f"{mod}_decls.json").read_text()).get("types", {})
+    head = json.loads(subprocess.run(["git", "show", f"HEAD:src/{mod}/{mod}_decls.json"], cwd=ROOT,
+                                     capture_output=True, text=True).stdout or "{}").get("types", {})
+    names = sorted(k for k, v in now.items() if head.get(k) != v)
     if phase is structify_globals:
         names = [n[:-2] for n in names if n.endswith("_s")]
     revert(mod)
