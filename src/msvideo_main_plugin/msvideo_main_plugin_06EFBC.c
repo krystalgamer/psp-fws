@@ -370,7 +370,13 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_06
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_06EFBC", func_00073A80);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_06EFBC", func_00073ADC);
+void func_00073ADC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = (s32) (arg0 + 0x96C);
+    M2C_FIELD(arg0, s32 *, 0x196C) = 0x1000;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1970) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_06EFBC", func_00073AFC);
 

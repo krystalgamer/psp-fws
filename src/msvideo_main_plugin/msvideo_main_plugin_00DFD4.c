@@ -76,7 +76,15 @@ void func_0000E540(void *arg0) {
     }
 }
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00DFD4", func_0000E570);
+void func_0000E570(void *arg0, s32 arg1, s32 arg2) {
+    void *temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, void **, 0x68);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(temp_v0, s32 *, 0x350) = arg1;
+        M2C_FIELD(temp_v0, s32 *, 0x354) = arg2;
+    }
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00DFD4", func_0000E58C);
 
@@ -122,7 +130,11 @@ s32 func_0000ECC4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x18);
 }
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00DFD4", func_0000ECCC);
+void func_0000ECCC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00DFD4", func_0000ECDC);
 
@@ -152,7 +164,11 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00DFD4", func_0000F82C);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00DFD4", func_0000FA60);
+void func_0000FA60(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00DFD4", func_0000FA70);
 
@@ -209,7 +225,11 @@ INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00DFD4", func_00010110);
 
-INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00DFD4", func_000101F4);
+void func_000101F4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/msvideo_main_plugin/nonmatchings/msvideo_main_plugin_00DFD4", func_00010204);
 
