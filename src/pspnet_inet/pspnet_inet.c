@@ -1017,23 +1017,23 @@ s32 func_000232C0(struct Unk_func_000232C0_0 *arg0) {
     s32 var_v0;
     struct Unk_func_000232C0_temp_v1 *temp_v1;
     struct Unk_func_000232C0_temp_v1_2 *temp_v1_2;
-    void *var_s0;
+    struct Unk_func_000232C0_var_s0 *var_s0;
 
     var_v0 = 0;
     var_s0 = arg0->unk4;
     if (var_s0 != NULL) {
         do {
-            temp_v1 = M2C_FIELD(var_s0, void **, 0);
+            temp_v1 = var_s0->unk0;
             if (temp_v1 != NULL) {
-                temp_v1->unk4 = (void **) M2C_FIELD(var_s0, void ***, 4);
+                temp_v1->unk4 = (void **) var_s0->unk4;
             }
-            *M2C_FIELD(var_s0, void ***, 4) = temp_v1;
-            temp_v1_2 = M2C_FIELD(var_s0, void **, 0x14);
+            *var_s0->unk4 = temp_v1;
+            temp_v1_2 = var_s0->unk14;
             if (temp_v1_2 != NULL) {
-                temp_v1_2->unk18 = (void **) M2C_FIELD(var_s0, void ***, 0x18);
+                temp_v1_2->unk18 = (void **) var_s0->unk18;
             }
-            *M2C_FIELD(var_s0, void ***, 0x18) = temp_v1_2;
-            sceNetIfhandle_lib_F56FAC82(M2C_FIELD(var_s0, s32 *, 0xC));
+            *var_s0->unk18 = temp_v1_2;
+            sceNetIfhandle_lib_F56FAC82(var_s0->unkC);
             sceNetIfhandle_lib_76BAD213(var_s0);
             var_s0 = arg0->unk4;
             var_v0 = 1;

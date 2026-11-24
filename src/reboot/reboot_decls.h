@@ -20,6 +20,11 @@ struct Unk_func_000091C4_temp_a0 {
     struct Unk_func_000091C4_temp_a3 *unk8;
 };
 
+struct Unk_func_000091C4_temp_a1 {
+    u8 pad0[0x4];
+    void **unk4;
+};
+
 struct Unk_func_000091C4_temp_a3 {
     u8 pad0[0x8];
     s32 unk8;

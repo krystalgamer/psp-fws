@@ -214,7 +214,7 @@ struct Unk_func_0001C57C_0 {
 
 struct Unk_func_000232C0_0 {
     u8 pad0[0x4];
-    void *unk4;
+    struct Unk_func_000232C0_var_s0 *unk4;
 };
 
 struct Unk_func_000232C0_temp_v1 {
@@ -224,6 +224,16 @@ struct Unk_func_000232C0_temp_v1 {
 
 struct Unk_func_000232C0_temp_v1_2 {
     u8 pad0[0x18];
+    void **unk18;
+};
+
+struct Unk_func_000232C0_var_s0 {
+    void *unk0;
+    void **unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    u8 pad10[0x4];
+    void *unk14;
     void **unk18;
 };
 

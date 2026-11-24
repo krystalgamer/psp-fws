@@ -616,7 +616,7 @@ struct Unk_func_000417D8_var_v0 {
 };
 
 struct Unk_func_00041834_0 {
-    M2C_UNK * unk0;
+    M2C_UNK *unk0;
     s32 unk4;
 };
 

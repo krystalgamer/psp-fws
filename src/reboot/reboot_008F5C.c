@@ -48,7 +48,7 @@ s32 func_000091C4(struct Unk_func_000091C4_0 *arg0) {
     void **temp_a2;
     void **temp_v0;
     struct Unk_func_000091C4_temp_a0 *temp_a0;
-    void *temp_a1;
+    struct Unk_func_000091C4_temp_a1 *temp_a1;
     struct Unk_func_000091C4_temp_a3 *temp_a3;
 
     func_0000E028();
@@ -59,7 +59,7 @@ s32 func_000091C4(struct Unk_func_000091C4_0 *arg0) {
         temp_a2 = temp_a0->unk4;
         temp_a3->unk8 = (s32) (temp_a3->unk8 - 1);
         if (temp_a1 != NULL) {
-            M2C_FIELD(temp_a1, void ***, 4) = temp_a2;
+            temp_a1->unk4 = temp_a2;
         } else {
             D_00017348 = temp_a2;
         }
