@@ -289,7 +289,11 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_00017660);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_000176F4);
+s32 func_000176F4(void *arg0) {
+    void *sp0;
+    sceKernelCancelEventFlag(M2C_FIELD(arg0, s32 *, 0x30), 0x38U, &sp0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_014B14", func_0001771C);
 

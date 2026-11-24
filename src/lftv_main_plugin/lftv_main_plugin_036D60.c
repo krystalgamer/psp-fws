@@ -2,7 +2,11 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_036D60", func_00036D60);
+void func_00036D60(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_036D60", func_00036D70);
 

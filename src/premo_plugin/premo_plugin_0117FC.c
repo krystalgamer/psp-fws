@@ -2,7 +2,17 @@
 #include "common.h"
 #include "premo_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_0117FC", func_000117FC);
+s32 func_000117FC(void *arg0, s32 arg1) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0xA0);
+    if (temp_v0 != 0) {
+        var_v1 = func_000149C4(temp_v0, arg1);
+    }
+    return var_v1;
+}
 
 s32 func_00011830(void *arg0) {
     s32 var_v0;

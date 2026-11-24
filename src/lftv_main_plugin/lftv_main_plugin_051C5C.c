@@ -2,9 +2,26 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_051C5C", func_00051C5C);
+void func_00051C5C(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0005DAA0;
+    M2C_FIELD(arg0, M2C_UNK **, 0x2C) = &D_0005DAD0;
+    func_00050DFC(arg0 + 0x2C);
+    M2C_FIELD(arg0, M2C_UNK **, 0x14) = &D_0005DAD0;
+    func_00050DFC(arg0 + 0x14);
+    func_00051884((s32) (arg0 + 4));
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0005DB00;
+}
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_051C5C", func_00051CC4);
+void func_00051CC4(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0005DAA0;
+    M2C_FIELD(arg0, M2C_UNK **, 0x2C) = &D_0005DAD0;
+    func_00050DFC(arg0 + 0x2C);
+    M2C_FIELD(arg0, M2C_UNK **, 0x14) = &D_0005DAD0;
+    func_00050DFC(arg0 + 0x14);
+    func_00051884((s32) (arg0 + 4));
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0005DB00;
+    scePaf_4E67BB08(arg0);
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_051C5C", func_00051D34);
 

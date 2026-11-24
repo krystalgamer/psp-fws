@@ -2,7 +2,15 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_003ADC", func_00003ADC);
+s32 func_00003ADC(void) {
+    s32 temp_v0;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_000572A0);
+    if (temp_v0 != 0) {
+        scePaf_1A45C860(temp_v0, (s32) &func_00003A28);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_003ADC", func_00003B18);
 

@@ -4,7 +4,16 @@
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_0149C4", func_000149C4);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_0149C4", func_00014A10);
+s32 func_00014A10(void *arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (M2C_FIELD(arg0, s8 *, 0x52) != 0) {
+        scePaf_3308156F(arg1, (s32) (arg0 + 0x52), 0x80);
+        var_v1 = arg1;
+    }
+    return var_v1;
+}
 
 void func_00014A5C(void *arg0) {
     s32 temp_s1;

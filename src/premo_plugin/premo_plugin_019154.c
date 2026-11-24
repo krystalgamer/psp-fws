@@ -99,7 +99,11 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00019E3C);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00019ED4);
+s32 func_00019ED4(void *arg0) {
+    void *sp0;
+    sceKernelCancelEventFlag(M2C_FIELD(arg0, s32 *, 0x30), 0x38U, &sp0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00019EFC);
 
@@ -813,7 +817,11 @@ s32 func_0001E918(void *arg0) {
     return var_a0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001E96C);
+s32 func_0001E96C(void *arg0) {
+    void *sp0;
+    sceKernelCancelEventFlag(M2C_FIELD(arg0, s32 *, 0x30), 0x38U, &sp0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001E994);
 
@@ -972,7 +980,11 @@ s32 func_0001FDA0(void *arg0) {
     return var_a0;
 }
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001FDF8);
+s32 func_0001FDF8(void *arg0) {
+    void *sp0;
+    sceKernelCancelEventFlag(M2C_FIELD(arg0, s32 *, 0x30), 0x38U, &sp0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_0001FE20);
 
@@ -1260,7 +1272,13 @@ INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_000230C0);
 
-INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00023230);
+s32 func_00023230(s32 arg0, s32 arg1, s32 arg2) {
+    if (arg1 == 1) {
+        scePaf_3308156F(arg0 + 0xD8, arg2, 0x10);
+        M2C_FIELD(arg0, s8 *, 0xE8) = (s8) arg1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/352/premo_plugin/nonmatchings/premo_plugin_019154", func_00023284);
 

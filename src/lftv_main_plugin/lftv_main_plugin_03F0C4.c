@@ -2,7 +2,20 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/lftv_main_plugin/nonmatchings/lftv_main_plugin_03F0C4", func_0003F0C4);
+void func_0003F0C4(void *arg0, s32 arg1) {
+    s32 temp_v0;
+
+    M2C_FIELD(arg0, s32 *, 4) = -1;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s8 *, 8) = 0;
+    if (arg1 != 0) {
+        temp_v0 = sceNetApctl_A7BB73DF(arg1, 0);
+        M2C_FIELD(arg0, s32 *, 0) = temp_v0;
+        if (temp_v0 >= 0) {
+            M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+        }
+    }
+}
 
 void func_0003F118(void *arg0) {
     s32 temp_v0;
