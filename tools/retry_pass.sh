@@ -3,7 +3,7 @@
 # INCLUDE_ASM functions whose asm matches REGEX (default: Allegrex integer
 # ops). Keeps the result only if more functions are in C and the module still
 # matches from scratch.
-# Usage: tools/retry_pass.sh VERSION:MODULE [REGEX]
+# Usage: tools/retry_pass.sh VERSION:MODULE [REGEX] [NAMES_FILE]
 cd "$(dirname "$0")/.."
 v=${1%%:*}; m=${1##*:}
 re=${2:-'^\s*/\*.*\*/\s+(max|min|clz|clo|ext|ins|wsbh|wsbw|bitrev|rotrv?|rorv?)\s'}
@@ -12,7 +12,7 @@ count() { cat src/$m/*.c | grep -cE '^[A-Za-z][A-Za-z0-9_ *]*\b[A-Za-z0-9_]+\([^
 before=$(count)
 log=tmp/retry_${v}_${m}.log
 { make extract split VERSION=$v MODULE=$m && .venv/bin/python tools/op_census.py $v $m \
-  && .venv/bin/python tools/auto_decomp.py $v $m --max-size 0x400 --grep "$re"; } >"$log" 2>&1
+  && .venv/bin/python tools/auto_decomp.py $v $m --max-size 0x400 --grep "$re" ${3:+--names "$3"}; } >"$log" 2>&1
 after=$(count)
 if [ "$after" -gt "$before" ] && tools/regress.sh "$1" >>"$log" 2>&1; then
     echo "$1: OK $before -> $after"
