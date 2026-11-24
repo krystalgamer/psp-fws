@@ -14,10 +14,14 @@
   "func_00002EB8": "s32 func_00002EB8(void);",
   "func_00002EC0": "s32 func_00002EC0(s32 *arg0);",
   "func_00004754": "s32 func_00004754(void);",
+  "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceUsbBus_driver_B1644BE7": "s32 sceUsbBus_driver_B1644BE7(M2C_UNK *);",
-  "sceUsbBus_driver_C1E2A540": "s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);"
+  "sceUsbBus_driver_C1E2A540": "s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);",
+  "sceUsbGps_driver_268F95CA": "s32 sceUsbGps_driver_268F95CA(u32 arg0);"
  },
  "vars": {
-  "D_00005210": "extern M2C_UNK D_00005210;"
+  "D_00005210": "extern M2C_UNK D_00005210;",
+  "D_00005260": "extern M2C_UNK D_00005260;"
  }
 }

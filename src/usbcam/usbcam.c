@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "usbcam_decls.h"
 
 INCLUDE_RODATA("tmp/asm/282/usbcam/nonmatchings/usbcam", D_0000A2D8);
@@ -220,7 +221,15 @@ INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetSaturation);
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetBrightness);
 
-INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamGetBrightness);
+s32 sceUsbCamGetBrightness(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = sceUsbCam_driver_1E958148(0x80000001, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetContrast);
 
@@ -232,15 +241,39 @@ INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetSharpness);
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetZoom);
 
-INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamGetZoom);
+s32 sceUsbCamGetZoom(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = sceUsbCam_driver_1E958148(0x80000005, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetReverseMode);
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetEvLevel);
 
-INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamGetEvLevel);
+s32 sceUsbCamGetEvLevel(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamGetReverseMode);
+    temp_s0 = shiftK1();
+    temp_v0 = sceUsbCam_driver_1E958148(0x80000014, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceUsbCamGetReverseMode(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = sceUsbCam_driver_1E958148(0x80000006, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/usbcam/nonmatchings/usbcam", sceUsbCamSetImageEffectMode);
 

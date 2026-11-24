@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "idcheck_decls.h"
 
 INCLUDE_ASM("tmp/asm/340/idcheck/nonmatchings/idcheck", func_00000000);
@@ -49,9 +50,21 @@ INCLUDE_ASM("tmp/asm/340/idcheck/nonmatchings/idcheck", func_00000928);
 
 INCLUDE_ASM("tmp/asm/340/idcheck/nonmatchings/idcheck", func_00000950);
 
-INCLUDE_ASM("tmp/asm/340/idcheck/nonmatchings/idcheck", func_00000978);
+void func_00000978(s32 arg0) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/340/idcheck/nonmatchings/idcheck", func_000009AC);
+    temp_s0 = shiftK1();
+    func_00000AB8(1, arg0);
+    setK1(temp_s0);
+}
+
+void func_000009AC(s32 arg0) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_00000AB8(2, arg0);
+    setK1(temp_s0);
+}
 
 s32 func_000009E0(void) {
     return 0;

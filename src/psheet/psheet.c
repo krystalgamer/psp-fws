@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "psheet_decls.h"
 
 INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", scePsheet_driver_15355B0E);
@@ -31,7 +32,13 @@ s32 scePsheet_driver_3CEC4078(void) {
 
 INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", scePsheet_driver_3BA93CFA);
 
-INCLUDE_ASM("tmp/asm/340/psheet/nonmatchings/psheet", scePsheet_driver_226D9099);
+void scePsheet_driver_226D9099(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_00001460(1);
+    setK1(temp_s0);
+}
 
 INCLUDE_RODATA("tmp/asm/340/psheet/nonmatchings/psheet", D_000027EC);
 

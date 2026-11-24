@@ -17,8 +17,12 @@ s32 func_00008E1C(void);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);
 s32 sceUsbCamGetAutoImageReverseState(void);
+s32 sceUsbCamGetBrightness(void *arg0);
 s32 sceUsbCamGetContrast(void *arg0);
+s32 sceUsbCamGetEvLevel(void *arg0);
 s32 sceUsbCamGetImageEffectMode(void *arg0);
+s32 sceUsbCamGetReverseMode(void *arg0);
+s32 sceUsbCamGetZoom(void *arg0);
 s32 sceUsbCam_driver_1E958148(s32, s32);
 
 #endif

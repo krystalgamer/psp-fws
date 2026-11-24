@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "power_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_9CE06934);
@@ -109,7 +110,13 @@ s32 scePower_driver_165CE085(void) {
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_79DB9421);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_D6D016EF);
+void scePower_D6D016EF(s32 arg0) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_000012B4(arg0, 1);
+    setK1(temp_s0);
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_CA3D34C1);
 
@@ -121,11 +128,32 @@ INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_7FA406DD);
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_DB62C9CF);
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_2B7C7CF4);
+s32 scePower_driver_2B7C7CF4(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePowerRequestSuspend);
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00006180, 0x10U);
+    setK1(temp_s0);
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_2875994B);
+s32 scePowerRequestSuspend(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00006180, 0x20U);
+    setK1(temp_s0);
+    return 0;
+}
+
+s32 scePower_driver_2875994B(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00006180, 0x40U);
+    setK1(temp_s0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/power/nonmatchings/power", scePower_driver_0442D852);
 

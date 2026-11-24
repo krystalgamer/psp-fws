@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "wlan_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", func_00000000);
@@ -30,7 +31,21 @@ INCLUDE_RODATA("tmp/asm/282/wlan/nonmatchings/wlan", D_00018B20);
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_482CAE9A);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_C9A8CAB7);
+void sceWlanDrv_driver_C9A8CAB7(void) {
+    u32 temp_s2;
+    void *temp_s0;
+    void *temp_s1;
+
+    temp_s0 = D_000191B0;
+    temp_s2 = shiftK1();
+    temp_s1 = temp_s0 + 0x188;
+    if (temp_s0 != NULL) {
+        sceNetIfhandle_driver_54D1AEA1(temp_s1);
+        sceNetIfhandle_driver_C9344A59(temp_s1);
+        M2C_FIELD(temp_s0, s32 *, 0x188) = 0;
+    }
+    setK1(temp_s2);
+}
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_19E51F54);
 
@@ -181,7 +196,21 @@ INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_A447103A);
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_9658C9F7);
 
-INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_4C7F62E0);
+s32 sceWlanDrv_driver_4C7F62E0(void) {
+    s32 temp_v1;
+    u32 temp_s0;
+    void *temp_s1;
+
+    temp_s1 = D_000191B0;
+    temp_s0 = shiftK1();
+    temp_v1 = M2C_FIELD(temp_s1, s32 *, 0x1CC);
+    if (temp_v1 > 0) {
+        sceKernelCancelCallback(temp_v1);
+        M2C_FIELD(temp_s1, s32 *, 0x1CC) = 0;
+    }
+    setK1(temp_s0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/282/wlan/nonmatchings/wlan", sceWlanDrv_driver_81579D36);
 

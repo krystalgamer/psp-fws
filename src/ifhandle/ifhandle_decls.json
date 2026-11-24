@@ -3,9 +3,22 @@
   "func_00001330": "s32 func_00001330(void);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
+  "sceKernelCreateVpl": "s32 sceKernelCreateVpl(void *, s32, u32, u32, void *);",
+  "sceKernelDeleteVpl": "s32 sceKernelDeleteVpl(s32);",
+  "sceNetIfhandle_driver_0C391E9F": "s32 sceNetIfhandle_driver_0C391E9F(s32 arg0, u32 arg1);",
+  "sceNetIfhandle_driver_0FB8AE0D": "void sceNetIfhandle_driver_0FB8AE0D(void);",
   "sceNetIfhandle_driver_16246B99": "void sceNetIfhandle_driver_16246B99(void *arg0, void *arg1);",
+  "sceNetIfhandle_driver_29ED84C5": "s32 sceNetIfhandle_driver_29ED84C5(void);",
+  "sceNetIfhandle_driver_62B20015": "s32 sceNetIfhandle_driver_62B20015(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
   "sceNetIfhandle_driver_C6D14282": "s32 sceNetIfhandle_driver_C6D14282(void *arg0, s32 arg1);",
   "sceNetIfhandle_driver_D5AD6DEA": "s32 sceNetIfhandle_driver_D5AD6DEA(void *arg0);"
  },
- "vars": {}
+ "vars": {
+  "D_000034E8": "extern s32 D_000034E8;",
+  "D_000034EC": "extern s32 D_000034EC;",
+  "D_00003548": "extern s32 D_00003548;",
+  "D_0000354C": "extern s32 D_0000354C;",
+  "D_00003550": "extern s32 D_00003550;",
+  "D_00003554": "extern s32 D_00003554;"
+ }
 }

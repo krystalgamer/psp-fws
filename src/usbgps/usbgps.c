@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "usbgps_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", func_00000000);
@@ -18,7 +19,25 @@ INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", sceUsbGpsClose);
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", sceUsbGps_driver_A259CD67);
 
-INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", sceUsbGps_driver_268F95CA);
+s32 sceUsbGps_driver_268F95CA(u32 arg0) {
+    s32 temp_a0;
+    s32 var_s0;
+    u32 temp_s1;
+
+    var_s0 = 0;
+    temp_s1 = shiftK1();
+    if (M2C_FIELD(&D_000059B0, s32 *, 0) == 0) {
+        var_s0 = 0x80244002;
+    } else if (arg0 >= 3U) {
+        var_s0 = 0x80244007;
+    } else {
+        temp_a0 = sceKernelCpuSuspendIntr();
+        M2C_FIELD(&D_000059B0, u32 *, 0x157C) = arg0;
+        sceKernelCpuResumeIntr(temp_a0);
+    }
+    setK1(temp_s1);
+    return var_s0;
+}
 
 INCLUDE_ASM("tmp/asm/282/usbgps/nonmatchings/usbgps", sceUsbGps_driver_54D26AA4);
 

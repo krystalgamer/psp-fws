@@ -12,6 +12,8 @@
   "sceDisplayIsForeground": "s32 sceDisplayIsForeground(void);",
   "sceDisplayIsVblank": "s32 sceDisplayIsVblank(void);",
   "sceDisplaySetFrameBuf": "s32 sceDisplaySetFrameBuf(void *arg0, s32 arg1, s32 arg2, s32 arg3);",
+  "sceDisplayWaitVblankStart": "s32 sceDisplayWaitVblankStart(void);",
+  "sceDisplayWaitVblankStartCB": "s32 sceDisplayWaitVblankStartCB(void);",
   "sceDisplay_driver_206276C2": "s32 sceDisplay_driver_206276C2(void);",
   "sceDisplay_driver_23CE8C51": "s8 sceDisplay_driver_23CE8C51(void);",
   "sceDisplay_driver_5B5AEFAD": "s32 sceDisplay_driver_5B5AEFAD(s32, s32, s32, s32, s32);",
@@ -22,6 +24,8 @@
   "sceDisplay_driver_AC14F1FF": "s8 sceDisplay_driver_AC14F1FF(void);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelReleaseSubIntrHandler": "M2C_UNK sceKernelReleaseSubIntrHandler(M2C_UNK, M2C_UNK);",
+  "sceKernelWaitEventFlag": "s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);",
+  "sceKernelWaitEventFlagCB": "s32 sceKernelWaitEventFlagCB(s32, u32, s32, void *, void *);",
   "sceLcdc_driver_3107417C": "M2C_UNK sceLcdc_driver_3107417C();",
   "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
   "sceSysreg_driver_F6D83AD0": "M2C_UNK sceSysreg_driver_F6D83AD0(M2C_UNK);"

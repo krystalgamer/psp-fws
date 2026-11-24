@@ -18,9 +18,12 @@ s32 func_00000A20(void);
 s32 func_00000A28(void *arg0);
 s32 func_00000A40(void *arg0);
 s32 func_00000AF0(void);
+s32 func_00000AFC(s32, s32);
 s32 func_00000C78(void);
 void gets(s32 arg0);
 void putchar(s32 arg0);
+s32 sceKernelRegisterStderrPipe(s32 arg0);
+s32 sceKernelRegisterStdoutPipe(s32 arg0);
 void syslib_D3744BE0(void);
 
 #endif

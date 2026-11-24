@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "display_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", module_reboot_before);
@@ -142,9 +143,25 @@ INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_69B535
 
 INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplay_driver_21038913);
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayWaitVblankStart);
+s32 sceDisplayWaitVblankStart(void) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/display/nonmatchings/display", sceDisplayWaitVblankStartCB);
+    temp_s0 = shiftK1();
+    temp_v0 = sceKernelWaitEventFlag(D_00003EF8, 1U, 1, NULL, NULL);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceDisplayWaitVblankStartCB(void) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = sceKernelWaitEventFlagCB(D_00003EF8, 1U, 1, NULL, NULL);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 s32 sceDisplay_driver_92C8F8B7(void) {
     return D_00003EF0 != 0;

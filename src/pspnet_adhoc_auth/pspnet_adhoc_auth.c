@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "pspnet_adhoc_auth_decls.h"
 
 INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_86004235);
@@ -8,7 +9,20 @@ INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", func
 
 INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", func_0000025C);
 
-INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_6074D8F1);
+s32 sceNetAdhocAuth_driver_6074D8F1(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    if (D_00004610 > 0) {
+        sceNetIfhandle_driver_773FC77C();
+        func_000018F0();
+        func_000015B0();
+        func_00001650();
+        D_00004610 = 0;
+    }
+    setK1(temp_s0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/303/pspnet_adhoc_auth/nonmatchings/pspnet_adhoc_auth", module_reboot_before);
 

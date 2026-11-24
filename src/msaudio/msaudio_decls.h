@@ -16,6 +16,8 @@ s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelDeleteSema(s32);
 M2C_UNK sceMSAudio_driver_3872FBE5();
+s32 sceMSAudio_driver_67E58C07(void);
+s32 sceMSAudio_driver_E8B25D38(void);
 s32 sceMgr_driver_02F7AB01(s32, s32, s32);
 M2C_UNK sceMgr_driver_1B8F3192(s32);
 s32 sceMgr_driver_F30E22CF(M2C_UNK);

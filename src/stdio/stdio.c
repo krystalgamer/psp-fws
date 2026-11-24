@@ -1,5 +1,6 @@
 /* cflags: -Os -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "stdio_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000000);
@@ -61,9 +62,25 @@ INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000960);
 
 INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", func_00000988);
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", sceKernelRegisterStdoutPipe);
+s32 sceKernelRegisterStdoutPipe(s32 arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/stdio/nonmatchings/stdio", sceKernelRegisterStderrPipe);
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000AFC(1, arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceKernelRegisterStderrPipe(s32 arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000AFC(2, arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 s32 func_00000A18(void) {
     return 0;

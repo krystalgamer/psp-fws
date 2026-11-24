@@ -4,6 +4,7 @@
   "func_0000127C": "s32 func_0000127C(void *arg0);",
   "func_000012F0": "s32 func_000012F0(s32 arg0);",
   "func_000013D8": "s32 func_000013D8(void);",
+  "func_00001460": "s32 func_00001460(s32);",
   "func_00001F94": "s32 func_00001F94(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
   "func_0000217C": "s32 func_0000217C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);",
   "memset": "M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);",
@@ -14,6 +15,7 @@
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(u32, s32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(u32, s32, void *);",
+  "scePsheet_driver_226D9099": "void scePsheet_driver_226D9099(void);",
   "scePsheet_driver_302AB4B8": "s32 scePsheet_driver_302AB4B8(s32, s32);",
   "scePsheet_driver_3CEC4078": "s32 scePsheet_driver_3CEC4078(void);"
  },

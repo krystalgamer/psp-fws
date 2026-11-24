@@ -21,12 +21,15 @@
   "sceKernelSendMbx": "s32 sceKernelSendMbx(u32, void *);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceMemab_driver_0C134D3F": "M2C_UNK sceMemab_driver_0C134D3F();",
-  "sceNetAdhocAuth_driver_2E6AA271": "s32 sceNetAdhocAuth_driver_2E6AA271(void);"
+  "sceNetAdhocAuth_driver_2E6AA271": "s32 sceNetAdhocAuth_driver_2E6AA271(void);",
+  "sceNetAdhocAuth_driver_6074D8F1": "s32 sceNetAdhocAuth_driver_6074D8F1(void);",
+  "sceNetIfhandle_driver_773FC77C": "M2C_UNK sceNetIfhandle_driver_773FC77C();"
  },
  "vars": {
   "D_00004600": "extern s32 D_00004600;",
   "D_00004604": "extern s32 D_00004604;",
   "D_00004608": "extern s32 D_00004608;",
+  "D_00004610": "extern s32 D_00004610;",
   "D_00004784": "extern s32 D_00004784;",
   "D_00004788": "extern M2C_UNK D_00004788;"
  }

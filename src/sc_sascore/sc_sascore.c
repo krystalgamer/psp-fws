@@ -1,4 +1,6 @@
 #include "common.h"
+#include "k1.h"
+#include "sc_sascore_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/sc_sascore/nonmatchings/sc_sascore", __sceSasCore);
 
@@ -60,6 +62,12 @@ INCLUDE_ASM("tmp/asm/282/sc_sascore/nonmatchings/sc_sascore", sceP3daBridgeInit)
 
 INCLUDE_ASM("tmp/asm/282/sc_sascore/nonmatchings/sc_sascore", sceP3daBridgeCore);
 
-INCLUDE_ASM("tmp/asm/282/sc_sascore/nonmatchings/sc_sascore", sceP3da_59FB2B06);
+void sceP3da_59FB2B06(s32 arg0, s32 arg1) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceMeCore_driver_D1EA3DFD(0x108, arg0, arg1);
+    setK1(temp_s0);
+}
 
 INCLUDE_ASM("tmp/asm/282/sc_sascore/nonmatchings/sc_sascore", sceP3daBridgeExit);

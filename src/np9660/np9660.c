@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "np9660_decls.h"
 
 INCLUDE_RODATA("tmp/asm/352/np9660/nonmatchings/np9660", D_00004658);
@@ -167,17 +168,55 @@ INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdGetDriveStat);
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdGetErrorStat);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdReplaceProhibit);
+s32 sceUmdReplaceProhibit(void) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdReplacePermit);
+    temp_s0 = shiftK1();
+    temp_v0 = func_000018DC(0);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdWaitDriveStat);
+s32 sceUmdReplacePermit(void) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_000018DC(1);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceUmdWaitDriveStat(u32 arg0) {
+    void *sp0;
+    s32 temp_v0;
+    s32 var_v1;
+    u32 temp_s0;
+
+    var_v1 = 0x80010016;
+    if (arg0 & 0x3B) {
+        temp_s0 = shiftK1();
+        temp_v0 = sceKernelWaitEventFlag(D_00004CB0, arg0, 1, &sp0, NULL);
+        setK1(temp_s0);
+        var_v1 = temp_v0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdWaitDriveStatWithTimer);
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdWaitDriveStatCB);
 
-INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", sceUmdCancelWaitDriveStat);
+s32 sceUmdCancelWaitDriveStat(void) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = sceKernelCancelEventFlag(D_00004CB0, (u32) D_00004CA4, NULL);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/352/np9660/nonmatchings/np9660", func_00000B58);
 

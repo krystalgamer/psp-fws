@@ -1,5 +1,6 @@
 /* cflags: -Os */
 #include "common.h"
+#include "k1.h"
 #include "msaudio_decls.h"
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", func_00000000);
@@ -185,7 +186,13 @@ INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_22DA99
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_5D1C9867);
 
-INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_67E58C07);
+s32 sceMSAudio_driver_67E58C07(void) {
+    u32 temp_v0;
+
+    temp_v0 = shiftK1();
+    setK1(temp_v0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_38178F2F);
 
@@ -203,7 +210,13 @@ INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_2685C0
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_A18A1DF6);
 
-INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_E8B25D38);
+s32 sceMSAudio_driver_E8B25D38(void) {
+    u32 temp_v0;
+
+    temp_v0 = shiftK1();
+    setK1(temp_v0);
+    return 0x80508011;
+}
 
 INCLUDE_ASM("tmp/asm/340/msaudio/nonmatchings/msaudio", sceMSAudio_driver_66F19CA3);
 

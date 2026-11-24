@@ -7,6 +7,7 @@
 extern s32 D_00004600;
 extern s32 D_00004604;
 extern s32 D_00004608;
+extern s32 D_00004610;
 extern s32 D_00004784;
 extern M2C_UNK D_00004788;
 
@@ -32,5 +33,7 @@ s32 sceKernelSendMbx(u32, void *);
 s32 sceKernelSignalSema(s32, s32);
 M2C_UNK sceMemab_driver_0C134D3F();
 s32 sceNetAdhocAuth_driver_2E6AA271(void);
+s32 sceNetAdhocAuth_driver_6074D8F1(void);
+M2C_UNK sceNetIfhandle_driver_773FC77C();
 
 #endif

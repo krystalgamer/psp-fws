@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "usb_decls.h"
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsb_driver_E20B23A6);
@@ -92,7 +93,15 @@ INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", module_reboot_before);
 
 INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbGetState);
 
-INCLUDE_ASM("tmp/asm/282/usb/nonmatchings/usb", sceUsbActivate);
+s32 sceUsbActivate(u32 arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000090((s32) arg0, 0);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 s32 sceUsbWaitState(u32 arg0, s32 arg1, void *arg2) {
     return func_00002F64((s32) arg0, arg1, (s32) arg2, 0);

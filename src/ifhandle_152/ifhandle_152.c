@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "ifhandle_152_decls.h"
 
 INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_B9096E48);
@@ -94,9 +95,31 @@ INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", func_000012A0)
 
 INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", func_0000145C);
 
-INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_0C391E9F);
+s32 sceNetIfhandle_driver_0C391E9F(u32 arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_29ED84C5);
+    temp_s0 = shiftK1();
+    temp_v0 = sceKernelCreateVpl("pspnet", 2, 0U, arg0, NULL);
+    if (temp_v0 >= 0) {
+        D_00003AD8 = temp_v0;
+        D_00003ADC = 0;
+    }
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceNetIfhandle_driver_29ED84C5(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    if (D_00003AD8 > 0) {
+        sceKernelDeleteVpl(D_00003AD8);
+        D_00003AD8 = -1;
+    }
+    setK1(temp_s0);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_4C2886CB);
 
@@ -132,7 +155,16 @@ INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", func_00002400)
 
 INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_1560F143);
 
-INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_0FB8AE0D);
+void sceNetIfhandle_driver_0FB8AE0D(void) {
+    u32 temp_a1;
+
+    temp_a1 = shiftK1();
+    D_00004378 = 0;
+    D_0000437C = 0;
+    D_00004380 = 0;
+    D_00004384 = 0;
+    setK1(temp_a1);
+}
 
 INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_A493AA5F);
 
@@ -146,7 +178,17 @@ INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle
 
 INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_5FB31C72);
 
-INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", sceNetIfhandle_driver_62B20015);
+s32 sceNetIfhandle_driver_62B20015(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    u32 temp_a5;
+
+    temp_a5 = shiftK1();
+    D_00004378 = arg0;
+    D_0000437C = arg1;
+    D_00004380 = arg2;
+    D_00004384 = arg3;
+    setK1(temp_a5);
+    return 0;
+}
 
 INCLUDE_ASM("tmp/asm/350/ifhandle_152/nonmatchings/ifhandle_152", func_00002C20);
 

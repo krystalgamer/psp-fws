@@ -1,5 +1,6 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "utility_decls.h"
 
 INCLUDE_RODATA("tmp/asm/282/utility/nonmatchings/utility", D_00006C98);
@@ -35,17 +36,59 @@ INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00000AC4);
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00000B0C);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_17CB4D96);
+s32 sceUtility_private_17CB4D96(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_EE7AC503);
+    temp_s0 = shiftK1();
+    sceKernelWaitEventFlag(D_00007E98, 1U, 0x20, NULL, NULL);
+    setK1(temp_s0);
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_5FF96ED3);
+s32 sceUtility_private_EE7AC503(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_9C9DD5BC);
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00007E98, 2U);
+    setK1(temp_s0);
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_4405BA38);
+s32 sceUtility_private_5FF96ED3(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_1DFA62EF);
+    temp_s0 = shiftK1();
+    sceKernelWaitEventFlag(D_00007E98, 4U, 0x20, NULL, NULL);
+    setK1(temp_s0);
+    return 0;
+}
+
+s32 sceUtility_private_9C9DD5BC(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00007E98, 8U);
+    setK1(temp_s0);
+    return 0;
+}
+
+s32 sceUtility_private_4405BA38(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelWaitEventFlag(D_00007E98, 0x10U, 0x20, NULL, NULL);
+    setK1(temp_s0);
+    return 0;
+}
+
+s32 sceUtility_private_1DFA62EF(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00007E98, 0x20U);
+    setK1(temp_s0);
+    return 0;
+}
 
 s32 sceUtility_private_680C0EA8(s32 arg0) {
     D_00007EA4 = arg0;
@@ -116,17 +159,59 @@ INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_000019C4);
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00001A3C);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_DC17A878);
+s32 sceUtility_private_DC17A878(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_2FBA0921);
+    temp_s0 = shiftK1();
+    sceKernelWaitEventFlag(D_00007EEC, 1U, 0x20, NULL, NULL);
+    setK1(temp_s0);
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_CD3C8C18);
+s32 sceUtility_private_2FBA0921(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_B20562D4);
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00007EEC, 2U);
+    setK1(temp_s0);
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_88682129);
+s32 sceUtility_private_CD3C8C18(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_2FE219D7);
+    temp_s0 = shiftK1();
+    sceKernelWaitEventFlag(D_00007EEC, 4U, 0x20, NULL, NULL);
+    setK1(temp_s0);
+    return 0;
+}
+
+s32 sceUtility_private_B20562D4(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00007EEC, 8U);
+    setK1(temp_s0);
+    return 0;
+}
+
+s32 sceUtility_private_88682129(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelWaitEventFlag(D_00007EEC, 0x10U, 0x20, NULL, NULL);
+    setK1(temp_s0);
+    return 0;
+}
+
+s32 sceUtility_private_2FE219D7(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00007EEC, 0x20U);
+    setK1(temp_s0);
+    return 0;
+}
 
 s32 sceUtility_private_97F922A3(s32 arg0) {
     D_00007EF4 = arg0;
@@ -236,9 +321,31 @@ INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00003474);
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00003520);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_0D5BC6D2);
+s32 sceUtility_0D5BC6D2(s32 arg0) {
+    s32 var_v1;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_F64910F0);
+    temp_s0 = shiftK1();
+    var_v1 = 0x80110E01;
+    if ((u32) (arg0 - 1) < 5U) {
+        var_v1 = func_000036F8(arg0);
+    }
+    setK1(temp_s0);
+    return var_v1;
+}
+
+s32 sceUtility_F64910F0(s32 arg0) {
+    s32 var_v1;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    var_v1 = 0x80110E01;
+    if ((u32) (arg0 - 1) < 5U) {
+        var_v1 = func_000035F0(arg0);
+    }
+    setK1(temp_s0);
+    return var_v1;
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_000035F0);
 
@@ -288,87 +395,303 @@ INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00003C38);
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00003D0C);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityGameSharingInitStart);
+s32 sceUtilityGameSharingInitStart(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityGameSharingShutdownStart);
+    temp_s0 = shiftK1();
+    temp_v0 = func_000000C4(3, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceUtilityGameSharingShutdownStart(void) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000550(3);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityGameSharingUpdate);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityGameSharingGetStatus);
+s32 sceUtilityGameSharingGetStatus(void) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityNetconfInitStart);
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000AC4(3);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityNetconfShutdownStart);
+s32 sceUtilityNetconfInitStart(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_000000C4(4, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceUtilityNetconfShutdownStart(void) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000550(4);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityNetconfUpdate);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityNetconfGetStatus);
+s32 sceUtilityNetconfGetStatus(void) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilitySavedataInitStart);
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000AC4(4);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilitySavedataShutdownStart);
+s32 sceUtilitySavedataInitStart(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_000000C4(1, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceUtilitySavedataShutdownStart(void) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000550(1);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilitySavedataUpdate);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilitySavedataGetStatus);
+s32 sceUtilitySavedataGetStatus(void) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityMsgDialogInitStart);
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000AC4(1);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityMsgDialogShutdownStart);
+s32 sceUtilityMsgDialogInitStart(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_000000C4(5, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceUtilityMsgDialogShutdownStart(void) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000550(5);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityMsgDialogUpdate);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityMsgDialogGetStatus);
+s32 sceUtilityMsgDialogGetStatus(void) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityMsgDialogAbort);
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000AC4(5);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityOskInitStart);
+s32 sceUtilityMsgDialogAbort(void) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityOskShutdownStart);
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000B0C(5);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceUtilityOskInitStart(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_000000C4(6, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceUtilityOskShutdownStart(void) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000550(6);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityOskUpdate);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityOskGetStatus);
+s32 sceUtilityOskGetStatus(void) {
+    s32 temp_v0;
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_DDE5389D);
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000AC4(6);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_149A7895);
+void sceUtility_DDE5389D(s32 arg0) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_000000C4(7, arg0);
+    setK1(temp_s0);
+}
+
+void sceUtility_149A7895(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_00000550(7);
+    setK1(temp_s0);
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_4A833BA4);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_A50E5B30);
+void sceUtility_A50E5B30(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_943CBA46);
+    temp_s0 = shiftK1();
+    func_00000AC4(7);
+    setK1(temp_s0);
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_0F3EEAAC);
+void sceUtility_943CBA46(s32 arg0) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_000000C4(8, arg0);
+    setK1(temp_s0);
+}
+
+void sceUtility_0F3EEAAC(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_00000550(8);
+    setK1(temp_s0);
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_147F7C85);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_16A1A8D8);
+void sceUtility_16A1A8D8(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityInstallInitStart);
+    temp_s0 = shiftK1();
+    func_00000AC4(8);
+    setK1(temp_s0);
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityInstallShutdownStart);
+void sceUtilityInstallInitStart(s32 arg0) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_000000C4(9, arg0);
+    setK1(temp_s0);
+}
+
+void sceUtilityInstallShutdownStart(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_00000550(9);
+    setK1(temp_s0);
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityInstallUpdate);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityInstallGetStatus);
+void sceUtilityInstallGetStatus(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_04B24901);
+    temp_s0 = shiftK1();
+    func_00000AC4(9);
+    setK1(temp_s0);
+}
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_1B698F54);
+void sceUtility_private_04B24901(s32 arg0) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_000000C4(0xA, arg0);
+    setK1(temp_s0);
+}
+
+void sceUtility_private_1B698F54(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_00000550(0xA);
+    setK1(temp_s0);
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_FD99AF0A);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_private_8FCABAB9);
+void sceUtility_private_8FCABAB9(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_00000AC4(0xA);
+    setK1(temp_s0);
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityHtmlViewerInitStart);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityHtmlViewerShutdownStart);
+s32 sceUtilityHtmlViewerShutdownStart(void) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_0000171C(1);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityHtmlViewerUpdate);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityHtmlViewerGetStatus);
+s32 sceUtilityHtmlViewerGetStatus(void) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_00001A3C(1);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 void sceUtility_3AD50AE7(void) {
 }
@@ -414,7 +737,18 @@ INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilitySetSystemParam
 
 INCLUDE_RODATA("tmp/asm/282/utility/nonmatchings/utility", D_00007914);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityGetSystemParamString);
+s32 sceUtilityGetSystemParamString(s32 arg0, void *arg1, u32 arg2) {
+    s32 var_a4;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    var_a4 = 0x80110103;
+    if (arg0 == 1) {
+        var_a4 = func_00004A80((s32) "/CONFIG/SYSTEM", (s32) "owner_name", (s32) arg1, (s32) arg2);
+    }
+    setK1(temp_s0);
+    return var_a4;
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00004A80);
 
@@ -430,9 +764,21 @@ INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityGetNetParam);
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_netparam_internal_FC4516F3);
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtility_netparam_internal_8E8E3AA3);
+void sceUtility_netparam_internal_8E8E3AA3(s32 arg0) {
+    u32 temp_s0;
 
-INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", sceUtilityGetNetParamLatestID);
+    temp_s0 = shiftK1();
+    func_00005260((s32) &D_00007980, (s32) &D_000079A0, arg0);
+    setK1(temp_s0);
+}
+
+void sceUtilityGetNetParamLatestID(s32 arg0) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    func_0000535C((s32) &D_00007980, (s32) &D_000079A0, arg0);
+    setK1(temp_s0);
+}
 
 INCLUDE_ASM("tmp/asm/282/utility/nonmatchings/utility", func_00004F98);
 
