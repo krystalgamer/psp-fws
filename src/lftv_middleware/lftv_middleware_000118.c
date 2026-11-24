@@ -2,9 +2,17 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_000118", module_start);
+s32 module_start(s32 arg0, s32 arg1) {
+    func_00000000();
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_000118", module_stop);
+s32 module_stop(s32 arg0, s32 arg1) {
+    func_00050620();
+    return 0;
+}
 
-INCLUDE_ASM("tmp/asm/303/lftv_middleware/nonmatchings/lftv_middleware_000118", sceVshLftvMw_1D3D9AE0);
+void sceVshLftvMw_1D3D9AE0(void) {
+    func_00050620();
+}
 
