@@ -5,9 +5,9 @@ s32 scePaf_D3AB4076(void) {
     return D_001A34E4;
 }
 
-s32 scePaf_87E5F9C7(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0xA0) = arg1;
-    M2C_FIELD(arg0, s32 *, 0xA4) = arg2;
+s32 scePaf_87E5F9C7(struct Unk_scePaf_87E5F9C7_0 *arg0, s32 arg1, s32 arg2) {
+    arg0->unkA0 = arg1;
+    arg0->unkA4 = arg2;
     return 1;
 }
 
@@ -37,12 +37,12 @@ s32 scePaf_8A8FE0A1(s32 arg0) {
     return var_v0;
 }
 
-s32 func_0004352C(void *arg0) {
+s32 func_0004352C(struct Unk_func_0004352C_0 *arg0) {
     s32 var_v1;
 
     var_v1 = 1;
-    if ((M2C_FIELD(arg0, u8 *, 0x15) != 0) && (M2C_FIELD(arg0, u8 *, 0x29) != 0)) {
-        var_v1 = M2C_FIELD(arg0, s32 *, 0) != 0;
+    if ((arg0->unk15 != 0) && (arg0->unk29 != 0)) {
+        var_v1 = arg0->unk0 != 0;
     }
     return var_v1;
 }
@@ -94,46 +94,46 @@ s32 func_0004414C(void) {
     return 0;
 }
 
-void func_00044154(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0017135C;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_00044154(struct Unk_func_00044154_0 *arg0) {
+    arg0->unk0 = &D_0017135C;
+    arg0->unk4 = 0;
 }
 
-void func_00044168(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0017135C;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_00044168(struct Unk_func_00044168_0 *arg0) {
+    arg0->unk0 = &D_0017135C;
+    arg0->unk4 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_043468", func_0004417C);
 
-void func_00044190(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00171380;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_00044190(struct Unk_func_00044190_0 *arg0) {
+    arg0->unk0 = &D_00171380;
+    arg0->unk4 = 0;
 }
 
-void func_000441A4(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00171380;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_000441A4(struct Unk_func_000441A4_0 *arg0) {
+    arg0->unk0 = &D_00171380;
+    arg0->unk4 = 0;
     scePaf_4E67BB08(arg0);
 }
 
-s32 func_000441D0(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_000441D0(struct Unk_func_000441D0_0 *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 var_v1;
 
     var_v1 = 0;
     if (func_0004352C(arg1) != 0) {
-        M2C_FIELD(arg0, void **, 4) = arg1;
-        var_v1 = M2C_FIELD(M2C_FIELD(arg0, void **, 0), s32 (**)(void *, void *, void *, void *, s32, s32, s32), 0x18)(arg0, arg1 + 0x2C, arg1 + 4, arg1 + 0x18, arg4, arg2, arg3);
+        arg0->unk4 = arg1;
+        var_v1 = M2C_FIELD(arg0->unk0, s32 (**)(void *, void *, void *, void *, s32, s32, s32), 0x18)(arg0, arg1 + 0x2C, arg1 + 4, arg1 + 0x18, arg4, arg2, arg3);
     }
     return var_v1;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_043468", func_0004426C);
 
-void func_00044394(void *arg0) {
+void func_00044394(struct Unk_func_00044394_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 4);
+    temp_v0 = arg0->unk4;
     if (temp_v0 == 0) {
 
     } else {

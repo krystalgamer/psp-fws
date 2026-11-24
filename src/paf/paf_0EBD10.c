@@ -7,80 +7,80 @@ void func_000EBD10(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-void scePaf_22B0D7D8(void *arg0) {
-    func_00102B50(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_22B0D7D8(struct Unk_scePaf_22B0D7D8_0 *arg0) {
+    func_00102B50(arg0->unk1E8);
 }
 
-void scePaf_FCABD0E7(void *arg0) {
-    func_00102CFC(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_FCABD0E7(struct Unk_scePaf_FCABD0E7_0 *arg0) {
+    func_00102CFC(arg0->unk1E8);
 }
 
-void scePaf_CA8CDF32(void *arg0) {
-    func_00102D38(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_CA8CDF32(struct Unk_scePaf_CA8CDF32_0 *arg0) {
+    func_00102D38(arg0->unk1E8);
 }
 
-void scePaf_EE10AEF1(void *arg0) {
-    func_00102FCC(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_EE10AEF1(struct Unk_scePaf_EE10AEF1_0 *arg0) {
+    func_00102FCC(arg0->unk1E8);
 }
 
-void scePaf_E15A64EA(void *arg0) {
-    func_00103008(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_E15A64EA(struct Unk_scePaf_E15A64EA_0 *arg0) {
+    func_00103008(arg0->unk1E8);
 }
 
-void func_000EBDD4(void *arg0) {
-    func_0010308C(M2C_FIELD(arg0, s32 *, 0x1E8));
+void func_000EBDD4(struct Unk_func_000EBDD4_0 *arg0) {
+    func_0010308C(arg0->unk1E8);
 }
 
-void scePaf_4C5F6657(void *arg0) {
-    func_00103094(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_4C5F6657(struct Unk_scePaf_4C5F6657_0 *arg0) {
+    func_00103094(arg0->unk1E8);
 }
 
-void scePaf_6A772BF7(void *arg0) {
-    func_001030B0(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_6A772BF7(struct Unk_scePaf_6A772BF7_0 *arg0) {
+    func_001030B0(arg0->unk1E8);
 }
 
-void scePaf_8CDEDC6F(void *arg0) {
-    func_00103104(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_8CDEDC6F(struct Unk_scePaf_8CDEDC6F_0 *arg0) {
+    func_00103104(arg0->unk1E8);
 }
 
-void scePaf_CFAF88AB(void *arg0) {
-    func_00103120(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_CFAF88AB(struct Unk_scePaf_CFAF88AB_0 *arg0) {
+    func_00103120(arg0->unk1E8);
 }
 
-void scePaf_DFB912CB(void *arg0) {
-    func_0010313C(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_DFB912CB(struct Unk_scePaf_DFB912CB_0 *arg0) {
+    func_0010313C(arg0->unk1E8);
 }
 
-void scePaf_D34D0B82(void *arg0) {
-    func_00103158(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_D34D0B82(struct Unk_scePaf_D34D0B82_0 *arg0) {
+    func_00103158(arg0->unk1E8);
 }
 
-void func_000EBE98(void *arg0) {
-    func_00103174(M2C_FIELD(arg0, s32 *, 0x1E8));
+void func_000EBE98(struct Unk_func_000EBE98_0 *arg0) {
+    func_00103174(arg0->unk1E8);
 }
 
-void scePaf_BAA76FDE(void *arg0) {
-    func_00103190(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_BAA76FDE(struct Unk_scePaf_BAA76FDE_0 *arg0) {
+    func_00103190(arg0->unk1E8);
 }
 
-void func_000EBED0(void *arg0) {
-    func_001031AC(M2C_FIELD(arg0, s32 *, 0x1E8));
+void func_000EBED0(struct Unk_func_000EBED0_0 *arg0) {
+    func_001031AC(arg0->unk1E8);
 }
 
-void scePaf_6CF44237(void *arg0) {
-    func_001031C8(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_6CF44237(struct Unk_scePaf_6CF44237_0 *arg0) {
+    func_001031C8(arg0->unk1E8);
 }
 
-void func_000EBF08(void *arg0) {
-    func_001031E4(M2C_FIELD(arg0, s32 *, 0x1E8));
+void func_000EBF08(struct Unk_func_000EBF08_0 *arg0) {
+    func_001031E4(arg0->unk1E8);
 }
 
-void func_000EBF24(void *arg0) {
-    func_00103200(M2C_FIELD(arg0, s32 *, 0x1E8));
+void func_000EBF24(struct Unk_func_000EBF24_0 *arg0) {
+    func_00103200(arg0->unk1E8);
 }
 
-void scePaf_6B678D44(void *arg0) {
-    func_00103208(M2C_FIELD(arg0, s32 *, 0x1E8));
+void scePaf_6B678D44(struct Unk_scePaf_6B678D44_0 *arg0) {
+    func_00103208(arg0->unk1E8);
 }
 
 s32 func_000EBF5C(s32 arg0, s32 arg1) {

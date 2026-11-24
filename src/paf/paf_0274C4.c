@@ -1,8 +1,8 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_000274C4(void *arg0, s32 arg1) {
-    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+void func_000274C4(struct Unk_func_000274C4_0 *arg0, s32 arg1) {
+    if (arg0->unk8 >= arg1) {
 
     } else {
         func_00027B10((s32) arg0, arg1);
@@ -11,8 +11,8 @@ void func_000274C4(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0274C4", func_000274F8);
 
-void func_00027584(void *arg0, s32 arg1) {
-    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+void func_00027584(struct Unk_func_00027584_0 *arg0, s32 arg1) {
+    if (arg0->unk8 >= arg1) {
 
     } else {
         func_00027C28((s32) arg0, arg1);
@@ -21,8 +21,8 @@ void func_00027584(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0274C4", func_000275B8);
 
-void func_00027644(void *arg0, s32 arg1) {
-    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+void func_00027644(struct Unk_func_00027644_0 *arg0, s32 arg1) {
+    if (arg0->unk8 >= arg1) {
 
     } else {
         func_00027D40((s32) arg0, arg1);
@@ -31,8 +31,8 @@ void func_00027644(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0274C4", func_00027678);
 
-void func_0002770C(void *arg0, s32 arg1) {
-    if (M2C_FIELD(arg0, s32 *, 8) >= arg1) {
+void func_0002770C(struct Unk_func_0002770C_0 *arg0, s32 arg1) {
+    if (arg0->unk8 >= arg1) {
 
     } else {
         func_00027E50((s32) arg0, arg1);
@@ -47,13 +47,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0274C4", func_00027854);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0274C4", func_000278D0);
 
-void func_00027A24(void *arg0) {
+void func_00027A24(struct Unk_func_00027A24_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, s32 *, 8);
-    temp_v0 = M2C_FIELD(arg0, s32 *, 4) - 1;
-    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
+    temp_v1 = arg0->unk8;
+    temp_v0 = arg0->unk4 - 1;
+    arg0->unk4 = temp_v0;
     if (temp_v0 >= (temp_v1 - 0x14)) {
 
     } else {

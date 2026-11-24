@@ -1,9 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_00118050(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, u32 *, 0) = sceKernelCreateEventFlag(&D_0019D1F0, 0x200U, 3U, NULL);
+void func_00118050(struct Unk_func_00118050_0 *arg0) {
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
+    arg0->unk0 = sceKernelCreateEventFlag(&D_0019D1F0, 0x200U, 3U, NULL);
 }
 

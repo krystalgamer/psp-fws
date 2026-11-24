@@ -2,40 +2,40 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_00049484(void *arg0) {
-    M2C_FIELD(arg0, s8 *, 0x11) = 1;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s8 *, 0x10) = 0;
+void func_00049484(struct Unk_func_00049484_0 *arg0) {
+    arg0->unk11 = 1;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
 }
 
-void func_000494A4(void *arg0) {
-    M2C_FIELD(arg0, s8 *, 0x11) = 1;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s8 *, 0x10) = 0;
+void func_000494A4(struct Unk_func_000494A4_0 *arg0) {
+    arg0->unk11 = 1;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
 }
 
-void func_000494C4(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s8 *, 0x11) = 1;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s8 *, 0x10) = 0;
+void func_000494C4(struct Unk_func_000494C4_0 *arg0, s32 arg1) {
+    arg0->unk11 = 1;
+    arg0->unk4 = arg1;
+    arg0->unk0 = 0;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
 }
 
-void func_000494E4(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s8 *, 0x11) = 1;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s8 *, 0x10) = 0;
+void func_000494E4(struct Unk_func_000494E4_0 *arg0, s32 arg1) {
+    arg0->unk11 = 1;
+    arg0->unk4 = arg1;
+    arg0->unk0 = 0;
+    arg0->unk8 = 0;
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
 }
 
 void func_00049504(void) {

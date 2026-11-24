@@ -2,10 +2,10 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_0015B788(void *arg0, s32 arg1, s32 arg2) {
+void func_0015B788(struct Unk_func_0015B788_0 *arg0, s32 arg1, s32 arg2) {
     if (arg0 != NULL) {
-        M2C_FIELD(arg0, s32 *, 0x80) = arg2;
-        M2C_FIELD(arg0, s32 *, 0x7C) = arg1;
+        arg0->unk80 = arg2;
+        arg0->unk7C = arg1;
     }
 }
 

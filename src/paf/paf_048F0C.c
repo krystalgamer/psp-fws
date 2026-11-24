@@ -1,10 +1,10 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_00048F0C(void *arg0) {
+void func_00048F0C(struct Unk_func_00048F0C_0 *arg0) {
     void *temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, void **, 0x18);
+    temp_v1 = arg0->unk18;
     M2C_FIELD(temp_v1, s32 *, 0x18) = (s32) (M2C_FIELD(M2C_FIELD(temp_v1, void **, 0x14), s32 *, 4) - M2C_FIELD(temp_v1, s32 *, 4));
 }
 
@@ -25,8 +25,8 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", scePaf_4EC4EEC6);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", func_00049138);
 
-void func_00049170(void *arg0) {
-    M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), s32 *, 0x24) = 1;
+void func_00049170(struct Unk_func_00049170_0 *arg0) {
+    M2C_FIELD(arg0->unk18, s32 *, 0x24) = 1;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", func_00049180);

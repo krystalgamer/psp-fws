@@ -21,42 +21,42 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", func_0009E658);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", scePaf_07216006);
 
-u8 png_get_rgb_to_gray_status(void *arg0) {
+u8 png_get_rgb_to_gray_status(struct Unk_png_get_rgb_to_gray_status_0 *arg0) {
     u8 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, u8 *, 0x5E4);
+        var_v0 = arg0->unk5E4;
     }
     return var_v0;
 }
 
-s32 png_get_user_chunk_ptr(void *arg0) {
+s32 png_get_user_chunk_ptr(struct Unk_png_get_user_chunk_ptr_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x5D4);
+        var_v0 = arg0->unk5D4;
     }
     return var_v0;
 }
 
-s32 png_get_compression_buffer_size(void *arg0) {
+s32 png_get_compression_buffer_size(struct Unk_png_get_compression_buffer_size_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x470);
+        var_v0 = arg0->unk470;
     }
     return var_v0;
 }
 
-s32 png_get_asm_flags(void *arg0) {
+s32 png_get_asm_flags(struct Unk_png_get_asm_flags_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x5FC);
+        var_v0 = arg0->unk5FC;
     }
     return var_v0;
 }
@@ -67,42 +67,42 @@ s32 png_get_asm_flagmask(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", png_get_mmx_flagmask);
 
-u8 png_get_mmx_bitdepth_threshold(void *arg0) {
+u8 png_get_mmx_bitdepth_threshold(struct Unk_png_get_mmx_bitdepth_threshold_0 *arg0) {
     u8 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, u8 *, 0x5F5);
+        var_v0 = arg0->unk5F5;
     }
     return var_v0;
 }
 
-s32 png_get_mmx_rowbytes_threshold(void *arg0) {
+s32 png_get_mmx_rowbytes_threshold(struct Unk_png_get_mmx_rowbytes_threshold_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x5F8);
+        var_v0 = arg0->unk5F8;
     }
     return var_v0;
 }
 
-s32 png_get_user_width_max(void *arg0) {
+s32 png_get_user_width_max(struct Unk_png_get_user_width_max_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x620);
+        var_v0 = arg0->unk620;
     }
     return var_v0;
 }
 
-s32 png_get_user_height_max(void *arg0) {
+s32 png_get_user_height_max(struct Unk_png_get_user_height_max_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x624);
+        var_v0 = arg0->unk624;
     }
     return var_v0;
 }
@@ -123,27 +123,27 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", func_0009EA54);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", func_0009EA9C);
 
-void func_0009EAD4(void *arg0) {
+void func_0009EAD4(struct Unk_func_0009EAD4_0 *arg0) {
     s32 temp_s1;
 
-    temp_s1 = M2C_FIELD(arg0, s32 *, 0x42C);
-    M2C_FIELD(arg0, s32 *, 0x42C) = (s32) (temp_s1 | 0x100000);
+    temp_s1 = arg0->unk42C;
+    arg0->unk42C = (s32) (temp_s1 | 0x100000);
     func_0009E980();
-    M2C_FIELD(arg0, s32 *, 0x42C) = temp_s1;
+    arg0->unk42C = temp_s1;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", func_0009EB14);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", func_0009EB38);
 
-void func_0009EB5C(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    M2C_FIELD(arg0, s32 *, 0x600) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x604) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x608) = arg3;
+void func_0009EB5C(struct Unk_func_0009EB5C_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0->unk600 = arg1;
+    arg0->unk604 = arg2;
+    arg0->unk608 = arg3;
 }
 
-s32 func_0009EB6C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x600);
+s32 func_0009EB6C(struct Unk_func_0009EB6C_0 *arg0) {
+    return arg0->unk600;
 }
 
 void scePaf_6528115D(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -170,8 +170,8 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", scePaf_E327C974);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", scePaf_D4F9270D);
 
-void scePaf_DB1549DF(void *arg0) {
-    if (M2C_FIELD(arg0, s32 *, 0x42C) & 0x40) {
+void scePaf_DB1549DF(struct Unk_scePaf_DB1549DF_0 *arg0) {
+    if (arg0->unk42C & 0x40) {
 
     } else {
         func_000AA884((s32) arg0);
@@ -188,8 +188,8 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", scePaf_211A764A);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", func_000A03A4);
 
-void func_000A0664(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x558) = arg1;
+void func_000A0664(struct Unk_func_000A0664_0 *arg0, s32 arg1) {
+    arg0->unk558 = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", func_000A066C);
@@ -216,22 +216,22 @@ INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_09DF4C", D_001934DC);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", func_000A0B8C);
 
-void func_000A1584(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x02001000);
+void func_000A1584(struct Unk_func_000A1584_0 *arg0) {
+    arg0->unk430 = (s32) (arg0->unk430 | 0x02001000);
 }
 
-void func_000A159C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x02001000);
+void func_000A159C(struct Unk_func_000A159C_0 *arg0) {
+    arg0->unk430 = (s32) (arg0->unk430 | 0x02001000);
 }
 
-void func_000A15B4(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x02000000);
+void func_000A15B4(struct Unk_func_000A15B4_0 *arg0) {
+    arg0->unk430 = (s32) (arg0->unk430 | 0x02000000);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", func_000A15C8);
 
-void func_000A15E0(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x02001000);
+void func_000A15E0(struct Unk_func_000A15E0_0 *arg0) {
+    arg0->unk430 = (s32) (arg0->unk430 | 0x02001000);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", func_000A15F8);
@@ -246,7 +246,7 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", png_read_transform_info);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_09DF4C", png_do_read_transformations);
 
-void png_do_unpack(void *arg0, s32 arg1) {
+void png_do_unpack(struct Unk_png_do_unpack_0 *arg0, s32 arg1) {
     s32 var_v1;
     s32 var_v1_2;
     s32 var_v1_3;
@@ -262,9 +262,9 @@ void png_do_unpack(void *arg0, s32 arg1) {
     u8 *var_a1_3;
     u8 temp_v1;
 
-    temp_v1 = M2C_FIELD(arg0, u8 *, 9);
+    temp_v1 = arg0->unk9;
     if (temp_v1 < 8U) {
-        temp_a2 = M2C_FIELD(arg0, u32 *, 0);
+        temp_a2 = arg0->unk0;
         switch (temp_v1) {                          /* irregular */
         case 1:
             var_a1 = arg1 + ((u32) (temp_a2 - 1) >> 3);
@@ -324,9 +324,9 @@ void png_do_unpack(void *arg0, s32 arg1) {
             }
             break;
         }
-        M2C_FIELD(arg0, u8 *, 9) = 8U;
-        M2C_FIELD(arg0, s8 *, 0xB) = (s8) (M2C_FIELD(arg0, u8 *, 0xA) * 8);
-        M2C_FIELD(arg0, s32 *, 4) = (s32) (temp_a2 * M2C_FIELD(arg0, u8 *, 0xA));
+        arg0->unk9 = 8U;
+        arg0->unkB = (s8) (arg0->unkA * 8);
+        arg0->unk4 = (s32) (temp_a2 * arg0->unkA);
     }
 }
 

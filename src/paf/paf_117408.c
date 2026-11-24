@@ -7,8 +7,8 @@ void func_00117408(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-void func_00117440(void *arg0, s32 arg1) {
-    M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), s32 *, 0x28) = arg1;
+void func_00117440(struct Unk_func_00117440_0 *arg0, s32 arg1) {
+    M2C_FIELD(arg0->unk1E8, s32 *, 0x28) = arg1;
 }
 
 s32 func_0011744C(s32 arg0, s32 arg1) {

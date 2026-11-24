@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-s32 func_000A7144(s32 arg0, void *arg1) {
+s32 func_000A7144(s32 arg0, struct Unk_func_000A7144_1 *arg1) {
     s32 temp_v0;
 
     temp_v0 = func_000A719C(arg1);
@@ -13,16 +13,16 @@ s32 func_000A7144(s32 arg0, void *arg1) {
     return temp_v0;
 }
 
-s32 func_000A719C(void *arg0) {
-    return (M2C_FIELD(arg0, u8 *, 0) << 0x18) + (M2C_FIELD(arg0, u8 *, 1) << 0x10) + (M2C_FIELD(arg0, u8 *, 2) << 8) + M2C_FIELD(arg0, u8 *, 3);
+s32 func_000A719C(struct Unk_func_000A7144_1 *arg0) {
+    return (arg0->unk0 << 0x18) + (arg0->unk1 << 0x10) + (arg0->unk2 << 8) + arg0->unk3;
 }
 
-s32 func_000A71C8(void *arg0) {
-    return (M2C_FIELD(arg0, u8 *, 0) << 0x18) + (M2C_FIELD(arg0, u8 *, 1) << 0x10) + (M2C_FIELD(arg0, u8 *, 2) << 8) + M2C_FIELD(arg0, u8 *, 3);
+s32 func_000A71C8(struct Unk_func_000A71C8_0 *arg0) {
+    return (arg0->unk0 << 0x18) + (arg0->unk1 << 0x10) + (arg0->unk2 << 8) + arg0->unk3;
 }
 
-s32 func_000A71F4(void *arg0) {
-    return (M2C_FIELD(arg0, u8 *, 1) + (M2C_FIELD(arg0, u8 *, 0) << 8)) & 0xFFFF;
+s32 func_000A71F4(struct Unk_func_000A71F4_0 *arg0) {
+    return (arg0->unk1 + (arg0->unk0 << 8)) & 0xFFFF;
 }
 
 void func_000A720C(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {

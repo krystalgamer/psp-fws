@@ -177,25 +177,25 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0B8224", func_000B966C);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0B8224", func_000B9748);
 
-void func_000B97D0(void *arg0, s32 arg1) {
+void func_000B97D0(struct Unk_func_000B97D0_0 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_a2;
     void *temp_v1;
 
-    var_a2 = M2C_FIELD(arg0, s32 *, 4);
-    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    var_a2 = arg0->unk4;
+    temp_v0 = arg0->unk8;
     if (temp_v0 < (var_a2 + 1)) {
         func_000B9864((s32) arg0, temp_v0 + 0xA);
-        var_a2 = M2C_FIELD(arg0, s32 *, 4);
+        var_a2 = arg0->unk4;
     }
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0) + (var_a2 * 0xC);
+    temp_v1 = arg0->unk0 + (var_a2 * 0xC);
     if (temp_v1 != NULL) {
         M2C_FIELD(temp_v1, M2C_UNK **, 0) = &D_001ABCF0;
         M2C_FIELD(temp_v1, s32 *, 4) = 0;
         func_00002AE4((s32) temp_v1, arg1);
-        var_a2 = M2C_FIELD(arg0, s32 *, 4);
+        var_a2 = arg0->unk4;
     }
-    M2C_FIELD(arg0, s32 *, 4) = (s32) (var_a2 + 1);
+    arg0->unk4 = (s32) (var_a2 + 1);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0B8224", func_000B9864);
@@ -352,41 +352,41 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0B8224", func_000BC4F4);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0B8224", func_000BC538);
 
-s32 func_000BC724(void *arg0) {
+s32 func_000BC724(struct Unk_func_000BC724_0 *arg0) {
     s32 temp_v0;
     void *temp_v1;
     void *temp_v1_2;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    temp_v0 = arg0->unk8;
     if (temp_v0 == 0) {
 
     } else {
-        temp_v1 = M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x48);
+        temp_v1 = M2C_FIELD(arg0->unk4, void **, 0x48);
         M2C_FIELD(temp_v1, M2C_UNK (**)(s32, s32), 0x10)(M2C_FIELD(temp_v1, s32 *, 0), temp_v0);
     }
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
-        M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    arg0->unk8 = 0;
+    if (arg0->unkC == 0) {
+        arg0->unkC = 0;
     } else {
-        temp_v1_2 = M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x48);
-        M2C_FIELD(temp_v1_2, M2C_UNK (**)(s32, s32), 0x10)(M2C_FIELD(temp_v1_2, s32 *, 0), M2C_FIELD(arg0, s32 *, 0xC));
-        M2C_FIELD(arg0, s32 *, 0xC) = 0;
+        temp_v1_2 = M2C_FIELD(arg0->unk4, void **, 0x48);
+        M2C_FIELD(temp_v1_2, M2C_UNK (**)(s32, s32), 0x10)(M2C_FIELD(temp_v1_2, s32 *, 0), arg0->unkC);
+        arg0->unkC = 0;
     }
     return 0;
 }
 
-s32 func_000BC7A0(void *arg0) {
+s32 func_000BC7A0(struct Unk_func_000BC7A0_0 *arg0) {
     s32 var_s1;
     s32 var_s2;
 
     var_s2 = 0;
-    if (M2C_FIELD(arg0, s32 *, 4) > 0) {
+    if (arg0->unk4 > 0) {
         var_s1 = 0;
         do {
             var_s2 += 1;
-            sceFontClose(M2C_FIELD(arg0, s32 *, 0x2C) + var_s1);
+            sceFontClose(arg0->unk2C + var_s1);
             var_s1 += 0x4C;
-        } while (var_s2 < M2C_FIELD(arg0, s32 *, 4));
+        } while (var_s2 < arg0->unk4);
     }
     return 0;
 }
@@ -399,16 +399,16 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0B8224", func_000BC8DC);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0B8224", func_000BCE0C);
 
-s32 func_000BCF98(void *arg0, void *arg1) {
-    M2C_FIELD(arg0, u8 *, 0) = (u8) M2C_FIELD(arg1, u8 *, 0);
-    M2C_FIELD(arg0, u8 *, 1) = (u8) M2C_FIELD(arg1, u8 *, 1);
-    M2C_FIELD(arg0, u16 *, 2) = (u16) M2C_FIELD(arg1, u16 *, 2);
-    M2C_FIELD(arg0, u8 *, 4) = (u8) M2C_FIELD(arg1, u8 *, 4);
-    M2C_FIELD(arg0, u8 *, 5) = (u8) M2C_FIELD(arg1, u8 *, 5);
-    M2C_FIELD(arg0, u8 *, 6) = (u8) M2C_FIELD(arg1, u8 *, 6);
-    M2C_FIELD(arg0, u8 *, 7) = (u8) M2C_FIELD(arg1, u8 *, 7);
-    M2C_FIELD(arg0, u16 *, 8) = (u16) M2C_FIELD(arg1, u16 *, 8);
-    M2C_FIELD(arg0, u16 *, 0xA) = (u16) M2C_FIELD(arg1, u16 *, 0xA);
+s32 func_000BCF98(struct Unk_func_000BCF98_0 *arg0, struct Unk_func_000BCF98_1 *arg1) {
+    arg0->unk0 = (u8) arg1->unk0;
+    arg0->unk1 = (u8) arg1->unk1;
+    arg0->unk2 = (u16) arg1->unk2;
+    arg0->unk4 = (u8) arg1->unk4;
+    arg0->unk5 = (u8) arg1->unk5;
+    arg0->unk6 = (u8) arg1->unk6;
+    arg0->unk7 = (u8) arg1->unk7;
+    arg0->unk8 = (u16) arg1->unk8;
+    arg0->unkA = (u16) arg1->unkA;
     return 0;
 }
 

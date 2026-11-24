@@ -125,8 +125,8 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_12038C", func_00121C08);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_12038C", func_00121C38);
 
-s32 func_00121C68(void *arg0) {
-    func_0012446C(M2C_FIELD(arg0, s32 *, 0x7C));
+s32 func_00121C68(struct Unk_func_00121C68_0 *arg0) {
+    func_0012446C(arg0->unk7C);
     return 0;
 }
 
@@ -140,28 +140,28 @@ s32 func_00121CB8(void) {
     return 0;
 }
 
-s32 func_00121CC0(void *arg0) {
+s32 func_00121CC0(struct Unk_func_00121CC0_0 *arg0) {
     void *temp_a0;
 
-    temp_a0 = *M2C_FIELD(arg0, void ***, 0x7C);
+    temp_a0 = *arg0->unk7C;
     M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD88)(temp_a0);
     return 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_12038C", func_00121CEC);
 
-s32 func_00121D20(void *arg0) {
+s32 func_00121D20(struct Unk_func_00121D20_0 *arg0) {
     void *temp_a0;
 
-    temp_a0 = *M2C_FIELD(arg0, void ***, 0x7C);
+    temp_a0 = *arg0->unk7C;
     M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD90)(temp_a0);
     return 0;
 }
 
-s32 func_00121D4C(void *arg0) {
+s32 func_00121D4C(struct Unk_func_00121D4C_0 *arg0) {
     void *temp_a0;
 
-    temp_a0 = *M2C_FIELD(arg0, void ***, 0x7C);
+    temp_a0 = *arg0->unk7C;
     M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD98)(temp_a0);
     return 0;
 }
@@ -420,10 +420,10 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_12038C", func_001242A0);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_12038C", func_001242D4);
 
-s32 func_0012441C(void *arg0) {
+s32 func_0012441C(struct Unk_func_0012441C_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0);
+    temp_v0 = arg0->unk0;
     if (temp_v0 == 0) {
 
     } else {
@@ -476,11 +476,11 @@ s32 func_00124804(void) {
     return 0;
 }
 
-s32 func_0012480C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x60C) = 0x80;
-    M2C_FIELD(arg0, s32 *, 0x604) = 0;
-    M2C_FIELD(arg0, s32 *, 0x600) = 0;
-    M2C_FIELD(arg0, s32 *, 0x608) = 0;
+s32 func_0012480C(struct Unk_func_0012480C_0 *arg0) {
+    arg0->unk60C = 0x80;
+    arg0->unk604 = 0;
+    arg0->unk600 = 0;
+    arg0->unk608 = 0;
     return 0;
 }
 

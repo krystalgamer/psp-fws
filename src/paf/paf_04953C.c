@@ -9,12 +9,12 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_04953C", func_00049800);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_04953C", func_0004987C);
 
-s32 func_000498D8(void *arg0, s32 arg1) {
+s32 func_000498D8(struct Unk_func_000498D8_0 *arg0, s32 arg1) {
     s32 var_a3;
 
     var_a3 = 0;
-    if ((arg1 >= 0) && (arg1 < (M2C_FIELD(arg0, s32 *, 8) * M2C_FIELD(arg0, s32 *, 0xC)))) {
-        var_a3 = M2C_FIELD(arg0, s32 *, 0) + (arg1 * 8);
+    if ((arg1 >= 0) && (arg1 < (arg0->unk8 * arg0->unkC))) {
+        var_a3 = arg0->unk0 + (arg1 * 8);
     }
     return var_a3;
 }

@@ -1,9 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_00118308(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, u32 *, 0) = sceKernelCreateEventFlag(&D_0019D204, 0x200U, 3U, NULL);
+void func_00118308(struct Unk_func_00118308_0 *arg0) {
+    arg0->unk4 = 0;
+    arg0->unk0 = sceKernelCreateEventFlag(&D_0019D204, 0x200U, 3U, NULL);
 }
 
 void func_00118348(s32 *arg0) {
@@ -14,32 +14,32 @@ void func_00118364(s32 *arg0) {
     sceKernelDeleteEventFlag(*arg0);
 }
 
-void func_00118380(void *arg0) {
+void func_00118380(struct Unk_func_00118380_0 *arg0) {
     s32 temp_v1;
 
-    sceKernelWaitEventFlag(M2C_FIELD(arg0, u32 *, 0), 2U, 0x20, NULL, NULL);
-    temp_v1 = M2C_FIELD(arg0, s32 *, 4) + 1;
-    M2C_FIELD(arg0, s32 *, 4) = temp_v1;
+    sceKernelWaitEventFlag(arg0->unk0, 2U, 0x20, NULL, NULL);
+    temp_v1 = arg0->unk4 + 1;
+    arg0->unk4 = temp_v1;
     if (temp_v1 != 1) {
 
     } else {
-        sceKernelClearEventFlag(M2C_FIELD(arg0, u32 *, 0), -2U);
+        sceKernelClearEventFlag(arg0->unk0, -2U);
     }
-    sceKernelSetEventFlag((s32) M2C_FIELD(arg0, u32 *, 0), 2);
+    sceKernelSetEventFlag((s32) arg0->unk0, 2);
 }
 
-void func_001183EC(void *arg0) {
+void func_001183EC(struct Unk_func_001183EC_0 *arg0) {
     s32 temp_v1;
 
-    sceKernelWaitEventFlag(M2C_FIELD(arg0, u32 *, 0), 2U, 0x20, NULL, NULL);
-    temp_v1 = M2C_FIELD(arg0, s32 *, 4) - 1;
-    M2C_FIELD(arg0, s32 *, 4) = temp_v1;
+    sceKernelWaitEventFlag(arg0->unk0, 2U, 0x20, NULL, NULL);
+    temp_v1 = arg0->unk4 - 1;
+    arg0->unk4 = temp_v1;
     if (temp_v1 != 0) {
 
     } else {
-        sceKernelSetEventFlag((s32) M2C_FIELD(arg0, u32 *, 0), 1);
+        sceKernelSetEventFlag((s32) arg0->unk0, 1);
     }
-    sceKernelSetEventFlag((s32) M2C_FIELD(arg0, u32 *, 0), 2);
+    sceKernelSetEventFlag((s32) arg0->unk0, 2);
 }
 
 void func_00118454(u32 *arg0) {

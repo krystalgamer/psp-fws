@@ -1,10 +1,10 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_00106C68(void *arg0) {
+void func_00106C68(struct Unk_func_00106C68_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x1C);
+    temp_v0 = arg0->unk1C;
     if (temp_v0 == 0) {
 
     } else {

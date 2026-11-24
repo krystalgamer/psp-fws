@@ -7,10 +7,10 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_00106DE4);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_00106E1C);
 
-void func_00106E54(void *arg0) {
+void func_00106E54(struct Unk_func_00106E54_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x1C);
+    temp_v0 = arg0->unk1C;
     if (temp_v0 == 0) {
 
     } else {
@@ -18,12 +18,12 @@ void func_00106E54(void *arg0) {
     }
 }
 
-s32 func_00106E84(void *arg0) {
+s32 func_00106E84(struct Unk_func_00106E84_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
     var_v1 = 0;
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x1C);
+    temp_v0 = arg0->unk1C;
     if (temp_v0 != 0) {
         var_v1 = func_000C5EAC(temp_v0 + 0x40);
     }
@@ -38,11 +38,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_00106F04);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_00106F18);
 
-void scePaf_D4C6CC7A(void *arg0) {
-    D_001A7CC0.unk0 = (s32) M2C_FIELD(arg0, s32 *, 0);
-    D_001A7CC0.unk4 = (s32) M2C_FIELD(arg0, s32 *, 4);
-    D_001A7CC0.unk8 = (s32) M2C_FIELD(arg0, s32 *, 8);
-    D_001A7CC0.unkC = (s32) M2C_FIELD(arg0, s32 *, 0xC);
+void scePaf_D4C6CC7A(struct Unk_scePaf_D4C6CC7A_0 *arg0) {
+    D_001A7CC0.unk0 = (s32) arg0->unk0;
+    D_001A7CC0.unk4 = (s32) arg0->unk4;
+    D_001A7CC0.unk8 = (s32) arg0->unk8;
+    D_001A7CC0.unkC = (s32) arg0->unkC;
 }
 
 INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_106DCC", D_0019C1F8);
@@ -271,11 +271,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_0010D568);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_0010E448);
 
-void func_0010FA74(void *arg0, void *arg1) {
-    M2C_FIELD(arg0, s32 *, 0x14F0) = (s32) M2C_FIELD(arg1, s32 *, 0);
-    M2C_FIELD(arg0, s32 *, 0x14F4) = (s32) M2C_FIELD(arg1, s32 *, 4);
-    M2C_FIELD(arg0, s32 *, 0x14F8) = (s32) M2C_FIELD(arg1, s32 *, 8);
-    M2C_FIELD(arg0, s32 *, 0x14FC) = (s32) M2C_FIELD(arg1, s32 *, 0xC);
+void func_0010FA74(struct Unk_func_0010FA74_0 *arg0, struct Unk_func_0010FA74_1 *arg1) {
+    arg0->unk14F0 = (s32) arg1->unk0;
+    arg0->unk14F4 = (s32) arg1->unk4;
+    arg0->unk14F8 = (s32) arg1->unk8;
+    arg0->unk14FC = (s32) arg1->unkC;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_0010FA98);
@@ -476,11 +476,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_00116960);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_001169D8);
 
-void func_00116A60(void *arg0, s32 arg1) {
+void func_00116A60(struct Unk_func_00116A60_0 *arg0, s32 arg1) {
     s32 temp_v0;
 
     if (arg0 != NULL) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 0x4C);
+        temp_v0 = arg0->unk4C;
         if (temp_v0 != 0) {
             func_00116AA0((s32) arg0, temp_v0 + (arg1 * 0x34));
         }
@@ -489,35 +489,35 @@ void func_00116A60(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_106DCC", func_00116AA0);
 
-s32 func_00116B6C(void *arg0, void *arg1) {
+s32 func_00116B6C(struct Unk_func_00116B6C_0 *arg0, struct Unk_func_00116B6C_1 *arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (M2C_FIELD(arg0, s32 *, 0) == M2C_FIELD(arg1, s32 *, 0)) {
-        if ((M2C_FIELD(arg0, s32 *, 4) == M2C_FIELD(arg1, s32 *, 4)) && (M2C_FIELD(arg0, s32 *, 8) == M2C_FIELD(arg1, s32 *, 8))) {
-            var_a2 = M2C_FIELD(arg0, s32 *, 0xC) != M2C_FIELD(arg1, s32 *, 0xC);
+    if (arg0->unk0 == arg1->unk0) {
+        if ((arg0->unk4 == arg1->unk4) && (arg0->unk8 == arg1->unk8)) {
+            var_a2 = arg0->unkC != arg1->unkC;
         }
     }
     return var_a2;
 }
 
-s32 func_00116BB8(void *arg0) {
+s32 func_00116BB8(struct Unk_func_00116BB8_0 *arg0) {
     s32 var_v1;
 
     var_v1 = -1;
-    if (M2C_FIELD(arg0, s32 *, 0x48) == 0) {
-        M2C_FIELD(arg0, s32 *, 0x48) = 1;
+    if (arg0->unk48 == 0) {
+        arg0->unk48 = 1;
         var_v1 = 0;
     }
     return var_v1;
 }
 
-s32 func_00116BD8(void *arg0) {
+s32 func_00116BD8(struct Unk_func_00116BD8_0 *arg0) {
     s32 var_v1;
 
     var_v1 = -1;
-    if (M2C_FIELD(arg0, s32 *, 0x48) != 0) {
-        M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    if (arg0->unk48 != 0) {
+        arg0->unk48 = 0;
         var_v1 = 0;
     }
     return var_v1;

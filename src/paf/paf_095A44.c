@@ -360,8 +360,8 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", jchuff_emit_bits);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", func_000988A4);
 
-void func_000988F4(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x90) = 0;
+void func_000988F4(struct Unk_func_000988F4_0 *arg0) {
+    arg0->unk90 = 0;
     func_000988A4();
 }
 
@@ -389,8 +389,8 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", func_00099D54);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", func_00099E98);
 
-void func_00099F18(void *arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4) {
-    func_00095A84(*arg1, arg2, arg3, 0, arg4, M2C_FIELD(arg0, s32 *, 0x6C));
+void func_00099F18(struct Unk_func_00099F18_0 *arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4) {
+    func_00095A84(*arg1, arg2, arg3, 0, arg4, arg0->unk6C);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", func_00099F48);
@@ -496,13 +496,13 @@ INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_095A44", D_00192D84);
 
 INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_095A44", D_00192DA0);
 
-void scePaf_1A1F232F(void *arg0, s32 arg1) {
+void scePaf_1A1F232F(struct Unk_scePaf_1A1F232F_0 *arg0, s32 arg1) {
     if (arg1 < 9) {
 
     } else {
         scePaf_7894B61F((s32) arg0, (s32) "Too many bytes for PNG signature.");
     }
-    M2C_FIELD(arg0, s8 *, 0x4EC) = __builtin_allegrex_max(arg1, 0);
+    arg0->unk4EC = __builtin_allegrex_max(arg1, 0);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", func_0009CE3C);
@@ -515,8 +515,8 @@ void func_0009CF74(void) {
     func_0009EA54();
 }
 
-void func_0009CF90(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x4D0) = crc32(0, 0, 0);
+void func_0009CF90(struct Unk_func_0009CF90_0 *arg0) {
+    arg0->unk4D0 = crc32(0, 0, 0);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_095A44", func_0009CFC4);

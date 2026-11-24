@@ -1,9 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_000EE3AC(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0019AE48;
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x370));
+void func_000EE3AC(struct Unk_func_000EE3AC_0 *arg0) {
+    arg0->unk0 = &D_0019AE48;
+    sceKernelDeleteSema(arg0->unk370);
     scePaf_715E8DAB((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
@@ -24,8 +24,8 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", scePaf_18D51B42);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", scePaf_03064559);
 
-void scePaf_2A5DDF04(void *arg0, s32 arg1) {
-    M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), s32 *, 0x3F8) = arg1;
+void scePaf_2A5DDF04(struct Unk_scePaf_2A5DDF04_0 *arg0, s32 arg1) {
+    M2C_FIELD(arg0->unk1E8, s32 *, 0x3F8) = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EE8DC);
@@ -76,8 +76,8 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EEE10);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", scePaf_79C3CBF7);
 
-s32 func_000EEFFC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x554);
+s32 func_000EEFFC(struct Unk_func_000EEFFC_0 *arg0) {
+    return arg0->unk554;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EF004);
@@ -96,10 +96,10 @@ s32 func_000EF208(s32 arg0, M2C_UNK arg1) {
     return 1;
 }
 
-void func_000EF250(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_000EF250(struct Unk_func_000EF250_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0EE3AC", func_000EF260);

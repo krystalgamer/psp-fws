@@ -1,13 +1,13 @@
 #include "common.h"
 #include "paf_decls.h"
 
-s32 func_000BDD58(void *arg0, s32 *arg1) {
+s32 func_000BDD58(struct Unk_func_000BDD58_0 *arg0, s32 *arg1) {
     s32 temp_v1;
     u8 temp_a2;
 
-    temp_v1 = ((u32) ((M2C_FIELD(arg0, u16 *, 0x1F0) * M2C_FIELD(arg0, s32 *, 0x1EC)) + 7) >> 3) * 2;
+    temp_v1 = ((u32) ((arg0->unk1F0 * arg0->unk1EC) + 7) >> 3) * 2;
     *arg1 = temp_v1;
-    temp_a2 = M2C_FIELD(arg0, u8 *, 0x1F2);
+    temp_a2 = arg0->unk1F2;
     *arg1 = ((s32) ((temp_v1 + temp_a2) - 1) / (s32) temp_a2) * temp_a2;
     return 0;
 }

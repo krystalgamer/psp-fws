@@ -1,9 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_000EE370(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0019AE48;
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x370));
+void func_000EE370(struct Unk_func_000EE370_0 *arg0) {
+    arg0->unk0 = &D_0019AE48;
+    sceKernelDeleteSema(arg0->unk370);
     scePaf_715E8DAB((s32) arg0);
 }
 

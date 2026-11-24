@@ -1,9 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_001188C8(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0019D238;
-    sceKernelDeleteThread(M2C_FIELD(arg0, u32 *, 4));
+void func_001188C8(struct Unk_func_001188C8_0 *arg0) {
+    arg0->unk0 = &D_0019D238;
+    sceKernelDeleteThread(arg0->unk4);
     scePaf_4E67BB08(arg0);
 }
 
@@ -13,21 +13,21 @@ void func_00118930(void) {
     sceKernelExitThread(0);
 }
 
-void scePaf_5775283A(void *arg0) {
-    sceKernelWaitThreadEnd(M2C_FIELD(arg0, s32 *, 4), 0);
+void scePaf_5775283A(struct Unk_scePaf_5775283A_0 *arg0) {
+    sceKernelWaitThreadEnd(arg0->unk4, 0);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1188C8", func_0011896C);
 
-s32 func_00118998(void *arg0) {
-    D_001A7CEC.unk0 = (s32) M2C_FIELD(arg0, s32 *, 0);
-    D_001A7CEC.unk4 = (s32) M2C_FIELD(arg0, s32 *, 4);
-    D_001A7CEC.unk8 = (s32) M2C_FIELD(arg0, s32 *, 8);
-    D_001A7CEC.unkC = (s32) M2C_FIELD(arg0, s32 *, 0xC);
-    D_001A7CEC.unk10 = (s32) M2C_FIELD(arg0, s32 *, 0x10);
-    D_001A7CEC.unk14 = (s32) M2C_FIELD(arg0, s32 *, 0x14);
-    D_001A7CEC.unk18 = (s32) M2C_FIELD(arg0, s32 *, 0x18);
-    D_001A7CEC.unk1C = (s32) M2C_FIELD(arg0, s32 *, 0x1C);
+s32 func_00118998(struct Unk_func_00118998_0 *arg0) {
+    D_001A7CEC.unk0 = (s32) arg0->unk0;
+    D_001A7CEC.unk4 = (s32) arg0->unk4;
+    D_001A7CEC.unk8 = (s32) arg0->unk8;
+    D_001A7CEC.unkC = (s32) arg0->unkC;
+    D_001A7CEC.unk10 = (s32) arg0->unk10;
+    D_001A7CEC.unk14 = (s32) arg0->unk14;
+    D_001A7CEC.unk18 = (s32) arg0->unk18;
+    D_001A7CEC.unk1C = (s32) arg0->unk1C;
     return 0;
 }
 

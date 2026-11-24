@@ -2,13 +2,13 @@
 #include "common.h"
 #include "paf_decls.h"
 
-s32 func_001689DC(void *arg0, s32 *arg1) {
+s32 func_001689DC(struct Unk_func_001689DC_0 *arg0, s32 *arg1) {
     s32 var_v1;
 
     var_v1 = 0x80615001;
-    if (M2C_FIELD(arg0, s32 *, 0) & 8) {
+    if (arg0->unk0 & 8) {
         var_v1 = 0;
-        *arg1 = M2C_FIELD(arg0, s32 *, 8);
+        *arg1 = arg0->unk8;
     }
     return var_v1;
 }

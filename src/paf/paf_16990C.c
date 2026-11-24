@@ -2,8 +2,8 @@
 #include "common.h"
 #include "paf_decls.h"
 
-u32 func_0016990C(void *arg0) {
-    return (u8) M2C_FIELD(M2C_FIELD(arg0, void **, 0x30), u8 *, 2) >> 5;
+u32 func_0016990C(struct Unk_func_0016990C_0 *arg0) {
+    return (u8) M2C_FIELD(arg0->unk30, u8 *, 2) >> 5;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_16990C", func_0016991C);

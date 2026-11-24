@@ -32,12 +32,12 @@ void func_001497FC(s32 arg0, s32 arg1, s32 arg2) {
     func_00149960(arg0, arg1, 8, arg2);
 }
 
-s32 func_0014981C(void *arg0) {
+s32 func_0014981C(struct Unk_func_0014981C_0 *arg0) {
     s32 var_v0;
 
     var_v0 = -1;
     if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 (**)(s32, M2C_UNK), 0xC)(M2C_FIELD(arg0, s32 *, 0), 1);
+        var_v0 = M2C_FIELD(arg0, s32 (**)(s32, M2C_UNK), 0xC)(arg0->unk0, 1);
     }
     return var_v0;
 }
@@ -76,16 +76,16 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1496FC", func_00149E38);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1496FC", func_00149F10);
 
-void func_0014A000(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x1F80) = 0;
+void func_0014A000(struct Unk_func_0014A000_0 *arg0, s32 arg1) {
+    arg0->unk1F80 = 0;
     func_00149F10((s32) arg0, arg1, 0);
 }
 
-void func_0014A020(void *arg0, s32 arg1) {
+void func_0014A020(struct Unk_func_0014A020_0 *arg0, s32 arg1) {
     s32 temp_a2;
 
-    temp_a2 = M2C_FIELD(arg0, s32 *, 0x1F80) + 1;
-    M2C_FIELD(arg0, s32 *, 0x1F80) = temp_a2;
+    temp_a2 = arg0->unk1F80 + 1;
+    arg0->unk1F80 = temp_a2;
     func_00149F10((s32) arg0, arg1, temp_a2);
 }
 

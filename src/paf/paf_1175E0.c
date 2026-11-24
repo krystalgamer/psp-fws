@@ -7,8 +7,8 @@ void func_001175E0(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-void func_00117618(void *arg0, s32 arg1) {
-    M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), s32 *, 0x28) = arg1;
+void func_00117618(struct Unk_func_00117618_0 *arg0, s32 arg1) {
+    M2C_FIELD(arg0->unk1E8, s32 *, 0x28) = arg1;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1175E0", func_00117624);
@@ -55,8 +55,8 @@ void func_001179F4(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1175E0", func_00117A10);
 
-s32 func_00117A44(void *arg0, s32 arg1) {
-    func_0000C8BC(arg1, M2C_FIELD(arg0, s32 *, 0x84));
+s32 func_00117A44(struct Unk_func_00117A44_0 *arg0, s32 arg1) {
+    func_0000C8BC(arg1, arg0->unk84);
     return 0;
 }
 
@@ -108,8 +108,8 @@ void func_00117E60(s32 arg0) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1175E0", func_00117E7C);
 
-s32 func_00117EB0(void *arg0, s32 arg1) {
-    func_0000C8BC(arg1, M2C_FIELD(arg0, s32 *, 0x84));
+s32 func_00117EB0(struct Unk_func_00117EB0_0 *arg0, s32 arg1) {
+    func_0000C8BC(arg1, arg0->unk84);
     return 0;
 }
 
@@ -121,28 +121,28 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1175E0", func_00117EFC);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_1175E0", scePaf_6147E3D5);
 
-void func_00117F74(void *arg0) {
-    sceKernelDeleteEventFlag(M2C_FIELD(arg0, s32 *, 4));
+void func_00117F74(struct Unk_func_00117F74_0 *arg0) {
+    sceKernelDeleteEventFlag(arg0->unk4);
 }
 
-void scePaf_1B043852(void *arg0) {
-    sceKernelDeleteEventFlag(M2C_FIELD(arg0, s32 *, 4));
+void scePaf_1B043852(struct Unk_scePaf_1B043852_0 *arg0) {
+    sceKernelDeleteEventFlag(arg0->unk4);
 }
 
-s32 scePaf_0B0959FC(void *arg0) {
+s32 scePaf_0B0959FC(struct Unk_scePaf_0B0959FC_0 *arg0) {
     void *sp0;
-    sceKernelSignalSema(*M2C_FIELD(arg0, s32 **, 0), 1);
-    sceKernelWaitEventFlag(M2C_FIELD(arg0, u32 *, 4), 1U, 0x10, &sp0, NULL);
-    sceKernelWaitSema(*M2C_FIELD(arg0, s32 **, 0), 1, NULL);
+    sceKernelSignalSema(*arg0->unk0, 1);
+    sceKernelWaitEventFlag(arg0->unk4, 1U, 0x10, &sp0, NULL);
+    sceKernelWaitSema(*arg0->unk0, 1, NULL);
     return 0;
 }
 
-void scePaf_CA5EF446(void *arg0) {
-    sceKernelSetEventFlag(M2C_FIELD(arg0, s32 *, 4), 1);
+void scePaf_CA5EF446(struct Unk_scePaf_CA5EF446_0 *arg0) {
+    sceKernelSetEventFlag(arg0->unk4, 1);
 }
 
-void func_0011802C(void *arg0) {
+void func_0011802C(struct Unk_func_0011802C_0 *arg0) {
     void *sp0;
-    sceKernelCancelEventFlag(M2C_FIELD(arg0, s32 *, 4), 0U, &sp0);
+    sceKernelCancelEventFlag(arg0->unk4, 0U, &sp0);
 }
 

@@ -1,13 +1,13 @@
 #include "common.h"
 #include "paf_decls.h"
 
-u32 func_0007E2A0(void *arg0) {
+u32 func_0007E2A0(struct Unk_func_0007E2A0_0 *arg0) {
     u32 temp_v0;
     u32 var_v1;
 
-    var_v1 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x15C), u32 (**)(), 0x6A0)();
-    if (var_v1 < (u32) M2C_FIELD(arg0, u32 *, 0x34)) {
-        temp_v0 = M2C_FIELD(arg0, u16 *, 0xBA) * 0x10;
+    var_v1 = M2C_FIELD(arg0->unk15C, u32 (**)(), 0x6A0)();
+    if (var_v1 < (u32) arg0->unk34) {
+        temp_v0 = arg0->unkBA * 0x10;
         var_v1 = ((u32) ((var_v1 + temp_v0) - 1) / temp_v0) * temp_v0;
     }
     return var_v1;
@@ -15,7 +15,7 @@ u32 func_0007E2A0(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_07E2A0", func_0007E30C);
 
-void func_0007E3A8(void *arg0) {
+void func_0007E3A8(struct Unk_func_0007E3A8_0 *arg0) {
     s32 temp_a0;
     s32 temp_a0_2;
     s32 temp_a0_3;
@@ -24,7 +24,7 @@ void func_0007E3A8(void *arg0) {
     s32 temp_a0_6;
     void *temp_s0;
 
-    temp_s0 = M2C_FIELD(arg0, void **, 0x15C);
+    temp_s0 = arg0->unk15C;
     if (temp_s0 != NULL) {
         if (scePaf_8F12B63A(temp_s0 + 0x250) != 0) {
 
@@ -60,16 +60,16 @@ void func_0007E3A8(void *arg0) {
             func_0006A618(temp_a0_5);
             M2C_FIELD(temp_s0, s32 *, 0x6F8) = 0;
         }
-        if (!(M2C_FIELD(arg0, s32 *, 0xC) & 0x800)) {
-            temp_a0_6 = M2C_FIELD(arg0, s32 *, 0x178);
+        if (!(arg0->unkC & 0x800)) {
+            temp_a0_6 = arg0->unk178;
             if (temp_a0_6 != 0) {
                 func_0006A618(temp_a0_6);
-                M2C_FIELD(arg0, s32 *, 0x178) = 0;
-                M2C_FIELD(arg0, s32 *, 0x17C) = 0;
+                arg0->unk178 = 0;
+                arg0->unk17C = 0;
             }
         }
         func_0006A618((s32) temp_s0);
-        M2C_FIELD(arg0, void **, 0x15C) = NULL;
+        arg0->unk15C = NULL;
     }
 }
 
@@ -77,10 +77,10 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_07E2A0", func_0007E4DC);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_07E2A0", func_0007E7E8);
 
-s32 func_0007E854(void *arg0) {
+s32 func_0007E854(struct Unk_func_0007E854_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x15C);
+    temp_v0 = arg0->unk15C;
     if (temp_v0 == 0) {
 
     } else {

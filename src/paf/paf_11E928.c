@@ -30,7 +30,7 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_11E928", func_0011F07C);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_11E928", func_0011F0FC);
 
-void ***func_0011F188(void ***arg0, void *arg1, void **arg2) {
+void ***func_0011F188(void ***arg0, struct Unk_func_0011F188_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_a1;
     void *temp_v1;
@@ -42,7 +42,7 @@ void ***func_0011F188(void ***arg0, void *arg1, void **arg2) {
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
     scePaf_7EC15225(temp_v1, temp_a1);
     *arg0 = temp_s0;
-    M2C_FIELD(arg1, s32 *, 4) = (s32) (M2C_FIELD(arg1, s32 *, 4) - 1);
+    arg1->unk4 = (s32) (arg1->unk4 - 1);
     return arg0;
 }
 
@@ -74,8 +74,8 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_11E928", func_0011F970);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_11E928", func_0011FC4C);
 
-s32 func_0011FCF0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x38) * (3 - M2C_FIELD(arg0, s32 *, 0x1C));
+s32 func_0011FCF0(struct Unk_func_0011FCF0_0 *arg0) {
+    return arg0->unk38 * (3 - arg0->unk1C);
 }
 
 void func_0011FD0C(void) {
@@ -95,12 +95,12 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_11E928", func_0011FDD4);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_11E928", func_0011FE34);
 
-void func_0011FE94(void *arg0) {
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x24));
+void func_0011FE94(struct Unk_func_0011FE94_0 *arg0) {
+    sceKernelDeleteSema(arg0->unk24);
 }
 
-void func_0011FEB0(void *arg0) {
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x24));
+void func_0011FEB0(struct Unk_func_0011FEB0_0 *arg0) {
+    sceKernelDeleteSema(arg0->unk24);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_11E928", func_0011FECC);

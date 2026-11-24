@@ -7,11 +7,11 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_016744", func_0001697C);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_016744", func_00016F5C);
 
-void func_00017270(void *arg0, void *arg1, s32 arg2) {
-    if (((u32) M2C_FIELD(arg1, u32 *, 8) >> 8) & 0x80) {
+void func_00017270(struct Unk_func_00017270_0 *arg0, struct Unk_func_00017270_1 *arg1, s32 arg2) {
+    if (((u32) arg1->unk8 >> 8) & 0x80) {
 
     } else {
-        scePaf_C01BF169(arg2 + 0xF8, (s32) &func_000173DC, arg2, M2C_FIELD(arg0, s32 *, 0x1C), 0, 0);
+        scePaf_C01BF169(arg2 + 0xF8, (s32) &func_000173DC, arg2, arg0->unk1C, 0, 0);
     }
 }
 

@@ -19,10 +19,10 @@ s32 func_00124BD8(void) {
     return 0;
 }
 
-s32 func_00124BE0(void *arg0) {
+s32 func_00124BE0(struct Unk_func_00124BE0_0 *arg0) {
     void *temp_s0;
 
-    temp_s0 = M2C_FIELD(arg0, void **, 0xDBC);
+    temp_s0 = arg0->unkDBC;
     M2C_FIELD(temp_s0, s32 *, 0x2C) = 0;
     M2C_FIELD(temp_s0, s16 *, 0) = 0;
     M2C_FIELD(temp_s0, s16 *, 2) = 0;
@@ -43,15 +43,15 @@ s32 func_00124BE0(void *arg0) {
     *M2C_FIELD(temp_s0, s8 **, 0x1C) = 0;
     *M2C_FIELD(temp_s0, s8 **, 0xC) = 0;
     *M2C_FIELD(temp_s0, s8 **, 0x24) = 0;
-    func_0012592C((s32) temp_s0, 0x108, 0, 0, (s32) (M2C_FIELD(arg0, void **, 0xDBC) + 0x3C4));
-    func_0012592C((s32) temp_s0, 0x1A, 0, 0, (s32) (M2C_FIELD(arg0, void **, 0xDBC) + 0x3C4));
+    func_0012592C((s32) temp_s0, 0x108, 0, 0, (s32) (arg0->unkDBC + 0x3C4));
+    func_0012592C((s32) temp_s0, 0x1A, 0, 0, (s32) (arg0->unkDBC + 0x3C4));
     return 0;
 }
 
-s32 func_00124CA4(void *arg0, s16 arg1) {
+s32 func_00124CA4(struct Unk_func_00124CA4_0 *arg0, s16 arg1) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x111, (s32) arg1, temp_a0 + 0x3C4);
     return 0;
 }
@@ -60,34 +60,34 @@ s32 func_00124CD8(void) {
     return 0;
 }
 
-s32 func_00124CE0(void *arg0) {
+s32 func_00124CE0(struct Unk_func_00124CE0_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x104, 0, temp_a0 + 0x3C4);
-    return M2C_FIELD(M2C_FIELD(arg0, s32 *, 0xDBC), s16 *, 0x3A) != 7;
+    return M2C_FIELD(arg0->unkDBC, s16 *, 0x3A) != 7;
 }
 
-s32 func_00124D28(void *arg0) {
+s32 func_00124D28(struct Unk_func_00124D28_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x109, 0, temp_a0 + 0x3C4);
-    return M2C_FIELD(M2C_FIELD(arg0, s32 *, 0xDBC), s16 *, 0x3A) != 1;
+    return M2C_FIELD(arg0->unkDBC, s16 *, 0x3A) != 1;
 }
 
-s32 func_00124D70(void *arg0) {
+s32 func_00124D70(struct Unk_func_00124D70_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x106, 0, temp_a0 + 0x3C4);
     return 0;
 }
 
-s32 func_00124DA0(void *arg0) {
+s32 func_00124DA0(struct Unk_func_00124DA0_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x107, 0, temp_a0 + 0x3C4);
     return 0;
 }
@@ -116,50 +116,50 @@ s32 func_00124F2C(void) {
     return 0;
 }
 
-s32 func_00124F34(void *arg0) {
+s32 func_00124F34(struct Unk_func_00124F34_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x100, 0, temp_a0 + 0x3C4);
     return 0;
 }
 
-s32 func_00124F64(void *arg0) {
+s32 func_00124F64(struct Unk_func_00124F64_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x101, 0, temp_a0 + 0x3C4);
     return 0;
 }
 
-s32 func_00124F94(void *arg0) {
+s32 func_00124F94(struct Unk_func_00124F94_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x10B, 0, temp_a0 + 0x3C4);
     return 0;
 }
 
-s32 func_00124FC4(void *arg0) {
+s32 func_00124FC4(struct Unk_func_00124FC4_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x10C, 0, temp_a0 + 0x3C4);
     return 0;
 }
 
-s32 func_00124FF4(void *arg0) {
+s32 func_00124FF4(struct Unk_func_00124FF4_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x104, 0, temp_a0 + 0x3C4);
     return 0;
 }
 
-s32 func_00125024(void *arg0) {
+s32 func_00125024(struct Unk_func_00125024_0 *arg0) {
     s32 temp_a0;
 
-    temp_a0 = M2C_FIELD(arg0, s32 *, 0xDBC);
+    temp_a0 = arg0->unkDBC;
     func_0012592C(temp_a0, 0x109, 0x105, 0, temp_a0 + 0x3C4);
     return 0;
 }

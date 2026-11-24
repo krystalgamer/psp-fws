@@ -2,16 +2,16 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_0002742C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_0002742C(struct Unk_func_0002742C_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
-void func_0002743C(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+void func_0002743C(struct Unk_func_0002743C_0 *arg0) {
+    arg0->unk8 = 0;
+    arg0->unk0 = 0;
+    arg0->unk4 = 0;
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_02742C", func_0002744C);

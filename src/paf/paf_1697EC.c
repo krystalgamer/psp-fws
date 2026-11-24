@@ -2,7 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_001697EC(void *arg0) {
-    func_0016B084(M2C_FIELD(arg0, s32 *, 0x20) + 0x10);
+void func_001697EC(struct Unk_func_001697EC_0 *arg0) {
+    func_0016B084(arg0->unk20 + 0x10);
 }
 

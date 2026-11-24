@@ -2,8 +2,8 @@
 #include "common.h"
 #include "paf_decls.h"
 
-void func_00169B1C(void *arg0, s32 arg1, s32 arg2) {
-    func_00169C20(M2C_FIELD(arg0, s32 *, 0x24), arg2, arg1);
+void func_00169B1C(struct Unk_func_00169B1C_0 *arg0, s32 arg1, s32 arg2) {
+    func_00169C20(arg0->unk24, arg2, arg1);
 }
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_169B1C", func_00169B44);

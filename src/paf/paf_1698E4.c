@@ -2,8 +2,8 @@
 #include "common.h"
 #include "paf_decls.h"
 
-s32 func_001698E4(void *arg0, s32 *arg1) {
-    *arg1 = (s32) *M2C_FIELD(arg0, u8 **, 0x30);
+s32 func_001698E4(struct Unk_func_001698E4_0 *arg0, s32 *arg1) {
+    *arg1 = (s32) *arg0->unk30;
     return 0;
 }
 
