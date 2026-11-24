@@ -2,7 +2,11 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000466F4);
+void func_000466F4(void *arg0, s32 arg1) {
+    func_00044154(arg0);
+    M2C_FIELD(arg0, s32 *, 8) = (s32) (arg1 - __builtin_allegrex_ins(arg1 + ((u32) (arg1 >> 0x1F) >> 0x1E), 0, 0, 2));
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00171564;
+}
 
 void func_00046748(M2C_UNK **arg0) {
     *arg0 = &D_00171564;
@@ -32,7 +36,13 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00046D28);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_00046FF8);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_0466F4", func_000472DC);
+void func_000472DC(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_001715C4;
+    func_0004C5C4(arg0 + 4, arg1);
+    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x1C) = arg3;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+}
 
 void func_00047334(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_001715C4;

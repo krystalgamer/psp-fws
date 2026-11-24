@@ -1200,9 +1200,15 @@ s32 func_0005C0E8(void *arg0) {
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", func_0005C0F4);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", _TIFFGetFieldInfo);
+M2C_UNK *_TIFFGetFieldInfo(s32 *arg0) {
+    *arg0 = 0xA6;
+    return &D_00172674;
+}
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", _TIFFGetExifFieldInfo);
+M2C_UNK *_TIFFGetExifFieldInfo(s32 *arg0) {
+    *arg0 = 0x39;
+    return &D_00173720;
+}
 
 INCLUDE_RODATA("tmp/asm/282/paf/nonmatchings/paf_048F0C", D_00171E1C);
 
@@ -2131,7 +2137,18 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", func_00069364);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", func_00069394);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", func_000693AC);
+u32 func_000693AC(void *arg0, s32 arg1, u32 arg2, s32 arg3) {
+    u32 var_a4;
+
+    var_a4 = arg1 * arg2;
+    if (arg2 != 0) {
+        if ((var_a4 / arg2) != arg1) {
+            func_0005FFE0(M2C_FIELD(arg0, s32 *, 0x188), M2C_FIELD(arg0, s32 *, 0), (s32) "Integer overflow in %s", arg3);
+            var_a4 = 0;
+        }
+    }
+    return var_a4;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", func_00069404);
 
@@ -2158,7 +2175,22 @@ void TIFFDefaultStripSize(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK (**)(), 0x154)();
 }
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", _TIFFDefaultStripSize);
+u32 _TIFFDefaultStripSize(s32 arg0, s32 arg1) {
+    s32 temp_v0;
+    s32 var_a1;
+    u32 temp_lo;
+
+    var_a1 = arg1;
+    if (var_a1 <= 0) {
+        temp_v0 = func_000697C4(arg0);
+        var_a1 = 0x2000;
+        if (temp_v0 != 0) {
+            temp_lo = 0x2000U / (u32) temp_v0;
+            var_a1 = (s32) ((temp_lo != 0) ? temp_lo : 1U);
+        }
+    }
+    return (u32) var_a1;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", func_000697C4);
 
@@ -2176,7 +2208,15 @@ INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", TIFFSwabDouble);
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", TIFFSwabArrayOfDouble);
 
-INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", TIFFGetBitRevTable);
+M2C_UNK *TIFFGetBitRevTable(s32 arg0) {
+    M2C_UNK *var_v0;
+
+    var_v0 = &D_0017581C;
+    if (arg0 == 0) {
+        var_v0 = &D_0017591C;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("tmp/asm/282/paf/nonmatchings/paf_048F0C", TIFFReverseBits);
 
