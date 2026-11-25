@@ -29,7 +29,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_0002F2F4);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_0002F324);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_00025F04);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_000260C0);
@@ -43,7 +43,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_0002F56C);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_0002F954);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_00026348);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_00026364);
