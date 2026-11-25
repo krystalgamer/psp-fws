@@ -161,9 +161,7 @@ u8 func_0002040C(s32 arg0, struct Unk_func_0002040C_1 *arg1) {
 }
 
 #if FW_VERSION == 151
-s32 func_0003FC2C(s32 arg0, s32 arg1) {
-    return !((arg0 != 0) & (arg1 != 0)) ? 0 : (arg1 + 0x20);
-}
+INCLUDE_ASM("nonmatchings/pafmini_020050", func_0003FC2C);
 #endif
 
 #if FW_VERSION < 151

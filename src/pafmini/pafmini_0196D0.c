@@ -893,7 +893,7 @@ INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000D213C);
 
 INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000D2158);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", scePaf_1A1F232F);
 #else
 void scePaf_1A1F232F(struct Unk_scePaf_1A1F232F_0 *arg0, s32 arg1) {
@@ -970,13 +970,7 @@ M2C_UNK *func_0001FBBC(void) {
 
 INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000D22B4);
 
-#if FW_VERSION != 151
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001FBC8);
-#else
-M2C_UNK *func_0001FBC8(void) {
-    return " libpng version 1.2.6 - August 15, 2004 (header)\n";
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001FBD4);
 

@@ -81,17 +81,9 @@ s32 func_00041210(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pafmini_020444", func_00041224);
-#endif
-
-#if FW_VERSION == 151
-s32 func_00041224(s32 arg0) {
-    return !(arg0 & 1) ? 0 : 0xFC;
-}
-#endif
-
 #if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pafmini_020444", func_00041224);
+
 INCLUDE_ASM("nonmatchings/pafmini_020444", func_0004123C);
 #endif
 
@@ -676,21 +668,7 @@ INCLUDE_ASM("nonmatchings/pafmini_020444", png_build_gamma_table);
 INCLUDE_ASM("nonmatchings/pafmini_020444", png_do_read_intrapixel);
 #endif
 
-#if FW_VERSION != 151
 INCLUDE_ASM("nonmatchings/pafmini_020444", func_0002963C);
-#else
-s32 func_0002963C(s32 arg0, struct Unk_func_00029694_0 *arg1) {
-    s32 temp_v0;
-
-    temp_v0 = func_00029694(arg1);
-    if (temp_v0 >= 0) {
-
-    } else {
-        scePaf_7894B61F(arg0, (s32) "PNG unsigned integer out of range.\n");
-    }
-    return temp_v0;
-}
-#endif
 
 s32 func_00029694(struct Unk_func_00029694_0 *arg0) {
     return (arg0->unk0 << 0x18) + (arg0->unk1 << 0x10) + (arg0->unk2 << 8) + arg0->unk3;
@@ -787,21 +765,7 @@ INCLUDE_ASM("nonmatchings/pafmini_020444", func_0002BAF4);
 
 INCLUDE_ASM("nonmatchings/pafmini_020444", func_0002BCEC);
 
-#if FW_VERSION != 151
 INCLUDE_ASM("nonmatchings/pafmini_020444", func_0002BEAC);
-#else
-void func_0002BEAC(s32 arg0, void *arg1) {
-    u8 temp_v1;
-    u8 temp_v1_2;
-    u8 temp_v1_3;
-    u8 temp_v1_4;
-
-    temp_v1 = M2C_FIELD(arg1, u8 *, 0);
-    if (((((u32) (temp_v1 - 0x41) >= 0x3AU) | ((u32) (temp_v1 - 0x5B) < 6U)) != 0) || (temp_v1_2 = M2C_FIELD(arg1, u8 *, 1), ((((u32) (temp_v1_2 - 0x41) >= 0x3AU) | ((u32) (temp_v1_2 - 0x5B) < 6U)) != 0)) || (temp_v1_3 = M2C_FIELD(arg1, u8 *, 2), ((((u32) (temp_v1_3 - 0x41) >= 0x3AU) | ((u32) (temp_v1_3 - 0x5B) < 6U)) != 0)) || (temp_v1_4 = M2C_FIELD(arg1, u8 *, 3), ((((u32) (temp_v1_4 - 0x41) >= 0x3AU) | ((u32) (temp_v1_4 - 0x5B) < 6U)) != 0))) {
-        func_000404A8(arg0, (s32) "invalid chunk type");
-    }
-}
-#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_020444", func_0004C714);
