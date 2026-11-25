@@ -26,11 +26,11 @@ INCLUDE_ASM("nonmatchings/pafmini_019014", func_00019128);
 
 INCLUDE_ASM("nonmatchings/pafmini_019014", func_000191D0);
 
-#if FW_VERSION == 100
+#if FW_VERSION == 100 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/pafmini_019014", func_00019278);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 282
 void func_00019278(struct Unk_func_00019278_0 *arg0) {
     arg0->unk50 = -1;
     arg0->unk30 = 0;
