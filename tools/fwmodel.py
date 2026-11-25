@@ -13,7 +13,7 @@ from dataclasses import dataclass, field
 
 FWCOND = re.compile(r"^#(if|elif)\s+(.*FW_VERSION.*)$")
 ITEM = re.compile(r'^INCLUDE_ASM\("[^"]+", (\w+)\);\n|^INCLUDE_RODATA\("[^"]+", (\w+)\);\n|'
-                  r'^(?!static)[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{\n.*?^\}\n', re.M | re.S)
+                  r'^(?!static\s+inline)(?=[A-Za-z_])[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{\n.*?^\}\n', re.M | re.S)
 
 
 def evaluate(cond, v):
@@ -101,7 +101,12 @@ def parse(text, versions):
                         i += 1
                         break
                 i += 1
-            out.append(Entry(allv, "other", None, "".join(blk)))
+            # `#ifdef NON_MATCHING / C / #else / INCLUDE_ASM / #endif`: one function
+            inc = re.findall(r'^INCLUDE_ASM\("[^"]+", (\w+)\);', "".join(blk), re.M)
+            if len(set(inc)) == 1:
+                out.append(Entry(allv, "asm", inc[0], "".join(blk)))
+            else:
+                out.append(Entry(allv, "other", None, "".join(blk)))
             continue
         buf.append(lines[i])
         i += 1
