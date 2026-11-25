@@ -21,149 +21,27 @@ INCLUDE_ASM("nonmatchings/paf_09DF4C", func_0009E658);
 
 INCLUDE_ASM("nonmatchings/paf_09DF4C", scePaf_07216006);
 
-#if FW_VERSION < 270
-INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00055210);
-#endif
-
-#if FW_VERSION == 270
-u8 func_00055210(void *arg0) {
-    u8 var_v0;
-
-    var_v0 = 0;
-    if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, u8 *, 0x5E4);
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION < 270
-INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00055224);
-#endif
-
-#if FW_VERSION == 270
-s32 func_00055224(void *arg0) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x5D4);
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION < 270
-INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00055238);
-#endif
-
-#if FW_VERSION == 270
-s32 func_00055238(void *arg0) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x470);
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION < 270
-INCLUDE_ASM("nonmatchings/paf_09DF4C", func_0005524C);
-#endif
-
-#if FW_VERSION == 270
-s32 func_0005524C(void *arg0) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x5FC);
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION < 270
-INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00055260);
-#endif
-
-#if FW_VERSION == 270
-s32 func_00055260(s32 arg0) {
-    return !(arg0 & 1) ? 0 : 0xFC;
-}
-#endif
-
 #if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00055210);
+
+INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00055224);
+
+INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00055238);
+
+INCLUDE_ASM("nonmatchings/paf_09DF4C", func_0005524C);
+
+INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00055260);
+
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00055278);
-#endif
 
-#if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000552A0);
-#endif
 
-#if FW_VERSION == 270
-u8 func_000552A0(void *arg0) {
-    u8 var_v0;
-
-    var_v0 = 0;
-    if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, u8 *, 0x5F5);
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000552B4);
-#endif
 
-#if FW_VERSION == 270
-s32 func_000552B4(void *arg0) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x5F8);
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000552C8);
-#endif
 
-#if FW_VERSION == 270
-s32 func_000552C8(void *arg0) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x620);
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000552DC);
-#endif
-
-#if FW_VERSION == 270
-s32 func_000552DC(void *arg0) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg0 != NULL) {
-        var_v0 = M2C_FIELD(arg0, s32 *, 0x624);
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 u8 png_get_rgb_to_gray_status(struct Unk_png_get_rgb_to_gray_status_0 *arg0) {
     u8 var_v0;
 
@@ -460,99 +338,9 @@ INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000A1784);
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00059294);
 
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000595A4);
-#endif
 
-#if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00059A58);
-#endif
 
-#if FW_VERSION == 270
-void func_00059A58(void *arg0, s32 arg1) {
-    s32 var_v1;
-    s32 var_v1_2;
-    s32 var_v1_3;
-    s8 *var_a0;
-    s8 *var_a0_2;
-    s8 *var_a0_3;
-    u32 temp_a2;
-    u32 var_a3;
-    u32 var_a3_2;
-    u32 var_a3_3;
-    u8 *var_a1;
-    u8 *var_a1_2;
-    u8 *var_a1_3;
-    u8 temp_v1;
-
-    temp_v1 = M2C_FIELD(arg0, u8 *, 9);
-    if (temp_v1 < 8U) {
-        temp_a2 = M2C_FIELD(arg0, u32 *, 0);
-        switch (temp_v1) {                          /* irregular */
-        case 1:
-            var_a1 = arg1 + ((u32) (temp_a2 - 1) >> 3);
-            var_a0 = (arg1 + temp_a2) - 1;
-            var_v1 = ~(temp_a2 + 7) & 7;
-            var_a3 = 0;
-            if (temp_a2 != 0) {
-                do {
-                    *var_a0 = ((s32) *var_a1 >> var_v1) & 1;
-                    if (var_v1 != 7) {
-                        var_v1 += 1;
-                    } else {
-                        var_v1 = 0;
-                        var_a1 -= 1;
-                    }
-                    var_a3 += 1;
-                    var_a0 -= 1;
-                } while (var_a3 < temp_a2);
-            }
-            break;
-        case 4:
-            var_a1_2 = arg1 + ((u32) (temp_a2 - 1) >> 1);
-            var_a0_2 = (arg1 + temp_a2) - 1;
-            var_v1_2 = (~(temp_a2 + 1) & 1) * 4;
-            var_a3_2 = 0;
-            if (temp_a2 != 0) {
-                do {
-                    *var_a0_2 = ((s32) *var_a1_2 >> var_v1_2) & 0xF;
-                    if (var_v1_2 != 4) {
-                        var_v1_2 = 4;
-                    } else {
-                        var_v1_2 = 0;
-                        var_a1_2 -= 1;
-                    }
-                    var_a3_2 += 1;
-                    var_a0_2 -= 1;
-                } while (var_a3_2 < temp_a2);
-            }
-            break;
-        case 2:
-            var_a1_3 = arg1 + ((u32) (temp_a2 - 1) >> 2);
-            var_a0_3 = (arg1 + temp_a2) - 1;
-            var_v1_3 = (~(temp_a2 + 3) & 3) * 2;
-            var_a3_3 = 0;
-            if (temp_a2 != 0) {
-                do {
-                    *var_a0_3 = ((s32) *var_a1_3 >> var_v1_3) & 3;
-                    if (var_v1_3 != 6) {
-                        var_v1_3 += 2;
-                    } else {
-                        var_v1_3 = 0;
-                        var_a1_3 -= 1;
-                    }
-                    var_a3_3 += 1;
-                    var_a0_3 -= 1;
-                } while (var_a3_3 < temp_a2);
-            }
-            break;
-        }
-        M2C_FIELD(arg0, u8 *, 9) = 8U;
-        M2C_FIELD(arg0, s8 *, 0xB) = (s8) (M2C_FIELD(arg0, u8 *, 0xA) * 8);
-        M2C_FIELD(arg0, s32 *, 4) = (s32) (temp_a2 * M2C_FIELD(arg0, u8 *, 0xA));
-    }
-}
-#endif
-
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00059BF8);
 
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00059E50);

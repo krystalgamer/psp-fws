@@ -253,7 +253,7 @@ INCLUDE_ASM("nonmatchings/paf_12038C", func_00121C08);
 
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00121C38);
 
-#if FW_VERSION < 270
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00121C68);
 #else
 s32 func_00121C68(struct Unk_func_00121C68_0 *arg0) {
@@ -272,21 +272,9 @@ s32 func_00121CB8(void) {
     return 0;
 }
 
-#if FW_VERSION < 270
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00121CC0);
-#endif
-
-#if FW_VERSION == 270
-s32 func_00121CC0(struct Unk_func_00121CC0_0 *arg0) {
-    void *temp_a0;
-
-    temp_a0 = *arg0->unk7C;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD88)(temp_a0);
-    return 0;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 s32 func_00121CC0(struct Unk_func_00121CC0_0 *arg0) {
     struct Unk_func_00121CC0_temp_a0 *temp_a0;
 
@@ -298,21 +286,9 @@ s32 func_00121CC0(struct Unk_func_00121CC0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00121CEC);
 
-#if FW_VERSION < 270
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00121D20);
-#endif
-
-#if FW_VERSION == 270
-s32 func_00121D20(struct Unk_func_00121D20_0 *arg0) {
-    void *temp_a0;
-
-    temp_a0 = *arg0->unk7C;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD90)(temp_a0);
-    return 0;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 s32 func_00121D20(struct Unk_func_00121D20_0 *arg0) {
     struct Unk_func_00121D20_temp_a0 *temp_a0;
 
@@ -322,21 +298,9 @@ s32 func_00121D20(struct Unk_func_00121D20_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 270
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00121D4C);
-#endif
-
-#if FW_VERSION == 270
-s32 func_00121D4C(struct Unk_func_00121D4C_0 *arg0) {
-    void *temp_a0;
-
-    temp_a0 = *arg0->unk7C;
-    M2C_FIELD(temp_a0, M2C_UNK (**)(void *), 0xD98)(temp_a0);
-    return 0;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 s32 func_00121D4C(struct Unk_func_00121D4C_0 *arg0) {
     struct Unk_func_00121D4C_temp_a0 *temp_a0;
 
@@ -377,72 +341,32 @@ INCLUDE_ASM("nonmatchings/paf_12038C", func_00119DA4_v200);
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_12038C", scePaf_54AB18DD);
-#endif
 
-#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00119FB8);
-#endif
 
-#if FW_VERSION == 270
-void func_00119FB8(void) {
-    sceCccSetTable();
-}
-#endif
-
-#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00119FD4);
-#endif
 
-#if FW_VERSION == 270
-void func_00119FD4(void) {
-    scePaf_D4DAB044();
-}
-#endif
-
-#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00119FF0);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 270
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00119F64);
-#endif
-
-#if FW_VERSION == 270
-void func_00119F64(s32 arg0) {
-    func_000C6CDC(arg0 & 0xFFFF);
-}
 #endif
 
 #if FW_VERSION == 200
 INCLUDE_ASM("nonmatchings/paf_12038C", func_0011A00C_v200);
 #endif
 
-#if FW_VERSION >= 200 && FW_VERSION < 270
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_12038C", func_0011A028);
-#endif
 
-#if FW_VERSION == 270
-void func_0011A028(s32 arg0) {
-    func_00120F34(arg0 & 0xFFFF);
-}
-#endif
-
-#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_12038C", func_0011A044);
 #endif
 
 #if FW_VERSION == 270
-void func_0011A044(s32 arg0) {
-    func_0011A08C(arg0 & 0xFFFF);
-}
+INCLUDE_ASM("nonmatchings/paf_12038C", func_00120E58);
 
-void func_00120E58(s32 arg0) {
-    func_00121694(arg0 & 0xFFFF);
-}
-
-void func_00120E74(s32 arg0) {
-    func_00120EB0(arg0 & 0xFFFF);
-}
+INCLUDE_ASM("nonmatchings/paf_12038C", func_00120E74);
 
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00120E90);
 
@@ -450,10 +374,7 @@ INCLUDE_ASM("nonmatchings/paf_12038C", func_00120EAC);
 
 INCLUDE_ASM("nonmatchings/paf_12038C", func_00120EC8);
 
-void func_00120EE4(s32 arg0, s32 arg1) {
-    D_001A5B8C = arg0;
-    D_001A5B88 = arg1;
-}
+INCLUDE_ASM("nonmatchings/paf_12038C", func_00120EE4);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 270

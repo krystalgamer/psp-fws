@@ -506,16 +506,8 @@ INCLUDE_ASM("nonmatchings/paf_101AC0", func_00106210);
 
 INCLUDE_ASM("nonmatchings/paf_101AC0", func_00106230);
 
-#if FW_VERSION >= 200 && FW_VERSION < 270
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_101AC0", func_000FEEF8);
-#endif
-
-#if FW_VERSION == 270
-void func_000FEEF8(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x3E8) = arg1;
-    M2C_FIELD(arg0, s32 *, 0xC28) = arg1;
-    M2C_FIELD(arg0, s32 *, 0xDA8) = arg1;
-}
 #endif
 
 #if FW_VERSION < 282

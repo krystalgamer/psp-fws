@@ -392,23 +392,9 @@ INCLUDE_ASM("nonmatchings/paf_087074", func_00091B40);
 INCLUDE_ASM("nonmatchings/paf_087074", func_0004AAF8);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0004AB74);
-#endif
 
-#if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_087074", func_0004AC84);
-#endif
 
-#if FW_VERSION == 270
-void func_0004AC84(void **arg0) {
-    void *temp_v0;
-
-    temp_v0 = *arg0;
-    M2C_FIELD(temp_v0, s32 *, 0x6C) = 0;
-    M2C_FIELD(temp_v0, s32 *, 0x14) = 0;
-}
-#endif
-
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_087074", func_0004AC94);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0004AD04);
