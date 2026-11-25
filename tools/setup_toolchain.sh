@@ -2,9 +2,9 @@
 # Fetch build toolchains into tmp/ (no root needed):
 #  - Allegrex GCC 1.3.1 / 1.7.1 (i386 binaries, run via a local i386 glibc)
 #  - modern mips-linux-gnu binutils (for splat asm, linking)
-#  - an approximation of psp-gcc 1.5.1, built from the reconstructed 1.7.1
-#    sources (github.com/krystalgamer/psp-gcc-1.7.1) without the two 1.7.1
-#    changes that 1.5.1-built firmware shows it lacks (abs as max, ulsw default)
+#  - psp-gcc 1.5.1 and 1.6.1 cc1, reconstructed from firmware they built
+#    (github.com/krystalgamer/psp-compiler-ground), compiled as Sony did in a
+#    Red Hat 9 i386 sandbox
 set -euo pipefail
 cd "$(dirname "$0")/.."
 T=tmp/toolchains
@@ -46,24 +46,20 @@ for tool in as ld objcopy objdump nm readelf; do
     printf '#!/bin/sh\nLD_LIBRARY_PATH=%s/usr/lib/x86_64-linux-gnu exec %s/usr/bin/mips-linux-gnu-%s "$@"\n' "$BU" "$BU" "$tool" > "$T/bin/mips-$tool"
     chmod +x "$T/bin/mips-$tool"
 done
-if [ ! -x "$T/bin/cc1-1.5.1.bin" ]; then
-    SRC=$(realpath -m "$T/psp-gcc-src")
-    [ -d "$SRC" ] || git clone -q https://github.com/krystalgamer/psp-gcc-1.7.1.git "$SRC"
-    (cd "$SRC" && git checkout -q 7fbb1e7 \
-        && git -c user.name=build -c user.email=build@localhost revert --no-edit 485cb2c 7debb44 >/dev/null)
-    FAKE=$(realpath -m "$T/pspfake"); mkdir -p "$FAKE"
-    for tool in as ld ar ranlib nm objdump objcopy strip; do
-        printf '#!/bin/sh\nLD_LIBRARY_PATH=%s/usr/lib/x86_64-linux-gnu exec %s/usr/bin/mips-linux-gnu-%s "$@"\n' "$BU" "$BU" "$tool" > "$FAKE/psp-$tool"
-        chmod +x "$FAKE/psp-$tool"
-    done
-    B=$(realpath -m "$T/psp-gcc-151-build"); mkdir -p "$B"
-    (cd "$B" && PATH=$FAKE:$PATH CC="gcc -std=gnu89 -fcommon -w -fpermissive -Wno-error=implicit-function-declaration -Wno-error=implicit-int -Wno-error=int-conversion -Wno-error=incompatible-pointer-types" \
-        "$SRC"/gcc-3.3.3/configure --target=psp --with-gnu-ld --with-gnu-as \
-        --enable-languages=c --enable-c-mbchar --enable-threads=psp >configure.log 2>&1 \
-        && PATH=$FAKE:$PATH make -j8 all-gcc >make.log 2>&1 || true)  # libgcc fails; only cc1 is needed
-    cp "$B/gcc/cc1" "$T/bin/cc1-1.5.1.bin"
-    rm -rf "$B" "$FAKE"
+PCG=$(realpath -m "$T/psp-compiler-ground")
+if [ ! -x "$PCG/tmp/toolchains/bin/cc1-1.5.1.bin" ] || [ ! -x "$PCG/tmp/toolchains/bin/cc1-1.6.1.bin" ]; then
+    [ -d "$PCG" ] || git clone -q https://github.com/krystalgamer/psp-compiler-ground "$PCG"
+    git -C "$PCG" checkout -q 71b366af
+    "$PCG/tools/setup_toolchain.sh" >/dev/null
+    # the sandbox's RH9 loader must not find the host's i386 glibc through /etc/ld.so.cache
+    grep -q LD_LIBRARY_PATH "$PCG/tmp/toolchains/bin/rh9" \
+        || sed -i 's#--setenv LC_ALL C#--setenv LC_ALL C --setenv LD_LIBRARY_PATH /usr/lib#' "$PCG/tmp/toolchains/bin/rh9"
+    "$PCG/tools/build_gcc.sh" 1.5.1 >/dev/null
+    "$PCG/tools/build_gcc.sh" 1.6.1 >/dev/null
 fi
-printf '#!/bin/sh\nexec "$(dirname "$0")/cc1-1.5.1.bin" -mno-ulsw "$@"\n' > "$T/bin/cc1-1.5.1"
-chmod +x "$T/bin/cc1-1.5.1"
+rm -f "$T/bin/cc1-1.5.1.bin" "$T/bin/cc1-1.5.1-sony" "$T/bin/cc1-1.6.1-sony"
+# the 1.5.1 driver still passed -mno-ulsw to cc1, the 1.6.1 one no longer did
+printf '#!/bin/sh\nexec "%s/tmp/toolchains/bin/cc1-1.5.1" -mno-ulsw "$@"\n' "$PCG" > "$T/bin/cc1-1.5.1"
+printf '#!/bin/sh\nexec "%s/tmp/toolchains/bin/cc1-1.6.1" "$@"\n' "$PCG" > "$T/bin/cc1-1.6.1"
+chmod +x "$T/bin/cc1-1.5.1" "$T/bin/cc1-1.6.1"
 echo "toolchains ready in $T/bin"

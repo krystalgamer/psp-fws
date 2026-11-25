@@ -6,7 +6,8 @@ every function with the shipped objects (relocated words masked).
     tools/devkit_cctest.py tmp/toolchains/bin/cc1-1.7.1 [-O3]
 
 tools/devkit_cc/ holds minimal libc headers for these sources. Results so far:
-cc1-1.3.1 and cc1-1.5.1 287/288, cc1-1.7.1 285/288 (lwl/lwr: 1.4.0 is -mno-ulsw).
+cc1-1.3.1 287/288, cc1-1.5.1 286/288, cc1-1.6.1 and cc1-1.7.1 285/288
+(lwl/lwr: 1.4.0 is -mno-ulsw like 1.3.1/1.5.1).
 """
 import io
 import re

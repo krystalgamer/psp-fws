@@ -17,7 +17,8 @@ Matching decompilation of PSP firmware modules (PRX), split with
 python3 -m venv --without-pip .venv
 curl -sS https://bootstrap.pypa.io/get-pip.py | .venv/bin/python -
 .venv/bin/pip install pyelftools "splat64[mips]"
-make toolchain   # fetches Allegrex GCC 1.3.1/1.7.1, i386 glibc and MIPS binutils into tmp/
+make toolchain   # fetches Allegrex GCC 1.3.1/1.7.1, i386 glibc and MIPS binutils into tmp/,
+                 # builds psp-gcc 1.5.1/1.6.1 from github.com/krystalgamer/psp-compiler-ground
 ```
 
 ## Building
@@ -86,7 +87,9 @@ modules; multi-TU modules (paf, pafmini, pspnet_apctl, …) are not supported ye
 ```
 
 Per-module compiler flags live in a comment in the C file: `/* compiler: 1.3.1 */`
-(default 1.7.1), `/* cflags: -Os -frename-registers */` (default `-O2`),
+(without one, a module binary whose `.comment` names a single psp-gcc release we have a
+cc1 for — 1.3.1, 1.5.1(.internal), 1.6.1(.internal) — uses it, else 1.7.1;
+`/* compiler[100-152]: X */` overrides it for some firmware versions, see `tools/cc_of.py`), `/* cflags: -Os -frename-registers */` (default `-O2`),
 `/* text-align: 8 */`. Kernel/driver modules mostly match with
 `-O2 -frename-registers` (it gives the original register choice, e.g.
 `lui $3; ori $2,$3,...` for constants; `-O3` behaves the same), VSH plugins and
