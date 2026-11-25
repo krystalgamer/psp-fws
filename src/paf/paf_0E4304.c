@@ -7,14 +7,8 @@ void func_000E4304(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-#if FW_VERSION >= 200 && FW_VERSION < 260
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000DDDE8);
-#endif
-
-#if FW_VERSION == 260
-void func_000DDDE8(void *arg0, s32 arg1) {
-    M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), s32 *, 0x28) = arg1;
-}
 #endif
 
 #if FW_VERSION == 282
@@ -85,94 +79,34 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_D2E0D705);
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A838);
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A860);
-#endif
 
-#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A898);
-#endif
 
-#if FW_VERSION == 260
-s32 func_0008A898(void *arg0) {
-    return M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), void **, 0x1C), s32 *, 0x148);
-}
-#endif
-
-#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A8A8);
-#endif
 
-#if FW_VERSION == 260
-void func_0008A8A8(void *arg0) {
-    func_000CEE18(M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), s32 *, 0x1C));
-}
-#endif
-
-#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_6E1B5B50);
 #endif
 
-#if FW_VERSION == 260
-void scePaf_6E1B5B50(struct Unk_scePaf_6E1B5B50_0 *arg0) {
-    func_000D0648(M2C_FIELD(arg0->unk1E8, s32 *, 0x1C));
-}
-#endif
-
-#if FW_VERSION >= 200 && FW_VERSION < 260
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000DE0F8);
-#endif
-
-#if FW_VERSION == 260
-void func_000DE0F8(void *arg0, s32 arg1) {
-    func_000C9954(M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), s32 *, 0x1C), arg1);
-}
 #endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A8E8);
-#endif
 
-#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_BFFAEE83);
-#endif
 
-#if FW_VERSION == 260
-void scePaf_BFFAEE83(struct Unk_scePaf_BFFAEE83_0 *arg0) {
-    scePaf_14CE7F6F(M2C_FIELD(arg0->unk1E8, s32 *, 0x1C));
-}
-#endif
-
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_9AFD4AD4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 260
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008CBA4);
-#endif
 
-#if FW_VERSION == 260
-void func_0008CBA4(void *arg0, s32 arg1) {
-    func_0007949C(M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), s32 *, 0x1C), arg1);
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_7116224C);
 #endif
 
-#if FW_VERSION == 260
-void scePaf_7116224C(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
-    M2C_FIELD(M2C_FIELD(arg0->unk1E8, void **, 0x1C), s32 *, 0x194) = arg1;
-}
-#endif
-
-#if FW_VERSION >= 200 && FW_VERSION < 260
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000DE188);
-#endif
-
-#if FW_VERSION == 260
-void func_000DE188(void *arg0, s32 arg1, s32 arg2) {
-    func_000C82C8(M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), s32 *, 0x1C), arg1, arg2 & 0xFF);
-}
 #endif
 
 #if FW_VERSION < 282
@@ -275,21 +209,9 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E4CA0);
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E4E20);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_CD3A094C);
-#endif
-
-#if FW_VERSION == 260
-s32 scePaf_CD3A094C(struct Unk_func_000E4F0C_0 *arg0, struct Unk_func_000E4F0C_1 *arg1) {
-    if (((u32) (arg1->unk8 - 1) >= 2U) || (arg0->unk331 != 0)) {
-        scePaf_360956CC(arg0, arg1);
-    }
-    arg0->unk331 = 0;
-    return 0;
-}
-#endif
-
-#if FW_VERSION < 250 || FW_VERSION == 282
+#else
 s32 func_000E4F0C(struct Unk_func_000E4F0C_0 *arg0, struct Unk_func_000E4F0C_1 *arg1) {
     if (((u32) (arg1->unk8 - 1) >= 2U) || (arg0->unk331 != 0)) {
         scePaf_360956CC(arg0, arg1);
@@ -461,7 +383,7 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E7C18);
 INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_E1C76B22);
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_44EB8C62);
 #else
 void scePaf_44EB8C62(struct Unk_scePaf_44EB8C62_0 *arg0) {
@@ -575,24 +497,8 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E8E64);
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000909C8);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 260
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_00090A3C);
-#endif
-
-#if FW_VERSION == 260
-void func_00090A3C(void *arg0) {
-    s32 temp_v0;
-    s32 temp_v1;
-
-    temp_v1 = M2C_FIELD(arg0, s32 *, 8);
-    temp_v0 = M2C_FIELD(arg0, s32 *, 4) - 1;
-    M2C_FIELD(arg0, s32 *, 4) = temp_v0;
-    if (temp_v0 >= (temp_v1 - 0x14)) {
-
-    } else {
-        func_000C517C((s32) arg0, temp_v1 - 0xA);
-    }
-}
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282

@@ -26,7 +26,7 @@ INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049CB0);
 
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049D58);
 
-#if FW_VERSION < 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049E00);
 #else
 void func_00049E00(struct Unk_func_00049E00_0 *arg0) {
@@ -53,9 +53,7 @@ void func_00049E00(struct Unk_func_00049E00_0 *arg0) {
     arg0->unk4A = 0;
     arg0->unk4C = 0;
 }
-#endif
 
-#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/paf_049B9C", D_00171564);
 
 INCLUDE_RODATA("nonmatchings/paf_049B9C", D_00171580);

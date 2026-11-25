@@ -16,65 +16,21 @@ INCLUDE_ASM("nonmatchings/paf_11E928", func_000C5184);
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C52C8);
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C535C);
-#endif
 
-#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C53D8);
-#endif
 
-#if FW_VERSION == 260
-void func_000C53D8(void *arg0, s32 arg1) {
-    s32 temp_a0;
-
-    if (M2C_FIELD(arg0, u8 *, 0x24) != 0) {
-        M2C_FIELD(arg0, s32 *, 0x64) = 0xD;
-        temp_a0 = M2C_FIELD(arg0, s32 *, 0xC) + 3;
-        M2C_FIELD(arg0, s32 *, 0x44) = (s32) (((arg1 + (1 << temp_a0)) - 1) & (-1 << temp_a0));
-    } else {
-        M2C_FIELD(arg0, s32 *, 0x44) = (s32) ((arg1 + 0xF) & ~0xF);
-        M2C_FIELD(arg0, s32 *, 0x64) = 6;
-    }
-    M2C_FIELD(arg0, s32 *, 0x5C) = 6;
-}
-#endif
-
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C543C);
-#endif
 
-#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_11E928", scePaf_952CE8AF);
-#endif
-
-#if FW_VERSION == 260
-s32 scePaf_952CE8AF(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    s32 temp_s0;
-    s32 var_s2;
-
-    var_s2 = arg1;
-    temp_s0 = (((s32) ((arg0 << func_000C6134(arg2)) + 7) >> 3) + 0xF) & ~0xF;
-    if (arg3 == 2) {
-        var_s2 = (var_s2 + 7) & ~7;
-    }
-    return temp_s0 * var_s2;
-}
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C5508);
 #endif
 
-#if FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/paf_11E928", func_000C5524);
-#endif
-
-#if FW_VERSION == 260
-s32 func_000C5524(void *arg0) {
-    return (((s32) ((M2C_FIELD(arg0, s32 *, 0x18) << M2C_FIELD(arg0, s32 *, 0xC)) + 7) >> 3) + 0x1F) & ~0x1F;
-}
-#endif
-
 #if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/paf_11E928", func_000C5524);
+
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C5548);
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C55CC);
@@ -82,16 +38,8 @@ INCLUDE_ASM("nonmatchings/paf_11E928", func_000C55CC);
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C5890);
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C5B34);
-#endif
 
-#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C5BE4);
-#endif
-
-#if FW_VERSION == 260
-s32 func_000C5BE4(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x40) * (3 - M2C_FIELD(arg0, s32 *, 0x20));
-}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282

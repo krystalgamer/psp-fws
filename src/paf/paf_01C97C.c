@@ -69,14 +69,8 @@ INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_10C1DB70);
 
 INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_01C2FC36);
 
-#if FW_VERSION >= 200 && FW_VERSION < 260
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024B6C);
-#endif
-
-#if FW_VERSION == 260
-void func_00024B6C(void) {
-    sceKernelWaitSema(*D_001A4E30, 1, NULL);
-}
 #endif
 
 #if FW_VERSION == 282
