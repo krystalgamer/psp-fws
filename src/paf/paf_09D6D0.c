@@ -39,11 +39,19 @@ INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D8A4);
 
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D940);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D780_v280);
+
+INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D7DC);
+#endif
+
+#if FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_000544E4);
 
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0005451C);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DA4C);
 
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DAA8);
@@ -58,7 +66,13 @@ void func_0009DB20(void) {
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DB28);
-#else
+#endif
+
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D878);
+#endif
+
+#if FW_VERSION == 282
 void func_0009DB28(struct Unk_func_0009DB28_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (arg0 != NULL) {
         arg0->unk408 = arg1;
@@ -68,9 +82,11 @@ void func_0009DB28(struct Unk_func_0009DB28_0 *arg0, s32 arg1, s32 arg2, s32 arg
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_00054588);
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_0009DB44(struct Unk_func_0009DB44_0 *arg0) {
     s32 var_v0;
 

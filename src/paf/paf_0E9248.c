@@ -99,7 +99,15 @@ void scePaf_84913A3A(struct Unk_scePaf_84913A3A_0 *arg0) {
 INCLUDE_ASM("nonmatchings/paf_0E9248", func_000E66C4);
 
 INCLUDE_ASM("nonmatchings/paf_0E9248", func_000E67E4);
+#endif
 
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/paf_0E9248", func_000E9368);
+
+INCLUDE_ASM("nonmatchings/paf_0E9248", func_000E9394_v280);
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/paf_0E9248", scePaf_677F1705);
 
 INCLUDE_ASM("nonmatchings/paf_0E9248", scePaf_7C2DB482);

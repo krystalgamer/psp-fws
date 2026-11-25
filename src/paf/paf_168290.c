@@ -55,7 +55,7 @@ INCLUDE_ASM("nonmatchings/paf_168290", func_001687AC);
 
 INCLUDE_ASM("nonmatchings/paf_168290", func_001687E0);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_168290", D_001A16C0);
 #endif
 

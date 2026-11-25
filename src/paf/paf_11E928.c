@@ -6,7 +6,7 @@ void func_0011E928(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_11E928", func_0011DA28);
 #endif
 
