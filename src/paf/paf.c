@@ -110,22 +110,9 @@ INCLUDE_ASM("nonmatchings/paf", scePaf_84240C1D);
 
 INCLUDE_ASM("nonmatchings/paf", scePaf_5D786CDD);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_00000CE0);
-#endif
-
-#if FW_VERSION == 151
-s32 func_00000CE0(struct Unk_func_00000CE0_0 *arg0) {
-    s32 temp_v0;
-
-    temp_v0 = scePaf_B7E6052B(0x1E8);
-    func_00002EBC(temp_v0, arg0->unk8);
-    arg0->unk4 = temp_v0;
-    return 0;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 s32 func_00000CE0(struct Unk_func_00000CE0_0 *arg0) {
     s32 temp_v0;
 
@@ -285,59 +272,15 @@ INCLUDE_ASM("nonmatchings/paf", func_0000275C);
 
 INCLUDE_ASM("nonmatchings/paf", func_00002808);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_00002578);
-#endif
-
-#if FW_VERSION == 151
-void *func_00002578(void **arg0) {
-    void *temp_v0;
-    void *temp_v0_2;
-    void *var_a0;
-    void *var_v0;
-    void *var_v1;
-
-    var_a0 = *arg0;
-    var_v0 = NULL;
-    if (var_a0 != NULL) {
-        temp_v0 = M2C_FIELD(var_a0, void **, 4);
-        if (temp_v0 != NULL) {
-            var_v1 = temp_v0;
-            do {
-                temp_v0_2 = M2C_FIELD(var_v1, void **, 4);
-                var_a0 = var_v1;
-                var_v1 = temp_v0_2;
-            } while (temp_v0_2 != NULL);
-        }
-        var_v0 = var_a0;
-    }
-    return var_v0;
-}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_00002400);
-#endif
 
-#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/paf", func_000024CC);
-#endif
 
-#if FW_VERSION == 151
-void func_000024CC(void *arg0, void *arg1) {
-    s32 temp_v0;
-
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    temp_v0 = M2C_FIELD(arg1, s32 *, 0);
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    if (temp_v0 != 0) {
-        M2C_FIELD(arg0, s32 *, 0) = func_000025BC((s32) arg0, 0, temp_v0);
-        M2C_FIELD(arg0, s32 *, 4) = (s32) M2C_FIELD(arg1, s32 *, 4);
-    }
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_00002AE4);
 
 INCLUDE_ASM("nonmatchings/paf", func_000025BC);
@@ -380,13 +323,7 @@ void scePaf_1A45C860(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/paf", scePaf_6844744A);
 #endif
 
-#if FW_VERSION != 151
 INCLUDE_ASM("nonmatchings/paf", scePaf_D4FAE7D0);
-#else
-void scePaf_D4FAE7D0(s32 arg0) {
-    func_00001358((s32) D_001A4E1C, arg0);
-}
-#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_00002890);
@@ -440,25 +377,9 @@ INCLUDE_RODATA("nonmatchings/paf", D_0016E6F4);
 
 INCLUDE_ASM("nonmatchings/paf", scePaf_1811AD32);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", scePaf_F609FA81);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_F609FA81(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    void *sp0;
-    s32 temp_v0;
-
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x54);
-    if (temp_v0 == 0) {
-
-    } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
-        scePaf_1811AD32((s32) arg0, sp0, arg2, arg3);
-    }
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 void scePaf_F609FA81(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *sp0;
     s32 temp_v0;
@@ -482,25 +403,9 @@ INCLUDE_RODATA("nonmatchings/paf", D_0016E78C);
 
 INCLUDE_ASM("nonmatchings/paf", scePaf_D05C226F);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", scePaf_3481F595);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_3481F595(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
-    void *sp0;
-    s32 temp_v0;
-
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x54);
-    if (temp_v0 == 0) {
-
-    } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
-        scePaf_D05C226F((s32) arg0, sp0);
-    }
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 void scePaf_3481F595(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
     void *sp0;
     s32 temp_v0;
@@ -518,25 +423,9 @@ INCLUDE_ASM("nonmatchings/paf", scePaf_27F64616);
 
 INCLUDE_ASM("nonmatchings/paf", scePaf_5EBC648F);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", scePaf_CAF05F1D);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_CAF05F1D(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
-    void *sp0;
-    s32 temp_v0;
-
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x54);
-    if (temp_v0 == 0) {
-
-    } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
-        scePaf_5EBC648F((s32) arg0, sp0);
-    }
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 void scePaf_CAF05F1D(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
     void *sp0;
     s32 temp_v0;
@@ -548,33 +437,17 @@ void scePaf_CAF05F1D(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
         scePaf_5EBC648F((s32) arg0, sp0);
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/paf", func_00004F70);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/paf", func_00004F70);
+#else
 INCLUDE_ASM("nonmatchings/paf", scePaf_7E8C08D8);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", scePaf_5470B915);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_5470B915(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
-    void *sp0;
-    s32 temp_v0;
-
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x54);
-    if (temp_v0 == 0) {
-
-    } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
-        func_00004F70((s32) arg0, sp0);
-    }
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 void scePaf_5470B915(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
     void *sp0;
     s32 temp_v0;
@@ -782,26 +655,9 @@ INCLUDE_ASM("nonmatchings/paf", func_00009768);
 INCLUDE_ASM("nonmatchings/paf", func_00009A88);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_0000A6DC);
-#endif
-
-#if FW_VERSION == 151
-s32 func_0000A6DC(struct Unk_func_0000A6DC_0 *arg0) {
-    s32 temp_s2;
-    s32 temp_v0;
-
-    temp_s2 = func_0001F474((s32) &arg0->pad0[0xEC]);
-    if (M2C_FIELD(arg0, s32 *, 0xF4) == 0) {
-        temp_v0 = scePaf_B7E6052B(0x40);
-        func_00010B58(temp_v0, 0x44, 0xA000);
-        M2C_FIELD(arg0, s32 *, 0xF4) = temp_v0;
-    }
-    return temp_s2;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 s32 func_0000A6DC(struct Unk_func_0000A6DC_0 *arg0) {
     s32 temp_s2;
     s32 temp_v0;
@@ -870,26 +726,9 @@ INCLUDE_ASM("nonmatchings/paf", scePaf_D7215544);
 
 INCLUDE_ASM("nonmatchings/paf", func_0000B914);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", scePaf_49CE42F7);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_49CE42F7(struct Unk_scePaf_49CE42F7_0 *arg0) {
-    s32 temp_v0;
-
-    if (M2C_FIELD(arg0, u8 *, 0x1D4) == 0) {
-
-    } else {
-        temp_v0 = scePaf_D7215544();
-        if (temp_v0 != 0) {
-            func_0000B914(arg0, temp_v0);
-        }
-    }
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 void scePaf_49CE42F7(struct Unk_scePaf_49CE42F7_0 *arg0) {
     s32 temp_v0;
 
@@ -950,19 +789,8 @@ INCLUDE_ASM("nonmatchings/paf", func_0000BC3C);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf", func_0000C004);
-#endif
-
-#if FW_VERSION < 151
+#else
 INCLUDE_ASM("nonmatchings/paf", func_0000C0A0);
-#endif
-
-#if FW_VERSION == 151
-void func_0000C0A0(struct Unk_func_0000C0A0_0 *arg0) {
-    if (M2C_FIELD(arg0, s32 *, 0x1E4) == 0) {
-        func_00042208(M2C_FIELD(arg0, s32 *, 0x58));
-        M2C_FIELD(arg0, s32 *, 0x58) = 0;
-    }
-}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -984,19 +812,8 @@ INCLUDE_ASM("nonmatchings/paf", func_0000BCAC);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf", func_0000C0D8);
-#endif
-
-#if FW_VERSION < 151
+#else
 INCLUDE_ASM("nonmatchings/paf", func_0000C174);
-#endif
-
-#if FW_VERSION == 151
-void func_0000C174(struct Unk_func_0000C174_0 *arg0) {
-    if (M2C_FIELD(arg0, s32 *, 0x1E4) == 0) {
-        func_00042208(M2C_FIELD(arg0, s32 *, 0x5C));
-        M2C_FIELD(arg0, s32 *, 0x5C) = 0;
-    }
-}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -1018,19 +835,8 @@ INCLUDE_ASM("nonmatchings/paf", func_0000BD1C);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf", func_0000C1AC);
-#endif
-
-#if FW_VERSION < 151
+#else
 INCLUDE_ASM("nonmatchings/paf", func_0000C248);
-#endif
-
-#if FW_VERSION == 151
-void func_0000C248(struct Unk_func_0000C248_0 *arg0) {
-    if (M2C_FIELD(arg0, s32 *, 0x1E4) == 0) {
-        func_00042208(M2C_FIELD(arg0, s32 *, 0x60));
-        M2C_FIELD(arg0, s32 *, 0x60) = 0;
-    }
-}
 #endif
 
 #if FW_VERSION == 282
@@ -1131,37 +937,9 @@ INCLUDE_ASM("nonmatchings/paf", func_0000C5A4);
 
 INCLUDE_ASM("nonmatchings/paf", func_0000C600);
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/paf", func_0000D85C);
-#endif
-
-#if FW_VERSION == 151
-void *func_0000D85C(void **arg0) {
-    void *temp_v0;
-    void *temp_v0_2;
-    void *var_a0;
-    void *var_v0;
-    void *var_v1;
-
-    var_a0 = *arg0;
-    var_v0 = NULL;
-    if (var_a0 != NULL) {
-        temp_v0 = M2C_FIELD(var_a0, void **, 4);
-        if (temp_v0 != NULL) {
-            var_v1 = temp_v0;
-            do {
-                temp_v0_2 = M2C_FIELD(var_v1, void **, 4);
-                var_a0 = var_v1;
-                var_v1 = temp_v0_2;
-            } while (temp_v0_2 != NULL);
-        }
-        var_v0 = var_a0;
-    }
-    return var_v0;
-}
-#endif
-
 #if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/paf", func_0000D85C);
+
 INCLUDE_ASM("nonmatchings/paf", func_0000DA40);
 #endif
 
@@ -1176,20 +954,9 @@ s32 *func_0000C768(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_0000C2DC);
-#endif
 
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_0000C374);
-#endif
-
-#if FW_VERSION == 151
-s32 *func_0000C374(s32 *arg0, s32 arg1, s32 arg2) {
-    *arg0 = func_0000CF90(arg1, arg2);
-    return arg0;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 INCLUDE_ASM("nonmatchings/paf", func_0000C7A0);
 
 void func_0000C818(void) {
@@ -1315,35 +1082,15 @@ INCLUDE_ASM("nonmatchings/paf", func_0000D204);
 
 INCLUDE_ASM("nonmatchings/paf", func_0000D2DC);
 
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/paf", func_0000CB40);
-#endif
-
-#if FW_VERSION == 151
-s32 *func_0000CB40(s32 *arg0, s32 arg1, s32 arg2) {
-    *arg0 = func_0000D204(arg1, arg2);
-    return arg0;
-}
-#endif
-
 #if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/paf", func_0000CB40);
+
 INCLUDE_ASM("nonmatchings/paf", func_0000CB78);
 
 INCLUDE_ASM("nonmatchings/paf", func_0000D4EC);
-#endif
 
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_0000CC0C);
-#endif
 
-#if FW_VERSION == 151
-s32 *func_0000CC0C(s32 *arg0, s32 arg1, s32 arg2) {
-    *arg0 = func_0000D4EC(arg1, arg2);
-    return arg0;
-}
-#endif
-
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_0000CC44);
 
 INCLUDE_ASM("nonmatchings/paf", func_0000CC88);
@@ -1365,103 +1112,19 @@ INCLUDE_ASM("nonmatchings/paf", func_0000D31C);
 INCLUDE_ASM("nonmatchings/paf", func_0000D488);
 
 INCLUDE_ASM("nonmatchings/paf", func_0000D680);
-#endif
 
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_0000D7EC);
-#endif
 
-#if FW_VERSION == 151
-void *func_0000D7EC(void **arg0) {
-    void *temp_v0;
-    void *temp_v0_2;
-    void *var_a0;
-    void *var_v0;
-    void *var_v1;
-
-    var_a0 = *arg0;
-    var_v0 = NULL;
-    if (var_a0 != NULL) {
-        temp_v0 = M2C_FIELD(var_a0, void **, 4);
-        if (temp_v0 != NULL) {
-            var_v1 = temp_v0;
-            do {
-                temp_v0_2 = M2C_FIELD(var_v1, void **, 4);
-                var_a0 = var_v1;
-                var_v1 = temp_v0_2;
-            } while (temp_v0_2 != NULL);
-        }
-        var_v0 = var_a0;
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_0000D824);
-#endif
-
-#if FW_VERSION == 151
-void *func_0000D824(void **arg0) {
-    void *temp_v0;
-    void *temp_v0_2;
-    void *var_a0;
-    void *var_v0;
-    void *var_v1;
-
-    var_a0 = *arg0;
-    var_v0 = NULL;
-    if (var_a0 != NULL) {
-        temp_v0 = M2C_FIELD(var_a0, void **, 4);
-        if (temp_v0 != NULL) {
-            var_v1 = temp_v0;
-            do {
-                temp_v0_2 = M2C_FIELD(var_v1, void **, 4);
-                var_a0 = var_v1;
-                var_v1 = temp_v0_2;
-            } while (temp_v0_2 != NULL);
-        }
-        var_v0 = var_a0;
-    }
-    return var_v0;
-}
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf", func_0000D85C);
 #endif
 
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/paf", func_0000D894);
-#endif
-
-#if FW_VERSION == 151
-void *func_0000D894(void **arg0) {
-    void *temp_v0;
-    void *temp_v0_2;
-    void *var_a0;
-    void *var_v0;
-    void *var_v1;
-
-    var_a0 = *arg0;
-    var_v0 = NULL;
-    if (var_a0 != NULL) {
-        temp_v0 = M2C_FIELD(var_a0, void **, 4);
-        if (temp_v0 != NULL) {
-            var_v1 = temp_v0;
-            do {
-                temp_v0_2 = M2C_FIELD(var_v1, void **, 4);
-                var_a0 = var_v1;
-                var_v1 = temp_v0_2;
-            } while (temp_v0_2 != NULL);
-        }
-        var_v0 = var_a0;
-    }
-    return var_v0;
-}
-#endif
-
 #if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/paf", func_0000D894);
+
 INCLUDE_ASM("nonmatchings/paf", func_0000D8CC);
 #endif
 
@@ -1481,129 +1144,15 @@ INCLUDE_ASM("nonmatchings/paf", func_0000DE78);
 INCLUDE_ASM("nonmatchings/paf", func_0000E05C);
 
 INCLUDE_ASM("nonmatchings/paf", func_0000E1D0);
-#endif
 
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_0000E344);
-#endif
 
-#if FW_VERSION == 151
-void func_0000E344(M2C_UNK **arg0, M2C_UNK *arg1) {
-    M2C_UNK *temp_a2;
-    M2C_UNK *temp_v0;
-    M2C_UNK *temp_v1;
-
-    temp_v1 = M2C_FIELD(arg1, M2C_UNK **, 8);
-    temp_a2 = M2C_FIELD(arg1, M2C_UNK **, 0);
-    temp_v0 = M2C_FIELD(temp_v1, M2C_UNK **, 4);
-    M2C_FIELD(arg1, M2C_UNK **, 0) = temp_v1;
-    M2C_FIELD(temp_v1, M2C_UNK **, 4) = arg1;
-    M2C_FIELD(arg1, M2C_UNK **, 8) = temp_v0;
-    if (temp_v0 != NULL) {
-        *temp_v0 = arg1;
-    }
-    if (temp_a2 == NULL) {
-        *arg0 = temp_v1;
-    } else if (M2C_FIELD(temp_a2, M2C_UNK **, 4) == arg1) {
-        M2C_FIELD(temp_a2, M2C_UNK **, 4) = temp_v1;
-    } else {
-        M2C_FIELD(temp_a2, M2C_UNK **, 8) = temp_v1;
-    }
-    M2C_FIELD(temp_v1, M2C_UNK **, 0) = temp_a2;
-}
-#endif
-
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_0000E384);
-#endif
 
-#if FW_VERSION == 151
-void func_0000E384(M2C_UNK **arg0, M2C_UNK *arg1) {
-    M2C_UNK *temp_a2;
-    M2C_UNK *temp_v0;
-    M2C_UNK *temp_v1;
-
-    temp_v1 = M2C_FIELD(arg1, M2C_UNK **, 4);
-    temp_a2 = M2C_FIELD(arg1, M2C_UNK **, 0);
-    temp_v0 = M2C_FIELD(temp_v1, M2C_UNK **, 8);
-    M2C_FIELD(arg1, M2C_UNK **, 0) = temp_v1;
-    M2C_FIELD(arg1, M2C_UNK **, 4) = temp_v0;
-    M2C_FIELD(temp_v1, M2C_UNK **, 8) = arg1;
-    if (temp_v0 != NULL) {
-        *temp_v0 = arg1;
-    }
-    if (temp_a2 == NULL) {
-        *arg0 = temp_v1;
-    } else if (M2C_FIELD(temp_a2, M2C_UNK **, 4) == arg1) {
-        M2C_FIELD(temp_a2, M2C_UNK **, 4) = temp_v1;
-    } else {
-        M2C_FIELD(temp_a2, M2C_UNK **, 8) = temp_v1;
-    }
-    M2C_FIELD(temp_v1, M2C_UNK **, 0) = temp_a2;
-}
-#endif
-
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_0000E3C4);
-#endif
 
-#if FW_VERSION == 151
-void func_0000E3C4(M2C_UNK **arg0, M2C_UNK *arg1) {
-    M2C_UNK *temp_a2;
-    M2C_UNK *temp_v0;
-    M2C_UNK *temp_v1;
-
-    temp_v1 = M2C_FIELD(arg1, M2C_UNK **, 8);
-    temp_a2 = M2C_FIELD(arg1, M2C_UNK **, 0);
-    temp_v0 = M2C_FIELD(temp_v1, M2C_UNK **, 4);
-    M2C_FIELD(arg1, M2C_UNK **, 0) = temp_v1;
-    M2C_FIELD(temp_v1, M2C_UNK **, 4) = arg1;
-    M2C_FIELD(arg1, M2C_UNK **, 8) = temp_v0;
-    if (temp_v0 != NULL) {
-        *temp_v0 = arg1;
-    }
-    if (temp_a2 == NULL) {
-        *arg0 = temp_v1;
-    } else if (M2C_FIELD(temp_a2, M2C_UNK **, 4) == arg1) {
-        M2C_FIELD(temp_a2, M2C_UNK **, 4) = temp_v1;
-    } else {
-        M2C_FIELD(temp_a2, M2C_UNK **, 8) = temp_v1;
-    }
-    M2C_FIELD(temp_v1, M2C_UNK **, 0) = temp_a2;
-}
-#endif
-
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_0000E404);
-#endif
-
-#if FW_VERSION == 151
-void func_0000E404(M2C_UNK **arg0, M2C_UNK *arg1) {
-    M2C_UNK *temp_a2;
-    M2C_UNK *temp_v0;
-    M2C_UNK *temp_v1;
-
-    temp_v1 = M2C_FIELD(arg1, M2C_UNK **, 4);
-    temp_a2 = M2C_FIELD(arg1, M2C_UNK **, 0);
-    temp_v0 = M2C_FIELD(temp_v1, M2C_UNK **, 8);
-    M2C_FIELD(arg1, M2C_UNK **, 0) = temp_v1;
-    M2C_FIELD(arg1, M2C_UNK **, 4) = temp_v0;
-    M2C_FIELD(temp_v1, M2C_UNK **, 8) = arg1;
-    if (temp_v0 != NULL) {
-        *temp_v0 = arg1;
-    }
-    if (temp_a2 == NULL) {
-        *arg0 = temp_v1;
-    } else if (M2C_FIELD(temp_a2, M2C_UNK **, 4) == arg1) {
-        M2C_FIELD(temp_a2, M2C_UNK **, 4) = temp_v1;
-    } else {
-        M2C_FIELD(temp_a2, M2C_UNK **, 8) = temp_v1;
-    }
-    M2C_FIELD(temp_v1, M2C_UNK **, 0) = temp_a2;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 INCLUDE_ASM("nonmatchings/paf", func_0000D2FC);
 
 INCLUDE_ASM("nonmatchings/paf", func_0000D4EC);
@@ -1704,52 +1253,10 @@ void func_0000EB48(struct Unk_func_0000EB48_0 *arg0) {
     }
 }
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_0000E9CC);
-#endif
 
-#if FW_VERSION == 151
-void func_0000E9CC(void *arg0) {
-    s32 temp_v0;
-    s32 temp_v1;
-
-    if (M2C_FIELD(arg0, u8 *, 0x1C) == 0) {
-        temp_v1 = M2C_FIELD(arg0, s32 *, 0x14);
-        M2C_FIELD(arg0, u8 *, 0x1C) = 1U;
-        M2C_FIELD(arg0, s32 *, 0x18) = temp_v1;
-        if (temp_v1 > 0) {
-            do {
-                scePaf_66907719();
-                temp_v0 = M2C_FIELD(arg0, s32 *, 0x14) - 1;
-                M2C_FIELD(arg0, s32 *, 0x14) = temp_v0;
-            } while (temp_v0 > 0);
-        }
-    }
-}
-#endif
-
-#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/paf", func_0000EA20);
-#endif
-
-#if FW_VERSION == 151
-void func_0000EA20(void *arg0) {
-    s32 temp_v0;
-    s32 temp_v0_2;
-
-    if (M2C_FIELD(arg0, u8 *, 0x1C) != 0) {
-        temp_v0 = M2C_FIELD(arg0, s32 *, 0x18);
-        M2C_FIELD(arg0, u8 *, 0x1C) = 0U;
-        M2C_FIELD(arg0, s32 *, 0x14) = temp_v0;
-        if (temp_v0 > 0) {
-            do {
-                scePaf_6B1E90C7();
-                temp_v0_2 = M2C_FIELD(arg0, s32 *, 0x18) - 1;
-                M2C_FIELD(arg0, s32 *, 0x18) = temp_v0_2;
-            } while (temp_v0_2 > 0);
-        }
-    }
-}
 #endif
 
 #if FW_VERSION == 282
@@ -1897,69 +1404,11 @@ INCLUDE_ASM("nonmatchings/paf", func_0000FE24);
 INCLUDE_ASM("nonmatchings/paf", func_0000FE94);
 
 INCLUDE_ASM("nonmatchings/paf", func_00010078);
-#endif
 
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_000101EC);
-#endif
 
-#if FW_VERSION == 151
-void func_000101EC(M2C_UNK **arg0, M2C_UNK *arg1) {
-    M2C_UNK *temp_a2;
-    M2C_UNK *temp_v0;
-    M2C_UNK *temp_v1;
-
-    temp_v1 = M2C_FIELD(arg1, M2C_UNK **, 8);
-    temp_a2 = M2C_FIELD(arg1, M2C_UNK **, 0);
-    temp_v0 = M2C_FIELD(temp_v1, M2C_UNK **, 4);
-    M2C_FIELD(arg1, M2C_UNK **, 0) = temp_v1;
-    M2C_FIELD(temp_v1, M2C_UNK **, 4) = arg1;
-    M2C_FIELD(arg1, M2C_UNK **, 8) = temp_v0;
-    if (temp_v0 != NULL) {
-        *temp_v0 = arg1;
-    }
-    if (temp_a2 == NULL) {
-        *arg0 = temp_v1;
-    } else if (M2C_FIELD(temp_a2, M2C_UNK **, 4) == arg1) {
-        M2C_FIELD(temp_a2, M2C_UNK **, 4) = temp_v1;
-    } else {
-        M2C_FIELD(temp_a2, M2C_UNK **, 8) = temp_v1;
-    }
-    M2C_FIELD(temp_v1, M2C_UNK **, 0) = temp_a2;
-}
-#endif
-
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_0001022C);
-#endif
-
-#if FW_VERSION == 151
-void func_0001022C(M2C_UNK **arg0, M2C_UNK *arg1) {
-    M2C_UNK *temp_a2;
-    M2C_UNK *temp_v0;
-    M2C_UNK *temp_v1;
-
-    temp_v1 = M2C_FIELD(arg1, M2C_UNK **, 4);
-    temp_a2 = M2C_FIELD(arg1, M2C_UNK **, 0);
-    temp_v0 = M2C_FIELD(temp_v1, M2C_UNK **, 8);
-    M2C_FIELD(arg1, M2C_UNK **, 0) = temp_v1;
-    M2C_FIELD(arg1, M2C_UNK **, 4) = temp_v0;
-    M2C_FIELD(temp_v1, M2C_UNK **, 8) = arg1;
-    if (temp_v0 != NULL) {
-        *temp_v0 = arg1;
-    }
-    if (temp_a2 == NULL) {
-        *arg0 = temp_v1;
-    } else if (M2C_FIELD(temp_a2, M2C_UNK **, 4) == arg1) {
-        M2C_FIELD(temp_a2, M2C_UNK **, 4) = temp_v1;
-    } else {
-        M2C_FIELD(temp_a2, M2C_UNK **, 8) = temp_v1;
-    }
-    M2C_FIELD(temp_v1, M2C_UNK **, 0) = temp_a2;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 INCLUDE_ASM("nonmatchings/paf", func_0000FEB4);
 
 INCLUDE_ASM("nonmatchings/paf", func_000100A4);
@@ -1989,56 +1438,11 @@ INCLUDE_ASM("nonmatchings/paf", func_00010790);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_000102CC);
-#endif
 
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_00010364);
-#endif
 
-#if FW_VERSION == 151
-void *func_00010364(void **arg0) {
-    void *temp_v0;
-    void *temp_v0_2;
-    void *var_a0;
-    void *var_v0;
-    void *var_v1;
-
-    var_a0 = *arg0;
-    var_v0 = NULL;
-    if (var_a0 != NULL) {
-        temp_v0 = M2C_FIELD(var_a0, void **, 4);
-        if (temp_v0 != NULL) {
-            var_v1 = temp_v0;
-            do {
-                temp_v0_2 = M2C_FIELD(var_v1, void **, 4);
-                var_a0 = var_v1;
-                var_v1 = temp_v0_2;
-            } while (temp_v0_2 != NULL);
-        }
-        var_v0 = var_a0;
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf", func_0001039C);
-#endif
 
-#if FW_VERSION == 151
-s32 func_0001039C(void *arg0) {
-    M2C_FIELD(&D_00138F34, s32 *, 0) = (s32) M2C_FIELD(arg0, s32 *, 0);
-    M2C_FIELD(&D_00138F34, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 4);
-    M2C_FIELD(&D_00138F34, s32 *, 8) = (s32) M2C_FIELD(arg0, s32 *, 8);
-    M2C_FIELD(&D_00138F34, s32 *, 0xC) = (s32) M2C_FIELD(arg0, s32 *, 0xC);
-    M2C_FIELD(&D_00138F34, s32 *, 0x10) = (s32) M2C_FIELD(arg0, s32 *, 0x10);
-    M2C_FIELD(&D_00138F34, s32 *, 0x14) = (s32) M2C_FIELD(arg0, s32 *, 0x14);
-    M2C_FIELD(&D_00138F34, s32 *, 0x18) = (s32) M2C_FIELD(arg0, s32 *, 0x18);
-    return 0;
-}
-#endif
-
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_000103D4);
 #else
 INCLUDE_ASM("nonmatchings/paf", func_000107BC);
@@ -2262,17 +1666,9 @@ s32 func_000124F4(void) {
 }
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", scePaf_7DDE0658);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_7DDE0658(s32 arg0) {
-    scePaf_910BCFE1(arg0 + 0xF4, (s32) &func_00012530, arg0, 0, 0, 0);
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 void scePaf_7DDE0658(s32 arg0) {
     scePaf_910BCFE1(arg0 + 0xF8, (s32) &func_00012530, arg0, 0, 0, 0);
 }
@@ -2304,7 +1700,7 @@ INCLUDE_ASM("nonmatchings/paf", func_00012784);
 
 INCLUDE_ASM("nonmatchings/paf", func_000127C0);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", scePaf_1A468B86);
 #else
 s32 scePaf_1A468B86(struct Unk_scePaf_1A468B86_0 *arg0) {
@@ -2538,34 +1934,8 @@ INCLUDE_ASM("nonmatchings/paf", func_00013BCC);
 
 INCLUDE_ASM("nonmatchings/paf", func_00013BF8);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_00013570);
-#endif
-
-#if FW_VERSION == 151
-void *func_00013570(void **arg0) {
-    void *temp_v0;
-    void *temp_v0_2;
-    void *var_a0;
-    void *var_v0;
-    void *var_v1;
-
-    var_a0 = *arg0;
-    var_v0 = NULL;
-    if (var_a0 != NULL) {
-        temp_v0 = M2C_FIELD(var_a0, void **, 4);
-        if (temp_v0 != NULL) {
-            var_v1 = temp_v0;
-            do {
-                temp_v0_2 = M2C_FIELD(var_v1, void **, 4);
-                var_a0 = var_v1;
-                var_v1 = temp_v0_2;
-            } while (temp_v0_2 != NULL);
-        }
-        var_v0 = var_a0;
-    }
-    return var_v0;
-}
 #endif
 
 INCLUDE_ASM("nonmatchings/paf", func_00013D5C);
@@ -2776,21 +2146,9 @@ INCLUDE_ASM("nonmatchings/paf", func_0001590C);
 
 INCLUDE_ASM("nonmatchings/paf", func_00015AAC);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_00015B98);
-#endif
-
-#if FW_VERSION == 151
-void func_00015B98(struct Unk_func_00015B98_0 *arg0, struct Unk_func_00015B98_1 *arg1, s32 arg2) {
-    if (((u32) arg1->unk8 >> 8) & 0x80) {
-
-    } else {
-        scePaf_C01BF169(arg2 + 0xF4, (s32) &func_00015C30, arg2, arg0->unk1C, 0, 0);
-    }
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 void func_00015B98(struct Unk_func_00015B98_0 *arg0, struct Unk_func_00015B98_1 *arg1, s32 arg2) {
     if (((u32) arg1->unk8 >> 8) & 0x80) {
 
@@ -2800,21 +2158,9 @@ void func_00015B98(struct Unk_func_00015B98_0 *arg0, struct Unk_func_00015B98_1 
 }
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_00015BE4);
-#endif
-
-#if FW_VERSION == 151
-void func_00015BE4(struct Unk_func_00015BE4_0 *arg0, struct Unk_func_00015BE4_1 *arg1, s32 arg2) {
-    if (((u32) arg1->unk8 >> 8) & 0x80) {
-
-    } else {
-        scePaf_C01BF169(arg2 + 0xF4, (s32) &func_00015D28, arg2, arg0->unk1C, 0, 0);
-    }
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 void func_00015BE4(struct Unk_func_00015BE4_0 *arg0, struct Unk_func_00015BE4_1 *arg1, s32 arg2) {
     if (((u32) arg1->unk8 >> 8) & 0x80) {
 

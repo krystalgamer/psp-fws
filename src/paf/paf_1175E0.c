@@ -7,16 +7,8 @@ void func_001175E0(M2C_UNK **arg0) {
     scePaf_715E8DAB((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
-#endif
-
-#if FW_VERSION < 151
+#else
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_00117618);
-#endif
-
-#if FW_VERSION == 151
-void func_00117618(struct Unk_func_00117618_0 *arg0, s32 arg1) {
-    arg0->pad0[0] = (u8) arg1;
-}
 #endif
 
 #if FW_VERSION == 282

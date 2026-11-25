@@ -47,27 +47,11 @@ void func_000254EC(void) {
     sceKernelSignalSema((s32) *D_001A4E30, 1);
 }
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001F918);
-#endif
 
-#if FW_VERSION == 151
-s32 func_0001F918(void) {
-    return 1;
-}
-#endif
-
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001F920);
-#endif
-
-#if FW_VERSION == 151
-s32 func_0001F920(void) {
-    return 1;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00025514);
 
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_000255E8);
