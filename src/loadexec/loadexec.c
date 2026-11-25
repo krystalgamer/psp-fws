@@ -6,7 +6,7 @@
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002B4C);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION == 280
+#if FW_VERSION < 201 || FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/loadexec", func_00000000);
 #endif
 
@@ -142,6 +142,10 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00001110);
 
 #if FW_VERSION >= 270
 INCLUDE_RODATA("nonmatchings/loadexec", D_000031DC);
+#endif
+
+#if FW_VERSION == 281
+INCLUDE_RODATA("nonmatchings/loadexec", D_00001F7C);
 #endif
 
 #if FW_VERSION == 270

@@ -235,7 +235,7 @@ INCLUDE_ASM("nonmatchings/init", InitForKernel_A6E71B93);
 INCLUDE_ASM("nonmatchings/init", InitForKernel_9F9AE99C);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/init", func_000002C8);
 #endif
 
@@ -249,7 +249,7 @@ INCLUDE_ASM("nonmatchings/init", func_000012E0);
 INCLUDE_ASM("nonmatchings/init", func_00001430);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 s32 func_00001208(void) {
     s32 temp_s0;
 

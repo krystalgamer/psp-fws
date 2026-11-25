@@ -259,23 +259,79 @@ void func_000633E4(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000633F8);
+#endif
 
+#if FW_VERSION == 200
+void func_000633F8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x20);
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_00063408);
+#endif
 
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000634C4);
+#endif
 
+#if FW_VERSION == 200
+void func_000634C4(void *arg0, void *arg1) {
+    u32 temp_lo;
+    u32 var_a2;
+    u8 temp_v0;
+    void *var_a1;
+
+    var_a1 = arg1;
+    if (M2C_FIELD(arg0, u8 *, 9) == 0x10) {
+        temp_lo = M2C_FIELD(arg0, s32 *, 0) * M2C_FIELD(arg0, u8 *, 0xA);
+        var_a2 = 0;
+        if (temp_lo != 0) {
+            do {
+                temp_v0 = M2C_FIELD(var_a1, u8 *, 0);
+                var_a2 += 1;
+                M2C_FIELD(var_a1, u8 *, 0) = (u8) M2C_FIELD(var_a1, u8 *, 1);
+                M2C_FIELD(var_a1, u8 *, 1) = temp_v0;
+                var_a1 += 2;
+            } while (var_a2 < temp_lo);
+        }
+    }
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_00063518);
 
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_0006359C);
 
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000638E4);
+#endif
 
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_00063A10);
+#endif
 
+#if FW_VERSION == 200
+void func_00063A10(void *arg0, s32 arg1, s8 arg2, s8 arg3) {
+    M2C_FIELD(arg0, s32 *, 0x420) = arg1;
+    M2C_FIELD(arg0, s8 *, 0x424) = arg2;
+    M2C_FIELD(arg0, s8 *, 0x425) = arg3;
+}
+#endif
+
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_00063A20);
-#else
+#endif
+
+#if FW_VERSION == 200
+s32 func_00063A20(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x420);
+}
+#endif
+
+#if FW_VERSION == 282
 void png_set_swap_alpha(struct Unk_png_set_swap_alpha_0 *arg0) {
     arg0->unk430 = (s32) (arg0->unk430 | 0x20000);
 }
@@ -382,17 +438,15 @@ void func_000AE724(struct Unk_func_000AE724_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000AE758);
+#else
+INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000AEA7C);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000AEA7C);
-#else
+#if FW_VERSION == 282
 void func_000AEA7C(struct Unk_func_000AEA7C_0 *arg0, s32 arg1) {
     arg0->unk1C = arg1;
 }
-#endif
-
-#if FW_VERSION < 282
+#else
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_00063A34);
 
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_00063A60);
