@@ -397,7 +397,17 @@ INCLUDE_ASM("nonmatchings/paf_095A44", func_00092A8C);
 
 INCLUDE_ASM("nonmatchings/paf_095A44", func_00092D54);
 
-INCLUDE_ASM("nonmatchings/paf_095A44", func_00092DB0);
+s32 func_00092DB0(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (func_00093BBC(arg0, 0x7F, 7) != 0) {
+        var_v1 = 1;
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+        M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("nonmatchings/paf_095A44", func_00092DF4);
 
@@ -421,7 +431,10 @@ INCLUDE_ASM("nonmatchings/paf_095A44", func_00093BBC);
 
 INCLUDE_ASM("nonmatchings/paf_095A44", func_00093D0C);
 
-INCLUDE_ASM("nonmatchings/paf_095A44", func_00093D5C);
+void func_00093D5C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x90) = 0;
+    func_00093D0C((s32) arg0);
+}
 
 INCLUDE_ASM("nonmatchings/paf_095A44", func_00093D7C);
 
@@ -445,7 +458,9 @@ INCLUDE_ASM("nonmatchings/paf_095A44", func_000951BC);
 
 INCLUDE_ASM("nonmatchings/paf_095A44", func_000952FC);
 
-INCLUDE_ASM("nonmatchings/paf_095A44", func_0009537C);
+void func_0009537C(void *arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4) {
+    func_00095A84(*arg1, arg2, arg3, 0, arg4, M2C_FIELD(arg0, s32 *, 0x6C));
+}
 
 INCLUDE_ASM("nonmatchings/paf_095A44", func_000953AC);
 
@@ -680,7 +695,7 @@ INCLUDE_RODATA("nonmatchings/paf_095A44", D_00192D84);
 
 INCLUDE_RODATA("nonmatchings/paf_095A44", D_00192DA0);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_095A44", scePaf_1A1F232F);
 #else
 void scePaf_1A1F232F(struct Unk_scePaf_1A1F232F_0 *arg0, s32 arg1) {

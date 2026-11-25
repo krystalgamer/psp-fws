@@ -134,7 +134,13 @@ extern s32 D_00013688;
 extern s32 D_00013908;
 extern s32 D_0001390C;
 extern s32 D_00013910;
+extern s32 D_00013948;
+extern s32 D_00013980;
 extern s32 D_00013EB8;
+extern s32 D_00014134;
+extern s32 D_0001413C;
+extern s32 D_00014264;
+extern s32 D_00014268;
 
 s32 KDebugForKernel_24C32559(u32 arg0);
 s32 KDebugForKernel_333DCEC7(s32 arg0);

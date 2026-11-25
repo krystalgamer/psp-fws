@@ -8,7 +8,9 @@ void func_0002B79C(struct Unk_func_0002B79C_0 *arg0) {
     arg0->unk0 = 0;
     arg0->unk4 = 0;
 }
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 280
 void func_0002B7AC(struct Unk_func_0002B7AC_0 *arg0) {
     arg0->unk8 = 0;
     arg0->unk0 = 0;
@@ -16,7 +18,9 @@ void func_0002B7AC(struct Unk_func_0002B7AC_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02B79C", func_0002B7BC);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_02B79C", func_0002B830);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02B79C", func_0002B8A4);
@@ -34,9 +38,13 @@ void func_0002B928(struct Unk_func_0002B928_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02B79C", func_0002B938);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/photo_plugin_02B79C", func_0002B9F8);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_02B79C", func_0002BAB8);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02B79C", func_0002BB78);

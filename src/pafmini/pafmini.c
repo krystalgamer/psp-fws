@@ -294,67 +294,19 @@ void scePaf_149CDEB9(void) {
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_78192717);
 #endif
 
-#if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_62081F34);
-#endif
-
-#if FW_VERSION == 152
-void scePaf_62081F34(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_BECD1827);
-#endif
-
-#if FW_VERSION == 152
-void scePaf_BECD1827(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_A8711520);
-#endif
-
-#if FW_VERSION == 152
-void scePaf_A8711520(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_FCDD55E3);
-#endif
-
-#if FW_VERSION == 152
-void scePaf_FCDD55E3(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_2EABF548);
-#endif
-
-#if FW_VERSION == 152
-void scePaf_2EABF548(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_50F72192);
-#endif
-
-#if FW_VERSION == 152
-void scePaf_50F72192(void) {
-
-}
-#endif
-
 #if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_62081F34);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_BECD1827);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_A8711520);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_FCDD55E3);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_2EABF548);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_50F72192);
+
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_73712598);
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_8B439A23);

@@ -203,11 +203,21 @@ INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002A0F0);
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002A21C);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002A348);
+#endif
 
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002A064);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002A2B0);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002A440);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002A6C4);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002A948);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002AA28);
@@ -215,9 +225,13 @@ INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002AA28);
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002AA90);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002ADF4);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002B02C);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002B0C0);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002B0FC);

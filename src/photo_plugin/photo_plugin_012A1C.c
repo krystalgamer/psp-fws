@@ -68,7 +68,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012D90);
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FDC0);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 s32 func_00012A8C(void) {
     return 2;
 }
@@ -178,11 +178,21 @@ INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FE28);
 
 #if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FE38);
+#endif
 
+#if FW_VERSION == 280
+INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FE68);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030740);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FE50);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FE68);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000135AC);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_0001375C);

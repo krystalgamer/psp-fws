@@ -1,9 +1,25 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 282
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000A99B4);
-#else
+#endif
+
+#if FW_VERSION == 200
+void func_000A99B4(s32 arg0, struct Unk_func_000A99B4_1 *arg1) {
+    u8 temp_v1;
+    u8 temp_v1_2;
+    u8 temp_v1_3;
+    u8 temp_v1_4;
+
+    temp_v1 = arg1->unk0;
+    if (((((u32) (temp_v1 - 0x41) >= 0x3AU) | ((u32) (temp_v1 - 0x5B) < 6U)) != 0) || (temp_v1_2 = arg1->unk1, ((((u32) (temp_v1_2 - 0x41) >= 0x3AU) | ((u32) (temp_v1_2 - 0x5B) < 6U)) != 0)) || (temp_v1_3 = arg1->unk2, ((((u32) (temp_v1_3 - 0x41) >= 0x3AU) | ((u32) (temp_v1_3 - 0x5B) < 6U)) != 0)) || (temp_v1_4 = arg1->unk3, ((((u32) (temp_v1_4 - 0x41) >= 0x3AU) | ((u32) (temp_v1_4 - 0x5B) < 6U)) != 0))) {
+        func_000544E4(arg0, (s32) "invalid chunk type");
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 void func_000A99B4(s32 arg0, struct Unk_func_000A99B4_1 *arg1) {
     u8 temp_v1;
     u8 temp_v1_2;
@@ -15,11 +31,11 @@ void func_000A99B4(s32 arg0, struct Unk_func_000A99B4_1 *arg1) {
         func_0009DA4C(arg0, (s32) "invalid chunk type");
     }
 }
+#else
+INCLUDE_ASM("nonmatchings/paf_0A99B4", func_00060750);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0A99B4", func_00060750);
-#else
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000A9A68);
 #endif
 
@@ -175,7 +191,14 @@ INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000AC530);
 void func_000AC5C4(void) {
 }
 
+#if FW_VERSION != 200
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000AC5CC);
+#else
+void func_000AC5CC(void *arg0, s8 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s8 *, 0x5F5) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x5F8) = arg2;
+}
+#endif
 
 void func_000AC5E4(struct Unk_func_000AC5E4_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk620 = arg1;
@@ -216,11 +239,27 @@ INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000AC698);
 
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000AC6C0);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000633D0);
+#endif
 
+#if FW_VERSION == 200
+void func_000633D0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x20000);
+}
+#endif
+
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000633E4);
+#endif
 
+#if FW_VERSION == 200
+void func_000633E4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x80000);
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000633F8);
 
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_00063408);

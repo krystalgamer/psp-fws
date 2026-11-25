@@ -12,7 +12,9 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_176BBE07);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_DE2E7E89);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_E67F4E0A);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_1C6A60E1);
 #endif
 
@@ -37,6 +39,10 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C00D873B);
 #endif
 
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_00001F8C);
+
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_1C6A60E1);
+#endif
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_C00D873B);
@@ -194,6 +200,10 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00001588);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001624);
 
+#if FW_VERSION == 280
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002A64);
+#endif
+
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_63463F66);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C3A1D6B2);
@@ -252,17 +262,23 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00001C90);
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001B84);
 #endif
 
+#if FW_VERSION < 280
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002048);
+#endif
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_47DB48C2);
+#endif
+
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/me_wrapper", func_0000210C);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_4794C05C);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 void sceMeCore_driver_4794C05C(s32 arg0) {
     sceMeCore_driver_3D5F109C(0x185, arg0);
 }

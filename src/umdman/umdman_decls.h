@@ -93,6 +93,7 @@ extern s32 D_0000FF9C;
 extern s32 D_00010128;
 extern s32 D_00010140;
 extern s32 D_000109C0;
+extern s32 D_00010AC0;
 extern s32 D_00011014;
 extern s32 D_000110A0;
 extern M2C_UNK D_000110B4;
@@ -166,6 +167,7 @@ extern M2C_UNK func_0000B330;
 extern M2C_UNK func_0000FB38;
 
 s32 InterruptManagerForKernel_D774BA45(M2C_UNK);
+M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);
 M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);
 s32 KDebugForKernel_D636B827();
 M2C_UNK LoadExecForKernel_11412288(s32 (*)());

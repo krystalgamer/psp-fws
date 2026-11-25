@@ -12,6 +12,10 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005EA8);
 
 INCLUDE_ASM("nonmatchings/isofs", func_000001B8);
 
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/isofs", func_00000250);
+#endif
+
 #if FW_VERSION == 271
 s32 func_00000250(s32 arg0) {
     s32 temp_v0;
@@ -101,6 +105,24 @@ s32 func_00000494(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/isofs", func_00000440);
 #endif
 
+#if FW_VERSION == 280
+s32 func_00000440(struct Unk_func_00000440_0 *arg0) {
+    s32 var_s1;
+    s32 var_s2;
+
+    var_s2 = 0;
+    if (arg0->unk50 != 0) {
+        var_s1 = 0;
+        do {
+            var_s2 += 1;
+            func_0000065C(M2C_FIELD(arg0, s32 *, 0x894) + var_s1 + 8);
+            var_s1 += 0x2C;
+        } while (var_s2 < (s32) arg0->unk50);
+    }
+    return SysMemForKernel_7B749390(arg0->unk40, M2C_FIELD(arg0, s32 *, 0x894));
+}
+#endif
+
 #if FW_VERSION == 271
 s32 func_00000440(struct Unk_func_00000440_0 *arg0) {
     s32 var_s1;
@@ -144,7 +166,14 @@ s32 func_00000440(struct Unk_func_00000440_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 280
+s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1) {
+    func_000007FC(M2C_FIELD(arg0, s32 *, 0x894), arg1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 280
 s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1) {
     func_000007FC(arg0->unk98, arg1);
     return 0;
@@ -194,7 +223,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00000F9C);
 INCLUDE_ASM("nonmatchings/isofs", func_00000620);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 s32 func_000006EC(void) {
     s32 temp_s0;
 
@@ -242,7 +271,7 @@ s32 func_000006EC(void) {
 INCLUDE_ASM("nonmatchings/isofs", func_00000760);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/isofs", func_0000065C);
 #endif
 
@@ -282,7 +311,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00000D00);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00000DA8);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/isofs", func_00000CAC);
 #endif
 
@@ -310,7 +339,17 @@ INCLUDE_ASM("nonmatchings/isofs", func_00000EBC);
 INCLUDE_ASM("nonmatchings/isofs", func_00000FCC);
 
 INCLUDE_ASM("nonmatchings/isofs", func_000010AC);
+#endif
 
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/isofs", func_000010A0);
+
+INCLUDE_ASM("nonmatchings/isofs", func_000012F0);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00001394);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/isofs", func_0000125C);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00001498);
@@ -318,7 +357,9 @@ INCLUDE_ASM("nonmatchings/isofs", func_00001498);
 
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/isofs", func_0000140C);
-#else
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/isofs", D_000060F8);
 #endif
 
@@ -356,7 +397,33 @@ INCLUDE_ASM("nonmatchings/isofs", func_00001778);
 
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/isofs", func_00001A4C);
-#else
+#endif
+
+#if FW_VERSION == 280
+s32 func_00001A4C(void *arg0) {
+    s32 temp_a0;
+    s32 temp_v1;
+    s32 var_v0;
+
+    var_v0 = 0x80010016;
+    if (arg0 != NULL) {
+        temp_v1 = M2C_FIELD(arg0, s32 *, 0x898);
+        if (temp_v1 != 0) {
+            SysMemForKernel_7B749390(M2C_FIELD(arg0, s32 *, 0x40), temp_v1);
+            M2C_FIELD(arg0, s32 *, 0x898) = 0;
+        }
+        temp_a0 = M2C_FIELD(arg0, s32 *, 0x890);
+        if (temp_a0 != 0) {
+            SysMemForKernel_7B749390(M2C_FIELD(arg0, s32 *, 0x40), temp_a0);
+            M2C_FIELD(arg0, s32 *, 0x890) = 0;
+        }
+        var_v0 = 0;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION == 271
 s32 func_00001A4C(void *arg0) {
     s32 temp_a0;
     s32 temp_v1;
@@ -384,7 +451,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00001B0C);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00001C5C);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 INCLUDE_RODATA("nonmatchings/isofs", D_000060F8);
 #endif
 
@@ -429,6 +496,10 @@ INCLUDE_ASM("nonmatchings/isofs", func_00001F44);
 INCLUDE_ASM("nonmatchings/isofs", func_00002024);
 #endif
 
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/isofs", func_000020FC);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/isofs", func_00002150);
 #endif
@@ -458,21 +529,31 @@ INCLUDE_ASM("nonmatchings/isofs", func_00003D1C);
 INCLUDE_ASM("nonmatchings/isofs", func_00003E30);
 #else
 INCLUDE_ASM("nonmatchings/isofs", func_000023A4);
+#endif
 
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/isofs", func_000022CC);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/isofs", func_000024C4);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00002528);
 #endif
 
+#if FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/isofs", func_000026E4);
 
 INCLUDE_ASM("nonmatchings/isofs", func_000027C0);
 
 INCLUDE_ASM("nonmatchings/isofs", func_000028B4);
+#endif
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_00004538);
-#else
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/isofs", func_00002B40);
 #endif
 
@@ -603,6 +684,10 @@ INCLUDE_ASM("nonmatchings/isofs", func_00002E28);
 INCLUDE_ASM("nonmatchings/isofs", func_00002FA0);
 #endif
 
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/isofs", func_000027B0);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/isofs", func_00002FE4);
 #endif
@@ -661,7 +746,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_000037A4);
 INCLUDE_ASM("nonmatchings/isofs", func_00003ADC);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/isofs", func_00003BB4);
 #endif
 
@@ -797,9 +882,11 @@ INCLUDE_ASM("nonmatchings/isofs", func_00004624);
 INCLUDE_ASM("nonmatchings/isofs", func_00004780);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/isofs", func_00004614);
+#endif
 
+#if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/isofs", D_000059C4);
 #endif
 
@@ -815,7 +902,7 @@ s32 func_00007700(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION == 280
 INCLUDE_ASM("nonmatchings/isofs", module_reboot_before);
 #endif
 
@@ -892,10 +979,28 @@ s32 func_00007FF0(void) {
 s32 func_00004DB0(void) {
     return (s32) &D_00007608;
 }
+#endif
 
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/isofs", func_000042BC);
+
+s32 func_00002D7C(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/isofs", module_reboot_before);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/isofs", func_00004E30);
+#endif
+
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/isofs", func_0000433C);
+
+INCLUDE_ASM("nonmatchings/isofs", func_0000450C);
 #endif
 
 #if FW_VERSION == 271
@@ -914,7 +1019,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00005010);
 INCLUDE_ASM("nonmatchings/isofs", func_00005250);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/isofs", func_00005340);
 #endif
 
@@ -930,7 +1035,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00005400);
 INCLUDE_ASM("nonmatchings/isofs", func_00005878);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 s32 func_000054D4(s32 arg0) {
     return __builtin_allegrex_min(sceUmdMan_driver_BF8AED79(0x20, &func_00004614, arg0), 0);
 }
@@ -960,4 +1065,79 @@ s32 func_000059DC(void) {
     sceUmdMan_driver_4217E7F5(0x20);
     return 0;
 }
+#endif
+
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/isofs", func_00004D18);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00004E48);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00004F54);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005170);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005294);
+
+INCLUDE_ASM("nonmatchings/isofs", func_000055E8);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005894);
+
+s32 func_00005908(void *arg0) {
+    s32 var_v0;
+
+    var_v0 = 0x80010016;
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x8AC) = -1;
+        var_v0 = 0;
+    }
+    return var_v0;
+}
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005928);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005988);
+
+INCLUDE_ASM("nonmatchings/isofs", func_000059EC);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005A50);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005A9C);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005AE8);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005B34);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005B80);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005BCC);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005C18);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005C7C);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005CD4);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005D20);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005D70);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005DC0);
+
+s32 func_00005E10(void) {
+    return 0x80010086;
+}
+
+void func_00005E1C(s32 arg0, void *arg1, u32 arg2) {
+    sceIoDevctl(arg0 + 0x20, 0x01E18035, arg1, arg2, NULL, 0U);
+}
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005E50);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005EC0);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_000063EC);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_000063F0);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_0000641C);
 #endif

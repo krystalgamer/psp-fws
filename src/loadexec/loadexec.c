@@ -6,7 +6,7 @@
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002B4C);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 201 || FW_VERSION == 280
 INCLUDE_ASM("nonmatchings/loadexec", func_00000000);
 #endif
 
@@ -36,7 +36,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_000005F0);
 INCLUDE_ASM("nonmatchings/loadexec", func_0000083C);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002D04);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00000000);
@@ -46,7 +46,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00000000);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002F94);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/loadexec", func_000001C4);
 #endif
 
@@ -56,7 +56,7 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002FC4);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002FE4);
 #endif
 
-#if FW_VERSION >= 270
+#if FW_VERSION >= 270 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/loadexec", func_00000640);
 #endif
 
@@ -64,7 +64,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00000640);
 INCLUDE_ASM("nonmatchings/loadexec", func_000005F4);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/loadexec", func_000009E8);
 #endif
 
@@ -72,7 +72,9 @@ INCLUDE_ASM("nonmatchings/loadexec", func_000009E8);
 INCLUDE_ASM("nonmatchings/loadexec", func_00000B0C);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00000BD8);
-#else
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/loadexec", func_00000AD0);
 #endif
 
@@ -118,7 +120,7 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002B54);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002B88);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 280)
 INCLUDE_ASM("nonmatchings/loadexec", func_00000EB0);
 #endif
 
@@ -146,7 +148,7 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_000031DC);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00003098);
 #endif
 
-#if FW_VERSION >= 270
+#if FW_VERSION >= 270 && FW_VERSION < 280
 INCLUDE_RODATA("nonmatchings/loadexec", D_00003204);
 #endif
 
@@ -438,7 +440,11 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_11412288);
 
 INCLUDE_ASM("nonmatchings/loadexec", syslib_D3744BE0);
 
-#if FW_VERSION == 260 || FW_VERSION == 271
+#if FW_VERSION == 280
+INCLUDE_RODATA("nonmatchings/loadexec", D_00001F7C);
+#endif
+
+#if FW_VERSION == 260 || FW_VERSION >= 271
 INCLUDE_RODATA("nonmatchings/loadexec", D_00003098);
 #endif
 
@@ -446,9 +452,11 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00003098);
 INCLUDE_RODATA("nonmatchings/loadexec", D_0000309C);
 #endif
 
-#if FW_VERSION >= 260
+#if FW_VERSION >= 260 && FW_VERSION < 280
 INCLUDE_RODATA("nonmatchings/loadexec", D_000030A4);
+#endif
 
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/loadexec", func_00001BD0);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00001C94);

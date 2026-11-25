@@ -21,7 +21,7 @@ INCLUDE_ASM("nonmatchings/init", InitForKernel_CE88E870);
 INCLUDE_ASM("nonmatchings/init", func_000000A8);
 #endif
 
-#if FW_VERSION >= 270
+#if FW_VERSION >= 270 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/init", func_000004B8);
 #endif
 
@@ -201,13 +201,15 @@ s32 InitForKernel_FD0F25AD(void) {
 }
 #endif
 
-#if FW_VERSION >= 270
+#if FW_VERSION >= 270 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/init", func_00000E1C);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/init", func_00000E40);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/init", syslib_D3744BE0);
 #endif
 
@@ -231,7 +233,13 @@ INCLUDE_ASM("nonmatchings/init", func_00000FCC);
 INCLUDE_ASM("nonmatchings/init", InitForKernel_A6E71B93);
 
 INCLUDE_ASM("nonmatchings/init", InitForKernel_9F9AE99C);
+#endif
 
+#if FW_VERSION == 280
+INCLUDE_ASM("nonmatchings/init", func_000002C8);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/init", func_00001078);
 
 INCLUDE_ASM("nonmatchings/init", func_000011D0);
@@ -239,6 +247,21 @@ INCLUDE_ASM("nonmatchings/init", func_000011D0);
 INCLUDE_ASM("nonmatchings/init", func_000012E0);
 
 INCLUDE_ASM("nonmatchings/init", func_00001430);
+#endif
+
+#if FW_VERSION == 280
+s32 func_00001208(void) {
+    s32 temp_s0;
+
+    SysMemForKernel_A2A65F0E(1, 0);
+    SysMemForKernel_A2A65F0E(5, 0);
+    sceKernelVolatileMemUnlock(0);
+    temp_s0 = SysMemForKernel_A2A65F0E(2, 0);
+    SysMemForKernel_A2A65F0E(8, 0);
+    SysMemForKernel_A2A65F0E(0xA, 0);
+    memset(0x80010000, 0, 0x4000);
+    return temp_s0;
+}
 #endif
 
 #if FW_VERSION >= 260
