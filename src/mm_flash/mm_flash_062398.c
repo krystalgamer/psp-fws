@@ -659,13 +659,23 @@ INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE5C4);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE5D0);
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE58C);
+
+INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE7EC);
+
+INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE814);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE2DC);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE53C);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE564);
-#else
+#endif
+
+#if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE5DC);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE83C);

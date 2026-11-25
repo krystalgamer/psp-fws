@@ -29,6 +29,7 @@ INCLUDE_ASM("nonmatchings/meaudio", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/meaudio", func_000007B8);
 
+#if FW_VERSION == 302
 void sceAudioOutput(void) {
 }
 
@@ -109,5 +110,6 @@ void sceAudio_E9D97901(void) {
 
 void sceAudio_41EFADE7(void) {
 }
+#endif
 
 INCLUDE_RODATA("nonmatchings/meaudio", D_00000EE0);

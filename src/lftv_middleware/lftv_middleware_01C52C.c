@@ -187,7 +187,7 @@ void func_0001D00C(struct Unk_func_0001D00C_0 *arg0, s32 arg1, s32 arg2) {
     }
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_00019B90);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_00019D50);
@@ -284,11 +284,15 @@ s32 func_0001D4D0(s32 arg0, struct Unk_func_0001D4D0_1 *arg1) {
     return 0;
 }
 
-#if FW_VERSION < 303
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001D2F4);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_00038B88);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001A0F0);
 #endif
 

@@ -282,6 +282,12 @@ INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00090648);
 
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00090730);
 
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_000907C8);
+
+INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_0009080C);
+#endif
+
 #if FW_VERSION == 340
 void func_000907D8(struct Unk_func_000907D8_0 *arg0) {
     s32 temp_v1;
@@ -431,7 +437,7 @@ void func_00091024(void) {
 void func_00091040(void) {
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00091048);
 #else
 void func_00091048(void) {
@@ -868,9 +874,15 @@ INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00093C60);
 
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00093CA4);
 
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00093D14);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00093C74);
-#else
+#endif
+
+#if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00093D24);
 #endif
 
@@ -971,7 +983,7 @@ INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00095494);
 void func_000956AC(void) {
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_000954C4);
 #else
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_000956B4);
@@ -981,7 +993,7 @@ INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00095804);
 
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00095B7C);
 
-#if FW_VERSION == 271
+#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00095DD4);
 #else
 s32 func_00095DD4(void) {

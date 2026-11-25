@@ -40,7 +40,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C00D873B);
 
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_00001F8C);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_1C6A60E1);
 #endif
 
@@ -200,7 +200,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00001588);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001624);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002A64);
 #endif
 
@@ -270,7 +270,7 @@ INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002048);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_47DB48C2);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/me_wrapper", func_0000210C);
 #endif
 

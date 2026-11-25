@@ -31,7 +31,7 @@ s32 sceVshLftvMw_C76755BE(void) {
     return 0;
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_0001A8", func_00000300);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0001A8", func_00000378);
@@ -87,7 +87,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_0001A8", func_00000F34);
 INCLUDE_ASM("nonmatchings/lftv_middleware_0001A8", func_000010EC);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_0001A8", func_000011B0);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0001A8", func_00001274);

@@ -1555,7 +1555,7 @@ s32 func_000084A0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/umdman", func_000083FC);
 #endif
 
@@ -2208,7 +2208,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_00009FF4);
 INCLUDE_RODATA("nonmatchings/umdman", D_000119A8);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/umdman", func_00009B2C);
 #endif
 
@@ -2224,7 +2224,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_0000A3F0);
 INCLUDE_ASM("nonmatchings/umdman", func_0000A4E4);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/umdman", func_00009C3C);
 #endif
 
@@ -2929,7 +2929,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_0000AF50);
 INCLUDE_ASM("nonmatchings/umdman", func_0000B0E0);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 void func_0000B0E0(void) {
     s32 temp_s0;
 

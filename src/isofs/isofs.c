@@ -12,7 +12,7 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005EA8);
 
 INCLUDE_ASM("nonmatchings/isofs", func_000001B8);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_00000250);
 #endif
 
@@ -105,7 +105,7 @@ s32 func_00000494(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/isofs", func_00000440);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 s32 func_00000440(struct Unk_func_00000440_0 *arg0) {
     s32 var_s1;
     s32 var_s2;
@@ -166,7 +166,7 @@ s32 func_00000440(struct Unk_func_00000440_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1) {
     func_000007FC(M2C_FIELD(arg0, s32 *, 0x894), arg1);
     return 0;
@@ -341,7 +341,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00000FCC);
 INCLUDE_ASM("nonmatchings/isofs", func_000010AC);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_000010A0);
 
 INCLUDE_ASM("nonmatchings/isofs", func_000012F0);
@@ -399,7 +399,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00001778);
 INCLUDE_ASM("nonmatchings/isofs", func_00001A4C);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 s32 func_00001A4C(void *arg0) {
     s32 temp_a0;
     s32 temp_v1;
@@ -496,7 +496,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00001F44);
 INCLUDE_ASM("nonmatchings/isofs", func_00002024);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_000020FC);
 #endif
 
@@ -531,7 +531,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00003E30);
 INCLUDE_ASM("nonmatchings/isofs", func_000023A4);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_000022CC);
 #endif
 
@@ -684,7 +684,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00002E28);
 INCLUDE_ASM("nonmatchings/isofs", func_00002FA0);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_000027B0);
 #endif
 
@@ -902,7 +902,7 @@ s32 func_00007700(void) {
 }
 #endif
 
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION == 280
+#if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", module_reboot_before);
 #endif
 
@@ -981,7 +981,7 @@ s32 func_00004DB0(void) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_000042BC);
 
 s32 func_00002D7C(void) {
@@ -997,7 +997,7 @@ INCLUDE_ASM("nonmatchings/isofs", module_reboot_before);
 INCLUDE_ASM("nonmatchings/isofs", func_00004E30);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_0000433C);
 
 INCLUDE_ASM("nonmatchings/isofs", func_0000450C);
@@ -1067,7 +1067,7 @@ s32 func_000059DC(void) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_00004D18);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00004E48);

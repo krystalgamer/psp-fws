@@ -32,7 +32,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_038348", func_0003840C);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_038348", func_00038580);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_038348", func_000344E8);
 #endif
 
@@ -52,6 +52,6 @@ void func_00038854(s32 arg0) {
     func_00039B40(arg0 + 0x10);
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_038348", func_00034628);
 #endif

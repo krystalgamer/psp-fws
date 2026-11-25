@@ -97,7 +97,7 @@ u16 func_0003CACC(struct Unk_func_0003CACC_0 *arg0) {
     return var_v1;
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_00037C90);
 #endif
 

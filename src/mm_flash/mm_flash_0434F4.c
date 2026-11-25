@@ -169,9 +169,15 @@ INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD908);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD910);
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD8C8_v282);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD618);
-#else
+#endif
+
+#if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD918);
 #endif
 
@@ -277,7 +283,7 @@ INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD978);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD980);
 
-#if FW_VERSION == 271
+#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mm_flash_0434F4", func_00046628);
 #else
 void func_00046628(s32 arg0) {

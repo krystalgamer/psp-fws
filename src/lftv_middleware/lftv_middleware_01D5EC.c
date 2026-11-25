@@ -51,7 +51,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001DF28);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001DF84);
 
-#if FW_VERSION < 303
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_000396A0);
 #endif
 
@@ -120,7 +120,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E784);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E7C4);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001B310);
 #endif
 
@@ -132,9 +132,15 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003A0F4);
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E838);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001B38C);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_00054B24);
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0005002C);
 #endif
 
@@ -188,7 +194,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001ED48);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001ED90);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003AA58);
 #endif
 
@@ -238,7 +244,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001F5A4);
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003B514);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001C2B4);
 #endif
 
@@ -248,7 +254,13 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003B614);
 
 #if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003B7D8);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001F7E8);
+#endif
+
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003BAB4);
 #else
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001F744);

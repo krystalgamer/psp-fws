@@ -90,6 +90,12 @@ void func_00000620(void) {
 }
 #endif
 
+#if FW_VERSION == 282
+void func_0000063C_v282(void) {
+    sceKernelLibcGettimeofday();
+}
+#endif
+
 #if FW_VERSION == 280
 void func_0000063C_v280(void) {
     sceKernelLibcGettimeofday();
@@ -182,7 +188,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000006E0);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000006B8);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00000738);
 #endif
 
@@ -216,7 +222,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005AF4C);
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005AF5C);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005B464);
 #endif
 
@@ -242,7 +248,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00000360);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00000C6C);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 void func_00000458(void) {
     struct Unk_ret_func_00003D10 *temp_v0;
 
@@ -318,7 +324,7 @@ s32 module_stop(void) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00000E94);
 #endif
 
@@ -336,7 +342,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00000598);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00000890);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 void func_00000890(s32 arg0) {
     func_00011618(1, arg0 * 2);
 }
@@ -368,7 +374,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005146C);
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_00051484);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005CEFC);
 #endif
 
@@ -457,7 +463,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", sceHVUI_Module_3ADFED08);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", sceHVUI_Module_EBE0E82B);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 sceHVUI_Module_55C70B0A(s32 arg0) {
     s32 var_a2;
     struct Unk_ret_func_00003D10 *temp_v0;
@@ -545,7 +551,7 @@ s32 sceHVUI_Module_55C70B0A(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 void func_00002298(void) {
     s32 temp_a0;
     s32 temp_v0_3;
@@ -667,7 +673,7 @@ void func_00002298(void) {
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", sceHVUI_Module_789FBBA8);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 sceHVUI_Module_260E54A0(void) {
     s32 var_a0;
 
@@ -799,7 +805,7 @@ void sceHVUI_Module_F77A9C17(s32 arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", sceHVUI_Module_2797B2D1);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00002DCC);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00002ECC);
@@ -882,7 +888,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00003AC4);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", module_reboot_before);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 module_reboot_before(void) {
     s32 temp_a0;
     s32 temp_a0_2;
@@ -1093,6 +1099,10 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0000427C);
 s32 func_000042A4(void) {
     return D_00063554 == 0;
 }
+
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00003FEC_v282);
+#endif
 
 #if FW_VERSION == 280
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00003FEC_v280);
@@ -1340,7 +1350,7 @@ s32 func_00004B3C(void) {
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00004B4C);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 void func_000048EC(void) {
     if (D_00061A28 != 0) {
         func_000461EC(D_00061A28);
@@ -1402,7 +1412,7 @@ s32 func_00004CBC(s32 *arg0) {
     return var_a2;
 }
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 void func_00004700(s32 arg0) {
     struct Unk_ret_func_00003D10 *temp_v0;
 
@@ -1679,11 +1689,19 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00005E2C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00005EB0);
 
+#if FW_VERSION == 282
+void func_00005C0C_v282(s32 arg0, s32 arg1) {
+    func_000084BC(arg0, arg1);
+}
+#endif
+
 #if FW_VERSION == 280
 void func_00005C0C_v280(s32 arg0, s32 arg1) {
     func_000084BC(arg0, arg1);
 }
+#endif
 
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00005C28);
 #endif
 
@@ -1789,7 +1807,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000071FC);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00006F2C);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00007434);
 #endif
 
@@ -1862,7 +1880,7 @@ void func_0000873C(void) {
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0000875C);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000084BC);
 #endif
 
@@ -2788,7 +2806,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000112E8);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00011418);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00011264);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000112E0);
@@ -2813,7 +2831,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000115B8);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00011618);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_00011390(void *arg0, s32 arg1) {
     sceHVSlim_Library_D611E938(arg0, 0, 0x54);
     M2C_FIELD(arg0, s32 *, 4) = arg1;
@@ -2880,7 +2898,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00011724);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0001178C);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 void func_00011518(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x18) != 0) {
         func_0001178C(arg0);
@@ -2904,7 +2922,7 @@ void func_00011870(s16 *arg0, s16 arg1) {
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00011878);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_000111A0(s32 arg0, s32 arg1) {
     s32 var_v1;
 
@@ -2933,7 +2951,7 @@ s32 func_000111A0(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00011204);
 #endif
 
@@ -2954,7 +2972,7 @@ s32 func_00011204(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00011278);
 #endif
 
@@ -2975,7 +2993,7 @@ s32 func_00011278(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_000112DC(s32 arg0) {
     s32 var_v1;
 
@@ -3004,7 +3022,7 @@ s32 func_000112DC(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00011330);
 #endif
 
@@ -3025,7 +3043,7 @@ s32 func_00011330(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000113B4);
 #endif
 
@@ -3174,7 +3192,7 @@ s32 func_00012020(struct Unk_func_00012020_0 *arg0, struct Unk_func_00012020_1 *
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00012068);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_00012068(struct Unk_func_00012068_0 *arg0) {
     s32 var_v1;
 
@@ -3223,7 +3241,7 @@ s32 func_00012068(struct Unk_func_00012068_0 *arg0) {
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000120B4);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_000120B4(struct Unk_func_000120B4_0 *arg0) {
     s32 var_v1;
 
@@ -3364,7 +3382,7 @@ s32 func_000126B4(struct Unk_func_000126B4_0 *arg0, struct Unk_func_000126B4_1 *
     return var_v1;
 }
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0001244C);
 
 void func_00012484(void) {
@@ -6413,7 +6431,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00025960);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00025AC4);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_00025BD8(s32 arg0, struct Unk_func_00025BD8_1 *arg1) {
     struct Unk_ret_func_00003D10 *temp_s1;
     struct Unk_ret_sceHVSlim_Library_896E55F6 *temp_v0;
@@ -6497,7 +6515,7 @@ s32 func_00025BD8(s32 arg0, struct Unk_func_00025BD8_1 *arg1) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_00025C84(s32 arg0, struct Unk_func_00025C84_1 *arg1) {
     struct Unk_ret_func_00003D10 *temp_s1;
     struct Unk_ret_sceHVSlim_Library_896E55F6 *temp_v0;
@@ -6577,7 +6595,7 @@ s32 func_00025C84(s32 arg0, struct Unk_func_00025C84_1 *arg1) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_00025D24(s32 arg0, struct Unk_func_00025D24_1 *arg1) {
     struct Unk_ret_func_00003D10 *temp_s1;
     struct Unk_ret_sceHVSlim_Library_896E55F6 *temp_v0;
@@ -6667,7 +6685,7 @@ s32 func_00026108(void) {
     return 0;
 }
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_00026110(s32 arg0) {
     s32 temp_v0;
     struct Unk_ret_func_00003D10 *temp_s1;
@@ -7352,7 +7370,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000290F4);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0002759C);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 void func_00028928(s32 arg0, s32 arg1) {
     s32 temp_v0_2;
     struct Unk_ret_sceHVSlim_Library_896E55F6 *temp_v0;
@@ -7418,7 +7436,7 @@ void func_00028928(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 void func_000289BC(s32 arg0) {
     void *sp0;
     s32 sp4;
@@ -7529,7 +7547,7 @@ void func_0002940C(void *arg0) {
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0002A19C);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_0002A1EC(s32 arg0) {
     s32 temp_s0;
     s32 var_s2;
@@ -8039,6 +8057,12 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EE74);
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EE7C);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EE84);
+
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005D284);
+
+INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005D2B4);
+#endif
 
 #if FW_VERSION == 280
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005D404);
@@ -8794,9 +8818,15 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00032124);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0003219C);
 
-#if FW_VERSION >= 271 && FW_VERSION < 303
-INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000314EC);
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00031B24);
+#endif
 
+#if FW_VERSION >= 271 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000314EC);
+#endif
+
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00031A58);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00031AE0);
@@ -9077,7 +9107,7 @@ s32 func_0003346C(s32 arg0) {
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000334F0);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 s32 func_000334F0(s32 arg0) {
     s32 temp_v0;
     s32 temp_v1;
@@ -11725,7 +11755,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000447B4);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00042E98);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0004348C);
 #endif
 
@@ -11998,7 +12028,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00047270);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000474A4);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000461EC);
 #endif
 
@@ -13153,7 +13183,7 @@ void func_00053D38(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00053DC4);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00053E88);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00053FF8);
@@ -13179,7 +13209,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0004E7D8);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005472C);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005479C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00054804);
@@ -13201,7 +13231,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0004A97C);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00054A44);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00054A9C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00054AFC);
@@ -13221,7 +13251,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_00058A54);
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0006041C);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_00060438);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00054BF0);
@@ -13237,7 +13267,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0004ACF0);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00054DAC);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00054F94);
 #endif
 
@@ -13265,7 +13295,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00055378);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000558E8);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00055BFC);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00055CC4);
@@ -13317,7 +13347,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0004CC14);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00056CF0);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00056D04);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00056DE0);
@@ -13355,7 +13385,7 @@ void func_00056F2C(void) {
 }
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00056F48);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00056F94);
@@ -13369,7 +13399,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0004CB64);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00057374);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005739C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000574C0);
@@ -13403,7 +13433,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00057EB8);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000580DC);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00058150);
 #endif
 
@@ -13419,7 +13449,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0004DD00);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00058168);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00058288);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00058384);
@@ -13447,7 +13477,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0004E180);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000585FC);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00058878);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000589B4);
@@ -13564,7 +13594,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00059E08);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005A05C);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005A424);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005A480);
@@ -13592,7 +13622,7 @@ void func_0005A5FC(struct Unk_func_0005A5FC_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005A62C);
 #endif
 
@@ -13604,7 +13634,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0004FEB0);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005A694);
 #endif
 
-#if FW_VERSION != 280
+#if FW_VERSION < 280 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005A750);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005A7AC);
@@ -13963,7 +13993,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00053F78);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000540E8);
 #endif
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0004EC24);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005E87C);
@@ -14042,9 +14072,17 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00052978);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000529E4);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00052A18);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00052AF4);
+#endif
+
+#if FW_VERSION == 280
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00052C7C_v280);
+#endif
 
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00052D08);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_00052D78);
@@ -14132,9 +14170,17 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000552CC);
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000552E0);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000553BC);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EC60_v282);
+#endif
+
+#if FW_VERSION == 280
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EDE0_v280);
+#endif
 
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EDE8);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_000553D0);
@@ -14296,7 +14342,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005B8A4);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_ui", func_0005B9B8);
 
-#if FW_VERSION == 280
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EE0C);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EE10);
@@ -14306,9 +14352,17 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EE20);
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EF38);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EF3C);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EDC0);
+#endif
+
+#if FW_VERSION == 280
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EF40_v280);
+#endif
 
+#if FW_VERSION >= 280 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/htmlviewer_ui", D_0005EF44);
 #endif
 

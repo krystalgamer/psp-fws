@@ -14,7 +14,7 @@ void func_00017EDC(struct Unk_func_00017EDC_0 *arg0) {
     }
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mm_flash_017884", func_00017F20);
 #else
 void func_00017F20(struct Unk_func_00017F20_0 *arg0) {

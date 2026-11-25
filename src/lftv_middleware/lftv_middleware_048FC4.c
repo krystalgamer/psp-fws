@@ -29,7 +29,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_048FC4", func_000494EC);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_048FC4", func_00049590);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_048FC4", func_00044758);
 #endif
 

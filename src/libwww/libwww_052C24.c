@@ -612,9 +612,15 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CFD60);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CFD90);
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF654);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF1B4_v271);
+#endif
 
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF234);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF25C);
@@ -664,17 +670,39 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CFF64);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0038);
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF950);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF4B0_v271);
+#endif
 
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF52C);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF9FC);
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF55C_v271);
+#endif
 
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF5D8);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CFAA8);
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF608_v271);
+#endif
 
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF648);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CF688);
@@ -838,7 +866,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0808);
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D2D98);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CFC28);
 #endif
 
@@ -856,7 +884,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D08A4);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D08B4);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CFCB8);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CFD34);
@@ -912,7 +940,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0A10);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0A34);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CFE2C);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000CFEA0);
@@ -1010,7 +1038,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0E10);
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D3654);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0F44);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D3644);
@@ -1080,7 +1108,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1750);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1764);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0B5C);
 #endif
 
@@ -1182,7 +1210,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1BF8);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1C00);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0FFC);
 #endif
 
@@ -1258,7 +1286,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1E1C);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1E2C);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1224);
 #endif
 
@@ -1280,7 +1308,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1EEC);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1EF4);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D12EC);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1370);
@@ -1314,7 +1342,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D2038);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D2040);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D143C);
 #endif
 
@@ -2581,7 +2609,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0005DB08);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0005DBAC);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0005D6F8);
 #endif
 
@@ -2599,7 +2627,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0005E3DC);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0005E61C);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0005E178);
 #endif
 
@@ -2621,7 +2649,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0005EBC4);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0005EDEC);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0005E924);
 #endif
 
@@ -2719,7 +2747,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00062EB8);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00062F3C);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000629F8);
 #endif
 
@@ -2989,7 +3017,7 @@ s32 func_000640E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00064154);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00063CEC);
 #endif
 
@@ -3007,7 +3035,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00064408);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00064614);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0006424C);
 #endif
 
@@ -3021,7 +3049,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00064814);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0006497C);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00064498);
 #endif
 
@@ -3045,7 +3073,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000657DC);
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00065984);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000654A8);
 #endif
 
@@ -3118,7 +3146,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00066C38);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00066CD8);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00066824);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00066A94);
@@ -3255,7 +3283,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0006A7B4);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0006A8EC);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0006A3B8);
 #endif
 
@@ -3307,7 +3335,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0006C228);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0006C408);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0006C0E8);
 #endif
 
@@ -3414,7 +3442,7 @@ void func_0007057C(struct Unk_func_0007057C_0 *arg0) {
     func_000702F4();
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0006FFE8);
 #endif
 
@@ -3475,7 +3503,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00071F58);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000720A8);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00071D3C);
 #endif
 
@@ -3489,7 +3517,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007230C);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_317876F7);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00071FF8);
 #endif
 
@@ -3517,7 +3545,7 @@ void func_000728B0(struct Unk_func_000728B0_0 *arg0, s32 arg1, struct Unk_func_0
     func_00073E24((s32) arg0, (s32) arg2);
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007231C);
 #endif
 
@@ -3533,7 +3561,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00072B4C);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00072C68);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00072724);
 #endif
 
@@ -3683,7 +3711,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00077F28);
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00079918);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00077B5C);
 #endif
 
@@ -3891,7 +3919,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007D7C8);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007D874);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007D354);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007D3B4);
@@ -3937,7 +3965,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_63E5C01F);
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_2D3A56C3);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DCB4);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DD14);
@@ -3951,7 +3979,7 @@ void sceHVWWW_Library_2D3A56C3(void *arg0, M2C_UNK arg1) {
 }
 #endif
 
-#if FW_VERSION != 271
+#if FW_VERSION < 271 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DCB4);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DD14);
@@ -3967,9 +3995,15 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DD68);
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DDC4);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007D814);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007D874_v282);
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007D874_v271);
 #endif
 
@@ -3997,7 +4031,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DE98);
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DEF4);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DF14);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DF74);
@@ -4011,7 +4045,7 @@ void func_0007DEF4(void *arg0, M2C_UNK arg1) {
 }
 #endif
 
-#if FW_VERSION != 271
+#if FW_VERSION < 271 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DF14);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0007DF74);
@@ -4299,7 +4333,7 @@ void func_000848B4(void) {
     func_00084270();
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00084300);
 #endif
 
@@ -4317,7 +4351,7 @@ s32 func_00084CB0(void) {
     return 1;
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000846E8);
 #endif
 
@@ -4365,7 +4399,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000872B0);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0008764C);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0008735C);
 #endif
 
@@ -4387,7 +4421,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00088504);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000886E0);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000886CC);
 #endif
 
@@ -4401,7 +4435,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00088C9C);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00089030);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00088FFC);
 #endif
 
@@ -4483,7 +4517,7 @@ void func_0008BF2C(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0008BF48);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0008BA3C);
 #endif
 
@@ -4541,7 +4575,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0008FCF4);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0008FEC4);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0008FAC4);
 #endif
 
@@ -4563,7 +4597,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000911C4);
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000920EC);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00091BB0);
 #endif
 
@@ -4669,7 +4703,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00095834);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00095948);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000954C4);
 #endif
 
@@ -4679,7 +4713,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_00095A94);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00095C20);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_00095F44);
 #endif
 
@@ -4979,7 +5013,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0009BAA4);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0009BC68);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0009B714);
 #endif
 
@@ -5030,7 +5064,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_0009C66C);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0009CD18);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0009CA54);
 #endif
 
@@ -5052,7 +5086,7 @@ s32 func_0009D154(struct Unk_func_0009D154_0 *arg0) {
     return 1;
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_0009CBA4);
 #endif
 
@@ -6772,7 +6806,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000B4498);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000B4724);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000B4394);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000B4424);
@@ -6949,7 +6983,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000B8164);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000B81B4);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000B8030);
 #endif
 
@@ -7508,7 +7542,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_BF5437BC);
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C1B04);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000BE838);
 #endif
 
@@ -7647,7 +7681,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000BF474);
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_27C4AC1F);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_2E58A543);
 #endif
 
@@ -8121,7 +8155,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000BF5FC);
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_0D438DC5);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_FC93BCB3);
 #endif
 
@@ -8147,7 +8181,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_3D690F27);
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_E4A7EBE6);
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_D4BBE8DC);
 #endif
 
@@ -8246,7 +8280,7 @@ void func_000BFC7C(void) {
 void func_000BFC84(void) {
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_AFE281B5);
 #endif
 
@@ -8264,7 +8298,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000BFCA0);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000BFD5C);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_53916AC5);
 #endif
 
@@ -8287,7 +8321,7 @@ void sceHVWWW_Library_53916AC5(struct Unk_sceHVWWW_Library_53916AC5_0 *arg0, s32
 }
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_284DC37B);
 #endif
 
@@ -8297,7 +8331,7 @@ void sceHVWWW_Library_284DC37B(struct Unk_sceHVWWW_Library_284DC37B_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_6E00402C);
 #endif
 
@@ -8351,7 +8385,7 @@ void func_000C00F0(struct Unk_func_000C00C0_0 *arg0, s32 arg1, s32 arg2, s32 arg
 }
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_853AF853);
 #endif
 
@@ -8361,7 +8395,7 @@ void sceHVWWW_Library_853AF853(struct Unk_func_000C00C0_0 *arg0, s32 arg1, s32 a
 }
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_8E3D33E7);
 #endif
 
@@ -8371,7 +8405,7 @@ void sceHVWWW_Library_8E3D33E7(struct Unk_func_000C00C0_0 *arg0, s32 arg1, s32 a
 }
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_6E222D75);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_24AAD78B);
@@ -8527,15 +8561,19 @@ void func_000C0EB4(void) {
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_B46B8FD9);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0A70);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0A78);
+#endif
 
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0A80);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0AA8);
+#endif
 
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0AB0);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0AB8);
@@ -8549,13 +8587,37 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0AD0);
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0AD8);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0B18);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0AF0);
+
+INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0B18_v282);
+#endif
+
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0B20);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0B54);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0B90);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000E0B24);
+
+INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000E0B34);
+
+INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0C6C_v282);
+
+INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0D64);
+
+INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0DB4);
+
+INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0E5C);
+#endif
+
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0C6C);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C0C8C);
@@ -8825,7 +8887,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C51BC);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C5338);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C48EC);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C4964);
@@ -8857,7 +8919,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C593C);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C5A0C);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C4F08);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C4F78);
@@ -8920,7 +8982,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C6380);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C64CC);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", sceHVWWW_Library_88A5B88D);
 #endif
 
@@ -8981,7 +9043,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C7780);
 
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C7814);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C6D78);
 #else
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C7924);

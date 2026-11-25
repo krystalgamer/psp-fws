@@ -8,3 +8,5 @@ sceAmctrl_driver_1CCB66D2 = 0x00000E2C; // type:func
 sceAmctrl_driver_0785C974 = 0x000010D4; // type:func
 sceAmctrl_driver_9951C50F = 0x000011D0; // type:func
 semaphore_4C537C72 = 0x000011F8; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

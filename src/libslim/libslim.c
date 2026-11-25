@@ -813,7 +813,7 @@ INCLUDE_ASM("nonmatchings/libslim", sceHVSlim_Library_6B15F29F);
 
 INCLUDE_ASM("nonmatchings/libslim", func_00005F60);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 303
 s32 func_00006054(struct Unk_func_00006054_0 *arg0, s32 arg1) {
     s32 var_v1;
 

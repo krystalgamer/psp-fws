@@ -68,3 +68,23 @@ sceKernelIcacheInvalidateAll = 0x00001B58; // type:func
 memlmd_6A811217 = 0x00001B60; // type:func
 memlmd_D1732BE4 = 0x00001B68; // type:func
 sceSuspendForKernel_98A1D061 = 0x00001B70; // type:func
+// shared names (tools/add_version.py) begin
+D_000031DC = 0x00001F5C; // rom:0x1FFC
+D_00001F7C = 0x00001F80; // rom:0x2020
+D_00003098 = 0x00001FA8; // rom:0x2048
+D_000101E0 = 0x0000D4D0;
+D_000101E4 = 0x0000D4D4;
+D_0000FB78 = 0x0000D4D8;
+func_00000FC0 = 0x000000FC; // type:func rom:0x19C
+func_00001110 = 0x0000024C; // type:func rom:0x2EC
+func_00001BD0 = 0x00000D48; // type:func rom:0xDE8
+func_00001C94 = 0x00000E0C; // type:func rom:0xEAC
+func_00001DB0 = 0x00000F1C; // type:func rom:0xFBC
+func_00001FA8 = 0x00000FBC; // type:func rom:0x105C
+func_00002190 = 0x00001188; // type:func rom:0x1228
+func_00002288 = 0x000012A8; // type:func rom:0x1348
+func_00001C70 = 0x000013D8; // type:func rom:0x1478
+func_00001DF4 = 0x000013F8; // type:func rom:0x1498
+func_00002700 = 0x0000150C; // type:func rom:0x15AC
+func_00002304 = 0x0000159C; // type:func rom:0x163C
+// shared names (tools/add_version.py) end

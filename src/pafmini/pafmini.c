@@ -120,174 +120,42 @@ void scePaf_CFAF88AB(void) {
 }
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_D34D0B82);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_D34D0B82(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_8CDEDC6F);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_8CDEDC6F(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_22B0D7D8);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_22B0D7D8(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_CA8CDF32);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_CA8CDF32(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_FCABD0E7);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_FCABD0E7(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_EE10AEF1);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_EE10AEF1(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_D99BEC81);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_D99BEC81(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_4D4805AF);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_4D4805AF(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_28F8DE83);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_28F8DE83(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_B1F587EF);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_B1F587EF(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_8C1ED07B);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_8C1ED07B(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_04EF78CD);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_04EF78CD(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_75A553A2);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_75A553A2(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_F4404EAF);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_F4404EAF(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_D63D4561);
-#endif
 
-#if FW_VERSION == 152
-void scePaf_D63D4561(void) {
-
-}
-#endif
-
-#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_81667058);
 #endif
 
-#if FW_VERSION == 152
-void scePaf_81667058(void) {
-
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_149CDEB9);
-#endif
-
-#if FW_VERSION == 152
-void scePaf_149CDEB9(void) {
-
-}
 #endif
 
 #if FW_VERSION == 100

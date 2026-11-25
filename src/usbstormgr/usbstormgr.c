@@ -276,7 +276,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_0000363C);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000036A4);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 340
 void func_00003610(void) {
     M2C_VFIELD(&D_00005170, s32, 0x74) = -1;
     M2C_VFIELD(&D_00005170, s32, 0x50) = 0;

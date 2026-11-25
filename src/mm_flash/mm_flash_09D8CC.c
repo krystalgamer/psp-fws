@@ -160,6 +160,14 @@ void func_0009EC94(s32 arg0) {
     }
 }
 
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/mm_flash_09D8CC", func_0009ECA8);
+
+INCLUDE_ASM("nonmatchings/mm_flash_09D8CC", func_0009ECC8);
+
+INCLUDE_ASM("nonmatchings/mm_flash_09D8CC", func_0009ECE8);
+#endif
+
 #if FW_VERSION == 340
 void func_0009ECC8(struct Unk_func_000907D8_0 *arg0) {
     if (arg0 != NULL) {
