@@ -1270,6 +1270,10 @@ void func_0000AA58(void) {
 
 INCLUDE_ASM("nonmatchings/camera_plugin_001FE8", func_0000AA74);
 
+#if FW_VERSION == 302
+INCLUDE_RODATA("nonmatchings/camera_plugin_001FE8", D_00022168_v302);
+#endif
+
 #if FW_VERSION == 301
 INCLUDE_RODATA("nonmatchings/camera_plugin_001FE8", D_00022168_v301);
 #endif

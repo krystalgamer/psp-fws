@@ -51,7 +51,7 @@ s32 func_000092C8(void) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_0000AA34);
 #endif
 
-#if FW_VERSION == 301
+#if FW_VERSION >= 301
 INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_0000AA5C);
 
 void func_000092D0(void) {

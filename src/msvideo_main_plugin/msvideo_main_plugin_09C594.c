@@ -403,7 +403,7 @@ s32 func_0009F804(s32 *arg0) {
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_09C594", func_0009F83C);
 #endif
 
-#if FW_VERSION == 301
+#if FW_VERSION >= 301 && FW_VERSION < 352
 s32 func_0009F83C(s32 arg0, s32 arg1, s32 *arg2) {
     s32 temp_v0;
     s32 var_v1;
@@ -457,7 +457,7 @@ s32 func_0009F83C(s32 arg0, s32 arg1, s32 *arg2) {
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_09C594", func_0009F8C4);
 #endif
 
-#if FW_VERSION == 301
+#if FW_VERSION >= 301 && FW_VERSION < 352
 void func_0009F8C4(s32 *arg0) {
     s32 temp_s0;
     s32 var_s1;

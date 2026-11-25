@@ -78,6 +78,7 @@ s32 func_000076B4(void);
 void *func_00008318(struct Unk_func_00008318_0 *arg0, struct Unk_func_00008318_1 *arg1);
 s32 func_00008318_v300(void);
 s32 func_00008318_v301(void);
+s32 func_00008318_v302(void);
 void *func_00008334(void *arg0, void *arg1);
 s32 func_00008A24(void);
 s32 func_00008A30(void);

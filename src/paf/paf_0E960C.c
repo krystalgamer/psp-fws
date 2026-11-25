@@ -94,6 +94,13 @@ INCLUDE_ASM("nonmatchings/paf_0E960C", func_0008E964);
 INCLUDE_ASM("nonmatchings/paf_0E960C", scePaf_F60816FE);
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
+#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/paf_0E960C", scePaf_02F6DB7E);
+#endif
+
+#if FW_VERSION == 260
+void scePaf_02F6DB7E(M2C_UNK **arg0) {
+    *arg0 = &D_0019AA20;
+    func_000E49B0((s32) arg0);
+}
 #endif

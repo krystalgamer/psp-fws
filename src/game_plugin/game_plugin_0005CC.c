@@ -22,6 +22,10 @@ void func_00000610(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 }
 #endif
 
+#if FW_VERSION == 302
+INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000664_v302);
+#endif
+
 #if FW_VERSION == 301
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000664_v301);
 #endif

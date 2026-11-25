@@ -79,3 +79,24 @@ sceMeVideo_driver_1C6A60E1 = 0x00003DC8; // type:func
 sceMeVideo_driver_B655AD4E = 0x00003DD0; // type:func
 sceMeVideo_driver_DE2E7E89 = 0x00003DD8; // type:func
 sceMeVideo_driver_E67F4E0A = 0x00003DE0; // type:func
+// shared names (tools/add_version.py) begin
+D_00004034 = 0x000042D4; // rom:0x4374
+D_00004078 = 0x00004318; // rom:0x43B8
+D_00004098 = 0x00004338; // rom:0x43D8
+D_000040B0 = 0x00004350; // rom:0x43F0
+D_000040C4 = 0x00004364; // rom:0x4404
+D_000040E4 = 0x00004384; // rom:0x4424
+D_00004140 = 0x00004400;
+func_00000050 = 0x00000070; // type:func rom:0x110
+func_000012AC = 0x000014A4; // type:func rom:0x1544
+func_00001524 = 0x000016A8; // type:func rom:0x1748
+func_000018F0 = 0x000019FC; // type:func rom:0x1A9C
+func_0000199C = 0x00001AA8; // type:func rom:0x1B48
+func_00001B88 = 0x00001CA4; // type:func rom:0x1D44
+func_0000203C = 0x00002170; // type:func rom:0x2210
+func_00002A38 = 0x00002B7C; // type:func rom:0x2C1C
+func_00002A88 = 0x00002BCC; // type:func rom:0x2C6C
+func_00002AB0 = 0x00002BF4; // type:func rom:0x2C94
+func_000033E8 = 0x000035C0; // type:func rom:0x3660
+D_00004034_v302 = 0x00004034; // rom:0x40D4
+// shared names (tools/add_version.py) end

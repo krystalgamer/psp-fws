@@ -1,4 +1,9 @@
 {
- "funcs": {},
+ "funcs": {
+  "func_00002474": "void func_00002474(void);",
+  "func_00002490": "s32 func_00002490(void);",
+  "sceSemawm_51E51869": "M2C_UNK sceSemawm_51E51869();",
+  "sceSemawm_77C42467": "M2C_UNK sceSemawm_77C42467();"
+ },
  "vars": {}
 }

@@ -17,11 +17,11 @@ void func_00118930(void) {
     sceKernelExitThread(0);
 }
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if FW_VERSION >= 200 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_1188C8", scePaf_5775283A);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 260
 void scePaf_5775283A(struct Unk_scePaf_5775283A_0 *arg0) {
     sceKernelWaitThreadEnd(arg0->unk4, 0);
 }
@@ -33,9 +33,25 @@ INCLUDE_ASM("nonmatchings/paf_1188C8", func_000BF4C8);
 
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_0011896C);
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if FW_VERSION >= 200 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_0011065C);
+#endif
 
+#if FW_VERSION == 260
+s32 func_0011065C(void *arg0) {
+    M2C_FIELD(&D_0019B7DC, s32 *, 0) = (s32) M2C_FIELD(arg0, s32 *, 0);
+    M2C_FIELD(&D_0019B7DC, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 4);
+    M2C_FIELD(&D_0019B7DC, s32 *, 8) = (s32) M2C_FIELD(arg0, s32 *, 8);
+    M2C_FIELD(&D_0019B7DC, s32 *, 0xC) = (s32) M2C_FIELD(arg0, s32 *, 0xC);
+    M2C_FIELD(&D_0019B7DC, s32 *, 0x10) = (s32) M2C_FIELD(arg0, s32 *, 0x10);
+    M2C_FIELD(&D_0019B7DC, s32 *, 0x14) = (s32) M2C_FIELD(arg0, s32 *, 0x14);
+    M2C_FIELD(&D_0019B7DC, s32 *, 0x18) = (s32) M2C_FIELD(arg0, s32 *, 0x18);
+    M2C_FIELD(&D_0019B7DC, s32 *, 0x1C) = (s32) M2C_FIELD(arg0, s32 *, 0x1C);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_001106AC);
 #endif
 

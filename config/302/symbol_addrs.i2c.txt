@@ -31,3 +31,9 @@ sceSysreg_driver_0436B60F = 0x000014BC; // type:func
 sceSysreg_driver_58F47EFD = 0x000014C4; // type:func
 sceSysreg_driver_94B0323C = 0x000014CC; // type:func
 sceSysreg_driver_DC68A93F = 0x000014D4; // type:func
+// shared names (tools/add_version.py) begin
+D_000016E0 = 0x000016D8; // rom:0x1778
+func_00001264 = 0x0000125C; // type:func rom:0x12FC
+func_000012BC = 0x000012B4; // type:func rom:0x1354
+D_000016E0_v302 = 0x000016E0; // rom:0x1780
+// shared names (tools/add_version.py) end

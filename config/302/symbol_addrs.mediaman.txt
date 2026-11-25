@@ -54,3 +54,15 @@ sceKernelCreateEventFlag = 0x00000F38; // type:func
 sceKernelGetThreadmanIdType = 0x00000F40; // type:func
 sceKernelClearEventFlag = 0x00000F48; // type:func
 sceKernelCancelEventFlag = 0x00000F50; // type:func
+// shared names (tools/add_version.py) begin
+D_0000129C = 0x000012E4; // rom:0x1384
+D_000012C0 = 0x00001320;
+D_000012F8 = 0x00001358;
+D_000012FC = 0x0000135C;
+D_00001300 = 0x00001360;
+D_00001304 = 0x00001364;
+D_00001308 = 0x00001368;
+D_00001328 = 0x00001388;
+D_0000132C = 0x0000138C;
+D_000012FC_v302 = 0x000012FC; // rom:0x139C
+// shared names (tools/add_version.py) end

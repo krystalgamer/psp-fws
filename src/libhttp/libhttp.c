@@ -2579,7 +2579,13 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetNetworkErrno);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetNetworkPspError);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetAllHeader);
+#endif
 
+#if FW_VERSION == 302
+INCLUDE_ASM("nonmatchings/libhttp", func_00014444);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00013CE8);
 #endif
 
@@ -2609,7 +2615,13 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_00017684);
 INCLUDE_ASM("nonmatchings/libhttp", func_00014284);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_000147F8);
+#endif
 
+#if FW_VERSION == 302
+INCLUDE_ASM("nonmatchings/libhttp", func_0001524C);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 302
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017794);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_0001779C);
@@ -2641,9 +2653,13 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00015080);
 INCLUDE_ASM("nonmatchings/libhttp", func_000151D4);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_000152A8);
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 302
 INCLUDE_ASM("nonmatchings/libhttp", func_00015324);
+#endif
 
+#if FW_VERSION >= 282
 void func_00015428(void) {
     sceKernelCpuSuspendIntr();
 }

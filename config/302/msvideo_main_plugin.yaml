@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/302/.splat_cache.msvideo_main_plugin
   symbol_addrs_path:
     - config/302/symbol_addrs.msvideo_main_plugin.txt
+    - config/302/func_starts.msvideo_main_plugin.txt
     - tmp/build/302/prx_syms.msvideo_main_plugin.txt
   reloc_addrs_path: [tmp/build/302/reloc_addrs.msvideo_main_plugin.txt]
   asset_path: tmp/assets/302/msvideo_main_plugin
@@ -54,7 +55,39 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - { start: 0xC4, type: prxpad, order: .text }
-      - [0xD0, asm, msvideo_main_plugin]
+      - [0xD0, c, msvideo_main_plugin]
+      - [0xD93C, c, msvideo_main_plugin_00C098]
+      - [0xE1B8, c, msvideo_main_plugin_00C914]
+      - [0xE1C0, c, msvideo_main_plugin_00C91C]
+      - [0xF854, c, msvideo_main_plugin_00DFD4]
+      - [0x12130, c, msvideo_main_plugin_010508]
+      - [0x12208, c, msvideo_main_plugin_0105E0]
+      - [0x2145C, c, msvideo_main_plugin_01F970]
+      - [0x21B98, c, msvideo_main_plugin_020034]
+      - [0x28D34, c, msvideo_main_plugin_0274D4]
+      - [0x29518, c, msvideo_main_plugin_027C8C]
+      - [0x313D0, c, msvideo_main_plugin_02F8F8]
+      - [0x314E0, c, msvideo_main_plugin_02FA08]
+      - [0x45128, c, msvideo_main_plugin_044564]
+      - [0x45A24, c, msvideo_main_plugin_044E48]
+      - [0x6DF5C, c, msvideo_main_plugin_06ED70]
+      - [0x6E9F0, c, msvideo_main_plugin_06EFBC]
+      - [0x742F0, c, msvideo_main_plugin_07495C]
+      - [0x750BC, c, msvideo_main_plugin_0761EC]
+      - [0x75C58, c, msvideo_main_plugin_076DA0]
+      - [0x76E00, c, msvideo_main_plugin_077F48]
+      - [0x7856C, c, msvideo_main_plugin_0796B4]
+      - [0x78B30, c, msvideo_main_plugin_079C78]
+      - [0x79AA0, c, msvideo_main_plugin_07ABE8]
+      - [0x7D3F4, c, msvideo_main_plugin_07E53C]
+      - [0x7FF2C, c, msvideo_main_plugin_081074]
+      - [0x80654, c, msvideo_main_plugin_08179C]
+      - [0x9B44C, c, msvideo_main_plugin_09C594]
+      - [0x9E7F0, c, msvideo_main_plugin_09F938]
+      - [0xA5530, c, msvideo_main_plugin_0A6698]
+      - [0xA55CC, c, msvideo_main_plugin_0A6734]
+      - [0xA65E8, c, msvideo_main_plugin_0A7750]
+      - [0xA791C, c, msvideo_main_plugin_0A8C78]
       - { start: 0xAB19C, type: asm, name: fini, linker_section: .fini }
       - { start: 0xAB1B8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xABE80, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -72,7 +105,24 @@ segments:
       - { start: 0xACDC4, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0xACDC8, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0xACEBC, type: prxpad, order: .rodata }
-      - [0xACEC0, rodata, msvideo_main_plugin]
+      - [0xACEC0, .rodata, msvideo_main_plugin]
+      - [0xAE430, .rodata, msvideo_main_plugin_00C91C]
+      - [0xAE6E0, .rodata, msvideo_main_plugin_00DFD4]
+      - [0xAE9D8, .rodata, msvideo_main_plugin_010508]
+      - [0xAEB48, .rodata, msvideo_main_plugin_0105E0]
+      - [0xAFD2C, .rodata, msvideo_main_plugin_020034]
+      - [0xB0780, .rodata, msvideo_main_plugin_0274D4]
+      - [0xB0898, .rodata, msvideo_main_plugin_027C8C]
+      - [0xB1D94, .rodata, msvideo_main_plugin_02FA08]
+      - [0xB2E38, .rodata, msvideo_main_plugin_044564]
+      - [0xB2E5C, .rodata, msvideo_main_plugin_044E48]
+      - [0xB4EC0, .rodata, msvideo_main_plugin_06ED70]
+      - [0xB4F98, .rodata, msvideo_main_plugin_06EFBC]
+      - [0xB53A0, .rodata, msvideo_main_plugin_08179C]
+      - [0xB5A18, .rodata, msvideo_main_plugin_09F938]
+      - [0xB5A60, .rodata, msvideo_main_plugin_0A6734]
+      - [0xB5C7C, .rodata, msvideo_main_plugin_0A7750]
+      - [0xB5D3C, .rodata, msvideo_main_plugin_0A8C78]
       - { start: 0xB60B8, type: prxpad, order: .rodata }
   - name: msvideo_main_plugin_seg1
     type: code

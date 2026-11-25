@@ -116,9 +116,29 @@ INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100918);
 
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100A50);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100A88);
-#else
+#endif
+
+#if FW_VERSION == 260
+void func_00100A88(struct Unk_func_00100A88_0 *arg0) {
+    if (arg0 != NULL) {
+        if (arg0->unk0 != 0) {
+            arg0->unk0 = 0;
+            func_00101C84(M2C_FIELD(arg0, s32 *, 0x64));
+            func_00102168(M2C_FIELD(arg0, s32 *, 0x68));
+        }
+        if (arg0->unk4 != 0) {
+
+        } else {
+            func_00100918(arg0);
+            scePaf_4E67BB08(arg0);
+        }
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 void func_00100A88(struct Unk_func_00100A88_0 *arg0) {
     if (arg0 != NULL) {
         if (arg0->unk0 != 0) {
@@ -138,9 +158,27 @@ void func_00100A88(struct Unk_func_00100A88_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100AF4);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100C44);
-#else
+#endif
+
+#if FW_VERSION == 260
+u8 func_00100C44(struct Unk_func_00100C44_0 *arg0, s32 arg1) {
+    u8 var_v1;
+
+    var_v1 = 0;
+    if (arg0 != NULL) {
+        if (arg1 == 0) {
+            var_v1 = arg0->unk0;
+        } else if ((!(arg1 & 0xF) || (var_v1 = 1, (M2C_FIELD(arg0, s32 *, 0x70) == 0))) && ((var_v1 = 1, ((arg1 & 0xF0) == 0)) || (M2C_FIELD(arg0, s32 *, 0x60) != 0))) {
+            var_v1 = 0;
+        }
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION == 282
 u8 func_00100C44(struct Unk_func_00100C44_0 *arg0, s32 arg1) {
     u8 var_v1;
 
@@ -156,9 +194,19 @@ u8 func_00100C44(struct Unk_func_00100C44_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100C90);
-#else
+#endif
+
+#if FW_VERSION == 260
+void func_00100C90(struct Unk_func_00100C90_0 *arg0, s32 arg1) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0xA4) = arg1;
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 void func_00100C90(struct Unk_func_00100C90_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
         arg0->unkF4 = arg1;
@@ -166,9 +214,19 @@ void func_00100C90(struct Unk_func_00100C90_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100CA0);
-#else
+#endif
+
+#if FW_VERSION == 260
+void func_00100CA0(struct Unk_func_00100CA0_0 *arg0) {
+    if (arg0 != NULL) {
+        func_00102278(M2C_FIELD(arg0, s32 *, 0x68));
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 void func_00100CA0(struct Unk_func_00100CA0_0 *arg0) {
     if (arg0 != NULL) {
         func_00102278(arg0->unkB8);
@@ -178,9 +236,23 @@ void func_00100CA0(struct Unk_func_00100CA0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100CC0);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100D2C);
-#else
+#endif
+
+#if FW_VERSION == 260
+s32 func_00100D2C(struct Unk_func_00100D2C_0 *arg0) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg0 != NULL) {
+        var_v0 = M2C_FIELD(arg0, s32 *, 0xE0);
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_00100D2C(struct Unk_func_00100D2C_0 *arg0) {
     s32 var_v0;
 
@@ -192,9 +264,23 @@ s32 func_00100D2C(struct Unk_func_00100D2C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100D40);
-#else
+#endif
+
+#if FW_VERSION == 260
+s32 func_00100D40(struct Unk_func_00100D40_0 *arg0) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg0 != NULL) {
+        var_v0 = M2C_FIELD(arg0, s32 *, 0xE4);
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_00100D40(struct Unk_func_00100D40_0 *arg0) {
     s32 var_v0;
 
@@ -258,7 +344,7 @@ u8 func_00101818(struct Unk_func_00101818_0 *arg0, s32 arg1) {
     return var_v1;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00101850);
 #else
 void func_00101850(struct Unk_func_00101850_0 *arg0, s32 arg1) {

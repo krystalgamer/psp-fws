@@ -1,5 +1,9 @@
 #include "common.h"
 
+#if FW_VERSION == 302
+INCLUDE_ASM("nonmatchings/usbstorms", func_00000000_v302);
+#endif
+
 #if FW_VERSION == 301
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000000_v301);
 #endif

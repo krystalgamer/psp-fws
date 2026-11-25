@@ -6,7 +6,7 @@
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_01F970", func_0001F970);
 #endif
 
-#if FW_VERSION == 301
+#if FW_VERSION >= 301 && FW_VERSION < 352
 void func_0001F970(struct Unk_func_0001F970_0 *arg0) {
     if (M2C_FIELD(arg0, u8 *, 0xD0) != 0) {
         M2C_FIELD(arg0, s32 *, 0xD4) = 0;

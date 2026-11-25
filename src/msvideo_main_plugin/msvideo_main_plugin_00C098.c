@@ -6,7 +6,7 @@
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C098", func_0000C098);
 #endif
 
-#if FW_VERSION == 301
+#if FW_VERSION >= 301 && FW_VERSION < 352
 void func_0000C098(s32 arg0, s32 arg1) {
     s32 var_v0;
 

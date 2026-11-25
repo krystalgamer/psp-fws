@@ -2599,6 +2599,10 @@ INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_000212B0);
 INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021390);
 #endif
 
+#if FW_VERSION == 302
+INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021B78_v302);
+#endif
+
 #if FW_VERSION == 301
 INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00021B78_v301);
 #endif

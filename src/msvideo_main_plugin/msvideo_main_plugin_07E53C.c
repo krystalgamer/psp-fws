@@ -339,7 +339,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07E53C", func_00080C20);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07E53C", func_00080C40);
 #endif
 
-#if FW_VERSION == 301
+#if FW_VERSION >= 301 && FW_VERSION < 352
 void func_00080C40(void) {
     scePaf_5FAC9869();
 }
@@ -355,7 +355,7 @@ void func_00080C40(void) {
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07E53C", func_00080C5C);
 #endif
 
-#if FW_VERSION == 301
+#if FW_VERSION >= 301 && FW_VERSION < 352
 s32 func_00080C5C(s32 **arg0, u32 arg1, s32 arg2) {
     s32 *temp_v0;
     s32 var_v0;

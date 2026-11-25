@@ -168,9 +168,17 @@ INCLUDE_ASM("nonmatchings/paf_11BFC0", func_0011D414);
 
 INCLUDE_ASM("nonmatchings/paf_11BFC0", scePaf_5C4BF618);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_0011D4E8);
-#else
+#endif
+
+#if FW_VERSION == 260
+void func_0011D4E8(s32 arg0) {
+    func_0000C934(arg0 + 0x70, 0);
+}
+#endif
+
+#if FW_VERSION == 282
 void func_0011D4E8(s32 arg0) {
     func_0000C934(arg0 + 0x60, 0);
 }
@@ -192,19 +200,71 @@ INCLUDE_ASM("nonmatchings/paf_11BFC0", scePaf_846E1F0A);
 
 INCLUDE_ASM("nonmatchings/paf_11BFC0", scePaf_21DBFF5B);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_000C45FC);
-#else
+#endif
+
+#if FW_VERSION == 260
+void func_000C45FC(void *arg0) {
+    s32 temp_a1;
+    s32 temp_v0;
+    s32 temp_v0_2;
+
+    temp_a1 = M2C_FIELD(arg0, s32 *, 0x48);
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x4C) + 1;
+    M2C_FIELD(arg0, s32 *, 0x4C) = temp_v0;
+    if (temp_v0 >= temp_a1) {
+        M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+    }
+    temp_v0_2 = M2C_FIELD(arg0, s32 *, 0x50) + 1;
+    M2C_FIELD(arg0, s32 *, 0x50) = temp_v0_2;
+    if (temp_v0_2 >= temp_a1) {
+        M2C_FIELD(arg0, s32 *, 0x50) = 0;
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_0011DE30);
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_0011DE74);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_0011DEA8);
+#endif
 
+#if FW_VERSION == 260
+s32 func_0011DEA8(struct Unk_func_0011DEA8_0 *arg0) {
+    s32 var_v0;
+
+    var_v0 = M2C_FIELD(arg0, s32 *, 0x60);
+    if (var_v0 == 0) {
+        var_v0 = func_000C5EC0((s32) &D_001A7DA8, 1 << M2C_FIELD(arg0, s32 *, 0x64), M2C_FIELD(arg0, s32 *, 0x40) * M2C_FIELD(arg0, s32 *, 0x48));
+        M2C_FIELD(arg0, s32 *, 0x60) = var_v0;
+    }
+    return var_v0 != 0;
+}
+#endif
+
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_000C46C8);
-#else
+#endif
+
+#if FW_VERSION == 260
+void func_000C46C8(void *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x60);
+    if (temp_v0 != 0) {
+        func_000C6034((s32) &D_001A7DA8, temp_v0, M2C_FIELD(arg0, s32 *, 0x40) * M2C_FIELD(arg0, s32 *, 0x48));
+        D_001A7D88 = 1;
+        M2C_FIELD(arg0, s32 *, 0x60) = 0;
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_0011DEA8(struct Unk_func_0011DEA8_0 *arg0) {
     s32 var_v0;
 

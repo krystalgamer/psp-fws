@@ -706,7 +706,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_000957B4);
 INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_000957DC);
 #endif
 
-#if FW_VERSION == 301
+#if FW_VERSION >= 301
 INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00080388);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00095D04);

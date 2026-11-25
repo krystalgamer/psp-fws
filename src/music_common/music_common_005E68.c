@@ -982,7 +982,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000CCDC);
 INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000D098);
 #endif
 
-#if FW_VERSION == 301
+#if FW_VERSION >= 301
 INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000D26C);
 #endif
 
@@ -1292,6 +1292,12 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_00011448);
 INCLUDE_ASM("nonmatchings/music_common_005E68", func_000114E4);
 
 INCLUDE_ASM("nonmatchings/music_common_005E68", func_00011534);
+#endif
+
+#if FW_VERSION == 302
+s32 func_000115E8_v302(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x1D4);
+}
 #endif
 
 #if FW_VERSION == 301

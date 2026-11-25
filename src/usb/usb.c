@@ -1031,6 +1031,12 @@ s32 func_00008A30(void) {
 }
 #endif
 
+#if FW_VERSION == 302
+s32 func_00008318_v302(void) {
+    return (D_0000B440 == 0) ? 0 : -1;
+}
+#endif
+
 #if FW_VERSION == 301
 s32 func_00008318_v301(void) {
     return (D_0000B440 == 0) ? 0 : -1;

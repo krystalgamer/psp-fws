@@ -81,3 +81,14 @@ sceSysEventForKernel_CD9E4BB5 = 0x00002A30; // type:func
 sceSysEventForKernel_D7D3FDCD = 0x00002A38; // type:func
 sceSysreg_driver_168C09B8 = 0x00002A40; // type:func
 sceSysreg_driver_678AD3ED = 0x00002A48; // type:func
+// shared names (tools/add_version.py) begin
+D_00002E90 = 0x00002E34; // rom:0x2ED4
+D_00002E9C = 0x00002E40; // rom:0x2EE0
+D_00002EC8 = 0x00002E6C; // rom:0x2F0C
+D_00002ED4 = 0x00002E78; // rom:0x2F18
+D_00002EE4 = 0x00002E88; // rom:0x2F28
+D_00002EF8 = 0x00002E9C; // rom:0x2F3C
+D_00002F0C = 0x00002EB0; // rom:0x2F50
+D_00002F40 = 0x00002F00; // rom:0x2F80
+D_00002F40_v302 = 0x00002F40; // rom:0x2FC0
+// shared names (tools/add_version.py) end
