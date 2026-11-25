@@ -46,6 +46,8 @@
   "func_00002154": "void func_00002154(void);",
   "func_00002164": "s32 func_00002164(u32 arg0, s32 *arg1);",
   "func_00002290": "s32 func_00002290(s32, s32, s32);",
+  "func_000022C0": "void func_000022C0(s32 arg0);",
+  "func_000022CC": "s32 func_000022CC(void);",
   "func_000022D8": "s8 *func_000022D8(s8 *arg0, s32 arg1, s32 arg2);",
   "func_0000231C": "s32 func_0000231C(s32, s32);",
   "func_00002368": "void func_00002368(s8 arg0);",
@@ -131,6 +133,7 @@
   "D_00006F24": "extern s32 D_00006F24;",
   "D_00006F28": "extern struct D_00006F28_s D_00006F28;",
   "D_000072B4": "extern M2C_UNK D_000072B4;",
-  "D_00007334": "extern s32 D_00007334;"
+  "D_00007334": "extern s32 D_00007334;",
+  "D_00007D14": "extern s32 D_00007D14;"
  }
 }

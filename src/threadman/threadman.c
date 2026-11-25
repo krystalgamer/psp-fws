@@ -352,7 +352,24 @@ s32 func_000008D0(s32 arg0, struct Unk_func_000008D0_1 *arg1) {
 INCLUDE_ASM("nonmatchings/threadman", func_000008F0);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 310
+s32 func_000009F8(void) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (D_00016C74.unk418 == 0) {
+        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+        if (temp_v0 != 0) {
+            M2C_FIELD(D_00016C74.unk0, void **, 0x100) = (void *) (D_00016C74.unk0 + 0x104);
+        }
+        var_v1 = temp_v0;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 310
 s32 func_000009F8(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -2155,7 +2172,22 @@ INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_C9BBE9A2);
 INCLUDE_RODATA("nonmatchings/threadman", D_000169E0);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00013BEC);
+#endif
 
+#if FW_VERSION == 310
+s32 module_reboot_before(void) {
+    s32 temp_s0;
+
+    temp_s0 = sceKernelCpuSuspendIntr();
+    ExceptionManagerForKernel_1AA6CFFA(0xB, &func_00015B40);
+    InterruptManagerForKernel_F987B1F0(D_00017AFC);
+    InterruptManagerForKernel_F987B1F0(0x41);
+    sceKernelCpuResumeIntr(temp_s0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_B50F4E46);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00013C4C);
@@ -2169,7 +2201,13 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013DB0);
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForUser_532A522E);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 310
+void ThreadManForUser_532A522E(void) {
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x11C), s32 *, 0x18));
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 310
 void ThreadManForUser_532A522E(void) {
     sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x118), s32 *, 0x18));
 }

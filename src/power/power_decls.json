@@ -34,6 +34,7 @@
   "sceKernelCreateThread": "s32 sceKernelCreateThread(void *, s32, s32, u32, u32, void *);",
   "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
+  "sceKernelDeleteMutex": "s32 sceKernelDeleteMutex(s32);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
   "sceKernelDeleteThread": "s32 sceKernelDeleteThread(s32);",
   "sceKernelEnableSubIntr": "M2C_UNK sceKernelEnableSubIntr(M2C_UNK, M2C_UNK);",

@@ -931,6 +931,7 @@
   "func_00071E1C": "void func_00071E1C(void);",
   "func_00071E3C": "void func_00071E3C(void);",
   "func_000723BC": "M2C_UNK func_000723BC(s32);",
+  "func_00072494": "s32 func_00072494(s32, s32);",
   "func_000724B4": "M2C_UNK func_000724B4(s32);",
   "func_000725B4": "s32 func_000725B4(struct Unk_func_000725B4_0 *arg0);",
   "func_00072A40": "void func_00072A40(struct Unk_func_00072A40_0 *arg0, s32 arg1);",

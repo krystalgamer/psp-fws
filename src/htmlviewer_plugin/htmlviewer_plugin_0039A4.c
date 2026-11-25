@@ -13,7 +13,15 @@ void func_000039B0(s32 arg0) {
 s32 func_000039BC(void) {
     return D_00008B90;
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000056A4);
+
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000056B0);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000039C8);
 
 u8 func_000039D4(void) {
@@ -27,9 +35,17 @@ void func_000039E0(void) {
         sceHVUI_Module_789FBBA8();
     }
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_0000570C);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003A18);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003A8C);
 
 void func_00003B28(void) {
@@ -55,11 +71,17 @@ void func_00003D3C(s8 arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003D48);
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00005AAC);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003D74);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION >= 300 && FW_VERSION < 310
 M2C_UNK *func_00005554(void) {
     return "http://manuals.playstation.net/document/pspindex.html";
 }
@@ -73,7 +95,11 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003E2C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00004008);
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00005EA0);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000058EC);
 #endif
 

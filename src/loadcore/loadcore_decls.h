@@ -22,6 +22,7 @@ extern s32 D_000075B8;
 extern M2C_UNK D_000077C4;
 extern s32 D_000079C0;
 extern s32 D_000079C8;
+extern s32 D_00007F08;
 extern s32 D_00008914;
 extern M2C_UNK D_000097AC;
 
@@ -92,6 +93,7 @@ s32 func_00004B28(void *arg0);
 s32 func_00004D04(s32 arg0);
 s32 func_00004D14(s32 arg0);
 s32 func_00004D24(void);
+s32 func_000051C0(s32 arg0);
 s32 func_00005338(s32, s32);
 void func_000054D0(void);
 s32 func_000056D8(s32, s32, s32, s32, s32, s32);

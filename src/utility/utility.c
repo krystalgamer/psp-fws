@@ -949,7 +949,11 @@ INCLUDE_ASM("nonmatchings/utility", sceUtility_private_06AE20E5);
 INCLUDE_RODATA("nonmatchings/utility", D_00007020);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/utility", D_000067F0);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/utility", D_000067E0);
 #endif
 
@@ -2317,6 +2321,16 @@ INCLUDE_ASM("nonmatchings/utility", func_00004900);
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/utility", sceUtilitySetSystemParamString);
+#endif
+
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/utility", D_00006F74);
+
+INCLUDE_RODATA("nonmatchings/utility", D_00006F88);
+
+INCLUDE_RODATA("nonmatchings/utility", D_00006F94);
+
+INCLUDE_RODATA("nonmatchings/utility", D_00006FA4);
 #endif
 
 INCLUDE_RODATA("nonmatchings/utility", D_00007914);

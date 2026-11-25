@@ -145,7 +145,11 @@ INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005A9AC);
 
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005A9C4);
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005C19C);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005BD14);
 #endif
 
@@ -1826,6 +1830,10 @@ s32 func_0002E03C(void) {
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005B8C0);
 #endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002EAC4);
+#endif
+
 #if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002E954_v303);
 #endif
@@ -1938,14 +1946,24 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002F358);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002F534);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002F764);
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00030380);
+#endif
+
+#if FW_VERSION >= 282
 s32 *func_0002F830(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
     *arg0 = func_0002FB7C(arg1, arg2);
     return arg0;
 }
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002F868);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002F888);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002F948);
@@ -2124,15 +2142,15 @@ s32 *func_00032680(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
     *arg0 = func_00032A94(arg1, arg2);
     return arg0;
 }
-#endif
-
-#if FW_VERSION < 282
+#else
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_000257D4);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_000258E0);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_000259EC);
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_000326B8);
 
 void func_000326E8(s32 arg0, s32 *arg1) {
@@ -2415,7 +2433,11 @@ INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005BC20);
 
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005BC44);
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005D474);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005CFD0);
 #endif
 

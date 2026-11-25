@@ -27,4 +27,3 @@ void func_00019128(struct Unk_func_00019128_0 *arg0) {
 void func_00019144(M2C_UNK **arg0) {
     *arg0 = &D_0002AFA0;
 }
-

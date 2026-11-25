@@ -17,6 +17,7 @@
   "sceHprm_driver_71B5FB67": "u8 sceHprm_driver_71B5FB67(void);",
   "sceHprm_driver_7B038374": "s32 sceHprm_driver_7B038374(M2C_UNK **arg0);",
   "sceHprm_driver_971AE8FB": "s32 sceHprm_driver_971AE8FB(s32 *arg0);",
+  "sceHprm_driver_C1777D84": "s32 sceHprm_driver_C1777D84(void);",
   "sceHprm_driver_F04591FA": "s32 sceHprm_driver_F04591FA(s32 arg0);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
@@ -40,6 +41,7 @@
   "D_0000225C": "extern s32 D_0000225C;",
   "D_00002261": "extern s8 D_00002261;",
   "D_00002262": "extern s8 D_00002262;",
-  "D_00002263": "extern s8 D_00002263;"
+  "D_00002263": "extern s8 D_00002263;",
+  "D_000022B0": "extern s32 D_000022B0;"
  }
 }

@@ -3501,6 +3501,7 @@ M2C_UNK func_00071DA0(M2C_UNK, M2C_UNK);
 void func_00071E1C(void);
 void func_00071E3C(void);
 M2C_UNK func_000723BC(s32);
+s32 func_00072494(s32, s32);
 M2C_UNK func_000724B4(s32);
 s32 func_000725B4(struct Unk_func_000725B4_0 *arg0);
 void func_00072A40(struct Unk_func_00072A40_0 *arg0, s32 arg1);

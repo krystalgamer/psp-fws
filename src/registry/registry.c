@@ -1,7 +1,44 @@
 #include "common.h"
+#include "k1.h"
 #include "registry_decls.h"
 
+#if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_98279CF1);
+#else
+s32 sceReg_driver_98279CF1(void) {
+    s32 temp_v0;
+    s32 var_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    D_0000706C = -1;
+    D_00007070 = 0;
+    D_00006FC4 = 0;
+    D_00006FC8 = 0;
+    D_00006FCC = 0;
+    D_00006FD0 = 0;
+    D_00006FD4 = 0;
+    D_00006FD8 = 0;
+    D_00007050 = 0;
+    temp_v0 = sceKernelCreateMutex("SceRegBlockAPI", 0U, 0, NULL);
+    if (temp_v0 >= 0) {
+        D_0000706C = temp_v0;
+        if (func_000069A0(0, 0x8000) >= 0) {
+            D_00007050 = 1;
+            setK1(temp_s0);
+            var_v0 = 0;
+        } else {
+            sceKernelDeleteMutex(D_0000706C);
+            setK1(temp_s0);
+            var_v0 = 0x8008272B;
+        }
+    } else {
+        setK1(temp_s0);
+        var_v0 = 0x8008273D;
+    }
+    return var_v0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_9B25EDF1);
 
@@ -25,7 +62,20 @@ s32 syslib_ADF12745(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 310
+s32 syslib_ADF12745(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 0:
+        break;
+    case 2:
+        sceKernelLockMutex(D_0000706C, 1, NULL);
+        break;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 s32 syslib_ADF12745(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0:

@@ -293,77 +293,41 @@ void scePaf_62081F34(void) {
 
 }
 
-void scePaf_BECD1827(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_BECD1827);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_A8711520);
 
-void scePaf_A8711520(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_FCDD55E3);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_2EABF548);
 
-void scePaf_FCDD55E3(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_50F72192);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_73712598);
 
-void scePaf_2EABF548(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_8B439A23);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_7435C5D5);
 
-void scePaf_50F72192(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_CC103AD2);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_566BC690);
 
-void scePaf_73712598(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_68569AAC);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_76491EEA);
 
-void scePaf_8B439A23(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_7771BC86);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_06BB62B7);
 
-void scePaf_7435C5D5(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_30F5E7DF);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_97B9C21E);
 
-void scePaf_CC103AD2(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_D16E5935);
 
-}
-
-void scePaf_566BC690(void) {
-
-}
-
-void scePaf_68569AAC(void) {
-
-}
-
-void scePaf_76491EEA(void) {
-
-}
-
-void scePaf_7771BC86(void) {
-
-}
-
-void scePaf_06BB62B7(void) {
-
-}
-
-void scePaf_30F5E7DF(void) {
-
-}
-
-void scePaf_97B9C21E(void) {
-
-}
-
-void scePaf_D16E5935(void) {
-
-}
-
-void scePaf_9D496842(void) {
-
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_9D496842);
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_2750CF68);
 

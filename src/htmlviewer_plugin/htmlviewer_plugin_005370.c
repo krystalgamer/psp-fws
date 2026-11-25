@@ -79,7 +79,20 @@ void sceHtmlViewerHelper_05E0C3D4(s32 arg0) {
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_000058D4);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005948);
+#endif
 
+#if FW_VERSION == 310
+s32 func_00007A9C(void *arg0) {
+    if (arg0 != NULL) {
+        M2C_FIELD(&D_00008E68, s32 *, 0) = (s32) M2C_FIELD(arg0, s32 *, 0);
+        M2C_FIELD(&D_00008E68, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 4);
+        M2C_FIELD(&D_00008E68, s32 *, 8) = (s32) M2C_FIELD(arg0, s32 *, 8);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_000059C0);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005B2C);

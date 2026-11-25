@@ -2251,7 +2251,7 @@ s32 func_00009C3C(void) {
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 271 && FW_VERSION < 310
 void func_00009CA8(void) {
     func_0000A7EC();
     func_0000A96C();
@@ -2793,7 +2793,9 @@ INCLUDE_RODATA("nonmatchings/umdman", D_00011330);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", func_0000A834);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 310
 s32 func_0000A8DC(void) {
     s32 temp_s0;
     s32 temp_s1;
@@ -2803,7 +2805,9 @@ s32 func_0000A8DC(void) {
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
+#endif
 
+#if FW_VERSION >= 201
 s32 func_0000A924(void) {
     s32 temp_s0;
     s32 temp_s1;
@@ -2813,7 +2817,9 @@ s32 func_0000A924(void) {
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 310
 s32 func_0000A96C(void) {
     s32 temp_s0;
     s32 temp_s1;
@@ -2823,7 +2829,9 @@ s32 func_0000A96C(void) {
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_BF8AED79);
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_4217E7F5);
@@ -2908,7 +2916,13 @@ s32 func_0000AF50(void) {
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/umdman", func_0000A838);
+#endif
+
+#if FW_VERSION >= 271
 s32 func_0000A7AC(void) {
     s32 temp_s0;
     s32 temp_s1;
@@ -2990,6 +3004,12 @@ s32 func_0000A8D8(void) {
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
+#endif
+
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/umdman", func_0000A8DC);
+
+INCLUDE_ASM("nonmatchings/umdman", func_0000A96C);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271

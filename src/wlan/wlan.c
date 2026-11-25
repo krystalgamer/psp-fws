@@ -123,6 +123,10 @@ INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_19E51F54);
 
 INCLUDE_ASM("nonmatchings/wlan", sceWlanGetEtherAddr);
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/wlan", func_000009D0);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_000008B4);
 
@@ -153,9 +157,11 @@ INCLUDE_ASM("nonmatchings/wlan", func_000008C8);
 INCLUDE_ASM("nonmatchings/wlan", func_00000874);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/wlan", func_00000A08);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/wlan", func_00000AE4);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_00018B3C);
@@ -1896,7 +1902,13 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000B328);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000CCC8);
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/wlan", func_0000D020);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000CE48);
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000CFEC);
@@ -2647,6 +2659,10 @@ void func_00015958(struct Unk_func_00015958_0 *arg0) {
 INCLUDE_ASM("nonmatchings/wlan", func_00015A1C);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_00019078);
+#endif
+
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/wlan", D_000195C0);
 #endif
 
 #if FW_VERSION == 303

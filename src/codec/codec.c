@@ -112,9 +112,17 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_56494D70);
 void sceCodec_driver_31B2E41E(void) {
     func_000002A8(0, 0, -1, 0);
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/codec", func_00000C24);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/codec", func_00000B68);
+#endif
 
+#if FW_VERSION >= 282
 s32 sceCodec_driver_28A49CCA(void) {
     s32 var_v0;
 

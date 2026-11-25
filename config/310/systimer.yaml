@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, systimer]
+      - [0xA0, c, systimer]
       - { start: 0xA00, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xA48, type: prxpad, order: .text }
       - { start: 0xA50, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }

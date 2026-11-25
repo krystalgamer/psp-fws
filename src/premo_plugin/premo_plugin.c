@@ -1,7 +1,9 @@
 #include "common.h"
 #include "premo_plugin_decls.h"
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00000000);
+#endif
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00000030);
 
@@ -16,6 +18,13 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00000168);
 
+#if FW_VERSION == 310
+void func_0000018C_v310(void) {
+
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000018C);
+#else
 void func_0000018C(void) {
     s32 temp_v0;
 
@@ -23,12 +32,24 @@ void func_0000018C(void) {
     func_00006CD4(temp_v0);
     func_0000916C(temp_v0 + 0x240);
 }
+#endif
 
+#if FW_VERSION == 310
+void func_0000020C(void) {
+
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000001C4);
+#else
 s32 func_000001C4(void) {
     sceKernelDelayThread(0x2710);
     return 0;
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00000238);
+#else
 void func_000001E4(void) {
     func_00001608(0x10, 0);
     func_0000170C();
@@ -141,6 +162,7 @@ INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028AF4);
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028B00);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028B04);
+#endif
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028B10);
 
@@ -156,13 +178,29 @@ INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028B90);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028BB0);
 
+#if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028BD0);
+#endif
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028BF4);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028C18);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028C30);
+
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00022D98);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00022DB8);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00022DDC);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00022E00);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00022E28);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00022E50);
+#endif
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028C4C);
 
@@ -186,6 +224,7 @@ INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028D98);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028DC0);
 
+#if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028DF0);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00028E1C);
@@ -223,6 +262,7 @@ INCLUDE_RODATA("nonmatchings/premo_plugin", D_000290C4);
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_000290F0);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029110);
+#endif
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029130);
 
@@ -244,6 +284,11 @@ INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029214);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029234);
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000002C4);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00000320);
+#else
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029254);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029274);
@@ -285,9 +330,20 @@ INCLUDE_RODATA("nonmatchings/premo_plugin", D_000294F4);
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00000230);
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_000002D4);
+#endif
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00000394);
 
+#if FW_VERSION == 310
+void func_00000474(void) {
+    sceVshBridge_33EEEF3E(1, 2);
+    sceVshBridge_AFB59B52(1, 2);
+    func_00001888();
+    func_00009A60();
+    func_00001958();
+    func_00009364();
+}
+#else
 void func_00000474(void) {
     sceVshBridge_002381F2(1, 2);
     sceVshBridge_60C6E226(1, 2);
@@ -298,13 +354,52 @@ void func_00000474(void) {
     func_00009364();
     D_0002C9B0 = 0;
 }
+#endif
+
+#if FW_VERSION == 310
+void func_000004C8(s32 arg0) {
+    if (func_000019A0() > 0) {
+
+    } else {
+        sceVshCommonUtil_622815DD(&D_00026FEC, &func_00000320);
+        if (scePaf_DAB59652(M2C_FIELD(func_00002478(), s32 *, 0x20), &D_000291A8) == 0) {
+            scePaf_F609FA81(arg0, &D_000291A8, 0, 0);
+            scePaf_CAF05F1D(arg0, &D_000291A8);
+        }
+    }
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_000004D0);
+
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000005D8);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000006E8);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00000868);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000088C);
+
+void func_0000097C(M2C_UNK (*arg0)(M2C_UNK)) {
+    void *temp_v0;
+
+    temp_v0 = func_00002478();
+    M2C_FIELD(temp_v0, s8 *, 0xAE) = 1;
+    func_00001FA4((s32) temp_v0, 4);
+    func_00001FE4((s32) temp_v0, 4, 0);
+    M2C_FIELD(temp_v0, s8 *, 0xA5) = 0;
+    arg0(0);
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000009DC);
+#endif
 
 void func_000005DC(void) {
     func_00001534();
 }
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/premo_plugin", func_000005F8);
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00000738);
@@ -439,6 +534,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin", func_000017EC);
 void func_00001854(s32 arg0) {
     func_00001650(0x40000, arg0);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00001874);
 
@@ -449,6 +545,12 @@ void func_000018F0(void) {
 void func_00001910(void) {
     func_00001874(0, 0xFFFF);
 }
+
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00000B9C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00000BEC);
+#endif
 
 void func_00001930(s32 arg0, s32 arg1) {
     D_0002C9C4 = arg0;
@@ -502,6 +604,18 @@ void func_000019F8(void) {
     }
 }
 
+#if FW_VERSION == 310
+void func_00001A24(struct Unk_func_00001A24_0 *arg0) {
+    arg0->unk0 = 0;
+    arg0->unk4 = sceKernelCreateSema(&D_0002970C, 0x100U, 1, 1, NULL);
+    arg0->unk8 = sceKernelCreateSema(&D_0002970C, 0x100U, 1, 1, NULL);
+    arg0->unkC = 0;
+    arg0->unk10 = 0;
+    arg0->unk14 = 0;
+    arg0->unk0 = vsh_8A06C72F(0, &func_00001DC4, &func_00001E50, 0);
+    func_00001CA8(arg0);
+}
+#else
 void func_00001A24(struct Unk_func_00001A24_0 *arg0) {
     arg0->unk0 = 0;
     arg0->unk4 = sceKernelCreateSema(&D_0002970C, 0x100U, 1, 1, NULL);
@@ -512,9 +626,24 @@ void func_00001A24(struct Unk_func_00001A24_0 *arg0) {
     arg0->unk0 = vsh_AD93F68D(0, &func_00001DC4, &func_00001E50, 0);
     func_00001CA8(arg0);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00001AC4);
 
+#if FW_VERSION == 310
+void func_00001B64(struct Unk_func_00001B64_0 *arg0) {
+    s32 temp_v0;
+
+    func_00001CF4(arg0);
+    temp_v0 = arg0->unk0;
+    if (temp_v0 != 0) {
+        vsh_FE0FDCDB(temp_v0);
+        arg0->unk0 = 0;
+    }
+    sceKernelDeleteSema(arg0->unk8);
+    sceKernelDeleteSema(arg0->unk4);
+}
+#else
 void func_00001B64(struct Unk_func_00001B64_0 *arg0) {
     s32 temp_v0;
 
@@ -527,7 +656,22 @@ void func_00001B64(struct Unk_func_00001B64_0 *arg0) {
     sceKernelDeleteSema(arg0->unk8);
     sceKernelDeleteSema(arg0->unk4);
 }
+#endif
 
+#if FW_VERSION == 310
+void func_00001BB4(struct Unk_func_00001B64_0 *arg0) {
+    s32 temp_v0;
+
+    func_00001CF4(arg0);
+    temp_v0 = arg0->unk0;
+    if (temp_v0 != 0) {
+        vsh_FE0FDCDB(temp_v0);
+        arg0->unk0 = 0;
+    }
+    sceKernelDeleteSema(arg0->unk8);
+    sceKernelDeleteSema(arg0->unk4);
+}
+#else
 void func_00001BB4(struct Unk_func_00001B64_0 *arg0) {
     s32 temp_v0;
 
@@ -540,11 +684,25 @@ void func_00001BB4(struct Unk_func_00001B64_0 *arg0) {
     sceKernelDeleteSema(arg0->unk8);
     sceKernelDeleteSema(arg0->unk4);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00001C04);
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00001C5C);
 
+#if FW_VERSION == 310
+void func_00001CA8(struct Unk_func_00001A24_0 *arg0) {
+    s32 temp_a0;
+
+    temp_a0 = arg0->unk0;
+    if (temp_a0 != 0) {
+        if (arg0->unk14 == 0) {
+            vsh_388428D3(temp_a0);
+            arg0->unk14 = 1;
+        }
+    }
+}
+#else
 void func_00001CA8(struct Unk_func_00001A24_0 *arg0) {
     s32 temp_a0;
 
@@ -556,7 +714,21 @@ void func_00001CA8(struct Unk_func_00001A24_0 *arg0) {
         }
     }
 }
+#endif
 
+#if FW_VERSION == 310
+void func_00001CF4(struct Unk_func_00001B64_0 *arg0) {
+    s32 temp_a0;
+
+    temp_a0 = arg0->unk0;
+    if (temp_a0 != 0) {
+        if (arg0->unk14 != 0) {
+            vsh_475ABD41(temp_a0);
+            arg0->unk14 = 0;
+        }
+    }
+}
+#else
 void func_00001CF4(struct Unk_func_00001B64_0 *arg0) {
     s32 temp_a0;
 
@@ -568,6 +740,7 @@ void func_00001CF4(struct Unk_func_00001B64_0 *arg0) {
         }
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00001D3C);
 
@@ -584,11 +757,15 @@ void func_00001FD8(M2C_UNK **arg0) {
     func_000141F0((s32) arg0);
 }
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00002000);
+#else
 void func_00002000(M2C_UNK **arg0) {
     *arg0 = &D_00029720;
     func_000141F0((s32) arg0);
     scePaf_6261C0A5((s32) arg0);
 }
+#endif
 
 s32 func_00002038(struct Unk_func_00002038_0 *arg0) {
     return arg0->unk1D4;
@@ -599,6 +776,14 @@ INCLUDE_RODATA("nonmatchings/premo_plugin", D_0002970C);
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029720);
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00002040);
+
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00023214);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00023220);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00023228);
+#endif
 
 s32 func_00002094(struct Unk_func_00002094_0 *arg0, s32 arg1) {
     arg0->unk1EC = arg1;
@@ -611,6 +796,222 @@ s32 func_000020CC(void) {
     return D_0002C850;
 }
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001440);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000151C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000015F8);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000016C8);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001798);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00002478);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001888);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000018D8);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001908);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001984);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000019C4);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001A08);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000263C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001B00);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001C0C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001CA0);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001D44);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001D88);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000AB64);
+
+void func_00001E08(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001E18);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001E94);
+
+void func_00001F34(void *arg0) {
+    s32 temp_s0;
+    s32 temp_s0_2;
+
+    temp_s0 = M2C_FIELD(arg0, s32 *, 0x68);
+    if (temp_s0 != 0) {
+        scePaf_4612DB4B(temp_s0);
+        scePaf_4E67BB08(temp_s0);
+        M2C_FIELD(arg0, s32 *, 0x68) = 0;
+    }
+    temp_s0_2 = M2C_FIELD(arg0, s32 *, 0x6C);
+    if (temp_s0_2 != 0) {
+        scePaf_4612DB4B(temp_s0_2);
+        scePaf_4E67BB08(temp_s0_2);
+        M2C_FIELD(arg0, s32 *, 0x6C) = 0;
+    }
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001FA4);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001FE4);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00002044);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000020AC);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000020D4);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00002174);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00023290);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_000232A0);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00002204);
+
+s32 func_000029A4(void) {
+    s32 var_s0;
+
+    var_s0 = 0;
+    if (D_00027108 != 0) {
+        var_s0 = func_00002204(D_00027108);
+    }
+    sceKernelExitDeleteThread(0);
+    return var_s0;
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000029F0);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00002B08);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_000232E0);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00002BAC);
+
+void func_00002C4C(void) {
+    sceKernelPowerTick(0);
+}
+
+s32 func_00002C68(void) {
+    s32 var_v0;
+    void *temp_v1;
+
+    var_v0 = 0;
+    if (D_00027108 != 0) {
+        temp_v1 = M2C_FIELD(D_00027108, void **, 0x64);
+        if (temp_v1 != NULL) {
+            var_v0 = M2C_FIELD(temp_v1, s32 *, 0x344);
+        }
+    }
+    return var_v0;
+}
+
+void func_00002C8C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x154) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x158) = arg1;
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00002C98);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00002D1C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00002DA0);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000030E4);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003178);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000031E4);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003220);
+
+void func_000032AC(void *arg0) {
+    if ((M2C_FIELD(arg0, s32 *, 0xA8) == 0) || (M2C_FIELD(arg0, u8 *, 0xAC) == 0)) {
+
+    } else {
+        func_0000B778(arg0 + 0x17C);
+        func_00001FA4((s32) arg0, 0x10);
+    }
+}
+
+void func_000032FC(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0xA8) != 0) {
+        if (M2C_FIELD(arg0, u8 *, 0xAC) == 0) {
+
+        } else {
+            func_00001FA4((s32) arg0, 0x1000);
+        }
+    }
+}
+
+s32 func_00003338(void *arg0, s32 arg1) {
+    if (M2C_FIELD(arg0, s32 *, 0x158) != arg1) {
+        func_00003390((s32) arg0, arg1);
+        M2C_FIELD(arg0, s32 *, 0x158) = arg1;
+        func_00001FA4((s32) arg0, 0x300);
+    }
+    return 0;
+}
+
+s32 func_00003388(void) {
+    return 4;
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003390);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000033EC);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003478);
+
+INCLUDE_RODATA("nonmatchings/premo_plugin", D_00023314);
+
+void func_00003678(void *arg0, s32 arg1) {
+    void *temp_s0;
+
+    M2C_FIELD(arg0, s32 *, 0x20) = arg1;
+    temp_s0 = arg0 + 0x24;
+    func_00004470((s32) temp_s0, 0x10);
+    func_000044A4((s32) temp_s0);
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000036B0);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003724);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000378C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003804);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000387C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00006E3C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000393C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003984);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000039CC);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003A14);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003A4C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003B08);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003BC4);
+#else
 INCLUDE_ASM("nonmatchings/premo_plugin", func_000020D8);
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_0000218C);
@@ -620,15 +1021,146 @@ INCLUDE_ASM("nonmatchings/premo_plugin", func_00002240);
 INCLUDE_ASM("nonmatchings/premo_plugin", func_000022B8);
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00002330);
+#endif
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_000297F4);
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003CDC);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003D3C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003D68);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00003F40);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000407C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004168);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000419C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000420C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000423C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004284);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004300);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004344);
+
+void func_00004390(s32 arg0) {
+    func_000043C4(arg0);
+    func_00004634(arg0 + 0x24, 0);
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000043C4);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004470);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000044A4);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000452C);
+
+void func_000045C0(void *arg0) {
+    s32 temp_v0;
+    s32 temp_v1;
+
+    func_0000AB64((M2C_FIELD(arg0, s32 *, 0) + (M2C_FIELD(arg0, s32 *, 4) * 0xC)) - 0xC);
+    temp_v1 = M2C_FIELD(arg0, s32 *, 4) - 1;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
+    M2C_FIELD(arg0, s32 *, 4) = temp_v1;
+    if (temp_v1 >= (temp_v0 - 0x14)) {
+
+    } else {
+        func_00004794((s32) arg0, temp_v0 - 0xA);
+    }
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004634);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004794);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_0000AC7C);
+
+void func_0000494C(s32 arg0) {
+    func_00004994(arg0);
+}
+
+void func_00004968(s32 arg0) {
+    func_00004994(arg0);
+}
+
+void func_00004984(void) {
+
+}
+
+void func_0000498C(void) {
+
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004994);
+#endif
+
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029800);
+
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000049C0);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004A1C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004B44);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004BA0);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004BDC);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004C2C);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004CA0);
+
+void func_00004D0C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) + 1);
+    scePaf_6B1E90C7();
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004D30);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004D64);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004DA4);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004DD4);
+
+void func_00004E04(s8 arg0) {
+    D_00027120 = arg0;
+}
+
+void func_00004E10(s32 arg0) {
+    D_00027124 = arg0;
+}
+
+void func_00004E1C(s32 arg0, s32 arg1, s32 arg2) {
+    D_00027128 = arg0;
+    D_0002712C = arg1;
+    D_00027130 = arg2;
+}
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004E38);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00004EB8);
+
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00001534);
+#endif
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_0002981C);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029834);
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/premo_plugin", func_000050AC);
+#else
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029844);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin", D_00029854);
@@ -1197,11 +1729,13 @@ s32 func_000069A8(void) {
 INCLUDE_ASM("nonmatchings/premo_plugin", func_000069F0);
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00006A6C);
+#endif
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00006A9C);
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00006AEC);
 
+#if FW_VERSION == 352
 void func_00006BA0(struct Unk_func_00006BA0_0 *arg0, s32 arg1) {
     void *temp_s0;
 
@@ -1375,9 +1909,11 @@ INCLUDE_ASM("nonmatchings/premo_plugin", func_00008768);
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00008804);
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00008824);
+#endif
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00008854);
 
+#if FW_VERSION == 352
 void func_00008860(s32 arg0, s32 arg1, s32 arg2) {
     D_0002CB20 = arg0;
     D_0002CB24 = arg1;
@@ -1386,7 +1922,11 @@ void func_00008860(s32 arg0, s32 arg1, s32 arg2) {
 
 void func_0000887C(void) {
 }
+#else
+INCLUDE_ASM("nonmatchings/premo_plugin", func_00008884);
+#endif
 
+#if FW_VERSION == 352
 void func_00008884(void) {
     func_00008A70();
 }
@@ -1433,6 +1973,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin", func_0000916C);
 INCLUDE_ASM("nonmatchings/premo_plugin", func_000091B4);
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00009208);
+#endif
 
 void func_00009348(void) {
     func_00009688();
@@ -1441,4 +1982,3 @@ void func_00009348(void) {
 void func_00009364(void) {
     func_000096E0();
 }
-

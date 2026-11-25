@@ -67,6 +67,7 @@
   "func_00004D04": "s32 func_00004D04(s32 arg0);",
   "func_00004D14": "s32 func_00004D14(s32 arg0);",
   "func_00004D24": "s32 func_00004D24(void);",
+  "func_000051C0": "s32 func_000051C0(s32 arg0);",
   "func_00005338": "s32 func_00005338(s32, s32);",
   "func_000054D0": "void func_000054D0(void);",
   "func_000056D8": "s32 func_000056D8(s32, s32, s32, s32, s32, s32);",
@@ -99,6 +100,7 @@
   "D_000077C4": "extern M2C_UNK D_000077C4;",
   "D_000079C0": "extern s32 D_000079C0;",
   "D_000079C8": "extern s32 D_000079C8;",
+  "D_00007F08": "extern s32 D_00007F08;",
   "D_00008914": "extern s32 D_00008914;",
   "D_000097AC": "extern M2C_UNK D_000097AC;"
  }

@@ -461,6 +461,13 @@ void func_000021AC(void) {
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000021CC);
 #endif
 
+#if FW_VERSION == 310
+void func_000023A4(s32 *arg0, s32 arg1) {
+    *arg0 = arg1;
+    func_00002638();
+}
+#endif
+
 #if FW_VERSION < 282
 void func_00001514(s32 arg0, s32 arg1) {
     s32 var_v0;
@@ -516,22 +523,32 @@ void func_0000227C(s32 arg0, s32 arg1) {
 }
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000022CC);
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 310
 void func_000023A4(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00002638();
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000023C4);
 #endif
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002460);
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00002638);
+#endif
+
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000024D8);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002584);
 
+#if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002638);
+#endif
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00001858);

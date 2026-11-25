@@ -243,7 +243,13 @@ INCLUDE_ASM("nonmatchings/power", func_00001700);
 INCLUDE_ASM("nonmatchings/power", func_00001754);
 #endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/power", func_00002464);
+
+INCLUDE_ASM("nonmatchings/power", func_000025D8);
+#else
 INCLUDE_ASM("nonmatchings/power", func_00002414);
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00001178);
@@ -550,7 +556,9 @@ INCLUDE_ASM("nonmatchings/power", func_000029BC);
 INCLUDE_ASM("nonmatchings/power", func_000016D8);
 #endif
 
+#if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/power", func_000029F8);
+#endif
 
 INCLUDE_ASM("nonmatchings/power", scePowerTick);
 
@@ -639,7 +647,16 @@ s32 func_000024BC(void) {
     sceKernelDeleteSema(D_00008F84);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 310
+s32 func_00003A98(void) {
+    sceKernelDeleteMutex(D_0000B348);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 s32 func_00003A98(void) {
     sceKernelDeleteSema(D_0000B348);
     return 0;
@@ -1001,7 +1018,25 @@ s32 scePower_driver_B999184C(void) {
 }
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 310
+s32 func_00004B54(void) {
+    M2C_UNK *temp_v0;
+    s32 temp_v0_2;
+
+    memset(&D_0000B3AC.unk0, 0, 0xC0);
+    temp_v0 = "ScePowerBattery";
+    M2C_VFIELD(&D_0000B3AC, s32, 0x48) = -1;
+    D_0000B3AC.unk28 = -1;
+    M2C_VFIELD(&D_0000B3AC, s32, 0x40) = -1;
+    D_0000B3AC.unk0 = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
+    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003F14, 0x40, 0x800U, 0x100001U, NULL);
+    D_0000B3AC.unk4 = temp_v0_2;
+    sceKernelStartThread(temp_v0_2, 0U, NULL);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 310
 s32 func_00004B54(void) {
     M2C_UNK *temp_v0;
     s32 temp_v0_2;
@@ -1130,6 +1165,10 @@ INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryLifeTime);
 INCLUDE_ASM("nonmatchings/power", scePower_driver_28E12023);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_483CE86B);
+
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/power", scePower_driver_CB49F5CE);
+#endif
 
 #if FW_VERSION >= 282
 s32 scePower_driver_23436A4A(void) {

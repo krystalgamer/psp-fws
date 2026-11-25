@@ -1,5 +1,7 @@
 {
  "funcs": {
+  "ExceptionManagerForKernel_1AA6CFFA": "M2C_UNK ExceptionManagerForKernel_1AA6CFFA(M2C_UNK, M2C_UNK *);",
+  "InterruptManagerForKernel_F987B1F0": "M2C_UNK InterruptManagerForKernel_F987B1F0(s32);",
   "SysMemForKernel_5367923C": "M2C_UNK SysMemForKernel_5367923C(s32, M2C_UNK);",
   "SysMemForKernel_AD09C397": "M2C_UNK SysMemForKernel_AD09C397(M2C_UNK *, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);",
   "SysMemForKernel_CE05CCB7": "M2C_UNK SysMemForKernel_CE05CCB7();",
@@ -80,6 +82,7 @@
   "func_000136C0": "s32 func_000136C0(void);",
   "func_0001444C": "s32 func_0001444C(void);",
   "memset": "M2C_UNK memset(s32, M2C_UNK, s32);",
+  "module_reboot_before": "s32 module_reboot_before(void);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelExitDeleteThread": "s32 sceKernelExitDeleteThread(s32);",
@@ -167,6 +170,8 @@
   "D_00017344": "extern s32 D_00017344;",
   "D_00017350": "extern s32 D_00017350;",
   "D_000173BC": "extern s32 D_000173BC;",
-  "D_00017968": "extern s32 D_00017968;"
+  "D_00017968": "extern s32 D_00017968;",
+  "D_00017AFC": "extern s32 D_00017AFC;",
+  "func_00015B40": "extern M2C_UNK func_00015B40;"
  }
 }

@@ -217,6 +217,18 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_0E10922A);
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_A84742F0);
 #endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_5D307BD9);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_22971D45);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_172C990E);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_9A1BEEE4);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_C95B9265);
+#endif
+
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_0163A8E7);
 
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_7C1658F2);
@@ -606,6 +618,26 @@ INCLUDE_RODATA("nonmatchings/vshbridge", D_00002D10);
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_5D09ED94);
 
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_C58090DA);
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_C9C7BB70);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_F78AA466);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_A8415BEB);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_40DAF7AA);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_D5F482CB);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_E7872DB9);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_2BA6DA4D);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_27AA80A4);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/vshbridge", func_00002D24);
 #endif

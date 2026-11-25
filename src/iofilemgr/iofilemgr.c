@@ -663,23 +663,49 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000565C);
 INCLUDE_ASM("nonmatchings/iofilemgr", syslib_D3744BE0);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", module_reboot_before);
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/iofilemgr", sceIoPollAsync);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 s32 sceIoPollAsync(u32 arg0, void *arg1) {
     return func_00003570((s32) arg0, (s32) arg1, 1, 0);
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsync);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 s32 sceIoWaitAsync(u32 arg0, void *arg1) {
     return func_00003570((s32) arg0, (s32) arg1, 0, 0);
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsyncCB);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 s32 sceIoWaitAsyncCB(u32 arg0, void *arg1) {
     return func_00003570((s32) arg0, (s32) arg1, 0, 1);
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_CB05F8D6);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 void IoFileMgrForKernel_CB05F8D6(s32 arg0, s32 arg1, s32 arg2) {
     func_00003570(arg0, arg2, arg1, 0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoSetAsyncCallback);
 
 s32 sceIoClose(u32 arg0) {
@@ -763,7 +789,7 @@ s32 sceIoChstat(void *arg0, void *arg1, u32 arg2) {
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoSync);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetDevType);
 #endif
 

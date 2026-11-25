@@ -2,16 +2,25 @@
  "funcs": {
   "func_0000015C": "void func_0000015C(struct Unk_func_0000015C_0 *arg0);",
   "func_00000180": "void func_00000180(struct Unk_func_00000180_0 *arg0);",
+  "func_00000964": "void func_00000964(void);",
   "func_00000D64": "void func_00000D64(void);",
   "func_00000DE8": "M2C_UNK func_00000DE8();",
   "func_0000104C": "void func_0000104C(void);",
   "func_000010D0": "M2C_UNK func_000010D0();",
   "module_stop": "s32 module_stop(void);",
-  "scePaf_86B41BA3": "M2C_UNK scePaf_86B41BA3();"
+  "scePaf_338C3774": "void *scePaf_338C3774(s32, M2C_UNK);",
+  "scePaf_3DEE8DB4": "M2C_UNK scePaf_3DEE8DB4();",
+  "scePaf_499FF48D": "M2C_UNK scePaf_499FF48D();",
+  "scePaf_86B41BA3": "M2C_UNK scePaf_86B41BA3();",
+  "scePaf_A69BABE3": "M2C_UNK scePaf_A69BABE3(M2C_UNK, s32, s32);",
+  "scePaf_D4FAE7D0": "s32 scePaf_D4FAE7D0(M2C_UNK *);",
+  "sceVshBridge_639C3CB3": "s32 sceVshBridge_639C3CB3(M2C_UNK);"
  },
  "types": {
   "Unk_func_0000015C_0": "struct Unk_func_0000015C_0 {\n    u8 pad0[0x1FD];\n    s8 unk1FD;\n    s8 unk1FE;\n};",
   "Unk_func_00000180_0": "struct Unk_func_00000180_0 {\n    u8 pad0[0x1FD];\n    s8 unk1FD;\n    s8 unk1FE;\n};"
  },
- "vars": {}
+ "vars": {
+  "D_000013A4": "extern M2C_UNK D_000013A4;"
+ }
 }

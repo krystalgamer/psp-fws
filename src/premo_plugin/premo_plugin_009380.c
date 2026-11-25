@@ -57,4 +57,3 @@ void func_00009528(struct Unk_func_00009528_0 *arg0) {
     arg0->unk10 = 0;
     arg0->unk4 = sceKernelCreateEventFlag(&D_0002A07C, 0x200U, 1U, NULL);
 }
-

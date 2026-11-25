@@ -112,14 +112,27 @@ void func_000132A4(void) {
 void func_000132C4(void) {
     func_000131D8(0, 0xFFFF);
 }
+#endif
 
-INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000132E4);
-
+#if FW_VERSION == 310
 void func_00013380(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_000134E4();
 }
+#endif
 
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000132E4);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 310
+void func_00013380(s32 *arg0, s32 arg1) {
+    *arg0 = arg1;
+    func_000134E4();
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000133A0);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013418);

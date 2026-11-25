@@ -128,3 +128,5 @@ vsh_5452A47B = 0x0000EF34; // type:func
 vsh_5E43E468 = 0x0000EF3C; // type:func
 vsh_61FE226A = 0x0000EF44; // type:func
 vsh_7ADF6A69 = 0x0000EF4C; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

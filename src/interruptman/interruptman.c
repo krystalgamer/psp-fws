@@ -281,7 +281,13 @@ s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1) {
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_0FC68A56);
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/interruptman", module_reboot_before);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_02314986);
 
 M2C_UNK *InterruptManagerForKernel_00B6B0F3(void) {

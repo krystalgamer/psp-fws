@@ -1,6 +1,7 @@
 {
  "funcs": {
   "IoFileMgrForKernel_8E982A74": "M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);",
+  "KDebugForKernel_24C32559": "s32 KDebugForKernel_24C32559(M2C_UNK);",
   "KDebugForKernel_D636B827": "s32 KDebugForKernel_D636B827();",
   "func_00000984": "s32 func_00000984(s32 arg0);",
   "func_000009BC": "s32 func_000009BC(s32 arg0);",
@@ -44,6 +45,7 @@
   "func_000044C0": "s32 func_000044C0(void *arg0);",
   "func_00004544": "s32 func_00004544(s32);",
   "func_00004568": "s32 func_00004568(void);",
+  "func_000046C4": "void func_000046C4(void);",
   "func_00005334": "void func_00005334(s32 arg0);",
   "func_00005340": "s32 func_00005340(void);",
   "func_00005358": "u8 func_00005358(void);",
@@ -104,6 +106,7 @@
   "D_000070D0": "extern s32 D_000070D0;",
   "D_000070D4": "extern s32 D_000070D4;",
   "D_000070D8": "extern s32 D_000070D8;",
+  "D_00007690": "extern s32 D_00007690;",
   "D_000083A4": "extern u8 D_000083A4;",
   "D_000083A5": "extern u8 D_000083A5;",
   "D_000083A6": "extern u8 D_000083A6;",

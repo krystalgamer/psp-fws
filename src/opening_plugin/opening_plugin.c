@@ -254,6 +254,10 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_000009E8);
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000009D4);
 #endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/opening_plugin", func_000009FC_v310);
+#endif
+
 #if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000009FC_v303);
 #endif
@@ -329,7 +333,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_000010EC);
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00001194);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_00001194(void) {
     func_000010EC(1, 0xFFFF);
 }
@@ -339,7 +343,7 @@ void func_00001194(void) {
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000011B4);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_000011B4(void) {
     func_000010EC(0, 0xFFFF);
 }
@@ -387,7 +391,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00001274);
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000012EC);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_000012EC(void **arg0) {
     void *temp_a0;
 
@@ -406,7 +410,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00000F78);
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000013E8);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_000013E8(void **arg0, void *arg1) {
     *arg0 = arg1;
     func_000012EC(arg0);

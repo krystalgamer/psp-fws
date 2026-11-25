@@ -118,6 +118,7 @@ s32 sceKernelCreateEventFlag(void *, u32, u32, void *);
 s32 sceKernelCreateThread(void *, s32, s32, u32, u32, void *);
 s32 sceKernelDelayThread(u32);
 s32 sceKernelDeleteEventFlag(s32);
+s32 sceKernelDeleteMutex(s32);
 s32 sceKernelDeleteSema(s32);
 s32 sceKernelDeleteThread(s32);
 M2C_UNK sceKernelEnableSubIntr(M2C_UNK, M2C_UNK);

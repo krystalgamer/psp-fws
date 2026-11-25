@@ -451,9 +451,9 @@ INCLUDE_ASM("nonmatchings/license_plugin", func_000053B0);
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_00005410);
 
-#if FW_VERSION < 330
+#if FW_VERSION >= 310
 void func_00005468(s32 arg0, struct Unk_func_00005468_1 *arg1) {
-    if (arg1->unk4 == 0x401) {
+    if (arg1->unk4 == 0x409) {
         if (arg1->unkC == 0) {
             func_00005410(arg0, (s32) &func_000053B0, 0);
         }
@@ -461,7 +461,7 @@ void func_00005468(s32 arg0, struct Unk_func_00005468_1 *arg1) {
 }
 #else
 void func_00005468(s32 arg0, struct Unk_func_00005468_1 *arg1) {
-    if (arg1->unk4 == 0x409) {
+    if (arg1->unk4 == 0x401) {
         if (arg1->unkC == 0) {
             func_00005410(arg0, (s32) &func_000053B0, 0);
         }

@@ -40,7 +40,7 @@ INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodec_8ACA11D5);
 
 INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodec_59176A0F);
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodec_E066B45F);
 #endif
 

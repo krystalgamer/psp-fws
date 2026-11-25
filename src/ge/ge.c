@@ -518,9 +518,17 @@ INCLUDE_ASM("nonmatchings/ge", func_000022E0);
 INCLUDE_ASM("nonmatchings/ge", func_00004DAC);
 
 INCLUDE_ASM("nonmatchings/ge", func_00004DFC);
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/ge", func_00004FD4);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/ge", func_00004F4C);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", func_0000505C);
 
 INCLUDE_ASM("nonmatchings/ge", func_00005140);

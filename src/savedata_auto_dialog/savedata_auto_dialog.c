@@ -8559,7 +8559,11 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019B0C);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001B2B8);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001B328);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001B308);
 #endif
 

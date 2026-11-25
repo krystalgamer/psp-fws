@@ -563,7 +563,11 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_000034B0);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00003570);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002FEBC);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002FE04);
 #endif
 
@@ -2324,6 +2328,10 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F5A8);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F5C0);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F5CC);
+#endif
+
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_00030654);
 #endif
 
 #if FW_VERSION == 303

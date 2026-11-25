@@ -159,6 +159,20 @@ INCLUDE_ASM("nonmatchings/video_main_plugin", func_000011F8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00001584);
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_00001644);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_00001674);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_0000168C);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_0000169C);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_000016BC);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_000016D8);
+#endif
+
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00001830);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00001A04);
@@ -381,6 +395,10 @@ INCLUDE_ASM("nonmatchings/video_main_plugin", func_00002650);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00002760);
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_0000267C);
+#endif
+
 #if FW_VERSION < 300
 void func_000027A0(void) {
     void *temp_v0;
@@ -585,11 +603,22 @@ INCLUDE_ASM("nonmatchings/video_main_plugin", func_00005824);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00005848);
 
+#if FW_VERSION == 310
+void func_00005B1C(s32 *arg0, s32 arg1) {
+    *arg0 = arg1;
+    func_00005E68();
+}
+
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_00005944);
+#endif
+
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00005878);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_000058A8);
 
+#if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00005944);
+#endif
 
 void func_00005964(struct Unk_func_00005964_0 *arg0) {
     arg0->unk0 = 0;
@@ -601,7 +630,9 @@ INCLUDE_ASM("nonmatchings/video_main_plugin", func_00005974);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00005A00);
 
+#if FW_VERSION < 310
 void func_00005B1C(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00005E68();
 }
+#endif

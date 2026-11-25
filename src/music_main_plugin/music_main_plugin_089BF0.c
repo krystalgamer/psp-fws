@@ -976,7 +976,13 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008F094);
 s32 func_0008F270(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_000A59E4);
+#endif
+
+#if FW_VERSION == 260 || (FW_VERSION >= 282 && FW_VERSION < 310)
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008F278);
 #endif
 

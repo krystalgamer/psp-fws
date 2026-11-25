@@ -15,7 +15,9 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_0000015C);
 
+#if FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0000201C);
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0005AD18);

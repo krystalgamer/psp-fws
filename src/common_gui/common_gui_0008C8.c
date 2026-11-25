@@ -38,6 +38,10 @@ INCLUDE_RODATA("nonmatchings/common_gui_0008C8", D_00003324);
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000AC8);
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000CD4);
+#endif
+
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000BE4);
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000D4C);

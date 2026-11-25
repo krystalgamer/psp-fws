@@ -36,6 +36,7 @@ struct Unk_func_000004C0_1 {
 
 extern u32 D_00005AF0;
 extern u32 D_00007160;
+extern s32 D_00008174;
 extern s32 D_00008184;
 
 M2C_UNK LoadCoreForKernel_0DE1F600();
@@ -87,6 +88,7 @@ void module_reboot_before(void);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 M2C_UNK sceKernelFreePartitionMemory(s32);
+s32 sceKernelLockMutex(s32, s32, void *);
 s32 sceKernelSuspendThread(u32);
 s32 sceKernelWaitSema(s32, s32, void *);
 s32 syslib_ADF12745(void);

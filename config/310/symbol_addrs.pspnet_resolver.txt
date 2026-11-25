@@ -27,3 +27,9 @@ sceNet_lib_B5CE388A = 0x00001D28; // type:func
 sceNet_lib_BCBE14CF = 0x00001D30; // type:func
 sceNet_lib_D8722983 = 0x00001D38; // type:func
 sceNet_lib_EF097716 = 0x00001D40; // type:func
+// shared names (tools/add_version.py) begin
+D_00001F70 = 0x00001F90;
+D_00001F74 = 0x00001F94;
+D_00001F78 = 0x00001F98;
+D_00001F7C = 0x00001F9C;
+// shared names (tools/add_version.py) end

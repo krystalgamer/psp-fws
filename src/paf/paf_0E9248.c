@@ -97,12 +97,43 @@ void scePaf_84913A3A(struct Unk_scePaf_84913A3A_0 *arg0) {
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E9248", func_000E66C4);
+#endif
 
+#if FW_VERSION >= 250 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_0E9248", func_000E67E4);
+#endif
 
+#if FW_VERSION == 270
+void func_000E67E4(M2C_UNK **arg0) {
+    *arg0 = &D_00192C90;
+    scePaf_4E67BB08(arg0);
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_0E9248", scePaf_677F1705);
+#endif
 
+#if FW_VERSION == 270
+s32 scePaf_677F1705(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 1;
+    if (D_001A47D8 != arg1) {
+        var_v0 = func_0008A944(arg0, arg1);
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_0E9248", scePaf_7C2DB482);
+#endif
+
+#if FW_VERSION == 270
+s32 scePaf_7C2DB482(void) {
+    return D_001A47D8;
+}
 #endif
 
 #if FW_VERSION == 282

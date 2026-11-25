@@ -38,6 +38,12 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_4E923738);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_68C14F25);
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/mscm", module_reboot_before);
+
+INCLUDE_ASM("nonmatchings/mscm", func_00000BEC);
+#endif
+
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/mscm", func_00000B9C);
 
@@ -52,7 +58,9 @@ s32 func_00000C1C(struct Unk_func_00000C1C_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/mscm", module_reboot_before);
+#endif
 
 #if FW_VERSION < 250
 void func_00000930(s32 arg0) {
@@ -107,6 +115,10 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0D8D6A54);
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_54B3A3F1);
 #endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/mscm", func_00001B0C);
+#endif
+
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0D8D6A54);
 #endif
@@ -115,9 +127,11 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0D8D6A54);
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_54B3A3F1);
 #endif
 
-#if FW_VERSION >= 250
+#if FW_VERSION >= 250 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/mscm", func_00001AD4);
+#endif
 
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/mscm", func_00001BF8);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00001F10);
@@ -175,7 +189,13 @@ s32 func_0000254C(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 
 }
 #endif
 
-#if FW_VERSION >= 250
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/mscm", func_0000267C);
+
+INCLUDE_ASM("nonmatchings/mscm", func_000028E0);
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/mscm", func_000025F0);
 #endif
 
@@ -429,6 +449,10 @@ INCLUDE_ASM("nonmatchings/mscm", func_000059C0);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00005A44);
 
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/mscm", func_00005A90);
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00005AC8);
 
@@ -446,8 +470,6 @@ s32 func_000052F4(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/mscm", func_00005A90);
-
 INCLUDE_ASM("nonmatchings/mscm", func_000063B4);
 
 INCLUDE_ASM("nonmatchings/mscm", func_0000641C);

@@ -2316,7 +2316,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00004014);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00004144);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024920);
 #endif
 

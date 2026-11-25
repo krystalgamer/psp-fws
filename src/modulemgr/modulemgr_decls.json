@@ -49,6 +49,7 @@
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelFreePartitionMemory": "M2C_UNK sceKernelFreePartitionMemory(s32);",
+  "sceKernelLockMutex": "s32 sceKernelLockMutex(s32, s32, void *);",
   "sceKernelSuspendThread": "s32 sceKernelSuspendThread(u32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
   "syslib_ADF12745": "s32 syslib_ADF12745(void);"
@@ -61,6 +62,7 @@
  "vars": {
   "D_00005AF0": "extern u32 D_00005AF0;",
   "D_00007160": "extern u32 D_00007160;",
+  "D_00008174": "extern s32 D_00008174;",
   "D_00008184": "extern s32 D_00008184;"
  }
 }

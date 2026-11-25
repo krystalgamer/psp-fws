@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/310/.splat_cache.pops
   symbol_addrs_path:
     - config/310/symbol_addrs.pops.txt
+    - config/310/func_starts.pops.txt
     - tmp/build/310/prx_syms.pops.txt
   reloc_addrs_path: [tmp/build/310/reloc_addrs.pops.txt]
   asset_path: tmp/assets/310/pops
@@ -54,7 +55,10 @@ segments:
     subsegments:
       - { start: 0xC0, type: asm, name: init, linker_section: .init }
       - { start: 0xE4, type: prxpad, order: .text }
-      - [0x100, asm, pops]
+      - [0x100, c, pops]
+      - [0xE84, c, pops_017A50]
+      - [0x2D21C, c, pops_032938]
+      - [0x2E1A0, c, pops_0348E8]
       - { start: 0x310D8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x310F4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x31504, type: prxpad, order: .text }
@@ -72,7 +76,10 @@ segments:
       - { start: 0x31AA4, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x31AA8, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x31AAC, type: prxpad, order: .rodata }
-      - [0x31AC0, rodata, pops]
+      - [0x31AC0, .rodata, pops]
+      - [0x31B30, .rodata, pops_017A50]
+      - [0xE81C4, .rodata, pops_032938]
+      - [0xE95D8, .rodata, pops_0348E8]
       - { start: 0xE9788, type: prxpad, order: .rodata }
   - name: pops_seg1
     type: code

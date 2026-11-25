@@ -319,9 +319,17 @@ INCLUDE_ASM("nonmatchings/display", func_00000AF8);
 INCLUDE_ASM("nonmatchings/display", func_00000EAC);
 
 INCLUDE_ASM("nonmatchings/display", func_00001220);
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/display", func_00001288);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/display", func_000012C0);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/display", func_00001398);
 
 INCLUDE_ASM("nonmatchings/display", func_00001480);

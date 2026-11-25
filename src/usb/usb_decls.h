@@ -22,6 +22,9 @@ struct Unk_func_00008318_temp_a0 {
 extern s32 D_000094F0;
 extern s32 D_00009554;
 extern M2C_UNK D_00009A3C;
+extern void *D_00009FC8;
+extern s32 D_0000A034;
+extern s32 D_0000A038;
 extern s32 D_0000A9DC;
 extern s32 D_0000A9EC;
 extern s32 D_0000AA0C;
@@ -91,6 +94,8 @@ s32 func_00008BD8(void);
 s32 func_00008BFC(void);
 s32 func_00008D38(s32 arg0);
 s32 module_start(void);
+M2C_UNK sceGpio_driver_103C3EB2(M2C_UNK);
+M2C_UNK sceGpio_driver_310F0CCF(M2C_UNK);
 s32 sceGpio_driver_317D9D2C(M2C_UNK, M2C_UNK);
 s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
 s32 sceKernelPowerLock(s32);

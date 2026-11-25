@@ -3,7 +3,9 @@
 
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudioOutputBlocking);
 
+#if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudioChReserve);
+#endif
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudioChRelease);
@@ -15,7 +17,19 @@ INCLUDE_RODATA("nonmatchings/vaudio", D_00000D9C);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/vaudio", module_start);
-#else
+#endif
+
+#if FW_VERSION == 310
+s32 sceVaudioChReserve(s32 arg0, s32 arg1, s32 arg2) {
+    return func_0000078C(arg0, arg1, arg2, 0);
+}
+
+void sceVaudioChReserveBuffering(s32 arg0, s32 arg1, s32 arg2) {
+    func_0000078C(arg0, arg1, arg2, 1);
+}
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudio_driver_5A7435B7);
 #endif
 
@@ -87,6 +101,10 @@ s32 sceVaudio_driver_DCC18F25(void) {
 }
 
 INCLUDE_ASM("nonmatchings/vaudio", module_stop);
+#endif
+
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/vaudio", func_0000078C);
 #endif
 
 #if FW_VERSION >= 300

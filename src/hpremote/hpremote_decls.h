@@ -29,6 +29,7 @@ extern s32 D_0000225C;
 extern s8 D_00002261;
 extern s8 D_00002262;
 extern s8 D_00002263;
+extern s32 D_000022B0;
 
 s32 func_0000030C(void);
 s32 func_00000AE4(void);
@@ -47,6 +48,7 @@ s32 sceHprm_driver_526BB7F4(void);
 u8 sceHprm_driver_71B5FB67(void);
 s32 sceHprm_driver_7B038374(M2C_UNK **arg0);
 s32 sceHprm_driver_971AE8FB(s32 *arg0);
+s32 sceHprm_driver_C1777D84(void);
 s32 sceHprm_driver_F04591FA(s32 arg0);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);

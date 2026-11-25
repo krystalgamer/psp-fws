@@ -564,11 +564,19 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003EE0);
 INCLUDE_ASM("nonmatchings/umd9660", func_00003830);
 
 INCLUDE_ASM("nonmatchings/umd9660", func_00003A18);
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/umd9660", func_00003EF4);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 s32 func_00003BFC(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282
 M2C_UNK *func_00003C04(void) {
     return &D_00005CA0;
 }
@@ -861,6 +869,12 @@ s32 func_00004568(void) {
 }
 
 INCLUDE_ASM("nonmatchings/umd9660", func_0000458C);
+#endif
+
+#if FW_VERSION == 310
+void func_000046C4(void) {
+    D_00007690 = KDebugForKernel_24C32559(0x13);
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/umd9660", func_000042A0);

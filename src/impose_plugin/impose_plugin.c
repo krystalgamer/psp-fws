@@ -125,9 +125,34 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_00000AC0);
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000924);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000964);
+#endif
 
+#if FW_VERSION == 310
+void func_00000964(void) {
+    s32 temp_s1;
+    void *temp_v0;
+
+    temp_s1 = sceVshBridge_639C3CB3(0x40000000);
+    temp_v0 = scePaf_338C3774(scePaf_D4FAE7D0(&D_000013A4), 1);
+    if (temp_s1 == 0) {
+        if (temp_v0 != NULL) {
+            M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x10C)(0x1F, 1);
+        }
+        scePaf_A69BABE3(0x40D, 0, 0);
+        scePaf_3DEE8DB4();
+    } else {
+        scePaf_499FF48D();
+        scePaf_A69BABE3(0x40D, temp_s1, temp_s1);
+        if (temp_v0 != NULL) {
+            M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x10C)(0x1F, 0);
+        }
+    }
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000A2C);
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000B5C);

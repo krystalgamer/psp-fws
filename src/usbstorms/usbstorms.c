@@ -1,4 +1,9 @@
 #include "common.h"
+#include "usbstorms_decls.h"
+
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/usbstorms", func_00000000_v310);
+#endif
 
 #if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000000_v303);
@@ -40,7 +45,13 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00000374_v150);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000544);
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/usbstorms", func_0000082C);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/usbstorms", func_000006BC);
 #endif
 
@@ -122,7 +133,7 @@ INCLUDE_RODATA("nonmatchings/usbstorms", D_00003764);
 
 INCLUDE_ASM("nonmatchings/usbstorms", module_start);
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 271 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_16173D42);
 
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_CF2AF7B3);
@@ -220,7 +231,7 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_000023E0);
 INCLUDE_ASM("nonmatchings/usbstorms", func_00002514);
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 271 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/usbstorms", func_000029BC);
 #endif
 
@@ -264,6 +275,65 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00002C4C);
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/usbstorms", func_0000332C);
+#endif
+
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003248);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_000033BC);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003438);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_000034B4);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_000035BC);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_0000377C);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_0000505C);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_0000506C);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003860);
+
+s32 func_00003944(s32 arg0, s32 arg1) {
+    sceReg_driver_0CAE832B(arg1);
+    sceReg_driver_FA8A5739(arg0);
+    sceKernelPowerUnlock(0);
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003980);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003A24);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_16173D42);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_CF2AF7B3);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_9569F268);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_2241C828);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_4B10A7F5);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_FF0C3873);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_ABE9F2C7);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_762F7FDF);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_0000432C);
+
+s32 func_00004380(void) {
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_00004388);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_000043C4);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_00004400);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 300

@@ -125,6 +125,10 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_000058E0);
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_0000592C);
 #endif
 
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_000059F4_v310);
+#endif
+
 #if FW_VERSION == 303
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005964_v303);
 #endif
@@ -145,6 +149,10 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005964_v300);
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005994);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_000059DC);
+#endif
+
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005AB0);
 #endif
 
 #if FW_VERSION == 303
@@ -820,7 +828,19 @@ void func_00001FDC(s32 arg0) {
 s32 func_00001FE8(void) {
     return D_00006C50;
 }
+#endif
 
+#if FW_VERSION == 310
+void func_000022C0(s32 arg0) {
+    D_00007D14 = arg0;
+}
+
+s32 func_000022CC(void) {
+    return D_00007D14;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00001FF4);
 
 u8 func_00002000(void) {
@@ -834,9 +854,17 @@ void func_0000200C(void) {
         sceHVUI_Module_789FBBA8();
     }
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00002328);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00002044);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_000020B8);
 
 void func_00002154(void) {
@@ -867,11 +895,17 @@ void func_00002374(s32 arg0) {
     }
     sceHVUI_Module_A4C50591();
 }
+#endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_000026C8);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_000023A0);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION >= 300 && FW_VERSION < 310
 M2C_UNK *func_0000268C(void) {
     return "http://manuals.playstation.net/document/pspindex.html";
 }
@@ -883,6 +917,10 @@ INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_000023C8);
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00002458);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00002634);
+#endif
+
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00002ABC);
 #endif
 
 #if FW_VERSION == 303
@@ -1134,6 +1172,10 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00006338);
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00006348);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00006354);
+#endif
+
+#if FW_VERSION == 310
+INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00006424);
 #endif
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_0000566C);

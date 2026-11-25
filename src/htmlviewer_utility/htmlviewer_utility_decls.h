@@ -55,6 +55,7 @@ extern s32 D_00006F24;
 extern struct D_00006F28_s D_00006F28;
 extern M2C_UNK D_000072B4;
 extern s32 D_00007334;
+extern s32 D_00007D14;
 
 M2C_UNK func_00000000();
 s32 func_00000180(s32, s32, s32);
@@ -102,6 +103,8 @@ void func_0000200C(void);
 void func_00002154(void);
 s32 func_00002164(u32 arg0, s32 *arg1);
 s32 func_00002290(s32, s32, s32);
+void func_000022C0(s32 arg0);
+s32 func_000022CC(void);
 s8 *func_000022D8(s8 *arg0, s32 arg1, s32 arg2);
 s32 func_0000231C(s32, s32);
 void func_00002368(s8 arg0);

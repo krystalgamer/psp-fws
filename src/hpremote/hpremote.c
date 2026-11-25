@@ -30,7 +30,25 @@ s32 func_00000AE4(void) {
     sceKernelCpuResumeIntr(temp_v0);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 310
+s32 func_00000AF4(void) {
+    s32 temp_v0;
+
+    temp_v0 = sceKernelCpuSuspendIntr();
+    M2C_VFIELD(&D_00002080, s32, 0x1E0) = 1;
+    D_00002080.unk1CC = 0;
+    D_00002080.unk1D8 = 0;
+    M2C_VFIELD(&D_00002080, s32, 0x1DC) = 0;
+    D_00002080.unk1D0 = 0;
+    D_00002080.unk1D4 = 0;
+    sceKernelCpuResumeIntr(temp_v0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 s32 func_00000AF4(void) {
     s32 temp_v0;
 
@@ -160,7 +178,15 @@ s32 sceHprmIsRemoteExist(void) {
 s32 sceHprmIsMicrophoneExist(void) {
     return __builtin_allegrex_max(D_00002263, 0);
 }
+#endif
 
+#if FW_VERSION == 310
+s32 sceHprm_driver_C1777D84(void) {
+    return D_000022B0;
+}
+#endif
+
+#if FW_VERSION >= 282
 s32 sceHprm_driver_4D1E622C(void) {
     sceKernelSetEventFlag(D_00002198, 8U);
     return 0;

@@ -17,15 +17,20 @@
   "func_000065E4": "s32 func_000065E4(s32);",
   "func_00006674": "s32 func_00006674(s32 arg0);",
   "func_00006998": "s32 func_00006998(s32 arg0);",
+  "func_000069A0": "s32 func_000069A0(s32, s32);",
   "func_00006A0C": "void func_00006A0C(void);",
   "func_00006AC0": "void func_00006AC0(s32 arg0);",
   "func_00006EF0": "s32 func_00006EF0(s32 arg0);",
   "module_reboot_before": "s32 module_reboot_before(void);",
   "sceIoClose": "s32 sceIoClose(s32);",
   "sceIoDevctl": "s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);",
+  "sceKernelCreateMutex": "s32 sceKernelCreateMutex(void *, u32, s32, void *);",
+  "sceKernelDeleteMutex": "s32 sceKernelDeleteMutex(s32);",
   "sceKernelDeleteVpl": "M2C_UNK sceKernelDeleteVpl(s32);",
   "sceKernelFreeVpl": "M2C_UNK sceKernelFreeVpl(s32, s32);",
+  "sceKernelLockMutex": "s32 sceKernelLockMutex(s32, s32, void *);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
+  "sceReg_driver_98279CF1": "s32 sceReg_driver_98279CF1(void);",
   "sceReg_driver_9B25EDF1": "M2C_UNK sceReg_driver_9B25EDF1();",
   "syslib_ADF12745": "s32 syslib_ADF12745(s32 arg0);"
  },
@@ -38,6 +43,15 @@
   "D_0000674C": "extern s32 D_0000674C;",
   "D_00006F8C": "extern M2C_UNK D_00006F8C;",
   "D_00006FB0": "extern s32 D_00006FB0;",
-  "D_00006FDC": "extern s32 D_00006FDC;"
+  "D_00006FC4": "extern s32 D_00006FC4;",
+  "D_00006FC8": "extern s32 D_00006FC8;",
+  "D_00006FCC": "extern s32 D_00006FCC;",
+  "D_00006FD0": "extern s32 D_00006FD0;",
+  "D_00006FD4": "extern s32 D_00006FD4;",
+  "D_00006FD8": "extern s32 D_00006FD8;",
+  "D_00006FDC": "extern s32 D_00006FDC;",
+  "D_00007050": "extern s32 D_00007050;",
+  "D_0000706C": "extern s32 D_0000706C;",
+  "D_00007070": "extern s32 D_00007070;"
  }
 }

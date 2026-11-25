@@ -95,6 +95,7 @@ extern s32 D_00010140;
 extern s32 D_000109C0;
 extern s32 D_00010AC0;
 extern s32 D_00010B80;
+extern s32 D_00010C00;
 extern s32 D_00011014;
 extern s32 D_000110A0;
 extern M2C_UNK D_000110B4;

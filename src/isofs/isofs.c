@@ -1132,19 +1132,29 @@ INCLUDE_ASM("nonmatchings/isofs", func_00004D38);
 INCLUDE_ASM("nonmatchings/isofs", func_00004E38);
 #endif
 
+#if FW_VERSION == 310
+INCLUDE_ASM("nonmatchings/isofs", func_00005048);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005410);
+
+INCLUDE_ASM("nonmatchings/isofs", func_00005760);
+#endif
+
 #if FW_VERSION >= 280 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/isofs", func_00004E48);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00004F54);
 #endif
 
-#if FW_VERSION >= 280
+#if FW_VERSION >= 280 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/isofs", func_00005170);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00005294);
 
 INCLUDE_ASM("nonmatchings/isofs", func_000055E8);
+#endif
 
+#if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_00005894);
 #endif
 
