@@ -41,6 +41,10 @@ INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001420);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001434);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/opening_plugin", func_0000076C);
+#endif
+
 #if FW_VERSION == 260
 void func_0000076C(void) {
     s32 temp_v0;

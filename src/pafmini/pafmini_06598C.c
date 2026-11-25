@@ -18,7 +18,7 @@ void func_000659DC(struct Unk_func_000659DC_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_000659EC);
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_0007ECC4);
 
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_0007EDAC);

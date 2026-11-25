@@ -11,6 +11,20 @@ s32 scePaf_87E5F9C7(struct Unk_scePaf_87E5F9C7_0 *arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
+#if FW_VERSION == 200
+INCLUDE_ASM("nonmatchings/paf_043468", scePaf_D726DDD3);
+
+s32 func_00040864(void *arg0) {
+    s32 var_v1;
+
+    var_v1 = 1;
+    if ((M2C_FIELD(arg0, u8 *, 0x15) != 0) && (M2C_FIELD(arg0, u8 *, 0x29) != 0)) {
+        var_v1 = M2C_FIELD(arg0, s32 *, 0) != 0;
+    }
+    return var_v1;
+}
+#endif
+
 #if FW_VERSION == 282
 s32 scePaf_D726DDD3(s32 arg0) {
     s32 **temp_v0;

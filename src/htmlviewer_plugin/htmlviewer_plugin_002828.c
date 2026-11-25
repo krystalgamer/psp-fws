@@ -49,7 +49,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00002A28);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00001EEC);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 void func_00001EEC(void) {
     void *sp0;
     s32 temp_v0;
@@ -96,7 +96,7 @@ void func_00001EEC(void) {
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00001F4C);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 void func_00001F4C(void) {
     if (D_000066F9 != 0) {
         func_00000678(0);

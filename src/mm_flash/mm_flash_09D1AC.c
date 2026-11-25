@@ -43,4 +43,3 @@ s32 func_0009D288(struct Unk_func_0009D288_0 *arg0) {
 void func_0009D290(struct Unk_func_0009D290_0 *arg0) {
     func_000000E8(arg0->unk4);
 }
-

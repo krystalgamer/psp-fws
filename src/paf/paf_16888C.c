@@ -9,9 +9,19 @@ s32 func_0016888C(s32 arg0, s32 arg1, s32 *arg2) {
 
 INCLUDE_ASM("nonmatchings/paf_16888C", func_001688A4);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_16888C", func_00121374);
+#if FW_VERSION == 200
+INCLUDE_ASM("nonmatchings/paf_16888C", func_0015F838);
 
+INCLUDE_ASM("nonmatchings/paf_16888C", func_0015F87C);
+
+INCLUDE_ASM("nonmatchings/paf_16888C", func_0015F8A4);
+#endif
+
+#if FW_VERSION < 200
+INCLUDE_ASM("nonmatchings/paf_16888C", func_00121374);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_16888C", func_0012137C);
 
 INCLUDE_ASM("nonmatchings/paf_16888C", func_001213A0);

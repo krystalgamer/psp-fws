@@ -3517,6 +3517,7 @@ s32 func_00093A38(struct Unk_func_00093A38_0 *arg0);
 void func_00093AF0(void);
 s32 func_00093AF8(s32 arg0);
 s32 func_00093B34(s32 arg0);
+s32 func_00093C74(s32);
 s32 func_00093FD8();
 void func_000956AC(void);
 s32 func_00095DD4(void);
@@ -3821,5 +3822,6 @@ void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 M2C_UNK sceKernelLibcGettimeofday();
 M2C_UNK sceKernelLibcTime();
+s32 sceKernelSleepThread(void);
 
 #endif

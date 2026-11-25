@@ -189,7 +189,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_000007F4);
 INCLUDE_ASM("nonmatchings/threadman", func_000008A0);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 s32 func_000008A0(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -394,7 +394,7 @@ INCLUDE_ASM("nonmatchings/threadman", ThreadManForUser_6E9EA350);
 INCLUDE_ASM("nonmatchings/threadman", func_00002228);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_000021A0);
 #endif
 
@@ -492,7 +492,7 @@ s32 func_0000275C(struct Unk_func_0000275C_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/threadman", func_00002784);
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_00002828);
 #endif
 
@@ -682,7 +682,7 @@ s32 func_000059B4(void) {
 }
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateMutex);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteMutex);
@@ -762,7 +762,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_000154A8);
 INCLUDE_ASM("nonmatchings/threadman", func_000067BC);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_00007B40);
 #endif
 
@@ -1580,7 +1580,7 @@ s32 func_0000ED50(void) {
 }
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000FCC4);
 #endif
 
@@ -1596,7 +1596,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000F200);
 INCLUDE_ASM("nonmatchings/threadman", func_0000F258);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_000103C4);
 
 INCLUDE_RODATA("nonmatchings/threadman", D_000169B4);
@@ -1700,7 +1700,7 @@ INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_DD55A192);
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_BC31C1B9);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 void func_00011B68(void *arg0, s32 arg1) {
     void *var_s0;
 
@@ -1792,7 +1792,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_000130E4);
 INCLUDE_ASM("nonmatchings/threadman", func_0001313C);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 void ThreadManForUser_532A522E(void) {
     sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00015E08, void **, 0x108), s32 *, 0x18));
 }
@@ -1882,7 +1882,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013B34);
 INCLUDE_ASM("nonmatchings/threadman", func_00013C70);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_00014E9C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00015050);

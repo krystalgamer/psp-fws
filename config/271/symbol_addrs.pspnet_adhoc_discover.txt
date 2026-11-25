@@ -24,3 +24,5 @@ sceNet_lib_1858883D = 0x00000DEC; // type:func
 sceNet_lib_E0A81C7C = 0x00000DF4; // type:func
 sceNet_lib_EF097716 = 0x00000DFC; // type:func
 sceUtilityGetSystemParamInt = 0x00000E04; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

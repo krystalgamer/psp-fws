@@ -16,7 +16,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00000070);
 INCLUDE_ASM("nonmatchings/impose", func_000000C8);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose", func_00000124);
 #endif
 
@@ -210,7 +210,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F2E4);
 INCLUDE_RODATA("nonmatchings/impose", D_00006024);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose", func_0000017C);
 
 INCLUDE_ASM("nonmatchings/impose", func_000001FC);
@@ -328,7 +328,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00001E30);
 INCLUDE_ASM("nonmatchings/impose", func_00000FD8);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 s32 sceImpose_driver_1B6E3400(void) {
     return M2C_FIELD(D_00018648, s32 *, 0x78);
 }
@@ -352,7 +352,7 @@ s32 sceImpose_driver_1B6E3400(void) {
 }
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 s32 sceImpose_driver_B415FC59(void) {
     s32 temp_v0;
 
@@ -410,7 +410,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetUMDPopup);
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_381BD9E7);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 s32 sceImpose_driver_C7E36CC7(void) {
     func_0000070C();
     sceSysEventForKernel_D7D3FDCD(&D_0000F334);
@@ -577,7 +577,7 @@ s32 sceAudioRoutingGetMode(void) {
 }
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 s32 sceAudioRoutingSetVolumeMode(s32 arg0) {
     return func_0000478C(arg0);
 }
@@ -635,7 +635,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00002B0C);
 INCLUDE_ASM("nonmatchings/impose", func_00002A08);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 void func_00002D30(s32 arg0) {
     if ((M2C_FIELD(D_00018648, s32 *, 0x78) != 0) && !(arg0 & 0x20000) && (M2C_FIELD(D_00018648, s32 *, 0x6C) == 0)) {
         if (arg0 & 0x100000) {
@@ -680,7 +680,7 @@ void func_00002B54(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 void func_00002BB4(s32 arg0) {
     if (arg0 & 0x80000) {
         M2C_FIELD(D_00018648, s32 *, 0x48) = 1;
@@ -729,7 +729,7 @@ void func_00002BB4(s32 arg0) {
 INCLUDE_ASM("nonmatchings/impose", func_00002C10);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose", func_00002F3C);
 
 INCLUDE_ASM("nonmatchings/impose", func_0000341C);
@@ -857,6 +857,10 @@ INCLUDE_RODATA("nonmatchings/impose", D_000061B8);
 INCLUDE_RODATA("nonmatchings/impose", D_000061C4);
 #endif
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/impose", D_0000F2E0);
+#endif
+
 #if FW_VERSION == 270
 INCLUDE_RODATA("nonmatchings/impose", D_0000F2D0);
 #endif
@@ -901,7 +905,7 @@ INCLUDE_ASM("nonmatchings/impose", func_0000447C);
 INCLUDE_ASM("nonmatchings/impose", func_000044B8);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose", func_0000478C);
 #endif
 
@@ -923,7 +927,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00004590);
 INCLUDE_ASM("nonmatchings/impose", func_00004604);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose", func_0000498C);
 
 INCLUDE_ASM("nonmatchings/impose", func_00004F38);

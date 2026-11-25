@@ -2,11 +2,37 @@
 #include "common.h"
 #include "codec_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/codec", func_00000000);
 
 INCLUDE_ASM("nonmatchings/codec", func_0000004C);
+#endif
 
+#if FW_VERSION == 271
+void func_00000094(s32 arg0) {
+    if (sceSysreg_driver_E2A5D1EE() > 0x4FFFFF) {
+        func_0000004C(0x31, 0x37);
+        return;
+    }
+    sceGpio_driver_103C3EB2(2);
+}
+
+void func_000000E0(void) {
+    if (sceSysreg_driver_E2A5D1EE() > 0x4FFFFF) {
+        func_0000004C(0x31, 0xF7);
+        return;
+    }
+    sceGpio_driver_310F0CCF(2);
+}
+
+INCLUDE_ASM("nonmatchings/codec", func_0000012C);
+
+INCLUDE_ASM("nonmatchings/codec", func_00000188);
+
+INCLUDE_ASM("nonmatchings/codec", func_00000924);
+#endif
+
+#if FW_VERSION == 282
 void func_00000094(s32 arg0) {
     if (arg0 != (sceSysreg_driver_E2A5D1EE() > 0x4FFFFF)) {
         sceGpio_driver_103C3EB2(0x20);
@@ -54,9 +80,11 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_856E7487);
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_261C6EE8);
 #endif
 
+#if FW_VERSION != 271
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_6D945509);
 
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_40D5C897);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_EEB91526);
@@ -66,17 +94,21 @@ void sceCodec_driver_359C2B9F(void) {
 }
 #endif
 
+#if FW_VERSION != 271
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_DFBCACF3);
 
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_C513C747);
+#endif
 
-#if FW_VERSION >= 150
+#if (FW_VERSION >= 150 && FW_VERSION < 271) || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_3064C53D);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_56494D70);
-#else
+#endif
+
+#if FW_VERSION == 282
 void sceCodec_driver_31B2E41E(void) {
     func_000002A8(0, 0, -1, 0);
 }
@@ -94,7 +126,9 @@ s32 sceCodec_driver_28A49CCA(void) {
 }
 #endif
 
+#if FW_VERSION != 271
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_BD8E0977);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_856E7487);
@@ -102,7 +136,15 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_856E7487);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_261C6EE8);
+#endif
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_6D945509);
+
+INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_40D5C897);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_EEB91526);
 #endif
 
@@ -116,6 +158,14 @@ void sceCodec_driver_359C2B9F(void) {
 }
 #endif
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_DFBCACF3);
+
+INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_C513C747);
+
+INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_3064C53D);
+#endif
+
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_31B2E41E);
 #endif
@@ -126,7 +176,15 @@ void sceCodec_driver_31B2E41E(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/codec", func_00000B28);
+
+INCLUDE_ASM("nonmatchings/codec", func_00000BDC);
+
+INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_BD8E0977);
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_4515AE04);
 #endif
 
@@ -136,15 +194,15 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_20C61103);
 
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_02133959);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/codec", func_00000B70);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/codec", func_00000924);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/codec", func_00000EC4);
 #endif
 
@@ -152,7 +210,7 @@ INCLUDE_ASM("nonmatchings/codec", func_00000EC4);
 INCLUDE_ASM("nonmatchings/codec", func_00000C50);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/codec", func_00000CF8);
 #endif
 
@@ -166,7 +224,9 @@ INCLUDE_ASM("nonmatchings/codec", func_00000D5C);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/codec", D_00001320);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/codec", D_00001230);
 #endif
 

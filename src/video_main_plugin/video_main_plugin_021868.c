@@ -50,4 +50,3 @@ void func_00021A58(struct Unk_func_00021A58_0 *arg0) {
 s32 func_00021A64(s32 *arg0) {
     return *arg0;
 }
-

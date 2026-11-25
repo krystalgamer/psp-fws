@@ -69,4 +69,3 @@ void func_0009B788(struct Unk_func_0009B788_0 *arg0) {
         }
     }
 }
-

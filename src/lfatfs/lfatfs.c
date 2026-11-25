@@ -30,11 +30,32 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CB3C);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_000005EC);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000C5B4);
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
+#if FW_VERSION == 271
+s32 func_000006AC(s32 arg0) {
+    s32 temp_v0;
+
+    if (arg0 != 0x200) {
+
+    } else {
+        temp_v0 = sceKernelWaitSema(D_0000EC14, 1, NULL);
+        if (temp_v0 != 0) {
+            KDebugForKernel_84F370BC("lfatfs.c:%s:sceKernelWaitSema -> 0x%08x\n", "_sceLfatfsSysEventHandler", temp_v0);
+        } else {
+            func_000005EC();
+            sceKernelSignalSema(D_0000EC14, 1);
+        }
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 271
 s32 func_000006AC(s32 arg0) {
     s32 temp_v0;
 
@@ -180,7 +201,9 @@ s32 sceLFatFs_driver_8F0560E0(void) {
 }
 #endif
 
+#if FW_VERSION != 271
 INCLUDE_ASM("nonmatchings/lfatfs", module_reboot_before);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000C990);
@@ -194,7 +217,19 @@ INCLUDE_ASM("nonmatchings/lfatfs", sceLFatFs_driver_933F6E29);
 s32 sceLFatFs_driver_8F0560E0(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION == 271
+s32 module_reboot_before(void) {
+    func_000005EC();
+    IoFileMgrForKernel_6D08A871(&D_0000CD94);
+    IoFileMgrForKernel_6D08A871(&D_0000CDB4);
+    func_00009150();
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_00005DC0);
 #endif
 
@@ -346,6 +381,10 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CF5C);
 
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CF6C);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CF84);
+#endif
+
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CF9C);
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_00001D34);
@@ -390,7 +429,33 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00002774);
 INCLUDE_ASM("nonmatchings/lfatfs", func_000022A4);
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
+#if FW_VERSION == 271
+s32 func_000022A4(void *arg0) {
+    s32 temp_s0;
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_s0 = D_0000EC14;
+    sceKernelPowerLock(0);
+    temp_v0 = sceKernelWaitSema(temp_s0, 1, NULL);
+    if (temp_v0 != 0) {
+        KDebugForKernel_84F370BC(&D_0000CF84, &D_0000CF6C, temp_v0);
+        sceKernelPowerUnlock(0);
+        KDebugForKernel_84F370BC(&D_0000CF9C, "UFatDclose", temp_v0);
+        var_v0 = 0x80010005;
+    } else {
+        func_00009150();
+        func_000019B4(M2C_FIELD(arg0, void **, 0x10));
+        func_00009150();
+        sceKernelSignalSema(D_0000EC14, 1);
+        sceKernelPowerUnlock(0);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 271
 s32 func_000022A4(void *arg0) {
     s32 temp_s0;
     s32 temp_v0;

@@ -1,10 +1,14 @@
 {
  "funcs": {
+  "func_00000AB0": "s32 func_00000AB0(s32 arg0);",
   "func_00000AC0": "s32 func_00000AC0(s32 arg0);",
   "func_00000B3C": "M2C_UNK *func_00000B3C(void);",
+  "func_00000B80": "M2C_UNK *func_00000B80(void);",
   "func_00000B90": "M2C_UNK *func_00000B90(void);",
   "func_00000C00": "void func_00000C00(void);",
+  "func_00000C44": "void func_00000C44(void);",
   "func_00000C54": "void func_00000C54(void);",
+  "func_00000CC0": "s32 func_00000CC0(void);",
   "func_00000D00": "s32 func_00000D00(void);",
   "func_00000D28": "s32 func_00000D28(void);",
   "func_000012C0": "s32 func_000012C0(void);",
@@ -38,7 +42,9 @@
  "vars": {
   "D_00003188_v260": "extern M2C_UNK D_00003188_v260;",
   "D_000031AC": "extern M2C_UNK D_000031AC;",
+  "D_0000326C": "extern s32 D_0000326C;",
   "D_0000329C": "extern M2C_UNK D_0000329C;",
+  "D_000032AC": "extern M2C_UNK D_000032AC;",
   "D_000033F9": "extern s8 D_000033F9;",
   "D_000033FC": "extern s32 D_000033FC;",
   "D_00003410": "extern s32 D_00003410;",

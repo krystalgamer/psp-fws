@@ -6,30 +6,30 @@ INCLUDE_ASM("nonmatchings/libssl", func_00000000);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000002D8);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00000308);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000003D4);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000040C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000002FC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000003C4);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000003FC);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00000308);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000003D4);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000040C);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00000598);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00000678);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000007D8);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00000664);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000007B4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00000678);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000007D8);
 #endif
 
 void func_000007F0(struct Unk_func_000007F0_0 *arg0) {
@@ -41,7 +41,7 @@ void func_000007F0(struct Unk_func_000007F0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00000804);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00000824);
 #else
 void func_00000824(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
@@ -56,71 +56,53 @@ INCLUDE_ASM("nonmatchings/libssl", func_000008B8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000008E4);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00000924);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00000A38);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00000CEC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00000EC8);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000008FC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00000A1C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00000CCC);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00000924);
 
+INCLUDE_ASM("nonmatchings/libssl", func_00000A38);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00000CEC);
+#endif
+
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/libssl", func_00000EC8);
+#else
 INCLUDE_ASM("nonmatchings/libssl", func_00000E88);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00000FF0);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00001054);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00001008);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00001054);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00001160);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00001210);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000129C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00001338);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00001240);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000012D8);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000129C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00001338);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000013CC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000147C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00001560);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00001634);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000017AC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00001974);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00001AA0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00001CC0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00001E9C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00001FFC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00002184);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00002248);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000014F8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000015D0);
@@ -140,14 +122,34 @@ INCLUDE_ASM("nonmatchings/libssl", func_00001FA0);
 INCLUDE_ASM("nonmatchings/libssl", func_00002120);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000021DC);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00001560);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00001634);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000017AC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00001974);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00001AA0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00001CC0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00001E9C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00001FFC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00002184);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00002248);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000022B0);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000023E8);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00002390);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000023E8);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00002408);
@@ -158,40 +160,42 @@ INCLUDE_ASM("nonmatchings/libssl", func_00002510);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000025B0);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00002748);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000026E4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00002748);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000027D4);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000027F4);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00002878);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00002814);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00002D90);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00002878);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_00002D90);
+#else
 void func_00002D90(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_00002878(0, arg0, arg1, arg2, arg3);
 }
+#endif
 
-INCLUDE_ASM("nonmatchings/libssl", func_00002E54);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00002F20);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000307C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00002DC4);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00002E8C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00002FF4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00002E54);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00002F20);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000307C);
 #endif
 
 s32 func_00003258(void) {
@@ -202,14 +206,14 @@ M2C_UNK *func_00003260(void) {
     return &D_0002A698;
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000032E4);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00003368);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000326C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000032F0);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000032E4);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00003368);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00003340);
@@ -218,7 +222,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_000033D0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00003440);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00003458);
 #else
 void *func_00003458(void) {
@@ -263,15 +267,15 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002A698);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002A6AC);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00003608);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00003584);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000036D0);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00003608);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_000036D0);
+#else
 s32 func_000036D0(s32 arg0) {
     s32 var_v1;
     void *temp_v0;
@@ -283,33 +287,21 @@ s32 func_000036D0(s32 arg0) {
     }
     return var_v1;
 }
+#endif
 
-INCLUDE_ASM("nonmatchings/libssl", func_0000379C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00003934);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000370C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00003898);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000379C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00003934);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000390C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00003A28);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00003B98);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00003C24);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00003C8C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00003D50);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00003ED0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00003F20);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00003984);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00003AF0);
@@ -325,21 +317,25 @@ INCLUDE_ASM("nonmatchings/libssl", func_00003E18);
 INCLUDE_ASM("nonmatchings/libssl", func_00003E68);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00003F04);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00003A28);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00003B98);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00003C24);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00003C8C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00003D50);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00003ED0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00003F20);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00003F7C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000413C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000042F8);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00004484);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00004EE0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000051C0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00004084);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000423C);
@@ -349,6 +345,16 @@ INCLUDE_ASM("nonmatchings/libssl", func_000043A0);
 INCLUDE_ASM("nonmatchings/libssl", func_00004DB0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00005094);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000413C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000042F8);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00004484);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00004EE0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000051C0);
 #endif
 
 void *func_0000546C(void) {
@@ -369,27 +375,19 @@ INCLUDE_ASM("nonmatchings/libssl", func_000054B4);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000054F8);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00005690);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00005A44);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00005550);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000058FC);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00005690);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00005A44);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00005A5C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00005CD0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00005DAC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00005F2C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00006058);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00005B84);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00005C60);
@@ -397,13 +395,21 @@ INCLUDE_ASM("nonmatchings/libssl", func_00005C60);
 INCLUDE_ASM("nonmatchings/libssl", func_00005DE8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00005EF8);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00005CD0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00005DAC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00005F2C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00006058);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00006094);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00006210);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_000064A8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00006514);
@@ -447,26 +453,26 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002A7F0);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002A7F4);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000793C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00007F6C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00008608);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00007788);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00007DB8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00008434);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000793C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00007F6C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00008608);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00008474);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000086BC);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000084E4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000086BC);
 #endif
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002A888);
@@ -477,19 +483,7 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002B188);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002B1C8);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00008A14);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000904C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00009D40);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000AA34);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000ABB4);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000AF1C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00008834);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00008E6C);
@@ -501,6 +495,18 @@ INCLUDE_ASM("nonmatchings/libssl", func_0000A968);
 INCLUDE_ASM("nonmatchings/libssl", func_0000AAE0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000AE34);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00008A14);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000904C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00009D40);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000AA34);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000ABB4);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000AF1C);
 #endif
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002BA10);
@@ -529,23 +535,23 @@ void func_0000AED0(struct Unk_func_0000AED0_0 *arg0) {
     arg0->unk10 = 0;
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000B018);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000B104);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000B2D0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000AF24);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000B008);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000B1C8);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000B018);
 
-INCLUDE_ASM("nonmatchings/libssl", func_0000B298);
+INCLUDE_ASM("nonmatchings/libssl", func_0000B104);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000B2D0);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_0000B298);
+#else
 void func_0000B298(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0x67452301;
     M2C_FIELD(arg0, s32 *, 4) = 0xEFCDAB89;
@@ -556,31 +562,25 @@ void func_0000B298(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x58) = 0;
     func_00029D1C((s32) (arg0 + 0x18), 0, 0x40);
 }
+#endif
 
-INCLUDE_ASM("nonmatchings/libssl", func_0000B410);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000BAC8);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000BD98);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000B2FC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000B9B0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000BC74);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000B410);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000BAC8);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000BD98);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000BE84);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000C02C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000C078);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000C748);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000CBB0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000BF08);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000BF54);
@@ -588,11 +588,19 @@ INCLUDE_ASM("nonmatchings/libssl", func_0000BF54);
 INCLUDE_ASM("nonmatchings/libssl", func_0000C61C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000CA48);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000C02C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000C078);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000C748);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000CBB0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000CC88);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000CD44);
 #else
 void func_0000CD44(struct Unk_func_0000CD44_0 *arg0) {
@@ -610,14 +618,14 @@ M2C_UNK *func_0000CDD4(void) {
     return &D_0002E3E4;
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000CF48);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000D01C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000CDE0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000CE90);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000CF48);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000D01C);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000CF20);
@@ -626,10 +634,10 @@ M2C_UNK *func_0000CF5C(void) {
     return &D_0002E40C;
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000D114);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000CF68);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000D114);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000CFC8);
@@ -646,10 +654,10 @@ M2C_UNK *func_0000D014(void) {
     return &D_0002E484;
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000D1F0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000D020);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000D1F0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000D0D4);
@@ -707,14 +715,14 @@ void func_0000D49C(struct Unk_func_0000D49C_0 *arg0) {
     arg0->unk58 = 0;
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000D6B0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000D89C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000D4B0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000D698);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000D6B0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000D89C);
 #endif
 
 void func_0000D7D0(struct Unk_func_0000D7D0_0 *arg0) {
@@ -724,14 +732,14 @@ void func_0000D7D0(struct Unk_func_0000D7D0_0 *arg0) {
     arg0->unk5C = 0;
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000D9EC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000DC44);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000D7E8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000DA38);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000D9EC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000DC44);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000DC00);
@@ -791,7 +799,7 @@ s32 func_0000DF44(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_09C45275);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_FAF333D1);
 #else
 void sceSsl_lib_FAF333D1(s32 arg0) {
@@ -801,10 +809,10 @@ void sceSsl_lib_FAF333D1(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000DFD8);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000E294);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000E06C);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000E294);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_7317C1BC);
@@ -813,7 +821,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_0000E160);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000E19C);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000E280);
 #else
 void func_0000E280(struct Unk_vt_func_0000E280_arg0 **arg0) {
@@ -841,10 +849,10 @@ INCLUDE_ASM("nonmatchings/libssl", func_0000E66C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000E7DC);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000EAE0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000E8C4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000EAE0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000E9EC);
@@ -859,7 +867,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_0000EAB8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000ECDC);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000ED70);
 #else
 s32 func_0000ED70(s32 arg0, s32 arg1) {
@@ -877,7 +885,7 @@ s32 func_0000EDBC(struct Unk_func_0000EDBC_0 *arg0) {
     return arg0->unk8;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000EDC4);
 #else
 s32 func_0000EDC4(struct Unk_vt_func_0000EDC4_arg0 **arg0) {
@@ -899,7 +907,7 @@ s32 func_0000EDE0(struct Unk_func_0000EDE0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000EDE8);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000EDF0);
 #else
 s32 func_0000EDF0(struct Unk_vt_func_0000EDF0_arg0 **arg0) {
@@ -958,7 +966,7 @@ void func_0000F11C(s32 arg0) {
     D_000304D8 = arg0;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_2FE7BB42);
 #else
 s32 sceSsl_lib_2FE7BB42(void) {
@@ -968,15 +976,21 @@ s32 sceSsl_lib_2FE7BB42(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_A7BED83B);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000F3A0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000F16C);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000F3A0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000F254);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000F254);
-#else
+#if FW_VERSION == 271
+s32 func_0000F254(void) {
+    return D_000304AC;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_0000F254(void) {
     return D_000304DC;
 }
@@ -1000,15 +1014,21 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002C1B0);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002C1DC);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000F4C8);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000F298);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000F4C8);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000F944);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000F944);
-#else
+#if FW_VERSION == 271
+s32 func_0000F944(void) {
+    return D_000304B0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_0000F944(void) {
     return D_000304E0;
 }
@@ -1016,19 +1036,25 @@ s32 func_0000F944(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_9EF66756);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0000FBE0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0000FCC8);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000F988);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000FA74);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0000FBE0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0000FCC8);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00010110);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00010110);
-#else
+#if FW_VERSION == 271
+s32 func_00010110(void) {
+    return D_000304B4;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_00010110(void) {
     return D_000304E4;
 }
@@ -1036,19 +1062,27 @@ s32 func_00010110(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_E7BFC0EF);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000103A8);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00010154);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000103A8);
+#endif
 
+#if FW_VERSION == 282
 void func_000101D4(s32 arg0) {
     D_000304E8 = arg0;
 }
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000101E0);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000101E0);
-#else
+#if FW_VERSION == 271
+s32 func_000101E0_v271(void) {
+    return D_000304B8;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_000101E0(void) {
     return D_000304E8;
 }
@@ -1056,24 +1090,24 @@ s32 func_000101E0(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_047AB6BB);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000104E0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000105EC);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001027C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00010378);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000104E0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000105EC);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00010550);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00010730);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00010A98);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00010810);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00010A98);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00010A48);
@@ -1088,10 +1122,10 @@ INCLUDE_ASM("nonmatchings/libssl", func_00010C80);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002C288);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00011100);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00010E64);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00011100);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001113C);
@@ -1103,7 +1137,7 @@ void func_00011190(s32 arg0) {
     }
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000111C4);
 #else
 s32 func_000111C4(void *arg0) {
@@ -1167,22 +1201,22 @@ INCLUDE_ASM("nonmatchings/libssl", func_00011F9C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001204C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000123B8);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0001253C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000120D0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001225C);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000123B8);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0001253C);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00012458);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00012AE4);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00012804);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00012AE4);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00012950);
@@ -1207,7 +1241,7 @@ void sceSsl_lib_067173A8(struct Unk_sceSsl_lib_067173A8_0 *arg0) {
     arg0->unk14 = (s32) (arg0->unk14 | 0xA);
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000129DC);
 #else
 void func_000129DC(void *arg0, s32 arg1) {
@@ -1257,7 +1291,7 @@ s32 sceSsl_lib_558CAA41(struct Unk_sceSsl_lib_558CAA41_0 *arg0) {
     return arg0->unk4;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_0FD2F220);
 #else
 s32 sceSsl_lib_0FD2F220(struct Unk_vt_sceSsl_lib_0FD2F220_arg0 **arg0) {
@@ -1265,7 +1299,7 @@ s32 sceSsl_lib_0FD2F220(struct Unk_vt_sceSsl_lib_0FD2F220_arg0 **arg0) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_19A0DB42);
 #else
 s32 sceSsl_lib_19A0DB42(s32 **arg0) {
@@ -1275,7 +1309,7 @@ s32 sceSsl_lib_19A0DB42(s32 **arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00012A84);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_58352068);
 #else
 void sceSsl_lib_58352068(void) {
@@ -1295,14 +1329,14 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002C37C);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002C384);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00012FF4);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00013108);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00012CFC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00012E08);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00012FF4);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00013108);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00012ED0);
@@ -1311,7 +1345,7 @@ M2C_UNK *func_00012F14(void) {
     return &D_0002E758;
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_28B4DE33);
 #else
 s32 sceSsl_lib_28B4DE33(s32 arg0, s32 arg1) {
@@ -1338,7 +1372,7 @@ s32 func_00012F88(struct Unk_func_00012F88_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00012FA0);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00012FFC);
 #else
 s32 func_00012FFC(void *arg0, void *arg1, u32 arg2) {
@@ -1389,15 +1423,7 @@ s32 func_00013538(s32 *arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_9A789D37);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00013860);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000138DC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00013A98);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00013B60);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00013554);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000135D0);
@@ -1405,28 +1431,50 @@ INCLUDE_ASM("nonmatchings/libssl", func_000135D0);
 INCLUDE_ASM("nonmatchings/libssl", func_0001378C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001385C);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00013860);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000138DC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00013A98);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00013B60);
 #endif
 
 void func_00013A2C(void) {
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00013D40);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00013A34);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00013D40);
+
+INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_9266C0D5);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_9266C0D5);
-#else
+#if FW_VERSION == 271
+s32 sceSsl_lib_9266C0D5(void) {
+    return D_00030CD0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 sceSsl_lib_9266C0D5(void) {
     return D_00030D00;
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_00013B08);
-#else
+#endif
+
+#if FW_VERSION == 271
+s32 func_00013B08(void) {
+    return D_00030CCC;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_00013B08(void) {
     return D_00030CFC;
 }
@@ -1440,10 +1488,10 @@ void func_00013B38(s32 arg0) {
     }
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00013E60);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00013B58);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00013E60);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00013CA8);
@@ -1460,39 +1508,31 @@ INCLUDE_ASM("nonmatchings/libssl", func_00013E90);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00013F78);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001435C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00014048);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001435C);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00014150);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000141D8);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00014600);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000146C8);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000142DC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000143A0);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00014600);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000146C8);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000143F8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00014414);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000147D4);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00014910);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00014A20);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00014B30);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000144A4);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000145DC);
@@ -1500,16 +1540,24 @@ INCLUDE_ASM("nonmatchings/libssl", func_000145DC);
 INCLUDE_ASM("nonmatchings/libssl", func_000146E4);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000147F4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000147D4);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00014910);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00014A20);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00014B30);
 #endif
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002C5A0);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002C5A8);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00014B98);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00014854);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00014B98);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_A2619268);
@@ -1537,19 +1585,7 @@ void func_00014A54(s32 arg0, s32 arg1) {
     sceSsl_lib_0861D934(arg1);
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00014DCC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00014FB0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00015024);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00014D3C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00015170);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00015288);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00014A88);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00014C64);
@@ -1561,6 +1597,18 @@ INCLUDE_ASM("nonmatchings/libssl", func_00014D3C);
 INCLUDE_ASM("nonmatchings/libssl", func_00014E18);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00014F30);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00014DCC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00014FB0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00015024);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00014D3C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00015170);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00015288);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00014FE8);
@@ -1570,15 +1618,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_00015028);
 void func_000150F0(void) {
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001544C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000154D0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00015558);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000155E0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000150F8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00015178);
@@ -1586,14 +1626,22 @@ INCLUDE_ASM("nonmatchings/libssl", func_00015178);
 INCLUDE_ASM("nonmatchings/libssl", func_000151FC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00015280);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001544C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000154D0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00015558);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000155E0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00015338);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000156F0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001538C);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000156F0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000153CC);
@@ -1608,14 +1656,14 @@ M2C_UNK *sceSsl_lib_A1C3AB31(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_000154F0);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000158BC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00015AE8);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001554C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00015770);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000158BC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00015AE8);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_1C2728A5);
@@ -1632,7 +1680,17 @@ M2C_UNK *func_00015C18(void) {
     return &D_0002FADC;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_00015C24);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00015F28);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00016384);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000167C8);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00016A50);
+#else
 INCLUDE_ASM("nonmatchings/libssl", func_00015F94);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000162A4);
@@ -1652,18 +1710,6 @@ INCLUDE_ASM("nonmatchings/libssl", func_00016DB0_v250);
 
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/libssl", func_00016DB0_v201);
-#endif
-
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/libssl", func_00015C24);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00015F28);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00016384);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000167C8);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00016A50);
 #endif
 
 s32 func_00016D08(struct Unk_func_00016D08_0 *arg0) {
@@ -2150,7 +2196,7 @@ void func_00017104(s32 arg0) {
     func_00013D78(arg0 + 0x2C);
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00017120);
 #else
 s32 func_00017120(void *arg0) {
@@ -2204,20 +2250,20 @@ s32 func_0001755C(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00017568);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00017928);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000175B4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00017928);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00017708);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00017774);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00017B94);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001781C);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00017B94);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000178CC);
@@ -2226,10 +2272,10 @@ INCLUDE_ASM("nonmatchings/libssl", func_000179A8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00017A90);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00017EC0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00017B50);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00017EC0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00017CD0);
@@ -2251,10 +2297,10 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001810C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00018190);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00018654);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000182D4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00018654);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00018344);
@@ -2267,7 +2313,7 @@ void func_0001846C(s32 arg0, s32 arg1) {
     func_00018190(arg0, arg1, 0);
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00018488);
 #else
 s32 func_00018488(s32 *arg0) {
@@ -2281,7 +2327,7 @@ s32 func_00018488(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000184B8);
 #else
 s32 func_000184B8(s32 *arg0) {
@@ -2311,10 +2357,10 @@ void func_000184E8(struct Unk_func_000184E8_0 *arg0) {
     }
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000188C0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00018528);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000188C0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000185A8);
@@ -2323,22 +2369,22 @@ INCLUDE_ASM("nonmatchings/libssl", func_00018614);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000187F4);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00018C8C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00018E48);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000188EC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00018AA4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00018C8C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00018E48);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00018CB8);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001918C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00018DE0);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001918C);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00018E64);
@@ -2359,13 +2405,21 @@ void func_000191E4(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00019204);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_000192B8);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000194DC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00019524);
+#else
 INCLUDE_ASM("nonmatchings/libssl", func_00019680);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000198B4);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000198FC);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libssl", func_00019A24);
 #endif
 
@@ -2382,20 +2436,22 @@ INCLUDE_ASM("nonmatchings/libssl", func_00019AEC_v201);
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/libssl", func_000192B8);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000194DC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00019524);
-
 INCLUDE_ASM("nonmatchings/libssl", func_0001963C);
+#endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00019704);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000197F4);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_00019860);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000198C0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00019948);
+#else
 INCLUDE_ASM("nonmatchings/libssl", func_00019C4C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00019CAC);
@@ -2411,14 +2467,6 @@ INCLUDE_ASM("nonmatchings/libssl", func_00019D30_v250);
 
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/libssl", func_00019D30_v201);
-#endif
-
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/libssl", func_00019860);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000198C0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00019948);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00019A14);
@@ -2453,10 +2501,10 @@ INCLUDE_ASM("nonmatchings/libssl", func_00019E54);
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_5DED429A);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001A498);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001A094);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001A498);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_3E040FD4);
@@ -2481,9 +2529,18 @@ s32 sceSsl_lib_4A6078CF(struct Unk_sceSsl_lib_4A6078CF_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_959557F5);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_624CB314);
-#else
+#endif
+
+#if FW_VERSION == 271
+void sceSsl_lib_624CB314(struct Unk_func_00012994_0 *arg0) {
+    func_00012994(arg0, sceSsl_lib_CA6A3C74((struct Unk_sceSsl_lib_CA6A3C74_0 *) arg0->unk24));
+    arg0->unk18 = arg0->unk24->unk18;
+}
+#endif
+
+#if FW_VERSION == 282
 void sceSsl_lib_624CB314(struct Unk_func_00012994_0 *arg0) {
     func_00012994(arg0, sceSsl_lib_CA6A3C74(arg0->unk24));
     arg0->unk18 = (s32) arg0->unk24->unk18;
@@ -2492,7 +2549,7 @@ void sceSsl_lib_624CB314(struct Unk_func_00012994_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001A7A8);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001A7D4);
 #else
 void func_0001A7D4(s32 arg0, s32 arg1, s32 arg2) {
@@ -2506,7 +2563,7 @@ s32 func_0001A80C(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001A814);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001AAA8);
 #else
 void func_0001AAA8(void) {
@@ -2518,10 +2575,10 @@ INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_1E257243);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D2EC);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001AF14);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001AAFC);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001AF14);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B1E75EA9);
@@ -2632,7 +2689,7 @@ void func_0001C408(void) {
     func_0001D31C();
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_6BA650E4);
 #else
 s32 sceSsl_lib_6BA650E4(void) {
@@ -2640,7 +2697,7 @@ s32 sceSsl_lib_6BA650E4(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_69105335);
 #else
 s32 sceSsl_lib_69105335(void) {
@@ -2657,7 +2714,7 @@ void sceSsl_lib_64AA4ED6(s32 arg0) {
     D_00030DF4 = arg0;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_6CDEB823);
 #else
 s32 sceSsl_lib_6CDEB823(void) {
@@ -2698,7 +2755,7 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002DA70_v201);
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DA74_v201);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DA80);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DA84);
@@ -2728,19 +2785,19 @@ INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_BE5FF9F1);
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B99D89E2);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001D0D0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0001D1C0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001CC80);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001CD78);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001D0D0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0001D1C0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0001D310);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001D310);
-#else
+#if FW_VERSION >= 271
 s32 func_0001D310(void) {
     return D_0002FB80;
 }
@@ -2748,18 +2805,18 @@ s32 func_0001D310(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001D31C);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001D328);
 #else
 void func_0001D328(void) {
     D_0002FB80 = 1;
 }
-
-INCLUDE_ASM("nonmatchings/libssl", func_0001D77C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001D338);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001D77C);
 #endif
 
 void *func_0001D3A0(void) {
@@ -2782,27 +2839,35 @@ void *func_0001D3A0(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001D420);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001D4C0);
 #else
 void func_0001D4C0(s32 arg0) {
     func_0001C4F0(arg0 + 0xA8, 1, 3, (s32) &D_0002D63C, 0xB2);
 }
+#endif
 
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_0001D4F0);
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/libssl", func_0001D6DC);
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001D940);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001DCB8);
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001D4F0);
-
 INCLUDE_ASM("nonmatchings/libssl", func_0001D70C);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001D850);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001DE44);
 #else
 INCLUDE_ASM("nonmatchings/libssl", func_0001D9DC);
@@ -2812,10 +2877,10 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001DA44);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001DACC);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001DF90);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001DB18);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001DF90);
 #endif
 
 s32 func_0001DD1C(s32 arg0) {
@@ -2826,7 +2891,7 @@ s32 func_0001DD24(s32 arg0) {
     return arg0 + 0x38;
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001DD2C);
 #else
 void func_0001DD2C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -2842,10 +2907,10 @@ void func_0001DDE4(s32 arg0, s32 arg1) {
     func_0001DDAC(arg0 + 0x38, arg1 + 0x38);
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001E280);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001DE04);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001E280);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001DE7C);
@@ -2864,9 +2929,24 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001E1A8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001E1F8);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001E27C);
-#else
+#endif
+
+#if FW_VERSION == 271
+s32 func_0001E27C(struct Unk_func_0001E27C_0 *arg0, struct Unk_func_0001E27C_1 *arg1) {
+    if (arg1 != NULL) {
+        arg1->unk0 = arg0->unk0;
+        arg1->unk4 = arg0->unk4;
+        arg1->unk8 = arg0->unk8;
+        arg1->unkC = arg0->unkC;
+        arg1->unk10 = arg0->unk10;
+    }
+    return 1;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_0001E27C(struct Unk_func_0001E27C_0 *arg0, struct Unk_func_0001E27C_1 *arg1) {
     if (arg1 != NULL) {
         arg1->unk0 = (s32) arg0->unk0;
@@ -2879,7 +2959,7 @@ s32 func_0001E27C(struct Unk_func_0001E27C_0 *arg0, struct Unk_func_0001E27C_1 *
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001E740);
 
 void *func_0001E828(void) {
@@ -2918,23 +2998,29 @@ s32 func_0001E410(void) {
     return 0;
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001E8A0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001E418);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001E8A0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001E50C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001EA48);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001E5B0);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001EA48);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0001E770);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001E770);
-#else
+#if FW_VERSION == 271
+s32 func_0001E770(void) {
+    return D_00030EC0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_0001E770(void) {
     return D_00030EF0;
 }
@@ -3034,7 +3120,7 @@ s32 func_0001EBF0(s32 *arg0) {
     return *arg0 * 0xD;
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001EC08);
 #else
 s32 func_0001EC08(s32 *arg0, s32 *arg1) {
@@ -3048,7 +3134,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001EDD0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001EE24);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001EF34);
 #else
 s32 func_0001EF34(s32 arg0) {
@@ -3064,19 +3150,7 @@ s32 func_0001EF34(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B40D11EA);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0001F4C0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0001FC90);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0001FEE8);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000201D0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0002059C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00020A20);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001EFFC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001F7C4);
@@ -3088,6 +3162,18 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001FCF8);
 INCLUDE_ASM("nonmatchings/libssl", func_000200B0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00020528);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0001F4C0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0001FC90);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0001FEE8);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000201D0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0002059C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00020A20);
 #endif
 
 void func_00020854(s32 *arg0, s32 *arg1) {
@@ -3096,27 +3182,15 @@ void func_00020854(s32 *arg0, s32 *arg1) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00020874);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00020E04);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000208EC);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00020E04);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00020B94);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00021204);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00021430);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000215FC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00021804);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00021B9C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00021D50);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00020CD8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00020EFC);
@@ -3128,13 +3202,35 @@ INCLUDE_ASM("nonmatchings/libssl", func_000212B4);
 INCLUDE_ASM("nonmatchings/libssl", func_0002163C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000217E0);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00021204);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00021430);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000215FC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00021804);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00021B9C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00021D50);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000219BC);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D724);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_00021AB0);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00022218);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0002235C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00022410);
+
+INCLUDE_ASM("nonmatchings/libssl", func_0002257C);
+#else
 INCLUDE_ASM("nonmatchings/libssl", func_00022034);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000227A8);
@@ -3161,24 +3257,14 @@ s32 func_00022B14(void *arg0, s32 arg1) {
     }
     return var_a0;
 }
-#else
-INCLUDE_ASM("nonmatchings/libssl", func_00021AB0);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00022218);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0002235C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00022410);
-
-INCLUDE_ASM("nonmatchings/libssl", func_0002257C);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000225E4);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00022BA8);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0002260C);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00022BA8);
 #endif
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D740);
@@ -3257,18 +3343,18 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002D824);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0002264C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00022C8C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000226F0);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00022C8C);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0002284C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00022E4C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000228A8);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00022E4C);
 #endif
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D898);
@@ -3278,6 +3364,10 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002D8C8);
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D8D0);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D8D4);
+
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/libssl", D_0002D8AC);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D8DC);
@@ -3289,7 +3379,7 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002D8EC);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D8F4);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DED4);
 #endif
 
@@ -3298,6 +3388,10 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002D900);
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D908);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D910);
+
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/libssl", D_0002D8E8);
+#endif
 
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DF78_v260);
@@ -3339,7 +3433,9 @@ s32 sceSsl_lib_EF5A4BD4(struct Unk_sceSsl_lib_EF5A4BD4_0 *arg0) {
     return arg0->unkB8;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_0002390C);
+#else
 void func_00023EAC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_a0;
 
@@ -3347,8 +3443,6 @@ void func_00023EAC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     D_000316A0 += 1;
     func_00013E60(temp_a0, (s32) &D_000310C4, arg0, arg1, arg2, arg3, arg4);
 }
-#else
-INCLUDE_ASM("nonmatchings/libssl", func_0002390C);
 #endif
 
 void func_00023960(s32 arg0) {
@@ -3361,10 +3455,10 @@ void func_0002397C(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00023998);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00023FD0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00023A30);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00023FD0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00023E64);
@@ -3373,7 +3467,7 @@ INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B81AD643);
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_BDAD0841);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_86D0771E);
 #else
 void sceSsl_lib_86D0771E(s32 arg0) {
@@ -3462,7 +3556,7 @@ s32 func_000247F8(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00024800);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0002485C);
 #else
 void func_0002485C(s32 arg0) {
@@ -3484,23 +3578,15 @@ INCLUDE_ASM("nonmatchings/libssl", func_00024A14);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00024A50);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00025128);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00024B68);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00025128);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00024C18);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000252D4);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00025328);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000256DC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00025914);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00024D0C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00024D5C);
@@ -3508,19 +3594,27 @@ INCLUDE_ASM("nonmatchings/libssl", func_00024D5C);
 INCLUDE_ASM("nonmatchings/libssl", func_00025110);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00025348);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000252D4);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00025328);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000256DC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00025914);
 #endif
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D994);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_000259C0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000253EC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00025448);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_000259C0);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_00025448);
+#else
 s32 func_00025448(void) {
     return 0x28;
 }
@@ -3528,30 +3622,30 @@ s32 func_00025448(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00025450);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00025AE8);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00025BC8);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00025D48);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00025510);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000255F8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00025788);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00025AE8);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00025BC8);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00025D48);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00025AE4);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0002619C);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000261F4);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00025BDC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00025C30);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0002619C);
+
+INCLUDE_ASM("nonmatchings/libssl", func_000261F4);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00025D90);
@@ -3580,15 +3674,15 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002DA74);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DA78);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_0002691C);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00026358);
-
-INCLUDE_ASM("nonmatchings/libssl", func_000263E4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_0002691C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_000263E4);
+#else
 s32 func_000263E4(void) {
     return -1;
 }
@@ -3608,7 +3702,7 @@ s32 func_00026400(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00026408);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0002643C);
 #else
 s32 func_0002643C(void *arg0) {
@@ -3626,10 +3720,10 @@ INCLUDE_ASM("nonmatchings/libssl", func_0002645C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00026530);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00026BE0);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0002661C);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00026BE0);
 #endif
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DC10);
@@ -3704,33 +3798,41 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002DE78);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DE90);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00026D08);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0002673C);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00026D08);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0002681C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0002688C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00026F34);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00026964);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00026F34);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_0002699C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00026F94);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000269C4);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00026F94);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00026AEC);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_00026BFC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00026D30);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00026DFC);
+
+INCLUDE_ASM("nonmatchings/libssl", func_00026EA8);
+#else
 INCLUDE_ASM("nonmatchings/libssl", func_000271D4);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00027318);
@@ -3752,14 +3854,6 @@ s32 func_000274A8(void *arg0) {
     }
     return var_v1;
 }
-#else
-INCLUDE_ASM("nonmatchings/libssl", func_00026BFC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00026D30);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00026DFC);
-
-INCLUDE_ASM("nonmatchings/libssl", func_00026EA8);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00026EDC);
@@ -3831,7 +3925,7 @@ s32 sceSsl_lib_868C15DF(struct Unk_sceSsl_lib_868C15DF_0 *arg0) {
     return arg0->unk10;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_D49A570C);
 #else
 void sceSsl_lib_D49A570C(struct Unk_sceSsl_lib_D49A570C_0 *arg0) {
@@ -3853,7 +3947,37 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002DF78);
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B4D78E98);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_00027CB4);
+#endif
+
+#if FW_VERSION == 271
+s32 func_00027CE8(struct Unk_func_00027CE8_0 *arg0) {
+    s32 var_v0;
+    void *temp_v0;
+
+    if (((arg0 == NULL) || (var_v0 = arg0->unk68, (var_v0 == 0))) && ((temp_v0 = arg0->unkE4, (temp_v0 == NULL)) || (var_v0 = M2C_FIELD(temp_v0, s32 *, 8), (var_v0 == 0)))) {
+        var_v0 = 0;
+    }
+    return var_v0;
+}
+
+s32 func_00027D1C(struct Unk_func_00027D1C_0 *arg0) {
+    s32 var_v0;
+    void *temp_v0;
+
+    var_v0 = 0;
+    if (arg0 != NULL) {
+        var_v0 = arg0->unk6C;
+        if ((var_v0 == 0) && ((temp_v0 = arg0->unkE4, (temp_v0 == NULL)) || (var_v0 = M2C_FIELD(temp_v0, s32 *, 0xC), (var_v0 == 0)))) {
+            var_v0 = 0;
+        }
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_000282E0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00028310);
@@ -3865,9 +3989,9 @@ INCLUDE_ASM("nonmatchings/libssl", func_00028380);
 INCLUDE_ASM("nonmatchings/libssl", func_00028420);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0002844C);
-#else
-INCLUDE_ASM("nonmatchings/libssl", func_00027CB4);
+#endif
 
+#if FW_VERSION == 282
 s32 func_00027CE8(struct Unk_func_00027CE8_0 *arg0) {
     s32 var_v0;
     struct Unk_func_00027CE8_temp_v0 *temp_v0;
@@ -3891,7 +4015,9 @@ s32 func_00027D1C(struct Unk_func_00027D1C_0 *arg0) {
     }
     return var_v0;
 }
+#endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00027D50);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00027DEC);
@@ -3910,18 +4036,18 @@ void sceSsl_lib_529A9477(struct Unk_sceSsl_lib_529A9477_0 *arg0, s32 arg1, s32 a
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_AEBF278B);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00028900);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000282B8);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00028900);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_000284F0);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00028C84);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00028600);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00028C84);
 #endif
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B3B04C58);
@@ -3938,15 +4064,15 @@ s32 func_000288CC(void) {
     return 0;
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", func_00028F84);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000288FC);
+#else
+INCLUDE_ASM("nonmatchings/libssl", func_00028F84);
+
+INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_88897D26);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_88897D26);
-#else
+#if FW_VERSION >= 271
 s32 sceSsl_lib_88897D26(struct Unk_sceSsl_lib_88897D26_0 *arg0) {
     s32 var_v0;
     struct Unk_sceSsl_lib_88897D26_temp_v0 *temp_v0;
@@ -4075,27 +4201,27 @@ s32 sceSsl_lib_A8F0AD39(struct Unk_sceSsl_lib_A8F0AD39_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00028C10);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00028C20);
 #else
 s32 func_00028C20(s32 arg0) {
     D_00031164 |= arg0;
     return 1;
 }
+#endif
 
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libssl", func_00028C38);
+#else
 s32 func_000292C8(s32 arg0) {
     D_00031164 &= ~arg0;
     return 1;
 }
-#endif
 
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/libssl", func_00028C38);
-#else
 INCLUDE_ASM("nonmatchings/libssl", func_00028C54);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 s32 func_00028C54(s32 arg0) {
     return D_00031164 & arg0;
 }

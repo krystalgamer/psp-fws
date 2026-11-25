@@ -12,9 +12,11 @@ s32 module_stop(void) {
     return 0;
 }
 
+#if FW_VERSION == 282
 void sceVideo_9DD8CE8E(void) {
     func_0000BF58();
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00000178);
 
@@ -297,7 +299,11 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051B54);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051B80);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/video_main_plugin", D_0004FD10);
+#else
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051B88);
+#endif
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051BAC);
 
@@ -466,6 +472,9 @@ INCLUDE_ASM("nonmatchings/video_main_plugin", func_00004710);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00004B14);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_00004AC0);
+#else
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00004B54);
 
 s32 func_00004BD8(void) {
@@ -491,6 +500,7 @@ void func_00004C14(void) {
         }
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00004C6C);
 
@@ -542,4 +552,3 @@ void func_00005B1C(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00005E68();
 }
-

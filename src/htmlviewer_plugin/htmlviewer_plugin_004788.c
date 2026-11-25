@@ -32,7 +32,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_000049A4);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_000049E8);
 #endif
 
-#if FW_VERSION != 270
+#if FW_VERSION < 270 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007558);
 #endif
 
@@ -44,7 +44,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_00003518);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_0000356C);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 s32 func_0000356C(s32 arg0) {
     s32 temp_v0;
     s32 var_a1;
@@ -182,7 +182,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_000075D4);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_000075E0);
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00006744);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00006754);
@@ -200,7 +200,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007608);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007618);
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00006860);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00006870);
@@ -308,7 +308,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_0000793C);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007948);
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00006AF4);
 #endif
 
@@ -344,7 +344,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_000079C4);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_000079C8);
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00006B28);
 #endif
 
@@ -424,7 +424,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007BE8);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007C04);
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00006D3C);
 #endif
 

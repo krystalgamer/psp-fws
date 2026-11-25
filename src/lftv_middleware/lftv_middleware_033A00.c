@@ -169,7 +169,7 @@ s32 func_00034258(s32 arg0) {
     return __builtin_allegrex_wsbw(arg0);
 }
 
-#if FW_VERSION < 303
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/lftv_middleware_033A00", func_00050558);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_033A00", func_00050560);
@@ -189,7 +189,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_033A00", func_0005092C);
 INCLUDE_ASM("nonmatchings/lftv_middleware_033A00", func_00050620_v250);
 #endif
 
-#if FW_VERSION < 303
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/lftv_middleware_033A00", func_00050664);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_033A00", func_000506CC);

@@ -58,6 +58,7 @@ INCLUDE_ASM("nonmatchings/sc_sascore", sceSasCore_driver_B0F9F98F);
 
 INCLUDE_ASM("nonmatchings/sc_sascore", sceSasCore_driver_E143A1EA);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/sc_sascore", sceP3daBridgeInit);
 
 INCLUDE_ASM("nonmatchings/sc_sascore", sceP3daBridgeCore);
@@ -71,3 +72,4 @@ void sceP3da_59FB2B06(s32 arg0, s32 arg1) {
 }
 
 INCLUDE_ASM("nonmatchings/sc_sascore", sceP3daBridgeExit);
+#endif

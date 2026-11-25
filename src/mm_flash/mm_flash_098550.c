@@ -49,4 +49,3 @@ void func_00098848(struct Unk_func_00098848_0 *arg0) {
         func_00090730(*func_0009F1C0(), temp_s0, 0);
     }
 }
-

@@ -11,18 +11,24 @@ struct Unk_func_0000186C_temp_v0_2 {
 
 extern M2C_UNK D_00003188_v260;
 extern M2C_UNK D_000031AC;
+extern s32 D_0000326C;
 extern M2C_UNK D_0000329C;
+extern M2C_UNK D_000032AC;
 extern s8 D_000033F9;
 extern s32 D_000033FC;
 extern s32 D_00003410;
 extern M2C_UNK D_0000343C;
 extern M2C_UNK func_000018E0;
 
+s32 func_00000AB0(s32 arg0);
 s32 func_00000AC0(s32 arg0);
 M2C_UNK *func_00000B3C(void);
+M2C_UNK *func_00000B80(void);
 M2C_UNK *func_00000B90(void);
 void func_00000C00(void);
+void func_00000C44(void);
 void func_00000C54(void);
+s32 func_00000CC0(void);
 s32 func_00000D00(void);
 s32 func_00000D28(void);
 s32 func_000012C0(void);

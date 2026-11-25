@@ -57,4 +57,3 @@ void func_0005AF64(struct Unk_func_0005AF64_0 *arg0) {
     arg0->unk8 = 0;
     sceHVNetfront_Module_461C7724((u8 *)arg0 + 0x10);
 }
-

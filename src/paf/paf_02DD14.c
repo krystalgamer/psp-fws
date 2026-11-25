@@ -7,7 +7,7 @@ INCLUDE_ASM("nonmatchings/paf_02DD14", scePaf_6676FAA6);
 
 INCLUDE_ASM("nonmatchings/paf_02DD14", scePaf_AD7A45F9);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_02DD14", scePaf_95C97571);
 #else
 s32 scePaf_95C97571(s32 arg0) {

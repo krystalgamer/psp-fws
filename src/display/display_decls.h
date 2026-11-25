@@ -23,6 +23,8 @@ extern s32 D_000021EC;
 extern s32 D_000021F0;
 extern s8 D_00002CB0;
 extern s32 D_00002CE4;
+extern s8 D_00003675;
+extern s32 D_000036C0;
 extern M2C_UNK D_00003D10;
 extern struct D_00003DB0_s D_00003DB0;
 extern s8 D_00003E14;

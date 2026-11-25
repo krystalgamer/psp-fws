@@ -1018,7 +1018,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000128AC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001292C);
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012A08);
 #endif
 
@@ -1289,10 +1289,10 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016644);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016788);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016D78);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016830);
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016D78);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016938);
@@ -1303,10 +1303,10 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000175DC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000177A4);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00017F60);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001788C);
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_00017F60);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00017BF0);
@@ -1543,7 +1543,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001D1E4);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001C188);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001CC7C);
 #endif
 
@@ -1575,7 +1575,9 @@ void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1) {
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001C5F0);
+#endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001CBCC);
 #endif
 
@@ -1795,10 +1797,10 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023BD8);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023C5C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000256DC);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023D1C);
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_000256DC);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023D98);

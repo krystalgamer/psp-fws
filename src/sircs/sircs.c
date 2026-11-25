@@ -2,19 +2,21 @@
 #include "common.h"
 #include "sircs_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sircs", func_00000000);
 #endif
 
 INCLUDE_ASM("nonmatchings/sircs", sceSircs_driver_71EEF62D);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sircs", sceSircs_driver_83381633);
+#else
 INCLUDE_ASM("nonmatchings/sircs", func_00000294);
 
 INCLUDE_ASM("nonmatchings/sircs", func_000002E8);
-#else
-INCLUDE_ASM("nonmatchings/sircs", sceSircs_driver_83381633);
+#endif
 
+#if FW_VERSION == 282
 void func_00000894(void) {
     if (D_00002770.unk0 == 0) {
         sceKernelPowerLock(0);
@@ -63,7 +65,9 @@ s32 sceSircs_driver_19155A2F(void) {
 }
 #endif
 
+#if FW_VERSION != 271
 INCLUDE_ASM("nonmatchings/sircs", func_00000BA4);
+#endif
 
 #if FW_VERSION < 282
 void func_000004D8(void) {
@@ -87,7 +91,18 @@ s32 func_00000554(void) {
 INCLUDE_ASM("nonmatchings/sircs", module_start);
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
+#if FW_VERSION == 271
+s32 func_00000634(void) {
+    InterruptManagerForKernel_F987B1F0(0xE);
+    sceKernelDeleteSema(M2C_VFIELD(&D_00002148, s32, 0x1C));
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00002148, s32, 0x20));
+    func_00001AB0();
+    func_00000518();
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 271
 s32 func_00000634(void) {
     InterruptManagerForKernel_F987B1F0(0xE);
     sceKernelDeleteSema(M2C_VFIELD(&D_00002148, s32, 0x10));
@@ -107,7 +122,20 @@ s32 module_reboot_before(void) {
 }
 
 INCLUDE_ASM("nonmatchings/sircs", sceSircs_driver_62411801);
+#endif
 
+#if FW_VERSION == 271
+s32 sceSircs_driver_19155A2F(void) {
+    InterruptManagerForKernel_F987B1F0(0xE);
+    sceKernelDeleteSema(M2C_VFIELD(&D_00002148, s32, 0x1C));
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00002148, s32, 0x20));
+    func_00001AB0();
+    func_00000518();
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 271
 s32 sceSircs_driver_19155A2F(void) {
     InterruptManagerForKernel_F987B1F0(0xE);
     sceKernelDeleteSema(M2C_VFIELD(&D_00002148, s32, 0x10));
@@ -116,7 +144,13 @@ s32 sceSircs_driver_19155A2F(void) {
     func_00000518();
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/sircs", func_00000BA4);
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sircs", func_00000C98);
 #endif
 
@@ -159,12 +193,12 @@ s32 func_00001718(void) {
 
 INCLUDE_RODATA("nonmatchings/sircs", D_0000263C);
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_RODATA("nonmatchings/sircs", D_00001F38);
+#if FW_VERSION >= 271
+INCLUDE_RODATA("nonmatchings/sircs", D_00002648);
 #endif
 
-#if FW_VERSION == 282
-INCLUDE_RODATA("nonmatchings/sircs", D_00002648);
+#if FW_VERSION >= 250 && FW_VERSION < 271
+INCLUDE_RODATA("nonmatchings/sircs", D_00001F38);
 #endif
 
 INCLUDE_RODATA("nonmatchings/sircs", D_000026A0);
@@ -183,7 +217,23 @@ INCLUDE_ASM("nonmatchings/sircs", func_00001748);
 
 INCLUDE_ASM("nonmatchings/sircs", func_00001830);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 271
+s32 func_000011F8(void *arg0) {
+    s32 temp_v0;
+
+    if (M2C_FIELD(arg0, s32 *, 0x4C) == 0) {
+        func_000019C0();
+        temp_v0 = sceKernelSetAlarm(0x64U, (s32) &func_00002044, arg0);
+        M2C_FIELD(arg0, s32 *, 0x4C) = temp_v0;
+        if (temp_v0 < 0) {
+            M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+        }
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 271
 s32 func_000011F8(void *arg0) {
     s32 temp_v0;
 
@@ -197,7 +247,9 @@ s32 func_000011F8(void *arg0) {
     }
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_000018E4(struct Unk_func_000018E4_0 *arg0) {
     s32 temp_v0;
 
@@ -224,6 +276,12 @@ INCLUDE_ASM("nonmatchings/sircs", func_00001A14);
 #if FW_VERSION < 282
 s32 func_00001394(void) {
     return D_00002100;
+}
+#endif
+
+#if FW_VERSION == 271
+void func_00001A80(s32 arg0) {
+    D_00002728 = arg0;
 }
 #endif
 

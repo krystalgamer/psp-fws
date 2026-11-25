@@ -169,7 +169,11 @@ INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD908);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD910);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD618);
+#else
 INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD918);
+#endif
 
 INCLUDE_ASM("nonmatchings/mm_flash_0434F4", func_00044FF8);
 
@@ -273,6 +277,9 @@ INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD978);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_0434F4", D_000BD980);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mm_flash_0434F4", func_00046628);
+#else
 void func_00046628(s32 arg0) {
     if (func_0008D474() == 0) {
 
@@ -282,6 +289,7 @@ void func_00046628(s32 arg0) {
         func_0004640C(arg0, (s32) "Flash Player");
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/mm_flash_0434F4", func_00046684);
 
@@ -328,4 +336,3 @@ INCLUDE_ASM("nonmatchings/mm_flash_0434F4", func_0004A570);
 INCLUDE_ASM("nonmatchings/mm_flash_0434F4", func_0004A638);
 
 INCLUDE_ASM("nonmatchings/mm_flash_0434F4", func_0004ABD0);
-

@@ -121,6 +121,7 @@ extern M2C_UNK func_00002764;
 
 void func_0000010C(void);
 void func_0000010C_v270(void);
+void func_0000010C_v271(void);
 s32 func_00000140(void);
 void func_0000020C(void *arg0);
 void func_00000274(struct Unk_func_00000274_0 *arg0);

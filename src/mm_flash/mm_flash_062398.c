@@ -659,11 +659,19 @@ INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE5C4);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE5D0);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE2DC);
+
+INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE53C);
+
+INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE564);
+#else
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE5DC);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE83C);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE864);
+#endif
 
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE880);
 
@@ -920,4 +928,3 @@ s32 func_00077A74(s32 arg0, s32 arg1) {
     void *sp0;
     return (func_000226F0(arg0, arg1, &sp0) == 0) ? 0 : sp0;
 }
-

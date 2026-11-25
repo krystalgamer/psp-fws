@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/271/.splat_cache.lftv_middleware
   symbol_addrs_path:
     - config/271/symbol_addrs.lftv_middleware.txt
+    - config/271/func_starts.lftv_middleware.txt
     - tmp/build/271/prx_syms.lftv_middleware.txt
   reloc_addrs_path: [tmp/build/271/reloc_addrs.lftv_middleware.txt]
   asset_path: tmp/assets/271/lftv_middleware
@@ -54,7 +55,43 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - { start: 0xC4, type: prxpad, order: .text }
-      - [0xD0, asm, lftv_middleware]
+      - [0xD0, c, lftv_middleware]
+      - [0x1B8, c, lftv_middleware_000118]
+      - [0x248, c, lftv_middleware_0001A8]
+      - [0x1770, c, lftv_middleware_000300]
+      - [0x14A6C, c, lftv_middleware_017CB0]
+      - [0x15F14, c, lftv_middleware_019118]
+      - [0x19064, c, lftv_middleware_01C470]
+      - [0x19120, c, lftv_middleware_01C52C]
+      - [0x1A1E8, c, lftv_middleware_01D5EC]
+      - [0x1CF88, c, lftv_middleware_0204B4]
+      - [0x1D2B8, c, lftv_middleware_0207E4]
+      - [0x1FBC0, c, lftv_middleware_0230EC]
+      - [0x204A8, c, lftv_middleware_02399C]
+      - [0x205C8, c, lftv_middleware_023ABC]
+      - [0x24484, c, lftv_middleware_027D08]
+      - [0x25C24, c, lftv_middleware_02949C]
+      - [0x2CCDC, c, lftv_middleware_030524]
+      - [0x2D08C, c, lftv_middleware_0308D4]
+      - [0x2DD94, c, lftv_middleware_0315DC]
+      - [0x2E55C, c, lftv_middleware_031DA4]
+      - [0x301A0, c, lftv_middleware_033A00]
+      - [0x30E8C, c, lftv_middleware_0346EC]
+      - [0x32568, c, lftv_middleware_036D6C]
+      - [0x327E8, c, lftv_middleware_037D10]
+      - [0x32850, c, lftv_middleware_037D88]
+      - [0x341A0, c, lftv_middleware_038348]
+      - [0x347DC, c, lftv_middleware_038870]
+      - [0x35C44, c, lftv_middleware_039DEC]
+      - [0x35C94, c, lftv_middleware_039E3C]
+      - [0x35CF4, c, lftv_middleware_039E64]
+      - [0x36E04, c, lftv_middleware_03BBB8]
+      - [0x37E60, c, lftv_middleware_03CC14]
+      - [0x38B5C, c, lftv_middleware_03D910]
+      - [0x441A0, c, lftv_middleware_048FC4]
+      - [0x4483C, c, lftv_middleware_049660]
+      - [0x46688, c, lftv_middleware_04B4AC]
+      - [0x473BC, c, lftv_middleware_04C1DC]
       - { start: 0x4B800, type: asm, name: fini, linker_section: .fini }
       - { start: 0x4B81C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x4BCD4, type: prxpad, order: .text }
@@ -72,7 +109,29 @@ segments:
       - { start: 0x4C504, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x4C518, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x4C51C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x4C580, rodata, lftv_middleware]
+      - [0x4C580, .rodata, lftv_middleware_0001A8]
+      - [0x4C730, .rodata, lftv_middleware_000300]
+      - [0x4F690, .rodata, lftv_middleware_019118]
+      - [0x4F7AC, .rodata, lftv_middleware_01C52C]
+      - [0x50008, .rodata, lftv_middleware_01D5EC]
+      - [0x500F8, .rodata, lftv_middleware_0207E4]
+      - [0x50468, .rodata, lftv_middleware_023ABC]
+      - [0x50908, .rodata, lftv_middleware_027D08]
+      - [0x50BB8, .rodata, lftv_middleware_02949C]
+      - [0x50CCC, .rodata, lftv_middleware_0308D4]
+      - [0x51168, .rodata, lftv_middleware_031DA4]
+      - [0x51198, .rodata, lftv_middleware_033A00]
+      - [0x511C0, .rodata, lftv_middleware_0346EC]
+      - [0x512D0, .rodata, lftv_middleware_037D88]
+      - [0x51370, .rodata, lftv_middleware_038348]
+      - [0x513A0, .rodata, lftv_middleware_038870]
+      - [0x51528, .rodata, lftv_middleware_039E64]
+      - [0x51620, .rodata, lftv_middleware_03BBB8]
+      - [0x51648, .rodata, lftv_middleware_03CC14]
+      - [0x517C8, .rodata, lftv_middleware_03D910]
+      - [0x51D18, .rodata, lftv_middleware_049660]
+      - [0x51E68, .rodata, lftv_middleware_04B4AC]
+      - [0x51F74, .rodata, lftv_middleware_04C1DC]
       - { start: 0x52618, type: prxpad, order: .rodata }
   - name: lftv_middleware_seg1
     type: code

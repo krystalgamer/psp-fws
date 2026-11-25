@@ -4,18 +4,26 @@
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_169860", func_00169860);
-#else
+#endif
+
+#if FW_VERSION == 200
+INCLUDE_ASM("nonmatchings/paf_169860", func_00160428);
+
+INCLUDE_ASM("nonmatchings/paf_169860", func_00160450);
+#endif
+
+#if FW_VERSION == 282
 s32 func_00169860(struct Unk_func_00169860_0 *arg0, s32 *arg1) {
     *arg1 = func_0016B084(arg0->unk28 + 0xC);
     return 0;
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_169860", func_00121A34);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_169860", func_0010F1A0);
 #endif
 

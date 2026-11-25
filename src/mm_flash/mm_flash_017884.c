@@ -14,6 +14,9 @@ void func_00017EDC(struct Unk_func_00017EDC_0 *arg0) {
     }
 }
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mm_flash_017884", func_00017F20);
+#else
 void func_00017F20(struct Unk_func_00017F20_0 *arg0) {
     if (!(arg0->unkE4 & 0x200)) {
         func_000152E4((s32) arg0, 0, arg0->unk268, (s32) "\r");
@@ -21,6 +24,7 @@ void func_00017F20(struct Unk_func_00017F20_0 *arg0) {
         func_00015B0C((s32) arg0, 0, arg0->unk268);
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/mm_flash_017884", func_00017F68);
 
@@ -342,4 +346,3 @@ void func_0001E628(struct Unk_func_0001E628_0 *arg0, struct Unk_func_0001E628_1 
     arg0->unk0 = temp_v0;
     arg0->unk4 = 0;
 }
-

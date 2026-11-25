@@ -63,6 +63,10 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_003ADC", func_0000415C);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_003ADC", func_0000425C);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/lftv_main_plugin_003ADC", D_00040108);
+#endif
+
 #if FW_VERSION == 270
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_003ADC", D_000400C8);
 #endif

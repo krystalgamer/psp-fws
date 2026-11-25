@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, pspnet_adhoc_discover]
+      - [0xA0, c, pspnet_adhoc_discover]
       - { start: 0xE14, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xEAC, type: prxpad, order: .text }
       - { start: 0xEB0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0xF58, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0xF8C, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x1054, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x10A0, rodata, pspnet_adhoc_discover]
+      - [0x10A0, .rodata, pspnet_adhoc_discover]
   - name: pspnet_adhoc_discover_seg1
     type: code
     start: 0x1100

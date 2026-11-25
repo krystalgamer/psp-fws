@@ -21,7 +21,9 @@ INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodec_8ACA11D5);
 
 INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodec_59176A0F);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodec_E066B45F);
+#endif
 
 INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodec_3A20A200);
 
@@ -31,7 +33,11 @@ INCLUDE_RODATA("nonmatchings/avcodec", D_00004034);
 
 INCLUDE_ASM("nonmatchings/avcodec", func_00000A18);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/avcodec", func_000009E4);
+#else
 INCLUDE_ASM("nonmatchings/avcodec", func_00000B04);
+#endif
 
 INCLUDE_ASM("nonmatchings/avcodec", func_00000BD8);
 
@@ -49,7 +55,9 @@ INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_26927D19);
 
 INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_627B7D42);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_17CF7D2C);
+#endif
 
 s32 func_000012AC(void) {
     sceMePower_driver_B6FE3E62(0);
@@ -85,7 +93,11 @@ INCLUDE_ASM("nonmatchings/avcodec", sceMpegbase_driver_7AC0321A);
 
 INCLUDE_ASM("nonmatchings/avcodec", sceMpegbase_driver_BE45C284);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/avcodec", func_00001D34);
+#else
 INCLUDE_ASM("nonmatchings/avcodec", func_00001FC0);
+#endif
 
 INCLUDE_ASM("nonmatchings/avcodec", func_0000203C);
 
@@ -103,7 +115,9 @@ INCLUDE_ASM("nonmatchings/avcodec", sceJpegMJpegCsc);
 
 INCLUDE_ASM("nonmatchings/avcodec", sceJpegDecodeMJpeg);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/avcodec", sceJpegGetOutputInfo);
+#endif
 
 void sceJpeg_0425B986(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_00002AB0(arg0, arg1, arg2, arg3, 0);

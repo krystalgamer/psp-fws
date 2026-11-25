@@ -115,7 +115,11 @@ INCLUDE_RODATA("nonmatchings/mm_flash_083174", D_000C0E44);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_083174", D_000C0E50);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/mm_flash_083174", D_000C0B5C);
+#else
 INCLUDE_RODATA("nonmatchings/mm_flash_083174", D_000C0E5C);
+#endif
 
 INCLUDE_RODATA("nonmatchings/mm_flash_083174", D_000C1008);
 
@@ -430,6 +434,9 @@ INCLUDE_RODATA("nonmatchings/mm_flash_083174", D_000C29AC);
 
 INCLUDE_ASM("nonmatchings/mm_flash_083174", func_0008AF48);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mm_flash_083174", func_0008AFF4);
+#else
 void func_0008AFF4(struct Unk_func_0008AFF4_0 *arg0) {
     s32 temp_v0;
 
@@ -443,6 +450,7 @@ void func_0008AFF4(struct Unk_func_0008AFF4_0 *arg0) {
         func_00072ED8((void *) arg0->unk38);
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/mm_flash_083174", func_0008B06C);
 
@@ -888,4 +896,3 @@ INCLUDE_ASM("nonmatchings/mm_flash_083174", func_0008E6FC);
 INCLUDE_ASM("nonmatchings/mm_flash_083174", func_0008E798);
 
 INCLUDE_ASM("nonmatchings/mm_flash_083174", func_0008E838);
-

@@ -106,7 +106,7 @@ s32 func_00008058(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00007348);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00007494);
@@ -142,7 +142,9 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000078AC);
 s32 func_00007914(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0) - M2C_FIELD(arg0, s32 *, 0xC);
 }
+#endif
 
+#if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00007924);
 #endif
 
@@ -192,7 +194,7 @@ s32 module_stop(void) {
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000065DC);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00006614);
 #endif
 

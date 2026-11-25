@@ -55,4 +55,3 @@ void func_0004B150(M2C_UNK **arg0) {
 void func_0004B160(struct Unk_func_0004B160_0 *arg0, s32 arg1) {
     arg0->unk8 = arg1;
 }
-

@@ -76,4 +76,3 @@ void func_0008F024(struct Unk_func_0008F024_0 *arg0) {
     arg0->unk0 = &D_000C2F98;
     arg0->unk60 = 0;
 }
-

@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, codec]
+      - [0xA0, c, codec]
       - { start: 0xE04, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xE6C, type: prxpad, order: .text }
       - { start: 0xE70, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0xF18, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0xF4C, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x105C, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x1090, rodata, codec]
+      - [0x1090, .rodata, codec]
       - { start: 0x1118, type: prxpad, order: .rodata }
   - name: codec_seg1
     type: code

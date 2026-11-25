@@ -7,9 +7,13 @@ INCLUDE_ASM("nonmatchings/mm_flash_09F0C8", func_0009F124);
 
 INCLUDE_ASM("nonmatchings/mm_flash_09F0C8", func_0009F1C0);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mm_flash_09F0C8", func_0009F1CC);
+#else
 s32 func_0009F1CC(void) {
     return M2C_FIELD(sceHVWWW_Library_6E00402C()->unk29C, s32 *, 0x28);
 }
+#endif
 
 M2C_UNK *func_0009F1F0(void) {
     return &D_000C3F08;

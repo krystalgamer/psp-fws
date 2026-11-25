@@ -226,11 +226,235 @@ void func_000B97D0(struct Unk_func_000B97D0_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9864);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 200
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontNewLib);
+#endif
 
+#if FW_VERSION == 200
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C6FC);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C710);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C724);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C738);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C74C);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C760);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C764);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C778);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C78C);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C7A0);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C7B4);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C7C8);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C7DC);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C7E8);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C7F4);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C80C);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C818);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C824);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C82C);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C834);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C844);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C854);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C85C);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C868);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C870);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C87C);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C88C);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C898);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C8A8);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C8B4);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C8C0);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C8D4);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C8E0);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C8FC);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C908);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C91C);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C930);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C944);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C958);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C96C);
+#endif
+
+#if FW_VERSION >= 200
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontDoneLib);
+#endif
 
+#if FW_VERSION == 200
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B98DC);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B4550);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B462C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B464C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B49A8);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B4D9C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontOpenUserFile);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B4F10);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontClose);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontGetFontInfo);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontGetCharInfo);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B5374);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontGetCharGlyphImage);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B57D8);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BBAAC);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BBB38);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BBBC4);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BBBF8);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B5E58);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B5E78);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B5EA8);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B5F84);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B6040);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B615C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B61A0);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B638C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B6408);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B646C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B64C0);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B6544);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B6A10);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B6B9C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B6BEC);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B6E50);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B7108);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B73C4);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B790C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B795C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B79AC);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B7B2C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B8074);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B8558);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B88A0);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B8AD4);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B8C14);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B8CD0);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B8FFC);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9210);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9330);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9694);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9954);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9A4C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9AA8);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9B20);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9B58);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9C3C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9ECC);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9F40);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA1A8);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA1C8);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA304);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA34C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA580);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA614);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA74C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA800);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA83C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA964);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9DEC);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9E4C);

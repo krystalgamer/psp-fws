@@ -308,6 +308,9 @@ INCLUDE_ASM("nonmatchings/mm_flash_04B168", func_000523C8);
 
 INCLUDE_ASM("nonmatchings/mm_flash_04B168", func_0005250C);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mm_flash_04B168", func_0005260C);
+#else
 void func_0005260C(struct Unk_func_0005260C_0 *arg0) {
     s32 var_a2;
     struct Unk_func_0005260C_temp_a3 *temp_a3;
@@ -319,6 +322,7 @@ void func_0005260C(struct Unk_func_0005260C_0 *arg0) {
     }
     func_0005250C((s32) arg0, (s32) "trackAsMenu", var_a2);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/mm_flash_04B168", func_0005264C);
 
@@ -636,4 +640,3 @@ INCLUDE_ASM("nonmatchings/mm_flash_04B168", func_00059B94);
 INCLUDE_ASM("nonmatchings/mm_flash_04B168", func_00059CC0);
 
 INCLUDE_ASM("nonmatchings/mm_flash_04B168", func_00059D2C);
-

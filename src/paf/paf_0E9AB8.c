@@ -158,9 +158,17 @@ INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_D5F5E68F);
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000924FC);
 
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_00092934);
+#endif
 
+#if FW_VERSION == 200
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000E4B54);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000929C8);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_00092AA8);
 #endif
 

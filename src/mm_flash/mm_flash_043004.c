@@ -103,4 +103,3 @@ void func_000434BC(void) {
 void func_000434D8(void) {
     func_000435EC();
 }
-

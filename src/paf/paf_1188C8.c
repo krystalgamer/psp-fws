@@ -17,15 +17,27 @@ void func_00118930(void) {
     sceKernelExitThread(0);
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION == 200
+INCLUDE_ASM("nonmatchings/paf_1188C8", scePaf_5775283A);
+#endif
+
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_000BF4C8);
-#else
+#endif
+
+#if FW_VERSION == 282
 void scePaf_5775283A(struct Unk_scePaf_5775283A_0 *arg0) {
     sceKernelWaitThreadEnd(arg0->unk4, 0);
 }
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_0011896C);
+
+#if FW_VERSION == 200
+INCLUDE_ASM("nonmatchings/paf_1188C8", func_0011065C);
+
+INCLUDE_ASM("nonmatchings/paf_1188C8", func_001106AC);
+#endif
 
 #if FW_VERSION == 282
 s32 func_00118998(struct Unk_func_00118998_0 *arg0) {

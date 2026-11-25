@@ -46,9 +46,11 @@ void func_00000FB4(s32 arg0, s32 arg1) {
     func_00000B54(arg0, 0, arg1);
 }
 
+#if FW_VERSION == 282
 s32 func_00000FD4(void) {
     return 0x80618006;
 }
+#endif
 
 s32 func_00000FE0(void) {
     return 0x80618006;
@@ -474,6 +476,7 @@ s32 func_000071E0(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mpeg", func_00007234);
 
+#if FW_VERSION == 282
 s32 func_000072FC(struct Unk_func_000072FC_0 *arg0, s32 arg1) {
     s32 temp_s1;
 
@@ -483,6 +486,7 @@ s32 func_000072FC(struct Unk_func_000072FC_0 *arg0, s32 arg1) {
     func_00006E00(D_000084C0);
     return temp_s1;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/mpeg", func_0000735C);
 

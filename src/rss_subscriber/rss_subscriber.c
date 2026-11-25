@@ -34,7 +34,7 @@ void func_0000034C(void) {
     func_000002B0(0, 0xFFFF);
 }
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000036C);
 #else
 void func_0000036C(struct Unk_func_0000036C_0 *arg0) {
@@ -63,7 +63,7 @@ void func_0000036C(struct Unk_func_0000036C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000044C);
 #else
 void func_0000044C(struct Unk_func_0000044C_0 *arg0) {
@@ -134,7 +134,7 @@ INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003B88);
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003BB0);
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003B70);
 #endif
 
@@ -151,6 +151,10 @@ INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003C5C);
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003C8C);
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003CA8);
+
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003C9C);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003CDC);
@@ -182,9 +186,15 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_000013CC);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00001670);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/rss_subscriber", func_000016AC);
+#endif
+
 #if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_000016A0);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_000016A8);
 #endif
 
@@ -198,7 +208,7 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_000017C0);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00001B18);
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00001B80);
 #else
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00001BA0);
@@ -306,7 +316,14 @@ void func_00002D70(M2C_UNK **arg0) {
     *arg0 = &D_00003D30;
 }
 
+#if FW_VERSION != 271
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002D80);
+#else
+void func_00002D80(M2C_UNK **arg0) {
+    *arg0 = &D_00003D30;
+    scePaf_4E67BB08();
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002DB0);
 

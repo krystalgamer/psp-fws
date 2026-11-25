@@ -73,3 +73,26 @@ sceKernelCreateSema = 0x00002F98; // type:func
 sceWlanDrv_driver_44A99F9D = 0x00002FA0; // type:func
 sceWlanDrv_driver_EB3235B5 = 0x00002FA8; // type:func
 sceWlanDrv_driver_FBD385FB = 0x00002FB0; // type:func
+// shared names (tools/add_version.py) begin
+D_00003470 = 0x00003564; // rom:0x3604
+D_0000347C = 0x00003570; // rom:0x3610
+D_00003660 = 0x000035E0; // rom:0x3680
+D_00003B28 = 0x000035E8; // rom:0x3688
+D_00003B2C = 0x000035EC; // rom:0x368C
+D_000034F0 = 0x000035F0;
+D_00003504 = 0x00003604;
+D_00003508 = 0x00003608;
+D_0000350C = 0x0000360C;
+D_00003510 = 0x00003610;
+D_00003514 = 0x00003614;
+D_00003534 = 0x00003634;
+D_000043C8 = 0x00003648;
+D_000043CC = 0x0000364C;
+D_000043D0 = 0x00003650;
+D_000043D4 = 0x00003654;
+func_000018BC = 0x000013E0; // type:func rom:0x1480
+func_00001E90 = 0x00001F40; // type:func rom:0x1FE0
+func_00002690 = 0x00002740; // type:func rom:0x27E0
+D_0000347C_v271 = 0x0000347C; // rom:0x351C
+D_00003514_v271 = 0x00003514; // rom:0x35B4
+// shared names (tools/add_version.py) end

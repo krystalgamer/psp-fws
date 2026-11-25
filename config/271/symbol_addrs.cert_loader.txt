@@ -7,3 +7,13 @@ sceIoLseek = 0x00000EF0; // type:func
 sceIoRead = 0x00000EF8; // type:func
 sceIoClose = 0x00000F00; // type:func
 SysMemForKernel_FC114573 = 0x00000F08; // type:func
+// shared names (tools/add_version.py) begin
+func_0000050C = 0x00000598; // type:func rom:0x638
+func_00000544 = 0x000005D0; // type:func rom:0x670
+func_00000580 = 0x00000604; // type:func rom:0x6A4
+func_00000588 = 0x0000060C; // type:func rom:0x6AC
+func_00000590 = 0x00000614; // type:func rom:0x6B4
+func_00000598 = 0x0000061C; // type:func rom:0x6BC
+func_000005B0 = 0x0000063C; // type:func rom:0x6DC
+func_00000968 = 0x00000A04; // type:func rom:0xAA4
+// shared names (tools/add_version.py) end

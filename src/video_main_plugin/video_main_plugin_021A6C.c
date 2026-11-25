@@ -12,6 +12,16 @@ void func_00021B3C(struct Unk_func_00021B3C_0 *arg0, s32 arg1) {
     arg0->unk4 = func_00027E28(arg1 + 2);
 }
 
+#if FW_VERSION == 271
+void func_00036AEC(s32 *arg0, void *arg1) {
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(arg1, u8 *, 0) << 8;
+    *arg0 = temp_v0;
+    *arg0 = temp_v0 | M2C_FIELD(arg1, u8 *, 1);
+}
+#endif
+
 void func_00021B88(void) {
 }
 
@@ -992,4 +1002,3 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000277B0);
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000278B8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00027944);
-

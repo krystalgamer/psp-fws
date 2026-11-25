@@ -137,4 +137,3 @@ s32 func_0009D890(s32 arg0) {
 void func_0009D8B0(s32 arg0, s32 arg1) {
     func_00059D98(arg0, arg1, 0);
 }
-

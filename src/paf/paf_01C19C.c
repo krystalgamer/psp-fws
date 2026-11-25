@@ -2,9 +2,54 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 282
+#if FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_21A0C6E0);
-#else
+#endif
+
+#if FW_VERSION == 200
+void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    if (temp_a0 != NULL) {
+        M2C_FIELD(temp_a0, s32 *, 0xB4) = arg2;
+        M2C_FIELD(temp_a0, s32 *, 0xB0) = arg1;
+    }
+}
+
+void scePaf_C1579C1D(void **arg0, s32 arg1, s32 arg2) {
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    if (temp_a0 != NULL) {
+        M2C_FIELD(temp_a0, s32 *, 0xBC) = arg2;
+        M2C_FIELD(temp_a0, s32 *, 0xB8) = arg1;
+    }
+}
+
+void scePaf_ED2DF238(void **arg0, s32 arg1, s32 arg2) {
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    if (temp_a0 != NULL) {
+        M2C_FIELD(temp_a0, s32 *, 0xC4) = arg2;
+        M2C_FIELD(temp_a0, s32 *, 0xC0) = arg1;
+    }
+}
+
+void scePaf_EB5BDCE1(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    if (temp_a0 != NULL) {
+        M2C_FIELD(temp_a0, s32 *, 0xCC) = arg3;
+        M2C_FIELD(temp_a0, s32 *, 0xD0) = arg1;
+        M2C_FIELD(temp_a0, s32 *, 0xC8) = arg2;
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
     struct Unk_scePaf_21A0C6E0_temp_a0 *temp_a0;
 
@@ -45,7 +90,9 @@ void scePaf_EB5BDCE1(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
         temp_a0->unkC8 = arg2;
     }
 }
+#endif
 
+#if FW_VERSION >= 200
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_D9D3EEBA);
 #endif
 
@@ -83,10 +130,10 @@ INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001C3F8);
 
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_F3967AF5);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001BBB4);
-#else
+#if FW_VERSION >= 200
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_E6134C53);
+#else
+INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001BBB4);
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_BBBF145C);
@@ -120,6 +167,10 @@ M2C_UNK *scePaf_4C8C2E25(void) {
 M2C_UNK *func_0001C964(void) {
     return &D_0016FC7C;
 }
+
+#if FW_VERSION == 200
+INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001C0A0);
+#endif
 
 #if FW_VERSION == 282
 M2C_UNK *func_0001C970(void) {

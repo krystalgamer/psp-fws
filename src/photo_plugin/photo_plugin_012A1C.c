@@ -2,7 +2,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 void func_00012A1C(s32 arg0) {
     void *temp_v0;
 
@@ -60,17 +60,27 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012E08);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012E58);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012CD0);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012D90);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FDC0);
+#endif
 
+#if FW_VERSION == 271
+s32 func_00012A8C(void) {
+    return 2;
+}
+#endif
+
+#if FW_VERSION == 260
 s32 func_00012DC0_v260(void) {
     return 2;
 }
+#endif
 
+#if FW_VERSION >= 260
 s32 func_00012DC8(void) {
     return 1;
 }
@@ -144,7 +154,7 @@ void func_0001359C(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 void func_00013464(void) {
 
 }
@@ -158,7 +168,7 @@ INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FDF8);
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FE18);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030158);
 #endif
 

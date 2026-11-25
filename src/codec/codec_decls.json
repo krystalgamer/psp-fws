@@ -2,6 +2,7 @@
  "funcs": {
   "func_0000004C": "M2C_UNK func_0000004C(M2C_UNK, M2C_UNK);",
   "func_00000094": "void func_00000094(s32 arg0);",
+  "func_000000E0": "void func_000000E0(void);",
   "func_000000E4": "void func_000000E4(void);",
   "func_00000130": "void func_00000130(void);",
   "func_0000017C": "s32 func_0000017C(void);",

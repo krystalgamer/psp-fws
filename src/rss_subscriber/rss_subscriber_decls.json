@@ -23,6 +23,7 @@
   "func_00002D28": "void func_00002D28(M2C_UNK **arg0);",
   "func_00002D50": "s32 func_00002D50(void);",
   "func_00002D70": "void func_00002D70(M2C_UNK **arg0);",
+  "func_00002D80": "void func_00002D80(M2C_UNK **arg0);",
   "func_00003278": "M2C_UNK func_00003278();",
   "memset": "M2C_UNK memset(void *, M2C_UNK, M2C_UNK);",
   "module_stop": "s32 module_stop(void);",

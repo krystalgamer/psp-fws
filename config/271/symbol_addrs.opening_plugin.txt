@@ -46,3 +46,17 @@ scePaf_FCB4E053 = 0x000011E0; // type:func
 scePower_DB62C9CF = 0x000011E8; // type:func
 sceKernelPowerUnlock = 0x000011F0; // type:func
 sceKernelPowerLock = 0x000011F8; // type:func
+// shared names (tools/add_version.py) begin
+D_00001510 = 0x00001478; // rom:0x1518
+D_00001670 = 0x000015D8; // rom:0x1678
+D_00001734 = 0x00001674; // rom:0x1714
+D_0000177C = 0x000017FC;
+D_00001820 = 0x00001800;
+D_00001780 = 0x00001804;
+func_0000076C = 0x00000790; // type:func rom:0x830
+func_000009E8 = 0x000009D4; // type:func rom:0xA74
+func_000009C0 = 0x00000A24; // type:func rom:0xAC4
+func_00000E44 = 0x00000E28; // type:func rom:0xEC8
+func_00000DE8 = 0x00000ED8; // type:func rom:0xF78
+func_00000E08 = 0x00000EF8; // type:func rom:0xF98
+// shared names (tools/add_version.py) end

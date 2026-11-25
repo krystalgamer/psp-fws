@@ -536,6 +536,12 @@ s32 func_00007A68(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A94);
 
+#if FW_VERSION == 271
+s32 func_00007A14(void) {
+    return sceKernelCheckThreadStack();
+}
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_0000791C);
 
@@ -636,7 +642,7 @@ s32 func_00007754(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000067C4);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_0000699C);

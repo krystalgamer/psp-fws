@@ -11,6 +11,7 @@ extern s32 D_00002998;
 extern s32 D_00003F94;
 extern s32 D_00003F98;
 extern s32 D_00004E14;
+extern s32 D_00005B94;
 extern s32 D_00006F94;
 extern s32 D_00006F98;
 

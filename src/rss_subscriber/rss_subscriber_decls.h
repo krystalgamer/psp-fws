@@ -93,6 +93,7 @@ M2C_UNK func_00002C30();
 void func_00002D28(M2C_UNK **arg0);
 s32 func_00002D50(void);
 void func_00002D70(M2C_UNK **arg0);
+void func_00002D80(M2C_UNK **arg0);
 M2C_UNK func_00003278();
 M2C_UNK memset(void *, M2C_UNK, M2C_UNK);
 s32 module_stop(void);

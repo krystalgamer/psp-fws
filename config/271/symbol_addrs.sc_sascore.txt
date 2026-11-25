@@ -34,3 +34,8 @@ sceKernelDcacheInvalidateRange = 0x000020F4; // type:func
 sceMeCore_driver_3D5F109C = 0x000020FC; // type:func
 sceMeMemory_driver_5AD660FA = 0x00002104; // type:func
 sceMeMemory_driver_C86500E3 = 0x0000210C; // type:func
+// shared names (tools/add_version.py) begin
+D_000025A0 = 0x0000238C; // rom:0x242C
+D_000025A8 = 0x00002394; // rom:0x2434
+D_000025B0 = 0x0000239C; // rom:0x243C
+// shared names (tools/add_version.py) end

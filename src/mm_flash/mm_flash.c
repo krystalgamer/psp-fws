@@ -1178,6 +1178,9 @@ INCLUDE_ASM("nonmatchings/mm_flash", func_000155F8);
 
 INCLUDE_RODATA("nonmatchings/mm_flash", D_000B57EC);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mm_flash", func_000159CC);
+#else
 void func_000159CC(s32 arg0, struct Unk_func_000159CC_1 *arg1) {
     s32 var_v1;
 
@@ -1201,6 +1204,7 @@ void func_000159CC(s32 arg0, struct Unk_func_000159CC_1 *arg1) {
         func_0001DA90(arg0, (s32) "</A>");
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/mm_flash", func_00015A8C);
 
@@ -1278,4 +1282,3 @@ INCLUDE_ASM("nonmatchings/mm_flash", func_00016D3C);
 INCLUDE_ASM("nonmatchings/mm_flash", func_00016DD8);
 
 INCLUDE_ASM("nonmatchings/mm_flash", func_00016E90);
-

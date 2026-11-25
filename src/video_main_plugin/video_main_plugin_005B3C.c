@@ -71,4 +71,3 @@ s32 func_00006640(struct Unk_func_00006640_0 *arg0, s32 arg1) {
     arg0->unk1EC = arg1;
     return 0;
 }
-

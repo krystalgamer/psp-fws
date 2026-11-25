@@ -46,3 +46,24 @@ sceNet_lib_BCBE14CF = 0x000028B8; // type:func
 sceNet_lib_D8722983 = 0x000028C0; // type:func
 sceNet_lib_EF097716 = 0x000028C8; // type:func
 sceParseHttpResponseHeader = 0x000028D0; // type:func
+// shared names (tools/add_version.py) begin
+D_00003310 = 0x00002B78; // rom:0x2C18
+D_00003320 = 0x00002B88; // rom:0x2C28
+D_00003054 = 0x00003044; // rom:0x30E4
+D_0000305C = 0x0000304C; // rom:0x30EC
+D_00003068 = 0x00003058; // rom:0x30F8
+D_00003078 = 0x00003068; // rom:0x3108
+D_00003D10 = 0x000030BC;
+D_00003D14 = 0x000030C0;
+D_00003CFC = 0x000030C8;
+D_000046F8 = 0x00003AC4;
+D_00003AE0 = 0x00003AD0;
+func_000002A0 = 0x000002E8; // type:func rom:0x388
+func_00000C1C = 0x00000C10; // type:func rom:0xCB0
+func_00001188 = 0x00001200; // type:func rom:0x12A0
+func_00001888 = 0x0000191C; // type:func rom:0x19BC
+func_00001944 = 0x00001938; // type:func rom:0x19D8
+func_00001BCC = 0x00001A48; // type:func rom:0x1AE8
+func_00001DBC = 0x00001C34; // type:func rom:0x1CD4
+func_00001FB8 = 0x00001E30; // type:func rom:0x1ED0
+// shared names (tools/add_version.py) end

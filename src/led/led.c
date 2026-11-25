@@ -14,7 +14,9 @@ INCLUDE_ASM("nonmatchings/led", func_00000144);
 
 INCLUDE_ASM("nonmatchings/led", sceLed_driver_EA24BE03);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/led", module_start);
+#else
 s32 module_start(void) {
     sceSyscon_driver_18BFBE65(0, 1);
     sceSyscon_driver_18BFBE65(1, 1);
@@ -25,8 +27,6 @@ s32 module_start(void) {
     sceSysEventForKernel_CD9E4BB5(&D_000008A0);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/led", module_start);
 #endif
 
 #if FW_VERSION < 282

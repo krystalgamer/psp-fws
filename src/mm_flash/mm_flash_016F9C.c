@@ -66,4 +66,3 @@ void func_00017830(struct Unk_func_00017830_0 *arg0, s32 arg1) {
     func_00017884((s32) arg0, 0, arg0->unk268);
     func_000133D0((s32) arg0, arg1, sceHVNetfront_Module_15875ED4(arg1), 0);
 }
-

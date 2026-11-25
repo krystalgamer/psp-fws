@@ -6,6 +6,7 @@
 
 extern s32 D_00000C30;
 extern s32 D_00000C70;
+extern s32 D_00000DA8;
 extern M2C_UNK D_00000EF0;
 extern s32 D_00000F30;
 extern s32 D_00000F3C;

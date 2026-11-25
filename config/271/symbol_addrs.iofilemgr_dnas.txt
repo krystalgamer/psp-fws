@@ -26,3 +26,10 @@ sceAmctrl_driver_525B8218 = 0x0000137C; // type:func
 sceAmctrl_driver_58163FBE = 0x00001384; // type:func
 sceAmctrl_driver_9951C50F = 0x0000138C; // type:func
 sceAmctrl_driver_EF95A213 = 0x00001394; // type:func
+// shared names (tools/add_version.py) begin
+D_000015D8 = 0x000015A4; // rom:0x1644
+D_000015F0 = 0x000015BC; // rom:0x165C
+D_00001658 = 0x000015FC; // rom:0x169C
+D_000015D8_v271 = 0x000015D8; // rom:0x1678
+D_000015F0_v271 = 0x000015F0; // rom:0x1690
+// shared names (tools/add_version.py) end

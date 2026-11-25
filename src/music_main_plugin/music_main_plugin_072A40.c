@@ -2,7 +2,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_072A40", func_00072A40);
 #else
 void func_00072A40(struct Unk_func_00072A40_0 *arg0, s32 arg1) {

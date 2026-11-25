@@ -6,3 +6,17 @@ sceUriBuild = 0x00000708; // type:func
 sceUriMerge = 0x00000C4C; // type:func
 sceUriSweepPath = 0x00000E64; // type:func
 sceKernelCheckThreadStack = 0x000029AC; // type:func
+// shared names (tools/add_version.py) begin
+D_00002C38 = 0x00002B98; // rom:0x2C38
+D_00002D14 = 0x00002BF4; // rom:0x2C94
+D_00002A19 = 0x00002E11; // rom:0x2EB1
+func_00001310 = 0x00001494; // type:func rom:0x1534
+func_0000170C = 0x00001610; // type:func rom:0x16B0
+func_000019F8 = 0x000018E8; // type:func rom:0x1988
+func_00001A7C = 0x0000196C; // type:func rom:0x1A0C
+func_0000181C = 0x00001B98; // type:func rom:0x1C38
+func_00001868 = 0x00001BDC; // type:func rom:0x1C7C
+func_000018A0 = 0x00001C24; // type:func rom:0x1CC4
+func_00001DEC = 0x00002174; // type:func rom:0x2214
+func_00001DE4 = 0x000021BC; // type:func rom:0x225C
+// shared names (tools/add_version.py) end

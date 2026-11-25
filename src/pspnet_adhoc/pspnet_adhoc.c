@@ -383,6 +383,10 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004B30);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004E80);
 #endif
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004DA4);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004DFC);
 #endif
@@ -391,9 +395,11 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004DFC);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004C0C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004E60);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004F50);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000050F8);

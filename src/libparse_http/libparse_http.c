@@ -6,13 +6,21 @@ INCLUDE_ASM("nonmatchings/libparse_http", sceParseHttpStatusLine);
 
 INCLUDE_ASM("nonmatchings/libparse_http", sceParseHttpResponseHeader);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libparse_http", func_000003A0);
+
+INCLUDE_ASM("nonmatchings/libparse_http", func_00000510);
+
+INCLUDE_ASM("nonmatchings/libparse_http", func_000005A0);
+
+INCLUDE_ASM("nonmatchings/libparse_http", func_0000061C);
+#else
 INCLUDE_ASM("nonmatchings/libparse_http", func_000002D8);
 
 INCLUDE_ASM("nonmatchings/libparse_http", func_0000044C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libparse_http", func_000004DC);
 #endif
 
@@ -20,7 +28,7 @@ INCLUDE_ASM("nonmatchings/libparse_http", func_000004DC);
 INCLUDE_ASM("nonmatchings/libparse_http", strncmp_uc);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libparse_http", func_00000564);
 #endif
 
@@ -34,16 +42,6 @@ s32 module_stop(void) {
 }
 
 INCLUDE_ASM("nonmatchings/libparse_http", func_000005F0);
-#endif
-
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/libparse_http", func_000003A0);
-
-INCLUDE_ASM("nonmatchings/libparse_http", func_00000510);
-
-INCLUDE_ASM("nonmatchings/libparse_http", func_000005A0);
-
-INCLUDE_ASM("nonmatchings/libparse_http", func_0000061C);
 #endif
 
 INCLUDE_ASM("nonmatchings/libparse_http", func_000006C4);

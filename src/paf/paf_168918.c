@@ -2,6 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION != 200
 s32 func_00168918(s32 arg0, s32 *arg1) {
     s32 temp_v0;
     s32 var_v0;
@@ -15,3 +16,4 @@ s32 func_00168918(s32 arg0, s32 *arg1) {
     }
     return var_v0;
 }
+#endif

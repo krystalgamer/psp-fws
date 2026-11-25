@@ -60,3 +60,5 @@ sceUsbBus_driver_B1644BE7 = 0x0000527C; // type:func
 sceUsbBus_driver_C1E2A540 = 0x00005284; // type:func
 sceUsbBus_driver_C5E53685 = 0x0000528C; // type:func
 sceUsbBus_driver_CC57EC9D = 0x00005294; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

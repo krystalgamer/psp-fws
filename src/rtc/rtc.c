@@ -32,7 +32,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastReincarnatedTime);
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastAdjustedTime);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 s32 module_start(void) {
     memset(&D_00004580.unk0, 0, 0x60);
     D_00004580.unk1C = -1;
@@ -62,7 +62,7 @@ s32 module_start(void) {
 }
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 s32 module_reboot_before(void) {
     sceSyscon_driver_A068B3D0(0, 0);
     sceSysEventForKernel_D7D3FDCD(&D_00004530);
@@ -101,7 +101,7 @@ s32 module_reboot_before(void) {
 INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_912BEE56);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 s32 sceRtc_driver_912BEE56(void) {
     memset(&D_00004580.unk0, 0, 0x60);
     D_00004580.unk1C = -1;
@@ -135,7 +135,7 @@ s32 sceRtc_driver_912BEE56(void) {
 INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_CE27DE2F);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 s32 sceRtc_driver_CE27DE2F(void) {
     sceSyscon_driver_A068B3D0(0, 0);
     sceSysEventForKernel_D7D3FDCD(&D_00004530);

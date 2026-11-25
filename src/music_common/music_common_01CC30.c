@@ -80,6 +80,10 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001E040);
 
 INCLUDE_RODATA("nonmatchings/music_common_01CC30", D_000201A8);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/music_common_01CC30", D_0001D500);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/music_common_01CC30", D_000202B0);
 

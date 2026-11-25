@@ -89,7 +89,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000023BC);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002480);
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000251C);
 #endif
 
@@ -132,7 +132,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002A04);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002B7C);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002F60);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000030D4);
@@ -154,7 +154,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002E2C);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001710);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000032EC);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003468);
@@ -178,7 +178,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001A68);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003230);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003784);
 #endif
 
@@ -213,7 +213,13 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001E6C);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000035C4);
+#endif
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003B50);
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000035E4);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003644);
@@ -310,7 +316,7 @@ INCLUDE_RODATA("nonmatchings/pspnet_apctl_0016E0", D_00010A70);
 
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_0016E0", D_00010A8C);
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003DA8);
 #endif
 

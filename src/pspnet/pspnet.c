@@ -70,7 +70,11 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetInit);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetTerm);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/pspnet", func_0000198C);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/pspnet", func_0000195C);
 #endif
 
@@ -742,7 +746,11 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00006C8C);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00007020);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/pspnet", func_00007060);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/pspnet", func_0000704C);
 #endif
 
@@ -1062,6 +1070,10 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00008E1C);
 INCLUDE_ASM("nonmatchings/pspnet", func_00009390);
 
 INCLUDE_RODATA("nonmatchings/pspnet", D_0000A574);
+
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/pspnet", D_0000A564);
+#endif
 
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/pspnet", D_0000A5B4);

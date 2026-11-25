@@ -152,7 +152,7 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00000634);
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_0000072C);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00003CC4);
 #endif
 
@@ -265,7 +265,7 @@ INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00003D88);
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00003DAC);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_0000423C);
 #endif
 
@@ -281,7 +281,7 @@ INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00003DE8);
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00003E00);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_000037C0);
 #endif
 
@@ -327,7 +327,7 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_0000106C);
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001104);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000012A0);
 #endif
 
@@ -383,7 +383,7 @@ void func_0000117C(void) {
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 void func_00001790(s32 arg0) {
     void *sp0;
     D_00004160 = 4;
@@ -569,7 +569,7 @@ void func_000016D4(void) {
 
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000019A0);
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000019D0);
 #endif
 

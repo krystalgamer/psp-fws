@@ -107,6 +107,10 @@ INCLUDE_RODATA("nonmatchings/usbstor", D_000028B0);
 
 INCLUDE_RODATA("nonmatchings/usbstor", D_000028E0);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/usbstor", D_000027E4_v271);
+#endif
+
 #if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/usbstor", D_00002904);
 #endif

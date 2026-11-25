@@ -70,7 +70,7 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_000073B4);
 INCLUDE_ASM("nonmatchings/update_plugin", func_00000180);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 void func_00000210(void) {
     if ((D_000076C8 != 0) && (D_000076C9 != 0)) {
         vsh_475ABD41(D_000076CC);
@@ -193,7 +193,7 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_00006DB8);
 INCLUDE_ASM("nonmatchings/update_plugin", func_00000320);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 void func_00000320(s32 arg0) {
     void *sp0;
     void **temp_v0;
@@ -279,6 +279,12 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_00005294);
 
 INCLUDE_RODATA("nonmatchings/update_plugin", D_000075A0);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/update_plugin", D_00005BB0);
+
+INCLUDE_RODATA("nonmatchings/update_plugin", D_0000753C);
+#endif
+
 #if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/update_plugin", D_000075BC);
 
@@ -293,7 +299,7 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_000075F4);
 
 INCLUDE_RODATA("nonmatchings/update_plugin", D_0000760C);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00005BB0);
 
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00005BD0);
@@ -498,6 +504,12 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_00005754);
 #endif
 
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00007A34);
+
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/update_plugin", D_000079B0);
+
+INCLUDE_RODATA("nonmatchings/update_plugin", D_000079F4);
+#endif
 
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00007370);
@@ -1281,7 +1293,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00003808);
 INCLUDE_ASM("nonmatchings/update_plugin", func_00003BB0);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/update_plugin", func_00003B88);
 
 INCLUDE_ASM("nonmatchings/update_plugin", func_00003C64);
@@ -1365,7 +1377,7 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_0000746C_v260);
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00007470);
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
+#if FW_VERSION >= 250 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/update_plugin", D_0000746C);
 #endif
 
@@ -1929,6 +1941,12 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00004870);
 #endif
 
 INCLUDE_ASM("nonmatchings/update_plugin", func_000062D4);
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/update_plugin", func_00006294);
+
+INCLUDE_RODATA("nonmatchings/update_plugin", D_00007C50);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/update_plugin", func_0000632C);

@@ -21,7 +21,7 @@ INCLUDE_RODATA("nonmatchings/music_plugin", D_0000201C);
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0005AD18);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_plugin", func_00000180);
 
 void func_00000318(void) {
@@ -96,7 +96,7 @@ INCLUDE_RODATA("nonmatchings/music_plugin", D_0005AF60);
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0005AF74);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_plugin", func_00000610);
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_000009D4);
@@ -118,7 +118,7 @@ INCLUDE_RODATA("nonmatchings/music_plugin", D_0008BC80);
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0008BCA0);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_plugin", func_00000AA0);
 #endif
 
@@ -126,7 +126,7 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00000AA0);
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0008BCC0);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_plugin", func_00000C6C);
 
 void func_00000EEC(void) {
@@ -192,7 +192,7 @@ INCLUDE_RODATA("nonmatchings/music_plugin", D_0005B050);
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0005B06C);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_plugin", func_000010D0);
 #endif
 
@@ -2013,7 +2013,7 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00014338);
 INCLUDE_ASM("nonmatchings/music_plugin", func_000012F0);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 void func_000012F0(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -2097,7 +2097,7 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00018710);
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001871C);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 s32 func_0001871C(void) {
     return func_00018CB4();
 }
@@ -3303,7 +3303,7 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_0001177C);
 INCLUDE_ASM("nonmatchings/music_plugin", func_000117CC);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_plugin", func_00018CB4);
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_00001668);

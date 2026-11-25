@@ -398,6 +398,10 @@ INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D96B8);
 
 INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D96C4);
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000F3F90);
+#endif
+
 #if FW_VERSION == 151
 INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000F21D0_v151);
 #endif
@@ -415,6 +419,10 @@ INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D96D0);
 #endif
 
 INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D9744);
+
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000F400C);
+#endif
 
 #if FW_VERSION == 151
 INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000F224C);
@@ -761,6 +769,10 @@ INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D98B8);
 
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_00072054);
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000F4240);
+#endif
+
 INCLUDE_ASM("nonmatchings/pafmini_06A490", scePaf_F6F3E99E);
 
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_0007227C);
@@ -854,7 +866,7 @@ INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_00106B70);
 INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_00106C08);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000F2768);
 #endif
 

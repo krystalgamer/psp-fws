@@ -204,7 +204,7 @@ INCLUDE_ASM("nonmatchings/hpremote", func_00001658);
 
 INCLUDE_ASM("nonmatchings/hpremote", func_0000181C);
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/hpremote", func_00001924);
 #else
 s32 func_00001924(void) {

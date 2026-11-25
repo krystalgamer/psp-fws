@@ -56,7 +56,18 @@ void func_0000F844(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000F84C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 271
+void func_0000F86C(s32 arg0, s32 arg1, s32 arg2) {
+    func_0000F1A0(arg0, arg1);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000226D8;
+    func_000020A4(arg0 + 0x20, 0);
+    M2C_FIELD(arg0, s32 *, 0x24) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    func_00011ED4(arg0);
+}
+#endif
+
+#if FW_VERSION < 271
 void func_0000F86C(s32 arg0, s32 arg1, s32 arg2) {
     func_0000F1A0(arg0, arg1);
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000212C0;
@@ -65,7 +76,20 @@ void func_0000F86C(s32 arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
     func_00011ED4(arg0);
 }
+#endif
 
+#if FW_VERSION == 271
+void func_0000F8C4(s32 arg0, s32 arg1, s32 arg2) {
+    func_0000F1A0(arg0, arg1);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000226D8;
+    func_000020A4(arg0 + 0x20, 0);
+    M2C_FIELD(arg0, s32 *, 0x24) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    func_00011ED4(arg0);
+}
+#endif
+
+#if FW_VERSION < 271
 void func_0000F8C4(s32 arg0, s32 arg1, s32 arg2) {
     func_0000F1A0(arg0, arg1);
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000212C0;
@@ -74,7 +98,9 @@ void func_0000F8C4(s32 arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
     func_00011ED4(arg0);
 }
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000F91C);
 #endif
 
@@ -94,7 +120,9 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000F9A8_v100);
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000FA34);
 #endif
 
+#if FW_VERSION != 271
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226D0);
+#endif
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011ED4);
 
@@ -108,6 +136,10 @@ void func_0000FB5C(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00010B04);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00010BB8);
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0001205C);
 #endif
 
 #if FW_VERSION == 282
@@ -168,11 +200,19 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_000126B0);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_000126DC);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 271
+void func_000103B8(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
+}
+#endif
+
+#if FW_VERSION < 271
 void func_000103B8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3C) = arg1;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_00012764(struct Unk_func_00012764_0 *arg0, s32 arg1) {
     arg0->unk1C = arg1;
 }
@@ -236,11 +276,19 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012D94);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012ECC);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226B8_v271);
+
+INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226D8);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000227B8);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000212C0);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_00022738);
 #endif
 

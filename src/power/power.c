@@ -29,7 +29,7 @@ INCLUDE_ASM("nonmatchings/power", scePowerUnregitserCallback);
 
 INCLUDE_ASM("nonmatchings/power", func_0000096C);
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00000994);
 #endif
 
@@ -762,7 +762,7 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_35B7662E);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_F9B4DEA1);
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 s32 scePowerGetCpuClockFrequency(void) {
     return D_0000AF94;
 }
@@ -882,7 +882,24 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_862AE1A6);
 INCLUDE_ASM("nonmatchings/power", scePower_driver_23436A4A);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 271
+s32 func_00002D70(void) {
+    M2C_UNK *temp_v0;
+    s32 temp_v0_2;
+
+    memset(&D_00008FC8, 0, 0x58);
+    temp_v0 = "ScePowerBattery";
+    M2C_FIELD(&D_00008FC8, s32 *, 8) = -1;
+    M2C_FIELD(&D_00008FC8, s32 *, 0x24) = -1;
+    M2C_FIELD(&D_00008FC8, s32 *, 0) = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
+    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003220, 0x40, 0x800U, 1U, NULL);
+    M2C_FIELD(&D_00008FC8, s32 *, 4) = temp_v0_2;
+    sceKernelStartThread(temp_v0_2, 0U, NULL);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 271
 s32 func_00002D70(void) {
     M2C_UNK *temp_v0;
     s32 temp_v0_2;

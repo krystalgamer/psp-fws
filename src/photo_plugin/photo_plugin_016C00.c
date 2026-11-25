@@ -2,7 +2,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 void func_00016C00(void) {
     void *temp_v0;
 
@@ -39,7 +39,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_016C00", func_00016C74);
 INCLUDE_ASM("nonmatchings/photo_plugin_016C00", func_00016E18);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 s32 func_00016E94(void) {
     s32 var_v1;
     void *temp_v0;

@@ -11,8 +11,10 @@ struct Unk_func_00000790_temp_v0_2 {
 
 extern M2C_UNK D_00001648;
 extern s32 D_0000177C;
+extern s32 D_00001780;
 extern s32 D_000017FC;
 
+s32 func_00000570(void);
 void func_0000076C(void);
 void func_00000790(void);
 void func_000009C0(s32 arg0);

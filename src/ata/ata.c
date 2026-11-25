@@ -2,7 +2,7 @@
 #include "common.h"
 #include "ata_decls.h"
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/ata", D_00003F1C);
 #endif
 
@@ -29,6 +29,12 @@ INCLUDE_ASM("nonmatchings/ata", func_00000280);
 #endif
 
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_52D9A4CA);
+
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/ata", D_00004470);
+
+INCLUDE_RODATA("nonmatchings/ata", D_000044A0);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/ata", D_0000410C);
@@ -347,9 +353,18 @@ void sceAta_driver_7BBA095C(s32 arg0, M2C_UNK arg1) {
 }
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 271) || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/ata", module_start);
-#else
+#endif
+
+#if FW_VERSION == 271
+s32 module_start(void) {
+    func_00003C58();
+    return func_00000000(1) != 0;
+}
+#endif
+
+#if FW_VERSION == 201
 s32 module_start(void) {
     s32 var_v1;
 
@@ -492,11 +507,19 @@ INCLUDE_ASM("nonmatchings/ata", sceAta_driver_4D225674);
 
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_7DE9E14A);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/ata", func_00002374);
+
+INCLUDE_ASM("nonmatchings/ata", func_0000239C);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/ata", func_000021D0);
 
 INCLUDE_ASM("nonmatchings/ata", func_000021FC);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", func_00002214);
 
 INCLUDE_ASM("nonmatchings/ata", func_00002228);
@@ -592,7 +615,21 @@ INCLUDE_ASM("nonmatchings/ata", func_0000251C);
 INCLUDE_ASM("nonmatchings/ata", func_00002074);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 271
+s32 func_000020F8(void *arg0, void *arg1, s32 arg2) {
+    s32 var_v0;
+
+    var_v0 = 0x80211008;
+    if (((arg0 == NULL) | (arg1 == NULL)) == 0) {
+        var_v0 = 0;
+        M2C_FIELD(arg0, void **, 0x18) = arg1;
+        M2C_FIELD(arg1, s32 *, 0xC) = arg2;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 271
 s32 func_000020F8(void *arg0, void *arg1, s32 arg2) {
     s32 var_v0;
 
@@ -857,11 +894,19 @@ void sceAta_driver_6FD8E2AB(void) {
 
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_7C6B31D8);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 271
+void func_00003C58(void) {
+    D_000042A0 = __builtin_allegrex_ext(KDebugForKernel_D636B827(), 0x10, 1);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 271
 void func_00003C58(void) {
     D_000042A0 = (KDebugForKernel_D636B827() >> 0x10) & 1;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceAta_driver_DCC8A89E(void) {
     return D_000042A0 == 0;
 }

@@ -276,17 +276,31 @@ u32 func_00004928(s32 arg0) {
     return (u32) ~arg0 >> 0x1F;
 }
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000A238);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_9F1B5B95);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_A0472F68);
+#endif
 
+#if FW_VERSION == 271
+u8 func_000055E4(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0xAC);
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_2C03147D);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_3B03E04A);
+#endif
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000567C);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000A740);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_9E5A3EE2);
@@ -351,7 +365,7 @@ INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001EF28);
 
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001EF34);
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00006494);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000066DC);
@@ -469,7 +483,7 @@ INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001F138);
 
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001F140);
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000B3B8);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000B9B8);
@@ -537,7 +551,7 @@ INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_9F1B5B95);
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_A0472F68);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000055AC);
 #else
 u8 func_000055AC(struct Unk_func_000055AC_0 *arg0) {
@@ -545,7 +559,7 @@ u8 func_000055AC(struct Unk_func_000055AC_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CE48);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CE50);

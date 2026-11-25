@@ -170,4 +170,3 @@ void func_00060368(struct Unk_func_00060368_0 *arg0) {
 INCLUDE_ASM("nonmatchings/mm_flash_05AFB8", func_00060378);
 
 INCLUDE_ASM("nonmatchings/mm_flash_05AFB8", func_000603E8);
-

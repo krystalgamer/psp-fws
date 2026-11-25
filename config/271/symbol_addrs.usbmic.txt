@@ -34,3 +34,5 @@ sceUsbAccGetAuthStat = 0x000018B0; // type:func
 sceUsbBus_driver_913EC15D = 0x000018B8; // type:func
 sceUsbBus_driver_B1644BE7 = 0x000018C0; // type:func
 sceUsbBus_driver_C1E2A540 = 0x000018C8; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

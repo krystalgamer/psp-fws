@@ -137,6 +137,9 @@ INCLUDE_RODATA("nonmatchings/mm_flash_07C92C", D_000C06A0);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_07C92C", D_000C06B0);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mm_flash_07C92C", func_0007CB40);
+#else
 s32 func_0007CB40(struct Unk_func_000753DC_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_3;
@@ -154,6 +157,7 @@ s32 func_0007CB40(struct Unk_func_000753DC_0 *arg0) {
     }
     return var_s0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/mm_flash_07C92C", func_0007CB9C);
 
@@ -379,4 +383,3 @@ INCLUDE_ASM("nonmatchings/mm_flash_07C92C", func_0008271C);
 INCLUDE_ASM("nonmatchings/mm_flash_07C92C", func_0008285C);
 
 INCLUDE_ASM("nonmatchings/mm_flash_07C92C", func_000829CC);
-

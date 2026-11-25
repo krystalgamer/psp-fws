@@ -69,7 +69,7 @@ u8 *func_00009134(u8 *arg0, u8 *arg1, s32 arg2) {
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00009168);
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00007358);
 #endif
 
@@ -81,15 +81,19 @@ void func_00006768(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_0000678C);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_000067B4);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00006854);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00006884);
+#endif
 
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00006A48);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00006A90);
@@ -123,7 +127,7 @@ s32 func_0000732C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00007340);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_0000736C);
@@ -133,7 +137,9 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00007398);
 M2C_UNK *func_000073AC(void) {
     return &D_00007C61;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00009194);
 
 s32 func_00009214(s32 arg0) {
@@ -143,9 +149,15 @@ s32 func_00009214(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00009224);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_000091BC);
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_0000744C);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_000092B8);
 #endif
 
@@ -167,9 +179,15 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00009594);
 
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009BC8);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009ACC);
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00007B08);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009BD8);
 #endif
 
@@ -177,6 +195,10 @@ INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009C58);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009380);
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009BA4);
 #endif
 
 #if FW_VERSION == 282

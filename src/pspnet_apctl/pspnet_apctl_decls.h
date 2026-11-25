@@ -270,6 +270,7 @@ s32 func_0000B974(s32, s32, s32, s32, s32);
 s32 func_0000B9F8(s32, s32, s32, s32, s32);
 void func_0000BBEC(s32 arg0);
 s32 func_0000BC08(s32);
+s32 func_0000BC30(s32);
 s32 func_0000BC54(void);
 void func_0000BCBC(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_0000BCD8(void);

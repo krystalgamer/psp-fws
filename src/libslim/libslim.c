@@ -813,7 +813,19 @@ INCLUDE_ASM("nonmatchings/libslim", sceHVSlim_Library_6B15F29F);
 
 INCLUDE_ASM("nonmatchings/libslim", func_00005F60);
 
-#if FW_VERSION < 303
+#if FW_VERSION == 271
+s32 func_00006054(struct Unk_func_00006054_0 *arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if ((M2C_FIELD(func_000095F4((s32) arg0, __builtin_allegrex_ins(arg1, 0, 0x16, 0xA) * 4), s32 *, 8) != 0) || (arg0->unk18 == arg1)) {
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION < 271
 s32 func_00006054(struct Unk_func_00006054_0 *arg0, s32 arg1) {
     s32 var_v1;
 
@@ -823,7 +835,9 @@ s32 func_00006054(struct Unk_func_00006054_0 *arg0, s32 arg1) {
     }
     return var_v1;
 }
-#else
+#endif
+
+#if FW_VERSION == 303
 s32 func_00006054(struct Unk_func_00006054_0 *arg0, s32 arg1) {
     s32 var_v1;
 
@@ -847,7 +861,7 @@ void sceHVSlim_Library_05F33A6C(struct Unk_sceHVSlim_Library_05F33A6C_0 *arg0, s
     arg0->unk18 = arg1;
 }
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libslim", sceHVSlim_Library_1DF9F3CD);
 #else
 s32 sceHVSlim_Library_1DF9F3CD(s32 arg0, s32 arg1) {
@@ -881,6 +895,10 @@ INCLUDE_ASM("nonmatchings/libslim", func_0000674C);
 
 INCLUDE_ASM("nonmatchings/libslim", func_00006800);
 
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/libslim", func_000068A4);
+#endif
+
 #if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/libslim", func_000069A0);
 #endif
@@ -889,13 +907,9 @@ INCLUDE_ASM("nonmatchings/libslim", func_000069A0);
 INCLUDE_ASM("nonmatchings/libslim", func_00006974);
 #endif
 
-#if FW_VERSION == 303
-INCLUDE_ASM("nonmatchings/libslim", func_000068A4);
-#endif
-
 INCLUDE_ASM("nonmatchings/libslim", func_00006954);
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libslim", func_00006A98);
 #else
 s32 func_00006A98(void *arg0, s32 arg1, void *arg2) {
@@ -1073,7 +1087,7 @@ INCLUDE_ASM("nonmatchings/libslim", func_00008400);
 
 INCLUDE_ASM("nonmatchings/libslim", func_00008448);
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 303
 void func_00008490(s32 arg0, s32 arg1) {
     void *temp_v1;
 
@@ -1106,7 +1120,7 @@ void func_00008490(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 303
 void *func_000084CC(void) {
     void *temp_v0;
     void *var_v0;

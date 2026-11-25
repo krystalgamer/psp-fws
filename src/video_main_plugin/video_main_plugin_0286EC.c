@@ -1,6 +1,7 @@
 #include "common.h"
 #include "video_main_plugin_decls.h"
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/video_main_plugin_0286EC", func_000286EC);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_0286EC", func_000287AC);
@@ -1682,4 +1683,4 @@ s32 func_00038D88(struct Unk_func_00038D88_0 *arg0, s32 *arg1) {
     *arg1 = temp_v1->unk1954;
     return temp_v1->unk1950;
 }
-
+#endif

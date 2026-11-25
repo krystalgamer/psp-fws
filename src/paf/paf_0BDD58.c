@@ -111,6 +111,10 @@ M2C_UNK *scePaf_962FA087(void) {
     return &D_001A53C8;
 }
 
+#if FW_VERSION == 200
+INCLUDE_ASM("nonmatchings/paf_0BDD58", scePaf_DF642973);
+#endif
+
 #if FW_VERSION == 282
 s32 scePaf_DF642973(s32 arg0) {
     s32 temp_v0;

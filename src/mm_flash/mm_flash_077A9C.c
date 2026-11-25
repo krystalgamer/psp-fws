@@ -293,4 +293,3 @@ void func_0007B47C(M2C_UNK **arg0) {
 void func_0007B4E0(struct Unk_func_0007B4E0_0 *arg0) {
     arg0->unkFF8 = 0;
 }
-

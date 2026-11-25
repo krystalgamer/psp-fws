@@ -72,7 +72,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_0207E4", func_000215F0);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0207E4", func_00021754);
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/lftv_middleware_0207E4", func_000217E0);
 #endif
 
@@ -88,7 +88,7 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_0207E4", D_00055430);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0207E4", D_00055480);
 
-#if FW_VERSION < 303
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/lftv_middleware_0207E4", func_000217E0);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0207E4", D_0007BB28);

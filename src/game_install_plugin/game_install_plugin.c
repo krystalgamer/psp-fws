@@ -199,11 +199,17 @@ void func_000019F0(void) {
 
 INCLUDE_ASM("nonmatchings/game_install_plugin", func_00001A34);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/game_install_plugin", func_00001B1C);
+#endif
+
 INCLUDE_RODATA("nonmatchings/game_install_plugin", D_00003CF0);
 
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/game_install_plugin", D_00003ED0);
 
 INCLUDE_ASM("nonmatchings/game_install_plugin", func_00001B1C);
+#endif
 
 INCLUDE_ASM("nonmatchings/game_install_plugin", func_00001C18);
 

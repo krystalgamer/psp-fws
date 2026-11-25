@@ -10,6 +10,7 @@ extern s8 D_0000379D;
 
 s32 func_0000243C(s32, s32, s32);
 s32 func_000029D4(s32, s32, s32);
+s32 func_00002A18(s32, s32, s32);
 s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2);
 s32 sceAudioOutput2OutputBlocking(s32 arg0, void *arg1);
 s32 sceAudioOutput2Release(void);

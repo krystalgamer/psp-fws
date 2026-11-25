@@ -187,4 +187,3 @@ void func_0009B0E4(struct Unk_func_0009B0E4_0 *arg0, s32 arg1) {
 }
 
 INCLUDE_ASM("nonmatchings/mm_flash_098888", func_0009B13C);
-

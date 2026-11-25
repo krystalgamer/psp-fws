@@ -7,7 +7,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_072B60", func_00072C3C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_072B60", func_00072CFC);
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_072B60", func_00072D68);
 #else
 s32 func_00072D68(struct Unk_func_00072D68_0 *arg0) {

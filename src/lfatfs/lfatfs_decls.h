@@ -95,8 +95,11 @@ struct Unk_func_0000A3DC_0 {
 };
 
 extern s32 D_0000C5B4;
+extern M2C_UNK D_0000CD94;
+extern M2C_UNK D_0000CDB4;
 extern s32 D_0000CF5C;
 extern s32 D_0000CF6C;
+extern s32 D_0000CF84;
 extern s32 D_0000CF9C;
 extern s32 D_0000D084;
 extern s32 D_0000D22C;
@@ -120,6 +123,7 @@ extern void **D_0000EDB0;
 extern void *D_0000EDB4;
 extern M2C_UNK D_0000EED0;
 
+M2C_UNK IoFileMgrForKernel_6D08A871(M2C_UNK *);
 M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);
 M2C_UNK IoFileMgrForKernel_C7F35804(s32);
 M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
@@ -215,6 +219,7 @@ s32 func_0000ADFC(void *arg0);
 s32 func_0000AF24(void);
 s32 func_0000AF30(void);
 s32 func_0000AF98(void);
+s32 module_reboot_before(void);
 s32 sceKernelPowerLock(s32);
 s32 sceKernelPowerUnlock(s32);
 s32 sceKernelSignalSema(s32, s32);

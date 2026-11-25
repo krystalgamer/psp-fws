@@ -8,7 +8,7 @@ INCLUDE_ASM("nonmatchings/audio", func_00000000);
 INCLUDE_ASM("nonmatchings/audio", func_0000020C);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", func_0000028C);
 #endif
 
@@ -164,7 +164,7 @@ INCLUDE_ASM("nonmatchings/audio", func_000017A0);
 INCLUDE_ASM("nonmatchings/audio", func_000019C0);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", func_00001D24);
 #endif
 
@@ -204,9 +204,15 @@ INCLUDE_ASM("nonmatchings/audio", sceAudio_5C37C0AE);
 INCLUDE_ASM("nonmatchings/audio", sceAudio_E0727056);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", func_000021E0);
+#endif
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/audio", func_000023C8);
+#endif
+
+#if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/audio", func_000023B4);
 #endif
 
@@ -230,17 +236,23 @@ INCLUDE_ASM("nonmatchings/audio", func_0000206C);
 INCLUDE_ASM("nonmatchings/audio", func_0000217C);
 
 INCLUDE_ASM("nonmatchings/audio", func_0000234C);
+#endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/audio", sceAudioWaitInputEnd);
+#endif
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/audio", sceAudioInputInit);
 
 INCLUDE_ASM("nonmatchings/audio", sceAudioInputInitEx);
 #endif
 
+#if FW_VERSION != 271
 INCLUDE_ASM("nonmatchings/audio", sceAudioInputBlocking);
+#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/audio", sceAudioInput);
 #endif
 
@@ -255,12 +267,22 @@ s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/audio", sceAudioPollInputEnd);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", sceAudioInputInit);
 
 INCLUDE_ASM("nonmatchings/audio", sceAudioInputInitEx);
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/audio", sceAudioInputBlocking);
+
+s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2) {
+    return func_00002A18(arg0, arg1, (s32) arg2);
+}
 #endif
 
 #if FW_VERSION == 282
@@ -271,7 +293,17 @@ s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2) {
 
 INCLUDE_ASM("nonmatchings/audio", sceAudioGetInputLength);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/audio", sceAudioPollInputEnd);
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/audio", func_000028E4);
+
+INCLUDE_ASM("nonmatchings/audio", func_00002A18);
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/audio", sceAudioWaitInputEnd);
 #endif
 
@@ -283,11 +315,11 @@ INCLUDE_ASM("nonmatchings/audio", func_00002A94);
 INCLUDE_ASM("nonmatchings/audio", func_000027FC);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/audio", func_00002938);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", func_00002DA0);
 #endif
 
@@ -302,8 +334,6 @@ INCLUDE_ASM("nonmatchings/audio", func_00002720);
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/audio", sceAudioPollInputEnd);
-
 INCLUDE_ASM("nonmatchings/audio", func_000028AC);
 
 INCLUDE_ASM("nonmatchings/audio", func_000029D4);

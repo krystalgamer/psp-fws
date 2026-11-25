@@ -1,19 +1,31 @@
 #include "common.h"
 #include "emc_sm_decls.h"
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_A513BB12);
+
+INCLUDE_ASM("nonmatchings/emc_sm", func_0000014C);
+#endif
+
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/emc_sm", D_000026F0);
 #endif
 
+#if FW_VERSION != 271
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_A513BB12);
 
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000014C);
+#endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000160);
-#else
-INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
+#endif
 
+#if FW_VERSION == 282
+INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000015C);
 #endif
 

@@ -240,7 +240,7 @@ INCLUDE_RODATA("nonmatchings/ge", D_00003174);
 INCLUDE_ASM("nonmatchings/ge", func_00002880);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", func_00002CF4);
 #endif
 

@@ -30,3 +30,5 @@ sceSysEventForKernel_D7D3FDCD = 0x00001470; // type:func
 sceSysreg_driver_7725CA08 = 0x00001478; // type:func
 sceSysreg_driver_7FD7A631 = 0x00001480; // type:func
 sceSysreg_driver_BB823481 = 0x00001488; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

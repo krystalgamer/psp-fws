@@ -442,6 +442,14 @@ s32 func_0006996C(struct Unk_func_0006996C_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_0006998C);
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000F3C70);
+
+INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000D93A0);
+
+INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000F3D50);
+#endif
+
 #if FW_VERSION == 151
 INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000F1EB0);
 

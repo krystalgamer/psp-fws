@@ -48,3 +48,13 @@ sceVshCommonGui_B45ED019 = 0x00001790; // type:func
 sceVshCommonGui_D4353F96 = 0x00001798; // type:func
 sceVshCommonGui_DBEE94DC = 0x000017A0; // type:func
 sceVshCommonUtil_7EEFA381 = 0x000017A8; // type:func
+// shared names (tools/add_version.py) begin
+D_00001F68 = 0x00001F5C;
+D_00001FBC = 0x00001FB0;
+D_00001FC9 = 0x00001FBD;
+func_000003CC = 0x000003E8; // type:func rom:0x488
+func_00000E08 = 0x00000F60; // type:func rom:0x1000
+func_00001064 = 0x00001070; // type:func rom:0x1110
+func_00001248 = 0x00001254; // type:func rom:0x12F4
+D_00001FBC_v271 = 0x00001FBC;
+// shared names (tools/add_version.py) end

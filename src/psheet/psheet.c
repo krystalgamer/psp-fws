@@ -85,6 +85,9 @@ s32 func_00001360(s32 arg0, s32 arg1) {
     return var_v1;
 }
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/psheet", func_000013D8);
+#else
 s32 func_000013D8(void) {
     s32 temp_s0;
     s32 var_s1;
@@ -97,6 +100,7 @@ s32 func_000013D8(void) {
     }
     return var_v0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/psheet", func_00001460);
 
@@ -149,6 +153,9 @@ INCLUDE_RODATA("nonmatchings/psheet", D_000029E0);
 
 INCLUDE_ASM("nonmatchings/psheet", func_00002048);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/psheet", func_0000217C);
+#else
 s32 func_0000217C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 var_v0;
     s32 var_v1;
@@ -160,6 +167,7 @@ s32 func_0000217C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     }
     return var_v1;
 }
+#endif
 
 INCLUDE_RODATA("nonmatchings/psheet", D_00002A1C);
 

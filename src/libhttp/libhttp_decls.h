@@ -27,9 +27,14 @@ struct Unk_func_00011B3C_1 {
 };
 
 extern s32 D_0000E0A0;
+extern s32 D_0000F590;
+extern s32 D_0001A334;
 extern s32 D_0001A5C4;
+extern s32 D_0001A7B4;
 extern s32 D_0001AA44;
 extern s32 D_0001AB6C;
+extern s32 D_0001AB78;
+extern s32 D_0001AC9C;
 extern s32 D_0001AE08;
 extern s32 D_0001AF9C;
 extern s32 D_0001B0CC;

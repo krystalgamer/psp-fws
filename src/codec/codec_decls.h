@@ -7,6 +7,7 @@
 
 M2C_UNK func_0000004C(M2C_UNK, M2C_UNK);
 void func_00000094(s32 arg0);
+void func_000000E0(void);
 void func_000000E4(void);
 void func_00000130(void);
 s32 func_0000017C(void);

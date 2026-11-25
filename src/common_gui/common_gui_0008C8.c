@@ -54,7 +54,7 @@ void func_00000EFC(struct Unk_func_00000EFC_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000F04);
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 void func_00000F4C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x24) = arg1;
 }
@@ -127,6 +127,6 @@ void sceVshCommonGui_88F5E3A8(struct Unk_sceVshCommonGui_88F5E3A8_0 *arg0, s32 a
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_70490BCC);
 #endif

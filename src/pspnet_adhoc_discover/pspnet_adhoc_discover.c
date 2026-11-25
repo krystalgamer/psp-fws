@@ -20,8 +20,8 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_discover", func_00000A30);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_discover", func_00000AF4);
 
-#if FW_VERSION == 260
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_discover", func_00000BDC);
-#else
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_discover", func_00000CBC);
+#else
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_discover", func_00000BDC);
 #endif

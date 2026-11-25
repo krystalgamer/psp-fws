@@ -84,6 +84,16 @@ INCLUDE_RODATA("nonmatchings/usbstorms", D_00003764);
 
 INCLUDE_ASM("nonmatchings/usbstorms", module_start);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_16173D42);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_CF2AF7B3);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_9569F268);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_2241C828);
+#endif
+
 INCLUDE_ASM("nonmatchings/usbstorms", module_stop);
 
 #if FW_VERSION < 201
@@ -154,7 +164,13 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00002158);
 INCLUDE_ASM("nonmatchings/usbstorms", func_000023E0);
 
 INCLUDE_ASM("nonmatchings/usbstorms", func_00002514);
+#endif
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/usbstorms", func_000029BC);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstorms", func_000025E4);
 #endif
 

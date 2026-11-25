@@ -107,7 +107,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_00093D4C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_00093E4C);
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008AA74);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008AAC0);
@@ -115,7 +115,9 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008AAC0);
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008AAE8);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008AB10);
+#endif
 
+#if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008AB48);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008AB50);
@@ -135,6 +137,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008ACCC);
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008AE00);
 #endif
 
+#if FW_VERSION != 271
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_00093F98);
 
 void func_00093FE4(M2C_UNK **arg0) {
@@ -152,6 +155,7 @@ void func_00094034(M2C_UNK **arg0) {
     func_000885B8((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
 s32 func_0009406C(void) {
     return 0;
@@ -239,9 +243,11 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_000945F8);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0009472C);
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008B83C);
+#endif
 
+#if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008B99C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008B9F4);
@@ -295,7 +301,9 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008C0A4);
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008C0DC);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_0008C174);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_09339C", func_00094820);
 #endif
 
@@ -473,25 +481,37 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_000A2A30);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_000A2A40);
 
-#if FW_VERSION == 260
+#if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_00098050);
+#endif
 
+#if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_00098058);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_0009805C);
+#endif
 
+#if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_00098068);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_00098078);
 #endif
 
+#if FW_VERSION != 271
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_000A2A50);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_000A2A58);
+#endif
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_000A2A68);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_00098078);
+#else
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_000A2A78);
+#endif
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09339C", D_000A2A88);
 

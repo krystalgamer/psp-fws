@@ -142,7 +142,7 @@ s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_00001D70.unkA40 = arg3;
     D_00001D70.unkA34 = arg0;
@@ -162,7 +162,7 @@ s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 s32 sceCtrl_driver_252D3A8D(s8 arg0) {
     D_00001D9F = arg0;
     return 0;
@@ -279,7 +279,7 @@ s32 func_00001214(void) {
 INCLUDE_ASM("nonmatchings/ctrl", func_00001544);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 s32 func_000015C0(void) {
     D_00001D70.pad0[0x11] = 0;
     D_00001D70.pad0[0xE] = D_00001D70.pad0[0x8A];

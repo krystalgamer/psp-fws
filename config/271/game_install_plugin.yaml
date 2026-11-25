@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, game_install_plugin]
+      - [0xC4, c, game_install_plugin]
       - { start: 0x3348, type: asm, name: fini, linker_section: .fini }
       - { start: 0x3364, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x35EC, type: prxpad, order: .text }
@@ -71,7 +71,7 @@ segments:
       - { start: 0x3928, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x3930, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x3934, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x3968, rodata, game_install_plugin]
+      - [0x3968, .rodata, game_install_plugin]
   - name: game_install_plugin_seg1
     type: code
     start: 0x4030

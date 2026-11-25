@@ -6,4 +6,3 @@ void func_0007B4E8(void) {
 
 void func_0007B4F0(void) {
 }
-

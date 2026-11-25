@@ -230,10 +230,17 @@ void func_000010C0(struct Unk_func_000006E0_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION == 271
+void func_00001138(struct Unk_func_00001138_0 *arg0) {
+    func_00003830((s32) &arg0->pad0[0xC]);
+    sceKernelSetEventFlag(M2C_FIELD(arg0, s32 *, 0xCC), 1);
+}
+#else
 void func_00001138(struct Unk_func_00001138_0 *arg0) {
     func_00003830((u8 *)arg0 + 0xC);
     sceKernelSetEventFlag(arg0->unkC0, 1);
 }
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0000AA64);
@@ -299,6 +306,10 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0000AD08);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0000AD1C);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0000868C);
+#endif
+
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0000AD34);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0000AD4C);
@@ -345,7 +356,11 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00001C24);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00001E00);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/dd_helper", func_00001D50);
+#else
 INCLUDE_ASM("nonmatchings/dd_helper", func_00002184);
+#endif
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00002268);
 
@@ -389,7 +404,11 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00002964);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_000029D4);
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/dd_helper", func_000027CC);
+#else
 INCLUDE_ASM("nonmatchings/dd_helper", func_00002ABC);
+#endif
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00002B2C);
 
@@ -410,6 +429,12 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0000B014);
 INCLUDE_ASM("nonmatchings/dd_helper", func_00002DE8);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00002E2C);
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/dd_helper", func_00002B98);
+
+INCLUDE_RODATA("nonmatchings/dd_helper", D_00008984);
+#endif
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00002E70);
 
@@ -541,6 +566,10 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0000B05C);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0000B064);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0000B06C);
+
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/dd_helper", D_000089DC);
+#endif
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0000B074);
 

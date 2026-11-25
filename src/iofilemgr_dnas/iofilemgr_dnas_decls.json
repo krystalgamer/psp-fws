@@ -1,7 +1,9 @@
 {
  "funcs": {
   "func_000000E8": "s32 func_000000E8(void);",
-  "func_000000F0": "s32 func_000000F0(void);"
+  "func_000000F0": "s32 func_000000F0(void);",
+  "sceIoFilemgrDNAS_driver_4B4AAA29": "s32 sceIoFilemgrDNAS_driver_4B4AAA29(void);",
+  "sceIoFilemgrDNAS_driver_79A425A4": "s32 sceIoFilemgrDNAS_driver_79A425A4(s32, s32);"
  },
  "vars": {}
 }

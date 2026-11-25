@@ -15,9 +15,15 @@ s32 module_stop(void) {
 }
 #endif
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C_v271);
+#endif
+
 #if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C_v260);
+#endif
 
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000194);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000328);
@@ -37,7 +43,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000238);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000005F8);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000954);
@@ -273,9 +279,15 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00001034);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000140C);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00001098);
+#endif
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00001D54);
+#endif
+
+#if FW_VERSION >= 260 && FW_VERSION < 282
 void func_00001CFC(void) {
     s32 var_a0;
 
@@ -527,8 +539,14 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00001858);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002658);
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002C00_v271);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002C00);
+#endif
 
+#if FW_VERSION >= 271
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002C10);
 #endif
