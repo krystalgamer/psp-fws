@@ -23,7 +23,7 @@ INCLUDE_ASM("nonmatchings/stdio", func_000001E8);
 
 INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_4F78930A);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_D2B2A2A7);
 #endif
 
@@ -55,7 +55,7 @@ INCLUDE_ASM("nonmatchings/stdio", getchar);
 INCLUDE_ASM("nonmatchings/stdio", gets);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void gets(s32 arg0) {
     StdioForKernel_11A5127A(arg0, 0);
 }
@@ -65,7 +65,7 @@ void gets(s32 arg0) {
 INCLUDE_ASM("nonmatchings/stdio", StdioForUser_3054D478);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 StdioForUser_3054D478(void) {
     return 0x80020001;
 }
@@ -75,7 +75,7 @@ s32 StdioForUser_3054D478(void) {
 INCLUDE_ASM("nonmatchings/stdio", StdioForUser_0CBB0571);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 StdioForUser_0CBB0571(void) {
     return 0x80020001;
 }
@@ -224,23 +224,41 @@ s32 func_00000A18(void) {
 s32 func_00000A20(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/stdio", func_00000A28);
+#endif
+
+#if FW_VERSION == 282
 s32 func_00000A28(struct Unk_func_00000A28_0 *arg0) {
     return (arg0->unk4 < 3) ? 0 : 0x800203E8;
 }
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/stdio", func_00000A40);
+#endif
+
+#if FW_VERSION == 282
 s32 func_00000A40(struct Unk_func_00000A40_0 *arg0) {
     return (arg0->unk4 < 3) ? 0 : 0x800203E8;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/stdio", func_00000A58);
 
 INCLUDE_ASM("nonmatchings/stdio", func_00000A68);
+#endif
 
+#if FW_VERSION == 282
 s32 func_00000AF0(void) {
     return 0x800203E9;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/stdio", D_0000145C);
 
 INCLUDE_RODATA("nonmatchings/stdio", D_00001464);
@@ -252,17 +270,19 @@ INCLUDE_RODATA("nonmatchings/stdio", D_000014C8);
 INCLUDE_RODATA("nonmatchings/stdio", D_000014DC);
 
 INCLUDE_ASM("nonmatchings/stdio", func_00000AFC);
+#endif
 
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/stdio", D_00001508);
 
 INCLUDE_RODATA("nonmatchings/stdio", D_0000151C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/stdio", func_00000C78);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void syslib_D3744BE0(void) {
     func_00000C78();
 }
@@ -288,6 +308,10 @@ INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_2D8551AB);
 INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_9662BF86);
 #endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/stdio", func_00000FB8);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/stdio", D_00001298);
 
@@ -300,8 +324,14 @@ INCLUDE_RODATA("nonmatchings/stdio", D_0000157C);
 INCLUDE_ASM("nonmatchings/stdio", func_0000100C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/stdio", D_0000154C);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/stdio", D_00001398);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/stdio", func_00000FB8);
 #endif

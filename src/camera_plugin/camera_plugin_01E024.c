@@ -31,7 +31,11 @@ INCLUDE_ASM("nonmatchings/camera_plugin_01E024", func_0001E1CC);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_01E024", func_0001E21C);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/camera_plugin_01E024", func_0001D0B4);
+#else
 INCLUDE_ASM("nonmatchings/camera_plugin_01E024", func_0001E314);
+#endif
 
 INCLUDE_ASM("nonmatchings/camera_plugin_01E024", func_0001E70C);
 
@@ -80,4 +84,3 @@ s32 func_0001F53C(struct Unk_func_0001F53C_0 *arg0) {
 void func_0001F544(struct Unk_func_0001F544_0 *arg0, s32 arg1) {
     arg0->unk1C = arg1;
 }
-

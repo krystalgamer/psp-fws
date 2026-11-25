@@ -1426,6 +1426,7 @@
   "D_0005F870": "extern struct Unk_D_0005F870 *D_0005F870;",
   "D_0005F874": "extern s32 D_0005F874;",
   "D_0005F8E8": "extern struct Unk_D_0005F8E8 *D_0005F8E8;",
+  "D_0005F8EC": "extern void *D_0005F8EC;",
   "D_0005F8F4": "extern s32 D_0005F8F4;",
   "D_0005F940": "extern s32 D_0005F940;",
   "D_0005F9D4": "extern s32 D_0005F9D4;",

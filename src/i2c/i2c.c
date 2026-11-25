@@ -14,7 +14,7 @@ s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1) {
     D_00001730.unk14 = arg1;
     D_00001730.unk10 = arg0;
@@ -48,7 +48,19 @@ s32 sceI2c_driver_4809D85F(void) {
     sceKernelDeleteEventFlag(M2C_VFIELD(&D_000015B0, s32, 0));
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 300
+s32 module_reboot_before(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_000016E0_v300);
+    InterruptManagerForKernel_F987B1F0(0xC);
+    sceKernelDeleteMutex(D_00001730.unk4);
+    sceKernelDeleteEventFlag(D_00001730.unk0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 module_reboot_before(void) {
     sceSysEventForKernel_D7D3FDCD(&D_000016F0);
     InterruptManagerForKernel_F987B1F0(0xC);
@@ -56,10 +68,24 @@ s32 module_reboot_before(void) {
     sceKernelDeleteEventFlag(D_00001730.unk0);
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/i2c", sceI2c_driver_20ADF12A);
+#endif
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/i2c", sceI2c_driver_4809D85F);
+#endif
+
+#if FW_VERSION == 300
+s32 sceI2c_driver_4809D85F(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_000016E0_v300);
+    InterruptManagerForKernel_F987B1F0(0xC);
+    sceKernelDeleteMutex(D_00001730.unk4);
+    sceKernelDeleteEventFlag(D_00001730.unk0);
+    return 0;
+}
 #endif
 
 s32 sceI2c_driver_21A8282C(void) {
@@ -125,7 +151,7 @@ INCLUDE_ASM("nonmatchings/i2c", func_000011B0);
 INCLUDE_ASM("nonmatchings/i2c", func_0000109C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 sceI2c_driver_DB6C4F9B(s32 arg0) {
     D_0000173C = arg0;
     return 0;

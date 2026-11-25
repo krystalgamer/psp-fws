@@ -130,7 +130,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000E3B4);
 INCLUDE_RODATA("nonmatchings/impose", D_0000E534);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00000000(u32 arg0) {
     sceKernelSetEventFlag(*D_0000F510, arg0);
 }
@@ -200,7 +200,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F2CC);
 INCLUDE_RODATA("nonmatchings/impose", D_0000F15C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/impose", D_0000F2D8);
 #endif
 
@@ -248,7 +248,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00000DFC);
 INCLUDE_RODATA("nonmatchings/impose", D_00004D00);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/impose", D_0000F2F8);
 
 INCLUDE_ASM("nonmatchings/impose", func_0000017C);
@@ -472,7 +472,7 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 sceImpose_driver_C7E36CC7(void) {
     if (M2C_FIELD(D_0000F510, s32 *, 0x80) >= 0) {
         M2C_FIELD(D_0000F510, s32 *, 0xBC) = 1;
@@ -491,11 +491,32 @@ s32 sceImpose_driver_C7E36CC7(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 300
+s32 syslib_ADF12745(s32 arg0) {
+    s32 temp_a2;
+
+    if (arg0 != 2) {
+
+    } else {
+        temp_a2 = M2C_FIELD(D_0000F510, s32 *, 0x80);
+        if (temp_a2 >= 0) {
+            if (temp_a2 & 2) {
+                sceImpose_driver_9C8C6C81(1);
+            }
+        } else {
+            sceDisplaySetHoldMode(arg0);
+        }
+        sceImpose_driver_C7E36CC7();
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_1AEED8FE);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose", func_00001764);
 
 INCLUDE_ASM("nonmatchings/impose", func_00001998);
@@ -547,9 +568,19 @@ s32 sceImpose_driver_7084E72C(void) {
 s32 sceImpose_9BA61B49(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x7C);
 }
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/impose", sceImposeSetBacklightOffTime);
+
+INCLUDE_ASM("nonmatchings/impose", sceImposeGetBacklightOffTime);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose", module_start);
+#endif
 
+#if FW_VERSION == 282
 s32 syslib_ADF12745(s32 arg0) {
     if (arg0 != 2) {
 
@@ -593,7 +624,7 @@ s32 sceAudioRoutingGetMode(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 sceAudioRoutingSetMode(s32 arg0) {
     return func_000048AC(arg0);
 }
@@ -625,7 +656,7 @@ INCLUDE_ASM("nonmatchings/impose", func_0000255C);
 INCLUDE_ASM("nonmatchings/impose", func_00001650);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose", func_000027AC);
 #endif
 
@@ -773,7 +804,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00002008);
 INCLUDE_ASM("nonmatchings/impose", func_000024F8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose", func_00002C5C);
 
 void func_00002DC0(s32 arg0) {
@@ -885,13 +916,19 @@ INCLUDE_RODATA("nonmatchings/impose", D_000061D4);
 INCLUDE_RODATA("nonmatchings/impose", D_00004E4C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/impose", D_0000F490);
 
 INCLUDE_RODATA("nonmatchings/impose", D_0000F4A0);
 
 INCLUDE_RODATA("nonmatchings/impose", D_0000F4AC);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/impose", D_0000F68C);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/impose", D_0000F4BC);
 #endif
 
@@ -909,7 +946,7 @@ INCLUDE_ASM("nonmatchings/impose", func_000044B8);
 INCLUDE_ASM("nonmatchings/impose", func_0000478C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose", func_000047EC);
 
 INCLUDE_ASM("nonmatchings/impose", func_00004870);
@@ -961,7 +998,7 @@ INCLUDE_ASM("nonmatchings/impose", func_0000553C);
 INCLUDE_ASM("nonmatchings/impose", func_000044CC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose", func_00004A40);
 
 INCLUDE_ASM("nonmatchings/impose", func_00004AB4);

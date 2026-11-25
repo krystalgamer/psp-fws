@@ -1,7 +1,7 @@
 #include "common.h"
 #include "video_main_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/video_main_plugin_0286EC", func_000286EC);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_0286EC", func_000287AC);
@@ -158,9 +158,17 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_0286EC", D_00053F0C);
 INCLUDE_RODATA("nonmatchings/video_main_plugin_0286EC", D_00053F18);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_0286EC", D_00053F24);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/video_main_plugin_0286EC", D_000523E0);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/video_main_plugin_0286EC", D_00053F30);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/video_main_plugin_0286EC", D_00053F68);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_0286EC", D_00053F80);

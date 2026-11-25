@@ -37,7 +37,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000B1C);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000590);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A2C);
 #endif
 
@@ -93,7 +93,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001918);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_0000158C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001BD4);
 #endif
 
@@ -129,7 +129,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_0000200C);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001B1C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002008);
 #endif
 
@@ -219,7 +219,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001EB4);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001ED8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000021EC);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002260);

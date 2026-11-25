@@ -37,6 +37,7 @@ s32 sceImpose_9BA61B49(void);
 s32 sceImpose_driver_1B6E3400(void);
 s32 sceImpose_driver_5595A71A(s32 arg0);
 s32 sceImpose_driver_7084E72C(void);
+s32 sceImpose_driver_9C8C6C81(s32);
 s32 sceImpose_driver_B415FC59(void);
 s32 sceImpose_driver_C7E36CC7(void);
 s32 sceKernelDelayThread(u32);

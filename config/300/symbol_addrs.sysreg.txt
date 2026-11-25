@@ -180,3 +180,14 @@ InterruptManagerForKernel_CDC86B64 = 0x00001E0C; // type:func
 InterruptManagerForKernel_F987B1F0 = 0x00001E14; // type:func
 sceSysEventForKernel_CD9E4BB5 = 0x00001E1C; // type:func
 sceSysEventForKernel_D7D3FDCD = 0x00001E24; // type:func
+// shared names (tools/add_version.py) begin
+D_00002520 = 0x00002528; // rom:0x25C8
+D_0000252C = 0x00002534; // rom:0x25D4
+D_00002530 = 0x00002538; // rom:0x25D8
+D_00002538 = 0x00002540; // rom:0x25E0
+D_00002578 = 0x00002580; // rom:0x2620
+D_000025A4 = 0x000025AC; // rom:0x264C
+D_000025B0 = 0x000025B8; // rom:0x2658
+D_000025B4 = 0x000025BC; // rom:0x265C
+D_00002520_v300 = 0x00002520; // rom:0x25C0
+// shared names (tools/add_version.py) end

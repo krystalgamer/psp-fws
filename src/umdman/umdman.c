@@ -665,11 +665,13 @@ INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_61EB07A5);
 INCLUDE_ASM("nonmatchings/umdman", func_00007C30_v100);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00007CA8);
+#endif
 
+#if FW_VERSION == 100 || FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_BF88476F);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/umdman", func_00004CEC);
 #endif
 
@@ -2208,7 +2210,11 @@ INCLUDE_ASM("nonmatchings/umdman", func_00009FF4);
 INCLUDE_RODATA("nonmatchings/umdman", D_000119A8);
 #endif
 
-#if FW_VERSION >= 280
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/umdman", func_00009C00);
+#endif
+
+#if FW_VERSION >= 280 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/umdman", func_00009B2C);
 #endif
 
@@ -2925,11 +2931,13 @@ INCLUDE_RODATA("nonmatchings/umdman", D_0001140C);
 INCLUDE_RODATA("nonmatchings/umdman", D_0001142C);
 
 INCLUDE_ASM("nonmatchings/umdman", func_0000AF50);
+#endif
 
+#if (FW_VERSION >= 201 && FW_VERSION < 271) || FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/umdman", func_0000B0E0);
 #endif
 
-#if FW_VERSION >= 280
+#if FW_VERSION >= 280 && FW_VERSION < 300
 void func_0000B0E0(void) {
     s32 temp_s0;
 
@@ -3514,6 +3522,10 @@ void sceUmdMan_driver_B69DFDB1(void) {
 void sceUmdMan_driver_EC3426D1(void) {
     sceAta_driver_DCC8A89E();
 }
+#endif
+
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/umdman", func_0000DF84);
 #endif
 
 #if FW_VERSION >= 201

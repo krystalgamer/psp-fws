@@ -366,6 +366,14 @@ INCLUDE_RODATA("nonmatchings/paf_095A44", D_00192620);
 
 INCLUDE_RODATA("nonmatchings/paf_095A44", D_0019264C);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/paf_095A44", D_0018B184);
+
+INCLUDE_RODATA("nonmatchings/paf_095A44", D_0018B1F4);
+
+INCLUDE_RODATA("nonmatchings/paf_095A44", D_0018B214);
+#endif
+
 INCLUDE_RODATA("nonmatchings/paf_095A44", D_00192840);
 
 INCLUDE_RODATA("nonmatchings/paf_095A44", D_00192848);

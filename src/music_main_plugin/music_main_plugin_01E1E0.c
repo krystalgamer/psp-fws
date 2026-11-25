@@ -43,6 +43,10 @@ s32 func_0001EAD8(struct Unk_func_0001EAD8_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00022E04);
+#endif
+
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_0001EAE8);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_0001EAF8);
@@ -438,7 +442,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000229CC);
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000229EC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00022A70);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00022AD8);
@@ -651,7 +655,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000250D8);
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00024B78);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000250E4);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01E1E0", D_0009C04C);
@@ -675,7 +679,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_01E1E0", D_00099514);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01E1E0", D_00099548);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01E1E0", D_0009C0C4);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01E1E0", D_0009C0F4);
@@ -697,7 +701,9 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_01E1E0", D_0009C1A0);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01E1E0", D_0009C1C0);
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01E1E0", D_0009C1E0);
+#endif
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_0002517C);
 
@@ -719,7 +725,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00008B64);
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000130C4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00025270(struct Unk_func_00025270_0 *arg0) {
     arg0->unk0 = &D_0009C278;
     arg0->unk4 = 0;

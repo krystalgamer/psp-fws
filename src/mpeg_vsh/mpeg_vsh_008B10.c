@@ -2,7 +2,7 @@
 #include "common.h"
 #include "mpeg_vsh_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00008B10);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00008C5C);
@@ -139,7 +139,7 @@ M2C_UNK *func_000073AC(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00009194);
 
 s32 func_00009214(s32 arg0) {
@@ -157,7 +157,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_000091BC);
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_0000744C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_000092B8);
 #endif
 
@@ -173,11 +173,15 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00009568);
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00008C60);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00009594);
 #endif
 
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009BC8);
+
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009C64);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009ACC);
@@ -201,7 +205,7 @@ INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009380);
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009BA4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009CAC);
 
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009CB0);
@@ -217,7 +221,7 @@ INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00008880);
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00007BC4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009CBC);
 #endif
 

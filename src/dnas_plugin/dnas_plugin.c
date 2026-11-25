@@ -57,7 +57,7 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_000002C4);
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_0000036C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_000003E8);
 #endif
 
@@ -176,7 +176,7 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001064);
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000F9C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001070);
 #endif
 
@@ -198,7 +198,7 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001248);
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_000010A0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001254);
 #endif
 

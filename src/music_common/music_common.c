@@ -176,7 +176,7 @@ INCLUDE_ASM("nonmatchings/music_common", func_00000D24);
 INCLUDE_ASM("nonmatchings/music_common", func_000017A0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_common", func_00000DD8);
 #endif
 

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00003ADC(void) {
     s32 temp_v0;
 

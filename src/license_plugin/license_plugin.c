@@ -61,12 +61,16 @@ void func_000005D4(void) {
     func_00007274(&D_0000FEAC);
 }
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/license_plugin", func_00000608);
+#else
 void func_00000608(void) {
     sceVshBridge_E1941520(0);
     func_00000BB0();
     func_000071B4(&D_0000FEAC);
     func_0000668C((s32) &D_0000FF18);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_00000644);
 
@@ -447,6 +451,15 @@ INCLUDE_ASM("nonmatchings/license_plugin", func_000053B0);
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_00005410);
 
+#if FW_VERSION == 300
+void func_00005468(s32 arg0, struct Unk_func_00005468_1 *arg1) {
+    if (arg1->unk4 == 0x401) {
+        if (arg1->unkC == 0) {
+            func_00005410(arg0, (s32) &func_000053B0, 0);
+        }
+    }
+}
+#else
 void func_00005468(s32 arg0, struct Unk_func_00005468_1 *arg1) {
     if (arg1->unk4 == 0x409) {
         if (arg1->unkC == 0) {
@@ -454,6 +467,7 @@ void func_00005468(s32 arg0, struct Unk_func_00005468_1 *arg1) {
         }
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_000054AC);
 

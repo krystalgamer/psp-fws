@@ -25,7 +25,7 @@ s32 syslib_ADF12745(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 syslib_ADF12745(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0:
@@ -54,7 +54,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000008BC);
 INCLUDE_ASM("nonmatchings/registry", func_000006CC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_0000086C);
 #endif
 
@@ -116,7 +116,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00001A0C);
 INCLUDE_ASM("nonmatchings/registry", func_00001608);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_00001110);
 
 INCLUDE_ASM("nonmatchings/registry", func_00001288);
@@ -182,7 +182,13 @@ s32 func_00001874(s32 arg0, s32 *arg1) {
 }
 
 INCLUDE_ASM("nonmatchings/registry", func_000018B4);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/registry", func_00001A44);
+#endif
+
+#if FW_VERSION == 282
 void func_00001A44(s32 arg0, M2C_UNK **arg1, M2C_UNK **arg2) {
     if (arg0 == 1) {
         *arg1 = "/registry/system.ireg";
@@ -192,7 +198,9 @@ void func_00001A44(s32 arg0, M2C_UNK **arg1, M2C_UNK **arg2) {
     *arg1 = NULL;
     *arg2 = NULL;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_00001A74);
 #endif
 
@@ -212,7 +220,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00001A9C);
 INCLUDE_ASM("nonmatchings/registry", func_00002064);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_00001B9C);
 
 INCLUDE_ASM("nonmatchings/registry", func_00001CC4);
@@ -250,7 +258,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00002228);
 INCLUDE_ASM("nonmatchings/registry", func_0000236C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_0000263C);
 
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_BE8C1263);
@@ -306,7 +314,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00003498);
 INCLUDE_ASM("nonmatchings/registry", func_00002C78);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_00002D2C);
 
 INCLUDE_ASM("nonmatchings/registry", func_00002F18);
@@ -350,7 +358,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000033C4);
 INCLUDE_ASM("nonmatchings/registry", func_00003414);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_000033AC);
 
 INCLUDE_ASM("nonmatchings/registry", func_00003594);
@@ -384,7 +392,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000034D0);
 INCLUDE_ASM("nonmatchings/registry", func_0000377C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_00003A5C);
 
 INCLUDE_ASM("nonmatchings/registry", func_00003ACC);
@@ -402,7 +410,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00003604);
 INCLUDE_ASM("nonmatchings/registry", func_00003910);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_00003DAC);
 #endif
 
@@ -447,7 +455,7 @@ s32 func_00003A80(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00003EE8(void) {
     s32 var_v0;
     struct Unk_func_00003EE8_temp_v0 *temp_v0;
@@ -469,7 +477,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00003F2C);
 
 INCLUDE_ASM("nonmatchings/registry", func_00003FE4);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00004024(void) {
     s32 var_v0;
     struct Unk_func_00004024_temp_v0 *temp_v0;
@@ -501,7 +509,7 @@ s32 func_00004058(void) {
 INCLUDE_ASM("nonmatchings/registry", func_000038A0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_00004058);
 #endif
 
@@ -517,7 +525,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000045B8);
 INCLUDE_ASM("nonmatchings/registry", func_00004768);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_000040E4);
 
 INCLUDE_ASM("nonmatchings/registry", func_00004270);
@@ -549,7 +557,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00004778);
 INCLUDE_ASM("nonmatchings/registry", func_000046A8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_00004F2C);
 #endif
 
@@ -575,7 +583,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00004AF0);
 INCLUDE_ASM("nonmatchings/registry", func_00004BE8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_000052B0);
 
 INCLUDE_ASM("nonmatchings/registry", func_00005390);
@@ -603,7 +611,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00005284);
 INCLUDE_ASM("nonmatchings/registry", func_00005340);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_00005A88);
 #endif
 
@@ -681,11 +689,11 @@ s32 func_00006998(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/registry", D_00006F8C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/registry", D_00006F94);
 #endif
 

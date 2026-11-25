@@ -252,6 +252,7 @@ s32 func_00007E9C(s32 arg0);
 s32 func_00007F04(struct Unk_func_00007F04_0 *arg0, s32 arg1);
 s32 func_00007F64(struct Unk_func_00007F64_0 *arg0, s32 arg1);
 void func_00007FC0(void);
+s32 func_00007FF4(void *arg0, s32 arg1);
 s32 func_00007FF8(s32 arg0, s32 arg1);
 s32 func_00008058(s32 *arg0);
 s32 func_00008734(void);
@@ -329,6 +330,7 @@ s32 sceVideocodec_17CF7D2C(void *, M2C_UNK);
 s32 sceVideocodec_307E6E1C(s32, M2C_UNK);
 M2C_UNK sceVideocodec_4F160BF4(s32);
 s32 sceVideocodec_627B7D42(void *, M2C_UNK);
+s32 sceVideocodec_893B32B1(void *, M2C_UNK);
 s32 sceVideocodec_A2F0564E(s32, M2C_UNK);
 s32 sceVideocodec_DBA273FA(s32, M2C_UNK);
 

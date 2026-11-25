@@ -2,7 +2,7 @@
 #include "common.h"
 #include "mpeg_vsh_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005C8C);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005CE4);
@@ -522,7 +522,7 @@ s32 func_00005DB8(s32 arg0) {
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A68);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00007A3C(s32 arg0) {
     return (sceKernelPollSema(arg0, 0) == 0) ? 0 : 0x80000041;
 }
@@ -548,7 +548,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_0000791C);
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000079D0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00007ADC(void) {
     return sceKernelCheckThreadStack();
 }
@@ -666,7 +666,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007E14);
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006234);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00007D70(void) {
     sceVideocodec_4F160BF4(D_00009DC0);
 }

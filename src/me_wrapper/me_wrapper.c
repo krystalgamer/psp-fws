@@ -72,6 +72,14 @@ void sceMeMemory_driver_5AD660FA(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/me_wrapper", func_0000106C);
+
+INCLUDE_ASM("nonmatchings/me_wrapper", func_0000109C);
+
+INCLUDE_ASM("nonmatchings/me_wrapper", func_000010C8);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000CF0);
 
@@ -96,13 +104,13 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_5AD660FA);
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000D14);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000D28);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000D58);
 #endif
 
-#if FW_VERSION >= 250
+#if FW_VERSION >= 250 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000EFC);
 #endif
 
@@ -124,11 +132,11 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_55F11AF6);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_8EBBBBA3);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_579ACEA9);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION == 300
 void sceMePower_driver_579ACEA9(s32 arg0) {
     u32 temp_s0;
 
@@ -142,6 +150,10 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00001070);
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", func_0000129C);
+#endif
+
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/me_wrapper", func_00001528);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -178,9 +190,11 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00001200);
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001114);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001174);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_04AFF68E);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_B97B15D7);

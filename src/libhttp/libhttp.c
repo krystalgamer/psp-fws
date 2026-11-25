@@ -13,7 +13,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpInit);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnd);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017310);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017318);
@@ -29,7 +29,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpIsRequestInCache);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpSendRequestInCacheFirstMode);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpAbortRequest);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpReadData);
@@ -37,7 +37,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpReadData);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpSendRequest);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateTemplate);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteTemplate);
@@ -55,19 +55,19 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00000990);
 INCLUDE_ASM("nonmatchings/libhttp", func_00000A74);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateConnectionWithURL);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteConnection);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequest);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequestWithURL);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteRequest);
@@ -167,7 +167,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteHeader);
 INCLUDE_RODATA("nonmatchings/libhttp", D_0000D6F8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttp_4E4A284A);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttp_A909F2AE);
@@ -175,15 +175,23 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttp_A909F2AE);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000165C);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_000017A8);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", func_00001AB4);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00001B70);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00001C10);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00001FC8);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_000173A4);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_000173A8);
@@ -446,6 +454,10 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_000173C0);
 INCLUDE_RODATA("nonmatchings/libhttp", D_000173C8);
 #endif
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/libhttp", D_00017CB4);
+#endif
+
 #if FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/libhttp", D_0000D96C);
 
@@ -594,13 +606,13 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_0000DA40);
 INCLUDE_RODATA("nonmatchings/libhttp", D_0000DA48);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000213C);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000230C);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION == 282
+#if FW_VERSION < 201 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_0001746C);
 #endif
 
@@ -618,7 +630,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00004198);
 INCLUDE_ASM("nonmatchings/libhttp", func_00004280);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00002704);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00002B38);
@@ -636,15 +648,37 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00003088);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000312C);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_000031E8);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", func_00003244);
+
+INCLUDE_ASM("nonmatchings/libhttp", func_000032EC);
+
+INCLUDE_ASM("nonmatchings/libhttp", func_0000339C);
+
+INCLUDE_ASM("nonmatchings/libhttp", func_000035BC);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libhttp", func_000032C0);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00003480);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_0001747C);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", func_0000382C);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libhttp", func_000036B8);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_000038CC);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttp_77EE5319);
@@ -949,7 +983,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000A094);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000A67C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00005174);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00005264);
@@ -1064,13 +1098,19 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000092A4);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsEnd);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000909C);
 #endif
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsEnableOption);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsDisableOption);
+
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", func_00009498);
+
+INCLUDE_ASM("nonmatchings/libhttp", func_000095D4);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/libhttp", func_0000928C);
@@ -1106,7 +1146,9 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000B484);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libhttp", func_000092E8);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000962C);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00009700);
@@ -1144,7 +1186,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000B598);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000B5C4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00009ADC(void) {
     return D_0001A5C4;
 }
@@ -2165,11 +2207,17 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000C114);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000C2F0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00009E74);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000A048);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", func_0000A248);
+#endif
+
+#if FW_VERSION >= 282
 void func_0000A08C(s32 arg0) {
     if (func_0000A0C0() >= 0) {
         func_0000AA9C(arg0);
@@ -2231,7 +2279,15 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableCookie);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableAuth);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableAuth);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", sceHttp_CDB0DC58);
+
+INCLUDE_ASM("nonmatchings/libhttp", sceHttp_951D310E);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableRedirect);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableRedirect);
@@ -2309,9 +2365,17 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000E98C);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000EAFC);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000EB44);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", func_0000F280);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000ECD0);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000EF08);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000EFE4);
@@ -2319,7 +2383,13 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000EFE4);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000F05C);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000F18C);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", func_0000F824);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000F1C8);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000F404);
@@ -2377,7 +2447,13 @@ void func_00011484(void) {
     sceNet_lib_57CC57DA(&D_0001AF9C, 0, 0xB0);
     D_0001AF9C = 0;
 }
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", func_00011B9C);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_000114B8);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017628);
@@ -2505,15 +2581,29 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetNetworkPspError);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetAllHeader);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00013CE8);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", func_00014660);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00013E98);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00013F6C);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0001408C);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00014208);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/libhttp", D_00017F84);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017684);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00014284);
@@ -2531,9 +2621,17 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_000177AC);
 INCLUDE_RODATA("nonmatchings/libhttp", D_000177BC);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_000177C8);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/libhttp", func_000151E0);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00014970);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00014C48);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0001500C);
@@ -2621,7 +2719,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00015730);
 INCLUDE_ASM("nonmatchings/libhttp", func_000157F0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00015A40(void) {
     sceHttpStorage_CDA3D8F6();
 }
@@ -2649,7 +2747,7 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_00017430);
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017530);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017848);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017860);

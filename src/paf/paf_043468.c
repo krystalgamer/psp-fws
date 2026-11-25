@@ -13,7 +13,13 @@ s32 scePaf_87E5F9C7(struct Unk_scePaf_87E5F9C7_0 *arg0, s32 arg1, s32 arg2) {
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_043468", scePaf_D726DDD3);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/paf_043468", scePaf_8A8FE0A1);
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_043468", func_00040864);
 #endif
 

@@ -10,7 +10,7 @@ INCLUDE_RODATA("nonmatchings/lcdc", D_00000D1C);
 INCLUDE_RODATA("nonmatchings/lcdc", D_00000D24);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/lcdc", D_00000E14);
 
 INCLUDE_RODATA("nonmatchings/lcdc", D_00000ED8);
@@ -36,7 +36,7 @@ INCLUDE_ASM("nonmatchings/lcdc", func_00000640);
 INCLUDE_ASM("nonmatchings/lcdc", func_0000064C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdc_driver_F6F413C5);
 #endif
 
@@ -116,6 +116,10 @@ s32 sceLcdc_driver_A0032C3D(void) {
 }
 #endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/lcdc", sceLcdc_driver_00EF7E87);
+#endif
+
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdc_driver_A2E70DA6);
 
 #if FW_VERSION == 271
@@ -130,7 +134,7 @@ INCLUDE_RODATA("nonmatchings/lcdc", D_00000B90);
 INCLUDE_RODATA("nonmatchings/lcdc", D_00000BF0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdc_driver_236095AC);
 
 s32 sceLcdc_driver_825DB9C5(void) {

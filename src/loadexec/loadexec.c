@@ -6,7 +6,7 @@
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002B4C);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION >= 280
+#if FW_VERSION < 201 || (FW_VERSION >= 280 && FW_VERSION < 300)
 INCLUDE_ASM("nonmatchings/loadexec", func_00000000);
 #endif
 
@@ -422,6 +422,16 @@ void LoadExecForKernel_70901231(s32 arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION == 300
+void LoadExecForKernel_061D9514(s32 arg0, s32 arg1) {
+    func_00001FA8(0x143, arg0, arg1, 0x10000);
+}
+
+void LoadExecForKernel_B7AB08DA(s32 arg0, s32 arg1) {
+    func_00001FA8(0x144, arg0, arg1, 0x10000);
+}
+#endif
+
 #if FW_VERSION >= 250
 void LoadExecForKernel_6D302D3D(s32 arg0) {
     func_00002288(0x200, arg0);
@@ -566,4 +576,8 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00002700);
 
 #if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/loadexec", func_00002304);
+#endif
+
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/loadexec", func_0000193C);
 #endif

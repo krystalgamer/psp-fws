@@ -2,7 +2,7 @@
 #include "common.h"
 #include "game_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_0000856C(s32 arg0) {
     s32 var_v0;
 
@@ -42,7 +42,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_00856C", func_00008AB0);
 INCLUDE_ASM("nonmatchings/game_plugin_00856C", func_0000799C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/game_plugin_00856C", func_0000861C);
 #endif
 
@@ -90,7 +90,7 @@ s32 func_00008EB0(void) {
 INCLUDE_ASM("nonmatchings/game_plugin_00856C", func_00007E08);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00008A50(void) {
     D_0001266C = -1;
     func_00008DB0();
@@ -140,7 +140,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_00856C", D_000123C0);
 INCLUDE_RODATA("nonmatchings/game_plugin_00856C", D_00012728);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/game_plugin_00856C", func_00008AA0);
 
 INCLUDE_ASM("nonmatchings/game_plugin_00856C", func_00008DB0);
@@ -156,7 +156,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_00856C", D_00012250);
 INCLUDE_RODATA("nonmatchings/game_plugin_00856C", D_00012258);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/game_plugin_00856C", D_00012264);
 #endif
 
@@ -172,7 +172,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_00856C", func_000092B0);
 INCLUDE_ASM("nonmatchings/game_plugin_00856C", func_00008578);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/game_plugin_00856C", func_000091D4);
 
 INCLUDE_ASM("nonmatchings/game_plugin_00856C", func_0000932C);

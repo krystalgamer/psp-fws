@@ -69,7 +69,7 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001290);
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013A4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001420);
 #endif
 
@@ -125,7 +125,7 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_00000AC0);
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000924);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000964);
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000A2C);

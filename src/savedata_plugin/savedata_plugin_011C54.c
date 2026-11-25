@@ -2,7 +2,7 @@
 #include "common.h"
 #include "savedata_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00011C54(struct Unk_func_00011C54_0 *arg0, s32 arg1, s32 arg2) {
     func_0000F1A0(arg0, arg1);
     arg0->unk0 = &D_00022718;
@@ -28,7 +28,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011D9C);
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011E34);
 #endif
 
-#if FW_VERSION < 250 || FW_VERSION == 282
+#if FW_VERSION < 250 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226A0);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226B8);
@@ -142,7 +142,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00010BB8);
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0001205C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00011F54(struct Unk_func_00011F54_0 *arg0, s32 arg1) {
     arg0->unk1C = arg1;
 }
@@ -150,7 +150,13 @@ void func_00011F54(struct Unk_func_00011F54_0 *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011F5C);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012008);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_000121DC);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0001209C);
 #endif
 
@@ -172,7 +178,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000FCFC);
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000FDE4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0001220C);
 #endif
 
@@ -212,7 +218,7 @@ void func_000103B8(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00012764(struct Unk_func_00012764_0 *arg0, s32 arg1) {
     arg0->unk1C = arg1;
 }
@@ -266,7 +272,7 @@ s32 func_00010994(void *arg0) {
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0001099C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00012D8C(struct Unk_func_00012D8C_0 *arg0) {
     return arg0->unk10;
 }
@@ -298,7 +304,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012EF8);
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011D6C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012F84);
 #endif
 

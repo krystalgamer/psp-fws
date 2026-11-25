@@ -10,6 +10,7 @@ struct Unk_func_00000F3C_temp_v0 {
 };
 
 extern M2C_UNK D_0000206C;
+extern M2C_UNK D_0000269C;
 extern s32 D_0005AF74;
 extern s32 D_0005C2D8;
 extern s32 D_0005C2F0;
@@ -241,6 +242,8 @@ extern M2C_UNK func_00000FF8;
 void func_00000318(void);
 M2C_UNK func_0000046C();
 s32 func_000009D4(void);
+void func_00000A04(s32 arg0);
+void func_00000A54(s32 arg0);
 M2C_UNK func_00000C6C(M2C_UNK);
 void func_00000EEC(void);
 void func_00000F04(void);
@@ -616,6 +619,8 @@ s32 scePaf_FD4C9F47(s32);
 M2C_UNK sceVshBridge_2380DC08(M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK);
 M2C_UNK sceVshBridge_5BBB35E4();
 M2C_UNK sceVshCommonGui_1CF884A1();
+M2C_UNK sceVshCommonUtil_0587F20C(M2C_UNK *, M2C_UNK, s32);
+M2C_UNK sceVshCommonUtil_8584376D(M2C_UNK *, s32);
 s32 vsh_34DA1B67();
 M2C_UNK vsh_6286E89D(s32, s32);
 s32 vsh_81BBD0D1(s32, s32);

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_0003E2F8(void) {
     s32 var_v1;
 

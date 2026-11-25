@@ -297,7 +297,7 @@ INCLUDE_ASM("nonmatchings/paf_0274C4", func_00026724);
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_00026820);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_00026064);
 
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_000260B4);
@@ -355,7 +355,7 @@ INCLUDE_ASM("nonmatchings/paf_0274C4", func_000280C4);
 INCLUDE_ASM("nonmatchings/paf_0274C4", scePaf_836A675D);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_00028160);
 
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_00028190);
@@ -381,7 +381,7 @@ s32 scePaf_F0885EDC(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_00026180);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 M2C_UNK *func_000281D8(void) {
     return &D_0016FC7C;
 }

@@ -61,4 +61,3 @@ s32 func_0001BD18(struct Unk_func_0001BD18_0 *arg0) {
 s32 func_0001BD20(struct Unk_func_0001BD20_0 *arg0) {
     return arg0->unk190;
 }
-

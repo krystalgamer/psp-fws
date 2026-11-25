@@ -87,7 +87,7 @@ s32 sceNetIfhandle_driver_D5AD6DEA(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_0542835F);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void sceNetIfhandle_driver_16246B99(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1) {
     s32 temp_v0;
 
@@ -155,7 +155,7 @@ INCLUDE_ASM("nonmatchings/ifhandle", func_000012BC);
 INCLUDE_ASM("nonmatchings/ifhandle", func_00001478);
 #endif
 
-#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282) || FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_0C391E9F);
 #endif
 
@@ -175,7 +175,7 @@ s32 sceNetIfhandle_driver_0C391E9F(s32 arg0, u32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282) || FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_29ED84C5);
 #endif
 
@@ -237,7 +237,7 @@ s32 func_000018BC(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00001330(void) {
     return 0;
 }

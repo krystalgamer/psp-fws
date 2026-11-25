@@ -38,6 +38,7 @@ struct Unk_func_00002978_temp_a2 {
     s32 unkA8;
 };
 
+extern M2C_UNK D_0000502C;
 extern M2C_UNK D_00005960;
 extern struct D_000059B0_s D_000059B0;
 extern struct D_00008478_s D_00008478;
@@ -46,10 +47,13 @@ extern s32 D_0000852C;
 
 s32 func_00000F28(s32);
 s32 func_00001504(s32 arg0);
+s32 func_00002620(s32, s32);
 s32 func_000027AC(void);
 s32 func_00002804(void);
 s32 func_00002888(s32 *arg0);
 void func_00002978(struct Unk_func_00002978_0 *arg0);
+s32 func_0000477C(void);
+s32 func_00004C68(s32);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelSetEventFlag(s32, u32);

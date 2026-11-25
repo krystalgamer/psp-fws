@@ -2,7 +2,7 @@
 #include "common.h"
 #include "video_main_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00038D9C(struct Unk_func_00038D9C_0 *arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
     struct Unk_func_00038D9C_temp_v1 *temp_v1;

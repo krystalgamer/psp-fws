@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, dialogmain]
+      - [0xC4, c, dialogmain]
       - { start: 0x6C4C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x6C68, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x70B0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -70,7 +70,7 @@ segments:
       - { start: 0x760C, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x7618, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x761C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x7620, rodata, dialogmain]
+      - [0x7620, .rodata, dialogmain]
       - { start: 0x8648, type: prxpad, order: .rodata }
   - name: dialogmain_seg1
     type: code

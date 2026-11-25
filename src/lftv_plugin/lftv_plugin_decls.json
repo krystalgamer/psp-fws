@@ -8,11 +8,16 @@
   "func_00000C00": "void func_00000C00(void);",
   "func_00000C44": "void func_00000C44(void);",
   "func_00000C54": "void func_00000C54(void);",
+  "func_00000C9C": "void func_00000C9C(s32 arg0);",
+  "func_00000CB8": "void func_00000CB8(s32 arg0, s32 arg1);",
   "func_00000CC0": "s32 func_00000CC0(void);",
+  "func_00000CD4": "void func_00000CD4(s32 arg0, s32 arg1);",
   "func_00000D00": "s32 func_00000D00(void);",
   "func_00000D28": "s32 func_00000D28(void);",
+  "func_00000DB4": "void func_00000DB4(void);",
   "func_000012C0": "s32 func_000012C0(void);",
   "func_0000186C": "void func_0000186C(void);",
+  "func_00001AE0": "void func_00001AE0(void);",
   "func_000020F8": "s32 func_000020F8(void);",
   "func_000021FC": "M2C_UNK func_000021FC(M2C_UNK, M2C_UNK);",
   "func_000022C4": "void func_000022C4(void);",
@@ -25,6 +30,16 @@
   "func_00002848": "void *func_00002848(void **arg0);",
   "func_00002868": "M2C_UNK func_00002868(s32, s32, s32);",
   "func_00002CD8": "M2C_UNK func_00002CD8();",
+  "func_00002F70": "void func_00002F70(void);",
+  "func_0000301C": "s32 func_0000301C(s32);",
+  "func_000030E8": "s32 func_000030E8(s32, s32);",
+  "func_00003138": "s32 func_00003138(s32, s32);",
+  "func_000031CC": "s32 func_000031CC(void);",
+  "func_0000323C": "s32 func_0000323C(void);",
+  "func_0000331C": "void func_0000331C(s32 arg0);",
+  "func_00003388": "s32 func_00003388(s32, s32);",
+  "func_00003404": "void func_00003404(void);",
+  "func_00003424": "void func_00003424(void);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelDelayThread": "M2C_UNK sceKernelDelayThread(M2C_UNK);",
   "sceKernelPowerLock": "M2C_UNK sceKernelPowerLock(M2C_UNK);",
@@ -34,7 +49,8 @@
   "scePaf_CA79D58B": "s32 scePaf_CA79D58B(s32);",
   "scePaf_D4FAE7D0": "s32 scePaf_D4FAE7D0(M2C_UNK *);",
   "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);",
-  "sceVshCommonGui_72E652AA": "M2C_UNK sceVshCommonGui_72E652AA(s32);"
+  "sceVshCommonGui_72E652AA": "M2C_UNK sceVshCommonGui_72E652AA(s32);",
+  "sceVshCommonUtil_622815DD": "M2C_UNK sceVshCommonUtil_622815DD(M2C_UNK *, M2C_UNK *);"
  },
  "types": {
   "Unk_func_0000186C_temp_v0_2": "struct Unk_func_0000186C_temp_v0_2 {\n    u8 pad0[0x70];\n    M2C_UNK (*unk70)();\n};"
@@ -49,6 +65,8 @@
   "D_000033FC": "extern s32 D_000033FC;",
   "D_00003410": "extern s32 D_00003410;",
   "D_0000343C": "extern M2C_UNK D_0000343C;",
-  "func_000018E0": "extern M2C_UNK func_000018E0;"
+  "D_00003D1C": "extern M2C_UNK D_00003D1C;",
+  "func_000018E0": "extern M2C_UNK func_000018E0;",
+  "func_00003164": "extern M2C_UNK func_00003164;"
  }
 }

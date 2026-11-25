@@ -262,7 +262,7 @@ INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_E55F0D50);
 INCLUDE_RODATA("nonmatchings/display", D_00002C30);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/display", D_00003B94);
 #endif
 
@@ -447,7 +447,7 @@ s32 func_00001748(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_AE0E8972);
 
 INCLUDE_RODATA("nonmatchings/display", D_00003C50);
@@ -471,7 +471,7 @@ s32 func_00002AA0(void) {
 
 INCLUDE_ASM("nonmatchings/display", func_00002AC8);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00002B20(s32 arg0) {
     D_00003EF4 = arg0;
     return 0;
@@ -603,7 +603,7 @@ INCLUDE_ASM("nonmatchings/display", func_000021C8);
 INCLUDE_RODATA("nonmatchings/display", D_00002B2C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/display", func_00002D14);
 
 INCLUDE_ASM("nonmatchings/display", func_00002D48);

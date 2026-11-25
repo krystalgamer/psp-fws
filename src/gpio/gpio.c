@@ -14,7 +14,7 @@ INCLUDE_RODATA("nonmatchings/gpio", D_00000DC8);
 INCLUDE_RODATA("nonmatchings/gpio", D_00000E3C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/gpio", D_00000DEC);
 
 INCLUDE_RODATA("nonmatchings/gpio", D_00000E18);

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "pspnet_apctl_decls.h"
 
-#if FW_VERSION < 151 || FW_VERSION == 282
+#if FW_VERSION < 151 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006340);
 #endif
 
@@ -32,7 +32,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000046F4);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000487C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000646C);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000659C);
@@ -76,7 +76,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004FC4);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005064);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000693C);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006BD8);
@@ -750,7 +750,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00007184);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00007530);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00008EB0);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00009098);

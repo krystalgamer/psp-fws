@@ -144,7 +144,7 @@ s32 func_00001250(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 u8 sceHprm_driver_71B5FB67(void) {
     return D_00002226;
 }

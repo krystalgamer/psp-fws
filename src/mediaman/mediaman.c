@@ -231,7 +231,7 @@ INCLUDE_ASM("nonmatchings/mediaman", func_00001CA4);
 INCLUDE_ASM("nonmatchings/mediaman", func_00001CDC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediaman", func_00000254);
 
 INCLUDE_ASM("nonmatchings/mediaman", func_000002B0);
@@ -245,7 +245,7 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmd_D45D1FE6);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_D01B2DC6);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_3925CBD8);
 #endif
 
@@ -253,7 +253,7 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmd_3925CBD8);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_0F7E578A);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_AE53DC2D);
 
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_230666E3);
@@ -291,15 +291,19 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmd_4BA25F4A);
 INCLUDE_ASM("nonmatchings/mediaman", func_0000090C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdUnRegisterUMDCallBack);
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdActivate);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdDeactivate);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdWaitDriveStatWithTimer);
 
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdWaitDriveStatCB);
@@ -307,7 +311,9 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmdWaitDriveStatCB);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdRegisterUMDCallBack);
 
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_075F1E0B);
+#endif
 
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdUnRegisterUMDCallBack);
 #endif
 
@@ -315,7 +321,7 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmdUnRegisterUMDCallBack);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdDeactivate);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetDiscInfo);
 
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_EB56097E);
@@ -377,7 +383,7 @@ void sceUmd_3BA4EC53(void) {
 INCLUDE_ASM("nonmatchings/mediaman", func_0000235C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdCancelWaitDriveStat);
 
 void sceUmdGetDriveStat(void) {

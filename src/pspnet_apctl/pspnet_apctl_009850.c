@@ -2,7 +2,7 @@
 #include "common.h"
 #include "pspnet_apctl_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 M2C_UNK *func_00009850(struct Unk_func_00009850_0 *arg0) {
     M2C_UNK *temp_a1;
 
@@ -151,7 +151,7 @@ void func_0000A418(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000A418);
 #endif
 
@@ -200,7 +200,7 @@ u8 *func_000077F8(u8 *arg0, u8 *arg1) {
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_00007830);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_0000A448(struct Unk_func_0000A448_0 *arg0) {
     arg0->unk24E8 = 1;
     return 0;
@@ -458,9 +458,17 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000BF90);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000C174);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000C248);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000C438);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000C3D4);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000C594);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000C638);
@@ -506,9 +514,17 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000DF14);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000E0B4);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000E254);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000E3EC);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000E2C0);
+#endif
 
+#if FW_VERSION >= 282
 void func_0000E320(void) {
     func_0000BD70(2, 0);
 }

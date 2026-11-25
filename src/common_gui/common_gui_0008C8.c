@@ -2,7 +2,7 @@
 #include "common.h"
 #include "common_gui_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_000008C8(struct Unk_func_000008C8_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     arg0->unk4 = arg1;
     arg0->unk10 = arg5;
@@ -68,7 +68,7 @@ INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_D27E08EE);
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_A06734FF);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00000F6C(struct Unk_func_00000F6C_0 *arg0, s32 arg1) {
     arg0->unk24 = arg1;
 }
@@ -89,6 +89,12 @@ INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_FE305D6D);
 void sceVshCommonGui_72E652AA(s32 *arg0) {
     scePaf_41BCFB59(*arg0);
 }
+
+#if FW_VERSION == 300
+void sceVshCommonGui_77812115(s32 *arg0) {
+    scePaf_6615D1B8(*arg0);
+}
+#endif
 
 #if FW_VERSION >= 201
 void sceVshCommonGui_0131C97D(s32 *arg0) {

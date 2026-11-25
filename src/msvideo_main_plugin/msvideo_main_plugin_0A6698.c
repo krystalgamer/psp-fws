@@ -61,4 +61,3 @@ s32 func_000A6724(struct Unk_func_000A6724_0 *arg0) {
 s32 func_000A672C(struct Unk_func_000A672C_0 *arg0) {
     return arg0->unk190;
 }
-

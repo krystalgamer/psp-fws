@@ -212,6 +212,7 @@ void func_00004D14(void);
 void func_00004D34(void);
 void func_00004DD4(s32 *arg0, s32 arg1);
 void func_00004DD8(void);
+s32 func_00004E7C(void);
 void func_00004F1C(void);
 void func_00004F38(s32 arg0);
 void func_00004F40(void);

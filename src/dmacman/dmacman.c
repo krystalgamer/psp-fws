@@ -65,7 +65,7 @@ INCLUDE_ASM("nonmatchings/dmacman", func_00000B5C);
 INCLUDE_ASM("nonmatchings/dmacman", func_00000F68);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dmacman", func_00000B10);
 #endif
 
@@ -106,7 +106,7 @@ INCLUDE_ASM("nonmatchings/dmacman", func_00001114);
 INCLUDE_ASM("nonmatchings/dmacman", func_000014C8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dmacman", func_0000108C);
 
 INCLUDE_ASM("nonmatchings/dmacman", func_00001418);
@@ -156,7 +156,7 @@ INCLUDE_ASM("nonmatchings/dmacman", func_000015A8);
 INCLUDE_ASM("nonmatchings/dmacman", func_00001860);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dmacman", func_00001A78);
 
 INCLUDE_ASM("nonmatchings/dmacman", func_00001B08);

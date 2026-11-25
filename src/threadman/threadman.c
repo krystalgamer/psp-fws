@@ -223,11 +223,38 @@ s32 func_000008A0(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000030C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00000408);
+#endif
 
+#if FW_VERSION == 300
+s32 func_00000448(s32 arg0, s32 arg1) {
+    M2C_UNK *temp_s0;
+    M2C_UNK *var_s1;
+    s32 var_s2;
+    void *temp_s3;
+    void *temp_v1;
+
+    temp_v1 = arg0 + (M2C_FIELD(D_000172B4, u8 *, 0x15) * 4);
+    var_s1 = M2C_FIELD(temp_v1, M2C_UNK **, 0xC);
+    temp_s3 = temp_v1 + 0xC;
+    var_s2 = 0;
+    if (var_s1 != temp_s3) {
+        do {
+            temp_s0 = var_s1;
+            var_s1 = M2C_FIELD(var_s1, M2C_UNK **, 0);
+            func_0000022C((s32) temp_s0);
+            var_s2 += 1;
+            M2C_FIELD(temp_s0, s32 *, 0x44) = arg1;
+        } while (var_s1 != temp_s3);
+    }
+    return var_s2;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_00000448(s32 arg0, s32 arg1) {
     struct Unk_func_00000448_temp_s0 *temp_s0;
     struct Unk_func_00000448_temp_s0 *var_s1;
@@ -250,7 +277,13 @@ s32 func_00000448(s32 arg0, s32 arg1) {
     }
     return var_s2;
 }
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_000004CC);
+#endif
+
+#if FW_VERSION == 282
 void func_000004CC(struct Unk_func_000004CC_0 *arg0) {
     s32 temp_v1;
     s32 temp_v1_2;
@@ -269,7 +302,9 @@ void func_000004CC(struct Unk_func_000004CC_0 *arg0) {
         SysMemForKernel_5367923C(temp_v1_2, 0x5BD49380);
     }
 }
+#endif
 
+#if FW_VERSION >= 282
 void func_00000534(s32 arg0) {
     SysMemForKernel_5367923C(arg0, 0x85FE2B4C);
 }
@@ -315,7 +350,26 @@ s32 func_000008D0(s32 arg0, struct Unk_func_000008D0_1 *arg1) {
 }
 
 INCLUDE_ASM("nonmatchings/threadman", func_000008F0);
+#endif
 
+#if FW_VERSION == 300
+s32 func_000009F8(void) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (D_00016C74.unk418 == 0) {
+        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+        if (temp_v0 != 0) {
+            M2C_FIELD(D_00016C74.unk0, void **, 0xFC) = (void *) (D_00016C74.unk0 + 0x100);
+        }
+        var_v1 = temp_v0;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_000009F8(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -334,11 +388,13 @@ s32 func_000009F8(void) {
 INCLUDE_ASM("nonmatchings/threadman", func_00000A34);
 #endif
 
+#if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/threadman", func_00000A74);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00000B88);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00000C98);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForUser_6E9EA350);
@@ -364,7 +420,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00001430);
 INCLUDE_ASM("nonmatchings/threadman", func_000014BC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000114C);
 #endif
 
@@ -406,7 +462,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000217C);
 INCLUDE_ASM("nonmatchings/threadman", func_000022B4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_00001D5C);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferCallbackStatus);
@@ -467,9 +523,17 @@ INCLUDE_RODATA("nonmatchings/threadman", D_0001644C);
 INCLUDE_RODATA("nonmatchings/threadman", D_00016464);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000023C4);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_00002250);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/threadman", func_00002448);
+#endif
 
+#if FW_VERSION >= 282
 s32 func_0000261C(struct Unk_func_0000261C_0 *arg0) {
     SysMemForKernel_CE05CCB7();
     return arg0->unkC;
@@ -504,7 +568,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_000029B8);
 INCLUDE_ASM("nonmatchings/threadman", func_00002614);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000289C);
 #endif
 
@@ -516,7 +580,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelWakeupThread);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelWakeupThread);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDonateWakeupThread);
 #endif
 
@@ -550,6 +614,19 @@ void func_00003C3C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x38) = 0;
     if (func_0000022C((s32) arg0) > 0) {
         D_00015E0C = 0;
+    }
+    sceKernelCpuResumeIntr(temp_v0);
+}
+#endif
+
+#if FW_VERSION == 300
+void func_00003CF8(struct Unk_func_00003CF8_0 *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = sceKernelCpuSuspendIntr();
+    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    if (func_0000022C((s32) arg0) > 0) {
+        D_00017328 = 0;
     }
     sceKernelCpuResumeIntr(temp_v0);
 }
@@ -657,6 +734,10 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelPollEventFlag);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelEventFlag);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferEventFlagStatus);
+
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_00005A7C);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00015490);
@@ -928,21 +1009,35 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014EDC);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014EE4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00016664);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00005BF0);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_00005B0C);
+#endif
+
+#if FW_VERSION >= 282
 s32 func_00005C34(struct Unk_func_00005C34_0 *arg0) {
     SysMemForKernel_CE05CCB7();
     return arg0->unkC;
 }
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_00005C5C);
+#endif
+
+#if FW_VERSION == 282
 s32 func_00005C5C(void) {
     SysMemForKernel_CE05CCB7();
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateMutex);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteMutex);
@@ -969,12 +1064,20 @@ s32 func_00006D6C(struct Unk_func_00006D6C_0 *arg0) {
     SysMemForKernel_CE05CCB7();
     return arg0->unkC;
 }
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_00006D94);
+#endif
+
+#if FW_VERSION == 282
 s32 func_00006D94(void) {
     SysMemForKernel_CE05CCB7();
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_00006DB4);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateMbx);
@@ -1091,7 +1194,13 @@ s32 func_0000ABD8(struct Unk_func_0000ABD8_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000AC00);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_0000AC9C);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateFpl);
 #endif
 
@@ -1117,7 +1226,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000A7CC);
 INCLUDE_ASM("nonmatchings/threadman", func_0000A818);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000BB7C);
 #endif
 
@@ -1228,7 +1337,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000B7F4);
 INCLUDE_ASM("nonmatchings/threadman", func_0000B84C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000BC20);
 
 INCLUDE_RODATA("nonmatchings/threadman", D_00016778);
@@ -1243,7 +1352,7 @@ s32 func_0000BCAC(struct Unk_func_0000BCAC_0 *arg0) {
 INCLUDE_ASM("nonmatchings/threadman", func_0000BCD4);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION == 282
+#if FW_VERSION < 201 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/threadman", D_0001679C);
 #endif
 
@@ -1259,7 +1368,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelSetAlarm);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetSysClockAlarm);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000BD5C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000BF7C);
@@ -1289,7 +1398,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000BFC0);
 INCLUDE_ASM("nonmatchings/threadman", func_0000C048);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000C638);
 #endif
 
@@ -1427,7 +1536,7 @@ s32 func_0000DE94(void) {
 INCLUDE_ASM("nonmatchings/threadman", func_0000E61C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000E674);
 #else
 s32 func_0000E674(void *arg0, void *arg1) {
@@ -1457,7 +1566,7 @@ s32 func_0000DF00(void) {
 INCLUDE_ASM("nonmatchings/threadman", func_0000DF3C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetAlarm);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetSysClockAlarm);
@@ -1514,12 +1623,20 @@ s32 func_0000F1D0(struct Unk_func_0000F1D0_0 *arg0) {
     SysMemForKernel_CE05CCB7();
     return arg0->unkC;
 }
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_0000F288);
+#endif
+
+#if FW_VERSION == 282
 s32 func_0000F1F8(void) {
     SysMemForKernel_CE05CCB7();
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282
 s32 func_0000F218(struct Unk_func_0000F218_0 *arg0, struct Unk_func_0000F218_1 *arg1) {
     struct Unk_func_0000F218_temp_a0 *temp_a0;
 
@@ -1557,7 +1674,7 @@ void ThreadManForKernel_A249EAAE(s32 arg0) {
 INCLUDE_ASM("nonmatchings/threadman", func_0000E524);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000F698);
 
 void ThreadManForKernel_A249EAAE(s32 arg0) {
@@ -1614,7 +1731,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000ED74);
 INCLUDE_ASM("nonmatchings/threadman", func_0000EE28);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_0000FD6C(void) {
     return -1;
 }
@@ -1868,7 +1985,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000F1EC);
 INCLUDE_ASM("nonmatchings/threadman", func_0000F234);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION == 282
+#if FW_VERSION < 201 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00016984);
 #endif
 
@@ -1904,7 +2021,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000F570);
 INCLUDE_ASM("nonmatchings/threadman", func_0000F880);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateThread);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteThread);
@@ -1916,17 +2033,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_00010CFC);
 INCLUDE_ASM("nonmatchings/threadman", func_000102C8);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelStartThread);
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/threadman", func_000106E4);
-
-INCLUDE_ASM("nonmatchings/threadman", ThreadManForUser_532A522E);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelExitThread);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelExitDeleteThread);
@@ -1934,11 +2049,25 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelExitDeleteThread);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelTerminateThread);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelTerminateDeleteThread);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_000116C4);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/threadman", func_00011574);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSuspendDispatchThread);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_00011940);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelResumeDispatchThread);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelChangeCurrentThreadAttr);
@@ -1952,7 +2081,33 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelReleaseWaitThread);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadExitStatus);
 
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_BC31C1B9);
+#endif
 
+#if FW_VERSION == 300
+void func_000127F8(struct Unk_func_000127F8_0 *arg0, s32 arg1) {
+    void *var_s0;
+
+    if (M2C_FIELD(arg0, s32 *, 0x14) & 0x200000) {
+        sceKernelCpuResumeIntr(arg1);
+        sceKernelMemset(arg0->unk84, 0, arg0->unk88);
+        if (M2C_FIELD(arg0, s32 *, 0x14) < 0) {
+            sceKernelMemset(M2C_FIELD(arg0, void **, 0x90), 0, M2C_FIELD(arg0, u32 *, 0x94));
+            var_s0 = M2C_FIELD(arg0, void **, 0x98);
+        } else {
+            var_s0 = M2C_FIELD(arg0, void **, 0x98);
+        }
+        if (var_s0 != NULL) {
+            do {
+                sceKernelMemset(M2C_FIELD(var_s0, void **, 4), 0, M2C_FIELD(var_s0, u32 *, 0xC));
+                var_s0 = M2C_FIELD(var_s0, void **, 0);
+            } while (var_s0 != NULL);
+        }
+        sceKernelCpuSuspendIntr();
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 void func_000127F8(struct Unk_func_000127F8_0 *arg0, s32 arg1) {
     struct Unk_func_000127F8_var_s0 *var_s0;
 
@@ -1974,7 +2129,9 @@ void func_000127F8(struct Unk_func_000127F8_0 *arg0, s32 arg1) {
         sceKernelCpuSuspendIntr();
     }
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0001289C);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCheckThreadStack);
@@ -2006,11 +2163,25 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013C4C);
 INCLUDE_ASM("nonmatchings/threadman", func_00013D58);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00013DB0);
+#endif
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/threadman", ThreadManForUser_532A522E);
+#endif
+
+#if FW_VERSION == 300
+void ThreadManForUser_532A522E(void) {
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x118), s32 *, 0x18));
+}
+#endif
+
+#if FW_VERSION == 282
 void ThreadManForUser_532A522E(void) {
     sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x110), s32 *, 0x18));
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadId);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadCurrentPriority);
@@ -2046,7 +2217,7 @@ s32 func_0001444C(void) {
 INCLUDE_ASM("nonmatchings/threadman", func_0001446C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_00014480);
 #endif
 
@@ -2114,7 +2285,7 @@ INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_2D69D086);
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_FCB5EB49);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0001449C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0001472C);
@@ -2156,8 +2327,20 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013AC4);
 INCLUDE_ASM("nonmatchings/threadman", func_00013C88);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_0001544C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000154D0);
+#endif
+
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/threadman", func_00015840);
+
+INCLUDE_ASM("nonmatchings/threadman", func_000158C0);
+
+INCLUDE_ASM("nonmatchings/threadman", func_000159F8);
+
+INCLUDE_ASM("nonmatchings/threadman", func_00015B08);
+
+INCLUDE_ASM("nonmatchings/threadman", func_00015B40);
 #endif

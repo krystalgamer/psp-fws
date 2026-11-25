@@ -438,6 +438,7 @@ s32 func_0000AFB8(void *arg0);
 void func_0000B134(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 func_0000B168(s32, s32, s32, s32);
 s32 func_0000B19C(struct Unk_func_0000B19C_0 *arg0);
+void func_0000B228(void);
 s32 func_0000B270(void);
 s32 func_0000B288(s32, s32, s32);
 void func_0000B290(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);

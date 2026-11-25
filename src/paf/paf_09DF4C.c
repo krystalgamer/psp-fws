@@ -192,7 +192,7 @@ INCLUDE_ASM("nonmatchings/paf_09DF4C", scePaf_E327C974);
 
 INCLUDE_ASM("nonmatchings/paf_09DF4C", scePaf_D4F9270D);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/paf_09DF4C", D_00129154);
 #endif
 
@@ -204,7 +204,7 @@ void scePaf_DB1549DF(struct Unk_scePaf_DB1549DF_0 *arg0) {
     }
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00056170);
 
 INCLUDE_ASM("nonmatchings/paf_09DF4C", scePaf_FBC76D05);
@@ -235,6 +235,10 @@ INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000A0B68);
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000A0B78);
 
 INCLUDE_RODATA("nonmatchings/paf_09DF4C", D_0019340C);
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/paf_09DF4C", D_0018BED8);
+#endif
 
 #if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/paf_09DF4C", D_00187E78);
@@ -330,9 +334,17 @@ INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00059E50);
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00059ED0);
 
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_0005A0C8);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000A12AC);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_0005A20C);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_0005A654);
 #else
 INCLUDE_ASM("nonmatchings/paf_09DF4C", png_read_transform_info);

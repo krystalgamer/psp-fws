@@ -16,6 +16,10 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_0000015C);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00000180);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/photo_plugin", func_000001BC);
+#endif
+
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00000300);
 #endif
@@ -296,6 +300,10 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EE0C);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EE14);
 #endif
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002FD84);
+#endif
+
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EE18);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000007B0);
@@ -553,6 +561,10 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_000034B0);
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00003570);
+#endif
+
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002FE04);
 #endif
 
 #if FW_VERSION == 282
@@ -1048,11 +1060,19 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00005468);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00005540);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EF38);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/photo_plugin", func_000059D4);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EF40);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000055A8);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000567C);
 #endif
 
@@ -2306,6 +2326,10 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F5C0);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F5CC);
 #endif
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0003059C_v300);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002FEEC_v282);
 #endif
@@ -2806,7 +2830,11 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002FCE4);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002FD00);
 #endif
 
-#if FW_VERSION >= 280
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_00030C0C);
+#endif
+
+#if FW_VERSION >= 280 && FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0003054C);
 #endif
 

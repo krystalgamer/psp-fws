@@ -293,6 +293,14 @@ INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0019C65C);
 
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0019C660);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00194AEC);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00194B18);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00194B34);
+#endif
+
 #if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190A14);
 
@@ -757,6 +765,10 @@ s32 func_00116B6C(struct Unk_func_00116B6C_0 *arg0, struct Unk_func_00116B6C_1 *
 INCLUDE_ASM("nonmatchings/paf_106DCC", func_000B8E04);
 
 INCLUDE_ASM("nonmatchings/paf_106DCC", func_000B8E4C);
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_001953A4);
 #endif
 
 #if FW_VERSION == 201

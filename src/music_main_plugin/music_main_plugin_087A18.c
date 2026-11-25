@@ -2,7 +2,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00087A18(struct Unk_func_00087A18_0 *arg0) {
     func_00087374(arg0, 5);
     arg0->unk0 = &D_000A2130;
@@ -224,7 +224,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088538);
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088578);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000885B8);
 
 void func_000885E0(s32 **arg0) {
@@ -243,7 +243,7 @@ void func_00088608(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088640);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 u8 func_00088640(struct Unk_func_00088640_0 *arg0) {
     return arg0->unk18;
 }
@@ -253,7 +253,7 @@ u8 func_00088640(struct Unk_func_00088640_0 *arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088648);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00088648(s32 arg0) {
     return arg0 + 0x19;
 }
@@ -349,7 +349,7 @@ void func_00088DC0(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088DF8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00088DF8(void) {
     return 0;
 }
@@ -359,7 +359,7 @@ s32 func_00088DF8(void) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088E00);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00088E00(struct Unk_func_00088E00_0 *arg0) {
     return arg0->unk20;
 }
@@ -369,7 +369,7 @@ s32 func_00088E00(struct Unk_func_00088E00_0 *arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_0007825C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00088E08(struct Unk_func_00088E08_0 *arg0) {
     return arg0->unk24;
 }
@@ -594,7 +594,7 @@ void func_00089944(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00089974);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00089974(M2C_UNK **arg0) {
     *arg0 = &D_000A22F8;
     func_000886B0((s32) arg0);
@@ -605,7 +605,7 @@ void func_00089974(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_0008999C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_0008999C(M2C_UNK **arg0) {
     *arg0 = &D_000A22F8;
     func_000886B0((s32) arg0);
@@ -622,7 +622,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000783B0);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_087A18", D_00097488);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_000899C4(M2C_UNK **arg0) {
     *arg0 = &D_000A22F8;
     func_000886B0((s32) arg0);
@@ -636,7 +636,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000899FC);
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00089BDC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00089BDC(s32 arg0) {
     return ((1 << arg0) - 1) & 0xFF;
 }

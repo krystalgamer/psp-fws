@@ -48,7 +48,7 @@ void ExceptionManagerForKernel_3FB264FC(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_5A837AD4);
 
 INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_565C0B0E);
@@ -60,7 +60,7 @@ INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_1AA6CFFA);
 INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_DF83875E);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_291FF031);
 #endif
 
@@ -68,11 +68,11 @@ INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_291FF031);
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000470);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_000003D8);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_000004AC);
 #endif
 
@@ -80,11 +80,11 @@ INCLUDE_ASM("nonmatchings/exceptionman", func_000004AC);
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000570);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_000004D0);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_000004E8);
 #endif
 
@@ -98,7 +98,9 @@ void func_00000544(void) {
     func_00000AAC(func_00000A80());
     syslib_D3744BE0();
 }
+#endif
 
+#if FW_VERSION >= 282
 void ExceptionManagerForKernel_3FB264FC(s32 arg0, s32 arg1) {
     ExceptionManagerForKernel_5A837AD4(arg0, 2, arg1);
 }
@@ -118,7 +120,11 @@ INCLUDE_ASM("nonmatchings/exceptionman", func_000006C8);
 
 INCLUDE_ASM("nonmatchings/exceptionman", func_000006D8);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_FC26C354);
+#else
 INCLUDE_ASM("nonmatchings/exceptionman", func_000006F8);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000A0C);
@@ -134,7 +140,9 @@ INCLUDE_ASM("nonmatchings/exceptionman", func_00000A28);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000A48);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000A54);
 #endif
 

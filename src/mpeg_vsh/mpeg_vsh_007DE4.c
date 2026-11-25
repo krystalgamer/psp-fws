@@ -2,7 +2,7 @@
 #include "common.h"
 #include "mpeg_vsh_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00007DE4(void) {
     return D_00009DC0->unk14;
 }
@@ -60,15 +60,39 @@ s32 func_00007F64(struct Unk_func_00007F64_0 *arg0, s32 arg1) {
     func_00007A68(D_00009F80);
     return temp_s1;
 }
+#endif
 
+#if FW_VERSION == 300
+s32 func_00007FF4(void *arg0, s32 arg1) {
+    s32 temp_s1;
+
+    func_000079D8(D_00009F80);
+    M2C_FIELD(arg0, s32 *, 0x58) = arg1;
+    temp_s1 = sceVideocodec_893B32B1(arg0, 0);
+    func_00007A68(D_00009F80);
+    return temp_s1;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00007FC4);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000081C4);
+#endif
 
+#if FW_VERSION == 300
+s32 func_00008734(void) {
+    return 0x58C;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_00008734(void) {
     return 0x588;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_0000873C);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000087A4);

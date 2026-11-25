@@ -29,7 +29,11 @@ void scePaf_D0AD10FF(void) {
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3338);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_B0C3E598);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_0006B024);
 #endif
 
@@ -55,12 +59,12 @@ INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C33A0);
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C34F0);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0C31CC", func_0006C4B8);
+#if FW_VERSION >= 250
+INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_81773E1C);
 #endif
 
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_81773E1C);
+#if FW_VERSION >= 150 && FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/paf_0C31CC", func_0006C4B8);
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C36A0);

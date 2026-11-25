@@ -191,6 +191,7 @@
   "func_0000B134": "void func_0000B134(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);",
   "func_0000B168": "s32 func_0000B168(s32, s32, s32, s32);",
   "func_0000B19C": "s32 func_0000B19C(struct Unk_func_0000B19C_0 *arg0);",
+  "func_0000B228": "void func_0000B228(void);",
   "func_0000B270": "s32 func_0000B270(void);",
   "func_0000B288": "s32 func_0000B288(s32, s32, s32);",
   "func_0000B290": "void func_0000B290(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);",

@@ -34,6 +34,16 @@ INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasGetEnvelopeHeight);
 
 INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasSetSimpleADSR);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasSetGrain);
+
+INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasGetGrain);
+
+INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasSetOutputmode);
+
+INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasGetOutputmode);
+#endif
+
 INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasInit);
 
 INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasRevVON);
@@ -60,9 +70,23 @@ INCLUDE_ASM("nonmatchings/sc_sascore", sceSasCore_driver_E143A1EA);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/sc_sascore", sceP3daBridgeInit);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sc_sascore", sceP3daBridgeCore);
+#endif
 
+#if FW_VERSION == 300
+void sceP3daBridgeInit(s32 arg0, s32 arg1) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceMeCore_driver_D1EA3DFD(0x108, arg0, arg1);
+    setK1(temp_s0);
+}
+#endif
+
+#if FW_VERSION == 282
 void sceP3da_59FB2B06(s32 arg0, s32 arg1) {
     u32 temp_s0;
 
@@ -70,6 +94,8 @@ void sceP3da_59FB2B06(s32 arg0, s32 arg1) {
     sceMeCore_driver_D1EA3DFD(0x108, arg0, arg1);
     setK1(temp_s0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sc_sascore", sceP3daBridgeExit);
 #endif

@@ -194,7 +194,7 @@ void func_000006B8(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_000004E8(s32 arg0) {
     func_00008160(&D_0001247C, arg0);
     return 0;

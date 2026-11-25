@@ -1,14 +1,14 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_0009172C(void) {
 }
 #else
 INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_00091734);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00091734(void) {
 }
 #else
@@ -17,7 +17,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_00080DE8);
 INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_00080F54);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_0009173C);
 #endif
 
@@ -324,7 +324,7 @@ void func_00091BCC(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/music_main_plugin_09172C", D_000A2948);
 #endif
 

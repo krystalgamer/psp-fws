@@ -2,7 +2,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00083780(struct Unk_func_00083780_0 *arg0) {
     arg0->unk0 = &D_000A1F70;
     arg0->unkC = 0;

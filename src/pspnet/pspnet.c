@@ -82,7 +82,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_0000195C);
 INCLUDE_ASM("nonmatchings/pspnet", func_000016BC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00001980);
 #endif
 
@@ -337,7 +337,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00003100);
 INCLUDE_ASM("nonmatchings/pspnet", func_000030A8_v100);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00003400(struct Unk_func_00003400_0 *arg0) {
     sceKernelWaitSema(D_0000A874, 1, NULL);
     if (arg0->unk20 == 0) {
@@ -712,7 +712,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00006BBC);
 INCLUDE_ASM("nonmatchings/pspnet", func_00006C28);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00006AA8);
 #endif
 
@@ -758,7 +758,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_0000704C);
 INCLUDE_ASM("nonmatchings/pspnet", func_000071FC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00007054);
 #endif
 
@@ -818,7 +818,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_000079E4);
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_F811A628);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_0000791C(void) {
     return 0;
 }
@@ -838,11 +838,13 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00007A68);
 INCLUDE_RODATA("nonmatchings/pspnet", D_00009D5C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/pspnet", func_0000795C);
+#endif
+
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/pspnet", sceNetEtherNtostr);
 #else
-INCLUDE_ASM("nonmatchings/pspnet", func_0000795C);
-
 void sceNetEtherNtostr(struct Unk_sceNetEtherNtostr_0 *arg0, s32 arg1) {
     if (((arg0 == NULL) | (arg1 == 0)) != 0) {
 
@@ -954,7 +956,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00008794);
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_1FB2FDDD);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 M2C_UNK *func_00007BBC(void) {
     return &D_0000A88D;
 }
@@ -1024,7 +1026,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_A0F16ABD);
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_80C9F02A);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 u8 *sceNet_lib_80C9F02A(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;
@@ -1070,6 +1072,10 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00008E1C);
 INCLUDE_ASM("nonmatchings/pspnet", func_00009390);
 
 INCLUDE_RODATA("nonmatchings/pspnet", D_0000A574);
+
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/pspnet", D_0000A598);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/pspnet", D_0000A564);

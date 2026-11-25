@@ -21,7 +21,7 @@ void func_000002B4(void **arg0) {
 INCLUDE_ASM("nonmatchings/systimer", func_000002D0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_000002B0(void **arg0) {
     struct Unk_func_000002B0_temp_a2 *temp_a2;
 
@@ -80,7 +80,7 @@ INCLUDE_ASM("nonmatchings/systimer", func_00000878);
 INCLUDE_ASM("nonmatchings/systimer", func_000008F0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/systimer", func_00000864);
 
 INCLUDE_ASM("nonmatchings/systimer", func_000008DC);

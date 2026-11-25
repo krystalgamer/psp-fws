@@ -32,7 +32,7 @@ INCLUDE_ASM("nonmatchings/ctrl", func_00000428);
 INCLUDE_ASM("nonmatchings/ctrl", func_000003D4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ctrl", func_000003B0);
 #endif
 
@@ -72,7 +72,7 @@ s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     if (arg0 != NULL) {
         *arg0 = D_000027A4;
@@ -212,7 +212,7 @@ s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 sceCtrlPeekBufferPositive(void *arg0, s32 arg1) {
     return func_0000161C((s32) arg0, arg1, 0);
 }
@@ -339,9 +339,21 @@ s32 func_00001578(void) {
 }
 
 INCLUDE_ASM("nonmatchings/ctrl", func_00001584);
+#endif
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/ctrl", func_00001600);
+#endif
 
+#if FW_VERSION == 300
+s32 func_00001600(void) {
+    D_00001D70.pad0[0x11] = 0;
+    D_00001D70.pad0[0xE] = D_00001D70.pad0[0x8A];
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ctrl", func_0000161C);
 #endif
 

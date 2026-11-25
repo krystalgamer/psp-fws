@@ -642,6 +642,10 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_0002534C);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025418);
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00051D68);
+#endif
+
 s32 func_00025464(s32 *arg0, M2C_UNK arg1) {
     s32 temp_v0;
 
@@ -683,8 +687,81 @@ s32 func_000256F4(void) {
 void func_000256FC(void) {
 }
 
+#if FW_VERSION == 300
+s32 func_00024770(s32 arg0, s32 *arg1) {
+    s32 temp_v0;
+
+    temp_v0 = sceKernelCreateSema(&D_00051D68, 0U, arg0, arg0, NULL);
+    *arg1 = temp_v0;
+    return (temp_v0 >= 0) ? 0 : -5;
+}
+
+s32 func_000247C0(s32 arg0, s32 arg1, s32 *arg2) {
+    s32 temp_v0;
+
+    temp_v0 = sceKernelCreateSema(&D_00051D68, 0U, arg0, arg1, NULL);
+    *arg2 = temp_v0;
+    return (temp_v0 >= 0) ? 0 : -5;
+}
+
+s32 func_00025910(s32 arg0) {
+    return (sceKernelDeleteSema(arg0) == 0) ? 0 : -5;
+}
+
+s32 func_000259A8(s32 arg0) {
+    return (sceKernelWaitSema(arg0, 1, NULL) == 0) ? 0 : -5;
+}
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00024868);
+
+s32 func_000248B0(s32 arg0) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = sceKernelPollSema(arg0, 1);
+    var_v1 = -0x32;
+    if (temp_v0 != 0x800201AD) {
+        var_v1 = (temp_v0 == 0) ? 0 : -5;
+    }
+    return var_v1;
+}
+
+s32 func_00025B48(s32 arg0) {
+    return (sceKernelSignalSema(arg0, 1) == 0) ? 0 : -5;
+}
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00024914);
+#endif
+
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025704);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000249EC);
+
+INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00051DA8_v300);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00024A50);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00026160);
+
+INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00051E08);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000261F8);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000262C0);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00026348);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000263AC);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00024EEC);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_0002658C);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000265B8);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000265F0);
+#else
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025794);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025854);
@@ -694,6 +771,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025910);
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000259A8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025B48);
+#endif
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025C6C);
 
@@ -713,6 +791,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_0005384C);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00053874);
 
+#if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025DFC);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025ECC);
@@ -779,11 +858,17 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00026800);
 INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00053AE4);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00053B0C);
+#endif
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00026884);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00026954);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025F14);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025F2C);
+#else
 void func_0002699C(struct Unk_func_0002699C_0 *arg0) {
     arg0->unk0 = &D_00053B58;
     arg0->unk4 = 0;
@@ -793,6 +878,7 @@ void func_0002699C(struct Unk_func_0002699C_0 *arg0) {
 void func_000269B4(M2C_UNK **arg0) {
     *arg0 = &D_00053B58;
 }
+#endif
 
 void func_000269C4(M2C_UNK **arg0) {
     *arg0 = &D_00053B58;

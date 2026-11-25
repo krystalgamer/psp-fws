@@ -2,7 +2,7 @@
 #include "common.h"
 #include "game_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_000075DC(struct Unk_func_000075DC_0 *arg0) {
     M2C_UNK *temp_v0;
     M2C_UNK *var_v1;
@@ -42,7 +42,7 @@ void ***func_00007638(void ***arg0, struct Unk_func_00007638_1 *arg1, void **arg
 
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000076A0);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_000076CC(void) {
     func_000076A0();
 }
@@ -70,13 +70,19 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00011034);
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00011058);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000076E8);
 #endif
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012038);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012050);
+
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_000138B4);
+
+INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_000138D0);
+#endif
 
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00011894);
@@ -132,7 +138,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006BE4);
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006C00);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000078F8);
 #endif
 

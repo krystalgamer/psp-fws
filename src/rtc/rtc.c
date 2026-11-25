@@ -2,6 +2,10 @@
 #include "common.h"
 #include "rtc_decls.h"
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/rtc", func_00000000_v300);
+#endif
+
 #if FW_VERSION >= 270
 INCLUDE_ASM("nonmatchings/rtc", func_00000000);
 #endif
@@ -77,7 +81,7 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 module_start(void) {
     memset(&D_00004580, 0, 0x60);
     D_00004580.unk1C = -1;
@@ -131,7 +135,7 @@ s32 sceRtc_driver_912BEE56(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_CE27DE2F);
 #endif
 
@@ -192,7 +196,9 @@ s32 func_00000DB0(s32 arg0) {
     }
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_0000138C(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x400:
@@ -310,9 +316,25 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcParseDateTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcParseRFC3339);
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/rtc", D_00004360);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_000044DC);
+
+INCLUDE_ASM("nonmatchings/rtc", func_00002ED4);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00004474);
+
+INCLUDE_ASM("nonmatchings/rtc", func_00002F78);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_000045C0_v300);
+
+INCLUDE_ASM("nonmatchings/rtc", func_00003038);
+#else
 INCLUDE_ASM("nonmatchings/rtc", func_000030C4);
 
 INCLUDE_ASM("nonmatchings/rtc", func_00003188);
+#endif
 
 INCLUDE_ASM("nonmatchings/rtc", func_0000328C);
 
@@ -360,9 +382,13 @@ INCLUDE_ASM("nonmatchings/rtc", func_00003DD4);
 
 INCLUDE_ASM("nonmatchings/rtc", func_00003DF4);
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/rtc", D_00004614);
+#else
 INCLUDE_RODATA("nonmatchings/rtc", D_000044D4);
 
 INCLUDE_RODATA("nonmatchings/rtc", D_000044DC);
+#endif
 
 INCLUDE_RODATA("nonmatchings/rtc", D_000044F4);
 

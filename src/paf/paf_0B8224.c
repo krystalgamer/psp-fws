@@ -242,7 +242,7 @@ INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C738);
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C74C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontDoneLib);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B98DC);

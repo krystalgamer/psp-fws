@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/300/.splat_cache.savedata_utility
   symbol_addrs_path:
     - config/300/symbol_addrs.savedata_utility.txt
+    - config/300/func_starts.savedata_utility.txt
     - tmp/build/300/prx_syms.savedata_utility.txt
   reloc_addrs_path: [tmp/build/300/reloc_addrs.savedata_utility.txt]
   asset_path: tmp/assets/300/savedata_utility
@@ -53,7 +54,13 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, savedata_utility]
+      - [0xC4, c, savedata_utility]
+      - [0x6984, c, savedata_utility_0068E4]
+      - [0x6E74, c, savedata_utility_006DD4]
+      - [0x1100C, c, savedata_utility_010F6C]
+      - [0x1108C, c, savedata_utility_010FEC]
+      - [0x15CD8, c, savedata_utility_015C1C]
+      - [0x17124, c, savedata_utility_017068]
       - { start: 0x238E8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x23904, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x23D84, type: prxpad, order: .text }
@@ -71,7 +78,11 @@ segments:
       - { start: 0x24340, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x24348, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x2434C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x24350, rodata, savedata_utility]
+      - [0x24350, .rodata, savedata_utility]
+      - [0x24A18, .rodata, savedata_utility_006DD4]
+      - [0x251A4, .rodata, savedata_utility_010FEC]
+      - [0x25360, .rodata, savedata_utility_015C1C]
+      - [0x253B8, .rodata, savedata_utility_017068]
   - name: savedata_utility_seg1
     type: code
     start: 0x257D0

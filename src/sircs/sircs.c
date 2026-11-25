@@ -16,7 +16,7 @@ INCLUDE_ASM("nonmatchings/sircs", func_00000294);
 INCLUDE_ASM("nonmatchings/sircs", func_000002E8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00000894(void) {
     if (D_00002770.unk0 == 0) {
         sceKernelPowerLock(0);
@@ -249,7 +249,7 @@ s32 func_000011F8(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_000018E4(struct Unk_func_000018E4_0 *arg0) {
     s32 temp_v0;
 
@@ -293,7 +293,7 @@ INCLUDE_ASM("nonmatchings/sircs", func_0000139C);
 INCLUDE_ASM("nonmatchings/sircs", func_000013A0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00001A74(void) {
     return D_00002724;
 }

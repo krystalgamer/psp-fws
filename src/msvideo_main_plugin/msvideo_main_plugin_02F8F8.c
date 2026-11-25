@@ -22,4 +22,3 @@ void func_0002F9F8(struct Unk_func_0002F9F8_0 *arg0, s32 arg1) {
 s32 func_0002FA00(struct Unk_func_0002FA00_0 *arg0) {
     return arg0->unk490;
 }
-

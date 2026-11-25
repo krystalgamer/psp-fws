@@ -59,7 +59,9 @@ INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_FEFA40C2);
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_2D633688);
 
+#if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/idstorage", func_00001C30);
+#endif
 
 INCLUDE_ASM("nonmatchings/idstorage", func_00001CA0);
 

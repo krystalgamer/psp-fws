@@ -49,3 +49,19 @@ sceKernelCreateSema = 0x00006B9C; // type:func
 sceKernelUtilsSha1Digest = 0x00006BA4; // type:func
 sceKernelPowerUnlock = 0x00006BAC; // type:func
 sceKernelPowerLock = 0x00006BB4; // type:func
+// shared names (tools/add_version.py) begin
+D_00006F8C = 0x00006F94; // rom:0x7034
+D_00006F94 = 0x00006F9C; // rom:0x703C
+D_00006FB0 = 0x00006FC0; // rom:0x7060
+D_00006FB4 = 0x00006FC4; // rom:0x7064
+D_00006FC0 = 0x00006FD0;
+D_00006FC4 = 0x00006FD4;
+D_00006FC8 = 0x00006FD8;
+D_00006FCC = 0x00006FDC;
+D_00006FD0 = 0x00006FE0;
+D_00006FD4 = 0x00006FE4;
+D_00006FD8 = 0x00006FE8;
+D_00006FDC = 0x00006FEC;
+D_00006FE0 = 0x00006FF0;
+D_00006FC8_v300 = 0x00006FC8; // rom:0x7068
+// shared names (tools/add_version.py) end

@@ -24,6 +24,7 @@ extern M2C_UNK D_0000BA80;
 extern struct D_0000BC08_s D_0000BC08;
 extern s32 D_0000BC1C;
 extern s32 D_0000BDB8;
+extern s32 D_0000BF10;
 
 M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
 void func_000039E8(void);

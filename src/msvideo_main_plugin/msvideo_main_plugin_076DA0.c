@@ -631,4 +631,3 @@ s32 func_00077F10(s32 *arg0, s32 arg1) {
     }
     return var_v1;
 }
-

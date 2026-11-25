@@ -5,12 +5,17 @@ INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_00000000);
 
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000000EC);
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001848);
+#endif
+
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_00000204);
 
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000007B0);
 
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000007E0);
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001724);
 
 INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001728);
@@ -24,7 +29,11 @@ INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001744);
 INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001764);
 
 INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001770);
+#else
+INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000008D0);
+#endif
 
+#if FW_VERSION < 300
 s32 func_000008D0(void) {
     KDebugForKernel_84F370BC("Usage: fatfmt [<option>]... <blkdev>\n");
     KDebugForKernel_84F370BC("  <option>:\n");
@@ -44,10 +53,13 @@ s32 func_000008D0(void) {
     KDebugForKernel_84F370BC("    -[no]cluster_align     set/reset cluster alignment\n");
     return 1;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000009A8);
 
+#if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_0000131C);
+#endif
 
 void LflashFatfmt_B7A424A4(void) {
     func_000009A8();

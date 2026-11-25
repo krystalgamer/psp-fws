@@ -15,6 +15,7 @@
   "func_00000F78": "M2C_UNK func_00000F78(s32, s32, s32);",
   "func_00000FFC": "void func_00000FFC(M2C_UNK **arg0);",
   "func_0000107C": "M2C_UNK func_0000107C();",
+  "func_000010EC": "s32 func_000010EC(s32, s32);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelPowerUnlock": "s32 sceKernelPowerUnlock(s32);",
   "scePaf_338C3774": "void *scePaf_338C3774(s32, M2C_UNK);",
@@ -30,6 +31,7 @@
   "D_00001648": "extern M2C_UNK D_00001648;",
   "D_0000177C": "extern s32 D_0000177C;",
   "D_00001780": "extern s32 D_00001780;",
-  "D_000017FC": "extern s32 D_000017FC;"
+  "D_000017FC": "extern s32 D_000017FC;",
+  "D_00001804": "extern s32 D_00001804;"
  }
 }

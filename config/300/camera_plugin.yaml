@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/300/.splat_cache.camera_plugin
   symbol_addrs_path:
     - config/300/symbol_addrs.camera_plugin.txt
+    - config/300/func_starts.camera_plugin.txt
     - tmp/build/300/prx_syms.camera_plugin.txt
   reloc_addrs_path: [tmp/build/300/reloc_addrs.camera_plugin.txt]
   asset_path: tmp/assets/300/camera_plugin
@@ -53,7 +54,17 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, camera_plugin]
+      - [0xC4, c, camera_plugin]
+      - [0x550, c, camera_plugin_000294]
+      - [0xA04, c, camera_plugin_000634]
+      - [0x2394, c, camera_plugin_001F80]
+      - [0x23FC, c, camera_plugin_001FE8]
+      - [0xCE54, c, camera_plugin_00CC64]
+      - [0xD744, c, camera_plugin_00D554]
+      - [0x1AACC, c, camera_plugin_01BC8C]
+      - [0x1AB68, c, camera_plugin_01BD28]
+      - [0x1CE64, c, camera_plugin_01E024]
+      - [0x1E198, c, camera_plugin_01F54C]
       - { start: 0x1ED98, type: asm, name: fini, linker_section: .fini }
       - { start: 0x1EDB4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1F62C, type: prxpad, order: .text }
@@ -71,7 +82,14 @@ segments:
       - { start: 0x1FF94, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x1FFBC, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x1FFC0, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x20000, rodata, camera_plugin]
+      - [0x20000, .rodata, camera_plugin]
+      - [0x2032C, .rodata, camera_plugin_000294]
+      - [0x20360, .rodata, camera_plugin_000634]
+      - [0x204FC, .rodata, camera_plugin_001FE8]
+      - [0x223A4, .rodata, camera_plugin_00D554]
+      - [0x22DA0, .rodata, camera_plugin_01BD28]
+      - [0x22FF4, .rodata, camera_plugin_01E024]
+      - [0x230B4, .rodata, camera_plugin_01F54C]
       - { start: 0x2343C, type: prxpad, order: .rodata }
   - name: camera_plugin_seg1
     type: code

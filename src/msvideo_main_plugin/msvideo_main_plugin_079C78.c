@@ -25,6 +25,9 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_079C78", func_0007A120);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_079C78", func_0007A1E8);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_079C78", func_0007A2B0);
+#else
 s32 func_0007A2B0(struct Unk_func_0007790C_0 *arg0, s32 *arg1) {
     s32 temp_v0;
 
@@ -36,6 +39,7 @@ s32 func_0007A2B0(struct Unk_func_0007790C_0 *arg0, s32 *arg1) {
     }
     return 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_079C78", func_0007A2F8);
 
@@ -117,4 +121,3 @@ s32 func_0007AB0C(struct Unk_func_00077C80_0 *arg0, s32 *arg1) {
 }
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_079C78", func_0007AB38);
-

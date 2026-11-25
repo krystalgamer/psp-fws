@@ -1,7 +1,7 @@
 #include "common.h"
 #include "music_common_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_common_003774", music_common_100366B3);
 
 INCLUDE_ASM("nonmatchings/music_common_003774", music_common_4BAF5236);
@@ -21,7 +21,7 @@ INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EDF0);
 INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001C5B8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EE18);
 #endif
 
@@ -99,7 +99,13 @@ INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EEA8);
 INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EEE0);
 
 INCLUDE_ASM("nonmatchings/music_common_003774", func_00004100);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EF10);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_common_003774", func_00004218);
 
 INCLUDE_ASM("nonmatchings/music_common_003774", func_00004254);

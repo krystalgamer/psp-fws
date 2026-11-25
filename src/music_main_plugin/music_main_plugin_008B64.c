@@ -2,7 +2,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00008B64(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -45,7 +45,119 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_000092A8);
 s32 func_000092C8(void) {
     return 1;
 }
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_0000AA34);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_00099DB0);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B11B0);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B11BC);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B11C8);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B11D4);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B11DC);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B11E8);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B11F4);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1200);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B120C);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1218);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1224);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1230);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B123C);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1248);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1250);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B125C);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B126C);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B127C);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1288);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1294);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B12A0);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B12B0);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B12C0);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B12D0);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B12DC);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B12E8);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B12F4);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1300);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B130C);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1318);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1320);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1328);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1334);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1340);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B134C);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1354);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1360);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1370);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1380);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B138C);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1394);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B139C);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B13A8);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B13B0);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B13BC);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B13C4);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B13D0);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B13D8);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B13E0);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B13EC);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B13F4);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_008B64", func_0000AA5C);
+#endif
+
+#if FW_VERSION >= 282
 void func_000092D0(void) {
     D_000A4234 = 0;
 }

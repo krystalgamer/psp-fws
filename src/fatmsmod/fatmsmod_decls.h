@@ -251,6 +251,7 @@ s32 func_0002214C(s32 arg0);
 s8 func_00022338(s8 arg0);
 s32 func_0002233C(s32 arg0);
 s8 func_00022344(s8 arg0);
+s32 module_start(void);
 s32 sceFatMS_driver_BCB9DEDB(void);
 s32 sceIoClose(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);

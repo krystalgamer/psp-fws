@@ -79,7 +79,7 @@ INCLUDE_RODATA("nonmatchings/vaudio", D_00000AE8);
 INCLUDE_ASM("nonmatchings/vaudio", func_000005DC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudioSetAlcMode);
 
 s32 sceVaudio_driver_DCC18F25(void) {
@@ -87,7 +87,19 @@ s32 sceVaudio_driver_DCC18F25(void) {
 }
 
 INCLUDE_ASM("nonmatchings/vaudio", module_stop);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/vaudio", func_00000794);
+
+INCLUDE_ASM("nonmatchings/vaudio", func_0000081C);
+
+INCLUDE_ASM("nonmatchings/vaudio", func_0000093C);
+
+INCLUDE_ASM("nonmatchings/vaudio", func_00000A84);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/vaudio", func_00000790);
 
 INCLUDE_ASM("nonmatchings/vaudio", func_00000818);
@@ -95,6 +107,8 @@ INCLUDE_ASM("nonmatchings/vaudio", func_00000818);
 INCLUDE_ASM("nonmatchings/vaudio", func_00000930);
 
 INCLUDE_ASM("nonmatchings/vaudio", func_00000A74);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/vaudio", D_00000E48);
 #endif

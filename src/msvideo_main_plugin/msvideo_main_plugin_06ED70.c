@@ -2,6 +2,9 @@
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06ED70", func_0006ED70);
+#else
 s32 func_0006ED70(struct Unk_func_0006ED70_0 *arg0, s32 arg1) {
     s32 var_v1;
 
@@ -11,6 +14,7 @@ s32 func_0006ED70(struct Unk_func_0006ED70_0 *arg0, s32 arg1) {
     }
     return var_v1;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06ED70", func_0006EDA4);
 
@@ -38,3 +42,12 @@ void func_0006EFA0(struct Unk_func_0006EF80_0 *arg0) {
     func_0006EF80(arg0);
 }
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06ED70", func_0006E108);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_06ED70", D_000B4E90);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_06ED70", D_000B4EE8);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_06ED70", D_000B4EEC);
+#endif

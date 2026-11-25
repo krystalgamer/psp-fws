@@ -40,7 +40,7 @@ s32 func_000000C4(void) {
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_CD0F6715);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F3443B9A);
 #endif
 
@@ -48,7 +48,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E2A5D1EE);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E88B77ED);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_312F9419);
 #endif
 
@@ -130,7 +130,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DCA57573);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_53A6838B);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BB3623DF);
 #endif
 
@@ -210,7 +210,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_4D2FFC60);
 INCLUDE_ASM("nonmatchings/sysreg", func_00000B64);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_6B01D71B);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_FC186A83);
@@ -454,7 +454,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8D0FED1E);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A46E9CA8);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_633595F2);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_32471457);
@@ -531,7 +531,7 @@ INCLUDE_RODATA("nonmatchings/sysreg", D_00002BFC);
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002B78_v250);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002538);
 
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002578);

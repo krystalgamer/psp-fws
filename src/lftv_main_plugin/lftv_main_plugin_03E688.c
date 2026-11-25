@@ -1,7 +1,7 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_03E688", func_0003E688);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_03E688", func_0003E6D8);

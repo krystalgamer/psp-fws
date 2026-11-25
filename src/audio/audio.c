@@ -28,7 +28,7 @@ INCLUDE_ASM("nonmatchings/audio", func_0000028C);
 INCLUDE_ASM("nonmatchings/audio", func_000004CC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/audio", func_000001E8);
 
 INCLUDE_ASM("nonmatchings/audio", func_00000274);
@@ -176,7 +176,7 @@ INCLUDE_ASM("nonmatchings/audio", func_000018FC);
 INCLUDE_ASM("nonmatchings/audio", func_000019FC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/audio", func_00001908);
 
 INCLUDE_ASM("nonmatchings/audio", func_00001A70);
@@ -188,11 +188,11 @@ INCLUDE_ASM("nonmatchings/audio", func_00001CC8);
 
 INCLUDE_ASM("nonmatchings/audio", sceAudio_38553111);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/audio", sceAudio_5C37C0AE);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION == 282
+#if FW_VERSION < 201 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/audio", sceAudio_E0727056);
 #endif
 
@@ -232,7 +232,7 @@ INCLUDE_ASM("nonmatchings/audio", func_00002178);
 INCLUDE_ASM("nonmatchings/audio", func_0000206C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/audio", func_0000217C);
 
 INCLUDE_ASM("nonmatchings/audio", func_0000234C);
@@ -242,7 +242,7 @@ INCLUDE_ASM("nonmatchings/audio", func_0000234C);
 INCLUDE_ASM("nonmatchings/audio", sceAudioWaitInputEnd);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/audio", sceAudioInputInit);
 
 INCLUDE_ASM("nonmatchings/audio", sceAudioInputInitEx);
@@ -285,7 +285,7 @@ s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2) {
     return func_000029D4(arg0, arg1, (s32) arg2);
 }
@@ -333,7 +333,7 @@ INCLUDE_ASM("nonmatchings/audio", func_000025B8);
 INCLUDE_ASM("nonmatchings/audio", func_00002720);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/audio", func_000028AC);
 
 INCLUDE_ASM("nonmatchings/audio", func_000029D4);

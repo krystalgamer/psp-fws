@@ -6,11 +6,13 @@ void func_0001BD28(void) {
 
 INCLUDE_ASM("nonmatchings/camera_plugin_01BD28", func_0001BD30);
 
+#if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/camera_plugin_01BD28", D_000240B0);
 
 INCLUDE_RODATA("nonmatchings/camera_plugin_01BD28", D_00024148);
 
 INCLUDE_RODATA("nonmatchings/camera_plugin_01BD28", D_000241E0);
+#endif
 
 INCLUDE_RODATA("nonmatchings/camera_plugin_01BD28", D_00024200);
 
@@ -53,4 +55,3 @@ INCLUDE_ASM("nonmatchings/camera_plugin_01BD28", func_0001DD64);
 INCLUDE_ASM("nonmatchings/camera_plugin_01BD28", func_0001DDB4);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_01BD28", func_0001DE50);
-

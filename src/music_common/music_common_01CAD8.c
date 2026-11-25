@@ -2,7 +2,7 @@
 #include "common.h"
 #include "music_common_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_0001CAD8(M2C_UNK **arg0) {
     *arg0 = &D_000202B0;
     func_0001CD88();

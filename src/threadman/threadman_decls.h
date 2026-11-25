@@ -219,9 +219,11 @@ extern s32 D_000172CC;
 extern s32 D_000172D0;
 extern s32 D_000172D4;
 extern s32 D_000172F4;
+extern s32 D_00017328;
 extern s32 D_00017344;
 extern s32 D_00017350;
 extern s32 D_000173BC;
+extern s32 D_00017968;
 
 M2C_UNK SysMemForKernel_5367923C(s32, M2C_UNK);
 M2C_UNK SysMemForKernel_AD09C397(M2C_UNK *, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);

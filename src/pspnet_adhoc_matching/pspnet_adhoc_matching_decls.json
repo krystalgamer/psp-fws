@@ -50,6 +50,9 @@
   "func_000030C8": "void func_000030C8(void);",
   "func_00003178": "void func_00003178(void *arg0);",
   "func_000031A0": "s32 func_000031A0(void);",
+  "func_00003308": "void func_00003308(void *arg0, void *arg1);",
+  "func_00003478": "void func_00003478(void *arg0);",
+  "func_00003A1C": "void func_00003A1C(s32 arg0);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "pmp_keepalive_handler": "s32 pmp_keepalive_handler(void *arg0);",
@@ -106,9 +109,11 @@
   "D_00003DB4": "extern s32 D_00003DB4;",
   "D_00003DC4": "extern s32 D_00003DC4;",
   "D_00003DC8": "extern s32 D_00003DC8;",
+  "D_00004898": "extern s32 D_00004898;",
   "func_000022A4": "extern M2C_UNK func_000022A4;",
   "func_00002374": "extern M2C_UNK func_00002374;",
   "func_00002948": "extern M2C_UNK func_00002948;",
+  "func_000035DC": "extern M2C_UNK func_000035DC;",
   "pmp_rexmt_handler": "extern M2C_UNK pmp_rexmt_handler;"
  }
 }

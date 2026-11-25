@@ -13,6 +13,7 @@ extern M2C_UNK D_00001648;
 extern s32 D_0000177C;
 extern s32 D_00001780;
 extern s32 D_000017FC;
+extern s32 D_00001804;
 
 s32 func_00000570(void);
 void func_0000076C(void);
@@ -29,6 +30,7 @@ M2C_UNK func_00000F48();
 M2C_UNK func_00000F78(s32, s32, s32);
 void func_00000FFC(M2C_UNK **arg0);
 M2C_UNK func_0000107C();
+s32 func_000010EC(s32, s32);
 s32 module_stop(void);
 s32 sceKernelPowerUnlock(s32);
 void *scePaf_338C3774(s32, M2C_UNK);

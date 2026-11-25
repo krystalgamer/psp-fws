@@ -20,69 +20,695 @@ void scePaf_FB3DB2FF(void) {
     func_000CED84();
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_C6F44EF9);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_C6F44EF9(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_6B678D44);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_6B678D44(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_E15A64EA);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_E15A64EA(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_6A772BF7);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_6A772BF7(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_D180ACBA);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_D180ACBA(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_4C5F6657);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_4C5F6657(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_DFB912CB);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_DFB912CB(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_BAA76FDE);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_BAA76FDE(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_6CF44237);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_6CF44237(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_CFAF88AB);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_CFAF88AB(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_D34D0B82);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_D34D0B82(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_8CDEDC6F);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_8CDEDC6F(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_22B0D7D8);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_22B0D7D8(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_CA8CDF32);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_CA8CDF32(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_FCABD0E7);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_FCABD0E7(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_EE10AEF1);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_EE10AEF1(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_D99BEC81);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_D99BEC81(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_4D4805AF);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_4D4805AF(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_28F8DE83);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_28F8DE83(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_B1F587EF);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_B1F587EF(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_8C1ED07B);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_8C1ED07B(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_04EF78CD);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_04EF78CD(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_75A553A2);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_75A553A2(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_F4404EAF);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_F4404EAF(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_D63D4561);
+#endif
 
+#if FW_VERSION == 201
+void scePaf_D63D4561(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_81667058);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+void scePaf_81667058(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_149CDEB9);
+#endif
+
+#if FW_VERSION == 201
+void scePaf_149CDEB9(void) {
+
+}
+
+void scePaf_62081F34(void) {
+
+}
+
+void scePaf_BECD1827(void) {
+
+}
+
+void scePaf_A8711520(void) {
+
+}
+
+void scePaf_FCDD55E3(void) {
+
+}
+
+void scePaf_2EABF548(void) {
+
+}
+
+void scePaf_50F72192(void) {
+
+}
+
+void scePaf_73712598(void) {
+
+}
+
+void scePaf_8B439A23(void) {
+
+}
+
+void scePaf_7435C5D5(void) {
+
+}
+
+void scePaf_CC103AD2(void) {
+
+}
+
+void scePaf_566BC690(void) {
+
+}
+
+void scePaf_68569AAC(void) {
+
+}
+
+void scePaf_76491EEA(void) {
+
+}
+
+void scePaf_7771BC86(void) {
+
+}
+
+void scePaf_06BB62B7(void) {
+
+}
+
+void scePaf_30F5E7DF(void) {
+
+}
+
+void scePaf_97B9C21E(void) {
+
+}
+
+void scePaf_D16E5935(void) {
+
+}
+
+void scePaf_9D496842(void) {
+
+}
+
+void scePaf_2750CF68(void) {
+
+}
+
+void scePaf_79E57CAF(void) {
+
+}
+
+void scePaf_9DED6118(void) {
+
+}
+
+void scePaf_997D2809(void) {
+
+}
+
+void scePaf_7D83FB20(void) {
+
+}
+
+void scePaf_E1242646(void) {
+
+}
+
+void scePaf_DC7F84BA(void) {
+
+}
+
+void scePaf_0F3527DD(void) {
+
+}
+
+void scePaf_10C1DB70(void) {
+
+}
+
+void scePaf_39B36025(void) {
+
+}
+
+void scePaf_01C2FC36(void) {
+
+}
+
+void scePaf_17308FC9(void) {
+
+}
+
+void scePaf_F3967AF5(void) {
+
+}
+
+void scePaf_34C973B6(void) {
+
+}
+
+void scePaf_4C8C2E25(void) {
+
+}
+
+void scePaf_81FD71A9(void) {
+
+}
+
+void scePaf_BBBF145C(void) {
+
+}
+
+void scePaf_B52E43FB(void) {
+
+}
+
+void scePaf_95C97571(void) {
+
+}
+
+void scePaf_F273FE50(void) {
+
+}
+
+void scePaf_AD7A45F9(void) {
+
+}
+
+void scePaf_67C7567E(void) {
+
+}
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_56F4D69F);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_D7E925A1);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_296ED0EF);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_7DDE0658);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_CC3CFABF);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_D2C94856);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_EF346632);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_79293604);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_AECF91A9);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_3342C5F5);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_48B5C1C0);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_D188831A);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_2D08CA09);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_55C7628A);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_A9CE8FBB);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_D6F088EF);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_F2E5FDEB);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_6E3E2085);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_6676FAA6);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_7D9A4824);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_D8739C4C);
+
+void scePaf_34C7D69A(void) {
+
+}
+
+void scePaf_CDB85442(void) {
+
+}
+
+void scePaf_DFD3E855(void) {
+
+}
+
+void scePaf_2AA80564(void) {
+
+}
+
+void scePaf_6BAC756B(void) {
+
+}
+
+void scePaf_3A844B7B(void) {
+
+}
+
+void scePaf_9B8CBC5F(void) {
+
+}
+
+void scePaf_BE5B0791(void) {
+
+}
+
+void scePaf_FCD816FA(void) {
+
+}
+
+void scePaf_4D5E7984(void) {
+
+}
+
+void scePaf_548AA4E7(void) {
+
+}
+
+void scePaf_21A0C6E0(void) {
+
+}
+
+void scePaf_C01BF169(void) {
+
+}
+
+void scePaf_AD1721B8(void) {
+
+}
+
+void scePaf_910BCFE1(void) {
+
+}
+
+void scePaf_75DBA857(void) {
+
+}
+
+void scePaf_849ED670(void) {
+
+}
+
+void scePaf_5148EFE2(void) {
+
+}
+
+void scePaf_D36F3AAA(void) {
+
+}
+
+void scePaf_1A468B86(void) {
+
+}
+
+void scePaf_8E757709(void) {
+
+}
+
+void scePaf_DD79627E(void) {
+
+}
+
+void scePaf_7BBD70F0(void) {
+
+}
+
+void scePaf_DFFE9ED6(void) {
+
+}
+
+void scePaf_C07624F0(void) {
+
+}
+
+void scePaf_AAE8A6B6(void) {
+
+}
+
+void scePaf_752F182C(void) {
+
+}
+
+void scePaf_81817B66(void) {
+
+}
+
+void scePaf_DF58706C(void) {
+
+}
+
+void scePaf_52CF8D80(void) {
+
+}
+
+void scePaf_F3397557(void) {
+
+}
+
+void scePaf_E6134C53(void) {
+
+}
+
+void scePaf_C1579C1D(void) {
+
+}
+
+void scePaf_ED2DF238(void) {
+
+}
+
+void scePaf_66E3AAA9(void) {
+
+}
+
+void scePaf_CEFBDE33(void) {
+
+}
+
+void scePaf_0880B827(void) {
+
+}
+
+void scePaf_1475F1EB(void) {
+
+}
+
+void scePaf_DFB24D02(void) {
+
+}
+
+void scePaf_39565433(void) {
+
+}
+
+void scePaf_14BEF129(void) {
+
+}
+
+void scePaf_D6E69FCB(void) {
+
+}
+
+void scePaf_836A675D(void) {
+
+}
+
+void scePaf_5335AE79(void) {
+
+}
+
+void scePaf_F0885EDC(void) {
+
+}
+
+void scePaf_2AFA99B1(void) {
+
+}
+
+void scePaf_8424D860(void) {
+
+}
+
+void scePaf_05026B26(void) {
+
+}
+
+void scePaf_877AD2FA(void) {
+
+}
+
+void scePaf_D9D3EEBA(void) {
+
+}
+
+void scePaf_EB5BDCE1(void) {
+
+}
+
+void scePaf_C904DA17(void) {
+
+}
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_78192717);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_62081F34);
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_BECD1827);
@@ -122,7 +748,9 @@ INCLUDE_ASM("nonmatchings/pafmini", scePaf_D16E5935);
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_9D496842);
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_2750CF68);
-#else
+#endif
+
+#if FW_VERSION == 282
 void scePaf_C6F44EF9(void) {
 }
 
@@ -627,6 +1255,24 @@ void acosf(void) {
 
 INCLUDE_ASM("nonmatchings/pafmini", printf);
 
+#if FW_VERSION == 201
+void strlen(void) {
+    scePaf_CA79D58B();
+}
+
+void strcpy(void) {
+    scePaf_980228BA();
+}
+
+void strncpy(void) {
+    scePaf_FF2F98C6();
+}
+
+void rand(void) {
+    scePaf_4370175A();
+}
+#endif
+
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", func_00000444);
 #else
@@ -681,7 +1327,18 @@ INCLUDE_ASM("nonmatchings/pafmini", scePaf_5D786CDD);
 INCLUDE_ASM("nonmatchings/pafmini", func_00001118);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+s32 func_00001118(struct Unk_func_00001118_0 *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = scePaf_B7E6052B(0x1EC);
+    func_0000355C(temp_v0, arg0->unk8);
+    arg0->unk4 = temp_v0;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00001118(struct Unk_func_00001118_0 *arg0) {
     s32 temp_v0;
 
@@ -954,9 +1611,17 @@ void scePaf_D4FAE7D0(s32 arg0) {
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", func_00002990);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pafmini", func_0000355C);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", func_00002F4C);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", func_00003D4C);
 #else
 INCLUDE_ASM("nonmatchings/pafmini", func_00003400);
@@ -1008,12 +1673,12 @@ INCLUDE_ASM("nonmatchings/pafmini", scePaf_1811AD32);
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_F609FA81);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 201
 void scePaf_F609FA81(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *sp0;
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x54);
+    temp_v0 = arg0->unk58;
     if (temp_v0 == 0) {
 
     } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
@@ -1022,12 +1687,12 @@ void scePaf_F609FA81(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s32 arg2, s32
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void scePaf_F609FA81(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *sp0;
     s32 temp_v0;
 
-    temp_v0 = arg0->unk58;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x54);
     if (temp_v0 == 0) {
 
     } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
@@ -1050,12 +1715,12 @@ INCLUDE_ASM("nonmatchings/pafmini", scePaf_D05C226F);
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_3481F595);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 201
 void scePaf_3481F595(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
     void *sp0;
     s32 temp_v0;
 
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x54);
+    temp_v0 = arg0->unk58;
     if (temp_v0 == 0) {
 
     } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
@@ -1064,12 +1729,12 @@ void scePaf_3481F595(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void scePaf_3481F595(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
     void *sp0;
     s32 temp_v0;
 
-    temp_v0 = arg0->unk58;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x54);
     if (temp_v0 == 0) {
 
     } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
@@ -1086,21 +1751,7 @@ INCLUDE_ASM("nonmatchings/pafmini", scePaf_5EBC648F);
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_CAF05F1D);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-void scePaf_CAF05F1D(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
-    void *sp0;
-    s32 temp_v0;
-
-    temp_v0 = M2C_FIELD(arg0, s32 *, 0x54);
-    if (temp_v0 == 0) {
-
-    } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
-        scePaf_5EBC648F((s32) arg0, sp0);
-    }
-}
-#endif
-
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 void scePaf_CAF05F1D(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
     void *sp0;
     s32 temp_v0;
@@ -1112,20 +1763,10 @@ void scePaf_CAF05F1D(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
         scePaf_5EBC648F((s32) arg0, sp0);
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pafmini", func_00004EC0);
 #endif
 
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_7E8C08D8);
-#endif
-
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_5470B915);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
-void scePaf_5470B915(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
+#if FW_VERSION >= 150 && FW_VERSION < 201
+void scePaf_CAF05F1D(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
     void *sp0;
     s32 temp_v0;
 
@@ -1133,12 +1774,22 @@ void scePaf_5470B915(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
     if (temp_v0 == 0) {
 
     } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
-        func_00004EC0((s32) arg0, sp0);
+        scePaf_5EBC648F((s32) arg0, sp0);
     }
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/pafmini", func_00004EC0);
+#else
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_7E8C08D8);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_5470B915);
+#endif
+
+#if FW_VERSION >= 201
 void scePaf_5470B915(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
     void *sp0;
     s32 temp_v0;
@@ -1148,6 +1799,20 @@ void scePaf_5470B915(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
 
     } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
         scePaf_7E8C08D8((s32) arg0, sp0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+void scePaf_5470B915(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
+    void *sp0;
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x54);
+    if (temp_v0 == 0) {
+
+    } else if (scePaf_602EB0CE(temp_v0, arg1, &sp0) == 0) {
+        func_00004EC0((s32) arg0, sp0);
     }
 }
 #endif
@@ -1184,6 +1849,10 @@ INCLUDE_RODATA("nonmatchings/pafmini", D_000FD62C);
 INCLUDE_RODATA("nonmatchings/pafmini", D_000FD634);
 #endif
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/pafmini", D_000CE51C);
+#endif
+
 #if FW_VERSION == 152
 INCLUDE_RODATA("nonmatchings/pafmini", D_000EAE5C);
 #endif
@@ -1210,7 +1879,7 @@ INCLUDE_RODATA("nonmatchings/pafmini", D_000D17BC);
 
 INCLUDE_RODATA("nonmatchings/pafmini", D_000D17C0);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/pafmini", D_000FD6D4);
 
 INCLUDE_RODATA("nonmatchings/pafmini", D_000FD6E4);
@@ -1264,6 +1933,10 @@ INCLUDE_RODATA("nonmatchings/pafmini", D_000D17F0);
 
 INCLUDE_RODATA("nonmatchings/pafmini", D_000D1810);
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/pafmini", D_000CE5E0);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/pafmini", D_000D1814);
 #endif
@@ -1314,11 +1987,33 @@ INCLUDE_ASM("nonmatchings/pafmini", scePaf_8117E6C8);
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_BBDE1C17);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+void func_00008E14(void) {
+
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", func_00008DCC);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", func_00008E10);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pafmini", func_00008E84);
+
+INCLUDE_ASM("nonmatchings/pafmini", func_00008ECC);
+
+INCLUDE_ASM("nonmatchings/pafmini", func_00008F14);
+
+INCLUDE_ASM("nonmatchings/pafmini", func_00008F5C);
+
+INCLUDE_ASM("nonmatchings/pafmini", func_00008F64);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", func_00008E78);
 
 INCLUDE_ASM("nonmatchings/pafmini", func_000090C0);
@@ -1328,7 +2023,9 @@ INCLUDE_ASM("nonmatchings/pafmini", func_00009268);
 INCLUDE_ASM("nonmatchings/pafmini", func_00009350);
 
 INCLUDE_ASM("nonmatchings/pafmini", func_00009F68);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_00008D54(void) {
 }
 
@@ -1351,7 +2048,7 @@ s32 func_00008EC0(void) {
 
 INCLUDE_ASM("nonmatchings/pafmini", func_00008EC8);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", func_0000A164);
 #endif
 
@@ -1363,9 +2060,17 @@ INCLUDE_ASM("nonmatchings/pafmini", func_00009234);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_BB3CBD19);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pafmini", func_00009534_v201);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", func_0000A590);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_00009424(struct Unk_func_00009424_0 *arg0, s32 arg1) {
     s32 var_a1;
 
@@ -1389,10 +2094,10 @@ void func_00009554(void) {
     scePaf_545FE2DA();
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pafmini", func_0000A614);
-#else
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_4847A314);
+#else
+INCLUDE_ASM("nonmatchings/pafmini", func_0000A614);
 #endif
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_DC2CA0F7);
@@ -1409,7 +2114,22 @@ INCLUDE_ASM("nonmatchings/pafmini", func_00009D9C);
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_49CE42F7);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+void scePaf_49CE42F7(struct Unk_scePaf_49CE42F7_0 *arg0) {
+    s32 temp_v0;
+
+    if (M2C_FIELD(arg0, u8 *, 0x1D8) == 0) {
+
+    } else {
+        temp_v0 = scePaf_D7215544();
+        if (temp_v0 != 0) {
+            func_00009D9C(arg0, temp_v0);
+        }
+    }
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void scePaf_49CE42F7(struct Unk_scePaf_49CE42F7_0 *arg0) {
     s32 temp_v0;
 
@@ -1463,7 +2183,7 @@ INCLUDE_ASM("nonmatchings/pafmini", scePaf_CE21D21F);
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_6CE39EF8);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_3067FC77);
 #endif
 
@@ -1503,7 +2223,16 @@ INCLUDE_ASM("nonmatchings/pafmini", func_0000A634);
 INCLUDE_ASM("nonmatchings/pafmini", func_0000A6D0);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+void func_0000A6D0(struct Unk_func_0000A6D0_0 *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x1E8) == 0) {
+        func_00011C1C(arg0->unk64);
+        arg0->unk64 = 0;
+    }
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0000A6D0(struct Unk_func_0000A6D0_0 *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x1E4) == 0) {
         func_00011C1C(M2C_FIELD(arg0, s32 *, 0x60));
@@ -1668,9 +2397,11 @@ s32 *func_0000BBC0(s32 *arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", func_0000BBF8);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini", func_0000AB20);
 #endif
 
@@ -1770,9 +2501,11 @@ void func_0000B2F0(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/pafmini", func_0000B334);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", func_0000C2F0);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", func_0000B38C);
 #else
 void func_0000B38C(s32 arg0, s32 arg1) {
@@ -1833,9 +2566,13 @@ INCLUDE_ASM("nonmatchings/pafmini", func_0000C74C);
 INCLUDE_ASM("nonmatchings/pafmini", func_0000C7F8);
 
 INCLUDE_ASM("nonmatchings/pafmini", func_0000C964);
+#endif
 
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", func_0000CAB4);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", func_0000CC38);
 
 INCLUDE_ASM("nonmatchings/pafmini", func_0000CDA4);
@@ -1945,9 +2682,13 @@ INCLUDE_ASM("nonmatchings/pafmini", func_0000D35C);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", func_0000D3CC);
+#endif
 
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini", func_0000D5B0);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", func_0000D724);
 
 INCLUDE_ASM("nonmatchings/pafmini", func_0000D794);

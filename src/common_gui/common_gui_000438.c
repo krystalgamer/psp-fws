@@ -226,11 +226,21 @@ void sceVshCommonGui_93107A60(void) {
 void sceVshCommonGui_B45ED019(void) {
     func_000005CC((s32) "msgsystem_cancel");
 }
+#endif
 
+#if FW_VERSION == 300
+void sceVshCommonGui_C00B308F(void) {
+    func_000005CC((s32) "msgsystem_ok");
+}
+#endif
+
+#if FW_VERSION >= 260 && FW_VERSION < 300
 void func_000006DC(void) {
     func_000005CC((s32) "msgsystem_ok");
 }
-#else
+#endif
+
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_473110B6);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_CC7BFDB1);
@@ -242,7 +252,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_5C161337);
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_7DB9C54A);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void sceVshCommonGui_E9B8D6AB(void) {
     func_000005CC((s32) "msgshare_opt_edit");
 }

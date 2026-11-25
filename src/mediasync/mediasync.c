@@ -117,7 +117,7 @@ INCLUDE_ASM("nonmatchings/mediasync", func_00004C40);
 INCLUDE_ASM("nonmatchings/mediasync", func_00000124);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediasync", func_0000014C);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_000001E4);
@@ -213,11 +213,11 @@ INCLUDE_ASM("nonmatchings/mediasync", func_00005750);
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006DF0);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION == 282
+#if FW_VERSION < 201 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006E10);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediasync", func_00005918);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_00005BD0);
@@ -257,7 +257,7 @@ INCLUDE_ASM("nonmatchings/mediasync", func_0000670C);
 INCLUDE_ASM("nonmatchings/mediasync", func_0000687C);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION == 282
+#if FW_VERSION < 201 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006E38);
 #endif
 

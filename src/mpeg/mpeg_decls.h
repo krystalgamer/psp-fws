@@ -114,6 +114,7 @@ s32 func_0000717C(void);
 s32 func_0000718C(s32 arg0);
 s32 func_000071E0(s32 arg0);
 s32 func_000072FC(struct Unk_func_000072FC_0 *arg0, s32 arg1);
+s32 func_00007390(void *arg0, s32 arg1);
 s32 func_000073E8(s32, s32, s32);
 void func_00007590(void);
 s32 func_000075C8(s32 arg0, s32 arg1);
@@ -135,6 +136,7 @@ s32 sceKernelSignalSema(u32, s32);
 s32 sceKernelWaitSema(u32, s32, void *);
 s32 sceVideocodec_17CF7D2C(void *, M2C_UNK);
 M2C_UNK sceVideocodec_4F160BF4(s32);
+s32 sceVideocodec_893B32B1(void *, M2C_UNK);
 s32 sceVideocodec_A2F0564E(s32, M2C_UNK);
 s32 sceVideocodec_DBA273FA(s32, M2C_UNK);
 

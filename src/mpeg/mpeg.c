@@ -46,7 +46,7 @@ void func_00000FB4(s32 arg0, s32 arg1) {
     func_00000B54(arg0, 0, arg1);
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00000FD4(void) {
     return 0x80618006;
 }
@@ -476,13 +476,25 @@ s32 func_000071E0(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mpeg", func_00007234);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_000072FC(struct Unk_func_000072FC_0 *arg0, s32 arg1) {
     s32 temp_s1;
 
     func_00006D70(D_000084C0);
     arg0->unk54 = arg1;
     temp_s1 = sceVideocodec_17CF7D2C(arg0, 0);
+    func_00006E00(D_000084C0);
+    return temp_s1;
+}
+#endif
+
+#if FW_VERSION == 300
+s32 func_00007390(void *arg0, s32 arg1) {
+    s32 temp_s1;
+
+    func_00006D70(D_000084C0);
+    M2C_FIELD(arg0, s32 *, 0x58) = arg1;
+    temp_s1 = sceVideocodec_893B32B1(arg0, 0);
     func_00006E00(D_000084C0);
     return temp_s1;
 }
@@ -586,7 +598,11 @@ INCLUDE_ASM("nonmatchings/mpeg", func_00007B58);
 
 INCLUDE_RODATA("nonmatchings/mpeg", D_00008100);
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/mpeg", D_000081BC);
+#else
 INCLUDE_RODATA("nonmatchings/mpeg", D_00008110);
+#endif
 
 INCLUDE_RODATA("nonmatchings/mpeg", D_00008190);
 

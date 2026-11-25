@@ -264,7 +264,11 @@ s32 func_00001208(void) {
 }
 #endif
 
-#if FW_VERSION >= 260
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/init", func_000013A8);
+#endif
+
+#if FW_VERSION >= 260 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/init", func_00001750);
 #endif
 

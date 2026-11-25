@@ -82,7 +82,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_00000D30);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00000E00);
 #endif
 
-#if FW_VERSION < 250 || FW_VERSION == 282
+#if FW_VERSION < 250 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00000E84);
 #endif
 
@@ -105,7 +105,7 @@ s32 func_00001288(void *arg0) {
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00001140);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00000F1C);
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00000FD8);
@@ -387,7 +387,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002918);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000029CC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_0000150C);
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_0000153C);
@@ -655,7 +655,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_00003478);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000035A4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/libatrac3plus", D_00003820);
 
 INCLUDE_RODATA("nonmatchings/libatrac3plus", D_00003830);

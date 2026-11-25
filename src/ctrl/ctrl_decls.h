@@ -42,6 +42,7 @@ s32 func_00001560(void);
 s32 func_0000156C(void);
 s32 func_00001578(void);
 s32 func_000015C0(void);
+s32 func_00001600(void);
 s32 func_0000161C(s32, s32, s32);
 s32 module_reboot_before(void);
 s32 module_start(void);

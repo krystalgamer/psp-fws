@@ -11,6 +11,7 @@ INCLUDE_ASM("nonmatchings/usb", sceUsb_driver_E20B23A6);
 INCLUDE_ASM("nonmatchings/usb", func_00000090);
 #endif
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_00009520);
 
 INCLUDE_RODATA("nonmatchings/usb", D_00009550);
@@ -26,8 +27,13 @@ INCLUDE_RODATA("nonmatchings/usb", D_00009608);
 INCLUDE_RODATA("nonmatchings/usb", D_00009630);
 
 INCLUDE_RODATA("nonmatchings/usb", D_00009664);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbDeactivate);
+
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_EDA8A020);
+#endif
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/usb", sceUsbWaitState);
@@ -39,15 +45,27 @@ INCLUDE_ASM("nonmatchings/usb", func_00000688);
 
 INCLUDE_ASM("nonmatchings/usb", func_000006D4);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/usb", func_0000077C);
+#else
 INCLUDE_ASM("nonmatchings/usb", func_0000073C);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", func_000009AC);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/usb", func_00000A58);
+
+INCLUDE_ASM("nonmatchings/usb", func_00000AF4);
+#else
 INCLUDE_ASM("nonmatchings/usb", func_00000A38);
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/usb", func_00000C90);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/usb", func_00000B14);
 #endif
 
@@ -77,7 +95,7 @@ INCLUDE_ASM("nonmatchings/usb", func_00001E20);
 
 INCLUDE_ASM("nonmatchings/usb", func_00001FC4);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/usb", func_00002214);
 
 INCLUDE_ASM("nonmatchings/usb", func_000022AC);
@@ -93,10 +111,31 @@ INCLUDE_ASM("nonmatchings/usb", func_000026E8);
 
 INCLUDE_ASM("nonmatchings/usb", func_00002808);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/usb", func_00002854);
+
+INCLUDE_ASM("nonmatchings/usb", func_00002928);
+
+INCLUDE_ASM("nonmatchings/usb", module_stop);
+
+s32 syslib_ADF12745(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 2:
+        sceKernelWaitSema(D_000094F0, 1, NULL);
+        break;
+    case 1:
+        sceKernelSignalSema(D_000094F0, 1);
+        break;
+    }
+    return 0;
+}
+#else
 INCLUDE_RODATA("nonmatchings/usb", D_00009A20);
+#endif
 
 INCLUDE_RODATA("nonmatchings/usb", D_00009A3C);
 
+#if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/usb", func_0000293C);
 
 INCLUDE_RODATA("nonmatchings/usb", D_00009A6C);
@@ -106,6 +145,7 @@ INCLUDE_ASM("nonmatchings/usb", func_00002A48);
 INCLUDE_ASM("nonmatchings/usb", module_stop);
 
 INCLUDE_RODATA("nonmatchings/usb", D_00009B28);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", module_reboot_before);
 
@@ -121,7 +161,7 @@ s32 sceUsbWaitStateCB(u32 arg0, s32 arg1, void *arg2) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 sceUsbActivate(u32 arg0) {
     s32 temp_v0;
     u32 temp_s0;
@@ -151,6 +191,23 @@ INCLUDE_ASM("nonmatchings/usb", func_00002E80);
 
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/usb", module_start);
+#endif
+
+#if FW_VERSION == 300
+s32 module_start(void) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_v0 = sceKernelCreateSema(&D_00009A3C, 1U, 1, 1, NULL);
+    var_v0 = 1;
+    if (temp_v0 >= 0) {
+        D_000094F0 = temp_v0;
+        func_00005CC0();
+        func_00008A30();
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
@@ -262,7 +319,9 @@ s32 module_start(void) {
     }
     return var_v0;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/usb", func_00002F64);
 
 INCLUDE_ASM("nonmatchings/usb", func_00003164);
@@ -270,9 +329,20 @@ INCLUDE_ASM("nonmatchings/usb", func_00003164);
 INCLUDE_ASM("nonmatchings/usb", func_00003258);
 #endif
 
+#if FW_VERSION == 300
+void func_00003198(void) {
+    sceSysreg_driver_7234EA80(9);
+    sceSysreg_driver_3E216017();
+    func_00008AA8();
+    func_00008ADC();
+}
+#endif
+
 INCLUDE_ASM("nonmatchings/usb", func_000033F8);
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_00009D20);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", func_00003490);
 
@@ -280,7 +350,7 @@ INCLUDE_ASM("nonmatchings/usb", func_00003490);
 INCLUDE_ASM("nonmatchings/usb", func_000034D8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/usb", func_000036A0);
 #endif
 
@@ -332,7 +402,7 @@ INCLUDE_ASM("nonmatchings/usb", func_00004908);
 INCLUDE_ASM("nonmatchings/usb", func_000047AC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/usb", func_000049D0);
 #endif
 
@@ -346,7 +416,9 @@ INCLUDE_ASM("nonmatchings/usb", func_0000526C);
 
 INCLUDE_ASM("nonmatchings/usb", func_00005400);
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_00009FE8);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", func_0000574C);
 
@@ -354,6 +426,14 @@ INCLUDE_ASM("nonmatchings/usb", func_0000574C);
 INCLUDE_ASM("nonmatchings/usb", func_00005870);
 #else
 INCLUDE_ASM("nonmatchings/usb", func_00005AB0);
+#endif
+
+#if FW_VERSION == 300
+void func_0000581C(void) {
+    func_00008B28();
+    sceSysreg_driver_BFBABB63();
+    sceSysreg_driver_38EC3281(9);
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/usb", func_00005B1C);
@@ -364,7 +444,9 @@ INCLUDE_ASM("nonmatchings/usb", func_00005914);
 
 INCLUDE_ASM("nonmatchings/usb", func_00005B68);
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_0000A174);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_951A24CC);
 
@@ -454,7 +536,7 @@ s32 func_00005B10(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00005C38(void) {
     sceKernelPowerLock(0);
     InterruptManagerForKernel_D774BA45(0x3B);
@@ -483,6 +565,10 @@ s32 func_00005CC8(void) {
 #endif
 
 INCLUDE_ASM("nonmatchings/usb", func_00005CD0);
+
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/usb", D_00009FE8);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", func_00005F58);
 
@@ -532,7 +618,7 @@ INCLUDE_ASM("nonmatchings/usb", func_00006B6C);
 INCLUDE_ASM("nonmatchings/usb", func_00006B4C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/usb", func_00006010);
 
 INCLUDE_ASM("nonmatchings/usb", func_00006358);
@@ -574,7 +660,17 @@ INCLUDE_ASM("nonmatchings/usb", func_0000736C);
 INCLUDE_ASM("nonmatchings/usb", func_00007414);
 #endif
 
+#if FW_VERSION == 300
+void func_000071AC(void) {
+    sceSysEventForKernel_CD9E4BB5(&D_00009554);
+}
+
+s32 func_00007504(void) {
+    return sceSysEventForKernel_D7D3FDCD(&D_00009554);
+}
+#else
 INCLUDE_RODATA("nonmatchings/usb", D_0000A3E4);
+#endif
 
 #if FW_VERSION == 271
 s32 func_0000751C(void) {
@@ -730,7 +826,9 @@ s32 func_000075BC(s32 arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/usb", func_0000760C);
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_000074B4(void) {
     s32 temp_v0;
 
@@ -754,7 +852,9 @@ s32 func_00007504(void) {
     }
     return temp_v0;
 }
+#endif
 
+#if FW_VERSION >= 282
 s32 func_00007554(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x1000E:
@@ -772,11 +872,13 @@ INCLUDE_ASM("nonmatchings/usb", func_000075A4);
 
 INCLUDE_ASM("nonmatchings/usb", func_000076B4);
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_0000A46C);
 
 INCLUDE_RODATA("nonmatchings/usb", D_0000A48C);
 
 INCLUDE_RODATA("nonmatchings/usb", D_0000A4C0);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbStart);
 
@@ -796,7 +898,7 @@ INCLUDE_RODATA("nonmatchings/usb", D_0000A024);
 INCLUDE_RODATA("nonmatchings/usb", D_0000A050);
 #endif
 
-#if FW_VERSION != 271
+#if FW_VERSION < 271 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/usb", D_0000A500);
 #endif
 
@@ -810,17 +912,21 @@ INCLUDE_RODATA("nonmatchings/usb", D_0000A54C);
 INCLUDE_RODATA("nonmatchings/usb", D_0000A578);
 #endif
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_0000A5A4);
 
 INCLUDE_RODATA("nonmatchings/usb", D_0000A5D4);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbStop);
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbGetDrvList);
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_0000A690);
 
 INCLUDE_RODATA("nonmatchings/usb", D_0000A6B0);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbGetDrvState);
 
@@ -882,6 +988,7 @@ void *func_00008318(struct Unk_func_00008318_0 *arg0, struct Unk_func_00008318_1
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_B1644BE7);
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_0000A7C8);
 
 INCLUDE_RODATA("nonmatchings/usb", D_0000A7FC);
@@ -889,12 +996,19 @@ INCLUDE_RODATA("nonmatchings/usb", D_0000A7FC);
 INCLUDE_RODATA("nonmatchings/usb", D_0000A82C);
 
 INCLUDE_RODATA("nonmatchings/usb", D_0000A86C);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_C1E2A540);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/usb", func_0000800C);
+
+INCLUDE_ASM("nonmatchings/usb", func_00008234);
+#else
 INCLUDE_ASM("nonmatchings/usb", func_00008634);
 
 INCLUDE_ASM("nonmatchings/usb", func_000088B0);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00008A24(void) {
@@ -910,14 +1024,20 @@ s32 func_00008A24(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00008A30(void) {
     D_0000B440 = 0;
     return 0;
 }
 #endif
 
+#if FW_VERSION == 300
+s32 func_00008318_v300(void) {
+    return (D_0000B440 == 0) ? 0 : -1;
+}
+#else
 INCLUDE_ASM("nonmatchings/usb", func_00008A40);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 void sceUsbBus_driver_FBA2072B(void) {
@@ -965,7 +1085,7 @@ s32 func_00008BFC(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void sceUsbBus_driver_FBA2072B(void) {
     if (D_0000B444 != 0) {
         D_0000B44C = 1;
@@ -995,7 +1115,15 @@ s32 sceUsbBus_driver_48CCE3C1(void) {
 INCLUDE_ASM("nonmatchings/usb", func_00008ADC);
 
 INCLUDE_ASM("nonmatchings/usb", func_00008B28);
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/usb", D_000092A4);
+
+INCLUDE_RODATA("nonmatchings/usb", D_000092AC);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/usb", func_00008B70);
 
 s32 func_00008BD8(void) {

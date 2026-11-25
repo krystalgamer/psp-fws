@@ -140,7 +140,7 @@ INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003B70);
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003BD8);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003C08);
 #endif
 
@@ -156,7 +156,7 @@ INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003CA8);
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003C9C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003CDC);
 #endif
 
@@ -194,7 +194,7 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_000016AC);
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_000016A0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_000016A8);
 #endif
 

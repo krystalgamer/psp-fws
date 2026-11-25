@@ -1575,6 +1575,7 @@ extern s32 D_0005F86C;
 extern struct Unk_D_0005F870 *D_0005F870;
 extern s32 D_0005F874;
 extern struct Unk_D_0005F8E8 *D_0005F8E8;
+extern void *D_0005F8EC;
 extern s32 D_0005F8F4;
 extern s32 D_0005F940;
 extern s32 D_0005F9D4;

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00051C5C(struct Unk_func_00051C5C_0 *arg0) {
     arg0->unk0 = &D_0005DAA0;
     arg0->unk2C = &D_0005DAD0;
@@ -53,7 +53,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_00051E70);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_0003B94C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_00052014);
 #endif
 

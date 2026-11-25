@@ -1,7 +1,9 @@
 #include "common.h"
 #include "camera_plugin_decls.h"
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/camera_plugin", func_00000000);
+#endif
 
 INCLUDE_ASM("nonmatchings/camera_plugin", func_00000024);
 
@@ -16,6 +18,23 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("nonmatchings/camera_plugin", func_0000015C);
 
+#if FW_VERSION == 300
+void func_00000180_v300(void) {
+    if ((sceUsbStart(&D_000201FC, 0U, NULL) >= 0) && (sceUsbStart(&D_0002020C, 0U, NULL) >= 0) && (sceUsbStart(&D_00020220, 0U, NULL) >= 0)) {
+        sceUsbStart(&D_00020230, 0U, NULL);
+    }
+}
+
+void func_000001FC(void) {
+    if ((sceUsbStop(&D_00020230, 0U, NULL) >= 0) && (sceUsbStop(&D_00020220, 0U, NULL) >= 0) && (sceUsbStop(&D_0002020C, 0U, NULL) >= 0)) {
+        sceUsbStop(&D_000201FC, 0U, NULL);
+    }
+}
+
+INCLUDE_ASM("nonmatchings/camera_plugin", func_00000278);
+
+INCLUDE_ASM("nonmatchings/camera_plugin", func_000002CC);
+#else
 INCLUDE_RODATA("nonmatchings/camera_plugin", D_00020B5C);
 
 INCLUDE_RODATA("nonmatchings/camera_plugin", D_00020B60);
@@ -93,6 +112,7 @@ INCLUDE_RODATA("nonmatchings/camera_plugin", D_00021328);
 INCLUDE_RODATA("nonmatchings/camera_plugin", D_0002134C);
 
 INCLUDE_RODATA("nonmatchings/camera_plugin", D_00021350);
+#endif
 
 INCLUDE_RODATA("nonmatchings/camera_plugin", D_00021388);
 
@@ -148,12 +168,33 @@ INCLUDE_RODATA("nonmatchings/camera_plugin", D_000215F4);
 
 INCLUDE_RODATA("nonmatchings/camera_plugin", D_0002160C);
 
+#if FW_VERSION == 300
+INCLUDE_RODATA("nonmatchings/camera_plugin", D_000201FC);
+
+INCLUDE_RODATA("nonmatchings/camera_plugin", D_0002020C);
+
+INCLUDE_RODATA("nonmatchings/camera_plugin", D_00020220);
+
+INCLUDE_RODATA("nonmatchings/camera_plugin", D_00020230);
+#endif
+
 INCLUDE_ASM("nonmatchings/camera_plugin", func_00000180);
 
+#if FW_VERSION == 300
+void func_000001D8(void) {
+    func_000019F0();
+    func_000002CC();
+    func_000001FC();
+}
+#else
 void func_000001D8(void) {
     func_000062A8(func_0000CA94());
     func_0000CAD8();
 }
+#endif
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/camera_plugin", func_000003B4);
+#else
 INCLUDE_ASM("nonmatchings/camera_plugin", func_00000204);
-
+#endif

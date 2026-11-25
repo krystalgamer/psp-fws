@@ -3,6 +3,8 @@
   "func_00000318": "void func_00000318(void);",
   "func_0000046C": "M2C_UNK func_0000046C();",
   "func_000009D4": "s32 func_000009D4(void);",
+  "func_00000A04": "void func_00000A04(s32 arg0);",
+  "func_00000A54": "void func_00000A54(s32 arg0);",
   "func_00000C6C": "M2C_UNK func_00000C6C(M2C_UNK);",
   "func_00000EEC": "void func_00000EEC(void);",
   "func_00000F04": "void func_00000F04(void);",
@@ -378,6 +380,8 @@
   "sceVshBridge_2380DC08": "M2C_UNK sceVshBridge_2380DC08(M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK);",
   "sceVshBridge_5BBB35E4": "M2C_UNK sceVshBridge_5BBB35E4();",
   "sceVshCommonGui_1CF884A1": "M2C_UNK sceVshCommonGui_1CF884A1();",
+  "sceVshCommonUtil_0587F20C": "M2C_UNK sceVshCommonUtil_0587F20C(M2C_UNK *, M2C_UNK, s32);",
+  "sceVshCommonUtil_8584376D": "M2C_UNK sceVshCommonUtil_8584376D(M2C_UNK *, s32);",
   "vsh_34DA1B67": "s32 vsh_34DA1B67();",
   "vsh_6286E89D": "M2C_UNK vsh_6286E89D(s32, s32);",
   "vsh_81BBD0D1": "s32 vsh_81BBD0D1(s32, s32);"
@@ -387,6 +391,7 @@
  },
  "vars": {
   "D_0000206C": "extern M2C_UNK D_0000206C;",
+  "D_0000269C": "extern M2C_UNK D_0000269C;",
   "D_0005AF74": "extern s32 D_0005AF74;",
   "D_0005C2D8": "extern s32 D_0005C2D8;",
   "D_0005C2F0": "extern s32 D_0005C2F0;",

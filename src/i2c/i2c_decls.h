@@ -15,6 +15,7 @@ struct D_00001730_s {
 extern s32 D_00001570;
 extern M2C_UNK D_000015B0;
 extern s32 D_000015B8;
+extern s32 D_000016E0_v300;
 extern M2C_UNK D_000016F0;
 extern s32 D_00001718;
 extern struct D_00001730_s D_00001730;
@@ -32,6 +33,7 @@ s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1);
 s32 sceI2c_driver_DB6C4F9B(s32 arg0);
 s32 sceKernelDelayThread(u32);
 s32 sceKernelDeleteEventFlag(s32);
+s32 sceKernelDeleteMutex(s32);
 s32 sceKernelDeleteSema(s32);
 M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);
 M2C_UNK sceSysreg_driver_0436B60F();

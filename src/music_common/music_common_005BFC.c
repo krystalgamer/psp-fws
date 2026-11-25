@@ -24,7 +24,11 @@ void func_00005CC4(struct Unk_func_00005CC4_0 *arg0) {
     arg0->unk8 = 0;
 }
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/music_common_005BFC", func_00006164);
+#else
 INCLUDE_ASM("nonmatchings/music_common_005BFC", func_00005CE4);
+#endif
 
 INCLUDE_ASM("nonmatchings/music_common_005BFC", music_common_28010044);
 

@@ -9,7 +9,7 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_9CE06934);
 INCLUDE_ASM("nonmatchings/power", func_00000174);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", func_00000464);
 #endif
 
@@ -33,7 +33,7 @@ INCLUDE_ASM("nonmatchings/power", func_0000096C);
 INCLUDE_ASM("nonmatchings/power", func_00000994);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", func_00000A3C);
 #endif
 
@@ -89,7 +89,7 @@ s32 scePower_driver_D66EF08D(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 scePower_driver_AD5BB433(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00005F00);
     sceSyscon_driver_E540E532(0, 0);
@@ -157,7 +157,7 @@ u8 scePower_driver_E8685403(void) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 u8 scePower_driver_D7B9C925(void) {
     return D_0000614A;
 }
@@ -219,7 +219,7 @@ INCLUDE_RODATA("nonmatchings/power", D_00003B7C);
 INCLUDE_ASM("nonmatchings/power", func_000008CC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", func_00000E18);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_23C31FFE);
@@ -320,7 +320,7 @@ void scePower_driver_D6D016EF(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 scePower_driver_0CD21B1F(s32 arg0) {
     D_0000618C = arg0 & 3;
     return 0;
@@ -614,7 +614,7 @@ INCLUDE_ASM("nonmatchings/power", func_0000294C);
 INCLUDE_ASM("nonmatchings/power", func_00001BAC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", func_00002FA0);
 #endif
 
@@ -708,7 +708,7 @@ s32 scePower_driver_8762BCE6(s32 *arg0, s32 *arg1) {
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
     if (arg0 != NULL) {
         *arg0 = (s32) D_0000B380;
@@ -720,11 +720,11 @@ s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
 }
 #endif
 
-#if (FW_VERSION >= 150 && FW_VERSION < 250) || FW_VERSION == 282
+#if (FW_VERSION >= 150 && FW_VERSION < 250) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", scePower_driver_DD27F119);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", scePower_driver_75F91FE4);
 
 s32 scePower_driver_06C83A4F(s32 *arg0, s32 *arg1) {
@@ -818,7 +818,7 @@ INCLUDE_ASM("nonmatchings/power", func_00002600);
 INCLUDE_ASM("nonmatchings/power", scePowerIsBatteryCharging);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 scePowerGetCpuClockFrequency(void) {
     return D_0000B358;
 }
@@ -836,8 +836,15 @@ s32 scePowerGetPllClockFrequencyInt(void) {
 }
 
 INCLUDE_ASM("nonmatchings/power", scePowerGetPllClockFrequencyFloat);
+#endif
 
+#if FW_VERSION == 300
 s32 scePowerSetClockFrequency(s32 arg0, s32 arg1, s32 arg2) {
+    if (D_0000B40C == 0) {
+
+    } else {
+        sceKernelDelayThread(0x03938700U);
+    }
     return func_000032EC(arg0, arg1, arg2);
 }
 
@@ -845,6 +852,22 @@ void scePower_driver_A4E93389(s32 arg0, s32 arg1, s32 arg2) {
     func_000032EC(arg0, arg1, arg2);
 }
 
+void scePower_driver_545A7F3C(s32 arg0, s32 arg1, s32 arg2) {
+    func_000032EC(arg0, arg1, arg2);
+}
+#endif
+
+#if FW_VERSION == 282
+s32 scePowerSetClockFrequency(s32 arg0, s32 arg1, s32 arg2) {
+    return func_000032EC(arg0, arg1, arg2);
+}
+
+void scePower_driver_A4E93389(s32 arg0, s32 arg1, s32 arg2) {
+    func_000032EC(arg0, arg1, arg2);
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", func_00003DB8);
 
 INCLUDE_ASM("nonmatchings/power", func_00003E3C);
@@ -858,7 +881,7 @@ INCLUDE_ASM("nonmatchings/power", func_00004548);
 INCLUDE_ASM("nonmatchings/power", scePower_driver_DD3D4DAC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", scePower_driver_733F973B);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_90285886);
@@ -976,7 +999,25 @@ s32 scePower_driver_E8E4E204(void) {
 s32 scePower_driver_B999184C(void) {
     return D_00008FD8;
 }
-#else
+#endif
+
+#if FW_VERSION == 300
+s32 func_00004B54(void) {
+    M2C_UNK *temp_v0;
+    s32 temp_v0_2;
+
+    memset(&D_0000B3AC.unk0, 0, 0xBC);
+    temp_v0 = "ScePowerBattery";
+    D_0000B3AC.unk28 = -1;
+    D_0000B3AC.unk0 = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
+    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003F14, 0x40, 0x800U, 0x100001U, NULL);
+    D_0000B3AC.unk4 = temp_v0_2;
+    sceKernelStartThread(temp_v0_2, 0U, NULL);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_00004B54(void) {
     M2C_UNK *temp_v0;
     s32 temp_v0_2;
@@ -990,7 +1031,9 @@ s32 func_00004B54(void) {
     sceKernelStartThread(temp_v0_2, 0U, NULL);
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282
 s32 func_00004BF8(void) {
     sceKernelSetEventFlag(D_0000B3AC.unk0, 0x80000000U);
     sceKernelWaitThreadEnd(D_0000B3AC.unk4, NULL);
@@ -1011,9 +1054,25 @@ s32 func_00004C6C(void) {
 }
 
 INCLUDE_ASM("nonmatchings/power", func_00004C7C);
+#endif
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/power", scePower_driver_27F3292C);
+#endif
 
+#if FW_VERSION == 300
+s32 scePower_driver_27F3292C(void) {
+    s32 temp_s1;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    sceKernelSetEventFlag(D_0000B3AC.unk0, 0x10000000U);
+    sceKernelClearEventFlag(D_0000B3AC.unk0, 0xEFFFFFFFU);
+    sceKernelCpuResumeIntr(temp_s1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 s32 scePower_driver_E8E4E204(void) {
     return D_0000B3B4;
 }
@@ -1072,7 +1131,7 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_28E12023);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_483CE86B);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 scePower_driver_23436A4A(void) {
     return 0x802B0010;
 }

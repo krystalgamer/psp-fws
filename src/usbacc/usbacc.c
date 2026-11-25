@@ -30,9 +30,11 @@ INCLUDE_RODATA("nonmatchings/usbacc", D_00000E34);
 
 INCLUDE_RODATA("nonmatchings/usbacc", D_00000E58);
 
+#if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/usbacc", func_0000050C);
 
 INCLUDE_RODATA("nonmatchings/usbacc", D_00000EB0);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbacc", sceUsbAcc_internal_2E251404);
 
@@ -41,6 +43,10 @@ INCLUDE_ASM("nonmatchings/usbacc", sceUsbAcc_internal_18B04C82);
 INCLUDE_ASM("nonmatchings/usbacc", module_start);
 
 INCLUDE_ASM("nonmatchings/usbacc", module_stop);
+
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/usbacc", func_00000664);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbacc", func_00000728);
 

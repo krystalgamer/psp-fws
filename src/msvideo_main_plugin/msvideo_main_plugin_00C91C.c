@@ -40,7 +40,11 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C91C", func_0000CF68);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C91C", func_0000DAA0);
 
+#if FW_VERSION == 300
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C91C", func_0000F63C);
+#else
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C91C", func_0000DE38);
+#endif
 
 void func_0000DEE4(struct Unk_vt_func_0000DEE4_arg0 **arg0, s32 arg1) {
     func_0000C220((s32) &D_000B60D4, arg1);
@@ -59,4 +63,3 @@ void func_0000DF84(struct Unk_vt_func_0000DF84_arg0 **arg0, s32 arg1) {
     D_000B60A8 = 4;
     (*arg0)->unk34(arg0, &func_0000E054);
 }
-

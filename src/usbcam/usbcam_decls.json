@@ -27,6 +27,7 @@
   "D_0000BA80": "extern M2C_UNK D_0000BA80;",
   "D_0000BC08": "extern struct D_0000BC08_s D_0000BC08;",
   "D_0000BC1C": "extern s32 D_0000BC1C;",
-  "D_0000BDB8": "extern s32 D_0000BDB8;"
+  "D_0000BDB8": "extern s32 D_0000BDB8;",
+  "D_0000BF10": "extern s32 D_0000BF10;"
  }
 }

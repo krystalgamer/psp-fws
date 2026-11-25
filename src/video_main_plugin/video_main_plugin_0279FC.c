@@ -49,7 +49,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_0279FC", D_00053BC8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_0279FC", func_000282A0);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/video_main_plugin_0279FC", func_00028570);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_0279FC", func_00028618);
