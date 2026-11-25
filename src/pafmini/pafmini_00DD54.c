@@ -3597,11 +3597,11 @@ INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00031854);
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_0003185C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 151
+#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00031884);
 #endif
 
-#if FW_VERSION == 150 || FW_VERSION == 152
+#if FW_VERSION == 150
 s32 func_00031884(void) {
     return 1;
 }

@@ -717,18 +717,7 @@ INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D7548);
 
 INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D7588);
 
-#if FW_VERSION != 152
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0003EA60);
-#else
-void func_0003EA60(void) {
-    s32 temp_v0;
-
-    temp_v0 = scePaf_B7E6052B(0x330);
-    scePaf_84485F54(temp_v0, 0, 0);
-    D_000E1784 = temp_v0;
-    func_00002464(temp_v0 + 4, (s32) "phi_manager");
-}
-#endif
 
 void func_0003EAB0(M2C_UNK **arg0) {
     *arg0 = &D_000D75B0;
