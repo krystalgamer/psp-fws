@@ -4,6 +4,7 @@
   "func_0000019C": "s32 func_0000019C(struct Unk_func_0000019C_0 *arg0, struct Unk_func_0000019C_1 *arg1, s32 arg2);",
   "func_000001CC": "s32 func_000001CC(struct Unk_func_000001CC_0 *arg0, struct Unk_func_000001CC_1 *arg1, s32 arg2);",
   "func_000017C4": "s32 func_000017C4(void);",
+  "func_00001840": "s32 func_00001840(void);",
   "func_00003610": "void func_00003610(void);",
   "func_00003B58": "void func_00003B58(void);"
  },

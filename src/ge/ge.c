@@ -79,7 +79,7 @@ s32 sceGe_driver_9DA4A75F(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", func_00000EA8);
 #endif
 
@@ -148,7 +148,7 @@ void *sceGeEdramGetAddr(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", func_00001410);
 
 INCLUDE_ASM("nonmatchings/ge", func_000016DC);
@@ -223,7 +223,7 @@ INCLUDE_ASM("nonmatchings/ge", func_000025F0);
 INCLUDE_ASM("nonmatchings/ge", func_000028BC);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/ge", D_00005E34);
 #endif
 
@@ -241,7 +241,7 @@ INCLUDE_ASM("nonmatchings/ge", func_000029A8);
 INCLUDE_ASM("nonmatchings/ge", func_00002E78);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/ge", sceGeListDeQueue);
 
 INCLUDE_ASM("nonmatchings/ge", sceGeListUpdateStallAddr);
@@ -268,7 +268,7 @@ s32 func_00004C44(void) {
 INCLUDE_ASM("nonmatchings/ge", func_000021C4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3) {
     return func_00002990((s32) arg0, (s32) arg1, arg2, (s32) arg3, 0) ^ D_00004500;
 }
@@ -280,7 +280,7 @@ s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3) {
     return func_00002990((s32) arg0, (s32) arg1, arg2, (s32) arg3, 1) ^ D_00004500;
 }
@@ -334,7 +334,7 @@ s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3) {
 
 INCLUDE_ASM("nonmatchings/ge", sceGeUnsetCallback);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", func_00002990);
 #endif
 

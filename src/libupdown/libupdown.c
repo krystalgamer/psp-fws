@@ -29,9 +29,15 @@ INCLUDE_ASM("nonmatchings/libupdown", func_000007B4);
 
 INCLUDE_ASM("nonmatchings/libupdown", func_00000A24);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libupdown", func_00000B44);
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/libupdown", func_00000B68);
+#endif
 
+#if FW_VERSION < 151
+INCLUDE_ASM("nonmatchings/libupdown", func_00000B44);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libupdown", func_00000C0C);
 #endif
 
@@ -51,7 +57,7 @@ INCLUDE_ASM("nonmatchings/libupdown", func_00000DF4);
 
 INCLUDE_ASM("nonmatchings/libupdown", func_00000F24);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libupdown", func_00001188);
 #endif
 
@@ -75,7 +81,7 @@ INCLUDE_ASM("nonmatchings/libupdown", func_000018E0);
 INCLUDE_ASM("nonmatchings/libupdown", func_00001888);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/libupdown", D_00003310);
 
 INCLUDE_RODATA("nonmatchings/libupdown", D_00003320);
@@ -185,15 +191,23 @@ INCLUDE_ASM("nonmatchings/libupdown", func_00002568);
 INCLUDE_ASM("nonmatchings/libupdown", func_0000257C);
 
 INCLUDE_ASM("nonmatchings/libupdown", func_00002588);
+#endif
 
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/libupdown", func_000029F0);
+#endif
+
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/libupdown", func_000025C0);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libupdown", func_00002600);
 
 INCLUDE_ASM("nonmatchings/libupdown", func_00002634);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libupdown", func_00002AC0);
 #endif
 

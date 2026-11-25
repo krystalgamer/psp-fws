@@ -5,7 +5,7 @@
 
 INCLUDE_ASM("nonmatchings/display", module_reboot_before);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/display", D_00002968);
 #endif
 
@@ -20,7 +20,7 @@ s32 sceDisplay_driver_7A10289D(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00000658(void) {
     void *temp_s1;
 
@@ -71,7 +71,7 @@ INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_9E3C6DC6);
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_31C4BAA8);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_000013B4(s32 *arg0) {
     return *arg0 & ~3;
 }
@@ -93,7 +93,7 @@ s32 sceDisplaySetHoldMode(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceDisplay_driver_A544C486(s32 arg0) {
     D_00002CE4 = arg0;
     return 0;
@@ -114,7 +114,7 @@ s32 sceDisplayGetFrameBuf(void *arg0, void *arg1, void *arg2, s32 arg3) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceDisplayIsForeground(void) {
     return D_00002CB0 == 2;
 }
@@ -274,7 +274,7 @@ s32 func_000016F4(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00001728(void) {
     sceSysreg_driver_F6D83AD0(1);
     InterruptManagerForKernel_D774BA45(0x1E);
@@ -289,7 +289,7 @@ s32 func_00001728(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", func_00001748);
 #endif
 
@@ -344,7 +344,7 @@ s32 sceDisplayIsVblank(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceDisplay_driver_69B53541(void) {
     return __builtin_allegrex_max(M2C_VFIELD(&D_00003EC8, s32, 0x14) - sceDisplayGetCurrentHcount(), -1);
 }
@@ -360,7 +360,7 @@ s32 sceDisplay_driver_69B53541(void) {
 INCLUDE_RODATA("nonmatchings/display", D_00002060);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankStart);
 #endif
 
@@ -425,7 +425,7 @@ INCLUDE_ASM("nonmatchings/display", func_00002CC0);
 
 INCLUDE_ASM("nonmatchings/display", func_00002CF8);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", func_00001DE4);
 
 INCLUDE_ASM("nonmatchings/display", func_00001F08);

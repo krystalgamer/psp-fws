@@ -181,6 +181,7 @@ s32 func_00001650(void);
 s32 func_0000165C(void);
 s32 func_000017D8(struct Unk_func_000017D8_0 *arg0);
 s32 func_000017E0(struct Unk_func_000017E0_0 *arg0);
+s32 func_00001810(void *arg0);
 s32 func_000018D8(void *arg0);
 s32 func_00001B6C(void *arg0);
 s32 func_00001B74(void *arg0);

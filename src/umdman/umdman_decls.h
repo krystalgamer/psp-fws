@@ -254,6 +254,7 @@ void func_0000A2B8(s32 arg0, s32 arg1);
 s32 func_0000A2EC(void);
 s32 func_0000A30C(void);
 void func_0000A33C(void);
+s32 func_0000A344(void);
 void func_0000A364(void);
 s32 func_0000A364_v150(void);
 s32 func_0000A484(void);

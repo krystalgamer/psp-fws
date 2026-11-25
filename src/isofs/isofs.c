@@ -234,7 +234,7 @@ INCLUDE_RODATA("nonmatchings/isofs", D_000061C8);
 INCLUDE_ASM("nonmatchings/isofs", func_00002DDC);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_00003308);
 #endif
 
@@ -246,7 +246,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_000032D8);
 INCLUDE_ASM("nonmatchings/isofs", func_000034EC);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_0000376C);
 #endif
 
@@ -409,7 +409,7 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00006224);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00002E28);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_00005440);
 #endif
 
@@ -431,7 +431,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_000033F0);
 
 INCLUDE_RODATA("nonmatchings/isofs", D_00006318);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_00005CD4);
 #endif
 
@@ -492,9 +492,17 @@ INCLUDE_ASM("nonmatchings/isofs", func_00003DD4);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00004024);
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_0000664C);
+#if FW_VERSION == 151
+s32 func_00006720(s32 arg0) {
+    return !(arg0 & 0xF02) ? 0 : 0x8001B004;
+}
+#endif
 
+#if FW_VERSION < 151
+INCLUDE_ASM("nonmatchings/isofs", func_0000664C);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_0000666C);
 
 INCLUDE_ASM("nonmatchings/isofs", func_0000692C);
@@ -508,6 +516,10 @@ INCLUDE_ASM("nonmatchings/isofs", func_00006E18);
 INCLUDE_ASM("nonmatchings/isofs", func_00006FCC);
 
 INCLUDE_ASM("nonmatchings/isofs", func_000072C4);
+#endif
+
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/isofs", func_000074FC);
 #endif
 
 #if FW_VERSION == 150
@@ -544,7 +556,7 @@ s32 func_00007700(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", module_reboot_before);
 #endif
 
@@ -584,7 +596,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00007B0C);
 INCLUDE_ASM("nonmatchings/isofs", func_00007E48);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_00007FC0);
 #endif
 
@@ -595,7 +607,7 @@ s32 func_00007FC0(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00007FF0(void) {
     sceUmdMan_driver_4217E7F5(0);
     return 0;

@@ -63,6 +63,7 @@ extern s32 func_00004250;
 M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);
 s32 KDebugForKernel_D636B827();
 s32 func_00000984(s32 arg0);
+s32 func_000009BC(s32 arg0);
 s32 func_00000B34(s32 arg0);
 s32 func_00000B48(s32 arg0);
 M2C_UNK *func_000019D0(void);

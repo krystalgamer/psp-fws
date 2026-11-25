@@ -224,6 +224,7 @@ s32 func_00000554(void);
 void func_000005F4(s32 arg0);
 s32 func_00000680(void);
 s32 func_000006C8(struct Unk_func_000006C8_0 *arg0, struct Unk_func_000006C8_1 *arg1);
+s32 func_000008A0(void);
 s32 func_000008C8(void);
 s32 func_000008D0(s32 arg0, struct Unk_func_000008D0_1 *arg1);
 s32 func_000009F8(void);

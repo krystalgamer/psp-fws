@@ -2,7 +2,7 @@
 #include "common.h"
 #include "libparse_uri_decls.h"
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00000000);
 #else
 INCLUDE_ASM("nonmatchings/libparse_uri", _is_scheme_char);
@@ -22,7 +22,7 @@ INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002798);
 INCLUDE_ASM("nonmatchings/libparse_uri", sceUriBuild);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00000CDC);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00000D1C);
@@ -58,7 +58,7 @@ INCLUDE_RODATA("nonmatchings/libparse_uri", D_000027B4);
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001310);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001490);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001554);
@@ -138,9 +138,15 @@ M2C_UNK *func_00001B98(void) {
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001BA4);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libparse_uri", func_00001860);
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/libparse_uri", func_00001868);
+#endif
 
+#if FW_VERSION < 151
+INCLUDE_ASM("nonmatchings/libparse_uri", func_00001860);
+#endif
+
+#if FW_VERSION < 282
 u8 *func_000018A0(u8 *arg0, u8 *arg1, s32 arg2) {
     s32 var_a2;
     u8 *var_a1;

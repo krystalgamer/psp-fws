@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, libparse_uri]
+      - [0x80, c, libparse_uri]
       - { start: 0x2688, type: prxpad, order: .text }
       - { start: 0x2690, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x2694, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -61,7 +61,7 @@ segments:
       - { start: 0x26BC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x26C0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x26F4, type: rodata, name: resident, linker_section: .rodata.sceResident }
-      - [0x2738, rodata, libparse_uri]
+      - [0x2738, .rodata, libparse_uri]
       - { start: 0x2AA8, type: prxpad, order: .rodata }
   - name: libparse_uri_seg1
     type: code

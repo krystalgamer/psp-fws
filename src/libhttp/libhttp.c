@@ -29,7 +29,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpReadData);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpSendRequest);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateTemplate);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteTemplate);
@@ -51,7 +51,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00000A74);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateConnectionWithURL);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteConnection);
 #endif
 
@@ -59,7 +59,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteConnection);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequest);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequestWithURL);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteRequest);
@@ -117,7 +117,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetAllHeader);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpReadData);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00000DDC);
 
 s32 sceHttpCreateTemplate(void *arg0, s32 arg1, s32 arg2) {
@@ -157,7 +157,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00001C10);
 INCLUDE_ASM("nonmatchings/libhttp", func_00001FC8);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_000173A4);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_000173A8);
@@ -296,7 +296,7 @@ s32 sceHttpCreateConnectionWithURL(s32 arg0, void *arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceHttpDeleteConnection(s32 arg0) {
     return func_0000A370(arg0);
 }
@@ -306,7 +306,7 @@ s32 sceHttpDeleteConnection(s32 arg0) {
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequest);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void sceHttpCreateRequest(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     func_0000992C(arg0, arg1, arg2, arg3, arg4, arg5);
 }
@@ -352,7 +352,9 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000786C);
 INCLUDE_ASM("nonmatchings/libhttp", func_00007918);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00007C90);
+#endif
 
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/libhttp", func_00007D88);
 #endif
 
@@ -380,13 +382,27 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_0000D994);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_000173D0);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/libhttp", func_000014BC);
+#endif
+
+#if FW_VERSION < 151
 INCLUDE_RODATA("nonmatchings/libhttp", D_0000D9A0);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00007F54);
+#endif
 
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/libhttp", func_00001AC0);
+#endif
+
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/libhttp", func_000083B0);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_000088E8);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00008A80);
@@ -394,11 +410,15 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00008A80);
 INCLUDE_ASM("nonmatchings/libhttp", func_00008CB0);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00008D10);
+#endif
 
+#if FW_VERSION < 151
 INCLUDE_RODATA("nonmatchings/libhttp", D_0000DA3C);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_0000DA40);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_0000DA48);
 #else
 INCLUDE_ASM("nonmatchings/libhttp", func_0000213C);
@@ -474,7 +494,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000050F4);
 INCLUDE_ASM("nonmatchings/libhttp", func_00008FB4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_000027A4);
 #endif
 
@@ -488,7 +508,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000092D4);
 INCLUDE_ASM("nonmatchings/libhttp", func_00009460);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00002F44);
 #endif
 
@@ -509,7 +529,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00009A68);
 INCLUDE_ASM("nonmatchings/libhttp", func_00009DA0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00009DA0(void *arg0) {
     s32 temp_a0;
     s32 temp_a0_2;
@@ -557,7 +577,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00009E68);
 INCLUDE_ASM("nonmatchings/libhttp", func_00009EE0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00003908);
 #endif
 
@@ -680,7 +700,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpsEnableOption);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsDisableOption);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00004C44);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00005004);
@@ -734,7 +754,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00009D54);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000B93C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00005778(s32 arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -1085,9 +1105,17 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000BDF0);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BE38);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BE6C);
+#endif
 
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/libhttp", func_0000D1A8);
+#endif
+
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BED4);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BF6C);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000C030);

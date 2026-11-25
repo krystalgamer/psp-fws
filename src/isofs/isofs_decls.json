@@ -34,6 +34,7 @@
   "func_000050CC": "void func_000050CC(void *arg0);",
   "func_00005970": "s32 func_00005970(s32 arg0);",
   "func_000059DC": "s32 func_000059DC(void);",
+  "func_00006720": "s32 func_00006720(s32 arg0);",
   "func_00007700": "s32 func_00007700(void);",
   "func_0000770C": "s32 func_0000770C(void);",
   "func_00007718": "s32 func_00007718(void);",

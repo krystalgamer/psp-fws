@@ -135,6 +135,7 @@ void func_00000D58(void *arg0, s32 *arg1);
 void func_0000113C(struct Unk_func_0000113C_0 *arg0, s32 *arg1);
 void func_0000181C(void *arg0);
 void func_00001A74(void *arg0);
+s32 func_00001C24(void *arg0, s32 arg1);
 void func_00001D08(void *arg0);
 void func_00001E50(void *arg0, s32 *arg1);
 void func_000020AC(void *arg0, void *arg1);

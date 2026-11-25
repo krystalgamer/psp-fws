@@ -100,6 +100,7 @@
   "func_0000A2EC": "s32 func_0000A2EC(void);",
   "func_0000A30C": "s32 func_0000A30C(void);",
   "func_0000A33C": "void func_0000A33C(void);",
+  "func_0000A344": "s32 func_0000A344(void);",
   "func_0000A364": "void func_0000A364(void);",
   "func_0000A364_v150": "s32 func_0000A364_v150(void);",
   "func_0000A484": "s32 func_0000A484(void);",

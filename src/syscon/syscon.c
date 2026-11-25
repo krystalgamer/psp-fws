@@ -61,7 +61,7 @@ s32 sceSyscon_driver_5EE92F3C(s32 arg0) {
     return 0;
 }
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceSyscon_driver_5FF1D610(s32 arg0) {
     M2C_VFIELD(&D_00004600, s32, 0x128) = arg0;
     return 0;

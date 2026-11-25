@@ -2,17 +2,23 @@
 #include "common.h"
 #include "loadexec_decls.h"
 
+#if FW_VERSION == 151
+INCLUDE_RODATA("nonmatchings/loadexec", D_00002B4C);
+#endif
+
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", func_00000000);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", func_000001A8);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00000578);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00000924);
+#endif
 
+#if FW_VERSION == 150
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002B5C);
 
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002B70);
@@ -56,7 +62,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00000C18);
 INCLUDE_ASM("nonmatchings/loadexec", func_00000CA4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", func_00000EC4);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00000FCC);
@@ -78,7 +84,7 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002B54);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002B88);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/loadexec", func_00000EB0);
 #endif
 
@@ -124,7 +130,7 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002E78);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002EA4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002DC4);
 
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002DC8);
@@ -134,7 +140,7 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002DC8);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002ED4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_A3D5E142);
 
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_4D5C75BE);
@@ -168,7 +174,7 @@ void LoadExecForKernel_821BE114(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_7B7C47EF);
 #endif
 
@@ -176,7 +182,7 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_7B7C47EF);
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_015DA036);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void LoadExecForKernel_015DA036(s32 arg0, s32 arg1, s32 arg2) {
     func_00001D6C(0x130, arg0, arg1, arg2, 0x10000);
 }
@@ -200,7 +206,7 @@ void LoadExecForKernel_70901231(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForUser_2AC9954B);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_A3D5E142);
 #endif
 
@@ -208,7 +214,7 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_A3D5E142);
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_62C459E1);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void LoadExecForKernel_62C459E1(s32 arg0, s32 arg1, s32 arg2) {
     func_00001D6C(0x100, arg0, arg1, arg2, 0x10000);
 }
@@ -230,7 +236,7 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_4D5C75BE);
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelRegisterExitCallback);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_D9739B89);
 
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_659188E1);
@@ -244,7 +250,7 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002E54);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002FD4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002E94);
 #endif
 
@@ -318,7 +324,7 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_11412288);
 
 INCLUDE_ASM("nonmatchings/loadexec", syslib_D3744BE0);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", func_00001A1C);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00001934);

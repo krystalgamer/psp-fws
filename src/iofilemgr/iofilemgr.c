@@ -3,7 +3,7 @@
 #include "k1.h"
 #include "iofilemgr_decls.h"
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChangeAsyncPriority);
 
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_000044DC);
@@ -123,7 +123,7 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000447C);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000449C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004B38);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", module_reboot_before);
@@ -153,7 +153,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsyncCB);
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_CB05F8D6);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChangeAsyncPriority);
 #endif
 
@@ -179,7 +179,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_A905B705);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_000050C0);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00005118);
 #endif
 
@@ -191,7 +191,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00000D24);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000511C);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00005130);
 #endif
 
@@ -209,7 +209,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_000001E4);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00000364);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_3C54E908);
 #endif
 
@@ -267,7 +267,7 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000472C);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004758);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDopen);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDread);
@@ -301,7 +301,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetstat);
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChstat);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoRename);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDevctl);
@@ -311,7 +311,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDevctl);
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetDevType);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_B2A628C1);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_6D08A871);
@@ -321,7 +321,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_6D08A871);
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_411106BA);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002BAC);
 #else
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_CB0A151F);
@@ -335,7 +335,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetFdList);
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_73B7671F);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_8E982A74);
 #endif
 
@@ -343,7 +343,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_8E982A74);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002E18);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_C7F35804);
 #endif
 
@@ -351,7 +351,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_C7F35804);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002FA4);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001A24);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001AA8);
@@ -373,7 +373,7 @@ void func_00001B9C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001BC4);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001C00);
@@ -409,7 +409,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00002168);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002254);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_000022D8);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002328);
@@ -419,7 +419,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00002328);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_000036F0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002C48);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002C54);
@@ -459,7 +459,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00002484);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002578);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_000028C0);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002960);
@@ -473,7 +473,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00003CF8);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00003D00);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_0000396C);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00003A6C);
@@ -491,7 +491,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00003D68);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_000055E4);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000563C);
 
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00005650);

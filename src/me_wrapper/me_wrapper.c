@@ -52,7 +52,7 @@ void sceMeMemory_driver_5AD660FA(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000CF0);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000D1C);
@@ -100,7 +100,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_8EBBBBA3);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_579ACEA9);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void sceMePower_driver_579ACEA9(s32 arg0) {
     u32 temp_s0;
 
@@ -112,7 +112,7 @@ void sceMePower_driver_579ACEA9(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001070);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/me_wrapper", func_000010B0);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001120);
@@ -170,7 +170,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_63463F66);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C3A1D6B2);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/me_wrapper", func_000015B4);
 #endif
 

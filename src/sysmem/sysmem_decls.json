@@ -55,6 +55,7 @@
   "func_0000165C": "s32 func_0000165C(void);",
   "func_000017D8": "s32 func_000017D8(struct Unk_func_000017D8_0 *arg0);",
   "func_000017E0": "s32 func_000017E0(struct Unk_func_000017E0_0 *arg0);",
+  "func_00001810": "s32 func_00001810(void *arg0);",
   "func_000018D8": "s32 func_000018D8(void *arg0);",
   "func_00001B6C": "s32 func_00001B6C(void *arg0);",
   "func_00001B74": "s32 func_00001B74(void *arg0);",

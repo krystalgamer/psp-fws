@@ -5,7 +5,7 @@
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_9CE06934);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00000174);
 #endif
 
@@ -120,7 +120,7 @@ s32 scePower_driver_23BB0A60(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 u8 scePower_driver_D7B9C925(void) {
     return D_00004FC6;
 }
@@ -150,7 +150,7 @@ u8 scePower_driver_E8685403(void) {
 
 INCLUDE_ASM("nonmatchings/power", func_00000DD4);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePower_driver_23C31FFE);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_FA97A599);
@@ -168,7 +168,7 @@ INCLUDE_ASM("nonmatchings/power", func_00000658);
 
 INCLUDE_RODATA("nonmatchings/power", D_00005D60);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/power", D_00004CF0);
 
 INCLUDE_ASM("nonmatchings/power", func_00000CF4);
@@ -212,7 +212,7 @@ INCLUDE_ASM("nonmatchings/power", func_00001178);
 INCLUDE_ASM("nonmatchings/power", func_0000250C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_0000250C(void) {
     sceKernelSetEventFlag(M2C_FIELD(&D_00003E00, s32 *, 0), 0x80000000U);
     sceKernelWaitThreadEnd(M2C_FIELD(&D_00003E00, s32 *, 8), NULL);
@@ -250,7 +250,7 @@ s32 scePower_driver_165CE085(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePower_driver_B3EDD801);
 
 s32 scePower_driver_79DB9421(void) {
@@ -321,7 +321,7 @@ INCLUDE_ASM("nonmatchings/power", scePower_CA3D34C1);
 INCLUDE_ASM("nonmatchings/power", scePower_driver_CA3D34C1);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void scePower_driver_CA3D34C1(s32 arg0) {
     func_00001FEC(arg0, 0);
 }
@@ -333,7 +333,7 @@ INCLUDE_ASM("nonmatchings/power", func_00001334);
 INCLUDE_ASM("nonmatchings/power", func_00001364);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 scePower_driver_7FA406DD(void) {
     return M2C_VFIELD(&D_00003E00, s32, 0x20);
 }
@@ -345,7 +345,7 @@ s32 scePower_driver_7FA406DD(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 scePower_driver_DB62C9CF(void) {
     s32 temp_s0;
     s32 temp_v0;
@@ -379,7 +379,7 @@ INCLUDE_ASM("nonmatchings/power", scePowerRequestSuspend);
 INCLUDE_ASM("nonmatchings/power", scePower_driver_2875994B);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 scePower_driver_0074EF9B(void) {
     return M2C_VFIELD(&D_00003E00, s32, 0x30);
 }
@@ -398,7 +398,7 @@ s32 scePower_driver_F535D928(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00001EF4);
 
 INCLUDE_ASM("nonmatchings/power", func_00001FEC);
@@ -591,7 +591,7 @@ INCLUDE_ASM("nonmatchings/power", func_00003AC0);
 
 INCLUDE_ASM("nonmatchings/power", func_00003B14);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
     if (arg0 != NULL) {
         *arg0 = (s32) D_0000A1F8;
@@ -657,7 +657,7 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_35B7662E);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_F9B4DEA1);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 scePowerGetCpuClockFrequencyInt(void) {
     return D_0000A1D0;
 }
@@ -765,7 +765,7 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_862AE1A6);
 INCLUDE_ASM("nonmatchings/power", scePower_driver_23436A4A);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00002D70(void) {
     M2C_UNK *temp_v0;
     s32 temp_v0_2;
@@ -822,7 +822,7 @@ s32 func_00002EFC(void) {
 INCLUDE_ASM("nonmatchings/power", func_00002F0C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 scePower_driver_27F3292C(void) {
     s32 temp_s1;
 
@@ -915,7 +915,7 @@ s32 scePowerIsBatteryExist(void) {
 INCLUDE_ASM("nonmatchings/power", scePowerIsBatteryCharging);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 151
 s32 scePowerIsBatteryCharging(void) {
     s32 temp_v0;
 

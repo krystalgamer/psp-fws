@@ -73,7 +73,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000023BC);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002480);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001440);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000015C4);
@@ -125,7 +125,7 @@ s32 func_00001BC0(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001E14);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001E6C);
@@ -159,7 +159,7 @@ s32 func_000038E4(void) {
 }
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000038EC);
 #endif
 
@@ -220,10 +220,14 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003E70);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003EF0);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000021A4);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000024C0);
+#endif
+
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002898);
 #endif
 
 #if FW_VERSION == 100
@@ -232,11 +236,11 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000020D4);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002408);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002818);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002B90);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002FAC);
@@ -284,9 +288,17 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005634);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003908);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003978);
+#endif
 
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003914);
+#endif
+
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003988);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000570C);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000057B4);
@@ -294,11 +306,19 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000057B4);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000585C);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003A18);
+
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003C00);
+#endif
+
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003AA8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003CD0);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000058B8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005984);
@@ -320,11 +340,19 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005ED4);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00006050);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00004150);
+
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00004190);
+#endif
+
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00004270);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000042D0);
+#endif
 
+#if FW_VERSION < 282
 s32 func_00004424(s32 arg0) {
     s32 var_v0;
 
@@ -334,7 +362,13 @@ s32 func_00004424(s32 arg0) {
     }
     return var_v0;
 }
-#else
+#endif
+
+#if FW_VERSION == 151
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00004314);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000614C);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000618C);
