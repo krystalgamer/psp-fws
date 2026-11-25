@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/303/.splat_cache.htmlviewer_plugin
   symbol_addrs_path:
     - config/303/symbol_addrs.htmlviewer_plugin.txt
+    - config/303/func_starts.htmlviewer_plugin.txt
     - tmp/build/303/prx_syms.htmlviewer_plugin.txt
   reloc_addrs_path: [tmp/build/303/reloc_addrs.htmlviewer_plugin.txt]
   asset_path: tmp/assets/303/htmlviewer_plugin
@@ -53,7 +54,13 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, htmlviewer_plugin]
+      - [0xC4, c, htmlviewer_plugin]
+      - [0x2170, c, htmlviewer_plugin_001670]
+      - [0x35DC, c, htmlviewer_plugin_002828]
+      - [0x3FD4, c, htmlviewer_plugin_002EB4]
+      - [0x5204, c, htmlviewer_plugin_0039A4]
+      - [0x6124, c, htmlviewer_plugin_004788]
+      - [0x6E04, c, htmlviewer_plugin_005370]
       - { start: 0x8024, type: asm, name: fini, linker_section: .fini }
       - { start: 0x8040, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x8460, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -70,7 +77,11 @@ segments:
       - { start: 0x8ABC, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x8AC8, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x8ACC, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x8AD0, rodata, htmlviewer_plugin]
+      - [0x8AD0, .rodata, htmlviewer_plugin]
+      - [0x930C, .rodata, htmlviewer_plugin_002EB4]
+      - [0x962C, .rodata, htmlviewer_plugin_0039A4]
+      - [0x96F0, .rodata, htmlviewer_plugin_004788]
+      - [0x9EC0, .rodata, htmlviewer_plugin_005370]
       - { start: 0x9FB0, type: prxpad, order: .rodata }
   - name: htmlviewer_plugin_seg1
     type: code

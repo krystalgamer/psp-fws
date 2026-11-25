@@ -1571,6 +1571,12 @@ s32 sceLFatFs_driver_F1FBA85F(void) {
 }
 #endif
 
+#if FW_VERSION == 303
+s32 sceLFatFs_driver_51C7F7AE(void) {
+    return 0x03000310;
+}
+#endif
+
 #if FW_VERSION == 302
 s32 sceLFatFs_driver_51C7F7AE(void) {
     return 0x03000210;
@@ -1657,6 +1663,10 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00008C9C);
 
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000DF88);
+#endif
+
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/lfatfs", func_00009EBC_v303);
 #endif
 
 #if FW_VERSION == 302

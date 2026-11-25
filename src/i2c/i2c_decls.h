@@ -18,6 +18,7 @@ extern s32 D_000015B8;
 extern s32 D_000016E0_v300;
 extern s32 D_000016E0_v301;
 extern s32 D_000016E0_v302;
+extern s32 D_000016E0_v303;
 extern M2C_UNK D_000016F0;
 extern s32 D_00001718;
 extern struct D_00001730_s D_00001730;

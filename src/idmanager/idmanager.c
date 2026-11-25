@@ -1,6 +1,6 @@
 #include "common.h"
 
-#if FW_VERSION == 302
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/idmanager", func_00000000);
 #else
 INCLUDE_ASM("nonmatchings/idmanager", module_start);
@@ -50,7 +50,7 @@ INCLUDE_ASM("nonmatchings/idmanager", func_0000034C);
 
 INCLUDE_ASM("nonmatchings/idmanager", func_0000041C);
 
-#if FW_VERSION == 302
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/idmanager", func_0000046C);
 
 INCLUDE_ASM("nonmatchings/idmanager", func_00000534);

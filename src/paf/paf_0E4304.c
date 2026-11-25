@@ -1,13 +1,15 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION != 270
 void func_000E4304(M2C_UNK **arg0) {
     *arg0 = &D_0019A4A0;
     scePaf_715E8DAB((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000DDDE8);
 #endif
 
@@ -121,9 +123,11 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A97C);
 
 INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0019A3B8);
 
+#if FW_VERSION != 270
 INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0019A488);
 
 INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0019A4A0);
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0012EA84);
@@ -133,7 +137,19 @@ INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0012EA98);
 
 INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0019A574);
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0019800C);
+
+INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0019802C);
+
+INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0019804C);
+
+INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0019806C);
+
+INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0019808C);
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0018DFEC);
 
 INCLUDE_RODATA("nonmatchings/paf_0E4304", D_0018E008);
@@ -333,6 +349,10 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_A76B9604);
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_5075C799);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E63C0);
+#endif
+
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008CE10);
 #else
@@ -437,9 +457,15 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E8348);
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E2060);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0E4304", func_000900EC);
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E7B58);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 270
+INCLUDE_ASM("nonmatchings/paf_0E4304", func_000900EC);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_00090268);
 #endif
 

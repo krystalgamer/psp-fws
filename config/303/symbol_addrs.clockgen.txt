@@ -23,3 +23,8 @@ sceI2c_driver_D6E9836A = 0x00000744; // type:func
 sceI2c_driver_E9463B99 = 0x0000074C; // type:func
 sceSysEventForKernel_CD9E4BB5 = 0x00000754; // type:func
 sceSysEventForKernel_D7D3FDCD = 0x0000075C; // type:func
+// shared names (tools/add_version.py) begin
+D_0000090C = 0x00000914; // rom:0x9B4
+D_00000918 = 0x00000920; // rom:0x9C0
+D_0000090C_v303 = 0x0000090C; // rom:0x9AC
+// shared names (tools/add_version.py) end

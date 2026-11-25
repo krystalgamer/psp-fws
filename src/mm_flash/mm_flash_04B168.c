@@ -308,7 +308,7 @@ INCLUDE_ASM("nonmatchings/mm_flash_04B168", func_000523C8);
 
 INCLUDE_ASM("nonmatchings/mm_flash_04B168", func_0005250C);
 
-#if FW_VERSION < 340
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mm_flash_04B168", func_0005260C);
 #else
 void func_0005260C(struct Unk_func_0005260C_0 *arg0) {

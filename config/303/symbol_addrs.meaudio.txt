@@ -58,3 +58,10 @@ sceSysreg_driver_BB26CF1F = 0x00000AE0; // type:func
 sceSysreg_driver_C1DA05D2 = 0x00000AE8; // type:func
 sceSysreg_driver_DE59DACB = 0x00000AF0; // type:func
 sceSysreg_driver_F844DDF3 = 0x00000AF8; // type:func
+// shared names (tools/add_version.py) begin
+D_00000EE0 = 0x00000F20; // rom:0xFC0
+D_00000EF0 = 0x00000F30; // rom:0xFD0
+D_00000F40 = 0x00000F80;
+D_00000F44 = 0x00000F84;
+D_00000EE0_v303 = 0x00000EE0; // rom:0xF80
+// shared names (tools/add_version.py) end

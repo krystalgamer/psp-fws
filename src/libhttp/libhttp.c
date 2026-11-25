@@ -2581,7 +2581,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetNetworkPspError);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetAllHeader);
 #endif
 
-#if FW_VERSION == 302
+#if FW_VERSION >= 302
 INCLUDE_ASM("nonmatchings/libhttp", func_00014444);
 #endif
 
@@ -2617,7 +2617,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00014284);
 INCLUDE_ASM("nonmatchings/libhttp", func_000147F8);
 #endif
 
-#if FW_VERSION == 302
+#if FW_VERSION >= 302
 INCLUDE_ASM("nonmatchings/libhttp", func_0001524C);
 #endif
 

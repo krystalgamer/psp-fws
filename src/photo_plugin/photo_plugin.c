@@ -2326,6 +2326,10 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F5C0);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F5CC);
 #endif
 
+#if FW_VERSION == 303
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0003059C_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0003059C_v302);
 #endif

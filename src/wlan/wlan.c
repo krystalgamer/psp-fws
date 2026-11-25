@@ -2649,6 +2649,10 @@ INCLUDE_ASM("nonmatchings/wlan", func_00015A1C);
 INCLUDE_RODATA("nonmatchings/wlan", D_00019078);
 #endif
 
+#if FW_VERSION == 303
+INCLUDE_RODATA("nonmatchings/wlan", D_000192B0_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_RODATA("nonmatchings/wlan", D_000192B0_v302);
 #endif

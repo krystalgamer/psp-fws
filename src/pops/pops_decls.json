@@ -26,6 +26,9 @@
   "func_00010578": "M2C_UNK func_00010578(M2C_UNK);",
   "func_00010760": "M2C_UNK func_00010760();",
   "func_00010934": "M2C_UNK func_00010934();",
+  "func_00010C8C": "s32 func_00010C8C(s32);",
+  "func_00010F3C": "s32 func_00010F3C(void);",
+  "func_000110F4": "s32 func_000110F4(void);",
   "func_0001154C": "M2C_UNK *func_0001154C(void);",
   "func_00011648": "s32 func_00011648(void);",
   "func_00011654": "s32 func_00011654(void);",
@@ -81,7 +84,10 @@
   "Unk_func_000363A8_temp_v0": "struct Unk_func_000363A8_temp_v0 {\n    u8 pad0[0x10];\n    s32 unk10;\n    s32 unk14;\n};"
  },
  "vars": {
+  "D_00120E00": "extern s32 D_00120E00;",
   "D_001212C0": "extern s32 D_001212C0;",
+  "D_001610C8": "extern s32 D_001610C8;",
+  "D_001610CC": "extern s32 D_001610CC;",
   "D_001613D4": "extern s32 D_001613D4;",
   "D_001613D8": "extern s32 D_001613D8;",
   "D_00169648": "extern struct D_00169648_s D_00169648;",
@@ -91,6 +97,7 @@
   "D_004122A0": "extern s32 D_004122A0;",
   "D_004122AC": "extern s32 D_004122AC;",
   "D_00554214": "extern s32 D_00554214;",
+  "D_0076FDA8": "extern s32 D_0076FDA8;",
   "D_007D4E3C": "extern s32 D_007D4E3C;",
   "D_00855570": "extern s32 D_00855570;",
   "D_00855574": "extern s32 D_00855574;",

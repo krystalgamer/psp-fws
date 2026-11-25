@@ -848,9 +848,15 @@ INCLUDE_ASM("nonmatchings/mm_flash_01E9D0", func_0002AB58);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_01E9D0", D_000B6E5C);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282 && FW_VERSION < 340
 INCLUDE_RODATA("nonmatchings/mm_flash_01E9D0", D_000B6E10);
+#endif
 
+#if FW_VERSION == 303
+INCLUDE_RODATA("nonmatchings/mm_flash_01E9D0", D_000B6E44_v303);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/mm_flash_01E9D0", D_000B6E44_v282);
 #endif
 
@@ -1379,7 +1385,7 @@ INCLUDE_RODATA("nonmatchings/mm_flash_01E9D0", D_000B73B0);
 
 INCLUDE_ASM("nonmatchings/mm_flash_01E9D0", func_00033884);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282 && FW_VERSION < 340
 INCLUDE_RODATA("nonmatchings/mm_flash_01E9D0", D_000B7378);
 #endif
 

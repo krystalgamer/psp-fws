@@ -1826,6 +1826,10 @@ s32 func_0002E03C(void) {
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005B8C0);
 #endif
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002E954_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002E954_v302);
 #endif

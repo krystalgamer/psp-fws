@@ -254,6 +254,10 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_000009E8);
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000009D4);
 #endif
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/opening_plugin", func_000009FC_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000009FC_v302);
 #endif
@@ -319,10 +323,26 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00000E84);
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000010EC);
+#endif
 
+#if FW_VERSION >= 300 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00001194);
+#endif
 
+#if FW_VERSION == 303
+void func_00001194(void) {
+    func_000010EC(1, 0xFFFF);
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000011B4);
+#endif
+
+#if FW_VERSION == 303
+void func_000011B4(void) {
+    func_000010EC(0, 0xFFFF);
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000EA8);
@@ -361,16 +381,36 @@ void func_00000EF8(s32 arg0, s32 arg1) {
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00001274);
+#endif
 
+#if FW_VERSION >= 300 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000012EC);
+#endif
+
+#if FW_VERSION == 303
+void func_000012EC(void **arg0) {
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    if (temp_a0 != NULL) {
+        M2C_FIELD(temp_a0, s32 *, 4) = (s32) (M2C_FIELD(temp_a0, s32 *, 4) + 1);
+    }
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000F48);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000F78);
 
-#if FW_VERSION >= 300
+#if FW_VERSION >= 300 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000013E8);
+#endif
+
+#if FW_VERSION == 303
+void func_000013E8(void **arg0, void *arg1) {
+    *arg0 = arg1;
+    func_000012EC(arg0);
+}
 #endif
 
 #if FW_VERSION < 250

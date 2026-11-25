@@ -1,6 +1,7 @@
 #include "common.h"
 #include "pops_decls.h"
 
+#if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/pops_00F5D4", func_0000F5D4);
 
 INCLUDE_ASM("nonmatchings/pops_00F5D4", func_0000F77C);
@@ -93,4 +94,4 @@ INCLUDE_ASM("nonmatchings/pops_00F5D4", func_00011204);
 INCLUDE_ASM("nonmatchings/pops_00F5D4", func_000112B8);
 
 INCLUDE_ASM("nonmatchings/pops_00F5D4", func_00011430);
-
+#endif

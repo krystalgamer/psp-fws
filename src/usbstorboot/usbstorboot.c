@@ -81,7 +81,7 @@ INCLUDE_ASM("nonmatchings/usbstorboot", func_000014CC);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_00001754);
 
-#if FW_VERSION == 302
+#if FW_VERSION >= 302
 INCLUDE_ASM("nonmatchings/usbstorboot", func_00001834);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_000018A8);

@@ -137,9 +137,31 @@ INCLUDE_RODATA("nonmatchings/mm_flash_07C92C", D_000C06A0);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_07C92C", D_000C06B0);
 
-#if FW_VERSION < 340
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mm_flash_07C92C", func_0007CB40);
-#else
+#endif
+
+#if FW_VERSION == 303
+s32 func_0007CB40(struct Unk_func_000753DC_0 *arg0) {
+    s32 temp_v0;
+    s32 temp_v0_3;
+    s32 var_s0;
+    void *temp_v0_2;
+
+    temp_v0 = func_000753DC(arg0, 1);
+    var_s0 = temp_v0;
+    temp_v0_2 = func_000608F4(temp_v0, "System");
+    if (temp_v0_2 != NULL) {
+        if (M2C_FIELD(temp_v0_2, s32 *, 0) == 3) {
+            temp_v0_3 = M2C_FIELD(temp_v0_2, s32 *, 8);
+            var_s0 = (temp_v0_3 != 0) ? temp_v0_3 : var_s0;
+        }
+    }
+    return var_s0;
+}
+#endif
+
+#if FW_VERSION == 340
 s32 func_0007CB40(struct Unk_func_000753DC_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_3;

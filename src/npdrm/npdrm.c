@@ -9,7 +9,9 @@ INCLUDE_ASM("nonmatchings/npdrm", scePspNpDrm_driver_37B9B10D);
 
 INCLUDE_ASM("nonmatchings/npdrm", scePspNpDrm_driver_5667B7B9);
 
+#if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/npdrm", scePspNpDrm_driver_0F9547E6);
+#endif
 
 INCLUDE_ASM("nonmatchings/npdrm", func_00000360);
 
@@ -21,9 +23,13 @@ s32 module_start(void) {
     return 0;
 }
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/npdrm", module_stop);
+#else
 s32 module_stop(void) {
     return 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/npdrm", func_000004C0);
 
@@ -49,7 +55,9 @@ INCLUDE_ASM("nonmatchings/npdrm", func_00001D08);
 
 INCLUDE_ASM("nonmatchings/npdrm", func_00001D54);
 
+#if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/npdrm", D_00001EBC);
+#endif
 
 INCLUDE_RODATA("nonmatchings/npdrm", D_00001ECC);
 

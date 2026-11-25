@@ -7,7 +7,7 @@ INCLUDE_ASM("nonmatchings/mm_flash_09F0C8", func_0009F124);
 
 INCLUDE_ASM("nonmatchings/mm_flash_09F0C8", func_0009F1C0);
 
-#if FW_VERSION < 340
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mm_flash_09F0C8", func_0009F1CC);
 #else
 s32 func_0009F1CC(void) {

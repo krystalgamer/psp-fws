@@ -127,7 +127,7 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_AAD0EE78);
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_E69C3B1B);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_17BC4F41);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_C2911954);
@@ -238,6 +238,22 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9864);
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontNewLib);
 #endif
 
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_001963A0);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_001963BC);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_001963D0);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_001963E4);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_001963F8);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0019640C);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00196420);
+#endif
+
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00192BA0_v260);
 
@@ -246,7 +262,9 @@ INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00192BB4);
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C724);
 
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C738);
+#endif
 
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00192BF0);
 #endif
 
@@ -274,8 +292,18 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B4584);
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C760);
+#endif
 
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0019644C);
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C764);
+#endif
+
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00196474);
 #endif
 
 #if FW_VERSION == 260
@@ -290,6 +318,12 @@ INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C778);
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C78C);
 #endif
 
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C7B4);
+
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_001964B0);
+#endif
+
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00192C44);
 #endif
@@ -298,7 +332,7 @@ INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00192C44);
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C7A0);
 #endif
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C7B4);
 #endif
 
@@ -360,7 +394,7 @@ INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C908);
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C91C);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00192DD4);
 #endif
 
@@ -398,7 +432,17 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B4D9C);
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontOpenUserFile);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B4F10);
+#endif
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9D70);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9DC0);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9E28);
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontClose);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontGetFontInfo);
@@ -424,9 +468,15 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B5E58);
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B5E78);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA660);
+#endif
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BB3F8);
+#endif
+
+#if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA668);
 #endif
 
@@ -436,7 +486,13 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B5EA8);
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B5F84);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B6040);
+#endif
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BB894);
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B615C);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B61A0);
@@ -478,7 +534,11 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B8558);
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B88A0);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BE3C0);
+#endif
+
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BD340);
 #endif
 
@@ -490,7 +550,7 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B8AD4);
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B8C14);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BD5C8);
 #endif
 
@@ -504,7 +564,7 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B8FFC);
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9210);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BDBDC);
 #endif
 
@@ -534,7 +594,13 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9C3C);
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9ECC);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9F40);
+#endif
 
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00196684);
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA1A8);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA1C8);
@@ -554,6 +620,20 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA800);
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA83C);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BA964);
+#endif
+
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000C04D8);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000C0508);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000C0570);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000C059C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000C063C);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000C06E8);
 #endif
 
 #if FW_VERSION == 282

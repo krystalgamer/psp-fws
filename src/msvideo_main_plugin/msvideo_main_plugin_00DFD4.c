@@ -148,6 +148,20 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE778);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE78C);
 #endif
 
+#if FW_VERSION == 303
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE7A8_v303);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE7EC);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE810);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE828);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AF3E8);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE848_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE7A8_v302);
 
@@ -313,6 +327,10 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_00011B28);
 
 #if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE8AC);
+#endif
+
+#if FW_VERSION == 303
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE8E8_v303);
 #endif
 
 #if FW_VERSION == 302

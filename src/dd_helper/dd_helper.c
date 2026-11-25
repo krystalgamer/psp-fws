@@ -661,6 +661,10 @@ s32 func_00003998(s8 arg0) {
 }
 #endif
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/dd_helper", func_000039B4_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/dd_helper", func_000039B4_v302);
 #endif

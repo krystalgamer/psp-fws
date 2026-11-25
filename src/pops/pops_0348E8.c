@@ -58,7 +58,9 @@ s32 func_00035ACC(s32 *arg0, s32 arg1) {
     return temp_v0;
 }
 
+#if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/pops_0348E8", func_00035B28);
+#endif
 
 INCLUDE_ASM("nonmatchings/pops_0348E8", func_00035B9C);
 

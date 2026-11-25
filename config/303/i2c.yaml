@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, i2c]
+      - [0xA0, c, i2c]
       - { start: 0x14E4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x157C, type: prxpad, order: .text }
       - { start: 0x1580, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x1604, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x1638, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x172C, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x1778, rodata, i2c]
+      - [0x1778, .rodata, i2c]
   - name: i2c_seg1
     type: code
     start: 0x1780

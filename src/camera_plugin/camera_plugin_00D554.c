@@ -724,6 +724,10 @@ INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_00016D5C);
 INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_00016FB4);
 #endif
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_00017154_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_00017154_v302);
 #endif

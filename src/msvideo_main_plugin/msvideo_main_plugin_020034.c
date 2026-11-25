@@ -37,6 +37,10 @@ void func_00020604(struct Unk_func_00020604_0 *arg0, s8 arg1) {
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_020034", func_0002060C);
 
+#if FW_VERSION == 303
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_020034", D_000AFCF0_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_020034", D_000AFCF0_v302);
 #endif

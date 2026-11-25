@@ -42,7 +42,10 @@ struct Unk_func_000363A8_temp_v0 {
     s32 unk14;
 };
 
+extern s32 D_00120E00;
 extern s32 D_001212C0;
+extern s32 D_001610C8;
+extern s32 D_001610CC;
 extern s32 D_001613D4;
 extern s32 D_001613D8;
 extern struct D_00169648_s D_00169648;
@@ -52,6 +55,7 @@ extern M2C_UNK D_00218940;
 extern s32 D_004122A0;
 extern s32 D_004122AC;
 extern s32 D_00554214;
+extern s32 D_0076FDA8;
 extern s32 D_007D4E3C;
 extern s32 D_00855570;
 extern s32 D_00855574;
@@ -83,6 +87,9 @@ M2C_UNK func_000104C8(M2C_UNK, M2C_UNK, M2C_UNK);
 M2C_UNK func_00010578(M2C_UNK);
 M2C_UNK func_00010760();
 M2C_UNK func_00010934();
+s32 func_00010C8C(s32);
+s32 func_00010F3C(void);
+s32 func_000110F4(void);
 M2C_UNK *func_0001154C(void);
 s32 func_00011648(void);
 s32 func_00011654(void);

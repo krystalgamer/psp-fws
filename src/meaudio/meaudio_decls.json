@@ -27,6 +27,7 @@
   "sceAudio_5C37C0AE": "void sceAudio_5C37C0AE(void);",
   "sceAudio_E0727056": "void sceAudio_E0727056(void);",
   "sceAudio_E9D97901": "void sceAudio_E9D97901(void);",
+  "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
   "sceMeAudio_05115756": "void sceMeAudio_05115756(void);",
   "sceMeAudio_5EDA8D33": "void sceMeAudio_5EDA8D33(void);",
   "sceSysreg_driver_8BE2D520": "M2C_UNK sceSysreg_driver_8BE2D520();",

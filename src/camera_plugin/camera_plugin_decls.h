@@ -485,6 +485,7 @@ extern s32 func_0000C628;
 void func_00000180_v300(void);
 void func_00000180_v301(void);
 void func_00000180_v302(void);
+void func_00000180_v303(void);
 void func_000001D8(void);
 void func_000001FC(void);
 void func_00000294(void);

@@ -284,8 +284,30 @@ INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00090730);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_000907C8);
+#endif
 
+#if FW_VERSION == 303
+void func_000907C8(void *arg0) {
+    s32 temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, s32 *, 0x100);
+    M2C_FIELD(arg0, s32 *, 0x104) = 1;
+    if (temp_v1 != 0) {
+        sceHVWWW_Library_2E58A543(temp_v1);
+        M2C_FIELD(arg0, s32 *, 0x100) = 0;
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_0009080C);
+#endif
+
+#if FW_VERSION == 303
+void func_0009080C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x104) = 0;
+    M2C_FIELD(arg0, s32 *, 0x100) = sceHVWWW_Library_27C4AC1F(0x4000);
+}
 #endif
 
 #if FW_VERSION == 340
@@ -437,9 +459,17 @@ void func_00091024(void) {
 void func_00091040(void) {
 }
 
-#if FW_VERSION < 340
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00091048);
-#else
+#endif
+
+#if FW_VERSION == 303
+void func_00091048(void) {
+
+}
+#endif
+
+#if FW_VERSION == 340
 void func_00091048(void) {
 }
 #endif
@@ -874,7 +904,7 @@ INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00093C60);
 
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00093CA4);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00093D14);
 #endif
 
@@ -993,7 +1023,7 @@ INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00095804);
 
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00095B7C);
 
-#if FW_VERSION < 340
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_00095DD4);
 #else
 s32 func_00095DD4(void) {

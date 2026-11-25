@@ -775,6 +775,10 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06EFBC", func_0007446C);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06EFBC", func_00074498);
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06EFBC", func_00073FF4_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06EFBC", func_00073FF4_v302);
 #endif

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION != 270
 s32 func_00049B9C(struct Unk_func_00049B9C_0 *arg0) {
     s32 var_a1;
 
@@ -15,20 +16,27 @@ s32 func_00049B9C(struct Unk_func_00049B9C_0 *arg0) {
     }
     return var_a1;
 }
+#endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_000388C4);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049BD0);
 #endif
 
+#if FW_VERSION != 270
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049CB0);
 
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049D58);
+#endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049E00);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_00049E00(struct Unk_func_00049E00_0 *arg0) {
     arg0->unk50 = -1;
     arg0->unk30 = 0;
@@ -67,6 +75,7 @@ INCLUDE_RODATA("nonmatchings/paf_049B9C", D_001715C4);
 INCLUDE_RODATA("nonmatchings/paf_049B9C", D_001715E0);
 #endif
 
+#if FW_VERSION != 270
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049E60);
 
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049EB8);
@@ -88,3 +97,4 @@ void func_0004A228(M2C_UNK **arg0) {
     func_00044154(arg0);
     *arg0 = &D_00171640;
 }
+#endif

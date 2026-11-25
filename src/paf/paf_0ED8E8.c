@@ -18,10 +18,18 @@ void func_000ED938(struct Unk_func_000ED938_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_0ED8E8", func_000ED948);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_0ED8E8", func_0008A1C8);
+#endif
+
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0ED8E8", func_00093294);
 
 INCLUDE_ASM("nonmatchings/paf_0ED8E8", func_0009337C);
+#endif
+
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_0ED8E8", func_000ED1EC);
 #endif
 
 #if FW_VERSION < 151
@@ -47,6 +55,10 @@ INCLUDE_ASM("nonmatchings/paf_0ED8E8", func_000EDB70);
 INCLUDE_ASM("nonmatchings/paf_0ED8E8", func_000EDC60);
 
 INCLUDE_ASM("nonmatchings/paf_0ED8E8", func_000EDD24);
+
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_0ED8E8", func_000ED460);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0ED8E8", func_00095320);

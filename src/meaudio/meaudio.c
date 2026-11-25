@@ -29,13 +29,23 @@ INCLUDE_ASM("nonmatchings/meaudio", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/meaudio", func_000007B8);
 
-#if FW_VERSION == 302
+#if FW_VERSION >= 302
 void sceAudioOutput(void) {
 }
+#endif
 
+#if FW_VERSION == 303
+void sceAudioOutputBlocking(void) {
+    sceKernelDelayThread(0x2710U);
+}
+#endif
+
+#if FW_VERSION == 302
 void sceAudioOutputBlocking(void) {
 }
+#endif
 
+#if FW_VERSION >= 302
 void sceAudioOutputPanned(void) {
 }
 

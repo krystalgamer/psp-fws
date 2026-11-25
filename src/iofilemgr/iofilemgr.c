@@ -761,7 +761,13 @@ s32 sceIoChstat(void *arg0, void *arg1, u32 arg2) {
 }
 
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoSync);
+#endif
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetDevType);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 303
 s32 sceIoGetDevType(s32 arg0) {
     struct Unk_sceIoGetDevType_sp0 *sp0;
     s32 var_v0;
@@ -777,7 +783,9 @@ s32 sceIoGetDevType(s32 arg0) {
     }
     return var_v0;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_411106BA);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_5216CE3F);

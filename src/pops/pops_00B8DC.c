@@ -2,6 +2,7 @@
 #include "common.h"
 #include "pops_decls.h"
 
+#if FW_VERSION == 302
 void func_0000B8DC(s32 arg0, s32 arg1) {
     if (!(arg0 & 0xF)) {
         func_00017B74(arg1);
@@ -61,4 +62,4 @@ INCLUDE_ASM("nonmatchings/pops_00B8DC", func_0000CA68);
 s32 func_0000CC30(void) {
     return 0x1FF;
 }
-
+#endif

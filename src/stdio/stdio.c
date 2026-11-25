@@ -230,7 +230,7 @@ s32 func_00000A20(void) {
 INCLUDE_ASM("nonmatchings/stdio", func_00000A28);
 #endif
 
-#if FW_VERSION == 302
+#if FW_VERSION >= 302
 s32 func_00000A28(struct Unk_func_00000A28_0 *arg0) {
     return (arg0->unk4 < 3) ? 0 : 0x80010006;
 }
@@ -246,7 +246,7 @@ s32 func_00000A28(struct Unk_func_00000A28_0 *arg0) {
 INCLUDE_ASM("nonmatchings/stdio", func_00000A40);
 #endif
 
-#if FW_VERSION == 302
+#if FW_VERSION >= 302
 s32 func_00000A40(struct Unk_func_00000A40_0 *arg0) {
     return (arg0->unk4 < 3) ? 0 : 0x80010006;
 }

@@ -17,3 +17,8 @@ sceKernelDeleteFpl = 0x000006BC; // type:func
 scePopsMan_driver_92E9E38D = 0x000006C4; // type:func
 scePspNpDrm_driver_5667B7B9 = 0x000006CC; // type:func
 sceRtc_driver_B44BDAED = 0x000006D4; // type:func
+// shared names (tools/add_version.py) begin
+func_00000254 = 0x000001BC; // type:func rom:0x25C
+func_0000034C = 0x000002A8; // type:func rom:0x348
+func_0000041C = 0x00000378; // type:func rom:0x418
+// shared names (tools/add_version.py) end

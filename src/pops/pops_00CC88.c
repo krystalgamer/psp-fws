@@ -2,6 +2,7 @@
 #include "common.h"
 #include "pops_decls.h"
 
+#if FW_VERSION == 302
 s32 func_0000CC88(void) {
     sceKernelSignalSema(D_001613D4, 1);
     sceKernelCancelAlarm(D_001613D8);
@@ -96,4 +97,4 @@ void func_0000F58C(void) {
     temp_v0->unk3 = (u8) D_00169648.unk2;
     temp_v0->unk4 = (u8) D_00169648.unk3;
 }
-
+#endif

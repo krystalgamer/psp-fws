@@ -42,6 +42,12 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_044E48", D_000B2E30);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00045A94);
 #endif
 
+#if FW_VERSION == 303
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_044E48", D_000B2E14_v303);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_044E48", D_000B2E30_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_044E48", D_000B2E14_v302);
 
@@ -1430,6 +1436,10 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00050BAC);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00050BB4);
 #endif
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00050BBC_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00050BBC_v302);
 #endif
@@ -1624,6 +1634,18 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00051840);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_0005185C);
 #endif
 
+#if FW_VERSION == 303
+void func_0005187C_v303(s32 arg0, s32 arg1) {
+    func_0004F618(arg0 - 0x3C, arg1);
+}
+
+void func_00051898_v303(s32 arg0, s32 arg1) {
+    func_0004F788(arg0 - 0x3C, arg1);
+}
+
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_000518B4_v303);
+#endif
+
 #if FW_VERSION == 302
 void func_0005187C_v302(s32 arg0, s32 arg1) {
     func_0004F618(arg0 - 0x3C, arg1);
@@ -1664,6 +1686,12 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_000518F0);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_0005190C);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00051928);
+#endif
+
+#if FW_VERSION == 303
+void func_00051944_v303(s32 arg0, s32 arg1) {
+    func_0005019C(arg0 - 0x3C, arg1);
+}
 #endif
 
 #if FW_VERSION == 302
@@ -4255,6 +4283,16 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_000600A4);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00060CB4);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00060114);
+#endif
+
+#if FW_VERSION == 303
+void func_0006014C_v303(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B40C8;
+    if (M2C_FIELD(arg0, s32 *, 8) != 0) {
+        func_00060B44((s32) arg0);
+    }
+    func_000611B4((s32) (arg0 + 0xC));
+}
 #endif
 
 #if FW_VERSION == 302

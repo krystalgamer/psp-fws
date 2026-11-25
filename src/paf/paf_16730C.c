@@ -9,11 +9,23 @@ INCLUDE_ASM("nonmatchings/paf_16730C", func_00167398);
 
 INCLUDE_ASM("nonmatchings/paf_16730C", func_00167500);
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_16730C", func_00165E20);
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_16730C", func_0015EAA0);
+#endif
 
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_16730C", func_0015EBAC);
+#endif
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_16730C", func_0016603C);
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_16730C", func_0015EC60);
 #endif
 

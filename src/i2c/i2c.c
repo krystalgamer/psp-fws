@@ -50,6 +50,16 @@ s32 sceI2c_driver_4809D85F(void) {
 }
 #endif
 
+#if FW_VERSION == 303
+s32 module_reboot_before(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_000016E0_v303);
+    InterruptManagerForKernel_F987B1F0(0xC);
+    sceKernelDeleteMutex(D_00001730.unk4);
+    sceKernelDeleteEventFlag(D_00001730.unk0);
+    return 0;
+}
+#endif
+
 #if FW_VERSION == 302
 s32 module_reboot_before(void) {
     sceSysEventForKernel_D7D3FDCD(&D_000016E0_v302);
@@ -96,6 +106,16 @@ INCLUDE_ASM("nonmatchings/i2c", sceI2c_driver_20ADF12A);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/i2c", sceI2c_driver_4809D85F);
+#endif
+
+#if FW_VERSION == 303
+s32 sceI2c_driver_4809D85F(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_000016E0_v303);
+    InterruptManagerForKernel_F987B1F0(0xC);
+    sceKernelDeleteMutex(D_00001730.unk4);
+    sceKernelDeleteEventFlag(D_00001730.unk0);
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 302

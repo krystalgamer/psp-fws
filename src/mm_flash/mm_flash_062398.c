@@ -659,7 +659,7 @@ INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE5C4);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE5D0);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282 && FW_VERSION < 340
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE58C);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_062398", D_000BE7EC);

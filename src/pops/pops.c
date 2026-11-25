@@ -26,9 +26,17 @@ s32 func_00000668(void) {
 
 INCLUDE_ASM("nonmatchings/pops", func_00000688);
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/pops", func_00000748);
+#else
 INCLUDE_ASM("nonmatchings/pops", func_0000076C);
+#endif
 
 INCLUDE_ASM("nonmatchings/pops", func_0000078C);
+
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/pops", func_00000958);
+#endif
 
 INCLUDE_ASM("nonmatchings/pops", func_000008C4);
 
@@ -36,8 +44,13 @@ INCLUDE_ASM("nonmatchings/pops", func_000009C0);
 
 INCLUDE_ASM("nonmatchings/pops", func_00000B00);
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/pops", func_00000D44);
+#endif
+
 INCLUDE_ASM("nonmatchings/pops", func_00000BB0);
 
+#if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/pops", func_00000C34);
 
 INCLUDE_ASM("nonmatchings/pops", func_00000E00);
@@ -368,4 +381,4 @@ INCLUDE_ASM("nonmatchings/pops", func_0000B80C);
 INCLUDE_ASM("nonmatchings/pops", func_0000B860);
 
 INCLUDE_ASM("nonmatchings/pops", func_0000B8A8);
-
+#endif

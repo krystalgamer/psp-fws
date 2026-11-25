@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/303/.splat_cache.mm_flash
   symbol_addrs_path:
     - config/303/symbol_addrs.mm_flash.txt
+    - config/303/func_starts.mm_flash.txt
     - tmp/build/303/prx_syms.mm_flash.txt
   reloc_addrs_path: [tmp/build/303/reloc_addrs.mm_flash.txt]
   asset_path: tmp/assets/303/mm_flash
@@ -52,7 +53,37 @@ segments:
     start: 0xC0
     vram: 0x0
     subsegments:
-      - [0xC0, asm, mm_flash]
+      - [0xC0, c, mm_flash]
+      - [0x1705C, c, mm_flash_016F9C]
+      - [0x17944, c, mm_flash_017884]
+      - [0x1E760, c, mm_flash_01E6A0]
+      - [0x1EA90, c, mm_flash_01E9D0]
+      - [0x414D4, c, mm_flash_041414]
+      - [0x4152C, c, mm_flash_04146C]
+      - [0x430C4, c, mm_flash_043004]
+      - [0x435B4, c, mm_flash_0434F4]
+      - [0x4ACC8, c, mm_flash_04AC08]
+      - [0x4B228, c, mm_flash_04B168]
+      - [0x59E10, c, mm_flash_059D50]
+      - [0x5B078, c, mm_flash_05AFB8]
+      - [0x60520, c, mm_flash_060460]
+      - [0x62458, c, mm_flash_062398]
+      - [0x77B5C, c, mm_flash_077A9C]
+      - [0x7B5A8, c, mm_flash_07B4E8]
+      - [0x7B5B8, c, mm_flash_07B4F8]
+      - [0x7C9EC, c, mm_flash_07C92C]
+      - [0x82ABC, c, mm_flash_0829FC]
+      - [0x83234, c, mm_flash_083174]
+      - [0x8E988, c, mm_flash_08E8D8]
+      - [0x8F108, c, mm_flash_08F058]
+      - [0x985F0, c, mm_flash_098550]
+      - [0x98928, c, mm_flash_098888]
+      - [0x9B234, c, mm_flash_09B194]
+      - [0x9B874, c, mm_flash_09B7D4]
+      - [0x9D24C, c, mm_flash_09D1AC]
+      - [0x9D34C, c, mm_flash_09D2AC]
+      - [0x9D96C, c, mm_flash_09D8CC]
+      - [0x9F168, c, mm_flash_09F0C8]
       - { start: 0xB2EFC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xB325C, type: prxpad, order: .text }
       - { start: 0xB3260, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -67,7 +98,21 @@ segments:
       - { start: 0xB3630, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0xB4418, type: rodata, name: gcc_except_table, linker_section: .gcc_except_table }
       - { start: 0xB446C, type: prxpad, order: .rodata }
-      - [0xB4470, rodata, mm_flash]
+      - [0xB4470, .rodata, mm_flash]
+      - [0xB5944, .rodata, mm_flash_017884]
+      - [0xB5AE4, .rodata, mm_flash_01E9D0]
+      - [0xBD850, .rodata, mm_flash_0434F4]
+      - [0xBDBA0, .rodata, mm_flash_04B168]
+      - [0xBE238, .rodata, mm_flash_05AFB8]
+      - [0xBE300, .rodata, mm_flash_062398]
+      - [0xBEB94, .rodata, mm_flash_077A9C]
+      - [0xBEFF8, .rodata, mm_flash_07C92C]
+      - [0xC0A50, .rodata, mm_flash_0829FC]
+      - [0xC0BE8, .rodata, mm_flash_083174]
+      - [0xC2FB0, .rodata, mm_flash_08F058]
+      - [0xC3DCC, .rodata, mm_flash_098888]
+      - [0xC3E70, .rodata, mm_flash_09B7D4]
+      - [0xC3F4C, .rodata, mm_flash_09F0C8]
       - { start: 0xC5644, type: prxpad, order: .rodata }
   - name: mm_flash_seg1
     type: code

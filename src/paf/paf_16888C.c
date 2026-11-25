@@ -11,7 +11,13 @@ INCLUDE_ASM("nonmatchings/paf_16888C", func_001688A4);
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_16888C", func_0015F838);
+#endif
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/paf_16888C", func_00166FBC);
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_16888C", func_0015F87C);
 
 INCLUDE_ASM("nonmatchings/paf_16888C", func_0015F8A4);

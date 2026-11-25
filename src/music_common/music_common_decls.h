@@ -655,6 +655,7 @@ s32 func_000115E8(s32);
 s32 func_000115E8_v300(void *arg0);
 s32 func_000115E8_v301(void *arg0);
 s32 func_000115E8_v302(void *arg0);
+s32 func_000115E8_v303(void *arg0);
 s32 func_00011644(void *arg0, s32 arg1);
 void func_00011660(M2C_UNK **arg0);
 s32 func_000116B4(void);

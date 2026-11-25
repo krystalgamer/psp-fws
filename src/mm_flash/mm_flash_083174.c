@@ -115,7 +115,7 @@ INCLUDE_RODATA("nonmatchings/mm_flash_083174", D_000C0E44);
 
 INCLUDE_RODATA("nonmatchings/mm_flash_083174", D_000C0E50);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282 && FW_VERSION < 340
 INCLUDE_RODATA("nonmatchings/mm_flash_083174", D_000C0E0C);
 #endif
 
@@ -440,9 +440,27 @@ INCLUDE_RODATA("nonmatchings/mm_flash_083174", D_000C29AC);
 
 INCLUDE_ASM("nonmatchings/mm_flash_083174", func_0008AF48);
 
-#if FW_VERSION < 340
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mm_flash_083174", func_0008AFF4);
-#else
+#endif
+
+#if FW_VERSION == 303
+void func_0008AFF4(struct Unk_func_0008AFF4_0 *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = arg0->unk3C;
+    if (temp_v0 == 0) {
+
+    } else {
+        if (func_000756C0(arg0->unk38, temp_v0, 0, (s32) "onClose", 1, 0, 0, 0) != 0) {
+            func_0006D3D0(arg0->unk38, 1);
+        }
+        func_00072ED8((struct Unk_func_00072ED8_0 *) arg0->unk38);
+    }
+}
+#endif
+
+#if FW_VERSION == 340
 void func_0008AFF4(struct Unk_func_0008AFF4_0 *arg0) {
     s32 temp_v0;
 

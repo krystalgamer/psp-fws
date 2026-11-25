@@ -413,6 +413,10 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B1478);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B1494);
 
+#if FW_VERSION == 303
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B0E44_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B0E44_v302);
 #endif
@@ -1117,6 +1121,10 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B16C0);
 
 #if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B11F8);
+#endif
+
+#if FW_VERSION == 303
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B1210_v303);
 #endif
 
 #if FW_VERSION == 302

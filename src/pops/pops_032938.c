@@ -2,11 +2,13 @@
 #include "common.h"
 #include "pops_decls.h"
 
+#if FW_VERSION == 302
 s32 func_00032938(void) {
     return 0x10600;
 }
 
 INCLUDE_ASM("nonmatchings/pops_032938", func_00032944);
+#endif
 
 INCLUDE_RODATA("nonmatchings/pops_032938", D_0010C778);
 
@@ -104,6 +106,10 @@ INCLUDE_ASM("nonmatchings/pops_032938", func_00034450);
 
 INCLUDE_RODATA("nonmatchings/pops_032938", D_0010DB7C);
 
+#if FW_VERSION == 303
+INCLUDE_RODATA("nonmatchings/pops_032938", D_0010F888);
+#endif
+
 INCLUDE_ASM("nonmatchings/pops_032938", func_00034518);
 
 INCLUDE_ASM("nonmatchings/pops_032938", func_00034608);
@@ -165,4 +171,3 @@ void func_000348C4(void) {
 s32 func_000348E0(void) {
     return -1;
 }
-

@@ -23,6 +23,10 @@ s32 scePopsMan_driver_F74199F8(void) {
     return 0;
 }
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/popsman", scePopsMan_632F80A0);
+#endif
+
 s32 func_0000032C(void) {
     return 0;
 }

@@ -9,6 +9,10 @@ INCLUDE_ASM("nonmatchings/vshmain", func_000000AC);
 INCLUDE_ASM("nonmatchings/vshmain", func_0000010C);
 #endif
 
+#if FW_VERSION == 303
+INCLUDE_ASM("nonmatchings/vshmain", func_000001A0_v303);
+#endif
+
 #if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/vshmain", func_000001A0_v302);
 #endif

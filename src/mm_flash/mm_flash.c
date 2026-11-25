@@ -1178,7 +1178,7 @@ INCLUDE_ASM("nonmatchings/mm_flash", func_000155F8);
 
 INCLUDE_RODATA("nonmatchings/mm_flash", D_000B57EC);
 
-#if FW_VERSION < 340
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mm_flash", func_000159CC);
 #else
 void func_000159CC(s32 arg0, struct Unk_func_000159CC_1 *arg1) {

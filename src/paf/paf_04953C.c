@@ -1,6 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION != 270
 INCLUDE_ASM("nonmatchings/paf_04953C", func_0004953C);
 
 INCLUDE_ASM("nonmatchings/paf_04953C", func_000496E4);
@@ -24,3 +25,4 @@ INCLUDE_ASM("nonmatchings/paf_04953C", func_0004990C);
 INCLUDE_ASM("nonmatchings/paf_04953C", func_00049978);
 
 INCLUDE_ASM("nonmatchings/paf_04953C", func_00049AA4);
+#endif

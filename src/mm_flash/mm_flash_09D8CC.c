@@ -160,7 +160,7 @@ void func_0009EC94(s32 arg0) {
     }
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mm_flash_09D8CC", func_0009ECA8);
 
 INCLUDE_ASM("nonmatchings/mm_flash_09D8CC", func_0009ECC8);

@@ -365,37 +365,21 @@ void scePaf_9D496842(void) {
 
 }
 
-void scePaf_2750CF68(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_2750CF68);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_79E57CAF);
 
-void scePaf_79E57CAF(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_9DED6118);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_997D2809);
 
-void scePaf_9DED6118(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_7D83FB20);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_E1242646);
 
-void scePaf_997D2809(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_DC7F84BA);
 
-}
-
-void scePaf_7D83FB20(void) {
-
-}
-
-void scePaf_E1242646(void) {
-
-}
-
-void scePaf_DC7F84BA(void) {
-
-}
-
-void scePaf_0F3527DD(void) {
-
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_0F3527DD);
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_10C1DB70);
 

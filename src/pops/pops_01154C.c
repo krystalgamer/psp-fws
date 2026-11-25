@@ -2,6 +2,7 @@
 #include "common.h"
 #include "pops_decls.h"
 
+#if FW_VERSION == 302
 M2C_UNK *func_0001154C(void) {
     return &D_00218940;
 }
@@ -153,4 +154,4 @@ INCLUDE_ASM("nonmatchings/pops_01154C", func_00017A00);
 s32 func_00017A48(void) {
     return 1;
 }
-
+#endif
