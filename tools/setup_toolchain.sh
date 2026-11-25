@@ -47,9 +47,9 @@ for tool in as ld objcopy objdump nm readelf; do
     chmod +x "$T/bin/mips-$tool"
 done
 PCG=$(realpath -m "$T/psp-compiler-ground")
-if [ ! -x "$PCG/tmp/toolchains/bin/cc1-1.5.1.bin" ] || [ ! -x "$PCG/tmp/toolchains/bin/cc1-1.6.1.bin" ]; then
+if [ "$(git -C "$PCG" rev-parse --short=8 HEAD 2>/dev/null)" != 848efe94 ] || [ ! -x "$PCG/tmp/toolchains/bin/cc1-1.5.1.bin" ] || [ ! -x "$PCG/tmp/toolchains/bin/cc1-1.6.1.bin" ]; then
     [ -d "$PCG" ] || git clone -q https://github.com/krystalgamer/psp-compiler-ground "$PCG"
-    git -C "$PCG" checkout -q 71b366af
+    git -C "$PCG" checkout -q 848efe94
     "$PCG/tools/setup_toolchain.sh" >/dev/null
     # the sandbox's RH9 loader must not find the host's i386 glibc through /etc/ld.so.cache
     grep -q LD_LIBRARY_PATH "$PCG/tmp/toolchains/bin/rh9" \
