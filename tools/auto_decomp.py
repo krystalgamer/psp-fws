@@ -483,6 +483,8 @@ def main():
     ap.add_argument("--fast", action="store_true", help="only compile with each file's own setting")
     ap.add_argument("--min-size", type=lambda x: int(x, 0), default=0)
     ap.add_argument("--no-cache", action="store_true", help="retry functions that failed in other versions")
+    ap.add_argument("--stats-only", action="store_true",
+                    help="only record which settings reproduce each draft (tmp/auto_stats); change nothing")
     ap.add_argument("--verify-only", action="store_true",
                     help="only build and put asm back for C functions that do not match (this version)")
     args = ap.parse_args()
@@ -538,6 +540,9 @@ def main():
             res = try_func(mod, name, header)
         except subprocess.TimeoutExpired:
             res = None
+        if args.stats_only:
+            print(f"[{i+1}/{len(names)}] {name}: {'match' if res else '-'} {mod.stats.get(name, [])}", flush=True)
+            continue
         if not res and key:
             failed.add(key)
             if i % 50 == 0:
@@ -574,6 +579,8 @@ def main():
         stats = old
     if not FAST:  # keep the per-setting evidence of full runs
         stats_path.write_text(json.dumps(stats))
+    if args.stats_only:
+        return
     verify_and_revert(mod, args, accepted_now)
 
 

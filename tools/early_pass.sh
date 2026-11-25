@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Deep pass for one module of a firmware version we have the compiler for:
-# auto_decomp with every setting, per-version cflags from what the drafts match
-# (tools/version_flags.py), auto_decomp again; every version sharing the
+# which settings reproduce each m2c draft (auto_decomp --stats-only), per-version
+# cflags from that (tools/version_flags.py), then auto_decomp; every version sharing the
 # source must still match, else the module is restored.
 # Usage: tools/early_pass.sh VER MODULE [MAX_SIZE]
 cd "$(dirname "$0")/.."
@@ -21,7 +21,7 @@ P
 }
 before=$(count)
 { tools/regress.sh "$v:$m" \
-  && .venv/bin/python tools/auto_decomp.py "$v" "$m" --max-size "$max" --no-cache \
+  && .venv/bin/python tools/auto_decomp.py "$v" "$m" --max-size "$max" --no-cache --stats-only \
   && cp "tmp/auto_stats/${v}_$m.json" "tmp/auto_stats/${v}_$m.full.json" \
   && .venv/bin/python tools/version_flags.py "$v" "$m" --apply \
   && .venv/bin/python tools/auto_decomp.py "$v" "$m" --max-size "$max"; } >"$log" 2>&1
