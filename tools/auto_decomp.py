@@ -45,6 +45,7 @@ def mask(word, kind):
 class Module:
     def __init__(self, ver, mod):
         self.ver, self.mod = ver, mod
+        Module.VERSION = ver
         from srcdir import src_dir
         from srcdir import sharing_versions
         self.srcdir = src_dir(ver, mod)
@@ -78,13 +79,14 @@ class Module:
                     if m[2] not in self.store["funcs"] and not m[2].startswith("__"):
                         self.store["funcs"][m[2]] = m[1].strip() + ";"
 
+    VERSION = None  # firmware version the module is built for (per-version compiler headers)
+
     @staticmethod
     def file_setting(path):
+        import cc_of
         text = path.read_text() if path.exists() else ""
-        m = re.search(r"compiler: ([0-9.]+)", text)
-        compiler = m[1] if m else "1.7.1"
-        m = re.search(r"cflags: (-O[0-3s](?: -[fm][\w-]+)*)", text)
-        return compiler, f"{compiler} {m[1] if m else '-O2'}"
+        compiler, flags = cc_of.setting(text, Module.VERSION)
+        return compiler, f"{compiler} {flags}"
 
     def all_text(self):
         return "\n".join(f.read_text() for f in self.files if f.exists())

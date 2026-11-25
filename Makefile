@@ -63,7 +63,7 @@ $(BUILD)/%.bin.o: %.bin
 
 $(BUILD)/%.c.o: %.c
 	@mkdir -p $(@D)
-	$(CPP) $(CPPFLAGS) $< | $(TOOLS)/cc1-$$(grep -oP "compiler: \K[0-9.]+" $< || echo 1.7.1) $$(grep -oP "cflags: \K-O[0-3s](?: -[fm][\w-]+)*" $< || echo -O2) $(CFLAGS) -o $(BUILD)/$*.c.s
+	$(CPP) $(CPPFLAGS) $< | $$(set -- $$(python3 tools/cc_of.py $< $(VERSION)); echo $(TOOLS)/cc1-$$1; shift; echo $$@) $(CFLAGS) -o $(BUILD)/$*.c.s
 	$(PSP_AS) -EL -G0 -mulsw -Iinclude -Itmp/asm/$(VERSION)/$(MODULE) -o $@ $(BUILD)/$*.c.s
 	$(PYTHON) tools/fix_old_gas.py --text-align $$(grep -oP "text-align: \K[0-9]+" $< || echo 4) --data-align 4 $@
 
