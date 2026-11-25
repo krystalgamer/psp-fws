@@ -417,6 +417,9 @@ def _try_func(mod, name, header_ctx, target, seen):
             # code already calls it under the old one
             if k != name or re.search(rf"^(?!INCLUDE_ASM).*\b{k}\(", mod.all_text(), re.M):
                 return None
+            # another firmware version defines it in C with the old prototype
+            if mod.shared and mod.defined_elsewhere(name):
+                return None
     for k, v in new_vars.items():
         if k in mod.store["vars"] and mod.store["vars"][k] != v:
             return None
@@ -618,12 +621,30 @@ def _verify_functions(mod, args, max_rounds=200):
     accepted = sorted(set(mod.store["funcs"]) & set(mod.funcs))
     built_path = ROOT / "tmp/build" / args.version / f"{args.module}.prx"
     for rnd in range(max_rounds):
-        subprocess.run(["make", f"VERSION={args.version}", f"MODULE={args.module}"], cwd=ROOT, capture_output=True)
+        built_path.unlink(missing_ok=True)
+        r = subprocess.run(["make", f"VERSION={args.version}", f"MODULE={args.module}"], cwd=ROOT,
+                           capture_output=True, text=True)
         built = built_path.read_bytes() if built_path.exists() else b""
         src = mod.all_text()
         if built == mod.base:
             print("full build verified")
             return
+        if not built:
+            # compile/link error: revert the accepted functions it names
+            out = r.stdout + r.stderr
+            names = [n for n in accepted if re.search(rf"[`']{n}'|\b{n}\b[^\n]*(?:error|undefined)", out)
+                     and (FB.has_c(mod.file_of(n).read_text(), args.version, mod.fwvers, n) if mod.shared
+                          else f", {n});" not in src)]
+            if not names:
+                print("build failed outside accepted functions:", out[-500:])
+                return
+            for name in names:
+                mod.revert_def(mod.file_of(name), name)
+                if not mod.defined_elsewhere(name):
+                    mod.store["funcs"].pop(name, None)
+                print(f"reverted {name} (build error)")
+            mod.write_decls()
+            continue
         if mod.shared:
             live = [n for n in accepted if any(FB.has_c(f.read_text(), args.version, mod.fwvers, n) for f in mod.files if f.exists())]
         else:
