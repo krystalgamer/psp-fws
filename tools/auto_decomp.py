@@ -482,11 +482,18 @@ def main():
     ap.add_argument("--names", help="file with function names to try (one per line)")
     ap.add_argument("--fast", action="store_true", help="only compile with each file's own setting")
     ap.add_argument("--min-size", type=lambda x: int(x, 0), default=0)
+    ap.add_argument("--no-cache", action="store_true", help="retry functions that failed in other versions")
+    ap.add_argument("--verify-only", action="store_true",
+                    help="only build and put asm back for C functions that do not match (this version)")
     args = ap.parse_args()
     global FAST
     FAST = args.fast
 
     mod = Module(args.version, args.module)
+    if args.verify_only:
+        _verify_functions(mod, args)
+        mod.write_decls()
+        return
     srcs = {}
     for f in mod.files:
         s = f.read_text()
@@ -514,7 +521,7 @@ def main():
     # shared sources: functions whose (normalised) asm already failed in another
     # version of the module are not tried again
     fail_path = ROOT / "tmp/auto_fail" / f"{args.module}.json"
-    failed = set(json.loads(fail_path.read_text())) if mod.shared and fail_path.exists() else set()
+    failed = set(json.loads(fail_path.read_text())) if mod.shared and fail_path.exists() and not args.no_cache else set()
 
     def asm_key(n):
         import hashlib

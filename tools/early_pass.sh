@@ -21,7 +21,7 @@ P
 }
 before=$(count)
 { tools/regress.sh "$v:$m" \
-  && .venv/bin/python tools/auto_decomp.py "$v" "$m" --max-size "$max" \
+  && .venv/bin/python tools/auto_decomp.py "$v" "$m" --max-size "$max" --no-cache \
   && .venv/bin/python tools/version_flags.py "$v" "$m" --apply \
   && .venv/bin/python tools/auto_decomp.py "$v" "$m" --max-size "$max"; } >"$log" 2>&1
 if tools/regress.sh --shared "$v:$m" >>"$log" 2>&1; then
