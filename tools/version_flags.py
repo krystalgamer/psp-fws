@@ -28,7 +28,9 @@ def main():
     ver, mod = sys.argv[1], sys.argv[2]
     apply = "--apply" in sys.argv
     v = int(re.match(r"\d+", ver)[0])
-    stats = ROOT / "tmp/auto_stats" / f"{ver}_{mod}.json"
+    stats = ROOT / "tmp/auto_stats" / f"{ver}_{mod}.full.json"
+    if not stats.exists():
+        stats = ROOT / "tmp/auto_stats" / f"{ver}_{mod}.json"
     if not stats.exists():
         sys.exit(f"{ver}:{mod}: no stats")
     funcs = json.loads(stats.read_text())["funcs"]
@@ -84,8 +86,14 @@ def main():
             break
         built = (ROOT / "tmp/build" / ver / f"{mod}.prx").read_bytes()
         diff = next((i for i in range(min(len(built), len(base))) if built[i] != base[i]), min(len(built), len(base)))
-        hit = next((n for lo, hi, n in ranges if lo <= diff - text_off < hi), None)
-        owner = next((f for f in sd.glob("*.c") if FB.has_c(f.read_text(), ver, fv, hit)), None) if hit else None
+        # the function holding the first differing byte, or the one before it
+        # (a C function that grew at its end shifts everything after it)
+        owner = hit = None
+        for at in (diff - text_off, diff - text_off - 4):
+            hit = next((n for lo, hi, n in ranges if lo <= at < hi), None)
+            owner = next((f for f in sd.glob("*.c") if FB.has_c(f.read_text(), ver, fv, hit)), None) if hit else None
+            if owner:
+                break
         if not owner:
             break
         owner.write_text(FB.put_asm(owner.read_text(), ver, fv, hit, f"nonmatchings/{owner.stem}"))
