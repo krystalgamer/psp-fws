@@ -29,6 +29,9 @@
   "func_000035B8": "s32 func_000035B8(s32);",
   "func_00003878": "void func_00003878(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);",
   "func_00003894": "void func_00003894(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);",
+  "func_000071EC": "void func_000071EC(void);",
+  "func_0000720C": "void func_0000720C(M2C_UNK **arg0);",
+  "func_0000721C": "void func_0000721C(M2C_UNK **arg0);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "scePaf_338C3774": "void *scePaf_338C3774(s32, M2C_UNK);",
@@ -72,6 +75,7 @@
   "D_00003314": "extern s32 D_00003314;",
   "D_000037F0": "extern M2C_UNK D_000037F0;",
   "D_00003920": "extern M2C_UNK D_00003920;",
-  "D_00003934": "extern s32 D_00003934;"
+  "D_00003934": "extern s32 D_00003934;",
+  "D_00008148": "extern M2C_UNK D_00008148;"
  }
 }

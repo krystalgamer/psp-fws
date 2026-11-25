@@ -52,11 +52,14 @@
   "func_000053D8": "u8 func_000053D8(void);",
   "func_000053E4": "u8 func_000053E4(void);",
   "func_000053F0": "u8 func_000053F0(void);",
+  "func_00005B20": "void func_00005B20(s32 arg0);",
+  "func_00005B2C": "void func_00005B2C(s32 arg0);",
   "module_start": "s32 module_start(void);",
   "sceAta_driver_6FC42083": "s32 sceAta_driver_6FC42083();",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceUmd9660_driver_2C6C3F4C": "s32 sceUmd9660_driver_2C6C3F4C(void);",
+  "sceUmd9660_driver_3C150E0D": "s32 sceUmd9660_driver_3C150E0D(void);",
   "sceUmd9660_driver_44EF600C": "s32 sceUmd9660_driver_44EF600C(void);",
   "sceUmd9660_driver_C7CD9CE8": "s32 sceUmd9660_driver_C7CD9CE8(void);",
   "sceUmd9660_driver_CAAFFE8D": "s32 sceUmd9660_driver_CAAFFE8D(void);",
@@ -104,6 +107,8 @@
   "D_000083B0": "extern s32 D_000083B0;",
   "D_000083C0": "extern s32 D_000083C0;",
   "D_000083D0": "extern s32 D_000083D0;",
+  "D_00008CA0": "extern s32 D_00008CA0;",
+  "D_00008CB0": "extern s32 D_00008CB0;",
   "func_000036D8": "extern M2C_UNK func_000036D8;",
   "func_00004250": "extern s32 func_00004250;"
  }

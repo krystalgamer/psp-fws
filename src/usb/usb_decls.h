@@ -22,8 +22,10 @@ struct Unk_func_00008318_temp_a0 {
 extern M2C_UNK D_00009A3C;
 extern s32 D_0000A9DC;
 extern s32 D_0000A9EC;
+extern s32 D_0000AA0C;
 extern s32 D_0000AA3C;
 extern s32 D_0000AA4C;
+extern s32 D_0000AA6C;
 extern s32 D_0000AE40_v100;
 extern s32 D_0000AE80;
 extern s32 D_0000AFB0;

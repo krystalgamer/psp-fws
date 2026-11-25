@@ -166,6 +166,10 @@ INCLUDE_ASM("nonmatchings/power", scePowerWaitRequestCompletion);
 INCLUDE_ASM("nonmatchings/power", func_00000658);
 #endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/power", func_00000D20);
+#endif
+
 INCLUDE_RODATA("nonmatchings/power", D_00005D60);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -493,7 +497,7 @@ void func_00002944(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/power", func_000029BC);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/power", func_000016D8);
 #endif
 

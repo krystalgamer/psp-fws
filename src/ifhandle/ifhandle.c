@@ -153,11 +153,47 @@ INCLUDE_ASM("nonmatchings/ifhandle", sceNetSetDropRate);
 INCLUDE_ASM("nonmatchings/ifhandle", func_000012BC);
 
 INCLUDE_ASM("nonmatchings/ifhandle", func_00001478);
+#endif
 
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_0C391E9F);
+#endif
 
+#if FW_VERSION == 152
+s32 sceNetIfhandle_driver_0C391E9F(s32 arg0, u32 arg1) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = sceKernelCreateVpl("pspnet", 2, 0U, (u32) arg0, NULL);
+    if (temp_v0 >= 0) {
+        D_00003B28 = temp_v0;
+        D_00003B2C = 0;
+    }
+    setK1(temp_s0);
+    return temp_v0;
+}
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_29ED84C5);
-#else
+#endif
+
+#if FW_VERSION == 152
+s32 sceNetIfhandle_driver_29ED84C5(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    if (D_00003B28 > 0) {
+        sceKernelDeleteVpl(D_00003B28);
+        D_00003B28 = -1;
+    }
+    setK1(temp_s0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 sceNetIfhandle_driver_0C391E9F(s32 arg0, u32 arg1) {
     s32 temp_v0;
     u32 temp_s0;
@@ -191,9 +227,17 @@ INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_15CFE3C0);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_76BAD213);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/ifhandle", func_000018BC);
-#else
+#endif
+
+#if FW_VERSION == 152
+s32 func_000018BC(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_00001330(void) {
     return 0;
 }

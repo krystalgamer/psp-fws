@@ -22,3 +22,17 @@ sceUmdGetDriveStat = 0x000005F8; // type:func
 sceUmdGetErrorStat = 0x00000600; // type:func
 sceUmdRegisterUMDCallBack = 0x00000608; // type:func
 sceUmdUnRegisterUMDCallBack = 0x00000610; // type:func
+// shared names (tools/add_version.py) begin
+D_00006E10 = 0x00000930; // rom:0x9B0
+D_00006E38 = 0x00000970; // rom:0x9F0
+D_00000858 = 0x000009A8; // rom:0xA28
+D_00000864 = 0x000009E0; // rom:0xA60
+D_00000894 = 0x00000A10; // rom:0xA90
+D_000008D4 = 0x00000A50; // rom:0xAD0
+D_00000984 = 0x00000B34;
+D_00000988 = 0x00000B38;
+func_00000124 = 0x00000118; // type:func rom:0x198
+func_00000298 = 0x000002BC; // type:func rom:0x33C
+func_00000454 = 0x00000490; // type:func rom:0x510
+func_0000050C = 0x00000508; // type:func rom:0x588
+// shared names (tools/add_version.py) end

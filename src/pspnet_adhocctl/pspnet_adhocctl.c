@@ -46,7 +46,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlDelHandler);
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetState);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 s32 sceNetAdhocctlGetState(s32 *arg0) {
     s32 var_v0;
 
@@ -519,7 +519,7 @@ u8 *func_00004A30(u8 *arg0, u8 *arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_00004A64);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_00005050);
 #endif
 
@@ -539,7 +539,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_00004B1C);
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_00004BCC);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_000051DC);
 #endif
 

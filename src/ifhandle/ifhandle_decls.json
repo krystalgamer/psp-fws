@@ -1,6 +1,7 @@
 {
  "funcs": {
   "func_00001330": "s32 func_00001330(void);",
+  "func_000018BC": "s32 func_000018BC(void);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",

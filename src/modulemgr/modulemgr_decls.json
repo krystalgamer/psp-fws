@@ -56,6 +56,7 @@
   "Unk_func_000004C0_1": "struct Unk_func_000004C0_1 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n    u8 padC[0x4];\n    u8 unk10;\n    u8 unk11;\n};"
  },
  "vars": {
+  "D_00005AF0": "extern u32 D_00005AF0;",
   "D_00007160": "extern u32 D_00007160;"
  }
 }

@@ -6,6 +6,10 @@ s32 sceFatMS_driver_BCB9DEDB(void) {
     return 0;
 }
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00000020_v152);
+#endif
+
 #if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000020_v151);
 #endif
@@ -38,7 +42,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000020);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000004B8);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00015B80);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00015B88);
@@ -181,6 +185,10 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023CEC);
 #endif
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00001CD0);
+
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00001CD8);
+#endif
 
 #if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00001CD0_v151);
@@ -596,7 +604,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00005DA4);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006240);
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005134);
 #endif
 

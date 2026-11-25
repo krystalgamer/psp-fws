@@ -120,9 +120,17 @@ s32 module_stop(void) {
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000065DC);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00006614);
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000072B0);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00006688);
+#endif
 
+#if FW_VERSION < 282
 u8 *func_000066C8(u8 *arg0, u8 *arg1, s32 arg2) {
     s32 var_a2;
     u8 *var_a1;

@@ -13,6 +13,16 @@ INCLUDE_ASM("nonmatchings/init", InitForKernel_CE88E870);
 
 INCLUDE_RODATA("nonmatchings/init", D_00001E44);
 
+#if FW_VERSION >= 152
+INCLUDE_ASM("nonmatchings/init", func_00000208);
+#endif
+
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/init", func_0000053C);
+
+INCLUDE_ASM("nonmatchings/init", InitForKernel_7233B5BC);
+#endif
+
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/init", func_0000013C);
 
@@ -23,15 +33,15 @@ INCLUDE_ASM("nonmatchings/init", func_00000260);
 INCLUDE_ASM("nonmatchings/init", func_00000358);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/init", func_00000488);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/init", func_00000248);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 152
 INCLUDE_RODATA("nonmatchings/init", D_00002010);
 #endif
 
@@ -41,13 +51,15 @@ INCLUDE_ASM("nonmatchings/init", func_00000598);
 INCLUDE_ASM("nonmatchings/init", func_00000720);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 152
 INCLUDE_RODATA("nonmatchings/init", D_0000213C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/init", func_000006CC);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/init", func_00001088);
 #endif
 
@@ -91,7 +103,7 @@ INCLUDE_ASM("nonmatchings/init", InitForKernel_27932388);
 INCLUDE_ASM("nonmatchings/init", func_00001284);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 201
 s32 func_00001284(void) {
     return 0x40;
 }
@@ -105,15 +117,25 @@ INCLUDE_ASM("nonmatchings/init", InitForKernel_A6E71B93);
 INCLUDE_ASM("nonmatchings/init", InitForKernel_9F9AE99C);
 
 INCLUDE_ASM("nonmatchings/init", func_00001330);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_RODATA("nonmatchings/init", D_0000297C);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/init", func_00001474);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_RODATA("nonmatchings/init", D_000029C4);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/init", func_000015C8);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/init", func_00001784);
 
 INCLUDE_RODATA("nonmatchings/init", D_00002A88);
@@ -129,13 +151,19 @@ INCLUDE_RODATA("nonmatchings/init", D_00002AC0);
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/init", func_00001BB4);
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/init", func_00001650);
+
+INCLUDE_ASM("nonmatchings/init", func_00001764);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/init", func_00001E80);
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/init", func_00000208);
-
 INCLUDE_ASM("nonmatchings/init", func_00000584);
 
 INCLUDE_ASM("nonmatchings/init", InitForKernel_7233B5BC);

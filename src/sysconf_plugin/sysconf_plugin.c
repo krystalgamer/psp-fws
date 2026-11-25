@@ -525,7 +525,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000006F4);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000075C);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 void func_0000075C(void) {
     func_00000A94();
     vsh_163B90CB(3);
@@ -564,7 +564,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00000AE8);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00000A60);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 void func_00000A60(s32 arg0) {
     sceVshCommonUtil_53120F49(D_00014F20, arg0);
 }
@@ -2423,6 +2423,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C06C);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C090);
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012D3C);
+#endif
+
 #if FW_VERSION == 151
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012CFC);
 #endif
@@ -2569,6 +2573,12 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C5BC);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C5DC);
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012F84);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012FA0);
+#endif
+
 #if FW_VERSION == 151
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012F44);
 
@@ -2683,7 +2693,11 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000CD40);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000CE0C);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000093CC);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00009420);
 #endif
 
@@ -3371,6 +3385,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001327C);
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00013294);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_000132B4);
+#endif
+
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_000132A8);
 #endif
 
 #if FW_VERSION == 151

@@ -11,7 +11,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelIcacheInvalidateRange);
 INCLUDE_ASM("nonmatchings/utils", func_0000005C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", func_000000CC);
 
 INCLUDE_ASM("nonmatchings/utils", func_0000011C);
@@ -37,7 +37,7 @@ INCLUDE_ASM("nonmatchings/utils", func_000001CC);
 INCLUDE_RODATA("nonmatchings/utils", D_00003DE0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", func_000001E8);
 #endif
 
@@ -65,7 +65,7 @@ INCLUDE_ASM("nonmatchings/utils", func_00000AFC);
 INCLUDE_ASM("nonmatchings/utils", func_00000BE4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", func_00000CE8);
 
 INCLUDE_ASM("nonmatchings/utils", func_00000D38);
@@ -113,7 +113,7 @@ INCLUDE_ASM("nonmatchings/utils", func_00001514);
 INCLUDE_ASM("nonmatchings/utils", func_000015AC);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", func_00001520);
 
 INCLUDE_ASM("nonmatchings/utils", func_00001548);
@@ -125,7 +125,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5BlockUpdate);
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5BlockResult);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5Digest);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5BlockInit);
@@ -137,7 +137,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5BlockUpdate);
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5BlockResult);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5Digest);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5BlockInit);
@@ -149,7 +149,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1BlockUpdate);
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1BlockResult);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1Digest);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1BlockInit);
@@ -161,7 +161,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1BlockUpdate);
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1BlockResult);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1Digest);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1BlockInit);
@@ -171,7 +171,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMt19937Init);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMt19937UInt);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_193D4036);
 #endif
 
@@ -181,7 +181,7 @@ void UtilsForKernel_193D4036(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_95035FEF);
 #endif
 
@@ -233,7 +233,7 @@ INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_B0E9C31F);
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_23FFC828);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0CE3E29);
 #endif
 
@@ -241,7 +241,7 @@ INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0CE3E29);
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_B0E9C31F);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_23FFC828);
 
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0CE3E29);
@@ -309,7 +309,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelIcacheInvalidateAll);
 
 INCLUDE_ASM("nonmatchings/utils", func_00001680);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", func_00002B3C);
 #endif
 

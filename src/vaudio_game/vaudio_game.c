@@ -26,7 +26,7 @@ s32 sceVaudio_driver_DCC18F25(void) {
     return 0;
 }
 
-#if FW_VERSION == 150
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/vaudio_game", sceVaudio_driver_82EF2F9D);
 #else
 M2C_UNK *sceVaudio_driver_82EF2F9D(s32 arg0) {

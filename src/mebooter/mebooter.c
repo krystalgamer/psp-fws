@@ -8,7 +8,7 @@ INCLUDE_ASM("nonmatchings/mebooter", func_0000014C);
 INCLUDE_RODATA("nonmatchings/mebooter", D_00000370);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/mebooter", D_0001E760);
 #endif
 

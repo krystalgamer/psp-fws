@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/152/.splat_cache.common_gui
   symbol_addrs_path:
     - config/152/symbol_addrs.common_gui.txt
+    - config/152/func_starts.common_gui.txt
     - tmp/build/152/prx_syms.common_gui.txt
   reloc_addrs_path: [tmp/build/152/reloc_addrs.common_gui.txt]
   asset_path: tmp/assets/152/common_gui
@@ -53,7 +54,10 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, common_gui]
+      - [0xA4, c, common_gui]
+      - [0x4B8, c, common_gui_000438]
+      - [0x55FC, c, common_gui_0008C8]
+      - [0x6118, c, common_gui_0016E8]
       - { start: 0x731C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x7338, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x75B8, type: prxpad, order: .text }
@@ -71,7 +75,9 @@ segments:
       - { start: 0x79BC, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x79C8, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x79CC, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x79D0, rodata, common_gui]
+      - [0x79D0, .rodata, common_gui_000438]
+      - [0x7CB8, .rodata, common_gui_0008C8]
+      - [0x7DD8, .rodata, common_gui_0016E8]
   - name: common_gui_seg1
     type: code
     start: 0x81D0

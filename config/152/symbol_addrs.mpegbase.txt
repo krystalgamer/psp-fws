@@ -27,3 +27,10 @@ sceDmacplus_driver_BE693828 = 0x00001D88; // type:func
 sceDmacplus_driver_AB49D2CB = 0x00001D90; // type:func
 sceMeCore_driver_3D5F109C = 0x00001D98; // type:func
 sceSysreg_driver_E2A5D1EE = 0x00001DA0; // type:func
+// shared names (tools/add_version.py) begin
+func_00000D48 = 0x00000D78; // type:func rom:0xDF8
+func_00000D74 = 0x00000DA8; // type:func rom:0xE28
+func_00000E34 = 0x00000E68; // type:func rom:0xEE8
+func_00000FEC = 0x00001020; // type:func rom:0x10A0
+func_000010FC = 0x00001130; // type:func rom:0x11B0
+// shared names (tools/add_version.py) end

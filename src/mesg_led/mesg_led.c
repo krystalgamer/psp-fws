@@ -3,7 +3,33 @@
 
 INCLUDE_ASM("nonmatchings/mesg_led", func_00000000);
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/mesg_led", func_0000006C_v152);
+#endif
+
 INCLUDE_ASM("nonmatchings/mesg_led", func_0000006C);
+
+#if FW_VERSION == 152
+s32 module_start(void) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_v1;
+
+    temp_v0 = sceKernelCreateSema("SceUtils4096", 0U, 1, 1, NULL);
+    D_00002994 = temp_v0;
+    var_v1 = 1;
+    if (temp_v0 > 0) {
+        temp_v0_2 = sceKernelCreateSema("SceUtils5120", 0U, 1, 1, NULL);
+        D_00002998 = temp_v0_2;
+        var_v1 = 0;
+        if (temp_v0_2 <= 0) {
+            sceKernelDeleteSema(D_00002994);
+            var_v1 = 1;
+        }
+    }
+    return var_v1;
+}
+#endif
 
 #if FW_VERSION == 100
 s32 module_start(void) {
@@ -25,7 +51,9 @@ s32 module_start(void) {
     }
     return var_v1;
 }
+#endif
 
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_84A04017);
 
 INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_A86D5005);
@@ -79,7 +107,7 @@ INCLUDE_ASM("nonmatchings/mesg_led", sceNwman_driver_9555D68D);
 
 INCLUDE_ASM("nonmatchings/mesg_led", sceResmgr_9DC14891);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_198FD3BE);
 
 INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_FBC694C7);
@@ -163,6 +191,10 @@ INCLUDE_RODATA("nonmatchings/mesg_led", D_00004E38);
 
 INCLUDE_RODATA("nonmatchings/mesg_led", D_00004E3C);
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/mesg_led", D_00001DBC);
+#endif
+
 #if FW_VERSION == 303
 INCLUDE_RODATA("nonmatchings/mesg_led", D_00004ECC);
 
@@ -233,7 +265,7 @@ INCLUDE_RODATA("nonmatchings/mesg_led", D_00005DAC);
 
 INCLUDE_RODATA("nonmatchings/mesg_led", D_00005E40);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/mesg_led", D_00001E20);
 #else
 INCLUDE_RODATA("nonmatchings/mesg_led", D_00005E44);
@@ -300,6 +332,10 @@ INCLUDE_RODATA("nonmatchings/mesg_led", D_000061FC);
 INCLUDE_RODATA("nonmatchings/mesg_led", D_00006210);
 
 INCLUDE_RODATA("nonmatchings/mesg_led", D_00006214);
+
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/mesg_led", D_00002334);
+#endif
 
 #if FW_VERSION == 303
 INCLUDE_RODATA("nonmatchings/mesg_led", D_000062A4);

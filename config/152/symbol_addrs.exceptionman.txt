@@ -8,3 +8,27 @@ ExceptionManagerForKernel_3FB264FC = 0x000005B4; // type:func
 ExceptionManagerForKernel_DF83875E = 0x000005D4; // type:func
 ExceptionManagerForKernel_15ADC862 = 0x00000B48; // type:func
 ExceptionManagerForKernel_B15357C9 = 0x00000BB0; // type:func
+// shared names (tools/add_version.py) begin
+D_00000DC0 = 0x00001180;
+D_00000DC4 = 0x00001184;
+func_000000F4 = 0x00000560; // type:func rom:0x5E0
+func_0000011C = 0x00000588; // type:func rom:0x608
+func_000005C0 = 0x000005F0; // type:func rom:0x670
+func_00000600 = 0x0000062C; // type:func rom:0x6AC
+func_00000690 = 0x000006BC; // type:func rom:0x73C
+func_000006B8 = 0x000006E4; // type:func rom:0x764
+func_000006C8 = 0x000006F4; // type:func rom:0x774
+func_000006D8 = 0x00000704; // type:func rom:0x784
+func_000006F8 = 0x00000724; // type:func rom:0x7A4
+func_00000A0C = 0x00000A00; // type:func rom:0xA80
+func_00000A18 = 0x00000A0C; // type:func rom:0xA8C
+func_00000A28 = 0x00000A1C; // type:func rom:0xA9C
+func_00000A80 = 0x00000A2C; // type:func rom:0xAAC
+func_00000AAC = 0x00000A58; // type:func rom:0xAD8
+func_00000AD4 = 0x00000A80; // type:func rom:0xB00
+func_00000744 = 0x00000AB8; // type:func rom:0xB38
+func_00000B14 = 0x00000AC0; // type:func rom:0xB40
+func_00000B20 = 0x00000ACC; // type:func rom:0xB4C
+func_00000C80 = 0x00000C2C; // type:func rom:0xCAC
+func_00000CB0 = 0x00000C5C; // type:func rom:0xCDC
+// shared names (tools/add_version.py) end

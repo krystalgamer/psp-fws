@@ -53,6 +53,7 @@
   "func_000045DC": "s32 func_000045DC(void);",
   "func_00004664": "s32 func_00004664(M2C_UNK, M2C_UNK);",
   "func_00004CBC": "s32 func_00004CBC(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
+  "func_00005194": "s32 func_00005194(s32 arg0, s32 arg1);",
   "func_00005834": "s32 func_00005834(s32);",
   "func_00005B88": "s32 func_00005B88(void);",
   "func_00005E30": "s32 func_00005E30(void);",

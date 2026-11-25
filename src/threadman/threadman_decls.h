@@ -262,6 +262,7 @@ s32 func_0000DE24(void *arg0);
 s32 func_0000DE4C(void);
 s32 func_0000DE6C(void *arg0);
 s32 func_0000DE94(void);
+s32 func_0000DF00(void);
 s32 func_0000E674(void *arg0, void *arg1);
 s32 func_0000EA04(s32, s32);
 s32 func_0000ED30(void);

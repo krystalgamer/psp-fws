@@ -70,6 +70,10 @@ INCLUDE_ASM("nonmatchings/libparse_http", func_000009F0);
 
 INCLUDE_ASM("nonmatchings/libparse_http", func_00000BD0);
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/libparse_http", func_00000B4C_v152);
+#endif
+
 #if FW_VERSION < 282
 u8 *func_00000B4C(u8 *arg0, u8 *arg1) {
     u8 *var_a1;

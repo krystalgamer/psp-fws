@@ -87,6 +87,10 @@ s32 syslib_D3744BE0(void) {
 INCLUDE_ASM("nonmatchings/uart4", func_0000047C);
 #endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/uart4", func_00000504_v152);
+#endif
+
 #if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/uart4", func_00000504_v150);
 #endif

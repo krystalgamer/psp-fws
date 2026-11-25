@@ -115,7 +115,7 @@ INCLUDE_ASM("nonmatchings/sysclib", memset);
 
 INCLUDE_ASM("nonmatchings/sysclib", memmove);
 
-#if FW_VERSION < 201
+#if FW_VERSION < 152
 INCLUDE_RODATA("nonmatchings/sysclib", D_00001EE8);
 #endif
 
@@ -143,7 +143,7 @@ INCLUDE_ASM("nonmatchings/sysclib", sprintf);
 
 INCLUDE_ASM("nonmatchings/sysclib", func_00001CE4);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/sysclib", func_00001B30);
 #endif
 

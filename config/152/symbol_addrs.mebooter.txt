@@ -8,3 +8,7 @@ sceSysreg_driver_DE59DACB = 0x000001E4; // type:func
 sceSysreg_driver_2DB0EB28 = 0x000001EC; // type:func
 sceSysreg_driver_7558064A = 0x000001F4; // type:func
 sceSysreg_driver_44F6CDA7 = 0x000001FC; // type:func
+// shared names (tools/add_version.py) begin
+D_0001E760 = 0x0001E750; // rom:0x1E7D0
+func_0000014C = 0x00000104; // type:func rom:0x184
+// shared names (tools/add_version.py) end

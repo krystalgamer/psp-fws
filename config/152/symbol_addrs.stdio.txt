@@ -37,3 +37,16 @@ SysclibForKernel_87C78FB6 = 0x00000E10; // type:func
 Uart4ForKernel_69BCBEF1 = 0x00000E18; // type:func
 Uart4ForKernel_2518C2F3 = 0x00000E20; // type:func
 Uart4ForKernel_2FD96F62 = 0x00000E28; // type:func
+// shared names (tools/add_version.py) begin
+D_00000FB0 = 0x000010B0; // rom:0x1130
+D_00000FB8 = 0x000010B8; // rom:0x1138
+D_000011C8 = 0x00001188; // rom:0x1208
+D_000011DC = 0x0000119C; // rom:0x121C
+D_00001298 = 0x00001258; // rom:0x12D8
+D_000012B0 = 0x00001270; // rom:0x12F0
+D_00001560 = 0x00001280; // rom:0x1300
+D_00001564 = 0x00001284; // rom:0x1304
+D_00001568 = 0x00001288; // rom:0x1308
+func_000006A0 = 0x00000780; // type:func rom:0x800
+func_00000C78 = 0x00000A3C; // type:func rom:0xABC
+// shared names (tools/add_version.py) end

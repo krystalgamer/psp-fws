@@ -12,7 +12,23 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005EA8);
 
 INCLUDE_ASM("nonmatchings/isofs", func_000001B8);
 
-#if FW_VERSION < 201
+#if FW_VERSION == 152
+s32 sceIsofs_driver_19F9734D(s32 arg0) {
+    s32 temp_v0;
+    s32 var_a0;
+
+    temp_v0 = func_00007700();
+    var_a0 = 0;
+    if (arg0 >= 0) {
+        if (arg0 < M2C_FIELD(temp_v0, s32 *, 0xC)) {
+            var_a0 = D_00008A40 + (arg0 * 0xA4);
+        }
+    }
+    return var_a0;
+}
+#endif
+
+#if FW_VERSION < 152
 s32 sceIsofs_driver_19F9734D(s32 arg0) {
     s32 temp_v0;
     s32 var_a0;
@@ -26,7 +42,9 @@ s32 sceIsofs_driver_19F9734D(s32 arg0) {
     }
     return var_a0;
 }
-#else
+#endif
+
+#if FW_VERSION == 201
 s32 sceIsofs_driver_19F9734D(s32 arg0) {
     s32 temp_v0;
     s32 var_a0;
@@ -178,9 +196,17 @@ INCLUDE_ASM("nonmatchings/isofs", func_00000DA8);
 INCLUDE_ASM("nonmatchings/isofs", func_00001914);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00001A04);
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/isofs", func_00001BBC);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/isofs", func_00001B84);
-#else
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/isofs", func_00000E3C);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00000EBC);
@@ -372,7 +398,13 @@ u8 func_00005054(void) {
 u8 func_00005060(void) {
     return D_00009C83;
 }
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/isofs", func_0000506C);
+#endif
+
+#if FW_VERSION < 152
 s32 func_0000506C(u32 arg0) {
     s32 temp_s1;
     s32 var_v0;
@@ -409,7 +441,11 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00006224);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00002E28);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/isofs", func_000053C0);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/isofs", func_00005440);
 #endif
 
@@ -492,7 +528,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00003DD4);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00004024);
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 201
 s32 func_00006720(s32 arg0) {
     return !(arg0 & 0xF02) ? 0 : 0x8001B004;
 }
@@ -518,7 +554,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00006FCC);
 INCLUDE_ASM("nonmatchings/isofs", func_000072C4);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_000074FC);
 #endif
 
@@ -590,9 +626,17 @@ s32 func_00007748(void) {
 INCLUDE_ASM("nonmatchings/isofs", func_00007754);
 
 INCLUDE_ASM("nonmatchings/isofs", func_000079AC);
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/isofs", func_00007ED8);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/isofs", func_00007B0C);
+#endif
 
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_00007E48);
 #endif
 

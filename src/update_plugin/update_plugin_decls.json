@@ -36,6 +36,7 @@
   "func_00002824": "void func_00002824(s32 arg0);",
   "func_0000283C": "void func_0000283C(void);",
   "func_00002858": "void func_00002858(void);",
+  "func_00002870_v152": "void func_00002870_v152(s32 arg0);",
   "func_00002874_v150": "void func_00002874_v150(s32 arg0);",
   "func_000028A8": "s32 func_000028A8(s32);",
   "func_000028D4": "void func_000028D4(s32 arg0);",

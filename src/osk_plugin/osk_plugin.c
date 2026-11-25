@@ -113,7 +113,7 @@ void func_0000038C(void) {
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000003A8);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_000003E4(void) {
     void *temp_v0;
 
@@ -194,7 +194,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000C07C);
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000C08C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000DC54);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000DC64);
@@ -212,7 +212,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000DC9C);
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000C09C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000DCC0);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000DCC8);
@@ -246,6 +246,10 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000C110);
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000C118);
 #endif
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000DD88);
+#endif
+
 #if FW_VERSION == 150
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000DDC8);
 #endif
@@ -268,7 +272,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000C170);
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000C188);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000DE44);
 #endif
 
@@ -318,7 +322,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118AC);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118B4);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E094);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E0AC);
@@ -344,7 +348,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E18C);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118C0);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E1AC);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E1B8);
@@ -352,7 +356,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E1B8);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118CC);
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118D8);
 #endif
 
@@ -600,9 +604,23 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_000120EC);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_000120F4);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E234);
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E208);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E3C8);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E5C8);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E608);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E644);
+#endif
+
+#if FW_VERSION == 150
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E248);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E408);
@@ -622,7 +640,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_000120FC);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012110);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E6D0);
 #endif
 
@@ -862,7 +880,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00000500);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00000664);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00000750);
 #endif
 
@@ -878,7 +896,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00000914);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00000A98);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00001188(void) {
     if (D_000160F0 == 0) {
         D_000160E0 = 0;
@@ -952,7 +970,7 @@ void func_000010D8(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00003A34);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00003BDC);
@@ -1056,7 +1074,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_000035EC);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00003AFC);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00004B30);
 #endif
 
@@ -1072,7 +1090,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00003F24);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000040E8);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00005114);
 #endif
 
@@ -1088,7 +1106,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_000048D8);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00004998);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00004998(void) {
     D_00015FA8 = 0;
     scePaf_3481F595(D_0000F140, &D_000120FC);
@@ -1120,7 +1138,7 @@ void func_00004C24(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00005E70);
 #endif
 
@@ -1166,7 +1184,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_000053DC);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000540C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_0000547C(s32 *arg0, s32 *arg1) {
     *arg0 = *arg1;
     func_00005664((s32) arg0);
@@ -1197,7 +1215,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_000055B0);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00005664);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000068F4);
 #endif
 
@@ -1209,9 +1227,15 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00005684);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000057A8);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00006A74);
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/osk_plugin", func_00006B78);
+#endif
+
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00006B90_v150);
 #endif
 
@@ -1235,11 +1259,25 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012228);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012230);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E7F8);
 #endif
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012238);
+
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E7C0);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E814);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E868);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E8E8);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E968);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E9E8);
+#endif
 
 #if FW_VERSION == 150
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E800);
@@ -1253,7 +1291,9 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E928);
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000E9A8);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000EA28);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000EAA8);
 #endif
 
@@ -1291,7 +1331,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_000122E8);
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0001233C);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012390);
 #endif
 
@@ -1311,7 +1351,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000732C);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000078E4);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000077F0);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00007868);
@@ -1386,6 +1426,10 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00008164);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00008210);
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/osk_plugin", func_00007B10);
+#endif
+
 #if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00007B28);
 #endif
@@ -1400,7 +1444,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_000065EC);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000664C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_000086C8(void) {
     return 1;
 }
@@ -1436,7 +1480,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00009FF0);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A064);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_000079F0(void *arg0, s32 arg1) {
     scePaf_D1EE972C(M2C_FIELD(arg0, s32 *, 0x41C), arg1, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
 }
@@ -1462,7 +1506,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A1E4);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A218);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00009454);
 #endif
 
@@ -1476,7 +1520,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A250);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A270);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00009490);
 #endif
 
@@ -1492,7 +1536,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A28C);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A2B8);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000094E0);
 #endif
 
@@ -1545,7 +1589,7 @@ void func_0000AAE4(struct Unk_func_0000AAE4_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000AB98);
 #endif
 
@@ -1553,7 +1597,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000AB98);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00008164);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000099AC);
 #endif
 
@@ -1571,7 +1615,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000AD44);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00008408);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00008588(void *arg0) {
     scePaf_AEEF2A7C(M2C_FIELD(arg0, s32 *, 0x41C), 0, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
     scePaf_AEEF2A7C(M2C_FIELD(arg0, s32 *, 0x41C), 1, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
@@ -1585,7 +1629,7 @@ void func_00008588(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_000085E0(void *arg0) {
     scePaf_37DD37B8(M2C_FIELD(arg0, s32 *, 0x41C), 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
 }
@@ -1597,7 +1641,7 @@ void func_000085E0(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00008618(void *arg0) {
     s32 temp_s1;
 
@@ -1650,7 +1694,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000B1C0);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000088B0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A1EC);
 #endif
 
@@ -1658,7 +1702,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A1EC);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000089A4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A54C);
 #endif
 
@@ -1722,7 +1766,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000C560);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_000094D8);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000AE78);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000AF80);
@@ -2013,7 +2057,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012C6C);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012C94);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000EEB4);
 #endif
 
@@ -2049,7 +2093,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012DF0);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012E08);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000F024);
 #endif
 
@@ -2069,9 +2113,15 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012E74);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012E90);
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000F070);
+#endif
+
 #if FW_VERSION == 150
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000F0B0_v150);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000F0E4);
 #endif
 
@@ -2119,7 +2169,7 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_00012FF8);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0001300C);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_0000F224);
 #endif
 
@@ -2194,7 +2244,7 @@ void func_00009C14(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000B264);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000B2D0);
@@ -2274,7 +2324,7 @@ void func_0000E0B0(void) {
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000E0B8);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000B37C);
 #endif
 
@@ -2282,7 +2332,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000B37C);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00009C7C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000B59C);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000B700);
@@ -2326,7 +2376,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000E6A0);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000E700);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000E7F0);
 #endif
 
@@ -2362,13 +2412,13 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000EC5C);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000ED24);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000ED64);
 #endif
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000EDB8);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000BC30);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000BE88);

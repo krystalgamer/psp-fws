@@ -69,13 +69,19 @@ u8 *func_00009134(u8 *arg0, u8 *arg1, s32 arg2) {
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00009168);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00007358);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00006728);
 
 void func_00006768(s32 arg0, s32 arg1) {
     func_00006614(arg1, arg0);
 }
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_0000678C);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_000067B4);
@@ -105,9 +111,19 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00006F48);
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_000072D8);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_000072F8);
+#endif
 
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_0000732C);
+#endif
 
+#if FW_VERSION == 152
+s32 func_0000732C(s32 arg0) {
+    return __builtin_allegrex_max(arg0, -arg0);
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00007340);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_0000736C);
@@ -163,9 +179,15 @@ INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009CB0);
 
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009CB8);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00008880);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00007BC4);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009CBC);
 #endif
 

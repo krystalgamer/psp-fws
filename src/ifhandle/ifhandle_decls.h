@@ -44,6 +44,7 @@ extern s32 D_000043D0;
 extern s32 D_000043D4;
 
 s32 func_00001330(void);
+s32 func_000018BC(void);
 s32 module_start(void);
 s32 module_stop(void);
 void sceKernelCpuResumeIntr(s32);

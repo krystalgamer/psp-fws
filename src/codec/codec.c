@@ -46,7 +46,7 @@ INCLUDE_ASM("nonmatchings/codec", func_000001D8);
 INCLUDE_ASM("nonmatchings/codec", func_000002A8);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_856E7487);
 #endif
 
@@ -96,7 +96,7 @@ s32 sceCodec_driver_28A49CCA(void) {
 
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_BD8E0977);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_856E7487);
 #endif
 
@@ -110,7 +110,7 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_EEB91526);
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_359C2B9F);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void sceCodec_driver_359C2B9F(void) {
     func_00000924(-1, -1, 0, 0);
 }
@@ -120,7 +120,7 @@ void sceCodec_driver_359C2B9F(void) {
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_31B2E41E);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void sceCodec_driver_31B2E41E(void) {
     func_00000924(0, 0, -1, 0);
 }
@@ -136,7 +136,7 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_20C61103);
 
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_02133959);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/codec", func_00000B70);
 #endif
 
@@ -144,7 +144,7 @@ INCLUDE_ASM("nonmatchings/codec", func_00000B70);
 INCLUDE_ASM("nonmatchings/codec", func_00000924);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/codec", func_00000EC4);
 #endif
 
@@ -158,7 +158,7 @@ INCLUDE_ASM("nonmatchings/codec", func_00000CF8);
 INCLUDE_ASM("nonmatchings/codec", func_00000D5C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/codec", D_00001320);
 
 INCLUDE_RODATA("nonmatchings/codec", D_00001230);

@@ -191,6 +191,10 @@ INCLUDE_ASM("nonmatchings/msaudio", func_00001ACC);
 
 INCLUDE_ASM("nonmatchings/msaudio", func_00001B78);
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/msaudio", func_000005C4);
+#endif
+
 #if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/msaudio", func_00001BD4);
 
@@ -257,6 +261,10 @@ INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_9E37E51D);
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_68EF9696);
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_45E1994B);
+#endif
+
+#if FW_VERSION >= 152
+INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_135F2225);
 #else
 s32 sceMSAudio_driver_135F2225(u32 arg0) {
     if (D_00003088 != 0) {
@@ -268,24 +276,20 @@ s32 sceMSAudio_driver_135F2225(u32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_135F2225);
-#endif
-
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_22DA9981);
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_5D1C9867);
 
-#if FW_VERSION < 340
-s32 sceMSAudio_driver_67E58C07(void) {
-    return 0;
-}
-#else
+#if FW_VERSION >= 152
 s32 sceMSAudio_driver_67E58C07(void) {
     u32 temp_v0;
 
     temp_v0 = shiftK1();
     setK1(temp_v0);
+    return 0;
+}
+#else
+s32 sceMSAudio_driver_67E58C07(void) {
     return 0;
 }
 #endif

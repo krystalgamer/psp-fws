@@ -102,3 +102,17 @@ ThreadManForKernel_F6427665 = 0x00004EA0; // type:func
 ThreadManForKernel_DD55A192 = 0x00004EA8; // type:func
 sceKernelDcacheWritebackAll = 0x00004EB0; // type:func
 sceKernelIcacheInvalidateAll = 0x00004EB8; // type:func
+// shared names (tools/add_version.py) begin
+D_00004D48 = 0x000053D8; // rom:0x5458
+D_00006D34 = 0x000053E4; // rom:0x5464
+D_00005018 = 0x00005404; // rom:0x5484
+D_0000602C = 0x00005680; // rom:0x5700
+D_00006060 = 0x000056BC; // rom:0x573C
+D_000060A8 = 0x000056D0; // rom:0x5750
+func_000004B0 = 0x00000430; // type:func rom:0x4B0
+func_00003210 = 0x00003E94; // type:func rom:0x3F14
+func_00003DBC = 0x0000464C; // type:func rom:0x46CC
+func_00004058 = 0x00004860; // type:func rom:0x48E0
+func_000041DC = 0x000049CC; // type:func rom:0x4A4C
+D_00005018_v152 = 0x00005018; // rom:0x5098
+// shared names (tools/add_version.py) end

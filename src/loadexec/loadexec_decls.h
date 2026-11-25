@@ -18,6 +18,7 @@ void LoadExecForKernel_821BE114(s32 arg0, s32 arg1);
 void LoadExecForKernel_AC085B9E(s32 arg0, s32 arg1, s32 arg2);
 s32 LoadExecForUser_2AC9954B(s32);
 void RebootForKernel_72E280A8(void);
+s32 func_000017D8(void);
 s32 func_00001934(s32, s32, s32, s32);
 s32 func_00001A98(void);
 s32 func_00001D6C(s32, s32, s32, s32, s32);

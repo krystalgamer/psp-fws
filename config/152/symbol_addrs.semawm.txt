@@ -7,3 +7,5 @@ sceSemawm_6FEA0A45 = 0x00001074; // type:func
 module_start = 0x000055E0; // type:func
 module_stop = 0x00005608; // type:func
 semaphore_4C537C72 = 0x00005630; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

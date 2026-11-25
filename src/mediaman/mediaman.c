@@ -153,7 +153,7 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmd_086DDC0D);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_2D81508D);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mediaman", D_00000F5C);
 #endif
 

@@ -25,3 +25,11 @@ sceKernelCreateSema = 0x00000E18; // type:func
 sceKernelDeleteSema = 0x00000E20; // type:func
 sceKernelSignalSema = 0x00000E28; // type:func
 sceKernelWaitSema = 0x00000E30; // type:func
+// shared names (tools/add_version.py) begin
+D_00000F00 = 0x00001080;
+D_00000F10 = 0x00001090;
+D_00000F20 = 0x000010A0;
+D_00000F30 = 0x000010B0;
+D_00001000 = 0x00001180;
+D_00000F10_v152 = 0x00000F10; // rom:0xF90
+// shared names (tools/add_version.py) end

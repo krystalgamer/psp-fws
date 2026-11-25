@@ -2,6 +2,24 @@
 #include "common.h"
 #include "vshbridge_decls.h"
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_61001D64);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_C6395C03);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_16415246);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_2380DC08);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_4DB43867);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_274BB6AE);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_3B3D9F5D);
+
+INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_74DA9D25);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/vshbridge", D_00003BB0);
 
@@ -76,7 +94,7 @@ s32 sceVshBridge_driver_92A3B940(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_A5628F0D);
 #else
 void sceVshBridge_A5628F0D(void) {
@@ -84,7 +102,7 @@ void sceVshBridge_A5628F0D(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_41C54ADF);
 #else
 void sceVshBridge_41C54ADF(void) {
@@ -92,7 +110,7 @@ void sceVshBridge_41C54ADF(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_C9626587);
 #else
 void sceVshBridge_C9626587(void) {
@@ -102,7 +120,7 @@ void sceVshBridge_C9626587(void) {
 
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_5C2983C2);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_61001D64);
 #endif
 
@@ -112,9 +130,11 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_C949966C);
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_5D4213EA);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_C6395C03);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_33EEEF3E);
 
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_AFB59B52);
@@ -146,13 +166,13 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_5894C339);
 
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_0FA48729);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_16415246);
 #endif
 
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_5350C073);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_2380DC08);
 
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_4DB43867);
@@ -212,9 +232,11 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_E2DD0A81);
 
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_6396ACBD);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_274BB6AE);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_9AE8C0AC);
 #endif
 
@@ -222,7 +244,7 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_8C440581);
 
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_07EC5661);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_3B3D9F5D);
 #endif
 
@@ -240,7 +262,7 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_A7F0E8E0);
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_98B4117E);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_98B4117E(void) {
     LoadExecForKernel_BB28E9B7();
 }
@@ -250,7 +272,7 @@ void sceVshBridge_98B4117E(void) {
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_8399A8AA);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_8399A8AA(void) {
     LoadExecForKernel_71A1D738();
 }
@@ -260,7 +282,7 @@ void sceVshBridge_8399A8AA(void) {
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_EEFB02BB);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_EEFB02BB(void *arg0, void *arg1) {
     sceKernelLoadExec(arg0, arg1);
 }
@@ -270,7 +292,7 @@ void sceVshBridge_EEFB02BB(void *arg0, void *arg1) {
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_E614F45F);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_E614F45F(void) {
     LoadExecForKernel_4D5C75BE();
 }
@@ -280,7 +302,7 @@ void sceVshBridge_E614F45F(void) {
 INCLUDE_ASM("nonmatchings/vshbridge", func_0000095C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_0000095C(void) {
     sceKernelExitGame();
 }
@@ -290,7 +312,7 @@ void func_0000095C(void) {
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_9929DDA5);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_9929DDA5(void) {
     sceKernelExitGame();
 }
@@ -334,7 +356,7 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_8DF139B4);
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_CE86EF4A);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_B7C46DCA);
 #else
 void sceVshBridge_B7C46DCA(void) {
@@ -342,7 +364,7 @@ void sceVshBridge_B7C46DCA(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_F4873F4D);
 #else
 void sceVshBridge_F4873F4D(void) {
@@ -350,7 +372,7 @@ void sceVshBridge_F4873F4D(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_83528906);
 #else
 void sceVshBridge_83528906(void) {
@@ -358,7 +380,7 @@ void sceVshBridge_83528906(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_F35BFB7D);
 #else
 void sceVshBridge_F35BFB7D(void) {
@@ -366,7 +388,7 @@ void sceVshBridge_F35BFB7D(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_97FB006F);
 #else
 void sceVshBridge_97FB006F(void) {
@@ -374,7 +396,7 @@ void sceVshBridge_97FB006F(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_029EF6C9);
 #else
 void sceVshBridge_029EF6C9(void) {
@@ -382,7 +404,7 @@ void sceVshBridge_029EF6C9(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_40716012);
 #else
 void sceVshBridge_40716012(void) {
@@ -394,47 +416,47 @@ void sceVshBridge_40716012(void) {
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_88DA81A5);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_88DA81A5(void) {
     LoadExecForKernel_62C459E1();
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_C1D3AE95);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_C1D3AE95(void) {
     KDebugForKernel_5282DD5E();
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_D08C1FBE);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_D08C1FBE(void) {
     KDebugForKernel_EE75658D();
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_04AEC74C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_04AEC74C(void) {
     LoadExecForKernel_7B7C47EF();
 }
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_68BE3316);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_68BE3316(void) {
     LoadExecForKernel_4F41E75E();
 }
@@ -444,7 +466,7 @@ void sceVshBridge_68BE3316(void) {
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_88BD8364);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceVshBridge_88BD8364(void) {
     LoadExecForKernel_918782E8();
 }
@@ -454,9 +476,11 @@ void sceVshBridge_88BD8364(void) {
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_B8C7406A);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_74DA9D25);
+#endif
 
+#if FW_VERSION < 282
 void LflashFatfmt_B7A424A4(void) {
 
 }

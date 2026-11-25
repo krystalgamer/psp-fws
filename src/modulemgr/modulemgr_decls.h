@@ -34,6 +34,7 @@ struct Unk_func_000004C0_1 {
     u8 unk11;
 };
 
+extern u32 D_00005AF0;
 extern u32 D_00007160;
 
 M2C_UNK LoadCoreForKernel_0DE1F600();

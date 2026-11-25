@@ -13,7 +13,7 @@ INCLUDE_ASM("nonmatchings/stdio", func_0000014C);
 
 INCLUDE_ASM("nonmatchings/stdio", printf);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/stdio", func_000001A4);
 #endif
 
@@ -51,7 +51,11 @@ INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_D2B2A2A7);
 
 INCLUDE_ASM("nonmatchings/stdio", getchar);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/stdio", D_000010A8);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_RODATA("nonmatchings/stdio", D_00000F8C);
 #endif
 
@@ -77,7 +81,7 @@ INCLUDE_ASM("nonmatchings/stdio", StdioForUser_9D061C19);
 INCLUDE_ASM("nonmatchings/stdio", StdioForUser_924ABA61);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/stdio", func_00000C78);
 #endif
 
@@ -182,7 +186,7 @@ INCLUDE_RODATA("nonmatchings/stdio", D_00001508);
 INCLUDE_RODATA("nonmatchings/stdio", D_0000151C);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/stdio", func_00000C78);
 #endif
 
@@ -206,7 +210,7 @@ INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_98220F3E);
 
 INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_FB5380C5);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/stdio", D_00001298);
 
 INCLUDE_RODATA("nonmatchings/stdio", D_000012B0);

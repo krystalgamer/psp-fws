@@ -14,7 +14,7 @@ INCLUDE_ASM("nonmatchings/ctrl", func_00000294);
 INCLUDE_ASM("nonmatchings/ctrl", func_00000334);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ctrl", func_00000428);
 #endif
 
@@ -44,7 +44,7 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrlPeekLatch);
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlReadLatch);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     if (arg0 != NULL) {
         *arg0 = D_00002618;
@@ -132,7 +132,7 @@ s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_VFIELD(&D_00001D70, s32, 0xA44) = arg3;
     D_00001D70.unkA38 = arg0;
@@ -150,7 +150,7 @@ s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceCtrl_driver_348D99D4(u32 arg0) {
     s32 var_v1;
 
@@ -242,7 +242,7 @@ s32 func_00001214(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00001220(void) {
     func_00000804(M2C_VFIELD(&D_00001D70, s32, 0xA20) & 0xFFFF0C06, (s32) D_00001D70.pad0[0xA2C], (s32) D_00001D70.pad0[0xA2D]);
     sceKernelSetEventFlag(M2C_VFIELD(&D_00001D70, s32, 4), 1U);

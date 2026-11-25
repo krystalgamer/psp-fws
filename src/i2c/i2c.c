@@ -75,7 +75,7 @@ s32 sceI2c_driver_DB6C4F9B(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceI2c_driver_0397408B(s32 arg0) {
     D_00001718 = arg0;
     return 0;
@@ -91,7 +91,7 @@ s32 sceI2c_driver_17B0DA59(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1) {
     M2C_VFIELD(&D_000015B0, s32, 0x14) = arg1;
     M2C_VFIELD(&D_000015B0, s32, 0x10) = arg0;
@@ -107,7 +107,7 @@ s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/i2c", func_000011B0);
 #endif
 

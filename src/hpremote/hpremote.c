@@ -91,7 +91,7 @@ INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_2C7B8B05);
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_D22913DB);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 u8 sceHprm_driver_71B5FB67(void) {
     return D_00002176;
 }
@@ -129,7 +129,7 @@ s32 sceHprm_driver_971AE8FB(s32 *arg0) {
 INCLUDE_ASM("nonmatchings/hpremote", func_00001250);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00001250(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x1000C:
@@ -204,7 +204,7 @@ INCLUDE_ASM("nonmatchings/hpremote", func_00001658);
 
 INCLUDE_ASM("nonmatchings/hpremote", func_0000181C);
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/hpremote", func_00001924);
 #else
 s32 func_00001924(void) {

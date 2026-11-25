@@ -508,15 +508,27 @@ s32 func_000079D8(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A08);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005DB8);
+#endif
 
+#if FW_VERSION == 152
+s32 func_00005DB8(s32 arg0) {
+    return (sceKernelPollSema(arg0, 0) == 0) ? 0 : 0x80000041;
+}
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A68);
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_00007A3C(s32 arg0) {
     return (sceKernelPollSema(arg0, 0) == 0) ? 0 : 0x80000041;
 }
+#endif
 
+#if FW_VERSION >= 152
 s32 func_00007A68(s32 arg0) {
     return (sceKernelSignalSema(arg0, 1) == 0) ? 0 : 0x80000041;
 }

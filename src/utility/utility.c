@@ -17,7 +17,7 @@ INCLUDE_ASM("nonmatchings/utility", sceUtility_driver_20C68C34);
 INCLUDE_ASM("nonmatchings/utility", func_000001B8);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/utility", func_000001E4);
 
 INCLUDE_ASM("nonmatchings/utility", func_00000280);
@@ -39,7 +39,7 @@ INCLUDE_ASM("nonmatchings/utility", func_00000C08);
 INCLUDE_ASM("nonmatchings/utility", func_00000D08);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_17CB4D96);
 
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_EE7AC503);
@@ -67,7 +67,7 @@ INCLUDE_ASM("nonmatchings/utility", sceUtility_private_B222E887);
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_4F2206BC);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_EF5BC2D1);
 #endif
 
@@ -87,7 +87,7 @@ INCLUDE_ASM("nonmatchings/utility", sceUtility_private_4ABA7FF9);
 
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_A5168A5D);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_3CEAE1DF);
 
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_56BEDCA4);
@@ -573,7 +573,7 @@ INCLUDE_ASM("nonmatchings/utility", sceUtilityGameSharingUpdate);
 INCLUDE_ASM("nonmatchings/utility", sceUtilityGameSharingGetStatus);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/utility", sceUtility_3AD50AE7);
 
 INCLUDE_ASM("nonmatchings/utility", sceUtility_BC6B6296);

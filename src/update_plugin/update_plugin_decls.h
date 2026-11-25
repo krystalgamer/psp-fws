@@ -160,6 +160,7 @@ void func_000027B8(s32 arg0);
 void func_00002824(s32 arg0);
 void func_0000283C(void);
 void func_00002858(void);
+void func_00002870_v152(s32 arg0);
 void func_00002874_v150(s32 arg0);
 s32 func_000028A8(s32);
 void func_000028D4(s32 arg0);

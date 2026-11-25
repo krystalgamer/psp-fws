@@ -18,7 +18,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00000124);
 INCLUDE_ASM("nonmatchings/mscm", func_000001E4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_0000027C);
 #endif
 
@@ -103,7 +103,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00001D18);
 INCLUDE_ASM("nonmatchings/mscm", func_00002194);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_0000244C);
 #endif
 
@@ -282,9 +282,17 @@ INCLUDE_ASM("nonmatchings/mscm", func_00004B70);
 INCLUDE_ASM("nonmatchings/mscm", func_00004D30);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00004E50);
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/mscm", func_0000514C);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/mscm", func_00004E94);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00004F60);
 #else
 INCLUDE_ASM("nonmatchings/mscm", func_00005330);
@@ -436,7 +444,7 @@ s32 func_000059D8(void) {
 INCLUDE_ASM("nonmatchings/mscm", func_000059E0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00005EE4);
 #endif
 

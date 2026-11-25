@@ -159,7 +159,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002480);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00001C24);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 s32 func_00001C24(void *arg0, s32 arg1) {
     s32 temp_v0;
 
@@ -384,7 +384,13 @@ s32 pmp_keepalive_handler(void *arg0) {
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002374);
-#else
+#endif
+
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_000023D8);
+#endif
+
+#if FW_VERSION == 282
 void func_00002AF4(struct Unk_func_00002AF4_0 *arg0, u32 arg1) {
     s32 temp_s1;
     s32 temp_v1;
@@ -478,7 +484,7 @@ s32 func_00002CC0(struct Unk_func_00002CC0_0 *arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002D1C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_0000245C);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002528);
@@ -723,8 +729,12 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00003674);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002C90);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002CE4);
+#endif
+
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002528);
 #endif
 
 #if FW_VERSION < 151
@@ -775,7 +785,7 @@ u8 *func_00002ED8(u8 *arg0, u8 *arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002F0C);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002F00);
 #endif
 

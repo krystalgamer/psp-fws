@@ -49,11 +49,19 @@ INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_50F99EAD);
 
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_driver_60066CFE);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/usbstor", func_000008BC);
+
+INCLUDE_ASM("nonmatchings/usbstor", func_00000EB8);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/usbstor", func_000008E4);
 
 INCLUDE_ASM("nonmatchings/usbstor", func_00000EDC);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/usbstor", func_00000FE0);
 #else
 INCLUDE_ASM("nonmatchings/usbstor", func_00000904);
@@ -79,7 +87,7 @@ INCLUDE_RODATA("nonmatchings/usbstor", D_00002928);
 
 INCLUDE_RODATA("nonmatchings/usbstor", D_00002948);
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/usbstor", D_0000296C);
 #endif
 
@@ -130,9 +138,17 @@ INCLUDE_ASM("nonmatchings/usbstor", func_00001D18);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/usbstor", func_00001BD8);
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/usbstor", func_00001E4C);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/usbstor", func_00001E5C);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/usbstor", func_00001D7C);
 
 INCLUDE_ASM("nonmatchings/usbstor", func_00001FDC);

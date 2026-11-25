@@ -57,6 +57,10 @@ s32 func_000003F0(s32 arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/threadman", func_00000544_v152);
+#endif
+
 #if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/threadman", func_00000544_v151);
 #endif
@@ -152,7 +156,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_000007F4);
 INCLUDE_ASM("nonmatchings/threadman", func_000008A0);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 s32 func_000008A0(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -666,7 +670,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelMsgPipe);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferMsgPipeStatus);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_00008828);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000088FC);
@@ -966,7 +970,11 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014F2C);
 INCLUDE_ASM("nonmatchings/threadman", func_0000AB04);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/threadman", func_0000AEA0);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/threadman", func_0000AEF8);
 #endif
 
@@ -1210,8 +1218,15 @@ s32 func_0000E674(void *arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/threadman", func_0000DF00);
+#endif
+
+#if FW_VERSION == 152
+s32 func_0000DF00(void) {
+    SysMemForKernel_CE05CCB7();
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 100

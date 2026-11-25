@@ -22,7 +22,7 @@ void func_00000610(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 }
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000115C8);
 #endif
 
@@ -164,7 +164,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_0001171C);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011730);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011BFC);
 
 void func_00000558(void) {
@@ -187,7 +187,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000758);
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000A14);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00000BC8(void) {
     func_00008120(&D_0001157C);
 }
@@ -201,7 +201,7 @@ void func_00000BC8(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000880);
 #endif
 
@@ -300,7 +300,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000011C4);
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000013BC);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000EA0);
 #endif
 
@@ -312,7 +312,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000E68);
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000E78);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_000010C8(s32 arg0, u32 arg1) {
     return (((s32) (arg0 + 1) / (s32) (arg1 >> 5)) + 1) * arg1;
 }
@@ -338,9 +338,15 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011880);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011890);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000010F0);
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001278);
+#endif
+
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001274);
 #endif
 
@@ -348,7 +354,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001274);
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001614);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001C4C);
 #endif
 
@@ -372,7 +378,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011990);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000119A0);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011DDC);
 #endif
 
@@ -384,7 +390,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000119C4);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000119D0);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011E08);
 #endif
 
@@ -418,7 +424,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002034);
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002640);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00002640(s32 arg0) {
     s32 temp_s1;
 
@@ -453,13 +459,13 @@ void func_00002640(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002800);
 #else
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000026F0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002880);
 #endif
 
@@ -497,7 +503,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000029F0);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002A60);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00002A98(s32 arg0, void *arg1) {
     if (D_00012A80 == 0) {
         if (M2C_FIELD(arg1, u16 *, 4) == 0x401) {
@@ -528,6 +534,12 @@ void func_00002B1C(s32 arg0, s32 arg1, s32 arg2) {
 
 s32 func_00002B38(void) {
     return D_0001167C;
+}
+#endif
+
+#if FW_VERSION == 152
+u8 func_00002D00(void) {
+    return D_00012A98;
 }
 #endif
 

@@ -7,8 +7,11 @@
 
 s32 func_00001288(void *arg0);
 s32 func_00002014(void *arg0);
+s32 func_00002044(s32, s32);
+s32 func_000020B4(s32, s32);
 void func_00002320(u8 *arg0, u8 *arg1, s32 arg2);
 u32 func_00002D4C(void *arg0);
+s32 func_00002E3C(s32);
 s32 func_00003168(s32 arg0, u32 arg1, s32 arg2, u32 arg3);
 u32 func_000032F0(u32 arg0, u32 arg1, u32 arg2);
 void func_00003320(void *arg0, u32 arg1);

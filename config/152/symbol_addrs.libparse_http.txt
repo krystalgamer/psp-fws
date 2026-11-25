@@ -3,3 +3,24 @@ sceParseHttpStatusLine = 0x00000000; // type:func
 sceParseHttpResponseHeader = 0x000000AC; // type:func
 module_start = 0x000005D4; // type:func
 module_stop = 0x000005DC; // type:func
+// shared names (tools/add_version.py) begin
+D_00000D60 = 0x00000C80; // rom:0xD00
+D_00000C41 = 0x00000C81; // rom:0xD01
+func_000002D8 = 0x000002D0; // type:func rom:0x350
+func_0000044C = 0x00000444; // type:func rom:0x4C4
+func_000004DC = 0x000004D4; // type:func rom:0x554
+func_00000564 = 0x0000055C; // type:func rom:0x5DC
+func_000005F0 = 0x000005E4; // type:func rom:0x664
+func_000006C4 = 0x00000610; // type:func rom:0x690
+func_000006F0 = 0x0000063C; // type:func rom:0x6BC
+func_0000065C = 0x00000650; // type:func rom:0x6D0
+func_00000710 = 0x0000065C; // type:func rom:0x6DC
+func_000007B0 = 0x000006FC; // type:func rom:0x77C
+func_0000090C = 0x00000858; // type:func rom:0x8D8
+func_00000954 = 0x000008A0; // type:func rom:0x920
+func_00000988 = 0x000008D4; // type:func rom:0x954
+func_000009F0 = 0x0000093C; // type:func rom:0x9BC
+func_00000BD0 = 0x00000B1C; // type:func rom:0xB9C
+func_00000B4C = 0x00000B94; // type:func rom:0xC14
+func_00000B4C_v152 = 0x00000B4C; // type:func rom:0xBCC
+// shared names (tools/add_version.py) end

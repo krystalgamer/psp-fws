@@ -54,7 +54,7 @@ void func_00000EFC(struct Unk_func_00000EFC_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000F04);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_1A6F3382);
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_D27E08EE);
@@ -80,7 +80,7 @@ void sceVshCommonGui_72E652AA(s32 *arg0) {
     scePaf_41BCFB59(*arg0);
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 void sceVshCommonGui_9F196654(s32 *arg0) {
     scePaf_FA05BF7B(*arg0);
 }
@@ -106,7 +106,7 @@ s32 sceVshCommonGui_ACFE7BE7(void **arg0) {
     return var_v0;
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 152
 void sceVshCommonGui_88F5E3A8(struct Unk_sceVshCommonGui_88F5E3A8_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk14 = arg2;
     arg0->unkC = arg1;

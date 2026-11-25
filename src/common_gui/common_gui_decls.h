@@ -67,6 +67,7 @@ extern s32 D_00003314;
 extern M2C_UNK D_000037F0;
 extern M2C_UNK D_00003920;
 extern s32 D_00003934;
+extern M2C_UNK D_00008148;
 
 M2C_UNK func_00000000();
 void func_00000438(s32 arg0, s32 arg1);
@@ -97,6 +98,9 @@ s32 func_00003588(s32);
 s32 func_000035B8(s32);
 void func_00003878(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 void func_00003894(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+void func_000071EC(void);
+void func_0000720C(M2C_UNK **arg0);
+void func_0000721C(M2C_UNK **arg0);
 s32 module_start(void);
 s32 module_stop(void);
 void *scePaf_338C3774(s32, M2C_UNK);

@@ -12,3 +12,16 @@ sceKernelDeleteSema = 0x000012D8; // type:func
 sceKernelSignalSema = 0x000012E0; // type:func
 sceKernelWaitSema = 0x000012E8; // type:func
 semaphore_4C537C72 = 0x000012F0; // type:func
+// shared names (tools/add_version.py) begin
+D_00002AD4 = 0x00002514;
+D_00002AD8 = 0x00002518;
+func_000013F0 = 0x00000EA8; // type:func rom:0xF28
+func_00001440 = 0x00000EFC; // type:func rom:0xF7C
+func_00001490 = 0x00000F50; // type:func rom:0xFD0
+func_000014E4 = 0x00000FA8; // type:func rom:0x1028
+func_00001538 = 0x00001000; // type:func rom:0x1080
+func_000015D8 = 0x000010A0; // type:func rom:0x1120
+func_00001688 = 0x00001150; // type:func rom:0x11D0
+func_00001724 = 0x000011EC; // type:func rom:0x126C
+func_000017D0 = 0x00001298; // type:func rom:0x1318
+// shared names (tools/add_version.py) end

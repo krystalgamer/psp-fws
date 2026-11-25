@@ -67,7 +67,7 @@ void func_000018AC(s32 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000018D8);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001550);
 #endif
 
@@ -137,11 +137,19 @@ INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009194);
 
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_000091AC);
 
-#if FW_VERSION < 201
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_0000842C);
+
+INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00008434);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00008170);
 
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00008178);
-#else
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_0000920C);
 
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009214);
@@ -166,9 +174,15 @@ s32 func_000034CC(void *arg0, s32 arg1, s32 *arg2) {
     return var_a0;
 }
 
-#if FW_VERSION < 201
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00003130);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00003298);
-#else
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000351C);
 #endif
 
@@ -220,7 +234,7 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004664);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000046FC);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000047C8);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000048D4);
@@ -288,6 +302,10 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", module_reboot_before);
 
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009284);
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_000084F8);
+#endif
+
 #if FW_VERSION == 150
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00008508);
 #endif
@@ -320,7 +338,7 @@ s32 func_0000497C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00004990(void) {
     if (M2C_FIELD(&D_00008934, s32 *, 0) > 0) {
         sceKernelDeleteSema(M2C_FIELD(&D_00008934, s32 *, 0));
@@ -358,7 +376,7 @@ s32 func_00004A04(void) {
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004A90);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004B30);

@@ -125,3 +125,5 @@ sceUmdMan_driver_F6BE91FC = 0x00001A10; // type:func
 sceVaudioOutputBlocking = 0x00001A18; // type:func
 sceVaudioChReserve = 0x00001A20; // type:func
 sceVaudioChRelease = 0x00001A28; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

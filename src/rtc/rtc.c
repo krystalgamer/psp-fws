@@ -173,6 +173,10 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetDosTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetWin32FileTime);
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/rtc", func_000011E0);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetTime64_t);
 #endif
@@ -207,6 +211,10 @@ s32 sceRtcGetDayOfWeek(s32 arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetDosTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetWin32FileTime);
+
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/rtc", func_00001E10);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime64_t);

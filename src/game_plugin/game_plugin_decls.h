@@ -223,6 +223,7 @@ void func_00002A98(s32 arg0, void *arg1);
 void func_00002B1C(s32 arg0, s32 arg1, s32 arg2);
 s32 func_00002B38(void);
 s32 func_00002B8C(void);
+u8 func_00002D00(void);
 u8 func_00002D08_v150(void);
 void func_000031CC(void);
 void func_00003244(void);

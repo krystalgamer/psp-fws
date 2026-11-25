@@ -138,7 +138,7 @@ M2C_UNK *func_00001B98(void) {
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001BA4);
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001868);
 #endif
 
@@ -220,6 +220,10 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_00001F64);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00002144);
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/libparse_uri", func_00001DEC);
+#endif
+
 #if FW_VERSION < 282
 u8 *func_00001DE4(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
@@ -278,8 +282,14 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_00002984);
 
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002C20);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002874);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002824);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002C28);
 #endif

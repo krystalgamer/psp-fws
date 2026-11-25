@@ -106,6 +106,7 @@ void func_00004410(s32 arg0);
 s32 func_000045DC(void);
 s32 func_00004664(M2C_UNK, M2C_UNK);
 s32 func_00004CBC(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+s32 func_00005194(s32 arg0, s32 arg1);
 s32 func_00005834(s32);
 s32 func_00005B88(void);
 s32 func_00005E30(void);

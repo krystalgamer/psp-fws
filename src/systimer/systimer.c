@@ -10,7 +10,7 @@ INCLUDE_ASM("nonmatchings/systimer", func_000000E0);
 INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_975D8E84);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_000002B4(void **arg0) {
     void *temp_a2;
 
@@ -74,7 +74,7 @@ INCLUDE_ASM("nonmatchings/systimer", func_00000898);
 
 INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_53231A15);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/systimer", func_00000878);
 
 INCLUDE_ASM("nonmatchings/systimer", func_000008F0);

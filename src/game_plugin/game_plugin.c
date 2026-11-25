@@ -38,7 +38,7 @@ INCLUDE_ASM("nonmatchings/game_plugin", func_000005D4);
 
 INCLUDE_ASM("nonmatchings/game_plugin", func_0000045C);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin", func_000006B8);
 #endif
 

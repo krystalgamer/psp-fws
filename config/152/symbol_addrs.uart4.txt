@@ -16,3 +16,7 @@ KDebugForKernel_E6554FDA = 0x000005DC; // type:func
 KDebugForKernel_7D1C74F0 = 0x000005E4; // type:func
 sceSuspendForKernel_91A77137 = 0x000005EC; // type:func
 sceSuspendForKernel_B43D1A8C = 0x000005F4; // type:func
+// shared names (tools/add_version.py) begin
+func_00000504 = 0x00000398; // type:func rom:0x418
+func_00000504_v152 = 0x00000504; // type:func rom:0x584
+// shared names (tools/add_version.py) end

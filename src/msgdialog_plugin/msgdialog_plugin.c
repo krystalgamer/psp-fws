@@ -84,7 +84,7 @@ INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_000005F4);
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000ADC);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000984);
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_000009B4);
@@ -142,7 +142,7 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000015EC);
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001604);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001624);
 #endif
 
@@ -192,9 +192,15 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000018B8);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000018E0);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001434);
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000144C_v152);
+#endif
+
+#if FW_VERSION == 150
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000144C_v150);
 #endif
 

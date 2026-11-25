@@ -137,7 +137,7 @@ INCLUDE_RODATA("nonmatchings/common_util", D_0000A828);
 INCLUDE_RODATA("nonmatchings/common_util", D_0000A834);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/common_util", D_0000B274);
 #endif
 
@@ -257,7 +257,7 @@ INCLUDE_RODATA("nonmatchings/common_util", D_0000AB24);
 INCLUDE_RODATA("nonmatchings/common_util", D_0000AB30);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/common_util", D_0000B580);
 #endif
 
@@ -269,7 +269,7 @@ INCLUDE_RODATA("nonmatchings/common_util", D_0000AB48);
 INCLUDE_RODATA("nonmatchings/common_util", D_0000AB54);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_C403411C);
 
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_58234CB0);
@@ -346,7 +346,7 @@ INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_FC8E3CEF);
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_BFC546B6);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_9DF53F2F);
 #endif
 
@@ -380,7 +380,7 @@ INCLUDE_RODATA("nonmatchings/common_util", D_00008A24);
 
 INCLUDE_RODATA("nonmatchings/common_util", D_00008A30);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/common_util", D_0000B954);
 
 INCLUDE_RODATA("nonmatchings/common_util", D_0000B960);
@@ -398,7 +398,7 @@ INCLUDE_RODATA("nonmatchings/common_util", D_0000B99C);
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_B296D591);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_util", func_00001A44);
 
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_FA969B6A);
@@ -422,13 +422,28 @@ void func_000012F8(void) {
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_D4D66154);
 #endif
 
+#if FW_VERSION == 152
+void sceVshCommonUtil_D4D66154(s32 *arg0) {
+    if (!(*arg0 & 1)) {
+
+    } else {
+        scePower_DB62C9CF();
+    }
+    if (D_0000E7A0 != 0) {
+        ((M2C_UNK (*)(M2C_UNK)) D_0000E7A0)(0);
+    } else {
+        sceKernelPowerUnlock(0);
+    }
+}
+#endif
+
 #if FW_VERSION == 100
 void sceVshCommonUtil_D4D66154(s32 *arg0) {
     sceKernelPowerUnlock(0);
 }
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void sceVshCommonUtil_5A0B7762(s32 arg0, s32 arg1) {
     D_0000E79C = arg0;
     D_0000E7A0 = arg1;
@@ -585,7 +600,7 @@ INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_B48D135B);
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_9E7D761E);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void sceVshCommonUtil_0F553311(void *arg0) {
     s32 temp_v0;
 
@@ -713,7 +728,7 @@ INCLUDE_ASM("nonmatchings/common_util", func_00006F68);
 INCLUDE_ASM("nonmatchings/common_util", func_0000706C);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/common_util", D_00008AD0);
 
 INCLUDE_RODATA("nonmatchings/common_util", D_00008AD4);
@@ -747,7 +762,7 @@ INCLUDE_RODATA("nonmatchings/common_util", D_0000AE1C);
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_EE5869D8);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_util", func_00002600);
 #endif
 
@@ -765,7 +780,7 @@ INCLUDE_RODATA("nonmatchings/common_util", D_0000AED4);
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_3088B748);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_81B52E61);
 #endif
 
@@ -851,7 +866,7 @@ INCLUDE_ASM("nonmatchings/common_util", func_00008A34);
 INCLUDE_ASM("nonmatchings/common_util", func_00008BE0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/common_util", D_0000BA3C);
 
 INCLUDE_RODATA("nonmatchings/common_util", D_0000BA40);
@@ -879,7 +894,7 @@ INCLUDE_ASM("nonmatchings/common_util", func_000075BC);
 
 INCLUDE_ASM("nonmatchings/common_util", func_00007698);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_util", func_00009D78);
 #endif
 

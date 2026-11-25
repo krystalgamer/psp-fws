@@ -71,7 +71,7 @@ INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_9E3C6DC6);
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_31C4BAA8);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_000013B4(s32 *arg0) {
     return *arg0 & ~3;
 }

@@ -149,7 +149,7 @@ INCLUDE_RODATA("nonmatchings/mediasync", D_00006E38);
 INCLUDE_RODATA("nonmatchings/mediasync", D_00000858);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mediasync", D_000009B4);
 #endif
 
@@ -165,7 +165,7 @@ INCLUDE_ASM("nonmatchings/mediasync", func_00000298);
 INCLUDE_ASM("nonmatchings/mediasync", func_00000454);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediasync", func_0000050C);
 #endif
 

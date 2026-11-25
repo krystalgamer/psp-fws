@@ -59,7 +59,7 @@ INCLUDE_ASM("nonmatchings/mpegbase", func_00000CC8);
 
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_0530BE4E);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000D48);
 
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000D74);

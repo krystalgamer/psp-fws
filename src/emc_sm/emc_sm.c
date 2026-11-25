@@ -76,7 +76,7 @@ void sceNand_driver_BADD5D46(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     sceNand_driver_0ADC8686(arg0, arg1, arg2, arg3, 0x31);
 }
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000FD4);
 #endif
 

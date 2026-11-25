@@ -41,6 +41,7 @@ s32 func_00006674(s32 arg0);
 s32 func_00006998(s32 arg0);
 void func_00006A0C(void);
 void func_00006AC0(s32 arg0);
+s32 func_00006EF0(s32 arg0);
 s32 module_reboot_before(void);
 s32 sceIoClose(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);

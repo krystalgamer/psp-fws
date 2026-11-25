@@ -246,9 +246,17 @@ void func_00001514(s32 arg0, s32 arg1) {
     }
     func_00002584(arg0, arg1, var_v0);
 }
+#endif
 
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00001550);
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00001564);
+#endif
 
+#if FW_VERSION < 282
 void func_000021FC(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00002638();

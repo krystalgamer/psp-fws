@@ -64,7 +64,7 @@ void sceClockgen_driver_DBE5F283(void) {
     func_00000614(8, 0);
 }
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/clockgen", func_0000047C);
 #endif
 
