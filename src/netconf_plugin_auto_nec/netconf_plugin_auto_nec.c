@@ -29,7 +29,11 @@ s32 func_00000194(void) {
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_0000019C);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_000004D8);
+#else
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00000500);
+#endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_0000098C);
 
@@ -82,7 +86,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_000013A4);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00001518);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00001624);
+#else
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00001758);
+#endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00001804);
 
@@ -152,7 +160,9 @@ INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00004AC4);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00004B24);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00004B48);
+#endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00004BD4);
 
@@ -177,9 +187,15 @@ s32 sceVshNetconfRaku_F3AF9DD1(void *arg0) {
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_D030086D);
 
+#if FW_VERSION == 201
+s32 func_00004FE8(void) {
+    return 0x401;
+}
+#else
 s32 func_00004FE8(void) {
     return 0x410;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00004FF0);
 

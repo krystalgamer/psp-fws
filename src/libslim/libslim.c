@@ -521,6 +521,19 @@ void func_000044C0(void) {
 
 INCLUDE_ASM("nonmatchings/libslim", func_000044DC);
 
+#if FW_VERSION == 201
+void func_00004540(struct Unk_func_00004540_0 *arg0) {
+    s32 temp_v0;
+    s32 temp_v1;
+
+    temp_v1 = arg0->unk10 - 1;
+    temp_v0 = temp_v1 << arg0->unkE;
+    arg0->unk10 = temp_v1;
+    if (!(temp_v0 & 0xFFF)) {
+        func_000096E4((s32) arg0, temp_v0);
+    }
+}
+#else
 void func_00004540(struct Unk_func_00004540_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
@@ -532,6 +545,7 @@ void func_00004540(struct Unk_func_00004540_0 *arg0) {
         func_000096E4((s32) arg0, temp_v0);
     }
 }
+#endif
 
 s32 func_0000457C(struct Unk_func_0000457C_0 *arg0, s32 arg1) {
     s32 temp_v0;
@@ -799,6 +813,17 @@ INCLUDE_ASM("nonmatchings/libslim", sceHVSlim_Library_6B15F29F);
 
 INCLUDE_ASM("nonmatchings/libslim", func_00005F60);
 
+#if FW_VERSION == 201
+s32 func_00006054(struct Unk_func_00006054_0 *arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if ((M2C_FIELD(func_000095F4((s32) arg0, (arg1 & 0x3FFFFF) * 4), s32 *, 8) != 0) || (arg0->unk18 == arg1)) {
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#else
 s32 func_00006054(struct Unk_func_00006054_0 *arg0, s32 arg1) {
     s32 var_v1;
 
@@ -808,6 +833,7 @@ s32 func_00006054(struct Unk_func_00006054_0 *arg0, s32 arg1) {
     }
     return var_v1;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/libslim", sceHVSlim_Library_EE1C1283);
 
@@ -821,7 +847,21 @@ void sceHVSlim_Library_05F33A6C(struct Unk_sceHVSlim_Library_05F33A6C_0 *arg0, s
     arg0->unk18 = arg1;
 }
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/libslim", sceHVSlim_Library_1DF9F3CD);
+#else
+s32 sceHVSlim_Library_1DF9F3CD(s32 arg0, s32 arg1) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = M2C_FIELD(func_000095F4(arg0, (arg1 & 0x3FFFFF) * 4), s32 *, 0xC);
+    var_v1 = 0;
+    if (temp_v0 != 0) {
+        var_v1 = *func_000095F4(arg0, (temp_v0 & 0x3FFFFF) * 4);
+    }
+    return var_v1;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/libslim", sceHVSlim_Library_6DC3FDE4);
 
@@ -841,11 +881,31 @@ INCLUDE_ASM("nonmatchings/libslim", func_0000674C);
 
 INCLUDE_ASM("nonmatchings/libslim", func_00006800);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/libslim", func_00006974);
+#else
 INCLUDE_ASM("nonmatchings/libslim", func_000068A4);
+#endif
 
 INCLUDE_ASM("nonmatchings/libslim", func_00006954);
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/libslim", func_00006A98);
+#else
+s32 func_00006A98(void *arg0, s32 arg1, void *arg2) {
+    s32 var_s0;
+    s32 var_v0;
+
+    var_s0 = arg1;
+    sceHVSlim_Library_D611E938(arg2, 0, 0xC);
+    if ((var_s0 != 0) || (var_s0 = M2C_FIELD(arg0, s32 *, 0x18), var_v0 = 0, (var_s0 != 0))) {
+        M2C_FIELD(arg2, s32 *, 0) = var_s0;
+        M2C_FIELD(arg2, s32 *, 8) = sceHVSlim_Library_440B8F87(arg0, (var_s0 & 0x3FFFFF) * 4, (s32) (arg2 + 4));
+        var_v0 = 1;
+    }
+    return var_v0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/libslim", func_00006B10);
 
@@ -893,7 +953,21 @@ s32 func_00006CF0(s32 arg0, struct Unk_func_00006CF0_1 *arg1) {
     return var_v1;
 }
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/libslim", func_00006D2C);
+#else
+s32 func_00006D2C(s32 arg0, s32 *arg1) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = sceHVSlim_Library_1DF9F3CD(arg0, *arg1);
+    var_v1 = 0;
+    if (temp_v0 != 0) {
+        var_v1 = func_00006B38(arg0, temp_v0, (s32) arg1);
+    }
+    return var_v1;
+}
+#endif
 
 void sceHVSlim_Library_81130A27(struct Unk_sceHVSlim_Library_81130A27_0 *arg0, s32 arg1, s16 arg2) {
     arg0->unk0 = arg1;
@@ -993,6 +1067,16 @@ INCLUDE_ASM("nonmatchings/libslim", func_00008400);
 
 INCLUDE_ASM("nonmatchings/libslim", func_00008448);
 
+#if FW_VERSION == 201
+void func_00008490(s32 arg0, s32 arg1) {
+    void *temp_v1;
+
+    temp_v1 = D_00016518 + (((s32) (arg0 - D_00017EB0) >> 0xC) * 0xC);
+    if (M2C_FIELD(temp_v1, s16 *, 0) == 0) {
+        M2C_FIELD(temp_v1, s32 *, 8) = arg1;
+    }
+}
+#else
 void func_00008490(s32 arg0, s32 arg1) {
     struct Unk_func_00008490_temp_v1 *temp_v1;
 
@@ -1001,7 +1085,24 @@ void func_00008490(s32 arg0, s32 arg1) {
         temp_v1->unk8 = arg1;
     }
 }
+#endif
 
+#if FW_VERSION == 201
+void *func_000084CC(void) {
+    void *temp_v0;
+    void *var_v0;
+
+    temp_v0 = func_00007974(0x1000, 1);
+    var_v0 = NULL;
+    if (temp_v0 != NULL) {
+        func_00008448(temp_v0, 1);
+        sceHVSlim_Library_D611E938(temp_v0, 0, 0x1000);
+        M2C_FIELD(temp_v0, s16 *, 2) = 0x3FF;
+        var_v0 = temp_v0;
+    }
+    return var_v0;
+}
+#else
 void *func_000084CC(void) {
     struct Unk_func_000084CC_temp_v0 *temp_v0;
     void *var_v0;
@@ -1016,6 +1117,7 @@ void *func_000084CC(void) {
     }
     return var_v0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/libslim", func_0000852C);
 
@@ -1142,9 +1244,15 @@ void func_0000905C(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/libslim", func_00009068);
 
+#if FW_VERSION == 201
+void func_0000911C(s32 *arg0) {
+    *arg0 = 0x1000;
+}
+#else
 void func_0000911C(s32 *arg0) {
     *arg0 = 0x400;
 }
+#endif
 
 void func_00009128(s32 *arg0) {
     *arg0 = D_0001657C;
@@ -1180,6 +1288,73 @@ INCLUDE_ASM("nonmatchings/libslim", func_00009618);
 INCLUDE_ASM("nonmatchings/libslim", func_000096E4);
 
 INCLUDE_ASM("nonmatchings/libslim", func_0000973C);
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/libslim", func_00009888);
+
+INCLUDE_ASM("nonmatchings/libslim", func_000098B0);
+
+INCLUDE_ASM("nonmatchings/libslim", func_00009928);
+
+INCLUDE_ASM("nonmatchings/libslim", func_00009994);
+
+INCLUDE_ASM("nonmatchings/libslim", func_000099E8);
+
+INCLUDE_ASM("nonmatchings/libslim", func_00009A58);
+
+INCLUDE_ASM("nonmatchings/libslim", func_00009A94_v201);
+
+INCLUDE_ASM("nonmatchings/libslim", func_00009B0C);
+
+INCLUDE_ASM("nonmatchings/libslim", func_00009B5C);
+
+INCLUDE_ASM("nonmatchings/libslim", func_00009BB0);
+
+INCLUDE_ASM("nonmatchings/libslim", func_00009C08);
+
+INCLUDE_ASM("nonmatchings/libslim", func_00009D48);
+
+INCLUDE_ASM("nonmatchings/libslim", func_00009F34);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000A1CC);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000A29C);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000A3E8);
+
+void func_0000A4C8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_0000A3E8(arg0, arg1, arg2, sceHVSlim_Library_15875ED4(arg2), arg3);
+}
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000A52C);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000A61C);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000A90C);
+
+void func_0000AA08(s32 arg0, s32 arg1, s32 **arg2) {
+    func_0000A90C(arg0, arg1, (s32) arg2, sceHVSlim_Library_3EDA77E7(*arg2));
+}
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000AA5C);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000AC40);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000ACCC);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000AE84);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000AF2C);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000AFC0);
+
+INCLUDE_ASM("nonmatchings/libslim", func_0000B040);
+
+void func_0000B118(void ***arg0, s32 arg1) {
+    sceHVSlim_Library_08549708(*arg0);
+    func_00005A3C(arg1 + 0x14, arg1 + 0x38);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/libslim", func_000097C4);
 
@@ -1517,6 +1692,10 @@ INCLUDE_RODATA("nonmatchings/libslim", D_000150F0);
 INCLUDE_RODATA("nonmatchings/libslim", D_000151F0);
 
 INCLUDE_RODATA("nonmatchings/libslim", D_000152F0);
+
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/libslim", D_00016CEC);
+#endif
 
 INCLUDE_RODATA("nonmatchings/libslim", D_00015350);
 

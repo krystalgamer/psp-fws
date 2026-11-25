@@ -10,17 +10,30 @@ INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C31F4);
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3250);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_7C2C2742);
+#else
 void scePaf_7C2C2742(void) {
     sceGuStart(0, D_001A5420, D_001A5424);
 }
+#endif
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_D0AD10FF);
+#else
 void scePaf_D0AD10FF(void) {
     sceGuFinish();
     sceGuSync(0, 0);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3338);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0C31CC", func_0006B024);
+
+INCLUDE_ASM("nonmatchings/paf_0C31CC", func_0006B030);
+#else
 M2C_UNK *scePaf_B0C3E598(void) {
     return &D_001A542C;
 }
@@ -28,20 +41,29 @@ M2C_UNK *scePaf_B0C3E598(void) {
 void scePaf_2A7CDE78(s32 arg0) {
     D_001A45D8 = arg0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C33A0);
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C34F0);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_81773E1C);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C36A0);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0C31CC", func_0006B2E4);
+#else
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C36F0);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3778);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3A88);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3B04);
 
@@ -69,6 +91,9 @@ s32 func_000C3D20(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3D30);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0C31CC", func_0006B960);
+#else
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3D70);
 
 s32 scePaf_2AD8DE45(s32 arg0) {
@@ -78,6 +103,7 @@ s32 scePaf_2AD8DE45(s32 arg0) {
     D_001A45DC = arg0;
     return temp_v0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3E50);
 
@@ -185,9 +211,11 @@ INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C5108);
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C517C);
 
+#if FW_VERSION == 282
 void func_000C523C(struct Unk_func_000C523C_0 *arg0) {
     arg0->unk18 = 1;
 }
+#endif
 
 s32 func_000C5248(void) {
     return 0;
@@ -206,4 +234,3 @@ void scePaf_2313DDCA(struct Unk_scePaf_2313DDCA_0 *arg0) {
     arg0->unk8 = 0;
     arg0->unk1C = 0;
 }
-

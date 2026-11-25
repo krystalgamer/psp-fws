@@ -96,6 +96,7 @@ void scePaf_A574DB92(struct Unk_scePaf_A574DB92_0 *arg0) {
     }
 }
 
+#if FW_VERSION == 282
 void scePaf_F639E5E1(struct Unk_scePaf_F639E5E1_0 *arg0) {
     s32 temp_v0;
 
@@ -106,10 +107,12 @@ void scePaf_F639E5E1(struct Unk_scePaf_F639E5E1_0 *arg0) {
         func_00106F04(temp_v0);
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_7F2442DC);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F2828);
 
 INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F2978);
-
+#endif

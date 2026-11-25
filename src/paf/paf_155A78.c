@@ -55,4 +55,3 @@ void func_00155D04(struct Unk_func_00155D04_0 *arg0) {
         arg0->unk10 = 0;
     }
 }
-

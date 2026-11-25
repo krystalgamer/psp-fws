@@ -95,5 +95,6 @@ void scePaf_84913A3A(struct Unk_scePaf_84913A3A_0 *arg0) {
     func_000FFD1C(arg0->unk1E8);
 }
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0E9248", func_000E94EC);
-
+#endif

@@ -61,4 +61,3 @@ s32 scePaf_ABCBC1C5(struct Unk_scePaf_ABCBC1C5_0 *arg0) {
     }
     return var_v1;
 }
-

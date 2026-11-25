@@ -2,6 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 void func_00049484(struct Unk_func_00049484_0 *arg0) {
     arg0->unk11 = 1;
     arg0->unk0 = 0;
@@ -10,6 +11,7 @@ void func_00049484(struct Unk_func_00049484_0 *arg0) {
     arg0->unkC = 0;
     arg0->unk10 = 0;
 }
+#endif
 
 void func_000494A4(struct Unk_func_000494A4_0 *arg0) {
     arg0->unk11 = 1;
@@ -45,4 +47,3 @@ void func_00049504(void) {
 void func_00049520(void) {
     func_00049D58();
 }
-

@@ -72,3 +72,24 @@ sceMgr_driver_31B4BD28 = 0x00006728; // type:func
 sceRtcGetCurrentClock = 0x00006730; // type:func
 sceKernelPowerLock = 0x00006738; // type:func
 sceKernelPowerUnlock = 0x00006740; // type:func
+// shared names (tools/add_version.py) begin
+D_00003488 = 0x00006DD8;
+D_00008060 = 0x00008180;
+func_000002D8 = 0x00001908; // type:func rom:0x1988
+func_0000035C = 0x0000198C; // type:func rom:0x1A0C
+func_000003A4 = 0x000019D4; // type:func rom:0x1A54
+func_00000424 = 0x00001A54; // type:func rom:0x1AD4
+func_00001A58 = 0x00001A9C; // type:func rom:0x1B1C
+func_00001ACC = 0x00001B10; // type:func rom:0x1B90
+func_00001B78 = 0x00001BBC; // type:func rom:0x1C3C
+func_000005C4 = 0x00001CB8; // type:func rom:0x1D38
+func_0000570C = 0x00005794; // type:func rom:0x5814
+func_00005780 = 0x00005808; // type:func rom:0x5888
+func_00005A98 = 0x00005B20; // type:func rom:0x5BA0
+func_00005C18 = 0x00005CA0; // type:func rom:0x5D20
+func_00005D30 = 0x00005DB8; // type:func rom:0x5E38
+func_00005F4C = 0x00005FD4; // type:func rom:0x6054
+func_000061E4 = 0x0000626C; // type:func rom:0x62EC
+func_0000637C = 0x00006404; // type:func rom:0x6484
+func_00006414 = 0x0000649C; // type:func rom:0x651C
+// shared names (tools/add_version.py) end

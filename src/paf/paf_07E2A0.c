@@ -1,6 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 u32 func_0007E2A0(struct Unk_func_0007E2A0_0 *arg0) {
     u32 temp_v0;
     u32 var_v1;
@@ -128,4 +129,4 @@ INCLUDE_RODATA("nonmatchings/paf_07E2A0", D_00190818);
 INCLUDE_RODATA("nonmatchings/paf_07E2A0", D_0019081C);
 
 INCLUDE_ASM("nonmatchings/paf_07E2A0", func_000803B0);
-
+#endif

@@ -8,9 +8,15 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_E03956E9);
 
 INCLUDE_ASM("nonmatchings/ctrl", func_000001C0);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ctrl", func_00000294);
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/ctrl", func_00000300);
+#endif
 
+#if FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/ctrl", func_00000294);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ctrl", func_00000334);
 #endif
 
@@ -150,7 +156,11 @@ s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_348D99D4);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceCtrl_driver_348D99D4(u32 arg0) {
     s32 var_v1;
 
@@ -161,7 +171,9 @@ s32 sceCtrl_driver_348D99D4(u32 arg0) {
     }
     return var_v1;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceCtrl_driver_AF5960F3(void) {
     return (s32) D_00001BFC;
 }
@@ -242,7 +254,17 @@ s32 func_00001214(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/ctrl", func_00001544);
+
+s32 func_000015C0(void) {
+    D_00001D70.pad0[0x15] = 0;
+    M2C_FIELD(&D_00001D70, s32 *, 0x10) = (s32) D_00001D70.pad0[0x8E];
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00001220(void) {
     func_00000804(M2C_VFIELD(&D_00001D70, s32, 0xA20) & 0xFFFF0C06, (s32) D_00001D70.pad0[0xA2C], (s32) D_00001D70.pad0[0xA2D]);
     sceKernelSetEventFlag(M2C_VFIELD(&D_00001D70, s32, 4), 1U);
@@ -258,9 +280,11 @@ s32 func_00001220(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/ctrl", func_00001270);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ctrl", func_00001298);
 #else
 s32 func_00001548(void) {

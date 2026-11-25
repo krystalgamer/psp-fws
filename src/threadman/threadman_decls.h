@@ -177,6 +177,22 @@ struct Unk_func_000127F8_var_s0 {
     u32 unkC;
 };
 
+extern s32 D_00015410;
+extern s32 D_00015470;
+extern s32 D_00015490;
+extern s32 D_000154A8;
+extern s32 D_000154C0;
+extern s32 D_000154E8;
+extern s32 D_00015500;
+extern s32 D_00015578;
+extern s32 D_00015BD8;
+extern s32 D_00015BDC;
+extern s32 D_00015BE0;
+extern s32 D_00015BE4;
+extern s32 D_00015BE8;
+extern s32 D_00015BEC;
+extern s32 D_00015BF0;
+extern s32 D_00015CD4;
 extern void *D_00015E08;
 extern s32 D_00015E0C;
 extern M2C_UNK D_00016414;
@@ -256,6 +272,7 @@ s32 func_00009BBC(s32 arg0, struct Unk_func_00009BBC_1 *arg1, s32 arg2, s32 arg3
 s32 func_0000A8A8(void *arg0);
 s32 func_0000ABD8(struct Unk_func_0000ABD8_0 *arg0);
 s32 func_0000BCAC(struct Unk_func_0000BCAC_0 *arg0);
+s32 func_0000DAF4(s32, s32);
 s32 func_0000DDDC(void *arg0);
 s32 func_0000DE04(void);
 s32 func_0000DE24(void *arg0);

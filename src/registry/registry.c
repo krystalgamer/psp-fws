@@ -12,6 +12,19 @@ s32 module_reboot_before(void) {
 }
 #endif
 
+#if FW_VERSION == 201
+s32 syslib_ADF12745(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 0:
+        break;
+    case 2:
+        sceKernelWaitSema(D_0000674C, 1, NULL);
+        break;
+    }
+    return 0;
+}
+#endif
+
 #if FW_VERSION == 282
 s32 syslib_ADF12745(s32 arg0) {
     switch (arg0) {                                 /* irregular */
@@ -71,10 +84,10 @@ INCLUDE_ASM("nonmatchings/registry", func_00000D10);
 
 INCLUDE_ASM("nonmatchings/registry", func_00000D7C);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/registry", func_00000D9C);
-#else
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/registry", func_00000DA8);
+#else
+INCLUDE_ASM("nonmatchings/registry", func_00000D9C);
 #endif
 
 INCLUDE_ASM("nonmatchings/registry", func_00001058);
@@ -191,7 +204,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00001B7C);
 INCLUDE_ASM("nonmatchings/registry", func_00001EC4);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00001A9C);
 #endif
 
@@ -203,7 +216,9 @@ INCLUDE_ASM("nonmatchings/registry", func_00002064);
 INCLUDE_ASM("nonmatchings/registry", func_00001B9C);
 
 INCLUDE_ASM("nonmatchings/registry", func_00001CC4);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/registry", func_00001D7C);
 #endif
 
@@ -215,17 +230,27 @@ INCLUDE_ASM("nonmatchings/registry", sceReg_driver_4CA16893);
 
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_0CAE832B);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00002350);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/registry", sceReg_driver_BE8C1263);
+
+INCLUDE_ASM("nonmatchings/registry", sceReg_driver_835ECE6F);
+
+INCLUDE_ASM("nonmatchings/registry", func_00002A5C);
 #endif
 
 #if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/registry", func_00002228);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/registry", func_0000236C);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/registry", func_0000263C);
 
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_BE8C1263);
@@ -237,7 +262,17 @@ INCLUDE_ASM("nonmatchings/registry", func_00002A64);
 
 INCLUDE_ASM("nonmatchings/registry", func_00002C3C);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/registry", func_00002D24);
+
+INCLUDE_ASM("nonmatchings/registry", func_00002F10);
+
+INCLUDE_ASM("nonmatchings/registry", func_000030B8);
+
+INCLUDE_ASM("nonmatchings/registry", func_00003194);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/registry", func_00002630);
 #endif
 
@@ -249,7 +284,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00002848);
 INCLUDE_ASM("nonmatchings/registry", func_00002884);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/registry", func_00002948);
 #endif
 
@@ -283,21 +318,27 @@ INCLUDE_ASM("nonmatchings/registry", func_0000319C);
 
 INCLUDE_ASM("nonmatchings/registry", func_00003340);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00002D14);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/registry", func_0000358C);
 #endif
 
 #if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/registry", func_00002F10);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/registry", func_00003070);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_000031D4);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00003228);
 
 INCLUDE_ASM("nonmatchings/registry", func_00003260);
@@ -323,7 +364,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000039A4);
 
 INCLUDE_ASM("nonmatchings/registry", func_000039E0);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00003318);
 #endif
 
@@ -335,7 +376,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000034E4);
 INCLUDE_ASM("nonmatchings/registry", func_00003594);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_000034D0);
 #endif
 
@@ -353,7 +394,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00003C68);
 
 INCLUDE_ASM("nonmatchings/registry", func_00003D1C);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00003604);
 #endif
 
@@ -456,7 +497,7 @@ s32 func_00004058(void) {
 }
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_000038A0);
 #endif
 
@@ -500,7 +541,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00004D6C);
 
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_3615BC87);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00004778);
 #endif
 
@@ -516,9 +557,15 @@ INCLUDE_ASM("nonmatchings/registry", sceReg_driver_2C0DB9DD);
 
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_2D211135);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/registry", func_000052C0);
+#endif
+
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/registry", func_00004AF4);
+#endif
 
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00004BB8);
 #endif
 
@@ -548,7 +595,7 @@ INCLUDE_ASM("nonmatchings/registry", func_0000589C);
 
 INCLUDE_ASM("nonmatchings/registry", func_000059A0);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00005284);
 #endif
 
@@ -576,7 +623,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000065E4);
 INCLUDE_ASM("nonmatchings/registry", func_00006EF0);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 s32 func_00006EF0(s32 arg0) {
     s32 var_v1;
 

@@ -50,7 +50,10 @@ struct Unk_func_000026B0_0 {
 };
 
 extern s32 D_00003088;
+extern M2C_UNK D_00006A60;
 extern struct D_00006B80_s D_00006B80;
+extern M2C_UNK D_00006CA0;
+extern s32 D_00006DE0;
 
 M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
 s32 func_00000000(s32);
@@ -61,10 +64,12 @@ s32 func_0000035C(s32 *arg0);
 s32 func_000003A4(s32 *arg0);
 s32 func_00000424(s32 *arg0);
 s32 func_00000570(struct Unk_func_00000570_0 *arg0, struct Unk_func_00000570_1 *arg1);
+s32 func_00000B38(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_00001908(struct Unk_func_00001908_0 *arg0);
 s32 func_0000198C(s32 *arg0);
 s32 func_00001B78(s32);
 s32 func_000026B0(struct Unk_func_000026B0_0 *arg0);
+s32 func_00002700(void *arg0);
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelDeleteSema(s32);
@@ -77,6 +82,8 @@ s32 sceMSAudio_driver_DA34AB8F(void);
 s32 sceMSAudio_driver_E8B25D38(void);
 s32 sceMgr_driver_02F7AB01(s32, s32, s32);
 M2C_UNK sceMgr_driver_1B8F3192(s32);
+s32 sceMgr_driver_6B908200(s32, s32, M2C_UNK, s32, s32);
+s32 sceMgr_driver_C408E3C0(s32, M2C_UNK *, M2C_UNK *, s32);
 s32 sceMgr_driver_F30E22CF(M2C_UNK);
 
 #endif

@@ -30,6 +30,7 @@ s32 func_00000A28(struct Unk_func_00000A28_0 *arg0);
 s32 func_00000A40(struct Unk_func_00000A40_0 *arg0);
 s32 func_00000AF0(void);
 s32 func_00000AFC(s32, s32);
+s32 func_00000B0C(s32, s32);
 s32 func_00000C78(void);
 void gets(s32 arg0);
 void putchar(s32 arg0);

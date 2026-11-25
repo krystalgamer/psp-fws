@@ -43,9 +43,15 @@ INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001AB4);
 
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000220);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/dnas_plugin", func_000002C4);
+
+INCLUDE_ASM("nonmatchings/dnas_plugin", func_0000036C);
+#else
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_000002B8);
 
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_000003E8);
+#endif
 
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000448);
 
@@ -90,9 +96,17 @@ void func_00000810(void) {
 
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001D1C);
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001940);
+#endif
+
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001D20);
 
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001D30);
+
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001970);
+#endif
 
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001D3C);
 
@@ -123,12 +137,20 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000D84);
 void func_00000F58(void) {
 }
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000E08);
+#else
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000F60);
+#endif
 
 void func_00001068(void) {
 }
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000F9C);
+#else
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001070);
+#endif
 
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_0000112C);
 
@@ -140,7 +162,11 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001198);
 
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_0000122C);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/dnas_plugin", func_000010A0);
+#else
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001254);
+#endif
 
 void func_000013B4(void **arg0, void **arg1) {
     *arg0 = *arg1;
@@ -151,7 +177,9 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_000013D4);
 
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001404);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001454);
+#endif
 
 void func_000014F0(void **arg0) {
     struct Unk_func_000014F0_temp_a0 *temp_a0;

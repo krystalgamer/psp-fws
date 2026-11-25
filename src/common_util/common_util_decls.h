@@ -13,6 +13,8 @@ struct Unk_sceVshCommonUtil_98E57F6D_0 {
     u8 unk10;
 };
 
+extern s32 D_000080C0;
+extern s32 D_000080C4;
 extern s32 D_00008BF0;
 extern s32 D_00008BF4;
 extern s32 D_00008BF8;

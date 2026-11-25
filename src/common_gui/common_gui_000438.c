@@ -55,7 +55,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", func_000005CC_v100);
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_35D57A35);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_57F57F40);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_FA9B7ABD);
@@ -73,7 +73,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", func_00003044);
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00001C78);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_4016357A);
 #endif
 
@@ -83,7 +83,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_F4FD56D2);
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_16DA723A);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_01B60A5C);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_61A1FA3A);
@@ -131,7 +131,7 @@ INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00007B98);
 INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00007B9C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_C4D809CB);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_72C75A14);
@@ -143,7 +143,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_566AA22F);
 INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00007BC0);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_B97EAE7A);
 #endif
 
@@ -153,7 +153,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_8A029A78);
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_A939DDF9);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 void sceVshCommonGui_FA1DE461(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
     M2C_FIELD(arg0, s32 *, 0x20) = arg2;
@@ -168,7 +168,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", func_00004F24);
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00004FEC);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 void func_00003508(void **arg0, void *arg1) {
     *arg0 = arg1;
     func_000008A8(arg0);
@@ -272,10 +272,25 @@ void func_00000888(void **arg0, void **arg1) {
     func_000008A8(arg0);
 }
 
-#if FW_VERSION == 152
+#if FW_VERSION == 201
+void func_000008A8(void **arg0) {
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    if (temp_a0 != NULL) {
+        M2C_FIELD(temp_a0, s32 *, 4) = (s32) (M2C_FIELD(temp_a0, s32 *, 4) + 1);
+    }
+}
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00005434);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00005458);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/common_gui_000438", func_000008D4);
 #endif
 
 #if FW_VERSION == 100
@@ -298,9 +313,11 @@ void func_00003894(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_000038B0);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_000009F0);
 #else
 void func_000008A8(void **arg0) {

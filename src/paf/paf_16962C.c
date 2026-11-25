@@ -2,6 +2,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_16962C", func_0016962C);
+#else
 s32 func_0016962C(struct Unk_func_0016962C_0 *arg0, s32 arg1) {
     s32 var_s0;
     s32 var_s1;
@@ -26,4 +29,4 @@ s32 func_0016962C(struct Unk_func_0016962C_0 *arg0, s32 arg1) {
     }
     return var_v1;
 }
-
+#endif

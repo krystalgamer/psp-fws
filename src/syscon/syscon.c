@@ -68,6 +68,13 @@ s32 sceSyscon_driver_5FF1D610(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION == 201
+s32 sceSyscon_driver_9E6E060F(s32 arg0) {
+    M2C_VFIELD(&D_00004600, s32, 0x12C) = arg0;
+    return 0;
+}
+#endif
+
 #if FW_VERSION < 282
 s32 sceSyscon_driver_E00BFC9E(void) {
     return M2C_VFIELD(&D_00004600, s32, 0x108);
@@ -456,13 +463,15 @@ void sceSyscon_driver_FB148FB6(s32 arg0) {
     func_00001444(arg0, 0x41);
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_01677F91);
+#else
 void sceSyscon_driver_01677F91(s32 arg0, s32 arg1) {
     func_0000193C(((arg1 & 0xFFFF) << 8) | (arg0 & 0xFF), 0x42, 5);
 }
-#else
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_01677F91);
+#endif
 
+#if FW_VERSION == 282
 void sceSyscon_driver_72EDA9AF(s32 arg0) {
     func_00001444(arg0, 0x43);
 }
@@ -621,7 +630,13 @@ INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_08DA3752);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_9C4E3CA9);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/syscon", func_00002CE4);
+#endif
+
+#if FW_VERSION < 201
 s32 func_00002CE4(void) {
     s32 var_s0;
 
@@ -635,7 +650,9 @@ s32 func_00002CE4(void) {
 s32 func_00002D34(void) {
     return __builtin_allegrex_ext(sceSyscon_driver_E00BFC9E(), 8, 8) != 1;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/syscon", func_00003AB0);
 
 s32 func_00003B1C(void) {

@@ -79,6 +79,7 @@ void func_000004B0(void *arg0, void *arg1);
 void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 *arg1);
 void func_00000594(void *arg0);
 s32 func_00003210(s32);
+s32 func_00004BA4(s32);
 s32 func_0000552C(s32);
 void module_reboot_before(void);
 void sceKernelCpuResumeIntr(s32);

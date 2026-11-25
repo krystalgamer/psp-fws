@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/201/.splat_cache.savedata_plugin
   symbol_addrs_path:
     - config/201/symbol_addrs.savedata_plugin.txt
+    - config/201/func_starts.savedata_plugin.txt
     - tmp/build/201/prx_syms.savedata_plugin.txt
   reloc_addrs_path: [tmp/build/201/reloc_addrs.savedata_plugin.txt]
   asset_path: tmp/assets/201/savedata_plugin
@@ -53,7 +54,10 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, savedata_plugin]
+      - [0xA4, c, savedata_plugin]
+      - [0xAE88, c, savedata_plugin_00CE3C]
+      - [0x107B0, c, savedata_plugin_011C54]
+      - [0x11D58, c, savedata_plugin_0130A0]
       - { start: 0x1F114, type: asm, name: fini, linker_section: .fini }
       - { start: 0x1F130, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1F670, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -71,7 +75,10 @@ segments:
       - { start: 0x1FCF4, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x1FCF8, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x1FCFC, type: prxpad, order: .rodata }
-      - [0x1FD00, rodata, savedata_plugin]
+      - [0x1FD00, .rodata, savedata_plugin]
+      - [0x20930, .rodata, savedata_plugin_00CE3C]
+      - [0x20B20, .rodata, savedata_plugin_011C54]
+      - [0x20C18, .rodata, savedata_plugin_0130A0]
   - name: savedata_plugin_seg1
     type: code
     start: 0x21100

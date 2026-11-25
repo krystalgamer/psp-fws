@@ -11,12 +11,15 @@ struct Unk_D_00002D50 {
     s32 unk30;
 };
 
+extern M2C_UNK D_00001D38;
+extern s32 D_00001E90;
 extern M2C_UNK D_00002AE0;
 extern M2C_UNK D_00002AEC;
 extern s32 D_00002C7C;
 extern M2C_UNK D_00002C88;
 extern M2C_UNK D_00002C94;
 extern struct Unk_D_00002D50 *D_00002D50;
+extern void *D_000032D8;
 
 s32 func_0000015C(s32);
 s32 func_000004B0(s32);
@@ -42,6 +45,7 @@ void func_000021AC(void);
 void func_000021FC(s32 *arg0, s32 arg1);
 void func_0000222C(s32 arg0, s32 arg1);
 void func_0000227C(s32 arg0, s32 arg1);
+void func_00002364(void);
 void func_000023A4(s32 *arg0, s32 arg1);
 M2C_UNK func_000024D8(s32, s32, s32);
 M2C_UNK func_00002584(s32, s32, s32);
@@ -49,6 +53,7 @@ M2C_UNK func_00002638();
 M2C_UNK func_000026B0();
 s32 module_stop(void);
 M2C_UNK scePaf_3481F595(s32, M2C_UNK *);
+M2C_UNK scePaf_49CE42F7(s32, M2C_UNK *);
 s32 scePaf_CA79D58B(s32);
 M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);
 M2C_UNK scePaf_F609FA81(s32, M2C_UNK *, M2C_UNK, M2C_UNK);

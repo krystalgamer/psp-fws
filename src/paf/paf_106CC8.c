@@ -51,4 +51,3 @@ s32 func_00106D98(struct Unk_func_00106D98_0 *arg0, s32 arg1, s32 arg2, s32 arg3
     }
     return var_v1;
 }
-

@@ -5,9 +5,77 @@
 
 INCLUDE_ASM("nonmatchings/msaudio", func_00000000);
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/msaudio", func_00000194);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/msaudio", func_00000234);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_000002F8);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00000478);
+
+s32 func_00000570(struct Unk_func_00000570_0 *arg0, struct Unk_func_00000570_1 *arg1) {
+    s32 temp_v1;
+    s32 var_a2;
+
+    temp_v1 = (arg1->unk15 + (arg1->unk14 << 8)) - 1;
+    var_a2 = 0x8050800D;
+    if (temp_v1 >= 0) {
+        var_a2 = temp_v1;
+        arg0->unk0 = arg1->unk28;
+        arg0->unk4 = arg1->unk2C;
+        if (temp_v1 > 0) {
+            arg0->unk8 = arg1->unk30;
+            arg0->unkC = arg1->unk34;
+        }
+    }
+    return var_a2;
+}
+
+INCLUDE_ASM("nonmatchings/msaudio", func_000005C0);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_0000080C);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00000918);
+
+s32 func_00000B38(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
+    s32 var_s0;
+
+    temp_v0 = func_000003A4(&D_00006DE0);
+    var_s0 = temp_v0;
+    if (temp_v0 >= 0) {
+        temp_v0_2 = sceMgr_driver_F30E22CF(2);
+        if (temp_v0_2 >= 0) {
+            temp_v0_3 = sceMgr_driver_C408E3C0(temp_v0_2, &D_00006A60, &D_00006A60, arg3);
+            var_s0 = temp_v0_3;
+            if (temp_v0_3 >= 0) {
+                var_s0 = sceMgr_driver_6B908200(arg0, arg1, 0, arg2, temp_v0_2);
+            }
+            sceMgr_driver_1B8F3192(temp_v0_2);
+        }
+        if (var_s0 < 0) {
+            var_s0 = func_00000000(var_s0);
+        }
+        func_00000424(&D_00006DE0);
+    }
+    return var_s0;
+}
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00000C2C);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00000D98);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006A60);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006A68);
+#endif
+
+#if FW_VERSION == 340
 s32 func_00000234(s32 arg0, M2C_UNK arg1) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -79,7 +147,9 @@ INCLUDE_ASM("nonmatchings/msaudio", func_00000D98);
 INCLUDE_RODATA("nonmatchings/msaudio", D_000069C8);
 
 INCLUDE_RODATA("nonmatchings/msaudio", D_000069D0);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/msaudio", func_00000E84);
 
 INCLUDE_ASM("nonmatchings/msaudio", func_00001168);
@@ -134,7 +204,13 @@ s32 func_0000035C(s32 *arg0) {
     }
     return var_v1;
 }
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006A88);
+#endif
+
+#if FW_VERSION < 340
 s32 func_000003A4(s32 *arg0) {
     s32 temp_v0;
     s32 var_s0;
@@ -191,7 +267,13 @@ INCLUDE_ASM("nonmatchings/msaudio", func_00001ACC);
 
 INCLUDE_ASM("nonmatchings/msaudio", func_00001B78);
 
-#if FW_VERSION == 152
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/msaudio", func_00001C18);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00001C80);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/msaudio", func_000005C4);
 #endif
 
@@ -222,6 +304,21 @@ INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_3872FBE5);
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_107D83D4);
 
+#if FW_VERSION == 201
+s32 sceMSAudio_driver_DA34AB8F(void) {
+    s32 var_v1;
+    u32 temp_a0;
+
+    temp_a0 = shiftK1();
+    var_v1 = 0x80508004;
+    if ((u32) M2C_VFIELD(&D_00006CA0, u32, 0x138) >= 2U) {
+        var_v1 = M2C_VFIELD(&D_00006CA0, s32, 0x2D4);
+    }
+    setK1(temp_a0);
+    return var_v1;
+}
+#endif
+
 #if FW_VERSION == 340
 s32 sceMSAudio_driver_DA34AB8F(void) {
     s32 var_v1;
@@ -243,6 +340,18 @@ INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_7B953C1A);
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_80BD1592);
 
+#if FW_VERSION == 201
+s32 func_00002700(void *arg0) {
+    s32 var_v1;
+
+    var_v1 = 0x80508016;
+    if (!(M2C_FIELD(arg0, u8 *, 0x2D) & 0x40) && ((var_v1 = 0, (M2C_FIELD(arg0, s32 *, 0x44) != 0)) || (M2C_FIELD(arg0, s32 *, 0x48) != 0))) {
+        var_v1 = 0x80508016;
+    }
+    return var_v1;
+}
+#endif
+
 #if FW_VERSION == 340
 s32 func_000026B0(struct Unk_func_000026B0_0 *arg0) {
     s32 var_v1;
@@ -257,7 +366,7 @@ s32 func_000026B0(struct Unk_func_000026B0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_9E37E51D);
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_68EF9696);
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_45E1994B);
@@ -300,19 +409,29 @@ INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_86666DA6);
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_FE7BC654);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/msaudio", func_00003BD4);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00003D94);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00003F74);
+#endif
+
 #if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/msaudio", func_00003B60);
 
 INCLUDE_ASM("nonmatchings/msaudio", func_00003D20);
 
 INCLUDE_ASM("nonmatchings/msaudio", func_00003F10);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_2685C036);
 #endif
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_A18A1DF6);
 
-#if FW_VERSION < 340
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_E8B25D38);
 #else
 s32 sceMSAudio_driver_E8B25D38(void) {
@@ -332,9 +451,65 @@ INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_C1B87E96);
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_60577DBD);
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_A2161ACB);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/msaudio", func_00004AE8);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00004B24);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00004C18);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00004D24);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00004FF8);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00005148);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B38);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B3C);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B40);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B48);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B50);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B58);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B64);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B70);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B7C);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B88);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006B94);
+
+INCLUDE_RODATA("nonmatchings/msaudio", D_00006C00);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00005188);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_000051D0);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00005284);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00005344);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_000053E4);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00005590);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_0000561C);
+
+INCLUDE_ASM("nonmatchings/msaudio", func_00005670);
+#endif
+
+#if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/msaudio", func_00004A60);
 
 INCLUDE_ASM("nonmatchings/msaudio", func_00004A9C);
@@ -404,7 +579,7 @@ INCLUDE_ASM("nonmatchings/msaudio", func_000061E4);
 
 INCLUDE_ASM("nonmatchings/msaudio", func_0000637C);
 
-#if FW_VERSION < 340
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/msaudio", D_00003050);
 #endif
 

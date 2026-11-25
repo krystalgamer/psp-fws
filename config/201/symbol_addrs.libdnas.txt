@@ -93,3 +93,7 @@ sceSsl_lib_69F1B678 = 0x00002220; // type:func
 sceSsl_lib_3E3133D6 = 0x00002228; // type:func
 sceSsl_lib_B7CA8717 = 0x00002230; // type:func
 sceSsl_lib_B40D11EA = 0x00002238; // type:func
+// shared names (tools/add_version.py) begin
+D_00003690 = 0x00002630; // rom:0x26B0
+func_00002F30 = 0x00001ED0; // type:func rom:0x1F50
+// shared names (tools/add_version.py) end

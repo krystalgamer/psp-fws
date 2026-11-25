@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, netplay_server_utility]
+      - [0xA4, c, netplay_server_utility]
       - { start: 0x3410, type: asm, name: fini, linker_section: .fini }
       - { start: 0x342C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x364C, type: prxpad, order: .text }
@@ -71,7 +71,7 @@ segments:
       - { start: 0x3994, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x39A0, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x39A4, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x39A8, rodata, netplay_server_utility]
+      - [0x39A8, .rodata, netplay_server_utility]
       - { start: 0x3E28, type: prxpad, order: .rodata }
   - name: netplay_server_utility_seg1
     type: code

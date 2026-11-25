@@ -79,4 +79,3 @@ s32 func_00106A20(struct Unk_func_00106A20_0 *arg0) {
     }
     return var_v1;
 }
-

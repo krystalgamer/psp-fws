@@ -78,7 +78,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012050);
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_000110B8);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_000124D8);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_000124F0);
@@ -98,7 +98,13 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_000110D8);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006994);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007BFC);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006B24);
 
 void func_00006B84(void) {

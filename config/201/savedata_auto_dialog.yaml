@@ -54,7 +54,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - { start: 0xA4, type: prxpad, order: .text }
-      - [0xB0, asm, savedata_auto_dialog]
+      - [0xB0, c, savedata_auto_dialog]
       - { start: 0x49E08, type: asm, name: fini, linker_section: .fini }
       - { start: 0x49E24, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x4A154, type: prxpad, order: .text }
@@ -71,7 +71,7 @@ segments:
       - { start: 0x4A5B4, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x4A5E0, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x4A5E4, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x4A618, rodata, savedata_auto_dialog]
+      - [0x4A618, .rodata, savedata_auto_dialog]
       - { start: 0x4D094, type: prxpad, order: .rodata }
   - name: savedata_auto_dialog_seg1
     type: code

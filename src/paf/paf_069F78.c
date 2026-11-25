@@ -1,6 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 s32 TIFFNumberOfTiles(void *arg0) {
     M2C_UNK *temp_s0;
     u32 var_a1;
@@ -835,4 +836,4 @@ INCLUDE_ASM("nonmatchings/paf_069F78", func_00076E28);
 
 void func_00077100(void) {
 }
-
+#endif

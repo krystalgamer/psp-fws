@@ -2,6 +2,17 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 100
+void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    if (temp_a0 != NULL) {
+        M2C_FIELD(temp_a0, s32 *, 0xAC) = arg2;
+        M2C_FIELD(temp_a0, s32 *, 0xA8) = arg1;
+    }
+}
+#else
 void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
     struct Unk_scePaf_21A0C6E0_temp_a0 *temp_a0;
 
@@ -44,6 +55,7 @@ void scePaf_EB5BDCE1(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_D9D3EEBA);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_81FD71A9);
 
@@ -79,7 +91,11 @@ INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001C3F8);
 
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_F3967AF5);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001BBB4);
+#else
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_E6134C53);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_BBBF145C);
 
@@ -113,7 +129,8 @@ M2C_UNK *func_0001C964(void) {
     return &D_0016FC7C;
 }
 
+#if FW_VERSION == 282
 M2C_UNK *func_0001C970(void) {
     return &D_00170D48;
 }
-
+#endif

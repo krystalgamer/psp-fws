@@ -11,9 +11,17 @@ void func_0002CFF4(s32 arg0, s32 arg1) {
     }
 }
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002AA78);
+#else
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002D02C);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002D1D8);
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002AB6C);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002D288);
 
@@ -71,11 +79,12 @@ INCLUDE_RODATA("nonmatchings/paf_02CFF4", D_0017032C);
 
 INCLUDE_RODATA("nonmatchings/paf_02CFF4", D_00170338);
 
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/paf_02CFF4", D_00170344);
+#endif
 
 INCLUDE_RODATA("nonmatchings/paf_02CFF4", D_00170380);
 
 INCLUDE_RODATA("nonmatchings/paf_02CFF4", D_001703B0);
 
 INCLUDE_RODATA("nonmatchings/paf_02CFF4", D_001703C0);
-

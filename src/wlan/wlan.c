@@ -45,9 +45,29 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00018B20);
 
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_482CAE9A);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_C9A8CAB7);
-#else
+#endif
+
+#if FW_VERSION == 201
+void sceWlanDrv_driver_C9A8CAB7(void) {
+    struct Unk_D_000191B0 *temp_s0;
+    u32 temp_s2;
+    u8 *temp_s1;
+
+    temp_s0 = D_000191B0;
+    temp_s2 = shiftK1();
+    temp_s1 = temp_s0->pad188;
+    if (temp_s0 != NULL) {
+        sceNetIfhandle_driver_54D1AEA1(temp_s1);
+        sceNetIfhandle_driver_C9344A59(temp_s1);
+        M2C_FIELD(temp_s0, s32 *, 0x188) = 0;
+    }
+    setK1(temp_s2);
+}
+#endif
+
+#if FW_VERSION == 282
 void sceWlanDrv_driver_C9A8CAB7(void) {
     u32 temp_s2;
     struct Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0 *temp_s0;
@@ -69,9 +89,21 @@ INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_19E51F54);
 
 INCLUDE_ASM("nonmatchings/wlan", sceWlanGetEtherAddr);
 
-#if FW_VERSION == 152
-INCLUDE_RODATA("nonmatchings/wlan", D_000134A4);
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_000008B4);
 
+INCLUDE_ASM("nonmatchings/wlan", func_00000990);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
+INCLUDE_RODATA("nonmatchings/wlan", D_000134A4);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00000A6C);
+#endif
+
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/wlan", func_000008A4);
 #endif
 
@@ -109,7 +141,13 @@ INCLUDE_ASM("nonmatchings/wlan", func_00000F1C);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/wlan", D_00013A14);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_0000131C);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_000010E0);
 #endif
 
@@ -128,6 +166,10 @@ INCLUDE_ASM("nonmatchings/wlan", func_000026F8);
 #endif
 
 INCLUDE_ASM("nonmatchings/wlan", func_00002818);
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_000021C8);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/wlan", func_000028D0);
@@ -161,17 +203,31 @@ void func_000022A0(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+void func_000022C0(void *arg0) {
+    sceKernelWaitSema(M2C_FIELD(arg0, u32 *, 0x174), 1, NULL);
+}
+#endif
+
+#if FW_VERSION < 201
 void func_000022C0(void *arg0) {
     sceKernelWaitSema(M2C_FIELD(arg0, u32 *, 0x268), 1, NULL);
 }
+#endif
 
+#if FW_VERSION == 201
+void func_000022E4(void *arg0) {
+    sceKernelSignalSema(M2C_FIELD(arg0, u32 *, 0x174), 1);
+}
+#endif
+
+#if FW_VERSION < 201
 void func_000022E4(void *arg0) {
     sceKernelSignalSema(M2C_FIELD(arg0, u32 *, 0x268), 1);
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00002188(void *arg0) {
     sceKernelWaitSema(M2C_FIELD(arg0, u32 *, 0x26C), 1, NULL);
 }
@@ -228,7 +284,23 @@ void func_000031DC(struct Unk_func_000031DC_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000321C);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+void func_00002350(void *arg0, s32 arg1) {
+    s32 temp_a3;
+    void *temp_a2;
+
+    sceKernelWaitSema(M2C_FIELD(arg0, u32 *, 0x134), 1, NULL);
+    temp_a3 = M2C_FIELD(arg0, s32 *, 0x140);
+    temp_a2 = temp_a3 + (((s32) (arg1 - (temp_a3 + (M2C_FIELD(arg0, s32 *, 0x13C) * 0x14))) / (s32) M2C_FIELD(arg0, s32 *, 0x138)) * 0x14);
+    if (M2C_FIELD(temp_a2, s32 *, 0x10) == arg1) {
+        M2C_FIELD(temp_a2, s32 *, 0) = 0;
+        M2C_FIELD(arg0, void **, 0x144) = temp_a2;
+    }
+    sceKernelSignalSema(M2C_FIELD(arg0, u32 *, 0x134), 1);
+}
+#endif
+
+#if FW_VERSION < 201
 void func_00002350(void *arg0, s32 arg1) {
     s32 temp_a3;
     void *temp_a2;
@@ -242,7 +314,27 @@ void func_00002350(void *arg0, s32 arg1) {
     }
     sceKernelSignalSema(M2C_FIELD(arg0, u32 *, 0x228), 1);
 }
+#endif
 
+#if FW_VERSION == 201
+void func_000023EC(void *arg0) {
+    void *temp_v1;
+    void *var_v0;
+
+    temp_v1 = M2C_FIELD(arg0, void **, 0x15C);
+    var_v0 = M2C_FIELD(temp_v1, void **, 4);
+    if (var_v0 != temp_v1) {
+        do {
+            M2C_FIELD(var_v0, s16 *, 0) = 0;
+            M2C_FIELD(var_v0, s16 *, 2) = 0;
+            var_v0 = M2C_FIELD(var_v0, void **, 4);
+        } while (var_v0 != temp_v1);
+    }
+    M2C_FIELD(temp_v1, u16 *, 0) = (u16) (M2C_FIELD(temp_v1, u16 *, 0) | 2);
+}
+#endif
+
+#if FW_VERSION < 201
 void func_000023EC(void *arg0) {
     void *temp_v1;
     void *var_v0;
@@ -258,7 +350,9 @@ void func_000023EC(void *arg0) {
     }
     M2C_FIELD(temp_v1, u16 *, 0) = (u16) (M2C_FIELD(temp_v1, u16 *, 0) | 2);
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_00003268(struct Unk_func_00003268_0 *arg0, s32 arg1) {
     s32 temp_a3;
     struct Unk_func_00003268_temp_a2 *temp_a2;
@@ -345,7 +439,7 @@ INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_5E7C8D94);
 
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_5ED4049A);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_6D5C839E);
 #endif
 
@@ -355,7 +449,25 @@ INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_A447103A);
 
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_9658C9F7);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+s32 sceWlanDrv_driver_4C7F62E0(void) {
+    s32 temp_v1;
+    struct Unk_D_000191B0 *temp_s1;
+    u32 temp_s0;
+
+    temp_s1 = D_000191B0;
+    temp_s0 = shiftK1();
+    temp_v1 = M2C_FIELD(temp_s1, s32 *, 0x1CC);
+    if (temp_v1 > 0) {
+        sceKernelCancelCallback(temp_v1);
+        M2C_FIELD(temp_s1, s32 *, 0x1CC) = 0;
+    }
+    setK1(temp_s0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceWlanDrv_driver_4C7F62E0(void) {
     s32 temp_v1;
     struct Unk_D_000191B0 *temp_s1;
@@ -419,7 +531,13 @@ INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_2D0FAE4E);
 
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_56F467CA);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 201
+s32 sceWlanGetSwitchState(void) {
+    return D_000191B0->unk1D0 == 1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceWlanGetSwitchState(void) {
     return M2C_FIELD(D_000191B0, s32 *, 0x2C8) == 1;
 }
@@ -428,12 +546,6 @@ s32 sceWlanGetSwitchState(void) {
 #if FW_VERSION == 100
 s32 sceWlanGetSwitchState(void) {
     return M2C_FIELD(D_000191B0, s32 *, 0x2C4) == 1;
-}
-#endif
-
-#if FW_VERSION == 282
-s32 sceWlanGetSwitchState(void) {
-    return D_000191B0->unk1D0 == 1;
 }
 #endif
 
@@ -451,13 +563,13 @@ INCLUDE_ASM("nonmatchings/wlan", func_00003B60);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00003B78);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00002B40);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00002B84);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00002BC8(void *arg0, s32 arg1) {
     if (arg1 != 1) {
 
@@ -489,11 +601,13 @@ INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_40B0AA4A);
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_8D5F551B);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00002C5C);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00002CD4);
-#else
+#endif
+
+#if FW_VERSION == 282
 void sceWlanDrv_driver_E50312AB(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0000B24C(D_000191B0->unk184, arg0, arg1, arg2, arg3);
 }
@@ -513,15 +627,19 @@ INCLUDE_ASM("nonmatchings/wlan", func_00002F60);
 INCLUDE_ASM("nonmatchings/wlan", func_0000310C);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_00003060);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00003908);
 #endif
 
 #if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/wlan", func_000030AC);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_000033A0);
 #endif
 
@@ -552,7 +670,11 @@ INCLUDE_ASM("nonmatchings/wlan", func_00003708);
 INCLUDE_ASM("nonmatchings/wlan", func_000037A0);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00003DC8);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_000037F0);
 #endif
 
@@ -568,11 +690,21 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000509C);
 INCLUDE_ASM("nonmatchings/wlan", func_000052EC);
 #endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00005B2C);
+
+INCLUDE_ASM("nonmatchings/wlan", func_00005F44);
+
+INCLUDE_ASM("nonmatchings/wlan", func_000063D4);
+
+INCLUDE_ASM("nonmatchings/wlan", func_00006760);
+#endif
+
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/wlan", func_00005184);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_0000529C);
 
 INCLUDE_ASM("nonmatchings/wlan", func_000053CC);
@@ -580,8 +712,16 @@ INCLUDE_ASM("nonmatchings/wlan", func_000053CC);
 
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/wlan", func_000057D4);
+#endif
 
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_00005AD4);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00006E24);
+
+INCLUDE_ASM("nonmatchings/wlan", func_00006FD8);
 #endif
 
 #if FW_VERSION < 152
@@ -590,19 +730,19 @@ INCLUDE_ASM("nonmatchings/wlan", func_00005688);
 INCLUDE_ASM("nonmatchings/wlan", func_0000598C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00005C88);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00005FA8);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00006278);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00006338);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_000060FC);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00006194);
@@ -614,7 +754,7 @@ INCLUDE_ASM("nonmatchings/wlan", func_00006258);
 INCLUDE_ASM("nonmatchings/wlan", func_00006300);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00017E04);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00006458);
@@ -622,7 +762,7 @@ INCLUDE_ASM("nonmatchings/wlan", func_00006458);
 INCLUDE_ASM("nonmatchings/wlan", func_000064F0);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00006574(void *arg0, void *arg1) {
     void *temp_s0;
 
@@ -793,7 +933,13 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000840C);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00008440);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+void func_000067B8(void *arg0, void *arg1) {
+    sceKernelFreeVpl(M2C_FIELD(arg0, u32 *, 0x17C), arg1);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000067B8(void *arg0, void *arg1) {
     sceKernelFreeVpl(M2C_FIELD(arg0, u32 *, 0x274), arg1);
 }
@@ -825,9 +971,17 @@ INCLUDE_ASM("nonmatchings/wlan", func_00006B04);
 INCLUDE_ASM("nonmatchings/wlan", func_00006D74);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00006DFC);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00007FA8);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00007060);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_000071F8);
 
 s32 func_000090E8(struct Unk_func_000090E8_0 *arg0, s32 arg1, s8 *arg2) {
@@ -890,7 +1044,26 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00018DE4);
 INCLUDE_ASM("nonmatchings/wlan", func_00007F30);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+void func_0000806C(void *arg0) {
+    void *temp_s1;
+
+    temp_s1 = M2C_FIELD(arg0, void **, 0x100);
+    if (arg0 != NULL) {
+        sceKernelDeleteEventFlag(M2C_FIELD(arg0, u32 *, 0x10));
+        sceKernelDeleteSema(M2C_FIELD(arg0, u32 *, 0xC));
+        sceKernelDeleteEventFlag(M2C_FIELD(arg0, u32 *, 0xF8));
+        sceKernelDeleteMbx(M2C_FIELD(arg0, u32 *, 0xFC));
+        func_000067B8(M2C_FIELD(arg0, void **, 0x100), M2C_FIELD(arg0, void **, 0x104));
+        func_000067B8(M2C_FIELD(arg0, void **, 0x100), M2C_FIELD(arg0, void **, 0x108));
+        DmacManForKernel_745E19EF(M2C_FIELD(arg0, s32 *, 0xE8));
+        func_000067B8(M2C_FIELD(arg0, void **, 0x100), M2C_FIELD(arg0, void **, 0xEC));
+        func_000067B8(temp_s1, arg0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0000806C(void *arg0) {
     void *temp_s1;
 
@@ -932,7 +1105,7 @@ INCLUDE_ASM("nonmatchings/wlan", func_000080E0);
 INCLUDE_ASM("nonmatchings/wlan", func_000082D4);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 s32 func_000082D4(s32 arg0, s32 arg1) {
     return (func_000091D4(arg0 + 0xC, arg1) >= 0) ? 0 : -1;
 }
@@ -1082,9 +1255,15 @@ void func_0000AC90(struct Unk_func_0000AC90_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000ACEC);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00009A6C);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00008690);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000AD1C);
 #endif
 
@@ -1209,6 +1388,19 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000B268);
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000B30C);
 
+#if FW_VERSION == 201
+s32 func_0000A4C8(s32 arg0, void *arg1, s32 arg2) {
+    s32 temp_s3;
+
+    temp_s3 = sceKernelCpuSuspendIntr();
+    if (!(*M2C_FIELD(arg1, u16 **, 0x30) & 4)) {
+        InterruptManagerForKernel_CDC86B64(arg0, 0, arg0, arg2);
+    }
+    sceKernelCpuResumeIntr(temp_s3);
+    return -1;
+}
+#endif
+
 #if FW_VERSION == 282
 s32 func_0000B3CC(s32 arg0, struct Unk_func_0000B3CC_1 *arg1, M2C_UNK arg2) {
     s32 temp_s3;
@@ -1224,15 +1416,27 @@ s32 func_0000B3CC(s32 arg0, struct Unk_func_0000B3CC_1 *arg1, M2C_UNK arg2) {
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000B450);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 s32 func_00009810(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_00009818);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_0000A710);
+
+INCLUDE_ASM("nonmatchings/wlan", func_0000A810);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00009900);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000B524);
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000B670);
@@ -1247,6 +1451,12 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000BAD0);
 INCLUDE_ASM("nonmatchings/wlan", func_0000BD90);
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000BE8C);
+
+#if FW_VERSION == 201
+s32 func_0000ACB8(void) {
+    return 0;
+}
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_00009CB0);
@@ -1326,7 +1536,7 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000AD1C);
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000D2F4);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000B85C);
 #endif
 
@@ -1339,6 +1549,12 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000D658);
 #endif
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000D924);
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_0000CBC4);
+
+INCLUDE_ASM("nonmatchings/wlan", func_0000CF20);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000DBA4);
@@ -1376,7 +1592,11 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00019008);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_0001900C);
 
-#if FW_VERSION == 152
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/wlan", D_000167A4);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/wlan", D_00013750);
 #endif
 
@@ -1394,7 +1614,7 @@ INCLUDE_RODATA("nonmatchings/wlan", D_0001901C);
 INCLUDE_ASM("nonmatchings/wlan", func_0000BC54);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000C6E4);
 #endif
 
@@ -1415,6 +1635,20 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000EAD4);
 #endif
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000ECD0);
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_0000DBFC);
+
+INCLUDE_ASM("nonmatchings/wlan", func_0000DD0C);
+
+INCLUDE_ASM("nonmatchings/wlan", func_0000DD9C);
+
+INCLUDE_ASM("nonmatchings/wlan", func_0000DF24);
+
+INCLUDE_ASM("nonmatchings/wlan", func_0000DFCC);
+
+INCLUDE_ASM("nonmatchings/wlan", func_0000E074);
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000C488);
@@ -1483,7 +1717,7 @@ INCLUDE_ASM("nonmatchings/wlan", func_00010310);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00010464);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000DA38);
 #else
 INCLUDE_ASM("nonmatchings/wlan", func_000105B0);
@@ -1507,7 +1741,33 @@ INCLUDE_ASM("nonmatchings/wlan", func_00010CD0);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00010DCC);
 
-#if FW_VERSION == 152
+#if FW_VERSION == 201
+s32 func_0000FAEC(void) {
+    return 0;
+}
+
+s32 func_0000FAF4(void) {
+    return 0;
+}
+
+s32 func_0000FAFC(void) {
+    return 0;
+}
+
+s32 func_0000FB04(void) {
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/wlan", func_0000FB0C);
+
+INCLUDE_ASM("nonmatchings/wlan", func_0000FC90);
+
+s32 func_0000FE1C(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000E278);
 #endif
 
@@ -1585,9 +1845,43 @@ INCLUDE_ASM("nonmatchings/wlan", func_00012614);
 
 INCLUDE_ASM("nonmatchings/wlan", func_000126AC);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/wlan", func_0000ED5C);
+#if FW_VERSION == 201
+s32 func_00010ADC(void) {
+    return 0;
+}
 
+s32 func_00010AE4(void) {
+    return 0;
+}
+
+s32 func_00010AEC(void) {
+    return 0;
+}
+
+s32 func_00010AF4(void) {
+    return 0;
+}
+
+s32 func_00010AFC(void) {
+    return 0;
+}
+
+s32 func_00010B04(void) {
+    return 0;
+}
+
+s32 func_00010B0C(void) {
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/wlan", func_00010B14);
+#endif
+
+#if FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/wlan", func_0000ED5C);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000F2DC);
 #else
 INCLUDE_ASM("nonmatchings/wlan", func_0001276C);
@@ -1619,9 +1913,17 @@ INCLUDE_ASM("nonmatchings/wlan", func_00013620);
 INCLUDE_ASM("nonmatchings/wlan", func_0000F550);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/wlan", func_0000FAA4);
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00011730);
 
+INCLUDE_ASM("nonmatchings/wlan", func_000117F8);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/wlan", func_0000FAA4);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000FC6C);
 #endif
 
@@ -1635,8 +1937,12 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000F7A0);
 INCLUDE_ASM("nonmatchings/wlan", func_00010364);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_000105A8);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00012B20);
 #endif
 
 #if FW_VERSION == 150
@@ -1649,7 +1955,13 @@ INCLUDE_ASM("nonmatchings/wlan", func_000104E4);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_00010720);
-#else
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00012E18);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/wlan", func_000136A0);
 
 INCLUDE_ASM("nonmatchings/wlan", func_0001374C);
@@ -1671,13 +1983,39 @@ INCLUDE_ASM("nonmatchings/wlan", func_000151C8);
 
 INCLUDE_ASM("nonmatchings/wlan", func_000152B4);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00013004);
+
+INCLUDE_ASM("nonmatchings/wlan", func_000131E8);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00010A58);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00010C1C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+void func_00010F6C(void *arg0) {
+    void *temp_s1;
+
+    temp_s1 = M2C_FIELD(arg0, void **, 0xB8);
+    if (M2C_FIELD(temp_s1, s32 *, 0x74) == 0) {
+        sceKernelClearEventFlag(M2C_FIELD(temp_s1, s32 *, 0x38), -0x201U);
+        M2C_FIELD(temp_s1, s32 *, 0x6C) = -1;
+        M2C_FIELD(temp_s1, s32 *, 0x30) = 1;
+        if ((u32) (sceKernelGetSystemTimeLow() - D_0002D7A8) >= (u32) (M2C_FIELD(arg0, s32 *, 0x128) * 0x3E8)) {
+
+        } else {
+            func_0000BC54((s32) arg0, 2, 0);
+        }
+        sceKernelSetEventFlag(M2C_FIELD(temp_s1, s32 *, 0x38), 0x400U);
+        M2C_FIELD(temp_s1, s32 *, 0x74) = 1;
+    }
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00010F6C(void *arg0) {
     void *temp_s0;
 
@@ -1711,6 +2049,10 @@ void func_00010F6C(void *arg0) {
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_00010FE8);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/wlan", D_00016810);
 #endif
 
 #if FW_VERSION < 152
@@ -1747,7 +2089,7 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00019078);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_0001907C);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/wlan", D_000137C0);
 #endif
 
@@ -1767,7 +2109,7 @@ INCLUDE_RODATA("nonmatchings/wlan", D_000190F8);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00015B48);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_000116BC);
 #endif
 
@@ -1785,7 +2127,7 @@ INCLUDE_ASM("nonmatchings/wlan", func_00011718);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00016010);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_000117D8);
 
 INCLUDE_ASM("nonmatchings/wlan", func_000118BC);
@@ -1793,10 +2135,18 @@ INCLUDE_ASM("nonmatchings/wlan", func_000118BC);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00016060);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00013D64);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_00011E64);
 
 INCLUDE_ASM("nonmatchings/wlan", func_000122C8);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_000143E4);
 #endif
 
 #if FW_VERSION == 100
@@ -1805,9 +2155,11 @@ INCLUDE_ASM("nonmatchings/wlan", func_00011A08);
 INCLUDE_ASM("nonmatchings/wlan", func_00011E2C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00011F5C);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_000122B8);
 #else
 INCLUDE_ASM("nonmatchings/wlan", func_000160E0);
@@ -1827,9 +2179,82 @@ INCLUDE_ASM("nonmatchings/wlan", func_00016F70);
 
 INCLUDE_ASM("nonmatchings/wlan", func_00017048);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/wlan", func_00014C0C);
+
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_FBD385FB);
+
+s32 sceWlanDrv_driver_44A99F9D(s32 *arg0, s32 *arg1) {
+    s32 var_a2;
+
+    var_a2 = 0x80410003;
+    if (((arg0 == NULL) | (arg1 == NULL)) == 0) {
+        var_a2 = 0;
+        *arg0 = D_0002D7AC;
+        *arg1 = D_0002D7B0;
+    }
+    return var_a2;
+}
+
+s32 sceWlanDrv_driver_EB3235B5(u32 arg0, s32 arg1) {
+    s32 temp_a0;
+    s32 var_v1;
+
+    var_v1 = 0x80410003;
+    if (arg0 < 0x65U) {
+        if (D_0002D7B4 == 0) {
+            D_0002D7B4 = 1;
+            func_000152F4(sceKernelGetSystemTimeLow());
+        }
+        temp_a0 = sceKernelCpuSuspendIntr();
+        D_0002D7AC = (s32) arg0;
+        D_0002D7B0 = arg1;
+        D_0002D7B8 = 0;
+        D_0002D7BC = 0;
+        D_0002D7C0 = 0;
+        D_0002D7C4 = 0;
+        sceKernelCpuResumeIntr(temp_a0);
+        var_v1 = 0;
+    }
+    return var_v1;
+}
+
+INCLUDE_ASM("nonmatchings/wlan", func_000152F4);
+
+INCLUDE_ASM("nonmatchings/wlan", func_00006278);
+
+INCLUDE_ASM("nonmatchings/wlan", func_00006338);
+
+INCLUDE_ASM("nonmatchings/wlan", func_000060FC);
+
+INCLUDE_ASM("nonmatchings/wlan", func_000156F8);
+
+INCLUDE_ASM("nonmatchings/wlan", func_00006194);
+
+INCLUDE_ASM("nonmatchings/wlan", func_00017E04);
+
+INCLUDE_ASM("nonmatchings/wlan", func_00006458);
+
+INCLUDE_ASM("nonmatchings/wlan", func_000064F0);
+
+s32 func_00006574(void *arg0, void *arg1) {
+    void *temp_s0;
+
+    temp_s0 = M2C_FIELD(arg0, void **, 0x184);
+    func_000022C0(arg0);
+    M2C_FIELD(arg1, u16 *, 0) = (u16) M2C_FIELD(temp_s0, u16 *, 0x12C);
+    M2C_FIELD(arg1, u16 *, 2) = (u16) M2C_FIELD(temp_s0, u16 *, 0x12E);
+    M2C_FIELD(arg1, u16 *, 4) = (u16) M2C_FIELD(temp_s0, u16 *, 0x130);
+    func_000022E4(arg0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/wlan", func_00012630);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/wlan", func_0001712C);
 
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_FBD385FB);

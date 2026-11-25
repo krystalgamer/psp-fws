@@ -39,7 +39,9 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_442BFBAC);
 
 INCLUDE_ASM("nonmatchings/power", module_start);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/power", module_reboot_before);
+#else
 s32 module_reboot_before(void) {
     scePowerSetClockFrequency(0xDE, 0xDE, 0x6F);
     sceSysEventForKernel_D7D3FDCD(&D_00003C60);
@@ -51,8 +53,6 @@ s32 module_reboot_before(void) {
     func_0000250C();
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/power", module_reboot_before);
 #endif
 
 #if FW_VERSION < 282
@@ -162,11 +162,17 @@ INCLUDE_ASM("nonmatchings/power", func_0000054C);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerWaitRequestCompletion);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/power", func_00000C38);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/power", func_00000658);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00000D20);
 #endif
 
@@ -174,7 +180,13 @@ INCLUDE_RODATA("nonmatchings/power", D_00005D60);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/power", D_00004CF0);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/power", func_00000F08);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/power", func_00000CF4);
 #endif
 
@@ -337,7 +349,13 @@ INCLUDE_ASM("nonmatchings/power", func_00001334);
 INCLUDE_ASM("nonmatchings/power", func_00001364);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+s32 scePower_driver_7FA406DD(void) {
+    return (M2C_VFIELD(&D_00003E00, s32, 0x20) | M2C_VFIELD(&D_00003E00, s32, 0x24)) != 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 scePower_driver_7FA406DD(void) {
     return M2C_VFIELD(&D_00003E00, s32, 0x20);
 }
@@ -383,7 +401,15 @@ INCLUDE_ASM("nonmatchings/power", scePowerRequestSuspend);
 INCLUDE_ASM("nonmatchings/power", scePower_driver_2875994B);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/power", scePower_driver_0442D852);
+
+s32 scePower_driver_0074EF9B(void) {
+    return M2C_VFIELD(&D_00003E00, s32, 0x34);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 scePower_driver_0074EF9B(void) {
     return M2C_VFIELD(&D_00003E00, s32, 0x30);
 }
@@ -557,9 +583,15 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_972CE941);
 
 INCLUDE_ASM("nonmatchings/power", func_00002F98);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/power", func_0000294C);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/power", func_00001BAC);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/power", func_00002FA0);
 #endif
 
@@ -681,11 +713,15 @@ s32 scePowerGetPllClockFrequencyInt(void) {
 INCLUDE_ASM("nonmatchings/power", scePowerGetPllClockFrequencyFloat);
 
 INCLUDE_ASM("nonmatchings/power", func_00003140);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/power", D_00004E08);
 
 INCLUDE_RODATA("nonmatchings/power", D_00004E0C);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00003220);
 
 INCLUDE_ASM("nonmatchings/power", func_00003814);

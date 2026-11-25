@@ -42,6 +42,8 @@
   "Unk_sceVshCommonUtil_98E57F6D_0": "struct Unk_sceVshCommonUtil_98E57F6D_0 {\n    u8 unk0;\n    u8 pad1[0x3];\n    s32 unk4;\n    s32 unk8;\n    u8 padC[0x4];\n    u8 unk10;\n};"
  },
  "vars": {
+  "D_000080C0": "extern s32 D_000080C0;",
+  "D_000080C4": "extern s32 D_000080C4;",
   "D_00008BF0": "extern s32 D_00008BF0;",
   "D_00008BF4": "extern s32 D_00008BF4;",
   "D_00008BF8": "extern s32 D_00008BF8;",

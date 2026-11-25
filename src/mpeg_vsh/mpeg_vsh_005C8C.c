@@ -512,7 +512,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A08);
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005DB8);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 s32 func_00005DB8(s32 arg0) {
     return (sceKernelPollSema(arg0, 0) == 0) ? 0 : 0x80000041;
 }
@@ -595,7 +595,21 @@ s32 func_00006178(s32 arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000061CC);
+#endif
 
+#if FW_VERSION == 201
+s32 func_00007754(void *arg0, s32 arg1) {
+    s32 temp_s1;
+
+    func_000079D8(D_00007F04);
+    M2C_FIELD(arg0, s32 *, 0x50) = arg1;
+    temp_s1 = sceVideocodec_627B7D42(arg0, 0);
+    func_00007A68(D_00007F04);
+    return temp_s1;
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006234);
 #else
 void func_00007D70(void) {

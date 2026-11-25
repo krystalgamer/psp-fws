@@ -1,6 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0A7144", func_000A7144);
+#else
 s32 func_000A7144(s32 arg0, struct Unk_func_000A7144_1 *arg1) {
     s32 temp_v0;
 
@@ -12,6 +15,7 @@ s32 func_000A7144(s32 arg0, struct Unk_func_000A7144_1 *arg1) {
     }
     return temp_v0;
 }
+#endif
 
 s32 func_000A719C(struct Unk_func_000A7144_1 *arg0) {
     return (arg0->unk0 << 0x18) + (arg0->unk1 << 0x10) + (arg0->unk2 << 8) + arg0->unk3;
@@ -79,4 +83,3 @@ INCLUDE_ASM("nonmatchings/paf_0A7144", func_000A946C);
 INCLUDE_ASM("nonmatchings/paf_0A7144", func_000A95FC);
 
 INCLUDE_ASM("nonmatchings/paf_0A7144", func_000A97F4);
-

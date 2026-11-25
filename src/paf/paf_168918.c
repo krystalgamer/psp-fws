@@ -15,4 +15,3 @@ s32 func_00168918(s32 arg0, s32 *arg1) {
     }
     return var_v0;
 }
-

@@ -29,6 +29,7 @@ struct Unk_func_0000277C_1 {
     s32 unkC;
 };
 
+extern M2C_UNK D_00003F1C;
 extern s32 D_00004250;
 extern s32 D_00004260;
 extern M2C_UNK D_00004280;
@@ -49,7 +50,9 @@ extern M2C_UNK func_00003D3C;
 M2C_UNK InterruptManagerForKernel_D774BA45(M2C_UNK);
 M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);
 s32 KDebugForKernel_24C32559(M2C_UNK);
+M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, M2C_UNK *);
 u32 KDebugForKernel_D636B827();
+s32 func_00000000(s32);
 void func_00001274(u32 arg0);
 s32 func_000012C8(void);
 void func_000012D4(s32 arg0);
@@ -79,6 +82,7 @@ void func_00003FF0(u32 arg0);
 void func_00004044(s32 arg0);
 s32 func_00004080(void);
 s32 func_0000408C(s32 *arg0);
+s32 module_start(void);
 void sceAta_driver_110D3739(s32 arg0, s32 arg1);
 s32 sceAta_driver_1C29566B(void);
 void sceAta_driver_298DDC3D(void);

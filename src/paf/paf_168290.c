@@ -2,6 +2,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_168290", func_00168290);
+#else
 s32 func_00168290(s32 *arg0) {
     s32 temp_a1;
     s32 var_a1;
@@ -16,11 +19,13 @@ s32 func_00168290(s32 *arg0) {
     }
     return var_a1;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_168290", func_001682E4);
 
 INCLUDE_ASM("nonmatchings/paf_168290", func_001683E0);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_168290", func_001685B0);
 
 INCLUDE_ASM("nonmatchings/paf_168290", func_00168638);
@@ -28,6 +33,7 @@ INCLUDE_ASM("nonmatchings/paf_168290", func_00168638);
 INCLUDE_ASM("nonmatchings/paf_168290", func_001686C0);
 
 INCLUDE_ASM("nonmatchings/paf_168290", func_00168748);
+#endif
 
 INCLUDE_RODATA("nonmatchings/paf_168290", D_001A2B7C);
 
@@ -38,4 +44,3 @@ INCLUDE_RODATA("nonmatchings/paf_168290", D_001A2BC4);
 INCLUDE_ASM("nonmatchings/paf_168290", func_001687AC);
 
 INCLUDE_ASM("nonmatchings/paf_168290", func_001687E0);
-

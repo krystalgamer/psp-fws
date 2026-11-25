@@ -3,7 +3,9 @@
   "InterruptManagerForKernel_D774BA45": "M2C_UNK InterruptManagerForKernel_D774BA45(M2C_UNK);",
   "InterruptManagerForKernel_F987B1F0": "M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);",
   "KDebugForKernel_24C32559": "s32 KDebugForKernel_24C32559(M2C_UNK);",
+  "KDebugForKernel_84F370BC": "M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, M2C_UNK *);",
   "KDebugForKernel_D636B827": "u32 KDebugForKernel_D636B827();",
+  "func_00000000": "s32 func_00000000(s32);",
   "func_00001274": "void func_00001274(u32 arg0);",
   "func_000012C8": "s32 func_000012C8(void);",
   "func_000012D4": "void func_000012D4(s32 arg0);",
@@ -33,6 +35,7 @@
   "func_00004044": "void func_00004044(s32 arg0);",
   "func_00004080": "s32 func_00004080(void);",
   "func_0000408C": "s32 func_0000408C(s32 *arg0);",
+  "module_start": "s32 module_start(void);",
   "sceAta_driver_110D3739": "void sceAta_driver_110D3739(s32 arg0, s32 arg1);",
   "sceAta_driver_1C29566B": "s32 sceAta_driver_1C29566B(void);",
   "sceAta_driver_298DDC3D": "void sceAta_driver_298DDC3D(void);",
@@ -70,6 +73,7 @@
   "Unk_func_0000277C_1": "struct Unk_func_0000277C_1 {\n    u8 pad0[0xC];\n    s32 unkC;\n};"
  },
  "vars": {
+  "D_00003F1C": "extern M2C_UNK D_00003F1C;",
   "D_00004250": "extern s32 D_00004250;",
   "D_00004260": "extern s32 D_00004260;",
   "D_00004280": "extern M2C_UNK D_00004280;",

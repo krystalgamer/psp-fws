@@ -1,6 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 s32 func_000BDD08(struct Unk_func_000BDD08_0 *arg0, s32 *arg1) {
     s32 temp_v1;
     u8 temp_a2;
@@ -11,4 +12,4 @@ s32 func_000BDD08(struct Unk_func_000BDD08_0 *arg0, s32 *arg1) {
     *arg1 = ((s32) ((temp_v1 + temp_a2) - 1) / (s32) temp_a2) * temp_a2;
     return 0;
 }
-
+#endif

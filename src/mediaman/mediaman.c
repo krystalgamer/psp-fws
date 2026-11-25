@@ -13,7 +13,13 @@ INCLUDE_ASM("nonmatchings/mediaman", func_0000018C);
 INCLUDE_ASM("nonmatchings/mediaman", func_00000264);
 
 INCLUDE_ASM("nonmatchings/mediaman", func_000002C0);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mediaman", sceUmd_659587F7);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_3D0DECD5);
 
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_D45D1FE6);
@@ -27,7 +33,13 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmd_AE53DC2D);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_230666E3);
 
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_9B22AED7);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mediaman", sceUmd_71F81482);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/mediaman", func_0000042C);
 #endif
 
@@ -163,7 +175,17 @@ INCLUDE_RODATA("nonmatchings/mediaman", D_00000F7C);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", module_start);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mediaman", sceUmd_4832ABF3);
+
+INCLUDE_ASM("nonmatchings/mediaman", sceUmd_4BA25F4A);
+
+INCLUDE_ASM("nonmatchings/mediaman", func_0000090C);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdActivate);
 
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdDeactivate);
@@ -371,7 +393,7 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmd_6A41ED25);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_4C952ACF);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdReplaceProhibit);
 
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdReplacePermit);

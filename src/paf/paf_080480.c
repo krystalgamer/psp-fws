@@ -1,6 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 u32 func_00080480(u32 arg0, s32 arg1) {
     u32 var_v1;
 
@@ -333,4 +334,4 @@ INCLUDE_ASM("nonmatchings/paf_080480", jpeg_alloc_quant_table);
 INCLUDE_ASM("nonmatchings/paf_080480", jpeg_alloc_huff_table);
 
 INCLUDE_ASM("nonmatchings/paf_080480", jpeg_add_quant_table);
-
+#endif

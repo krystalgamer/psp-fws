@@ -2,7 +2,7 @@
 #include "common.h"
 #include "emc_ddr_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 s32 module_start(void) {
     sceDdr_driver_17D39E17();
     DmacManForKernel_32757C57((s32) &sceDdr_driver_87D86769);

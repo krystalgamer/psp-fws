@@ -33,7 +33,9 @@ INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00198784);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_BAE16A39);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_41F702EA);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_D27DE19A);
 
@@ -74,7 +76,9 @@ s32 func_000B8C4C(void) {
     return 1;
 }
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_78F94D84);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_5822F12A);
 
@@ -91,6 +95,9 @@ s32 scePaf_EA39A7C1(void) {
     return D_001A52C0;
 }
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_6B1E90C7);
+#else
 void scePaf_6B1E90C7(void) {
     s32 temp_a0;
 
@@ -98,7 +105,11 @@ void scePaf_6B1E90C7(void) {
     D_001A52BC += 1;
     sceKernelResumeDispatchThread(temp_a0);
 }
+#endif
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_66907719);
+#else
 void scePaf_66907719(void) {
     s32 temp_a0;
 
@@ -106,9 +117,15 @@ void scePaf_66907719(void) {
     D_001A52BC -= 1;
     sceKernelResumeDispatchThread(temp_a0);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_D5F3BAB1);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_AAD0EE78);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_E69C3B1B);
+#else
 void scePaf_AAD0EE78(s32 arg0) {
     D_001A5270 = arg0;
 }
@@ -124,6 +141,7 @@ void scePaf_17BC4F41(s32 arg0) {
 void scePaf_C2911954(s32 arg0) {
     D_001A527C = arg0;
 }
+#endif
 
 s32 scePaf_872F948B(void) {
     return D_001A5280;
@@ -139,6 +157,9 @@ s32 func_000B9280(void) {
     return 1;
 }
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_A044BFC0);
+#else
 void scePaf_A044BFC0(void) {
     s32 temp_a0;
 
@@ -146,7 +167,11 @@ void scePaf_A044BFC0(void) {
     D_001A52FC += 1;
     sceKernelResumeDispatchThread(temp_a0);
 }
+#endif
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_F1CF9579);
+#else
 void scePaf_F1CF9579(void) {
     s32 temp_a0;
 
@@ -154,6 +179,7 @@ void scePaf_F1CF9579(void) {
     D_001A52FC -= 1;
     sceKernelResumeDispatchThread(temp_a0);
 }
+#endif
 
 void scePaf_D726F4A2(s32 arg0) {
     D_001A52D4 = arg0;
@@ -200,6 +226,7 @@ void func_000B97D0(struct Unk_func_000B97D0_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9864);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontNewLib);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontDoneLib);
@@ -419,4 +446,4 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BD24C);
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BD504);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000BD7C0);
-
+#endif

@@ -26,6 +26,12 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentTick);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_B44BDAED);
 
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastReincarnatedTime);
+
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastAdjustedTime);
+#endif
+
 #if FW_VERSION < 282
 s32 module_start(void) {
     memset(&D_00004580.unk0, 0, 0x58);
@@ -44,10 +50,6 @@ s32 module_reboot_before(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastReincarnatedTime);
-
-INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastAdjustedTime);
-
 s32 module_start(void) {
     memset(&D_00004580, 0, 0x60);
     D_00004580.unk1C = -1;
@@ -173,12 +175,12 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetDosTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetWin32FileTime);
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/rtc", func_000011E0);
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetTime64_t);
 #endif
 
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/rtc", sceRtcGetTime64_t);
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/rtc", func_000011E0);
 #endif
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetTime_t);
@@ -212,12 +214,12 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcSetDosTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetWin32FileTime);
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/rtc", func_00001E10);
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime64_t);
 #endif
 
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime64_t);
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/rtc", func_00001E10);
 #endif
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime_t);

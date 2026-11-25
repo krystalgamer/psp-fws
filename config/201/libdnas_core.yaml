@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, libdnas_core]
+      - [0x80, c, libdnas_core]
       - { start: 0x261C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2704, type: prxpad, order: .text }
       - { start: 0x2710, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x27B8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x27EC, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x2920, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x2994, rodata, libdnas_core]
+      - [0x2994, .rodata, libdnas_core]
   - name: libdnas_core_seg1
     type: code
     start: 0x2B50

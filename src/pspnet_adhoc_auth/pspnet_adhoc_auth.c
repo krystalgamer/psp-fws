@@ -3,7 +3,7 @@
 #include "k1.h"
 #include "pspnet_adhoc_auth_decls.h"
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_86004235);
 #endif
 
@@ -11,7 +11,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_86004235);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00000000);
 #endif
 
-#if FW_VERSION != 152
+#if FW_VERSION == 100 || FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_86004235);
 #endif
 
@@ -37,7 +37,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_000000D8);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_0000025C);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 303
 s32 sceNetAdhocAuth_driver_6074D8F1(void) {
     u32 temp_s0;
 
@@ -85,7 +85,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_2AD8C677);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_BD144DA6);
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_CF4D9BED);
 #endif
 
@@ -116,13 +116,25 @@ void func_000015B0(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_000015D4);
 
-#if FW_VERSION < 303
+#if FW_VERSION == 201
+s32 func_00001290(void) {
+    if (D_00004600 >= 0) {
+        sceKernelDeleteSema((u32) D_00004600);
+    }
+    D_00004600 = -1;
+    return sceMemab_driver_0C134D3F();
+}
+#endif
+
+#if FW_VERSION < 201
 s32 func_00001290(void) {
     sceKernelDeleteSema((u32) D_00004600);
     D_00004600 = 0;
     return sceMemab_driver_0C134D3F();
 }
-#else
+#endif
+
+#if FW_VERSION == 303
 void func_00001650(void) {
     if (D_00004600 >= 0) {
         sceKernelDeleteSema((u32) D_00004600);
@@ -138,7 +150,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00001770);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00001848);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 303
 s32 func_00001578(void) {
     D_00004498 = 0;
     memset(&D_0000449C, 0, 0x10);
@@ -173,7 +185,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00001B84);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00001CE4);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00001A80);
 #endif
 
@@ -205,9 +217,15 @@ INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_0000459C);
 
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000045A0);
 
-#if FW_VERSION < 303
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000044C0);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_00003F80);
-#else
+#endif
+
+#if FW_VERSION == 303
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000045A4);
 #endif
 
@@ -215,7 +233,13 @@ INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000045AC);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_000027F8);
 
-#if FW_VERSION < 303
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_0000298C);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00002C30);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00002694);
 #endif
 
@@ -254,6 +278,23 @@ s32 func_000034C0(void **arg0) {
         var_v1 = *arg0;
     }
     M2C_FIELD(var_v1, s32 *, 0xC0) = 0;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 201
+s32 func_00003514(void *arg0) {
+    s32 temp_a3;
+    void *var_v1;
+
+    var_v1 = M2C_FIELD(arg0, void **, 4);
+    temp_a3 = M2C_FIELD(var_v1, s32 *, 0x4F0);
+    if (!(temp_a3 & 0x10)) {
+        M2C_FIELD(var_v1, s32 *, 0x4F0) = (s32) (temp_a3 | 0x10);
+        sceKernelSendMbx(M2C_FIELD(M2C_FIELD(arg0, void **, 0), u32 *, 4), var_v1 + 0x4A0);
+        var_v1 = M2C_FIELD(arg0, void **, 4);
+    }
+    M2C_FIELD(var_v1, s32 *, 0x4E0) = 0;
     return 0;
 }
 #endif
@@ -307,6 +348,23 @@ s32 func_0000356C(void *arg0) {
 }
 #endif
 
+#if FW_VERSION == 201
+s32 func_000035C4(void *arg0) {
+    s32 temp_a3;
+    void *var_v1;
+
+    var_v1 = M2C_FIELD(arg0, void **, 4);
+    temp_a3 = M2C_FIELD(var_v1, s32 *, 0x4F0);
+    if (!(temp_a3 & 0x40)) {
+        M2C_FIELD(var_v1, s32 *, 0x4F0) = (s32) (temp_a3 | 0x40);
+        sceKernelSendMbx(M2C_FIELD(M2C_FIELD(arg0, void **, 0), u32 *, 4), var_v1 + 0x4D0);
+        var_v1 = M2C_FIELD(arg0, void **, 4);
+    }
+    M2C_FIELD(var_v1, s32 *, 0x4E8) = 0;
+    return 0;
+}
+#endif
+
 #if FW_VERSION == 152
 s32 func_000035C4(void *arg0) {
     s32 temp_a3;
@@ -337,6 +395,23 @@ s32 func_000035C4(void *arg0) {
         var_v1 = M2C_FIELD(arg0, void **, 4);
     }
     M2C_FIELD(var_v1, s32 *, 0x2E8) = 0;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 201
+s32 func_0000361C(void *arg0) {
+    s32 temp_a3;
+    void *var_v1;
+
+    var_v1 = M2C_FIELD(arg0, void **, 4);
+    temp_a3 = M2C_FIELD(var_v1, s32 *, 0x4F0);
+    if (!(temp_a3 & 0x80)) {
+        M2C_FIELD(var_v1, s32 *, 0x4F0) = (s32) (temp_a3 | 0x80);
+        sceKernelSendMbx(M2C_FIELD(M2C_FIELD(arg0, void **, 0), u32 *, 4), var_v1 + 0x4B8);
+        var_v1 = M2C_FIELD(arg0, void **, 4);
+    }
+    M2C_FIELD(var_v1, s32 *, 0x4E4) = 0;
     return 0;
 }
 #endif
@@ -441,6 +516,10 @@ s32 func_00003B58(struct Unk_func_00003B58_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00003BB0);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00003BC8);
+#endif
+
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00003A04);
 #endif
@@ -491,6 +570,14 @@ void func_00003AC8(s32 arg0) {
 
     } else {
         D_00003FE4 = -1;
+        sceKernelSignalSema(D_00003FE0, 1);
+    }
+}
+#endif
+
+#if FW_VERSION == 201
+void func_00003DA0(void) {
+    if (D_00003FE0 >= 0) {
         sceKernelSignalSema(D_00003FE0, 1);
     }
 }

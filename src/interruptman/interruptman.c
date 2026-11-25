@@ -57,7 +57,7 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseSubIntrHandler);
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSuspendSubIntr);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_36B1EF81);
 #endif
 
@@ -207,7 +207,7 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsSubInterruptOccurred);
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManager_D2E8363F);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 s32 InterruptManager_D2E8363F(void) {
     return 0x80020001;
 }
@@ -404,7 +404,7 @@ INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_43CD40EF);
 
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_FE28C6D9);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_7AD28215);
 #endif
 

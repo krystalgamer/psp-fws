@@ -45,4 +45,3 @@ void func_000580D8(struct Unk_func_000580D8_0 *arg0, s32 arg1, s32 arg2, s32 arg
     arg0->unk10 = 0;
     arg0->unk14 = 0;
 }
-

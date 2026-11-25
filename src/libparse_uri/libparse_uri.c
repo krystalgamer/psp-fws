@@ -22,9 +22,19 @@ INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002798);
 INCLUDE_ASM("nonmatchings/libparse_uri", sceUriBuild);
 #endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/libparse_uri", sceUriMerge);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00000CDC);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/libparse_uri", sceUriSweepPath);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00000D1C);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00000DE8);
@@ -58,14 +68,26 @@ INCLUDE_RODATA("nonmatchings/libparse_uri", D_000027B4);
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001310);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libparse_uri", func_00001490);
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/libparse_uri", func_0000170C);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/libparse_uri", func_00001490);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001554);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_000015FC);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_000016A0);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/libparse_uri", func_000019F8);
+
+INCLUDE_ASM("nonmatchings/libparse_uri", func_00001A7C);
 #endif
 
 #if FW_VERSION == 100
@@ -80,7 +102,9 @@ INCLUDE_ASM("nonmatchings/libparse_uri", _query_parse);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_0000175C);
+#endif
 
+#if FW_VERSION < 201
 s32 module_start(void) {
     return 0;
 }
@@ -88,7 +112,9 @@ s32 module_start(void) {
 s32 module_stop(void) {
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libparse_uri", sceUriBuild);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", sceUriMerge);
@@ -220,7 +246,7 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_00001F64);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00002144);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001DEC);
 #endif
 
@@ -272,6 +298,10 @@ u8 *func_000021BC(u8 *arg0, u8 *arg1) {
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_000021F4);
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002D14);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002BF4);
 #endif
@@ -281,6 +311,10 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_00002240);
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00002984);
 
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002C20);
+
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002D48);
+#endif
 
 #if FW_VERSION == 152
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002874);

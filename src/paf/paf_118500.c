@@ -1,6 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 void func_00118500(struct Unk_func_00118500_0 *arg0) {
     arg0->unk4 = 0;
     arg0->unk8 = 0;
@@ -72,4 +73,4 @@ INCLUDE_RODATA("nonmatchings/paf_118500", D_0019D210);
 INCLUDE_ASM("nonmatchings/paf_118500", scePaf_96857E81);
 
 INCLUDE_ASM("nonmatchings/paf_118500", scePaf_E977B833);
-
+#endif

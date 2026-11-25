@@ -34,3 +34,7 @@ sceUmdCheckMedium = 0x0000603C; // type:func
 sceUmdActivate = 0x00006044; // type:func
 sceUmdWaitDriveStat = 0x0000604C; // type:func
 sceUmd_D45D1FE6 = 0x00006054; // type:func
+// shared names (tools/add_version.py) begin
+D_00000894 = 0x000063C0; // rom:0x6440
+D_000008D4 = 0x000063C8; // rom:0x6448
+// shared names (tools/add_version.py) end

@@ -4,6 +4,7 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern s32 D_00002D20;
 extern M2C_UNK D_00003C00;
 
 M2C_UNK KDebugForKernel_5282DD5E();
@@ -27,6 +28,7 @@ M2C_UNK ModuleMgrForKernel_91B87FAE();
 M2C_UNK ModuleMgrForKernel_A4370E7C();
 M2C_UNK ModuleMgrForKernel_F0CAC59E();
 void func_0000095C(void);
+s32 func_000020F8(void);
 M2C_UNK sceImpose_driver_9C8C6C81(M2C_UNK);
 s32 sceKernelExitGame(void);
 s32 sceKernelLoadExec(void *, void *);

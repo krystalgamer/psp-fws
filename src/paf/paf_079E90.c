@@ -1,6 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 u32 func_00079E90(u32 arg0, s32 arg1) {
     u32 var_v1;
 
@@ -197,4 +198,4 @@ INCLUDE_ASM("nonmatchings/paf_079E90", func_0007DE18);
 
 void func_0007E298(void) {
 }
-
+#endif

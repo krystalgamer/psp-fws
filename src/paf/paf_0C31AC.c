@@ -4,4 +4,3 @@
 void func_000C31AC(M2C_UNK **arg0) {
     *arg0 = &D_00199150;
 }
-

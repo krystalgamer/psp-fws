@@ -58,3 +58,21 @@ sceNet_lib_E0A81C7C = 0x00002374; // type:func
 sceNet_lib_EF097716 = 0x0000237C; // type:func
 sceNet_lib_57CC57DA = 0x00002384; // type:func
 sceUtilityGetSystemParamString = 0x0000238C; // type:func
+// shared names (tools/add_version.py) begin
+D_00003BEC = 0x00002724; // rom:0x27A4
+D_00003D64 = 0x00002824;
+D_00003D90 = 0x00002850;
+D_00002904 = 0x00002854;
+func_00000A80 = 0x00000B18; // type:func rom:0xB98
+func_00000A9C = 0x00000B34; // type:func rom:0xBB4
+func_00000AC4 = 0x00000B5C; // type:func rom:0xBDC
+func_00000B1C = 0x00000BB4; // type:func rom:0xC34
+func_00001950 = 0x00001954; // type:func rom:0x19D4
+func_00001CC8 = 0x00001CCC; // type:func rom:0x1D4C
+func_00001D24 = 0x00001D28; // type:func rom:0x1DA8
+func_00001D68 = 0x00001D6C; // type:func rom:0x1DEC
+func_000020D4 = 0x000020D8; // type:func rom:0x2158
+func_00002118 = 0x0000211C; // type:func rom:0x219C
+func_00002150 = 0x00002154; // type:func rom:0x21D4
+func_000021C4 = 0x000021C8; // type:func rom:0x2248
+// shared names (tools/add_version.py) end

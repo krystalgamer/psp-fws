@@ -35,6 +35,7 @@
  },
  "vars": {
   "D_000066F0": "extern s32 D_000066F0;",
+  "D_0000674C": "extern s32 D_0000674C;",
   "D_00006F8C": "extern M2C_UNK D_00006F8C;",
   "D_00006FB0": "extern s32 D_00006FB0;",
   "D_00006FDC": "extern s32 D_00006FDC;"

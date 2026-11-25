@@ -6,12 +6,17 @@ INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_0D560144);
 
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_CA8B8909);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_BE0998D7);
+#else
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_F3787AD8);
+#endif
 
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_9FF48DD3);
 
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_45C1AAF5);
 
+#if FW_VERSION == 340
 void sceDNAS_lib_BE0998D7(void) {
     if (D_000037B0 <= 0) {
         return;
@@ -41,9 +46,59 @@ void sceDNAS_lib_BE0998D7(void) {
     func_00002888((s32) &D_000037B4);
     D_000037B0 = 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_A646E771);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_2D424791);
+
+INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_79528BDB);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_0000045C);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_000004E8);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_000009C4);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00000A54);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00000AD4);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00000B5C);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00000BC4);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00000C68);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00000CB0);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00000D50);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00000F84);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00001044);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00001114);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_000011B8);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_0000152C);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00001780);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_000018E0);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00001A7C);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00001C1C);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00001CB4);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00001DAC);
+
+INCLUDE_ASM("nonmatchings/libdnas", func_00001E44);
+#else
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_6929100C);
 
 INCLUDE_ASM("nonmatchings/libdnas", func_0000079C);
@@ -105,6 +160,7 @@ INCLUDE_ASM("nonmatchings/libdnas", func_00002C38);
 INCLUDE_ASM("nonmatchings/libdnas", func_00002D84);
 
 INCLUDE_ASM("nonmatchings/libdnas", func_00002E78);
+#endif
 
 INCLUDE_ASM("nonmatchings/libdnas", func_00002F30);
 

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 u32 func_00077108(struct Unk_func_00077108_0 *arg0) {
     u16 temp_a0;
     u32 temp_v1;
@@ -135,4 +136,4 @@ void func_00079E14(void) {
 }
 
 INCLUDE_ASM("nonmatchings/paf_077108", func_00079E1C);
-
+#endif

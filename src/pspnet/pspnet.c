@@ -2,7 +2,7 @@
 #include "common.h"
 #include "pspnet_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_B755FA98);
 #endif
 
@@ -26,7 +26,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_03164B12);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_389728AB);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_EB38431E);
 #endif
 
@@ -40,7 +40,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_0DFF67F9);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_0D633F53);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_AB375964);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_8DA79EB0);
@@ -60,7 +60,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_AB7DD9A5);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_80E1933E);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_C1D2A7FB);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_CFA79880);
@@ -70,9 +70,15 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetInit);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetTerm);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pspnet", func_0000195C);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet", func_000016BC);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00001980);
 #endif
 
@@ -582,9 +588,15 @@ void func_00005744(struct Unk_func_00005744_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_13A8B98A);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", func_000057D8);
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pspnet", func_00005AD4);
+#endif
 
+#if FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/pspnet", func_000057D8);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_8C55B410);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00005C28);
@@ -648,7 +660,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_522A971B);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_EA42B353);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_E9D457B6);
 #endif
 
@@ -684,13 +696,19 @@ INCLUDE_ASM("nonmatchings/pspnet", func_000064CC);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_000069DC);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pspnet", func_00006AA0);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet", func_00006B10);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00006BBC);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00006C28);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00006AA8);
 #endif
 
@@ -724,9 +742,15 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00006C8C);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00007020);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pspnet", func_0000704C);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet", func_000071FC);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00007054);
 #endif
 
@@ -800,9 +824,13 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_75D9985C);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00007A68);
+#endif
 
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/pspnet", D_00009D5C);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", sceNetEtherNtostr);
 #else
 INCLUDE_ASM("nonmatchings/pspnet", func_0000795C);
@@ -820,7 +848,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetEtherStrton);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetGetMallocStat);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet", module_start);
 
 INCLUDE_ASM("nonmatchings/pspnet", module_stop);
@@ -844,7 +872,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00007CA4);
 INCLUDE_ASM("nonmatchings/pspnet", func_00007D20);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet", func_00007D60);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00007D84);
@@ -872,17 +900,53 @@ INCLUDE_ASM("nonmatchings/pspnet", func_000087C8);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00007B50);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", func_0000881C);
-
-INCLUDE_ASM("nonmatchings/pspnet", func_00008848);
-
-INCLUDE_ASM("nonmatchings/pspnet", func_0000885C);
-#else
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_96EF9DA1);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_750F705D);
+#else
+INCLUDE_ASM("nonmatchings/pspnet", func_0000881C);
 
+INCLUDE_ASM("nonmatchings/pspnet", func_00008848);
+#endif
+
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet", func_0000885C);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_E0A81C7C);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_EF097716);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_57CC57DA);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_8E798A2F);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_4753D878);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_4BF83CF4);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_2F305274);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_8B615F52);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_CF705E46);
+
+INCLUDE_ASM("nonmatchings/pspnet", func_00007E3C);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_8687B5AB);
+
+INCLUDE_ASM("nonmatchings/pspnet", func_00008598);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_2A73ADDC);
+
+INCLUDE_ASM("nonmatchings/pspnet", func_00008794);
+
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_1FB2FDDD);
+#endif
+
+#if FW_VERSION == 282
 M2C_UNK *func_00007BBC(void) {
     return &D_0000A88D;
 }
@@ -942,9 +1006,17 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00008790);
 void sceNet_lib_1FB2FDDD(s32 arg0) {
     func_00008790(arg0, 0, 0xA);
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_A0F16ABD);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_80C9F02A);
+#endif
+
+#if FW_VERSION == 282
 u8 *sceNet_lib_80C9F02A(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;
@@ -965,7 +1037,9 @@ u8 *sceNet_lib_80C9F02A(u8 *arg0, u8 *arg1) {
     }
     return var_v0;
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_D8722983);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_94DCA9F0);
@@ -988,6 +1062,10 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00008E1C);
 INCLUDE_ASM("nonmatchings/pspnet", func_00009390);
 
 INCLUDE_RODATA("nonmatchings/pspnet", D_0000A574);
+
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/pspnet", D_0000A4D0);
+#endif
 
 #if FW_VERSION == 152
 INCLUDE_RODATA("nonmatchings/pspnet", D_00009DF4);

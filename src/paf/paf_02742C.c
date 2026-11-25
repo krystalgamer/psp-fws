@@ -23,4 +23,3 @@ void func_0002748C(void) {
 void func_000274A8(void) {
     func_00027AF4();
 }
-

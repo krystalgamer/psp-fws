@@ -18,6 +18,7 @@ struct Unk_func_00004024_temp_v0 {
 };
 
 extern s32 D_000066F0;
+extern s32 D_0000674C;
 extern M2C_UNK D_00006F8C;
 extern s32 D_00006FB0;
 extern s32 D_00006FDC;

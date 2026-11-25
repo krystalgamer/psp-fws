@@ -1,5 +1,44 @@
 #include "common.h"
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_FA571A75);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_DA5939B4);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_C54657B7);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_2370130E);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_4108128B);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_F0EB4367);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_26E1E2BD);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_B6C76A14);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_80CEC43A);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_822357BB);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_8309549E);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_BA0A32CA);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_BA0D27F8);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_D5E80301);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_15096ECD);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_F479F616);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_7E327A7B);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_BDF74C43);
+
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_2B6C67EA);
+#else
 INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_lib_FA571A75);
 
 INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_lib_DA5939B4);
@@ -39,6 +78,7 @@ INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_lib_2B6C67EA);
 INCLUDE_RODATA("nonmatchings/libdnas_core", D_00002990);
 
 INCLUDE_RODATA("nonmatchings/libdnas_core", D_0000299C);
+#endif
 
 INCLUDE_RODATA("nonmatchings/libdnas_core", D_000029B4);
 

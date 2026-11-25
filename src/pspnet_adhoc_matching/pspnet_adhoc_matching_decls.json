@@ -11,6 +11,7 @@
   "func_0000113C": "void func_0000113C(struct Unk_func_0000113C_0 *arg0, s32 *arg1);",
   "func_0000181C": "void func_0000181C(void *arg0);",
   "func_00001A74": "void func_00001A74(void *arg0);",
+  "func_00001AAC": "s32 func_00001AAC(void *arg0);",
   "func_00001C24": "s32 func_00001C24(void *arg0, s32 arg1);",
   "func_00001D08": "void func_00001D08(void *arg0);",
   "func_00001E50": "void func_00001E50(void *arg0, s32 *arg1);",
@@ -99,12 +100,15 @@
   "D_00003410": "extern M2C_UNK D_00003410;",
   "D_00003454": "extern s32 D_00003454;",
   "D_00003458": "extern s32 D_00003458;",
+  "D_00003A44": "extern s32 D_00003A44;",
+  "D_00003A48": "extern s32 D_00003A48;",
   "D_00003DB0": "extern s32 D_00003DB0;",
   "D_00003DB4": "extern s32 D_00003DB4;",
   "D_00003DC4": "extern s32 D_00003DC4;",
   "D_00003DC8": "extern s32 D_00003DC8;",
   "func_000022A4": "extern M2C_UNK func_000022A4;",
   "func_00002374": "extern M2C_UNK func_00002374;",
+  "func_00002948": "extern M2C_UNK func_00002948;",
   "pmp_rexmt_handler": "extern M2C_UNK pmp_rexmt_handler;"
  }
 }

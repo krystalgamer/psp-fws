@@ -9,38 +9,90 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000000AC);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", module_start);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 100 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", module_stop);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", module_reboot_before);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000194_v201);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000228);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000002A4);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 module_stop(void) {
     func_0001EB8C();
     return 0;
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 100 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000015C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0000015C(void) {
     scePaf_5FAC9869();
 }
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000002EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000178);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00000178(void) {
     scePaf_3586BE05();
 }
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000358);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000037C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000003B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000003D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000004F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000194);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00000194(void) {
     scePaf_545FE2DA();
 }
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000005B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000005CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000005E8);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000001B0);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000474);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000884);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000510);
 #endif
 
@@ -64,7 +116,15 @@ void func_00000340(void) {
 u8 func_0000034C(void) {
     return (u8) D_00020A00;
 }
-#else
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000008F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000A10);
+#endif
+
+#if FW_VERSION == 282
 void func_0000010C(void) {
     func_00017684();
 }
@@ -102,9 +162,11 @@ void func_000002E0(void) {
 }
 #endif
 
+#if FW_VERSION != 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000002FC);
+#endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000037C);
 
 void func_000004DC(void) {
@@ -112,23 +174,89 @@ void func_000004DC(void) {
         D_00020A00 = 1;
     }
 }
+#endif
 
+#if FW_VERSION < 282
 void func_000004FC(void) {
     func_00011710();
 }
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000A34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000AF0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000BCC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004A60C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000C6C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000CE8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000F0C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000FD8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000010B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001158);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001214);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000012D8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004A61C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000142C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000017A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001888);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001890);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000019C4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001B48);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001C7C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001D68);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001E28);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001EF4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002094);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000021BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000225C);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000518);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000053C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000008FC);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000954);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000A1C);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004A638);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000101B4);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000101C0);
@@ -142,7 +270,83 @@ s32 func_00000AD8(void) {
 }
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000AF4);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000258C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002694);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000281C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004A668);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002B38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002F30);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003020);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000309C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003884);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003A5C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003A8C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003ABC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003B14);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003B30);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003BDC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003C14);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003C50);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003D78);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003E28);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003E90);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003EBC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004A738);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003F64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004004);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004038);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004054);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000040B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000040C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000040EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000041D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000042B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004420);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004474);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000046E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004720);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004748);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000B6C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000CA0);
@@ -180,7 +384,7 @@ void func_00000784(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000007A0);
 #endif
 
@@ -199,7 +403,53 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000A2C);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000A9C);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004AD4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004C34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000D2C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004D54);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004E20);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004E78);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004F68);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005218);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000052C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000054AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000056CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005728);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004A79C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004A7A8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005814);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005A0C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005A28);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005B84);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005BB0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005E1C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006130);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000BC0);
 
 u32 func_00000CE4(s32 arg0, void *arg1, u32 arg2) {
@@ -223,7 +473,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000DE0);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000F60);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000015B0);
 #endif
 
@@ -233,13 +483,13 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000FCC);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000013A8);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 s32 func_00001414(void) {
     return 0;
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001AF8);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001DE4);
@@ -257,7 +507,7 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F5F8);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000014A4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001870);
 #endif
 
@@ -295,6 +545,24 @@ void func_000024C4(void) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000024E8);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000617C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006258);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006300);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000637C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006448);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000064E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006638);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000066AC);
 #endif
 
 #if FW_VERSION == 100
@@ -2328,7 +2596,7 @@ void func_0001151C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001156C);
 #endif
 
@@ -2336,18 +2604,32 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001156C);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000201C8);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00011710);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00011814);
+#endif
+
+#if FW_VERSION < 201
 void func_00011814(void) {
     IoFileMgrForUser_6D08A871(&D_0001AD94);
 }
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00011710);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000026B0);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002794);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006A18);
 #endif
 
 #if FW_VERSION == 282
@@ -2368,9 +2650,11 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000080BC);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000081A0);
 #endif
 
+#if FW_VERSION != 201
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001AD94);
+#endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_00020234);
 #endif
 
@@ -2386,9 +2670,11 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001ADA0);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001ADB4);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000119C8);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00011AB8);
 #endif
 
@@ -2444,11 +2730,27 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001AE30);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012000);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002FAC);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00002FAC(s32 arg0, u32 arg1) {
     return (((s32) (arg0 + 1) / (s32) (arg1 >> 5)) + 1) * arg1;
 }
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000070B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007174);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000729C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007424);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002FD4);
 #endif
 
@@ -2458,7 +2760,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000120BC);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001212C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001232C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000125E8);
@@ -2468,15 +2770,21 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008DEC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009020);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007888);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012928);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000911C);
 #endif
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009278);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012BB0);
 #endif
 
@@ -2592,7 +2900,13 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001AF10);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003E0C);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008588);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000452C);
 #endif
 
@@ -2604,12 +2918,26 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012FEC);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000138E8);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013954);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000087DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008904);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000139D0);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013AD8);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_00020400);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008A0C);
 #endif
 
 #if FW_VERSION == 100
@@ -2634,7 +2962,7 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000204B8);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000204D8);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013BDC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013C0C);
@@ -2670,7 +2998,9 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001400C);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001409C);
+#endif
 
+#if FW_VERSION < 201
 s32 func_00014104(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -2683,7 +3013,9 @@ s32 func_00014104(void) {
     }
     return var_v1;
 }
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014148);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000141C8);
@@ -2721,11 +3053,39 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000145F4);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000146CC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014714);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000147C0);
+#endif
+
+#if FW_VERSION < 201
 s32 func_000147C0(s32 arg0) {
     return __builtin_allegrex_max(func_00011AB8(0, 0, arg0, 0, 0), -1);
 }
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009730);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000097E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000996C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009988);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000099A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009B78);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009C88);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009D4C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009D90);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000147F4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014A00);
@@ -2733,27 +3093,55 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014A00);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005B2C);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009E38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009E60);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_00010480);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014BE0);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_00020610);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009F18);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_00020618);
 #endif
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A734);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014E0C);
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A198);
+#endif
 
+#if FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014E0C);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00015070);
+#endif
+
+#if FW_VERSION < 201
 void func_00015070(s32 *arg0, s32 arg1, s32 arg2) {
     *arg0 = (*arg0 & ~(3 << arg1)) | (arg2 << arg1);
 }
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00015094);
 #else
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A834);
@@ -2776,15 +3164,25 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AC60);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AC74);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A534);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000150EC);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AC8C);
 #endif
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AEF0);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00015280);
+#endif
+
+#if FW_VERSION < 201
 void func_00015280(void *arg0) {
     s32 temp_v1;
 
@@ -2798,7 +3196,9 @@ void func_00015280(void *arg0) {
         func_00007FCC((s32) arg0);
     }
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_0000AF14(struct Unk_func_0000AF14_0 *arg0) {
     s32 temp_v1;
 
@@ -2816,11 +3216,21 @@ void func_0000AF14(struct Unk_func_0000AF14_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AF6C);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A874);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00015394);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000154F0);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000155B0);
+#endif
+
+#if FW_VERSION < 201
 s32 func_000155B0(void *arg0) {
     s32 var_v0;
 
@@ -2830,13 +3240,47 @@ s32 func_000155B0(void *arg0) {
     }
     return var_v0;
 }
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A9F4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AA68);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AAA4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AAB0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AAD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AB04);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000ACE4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AFC0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B134);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B168);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B288);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B51C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B688);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B7B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B870);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000155C4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000158B8);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006AB4);
 #endif
 
@@ -2844,7 +3288,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006AB4);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00015A90);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00015CE8);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00015EC0);
@@ -2854,7 +3298,9 @@ void func_00015FF8(s32 arg0, s8 arg1) {
 }
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016010);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B034);
 
 s32 func_0000B19C(struct Unk_func_0000B19C_0 *arg0) {
@@ -2932,9 +3378,17 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C29C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C3C4);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000162D8);
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000BB8C);
 
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000BD3C);
+#endif
+
+#if FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000162D8);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016634);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016678);
@@ -2942,25 +3396,61 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016678);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016B74);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016E0C);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C554);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016EB8);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000CD88);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000177EC);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017D10);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000D3AC);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000181B8);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018578);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000DAE8);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018B90);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019028);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019168);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E5C8);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019304);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000198F4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001993C);
@@ -2972,31 +3462,81 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019B78);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001A75C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001A7C4);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000F420);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001A81C);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AACC);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000F648);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AB9C);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AE30);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000F868);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AEA4);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AF70);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000F950);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000F9DC);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AFE0);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B0E4);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B35C);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000FCF8);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B5C4);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B818);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010070);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BA68);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BC10);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BD40);
@@ -3006,13 +3546,25 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C328);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C7A4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C894);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010F9C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00011064);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000111BC);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CD90);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CEAC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D0B0);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D25C);
 #else
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C484);
@@ -3036,7 +3588,9 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C6F4);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001AFEC);
 
+#if FW_VERSION != 201
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001B000);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C7E4);
@@ -3236,11 +3790,2795 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013DD8);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013F48);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000125CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012610);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000126B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001270C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001B114);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012720);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001275C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001277C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000127FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012874);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012890);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000128AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000128C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001290C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004ABEC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012A64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012B78);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012B84);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012B90);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012B9C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012BFC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012C90);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012C98);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012CD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012CD8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012CF4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012D10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012D84);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012DA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012DEC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012E98);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012F7C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004AC34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012F98);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013310);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004ACC0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004ACDC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004ACFC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004AD34);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004AD58);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001332C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000134CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001351C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013528);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013550);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000135DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013790);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004AE60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013848);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001397C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013A10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013B14);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013C14);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013C20);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013C68);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013EEC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013EF8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013F10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013F30);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013F38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013F4C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013F88);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014000);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014024);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014044);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014060);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000142D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000142DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014334);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014358);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001438C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014474);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014490);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001452C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001456C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000145AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000145F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014610);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014630);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000146A8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000146C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014744);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000147BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014838);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004AE9C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004AEA0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004AEAC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004AF2C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004AFB4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004AFEC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B068);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B0E8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B170);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B1A8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B224);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000148D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014A44);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014BB4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014C18);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014C7C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014CE8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014D48);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000150C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001592C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00015B60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00015FB4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000166E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000167D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016820);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001689C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001696C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000169E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016AE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016C1C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016C3C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016D8C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00016FEC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017178);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017184);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017328);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000173DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001748C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001781C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000178D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017940);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017A24);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017A9C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017AE8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017AF8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017BCC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017CA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00017F98);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000180B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000180E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018124);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001817C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000181CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018268);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000182C4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018378);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018478);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018570);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000185D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018658);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000186E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018744);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018754);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001877C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000187FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001880C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001881C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018888);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000188F4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018A98);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018B4C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018B9C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018BAC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018BBC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018CB8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018DD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018DEC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00018E64);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B308);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B320);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B330);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B3C0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B3C4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B3C8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B428);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B458);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B460);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019000);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000190D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019268);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000197DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019968);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000199B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019A08);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019B10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019C3C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019CD8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019DAC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019FFC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001A178);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001A328);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001A37C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001A428);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001A4D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001A898);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AB54);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001ACB4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AD14);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AD70);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AE2C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001AF3C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B02C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B204);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B488);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B664);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B70C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B7C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B884);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B8A8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B924);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B9D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001B9F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BA40);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BA90);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BAA8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BBD8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BBF8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BC18);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BC90);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BCA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BCE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BD34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BDC0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BDD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BE10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BF04);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001BF80);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C01C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C03C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C120);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C1E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C208);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C298);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C328_v201);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C37C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C434);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C580);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C64C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C6E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C7C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C7FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C858);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C8D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C964);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001C9CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CA20);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CA7C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B538);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B544);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B558);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CAD4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CBA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CCB0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CE64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CE98);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CEA4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CEB0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CEBC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001CEC8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D088);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D0CC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B5C4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B5C8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B5CC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B5D0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B5D4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B5D8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B5DC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B5E0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B5E4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B5E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D0F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D188);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D374);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D3AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D3EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D424);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D498);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D4FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D524);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D534);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D55C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D564);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D570);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D580);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D624);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D62C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D634);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D63C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D69C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D6A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D6AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D6B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D778);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D7C4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B640);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D808);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D93C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D9B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001D9F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001DA40);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001DB4C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001DCE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001DD54);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001DDC0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001DFC8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001E004);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001E218);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001E45C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001E72C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001E7E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001E89C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001E8F4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001E930);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001ECA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001EE74);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001EF90);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001EFFC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F01C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F03C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F0A8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F11C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F188);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F1FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F218);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F234);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F250);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F26C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F288);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F2A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F2B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F2DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F364);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F3EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F430);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B718);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B758);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B798);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F474);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F4C4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F4D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F4E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F50C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F568);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F60C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F638);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F660);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F6B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F6BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F6C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F820);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F920);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001F9D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001FA24);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001FAAC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001FDD8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001FE54);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001FEA4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001FED4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001FEE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001FF50);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001FFD8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020000);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020070);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020080);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000200C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000200F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020108);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020138);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000202B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000202D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000202F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020348);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002039C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020560);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002064C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000206C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000207D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002087C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002093C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002094C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020974);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000209E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000209F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020A30);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020A58);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020A94);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020AB4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020AD4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020AFC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020B24);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020B60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020B9C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020C18);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020C80);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020CA8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020CD0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B7B8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B7C8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B7D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020CF8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020D40);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020D6C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020DCC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020E00);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00020F0C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021044);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021094);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B7E4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B7F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000210E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021138);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002118C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021214);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002129C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021394);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000214E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021604);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021638);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021658);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021688);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000216B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000218F4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002196C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021A30);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021ACC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021BC0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021BE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021C10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021C40);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021C70);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021CA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021D54);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021E00);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021E20);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021E40);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021E78);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021EEC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021F24);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021F74);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00021FB8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022108);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022274);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000222E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000224C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002263C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002267C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000226BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000226D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000226E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022700);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002271C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000227A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000227DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000227F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000227FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022808);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000228B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022958);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000229D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022A50);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022AD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022AF4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022C30);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022CA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022D44);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022E18);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022F4C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00022FD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023054);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000230B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000231A0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000231FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023254);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023378);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000234A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023738);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000239B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023A94);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023BBC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023C34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023D88);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B808);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023E5C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023F64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023F90);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00023FC0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024090);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024114);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024134);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024154);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000241D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024204);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024214);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024254);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024290);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000242F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024384);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024418);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024520);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024600);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024674);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024750);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002475C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024808);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024870);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000248AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024904);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024954);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000249A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024A0C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024AE4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024B14);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024B88);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024C84);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024C94);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024CC8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00024E1C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025014);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000250C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000251F4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025220);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002522C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B820);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B868);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B874);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B880);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025238);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025560);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025888);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025974);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025A60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025B54);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025CA4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025CCC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025D50);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025E00);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00025E38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002600C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002614C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026454);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002651C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026634);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000266E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026738);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000267C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026858);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000268F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026988);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026A84);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026C20);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026CAC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026E08);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026E48);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026EA4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00026F9C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027014);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027104);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027388);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002759C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027814);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000278D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027BFC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027C64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027C88);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027D34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027E6C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027F10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00027FA8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028040);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000280DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028178);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000281D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028270);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028304);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002834C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000283EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028480);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002851C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028560);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002898C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028A08);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028A48);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028A84);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028AC0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028AFC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028B3C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028B78);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028BB4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028BF0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028C2C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028C68);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028CA4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028CE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028D1C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028D58);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028D94);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028DD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028E30);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028E64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028EC4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028EF8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028F28);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028F38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00028F78);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029064);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000290D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000291E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000292A8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000292B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029304);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029310);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002932C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029360);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029368);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029388);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000293A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000293C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000293DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029420);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029460);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002949C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000294DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029500);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029524);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029548);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002956C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029590);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000295B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000295D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000295FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029618);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029634);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029650);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002966C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000296AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000296EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002972C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002976C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029774);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002977C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029784);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002978C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029794);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002979C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000297A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000297AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000297B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000297E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000297EC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B900);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004B9D8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BA68);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BA70);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BA7C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000297F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029B74);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029BD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029C34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029C74);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029E60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029E68);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029EE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029F7C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029FA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00029FF0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A04C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A0C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A110);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A120);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A160);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A24C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A2C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A380);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A4F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A500);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A55C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A5A0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A604);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A660);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A6D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A718);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A7C4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BA98);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BAA8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A810);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A858);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A89C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A990);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002A9E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002AAB0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002AB7C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002AC48);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002AD14);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002AD84);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002ADF4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002AE64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002AED4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002B1E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002B280);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002B2E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002B3BC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BBB8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BBCC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BBE0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BBF4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BC08);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BC1C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BC20);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BC34);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BC48);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BC5C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BC70);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BC84);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BC98);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BCA4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BCB0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BCC8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BCD4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BCE0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BCE8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BCF0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD00);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD10);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD18);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD24);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD2C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD38);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD48);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD54);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD64);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD70);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD7C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD90);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BD9C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BDB8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BDC4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BDD8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BDEC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BE00);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BE14);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BE28);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002B3DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002B738);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002BB2C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002BCA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002BD0C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002BD70);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002C01C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002C104);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002C420);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002C568);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CA68);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CAF4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CB80);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CBB4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CBE8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CC08);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CC38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CD14);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CDD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CEEC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002CF30);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002D11C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002D198);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002D1FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002D250);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002D2D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002D7A0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002D92C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002D97C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002DBE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002DE98);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002E154);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002E69C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002E6EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002E73C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002E8BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002EE04);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002F2E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002F630);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002F864);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002F9A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002FA60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002FD8C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0002FFA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000300C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00030424);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000306E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000307DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00030838);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000308B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000308E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000309CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00030C5C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00030CD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00030F38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00030F58);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031094);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000310DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031310);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000313A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000314DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031590);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000315CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000316F4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031754);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031780);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003178C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031798);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000317E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031830);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031890);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000318F0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BE50);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031A34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031AA8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031B88);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031CC0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031F20);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031F28);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00031FB4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032058);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003207C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032084);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000320B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000320BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000320C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003215C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000321F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032244);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BE70);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BEB8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BEC4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032300);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000325E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032774);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000327CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032824);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032884);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000328B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000328D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032AB0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032B90);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032C10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032C78);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032DBC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032EEC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032F28);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032F90);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032FA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00032FE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003304C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000330D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033154);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000331E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003327C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000333E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033478);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003357C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000335B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000335D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000335F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033650);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033670);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BF0C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BF20);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004BF30);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033694);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000337DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033804);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003382C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033868);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033894);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000338B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000338D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000338FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033944);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003398C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000339C4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033A0C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033A44);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C018);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033A7C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033AF4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033B3C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033B84);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033BCC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033C04);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033C5C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033C8C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033CE4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033D1C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033DE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033E38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033EE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033F20);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00033F64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034038);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000340A0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034174);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000341E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003425C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034358);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034454);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003453C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034564);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034664);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034764);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000348B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000348E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034940);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003499C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034A08);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034A60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034AD8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034BBC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034BE8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034C80);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034CAC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034DA4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034E80);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00034F14);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000351F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000353A0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035478);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035484);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000354B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035518);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035660);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000356A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035748);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000357EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035890);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035920);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000359B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035A40);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035AD8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035B74);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035C10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035C44);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035CA4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035D34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035E0C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035E94);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00035F50);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036000);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000361B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036220);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036258);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036318);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036340);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000363E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003657C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000367A8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000368BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000369CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036A30);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036B94);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036CF8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036D8C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036DAC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036E08);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036E64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036ED0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00036F3C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037110);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037270);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000372B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037368);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037430);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037498);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037510);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037548);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003760C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037748);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000379C4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037B04);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037C50);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037D94);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00037ED8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C0F0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C108);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038024);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000380D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038198);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000381A0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038214);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000382B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000382E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038308);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000383AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038670);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000386F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000387C4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038BAC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038C6C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038CA8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038CDC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038D38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038DC8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00038E60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039018);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000390F4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000391E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000392D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039528);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C130);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C140);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C160);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C170);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000395B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000396CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000396EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003970C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039734);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039744);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039754);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003977C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039794);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000398D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003996C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000399E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039A4C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039AA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039B18);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039B3C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039BC0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00039E84);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A128);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A1A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A1C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A1C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A2DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A2FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A31C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A378);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A3D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A3F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A40C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A4A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A624);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A730);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A7B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A7DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A7FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A818);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003A92C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003AC70);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003AD1C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003ADC8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003AE5C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003AF08);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003AF28);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003AF48);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003AFC8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B054);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B0BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B0F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B150);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B158);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B174);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B190);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B1AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B1C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B200);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B238);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B2BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B350);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B480);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B4A8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B4F4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B55C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B594);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B5CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B778);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B814);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B83C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B888);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B8F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B998);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003B9BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003BAB8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003BBC8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003BC54);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003BD64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003BDE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003BE74);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003BF10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003BF38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003BF7C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003C044);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003C04C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003C1EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003C234);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003C298);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003C5B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003CA68);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003CBAC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003CCCC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003CF38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D178);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D1A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D1C4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D4B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D4D4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C190);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C19C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C1B0);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C1B8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C1E4);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C204);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D51C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D6F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D7E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D838);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D858);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D8E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D978);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003D9D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003DA48);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003DAEC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003DB68);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003DC80);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003DD64);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003DE38);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C368);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003DE5C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003DF4C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003DFB8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E004);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E0A8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E114);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E1BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E2E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E320);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E368);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E3D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E444);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E4D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E4F4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E514);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E538);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E580);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E5A0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E5EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E650);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E684);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E6BC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C3B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003E6E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EA80);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EA88);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EBBC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EC6C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003ECD8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003ED58);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003ED84);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EDB0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EDE8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EE08);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EE4C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EE98);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EEC0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EEF4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EF24);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EF4C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003EFE4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F114);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F244);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F27C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F318);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F360);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F394);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F3FC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F564);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F5E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F638);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F680);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F750);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F770);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003F844);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003FA70);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003FBF0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003FCCC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003FCFC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003FE60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003FED0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003FF04);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0003FF6C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004014C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000401A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000401EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000402C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00040394);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00040410);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00040470);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000404BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00040508);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004051C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00040EE0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00040F54);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00040FE8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041008);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C414);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C41C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C600);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C604);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C608);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C60C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041028);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041158);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041178);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041198);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000411DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041224);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041258);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004128C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000412B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000412DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041354);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041398);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041424);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041448);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004146C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041488);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000414A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000414C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000414F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041530);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041568);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041594);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000415C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000415EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000416E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041738);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000417D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041890);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041898);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000418A0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000418C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041AA0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041BCC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041BF8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041C28);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C640);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C644);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004C944);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CCB8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CCD8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CCF8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CD18);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CD5C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041CD4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041D68);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CD88);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CDC8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CDDC);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CE34);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CE8C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041D88);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00041F38);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000420B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004233C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042408);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042424);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042568);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004260C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042640);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042650);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042694);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042790);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042A6C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042D1C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042D28);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00042DB8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00043130);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00043240);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000433B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000434C4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000436F4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00043788);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00043BA4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00043BD8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00043CE4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00043D0C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00043D34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00043D5C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044000);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000440EC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044150);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000441D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004427C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000442E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044368);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044410);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000444F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044538);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044584);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000445BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044634);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004467C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004469C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000446CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044778);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000447C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044824);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044850);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000448C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004490C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000449BC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000449E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044A58);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044AFC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044C18);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044C70);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044CFC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044D34);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044D98);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044DC8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044E00);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044E60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044EE4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044F48);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00044F68);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045068);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000450AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000450F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045110);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004513C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045184);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000451E4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045264);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000452B8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045300);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045330);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045360);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000453A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045458);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000454A0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000454C8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045508);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004556C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000456D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004570C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004587C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000458B8);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CEB0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045AB4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045B10);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00045F3C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00046358);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000466B4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00046A54);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00047104);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00047958);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000479D8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00047A58);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00047D88);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000480D0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000483F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000484F0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000485AC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048900);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048958);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000489D4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048A2C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048A8C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048AD0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048B3C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048BB8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048C24);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048CB0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048DF8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00048F60);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049220);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049288);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000492A4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000492C0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000492DC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000492F8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049314);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049330);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0004934C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049368);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049384);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000493B0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000493CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000493E8);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049404);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049420);
+#endif
+
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001E584);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001E5DC);
-#else
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049A80);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049B08);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00049C24);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0004CF00);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001411C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014160);
@@ -3264,7 +6602,9 @@ void func_0001425C(s32 arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION != 201
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001B114);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014270);

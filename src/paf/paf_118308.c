@@ -1,6 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 void func_00118308(struct Unk_func_00118308_0 *arg0) {
     arg0->unk4 = 0;
     arg0->unk0 = sceKernelCreateEventFlag(&D_0019D204, 0x200U, 3U, NULL);
@@ -50,4 +51,4 @@ void func_00118454(u32 *arg0) {
 void func_00118498(s32 *arg0) {
     sceKernelSetEventFlag(*arg0, 2);
 }
-
+#endif

@@ -9,6 +9,7 @@ struct Unk_func_00002014_0 {
     s32 unk8;
 };
 
+extern s32 D_00005960;
 extern s32 D_00005B50;
 extern s32 D_00005B54;
 extern M2C_UNK D_00005BE4;
@@ -22,6 +23,8 @@ extern M2C_UNK D_000063F4;
 extern s32 D_00006400;
 
 s32 _sce_pspnet_adhocctl_get_state(s32 *arg0);
+void func_0000155C(s32 arg0, s32 arg1);
+s32 func_00001BD4(s32, s32, s32, s32);
 void func_00002014(struct Unk_func_00002014_0 *arg0);
 s32 func_00002068(s32, s32, s32, s32);
 void func_00002280(s32 arg0, s32 arg1);

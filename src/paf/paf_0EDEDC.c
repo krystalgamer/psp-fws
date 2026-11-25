@@ -22,4 +22,3 @@ s32 scePaf_CEAC29F3(void) {
 INCLUDE_ASM("nonmatchings/paf_0EDEDC", func_000EDF20);
 
 INCLUDE_ASM("nonmatchings/paf_0EDEDC", scePaf_275BCDC6);
-

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 void std_huff_tables(s32 arg0) {
     add_huff_table(arg0, arg0 + 0x50, (s32) &D_00191098, (s32) &D_001910AC);
     add_huff_table(arg0, arg0 + 0x60, (s32) &D_001910D8, (s32) &D_001910EC);
@@ -148,6 +149,7 @@ void jpeg_abort_decompress(s32 arg0) {
 INCLUDE_ASM("nonmatchings/paf_087074", default_decompress_parms);
 
 INCLUDE_ASM("nonmatchings/paf_087074", jpeg_read_header);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008A3BC);
 
@@ -157,6 +159,9 @@ INCLUDE_ASM("nonmatchings/paf_087074", func_0008A69C);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008A7F4);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_087074", func_00044724);
+#else
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008A928);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008AA20);
@@ -164,6 +169,7 @@ INCLUDE_ASM("nonmatchings/paf_087074", func_0008AA20);
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008AB50);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008ABEC);
+#endif
 
 void func_0008ACDC(struct Unk_func_0008ACDC_0 *arg0) {
     arg0->unk18->unk24 = 1;
@@ -178,6 +184,7 @@ void func_0008AE3C(void) {
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008AE44);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_087074", start_pass_huff_decoder);
 
 INCLUDE_ASM("nonmatchings/paf_087074", jpeg_make_d_derived_tbl);
@@ -193,6 +200,7 @@ INCLUDE_ASM("nonmatchings/paf_087074", decode_mcu);
 INCLUDE_ASM("nonmatchings/paf_087074", jinit_huff_decoder);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008BD60);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008BDA4);
 
@@ -252,9 +260,11 @@ INCLUDE_ASM("nonmatchings/paf_087074", func_0008E980);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008EAE0);
 
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/paf_087074", D_001912A8);
 
 INCLUDE_RODATA("nonmatchings/paf_087074", D_001912E8);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008EBBC);
 
@@ -342,6 +352,49 @@ INCLUDE_ASM("nonmatchings/paf_087074", func_00091B0C);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_00091B40);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004AAF8);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004AB74);
+
+void func_0004AC84(void **arg0) {
+    void *temp_v0;
+
+    temp_v0 = *arg0;
+    M2C_FIELD(temp_v0, s32 *, 0x6C) = 0;
+    M2C_FIELD(temp_v0, s32 *, 0x14) = 0;
+}
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004AC94);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004AD04);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004AD38);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004AF0C);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004B01C);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004B140);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004B274);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004B338);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004B3FC);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004B674);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004B788);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004B8A0);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004BAC8);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004BCF4);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004BE90);
+#else
 INCLUDE_ASM("nonmatchings/paf_087074", emit_message);
 
 INCLUDE_ASM("nonmatchings/paf_087074", format_message);
@@ -383,9 +436,67 @@ INCLUDE_ASM("nonmatchings/paf_087074", access_virt_barray);
 INCLUDE_ASM("nonmatchings/paf_087074", free_pool);
 
 INCLUDE_ASM("nonmatchings/paf_087074", self_destruct);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_00092F40);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C02C);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C048);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C064);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C080);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C09C);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C0A4);
+
+s32 func_0004C0D0(void) {
+    return 0;
+}
+
+void func_0004C0D8(void) {
+
+}
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C0E0);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C250);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C280);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C2B0);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C49C);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C664);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C738);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C7E8);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C88C);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004C930);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004CA7C);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004CBC4);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004CDCC);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004CE54);
+
+void func_0004CFC0(void) {
+
+}
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004CFC8);
+
+INCLUDE_ASM("nonmatchings/paf_087074", func_0004CFF4);
+#else
 INCLUDE_ASM("nonmatchings/paf_087074", jpeg_get_small);
 
 INCLUDE_ASM("nonmatchings/paf_087074", jpeg_free_small);
@@ -439,6 +550,7 @@ void finish_pass_1_quant(void) {
 INCLUDE_ASM("nonmatchings/paf_087074", new_color_map_1_quant);
 
 INCLUDE_ASM("nonmatchings/paf_087074", jinit_1pass_quantizer);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_00094168);
 
@@ -524,4 +636,3 @@ void func_0009584C(struct Unk_func_0009584C_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0009585C);
-

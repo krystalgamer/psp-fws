@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, ge]
+      - [0x80, c, ge]
       - { start: 0x47A0, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x48D0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x48D4, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -63,7 +63,7 @@ segments:
       - { start: 0x49C8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x49FC, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x4C7C, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x4D14, rodata, ge]
+      - [0x4D14, .rodata, ge]
       - { start: 0x5274, type: prxpad, order: .rodata }
   - name: ge_seg1
     type: code

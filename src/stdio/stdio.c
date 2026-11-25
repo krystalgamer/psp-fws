@@ -51,8 +51,86 @@ INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_D2B2A2A7);
 
 INCLUDE_ASM("nonmatchings/stdio", getchar);
 
-#if FW_VERSION == 152
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/stdio", gets);
+#endif
+
+#if FW_VERSION == 282
+void gets(s32 arg0) {
+    StdioForKernel_11A5127A(arg0, 0);
+}
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/stdio", StdioForUser_3054D478);
+#endif
+
+#if FW_VERSION == 282
+s32 StdioForUser_3054D478(void) {
+    return 0x80020001;
+}
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/stdio", StdioForUser_0CBB0571);
+#endif
+
+#if FW_VERSION == 282
+s32 StdioForUser_0CBB0571(void) {
+    return 0x80020001;
+}
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/stdio", StdioForUser_A46785C9);
+
+INCLUDE_ASM("nonmatchings/stdio", StdioForUser_A3B931DB);
+
+INCLUDE_ASM("nonmatchings/stdio", StdioForUser_9D061C19);
+
+INCLUDE_ASM("nonmatchings/stdio", StdioForUser_924ABA61);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000778);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000880);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000970);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000998);
+
+INCLUDE_ASM("nonmatchings/stdio", sceKernelRegisterStdoutPipe);
+
+INCLUDE_ASM("nonmatchings/stdio", sceKernelRegisterStderrPipe);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000A28);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000A30);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000A38);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000A50);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000A68);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000A78);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000B00);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/stdio", D_000010A8);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/stdio", D_0000147C);
+
+INCLUDE_RODATA("nonmatchings/stdio", D_000014D4);
+
+INCLUDE_RODATA("nonmatchings/stdio", D_000014E0);
+
+INCLUDE_RODATA("nonmatchings/stdio", D_000014F4);
+
+INCLUDE_ASM("nonmatchings/stdio", func_00000B0C);
 #endif
 
 #if FW_VERSION < 152
@@ -63,7 +141,7 @@ INCLUDE_RODATA("nonmatchings/stdio", D_00000F8C);
 INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_11A5127A);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/stdio", gets);
 
 INCLUDE_ASM("nonmatchings/stdio", func_000006A0);
@@ -90,18 +168,6 @@ void syslib_D3744BE0(void) {
     func_00000C78();
 }
 #else
-void gets(s32 arg0) {
-    StdioForKernel_11A5127A(arg0, 0);
-}
-
-s32 StdioForUser_3054D478(void) {
-    return 0x80020001;
-}
-
-s32 StdioForUser_0CBB0571(void) {
-    return 0x80020001;
-}
-
 void StdioForUser_A46785C9(void) {
 }
 
@@ -210,17 +276,25 @@ INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_98220F3E);
 
 INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_FB5380C5);
 
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_2D8551AB);
+
+INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_9662BF86);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/stdio", D_00001298);
 
 INCLUDE_RODATA("nonmatchings/stdio", D_000012B0);
 #endif
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/stdio", D_0000157C);
+
+INCLUDE_ASM("nonmatchings/stdio", func_0000100C);
+#endif
+
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_2D8551AB);
-
-INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_9662BF86);
-
 INCLUDE_RODATA("nonmatchings/stdio", D_0000154C);
 
 INCLUDE_ASM("nonmatchings/stdio", func_00000FB8);

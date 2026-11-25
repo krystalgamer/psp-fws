@@ -1,6 +1,8 @@
 {
  "funcs": {
   "_sce_pspnet_adhocctl_get_state": "s32 _sce_pspnet_adhocctl_get_state(s32 *arg0);",
+  "func_0000155C": "void func_0000155C(s32 arg0, s32 arg1);",
+  "func_00001BD4": "s32 func_00001BD4(s32, s32, s32, s32);",
   "func_00002014": "void func_00002014(struct Unk_func_00002014_0 *arg0);",
   "func_00002068": "s32 func_00002068(s32, s32, s32, s32);",
   "func_00002280": "void func_00002280(s32 arg0, s32 arg1);",
@@ -42,6 +44,7 @@
   "Unk_func_00002014_0": "struct Unk_func_00002014_0 {\n    u8 pad0[0x8];\n    s32 unk8;\n};"
  },
  "vars": {
+  "D_00005960": "extern s32 D_00005960;",
   "D_00005B50": "extern s32 D_00005B50;",
   "D_00005B54": "extern s32 D_00005B54;",
   "D_00005BE4": "extern M2C_UNK D_00005BE4;",

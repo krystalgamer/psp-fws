@@ -174,6 +174,7 @@ s32 func_00006FCC(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_00007044(s32 arg0, s32 arg1, s32 arg2);
 s32 func_0000732C(s32 arg0);
 M2C_UNK *func_000073AC(void);
+s32 func_00007754(void *arg0, s32 arg1);
 s32 func_00007958(s32 arg0, s32 arg1, void *arg2, s32 *arg3);
 s32 func_000079AC(s32 arg0);
 s32 func_000079D8(s32 arg0);

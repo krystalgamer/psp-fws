@@ -4,6 +4,12 @@
 
 INCLUDE_ASM("nonmatchings/memlmd", func_00000000);
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/memlmd", func_0000006C_v201);
+
+INCLUDE_ASM("nonmatchings/memlmd", func_000000A8);
+#endif
+
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/memlmd", func_0000006C_v152);
 #endif
@@ -18,7 +24,19 @@ void memlmd_8BDB1A3E(s32 arg0, s32 arg1, s32 arg2) {
 void memlmd_185F0A2A(s32 arg0, s32 arg1, s32 arg2) {
     func_0000006C(arg0, arg1, arg2, 1);
 }
-#else
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/memlmd", func_0000082C);
+
+INCLUDE_ASM("nonmatchings/memlmd", func_00000898);
+
+INCLUDE_ASM("nonmatchings/memlmd", memlmd_C3A6F784);
+
+INCLUDE_ASM("nonmatchings/memlmd", memlmd_DF76975E);
+#endif
+
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/memlmd", func_000000A8);
 
 INCLUDE_ASM("nonmatchings/memlmd", func_00000134);
@@ -78,6 +96,12 @@ INCLUDE_ASM("nonmatchings/memlmd", semaphore_4C537C72);
 
 INCLUDE_ASM("nonmatchings/memlmd", semaphore_77E97079);
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/memlmd", D_000017C8);
+
+INCLUDE_RODATA("nonmatchings/memlmd", D_000017D8);
+#endif
+
 #if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/memlmd", D_000012B4);
 #else
@@ -119,6 +143,14 @@ INCLUDE_RODATA("nonmatchings/memlmd", D_00002124);
 #endif
 
 INCLUDE_RODATA("nonmatchings/memlmd", D_00002134);
+
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/memlmd", D_00001910);
+
+INCLUDE_RODATA("nonmatchings/memlmd", D_000019A0);
+
+INCLUDE_RODATA("nonmatchings/memlmd", D_000019A4);
+#endif
 
 #if FW_VERSION == 152
 INCLUDE_RODATA("nonmatchings/memlmd", D_0000159C);

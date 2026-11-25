@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, osk_plugin]
+      - [0xA4, c, osk_plugin]
       - { start: 0xEFF8, type: asm, name: fini, linker_section: .fini }
       - { start: 0xF014, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xF32C, type: prxpad, order: .text }
@@ -72,7 +72,7 @@ segments:
       - { start: 0xF71C, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0xF720, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0xF724, type: prxpad, order: .rodata }
-      - [0xF728, rodata, osk_plugin]
+      - [0xF728, .rodata, osk_plugin]
       - { start: 0x11898, type: prxpad, order: .rodata }
   - name: osk_plugin_seg1
     type: code

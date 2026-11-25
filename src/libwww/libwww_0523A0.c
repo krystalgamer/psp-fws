@@ -2,6 +2,7 @@
 #include "common.h"
 #include "libwww_decls.h"
 
+#if FW_VERSION == 303
 void func_000523A0(struct Unk_func_000523A0_0 *arg0) {
     struct Unk_func_000523A0_temp_v1 *temp_v1;
     struct Unk_func_000523A0_temp_v1_2 *temp_v1_2;
@@ -11,6 +12,7 @@ void func_000523A0(struct Unk_func_000523A0_0 *arg0) {
     temp_v1_2 = arg0->unk90;
     temp_v1_2->unk20 = (s32) (temp_v1_2->unk20 | 0x80);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/libwww_0523A0", func_000523C4);
 
@@ -68,4 +70,3 @@ void func_00052BE4(s32 **arg0) {
     sceHVWWW_Library_904188DB(func_0004E0E0(**arg0), 0x40000);
     sceHVNetfront_Module_EDDF1A9E(arg0);
 }
-

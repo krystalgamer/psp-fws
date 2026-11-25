@@ -1001,7 +1001,7 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_C9B02F91);
 INCLUDE_ASM("nonmatchings/mgr", func_00006030);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 340
 s32 func_00006030(void) {
     s32 temp_v0;
     s32 var_a0;
@@ -1099,7 +1099,7 @@ INCLUDE_ASM("nonmatchings/mgr", func_00006884);
 INCLUDE_ASM("nonmatchings/mgr", func_00005194);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 340
 s32 func_00005194(s32 arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_v1;
@@ -1131,7 +1131,7 @@ INCLUDE_ASM("nonmatchings/mgr", func_00006A20);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00006B3C);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_00005324);
 #endif
 
@@ -1149,7 +1149,7 @@ INCLUDE_ASM("nonmatchings/mgr", func_00006D70);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00006EAC);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_000056C4);
 #endif
 
@@ -1213,7 +1213,7 @@ INCLUDE_ASM("nonmatchings/mgr", func_000077A0);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00007844);
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFB8);
 #endif
 
@@ -1301,7 +1301,7 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_6CCA97DB);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_A85906FC);
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_00008274);
 #endif
 

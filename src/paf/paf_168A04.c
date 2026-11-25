@@ -2,6 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
+#if FW_VERSION == 282
 s32 func_00168A04(struct Unk_func_00168A04_0 *arg0) {
     s32 var_a1;
 
@@ -13,6 +14,7 @@ s32 func_00168A04(struct Unk_func_00168A04_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00168A28);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00168A88);
 
@@ -20,6 +22,15 @@ INCLUDE_ASM("nonmatchings/paf_168A04", func_00168B34);
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00168BAC);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_168A04", func_001215BC);
+
+INCLUDE_ASM("nonmatchings/paf_168A04", func_00121674);
+
+INCLUDE_ASM("nonmatchings/paf_168A04", func_0012172C);
+
+INCLUDE_ASM("nonmatchings/paf_168A04", func_0012176C);
+#else
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00168BFC);
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00168C94);
@@ -47,4 +58,4 @@ INCLUDE_ASM("nonmatchings/paf_168A04", func_001692F0);
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00169408);
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00169518);
-
+#endif

@@ -4,13 +4,23 @@
 
 INCLUDE_ASM("nonmatchings/audio", func_00000000);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/audio", func_0000020C);
+
+INCLUDE_ASM("nonmatchings/audio", func_00000298);
+
+INCLUDE_ASM("nonmatchings/audio", func_00000518);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/audio", func_00000220);
 
 INCLUDE_ASM("nonmatchings/audio", func_0000028C);
 
 INCLUDE_ASM("nonmatchings/audio", func_000004CC);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/audio", func_000001E8);
 
 INCLUDE_ASM("nonmatchings/audio", func_00000274);
@@ -74,7 +84,7 @@ INCLUDE_ASM("nonmatchings/audio", sceAudio_driver_210567F7);
 
 INCLUDE_RODATA("nonmatchings/audio", D_000032E4);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/audio", D_00002D70);
 
 INCLUDE_RODATA("nonmatchings/audio", D_00002D7C);
@@ -84,11 +94,15 @@ INCLUDE_RODATA("nonmatchings/audio", D_00002D88);
 
 INCLUDE_ASM("nonmatchings/audio", sceAudio_driver_80F1F7E0);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/audio", sceAudio_driver_210567F7);
 #endif
 
 INCLUDE_ASM("nonmatchings/audio", sceAudio_driver_B61595C0);
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/audio", sceAudio_driver_210567F7);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceAudio_driver_927AC32B(s32 arg0) {
@@ -102,6 +116,10 @@ s32 sceAudio_driver_927AC32B(s32 arg0) {
     D_0000379D = arg0 + 8;
     return 0;
 }
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/audio", func_00001834);
 #endif
 
 #if FW_VERSION == 100
@@ -118,7 +136,7 @@ s32 sceAudio_driver_927AC32B(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/audio", func_00001774);
 #endif
 
@@ -160,11 +178,21 @@ INCLUDE_ASM("nonmatchings/audio", sceAudio_38553111);
 INCLUDE_ASM("nonmatchings/audio", sceAudio_5C37C0AE);
 #endif
 
+#if FW_VERSION != 201
 INCLUDE_ASM("nonmatchings/audio", sceAudio_E0727056);
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", sceAudio_5C37C0AE);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/audio", sceAudio_E0727056);
+
+INCLUDE_ASM("nonmatchings/audio", func_000020F8);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/audio", func_00001E94);
 #endif
 

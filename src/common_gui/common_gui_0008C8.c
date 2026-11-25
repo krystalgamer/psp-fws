@@ -54,17 +54,21 @@ void func_00000EFC(struct Unk_func_00000EFC_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00000F04);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_1A6F3382);
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_D27E08EE);
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_A06734FF);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_00000F6C(struct Unk_func_00000F6C_0 *arg0, s32 arg1) {
     arg0->unk24 = arg1;
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_10906D79);
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_0D5D87F2);
@@ -80,15 +84,17 @@ void sceVshCommonGui_72E652AA(s32 *arg0) {
     scePaf_41BCFB59(*arg0);
 }
 
-#if FW_VERSION < 282
-void sceVshCommonGui_9F196654(s32 *arg0) {
-    scePaf_FA05BF7B(*arg0);
-}
-#else
+#if FW_VERSION >= 201
 void sceVshCommonGui_0131C97D(s32 *arg0) {
     scePaf_FE575092(*arg0);
 }
+#else
+void sceVshCommonGui_9F196654(s32 *arg0) {
+    scePaf_FA05BF7B(*arg0);
+}
+#endif
 
+#if FW_VERSION == 282
 void sceVshCommonGui_450F3CF0(s32 *arg0) {
     scePaf_6C3BBB68(*arg0);
 }

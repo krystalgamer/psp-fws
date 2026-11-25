@@ -122,7 +122,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000065DC);
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00006614);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000072B0);
 #endif
 

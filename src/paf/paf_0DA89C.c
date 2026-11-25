@@ -5,4 +5,3 @@ void func_000DA89C(M2C_UNK **arg0) {
     *arg0 = &D_00199D28;
     scePaf_715E8DAB((s32) arg0);
 }
-

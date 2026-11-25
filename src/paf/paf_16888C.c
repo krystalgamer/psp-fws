@@ -9,3 +9,10 @@ s32 func_0016888C(s32 arg0, s32 arg1, s32 *arg2) {
 
 INCLUDE_ASM("nonmatchings/paf_16888C", func_001688A4);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/paf_16888C", func_00121374);
+
+INCLUDE_ASM("nonmatchings/paf_16888C", func_0012137C);
+
+INCLUDE_ASM("nonmatchings/paf_16888C", func_001213A0);
+#endif

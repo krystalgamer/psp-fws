@@ -56,6 +56,7 @@ void func_00004E4C(void);
 s32 func_00004E68(s32 arg0, s32 arg1);
 s32 func_000052F4(void);
 s32 func_000053EC(void);
+s32 func_000057F0(void);
 s32 func_000059D8(void);
 s32 func_00006484(void);
 s32 func_0000648C(void);

@@ -46,4 +46,3 @@ M2C_UNK *func_000B81E8(M2C_UNK **arg0, s32 arg1) {
     }
     return var_a0;
 }
-
