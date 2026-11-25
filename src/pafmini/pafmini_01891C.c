@@ -36,4 +36,3 @@ void func_0001897C(void) {
 void func_00018998(void) {
     func_000191D0();
 }
-

@@ -18,6 +18,11 @@ void func_000659DC(struct Unk_func_000659DC_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_000659EC);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/pafmini_06598C", func_0007D810);
+
+INCLUDE_ASM("nonmatchings/pafmini_06598C", func_0007D900);
+#else
 void func_00065A2C(struct Unk_func_00065A2C_0 *arg0) {
     arg0->unk8 = 0;
     arg0->unk0 = 0;
@@ -29,11 +34,13 @@ INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065A3C);
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065B24);
 
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065C14);
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065D04);
 
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065DC8);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065E88);
 
 void func_00065F48(void) {
@@ -43,4 +50,4 @@ void func_00065F48(void) {
 void func_00065F64(void) {
     func_00068FD4();
 }
-
+#endif

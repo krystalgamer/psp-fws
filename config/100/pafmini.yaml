@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/100/.splat_cache.pafmini
   symbol_addrs_path:
     - config/100/symbol_addrs.pafmini.txt
+    - config/100/func_starts.pafmini.txt
     - tmp/build/100/prx_syms.pafmini.txt
   reloc_addrs_path: [tmp/build/100/reloc_addrs.pafmini.txt]
   asset_path: tmp/assets/100/pafmini
@@ -54,7 +55,32 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - { start: 0xA4, type: prxpad, order: .text }
-      - [0xB0, asm, pafmini]
+      - [0xB0, c, pafmini]
+      - [0xDFA0, c, pafmini_00CC38]
+      - [0xF24C, c, pafmini_00DD54]
+      - [0x37B3C, c, pafmini_01891C]
+      - [0x37BD4, c, pafmini_0189B4]
+      - [0x3822C, c, pafmini_019014]
+      - [0x388E4, c, pafmini_0196D0]
+      - [0x405D4, c, pafmini_020050]
+      - [0x409D8, c, pafmini_020444]
+      - [0x53A68, c, pafmini_033A7C]
+      - [0x53B04, c, pafmini_033B18]
+      - [0x54040, c, pafmini_0340C4]
+      - [0x54530, c, pafmini_0346A8]
+      - [0x7D7F0, c, pafmini_06598C]
+      - [0x7DBFC, c, pafmini_065F80]
+      - [0x81A4C, c, pafmini_06A38C]
+      - [0x81B50, c, pafmini_06A490]
+      - [0x8EB6C, c, pafmini_0781A8]
+      - [0x8ED94, c, pafmini_0783D0]
+      - [0x8EE8C, c, pafmini_0784E0]
+      - [0x8EF90, c, pafmini_0785E4]
+      - [0x8EFF0, c, pafmini_078644]
+      - [0x8F0F4, c, pafmini_078748]
+      - [0xCE3B4, c, pafmini_0ABE50]
+      - [0xD14FC, c, pafmini_0AD564]
+      - [0xECD30, c, pafmini_0BB9C0]
       - { start: 0xFB784, type: asm, name: fini, linker_section: .fini }
       - { start: 0xFB7A0, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xFB968, type: prxpad, order: .text }
@@ -72,7 +98,21 @@ segments:
       - { start: 0xFD198, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0xFD19C, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0xFD1A0, type: prxpad, order: .rodata }
-      - [0xFD1C0, rodata, pafmini]
+      - [0xFD1C0, .rodata, pafmini]
+      - [0xFDA60, .rodata, pafmini_00CC38]
+      - [0xFDC18, .rodata, pafmini_00DD54]
+      - [0xFF588, .rodata, pafmini_019014]
+      - [0xFF5AC, .rodata, pafmini_0196D0]
+      - [0xFFC30, .rodata, pafmini_020444]
+      - [0x1041AC, .rodata, pafmini_033B18]
+      - [0x10432C, .rodata, pafmini_0340C4]
+      - [0x104338, .rodata, pafmini_0346A8]
+      - [0x105E50, .rodata, pafmini_065F80]
+      - [0x106550, .rodata, pafmini_06A490]
+      - [0x107158, .rodata, pafmini_078748]
+      - [0x10BC34, .rodata, pafmini_0ABE50]
+      - [0x10BD14, .rodata, pafmini_0AD564]
+      - [0x10C2BC, .rodata, pafmini_0BB9C0]
       - { start: 0x10D738, type: prxpad, order: .rodata }
   - name: pafmini_seg1
     type: code

@@ -79,4 +79,3 @@ s32 func_0007839C(struct Unk_func_0007839C_0 *arg0) {
     }
     return var_v1;
 }
-

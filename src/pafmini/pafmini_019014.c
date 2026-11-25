@@ -16,12 +16,19 @@ s32 func_00019014(struct Unk_func_00019014_0 *arg0) {
     return var_a1;
 }
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_000381E0);
+#else
 INCLUDE_ASM("nonmatchings/pafmini_019014", func_00019048);
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_019014", func_00019128);
 
 INCLUDE_ASM("nonmatchings/pafmini_019014", func_000191D0);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/pafmini_019014", func_00019278);
+#else
 void func_00019278(struct Unk_func_00019278_0 *arg0) {
     arg0->unk50 = -1;
     arg0->unk30 = 0;
@@ -58,6 +65,7 @@ INCLUDE_RODATA("nonmatchings/pafmini_019014", D_000D1D98);
 INCLUDE_RODATA("nonmatchings/pafmini_019014", D_000D1DB4);
 
 INCLUDE_RODATA("nonmatchings/pafmini_019014", D_000D1DD0);
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_019014", func_000192D8);
 
@@ -80,4 +88,3 @@ void func_000196A0(M2C_UNK **arg0) {
     func_00013B68(arg0);
     *arg0 = &D_000D1E30;
 }
-

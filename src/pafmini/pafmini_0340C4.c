@@ -2,7 +2,9 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_0340C4", func_000340C4);
+#endif
 
 s32 func_00034114(void) {
     sceCtrlReadBufferPositive(&D_000E164C, 1);
@@ -19,7 +21,9 @@ s32 func_00034590(void) {
     return 1;
 }
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_0340C4", scePaf_78F94D84);
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_0340C4", scePaf_5822F12A);
 
@@ -27,4 +31,3 @@ void scePaf_FD9DE7B9(s32 arg0) {
     D_000E072C = arg0 * arg0;
     scePaf_5822F12A();
 }
-

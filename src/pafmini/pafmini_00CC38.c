@@ -2,6 +2,7 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
+#if FW_VERSION == 282
 void func_0000CC38(struct Unk_func_0000CC38_0 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
@@ -37,6 +38,7 @@ void func_0000CC8C(struct Unk_func_0000CC8C_0 *arg0) {
         }
     }
 }
+#endif
 
 INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D1930);
 
@@ -50,7 +52,11 @@ INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000CDBC);
 
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D2D0);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000E8B4);
+#else
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D2EC);
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D438);
 
@@ -62,6 +68,9 @@ INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_72A0044D);
 
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_4612DB4B);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_78219D10);
+#else
 s32 scePaf_78219D10(s32 arg0) {
     s32 temp_v0;
 
@@ -69,18 +78,41 @@ s32 scePaf_78219D10(s32 arg0) {
     D_000E0678 = arg0;
     return temp_v0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_97FDA760);
 
 INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D19F4);
 
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D1A0C);
 
 INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D1A24);
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_298246CD);
 
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000DC68);
+
+#if FW_VERSION == 100
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000FDAF0);
+
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000FDAFC);
+
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000FDB0C);
+
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000FDB28);
+
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000FDB38);
+
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000FDB4C);
+
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000FDB68);
+
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000FDB78);
+
+INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000FDB8C);
+#endif
 
 void func_0000DD14(void) {
     func_0000DC68(1, 0xFFFF);
@@ -89,4 +121,3 @@ void func_0000DD14(void) {
 void func_0000DD34(void) {
     func_0000DC68(0, 0xFFFF);
 }
-

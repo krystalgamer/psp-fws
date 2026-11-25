@@ -27,11 +27,12 @@ void func_00078450(struct Unk_func_00078450_0 *arg0) {
     }
 }
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_00078480);
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_00078498);
 
 INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_000784B0);
 
 INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_000784C8);
-

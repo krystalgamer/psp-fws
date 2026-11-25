@@ -2,6 +2,7 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
+#if FW_VERSION == 282
 s32 func_000BB078(s32 *arg0, s32 arg1, s32 *arg2) {
     s32 temp_v0;
     s32 var_a0;
@@ -88,4 +89,4 @@ void func_000BB99C(struct Unk_func_000BB99C_0 *arg0, s32 arg1) {
     arg0->unk1F80 = temp_a2;
     func_000BB88C((s32) arg0, arg1, temp_a2);
 }
-
+#endif

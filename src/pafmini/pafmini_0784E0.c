@@ -11,4 +11,3 @@ INCLUDE_ASM("nonmatchings/pafmini_0784E0", func_00078548);
 INCLUDE_ASM("nonmatchings/pafmini_0784E0", func_0007857C);
 
 INCLUDE_ASM("nonmatchings/pafmini_0784E0", func_000785B0);
-

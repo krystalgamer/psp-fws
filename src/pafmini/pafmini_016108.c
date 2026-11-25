@@ -2,6 +2,7 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
+#if FW_VERSION == 282
 void func_00016108(struct Unk_func_00013B68_0 *arg0, s32 arg1) {
     func_00013B68(arg0);
     arg0->unk8 = (s32) (arg1 - __builtin_allegrex_ins(arg1 + ((u32) (arg1 >> 0x1F) >> 0x1E), 0, 0, 2));
@@ -145,4 +146,4 @@ void func_00018160(M2C_UNK **arg0) {
     func_00013B90((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
-
+#endif

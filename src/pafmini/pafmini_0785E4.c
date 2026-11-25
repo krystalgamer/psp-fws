@@ -15,4 +15,3 @@ void func_000785E4(struct Unk_func_000785E4_0 *arg0) {
 INCLUDE_ASM("nonmatchings/pafmini_0785E4", func_00078614);
 
 INCLUDE_ASM("nonmatchings/pafmini_0785E4", func_0007862C);
-

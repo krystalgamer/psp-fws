@@ -189,7 +189,7 @@ def label_roms(d):
 
 
 def unit_rodata(d, name):
-    return [int(m[1], 16) for m in re.finditer(r"dlabel \w+\n\s*/\* ([0-9A-F]+) ", (d / f"{name}.s").read_text())]
+    return [int(m[1], 16) for m in re.finditer(r"(?m)^dlabel \w+\n\s*/\* ([0-9A-F]+) ", (d / f"{name}.s").read_text())]
 
 
 def address_order(N, d):
@@ -234,6 +234,10 @@ def fix_boundaries(N, n_tu, nmap, stems, d):
                 break
 
 
+class Unmigrate(Exception):
+    pass
+
+
 def split_config(ntext, mod, stems, N, n_tu, new, stem0):
     """NEW's config with one c (and .rodata) subsegment per TU."""
     d = ROOT / "tmp/asm" / new / mod / "nonmatchings" / stem0
@@ -245,14 +249,31 @@ def split_config(ntext, mod, stems, N, n_tu, new, stem0):
         if k == "func":
             m = re.search(r"(?:glabel|jlabel) \w+\n\s*/\* ([0-9A-F]+) ", t)
             text_start.setdefault(tu, int(m[1], 16))
-        for m in re.finditer(r"dlabel \w+\n\s*/\* ([0-9A-F]+) ", t):
-            r = int(m[1], 16)
+        for m in re.finditer(r"(?m)^dlabel (\w+)\n\s*/\* ([0-9A-F]+) [^\n]*\*/\s*(\S+ \S+)?", t):
+            lab, r = m[1], int(m[2], 16)
+            jt = bool(m[3] and m[3].startswith(".word .L"))
             ro_start[tu] = min(ro_start.get(tu, r), r)
-            order.append((r, stems.index(tu), nn))
+            order.append((r, stems.index(tu), nn, lab if k == "func" else None, jt))
     order.sort()
     bad = [(a, b) for a, b in zip(order, order[1:]) if b[1] < a[1]]
     if bad:
-        (ra, ta, na), (rb, tb, nb) = bad[0]
+        # longest run in TU order; migrated pieces outside it must not migrate
+        seq = [o[1] for o in order]
+        w = [1000 if o[4] else 1 for o in order]  # jump tables must stay with their function
+        best, prev = list(w), [-1] * len(seq)
+        for j in range(len(seq)):
+            for i in range(j):
+                if seq[i] <= seq[j] and best[i] + w[j] > best[j]:
+                    best[j], prev[j] = best[i] + w[j], i
+        j = max(range(len(seq)), key=lambda k: best[k])
+        keep = set()
+        while j >= 0:
+            keep.add(j)
+            j = prev[j]
+        out = {order[k][3] for k in range(len(order)) if k not in keep and order[k][3] and not order[k][4]}
+        if out:
+            raise Unmigrate(out)
+        (ra, ta, na, _, _), (rb, tb, nb, _, _) = bad[0]
         raise RuntimeError(f"rodata order of the TUs differs between versions: {na}@{ra:X} ({stems[ta]}) "
                            f"before {nb}@{rb:X} ({stems[tb]}); {len(bad)} inversions")
     cm = re.search(rf"^(\s+)- \[(0x[0-9A-Fa-f]+), c, {stem0}\]\n", ntext, re.M)
@@ -275,7 +296,32 @@ def c_count(cfile, ver):
     return len(re.findall(r"^(?!static)[^\n;#]*\b\w+\([^;{}]*\)\s*\{", r.stdout, re.M))
 
 
+FBEGIN, FEND = "// not migrated (tools/add_version.py) begin", "// not migrated (tools/add_version.py) end"
+
+
+class Retry(Exception):
+    pass
+
+
 def main():
+    new, mod = sys.argv[2], sys.argv[3]
+    symf = ROOT / "config" / new / f"symbol_addrs.{mod}.txt"
+    orig = symf.read_text() if symf.exists() else None
+    try:
+        for k in range(4):
+            try:
+                return once(k > 0)
+            except Retry:
+                continue
+        print("gave up after un-migrating rodata 4 times")
+        sys.exit(1)
+    except SystemExit as e:
+        if e.code and orig is not None:
+            symf.write_text(orig)
+        raise
+
+
+def once(retrying=False):
     ap = argparse.ArgumentParser()
     ap.add_argument("ref")
     ap.add_argument("new")
@@ -298,7 +344,7 @@ def main():
         sys.exit(f"{mod}: {new} already shares the source")
     src = ROOT / "src" / mod
     if run("git", "diff", "--quiet", "--", f"src/{mod}", f"config/{new}/{mod}.yaml", f"config/{ref}/{mod}.yaml",
-           f"config/{new}/symbol_addrs.{mod}.txt")[0]:
+           *([] if retrying else [f"config/{new}/symbol_addrs.{mod}.txt"]))[0]:
         sys.exit(f"{mod}: local changes, aborting")
     stems = list(dict.fromkeys(x[2] for x in rsub))
     symf = ROOT / "config" / new / f"symbol_addrs.{mod}.txt"
@@ -411,6 +457,10 @@ def main():
                 return f" rom:0x{roms[y][0]:X}"
             inside = [nm for nm, lo, hi in seg_range if lo <= addr < hi]
             return f" segment:{inside[-1]}" if len(inside) > 1 else ""
+        force = {}
+        if FBEGIN in sym0:
+            for ln in sym0[sym0.index(FBEGIN):sym0.index(FEND)].splitlines()[1:]:
+                force[ln.split(" =")[0]] = ln
         lines = []
         canon_taken = set(mapping.values())
         for y, x in sorted(mapping.items()):
@@ -422,6 +472,9 @@ def main():
                 raise RuntimeError(f"no address for {y}")
             t = " type:func" if x.startswith("func_") or y.startswith("func_") else ""
             attrs = (t + where(y, addr)).strip()
+            if y in force:
+                attrs = (attrs + " force_not_migration:True").strip()
+                del force[y]
             lines.append(f"{x} = 0x{addr:08X};" + (f" // {attrs}" if attrs else ""))
         # auto names of NEW that collide with a canonical name used for another address
         vlabels = set()
@@ -434,9 +487,11 @@ def main():
                     attrs = ((" type:func" if m[1] == "func" else "") + where(nn, int(m[2], 16))).strip()
                     lines.append(f"{nn}_v{nv} = 0x{m[2]};" + (f" // {attrs}" if attrs else ""))
         body = sym0
-        if BEGIN in body:
-            body = body[:body.index(BEGIN)] + body[body.index(END) + len(END) + 1:]
-        symf.write_text(body.rstrip("\n") + ("\n" if body.strip() else "") + "\n".join([BEGIN] + lines + [END]) + "\n")
+        for b, e in ((BEGIN, END), (FBEGIN, FEND)):
+            if b in body:
+                body = body[:body.index(b)] + body[body.index(e) + len(e) + 1:]
+        fblock = "\n".join([FBEGIN] + list(force.values()) + [FEND]) + "\n" if force else ""
+        symf.write_text(body.rstrip("\n") + ("\n" if body.strip() else "") + fblock + "\n".join([BEGIN] + lines + [END]) + "\n")
         renamed = lambda n: (mapping.get(n) if mapping.get(n) else (f"{n}_v{nv}" if n in canon_taken and n not in rev.values() else n))  # noqa: E731
         dbg = os.environ.get("AVDEBUG")
         if dbg:
@@ -454,16 +509,25 @@ def main():
         if len(stems) > 1:
             dn = ROOT / "tmp/asm" / new / mod / "nonmatchings" / rstem_new
             fix_boundaries(N, n_tu, nmap, stems, dn)
-            # unpaired rodata goes after the paired unit whose rodata precedes it
-            pro = sorted((r, nn) for nn, _, _, _ in N if nn in nmap for r in unit_rodata(dn, nn))
+            # unpaired rodata goes right after the unit whose rodata precedes it
+            ro = {u[0]: unit_rodata(dn, u[0]) for u in N}
+            anchors = sorted((r, nn) for nn, _, _, k in N if k == "func" or nn in nmap for r in ro[nn])
+            moved = {}
             for nn, _, _, k in N:
-                if nn in nmap or k == "func":
+                if nn in nmap or k == "func" or not ro[nn]:
                     continue
-                r = min(unit_rodata(dn, nn), default=None)
-                below = [x for x in pro if x[0] < r] if r is not None else []
+                below = [x for x in anchors if x[0] < min(ro[nn])]
                 if below:
-                    place_after[nn] = nmap[below[-1][1]]
-                    n_tu[nn] = r_tu[place_after[nn]]
+                    moved[nn] = below[-1][1]
+            if moved:
+                rest = [u for u in N if u[0] not in moved]
+                out_n = []
+                for u in rest:
+                    out_n.append(u)
+                    out_n += sorted((v for v in N if moved.get(v[0]) == u[0]), key=lambda v: min(ro[v[0]]))
+                N[:] = out_n
+                for nn, anc in moved.items():
+                    n_tu[nn] = n_tu[anc]
             ntext = split_config(ntext, mod, stems, N, n_tu, new, rstem_new)
             pins = [f"{nn} = 0x{roms[nn][1]:08X}; // type:func" for nn, _, _, k in N
                     if k == "func" and AUTO.fullmatch(nn) and renamed(nn) == nn and nn in roms]
@@ -581,6 +645,26 @@ def main():
         if ": OK" not in outp:
             raise RuntimeError(f"{new} from scratch failed:\n{outp[-800:]}")
         print(f"{mod}: OK, {new} shares src/{mod} (C functions: {ref} {sum(c_count(f, ref) for f in cfiles)}, {new} {sum(c_count(f, new) for f in cfiles)})")
+    except Unmigrate as u:
+        restore()
+        old = sym0
+        fl = []
+        if FBEGIN in old:
+            fl = old[old.index(FBEGIN):old.index(FEND)].splitlines()[1:]
+            old = old[:old.index(FBEGIN)] + old[old.index(FEND) + len(FEND) + 1:]
+        have = {ln.split(" =")[0] for ln in fl}
+        for lab in sorted(set(u.args[0]) - have):
+            rv = roms.get(lab)
+            m = re.search(rf"^{lab} = [^\n]*", old, re.M)
+            if m:
+                if "force_not_migration" not in m[0]:
+                    old = old.replace(m[0], m[0] + (" force_not_migration:True" if "//" in m[0] else " // force_not_migration:True"), 1)
+                continue
+            if rv:
+                fl.append(f"{lab} = 0x{rv[1]:08X}; // rom:0x{rv[0]:X} force_not_migration:True")
+        symf.write_text(old.rstrip("\n") + ("\n" if old.strip() else "") + "\n".join([FBEGIN] + fl + [FEND]) + "\n")
+        print(f"{mod}: {len(u.args[0])} rodata pieces will not migrate; retrying")
+        raise Retry()
     except Exception as e:  # noqa: BLE001
         if not a.keep:
             restore()

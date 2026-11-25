@@ -33,7 +33,9 @@ INCLUDE_RODATA("nonmatchings/pafmini_033B18", D_000D6BE4);
 
 INCLUDE_ASM("nonmatchings/pafmini_033B18", scePaf_BAE16A39);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_033B18", scePaf_41F702EA);
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_033B18", scePaf_D27DE19A);
 
@@ -58,4 +60,3 @@ void func_00034084(void) {
 void func_000340A4(void) {
     func_00033FE0(0, 0xFFFF);
 }
-

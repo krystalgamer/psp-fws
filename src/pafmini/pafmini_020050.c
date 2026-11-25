@@ -2,11 +2,15 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/pafmini_020050", func_00020050);
+#else
 void func_00020050(struct Unk_func_00020050_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
         arg0->unk42C = __builtin_allegrex_ins(arg0->unk42C & arg1, 0, 0x12, 2);
     }
 }
+#endif
 
 s32 func_00020070(s32 arg0, struct Unk_func_00020070_1 *arg1, s32 arg2) {
     s32 var_v0;
@@ -146,7 +150,10 @@ u8 func_0002040C(s32 arg0, struct Unk_func_0002040C_1 *arg1) {
     return var_v0;
 }
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/pafmini_020050", func_00040934);
+#else
 s32 func_0002042C(s32 arg0, s32 arg1) {
     return !((arg0 != 0) & (arg1 != 0)) ? 0 : (arg1 + 0x20);
 }
-
+#endif
