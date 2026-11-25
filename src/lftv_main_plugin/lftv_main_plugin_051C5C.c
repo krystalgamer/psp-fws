@@ -49,7 +49,7 @@ void func_00051E48(M2C_UNK **arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_00051E70);
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_0003B94C);
 #endif
 

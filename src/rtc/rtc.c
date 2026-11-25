@@ -2,7 +2,7 @@
 #include "common.h"
 #include "rtc_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 270
 INCLUDE_ASM("nonmatchings/rtc", func_00000000);
 #endif
 
@@ -14,7 +14,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_17C26C00);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetAlarmTick);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 270
 INCLUDE_ASM("nonmatchings/rtc", sceRtcIsAlarmed);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcRegisterCallback);
@@ -32,7 +32,23 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastReincarnatedTime);
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastAdjustedTime);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 270
+s32 module_start(void) {
+    memset(&D_00004580.unk0, 0, 0x60);
+    D_00004580.unk1C = -1;
+    func_0000358C();
+    D_00004580.unk0 = 0;
+    D_00004580.unk8 = 0;
+    D_00004580.unk4 = 0;
+    D_00004580.unkC = 0;
+    sceRtc_driver_F0B5571C();
+    sceSyscon_driver_A068B3D0((s32) &func_00000000, 0);
+    sceSysEventForKernel_CD9E4BB5(&D_00004530);
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 270
 s32 module_start(void) {
     memset(&D_00004580.unk0, 0, 0x58);
     func_0000358C();
@@ -44,12 +60,24 @@ s32 module_start(void) {
     sceSysEventForKernel_CD9E4BB5(&D_00003BF0);
     return 0;
 }
+#endif
 
+#if FW_VERSION == 270
+s32 module_reboot_before(void) {
+    sceSyscon_driver_A068B3D0(0, 0);
+    sceSysEventForKernel_D7D3FDCD(&D_00004530);
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 270
 s32 module_reboot_before(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00003BF0);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 module_start(void) {
     memset(&D_00004580, 0, 0x60);
     D_00004580.unk1C = -1;
@@ -69,9 +97,27 @@ s32 module_reboot_before(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00004540);
     return 0;
 }
+
+INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_912BEE56);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 270
+s32 sceRtc_driver_912BEE56(void) {
+    memset(&D_00004580.unk0, 0, 0x60);
+    D_00004580.unk1C = -1;
+    func_0000358C();
+    D_00004580.unk0 = 0;
+    D_00004580.unk8 = 0;
+    D_00004580.unk4 = 0;
+    D_00004580.unkC = 0;
+    sceRtc_driver_F0B5571C();
+    sceSyscon_driver_A068B3D0((s32) &func_00000000, 0);
+    sceSysEventForKernel_CD9E4BB5(&D_00004530);
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 270
 s32 sceRtc_driver_912BEE56(void) {
     memset(&D_00004580.unk0, 0, 0x58);
     func_0000358C();
@@ -83,17 +129,25 @@ s32 sceRtc_driver_912BEE56(void) {
     sceSysEventForKernel_CD9E4BB5(&D_00003BF0);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_912BEE56);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_CE27DE2F);
+#endif
+
+#if FW_VERSION == 270
+s32 sceRtc_driver_CE27DE2F(void) {
+    sceSyscon_driver_A068B3D0(0, 0);
+    sceSysEventForKernel_D7D3FDCD(&D_00004530);
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 270
 s32 sceRtc_driver_CE27DE2F(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00003BF0);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_CE27DE2F);
 #endif
 
 s32 sceRtc_driver_9CC2797E(void) {
@@ -105,7 +159,7 @@ s32 sceRtc_driver_48D07D70(void) {
     return 0;
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 270
 s32 sceRtc_driver_C499AF2F(void) {
     D_00004580.unk14 = 0;
     D_00004580.unk10 = 0;

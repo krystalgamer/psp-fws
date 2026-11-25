@@ -40,11 +40,29 @@ INCLUDE_ASM("nonmatchings/loadexec", func_0000083C);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002D04);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00000000);
+#endif
 
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/loadexec", D_00002F94);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/loadexec", func_000001C4);
+#endif
 
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/loadexec", D_00002FC4);
+
+INCLUDE_RODATA("nonmatchings/loadexec", D_00002FE4);
+
+INCLUDE_ASM("nonmatchings/loadexec", func_00000640);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/loadexec", func_000005F4);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/loadexec", func_000009E8);
 #endif
 
@@ -108,6 +126,14 @@ INCLUDE_ASM("nonmatchings/loadexec", func_0000162C);
 INCLUDE_ASM("nonmatchings/loadexec", func_00000FC0);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00001110);
+#endif
+
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/loadexec", D_000031DC);
+
+INCLUDE_RODATA("nonmatchings/loadexec", D_00003098);
+
+INCLUDE_RODATA("nonmatchings/loadexec", D_00003204);
 #endif
 
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExec);
@@ -316,7 +342,7 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_6D302D3D);
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_659188E1);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_62A27008);
 #endif
 
@@ -402,7 +428,9 @@ INCLUDE_ASM("nonmatchings/loadexec", syslib_D3744BE0);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00003098);
 
 INCLUDE_RODATA("nonmatchings/loadexec", D_0000309C);
+#endif
 
+#if FW_VERSION >= 260
 INCLUDE_RODATA("nonmatchings/loadexec", D_000030A4);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00001BD0);
@@ -508,6 +536,6 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00002304);
 INCLUDE_ASM("nonmatchings/loadexec", func_00002700);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/loadexec", func_00002304);
 #endif

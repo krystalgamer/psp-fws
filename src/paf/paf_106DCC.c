@@ -273,6 +273,14 @@ INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0019C65C);
 
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0019C660);
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0011EF70);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0011EF9C);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0011EFB8);
+#endif
+
 #if FW_VERSION == 151
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0011C770);
 

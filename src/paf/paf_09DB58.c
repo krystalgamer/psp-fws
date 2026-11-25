@@ -150,7 +150,7 @@ u8 func_0009DF14(s32 arg0, struct Unk_func_0009DF14_1 *arg1) {
     return var_v0;
 }
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09DB58", func_00053D90);
 #endif
 

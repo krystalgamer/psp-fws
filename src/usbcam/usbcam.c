@@ -33,19 +33,27 @@ INCLUDE_RODATA("nonmatchings/usbcam", D_0000A3DC);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A3E0);
 
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/usbcam", D_00009E38);
+#endif
+
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A3E8);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A3EC);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A3F0);
 
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A3F4);
+#endif
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A408);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A450);
 
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A4A0);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00000000);
 
@@ -103,6 +111,17 @@ INCLUDE_ASM("nonmatchings/usbcam", func_000012E8);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_0000131C);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/usbcam", func_0000135C);
+
+INCLUDE_ASM("nonmatchings/usbcam", func_000013AC);
+
+INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetupVideo);
+
+INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_CFE9E999);
+
+INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamReadVideoFrame);
+#else
 INCLUDE_ASM("nonmatchings/usbcam", func_00001374);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_000013C0);
@@ -110,16 +129,21 @@ INCLUDE_ASM("nonmatchings/usbcam", func_000013C0);
 INCLUDE_ASM("nonmatchings/usbcam", func_0000140C);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00001458);
+#endif
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000AB44);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000AB48);
 
+#if FW_VERSION == 270
+INCLUDE_RODATA("nonmatchings/usbcam", D_0000A414);
+#else
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetupVideo);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_CFE9E999);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamReadVideoFrame);
+#endif
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000AB8C);
 
@@ -163,7 +187,9 @@ INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamStillInputBlocking);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamStillGetInputLength);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamStillCancelInput);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamGetSaturation);
 
@@ -175,6 +201,7 @@ INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamRegisterLensRotationCallback);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_C72ED6D3);
 
+#if FW_VERSION == 282
 s32 sceUsbCam_driver_95F8901E(void) {
     s32 var_a1;
     u32 temp_a0;
@@ -187,10 +214,17 @@ s32 sceUsbCam_driver_95F8901E(void) {
     setK1(temp_a0);
     return var_a1;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", module_start);
 
 INCLUDE_ASM("nonmatchings/usbcam", module_stop);
+
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/usbcam", func_00002F4C);
+
+INCLUDE_ASM("nonmatchings/usbcam", func_00002F60);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", func_0000321C);
 
@@ -216,13 +250,19 @@ INCLUDE_ASM("nonmatchings/usbcam", func_000033D4);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_000033E8);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/usbcam", func_000031B4);
+#else
 INCLUDE_ASM("nonmatchings/usbcam", func_0000342C);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00003468);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/usbcam", func_0000352C);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00003540);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamStartVideo);
 
@@ -264,6 +304,7 @@ s32 sceUsbCamGetZoom(void *arg0) {
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetReverseMode);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetEvLevel);
 
 s32 sceUsbCamGetEvLevel(void *arg0) {
@@ -275,6 +316,7 @@ s32 sceUsbCamGetEvLevel(void *arg0) {
     setK1(temp_s0);
     return temp_v0;
 }
+#endif
 
 s32 sceUsbCamGetReverseMode(void *arg0) {
     s32 temp_v0;
@@ -302,6 +344,21 @@ s32 sceUsbCamGetAutoImageReverseState(void) {
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamUnregisterLensRotationCallback);
 
+#if FW_VERSION == 270
+s32 sceUsbCam_driver_95F8901E(void) {
+    s32 var_a1;
+    u32 temp_a0;
+
+    temp_a0 = shiftK1();
+    var_a1 = 1;
+    if (!(D_0000BC08.unk14 & 0x800)) {
+        var_a1 = M2C_FIELD(&D_0000BC08, s32 *, 0x1CC);
+    }
+    setK1(temp_a0);
+    return var_a1;
+}
+#endif
+
 INCLUDE_ASM("nonmatchings/usbcam", func_00003984);
 
 void func_000039E8(void) {
@@ -309,6 +366,9 @@ void func_000039E8(void) {
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000AE58);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/usbcam", func_000039F0);
+#else
 void func_000039F0(struct Unk_func_000039F0_0 *arg0) {
     s32 temp_v1;
 
@@ -320,6 +380,7 @@ void func_000039F0(struct Unk_func_000039F0_0 *arg0) {
     }
     sceKernelSignalSema(D_0000BDB8, 1);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00003A40);
 
@@ -331,7 +392,11 @@ INCLUDE_ASM("nonmatchings/usbcam", func_00003E68);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00003FDC);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/usbcam", func_00003F48);
+#else
 INCLUDE_ASM("nonmatchings/usbcam", func_00004240);
+#endif
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000AFB8);
 
@@ -341,19 +406,33 @@ INCLUDE_ASM("nonmatchings/usbcam", func_000046A4);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_000048D0);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/usbcam", func_00004658);
+#else
 INCLUDE_ASM("nonmatchings/usbcam", func_00004948);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00004B5C);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/usbcam", func_000049EC);
+
+INCLUDE_ASM("nonmatchings/usbcam", func_00004DC0);
+#else
 INCLUDE_ASM("nonmatchings/usbcam", func_00004CE8);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00005110);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", func_000052E8);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/usbcam", func_00005170);
+#else
 INCLUDE_ASM("nonmatchings/usbcam", func_000054EC);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_000057A0);
+#endif
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000B2E4);
 
@@ -375,9 +454,15 @@ INCLUDE_ASM("nonmatchings/usbcam", func_00006040);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00006114);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/usbcam", func_00005D78);
+
+INCLUDE_ASM("nonmatchings/usbcam", func_00005E44);
+#else
 INCLUDE_ASM("nonmatchings/usbcam", func_0000614C);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00006284);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", func_000062BC);
 
@@ -389,9 +474,15 @@ INCLUDE_ASM("nonmatchings/usbcam", func_000063F0);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00006448);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/usbcam", func_000060EC);
+
+INCLUDE_ASM("nonmatchings/usbcam", func_000061E4);
+#else
 INCLUDE_ASM("nonmatchings/usbcam", func_0000650C);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00006548);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", func_000065B8);
 
@@ -423,9 +514,11 @@ INCLUDE_ASM("nonmatchings/usbcam", func_00006E0C);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00006E44);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/usbcam", func_00006F10);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00006F68);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00007034);
 
@@ -445,7 +538,9 @@ INCLUDE_ASM("nonmatchings/usbcam", func_000076BC);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00007744);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/usbcam", func_00007934);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_2E930264);
 
@@ -521,6 +616,20 @@ INCLUDE_RODATA("nonmatchings/usbcam", D_0000B678);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00008DC8);
 
+#if FW_VERSION == 270
+s32 func_00008E1C(void) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = sceUsbBus_driver_C1E2A540(&D_0000B314);
+    var_v1 = 0;
+    if (temp_v0 < 0) {
+        KDebugForKernel_84F370BC("%serror - cannot unregister : 0x%08x\n", &D_0000B454, temp_v0);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#else
 s32 func_00008E1C(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -533,6 +642,7 @@ s32 func_00008E1C(void) {
     }
     return var_v1;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00008E6C);
 

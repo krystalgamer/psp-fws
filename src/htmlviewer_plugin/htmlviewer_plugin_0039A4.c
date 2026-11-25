@@ -69,9 +69,15 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_0000411C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000042C4);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003FD4);
+#endif
+
+#if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000032A0);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000043F8);
 #endif
 
@@ -82,6 +88,10 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00004554);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000045D8);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00004688);
+
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000042A4);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000046E4);

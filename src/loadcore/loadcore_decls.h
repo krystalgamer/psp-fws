@@ -61,6 +61,7 @@ s32 func_00000B4C(void);
 s32 func_00000EF4(s32, s32);
 s32 func_000014F8(s32, s32);
 s32 func_0000175C(s32, s32, s32, s32);
+s32 func_00001830(s32, s32, s32, s32);
 s32 func_00001B6C(s32, s32, s32);
 s32 func_00001ECC(void);
 void func_00002220(s32 arg0);

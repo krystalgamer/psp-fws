@@ -22,6 +22,7 @@
  },
  "vars": {
   "D_0000A658": "extern M2C_UNK D_0000A658;",
+  "D_0000B314": "extern s32 D_0000B314;",
   "D_0000B454": "extern s32 D_0000B454;",
   "D_0000BA80": "extern M2C_UNK D_0000BA80;",
   "D_0000BC08": "extern struct D_0000BC08_s D_0000BC08;",

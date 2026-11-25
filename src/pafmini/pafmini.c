@@ -270,121 +270,37 @@ void scePaf_D63D4561(void) {
 }
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_81667058);
 #endif
 
-#if FW_VERSION == 151
-void scePaf_81667058(void) {
-
-}
-#endif
-
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_149CDEB9);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_149CDEB9(void) {
-
-}
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_78192717);
 #endif
 
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_62081F34);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_62081F34(void) {
-
-}
-#endif
-
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_BECD1827);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_BECD1827(void) {
-
-}
-#endif
-
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_A8711520);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_A8711520(void) {
-
-}
-#endif
-
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_FCDD55E3);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_FCDD55E3(void) {
-
-}
-#endif
-
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_2EABF548);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_2EABF548(void) {
-
-}
-#endif
-
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_50F72192);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_50F72192(void) {
-
-}
-#endif
-
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_73712598);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_73712598(void) {
-
-}
-#endif
-
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_8B439A23);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_8B439A23(void) {
-
-}
-#endif
-
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_7435C5D5);
-#endif
-
-#if FW_VERSION == 151
-void scePaf_7435C5D5(void) {
-
-}
-#endif
-
 #if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_62081F34);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_BECD1827);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_A8711520);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_FCDD55E3);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_2EABF548);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_50F72192);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_73712598);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_8B439A23);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_7435C5D5);
+
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_CC103AD2);
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_566BC690);

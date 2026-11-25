@@ -25,11 +25,19 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004838);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004DC0);
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
+#if FW_VERSION >= 250 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_3C54E908);
+#endif
 
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004894);
+#endif
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_3C54E908);
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDopen);
 #endif
 
@@ -143,13 +151,17 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_000018B0);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_0000191C);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001968);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 270
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004958);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001990);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001D70);
 #endif
 
@@ -161,7 +173,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00001B1C);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001BF0);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001F7C);
 #endif
 
@@ -547,7 +559,11 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00002C48);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002C54);
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/iofilemgr", func_000031F8);
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/iofilemgr", func_0000396C);
 #endif
 
@@ -601,11 +617,15 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00003CF8);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00003D00);
 #endif
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/iofilemgr", func_000042A4);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/iofilemgr", func_0000396C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00003A6C);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00003BE8);

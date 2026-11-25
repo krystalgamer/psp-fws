@@ -3,7 +3,7 @@
 
 INCLUDE_ASM("nonmatchings/init", func_00000000);
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 INCLUDE_RODATA("nonmatchings/init", D_00001EB8);
 #endif
 
@@ -17,6 +17,10 @@ INCLUDE_ASM("nonmatchings/init", InitForKernel_1D3256BA);
 
 INCLUDE_ASM("nonmatchings/init", InitForKernel_CE88E870);
 
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/init", func_000004B8);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/init", func_000000A8);
 #endif
@@ -25,7 +29,7 @@ INCLUDE_ASM("nonmatchings/init", func_000000A8);
 INCLUDE_RODATA("nonmatchings/init", D_00001E44);
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 152 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/init", func_00000208);
 #endif
 
@@ -175,9 +179,11 @@ INCLUDE_ASM("nonmatchings/init", func_00001764);
 INCLUDE_ASM("nonmatchings/init", func_00001E80);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/init", func_00000584);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/init", InitForKernel_7233B5BC);
 #endif
 
@@ -193,6 +199,10 @@ s32 InitForKernel_33D30F49(void) {
 s32 InitForKernel_FD0F25AD(void) {
     return 0;
 }
+#endif
+
+#if FW_VERSION == 270
+INCLUDE_ASM("nonmatchings/init", func_00000E1C);
 #endif
 
 #if FW_VERSION >= 201
@@ -231,7 +241,7 @@ INCLUDE_ASM("nonmatchings/init", func_000012E0);
 INCLUDE_ASM("nonmatchings/init", func_00001430);
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/init", func_00001750);
 #endif
 

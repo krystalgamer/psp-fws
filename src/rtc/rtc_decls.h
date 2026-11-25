@@ -21,6 +21,7 @@ struct Unk_func_00003AF8_0 {
 };
 
 extern s32 D_00003BF0;
+extern s32 D_00004530;
 extern M2C_UNK D_00004540;
 extern struct D_00004580_s D_00004580;
 extern M2C_UNK func_00000000;

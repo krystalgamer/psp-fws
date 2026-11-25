@@ -193,6 +193,14 @@ s32 func_000F18C8(struct Unk_func_000F18C8_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F18E8);
 
+#if FW_VERSION == 152
+INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0011DAD8);
+
+INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B2A8);
+
+INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0011DBB8);
+#endif
+
 #if FW_VERSION == 151
 INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0011B2D8);
 

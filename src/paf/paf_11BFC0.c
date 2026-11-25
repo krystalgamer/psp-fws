@@ -101,7 +101,7 @@ INCLUDE_ASM("nonmatchings/paf_11BFC0", func_000C354C);
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_000C3694);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_000C5FD4);
 
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_000C6118);
@@ -219,7 +219,7 @@ s32 func_0011DEA8(struct Unk_func_0011DEA8_0 *arg0) {
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_000C46C8);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_11BFC0", func_000C7008);
 #endif
 

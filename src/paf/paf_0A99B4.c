@@ -200,7 +200,7 @@ void scePaf_C6624F24(struct Unk_scePaf_C6624F24_0 *arg0) {
     }
 }
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000626C4);
 #endif
 

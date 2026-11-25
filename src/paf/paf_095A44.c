@@ -566,7 +566,13 @@ INCLUDE_RODATA("nonmatchings/paf_095A44", D_00192DA0);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_095A44", scePaf_1A1F232F);
-#else
+#endif
+
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/paf_095A44", func_0009CE3C);
+#endif
+
+#if FW_VERSION == 282
 void scePaf_1A1F232F(struct Unk_scePaf_1A1F232F_0 *arg0, s32 arg1) {
     if (arg1 < 9) {
 
@@ -577,11 +583,11 @@ void scePaf_1A1F232F(struct Unk_scePaf_1A1F232F_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_095A44", D_001147F4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/paf_095A44", func_0009CE3C);
 #endif
 

@@ -18,6 +18,7 @@ struct Unk_func_000039F0_0 {
 };
 
 extern M2C_UNK D_0000A658;
+extern s32 D_0000B314;
 extern s32 D_0000B454;
 extern M2C_UNK D_0000BA80;
 extern struct D_0000BC08_s D_0000BC08;
