@@ -1,25 +1,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 200
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0A7144", func_000A7144);
-#endif
-
-#if FW_VERSION == 200
-s32 func_000A7144(s32 arg0, struct Unk_func_000A7144_1 *arg1) {
-    s32 temp_v0;
-
-    temp_v0 = func_000A719C(arg1);
-    if (temp_v0 >= 0) {
-
-    } else {
-        scePaf_7894B61F(arg0, (s32) "PNG unsigned integer out of range.\n");
-    }
-    return temp_v0;
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 s32 func_000A7144(s32 arg0, struct Unk_func_000A7144_1 *arg1) {
     s32 temp_v0;
 

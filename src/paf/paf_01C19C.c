@@ -2,51 +2,16 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 200
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_21A0C6E0);
 #endif
 
 #if FW_VERSION == 200
-void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
-    void *temp_a0;
+INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_C1579C1D);
 
-    temp_a0 = *arg0;
-    if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 0xB4) = arg2;
-        M2C_FIELD(temp_a0, s32 *, 0xB0) = arg1;
-    }
-}
+INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_ED2DF238);
 
-void scePaf_C1579C1D(void **arg0, s32 arg1, s32 arg2) {
-    void *temp_a0;
-
-    temp_a0 = *arg0;
-    if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 0xBC) = arg2;
-        M2C_FIELD(temp_a0, s32 *, 0xB8) = arg1;
-    }
-}
-
-void scePaf_ED2DF238(void **arg0, s32 arg1, s32 arg2) {
-    void *temp_a0;
-
-    temp_a0 = *arg0;
-    if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 0xC4) = arg2;
-        M2C_FIELD(temp_a0, s32 *, 0xC0) = arg1;
-    }
-}
-
-void scePaf_EB5BDCE1(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
-    void *temp_a0;
-
-    temp_a0 = *arg0;
-    if (temp_a0 != NULL) {
-        M2C_FIELD(temp_a0, s32 *, 0xCC) = arg3;
-        M2C_FIELD(temp_a0, s32 *, 0xD0) = arg1;
-        M2C_FIELD(temp_a0, s32 *, 0xC8) = arg2;
-    }
-}
+INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_EB5BDCE1);
 #endif
 
 #if FW_VERSION == 282

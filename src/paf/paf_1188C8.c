@@ -21,14 +21,14 @@ void func_00118930(void) {
 INCLUDE_ASM("nonmatchings/paf_1188C8", scePaf_5775283A);
 #endif
 
-#if FW_VERSION < 200
-INCLUDE_ASM("nonmatchings/paf_1188C8", func_000BF4C8);
-#endif
-
 #if FW_VERSION == 282
 void scePaf_5775283A(struct Unk_scePaf_5775283A_0 *arg0) {
     sceKernelWaitThreadEnd(arg0->unk4, 0);
 }
+#endif
+
+#if FW_VERSION < 200
+INCLUDE_ASM("nonmatchings/paf_1188C8", func_000BF4C8);
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_0011896C);
