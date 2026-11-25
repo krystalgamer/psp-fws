@@ -114,6 +114,7 @@ extern void *D_0000E80C;
 extern void **D_0000E810;
 extern void *D_0000E814;
 extern s32 D_0000EB24;
+extern s32 D_0000EC14;
 extern void *D_0000EDAC;
 extern void **D_0000EDB0;
 extern void *D_0000EDB4;

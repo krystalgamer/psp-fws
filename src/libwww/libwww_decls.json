@@ -1273,6 +1273,7 @@
   "sceHVNetfront_Module_D5A24BD1": "M2C_UNK sceHVNetfront_Module_D5A24BD1(void *, s32);",
   "sceHVNetfront_Module_D611E938": "M2C_UNK sceHVNetfront_Module_D611E938(s32, s32, M2C_UNK);",
   "sceHVNetfront_Module_D77AFB32": "M2C_UNK sceHVNetfront_Module_D77AFB32();",
+  "sceHVNetfront_Module_D80A1B5C": "M2C_UNK sceHVNetfront_Module_D80A1B5C(s32 *, s32);",
   "sceHVNetfront_Module_D9FE99F5": "s32 sceHVNetfront_Module_D9FE99F5(s32, s32);",
   "sceHVNetfront_Module_E1280750": "s32 sceHVNetfront_Module_E1280750(s32, M2C_UNK, s32);",
   "sceHVNetfront_Module_E2C79DAF": "M2C_UNK sceHVNetfront_Module_E2C79DAF(s32);",

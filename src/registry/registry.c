@@ -12,7 +12,7 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 syslib_ADF12745(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0:
@@ -234,7 +234,7 @@ INCLUDE_ASM("nonmatchings/registry", sceReg_driver_0CAE832B);
 INCLUDE_ASM("nonmatchings/registry", func_00002350);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_BE8C1263);
 
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_835ECE6F);
@@ -262,7 +262,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00002A64);
 
 INCLUDE_ASM("nonmatchings/registry", func_00002C3C);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00002D24);
 
 INCLUDE_ASM("nonmatchings/registry", func_00002F10);
@@ -322,7 +322,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00003340);
 INCLUDE_ASM("nonmatchings/registry", func_00002D14);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_0000358C);
 #endif
 
@@ -557,7 +557,7 @@ INCLUDE_ASM("nonmatchings/registry", sceReg_driver_2C0DB9DD);
 
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_2D211135);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_000052C0);
 #endif
 

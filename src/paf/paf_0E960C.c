@@ -6,8 +6,22 @@ void func_000E960C(M2C_UNK **arg0) {
     *arg0 = &D_0019A890;
     scePaf_4E67BB08(arg0);
 }
-#else
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_0E960C", func_000E9634);
+#endif
+
+#if FW_VERSION == 150
+s32 func_000E9634(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 1;
+    if (D_001A47D8 != arg1) {
+        var_v0 = func_0008A944(arg0, arg1);
+    }
+    return var_v0;
+}
 #endif
 
 #if FW_VERSION == 282
@@ -50,15 +64,21 @@ INCLUDE_RODATA("nonmatchings/paf_0E960C", D_0019A890);
 
 INCLUDE_RODATA("nonmatchings/paf_0E960C", D_0019A89C);
 
+#if FW_VERSION == 150
+INCLUDE_RODATA("nonmatchings/paf_0E960C", D_0011C7B0);
+#endif
+
 #if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/paf_0E960C", D_0012EE30);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/paf_0E960C", D_0019A8A8);
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_0E960C", func_000E9678);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E960C", func_0008E964);
 #else
 INCLUDE_ASM("nonmatchings/paf_0E960C", scePaf_F60816FE);

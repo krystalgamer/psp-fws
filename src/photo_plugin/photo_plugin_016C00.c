@@ -2,7 +2,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201
 void func_00016C00(void) {
     struct Unk_func_00016C00_temp_v0 *temp_v0;
 
@@ -51,7 +51,15 @@ void func_00016FF0(s32 arg0) {
         }
     }
 }
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/photo_plugin_016C00", func_00017288);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_016C00", func_00017310);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_016C00", func_00017050);
 
 void func_00017138(void) {

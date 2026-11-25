@@ -3,7 +3,23 @@
 
 INCLUDE_ASM("nonmatchings/cert_loader", sceCertLoader_DD629A24);
 
-#if FW_VERSION == 201
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/cert_loader", func_0000050C);
+
+INCLUDE_ASM("nonmatchings/cert_loader", func_00000544);
+
+INCLUDE_ASM("nonmatchings/cert_loader", func_00000578);
+
+INCLUDE_ASM("nonmatchings/cert_loader", func_00000580);
+
+INCLUDE_ASM("nonmatchings/cert_loader", func_00000588);
+
+INCLUDE_ASM("nonmatchings/cert_loader", func_00000590);
+#endif
+
+#if FW_VERSION >= 250
+INCLUDE_ASM("nonmatchings/cert_loader", func_00000598);
+#else
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000364);
 
 INCLUDE_ASM("nonmatchings/cert_loader", func_000005AC);
@@ -13,9 +29,9 @@ INCLUDE_ASM("nonmatchings/cert_loader", func_00000954);
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000B10);
 
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000CF8);
-#else
-INCLUDE_ASM("nonmatchings/cert_loader", func_00000598);
+#endif
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/cert_loader", func_000005D0);
 
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000604);
@@ -36,6 +52,12 @@ s32 sceCertLoader_driver_11391041(void) {
 s32 sceCertLoader_driver_E86A7DC1(void) {
     return 0;
 }
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/cert_loader", func_000005B0);
+
+INCLUDE_ASM("nonmatchings/cert_loader", func_00000968);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/cert_loader", func_0000063C);

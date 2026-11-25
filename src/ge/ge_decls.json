@@ -41,9 +41,11 @@
   "D_00004500": "extern s32 D_00004500;",
   "D_00005AC0": "extern M2C_UNK D_00005AC0;",
   "D_00006240": "extern s32 D_00006240;",
+  "D_00006600": "extern u32 D_00006600;",
   "D_00006A80": "extern s32 D_00006A80;",
   "D_00006A84": "extern u32 D_00006A84;",
   "D_00006F80": "extern s32 D_00006F80;",
+  "D_00007640": "extern M2C_UNK D_00007640;",
   "D_00007AC0": "extern struct D_00007AC0_s D_00007AC0;",
   "D_00007AC8": "extern s32 D_00007AC8;",
   "D_00007FC0": "extern s32 D_00007FC0;"

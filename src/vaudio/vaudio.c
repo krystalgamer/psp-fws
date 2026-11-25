@@ -29,7 +29,7 @@ s32 sceVaudio_driver_DCC18F25(void) {
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudio_driver_82EF2F9D);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/vaudio", func_000006CC);
 
 INCLUDE_ASM("nonmatchings/vaudio", func_000006D8);
@@ -41,7 +41,7 @@ INCLUDE_ASM("nonmatchings/vaudio", func_000006E4);
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudio_driver_72749E84);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/vaudio", func_00000748);
 
 INCLUDE_RODATA("nonmatchings/vaudio", D_00000AE8);

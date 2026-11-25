@@ -2,7 +2,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201
 void func_0002B79C(struct Unk_func_0002B79C_0 *arg0) {
     arg0->unk8 = 0;
     arg0->unk0 = 0;

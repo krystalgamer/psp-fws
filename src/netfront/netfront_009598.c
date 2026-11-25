@@ -2,6 +2,7 @@
 #include "common.h"
 #include "netfront_decls.h"
 
+#if FW_VERSION == 303
 void func_00009598(struct Unk_func_00009598_0 *arg0, s32 arg1) {
     s32 temp_a0;
     struct Unk_func_00009598_temp_v0 *temp_v0;
@@ -73,4 +74,4 @@ s32 func_000097B8(struct Unk_func_000097B8_0 *arg0) {
     }
     return var_v1;
 }
-
+#endif

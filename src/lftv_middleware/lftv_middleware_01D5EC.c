@@ -51,6 +51,10 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001DF28);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001DF84);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_000396A0);
+#endif
+
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001DFE0);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E098);
@@ -71,7 +75,11 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E3E8);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E4F4);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_00039D84);
+#else
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E594);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E678);
 
@@ -112,11 +120,29 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E784);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E7C4);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003A0F4);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B24C);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B250);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B29C);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B2B0);
+#else
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E7F8);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E838);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003A1E8);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B2F8);
+#else
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E874);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E8B4);
 
@@ -124,19 +150,43 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E8F0);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E92C);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003A358);
+#else
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001E96C);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001ED48);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001ED90);
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001EE5C);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_000551BC);
+#endif
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_000551C8);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003AA58);
+#endif
+
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001F2AC);
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B4F4);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B4FC);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B504);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B580);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B594);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_01D5EC", D_0007B5BC);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001F4B8);
 
@@ -152,6 +202,15 @@ s32 func_0001F550(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001F5A4);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003B514);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003B614);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003B7D8);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0003BAB4);
+#else
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001F744);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001F7A4);
@@ -161,6 +220,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001F8B4);
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001FA0C);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001FA94);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001FBC4);
 
@@ -224,4 +284,3 @@ u8 func_0002049C(struct Unk_func_0002049C_0 *arg0) {
     }
     return var_v0;
 }
-

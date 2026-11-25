@@ -21,7 +21,7 @@ s32 func_00034590(void) {
     return 1;
 }
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pafmini_0340C4", scePaf_78F94D84);
 #endif
 

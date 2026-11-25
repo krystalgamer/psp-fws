@@ -1,7 +1,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201
 void func_0002BC40(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
     func_0002B53C(arg0);
@@ -95,6 +95,10 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002C658);
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002C8B4);
 #endif
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/photo_plugin_02BC40", D_00032C50);
+#endif
+
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002CA60);
 
 u16 func_0002CA9C(struct Unk_func_0002CA9C_0 *arg0) {
@@ -133,7 +137,11 @@ void func_0002CC5C(void) {
     func_0002CE60();
 }
 
-#if FW_VERSION >= 150
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002D29C);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002CC78);
 #endif
 
@@ -178,13 +186,19 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002CE54);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002CE60);
 
-#if FW_VERSION >= 150
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002D45C);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002CE7C);
 #endif
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002CEC0);
 
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002CF10);
+#endif
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002D07C);
 
@@ -1445,6 +1459,32 @@ void func_00021E38(M2C_UNK **arg0) {
 #endif
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002D1F0);
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002D7DC);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002D828);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002DB70);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002DBD8);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002DC4C);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002DFC4);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002DFF8);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002E070);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002E13C);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002E16C);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002E40C);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002E528);
+#endif
 
 #if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_02BC40", D_000250D0);

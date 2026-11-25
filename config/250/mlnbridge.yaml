@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, mlnbridge]
+      - [0x80, c, mlnbridge]
       - { start: 0x1410, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1440, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x1444, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -63,7 +63,7 @@ segments:
       - { start: 0x1494, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x14C8, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x1588, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x15A0, rodata, mlnbridge]
+      - [0x15A0, .rodata, mlnbridge]
       - { start: 0x15CC, type: prxpad, order: .rodata }
   - name: mlnbridge_seg1
     type: code

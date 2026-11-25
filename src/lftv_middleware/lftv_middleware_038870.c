@@ -2,11 +2,43 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00038870);
+#endif
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_000564D0);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E158);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00055A10);
+#endif
+
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00038984);
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E1B8);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E1C0);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E1D4);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E1DC);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E1F8);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E208);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E224);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E22C);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E230);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E234);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E23C);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00038D3C);
 
@@ -20,7 +52,11 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_000392DC);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_000393C8);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00056688);
+#else
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00039444);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_000395D4);
 
@@ -63,5 +99,10 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00039C54);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00039D18);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00039DB8);
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_00056628);
 
+INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_00056648);
+#endif
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00039DB8);

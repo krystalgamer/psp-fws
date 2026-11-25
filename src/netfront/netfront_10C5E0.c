@@ -14,6 +14,14 @@ void func_0010C5E0(void) {
     }
 }
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_00108C5C);
+
+INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_00108CB0);
+
+INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_00108D44);
+#endif
+
 s32 func_0010C61C(s32 *arg0, s32 arg1) {
     s32 temp_v0;
 
@@ -85,11 +93,21 @@ INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_0010EBB0);
 
 INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_0010EFD0);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_0010BA44);
+#else
 INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_0010F0F0);
+#endif
 
 INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00130AAC);
 
 INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_0010F338);
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_001280EC);
+
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_001280F8);
+#endif
 
 INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_00110784);
 
@@ -157,7 +175,11 @@ INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00130C10);
 
 INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00130C14);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00128150);
+#else
 INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00130C18);
+#endif
 
 INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00130C30);
 
@@ -169,9 +191,28 @@ INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00130C68);
 
 INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_00111398);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00130C78);
+
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_001281C0);
+
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00128288);
+
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_001282A8);
+
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_001282AC);
+
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_001282D8);
+
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_001282DC);
+
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_001282E0);
+
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_001282E4);
+#endif
+
 INCLUDE_ASM("nonmatchings/netfront_10C5E0", func_00111438);
 
 void func_00111444(s32 arg0, M2C_UNK arg1) {
     func_00111398(func_0010BB64(), arg0, arg1);
 }
-

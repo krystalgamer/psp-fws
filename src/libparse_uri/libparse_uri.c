@@ -16,21 +16,27 @@ INCLUDE_ASM("nonmatchings/libparse_uri", sceUriParse);
 
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002A98);
 
-#if FW_VERSION < 282
-INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002798);
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002C38);
+#endif
 
+#if FW_VERSION < 250
+INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002798);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", sceUriBuild);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", sceUriMerge);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00000CDC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", sceUriSweepPath);
 #endif
 
@@ -68,7 +74,7 @@ INCLUDE_RODATA("nonmatchings/libparse_uri", D_000027B4);
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001310);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_0000170C);
 #endif
 
@@ -84,7 +90,7 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_000015FC);
 INCLUDE_ASM("nonmatchings/libparse_uri", func_000016A0);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libparse_uri", func_000019F8);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001A7C);
@@ -298,7 +304,7 @@ u8 *func_000021BC(u8 *arg0, u8 *arg1) {
 
 INCLUDE_ASM("nonmatchings/libparse_uri", func_000021F4);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002D14);
 #endif
 
@@ -311,6 +317,10 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_00002240);
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00002984);
 
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002C20);
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002CC8);
+#endif
 
 #if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002D48);

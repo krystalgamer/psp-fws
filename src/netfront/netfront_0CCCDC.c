@@ -43,4 +43,3 @@ INCLUDE_ASM("nonmatchings/netfront_0CCCDC", func_000CD408);
 s32 func_000CD494(struct Unk_vt_func_000CD494_arg0 **arg0) {
     return (*arg0)->unk80;
 }
-

@@ -4421,6 +4421,7 @@ s32 sceHVNetfront_Module_D38CE2BC(void *);
 M2C_UNK sceHVNetfront_Module_D5A24BD1(void *, s32);
 M2C_UNK sceHVNetfront_Module_D611E938(s32, s32, M2C_UNK);
 M2C_UNK sceHVNetfront_Module_D77AFB32();
+M2C_UNK sceHVNetfront_Module_D80A1B5C(s32 *, s32);
 s32 sceHVNetfront_Module_D9FE99F5(s32, s32);
 s32 sceHVNetfront_Module_E1280750(s32, M2C_UNK, s32);
 M2C_UNK sceHVNetfront_Module_E2C79DAF(s32);

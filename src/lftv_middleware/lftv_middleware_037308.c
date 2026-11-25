@@ -2,6 +2,7 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
+#if FW_VERSION == 303
 s32 func_00037308(struct Unk_func_00037308_0 *arg0) {
     arg0->unk1C = 0;
     arg0->unk20 = 0;
@@ -76,4 +77,4 @@ s32 func_00037B38(void) {
 }
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_00037B40);
-
+#endif

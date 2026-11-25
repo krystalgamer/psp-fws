@@ -34,6 +34,7 @@
   "D_00003F98": "extern s32 D_00003F98;",
   "D_00003F9C": "extern s32 D_00003F9C;",
   "D_00003FA0": "extern s32 D_00003FA0;",
+  "D_00004ABC": "extern s32 D_00004ABC;",
   "D_00004E7C": "extern s32 D_00004E7C;"
  }
 }

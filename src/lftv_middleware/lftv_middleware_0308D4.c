@@ -35,6 +35,7 @@ s32 func_00030A38(void) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00030A44);
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00030AE4);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00030BB8);
@@ -60,6 +61,7 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00055DC8);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00055DD8);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00055DE8);
+#endif
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00055DEC);
 
@@ -185,6 +187,24 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00056120);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00056134);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_0004CE6C);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00030BB8);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00030C50);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00030CF8);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_0004D09C);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_0004D178);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00030EFC);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_0004D300);
+#endif
+
 INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00030FD0);
 
 void func_000311D4(void) {
@@ -194,6 +214,42 @@ void func_000311D4(void) {
 INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_000311F0);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00031220);
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_0007CE00);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_0007CE04);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_0007CE08);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_0007CE0C);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_0007CE10);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_0007CE14);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00056170);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00056180);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00056190);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00056198);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_000561A4);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_000561B8);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_000561E0);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00056208);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00056230);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_00056250);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0308D4", D_0005625C);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_000312AC);
 
@@ -276,4 +332,3 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_000315A0);
 void func_000315C0(s32 arg0, s32 arg1) {
     func_000305F0(arg0 + 8, arg1);
 }
-

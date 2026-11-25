@@ -6,7 +6,7 @@
 INCLUDE_ASM("nonmatchings/i2c", func_00000000);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1) {
     M2C_VFIELD(&D_000015B0, s32, 0x14) = arg1;
     M2C_VFIELD(&D_000015B0, s32, 0x10) = arg0;

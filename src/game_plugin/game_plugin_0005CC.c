@@ -102,7 +102,7 @@ s32 func_00000ED0(s32 arg0, u32 arg1) {
 }
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000115F0);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000115FC);
@@ -112,7 +112,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000115FC);
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00010768);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011608);
 #endif
 
@@ -120,7 +120,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011608);
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00010784);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011614);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011628);
@@ -140,7 +140,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00010808);
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00010818);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011688);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_0001169C);
@@ -150,7 +150,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_0001169C);
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00010850);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000116AC);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000116C0);
@@ -170,7 +170,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000108D4);
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000108E8);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_0001171C);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011730);
@@ -375,7 +375,9 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000E78);
 s32 func_000010C8(s32 arg0, u32 arg1) {
     return (((s32) (arg0 + 1) / (s32) (arg1 >> 5)) + 1) * arg1;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011C6C);
 #endif
 
@@ -479,7 +481,9 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011A4C);
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002104);
 #else
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002034);
+#endif
 
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002640);
 #endif
 
@@ -536,11 +540,17 @@ void func_00002640(s32 arg0) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002800);
-#else
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002998);
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000026F0);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002880);
 #endif
 
@@ -568,13 +578,21 @@ void func_00002880(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002918);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000028C8);
 #endif
 
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000029F0);
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002B18);
+
+INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002BB0_v250);
+#endif
 
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002BA4);
@@ -582,9 +600,11 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002BA4);
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002BDC);
 #endif
 
+#if FW_VERSION != 250
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002A60);
+#endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 func_00002CEC(void) {
     s32 var_v0;
 

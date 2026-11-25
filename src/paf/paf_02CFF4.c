@@ -11,7 +11,7 @@ void func_0002CFF4(s32 arg0, s32 arg1) {
     }
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002AA78);
 #else
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002D02C);
@@ -19,7 +19,7 @@ INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002D02C);
 
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002D1D8);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002AB6C);
 #endif
 

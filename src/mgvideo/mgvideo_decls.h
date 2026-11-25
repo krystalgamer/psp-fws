@@ -66,5 +66,6 @@ s32 sceMgr_driver_4A14DD18(s32, s32, s32);
 s32 sceMgr_driver_DB12BB23(s32, s32, s32);
 s32 sceMgr_driver_F30E22CF(M2C_UNK);
 s32 sceRtc_driver_17C26C00(void *);
+s32 sceRtc_driver_B44BDAED(void *);
 
 #endif

@@ -11,7 +11,9 @@ void func_00117408(M2C_UNK **arg0) {
 void func_00117440(struct Unk_func_00117440_0 *arg0, s32 arg1) {
     arg0->unk1E8->unk28 = arg1;
 }
-#else
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_117408", func_0011744C);
 #endif
 
@@ -83,9 +85,17 @@ INCLUDE_ASM("nonmatchings/paf_117408", func_000BB8B8);
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BBD04);
 
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BBF04);
+#endif
 
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/paf_117408", func_000C00AC);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BC098);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BC3B8);
 
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BC530);
@@ -121,9 +131,7 @@ INCLUDE_ASM("nonmatchings/paf_117408", func_000BE2C0);
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BE334);
 
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BE3A8);
-#endif
-
-#if FW_VERSION == 282
+#else
 s32 func_00117478(void) {
     return D_001A4934;
 }

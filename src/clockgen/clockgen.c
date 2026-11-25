@@ -82,7 +82,7 @@ INCLUDE_ASM("nonmatchings/clockgen", func_00000614);
 
 INCLUDE_ASM("nonmatchings/clockgen", func_000006C0);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/clockgen", D_000008FC);
 
 INCLUDE_RODATA("nonmatchings/clockgen", D_00000908);

@@ -38,6 +38,7 @@
   "Unk_func_00004254_0": "struct Unk_func_00004254_0 {\n    u8 pad0[0x1EC];\n    s32 unk1EC;\n    u16 unk1F0;\n    u8 unk1F2;\n};"
  },
  "vars": {
+  "D_00009F31": "extern M2C_UNK D_00009F31;",
   "D_0000BB45": "extern M2C_UNK D_0000BB45;",
   "D_0000BBD0": "extern s32 D_0000BBD0;",
   "D_0000BBD4": "extern s32 D_0000BBD4;"

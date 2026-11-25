@@ -142,6 +142,7 @@
   "D_0000E810": "extern void **D_0000E810;",
   "D_0000E814": "extern void *D_0000E814;",
   "D_0000EB24": "extern s32 D_0000EB24;",
+  "D_0000EC14": "extern s32 D_0000EC14;",
   "D_0000EDAC": "extern void *D_0000EDAC;",
   "D_0000EDB0": "extern void **D_0000EDB0;",
   "D_0000EDB4": "extern void *D_0000EDB4;",

@@ -52,7 +52,7 @@ INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000CDBC);
 
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D2D0);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000E8B4);
 #else
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D2EC);
@@ -68,7 +68,7 @@ INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_72A0044D);
 
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_4612DB4B);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_78219D10);
 #else
 s32 scePaf_78219D10(s32 arg0) {

@@ -112,7 +112,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000E90);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000E44);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000FB4);
 #endif
 
@@ -138,7 +138,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpSend);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpDelete);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000016B4);
 #endif
 
@@ -158,7 +158,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpRecv);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_67346A2A);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void sceNetAdhoc_lib_F9240FBA(void) {
     sceNet_lib_57CC57DA(&D_00007A8C, 0, 0x18);
 }
@@ -179,7 +179,7 @@ void sceNetAdhoc_lib_F9240FBA(void) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_1059683E);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000215C);
 #endif
 
@@ -203,7 +203,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000020A4);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000223C);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002404);
 #endif
 
@@ -221,7 +221,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000297C);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000029E8);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002B7C);
 #endif
 
@@ -316,7 +316,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004058);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004408);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000049E4);
 #endif
 
@@ -328,7 +328,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000045E4);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_62B875A8);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void sceNetAdhoc_lib_62B875A8(void) {
     sceNet_lib_57CC57DA(&D_00007CC8, 0, 0x7C);
 }
@@ -379,7 +379,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004AE4);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004B30);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004E80);
 #endif
 
@@ -413,7 +413,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000052D4);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000532C);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000056CC);
 #endif
 
@@ -450,7 +450,7 @@ void func_00005560(void *arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000589C);
 #endif
 
@@ -489,7 +489,7 @@ s32 func_000056B0(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_000056D4(void *arg0) {
     s32 temp_s2;
     void *temp_a1;
@@ -556,7 +556,7 @@ void func_000056D4(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005AAC);
 #endif
 
@@ -664,7 +664,7 @@ INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000078A4);
 
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000078AC);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005B98);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000065F8);
@@ -682,7 +682,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006324);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000667C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006AF8);
 #endif
 

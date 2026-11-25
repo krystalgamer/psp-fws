@@ -48,6 +48,7 @@ extern s32 D_00006200;
 extern s32 D_00006224;
 extern s32 D_000065C0;
 extern s32 D_000065C4;
+extern s32 D_000067C4;
 extern struct D_00007608_s D_00007608;
 extern s32 D_00008A40;
 extern s32 D_00008A80;

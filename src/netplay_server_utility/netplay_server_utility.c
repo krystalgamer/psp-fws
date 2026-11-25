@@ -58,7 +58,7 @@ INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_0000414C);
 
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00004170);
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00004194);
 #endif
 
@@ -152,7 +152,7 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00000634);
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_0000072C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_000037C0);
 #endif
 
@@ -174,7 +174,7 @@ void func_00000908(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00000914);
 
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00000AD0);
@@ -237,7 +237,7 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00000D74);
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00000E6C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00003AE8);
 #endif
 
@@ -518,7 +518,7 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001850);
 
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000018EC);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
 void func_000016C8(void) {
     D_00003D28 = 0;
 }
@@ -530,17 +530,31 @@ void func_000016D4(void) {
 
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000019A0);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001A44_v250);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_0000186C);
 
 void func_000018CC(void) {
     func_0000186C(0);
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001A20);
 #endif
 
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001A78);
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_0000435C);
+
+INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001AFC);
+
+INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001D78);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00004358);
@@ -562,11 +576,15 @@ void func_000019A8(void) {
 void func_000019C4(void) {
     func_000032A0();
 }
+#endif
 
+#if FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00003A24);
 
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00003A3C);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_00001E34(void) {
     func_0000320C();
 }
@@ -672,11 +690,19 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001FA0);
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_0000204C);
 
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00002060);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000020A4);
+
+INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000021E4);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_000043B8);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001B50);
 #endif
 
@@ -713,7 +739,11 @@ s32 func_00002468(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00002740);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00002254);
 
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_0000239C);
@@ -772,7 +802,11 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00002E64);
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000028AC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_000043B8);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00002960);
 #endif
 

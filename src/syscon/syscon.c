@@ -68,7 +68,7 @@ s32 sceSyscon_driver_5FF1D610(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceSyscon_driver_9E6E060F(s32 arg0) {
     M2C_VFIELD(&D_00004600, s32, 0x12C) = arg0;
     return 0;
@@ -632,7 +632,7 @@ INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_08DA3752);
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_9C4E3CA9);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/syscon", func_00002CE4);
 #endif
 

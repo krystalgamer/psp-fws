@@ -23,4 +23,3 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_030524", func_000306A4);
 INCLUDE_ASM("nonmatchings/lftv_middleware_030524", func_00030734);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_030524", func_00030880);
-

@@ -92,4 +92,3 @@ void func_00019934(struct Unk_func_00019934_0 *arg0, s32 arg1) {
         func_00018F14(arg0->unkC, arg1);
     }
 }
-

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201
 void func_00012A1C(s32 arg0) {
     struct Unk_func_00012A1C_temp_v0 *temp_v0;
 
@@ -15,7 +15,13 @@ void func_00012A1C(s32 arg0) {
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012A54);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012C38);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000130B0);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012D5C);
 
 s32 func_00012D7C(s32 *arg0, s32 arg1) {
@@ -151,7 +157,13 @@ INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030014);
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030030);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030054);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_000314A4);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030070);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030094);
@@ -177,13 +189,25 @@ INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030140);
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030144);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0003014C);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_000315AC);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_000315C0);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030164);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030170);
+#endif
 
+#if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030174);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013BC4);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013DAC);
@@ -195,9 +219,17 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013F58);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013F98);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00014518);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00014D14);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000149E4);
+#endif
 
+#if FW_VERSION >= 201
 void func_00014AE8(void) {
     sceVshCommonGui_A0DE7090(1);
 }

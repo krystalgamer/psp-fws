@@ -1,7 +1,9 @@
 #include "common.h"
 #include "htmlviewer_plugin_decls.h"
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005370);
+#endif
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_005370", D_00007CAC);
 
@@ -9,7 +11,11 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_005370", D_00007CCC);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_005370", D_00007CDC);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00003F6C);
+#else
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_000053D4);
+#endif
 
 void func_00005488(void) {
     func_000052C8(0);
@@ -33,6 +39,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", sceHtmlViewerHelper_5F1A773
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", sceHtmlViewerHelper_F27998C2);
 
+#if FW_VERSION == 282
 s32 sceHtmlViewerHelper_47F988E6(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
 
@@ -88,6 +95,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005BDC);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005C28);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005C64);
+#endif
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005CC8);
 
@@ -118,6 +126,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005ECC);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005EF4);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005F20);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005FE0);
@@ -131,5 +140,6 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_005370", D_00007D68);
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_005370", D_00007D74);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00006044);
+#endif
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00006164);

@@ -20,7 +20,34 @@ s32 sceDisplay_driver_7A10289D(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 250
+s32 func_00000658(void) {
+    s32 temp_v0;
+    void *temp_s1;
+
+    if (M2C_VFIELD(&D_00002150, s32, 0x5C) != 0) {
+        if (M2C_VFIELD(&D_00002150, s32, 0x5C) == 1) {
+            do {
+                sceDisplayWaitVblankStart();
+            } while (M2C_VFIELD(&D_00002150, s32, 0x5C) == 1);
+        }
+        func_000021C8();
+    }
+    temp_v0 = InitForKernel_7A2333AD();
+    if (((temp_v0 == 0x110) | (temp_v0 == 0x300)) != 0) {
+
+    } else {
+        sceDisplay_driver_63E22A26(2, 0, 0, 3, 1);
+        sceDisplayWaitVblankStart();
+        temp_s1 = sceGeEdramGetAddr();
+        SysMemForKernel_2F808748(temp_s1, 0, sceGeEdramGetSize());
+        sceKernelDcacheWritebackAll();
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 s32 func_00000658(void) {
     void *temp_s1;
 
@@ -41,9 +68,17 @@ s32 func_00000658(void) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/display", func_0000073C);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/display", func_00000724);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", func_00000890);
 #endif
 
@@ -100,7 +135,7 @@ s32 sceDisplay_driver_A544C486(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_BF79F646);
 #endif
 
@@ -126,7 +161,13 @@ s32 sceDisplayIsForeground(void) {
 s8 sceDisplay_driver_AC14F1FF(void) {
     return D_00002CB0;
 }
-#else
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/display", D_00002C30);
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/display", D_00003B94);
 #endif
 
@@ -134,7 +175,7 @@ INCLUDE_RODATA("nonmatchings/display", D_00003B94);
 INCLUDE_ASM("nonmatchings/display", func_0000118C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", func_000016C4);
 #endif
 
@@ -354,7 +395,7 @@ s32 sceDisplayIsVblank(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceDisplay_driver_69B53541(void) {
     return __builtin_allegrex_max(M2C_VFIELD(&D_00003EC8, s32, 0x18) - sceDisplayGetCurrentHcount(), -1);
 }
@@ -366,7 +407,7 @@ s32 sceDisplay_driver_69B53541(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_21038913);
 #endif
 
@@ -447,9 +488,17 @@ INCLUDE_ASM("nonmatchings/display", func_00002CF8);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", func_00001DE4);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/display", func_000020D8);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/display", func_00001F08);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", func_00001FF0);
 
 INCLUDE_ASM("nonmatchings/display", func_000021C8);

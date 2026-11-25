@@ -185,6 +185,12 @@ s32 func_00001334(s32 arg0) {
 
 INCLUDE_RODATA("nonmatchings/dmacplus", D_00002E90);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/dmacplus", D_00002E38);
+
+INCLUDE_RODATA("nonmatchings/dmacplus", D_00002EEC);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/dmacplus", D_00002E9C);
 

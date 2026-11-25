@@ -50,7 +50,7 @@ INCLUDE_ASM("nonmatchings/emc_ddr", sceDdr_driver_F23B7983);
 
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdr_driver_91CD8F94);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdr_driver_888129E8);
 #endif
 

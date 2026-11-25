@@ -2,7 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_015F14", func_00015F14);
 #else
 void func_00015F14(struct Unk_func_00015F14_0 *arg0, s32 arg1, s32 arg2) {
@@ -13,7 +13,7 @@ void func_00015F14(struct Unk_func_00015F14_0 *arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_015F14", func_00015F64);
 #else
 void func_00015F64(struct Unk_func_00015F64_0 *arg0, s32 arg1, s32 arg2) {

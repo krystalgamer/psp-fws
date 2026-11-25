@@ -35,6 +35,7 @@ M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);
 void func_000004D8(void);
 void func_00000518(void);
 s32 func_00000554(void);
+s32 func_00000634(void);
 void func_00000894(void);
 void func_000008D4(void);
 s32 func_00000910(void);

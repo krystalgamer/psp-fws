@@ -5,6 +5,7 @@
 #include "m2c_macros.h"
 
 
+s32 func_00001054(u8 *arg0);
 s32 func_00001288(void *arg0);
 s32 func_00002014(void *arg0);
 s32 func_00002044(s32, s32);

@@ -310,7 +310,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000059AC);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00005D70);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00005C9C);
 #endif
 
@@ -414,7 +414,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetRecvfrom);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetShutdown);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000085D0);
 #endif
 
@@ -652,7 +652,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000CD64);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000CE98);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000D170);
 #endif
 
@@ -678,7 +678,7 @@ s32 func_0000D1F4(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000D1FC);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000D37C);
 #endif
 
@@ -715,7 +715,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000D6D0);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000DD34);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000DF80);
 #endif
 
@@ -914,7 +914,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010930);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010A28);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010CCC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010D50);
@@ -940,7 +940,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010C08);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00011678);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00011968);
 #endif
 
@@ -1038,7 +1038,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012B9C);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012CDC);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012D50);
 #endif
 
@@ -1146,7 +1146,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014018);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014120);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014260);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000142CC);
@@ -1188,7 +1188,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014524);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014588);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014668);
 #endif
 
@@ -1331,9 +1331,15 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000185BC);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018E1C);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018640);
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018B28);
+#endif
 
+#if FW_VERSION >= 151 && FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018640);
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018BE8);
 #endif
 
@@ -1369,7 +1375,7 @@ s32 func_00019A98(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00019AA0);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00019BCC);
 #endif
 
@@ -1443,7 +1449,7 @@ void func_0001AA20(struct Unk_func_0001AA20_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001AA90);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001ABA4);
 #endif
 
@@ -1471,7 +1477,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B6BC);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B2E4);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B820);
 #endif
 
@@ -1533,7 +1539,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001D1E4);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001C188);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001CC7C);
 #endif
 
@@ -1579,7 +1585,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001F3B0);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001F0A4);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001F674);
 #endif
 
@@ -1748,7 +1754,13 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00025468);
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002373C);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023CD0);
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002380C);
 #endif
 
@@ -1813,9 +1825,15 @@ void func_000244B0(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000244FC);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024B04);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000263E0);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000249FC);
 #endif
 
@@ -1865,7 +1883,7 @@ INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002BBD0);
 
 INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002BBD8);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002590C);
 #endif
 
@@ -2076,7 +2094,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000293A4);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00029460);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000297CC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000298B8);
@@ -2096,7 +2114,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000297E4);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000299E4);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00029B94);
 #endif
 
@@ -2145,7 +2163,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002A570);
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_7CB1D9E3);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_4C13BE10);
 #endif
 
@@ -2176,7 +2194,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetInetAton);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002C4CC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetInit);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetTerm);

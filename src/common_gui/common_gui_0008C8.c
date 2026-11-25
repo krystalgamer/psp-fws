@@ -88,15 +88,17 @@ void sceVshCommonGui_72E652AA(s32 *arg0) {
 void sceVshCommonGui_0131C97D(s32 *arg0) {
     scePaf_FE575092(*arg0);
 }
-#else
-void sceVshCommonGui_9F196654(s32 *arg0) {
-    scePaf_FA05BF7B(*arg0);
+#endif
+
+#if FW_VERSION >= 250
+void sceVshCommonGui_450F3CF0(s32 *arg0) {
+    scePaf_6C3BBB68(*arg0);
 }
 #endif
 
-#if FW_VERSION == 282
-void sceVshCommonGui_450F3CF0(s32 *arg0) {
-    scePaf_6C3BBB68(*arg0);
+#if FW_VERSION < 201
+void sceVshCommonGui_9F196654(s32 *arg0) {
+    scePaf_FA05BF7B(*arg0);
 }
 #endif
 

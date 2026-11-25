@@ -72,6 +72,58 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetBatteryIconStatus);
 INCLUDE_ASM("nonmatchings/impose", func_00000DFC);
 #endif
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/impose", D_00006310);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00006A80);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000071F0);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007544);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007744);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007944);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007B84);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007DC4);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007FE4);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00008204);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00009914);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000ABD4);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000BE94);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000BFFC);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000C164);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000C2CC);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000C434);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000C834);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000CC34);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000D034);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000D434);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000DB34);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000E234);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000E3B4);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000E534);
+#endif
+
 #if FW_VERSION == 282
 void func_00000000(u32 arg0) {
     sceKernelSetEventFlag(*D_0000F510, arg0);
@@ -137,6 +189,10 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000E90C);
 #endif
 
 INCLUDE_RODATA("nonmatchings/impose", D_0000F2CC);
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/impose", D_0000F15C);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/impose", D_0000F2D8);
@@ -224,7 +280,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00001E30);
 INCLUDE_ASM("nonmatchings/impose", func_00000FD8);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceImpose_driver_1B6E3400(void) {
     return M2C_FIELD(D_00018648, s32 *, 0x6C);
 }
@@ -242,7 +298,7 @@ s32 sceImpose_driver_1B6E3400(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceImpose_driver_B415FC59(void) {
     s32 temp_v0;
 
@@ -290,7 +346,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetUMDPopup);
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_381BD9E7);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 syslib_ADF12745(s32 arg0) {
     if (arg0 != 2) {
 
@@ -420,7 +476,7 @@ s32 sceAudioRoutingSetMode(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceAudioRoutingGetMode(void) {
     return M2C_FIELD(D_00018648, s32 *, 0x4C);
 }
@@ -474,7 +530,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00002B0C);
 INCLUDE_ASM("nonmatchings/impose", func_00002A08);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_00002B54(s32 arg0) {
     if ((M2C_FIELD(D_00018648, s32 *, 0x6C) != 0) && !(arg0 & 0x20000)) {
         if (arg0 & 0x100000) {
@@ -504,7 +560,7 @@ void func_00002B54(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_00002BB4(s32 arg0) {
     if (arg0 & 0x80000) {
         M2C_FIELD(D_00018648, s32 *, 0x48) = 1;
@@ -658,7 +714,11 @@ INCLUDE_RODATA("nonmatchings/impose", D_000061B8);
 INCLUDE_RODATA("nonmatchings/impose", D_000061C4);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/impose", D_0000F0D0);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/impose", D_000061B4);
 #endif
 
@@ -726,7 +786,7 @@ INCLUDE_ASM("nonmatchings/impose", func_000036E8);
 INCLUDE_ASM("nonmatchings/impose", func_00003C58);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose", func_000055FC);
 #endif
 

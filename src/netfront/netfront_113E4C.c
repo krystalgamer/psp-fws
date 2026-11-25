@@ -2,6 +2,7 @@
 #include "common.h"
 #include "netfront_decls.h"
 
+#if FW_VERSION == 303
 void func_00113E4C(s32 arg0, s32 arg1) {
     D_0013447C = arg0;
     D_00134478 = arg1;
@@ -220,6 +221,7 @@ INCLUDE_ASM("nonmatchings/netfront_113E4C", func_00117308);
 INCLUDE_ASM("nonmatchings/netfront_113E4C", func_001175B4);
 
 INCLUDE_ASM("nonmatchings/netfront_113E4C", func_00117B24);
+#endif
 
 INCLUDE_ASM("nonmatchings/netfront_113E4C", func_00117E38);
 
@@ -289,6 +291,7 @@ INCLUDE_RODATA("nonmatchings/netfront_113E4C", D_00130DF8);
 
 INCLUDE_RODATA("nonmatchings/netfront_113E4C", D_00130E10);
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_113E4C", func_0011A154);
 
 INCLUDE_ASM("nonmatchings/netfront_113E4C", func_0011A34C);
@@ -358,4 +361,4 @@ void func_0011A6F8(void) {
 s32 func_0011A714(void) {
     return -1;
 }
-
+#endif

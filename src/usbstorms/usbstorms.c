@@ -14,7 +14,7 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00000374_v151);
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000374_v150);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000544);
 
 INCLUDE_ASM("nonmatchings/usbstorms", func_000006BC);
@@ -38,21 +38,21 @@ INCLUDE_RODATA("nonmatchings/usbstorms", D_00002A14);
 INCLUDE_RODATA("nonmatchings/usbstorms", D_000028FC);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 201
+#if FW_VERSION == 100 || FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/usbstorms", D_00003460);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000728);
 
 INCLUDE_RODATA("nonmatchings/usbstorms", D_0000349C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 201
+#if FW_VERSION == 100 || FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/usbstorms", D_000034A8);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/usbstorms", D_000034D4);
 #endif
 
@@ -122,7 +122,7 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00001B54);
 INCLUDE_ASM("nonmatchings/usbstorms", func_00001C9C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000E9C);
 
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000F40);
@@ -146,7 +146,7 @@ INCLUDE_RODATA("nonmatchings/usbstorms", D_00003890);
 
 INCLUDE_RODATA("nonmatchings/usbstorms", D_000038C4);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstorms", func_00001B60);
 
 INCLUDE_ASM("nonmatchings/usbstorms", func_00002158);
@@ -184,6 +184,12 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_000028E8);
 INCLUDE_ASM("nonmatchings/usbstorms", func_00002B7C);
 
 INCLUDE_ASM("nonmatchings/usbstorms", func_00002C4C);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/usbstorms", func_00002CA4);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/usbstorms", func_00002CC4);
 #endif

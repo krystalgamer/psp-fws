@@ -130,7 +130,7 @@ INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002988);
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_CD76A885);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00008148);
 #endif
 

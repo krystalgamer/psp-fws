@@ -155,7 +155,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000052C);
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000005D8);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000006D8);
 #endif
 
@@ -171,7 +171,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000688);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E028);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_000076D8);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E140);
@@ -191,7 +191,7 @@ void func_0000084C(s32 arg0) {
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000874);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_000009DC(void) {
     func_0000052C((s32) &D_00007748, (s32) &D_0000E158);
 }
@@ -203,7 +203,7 @@ void func_000009DC(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_00007748);
 #endif
 
@@ -256,13 +256,13 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E0F4);
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E11C);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E140);
 #endif
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E158);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E25C);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_00007780);
@@ -288,6 +288,10 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E170);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E188);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E0E4);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_00006714);
 #endif
@@ -300,7 +304,7 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E1BC);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E1E0);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_000078A0);
 #endif
 
@@ -344,7 +348,7 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_000064C0);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E234);
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E240);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E250);
@@ -354,7 +358,7 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E250);
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_00006508);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E25C);
 #endif
 
@@ -374,7 +378,7 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_00006588);
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_000065BC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_00007904);
 #endif
 
@@ -388,11 +392,19 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E274);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E28C);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E1E0_v250);
+
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E1FC);
+
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E210);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E2A4);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E2AC);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E2C0);
@@ -412,7 +424,7 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E300);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E314);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_00007974);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_00007994);
@@ -442,7 +454,7 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E3B0);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E3C8);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000940);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000AA0);
@@ -504,7 +516,7 @@ void func_00000C50(void) {
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000C78);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000E9C);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000013AC);
@@ -532,7 +544,7 @@ void func_00001190(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002114);
 #endif
 
@@ -604,7 +616,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002434);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002528);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002460);
 #endif
 
@@ -619,7 +631,7 @@ s32 func_00001700(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_00002530(void) {
     void *sp0;
     sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_5C161337(-1));
@@ -654,6 +666,10 @@ void func_0000181C(void) {
 }
 #endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002998_v250);
+#endif
+
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002858);
 #endif
@@ -680,7 +696,7 @@ void func_00001884(void) {
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000188C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002998);
 #endif
 
@@ -720,7 +736,7 @@ void func_00001B30(void) {
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00001C3C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002C4C);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002E74);
@@ -763,7 +779,7 @@ void func_00002C70(void) {
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002C78);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002CE8);
 #endif
 
@@ -784,7 +800,7 @@ void func_00002F04(void) {
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002F0C);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002F9C);
 #endif
 
@@ -924,7 +940,7 @@ void func_000029D8(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000037E0);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003868);
@@ -938,9 +954,17 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003E08);
 void func_000029F8(void) {
     func_00002D4C();
 }
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003C20);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002A14);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_000039C0(void) {
 }
 
@@ -977,7 +1001,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003E08);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003E38);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003AF4);
 #endif
 
@@ -987,7 +1011,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003E88);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003F24);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003C24);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004148);
@@ -1001,17 +1025,25 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002CC4);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002D4C);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000431C);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002D68);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002DA0);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004574);
 #else
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003FB8);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004148);
 #endif
 
@@ -1027,7 +1059,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004574);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004620);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000419C);
 #endif
 
@@ -1039,11 +1071,19 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000047C8);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003104);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004944);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000031B0);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003280);
+#endif
 
+#if FW_VERSION < 282
 void *func_000034B8(void **arg0) {
     void *temp_v0;
     void *temp_v0_2;
@@ -1067,9 +1107,13 @@ void *func_000034B8(void **arg0) {
     }
     return var_v0;
 }
+#endif
 
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000034F0);
+#endif
 
+#if FW_VERSION < 282
 void func_00003664(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 0;
@@ -1077,7 +1121,7 @@ void func_00003664(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_00004924(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 0;
@@ -1113,7 +1157,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004BC8);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004C08);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
 void func_000036F0(void) {
     D_00006D9C = 0;
 }
@@ -1125,13 +1169,19 @@ void func_000036FC(void) {
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004C84);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004C4C);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003894);
 
 void func_000038F4(void) {
     func_00003894(0);
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004D04);
 #endif
 
@@ -1141,7 +1191,17 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004D5C);
 void func_00003954(void) {
     func_00004D5C(0);
 }
-#else
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E350);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004D04);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004F80);
+#endif
+
+#if FW_VERSION == 282
 void func_00004DA0(void) {
     func_00004D5C(0);
 }
@@ -1165,11 +1225,15 @@ void func_000039D0(void) {
 void func_00005134(void) {
     func_00006A80();
 }
+#endif
 
+#if FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000679C);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_000067B4);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_00005118(void) {
     func_000069EC();
 }
@@ -1279,7 +1343,7 @@ s32 func_00003E44(void) {
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003E58);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004F14);
 #endif
 
@@ -1289,7 +1353,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003B78);
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003C0C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 func_00003C0C(void) {
     s32 var_v0;
 
@@ -1308,7 +1372,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003C60);
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003CC0);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000517C);
 #endif
 
@@ -1346,7 +1410,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004008);
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004080);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_000054E4(void) {
     sceNetAdhocDownload_469F6B83();
 }
@@ -1364,7 +1428,13 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E490);
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004504);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00005B68);
+
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E41C);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000057CC);
 #endif
 
@@ -1543,7 +1613,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000064A8);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00006514);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000060DC);
 #endif
 
@@ -1561,7 +1631,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000067F4);
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00004B8C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 func_00004B8C(s32 arg0) {
     if (arg0 != -1) {
         sceKernelStopModule(arg0, 0U, NULL, NULL, NULL);
@@ -1657,6 +1727,130 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00006EC8);
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00006FEC);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00007014);
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00006F68);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00006FAC);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00007434);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00007614);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000076C0);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00007874);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000079FC);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00007B6C);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00007DE8);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000085DC);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00008C5C);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00008F3C);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000090A8);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000093EC);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00009684);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00009B28);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00009C30);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00009FA0);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000A08C);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000A20C);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000A2A4);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000A46C);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000A4C4);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000A53C);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000A5AC);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000A638);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000A7C0);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000A954);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000AAD4);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000ACCC);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000ADE4);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000AEF8);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000B3BC);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000B780);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000B854);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000BBF8);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000BCC0);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000BE18);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000BF1C);
+
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E6C0);
+
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E628);
+
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E630);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000C0E4);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000C39C);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000C46C);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000C548);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000C750);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000C7C4);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000C818);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000C854);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000C910);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000C9A4);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000CA38);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000CAB0);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000CB80);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000CBF4);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000CC54);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000CCF0);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000CDE0);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000CEE4);
+
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000D054);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00007050);
@@ -1784,8 +1978,14 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000D13C);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000D310);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E658);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E6C0);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E740);
 #endif

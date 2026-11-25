@@ -4,7 +4,7 @@
 
 INCLUDE_ASM("nonmatchings/audio", func_00000000);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", func_0000020C);
 
 INCLUDE_ASM("nonmatchings/audio", func_00000298);
@@ -52,7 +52,7 @@ INCLUDE_ASM("nonmatchings/audio", sceAudioChangeChannelVolume);
 
 INCLUDE_ASM("nonmatchings/audio", sceAudioChangeChannelConfig);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/audio", sceAudioOutput2ChangeLength);
 
 INCLUDE_ASM("nonmatchings/audio", sceAudioOutput2GetRestSample);
@@ -60,7 +60,7 @@ INCLUDE_ASM("nonmatchings/audio", sceAudioOutput2GetRestSample);
 
 INCLUDE_ASM("nonmatchings/audio", sceAudio_E9D97901);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 250
 s32 sceAudioOutput2Reserve(s32 arg0) {
     return sceAudio_38553111(arg0, 0xAC44, 2);
 }
@@ -78,7 +78,7 @@ INCLUDE_ASM("nonmatchings/audio", func_00001330);
 
 INCLUDE_ASM("nonmatchings/audio", sceAudio_driver_A2BEAA6C);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/audio", sceAudio_driver_210567F7);
 #endif
 
@@ -118,7 +118,7 @@ s32 sceAudio_driver_927AC32B(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", func_00001834);
 #endif
 
@@ -178,7 +178,7 @@ INCLUDE_ASM("nonmatchings/audio", sceAudio_38553111);
 INCLUDE_ASM("nonmatchings/audio", sceAudio_5C37C0AE);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/audio", sceAudio_E0727056);
 #endif
 
@@ -186,7 +186,7 @@ INCLUDE_ASM("nonmatchings/audio", sceAudio_E0727056);
 INCLUDE_ASM("nonmatchings/audio", sceAudio_5C37C0AE);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/audio", sceAudio_E0727056);
 
 INCLUDE_ASM("nonmatchings/audio", func_000020F8);

@@ -55,3 +55,25 @@ sceSyscon_driver_44439604 = 0x00001C08; // type:func
 sceSysreg_driver_7725CA08 = 0x00001C10; // type:func
 sceSysreg_driver_7FD7A631 = 0x00001C18; // type:func
 sceSysreg_driver_BB823481 = 0x00001C20; // type:func
+// shared names (tools/add_version.py) begin
+D_00001FD8 = 0x00001FD4; // rom:0x2054
+D_00002078 = 0x00002198;
+D_00002176 = 0x00002226;
+D_00002124 = 0x00002244;
+D_00002128 = 0x00002248;
+D_0000213C = 0x0000225C;
+D_00002141 = 0x00002261;
+D_00002142 = 0x00002262;
+D_00002143 = 0x00002263;
+func_00000484 = 0x0000048C; // type:func rom:0x50C
+func_00000AE4 = 0x00000AFC; // type:func rom:0xB7C
+func_00000B40 = 0x00000B48; // type:func rom:0xBC8
+func_00001250 = 0x00001354; // type:func rom:0x13D4
+func_000013AC = 0x000013B4; // type:func rom:0x1434
+func_000013F0 = 0x000013F8; // type:func rom:0x1478
+func_00001418 = 0x00001420; // type:func rom:0x14A0
+func_00001658 = 0x00001664; // type:func rom:0x16E4
+func_0000181C = 0x00001828; // type:func rom:0x18A8
+func_00001924 = 0x00001934; // type:func rom:0x19B4
+func_000019D0 = 0x000019E4; // type:func rom:0x1A64
+// shared names (tools/add_version.py) end

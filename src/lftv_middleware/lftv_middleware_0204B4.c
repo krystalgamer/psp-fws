@@ -43,4 +43,3 @@ s32 func_000207C4(void) {
     func_0004B200();
     return 0;
 }
-

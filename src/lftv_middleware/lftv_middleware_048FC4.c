@@ -29,6 +29,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_048FC4", func_000494EC);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_048FC4", func_00049590);
 
+#if FW_VERSION == 303
 s32 func_0004961C(void) {
     s32 temp_v0;
 
@@ -36,6 +37,7 @@ s32 func_0004961C(void) {
     D_0005C618 = 0;
     return temp_v0;
 }
+#endif
 
 s32 func_0004962C(void) {
     return D_0005C618;
@@ -52,4 +54,3 @@ void func_00049648(void) {
 s32 func_00049654(void) {
     return (s32) (u8) D_0005C61C;
 }
-

@@ -29,6 +29,10 @@ INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BE828);
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BE8A4);
 #endif
 
+#if FW_VERSION == 150
+INCLUDE_RODATA("nonmatchings/paf_1175E0", D_0011F128);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_00117624);
 
@@ -98,7 +102,7 @@ INCLUDE_ASM("nonmatchings/paf_1175E0", func_00117D2C);
 
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_00117D98);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BEB2C);
 
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BEC68);
@@ -110,7 +114,15 @@ INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BEEE4);
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BEF7C);
 
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BF0B4);
+#endif
 
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/paf_1175E0", func_000C3244);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", func_000C3280);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BF1AC);
 #else
 void func_00117DB8(s32 arg0) {
@@ -161,7 +173,7 @@ void func_00117F74(struct Unk_func_00117F74_0 *arg0) {
     sceKernelDeleteEventFlag(arg0->unk4);
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BF204);
 
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BF220);
@@ -189,6 +201,30 @@ void func_0011802C(struct Unk_func_0011802C_0 *arg0) {
     void *sp0;
     sceKernelCancelEventFlag(arg0->unk4, 0U, &sp0);
 }
+
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/paf_1175E0", func_000C33D4);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", scePaf_B884B031);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", func_000C345C);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", scePaf_9399AF50);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", scePaf_C1F72218);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", scePaf_539F2583);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", func_000C3590);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", func_000C360C);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", func_000C362C);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", scePaf_E05F3CEF);
+
+INCLUDE_ASM("nonmatchings/paf_1175E0", scePaf_E977B833);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_000BF2C4);

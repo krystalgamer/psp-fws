@@ -37,3 +37,14 @@ sceAudiocodec_3DD7EE1A = 0x000033E8; // type:func
 sceAudiocodec_70A703F8 = 0x000033F0; // type:func
 sceAudiocodec_3A20A200 = 0x000033F8; // type:func
 sceAudiocodec_29681260 = 0x00003400; // type:func
+// shared names (tools/add_version.py) begin
+D_00003810 = 0x0000361C; // rom:0x369C
+D_000038A4 = 0x00003628; // rom:0x36A8
+D_000038B4 = 0x00003638; // rom:0x36B8
+func_00002320 = 0x0000238C; // type:func rom:0x240C
+func_00002CE0 = 0x00002900; // type:func rom:0x2980
+func_00002D84 = 0x000029AC; // type:func rom:0x2A2C
+func_00002FBC = 0x00002BD8; // type:func rom:0x2C58
+func_00003150 = 0x00002D68; // type:func rom:0x2DE8
+func_00003780 = 0x000032A8; // type:func rom:0x3328
+// shared names (tools/add_version.py) end

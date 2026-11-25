@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, lftv_plugin]
+      - [0xA4, c, lftv_plugin]
       - { start: 0x2A00, type: asm, name: fini, linker_section: .fini }
       - { start: 0x2A1C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2BAC, type: prxpad, order: .text }
@@ -71,7 +71,7 @@ segments:
       - { start: 0x2E9C, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x2EA8, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x2EAC, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x2EB0, rodata, lftv_plugin]
+      - [0x2EB0, .rodata, lftv_plugin]
   - name: lftv_plugin_seg1
     type: code
     start: 0x30F0

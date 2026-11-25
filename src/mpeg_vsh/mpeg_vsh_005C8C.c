@@ -536,6 +536,12 @@ s32 func_00007A68(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A94);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_0000791C);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000079D0);
+#endif
+
 #if FW_VERSION == 282
 s32 func_00007ADC(void) {
     return sceKernelCheckThreadStack();
@@ -548,7 +554,22 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007BAC);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007BF0);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 250
+void func_00007B94(void) {
+    sceVideocodec_4F160BF4(D_00007D40);
+}
+
+s32 func_00007BB8(s32 arg0) {
+    s32 temp_s1;
+
+    func_000079D8(D_00007F04);
+    temp_s1 = func_000079D0(arg0);
+    func_00007A68(D_00007F04);
+    return temp_s1;
+}
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005FC8);
 
 void func_00006048(void) {
@@ -556,9 +577,13 @@ void func_00006048(void) {
 }
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006050);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000060C0);
+#endif
 
+#if FW_VERSION < 250
 void func_000060D0(s32 arg0, s32 arg1) {
     s32 temp_a1;
     s32 var_s0;
@@ -575,7 +600,9 @@ void func_000060D0(s32 arg0, s32 arg1) {
         } while (var_s0 != 0);
     }
 }
+#endif
 
+#if FW_VERSION < 282
 s32 func_00006124(s32 arg0) {
     s32 temp_s1;
 
@@ -597,7 +624,7 @@ s32 func_00006178(s32 arg0) {
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000061CC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 func_00007754(void *arg0, s32 arg1) {
     s32 temp_s1;
 
@@ -609,9 +636,17 @@ s32 func_00007754(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007D88);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007E14);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006234);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_00007D70(void) {
     sceVideocodec_4F160BF4(D_00009DC0);
 }

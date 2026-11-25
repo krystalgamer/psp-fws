@@ -2,6 +2,7 @@
 #include "common.h"
 #include "netfront_decls.h"
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_0EBEEC", func_000EBEEC);
 
 INCLUDE_ASM("nonmatchings/netfront_0EBEEC", func_000EBEF8);
@@ -54,4 +55,4 @@ void func_000EC358(s32 arg0) {
 INCLUDE_ASM("nonmatchings/netfront_0EBEEC", func_000EC374);
 
 INCLUDE_ASM("nonmatchings/netfront_0EBEEC", func_000EC37C);
-
+#endif

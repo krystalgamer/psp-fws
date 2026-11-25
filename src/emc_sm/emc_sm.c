@@ -80,7 +80,7 @@ void sceNand_driver_BADD5D46(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000FD4);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/emc_sm", func_00001044);
 #endif
 

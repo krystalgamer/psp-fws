@@ -22,6 +22,9 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BE50);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003BF14);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C01C);
+#else
 void func_0003C01C(void *arg0) {
     s32 temp_v0;
 
@@ -48,11 +51,13 @@ void func_0003C01C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x3C) = temp_v0;
     D_0005C5FC += 1;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C0B4);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C14C);
 
+#if FW_VERSION == 303
 INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_00056628);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_00056648);
@@ -60,12 +65,19 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_00056648);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_00056660);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_00056690);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C1E4);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C694);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C870);
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_0007E664);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_03BBB8", D_0007E694);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003C8C8);
 
@@ -85,9 +97,11 @@ u16 func_0003CACC(struct Unk_func_0003CACC_0 *arg0) {
     return var_v1;
 }
 
+#if FW_VERSION == 303
 s32 func_0003CAE4(struct Unk_func_0003CAE4_0 *arg0) {
     return arg0->unk54;
 }
+#endif
 
 s32 func_0003CAEC(struct Unk_func_0003CAEC_0 *arg0) {
     s32 temp_a1;
@@ -103,6 +117,9 @@ s32 func_0003CAEC(struct Unk_func_0003CAEC_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003CB20);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003CBB0);
+#else
 s32 func_0003CBB0(void) {
     s32 temp_v0;
 
@@ -113,4 +130,4 @@ s32 func_0003CBB0(void) {
     }
     return temp_v0;
 }
-
+#endif

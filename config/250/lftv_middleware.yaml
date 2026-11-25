@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/250/.splat_cache.lftv_middleware
   symbol_addrs_path:
     - config/250/symbol_addrs.lftv_middleware.txt
+    - config/250/func_starts.lftv_middleware.txt
     - tmp/build/250/prx_syms.lftv_middleware.txt
   reloc_addrs_path: [tmp/build/250/reloc_addrs.lftv_middleware.txt]
   asset_path: tmp/assets/250/lftv_middleware
@@ -54,7 +55,43 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - { start: 0xA4, type: prxpad, order: .text }
-      - [0xB0, asm, lftv_middleware]
+      - [0xB0, c, lftv_middleware]
+      - [0x198, c, lftv_middleware_000118]
+      - [0x228, c, lftv_middleware_0001A8]
+      - [0x6F0, c, lftv_middleware_000300]
+      - [0x32FDC, c, lftv_middleware_017CB0]
+      - [0x34650, c, lftv_middleware_019118]
+      - [0x377C4, c, lftv_middleware_01C470]
+      - [0x37880, c, lftv_middleware_01C52C]
+      - [0x38D24, c, lftv_middleware_01D5EC]
+      - [0x3C610, c, lftv_middleware_0204B4]
+      - [0x3C940, c, lftv_middleware_0207E4]
+      - [0x3F2A8, c, lftv_middleware_0230EC]
+      - [0x3FB90, c, lftv_middleware_02399C]
+      - [0x3FCB0, c, lftv_middleware_023ABC]
+      - [0x43BF0, c, lftv_middleware_027D08]
+      - [0x45434, c, lftv_middleware_02949C]
+      - [0x4C92C, c, lftv_middleware_030524]
+      - [0x4CCDC, c, lftv_middleware_0308D4]
+      - [0x4DA20, c, lftv_middleware_0315DC]
+      - [0x4E1E8, c, lftv_middleware_031DA4]
+      - [0x4FD78, c, lftv_middleware_033A00]
+      - [0x50F24, c, lftv_middleware_0346EC]
+      - [0x52950, c, lftv_middleware_036D6C]
+      - [0x52FE0, c, lftv_middleware_037D10]
+      - [0x53048, c, lftv_middleware_037D88]
+      - [0x55534, c, lftv_middleware_038348]
+      - [0x55A90, c, lftv_middleware_038870]
+      - [0x570E4, c, lftv_middleware_039DEC]
+      - [0x57134, c, lftv_middleware_039E3C]
+      - [0x5720C, c, lftv_middleware_039E64]
+      - [0x585A0, c, lftv_middleware_03BBB8]
+      - [0x595F4, c, lftv_middleware_03CC14]
+      - [0x5A398, c, lftv_middleware_03D910]
+      - [0x6614C, c, lftv_middleware_048FC4]
+      - [0x667D8, c, lftv_middleware_049660]
+      - [0x687E0, c, lftv_middleware_04B4AC]
+      - [0x69798, c, lftv_middleware_04C1DC]
       - { start: 0x6DC4C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x6DC68, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x6E138, type: prxpad, order: .text }
@@ -73,7 +110,32 @@ segments:
       - { start: 0x6E874, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x6E878, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x6E8DC, type: prxpad, order: .rodata }
-      - [0x6E8E0, rodata, lftv_middleware]
+      - [0x6E8E0, .rodata, lftv_middleware_0001A8]
+      - [0x6EAB8, .rodata, lftv_middleware_000300]
+      - [0x7A0AC, .rodata, lftv_middleware_017CB0]
+      - [0x7A1F0, .rodata, lftv_middleware_019118]
+      - [0x7A618, .rodata, lftv_middleware_01C52C]
+      - [0x7AFE8, .rodata, lftv_middleware_01D5EC]
+      - [0x7B8A8, .rodata, lftv_middleware_0207E4]
+      - [0x7BC78, .rodata, lftv_middleware_023ABC]
+      - [0x7C17C, .rodata, lftv_middleware_027D08]
+      - [0x7C4B0, .rodata, lftv_middleware_02949C]
+      - [0x7C9EC, .rodata, lftv_middleware_0308D4]
+      - [0x7CF98, .rodata, lftv_middleware_031DA4]
+      - [0x7D140, .rodata, lftv_middleware_033A00]
+      - [0x7D1F8, .rodata, lftv_middleware_0346EC]
+      - [0x7D748, .rodata, lftv_middleware_036D6C]
+      - [0x7D950, .rodata, lftv_middleware_037D88]
+      - [0x7E180, .rodata, lftv_middleware_038348]
+      - [0x7E1BC, .rodata, lftv_middleware_038870]
+      - [0x7E480, .rodata, lftv_middleware_039E3C]
+      - [0x7E49C, .rodata, lftv_middleware_039E64]
+      - [0x7E6B8, .rodata, lftv_middleware_03BBB8]
+      - [0x7E71C, .rodata, lftv_middleware_03CC14]
+      - [0x7E8E8, .rodata, lftv_middleware_03D910]
+      - [0x7F090, .rodata, lftv_middleware_049660]
+      - [0x7F2F8, .rodata, lftv_middleware_04B4AC]
+      - [0x7F5E4, .rodata, lftv_middleware_04C1DC]
       - { start: 0x7FC88, type: prxpad, order: .rodata }
   - name: lftv_middleware_seg1
     type: code

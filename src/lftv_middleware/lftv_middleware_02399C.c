@@ -29,4 +29,3 @@ s32 func_00023A90(struct Unk_func_00023A90_0 *arg0) {
     }
     return var_a1;
 }
-

@@ -3,7 +3,7 @@
 
 INCLUDE_ASM("nonmatchings/mediasync", module_start);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediasync", func_0000012C);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_000001C4);
@@ -27,19 +27,45 @@ INCLUDE_ASM("nonmatchings/mediasync", func_00000C30);
 INCLUDE_ASM("nonmatchings/mediasync", func_00000E10);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_00000EBC);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/mediasync", func_000010B0);
+
+INCLUDE_ASM("nonmatchings/mediasync", func_00001238);
+
+INCLUDE_ASM("nonmatchings/mediasync", func_000013A8);
+
+INCLUDE_ASM("nonmatchings/mediasync", func_00001624);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediasync", func_00001070);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_000016F0);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/mediasync", func_00002778);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediasync", func_000019D0);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_00001D14);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_00001FAC);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/mediasync", func_00003364);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mediasync", func_00002450);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediasync", func_00002954);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_00002CC4);
@@ -187,7 +213,7 @@ INCLUDE_ASM("nonmatchings/mediasync", func_00005750);
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006DF0);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006E10);
 #endif
 
@@ -231,7 +257,7 @@ INCLUDE_ASM("nonmatchings/mediasync", func_0000670C);
 INCLUDE_ASM("nonmatchings/mediasync", func_0000687C);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006E38);
 #endif
 
@@ -253,7 +279,7 @@ INCLUDE_RODATA("nonmatchings/mediasync", D_00000894);
 INCLUDE_RODATA("nonmatchings/mediasync", D_000008D4);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediasync", func_00004E08);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_000050C0);
@@ -307,7 +333,7 @@ INCLUDE_ASM("nonmatchings/mediasync", func_0000050C);
 INCLUDE_ASM("nonmatchings/mediasync", func_000004CC);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
 void sceLFatFs_driver_933F6E29(void) {
 
 }
@@ -317,6 +343,6 @@ void sceLFatFs_driver_8F0560E0(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mediasync", D_000063F0);
 #endif

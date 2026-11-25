@@ -80,7 +80,33 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000088AC);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00008958);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 250
+void func_00007FC0(void) {
+    if (M2C_FIELD(D_00009B80, s32 *, 0xC) == 0) {
+
+    } else {
+        sceAudiocodec_29681260(D_00009B80);
+    }
+}
+
+s32 func_00007FF8(s32 arg0, s32 arg1) {
+    s32 temp_s1;
+
+    func_000079D8(D_00009C48);
+    temp_s1 = func_00007E14(arg0, arg1, 0);
+    func_00007A68(D_00009C48);
+    return temp_s1;
+}
+
+s32 func_00008058(s32 *arg0) {
+    if (arg0 != NULL) {
+        *arg0 = D_00009C2C;
+    }
+    return M2C_FIELD(D_00009B80, s32 *, 0xC);
+}
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000063E8);
 
 void func_00006420(void) {
@@ -92,7 +118,13 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00006428);
 s32 func_00006508(void) {
     return M2C_FIELD(D_00007E40, s32 *, 0xC);
 }
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00006518);
+#endif
+
+#if FW_VERSION < 250
 s32 func_00006518(s32 arg0) {
     s32 temp_v0;
     s32 var_v0;
@@ -118,7 +150,9 @@ s32 module_stop(void) {
 }
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000065DC);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00006614);
 #endif
 

@@ -36,7 +36,7 @@ s32 sceNetResolverTerm(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet_resolver", sceNetResolverCreate);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceNetResolverDelete(s32 arg0) {
     s32 var_a1;
     s32 var_v1;
@@ -108,7 +108,7 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000005D0);
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_0000060C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000007E0);
 
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000908);
@@ -215,7 +215,7 @@ s32 func_00000E2C(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000F98);
 #endif
 
@@ -249,7 +249,7 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", send_query_message);
 
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000011E8);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_0000131C);
 #endif
 
@@ -265,8 +265,12 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001210);
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001380);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_0000157C);
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001720);
 #endif
 
 #if FW_VERSION == 100

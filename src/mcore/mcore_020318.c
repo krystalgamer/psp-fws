@@ -291,4 +291,3 @@ void func_00024014(struct Unk_func_00024014_0 *arg0) {
         arg0->unk1 = (u8) (1 - arg0->unk1);
     }
 }
-

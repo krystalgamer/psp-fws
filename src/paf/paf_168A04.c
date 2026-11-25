@@ -22,7 +22,7 @@ INCLUDE_ASM("nonmatchings/paf_168A04", func_00168B34);
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00168BAC);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_168A04", func_001215BC);
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00121674);

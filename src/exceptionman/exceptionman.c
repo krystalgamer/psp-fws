@@ -122,9 +122,13 @@ INCLUDE_ASM("nonmatchings/exceptionman", func_000006F8);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000A0C);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000A18);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000A28);
 #endif
 

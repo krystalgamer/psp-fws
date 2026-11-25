@@ -52,3 +52,11 @@ sceKernelPowerLock = 0x00001E4C; // type:func
 sceKernelPowerUnlock = 0x00001E54; // type:func
 sceSysEventForKernel_CD9E4BB5 = 0x00001E5C; // type:func
 sceSysEventForKernel_D7D3FDCD = 0x00001E64; // type:func
+// shared names (tools/add_version.py) begin
+D_0000217C = 0x00002158; // rom:0x21D8
+D_000021F0 = 0x000021D0; // rom:0x2250
+D_00006630 = 0x00006610;
+D_00006644 = 0x00006624;
+D_00006645 = 0x00006625;
+D_00006650 = 0x00006630;
+// shared names (tools/add_version.py) end

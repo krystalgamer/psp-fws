@@ -9,7 +9,19 @@ INCLUDE_ASM("nonmatchings/paf_016744", func_00016F5C);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_016744", func_00017270);
-#else
+#endif
+
+#if FW_VERSION == 150
+void func_00017270(struct Unk_func_00017270_0 *arg0, struct Unk_func_00017270_1 *arg1, s32 arg2) {
+    if (((u32) arg1->unk8 >> 8) & 0x80) {
+
+    } else {
+        scePaf_C01BF169(arg2 + 0xF4, (s32) &func_000173DC, arg2, arg0->unk1C, 0, 0);
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 void func_00017270(struct Unk_func_00017270_0 *arg0, struct Unk_func_00017270_1 *arg1, s32 arg2) {
     if (((u32) arg1->unk8 >> 8) & 0x80) {
 
@@ -119,7 +131,7 @@ INCLUDE_ASM("nonmatchings/paf_016744", func_000180C4);
 
 INCLUDE_ASM("nonmatchings/paf_016744", func_000181F8);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_016744", func_00017B24);
 #else
 INCLUDE_ASM("nonmatchings/paf_016744", func_00018328);
@@ -181,7 +193,15 @@ INCLUDE_ASM("nonmatchings/paf_016744", func_0001BACC);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_016744", func_0001B1D4);
-#else
+#endif
+
+#if FW_VERSION == 150
+void func_0001B1D4(s32 *arg0) {
+    *arg0 = 0;
+}
+#endif
+
+#if FW_VERSION == 282
 void scePaf_52CF8D80(s32 *arg0) {
     *arg0 = 0;
 }
@@ -199,11 +219,48 @@ void func_0001BB84(s32 **arg0, s32 **arg1) {
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_016744", func_0001B1FC);
+#endif
 
+#if FW_VERSION == 150
+void func_0001B1FC(s32 **arg0, s32 **arg1) {
+    s32 *temp_a1;
+
+    temp_a1 = *arg1;
+    *arg0 = temp_a1;
+    if (temp_a1 != NULL) {
+        *temp_a1 += 1;
+    }
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_016744", func_0001B21C);
+#endif
 
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_016744", func_0001B2F8);
+#endif
 
+#if FW_VERSION == 150
+void func_0001B2F8(s32 **arg0) {
+    s32 *temp_s0;
+    s32 temp_v0;
+
+    temp_s0 = *arg0;
+    if (temp_s0 != NULL) {
+        temp_v0 = *temp_s0 - 1;
+        *temp_s0 = temp_v0;
+        if (temp_v0 > 0) {
+
+        } else {
+            func_0001B198(temp_s0);
+            scePaf_4E67BB08(temp_s0);
+        }
+    }
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_016744", func_0001B34C);
 #else
 void scePaf_0880B827(s32 **arg0, s32 **arg1) {
@@ -240,7 +297,7 @@ INCLUDE_ASM("nonmatchings/paf_016744", scePaf_C07624F0);
 
 INCLUDE_ASM("nonmatchings/paf_016744", scePaf_296ED0EF);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_016744", func_0001B4DC);
 
 INCLUDE_ASM("nonmatchings/paf_016744", scePaf_DBD69B7B);
@@ -254,7 +311,23 @@ INCLUDE_ASM("nonmatchings/paf_016744", scePaf_66E3AAA9);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_016744", scePaf_D8739C4C);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 scePaf_D8739C4C(void **arg0) {
+    s32 var_v0;
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    var_v0 = 0;
+    if (temp_a0 != NULL) {
+        var_v0 = M2C_FIELD(temp_a0, s32 *, 0x10C);
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 scePaf_D8739C4C(void **arg0) {
     s32 var_v0;
     struct Unk_scePaf_D8739C4C_temp_a0 *temp_a0;
@@ -270,7 +343,24 @@ s32 scePaf_D8739C4C(void **arg0) {
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_016744", scePaf_D7E925A1);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 scePaf_D7E925A1(void **arg0, s32 arg1) {
+    s32 var_v0;
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    var_v0 = 0;
+    if (temp_a0 != NULL) {
+        var_v0 = M2C_FIELD(temp_a0, s32 *, 0x10C);
+        M2C_FIELD(temp_a0, s32 *, 0x10C) = arg1;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 scePaf_D7E925A1(void **arg0, s32 arg1) {
     s32 var_v0;
     struct Unk_scePaf_D7E925A1_temp_a0 *temp_a0;

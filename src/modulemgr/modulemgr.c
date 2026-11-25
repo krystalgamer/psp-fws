@@ -2,6 +2,10 @@
 #include "common.h"
 #include "modulemgr_decls.h"
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/modulemgr", func_00000000_v250);
+#endif
+
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000000_v201);
 #endif
@@ -10,7 +14,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00000000_v201);
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000000);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000174);
 #endif
 
@@ -20,6 +24,27 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_000000A0);
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/modulemgr", func_000000B8);
+#endif
+
+#if FW_VERSION == 250
+void func_000004B0(void *arg0, void *arg1) {
+    if (arg1 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x14) = (s32) M2C_FIELD(arg1, s32 *, 4);
+        M2C_FIELD(arg0, s32 *, 0x18) = (s32) M2C_FIELD(arg1, s32 *, 8);
+        M2C_FIELD(arg0, u8 *, 2) = (u8) M2C_FIELD(arg1, u8 *, 0x10);
+        M2C_FIELD(arg0, u8 *, 3) = (u8) M2C_FIELD(arg1, u8 *, 0x11);
+    } else {
+        M2C_FIELD(arg0, u8 *, 3) = 1U;
+        M2C_FIELD(arg0, s32 *, 0x14) = 0;
+        M2C_FIELD(arg0, s32 *, 0x18) = 0;
+        M2C_FIELD(arg0, u8 *, 2) = 0U;
+    }
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x50) = 0;
+    M2C_FIELD(arg0, s32 *, 0x60) = 0;
+    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    func_00004BA4((s32) arg0);
+}
 #endif
 
 #if FW_VERSION == 201
@@ -90,7 +115,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_A4370E7C);
 INCLUDE_ASM("nonmatchings/modulemgr", func_00001540);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_3E4FEDDC);
 #endif
 
@@ -375,7 +400,7 @@ s32 ModuleMgrForKernel_61EC6AB0(void) {
 INCLUDE_ASM("nonmatchings/modulemgr", func_00003FE0);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006D34);
 #endif
 
@@ -510,7 +535,13 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_000050D0);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleId);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleGPByAddress);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5F0CC575);
 #endif
 
@@ -602,7 +633,13 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_BA889C07);
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5799EE32);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_53CA70EE);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 s32 ModuleMgrForKernel_25E1F458(void) {
     return 0x80020149;
 }
@@ -706,21 +743,35 @@ s32 ModuleMgrForKernel_61EC6AB0(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", func_000036B8);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006254);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006284);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/modulemgr", D_0000643C);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_00004114);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/modulemgr", D_000062C0);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00004064);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/modulemgr", D_000062E8);
+#endif
 
+#if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/modulemgr", D_0000631C);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/modulemgr", D_0000632C);
 #endif
 
@@ -752,7 +803,9 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006060);
 
 #if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/modulemgr", D_000063AC);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", func_00004644);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_000046F4);
@@ -780,7 +833,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00004020);
 INCLUDE_ASM("nonmatchings/modulemgr", func_00004074);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", func_00004D7C);
 #endif
 
@@ -902,13 +955,19 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_000041DC);
 INCLUDE_ASM("nonmatchings/modulemgr", func_00004A7C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", func_0000512C);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_0000539C);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00005480);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/modulemgr", func_000055D0);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", func_0000556C);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00005834);

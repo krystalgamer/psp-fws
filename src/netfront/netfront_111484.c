@@ -13,4 +13,3 @@ INCLUDE_ASM("nonmatchings/netfront_111484", func_00111610);
 INCLUDE_ASM("nonmatchings/netfront_111484", func_00111700);
 
 INCLUDE_ASM("nonmatchings/netfront_111484", func_00111A00);
-

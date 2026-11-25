@@ -1654,4 +1654,3 @@ void func_00018D74(void) {
 s32 func_00018D90(void) {
     return 0x30000000;
 }
-

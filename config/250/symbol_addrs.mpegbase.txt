@@ -23,3 +23,10 @@ sceDmacplus_driver_3438DA0B = 0x00001938; // type:func
 sceDmacplus_driver_58DE4914 = 0x00001940; // type:func
 sceDmacplus_driver_2D5940FF = 0x00001948; // type:func
 sceDmacplus_driver_AB49D2CB = 0x00001950; // type:func
+// shared names (tools/add_version.py) begin
+func_00000D78 = 0x00000D14; // type:func rom:0xD94
+func_00000DA8 = 0x00000D44; // type:func rom:0xDC4
+func_00000E68 = 0x00000E04; // type:func rom:0xE84
+func_00001020 = 0x00000FBC; // type:func rom:0x103C
+func_00001130 = 0x000010CC; // type:func rom:0x114C
+// shared names (tools/add_version.py) end

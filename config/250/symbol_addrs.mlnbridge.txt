@@ -14,3 +14,5 @@ sceMgr_driver_A45A63B6 = 0x000013A0; // type:func
 sceMgr_driver_19B8F2D0 = 0x000013A8; // type:func
 sceMgr_driver_A44A5538 = 0x000013B0; // type:func
 sceMgr_driver_A1F6D85A = 0x000013B8; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "ata_decls.h"
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/ata", D_00003F1C);
 #endif
 
@@ -82,7 +82,7 @@ void sceAta_driver_110D3739(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", func_0000104C);
 #endif
 
@@ -112,7 +112,13 @@ INCLUDE_ASM("nonmatchings/ata", sceAta_driver_6DE1C65F);
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_BA09142A);
 
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_C7B02795);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/ata", sceAta_driver_EFE3C7FA);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceAta_driver_1C29566B(void) {
     return D_00004328;
 }
@@ -578,7 +584,7 @@ INCLUDE_ASM("nonmatchings/ata", sceAta_driver_0B53CAD8);
 
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_010F750B);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", func_0000251C);
 #endif
 
@@ -722,6 +728,12 @@ INCLUDE_ASM("nonmatchings/ata", sceAta_driver_BDD30DEE);
 INCLUDE_ASM("nonmatchings/ata", func_00002F1C);
 
 INCLUDE_ASM("nonmatchings/ata", func_000030F8);
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/ata", sceAta_driver_FC7B031E);
+
+INCLUDE_ASM("nonmatchings/ata", func_0000349C);
 #endif
 
 #if FW_VERSION == 100

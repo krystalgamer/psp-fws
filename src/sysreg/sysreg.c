@@ -469,20 +469,24 @@ INCLUDE_ASM("nonmatchings/sysreg", func_00001814);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_3EA188AD);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/sysreg", D_00002B78_v250);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002538);
 
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002578);
+#endif
+
+#if FW_VERSION >= 250
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_25673620);
 #else
 s32 sceSysreg_driver_25673620(void) {
     InterruptManagerForKernel_58DD8978(0x1F, 1, &func_00001814, 0, &D_00002BD0);
     InterruptManagerForKernel_4D6E7305(0x1F);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_25673620);
 #endif
 
 s32 sceSysreg_driver_4EE8E2C8(void) {

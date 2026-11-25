@@ -11,7 +11,11 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_F8FC359E);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_D0189004);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 250
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A70FDFBE);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000008C4);
 #endif
 
@@ -19,7 +23,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000008C4);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000718);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A80);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A9C);
@@ -34,8 +38,6 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000590);
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A70FDFBE);
-
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A2C);
 #endif
 
@@ -47,7 +49,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_2B6FB0DA);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_C421875C);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A70FDFBE);
 #endif
 
@@ -79,7 +81,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_469F6B83);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001950);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001BD8);
 #endif
 
@@ -119,7 +121,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_378D4311);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_BF1433F0);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_0000200C);
 #endif
 
@@ -139,8 +141,40 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002150);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000021C4);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000021F0);
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002264);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002280);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000022A8);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002300);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_3B6A7B35);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_8A987F07);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_4C542FD1);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A45230D9);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_48F87AB1);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_0A531FBE);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002D64);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002F34);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002FDC);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00003298);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00003310);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -217,7 +251,9 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002FD8);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00003294);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_0000330C);
+#endif
 
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_48252AF0);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_827157E2);

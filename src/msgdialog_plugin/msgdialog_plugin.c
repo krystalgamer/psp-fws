@@ -102,11 +102,19 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000138C);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013A4);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001298);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012B4_v250);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012B4_v201);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012D8);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012F8);
@@ -118,9 +126,17 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000133C);
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001360);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001384);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013A4_v250);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013A4_v201);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013C4);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013E4);
@@ -128,9 +144,17 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013E4);
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001400);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000141C);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001434_v250);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001434_v201);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001450);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000146C);
@@ -142,7 +166,7 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000014A8);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013CC);
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013E8);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000140C);
@@ -212,7 +236,7 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001784);
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000179C);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000017B4);
 #endif
 
@@ -224,7 +248,7 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001808);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000182C);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001518);
 #endif
 
@@ -238,12 +262,16 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000018B8);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000018E0);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001604);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001434);
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000163C);
 #endif
 
 #if FW_VERSION == 201

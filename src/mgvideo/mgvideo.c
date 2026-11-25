@@ -339,6 +339,17 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_000056F4);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00005730);
 
+#if FW_VERSION == 250
+s32 func_00005850(s32 arg0) {
+    void *sp0;
+    s32 var_v1;
+
+    if ((sceRtc_driver_B44BDAED(&sp0) >= 0) || ((var_v1 = -2, (func_000055A8(&sp0, arg0) >= 0)) && (var_v1 = -3, (sceRtc_driver_17C26C00(&sp0) >= 0)))) {
+        var_v1 = 0;
+    }
+    return var_v1;
+}
+#else
 s32 func_00005850(s32 arg0) {
     void *sp0;
     s32 var_v1;
@@ -349,6 +360,7 @@ s32 func_00005850(s32 arg0) {
     }
     return var_v1;
 }
+#endif
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_000060F0);
 

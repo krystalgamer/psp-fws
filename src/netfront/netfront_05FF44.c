@@ -37,4 +37,3 @@ s32 func_0005FFB8(s32 **arg0) {
 s32 func_0005FFD8(s32 **arg0) {
     return sceHVNetfront_Module_896E55F6(arg0) + 0x28;
 }
-

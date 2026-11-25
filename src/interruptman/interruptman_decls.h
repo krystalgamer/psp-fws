@@ -22,6 +22,7 @@ extern s32 D_00003F94;
 extern s32 D_00003F98;
 extern s32 D_00003F9C;
 extern s32 D_00003FA0;
+extern s32 D_00004ABC;
 extern s32 D_00004E7C;
 
 M2C_UNK *InterruptManagerForKernel_00B6B0F3(void);

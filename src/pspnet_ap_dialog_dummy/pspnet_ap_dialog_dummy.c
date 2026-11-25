@@ -11,9 +11,13 @@ INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", sceNetApDialogDummyGetState);
 
 INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", func_00000228);
 
-#if FW_VERSION < 270
+#if FW_VERSION >= 250
+INCLUDE_RODATA("nonmatchings/pspnet_ap_dialog_dummy", D_000007BC);
+#endif
+
 INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", func_00000294);
 
+#if FW_VERSION < 250
 s32 module_start(void) {
     return 0;
 }
@@ -35,8 +39,4 @@ INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", func_0000077C);
 INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", func_000007AC);
 
 INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", func_000007E4);
-#else
-INCLUDE_RODATA("nonmatchings/pspnet_ap_dialog_dummy", D_000007BC);
-
-INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", func_00000294);
 #endif

@@ -15,4 +15,3 @@ s32 module_stop(s32 arg0, s32 arg1) {
 void sceVshLftvMw_1D3D9AE0(void) {
     func_00050620();
 }
-

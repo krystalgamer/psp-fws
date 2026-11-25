@@ -41,7 +41,7 @@ INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001420);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001434);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_0000076C(void) {
     s32 temp_v0;
     void *temp_v0_2;
@@ -181,7 +181,7 @@ INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001658);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_0000166C);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001734);
 #endif
 
@@ -237,7 +237,11 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00000A90);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000AE0);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/opening_plugin", func_00000E44);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 void func_00000E00(void) {
     scePower_DB62C9CF();
     sceKernelPowerUnlock(0);
@@ -294,7 +298,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00000F48);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000F78);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
 void func_00000FFC(M2C_UNK **arg0) {
     *arg0 = &D_00001648;
     scePaf_4E67BB08();
@@ -303,7 +307,7 @@ void func_00000FFC(M2C_UNK **arg0) {
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00001024);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001638);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001648);

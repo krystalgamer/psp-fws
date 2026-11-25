@@ -41,6 +41,7 @@ struct Unk_func_00004254_0 {
     u8 unk1F2;
 };
 
+extern M2C_UNK D_00009F31;
 extern M2C_UNK D_0000BB45;
 extern s32 D_0000BBD0;
 extern s32 D_0000BBD4;

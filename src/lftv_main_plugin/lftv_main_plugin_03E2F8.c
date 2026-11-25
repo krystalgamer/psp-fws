@@ -2,6 +2,7 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
+#if FW_VERSION == 282
 s32 func_0003E2F8(void) {
     s32 var_v1;
 
@@ -50,4 +51,4 @@ s32 func_0003E618(struct Unk_func_0003E5C0_0 *arg0, u32 arg1, void *arg2, void *
     }
     return var_v1;
 }
-
+#endif

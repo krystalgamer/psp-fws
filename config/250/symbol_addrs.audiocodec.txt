@@ -17,3 +17,5 @@ sceMeAudio_driver_BAC7C2BE = 0x00000C8C; // type:func
 sceMeAudio_driver_39F06790 = 0x00000C94; // type:func
 sceMeMemory_driver_A177798D = 0x00000C9C; // type:func
 sceMeMemory_driver_5AD660FA = 0x00000CA4; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

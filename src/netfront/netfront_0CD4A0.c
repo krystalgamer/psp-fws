@@ -461,7 +461,11 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6AD0);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6BFC);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D0F94);
+#else
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6EF4);
+#endif
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7164);
 
@@ -510,6 +514,201 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D86CC);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D87CC);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAD54);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAE04);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D2AB4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D2AC4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D2B00);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAEDC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D2B6C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAF58);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D2BE4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAFD0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB014);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB05C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB0B0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D2D5C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D2DB0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D2E10);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D2E7C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB2A0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D2F4C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB358);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB39C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB3E0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D309C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3108);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3184);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D31C4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3204);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3254);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB648);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB664);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D32D0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D32EC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3308);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3324);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3340);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB734);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB740);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D339C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D33F0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3444);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3488);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D34FC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3540);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D35AC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EB9B0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3664);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D36B8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D371C_v250);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D37AC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3928);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3AD4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3B28);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3B44);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3B50);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3C54);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3C60);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3C7C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EC040);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EC158);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EC1C0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3ED8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3EE8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3EFC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3F08);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3F24);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EC2D4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EC2F0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EC2FC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3F74);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EC324);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3FAC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3FB4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3FD0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3FD8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D3FF4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4038);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D40D4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4120);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D42F4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4384);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D43F4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D44AC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D459C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D46C0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4934);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4AAC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4B44);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4B64);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4B80);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4BDC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4C5C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4CDC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4D2C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4DD8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4E7C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4ED8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D5050);
+#else
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", inflateReset);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", inflateInit2_);
@@ -524,6 +723,7 @@ void fixedtables(struct Unk_fixedtables_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", updatewindow);
+#endif
 
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_00129DF4);
 
@@ -545,6 +745,201 @@ INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012A748);
 
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012A788);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012DB08);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D5154);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D537C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D5528);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D55DC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D566C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D56A0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D5984);
+
+INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012DBCC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D5D40);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EE138);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D5DA0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D5DD4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D5E5C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D5ED4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D60BC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D61C0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6224);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6270);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D62CC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D63D8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D654C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6640);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6704);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D67C4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D689C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6984);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6AD4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EEF40);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EEF48);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EEF54);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6BC4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6BDC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6C28);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6CCC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6D88);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6DA4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6DC0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6DDC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6DE4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D6F0C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7108);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D72DC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7408);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7410);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7418);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7420);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D759C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D76F4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EFBB8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7824);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D784C_v250);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D78C4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7930);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7984);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D79F4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7A30);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7AA8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7AF8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7B4C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7BA4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7CE4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D7ED0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D8168);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D8238);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D8384);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D8464);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D84C8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D85B8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D88A8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D89A4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D89F8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D8BDC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D8C68);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D8E20);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D8EC8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D8F5C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D8FDC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D90B4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000F1458);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D91B0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D91D8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9218);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_00006048);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9288);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D92E8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9364);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9380);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D939C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D93B8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D93EC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9410);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_00006268);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D94A4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D94AC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D960C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D96A0);
+#else
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012A78C);
 
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012AF8C);
@@ -599,9 +994,45 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_85C2B45D);
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B3A4);
 
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B3B4);
+#endif
 
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B3C0);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9788);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D982C);
+
+INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_00121C34);
+
+INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_00121C38_v250);
+
+INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_00121CB4);
+
+INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_00121DB4);
+
+INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_00121DB8);
+
+INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_00121DE4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D99E8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9A60);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9AE4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9B68);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9D3C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9EB0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D9EE4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA000);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA048);
+#else
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B3C4);
 
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B3D0);
@@ -617,17 +1048,147 @@ INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B410);
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B428);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAC40);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAC4C);
+#else
 s32 func_000DAC4C(void) {
     return 0x55;
 }
+#endif
 
+#if FW_VERSION == 250
+void func_00007570(void) {
+
+}
+
+void func_00007578(void) {
+
+}
+
+void func_00007580(void) {
+
+}
+
+void func_00007588(void) {
+
+}
+
+void func_00007590(void) {
+
+}
+
+void func_00007598(void) {
+
+}
+
+s32 func_000075A0(void) {
+    return 1;
+}
+
+void func_000075A8(void) {
+
+}
+
+s32 func_000075B0(void) {
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA4E8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA4F0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA4F8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA500);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA508);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA510);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA518);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA520);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA554);
+#else
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAC54);
+#endif
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAC74);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA578);
+#endif
+
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAC94);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA5B0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA5CC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA664);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA7B4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA82C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA9B8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA9EC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAB44);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAB98);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAD0C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAD14);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAD70);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DADB4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAE18);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAE74);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAEE8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAF24);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAFD0);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB018);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB038);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB054);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB148);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB19C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB264);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB32C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB3F4);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB4BC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB52C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB59C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB60C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB67C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB7A4);
+#else
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", adler32);
 
 M2C_UNK *get_crc_table(void) {
@@ -647,6 +1208,7 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB6A4);
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_108703C2);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_09FA691C);
+#endif
 
 void func_000DBD14(void) {
     func_000E6350();
@@ -654,7 +1216,11 @@ void func_000DBD14(void) {
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DBD30);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB9E8);
+#else
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_26B067E3);
+#endif
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC000);
 
@@ -662,13 +1228,23 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC0FC);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC158);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DBC60);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DBD70);
+#else
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_20D27DB1);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_1171FA01);
+#endif
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC408);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DBFD4);
+#else
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_F6376D31);
+#endif
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC61C);
 
@@ -724,7 +1300,11 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DEE74);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DF168);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DECCC);
+#else
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_AB30BEB4);
+#endif
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DF380);
 
@@ -1178,6 +1758,7 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAAAC);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAD18);
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAD54);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAE04);
@@ -1470,4 +2051,4 @@ void func_000EBE7C(s32 arg0, M2C_UNK arg1, s32 *arg2) {
 void func_000EBED0(s32 arg0) {
     func_000F0F48(arg0 + 0xC);
 }
-
+#endif

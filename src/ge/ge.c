@@ -4,6 +4,10 @@
 
 INCLUDE_ASM("nonmatchings/ge", func_00000000);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/ge", D_00005878);
+#endif
+
 #if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/ge", D_00004C94);
 #endif
@@ -36,7 +40,7 @@ INCLUDE_ASM("nonmatchings/ge", sceGeSaveContext);
 
 INCLUDE_ASM("nonmatchings/ge", sceGeRestoreContext);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_000018B8(s32 arg0) {
     func_00001908(2, 0, arg0, 0);
 }
@@ -46,7 +50,15 @@ void func_000018E0(s32 arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/ge", func_00001908);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/ge", D_000058B0);
+
+INCLUDE_RODATA("nonmatchings/ge", D_000058B8);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/ge", D_00004CC4);
 
 INCLUDE_RODATA("nonmatchings/ge", D_00004CE4);
@@ -105,7 +117,7 @@ s32 sceGe_driver_9DA4A75F(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_00001FA4(s32 arg0) {
     func_00001908(1, arg0, 0, 0);
 }
@@ -186,9 +198,19 @@ INCLUDE_ASM("nonmatchings/ge", func_0000102C);
 INCLUDE_ASM("nonmatchings/ge", func_000010CC);
 
 INCLUDE_ASM("nonmatchings/ge", sceGe_driver_8F185DF7);
+#endif
 
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/ge", sceGeEdramGetSize);
+#endif
 
+#if FW_VERSION == 250
+u32 sceGeEdramGetSize(void) {
+    return D_00006600;
+}
+#endif
+
+#if FW_VERSION < 282
 void *sceGeEdramGetAddr(void) {
     return (void *)0x04000000;
 }
@@ -212,6 +234,12 @@ INCLUDE_RODATA("nonmatchings/ge", D_00002A34);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/ge", D_00003174);
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/ge", func_00002880);
+
+INCLUDE_ASM("nonmatchings/ge", func_00002CCC);
 #endif
 
 #if FW_VERSION == 201
@@ -240,16 +268,41 @@ INCLUDE_ASM("nonmatchings/ge", sceGeContinue);
 INCLUDE_ASM("nonmatchings/ge", sceGeSetCallback);
 #endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/ge", sceGe_driver_AEC21518);
+
+INCLUDE_ASM("nonmatchings/ge", sceGe_driver_7B481502);
+
+INCLUDE_ASM("nonmatchings/ge", sceGe_driver_9ACFF59D);
+#endif
+
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/ge", sceGe_driver_3EFC0D64);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", sceGe_driver_67B01D8E);
 
 INCLUDE_ASM("nonmatchings/ge", sceGe_user_E66CB92E);
 #endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/ge", func_000043CC);
+
+INCLUDE_ASM("nonmatchings/ge", func_0000447C);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", func_00002738);
+#endif
+
+#if FW_VERSION == 250
+s32 func_00004C44(void) {
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00007640, s32, 0x18));
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00007640, s32, 0x1C));
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00007640, s32, 0x20));
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 201
@@ -351,7 +404,7 @@ s32 func_00004C44(void) {
 INCLUDE_ASM("nonmatchings/ge", func_000021C4);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3) {
     return func_0000428C((s32) arg0, (s32) arg1, arg2, (s32) arg3, 0);
 }
@@ -369,7 +422,7 @@ s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3) {
     return func_0000428C((s32) arg0, (s32) arg1, arg2, (s32) arg3, 1);
 }
@@ -429,11 +482,19 @@ s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3) {
 
 INCLUDE_ASM("nonmatchings/ge", sceGeUnsetCallback);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", func_000040EC);
 
 INCLUDE_ASM("nonmatchings/ge", func_0000413C);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/ge", func_00004C30);
+
+INCLUDE_ASM("nonmatchings/ge", func_00004D40);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", func_0000428C);
 
 INCLUDE_ASM("nonmatchings/ge", func_000046DC);

@@ -6,10 +6,12 @@ INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_0D560144);
 
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_CA8B8909);
 
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_BE0998D7);
-#else
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_F3787AD8);
+#endif
+
+#if FW_VERSION < 340
+INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_BE0998D7);
 #endif
 
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_9FF48DD3);
@@ -50,11 +52,15 @@ void sceDNAS_lib_BE0998D7(void) {
 
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_A646E771);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 250
+INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_6929100C);
+#else
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_2D424791);
 
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_79528BDB);
+#endif
 
+#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/libdnas", func_0000045C);
 
 INCLUDE_ASM("nonmatchings/libdnas", func_000004E8);
@@ -99,8 +105,6 @@ INCLUDE_ASM("nonmatchings/libdnas", func_00001DAC);
 
 INCLUDE_ASM("nonmatchings/libdnas", func_00001E44);
 #else
-INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_6929100C);
-
 INCLUDE_ASM("nonmatchings/libdnas", func_0000079C);
 
 INCLUDE_ASM("nonmatchings/libdnas", func_00000804);

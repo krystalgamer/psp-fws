@@ -29,7 +29,7 @@ INCLUDE_ASM("nonmatchings/libupdown", func_000007B4);
 
 INCLUDE_ASM("nonmatchings/libupdown", func_00000A24);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libupdown", func_00000C1C);
 #endif
 
@@ -91,7 +91,7 @@ INCLUDE_RODATA("nonmatchings/libupdown", D_00003310);
 INCLUDE_RODATA("nonmatchings/libupdown", D_00003320);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libupdown", func_00001944);
 #endif
 

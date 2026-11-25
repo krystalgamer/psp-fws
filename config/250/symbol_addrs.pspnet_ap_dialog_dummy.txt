@@ -12,3 +12,7 @@ sceNet_lib_B5CE388A = 0x00000628; // type:func
 sceUtility_netparam_internal_072DEBF2 = 0x00000630; // type:func
 sceUtility_netparam_internal_9CE50172 = 0x00000638; // type:func
 sceUtility_netparam_internal_FC4516F3 = 0x00000640; // type:func
+// shared names (tools/add_version.py) begin
+D_000009A0 = 0x000007F0; // rom:0x870
+D_000009B0 = 0x00000800;
+// shared names (tools/add_version.py) end

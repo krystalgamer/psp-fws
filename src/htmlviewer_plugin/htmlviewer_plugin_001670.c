@@ -2,6 +2,7 @@
 #include "common.h"
 #include "htmlviewer_plugin_decls.h"
 
+#if FW_VERSION == 282
 void func_00001670(void) {
     s32 temp_v0;
     s32 temp_v0_3;
@@ -25,20 +26,29 @@ void func_00001670(void) {
         }
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001760);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001840);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001890);
+#endif
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_000018EC);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001A1C);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_0000142C);
+
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_0000167C);
+#else
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001B94);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00002178);
+#endif
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_000022A4);
 
@@ -72,6 +82,9 @@ void func_000026F8(void) {
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00002764);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_0000278C);
+#else
 void func_0000278C(void) {
     s32 temp_v0;
     struct Unk_func_0000278C_temp_v0_2 *temp_v0_2;
@@ -90,8 +103,12 @@ void func_000027E8(void) {
     func_00005014();
     scePaf_66907719();
 }
+#endif
 
 void func_0000280C(void) {
     func_000050D0();
 }
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001C9C);
+#endif

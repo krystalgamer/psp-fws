@@ -1,6 +1,7 @@
 #include "common.h"
 #include "htmlviewer_plugin_decls.h"
 
+#if FW_VERSION == 282
 s32 func_000039A4(void) {
     return D_00008244;
 }
@@ -60,6 +61,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003D74);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003D9C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003E2C);
+#endif
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00004008);
 
@@ -67,7 +69,11 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_0000411C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000042C4);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000032A0);
+#else
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000043F8);
+#endif
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000044CC);
 
@@ -77,5 +83,6 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000045D8);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00004688);
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000046E4);
-
+#endif

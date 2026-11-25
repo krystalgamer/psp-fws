@@ -42,11 +42,13 @@ INCLUDE_ASM("nonmatchings/netfront_111AB8", func_00112668);
 
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_0011290C);
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_00112E64);
 
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_00112EB8);
 
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_00112F4C);
+#endif
 
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_00113170);
 
@@ -96,6 +98,7 @@ s32 func_001135A8(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_00113610);
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_001136B4);
 
 u32 func_001136F0(s32 arg0) {
@@ -156,4 +159,4 @@ void func_00113DA4(s32 arg0) {
 void func_00113DC0(s32 arg0) {
     func_001145FC(arg0 & 0xFFFF);
 }
-
+#endif

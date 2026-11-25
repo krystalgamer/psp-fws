@@ -6,6 +6,10 @@ s32 sceFatMS_driver_BCB9DEDB(void) {
     return 0;
 }
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00000020_v250);
+#endif
+
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000020_v201);
 #endif
@@ -106,15 +110,29 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000B1C);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000BDC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023A20);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_000009F4);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000009FC);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023A30);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023A34);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_000243D8);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023A38);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000009A0);
@@ -152,9 +170,11 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023B84);
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023B88);
 #endif
 
+#if FW_VERSION != 250
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023B8C);
+#endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023BAC);
 #endif
 
@@ -204,7 +224,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00001A18);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000152C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023B5C);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023B78);
@@ -242,7 +262,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00001DCC);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00001EA4);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000020A0);
 #endif
 
@@ -312,13 +332,21 @@ s32 func_00002B48(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003950);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023E70);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00003AA8);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000039E8_v201);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003B98);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003C04);
@@ -622,6 +650,10 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000050E4);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005124);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00004DA8);
+#endif
+
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000311C);
 #else
@@ -638,7 +670,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000527C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000052D0);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004E24);
 #endif
 
@@ -649,7 +681,7 @@ void func_0000326C(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023F2C);
 #endif
 
@@ -730,7 +762,7 @@ s32 func_00004600(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000062F8);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006338);
@@ -780,7 +812,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00006A54);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006B10);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000066BC);
 #endif
 
@@ -804,7 +836,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00006C68);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000075CC);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002435C);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_000243DC);
@@ -816,7 +848,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002445C);
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_0001656C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002455C);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_000245DC);
@@ -836,7 +868,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_0001666C);
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_000166EC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002495C);
 #endif
 
@@ -928,13 +960,21 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00007A5C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007AB4);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007684);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000076CC);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00007878);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007718_v201);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007760);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000077A8);
@@ -950,9 +990,17 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000078D4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007920);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007974);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00007B2C);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000079CC_v201);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007A48);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007A9C);
@@ -1014,7 +1062,13 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00008AC8);
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024A24);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024BF0);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00008CF8);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00008B98);
 #endif
 
@@ -1024,7 +1078,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00004FAC);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005118);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000931C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00009C74);
@@ -1034,7 +1088,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00009C74);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000565C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00009D50);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00009E3C);
@@ -1044,7 +1098,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00009E3C);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000056FC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00009F34);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00009FA0);
@@ -1060,9 +1114,15 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000060D4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006148);
 #endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B59C);
+#endif
+
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B440_v201);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B574);
 #endif
 
@@ -1070,13 +1130,29 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B574);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000627C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B738);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C66C);
+
+INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C700);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C4FC);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_0000CA8C);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C62C);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C75C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C7A8);
@@ -1094,10 +1170,16 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00008230);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00008274);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000DA6C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000DBD4);
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_0000E0B8);
+
+INCLUDE_ASM("nonmatchings/fatmsmod", func_0000E42C);
 #endif
 
 #if FW_VERSION == 100
@@ -1110,7 +1192,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000072F0);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000764C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000E050);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000E0BC);
@@ -1120,7 +1202,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000E0BC);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000076F4);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000E278);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000E344);
@@ -1142,7 +1224,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00007BD4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007C30);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000EB9C);
 #endif
 
@@ -1166,7 +1248,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00008EFC);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00009018);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000FDA0);
 #endif
 
@@ -1178,7 +1260,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000090A8);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00009398);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001028C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00010420);
@@ -1208,7 +1290,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000A128);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000A3AC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00011318);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000113C4);
@@ -1226,11 +1308,13 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000A744);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000A7C0);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000A82C);
+#endif
 
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000A90C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00011A58);
 #endif
 
@@ -1240,9 +1324,17 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000A99C);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000AAC4);
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_000125A8);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000AB38);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000ABF8);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000ACF8);
@@ -1252,7 +1344,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000AD4C);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000AE30);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012280);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000122FC);
@@ -1266,7 +1358,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000AFD0);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B1D8);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000128A4);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012B7C);
@@ -1280,7 +1372,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B440);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B50C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012D40);
 #endif
 
@@ -1300,7 +1392,7 @@ void func_0000B57C(void) {
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B5CC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012E64);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012F30);
@@ -1312,7 +1404,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B650);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B71C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00013110);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000131D8);
@@ -1348,7 +1440,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B818);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B978);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00013684);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000136FC);
@@ -1364,7 +1456,7 @@ void func_0000BA20(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001375C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000137A4);
@@ -1378,7 +1470,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00013810);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BA44);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BAF8);
 #endif
 
@@ -1400,7 +1492,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BB3C);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BBAC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00013A44);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00013B38);
@@ -1416,7 +1508,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BC38);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BC84);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00013C58);
 #endif
 
@@ -1430,10 +1522,14 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BD30);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BE6C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00013FE0);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00014240);
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00014AB8);
 #endif
 
 #if FW_VERSION < 282
@@ -1444,7 +1540,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C108);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000D3B8);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000144A8);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001467C);
@@ -1454,7 +1550,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0001467C);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C120);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00014AF8);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00014E4C);
@@ -1466,7 +1562,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00007AEC);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007C04);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024BE0);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024BF0);
@@ -1476,7 +1572,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024BF0);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C3C0);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000152C0);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00015468);
@@ -1812,7 +1908,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00015508);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000155DC);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000163EC);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00016484);
@@ -1830,7 +1926,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0001577C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00015908);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000166C4);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001675C);
@@ -1850,7 +1946,7 @@ s32 func_0000CC88(void) {
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000CC94);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00017164);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00017A14);
@@ -1862,7 +1958,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000183CC);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000D440);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00018520);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00018638);
@@ -1914,7 +2010,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00018570);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000DCF4);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00019430);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00019A48);
@@ -1931,7 +2027,7 @@ s32 func_0000E5E8(void) {
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000E5F8);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001A1B8);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001A630);
@@ -1985,7 +2081,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0001A518);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001A620);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024BA0);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024BA4);
@@ -2049,7 +2145,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000F8A4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000F8F8);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001BEB0);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001C304);
@@ -2077,7 +2173,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000FF1C);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00010238);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001D1FC);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001DA7C);
@@ -2087,7 +2183,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0001DA7C);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00010A64);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001E46C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001EE2C);
@@ -2097,7 +2193,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0001EE2C);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00011430);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001F234);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001F448);
@@ -2109,7 +2205,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000117FC);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000118E4);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001F594);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001F5E8);
@@ -2123,7 +2219,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00011AB4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012480);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00020690);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00020984);
@@ -2135,7 +2231,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00012710);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012788);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00020C0C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00020DC8);
@@ -2145,7 +2241,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00020DC8);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012964);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000216E0);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00022054);
@@ -2155,7 +2251,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00022054);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00013240);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000221CC);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00022314);
@@ -2167,7 +2263,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0001337C);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00013E3C);
 #endif
 
-#if FW_VERSION != 201
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024DBC);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024DC0);
@@ -2189,7 +2285,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00013EE0);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00014220);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0002329C);
 #endif
 
@@ -2201,7 +2297,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00015884);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000158BC);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00023368);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00023384);

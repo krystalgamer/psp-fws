@@ -272,7 +272,7 @@ void func_00000888(void **arg0, void **arg1) {
     func_000008A8(arg0);
 }
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_000008A8(void **arg0) {
     void *temp_a0;
 
@@ -289,7 +289,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", func_00005434);
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00005458);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_000008D4);
 #endif
 

@@ -51,7 +51,7 @@ INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_D2B2A2A7);
 
 INCLUDE_ASM("nonmatchings/stdio", getchar);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/stdio", gets);
 #endif
 
@@ -61,7 +61,7 @@ void gets(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/stdio", StdioForUser_3054D478);
 #endif
 
@@ -71,7 +71,7 @@ s32 StdioForUser_3054D478(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/stdio", StdioForUser_0CBB0571);
 #endif
 
@@ -81,7 +81,7 @@ s32 StdioForUser_0CBB0571(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/stdio", StdioForUser_A46785C9);
 
 INCLUDE_ASM("nonmatchings/stdio", StdioForUser_A3B931DB);
@@ -121,7 +121,7 @@ INCLUDE_ASM("nonmatchings/stdio", func_00000B00);
 INCLUDE_RODATA("nonmatchings/stdio", D_000010A8);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/stdio", D_0000147C);
 
 INCLUDE_RODATA("nonmatchings/stdio", D_000014D4);
@@ -288,7 +288,7 @@ INCLUDE_RODATA("nonmatchings/stdio", D_00001298);
 INCLUDE_RODATA("nonmatchings/stdio", D_000012B0);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/stdio", D_0000157C);
 
 INCLUDE_ASM("nonmatchings/stdio", func_0000100C);

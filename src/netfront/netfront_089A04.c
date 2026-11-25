@@ -45,4 +45,3 @@ INCLUDE_ASM("nonmatchings/netfront_089A04", func_0008A010);
 s32 func_0008A040(struct Unk_func_0008A040_0 *arg0) {
     return arg0->unkC == 0;
 }
-

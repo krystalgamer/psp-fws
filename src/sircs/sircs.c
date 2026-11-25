@@ -85,7 +85,20 @@ s32 func_00000554(void) {
 }
 
 INCLUDE_ASM("nonmatchings/sircs", module_start);
+#endif
 
+#if FW_VERSION == 250
+s32 func_00000634(void) {
+    InterruptManagerForKernel_F987B1F0(0xE);
+    sceKernelDeleteSema(M2C_VFIELD(&D_00002148, s32, 0x10));
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_00002148, s32, 0x14));
+    func_00001AB0();
+    func_00000518();
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 282
 s32 module_reboot_before(void) {
     sceGpio_driver_310F0CCF(4);
     sceSysreg_driver_20388C9E();
@@ -146,13 +159,17 @@ s32 func_00001718(void) {
 
 INCLUDE_RODATA("nonmatchings/sircs", D_0000263C);
 
+#if FW_VERSION == 250
+INCLUDE_RODATA("nonmatchings/sircs", D_00001F38);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/sircs", D_00002648);
 #endif
 
 INCLUDE_RODATA("nonmatchings/sircs", D_000026A0);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 250
 INCLUDE_RODATA("nonmatchings/sircs", D_000026A8);
 #endif
 
@@ -208,9 +225,17 @@ INCLUDE_ASM("nonmatchings/sircs", func_00001A14);
 s32 func_00001394(void) {
     return D_00002100;
 }
+#endif
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/sircs", func_0000139C);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/sircs", func_000013A0);
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_00001A74(void) {
     return D_00002724;
 }

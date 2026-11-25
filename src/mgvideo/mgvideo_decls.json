@@ -24,7 +24,8 @@
   "sceMgr_driver_4A14DD18": "s32 sceMgr_driver_4A14DD18(s32, s32, s32);",
   "sceMgr_driver_DB12BB23": "s32 sceMgr_driver_DB12BB23(s32, s32, s32);",
   "sceMgr_driver_F30E22CF": "s32 sceMgr_driver_F30E22CF(M2C_UNK);",
-  "sceRtc_driver_17C26C00": "s32 sceRtc_driver_17C26C00(void *);"
+  "sceRtc_driver_17C26C00": "s32 sceRtc_driver_17C26C00(void *);",
+  "sceRtc_driver_B44BDAED": "s32 sceRtc_driver_B44BDAED(void *);"
  },
  "types": {
   "Unk_func_0000038C_0": "struct Unk_func_0000038C_0 {\n    s32 unk0;\n    u32 unk4;\n};",

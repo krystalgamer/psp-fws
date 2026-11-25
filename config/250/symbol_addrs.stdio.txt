@@ -44,3 +44,13 @@ sceKernelSendMsgPipe = 0x00001184; // type:func
 sceKernelReceiveMsgPipe = 0x0000118C; // type:func
 sceKernelCancelMsgPipe = 0x00001194; // type:func
 sceKernelReferMsgPipeStatus = 0x0000119C; // type:func
+// shared names (tools/add_version.py) begin
+D_000010A8 = 0x00001474; // rom:0x14F4
+D_00001298 = 0x00001544; // rom:0x15C4
+D_000012B0 = 0x00001558; // rom:0x15D8
+D_00001560 = 0x00001590; // rom:0x1610
+D_00001564 = 0x00001594; // rom:0x1614
+D_00001568 = 0x00001598; // rom:0x1618
+D_00001290 = 0x000015B8;
+func_00000C78 = 0x00000C64; // type:func rom:0xCE4
+// shared names (tools/add_version.py) end

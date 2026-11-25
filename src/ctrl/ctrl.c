@@ -8,7 +8,7 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_E03956E9);
 
 INCLUDE_ASM("nonmatchings/ctrl", func_000001C0);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ctrl", func_00000300);
 #endif
 
@@ -156,7 +156,7 @@ s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_348D99D4);
 #endif
 
@@ -254,7 +254,7 @@ s32 func_00001214(void) {
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ctrl", func_00001544);
 
 s32 func_000015C0(void) {

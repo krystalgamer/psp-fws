@@ -13,6 +13,10 @@ INCLUDE_ASM("nonmatchings/uart4", func_00000154);
 
 INCLUDE_ASM("nonmatchings/uart4", Uart4ForKernel_D00E3D06);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/uart4", Uart4ForKernel_4E9CBD00);
+#endif
+
 INCLUDE_ASM("nonmatchings/uart4", Uart4ForKernel_A68555F7);
 
 INCLUDE_ASM("nonmatchings/uart4", Uart4ForKernel_C703109F);
@@ -48,7 +52,9 @@ INCLUDE_ASM("nonmatchings/uart4", func_0000034C);
 void func_00000504(void) {
     Uart4ForKernel_D00E3D06();
 }
-#else
+#endif
+
+#if FW_VERSION == 201
 void func_00000398(void) {
     Uart4ForKernel_D00E3D06();
 }
@@ -66,8 +72,14 @@ INCLUDE_ASM("nonmatchings/uart4", Uart4ForKernel_2518C2F3);
 
 INCLUDE_ASM("nonmatchings/uart4", Uart4ForKernel_2FD96F62);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/uart4", Uart4ForKernel_393E7F51);
+#endif
+
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/uart4", syslib_D3744BE0);
+
+INCLUDE_ASM("nonmatchings/uart4", func_0000047C);
 #else
 s32 syslib_D3744BE0(void) {
     s32 temp_s0;
@@ -83,10 +95,6 @@ s32 syslib_D3744BE0(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/uart4", func_0000047C);
-#endif
-
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/uart4", func_00000504_v152);
 #endif
@@ -95,7 +103,7 @@ INCLUDE_ASM("nonmatchings/uart4", func_00000504_v152);
 INCLUDE_ASM("nonmatchings/uart4", func_00000504_v150);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/uart4", func_00000504);
 #endif
 

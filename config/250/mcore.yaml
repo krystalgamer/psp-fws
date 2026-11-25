@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/250/.splat_cache.mcore
   symbol_addrs_path:
     - config/250/symbol_addrs.mcore.txt
+    - config/250/func_starts.mcore.txt
     - tmp/build/250/prx_syms.mcore.txt
   reloc_addrs_path: [tmp/build/250/reloc_addrs.mcore.txt]
   asset_path: tmp/assets/250/mcore
@@ -52,7 +53,11 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, mcore]
+      - [0x80, c, mcore]
+      - [0x18E18, c, mcore_018D98]
+      - [0x19A50, c, mcore_0199D0]
+      - [0x20398, c, mcore_020318]
+      - [0x240CC, c, mcore_02404C]
       - { start: 0x284F0, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x28628, type: prxpad, order: .text }
       - { start: 0x28630, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +69,11 @@ segments:
       - { start: 0x286DC, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x28710, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x287E0, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x2887C, rodata, mcore]
+      - [0x2887C, .rodata, mcore]
+      - [0x29968, .rodata, mcore_018D98]
+      - [0x299BC, .rodata, mcore_0199D0]
+      - [0x29FF0, .rodata, mcore_020318]
+      - [0x2CC0C, .rodata, mcore_02404C]
       - { start: 0x2CF6C, type: prxpad, order: .rodata }
   - name: mcore_seg1
     type: code

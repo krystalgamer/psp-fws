@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0D5868", func_000D5868);
 #else
 void func_000D5868(struct Unk_func_000D5868_0 *arg0) {
@@ -39,7 +39,7 @@ INCLUDE_RODATA("nonmatchings/paf_0D5868", D_001999FC);
 
 INCLUDE_RODATA("nonmatchings/paf_0D5868", D_00199A10);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0D5868", func_0007C0CC);
 #else
 INCLUDE_ASM("nonmatchings/paf_0D5868", func_000D591C);
@@ -47,7 +47,7 @@ INCLUDE_ASM("nonmatchings/paf_0D5868", func_000D591C);
 
 INCLUDE_ASM("nonmatchings/paf_0D5868", func_000D59E8);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0D5868", func_0007C264);
 #else
 INCLUDE_ASM("nonmatchings/paf_0D5868", func_000D5AF8);
@@ -87,9 +87,15 @@ INCLUDE_RODATA("nonmatchings/paf_0D5868", D_00199A98);
 
 INCLUDE_RODATA("nonmatchings/paf_0D5868", D_00199A9C);
 
+#if FW_VERSION == 150
+INCLUDE_RODATA("nonmatchings/paf_0D5868", D_0011B960);
+#endif
+
 #if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/paf_0D5868", D_0012DFF0);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/paf_0D5868", D_00199AA0);
 #endif
 

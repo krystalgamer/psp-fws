@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/250/.splat_cache.netfront
   symbol_addrs_path:
     - config/250/symbol_addrs.netfront.txt
+    - config/250/func_starts.netfront.txt
     - tmp/build/250/prx_syms.netfront.txt
   reloc_addrs_path: [tmp/build/250/reloc_addrs.netfront.txt]
   asset_path: tmp/assets/250/netfront
@@ -52,7 +53,21 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, netfront]
+      - [0x80, c, netfront]
+      - [0x62F4, c, netfront_0097D4]
+      - [0x39848, c, netfront_03F820]
+      - [0x39898, c, netfront_03F870]
+      - [0x59698, c, netfront_05FF44]
+      - [0x5974C, c, netfront_05FFF8]
+      - [0x8358C, c, netfront_089A04]
+      - [0x83BE4, c, netfront_08A04C]
+      - [0xC6C48, c, netfront_0CCCDC]
+      - [0xC740C, c, netfront_0CD4A0]
+      - [0xEA880, c, netfront_0EC398]
+      - [0x108CA0, c, netfront_10C5E0]
+      - [0x10DDA4, c, netfront_111484]
+      - [0x10E3F8, c, netfront_111AB8]
+      - [0x10FCD4, c, netfront_113E4C]
       - { start: 0x111FD4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1127AC, type: prxpad, order: .text }
       - { start: 0x1127B0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -66,7 +81,16 @@ segments:
       - { start: 0x1140C4, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - { start: 0x1144B0, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x114524, type: prxpad, order: .rodata }
-      - [0x114528, rodata, netfront]
+      - [0x114528, .rodata, netfront]
+      - [0x114F18, .rodata, netfront_0097D4]
+      - [0x116918, .rodata, netfront_03F870]
+      - [0x119994, .rodata, netfront_05FFF8]
+      - [0x11D5BC, .rodata, netfront_08A04C]
+      - [0x1210B4, .rodata, netfront_0CCCDC]
+      - [0x1210DC, .rodata, netfront_0CD4A0]
+      - [0x1224CC, .rodata, netfront_0EC398]
+      - [0x127DE0, .rodata, netfront_10C5E0]
+      - [0x128368, .rodata, netfront_113E4C]
       - { start: 0x128498, type: prxpad, order: .rodata }
   - name: netfront_seg1
     type: code

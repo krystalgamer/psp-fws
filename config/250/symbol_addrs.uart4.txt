@@ -19,3 +19,12 @@ KDebugForKernel_E6554FDA = 0x000006A8; // type:func
 KDebugForKernel_7D1C74F0 = 0x000006B0; // type:func
 sceSuspendForKernel_91A77137 = 0x000006B8; // type:func
 sceSuspendForKernel_B43D1A8C = 0x000006C0; // type:func
+// shared names (tools/add_version.py) begin
+D_000007E0 = 0x000008C0;
+func_0000031C = 0x0000039C; // type:func rom:0x41C
+func_0000034C = 0x000003CC; // type:func rom:0x44C
+func_0000047C = 0x00000540; // type:func rom:0x5C0
+func_00000504 = 0x000005C8; // type:func rom:0x648
+func_00000548 = 0x0000060C; // type:func rom:0x68C
+D_000007E0_v250 = 0x000007E0; // rom:0x860
+// shared names (tools/add_version.py) end

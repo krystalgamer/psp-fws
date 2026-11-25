@@ -1,6 +1,7 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
+#if FW_VERSION == 282
 void func_00004310(s32 arg0) {
     scePaf_66907719();
     if (arg0 != 0) {
@@ -9,7 +10,17 @@ void func_00004310(s32 arg0) {
         func_00001D58();
     }
 }
+#else
+void func_0000434C(struct Unk_func_0000434C_0 *arg0) {
+    if (arg0 != NULL) {
 
+    } else {
+        func_00001D5C();
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 void func_0000434C(struct Unk_func_0000434C_0 *arg0) {
     s32 temp_v0;
 
@@ -93,6 +104,7 @@ s32 func_00004AD0(struct Unk_func_00004AD0_0 *arg0) {
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004AE8);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004C04);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004E08);
 
@@ -104,9 +116,18 @@ void func_00004EA4(void) {
     func_00004E08(0, 0xFFFF);
 }
 
+#if FW_VERSION == 250
+void func_00004688(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
+
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004698);
+#endif
+
 void func_00004EC4(void) {
     func_00005090();
 }
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004EE0);
-

@@ -66,7 +66,26 @@ s32 scePower_driver_AD5BB433(void) {
     func_0000250C();
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 250
+s32 scePower_driver_C71EE866(s8 arg0) {
+    D_00005889 = arg0;
+    return 0;
+}
+
+s32 scePower_driver_D66EF08D(s32 arg0) {
+    s32 var_a0;
+
+    var_a0 = 0;
+    if ((((u8) D_00005889 == 1) & (arg0 >= 0xDF)) || (((u8) D_00005889 == 2) & (arg0 >= 0x10B))) {
+        var_a0 = 0x802B0300;
+    }
+    return var_a0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 scePower_driver_AD5BB433(void) {
     sceSysEventForKernel_D7D3FDCD(&D_00005F00);
     sceSyscon_driver_E540E532(0, 0);
@@ -164,7 +183,7 @@ INCLUDE_ASM("nonmatchings/power", func_0000054C);
 INCLUDE_ASM("nonmatchings/power", scePowerWaitRequestCompletion);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00000C38);
 #endif
 
@@ -182,7 +201,7 @@ INCLUDE_RODATA("nonmatchings/power", D_00005D60);
 INCLUDE_RODATA("nonmatchings/power", D_00004CF0);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00000F08);
 #endif
 
@@ -349,7 +368,7 @@ INCLUDE_ASM("nonmatchings/power", func_00001334);
 INCLUDE_ASM("nonmatchings/power", func_00001364);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 scePower_driver_7FA406DD(void) {
     return (M2C_VFIELD(&D_00003E00, s32, 0x20) | M2C_VFIELD(&D_00003E00, s32, 0x24)) != 0;
 }
@@ -401,7 +420,7 @@ INCLUDE_ASM("nonmatchings/power", scePowerRequestSuspend);
 INCLUDE_ASM("nonmatchings/power", scePower_driver_2875994B);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePower_driver_0442D852);
 
 s32 scePower_driver_0074EF9B(void) {
@@ -583,7 +602,7 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_972CE941);
 
 INCLUDE_ASM("nonmatchings/power", func_00002F98);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_0000294C);
 #endif
 
@@ -627,7 +646,23 @@ INCLUDE_ASM("nonmatchings/power", func_00003AC0);
 
 INCLUDE_ASM("nonmatchings/power", func_00003B14);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 250
+INCLUDE_ASM("nonmatchings/power", scePower_driver_57A098B4);
+#endif
+
+#if FW_VERSION == 250
+s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
+    if (arg0 != NULL) {
+        *arg0 = (s32) D_0000AABC;
+    }
+    if (arg1 != NULL) {
+        *arg1 = (s32) D_0000AABE;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
     if (arg0 != NULL) {
         *arg0 = (s32) D_0000A1F8;
@@ -639,9 +674,37 @@ s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
 }
 #endif
 
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/power", scePower_driver_57A098B4);
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/power", scePower_driver_DD27F119);
 
+INCLUDE_ASM("nonmatchings/power", scePower_driver_75F91FE4);
+
+s32 scePower_driver_06C83A4F(s32 *arg0, s32 *arg1) {
+    if (arg0 != NULL) {
+        *arg0 = (s32) D_0000AAC4;
+    }
+    if (arg1 != NULL) {
+        *arg1 = (s32) D_0000AAC6;
+    }
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/power", scePower_driver_4E759486);
+
+INCLUDE_ASM("nonmatchings/power", scePower_driver_53C1255D);
+
+s32 scePower_driver_8762BCE6(s32 *arg0, s32 *arg1) {
+    if (arg0 != NULL) {
+        *arg0 = (s32) D_0000AACC;
+    }
+    if (arg1 != NULL) {
+        *arg1 = (s32) D_0000AACE;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
     if (arg0 != NULL) {
         *arg0 = (s32) D_0000B380;
@@ -653,7 +716,7 @@ s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if (FW_VERSION >= 150 && FW_VERSION < 250) || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/power", scePower_driver_DD27F119);
 #endif
 
@@ -683,7 +746,9 @@ s32 scePower_driver_8762BCE6(s32 *arg0, s32 *arg1) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/power", scePower_driver_CAE2A4CA);
 #endif
 

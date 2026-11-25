@@ -4,7 +4,21 @@
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_21A0C6E0);
-#else
+#endif
+
+#if FW_VERSION == 150
+void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
+    void *temp_a0;
+
+    temp_a0 = *arg0;
+    if (temp_a0 != NULL) {
+        M2C_FIELD(temp_a0, s32 *, 0xAC) = arg2;
+        M2C_FIELD(temp_a0, s32 *, 0xA8) = arg1;
+    }
+}
+#endif
+
+#if FW_VERSION == 282
 void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
     struct Unk_scePaf_21A0C6E0_temp_a0 *temp_a0;
 
@@ -83,7 +97,7 @@ INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001C3F8);
 
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_F3967AF5);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001BBB4);
 #else
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_E6134C53);

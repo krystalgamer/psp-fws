@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EE3AC);
 #else
 void func_000EE3AC(struct Unk_func_000EE3AC_0 *arg0) {
@@ -16,7 +16,7 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EE3F0);
 
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_B104EC1B);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_B3659499);
 #else
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_4E62343D);
@@ -28,7 +28,7 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_85696453);
 
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_6E94BA7B);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_00092630);
 #else
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_18D51B42);
@@ -80,7 +80,17 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EED6C);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EEDD0);
-#else
+#endif
+
+#if FW_VERSION == 150
+void func_000EEDD0(struct Unk_vt_func_000EEDD0_arg0 **arg0) {
+    func_0011E438(2);
+    func_0011D80C();
+    M2C_FIELD(*arg0, M2C_UNK (**)(struct Unk_vt_func_000EEDD0_arg0 **), 0x5C)(arg0);
+}
+#endif
+
+#if FW_VERSION == 282
 void func_000EEDD0(struct Unk_vt_func_000EEDD0_arg0 **arg0) {
     sceGumMatrixMode(2);
     sceGumLoadIdentity();
@@ -104,13 +114,13 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EF118);
 
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EF13C);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_00092E9C);
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EF18C);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EF208);
 #else
 s32 func_000EF208(s32 arg0, M2C_UNK arg1) {
@@ -160,7 +170,7 @@ INCLUDE_RODATA("nonmatchings/paf_0EE3AC", D_0019B028);
 
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EF504);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_0009331C);
 #else
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_57AF63CE);

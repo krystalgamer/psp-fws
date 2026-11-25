@@ -21,4 +21,3 @@ void func_0003F85C(struct Unk_func_0003F85C_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unkB0E4 = arg2;
     arg0->unkB0E0 = arg1;
 }
-

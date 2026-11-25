@@ -49,6 +49,10 @@ INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_7D21A2EF);
 
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_DB286D65);
 
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/dmacman", func_00000B28);
+#endif
+
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/dmacman", func_00000B2C);
 #endif
@@ -90,7 +94,7 @@ s32 func_00001388(void **arg0, u32 arg1) {
 
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_904110FC);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dmacman", func_000010BC);
 
 INCLUDE_ASM("nonmatchings/dmacman", func_00001458);
@@ -132,7 +136,7 @@ INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_A893DA2C);
 INCLUDE_ASM("nonmatchings/dmacman", func_00001A08);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dmacman", func_00001B04);
 
 INCLUDE_ASM("nonmatchings/dmacman", func_00001B84);
