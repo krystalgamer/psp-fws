@@ -1642,6 +1642,10 @@ INCLUDE_ASM("nonmatchings/libssl", func_00016704);
 INCLUDE_ASM("nonmatchings/libssl", func_00016B28);
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libssl", func_00016DB0_v260);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/libssl", func_00016DB0_v250);
 #endif
@@ -2365,6 +2369,10 @@ INCLUDE_ASM("nonmatchings/libssl", func_000198FC);
 INCLUDE_ASM("nonmatchings/libssl", func_00019A24);
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libssl", func_00019AEC_v260);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/libssl", func_00019AEC_v250);
 #endif
@@ -2391,6 +2399,10 @@ INCLUDE_ASM("nonmatchings/libssl", func_000197F4);
 INCLUDE_ASM("nonmatchings/libssl", func_00019C4C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00019CAC);
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libssl", func_00019D30_v260);
 #endif
 
 #if FW_VERSION == 250
@@ -2668,6 +2680,12 @@ s32 func_0001C598(void) {
     return -1;
 }
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/libssl", D_0002DAF4);
+
+INCLUDE_RODATA("nonmatchings/libssl", D_0002DAF8);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DA70_v250);
 
@@ -2694,7 +2712,13 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002DAA0);
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DAA4);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DAB8);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/libssl", D_0002DB40);
+#endif
+
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DABC);
 #endif
 
@@ -3274,6 +3298,10 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002D900);
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D908);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D910);
+
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/libssl", D_0002DF78_v260);
+#endif
 
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DEF4_v250);

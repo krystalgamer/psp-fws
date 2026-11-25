@@ -15,7 +15,7 @@ s32 func_00169860(struct Unk_func_00169860_0 *arg0, s32 *arg1) {
 INCLUDE_ASM("nonmatchings/paf_169860", func_00121A34);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_169860", func_0010F1A0);
 #endif
 

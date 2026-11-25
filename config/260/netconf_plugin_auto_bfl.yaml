@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, netconf_plugin_auto_bfl]
+      - [0xA4, c, netconf_plugin_auto_bfl]
       - { start: 0x4324, type: asm, name: fini, linker_section: .fini }
       - { start: 0x4340, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x4478, type: prxpad, order: .text }
@@ -70,7 +70,7 @@ segments:
       - { start: 0x4720, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x4728, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x472C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x4730, rodata, netconf_plugin_auto_bfl]
+      - [0x4730, .rodata, netconf_plugin_auto_bfl]
       - { start: 0x489C, type: prxpad, order: .rodata }
   - name: netconf_plugin_auto_bfl_seg1
     type: code

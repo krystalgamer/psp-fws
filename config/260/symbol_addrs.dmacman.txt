@@ -37,3 +37,12 @@ sceKernelCreateEventFlag = 0x00001C70; // type:func
 sceKernelDeleteEventFlag = 0x00001C78; // type:func
 sceSuspendForKernel_91A77137 = 0x00001C80; // type:func
 sceSuspendForKernel_B43D1A8C = 0x00001C88; // type:func
+// shared names (tools/add_version.py) begin
+D_000049B8 = 0x00003FD8;
+func_000010BC = 0x000010B4; // type:func rom:0x1134
+func_00001458 = 0x00001450; // type:func rom:0x14D0
+func_00001A08 = 0x00001A6C; // type:func rom:0x1AEC
+func_00001B04 = 0x00001AFC; // type:func rom:0x1B7C
+func_00001B84 = 0x00001B7C; // type:func rom:0x1BFC
+func_00001BA4 = 0x00001B9C; // type:func rom:0x1C1C
+// shared names (tools/add_version.py) end

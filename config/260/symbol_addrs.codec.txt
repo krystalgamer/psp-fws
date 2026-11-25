@@ -26,3 +26,12 @@ sceGpio_driver_317D9D2C = 0x000010B4; // type:func
 sceI2c_driver_E9463B99 = 0x000010BC; // type:func
 sceSysEventForKernel_CD9E4BB5 = 0x000010C4; // type:func
 sceSysEventForKernel_D7D3FDCD = 0x000010CC; // type:func
+// shared names (tools/add_version.py) begin
+D_00001320 = 0x000012E0; // rom:0x1360
+D_00001230 = 0x00001340; // rom:0x13C0
+D_0000108C = 0x00001344; // rom:0x13C4
+func_00000B70 = 0x00000B14; // type:func rom:0xB94
+func_00000924 = 0x00000B7C; // type:func rom:0xBFC
+func_00000EC4 = 0x00000E80; // type:func rom:0xF00
+func_00000CF8 = 0x00000F3C; // type:func rom:0xFBC
+// shared names (tools/add_version.py) end

@@ -87,7 +87,7 @@ s32 func_00000554(void) {
 INCLUDE_ASM("nonmatchings/sircs", module_start);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 func_00000634(void) {
     InterruptManagerForKernel_F987B1F0(0xE);
     sceKernelDeleteSema(M2C_VFIELD(&D_00002148, s32, 0x10));
@@ -159,7 +159,7 @@ s32 func_00001718(void) {
 
 INCLUDE_RODATA("nonmatchings/sircs", D_0000263C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/sircs", D_00001F38);
 #endif
 
@@ -227,7 +227,7 @@ s32 func_00001394(void) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/sircs", func_0000139C);
 #endif
 

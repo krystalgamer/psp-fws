@@ -14,7 +14,7 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00000190);
 INCLUDE_ASM("nonmatchings/umd9660", func_0000030C);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/umd9660", D_00005624);
 #endif
 
@@ -28,7 +28,7 @@ INCLUDE_RODATA("nonmatchings/umd9660", D_00005AF0);
 
 INCLUDE_RODATA("nonmatchings/umd9660", D_00005AF4);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/umd9660", D_00005858);
 #endif
 
@@ -124,7 +124,7 @@ s32 module_start(void) {
 INCLUDE_ASM("nonmatchings/umd9660", func_000009B0);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/umd9660", func_00000AF4);
 #endif
 
@@ -230,6 +230,10 @@ INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660_driver_85F6776E);
 INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660_driver_EB75B9FA);
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/umd9660", func_000017B8);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umd9660", func_000022EC);
 #endif
@@ -266,19 +270,21 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00001E4C);
 INCLUDE_ASM("nonmatchings/umd9660", func_0000264C);
 #endif
 
+#if FW_VERSION != 260
 INCLUDE_RODATA("nonmatchings/umd9660", D_00005B30);
 
 INCLUDE_RODATA("nonmatchings/umd9660", D_00005B34);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/umd9660", D_00005B4C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/umd9660", D_00005B60);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/umd9660", D_00005560);
 
 INCLUDE_RODATA("nonmatchings/umd9660", D_0000556C);
@@ -286,7 +292,7 @@ INCLUDE_RODATA("nonmatchings/umd9660", D_0000556C);
 INCLUDE_RODATA("nonmatchings/umd9660", D_0000557C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/umd9660", func_000023E0);
 #endif
 
@@ -356,6 +362,20 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00002C08);
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/umd9660", func_00002E88);
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/umd9660", D_00005B30);
+
+INCLUDE_RODATA("nonmatchings/umd9660", D_000058C8);
+
+INCLUDE_RODATA("nonmatchings/umd9660", D_000058E0);
+
+INCLUDE_RODATA("nonmatchings/umd9660", D_0000590C);
+
+INCLUDE_RODATA("nonmatchings/umd9660", D_00005918);
+
+INCLUDE_RODATA("nonmatchings/umd9660", D_00005928);
 #endif
 
 #if FW_VERSION < 151
@@ -817,7 +837,15 @@ INCLUDE_RODATA("nonmatchings/umd9660", D_00005630);
 INCLUDE_ASM("nonmatchings/umd9660", func_00003F38);
 
 INCLUDE_ASM("nonmatchings/umd9660", func_000040DC);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/umd9660", func_000043EC);
+
+INCLUDE_RODATA("nonmatchings/umd9660", D_00005A38);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/umd9660", func_00004240);
 #endif
 

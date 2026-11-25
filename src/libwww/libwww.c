@@ -1273,7 +1273,7 @@ INCLUDE_ASM("nonmatchings/libwww", func_000070A8);
 
 INCLUDE_ASM("nonmatchings/libwww", sceHVWWW_Library_194228D5);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww", func_00007268);
 #endif
 
@@ -1287,7 +1287,7 @@ INCLUDE_ASM("nonmatchings/libwww", func_000071E0);
 
 INCLUDE_ASM("nonmatchings/libwww", func_000072D8);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww", func_00007450);
 #endif
 
@@ -1738,7 +1738,7 @@ INCLUDE_ASM("nonmatchings/libwww", func_00008C60);
 
 INCLUDE_ASM("nonmatchings/libwww", func_00008D1C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww", func_00008E34);
 #endif
 
@@ -2272,7 +2272,7 @@ INCLUDE_RODATA("nonmatchings/libwww", D_000CCA30);
 
 INCLUDE_ASM("nonmatchings/libwww", func_00010BC4);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww", func_00011620);
 #endif
 
@@ -2638,7 +2638,7 @@ INCLUDE_ASM("nonmatchings/libwww", func_00013E70);
 
 INCLUDE_ASM("nonmatchings/libwww", func_00013F68);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww", func_0001456C);
 #endif
 
@@ -3577,7 +3577,7 @@ INCLUDE_RODATA("nonmatchings/libwww", D_000CF84C);
 INCLUDE_RODATA("nonmatchings/libwww", D_000CF860);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww", D_000CFA24);
 #endif
 
@@ -4525,9 +4525,15 @@ INCLUDE_RODATA("nonmatchings/libwww", D_000CF6F8);
 INCLUDE_RODATA("nonmatchings/libwww", D_000D1CF4);
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/libwww", D_000D1EE0_v260);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/libwww", D_000D1EE0_v250);
+#endif
 
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww", D_000D1F54);
 
 INCLUDE_RODATA("nonmatchings/libwww", D_000D1FC8);
@@ -7246,7 +7252,7 @@ INCLUDE_ASM("nonmatchings/libwww", func_00050F10);
 
 INCLUDE_ASM("nonmatchings/libwww", func_0005100C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww", func_00052040);
 #endif
 

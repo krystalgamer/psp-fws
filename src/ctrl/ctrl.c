@@ -8,7 +8,11 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_E03956E9);
 
 INCLUDE_ASM("nonmatchings/ctrl", func_000001C0);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 260
+INCLUDE_ASM("nonmatchings/ctrl", func_000002F0);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/ctrl", func_00000300);
 #endif
 
@@ -20,7 +24,7 @@ INCLUDE_ASM("nonmatchings/ctrl", func_00000294);
 INCLUDE_ASM("nonmatchings/ctrl", func_00000334);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/ctrl", func_00000428);
 #endif
 
@@ -29,16 +33,16 @@ INCLUDE_ASM("nonmatchings/ctrl", func_000003D4);
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/ctrl", func_000002F0);
-
 INCLUDE_ASM("nonmatchings/ctrl", func_000003B0);
+#endif
 
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/ctrl", func_00000470);
 #endif
 
 INCLUDE_ASM("nonmatchings/ctrl", func_00000804);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSamplingMode);
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetSamplingMode);
@@ -112,7 +116,7 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_C3F607F3);
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_C245B57B);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSamplingMode);
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetSamplingMode);
@@ -138,12 +142,29 @@ s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 260
+s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    D_00001D70.unkA40 = arg3;
+    D_00001D70.unkA34 = arg0;
+    D_00001D70.unkA38 = arg1;
+    D_00001D70.unkA3C = arg2;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 260
 s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_VFIELD(&D_00001D70, s32, 0xA44) = arg3;
     D_00001D70.unkA38 = arg0;
     D_00001D70.unkA3C = arg1;
     D_00001D70.unkA40 = arg2;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 260
+s32 sceCtrl_driver_252D3A8D(s8 arg0) {
+    D_00001D9F = arg0;
     return 0;
 }
 #endif
@@ -256,7 +277,17 @@ s32 func_00001214(void) {
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ctrl", func_00001544);
+#endif
 
+#if FW_VERSION == 260
+s32 func_000015C0(void) {
+    D_00001D70.pad0[0x11] = 0;
+    D_00001D70.pad0[0xE] = D_00001D70.pad0[0x8A];
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 s32 func_000015C0(void) {
     D_00001D70.pad0[0x15] = 0;
     M2C_FIELD(&D_00001D70, s32 *, 0x10) = (s32) D_00001D70.pad0[0x8E];

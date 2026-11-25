@@ -105,7 +105,120 @@ s32 func_000045C8(s32 arg0, s32 arg1, s32 arg2) {
     return var_v1;
 }
 
+#if FW_VERSION == 260
+void func_00004C6C(void *arg0, s32 arg1, s8 arg2) {
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s8 *, 4) = arg2;
+}
+
+void func_00004C78(void *arg0, s32 arg1, s8 arg2) {
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s8 *, 4) = arg2;
+}
+
+void func_00004C84(void) {
+
+}
+
+void func_00004C8C(void) {
+
+}
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00004C94);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00004DB8);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00004EDC);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000050B4);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000053B0);
+#else
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000045FC);
+#endif
+
+#if FW_VERSION == 260
+void func_000045FC(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001EF10;
+    func_00006A08((s32) arg0);
+    func_00005D08((s32) arg0);
+    func_0000640C((s32) arg0);
+    M2C_FIELD(arg0, s8 *, 0xAF) = 0;
+    func_000046F4(arg0 + 0x90);
+}
+
+void func_00005524(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001EF10;
+    func_00006A08((s32) arg0);
+    func_00005D08((s32) arg0);
+    func_0000640C((s32) arg0);
+    M2C_FIELD(arg0, s8 *, 0xAF) = 0;
+    func_000046F4(arg0 + 0x90);
+}
+
+void func_00005574(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001EF10;
+    func_00006A08((s32) arg0);
+    func_00005D08((s32) arg0);
+    func_0000640C((s32) arg0);
+    M2C_FIELD(arg0, s8 *, 0xAF) = 0;
+    func_000046F4(arg0 + 0x90);
+    scePaf_4E67BB08(arg0);
+}
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000055C8);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00005D08);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000060AC);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000640C);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000065D8);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00006A08);
+
+u8 func_00006D08(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0xAF);
+}
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000125E0);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00012698);
+
+u32 func_0001280C(struct Unk_func_000044B0_0 *arg0) {
+    return (u32) ~arg0->unk9C >> 0x1F;
+}
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0001281C);
+
+s32 func_00012834(struct Unk_func_00004420_0 *arg0, s32 *arg1) {
+    *arg1 = arg0->unk98;
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00012844);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00012A24);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00012C7C);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00012CA0);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00012EFC);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00007728);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00008650);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00008704);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00008850);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00014B48);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00009E64);
+#endif
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00004648);
 
@@ -163,6 +276,31 @@ u32 func_00004928(s32 arg0) {
     return (u32) ~arg0 >> 0x1F;
 }
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000A238);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_9F1B5B95);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_A0472F68);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_2C03147D);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_3B03E04A);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000A740);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_9E5A3EE2);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000ABB4);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000ABE8);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00006428);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00006450);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000648C);
+#else
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00004934);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00004970);
@@ -203,6 +341,7 @@ INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_5C2678FA);
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_A14CA640);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_BD897CD8);
+#endif
 
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001EF10);
 
@@ -212,6 +351,33 @@ INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001EF28);
 
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001EF34);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00006494);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000066DC);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00006734);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00006800);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00006808);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00006810);
+
+void func_000068F4(void) {
+
+}
+
+void func_0000B0E4(void) {
+
+}
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000B0EC);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000B134);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000B194);
+#else
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001EF40);
 
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001EF4C);
@@ -295,6 +461,7 @@ INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001F110);
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001F11C);
 
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001F124);
+#endif
 
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001F12C);
 
@@ -302,6 +469,47 @@ INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001F138);
 
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001F140);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000B3B8);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000B9B8);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000B9C4);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000B9D0);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C23C);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C2DC);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C344);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C3C4);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C408);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C438);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C4C8);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C548);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C718);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C75C);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C894);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000C940);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CB6C);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CBC0);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CC14);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CE04);
+#else
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001F144);
 
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_0001F150);
@@ -327,8 +535,39 @@ INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_07771D45);
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_9F1B5B95);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_A0472F68);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000055AC);
+#else
 u8 func_000055AC(struct Unk_func_000055AC_0 *arg0) {
     return arg0->unkAC;
 }
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CE48);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CE50);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CE58);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CE60);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CE68);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000CE70);
+
+INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00008580);
+
+void func_0000CE80(void) {
+
+}
+
+void func_0000CE88(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001F2C8;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
+#endif

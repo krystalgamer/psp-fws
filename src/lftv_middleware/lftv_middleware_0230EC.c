@@ -12,7 +12,7 @@ s32 func_000230EC(struct Unk_func_000230EC_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0230EC", func_00023138);
 
-#if FW_VERSION == 250
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_0230EC", func_0003F290);
 #else
 INCLUDE_ASM("nonmatchings/lftv_middleware_0230EC", func_00023154);

@@ -72,7 +72,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetBatteryIconStatus);
 INCLUDE_ASM("nonmatchings/impose", func_00000DFC);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/impose", D_00006310);
 
 INCLUDE_RODATA("nonmatchings/impose", D_00006A80);
@@ -190,7 +190,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000E90C);
 
 INCLUDE_RODATA("nonmatchings/impose", D_0000F2CC);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/impose", D_0000F15C);
 #endif
 
@@ -252,9 +252,17 @@ INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_C7E36CC7);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_1AEED8FE);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/impose", func_00001614);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/impose", func_000015CC);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose", func_00001820);
 
 INCLUDE_ASM("nonmatchings/impose", func_00001BB0);
@@ -714,7 +722,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_000061B8);
 INCLUDE_RODATA("nonmatchings/impose", D_000061C4);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/impose", D_0000F0D0);
 #endif
 

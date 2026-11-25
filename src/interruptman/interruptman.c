@@ -111,7 +111,7 @@ INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_15894D0B);
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_F987B1F0);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_07E138EE);
 #endif
 
@@ -166,7 +166,7 @@ INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_27BC9A45);
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_0E224D66);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 InterruptManagerForKernel_20804B41(void) {
     return D_00004ABC;
 }

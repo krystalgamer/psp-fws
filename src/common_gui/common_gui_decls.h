@@ -81,6 +81,7 @@ void func_000008A8(void **arg0);
 void func_000008C8(struct Unk_func_000008C8_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 void func_000008F0(struct Unk_func_000008F0_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 void func_00000EFC(struct Unk_func_00000EFC_0 *arg0, s32 arg1);
+void func_00000F4C(void *arg0, s32 arg1);
 void func_00000F6C(struct Unk_func_00000F6C_0 *arg0, s32 arg1);
 void func_000017BC(void);
 void func_000017C4(void);

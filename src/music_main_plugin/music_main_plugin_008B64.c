@@ -2,6 +2,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
+#if FW_VERSION == 282
 void func_00008B64(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -52,4 +53,4 @@ void func_000092D0(void) {
 void func_000092DC(s8 arg0) {
     D_000A4223 = arg0;
 }
-
+#endif

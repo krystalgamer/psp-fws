@@ -38,7 +38,7 @@ INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_lib_F479F616);
 INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_lib_2B6C67EA);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/libdnas_core", D_00002954);
 
 INCLUDE_RODATA("nonmatchings/libdnas_core", D_00002960);

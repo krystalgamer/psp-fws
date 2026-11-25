@@ -34,6 +34,9 @@ void func_0000034C(void) {
     func_000002B0(0, 0xFFFF);
 }
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000036C);
+#else
 void func_0000036C(struct Unk_func_0000036C_0 *arg0) {
     arg0->unk0 = &D_00003D20;
     arg0->unk4 = sceKernelCreateSema(&D_000039F4, 0x100U, 1, 1, NULL);
@@ -58,7 +61,11 @@ void func_0000036C(struct Unk_func_0000036C_0 *arg0) {
     arg0->unkC44 = 0;
     arg0->unkC48 = 0;
 }
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000044C);
+#else
 void func_0000044C(struct Unk_func_0000044C_0 *arg0) {
     arg0->unk0 = &D_00003D20;
     arg0->unk4 = sceKernelCreateSema(&D_000039F4, 0x100U, 1, 1, NULL);
@@ -83,6 +90,7 @@ void func_0000044C(struct Unk_func_0000044C_0 *arg0) {
     arg0->unkC44 = 0;
     arg0->unkC48 = 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000052C);
 
@@ -126,9 +134,15 @@ INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003B88);
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003BB0);
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003B70);
+#endif
+
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003BD8);
 
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003C08);
+#endif
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003C30);
 
@@ -138,7 +152,9 @@ INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003C8C);
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003CA8);
 
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003CDC);
+#endif
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003CE8);
 
@@ -166,7 +182,11 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_000013CC);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00001670);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/rss_subscriber", func_000016A0);
+#else
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_000016A8);
+#endif
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_000016E0);
 
@@ -178,7 +198,11 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_000017C0);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00001B18);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/rss_subscriber", func_00001B80);
+#else
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00001BA0);
+#endif
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00001FF8);
 

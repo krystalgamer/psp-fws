@@ -536,7 +536,7 @@ s32 func_00007A68(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A94);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_0000791C);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000079D0);
@@ -554,7 +554,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007BAC);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007BF0);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 void func_00007B94(void) {
     sceVideocodec_4F160BF4(D_00007D40);
 }
@@ -636,7 +636,21 @@ s32 func_00007754(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000067C4);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_0000699C);
+
+s32 func_00006F6C(void) {
+    return 0x584;
+}
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006F74);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006FDC);
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007D88);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007E14);

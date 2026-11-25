@@ -5,7 +5,7 @@ INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_9D3F790C);
 
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_5B37EB1D);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_3DD7EE1A);
 #endif
 
@@ -13,7 +13,9 @@ INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_70A703F8);
 
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_8ACA11D5);
 
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_6CD2A861);
+#endif
 
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_59176A0F);
 
@@ -21,7 +23,7 @@ INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_3A20A200);
 
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_29681260);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_RODATA("nonmatchings/audiocodec", D_00000E18);
 
 INCLUDE_RODATA("nonmatchings/audiocodec", D_00000E30);
@@ -29,13 +31,21 @@ INCLUDE_RODATA("nonmatchings/audiocodec", D_00000E30);
 INCLUDE_ASM("nonmatchings/audiocodec", func_00000948);
 
 INCLUDE_ASM("nonmatchings/audiocodec", func_00000A28);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/audiocodec", func_00000A78);
+#endif
+
+#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/audiocodec", func_00000AF0);
 
 INCLUDE_ASM("nonmatchings/audiocodec", func_00000BD4);
 
 INCLUDE_ASM("nonmatchings/audiocodec", func_00000C20);
+#endif
 
+#if FW_VERSION >= 250
 INCLUDE_RODATA("nonmatchings/audiocodec", D_00000E74);
 
 INCLUDE_RODATA("nonmatchings/audiocodec", D_00000E94);

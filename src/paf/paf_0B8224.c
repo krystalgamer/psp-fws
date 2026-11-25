@@ -80,7 +80,24 @@ s32 func_000B8C4C(void) {
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_78F94D84);
 #endif
 
+#if FW_VERSION != 151
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_5822F12A);
+#else
+s32 scePaf_5822F12A(void) {
+    s32 temp_v0;
+
+    temp_v0 = sceCtrlSetSamplingMode(1U);
+    if (temp_v0 >= 0) {
+        D_00138F94 = 1;
+    }
+    if (D_00138FA0 != 0) {
+
+    } else {
+        scePaf_E69C3B1B((s32) &func_000B8804);
+    }
+    return temp_v0;
+}
+#endif
 
 void scePaf_FD9DE7B9(s32 arg0) {
     D_001A3CC0 = arg0 * arg0;
@@ -95,7 +112,7 @@ s32 scePaf_EA39A7C1(void) {
     return D_001A52C0;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_6B1E90C7);
 #else
 void scePaf_6B1E90C7(void) {
@@ -107,7 +124,7 @@ void scePaf_6B1E90C7(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_66907719);
 #else
 void scePaf_66907719(void) {
@@ -121,11 +138,27 @@ void scePaf_66907719(void) {
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_D5F3BAB1);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_AAD0EE78);
+#endif
 
+#if FW_VERSION == 151
+void scePaf_AAD0EE78(s32 arg0) {
+    D_00138F9C = arg0;
+}
+#endif
+
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_E69C3B1B);
-#else
+#endif
+
+#if FW_VERSION == 151
+void scePaf_E69C3B1B(s32 arg0) {
+    D_00138FA0 = arg0;
+}
+#endif
+
+#if FW_VERSION == 282
 void scePaf_AAD0EE78(s32 arg0) {
     D_001A5270 = arg0;
 }
@@ -157,7 +190,7 @@ s32 func_000B9280(void) {
     return 1;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_A044BFC0);
 #else
 void scePaf_A044BFC0(void) {
@@ -169,7 +202,7 @@ void scePaf_A044BFC0(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_F1CF9579);
 #else
 void scePaf_F1CF9579(void) {

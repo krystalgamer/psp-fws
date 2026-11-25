@@ -40,7 +40,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_000018EC);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00001A1C);
 
-#if FW_VERSION == 250
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_0000142C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_0000167C);
@@ -84,7 +84,30 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_00002764);
 
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_0000278C);
-#else
+#endif
+
+#if FW_VERSION == 260
+void func_0000278C(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    D_000066F4 = 0;
+    temp_v0 = scePaf_D4FAE7D0(&D_00004FF0);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            D_000066F4 = M2C_FIELD(temp_v0_2, s32 (**)(), 0x2C)();
+        }
+    }
+}
+
+void func_000021A0(s32 arg0) {
+    func_000044A4(arg0);
+    scePaf_66907719();
+}
+#endif
+
+#if FW_VERSION == 282
 void func_0000278C(void) {
     s32 temp_v0;
     struct Unk_func_0000278C_temp_v0_2 *temp_v0_2;

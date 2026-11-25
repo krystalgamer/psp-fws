@@ -8,6 +8,7 @@
   "func_0000025C": "void func_0000025C(void);",
   "func_000002A4": "void func_000002A4(void);",
   "func_00000314": "void func_00000314(void);",
+  "func_00000320": "void func_00000320(s32 arg0);",
   "func_0000086C": "void func_0000086C(s32 arg0);",
   "func_000008A4": "void func_000008A4(void);",
   "func_000008C4": "void func_000008C4(void);",

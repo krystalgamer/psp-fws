@@ -144,6 +144,7 @@ void func_00000258(void);
 void func_0000025C(void);
 void func_000002A4(void);
 void func_00000314(void);
+void func_00000320(s32 arg0);
 void func_0000086C(s32 arg0);
 void func_000008A4(void);
 void func_000008C4(void);

@@ -54,7 +54,7 @@ s32 sceVideocodec_driver_CB3312D1(void) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_17099F0A);
 
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_DBA273FA);
@@ -68,15 +68,21 @@ INCLUDE_ASM("nonmatchings/videocodec", func_00000BB0);
 
 INCLUDE_ASM("nonmatchings/videocodec", func_00000C18);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/videocodec", func_0000094C);
 #endif
 
 INCLUDE_ASM("nonmatchings/videocodec", func_00000CE8);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/videocodec", func_00000B78);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/videocodec", func_00000EB4);
+#endif
+
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/videocodec", func_00000C24);
 
 INCLUDE_ASM("nonmatchings/videocodec", func_00000D50);
@@ -137,7 +143,7 @@ void func_00000EB4(struct Unk_func_00000EB4_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_RODATA("nonmatchings/videocodec", D_00001090);
 
 INCLUDE_RODATA("nonmatchings/videocodec", D_000010A8);

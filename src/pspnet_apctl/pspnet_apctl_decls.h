@@ -172,6 +172,7 @@ extern s32 D_0001242C;
 extern s32 D_00012430;
 extern s32 D_00012434;
 extern s32 D_00012438;
+extern s32 D_0001253C;
 extern s32 D_000125BC;
 extern s32 D_000129FC;
 extern s32 D_00012A00;

@@ -23,3 +23,11 @@ sceNetIfhandle_lib_76BAD213 = 0x00000D10; // type:func
 sceNet_lib_1858883D = 0x00000D18; // type:func
 sceNet_lib_E0A81C7C = 0x00000D20; // type:func
 sceNet_lib_EF097716 = 0x00000D28; // type:func
+// shared names (tools/add_version.py) begin
+D_00001070 = 0x00000F60;
+D_00001094 = 0x00000F80;
+func_000007F8 = 0x00000774; // type:func rom:0x7F4
+func_00000938 = 0x0000088C; // type:func rom:0x90C
+func_00000A30 = 0x00000984; // type:func rom:0xA04
+func_00000AF4 = 0x00000A48; // type:func rom:0xAC8
+// shared names (tools/add_version.py) end

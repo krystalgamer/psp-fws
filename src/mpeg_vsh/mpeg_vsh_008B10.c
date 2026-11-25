@@ -175,7 +175,7 @@ INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009BD8);
 
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009C58);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009380);
 #endif
 

@@ -69,4 +69,3 @@ void func_00011B58(void) {
 void func_00011B8C(void) {
     vsh_6286E89D(vsh_34DA1B67(), D_000A3254);
 }
-

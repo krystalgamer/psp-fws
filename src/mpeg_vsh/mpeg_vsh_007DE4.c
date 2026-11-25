@@ -80,7 +80,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000088AC);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00008958);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 void func_00007FC0(void) {
     if (M2C_FIELD(D_00009B80, s32 *, 0xC) == 0) {
 
@@ -104,6 +104,46 @@ s32 func_00008058(s32 *arg0) {
     }
     return M2C_FIELD(D_00009B80, s32 *, 0xC);
 }
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00007348);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00007494);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000075E0);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000076D0);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000077B0);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_0000780C);
+
+void func_00007828(void) {
+
+}
+
+s32 func_00007830(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xC) == 0;
+}
+
+s32 func_0000783C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xC) == M2C_FIELD(arg0, s32 *, 0);
+}
+
+s32 func_00007850(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00007858);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000078AC);
+
+s32 func_00007914(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0) - M2C_FIELD(arg0, s32 *, 0xC);
+}
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00007924);
 #endif
 
 #if FW_VERSION < 250

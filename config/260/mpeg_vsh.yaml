@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/260/.splat_cache.mpeg_vsh
   symbol_addrs_path:
     - config/260/symbol_addrs.mpeg_vsh.txt
+    - config/260/func_starts.mpeg_vsh.txt
     - tmp/build/260/prx_syms.mpeg_vsh.txt
   reloc_addrs_path: [tmp/build/260/reloc_addrs.mpeg_vsh.txt]
   asset_path: tmp/assets/260/mpeg_vsh
@@ -52,7 +53,10 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, mpeg_vsh]
+      - [0x80, c, mpeg_vsh]
+      - [0x6304, c, mpeg_vsh_005C8C]
+      - [0x7210, c, mpeg_vsh_007DE4]
+      - [0x7ACC, c, mpeg_vsh_008B10]
       - { start: 0x8B84, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x8C64, type: prxpad, order: .text }
       - { start: 0x8C70, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +68,8 @@ segments:
       - { start: 0x8D08, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x8D3C, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x8F78, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x8FE8, rodata, mpeg_vsh]
+      - [0x8FE8, .rodata, mpeg_vsh]
+      - [0x90E0, .rodata, mpeg_vsh_008B10]
       - { start: 0x9270, type: prxpad, order: .rodata }
   - name: mpeg_vsh_seg1
     type: code

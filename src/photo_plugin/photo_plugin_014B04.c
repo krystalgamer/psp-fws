@@ -19,7 +19,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_000152E4);
 INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_00015354);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 void func_00015390(void) {
     if (func_00012D5C() == 0) {
         if (D_00031B40 == NULL) {
@@ -52,7 +52,7 @@ void func_00015390(void) {
 INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_000153E0);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 void func_00015440(void) {
     func_00015390();
 }
@@ -107,13 +107,21 @@ void func_000160D4(void) {
 }
 
 INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_00016108);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_00015FE8);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_00016284);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_00016760);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/photo_plugin_014B04", func_00016C38);
 #endif
 

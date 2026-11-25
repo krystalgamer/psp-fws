@@ -84,7 +84,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000A7F8);
 INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000AC58);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000AAE0);
 
 INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000AC68);
@@ -112,7 +112,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000B7C0);
 INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000B48C);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000C1A8);
 #endif
 

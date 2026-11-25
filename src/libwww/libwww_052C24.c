@@ -618,7 +618,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D2338);
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D23B8);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D258C);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D2430);
@@ -656,7 +656,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0038);
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D2634);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D285C);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D288C);
@@ -858,7 +858,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D3024);
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D3098);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D32B8);
 #endif
 
@@ -926,7 +926,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0E04);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D0E10);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D3654);
 #endif
 
@@ -990,7 +990,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1750);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1764);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D3E8C);
 #endif
 
@@ -1158,7 +1158,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1E1C);
 
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1E2C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D4554);
 #endif
 
@@ -1180,7 +1180,7 @@ INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D1EF4);
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D4470);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/libwww_052C24", D_000D46A0);
 #endif
 
@@ -5937,6 +5937,10 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000B1018);
 void func_000B1064(void) {
 }
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libwww_052C24", func_000B3C14);
+#endif
+
 #if FW_VERSION == 303
 void func_000B106C(struct Unk_func_000B106C_0 *arg0) {
     s32 temp_v0;
@@ -7757,7 +7761,7 @@ INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C2764);
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C2854);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/libwww_052C24", func_000C2AF8);
 #endif
 

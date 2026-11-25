@@ -2,7 +2,18 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 260
+void func_00012A1C(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = func_00012DE4();
+    if (temp_v0 != NULL) {
+        M2C_FIELD(temp_v0, M2C_UNK (**)(s32), 0x10)(arg0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_00012A1C(s32 arg0) {
     struct Unk_func_00012A1C_temp_v0 *temp_v0;
 
@@ -11,13 +22,15 @@ void func_00012A1C(s32 arg0) {
         temp_v0->unk14(arg0);
     }
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012A54);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012C38);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000130B0);
 #endif
 
@@ -45,15 +58,41 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012DE4);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012E08);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012E58);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012CD0);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012D90);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FDC0);
+
+s32 func_00012DC0_v260(void) {
+    return 2;
+}
+
+s32 func_00012DC8(void) {
+    return 1;
+}
+
+s32 func_00012DD0(void) {
+    return 3;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012EE4);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000130AC);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013100);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FDC0);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000131D8);
 
 void func_000132A4(void) {
@@ -103,15 +142,31 @@ void func_00013574(M2C_UNK **arg0) {
 void func_0001359C(M2C_UNK **arg0) {
     *arg0 = &D_0002FE68;
 }
+#endif
 
+#if FW_VERSION == 260
+void func_00013464(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FDE8);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FDF8);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FE18);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030158);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FE28);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FE38);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FE50);
@@ -129,9 +184,13 @@ INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FEEC);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_0001396C);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013AC0);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FF20);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FF34);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FF44);
@@ -159,7 +218,7 @@ INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030030);
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030054);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_000314A4);
 #endif
 
@@ -191,15 +250,17 @@ INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030144);
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0003014C);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_000315AC);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_000315C0);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030164);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00030170);
 #endif
 
@@ -221,7 +282,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013F98);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00014518);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00014D14);
 #endif
 

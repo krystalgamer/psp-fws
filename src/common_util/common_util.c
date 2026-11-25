@@ -362,7 +362,7 @@ INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_FA969B6A);
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_D4D66154);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 void sceVshCommonUtil_D4D66154(s32 *arg0) {
     if (!(*arg0 & 1)) {
 
@@ -844,7 +844,7 @@ INCLUDE_ASM("nonmatchings/common_util", func_00002790);
 INCLUDE_ASM("nonmatchings/common_util", func_00001848);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_util", func_00001A00);
 
 INCLUDE_ASM("nonmatchings/common_util", func_00001B88);
@@ -860,7 +860,7 @@ INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_E55CADD9);
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_F857F095);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_util", func_000030C8);
 #endif
 

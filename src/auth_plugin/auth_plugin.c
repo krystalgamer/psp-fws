@@ -15,6 +15,14 @@ s32 module_stop(void) {
 }
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C_v260);
+
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000194);
+
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000328);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C_v250);
 #endif
@@ -27,7 +35,44 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C_v201);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000238);
-#else
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/auth_plugin", func_000005F8);
+
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000954);
+
+void func_0000098C(void) {
+    func_0000015C(1);
+    if (D_000032D8 != NULL) {
+        M2C_FIELD(D_000032D8, s32 *, 0x1C) = 1;
+    }
+}
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A34);
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A38);
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A3C);
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A40);
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A44);
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A48);
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A4C);
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A50);
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A54);
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A58);
+
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A5C);
+#endif
+
+#if FW_VERSION == 282
 s32 module_stop(void) {
     func_000026B0();
     return 0;
@@ -87,29 +132,31 @@ INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AE0);
 
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002AEC);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002FC8);
 
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002FD8);
 
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002FE8);
-#else
+#endif
+
+#if FW_VERSION < 201 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000009BC);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001C88);
 
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001C94);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_0000301C);
 
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00003028);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001C9C);
 #endif
 
@@ -117,7 +164,7 @@ INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001C9C);
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001CAC);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001CC0);
 
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001CD8);
@@ -125,7 +172,7 @@ INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001CD8);
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001CF4);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_000030A8);
 
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_000030AC);
@@ -133,7 +180,7 @@ INCLUDE_RODATA("nonmatchings/auth_plugin", D_000030AC);
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_000030C8);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D18);
 #endif
 
@@ -149,7 +196,7 @@ INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D54);
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D70);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D84);
 #endif
 
@@ -163,11 +210,11 @@ INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001DA8);
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001DBC);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001DD0);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00003144);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000002F8);
@@ -186,7 +233,17 @@ void func_00000670(void) {
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000068C);
+#endif
 
+#if FW_VERSION >= 260
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000B3C);
+
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000D38);
+
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00000F40);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000810);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000CC8);
@@ -210,19 +267,27 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_000005C0);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000758);
 #endif
 
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/auth_plugin", func_00000B3C);
-
-INCLUDE_ASM("nonmatchings/auth_plugin", func_00000D38);
-
-INCLUDE_ASM("nonmatchings/auth_plugin", func_00000F40);
-#endif
-
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00001034);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000140C);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/auth_plugin", func_00001098);
+
+void func_00001CFC(void) {
+    s32 var_a0;
+
+    var_a0 = 0;
+    if (D_000032D8 != NULL) {
+        var_a0 = M2C_FIELD(D_000032D8, s32 *, 0x30);
+    }
+    func_00001DF4(var_a0, 0, 0, 0);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00001448);
 #endif
 
@@ -240,7 +305,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_000023A8);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002444);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 void func_00002444(void) {
     func_0000015C(2);
     if (D_000032D8 != NULL) {
@@ -302,7 +367,11 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00001170);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00001DF4);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002B5C);
+#endif
+
+#if FW_VERSION < 260
 void func_0000127C(void) {
     func_0000015C(2);
 }
@@ -314,7 +383,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00001EBC);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000025F4);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002664);
 #endif
 
@@ -352,7 +421,7 @@ void func_00001474(void) {
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00001858);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000289C);
 #endif
 
@@ -376,7 +445,7 @@ void func_000021AC(void) {
 }
 #endif
 
-#if FW_VERSION != 250
+#if FW_VERSION < 250 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000021CC);
 #endif
 
@@ -407,7 +476,7 @@ void func_000021FC(s32 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002A64);
 #endif
 

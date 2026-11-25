@@ -1,11 +1,60 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000873D4);
+#else
 void func_000873D4(M2C_UNK **arg0) {
     *arg0 = &D_000A20E0;
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00076C10);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00076CEC);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00076DAC);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00076E64);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077228);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_0007734C);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_0873D4", D_00097450);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077720);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077910);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077B00);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077CD0);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077D90);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077DA0);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077DB4);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077DCC);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077DE4);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077DFC);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077E14);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077EC0);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077F6C);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00077FE0);
+
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00078054);
+#else
 void func_000873FC(struct Unk_func_000873FC_0 *arg0) {
     arg0->unk14 = 0;
 }
@@ -106,4 +155,4 @@ void func_000878B0(s32 **arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000878E8);
-
+#endif

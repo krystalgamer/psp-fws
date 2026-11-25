@@ -154,7 +154,13 @@ INCLUDE_ASM("nonmatchings/codec", func_00000C50);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/codec", func_00000CF8);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/codec", func_00000FA0);
+#endif
+
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/codec", func_00000D5C);
 #endif
 
@@ -168,7 +174,7 @@ INCLUDE_RODATA("nonmatchings/codec", D_00001230);
 INCLUDE_ASM("nonmatchings/codec", func_00000E60);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/codec", D_00001160);
 #endif
 

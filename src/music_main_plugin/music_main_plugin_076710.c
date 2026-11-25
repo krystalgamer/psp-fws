@@ -34,4 +34,3 @@ void func_000772C4(s32 arg0) {
 void func_000772E0(s32 arg0) {
     func_00075DE8(arg0 - 4);
 }
-

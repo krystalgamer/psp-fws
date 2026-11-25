@@ -27,6 +27,7 @@ s32 func_00000D24(s32, s32, s32, s32);
 s32 func_000010A8(s32, s32, s32, s32);
 s32 func_000011EC(s32, s32, s32, s32);
 s32 func_000014D4(s32, s32, s32, s32, s32, s32, s32);
+s32 func_00001990(s32, s32, s32, s32, s32);
 s32 func_00001AB0(s32, s32, s32);
 void func_00001B9C(s32 arg0);
 void func_00001CB8(s32 arg0);

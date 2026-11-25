@@ -76,4 +76,3 @@ void func_0001E1A8(s32 arg0) {
     func_0001E870(arg0, func_0001E860());
     func_00029BF4();
 }
-

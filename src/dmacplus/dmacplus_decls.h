@@ -30,6 +30,7 @@ extern s32 D_00003FC0;
 extern s32 D_00003FD4;
 extern s32 D_00003FEC;
 extern M2C_UNK D_0000400C;
+extern u16 D_0000400E;
 extern M2C_UNK D_00004020;
 extern struct D_00004034_s D_00004034;
 extern struct D_0000404C_s D_0000404C;

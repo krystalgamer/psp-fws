@@ -1,6 +1,7 @@
 #include "common.h"
 #include "music_common_decls.h"
 
+#if FW_VERSION == 282
 s32 music_common_2C03147D(struct Unk_music_common_2C03147D_0 *arg0) {
     s32 var_v1;
     struct Unk_vt_music_common_2C03147D_temp_v0 **temp_v0;
@@ -30,6 +31,7 @@ INCLUDE_ASM("nonmatchings/music_common_0055B4", func_00005644);
 INCLUDE_ASM("nonmatchings/music_common_0055B4", func_000056CC);
 
 INCLUDE_ASM("nonmatchings/music_common_0055B4", music_common_9E5A3EE2);
+#endif
 
 INCLUDE_ASM("nonmatchings/music_common_0055B4", music_common_74CC985E);
 
@@ -57,4 +59,3 @@ s32 music_common_703558A2(struct Unk_music_common_703558A2_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/music_common_0055B4", music_common_575CEC09);
-

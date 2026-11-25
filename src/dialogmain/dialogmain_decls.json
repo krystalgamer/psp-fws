@@ -104,6 +104,7 @@
   "func_00006034": "s32 func_00006034(void);",
   "func_00006164": "s32 func_00006164(void);",
   "func_000062E4": "void func_000062E4(void);",
+  "func_000062FC": "s32 func_000062FC(void);",
   "func_00006300_v250": "s32 func_00006300_v250(void);",
   "func_00006430": "s32 func_00006430(void);",
   "func_00006484": "M2C_UNK func_00006484();",

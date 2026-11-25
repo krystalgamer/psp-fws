@@ -2,6 +2,10 @@
 #include "common.h"
 #include "modulemgr_decls.h"
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/modulemgr", func_00000000_v260);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000000_v250);
 #endif
@@ -26,7 +30,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_000000A0);
 INCLUDE_ASM("nonmatchings/modulemgr", func_000000B8);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 void func_000004B0(void *arg0, void *arg1) {
     if (arg1 != NULL) {
         M2C_FIELD(arg0, s32 *, 0x14) = (s32) M2C_FIELD(arg1, s32 *, 4);
@@ -537,7 +541,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_000050D0);
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleId);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleGPByAddress);
 #endif
 
@@ -635,7 +639,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_BA889C07);
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5799EE32);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_53CA70EE);
 #endif
 
@@ -751,9 +755,15 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006254);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006284);
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/modulemgr", D_00006500);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/modulemgr", D_0000643C);
+#endif
 
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", func_00004114);
 #endif
 
@@ -793,11 +803,15 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelQueryModuleInfo);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_0000602C);
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/modulemgr", D_000065D8);
+#endif
+
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5F0CC575);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006060);
 #endif
 
@@ -963,7 +977,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_0000539C);
 INCLUDE_ASM("nonmatchings/modulemgr", func_00005480);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", func_000055D0);
 #endif
 

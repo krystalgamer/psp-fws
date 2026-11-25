@@ -186,7 +186,7 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00002B7C);
 INCLUDE_ASM("nonmatchings/usbstorms", func_00002C4C);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/usbstorms", func_00002CA4);
 #endif
 

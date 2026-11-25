@@ -215,6 +215,7 @@
   "sceUmdMan_driver_1CB85F05": "s32 sceUmdMan_driver_1CB85F05(void);",
   "sceUmdMan_driver_1FBF6078": "s32 sceUmdMan_driver_1FBF6078(void);",
   "sceUmdMan_driver_2C756C37": "s32 sceUmdMan_driver_2C756C37(void);",
+  "sceUmdMan_driver_2E49311E": "s32 sceUmdMan_driver_2E49311E(void);",
   "sceUmdMan_driver_3DCFAA71": "s32 sceUmdMan_driver_3DCFAA71(s32 arg0);",
   "sceUmdMan_driver_405B48A5": "s32 sceUmdMan_driver_405B48A5(void);",
   "sceUmdMan_driver_42D28DD1": "s32 sceUmdMan_driver_42D28DD1(void);",

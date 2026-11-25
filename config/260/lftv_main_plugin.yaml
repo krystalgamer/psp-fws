@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/260/.splat_cache.lftv_main_plugin
   symbol_addrs_path:
     - config/260/symbol_addrs.lftv_main_plugin.txt
+    - config/260/func_starts.lftv_main_plugin.txt
     - tmp/build/260/prx_syms.lftv_main_plugin.txt
   reloc_addrs_path: [tmp/build/260/reloc_addrs.lftv_main_plugin.txt]
   asset_path: tmp/assets/260/lftv_main_plugin
@@ -54,7 +55,19 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - { start: 0xA4, type: prxpad, order: .text }
-      - [0xB0, asm, lftv_main_plugin]
+      - [0xB0, c, lftv_main_plugin]
+      - [0x3CA8, c, lftv_main_plugin_003ADC]
+      - [0x4104, c, lftv_main_plugin_004310]
+      - [0x42F8, c, lftv_main_plugin_004FAC]
+      - [0x5CD8, c, lftv_main_plugin_007618]
+      - [0x1DC88, c, lftv_main_plugin_023318]
+      - [0x203B8, c, lftv_main_plugin_02433C]
+      - [0x287C4, c, lftv_main_plugin_036D60]
+      - [0x2A810, c, lftv_main_plugin_037634]
+      - [0x31764, c, lftv_main_plugin_03F0C4]
+      - [0x322BC, c, lftv_main_plugin_03F278]
+      - [0x3B828, c, lftv_main_plugin_051C5C]
+      - [0x3BCCC, c, lftv_main_plugin_052314]
       - { start: 0x3D268, type: asm, name: fini, linker_section: .fini }
       - { start: 0x3D284, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x3DEF4, type: prxpad, order: .text }
@@ -73,7 +86,17 @@ segments:
       - { start: 0x3EDD8, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x3EDDC, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x3EDE0, type: prxpad, order: .rodata }
-      - [0x3EE00, rodata, lftv_main_plugin]
+      - [0x3EE00, .rodata, lftv_main_plugin]
+      - [0x40288, .rodata, lftv_main_plugin_003ADC]
+      - [0x402D8, .rodata, lftv_main_plugin_004FAC]
+      - [0x404D0, .rodata, lftv_main_plugin_007618]
+      - [0x432C0, .rodata, lftv_main_plugin_023318]
+      - [0x43640, .rodata, lftv_main_plugin_02433C]
+      - [0x44058, .rodata, lftv_main_plugin_036D60]
+      - [0x44318, .rodata, lftv_main_plugin_037634]
+      - [0x452CC, .rodata, lftv_main_plugin_03F0C4]
+      - [0x45554, .rodata, lftv_main_plugin_03F278]
+      - [0x46738, .rodata, lftv_main_plugin_052314]
       - { start: 0x46BEC, type: prxpad, order: .rodata }
   - name: lftv_main_plugin_seg1
     type: code

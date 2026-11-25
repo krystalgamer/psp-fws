@@ -270,7 +270,9 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002ED88);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EDA8);
 
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EDC0);
+#endif
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EDE4);
 
@@ -278,9 +280,11 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EDE4);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EDEC);
 #endif
 
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EDFC);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EE00);
+#endif
 
 #if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EE0C);
@@ -371,6 +375,25 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00001518);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00001560);
 
+#if FW_VERSION == 260
+void func_000015B0(s32 arg0, s32 arg1) {
+    func_00001640(arg0, 0, 1, arg1);
+}
+
+void func_000015D4(s32 arg0, s32 arg1) {
+    func_00001640(arg0, 0, -1, arg1);
+}
+
+void func_000015F8(s32 arg0, s32 arg1) {
+    func_00001640(arg0, -1, 0, arg1);
+}
+
+void func_0000161C(s32 arg0, s32 arg1) {
+    func_00001640(arg0, 1, 0, arg1);
+}
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00001640);
+#else
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000015A4);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00001840);
@@ -378,6 +401,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00001840);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00001ADC);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00001CF4);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00001BB0);
@@ -491,7 +515,9 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00002B70);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00002FE8);
 #endif
 
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00003384);
+#endif
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000033B4);
 
@@ -515,7 +541,13 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_000034B0);
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00003570);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F238);
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00003720);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00003764);
@@ -567,6 +599,44 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00003814);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00003C34);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00003CE8);
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00003884);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00003A6C);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00003B08);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00003BCC);
+
+s32 func_00003C90(void *arg0) {
+    s32 var_a0;
+    u8 *temp_v0;
+    u8 *var_v1;
+
+    temp_v0 = M2C_FIELD(arg0, u8 **, 4);
+    var_a0 = 0;
+    if (temp_v0 != NULL) {
+        var_v1 = temp_v0;
+        if (*temp_v0 != 0) {
+            do {
+                var_v1 += 1;
+                var_a0 += 1;
+            } while (*var_v1 != 0);
+        }
+        var_a0 += 1;
+    }
+    return var_a0;
+}
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00003CC8);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00003DB4);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00003E24);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00003F04);
+#endif
 
 #if FW_VERSION >= 201
 void func_00003D94(struct Unk_func_00003D94_0 *arg0, s32 arg1) {
@@ -624,26 +694,46 @@ void func_00003F20(struct Unk_func_00003F20_0 *arg0, s32 arg1) {
 }
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00003F28);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00003FB8);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_00003FB8(M2C_UNK **arg0) {
     *arg0 = &D_0002F120;
     func_00004460(arg0);
     func_00003DCC(arg0);
 }
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00003FF0);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_00003FF0(M2C_UNK **arg0) {
     *arg0 = &D_0002F120;
     func_00004460(arg0);
     func_00003DCC(arg0);
 }
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00004028);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_00004028(M2C_UNK **arg0) {
     *arg0 = &D_0002F120;
     func_00004460(arg0);
     func_00003DCC(arg0);
     scePaf_4E67BB08((s32) arg0);
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00004068);
 
 s32 func_0000413C(struct Unk_func_0000413C_0 *arg0) {
@@ -653,7 +743,7 @@ s32 func_0000413C(struct Unk_func_0000413C_0 *arg0) {
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000414C);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00004168);
 #endif
 
@@ -661,7 +751,13 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00004168);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000424C);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00004328);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00004354);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_00004354(s32 arg0, s32 arg1, s32 arg2) {
     struct Unk_func_00004354_temp_v0 *temp_v0;
 
@@ -673,7 +769,23 @@ void func_00004354(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION == 260
+s32 func_0000464C(void *arg0) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x30);
+    if (temp_v0 != 0) {
+        scePaf_79493F8F(0, temp_v0);
+        M2C_FIELD(arg0, s32 *, 0x30) = 0;
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000440C);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000044A0);
@@ -685,7 +797,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_000043C4);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00004434);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 void func_00004460(struct Unk_func_00004460_0 *arg0) {
     s32 temp_v0;
 
@@ -719,17 +831,53 @@ void func_00004460(struct Unk_func_00004460_0 *arg0) {
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000044A8);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EEB4);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F244);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EEBC);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F258);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EEC8);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F264);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EED0);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F270);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EED8);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F27C);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EEE0);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F290_v260);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EEEC);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EEF4);
@@ -743,6 +891,17 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_0000492C);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000049D4);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00004A3C);
+#endif
+
+#if FW_VERSION == 260
+void func_00004ADC(void ***arg0) {
+    void **temp_a0;
+
+    sceKernelPowerLock(0);
+    sceKernelPowerUnlock(0);
+    temp_a0 = *arg0;
+    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 0x28)(temp_a0);
+}
 #endif
 
 #if FW_VERSION == 250
@@ -875,7 +1034,21 @@ void func_00005870(void) {
         temp_s0->unk4C = scePaf_A0ED77C4(0, func_00006BF4, NULL, -1, -1, &func_00006C34);
     }
 }
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00005C60);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00005D84);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00005EA8);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00005F20);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00005F98);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000058DC);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00005AA8);
@@ -883,7 +1056,9 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00005AA8);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00005D60);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00005E4C);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00005F40);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000608C);
@@ -907,7 +1082,7 @@ void func_00006C40(struct Unk_vt_func_00006C40_arg0 **arg0, struct Unk_vt_func_0
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00006E38);
 #endif
 
@@ -937,7 +1112,22 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00007000);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00007054);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00007124);
+#endif
 
+#if FW_VERSION == 260
+void func_000071D8(s32 arg0, s32 arg1, s32 arg2) {
+    void *temp_v0;
+
+    temp_v0 = scePaf_B7E6052B(0x10);
+    M2C_FIELD(temp_v0, s32 *, 4) = arg1;
+    M2C_FIELD(temp_v0, s32 *, 8) = arg2;
+    M2C_FIELD(temp_v0, s32 *, 0) = arg0;
+    M2C_FIELD(temp_v0, s8 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x38) = scePaf_A0ED77C4(0, func_0000729C, temp_v0, -1, -1, &func_000076C0);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_000071D8(s32 arg0, s32 arg1, s32 arg2) {
     struct Unk_func_000071D8_temp_v0 *temp_v0;
 
@@ -948,11 +1138,43 @@ void func_000071D8(s32 arg0, s32 arg1, s32 arg2) {
     temp_v0->unkC = 0;
     scePaf_A0ED77C4(0, func_0000729C, temp_v0, -1, -1, &func_0000738C);
 }
+#endif
 
+#if FW_VERSION == 260
+s32 func_000074B8(void *arg0) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0x38);
+    if (temp_v0 != 0) {
+        scePaf_79493F8F(0, temp_v0);
+        M2C_FIELD(arg0, s32 *, 0x38) = 0;
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000724C);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000729C);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_000076C0);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00007870);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00007988);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00007A18);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00007AA8);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000738C);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000075E0);
@@ -1001,7 +1223,9 @@ void func_0000789C(struct Unk_func_0000789C_0 *arg0) {
     func_00006E78((s32) arg0);
     scePaf_4E67BB08((s32) arg0);
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00007920);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00007D94);
@@ -1013,7 +1237,19 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_000080A4);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000082C8);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000847C);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00008C7C);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00008DA0);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00008E4C);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00008EF8);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00008A5C);
 #endif
 
@@ -1149,7 +1385,9 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EF64);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EF6C);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EF70);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EF7C);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EF80);
@@ -1163,11 +1401,13 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EF90);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EF94);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EF9C);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000092C8);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000096B4);
 #endif
 
@@ -1272,11 +1512,25 @@ s32 func_00009E5C(struct Unk_func_00009E5C_0 *arg0) {
 
 void func_00009E64(void) {
 }
+#endif
 
+#if FW_VERSION == 260
+s32 func_00009E90_v260(void) {
+    return 0;
+}
+
+void func_00009E6C(struct Unk_vt_func_00009E6C_arg0 **arg0) {
+    M2C_FIELD(*arg0, M2C_UNK (**)(), 0x1C)();
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_00009E6C(struct Unk_vt_func_00009E6C_arg0 **arg0) {
     (*arg0)->unk18();
 }
+#endif
 
+#if FW_VERSION >= 201
 void func_00009E90(void) {
     func_00007000();
 }
@@ -1286,7 +1540,7 @@ s32 func_00009EAC(void) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000A240);
 #endif
 
@@ -1428,7 +1682,7 @@ s32 func_0000A080(void) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 s32 func_0000A088(void) {
     return -1;
 }
@@ -1452,7 +1706,19 @@ s32 func_0000A098(void) {
 s32 func_0000A0A0(void) {
     return 1;
 }
+#endif
 
+#if FW_VERSION == 260
+s32 func_0000A0BC(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x3C);
+}
+
+s32 func_0000A0C4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x34);
+}
+#endif
+
+#if FW_VERSION >= 201
 s32 func_0000A0A8(struct Unk_func_0000A0A8_0 *arg0) {
     return arg0->unk38;
 }
@@ -1498,6 +1764,12 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_0000AA7C);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000AB80);
 #endif
 
+#if FW_VERSION == 260
+void func_0000AC80(struct Unk_func_0000AC80_0 *arg0) {
+    func_0000AC9C(M2C_FIELD(arg0, s32 *, 0x34));
+}
+#endif
+
 #if FW_VERSION == 250
 void func_0000AC80(struct Unk_func_0000AC80_0 *arg0) {
     func_0000AC9C(M2C_FIELD(arg0, s32 *, 0x30));
@@ -1520,7 +1792,19 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_0000AE7C);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000AEB8);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EFB0);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F338);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F33C);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F344);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F350_v260);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EFB4);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EFB8);
@@ -1597,6 +1881,15 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_0000B458);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000B4B4);
 #endif
 
+#if FW_VERSION == 260
+void func_0000B518(struct Unk_func_0000B518_0 *arg0) {
+    void **temp_a0;
+
+    temp_a0 = M2C_FIELD(arg0, void ***, 0x34);
+    M2C_FIELD(*temp_a0, M2C_UNK (**)(void **), 8)(temp_a0);
+}
+#endif
+
 #if FW_VERSION == 250
 void func_0000B518(struct Unk_func_0000B518_0 *arg0) {
     void **temp_a0;
@@ -1653,7 +1946,13 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_0000C194);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000C29C);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000C3AC);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0000C3E0);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_0000C3E0(struct Unk_func_0000C3E0_0 *arg0) {
     s32 temp_v0;
     struct Unk_vt_func_0000C3E0_temp_a0 **temp_a0;
@@ -1667,7 +1966,9 @@ void func_0000C3E0(struct Unk_func_0000C3E0_0 *arg0) {
     }
     func_0000D3F4(arg0);
 }
+#endif
 
+#if FW_VERSION >= 201
 void func_0000C450(struct Unk_func_0000C450_0 *arg0) {
     sceVshCommonGui_1CF884A1();
     scePaf_66907719();
@@ -1735,11 +2036,23 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F314);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F318);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F31C);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F6DC);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F6E0);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F320);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F324);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F328);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F32C);
@@ -1747,7 +2060,9 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F32C);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F330);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F334);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F338);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F33C);
@@ -1755,7 +2070,9 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F33C);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F340);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F344);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F348);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F34C);
@@ -1765,7 +2082,15 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F350);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F354);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F358);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F70C);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F710);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F35C);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F360);
@@ -1849,7 +2174,15 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F6C4);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000D794);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION == 260
+void func_0000DE08_v260(s32 arg0, s32 arg1) {
+    func_000130B0(arg0, arg1);
+}
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0000DE24);
+#endif
+
+#if FW_VERSION >= 250
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_00030B9C);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_00030BB0);
@@ -1861,7 +2194,9 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_00030BE0);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_00030BFC);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_00030C14);
+#endif
 
+#if FW_VERSION == 250
 void func_0000E1B8(s32 arg0, s32 arg1) {
     func_000130B0(arg0, arg1);
 }
@@ -1873,13 +2208,19 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_0000E1D4);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F770);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_00030C44);
 #endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000DE08);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0000E22C);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000E0E4);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000E524);
@@ -1887,6 +2228,12 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_0000E524);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000E644);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000E6D0);
+#endif
+
+#if FW_VERSION == 260
+void func_0000E8D4(void) {
+    scePaf_D7074BD1();
+}
 #endif
 
 #if FW_VERSION == 250
@@ -1928,7 +2275,31 @@ void func_0000EE0C(struct Unk_func_0000EE0C_0 *arg0) {
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000EE58);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000EF70);
+#endif
 
+#if FW_VERSION == 260
+void func_0000F104(s32 arg0) {
+    func_0000F190(arg0);
+}
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0000F120);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0000F190);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0000F1CC);
+
+void func_0000EFA0(struct Unk_func_0000EFA0_0 *arg0, struct Unk_vt_func_0000EFA0_arg1 **arg1) {
+    if (M2C_FIELD(*arg1, s32 (**)(struct Unk_vt_func_0000EFA0_arg1 **), 0x14)(arg1) != 0) {
+
+    } else {
+        M2C_FIELD(arg0, struct Unk_vt_func_0000EFA0_arg1 ***, 8) = arg1;
+        func_0000F190((s32) arg0);
+        M2C_FIELD(M2C_FIELD(arg0, void **, 0), M2C_UNK (**)(struct Unk_func_0000EFA0_0 *), 8)(arg0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_0000EFA0(struct Unk_func_0000EFA0_0 *arg0, struct Unk_vt_func_0000EFA0_arg1 **arg1) {
     s32 temp_v0;
 
@@ -1942,7 +2313,21 @@ void func_0000EFA0(struct Unk_func_0000EFA0_0 *arg0, struct Unk_vt_func_0000EFA0
         func_0000F06C(arg0);
     }
 }
+#endif
 
+#if FW_VERSION == 260
+void func_0000F00C(struct Unk_func_0000F00C_0 *arg0) {
+    struct Unk_func_00004460_0 *temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, struct Unk_func_00004460_0 **, 8);
+    if (temp_v0 != NULL) {
+        func_00004460(temp_v0);
+    }
+    func_0000F104((s32) arg0);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_0000F00C(struct Unk_func_0000F00C_0 *arg0) {
     s32 temp_v0;
 
@@ -1953,27 +2338,73 @@ void func_0000F00C(struct Unk_func_0000F00C_0 *arg0) {
         arg0->unkC = 0;
     }
 }
+#endif
 
+#if FW_VERSION == 260
+void func_0000F2DC(void *arg0) {
+    func_000044A8(M2C_FIELD(arg0, s32 *, 8), (s32) &func_0000F304, (s32) arg0);
+}
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0000F304);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0000F330);
+
+void func_0000F050(struct Unk_func_0000F050_0 *arg0) {
+    func_00012E58(M2C_FIELD(arg0, s32 *, 8));
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_0000F050(struct Unk_func_0000F050_0 *arg0) {
     func_00012E58(arg0->unk4);
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000F06C);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_0000F280(s32 arg0, M2C_UNK arg1) {
     func_0000F2A4(arg1, arg0);
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F860);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F870);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F87C);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0000F760);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00010064);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_000101DC);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000F2A4);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000FD30);
+#endif
 
+#if FW_VERSION == 260
+void func_000102F4(struct Unk_func_000102F4_0 *arg0, struct Unk_vt_func_000102F4_arg1 **arg1) {
+    if (M2C_FIELD(*arg1, s32 (**)(struct Unk_vt_func_000102F4_arg1 **), 0x14)(arg1) != 1) {
+
+    } else {
+        M2C_FIELD(arg0, struct Unk_vt_func_000102F4_arg1 ***, 0x10) = arg1;
+        func_0000F190((s32) arg0);
+        M2C_FIELD(M2C_FIELD(arg0, void **, 0), M2C_UNK (**)(struct Unk_func_000102F4_0 *), 8)(arg0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_000102F4(struct Unk_func_000102F4_0 *arg0, struct Unk_vt_func_000102F4_arg1 **arg1) {
     s32 temp_v0;
 
@@ -1987,7 +2418,23 @@ void func_000102F4(struct Unk_func_000102F4_0 *arg0, struct Unk_vt_func_000102F4
         func_0001040C(arg0, arg1);
     }
 }
+#endif
 
+#if FW_VERSION == 260
+void func_0001036C(struct Unk_func_0001036C_0 *arg0) {
+    s32 temp_v0;
+
+    func_00005100((struct Unk_func_00003DCC_0 *) arg0->unk10);
+    temp_v0 = arg0->unk14;
+    if (temp_v0 != 0) {
+        scePaf_79493F8F(0, temp_v0);
+        arg0->unk14 = 0;
+    }
+    func_0000F104((s32) arg0);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_0001036C(struct Unk_func_0001036C_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -2010,7 +2457,13 @@ void func_0001036C(struct Unk_func_0001036C_0 *arg0) {
         arg0->unk18 = 0;
     }
 }
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0002591C);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_000103F0(struct Unk_func_000103F0_0 *arg0) {
     func_00012E58(arg0->unk4);
 }
@@ -2026,7 +2479,9 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00010938);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00010960);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00010998);
+#endif
 
+#if FW_VERSION >= 201
 void func_00010ADC(void) {
     func_00010AF8();
 }
@@ -2042,13 +2497,64 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00010B7C);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00010BC0);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00010C64);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/photo_plugin", func_0001054C);
+
+void func_00010820(struct Unk_func_0001036C_0 *arg0) {
+    s32 temp_v0;
+
+    func_0001036C(arg0);
+    temp_v0 = arg0->unk18;
+    if (temp_v0 != 0) {
+        scePaf_79493F8F(0, temp_v0);
+        arg0->unk18 = 0;
+    }
+}
+
+void func_00010864(void *arg0) {
+    func_00012E58(M2C_FIELD(arg0, s32 *, 0x10));
+}
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00010880);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00010CCC);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00010CE8);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00010DE4);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00010E4C);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00010E84);
+
+INCLUDE_ASM("nonmatchings/photo_plugin", func_00010FA4);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00010D04);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00011288);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0001132C);
+#endif
 
+#if FW_VERSION == 260
+void func_00011388(struct Unk_func_00011388_0 *arg0, struct Unk_vt_func_00011388_arg1 **arg1) {
+    func_00011288((s32) arg0, (s32) &D_0002FB8C);
+    if (M2C_FIELD(*arg1, s32 (**)(struct Unk_vt_func_00011388_arg1 **), 0x14)(arg1) != 0) {
+
+    } else {
+        arg0->unk8 = (void **) arg1;
+        func_000044A8((s32) arg1, (s32) &func_00011470, (s32) arg0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_00011388(struct Unk_func_00011388_0 *arg0, struct Unk_vt_func_00011388_arg1 **arg1) {
     func_00011288(arg0, (s32) &D_0002FB8C);
     if ((*arg1)->unk10(arg1) != 0) {
@@ -2058,7 +2564,9 @@ void func_00011388(struct Unk_func_00011388_0 *arg0, struct Unk_vt_func_00011388
         func_000044A8((s32) arg1, (s32) &func_00011470, arg0);
     }
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000113F4);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00011470);
@@ -2096,12 +2604,28 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002FCE4);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002FD00);
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_00030004);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_00031154);
 #endif
 
 #if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002FD04);
+#endif
+
+#if FW_VERSION == 260
+void func_0001206C(struct Unk_func_0001206C_0 *arg0, struct Unk_vt_func_0001206C_arg1 **arg1) {
+    func_00011288((s32) arg0, (s32) "info_album_page");
+    if (M2C_FIELD(*arg1, s32 (**)(struct Unk_vt_func_0001206C_arg1 **), 0x14)(arg1) != 1) {
+
+    } else {
+        arg0->unk8 = (void **) arg1;
+        func_00012174((s32) arg0);
+    }
+}
 #endif
 
 #if FW_VERSION == 250

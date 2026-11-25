@@ -78,9 +78,19 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EED10);
 
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EED6C);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EEDD0);
-#else
+#endif
+
+#if FW_VERSION == 151
+void func_000EEDD0(struct Unk_vt_func_000EEDD0_arg0 **arg0) {
+    func_0011E438(2);
+    func_0011D80C();
+    M2C_FIELD(*arg0, M2C_UNK (**)(struct Unk_vt_func_000EEDD0_arg0 **), 0x5C)(arg0);
+}
+#endif
+
+#if FW_VERSION == 282
 void func_000EEDD0(struct Unk_vt_func_000EEDD0_arg0 **arg0) {
     sceGumMatrixMode(2);
     sceGumLoadIdentity();

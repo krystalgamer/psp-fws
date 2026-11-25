@@ -36,4 +36,3 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_092A3C", func_00093360);
 void func_00093394(struct Unk_func_00093394_0 *arg0, s32 arg1) {
     arg0->unk4C = arg1;
 }
-

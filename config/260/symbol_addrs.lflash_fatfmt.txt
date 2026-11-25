@@ -19,3 +19,5 @@ sceKernelCreateVpl = 0x0000148C; // type:func
 sceKernelDeleteVpl = 0x00001494; // type:func
 sceKernelTryAllocateVpl = 0x0000149C; // type:func
 sceKernelDelayThread = 0x000014A4; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

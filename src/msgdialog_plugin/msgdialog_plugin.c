@@ -106,6 +106,10 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013A4);
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001298);
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012D8_v260);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012B4_v250);
 #endif
@@ -124,8 +128,18 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001318);
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000133C);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001360);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013A8);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001384);
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013F0);
 #endif
 
 #if FW_VERSION == 250
@@ -144,6 +158,10 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000013E4);
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001400);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000141C);
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001480);
 #endif
 
 #if FW_VERSION == 250
@@ -270,7 +288,7 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001604);
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001434);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000163C);
 #endif
 
@@ -308,7 +326,17 @@ void func_00000BC8(void) {
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000BE4);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 260
+void func_00000998(void) {
+    void *sp0;
+    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    func_00000E88(&sp0);
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    func_00000E88(&sp0);
+}
+#endif
+
+#if FW_VERSION < 260
 void func_00000998(void) {
     void *sp0;
     sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_E9930C29(-1));
@@ -316,7 +344,9 @@ void func_00000998(void) {
     sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_5C161337(-1));
     func_00000E88(&sp0);
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_00000C0C(void) {
     void *sp0;
     sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());

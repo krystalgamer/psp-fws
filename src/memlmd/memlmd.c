@@ -4,6 +4,10 @@
 
 INCLUDE_ASM("nonmatchings/memlmd", func_00000000);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/memlmd", func_0000006C_v260);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/memlmd", func_0000006C_v250);
 #endif
@@ -22,7 +26,7 @@ INCLUDE_ASM("nonmatchings/memlmd", func_0000006C_v152);
 
 INCLUDE_ASM("nonmatchings/memlmd", func_0000006C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 352
 void memlmd_7CF1CD3E(s32 arg0, s32 arg1, s32 arg2) {
     func_0000006C(arg0, arg1, arg2, 0);
 }
@@ -122,15 +126,33 @@ INCLUDE_ASM("nonmatchings/memlmd", semaphore_77E97079);
 INCLUDE_ASM("nonmatchings/memlmd", memlmd_D1732BE4);
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/memlmd", D_00001D10);
+
+INCLUDE_RODATA("nonmatchings/memlmd", D_00001D14);
+
+INCLUDE_RODATA("nonmatchings/memlmd", D_00001D18);
+
+INCLUDE_RODATA("nonmatchings/memlmd", D_00001D1C);
+
+INCLUDE_RODATA("nonmatchings/memlmd", D_00001D20);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/memlmd", D_000017C8);
 
 INCLUDE_RODATA("nonmatchings/memlmd", D_000017D8);
 #endif
 
-#if FW_VERSION < 352
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/memlmd", D_00001D44);
+#endif
+
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/memlmd", D_000012B4);
-#else
+#endif
+
+#if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001F28);
 
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001F2C);
@@ -146,7 +168,9 @@ INCLUDE_RODATA("nonmatchings/memlmd", D_00001F3C);
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001F40);
 #endif
 
+#if FW_VERSION != 260
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001F44);
+#endif
 
 #if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001F48);
@@ -166,13 +190,25 @@ INCLUDE_RODATA("nonmatchings/memlmd", D_00002094);
 INCLUDE_RODATA("nonmatchings/memlmd", D_00002124);
 #endif
 
+#if FW_VERSION != 260
 INCLUDE_RODATA("nonmatchings/memlmd", D_00002134);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001910);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/memlmd", D_00001EF4);
+
+INCLUDE_RODATA("nonmatchings/memlmd", D_00001F04);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/memlmd", D_000019A0);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/memlmd", D_000019A4);
 #endif
 

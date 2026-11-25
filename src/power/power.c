@@ -17,17 +17,21 @@ INCLUDE_ASM("nonmatchings/power", func_000004BC);
 
 INCLUDE_ASM("nonmatchings/power", scePowerRegisterCallback);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", scePowerUnregitserCallback);
-#else
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/power", scePowerUnregisterCallback);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_A9D22232);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_BAFA3DF0);
+#else
+INCLUDE_ASM("nonmatchings/power", scePowerUnregitserCallback);
 #endif
 
 INCLUDE_ASM("nonmatchings/power", func_0000096C);
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/power", func_00000994);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/power", func_00000A3C);
@@ -68,7 +72,7 @@ s32 scePower_driver_AD5BB433(void) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 scePower_driver_C71EE866(s8 arg0) {
     D_00005889 = arg0;
     return 0;
@@ -650,7 +654,7 @@ INCLUDE_ASM("nonmatchings/power", func_00003B14);
 INCLUDE_ASM("nonmatchings/power", scePower_driver_57A098B4);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
     if (arg0 != NULL) {
         *arg0 = (s32) D_0000AABC;
@@ -674,7 +678,7 @@ s32 scePower_driver_55D2D789(s32 *arg0, s32 *arg1) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePower_driver_DD27F119);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_75F91FE4);
@@ -758,11 +762,19 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_35B7662E);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_F9B4DEA1);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 260
+s32 scePowerGetCpuClockFrequency(void) {
+    return D_0000AF94;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 260
 s32 scePowerGetCpuClockFrequencyInt(void) {
     return D_0000A1D0;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerGetCpuClockFrequencyFloat);
 
 s32 scePowerGetBusClockFrequencyInt(void) {

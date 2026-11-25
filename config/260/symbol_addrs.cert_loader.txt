@@ -7,3 +7,6 @@ sceIoLseek = 0x00000E54; // type:func
 sceIoRead = 0x00000E5C; // type:func
 sceIoClose = 0x00000E64; // type:func
 SysMemForKernel_FC114573 = 0x00000E6C; // type:func
+// shared names (tools/add_version.py) begin
+func_00000D8C = 0x00000CF0; // type:func rom:0xD70
+// shared names (tools/add_version.py) end

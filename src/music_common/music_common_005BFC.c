@@ -45,4 +45,3 @@ s32 music_common_83F66E1F(s32 arg0) {
 s32 music_common_EE5C2594(s32 arg0) {
     return arg0 + 0x24;
 }
-

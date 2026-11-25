@@ -68,7 +68,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00000730);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000764);
 
-#if FW_VERSION == 152 || FW_VERSION == 250
+#if FW_VERSION == 152 || (FW_VERSION >= 250 && FW_VERSION < 340)
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000087C);
 #endif
 
@@ -116,7 +116,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00001304);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000013FC);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001460);
 #endif
 
@@ -138,7 +138,7 @@ s32 func_00001840(void) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000017DC);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001B98);
@@ -170,7 +170,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00001D04);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001F0C);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001E68);
 #endif
 
@@ -240,7 +240,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_000029D8);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002BF0);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002CF8);
 #endif
 
@@ -266,7 +266,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00002FA0);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000318C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000033A8);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00003604);
@@ -274,7 +274,21 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00003604);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000363C);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000036A4);
+#endif
 
+#if FW_VERSION == 260
+void func_00003610(void) {
+    M2C_VFIELD(&D_00005170, s32, 0x74) = -1;
+    M2C_VFIELD(&D_00005170, s32, 0x50) = 0;
+    M2C_VFIELD(&D_00005170, s32, 0x68) = -1;
+    M2C_VFIELD(&D_00005170, s32, 0x64) = -1;
+    M2C_VFIELD(&D_00005170, s32, 0x48) = -1;
+    M2C_VFIELD(&D_00005170, s32, 0x4C) = -1;
+    M2C_VFIELD(&D_00005170, s32, 0x70) = 0;
+}
+#endif
+
+#if FW_VERSION == 250
 void func_00003610(void) {
     M2C_VFIELD(&D_000051A0_v250, s32, 0x74) = -1;
     M2C_VFIELD(&D_000051A0_v250, s32, 0x50) = 0;

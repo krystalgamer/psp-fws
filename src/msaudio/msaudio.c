@@ -206,7 +206,7 @@ s32 func_0000035C(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/msaudio", func_000003A4);
 
 INCLUDE_ASM("nonmatchings/msaudio", func_00000424);
@@ -302,7 +302,7 @@ s32 module_stop(void) {
     return 0;
 }
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 340
 INCLUDE_RODATA("nonmatchings/msaudio", D_00006A88);
 #endif
 

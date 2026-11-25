@@ -59,6 +59,7 @@ extern s16 D_0000AAC4;
 extern s16 D_0000AAC6;
 extern s16 D_0000AACC;
 extern s16 D_0000AACE;
+extern s32 D_0000AF94;
 extern s32 D_0000B348;
 extern s32 D_0000B354;
 extern s32 D_0000B358;

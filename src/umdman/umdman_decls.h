@@ -373,6 +373,7 @@ void sceUmdMan_driver_0DC8D26D(void);
 s32 sceUmdMan_driver_1CB85F05(void);
 s32 sceUmdMan_driver_1FBF6078(void);
 s32 sceUmdMan_driver_2C756C37(void);
+s32 sceUmdMan_driver_2E49311E(void);
 s32 sceUmdMan_driver_3DCFAA71(s32 arg0);
 s32 sceUmdMan_driver_405B48A5(void);
 s32 sceUmdMan_driver_42D28DD1(void);

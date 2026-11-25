@@ -41,7 +41,22 @@ INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001420);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001434);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION == 260
+void func_0000076C(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0("topmenu_plugin");
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK), 0x10)(0xD);
+        }
+    }
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 void func_0000076C(void) {
     s32 temp_v0;
     void *temp_v0_2;
@@ -237,7 +252,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00000A90);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000AE0);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000E44);
 #endif
 

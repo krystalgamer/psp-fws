@@ -13,6 +13,7 @@
   "func_00001550": "void func_00001550(void);",
   "func_00001550_v250": "s32 func_00001550_v250(void);",
   "func_00001588": "void func_00001588(void);",
+  "func_000015F8": "s32 func_000015F8(void);",
   "func_000015FC": "void func_000015FC(s32 arg0, s32 arg1);",
   "func_0000167C": "s32 func_0000167C(s32 arg0);",
   "func_000017CC": "void func_000017CC(u8 arg0);",

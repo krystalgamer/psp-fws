@@ -47,7 +47,7 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000220);
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_000002B8);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_000003CC);
 #endif
 
@@ -114,7 +114,7 @@ INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001D20);
 
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001D30);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001970);
 #endif
 
@@ -168,7 +168,7 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000F60);
 void func_00001068(void) {
 }
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001064);
 #endif
 
@@ -190,7 +190,7 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001198);
 
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_0000122C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001248);
 #endif
 

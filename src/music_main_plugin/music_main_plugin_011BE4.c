@@ -37,4 +37,3 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_00011C50);
 s32 func_00011C5C(void) {
     return scePaf_75062BCF() != 0;
 }
-

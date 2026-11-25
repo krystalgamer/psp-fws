@@ -237,6 +237,7 @@ s32 func_0000602C(void);
 s32 func_00006034(void);
 s32 func_00006164(void);
 void func_000062E4(void);
+s32 func_000062FC(void);
 s32 func_00006300_v250(void);
 s32 func_00006430(void);
 M2C_UNK func_00006484();

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
+#if FW_VERSION == 282
 void func_000092E8(s32 arg0) {
     D_000A4238->unkE0(2, arg0 & 0xFF);
 }
@@ -678,6 +679,7 @@ s32 func_00010CCC(void) {
 }
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00010CD4);
+#endif
 
 void func_00010CF0(s32 arg0, s32 arg1, s32 arg2) {
     D_000A43C4 = arg0;
@@ -685,6 +687,7 @@ void func_00010CF0(s32 arg0, s32 arg1, s32 arg2) {
     D_000A43CC = arg2;
 }
 
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_0009B118);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_0009B128);
@@ -778,6 +781,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_0009B324);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_0009B32C);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_0009B338);
+#endif
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00010D0C);
 
@@ -785,9 +789,13 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00010ED8);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_000110D0);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00002F58);
+#else
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00011100);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00011158);
+#endif
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_000111A8);
 
@@ -795,5 +803,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00011250);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00011408);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00003220);
+#else
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00011438);
-
+#endif

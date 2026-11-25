@@ -38,7 +38,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C00D873B);
 
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_00001F8C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_C00D873B);
 #endif
 
@@ -46,7 +46,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_C00D873B);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_FEE0A97D);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_3D6CC0D9);
 #endif
 
@@ -96,7 +96,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00000D28);
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000D58);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000EFC);
 #endif
 
@@ -134,7 +134,7 @@ void sceMePower_driver_579ACEA9(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001070);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", func_0000129C);
 #endif
 
@@ -198,9 +198,15 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_63463F66);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C3A1D6B2);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/me_wrapper", func_000018C8);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/me_wrapper", func_000018B4_v250);
+#endif
 
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", func_000019C8);
 #endif
 
@@ -228,13 +234,13 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_000017B0);
 INCLUDE_ASM("nonmatchings/me_wrapper", func_000018B4);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001A44);
 #endif
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001918);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001B58);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001B84);
@@ -242,7 +248,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00001B84);
 
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002048);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_47DB48C2);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_4794C05C);

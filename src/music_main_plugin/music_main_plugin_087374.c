@@ -2,6 +2,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087374", func_00087374);
 
 void func_00087394(struct Unk_func_00087394_0 *arg0, s8 arg1) {
@@ -19,4 +20,4 @@ void func_000873B4(M2C_UNK **arg0) {
 void func_000873C4(M2C_UNK **arg0) {
     *arg0 = &D_000A20E0;
 }
-
+#endif

@@ -2,3 +2,22 @@
 sceParseHttpStatusLine = 0x00000000; // type:func
 sceParseHttpResponseHeader = 0x00000120; // type:func
 sceKernelCheckThreadStack = 0x00000CA8; // type:func
+// shared names (tools/add_version.py) begin
+D_00000D60 = 0x00000D80; // rom:0xE00
+D_00000C41 = 0x00000D81; // rom:0xE01
+func_000002D8 = 0x000003BC; // type:func rom:0x43C
+func_0000044C = 0x00000530; // type:func rom:0x5B0
+func_000004DC = 0x000005C0; // type:func rom:0x640
+func_00000564 = 0x00000648; // type:func rom:0x6C8
+func_000006C4 = 0x000006EC; // type:func rom:0x76C
+func_000006F0 = 0x00000718; // type:func rom:0x798
+func_0000065C = 0x0000072C; // type:func rom:0x7AC
+func_00000710 = 0x00000738; // type:func rom:0x7B8
+func_000007B0 = 0x000007D8; // type:func rom:0x858
+func_0000090C = 0x00000934; // type:func rom:0x9B4
+func_00000954 = 0x0000097C; // type:func rom:0x9FC
+func_00000988 = 0x000009B0; // type:func rom:0xA30
+func_000009F0 = 0x00000A18; // type:func rom:0xA98
+func_00000BD0 = 0x00000BF8; // type:func rom:0xC78
+func_00000B4C = 0x00000C70; // type:func rom:0xCF0
+// shared names (tools/add_version.py) end

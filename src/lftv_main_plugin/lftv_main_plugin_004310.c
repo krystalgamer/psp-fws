@@ -10,7 +10,9 @@ void func_00004310(s32 arg0) {
         func_00001D58();
     }
 }
-#else
+#endif
+
+#if FW_VERSION == 250
 void func_0000434C(struct Unk_func_0000434C_0 *arg0) {
     if (arg0 != NULL) {
 
@@ -116,7 +118,7 @@ void func_00004EA4(void) {
     func_00004E08(0, 0xFFFF);
 }
 
-#if FW_VERSION == 250
+#if FW_VERSION < 282
 void func_00004688(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 0;

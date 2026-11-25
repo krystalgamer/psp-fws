@@ -469,6 +469,10 @@ INCLUDE_ASM("nonmatchings/sysreg", func_00001814);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_3EA188AD);
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/sysreg", D_00002BFC);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002B78_v250);
 #endif

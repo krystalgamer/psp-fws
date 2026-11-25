@@ -542,7 +542,7 @@ void func_00002640(s32 arg0) {
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002800);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002998);
 #endif
 
@@ -588,9 +588,15 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000028C8);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000029F0);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002B18);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002BD0);
+#endif
+
+#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002BB0_v250);
 #endif
 
@@ -600,7 +606,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002BA4);
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002BDC);
 #endif
 
-#if FW_VERSION != 250
+#if FW_VERSION < 250 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00002A60);
 #endif
 

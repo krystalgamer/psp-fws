@@ -3,6 +3,14 @@
 
 INCLUDE_ASM("nonmatchings/chnnlsv", func_00000000);
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/chnnlsv", D_00001700);
+
+INCLUDE_RODATA("nonmatchings/chnnlsv", D_00001710);
+
+INCLUDE_RODATA("nonmatchings/chnnlsv", D_00001720);
+#endif
+
 #if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/chnnlsv", D_000019A0);
 

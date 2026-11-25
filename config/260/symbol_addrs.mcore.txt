@@ -49,3 +49,5 @@ sceRtcGetTick = 0x00028588; // type:func
 sceRtcTickAddSeconds = 0x00028590; // type:func
 sceUtilityGetSystemParamInt = 0x00028598; // type:func
 sceVshBridge_02191D5D = 0x000285A0; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

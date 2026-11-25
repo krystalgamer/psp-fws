@@ -63,3 +63,5 @@ sceRtc_driver_B44BDAED = 0x000059DC; // type:func
 sceRtcGetTickResolution = 0x000059E4; // type:func
 sceKernelPowerUnlock = 0x000059EC; // type:func
 sceKernelPowerLock = 0x000059F4; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

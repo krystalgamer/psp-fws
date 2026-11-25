@@ -314,11 +314,19 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_6D302D3D);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_659188E1);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_62A27008);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 s32 func_00001A98(void) {
     return (KDebugForKernel_428A8DA3() != 0) ? 0 : 0x80020149;
 }
+#endif
 
+#if FW_VERSION >= 201
 s32 sceKernelExitGame(void) {
     return LoadExecForUser_2AC9954B(0);
 }
@@ -368,7 +376,7 @@ void LoadExecForKernel_70901231(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250
 void LoadExecForKernel_6D302D3D(s32 arg0) {
     func_00002288(0x200, arg0);
 }
@@ -380,7 +388,9 @@ INCLUDE_ASM("nonmatchings/loadexec", sceKernelRegisterExitCallback);
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_D9739B89);
 #endif
 
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_62A27008);
+#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_11412288);
@@ -388,7 +398,27 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_11412288);
 
 INCLUDE_ASM("nonmatchings/loadexec", syslib_D3744BE0);
 
-#if FW_VERSION == 250
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/loadexec", D_00003098);
+
+INCLUDE_RODATA("nonmatchings/loadexec", D_0000309C);
+
+INCLUDE_RODATA("nonmatchings/loadexec", D_000030A4);
+
+INCLUDE_ASM("nonmatchings/loadexec", func_00001BD0);
+
+INCLUDE_ASM("nonmatchings/loadexec", func_00001C94);
+
+INCLUDE_ASM("nonmatchings/loadexec", func_00001DB0);
+
+INCLUDE_ASM("nonmatchings/loadexec", func_00001FA8);
+
+INCLUDE_ASM("nonmatchings/loadexec", func_00002190);
+
+INCLUDE_ASM("nonmatchings/loadexec", func_00002288);
+#endif
+
+#if FW_VERSION >= 250
 void func_00001C70(s32 arg0) {
     func_00002288(0x300, arg0);
 }
@@ -450,7 +480,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00001DF4);
 INCLUDE_ASM("nonmatchings/loadexec", func_00001DA4);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadexec", func_00001F08);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00001FA8);
@@ -462,7 +492,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00002190);
 INCLUDE_ASM("nonmatchings/loadexec", func_00002288);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002F08);
 
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002F0C);
@@ -472,6 +502,12 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002F14);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002F2C);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00002304);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/loadexec", func_00002700);
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/loadexec", func_00002304);
 #endif

@@ -12,7 +12,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegUnRegistStream);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegRegistStream);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_000096DC);
 #endif
 
@@ -66,6 +66,10 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeMode);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeDetailIndex);
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_CF3547A2);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_6F314410);
 #endif
@@ -88,7 +92,7 @@ s32 sceMpegAvcDecodeDetail(void *arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_CF3547A2);
 #endif
 
@@ -100,14 +104,30 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcInitYCbCr);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcQueryYCbCrSize);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcCsc);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcCopyYCbCr);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeYCbCr);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeStopYCbCr);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000017D0);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001BC4);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001874);
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001CFC);
 #endif
 
 #if FW_VERSION < 282
@@ -161,6 +181,10 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001E54);
 #endif
 
 INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009B68);
+
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009010);
+#endif
 
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009784);
@@ -228,13 +252,23 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000022B4);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_0000237C);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00002350);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000026B8);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000027CC);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00002970);
+#endif
+
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000015FC);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000019B0);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000029AC);
 #endif
 
@@ -242,9 +276,11 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000029AC);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00002040_v100);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00003A8C);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegRingbufferPut);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00003B90);
@@ -260,7 +296,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_C2F02CDD);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegRingbufferQueryMemSize);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegRingbufferQueryPackNum);
 #endif
 
@@ -304,11 +340,15 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000036DC);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00003794);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00004D2C);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_DBB60658);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_5AC68A41);
 #endif
 
@@ -316,7 +356,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_5AC68A41);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegGetPcmAu);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000050DC);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00005444);
@@ -381,7 +421,7 @@ s32 func_00004D20(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 void func_00006484(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_00005444(arg0, arg1, 3, arg2, arg3);
 }
@@ -391,11 +431,17 @@ void sceMpeg_D4DD6E75(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 #endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00005D9C);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_0000657C);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000057A4);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00004D2C);
 #endif
 
@@ -409,13 +455,15 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000063F0);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00005C08);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00005D9C);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_0000657C);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_0000660C);
 #endif
 
@@ -476,7 +524,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegQueryPcmEsSize);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_11CAB459);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00007040);
 #endif
 
@@ -518,7 +566,7 @@ u8 func_0000568C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 void *func_00005694(void *arg0, u32 arg1) {
     void *var_v0;
 

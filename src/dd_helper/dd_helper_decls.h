@@ -170,6 +170,7 @@ extern M2C_UNK D_0000B628;
 extern M2C_UNK func_00001500;
 extern s32 func_0000696C;
 
+void func_00000164(void);
 void func_000001C4(void);
 void func_00000230(void);
 s32 func_0000038C(void);

@@ -12,6 +12,7 @@
   "func_00002A24": "s32 func_00002A24(s32, s32, s32);",
   "func_000030BC": "s32 func_000030BC(s32 *arg0);",
   "func_00003360": "s32 func_00003360(void);",
+  "func_0000338C": "s32 func_0000338C(void);",
   "func_00003958": "void func_00003958(s32 arg0);",
   "func_00003A00": "s32 func_00003A00(s32, s32, s32);",
   "func_00004938": "M2C_UNK *func_00004938(void);",

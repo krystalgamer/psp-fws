@@ -8,7 +8,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006340);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006414);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005F58);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006088);
@@ -56,7 +56,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006C50);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004CDC);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000068D4);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006948);
@@ -116,7 +116,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00007358);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005434);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000073F8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000077D8);
@@ -162,7 +162,7 @@ INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_000080D0);
 
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00010DA4);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000080C0);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000834C);
@@ -210,7 +210,7 @@ s32 func_00008E00(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00008E34);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000089C8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00008BB0);
@@ -494,13 +494,25 @@ INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_000109E0);
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_000109E4);
 
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_000109E8);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00010ED4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00010F64);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00010F74);
+#endif
+
+#if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_000109EC);
 
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00010A7C);
 
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00010A8C_v250);
+#endif
 
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000BC54);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000BD1C);
@@ -576,9 +588,17 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000DFE0);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000E018);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000E024);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00010F9C);
+#endif
+
+#if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00010AB4);
+#endif
 
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000E1E4);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000E3A4);
@@ -588,7 +608,27 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000E3C8);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000E730);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000E7B8);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000E7C4);
+
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000F140);
+
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000F188);
+
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000F1DC);
+
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000F22C);
+
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000F510);
+
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000101B8);
+
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00010204);
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00010AE8);
 
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00010B08);
@@ -602,7 +642,9 @@ INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00011408);
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00011508);
 
 INCLUDE_RODATA("nonmatchings/pspnet_apctl_006340", D_00011608);
+#endif
 
+#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000E7C4);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000EC30);

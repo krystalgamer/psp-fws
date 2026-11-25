@@ -364,6 +364,7 @@ extern s32 D_00016510;
 extern s32 D_00016518;
 extern s32 D_0001657C;
 extern s32 D_00016598;
+extern s32 D_00016630;
 extern s32 D_00017EB0;
 extern M2C_UNK func_00003EDC;
 extern M2C_UNK func_00003F4C;

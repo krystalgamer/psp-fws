@@ -2,6 +2,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
+#if FW_VERSION == 282
 s32 func_00019E80(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -137,6 +138,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001A4CC);
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001A50C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001A568);
+#endif
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001A5C4);
 
@@ -164,7 +166,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001AAA8);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001AAB0);
 
+#if FW_VERSION == 282
 s32 func_0001AAF0(void) {
     return 0x80004001;
 }
-
+#endif

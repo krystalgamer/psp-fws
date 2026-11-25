@@ -50,7 +50,7 @@ void sceNetAdhocMatchingGetPoolMaxAlloc(void) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", sceNetAdhocMatchingGetPoolStat);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00000E8C);
 #endif
 
@@ -74,7 +74,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00000D58);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00000FB4);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_0000143C);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00001FA0);

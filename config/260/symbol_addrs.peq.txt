@@ -7,3 +7,5 @@ sceKernelDcacheWritebackRange = 0x000002EC; // type:func
 sceKernelDcacheInvalidateRange = 0x000002F4; // type:func
 sceMeCore_driver_3D5F109C = 0x000002FC; // type:func
 sceMeCore_driver_D1EA3DFD = 0x00000304; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

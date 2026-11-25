@@ -96,7 +96,7 @@ void func_000005F4(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00015410);
 #endif
 
@@ -413,7 +413,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00001FC4);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000233C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00015440);
 
 INCLUDE_RODATA("nonmatchings/threadman", D_00015458);
@@ -565,7 +565,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelSema);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferSemaStatus);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00015470);
 #endif
 
@@ -633,7 +633,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelEventFlag);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferEventFlagStatus);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00015490);
 #endif
 
@@ -693,7 +693,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelReceiveMbx);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferMbxStatus);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_000154A8);
 #endif
 
@@ -761,7 +761,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00008828);
 INCLUDE_ASM("nonmatchings/threadman", func_000088FC);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_000154C0);
 #endif
 
@@ -828,7 +828,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelVpl);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferVplStatus);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_000154E8);
 #endif
 
@@ -1044,7 +1044,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelFpl);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferFplStatus);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000A7CC);
 #endif
 
@@ -1058,7 +1058,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000BB7C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000BBD0);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00015500);
 #endif
 
@@ -1296,7 +1296,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000D994);
 INCLUDE_ASM("nonmatchings/threadman", func_0000DAF4);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00015518);
 
 INCLUDE_RODATA("nonmatchings/threadman", D_00015530);
@@ -1663,7 +1663,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadmanIdList);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadmanIdType);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00015578);
 #endif
 

@@ -6,13 +6,39 @@ INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_91B11F3A);
 
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_6B3AE857);
 
-#if FW_VERSION == 250
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_49E09367);
-#else
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_C6D98C54);
 
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_685E0DA7);
+#endif
 
+#if FW_VERSION == 260
+s32 func_00000214(s32 arg0, s32 arg1, void **arg2) {
+    s32 var_v1;
+    void *temp_v0;
+
+    *arg2 = NULL;
+    var_v1 = 0x86400001;
+    if (arg0 != 0) {
+        var_v1 = 0x86400402;
+        if ((u32) (arg1 - 1) < 0x7FU) {
+            temp_v0 = M2C_FIELD(((arg1 * 4) + arg0), void **, 0x3014);
+            var_v1 = 0x86400403;
+            *arg2 = temp_v0;
+            if (temp_v0 != NULL) {
+                var_v1 = ((M2C_FIELD(temp_v0, s32 *, 8) ^ 3) == 0) ? 0 : 0x86400401;
+            }
+        }
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION == 250
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_49E09367);
+#endif
+
+#if FW_VERSION == 282
 s32 func_00000214(s32 arg0, s32 arg1, void **arg2) {
     s32 var_v1;
     struct Unk_func_00000214_temp_v0 *temp_v0;
@@ -65,7 +91,7 @@ s32 sceAsfParser_8B08301F(void) {
 
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_95AD7B34);
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_2CB147F7);
 #else
 void sceAsfParser_2CB147F7(s32 arg0, s32 arg1, s32 arg2) {
@@ -74,7 +100,35 @@ void sceAsfParser_2CB147F7(s32 arg0, s32 arg1, s32 arg2) {
         func_00002124(arg0, sp0, arg2);
     }
 }
+#endif
 
+#if FW_VERSION >= 260
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_41322F4A);
+
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_24DB62B1);
+
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_320202AB);
+
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_6DA63281);
+
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_3CAAC462);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_0000058C);
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libasfparser", func_00000698_v260);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000006D8_v260);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00000708);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00000730);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00000780);
+#endif
+
+#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_F4502CB5);
 
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_002052FF);
@@ -99,36 +153,24 @@ INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_5EC678CB);
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000474);
 #endif
 
-#if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_41322F4A);
-
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_24DB62B1);
-
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_320202AB);
-
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_6DA63281);
-
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_3CAAC462);
-
-INCLUDE_ASM("nonmatchings/libasfparser", func_0000058C);
-#endif
-
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000698);
 
-#if FW_VERSION == 250
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libasfparser", func_0000080C);
 #else
 INCLUDE_ASM("nonmatchings/libasfparser", func_000006D8);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION < 282
 void func_000006D8(void *arg0) {
     s32 temp_a1;
 
     temp_a1 = M2C_FIELD(arg0, s32 *, 0);
     M2C_FIELD(arg0, M2C_UNK (**)(s32, s32), 8)(temp_a1, temp_a1);
 }
+#endif
 
+#if FW_VERSION == 250
 void func_00000548(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *temp_v1;
 
@@ -141,17 +183,21 @@ void func_00000548(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 INCLUDE_ASM("nonmatchings/libasfparser", func_0000055C);
 #endif
 
+#if FW_VERSION != 260
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000708);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000730);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000780);
+#endif
 
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000658);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000750);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libasfparser", func_000007E8);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_0000080C);
@@ -162,7 +208,9 @@ void func_0000083C(struct Unk_func_0000083C_0 *arg0) {
     temp_a1 = arg0->unk0;
     arg0->unk8(temp_a1, temp_a1);
 }
+#endif
 
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000860);
 #endif
 
@@ -172,19 +220,39 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_00000980);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000A64);
 
-#if FW_VERSION == 250
-INCLUDE_ASM("nonmatchings/libasfparser", func_000009E0);
-#else
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000ACC);
+#else
+INCLUDE_ASM("nonmatchings/libasfparser", func_000009E0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000DF4);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000E5C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 260
+INCLUDE_ASM("nonmatchings/libasfparser", func_00000F0C);
+#else
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000E14);
+#endif
 
+#if FW_VERSION == 260
+s32 func_00000FB8(struct Unk_func_00000FB8_0 *arg0) {
+    s32 var_v1;
+    u32 temp_a4;
+    u32 temp_v0;
+
+    var_v1 = 0;
+    temp_a4 = arg0->unk20;
+    temp_v0 = arg0->unk8;
+    if (temp_a4 < temp_v0) {
+        var_v1 = func_000016F4((s32) arg0, temp_v0 - temp_a4);
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION == 250
 s32 func_00000FB8(struct Unk_func_00000FB8_0 *arg0) {
     s32 var_v1;
     u32 temp_a4;
@@ -198,9 +266,9 @@ s32 func_00000FB8(struct Unk_func_00000FB8_0 *arg0) {
     }
     return var_v1;
 }
-#else
-INCLUDE_ASM("nonmatchings/libasfparser", func_00000F0C);
+#endif
 
+#if FW_VERSION == 282
 s32 func_00000FB8(struct Unk_func_00000FB8_0 *arg0) {
     s32 temp_v0;
     s32 var_a3;
@@ -256,33 +324,41 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_000016C0);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_000016F4);
 
+#if FW_VERSION == 260
+s32 func_00001728(struct Unk_func_00001728_0 *arg0) {
+    return (u32) (arg0->unk20 + arg0->unkC) >= (u32) arg0->unk8;
+}
+#endif
+
 #if FW_VERSION == 250
 s32 func_00001728(struct Unk_func_00001728_0 *arg0) {
     return (u32) (M2C_FIELD(arg0, s32 *, 0x30) + M2C_FIELD(arg0, s32 *, 0x1C)) >= (u32) M2C_FIELD(arg0, u32 *, 0x14);
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_00001728(struct Unk_func_00001728_0 *arg0) {
     return (u32) (M2C_FIELD(arg0, s32 *, 0x20) + arg0->unkC) >= (u32) arg0->unk8;
 }
 #endif
 
-#if FW_VERSION == 250
-s32 func_00001744(struct Unk_func_00001728_0 *arg0) {
-    return (u32) M2C_FIELD(arg0, u32 *, 0x30) >= (u32) M2C_FIELD(arg0, u32 *, 0x38);
-}
-#else
+#if FW_VERSION >= 260
 s32 func_00001744(struct Unk_func_00001728_0 *arg0) {
     return (u32) arg0->unk20 >= (u32) arg0->unk28;
 }
+#else
+s32 func_00001744(struct Unk_func_00001728_0 *arg0) {
+    return (u32) M2C_FIELD(arg0, u32 *, 0x30) >= (u32) M2C_FIELD(arg0, u32 *, 0x38);
+}
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 260
 s32 func_00001758(struct Unk_func_00001758_0 *arg0) {
-    return (u32) M2C_FIELD(arg0, u32 *, 0x30) >= (u32) M2C_FIELD(arg0, u32 *, 0x34);
+    return (u32) arg0->unk20 >= (u32) arg0->unk24;
 }
 #else
 s32 func_00001758(struct Unk_func_00001758_0 *arg0) {
-    return (u32) arg0->unk20 >= (u32) arg0->unk24;
+    return (u32) M2C_FIELD(arg0, u32 *, 0x30) >= (u32) M2C_FIELD(arg0, u32 *, 0x34);
 }
 #endif
 
@@ -299,9 +375,15 @@ s32 func_0000178C(struct Unk_func_00001728_0 *arg0) {
     return var_v0 == 0;
 }
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libasfparser", func_00001794);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/libasfparser", func_000016D8);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libasfparser", func_000017CC);
 #endif
 
@@ -321,19 +403,43 @@ s32 func_00001838(struct Unk_func_00001838_0 *arg0) {
     return arg0->unk2 & 0xF;
 }
 
+#if FW_VERSION == 260
+s32 func_0000174C(void *arg0) {
+    return (s32) (M2C_FIELD(arg0, u8 *, 3) & 0x60) >> 5;
+}
+#endif
+
 #if FW_VERSION == 250
 s32 func_0000174C(void *arg0) {
     return (s32) (M2C_FIELD(arg0, u8 *, 0x12) & 0x60) >> 5;
 }
+#endif
 
+#if FW_VERSION == 260
+s32 func_0000175C(void *arg0) {
+    return (s32) (M2C_FIELD(arg0, u8 *, 3) & 6) >> 1;
+}
+#endif
+
+#if FW_VERSION == 250
 s32 func_0000175C(void *arg0) {
     return (s32) (M2C_FIELD(arg0, u8 *, 0x12) & 6) >> 1;
 }
+#endif
 
+#if FW_VERSION == 260
+s32 func_0000182C_v260(void *arg0) {
+    return (s32) (M2C_FIELD(arg0, u8 *, 3) & 0x18) >> 3;
+}
+#endif
+
+#if FW_VERSION == 250
 s32 func_0000176C_v250(void *arg0) {
     return (s32) (M2C_FIELD(arg0, u8 *, 0x12) & 0x18) >> 3;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_00001844(struct Unk_func_00001844_0 *arg0) {
     return __builtin_allegrex_ext(arg0->unk3, 5, 2);
 }
@@ -349,15 +455,31 @@ s32 func_0000185C(struct Unk_func_0000185C_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00001868);
 
+#if FW_VERSION == 260
+s32 func_00001788(void *arg0) {
+    return (s32) (M2C_FIELD(arg0, u8 *, 4) & 0x30) >> 4;
+}
+#endif
+
 #if FW_VERSION == 250
 s32 func_00001788(void *arg0) {
     return (s32) (M2C_FIELD(arg0, u8 *, 0x13) & 0x30) >> 4;
 }
+#endif
 
+#if FW_VERSION == 260
+s32 func_00001798(void *arg0) {
+    return (s32) (M2C_FIELD(arg0, u8 *, 4) & 0xC) >> 2;
+}
+#endif
+
+#if FW_VERSION == 250
 s32 func_00001798(void *arg0) {
     return (s32) (M2C_FIELD(arg0, u8 *, 0x13) & 0xC) >> 2;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_00001874(struct Unk_func_00001874_0 *arg0) {
     return __builtin_allegrex_ext(arg0->unk4, 4, 2);
 }
@@ -367,33 +489,33 @@ s32 func_00001880(struct Unk_func_00001880_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 250
-s32 func_0000188C(struct Unk_func_0000188C_0 *arg0) {
-    return M2C_FIELD(arg0, u8 *, 0x13) & 3;
-}
-#else
+#if FW_VERSION >= 260
 s32 func_0000188C(struct Unk_func_0000188C_0 *arg0) {
     return arg0->unk4 & 3;
 }
+#else
+s32 func_0000188C(struct Unk_func_0000188C_0 *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x13) & 3;
+}
 #endif
 
-#if FW_VERSION == 250
-s32 func_00001898(struct Unk_func_00001898_0 *arg0) {
-    return M2C_FIELD(arg0, u8 *, 0x27) & 0x3F;
-}
-#else
+#if FW_VERSION >= 260
 s32 func_00001898(struct Unk_func_00001898_0 *arg0) {
     return arg0->unk17 & 0x3F;
 }
+#else
+s32 func_00001898(struct Unk_func_00001898_0 *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x27) & 0x3F;
+}
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 260
 u32 func_000018A4(struct Unk_func_000018A4_0 *arg0) {
-    return (u8) M2C_FIELD(arg0, u8 *, 0x27) >> 6;
+    return (u8) arg0->unk17 >> 6;
 }
 #else
 u32 func_000018A4(struct Unk_func_000018A4_0 *arg0) {
-    return (u8) arg0->unk17 >> 6;
+    return (u8) M2C_FIELD(arg0, u8 *, 0x27) >> 6;
 }
 #endif
 
@@ -401,23 +523,33 @@ void func_000018B0(s32 arg0, s32 arg1) {
     func_000016F4(arg0, arg1);
 }
 
-#if FW_VERSION == 250
-s32 func_000018CC(struct Unk_func_000018CC_0 *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x20);
-}
-#else
+#if FW_VERSION >= 260
 s32 func_000018CC(struct Unk_func_000018CC_0 *arg0) {
     return arg0->unk10;
 }
-#endif
+#else
+s32 func_000018CC(struct Unk_func_000018CC_0 *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x20);
+}
 
-#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/libasfparser", func_000017F0);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_000018A0);
 #endif
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_000018D4);
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libasfparser", func_00001910);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00001A18);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00001BD8);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00001C88);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00001D58);
+#endif
 
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/libasfparser", func_000018F8);
@@ -435,7 +567,9 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_00001E94);
 INCLUDE_ASM("nonmatchings/libasfparser", func_00001FA4);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00002000);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libasfparser", func_00001934);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00001A3C);
@@ -451,6 +585,10 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_00001E24);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00001E50);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libasfparser", func_00001E54);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libasfparser", func_00001E78);
 #endif
@@ -458,6 +596,24 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_00001E78);
 s32 func_00001E98(s32 arg0) {
     return arg0 & 0x7F;
 }
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libasfparser", func_00001E7C);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00001EF4);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00001FAC);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002064);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000020C4);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002200);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002250);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000022B0);
+#endif
 
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/libasfparser", func_000020A4);
@@ -485,7 +641,9 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_00002528);
 s32 func_000025DC(void) {
     return 0x86400401;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libasfparser", func_00001EA0);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00001F18);
@@ -507,6 +665,22 @@ void func_00002334(s32 *arg0) {
     *arg0 = 0;
 }
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002318);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002344);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002378);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002440);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000024A0);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000025E8);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002640);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/libasfparser", func_000025F0);
 
@@ -521,7 +695,9 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_000028E0);
 INCLUDE_ASM("nonmatchings/libasfparser", func_000029E8);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00002A48);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libasfparser", func_0000233C);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00002368);
@@ -539,7 +715,36 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_00002664);
 
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/libasfparser", func_000026F0);
-#else
+#endif
+
+#if FW_VERSION == 260
+void func_000026F0(s32 arg0) {
+    func_000026F8(arg0);
+    func_0000279C(arg0);
+}
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000026F8);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_0000279C);
+
+void func_00002808(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void *sp0;
+    if (func_00001C88(arg0, arg1, arg2, arg3, &sp0) >= 0) {
+        func_00002860(sp0);
+    }
+}
+
+void func_00002834(s32 arg0, s32 arg1) {
+    void *sp0;
+    if (func_00001BD8(arg0, arg1, &sp0) >= 0) {
+        func_00002860(sp0);
+    }
+}
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002860);
+#endif
+
+#if FW_VERSION == 282
 void func_000026F0(s32 arg0) {
     func_0000271C(arg0);
     func_000027C0(arg0);
@@ -562,13 +767,39 @@ void func_00002858(s32 arg0, s32 arg1) {
         func_00002884(sp0);
     }
 }
+#endif
 
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/libasfparser", func_00002884);
+#endif
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libasfparser", func_000028A8);
 #endif
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_000028F0);
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002954);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002998);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002B34);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002CAC);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002E08);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00002F64);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000030B0);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_0000312C);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000031FC);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000032E0);
+#endif
 
 #if FW_VERSION == 250
 void func_00002C24(s32 arg0, s32 arg1) {
@@ -600,7 +831,9 @@ s32 func_000034E0_v250(s32 arg0, void *arg1) {
     }
     return var_s1;
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libasfparser", func_00002978);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_000029BC);
@@ -626,11 +859,69 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_000034E0);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_000035C4);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/libasfparser", func_0000368C);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000036E0);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00003768);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00003784);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00003874);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00003974);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000039C8);
+
+s32 func_00003B24(s32 arg0, s32 *arg1) {
+    s32 var_a2;
+    void *temp_v0;
+
+    temp_v0 = (*arg1 * 4) + arg0 + 0x300C;
+    var_a2 = 0;
+    if (M2C_FIELD(temp_v0, s32 **, 8) == NULL) {
+        M2C_FIELD(temp_v0, s32 **, 8) = arg1;
+    } else {
+        var_a2 = 0x86400174;
+    }
+    return var_a2;
+}
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00003B58);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00003C44);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00003CAC);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00003D10);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00003D94);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00003E50);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000040B8);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00004284);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00004388);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00004418);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000044C4);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00004548);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000046E0);
+#endif
+
 #if FW_VERSION == 250
 s32 func_00003718(void *arg0) {
     return (M2C_FIELD(arg0, u8 *, 1) << 8) | M2C_FIELD(arg0, u8 *, 0);
 }
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/libasfparser", func_000036AC);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00003700);
@@ -684,11 +975,49 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_000044E4);
 INCLUDE_ASM("nonmatchings/libasfparser", func_00004568);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00004700);
+#else
+INCLUDE_ASM("nonmatchings/libasfparser", func_0000478C);
 #endif
 
-#if FW_VERSION == 250
-INCLUDE_ASM("nonmatchings/libasfparser", func_0000478C);
-#else
+#if FW_VERSION == 260
+void func_000047A0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x2AC) = 0;
+}
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000047A8);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00004860);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00004884);
+
+void func_000048A4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x2D4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x2D8) = 0;
+    M2C_FIELD(arg0, s32 *, 0x2DC) = 0;
+}
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000048B4);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000048C0);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_0000495C);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_000049BC);
+
+void func_000049EC(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s16 *, 0xA) = 9;
+    M2C_FIELD(arg0, s32 *, 0x288) = 0;
+    func_00004A98((s32) arg0, arg1);
+}
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00004A14);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00004A98);
+
+INCLUDE_ASM("nonmatchings/libasfparser", func_00004AF0);
+#endif
+
+#if FW_VERSION == 282
 void func_0000478C(struct Unk_func_0000478C_0 *arg0, s32 arg1) {
     func_000047C0(arg0);
     arg0->unk2CC = arg1;
@@ -721,7 +1050,9 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_00004150);
 INCLUDE_ASM("nonmatchings/libasfparser", func_0000432C);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_000043D4);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_000047C0(struct Unk_func_0000478C_0 *arg0) {
     arg0->unk2AC = 0;
 }
@@ -759,9 +1090,11 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_00004AB8);
 INCLUDE_ASM("nonmatchings/libasfparser", func_00004B10);
 #endif
 
+#if FW_VERSION != 260
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00006FC8);
+#endif
 
-#if FW_VERSION == 250
+#if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00007878);
 #endif
 
@@ -813,6 +1146,10 @@ INCLUDE_RODATA("nonmatchings/libasfparser", D_00007118);
 
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00007128);
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/libasfparser", D_00007118_v260);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00007138);
 #endif
@@ -863,7 +1200,9 @@ INCLUDE_RODATA("nonmatchings/libasfparser", D_0000821C);
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00008230);
 
 INCLUDE_RODATA("nonmatchings/libasfparser", D_0000824C);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00007218);
 
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00007228);
@@ -895,13 +1234,29 @@ INCLUDE_RODATA("nonmatchings/libasfparser", D_00008390);
 
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00007268);
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/libasfparser", D_00007218);
+
+INCLUDE_RODATA("nonmatchings/libasfparser", D_00007228);
+
+INCLUDE_RODATA("nonmatchings/libasfparser", D_00007238);
+
+INCLUDE_RODATA("nonmatchings/libasfparser", D_00007248);
+
+INCLUDE_RODATA("nonmatchings/libasfparser", D_00007258_v260);
+
+INCLUDE_RODATA("nonmatchings/libasfparser", D_000073A8);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/libasfparser", D_000083B8);
 
 INCLUDE_RODATA("nonmatchings/libasfparser", D_000083D8);
 
 INCLUDE_RODATA("nonmatchings/libasfparser", D_000083FC);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00007278);
 
 INCLUDE_RODATA("nonmatchings/libasfparser", D_000073C8);
@@ -974,6 +1329,10 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_000053A4);
 #endif
 
 INCLUDE_RODATA("nonmatchings/libasfparser", D_000074A0);
+
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/libasfparser", D_00007488);
+#endif
 
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/libasfparser", D_000074A4);
@@ -1071,13 +1430,13 @@ void func_0000664C(struct Unk_func_0000664C_0 *arg0) {
     }
 }
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 260
 u32 func_00006678(struct Unk_func_00006678_0 *arg0) {
     u32 temp_a0;
     u32 var_v0;
 
     temp_a0 = arg0->unk10;
-    var_v0 = 0x86401013;
+    var_v0 = 0x86401012;
     if (temp_a0 != 0) {
         var_v0 = (u32) (arg0->unk28 * 0x3E8) / temp_a0;
     }
@@ -1089,7 +1448,7 @@ u32 func_00006678(struct Unk_func_00006678_0 *arg0) {
     u32 var_v0;
 
     temp_a0 = arg0->unk10;
-    var_v0 = 0x86401012;
+    var_v0 = 0x86401013;
     if (temp_a0 != 0) {
         var_v0 = (u32) (arg0->unk28 * 0x3E8) / temp_a0;
     }

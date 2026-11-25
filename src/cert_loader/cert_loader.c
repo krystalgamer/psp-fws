@@ -3,7 +3,7 @@
 
 INCLUDE_ASM("nonmatchings/cert_loader", sceCertLoader_DD629A24);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/cert_loader", func_0000050C);
 
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000544);
@@ -53,7 +53,7 @@ s32 sceCertLoader_driver_E86A7DC1(void) {
     return 0;
 }
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/cert_loader", func_000005B0);
 
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000968);

@@ -1033,6 +1033,7 @@
   "D_0007EE70": "extern s32 D_0007EE70;",
   "D_0007FEAC": "extern M2C_UNK D_0007FEAC;",
   "D_0007FF3C": "extern s32 D_0007FF3C;",
+  "D_0008017C": "extern M2C_UNK D_0008017C;",
   "D_00080518": "extern s32 D_00080518;",
   "D_00083FB8": "extern s32 D_00083FB8;",
   "D_00083FD4": "extern s32 D_00083FD4;",
@@ -1043,9 +1044,13 @@
   "D_00084254": "extern M2C_UNK D_00084254;",
   "D_00084260": "extern M2C_UNK D_00084260;",
   "D_0008426C": "extern M2C_UNK D_0008426C;",
+  "D_00084280": "extern s32 D_00084280;",
   "D_00084284": "extern s32 D_00084284;",
   "D_00084288": "extern s32 D_00084288;",
   "D_0008428C": "extern s32 D_0008428C;",
+  "D_0008428C_v260": "extern s32 D_0008428C_v260;",
+  "D_00084290_v260": "extern s32 D_00084290_v260;",
+  "D_00084294_v260": "extern s32 D_00084294_v260;",
   "D_000842B4": "extern s32 D_000842B4;",
   "D_000842B8": "extern s32 D_000842B8;",
   "D_000842D4": "extern s32 D_000842D4;",
@@ -1076,6 +1081,15 @@
   "D_0008453C": "extern void **D_0008453C;",
   "D_000852E4": "extern s32 D_000852E4;",
   "D_000852FC": "extern s32 D_000852FC;",
-  "func_0001D518": "extern M2C_UNK func_0001D518;"
+  "D_00085650": "extern s32 D_00085650;",
+  "D_00085654": "extern s32 D_00085654;",
+  "D_00087670": "extern s32 D_00087670;",
+  "D_00087674": "extern s32 D_00087674;",
+  "D_00089690": "extern s32 D_00089690;",
+  "D_00089694": "extern s32 D_00089694;",
+  "D_0008B6B4": "extern s32 *D_0008B6B4;",
+  "D_0008B6B8": "extern s32 *D_0008B6B8;",
+  "func_0001D518": "extern M2C_UNK func_0001D518;",
+  "func_00038B88": "extern M2C_UNK func_00038B88;"
  }
 }

@@ -13,3 +13,5 @@ sceIoWrite = 0x00000478; // type:func
 sceIoRead = 0x00000480; // type:func
 sceIoClose = 0x00000488; // type:func
 sceIoGetstat = 0x00000490; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

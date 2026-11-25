@@ -729,7 +729,7 @@ INCLUDE_RODATA("nonmatchings/usb", D_0000A4C0);
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbStart);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/usb", D_0000A2D4);
 #endif
 
@@ -747,7 +747,7 @@ INCLUDE_RODATA("nonmatchings/usb", D_0000A528);
 INCLUDE_RODATA("nonmatchings/usb", D_0000A54C);
 #endif
 
-#if FW_VERSION != 250
+#if FW_VERSION < 250 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/usb", D_0000A578);
 #endif
 

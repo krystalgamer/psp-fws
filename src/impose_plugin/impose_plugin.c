@@ -117,7 +117,7 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_000008DC);
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000980);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000AC0);
 #endif
 

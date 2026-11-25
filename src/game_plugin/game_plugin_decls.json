@@ -149,6 +149,8 @@
   "func_000089DC": "s32 func_000089DC(void);",
   "func_00008A50": "s32 func_00008A50(void);",
   "func_00008DB0": "s32 func_00008DB0(void);",
+  "func_00008E14": "s32 func_00008E14(void);",
+  "func_00008EB0": "s32 func_00008EB0(void);",
   "func_00009644": "s32 func_00009644(s32 arg0);",
   "func_0000FC3C": "M2C_UNK func_0000FC3C();",
   "func_00010A38": "M2C_UNK func_00010A38();",
@@ -255,6 +257,7 @@
   "D_00012A80": "extern s32 D_00012A80;",
   "D_00012A98": "extern u8 D_00012A98;",
   "D_00012AC8": "extern s32 D_00012AC8;",
+  "D_00012AF4": "extern s32 D_00012AF4;",
   "func_00002918": "extern M2C_UNK func_00002918;",
   "func_00005CE8": "extern M2C_UNK func_00005CE8;",
   "func_00005F40": "extern M2C_UNK func_00005F40;",
@@ -262,6 +265,7 @@
   "func_0000669C": "extern M2C_UNK func_0000669C;",
   "func_000068E4": "extern M2C_UNK func_000068E4;",
   "func_00006B7C": "extern M2C_UNK func_00006B7C;",
+  "func_00006F0C": "extern M2C_UNK func_00006F0C;",
   "func_00007058": "extern M2C_UNK func_00007058;"
  }
 }

@@ -57,4 +57,3 @@ void func_0002EE48(void) {
 void func_0002EE6C(void) {
     func_0002E738(sceIoRename());
 }
-

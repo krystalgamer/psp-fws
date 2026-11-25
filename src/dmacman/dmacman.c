@@ -49,7 +49,7 @@ INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_7D21A2EF);
 
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_DB286D65);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dmacman", func_00000B28);
 #endif
 

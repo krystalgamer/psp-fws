@@ -89,7 +89,7 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_5AB92658);
 INCLUDE_ASM("nonmatchings/mscm", func_00001804);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mscm", D_000070F8);
 #endif
 
@@ -103,7 +103,7 @@ INCLUDE_RODATA("nonmatchings/mscm", D_0000716C);
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0D8D6A54);
 #endif
 
-#if FW_VERSION != 250
+#if FW_VERSION < 250 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_54B3A3F1);
 #endif
 
@@ -111,7 +111,7 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_54B3A3F1);
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0D8D6A54);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_54B3A3F1);
 #endif
 
@@ -141,7 +141,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00001D18);
 INCLUDE_ASM("nonmatchings/mscm", func_00002194);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 func_00002194(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     s32 temp_s2;
     s32 temp_v0;
@@ -220,7 +220,7 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_BE455B5D);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_21183216);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00003628);
 #endif
 
@@ -248,7 +248,7 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_D6DB3199);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00004430);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_000044E8);
 #endif
 
@@ -278,7 +278,7 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_FF6C50D8);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_34124B97);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00004DAC);
 #endif
 
@@ -288,7 +288,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_000047C0);
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0A054CDA);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 sceMScm_driver_0A054CDA(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
     return arg0->unk8->unk14;
 }
@@ -325,7 +325,7 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_E24B5D0C);
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_46AAC4E5);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00004F68);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_D6DB3199);
@@ -355,7 +355,7 @@ void sceMScm_driver_CFD8F662(s32 arg0) {
     sceMScm_driver_AA67D87A(arg0, 4);
 }
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_0000534C);
 
 INCLUDE_ASM("nonmatchings/mscm", func_000054E0);
@@ -405,7 +405,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005718);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00005804);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00005868);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00005938);
@@ -429,7 +429,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_000059C0);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00005A44);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00005AC8);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00006360);
@@ -557,7 +557,7 @@ s32 func_000053EC(void) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 func_00006440(void *arg0) {
     s32 var_a0;
 
@@ -579,7 +579,7 @@ s32 func_000057F0(void) {
 }
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00006474);
 
 INCLUDE_ASM("nonmatchings/mscm", func_000064D8);
@@ -621,7 +621,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005A44_v100);
 INCLUDE_ASM("nonmatchings/mscm", func_00005AA8);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 func_00005AA8(void *arg0) {
     s32 var_v0;
 
@@ -639,7 +639,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005AD0);
 INCLUDE_ASM("nonmatchings/mscm", func_00005B3C);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 func_00005B3C(void *arg0, s32 arg1) {
     s32 var_v0;
 
@@ -681,7 +681,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005E58);
 INCLUDE_ASM("nonmatchings/mscm", func_00005EB0);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mscm", D_00007128);
 
 INCLUDE_RODATA("nonmatchings/mscm", D_00007190);
@@ -699,7 +699,7 @@ INCLUDE_RODATA("nonmatchings/mscm", D_00006E10);
 INCLUDE_RODATA("nonmatchings/mscm", D_00006E18);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mscm", D_0000725C);
 #endif
 
@@ -709,6 +709,6 @@ INCLUDE_RODATA("nonmatchings/mscm", D_00006E2C);
 INCLUDE_RODATA("nonmatchings/mscm", D_00006E34);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mscm", D_0000728C);
 #endif

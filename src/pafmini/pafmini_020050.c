@@ -6,7 +6,7 @@
 INCLUDE_ASM("nonmatchings/pafmini_020050", func_00020050);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00020050(struct Unk_func_00020050_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
         arg0->unk42C = arg0->unk42C & arg1 & 0xFFF3FFFF;
@@ -160,9 +160,17 @@ u8 func_0002040C(s32 arg0, struct Unk_func_0002040C_1 *arg1) {
     return var_v0;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION == 151
+s32 func_0003FC2C(s32 arg0, s32 arg1) {
+    return !((arg0 != 0) & (arg1 != 0)) ? 0 : (arg1 + 0x20);
+}
+#endif
+
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pafmini_020050", func_00040934);
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_0002042C(s32 arg0, s32 arg1) {
     return !((arg0 != 0) & (arg1 != 0)) ? 0 : (arg1 + 0x20);
 }

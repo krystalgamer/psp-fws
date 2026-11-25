@@ -14,4 +14,3 @@ s32 func_00011BC4(void) {
     }
     return var_v0;
 }
-

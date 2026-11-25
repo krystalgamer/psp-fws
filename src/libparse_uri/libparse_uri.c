@@ -16,7 +16,7 @@ INCLUDE_ASM("nonmatchings/libparse_uri", sceUriParse);
 
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002A98);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002C38);
 #endif
 
@@ -318,7 +318,7 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_00002984);
 
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002C20);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002CC8);
 #endif
 

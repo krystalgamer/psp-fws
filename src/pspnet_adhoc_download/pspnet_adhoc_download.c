@@ -145,7 +145,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000021C4);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000021F0);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002264);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002280);

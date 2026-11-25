@@ -34,6 +34,7 @@ void func_00002984(s32 arg0);
 s32 func_00002A24(s32, s32, s32);
 s32 func_000030BC(s32 *arg0);
 s32 func_00003360(void);
+s32 func_0000338C(void);
 void func_00003958(s32 arg0);
 s32 func_00003A00(s32, s32, s32);
 M2C_UNK *func_00004938(void);

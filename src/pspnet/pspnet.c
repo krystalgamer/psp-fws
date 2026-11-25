@@ -1063,6 +1063,10 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00009390);
 
 INCLUDE_RODATA("nonmatchings/pspnet", D_0000A574);
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/pspnet", D_0000A5B4);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/pspnet", D_0000A530);
 #endif

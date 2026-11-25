@@ -4,7 +4,7 @@
 
 INCLUDE_ASM("nonmatchings/ge", func_00000000);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/ge", D_00005878);
 #endif
 
@@ -52,7 +52,7 @@ void func_000018E0(s32 arg0) {
 INCLUDE_ASM("nonmatchings/ge", func_00001908);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/ge", D_000058B0);
 
 INCLUDE_RODATA("nonmatchings/ge", D_000058B8);
@@ -204,7 +204,7 @@ INCLUDE_ASM("nonmatchings/ge", sceGe_driver_8F185DF7);
 INCLUDE_ASM("nonmatchings/ge", sceGeEdramGetSize);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 u32 sceGeEdramGetSize(void) {
     return D_00006600;
 }
@@ -236,9 +236,15 @@ INCLUDE_RODATA("nonmatchings/ge", D_00002A34);
 INCLUDE_RODATA("nonmatchings/ge", D_00003174);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", func_00002880);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/ge", func_00002CF4);
+#endif
+
+#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/ge", func_00002CCC);
 #endif
 
@@ -268,7 +274,7 @@ INCLUDE_ASM("nonmatchings/ge", sceGeContinue);
 INCLUDE_ASM("nonmatchings/ge", sceGeSetCallback);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", sceGe_driver_AEC21518);
 
 INCLUDE_ASM("nonmatchings/ge", sceGe_driver_7B481502);
@@ -286,7 +292,7 @@ INCLUDE_ASM("nonmatchings/ge", sceGe_driver_67B01D8E);
 INCLUDE_ASM("nonmatchings/ge", sceGe_user_E66CB92E);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", func_000043CC);
 
 INCLUDE_ASM("nonmatchings/ge", func_0000447C);
@@ -296,7 +302,7 @@ INCLUDE_ASM("nonmatchings/ge", func_0000447C);
 INCLUDE_ASM("nonmatchings/ge", func_00002738);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 func_00004C44(void) {
     sceKernelDeleteEventFlag(M2C_VFIELD(&D_00007640, s32, 0x18));
     sceKernelDeleteEventFlag(M2C_VFIELD(&D_00007640, s32, 0x1C));
@@ -488,7 +494,7 @@ INCLUDE_ASM("nonmatchings/ge", func_000040EC);
 INCLUDE_ASM("nonmatchings/ge", func_0000413C);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ge", func_00004C30);
 
 INCLUDE_ASM("nonmatchings/ge", func_00004D40);

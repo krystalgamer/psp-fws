@@ -23,3 +23,5 @@ sceKernelDeleteSema = 0x00000D10; // type:func
 sceKernelSignalSema = 0x00000D18; // type:func
 sceKernelWaitSema = 0x00000D20; // type:func
 sceKernelCreateSema = 0x00000D28; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

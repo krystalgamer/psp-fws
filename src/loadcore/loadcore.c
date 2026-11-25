@@ -59,23 +59,43 @@ void func_00000784(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/loadcore", func_000007A4);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00000934);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/loadcore", syslib_D3744BE0);
+
+INCLUDE_ASM("nonmatchings/loadcore", func_00000E00);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadcore", func_00000B4C);
+#endif
 
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/loadcore", D_00006A40);
 
 INCLUDE_RODATA("nonmatchings/loadcore", D_00006A60);
 
 INCLUDE_RODATA("nonmatchings/loadcore", D_00006A6C);
+#endif
 
+#if FW_VERSION >= 152 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadcore", syslib_D3744BE0);
+#endif
 
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", func_000014F8);
 
 void LoadCoreForKernel_99A695F0(s32 arg0) {
     func_000014F8(arg0, 0);
 }
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/loadcore", func_0000145C);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadcore", func_00001224);
 #endif
 
@@ -226,7 +246,7 @@ INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_7E63F86D);
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_B370DF29);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_5248A98F);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00002060);
@@ -244,10 +264,20 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00001770);
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_616FCCCD);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/loadcore", func_00002220);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 260
 void func_00002220(s32 arg0) {
     SysMemForKernel_636C953B(func_00000B4C(), arg0);
 }
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/loadcore", func_000029B4);
+
+INCLUDE_ASM("nonmatchings/loadcore", func_00002A04);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
@@ -328,19 +358,71 @@ s32 func_00001ECC(void) {
 s32 LoadCoreForKernel_3BB7AC18(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/loadcore", func_00002B28);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadcore", func_00002350);
+#endif
 
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", func_0000245C);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION == 260
+void func_00002E84(void) {
+    LoadCoreForKernel_D8779AC6();
+    sceKernelDcacheWBinvAll();
+}
+
+void func_00002EA8(void) {
+    sceKernelIcacheInvalidateAll();
+    sceKernelDcacheWritebackInvalidateAll();
+}
+
+void func_00002ECC(void) {
+    sceKernelDcacheWBinvAll();
+}
+
+void func_00002EE8(void) {
+    sceKernelDcacheWritebackInvalidateAll();
+}
+
+void func_00002F04(void) {
+    LoadCoreForKernel_D8779AC6();
+    sceKernelDcacheWBinvAll();
+}
+
+void func_00002F28(void *arg0, u32 arg1) {
+    sceKernelIcacheInvalidateRange(arg0, arg1);
+    sceKernelDcacheWritebackInvalidateRange(arg0, arg1);
+}
+
+void func_00002F64(void) {
+    sceKernelDcacheWBinvAll();
+}
+
+void func_00002F80(void *arg0, u32 arg1) {
+    sceKernelDcacheWritebackInvalidateRange(arg0, arg1);
+}
+
+INCLUDE_ASM("nonmatchings/loadcore", func_00002F9C);
+
+INCLUDE_ASM("nonmatchings/loadcore", func_00003190);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadcore", func_00002854);
 #endif
 
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/loadcore", func_00002CA4);
+#endif
 
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", func_00002E18);
 #endif
 
@@ -594,18 +676,26 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_00007268);
 INCLUDE_RODATA("nonmatchings/loadcore", D_0000728C);
 #endif
 
+#if FW_VERSION != 260
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_B4D6FECC);
+#endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007304);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007BC0);
 
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007BD8);
 
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007BF4);
+#endif
+
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/loadcore", D_000079C0_v260);
+
+INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_B4D6FECC);
 #endif
 
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_54AB2675);
@@ -636,7 +726,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000046EC);
 INCLUDE_ASM("nonmatchings/loadcore", func_00004944);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/loadcore", D_000079C8);
 #endif
 
@@ -672,7 +762,7 @@ INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_CD0F3BAC);
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_8D8A8ACE);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007DCC);
 
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007DD8);
@@ -720,7 +810,7 @@ INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_CF8A41B1);
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_FB8AE27D);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_A6D40F56);
 #endif
 
@@ -945,7 +1035,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00006584);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_000065EC);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadcore", func_000055E0);
 #endif
 
@@ -953,7 +1043,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000055E0);
 INCLUDE_ASM("nonmatchings/loadcore", func_000056A4);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadcore", func_000056D8);
 #endif
 
@@ -961,14 +1051,14 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000056D8);
 INCLUDE_ASM("nonmatchings/loadcore", func_00005858);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 260
 s32 func_00005858(s32 arg0) {
     void *sp0;
     return (func_000056D8(arg0, 0, 0, 0, 0, &sp0) < 0) ? 0 : sp0;
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadcore", func_00005B10);
 #endif
 
@@ -976,7 +1066,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00005B10);
 INCLUDE_ASM("nonmatchings/loadcore", func_00005894);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 260
 s32 func_00005894(s32 arg0) {
     void *sp0;
     return (func_000056D8(arg0, 0, 0, &sp0, 0, 0) < 0) ? 0 : sp0;
@@ -1009,7 +1099,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000066F0);
 INCLUDE_ASM("nonmatchings/loadcore", func_00005C5C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadcore", func_000059B0);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00005C80);
@@ -1023,7 +1113,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00005D28);
 INCLUDE_ASM("nonmatchings/loadcore", func_00006A38);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/loadcore", func_00005DB4);
 #endif
 
@@ -1043,9 +1133,13 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00005ED0);
 INCLUDE_ASM("nonmatchings/loadcore", func_00005FF0);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_0000606C);
+#endif
 
+#if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007180);
-#else
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/loadcore", func_000066FC);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00006780);

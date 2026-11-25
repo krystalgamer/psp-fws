@@ -27,4 +27,3 @@ void func_00092054(M2C_UNK **arg0) {
 void func_00092064(M2C_UNK **arg0) {
     *arg0 = &D_000A2988;
 }
-

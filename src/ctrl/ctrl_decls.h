@@ -16,6 +16,7 @@ extern u32 D_00001BFC;
 extern struct D_00001D70_s D_00001D70;
 extern s8 D_00001D7F;
 extern s32 D_00001D88;
+extern s8 D_00001D9F;
 extern s32 D_00002354;
 extern s32 D_00002358;
 extern s32 D_00002618;

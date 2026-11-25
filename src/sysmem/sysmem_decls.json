@@ -58,6 +58,12 @@
   "SysMemUserForUser_E6581468": "void SysMemUserForUser_E6581468(void);",
   "SysMemUserForUser_FC114573": "s32 SysMemUserForUser_FC114573(void);",
   "SysclibForKernel_D887CACD": "M2C_UNK *SysclibForKernel_D887CACD(void);",
+  "UtilsForKernel_23FFC828": "s32 UtilsForKernel_23FFC828(s32 arg0);",
+  "UtilsForKernel_6151A7C3": "s32 UtilsForKernel_6151A7C3(void);",
+  "UtilsForKernel_7B7ED3FD": "s32 UtilsForKernel_7B7ED3FD(s32 arg0, s32 arg1, s32 arg2);",
+  "UtilsForKernel_8C1FBE04": "s32 UtilsForKernel_8C1FBE04(s32 arg0);",
+  "UtilsForKernel_B0E9C31F": "s32 UtilsForKernel_B0E9C31F(s32, s32, s32, s32, s32, s32);",
+  "UtilsForKernel_E0E6BA96": "s32 UtilsForKernel_E0E6BA96(s32 arg0);",
   "bcmp": "void bcmp(s32 arg0, s32 arg1, s32 arg2);",
   "bcopy": "void bcopy(s32 arg0, s32 arg1);",
   "func_00000724": "void func_00000724(void);",
@@ -176,6 +182,9 @@
   "D_00010244": "extern s32 D_00010244;",
   "D_000109D4": "extern s32 D_000109D4;",
   "D_00010AF0": "extern s32 D_00010AF0;",
-  "D_00010CBC": "extern s32 D_00010CBC;"
+  "D_00010CBC": "extern s32 D_00010CBC;",
+  "D_00013908": "extern s32 D_00013908;",
+  "D_0001390C": "extern s32 D_0001390C;",
+  "D_00013910": "extern s32 D_00013910;"
  }
 }

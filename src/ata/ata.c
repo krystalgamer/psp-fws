@@ -114,7 +114,7 @@ INCLUDE_ASM("nonmatchings/ata", sceAta_driver_BA09142A);
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_C7B02795);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_EFE3C7FA);
 #endif
 
@@ -730,7 +730,7 @@ INCLUDE_ASM("nonmatchings/ata", func_00002F1C);
 INCLUDE_ASM("nonmatchings/ata", func_000030F8);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_FC7B031E);
 
 INCLUDE_ASM("nonmatchings/ata", func_0000349C);

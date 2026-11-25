@@ -159,7 +159,7 @@ INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00066E10);
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00066E74);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00066E74(struct Unk_vt_func_00066E74_arg0 **arg0) {
     func_000F865C(2);
     func_000F7A30();
@@ -312,7 +312,7 @@ INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000D9220);
 INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_00106278);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000F3B30);
 
 INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000F3B54);
@@ -441,6 +441,14 @@ s32 func_0006996C(struct Unk_func_0006996C_0 *arg0, s32 arg1) {
 #endif
 
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_0006998C);
+
+#if FW_VERSION == 151
+INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000F1EB0);
+
+INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000D93A0);
+
+INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000F1F90);
+#endif
 
 #if FW_VERSION == 150
 INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000F3C30);

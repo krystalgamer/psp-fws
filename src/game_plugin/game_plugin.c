@@ -38,7 +38,7 @@ INCLUDE_ASM("nonmatchings/game_plugin", func_000005D4);
 
 INCLUDE_ASM("nonmatchings/game_plugin", func_0000045C);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 s32 func_00000534(s32 arg0) {
     func_000074E0(&D_0001157C, arg0);
     return 0;
@@ -101,7 +101,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin", D_000109B0);
 INCLUDE_RODATA("nonmatchings/game_plugin", D_000109C4);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/game_plugin", D_00011C6C);
 #endif
 
