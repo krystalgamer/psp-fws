@@ -35,7 +35,7 @@ INCLUDE_ASM("nonmatchings/paf_0E3294", func_00089C50);
 INCLUDE_ASM("nonmatchings/paf_0E3294", func_00089D48);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E3294", func_000E3408);
 #endif
 
@@ -97,7 +97,7 @@ void func_000E414C(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION != 270
+#if FW_VERSION < 270 || FW_VERSION == 282
 s32 func_000E4168(s32 arg0, s32 arg1) {
     s32 var_v0;
 

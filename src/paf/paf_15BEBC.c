@@ -201,7 +201,7 @@ INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A29C8);
 
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2A08);
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A04CC);
 
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A0524);
@@ -508,7 +508,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001095A8);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011C1AC);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015F2B8);
 #endif
 
@@ -640,7 +640,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00109964);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuLightColor);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015F72C);
 #endif
 
@@ -688,7 +688,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00109CD4);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00107EB8);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A05A0);
 #endif
 
@@ -746,7 +746,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuClutMode);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuClutLoad);
 #endif
 
-#if FW_VERSION == 270
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015FC98);
 #endif
 
@@ -1156,9 +1156,15 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0010C0CC);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015FC60);
 #endif
 
+#if FW_VERSION == 271
+INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A15C4);
+#endif
+
 #if FW_VERSION == 270
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A05F4);
+#endif
 
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A0610);
 #endif
 
