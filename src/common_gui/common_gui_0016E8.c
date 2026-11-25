@@ -78,6 +78,10 @@ INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_0000379C);
 
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000037A0);
 
+#if FW_VERSION == 301
+INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00003900_v301);
+#endif
+
 #if FW_VERSION == 300
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00003900_v300);
 #endif
@@ -86,7 +90,7 @@ INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000037A4);
 
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000037A8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_0000390C);
 #endif
 
@@ -192,7 +196,7 @@ void func_00002D08(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002D28);
 #endif
 
@@ -202,7 +206,7 @@ void func_00002D28(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002E9C);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002EDC);

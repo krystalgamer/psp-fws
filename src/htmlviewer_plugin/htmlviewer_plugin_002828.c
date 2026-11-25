@@ -41,7 +41,7 @@ s32 func_00002930(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_000036E4);
 #endif
 
@@ -49,7 +49,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_000036E4);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_000029C8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_0000378C);
 
 void func_000037C8(void) {
@@ -129,7 +129,7 @@ void func_00001F4C(void) {
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00002B08);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00002B08(s32 arg0) {
     s32 temp_v0;
 
@@ -159,7 +159,7 @@ void func_00002BF4(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00003C10);
 #else
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002828", func_00002C80);

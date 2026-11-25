@@ -61,7 +61,7 @@ s32 sceLed_driver_DE91D3A4(void) {
 INCLUDE_ASM("nonmatchings/led", sceLed_driver_DE91D3A4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 sceLed_driver_DE91D3A4(void) {
     s32 var_a2;
 
@@ -97,7 +97,7 @@ s32 sceLed_driver_A13B3D38(void) {
 INCLUDE_ASM("nonmatchings/led", sceLed_driver_A13B3D38);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 sceLed_driver_A13B3D38(void) {
     if (M2C_VFIELD(&D_00000B30, s32, 0) != 0) {
         sceGpio_driver_310F0CCF(0x40);

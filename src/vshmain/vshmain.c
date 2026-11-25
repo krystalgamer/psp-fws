@@ -9,6 +9,10 @@ INCLUDE_ASM("nonmatchings/vshmain", func_000000AC);
 INCLUDE_ASM("nonmatchings/vshmain", func_0000010C);
 #endif
 
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/vshmain", func_000001A0_v301);
+#endif
+
 #if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/vshmain", func_000001A0_v300);
 #endif
@@ -144,7 +148,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_00027BBC);
 INCLUDE_RODATA("nonmatchings/vshmain", D_000287A4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002CF98);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002CFA8);
@@ -252,7 +256,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_00027C30);
 INCLUDE_RODATA("nonmatchings/vshmain", D_00028348);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002D39C);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002D3AC);
@@ -294,7 +298,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_00028C1C);
 INCLUDE_RODATA("nonmatchings/vshmain", D_00028C2C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002D470);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002D480);
@@ -402,7 +406,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_000298E8);
 INCLUDE_RODATA("nonmatchings/vshmain", D_00028E3C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002D70C);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002D71C);
@@ -440,7 +444,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_00027CB0);
 INCLUDE_RODATA("nonmatchings/vshmain", D_00027CBC);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002D800);
 #endif
 
@@ -512,7 +516,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_00027E48);
 INCLUDE_RODATA("nonmatchings/vshmain", D_00027E50);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002D9B0);
 #endif
 
@@ -634,7 +638,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_000011E0);
 INCLUDE_ASM("nonmatchings/vshmain", func_000012D8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_00001458);
 #endif
 
@@ -1040,7 +1044,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_00028918);
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002D25C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_00033F54);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_00033F64);
@@ -1128,7 +1132,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_000032F0);
 INCLUDE_ASM("nonmatchings/vshmain", func_00003490);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_00003F80);
 
 INCLUDE_ASM("nonmatchings/vshmain", func_00003FC0);
@@ -1150,7 +1154,7 @@ void func_0000362C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_0000403C);
 #endif
 
@@ -1164,7 +1168,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00003874);
 INCLUDE_ASM("nonmatchings/vshmain", func_000038E0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_0000436C);
 #endif
 
@@ -1183,7 +1187,7 @@ void func_00003994(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_000039B8);
 #endif
 
@@ -2579,7 +2583,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_0001CE08);
 INCLUDE_ASM("nonmatchings/vshmain", func_00003AA8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_0000B89C(void) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -2840,7 +2844,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_00029358);
 INCLUDE_ASM("nonmatchings/vshmain", vsh_163B90CB);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_0000CD30);
 
 INCLUDE_ASM("nonmatchings/vshmain", func_0000CD88);
@@ -3162,7 +3166,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00005758);
 INCLUDE_ASM("nonmatchings/vshmain", func_0000E0F8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0000E340(void) {
     s32 temp_s0;
 
@@ -3619,7 +3623,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_00029CA4);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_00029CA8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_000353E0);
 #endif
 
@@ -3631,7 +3635,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0000F58C);
 INCLUDE_ASM("nonmatchings/vshmain", func_0000F804);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_0001085C);
 #endif
 
@@ -3860,7 +3864,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00009248);
 INCLUDE_RODATA("nonmatchings/vshmain", D_00029E40);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_000117EC);
 #endif
 
@@ -4012,7 +4016,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_0002FC98);
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002FCA4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_00035880);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_000358A8);
@@ -4044,7 +4048,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_0002FD5C);
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002FD64);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_00035984);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_00035994);
@@ -4126,7 +4130,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_000075C0);
 INCLUDE_ASM("nonmatchings/vshmain", func_00011684);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_00013570);
 #endif
 
@@ -4164,7 +4168,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00011F1C);
 INCLUDE_ASM("nonmatchings/vshmain", func_00011E8C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_00013E28);
 
 INCLUDE_ASM("nonmatchings/vshmain", func_00013F84);
@@ -4276,7 +4280,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0001294C);
 INCLUDE_ASM("nonmatchings/vshmain", func_00012A2C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00012AA4(void) {
     if (D_0003089C->padCD[0x1B] == 0) {
 
@@ -4376,7 +4380,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00012CC4);
 INCLUDE_ASM("nonmatchings/vshmain", func_00012D1C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00012E14(void) {
     return (func_00011684(M2C_FIELD(D_0003089C, s32 *, 0xC8)) == 0) ? 0 : -0x3F7;
 }
@@ -4448,7 +4452,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00013080);
 INCLUDE_ASM("nonmatchings/vshmain", func_00013144);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_000154DC);
 #endif
 
@@ -4490,7 +4494,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_0002A3F4);
 INCLUDE_RODATA("nonmatchings/vshmain", D_00031558);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_00035D78);
 #endif
 
@@ -4594,7 +4598,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00008AD0);
 INCLUDE_ASM("nonmatchings/vshmain", func_00013790);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00014014(void) {
     return M2C_FIELD(D_0003089C, s32 *, 0xD0);
 }
@@ -4652,7 +4656,7 @@ s32 func_00014508(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00014B90(void) {
     return M2C_FIELD(D_0003089C, s32 *, 0xB8);
 }
@@ -4664,7 +4668,7 @@ s32 func_00014B90(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00014E8C(void) {
     return M2C_FIELD(D_0003089C, s32 *, 0xBC);
 }
@@ -4714,7 +4718,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00008D2C);
 INCLUDE_ASM("nonmatchings/vshmain", func_00014238);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0001429C(s32 arg0) {
     s32 temp_a0;
 
@@ -4780,7 +4784,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_000142D8);
 INCLUDE_ASM("nonmatchings/vshmain", func_00014300);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_00016748);
 
 INCLUDE_ASM("nonmatchings/vshmain", func_000167D4);
@@ -5042,7 +5046,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_0002A848);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002A864);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_00036270);
 #endif
 
@@ -5212,7 +5216,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_0002AA48);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002AA4C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_00036434);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_00036464);
@@ -5276,7 +5280,7 @@ INCLUDE_RODATA("nonmatchings/vshmain", D_0002AAEC);
 
 INCLUDE_RODATA("nonmatchings/vshmain", D_0002AB04);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_000364FC);
 #endif
 
@@ -5416,7 +5420,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0000CB64);
 INCLUDE_ASM("nonmatchings/vshmain", func_0000A82C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_000162C8(struct Unk_func_000162C8_0 *arg0) {
     s32 temp_s1;
     void *temp_a0;
@@ -5783,7 +5787,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00018170);
 INCLUDE_ASM("nonmatchings/vshmain", func_000181C4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_000187A8(void *arg0) {
     s32 temp_a1;
 
@@ -5906,7 +5910,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0001A18C);
 INCLUDE_ASM("nonmatchings/vshmain", func_00019E0C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00019EBC(struct Unk_func_00019EBC_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
@@ -5982,7 +5986,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00019EF4);
 INCLUDE_ASM("nonmatchings/vshmain", func_00019F94);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0001AAA0(struct Unk_func_0001AAA0_0 *arg0) {
     if (M2C_FIELD(arg0, u8 *, 0xE9) != 0) {
         M2C_FIELD(arg0, s32 *, 0xA0) = (s32) (M2C_FIELD(arg0, s32 *, 0xA0) | 4);
@@ -6122,7 +6126,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0000D844);
 INCLUDE_ASM("nonmatchings/vshmain", func_0001AD04);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
     u8 var_v0;
     void *temp_v1;
@@ -6284,7 +6288,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0001B8E0);
 INCLUDE_ASM("nonmatchings/vshmain", func_0001B9F8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_0001E674);
 #endif
 
@@ -6320,7 +6324,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0001BE38);
 INCLUDE_ASM("nonmatchings/vshmain", func_0001BED0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_0001EB24);
 #endif
 
@@ -6427,7 +6431,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0001BF6C);
 INCLUDE_ASM("nonmatchings/vshmain", func_0001C008);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0001C118(struct Unk_func_0001C118_0 *arg0) {
     s32 temp_s0;
 
@@ -6492,7 +6496,7 @@ void func_0001C118(struct Unk_func_0001C118_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0001C198(void *arg0) {
     void *temp_v0;
 
@@ -6869,7 +6873,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_000145E0);
 INCLUDE_ASM("nonmatchings/vshmain", func_0001E0C8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_000211BC);
 #endif
 
@@ -8136,7 +8140,7 @@ s32 func_000139D0(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00022FC4(void) {
     s32 temp_s0;
     s32 temp_s0_2;
@@ -8536,7 +8540,7 @@ s32 func_000230C8(void) {
 
 INCLUDE_ASM("nonmatchings/vshmain", func_000230FC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_00026234);
 #else
 INCLUDE_ASM("nonmatchings/vshmain", func_00023260);
@@ -8550,7 +8554,7 @@ s32 func_00023394(void) {
 INCLUDE_ASM("nonmatchings/vshmain", func_000233A4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_00026494);
 
 s32 func_00026578(void) {
@@ -8592,7 +8596,7 @@ s32 func_00023660(void) {
 INCLUDE_ASM("nonmatchings/vshmain", func_00024050);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_000233F4);
 
 INCLUDE_ASM("nonmatchings/vshmain", func_00026B40);
@@ -9086,7 +9090,7 @@ void func_00015640(void **arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 vsh_4A619A1D(void) {
     if (D_00030A08 != 0) {
         sceVshBridge_E5DA5E95();
@@ -9129,7 +9133,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00024D64);
 INCLUDE_ASM("nonmatchings/vshmain", func_00024F70);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00028B0C(void) {
     s32 var_v0;
 
@@ -9314,7 +9318,7 @@ void func_00025C30(void **arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/vshmain", D_00037FDC);
 
 INCLUDE_ASM("nonmatchings/vshmain", func_000296F4);
@@ -9396,7 +9400,7 @@ void sceResmgr_9DC14891(void) {
 
 INCLUDE_ASM("nonmatchings/vshmain", func_00025D94);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vshmain", func_0002A604);
 
 INCLUDE_ASM("nonmatchings/vshmain", func_0002AB78);

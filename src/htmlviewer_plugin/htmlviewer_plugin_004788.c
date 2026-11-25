@@ -2,7 +2,7 @@
 #include "common.h"
 #include "htmlviewer_plugin_decls.h"
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_00004788);
 #endif
 
@@ -204,7 +204,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_000075FC);
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007608);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00009710);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00009720);
@@ -420,7 +420,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007B38);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007B50);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00009CB0);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00009CC8);
@@ -464,7 +464,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_00004B70);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_00004CD4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_0000664C);
 #endif
 

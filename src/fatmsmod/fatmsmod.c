@@ -1,7 +1,7 @@
 #include "common.h"
 #include "fatmsmod_decls.h"
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 module_start(void) {
     func_00000020();
     return 0;
@@ -89,7 +89,7 @@ void func_00000048(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000068);
 #endif
 
@@ -229,7 +229,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000E00);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000EF8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000FA4);
 #endif
 
@@ -881,7 +881,7 @@ s32 func_00004544(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00006724(void) {
     if (D_0002B5CC != -1) {
         sceIoClose(D_0002B5CC);
@@ -959,7 +959,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00006878);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000068C8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006868);
 #endif
 
@@ -981,7 +981,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00006A54);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006B10);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006B44);
 #endif
 
@@ -3620,7 +3620,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00021D78);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00021D94);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00021D30);
 #endif
 

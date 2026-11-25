@@ -2,7 +2,7 @@
 #include "common.h"
 #include "camera_plugin_decls.h"
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 void func_0000CC64(s32 arg0, s32 arg1) {
     s32 var_v0;
 

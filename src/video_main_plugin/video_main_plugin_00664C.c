@@ -117,7 +117,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_000522A8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00008C6C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 u8 func_00008DD8(struct Unk_func_00008DD8_0 *arg0) {
     u8 temp_v0;
     void **temp_a0;
@@ -2351,7 +2351,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000C2B8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000C488);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000CB14);
 #else
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000CB9C);
@@ -2532,7 +2532,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000DF94);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000E044);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000DB14);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000D3FC);
@@ -2592,7 +2592,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_000526BC);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_000526C8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000F820);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00050FA0);
@@ -2622,7 +2622,7 @@ s32 func_0000FAF0(void) {
     return 0;
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000EF90);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000F0B4);
@@ -2782,7 +2782,7 @@ s32 func_000100D0(struct Unk_func_000100D0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001010C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00010098);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000100B4);
@@ -2794,7 +2794,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000F80C);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00010144);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_0000F944(void *arg0, s32 *arg1) {
     if (arg1 != NULL) {
         *arg1 = func_0001D464(M2C_FIELD(arg0, struct Unk_func_0001D464_0 **, 0xA80));
@@ -2879,7 +2879,7 @@ s32 func_00010554(void) {
     return 0;
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00010230);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00010290);
@@ -2897,7 +2897,7 @@ s32 func_00010724(void) {
     return 0;
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00010494);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00010504);
@@ -2915,7 +2915,7 @@ s32 func_00010904(void) {
     return 0;
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000FD3C);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001050C);
@@ -3067,7 +3067,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000116B8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001172C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000117A0);
 #else
 void func_000117A0(s32 arg0) {
@@ -3243,7 +3243,7 @@ void func_00011E40(s32 arg0) {
     func_00010060(arg0 - 0x3C);
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011E5C);
 #else
 void func_00011E5C(s32 arg0) {
@@ -3263,7 +3263,7 @@ void func_00011EB0(s32 arg0) {
     func_000100D0(arg0 - 0x3C);
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011ECC);
 #else
 void func_00011ECC(s32 arg0) {
@@ -3385,7 +3385,7 @@ void func_00012228(M2C_UNK **arg0) {
 void func_00012250(void) {
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_000111D4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xC88);
 }
@@ -3426,11 +3426,21 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000119B0);
 void func_00011BF0(void) {
 
 }
+#endif
 
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011BF8_v301);
+
+INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011C30_v301);
+#endif
+
+#if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011BF8_v300);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011C30_v300);
+#endif
 
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011C68);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00012338);
@@ -3442,11 +3452,19 @@ s32 func_00012258(void) {
     return 0;
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011D5C);
+#endif
 
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011DD0_v301);
+#endif
+
+#if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011DD0_v300);
+#endif
 
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00011DE0);
 
 s32 func_0001210C(void *arg0) {
@@ -3582,7 +3600,7 @@ s32 func_00012338(struct Unk_func_00012338_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00012340);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001220C);
 #endif
 
@@ -3590,15 +3608,23 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001235C);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000123A8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00012298);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000122C8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000122F8);
+#endif
 
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00012338_v301);
+#endif
+
+#if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00012338_v300);
+#endif
 
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000123E4);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000123F0);
@@ -3743,7 +3769,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00013AC8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00013B08);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00013DF0);
 #else
 void func_00013DF0(s32 arg0) {
@@ -3751,7 +3777,7 @@ void func_00013DF0(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00013E0C);
 #else
 void func_00013E0C(s32 arg0) {
@@ -3771,7 +3797,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00014E8C);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000151CC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00014554);
 #else
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00015520);
@@ -3783,7 +3809,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001576C);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00015824);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00014BF8);
 #else
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00015A74);
@@ -3833,7 +3859,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00016154);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001623C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00015450);
 #else
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000162D0);
@@ -3893,7 +3919,7 @@ s32 func_00016BE4(struct Unk_func_00016BE4_0 *arg0, s32 arg1) {
     return 0;
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00016BF0(struct Unk_func_00016BF0_0 *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xD2C) = arg1;
     return 0;
@@ -3950,7 +3976,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000178F0);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00017988);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000170A8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001747C);
@@ -3980,7 +4006,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052A30);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052B98);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_000512B8);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_000512BC);
@@ -3994,7 +4020,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052C10);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052C68);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052BC0);
 #else
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052CC0);
@@ -4294,7 +4320,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052D98);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052D9C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_000514C8);
 #else
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052DA8);
@@ -4496,7 +4522,7 @@ void func_0001E3D0(struct Unk_func_0001E3D0_0 *arg0) {
     func_000201A8((u8 *)arg0 + (arg0->unkC * 0x60) + 0x48);
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001E400);
 #else
 void func_0001E400(struct Unk_vt_func_0001E400_arg0 **arg0) {
@@ -4616,7 +4642,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001FA54);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0001FA74);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_0001FAA8(s32 arg0) {
     return func_000250D0(arg0 + 0x10);
 }
@@ -4627,7 +4653,7 @@ s32 func_0001FAA8(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_0001FAC8(s32 arg0) {
     return func_000250EC(arg0 + 0x10);
 }

@@ -3389,7 +3389,7 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002D908);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D910);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D920);
 #endif
 

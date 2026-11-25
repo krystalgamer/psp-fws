@@ -4184,7 +4184,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B1B4);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B228);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0000B228(void) {
     if (D_00047E40.unk0 != 0) {
         func_00007FCC(D_00047E40.unk0);
@@ -8559,7 +8559,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00019B0C);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001B2B8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001B308);
 #endif
 

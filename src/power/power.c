@@ -838,7 +838,7 @@ s32 scePowerGetPllClockFrequencyInt(void) {
 INCLUDE_ASM("nonmatchings/power", scePowerGetPllClockFrequencyFloat);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 scePowerSetClockFrequency(s32 arg0, s32 arg1, s32 arg2) {
     if (D_0000B40C == 0) {
 
@@ -1001,7 +1001,7 @@ s32 scePower_driver_B999184C(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00004B54(void) {
     M2C_UNK *temp_v0;
     s32 temp_v0_2;
@@ -1060,7 +1060,7 @@ INCLUDE_ASM("nonmatchings/power", func_00004C7C);
 INCLUDE_ASM("nonmatchings/power", scePower_driver_27F3292C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 scePower_driver_27F3292C(void) {
     s32 temp_s1;
 

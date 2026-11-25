@@ -491,7 +491,7 @@ s32 sceImpose_driver_C7E36CC7(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 syslib_ADF12745(s32 arg0) {
     s32 temp_a2;
 
@@ -570,7 +570,7 @@ s32 sceImpose_9BA61B49(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/impose", sceImposeSetBacklightOffTime);
 
 INCLUDE_ASM("nonmatchings/impose", sceImposeGetBacklightOffTime);
@@ -924,7 +924,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F4A0);
 INCLUDE_RODATA("nonmatchings/impose", D_0000F4AC);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/impose", D_0000F68C);
 #endif
 

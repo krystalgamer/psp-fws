@@ -211,7 +211,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_026DBC", func_00029E60);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_026DBC", func_00029EA0);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/music_main_plugin_026DBC", func_0002E21C);
 #endif
 

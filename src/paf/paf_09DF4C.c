@@ -236,6 +236,10 @@ INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000A0B78);
 
 INCLUDE_RODATA("nonmatchings/paf_09DF4C", D_0019340C);
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/paf_09DF4C", D_0018D9D8);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/paf_09DF4C", D_0018BED8);
 #endif
@@ -336,7 +340,7 @@ INCLUDE_ASM("nonmatchings/paf_09DF4C", func_00059ED0);
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_0005A0C8);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000A12AC);
 #endif
 

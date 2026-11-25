@@ -291,7 +291,7 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmd_4BA25F4A);
 INCLUDE_ASM("nonmatchings/mediaman", func_0000090C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdUnRegisterUMDCallBack);
 #endif
 

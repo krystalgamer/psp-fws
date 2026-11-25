@@ -184,7 +184,7 @@ s32 func_00001874(s32 arg0, s32 *arg1) {
 INCLUDE_ASM("nonmatchings/registry", func_000018B4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/registry", func_00001A44);
 #endif
 

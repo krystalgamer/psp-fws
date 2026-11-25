@@ -186,7 +186,7 @@ s32 func_000795C8(void **arg0, u16 *arg1) {
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_077F48", func_000795EC);
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_077F48", func_00079688);
 #else
 s32 func_00079688(struct Unk_func_0007747C_0 *arg0, M2C_UNK arg1) {

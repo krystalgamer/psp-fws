@@ -9,6 +9,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", module_start);
 
 #if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", module_stop);
+#else
+s32 module_stop(void) {
+    func_0001A060();
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 271
@@ -163,8 +168,14 @@ s32 func_00000168(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 300
+#if FW_VERSION == 100 || FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000015C);
+#endif
+
+#if FW_VERSION == 282
+s32 func_0000015C(void) {
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -281,18 +292,7 @@ s32 func_00000398(void) {
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000002DC);
 #endif
 
-#if FW_VERSION == 282
-s32 module_stop(void) {
-    func_0001A060();
-    return 0;
-}
-
-s32 func_0000015C(void) {
-    return 0;
-}
-#endif
-
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00000164);
 #endif
 
@@ -310,7 +310,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000022C);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000002B4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00000314);
 #endif
 
@@ -338,7 +338,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001B0F0);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00000394);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_000004BC(s32 arg0) {
     s32 temp_v0;
 
@@ -424,7 +424,7 @@ s32 func_000004BC(s32 arg0) {
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00000624);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00000784(s32 arg0, struct Unk_func_00000784_1 *arg1, s32 arg2) {
     if (arg1 != NULL) {
         func_00003388(2, 1);
@@ -449,7 +449,7 @@ void func_00000784(s32 arg0, struct Unk_func_00000784_1 *arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000007CC);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00000908);
 #endif
 
@@ -517,7 +517,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000154C);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000156C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000176C);
 #endif
 
@@ -555,7 +555,7 @@ void sceVshNetconf_ED56BC38(void) {
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001AB0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00001D64(void) {
     void *sp0;
     if (!(D_00024848 & 0x80)) {
@@ -626,9 +626,17 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001EEC4);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001EEE4);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001EF04);
+#endif
 
+#if FW_VERSION == 301
+INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001EF20_v301);
+#endif
+
+#if FW_VERSION == 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001EF20_v300);
+#endif
 
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001EF3C);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001EF5C);
@@ -718,11 +726,21 @@ void func_000034A0(s32 arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000034C0);
+#endif
 
+#if FW_VERSION == 301
+void func_000035F0_v301(void) {
+    func_000034C0(1, 0xFFFF);
+}
+#endif
+
+#if FW_VERSION == 300
 void func_000035F0_v300(void) {
     func_000034C0(1, 0xFFFF);
 }
+#endif
 
+#if FW_VERSION >= 300
 void func_00003610(void) {
     func_000034C0(0, 0xFFFF);
 }
@@ -806,7 +824,13 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_000042D0);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004368);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004568);
+#endif
 
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004794_v301);
+#endif
+
+#if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004794_v300);
 
 void func_000048C4_v300(void) {
@@ -816,9 +840,25 @@ void func_000048C4_v300(void) {
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00010B24);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004960);
+#endif
 
+#if FW_VERSION == 301
+void func_00004960(void) {
+    func_0000FF64();
+}
+#endif
+
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00010BF4);
+#endif
 
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004960_v301);
+
+INCLUDE_ASM("nonmatchings/netconf_plugin", func_000049B0);
+#endif
+
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004A30);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004B10);
@@ -832,17 +872,41 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00010E98);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004D0C);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00010FA0);
+#endif
 
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004DDC_v301);
+#endif
+
+#if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004DDC_v300);
+#endif
 
+#if FW_VERSION == 301
+void func_00004E6C(void) {
+    func_00004DDC_v301(1, 0xFFFF);
+}
+#endif
+
+#if FW_VERSION == 300
 void func_00004E6C(void) {
     func_00004DDC_v300(1, 0xFFFF);
 }
+#endif
 
+#if FW_VERSION == 301
+void func_00004E8C(void) {
+    func_00004DDC_v301(0, 0xFFFF);
+}
+#endif
+
+#if FW_VERSION == 300
 void func_00004E8C(void) {
     func_00004DDC_v300(0, 0xFFFF);
 }
+#endif
 
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000032BC);
 
 void func_00004EDC(void *arg0, s32 arg1) {
@@ -889,9 +953,17 @@ void func_0000535C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = 0;
     M2C_FIELD(arg0, s32 *, 8) = 0;
 }
+#endif
 
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000536C_v301);
+#endif
+
+#if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000536C_v300);
+#endif
 
+#if FW_VERSION >= 300
 void func_000053E8(void) {
     if (M2C_VFIELD(&D_000249F0, s32, 0x1C) != 0) {
         M2C_VFIELD(&D_000249F0, s32, 0x1C) = 0;
@@ -961,7 +1033,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_000064A0);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001B0C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F100);
 #endif
 
@@ -971,7 +1043,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001B40);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001B90);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000065F4);
 #endif
 
@@ -1077,7 +1149,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001DB4);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001DF8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000068F4);
 #endif
 
@@ -1095,7 +1167,7 @@ s32 func_00001E5C(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00006968);
 #endif
 
@@ -1133,11 +1205,15 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001B380);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001B3A0);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F210);
 #endif
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001B3C4);
+
+#if FW_VERSION == 301
+INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F258_v301);
+#endif
 
 #if FW_VERSION == 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F258_v300);
@@ -1145,7 +1221,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F258_v300);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001B3E4);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F2A4);
 #endif
 
@@ -1161,7 +1237,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_000191F0);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001B458);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F344);
 #endif
 
@@ -1267,19 +1343,19 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001B970);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001B994);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F7FC);
 #endif
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001B9B4);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F848);
 #endif
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001B9D0);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F89C);
 #endif
 
@@ -1309,7 +1385,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001BAB4);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001BAD8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F9D4);
 #endif
 
@@ -1327,7 +1403,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001BB90);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001BBAC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001FACC);
 #endif
 
@@ -1335,7 +1411,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001BBC4);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001BBE0);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001FB24);
 #endif
 
@@ -1357,7 +1433,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001BCD4);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001BCF4);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001FC58);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001FC74);
@@ -1581,7 +1657,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001C660);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001C68C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00020674);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0002069C);
@@ -1591,9 +1667,17 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_000206C4);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_000206F4);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00020724);
+#endif
 
+#if FW_VERSION == 301
+INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00020750_v301);
+#endif
+
+#if FW_VERSION == 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00020750_v300);
+#endif
 
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00020780);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_000207AC);
@@ -1727,7 +1811,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001A8E4);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001CC78);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00020DAC);
 #endif
 
@@ -1809,7 +1893,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001EDC);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000020A0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_000020A0(void) {
     func_00001E68(0);
     func_00005638();
@@ -1919,6 +2003,16 @@ void func_0000265C(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION == 301
+void func_000071A0_v301(s32 arg0) {
+    if (arg0 > 0) {
+        D_00024A78 = arg0;
+        return;
+    }
+    D_00024A78 = 0;
+}
+#endif
+
 #if FW_VERSION == 300
 void func_000071A0_v300(s32 arg0) {
     if (arg0 > 0) {
@@ -1927,7 +2021,9 @@ void func_000071A0_v300(s32 arg0) {
     }
     D_00024A78 = 0;
 }
+#endif
 
+#if FW_VERSION >= 300
 s32 func_000071B8(void) {
     s32 temp_v0;
 
@@ -1991,7 +2087,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_000030C8);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00003178);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00008038);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00018ED0);
@@ -2647,7 +2743,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00003C54);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00003CF4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00008D20);
 
 void func_00008D60(void) {
@@ -3065,7 +3161,7 @@ s32 func_00004834(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000098B0);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00009A5C);
@@ -3224,7 +3320,7 @@ void func_000048C4(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004950);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0000A9C0(void) {
     func_000033B4(0x10, 0);
 }
@@ -3762,7 +3858,7 @@ void func_00006878(void **arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00006898);
 #endif
 
@@ -3862,7 +3958,7 @@ void func_000071A0(s32 arg0, struct Unk_func_000071A0_1 *arg1) {
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000071D8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_000071D8(s32 arg0) {
     void **temp_s0;
     void **temp_s1;
@@ -4304,7 +4400,7 @@ s32 func_00007FA8(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00021434);
 #endif
 
@@ -4336,7 +4432,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001D768);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001D788);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00021784);
 #endif
 
@@ -4350,7 +4446,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001D7CC);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001D7EC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_000217F8);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00021810);
@@ -4440,7 +4536,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_000088B8);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000089A8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D474);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D624);
@@ -4480,7 +4576,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00005414);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00008B9C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000DE48);
 #endif
 
@@ -4490,7 +4586,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00008C6C);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00008D44);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E040);
 #endif
 
@@ -4735,7 +4831,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00009908);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00009948);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000EF04);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000EF68);
@@ -4753,7 +4849,7 @@ void func_000099C8(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000F16C);
 #endif
 
@@ -4767,7 +4863,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001DA28);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001DA48);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000F1BC);
 #endif
 
@@ -4791,7 +4887,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001DAD8);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001DAF0);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00021BF0);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00021C0C);
@@ -4869,7 +4965,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001DB08);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001DB1C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00021C5C);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00021C68);
@@ -4899,7 +4995,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001DBE0);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001DBFC);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00021D8C);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00021DA8);
@@ -5027,7 +5123,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001DF2C);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001DF50);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00022158);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0002215C);
@@ -5150,7 +5246,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_000065C4);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000A464);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000F83C);
 #endif
 
@@ -5158,7 +5254,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000F83C);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000A628);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000F934);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000FAAC);
@@ -5267,7 +5363,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000B154);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000B24C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00010B50);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00010BD4);
@@ -6170,7 +6266,7 @@ u8 func_0000E66C(void) {
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E678);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0000E6E4(void) {
     s32 temp_s0;
 
@@ -6764,7 +6860,7 @@ u8 func_0000F118(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00014ADC);
 
 void func_0000F190(void) {
@@ -6835,7 +6931,7 @@ void func_0000FB08(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00015540);
 #endif
 
@@ -7207,7 +7303,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001E654);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001E66C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00022810);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00022834);
@@ -7398,7 +7494,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00012E08);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00012F0C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00012F30);
 #endif
 
@@ -7408,7 +7504,7 @@ void func_00012F30(s8 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00012F3C);
 #endif
 
@@ -7422,7 +7518,7 @@ u8 func_00012F3C(void) {
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001E88C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00016D70);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00016F98);
@@ -7722,7 +7818,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00016080);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001616C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00019C08);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00019CF4);
@@ -7780,7 +7876,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001EFE0);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000162D4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00023158);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00023170);
@@ -7798,7 +7894,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F078);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F090);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00023208);
 #endif
 
@@ -8286,7 +8382,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F31C);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F338);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_000234AC);
 #endif
 
@@ -8302,7 +8398,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00017834);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F368);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_000234E0);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00023500);
@@ -8324,7 +8420,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000C21C);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F384);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00023554);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00023570);
@@ -8340,7 +8436,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F42C);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F438);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_000235D4);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_000235E8);
@@ -8410,7 +8506,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F550);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F564);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00023794);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_000237B4);
@@ -8424,7 +8520,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00013574);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F580);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001B440);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001B628);
@@ -8452,7 +8548,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F5CC);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00017D6C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001BAFC);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001BC84);
@@ -8624,7 +8720,7 @@ void func_00018448(void) {
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000184C0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00018530(void) {
     scePaf_6B1E90C7();
     func_00005C24(0);
@@ -8651,7 +8747,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00018638);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00018928);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00018974(s32 arg0) {
     void *temp_v0;
 
@@ -8689,7 +8785,7 @@ void func_00018974(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_000189F4(void) {
     s32 temp_s0;
 
@@ -8766,7 +8862,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00018CD4);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00018DA8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001D290);
 #endif
 
@@ -9123,7 +9219,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E724);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000191F0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001D608);
 #else
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000193A8);
@@ -9213,7 +9309,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00019424);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00019488);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001D750);
 #endif
 
@@ -9227,7 +9323,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00019580);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000195C8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001D8FC);
 #endif
 

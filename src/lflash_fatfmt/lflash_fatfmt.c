@@ -5,7 +5,7 @@ INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_00000000);
 
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000000EC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001848);
 #endif
 

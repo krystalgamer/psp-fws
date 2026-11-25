@@ -2,7 +2,7 @@
 #include "common.h"
 #include "libparse_uri_decls.h"
 
-#if (FW_VERSION >= 150 && FW_VERSION < 282) || FW_VERSION == 300
+#if (FW_VERSION >= 150 && FW_VERSION < 282) || FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00000000);
 #else
 INCLUDE_ASM("nonmatchings/libparse_uri", _is_scheme_char);
@@ -330,7 +330,7 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_00002984);
 
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002C20);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002C30);
 #endif
 

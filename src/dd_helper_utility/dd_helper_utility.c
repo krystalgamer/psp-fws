@@ -15,7 +15,7 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_0000015C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00006048);
 
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00006058);
@@ -61,7 +61,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00000454);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000004C0);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000005A8);
 #else
 void func_00000550(void) {
@@ -105,7 +105,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_0000061C);
 
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00004770);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0000063C(void) {
     void *temp_v0;
 
@@ -224,7 +224,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_0000480C);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00000FD8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00001120(struct Unk_func_00001120_0 *arg0) {
     func_000021C8(&arg0->pad0[0xC], M2C_FIELD(arg0, s32 *, 0x40));
 }
@@ -238,7 +238,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001140);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000011A4);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_0000495C);
 
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_000061F0);
@@ -258,7 +258,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_0000490C);
 
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_0000491C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00006284);
 
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_0000628C);
@@ -290,7 +290,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001770);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001A28);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001CE0);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001FF4);
@@ -324,7 +324,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001F1C);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001FC8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00002798);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000026D0);
@@ -338,7 +338,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000020C4);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00002100);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00002914);
 #else
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00002128);
@@ -378,7 +378,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000026C0);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000026CC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00002F2C);
 #endif
 
@@ -397,7 +397,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000028AC);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_0000292C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000031F8);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00003268);
@@ -629,7 +629,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00004AE0);
 
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00004AF0);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00005150);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00005218);

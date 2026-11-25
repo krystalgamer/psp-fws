@@ -284,6 +284,6 @@ s32 func_0003762C(struct Unk_func_0003762C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_036D60", func_000382B8);
 #endif

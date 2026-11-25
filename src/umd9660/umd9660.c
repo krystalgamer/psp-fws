@@ -110,7 +110,7 @@ s32 func_00000B48(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/umd9660", func_00000CDC);
 #endif
 
@@ -188,7 +188,7 @@ s32 func_00001D78(void) {
 INCLUDE_ASM("nonmatchings/umd9660", func_00000BC4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/umd9660", func_00000DF0);
 #endif
 
@@ -198,7 +198,7 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00000BEC);
 
 INCLUDE_ASM("nonmatchings/umd9660", func_000013F4);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/umd9660", func_000015B4);
 #endif
 
@@ -855,7 +855,7 @@ s32 func_00004264(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00004568(void) {
     return (sceUmdMan_driver_4FB913A3() & 0xF) != 0;
 }
@@ -1083,7 +1083,7 @@ void func_00005334(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/umd9660", func_00005674);
 #endif
 

@@ -421,7 +421,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGetPtpStat);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000052D4);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004964);
 #endif
 
@@ -613,7 +613,7 @@ void func_000056D4(void *arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000053EC);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004AE4);
 #endif
 
@@ -644,7 +644,7 @@ s32 func_000056E4(struct Unk_func_000056E4_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005708);
 #endif
 

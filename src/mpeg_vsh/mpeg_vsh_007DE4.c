@@ -62,7 +62,7 @@ s32 func_00007F64(struct Unk_func_00007F64_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00007FF4(void *arg0, s32 arg1) {
     s32 temp_s1;
 
@@ -80,7 +80,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_00007FC4);
 INCLUDE_ASM("nonmatchings/mpeg_vsh_007DE4", func_000081C4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00008734(void) {
     return 0x58C;
 }

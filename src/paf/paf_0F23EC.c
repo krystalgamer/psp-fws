@@ -115,6 +115,12 @@ void scePaf_F639E5E1(struct Unk_scePaf_F639E5E1_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_7F2442DC);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F0848);
+
+INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F0998);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F2828);
 

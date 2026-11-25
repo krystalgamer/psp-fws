@@ -120,7 +120,7 @@ INCLUDE_ASM("nonmatchings/exceptionman", func_000006C8);
 
 INCLUDE_ASM("nonmatchings/exceptionman", func_000006D8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_FC26C354);
 #else
 INCLUDE_ASM("nonmatchings/exceptionman", func_000006F8);

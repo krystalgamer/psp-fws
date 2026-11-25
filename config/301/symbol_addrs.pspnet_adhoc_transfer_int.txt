@@ -60,3 +60,18 @@ sceNetAdhocMatchingDelete = 0x00002028; // type:func
 sceNet_lib_57CC57DA = 0x00002030; // type:func
 sceNet_lib_E0A81C7C = 0x00002038; // type:func
 sceNet_lib_EF097716 = 0x00002040; // type:func
+// shared names (tools/add_version.py) begin
+D_00002338 = 0x00002340; // rom:0x23E0
+D_00002410 = 0x00002420; // rom:0x24C0
+D_00002420 = 0x00002430;
+D_00002424 = 0x00002434;
+D_00002428 = 0x00002438;
+D_0000242C = 0x0000243C;
+D_00002430 = 0x00002440;
+D_00002458 = 0x00002468;
+D_0000245C = 0x0000246C;
+D_00002460 = 0x00002470;
+D_00002464 = 0x00002474;
+D_00002468 = 0x00002478;
+D_00002424_v301 = 0x00002424; // rom:0x24C4
+// shared names (tools/add_version.py) end

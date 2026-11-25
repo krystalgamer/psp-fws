@@ -39,7 +39,7 @@ INCLUDE_RODATA("nonmatchings/lftv_plugin", D_00003204);
 
 INCLUDE_RODATA("nonmatchings/lftv_plugin", D_0000322C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/lftv_plugin", D_00003ABC);
 #endif
 
@@ -173,7 +173,7 @@ M2C_UNK *func_00000B90(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00000C9C(s32 arg0) {
     func_0000301C(arg0);
 }
@@ -191,7 +191,7 @@ void func_00000CD4(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_00000B9C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00000DB4(void) {
     func_00003138(0x2000, 0);
 }
@@ -268,7 +268,7 @@ void func_0000186C(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00001AE0(void) {
     func_00003138(0x02000000, 0);
 }
@@ -417,7 +417,7 @@ INCLUDE_ASM("nonmatchings/lftv_plugin", func_00002B30);
 
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_00002B84);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00002F70(void) {
     sceVshCommonUtil_622815DD(&D_00003D1C, &func_00003164);
 }

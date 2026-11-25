@@ -2,7 +2,7 @@
 #include "common.h"
 #include "camera_plugin_decls.h"
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 void func_00000294(void) {
     s32 temp_v0;
     void *temp_v0_2;
@@ -42,7 +42,7 @@ INCLUDE_RODATA("nonmatchings/camera_plugin_000294", D_00021640);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_0000031C);
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 s32 func_000004F8(void) {
     sceVshCommonUtil_9E42444E(&D_000236A4, 1, 0);
     func_0000C718();
@@ -72,7 +72,7 @@ void func_00000614(void) {
     func_00000578(0, 0xFFFF);
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_00000890);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_00000900);

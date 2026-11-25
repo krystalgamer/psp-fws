@@ -179,7 +179,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00009594);
 
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009BC8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009C64);
 #endif
 

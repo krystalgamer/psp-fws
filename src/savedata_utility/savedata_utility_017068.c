@@ -1227,7 +1227,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_0001A860);
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_0001A8D4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0001A8D4(void) {
     if (D_00025C48.unk0 != 0) {
         func_00017678(D_00025C48.unk0);

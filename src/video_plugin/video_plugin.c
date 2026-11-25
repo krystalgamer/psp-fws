@@ -517,7 +517,7 @@ INCLUDE_RODATA("nonmatchings/video_plugin", D_00040B74);
 INCLUDE_ASM("nonmatchings/video_plugin", func_000002B4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0000057C(void) {
     func_00001678(1, 0);
     func_00001678(2, 1);
@@ -533,7 +533,7 @@ void func_00000548(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_plugin", func_00000550);
 #endif
 
@@ -967,7 +967,7 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_000046D0);
 INCLUDE_ASM("nonmatchings/video_plugin", func_000005A0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_plugin", func_00000B84);
 #endif
 
@@ -987,7 +987,7 @@ void func_00000B84(s32 arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin", func_00000BE0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_plugin", func_00000D40);
 #endif
 
@@ -1008,7 +1008,7 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_00000E68);
 INCLUDE_ASM("nonmatchings/video_plugin", func_00001174);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/video_plugin", D_000027B8);
 
 INCLUDE_RODATA("nonmatchings/video_plugin", D_00002FA4);
@@ -1034,7 +1034,7 @@ void func_00001460(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/video_plugin", func_00001678);
 
 INCLUDE_ASM("nonmatchings/video_plugin", func_00001760);
@@ -12995,7 +12995,7 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0000204C);
 
 INCLUDE_ASM("nonmatchings/video_plugin", func_000020A0);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/video_plugin", D_00003194);
 #endif
 

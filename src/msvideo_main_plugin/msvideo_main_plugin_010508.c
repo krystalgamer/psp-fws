@@ -19,7 +19,7 @@ void func_00010580(M2C_UNK **arg0) {
     func_0000FCD8((s32) arg0);
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_010508", func_000105A8);
 #else
 void func_000105A8(M2C_UNK **arg0) {

@@ -653,6 +653,7 @@ void func_00010E50(struct Unk_func_00010E50_0 *arg0);
 u8 func_000110C4(void *arg0);
 s32 func_000115E8(s32);
 s32 func_000115E8_v300(void *arg0);
+s32 func_000115E8_v301(void *arg0);
 s32 func_00011644(void *arg0, s32 arg1);
 void func_00011660(M2C_UNK **arg0);
 s32 func_000116B4(void);

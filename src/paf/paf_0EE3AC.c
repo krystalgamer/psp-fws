@@ -5,7 +5,7 @@
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EE3AC);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EB3B0);
 #endif
 
@@ -26,7 +26,7 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_B104EC1B);
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_B3659499);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_7475E79A);
 #endif
 

@@ -37,7 +37,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_000006F8);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000720);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001810);
 #endif
 
@@ -109,7 +109,7 @@ void func_0000076C(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000790);
 #endif
 
@@ -182,7 +182,7 @@ INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001670);
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_000015D8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_000019E4);
 #endif
 
@@ -190,7 +190,7 @@ INCLUDE_RODATA("nonmatchings/opening_plugin", D_000015E4);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_000015EC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001A04);
 #endif
 
@@ -254,9 +254,15 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_000009E8);
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000009D4);
 #endif
 
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/opening_plugin", func_000009FC_v301);
+#endif
+
 #if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000009FC_v300);
+#endif
 
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000A8C);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000B60);
@@ -274,7 +280,7 @@ void func_00000A24(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000BE0);
 #endif
 
@@ -307,7 +313,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00000E28);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000E84);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000010EC);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00001194);
@@ -349,7 +355,7 @@ void func_00000EF8(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00001274);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000012EC);
@@ -359,7 +365,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00000F48);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000F78);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000013E8);
 #endif
 

@@ -34,7 +34,7 @@ INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasGetEnvelopeHeight);
 
 INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasSetSimpleADSR);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasSetGrain);
 
 INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasGetGrain);
@@ -76,7 +76,7 @@ INCLUDE_ASM("nonmatchings/sc_sascore", sceP3daBridgeInit);
 INCLUDE_ASM("nonmatchings/sc_sascore", sceP3daBridgeCore);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void sceP3daBridgeInit(s32 arg0, s32 arg1) {
     u32 temp_s0;
 

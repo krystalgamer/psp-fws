@@ -48,7 +48,7 @@ s32 module_stop(void) {
 INCLUDE_ASM("nonmatchings/update_plugin", func_0000015C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0000015C(s32 arg0) {
     scePaf_97FDA760(arg0, 1, &D_00007DF8);
 }
@@ -385,13 +385,13 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_00007760);
 
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00007788);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/update_plugin", D_0000783C);
 #endif
 
 INCLUDE_RODATA("nonmatchings/update_plugin", D_000077A4);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00007D48);
 #endif
 
@@ -724,7 +724,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00001940);
 
 INCLUDE_ASM("nonmatchings/update_plugin", func_00001B1C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/update_plugin", func_00001BEC);
 
 void func_00001C20(void) {
@@ -966,7 +966,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00001B90);
 INCLUDE_ASM("nonmatchings/update_plugin", func_00001E54);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/update_plugin", D_000080A0);
 #endif
 
@@ -981,7 +981,7 @@ void func_0000214C(s32 arg0) {
 INCLUDE_ASM("nonmatchings/update_plugin", func_00002188);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_000022C0(void) {
     s32 temp_s0;
 
@@ -1016,7 +1016,7 @@ void func_000022C0(void) {
 INCLUDE_ASM("nonmatchings/update_plugin", func_0000231C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/update_plugin", func_00002360);
 #endif
 
@@ -1125,7 +1125,7 @@ void func_00002440(void) {
 INCLUDE_ASM("nonmatchings/update_plugin", func_00002464);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0000292C(s32 arg0) {
     void *temp_v0;
 
@@ -1148,7 +1148,7 @@ void func_0000292C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/update_plugin", func_00002960);
 #endif
 
@@ -1913,7 +1913,7 @@ s32 func_000059E8(void *arg0) {
 INCLUDE_ASM("nonmatchings/update_plugin", func_00005C10);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00005CA0(struct Unk_func_00005CA0_0 *arg0) {
     s32 temp_s1;
 
@@ -1998,7 +1998,7 @@ s32 func_00004010(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00005DD4(void) {
     s32 var_v1;
     void *temp_v0;

@@ -73,13 +73,13 @@ INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_000008A0);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_000008C8);
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00000AE0);
 #endif
 
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_000008F0);
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00000CF0);
 #else
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00000984);
@@ -91,13 +91,13 @@ INCLUDE_RODATA("nonmatchings/camera_plugin_000634", D_00021698);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00000C9C);
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_000013DC);
 #else
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00001158);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 void func_00001294(void) {
     sceVshCommonGui_441D55D7(0);
     if (D_00165444 == 0) {
@@ -178,7 +178,7 @@ INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00001D24);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00001DA8);
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00001E54);
 #else
 void func_00001E54(M2C_UNK **arg0) {
@@ -187,7 +187,7 @@ void func_00001E54(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00001E7C);
 #else
 void func_00001E7C(M2C_UNK **arg0) {
@@ -197,7 +197,7 @@ void func_00001E7C(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00001EB4);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00001ED0);

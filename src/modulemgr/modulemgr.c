@@ -184,7 +184,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForUser_FEF27DC1);
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForUser_710F61B5);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
 #endif
 
@@ -202,7 +202,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_49C5B9E1);
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_ECC2EAA9);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_F07E1A2F);
 
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_0CE03872);
@@ -212,7 +212,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_0CE03872);
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_A4370E7C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/modulemgr", func_0000206C);
 #endif
 
@@ -240,7 +240,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelQueryModuleInfo);
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleId);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleIdByAddress);
 #endif
 
@@ -446,7 +446,7 @@ s32 ModuleMgrForKernel_54D9E02E(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00004750(void) {
     sceKernelWaitSema(D_00008184, 1, NULL);
 }
@@ -462,7 +462,7 @@ s32 ModuleMgrForKernel_61EC6AB0(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/modulemgr", func_00004780);
 #endif
 
@@ -478,7 +478,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006D34);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006D64);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/modulemgr", D_000078BC);
 #endif
 
@@ -535,7 +535,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00000718);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006E3C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00007994);
 #endif
 
@@ -1123,7 +1123,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_000051F0);
 INCLUDE_ASM("nonmatchings/modulemgr", func_0000552C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 *arg1) {
     if (arg1 != NULL) {
         arg0->unk14 = arg1->unk4;
@@ -1164,7 +1164,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00006038);
 INCLUDE_ASM("nonmatchings/modulemgr", func_00006304);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/modulemgr", func_00006DA8);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00007C70);

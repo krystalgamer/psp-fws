@@ -4,7 +4,21 @@
 
 #if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C098", func_0000C098);
-#else
+#endif
+
+#if FW_VERSION == 301
+void func_0000C098(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_FD4C9F47(arg1);
+    }
+    func_0000C2B4(arg0, arg1, var_v0);
+}
+#endif
+
+#if FW_VERSION == 352
 void func_0000C098(s32 arg0, s32 arg1) {
     s32 var_v0;
 

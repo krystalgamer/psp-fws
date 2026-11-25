@@ -170,8 +170,15 @@ s32 scePaf_91E82C1B(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("nonmatchings/paf_042054", scePaf_A25BDAA2);
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if FW_VERSION >= 200 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/paf_042054", func_000407E4);
+#endif
+
+#if FW_VERSION == 260
+s32 func_000407E4(s32 arg0) {
+    D_001A34E4 = arg0;
+    return 1;
+}
 #endif
 
 #if FW_VERSION < 200

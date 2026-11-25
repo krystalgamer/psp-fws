@@ -488,7 +488,7 @@ s32 func_000072FC(struct Unk_func_000072FC_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00007390(void *arg0, s32 arg1) {
     s32 temp_s1;
 
@@ -598,7 +598,7 @@ INCLUDE_ASM("nonmatchings/mpeg", func_00007B58);
 
 INCLUDE_RODATA("nonmatchings/mpeg", D_00008100);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/mpeg", D_000081BC);
 #else
 INCLUDE_RODATA("nonmatchings/mpeg", D_00008110);

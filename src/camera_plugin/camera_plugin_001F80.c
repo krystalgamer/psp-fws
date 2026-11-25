@@ -2,7 +2,7 @@
 #include "common.h"
 #include "camera_plugin_decls.h"
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 void func_00001F80(struct Unk_func_00001F80_0 *arg0, s32 arg1, s32 arg2) {
     struct Unk_func_00001F80_temp_v0 *temp_v0;
 

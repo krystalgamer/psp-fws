@@ -1,6 +1,7 @@
 {
  "funcs": {
   "func_00000180_v300": "void func_00000180_v300(void);",
+  "func_00000180_v301": "void func_00000180_v301(void);",
   "func_000001D8": "void func_000001D8(void);",
   "func_000001FC": "void func_000001FC(void);",
   "func_00000294": "void func_00000294(void);",

@@ -582,7 +582,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_01AAFC", D_0009BE3C);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01AAFC", D_0009BE48);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01AAFC", D_000B3928);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01AAFC", D_000B3934);
@@ -616,7 +616,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_01AAFC", D_0009BE80);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01AAFC", D_0009BE8C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01AAFC", D_000B39F0);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_01AAFC", D_000B39F8);

@@ -642,7 +642,7 @@ INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_394CBE00);
 
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_B48D135B);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void sceVshCommonUtil_8584376D(s32 arg0) {
     func_000011B8(arg0);
 }

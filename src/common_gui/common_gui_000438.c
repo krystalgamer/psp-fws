@@ -228,7 +228,7 @@ void sceVshCommonGui_B45ED019(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void sceVshCommonGui_C00B308F(void) {
     func_000005CC((s32) "msgsystem_ok");
 }

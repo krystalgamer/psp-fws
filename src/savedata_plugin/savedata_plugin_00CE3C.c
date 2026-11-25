@@ -1867,7 +1867,7 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_00CE3C", D_000225AC);
 INCLUDE_RODATA("nonmatchings/savedata_plugin_00CE3C", D_000225B4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) {
     void *sp0;
     s32 temp_s0;

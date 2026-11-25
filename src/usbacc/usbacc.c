@@ -44,7 +44,7 @@ INCLUDE_ASM("nonmatchings/usbacc", module_start);
 
 INCLUDE_ASM("nonmatchings/usbacc", module_stop);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/usbacc", func_00000664);
 #endif
 

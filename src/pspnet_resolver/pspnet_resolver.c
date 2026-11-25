@@ -141,7 +141,7 @@ s32 _sce_pspnet_resolver_term(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 sceNetResolverDelete(s32 arg0) {
     s32 var_a1;
     s32 var_v1;
@@ -179,7 +179,7 @@ s32 sceNetResolverDelete(s32 arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000508);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_0000065C(void) {
     s32 temp_v0;
     s32 var_a0;
@@ -222,7 +222,7 @@ s32 func_000006B0(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000006D0);
 
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_0000070C);
@@ -252,7 +252,7 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000007E0);
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000908);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000F64);
 #endif
 
@@ -294,7 +294,7 @@ s32 func_00000FA8(void) {
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000FB0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000010C8);
 #endif
 
@@ -336,7 +336,7 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", parse_dns_header);
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001278);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000013E8);
 #endif
 
@@ -374,7 +374,7 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001818);
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000019A4);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00001B9C);
 #endif
 

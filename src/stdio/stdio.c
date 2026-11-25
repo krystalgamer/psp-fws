@@ -226,7 +226,7 @@ s32 func_00000A20(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/stdio", func_00000A28);
 #endif
 
@@ -236,7 +236,7 @@ s32 func_00000A28(struct Unk_func_00000A28_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/stdio", func_00000A40);
 #endif
 
@@ -308,7 +308,7 @@ INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_2D8551AB);
 INCLUDE_ASM("nonmatchings/stdio", StdioForKernel_9662BF86);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/stdio", func_00000FB8);
 #endif
 
@@ -328,7 +328,7 @@ INCLUDE_ASM("nonmatchings/stdio", func_0000100C);
 INCLUDE_RODATA("nonmatchings/stdio", D_0000154C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/stdio", D_00001398);
 #endif
 

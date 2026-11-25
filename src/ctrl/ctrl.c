@@ -345,7 +345,7 @@ INCLUDE_ASM("nonmatchings/ctrl", func_00001584);
 INCLUDE_ASM("nonmatchings/ctrl", func_00001600);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00001600(void) {
     D_00001D70.pad0[0x11] = 0;
     D_00001D70.pad0[0xE] = D_00001D70.pad0[0x8A];

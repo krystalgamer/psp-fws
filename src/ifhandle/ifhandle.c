@@ -155,7 +155,7 @@ INCLUDE_ASM("nonmatchings/ifhandle", func_000012BC);
 INCLUDE_ASM("nonmatchings/ifhandle", func_00001478);
 #endif
 
-#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282) || FW_VERSION == 300
+#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282) || FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_0C391E9F);
 #endif
 
@@ -175,7 +175,7 @@ s32 sceNetIfhandle_driver_0C391E9F(s32 arg0, u32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282) || FW_VERSION == 300
+#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282) || FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_29ED84C5);
 #endif
 

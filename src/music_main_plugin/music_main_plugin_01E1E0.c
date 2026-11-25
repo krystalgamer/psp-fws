@@ -43,7 +43,7 @@ s32 func_0001EAD8(struct Unk_func_0001EAD8_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00022E04);
 #endif
 

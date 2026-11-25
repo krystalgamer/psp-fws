@@ -3,3 +3,8 @@ module_start = 0x00000000; // type:func
 module_stop = 0x0000006C; // type:func
 sceIdStorageLookup = 0x00000074; // type:func
 sceWlanDrv_driver_E50312AB = 0x0000007C; // type:func
+// shared names (tools/add_version.py) begin
+D_0000015C = 0x00000164; // rom:0x204
+D_00000898 = 0x000008A0; // rom:0x940
+D_0000015C_v301 = 0x0000015C; // rom:0x1FC
+// shared names (tools/add_version.py) end

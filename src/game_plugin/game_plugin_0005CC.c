@@ -22,11 +22,17 @@ void func_00000610(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 }
 #endif
 
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000664_v301);
+#endif
+
 #if FW_VERSION == 300
 void func_00000664_v300(s32 arg0) {
     sceVshCommonUtil_8584376D(&D_00013F64, arg0);
 }
+#endif
 
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000688);
 #endif
 
@@ -46,7 +52,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000970);
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000664);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_0000076C(void) {
     sceVshCommonUtil_622815DD(&D_00013F64, &func_00000688);
     func_00008120(&D_0001247C);

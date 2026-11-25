@@ -422,7 +422,7 @@ void LoadExecForKernel_70901231(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void LoadExecForKernel_061D9514(s32 arg0, s32 arg1) {
     func_00001FA8(0x143, arg0, arg1, 0x10000);
 }
@@ -578,6 +578,6 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00002700);
 INCLUDE_ASM("nonmatchings/loadexec", func_00002304);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/loadexec", func_0000193C);
 #endif

@@ -22,7 +22,7 @@ void func_00027688(M2C_UNK **arg0) {
     *arg0 = &D_000B0F78;
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0274D4", func_00027698);
 #else
 void func_00027698(M2C_UNK **arg0) {
@@ -35,7 +35,7 @@ void func_000276C0(M2C_UNK **arg0) {
     *arg0 = &D_000B0F88;
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0274D4", func_000276D0);
 #else
 void func_000276D0(M2C_UNK **arg0) {
@@ -56,7 +56,7 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_0274D4", D_000B0F78);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_0274D4", D_000B0F88);
 
-#if FW_VERSION == 300
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0274D4", func_00028EB8);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0274D4", func_00028F68);

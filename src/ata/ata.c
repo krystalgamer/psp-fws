@@ -357,7 +357,7 @@ void sceAta_driver_7BBA095C(s32 arg0, M2C_UNK arg1) {
 INCLUDE_ASM("nonmatchings/ata", module_start);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 module_start(void) {
     func_00003FB0();
     return func_00000000(1) != 0;

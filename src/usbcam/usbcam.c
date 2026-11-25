@@ -151,7 +151,7 @@ INCLUDE_RODATA("nonmatchings/usbcam", D_0000AB8C);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000ABA4);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamReadVideoFrame);
 #else
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000ABC0);
@@ -199,7 +199,7 @@ INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamStillCancelInput);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamGetSaturation);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamGetBrightness);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamGetContrast);
@@ -207,7 +207,7 @@ INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamGetContrast);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamGetSharpness);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamGetZoom);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamGetAntiFlicker);
@@ -320,7 +320,7 @@ INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetSharpness);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetZoom);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetAntiFlicker);
 #else
 s32 sceUsbCamGetZoom(void *arg0) {
@@ -420,7 +420,7 @@ void func_000039F0(struct Unk_func_000039F0_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/usbcam", func_00003D54);
 #else
 INCLUDE_ASM("nonmatchings/usbcam", func_00003A40);
@@ -673,7 +673,7 @@ s32 func_00008E1C(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00008E1C(void) {
     s32 temp_v0;
     s32 var_v1;

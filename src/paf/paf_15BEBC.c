@@ -180,7 +180,7 @@ INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A299C);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuInit);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuTerm);
 #endif
 
@@ -408,7 +408,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuViewport);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuDepthRange);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuDepthOffset);
 #endif
 
@@ -638,7 +638,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuTexFilter);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuTexFunc);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuTexEnvColor);
 #endif
 
@@ -838,7 +838,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011CE54);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001616A8);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuDebugPrint);
 #endif
 
@@ -850,7 +850,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011CF38);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuSetCallback);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumSetMatrixStack);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumLoadIdentity);
@@ -872,7 +872,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00109630);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00109A5C);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumPerspective);
 #endif
 
@@ -912,7 +912,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001690E8);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011D6CC);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumUpdateMatrix);
 #endif
 
@@ -1118,9 +1118,15 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumScale);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0010C0CC);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015FC60);
+#endif
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_0019CA74);
+#endif
+
+#if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_0019AF34);
 #endif
 
@@ -1134,7 +1140,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011E040);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011E120);
 #endif
 
-#if FW_VERSION == 151 || FW_VERSION == 250
+#if FW_VERSION == 151 || (FW_VERSION >= 250 && FW_VERSION < 282)
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_00122B84);
 #endif
 

@@ -59,7 +59,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003D48);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003D74);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 M2C_UNK *func_00005554(void) {
     return "http://manuals.playstation.net/document/pspindex.html";
 }
@@ -73,7 +73,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003E2C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00004008);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000058EC);
 #endif
 
@@ -95,7 +95,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000043F8);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000044CC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00005D94);
 #endif
 

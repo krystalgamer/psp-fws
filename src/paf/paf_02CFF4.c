@@ -11,7 +11,7 @@ void func_0002CFF4(s32 arg0, s32 arg1) {
     }
 }
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_00030400);
 #endif
 

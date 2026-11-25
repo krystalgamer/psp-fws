@@ -90,7 +90,7 @@ void sceVshCommonGui_72E652AA(s32 *arg0) {
     scePaf_41BCFB59(*arg0);
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void sceVshCommonGui_77812115(s32 *arg0) {
     scePaf_6615D1B8(*arg0);
 }

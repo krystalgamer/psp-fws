@@ -101,7 +101,7 @@ INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EEE0);
 INCLUDE_ASM("nonmatchings/music_common_003774", func_00004100);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EF10);
 #endif
 

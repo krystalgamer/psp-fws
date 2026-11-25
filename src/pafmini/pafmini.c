@@ -425,33 +425,19 @@ void scePaf_4C8C2E25(void) {
 
 }
 
-void scePaf_81FD71A9(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_81FD71A9);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_BBBF145C);
 
-void scePaf_BBBF145C(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_B52E43FB);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_95C97571);
 
-void scePaf_B52E43FB(void) {
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_F273FE50);
 
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_AD7A45F9);
 
-void scePaf_95C97571(void) {
-
-}
-
-void scePaf_F273FE50(void) {
-
-}
-
-void scePaf_AD7A45F9(void) {
-
-}
-
-void scePaf_67C7567E(void) {
-
-}
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_67C7567E);
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_56F4D69F);
 

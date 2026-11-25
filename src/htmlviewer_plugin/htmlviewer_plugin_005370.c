@@ -29,7 +29,7 @@ void func_00005488(void) {
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_000054DC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00006F7C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", sceHtmlViewerHelper_63715462);
@@ -105,13 +105,13 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005C64);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005CC8);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00007888);
 #endif
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005CDC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00007918);
 #endif
 
@@ -150,7 +150,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005F20);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00005FE0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00007C90);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00007E94);

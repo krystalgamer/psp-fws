@@ -454,7 +454,7 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00003118);
 
 INCLUDE_ASM("nonmatchings/interruptman", func_00003150);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/interruptman", func_00003390);
 #else
 INCLUDE_ASM("nonmatchings/interruptman", func_000031D0);

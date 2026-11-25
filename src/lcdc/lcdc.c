@@ -116,7 +116,7 @@ s32 sceLcdc_driver_A0032C3D(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdc_driver_00EF7E87);
 #endif
 

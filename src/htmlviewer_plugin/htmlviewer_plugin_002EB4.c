@@ -4,7 +4,7 @@
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_00002EB4);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_00003F7C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_00003FAC);
@@ -18,7 +18,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_00002F20);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_00002FEC);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_000041C4(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -36,7 +36,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_0000312C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_00003158);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_000044FC);
 #endif
 
@@ -68,7 +68,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_0000357C);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_000035D0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_0000486C);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_002EB4", func_00004A3C);
@@ -204,7 +204,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_002EB4", D_00007240);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_002EB4", D_00007248);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_002EB4", D_00009308);
 #endif
 

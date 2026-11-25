@@ -12,7 +12,7 @@ void func_00004310(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_0000434C);
 #endif
 

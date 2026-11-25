@@ -432,7 +432,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00001990);
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_DA1B09AA);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_A8E2D53D);
 #endif
 
@@ -586,7 +586,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00002050);
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_616FCCCD);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void LoadCoreForKernel_4440853B(void) {
     func_0000665C();
 }
@@ -632,7 +632,7 @@ M2C_UNK *LoadCoreForKernel_C99DD47A(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 LoadCoreForKernel_3BB7AC18(void) {
     return 0;
 }
@@ -696,7 +696,7 @@ void func_00002C3C(void *arg0, u32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/loadcore", func_00000EF4);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_0000141C);
@@ -712,7 +712,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00002E40);
 INCLUDE_ASM("nonmatchings/loadcore", func_00003028);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/loadcore", func_0000175C);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_0000287C);
@@ -726,7 +726,7 @@ s32 func_00002A5C(void) {
 INCLUDE_ASM("nonmatchings/loadcore", func_000030DC);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/loadcore", func_00002CD0);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00002EA0);
@@ -1083,7 +1083,7 @@ s32 func_00004D24(void) {
 INCLUDE_ASM("nonmatchings/loadcore", func_00004D2C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/loadcore", func_00004D54);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00004E38);
@@ -1186,7 +1186,7 @@ INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_A6D40F56);
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_CCE4A157);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_929B5C69);
 #endif
 
@@ -1207,7 +1207,7 @@ s32 func_0000630C(struct Unk_func_0000630C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/loadcore", func_00006470);
 #endif
 

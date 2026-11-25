@@ -29,7 +29,7 @@ void scePaf_D0AD10FF(void) {
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3338);
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_B0C3E598);
 #endif
 

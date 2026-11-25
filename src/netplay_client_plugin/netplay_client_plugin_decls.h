@@ -118,6 +118,7 @@ extern s32 D_0000E90C;
 extern s32 D_0000EAD0;
 extern s32 D_0000EAD4;
 extern s8 D_0000EAFC_v300;
+extern s8 D_0000EAFC_v301;
 extern s32 D_0000EB00;
 extern s32 D_0000EB04;
 extern s32 D_0000EB08;

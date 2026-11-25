@@ -1418,7 +1418,7 @@ void func_00004F38(s32 arg0) {
 INCLUDE_ASM("nonmatchings/dialogmain", func_00004E04);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00004E7C(void) {
     return 0;
 }

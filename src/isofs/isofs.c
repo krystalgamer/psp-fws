@@ -105,7 +105,7 @@ s32 func_00000494(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/isofs", func_00000440);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00000440(struct Unk_func_00000440_0 *arg0) {
     s32 var_s1;
     s32 var_s2;
@@ -184,7 +184,7 @@ s32 func_00000440(struct Unk_func_00000440_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1) {
     func_000007FC(M2C_FIELD(arg0, s32 *, 0x94), arg1);
     return 0;
@@ -424,7 +424,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00001778);
 INCLUDE_ASM("nonmatchings/isofs", func_00001A4C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00001A4C(void *arg0) {
     s32 temp_a0;
     s32 temp_v1;
@@ -1046,7 +1046,7 @@ INCLUDE_ASM("nonmatchings/isofs", module_reboot_before);
 INCLUDE_ASM("nonmatchings/isofs", func_00004E30);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/isofs", func_000043C4);
 #endif
 
@@ -1126,7 +1126,7 @@ s32 func_000059DC(void) {
 INCLUDE_ASM("nonmatchings/isofs", func_00004D18);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/isofs", func_00004D38);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00004E38);
@@ -1148,7 +1148,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_000055E8);
 INCLUDE_ASM("nonmatchings/isofs", func_00005894);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00005908(void *arg0) {
     s32 var_v0;
 
@@ -1194,7 +1194,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00005B80);
 INCLUDE_ASM("nonmatchings/isofs", func_00005BCC);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/isofs", func_00005AE4);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00005B30);
@@ -1220,7 +1220,7 @@ s32 func_00005E10(void) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/isofs", func_00005CC4);
 #endif
 
@@ -1240,7 +1240,7 @@ INCLUDE_RODATA("nonmatchings/isofs", D_000063EC);
 INCLUDE_RODATA("nonmatchings/isofs", D_000063F0);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/isofs", D_00006428);
 #endif
 

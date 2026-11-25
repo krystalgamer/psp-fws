@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, update_plugin]
+      - [0xC4, c, update_plugin]
       - { start: 0x6F04, type: asm, name: fini, linker_section: .fini }
       - { start: 0x6F20, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x7320, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -70,7 +70,7 @@ segments:
       - { start: 0x78A0, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x78AC, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x78B0, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x78F0, rodata, update_plugin]
+      - [0x78F0, .rodata, update_plugin]
       - { start: 0x8418, type: prxpad, order: .rodata }
   - name: update_plugin_seg1
     type: code

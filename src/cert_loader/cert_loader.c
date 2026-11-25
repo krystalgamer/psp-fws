@@ -71,7 +71,7 @@ INCLUDE_ASM("nonmatchings/cert_loader", func_000005D0);
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000604);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00000604(void) {
     return 0x1FFF;
 }
@@ -81,7 +81,7 @@ s32 func_00000604(void) {
 INCLUDE_ASM("nonmatchings/cert_loader", func_0000060C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_0000060C(void) {
     return 7;
 }
@@ -91,7 +91,7 @@ s32 func_0000060C(void) {
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000614);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00000614(void) {
     return 1;
 }
@@ -101,7 +101,7 @@ s32 func_00000614(void) {
 INCLUDE_ASM("nonmatchings/cert_loader", func_0000061C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_0000061C(void) {
     return 0xF;
 }
@@ -111,7 +111,7 @@ s32 func_0000061C(void) {
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000624);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 s32 func_00000624(void) {
     return 3;
 }
@@ -125,7 +125,7 @@ s32 sceCertLoader_driver_E86A7DC1(void) {
     return 0;
 }
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000620);
 #endif
 

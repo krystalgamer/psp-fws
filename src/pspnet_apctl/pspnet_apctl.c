@@ -162,7 +162,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctl_A7BB73DF);
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctl_6F5D2981);
 #endif
 
-#if (FW_VERSION >= 260 && FW_VERSION < 282) || FW_VERSION == 300
+#if (FW_VERSION >= 260 && FW_VERSION < 282) || FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctl_lib_C519EDCD);
 #endif
 

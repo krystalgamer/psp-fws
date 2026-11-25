@@ -72,7 +72,7 @@ void sceMeMemory_driver_5AD660FA(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/me_wrapper", func_0000106C);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_0000109C);
@@ -136,7 +136,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_8EBBBBA3);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_579ACEA9);
 #endif
 
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION == 300
+#if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION >= 300
 void sceMePower_driver_579ACEA9(s32 arg0) {
     u32 temp_s0;
 
@@ -152,7 +152,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00001070);
 INCLUDE_ASM("nonmatchings/me_wrapper", func_0000129C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001528);
 #endif
 

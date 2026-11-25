@@ -393,7 +393,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00000C5C);
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00000CC8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00000DBC(void *arg0) {
     if (arg0 != NULL) {
         if (M2C_FIELD(arg0, u8 *, 0x61) == 0) {
@@ -462,7 +462,7 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021AA4);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021AB4);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00000D10);
 #endif
 
@@ -2042,13 +2042,17 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin", D_000220B0);
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00007290);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION == 301
+INCLUDE_ASM("nonmatchings/savedata_plugin", func_000072F4);
+#endif
+
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00022234);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00022290);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 301
 void func_000072F4(void) {
 }
 #endif

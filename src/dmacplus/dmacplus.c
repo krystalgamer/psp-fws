@@ -481,7 +481,7 @@ INCLUDE_ASM("nonmatchings/dmacplus", func_00002250);
 INCLUDE_ASM("nonmatchings/dmacplus", func_000021EC);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_C7D33466);
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_28558DBF);

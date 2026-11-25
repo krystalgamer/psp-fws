@@ -50,7 +50,7 @@ INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodec_29681260);
 
 INCLUDE_RODATA("nonmatchings/avcodec", D_00004034);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/avcodec", func_00000A74);
 
 INCLUDE_ASM("nonmatchings/avcodec", func_00000B64);
@@ -78,7 +78,7 @@ INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_4F160BF4);
 
 INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_C01EC829);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_17099F0A);
 #endif
 
@@ -94,7 +94,7 @@ INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_627B7D42);
 INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_17CF7D2C);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_893B32B1);
 #endif
 
@@ -116,7 +116,7 @@ INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_307E6E1C);
 
 INCLUDE_ASM("nonmatchings/avcodec", func_00001524);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/avcodec", func_0000171C);
 
 INCLUDE_ASM("nonmatchings/avcodec", func_000017E8);
@@ -132,7 +132,7 @@ INCLUDE_ASM("nonmatchings/avcodec", func_000018F0);
 
 INCLUDE_ASM("nonmatchings/avcodec", func_0000199C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/avcodec", func_00001B80);
 #else
 INCLUDE_ASM("nonmatchings/avcodec", func_00001A68);
@@ -144,7 +144,7 @@ INCLUDE_ASM("nonmatchings/avcodec", sceMpegbase_driver_7AC0321A);
 
 INCLUDE_ASM("nonmatchings/avcodec", sceMpegbase_driver_BE45C284);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/avcodec", func_000020DC);
 #endif
 

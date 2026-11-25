@@ -1637,7 +1637,7 @@ void func_00001674(void) {
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00001690);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00001718);
 #endif
 
@@ -2316,7 +2316,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00004014);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00004144);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024920);
 #endif
 

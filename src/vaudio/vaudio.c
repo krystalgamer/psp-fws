@@ -89,7 +89,7 @@ s32 sceVaudio_driver_DCC18F25(void) {
 INCLUDE_ASM("nonmatchings/vaudio", module_stop);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/vaudio", func_00000794);
 
 INCLUDE_ASM("nonmatchings/vaudio", func_0000081C);

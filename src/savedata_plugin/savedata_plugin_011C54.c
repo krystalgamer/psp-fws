@@ -152,7 +152,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011F5C);
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012008);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_000121DC);
 #endif
 

@@ -247,7 +247,7 @@ void func_00000F60(void) {
 INCLUDE_ASM("nonmatchings/sysmem", func_00000F80);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/sysmem", func_000010E0);
 #endif
 
@@ -523,7 +523,7 @@ s32 func_000017E0(struct Unk_func_000017E0_0 *arg0) {
 INCLUDE_ASM("nonmatchings/sysmem", func_000017E8);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/sysmem", func_00001834);
 #endif
 
@@ -547,7 +547,7 @@ INCLUDE_RODATA("nonmatchings/sysmem", D_0000F3F0);
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelAllocPartitionMemory);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/sysmem", func_00001C60);
 #endif
 
@@ -1182,7 +1182,7 @@ s32 SysMemForKernel_29A5899B(s32 arg0) {
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_F4390489);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_419DB8F4);
 
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_A1ACEA31);
@@ -1807,7 +1807,7 @@ INCLUDE_ASM("nonmatchings/sysmem", SysclibForKernel_87C78FB6);
 INCLUDE_RODATA("nonmatchings/sysmem", D_0000F988);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/sysmem", D_00012570);
 #endif
 
@@ -2362,7 +2362,7 @@ INCLUDE_ASM("nonmatchings/sysmem", KDebugForKernel_7D1C74F0);
 
 INCLUDE_ASM("nonmatchings/sysmem", syslib_D3744BE0);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/sysmem", func_0000DDAC);
 
 INCLUDE_ASM("nonmatchings/sysmem", func_0000DEE0);

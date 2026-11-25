@@ -70,7 +70,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_84EE5D76);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_E41A11DE);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_0BEE8F36);
 #endif
 
@@ -112,7 +112,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", func_00000F58);
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000F40);
 #endif
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000FE0);
 #endif
 
@@ -164,7 +164,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_B795D2ED);
 
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000214C);
 
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/emc_sm", D_00002980);
 #else
 INCLUDE_RODATA("nonmatchings/emc_sm", D_00002860);
