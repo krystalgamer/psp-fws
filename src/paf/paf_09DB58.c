@@ -2,19 +2,9 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09DB58", func_0009DB58);
-#endif
-
-#if FW_VERSION == 150
-void func_0009DB58(struct Unk_func_0009DB58_0 *arg0, s32 arg1) {
-    if (arg0 != NULL) {
-        arg0->unk42C = arg0->unk42C & arg1 & 0xFFF3FFFF;
-    }
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 void func_0009DB58(struct Unk_func_0009DB58_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
         arg0->unk42C = __builtin_allegrex_ins(arg0->unk42C & arg1, 0, 0x12, 2);

@@ -226,14 +226,6 @@ s32 func_00124FF4(struct Unk_func_00124FF4_0 *arg0) {
 INCLUDE_ASM("nonmatchings/paf_124B74", func_00125024);
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/paf_124B74", func_000CDD28);
-
-INCLUDE_ASM("nonmatchings/paf_124B74", func_000CDDCC);
-
-INCLUDE_ASM("nonmatchings/paf_124B74", func_000CDF5C);
-#endif
-
 #if FW_VERSION == 282
 s32 func_00125024(struct Unk_func_00125024_0 *arg0) {
     s32 temp_a0;
@@ -242,6 +234,14 @@ s32 func_00125024(struct Unk_func_00125024_0 *arg0) {
     func_0012592C(temp_a0, 0x109, 0x105, 0, temp_a0 + 0x3C4);
     return 0;
 }
+#endif
+
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/paf_124B74", func_000CDD28);
+
+INCLUDE_ASM("nonmatchings/paf_124B74", func_000CDDCC);
+
+INCLUDE_ASM("nonmatchings/paf_124B74", func_000CDF5C);
 #endif
 
 #if FW_VERSION == 100
