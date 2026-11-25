@@ -230,7 +230,7 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B9864);
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontNewLib);
 #endif
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C6FC);
 
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C710);
@@ -240,7 +240,19 @@ INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C724);
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C738);
 
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C74C);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontDoneLib);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B98DC);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B44A8);
+
+INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B4584);
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C760);
 
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C764);
@@ -312,7 +324,7 @@ INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C958);
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0018C96C);
 #endif
 
-#if FW_VERSION >= 200
+#if FW_VERSION == 200 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", sceFontDoneLib);
 #endif
 
@@ -322,7 +334,9 @@ INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B98DC);
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B4550);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B462C);
+#endif
 
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B464C);
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", func_000B49A8);

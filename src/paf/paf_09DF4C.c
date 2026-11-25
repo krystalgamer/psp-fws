@@ -236,6 +236,10 @@ INCLUDE_ASM("nonmatchings/paf_09DF4C", func_000A0B78);
 
 INCLUDE_RODATA("nonmatchings/paf_09DF4C", D_0019340C);
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/paf_09DF4C", D_00187E78);
+#endif
+
 #if FW_VERSION == 200
 INCLUDE_RODATA("nonmatchings/paf_09DF4C", D_0018756C);
 #endif

@@ -6,7 +6,7 @@
 INCLUDE_ASM("nonmatchings/paf_169860", func_00169860);
 #endif
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_169860", func_00160428);
 
 INCLUDE_ASM("nonmatchings/paf_169860", func_00160450);

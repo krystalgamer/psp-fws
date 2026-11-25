@@ -64,7 +64,7 @@ void acosf(void) {
 
 INCLUDE_ASM("nonmatchings/paf", printf);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", strlen);
 
 INCLUDE_ASM("nonmatchings/paf", strcpy);
@@ -343,7 +343,7 @@ INCLUDE_ASM("nonmatchings/paf", scePaf_D4FAE7D0);
 INCLUDE_ASM("nonmatchings/paf", func_00002890);
 #endif
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_000031F4);
 #endif
 
@@ -523,6 +523,10 @@ INCLUDE_RODATA("nonmatchings/paf", D_0016EA1C);
 
 INCLUDE_RODATA("nonmatchings/paf", D_0016EA24);
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/paf", D_00163F40);
+#endif
+
 #if FW_VERSION == 200
 INCLUDE_RODATA("nonmatchings/paf", D_00164000);
 #endif
@@ -605,7 +609,7 @@ INCLUDE_RODATA("nonmatchings/paf", D_0016ECA8);
 
 INCLUDE_RODATA("nonmatchings/paf", D_0016ECC8);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf", D_00164280);
 #endif
 
@@ -720,7 +724,7 @@ INCLUDE_ASM("nonmatchings/paf", func_0000AAB8);
 INCLUDE_ASM("nonmatchings/paf", scePaf_BB3CBD19);
 #endif
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_0000A6E8);
 #endif
 
@@ -1351,7 +1355,7 @@ INCLUDE_ASM("nonmatchings/paf", func_0000ED28);
 
 INCLUDE_ASM("nonmatchings/paf", func_0000F23C);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", func_0000EAC0);
 #endif
 

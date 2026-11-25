@@ -153,7 +153,7 @@ INCLUDE_ASM("nonmatchings/paf_087074", jpeg_read_header);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008A3BC);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_087074", D_001853D8);
 
 INCLUDE_RODATA("nonmatchings/paf_087074", D_00185418);
@@ -165,7 +165,7 @@ INCLUDE_ASM("nonmatchings/paf_087074", func_0008A69C);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008A7F4);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_087074", func_00085D9C);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_00085E94);
@@ -202,7 +202,7 @@ void func_0008AE3C(void) {
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_0008AE44);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_087074", func_00086380);
 
 INCLUDE_ASM("nonmatchings/paf_087074", func_00050B8C);

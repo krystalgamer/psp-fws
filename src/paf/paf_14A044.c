@@ -359,7 +359,7 @@ INCLUDE_RODATA("nonmatchings/paf_14A044", D_001A17D0);
 
 INCLUDE_RODATA("nonmatchings/paf_14A044", D_001A17FC);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_14A044", D_0019520C);
 #endif
 
@@ -439,6 +439,10 @@ INCLUDE_ASM("nonmatchings/paf_14A044", func_0014DE90);
 
 INCLUDE_ASM("nonmatchings/paf_14A044", scePaf_F1B52E86);
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/paf_14A044", D_00195D00);
+#endif
+
 #if FW_VERSION == 200
 INCLUDE_RODATA("nonmatchings/paf_14A044", D_001953C0);
 #endif
@@ -483,7 +487,7 @@ INCLUDE_ASM("nonmatchings/paf_14A044", func_0014E290);
 
 INCLUDE_ASM("nonmatchings/paf_14A044", func_0014E2B4);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_14A044", func_001459D4);
 #endif
 
@@ -517,7 +521,7 @@ INCLUDE_RODATA("nonmatchings/paf_14A044", D_001A19D0);
 
 INCLUDE_ASM("nonmatchings/paf_14A044", scePaf_ABBBB335);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_14A044", func_00145D78);
 
 INCLUDE_ASM("nonmatchings/paf_14A044", scePaf_9C483594);
@@ -561,7 +565,7 @@ INCLUDE_ASM("nonmatchings/paf_14A044", scePaf_84BD418F);
 INCLUDE_ASM("nonmatchings/paf_14A044", func_000F65AC);
 #endif
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_14A044", scePaf_680513D9);
 #endif
 
@@ -760,6 +764,10 @@ INCLUDE_ASM("nonmatchings/paf_14A044", func_001508C0);
 INCLUDE_ASM("nonmatchings/paf_14A044", func_00150920);
 
 INCLUDE_RODATA("nonmatchings/paf_14A044", D_001A1A2C);
+
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/paf_14A044", D_00195D64);
+#endif
 
 #if FW_VERSION == 200
 INCLUDE_RODATA("nonmatchings/paf_14A044", D_00195424);
@@ -1047,6 +1055,10 @@ INCLUDE_RODATA("nonmatchings/paf_14A044", D_001A1EDC);
 
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_14A044", D_00136518);
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/paf_14A044", D_00196254);
 #endif
 
 #if FW_VERSION == 200

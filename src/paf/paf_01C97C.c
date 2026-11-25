@@ -5,13 +5,21 @@ INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001C97C);
 
 INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016F7AC);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001C1A8);
 
 INCLUDE_RODATA("nonmatchings/paf_01C97C", D_00164DF0);
+#endif
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/paf_01C97C", D_00164D44);
+#endif
+
+#if FW_VERSION == 200
 INCLUDE_RODATA("nonmatchings/paf_01C97C", D_00164E04);
+#endif
 
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_01C97C", D_00164F40);
 
 INCLUDE_RODATA("nonmatchings/paf_01C97C", D_00164F70);
@@ -53,7 +61,7 @@ INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_10C1DB70);
 
 INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_01C2FC36);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024B6C);
 #endif
 
@@ -67,7 +75,7 @@ void func_000254EC(void) {
     sceKernelSignalSema((s32) *D_001A4E30, 1);
 }
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024BC0);
 
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024C94);

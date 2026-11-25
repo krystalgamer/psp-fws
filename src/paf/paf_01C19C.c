@@ -6,7 +6,7 @@
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_21A0C6E0);
 #endif
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_C1579C1D);
 
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_ED2DF238);
@@ -133,7 +133,7 @@ M2C_UNK *func_0001C964(void) {
     return &D_0016FC7C;
 }
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001C0A0);
 #endif
 

@@ -39,7 +39,7 @@ void scePaf_94136997(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_00042800((s32) temp_v0, arg2, arg3);
 }
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_042054", scePaf_1BD0E905);
 #endif
 
@@ -145,7 +145,7 @@ s32 scePaf_9F60CB01(s32 arg0) {
     return var_v0;
 }
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_042054", scePaf_91E82C1B);
 #endif
 
@@ -170,7 +170,7 @@ s32 scePaf_91E82C1B(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("nonmatchings/paf_042054", scePaf_A25BDAA2);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_042054", func_000407E4);
 #endif
 

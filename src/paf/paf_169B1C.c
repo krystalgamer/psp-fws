@@ -10,7 +10,7 @@ void func_00169B1C(struct Unk_func_00169B1C_0 *arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("nonmatchings/paf_169B1C", func_00169B44);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_169B1C", func_0016068C);
 #endif
 

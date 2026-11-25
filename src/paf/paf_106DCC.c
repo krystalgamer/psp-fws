@@ -77,6 +77,22 @@ INCLUDE_ASM("nonmatchings/paf_106DCC", func_001096C4);
 
 INCLUDE_ASM("nonmatchings/paf_106DCC", func_00109B80);
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190800);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190804);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190808);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0019080C);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190810);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190814);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190818);
+#endif
+
 INCLUDE_ASM("nonmatchings/paf_106DCC", func_00109DAC);
 
 INCLUDE_ASM("nonmatchings/paf_106DCC", func_00109E9C);
@@ -245,7 +261,7 @@ INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0019C628);
 
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0019C62C);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_001900D0);
 #endif
 
@@ -276,6 +292,14 @@ INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0019C658);
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0019C65C);
 
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_0019C660);
+
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190A14);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190A40);
+
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190A5C);
+#endif
 
 #if FW_VERSION == 200
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190104);
@@ -604,7 +628,7 @@ INCLUDE_ASM("nonmatchings/paf_106DCC", func_00113D7C);
 
 INCLUDE_ASM("nonmatchings/paf_106DCC", func_00113DE4);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_106DCC", func_0010C720);
 #endif
 
@@ -735,9 +759,15 @@ INCLUDE_ASM("nonmatchings/paf_106DCC", func_000B8E04);
 INCLUDE_ASM("nonmatchings/paf_106DCC", func_000B8E4C);
 #endif
 
+#if FW_VERSION == 201
+INCLUDE_RODATA("nonmatchings/paf_106DCC", D_001912CC);
+#endif
+
 #if FW_VERSION == 200
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_001909BC);
+#endif
 
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_001909D0);
 
 INCLUDE_RODATA("nonmatchings/paf_106DCC", D_00190AB0);

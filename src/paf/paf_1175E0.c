@@ -11,7 +11,7 @@ void func_001175E0(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_00117618);
 #endif
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_0010FAEC);
 
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_0010FAF8);
@@ -132,7 +132,7 @@ INCLUDE_ASM("nonmatchings/paf_1175E0", func_00117D2C);
 
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_00117D98);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_0010FEE4);
 
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_0010FF00);
@@ -231,7 +231,7 @@ void func_00117F74(struct Unk_func_00117F74_0 *arg0) {
     sceKernelDeleteEventFlag(arg0->unk4);
 }
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1175E0", scePaf_1B043852);
 #endif
 
@@ -241,7 +241,7 @@ void scePaf_1B043852(struct Unk_scePaf_1B043852_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1175E0", scePaf_0B0959FC);
 #endif
 
@@ -263,7 +263,7 @@ s32 scePaf_0B0959FC(struct Unk_scePaf_0B0959FC_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1175E0", scePaf_CA5EF446);
 #endif
 
@@ -298,7 +298,7 @@ INCLUDE_ASM("nonmatchings/paf_1175E0", func_000C360C);
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_000C362C);
 #endif
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1175E0", scePaf_96857E81);
 #endif
 

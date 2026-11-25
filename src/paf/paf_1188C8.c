@@ -17,7 +17,7 @@ void func_00118930(void) {
     sceKernelExitThread(0);
 }
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1188C8", scePaf_5775283A);
 #endif
 
@@ -33,7 +33,7 @@ INCLUDE_ASM("nonmatchings/paf_1188C8", func_000BF4C8);
 
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_0011896C);
 
-#if FW_VERSION == 200
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_0011065C);
 
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_001106AC);
