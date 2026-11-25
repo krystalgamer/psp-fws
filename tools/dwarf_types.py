@@ -85,6 +85,7 @@ def main():
     store = json.loads(store_path.read_text())
     store.setdefault("types", {})[KEY] = block
     store["funcs"].update(protos)
+    store["dwarf"] = sorted(set(store.get("dwarf", [])) | set(protos))
     import structify
     structify.SRC[mod] = sd
     structify.write_decls(mod, store)

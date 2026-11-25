@@ -85,7 +85,7 @@ class Module:
     def file_setting(path):
         import cc_of
         text = path.read_text() if path.exists() else ""
-        compiler, flags = cc_of.setting(text, Module.VERSION)
+        compiler, flags = cc_of.setting(text, Module.VERSION, path.parent.name)
         return compiler, f"{compiler} {flags}"
 
     def all_text(self):
@@ -390,6 +390,9 @@ def _try_func(mod, name, header_ctx, target, seen):
     # cc1 emits its own divide-by-zero check (bnez + break 7)
     out = re.sub(r"^\s*if \([^()]+ == 0\) \{\n\s*M2C_BREAK\((?:0, )?7\);\n\s*\}\n", "", out, flags=re.M)
     decls, body = split_m2c(out, name)
+    if body is not None and name in mod.store.get("dwarf", []) and "{" in body:
+        # the original prototype (devkit DWARF) instead of m2c's types
+        body = mod.store["funcs"][name][:-1] + " {" + body.split("{", 1)[1]
     if body is not None and re.search(r"\bk1\b", body):
         body = k1_helpers(body)
     # Unknown stack usage can't match; gotos are rejected in favour of
