@@ -28,18 +28,13 @@ INCLUDE_ASM("nonmatchings/paf_095A44", func_0004EBA8);
 INCLUDE_ASM("nonmatchings/paf_095A44", func_00095B3C);
 
 #if FW_VERSION == 100
-void func_0004EC24(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x90) = 0;
-    func_00095B3C((s32) arg0);
-}
+INCLUDE_ASM("nonmatchings/paf_095A44", func_0004EC24);
 
 INCLUDE_ASM("nonmatchings/paf_095A44", func_0004EC44);
 
 INCLUDE_ASM("nonmatchings/paf_095A44", func_0004ECAC);
 
-s32 func_0004EFB8(void) {
-    return 0;
-}
+INCLUDE_ASM("nonmatchings/paf_095A44", func_0004EFB8);
 #else
 INCLUDE_ASM("nonmatchings/paf_095A44", func_00095B8C);
 

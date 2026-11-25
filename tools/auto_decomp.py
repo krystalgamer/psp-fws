@@ -503,12 +503,31 @@ def main():
     mod.write_decls()
     matched = 0
     accepted_now = []
+    # shared sources: functions whose (normalised) asm already failed in another
+    # version of the module are not tried again
+    fail_path = ROOT / "tmp/auto_fail" / f"{args.module}.json"
+    failed = set(json.loads(fail_path.read_text())) if mod.shared and fail_path.exists() else set()
+
+    def asm_key(n):
+        import hashlib
+        t = re.sub(r"/\*.*?\*/", "", mod.funcs[n][2].read_text())
+        t = re.sub(r"\b(?:func|D|jtbl)_[0-9A-F]{8}\b|\.L[0-9A-F]{8}\b", "@", t)
+        return hashlib.sha1((t + str(mod.setting)).encode()).hexdigest()
     for i, name in enumerate(names):
+        key = asm_key(name) if mod.shared else None
+        if key in failed:
+            print(f"[{i+1}/{len(names)}] {name}: - (failed before)", flush=True)
+            continue
         header = mod.header()
         try:
             res = try_func(mod, name, header)
         except subprocess.TimeoutExpired:
             res = None
+        if not res and key:
+            failed.add(key)
+            if i % 50 == 0:
+                fail_path.parent.mkdir(exist_ok=True)
+                fail_path.write_text(json.dumps(sorted(failed)))
         if res:
             new_funcs, new_vars, sig, body = res
             mod.store["funcs"].update(new_funcs)
@@ -526,6 +545,9 @@ def main():
             matched += 1
             accepted_now.append(name)
         print(f"[{i+1}/{len(names)}] {name}: {'MATCH' if res else '-'}", flush=True)
+    if mod.shared:
+        fail_path.parent.mkdir(exist_ok=True)
+        fail_path.write_text(json.dumps(sorted(failed)))
     print(f"matched {matched}/{len(names)}")
     stats_path = ROOT / "tmp/auto_stats" / f"{args.version}_{args.module}.json"
     stats_path.parent.mkdir(exist_ok=True)

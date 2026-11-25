@@ -63,7 +63,9 @@ INCLUDE_ASM("nonmatchings/paf_11E928", func_000C6034);
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C6134);
 
-INCLUDE_ASM("nonmatchings/paf_11E928", scePaf_08DD2D50);
+s32 scePaf_08DD2D50(struct Unk_scePaf_08DD2D50_0 *arg0, s32 arg1) {
+    return (s32) ((arg1 << arg0->unkC) + 7) >> 3;
+}
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C61B4);
 #endif

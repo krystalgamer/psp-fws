@@ -48,13 +48,9 @@ void func_000254EC(void) {
 }
 
 #if FW_VERSION == 100
-s32 func_0001F918(void) {
-    return 1;
-}
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001F918);
 
-s32 func_0001F920(void) {
-    return 1;
-}
+INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001F920);
 #else
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00025514);
 

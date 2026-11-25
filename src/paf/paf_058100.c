@@ -60,13 +60,9 @@ INCLUDE_ASM("nonmatchings/paf_058100", func_00058B90);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/paf_058100", func_00043D70);
 
-void func_00043E98(s32 arg0) {
-    func_0004EB38_v100(arg0);
-}
+INCLUDE_ASM("nonmatchings/paf_058100", func_00043E98);
 
-void func_00043EB4(s32 arg0) {
-    func_0004EAC0(arg0);
-}
+INCLUDE_ASM("nonmatchings/paf_058100", func_00043EB4);
 #endif
 
 INCLUDE_RODATA("nonmatchings/paf_058100", D_00171A5C);
