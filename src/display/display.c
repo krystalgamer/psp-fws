@@ -678,11 +678,11 @@ s32 sceDisplayGetVblankRest(void) {
 INCLUDE_RODATA("nonmatchings/display", D_00002060);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankStart);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 sceDisplayWaitVblankStart(void) {
     s32 temp_v0;
     u32 temp_s1;
@@ -697,11 +697,11 @@ s32 sceDisplayWaitVblankStart(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankStartCB);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 sceDisplayWaitVblankStartCB(void) {
     s32 temp_v0;
     u32 temp_s1;
