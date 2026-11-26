@@ -1,10 +1,10 @@
 {
  "funcs": {
-  "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
   "module_reboot_before": "s32 module_reboot_before(void);",
-  "sceGpioSuspend": "s32 sceGpioSuspend(void);",
   "sceGpioEnd": "s32 sceGpioEnd(void);",
   "sceGpioGetCapturePort": "s32 sceGpioGetCapturePort(u32 arg0);",
+  "sceGpioSuspend": "s32 sceGpioSuspend(void);",
+  "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
   "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);"
  },
  "vars": {
