@@ -504,11 +504,11 @@ s32 scePowerCancelRequest(void) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerRequestStandby);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 s32 scePowerRequestStandby(void) {
     u32 temp_s0;
 
@@ -519,11 +519,11 @@ s32 scePowerRequestStandby(void) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerRequestSuspend);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 s32 scePowerRequestSuspend(void) {
     u32 temp_s0;
 
@@ -534,11 +534,11 @@ s32 scePowerRequestSuspend(void) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerRequestSuspendTouchAndGo);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 s32 scePowerRequestSuspendTouchAndGo(void) {
     u32 temp_s0;
 
@@ -588,11 +588,11 @@ INCLUDE_ASM("nonmatchings/power", func_000014A0);
 INCLUDE_ASM("nonmatchings/power", func_0000157C);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00001624);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 void func_00001624(s32 arg0) {
     s32 var_a0;
     s32 var_a1;
