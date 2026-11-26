@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/152/.splat_cache.msvideo_plugin
   symbol_addrs_path:
     - config/152/symbol_addrs.msvideo_plugin.txt
+    - config/152/func_starts.msvideo_plugin.txt
     - tmp/build/152/prx_syms.msvideo_plugin.txt
   reloc_addrs_path: [tmp/build/152/reloc_addrs.msvideo_plugin.txt]
   asset_path: tmp/assets/152/msvideo_plugin
@@ -53,7 +54,22 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, msvideo_plugin]
+      - [0xA4, c, msvideo_plugin]
+      - [0x1F94, c, msvideo_plugin_001F84]
+      - [0x4DF4, c, msvideo_plugin_00522C]
+      - [0x28DD8, c, msvideo_plugin_02F100]
+      - [0x29384, c, msvideo_plugin_030680]
+      - [0x2B584, c, msvideo_plugin_032F68]
+      - [0x2BCE0, c, msvideo_plugin_0331B4]
+      - [0x2E958, c, msvideo_plugin_037A18]
+      - [0x2F758, c, msvideo_plugin_038F84]
+      - [0x30B80, c, msvideo_plugin_03A47C]
+      - [0x31624, c, msvideo_plugin_03AF58]
+      - [0x31B84, c, msvideo_plugin_03B4CC]
+      - [0x376C0, c, msvideo_plugin_041CE8]
+      - [0x37DC4, c, msvideo_plugin_042460]
+      - [0x43E00, c, msvideo_plugin_0567A0]
+      - [0x45018, c, msvideo_plugin_05B564]
       - { start: 0x47FEC, type: asm, name: fini, linker_section: .fini }
       - { start: 0x48008, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x488E8, type: prxpad, order: .text }
@@ -71,7 +87,12 @@ segments:
       - { start: 0x49208, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x49218, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x4921C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x49220, rodata, msvideo_plugin]
+      - [0x49220, .rodata, msvideo_plugin]
+      - [0x495F8, .rodata, msvideo_plugin_001F84]
+      - [0x49800, .rodata, msvideo_plugin_00522C]
+      - [0x4C548, .rodata, msvideo_plugin_030680]
+      - [0x4C638, .rodata, msvideo_plugin_0567A0]
+      - [0x4C8D4, .rodata, msvideo_plugin_05B564]
       - { start: 0x4C9CC, type: prxpad, order: .rodata }
   - name: msvideo_plugin_seg1
     type: code

@@ -201,10 +201,14 @@ INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013A60);
 
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013AAC);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013AD8);
 
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_0001404C);
+#endif
 
 INCLUDE_RODATA("nonmatchings/reboot_012C04", D_00016C14);
 
+#if FW_VERSION >= 150
 INCLUDE_RODATA("nonmatchings/reboot_012C04", D_00016CE0);
+#endif

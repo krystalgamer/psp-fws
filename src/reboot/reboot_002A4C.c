@@ -2,6 +2,7 @@
 #include "common.h"
 #include "reboot_decls.h"
 
+#if FW_VERSION >= 150
 void func_00002A4C(u8 *arg0, u8 *arg1, u32 arg2) {
     u32 var_a4;
     u8 *var_a0;
@@ -30,6 +31,7 @@ INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002AC4);
 INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002B0C);
 
 INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002B44);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002C2C);
 
@@ -43,9 +45,13 @@ s32 func_00002CB8(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002CC0);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002CCC);
+#else
 void func_00002CCC(s32 arg0, s32 arg1) {
     func_00002EA0(arg1, arg0);
 }
+#endif
 
 void func_00002CF0(void) {
     func_00002F14();

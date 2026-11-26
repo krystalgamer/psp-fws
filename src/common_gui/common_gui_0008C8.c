@@ -179,7 +179,7 @@ s32 sceVshCommonGui_ACFE7BE7(void **arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 350
+#if FW_VERSION >= 150 && FW_VERSION < 350
 void sceVshCommonGui_88F5E3A8(struct Unk_sceVshCommonGui_88F5E3A8_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk14 = arg2;
     arg0->unkC = arg1;

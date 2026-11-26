@@ -3,9 +3,31 @@
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D0C);
 
+#if FW_VERSION == 100
+s32 func_00001D2C(s32 arg0) {
+    s32 var_v0;
+
+    var_v0 = arg0;
+    if (func_00002D74(arg0) & 2) {
+        var_v0 = (arg0 & 0xFF) - 0x20;
+    }
+    return var_v0;
+}
+
+s32 func_00001D68(s32 arg0) {
+    s32 var_v0;
+
+    var_v0 = arg0;
+    if (func_00002D74(arg0) & 1) {
+        var_v0 = (arg0 & 0xFF) + 0x20;
+    }
+    return var_v0;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D2C);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D50);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D74);
 
@@ -23,7 +45,11 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002EA0);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002F14);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00001F84);
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002F5C);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002FDC);
 
@@ -33,23 +59,43 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000030B8);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000030EC);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002144);
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000311C);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000031B8);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003234);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000022A0);
+
+INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00012AA8);
+
+INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00012AB0);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000029B4);
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000327C);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003994);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000039E0);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002A58);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002A9C);
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003A14);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003A3C);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003A7C);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003ABC);
 
@@ -81,15 +127,42 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004090);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000040C4);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000030F0);
+#endif
+
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000040CC);
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000326C);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004244);
 
+#if FW_VERSION == 100
+s32 func_000032F8(s8 arg0) {
+    do {
+
+    } while (func_00004244((s32) arg0) < 0);
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004298);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000033C4);
+
+void func_000033EC(void) {
+    do {
+
+    } while (func_000033C4() < 0);
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004270);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004298);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000433C);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000436C);
 
@@ -97,7 +170,13 @@ void func_000043B8(void) {
     func_000040CC();
 }
 
+#if FW_VERSION == 100
+void func_0000348C(s8 arg0) {
+    func_000032F8(arg0);
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000043D4);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000043FC);
 
@@ -111,7 +190,9 @@ s32 func_00004444(void) {
     return 0;
 }
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000444C);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000044D0);
 
@@ -119,21 +200,57 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004558);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004670);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000046C0);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000477C);
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003AC8);
+#endif
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00014E18);
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00014EA8);
 
+#if FW_VERSION >= 150
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00014EAC);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004B70);
 
+#if FW_VERSION == 100
+void func_00003B50(void *arg0, s32 arg1) {
+    if (arg1 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x48) = 1;
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x48) = 0;
+}
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003B68);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003BC4_v100);
+
+s32 func_00003DD8(void *arg0) {
+    s32 var_a1;
+
+    var_a1 = 0;
+    if (M2C_FIELD(arg0, s32 *, 0) == 0x4543537E) {
+        var_a1 = M2C_FIELD(arg0, s32 *, 4);
+    }
+    return var_a1;
+}
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003DFC);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000402C);
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004BE8);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004E18);
+#endif
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00014FF4);
 
@@ -143,16 +260,39 @@ INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_0001500C);
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00015050);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000041DC);
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004FC4);
+#endif
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_000150A4);
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_000150C4);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000447C);
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000526C);
+#endif
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00015164);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000045FC);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004680);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004984);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004DA0);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004FDC);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00005210);
+
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00005290);
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00005518);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000059A8);
@@ -166,6 +306,7 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00005E20);
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00005EAC);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00006298);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00006538);
 
@@ -215,7 +356,11 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000072FC);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00007350);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00006204);
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000748C);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00007978);
 
@@ -223,7 +368,11 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000079E4);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00007C3C);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00006AB4);
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00007D24);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00007E50);
 

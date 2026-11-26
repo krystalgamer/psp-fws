@@ -34,20 +34,105 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_00033114);
 
 #if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002B7E4);
+#endif
 
+#if FW_VERSION == 152
+s32 func_0002B7E4(void *arg0) {
+    func_000296D0(M2C_FIELD(arg0, s32 *, 0x98));
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002B804);
+#endif
 
+#if FW_VERSION == 152
+s32 func_0002B804(void *arg0, s32 arg1, s32 arg2) {
+    func_0002CFE4(M2C_FIELD(arg0, s32 *, 0x98), arg1, arg2);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002B824);
+#endif
 
+#if FW_VERSION == 152
+void func_0002B824(void *arg0, s32 arg1, s32 arg2) {
+    func_0002B804(arg0, arg1, arg2);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002B840);
+#endif
 
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002BBCC);
+#endif
 
+#if FW_VERSION == 152
+s32 func_0002BBCC(s32 arg0) {
+    void *temp_s0;
+    void *temp_s0_2;
+    void *temp_v1;
+    void *temp_v1_2;
+    void *var_a0;
+    void *var_a0_2;
+
+    temp_s0 = arg0 + 0xA0;
+    func_000250D4(arg0 + 0xB0);
+    var_a0 = M2C_FIELD(temp_s0, void **, 4);
+    if (var_a0 != NULL) {
+        do {
+            temp_v1 = M2C_FIELD(var_a0, void **, 0);
+            M2C_FIELD(var_a0, s32 *, 8) = 0;
+            M2C_FIELD(var_a0, void **, 0) = (void *) M2C_FIELD(temp_s0, void **, 8);
+            M2C_FIELD(temp_s0, void **, 8) = var_a0;
+            var_a0 = temp_v1;
+        } while (temp_v1 != NULL);
+    }
+    M2C_FIELD(temp_s0, void **, 4) = NULL;
+    temp_s0_2 = arg0 + 0x240;
+    func_000250F0((s32) (temp_s0 + 0x10));
+    func_000250D4(arg0 + 0x250);
+    var_a0_2 = M2C_FIELD(temp_s0_2, void **, 4);
+    if (var_a0_2 != NULL) {
+        do {
+            temp_v1_2 = M2C_FIELD(var_a0_2, void **, 0);
+            M2C_FIELD(var_a0_2, s32 *, 8) = 0;
+            M2C_FIELD(var_a0_2, void **, 0) = (void *) M2C_FIELD(temp_s0_2, void **, 8);
+            M2C_FIELD(temp_s0_2, void **, 8) = var_a0_2;
+            var_a0_2 = temp_v1_2;
+        } while (temp_v1_2 != NULL);
+    }
+    M2C_FIELD(temp_s0_2, void **, 4) = NULL;
+    func_000250F0((s32) (temp_s0_2 + 0x10));
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002BC78);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 152
+s32 func_0002BC78(void *arg0) {
+    func_00030974(M2C_FIELD(arg0, s32 *, 0x94), M2C_FIELD(arg0, s32 *, 0x98));
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_00028784);
+#endif
+
+#if FW_VERSION == 152
+s32 func_00028784(void *arg0) {
+    func_000309A8(M2C_FIELD(arg0, s32 *, 0x94));
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 100

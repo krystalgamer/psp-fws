@@ -111,13 +111,17 @@ s32 func_000093E8(void) {
     return temp_s0;
 }
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009414);
+#endif
 
 s32 func_00009484(void) {
     return 0x8001B000;
 }
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009490);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009550);
 
@@ -173,7 +177,11 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000BFFC);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000C0B4);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000AD20);
+#else
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000C140);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000C244);
 
@@ -225,6 +233,20 @@ INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015C64);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DBB8);
 
+#if FW_VERSION == 100
+s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v0;
+
+    if (&D_0002B79C != NULL) {
+        var_v0 = func_0000F78C(arg0, arg1, arg2, arg3, (s32) &D_0002B79C);
+    } else {
+        func_00001B78((s32) "lflash.c:%s:Mallocfailed: 0x%08x\n", (s32) "df_open", 0, arg3);
+        var_v0 = 0x8001000C;
+    }
+    return var_v0;
+}
+#endif
+
 #if FW_VERSION == 150
 s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
@@ -237,7 +259,9 @@ s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return var_v0;
 }
-#else
+#endif
+
+#if FW_VERSION == 151
 s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
 
@@ -255,7 +279,9 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DC9C);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DDA8);
 
+#if FW_VERSION >= 150
 INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015D38);
+#endif
 
 INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015D64);
 
@@ -267,9 +293,11 @@ INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015DBC);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DEF4);
 
+#if FW_VERSION >= 150
 s32 func_0000E020(void) {
     return 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E028);
 
@@ -354,6 +382,10 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000F990);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000FAE0);
 
+#if FW_VERSION == 100
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_000142F0);
+#endif
+
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000FBBC);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000FC60);
@@ -368,7 +400,11 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000FFF8);
 
 INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_000167A4);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000ED28);
+#else
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000101D4);
+#endif
 
 void func_00010328(s32 arg0) {
     s32 var_a1;
@@ -438,11 +474,17 @@ s32 func_00010EBC(void) {
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010EC8);
 
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000FAC4);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000FC60_v100);
+#else
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010F48);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011160);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011284);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000112F8);
 
@@ -463,6 +505,10 @@ s32 func_000119F0(void) {
 }
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000119F8);
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011284);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011A4C);
 

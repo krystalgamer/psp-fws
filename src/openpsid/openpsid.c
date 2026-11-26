@@ -37,7 +37,7 @@ INCLUDE_ASM("nonmatchings/openpsid", func_00000000_v352);
 INCLUDE_ASM("nonmatchings/openpsid", func_0000004C);
 #endif
 
-#if FW_VERSION >= 340
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/openpsid", func_00000000);
 #else
 static int func_00000000(u8 *cert) {
@@ -63,7 +63,7 @@ INCLUDE_RODATA("nonmatchings/openpsid", D_0000178C);
 INCLUDE_RODATA("nonmatchings/openpsid", D_0000179C);
 #endif
 
-#if FW_VERSION >= 340
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/openpsid", module_start);
 #else
 int module_start(SceSize args, void *argp) {
@@ -123,15 +123,19 @@ INCLUDE_ASM("nonmatchings/openpsid", scePcact_driver_F9ECFDDD);
 INCLUDE_ASM("nonmatchings/openpsid", scePcact_driver_08BB9677);
 #endif
 
+#if FW_VERSION >= 282
 s32 func_00000244(void) {
     return 0;
 }
+#endif
 
 #if FW_VERSION == 282
 s32 func_0000024C(void) {
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbSigvry);
 #endif
 
@@ -152,7 +156,9 @@ int sceDdrdbSigvry(u8 *pubKey, u8 *digest, u8 *sig) {
     }
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbCertvry);
 #endif
 
@@ -171,7 +177,9 @@ int sceDdrdbCertvry(u8 *cert) {
     }
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbMul1);
 #endif
 
@@ -192,7 +200,9 @@ int sceDdrdbMul1(u8 *out) {
     }
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbMul2);
 #endif
 
@@ -223,7 +233,9 @@ int sceDdrdbMul2(u8 *a, u8 *b, u8 *out) {
     }
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbSiggen);
 #endif
 
@@ -254,7 +266,9 @@ int sceDdrdbSiggen(u8 *privKey, u8 *digest, u8 *sig) {
     }
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbPrngen);
 #endif
 
@@ -275,7 +289,9 @@ int sceDdrdbPrngen(u8 *out) {
     }
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbHash);
 #endif
 
@@ -315,6 +331,7 @@ int sceDdrdbHash(u8 *data, u32 size, u8 *digest) {
 }
 #endif
 
+#if FW_VERSION >= 282
 #ifdef NON_MATCHING
 /* size and size + 0x14 end up in swapped saved registers. */
 int sceDdrdbEncrypt(u8 *buf, u32 size) {
@@ -352,10 +369,13 @@ int sceDdrdbEncrypt(u8 *buf, u32 size) {
 #else
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbEncrypt);
 #endif
+#endif
 
 #if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbDecrypt);
-#else
+#endif
+
+#if FW_VERSION == 282
 int sceDdrdbDecrypt(u8 *buf, u32 size) {
     int ret;
     u32 i;

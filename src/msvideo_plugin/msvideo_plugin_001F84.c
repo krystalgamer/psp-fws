@@ -34,7 +34,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_000024A8);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00002844);
 
-#if FW_VERSION < 201
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00002868);
 #else
 void func_00002868(s32 *arg0, s32 arg1) {
@@ -57,7 +57,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00002CB0);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00002DE0);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00002D1C);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00002DD4);
@@ -81,7 +81,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_000036E8);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003798);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_000036EC);
 #endif
 
@@ -99,7 +99,16 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003948);
 
 #if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003868);
+#endif
 
+#if FW_VERSION == 152
+void func_00003868(void) {
+    M2C_FIELD(&D_0004CE9C, s8 *, 0) = 0;
+    M2C_FIELD(&D_0004CE9C, s32 *, 0x80) = -1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003880);
 #endif
 
@@ -118,7 +127,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003A84);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003AB0);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_0000399C);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003AA0);
@@ -130,11 +139,27 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003194);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003238);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003310);
+#endif
 
+#if FW_VERSION == 152
+void func_00003310(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0x20) = 1;
+}
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_0000331C);
-#else
+#endif
+
+#if FW_VERSION == 152
+void func_0000331C(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0x20) = 0;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003BA0);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003CA4);
@@ -174,7 +199,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004720);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_0000480C);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004694);
 #endif
 
@@ -186,7 +211,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003C18);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003CB8);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_000047F4);
 #endif
 
@@ -204,11 +229,25 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004AA0);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004B24);
 
+#if FW_VERSION != 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004C04);
-
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003E90);
 #else
+void func_00004C04(void) {
+
+}
+#endif
+
+#if FW_VERSION < 152
+INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003E90);
+#endif
+
+#if FW_VERSION == 152
+u8 func_00003E90(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x18);
+}
+#endif
+
+#if FW_VERSION == 201
 u8 func_00004C5C(struct Unk_func_00004C5C_0 *arg0) {
     return arg0->unk18;
 }
@@ -218,11 +257,27 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004C64);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004CCC);
 
-#if FW_VERSION < 201
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003F70);
+#endif
 
+#if FW_VERSION == 152
+void func_00003F70(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0x18) = 0;
+}
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00003F78);
+#endif
 
+#if FW_VERSION == 152
+s32 func_00003F78(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x48);
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_001F84", D_000461E0);
 
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_001F84", D_000461FC);
@@ -262,15 +317,47 @@ INCLUDE_RODATA("nonmatchings/msvideo_plugin_001F84", D_000618E0);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004D58);
 
-#if FW_VERSION < 201
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004134);
+#endif
 
+#if FW_VERSION == 152
+u8 func_00004134(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x36);
+}
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_0000413C);
+#endif
 
+#if FW_VERSION == 152
+u8 func_0000413C(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x34);
+}
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004144);
+#endif
 
+#if FW_VERSION == 152
+u8 func_00004144(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x35);
+}
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_0000414C);
-#else
+#endif
+
+#if FW_VERSION == 152
+u8 func_0000414C(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x37);
+}
+#endif
+
+#if FW_VERSION == 201
 u8 func_00004F0C(struct Unk_func_00004F0C_0 *arg0) {
     return arg0->unk36;
 }
@@ -290,7 +377,7 @@ u8 func_00004F24(struct Unk_func_00004F24_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004F2C);
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004C84);
 #endif
 
@@ -298,9 +385,17 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004C84);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_000041B4);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004380);
-#else
+#endif
+
+#if FW_VERSION == 152
+s32 func_00004380(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x38);
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_00004F8C);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_001F84", func_000050E0);
