@@ -1,3 +1,4 @@
+/* cflags[150]: -O2 -frename-registers */
 #include "common.h"
 #include "uart4_decls.h"
 
@@ -76,10 +77,8 @@ INCLUDE_ASM("nonmatchings/uart4", sceKernelUart4ReceiveBytesFix);
 INCLUDE_ASM("nonmatchings/uart4", sceKernelUartStart);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/uart4", module_bootstart);
-
-INCLUDE_ASM("nonmatchings/uart4", func_0000047C);
 #else
 s32 module_bootstart(void) {
     s32 temp_s0;
@@ -93,6 +92,10 @@ s32 module_bootstart(void) {
     sceKernelCpuResumeIntr(temp_s0);
     return 0;
 }
+#endif
+
+#if FW_VERSION >= 150
+INCLUDE_ASM("nonmatchings/uart4", func_0000047C);
 #endif
 
 #if FW_VERSION == 152

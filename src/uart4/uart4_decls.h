@@ -4,9 +4,9 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-extern M2C_UNK func_00000000;
-extern M2C_UNK sceKernelUart4ReceiveBytesFix;
-extern M2C_UNK sceKernelUart4SendBytesFix;
+extern s32 func_00000000;
+extern s32 sceKernelUart4ReceiveBytesFix;
+extern s32 sceKernelUart4SendBytesFix;
 
 void func_00000398(void);
 s32 func_00000458(void);
