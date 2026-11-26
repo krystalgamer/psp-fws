@@ -468,9 +468,17 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelUnLinkLibraryEntries);
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelMaskLibraryEntries);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelQueryLoadCoreCB);
+#endif
 
+#if FW_VERSION == 150
+s32 *sceKernelQueryLoadCoreCB(void) {
+    return &D_00008C40;
+}
+#endif
+
+#if FW_VERSION < 282
 s32 func_00001ECC(void) {
     return 0;
 }

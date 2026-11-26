@@ -86,7 +86,7 @@
   "sceKernelMaskLibraryEntries": "s32 sceKernelMaskLibraryEntries(void);",
   "sceKernelModuleAssign": "s32 sceKernelModuleAssign(s32, s32);",
   "sceKernelModuleCount": "s32 sceKernelModuleCount(void);",
-  "sceKernelQueryLoadCoreCB": "M2C_UNK *sceKernelQueryLoadCoreCB(void);",
+  "sceKernelQueryLoadCoreCB": "s32 *sceKernelQueryLoadCoreCB(void);",
   "sceKernelRegisterLibrary": "void sceKernelRegisterLibrary(s32 arg0);",
   "sceKernelRegisterLibraryForUser": "void sceKernelRegisterLibraryForUser(s32 arg0);",
   "sceKernelUnLinkLibraryEntries": "s32 sceKernelUnLinkLibraryEntries(u32 arg0, u32 arg1);"
@@ -106,6 +106,7 @@
   "D_000079C8": "extern s32 D_000079C8;",
   "D_00007F08": "extern s32 D_00007F08;",
   "D_00008914": "extern s32 D_00008914;",
+  "D_00008C40": "extern s32 D_00008C40;",
   "D_000097AC": "extern M2C_UNK D_000097AC;"
  }
 }

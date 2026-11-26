@@ -24,6 +24,7 @@ extern s32 D_000079C0;
 extern s32 D_000079C8;
 extern s32 D_00007F08;
 extern s32 D_00008914;
+extern s32 D_00008C40;
 extern M2C_UNK D_000097AC;
 
 M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *);
@@ -112,7 +113,7 @@ s32 sceKernelLoadCoreMode(void);
 s32 sceKernelMaskLibraryEntries(void);
 s32 sceKernelModuleAssign(s32, s32);
 s32 sceKernelModuleCount(void);
-M2C_UNK *sceKernelQueryLoadCoreCB(void);
+s32 *sceKernelQueryLoadCoreCB(void);
 void sceKernelRegisterLibrary(s32 arg0);
 void sceKernelRegisterLibraryForUser(s32 arg0);
 s32 sceKernelUnLinkLibraryEntries(u32 arg0, u32 arg1);
