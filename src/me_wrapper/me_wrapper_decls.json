@@ -22,7 +22,7 @@
   "sceSysregVmeResetEnable": "M2C_UNK sceSysregVmeResetEnable();"
  },
  "vars": {
-  "D_000019F0": "extern M2C_UNK D_000019F0;",
+  "D_000019F0": "extern s32 D_000019F0;",
   "D_00001A30": "extern s32 D_00001A30;",
   "D_00001F60": "extern s32 D_00001F60;"
  }

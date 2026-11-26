@@ -4,7 +4,7 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-extern M2C_UNK D_000019F0;
+extern s32 D_000019F0;
 extern s32 D_00001A30;
 extern s32 D_00001F60;
 
