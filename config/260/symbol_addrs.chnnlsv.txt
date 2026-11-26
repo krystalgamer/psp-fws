@@ -15,13 +15,13 @@ sceUtilsBufferCopyWithRange = 0x00001588; // type:func
 // shared names (tools/add_version.py) begin
 D_00002AD4 = 0x00002814;
 D_00002AD8 = 0x00002818;
-func_000013F0 = 0x00001154; // type:func rom:0x11D4
-func_00001440 = 0x000011A4; // type:func rom:0x1224
-func_00001490 = 0x000011F4; // type:func rom:0x1274
-func_000014E4 = 0x00001248; // type:func rom:0x12C8
-func_00001538 = 0x0000129C; // type:func rom:0x131C
-func_000015D8 = 0x0000133C; // type:func rom:0x13BC
-func_00001688 = 0x000013EC; // type:func rom:0x146C
-func_00001724 = 0x00001488; // type:func rom:0x1508
-func_000017D0 = 0x00001534; // type:func rom:0x15B4
+_kirk4 = 0x00001154; // type:func rom:0x11D4
+_kirk7 = 0x000011A4; // type:func rom:0x1224
+_kirk5 = 0x000011F4; // type:func rom:0x1274
+_kirk8 = 0x00001248; // type:func rom:0x12C8
+_kirk4Xor = 0x0000129C; // type:func rom:0x131C
+_kirk7Xor = 0x0000133C; // type:func rom:0x13BC
+_kirk5Xor = 0x000013EC; // type:func rom:0x146C
+_kirk8Xor = 0x00001488; // type:func rom:0x1508
+_kirk14 = 0x00001534; // type:func rom:0x15B4
 // shared names (tools/add_version.py) end
