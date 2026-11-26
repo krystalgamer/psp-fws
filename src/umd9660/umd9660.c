@@ -1002,11 +1002,11 @@ s32 func_00003FFC(struct Unk_func_00003FFC_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00004024);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_00004024(void *arg0) {
     s32 temp_a1;
     s32 var_v1;
@@ -1038,11 +1038,11 @@ s32 func_00004024(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00004064);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_00004064(void *arg0) {
     s32 temp_a1;
     s32 var_v1;
@@ -1074,11 +1074,11 @@ s32 func_00004064(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_000040A4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_000040A4(void *arg0) {
     s32 temp_a1;
     s32 var_v1;
@@ -1110,11 +1110,11 @@ s32 func_000040A4(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_000040E4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_000040E4(void *arg0) {
     s32 temp_a1;
     s32 var_v1;
@@ -1146,11 +1146,11 @@ s32 func_000040E4(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00004124);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_00004124(void *arg0, s32 arg1) {
     s32 temp_a2;
     s32 var_v1;

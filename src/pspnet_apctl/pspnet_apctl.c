@@ -1,3 +1,4 @@
+/* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
@@ -292,11 +293,11 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_0000050C);
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000788);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000A30);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 s32 func_00000A30(void *arg0, s32 arg1) {
     if (arg1 == 6) {
         if (M2C_FIELD(arg0, s32 *, 0x6C8) > 0) {

@@ -1113,19 +1113,11 @@ void func_00002EF0(void *arg0) {
 void func_00002F10(void *arg0) {
     func_00004510(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8));
 }
-#endif
 
-#if FW_VERSION == 151
-INCLUDE_ASM("nonmatchings/lfatfs", func_00002F38);
-#endif
-
-#if FW_VERSION < 151 || (FW_VERSION >= 152 && FW_VERSION < 282)
 void func_00002F38(void *arg0) {
     func_0000464C(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8), M2C_FIELD(arg0, s32 *, 0xC));
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00003B90(struct Unk_func_00003B90_0 *arg0) {
     func_00004CFC(arg0->unk0, arg0->unk4, arg0->unk8);
 }

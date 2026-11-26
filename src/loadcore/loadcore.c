@@ -1,3 +1,4 @@
+/* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
@@ -291,11 +292,11 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00001AA0);
 INCLUDE_ASM("nonmatchings/loadcore", func_00001560);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_DA1B09AA);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 LoadCoreForKernel_DA1B09AA(u32 arg0, u32 arg1) {
     u32 temp_s1;
     u32 var_s0;

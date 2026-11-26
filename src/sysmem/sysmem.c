@@ -2760,11 +2760,11 @@ s32 KDebugForKernel_B9C643C9(void) {
 }
 #endif
 
-#if FW_VERSION >= 151
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/sysmem", KDebugForKernel_7D1C74F0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 KDebugForKernel_7D1C74F0(s32 arg0) {
     D_0000F868 = arg0;
     return arg0;

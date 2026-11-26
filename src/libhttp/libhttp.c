@@ -1,3 +1,4 @@
+/* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
@@ -851,7 +852,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetCookie);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpAddCookie);
 #endif
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/libhttp", func_000050F4);
 #else
 void func_000050F4(void *arg0) {
@@ -1296,11 +1297,11 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttp_87F1E666);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttp_3C478044);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsEnableOption);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 sceHttpsEnableOption(s32 arg0) {
     s32 temp_a1;
 
@@ -1409,11 +1410,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000962C);
 INCLUDE_ASM("nonmatchings/libhttp", func_00009700);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/libhttp", func_000097A4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_000097A4(void *arg0) {
     s32 temp_v1;
     s32 temp_v1_2;
@@ -1626,11 +1627,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000B7D8);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000649C);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00006558);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_00006558(void) {
     if (D_0000F1B4 != 0) {
         sceKernelDeleteVpl(D_0000F1B4);
@@ -1809,11 +1810,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000E220);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000E2DC);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/libhttp", func_00008360);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_00008360(void *arg0) {
     if (arg0 != NULL) {
         M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) - 1);
@@ -1825,11 +1826,11 @@ void func_00008360(void *arg0) {
 INCLUDE_ASM("nonmatchings/libhttp", func_0000837C);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpInit);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 sceHttpInit(u32 arg0) {
     s32 var_v0;
     s32 var_v1;
@@ -1844,11 +1845,11 @@ s32 sceHttpInit(u32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnd);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 sceHttpEnd(void) {
     s32 var_a0;
 
@@ -1864,11 +1865,11 @@ s32 sceHttpEnd(void) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00008510);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_00008510(void) {
     return D_0000F1FC;
 }
@@ -1910,11 +1911,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00008944);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000EBC0);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 260
+#if FW_VERSION >= 152 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/libhttp", func_00008AB8);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_00008AB8(void *arg0, void *arg1, u32 arg2, s32 arg3) {
     if (M2C_FIELD(arg0, s32 *, 4) != 1) {
         sceNetInetRecv(M2C_FIELD(arg0, s32 *, 0x2C), arg1, arg2, arg3);
@@ -1950,11 +1951,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00008E24);
 INCLUDE_ASM("nonmatchings/libhttp", func_00008E84);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00008F68);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_00008F68(void *arg0, void *arg1, u32 arg2, s32 arg3) {
     if (M2C_FIELD(arg0, s32 *, 4) != 1) {
         sceNetInetSend(M2C_FIELD(arg0, s32 *, 0x2C), arg1, arg2, arg3);
@@ -2098,11 +2099,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00010DD0);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000A9B0);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000AAAC);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_0000AAAC(void *arg0) {
     s32 temp_a1;
     s32 temp_a2;
@@ -2256,11 +2257,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000B8F8);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000B98C);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpInitCache);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 sceHttpInitCache(u32 arg0) {
     s32 var_a1;
 
@@ -2358,21 +2359,21 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000130E4);
 INCLUDE_ASM("nonmatchings/libhttp", func_000130F0);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BA58);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_0000BA58(void) {
     return D_0000F590;
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BA64);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_0000BA64(void) {
     return M2C_VFIELD(&D_0000F590, s32, 8);
 }
@@ -2388,21 +2389,21 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00013238);
 INCLUDE_ASM("nonmatchings/libhttp", func_00013470);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BA74);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_0000BA74(void) {
     return M2C_VFIELD(&D_0000F590, s32, 0xC);
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BA84);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_0000BA84(s32 arg0) {
     M2C_VFIELD(&D_0000F590, s32, 0xC) = (s32) (M2C_VFIELD(&D_0000F590, s32, 0xC) + arg0);
 }
@@ -2412,11 +2413,11 @@ void func_0000BA84(s32 arg0) {
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BA9C);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BAF8);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_0000BAF8(void *arg0) {
     void *temp_a1;
 
@@ -2665,11 +2666,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000BB20);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BB58);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BB98);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 u8 *func_0000BB98(u8 *arg0, u8 *arg1, s32 arg2) {
     s32 var_a2;
     u8 *var_a1;
@@ -2731,13 +2732,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000C0AC);
 
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/libhttp", func_0000DD2C);
-#endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp", func_0000C0DC);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 u8 *func_0000C0DC(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;

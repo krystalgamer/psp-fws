@@ -1,3 +1,4 @@
+/* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
@@ -242,21 +243,21 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_3D5F109C);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_D1EA3DFD);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_04AFF68E);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceMeCore_driver_04AFF68E(void) {
     sceKernelWaitSema(D_00001F60, 1, NULL);
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_B97B15D7);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void sceMeCore_driver_B97B15D7(void) {
     sceKernelSignalSema(D_00001F60, 1);
 }

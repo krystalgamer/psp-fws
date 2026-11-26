@@ -263,7 +263,7 @@ s32 func_0000142C(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_896EEE57);
 
-#if FW_VERSION >= 151
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_733917D9);
 #else
 u32 sceMgr_driver_733917D9(s32 arg0, u32 arg1) {
@@ -1262,11 +1262,7 @@ void func_000060B4(s32 arg0, s32 *arg1) {
 }
 #endif
 
-#if FW_VERSION == 151
-INCLUDE_ASM("nonmatchings/mgr", func_00006104);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_00006104(void) {
     return (-((sceMScm_driver_0A054CDA() & 0x300) == 0) & 0x7FAFE000) - 0x7FAFE000;
 }
@@ -1600,11 +1596,7 @@ INCLUDE_ASM("nonmatchings/mgr", func_0000A070);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_B7F69809);
 
-#if FW_VERSION == 151
-INCLUDE_ASM("nonmatchings/mgr", func_0000A1C8);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0000A1C8(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
 
@@ -1617,9 +1609,7 @@ s32 func_0000A1C8(s32 arg0, s32 arg1, s32 arg2) {
     }
     return var_v0;
 }
-#endif
-
-#if FW_VERSION >= 152
+#else
 s32 func_0000A1C8(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
     s32 temp_v0_2;
