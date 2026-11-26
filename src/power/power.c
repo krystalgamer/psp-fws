@@ -504,12 +504,49 @@ s32 scePowerCancelRequest(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerRequestStandby);
+#endif
 
+#if FW_VERSION == 100
+s32 scePowerRequestStandby(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00003E00, 0x10U);
+    setK1(temp_s0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerRequestSuspend);
+#endif
 
+#if FW_VERSION == 100
+s32 scePowerRequestSuspend(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00003E00, 0x20U);
+    setK1(temp_s0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerRequestSuspendTouchAndGo);
+#endif
+
+#if FW_VERSION == 100
+s32 scePowerRequestSuspendTouchAndGo(void) {
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    sceKernelSetEventFlag(D_00003E00, 0x40U);
+    setK1(temp_s0);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -551,9 +588,31 @@ INCLUDE_ASM("nonmatchings/power", func_000014A0);
 INCLUDE_ASM("nonmatchings/power", func_0000157C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00001624);
-#else
+#endif
+
+#if FW_VERSION == 100
+void func_00001624(s32 arg0) {
+    s32 var_a0;
+    s32 var_a1;
+
+    if (arg0 != 0) {
+        sceKernelSetEventFlag(D_00003E00, 1U);
+        sceKernelClearEventFlag(D_00003E00, -3U);
+        var_a0 = 0;
+        var_a1 = 0x80000000;
+    } else {
+        sceKernelSetEventFlag(D_00003E00, 2U);
+        sceKernelClearEventFlag(D_00003E00, -2U);
+        var_a0 = 0x80000000;
+        var_a1 = 0;
+    }
+    func_0000096C(var_a0, var_a1, 0);
+}
+#endif
+
+#if FW_VERSION >= 282
 void scePower_driver_CA3D34C1(s32 arg0) {
     func_00002880(arg0, 0);
 }
