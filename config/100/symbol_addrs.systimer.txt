@@ -21,3 +21,5 @@ sceKernelRegisterSuspendHandler = 0x000009B0; // type:func
 sceKernelRegisterResumeHandler = 0x000009B8; // type:func
 // shared names (tools/add_version.py) begin
 // shared names (tools/add_version.py) end
+_sceSTimerStopCount = 0x00000798; // type:func
+_sceSTimerGetCount = 0x00000898; // type:func

@@ -3,12 +3,14 @@
   "func_00000128": "void func_00000128(SceSTimerInfo *timer);",
   "func_000002B0": "void func_000002B0(void **arg0);",
   "func_000002B4": "void func_000002B4(void **arg0);",
-  "func_00000798": "void func_00000798(void **arg0);",
-  "func_00000898": "s32 func_00000898(SceSTimerInfo *timer);"
+  "_sceSTimerStopCount": "void _sceSTimerStopCount(SceSTimerInfo *timer);",
+  "_sceSTimerGetCount": "s32 _sceSTimerGetCount(SceSTimerInfo *timer);"
  },
  "types": {
   "SceSTimerInfo": "typedef struct {\n    volatile u32 timerData;\n    volatile u32 baseTime;\n    volatile s32 prsclNumerator;\n    volatile s32 prsclDenominator;\n    volatile s32 rsrv[60];\n    volatile u32 nowData;\n} SceHwTimer;\ntypedef s32 (*SceSTimerCb)(s32, s32, s32, s32);\ntypedef struct {\n    SceHwTimer *regadr;\n    s32 intrcode;\n    s32 timid;\n    u32 prev_tmcy;\n    u32 prev_icnt;\n    SceSTimerCb cb;\n    u32 totalcount;\n    void *common;\n} SceSTimerInfo;",
   "Unk_func_000002B0_temp_a2": "struct Unk_func_000002B0_temp_a2 {\n    s32 unk0;\n    u8 pad4[0xFC];\n    s32 unk100;\n};"
  },
- "vars": {}
+ "vars": {
+  "D_00000B20": "extern SceSTimerInfo D_00000B20[4];"
+ }
 }

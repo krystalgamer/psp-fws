@@ -83,6 +83,9 @@ def main():
     extra = Path(a.decls).read_text() if a.decls else ""
     # drop the decls' own prototype/vars that the hand decls redefine
     hdr = mod.header()
+    protos = re.findall(r"\b(\w+)\([^;{}]*\);\s*$", extra, re.M)
+    for n in protos:
+        hdr = re.sub(rf"^[^\n]*\b{n}\([^\n]*\);\n", "", hdr, flags=re.M)
     for n in re.findall(r"\b(\w+)\s*(?:\[[^\]]*\])?;\s*$", extra, re.M) + [name]:
         hdr = re.sub(rf"^[^\n]*\b{n}\b(?:\[[^\]]*\])?;\n", "", hdr, flags=re.M) if n != name else \
             re.sub(rf"^[^\n]*\b{n}\([^\n]*\);\n", "", hdr, flags=re.M)

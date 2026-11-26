@@ -30,11 +30,12 @@ struct Unk_func_000002B0_temp_a2 {
     s32 unk100;
 };
 
+extern SceSTimerInfo D_00000B20[4];
 
 void func_00000128(SceSTimerInfo *timer);
 void func_000002B0(void **arg0);
 void func_000002B4(void **arg0);
-void func_00000798(void **arg0);
-s32 func_00000898(SceSTimerInfo *timer);
+void _sceSTimerStopCount(SceSTimerInfo *timer);
+s32 _sceSTimerGetCount(SceSTimerInfo *timer);
 
 #endif
