@@ -23,21 +23,21 @@ INCLUDE_ASM("nonmatchings/paf_16888C", func_0015F87C);
 INCLUDE_ASM("nonmatchings/paf_16888C", func_0015F8A4);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/paf_16888C", func_00121374);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 s32 func_00121374(void) {
     return 0;
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_16888C", func_0012137C);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 s32 func_0012137C(void *arg0) {
     s32 var_a1;
 

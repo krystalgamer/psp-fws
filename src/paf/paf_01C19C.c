@@ -2,11 +2,11 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_21A0C6E0);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
     void *temp_a0;
 

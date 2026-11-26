@@ -105,11 +105,11 @@ INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000E9ED8);
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000918C8);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 250
+#if FW_VERSION >= 152 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_00091BD4);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_00091BD4(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_a4;
     s32 var_v0;
@@ -149,11 +149,11 @@ s32 func_000EA2D8(struct Unk_func_000EA2D8_0 *arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 250) || FW_VERSION == 282
+#if FW_VERSION == 100 || (FW_VERSION >= 152 && FW_VERSION < 250) || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EA314);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_000EA314(s32 arg0, s32 arg1, s32 arg2) {
     struct Unk_scePaf_86B41BA3_0 *temp_v0;
 
@@ -186,11 +186,11 @@ INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EA44C);
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EA488);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 250
+#if FW_VERSION >= 152 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EA4DC);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_000EA4DC(struct Unk_func_000EA4DC_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void **temp_v0;
 
@@ -229,11 +229,11 @@ void func_000EA4DC(struct Unk_func_000EA4DC_0 *arg0, s32 arg1, s32 arg2, s32 arg
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 250
+#if FW_VERSION >= 152 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EA528);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_000EA528(struct Unk_func_000EA528_0 *arg0, s32 arg1, s32 arg2) {
     void **temp_v0;
 
@@ -272,11 +272,11 @@ void func_000EA528(struct Unk_func_000EA528_0 *arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 250
+#if FW_VERSION >= 152 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EA570);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_000EA570(struct Unk_func_000EA570_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void **temp_v0;
 

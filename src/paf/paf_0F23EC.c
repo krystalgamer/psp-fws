@@ -96,11 +96,11 @@ void scePaf_A574DB92(struct Unk_scePaf_A574DB92_0 *arg0) {
     }
 }
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_F639E5E1);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void scePaf_F639E5E1(struct Unk_scePaf_F639E5E1_0 *arg0) {
     s32 temp_v0;
 

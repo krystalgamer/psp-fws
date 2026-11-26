@@ -8,11 +8,11 @@ void func_000E960C(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 250
+#if FW_VERSION >= 152 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_0E960C", func_000E9634);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 s32 func_000E9634(s32 arg0, s32 arg1) {
     s32 var_v0;
 

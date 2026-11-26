@@ -27,11 +27,11 @@ void scePaf_5775283A(struct Unk_scePaf_5775283A_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_000BF4C8);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 void func_000BF4C8(void *arg0) {
     sceKernelWaitThreadEnd(M2C_FIELD(arg0, s32 *, 4), 0);
 }
@@ -313,11 +313,11 @@ INCLUDE_ASM("nonmatchings/paf_1188C8", func_0011BEA4);
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_0011BEFC);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 270
+#if FW_VERSION >= 152 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_1188C8", func_000C6E04);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_000C6E04(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0019D328;
     if (M2C_FIELD(arg0, u8 *, 0x80) == 0) {
