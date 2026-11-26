@@ -288,9 +288,17 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaSetBusErrorIntr);
 
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_689FCB7D);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", sceAtaGetAtaCallBack);
-#else
+#endif
+
+#if FW_VERSION == 100
+s32 *sceAtaGetAtaCallBack(void) {
+    return &D_000046A8.unk0;
+}
+#endif
+
+#if FW_VERSION >= 282
 M2C_UNK *sceAtaGetAtaCallBack(void) {
     return &D_000046A8;
 }
@@ -353,11 +361,25 @@ void sceAtaSetIntrFlag(s32 arg0) {
 s32 sceAtaGetIntrFlag(void) {
     return D_00004324;
 }
+
+INCLUDE_ASM("nonmatchings/ata", sceAtaClearDriveStat);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ata", sceAtaClearDriveStat);
-#else
+#if FW_VERSION == 100
+void sceAtaClearDriveStat(s32 arg0, s32 arg1) {
+    s32 temp_s1;
+    s32 temp_v0;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    temp_v0 = sceAtaGetAtaDrive(arg0);
+    if (temp_v0 != 0) {
+        M2C_FIELD(temp_v0, s32 *, 4) = (s32) (M2C_FIELD(temp_v0, s32 *, 4) & ~arg1);
+    }
+    sceKernelCpuResumeIntr(temp_s1);
+}
+#endif
+
+#if FW_VERSION >= 282
 void sceAtaSetIntrFlag(s32 arg0) {
     D_000046E8 = arg0;
 }
@@ -503,7 +525,9 @@ M2C_UNK *func_00002160(void) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbGetAtaBlock);
+s32 *sceAtaAhbGetAtaBlock(void) {
+    return &D_00004280;
+}
 #endif
 
 #if FW_VERSION >= 282
