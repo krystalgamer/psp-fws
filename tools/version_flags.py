@@ -59,7 +59,14 @@ def main():
         return sum(1 for f in sd.glob("*.c") for e in FM.parse(f.read_text(), fv) if v in e.vers and e.kind == "cfunc")
 
     def build():
+        prx = ROOT / "tmp/build" / ver / f"{mod}.prx"
+        prx.unlink(missing_ok=True)
         r = subprocess.run(["make", f"VERSION={ver}", f"MODULE={mod}"], cwd=ROOT, capture_output=True, text=True)
+        if "can't open nonmatchings/" in r.stdout + r.stderr:
+            # demoted functions need their asm: re-split
+            subprocess.run(["make", "split", f"VERSION={ver}", f"MODULE={mod}"], cwd=ROOT, capture_output=True)
+            prx.unlink(missing_ok=True)
+            r = subprocess.run(["make", f"VERSION={ver}", f"MODULE={mod}"], cwd=ROOT, capture_output=True, text=True)
         return ": OK" in r.stdout + r.stderr
 
     # function ranges from a matching build (C functions have no asm to tell)
@@ -85,7 +92,7 @@ def main():
             ok = True
             break
         built = (ROOT / "tmp/build" / ver / f"{mod}.prx").read_bytes()
-        diff = next((i for i in range(min(len(built), len(base))) if built[i] != base[i]), min(len(built), len(base)))
+        diff = next((i for i in range(text_off, min(len(built), len(base))) if built[i] != base[i]), min(len(built), len(base)))
         # the function holding the first differing byte, or the one before it
         # (a C function that grew at its end shifts everything after it)
         owner = hit = None

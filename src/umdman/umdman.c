@@ -1,3 +1,4 @@
+/* compiler[150]: 1.5.1 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "umdman_decls.h"
@@ -1632,7 +1633,11 @@ INCLUDE_ASM("nonmatchings/umdman", func_00007FC8);
 
 INCLUDE_ASM("nonmatchings/umdman", func_000081EC);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/umdman", func_000080B8);
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 201
 s32 func_000080B8(s32 arg0) {
     return (arg0 != 0) ? 0 : 0x80010016;
 }
