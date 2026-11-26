@@ -332,7 +332,27 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00003A24);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00003AA8);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00003C04);
+void func_00003C04(void *arg0) {
+    s32 temp_a0;
+    s32 var_s1;
+
+    var_s1 = 0;
+    if (arg0 != NULL) {
+        temp_a0 = sceKernelSuspendDispatchThread();
+        if ((M2C_FIELD(arg0, s32 *, 4) == 0) && (M2C_FIELD(arg0, s32 *, 0x2C) != 1)) {
+            M2C_FIELD(arg0, s32 *, 0x2C) = 1;
+            var_s1 = 1;
+        }
+        sceKernelResumeDispatchThread(temp_a0);
+        if (var_s1 == 1) {
+            _sceHttpFreeInternal(M2C_FIELD(arg0, void **, 0x24));
+            M2C_FIELD(arg0, void **, 0x24) = NULL;
+            if (M2C_FIELD(arg0, s32 *, 0x2C) == var_s1) {
+                M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+            }
+        }
+    }
+}
 
 s32 func_00003C90(void *arg0) {
     s32 temp_a0;
