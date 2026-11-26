@@ -27,3 +27,4 @@ suspendSTimer = 0x00000160; // type:func
 resumeSTimer = 0x000001D8; // type:func
 STimerRegSave = 0x00000BB0;
 g_timerCB = 0x00000B20;
+systimerhandler = 0x000004C0; // type:func

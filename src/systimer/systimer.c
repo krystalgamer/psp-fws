@@ -128,7 +128,32 @@ s32 sceSTimerSetPrscl(s32 timerId, s32 numerator, s32 denominator) {
 }
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/systimer", func_000004C0);
+s32 systimerhandler(s32 arg0, SceSTimerInfo *timer, s32 arg2) {
+    u32 data;
+    u32 intrCount;
+    u32 cycle;
+
+    if (timer->cb == NULL) {
+        return -1;
+    }
+    data = timer->regadr->timerData;
+    cycle = data & 0x3FFFFF;
+    intrCount = data >> 24;
+    if (timer->prev_tmcy != 0) {
+        intrCount--;
+        timer->totalcount += timer->prev_tmcy;
+    }
+    timer->totalcount += cycle * (intrCount - timer->prev_icnt);
+    timer->prev_tmcy = 0;
+    timer->prev_icnt = 0;
+    if (timer->cb(timer->timid, timer->totalcount + _sceSTimerGetCount(timer), (s32)timer->common, arg2) != -1) {
+        goto stop;
+    }
+    return -1;
+stop:
+    _sceSTimerStopCount(timer);
+    return -2;
+}
 
 INCLUDE_ASM("nonmatchings/systimer", sceSTimerSetHandler);
 #endif
