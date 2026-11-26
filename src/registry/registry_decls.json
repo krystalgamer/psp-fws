@@ -1,5 +1,7 @@
 {
  "funcs": {
+  "func_000006CC": "s32 func_000006CC(s32);",
+  "func_000008E4": "s32 func_000008E4(s32);",
   "func_00000B6C": "void *func_00000B6C();",
   "func_00001730": "s32 func_00001730(s32 arg0, s32 *arg1);",
   "func_00001874": "s32 func_00001874(s32 arg0, s32 *arg1);",
@@ -11,6 +13,8 @@
   "func_00003EE8": "s32 func_00003EE8(void);",
   "func_00004024": "s32 func_00004024(void);",
   "func_00004058": "s32 func_00004058(void);",
+  "func_000046A8": "s32 func_000046A8(s32, s32);",
+  "func_00004A28": "s32 func_00004A28(s32, s32, s32, s32, s32);",
   "func_00005F54": "s32 func_00005F54(s32 arg0);",
   "func_000061B4": "s32 func_000061B4(s32 arg0);",
   "func_00006228": "void func_00006228(void);",
@@ -25,6 +29,7 @@
   "func_00006AC0": "void func_00006AC0(s32 arg0);",
   "func_00006EF0": "s32 func_00006EF0(s32 arg0);",
   "module_reboot_before": "s32 module_reboot_before(void);",
+  "module_reboot_phase": "s32 module_reboot_phase(s32 arg0);",
   "sceIoClose": "s32 sceIoClose(s32);",
   "sceIoDevctl": "s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);",
   "sceIoRead": "s32 sceIoRead(s32, void *, u32);",
@@ -34,10 +39,15 @@
   "sceKernelDeleteVpl": "M2C_UNK sceKernelDeleteVpl(s32);",
   "sceKernelFreeVpl": "M2C_UNK sceKernelFreeVpl(s32, s32);",
   "sceKernelLockMutex": "s32 sceKernelLockMutex(s32, s32, void *);",
+  "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
-  "sceRegInit": "s32 sceRegInit(void);",
   "sceRegExit": "M2C_UNK sceRegExit();",
-  "module_reboot_phase": "s32 module_reboot_phase(s32 arg0);"
+  "sceRegFlushCategory": "s32 sceRegFlushCategory(s32 arg0);",
+  "sceRegFlushRegistry": "s32 sceRegFlushRegistry(s32 arg0);",
+  "sceRegGetKeyInfo": "s32 sceRegGetKeyInfo(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);",
+  "sceRegGetKeyInfoByName": "s32 sceRegGetKeyInfoByName(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
+  "sceRegInit": "s32 sceRegInit(void);",
+  "sceRegRemoveKey": "s32 sceRegRemoveKey(s32 arg0, s32 arg1);"
  },
  "types": {
   "Unk_func_00003EE8_temp_v0": "struct Unk_func_00003EE8_temp_v0 {\n    u8 pad0[0x4];\n    s8 unk4;\n    s8 unk5;\n    s8 unk6;\n    s8 unk7;\n};",
@@ -45,6 +55,7 @@
  },
  "vars": {
   "D_000066F0": "extern s32 D_000066F0;",
+  "D_0000671C": "extern s32 D_0000671C;",
   "D_0000674C": "extern s32 D_0000674C;",
   "D_00006F8C": "extern M2C_UNK D_00006F8C;",
   "D_00006FB0": "extern s32 D_00006FB0;",

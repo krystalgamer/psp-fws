@@ -18,6 +18,7 @@ struct Unk_func_00004024_temp_v0 {
 };
 
 extern s32 D_000066F0;
+extern s32 D_0000671C;
 extern s32 D_0000674C;
 extern M2C_UNK D_00006F8C;
 extern s32 D_00006FB0;
@@ -32,6 +33,8 @@ extern s32 D_00007050;
 extern s32 D_0000706C;
 extern s32 D_00007070;
 
+s32 func_000006CC(s32);
+s32 func_000008E4(s32);
 void *func_00000B6C();
 s32 func_00001730(s32 arg0, s32 *arg1);
 s32 func_00001874(s32 arg0, s32 *arg1);
@@ -43,6 +46,8 @@ void *func_00003EA4();
 s32 func_00003EE8(void);
 s32 func_00004024(void);
 s32 func_00004058(void);
+s32 func_000046A8(s32, s32);
+s32 func_00004A28(s32, s32, s32, s32, s32);
 s32 func_00005F54(s32 arg0);
 s32 func_000061B4(s32 arg0);
 void func_00006228(void);
@@ -57,6 +62,7 @@ void func_00006A0C(void);
 void func_00006AC0(s32 arg0);
 s32 func_00006EF0(s32 arg0);
 s32 module_reboot_before(void);
+s32 module_reboot_phase(s32 arg0);
 s32 sceIoClose(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
 s32 sceIoRead(s32, void *, u32);
@@ -66,9 +72,14 @@ s32 sceKernelDeleteMutex(s32);
 M2C_UNK sceKernelDeleteVpl(s32);
 M2C_UNK sceKernelFreeVpl(s32, s32);
 s32 sceKernelLockMutex(s32, s32, void *);
+s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
-s32 sceRegInit(void);
 M2C_UNK sceRegExit();
-s32 module_reboot_phase(s32 arg0);
+s32 sceRegFlushCategory(s32 arg0);
+s32 sceRegFlushRegistry(s32 arg0);
+s32 sceRegGetKeyInfo(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+s32 sceRegGetKeyInfoByName(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+s32 sceRegInit(void);
+s32 sceRegRemoveKey(s32 arg0, s32 arg1);
 
 #endif

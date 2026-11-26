@@ -1,3 +1,4 @@
+/* cflags[100]: -Os */
 #include "common.h"
 #include "k1.h"
 #include "registry_decls.h"
@@ -128,7 +129,25 @@ INCLUDE_ASM("nonmatchings/registry", sceRegCloseRegistry);
 
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveRegistry);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushRegistry);
+#else
+s32 sceRegFlushRegistry(s32 arg0) {
+    s32 var_s0;
+    u32 temp_s1;
+
+    temp_s1 = shiftK1();
+    var_s0 = 0x80082733;
+    if (sceKernelWaitSema(D_0000671C, 1, NULL) == 0) {
+        var_s0 = func_000006CC(arg0);
+    }
+    if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+        var_s0 = 0x80082734;
+    }
+    setK1(temp_s1);
+    return var_s0;
+}
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_000008BC);
@@ -142,7 +161,25 @@ INCLUDE_ASM("nonmatchings/registry", func_000006CC);
 INCLUDE_ASM("nonmatchings/registry", func_0000086C);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushCategory);
+#else
+s32 sceRegFlushCategory(s32 arg0) {
+    s32 var_s0;
+    u32 temp_s1;
+
+    temp_s1 = shiftK1();
+    var_s0 = 0x80082733;
+    if (sceKernelWaitSema(D_0000671C, 1, NULL) == 0) {
+        var_s0 = func_000008E4(arg0);
+        if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+            var_s0 = 0x80082734;
+        }
+    }
+    setK1(temp_s1);
+    return var_s0;
+}
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_000008E4);
@@ -212,7 +249,11 @@ INCLUDE_ASM("nonmatchings/registry", func_00001714);
 
 INCLUDE_ASM("nonmatchings/registry", func_00001828);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/registry", func_00001730);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00001730(s32 arg0, s32 *arg1) {
     s32 temp_v0;
     s32 var_v1;
@@ -227,27 +268,13 @@ s32 func_00001730(s32 arg0, s32 *arg1) {
     }
     return var_v1;
 }
-
-INCLUDE_ASM("nonmatchings/registry", func_00001770);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/registry", func_00001908);
-#endif
-
-#if FW_VERSION == 100
-void func_00001908(s32 arg0, M2C_UNK **arg1, M2C_UNK **arg2) {
-    if (arg0 == 1) {
-        *arg1 = "/registry/system.ireg";
-        *arg2 = "/registry/system.dreg";
-        return;
-    }
-    *arg1 = NULL;
-    *arg2 = NULL;
-}
 #endif
 
 #if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/registry", func_00001770);
+
+INCLUDE_ASM("nonmatchings/registry", func_00001908);
+
 INCLUDE_ASM("nonmatchings/registry", func_00001938);
 #else
 s32 func_00001874(s32 arg0, s32 *arg1) {
@@ -619,9 +646,46 @@ INCLUDE_ASM("nonmatchings/registry", sceRegCreateKey);
 
 INCLUDE_ASM("nonmatchings/registry", sceRegSetKeyValue);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfo);
+#else
+s32 sceRegGetKeyInfo(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 var_s0;
+    u32 temp_s5;
 
+    temp_s5 = shiftK1();
+    var_s0 = 0x80082733;
+    if (sceKernelWaitSema(D_0000671C, 1, NULL) == 0) {
+        var_s0 = func_00004A28(arg0, arg1, arg2, arg3, arg4);
+    }
+    if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+        var_s0 = 0x80082734;
+    }
+    setK1(temp_s5);
+    return var_s0;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfoByName);
+#else
+s32 sceRegGetKeyInfoByName(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void *sp0;
+    s32 var_s0;
+    u32 temp_s4;
+
+    temp_s4 = shiftK1();
+    var_s0 = 0x80082733;
+    if (sceKernelWaitSema(D_0000671C, 1, NULL) == 0) {
+        var_s0 = func_00004A28(arg0, arg1, &sp0, arg2, arg3);
+    }
+    if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+        var_s0 = 0x80082734;
+    }
+    setK1(temp_s4);
+    return var_s0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/registry", func_00004A28);
 
@@ -631,7 +695,25 @@ INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValueByName);
 
 INCLUDE_ASM("nonmatchings/registry", func_00004D6C);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveKey);
+#else
+s32 sceRegRemoveKey(s32 arg0, s32 arg1) {
+    s32 var_s0;
+    u32 temp_s2;
+
+    temp_s2 = shiftK1();
+    var_s0 = 0x80082733;
+    if (sceKernelWaitSema(D_0000671C, 1, NULL) == 0) {
+        var_s0 = func_000046A8(arg0, arg1);
+        if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+            var_s0 = 0x80082734;
+        }
+    }
+    setK1(temp_s2);
+    return var_s0;
+}
+#endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00004778);
@@ -809,14 +891,20 @@ INCLUDE_RODATA("nonmatchings/registry", D_00006F94);
 
 INCLUDE_ASM("nonmatchings/registry", func_000069A0);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/registry", func_00006228);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00006228(void) {
     if (D_000066F0 >= 0) {
         sceKernelDeleteVpl(D_000066F0);
         D_000066F0 = -1;
     }
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
 void func_00006A0C(void) {
     if (D_00006FB0 >= 0) {
         sceKernelDeleteVpl(D_00006FB0);
