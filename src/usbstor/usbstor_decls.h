@@ -5,8 +5,8 @@
 #include "m2c_macros.h"
 
 extern s32 D_00002724;
-extern M2C_UNK D_000029A8;
-extern M2C_UNK D_000029F0;
+extern s32 D_000029A8;
+extern s32 D_000029F0;
 
 M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *);
 void func_00001A40(void);

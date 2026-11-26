@@ -186,7 +186,7 @@ INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorGetSubClass);
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorSetSubClass);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/usbstor", module_start);
 #else
 s32 module_start(void) {
@@ -202,7 +202,7 @@ s32 module_start(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/usbstor", module_stop);
 #else
 s32 module_stop(void) {
