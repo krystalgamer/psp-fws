@@ -17,8 +17,8 @@
   "sceUpdateDownloadAbort": "s32 sceUpdateDownloadAbort(void);",
   "sceUpdateDownloadSetDestCode": "s32 sceUpdateDownloadSetDestCode(s32 arg0);",
   "sceUpdateDownloadSetServerRegion": "void sceUpdateDownloadSetServerRegion(s32 arg0);",
-  "sceUpdateDownloadSetVersion": "s32 sceUpdateDownloadSetVersion(void);",
-  "sceUpdateDownloadSetUrl": "void sceUpdateDownloadSetUrl(void);"
+  "sceUpdateDownloadSetUrl": "void sceUpdateDownloadSetUrl(void);",
+  "sceUpdateDownloadSetVersion": "s32 sceUpdateDownloadSetVersion(void);"
  },
  "vars": {
   "D_000030D4": "extern M2C_UNK D_000030D4;",

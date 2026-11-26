@@ -26,7 +26,7 @@ M2C_UNK sceKernelGetSystemTimeLow();
 s32 sceUpdateDownloadAbort(void);
 s32 sceUpdateDownloadSetDestCode(s32 arg0);
 void sceUpdateDownloadSetServerRegion(s32 arg0);
-s32 sceUpdateDownloadSetVersion(void);
 void sceUpdateDownloadSetUrl(void);
+s32 sceUpdateDownloadSetVersion(void);
 
 #endif
