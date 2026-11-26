@@ -204,6 +204,8 @@ def compile_words(c_text, compiler="1.7.1", opt="-O2"):
 
 # --fast: only compile with each file's own setting (no per-setting stats)
 FAST = False
+# AUTO_GOTO=1: accept m2c output with gotos (SCE code uses goto-based error paths)
+ALLOW_GOTO = os.environ.get("AUTO_GOTO") == "1"
 
 # The PSP uses the MIPS EABI ($4-$11 and $f12-$f19 for arguments), which m2c
 # implements as "mipsee" with $8-$11 named a4-a7.
@@ -464,7 +466,9 @@ def _try_func(mod, name, header_ctx, target, seen):
         body = k1_helpers(body)
     # Unknown stack usage can't match; gotos are rejected in favour of
     # structured control flow (those functions are left for manual work).
-    if body is None or re.search(r"\b(sp|subroutine_arg\d+|saved_reg_\w+|unksp\w*|goto|k1)\b", body):
+    bad = r"\b(sp|subroutine_arg\d+|saved_reg_\w+|unksp\w*|k1)\b" if ALLOW_GOTO else \
+        r"\b(sp|subroutine_arg\d+|saved_reg_\w+|unksp\w*|goto|k1)\b"
+    if body is None or re.search(bad, body):
         return None
     new_funcs, new_vars = {}, {}
     for d in decls:
