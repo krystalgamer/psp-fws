@@ -6,7 +6,7 @@
   "func_000017D0": "s32 func_000017D0(void);",
   "func_0000191C": "M2C_UNK func_0000191C(s32);",
   "func_000020A0": "void func_000020A0(s32 arg0);",
-  "func_0000257C": "M2C_UNK *func_0000257C(void);",
+  "func_0000257C": "s32 *func_0000257C(void);",
   "func_0000258C": "void func_0000258C(void);",
   "func_00002600": "u8 *func_00002600(u8 *arg0, u8 *arg1, s32 arg2);",
   "func_00002660": "s32 func_00002660(s32, s32);",
@@ -22,7 +22,7 @@
  },
  "vars": {
   "D_000030D4": "extern M2C_UNK D_000030D4;",
-  "D_000037C1": "extern M2C_UNK D_000037C1;",
+  "D_000037C1": "extern s32 D_000037C1;",
   "D_00003A98": "extern M2C_UNK D_00003A98;",
   "D_00003AC0": "extern s32 D_00003AC0;"
  }
