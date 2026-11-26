@@ -1,5 +1,5 @@
 // NID-derived names
-LflashFatfmt_B7A424A4 = 0x00001530; // type:func
+sceLflashFatfmtStartFatfmt = 0x00001530; // type:func
 module_start = 0x0000154C; // type:func
 sceKernelCpuSuspendIntr = 0x00001554; // type:func
 sceKernelCpuResumeIntr = 0x0000155C; // type:func
@@ -8,7 +8,7 @@ sceIoLseek = 0x0000156C; // type:func
 sceIoWrite = 0x00001574; // type:func
 sceIoIoctl = 0x0000157C; // type:func
 sceIoClose = 0x00001584; // type:func
-KDebugForKernel_84F370BC = 0x0000158C; // type:func
+Kprintf = 0x0000158C; // type:func
 bcopy = 0x00001594; // type:func
 strlen = 0x0000159C; // type:func
 bzero = 0x000015A4; // type:func

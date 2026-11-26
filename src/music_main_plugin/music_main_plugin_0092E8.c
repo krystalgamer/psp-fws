@@ -93,8 +93,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_000094D0);
 #if FW_VERSION == 282
 void func_000094D0(M2C_UNK **arg0) {
     *arg0 = &D_0009A4B0;
-    if (sceVshCommonGui_071749CE() != 0) {
-        sceVshCommonGui_4704D5BD(0);
+    if (_ZN3vsh16Infobar_IsOpenedEv() != 0) {
+        _ZN3vsh13Infobar_CloseEb(0);
     }
     func_00006DC8((s32) arg0);
 }
@@ -107,8 +107,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00009520);
 #if FW_VERSION == 282
 void func_00009520(M2C_UNK **arg0) {
     *arg0 = &D_0009A4B0;
-    if (sceVshCommonGui_071749CE() != 0) {
-        sceVshCommonGui_4704D5BD(0);
+    if (_ZN3vsh16Infobar_IsOpenedEv() != 0) {
+        _ZN3vsh13Infobar_CloseEb(0);
     }
     func_00006DC8((s32) arg0);
 }
@@ -121,11 +121,11 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00009570);
 #if FW_VERSION == 282
 void func_00009570(M2C_UNK **arg0) {
     *arg0 = &D_0009A4B0;
-    if (sceVshCommonGui_071749CE() != 0) {
-        sceVshCommonGui_4704D5BD(0);
+    if (_ZN3vsh16Infobar_IsOpenedEv() != 0) {
+        _ZN3vsh13Infobar_CloseEb(0);
     }
     func_00006DC8((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_00099DB0);
@@ -743,14 +743,14 @@ void func_0000B98C(struct Unk_func_0000B98C_0 *arg0) {
     void **temp_v0;
     void **temp_v0_2;
 
-    temp_v0 = scePaf_72514A05(arg0->unk8, &D_0009A778, 0);
+    temp_v0 = _ZN3paf8PhWidget9FindChildEPKci(arg0->unk8, &D_0009A778, 0);
     M2C_FIELD(temp_v0, s8 *, 0x1FD) = 1;
     M2C_FIELD(temp_v0, s8 *, 0x1FE) = 1;
-    scePaf_86B41BA3(temp_v0);
-    temp_v0_2 = scePaf_72514A05(arg0->unk8, &D_0009A790, 0);
+    _ZN3paf8PhWidget13UpdateCamerasEv(temp_v0);
+    temp_v0_2 = _ZN3paf8PhWidget9FindChildEPKci(arg0->unk8, &D_0009A790, 0);
     M2C_FIELD(temp_v0_2, s8 *, 0x1FD) = 0;
     M2C_FIELD(temp_v0_2, s8 *, 0x1FE) = 0;
-    scePaf_86B41BA3(temp_v0_2);
+    _ZN3paf8PhWidget13UpdateCamerasEv(temp_v0_2);
 }
 #endif
 
@@ -776,7 +776,7 @@ void func_0000C184(struct Unk_func_0000C184_0 *arg0) {
 
     temp_v0 = arg0->unk18;
     if (temp_v0 != 0) {
-        sceVshCommonGui_72E652AA(temp_v0);
+        _ZN3vsh13MessageDialog10HideDeleteEv(temp_v0);
         arg0->unk18 = 0;
     }
 }
@@ -796,7 +796,7 @@ void func_0000C274(struct Unk_func_0000C274_0 *arg0) {
 
     temp_v0 = arg0->unk1C;
     if (temp_v0 != 0) {
-        sceVshCommonGui_72E652AA(temp_v0);
+        _ZN3vsh13MessageDialog10HideDeleteEv(temp_v0);
         arg0->unk1C = 0;
     }
 }
@@ -907,7 +907,7 @@ void func_0000EA30(struct Unk_func_0000EA30_0 *arg0) {
     if (var_v0 != var_v1) {
         do {
             temp_s0 = var_v0->unk4;
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_v1 = arg0->unk0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_v1);
@@ -942,12 +942,12 @@ void func_0000EAD0(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = var_v0->unk4;
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_7EC15225(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 #endif
 

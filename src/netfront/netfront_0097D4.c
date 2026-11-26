@@ -3872,7 +3872,7 @@ void func_00039B10(s32 **arg0) {
     temp_v0_2 = temp_v0->unk24;
     if (temp_v0_2 != NULL) {
         temp_v0_2->unk18->unk1C = temp_v0;
-        sceHVNetfront_Module_09FA691C(temp_v0_2);
+        jpeg_destroy_decompress(temp_v0_2);
         sceHVNetfront_Module_A2F4AC9E((s32) temp_v0->unk24);
         temp_v0->unk24 = NULL;
     }

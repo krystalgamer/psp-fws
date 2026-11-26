@@ -11,11 +11,11 @@
   "sceNetIfhandle_driver_0542835F": "s32 sceNetIfhandle_driver_0542835F(s32 arg0, s32 arg1, s32 arg2);",
   "sceNetIfhandle_driver_0C391E9F": "s32 sceNetIfhandle_driver_0C391E9F(s32 arg0, u32 arg1);",
   "sceNetIfhandle_driver_0FB8AE0D": "void sceNetIfhandle_driver_0FB8AE0D(void);",
-  "sceNetIfhandle_driver_16246B99": "void sceNetIfhandle_driver_16246B99(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1);",
+  "sceNetIfPrepend": "void sceNetIfPrepend(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1);",
   "sceNetIfhandle_driver_29ED84C5": "s32 sceNetIfhandle_driver_29ED84C5(void);",
   "sceNetIfhandle_driver_62B20015": "s32 sceNetIfhandle_driver_62B20015(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
-  "sceNetIfhandle_driver_C6D14282": "s32 sceNetIfhandle_driver_C6D14282(struct Unk_sceNetIfhandle_driver_C6D14282_0 *arg0, s32 arg1);",
-  "sceNetIfhandle_driver_D5AD6DEA": "s32 sceNetIfhandle_driver_D5AD6DEA(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *arg0);"
+  "sceNetSetIfhandleOpt": "s32 sceNetSetIfhandleOpt(struct Unk_sceNetIfhandle_driver_C6D14282_0 *arg0, s32 arg1);",
+  "sceNetGetIfhandleOpt": "s32 sceNetGetIfhandleOpt(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *arg0);"
  },
  "types": {
   "Unk_sceNetIfhandle_driver_16246B99_0": "struct Unk_sceNetIfhandle_driver_16246B99_0 {\n    u8 pad0[0x18];\n    void * unk18;\n    void * unk1C;\n    s32 unk20;\n};",

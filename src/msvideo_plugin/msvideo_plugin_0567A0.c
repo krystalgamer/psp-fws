@@ -435,9 +435,9 @@ void func_00059F54(struct Unk_func_00059F54_0 *arg0) {
     arg0->unk784 = 0;
     arg0->unk788 = 0;
     arg0->unk78C = 0;
-    scePaf_6829D7AF((u8 *)arg0 + 4, 0, 0x74);
-    scePaf_6829D7AF((u8 *)arg0 + 0x78, 0, 0x708);
-    temp_v0 = scePaf_F13EBB78(0xD000);
+    sce_paf_private_memset((u8 *)arg0 + 4, 0, 0x74);
+    sce_paf_private_memset((u8 *)arg0 + 0x78, 0, 0x708);
+    temp_v0 = _Znaj(0xD000);
     arg0->unk780 = temp_v0;
     arg0->unk784 = 0x400;
 }
@@ -451,9 +451,9 @@ void func_00059FCC(struct Unk_func_00059FCC_0 *arg0) {
     arg0->unk784 = 0;
     arg0->unk788 = 0;
     arg0->unk78C = 0;
-    scePaf_6829D7AF((u8 *)arg0 + 4, 0, 0x74);
-    scePaf_6829D7AF((u8 *)arg0 + 0x78, 0, 0x708);
-    temp_v0 = scePaf_F13EBB78(0xD000);
+    sce_paf_private_memset((u8 *)arg0 + 4, 0, 0x74);
+    sce_paf_private_memset((u8 *)arg0 + 0x78, 0, 0x708);
+    temp_v0 = _Znaj(0xD000);
     arg0->unk780 = temp_v0;
     arg0->unk784 = 0x400;
 }
@@ -468,7 +468,7 @@ void func_0005A084(struct Unk_func_0005A084_0 *arg0) {
     if (temp_a1 == 0) {
 
     } else {
-        scePaf_B3D2C3BB(temp_a1);
+        _ZdaPv(temp_a1);
     }
 }
 
@@ -478,9 +478,9 @@ void func_0005A0C4(s32 **arg0) {
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x780);
     M2C_FIELD(arg0, s32 **, 0) = &D_000657F8;
     if (temp_v1 != 0) {
-        scePaf_B3D2C3BB(temp_v1);
+        _ZdaPv(temp_v1);
     }
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -791,7 +791,7 @@ void func_000418A4(void *arg0) {
             do {
                 temp_s0 = M2C_FIELD(var_v0, s32 ***, 8);
                 if (var_v0 != NULL) {
-                    scePaf_4E67BB08(var_v0);
+                    _ZdlPv(var_v0);
                 }
                 var_v0 = temp_s0;
             } while (temp_s0 != NULL);
@@ -810,7 +810,7 @@ void func_000418FC(void *arg0) {
             do {
                 temp_s0 = M2C_FIELD(var_v0, s32 ***, 8);
                 if (var_v0 != NULL) {
-                    scePaf_4E67BB08(var_v0);
+                    _ZdlPv(var_v0);
                 }
                 var_v0 = temp_s0;
             } while (temp_s0 != NULL);

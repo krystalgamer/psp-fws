@@ -23,10 +23,10 @@ u8 *func_00002B44(u8 *arg0, u8 *arg1);
 s32 module_start(void);
 s32 module_stop(void);
 M2C_UNK sceKernelGetSystemTimeLow();
-s32 sceLibUpdateDL_4F49C9C1(void);
-s32 sceLibUpdateDL_88FF3935(s32 arg0);
-void sceLibUpdateDL_B5DB018D(s32 arg0);
-s32 sceLibUpdateDL_C1AF1076(void);
-void sceLibUpdateDL_F7E66CB4(void);
+s32 sceUpdateDownloadAbort(void);
+s32 sceUpdateDownloadSetDestCode(s32 arg0);
+void sceUpdateDownloadSetServerRegion(s32 arg0);
+s32 sceUpdateDownloadSetVersion(void);
+void sceUpdateDownloadSetUrl(void);
 
 #endif

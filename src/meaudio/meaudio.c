@@ -9,20 +9,20 @@ INCLUDE_ASM("nonmatchings/meaudio", func_00000280);
 
 INCLUDE_ASM("nonmatchings/meaudio", func_000004B4);
 
-INCLUDE_ASM("nonmatchings/meaudio", sceMeAudio_148E487D);
+INCLUDE_ASM("nonmatchings/meaudio", sceMeAudioRegisterTickCallback);
 
-INCLUDE_ASM("nonmatchings/meaudio", sceMeAudio_29798EF3);
+INCLUDE_ASM("nonmatchings/meaudio", sceMeAudioSetPause);
 
 INCLUDE_ASM("nonmatchings/meaudio", module_start);
 
-void sceMeAudio_5EDA8D33(void) {
+void sceMeAudioScLock(void) {
     do {
 
-    } while (sceSysreg_driver_9FC87ED4() != 0);
+    } while (sceSysregSemaTryLock() != 0);
 }
 
-void sceMeAudio_05115756(void) {
-    sceSysreg_driver_8BE2D520();
+void sceMeAudioScUnlock(void) {
+    sceSysregSemaUnlock();
 }
 
 INCLUDE_ASM("nonmatchings/meaudio", module_reboot_before);
@@ -85,13 +85,13 @@ void sceAudioOutput2ChangeLength(void) {
 void sceAudioOutput2GetRestSample(void) {
 }
 
-void sceAudio_38553111(void) {
+void sceAudioSRCChReserve(void) {
 }
 
-void sceAudio_5C37C0AE(void) {
+void sceAudioSRCChRelease(void) {
 }
 
-void sceAudio_E0727056(void) {
+void sceAudioSRCOutputBlocking(void) {
 }
 
 void sceAudioInputBlocking(void) {
@@ -115,10 +115,10 @@ void sceAudioInputInitEx(void) {
 void sceAudioPollInputEnd(void) {
 }
 
-void sceAudio_E9D97901(void) {
+void sceAudioGetChannelRestLen(void) {
 }
 
-void sceAudio_41EFADE7(void) {
+void sceAudioOneshotOutput(void) {
 }
 #endif
 

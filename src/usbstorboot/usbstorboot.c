@@ -78,17 +78,17 @@ INCLUDE_RODATA("nonmatchings/usbstorboot", D_00001BD8);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_000007B0);
 
-INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_E58818A8);
+INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootSetCapacity);
 
-INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_594BBF95);
+INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootSetLoadAddr);
 
-INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_6D865ECD);
+INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootGetDataSize);
 
-INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_A1119F0D);
+INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootSetStatus);
 
-INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_1F080078);
+INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootRegisterNotify);
 
-INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_A55C9E16);
+INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootUnregisterNotify);
 
 #if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/usbstorboot", module_start);
@@ -97,7 +97,7 @@ INCLUDE_ASM("nonmatchings/usbstorboot", module_stop);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_8A4F36E5);
+INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootGetDownloadSize);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 352
@@ -111,7 +111,7 @@ s32 module_start(void) {
     memset(&D_00001F20, 0, 0x104);
     var_v1 = 0;
     if (sceUsbstor_internal_489E6BF1(&D_00001F00) < 0) {
-        KDebugForKernel_84F370BC("%serror - cannot register handler\n", &D_00001B60);
+        Kprintf("%serror - cannot register handler\n", &D_00001B60);
         var_v1 = 1;
     }
     return var_v1;

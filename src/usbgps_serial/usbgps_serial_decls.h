@@ -13,7 +13,7 @@ struct D_00005260_s {
 extern M2C_UNK D_00005210;
 extern struct D_00005260_s D_00005260;
 
-M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, s32);
+M2C_UNK Kprintf(M2C_UNK *, s32);
 s8 *func_00000000(s8 *arg0, s32 arg1);
 s32 func_00000F28(s32);
 s32 func_00001504(s32 arg0);
@@ -29,8 +29,8 @@ s32 func_00002EC0(s32 *arg0);
 s32 func_00004754(void);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
-s32 sceUsbBus_driver_B1644BE7(M2C_UNK *);
-s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);
-s32 sceUsbGps_driver_268F95CA(u32 arg0);
+s32 sceUsbbdRegister(M2C_UNK *);
+s32 sceUsbbdUnregister(M2C_UNK *);
+s32 sceUsbGpsSetInitDataLocation(u32 arg0);
 
 #endif

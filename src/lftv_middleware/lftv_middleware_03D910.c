@@ -12,11 +12,11 @@ s32 func_0003D910(s32 arg0, s32 *arg1) {
 
     var_v0 = 0x16;
     if (arg0 != 0) {
-        temp_s0 = scePaf_CA79D58B() + 1;
+        temp_s0 = sce_paf_private_strlen() + 1;
         temp_v0 = scePaf_F13EBB78(temp_s0);
         var_v0 = 0xC;
         if (temp_v0 != 0) {
-            scePaf_F95EA3F1(temp_v0, arg0, temp_s0);
+            sce_paf_private_memcpy(temp_v0, arg0, temp_s0);
             *arg1 = temp_v0;
             var_v0 = 0;
         }
@@ -100,7 +100,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_0003DF38);
 #else
 void func_0003DF38(struct Unk_func_0003DF38_0 *arg0, s32 arg1) {
     arg0->unk4 = 0;
-    scePaf_F95EA3F1(arg1, arg0->unkC, arg0->unk8);
+    sce_paf_private_memcpy(arg1, arg0->unkC, arg0->unk8);
 }
 #endif
 
@@ -554,7 +554,7 @@ void func_0004146C(s32 arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00041488);
 #else
 s32 func_00041488(s32 arg0, s32 arg1) {
-    func_0004E0C0(arg0 + 8, arg1, scePaf_CA79D58B(arg1));
+    func_0004E0C0(arg0 + 8, arg1, sce_paf_private_strlen(arg1));
     return arg0;
 }
 #endif
@@ -767,7 +767,7 @@ s32 func_00043440(s32 arg0) {
     temp_v0 = func_000425C8(arg0 + 0x2C, (s32) "Transfer-Encoding");
     var_v1 = 0;
     if (temp_v0 != 0) {
-        var_v1 = scePaf_66FE90D7(temp_v0, "chunked") == 0;
+        var_v1 = sce_paf_private_strcmp(temp_v0, "chunked") == 0;
     }
     return var_v1;
 }
@@ -1202,10 +1202,10 @@ s32 func_00045B4C(s32 arg0) {
     s32 temp_s0;
     s32 temp_v0;
 
-    temp_s0 = scePaf_CA79D58B() + 1;
+    temp_s0 = sce_paf_private_strlen() + 1;
     temp_v0 = scePaf_F13EBB78(temp_s0);
     if (temp_v0 != 0) {
-        scePaf_F95EA3F1(temp_v0, arg0, temp_s0);
+        sce_paf_private_memcpy(temp_v0, arg0, temp_s0);
     }
     return temp_v0;
 }
@@ -1237,7 +1237,7 @@ s32 func_00046174(s32 arg0, s32 arg1, s32 arg2) {
 
     temp_v0 = scePaf_F13EBB78(arg2);
     if (temp_v0 != 0) {
-        scePaf_F95EA3F1(temp_v0, arg0, arg1);
+        sce_paf_private_memcpy(temp_v0, arg0, arg1);
         if (arg0 != 0) {
             scePaf_B3D2C3BB(arg0);
         }

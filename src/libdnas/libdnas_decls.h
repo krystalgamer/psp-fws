@@ -13,7 +13,7 @@ extern s32 D_000037D0;
 
 s32 func_00002888(s32);
 M2C_UNK sceDNASCore_lib_D5E80301();
-void sceDNAS_lib_BE0998D7(void);
+void sceDNASTerm(void);
 s32 sceKernelDeleteEventFlag(s32);
 s32 sceKernelSetEventFlag(s32, u32);
 s32 sceKernelTerminateDeleteThread(s32);

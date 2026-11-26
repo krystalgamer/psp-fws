@@ -127,8 +127,8 @@ s32 func_000006E4(void *arg0) {
 
     var_v0 = 0x80550003;
     if (arg0 != NULL) {
-        sceNet_lib_57CC57DA(arg0, 0, 8);
-        sceNet_lib_CF705E46(arg0, "%02d.%02d", 3, 0x32);
+        sceNetMemset(arg0, 0, 8);
+        sceNetSprintf(arg0, "%02d.%02d", 3, 0x32);
         var_v0 = 0;
     }
     return var_v0;
@@ -329,7 +329,7 @@ void func_00006690(s32 arg0, s32 arg1, struct Unk_func_00006690_2 *arg2) {
 
     arg2->unk0 = arg1;
     arg2->unkC = 0;
-    sceNet_lib_57CC57DA(arg2->unk4, 0, 0x130);
+    sceNetMemset(arg2->unk4, 0, 0x130);
     temp_a1 = arg2->unk4;
     temp_a1->unkE0 = -1;
     temp_a1->unkE4 = -1;

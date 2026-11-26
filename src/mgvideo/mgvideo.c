@@ -236,22 +236,22 @@ s32 func_000004DC(s32 arg0, M2C_UNK arg1) {
     var_s2 = -1;
     var_v0 = func_0000043C(arg1);
     if (var_v0 >= 0) {
-        temp_v0 = sceMgr_driver_F30E22CF(3);
+        temp_v0 = sceMgrAllocKeyReg(3);
         var_s0 = temp_v0;
         if (temp_v0 >= 0) {
             var_s2 = temp_v0;
             temp_v0_2 = sceMgr_driver_4A14DD18(temp_v0, arg0, var_v0);
             var_s0 = temp_v0_2;
             if (temp_v0_2 >= 0) {
-                sceMgr_driver_1B8F3192(var_v0);
+                sceMgrFreeKeyReg(var_v0);
                 return temp_v0;
             }
         }
         if (var_v0 >= 0) {
-            sceMgr_driver_1B8F3192(var_v0);
+            sceMgrFreeKeyReg(var_v0);
         }
         if (var_s2 >= 0) {
-            sceMgr_driver_1B8F3192(var_s2);
+            sceMgrFreeKeyReg(var_s2);
         }
         var_v0 = func_00000000(var_s0);
         /* Duplicate return node #9. Try simplifying control flow for better match */
@@ -272,22 +272,22 @@ s32 func_000006A0(s32 arg0, s32 arg1) {
     var_s2 = -1;
     var_v0 = func_0000043C(arg1);
     if (var_v0 >= 0) {
-        temp_v0 = sceMgr_driver_F30E22CF(3);
+        temp_v0 = sceMgrAllocKeyReg(3);
         var_s0 = temp_v0;
         if (temp_v0 >= 0) {
             var_s2 = temp_v0;
             temp_v0_2 = sceMgr_driver_DBB5C63E(temp_v0, arg0, var_v0);
             var_s0 = temp_v0_2;
             if (temp_v0_2 >= 0) {
-                sceMgr_driver_1B8F3192(var_v0);
+                sceMgrFreeKeyReg(var_v0);
                 return temp_v0;
             }
         }
         if (var_v0 >= 0) {
-            sceMgr_driver_1B8F3192(var_v0);
+            sceMgrFreeKeyReg(var_v0);
         }
         if (var_s2 >= 0) {
-            sceMgr_driver_1B8F3192(var_s2);
+            sceMgrFreeKeyReg(var_s2);
         }
         var_v0 = func_00000000(var_s0);
         /* Duplicate return node #9. Try simplifying control flow for better match */
@@ -308,22 +308,22 @@ s32 func_000005A0(s32 arg0, s32 arg1) {
     var_s2 = -1;
     var_v0 = func_0000043C(arg1);
     if (var_v0 >= 0) {
-        temp_v0 = sceMgr_driver_F30E22CF(3);
+        temp_v0 = sceMgrAllocKeyReg(3);
         var_s0 = temp_v0;
         if (temp_v0 >= 0) {
             var_s2 = temp_v0;
-            temp_v0_2 = sceMgr_driver_DB12BB23(temp_v0, arg0, var_v0);
+            temp_v0_2 = sceMgrNetDecryptKc(temp_v0, arg0, var_v0);
             var_s0 = temp_v0_2;
             if (temp_v0_2 >= 0) {
-                sceMgr_driver_1B8F3192(var_v0);
+                sceMgrFreeKeyReg(var_v0);
                 return temp_v0;
             }
         }
         if (var_v0 >= 0) {
-            sceMgr_driver_1B8F3192(var_v0);
+            sceMgrFreeKeyReg(var_v0);
         }
         if (var_s2 >= 0) {
-            sceMgr_driver_1B8F3192(var_s2);
+            sceMgrFreeKeyReg(var_s2);
         }
         var_v0 = func_00000000(var_s0);
         /* Duplicate return node #9. Try simplifying control flow for better match */
@@ -434,22 +434,22 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_00001744);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00001794);
 
-s32 sceMgVideo_driver_5CFE1758(void) {
+s32 sceMgVideoModuleInit(void) {
     return 0;
 }
 
-s32 sceMgVideo_driver_585F5755(void) {
-    sceMgVideo_driver_02CD7137();
+s32 sceMgVideoModuleEnd(void) {
+    sceMgVideoEnd();
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_04B36B8F);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoInit);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_02CD7137);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoEnd);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_2E94A4B6);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoAuth);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_76F716B2);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoCheckICV);
 #endif
 
 #if FW_VERSION >= 303 && FW_VERSION < 352
@@ -457,9 +457,9 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_00002178);
 #endif
 
 #if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_6297802E);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoInitMovie);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_6F13A2F9);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoEndMovie);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_0000206C);
 
@@ -529,11 +529,11 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_000025AC);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00002620);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_A5F216CC);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoInitTrack);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_57ADD7DA);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoEndTrack);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_63577C7E);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoDecryptSample);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00002BB8);
 
@@ -544,7 +544,7 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_00002D8C);
 INCLUDE_ASM("nonmatchings/mgvideo", func_00002F54);
 #else
 void func_00002F54(s32 arg0) {
-    ThreadManForKernel_BC31C1B9(0x1400, &func_00002D8C, arg0);
+    sceKernelExtendKernelStack(0x1400, &func_00002D8C, arg0);
 }
 #endif
 
@@ -567,15 +567,15 @@ INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_6C73EF37);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00007AF0);
 #else
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_10DA1B19);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoClearMACList);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_1B82B327);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoUpdateICV);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_A4AC9163);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoFormatICV);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_F27A69C2);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoGetLicenseInfo);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_37CD3829);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoGetDefaultEKB);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_000036EC);
 
@@ -615,15 +615,15 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_00003F80);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00004098);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_F3E7EE9B);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoNetBindLicense);
 #endif
 
 #if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_00005088);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_26AA0AF7);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoCheckGroupID);
 
-INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_1A30EF4B);
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideoFormatGroupID);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_000053E0);
 
@@ -748,7 +748,7 @@ s32 func_00008E14(s32 arg0) {
 
     var_v1 = -2;
     if (func_00008B28(&sp0, arg0) >= 0) {
-        var_v1 = (sceRtc_driver_17C26C00(&sp0) >= 0) ? 0 : -1;
+        var_v1 = (sceRtcSetCurrentSecureTick(&sp0) >= 0) ? 0 : -1;
     }
     return var_v1;
 }
@@ -835,7 +835,7 @@ s32 func_00005850(s32 arg0) {
 
     var_v1 = -2;
     if (func_000055A8(&sp0, arg0) >= 0) {
-        var_v1 = (sceRtc_driver_17C26C00(&sp0) >= 0) ? 0 : -1;
+        var_v1 = (sceRtcSetCurrentSecureTick(&sp0) >= 0) ? 0 : -1;
     }
     return var_v1;
 }
@@ -846,7 +846,7 @@ s32 func_00005850(s32 arg0) {
     void *sp0;
     s32 var_v1;
 
-    if ((sceRtc_driver_B44BDAED(&sp0) >= 0) || ((var_v1 = -2, (func_000055A8(&sp0, arg0) >= 0)) && (var_v1 = -3, (sceRtc_driver_17C26C00(&sp0) >= 0)))) {
+    if ((sceRtcGetCurrentSecureTick(&sp0) >= 0) || ((var_v1 = -2, (func_000055A8(&sp0, arg0) >= 0)) && (var_v1 = -3, (sceRtcSetCurrentSecureTick(&sp0) >= 0)))) {
         var_v1 = 0;
     }
     return var_v1;
@@ -944,7 +944,7 @@ s32 func_00007660(s32 arg0) {
 
     var_v1 = -2;
     if (func_000073B8(&sp0, arg0) >= 0) {
-        var_v1 = (sceRtc_driver_17C26C00(&sp0) >= 0) ? 0 : -1;
+        var_v1 = (sceRtcSetCurrentSecureTick(&sp0) >= 0) ? 0 : -1;
     }
     return var_v1;
 }

@@ -70,15 +70,15 @@ void func_00000558(void *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", func_00000580);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_69F19666);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferCreateParent);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_40D77905);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferGetChildRequest);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_AD0E88C6);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferReplySession);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_9C6EE447);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferSendParent);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_6D8B0D00);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferRecvParent);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", func_00000B30);
 
@@ -94,31 +94,31 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", func_00000D60);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", func_00000DB8);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_552E0C4F);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferInitParent);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_658833CC);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferStartParent);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_83FA2BBA);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferAbortReplySession);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_0B1F77E1);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferSocketAbortParent);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_CD469448);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferStopParent);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_E3707672);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferDeleteParent);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_A735B9B2);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferTermParent);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_B0975880);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferGetMallocStatParent);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_CD9F1D46);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferCreateChild);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_8897358A);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferGetParentList);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_0CAE4A7B);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferRequestSession);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_97D389A3);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferSendChild);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_D438691D);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferRecvChild);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", func_00001724);
 
@@ -130,8 +130,8 @@ s32 func_00001984(struct Unk_func_00001984_0 *arg0, M2C_UNK arg1, s32 arg2, M2C_
     arg0->unk8 = 0;
     if ((arg2 == 0) || (temp_v0 = func_000004E4(arg2), arg0->unk8 = temp_v0, var_v1 = -1, (temp_v0 != 0))) {
         arg0->unk4 = arg2;
-        sceNet_lib_EF097716(arg0->unk8, arg3, arg2);
-        sceNet_lib_EF097716((s32) ((u8 *)arg0 + 0xC), arg1, 6);
+        sceNetMemcpy(arg0->unk8, arg3, arg2);
+        sceNetMemcpy((s32) ((u8 *)arg0 + 0xC), arg1, 6);
         var_v1 = 0;
     }
     return var_v1;
@@ -143,18 +143,18 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", func_00001A74);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", func_00001AB8);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_75DAEB6B);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferInitChild);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_A64B28F7);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferStartChild);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_48381015);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferAbortRequestSession);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_6F595DFA);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferSocketAbortChild);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_645E312A);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferStopChild);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_24F04EF8);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferDeleteChild);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_541E3EAB);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferTermChild);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransInt_7CFB68C9);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_transfer_int", sceNetAdhocTransferGetMallocStatChild);

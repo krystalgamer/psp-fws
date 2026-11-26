@@ -35,9 +35,9 @@ s32 sceVaudio_driver_DCC18F25(void) {
 }
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/vaudio_game", sceVaudio_driver_82EF2F9D);
+INCLUDE_ASM("nonmatchings/vaudio_game", sceVaudioGetEffectString);
 #else
-M2C_UNK *sceVaudio_driver_82EF2F9D(s32 arg0) {
+M2C_UNK *sceVaudioGetEffectString(s32 arg0) {
     if (arg0 == 0) {
         return "THRU";
     }
@@ -45,10 +45,10 @@ M2C_UNK *sceVaudio_driver_82EF2F9D(s32 arg0) {
 }
 #endif
 
-s32 sceVaudio_driver_5A7435B7(void) {
+s32 sceVaudioInit(void) {
     return 0;
 }
 
-s32 sceVaudio_driver_72749E84(void) {
+s32 sceVaudioEnd(void) {
     return 0;
 }

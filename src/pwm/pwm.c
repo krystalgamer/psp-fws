@@ -2,20 +2,20 @@
 #include "common.h"
 #include "pwm_decls.h"
 
-INCLUDE_ASM("nonmatchings/pwm", scePwm_driver_68BA9CC1);
+INCLUDE_ASM("nonmatchings/pwm", scePwmInit);
 
-INCLUDE_ASM("nonmatchings/pwm", scePwm_driver_850ED3D3);
+INCLUDE_ASM("nonmatchings/pwm", scePwmStart);
 
-INCLUDE_ASM("nonmatchings/pwm", scePwm_driver_1FC555BE);
+INCLUDE_ASM("nonmatchings/pwm", scePwmStop);
 
-INCLUDE_ASM("nonmatchings/pwm", scePwm_driver_AB6D2E36);
+INCLUDE_ASM("nonmatchings/pwm", scePwmChangeDuty);
 
-INCLUDE_ASM("nonmatchings/pwm", scePwm_driver_F624C1A0);
+INCLUDE_ASM("nonmatchings/pwm", scePwmReferDuty);
 
-INCLUDE_ASM("nonmatchings/pwm", scePwm_driver_93F30DAC);
+INCLUDE_ASM("nonmatchings/pwm", scePwmIsLoading);
 
 s32 module_start(void) {
-    scePwm_driver_68BA9CC1();
+    scePwmInit();
     return 0;
 }
 
@@ -23,18 +23,18 @@ s32 module_start(void) {
 INCLUDE_ASM("nonmatchings/pwm", module_reboot_before);
 #else
 s32 module_reboot_before(void) {
-    sceSysEventForKernel_D7D3FDCD(&D_00000550);
+    sceKernelUnregisterSysEventHandler(&D_00000550);
     return 0;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pwm", scePwm_driver_B3169427);
+INCLUDE_ASM("nonmatchings/pwm", scePwmEnd);
 
-INCLUDE_ASM("nonmatchings/pwm", scePwm_driver_526F94FC);
+INCLUDE_ASM("nonmatchings/pwm", scePwmSuspend);
 
-s32 scePwm_driver_E449F656(void) {
-    sceSysreg_driver_7DCA8302();
-    sceSysreg_driver_7A5D2D15();
+s32 scePwmResume(void) {
+    sceSysregPwmClkEnable();
+    sceSysregPwmIoEnable();
     return 0;
 }
 

@@ -6,7 +6,7 @@
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/usb", sceUsbActivate);
 #else
-INCLUDE_ASM("nonmatchings/usb", sceUsb_driver_E20B23A6);
+INCLUDE_ASM("nonmatchings/usb", sceUsbActivateWithCharging);
 
 INCLUDE_ASM("nonmatchings/usb", func_00000090);
 #endif
@@ -32,7 +32,7 @@ INCLUDE_RODATA("nonmatchings/usb", D_00009664);
 INCLUDE_ASM("nonmatchings/usb", sceUsbDeactivate);
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_EDA8A020);
+INCLUDE_ASM("nonmatchings/usb", sceUsbRestart);
 #endif
 
 #if FW_VERSION < 201
@@ -175,11 +175,11 @@ INCLUDE_ASM("nonmatchings/usb", func_00002214);
 INCLUDE_ASM("nonmatchings/usb", func_000022AC);
 #endif
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_23E51D8F);
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqSend);
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_913EC15D);
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqRecv);
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_CC57EC9D);
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqCancel);
 
 INCLUDE_ASM("nonmatchings/usb", func_000026E8);
 
@@ -192,7 +192,7 @@ INCLUDE_ASM("nonmatchings/usb", func_00002928);
 
 INCLUDE_ASM("nonmatchings/usb", module_stop);
 
-s32 syslib_ADF12745(s32 arg0) {
+s32 module_reboot_phase(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 2:
         sceKernelWaitSema(D_000094F0, 1, NULL);
@@ -259,7 +259,7 @@ INCLUDE_ASM("nonmatchings/usb", sceUsbWaitCancel);
 
 INCLUDE_ASM("nonmatchings/usb", func_00002DC8);
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_C5E53685);
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqCancelAll);
 
 INCLUDE_ASM("nonmatchings/usb", func_00002E80);
 
@@ -296,7 +296,7 @@ s32 module_start(void) {
         func_00008A24();
         var_v0 = 0;
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
         var_v0 = 1;
     }
     return var_v0;
@@ -315,7 +315,7 @@ s32 module_start(void) {
         func_00008A24();
         var_v0 = 0;
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
         var_v0 = 1;
     }
     return var_v0;
@@ -338,7 +338,7 @@ s32 module_start(void) {
         func_00008A24();
         var_v0 = 0;
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
         var_v0 = 1;
     }
     return var_v0;
@@ -357,7 +357,7 @@ s32 module_start(void) {
         func_00008A24();
         var_v0 = 0;
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
         var_v0 = 1;
     }
     return var_v0;
@@ -388,7 +388,7 @@ s32 module_start(void) {
         func_00008A30();
         var_v0 = 0;
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : Cannot create semaphore : 0x%08x\n", temp_v0);
         var_v0 = 1;
     }
     return var_v0;
@@ -405,8 +405,8 @@ INCLUDE_ASM("nonmatchings/usb", func_00003258);
 
 #if FW_VERSION >= 300
 void func_00003198(void) {
-    sceSysreg_driver_7234EA80(9);
-    sceSysreg_driver_3E216017();
+    sceSysregUsbClkEnable(9);
+    sceSysregUsbBusClockEnable();
     func_00008AA8();
     func_00008ADC();
 }
@@ -505,8 +505,8 @@ INCLUDE_ASM("nonmatchings/usb", func_00005AB0);
 #if FW_VERSION >= 300
 void func_0000581C(void) {
     func_00008B28();
-    sceSysreg_driver_BFBABB63();
-    sceSysreg_driver_38EC3281(9);
+    sceSysregUsbBusClockDisable();
+    sceSysregUsbClkDisable(9);
 }
 #endif
 
@@ -522,25 +522,25 @@ INCLUDE_ASM("nonmatchings/usb", func_00005B68);
 INCLUDE_RODATA("nonmatchings/usb", D_0000A174);
 #endif
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_951A24CC);
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdClearFIFO);
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_E65441C1);
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdStall);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 s32 func_00005A70(void) {
     sceKernelPowerLock(0);
-    InterruptManagerForKernel_D774BA45(0x3B);
-    InterruptManagerForKernel_D774BA45(0x3A);
-    sceSysreg_driver_A3C8E075();
-    sceSysreg_driver_BFBABB63();
-    sceSysreg_driver_38EC3281(9);
+    sceKernelDisableIntr(0x3B);
+    sceKernelDisableIntr(0x3A);
+    sceSysregUsbIoDisable();
+    sceSysregUsbBusClockDisable();
+    sceSysregUsbClkDisable(9);
     func_0000756C();
     sceKernelPowerUnlock(0);
-    InterruptManagerForKernel_F987B1F0(0x38);
-    InterruptManagerForKernel_F987B1F0(0x39);
-    InterruptManagerForKernel_F987B1F0(0x3B);
-    InterruptManagerForKernel_F987B1F0(0x3A);
-    InterruptManagerForKernel_F987B1F0(0x1A);
+    sceKernelReleaseIntrHandler(0x38);
+    sceKernelReleaseIntrHandler(0x39);
+    sceKernelReleaseIntrHandler(0x3B);
+    sceKernelReleaseIntrHandler(0x3A);
+    sceKernelReleaseIntrHandler(0x1A);
     func_00008BFC();
     return 0;
 }
@@ -556,18 +556,18 @@ s32 func_00005BA0(void) {
 #if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00005A70(void) {
     sceKernelPowerLock(0);
-    InterruptManagerForKernel_D774BA45(0x3B);
-    InterruptManagerForKernel_D774BA45(0x3A);
-    sceSysreg_driver_A3C8E075();
-    sceSysreg_driver_BFBABB63();
-    sceSysreg_driver_38EC3281(9);
+    sceKernelDisableIntr(0x3B);
+    sceKernelDisableIntr(0x3A);
+    sceSysregUsbIoDisable();
+    sceSysregUsbBusClockDisable();
+    sceSysregUsbClkDisable(9);
     func_0000756C();
     sceKernelPowerUnlock(0);
-    InterruptManagerForKernel_F987B1F0(0x38);
-    InterruptManagerForKernel_F987B1F0(0x39);
-    InterruptManagerForKernel_F987B1F0(0x3B);
-    InterruptManagerForKernel_F987B1F0(0x3A);
-    InterruptManagerForKernel_F987B1F0(0x1A);
+    sceKernelReleaseIntrHandler(0x38);
+    sceKernelReleaseIntrHandler(0x39);
+    sceKernelReleaseIntrHandler(0x3B);
+    sceKernelReleaseIntrHandler(0x3A);
+    sceKernelReleaseIntrHandler(0x1A);
     return 0;
 }
 #endif
@@ -575,18 +575,18 @@ s32 func_00005A70(void) {
 #if FW_VERSION == 100
 s32 func_00005A70(void) {
     sceKernelPowerLock(0);
-    InterruptManagerForKernel_D774BA45(0x3B);
-    InterruptManagerForKernel_D774BA45(0x3A);
-    sceSysreg_driver_A3C8E075();
-    sceSysreg_driver_BFBABB63();
-    sceSysreg_driver_38EC3281(1);
+    sceKernelDisableIntr(0x3B);
+    sceKernelDisableIntr(0x3A);
+    sceSysregUsbIoDisable();
+    sceSysregUsbBusClockDisable();
+    sceSysregUsbClkDisable(1);
     func_0000756C();
     sceKernelPowerUnlock(0);
-    InterruptManagerForKernel_F987B1F0(0x38);
-    InterruptManagerForKernel_F987B1F0(0x39);
-    InterruptManagerForKernel_F987B1F0(0x3B);
-    InterruptManagerForKernel_F987B1F0(0x3A);
-    InterruptManagerForKernel_F987B1F0(0x1A);
+    sceKernelReleaseIntrHandler(0x38);
+    sceKernelReleaseIntrHandler(0x39);
+    sceKernelReleaseIntrHandler(0x3B);
+    sceKernelReleaseIntrHandler(0x3A);
+    sceKernelReleaseIntrHandler(0x1A);
     return 0;
 }
 #endif
@@ -613,18 +613,18 @@ s32 func_00005B10(void) {
 #if FW_VERSION >= 282
 s32 func_00005C38(void) {
     sceKernelPowerLock(0);
-    InterruptManagerForKernel_D774BA45(0x3B);
-    InterruptManagerForKernel_D774BA45(0x3A);
-    sceSysreg_driver_A3C8E075();
-    sceSysreg_driver_BFBABB63();
-    sceSysreg_driver_38EC3281(9);
+    sceKernelDisableIntr(0x3B);
+    sceKernelDisableIntr(0x3A);
+    sceSysregUsbIoDisable();
+    sceSysregUsbBusClockDisable();
+    sceSysregUsbClkDisable(9);
     func_00007504();
     sceKernelPowerUnlock(0);
-    InterruptManagerForKernel_F987B1F0(0x38);
-    InterruptManagerForKernel_F987B1F0(0x39);
-    InterruptManagerForKernel_F987B1F0(0x3B);
-    InterruptManagerForKernel_F987B1F0(0x3A);
-    InterruptManagerForKernel_F987B1F0(0x1A);
+    sceKernelReleaseIntrHandler(0x38);
+    sceKernelReleaseIntrHandler(0x39);
+    sceKernelReleaseIntrHandler(0x3B);
+    sceKernelReleaseIntrHandler(0x3A);
+    sceKernelReleaseIntrHandler(0x1A);
     func_00008BD8();
     return 0;
 }
@@ -714,7 +714,7 @@ INCLUDE_ASM("nonmatchings/usb", func_000072A0);
 
 #if FW_VERSION < 282
 s32 func_0000732C(void) {
-    sceSysreg_driver_692F31FF(8);
+    sceSysregUsbAcquireIntr(8);
     func_00007440();
     return -1;
 }
@@ -724,7 +724,7 @@ INCLUDE_ASM("nonmatchings/usb", func_00007354);
 INCLUDE_ASM("nonmatchings/usb", func_00007440);
 #else
 s32 func_00007344(void) {
-    sceSysreg_driver_692F31FF(8);
+    sceSysregUsbAcquireIntr(8);
     func_00007414();
     return -1;
 }
@@ -736,11 +736,11 @@ INCLUDE_ASM("nonmatchings/usb", func_00007414);
 
 #if FW_VERSION >= 300
 void func_000071AC(void) {
-    sceSysEventForKernel_CD9E4BB5(&D_00009554);
+    sceKernelRegisterSysEventHandler(&D_00009554);
 }
 
 s32 func_00007504(void) {
-    return sceSysEventForKernel_D7D3FDCD(&D_00009554);
+    return sceKernelUnregisterSysEventHandler(&D_00009554);
 }
 #endif
 
@@ -756,11 +756,11 @@ INCLUDE_RODATA("nonmatchings/usb", D_0000A3E4);
 s32 func_0000751C(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_CD9E4BB5(&D_0000AD4C);
+    temp_v0 = sceKernelRegisterSysEventHandler(&D_0000AD4C);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -770,11 +770,11 @@ s32 func_0000751C(void) {
 s32 func_0000751C(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_CD9E4BB5(&D_0000AD8C);
+    temp_v0 = sceKernelRegisterSysEventHandler(&D_0000AD8C);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -784,11 +784,11 @@ s32 func_0000751C(void) {
 s32 func_0000751C(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_CD9E4BB5(&D_0000AA6C);
+    temp_v0 = sceKernelRegisterSysEventHandler(&D_0000AA6C);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -798,11 +798,11 @@ s32 func_0000751C(void) {
 s32 func_0000751C(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_CD9E4BB5(&D_0000AA4C);
+    temp_v0 = sceKernelRegisterSysEventHandler(&D_0000AA4C);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -812,11 +812,11 @@ s32 func_0000751C(void) {
 s32 func_0000751C(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_CD9E4BB5(&D_0000AA3C);
+    temp_v0 = sceKernelRegisterSysEventHandler(&D_0000AA3C);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -826,11 +826,11 @@ s32 func_0000751C(void) {
 s32 func_0000756C(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_D7D3FDCD(&D_0000AD4C);
+    temp_v0 = sceKernelUnregisterSysEventHandler(&D_0000AD4C);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -840,11 +840,11 @@ s32 func_0000756C(void) {
 s32 func_0000756C(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_D7D3FDCD(&D_0000AD8C);
+    temp_v0 = sceKernelUnregisterSysEventHandler(&D_0000AD8C);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -854,11 +854,11 @@ s32 func_0000756C(void) {
 s32 func_0000756C(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_D7D3FDCD(&D_0000AA6C);
+    temp_v0 = sceKernelUnregisterSysEventHandler(&D_0000AA6C);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -868,11 +868,11 @@ s32 func_0000756C(void) {
 s32 func_0000756C(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_D7D3FDCD(&D_0000AA4C);
+    temp_v0 = sceKernelUnregisterSysEventHandler(&D_0000AA4C);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -882,11 +882,11 @@ s32 func_0000756C(void) {
 s32 func_0000756C(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_D7D3FDCD(&D_0000AA3C);
+    temp_v0 = sceKernelUnregisterSysEventHandler(&D_0000AA3C);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -912,11 +912,11 @@ INCLUDE_ASM("nonmatchings/usb", func_0000760C);
 s32 func_000074B4(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_CD9E4BB5(&D_0000B014);
+    temp_v0 = sceKernelRegisterSysEventHandler(&D_0000B014);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot register system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -924,11 +924,11 @@ s32 func_000074B4(void) {
 s32 func_00007504(void) {
     s32 temp_v0;
 
-    temp_v0 = sceSysEventForKernel_D7D3FDCD(&D_0000B014);
+    temp_v0 = sceKernelUnregisterSysEventHandler(&D_0000B014);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot unregister system event handler : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -1068,7 +1068,7 @@ void *func_00008318(struct Unk_func_00008318_0 *arg0, struct Unk_func_00008318_1
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_B1644BE7);
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdRegister);
 
 #if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_0000A7C8);
@@ -1080,7 +1080,7 @@ INCLUDE_RODATA("nonmatchings/usb", D_0000A82C);
 INCLUDE_RODATA("nonmatchings/usb", D_0000A86C);
 #endif
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbBus_driver_C1E2A540);
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdUnregister);
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/usb", func_0000800C);
@@ -1201,11 +1201,11 @@ INCLUDE_ASM("nonmatchings/usb", func_00008B94);
 s32 func_00008BFC(void) {
     s32 temp_v0;
 
-    temp_v0 = sceGpio_driver_317D9D2C(0x17, 2);
+    temp_v0 = sceGpioSetPortMode(0x17, 2);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot finalize GPIO for USB host power supply : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot finalize GPIO for USB host power supply : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }
@@ -1281,11 +1281,11 @@ INCLUDE_ASM("nonmatchings/usb", func_00008B70);
 s32 func_00008BD8(void) {
     s32 temp_v0;
 
-    temp_v0 = sceGpio_driver_317D9D2C(0x17, 2);
+    temp_v0 = sceGpioSetPortMode(0x17, 2);
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("usbbd ERROR : cannot finalize GPIO for USB host power supply : 0x%08x\n", temp_v0);
+        Kprintf("usbbd ERROR : cannot finalize GPIO for USB host power supply : 0x%08x\n", temp_v0);
     }
     return temp_v0;
 }

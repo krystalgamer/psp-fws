@@ -28,6 +28,6 @@ s32 sceKernelPollSema(s32, s32);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
 M2C_UNK sceMeWrapper_driver_3D5F109C(M2C_UNK);
-s32 sceMpegbase_driver_27A2982F(void);
+s32 sceMpegBaseInit(void);
 
 #endif

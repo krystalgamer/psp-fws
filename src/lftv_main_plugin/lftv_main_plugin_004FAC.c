@@ -124,9 +124,9 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_00005588);
 
 #if FW_VERSION == 250
 void func_00005588(s32 arg0) {
-    scePaf_F95EA3F1(arg0 + 0x434, arg0 + 0x160, 0x18);
-    scePaf_F95EA3F1(arg0 + 0x44C, arg0 + 0x178, 0x44);
-    scePaf_F95EA3F1(arg0 + 0x490, arg0 + 0x1BC, 0x7D);
+    sce_paf_private_memcpy(arg0 + 0x434, arg0 + 0x160, 0x18);
+    sce_paf_private_memcpy(arg0 + 0x44C, arg0 + 0x178, 0x44);
+    sce_paf_private_memcpy(arg0 + 0x490, arg0 + 0x1BC, 0x7D);
 }
 #endif
 
@@ -184,7 +184,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_0000573C);
 #if FW_VERSION == 250
 void func_0000573C(s32 arg0, s32 arg1) {
     if (arg1 != 0) {
-        scePaf_6BA9C299(arg1, arg0 + 0x528, 0x60);
+        sce_paf_private_memmove(arg1, arg0 + 0x528, 0x60);
     }
 }
 #endif
@@ -196,7 +196,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_0000576C);
 #if FW_VERSION == 250
 void func_0000576C(s32 arg0, s32 arg1) {
     if (arg1 != 0) {
-        scePaf_6BA9C299(arg0 + 0x528, arg1, 0x60);
+        sce_paf_private_memmove(arg0 + 0x528, arg1, 0x60);
     }
 }
 #endif
@@ -505,9 +505,9 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_00006344);
 
 #if FW_VERSION >= 282 && FW_VERSION < 330
 void func_00006344(s32 arg0) {
-    scePaf_F95EA3F1(arg0 + 0x454, arg0 + 0x160, 0x18);
-    scePaf_F95EA3F1(arg0 + 0x46C, arg0 + 0x178, 0x44);
-    scePaf_F95EA3F1(arg0 + 0x4B0, arg0 + 0x1BC, 0x7D);
+    sce_paf_private_memcpy(arg0 + 0x454, arg0 + 0x160, 0x18);
+    sce_paf_private_memcpy(arg0 + 0x46C, arg0 + 0x178, 0x44);
+    sce_paf_private_memcpy(arg0 + 0x4B0, arg0 + 0x1BC, 0x7D);
 }
 #endif
 
@@ -648,7 +648,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_000067AC);
 #if FW_VERSION >= 282 && FW_VERSION < 330
 void func_000067AC(s32 arg0, s32 arg1) {
     if (arg1 != 0) {
-        scePaf_6BA9C299(arg1, arg0 + 0x548, 0x60);
+        sce_paf_private_memmove(arg1, arg0 + 0x548, 0x60);
     }
 }
 #endif
@@ -660,7 +660,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_000067DC);
 #if FW_VERSION >= 282 && FW_VERSION < 330
 void func_000067DC(s32 arg0, s32 arg1) {
     if (arg1 != 0) {
-        scePaf_6BA9C299(arg0 + 0x548, arg1, 0x60);
+        sce_paf_private_memmove(arg0 + 0x548, arg1, 0x60);
     }
 }
 #endif

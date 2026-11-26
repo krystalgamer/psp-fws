@@ -28,7 +28,7 @@ void func_000041C4(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_FD4C9F47(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_000044FC(arg0, arg1, var_v0);
 }

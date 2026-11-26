@@ -58,10 +58,10 @@ INCLUDE_RODATA("nonmatchings/hpremote", D_000023D8);
 
 INCLUDE_RODATA("nonmatchings/hpremote", D_00001FD8);
 
-INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_1C5BC5A0);
+INCLUDE_ASM("nonmatchings/hpremote", sceHprmInit);
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_2C7B8B05);
+INCLUDE_ASM("nonmatchings/hpremote", sceHprmResume);
 #endif
 
 INCLUDE_ASM("nonmatchings/hpremote", func_000001B8);
@@ -171,90 +171,90 @@ INCLUDE_ASM("nonmatchings/hpremote", sceHprmRegisterCallback);
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_FD7DE6CD);
 
-INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_8EC787E0);
+INCLUDE_ASM("nonmatchings/hpremote", sceHprmUpdateCableType);
 #else
 INCLUDE_ASM("nonmatchings/hpremote", sceHprmUnregitserCallback);
 #endif
 
-INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_BAD0828E);
+INCLUDE_ASM("nonmatchings/hpremote", sceHprmGetModel);
 
 #if FW_VERSION >= 350
-s32 sceHprm_driver_4D1E622C(void) {
+s32 sceHprmReset(void) {
     sceKernelSetEventFlag(D_00002198, 8U);
     return 0;
 }
 #endif
 
 #if FW_VERSION < 282
-s32 sceHprm_driver_F04591FA(s32 arg0) {
+s32 sceHprmSetIdleCancelKey(s32 arg0) {
     D_0000213C = arg0;
     return 0;
 }
 #else
-s32 sceHprm_driver_F04591FA(s32 arg0) {
+s32 sceHprmSetIdleCancelKey(s32 arg0) {
     D_0000225C = arg0;
     return 0;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_1910B327);
+INCLUDE_ASM("nonmatchings/hpremote", sceHprmPeekCurrentKey);
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprmPeekLatch);
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprmReadLatch);
 
 s32 module_start(void) {
-    sceHprm_driver_1C5BC5A0();
+    sceHprmInit();
     return 0;
 }
 
 INCLUDE_ASM("nonmatchings/hpremote", module_reboot_before);
 
-INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_588845DA);
+INCLUDE_ASM("nonmatchings/hpremote", sceHprmEnd);
 
 #if FW_VERSION >= 350
-s32 sceHprm_driver_526BB7F4(void) {
+s32 sceHprmSuspend(void) {
     D_000025B4 = 1;
-    sceSysreg_driver_BB823481(4);
-    sceSysreg_driver_7725CA08(4);
+    sceSysregUartIoDisable(4);
+    sceSysregUartClkEnable(4);
     return 0;
 }
 #endif
 
 #if FW_VERSION == 340
-s32 sceHprm_driver_526BB7F4(void) {
+s32 sceHprmSuspend(void) {
     D_00002244_v340 = 1;
-    sceSysreg_driver_BB823481(4);
-    sceSysreg_driver_7725CA08(4);
+    sceSysregUartIoDisable(4);
+    sceSysregUartClkEnable(4);
     return 0;
 }
 #endif
 
 #if FW_VERSION == 330
-s32 sceHprm_driver_526BB7F4(void) {
+s32 sceHprmSuspend(void) {
     D_00002244_v330 = 1;
-    sceSysreg_driver_BB823481(4);
-    sceSysreg_driver_7725CA08(4);
+    sceSysregUartIoDisable(4);
+    sceSysregUartClkEnable(4);
     return 0;
 }
 #endif
 
 #if FW_VERSION < 330
-s32 sceHprm_driver_526BB7F4(void) {
-    sceSysreg_driver_BB823481(4);
-    sceSysreg_driver_7725CA08(4);
+s32 sceHprmSuspend(void) {
+    sceSysregUartIoDisable(4);
+    sceSysregUartClkEnable(4);
     return 0;
 }
 #endif
 
 #if FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_2C7B8B05);
+INCLUDE_ASM("nonmatchings/hpremote", sceHprmResume);
 #endif
 
-INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_D22913DB);
+INCLUDE_ASM("nonmatchings/hpremote", sceHprmSetConnectCallback);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-u8 sceHprm_driver_71B5FB67(void) {
+u8 sceHprmGetHpDetect(void) {
     return D_00002176;
 }
 #endif
@@ -272,14 +272,14 @@ s32 sceHprmIsMicrophoneExist(void) {
     return __builtin_allegrex_max(D_00002143, 0);
 }
 
-s32 sceHprm_driver_4D1E622C(void) {
+s32 sceHprmReset(void) {
     sceKernelSetEventFlag(D_00002078, 8U);
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_7B038374);
+INCLUDE_ASM("nonmatchings/hpremote", sceHprmGetInternalState);
 
-s32 sceHprm_driver_971AE8FB(s32 *arg0) {
+s32 sceHprmGetIdleCancelKey(s32 *arg0) {
     if (arg0 != NULL) {
         *arg0 = D_0000213C;
     }
@@ -295,11 +295,11 @@ INCLUDE_ASM("nonmatchings/hpremote", func_00001250);
 s32 func_00001250(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x1000C:
-        sceHprm_driver_2C7B8B05();
+        sceHprmResume();
         break;
     case 0x400C:
-        sceSysreg_driver_BB823481(4);
-        sceSysreg_driver_7725CA08(4);
+        sceSysregUartIoDisable(4);
+        sceSysregUartClkEnable(4);
         break;
     }
     return 0;
@@ -307,7 +307,7 @@ s32 func_00001250(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 282
-u8 sceHprm_driver_71B5FB67(void) {
+u8 sceHprmGetHpDetect(void) {
     return D_00002226;
 }
 
@@ -325,27 +325,27 @@ s32 sceHprmIsMicrophoneExist(void) {
 #endif
 
 #if FW_VERSION >= 310
-s32 sceHprm_driver_C1777D84(void) {
+s32 sceHprmGetCableType(void) {
     return D_000022B0;
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-s32 sceHprm_driver_4D1E622C(void) {
+s32 sceHprmReset(void) {
     sceKernelSetEventFlag(D_00002198, 8U);
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 282
-s32 sceHprm_driver_7B038374(M2C_UNK **arg0) {
+s32 sceHprmGetInternalState(M2C_UNK **arg0) {
     if (arg0 != NULL) {
         *arg0 = &D_00002080;
     }
     return D_00002080.unk120;
 }
 
-s32 sceHprm_driver_971AE8FB(s32 *arg0) {
+s32 sceHprmGetIdleCancelKey(s32 *arg0) {
     if (arg0 != NULL) {
         *arg0 = D_0000225C;
     }
@@ -367,11 +367,11 @@ void func_000016EC(s8 arg0) {
 s32 func_0000134C(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x1000C:
-        sceHprm_driver_2C7B8B05();
+        sceHprmResume();
         break;
     case 0x400C:
-        sceSysreg_driver_BB823481(4);
-        sceSysreg_driver_7725CA08(4);
+        sceSysregUartIoDisable(4);
+        sceSysregUartClkEnable(4);
         break;
     }
     return 0;

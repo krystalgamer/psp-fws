@@ -956,7 +956,7 @@
   "sceHttpSendRequest": "s32 sceHttpSendRequest(s32, void *, u32);",
   "sceHttp_457D221D": "M2C_UNK sceHttp_457D221D();",
   "sceHttp_B0257723": "M2C_UNK sceHttp_B0257723();",
-  "sceHttp_DD6E7857": "M2C_UNK sceHttp_DD6E7857();",
+  "sceHttpSaveAuthList": "M2C_UNK sceHttpSaveAuthList();",
   "sceIoClose": "s32 sceIoClose(s32);",
   "sceIoDclose": "M2C_UNK sceIoDclose(s32);",
   "sceIoDevctl": "s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);",

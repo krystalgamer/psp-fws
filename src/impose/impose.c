@@ -82,11 +82,11 @@ s32 func_000004C4(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_9C8C6C81);
+INCLUDE_ASM("nonmatchings/impose", sceImposeSetStatus);
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_531C9778);
+INCLUDE_ASM("nonmatchings/impose", sceImposeGetParam);
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_810FB7FB);
+INCLUDE_ASM("nonmatchings/impose", sceImposeSetParam);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 270
@@ -368,11 +368,11 @@ s32 func_0000070C(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_9C8C6C81);
+INCLUDE_ASM("nonmatchings/impose", sceImposeSetStatus);
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_531C9778);
+INCLUDE_ASM("nonmatchings/impose", sceImposeGetParam);
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_810FB7FB);
+INCLUDE_ASM("nonmatchings/impose", sceImposeSetParam);
 
 INCLUDE_ASM("nonmatchings/impose", sceImposeSetLanguageMode);
 
@@ -456,11 +456,11 @@ s32 func_0000070C(void) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_9C8C6C81);
+INCLUDE_ASM("nonmatchings/impose", sceImposeSetStatus);
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_531C9778);
+INCLUDE_ASM("nonmatchings/impose", sceImposeGetParam);
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_810FB7FB);
+INCLUDE_ASM("nonmatchings/impose", sceImposeSetParam);
 
 INCLUDE_ASM("nonmatchings/impose", sceImposeSetLanguageMode);
 
@@ -498,14 +498,14 @@ s32 func_000012B8(void) {
 #if FW_VERSION >= 350
 void func_000012E4(void) {
     sceDisplaySetMode(M2C_FIELD(D_0000F510, s32 *, 0x264), M2C_FIELD(D_0000F510, s32 *, 0x268), M2C_FIELD(D_0000F510, s32 *, 0x26C));
-    sceCodec_driver_20C61103(M2C_FIELD(D_0000F510, s32 *, 0x270));
+    sceCodecSelectVolumeTable(M2C_FIELD(D_0000F510, s32 *, 0x270));
 }
 #endif
 
 #if FW_VERSION >= 330 && FW_VERSION < 350
 void func_000012E4(void) {
     sceDisplaySetMode(M2C_FIELD(D_0000F510, s32 *, 0x250), M2C_FIELD(D_0000F510, s32 *, 0x254), M2C_FIELD(D_0000F510, s32 *, 0x258));
-    sceCodec_driver_20C61103(M2C_FIELD(D_0000F510, s32 *, 0x25C));
+    sceCodecSelectVolumeTable(M2C_FIELD(D_0000F510, s32 *, 0x25C));
 }
 #endif
 
@@ -518,21 +518,21 @@ INCLUDE_ASM("nonmatchings/impose", func_00001504);
 #endif
 
 #if FW_VERSION >= 330
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_116CFF64);
+INCLUDE_ASM("nonmatchings/impose", sceImposeCheckVideoOut);
 #endif
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", sceImpose_A9884B00);
 #endif
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_BDBC42A6);
+INCLUDE_ASM("nonmatchings/impose", sceImposeInit);
 
 #if FW_VERSION < 270
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_C7E36CC7);
+INCLUDE_ASM("nonmatchings/impose", sceImposeEnd);
 #endif
 
 #if FW_VERSION >= 350
-s32 sceImpose_driver_C7E36CC7(void) {
+s32 sceImposeEnd(void) {
     if (M2C_FIELD(D_0000F510, s32 *, 0x94) >= 0) {
         M2C_FIELD(D_0000F510, s32 *, 0xD0) = 1;
         func_00000000(8U);
@@ -540,7 +540,7 @@ s32 sceImpose_driver_C7E36CC7(void) {
             sceKernelDelayThread(0x186A0U);
         } while (M2C_FIELD(D_0000F510, s32 *, 0xD0) != 0);
     }
-    sceSysEventForKernel_D7D3FDCD(&D_00012884);
+    sceKernelUnregisterSysEventHandler(&D_00012884);
     sceKernelSetEventFlag(M2C_FIELD(D_0000F510, u32 *, 0), 0x80000000U);
     sceKernelWaitThreadEnd(M2C_FIELD(D_0000F510, s32 *, 4), NULL);
     sceKernelDeleteThread(M2C_FIELD(D_0000F510, s32 *, 4));
@@ -551,7 +551,7 @@ s32 sceImpose_driver_C7E36CC7(void) {
 #endif
 
 #if FW_VERSION >= 330 && FW_VERSION < 350
-s32 sceImpose_driver_C7E36CC7(void) {
+s32 sceImposeEnd(void) {
     if (M2C_FIELD(D_0000F510, s32 *, 0x8C) >= 0) {
         M2C_FIELD(D_0000F510, s32 *, 0xC8) = 1;
         func_00000000(8U);
@@ -559,7 +559,7 @@ s32 sceImpose_driver_C7E36CC7(void) {
             sceKernelDelayThread(0x186A0U);
         } while (M2C_FIELD(D_0000F510, s32 *, 0xC8) != 0);
     }
-    sceSysEventForKernel_D7D3FDCD(&D_000102A4);
+    sceKernelUnregisterSysEventHandler(&D_000102A4);
     sceKernelSetEventFlag(M2C_FIELD(D_0000F510, u32 *, 0), 0x80000000U);
     sceKernelWaitThreadEnd(M2C_FIELD(D_0000F510, s32 *, 4), NULL);
     sceKernelDeleteThread(M2C_FIELD(D_0000F510, s32 *, 4));
@@ -570,7 +570,7 @@ s32 sceImpose_driver_C7E36CC7(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_1AEED8FE);
+INCLUDE_ASM("nonmatchings/impose", sceImposeSuspend);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
@@ -608,31 +608,31 @@ INCLUDE_ASM("nonmatchings/impose", func_00000FD8);
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
-s32 sceImpose_driver_1B6E3400(void) {
+s32 sceImposeGetStatus(void) {
     return M2C_FIELD(D_00018648, s32 *, 0x78);
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 270
-s32 sceImpose_driver_1B6E3400(void) {
+s32 sceImposeGetStatus(void) {
     return M2C_FIELD(D_00018648, s32 *, 0x6C);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 sceImpose_driver_1B6E3400(void) {
+s32 sceImposeGetStatus(void) {
     return M2C_FIELD(D_00018648, s32 *, 0x68);
 }
 #endif
 
 #if FW_VERSION == 100
-s32 sceImpose_driver_1B6E3400(void) {
+s32 sceImposeGetStatus(void) {
     return M2C_FIELD(D_00018648, s32 *, 0x58);
 }
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
-s32 sceImpose_driver_B415FC59(void) {
+s32 sceImposeChanges(void) {
     s32 temp_v0;
 
     temp_v0 = M2C_FIELD(D_00018648, s32 *, 0x90);
@@ -642,7 +642,7 @@ s32 sceImpose_driver_B415FC59(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 270
-s32 sceImpose_driver_B415FC59(void) {
+s32 sceImposeChanges(void) {
     s32 temp_v0;
 
     temp_v0 = M2C_FIELD(D_00018648, s32 *, 0x84);
@@ -652,7 +652,7 @@ s32 sceImpose_driver_B415FC59(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 sceImpose_driver_B415FC59(void) {
+s32 sceImposeChanges(void) {
     s32 temp_v0;
 
     temp_v0 = M2C_FIELD(D_00018648, s32 *, 0x80);
@@ -662,7 +662,7 @@ s32 sceImpose_driver_B415FC59(void) {
 #endif
 
 #if FW_VERSION == 100
-s32 sceImpose_driver_B415FC59(void) {
+s32 sceImposeChanges(void) {
     s32 temp_v0;
 
     temp_v0 = M2C_FIELD(D_00018648, s32 *, 0x70);
@@ -672,12 +672,12 @@ s32 sceImpose_driver_B415FC59(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 sceImpose_driver_5595A71A(s32 arg0) {
+s32 sceImposeSetHomePopup(s32 arg0) {
     func_000043F8(arg0 ^ 1, 1);
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_0F341BE4);
+INCLUDE_ASM("nonmatchings/impose", sceImposeGetHomePopup);
 
 s32 sceImposeSetUMDPopup(s32 arg0) {
     func_000043F8(arg0 ^ 1, 2);
@@ -686,13 +686,13 @@ s32 sceImposeSetUMDPopup(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/impose", sceImposeGetUMDPopup);
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_381BD9E7);
+INCLUDE_ASM("nonmatchings/impose", sceImposeHomeButton);
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
-s32 sceImpose_driver_C7E36CC7(void) {
+s32 sceImposeEnd(void) {
     func_0000070C();
-    sceSysEventForKernel_D7D3FDCD(&D_0000F334);
+    sceKernelUnregisterSysEventHandler(&D_0000F334);
     sceKernelSetEventFlag(M2C_FIELD(D_00018648, u32 *, 0), 0x80000000U);
     sceKernelWaitThreadEnd(M2C_FIELD(D_00018648, s32 *, 4), NULL);
     sceKernelDeleteThread(M2C_FIELD(D_00018648, s32 *, 4));
@@ -709,7 +709,7 @@ s32 syslib_ADF12745(s32 arg0) {
             sceDisplaySetHoldMode(arg0);
         }
         func_0000070C();
-        sceSysEventForKernel_D7D3FDCD(&D_0000F334);
+        sceKernelUnregisterSysEventHandler(&D_0000F334);
         sceKernelSetEventFlag(M2C_FIELD(D_00018648, u32 *, 0), 0x80000000U);
         sceKernelWaitThreadEnd(M2C_FIELD(D_00018648, s32 *, 4), NULL);
         sceKernelDeleteThread(M2C_FIELD(D_00018648, s32 *, 4));
@@ -728,7 +728,7 @@ s32 syslib_ADF12745(s32 arg0) {
         if (M2C_FIELD(D_00018648, s32 *, 0x6C) < 0) {
             sceDisplaySetHoldMode(1);
         }
-        sceImpose_driver_C7E36CC7();
+        sceImposeEnd();
     }
     return 0;
 }
@@ -739,20 +739,20 @@ s32 module_reboot_before(void) {
     if (M2C_FIELD(D_00018648, s32 *, 0x68) < 0) {
         sceDisplaySetHoldMode(1);
     }
-    sceImpose_driver_C7E36CC7();
+    sceImposeEnd();
     return 0;
 }
 #endif
 
 #if FW_VERSION == 100
 s32 module_reboot_before(void) {
-    sceImpose_driver_C7E36CC7();
+    sceImposeEnd();
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 330
-s32 sceImpose_driver_C7E36CC7(void) {
+s32 sceImposeEnd(void) {
     if (M2C_FIELD(D_0000F510, s32 *, 0x80) >= 0) {
         M2C_FIELD(D_0000F510, s32 *, 0xBC) = 1;
         func_00000000(8U);
@@ -760,7 +760,7 @@ s32 sceImpose_driver_C7E36CC7(void) {
             sceKernelDelayThread(0x186A0U);
         } while (M2C_FIELD(D_0000F510, s32 *, 0xBC) != 0);
     }
-    sceSysEventForKernel_D7D3FDCD(&D_0000F514);
+    sceKernelUnregisterSysEventHandler(&D_0000F514);
     sceKernelSetEventFlag(M2C_FIELD(D_0000F510, u32 *, 0), 0x80000000U);
     sceKernelWaitThreadEnd(M2C_FIELD(D_0000F510, s32 *, 4), NULL);
     sceKernelDeleteThread(M2C_FIELD(D_0000F510, s32 *, 4));
@@ -780,12 +780,12 @@ s32 syslib_ADF12745(s32 arg0) {
         temp_a2 = M2C_FIELD(D_0000F510, s32 *, 0x94);
         if (temp_a2 >= 0) {
             if (temp_a2 & 2) {
-                sceImpose_driver_9C8C6C81(1);
+                sceImposeSetStatus(1);
             }
         } else {
             sceDisplaySetHoldMode(arg0);
         }
-        sceImpose_driver_C7E36CC7();
+        sceImposeEnd();
     }
     return 0;
 }
@@ -801,12 +801,12 @@ s32 syslib_ADF12745(s32 arg0) {
         temp_a2 = M2C_FIELD(D_0000F510, s32 *, 0x8C);
         if (temp_a2 >= 0) {
             if (temp_a2 & 2) {
-                sceImpose_driver_9C8C6C81(1);
+                sceImposeSetStatus(1);
             }
         } else {
             sceDisplaySetHoldMode(arg0);
         }
-        sceImpose_driver_C7E36CC7();
+        sceImposeEnd();
     }
     return 0;
 }
@@ -822,19 +822,19 @@ s32 syslib_ADF12745(s32 arg0) {
         temp_a2 = M2C_FIELD(D_0000F510, s32 *, 0x80);
         if (temp_a2 >= 0) {
             if (temp_a2 & 2) {
-                sceImpose_driver_9C8C6C81(1);
+                sceImposeSetStatus(1);
             }
         } else {
             sceDisplaySetHoldMode(arg0);
         }
-        sceImpose_driver_C7E36CC7();
+        sceImposeEnd();
     }
     return 0;
 }
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_1AEED8FE);
+INCLUDE_ASM("nonmatchings/impose", sceImposeSuspend);
 #endif
 
 #if FW_VERSION >= 350
@@ -870,25 +870,25 @@ INCLUDE_ASM("nonmatchings/impose", func_00001FB0);
 #endif
 
 #if FW_VERSION >= 350
-s32 sceImpose_driver_1B6E3400(void) {
+s32 sceImposeGetStatus(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x94);
 }
 #endif
 
 #if FW_VERSION >= 330 && FW_VERSION < 350
-s32 sceImpose_driver_1B6E3400(void) {
+s32 sceImposeGetStatus(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x8C);
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 330
-s32 sceImpose_driver_1B6E3400(void) {
+s32 sceImposeGetStatus(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x80);
 }
 #endif
 
 #if FW_VERSION >= 350
-s32 sceImpose_driver_B415FC59(void) {
+s32 sceImposeChanges(void) {
     s32 temp_v0;
 
     temp_v0 = M2C_FIELD(D_0000F510, s32 *, 0xAC);
@@ -898,7 +898,7 @@ s32 sceImpose_driver_B415FC59(void) {
 #endif
 
 #if FW_VERSION >= 330 && FW_VERSION < 350
-s32 sceImpose_driver_B415FC59(void) {
+s32 sceImposeChanges(void) {
     s32 temp_v0;
 
     temp_v0 = M2C_FIELD(D_0000F510, s32 *, 0xA4);
@@ -908,7 +908,7 @@ s32 sceImpose_driver_B415FC59(void) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 330
-s32 sceImpose_driver_B415FC59(void) {
+s32 sceImposeChanges(void) {
     s32 temp_v0;
 
     temp_v0 = M2C_FIELD(D_0000F510, s32 *, 0x98);
@@ -918,12 +918,12 @@ s32 sceImpose_driver_B415FC59(void) {
 #endif
 
 #if FW_VERSION >= 282
-s32 sceImpose_driver_5595A71A(s32 arg0) {
+s32 sceImposeSetHomePopup(s32 arg0) {
     func_000047EC(arg0 ^ 1, 1);
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_0F341BE4);
+INCLUDE_ASM("nonmatchings/impose", sceImposeGetHomePopup);
 
 s32 sceImposeSetUMDPopup(s32 arg0) {
     func_000047EC(arg0 ^ 1, 2);
@@ -932,7 +932,7 @@ s32 sceImposeSetUMDPopup(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/impose", sceImposeGetUMDPopup);
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_381BD9E7);
+INCLUDE_ASM("nonmatchings/impose", sceImposeHomeButton);
 
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_9DBCE0C4);
 #endif
@@ -964,7 +964,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetBacklightOffTime);
 #endif
 
 #if FW_VERSION >= 330
-void sceImpose_driver_116DDED6(s32 arg0, s32 arg1, s32 arg2) {
+void sceImposeSetVideoOutMode(s32 arg0, s32 arg1, s32 arg2) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -991,13 +991,13 @@ s32 syslib_ADF12745(s32 arg0) {
         if (M2C_FIELD(D_0000F510, s32 *, 0x80) < 0) {
             sceDisplaySetHoldMode(arg0);
         }
-        sceImpose_driver_C7E36CC7();
+        sceImposeEnd();
     }
     return 0;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_86924032);
+INCLUDE_ASM("nonmatchings/impose", sceImposeResume);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceAudioRoutingSetMode(s32 arg0) {
@@ -1203,7 +1203,7 @@ void func_00001D04(s32 arg0) {
                 if (!(temp_v1 & 0x10)) {
                     var_a0 = 0xA012;
                 }
-                sceImpose_driver_9C8C6C81(var_a0);
+                sceImposeSetStatus(var_a0);
             }
         }
         if ((arg0 & 0x400000) && !(M2C_FIELD(D_00018648, s32 *, 0x60) & 0x400000)) {

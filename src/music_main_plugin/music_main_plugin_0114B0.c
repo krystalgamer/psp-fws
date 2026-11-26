@@ -132,7 +132,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011B24);
 INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011B58);
 #else
 void func_00011B58(void) {
-    D_000A43D0 = vsh_81BBD0D1(vsh_34DA1B67(), D_000A3254);
+    D_000A43D0 = _ZN3vsh10FixedAlloc4LockEPKc(_ZN3vsh10FixedAlloc8InstanceEv(), D_000A3254);
 }
 #endif
 
@@ -140,6 +140,6 @@ void func_00011B58(void) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011B8C);
 #else
 void func_00011B8C(void) {
-    vsh_6286E89D(vsh_34DA1B67(), D_000A3254);
+    _ZN3vsh10FixedAlloc6UnlockEPKc(_ZN3vsh10FixedAlloc8InstanceEv(), D_000A3254);
 }
 #endif

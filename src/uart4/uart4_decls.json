@@ -1,24 +1,24 @@
 {
  "funcs": {
-  "KDebugForKernel_66253C4E": "M2C_UNK KDebugForKernel_66253C4E(M2C_UNK *);",
-  "KDebugForKernel_7D1C74F0": "M2C_UNK KDebugForKernel_7D1C74F0(M2C_UNK);",
-  "KDebugForKernel_E146606D": "M2C_UNK KDebugForKernel_E146606D(M2C_UNK *);",
-  "KDebugForKernel_E6554FDA": "M2C_UNK KDebugForKernel_E6554FDA(M2C_UNK *);",
-  "Uart4ForKernel_69BCBEF1": "void Uart4ForKernel_69BCBEF1(s8 arg0);",
-  "Uart4ForKernel_C0BE3133": "s32 Uart4ForKernel_C0BE3133(s8 arg0);",
-  "Uart4ForKernel_C703109F": "s32 Uart4ForKernel_C703109F(s32);",
-  "Uart4ForKernel_D00E3D06": "M2C_UNK Uart4ForKernel_D00E3D06();",
+  "sceKernelRegisterDebugWrite": "M2C_UNK sceKernelRegisterDebugWrite(M2C_UNK *);",
+  "sceKernelDebugEchoSet": "M2C_UNK sceKernelDebugEchoSet(M2C_UNK);",
+  "sceKernelRegisterDebugPutchar": "M2C_UNK sceKernelRegisterDebugPutchar(M2C_UNK *);",
+  "sceKernelRegisterDebugRead": "M2C_UNK sceKernelRegisterDebugRead(M2C_UNK *);",
+  "sceKernelUart4SendCharFix": "void sceKernelUart4SendCharFix(s8 arg0);",
+  "sceKernelUart4SendChar": "s32 sceKernelUart4SendChar(s8 arg0);",
+  "sceKernelUart4PostChar": "s32 sceKernelUart4PostChar(s32);",
+  "sceKernelUart4Init": "M2C_UNK sceKernelUart4Init();",
   "func_00000398": "void func_00000398(void);",
   "func_00000458": "s32 func_00000458(void);",
   "func_00000480": "void func_00000480(void);",
   "func_00000504": "void func_00000504(void);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
-  "syslib_D3744BE0": "s32 syslib_D3744BE0(void);"
+  "module_bootstart": "s32 module_bootstart(void);"
  },
  "vars": {
-  "Uart4ForKernel_2518C2F3": "extern M2C_UNK Uart4ForKernel_2518C2F3;",
-  "Uart4ForKernel_2FD96F62": "extern M2C_UNK Uart4ForKernel_2FD96F62;",
+  "sceKernelUart4SendBytesFix": "extern M2C_UNK sceKernelUart4SendBytesFix;",
+  "sceKernelUart4ReceiveBytesFix": "extern M2C_UNK sceKernelUart4ReceiveBytesFix;",
   "func_00000000": "extern M2C_UNK func_00000000;"
  }
 }

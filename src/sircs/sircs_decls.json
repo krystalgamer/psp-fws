@@ -1,7 +1,7 @@
 {
  "funcs": {
-  "InterruptManagerForKernel_F987B1F0": "M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);",
-  "IoFileMgrForKernel_8E982A74": "M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);",
+  "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
+  "sceIoAddDrv": "M2C_UNK sceIoAddDrv(M2C_UNK *);",
   "func_000004D8": "void func_000004D8(void);",
   "func_00000518": "void func_00000518(void);",
   "func_00000554": "s32 func_00000554(void);",
@@ -31,19 +31,19 @@
   "func_00001C34": "s32 func_00001C34(void);",
   "func_00001D5C": "s32 func_00001D5C(void);",
   "module_reboot_before": "s32 module_reboot_before(void);",
-  "sceGpio_driver_310F0CCF": "M2C_UNK sceGpio_driver_310F0CCF(M2C_UNK);",
+  "sceGpioPortSet": "M2C_UNK sceGpioPortSet(M2C_UNK);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
   "sceKernelPowerLock": "s32 sceKernelPowerLock(s32);",
   "sceKernelPowerUnlock": "s32 sceKernelPowerUnlock(s32);",
   "sceKernelSetAlarm": "s32 sceKernelSetAlarm(u32, s32, void *);",
   "sceKernelWaitEventFlag": "s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);",
-  "sceSircs_driver_19155A2F": "s32 sceSircs_driver_19155A2F(void);",
-  "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
-  "sceSysreg_driver_20388C9E": "M2C_UNK sceSysreg_driver_20388C9E();",
-  "sceSysreg_driver_26FA0928": "M2C_UNK sceSysreg_driver_26FA0928();",
-  "sceSysreg_driver_7725CA08": "M2C_UNK sceSysreg_driver_7725CA08(M2C_UNK);",
-  "sceSysreg_driver_BB823481": "M2C_UNK sceSysreg_driver_BB823481(M2C_UNK);"
+  "sceSircsEnd": "s32 sceSircsEnd(void);",
+  "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
+  "sceSysregSircsClkDisable": "M2C_UNK sceSysregSircsClkDisable();",
+  "sceSysregSircsIoDisable": "M2C_UNK sceSysregSircsIoDisable();",
+  "sceSysregUartClkEnable": "M2C_UNK sceSysregUartClkEnable(M2C_UNK);",
+  "sceSysregUartIoDisable": "M2C_UNK sceSysregUartIoDisable(M2C_UNK);"
  },
  "types": {
   "D_00002770_s": "struct D_00002770_s {\n    s32 unk0;\n    u8 pad4[0x18];\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};",

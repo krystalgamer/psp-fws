@@ -1,11 +1,11 @@
 // NID-derived names
-sceAsfParser_91B11F3A = 0x00000000; // type:func
-sceAsfParser_6B3AE857 = 0x0000007C; // type:func
+sceAsfInitParser = 0x00000000; // type:func
+sceAsfSeekTime = 0x0000007C; // type:func
 sceAsfParser_49E09367 = 0x000000F0; // type:func
-sceAsfParser_B9E4BD9E = 0x00000228; // type:func
-sceAsfParser_8B08301F = 0x00000230; // type:func
-sceAsfParser_95AD7B34 = 0x00000238; // type:func
-sceAsfParser_2CB147F7 = 0x00000274; // type:func
+sceAsfParserStartEntry = 0x00000228; // type:func
+sceAsfParserEndEntry = 0x00000230; // type:func
+sceAsfCheckNeedMem = 0x00000238; // type:func
+sceAsfGetFrameData = 0x00000274; // type:func
 sceAsfParser_F4502CB5 = 0x000002BC; // type:func
 sceAsfParser_002052FF = 0x000002F8; // type:func
 sceAsfParser_385E1320 = 0x00000328; // type:func

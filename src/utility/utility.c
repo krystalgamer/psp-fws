@@ -82,7 +82,7 @@ INCLUDE_ASM("nonmatchings/utility", module_start);
 
 INCLUDE_RODATA("nonmatchings/utility", D_00006C98);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_driver_F062AEA6);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityInit);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/utility", func_000000B4);
@@ -95,52 +95,52 @@ INCLUDE_ASM("nonmatchings/utility", sceUtility_private_4ABA7FF9);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_A5168A5D);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogLoadModule);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_970F9C89);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogCtrlPeekBufferPositive);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/utility", func_00000780);
 
 s32 module_start(void) {
-    sceUtility_driver_F062AEA6();
+    sceUtilityInit();
     return 0;
 }
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_driver_20C68C34);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityEnd);
 #endif
 
 #if FW_VERSION == 152
-s32 sceUtility_driver_20C68C34(void) {
-    sceSysEventForKernel_D7D3FDCD(&D_00004FC0_v152);
+s32 sceUtilityEnd(void) {
+    sceKernelUnregisterSysEventHandler(&D_00004FC0_v152);
     return 0;
 }
 #endif
 
 #if FW_VERSION == 150
-s32 sceUtility_driver_20C68C34(void) {
-    sceSysEventForKernel_D7D3FDCD(&D_00004FC0_v150);
+s32 sceUtilityEnd(void) {
+    sceKernelUnregisterSysEventHandler(&D_00004FC0_v150);
     return 0;
 }
 #endif
 
 #if FW_VERSION == 100
-s32 sceUtility_driver_20C68C34(void) {
-    sceSysEventForKernel_D7D3FDCD(&D_00004F80);
+s32 sceUtilityEnd(void) {
+    sceKernelUnregisterSysEventHandler(&D_00004F80);
     sceKernelDeleteSema(D_000050F0);
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 sceUtility_driver_20C68C34(void) {
+s32 sceUtilityEnd(void) {
     func_000015AC();
-    sceSysEventForKernel_D7D3FDCD(&D_00006980);
+    sceKernelUnregisterSysEventHandler(&D_00006980);
     return 0;
 }
 
@@ -208,24 +208,24 @@ s32 sceUtility_private_1DFA62EF(void) {
     return 0;
 }
 
-s32 sceUtility_private_680C0EA8(s32 arg0) {
+s32 sceUtilityDialogSetStatus(s32 arg0) {
     D_00006C34 = arg0;
     return 0;
 }
 
-s32 sceUtility_private_B222E887(void) {
+s32 sceUtilityDialogGetType(void) {
     return D_00006C2C;
 }
 
-s32 sceUtility_private_4F2206BC(void) {
+s32 sceUtilityDialogGetParam(void) {
     return D_00006C3C;
 }
 
-s32 sceUtility_private_EF5BC2D1(void) {
+s32 sceUtilityDialogGetStructVersion(void) {
     return D_00006C40;
 }
 
-s32 sceUtility_private_E01FE32A(void) {
+s32 sceUtilityDialogGetSpeed(void) {
     return D_00006C44;
 }
 #endif
@@ -243,22 +243,22 @@ s32 sceUtility_private_19461966(void) {
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 sceUtility_private_6F923BD3(s32 arg0) {
+s32 sceUtilityDialogSetThreadId(s32 arg0) {
     D_00006C20 = arg0;
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_7635200E);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogGetGameInfo);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_3CEAE1DF);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogPowerLock);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_56BEDCA4);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogPowerUnlock);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_E921B59E);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogCtrlSetSamplingMode);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_06AE20E5);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogCtrlGetSamplingMode);
 #endif
 
 #if FW_VERSION < 250
@@ -304,7 +304,7 @@ INCLUDE_ASM("nonmatchings/utility", func_000011C4);
 
 INCLUDE_ASM("nonmatchings/utility", func_0000135C);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_00948E27);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletLoadModule);
 #endif
 
 #if FW_VERSION == 260
@@ -560,51 +560,51 @@ s32 sceUtility_private_B96C67EC(void) {
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_680C0EA8);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogSetStatus);
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_B222E887);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogGetType);
 #endif
 
 #if FW_VERSION < 201
-s32 sceUtility_private_B222E887(void) {
+s32 sceUtilityDialogGetType(void) {
     return D_00005100;
 }
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_4F2206BC);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogGetParam);
 #endif
 
 #if FW_VERSION < 201
-s32 sceUtility_private_4F2206BC(void) {
+s32 sceUtilityDialogGetParam(void) {
     return D_0000510C;
 }
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_EF5BC2D1);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogGetStructVersion);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 sceUtility_private_EF5BC2D1(void) {
+s32 sceUtilityDialogGetStructVersion(void) {
     return D_0000514C;
 }
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_E01FE32A);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogGetSpeed);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 sceUtility_private_E01FE32A(void) {
+s32 sceUtilityDialogGetSpeed(void) {
     return D_00005150;
 }
 #endif
 
 #if FW_VERSION == 100
-s32 sceUtility_private_E01FE32A(void) {
+s32 sceUtilityDialogGetSpeed(void) {
     return D_00005110;
 }
 #endif
@@ -626,11 +626,11 @@ s32 sceUtility_private_19461966(void) {
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_6F923BD3);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogSetThreadId);
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_7635200E);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogGetGameInfo);
 #endif
 
 #if FW_VERSION >= 282
@@ -652,13 +652,13 @@ INCLUDE_ASM("nonmatchings/utility", sceUtility_private_4ABA7FF9);
 #endif
 
 #if FW_VERSION < 250 || (FW_VERSION >= 282 && FW_VERSION < 350)
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_A5168A5D);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogLoadModule);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_3CEAE1DF);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogPowerLock);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_56BEDCA4);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogPowerUnlock);
 
 INCLUDE_ASM("nonmatchings/utility", func_000013BC);
 #endif
@@ -790,83 +790,83 @@ s32 sceUtility_private_2FE219D7(void) {
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_97F922A3);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletSetStatus);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 sceUtility_private_97F922A3(s32 arg0) {
+s32 sceUtilityAppletSetStatus(s32 arg0) {
     D_00006C70 = arg0;
     return 0;
 }
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_463EA95E);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletGetType);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 sceUtility_private_463EA95E(void) {
+s32 sceUtilityAppletGetType(void) {
     return D_00006C6C;
 }
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_AB46A24F);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletGetParam);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 sceUtility_private_AB46A24F(void) {
+s32 sceUtilityAppletGetParam(void) {
     return D_00006C74;
 }
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_4B677BA1);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletGetStructVersion);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 sceUtility_private_4B677BA1(void) {
+s32 sceUtilityAppletGetStructVersion(void) {
     return D_00006C78;
 }
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_75FF798C);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletGetSpeed);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 sceUtility_private_75FF798C(void) {
+s32 sceUtilityAppletGetSpeed(void) {
     return D_00006C7C;
 }
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_9BAE7DCE);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletSetThreadId);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 sceUtility_private_9BAE7DCE(s32 arg0) {
+s32 sceUtilityAppletSetThreadId(s32 arg0) {
     D_00006C64 = arg0;
     return 0;
 }
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_00948E27);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletLoadModule);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_4ACD6532);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletUnloadModule);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void sceUtility_private_4ACD6532(void) {
+void sceUtilityAppletUnloadModule(void) {
     func_0000197C();
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_976F7805);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletRegisterPowerCallback);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_E542E9D8);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletUnregisterPowerCallback);
 #endif
 
 #if FW_VERSION == 271
@@ -886,7 +886,7 @@ s32 func_00001C48(s32 arg0, s32 arg1, void *arg2) {
             var_a2 = (void *) (var_a3 & 0x400);
             var_s0 = (var_a2 != NULL) ? 0x480000 : 0x380000;
         }
-        KDebugForKernel_84F370BC("block size:%x\n", var_s0, (s32) var_a2, var_a3);
+        Kprintf("block size:%x\n", var_s0, (s32) var_a2, var_a3);
         var_a1 = var_s0;
     }
     return var_a1;
@@ -1002,9 +1002,9 @@ s32 func_00001C5C(void) {
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/utility", sceUtility_1579A159);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityLoadNetModule);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_64D50C56);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityUnloadNetModule);
 
 INCLUDE_ASM("nonmatchings/utility", func_00001E9C);
 
@@ -1051,7 +1051,7 @@ s32 func_000034B0(void) {
     return 0;
 }
 
-s32 sceUtility_0D5BC6D2(s32 arg0) {
+s32 sceUtilityLoadUsbModule(s32 arg0) {
     s32 var_v1;
     u32 temp_s0;
 
@@ -1064,7 +1064,7 @@ s32 sceUtility_0D5BC6D2(s32 arg0) {
     return var_v1;
 }
 
-s32 sceUtility_F64910F0(s32 arg0) {
+s32 sceUtilityUnloadUsbModule(s32 arg0) {
     s32 var_v1;
     u32 temp_s0;
 
@@ -1101,9 +1101,9 @@ s32 func_000038BC(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_C629AF26);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityLoadAvModule);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_F7D8D092);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityUnloadAvModule);
 
 INCLUDE_ASM("nonmatchings/utility", func_00003984);
 
@@ -1167,20 +1167,20 @@ s32 sceUtilityGameSharingShutdownStart(void) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_970F9C89);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogCtrlPeekBufferPositive);
 #endif
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/utility", func_0000094C);
 
 s32 module_start(void) {
-    sceUtility_driver_F062AEA6();
+    sceUtilityInit();
     return 0;
 }
 
-s32 sceUtility_driver_20C68C34(void) {
+s32 sceUtilityEnd(void) {
     func_00001994();
-    sceSysEventForKernel_D7D3FDCD(&D_00007BF0);
+    sceKernelUnregisterSysEventHandler(&D_00007BF0);
     return 0;
 }
 
@@ -1342,24 +1342,24 @@ s32 sceUtility_private_1DFA62EF(void) {
     return 0;
 }
 
-s32 sceUtility_private_680C0EA8(s32 arg0) {
+s32 sceUtilityDialogSetStatus(s32 arg0) {
     D_00007EA4 = arg0;
     return 0;
 }
 
-s32 sceUtility_private_B222E887(void) {
+s32 sceUtilityDialogGetType(void) {
     return D_00007E9C;
 }
 
-s32 sceUtility_private_4F2206BC(void) {
+s32 sceUtilityDialogGetParam(void) {
     return D_00007EAC;
 }
 
-s32 sceUtility_private_EF5BC2D1(void) {
+s32 sceUtilityDialogGetStructVersion(void) {
     return D_00007EB0;
 }
 
-s32 sceUtility_private_E01FE32A(void) {
+s32 sceUtilityDialogGetSpeed(void) {
     return D_00007EB4;
 }
 
@@ -1367,20 +1367,20 @@ s32 sceUtility_private_5BA71568(void) {
     return D_00007EA8;
 }
 
-s32 sceUtility_private_6F923BD3(s32 arg0) {
+s32 sceUtilityDialogSetThreadId(s32 arg0) {
     D_00007E90 = arg0;
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_7635200E);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogGetGameInfo);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_3CEAE1DF);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogPowerLock);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_56BEDCA4);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogPowerUnlock);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_E921B59E);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogCtrlSetSamplingMode);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_06AE20E5);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogCtrlGetSamplingMode);
 #endif
 
 #if FW_VERSION >= 282
@@ -1428,7 +1428,7 @@ INCLUDE_ASM("nonmatchings/utility", sceUtility_private_6324267B);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_00948E27);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletLoadModule);
 #endif
 
 #if FW_VERSION >= 282
@@ -1591,39 +1591,39 @@ s32 sceUtility_private_2FE219D7(void) {
     return 0;
 }
 
-s32 sceUtility_private_97F922A3(s32 arg0) {
+s32 sceUtilityAppletSetStatus(s32 arg0) {
     D_00007EF4 = arg0;
     return 0;
 }
 
-s32 sceUtility_private_463EA95E(void) {
+s32 sceUtilityAppletGetType(void) {
     return D_00007EF0;
 }
 
-s32 sceUtility_private_AB46A24F(void) {
+s32 sceUtilityAppletGetParam(void) {
     return D_00007EF8;
 }
 
-s32 sceUtility_private_4B677BA1(void) {
+s32 sceUtilityAppletGetStructVersion(void) {
     return D_00007EFC;
 }
 
-s32 sceUtility_private_75FF798C(void) {
+s32 sceUtilityAppletGetSpeed(void) {
     return D_00007F00;
 }
 
-s32 sceUtility_private_9BAE7DCE(s32 arg0) {
+s32 sceUtilityAppletSetThreadId(s32 arg0) {
     D_00007EE8 = arg0;
     return 0;
 }
 
-void sceUtility_private_4ACD6532(void) {
+void sceUtilityAppletUnloadModule(void) {
     func_00001DC8();
 }
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_976F7805);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletRegisterPowerCallback);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_E542E9D8);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAppletUnregisterPowerCallback);
 #endif
 
 #if FW_VERSION >= 300
@@ -1660,7 +1660,7 @@ s32 func_00001CB8(s32 arg0, s32 arg1, void *arg2) {
             var_a2 = (void *) (var_a3 & 0x400);
             var_s0 = (var_a2 != NULL) ? 0x480000 : 0x380000;
         }
-        KDebugForKernel_84F370BC("block size:%x\n", var_s0, (s32) var_a2, var_a3);
+        Kprintf("block size:%x\n", var_s0, (s32) var_a2, var_a3);
         var_a1 = var_s0;
     }
     return var_a1;
@@ -1737,9 +1737,9 @@ s32 func_0000207C(void) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/utility", sceUtility_1579A159);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityLoadNetModule);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_64D50C56);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityUnloadNetModule);
 #endif
 
 #if FW_VERSION >= 300
@@ -1796,11 +1796,11 @@ s32 func_00003520(void) {
 #endif
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/utility", sceUtility_0D5BC6D2);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityLoadUsbModule);
 #endif
 
 #if FW_VERSION == 282
-s32 sceUtility_0D5BC6D2(s32 arg0) {
+s32 sceUtilityLoadUsbModule(s32 arg0) {
     s32 var_v1;
     u32 temp_s0;
 
@@ -1815,11 +1815,11 @@ s32 sceUtility_0D5BC6D2(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/utility", sceUtility_F64910F0);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityUnloadUsbModule);
 #endif
 
 #if FW_VERSION == 282
-s32 sceUtility_F64910F0(s32 arg0) {
+s32 sceUtilityUnloadUsbModule(s32 arg0) {
     s32 var_v1;
     u32 temp_s0;
 
@@ -1938,9 +1938,9 @@ s32 func_000039B0(void) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/utility", sceUtility_C629AF26);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityLoadAvModule);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_F7D8D092);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityUnloadAvModule);
 #endif
 
 #if FW_VERSION == 282
@@ -2056,13 +2056,13 @@ s32 sceUtilityGameSharingGetStatus(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/utility", sceUtility_3AD50AE7);
+INCLUDE_ASM("nonmatchings/utility", sceNetplayDialogInitStart);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_BC6B6296);
+INCLUDE_ASM("nonmatchings/utility", sceNetplayDialogShutdownStart);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_417BED54);
+INCLUDE_ASM("nonmatchings/utility", sceNetplayDialogUpdate);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_B6CEE597);
+INCLUDE_ASM("nonmatchings/utility", sceNetplayDialogGetStatus);
 #endif
 
 #if FW_VERSION == 100
@@ -2240,13 +2240,13 @@ s32 sceUtilitySavedataGetStatus(void) {
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/utility", sceUtility_2995D020);
+INCLUDE_ASM("nonmatchings/utility", sceUtilitySavedataErrInitStart);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_B62A4061);
+INCLUDE_ASM("nonmatchings/utility", sceUtilitySavedataErrShutdownStart);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_ED0FAD38);
+INCLUDE_ASM("nonmatchings/utility", sceUtilitySavedataErrUpdate);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_88BC7406);
+INCLUDE_ASM("nonmatchings/utility", sceUtilitySavedataErrGetStatus);
 
 INCLUDE_ASM("nonmatchings/utility", sceUtilityMsgDialogInitStart);
 #endif
@@ -2434,11 +2434,11 @@ s32 sceUtilityOskGetStatus(void) {
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_DDE5389D);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDNASInitStart);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void sceUtility_DDE5389D(s32 arg0) {
+void sceUtilityDNASInitStart(s32 arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2448,11 +2448,11 @@ void sceUtility_DDE5389D(s32 arg0) {
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_149A7895);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDNASShutdownStart);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void sceUtility_149A7895(void) {
+void sceUtilityDNASShutdownStart(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2462,15 +2462,15 @@ void sceUtility_149A7895(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/utility", sceUtility_4A833BA4);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDNASUpdate);
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_A50E5B30);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDNASGetStatus);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void sceUtility_A50E5B30(void) {
+void sceUtilityDNASGetStatus(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2480,11 +2480,11 @@ void sceUtility_A50E5B30(void) {
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_943CBA46);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAuthDialogInitStart);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void sceUtility_943CBA46(s32 arg0) {
+void sceUtilityAuthDialogInitStart(s32 arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2494,11 +2494,11 @@ void sceUtility_943CBA46(s32 arg0) {
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_0F3EEAAC);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAuthDialogShutdownStart);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void sceUtility_0F3EEAAC(void) {
+void sceUtilityAuthDialogShutdownStart(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2508,15 +2508,15 @@ void sceUtility_0F3EEAAC(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/utility", sceUtility_147F7C85);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAuthDialogUpdate);
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_16A1A8D8);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAuthDialogGetStatus);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void sceUtility_16A1A8D8(void) {
+void sceUtilityAuthDialogGetStatus(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2604,35 +2604,35 @@ s32 sceUtilityHtmlViewerGetStatus(void) {
     return temp_v0;
 }
 
-void sceUtility_3AD50AE7(void) {
+void sceNetplayDialogInitStart(void) {
 
 }
 
-void sceUtility_BC6B6296(void) {
+void sceNetplayDialogShutdownStart(void) {
 
 }
 
-void sceUtility_417BED54(void) {
+void sceNetplayDialogUpdate(void) {
 
 }
 
-void sceUtility_B6CEE597(void) {
+void sceNetplayDialogGetStatus(void) {
 
 }
 
-void sceUtility_2995D020(void) {
+void sceUtilitySavedataErrInitStart(void) {
 
 }
 
-void sceUtility_B62A4061(void) {
+void sceUtilitySavedataErrShutdownStart(void) {
 
 }
 
-void sceUtility_ED0FAD38(void) {
+void sceUtilitySavedataErrUpdate(void) {
 
 }
 
-void sceUtility_88BC7406(void) {
+void sceUtilitySavedataErrGetStatus(void) {
 
 }
 #endif
@@ -2654,7 +2654,7 @@ s32 sceUtilityOskGetStatus(void) {
     return temp_v0;
 }
 
-void sceUtility_DDE5389D(s32 arg0) {
+void sceUtilityDNASInitStart(s32 arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2662,7 +2662,7 @@ void sceUtility_DDE5389D(s32 arg0) {
     setK1(temp_s0);
 }
 
-void sceUtility_149A7895(void) {
+void sceUtilityDNASShutdownStart(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2670,9 +2670,9 @@ void sceUtility_149A7895(void) {
     setK1(temp_s0);
 }
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_4A833BA4);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDNASUpdate);
 
-void sceUtility_A50E5B30(void) {
+void sceUtilityDNASGetStatus(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2680,7 +2680,7 @@ void sceUtility_A50E5B30(void) {
     setK1(temp_s0);
 }
 
-void sceUtility_943CBA46(s32 arg0) {
+void sceUtilityAuthDialogInitStart(s32 arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2688,7 +2688,7 @@ void sceUtility_943CBA46(s32 arg0) {
     setK1(temp_s0);
 }
 
-void sceUtility_0F3EEAAC(void) {
+void sceUtilityAuthDialogShutdownStart(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2696,9 +2696,9 @@ void sceUtility_0F3EEAAC(void) {
     setK1(temp_s0);
 }
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_147F7C85);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityAuthDialogUpdate);
 
-void sceUtility_16A1A8D8(void) {
+void sceUtilityAuthDialogGetStatus(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2762,7 +2762,7 @@ void sceUtility_private_6C606BFA(void) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void sceUtility_private_04B24901(s32 arg0) {
+void sceUtilityDdHelperInitStart(s32 arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2770,7 +2770,7 @@ void sceUtility_private_04B24901(s32 arg0) {
     setK1(temp_s0);
 }
 
-void sceUtility_private_1B698F54(void) {
+void sceUtilityDdHelperShutdownStart(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2778,9 +2778,9 @@ void sceUtility_private_1B698F54(void) {
     setK1(temp_s0);
 }
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_FD99AF0A);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDdHelperUpdate);
 
-void sceUtility_private_8FCABAB9(void) {
+void sceUtilityDdHelperGetStatus(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -2814,28 +2814,28 @@ s32 sceUtilityHtmlViewerGetStatus(void) {
     return temp_v0;
 }
 
-void sceUtility_3AD50AE7(void) {
+void sceNetplayDialogInitStart(void) {
 }
 
-void sceUtility_BC6B6296(void) {
+void sceNetplayDialogShutdownStart(void) {
 }
 
-void sceUtility_417BED54(void) {
+void sceNetplayDialogUpdate(void) {
 }
 
-void sceUtility_B6CEE597(void) {
+void sceNetplayDialogGetStatus(void) {
 }
 
-void sceUtility_2995D020(void) {
+void sceUtilitySavedataErrInitStart(void) {
 }
 
-void sceUtility_B62A4061(void) {
+void sceUtilitySavedataErrShutdownStart(void) {
 }
 
-void sceUtility_ED0FAD38(void) {
+void sceUtilitySavedataErrUpdate(void) {
 }
 
-void sceUtility_88BC7406(void) {
+void sceUtilitySavedataErrGetStatus(void) {
 }
 #endif
 
@@ -2992,7 +2992,7 @@ INCLUDE_ASM("nonmatchings/utility", func_000029D8);
 #endif
 
 #if FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/utility", sceUtility_netparam_internal_072DEBF2);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityCreateNetParam);
 #endif
 
 #if FW_VERSION < 250
@@ -3000,7 +3000,7 @@ INCLUDE_ASM("nonmatchings/utility", func_00002B08);
 #endif
 
 #if FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/utility", sceUtility_netparam_internal_9CE50172);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDeleteNetParam);
 #endif
 
 #if FW_VERSION < 250
@@ -3008,7 +3008,7 @@ INCLUDE_ASM("nonmatchings/utility", func_00002C38);
 #endif
 
 #if FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/utility", sceUtility_netparam_internal_FB0C4840);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityCopyNetParam);
 #endif
 
 #if FW_VERSION < 250
@@ -3042,7 +3042,7 @@ void sceUtility_netparam_internal_77859541(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/utility", sceUtility_netparam_internal_3FD8CCFB);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityGetNetParamInt);
 #endif
 
 #if FW_VERSION < 250
@@ -3050,11 +3050,11 @@ INCLUDE_ASM("nonmatchings/utility", func_00003004);
 #endif
 
 #if FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/utility", sceUtility_netparam_internal_FC4516F3);
+INCLUDE_ASM("nonmatchings/utility", sceUtilitySetNetParam);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/utility", sceUtility_netparam_internal_63C3E40C);
+INCLUDE_ASM("nonmatchings/utility", sceUtilitySetNetParamInt);
 #endif
 
 #if FW_VERSION == 201
@@ -3062,11 +3062,11 @@ INCLUDE_ASM("nonmatchings/utility", func_00004BF8);
 
 INCLUDE_ASM("nonmatchings/utility", func_00004D40);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_netparam_internal_8E8E3AA3);
+INCLUDE_ASM("nonmatchings/utility", sceUtilitySetNetParamLatestID);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void sceUtility_netparam_internal_8E8E3AA3(s32 arg0) {
+void sceUtilitySetNetParamLatestID(s32 arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -3163,7 +3163,7 @@ INCLUDE_RODATA("nonmatchings/utility", D_00006730);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void sceUtility_netparam_internal_8E8E3AA3(s32 arg0) {
+void sceUtilitySetNetParamLatestID(s32 arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -3420,8 +3420,8 @@ INCLUDE_ASM("nonmatchings/utility", func_00005230);
 #if FW_VERSION == 271
 s32 func_000052B0(void) {
     if (D_00007DAC > 0) {
-        sceReg_driver_39461B4D(D_00006D70);
-        sceReg_driver_FA8A5739(D_00006D70);
+        sceRegFlushRegistry(D_00006D70);
+        sceRegCloseRegistry(D_00006D70);
         D_00007DAC -= 1;
     }
     return 0;
@@ -3431,8 +3431,8 @@ s32 func_000052B0(void) {
 #if FW_VERSION >= 250 && FW_VERSION < 271
 s32 func_000052B0(void) {
     if (D_00006D6C > 0) {
-        sceReg_driver_39461B4D(D_00006D70);
-        sceReg_driver_FA8A5739(D_00006D70);
+        sceRegFlushRegistry(D_00006D70);
+        sceRegCloseRegistry(D_00006D70);
         D_00006D6C = 0;
     }
     return 0;
@@ -3443,7 +3443,7 @@ s32 func_000052B0(void) {
 INCLUDE_ASM("nonmatchings/utility", func_000052FC);
 
 s32 func_0000532C(void) {
-    sceReg_driver_39461B4D(D_00006D70);
+    sceRegFlushRegistry(D_00006D70);
     return 0;
 }
 #endif
@@ -3499,8 +3499,8 @@ INCLUDE_ASM("nonmatchings/utility", func_00004158);
 #if FW_VERSION < 201
 s32 func_00004158(void) {
     if (D_00005134 > 0) {
-        sceReg_driver_39461B4D(D_00005138);
-        sceReg_driver_FA8A5739(D_00005138);
+        sceRegFlushRegistry(D_00005138);
+        sceRegCloseRegistry(D_00005138);
         D_00005134 = 0;
     }
     return 0;
@@ -3517,7 +3517,7 @@ INCLUDE_ASM("nonmatchings/utility", func_000041EC);
 
 #if FW_VERSION < 201
 s32 func_000041EC(void) {
-    sceReg_driver_39461B4D(D_00005138);
+    sceRegFlushRegistry(D_00005138);
     return 0;
 }
 #endif
@@ -3575,9 +3575,9 @@ INCLUDE_ASM("nonmatchings/utility", func_00007F78);
 
 INCLUDE_ASM("nonmatchings/utility", func_000080D4);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_1579A159);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityLoadNetModule);
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_64D50C56);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityUnloadNetModule);
 
 INCLUDE_ASM("nonmatchings/utility", func_000084B4);
 
@@ -3594,7 +3594,7 @@ INCLUDE_ASM("nonmatchings/utility", func_0000864C);
 INCLUDE_ASM("nonmatchings/utility", func_00005378);
 
 void func_000053DC(s32 arg0) {
-    sceReg_driver_4CA16893(D_00006D70, arg0, 0);
+    sceRegRemoveCategory(D_00006D70, arg0, 0);
 }
 
 INCLUDE_ASM("nonmatchings/utility", func_00005404);
@@ -3673,8 +3673,8 @@ INCLUDE_ASM("nonmatchings/utility", func_000060B4);
 
 s32 func_0000613C(void) {
     if (D_0000804C > 0) {
-        sceReg_driver_39461B4D(D_00008050);
-        sceReg_driver_FA8A5739(D_00008050);
+        sceRegFlushRegistry(D_00008050);
+        sceRegCloseRegistry(D_00008050);
         D_0000804C -= 1;
     }
     return 0;
@@ -3691,7 +3691,7 @@ INCLUDE_ASM("nonmatchings/utility", func_00006190);
 
 #if FW_VERSION >= 282
 s32 func_000061C0(void) {
-    sceReg_driver_39461B4D(D_00008050);
+    sceRegFlushRegistry(D_00008050);
     return 0;
 }
 
@@ -3700,7 +3700,7 @@ INCLUDE_ASM("nonmatchings/utility", func_000061E8);
 INCLUDE_ASM("nonmatchings/utility", func_0000620C);
 
 void func_00006270(s32 arg0) {
-    sceReg_driver_4CA16893(D_00008050, arg0, 0);
+    sceRegRemoveCategory(D_00008050, arg0, 0);
 }
 
 INCLUDE_ASM("nonmatchings/utility", func_00006298);

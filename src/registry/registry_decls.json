@@ -35,9 +35,9 @@
   "sceKernelFreeVpl": "M2C_UNK sceKernelFreeVpl(s32, s32);",
   "sceKernelLockMutex": "s32 sceKernelLockMutex(s32, s32, void *);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
-  "sceReg_driver_98279CF1": "s32 sceReg_driver_98279CF1(void);",
-  "sceReg_driver_9B25EDF1": "M2C_UNK sceReg_driver_9B25EDF1();",
-  "syslib_ADF12745": "s32 syslib_ADF12745(s32 arg0);"
+  "sceRegInit": "s32 sceRegInit(void);",
+  "sceRegExit": "M2C_UNK sceRegExit();",
+  "module_reboot_phase": "s32 module_reboot_phase(s32 arg0);"
  },
  "types": {
   "Unk_func_00003EE8_temp_v0": "struct Unk_func_00003EE8_temp_v0 {\n    u8 pad0[0x4];\n    s8 unk4;\n    s8 unk5;\n    s8 unk6;\n    s8 unk7;\n};",

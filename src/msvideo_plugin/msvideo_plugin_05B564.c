@@ -21,7 +21,7 @@ void func_0005BABC(struct Unk_func_0005BABC_0 *arg0) {
             do {
                 temp_s0 = M2C_FIELD(var_v0, s32 ***, 8);
                 if (var_v0 != NULL) {
-                    scePaf_4E67BB08(var_v0);
+                    _ZdlPv(var_v0);
                 }
                 var_v0 = temp_s0;
             } while (temp_s0 != NULL);
@@ -40,7 +40,7 @@ void func_0005BB14(struct Unk_func_0005BB14_0 *arg0) {
             do {
                 temp_s0 = M2C_FIELD(var_v0, s32 ***, 8);
                 if (var_v0 != NULL) {
-                    scePaf_4E67BB08(var_v0);
+                    _ZdlPv(var_v0);
                 }
                 var_v0 = temp_s0;
             } while (temp_s0 != NULL);

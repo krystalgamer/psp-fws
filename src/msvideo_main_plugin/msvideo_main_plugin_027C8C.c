@@ -104,7 +104,7 @@ void *func_00028540(s32 arg0, s32 arg1) {
 
     var_v0 = D_000B61F4;
     if (var_v0 == 0) {
-        temp_v0 = scePaf_B7E6052B(0x10);
+        temp_v0 = _Znwj(0x10);
         func_000284C8(temp_v0, arg0, arg1);
         D_000B61F4 = (s32) temp_v0;
         var_v0 = (s32) temp_v0;
@@ -362,7 +362,7 @@ s32 func_000296F0(struct Unk_func_000296F0_0 *arg0) {
 
     temp_v0 = arg0->unk2C;
     if (temp_v0 != 0) {
-        sceVshCommonGui_72E652AA(temp_v0);
+        _ZN3vsh13MessageDialog10HideDeleteEv(temp_v0);
         arg0->unk2C = 0;
     }
     arg0->unk20 = 0;
@@ -521,8 +521,8 @@ s32 func_0002A35C(void) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 s32 func_0002A35C(void) {
-    sceVshCommonGui_A0DE7090(0);
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     return 1;
 }
 #endif
@@ -651,7 +651,7 @@ void func_0002A784(void) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_0002A784(void) {
-    sceVshCommonGui_4704D5BD(0);
+    _ZN3vsh13Infobar_CloseEb(0);
     func_000027D4();
 }
 #endif
@@ -679,7 +679,7 @@ s32 func_0002AAA0(s32 arg0) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 s32 func_0002AAA0(s32 arg0) {
-    sceVshCommonGui_4704D5BD(0);
+    _ZN3vsh13Infobar_CloseEb(0);
     func_0000283C();
     func_0002A940(arg0);
     return 1;
@@ -1040,7 +1040,7 @@ void func_0002B6F0(void) {
 
     } else {
         D_000B6A52 = 1;
-        scePaf_6B1E90C7();
+        InputDevice_PspPad_Lock();
     }
 }
 #endif
@@ -1066,7 +1066,7 @@ void func_0002B724(void) {
 
     } else {
         D_000B6A52 = 0;
-        scePaf_66907719();
+        InputDevice_PspPad_Unlock();
     }
 }
 #endif
@@ -1092,7 +1092,7 @@ void func_0002B754(void) {
 
     } else {
         D_000B6A53 = 1;
-        scePaf_A044BFC0();
+        InputDevice_PspHprm_Lock();
     }
 }
 #endif
@@ -1491,9 +1491,9 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_027C8C", func_0002D498);
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_0002D4CC(void) {
     void *sp0;
-    sceVshCommonUtil_FA969B6A(&sp0, 0);
+    _ZN3vsh9PowerLockC1Ei(&sp0, 0);
     func_0002ED98();
-    sceVshCommonUtil_D4D66154(&sp0);
+    _ZN3vsh9PowerLockD1Ev(&sp0);
 }
 #endif
 
@@ -1541,9 +1541,9 @@ s32 func_0002D5BC(void) {
 #if FW_VERSION >= 301 && FW_VERSION < 350
 s32 func_0002D5BC(void) {
     void *sp0;
-    sceVshCommonUtil_FA969B6A(&sp0, 0);
+    _ZN3vsh9PowerLockC1Ei(&sp0, 0);
     func_0002D4FC();
-    sceVshCommonUtil_D4D66154(&sp0);
+    _ZN3vsh9PowerLockD1Ev(&sp0);
     return 0;
 }
 #endif

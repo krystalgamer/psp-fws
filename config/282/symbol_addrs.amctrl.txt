@@ -1,12 +1,12 @@
 // NID-derived names
 module_start = 0x000006DC; // type:func
-sceAmctrl_driver_525B8218 = 0x000006E4; // type:func
-sceAmctrl_driver_58163FBE = 0x00000728; // type:func
-sceAmctrl_driver_EF95A213 = 0x00000914; // type:func
-sceAmctrl_driver_F5186D8E = 0x00000D20; // type:func
-sceAmctrl_driver_1CCB66D2 = 0x00000E2C; // type:func
-sceAmctrl_driver_0785C974 = 0x000010D4; // type:func
-sceAmctrl_driver_9951C50F = 0x000011D0; // type:func
-semaphore_4C537C72 = 0x000011F8; // type:func
+sceDrmBBMacInit = 0x000006E4; // type:func
+sceDrmBBMacUpdate = 0x00000728; // type:func
+sceDrmBBMacFinal = 0x00000914; // type:func
+sceDrmBBMacFinal2 = 0x00000D20; // type:func
+sceDrmBBCipherInit = 0x00000E2C; // type:func
+sceDrmBBCipherUpdate = 0x000010D4; // type:func
+sceDrmBBCipherFinal = 0x000011D0; // type:func
+sceUtilsBufferCopyWithRange = 0x000011F8; // type:func
 // shared names (tools/add_version.py) begin
 // shared names (tools/add_version.py) end

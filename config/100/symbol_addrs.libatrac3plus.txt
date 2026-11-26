@@ -11,7 +11,7 @@ sceAtracSetSecondBuffer = 0x000008E0; // type:func
 sceAtracGetSoundSample = 0x000009CC; // type:func
 sceAtracGetNextDecodePosition = 0x00000A60; // type:func
 sceAtracSetLoopNum = 0x00000AF4; // type:func
-sceAtrac3plus_CA3CA3D2 = 0x00000B88; // type:func
+sceAtracGetBufferInfoForReseting = 0x00000B88; // type:func
 sceAtracResetPlayPosition = 0x00000C34; // type:func
 sceAtracStartEntry = 0x00001194; // type:func
 sceAtracEndEntry = 0x00001210; // type:func
@@ -26,11 +26,11 @@ sceAtracGetLoopStatus = 0x000015C8; // type:func
 sceAtracGetInternalErrorInfo = 0x0000164C; // type:func
 sceKernelCpuSuspendIntr = 0x0000369C; // type:func
 sceKernelCpuResumeIntr = 0x000036A4; // type:func
-sceAudiocodec_9D3F790C = 0x000036AC; // type:func
-sceAudiocodec_5B37EB1D = 0x000036B4; // type:func
-sceAudiocodec_70A703F8 = 0x000036BC; // type:func
-sceAudiocodec_3A20A200 = 0x000036C4; // type:func
-sceAudiocodec_29681260 = 0x000036CC; // type:func
+sceAudiocodecCheckNeedMem = 0x000036AC; // type:func
+sceAudiocodecInit = 0x000036B4; // type:func
+sceAudiocodecDecode = 0x000036BC; // type:func
+sceAudiocodecGetEDRAM = 0x000036C4; // type:func
+sceAudiocodecReleaseEDRAM = 0x000036CC; // type:func
 // shared names (tools/add_version.py) begin
 D_00003810 = 0x000038A0;
 // shared names (tools/add_version.py) end

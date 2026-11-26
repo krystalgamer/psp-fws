@@ -126,18 +126,18 @@ s32 func_000077D8(s32 arg0);
 s32 func_00007AF4(s32);
 s32 func_00007B0C(s32);
 s32 func_00007B2C(s32);
-M2C_UNK sceAudiocodec_29681260(void *);
-s32 sceAudiocodec_70A703F8(s32, M2C_UNK);
+M2C_UNK sceAudiocodecReleaseEDRAM(void *);
+s32 sceAudiocodecDecode(s32, M2C_UNK);
 s32 sceKernelCheckThreadStack(void);
 u32 sceKernelCreateSema(void *, u32, s32, s32, void *);
 s32 sceKernelDeleteSema(u32);
 s32 sceKernelPollSema(u32, s32);
 s32 sceKernelSignalSema(u32, s32);
 s32 sceKernelWaitSema(u32, s32, void *);
-s32 sceVideocodec_17CF7D2C(void *, M2C_UNK);
-M2C_UNK sceVideocodec_4F160BF4(s32);
+s32 sceVideocodecGetFrameCrop(void *, M2C_UNK);
+M2C_UNK sceVideocodecReleaseEDRAM(s32);
 s32 sceVideocodec_893B32B1(void *, M2C_UNK);
-s32 sceVideocodec_A2F0564E(s32, M2C_UNK);
-s32 sceVideocodec_DBA273FA(s32, M2C_UNK);
+s32 sceVideocodecStop(s32, M2C_UNK);
+s32 sceVideocodecDecode(s32, M2C_UNK);
 
 #endif

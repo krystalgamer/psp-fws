@@ -44,7 +44,7 @@ s32 func_0000DC84(void) {
         D_00170F9C = 0;
     }
     if (D_00173ABC != 0) {
-        scePaf_545FE2DA(D_00173ABC);
+        sce_paf_private_free(D_00173ABC);
         D_00173ABC = 0;
     }
     return temp_s0;

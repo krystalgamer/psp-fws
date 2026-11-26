@@ -16,7 +16,7 @@ void func_0000010C(void) {
 }
 #else
 void func_0000010C(void) {
-    scePaf_F95EA3F1();
+    sce_paf_private_memcpy();
 }
 #endif
 
@@ -207,7 +207,7 @@ void func_000012E0(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_FD4C9F47(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_000013CC(arg0, arg1, var_v0);
 }
@@ -236,7 +236,7 @@ void func_000014E0(void) {
 }
 #else
 void func_000014E0(void) {
-    scePaf_3586BE05();
+    sce_paf_private_memalign();
 }
 #endif
 
@@ -246,7 +246,7 @@ void func_000014FC(void) {
 }
 #else
 void func_000014FC(void) {
-    scePaf_545FE2DA();
+    sce_paf_private_free();
 }
 #endif
 
@@ -264,7 +264,7 @@ void func_000015D0(void) {
 }
 #else
 void func_000015D0(void) {
-    scePaf_F0B4CAE7();
+    sce_paf_private_strncmp();
 }
 #endif
 
@@ -274,7 +274,7 @@ void func_000015EC(void) {
 }
 #else
 void func_000015EC(void) {
-    scePaf_CA79D58B();
+    sce_paf_private_strlen();
 }
 #endif
 
@@ -284,7 +284,7 @@ void func_00001608(void) {
 }
 #else
 void func_00001608(void) {
-    scePaf_6829D7AF();
+    sce_paf_private_memset();
 }
 #endif
 
@@ -322,7 +322,7 @@ void func_000019F0(void) {
 #else
 void func_000019F0(void) {
     func_000015B8(1);
-    scePaf_A0ED77C4(0, &func_00001A34, D_000040C8, -1, -1, &func_00001B1C);
+    Job_Start(0, &func_00001A34, D_000040C8, -1, -1, &func_00001B1C);
 }
 #endif
 
@@ -365,7 +365,7 @@ INCLUDE_ASM("nonmatchings/game_install_plugin", func_00002508);
 INCLUDE_ASM("nonmatchings/game_install_plugin", func_00002598);
 
 void func_000026D4(void) {
-    scePsheet_E16F3A48();
+    sceDRMInstallInstall();
 }
 
 INCLUDE_ASM("nonmatchings/game_install_plugin", func_000026F0);
@@ -389,7 +389,7 @@ M2C_UNK *func_00002CF8(void) {
 }
 
 void func_00002D04(void) {
-    scePsheet_226D9099();
+    sceDRMInstallAbort();
 }
 
 INCLUDE_ASM("nonmatchings/game_install_plugin", func_00002D20);

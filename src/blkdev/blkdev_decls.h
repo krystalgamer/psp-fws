@@ -6,6 +6,6 @@
 
 
 s32 module_start(void);
-M2C_UNK sceBLK_driver_6216FF5D();
+M2C_UNK sceBLKInit();
 
 #endif

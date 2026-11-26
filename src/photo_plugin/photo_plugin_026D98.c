@@ -8,13 +8,13 @@ void func_00026D98(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = vsh_81BBD0D1(vsh_34DA1B67(), &D_000315F4);
+    temp_v0 = _ZN3vsh10FixedAlloc4LockEPKc(vsh_34DA1B67(), &D_000315F4);
     if (temp_v0 != 0) {
         temp_s0 = vsh_34DA1B67()->unk4;
-        temp_v0_2 = scePaf_B7E6052B(0x1C);
-        scePaf_93538664(temp_v0_2, temp_v0, 0x280000, 0);
+        temp_v0_2 = _Znwj(0x1C);
+        _ZN3paf11SurfacePoolC1EPviPKc(temp_v0_2, temp_v0, 0x280000, 0);
         D_00031E60 = temp_v0_2;
-        D_00031E5C = scePaf_6D491648(0, temp_s0 + 0xFFD7FC00, temp_v0 + 0x280100);
+        D_00031E5C = Heap_Create(0, temp_s0 + 0xFFD7FC00, temp_v0 + 0x280100);
     }
 }
 #endif
@@ -134,7 +134,7 @@ s32 func_000288C0(void) {
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
 s32 func_000288C0(void) {
-    return scePaf_75062BCF() != 0;
+    return Job_isCanceled() != 0;
 }
 #endif
 

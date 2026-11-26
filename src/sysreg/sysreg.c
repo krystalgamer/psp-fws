@@ -6,23 +6,23 @@
 INCLUDE_ASM("nonmatchings/sysreg", module_start);
 #else
 s32 module_start(void) {
-    sceSysEventForKernel_D7D3FDCD(&D_000025C0);
-    sceSysreg_driver_25673620();
-    sceSysreg_driver_BB3623DF();
-    sceSysEventForKernel_CD9E4BB5(&D_000025C0);
+    sceKernelUnregisterSysEventHandler(&D_000025C0);
+    sceSysregIntrInit();
+    sceSysregPllUpdateFrequency();
+    sceKernelRegisterSysEventHandler(&D_000025C0);
     return 0;
 }
 #endif
 
 s32 module_reboot_before(void) {
-    sceSysreg_driver_4EE8E2C8();
+    sceSysregIntrEnd();
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9C863542);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregInit);
 
-s32 sceSysreg_driver_F2DEAA14(void) {
-    sceSysreg_driver_4EE8E2C8();
+s32 sceSysregEnd(void) {
+    sceSysregIntrEnd();
     return 0;
 }
 
@@ -38,72 +38,72 @@ s32 func_000000C4(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_CD0F6715);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregDoTimerEvent);
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F3443B9A);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSetAwEdramSize);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E2A5D1EE);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetTachyonVersion);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E88B77ED);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregVblankIRQPolar);
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_312F9419);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGenerateVblankIRQ);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_844AF6BD);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSetMasterPriv);
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_4F46EEDE);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetFuseId);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8F4F4E96);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetFuseConfig);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_C29D614E);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregTopResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DC6139A4);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregScResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DE59DACB);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_2DB0EB28);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeResetDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_26283A6F);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A374195E);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwResetDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_D20581EA);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregVmeResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7558064A);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregVmeResetDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9BB70D34);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAvcResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_FD6C562B);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAvcResetDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_CD4FB614);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_69EECBE5);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbResetDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F5B80837);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8075303F);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaResetDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_00C2628E);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_EC4BF81F);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifResetDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8A7F9EB4);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_C32F2491);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkResetDisable);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A23BC2C4);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F5EA8570);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddResetDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_3E961C02);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostResetEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_ACFA3764);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostResetDisable);
 #else
 INCLUDE_ASM("nonmatchings/sysreg", func_00000588);
 #endif
@@ -111,7 +111,7 @@ INCLUDE_ASM("nonmatchings/sysreg", func_00000588);
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002520);
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_53A6838B);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetBaseFrequency);
 #endif
 
 #if FW_VERSION < 271
@@ -119,115 +119,115 @@ INCLUDE_RODATA("nonmatchings/sysreg", D_00002B04);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BB3623DF);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllUpdateFrequency);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DCA57573);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllSetOutSelect);
 #endif
 
 #if FW_VERSION != 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_53A6838B);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetBaseFrequency);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BB3623DF);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllUpdateFrequency);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B21B6CBF);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetFrequency);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B4560C45);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetOutSelect);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DCA57573);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllSetOutSelect);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_44F6CDA7);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_158AD4FC);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_4D4CE2B8);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegABusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_789BD609);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegABusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_391CE1C0);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegBBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_82D35024);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegBBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_AF904657);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwEdramBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_438AECE9);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwEdramBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_678AD3ED);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacplusBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_168C09B8);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacplusBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7E7EBC20);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A265C719);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_4F5AFBBE);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_845DD1A6);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_16909002);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B6C10DF0);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_3E216017);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BFBABB63);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_4716E71E);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_826430C0);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7CC6CBFD);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcddrBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_EE6B9411);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcddrBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F97D9D73);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_2D0F7755);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_63B9EB65);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E1AA9788);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_AA63C8BD);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_054AC8C6);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioBusClockDisable);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E45BED6A);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_681B35C4);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddBusClockDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E321F41A);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostBusClockEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_4D2FFC60);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostBusClockDisable);
 #else
 INCLUDE_ASM("nonmatchings/sysreg", func_00000B64);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_6B01D71B);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_FC186A83);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B59DB832);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9155812C);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DA4FCA1D);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_228A73E1);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostClkDisable);
 #endif
 
 #if FW_VERSION != 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_31154490);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8E2D835D);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkDisable);
 #endif
 
 #if FW_VERSION < 271
@@ -235,201 +235,201 @@ INCLUDE_ASM("nonmatchings/sysreg", func_00000C58);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_6B01D71B);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_FC186A83);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkDisable);
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B59DB832);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9155812C);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DA4FCA1D);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_228A73E1);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_31154490);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8E2D835D);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkDisable);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7234EA80);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_38EC3281);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkDisable);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8835D1E1);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8B90B8B5);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7725CA08);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A3E4154C);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E8533DCA);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbTimerClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F6D83AD0);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbTimerClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A9CD1C1F);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_2F216F38);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A24C242A);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E89243BE);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7DCA8302);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_45225F8F);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmClkDisable);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_D74D3AB6);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyClkEnable);
 #else
-s32 sceSysreg_driver_D74D3AB6(void) {
+s32 sceSysregKeyClkEnable(void) {
     return 0x80000004;
 }
 #endif
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_AD7C4ACB);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyClkDisable);
 #else
-s32 sceSysreg_driver_AD7C4ACB(void) {
+s32 sceSysregKeyClkDisable(void) {
     return 0x80000004;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DC68A93F);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_94B0323C);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_6417CDD6);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_20388C9E);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_E3AECFFA);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_3BBD0C0C);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioClkDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_C1DA05D2);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_DE170397);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkDisable);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7234EA80);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_38EC3281);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkDisable);
 #else
 INCLUDE_ASM("nonmatchings/sysreg", func_00001104);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_1969E840);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkSelect);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_1D382514);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifDelaySelect);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_03340297);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbTimerClkSelect);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9100B4E5);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkSelect);
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_0A83FC7B);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkSelect);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_D6628A48);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiClkSelect);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_1E18EA43);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkSelect);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_833E6FB1);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkSelect);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8CE2F97A);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkSelect);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_0A83FC7B);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkSelect);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9DD1F821);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_1C4C4C7A);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BC68D9B6);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A3C8E075);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_79338EA3);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_CADB92AA);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_D74F1D48);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_18172C6A);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_63B1AADF);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F74F14E9);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BB26CF1F);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8E2FB536);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_0436B60F);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_58F47EFD);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_4C49A8BC);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_26FA0928);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F844DDF3);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_29A119A1);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoDisable);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_77DED992);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyIoEnable);
 #else
-s32 sceSysreg_driver_77DED992(void) {
+s32 sceSysregKeyIoEnable(void) {
     return 0x80000004;
 }
 #endif
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_6879790B);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyIoDisable);
 #else
-s32 sceSysreg_driver_6879790B(void) {
+s32 sceSysregKeyIoDisable(void) {
     return 0x80000004;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7A5D2D15);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_25B0AC52);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoDisable);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8B95C17F);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_CCF911C0);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddIoDisable);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7FD7A631);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BB823481);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoDisable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8C5C53DE);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiIoEnable);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A16E55F4);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiIoDisable);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B627582E);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioIoEnable);
 #else
-void sceSysreg_driver_B627582E(s32 arg0) {
+void sceSysregGpioIoEnable(s32 arg0) {
     func_00001A68(arg0, 1);
 }
 #endif
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_1E9C3607);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioIoDisable);
 #else
-void sceSysreg_driver_1E9C3607(s32 arg0) {
+void sceSysregGpioIoDisable(s32 arg0) {
     func_00001A68(arg0, 0);
 }
 
@@ -455,37 +455,37 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8D0FED1E);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A46E9CA8);
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_633595F2);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbGetConnectStatus);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_32471457);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbQueryIntr);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_692F31FF);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbAcquireIntr);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_FFEB6E00);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostQueryIntr);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_87C2BA20);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostAcquireIntr);
 #endif
 
 #if FW_VERSION != 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_D43E98F6);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifGetConnectStatus);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BF91FBDA);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifQueryConnectIntr);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_36A75390);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifAcquireConnectIntr);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_633595F2);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbGetConnectStatus);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_32471457);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbQueryIntr);
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_692F31FF);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbAcquireIntr);
 #endif
 
 #if FW_VERSION < 271
-s32 sceSysreg_driver_692F31FF(s32 arg0) {
+s32 sceSysregUsbAcquireIntr(s32 arg0) {
     s32 temp_a0;
     s32 temp_s0;
 
@@ -498,32 +498,32 @@ s32 sceSysreg_driver_692F31FF(s32 arg0) {
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_FFEB6E00);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostQueryIntr);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_87C2BA20);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostAcquireIntr);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_D43E98F6);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifGetConnectStatus);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_BF91FBDA);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifQueryConnectIntr);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_36A75390);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifAcquireConnectIntr);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_61BFF85F);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregInterruptToOther);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_9FC87ED4);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSemaTryLock);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8BE2D520);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSemaUnlock);
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_B08A4E85);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSramAtomicRead);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A41929DA);
 #else
 INCLUDE_ASM("nonmatchings/sysreg", func_00001814);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_3EA188AD);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregRequestIntr);
 
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002B04);
@@ -544,26 +544,26 @@ INCLUDE_RODATA("nonmatchings/sysreg", D_00002578);
 #endif
 
 #if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_25673620);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregIntrInit);
 #else
-s32 sceSysreg_driver_25673620(void) {
-    InterruptManagerForKernel_58DD8978(0x1F, 1, &func_00001814, 0, &D_00002BD0);
-    InterruptManagerForKernel_4D6E7305(0x1F);
+s32 sceSysregIntrInit(void) {
+    sceKernelRegisterIntrHandler(0x1F, 1, &func_00001814, 0, &D_00002BD0);
+    sceKernelEnableIntr(0x1F);
     return 0;
 }
 #endif
 
-s32 sceSysreg_driver_4EE8E2C8(void) {
-    InterruptManagerForKernel_F987B1F0(0x1F);
+s32 sceSysregIntrEnd(void) {
+    sceKernelReleaseIntrHandler(0x1F);
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_083F56E2);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEnableIntr);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7C5B543C);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregDisableIntr);
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_EE8760C6);
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAcquireIntr);
 #endif
 
 #if FW_VERSION == 340
@@ -592,18 +592,18 @@ INCLUDE_ASM("nonmatchings/sysreg", func_00001B44);
 
 INCLUDE_ASM("nonmatchings/sysreg", func_00001B60);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_5664F8B5);
+INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetCpuGear);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_44704E1D);
+INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetCpuGear);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_584AD989);
+INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetBusGear);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_377F035F);
+INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetBusGear);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_AB3185FD);
+INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetCpuFrequency);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_0EA487FA);
+INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetCpuFrequency);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_136E8F5A);
+INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetBusFrequency);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_F4811E00);
+INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetBusFrequency);

@@ -453,7 +453,7 @@ s32 func_00070998(s32 *arg0) {
     var_v0 = 1;
     if (arg0 != NULL) {
         func_00073A80();
-        scePaf_545FE2DA((s32) arg0);
+        sce_paf_private_free((s32) arg0);
         var_v0 = 0;
     }
     return var_v0;
@@ -745,7 +745,7 @@ s32 func_000742BC(s32 arg0) {
 }
 
 s32 func_000742E4(s32 arg0) {
-    return (sceMpeg_CF3547A2(arg0 + 4) == 0) ? 0 : 4;
+    return (sceMpegAvcDecodeDetail2(arg0 + 4) == 0) ? 0 : 4;
 }
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06EFBC", func_0007430C);

@@ -1,10 +1,10 @@
 // NID-derived names
-scePspNpDrm_driver_04618D16 = 0x00000000; // type:func
-scePspNpDrm_driver_17E3F4BB = 0x00000034; // type:func
-scePspNpDrm_driver_37B9B10D = 0x00000088; // type:func
-scePspNpDrm_driver_5667B7B9 = 0x000000DC; // type:func
-scePspNpDrm_driver_0F9547E6 = 0x000000F8; // type:func
-scePspNpDrm_driver_EBB198ED = 0x000002C4; // type:func
+sceNpDrmGetIDps = 0x00000000; // type:func
+sceNpDrmVerifyAct = 0x00000034; // type:func
+sceNpDrmVerifyRif = 0x00000088; // type:func
+sceNpDrmGetContentKey = 0x000000DC; // type:func
+sceNpDrmGetVersionKey = 0x000000F8; // type:func
+sceNpDrmDecActivation = 0x000002C4; // type:func
 scePspNpDrmVideoKey_driver_77743584 = 0x000003A8; // type:func
 module_start = 0x000007EC; // type:func
 module_stop = 0x000007F4; // type:func
@@ -15,7 +15,7 @@ memset = 0x000020E8; // type:func
 memcmp = 0x000020F0; // type:func
 memcpy = 0x000020F8; // type:func
 sceDdrdbSigvry = 0x00002100; // type:func
-sceOpenPSID_driver_19D579F0 = 0x00002108; // type:func
+sceOpenPSIDGetPSID = 0x00002108; // type:func
 // shared names (tools/add_version.py) begin
 D_00001F04 = 0x00002340; // rom:0x23E0
 D_00001F14 = 0x00002350; // rom:0x23F0

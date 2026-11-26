@@ -4,10 +4,10 @@
   "func_00000EB4": "void func_00000EB4(struct Unk_func_00000EB4_0 *arg0, s32 arg1);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelDcacheInvalidateRange": "s32 sceKernelDcacheInvalidateRange(void *, u32);",
-  "sceMePower_driver_05B2C420": "M2C_UNK sceMePower_driver_05B2C420(M2C_UNK);",
-  "sceMePower_driver_B6FE3E62": "M2C_UNK sceMePower_driver_B6FE3E62(M2C_UNK);",
-  "sceVideocodec_driver_CB3312D1": "s32 sceVideocodec_driver_CB3312D1(void);",
-  "sceVideocodec_driver_E76D65FE": "s32 sceVideocodec_driver_E76D65FE(void);"
+  "sceMePowerControlAvcPower": "M2C_UNK sceMePowerControlAvcPower(M2C_UNK);",
+  "sceMePowerControlDmacplusClock": "M2C_UNK sceMePowerControlDmacplusClock(M2C_UNK);",
+  "sceVideocodecEndEntry": "s32 sceVideocodecEndEntry(void);",
+  "sceVideocodecStartEntry": "s32 sceVideocodecStartEntry(void);"
  },
  "types": {
   "Unk_func_00000EB4_0": "struct Unk_func_00000EB4_0 {\n    u8 pad0[0x10];\n    struct Unk_func_00000EB4_temp_s1 *unk10;\n    u8 pad14[0x18];\n    void *unk2C;\n    void *unk30;\n    u8 pad34[0x4];\n    void *unk38;\n};",

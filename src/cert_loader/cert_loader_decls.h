@@ -14,7 +14,7 @@ s32 func_0000060C(void);
 s32 func_00000614(void);
 s32 func_0000061C(void);
 s32 func_00000624(void);
-s32 sceCertLoader_driver_11391041(void);
-s32 sceCertLoader_driver_E86A7DC1(void);
+s32 sceLoadCertInit(void);
+s32 sceLoadCertEnd(void);
 
 #endif

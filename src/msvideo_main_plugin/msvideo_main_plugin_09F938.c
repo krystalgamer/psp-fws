@@ -242,11 +242,11 @@ s32 func_000A2EF4(s32 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = scePaf_5FAC9869(0xC);
+    temp_v0 = sce_paf_private_malloc(0xC);
     *arg0 = temp_v0;
     var_v1 = 1;
     if (temp_v0 != 0) {
-        scePaf_6829D7AF(temp_v0, 0, 0xC);
+        sce_paf_private_memset(temp_v0, 0, 0xC);
         var_v1 = func_000A31C4(*arg0 + 8);
     }
     return var_v1;
@@ -291,7 +291,7 @@ s32 func_000A3088(s32 *arg0) {
     if (temp_v0 != 0) {
         func_000A3268(temp_v0);
     }
-    scePaf_545FE2DA((s32) arg0);
+    sce_paf_private_free((s32) arg0);
     return 0;
 }
 #endif

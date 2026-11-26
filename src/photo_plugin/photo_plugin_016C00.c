@@ -85,9 +85,9 @@ void func_00016FF0(s32 arg0) {
     s32 temp_v0;
 
     if (arg0 != 0) {
-        temp_v0 = scePaf_D4FAE7D0(&D_0002FF34);
+        temp_v0 = _ZN3paf4View4FindEPKc(&D_0002FF34);
         if (temp_v0 != 0) {
-            sceVshCommonGui_54BC644C(&sp0, scePaf_BB3CBD19(temp_v0, arg0, -1));
+            _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, scePaf_BB3CBD19(temp_v0, arg0, -1));
             func_000038CC(&sp0);
         }
     }

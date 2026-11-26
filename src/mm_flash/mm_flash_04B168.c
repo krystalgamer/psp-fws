@@ -559,7 +559,7 @@ void func_00057E78(struct Unk_func_00057E78_0 *arg0) {
             if (func_0008FE1C(temp_v1, arg0) == 0) {
                 temp_v0_2 = arg0->unk34->unk2CC;
                 if (temp_v0_2 != 0) {
-                    sceHVNetfront_Module_09FA691C(temp_v0_2);
+                    jpeg_destroy_decompress(temp_v0_2);
                 }
                 temp_s0 = arg0->unk34->unk2CC;
                 if (temp_s0 != 0) {

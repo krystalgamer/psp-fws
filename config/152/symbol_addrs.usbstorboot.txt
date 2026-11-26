@@ -1,15 +1,15 @@
 // NID-derived names
-sceUsbstorBoot_E58818A8 = 0x00000868; // type:func
-sceUsbstorBoot_594BBF95 = 0x000008E4; // type:func
-sceUsbstorBoot_6D865ECD = 0x00000960; // type:func
-sceUsbstorBoot_A1119F0D = 0x00000A04; // type:func
-sceUsbstorBoot_1F080078 = 0x00000AAC; // type:func
-sceUsbstorBoot_A55C9E16 = 0x00000B68; // type:func
+sceUsbstorBootSetCapacity = 0x00000868; // type:func
+sceUsbstorBootSetLoadAddr = 0x000008E4; // type:func
+sceUsbstorBootGetDataSize = 0x00000960; // type:func
+sceUsbstorBootSetStatus = 0x00000A04; // type:func
+sceUsbstorBootRegisterNotify = 0x00000AAC; // type:func
+sceUsbstorBootUnregisterNotify = 0x00000B68; // type:func
 module_start = 0x00000C44; // type:func
 module_stop = 0x00000CA4; // type:func
 sceKernelCpuSuspendIntr = 0x00001810; // type:func
 sceKernelCpuResumeIntr = 0x00001818; // type:func
-KDebugForKernel_84F370BC = 0x00001820; // type:func
+Kprintf = 0x00001820; // type:func
 memset = 0x00001828; // type:func
 sceKernelCreateEventFlag = 0x00001830; // type:func
 sceKernelDeleteEventFlag = 0x00001838; // type:func
@@ -28,11 +28,11 @@ sceSemawm_51E51869 = 0x00001898; // type:func
 sceSemawm_4C268535 = 0x000018A0; // type:func
 sceSemawm_5B6C204D = 0x000018A8; // type:func
 sceSemawm_6FEA0A45 = 0x000018B0; // type:func
-sceUsbstor_internal_DC1A5833 = 0x000018B8; // type:func
-sceUsbstor_internal_FC4D0080 = 0x000018C0; // type:func
+sceUsbstorSendData = 0x000018B8; // type:func
+sceUsbstorRecvData = 0x000018C0; // type:func
 sceUsbstor_internal_489E6BF1 = 0x000018C8; // type:func
 sceUsbstor_internal_2CAFEFF1 = 0x000018D0; // type:func
-sceUsbstor_internal_50F99EAD = 0x000018D8; // type:func
+sceUsbstorGetString = 0x000018D8; // type:func
 // shared names (tools/add_version.py) begin
 D_00001B60 = 0x00001B54; // rom:0x1BD4
 D_00001B70 = 0x00001B64; // rom:0x1BE4

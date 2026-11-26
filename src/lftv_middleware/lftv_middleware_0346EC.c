@@ -6,9 +6,9 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_0346EC", func_000346EC);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0346EC", func_00034730);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_0346EC", sceVshLftvMw_E6A8CAC0);
+INCLUDE_ASM("nonmatchings/lftv_middleware_0346EC", lfxGetNextFrame);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_0346EC", sceVshLftvMw_D60D6F2D);
+INCLUDE_ASM("nonmatchings/lftv_middleware_0346EC", lfxReleaseFrameBuffer);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0346EC", func_000349A8);
 

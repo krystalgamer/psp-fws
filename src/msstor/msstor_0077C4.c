@@ -5,7 +5,7 @@ INCLUDE_ASM("nonmatchings/msstor_0077C4", func_000077C4);
 
 INCLUDE_ASM("nonmatchings/msstor_0077C4", func_00007850);
 
-INCLUDE_ASM("nonmatchings/msstor_0077C4", sceMSstor_driver_714782D6);
+INCLUDE_ASM("nonmatchings/msstor_0077C4", sceMSstorRegisterCLDMSelf);
 
 INCLUDE_ASM("nonmatchings/msstor_0077C4", func_00007928);
 

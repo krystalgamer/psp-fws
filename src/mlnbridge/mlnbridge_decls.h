@@ -6,6 +6,6 @@
 
 
 s32 module_stop(void);
-M2C_UNK sceMgr_driver_8429C9F3();
+M2C_UNK sceMgrAesEnd();
 
 #endif

@@ -621,7 +621,7 @@ s32 func_00001340(void *arg0, s32 arg1) {
         var_v1 = 0x8010300B;
         if (M2C_FIELD(arg0, u8 *, 0x60) == 0) {
             var_v1 = -1;
-            if (scePaf_75062BCF(arg1) == 0) {
+            if (Job_isCanceled(arg1) == 0) {
                 var_v1 = func_0000B5E4(M2C_FIELD(M2C_FIELD(arg0, void **, 0), s32 (**)(void *), 0x10)(arg0), 0, 0x800, (s32) &func_000010A0, arg1);
             }
         }
@@ -639,7 +639,7 @@ s32 func_00001340(void *arg0, s32 arg1) {
         var_v1 = 0x8010300B;
         if (M2C_FIELD(arg0, u8 *, 0x5C) == 0) {
             var_v1 = -1;
-            if (scePaf_75062BCF(arg1) == 0) {
+            if (Job_isCanceled(arg1) == 0) {
                 var_v1 = func_0000B5E4(M2C_FIELD(M2C_FIELD(arg0, void **, 0), s32 (**)(void *), 0x10)(arg0), 0, 0x800, (s32) &func_000010A0, arg1);
             }
         }
@@ -697,7 +697,7 @@ s32 func_00001478(struct Unk_func_00001478_0 *arg0, s32 arg1) {
         var_v1 = 0x8010300B;
         if (arg0->unk60 == 0) {
             var_v1 = -1;
-            if (scePaf_75062BCF(arg1) == 0) {
+            if (Job_isCanceled(arg1) == 0) {
                 var_v1 = func_0000D3D4(arg0->unk0->unk10(arg0), 0, 0x800, (s32) &func_000011A8, arg1);
             }
         }
@@ -750,7 +750,7 @@ void func_00001E90(s32 arg0, void *arg1) {
 
     if (M2C_FIELD(arg1, s32 *, 0xC) != -1) {
         temp_s0 = D_00022EE0;
-        if (scePaf_66FE90D7(func_0001351C(M2C_FIELD(temp_s0, s32 *, 0x1C)), &D_0002197C) == 0) {
+        if (sce_paf_private_strcmp(func_0001351C(M2C_FIELD(temp_s0, s32 *, 0x1C)), &D_0002197C) == 0) {
             if (M2C_FIELD(M2C_FIELD(temp_s0, void **, 0x28), u8 *, 5) == 1) {
                 func_000040D0(M2C_FIELD(M2C_FIELD(temp_s0, void **, 0x20), void **, 0x58));
                 func_0000FD8C(M2C_FIELD(temp_s0, s32 *, 0x2C), arg0, M2C_FIELD(arg1, s32 *, 0xC));
@@ -829,7 +829,7 @@ void func_00001ED0(void *arg0) {
     temp_a0 = M2C_FIELD(arg0, void ***, 0x1C);
     M2C_FIELD(*temp_a0, M2C_UNK (**)(void **, M2C_UNK), 0x14)(temp_a0, 2);
     func_000007B4(arg0);
-    scePaf_D24E4016(scePaf_962FA087(), 6, 9);
+    _ZN3paf9PhSRender8SetStyleEii(_ZN3paf8PhAppear12ShadowRenderEv(), 6, 9);
 }
 #endif
 
@@ -1258,8 +1258,8 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00003234);
 void func_00003234(void *arg0, s32 arg1) {
     s32 temp_s1;
 
-    temp_s1 = scePaf_B7E6052B(0x50);
-    vsh_DE027583(temp_s1, arg1, 0, 0, scePaf_72514A05(arg1, "savedata_list", 0));
+    temp_s1 = _Znwj(0x50);
+    vsh_DE027583(temp_s1, arg1, 0, 0, _ZN3paf8PhWidget9FindChildEPKci(arg1, "savedata_list", 0));
     M2C_FIELD(arg0, s32 *, 0x1C) = temp_s1;
 }
 #endif
@@ -1268,7 +1268,7 @@ void func_00003234(void *arg0, s32 arg1) {
 void func_00003234(void *arg0, s32 arg1) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_B7E6052B(0x60);
+    temp_v0 = _Znwj(0x60);
     sceVshCommonGui_35D57A35(temp_v0, arg1, 0, 0);
     M2C_FIELD(arg0, s32 *, 0x1C) = temp_v0;
 }
@@ -1316,8 +1316,8 @@ void func_000041D4(struct Unk_func_000041D4_0 *arg0, s32 arg1) {
 void func_000041D4(struct Unk_func_000041D4_0 *arg0, s32 arg1) {
     s32 temp_s1;
 
-    temp_s1 = scePaf_B7E6052B(0x50);
-    vsh_DE027583(temp_s1, arg1, 0, 0, scePaf_72514A05(arg1, "savedata_list", 0));
+    temp_s1 = _Znwj(0x50);
+    vsh_DE027583(temp_s1, arg1, 0, 0, _ZN3paf8PhWidget9FindChildEPKci(arg1, "savedata_list", 0));
     arg0->unk1C = temp_s1;
 }
 #endif
@@ -1499,7 +1499,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00005BC4);
 #if FW_VERSION < 282
 void func_00003E68(M2C_UNK **arg0) {
     *arg0 = &D_00021DD0;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -1543,7 +1543,7 @@ void func_00003F18(M2C_UNK **arg0) {
 void func_00003F40(M2C_UNK **arg0) {
     *arg0 = &D_00021E38;
     func_0000FBB0();
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1576,7 +1576,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00005CBC);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00005CBC(M2C_UNK **arg0) {
     *arg0 = &D_00021DD0;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -1614,7 +1614,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00005DAC);
 void func_00005DAC(M2C_UNK **arg0) {
     *arg0 = &D_00021E38;
     func_0000FBB0();
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1798,11 +1798,11 @@ void func_00006CD8(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0_2;
 
     func_000102C4(arg0, arg1, arg2);
-    temp_v0 = scePaf_B7E6052B(0x3C);
+    temp_v0 = _Znwj(0x3C);
     func_00003D14(temp_v0, arg1);
     M2C_FIELD(arg0, s32 *, 0x24) = temp_v0;
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_B7E6052B(0x20);
+        temp_v0_2 = _Znwj(0x20);
         func_0000F44C(temp_v0_2, arg1);
         M2C_FIELD(arg0, s32 *, 0x20) = temp_v0_2;
     }
@@ -1957,7 +1957,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_000069A0);
 void func_000069A0(M2C_UNK **arg0) {
     *arg0 = &D_00022070;
     func_0000D8E8((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1991,11 +1991,11 @@ void func_00006D50(struct Unk_func_00006D50_0 *arg0, M2C_UNK arg1) {
     s32 temp_v0_2;
 
     func_000126B0();
-    temp_v0 = scePaf_B7E6052B(0x3C);
+    temp_v0 = _Znwj(0x3C);
     func_00003D14(temp_v0, arg1);
     arg0->unk24 = temp_v0;
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_B7E6052B(0x20);
+        temp_v0_2 = _Znwj(0x20);
         func_0000F44C(temp_v0_2, arg1);
         arg0->unk20 = temp_v0_2;
     }
@@ -2020,7 +2020,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00006F60);
 void func_00006FF0(M2C_UNK **arg0) {
     *arg0 = &D_00022070;
     func_0000D8E8((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -2086,11 +2086,11 @@ void func_00005DEC(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0_2;
 
     func_000102C4(arg0, arg1, arg2);
-    temp_v0 = scePaf_B7E6052B(0x3C);
+    temp_v0 = _Znwj(0x3C);
     func_00003D14(temp_v0, arg1);
     M2C_FIELD(arg0, s32 *, 0x44) = temp_v0;
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_B7E6052B(0x20);
+        temp_v0_2 = _Znwj(0x20);
         func_0000F44C(temp_v0_2, arg1);
         M2C_FIELD(arg0, s32 *, 0x40) = temp_v0_2;
     }
@@ -2103,11 +2103,11 @@ void func_00005DEC(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0_2;
 
     func_000102C4(arg0, arg1, arg2);
-    temp_v0 = scePaf_B7E6052B(0x34);
+    temp_v0 = _Znwj(0x34);
     func_00003D14(temp_v0, arg1);
     M2C_FIELD(arg0, s32 *, 0x58) = temp_v0;
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_B7E6052B(0x20);
+        temp_v0_2 = _Znwj(0x20);
         func_0000F44C(temp_v0_2, arg1);
         M2C_FIELD(arg0, s32 *, 0x50) = temp_v0_2;
     }
@@ -2590,7 +2590,7 @@ void func_00007984(void *arg0, void *arg1) {
     func_00010104(3, 1);
     func_000065FC(3);
     temp_a0 = M2C_FIELD(arg1, void ***, 0x1C);
-    scePaf_533F3856(&sp10, scePaf_BB3CBD19(M2C_FIELD(*temp_a0, s32 (**)(void **), 0x24)(temp_a0), &D_00022270, -1), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    _ZN3paf12FormatStringEPKwS1_S1_S1_S1_S1_S1_S1_S1_S1_(&sp10, scePaf_BB3CBD19(M2C_FIELD(*temp_a0, s32 (**)(void **), 0x24)(temp_a0), &D_00022270, -1), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     func_0000D7B0(M2C_FIELD(arg1, s32 *, 0x2C), M2C_FIELD(arg0, s32 *, 0x1D0), (s32) &sp10, 5, (s32) &func_00007C24, 5, 0, (s32) arg1);
     func_000020C4((s32) &sp10);
 }
@@ -2618,7 +2618,7 @@ void func_00008D14(struct Unk_func_00008D14_0 *arg0, struct Unk_func_00008D14_1 
 
     func_00010104(3, 1);
     func_0000767C(3);
-    scePaf_533F3856(&sp10, scePaf_4842A808(arg1->unk4, &D_00022270), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    _ZN3paf12FormatStringEPKwS1_S1_S1_S1_S1_S1_S1_S1_S1_(&sp10, _ZNK3paf4View9GetStringEPKc(arg1->unk4, &D_00022270), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     func_00010184(arg1->unk1C, arg0->unk1D0, (s32) &sp10, 5, (s32) &func_00008F6C, 5, 0, (s32) arg1);
     func_000020C4((s32) &sp10);
 }
@@ -3012,7 +3012,7 @@ void func_000094E8(M2C_UNK **arg0) {
     *arg0 = &D_00022488;
     func_0000ABCC((s32) arg0);
     func_000117A8((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -3047,7 +3047,7 @@ void func_0000AB7C(M2C_UNK **arg0) {
     *arg0 = &D_00022488;
     func_0000ABCC((s32) arg0);
     func_000117A8((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -3287,7 +3287,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_0000C548);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000C548(M2C_UNK **arg0) {
     *arg0 = &D_000224C8;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 

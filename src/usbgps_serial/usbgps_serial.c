@@ -39,9 +39,9 @@ INCLUDE_ASM("nonmatchings/usbgps_serial", sceUsbGpsOpen);
 
 INCLUDE_ASM("nonmatchings/usbgps_serial", sceUsbGpsClose);
 
-INCLUDE_ASM("nonmatchings/usbgps_serial", sceUsbGps_driver_A259CD67);
+INCLUDE_ASM("nonmatchings/usbgps_serial", sceUsbGpsReset);
 
-s32 sceUsbGps_driver_268F95CA(u32 arg0) {
+s32 sceUsbGpsSetInitDataLocation(u32 arg0) {
     s32 temp_a0;
     s32 var_s0;
     u32 temp_s1;
@@ -61,9 +61,9 @@ s32 sceUsbGps_driver_268F95CA(u32 arg0) {
     return var_s0;
 }
 
-INCLUDE_ASM("nonmatchings/usbgps_serial", sceUsbGps_driver_54D26AA4);
+INCLUDE_ASM("nonmatchings/usbgps_serial", sceUsbGpsGetInitDataLocation);
 
-INCLUDE_ASM("nonmatchings/usbgps_serial", sceUsbGps_driver_69E4AAA8);
+INCLUDE_ASM("nonmatchings/usbgps_serial", sceUsbGpsSaveInitData);
 
 INCLUDE_ASM("nonmatchings/usbgps_serial", sceUsbGpsGetState);
 
@@ -150,10 +150,10 @@ s32 func_00002D4C(void) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = sceUsbBus_driver_B1644BE7(&D_00005210);
+    temp_v0 = sceUsbbdRegister(&D_00005210);
     var_v1 = 0;
     if (temp_v0 < 0) {
-        KDebugForKernel_84F370BC("usbserial ERROR : cannot register : 0x%08x\n", temp_v0);
+        Kprintf("usbserial ERROR : cannot register : 0x%08x\n", temp_v0);
         var_v1 = 1;
     }
     return var_v1;
@@ -163,10 +163,10 @@ s32 func_00002D94(void) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = sceUsbBus_driver_C1E2A540(&D_00005210);
+    temp_v0 = sceUsbbdUnregister(&D_00005210);
     var_v1 = 0;
     if (temp_v0 < 0) {
-        KDebugForKernel_84F370BC("usbserial ERROR : cannot unregister : 0x%08x\n", temp_v0);
+        Kprintf("usbserial ERROR : cannot unregister : 0x%08x\n", temp_v0);
         var_v1 = 1;
     }
     return var_v1;

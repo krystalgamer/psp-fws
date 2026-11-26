@@ -338,11 +338,11 @@ s32 func_000008C4(s32 arg0, struct Unk_func_000008C4_1 *arg1) {
     s32 temp_v0;
 
     temp_s0 = (arg1->unk4 * 2) + 2;
-    temp_v0 = scePaf_5FAC9869(temp_s0);
+    temp_v0 = sce_paf_private_malloc(temp_s0);
     if (temp_v0 != 0) {
         sceCccUTF8toUTF16(temp_v0, temp_s0, arg1->unk0);
         func_00001CFC(arg0, temp_v0);
-        scePaf_545FE2DA(temp_v0);
+        sce_paf_private_free(temp_v0);
     }
     return arg0;
 }
@@ -355,12 +355,12 @@ void func_00000944(s32 arg0, s32 arg1, M2C_UNK arg2) {
     s32 temp_s0;
     s32 temp_v0;
 
-    temp_s0 = (scePaf_FD4C9F47(arg1) * 2) + 0x20;
-    temp_v0 = scePaf_5FAC9869(temp_s0);
+    temp_s0 = (sce_paf_private_wcslen(arg1) * 2) + 0x20;
+    temp_v0 = sce_paf_private_malloc(temp_s0);
     if (temp_v0 != 0) {
-        scePaf_49A81B18(temp_v0, temp_s0, arg1, arg2);
-        func_00001D4C(arg0, temp_v0, scePaf_FD4C9F47(temp_v0));
-        scePaf_545FE2DA(temp_v0);
+        sce_paf_private_swprintf(temp_v0, temp_s0, arg1, arg2);
+        func_00001D4C(arg0, temp_v0, sce_paf_private_wcslen(temp_v0));
+        sce_paf_private_free(temp_v0);
     }
 }
 #endif
@@ -551,7 +551,7 @@ void func_00001ECC(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_CA79D58B(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_00001F1C(arg0, arg1, var_v0);
 }
@@ -906,7 +906,7 @@ void func_00003298(s32 *arg0) {
 #else
 void func_00003298(s32 *arg0) {
     func_00003014();
-    scePaf_7EC15225(*arg0);
+    sce_paf_private_free2(*arg0);
 }
 #endif
 

@@ -78,24 +78,24 @@ INCLUDE_RODATA("nonmatchings/ge", D_00004C94);
 INCLUDE_RODATA("nonmatchings/ge", D_00005C9C);
 #endif
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_71FCD1D6);
+INCLUDE_ASM("nonmatchings/ge", sceGeInit);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_B415364D);
+INCLUDE_ASM("nonmatchings/ge", sceGeGetReg);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_51C8BB60);
+INCLUDE_ASM("nonmatchings/ge", sceGeSetReg);
 #endif
 
 INCLUDE_ASM("nonmatchings/ge", sceGeGetCmd);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_51D44C58);
+INCLUDE_ASM("nonmatchings/ge", sceGeSetCmd);
 #endif
 
 INCLUDE_ASM("nonmatchings/ge", sceGeGetMtx);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_5A0103E6);
+INCLUDE_ASM("nonmatchings/ge", sceGeSetMtx);
 #endif
 
 INCLUDE_ASM("nonmatchings/ge", sceGeSaveContext);
@@ -161,13 +161,13 @@ INCLUDE_ASM("nonmatchings/ge", func_00001A38);
 INCLUDE_ASM("nonmatchings/ge", func_00001BA4);
 
 s32 module_start(void) {
-    sceGe_driver_71FCD1D6();
+    sceGeInit();
     return 0;
 }
 
 INCLUDE_ASM("nonmatchings/ge", module_reboot_before);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_9F2C2948);
+INCLUDE_ASM("nonmatchings/ge", sceGeEnd);
 
 #if FW_VERSION < 282
 s32 sceGe_driver_9DA4A75F(s32 arg0) {
@@ -239,13 +239,13 @@ INCLUDE_ASM("nonmatchings/ge", func_00001F34);
 
 INCLUDE_ASM("nonmatchings/ge", func_00002110);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_8F185DF7);
+INCLUDE_ASM("nonmatchings/ge", sceGeEdramInit);
 #endif
 
 INCLUDE_ASM("nonmatchings/ge", sceGe_driver_114E1745);
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_5BAA5439);
+INCLUDE_ASM("nonmatchings/ge", sceGeEdramSetSize);
 
 void *sceGeEdramGetAddr(void) {
     return (void *)0x04000000;
@@ -259,7 +259,7 @@ INCLUDE_ASM("nonmatchings/ge", func_0000102C);
 
 INCLUDE_ASM("nonmatchings/ge", func_000010CC);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_8F185DF7);
+INCLUDE_ASM("nonmatchings/ge", sceGeEdramInit);
 #endif
 
 #if FW_VERSION < 250
@@ -341,7 +341,7 @@ INCLUDE_ASM("nonmatchings/ge", sceGe_driver_AEC21518);
 
 INCLUDE_ASM("nonmatchings/ge", sceGe_driver_7B481502);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_9ACFF59D);
+INCLUDE_ASM("nonmatchings/ge", sceGeGetListIdList);
 #endif
 
 #if FW_VERSION == 201
@@ -349,9 +349,9 @@ INCLUDE_ASM("nonmatchings/ge", sceGe_driver_3EFC0D64);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_67B01D8E);
+INCLUDE_ASM("nonmatchings/ge", sceGeGetList);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_user_E66CB92E);
+INCLUDE_ASM("nonmatchings/ge", sceGeGetStack);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -513,11 +513,11 @@ INCLUDE_ASM("nonmatchings/ge", sceGe_driver_AEC21518);
 
 INCLUDE_ASM("nonmatchings/ge", sceGe_driver_7B481502);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_9ACFF59D);
+INCLUDE_ASM("nonmatchings/ge", sceGeGetListIdList);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_67B01D8E);
+INCLUDE_ASM("nonmatchings/ge", sceGeGetList);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_user_E66CB92E);
+INCLUDE_ASM("nonmatchings/ge", sceGeGetStack);
 
 INCLUDE_ASM("nonmatchings/ge", func_000046EC);
 

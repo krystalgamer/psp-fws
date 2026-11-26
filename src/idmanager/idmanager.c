@@ -59,7 +59,7 @@ INCLUDE_ASM("nonmatchings/idmanager", func_00000510);
 
 INCLUDE_ASM("nonmatchings/idmanager", func_000005F0);
 
-INCLUDE_ASM("nonmatchings/idmanager", sceIdMgr_driver_F464F91C);
+INCLUDE_ASM("nonmatchings/idmanager", sceIdMgrRegisterCallback);
 #else
 INCLUDE_ASM("nonmatchings/idmanager", func_0000046C);
 

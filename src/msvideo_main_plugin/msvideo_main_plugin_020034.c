@@ -511,7 +511,7 @@ s32 func_00024034(s32 arg0, s32 arg1) {
 
     var_v0 = D_000B61E4;
     if (var_v0 == 0) {
-        temp_v0 = scePaf_B7E6052B(0xD0);
+        temp_v0 = _Znwj(0xD0);
         func_00023EB0(temp_v0, arg0, arg1);
         D_000B61E4 = temp_v0;
         var_v0 = temp_v0;
@@ -591,9 +591,9 @@ void func_000258A0(struct Unk_func_000258A0_0 *arg0) {
                 temp_v0 = arg0->unk48;
                 temp_v0->unk1FD = 0;
                 temp_v0->unk1FE = 0;
-                scePaf_86B41BA3(temp_v0);
+                _ZN3paf8PhWidget13UpdateCamerasEv(temp_v0);
             } else {
-                scePaf_C2C25056(temp_s1, func_0001EBE0(temp_a0));
+                _ZN3paf6PhSpin11SetSelectedEi(temp_s1, func_0001EBE0(temp_a0));
             }
         }
         if ((arg0->unk6C != 0) || (arg0->unk70 != 0) || (arg0->unk74 != 0)) {

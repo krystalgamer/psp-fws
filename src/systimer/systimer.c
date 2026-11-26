@@ -4,11 +4,11 @@
 #include "systimer_decls.h"
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_C99073E3);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerAlloc);
 
 INCLUDE_ASM("nonmatchings/systimer", func_000000E0);
 
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_975D8E84);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerSetHandler);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -33,7 +33,7 @@ void func_000002B0(void **arg0) {
 INCLUDE_ASM("nonmatchings/systimer", func_000002CC);
 #endif
 
-INCLUDE_ASM("nonmatchings/systimer", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/systimer", module_bootstart);
 
 INCLUDE_ASM("nonmatchings/systimer", module_reboot_before);
 
@@ -44,22 +44,22 @@ INCLUDE_ASM("nonmatchings/systimer", func_00000160);
 
 INCLUDE_ASM("nonmatchings/systimer", func_000001D8);
 
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_C99073E3);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerAlloc);
 #endif
 
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_C105CF38);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerFree);
 
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_B53534B4);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerSetPrscl);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/systimer", func_000004C0);
 
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_975D8E84);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerSetHandler);
 #endif
 
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_A95143E2);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerStartCount);
 
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_4A01F9D3);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerStopCount);
 
 #if FW_VERSION == 100
 void func_00000798(void **arg0) {
@@ -70,15 +70,15 @@ void func_00000798(void **arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_54BB5DB4);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerResetCount);
 
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_228EDAE4);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerGetCount);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/systimer", func_00000898);
 #endif
 
-INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_53231A15);
+INCLUDE_ASM("nonmatchings/systimer", sceSTimerSetTMCY);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/systimer", func_00000878);

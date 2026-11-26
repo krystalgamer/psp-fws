@@ -117,7 +117,7 @@ void func_00001EEC(void) {
     temp_v0 = sceKernelCreateCallback(&D_00005BF0, (s32) &func_00002380, NULL);
     D_00006700 = temp_v0;
     if (temp_v0 > 0) {
-        sceVshBridge_13AEE247(2, temp_v0);
+        vshRegisterPowerCallback(2, temp_v0);
     }
     func_00003F6C();
     func_00004008((s32) &D_0000513C, (s32) &D_0000512C, &sp0);
@@ -138,7 +138,7 @@ void func_00001EEC(void) {
     temp_v0 = sceKernelCreateCallback(&D_00005BF0, (s32) &func_00002380, NULL);
     D_00006700 = temp_v0;
     if (temp_v0 > 0) {
-        sceVshBridge_13AEE247(2, temp_v0);
+        vshRegisterPowerCallback(2, temp_v0);
     }
     func_00003F6C();
     func_00004008((s32) &D_0000513C, (s32) &D_0000512C, &sp0);
@@ -197,7 +197,7 @@ void func_00002B08(s32 arg0) {
     temp_v0 = sceKernelCreateCallback(&D_0000916C, (s32) &func_000029C8, NULL);
     D_0000A364 = temp_v0;
     if (temp_v0 > 0) {
-        sceVshBridge_13AEE247(2, temp_v0);
+        vshRegisterPowerCallback(2, temp_v0);
     }
     func_000053D4();
     func_00002E78(arg0);

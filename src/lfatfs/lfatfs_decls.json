@@ -1,10 +1,10 @@
 {
  "funcs": {
-  "IoFileMgrForKernel_6D08A871": "M2C_UNK IoFileMgrForKernel_6D08A871(M2C_UNK *);",
-  "IoFileMgrForKernel_8E982A74": "M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);",
-  "IoFileMgrForKernel_C7F35804": "M2C_UNK IoFileMgrForKernel_C7F35804(s32);",
-  "KDebugForKernel_84F370BC": "M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);",
-  "SysMemForKernel_7B749390": "M2C_UNK SysMemForKernel_7B749390(s32, s32);",
+  "sceIoUnassign": "M2C_UNK sceIoUnassign(M2C_UNK *);",
+  "sceIoAddDrv": "M2C_UNK sceIoAddDrv(M2C_UNK *);",
+  "sceIoDelDrv": "M2C_UNK sceIoDelDrv(s32);",
+  "Kprintf": "M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, s32);",
+  "sceKernelFreeHeapMemory": "M2C_UNK sceKernelFreeHeapMemory(s32, s32);",
   "func_00000000": "s32 func_00000000(s32 arg0);",
   "func_00000000_v310": "s32 func_00000000_v310(s32 arg0);",
   "func_00000000_v311": "s32 func_00000000_v311(s32 arg0);",
@@ -134,10 +134,10 @@
   "sceKernelUnlockMutex": "s32 sceKernelUnlockMutex(s32, s32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
   "sceLFatFs_driver_51C7F7AE": "s32 sceLFatFs_driver_51C7F7AE(void);",
-  "sceLFatFs_driver_8F0560E0": "s32 sceLFatFs_driver_8F0560E0(void);",
+  "sceLfatfsStop": "s32 sceLfatfsStop(void);",
   "sceLFatFs_driver_F1FBA85F": "s32 sceLFatFs_driver_F1FBA85F(void);",
-  "sceSysEventForKernel_CD9E4BB5": "M2C_UNK sceSysEventForKernel_CD9E4BB5(M2C_UNK *);",
-  "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);"
+  "sceKernelRegisterSysEventHandler": "M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);",
+  "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);"
  },
  "types": {
   "Unk_Unk_func_00003AE8_0_0": "struct Unk_Unk_func_00003AE8_0_0 {\n    u8 pad0[0x10];\n    s32 unk10;\n};",

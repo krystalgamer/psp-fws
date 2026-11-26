@@ -1,11 +1,11 @@
 // NID-derived names
-sceHttpStorage_700AAD44 = 0x00000000; // type:func
-sceHttpStorage_CDA3D8F6 = 0x00000100; // type:func
-sceHttpStorage_CDDF1103 = 0x00000180; // type:func
-sceHttpStorage_24AA94F4 = 0x00000218; // type:func
-sceHttpStorage_B33389CE = 0x000002B0; // type:func
-sceHttpStorage_2D8DAE58 = 0x00000320; // type:func
-sceHttpStorage_driver_C59AC98A = 0x0000039C; // type:func
+sceHttpStorageOpen = 0x00000000; // type:func
+sceHttpStorageClose = 0x00000100; // type:func
+sceHttpStorageRead = 0x00000180; // type:func
+sceHttpStorageWrite = 0x00000218; // type:func
+sceHttpStorageLseek = 0x000002B0; // type:func
+sceHttpStorageGetstat = 0x00000320; // type:func
+sceHttpStorageEnd = 0x0000039C; // type:func
 module_reboot_before = 0x00000404; // type:func
 sceIoOpen = 0x0000046C; // type:func
 sceIoLseek = 0x00000474; // type:func

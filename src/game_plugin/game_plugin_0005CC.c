@@ -319,7 +319,7 @@ void func_00000558(void) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00000558(void) {
-    scePaf_809A4F83(&D_000129D8, 0x80, "disc0:/PSP_GAME/SYSDIR/EBOOT.BIN");
+    sce_paf_private_snprintf(&D_000129D8, 0x80, "disc0:/PSP_GAME/SYSDIR/EBOOT.BIN");
     func_000071AC(0);
 }
 
@@ -338,7 +338,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000005C0);
 
 #if FW_VERSION == 201
 void func_000005C0(s32 arg0, s32 arg1, s32 arg2) {
-    scePaf_FF2F98C6(&D_000129D8, arg0, 0x80);
+    sce_paf_private_strncpy(&D_000129D8, arg0, 0x80);
     D_00011710 = arg1;
     D_00011714 = arg2;
     func_000075F4(&D_0001157C);
@@ -888,7 +888,7 @@ void func_00002640(s32 arg0) {
         temp_s1 = D_00011620;
         scePaf_F609FA81(temp_s1, (s32) &D_00011980, 0, 0);
         scePaf_CAF05F1D(temp_s1, (s32) &D_00011980);
-        scePaf_66907719();
+        InputDevice_PspPad_Unlock();
     }
 }
 #endif
@@ -905,7 +905,7 @@ void func_00002640(s32 arg0) {
             temp_s1 = D_00011580;
             scePaf_F609FA81(temp_s1, (s32) &D_00011980, 0, 0);
             scePaf_CAF05F1D(temp_s1, (s32) &D_00011980);
-            scePaf_66907719();
+            InputDevice_PspPad_Unlock();
         }
     }
 }
@@ -963,7 +963,7 @@ void func_00002880(s32 arg0) {
         sceVshCommonGui_A0DE7090(0);
         sceVshCommonGui_441D55D7(0);
         vsh_0B8DE38E(&D_0001157C, 2);
-        scePaf_66907719();
+        InputDevice_PspPad_Unlock();
     }
 }
 #endif

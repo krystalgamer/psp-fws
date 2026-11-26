@@ -400,7 +400,7 @@ s32 sceMpeg_5AC68A41(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return var_v1;
 }
 
-s32 sceMpeg_DBB60658(s32 arg0, s32 arg1) {
+s32 sceMpegFlushAu(s32 arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0x80618008;
@@ -452,7 +452,7 @@ s32 sceMpegAvcDecodeDetailIndex(void *arg0, s32 arg1, void *arg2) {
     return var_v1;
 }
 
-s32 sceMpeg_CF3547A2(s32 arg0, s32 arg1) {
+s32 sceMpegAvcDecodeDetail2(s32 arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0x80618008;
@@ -462,7 +462,7 @@ s32 sceMpeg_CF3547A2(s32 arg0, s32 arg1) {
     return var_v1;
 }
 
-s32 sceMpeg_6F314410(s32 arg0, s32 arg1) {
+s32 sceMpegAvcDecodeGetDecodeSEI(s32 arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0x80618008;
@@ -581,7 +581,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007BF0);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 void func_00007B94(void) {
-    sceVideocodec_4F160BF4(D_00007D40);
+    sceVideocodecReleaseEDRAM(D_00007D40);
 }
 
 s32 func_00007BB8(s32 arg0) {
@@ -611,7 +611,7 @@ s32 func_00006050(s32 *arg0) {
     s32 temp_s1;
 
     func_000079D8(D_00007F04);
-    temp_s1 = sceVideocodec_C01EC829(D_00007D40, 0);
+    temp_s1 = sceVideocodecOpen(D_00007D40, 0);
     *arg0 = M2C_FIELD(D_00007D40, s32 *, 0x18);
     func_00007A68(D_00007F04);
     return temp_s1;
@@ -652,7 +652,7 @@ s32 func_00006124(s32 arg0) {
     s32 temp_s1;
 
     func_000079D8(D_00007F04);
-    temp_s1 = sceVideocodec_DBA273FA(arg0, 0);
+    temp_s1 = sceVideocodecDecode(arg0, 0);
     func_00007A68(D_00007F04);
     return temp_s1;
 }
@@ -661,7 +661,7 @@ s32 func_00006178(s32 arg0) {
     s32 temp_s1;
 
     func_000079D8(D_00007F04);
-    temp_s1 = sceVideocodec_A2F0564E(arg0, 0);
+    temp_s1 = sceVideocodecStop(arg0, 0);
     func_00007A68(D_00007F04);
     return temp_s1;
 }
@@ -677,7 +677,7 @@ s32 func_000061CC(s32 arg0) {
     s32 var_v0;
 
     func_000079D8(D_00007F04);
-    temp_v0 = sceVideocodec_307E6E1C(arg0, 0);
+    temp_v0 = sceVideocodecDelete(arg0, 0);
     if (temp_v0 != 0) {
         func_00007A68(D_00007F04);
         var_v0 = temp_v0;
@@ -695,7 +695,7 @@ s32 func_00007754(void *arg0, s32 arg1) {
 
     func_000079D8(D_00007F04);
     M2C_FIELD(arg0, s32 *, 0x50) = arg1;
-    temp_s1 = sceVideocodec_627B7D42(arg0, 0);
+    temp_s1 = sceVideocodecGetSEI(arg0, 0);
     func_00007A68(D_00007F04);
     return temp_s1;
 }
@@ -727,7 +727,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006234);
 
 #if FW_VERSION >= 282
 void func_00007D70(void) {
-    sceVideocodec_4F160BF4(D_00009DC0);
+    sceVideocodecReleaseEDRAM(D_00009DC0);
 }
 
 s32 func_00007D94(s32 arg0) {

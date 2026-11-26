@@ -390,11 +390,11 @@ s32 func_000004CC(void) {
 #endif
 
 #if FW_VERSION < 250
-void sceLFatFs_driver_933F6E29(void) {
+void sceLfatfsWaitReady(void) {
 
 }
 
-void sceLFatFs_driver_8F0560E0(void) {
+void sceLfatfsStop(void) {
 
 }
 #endif

@@ -129,8 +129,8 @@ s32 func_0003CBB0(void) {
 
     temp_v0 = scePaf_F13EBB78(0xE);
     if (temp_v0 != 0) {
-        scePaf_A82E3C19(func_0004C108(0));
-        scePaf_809A4F83(temp_v0, 4, "%d", scePaf_4370175A());
+        sce_paf_private_srand(func_0004C108(0));
+        sce_paf_private_snprintf(temp_v0, 4, "%d", sce_paf_private_rand());
     }
     return temp_v0;
 }

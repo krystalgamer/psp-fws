@@ -1,15 +1,15 @@
 // NID-derived names
-sceVideocodec_2D31F5B1 = 0x00000000; // type:func
-sceVideocodec_4F160BF4 = 0x000000A8; // type:func
-sceVideocodec_C01EC829 = 0x0000012C; // type:func
-sceVideocodec_17099F0A = 0x00000228; // type:func
-sceVideocodec_DBA273FA = 0x00000354; // type:func
-sceVideocodec_A2F0564E = 0x000004D0; // type:func
-sceVideocodec_307E6E1C = 0x00000608; // type:func
-sceVideocodec_745A7B7A = 0x000006F8; // type:func
-sceVideocodec_2F385E7F = 0x000007E4; // type:func
-sceVideocodec_26927D19 = 0x00000960; // type:func
-sceVideocodec_driver_E76D65FE = 0x00000A34; // type:func
+sceVideocodecGetEDRAM = 0x00000000; // type:func
+sceVideocodecReleaseEDRAM = 0x000000A8; // type:func
+sceVideocodecOpen = 0x0000012C; // type:func
+sceVideocodecInit = 0x00000228; // type:func
+sceVideocodecDecode = 0x00000354; // type:func
+sceVideocodecStop = 0x000004D0; // type:func
+sceVideocodecDelete = 0x00000608; // type:func
+sceVideocodecSetMemory = 0x000006F8; // type:func
+sceVideocodecScanHeader = 0x000007E4; // type:func
+sceVideocodecGetVersion = 0x00000960; // type:func
+sceVideocodecStartEntry = 0x00000A34; // type:func
 module_stop = 0x00000A3C; // type:func
 sceKernelDcacheWritebackInvalidateRange = 0x00000EF8; // type:func
 sceKernelDcacheInvalidateRange = 0x00000F00; // type:func

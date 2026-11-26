@@ -138,11 +138,11 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeDetailIndex);
 #endif
 
 #if FW_VERSION == 260
-INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_CF3547A2);
+INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeDetail2);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_6F314410);
+INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeGetDecodeSEI);
 #endif
 
 #if FW_VERSION == 100
@@ -164,7 +164,7 @@ s32 sceMpegAvcDecodeDetail(void *arg0, void *arg1) {
 #endif
 
 #if FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_CF3547A2);
+INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeDetail2);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -531,7 +531,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00003D0C);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_DBB60658);
+INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegFlushAu);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 271
@@ -1310,7 +1310,7 @@ s32 sceMpeg_5AC68A41(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return var_v1;
 }
 
-s32 sceMpeg_DBB60658(s32 arg0, s32 arg1) {
+s32 sceMpegFlushAu(s32 arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0x80618008;
@@ -1362,7 +1362,7 @@ s32 sceMpegAvcDecodeDetailIndex(void *arg0, s32 arg1, void *arg2) {
     return var_v1;
 }
 
-s32 sceMpeg_CF3547A2(s32 arg0, s32 arg1) {
+s32 sceMpegAvcDecodeDetail2(s32 arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0x80618008;
@@ -1372,7 +1372,7 @@ s32 sceMpeg_CF3547A2(s32 arg0, s32 arg1) {
     return var_v1;
 }
 
-s32 sceMpeg_6F314410(s32 arg0, s32 arg1) {
+s32 sceMpegAvcDecodeGetDecodeSEI(s32 arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0x80618008;

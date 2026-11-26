@@ -5,6 +5,6 @@
 #include "m2c_macros.h"
 
 
-s32 scePEQ_driver_213DE849(void);
+s32 scePeqEntry(void);
 
 #endif

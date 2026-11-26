@@ -13,15 +13,15 @@ extern s32 D_00000F3C;
 
 s32 module_reboot_before(void);
 s32 module_start(void);
-s32 sceLcdc_driver_0E8E8774(void);
+s32 sceLcdcEnd(void);
 s32 sceLcdc_driver_825DB9C5(void);
-s32 sceLcdc_driver_A0032C3D(void);
-s32 sceLcdc_driver_A182B32C(void);
-s32 sceLcdc_driver_B55500A3(void);
-s32 sceLcdc_driver_DCD51769(void);
-M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);
-M2C_UNK sceSysreg_driver_63B1AADF();
-M2C_UNK sceSysreg_driver_E89243BE();
-M2C_UNK sceSysreg_driver_F74F14E9();
+s32 sceLcdcDisable(void);
+s32 sceLcdcEnable(void);
+s32 sceLcdcInit(void);
+s32 sceLcdcSuspend(void);
+M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);
+M2C_UNK sceSysregLcdcIoEnable();
+M2C_UNK sceSysregLcdcClkDisable();
+M2C_UNK sceSysregLcdcIoDisable();
 
 #endif

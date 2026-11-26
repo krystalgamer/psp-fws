@@ -108,6 +108,6 @@ void func_000125EC(void);
 void func_00012624(void);
 void func_00012644(void);
 M2C_UNK func_000127F8(M2C_UNK, M2C_UNK);
-s32 syslib_D3744BE0(void);
+s32 module_bootstart(void);
 
 #endif

@@ -103,13 +103,13 @@ void func_0003FC60(s32 arg0) {
 
 void func_0003FCA4(s32 arg0) {
     func_0003F990();
-    sceVshLftvMw_3B433436(arg0 + 4);
-    sceVshLftvMw_7CA858EC(arg0 + 0xA);
+    sysInfoWriteMAC(arg0 + 4);
+    sysInfoWriteUniqueId(arg0 + 0xA);
 }
 
 void func_0003FCDC(s32 arg0) {
     func_0003F990();
-    sceVshLftvMw_E16F62EC(arg0 + 0x1B, 1);
+    sysInfoWriteModelInfo(arg0 + 0x1B, 1);
 }
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_0003FD10);
@@ -395,7 +395,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_000434F4);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000434F4(s32 arg0) {
-    scePaf_6829D7AF(arg0, 0, 0x14);
+    sce_paf_private_memset(arg0, 0, 0x14);
 }
 #endif
 
@@ -567,14 +567,14 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_00034148);
 
 #if FW_VERSION == 250
 s32 func_00034148(void *arg0) {
-    scePaf_6829D7AF(arg0 + 0x24, 0, 0x21);
-    scePaf_6829D7AF(arg0 + 0x45, 0, 0xD);
-    scePaf_6829D7AF(arg0 + 0x52, 0, 0x10);
-    scePaf_6829D7AF(arg0 + 0x62, 0, 0x80);
+    sce_paf_private_memset(arg0 + 0x24, 0, 0x21);
+    sce_paf_private_memset(arg0 + 0x45, 0, 0xD);
+    sce_paf_private_memset(arg0 + 0x52, 0, 0x10);
+    sce_paf_private_memset(arg0 + 0x62, 0, 0x80);
     M2C_FIELD(arg0, s32 *, 0xE4) = -1;
-    scePaf_6829D7AF((s32) (arg0 + 0xE8), 0, 8);
-    scePaf_6829D7AF((s32) (arg0 + 0xF0), 0, 7);
-    scePaf_6829D7AF((s32) (arg0 + 0xF7), 0, 0x21);
+    sce_paf_private_memset((s32) (arg0 + 0xE8), 0, 8);
+    sce_paf_private_memset((s32) (arg0 + 0xF0), 0, 7);
+    sce_paf_private_memset((s32) (arg0 + 0xF7), 0, 0x21);
     M2C_FIELD(arg0, s32 *, 0x118) = 0;
     return 0;
 }
@@ -602,15 +602,15 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_000341A4);
 s32 func_000341E8(void *arg0) {
     void *temp_s0;
 
-    scePaf_F95EA3F1(arg0 + 0x52, sceVshLftvMw_5C471047(0), 0xF);
-    scePaf_F95EA3F1(arg0 + 0x62, sceVshLftvMw_59456C6E(0), 0x7F);
+    sce_paf_private_memcpy(arg0 + 0x52, sceVshLftvMw_5C471047(0), 0xF);
+    sce_paf_private_memcpy(arg0 + 0x62, sceVshLftvMw_59456C6E(0), 0x7F);
     M2C_FIELD(arg0, s32 *, 0xE4) = sceVshLftvMw_95745BE1(0);
     temp_s0 = arg0 + 0xF0;
-    scePaf_F95EA3F1((s32) (arg0 + 0xE8), sceVshLftvMw_2A7D1F76(0), 7);
-    scePaf_F95EA3F1((s32) (arg0 + 0xF7), sceVshLftvMw_38CC4A9B(0), 0x20);
-    scePaf_F95EA3F1((s32) temp_s0, sceVshLftvMw_1D700DE1(0), 6);
+    sce_paf_private_memcpy((s32) (arg0 + 0xE8), sceVshLftvMw_2A7D1F76(0), 7);
+    sce_paf_private_memcpy((s32) (arg0 + 0xF7), sceVshLftvMw_38CC4A9B(0), 0x20);
+    sce_paf_private_memcpy((s32) temp_s0, sceVshLftvMw_1D700DE1(0), 6);
     if (strnlen(temp_s0, 7) == 0) {
-        scePaf_FF2F98C6(temp_s0, "1.000", 6);
+        sce_paf_private_strncpy(temp_s0, "1.000", 6);
     }
     M2C_FIELD(arg0, s32 *, 0x118) = sceVshLftvMw_0F42084B(0);
     return 0;
@@ -1061,7 +1061,7 @@ void func_00043BD4(void) {
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_00043C00);
 #else
 void func_00043C00(s32 arg0) {
-    scePaf_3E203AEB(D_0005F9E4, 0, arg0);
+    Heap_Alloc(D_0005F9E4, 0, arg0);
 }
 #endif
 
@@ -1970,15 +1970,15 @@ void func_00048C7C(struct Unk_func_00048C7C_0 *arg0) {
     arg0->unk3C = -1;
     arg0->unkE0 = -1;
     arg0->unkE4 = 0;
-    scePaf_6829D7AF((s32) arg0, 0, 0x18);
-    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x19), 0, 0x21);
-    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x40), 0, 0x21);
-    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x61), 0, 0xD);
-    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x6E), 0, 0x10);
-    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x7E), 0, 0x21);
-    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x9F), 0, 0x40);
-    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0xE8), 0, 0x80);
-    scePaf_6829D7AF((s32) ((u8 *)arg0 + 0x168), 0, 7);
+    sce_paf_private_memset((s32) arg0, 0, 0x18);
+    sce_paf_private_memset((s32) ((u8 *)arg0 + 0x19), 0, 0x21);
+    sce_paf_private_memset((s32) ((u8 *)arg0 + 0x40), 0, 0x21);
+    sce_paf_private_memset((s32) ((u8 *)arg0 + 0x61), 0, 0xD);
+    sce_paf_private_memset((s32) ((u8 *)arg0 + 0x6E), 0, 0x10);
+    sce_paf_private_memset((s32) ((u8 *)arg0 + 0x7E), 0, 0x21);
+    sce_paf_private_memset((s32) ((u8 *)arg0 + 0x9F), 0, 0x40);
+    sce_paf_private_memset((s32) ((u8 *)arg0 + 0xE8), 0, 0x80);
+    sce_paf_private_memset((s32) ((u8 *)arg0 + 0x168), 0, 7);
 }
 #endif
 
@@ -2117,7 +2117,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_00049878);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_00049A40);
 #else
 void func_00049A40(void) {
-    scePaf_5FAC9869();
+    sce_paf_private_malloc();
 }
 #endif
 
@@ -2125,7 +2125,7 @@ void func_00049A40(void) {
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_00049A5C);
 #else
 void func_00049A5C(void) {
-    scePaf_545FE2DA();
+    sce_paf_private_free();
 }
 #endif
 
@@ -2141,7 +2141,7 @@ void func_00049A78(struct Unk_func_00049A78_0 *arg0) {
     arg0->unk44 = 0;
     arg0->unk48 = 0;
     arg0->unk4C = 0;
-    scePaf_6829D7AF((s32) ((u8 *)arg0 + 4), 0, 0x38);
+    sce_paf_private_memset((s32) ((u8 *)arg0 + 4), 0, 0x38);
 }
 #endif
 
@@ -2157,7 +2157,7 @@ void func_00049AD0(struct Unk_func_00049AD0_0 *arg0) {
     arg0->unk44 = 0;
     arg0->unk48 = 0;
     arg0->unk4C = 0;
-    scePaf_6829D7AF((s32) ((u8 *)arg0 + 4), 0, 0x38);
+    sce_paf_private_memset((s32) ((u8 *)arg0 + 4), 0, 0x38);
 }
 #endif
 
@@ -2441,7 +2441,7 @@ void func_0004A9AC(struct Unk_func_0004A9AC_0 *arg0, s32 arg1) {
     arg0->unk0 = &D_0005D5C8;
     temp_v0 = scePaf_F13EBB78(arg1);
     arg0->unk4 = temp_v0;
-    scePaf_6829D7AF(temp_v0, 0, arg1);
+    sce_paf_private_memset(temp_v0, 0, arg1);
 }
 #endif
 
@@ -2457,7 +2457,7 @@ void func_0004AA04(struct Unk_func_0004AA04_0 *arg0, s32 arg1) {
     arg0->unk0 = &D_0005D5C8;
     temp_v0 = scePaf_F13EBB78(arg1);
     arg0->unk4 = temp_v0;
-    scePaf_6829D7AF(temp_v0, 0, arg1);
+    sce_paf_private_memset(temp_v0, 0, arg1);
 }
 #endif
 
@@ -2473,7 +2473,7 @@ void func_0004AA5C(struct Unk_func_0004AA5C_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk0 = &D_0005D5C8;
     temp_v0 = scePaf_F13EBB78(arg2);
     arg0->unk4 = temp_v0;
-    scePaf_F95EA3F1(temp_v0, arg1, arg2);
+    sce_paf_private_memcpy(temp_v0, arg1, arg2);
 }
 #endif
 
@@ -2489,7 +2489,7 @@ void func_0004AAC0(struct Unk_func_0004AAC0_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk0 = &D_0005D5C8;
     temp_v0 = scePaf_F13EBB78(arg2);
     arg0->unk4 = temp_v0;
-    scePaf_F95EA3F1(temp_v0, arg1, arg2);
+    sce_paf_private_memcpy(temp_v0, arg1, arg2);
 }
 #endif
 
@@ -2550,7 +2550,7 @@ void func_0004ADA4(struct Unk_func_0004ADA4_0 *arg0) {
     if (temp_v0 == 0) {
 
     } else {
-        scePaf_6829D7AF(temp_v0, 0, arg0->unk8);
+        sce_paf_private_memset(temp_v0, 0, arg0->unk8);
     }
 }
 #endif
@@ -3114,7 +3114,7 @@ void func_0004F650(struct Unk_func_0004F650_0 *arg0) {
 
     temp_v0 = scePaf_B7E6052B(0xC);
     func_000515E0(temp_v0, arg0->unk10, arg0->unk8);
-    scePaf_F95EA3F1((s32) ((u8 *)arg0 + 0xC), (*temp_v0)->unk8(temp_v0), 4);
+    sce_paf_private_memcpy((s32) ((u8 *)arg0 + 0xC), (*temp_v0)->unk8(temp_v0), 4);
     (*temp_v0)->unk4(temp_v0);
 }
 #endif
@@ -3130,7 +3130,7 @@ s32 func_0004F6C8(struct Unk_func_0004F6C8_0 *arg0) {
 
     temp_v0 = scePaf_B7E6052B(0xC);
     func_000515E0(temp_v0, arg0->unk10, arg0->unk8);
-    temp_s0 = scePaf_3FBD9639((u8 *)arg0 + 0xC, (*temp_v0)->unk8(temp_v0), 4) == 0;
+    temp_s0 = sce_paf_private_memcmp((u8 *)arg0 + 0xC, (*temp_v0)->unk8(temp_v0), 4) == 0;
     (*temp_v0)->unk4(temp_v0);
     return temp_s0;
 }
@@ -3154,7 +3154,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_0004F7A4);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_0004F7A4(void *arg0) {
-    return scePaf_3FBD9639(arg0, (s32) &D_0005D860, 4) == 0;
+    return sce_paf_private_memcmp(arg0, (s32) &D_0005D860, 4) == 0;
 }
 #endif
 
@@ -3485,7 +3485,7 @@ void func_00050BD4(struct Unk_func_00050BD4_0 *arg0, s32 arg1, s32 arg2, s32 arg
     arg0->unk14 = arg3;
     temp_v0 = scePaf_F13EBB78(arg0->unk8 + arg0->unk10 + arg3);
     arg0->unk4 = temp_v0;
-    scePaf_6829D7AF(temp_v0, 0, arg0->unk8 + arg0->unk10);
+    sce_paf_private_memset(temp_v0, 0, arg0->unk8 + arg0->unk10);
     func_00050F0C((s32) arg0);
 }
 #endif
@@ -3504,7 +3504,7 @@ void func_00050C58(struct Unk_func_00050C58_0 *arg0, s32 arg1, s32 arg2, s32 arg
     arg0->unk14 = arg3;
     temp_v0 = scePaf_F13EBB78(arg0->unk8 + arg0->unk10 + arg3);
     arg0->unk4 = temp_v0;
-    scePaf_6829D7AF(temp_v0, 0, arg0->unk8 + arg0->unk10);
+    sce_paf_private_memset(temp_v0, 0, arg0->unk8 + arg0->unk10);
     func_00050F0C((s32) arg0);
 }
 #endif
@@ -3523,7 +3523,7 @@ void func_00050CDC(struct Unk_func_00050CDC_0 *arg0, s32 arg1, s32 arg2, s32 arg
     arg0->unk14 = arg4;
     temp_v0 = scePaf_F13EBB78(arg0->unk8 + arg0->unk10 + arg4);
     arg0->unk4 = temp_v0;
-    scePaf_F95EA3F1(temp_v0, arg1, arg2);
+    sce_paf_private_memcpy(temp_v0, arg1, arg2);
     func_00050F0C((s32) arg0);
 }
 #endif
@@ -3542,7 +3542,7 @@ void func_00050D6C(struct Unk_func_00050D6C_0 *arg0, s32 arg1, s32 arg2, s32 arg
     arg0->unk14 = arg4;
     temp_v0 = scePaf_F13EBB78(arg0->unk8 + arg0->unk10 + arg4);
     arg0->unk4 = temp_v0;
-    scePaf_F95EA3F1(temp_v0, arg1, arg2);
+    sce_paf_private_memcpy(temp_v0, arg1, arg2);
     func_00050F0C((s32) arg0);
 }
 #endif
@@ -3614,7 +3614,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_00051018);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00051018(struct Unk_func_00051018_0 *arg0) {
-    scePaf_6829D7AF(arg0->unk4, 0, arg0->unk8);
+    sce_paf_private_memset(arg0->unk4, 0, arg0->unk8);
     arg0->unk0->unk8(arg0);
 }
 #endif

@@ -1,6 +1,6 @@
 {
  "funcs": {
-  "KDebugForKernel_84F370BC": "M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, s32);",
+  "Kprintf": "M2C_UNK Kprintf(M2C_UNK *, s32);",
   "func_00000000": "s8 *func_00000000(s8 *arg0, s32 arg1);",
   "func_00000F28": "s32 func_00000F28(s32);",
   "func_00001504": "s32 func_00001504(s32 arg0);",
@@ -16,9 +16,9 @@
   "func_00004754": "s32 func_00004754(void);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
-  "sceUsbBus_driver_B1644BE7": "s32 sceUsbBus_driver_B1644BE7(M2C_UNK *);",
-  "sceUsbBus_driver_C1E2A540": "s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);",
-  "sceUsbGps_driver_268F95CA": "s32 sceUsbGps_driver_268F95CA(u32 arg0);"
+  "sceUsbbdRegister": "s32 sceUsbbdRegister(M2C_UNK *);",
+  "sceUsbbdUnregister": "s32 sceUsbbdUnregister(M2C_UNK *);",
+  "sceUsbGpsSetInitDataLocation": "s32 sceUsbGpsSetInitDataLocation(u32 arg0);"
  },
  "types": {
   "D_00005260_s": "struct D_00005260_s {\n    s32 unk0;\n    u8 pad4[0x1578];\n    u32 unk157C;\n};"

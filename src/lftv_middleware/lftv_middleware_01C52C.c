@@ -58,7 +58,7 @@ void func_0001C594(struct Unk_func_0001C594_0 *arg0, s32 arg1) {
     arg0->unk6C = 0xAC44;
     arg0->unk70 = 0x116;
     func_00049648();
-    scePaf_C9831AFF(&D_00054E18, &D_00054E2C);
+    sce_paf_private_printf(&D_00054E18, &D_00054E2C);
 }
 #endif
 

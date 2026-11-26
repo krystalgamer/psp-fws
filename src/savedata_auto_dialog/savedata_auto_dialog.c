@@ -81,7 +81,7 @@ void func_0000015C(void) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0000015C(void) {
-    scePaf_5FAC9869();
+    sce_paf_private_malloc();
 }
 #endif
 
@@ -107,7 +107,7 @@ void func_00000178(void) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00000178(void) {
-    scePaf_3586BE05();
+    sce_paf_private_memalign();
 }
 #endif
 
@@ -164,7 +164,7 @@ void func_00000194(void) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00000194(void) {
-    scePaf_545FE2DA();
+    sce_paf_private_free();
 }
 #endif
 
@@ -932,7 +932,7 @@ void func_000005F4(M2C_UNK **arg0) {
 void func_0000061C(M2C_UNK **arg0) {
     *arg0 = &D_0001F5F8;
     func_0000E6EC((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000654);
@@ -1638,7 +1638,7 @@ void func_000059E4(void *arg0) {
     void **temp_a0;
 
     temp_a0 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), void ***, 0x1C);
-    temp_v0 = scePaf_DAB59652(M2C_FIELD(*temp_a0, s32 (**)(void **), 0x24)(temp_a0), &D_0001F9E0);
+    temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(*temp_a0, s32 (**)(void **), 0x24)(temp_a0), &D_0001F9E0);
     if (temp_v0 == 0) {
 
     } else {
@@ -1917,7 +1917,7 @@ s32 func_00007458(void *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_75062BCF(arg1) == 0) {
+    if (Job_isCanceled(arg1) == 0) {
         var_v1 = func_000093F0(M2C_FIELD(arg0, s32 *, 0x28), 0, 0x800);
     }
     return var_v1;
@@ -1967,7 +1967,7 @@ void func_00008274(void *arg0) {
         func_0000CC40(M2C_FIELD(arg0, void **, 0x2C));
         func_0000CAE4(3, 1);
         temp_a0 = M2C_FIELD(arg0, void ***, 0x1C);
-        temp_v0 = scePaf_DAB59652(M2C_FIELD(*temp_a0, s32 (**)(void **), 0x24)(temp_a0), &D_0001FC30);
+        temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(*temp_a0, s32 (**)(void **), 0x24)(temp_a0), &D_0001FC30);
         if (temp_v0 != 0) {
             func_00003924(temp_v0, (s32) arg0, 0);
         }
@@ -2165,7 +2165,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009FD0);
 
 void func_0000A074(s32 **arg0) {
     *arg0 = &D_0001FE18;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A09C);
@@ -2336,12 +2336,12 @@ void func_0000B590(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_7EC15225(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 
 void func_0000B5E8(void *arg0) {
@@ -2355,7 +2355,7 @@ void func_0000B5E8(void *arg0) {
     if (var_v0 != var_v1) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_v1 = M2C_FIELD(arg0, M2C_UNK **, 0);
             var_v0 = temp_s0;
         } while (temp_s0 != var_v1);
@@ -2378,7 +2378,7 @@ void ***func_0000B740(void ***arg0, void *arg1, void **arg2) {
     temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
     *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_7EC15225(temp_v1);
+    sce_paf_private_free2(temp_v1);
     *arg0 = temp_s0;
     M2C_FIELD(arg1, s32 *, 4) = (s32) (M2C_FIELD(arg1, s32 *, 4) - 1);
     return arg0;
@@ -2409,19 +2409,19 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000BA24);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000BB14);
 
 void func_0000BBF8(void) {
-    scePaf_5FAC9869();
+    sce_paf_private_malloc();
 }
 
 void func_0000BC14(void) {
-    scePaf_3586BE05();
+    sce_paf_private_memalign();
 }
 
 void func_0000BC30(void) {
-    scePaf_545FE2DA();
+    sce_paf_private_free();
 }
 
 void func_0000BC4C(void) {
-    scePaf_10B901E7();
+    sce_paf_private_qsort();
 }
 
 void func_0000BC68(void *arg0, s32 arg1) {
@@ -2488,7 +2488,7 @@ void func_0000BE3C(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0xC);
     if (temp_v0 != 0) {
-        scePaf_35F25BA1(0, temp_v0);
+        Job_Cancel(0, temp_v0);
         M2C_FIELD(arg0, s32 *, 8) = 1;
         M2C_FIELD(arg0, s32 *, 0xC) = 0;
     }
@@ -2516,7 +2516,7 @@ void func_0000BF1C(s32 **arg0) {
 void func_0000BF44(s32 **arg0) {
     *arg0 = &D_0001FE90;
     func_0000BD00(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 void func_0000BF7C(void *arg0) {
@@ -2578,11 +2578,11 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C904);
 
 void func_0000CA7C(void) {
     void *sp0;
-    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_E9930C29(-1));
+    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterE6Locale(-1));
     func_00003AAC(&sp0);
-    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_5C161337(-1));
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackE6Locale(-1));
     func_00003AAC(&sp0);
-    sceVshCommonGui_BAA1F762(&sp0, sceVshCommonGui_7DB9C54A(-1));
+    _ZN3vsh32SetButtonNavigationString_OptionEPKw(&sp0, _ZN3vsh16GetString_OptionE6Locale(-1));
     func_00003AAC(&sp0);
 }
 
@@ -2777,7 +2777,7 @@ void func_0000DA54(s32 arg0, void **arg1, s32 arg2) {
         M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
     }
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s2, 0x19, 3);
-    scePaf_DC2CA0F7(&sp0, arg0, &D_0001FEE4);
+    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FEE4);
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2);
     if ((sp0 == NULL) || (temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_2, (temp_v0_2 > 0))) {
 
@@ -2786,7 +2786,7 @@ void func_0000DA54(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0 = temp_s2 | 7;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0, 0x19, 3);
-    scePaf_DC2CA0F7(&sp0, arg0, &D_0001FEF4);
+    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FEF4);
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0);
     if ((sp0 == NULL) || (temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_3, (temp_v0_3 > 0))) {
 
@@ -2795,7 +2795,7 @@ void func_0000DA54(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0_2 = temp_s2 | 0xE;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0_2, 0x19, 3);
-    scePaf_DC2CA0F7(&sp0, arg0, &D_0001FF08);
+    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FF08);
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0_2);
     if (sp0 != NULL) {
         temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
@@ -2827,7 +2827,7 @@ void func_0000DC6C(s32 arg0, void **arg1, s32 arg2) {
         M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
     }
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s2, 0x19, 3);
-    scePaf_DC2CA0F7(&sp0, arg0, &D_0001FF1C);
+    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FF1C);
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2);
     if ((sp0 == NULL) || (temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_2, (temp_v0_2 > 0))) {
 
@@ -2836,7 +2836,7 @@ void func_0000DC6C(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0 = temp_s2 | 7;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0, 0x19, 3);
-    scePaf_DC2CA0F7(&sp0, arg0, &D_0001FF30);
+    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FF30);
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0);
     if ((sp0 == NULL) || (temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_3, (temp_v0_3 > 0))) {
 
@@ -2845,7 +2845,7 @@ void func_0000DC6C(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0_2 = temp_s2 | 0xE;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0_2, 0x19, 3);
-    scePaf_DC2CA0F7(&sp0, arg0, &D_0001FF44);
+    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FF44);
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0_2);
     if (sp0 != NULL) {
         temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
@@ -2924,7 +2924,7 @@ void func_0000E9F8(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0xA20);
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0xA20) = 0;
         M2C_FIELD(arg0, s32 *, 0xA24) = 0;
         M2C_FIELD(arg0, s32 *, 0xA28) = 0;
@@ -3092,12 +3092,12 @@ void func_0000FF94(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_7EC15225(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 
 void func_0000FFEC(void *arg0) {
@@ -3111,7 +3111,7 @@ void func_0000FFEC(void *arg0) {
     if (var_v0 != var_v1) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_v1 = M2C_FIELD(arg0, M2C_UNK **, 0);
             var_v0 = temp_s0;
         } while (temp_s0 != var_v1);
@@ -3130,7 +3130,7 @@ void ***func_00010048(void ***arg0, void *arg1, void **arg2) {
     temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
     *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_7EC15225(temp_v1);
+    sce_paf_private_free2(temp_v1);
     *arg0 = temp_s0;
     M2C_FIELD(arg1, s32 *, 4) = (s32) (M2C_FIELD(arg1, s32 *, 4) - 1);
     return arg0;
@@ -3149,7 +3149,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010178);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000101B4);
 
 s32 func_000101F8(void *arg0) {
-    scePaf_27F64616(M2C_FIELD(arg0, s32 *, 4));
+    _ZN3paf4View12PageCloseAllEv(M2C_FIELD(arg0, s32 *, 4));
     return 0;
 }
 
@@ -3167,7 +3167,7 @@ void func_00010304(void *arg0) {
     if (M2C_FIELD(temp_s1, s32 *, 4) == 0) {
         M2C_FIELD(arg0, s32 *, 0x1C) = 0;
     } else {
-        scePaf_27F64616(M2C_FIELD(arg0, s32 *, 4));
+        _ZN3paf4View12PageCloseAllEv(M2C_FIELD(arg0, s32 *, 4));
         M2C_FIELD(arg0, s32 *, 0x1C) = 0;
     }
     func_000104D4((s32) temp_s1);
@@ -3183,15 +3183,15 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010374);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010398);
 
 void func_000103E0(void) {
-    sceVshCommonGui_C5B53362();
+    _ZN3vsh10OptionMenu4ShowEv();
 }
 
 void func_000103FC(void) {
-    sceVshCommonGui_A1C3DDD6();
+    _ZN3vsh10OptionMenu4HideEv();
 }
 
 void func_00010418(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    sceVshCommonGui_607D5C82(arg1, arg2, arg3);
+    _ZN3vsh10OptionMenu5CloseEPN3paf4ViewEPKcS5_(arg1, arg2, arg3);
     M2C_FIELD(arg0, s8 *, 0x34) = 0;
 }
 
@@ -3234,15 +3234,15 @@ s32 func_0001058C(void *arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010594);
 
 void func_000105B8(void *arg0) {
-    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4));
+    _ZN3paf4View12PageActivateEPKc(M2C_FIELD(arg0, s32 *, 4));
 }
 
 void func_000105D4(void *arg0) {
-    scePaf_3481F595(M2C_FIELD(arg0, s32 *, 4));
+    _ZN3paf4View9PageCloseEPKc(M2C_FIELD(arg0, s32 *, 4));
 }
 
 void func_000105F0(void *arg0, s32 *arg1) {
-    scePaf_DAB59652(M2C_FIELD(arg0, s32 *, 4), arg1);
+    _ZNK3paf4View8PageRootEPKc(M2C_FIELD(arg0, s32 *, 4), arg1);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001060C);
@@ -3284,7 +3284,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010CCC);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010D60);
 
 void func_00010D80(void *arg0) {
-    scePaf_27F64616(M2C_FIELD(arg0, s32 *, 4));
+    _ZN3paf4View12PageCloseAllEv(M2C_FIELD(arg0, s32 *, 4));
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
     func_000104D4((s32) (arg0 + 0x20));
 }
@@ -3395,8 +3395,8 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007DD8);
 
 #if FW_VERSION == 100
 void func_0001151C(s32 arg0) {
-    scePaf_6829D7AF(&D_00047D24, 0, 0x10);
-    scePaf_F95EA3F1(&D_00047D24, arg0, 0x10);
+    sce_paf_private_memset(&D_00047D24, 0, 0x10);
+    sce_paf_private_memcpy(&D_00047D24, arg0, 0x10);
 }
 #endif
 
@@ -3418,7 +3418,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00011814);
 
 #if FW_VERSION < 201
 void func_00011814(void) {
-    IoFileMgrForUser_6D08A871(&D_0001AD94);
+    sceIoUnassign(&D_0001AD94);
 }
 #endif
 
@@ -5161,7 +5161,7 @@ void func_000126B0(s32 *arg0) {
     if (!(*arg0 & 1)) {
 
     } else {
-        scePower_DB62C9CF();
+        scePowerCancelRequest();
     }
     if (D_0004E420 != 0) {
         ((M2C_UNK (*)(M2C_UNK)) D_0004E420)(0);
@@ -8493,7 +8493,7 @@ void func_00014200(s32 *arg0) {
     if (!(*arg0 & 1)) {
 
     } else {
-        scePower_DB62C9CF();
+        scePowerCancelRequest();
     }
     if (D_0001C240 != 0) {
         ((M2C_UNK (*)(M2C_UNK)) D_0001C240)(0);

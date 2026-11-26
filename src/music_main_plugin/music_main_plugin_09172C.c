@@ -144,7 +144,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_00091930);
 #else
 void func_00091930(M2C_UNK **arg0) {
     *arg0 = &D_000A2948;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -326,7 +326,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_00091BCC);
 #if FW_VERSION == 260 || (FW_VERSION >= 282 && FW_VERSION < 350)
 void func_00091BCC(M2C_UNK **arg0) {
     *arg0 = &D_000A2968;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

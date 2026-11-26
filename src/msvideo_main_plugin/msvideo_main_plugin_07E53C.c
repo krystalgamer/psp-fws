@@ -347,7 +347,7 @@ void func_00080C40(void) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00080C40(void) {
-    scePaf_5FAC9869();
+    sce_paf_private_malloc();
 }
 #endif
 
@@ -381,7 +381,7 @@ s32 func_00080C5C(s32 **arg0, u32 arg1, s32 arg2) {
     var_v0 = 1;
     if (temp_v0 != NULL) {
         func_00078688(temp_v0, *arg0, (arg1 >= (u32) arg2) ? arg2 : (s32) arg1);
-        scePaf_545FE2DA((s32) *arg0);
+        sce_paf_private_free((s32) *arg0);
         *arg0 = temp_v0;
         var_v0 = 0;
     }

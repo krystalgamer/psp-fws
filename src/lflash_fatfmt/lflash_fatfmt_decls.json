@@ -1,7 +1,7 @@
 {
  "funcs": {
-  "KDebugForKernel_84F370BC": "M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *);",
-  "LflashFatfmt_B7A424A4": "void LflashFatfmt_B7A424A4(void);",
+  "Kprintf": "M2C_UNK Kprintf(M2C_UNK *);",
+  "sceLflashFatfmtStartFatfmt": "void sceLflashFatfmtStartFatfmt(void);",
   "func_00000000_v330": "void func_00000000_v330(void);",
   "func_00000000_v340": "void func_00000000_v340(void);",
   "func_000007F8": "s32 func_000007F8(s32 arg0);",

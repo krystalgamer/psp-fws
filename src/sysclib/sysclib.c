@@ -3,7 +3,7 @@
 #include "common.h"
 #include "sysclib_decls.h"
 
-INCLUDE_ASM("nonmatchings/sysclib", SysclibForKernel_87C78FB6);
+INCLUDE_ASM("nonmatchings/sysclib", prnt);
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/sysclib", toupper);
@@ -12,7 +12,7 @@ s32 toupper(s32 arg0) {
     s32 var_v0;
 
     var_v0 = arg0;
-    if (SysclibForKernel_32C767F2(arg0) & 2) {
+    if (look_ctype_table(arg0) & 2) {
         var_v0 = (arg0 & 0xFF) - 0x20;
     }
     return var_v0;
@@ -26,19 +26,19 @@ s32 tolower(s32 arg0) {
     s32 var_v0;
 
     var_v0 = arg0;
-    if (SysclibForKernel_32C767F2(arg0) & 1) {
+    if (look_ctype_table(arg0) & 1) {
         var_v0 = (arg0 & 0xFF) + 0x20;
     }
     return var_v0;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/sysclib", SysclibForKernel_32C767F2);
+INCLUDE_ASM("nonmatchings/sysclib", look_ctype_table);
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/sysclib", SysclibForKernel_D887CACD);
+INCLUDE_ASM("nonmatchings/sysclib", get_ctype_table);
 #else
-M2C_UNK *SysclibForKernel_D887CACD(void) {
+M2C_UNK *get_ctype_table(void) {
     return &D_000022C1;
 }
 #endif
@@ -77,7 +77,7 @@ INCLUDE_ASM("nonmatchings/sysclib", strtok_r);
 INCLUDE_ASM("nonmatchings/sysclib", strtol);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysclib", SysclibForKernel_1D83F344);
+INCLUDE_ASM("nonmatchings/sysclib", atob);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/sysclib", strtoul);
@@ -173,9 +173,9 @@ INCLUDE_RODATA("nonmatchings/sysclib", D_00001ED0);
 INCLUDE_RODATA("nonmatchings/sysclib", D_00001EF0);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysclib", SysclibForKernel_8AF6B8F8);
+INCLUDE_ASM("nonmatchings/sysclib", pseudo_fcvt);
 
-INCLUDE_ASM("nonmatchings/sysclib", SysclibForKernel_DF17F4A2);
+INCLUDE_ASM("nonmatchings/sysclib", __udivmoddi4);
 
 INCLUDE_ASM("nonmatchings/sysclib", __udivdi3);
 

@@ -53,7 +53,7 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_04B4AC", D_0007F344);
 
 #if FW_VERSION == 250 || (FW_VERSION >= 303 && FW_VERSION < 352)
 void sceVshLftvMw_323FA41B(void) {
-    scePaf_6829D7AF(&D_0005C680, 0, 0x2020);
+    sce_paf_private_memset(&D_0005C680, 0, 0x2020);
     D_0005C680 = 0x8002;
     D_0005C684 = 0;
     D_0005E6A0 = 0x4002;

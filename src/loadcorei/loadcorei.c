@@ -18,7 +18,7 @@ INCLUDE_ASM("nonmatchings/loadcorei", func_00000280);
 INCLUDE_ASM("nonmatchings/loadcorei", func_000002CC);
 
 s32 func_00000340(void) {
-    KDebugForKernel_84F370BC("systable.c:%s: is called.\n", "UndefSyscall");
+    Kprintf("systable.c:%s: is called.\n", "UndefSyscall");
     return 0x80020001;
 }
 
@@ -78,7 +78,7 @@ INCLUDE_RODATA("nonmatchings/loadcorei", D_00006F04);
 
 INCLUDE_RODATA("nonmatchings/loadcorei", D_00006F10);
 
-INCLUDE_ASM("nonmatchings/loadcorei", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/loadcorei", module_bootstart);
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_00001138);
 
@@ -92,11 +92,11 @@ INCLUDE_ASM("nonmatchings/loadcorei", func_000014B0);
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_000014F8);
 
-void LoadCoreForKernel_99A695F0(s32 arg0) {
+void sceKernelRegisterLibrary(s32 arg0) {
     func_000014F8(arg0, 0);
 }
 
-void LoadCoreForKernel_5873A31F(s32 arg0) {
+void sceKernelRegisterLibraryForUser(s32 arg0) {
     func_000014F8(arg0, 1);
 }
 
@@ -104,23 +104,23 @@ INCLUDE_ASM("nonmatchings/loadcorei", func_00001888);
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_00001A00);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_0B464512);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelReleaseLibrary);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_9BAF90F6);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelCanReleaseLibrary);
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_00001B6C);
 
-void LoadCoreForKernel_0E760DBA(s32 arg0, s32 arg1) {
+void sceKernelLinkLibraryEntries(s32 arg0, s32 arg1) {
     func_00001B6C(arg0, arg1, 0);
 }
 
-void LoadCoreForKernel_0DE1F600(s32 arg0, s32 arg1) {
+void sceKernelLinkLibraryEntriesForUser(s32 arg0, s32 arg1) {
     func_00001B6C(arg0, arg1, 1);
 }
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_00001D1C);
 
-s32 LoadCoreForKernel_DA1B09AA(u32 arg0, u32 arg1) {
+s32 sceKernelUnLinkLibraryEntries(u32 arg0, u32 arg1) {
     u32 temp_s1;
     u32 var_s0;
 
@@ -137,7 +137,7 @@ s32 LoadCoreForKernel_DA1B09AA(u32 arg0, u32 arg1) {
     return 0;
 }
 
-M2C_UNK *LoadCoreForKernel_C99DD47A(void) {
+M2C_UNK *sceKernelQueryLoadCoreCB(void) {
     return &D_0000967C;
 }
 
@@ -171,14 +171,14 @@ void func_00002204(u32 arg0, u32 arg1, M2C_UNK arg2) {
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_00002284);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_616FCCCD);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelSetBootCallbackLevel);
 
 s32 func_000029D8(s32 arg0) {
     D_00007FF0 = arg0;
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_ACE23476);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelCheckPspConfig);
 
 void func_00002B24(struct Unk_func_00002B24_0 *arg0, s32 arg1) {
     if (arg1 == 0) {
@@ -226,17 +226,17 @@ INCLUDE_RODATA("nonmatchings/loadcorei", D_000078C8);
 
 INCLUDE_RODATA("nonmatchings/loadcorei", D_00007900);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_7BE1421C);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelCheckExecFile);
 
 INCLUDE_RODATA("nonmatchings/loadcorei", D_000079DC);
 
 INCLUDE_RODATA("nonmatchings/loadcorei", D_000079FC);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_BF983EF2);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelProbeExecutableObject);
 
 INCLUDE_RODATA("nonmatchings/loadcorei", D_00007AD8);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_7068E6BA);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelLoadExecutableObject);
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_00004324);
 
@@ -244,11 +244,11 @@ INCLUDE_ASM("nonmatchings/loadcorei", func_0000465C);
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_00004964);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_B4D6FECC);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelApplyElfRelSection);
 
 INCLUDE_RODATA("nonmatchings/loadcorei", D_00007C7C);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_54AB2675);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelApplyPspRelSection);
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_000052A4);
 
@@ -257,7 +257,7 @@ INCLUDE_ASM("nonmatchings/loadcorei", func_00005324);
 INCLUDE_ASM("nonmatchings/loadcorei", func_00005344);
 
 s32 func_000053CC(struct Unk_func_000053CC_0 *arg0) {
-    SysMemForKernel_CE05CCB7();
+    sceKernelCallUIDObjCommonFunction();
     return arg0->unkC;
 }
 
@@ -265,29 +265,29 @@ INCLUDE_ASM("nonmatchings/loadcorei", func_000053F4);
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_00005478);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_F32A2940);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelModuleFromUID);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_CD0F3BAC);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelCreateModule);
 
-void LoadCoreForKernel_6B2371C2(struct Unk_LoadCoreForKernel_6B2371C2_0 *arg0) {
-    SysMemForKernel_8F20C4C0(arg0->unk2C);
+void sceKernelDeleteModule(struct Unk_LoadCoreForKernel_6B2371C2_0 *arg0) {
+    sceKernelDeleteUID(arg0->unk2C);
 }
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_00005660);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_7320D964);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelModuleAssign);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_44B292AB);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelAllocModule);
 
-void LoadCoreForKernel_BD61D4D5(struct Unk_LoadCoreForKernel_6B2371C2_0 *arg0) {
-    LoadCoreForKernel_6B2371C2(arg0);
+void sceKernelFreeModule(struct Unk_LoadCoreForKernel_6B2371C2_0 *arg0) {
+    sceKernelDeleteModule(arg0);
 }
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_AE7C6E76);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelRegisterModule);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_74CF001A);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelReleaseModule);
 
-s32 LoadCoreForKernel_CF8A41B1(s32 arg0) {
+s32 sceKernelFindModuleByName(s32 arg0) {
     s32 temp_s0;
     s32 temp_s1;
 
@@ -297,19 +297,19 @@ s32 LoadCoreForKernel_CF8A41B1(s32 arg0) {
     return temp_s0;
 }
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_FB8AE27D);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelFindModuleByAddress);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_CCE4A157);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelFindModuleByUID);
 
-s32 LoadCoreForKernel_82CE54ED(void) {
+s32 sceKernelModuleCount(void) {
     return D_00009694;
 }
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_C0584F0C);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelGetModuleList);
 
 INCLUDE_ASM("nonmatchings/loadcorei", sceKernelDcacheWBinvAll);
 
-INCLUDE_ASM("nonmatchings/loadcorei", LoadCoreForKernel_D8779AC6);
+INCLUDE_ASM("nonmatchings/loadcorei", sceKernelIcacheClearAll);
 
 INCLUDE_ASM("nonmatchings/loadcorei", func_00005BF8);
 

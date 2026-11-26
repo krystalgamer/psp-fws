@@ -127,11 +127,11 @@ extern void **D_0000EDB0;
 extern void *D_0000EDB4;
 extern M2C_UNK D_0000EED0;
 
-M2C_UNK IoFileMgrForKernel_6D08A871(M2C_UNK *);
-M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);
-M2C_UNK IoFileMgrForKernel_C7F35804(s32);
-M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
-M2C_UNK SysMemForKernel_7B749390(s32, s32);
+M2C_UNK sceIoUnassign(M2C_UNK *);
+M2C_UNK sceIoAddDrv(M2C_UNK *);
+M2C_UNK sceIoDelDrv(s32);
+M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, s32);
+M2C_UNK sceKernelFreeHeapMemory(s32, s32);
 s32 func_00000000(s32 arg0);
 s32 func_00000000_v310(s32 arg0);
 s32 func_00000000_v311(s32 arg0);
@@ -261,9 +261,9 @@ s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelUnlockMutex(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
 s32 sceLFatFs_driver_51C7F7AE(void);
-s32 sceLFatFs_driver_8F0560E0(void);
+s32 sceLfatfsStop(void);
 s32 sceLFatFs_driver_F1FBA85F(void);
-M2C_UNK sceSysEventForKernel_CD9E4BB5(M2C_UNK *);
-M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);
+M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);
+M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);
 
 #endif

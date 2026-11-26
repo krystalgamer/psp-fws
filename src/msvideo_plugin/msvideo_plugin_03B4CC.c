@@ -58,7 +58,7 @@ s32 func_0003BA50(struct Unk_func_0003996C_0 *arg0, s32 *arg1) {
     if (temp_v0 == 0) {
         *arg1 = 0;
     } else {
-        *arg1 = scePaf_CA79D58B(temp_v0) + 1;
+        *arg1 = sce_paf_private_strlen(temp_v0) + 1;
     }
     return 0;
 }
@@ -641,11 +641,11 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_03B4CC", func_00041760);
 #endif
 
 void func_00041908(s32 arg0) {
-    scePaf_CE699963(1, arg0);
+    sce_paf_private_calloc(1, arg0);
 }
 
 void func_00041928(s32 arg0) {
-    scePaf_5FAC9869(arg0);
+    sce_paf_private_malloc(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03B4CC", func_00041944);

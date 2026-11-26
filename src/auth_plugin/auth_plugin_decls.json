@@ -41,10 +41,10 @@
   "scePaf_8B38372A": "M2C_UNK scePaf_8B38372A(s32, M2C_UNK *);",
   "scePaf_A013540A": "M2C_UNK scePaf_A013540A(s32, M2C_UNK *);",
   "scePaf_C1B0AA0D": "s32 scePaf_C1B0AA0D(s32);",
-  "scePaf_CA79D58B": "s32 scePaf_CA79D58B(s32);",
+  "sce_paf_private_strlen": "s32 sce_paf_private_strlen(s32);",
   "scePaf_CAF05F1D": "M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);",
   "scePaf_F609FA81": "M2C_UNK scePaf_F609FA81(s32, M2C_UNK *, M2C_UNK, M2C_UNK);",
-  "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);"
+  "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);"
  },
  "types": {
   "Unk_D_00002D50": "struct Unk_D_00002D50 {\n    u8 pad0[0x1C];\n    s32 unk1C;\n    u8 pad20[0x10];\n    s32 unk30;\n};"

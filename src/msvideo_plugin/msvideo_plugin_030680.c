@@ -163,7 +163,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_030680", func_000267C8);
 s32 func_00030AF8(struct Unk_func_00030AF8_0 *arg0) {
     func_00030D84(arg0->unk0);
     func_000310FC(arg0->unk4);
-    scePaf_545FE2DA(arg0);
+    sce_paf_private_free(arg0);
     return 0;
 }
 #endif
@@ -294,7 +294,7 @@ s32 func_000310BC(s32 **arg0) {
     s32 *temp_v0;
     s32 var_v1;
 
-    temp_v0 = scePaf_5FAC9869(4);
+    temp_v0 = sce_paf_private_malloc(4);
     var_v1 = 2;
     if (temp_v0 != NULL) {
         *arg0 = temp_v0;

@@ -18,15 +18,15 @@ extern s32 D_00001560;
 extern s32 D_00001564;
 extern s32 D_00001568;
 
-s32 StdioForKernel_11A5127A(s32, s32);
-s32 StdioForKernel_36B23B8B(s32, s32);
-s32 StdioForKernel_4F78930A(s32, s32);
-s32 StdioForUser_0CBB0571(void);
-s32 StdioForUser_3054D478(void);
-s32 StdioForUser_924ABA61(void);
-s32 StdioForUser_9D061C19(void);
-s32 StdioForUser_A3B931DB(void);
-void StdioForUser_A46785C9(void);
+s32 fdgets(s32, s32);
+s32 fdputs(s32, s32);
+s32 fdputc(s32, s32);
+s32 sceKernelStdioLseek(void);
+s32 sceKernelStdioRead(void);
+s32 sceKernelStdioOpen(void);
+s32 sceKernelStdioClose(void);
+s32 sceKernelStdioWrite(void);
+void sceKernelStdioSendChar(void);
 s32 func_00000428(s32, s32);
 void func_000006D0(s32 arg0);
 s32 func_000006EC(void);
@@ -53,6 +53,6 @@ s32 sceKernelRegisterStdoutPipe(s32 arg0);
 s32 sceKernelStderr(void);
 s32 sceKernelStdin(void);
 s32 sceKernelStdout(void);
-void syslib_D3744BE0(void);
+void module_bootstart(void);
 
 #endif

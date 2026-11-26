@@ -39,7 +39,7 @@ void func_00027E54(void) {
 }
 #else
 void func_00027E54(void) {
-    scePaf_5FAC9869();
+    sce_paf_private_malloc();
 }
 #endif
 

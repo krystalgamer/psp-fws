@@ -26,9 +26,9 @@ INCLUDE_ASM("nonmatchings/irda", func_000006C8);
 INCLUDE_ASM("nonmatchings/irda", func_0000075C);
 
 s32 func_00000850(void) {
-    sceSysreg_driver_BB823481(5);
-    sceSysreg_driver_7725CA08(5);
-    sceGpio_driver_310F0CCF(4);
+    sceSysregUartIoDisable(5);
+    sceSysregUartClkEnable(5);
+    sceGpioPortSet(4);
     return 0;
 }
 
@@ -109,7 +109,7 @@ void func_00000BB8(s32 arg0) {
 }
 
 s32 func_00000BC4(void) {
-    IoFileMgrForKernel_8E982A74(&D_00001710);
+    sceIoAddDrv(&D_00001710);
     return 0;
 }
 
@@ -119,7 +119,7 @@ INCLUDE_ASM("nonmatchings/irda", func_00000C10);
 
 s32 func_00000C5C(void) {
     func_00000E94();
-    sceSysEventForKernel_D7D3FDCD(&D_00001740);
+    sceKernelUnregisterSysEventHandler(&D_00001740);
     return 0;
 }
 

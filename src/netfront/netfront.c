@@ -938,13 +938,13 @@ void func_00005E84(void) {
 
 s32 func_00005EA0(void) {
     sceHttpFlushAuthList();
-    sceHttp_77EE5319();
+    sceHttpLoadAuthList();
     D_00131AF8 = 1;
     return 0;
 }
 
 s32 func_00005ED4(void) {
-    sceHttp_DD6E7857();
+    sceHttpSaveAuthList();
     sceHttpFlushAuthList();
     D_00131AF8 = 0;
     return 0;

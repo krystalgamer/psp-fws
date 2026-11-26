@@ -1,17 +1,17 @@
 // NID-derived names
-sceAsfParser_91B11F3A = 0x00000000; // type:func
-sceAsfParser_6B3AE857 = 0x00000084; // type:func
+sceAsfInitParser = 0x00000000; // type:func
+sceAsfSeekTime = 0x00000084; // type:func
 sceAsfParser_C6D98C54 = 0x00000120; // type:func
 sceAsfParser_685E0DA7 = 0x0000019C; // type:func
-sceAsfParser_B9E4BD9E = 0x000002B4; // type:func
-sceAsfParser_8B08301F = 0x000002BC; // type:func
-sceAsfParser_95AD7B34 = 0x000002C4; // type:func
-sceAsfParser_2CB147F7 = 0x00000300; // type:func
+sceAsfParserStartEntry = 0x000002B4; // type:func
+sceAsfParserEndEntry = 0x000002BC; // type:func
+sceAsfCheckNeedMem = 0x000002C4; // type:func
+sceAsfGetFrameData = 0x00000300; // type:func
 sceAsfParser_41322F4A = 0x0000034C; // type:func
 sceAsfParser_24DB62B1 = 0x000003BC; // type:func
 sceAsfParser_320202AB = 0x0000042C; // type:func
 sceAsfParser_6DA63281 = 0x0000049C; // type:func
-sceAsfParser_3CAAC462 = 0x0000050C; // type:func
+sceAsfReadData = 0x0000050C; // type:func
 // shared names (tools/add_version.py) begin
 D_00006FC8 = 0x00006FD0; // rom:0x7070
 D_00006FD8 = 0x00006FE0; // rom:0x7080

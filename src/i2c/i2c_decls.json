@@ -1,23 +1,23 @@
 {
  "funcs": {
-  "InterruptManagerForKernel_F987B1F0": "M2C_UNK InterruptManagerForKernel_F987B1F0(M2C_UNK);",
+  "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
   "module_reboot_before": "s32 module_reboot_before(void);",
-  "sceI2c_driver_0397408B": "s32 sceI2c_driver_0397408B(s32 arg0);",
-  "sceI2c_driver_17B0DA59": "s32 sceI2c_driver_17B0DA59(void);",
-  "sceI2c_driver_21A8282C": "s32 sceI2c_driver_21A8282C(void);",
-  "sceI2c_driver_4809D85F": "s32 sceI2c_driver_4809D85F(void);",
-  "sceI2c_driver_B952BA65": "s32 sceI2c_driver_B952BA65(void);",
-  "sceI2c_driver_D6E9836A": "s32 sceI2c_driver_D6E9836A(s32 arg0, s32 arg1);",
-  "sceI2c_driver_DB6C4F9B": "s32 sceI2c_driver_DB6C4F9B(s32 arg0);",
+  "sceI2cSetPollingMode": "s32 sceI2cSetPollingMode(s32 arg0);",
+  "sceI2cReset": "s32 sceI2cReset(void);",
+  "sceI2cSuspend": "s32 sceI2cSuspend(void);",
+  "sceI2cEnd": "s32 sceI2cEnd(void);",
+  "sceI2cResume": "s32 sceI2cResume(void);",
+  "sceI2cSetClock": "s32 sceI2cSetClock(s32 arg0, s32 arg1);",
+  "sceI2cSetDebugHandlers": "s32 sceI2cSetDebugHandlers(s32 arg0);",
   "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelDeleteMutex": "s32 sceKernelDeleteMutex(s32);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
-  "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
-  "sceSysreg_driver_0436B60F": "M2C_UNK sceSysreg_driver_0436B60F();",
-  "sceSysreg_driver_58F47EFD": "M2C_UNK sceSysreg_driver_58F47EFD();",
-  "sceSysreg_driver_94B0323C": "M2C_UNK sceSysreg_driver_94B0323C();",
-  "sceSysreg_driver_DC68A93F": "M2C_UNK sceSysreg_driver_DC68A93F();"
+  "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
+  "sceSysregIicIoEnable": "M2C_UNK sceSysregIicIoEnable();",
+  "sceSysregIicIoDisable": "M2C_UNK sceSysregIicIoDisable();",
+  "sceSysregIicClkDisable": "M2C_UNK sceSysregIicClkDisable();",
+  "sceSysregIicClkEnable": "M2C_UNK sceSysregIicClkEnable();"
  },
  "types": {
   "D_00001730_s": "struct D_00001730_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    u8 pad8[0x8];\n    volatile s32 unk10;\n    volatile s32 unk14;\n};"

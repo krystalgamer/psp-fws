@@ -3,11 +3,11 @@
 #include "k1.h"
 #include "psheet_decls.h"
 
-INCLUDE_ASM("nonmatchings/psheet", scePsheet_driver_15355B0E);
+INCLUDE_ASM("nonmatchings/psheet", sceDRMInstallGetPkgInfo);
 
-INCLUDE_ASM("nonmatchings/psheet", scePsheet_driver_34E68A41);
+INCLUDE_ASM("nonmatchings/psheet", sceDRMInstallGetFileInfo);
 
-INCLUDE_ASM("nonmatchings/psheet", scePsheet_driver_E16F3A48);
+INCLUDE_ASM("nonmatchings/psheet", sceDRMInstallInstall);
 
 INCLUDE_ASM("nonmatchings/psheet", module_start);
 
@@ -23,16 +23,16 @@ s32 module_reboot_before(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/psheet", scePsheet_driver_302AB4B8);
+INCLUDE_ASM("nonmatchings/psheet", sceDRMInstallInit);
 
-s32 scePsheet_driver_3CEC4078(void) {
-    scePsheet_driver_302AB4B8(0, 0);
+s32 sceDRMInstallEnd(void) {
+    sceDRMInstallInit(0, 0);
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/psheet", scePsheet_driver_3BA93CFA);
+INCLUDE_ASM("nonmatchings/psheet", sceDRMInstallGetProgress);
 
-void scePsheet_driver_226D9099(void) {
+void sceDRMInstallAbort(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -95,7 +95,7 @@ s32 func_000013D8(void) {
 
     var_s1 = sceKernelWaitSema(D_00002A80.unk0, 1, NULL);
     if ((var_s1 < 0) || (temp_s0 = D_00002A80.unk18, var_s1 = sceKernelSignalSema(D_00002A80.unk0, 1), var_v0 = temp_s0, (var_s1 < 0))) {
-        KDebugForKernel_84F370BC(&D_000027EC, &D_00002804, "get_state", var_s1);
+        Kprintf(&D_000027EC, &D_00002804, "get_state", var_s1);
         var_v0 = var_s1;
     }
     return var_v0;
@@ -140,9 +140,9 @@ s32 func_00001F94(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
     s32 var_v1;
 
-    var_v0 = sceAmctrl_driver_1CCB66D2(&D_00002F88, 2, 1, arg3, arg2, 0);
-    if ((var_v0 < 0) || (var_v0 = sceAmctrl_driver_0785C974(&D_00002F88, arg0, arg1), (var_v0 < 0)) || (var_v0 = sceAmctrl_driver_9951C50F(&D_00002F88), var_v1 = 0, (var_v0 < 0))) {
-        KDebugForKernel_84F370BC(&D_000029C4, &D_000029E0, "data_encrypt", var_v0);
+    var_v0 = sceDrmBBCipherInit(&D_00002F88, 2, 1, arg3, arg2, 0);
+    if ((var_v0 < 0) || (var_v0 = sceDrmBBCipherUpdate(&D_00002F88, arg0, arg1), (var_v0 < 0)) || (var_v0 = sceDrmBBCipherFinal(&D_00002F88), var_v1 = 0, (var_v0 < 0))) {
+        Kprintf(&D_000029C4, &D_000029E0, "data_encrypt", var_v0);
         var_v1 = 0x80510102;
     }
     return var_v1;
@@ -152,9 +152,9 @@ s32 func_00001F94(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
     s32 var_v1;
 
-    var_v0 = sceAmctrl_driver_1CCB66D2(&D_00002F48, 2, 1, arg3, arg2, 0);
-    if ((var_v0 < 0) || (var_v0 = sceAmctrl_driver_0785C974(&D_00002F48, arg0, arg1), (var_v0 < 0)) || (var_v0 = sceAmctrl_driver_9951C50F(&D_00002F48), var_v1 = 0, (var_v0 < 0))) {
-        KDebugForKernel_84F370BC(&D_000029C4, &D_000029E0, "data_encrypt", var_v0);
+    var_v0 = sceDrmBBCipherInit(&D_00002F48, 2, 1, arg3, arg2, 0);
+    if ((var_v0 < 0) || (var_v0 = sceDrmBBCipherUpdate(&D_00002F48, arg0, arg1), (var_v0 < 0)) || (var_v0 = sceDrmBBCipherFinal(&D_00002F48), var_v1 = 0, (var_v0 < 0))) {
+        Kprintf(&D_000029C4, &D_000029E0, "data_encrypt", var_v0);
         var_v1 = 0x80510102;
     }
     return var_v1;
@@ -174,9 +174,9 @@ s32 func_0000217C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 var_v0;
     s32 var_v1;
 
-    var_v0 = sceAmctrl_driver_1CCB66D2(&D_00002F30, 1, 2, arg4, arg3, arg2);
-    if ((var_v0 < 0) || (var_v0 = sceAmctrl_driver_0785C974(&D_00002F30, arg0, arg1), (var_v0 < 0)) || (var_v0 = sceAmctrl_driver_9951C50F(&D_00002F30), var_v1 = 0, (var_v0 < 0))) {
-        KDebugForKernel_84F370BC("%s: %s(): error 0x%08X\n\n", &D_00002A1C, &D_00002A30, var_v0);
+    var_v0 = sceDrmBBCipherInit(&D_00002F30, 1, 2, arg4, arg3, arg2);
+    if ((var_v0 < 0) || (var_v0 = sceDrmBBCipherUpdate(&D_00002F30, arg0, arg1), (var_v0 < 0)) || (var_v0 = sceDrmBBCipherFinal(&D_00002F30), var_v1 = 0, (var_v0 < 0))) {
+        Kprintf("%s: %s(): error 0x%08X\n\n", &D_00002A1C, &D_00002A30, var_v0);
         var_v1 = 0x80510102;
     }
     return var_v1;

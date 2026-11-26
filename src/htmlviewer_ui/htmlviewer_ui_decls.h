@@ -2706,7 +2706,7 @@ M2C_UNK sceHttpSaveSystemCookie();
 s32 sceHttpSendRequest(s32, void *, u32);
 M2C_UNK sceHttp_457D221D();
 M2C_UNK sceHttp_B0257723();
-M2C_UNK sceHttp_DD6E7857();
+M2C_UNK sceHttpSaveAuthList();
 s32 sceIoClose(s32);
 M2C_UNK sceIoDclose(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);

@@ -5,13 +5,13 @@
 INCLUDE_ASM("nonmatchings/exceptionman", syslib_D3744BE0);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_5A837AD4);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelRegisterPriorityExceptionHandler);
 
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_565C0B0E);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelRegisterDefaultExceptionHandler);
 
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_1AA6CFFA);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelReleaseExceptionHandler);
 
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_291FF031);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelReleaseDefaultExceptionHandler);
 
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000414);
 
@@ -44,31 +44,31 @@ void func_0000011C(void) {
 #endif
 
 #if FW_VERSION < 282
-void ExceptionManagerForKernel_3FB264FC(s32 arg0, s32 arg1) {
-    ExceptionManagerForKernel_5A837AD4(arg0, 2, arg1);
+void sceKernelRegisterExceptionHandler(s32 arg0, s32 arg1) {
+    sceKernelRegisterPriorityExceptionHandler(arg0, 2, arg1);
 }
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_5A837AD4);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelRegisterPriorityExceptionHandler);
 
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_565C0B0E);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelRegisterDefaultExceptionHandler);
 
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_1AA6CFFA);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelReleaseExceptionHandler);
 #endif
 
 #if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_DF83875E);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelGetActiveDefaultExceptionHandler);
 #endif
 
 #if FW_VERSION == 152
-s32 ExceptionManagerForKernel_DF83875E(void) {
+s32 sceKernelGetActiveDefaultExceptionHandler(void) {
     return ((D_00002400 ^ (s32) &func_00000A28) == 0) ? 0 : D_00002400;
 }
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_291FF031);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelReleaseDefaultExceptionHandler);
 #endif
 
 #if FW_VERSION == 100
@@ -108,11 +108,11 @@ void func_00000544(void) {
 #endif
 
 #if FW_VERSION >= 282
-void ExceptionManagerForKernel_3FB264FC(s32 arg0, s32 arg1) {
-    ExceptionManagerForKernel_5A837AD4(arg0, 2, arg1);
+void sceKernelRegisterExceptionHandler(s32 arg0, s32 arg1) {
+    sceKernelRegisterPriorityExceptionHandler(arg0, 2, arg1);
 }
 
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_DF83875E);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelGetActiveDefaultExceptionHandler);
 #endif
 
 INCLUDE_ASM("nonmatchings/exceptionman", func_000005C0);
@@ -173,9 +173,9 @@ INCLUDE_ASM("nonmatchings/exceptionman", func_00000B14);
 
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000B20);
 
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_15ADC862);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelRegisterNmiHandler);
 
-INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_B15357C9);
+INCLUDE_ASM("nonmatchings/exceptionman", sceKernelReleaseNmiHandler);
 
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000C80);
 

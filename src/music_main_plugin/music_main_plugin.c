@@ -982,7 +982,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin", func_000029B8);
 INCLUDE_ASM("nonmatchings/music_main_plugin", func_000029DC);
 #else
 void func_000029DC(s32 arg0) {
-    scePaf_F47CA1C2(arg0, 0x10002, (s32) &func_00002B30, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10002, (s32) &func_00002B30, 0);
 }
 #endif
 
@@ -1619,7 +1619,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin", func_00003A34);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00003A34(struct Unk_func_00003A34_0 *arg0) {
     arg0->unk0 = &D_00098D90;
-    scePaf_F47CA1C2(arg0->unk8, 0x100002, 0, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0->unk8, 0x100002, 0, 0);
     func_00006DC8((s32) arg0);
 }
 #endif
@@ -1631,9 +1631,9 @@ INCLUDE_ASM("nonmatchings/music_main_plugin", func_00003A80);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00003A80(struct Unk_func_00003A80_0 *arg0) {
     arg0->unk0 = &D_00098D90;
-    scePaf_F47CA1C2(arg0->unk8, 0x100002, 0, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0->unk8, 0x100002, 0, 0);
     func_00006DC8((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1652,7 +1652,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin", func_00003BD4);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00003BD4(void) {
     D_000A423C->unk10(0xD);
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     D_000A4234 = 0;
 }
 #endif
@@ -2003,8 +2003,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin", func_00005B6C);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00005B6C(void) {
-    scePaf_F609FA81(D_000A422C, "music_page_content_select", 0, 0);
-    scePaf_F609FA81(D_000A422C, "music_page_background", 0, 0);
+    _ZN3paf4View8PageOpenEPKcii(D_000A422C, "music_page_content_select", 0, 0);
+    _ZN3paf4View8PageOpenEPKcii(D_000A422C, "music_page_background", 0, 0);
 }
 #endif
 
@@ -2053,9 +2053,9 @@ INCLUDE_ASM("nonmatchings/music_main_plugin", func_000068C8);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000068C8(void) {
     if (D_000A4234 != 0) {
-        sceVshCommonGui_A0DE7090(0);
-        sceVshCommonGui_441D55D7(0);
-        sceVshCommonGui_72E652AA(D_000A4234);
+        _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+        _ZN3vsh25ShowButtonNavigation_BackEb(0);
+        _ZN3vsh13MessageDialog10HideDeleteEv(D_000A4234);
         D_000A4234 = 0;
     }
 }
@@ -2092,7 +2092,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin", func_00006DFC);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00006DFC(struct Unk_func_00006DFC_0 *arg0) {
     arg0->unk0 = &D_00099DB0;
-    scePaf_D05C226F(D_000A422C, arg0->unk4);
+    _ZN3paf4View9PageCloseEPv(D_000A422C, arg0->unk4);
 }
 #endif
 
@@ -2106,7 +2106,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin", func_00006E74);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00006E74(struct Unk_func_00006E74_0 *arg0) {
-    scePaf_5EBC648F(D_000A422C, arg0->unk4);
+    _ZN3paf4View12PageActivateEPv(D_000A422C, arg0->unk4);
     D_000A2FA4 = arg0->unk0->unk8(arg0);
 }
 #endif
@@ -2214,7 +2214,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin", func_000079AC);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000079AC(void) {
     if (D_000A43A4 != 0) {
-        scePaf_79493F8F(0, D_000A43A4);
+        Job_Cancel2(0, D_000A43A4);
         D_000A43A4 = 0;
     }
 }

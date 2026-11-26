@@ -9,9 +9,9 @@ sceNetApctlAddHandler = 0x00000818; // type:func
 sceNetApctlDelHandler = 0x00000820; // type:func
 sceNetApctlConnect = 0x00000828; // type:func
 sceNetApctlGetState = 0x00000830; // type:func
-sceUtility_netparam_internal_072DEBF2 = 0x00000838; // type:func
-sceUtility_netparam_internal_9CE50172 = 0x00000840; // type:func
-sceUtility_netparam_internal_FC4516F3 = 0x00000848; // type:func
+sceUtilityCreateNetParam = 0x00000838; // type:func
+sceUtilityDeleteNetParam = 0x00000840; // type:func
+sceUtilitySetNetParam = 0x00000848; // type:func
 // shared names (tools/add_version.py) begin
 D_00000804 = 0x00000994;
 D_00000808 = 0x00000998;

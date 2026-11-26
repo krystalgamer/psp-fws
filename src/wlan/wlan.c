@@ -123,7 +123,7 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00018AD8);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_00018AEC);
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_6D89822C);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDevInit);
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/wlan", func_000003C0);
@@ -153,14 +153,14 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00018B14);
 INCLUDE_RODATA("nonmatchings/wlan", D_00018B20);
 #endif
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_482CAE9A);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDevAttach);
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_C9A8CAB7);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDevDetach);
 #endif
 
 #if FW_VERSION >= 300
-void sceWlanDrv_driver_C9A8CAB7(void) {
+void sceWlanDevDetach(void) {
     s32 *temp_s1;
     struct Unk_D_000191B0 *temp_s0;
     u32 temp_s2;
@@ -169,8 +169,8 @@ void sceWlanDrv_driver_C9A8CAB7(void) {
     temp_s2 = shiftK1();
     temp_s1 = &temp_s0->unk184;
     if (temp_s0 != NULL) {
-        sceNetIfhandle_driver_54D1AEA1(temp_s1);
-        sceNetIfhandle_driver_C9344A59(temp_s1);
+        sceNetDetachIfhandleEther(temp_s1);
+        sceNetDestroyIfhandleEther(temp_s1);
         temp_s0->unk184 = 0;
     }
     setK1(temp_s2);
@@ -178,7 +178,7 @@ void sceWlanDrv_driver_C9A8CAB7(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-void sceWlanDrv_driver_C9A8CAB7(void) {
+void sceWlanDevDetach(void) {
     struct Unk_D_000191B0 *temp_s0;
     u32 temp_s2;
     u8 *temp_s1;
@@ -187,8 +187,8 @@ void sceWlanDrv_driver_C9A8CAB7(void) {
     temp_s2 = shiftK1();
     temp_s1 = temp_s0->pad188;
     if (temp_s0 != NULL) {
-        sceNetIfhandle_driver_54D1AEA1(temp_s1);
-        sceNetIfhandle_driver_C9344A59(temp_s1);
+        sceNetDetachIfhandleEther(temp_s1);
+        sceNetDestroyIfhandleEther(temp_s1);
         M2C_FIELD(temp_s0, s32 *, 0x188) = 0;
     }
     setK1(temp_s2);
@@ -196,7 +196,7 @@ void sceWlanDrv_driver_C9A8CAB7(void) {
 #endif
 
 #if FW_VERSION == 282
-void sceWlanDrv_driver_C9A8CAB7(void) {
+void sceWlanDevDetach(void) {
     u32 temp_s2;
     struct Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0 *temp_s0;
     void *temp_s1;
@@ -205,15 +205,15 @@ void sceWlanDrv_driver_C9A8CAB7(void) {
     temp_s2 = shiftK1();
     temp_s1 = &temp_s0->unk188;
     if (temp_s0 != NULL) {
-        sceNetIfhandle_driver_54D1AEA1(temp_s1);
-        sceNetIfhandle_driver_C9344A59(temp_s1);
+        sceNetDetachIfhandleEther(temp_s1);
+        sceNetDestroyIfhandleEther(temp_s1);
         temp_s0->unk188 = 0;
     }
     setK1(temp_s2);
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_19E51F54);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDevGetMacAddr);
 
 INCLUDE_ASM("nonmatchings/wlan", sceWlanGetEtherAddr);
 
@@ -310,16 +310,16 @@ INCLUDE_ASM("nonmatchings/wlan", func_000028D0);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_FE8A0B46);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanSetWakeUp);
 #endif
 
 #if FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_749B813A);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanSetHostDiscover);
 #endif
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_7FF54BD2);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDevSetGPIO);
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_05FE320C);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDevGetStateGPIO);
 
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/wlan", func_00002D78);
@@ -723,31 +723,31 @@ void func_000033E4(struct Unk_func_000033E4_0 *arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_EC9232F0);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDevEnd);
 
 s32 module_reboot_before(void) {
-    sceWlanDrv_driver_EC9232F0();
+    sceWlanDevEnd();
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_93440B11);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDevIsPowerOn);
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_5E7C8D94);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDevIsGameMode);
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_5ED4049A);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanGPPrevEstablishActive);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_6D5C839E);
 #endif
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_B4D7CB74);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanGPSend);
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_A447103A);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanGPRecv);
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_9658C9F7);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanGPRegisterCallback);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-s32 sceWlanDrv_driver_4C7F62E0(void) {
+s32 sceWlanGPUnRegisterCallback(void) {
     s32 temp_v1;
     struct Unk_D_000191B0 *temp_s1;
     u32 temp_s0;
@@ -765,7 +765,7 @@ s32 sceWlanDrv_driver_4C7F62E0(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 sceWlanDrv_driver_4C7F62E0(void) {
+s32 sceWlanGPUnRegisterCallback(void) {
     s32 temp_v1;
     struct Unk_D_000191B0 *temp_s1;
     u32 temp_s0;
@@ -783,7 +783,7 @@ s32 sceWlanDrv_driver_4C7F62E0(void) {
 #endif
 
 #if FW_VERSION == 100
-s32 sceWlanDrv_driver_4C7F62E0(void) {
+s32 sceWlanGPUnRegisterCallback(void) {
     s32 temp_v1;
     struct Unk_D_000191B0 *temp_s1;
     u32 temp_s0;
@@ -801,7 +801,7 @@ s32 sceWlanDrv_driver_4C7F62E0(void) {
 #endif
 
 #if FW_VERSION >= 300
-s32 sceWlanDrv_driver_4C7F62E0(void) {
+s32 sceWlanGPUnRegisterCallback(void) {
     s32 temp_v1;
     struct Unk_D_000191B0 *temp_s1;
     u32 temp_s0;
@@ -819,7 +819,7 @@ s32 sceWlanDrv_driver_4C7F62E0(void) {
 #endif
 
 #if FW_VERSION == 282
-s32 sceWlanDrv_driver_4C7F62E0(void) {
+s32 sceWlanGPUnRegisterCallback(void) {
     s32 temp_v1;
     u32 temp_s0;
     struct Unk_sceWlanDrv_driver_4C7F62E0_temp_s1 *temp_s1;
@@ -899,7 +899,7 @@ s32 func_00002BC8(void *arg0, s32 arg1) {
     if (arg1 != 1) {
 
     } else if (M2C_FIELD(arg0, s32 *, 0x280) != 0) {
-        sceNetIfhandle_driver_263767F6(arg0 + 0x280, 5, 0);
+        sceNetFlagIfEvent(arg0 + 0x280, 5, 0);
     }
     return 0;
 }
@@ -910,14 +910,14 @@ s32 func_00002BC8(void *arg0, s32 arg1) {
     if (arg1 != 1) {
 
     } else if (M2C_FIELD(arg0, s32 *, 0x27C) != 0) {
-        sceNetIfhandle_driver_263767F6(arg0 + 0x27C, 5, 0);
+        sceNetFlagIfEvent(arg0 + 0x27C, 5, 0);
     }
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_FE8A0B46);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanSetWakeUp);
 #endif
 
 #if FW_VERSION == 250
@@ -937,13 +937,13 @@ INCLUDE_ASM("nonmatchings/wlan", func_00002CD4);
 #endif
 
 #if FW_VERSION >= 300
-void sceWlanDrv_driver_E50312AB(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+void sceWlanSetFirm(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0000B24C(M2C_FIELD(D_000191B0, s32 *, 0x180), arg0, arg1, arg2, arg3);
 }
 #endif
 
 #if FW_VERSION == 282
-void sceWlanDrv_driver_E50312AB(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+void sceWlanSetFirm(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0000B24C(D_000191B0->unk184, arg0, arg1, arg2, arg3);
 }
 #endif
@@ -1532,7 +1532,7 @@ void func_0000806C(void *arg0) {
         sceKernelDeleteMbx(M2C_FIELD(arg0, u32 *, 0xFC));
         func_000067B8(M2C_FIELD(arg0, void **, 0x100), M2C_FIELD(arg0, void **, 0x104));
         func_000067B8(M2C_FIELD(arg0, void **, 0x100), M2C_FIELD(arg0, void **, 0x108));
-        DmacManForKernel_745E19EF(M2C_FIELD(arg0, s32 *, 0xE8));
+        sceKernelDmaOpFree(M2C_FIELD(arg0, s32 *, 0xE8));
         func_000067B8(M2C_FIELD(arg0, void **, 0x100), M2C_FIELD(arg0, void **, 0xEC));
         func_000067B8(temp_s1, arg0);
     }
@@ -1656,7 +1656,7 @@ void func_0000AB18(struct Unk_func_00008470_1 *arg0) {
         sceKernelDeleteMbx(arg0->unkFC);
         func_00008470(arg0->unk100, arg0->unk104);
         func_00008470(arg0->unk100, arg0->unk108);
-        DmacManForKernel_745E19EF(arg0->unkE8);
+        sceKernelDmaOpFree(arg0->unkE8);
         func_00008470(arg0->unk100, arg0->unkEC);
         func_00008470(temp_s1, arg0);
     }
@@ -1667,21 +1667,21 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000ABA0);
 
 #if FW_VERSION < 282
 void func_00008394(void) {
-    sceSysreg_driver_00C2628E(1);
-    sceSysreg_driver_1969E840(1, 0);
-    sceSysreg_driver_4716E71E(1);
-    sceSysreg_driver_31154490(1);
-    sceSysreg_driver_D74F1D48(1);
-    sceSysreg_driver_EC4BF81F(1);
+    sceSysregMsifResetEnable(1);
+    sceSysregMsifClkSelect(1, 0);
+    sceSysregMsifBusClockEnable(1);
+    sceSysregMsifClkEnable(1);
+    sceSysregMsifIoEnable(1);
+    sceSysregMsifResetDisable(1);
 }
 
 void func_000083DC(void) {
-    sceSysreg_driver_00C2628E(1);
-    sceSysreg_driver_18172C6A(1);
-    sceSysreg_driver_8E2D835D(1);
-    sceSysreg_driver_826430C0(1);
-    sceSysreg_driver_1969E840(1, 0);
-    sceSysreg_driver_EC4BF81F(1);
+    sceSysregMsifResetEnable(1);
+    sceSysregMsifIoDisable(1);
+    sceSysregMsifClkDisable(1);
+    sceSysregMsifBusClockDisable(1);
+    sceSysregMsifClkSelect(1, 0);
+    sceSysregMsifResetDisable(1);
 }
 
 void func_00008424(void *arg0) {
@@ -1705,13 +1705,13 @@ INCLUDE_ASM("nonmatchings/wlan", func_00008480);
 INCLUDE_ASM("nonmatchings/wlan", func_00008524);
 #else
 void func_0000AC3C(void) {
-    sceSysreg_driver_00C2628E(1);
-    sceSysreg_driver_1969E840(1, 0);
-    sceSysreg_driver_1D382514(1, 4);
-    sceSysreg_driver_4716E71E(1);
-    sceSysreg_driver_31154490(1);
-    sceSysreg_driver_D74F1D48(1);
-    sceSysreg_driver_EC4BF81F(1);
+    sceSysregMsifResetEnable(1);
+    sceSysregMsifClkSelect(1, 0);
+    sceSysregMsifDelaySelect(1, 4);
+    sceSysregMsifBusClockEnable(1);
+    sceSysregMsifClkEnable(1);
+    sceSysregMsifIoEnable(1);
+    sceSysregMsifResetDisable(1);
 }
 
 void func_0000AC90(struct Unk_func_0000AC90_0 *arg0) {
@@ -1734,20 +1734,20 @@ void func_0000AC90(struct Unk_func_0000AC90_0 *arg0) {
 #if FW_VERSION >= 350
 s32 func_0000AF8C(s32 arg0) {
     func_000086B0(arg0);
-    sceSysreg_driver_00C2628E(1);
-    sceSysreg_driver_18172C6A(1);
-    sceSysreg_driver_8E2D835D(1);
-    sceSysreg_driver_826430C0(1);
-    sceSysreg_driver_1969E840(1, 0);
-    sceSysreg_driver_1D382514(1, 4);
-    sceSysreg_driver_EC4BF81F(1);
+    sceSysregMsifResetEnable(1);
+    sceSysregMsifIoDisable(1);
+    sceSysregMsifClkDisable(1);
+    sceSysregMsifBusClockDisable(1);
+    sceSysregMsifClkSelect(1, 0);
+    sceSysregMsifDelaySelect(1, 4);
+    sceSysregMsifResetDisable(1);
     return 0;
 }
 
 s32 func_0000AFEC(void) {
-    sceSyscon_driver_8CBC7987(4, 1);
+    sceSysconResetDevice(4, 1);
     sceKernelDelayThread(0x64U);
-    sceSyscon_driver_8CBC7987(4, 0);
+    sceSysconResetDevice(4, 0);
     return 0;
 }
 #endif
@@ -1893,7 +1893,7 @@ s32 func_0000A4C8(s32 arg0, void *arg1, s32 arg2) {
 
     temp_s3 = sceKernelCpuSuspendIntr();
     if (!(*M2C_FIELD(arg1, u16 **, 0x30) & 4)) {
-        InterruptManagerForKernel_CDC86B64(arg0, 0, arg0, arg2);
+        sceKernelCallSubIntrHandler(arg0, 0, arg0, arg2);
     }
     sceKernelCpuResumeIntr(temp_s3);
     return -1;
@@ -1906,7 +1906,7 @@ s32 func_0000B3CC(s32 arg0, struct Unk_func_0000B3CC_1 *arg1, M2C_UNK arg2) {
 
     temp_s3 = sceKernelCpuSuspendIntr();
     if (!(*arg1->unk30 & 4)) {
-        InterruptManagerForKernel_CDC86B64(arg0, 0, arg0, arg2);
+        sceKernelCallSubIntrHandler(arg0, 0, arg0, arg2);
     }
     sceKernelCpuResumeIntr(temp_s3);
     return -1;
@@ -2905,9 +2905,9 @@ INCLUDE_ASM("nonmatchings/wlan", func_00017048);
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_00014C0C);
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_FBD385FB);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDropCheck);
 
-s32 sceWlanDrv_driver_44A99F9D(s32 *arg0, s32 *arg1) {
+s32 sceWlanGetDropRate(s32 *arg0, s32 *arg1) {
     s32 var_a2;
 
     var_a2 = 0x80410003;
@@ -2919,7 +2919,7 @@ s32 sceWlanDrv_driver_44A99F9D(s32 *arg0, s32 *arg1) {
     return var_a2;
 }
 
-s32 sceWlanDrv_driver_EB3235B5(u32 arg0, s32 arg1) {
+s32 sceWlanSetDropRate(u32 arg0, s32 arg1) {
     s32 temp_a0;
     s32 var_v1;
 
@@ -2966,7 +2966,7 @@ s32 func_00006338(void *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
         var_s0 = 0x80410D14;
     } else if ((M2C_FIELD(temp_s2, s16 *, 0x10E) < arg1) || ((u32) M2C_FIELD(temp_s2, s16 *, 0x110) < arg3)) {
         var_s0 = 0x80410D13;
-    } else if (sceWlanDrv_driver_FBD385FB() <= 0) {
+    } else if (sceWlanDropCheck() <= 0) {
         temp_v0 = M2C_FIELD(temp_s2, M2C_UNK (**)(void *, s32, s32, u32, s32), 0xD8);
         if (temp_v0 != NULL) {
             temp_v0(temp_s2, arg1, arg2, arg3, arg4);
@@ -3081,9 +3081,9 @@ INCLUDE_ASM("nonmatchings/wlan", func_00012630);
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/wlan", func_0001712C);
 
-INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_FBD385FB);
+INCLUDE_ASM("nonmatchings/wlan", sceWlanDropCheck);
 
-s32 sceWlanDrv_driver_44A99F9D(s32 *arg0, s32 *arg1) {
+s32 sceWlanGetDropRate(s32 *arg0, s32 *arg1) {
     s32 var_a2;
 
     var_a2 = 0x80410003;
@@ -3097,7 +3097,7 @@ s32 sceWlanDrv_driver_44A99F9D(s32 *arg0, s32 *arg1) {
 #endif
 
 #if FW_VERSION >= 300
-s32 sceWlanDrv_driver_EB3235B5(u32 arg0, s32 arg1) {
+s32 sceWlanSetDropRate(u32 arg0, s32 arg1) {
     s32 temp_a0;
     s32 var_v1;
 
@@ -3121,7 +3121,7 @@ s32 sceWlanDrv_driver_EB3235B5(u32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION == 282
-s32 sceWlanDrv_driver_EB3235B5(u32 arg0, s32 arg1) {
+s32 sceWlanSetDropRate(u32 arg0, s32 arg1) {
     s32 temp_a0;
     s32 var_v1;
 
@@ -3162,7 +3162,7 @@ s32 func_00017A3C(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2, u32 arg3
         var_s0 = 0x80410D14;
     } else if ((M2C_FIELD(temp_s2, s16 *, 0x10E) < arg1) || ((u32) M2C_FIELD(temp_s2, s16 *, 0x110) < arg3)) {
         var_s0 = 0x80410D13;
-    } else if (sceWlanDrv_driver_FBD385FB() <= 0) {
+    } else if (sceWlanDropCheck() <= 0) {
         temp_v0 = M2C_FIELD(temp_s2, M2C_UNK (**)(void *, s32, s32, u32, s32), 0xD8);
         if (temp_v0 != NULL) {
             temp_v0(temp_s2, arg1, arg2, arg3, arg4);
@@ -3186,7 +3186,7 @@ s32 func_00017A3C(struct Unk_func_00003114_0 *arg0, s32 arg1, s32 arg2, u32 arg3
         var_s0 = 0x80410D14;
     } else if ((temp_s2->unk10E < arg1) || ((u32) temp_s2->unk110 < arg3)) {
         var_s0 = 0x80410D13;
-    } else if (sceWlanDrv_driver_FBD385FB() <= 0) {
+    } else if (sceWlanDropCheck() <= 0) {
         temp_v0 = temp_s2->unkD8;
         if (temp_v0 != NULL) {
             temp_v0(temp_s2, arg1, arg2, arg3, arg4);

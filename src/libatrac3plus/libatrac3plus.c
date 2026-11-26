@@ -48,7 +48,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracGetNextDecodePosition);
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetLoopNum);
 
-INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtrac3plus_CA3CA3D2);
+INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracGetBufferInfoForReseting);
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracResetPlayPosition);
 

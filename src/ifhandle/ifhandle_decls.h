@@ -54,10 +54,10 @@ s32 sceKernelDeleteVpl(s32);
 s32 sceNetIfhandle_driver_0542835F(s32 arg0, s32 arg1, s32 arg2);
 s32 sceNetIfhandle_driver_0C391E9F(s32 arg0, u32 arg1);
 void sceNetIfhandle_driver_0FB8AE0D(void);
-void sceNetIfhandle_driver_16246B99(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1);
+void sceNetIfPrepend(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1);
 s32 sceNetIfhandle_driver_29ED84C5(void);
 s32 sceNetIfhandle_driver_62B20015(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-s32 sceNetIfhandle_driver_C6D14282(struct Unk_sceNetIfhandle_driver_C6D14282_0 *arg0, s32 arg1);
-s32 sceNetIfhandle_driver_D5AD6DEA(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *arg0);
+s32 sceNetSetIfhandleOpt(struct Unk_sceNetIfhandle_driver_C6D14282_0 *arg0, s32 arg1);
+s32 sceNetGetIfhandleOpt(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *arg0);
 
 #endif

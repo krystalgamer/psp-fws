@@ -140,13 +140,13 @@ s32 module_start(void) {
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_84A04017);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleCLength);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_A86D5005);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleCLengthByPolling);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_A4547DF1);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleDLength);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_94EB1072);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleDLengthByPolling);
 #endif
 
 #if FW_VERSION >= 303
@@ -185,13 +185,13 @@ INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_DFF0F308);
 INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_F7275198);
 #endif
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceResmap_driver_E5659590);
+INCLUDE_ASM("nonmatchings/mesg_led", sceResmapPrepare);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceResmap_driver_4434E59F);
+INCLUDE_ASM("nonmatchings/mesg_led", sceResmapPrepareByPolling);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceDbman_driver_B2B8C3F9);
+INCLUDE_ASM("nonmatchings/mesg_led", sceDbmanSelect);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceDbman_driver_34B53D46);
+INCLUDE_ASM("nonmatchings/mesg_led", sceDbmanSelectByPolling);
 
 INCLUDE_ASM("nonmatchings/mesg_led", sceNwman_driver_9555D68D);
 
@@ -222,29 +222,29 @@ INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_28BC34E1);
 
 INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_8B0310A0);
 #else
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_198FD3BE);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleILength);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_FBC694C7);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleILengthByPolling);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_07E152BE);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleJLength);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_9906F33A);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleJLengthByPolling);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_46AC0E78);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleKLength);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_55C8785E);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleKLengthByPolling);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_67A5ECDF);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleLLength);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_85B9D9F3);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleLLengthByPolling);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_951F4A5B);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleMLength);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_58999D8E);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleMLengthByPolling);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_9FC926A0);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleNLength);
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_7A922276);
+INCLUDE_ASM("nonmatchings/mesg_led", sceUtilsGetLoadModuleNLengthByPolling);
 #endif
 
 INCLUDE_ASM("nonmatchings/mesg_led", sceMesgd_driver_102DC8AF);
@@ -277,7 +277,7 @@ INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_7EDF7F6E);
 INCLUDE_ASM("nonmatchings/mesg_led", sceMesgLed_driver_6039ED19);
 #endif
 
-INCLUDE_ASM("nonmatchings/mesg_led", sceDbsvr_driver_94561901);
+INCLUDE_ASM("nonmatchings/mesg_led", sceDbsvrGetData);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/mesg_led", func_00003FC0);

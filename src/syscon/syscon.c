@@ -2,14 +2,14 @@
 #include "common.h"
 #include "syscon_decls.h"
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_0A771482);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconInit);
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/syscon", func_00000218);
 #endif
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_56931095);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconResume);
 
 INCLUDE_ASM("nonmatchings/syscon", func_000004C4);
 #endif
@@ -77,11 +77,11 @@ INCLUDE_ASM("nonmatchings/syscon", func_00000204);
 
 INCLUDE_ASM("nonmatchings/syscon", func_00000360);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_5B9ACC97);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdExec);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3AC3D2A4);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdExecAsync);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_1602ED0D);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdCancel);
 #endif
 
 #if FW_VERSION == 282
@@ -107,118 +107,118 @@ INCLUDE_ASM("nonmatchings/syscon", func_0000050C);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_5B9ACC97);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdExec);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3AC3D2A4);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdExecAsync);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_1602ED0D);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdCancel);
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_F350F666);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdSync);
 
 INCLUDE_ASM("nonmatchings/syscon", func_00001444);
 
 s32 module_start(void) {
-    sceSyscon_driver_0A771482();
+    sceSysconInit();
     return 0;
 }
 
 INCLUDE_ASM("nonmatchings/syscon", module_reboot_before);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_92D16FC7);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconEnd);
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/syscon", func_000016C0);
 #endif
 
 #if FW_VERSION >= 150
-s32 sceSyscon_driver_081826B4(void) {
+s32 sceSysconSuspend(void) {
     sceKernelDisableSubIntr(4, 4);
     return 0;
 }
 #else
-s32 sceSyscon_driver_081826B4(void) {
+s32 sceSysconSuspend(void) {
     return 0;
 }
 #endif
 
 #if FW_VERSION < 300
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_56931095);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconResume);
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_5EE92F3C);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconSetDebugHandlers);
 #else
-s32 sceSyscon_driver_5EE92F3C(s32 arg0) {
+s32 sceSysconSetDebugHandlers(s32 arg0) {
     D_00004600.unk24 = arg0;
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 sceSyscon_driver_5FF1D610(s32 arg0) {
+s32 sceSysconSetPollingMode(s32 arg0) {
     M2C_VFIELD(&D_00004600, s32, 0x128) = arg0;
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-s32 sceSyscon_driver_9E6E060F(s32 arg0) {
+s32 sceSysconSetAffirmativeRertyMode(s32 arg0) {
     M2C_VFIELD(&D_00004600, s32, 0x12C) = arg0;
     return 0;
 }
 #endif
 
 #if FW_VERSION < 271
-s32 sceSyscon_driver_E00BFC9E(void) {
+s32 _sceSysconGetBaryonVersion(void) {
     return M2C_VFIELD(&D_00004600, s32, 0x108);
 }
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_5FF1D610);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconSetPollingMode);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
-s32 sceSyscon_driver_5FF1D610(s32 arg0) {
+s32 sceSysconSetPollingMode(s32 arg0) {
     D_00004600.unk134 = arg0;
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_9E6E060F);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconSetAffirmativeRertyMode);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
-s32 sceSyscon_driver_9E6E060F(s32 arg0) {
+s32 sceSysconSetAffirmativeRertyMode(s32 arg0) {
     D_00004600.unk138 = arg0;
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E00BFC9E);
+INCLUDE_ASM("nonmatchings/syscon", _sceSysconGetBaryonVersion);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s32 sceSyscon_driver_E00BFC9E(void) {
+s32 _sceSysconGetBaryonVersion(void) {
     return M2C_VFIELD(&D_00004600, s32, 0x110);
 }
 #endif
 
 #if FW_VERSION >= 271 && FW_VERSION < 300
-s32 sceSyscon_driver_E00BFC9E(void) {
+s32 _sceSysconGetBaryonVersion(void) {
     return D_00004600.unk10C;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_C8D97773);
+INCLUDE_ASM("nonmatchings/syscon", _sceSysconGetBaryonTimeStamp);
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/syscon", func_000017C0);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_64FA0B22);
+INCLUDE_ASM("nonmatchings/syscon", _sceSysconGetUsbPowerType);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
@@ -228,231 +228,231 @@ s32 func_000017C0(void) {
 #endif
 
 #if FW_VERSION >= 282
-void sceSyscon_driver_58531E69(s32 arg0, s32 arg1) {
+void sceSysconSetGSensorCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 0xA);
 }
 #endif
 
-void sceSyscon_driver_AD555CE5(s32 arg0, s32 arg1) {
+void sceSysconSetLowBatteryCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 0);
 }
 
-void sceSyscon_driver_F281805D(s32 arg0, s32 arg1) {
+void sceSysconSetPowerSwitchCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 1);
 }
 
-void sceSyscon_driver_A068B3D0(s32 arg0, s32 arg1) {
+void sceSysconSetAlarmCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 2);
 }
 
-void sceSyscon_driver_E540E532(s32 arg0, s32 arg1) {
+void sceSysconSetAcSupplyCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 3);
 }
 
-void sceSyscon_driver_BBFB70C0(s32 arg0, s32 arg1) {
+void sceSysconSetHPConnectCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 4);
 }
 
-void sceSyscon_driver_805180D1(s32 arg0, s32 arg1) {
+void sceSysconSetHRPowerCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 8);
 }
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_A8E34316);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconSetHRWakeupCallback);
 #endif
 
-void sceSyscon_driver_53072985(s32 arg0, s32 arg1) {
+void sceSysconSetWlanSwitchCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 5);
 }
 
-void sceSyscon_driver_F9193EC3(s32 arg0, s32 arg1) {
+void sceSysconSetWlanPowerCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 9);
 }
 
 #if FW_VERSION >= 282
-void sceSyscon_driver_04EEFD03(s32 arg0, s32 arg1) {
+void sceSysconSetHddPowerCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 0xB);
 }
 #endif
 
 #if FW_VERSION >= 300
-void sceSyscon_driver_88FDB279(s32 arg0, s32 arg1) {
+void sceSysconSetBtSwitchCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 0xD);
 }
 #endif
 
 #if FW_VERSION >= 282
-void sceSyscon_driver_BAAECDF8(s32 arg0, s32 arg1) {
+void sceSysconSetBtPowerCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 0xC);
 }
 #endif
 
-void sceSyscon_driver_7479DB05(s32 arg0, s32 arg1) {
+void sceSysconSetHoldSwitchCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 6);
 }
 
-void sceSyscon_driver_6848D817(s32 arg0, s32 arg1) {
+void sceSysconSetUmdSwitchCallback(s32 arg0, s32 arg1) {
     func_00001CA0(arg0, arg1, 7);
 }
 
 INCLUDE_ASM("nonmatchings/syscon", func_0000193C);
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_86D4CAD8);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetBaryonStatus);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s32 sceSyscon_driver_86D4CAD8(void) {
+s32 sceSysconGetBaryonStatus(void) {
     return D_00004600.unk4A & 0xFF;
 }
 #endif
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_204F23FF);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetBaryonStatus2);
 #endif
 
 #if FW_VERSION == 271
-s32 sceSyscon_driver_86D4CAD8(void) {
+s32 sceSysconGetBaryonStatus(void) {
     return D_00004600.unk46 & 0xFF;
 }
 #endif
 
 #if FW_VERSION < 271
-s32 sceSyscon_driver_86D4CAD8(void) {
+s32 sceSysconGetBaryonStatus(void) {
     return D_00004600.unk45 & 0xFF;
 }
 #endif
 
 #if FW_VERSION == 282
-s32 sceSyscon_driver_86D4CAD8(void) {
+s32 sceSysconGetBaryonStatus(void) {
     return D_00004600.unk48 & 0xFF;
 }
 
-s32 sceSyscon_driver_204F23FF(void) {
+s32 sceSysconGetBaryonStatus2(void) {
     return D_00004600.unk4A & 0xFF;
 }
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3357EE5C);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconIsFalling);
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_32CFD20F);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconIsLowBattery);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EC0DE439);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetPowerSwitch);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EA5B9823);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconIsAlarmed);
 
 #if FW_VERSION == 271
-s32 sceSyscon_driver_E20D08FE(void) {
+s32 sceSysconIsAcSupplied(void) {
     return D_00004600.unk46 & 1;
 }
 #endif
 
 #if FW_VERSION < 271
-s32 sceSyscon_driver_E20D08FE(void) {
+s32 sceSysconIsAcSupplied(void) {
     return D_00004600.unk45 & 1;
 }
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E20D08FE);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconIsAcSupplied);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s32 sceSyscon_driver_E20D08FE(void) {
+s32 sceSysconIsAcSupplied(void) {
     return D_00004600.unk4A & 1;
 }
 #endif
 
 #if FW_VERSION == 282
-s32 sceSyscon_driver_E20D08FE(void) {
+s32 sceSysconIsAcSupplied(void) {
     return D_00004600.unk48 & 1;
 }
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E0DDFE18);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetHPConnect);
 #else
-s8 sceSyscon_driver_E0DDFE18(void) {
+s8 sceSysconGetHPConnect(void) {
     return (s8) D_00004600.unk38;
 }
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_BDA16E46);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetWlanSwitch);
 #else
-s8 sceSyscon_driver_BDA16E46(void) {
+s8 sceSysconGetWlanSwitch(void) {
     return (s8) D_00004600.unk39;
 }
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_A6776FB4);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetBtSwitch);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_A6776FB4(void) {
+s8 sceSysconGetBtSwitch(void) {
     return (s8) D_00004600.unk3A;
 }
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_F6BB4649);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetHoldSwitch);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_F6BB4649(void) {
+s8 sceSysconGetHoldSwitch(void) {
     return (s8) D_00004600.unk3B;
 }
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_138747DE);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetUmdSwitch);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_138747DE(void) {
+s8 sceSysconGetUmdSwitch(void) {
     return (s8) D_00004600.unk3C;
 }
 #endif
 
 #if FW_VERSION < 300
-s8 sceSyscon_driver_F6BB4649(void) {
+s8 sceSysconGetHoldSwitch(void) {
     return (s8) D_00004600.unk3A;
 }
 
-s8 sceSyscon_driver_138747DE(void) {
+s8 sceSysconGetUmdSwitch(void) {
     return (s8) D_00004600.unk3B;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_71AE1BCE);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetHRPowerStatus);
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_F953EF93);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetHRWakeupStatus);
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_7016161C);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetWlanPowerStatus);
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_F9FDAFA5);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetHddPowerStatus);
 #endif
 
 #if FW_VERSION == 282
-s32 sceSyscon_driver_F9FDAFA5(void) {
+s32 sceSysconGetHddPowerStatus(void) {
     return D_00004600.unk4A & 1;
 }
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_56A73EDD);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetBtPowerStatus);
 #endif
 
 #if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/syscon", func_00001AC0);
 
-s8 sceSyscon_driver_48AB0E44(void) {
+s8 sceSysconGetLeptonPowerCtrl(void) {
     return (s8) D_00004600.unk3C;
 }
 #endif
@@ -460,17 +460,17 @@ s8 sceSyscon_driver_48AB0E44(void) {
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/syscon", func_00001AE8);
 #else
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_48AB0E44);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetLeptonPowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_48AB0E44(void) {
+s8 sceSysconGetLeptonPowerCtrl(void) {
     return (s8) D_00004600.unk3D;
 }
 #endif
 
 #if FW_VERSION < 300
-s8 sceSyscon_driver_628F2351(void) {
+s8 sceSysconGetMsPowerCtrl(void) {
     return (s8) D_00004600.unk3D;
 }
 #endif
@@ -478,17 +478,17 @@ s8 sceSyscon_driver_628F2351(void) {
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/syscon", func_00001B10);
 #else
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_628F2351);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetMsPowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_628F2351(void) {
+s8 sceSysconGetMsPowerCtrl(void) {
     return (s8) D_00004600.unk3E;
 }
 #endif
 
 #if FW_VERSION < 300
-s8 sceSyscon_driver_EC37C549(void) {
+s8 sceSysconGetWlanPowerCtrl(void) {
     return (s8) D_00004600.unk3E;
 }
 #endif
@@ -496,29 +496,29 @@ s8 sceSyscon_driver_EC37C549(void) {
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/syscon", func_00001B38);
 #else
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EC37C549);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetWlanPowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_EC37C549(void) {
+s8 sceSysconGetWlanPowerCtrl(void) {
     return (s8) D_00004600.unk3F;
 }
 #endif
 
 #if FW_VERSION == 271
-s8 sceSyscon_driver_610E0FD5(void) {
+s8 sceSysconGetNandPowerCtrl(void) {
     return (s8) D_00004600.unk3F;
 }
 #endif
 
 #if FW_VERSION < 271
-s8 sceSyscon_driver_8DDA4CA6(void) {
+s8 sceSysconGetTachyonVmePowerCtrl(void) {
     return (s8) D_00004600.unk3F;
 }
 #endif
 
 #if FW_VERSION == 282
-s8 sceSyscon_driver_051186F3(void) {
+s8 sceSysconGetHddPowerCtrl(void) {
     return (s8) D_00004600.unk3F;
 }
 #endif
@@ -526,29 +526,29 @@ s8 sceSyscon_driver_051186F3(void) {
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/syscon", func_00001B60);
 #else
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_051186F3);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetHddPowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_051186F3(void) {
+s8 sceSysconGetHddPowerCtrl(void) {
     return (s8) D_00004600.unk40;
 }
 #endif
 
 #if FW_VERSION == 271
-s8 sceSyscon_driver_8DDA4CA6(void) {
+s8 sceSysconGetTachyonVmePowerCtrl(void) {
     return (s8) D_00004600.unk40;
 }
 #endif
 
 #if FW_VERSION < 271
-s8 sceSyscon_driver_52B74B6C(void) {
+s8 sceSysconGetTachyonAwPowerCtrl(void) {
     return (s8) D_00004600.unk40;
 }
 #endif
 
 #if FW_VERSION == 282
-s8 sceSyscon_driver_CE76F93E(void) {
+s8 sceSysconGetDvePowerCtrl(void) {
     return (s8) D_00004600.unk40;
 }
 #endif
@@ -556,29 +556,29 @@ s8 sceSyscon_driver_CE76F93E(void) {
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/syscon", func_00001B88);
 #else
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_CE76F93E);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetDvePowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_CE76F93E(void) {
+s8 sceSysconGetDvePowerCtrl(void) {
     return (s8) D_00004600.unk41;
 }
 #endif
 
 #if FW_VERSION == 271
-s8 sceSyscon_driver_52B74B6C(void) {
+s8 sceSysconGetTachyonAwPowerCtrl(void) {
     return (s8) D_00004600.unk41;
 }
 #endif
 
 #if FW_VERSION < 271
-s8 sceSyscon_driver_1B17D3E3(void) {
+s8 sceSysconGetTachyonAvcPowerCtrl(void) {
     return (s8) D_00004600.unk41;
 }
 #endif
 
 #if FW_VERSION == 282
-s8 sceSyscon_driver_8EDF1AD7(void) {
+s8 sceSysconGetBtPowerCtrl(void) {
     return (s8) D_00004600.unk41;
 }
 #endif
@@ -586,29 +586,29 @@ s8 sceSyscon_driver_8EDF1AD7(void) {
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/syscon", func_00001BB0);
 #else
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_8EDF1AD7);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetBtPowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_8EDF1AD7(void) {
+s8 sceSysconGetBtPowerCtrl(void) {
     return (s8) D_00004600.unk42;
 }
 #endif
 
 #if FW_VERSION == 271
-s8 sceSyscon_driver_1B17D3E3(void) {
+s8 sceSysconGetTachyonAvcPowerCtrl(void) {
     return (s8) D_00004600.unk42;
 }
 #endif
 
 #if FW_VERSION < 271
-s8 sceSyscon_driver_5F19C00F(void) {
+s8 sceSysconGetLcdPowerCtrl(void) {
     return (s8) D_00004600.unk42;
 }
 #endif
 
 #if FW_VERSION == 282
-s8 sceSyscon_driver_8DDA4CA6(void) {
+s8 sceSysconGetTachyonVmePowerCtrl(void) {
     return (s8) D_00004600.unk42;
 }
 #endif
@@ -616,29 +616,29 @@ s8 sceSyscon_driver_8DDA4CA6(void) {
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/syscon", func_00001BD8);
 #else
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EE81C5B1);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetUsbPowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_EE81C5B1(void) {
+s8 sceSysconGetUsbPowerCtrl(void) {
     return (s8) D_00004600.unk43;
 }
 #endif
 
 #if FW_VERSION == 271
-s8 sceSyscon_driver_5F19C00F(void) {
+s8 sceSysconGetLcdPowerCtrl(void) {
     return (s8) D_00004600.unk43;
 }
 #endif
 
 #if FW_VERSION < 271
-s8 sceSyscon_driver_3C739F57(void) {
+s8 sceSysconGetHRPowerCtrl(void) {
     return (s8) D_00004600.unk43;
 }
 #endif
 
 #if FW_VERSION == 282
-s8 sceSyscon_driver_52B74B6C(void) {
+s8 sceSysconGetTachyonAwPowerCtrl(void) {
     return (s8) D_00004600.unk43;
 }
 #endif
@@ -646,35 +646,35 @@ s8 sceSyscon_driver_52B74B6C(void) {
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/syscon", func_00001C00);
 #else
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_8DDA4CA6);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetTachyonVmePowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_8DDA4CA6(void) {
+s8 sceSysconGetTachyonVmePowerCtrl(void) {
     return (s8) D_00004600.unk44;
 }
 #endif
 
 #if FW_VERSION == 271
-s8 sceSyscon_driver_3C739F57(void) {
+s8 sceSysconGetHRPowerCtrl(void) {
     return (s8) D_00004600.unk44;
 }
 
 INCLUDE_ASM("nonmatchings/syscon", func_000018C0);
 
-s8 sceSyscon_driver_CC04A978(void) {
+s8 sceSysconGetWlanLedCtrl(void) {
     return (s8) D_00004600.unk45;
 }
 #endif
 
 #if FW_VERSION < 271
-s8 sceSyscon_driver_CC04A978(void) {
+s8 sceSysconGetWlanLedCtrl(void) {
     return (s8) D_00004600.unk44;
 }
 #endif
 
 #if FW_VERSION == 282
-s8 sceSyscon_driver_1B17D3E3(void) {
+s8 sceSysconGetTachyonAvcPowerCtrl(void) {
     return (s8) D_00004600.unk44;
 }
 #endif
@@ -684,17 +684,17 @@ INCLUDE_ASM("nonmatchings/syscon", func_00001C28);
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_52B74B6C);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetTachyonAwPowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_52B74B6C(void) {
+s8 sceSysconGetTachyonAwPowerCtrl(void) {
     return (s8) D_00004600.unk45;
 }
 #endif
 
 #if FW_VERSION == 282
-s8 sceSyscon_driver_5F19C00F(void) {
+s8 sceSysconGetLcdPowerCtrl(void) {
     return (s8) D_00004600.unk45;
 }
 #endif
@@ -704,17 +704,17 @@ INCLUDE_ASM("nonmatchings/syscon", func_00001C50);
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_1B17D3E3);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetTachyonAvcPowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_1B17D3E3(void) {
+s8 sceSysconGetTachyonAvcPowerCtrl(void) {
     return (s8) D_00004600.unk46;
 }
 #endif
 
 #if FW_VERSION == 282
-s8 sceSyscon_driver_3C739F57(void) {
+s8 sceSysconGetHRPowerCtrl(void) {
     return (s8) D_00004600.unk46;
 }
 #endif
@@ -724,11 +724,11 @@ INCLUDE_ASM("nonmatchings/syscon", func_00001C78);
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_5F19C00F);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetLcdPowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_5F19C00F(void) {
+s8 sceSysconGetLcdPowerCtrl(void) {
     return (s8) D_00004600.unk47;
 }
 
@@ -736,11 +736,11 @@ INCLUDE_ASM("nonmatchings/syscon", func_00001C5C);
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3C739F57);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetHRPowerCtrl);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-s8 sceSyscon_driver_3C739F57(void) {
+s8 sceSysconGetHRPowerCtrl(void) {
     return (s8) D_00004600.unk48;
 }
 
@@ -748,11 +748,11 @@ INCLUDE_ASM("nonmatchings/syscon", func_00001C84);
 #endif
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_CC04A978);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetWlanLedCtrl);
 #endif
 
 #if FW_VERSION == 282
-s8 sceSyscon_driver_CC04A978(void) {
+s8 sceSysconGetWlanLedCtrl(void) {
     return (s8) D_00004600.unk47;
 }
 #endif
@@ -767,26 +767,26 @@ INCLUDE_ASM("nonmatchings/syscon", func_00001D14);
 
 INCLUDE_ASM("nonmatchings/syscon", func_00001E60);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_7BCC5EAE);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetTimeStamp);
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_59CD0449);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetGValue);
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_65EB6096);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconWriteScratchPad);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EB277C88);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconReadScratchPad);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_992C22C2);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconSendSetParam);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_08234E6D);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconReceiveSetParam);
 #endif
 
 #if FW_VERSION >= 151
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_2EE82492);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlTachyonWDT);
 #else
-s32 sceSyscon_driver_2EE82492(u32 arg0) {
+s32 sceSysconCtrlTachyonWDT(u32 arg0) {
     s32 var_v0;
     s32 var_v1;
 
@@ -802,130 +802,130 @@ s32 sceSyscon_driver_2EE82492(u32 arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_8CBC7987);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconResetDevice);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_91E183CB);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconPowerSuspend);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E6B74CB9);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconNop);
 
-void sceSyscon_driver_7EC5A957(s32 arg0) {
+void sceSysconGetBaryonVersion(s32 arg0) {
     func_00001444(arg0, 1);
 }
 
 #if FW_VERSION < 282
-void sceSyscon_driver_3B657A27(s32 arg0) {
+void sceSysconGetTachyonTemp(s32 arg0) {
     func_00001444(arg0, 5);
 }
 #endif
 
-void sceSyscon_driver_FC32141A(s32 arg0) {
+void sceSysconGetPowerSupplyStatus(s32 arg0) {
     func_00001444(arg0, 0xB);
 }
 
 #if FW_VERSION < 282
-void sceSyscon_driver_F775BC34(s32 arg0) {
+void sceSysconGetWakeUpFactor(s32 arg0) {
     func_00001444(arg0, 0xE);
 }
 
-void sceSyscon_driver_A9AEF39F(s32 arg0) {
+void sceSysconGetWakeUpReq(s32 arg0) {
     func_00001444(arg0, 0xF);
 }
 
-void sceSyscon_driver_C4D66C1D(s32 arg0) {
+void sceSysconReadClock(s32 arg0) {
     func_00001444(arg0, 9);
 }
 
-void sceSyscon_driver_C7634A7A(s32 arg0) {
+void sceSysconWriteClock(s32 arg0) {
     func_0000193C(arg0, 0x20, 6);
 }
 
-void sceSyscon_driver_7A805EE4(s32 arg0) {
+void sceSysconReadAlarm(s32 arg0) {
     func_00001444(arg0, 0xA);
 }
 
-void sceSyscon_driver_6C911742(s32 arg0) {
+void sceSysconWriteAlarm(s32 arg0) {
     func_0000193C(arg0, 0x22, 6);
 }
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_992C22C2);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconSendSetParam);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_08234E6D);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconReceiveSetParam);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_565EF519);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetFallingDetectTime);
 
-void sceSyscon_driver_F775BC34(s32 arg0) {
+void sceSysconGetWakeUpFactor(s32 arg0) {
     func_00001444(arg0, 0xE);
 }
 
-void sceSyscon_driver_A9AEF39F(s32 arg0) {
+void sceSysconGetWakeUpReq(s32 arg0) {
     func_00001444(arg0, 0xF);
 }
 #endif
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_25F47F96);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetVideoCable);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void sceSyscon_driver_25F47F96(s32 arg0) {
+void sceSysconGetVideoCable(s32 arg0) {
     func_00001444(arg0, 0x12);
 }
 #endif
 
 #if FW_VERSION >= 282
-void sceSyscon_driver_C4D66C1D(s32 arg0) {
+void sceSysconReadClock(s32 arg0) {
     func_00001444(arg0, 9);
 }
 
-void sceSyscon_driver_C7634A7A(s32 arg0) {
+void sceSysconWriteClock(s32 arg0) {
     func_0000193C(arg0, 0x20, 6);
 }
 
-void sceSyscon_driver_7A805EE4(s32 arg0) {
+void sceSysconReadAlarm(s32 arg0) {
     func_00001444(arg0, 0xA);
 }
 
-void sceSyscon_driver_6C911742(s32 arg0) {
+void sceSysconWriteAlarm(s32 arg0) {
     func_0000193C(arg0, 0x22, 6);
 }
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E9FF8226);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconSetUSBStatus);
 #endif
 
-void sceSyscon_driver_882F0AAB(s32 arg0) {
+void sceSysconGetTachyonWDTStatus(s32 arg0) {
     func_00001444(arg0, 0xC);
 }
 
-void sceSyscon_driver_00E7B6C2(s32 arg0) {
+void sceSysconCtrlAnalogXYPolling(s32 arg0) {
     func_0000193C(arg0, 0x33, 3);
 }
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_44439604);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlHRPower);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_C8439C57);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconPowerStandby);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_BE27FE66);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlPower);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_18BFBE65);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlLED);
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_A80D6AC6);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlNandPower);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_1A08CD66);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlDvePower);
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_19D5A97A);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlCharge);
 #endif
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E5E35721);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlTachyonAvcPower);
 #endif
 
 #if FW_VERSION >= 310
@@ -934,56 +934,56 @@ INCLUDE_ASM("nonmatchings/syscon", func_000029B8);
 INCLUDE_ASM("nonmatchings/syscon", func_00002A40);
 #endif
 
-void sceSyscon_driver_E7E87741(s32 arg0) {
+void sceSysconGetPommelVersion(s32 arg0) {
     func_00001444(arg0, 0x40);
 }
 
-void sceSyscon_driver_FB148FB6(s32 arg0) {
+void sceSysconGetPolestarVersion(s32 arg0) {
     func_00001444(arg0, 0x41);
 }
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_01677F91);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlVoltage);
 #else
-void sceSyscon_driver_01677F91(s32 arg0, s32 arg1) {
+void sceSysconCtrlVoltage(s32 arg0, s32 arg1) {
     func_0000193C(((arg1 & 0xFFFF) << 8) | (arg0 & 0xFF), 0x42, 5);
 }
 #endif
 
 #if FW_VERSION >= 282
-void sceSyscon_driver_72EDA9AF(s32 arg0) {
+void sceSysconGetGSensorVersion(s32 arg0) {
     func_00001444(arg0, 0x43);
 }
 #endif
 
 #if FW_VERSION >= 300
-void sceSyscon_driver_C68F1573(s32 arg0, s32 arg1, s32 arg2) {
+void sceSysconCtrlGSensor(s32 arg0, s32 arg1, s32 arg2) {
     func_0000193C(((arg1 & 0xFF) << 8) | (arg0 & 0xFF), 0x44, 4);
 }
 #endif
 
 #if FW_VERSION == 282
-void sceSyscon_driver_C68F1573(s32 arg0, s32 arg1, s32 arg2) {
+void sceSysconCtrlGSensor(s32 arg0, s32 arg1, s32 arg2) {
     func_0000193C(((arg2 & 0xFF) << 0x10) | ((arg1 & 0xFF) << 8) | (arg0 & 0xFF), 0x44, 4);
 }
 #endif
 
-void sceSyscon_driver_09721F7F(s32 arg0) {
+void sceSysconGetPowerStatus(s32 arg0) {
     func_00001444(arg0, 0x46);
 }
 
-void sceSyscon_driver_D1B501E8(s32 arg0, s32 arg1) {
+void sceSysconWritePommelReg(s32 arg0, s32 arg1) {
     func_0000193C(((arg1 & 0xFFFF) << 8) | (arg0 & 0xFF), 0x48, 5);
 }
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3DE38336);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconReadPommelReg);
 
 #if FW_VERSION < 282
-s32 sceSyscon_driver_2B9E6A06(s32 *arg0) {
+s32 sceSysconGetPowerError(s32 *arg0) {
     return func_00001444((s32) arg0, 0x4A);
 }
 #else
-s32 sceSyscon_driver_2B9E6A06(s32 *arg0) {
+s32 sceSysconGetPowerError(s32 *arg0) {
     if (arg0 != NULL) {
         *arg0 = 0;
     }
@@ -991,141 +991,141 @@ s32 sceSyscon_driver_2B9E6A06(s32 *arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_8A4519F5);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlLeptonPower);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_99BBB24C);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlMsPower);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_F0ED3255);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlWlanPower);
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_A975F224);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlHddPower);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_9C4266FC);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlBtPower);
 #endif
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3987FEA3);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlUsbPower);
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EAB13FBE);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconPermitChargeBattery);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_C5075828);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconForbidChargeBattery);
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3C6DB1C5);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlTachyonVmePower);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_B2558E37);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlTachyonAwPower);
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E5E35721);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlTachyonAvcPower);
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_9478F399);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlLcdPower);
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_05727A0B);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetGSensorCarib);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_7C8A5503);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetScvCode);
 #endif
 
-void sceSyscon_driver_806D4D6C(s32 arg0, s32 arg1) {
+void sceSysconWritePolestarReg(s32 arg0, s32 arg1) {
     func_0000193C(((arg1 & 0xFFFF) << 8) | (arg0 & 0xFF), 0x4E, 5);
 }
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_D8471760);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconReadPolestarReg);
 
 #if FW_VERSION >= 282
-void sceSyscon_driver_07A0C260(s32 arg0, s32 arg1) {
+void sceSysconWriteGSensorReg(s32 arg0, s32 arg1) {
     func_0000193C(((arg1 & 0xFFFF) << 8) | (arg0 & 0xFF), 0x50, 5);
 }
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_3AB3AEEF);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconReadGSensorReg);
 #endif
 
 #if FW_VERSION < 310
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_EAB13FBE);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconPermitChargeBattery);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_C5075828);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconForbidChargeBattery);
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_6A53F3F8);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconBatteryGetStatusCap);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_FA4C4518);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconBatteryGetInfo);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_1165C864);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconBatteryWriteNVM);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_68EF0BEF);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconBatteryReadNVM);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_36E28C5F);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconBatteryAuth);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_E448FD3F);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconBatteryNop);
 
-void sceSyscon_driver_70C10E61(s32 arg0) {
+void sceSysconBatteryGetTemp(s32 arg0) {
     func_000038C4(0x62, arg0);
 }
 
-void sceSyscon_driver_8BDEBB1E(s32 arg0) {
+void sceSysconBatteryGetVolt(s32 arg0) {
     func_000038C4(0x63, arg0);
 }
 
-void sceSyscon_driver_373EC933(s32 arg0) {
+void sceSysconBatteryGetElec(s32 arg0) {
     func_000038C4(0x64, arg0);
 }
 
-void sceSyscon_driver_82861DE2(s32 arg0) {
+void sceSysconBatteryGetRCap(s32 arg0) {
     func_000038C4(0x65, arg0);
 }
 
-void sceSyscon_driver_876CA580(s32 arg0) {
+void sceSysconBatteryGetCap(s32 arg0) {
     func_000038C4(0x66, arg0);
 }
 
-void sceSyscon_driver_71135D7D(s32 arg0) {
+void sceSysconBatteryGetFullCap(s32 arg0) {
     func_000038C4(0x67, arg0);
 }
 
-void sceSyscon_driver_7CBD4522(s32 arg0) {
+void sceSysconBatteryGetIFC(s32 arg0) {
     func_000038C4(0x68, arg0);
 }
 
-void sceSyscon_driver_284FE366(s32 arg0) {
+void sceSysconBatteryGetLimitTime(s32 arg0) {
     func_000038C4(0x69, arg0);
 }
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_75025299);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconBatteryGetStatus);
 
-void sceSyscon_driver_B5105D51(s32 arg0) {
+void sceSysconBatteryGetCycle(s32 arg0) {
     func_000038C4(0x6B, arg0);
 }
 
-void sceSyscon_driver_D5340103(s32 arg0) {
+void sceSysconBatteryGetSerial(s32 arg0) {
     func_000038C4(0x6C, arg0);
 }
 
-void sceSyscon_driver_B71B98A8(s32 arg0) {
+void sceSysconBatteryGetTempAD(s32 arg0) {
     func_000038C4(0x6E, arg0);
 }
 
-void sceSyscon_driver_87671B18(s32 arg0) {
+void sceSysconBatteryGetVoltAD(s32 arg0) {
     func_000038C4(0x6F, arg0);
 }
 
-void sceSyscon_driver_75D22BF8(s32 arg0) {
+void sceSysconBatteryGetElecAD(s32 arg0) {
     func_000038C4(0x70, arg0);
 }
 
-void sceSyscon_driver_4C539345(s32 arg0) {
+void sceSysconBatteryGetTotalElec(s32 arg0) {
     func_000038C4(0x71, arg0);
 }
 
-void sceSyscon_driver_4C0EE2FA(s32 arg0) {
+void sceSysconBatteryGetChargeTime(s32 arg0) {
     func_000038C4(0x72, arg0);
 }
 
 INCLUDE_ASM("nonmatchings/syscon", func_000038C4);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_08DA3752);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlTachyonVoltage);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_9C4E3CA9);
@@ -1140,7 +1140,7 @@ s32 func_00003424(void) {
     s32 var_s0;
 
     var_s0 = 0;
-    if ((__builtin_allegrex_ext(sceSyscon_driver_E00BFC9E(), 8, 8) == 1) || (__builtin_allegrex_ext(sceSyscon_driver_E00BFC9E(), 8, 8) == 0x11)) {
+    if ((__builtin_allegrex_ext(_sceSysconGetBaryonVersion(), 8, 8) == 1) || (__builtin_allegrex_ext(_sceSysconGetBaryonVersion(), 8, 8) == 0x11)) {
         var_s0 = 1;
     }
     return var_s0;
@@ -1152,14 +1152,14 @@ s32 func_00002CE4(void) {
     s32 var_s0;
 
     var_s0 = 0;
-    if ((__builtin_allegrex_ext(sceSyscon_driver_E00BFC9E(), 8, 8) == 1) || (__builtin_allegrex_ext(sceSyscon_driver_E00BFC9E(), 8, 8) == 0x11)) {
+    if ((__builtin_allegrex_ext(_sceSysconGetBaryonVersion(), 8, 8) == 1) || (__builtin_allegrex_ext(_sceSysconGetBaryonVersion(), 8, 8) == 0x11)) {
         var_s0 = 1;
     }
     return var_s0;
 }
 
 s32 func_00002D34(void) {
-    return __builtin_allegrex_ext(sceSyscon_driver_E00BFC9E(), 8, 8) != 1;
+    return __builtin_allegrex_ext(_sceSysconGetBaryonVersion(), 8, 8) != 1;
 }
 #endif
 
@@ -1172,14 +1172,14 @@ s32 func_00003B1C(void) {
     s32 var_s0;
 
     var_s0 = 0;
-    if ((__builtin_allegrex_ext(sceSyscon_driver_E00BFC9E(), 8, 8) == 1) || (__builtin_allegrex_ext(sceSyscon_driver_E00BFC9E(), 8, 8) == 0x11)) {
+    if ((__builtin_allegrex_ext(_sceSysconGetBaryonVersion(), 8, 8) == 1) || (__builtin_allegrex_ext(_sceSysconGetBaryonVersion(), 8, 8) == 0x11)) {
         var_s0 = 1;
     }
     return var_s0;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_34C36FF9);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconGetDigitalKey);
 
 #if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/syscon", func_00003968);
@@ -1188,13 +1188,13 @@ INCLUDE_ASM("nonmatchings/syscon", func_00003A78);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_B8919D79);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconMsOn);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_7BE86143);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconMsOff);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_0E8560F9);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconWlanOn);
 
-INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_1B60C8AD);
+INCLUDE_ASM("nonmatchings/syscon", sceSysconWlanOff);
 #endif
 
 #if FW_VERSION < 330

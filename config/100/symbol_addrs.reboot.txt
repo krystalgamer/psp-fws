@@ -1,6 +1,6 @@
 // NID-derived names
-RebootForKernel_72E280A8 = 0x00000170; // type:func
-syslib_D3744BE0 = 0x000004B4; // type:func
+sceKernelReboot = 0x00000170; // type:func
+module_bootstart = 0x000004B4; // type:func
 // shared names (tools/add_version.py) begin
 D_0001484C = 0x000127B4; // rom:0x12834
 D_0001486C = 0x000127D4; // rom:0x12854

@@ -20,7 +20,7 @@ s32 func_00014A10(struct Unk_func_00014A10_0 *arg0, s32 arg1) {
 
     var_v1 = 0;
     if ((s8) arg0->pad0[0x4C] != 0) {
-        scePaf_F95EA3F1(arg1, &arg0->pad0[0x4C], 0x80);
+        sce_paf_private_memcpy(arg1, &arg0->pad0[0x4C], 0x80);
         var_v1 = arg1;
     }
     return var_v1;
@@ -53,7 +53,7 @@ void func_0000D56C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 0x28) = 0;
     temp_s1 = arg0 + 0x40;
-    scePaf_980228BA(temp_s1, &D_0002AAF8);
+    sce_paf_private_strcpy(temp_s1, &D_0002AAF8);
     M2C_FIELD(arg0, void **, 0x38) = temp_s1;
     M2C_FIELD(arg0, void **, 0x34) = arg0;
 }

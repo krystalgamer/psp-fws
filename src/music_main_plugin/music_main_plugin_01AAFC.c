@@ -63,7 +63,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001AE2C);
 void func_0001AE2C(M2C_UNK **arg0) {
     *arg0 = &D_0009BBD8;
     func_00049F10((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -123,7 +123,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001B020);
 void func_0001B020(M2C_UNK **arg0) {
     *arg0 = &D_0009BC50;
     func_00049F10((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -171,27 +171,27 @@ void func_0001B3FC(struct Unk_func_0001B3FC_0 *arg0) {
     temp_v1 = arg0->unk14;
     arg0->unk0 = &D_0009BC68;
     if (temp_v1 != 0) {
-        scePaf_B3D2C3BB(temp_v1);
+        _ZdaPv(temp_v1);
         arg0->unk14 = 0;
     }
     temp_v0 = arg0->unk24;
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
         arg0->unk24 = 0;
     }
     temp_v0_2 = arg0->unk18;
     if (temp_v0_2 != 0) {
-        scePaf_B3D2C3BB(temp_v0_2);
+        _ZdaPv(temp_v0_2);
         arg0->unk18 = 0;
     }
     temp_v0_3 = arg0->unk1C;
     if (temp_v0_3 != 0) {
-        scePaf_B3D2C3BB(temp_v0_3);
+        _ZdaPv(temp_v0_3);
         arg0->unk1C = 0;
     }
     arg0->unk10 = &D_0009B888;
     D_000A43D4 -= 1;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -330,7 +330,7 @@ void func_0001BC04(s32 arg0, s32 arg1, M2C_UNK arg2) {
     if (temp_s1 == 0) {
 
     } else {
-        scePaf_A82E3C19(arg2);
+        sce_paf_private_srand(arg2);
     }
     func_0001BC54(arg0, temp_s1);
 }
@@ -525,7 +525,7 @@ void func_0001CCAC(struct Unk_func_0001CCAC_0 *arg0) {
     temp_v1 = arg0->unk408;
     arg0->unk0 = &D_0009BD28;
     if (temp_v1 != 0) {
-        scePaf_B3D2C3BB(temp_v1);
+        _ZdaPv(temp_v1);
         arg0->unk408 = 0;
     }
 }
@@ -564,11 +564,11 @@ s32 func_0001D170(struct Unk_func_0001D170_0 *arg0) {
 
     var_v1 = 1;
     if (arg0->unk408 == 0) {
-        temp_v0 = scePaf_F13EBB78(0x401);
+        temp_v0 = _Znaj(0x401);
         arg0->unk408 = temp_v0;
         var_v1 = 0;
         if (temp_v0 != 0) {
-            scePaf_6829D7AF(temp_v0, 0, 0x401);
+            sce_paf_private_memset(temp_v0, 0, 0x401);
             var_v1 = 1;
         }
     }

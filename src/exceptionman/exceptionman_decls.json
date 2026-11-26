@@ -1,8 +1,8 @@
 {
  "funcs": {
-  "ExceptionManagerForKernel_3FB264FC": "void ExceptionManagerForKernel_3FB264FC(s32 arg0, s32 arg1);",
-  "ExceptionManagerForKernel_5A837AD4": "s32 ExceptionManagerForKernel_5A837AD4(s32, s32, s32);",
-  "ExceptionManagerForKernel_DF83875E": "s32 ExceptionManagerForKernel_DF83875E(void);",
+  "sceKernelRegisterExceptionHandler": "void sceKernelRegisterExceptionHandler(s32 arg0, s32 arg1);",
+  "sceKernelRegisterPriorityExceptionHandler": "s32 sceKernelRegisterPriorityExceptionHandler(s32, s32, s32);",
+  "sceKernelGetActiveDefaultExceptionHandler": "s32 sceKernelGetActiveDefaultExceptionHandler(void);",
   "func_000000F4": "s32 func_000000F4(void);",
   "func_0000011C": "void func_0000011C(void);",
   "func_0000051C": "s32 func_0000051C(void);",

@@ -3,9 +3,9 @@
 #include "k1.h"
 #include "ifhandle_decls.h"
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_B9096E48);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleTerm);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_B1F5BB87);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleIfStart);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/ifhandle", D_00003024);
@@ -45,46 +45,46 @@ INCLUDE_RODATA("nonmatchings/ifhandle", D_000033E4);
 INCLUDE_RODATA("nonmatchings/ifhandle", D_0000340C);
 #endif
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_16042084);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetCreateIfhandleEther);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_AE81C0CB);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetAttachIfhandleEther);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_54D1AEA1);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetDetachIfhandleEther);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_263767F6);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetFlagIfEvent);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_E2F4F1C9);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfDequeue);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_C28F6FF2);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfEnqueue);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_30F69334);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleInit);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_B8188F96);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleGetAttachEther);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_4FB43BCE);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleGetDetachEther);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_8FCB05A1);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleIfUp);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_EAD3A759);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleIfDown);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_0296C7D6);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleIfIoctl);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_E440A7D8);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleIfDequeue);
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_30602CE9);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleSignalSema);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_D5DA7B3C);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandleWaitSema);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_2162EE67);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandlePollSema);
 #endif
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_C9344A59);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetDestroyIfhandleEther);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_F94BAF52);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetSendIfEvent);
 
 #if FW_VERSION < 282
-void sceNetIfhandle_driver_16246B99(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1) {
+void sceNetIfPrepend(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1) {
     s32 temp_v0;
 
     if (arg0 != NULL) {
@@ -99,7 +99,7 @@ void sceNetIfhandle_driver_16246B99(struct Unk_sceNetIfhandle_driver_16246B99_0 
     }
 }
 
-s32 sceNetIfhandle_driver_C6D14282(struct Unk_sceNetIfhandle_driver_C6D14282_0 *arg0, s32 arg1) {
+s32 sceNetSetIfhandleOpt(struct Unk_sceNetIfhandle_driver_C6D14282_0 *arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = 0x80000103;
@@ -110,7 +110,7 @@ s32 sceNetIfhandle_driver_C6D14282(struct Unk_sceNetIfhandle_driver_C6D14282_0 *
     return var_v0;
 }
 
-s32 sceNetIfhandle_driver_D5AD6DEA(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *arg0) {
+s32 sceNetGetIfhandleOpt(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -126,7 +126,7 @@ INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_0542835F);
 #endif
 
 #if FW_VERSION >= 282
-void sceNetIfhandle_driver_16246B99(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1) {
+void sceNetIfPrepend(struct Unk_sceNetIfhandle_driver_16246B99_0 *arg0, struct Unk_sceNetIfhandle_driver_16246B99_1 *arg1) {
     s32 temp_v0;
 
     if (arg0 != NULL) {
@@ -141,7 +141,7 @@ void sceNetIfhandle_driver_16246B99(struct Unk_sceNetIfhandle_driver_16246B99_0 
     }
 }
 
-s32 sceNetIfhandle_driver_C6D14282(struct Unk_sceNetIfhandle_driver_C6D14282_0 *arg0, s32 arg1) {
+s32 sceNetSetIfhandleOpt(struct Unk_sceNetIfhandle_driver_C6D14282_0 *arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = 0x80000103;
@@ -152,7 +152,7 @@ s32 sceNetIfhandle_driver_C6D14282(struct Unk_sceNetIfhandle_driver_C6D14282_0 *
     return var_v0;
 }
 
-s32 sceNetIfhandle_driver_D5AD6DEA(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *arg0) {
+s32 sceNetGetIfhandleOpt(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -259,11 +259,11 @@ s32 sceNetIfhandle_driver_29ED84C5(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_4C2886CB);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetGetMallocStatInternal);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_15CFE3C0);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMallocInternal);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_76BAD213);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetFreeInternal);
 
 #if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/ifhandle", func_000018BC);
@@ -281,13 +281,13 @@ s32 func_00001330(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_59F0D619);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMGetclr);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_F8825DC4);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMFree);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_F56FAC82);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMFreem);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_C3325FDC);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMPrepend);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_955F2924);
 
@@ -301,15 +301,15 @@ INCLUDE_RODATA("nonmatchings/ifhandle", D_00003470);
 INCLUDE_RODATA("nonmatchings/ifhandle", D_0000347C);
 #endif
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_9A6261EC);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMCopydata);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_BFF3CEA5);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMAdj);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_49EDBB18);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMPullup);
 
 INCLUDE_ASM("nonmatchings/ifhandle", func_00001E90);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_1560F143);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMCopyback);
 
 #if FW_VERSION >= 351
 INCLUDE_ASM("nonmatchings/ifhandle", func_000023BC);
@@ -339,15 +339,15 @@ void sceNetIfhandle_driver_0FB8AE0D(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_A493AA5F);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMGet);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_4CF15C43);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMGethdr);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_456E3146);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMCopym);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_6AB53C27);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMDup);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_3E8DD3F8);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMCat);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_5FB31C72);
 
@@ -379,7 +379,7 @@ s32 sceNetIfhandle_driver_62B20015(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 INCLUDE_ASM("nonmatchings/ifhandle", func_00002690);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_E80F00A4);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMPulldown);
 
 #if FW_VERSION < 201
 s32 module_start(void) {

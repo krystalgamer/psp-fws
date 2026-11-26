@@ -163,7 +163,7 @@ void func_00005574(void *arg0) {
     func_0000640C((s32) arg0);
     M2C_FIELD(arg0, s8 *, 0xAF) = 0;
     func_000046F4(arg0 + 0x90);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000055C8);
@@ -242,7 +242,7 @@ INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000471C);
 void func_0000471C(struct Unk_func_0000471C_0 *arg0) {
     arg0->unk0 = &D_0001EF20;
     sceKernelDeleteSema(arg0->unk4);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

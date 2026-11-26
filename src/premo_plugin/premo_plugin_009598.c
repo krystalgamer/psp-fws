@@ -97,8 +97,8 @@ void func_00009840(struct Unk_func_00009840_0 *arg0) {
     s32 temp_v0;
 
     if (arg0->unk10 == 0) {
-        temp_v0 = scePaf_B7E6052B(4);
-        sceVshCommonUtil_FA969B6A(temp_v0, 0);
+        temp_v0 = _Znwj(4);
+        _ZN3vsh9PowerLockC1Ei(temp_v0, 0);
         arg0->unk10 = temp_v0;
     }
 }
@@ -357,7 +357,7 @@ void func_0000A91C(struct Unk_func_0000A91C_0 *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0x10);
     if (temp_v0 != 0) {
-        sceVshCommonGui_72E652AA(temp_v0);
+        _ZN3vsh13MessageDialog10HideDeleteEv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x10) = 0;
     }
 }
@@ -698,8 +698,8 @@ INCLUDE_ASM("nonmatchings/premo_plugin_009598", func_0000D3F8);
 #if FW_VERSION < 330
 void func_00008B3C(void) {
     D_00027164 = func_00004A1C(func_00002478(), 1, 4);
-    D_00027160 = sceVshCommonGui_A0DE7090(1);
-    D_00027161 = sceVshCommonGui_441D55D7(1);
+    D_00027160 = _ZN3vsh26ShowButtonNavigation_EnterEb(1);
+    D_00027161 = _ZN3vsh25ShowButtonNavigation_BackEb(1);
 }
 #endif
 
@@ -1167,8 +1167,8 @@ void func_0000F9B8(void) {
 
 #if FW_VERSION < 330
 void func_0000F9B8(void) {
-    sceVshCommonGui_A0DE7090(1);
-    sceVshCommonGui_441D55D7(1);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(1);
+    _ZN3vsh25ShowButtonNavigation_BackEb(1);
 }
 #endif
 
@@ -1220,7 +1220,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_009598", func_0000A074);
 
 #if FW_VERSION < 330
 void func_000092EC(void) {
-    sceVshCommonGui_441D55D7(1);
+    _ZN3vsh25ShowButtonNavigation_BackEb(1);
 }
 #endif
 
@@ -1363,8 +1363,8 @@ void func_00010CC4(void) {
 
 #if FW_VERSION < 330
 void func_00010CCC(void) {
-    sceVshCommonGui_A0DE7090(1);
-    sceVshCommonGui_441D55D7(1);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(1);
+    _ZN3vsh25ShowButtonNavigation_BackEb(1);
 }
 #endif
 
@@ -1428,8 +1428,8 @@ INCLUDE_ASM("nonmatchings/premo_plugin_009598", func_00010F44);
 void func_00010F44(void) {
     func_00004D0C(func_00002478());
     func_00004E04(1);
-    sceVshCommonGui_A0DE7090(0);
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
 }
 #endif
 

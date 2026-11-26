@@ -323,12 +323,12 @@ void func_00010BE0(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_7EC15225(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00010C38);
@@ -365,11 +365,11 @@ void func_00013048(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = var_v0->unk4;
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_7EC15225(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 #endif

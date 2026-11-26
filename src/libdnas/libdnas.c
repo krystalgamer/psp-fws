@@ -48,24 +48,24 @@ INCLUDE_RODATA("nonmatchings/libdnas", D_0000355C);
 INCLUDE_RODATA("nonmatchings/libdnas", D_00003574);
 #endif
 
-INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_0D560144);
+INCLUDE_ASM("nonmatchings/libdnas", sceDNASInit);
 
-INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_CA8B8909);
+INCLUDE_ASM("nonmatchings/libdnas", sceDNASNetStart);
 
 #if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_F3787AD8);
+INCLUDE_ASM("nonmatchings/libdnas", sceDNASInternalStart);
 #endif
 
 #if FW_VERSION < 340
-INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_BE0998D7);
+INCLUDE_ASM("nonmatchings/libdnas", sceDNASTerm);
 #endif
 
-INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_9FF48DD3);
+INCLUDE_ASM("nonmatchings/libdnas", sceDNASStop);
 
-INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_45C1AAF5);
+INCLUDE_ASM("nonmatchings/libdnas", sceDNASGetEventFlag);
 
 #if FW_VERSION >= 340
-void sceDNAS_lib_BE0998D7(void) {
+void sceDNASTerm(void) {
     if (D_000037B0 <= 0) {
         return;
     }
@@ -96,10 +96,10 @@ void sceDNAS_lib_BE0998D7(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_A646E771);
+INCLUDE_ASM("nonmatchings/libdnas", sceDNASGetState);
 
 #if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_6929100C);
+INCLUDE_ASM("nonmatchings/libdnas", sceDNASGetProductCode);
 #else
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_2D424791);
 

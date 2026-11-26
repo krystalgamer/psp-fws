@@ -47,15 +47,15 @@ s32 module_start(void) {
 
 INCLUDE_ASM("nonmatchings/chnnlsv", module_stop);
 
-INCLUDE_ASM("nonmatchings/chnnlsv", sceChnnlsv_driver_E7833020);
+INCLUDE_ASM("nonmatchings/chnnlsv", sceSdSetIndex);
 
-INCLUDE_ASM("nonmatchings/chnnlsv", sceChnnlsv_driver_F21A1FCA);
+INCLUDE_ASM("nonmatchings/chnnlsv", sceSdRemoveValue);
 
-INCLUDE_ASM("nonmatchings/chnnlsv", sceChnnlsv_driver_C4C494F8);
+INCLUDE_ASM("nonmatchings/chnnlsv", sceSdGetLastIndex);
 
-INCLUDE_ASM("nonmatchings/chnnlsv", sceChnnlsv_driver_ABFDFC8B);
+INCLUDE_ASM("nonmatchings/chnnlsv", sceSdCreateList);
 
-INCLUDE_ASM("nonmatchings/chnnlsv", sceChnnlsv_driver_850A7FA1);
+INCLUDE_ASM("nonmatchings/chnnlsv", sceSdSetMember);
 
 INCLUDE_ASM("nonmatchings/chnnlsv", sceChnnlsv_driver_21BE78B4);
 

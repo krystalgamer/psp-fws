@@ -103,7 +103,7 @@ void func_000004B0(void *arg0, void *arg1) {
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_6DE9FF11);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecForUser);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModule);
 
@@ -117,31 +117,31 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForUser_FEF27DC1);
 #if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForUser_710F61B5);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_A1A78C58);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHDisc);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_896C15B6);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHDiscUpdater);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_92EDEBD0);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHDiscDebug);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_6723BBFF);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHMs1);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_49C5B9E1);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHMs2);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_ECC2EAA9);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHMs3);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_A4370E7C);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSH);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00001540);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_3E4FEDDC);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleToBlock);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_AB77DC5A);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBootInitConfig);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5C88479B);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleDeci);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -236,7 +236,7 @@ void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_6DE9FF11);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecForUser);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModule);
 #endif
@@ -258,11 +258,11 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_A1A78C58);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHDisc);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_896C15B6);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHDiscUpdater);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_92EDEBD0);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHDiscDebug);
 #endif
 
 #if FW_VERSION >= 350
@@ -270,21 +270,21 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_1B91F6EC);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_6723BBFF);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHMs1);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_49C5B9E1);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHMs2);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_ECC2EAA9);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHMs3);
 #endif
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_F07E1A2F);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHMs4);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_0CE03872);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleForLoadExecVSHMs5);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_A4370E7C);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSH);
 #endif
 
 #if FW_VERSION >= 300
@@ -296,11 +296,11 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00001924);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_3E4FEDDC);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleToBlock);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_AB77DC5A);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBootInitConfig);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5C88479B);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleDeci);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStartModule);
 
@@ -322,13 +322,13 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleIdByAddress);
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleGPByAddress);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5F0CC575);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootBeforeForUser);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_A6E8C1F5);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootPhaseForKernel);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_B49FFB9E);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootBeforeForKernel);
 
-s32 syslib_ADF12745(void) {
+s32 module_reboot_phase(void) {
     return 0;
 }
 
@@ -342,7 +342,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00007AB8);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/modulemgr", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/modulemgr", module_bootstart);
 #endif
 
 #if FW_VERSION == 100
@@ -351,7 +351,7 @@ s32 func_00000108(void) {
     s32 temp_s1;
 
     temp_s0 = sceKernelCpuSuspendIntr();
-    temp_s1 = LoadCoreForKernel_CD0F3BAC();
+    temp_s1 = sceKernelCreateModule();
     sceKernelCpuResumeIntr(temp_s0);
     return temp_s1;
 }
@@ -361,7 +361,7 @@ s32 func_00000148(s32 arg0) {
     s32 temp_s1;
 
     temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = LoadCoreForKernel_44B292AB(arg0);
+    temp_s0 = sceKernelAllocModule(arg0);
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
@@ -371,7 +371,7 @@ s32 func_00000190(s32 arg0) {
     s32 temp_s1;
 
     temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = LoadCoreForKernel_AE7C6E76(arg0);
+    temp_s0 = sceKernelRegisterModule(arg0);
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
@@ -381,7 +381,7 @@ s32 func_000001D8(s32 arg0) {
     s32 temp_s1;
 
     temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = LoadCoreForKernel_74CF001A(arg0);
+    temp_s0 = sceKernelReleaseModule(arg0);
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
@@ -391,7 +391,7 @@ s32 func_00000220(s32 arg0) {
     s32 temp_s1;
 
     temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = LoadCoreForKernel_6B2371C2(arg0);
+    temp_s0 = sceKernelDeleteModule(arg0);
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
@@ -401,7 +401,7 @@ s32 func_00000268(s32 arg0) {
     s32 temp_s1;
 
     temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = LoadCoreForKernel_BD61D4D5(arg0);
+    temp_s0 = sceKernelFreeModule(arg0);
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
@@ -411,7 +411,7 @@ s32 func_000002B0(s32 arg0) {
     s32 temp_s1;
 
     temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = LoadCoreForKernel_F32A2940(arg0);
+    temp_s0 = sceKernelModuleFromUID(arg0);
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
@@ -421,48 +421,48 @@ s32 func_000002F8(s32 arg0) {
     s32 temp_s1;
 
     temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = LoadCoreForKernel_CCE4A157(arg0);
+    temp_s0 = sceKernelFindModuleByUID(arg0);
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
 
 void func_00000340(void) {
-    LoadCoreForKernel_7BE1421C();
+    sceKernelCheckExecFile();
 }
 
 void func_0000035C(void) {
-    LoadCoreForKernel_BF983EF2();
+    sceKernelProbeExecutableObject();
 }
 
 void func_00000378(void) {
-    LoadCoreForKernel_7068E6BA();
+    sceKernelLoadExecutableObject();
 }
 
 void func_00000394(void) {
-    LoadCoreForKernel_99A695F0();
+    sceKernelRegisterLibrary();
 }
 
 void func_000003B0(void) {
-    LoadCoreForKernel_5873A31F();
+    sceKernelRegisterLibraryForUser();
 }
 
 void func_000003CC(void) {
-    LoadCoreForKernel_0E760DBA();
+    sceKernelLinkLibraryEntries();
 }
 
 void func_000003E8(void) {
-    LoadCoreForKernel_0DE1F600();
+    sceKernelLinkLibraryEntriesForUser();
 }
 
 void func_00000404(void) {
-    LoadCoreForKernel_DA1B09AA();
+    sceKernelUnLinkLibraryEntries();
 }
 #endif
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleByID);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_9F3AD1E9);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForExitGame);
 
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForUser_1196472E);
 #endif
@@ -476,35 +476,35 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_CE70664B);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForLoadExecBufferVSHUsbWlan);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_B5DDABD3);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForLoadExecBufferVSHUsbWlanDebug);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_91B87FAE);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHByID);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_F0CAC59E);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferVSH);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_667C1174);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForExitVSHVSH);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00003888);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_BA889C07);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBuffer);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5799EE32);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForExitVSHKernel);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_53CA70EE);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForRebootKernel);
 
-s32 ModuleMgrForKernel_25E1F458(void) {
+s32 sceKernelLoadModuleBootInitBtcnf(void) {
     return 0x80020149;
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_EF7A7F02);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferBootInitBtcnf);
 
-s32 ModuleMgrForKernel_74690AEB(void) {
+s32 sceKernelLoadModuleByIDBootInitConfig(void) {
     return 0x80020149;
 }
 
-s32 ModuleMgrForKernel_F80F3C96(void) {
+s32 sceKernelLoadModuleBufferBootInitConfig(void) {
     return 0x80020149;
 }
 
@@ -514,13 +514,13 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_2BE4807D);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStopUnloadSelfModule);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_04B7BD22);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelSearchModuleByName);
 
-s32 ModuleMgrForKernel_54D9E02E(void) {
+s32 sceKernelSearchModuleByAddress(void) {
     s32 var_v0;
     struct Unk_ModuleMgrForKernel_54D9E02E_temp_v0 *temp_v0;
 
-    temp_v0 = LoadCoreForKernel_FB8AE27D();
+    temp_v0 = sceKernelFindModuleByAddress();
     var_v0 = 0x8002012E;
     if (temp_v0 != NULL) {
         var_v0 = temp_v0->unk2C;
@@ -546,7 +546,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleIdByAddress);
 #endif
 
 #if FW_VERSION >= 282
-s32 ModuleMgrForKernel_61EC6AB0(void) {
+s32 sceKernelModuleMgrMode(void) {
     return 0;
 }
 #endif
@@ -580,11 +580,11 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_000078BC);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_ABE84F8A);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferWithApitype);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleByID);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_437214AE);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleWithApitype);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION == 282
@@ -595,11 +595,11 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006DA0);
 s32 func_00000420(void) {
     s32 temp_v0;
 
-    temp_v0 = LoadCoreForKernel_9BAF90F6();
+    temp_v0 = sceKernelCanReleaseLibrary();
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC(&D_00006DA0, "CanReleaseLibrary", temp_v0);
+        Kprintf(&D_00006DA0, "CanReleaseLibrary", temp_v0);
     }
     return temp_v0;
 }
@@ -687,7 +687,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_0000504C);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_91B87FAE);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHByID);
 #endif
 
 #if FW_VERSION < 152
@@ -695,7 +695,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_0000505C);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_A4370E7C);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSH);
 #endif
 
 #if FW_VERSION < 152
@@ -705,11 +705,11 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00005088);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_23425E93);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHPlain);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_F0CAC59E);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferVSH);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -743,7 +743,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleGPByAddress);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5F0CC575);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootBeforeForUser);
 #endif
 
 #if FW_VERSION < 152
@@ -759,11 +759,11 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_0000515C);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_A6E8C1F5);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootPhaseForKernel);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_B49FFB9E);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootBeforeForKernel);
 
-s32 syslib_ADF12745(void) {
+s32 module_reboot_phase(void) {
     return 0;
 }
 #endif
@@ -779,11 +779,11 @@ void module_reboot_before(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/modulemgr", module_bootstart);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_9F3AD1E9);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForExitGame);
 #endif
 
 #if FW_VERSION == 271
@@ -793,15 +793,15 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForUser_1196472E);
 #if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_CE70664B);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForLoadExecBufferVSHUsbWlan);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_B5DDABD3);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForLoadExecBufferVSHUsbWlanDebug);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_91B87FAE);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHByID);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_F0CAC59E);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferVSH);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_667C1174);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForExitVSHVSH);
 #endif
 
 #if FW_VERSION == 271
@@ -837,33 +837,33 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_0000253C);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_000026F8);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_ABE84F8A);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferWithApitype);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_BA889C07);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBuffer);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5799EE32);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForExitVSHKernel);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_53CA70EE);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferForRebootKernel);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
-s32 ModuleMgrForKernel_25E1F458(void) {
+s32 sceKernelLoadModuleBootInitBtcnf(void) {
     return 0x80020149;
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_EF7A7F02);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferBootInitBtcnf);
 
-s32 ModuleMgrForKernel_74690AEB(void) {
+s32 sceKernelLoadModuleByIDBootInitConfig(void) {
     return 0x80020149;
 }
 
-s32 ModuleMgrForKernel_F80F3C96(void) {
+s32 sceKernelLoadModuleBufferBootInitConfig(void) {
     return 0x80020149;
 }
 #endif
@@ -873,7 +873,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_000028EC);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleByID);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_437214AE);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleWithApitype);
 #endif
 
 #if FW_VERSION < 152
@@ -887,7 +887,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00005B90);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005BBC);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_91B87FAE);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHByID);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005C14);
 
@@ -895,15 +895,15 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00005C3C);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005C64);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_A4370E7C);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSH);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005CB0);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_23425E93);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHPlain);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
 
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_F0CAC59E);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferVSH);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStartModule);
 
@@ -933,15 +933,15 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStopUnloadSelfModule);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_04B7BD22);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelSearchModuleByName);
 #endif
 
 #if FW_VERSION == 100
-s32 ModuleMgrForKernel_04B7BD22(void) {
+s32 sceKernelSearchModuleByName(void) {
     s32 var_v0;
     void *temp_v0;
 
-    temp_v0 = LoadCoreForKernel_CF8A41B1();
+    temp_v0 = sceKernelFindModuleByName();
     var_v0 = 0x8002012E;
     if (temp_v0 != NULL) {
         var_v0 = M2C_FIELD(temp_v0, s32 *, 0x2C);
@@ -951,11 +951,11 @@ s32 ModuleMgrForKernel_04B7BD22(void) {
 #endif
 
 #if FW_VERSION < 282
-s32 ModuleMgrForKernel_54D9E02E(void) {
+s32 sceKernelSearchModuleByAddress(void) {
     s32 var_v0;
     void *temp_v0;
 
-    temp_v0 = LoadCoreForKernel_FB8AE27D();
+    temp_v0 = sceKernelFindModuleByAddress();
     var_v0 = 0x8002012E;
     if (temp_v0 != NULL) {
         var_v0 = M2C_FIELD(temp_v0, s32 *, 0x2C);
@@ -969,7 +969,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleIdByAddress);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
-s32 ModuleMgrForKernel_61EC6AB0(void) {
+s32 sceKernelModuleMgrMode(void) {
     return 0;
 }
 #endif
@@ -1041,7 +1041,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_000065D8);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_5F0CC575);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootBeforeForUser);
 #endif
 
 #if FW_VERSION < 260
@@ -1241,7 +1241,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_0000428C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_B49FFB9E);
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootBeforeForKernel);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350

@@ -43,7 +43,7 @@ extern s32 D_0000BE84;
 extern s32 D_0000FAE0;
 extern M2C_UNK func_00002D8C;
 
-M2C_UNK ThreadManForKernel_BC31C1B9(M2C_UNK, M2C_UNK *, s32);
+M2C_UNK sceKernelExtendKernelStack(M2C_UNK, M2C_UNK *, s32);
 s32 func_00000000(s32);
 s32 func_00000028(void *arg0);
 s32 func_00000108(void);
@@ -76,18 +76,18 @@ s32 func_00008B28(s32, s32);
 s32 func_00008E14(s32 arg0);
 s32 memcmp(void *, s32, M2C_UNK);
 M2C_UNK memset(void *, M2C_UNK, M2C_UNK);
-M2C_UNK sceMgVideo_driver_02CD7137();
+M2C_UNK sceMgVideoEnd();
 s32 sceMgVideo_driver_3B0F6095(void);
-s32 sceMgVideo_driver_585F5755(void);
-s32 sceMgVideo_driver_5CFE1758(void);
+s32 sceMgVideoModuleEnd(void);
+s32 sceMgVideoModuleInit(void);
 s32 sceMgVideo_driver_ADA3D270(void);
 s32 sceMgVideo_driver_F5E39E17(void);
-M2C_UNK sceMgr_driver_1B8F3192(s32);
+M2C_UNK sceMgrFreeKeyReg(s32);
 s32 sceMgr_driver_4A14DD18(s32, s32, s32);
-s32 sceMgr_driver_DB12BB23(s32, s32, s32);
+s32 sceMgrNetDecryptKc(s32, s32, s32);
 s32 sceMgr_driver_DBB5C63E(s32, s32, s32);
-s32 sceMgr_driver_F30E22CF(M2C_UNK);
-s32 sceRtc_driver_17C26C00(void *);
-s32 sceRtc_driver_B44BDAED(void *);
+s32 sceMgrAllocKeyReg(M2C_UNK);
+s32 sceRtcSetCurrentSecureTick(void *);
+s32 sceRtcGetCurrentSecureTick(void *);
 
 #endif

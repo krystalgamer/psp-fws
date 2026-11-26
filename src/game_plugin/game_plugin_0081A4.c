@@ -188,7 +188,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0081A4", func_00008530);
 INCLUDE_ASM("nonmatchings/game_plugin_0081A4", func_000078EC);
 
 s32 func_0000797C(void) {
-    scePaf_545FE2DA();
+    sce_paf_private_free();
     return 0;
 }
 #endif

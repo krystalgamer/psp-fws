@@ -19,9 +19,9 @@ s32 module_stop(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/heaparea2", scePafHeaparea_F50AAE41);
+INCLUDE_ASM("nonmatchings/heaparea2", sce_paf_private_getheaparea1);
 
-INCLUDE_ASM("nonmatchings/heaparea2", scePafHeaparea_ACCE25B2);
+INCLUDE_ASM("nonmatchings/heaparea2", sce_paf_private_getheaparea2);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/heaparea2", D_0000045C);

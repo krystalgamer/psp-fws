@@ -108,7 +108,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00078798);
 #else
 void func_00078798(M2C_UNK **arg0) {
     *arg0 = &D_000A1800;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -307,7 +307,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_0007B004);
 #else
 void func_0007B004(M2C_UNK **arg0) {
     *arg0 = &D_000A1998;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -509,7 +509,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_0007D8A4);
 #else
 void func_0007D8A4(M2C_UNK **arg0) {
     *arg0 = &D_000A1B58;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -785,7 +785,7 @@ void func_000804E8(M2C_UNK **arg0) {
     *arg0 = &D_000A1E50;
     func_000810C4((s32) arg0);
     func_0004A310((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1212,7 +1212,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00081B4C);
 void func_00081B4C(M2C_UNK **arg0) {
     *arg0 = &D_000A1E88;
     func_0001B730((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1607,7 +1607,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00081E20);
 #if FW_VERSION == 260 || (FW_VERSION >= 282 && FW_VERSION < 350)
 void func_00081E20(M2C_UNK **arg0) {
     *arg0 = &D_000A1EF8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1660,7 +1660,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00082104);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00082104(M2C_UNK **arg0) {
     *arg0 = &D_000A1F08;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1706,7 +1706,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_0008251C);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0008251C(M2C_UNK **arg0) {
     *arg0 = &D_000A1F18;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1808,7 +1808,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00083134);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00083134(M2C_UNK **arg0) {
     *arg0 = &D_000A1F60;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

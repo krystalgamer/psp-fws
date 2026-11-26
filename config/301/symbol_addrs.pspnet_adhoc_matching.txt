@@ -46,10 +46,10 @@ sceNetAdhocSetSocketAlert = 0x00004418; // type:func
 sceNetAdhocPdpDelete = 0x00004420; // type:func
 sceNetAdhocPdpSend = 0x00004428; // type:func
 sceNetAdhocPdpRecv = 0x00004430; // type:func
-sceNet_lib_1858883D = 0x00004438; // type:func
-sceNet_lib_57CC57DA = 0x00004440; // type:func
-sceNet_lib_E0A81C7C = 0x00004448; // type:func
-sceNet_lib_EF097716 = 0x00004450; // type:func
+sceNetRand = 0x00004438; // type:func
+sceNetMemset = 0x00004440; // type:func
+sceNetMemcmp = 0x00004448; // type:func
+sceNetMemcpy = 0x00004450; // type:func
 sceWlanGetEtherAddr = 0x00004458; // type:func
 // shared names (tools/add_version.py) begin
 D_00003DB0 = 0x00004890; // rom:0x4930

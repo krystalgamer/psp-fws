@@ -1,12 +1,12 @@
 // NID-derived names
 module_start = 0x00000000; // type:func
-sceLFatFs_driver_933F6E29 = 0x00000568; // type:func
-sceLFatFs_driver_8F0560E0 = 0x00000570; // type:func
-InitForKernel_2C6E9FE9 = 0x00000578; // type:func
-InitForKernel_7A2333AD = 0x00000580; // type:func
-InitForKernel_A6E71B93 = 0x00000588; // type:func
+sceLfatfsWaitReady = 0x00000568; // type:func
+sceLfatfsStop = 0x00000570; // type:func
+sceKernelGetChunk = 0x00000578; // type:func
+sceKernelInitApitype = 0x00000580; // type:func
+sceKernelInitFileName = 0x00000588; // type:func
 sceIoDevctl = 0x00000590; // type:func
-KDebugForKernel_84F370BC = 0x00000598; // type:func
+Kprintf = 0x00000598; // type:func
 sceKernelGetBlockHeadAddr = 0x000005A0; // type:func
 strncmp = 0x000005A8; // type:func
 sceKernelCreateCallback = 0x000005B0; // type:func

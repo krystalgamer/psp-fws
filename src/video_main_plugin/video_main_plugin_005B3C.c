@@ -18,7 +18,7 @@ void func_00005B3C(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_CA79D58B(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_00005F6C(arg0, arg1, var_v0);
 }
@@ -40,7 +40,7 @@ void func_00005B8C(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_FD4C9F47(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_00006018(arg0, arg1, var_v0);
 }

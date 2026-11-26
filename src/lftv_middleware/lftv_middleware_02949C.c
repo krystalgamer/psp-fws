@@ -48,9 +48,9 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_02949C", func_0002A414);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_02949C", func_0002A48C);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_02949C", sceVshLftvMw_7535F226);
+INCLUDE_ASM("nonmatchings/lftv_middleware_02949C", eventMgrCallbackAttach);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_02949C", sceVshLftvMw_0DA3EB39);
+INCLUDE_ASM("nonmatchings/lftv_middleware_02949C", eventMgrCallbackDetach);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_02949C", func_0002A5F0);
 

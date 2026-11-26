@@ -3,4 +3,4 @@ module_start = 0x00000000; // type:func
 sceKernelCpuSuspendIntr = 0x00000374; // type:func
 sceKernelCpuResumeIntr = 0x0000037C; // type:func
 sceKernelCpuResumeIntrWithSync = 0x00000384; // type:func
-KDebugForKernel_333DCEC7 = 0x0000038C; // type:func
+sceKernelSm1RegisterOperations = 0x0000038C; // type:func

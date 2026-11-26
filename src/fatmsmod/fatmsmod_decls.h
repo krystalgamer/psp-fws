@@ -79,7 +79,7 @@ extern s32 D_0002EF50;
 extern void *D_0003F728;
 extern M2C_UNK D_00042A80;
 
-M2C_UNK IoFileMgrForKernel_C7F35804(s32);
+M2C_UNK sceIoDelDrv(s32);
 M2C_UNK func_00000020();
 void func_00000048(void);
 M2C_UNK func_00000134();

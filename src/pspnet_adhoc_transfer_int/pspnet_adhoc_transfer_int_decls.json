@@ -11,7 +11,7 @@
   "sceKernelDeleteVpl": "s32 sceKernelDeleteVpl(u32);",
   "sceKernelFreeVpl": "s32 sceKernelFreeVpl(u32, void *);",
   "sceNetAdhocSetSocketAlert": "s32 sceNetAdhocSetSocketAlert(s32, s32);",
-  "sceNet_lib_EF097716": "M2C_UNK sceNet_lib_EF097716(s32, M2C_UNK, s32);"
+  "sceNetMemcpy": "M2C_UNK sceNetMemcpy(s32, M2C_UNK, s32);"
  },
  "types": {
   "Unk_func_00000D58_0": "struct Unk_func_00000D58_0 {\n    u8 pad0[0x20];\n    s32 unk20;\n};",

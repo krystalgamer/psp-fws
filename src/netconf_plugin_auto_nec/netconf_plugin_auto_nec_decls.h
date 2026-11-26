@@ -71,8 +71,8 @@ s32 module_stop(void);
 s32 sceKernelDelayThread(u32);
 M2C_UNK sceNetApctlDisconnect();
 M2C_UNK sceUtility_netparam_internal_854ACDD6(M2C_UNK);
-M2C_UNK sceUtility_netparam_internal_9CE50172(M2C_UNK);
+M2C_UNK sceUtilityDeleteNetParam(M2C_UNK);
 s32 sceVshNetconfRaku_8D3A5DA0(void *arg0);
-s32 sceVshNetconfRaku_F3AF9DD1(void *arg0);
+s32 necApConfigGetState(void *arg0);
 
 #endif

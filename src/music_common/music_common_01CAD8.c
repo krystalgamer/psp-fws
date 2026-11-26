@@ -35,7 +35,7 @@ void func_0001CB50(M2C_UNK **arg0) {
     *arg0 = &D_000202B0;
     func_0001CD88();
     *arg0 = &D_0001F8D8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

@@ -1,8 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM("nonmatchings/hvauth_r", sceHVAuth_5E335DF6);
+INCLUDE_ASM("nonmatchings/hvauth_r", sceHVAuthOpen);
 
-INCLUDE_ASM("nonmatchings/hvauth_r", sceHVAuth_816A5F92);
+INCLUDE_ASM("nonmatchings/hvauth_r", sceHVAuthAuth);
 
 INCLUDE_ASM("nonmatchings/hvauth_r", func_000001B0);
 

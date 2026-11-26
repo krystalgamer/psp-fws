@@ -16,7 +16,7 @@ INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", sceNetApDialogDummyTerm);
 int sceNetApDialogDummyTerm(void) {
     if (D_000009B0 != 0) {
         if (D_000009A0 >= 0) {
-            sceNetApctl_lib_E11BAFAB(D_000009A0);
+            sceNetApctlDelInternalHandler(D_000009A0);
         }
         D_000009B0 = 0;
         D_000009A0 = -1;

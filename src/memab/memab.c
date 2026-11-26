@@ -64,19 +64,19 @@ s32 module_stop(void) {
 INCLUDE_ASM("nonmatchings/memab", module_stop);
 #endif
 
-INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_01FD1BA0);
+INCLUDE_ASM("nonmatchings/memab", sceAdhocBBInit);
 
-INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_0C134D3F);
+INCLUDE_ASM("nonmatchings/memab", sceAdhocBBShutdown);
 
-INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_A4720EED);
+INCLUDE_ASM("nonmatchings/memab", sceAdhocBBAuth1);
 
-INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_DC598EF3);
+INCLUDE_ASM("nonmatchings/memab", sceAdhocBBAuth2);
 
-INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_8DAC2343);
+INCLUDE_ASM("nonmatchings/memab", sceAdhocBBAuth3);
 
-INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_DAE8A629);
+INCLUDE_ASM("nonmatchings/memab", sceAdhocBBAuth4);
 
-INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_CF49BCBB);
+INCLUDE_ASM("nonmatchings/memab", sceAdhocBBAuth5);
 
 INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_E6D3ACE2);
 
@@ -87,9 +87,9 @@ INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_F1D2B9B0);
 INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_4DF566D3);
 
 #if FW_VERSION == 352
-INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_F94CA9B8);
+INCLUDE_ASM("nonmatchings/memab", sceAdhocBBGMEncrypt);
 
-INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_34EBFB6A);
+INCLUDE_ASM("nonmatchings/memab", sceAdhocBBGMDecrypt);
 
-INCLUDE_ASM("nonmatchings/memab", sceMemab_driver_531E144B);
+INCLUDE_ASM("nonmatchings/memab", sceAdhocBBGMCreateSessionKey);
 #endif

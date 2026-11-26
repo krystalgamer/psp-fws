@@ -16,7 +16,7 @@ extern s32 D_00001788;
 extern s32 D_000017C8;
 extern M2C_UNK func_0000117C;
 
-M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);
+M2C_UNK sceIoAddDrv(M2C_UNK *);
 s32 func_00000528(void);
 s32 func_00000850(void);
 s32 func_00000A1C(struct Unk_func_00000A1C_0 *arg0);
@@ -32,11 +32,11 @@ s32 func_00000D6C(void);
 s32 func_00000E94(void);
 s32 module_reboot_before(void);
 s32 module_start(void);
-M2C_UNK sceGpio_driver_310F0CCF(M2C_UNK);
+M2C_UNK sceGpioPortSet(M2C_UNK);
 s32 sceKernelSetAlarm(u32, s32, void *);
 s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);
-M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);
-M2C_UNK sceSysreg_driver_7725CA08(M2C_UNK);
-M2C_UNK sceSysreg_driver_BB823481(M2C_UNK);
+M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);
+M2C_UNK sceSysregUartClkEnable(M2C_UNK);
+M2C_UNK sceSysregUartIoDisable(M2C_UNK);
 
 #endif

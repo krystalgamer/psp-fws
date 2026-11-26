@@ -15,11 +15,11 @@ s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2);
 s32 sceAudioOutput2OutputBlocking(s32 arg0, void *arg1);
 s32 sceAudioOutput2Release(void);
 s32 sceAudioOutput2Reserve(s32 arg0);
-s32 sceAudio_38553111(s32, s32, s32);
-s32 sceAudio_5C37C0AE(void);
-s32 sceAudio_E0727056(s32, s32);
-s32 sceAudio_driver_927AC32B(s32 arg0);
-M2C_UNK sceCodec_driver_EEB91526(s32);
+s32 sceAudioSRCChReserve(s32, s32, s32);
+s32 sceAudioSRCChRelease(void);
+s32 sceAudioSRCOutputBlocking(s32, s32);
+s32 sceAudioSetVolumeOffset(s32 arg0);
+M2C_UNK sceCodecSetVolumeOffset(s32);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 

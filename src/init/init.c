@@ -15,11 +15,11 @@ INCLUDE_RODATA("nonmatchings/init", D_00001EB8);
 INCLUDE_RODATA("nonmatchings/init", D_00001DC8);
 #endif
 
-INCLUDE_ASM("nonmatchings/init", InitForKernel_2C6E9FE9);
+INCLUDE_ASM("nonmatchings/init", sceKernelGetChunk);
 
-INCLUDE_ASM("nonmatchings/init", InitForKernel_1D3256BA);
+INCLUDE_ASM("nonmatchings/init", sceKernelRegisterChunk);
 
-INCLUDE_ASM("nonmatchings/init", InitForKernel_CE88E870);
+INCLUDE_ASM("nonmatchings/init", sceKernelReleaseChunk);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/init", D_00001B10);
@@ -90,7 +90,7 @@ INCLUDE_ASM("nonmatchings/init", func_00000208);
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/init", func_0000053C);
 
-s32 InitForKernel_7233B5BC(void) {
+s32 sceKernelApplicationType(void) {
     return D_00002450;
 }
 #endif
@@ -162,7 +162,7 @@ INCLUDE_ASM("nonmatchings/init", syslib_D3744BE0);
 #endif
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/init", InitForKernel_7233B5BC);
+INCLUDE_ASM("nonmatchings/init", sceKernelApplicationType);
 #endif
 
 #if FW_VERSION < 201
@@ -170,13 +170,13 @@ s32 module_reboot_before(void) {
     return 0;
 }
 
-s32 InitForKernel_7A2333AD(void) {
+s32 sceKernelInitApitype(void) {
     return D_00002620;
 }
 #endif
 
 #if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/init", InitForKernel_27932388);
+INCLUDE_ASM("nonmatchings/init", sceKernelBootFrom);
 #endif
 
 #if FW_VERSION == 150
@@ -190,17 +190,17 @@ s32 func_00001284(void) {
 #endif
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/init", InitForKernel_A6E71B93);
+INCLUDE_ASM("nonmatchings/init", sceKernelInitFileName);
 #endif
 
 #if FW_VERSION < 201
-s32 InitForKernel_A6E71B93(void) {
+s32 sceKernelInitFileName(void) {
     return D_00002644;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/init", InitForKernel_9F9AE99C);
+INCLUDE_ASM("nonmatchings/init", sceKernelSetInitCallback);
 
 INCLUDE_ASM("nonmatchings/init", func_00001330);
 #endif
@@ -254,11 +254,11 @@ INCLUDE_ASM("nonmatchings/init", func_00000584);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/init", InitForKernel_7233B5BC);
+INCLUDE_ASM("nonmatchings/init", sceKernelApplicationType);
 #endif
 
 #if FW_VERSION >= 250
-s32 InitForKernel_C4F1BA33(void) {
+s32 sceKernelStartIntrLogging(void) {
     return 0;
 }
 
@@ -290,7 +290,7 @@ s32 module_reboot_before(void) {
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/init", InitForKernel_7A2333AD);
+INCLUDE_ASM("nonmatchings/init", sceKernelInitApitype);
 #endif
 
 #if FW_VERSION >= 350
@@ -298,7 +298,7 @@ INCLUDE_ASM("nonmatchings/init", InitForKernel_48348387);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/init", InitForKernel_27932388);
+INCLUDE_ASM("nonmatchings/init", sceKernelBootFrom);
 #endif
 
 #if FW_VERSION == 201
@@ -306,11 +306,11 @@ INCLUDE_ASM("nonmatchings/init", func_00000FCC);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/init", InitForKernel_A6E71B93);
+INCLUDE_ASM("nonmatchings/init", sceKernelInitFileName);
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/init", InitForKernel_9F9AE99C);
+INCLUDE_ASM("nonmatchings/init", sceKernelSetInitCallback);
 #endif
 
 #if FW_VERSION >= 350
@@ -345,12 +345,12 @@ INCLUDE_ASM("nonmatchings/init", func_00001430);
 s32 func_00001208(void) {
     s32 temp_s0;
 
-    SysMemForKernel_A2A65F0E(1, 0);
-    SysMemForKernel_A2A65F0E(5, 0);
+    sceKernelFillFreeBlock(1, 0);
+    sceKernelFillFreeBlock(5, 0);
     sceKernelVolatileMemUnlock(0);
-    temp_s0 = SysMemForKernel_A2A65F0E(2, 0);
-    SysMemForKernel_A2A65F0E(8, 0);
-    SysMemForKernel_A2A65F0E(0xA, 0);
+    temp_s0 = sceKernelFillFreeBlock(2, 0);
+    sceKernelFillFreeBlock(8, 0);
+    sceKernelFillFreeBlock(0xA, 0);
     memset(0x80010000, 0, 0x4000);
     return temp_s0;
 }

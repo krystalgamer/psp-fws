@@ -260,7 +260,7 @@ void func_0002B53C(struct Unk_func_0002B53C_0 *arg0) {
     temp_v1 = arg0->unk4;
     arg0->unk0 = &D_00031648;
     if (temp_v1 != 0) {
-        scePaf_B3D2C3BB(temp_v1);
+        _ZdaPv(temp_v1);
         arg0->unk4 = 0;
     }
 }
@@ -277,7 +277,7 @@ void func_0002B584(struct Unk_func_0002B584_0 *arg0) {
     temp_v1 = arg0->unk4;
     arg0->unk0 = &D_00031648;
     if (temp_v1 != 0) {
-        scePaf_B3D2C3BB(temp_v1);
+        _ZdaPv(temp_v1);
         arg0->unk4 = 0;
     }
 }
@@ -294,10 +294,10 @@ void func_0002B5CC(struct Unk_func_0002B5CC_0 *arg0) {
     temp_v1 = arg0->unk4;
     arg0->unk0 = &D_00031648;
     if (temp_v1 != 0) {
-        scePaf_B3D2C3BB(temp_v1);
+        _ZdaPv(temp_v1);
         arg0->unk4 = 0;
     }
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 

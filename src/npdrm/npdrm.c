@@ -1,20 +1,20 @@
 #include "common.h"
 #include "npdrm_decls.h"
 
-INCLUDE_ASM("nonmatchings/npdrm", scePspNpDrm_driver_04618D16);
+INCLUDE_ASM("nonmatchings/npdrm", sceNpDrmGetIDps);
 
-INCLUDE_ASM("nonmatchings/npdrm", scePspNpDrm_driver_17E3F4BB);
+INCLUDE_ASM("nonmatchings/npdrm", sceNpDrmVerifyAct);
 
-INCLUDE_ASM("nonmatchings/npdrm", scePspNpDrm_driver_37B9B10D);
+INCLUDE_ASM("nonmatchings/npdrm", sceNpDrmVerifyRif);
 
-INCLUDE_ASM("nonmatchings/npdrm", scePspNpDrm_driver_5667B7B9);
+INCLUDE_ASM("nonmatchings/npdrm", sceNpDrmGetContentKey);
 
 #if FW_VERSION >= 340
-INCLUDE_ASM("nonmatchings/npdrm", scePspNpDrm_driver_0F9547E6);
+INCLUDE_ASM("nonmatchings/npdrm", sceNpDrmGetVersionKey);
 #endif
 
 #if FW_VERSION == 352
-INCLUDE_ASM("nonmatchings/npdrm", scePspNpDrm_driver_EBB198ED);
+INCLUDE_ASM("nonmatchings/npdrm", sceNpDrmDecActivation);
 
 INCLUDE_RODATA("nonmatchings/npdrm", D_000022D8);
 

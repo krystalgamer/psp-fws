@@ -112,9 +112,9 @@ s32 sceKernelGetThreadId(void);
 s32 sceKernelSendMbx(u32, void *);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
-M2C_UNK sceMemab_driver_0C134D3F();
-s32 sceNetAdhocAuth_driver_2E6AA271(void);
-s32 sceNetAdhocAuth_driver_6074D8F1(void);
+M2C_UNK sceAdhocBBShutdown();
+s32 _sce_pspnet_adhoc_prp_stop(void);
+s32 sceNetAdhocAuthTerm(void);
 M2C_UNK sceNetIfhandle_driver_773FC77C();
 
 #endif

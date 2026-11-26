@@ -305,7 +305,7 @@ INCLUDE_ASM("nonmatchings/libfont_hv", sceFontOpenUserFile);
 INCLUDE_ASM("nonmatchings/libfont_hv", sceFontOpenUserMemory);
 
 #if FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/libfont_hv", sceLibFont_HV_33FFD07C);
+INCLUDE_ASM("nonmatchings/libfont_hv", sceFontIsElement);
 #endif
 
 INCLUDE_ASM("nonmatchings/libfont_hv", sceFontGetFontInfo);
@@ -495,7 +495,7 @@ INCLUDE_ASM("nonmatchings/libfont_hv", func_00006990);
 INCLUDE_ASM("nonmatchings/libfont_hv", func_000069F8);
 
 s32 func_00006D0C(void) {
-    sceReg_FA8A5739();
+    sceRegCloseRegistry();
     return 0;
 }
 
@@ -681,52 +681,52 @@ INCLUDE_ASM("nonmatchings/libfont_hv", func_0000A8E8);
 INCLUDE_ASM("nonmatchings/libfont_hv", func_0000AA40);
 
 #if FW_VERSION < 352
-void sceReg_9B25EDF1(void) {
+void sceRegExit(void) {
 }
 
-void sceReg_92E41280(void) {
+void sceRegOpenRegistry(void) {
 }
 
-void sceReg_FA8A5739(void) {
+void sceRegCloseRegistry(void) {
 }
 
-void sceReg_DEDA92BF(void) {
+void sceRegRemoveRegistry(void) {
 }
 
-void sceReg_1D8A762E(void) {
+void sceRegOpenCategory(void) {
 }
 
-void sceReg_0CAE832B(void) {
+void sceRegCloseCategory(void) {
 }
 
-void sceReg_39461B4D(void) {
+void sceRegFlushRegistry(void) {
 }
 
-void sceReg_0D69BF40(void) {
+void sceRegFlushCategory(void) {
 }
 
-void sceReg_57641A81(void) {
+void sceRegCreateKey(void) {
 }
 
-void sceReg_17768E14(void) {
+void sceRegSetKeyValue(void) {
 }
 
-void sceReg_D4475AA8(void) {
+void sceRegGetKeyInfo(void) {
 }
 
-void sceReg_28A8E98A(void) {
+void sceRegGetKeyValue(void) {
 }
 
-void sceReg_2C0DB9DD(void) {
+void sceRegGetKeysNum(void) {
 }
 
-void sceReg_2D211135(void) {
+void sceRegGetKeys(void) {
 }
 
-void sceReg_4CA16893(void) {
+void sceRegRemoveCategory(void) {
 }
 
-void sceReg_3615BC87(void) {
+void sceRegRemoveKey(void) {
 }
 #endif
 

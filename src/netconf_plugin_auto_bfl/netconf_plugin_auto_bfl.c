@@ -83,15 +83,15 @@ INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_DFF564AF);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_F5C1F68A);
 #else
-INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_50DF536D);
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceNetAOSSInit);
 
-INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_D253B522);
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceNetAOSSTerm);
 
-INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_653D453F);
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceNetAOSSStart);
 
-INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_AC307152);
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceNetAOSSStop);
 
-INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_2AEE9D4D);
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceNetAOSSGetState);
 #endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00000664);

@@ -3,18 +3,18 @@
 #include "popsman_decls.h"
 
 #if FW_VERSION == 352
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_driver_F03F1227);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManInit);
 
-s32 scePopsMan_driver_04B14718(void) {
-    sceSysEventForKernel_D7D3FDCD(&D_00003A84);
+s32 scePopsManEnd(void) {
+    sceKernelUnregisterSysEventHandler(&D_00003A84);
     return 0;
 }
 
-s32 scePopsMan_driver_8666B52F(void) {
+s32 scePopsManSuspend(void) {
     return 0;
 }
 
-s32 scePopsMan_driver_F74199F8(void) {
+s32 scePopsManResume(void) {
     return 0;
 }
 #endif
@@ -132,7 +132,7 @@ INCLUDE_RODATA("nonmatchings/popsman", D_00002354);
 #endif
 
 #if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_29B3FB24);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManLoadModule);
 #endif
 
 #if FW_VERSION == 351
@@ -141,10 +141,10 @@ INCLUDE_RODATA("nonmatchings/popsman", D_000033D8_v351);
 INCLUDE_RODATA("nonmatchings/popsman", D_00003418);
 #endif
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_0090B2C8);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManExitVSHKernel);
 
 #if FW_VERSION == 352
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_29B3FB24);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManLoadModule);
 
 INCLUDE_ASM("nonmatchings/popsman", func_00000424);
 #else
@@ -158,22 +158,22 @@ s32 module_start(void) {
     func_0000061C();
     memset(&D_00003B18, 0, 0x40);
     D_00003A80 = &D_00003B18;
-    sceSysEventForKernel_CD9E4BB5(&D_00003A84);
+    sceKernelRegisterSysEventHandler(&D_00003A84);
     func_00001D70();
     return 0;
 }
 
 INCLUDE_ASM("nonmatchings/popsman", func_000004B0);
 #else
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_driver_F03F1227);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManInit);
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_driver_04B14718);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManEnd);
 
-s32 scePopsMan_driver_8666B52F(void) {
+s32 scePopsManSuspend(void) {
     return 0;
 }
 
-s32 scePopsMan_driver_F74199F8(void) {
+s32 scePopsManResume(void) {
     return 0;
 }
 #endif
@@ -199,11 +199,11 @@ INCLUDE_ASM("nonmatchings/popsman", func_00000334);
 #endif
 
 #if FW_VERSION < 340
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_2E18E4E9);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManCheckData);
 #endif
 
 #if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_6768B22F);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManIsoHeaderRead);
 
 INCLUDE_ASM("nonmatchings/popsman", func_00000588);
 
@@ -233,23 +233,23 @@ INCLUDE_ASM("nonmatchings/popsman", func_00000808);
 #endif
 
 #if FW_VERSION >= 340 && FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_2E18E4E9);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManCheckData);
 #endif
 
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_driver_92E9E38D);
 #endif
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_56EEB969);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManIsoOpen);
 
 #if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_F1D672CE);
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_2E18E4E9);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManCheckData);
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_6768B22F);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManIsoHeaderRead);
 
-s32 scePopsMan_03971322(void) {
+s32 scePopsManDocClose(void) {
     s32 var_v1;
     u32 temp_s0;
 
@@ -270,22 +270,22 @@ INCLUDE_ASM("nonmatchings/popsman", func_00000724);
 INCLUDE_ASM("nonmatchings/popsman", func_00000830);
 #endif
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_EF8F686E);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManDocSetImage);
 
 #if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_53F9ABD2);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManDocOpen);
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_FC56480E);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManDocRead);
 #endif
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_875F4C05);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManDocLseek);
 
 #if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/popsman", D_00003540);
 
 INCLUDE_RODATA("nonmatchings/popsman", D_00003580_v352);
 #else
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_03971322);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManDocClose);
 
 INCLUDE_ASM("nonmatchings/popsman", func_00000A44);
 #endif
@@ -305,11 +305,11 @@ INCLUDE_RODATA("nonmatchings/popsman", D_00003390);
 #if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/popsman", D_000035A8);
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_53F9ABD2);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManDocOpen);
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_FC56480E);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManDocRead);
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_4F7628CC);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManGetEdramSize);
 #endif
 
 #if FW_VERSION >= 340 && FW_VERSION < 352
@@ -323,15 +323,15 @@ INCLUDE_ASM("nonmatchings/popsman", func_00000B04);
 #endif
 
 #if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_EC94C50C);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManImposeGetBatteryIconStatus);
 #endif
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_065C7F0B);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManImposeGetParam);
 
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_B262B44F);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManImposeChanges);
 
 #if FW_VERSION == 352
-INCLUDE_ASM("nonmatchings/popsman", scePopsMan_EC94C50C);
+INCLUDE_ASM("nonmatchings/popsman", scePopsManImposeGetBatteryIconStatus);
 #endif
 
 #if FW_VERSION < 330
@@ -339,8 +339,8 @@ INCLUDE_ASM("nonmatchings/popsman", scePopsMan_BF224726);
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 352
-void scePopsMan_4F7628CC(void) {
-    sceGe_driver_5BAA5439(0x400000);
+void scePopsManGetEdramSize(void) {
+    sceGeEdramSetSize(0x400000);
     sceGeEdramGetSize();
 }
 #endif
@@ -358,62 +358,62 @@ INCLUDE_ASM("nonmatchings/popsman", func_00000E34);
 #if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/popsman", func_00001D70);
 
-void sceMeAudio_E2ECB299(void) {
+void sceMeAudioScLockv352(void) {
     do {
 
-    } while (sceSysreg_driver_9FC87ED4() != 0);
+    } while (sceSysregSemaTryLock() != 0);
 }
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_0EEC95DF);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioScUnlockv352);
 
 INCLUDE_ASM("nonmatchings/popsman", func_00001DF8);
 #endif
 
 #if FW_VERSION == 351
-void sceMeAudio_A345F290(void) {
+void sceMeAudioScLockv35(void) {
     do {
 
-    } while (sceSysreg_driver_9FC87ED4() != 0);
+    } while (sceSysregSemaTryLock() != 0);
 }
 
-void sceMeAudio_7EFCF769(void) {
-    sceSysreg_driver_8BE2D520();
+void sceMeAudioScUnlockv35(void) {
+    sceSysregSemaUnlock();
 }
 #endif
 
 #if FW_VERSION == 340
-void sceMeAudio_94DCC979(void) {
+void sceMeAudioScLockv34(void) {
     do {
 
-    } while (sceSysreg_driver_9FC87ED4() != 0);
+    } while (sceSysregSemaTryLock() != 0);
 }
 
-void sceMeAudio_5B571930(void) {
-    sceSysreg_driver_8BE2D520();
+void sceMeAudioScUnlockv34(void) {
+    sceSysregSemaUnlock();
 }
 #endif
 
 #if FW_VERSION == 330
-void sceMeAudio_EDD2B615(void) {
+void sceMeAudioScLockv33(void) {
     do {
 
-    } while (sceSysreg_driver_9FC87ED4() != 0);
+    } while (sceSysregSemaTryLock() != 0);
 }
 
-void sceMeAudio_1AF750F2(void) {
-    sceSysreg_driver_8BE2D520();
+void sceMeAudioScUnlockv33(void) {
+    sceSysregSemaUnlock();
 }
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 330
-void sceMeAudio_5EDA8D33(void) {
+void sceMeAudioScLock(void) {
     do {
 
-    } while (sceSysreg_driver_9FC87ED4() != 0);
+    } while (sceSysregSemaTryLock() != 0);
 }
 
-void sceMeAudio_05115756(void) {
-    sceSysreg_driver_8BE2D520();
+void sceMeAudioScUnlock(void) {
+    sceSysregSemaUnlock();
 }
 #endif
 
@@ -434,11 +434,11 @@ INCLUDE_ASM("nonmatchings/popsman", func_00002048);
 
 INCLUDE_ASM("nonmatchings/popsman", func_00002378);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_5F711DD6);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioSetPausev352);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_25F12580);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioSetVolumev352);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_66DA46E2);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioRegisterTickCallbackv352);
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 352
@@ -458,35 +458,35 @@ INCLUDE_ASM("nonmatchings/popsman", func_00001698);
 #endif
 
 #if FW_VERSION == 351
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_A002ED78);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioRegisterTickCallbackv35);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_C044E289);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioSetPausev35);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_43D9752F);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioSetVolumev35);
 #endif
 
 #if FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_B745BA7C);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioRegisterTickCallbackv34);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_448F65DD);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioSetPausev34);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_83E07D86);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioSetVolumev34);
 #endif
 
 #if FW_VERSION == 330
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_A54D5B20);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioRegisterTickCallbackv33);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_745FB863);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioSetPausev33);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_6DCDC5BA);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioSetVolumev33);
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 330
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_148E487D);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioRegisterTickCallback);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_29798EF3);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioSetPause);
 
-INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_DDB5FA7A);
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudioSetVolume);
 #endif
 
 #if FW_VERSION >= 310
@@ -554,15 +554,15 @@ void sceAudioOutput2ChangeLength(void) {
 
 INCLUDE_ASM("nonmatchings/popsman", sceAudioOutput2GetRestSample);
 
-void sceAudio_38553111(void) {
+void sceAudioSRCChReserve(void) {
 
 }
 
-void sceAudio_5C37C0AE(void) {
+void sceAudioSRCChRelease(void) {
 
 }
 
-void sceAudio_E0727056(void) {
+void sceAudioSRCOutputBlocking(void) {
 
 }
 
@@ -588,11 +588,11 @@ void sceAudioInputInitEx(void) {
 
 INCLUDE_ASM("nonmatchings/popsman", sceAudioPollInputEnd);
 
-void sceAudio_E9D97901(void) {
+void sceAudioGetChannelRestLen(void) {
 
 }
 
-void sceAudio_41EFADE7(void) {
+void sceAudioOneshotOutput(void) {
 
 }
 #endif

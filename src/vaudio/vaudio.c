@@ -64,7 +64,7 @@ void sceVaudioChReserveBuffering(s32 arg0, s32 arg1, s32 arg2) {
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/vaudio", sceVaudio_driver_5A7435B7);
+INCLUDE_ASM("nonmatchings/vaudio", sceVaudioInit);
 #endif
 
 #if FW_VERSION == 100
@@ -82,7 +82,7 @@ INCLUDE_ASM("nonmatchings/vaudio", module_stop);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/vaudio", sceVaudio_driver_82EF2F9D);
+INCLUDE_ASM("nonmatchings/vaudio", sceVaudioGetEffectString);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
@@ -94,7 +94,7 @@ INCLUDE_ASM("nonmatchings/vaudio", func_000006E4);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/vaudio", sceVaudio_driver_72749E84);
+INCLUDE_ASM("nonmatchings/vaudio", sceVaudioEnd);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282

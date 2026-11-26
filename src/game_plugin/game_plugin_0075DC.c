@@ -18,7 +18,7 @@ void func_000075DC(struct Unk_func_000075DC_0 *arg0) {
     if (var_v0 != var_v1) {
         do {
             temp_s0 = var_v0->unk4;
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_v1 = arg0->unk0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_v1);
@@ -55,7 +55,7 @@ void ***func_00007638(void ***arg0, struct Unk_func_00007638_1 *arg1, void **arg
     temp_s0 = temp_v1->unk4;
     *temp_s0 = temp_v1->unk0;
     M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
-    scePaf_7EC15225(temp_v1);
+    sce_paf_private_free2(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
     return arg0;

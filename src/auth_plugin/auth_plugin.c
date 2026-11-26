@@ -507,7 +507,7 @@ void func_00001494(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_CA79D58B(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_000024D8(arg0, arg1, var_v0);
 }
@@ -538,7 +538,7 @@ void func_00001514(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_FD4C9F47(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_00002584(arg0, arg1, var_v0);
 }
@@ -585,7 +585,7 @@ void func_0000222C(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_CA79D58B(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_000024D8(arg0, arg1, var_v0);
 }
@@ -609,7 +609,7 @@ void func_0000227C(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_FD4C9F47(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_00002584(arg0, arg1, var_v0);
 }

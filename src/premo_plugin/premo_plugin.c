@@ -378,8 +378,8 @@ INCLUDE_ASM("nonmatchings/premo_plugin", func_00000474);
 
 #if FW_VERSION < 330
 void func_00000474(void) {
-    sceVshBridge_33EEEF3E(1, 2);
-    sceVshBridge_AFB59B52(1, 2);
+    vshMePowerSetCpuClockGear(1, 2);
+    vshMePowerSetBusClockGear(1, 2);
     func_00001888();
     func_00009A60();
     func_00001958();
@@ -410,9 +410,9 @@ void func_000004C8(s32 arg0) {
 
     } else {
         sceVshCommonUtil_622815DD(&D_00026FEC, &func_00000320);
-        if (scePaf_DAB59652(M2C_FIELD(func_00002478(), s32 *, 0x20), &D_000291A8) == 0) {
-            scePaf_F609FA81(arg0, &D_000291A8, 0, 0);
-            scePaf_CAF05F1D(arg0, &D_000291A8);
+        if (_ZNK3paf4View8PageRootEPKc(M2C_FIELD(func_00002478(), s32 *, 0x20), &D_000291A8) == 0) {
+            _ZN3paf4View8PageOpenEPKcii(arg0, &D_000291A8, 0, 0);
+            _ZN3paf4View12PageActivateEPKc(arg0, &D_000291A8);
         }
     }
 }
@@ -1286,14 +1286,14 @@ void func_00001F34(void *arg0) {
 
     temp_s0 = M2C_FIELD(arg0, s32 *, 0x68);
     if (temp_s0 != 0) {
-        scePaf_4612DB4B(temp_s0);
-        scePaf_4E67BB08(temp_s0);
+        _ZN3paf6ModuleD1Ev(temp_s0);
+        _ZdlPv(temp_s0);
         M2C_FIELD(arg0, s32 *, 0x68) = 0;
     }
     temp_s0_2 = M2C_FIELD(arg0, s32 *, 0x6C);
     if (temp_s0_2 != 0) {
-        scePaf_4612DB4B(temp_s0_2);
-        scePaf_4E67BB08(temp_s0_2);
+        _ZN3paf6ModuleD1Ev(temp_s0_2);
+        _ZdlPv(temp_s0_2);
         M2C_FIELD(arg0, s32 *, 0x6C) = 0;
     }
 }
@@ -1994,7 +1994,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin", func_00004D0C);
 #if FW_VERSION < 350
 void func_00004D0C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) + 1);
-    scePaf_6B1E90C7();
+    InputDevice_PspPad_Lock();
 }
 #endif
 

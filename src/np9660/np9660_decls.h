@@ -70,14 +70,14 @@ s32 sceUmd9660_driver_2C6C3F4C(void);
 s32 sceUmd9660_driver_44EF600C(void);
 s32 sceUmd9660_driver_C7CD9CE8(void);
 s32 sceUmdCancelWaitDriveStat(void);
-s32 sceUmdMan_driver_2787078E(void);
-s32 sceUmdMan_driver_4217E7F5(s32 arg0);
-s32 sceUmdMan_driver_60933ECD(void);
+s32 sceUmdManUnRegisterImposeCallBack(void);
+s32 sceUmdManUnRegisterInsertEjectUMDCallBack(s32 arg0);
+s32 sceUmdManIsDvdDrive(void);
 s32 sceUmdReplacePermit(void);
 s32 sceUmdReplaceProhibit(void);
 s32 sceUmdWaitDriveStat(u32 arg0);
-s32 sceUmd_71F81482(void);
-void sceUmd_9B22AED7(s32 arg0);
-s32 sceUmd_D45D1FE6(void);
+s32 sceUmdGetErrorStatus(void);
+void sceUmdSetErrorStatus(s32 arg0);
+s32 sceUmdGetDriveStatus(void);
 
 #endif

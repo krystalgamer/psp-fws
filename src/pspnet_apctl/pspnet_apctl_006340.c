@@ -101,7 +101,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005290);
 #else
 void func_000070C0(s32 *arg0) {
     if (arg0 != NULL) {
-        sceNet_lib_57CC57DA(arg0, 0, 0x404);
+        sceNetMemset(arg0, 0, 0x404);
     }
 }
 #endif
@@ -758,14 +758,14 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00009098);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000091A8);
 
 s32 func_00009328(void) {
-    sceNet_lib_DB88F458();
+    sceNetBpfClose();
     return 0;
 }
 
 s32 func_00009348(void) {
     s32 temp_v0;
 
-    temp_v0 = sceNet_lib_B6FC0A5B();
+    temp_v0 = sceNetBpfRead();
     return (temp_v0 < 0) ? 0x80410E87 : temp_v0;
 }
 

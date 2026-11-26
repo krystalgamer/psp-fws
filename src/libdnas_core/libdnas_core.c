@@ -25,7 +25,7 @@ INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_lib_8309549E);
 
 INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_lib_BA0A32CA);
 
-INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_lib_BF6A7475);
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCoreGetProductCode);
 
 INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_lib_BA0D27F8);
 
@@ -77,9 +77,9 @@ INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_15096ECD);
 
 INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_F479F616);
 
-INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_7E327A7B);
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCoreGetCurrentSecureTick);
 
-INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_BDF74C43);
+INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCoreSetCurrentSecureTick);
 
 INCLUDE_ASM("nonmatchings/libdnas_core", sceDNASCore_driver_2B6C67EA);
 #endif

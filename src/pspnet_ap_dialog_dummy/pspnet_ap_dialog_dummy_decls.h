@@ -112,6 +112,6 @@ s32 module_start(void);
 s32 module_stop(void);
 int sceNetApDialogDummyTerm(void);
 M2C_UNK sceNetApctlDelHandler(s32);
-M2C_UNK sceNetApctl_lib_E11BAFAB(s32);
+M2C_UNK sceNetApctlDelInternalHandler(s32);
 
 #endif

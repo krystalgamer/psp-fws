@@ -7,11 +7,11 @@ module_start = 0x00000560; // type:func
 module_stop = 0x00000568; // type:func
 sceNetApctlConnect = 0x0000081C; // type:func
 sceNetApctlGetState = 0x00000824; // type:func
-sceNetApctl_lib_7CFAB990 = 0x0000082C; // type:func
-sceNetApctl_lib_E11BAFAB = 0x00000834; // type:func
-sceUtility_netparam_internal_072DEBF2 = 0x0000083C; // type:func
-sceUtility_netparam_internal_9CE50172 = 0x00000844; // type:func
-sceUtility_netparam_internal_FC4516F3 = 0x0000084C; // type:func
+sceNetApctlAddInternalHandler = 0x0000082C; // type:func
+sceNetApctlDelInternalHandler = 0x00000834; // type:func
+sceUtilityCreateNetParam = 0x0000083C; // type:func
+sceUtilityDeleteNetParam = 0x00000844; // type:func
+sceUtilitySetNetParam = 0x0000084C; // type:func
 // shared names (tools/add_version.py) begin
 D_000009A0 = 0x000009B0; // rom:0xA30
 D_000009B0 = 0x000009C0;

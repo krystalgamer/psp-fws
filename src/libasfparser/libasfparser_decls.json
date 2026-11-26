@@ -87,10 +87,10 @@
   "func_00006760": "s32 func_00006760(struct Unk_func_00006760_0 *arg0);",
   "func_00006774": "u32 func_00006774(struct Unk_func_00006774_0 *arg0);",
   "func_00006780": "void func_00006780(struct Unk_func_00006780_0 *arg0);",
-  "sceAsfParser_2CB147F7": "void sceAsfParser_2CB147F7(s32 arg0, s32 arg1, s32 arg2);",
+  "sceAsfGetFrameData": "void sceAsfGetFrameData(s32 arg0, s32 arg1, s32 arg2);",
   "sceAsfParser_385E1320": "void sceAsfParser_385E1320(s32 arg0, s32 arg1, s32 arg2);",
-  "sceAsfParser_8B08301F": "s32 sceAsfParser_8B08301F(void);",
-  "sceAsfParser_B9E4BD9E": "s32 sceAsfParser_B9E4BD9E(void);"
+  "sceAsfParserEndEntry": "s32 sceAsfParserEndEntry(void);",
+  "sceAsfParserStartEntry": "s32 sceAsfParserStartEntry(void);"
  },
  "types": {
   "Unk_Unk_func_00000FB8_0_38": "struct Unk_Unk_func_00000FB8_0_38 {\n    u8 pad0[0x40];\n    u32 unk40;\n};",

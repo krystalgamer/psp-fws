@@ -18,6 +18,6 @@ s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelDeleteVpl(s32);
 s32 sceKernelFreeVpl(s32, void *);
-s32 sceNetAdhocDownload_A21FEF45(s32 arg0);
+s32 sceNetAdhocDownloadInitServer(s32 arg0);
 
 #endif

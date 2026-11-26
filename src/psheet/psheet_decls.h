@@ -31,7 +31,7 @@ extern M2C_UNK D_00002F30;
 extern s32 D_00002F48;
 extern s32 D_00002F88;
 
-M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);
+M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);
 s32 func_0000127C(struct Unk_func_0000127C_0 *arg0);
 s32 func_000012F0(s32 arg0);
 s32 func_00001360(s32 arg0, s32 arg1);
@@ -42,14 +42,14 @@ s32 func_00001F94(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_0000217C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);
 s32 module_reboot_before(void);
-s32 sceAmctrl_driver_0785C974(M2C_UNK *, s32, s32);
-s32 sceAmctrl_driver_1CCB66D2(M2C_UNK *, M2C_UNK, M2C_UNK, s32, s32, s32);
-s32 sceAmctrl_driver_9951C50F(M2C_UNK *);
+s32 sceDrmBBCipherUpdate(M2C_UNK *, s32, s32);
+s32 sceDrmBBCipherInit(M2C_UNK *, M2C_UNK, M2C_UNK, s32, s32, s32);
+s32 sceDrmBBCipherFinal(M2C_UNK *);
 s32 sceKernelDeleteSema(s32);
 s32 sceKernelSignalSema(u32, s32);
 s32 sceKernelWaitSema(u32, s32, void *);
-void scePsheet_driver_226D9099(void);
-s32 scePsheet_driver_302AB4B8(s32, s32);
-s32 scePsheet_driver_3CEC4078(void);
+void sceDRMInstallAbort(void);
+s32 sceDRMInstallInit(s32, s32);
+s32 sceDRMInstallEnd(void);
 
 #endif

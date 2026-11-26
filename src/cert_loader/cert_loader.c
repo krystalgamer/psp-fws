@@ -1,7 +1,7 @@
 #include "common.h"
 #include "cert_loader_decls.h"
 
-INCLUDE_ASM("nonmatchings/cert_loader", sceCertLoader_DD629A24);
+INCLUDE_ASM("nonmatchings/cert_loader", sceLoadCertFromFlash);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/cert_loader", func_0000050C);
@@ -139,11 +139,11 @@ s32 func_00000624(void) {
 }
 #endif
 
-s32 sceCertLoader_driver_11391041(void) {
+s32 sceLoadCertInit(void) {
     return 0;
 }
 
-s32 sceCertLoader_driver_E86A7DC1(void) {
+s32 sceLoadCertEnd(void) {
     return 0;
 }
 

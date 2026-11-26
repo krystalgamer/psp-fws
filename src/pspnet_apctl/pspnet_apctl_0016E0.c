@@ -9,7 +9,7 @@ s32 func_000016E0(struct Unk_func_000016E0_0 *arg0, s32 arg1) {
             func_00002480((s32) arg0);
         }
     }
-    sceWlanDrv_lib_C9A8CAB7();
+    sceWlanDevDetach();
     return 0;
 }
 
@@ -498,9 +498,9 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000042D0);
 s32 func_00004424(s32 arg0) {
     s32 var_v0;
 
-    var_v0 = sceNetInet_lib_E6F67D14();
+    var_v0 = sceNetConfigFlushRoute();
     if (var_v0 >= 0) {
-        var_v0 = __builtin_allegrex_min(sceNetInet_lib_6A046357(arg0), 0);
+        var_v0 = __builtin_allegrex_min(sceNetConfigDelIfaddr(arg0), 0);
     }
     return var_v0;
 }
@@ -518,9 +518,9 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000618C);
 s32 func_00006304(s32 arg0) {
     s32 var_v0;
 
-    var_v0 = sceNetInet_lib_E6F67D14();
+    var_v0 = sceNetConfigFlushRoute();
     if (var_v0 >= 0) {
-        var_v0 = __builtin_allegrex_min(sceNetInet_lib_6A046357(arg0), 0);
+        var_v0 = __builtin_allegrex_min(sceNetConfigDelIfaddr(arg0), 0);
     }
     return var_v0;
 }

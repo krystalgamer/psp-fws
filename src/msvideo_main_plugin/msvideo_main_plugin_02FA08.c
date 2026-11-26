@@ -344,15 +344,15 @@ void func_000319B4(void *arg0) {
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x6D0);
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B2390;
     if (temp_v1 != 0) {
-        scePaf_545FE2DA(temp_v1);
+        sce_paf_private_free(temp_v1);
         M2C_FIELD(arg0, s32 *, 0x6D0) = 0;
     }
-    scePaf_545FE2DA(M2C_FIELD(arg0, s32 *, 0x588));
+    sce_paf_private_free(M2C_FIELD(arg0, s32 *, 0x588));
     func_00033E94((s32) arg0);
     func_0003E5C8((s32) (arg0 + 0x598));
     func_00074998(arg0 + 0x1C);
     func_00074998(arg0 + 8);
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -363,16 +363,16 @@ void func_000319B4(void *arg0) {
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x7D8);
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000B2390;
     if (temp_v1 != 0) {
-        scePaf_545FE2DA(temp_v1);
+        sce_paf_private_free(temp_v1);
         M2C_FIELD(arg0, s32 *, 0x7D8) = 0;
     }
-    scePaf_545FE2DA(M2C_FIELD(arg0, s32 *, 0x690));
+    sce_paf_private_free(M2C_FIELD(arg0, s32 *, 0x690));
     func_00035350((s32) arg0);
     func_00033E94((s32) arg0);
     func_0003E5C8((s32) (arg0 + 0x6A0));
     func_00074998(arg0 + 0x1C);
     func_00074998(arg0 + 8);
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -430,7 +430,7 @@ s32 func_00033448(void *arg0, s32 arg1, s32 arg2) {
     if (arg1 != 0) {
         var_v0 = M2C_FIELD(arg0, s32 *, 0x48);
         if (var_v0 == 0) {
-            scePaf_CB2198AB(arg1, arg0 + 0x578);
+            sce_paf_private_wcsncpy(arg1, arg0 + 0x578);
             M2C_FIELD(((arg2 * 2) + arg1), s16 *, -2) = 0;
             var_v0 = M2C_FIELD(arg0, s32 *, 0x48);
         }
@@ -1210,7 +1210,7 @@ s32 func_000373F4(void) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 330
 s32 func_000373F4(void) {
-    sceVshBridge_4E45C872();
+    vshMgVideoEnd();
     return 0;
 }
 #endif
@@ -1283,7 +1283,7 @@ void func_00037920(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0);
     if (temp_v0 != 0) {
-        scePaf_545FE2DA(temp_v0);
+        sce_paf_private_free(temp_v0);
         M2C_FIELD(arg0, s32 *, 0) = 0;
         M2C_FIELD(arg0, s32 *, 4) = 0;
     }
@@ -1300,7 +1300,7 @@ void func_00037A2C(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0);
     if (temp_v0 != 0) {
-        scePaf_545FE2DA(temp_v0);
+        sce_paf_private_free(temp_v0);
         M2C_FIELD(arg0, s32 *, 0) = 0;
         M2C_FIELD(arg0, s32 *, 4) = 0;
     }
@@ -1317,7 +1317,7 @@ void func_00037B38(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0);
     if (temp_v0 != 0) {
-        scePaf_545FE2DA(temp_v0);
+        sce_paf_private_free(temp_v0);
         M2C_FIELD(arg0, s32 *, 0) = 0;
         M2C_FIELD(arg0, s32 *, 4) = 0;
     }
@@ -1411,7 +1411,7 @@ s32 func_000386B0(struct Unk_func_000386B0_0 *arg0) {
     var_s2 = 1;
     temp_v0 = arg0->unk4;
     if (temp_v0 != -1) {
-        if (sceVshBridge_4D92785C(temp_v0) < 0) {
+        if (vshMgVideoEndMovie(temp_v0) < 0) {
             var_s2 = 0;
         } else {
             arg0->unk4 = -1;
@@ -1972,7 +1972,7 @@ s32 func_0003B8D4(void) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 330
 s32 func_0003B8D4(void) {
-    sceVshBridge_4E45C872();
+    vshMgVideoEnd();
     return 0;
 }
 #endif
@@ -2024,13 +2024,13 @@ void func_0003BA48(s32 **arg0) {
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x10);
     M2C_FIELD(arg0, s32 **, 0) = &D_000B2CE8;
     if (temp_v1 != 0) {
-        scePaf_B3D2C3BB(temp_v1);
+        _ZdaPv(temp_v1);
         M2C_FIELD(arg0, s32 *, 0x10) = 0;
     }
     temp_v0 = M2C_FIELD(arg0, s32 *, 0x14);
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x14) = 0;
     }
     func_00037F68(arg0);
@@ -2090,13 +2090,13 @@ void func_0003D0F4(s32 **arg0) {
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x10);
     M2C_FIELD(arg0, s32 **, 0) = &D_000B2CE8;
     if (temp_v1 != 0) {
-        scePaf_B3D2C3BB(temp_v1);
+        _ZdaPv(temp_v1);
         M2C_FIELD(arg0, s32 *, 0x10) = 0;
     }
     temp_v0 = M2C_FIELD(arg0, s32 *, 0x14);
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x14) = 0;
     }
     func_00037F68(arg0);
@@ -2115,17 +2115,17 @@ void func_0003D148(s32 **arg0) {
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x10);
     M2C_FIELD(arg0, s32 **, 0) = &D_000B2CE8;
     if (temp_v1 != 0) {
-        scePaf_B3D2C3BB(temp_v1);
+        _ZdaPv(temp_v1);
         M2C_FIELD(arg0, s32 *, 0x10) = 0;
     }
     temp_v0 = M2C_FIELD(arg0, s32 *, 0x14);
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x14) = 0;
     }
     func_00037F68(arg0);
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 

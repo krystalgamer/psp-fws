@@ -46,13 +46,13 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_00005730);
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00005730(s32 arg0, s32 arg1) {
-    return scePaf_66FE90D7(arg1, (s32) &D_0004CE9C) == 0;
+    return sce_paf_private_strcmp(arg1, (s32) &D_0004CE9C) == 0;
 }
 #endif
 
 #if FW_VERSION == 100
 s32 func_00005730(s32 arg0, s32 arg1) {
-    return scePaf_66FE90D7(arg1, arg0 + 0x4F) == 0;
+    return sce_paf_private_strcmp(arg1, arg0 + 0x4F) == 0;
 }
 #endif
 
@@ -265,7 +265,7 @@ void func_00006D98(struct Unk_func_00006D98_0 *arg0) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_1811AD32(temp_v1, temp_v0, 0, 0);
+            _ZN3paf4View8PageOpenEPvii(temp_v1, temp_v0, 0, 0);
         }
     }
 }
@@ -280,7 +280,7 @@ void func_00006DE0(struct Unk_func_00006DE0_0 *arg0) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_D05C226F(temp_v1, temp_v0);
+            _ZN3paf4View9PageCloseEPv(temp_v1, temp_v0);
         }
     }
 }
@@ -304,7 +304,7 @@ void func_00006E28(struct Unk_func_00006E28_0 *arg0) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_5EBC648F(temp_v1, temp_v0);
+            _ZN3paf4View12PageActivateEPv(temp_v1, temp_v0);
         }
     }
 }
@@ -367,9 +367,9 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_000070BC);
 
 void func_000075F4(void) {
     void *sp0;
-    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_5C161337(-1));
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackE6Locale(-1));
     func_00006A14(&sp0);
-    sceVshCommonGui_441D55D7(1);
+    _ZN3vsh25ShowButtonNavigation_BackEb(1);
 }
 
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_00522C", D_00061B08);
@@ -420,15 +420,15 @@ void func_0000788C(struct Unk_func_0000788C_0 *arg0) {
 #endif
 
 void func_000078C8(struct Unk_func_000078C8_0 *arg0) {
-    sceVshCommonGui_607D5C82(arg0->unk4, arg0->unk8, 0);
+    _ZN3vsh10OptionMenu5CloseEPN3paf4ViewEPKcS5_(arg0->unk4, arg0->unk8, 0);
 }
 
 void func_000078EC(void) {
-    sceVshCommonGui_C5B53362();
+    _ZN3vsh10OptionMenu4ShowEv();
 }
 
 void func_00007908(void) {
-    sceVshCommonGui_A1C3DDD6();
+    _ZN3vsh10OptionMenu4HideEv();
 }
 
 void func_00007924(struct Unk_func_00007924_0 *arg0) {
@@ -1311,8 +1311,8 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_0000D658);
 
 void func_0000D69C(void *arg0) {
     if (M2C_FIELD(arg0, u8 *, 0x1B0) != 0) {
-        scePaf_66907719();
-        scePaf_F1CF9579();
+        InputDevice_PspPad_Unlock();
+        InputDevice_PspHprm_Unlock();
         M2C_FIELD(arg0, u8 *, 0x1B0) = 0U;
     }
 }
@@ -1365,8 +1365,8 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_0000E6BC);
 
 void func_0000E700(struct Unk_func_0000E700_0 *arg0) {
     if (arg0->unk1A4 != 0) {
-        scePaf_66907719();
-        scePaf_F1CF9579();
+        InputDevice_PspPad_Unlock();
+        InputDevice_PspHprm_Unlock();
         arg0->unk1A4 = 0U;
     }
 }
@@ -4472,8 +4472,8 @@ s32 func_000138E0(s32 arg0, M2C_UNK **arg1) {
 }
 
 s32 func_0001390C(void) {
-    scePaf_6829D7AF(&D_00049F40, 0, 0x1C);
-    scePaf_6829D7AF(&D_00049F80, 0, 0x4000);
+    sce_paf_private_memset(&D_00049F40, 0, 0x1C);
+    sce_paf_private_memset(&D_00049F80, 0, 0x4000);
     M2C_FIELD(&D_00049F40, M2C_UNK **, 0) = &D_00049F80;
     M2C_FIELD(&D_00049F40, s32 *, 4) = 0;
     return 0;
@@ -4711,7 +4711,7 @@ s32 func_00014608(s32 arg0, s32 arg1) {
 
     var_v0 = D_0007E584;
     if (var_v0 == 0) {
-        temp_v0 = scePaf_B7E6052B(0x80);
+        temp_v0 = _Znwj(0x80);
         func_00019444(temp_v0, arg0, arg1);
         D_0007E584 = temp_v0;
         var_v0 = temp_v0;
@@ -4725,7 +4725,7 @@ s32 func_00019588(s32 arg0, s32 arg1) {
 
     var_v0 = D_0007E584;
     if (var_v0 == 0) {
-        temp_v0 = scePaf_B7E6052B(0x80);
+        temp_v0 = _Znwj(0x80);
         func_00019444(temp_v0, arg0, arg1);
         D_0007E584 = temp_v0;
         var_v0 = temp_v0;
@@ -4879,7 +4879,7 @@ s32 func_0001BA0C(struct Unk_func_0001BA0C_0 *arg0) {
 
     temp_v0 = arg0->unk2C;
     if (temp_v0 != 0) {
-        sceVshCommonGui_72E652AA(temp_v0);
+        _ZN3vsh13MessageDialog10HideDeleteEv(temp_v0);
         arg0->unk2C = 0;
     }
     arg0->unk20 = 0;
@@ -4939,8 +4939,8 @@ void func_0001BED0(struct Unk_func_0001BED0_0 *arg0) {
 INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_0001BF00);
 
 s32 func_0001BFF8(void) {
-    sceVshCommonGui_A0DE7090(0);
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     return 1;
 }
 
@@ -5259,7 +5259,7 @@ void *func_00019DB8(s32 arg0, s32 arg1) {
 
     var_v0 = D_0004E4DC;
     if (var_v0 == 0) {
-        temp_v0 = scePaf_B7E6052B(0x10);
+        temp_v0 = _Znwj(0x10);
         func_00019D40(temp_v0, arg0, arg1);
         D_0004E4DC = (s32) temp_v0;
         var_v0 = (s32) temp_v0;
@@ -5403,7 +5403,7 @@ void *func_0001F8F0(s32 arg0, s32 arg1) {
 
     var_v0 = D_0007EAC0;
     if (var_v0 == 0) {
-        temp_v0 = scePaf_B7E6052B(0x10);
+        temp_v0 = _Znwj(0x10);
         func_0001F878(temp_v0, arg0, arg1);
         D_0007EAC0 = (s32) temp_v0;
         var_v0 = (s32) temp_v0;
@@ -5649,8 +5649,8 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_0001E970);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_0001C384);
 
 void func_0001C3F4(void) {
-    scePaf_D0AD10FF();
-    scePaf_7C2C2742();
+    _ZN3paf13PhApplication14FinishDispListEv();
+    _ZN3paf13PhApplication13StartDispListEv();
 }
 #endif
 
@@ -5689,27 +5689,27 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_00020994);
 
 #if FW_VERSION < 201
 void func_0001C4C8(s32 arg0) {
-    scePaf_D24E4016(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
 }
 
 void func_0001C4E4(s32 arg0) {
-    scePaf_1F0E9712(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
 }
 
 void func_0001C500(s32 arg0) {
-    scePaf_0CFDBE2F(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
 }
 #else
 void func_000209B4(s32 arg0) {
-    scePaf_D24E4016(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
 }
 
 void func_000209D0(s32 arg0) {
-    scePaf_1F0E9712(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
 }
 
 void func_000209EC(s32 arg0) {
-    scePaf_0CFDBE2F(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
 }
 #endif
 
@@ -5765,19 +5765,19 @@ void func_0001C718(void **arg0) {
 }
 
 void func_0001C73C(s32 arg0) {
-    scePaf_95948FB6(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
 }
 
 void func_0001C758(s32 arg0) {
-    scePaf_ED89C94B(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
 }
 
 void func_0001C774(s32 arg0) {
-    scePaf_BA433BEF(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
 }
 
 void func_0001C790(s32 arg0) {
-    scePaf_B7865607(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
 }
 #else
 void func_00020BBC(struct Unk_vt_func_00020BBC_arg0 **arg0) {
@@ -5793,19 +5793,19 @@ void func_00020C04(struct Unk_vt_func_00020C04_arg0 **arg0) {
 }
 
 void func_00020C28(s32 arg0) {
-    scePaf_95948FB6(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
 }
 
 void func_00020C44(s32 arg0) {
-    scePaf_ED89C94B(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
 }
 
 void func_00020C60(s32 arg0) {
-    scePaf_BA433BEF(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
 }
 
 void func_00020C7C(s32 arg0) {
-    scePaf_B7865607(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
 }
 #endif
 
@@ -5973,8 +5973,8 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_00022668);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_000226D0);
 
 void func_00022740(void) {
-    scePaf_D0AD10FF();
-    scePaf_7C2C2742();
+    _ZN3paf13PhApplication14FinishDispListEv();
+    _ZN3paf13PhApplication13StartDispListEv();
 }
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_00022764);
@@ -6047,8 +6047,8 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_00023DD4);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_00023E3C);
 
 void func_00023EAC(void) {
-    scePaf_D0AD10FF();
-    scePaf_7C2C2742();
+    _ZN3paf13PhApplication14FinishDispListEv();
+    _ZN3paf13PhApplication13StartDispListEv();
 }
 
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_00522C", D_00064310);

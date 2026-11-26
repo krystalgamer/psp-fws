@@ -14,4 +14,4 @@ strlen = 0x00000A18; // type:func
 sprintf = 0x00000A20; // type:func
 strncmp = 0x00000A28; // type:func
 strcpy = 0x00000A30; // type:func
-sceOpenPSID_driver_19D579F0 = 0x00000A38; // type:func
+sceOpenPSIDGetPSID = 0x00000A38; // type:func

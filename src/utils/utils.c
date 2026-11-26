@@ -60,7 +60,7 @@ INCLUDE_ASM("nonmatchings/utils", func_000007EC);
 
 INCLUDE_ASM("nonmatchings/utils", func_000008F0);
 
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_80FE032E);
+INCLUDE_ASM("nonmatchings/utils", sceUtilsKernelDcacheWBinvRange);
 
 INCLUDE_ASM("nonmatchings/utils", func_00000AFC);
 
@@ -174,25 +174,25 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMt19937Init);
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMt19937UInt);
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void UtilsForKernel_193D4036(s32 arg0, s32 arg1) {
+void sceKernelSetGPIMask(s32 arg0, s32 arg1) {
     D_000046C4 = (D_000046C4 & ~arg0) | arg1;
 }
 #endif
 
 #if FW_VERSION == 100
-void UtilsForKernel_193D4036(s32 arg0, s32 arg1) {
+void sceKernelSetGPIMask(s32 arg0, s32 arg1) {
     D_00004704 = (D_00004704 & ~arg0) | arg1;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void UtilsForKernel_95035FEF(s32 arg0, s32 arg1) {
+void sceKernelSetGPOMask(s32 arg0, s32 arg1) {
     D_000046C0 = (D_000046C0 & ~arg0) | arg1;
 }
 #endif
 
 #if FW_VERSION == 100
-void UtilsForKernel_95035FEF(s32 arg0, s32 arg1) {
+void sceKernelSetGPOMask(s32 arg0, s32 arg1) {
     D_00004700 = (D_00004700 & ~arg0) | arg1;
 }
 #endif
@@ -202,11 +202,11 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelGetGPI);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelSetGPO);
 #else
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_7B7ED3FD);
+INCLUDE_ASM("nonmatchings/utils", sceKernelRegisterLibcRtcFunc);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 UtilsForKernel_7B7ED3FD(s32 arg0, s32 arg1, s32 arg2) {
+s32 sceKernelRegisterLibcRtcFunc(s32 arg0, s32 arg1, s32 arg2) {
     D_00004724 = arg0;
     D_00004728 = arg1;
     D_0000472C = arg2;
@@ -215,7 +215,7 @@ s32 UtilsForKernel_7B7ED3FD(s32 arg0, s32 arg1, s32 arg2) {
 #endif
 
 #if FW_VERSION == 100
-s32 UtilsForKernel_7B7ED3FD(s32 arg0, s32 arg1, s32 arg2) {
+s32 sceKernelRegisterLibcRtcFunc(s32 arg0, s32 arg1, s32 arg2) {
     D_00004764 = arg0;
     D_00004768 = arg1;
     D_0000476C = arg2;
@@ -224,11 +224,11 @@ s32 UtilsForKernel_7B7ED3FD(s32 arg0, s32 arg1, s32 arg2) {
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_6151A7C3);
+INCLUDE_ASM("nonmatchings/utils", sceKernelReleaseLibcRtcFunc);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 UtilsForKernel_6151A7C3(void) {
+s32 sceKernelReleaseLibcRtcFunc(void) {
     D_00004724 = 0;
     D_00004728 = 0;
     D_0000472C = 0;
@@ -237,7 +237,7 @@ s32 UtilsForKernel_6151A7C3(void) {
 #endif
 
 #if FW_VERSION == 100
-s32 UtilsForKernel_6151A7C3(void) {
+s32 sceKernelReleaseLibcRtcFunc(void) {
     D_00004764 = 0;
     D_00004768 = 0;
     D_0000476C = 0;
@@ -251,36 +251,36 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelLibcTime);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelLibcGettimeofday);
 
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_78934841);
+INCLUDE_ASM("nonmatchings/utils", sceKernelGzipDecompress);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_B0E9C31F);
+INCLUDE_ASM("nonmatchings/utils", sceKernelGzipGetInfo);
 
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_23FFC828);
+INCLUDE_ASM("nonmatchings/utils", sceKernelGzipGetCompressedData);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0CE3E29);
+INCLUDE_ASM("nonmatchings/utils", sceKernelGzipIsValid);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_B0E9C31F);
+INCLUDE_ASM("nonmatchings/utils", sceKernelGzipGetInfo);
 #endif
 
 #if FW_VERSION == 152
-s32 UtilsForKernel_23FFC828(s32 arg0) {
+s32 sceKernelGzipGetCompressedData(s32 arg0) {
     void *sp0;
-    return (UtilsForKernel_B0E9C31F(arg0, 0, 0, 0, 0, &sp0) < 0) ? 0 : sp0;
+    return (sceKernelGzipGetInfo(arg0, 0, 0, 0, 0, &sp0) < 0) ? 0 : sp0;
 }
 #endif
 
 #if FW_VERSION == 150
-s32 UtilsForKernel_23FFC828(s32 arg0) {
+s32 sceKernelGzipGetCompressedData(s32 arg0) {
     void *sp0;
     s32 var_v1;
 
     var_v1 = 0;
-    if (UtilsForKernel_B0E9C31F(arg0, 0, 0, 0, 0, &sp0) >= 0) {
+    if (sceKernelGzipGetInfo(arg0, 0, 0, 0, 0, &sp0) >= 0) {
         var_v1 = sp0;
     }
     return var_v1;
@@ -288,27 +288,27 @@ s32 UtilsForKernel_23FFC828(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0CE3E29);
+INCLUDE_ASM("nonmatchings/utils", sceKernelGzipIsValid);
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0E6BA96);
+INCLUDE_ASM("nonmatchings/utils", sceKernelGzipGetName);
 #endif
 
 #if FW_VERSION == 152
-s32 UtilsForKernel_E0E6BA96(s32 arg0) {
+s32 sceKernelGzipGetName(s32 arg0) {
     void *sp0;
-    return (UtilsForKernel_B0E9C31F(arg0, 0, &sp0, 0, 0, 0) < 0) ? 0 : sp0;
+    return (sceKernelGzipGetInfo(arg0, 0, &sp0, 0, 0, 0) < 0) ? 0 : sp0;
 }
 #endif
 
 #if FW_VERSION < 152
-s32 UtilsForKernel_E0E6BA96(s32 arg0) {
+s32 sceKernelGzipGetName(s32 arg0) {
     void *sp0;
     s32 var_v1;
 
     var_v1 = 0;
-    if (UtilsForKernel_B0E9C31F(arg0, 0, &sp0, 0, 0, 0) >= 0) {
+    if (sceKernelGzipGetInfo(arg0, 0, &sp0, 0, 0, 0) >= 0) {
         var_v1 = sp0;
     }
     return var_v1;
@@ -316,23 +316,23 @@ s32 UtilsForKernel_E0E6BA96(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_8C1FBE04);
+INCLUDE_ASM("nonmatchings/utils", sceKernelGzipGetComment);
 #endif
 
 #if FW_VERSION == 152
-s32 UtilsForKernel_8C1FBE04(s32 arg0) {
+s32 sceKernelGzipGetComment(s32 arg0) {
     void *sp0;
-    return (UtilsForKernel_B0E9C31F(arg0, 0, 0, &sp0, 0, 0) < 0) ? 0 : sp0;
+    return (sceKernelGzipGetInfo(arg0, 0, 0, &sp0, 0, 0) < 0) ? 0 : sp0;
 }
 #endif
 
 #if FW_VERSION < 152
-s32 UtilsForKernel_8C1FBE04(s32 arg0) {
+s32 sceKernelGzipGetComment(s32 arg0) {
     void *sp0;
     s32 var_v1;
 
     var_v1 = 0;
-    if (UtilsForKernel_B0E9C31F(arg0, 0, 0, &sp0, 0, 0) >= 0) {
+    if (sceKernelGzipGetInfo(arg0, 0, 0, &sp0, 0, 0) >= 0) {
         var_v1 = sp0;
     }
     return var_v1;
@@ -340,19 +340,19 @@ s32 UtilsForKernel_8C1FBE04(s32 arg0) {
 #endif
 
 #if FW_VERSION == 100
-s32 UtilsForKernel_23FFC828(s32 arg0) {
+s32 sceKernelGzipGetCompressedData(s32 arg0) {
     void *sp0;
     s32 var_v1;
 
     var_v1 = 0;
-    if (UtilsForKernel_B0E9C31F(arg0, 0, 0, 0, 0, &sp0) >= 0) {
+    if (sceKernelGzipGetInfo(arg0, 0, 0, 0, 0, &sp0) >= 0) {
         var_v1 = sp0;
     }
     return var_v1;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/utils", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/utils", module_bootstart);
 
 #if FW_VERSION == 250
 s32 func_000010E0(void) {
@@ -376,7 +376,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelDcacheWritebackInvalidateAll);
 
 INCLUDE_ASM("nonmatchings/utils", func_00001194);
 
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_864A9D72);
+INCLUDE_ASM("nonmatchings/utils", sceKernelDcacheInvalidateAll);
 
 INCLUDE_ASM("nonmatchings/utils", func_000011E0);
 
@@ -457,12 +457,12 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelGetGPI);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelSetGPO);
 
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_193D4036);
+INCLUDE_ASM("nonmatchings/utils", sceKernelSetGPIMask);
 
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_95035FEF);
+INCLUDE_ASM("nonmatchings/utils", sceKernelSetGPOMask);
 #endif
 
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E8DB3CE6);
+INCLUDE_ASM("nonmatchings/utils", sceKernelDeflateDecompress);
 
 INCLUDE_ASM("nonmatchings/utils", func_00002250);
 

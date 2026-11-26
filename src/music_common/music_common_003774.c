@@ -46,7 +46,7 @@ void music_common_F6EAB2FA(void) {
     s32 temp_v0;
 
     if (D_0001D714 == 0) {
-        temp_v0 = scePaf_B7E6052B(0x14);
+        temp_v0 = _Znwj(0x14);
         func_00004808(temp_v0);
         D_0001D714 = temp_v0;
     }
@@ -110,7 +110,7 @@ void music_common_F6EAB2FA(void) {
     s32 temp_v0;
 
     if (D_00020674 == 0) {
-        temp_v0 = scePaf_B7E6052B(0x14);
+        temp_v0 = _Znwj(0x14);
         func_00003F40(temp_v0);
         D_00020674 = temp_v0;
     }

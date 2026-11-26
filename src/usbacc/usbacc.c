@@ -4,7 +4,7 @@ INCLUDE_ASM("nonmatchings/usbacc", sceUsbAccGetAuthStat);
 
 INCLUDE_ASM("nonmatchings/usbacc", sceUsbAccGetInfo);
 
-INCLUDE_ASM("nonmatchings/usbacc", sceUsbAcc_internal_2A100C1F);
+INCLUDE_ASM("nonmatchings/usbacc", sceUsbAccIntrInReq);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbacc", D_00000B2C);
@@ -72,9 +72,9 @@ INCLUDE_ASM("nonmatchings/usbacc", func_0000050C);
 INCLUDE_RODATA("nonmatchings/usbacc", D_00000EB0);
 #endif
 
-INCLUDE_ASM("nonmatchings/usbacc", sceUsbAcc_internal_2E251404);
+INCLUDE_ASM("nonmatchings/usbacc", sceUsbAccRegisterType);
 
-INCLUDE_ASM("nonmatchings/usbacc", sceUsbAcc_internal_18B04C82);
+INCLUDE_ASM("nonmatchings/usbacc", sceUsbAccUnregisterType);
 
 INCLUDE_ASM("nonmatchings/usbacc", module_start);
 

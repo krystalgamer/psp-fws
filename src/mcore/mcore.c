@@ -36,7 +36,7 @@ INCLUDE_ASM("nonmatchings/mcore", mcore_FA30975D);
 INCLUDE_ASM("nonmatchings/mcore", mcore_56CA3080);
 
 s32 func_00000514(void) {
-    scePaf_6829D7AF((s32) &D_0002DC50, 0, 0x28);
+    sce_paf_private_memset((s32) &D_0002DC50, 0, 0x28);
     return 0;
 }
 
@@ -75,7 +75,7 @@ INCLUDE_ASM("nonmatchings/mcore", func_00000C34);
 INCLUDE_ASM("nonmatchings/mcore", func_00000C60);
 
 s32 func_00000C8C(s32 arg0, M2C_UNK arg1) {
-    scePaf_F95EA3F1(arg1, arg0 + 8, 8);
+    sce_paf_private_memcpy(arg1, arg0 + 8, 8);
     return 0;
 }
 
@@ -88,7 +88,7 @@ s32 func_00000EAC(struct Unk_func_00000EAC_0 *arg0) {
 
     temp_v0 = arg0->unkC;
     if (temp_v0 != 0) {
-        scePaf_545FE2DA(temp_v0);
+        sce_paf_private_free(temp_v0);
         arg0->unkC = 0;
     }
     return 0;
@@ -204,11 +204,11 @@ void func_000025DC(void) {
 INCLUDE_ASM("nonmatchings/mcore", func_000025F8);
 
 void func_00002714(void) {
-    scePaf_5FAC9869();
+    sce_paf_private_malloc();
 }
 
 void func_00002730(void) {
-    scePaf_8FC65EB0();
+    sce_paf_private_realloc();
 }
 
 INCLUDE_ASM("nonmatchings/mcore", func_0000274C);
@@ -224,7 +224,7 @@ void *func_000028A4(s32 arg0, s32 arg1) {
 
     temp_v0 = func_00002828(arg0, 0);
     if (temp_v0 != NULL) {
-        scePaf_6829D7AF(temp_v0->unk4, arg1 & 0xFF, arg0);
+        sce_paf_private_memset(temp_v0->unk4, arg1 & 0xFF, arg0);
     }
     return temp_v0;
 }
@@ -1537,7 +1537,7 @@ INCLUDE_ASM("nonmatchings/mcore", func_00017BD0);
 INCLUDE_ASM("nonmatchings/mcore", func_00017C48);
 
 s32 func_00017CF4(s32 arg0) {
-    scePaf_6829D7AF(arg0, 0, 0x18);
+    sce_paf_private_memset(arg0, 0, 0x18);
     return 0;
 }
 

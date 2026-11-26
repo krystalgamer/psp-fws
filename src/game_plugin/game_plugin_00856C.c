@@ -36,7 +36,7 @@ s32 func_000085FC(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_000085FC(void) {
-    scePaf_545FE2DA();
+    sce_paf_private_free();
     return 0;
 }
 #endif
@@ -88,7 +88,7 @@ s32 func_00008EB0(void) {
     D_000116CC = -1;
     func_00008E14();
     if (D_00012AF4 != 0) {
-        scePaf_545FE2DA(D_00012AF4);
+        sce_paf_private_free(D_00012AF4);
         D_00012AF4 = 0;
     }
     return 0;
@@ -116,7 +116,7 @@ s32 func_00008A50(void) {
     D_0001266C = -1;
     func_00008DB0();
     if (D_00012678 != 0) {
-        scePaf_545FE2DA(D_00012678);
+        sce_paf_private_free(D_00012678);
         D_00012678 = 0;
     }
     return 0;

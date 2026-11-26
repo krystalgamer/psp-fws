@@ -67,7 +67,7 @@ void func_00022078(s32 arg0) {
     if (var_s0 >= 0) {
         var_a1 = var_s0;
         do {
-            scePaf_4E67BB08(func_00022F14(temp_s1, var_a1));
+            _ZdlPv(func_00022F14(temp_s1, var_a1));
             temp_a1 = var_s0;
             var_s0 -= 1;
             func_00022F64(temp_s1, temp_a1);
@@ -168,7 +168,7 @@ s32 func_00022794(s32 arg0, s32 *arg1) {
 }
 #else
 s32 func_00022794(s32 arg0, s32 *arg1) {
-    *arg1 = scePaf_6C234A6A(arg0 + 0x4C);
+    *arg1 = sce_paf_private_atoi(arg0 + 0x4C);
     return 0;
 }
 #endif
@@ -229,8 +229,8 @@ void func_00022A04(s32 arg0) {
             temp_v0 = func_00020BF8(temp_s2, var_a1);
             if (temp_v0 != NULL) {
                 func_00027E70((*temp_v0)->unk4);
-                scePaf_4E67BB08((s32) *temp_v0);
-                scePaf_4E67BB08((s32) temp_v0);
+                _ZdlPv((s32) *temp_v0);
+                _ZdlPv((s32) temp_v0);
             }
             temp_a1 = var_s1;
             var_s1 -= 1;
@@ -361,7 +361,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000237C8);
 #else
 void func_000237C8(M2C_UNK **arg0) {
     *arg0 = &D_00053518;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -370,7 +370,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000237F0);
 #else
 void func_000237F0(M2C_UNK **arg0) {
     *arg0 = &D_00053508;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -379,7 +379,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00023818);
 #else
 void func_00023818(M2C_UNK **arg0) {
     *arg0 = &D_000534F8;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -388,7 +388,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00023840);
 #else
 void func_00023840(M2C_UNK **arg0) {
     *arg0 = &D_000534E8;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -397,7 +397,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00023868);
 #else
 void func_00023868(M2C_UNK **arg0) {
     *arg0 = &D_000534D8;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -406,7 +406,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00023890);
 #else
 void func_00023890(M2C_UNK **arg0) {
     *arg0 = &D_000534C8;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_000534C8);
@@ -514,7 +514,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00024280);
 #else
 void func_00024280(M2C_UNK **arg0) {
     *arg0 = &D_000535A0;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -544,7 +544,7 @@ void func_000242D8(struct Unk_func_000242D8_0 *arg0) {
             do {
                 temp_s0 = var_v0->unk8;
                 if (var_v0 != NULL) {
-                    scePaf_4E67BB08((s32) var_v0);
+                    _ZdlPv((s32) var_v0);
                 }
                 var_v0 = temp_s0;
             } while (temp_s0 != NULL);
@@ -567,7 +567,7 @@ void func_00024330(struct Unk_func_00024330_0 *arg0) {
             do {
                 temp_s0 = var_v0->unk8;
                 if (var_v0 != NULL) {
-                    scePaf_4E67BB08((s32) var_v0);
+                    _ZdlPv((s32) var_v0);
                 }
                 var_v0 = temp_s0;
             } while (temp_s0 != NULL);
@@ -590,13 +590,13 @@ void func_00024388(struct Unk_func_00024388_0 *arg0) {
             do {
                 temp_s0 = var_v0->unk8;
                 if (var_v0 != NULL) {
-                    scePaf_4E67BB08((s32) var_v0);
+                    _ZdlPv((s32) var_v0);
                 }
                 var_v0 = temp_s0;
             } while (temp_s0 != NULL);
         }
     }
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -771,7 +771,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00053718);
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_0002523C);
 
 void func_000252A4(s32 arg0) {
-    scePaf_C9831AFF("%s\n", arg0);
+    sce_paf_private_printf("%s\n", arg0);
 }
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000252C8);
@@ -998,7 +998,7 @@ void func_00025F2C(M2C_UNK **arg0) {
 
 void func_00025F3C(M2C_UNK **arg0) {
     *arg0 = &D_000538B8;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025F64);
@@ -1075,7 +1075,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000269C4);
 #else
 void func_000269C4(M2C_UNK **arg0) {
     *arg0 = &D_00053B58;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -1102,7 +1102,7 @@ void func_00026ACC(s32 *arg0) {
 }
 #else
 void func_00026ACC(s32 *arg0) {
-    scePaf_2FA84441(*arg0);
+    sce_paf_private_fseek(*arg0);
 }
 #endif
 
@@ -1112,7 +1112,7 @@ void func_00026AE8(s32 *arg0) {
 }
 #else
 void func_00026AE8(s32 *arg0) {
-    scePaf_84BD418F(*arg0);
+    sce_paf_private_ftell(*arg0);
 }
 #endif
 
@@ -1146,9 +1146,9 @@ s32 func_00026DDC(s32 *arg0, struct Unk_func_00026DDC_1 *arg1) {
 
     temp_s0 = *arg0;
     temp_s2 = temp_s0 + 0x28;
-    scePaf_FF2F98C6(arg1, temp_s0 + 4, 4U);
+    sce_paf_private_strncpy(arg1, temp_s0 + 4, 4U);
     arg1->unk4 = (u8) temp_s2->unk7;
-    scePaf_FF2F98C6((u8 *)arg1 + 5, temp_s0 + 0x31, temp_s2->unk8);
+    sce_paf_private_strncpy((u8 *)arg1 + 5, temp_s0 + 0x31, temp_s2->unk8);
     M2C_FIELD(((u8 *)arg1 + temp_s2->unk8), s8 *, 5) = 0;
     return 0;
 }
@@ -1162,7 +1162,7 @@ s32 func_00026E50(s32 *arg0, struct Unk_func_00026E50_1 *arg1) {
 }
 #else
 s32 func_00026E50(s32 *arg0, struct Unk_func_00026E50_1 *arg1) {
-    scePaf_F95EA3F1(arg1, *arg0 + 4, 4);
+    sce_paf_private_memcpy(arg1, *arg0 + 4, 4);
     arg1->unk4 = 0;
     return 0;
 }
@@ -1226,7 +1226,7 @@ s32 func_00027480(s32 *arg0, struct Unk_func_00027480_1 *arg1) {
 }
 #else
 s32 func_00027480(s32 *arg0, struct Unk_func_00027480_1 *arg1) {
-    scePaf_F95EA3F1(arg1, *arg0 + 4, 4);
+    sce_paf_private_memcpy(arg1, *arg0 + 4, 4);
     arg1->unk4 = 0;
     return 0;
 }
@@ -1257,7 +1257,7 @@ s32 func_00027500(void **arg0, struct Unk_func_00027500_1 *arg1) {
     struct Unk_func_00027500_temp_s0 *temp_s0;
 
     temp_s0 = *arg0;
-    scePaf_F95EA3F1(arg1, (u8 *)temp_s0 + 4, 4);
+    sce_paf_private_memcpy(arg1, (u8 *)temp_s0 + 4, 4);
     arg1->unk4 = (s32) temp_s0->unk2E;
     return 0;
 }
@@ -1319,7 +1319,7 @@ s32 func_000276E0(struct Unk_func_000276E0_0 *arg0, struct Unk_func_000276E0_1 *
 
     temp_s0 = arg0->unk8;
     arg1->unk0 = (s8) ((u8) temp_s0->unk0 >> 4);
-    scePaf_F95EA3F1((u8 *)arg1 + 1, (s32) ((u8 *)temp_s0 + 2), 2);
+    sce_paf_private_memcpy((u8 *)arg1 + 1, (s32) ((u8 *)temp_s0 + 2), 2);
     arg1->unk3 = (u8) temp_s0->unk4;
     arg1->unk4 = (s8) ((u8) temp_s0->unk5 >> 4);
     arg1->unk5 = (s8) (temp_s0->unk5 & 0xF);
@@ -1344,7 +1344,7 @@ s32 func_0002774C(struct Unk_func_0002774C_0 *arg0, struct Unk_func_0002774C_1 *
 
     temp_s0 = arg0->unk8;
     arg1->unk0 = (s8) ((u8) temp_s0->unk0 >> 4);
-    scePaf_F95EA3F1((u8 *)arg1 + 1, (s32) ((u8 *)temp_s0 + 2), 2);
+    sce_paf_private_memcpy((u8 *)arg1 + 1, (s32) ((u8 *)temp_s0 + 2), 2);
     arg1->unk3 = (s8) ((u8) temp_s0->unk5 >> 4);
     arg1->unk4 = (s8) (temp_s0->unk5 & 1);
     return 0;

@@ -13,10 +13,10 @@ void func_00023318(void) {
 
     func_00038A9C(0);
     sceVshCommonGui_80271F41();
-    scePaf_6B1E90C7();
+    InputDevice_PspPad_Lock();
     temp_s0 = D_0005F848;
-    if ((temp_s0 == NULL) || (temp_v0 = scePaf_A0ED77C4(0, &func_000234F8, 0, -1, -1, &func_0002365C), temp_s0->unk3C = temp_v0, (temp_v0 == 0))) {
-        scePaf_66907719();
+    if ((temp_s0 == NULL) || (temp_v0 = Job_Start(0, &func_000234F8, 0, -1, -1, &func_0002365C), temp_s0->unk3C = temp_v0, (temp_v0 == 0))) {
+        InputDevice_PspPad_Unlock();
         sceVshCommonGui_1CF884A1();
     }
 }

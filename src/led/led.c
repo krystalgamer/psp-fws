@@ -42,127 +42,127 @@ INCLUDE_ASM("nonmatchings/led", func_00000118);
 INCLUDE_ASM("nonmatchings/led", func_00000144);
 #endif
 
-INCLUDE_ASM("nonmatchings/led", sceLed_driver_EA24BE03);
+INCLUDE_ASM("nonmatchings/led", sceLedSetMode);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/led", module_start);
 #else
 s32 module_start(void) {
-    sceSyscon_driver_18BFBE65(0, 1);
-    sceSyscon_driver_18BFBE65(1, 1);
-    sceGpio_driver_317D9D2C(6, 0);
-    sceGpio_driver_317D9D2C(7, 0);
+    sceSysconCtrlLED(0, 1);
+    sceSysconCtrlLED(1, 1);
+    sceGpioSetPortMode(6, 0);
+    sceGpioSetPortMode(7, 0);
     sceKernelRegisterSubIntrHandler(0x1E, 0x19, &func_00000000, 0);
     sceKernelEnableSubIntr(0x1E, 0x19);
-    sceSysEventForKernel_CD9E4BB5(&D_000008A0);
+    sceKernelRegisterSysEventHandler(&D_000008A0);
     return 0;
 }
 #endif
 
 #if FW_VERSION < 282
 s32 module_reboot_before(void) {
-    sceSysEventForKernel_D7D3FDCD(&D_000008A0);
+    sceKernelUnregisterSysEventHandler(&D_000008A0);
     sceKernelReleaseSubIntrHandler(0x1E, 0x19);
-    sceGpio_driver_103C3EB2(0xC0);
+    sceGpioPortClear(0xC0);
     return 0;
 }
 #else
 INCLUDE_ASM("nonmatchings/led", module_reboot_before);
 #endif
 
-INCLUDE_ASM("nonmatchings/led", sceLed_driver_B0B6A883);
+INCLUDE_ASM("nonmatchings/led", sceLedInit);
 
-INCLUDE_ASM("nonmatchings/led", sceLed_driver_A8542C48);
+INCLUDE_ASM("nonmatchings/led", sceLedEnd);
 
 #if FW_VERSION < 282
-s32 sceLed_driver_DE91D3A4(void) {
+s32 sceLedSuspend(void) {
     sceKernelDisableSubIntr(0x1E, 0x19);
-    sceGpio_driver_317D9D2C(6, 2);
-    if (sceSyscon_driver_EC37C549() != 0) {
-        sceGpio_driver_310F0CCF(0x80);
+    sceGpioSetPortMode(6, 2);
+    if (sceSysconGetWlanPowerCtrl() != 0) {
+        sceGpioPortSet(0x80);
     } else {
-        sceGpio_driver_103C3EB2(0x80);
+        sceGpioPortClear(0x80);
     }
     return 0;
 }
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/led", sceLed_driver_DE91D3A4);
+INCLUDE_ASM("nonmatchings/led", sceLedSuspend);
 #endif
 
 #if FW_VERSION >= 330
-s32 sceLed_driver_DE91D3A4(void) {
+s32 sceLedSuspend(void) {
     sceKernelDisableSubIntr(0x1E, 0x19);
-    sceGpio_driver_103C3EB2(0x40);
-    sceGpio_driver_317D9D2C(6, 2);
-    sceSyscon_driver_18BFBE65(1, 0);
-    if (sceSyscon_driver_EC37C549() != 0) {
+    sceGpioPortClear(0x40);
+    sceGpioSetPortMode(6, 2);
+    sceSysconCtrlLED(1, 0);
+    if (sceSysconGetWlanPowerCtrl() != 0) {
         if ((D_00000BA0 ^ 1) != 0) {
-            sceGpio_driver_310F0CCF(0x80);
+            sceGpioPortSet(0x80);
         } else {
-            sceGpio_driver_103C3EB2(0x80);
+            sceGpioPortClear(0x80);
         }
     } else {
-        sceGpio_driver_103C3EB2(0x80);
-        sceGpio_driver_317D9D2C(6, 2);
+        sceGpioPortClear(0x80);
+        sceGpioSetPortMode(6, 2);
     }
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 330
-s32 sceLed_driver_DE91D3A4(void) {
+s32 sceLedSuspend(void) {
     s32 var_a2;
 
     sceKernelDisableSubIntr(0x1E, 0x19);
-    sceGpio_driver_317D9D2C(6, 2);
+    sceGpioSetPortMode(6, 2);
     var_a2 = 0;
-    if (sceSyscon_driver_EC37C549() != 0) {
-        sceSyscon_driver_18BFBE65(1, 0);
+    if (sceSysconGetWlanPowerCtrl() != 0) {
+        sceSysconCtrlLED(1, 0);
         var_a2 = 1;
     }
     if (var_a2 != D_00000B80) {
-        sceGpio_driver_310F0CCF(0x80);
+        sceGpioPortSet(0x80);
     } else {
-        sceGpio_driver_103C3EB2(0x80);
+        sceGpioPortClear(0x80);
     }
     return 0;
 }
 #endif
 
 #if FW_VERSION < 282
-s32 sceLed_driver_A13B3D38(void) {
-    sceGpio_driver_103C3EB2(0xC0);
-    sceGpio_driver_317D9D2C(6, 0);
-    sceGpio_driver_317D9D2C(7, 0);
-    sceSyscon_driver_18BFBE65(0, 1);
-    sceSyscon_driver_18BFBE65(1, 1);
+s32 sceLedResume(void) {
+    sceGpioPortClear(0xC0);
+    sceGpioSetPortMode(6, 0);
+    sceGpioSetPortMode(7, 0);
+    sceSysconCtrlLED(0, 1);
+    sceSysconCtrlLED(1, 1);
     sceKernelEnableSubIntr(0x1E, 0x19);
     return 0;
 }
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/led", sceLed_driver_A13B3D38);
+INCLUDE_ASM("nonmatchings/led", sceLedResume);
 #endif
 
 #if FW_VERSION >= 300
-s32 sceLed_driver_A13B3D38(void) {
+s32 sceLedResume(void) {
     if (M2C_VFIELD(&D_00000B30, s32, 0) != 0) {
-        sceGpio_driver_310F0CCF(0x40);
+        sceGpioPortSet(0x40);
     } else {
-        sceGpio_driver_103C3EB2(0x40);
+        sceGpioPortClear(0x40);
     }
     if (M2C_VFIELD(&D_00000B30, s32, 0x50) != 0) {
-        sceGpio_driver_310F0CCF(0x80);
+        sceGpioPortSet(0x80);
     } else {
-        sceGpio_driver_103C3EB2(0x80);
+        sceGpioPortClear(0x80);
     }
-    sceGpio_driver_317D9D2C(6, 0);
-    sceGpio_driver_317D9D2C(7, 0);
-    sceSyscon_driver_18BFBE65(0, 1);
-    sceSyscon_driver_18BFBE65(1, 1);
+    sceGpioSetPortMode(6, 0);
+    sceGpioSetPortMode(7, 0);
+    sceSysconCtrlLED(0, 1);
+    sceSysconCtrlLED(1, 1);
     sceKernelEnableSubIntr(0x1E, 0x19);
     return 0;
 }
@@ -172,20 +172,20 @@ s32 sceLed_driver_A13B3D38(void) {
 s32 func_00000590(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x100000:
-        sceGpio_driver_103C3EB2(0xC0);
-        sceGpio_driver_317D9D2C(6, 0);
-        sceGpio_driver_317D9D2C(7, 0);
-        sceSyscon_driver_18BFBE65(0, 1);
-        sceSyscon_driver_18BFBE65(1, 1);
+        sceGpioPortClear(0xC0);
+        sceGpioSetPortMode(6, 0);
+        sceGpioSetPortMode(7, 0);
+        sceSysconCtrlLED(0, 1);
+        sceSysconCtrlLED(1, 1);
         sceKernelEnableSubIntr(0x1E, 0x19);
         break;
     case 0x400A:
         sceKernelDisableSubIntr(0x1E, 0x19);
-        sceGpio_driver_317D9D2C(6, 2);
-        if (sceSyscon_driver_EC37C549() != 0) {
-            sceGpio_driver_310F0CCF(0x80);
+        sceGpioSetPortMode(6, 2);
+        if (sceSysconGetWlanPowerCtrl() != 0) {
+            sceGpioPortSet(0x80);
         } else {
-            sceGpio_driver_103C3EB2(0x80);
+            sceGpioPortClear(0x80);
         }
         break;
     }
@@ -195,10 +195,10 @@ s32 func_00000590(s32 arg0) {
 s32 func_00000800(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x100000:
-        sceLed_driver_A13B3D38();
+        sceLedResume();
         break;
     case 0x400A:
-        sceLed_driver_DE91D3A4();
+        sceLedSuspend();
         break;
     }
     return 0;

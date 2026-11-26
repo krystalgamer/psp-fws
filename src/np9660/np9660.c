@@ -81,7 +81,7 @@ INCLUDE_ASM("nonmatchings/np9660", module_start);
 
 INCLUDE_ASM("nonmatchings/np9660", module_reboot_before);
 
-s32 sceUmdMan_driver_60933ECD(void) {
+s32 sceUmdManIsDvdDrive(void) {
     return 0;
 }
 
@@ -97,9 +97,9 @@ s32 sceUmd9660_driver_44EF600C(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/np9660", sceUmd_230666E3);
+INCLUDE_ASM("nonmatchings/np9660", sceUmdSetDriveStatus);
 
-void sceUmd_9B22AED7(s32 arg0) {
+void sceUmdSetErrorStatus(s32 arg0) {
     s32 temp_a0;
 
     temp_a0 = sceKernelCpuSuspendIntr();
@@ -129,13 +129,13 @@ s32 func_00000718(void) {
     return 0;
 }
 
-s32 sceUmd_D45D1FE6(void) {
+s32 sceUmdGetDriveStatus(void) {
     return D_00004CA4;
 }
 
-INCLUDE_ASM("nonmatchings/np9660", sceUmd_AE53DC2D);
+INCLUDE_ASM("nonmatchings/np9660", sceUmdClearDriveStatus);
 
-s32 sceUmd_71F81482(void) {
+s32 sceUmdGetErrorStatus(void) {
     return D_00004CA8;
 }
 
@@ -256,9 +256,9 @@ INCLUDE_ASM("nonmatchings/np9660", func_0000154C);
 
 INCLUDE_ASM("nonmatchings/np9660", func_00001604);
 
-INCLUDE_ASM("nonmatchings/np9660", sceUmdMan_driver_BF8AED79);
+INCLUDE_ASM("nonmatchings/np9660", sceUmdManRegisterInsertEjectUMDCallBack);
 
-s32 sceUmdMan_driver_4217E7F5(s32 arg0) {
+s32 sceUmdManUnRegisterInsertEjectUMDCallBack(s32 arg0) {
     s32 temp_a0;
     s32 var_s1;
 
@@ -275,9 +275,9 @@ s32 sceUmdMan_driver_4217E7F5(s32 arg0) {
     return var_s1;
 }
 
-INCLUDE_ASM("nonmatchings/np9660", sceUmdMan_driver_F65D819F);
+INCLUDE_ASM("nonmatchings/np9660", sceUmdManRegisterImposeCallBack);
 
-s32 sceUmdMan_driver_2787078E(void) {
+s32 sceUmdManUnRegisterImposeCallBack(void) {
     s32 temp_a0;
 
     temp_a0 = sceKernelCpuSuspendIntr();

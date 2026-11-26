@@ -12,9 +12,9 @@
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
-  "sceUsbBus_driver_B1644BE7": "s32 sceUsbBus_driver_B1644BE7(M2C_UNK *);",
-  "sceUsbBus_driver_C1E2A540": "s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);",
-  "sceUsbGps_driver_268F95CA": "s32 sceUsbGps_driver_268F95CA(u32 arg0);"
+  "sceUsbbdRegister": "s32 sceUsbbdRegister(M2C_UNK *);",
+  "sceUsbbdUnregister": "s32 sceUsbbdUnregister(M2C_UNK *);",
+  "sceUsbGpsSetInitDataLocation": "s32 sceUsbGpsSetInitDataLocation(u32 arg0);"
  },
  "types": {
   "D_000059B0_s": "struct D_000059B0_s {\n    s32 unk0;\n    u8 pad4[0x1578];\n    u32 unk157C;\n};",

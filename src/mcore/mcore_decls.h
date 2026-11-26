@@ -556,11 +556,11 @@ s32 mcore_EA2E7E4D(s32 arg0);
 s32 module_start(void);
 s32 module_stop(void);
 M2C_UNK sceIoClose(s32);
-M2C_UNK scePaf_545FE2DA(s32);
-M2C_UNK scePaf_5FAC9869();
-M2C_UNK scePaf_6829D7AF(s32, s32, s32);
-M2C_UNK scePaf_8FC65EB0();
-M2C_UNK scePaf_F95EA3F1(M2C_UNK, s32, M2C_UNK);
+M2C_UNK sce_paf_private_free(s32);
+M2C_UNK sce_paf_private_malloc();
+M2C_UNK sce_paf_private_memset(s32, s32, s32);
+M2C_UNK sce_paf_private_realloc();
+M2C_UNK sce_paf_private_memcpy(M2C_UNK, s32, M2C_UNK);
 s32 sceRtcGetCurrentTick(void *);
 
 #endif

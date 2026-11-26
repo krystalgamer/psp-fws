@@ -2,19 +2,19 @@
 #include "peq_decls.h"
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/peq", scePEQ_ED13C3B5);
+INCLUDE_ASM("nonmatchings/peq", scePeqProc);
 #endif
 
-s32 scePEQ_driver_213DE849(void) {
+s32 scePeqEntry(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/peq", scePEQ_F7EA0632);
+INCLUDE_ASM("nonmatchings/peq", scePeqInit);
 
 INCLUDE_ASM("nonmatchings/peq", scePEQ_FC45514B);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/peq", scePEQ_ED13C3B5);
+INCLUDE_ASM("nonmatchings/peq", scePeqProc);
 #endif
 
 #if FW_VERSION < 201

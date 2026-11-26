@@ -62,7 +62,7 @@ void music_common_730D5E67(struct Unk_music_common_730D5E67_0 *arg0, struct Unk_
     if ((temp_a0 == 0) || (temp_v0 = arg1->unk4, (temp_v0 == 0))) {
         func_0001D4BC(arg0->unk8, arg1->unk8);
     } else {
-        scePaf_ED2B47FA(temp_a0, temp_v0);
+        sce_paf_private_strcasecmp(temp_a0, temp_v0);
     }
 }
 #endif
@@ -75,8 +75,8 @@ void music_common_730D5E67(struct Unk_music_common_730D5E67_0 *arg0, struct Unk_
     temp_a0 = arg0->unk4;
     if ((temp_a0 == 0) || (temp_v0 = arg1->unk4, (temp_v0 == 0))) {
         func_0001D4BC(arg0->unk8, arg1->unk8);
-    } else if (scePaf_ED2B47FA(temp_a0, temp_v0) == 0) {
-        scePaf_66FE90D7(arg0->unk4, arg1->unk4);
+    } else if (sce_paf_private_strcasecmp(temp_a0, temp_v0) == 0) {
+        sce_paf_private_strcmp(arg0->unk4, arg1->unk4);
     }
 }
 #endif
@@ -101,7 +101,7 @@ void func_0001D55C(void) {
 
 #if FW_VERSION >= 310 && FW_VERSION < 350
 void func_0001D55C(void) {
-    scePaf_FCFAA39F();
+    sce_paf_private_wcscasecmp();
 }
 #endif
 
@@ -167,7 +167,7 @@ void func_00021FE4(s32 **arg0) {
 void func_00021FE4(s32 **arg0) {
     *arg0 = &D_00025320;
     func_0001D7A0(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -216,7 +216,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001D7C0);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0001D7C0(M2C_UNK **arg0) {
     *arg0 = &D_000202D8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

@@ -29,6 +29,6 @@ s32 sceKernelCreateVpl(void *, s32, u32, u32, void *);
 s32 sceKernelDeleteVpl(u32);
 s32 sceKernelFreeVpl(u32, void *);
 s32 sceNetAdhocSetSocketAlert(s32, s32);
-M2C_UNK sceNet_lib_EF097716(s32, M2C_UNK, s32);
+M2C_UNK sceNetMemcpy(s32, M2C_UNK, s32);
 
 #endif

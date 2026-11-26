@@ -166,7 +166,7 @@ void func_0003D310(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D310(void) {
-    scePaf_E1242646();
+    _Z11PSJS_Mallocj();
 }
 #endif
 
@@ -178,7 +178,7 @@ void func_0003D32C(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D32C(void) {
-    scePaf_0F3527DD();
+    _Z9PSJS_FreePv();
 }
 #endif
 
@@ -190,7 +190,7 @@ void func_0003D348(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D348(void) {
-    scePaf_E1242646();
+    _Z11PSJS_Mallocj();
 }
 #endif
 
@@ -202,7 +202,7 @@ void func_0003D364(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D364(void) {
-    scePaf_0F3527DD();
+    _Z9PSJS_FreePv();
 }
 #endif
 
@@ -214,7 +214,7 @@ void func_0003D380(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D380(void) {
-    scePaf_E1242646();
+    _Z11PSJS_Mallocj();
 }
 #endif
 
@@ -226,7 +226,7 @@ void func_0003D39C(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D39C(void) {
-    scePaf_0F3527DD();
+    _Z9PSJS_FreePv();
 }
 #endif
 
@@ -238,7 +238,7 @@ void func_0003D3B8(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D3B8(void) {
-    scePaf_E1242646();
+    _Z11PSJS_Mallocj();
 }
 #endif
 
@@ -250,7 +250,7 @@ void func_0003D3D4(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D3D4(void) {
-    scePaf_0F3527DD();
+    _Z9PSJS_FreePv();
 }
 #endif
 
@@ -262,7 +262,7 @@ void func_0003D3F0(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D3F0(void) {
-    scePaf_E1242646();
+    _Z11PSJS_Mallocj();
 }
 #endif
 
@@ -274,6 +274,6 @@ void func_0003D40C(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D40C(void) {
-    scePaf_0F3527DD();
+    _Z9PSJS_FreePv();
 }
 #endif

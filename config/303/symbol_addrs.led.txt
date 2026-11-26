@@ -1,24 +1,24 @@
 // NID-derived names
-sceLed_driver_EA24BE03 = 0x000002D8; // type:func
+sceLedSetMode = 0x000002D8; // type:func
 module_start = 0x000003DC; // type:func
 module_reboot_before = 0x000004B0; // type:func
-sceLed_driver_B0B6A883 = 0x00000558; // type:func
-sceLed_driver_A8542C48 = 0x0000062C; // type:func
-sceLed_driver_DE91D3A4 = 0x000006D4; // type:func
-sceLed_driver_A13B3D38 = 0x00000754; // type:func
+sceLedInit = 0x00000558; // type:func
+sceLedEnd = 0x0000062C; // type:func
+sceLedSuspend = 0x000006D4; // type:func
+sceLedResume = 0x00000754; // type:func
 sceKernelDisableSubIntr = 0x0000084C; // type:func
 sceKernelRegisterSubIntrHandler = 0x00000854; // type:func
 sceKernelReleaseSubIntrHandler = 0x0000085C; // type:func
 sceKernelEnableSubIntr = 0x00000864; // type:func
 memset = 0x0000086C; // type:func
-sceGpio_driver_103C3EB2 = 0x00000874; // type:func
-sceGpio_driver_310F0CCF = 0x0000087C; // type:func
-sceGpio_driver_317D9D2C = 0x00000884; // type:func
-sceSysEventForKernel_CD9E4BB5 = 0x0000088C; // type:func
-sceSysEventForKernel_D7D3FDCD = 0x00000894; // type:func
-sceSyscon_driver_18BFBE65 = 0x0000089C; // type:func
+sceGpioPortClear = 0x00000874; // type:func
+sceGpioPortSet = 0x0000087C; // type:func
+sceGpioSetPortMode = 0x00000884; // type:func
+sceKernelRegisterSysEventHandler = 0x0000088C; // type:func
+sceKernelUnregisterSysEventHandler = 0x00000894; // type:func
+sceSysconCtrlLED = 0x0000089C; // type:func
 sceSyscon_driver_E00BFC9E = 0x000008A4; // type:func
-sceSyscon_driver_EC37C549 = 0x000008AC; // type:func
+sceSysconGetWlanPowerCtrl = 0x000008AC; // type:func
 // shared names (tools/add_version.py) begin
 D_00000A90 = 0x00000A98; // rom:0xB38
 D_00000B30 = 0x00000B40;

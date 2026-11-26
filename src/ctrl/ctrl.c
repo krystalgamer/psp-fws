@@ -2,9 +2,9 @@
 #include "common.h"
 #include "ctrl_decls.h"
 
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_3E65A0EA);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlInit);
 
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_E03956E9);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlEnd);
 
 INCLUDE_ASM("nonmatchings/ctrl", func_000001C0);
 
@@ -55,7 +55,7 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrlPeekLatch);
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlReadLatch);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
+s32 sceCtrlGetIdleCancelKey(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     if (arg0 != NULL) {
         *arg0 = D_00002618;
     }
@@ -73,7 +73,7 @@ s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
 #endif
 
 #if FW_VERSION >= 282
-s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
+s32 sceCtrlGetIdleCancelKey(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     if (arg0 != NULL) {
         *arg0 = D_000027A4;
     }
@@ -96,25 +96,25 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetIdleCancelThreshold);
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetIdleCancelThreshold);
 #endif
 
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_7CA723DC);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetButtonIntercept);
 
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_5E77BC8A);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetButtonIntercept);
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetRapidFire);
 
 s32 module_start(void) {
-    sceCtrl_driver_3E65A0EA();
+    sceCtrlInit();
     return 0;
 }
 
 s32 module_reboot_before(void) {
-    sceCtrl_driver_E03956E9();
+    sceCtrlEnd();
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_C3F607F3);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSuspend);
 
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_C245B57B);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlResume);
 
 #if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSamplingMode);
@@ -143,7 +143,7 @@ s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
-s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_00001D70.unkA40 = arg3;
     D_00001D70.unkA34 = arg0;
     D_00001D70.unkA38 = arg1;
@@ -153,7 +153,7 @@ s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 260
-s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_VFIELD(&D_00001D70, s32, 0xA44) = arg3;
     D_00001D70.unkA38 = arg0;
     D_00001D70.unkA3C = arg1;
@@ -163,14 +163,14 @@ s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
-s32 sceCtrl_driver_252D3A8D(s8 arg0) {
+s32 sceCtrlSetPollingMode(s8 arg0) {
     D_00001D9F = arg0;
     return 0;
 }
 #endif
 
 #if FW_VERSION == 100
-s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_00001D70.unkA38 = arg1;
     D_00001D70.unkA34 = arg0;
     return 0;
@@ -201,7 +201,7 @@ s32 sceCtrl_driver_AF5960F3(void) {
 #endif
 
 #if FW_VERSION == 100
-s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
+s32 sceCtrlGetIdleCancelKey(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     if (arg0 != NULL) {
         *arg0 = D_00002354;
     }
@@ -231,7 +231,7 @@ s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 350
-s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_VFIELD(&D_00001D70, s32, 0xA44) = arg3;
     D_00001D70.unkA38 = arg0;
     D_00001D70.unkA3C = arg1;
@@ -241,7 +241,7 @@ s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_00001D70.unkA40 = arg3;
     D_00001D70.unkA34 = arg0;
     D_00001D70.unkA38 = arg1;
@@ -251,11 +251,11 @@ s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 #endif
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_252D3A8D);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetPollingMode);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-s32 sceCtrl_driver_252D3A8D(s8 arg0) {
+s32 sceCtrlSetPollingMode(s8 arg0) {
     D_00001D7F = arg0;
     return 0;
 }

@@ -6,7 +6,7 @@ sceKernelCpuResumeIntrWithSync = 0x0000008C; // type:func
 sceKernelIsCpuIntrSuspended = 0x000000C4; // type:func
 sceKernelIsCpuIntrEnable = 0x000000CC; // type:func
 sceKernelRegisterUserSpaceIntrStack = 0x000000D8; // type:func
-SysMemUserForUser_A6848DF8 = 0x000000E0; // type:func
+sceKernelSetUsersystemLibWork = 0x000000E0; // type:func
 // shared names (tools/add_version.py) begin
 D_000001FC = 0x00000204; // rom:0x2A4
 D_00000200 = 0x00000280;

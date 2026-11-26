@@ -79,7 +79,7 @@ extern struct Unk_D_00009B50 *D_00009B50;
 extern struct D_00009B54_s D_00009B54;
 extern M2C_UNK func_00006858;
 
-M2C_UNK IoFileMgrForKernel_C7F35804(M2C_UNK *);
+M2C_UNK sceIoDelDrv(M2C_UNK *);
 M2C_UNK bzero(M2C_UNK *, M2C_UNK);
 s32 func_000001BC(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);
 s32 func_00000220(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);
@@ -145,16 +145,16 @@ s32 sceKernelDeleteSema(s32);
 s32 sceKernelSetEventFlag(s32, u32);
 s32 sceKernelStartThread(s32, u32, void *);
 s32 sceKernelTerminateDeleteThread(s32);
-s32 sceMScm_driver_12BD8FEC(M2C_UNK, M2C_UNK *);
-s32 sceMScm_driver_21183216(s32, M2C_UNK, M2C_UNK, M2C_UNK);
-s32 sceMScm_driver_36921225(s32, M2C_UNK, M2C_UNK, M2C_UNK);
-s32 sceMScm_driver_3FFE76E5(s32, s32, M2C_UNK);
-s32 sceMScm_driver_6C8AEF0B(s32, M2C_UNK, M2C_UNK, M2C_UNK);
-s32 sceMScm_driver_AA67D87A(s32, M2C_UNK);
-s32 sceMScm_driver_BE455B5D(s32, M2C_UNK, M2C_UNK, M2C_UNK);
-s32 sceMScm_driver_CBB2BF6F(s32, M2C_UNK, M2C_UNK, M2C_UNK);
-s32 sceMScm_driver_EF42A4A3(s32, M2C_UNK, M2C_UNK, M2C_UNK);
-void sceMSstor_driver_6FC1E8AE(void);
-M2C_UNK sceMSstor_driver_714782D6(M2C_UNK);
+s32 sceMScmRegisterCLD(M2C_UNK, M2C_UNK *);
+s32 sceMScmWriteDataPIO(s32, M2C_UNK, M2C_UNK, M2C_UNK);
+s32 sceMScmTPCReadShortData(s32, M2C_UNK, M2C_UNK, M2C_UNK);
+s32 sceMScmTPCSetCmdHelper(s32, s32, M2C_UNK);
+s32 sceMScmWriteMSRegHelper(s32, M2C_UNK, M2C_UNK, M2C_UNK);
+s32 sceMScmResetHC(s32, M2C_UNK);
+s32 sceMScmReadDataPIO(s32, M2C_UNK, M2C_UNK, M2C_UNK);
+s32 sceMScmReadMSRegHelper(s32, M2C_UNK, M2C_UNK, M2C_UNK);
+s32 sceMScmTPCWriteShortData(s32, M2C_UNK, M2C_UNK, M2C_UNK);
+void sceMSstorEntry(void);
+M2C_UNK sceMSstorRegisterCLDMSelf(M2C_UNK);
 
 #endif

@@ -9,9 +9,9 @@ void func_00001F84(void) {
     struct Unk_func_00001F84_temp_v0_2 *temp_v0_2;
 
     D_00065E18 = 0;
-    temp_v0 = scePaf_D4FAE7D0(&D_000615CC);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_000615CC);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             D_00065E18 = temp_v0_2->unk30();
         }

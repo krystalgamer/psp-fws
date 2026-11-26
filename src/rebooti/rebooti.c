@@ -5,9 +5,9 @@ INCLUDE_ASM("nonmatchings/rebooti", func_00000000);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000004C);
 
-INCLUDE_ASM("nonmatchings/rebooti", RebootForKernel_72E280A8);
+INCLUDE_ASM("nonmatchings/rebooti", sceKernelReboot);
 
-s32 syslib_D3744BE0(void) {
+s32 module_bootstart(void) {
     return 0;
 }
 

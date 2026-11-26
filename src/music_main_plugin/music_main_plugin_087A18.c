@@ -31,7 +31,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087AD8);
 void func_00087AD8(s32 **arg0) {
     *arg0 = &D_000A2130;
     func_000873B4(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -62,7 +62,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087BC0);
 void func_00087BC0(s32 **arg0) {
     *arg0 = &D_000A2120;
     func_00087454(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -118,7 +118,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087DF4);
 void func_00087DF4(s32 **arg0) {
     *arg0 = &D_000A2150;
     func_00086B7C(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -146,7 +146,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087F9C);
 void func_00087F9C(M2C_UNK **arg0) {
     *arg0 = &D_000A2190;
     func_000885B8((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -188,7 +188,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088094);
 void func_00088094(M2C_UNK **arg0) {
     *arg0 = &D_000A2180;
     func_000886B0((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -216,7 +216,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088270);
 void func_00088270(s32 **arg0) {
     *arg0 = &D_000A21B8;
     func_000873B4(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -266,7 +266,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088378);
 void func_00088378(s32 **arg0) {
     *arg0 = &D_000A21A8;
     func_00087454(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -297,7 +297,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088608);
 void func_00088608(s32 **arg0) {
     *arg0 = &D_000A21E0;
     func_00086ADC(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -343,7 +343,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088700);
 void func_00088700(s32 **arg0) {
     *arg0 = &D_000A21D0;
     func_00086B7C(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -371,7 +371,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000888C4);
 void func_000888C4(M2C_UNK **arg0) {
     *arg0 = &D_000A2208;
     func_0008B980((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -405,7 +405,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000889AC);
 void func_000889AC(M2C_UNK **arg0) {
     *arg0 = &D_000A21F8;
     func_0008BA74((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -433,7 +433,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088DC0);
 void func_00088DC0(M2C_UNK **arg0) {
     *arg0 = &D_000A2240;
     func_000885B8((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -503,7 +503,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088ED0);
 void func_00088ED0(M2C_UNK **arg0) {
     *arg0 = &D_000A2230;
     func_000886B0((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -554,7 +554,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00089200);
 void func_00089200(s32 **arg0) {
     *arg0 = &D_000A2260;
     func_00086B7C(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -605,7 +605,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00089488);
 void func_00089488(s32 **arg0) {
     *arg0 = &D_000A2290;
     func_00086B7C(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -656,7 +656,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00089710);
 void func_00089710(s32 **arg0) {
     *arg0 = &D_000A22C0;
     func_00086B7C(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -686,7 +686,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000898B4);
 void func_000898B4(M2C_UNK **arg0) {
     *arg0 = &D_000A2308;
     func_000885B8((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -762,7 +762,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000899C4);
 void func_000899C4(M2C_UNK **arg0) {
     *arg0 = &D_000A22F8;
     func_000886B0((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

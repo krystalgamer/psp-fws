@@ -44,9 +44,9 @@ sceNetAdhocSetSocketAlert = 0x000039B8; // type:func
 sceNetAdhocPdpDelete = 0x000039C0; // type:func
 sceNetAdhocPdpSend = 0x000039C8; // type:func
 sceNetAdhocPdpRecv = 0x000039D0; // type:func
-sceNet_lib_57CC57DA = 0x000039D8; // type:func
-sceNet_lib_E0A81C7C = 0x000039E0; // type:func
-sceNet_lib_EF097716 = 0x000039E8; // type:func
+sceNetMemset = 0x000039D8; // type:func
+sceNetMemcmp = 0x000039E0; // type:func
+sceNetMemcpy = 0x000039E8; // type:func
 sceWlanGetEtherAddr = 0x000039F0; // type:func
 // real names (devkit DWARF, tools/dwarf_names.py)
 _sce_pspnet_pmp_lockinit = 0x00002E94; // type:func

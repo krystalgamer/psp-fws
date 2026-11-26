@@ -285,9 +285,9 @@ s32 func_0000673C(struct Unk_func_0000673C_0 *arg0);
 s32 func_00006760(struct Unk_func_00006760_0 *arg0);
 u32 func_00006774(struct Unk_func_00006774_0 *arg0);
 void func_00006780(struct Unk_func_00006780_0 *arg0);
-void sceAsfParser_2CB147F7(s32 arg0, s32 arg1, s32 arg2);
+void sceAsfGetFrameData(s32 arg0, s32 arg1, s32 arg2);
 void sceAsfParser_385E1320(s32 arg0, s32 arg1, s32 arg2);
-s32 sceAsfParser_8B08301F(void);
-s32 sceAsfParser_B9E4BD9E(void);
+s32 sceAsfParserEndEntry(void);
+s32 sceAsfParserStartEntry(void);
 
 #endif

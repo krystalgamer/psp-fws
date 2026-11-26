@@ -156,11 +156,11 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00001C28);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpRecv);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_67346A2A);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpRecvWithRfInfo);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 void sceNetAdhoc_lib_F9240FBA(void) {
-    sceNet_lib_57CC57DA(&D_00007A8C, 0, 0x18);
+    sceNetMemset(&D_00007A8C, 0, 0x18);
 }
 #endif
 
@@ -193,7 +193,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002108);
 
 #if FW_VERSION >= 282
 void sceNetAdhoc_lib_F9240FBA(void) {
-    sceNet_lib_57CC57DA(&D_000079CC, 0, 0x18);
+    sceNetMemset(&D_000079CC, 0, 0x18);
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_1059683E);
@@ -330,7 +330,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_62B875A8);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 void sceNetAdhoc_lib_62B875A8(void) {
-    sceNet_lib_57CC57DA(&D_00007CC8, 0, 0x7C);
+    sceNetMemset(&D_00007CC8, 0, 0x7C);
 }
 #endif
 
@@ -355,7 +355,7 @@ void sceNetAdhoc_lib_62B875A8(void) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000473C);
 
 void sceNetAdhoc_lib_62B875A8(void) {
-    sceNet_lib_57CC57DA(&D_000079E8, 0, 0x7C);
+    sceNetMemset(&D_000079E8, 0, 0x7C);
 }
 #endif
 
@@ -528,8 +528,8 @@ void func_000056D4(void *arg0) {
             var_s0 = M2C_FIELD(arg0, void **, 0x10);
         } while (var_s0 != NULL);
     }
-    sceNet_lib_57CC57DA(arg0 + 0x18, 0, 6);
-    sceNet_lib_57CC57DA(arg0 + 0x1E, 0, 6);
+    sceNetMemset(arg0 + 0x18, 0, 6);
+    sceNetMemset(arg0 + 0x1E, 0, 6);
     M2C_FIELD(arg0, s16 *, 0x24) = 0;
     func_00004B30((s32) arg0);
 }
@@ -673,8 +673,8 @@ void func_00005708(struct Unk_func_00005708_0 *arg0) {
             var_s0 = arg0->unk10;
         } while (var_s0 != NULL);
     }
-    sceNet_lib_57CC57DA((u8 *)arg0 + 0x18, 0, 6);
-    sceNet_lib_57CC57DA((u8 *)arg0 + 0x1E, 0, 6);
+    sceNetMemset((u8 *)arg0 + 0x18, 0, 6);
+    sceNetMemset((u8 *)arg0 + 0x1E, 0, 6);
     arg0->unk24 = 0;
     func_00004B30((s32) arg0);
 }
@@ -784,16 +784,16 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006B1C);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006AA0);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_7F75C338);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateMaster);
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_3278AB0C);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateReplica);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_98C204C8);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeUpdateMaster);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_A0229362);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteMaster);
 #endif
 
 #if FW_VERSION < 282
@@ -809,34 +809,34 @@ s32 func_00006F68(void) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006F80);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_3278AB0C);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateReplica);
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_FA324B4E);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeUpdateReplica);
 #else
-void sceNetAdhoc_FA324B4E(s32 arg0, s32 arg1) {
+void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1) {
     func_00006C3C(arg0, arg1, 0);
 }
 #endif
 
 #if FW_VERSION < 282
-void sceNetAdhoc_lib_AF6DFB15(s32 arg0, s32 arg1) {
+void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1) {
     func_00006C3C(arg0, arg1, 1);
 }
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_A0229362);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteMaster);
 #endif
 
 #if FW_VERSION >= 282
-void sceNetAdhoc_lib_AF6DFB15(s32 arg0, s32 arg1) {
+void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1) {
     func_00007298(arg0, arg1, 1);
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_0B2228E9);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteReplica);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00007018);

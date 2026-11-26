@@ -51,14 +51,14 @@ s32 sceCtrlPeekBufferNegative(void *arg0, s32 arg1);
 s32 sceCtrlPeekBufferPositive(void *arg0, s32 arg1);
 s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1);
 s32 sceCtrlReadBufferPositive(void *arg0, s32 arg1);
-s32 sceCtrl_driver_252D3A8D(s8 arg0);
+s32 sceCtrlSetPollingMode(s8 arg0);
 s32 sceCtrl_driver_348D99D4(u32 arg0);
-M2C_UNK sceCtrl_driver_3E65A0EA();
-s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+M2C_UNK sceCtrlInit();
+s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 sceCtrl_driver_AF5960F3(void);
-s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3);
+s32 sceCtrlGetIdleCancelKey(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3);
 s32 sceCtrl_driver_CC70B61E(void);
-M2C_UNK sceCtrl_driver_E03956E9();
+M2C_UNK sceCtrlEnd();
 s32 sceKernelSetEventFlag(s32, u32);
 
 #endif

@@ -195,7 +195,7 @@ void func_00000B1C(void) {
         D_00008540 = 0;
     }
     if (D_00008538 != 0) {
-        sceUtility_netparam_internal_9CE50172(0);
+        sceUtilityDeleteNetParam(0);
         D_00008538 = 0;
     }
 }
@@ -335,11 +335,11 @@ s32 sceVshNetconfRaku_8D3A5DA0(void *arg0) {
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_1B26D858);
 #else
-INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_42C68F08);
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", necApConfigStart);
 
-INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_B29274F1);
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", necApConfigEnd);
 
-s32 sceVshNetconfRaku_F3AF9DD1(void *arg0) {
+s32 necApConfigGetState(void *arg0) {
     s32 var_v1;
 
     var_v1 = D_00008498;
@@ -352,7 +352,7 @@ s32 sceVshNetconfRaku_F3AF9DD1(void *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_D030086D);
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", necApConfigGetResult);
 #endif
 
 #if FW_VERSION >= 250

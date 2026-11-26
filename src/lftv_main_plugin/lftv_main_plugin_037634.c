@@ -638,8 +638,8 @@ s32 func_00039B8C(void) {
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039B98);
 #else
 void func_00039B98(s32 arg0) {
-    scePaf_6829D7AF(arg0, 0, 0x20);
-    scePaf_6829D7AF(arg0 + 0x20, 0, 0x20);
+    sce_paf_private_memset(arg0, 0, 0x20);
+    sce_paf_private_memset(arg0 + 0x20, 0, 0x20);
 }
 #endif
 
@@ -647,8 +647,8 @@ void func_00039B98(s32 arg0) {
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039BD8);
 #else
 void func_00039BD8(s32 arg0) {
-    scePaf_6829D7AF(arg0, 0, 0x20);
-    scePaf_6829D7AF(arg0 + 0x20, 0, 0x20);
+    sce_paf_private_memset(arg0, 0, 0x20);
+    sce_paf_private_memset(arg0 + 0x20, 0, 0x20);
 }
 #endif
 

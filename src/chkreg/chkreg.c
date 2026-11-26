@@ -15,10 +15,10 @@ INCLUDE_ASM("nonmatchings/chkreg", module_start);
 
 INCLUDE_ASM("nonmatchings/chkreg", module_stop);
 
-INCLUDE_ASM("nonmatchings/chkreg", sceChkreg_driver_54495B19);
+INCLUDE_ASM("nonmatchings/chkreg", sceChkregCheckRegion);
 
 #if FW_VERSION >= 152
-INCLUDE_ASM("nonmatchings/chkreg", sceChkreg_driver_59F8491D);
+INCLUDE_ASM("nonmatchings/chkreg", sceChkregGetPsCode);
 #endif
 
 #if FW_VERSION == 352

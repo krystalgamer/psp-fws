@@ -78,7 +78,7 @@
   "sceNetAdhocPdpSend": "s32 sceNetAdhocPdpSend(s32, void *, u32, void *, s32, u32, s32);",
   "sceNetAdhocSetSocketAlert": "s32 sceNetAdhocSetSocketAlert(s32, s32);",
   "sceNetFreeThreadinfo": "s32 sceNetFreeThreadinfo(u32);",
-  "sceNet_lib_57CC57DA": "M2C_UNK sceNet_lib_57CC57DA(void *, M2C_UNK, M2C_UNK);"
+  "sceNetMemset": "M2C_UNK sceNetMemset(void *, M2C_UNK, M2C_UNK);"
  },
  "types": {
   "Unk_func_0000113C_0": "struct Unk_func_0000113C_0 {\n    u8 pad0[0x3C];\n    u32 unk3C;\n    u32 unk40;\n};",

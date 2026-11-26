@@ -1,9 +1,9 @@
 // NID-derived names
 module_start = 0x00000200; // type:func
 sceOpenPSIDGetOpenPSID = 0x00000260; // type:func
-sceOpenPSID_driver_19D579F0 = 0x00000368; // type:func
-scePcact_driver_F9ECFDDD = 0x0000044C; // type:func
-scePcact_driver_08BB9677 = 0x000009D4; // type:func
+sceOpenPSIDGetPSID = 0x00000368; // type:func
+scePcactAuth1BB = 0x0000044C; // type:func
+scePcactAuth2BB = 0x000009D4; // type:func
 sceDdrdbSigvry = 0x00000D84; // type:func
 sceDdrdbCertvry = 0x00000E58; // type:func
 sceDdrdbMul1 = 0x00000EE4; // type:func

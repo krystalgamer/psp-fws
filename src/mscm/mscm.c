@@ -87,12 +87,12 @@ INCLUDE_RODATA("nonmatchings/mscm", D_00007120);
 INCLUDE_ASM("nonmatchings/mscm", func_00000124);
 
 s32 func_000001E4(void *arg0) {
-    sceSysreg_driver_18172C6A(M2C_FIELD(arg0, s32 *, 4));
-    sceMScm_driver_F1924A06((s32) arg0, 1);
+    sceSysregMsifIoDisable(M2C_FIELD(arg0, s32 *, 4));
+    sceMScmSetSlotPower((s32) arg0, 1);
     sceKernelDelayThread(0x186A0U);
-    sceMScm_driver_F1924A06((s32) arg0, 2);
+    sceMScmSetSlotPower((s32) arg0, 2);
     sceKernelDelayThread(0x4E20U);
-    sceSysreg_driver_D74F1D48(M2C_FIELD(arg0, s32 *, 4));
+    sceSysregMsifIoEnable(M2C_FIELD(arg0, s32 *, 4));
     return 0;
 }
 #endif
@@ -105,9 +105,9 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000027C);
 INCLUDE_ASM("nonmatchings/mscm", func_00000244);
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_4E923738);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmStartModule);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_68C14F25);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmStopModule);
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/mscm", module_reboot_before);
@@ -119,12 +119,12 @@ INCLUDE_ASM("nonmatchings/mscm", func_00000BEC);
 INCLUDE_ASM("nonmatchings/mscm", func_00000B9C);
 
 s32 func_00000C1C(struct Unk_func_00000C1C_0 *arg0) {
-    sceSysreg_driver_18172C6A(arg0->unk4);
-    sceMScm_driver_F1924A06((s32) arg0, 1);
+    sceSysregMsifIoDisable(arg0->unk4);
+    sceMScmSetSlotPower((s32) arg0, 1);
     sceKernelDelayThread(0x186A0U);
-    sceMScm_driver_F1924A06((s32) arg0, 2);
+    sceMScmSetSlotPower((s32) arg0, 2);
     sceKernelDelayThread(0x4E20U);
-    sceSysreg_driver_D74F1D48(arg0->unk4);
+    sceSysregMsifIoEnable(arg0->unk4);
     return 0;
 }
 #endif
@@ -146,15 +146,15 @@ void func_00000930(s32 arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_12BD8FEC);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLD);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_08A1EC6B);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmUnRegisterCLD);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_4451D813);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmDetachCLD);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_5BAAB238);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLDM);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_9A5CB5CC);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmUnRegisterCLDM);
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/mscm", func_000015C8);
@@ -162,7 +162,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_000015C8);
 INCLUDE_ASM("nonmatchings/mscm", func_0000123C);
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_5AB92658);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmGetRegisteredCLDMCount);
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/mscm", func_00001804);
@@ -179,11 +179,11 @@ INCLUDE_ASM("nonmatchings/mscm", func_00001478);
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/mscm", D_0000716C);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0D8D6A54);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 #endif
 
 #if FW_VERSION < 250 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_54B3A3F1);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmGetCLDM);
 #endif
 
 #if FW_VERSION >= 310
@@ -191,11 +191,11 @@ INCLUDE_ASM("nonmatchings/mscm", func_00001B0C);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0D8D6A54);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_54B3A3F1);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmGetCLDM);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 310
@@ -285,39 +285,39 @@ INCLUDE_ASM("nonmatchings/mscm", func_000028E0);
 INCLUDE_ASM("nonmatchings/mscm", func_000025F0);
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_42A40895);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmReadMSReg);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_CBB2BF6F);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmReadMSRegHelper);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0128147B);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmWriteMSReg);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_6C8AEF0B);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmWriteMSRegHelper);
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_46AAC4E5);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSendTPCDMA);
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_907D7766);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSendTPC);
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_B01C378C);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmClearALEvents);
 #endif
 
 #if FW_VERSION < 201
-s32 sceMScm_driver_B01C378C(struct Unk_sceMScm_driver_B01C378C_0 *arg0) {
+s32 sceMScmClearALEvents(struct Unk_sceMScm_driver_B01C378C_0 *arg0) {
     sceKernelClearEventFlag(M2C_FIELD(arg0->unk8, u32 *, 0x30), 0U);
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 250
-s32 sceMScm_driver_B01C378C(struct Unk_sceMScm_driver_B01C378C_0 *arg0) {
+s32 sceMScmClearALEvents(struct Unk_sceMScm_driver_B01C378C_0 *arg0) {
     sceKernelClearEventFlag(arg0->unk8->unk2C, 0U);
     return 0;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_2D7C40FA);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmWaitHCIntr);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_000029F8);
@@ -325,15 +325,15 @@ INCLUDE_ASM("nonmatchings/mscm", func_000029F8);
 INCLUDE_ASM("nonmatchings/mscm", func_00002FE0);
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_F1133DAF);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCSetRWRegAdrs);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_36921225);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCReadShortData);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_EF42A4A3);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCWriteShortData);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_BE455B5D);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmReadDataPIO);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_21183216);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmWriteDataPIO);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00003628);
@@ -349,13 +349,13 @@ INCLUDE_ASM("nonmatchings/mscm", func_00003020);
 INCLUDE_ASM("nonmatchings/mscm", func_00003624);
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_DE188BB6);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmStartReadDataDMA);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_18DD6E90);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmWaitAndEndDMA);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_97290A44);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmStartWriteDataDMA);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_B1D1C718);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSetHCTransferMode);
 
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_D6DB3199);
@@ -393,19 +393,19 @@ INCLUDE_ASM("nonmatchings/mscm", func_00003F48);
 INCLUDE_ASM("nonmatchings/mscm", func_000044D8);
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_AA67D87A);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmResetHC);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_F82AF926);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCSetCmd);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_3FFE76E5);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCSetCmdHelper);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_4FA42259);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCExSetCmd);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_494FB570);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCExSetCmdHelper);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_FF6C50D8);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCGetInt);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_34124B97);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCGetIntHelper);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00004DAC);
@@ -416,17 +416,17 @@ INCLUDE_ASM("nonmatchings/mscm", func_000047C0);
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0A054CDA);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmHCLastStatus);
 #endif
 
 #if FW_VERSION < 201
-s32 sceMScm_driver_0A054CDA(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
+s32 sceMScmHCLastStatus(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
     return M2C_FIELD(arg0->unk8, s32 *, 0x18);
 }
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 sceMScm_driver_0A054CDA(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
+s32 sceMScmHCLastStatus(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
     return arg0->unk8->unk14;
 }
 #endif
@@ -440,7 +440,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000488C);
 #else
 INCLUDE_ASM("nonmatchings/mscm", func_00004D94);
 
-s32 sceMScm_driver_0A054CDA(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
+s32 sceMScmHCLastStatus(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
     return arg0->unk8->unk14;
 }
 
@@ -456,10 +456,10 @@ s32 func_00004E68(s32 arg0, s32 arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_E24B5D0C);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmHCSetBusyCount);
 
 #if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_46AAC4E5);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSendTPCDMA);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -482,14 +482,14 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005030);
 INCLUDE_ASM("nonmatchings/mscm", func_00005088);
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_C003705D);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmIconLoadUcode);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_4E4C3099);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmIconStartUcode);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_6F4F7E4C);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmIconStopUcode);
 
-void sceMScm_driver_CFD8F662(s32 arg0) {
-    sceMScm_driver_AA67D87A(arg0, 4);
+void sceMScmIconResetIcon(s32 arg0) {
+    sceMScmResetHC(arg0, 4);
 }
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -548,9 +548,9 @@ s32 func_00005804(s32 arg0) {
 
     var_v1 = 0x80220081;
     if (arg0 == 0) {
-        InterruptManagerForKernel_F987B1F0(7);
-        InterruptManagerForKernel_F987B1F0(0x3C);
-        InterruptManagerForKernel_F987B1F0(0x3D);
+        sceKernelReleaseIntrHandler(7);
+        sceKernelReleaseIntrHandler(0x3C);
+        sceKernelReleaseIntrHandler(0x3D);
         var_v1 = 0;
     }
     return var_v1;
@@ -647,9 +647,9 @@ INCLUDE_ASM("nonmatchings/mscm", func_000064C8);
 
 INCLUDE_ASM("nonmatchings/mscm", func_0000652C);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_FCD92C74);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmGetSlotPower);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_2AD0A649);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmGetSlotState);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00006684);
 
@@ -673,9 +673,9 @@ s32 func_00006704(struct Unk_func_00006704_0 *arg0, s32 arg1) {
     return var_v0;
 }
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_F0CC24D1);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownRegByDesc);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_7B5396BA);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownReg);
 
 INCLUDE_ASM("nonmatchings/mscm", func_000067CC);
 
@@ -683,7 +683,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00006800);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00006854);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_F1924A06);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSetSlotPower);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00006908);
 
@@ -753,9 +753,9 @@ INCLUDE_ASM("nonmatchings/mscm", func_00006474);
 
 INCLUDE_ASM("nonmatchings/mscm", func_000064D8);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_FCD92C74);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmGetSlotPower);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_2AD0A649);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmGetSlotState);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00006630);
 #endif
@@ -859,23 +859,23 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005B64);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_F0CC24D1);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownRegByDesc);
 #endif
 
 #if FW_VERSION < 201
-s32 sceMScm_driver_F0CC24D1(void *arg0) {
+s32 sceMScmSetPullDownRegByDesc(void *arg0) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
     if (arg0 != NULL) {
-        var_v0 = sceMScm_driver_7B5396BA(M2C_FIELD(arg0, s32 *, 4));
+        var_v0 = sceMScmSetPullDownReg(M2C_FIELD(arg0, s32 *, 4));
     }
     return var_v0;
 }
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_7B5396BA);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownReg);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00005C58);
 
@@ -883,13 +883,13 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005C8C);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00005CE4);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_F1924A06);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSetSlotPower);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_FCD92C74);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmGetSlotPower);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_2AD0A649);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmGetSlotState);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00005E58);
 #endif

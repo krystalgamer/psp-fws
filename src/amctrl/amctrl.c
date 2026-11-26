@@ -25,7 +25,7 @@ s32 module_start(void) {
     return 0;
 }
 
-s32 sceAmctrl_driver_525B8218(struct Unk_sceAmctrl_driver_525B8218_0 *arg0, s32 arg1) {
+s32 sceDrmBBMacInit(struct Unk_sceAmctrl_driver_525B8218_0 *arg0, s32 arg1) {
     s8 *var_v1;
     u32 var_a1;
     u32 var_a1_2;
@@ -49,17 +49,17 @@ s32 sceAmctrl_driver_525B8218(struct Unk_sceAmctrl_driver_525B8218_0 *arg0, s32 
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/amctrl", sceAmctrl_driver_58163FBE);
+INCLUDE_ASM("nonmatchings/amctrl", sceDrmBBMacUpdate);
 
-INCLUDE_ASM("nonmatchings/amctrl", sceAmctrl_driver_EF95A213);
+INCLUDE_ASM("nonmatchings/amctrl", sceDrmBBMacFinal);
 
-INCLUDE_ASM("nonmatchings/amctrl", sceAmctrl_driver_F5186D8E);
+INCLUDE_ASM("nonmatchings/amctrl", sceDrmBBMacFinal2);
 
-INCLUDE_ASM("nonmatchings/amctrl", sceAmctrl_driver_1CCB66D2);
+INCLUDE_ASM("nonmatchings/amctrl", sceDrmBBCipherInit);
 
-INCLUDE_ASM("nonmatchings/amctrl", sceAmctrl_driver_0785C974);
+INCLUDE_ASM("nonmatchings/amctrl", sceDrmBBCipherUpdate);
 
-s32 sceAmctrl_driver_9951C50F(struct Unk_sceAmctrl_driver_9951C50F_0 *arg0) {
+s32 sceDrmBBCipherFinal(struct Unk_sceAmctrl_driver_9951C50F_0 *arg0) {
     u32 var_a1;
     struct Unk_sceAmctrl_driver_9951C50F_temp_v1 *temp_v1;
 

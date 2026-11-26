@@ -1,13 +1,13 @@
 // NID-derived names
 module_start = 0x00000248; // type:func
 module_stop = 0x000002E0; // type:func
-sceChkreg_driver_54495B19 = 0x00000390; // type:func
-sceChkreg_driver_59F8491D = 0x00000438; // type:func
+sceChkregCheckRegion = 0x00000390; // type:func
+sceChkregGetPsCode = 0x00000438; // type:func
 sceChkreg_driver_9C6E1D34 = 0x0000051C; // type:func
 sceKernelCreateSema = 0x000006B8; // type:func
 sceKernelDeleteSema = 0x000006C0; // type:func
 sceKernelSignalSema = 0x000006C8; // type:func
 sceKernelWaitSema = 0x000006D0; // type:func
-sceIdStorage_driver_EB00C509 = 0x000006D8; // type:func
+sceIdStorageReadLeaf = 0x000006D8; // type:func
 sceIdStorageLookup = 0x000006E0; // type:func
-semaphore_4C537C72 = 0x000006E8; // type:func
+sceUtilsBufferCopyWithRange = 0x000006E8; // type:func

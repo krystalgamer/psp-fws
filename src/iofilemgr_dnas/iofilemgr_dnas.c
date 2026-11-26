@@ -16,20 +16,20 @@ INCLUDE_ASM("nonmatchings/iofilemgr_dnas", module_start);
 INCLUDE_ASM("nonmatchings/iofilemgr_dnas", module_reboot_before);
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/iofilemgr_dnas", sceIoFilemgrDNAS_driver_79A425A4);
+INCLUDE_ASM("nonmatchings/iofilemgr_dnas", sceIoInitDNAS);
 
-s32 sceIoFilemgrDNAS_driver_4B4AAA29(void) {
-    sceIoFilemgrDNAS_driver_79A425A4(0, 0);
+s32 sceIoEndDNAS(void) {
+    sceIoInitDNAS(0, 0);
     return 0;
 }
 
 INCLUDE_ASM("nonmatchings/iofilemgr_dnas", sceIoFilemgrDNAS_driver_AA46A25E);
 
-INCLUDE_ASM("nonmatchings/iofilemgr_dnas", sceIoFilemgrDNAS_driver_9F645A9C);
+INCLUDE_ASM("nonmatchings/iofilemgr_dnas", sceIoCloseDNAS);
 
-INCLUDE_ASM("nonmatchings/iofilemgr_dnas", sceIoFilemgrDNAS_driver_0144AFDA);
+INCLUDE_ASM("nonmatchings/iofilemgr_dnas", sceIoLseekDNAS);
 
-INCLUDE_ASM("nonmatchings/iofilemgr_dnas", sceIoFilemgrDNAS_driver_8E56CAA1);
+INCLUDE_ASM("nonmatchings/iofilemgr_dnas", sceIoReadDNAS);
 #else
 s32 func_000000E8(void) {
     return 0;

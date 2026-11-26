@@ -28,9 +28,9 @@ scePaf_DCE3D225 = 0x0000150C; // type:func
 scePaf_ECB65734 = 0x00001514; // type:func
 scePaf_F042CC8B = 0x0000151C; // type:func
 scePaf_FA7E6DA3 = 0x00001524; // type:func
-scePower_78A1A796 = 0x0000152C; // type:func
-sceVshBridge_5894C339 = 0x00001534; // type:func
-sceVshBridge_639C3CB3 = 0x0000153C; // type:func
+scePowerIsSuspendRequired = 0x0000152C; // type:func
+vshImposeChanges = 0x00001534; // type:func
+vshImposeGetParam = 0x0000153C; // type:func
 vsh_6D4C06F7 = 0x00001544; // type:func
 // shared names (tools/add_version.py) begin
 D_00001364 = 0x000016F4; // rom:0x1794

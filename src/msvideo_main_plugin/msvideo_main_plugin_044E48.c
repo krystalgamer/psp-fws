@@ -204,7 +204,7 @@ void func_00045974(struct Unk_func_00045974_0 *arg0) {
             if (temp_v0_2 == 0) {
 
             } else {
-                scePaf_D05C226F(temp_a0, temp_v0_2);
+                _ZN3paf4View9PageCloseEPv(temp_a0, temp_v0_2);
             }
         }
     }
@@ -347,7 +347,7 @@ void func_00046B08(struct Unk_func_00046B08_0 *arg0) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00046B08(struct Unk_func_00046B08_0 *arg0) {
-    sceVshCommonGui_607D5C82(arg0->unk4, arg0->unk8, 0);
+    _ZN3vsh10OptionMenu5CloseEPN3paf4ViewEPKcS5_(arg0->unk4, arg0->unk8, 0);
 }
 #endif
 
@@ -363,7 +363,7 @@ void func_00046B2C(void) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00046B2C(void) {
-    sceVshCommonGui_C5B53362();
+    _ZN3vsh10OptionMenu4ShowEv();
 }
 #endif
 
@@ -379,7 +379,7 @@ void func_00046B48(void) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00046B48(void) {
-    sceVshCommonGui_A1C3DDD6();
+    _ZN3vsh10OptionMenu4HideEv();
 }
 #endif
 
@@ -403,7 +403,7 @@ void func_00046C18(s32 arg0) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00046C18(s32 arg0) {
-    scePaf_D24E4016(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
 }
 #endif
 
@@ -419,7 +419,7 @@ void func_00046C34(s32 arg0) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00046C34(s32 arg0) {
-    scePaf_1F0E9712(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
 }
 #endif
 
@@ -435,7 +435,7 @@ void func_00046C50(s32 arg0) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00046C50(s32 arg0) {
-    scePaf_0CFDBE2F(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
 }
 #endif
 
@@ -487,7 +487,7 @@ void func_00046E8C(s32 arg0) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00046E8C(s32 arg0) {
-    scePaf_95948FB6(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
 }
 #endif
 
@@ -503,7 +503,7 @@ void func_00046EA8(s32 arg0) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00046EA8(s32 arg0) {
-    scePaf_ED89C94B(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
 }
 #endif
 
@@ -519,7 +519,7 @@ void func_00046EC4(s32 arg0) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00046EC4(s32 arg0) {
-    scePaf_BA433BEF(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
 }
 #endif
 
@@ -535,7 +535,7 @@ void func_00046EE0(s32 arg0) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_00046EE0(s32 arg0) {
-    scePaf_B7865607(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
 }
 #endif
 
@@ -831,14 +831,14 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_0004993C);
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_0004993C(void) {
-    scePaf_D0AD10FF();
-    scePaf_7C2C2742();
+    _ZN3paf13PhApplication14FinishDispListEv();
+    _ZN3paf13PhApplication13StartDispListEv();
 }
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 350
 s32 func_000499A4(void) {
-    return M2C_FIELD(scePaf_5DFB5858(), s32 *, 0x9C);
+    return M2C_FIELD(_ZN3paf9Framework8InstanceEv(), s32 *, 0x9C);
 }
 
 s32 func_000499C4(void) {
@@ -1160,7 +1160,7 @@ void func_0004D4AC(struct Unk_func_0004D4AC_0 *arg0) {
 
     temp_s2 = arg0->unk4;
     temp_v0 = scePaf_D7FA53D2(arg0->unkEA8, 0);
-    if (sceMpegbase_91929A21(temp_v0, 0, (s32) arg0->unkEA8->unk3C >> 2, (u8 *)arg0 + 0xF4C) != 0) {
+    if (sceMpegBaseCscAvc(temp_v0, 0, (s32) arg0->unkEA8->unk3C >> 2, (u8 *)arg0 + 0xF4C) != 0) {
         temp_s2->unk341 = 1;
     }
     func_0004C1C0(temp_v0, arg0->unkEA8->unk3C, arg0->unkE94, arg0->unkE98, arg0->unkE84, arg0->unkE88, arg0->unkE8C, arg0->unkE90);
@@ -1312,8 +1312,8 @@ void func_0004DA40(void) {
 
 #if FW_VERSION >= 301 && FW_VERSION < 350
 void func_0004DA40(void) {
-    scePaf_D0AD10FF();
-    scePaf_7C2C2742();
+    _ZN3paf13PhApplication14FinishDispListEv();
+    _ZN3paf13PhApplication13StartDispListEv();
 }
 #endif
 
@@ -3314,7 +3314,7 @@ s32 func_000525A8(s32 arg0) {
 }
 
 s32 func_000525D0(s32 arg0) {
-    return (sceMpeg_CF3547A2(arg0 + 4) == 0) ? 0 : 4;
+    return (sceMpegAvcDecodeDetail2(arg0 + 4) == 0) ? 0 : 4;
 }
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_000525F8);
@@ -3812,7 +3812,7 @@ s32 func_000525A8(s32 arg0) {
 }
 
 s32 func_000525D0(s32 arg0) {
-    return (sceMpeg_CF3547A2(arg0 + 4) == 0) ? 0 : 4;
+    return (sceMpegAvcDecodeDetail2(arg0 + 4) == 0) ? 0 : 4;
 }
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_000525F8);
@@ -5563,13 +5563,13 @@ void func_0005F790(void *arg0) {
             do {
                 temp_s0 = M2C_FIELD(var_v0, void **, 8);
                 if (var_v0 != NULL) {
-                    scePaf_4E67BB08((s32) var_v0);
+                    _ZdlPv((s32) var_v0);
                 }
                 var_v0 = temp_s0;
             } while (temp_s0 != NULL);
         }
     }
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 

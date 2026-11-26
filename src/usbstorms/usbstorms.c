@@ -234,7 +234,7 @@ s32 module_start(void) {
     memset(&D_00002D20, 0, 0x60);
     var_v1 = 0;
     if (sceUsbstor_internal_489E6BF1(&D_00002D00) < 0) {
-        KDebugForKernel_84F370BC("%serror - cannot register handler\n", &D_00003460);
+        Kprintf("%serror - cannot register handler\n", &D_00003460);
         var_v1 = 1;
     }
     return var_v1;
@@ -242,13 +242,13 @@ s32 module_start(void) {
 #endif
 
 #if FW_VERSION >= 271 && FW_VERSION < 310
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_16173D42);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsSetNickname);
 
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_CF2AF7B3);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsGetNickname);
 
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_9569F268);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsSetVSHInfo);
 
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_2241C828);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsGetVSHInfo);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 201
@@ -261,7 +261,7 @@ s32 module_stop(void) {
 
     var_v1 = 0;
     if (sceUsbstor_internal_2CAFEFF1(&D_00002DD0) < 0) {
-        KDebugForKernel_84F370BC("%serror - cannot unregister handler\n", &D_00002A14);
+        Kprintf("%serror - cannot unregister handler\n", &D_00002A14);
         var_v1 = 1;
     }
     return var_v1;
@@ -274,7 +274,7 @@ s32 module_stop(void) {
 
     var_v1 = 0;
     if (sceUsbstor_internal_2CAFEFF1(&D_00002DB0) < 0) {
-        KDebugForKernel_84F370BC("%serror - cannot unregister handler\n", &D_00002A14);
+        Kprintf("%serror - cannot unregister handler\n", &D_00002A14);
         var_v1 = 1;
     }
     return var_v1;
@@ -287,7 +287,7 @@ s32 module_stop(void) {
 
     var_v1 = 0;
     if (sceUsbstor_internal_2CAFEFF1(&D_00002E10) < 0) {
-        KDebugForKernel_84F370BC("%serror - cannot unregister handler\n", &D_00002A14);
+        Kprintf("%serror - cannot unregister handler\n", &D_00002A14);
         var_v1 = 1;
     }
     return var_v1;
@@ -468,8 +468,8 @@ INCLUDE_RODATA("nonmatchings/usbstorms", D_00005A30);
 INCLUDE_ASM("nonmatchings/usbstorms", func_00003860);
 
 s32 func_00003944(s32 arg0, s32 arg1) {
-    sceReg_driver_0CAE832B(arg1);
-    sceReg_driver_FA8A5739(arg0);
+    sceRegCloseCategory(arg1);
+    sceRegCloseRegistry(arg0);
     sceKernelPowerUnlock(0);
     return 0;
 }
@@ -490,21 +490,21 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00004064);
 #endif
 
 #if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_16173D42);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsSetNickname);
 
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_CF2AF7B3);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsGetNickname);
 
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_9569F268);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsSetVSHInfo);
 
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_2241C828);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsGetVSHInfo);
 
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_4B10A7F5);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsRegisterEventFlag);
 
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_FF0C3873);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsUnregisterEventFlag);
 
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_ABE9F2C7);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsGetApInfo);
 
-INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_762F7FDF);
+INCLUDE_ASM("nonmatchings/usbstorms", sceUsbstorMsNotifyEventDone);
 #endif
 
 #if FW_VERSION >= 330

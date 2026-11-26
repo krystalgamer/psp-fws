@@ -3,7 +3,7 @@
 
 INCLUDE_ASM("nonmatchings/dmacman", module_start);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_1C46158A);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaExit);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_32757C57);
@@ -14,40 +14,40 @@ INCLUDE_ASM("nonmatchings/dmacman", func_00000328);
 
 INCLUDE_ASM("nonmatchings/dmacman", func_00000400);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_D8BC3120);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaChExclude);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_2E3BC333);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaChReserve);
 #endif
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_7B9634E1);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaSoftRequest);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_59615199);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAlloc);
 #endif
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_745E19EF);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpFree);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_F64BAB99);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAssign);
 
 INCLUDE_ASM("nonmatchings/dmacman", func_00000800);
 #endif
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_3BDEA96C);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpEnQueue);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_92700CCD);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpDeQueue);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_A84B084B);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAllCancel);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_D0358BE9);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpSetCallback);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_3FAD5844);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpSetupMemcpy);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_CE467D9B);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpSetupNormal);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_7D21A2EF);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpSetupLink);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_DB286D65);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpSync);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dmacman", func_00000B28);
@@ -69,7 +69,7 @@ INCLUDE_ASM("nonmatchings/dmacman", func_00000F68);
 INCLUDE_ASM("nonmatchings/dmacman", func_00000B10);
 #endif
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_5AF32783);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpQuit);
 
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_E18A93A5);
 
@@ -92,7 +92,7 @@ s32 func_00001388(void **arg0, u32 arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_904110FC);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAssignMultiple);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/dmacman", D_00001DF0);
@@ -145,24 +145,24 @@ INCLUDE_ASM("nonmatchings/dmacman", func_00001418);
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_D8BC3120);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaChExclude);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_2E3BC333);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaChReserve);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_59615199);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAlloc);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_F64BAB99);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAssign);
 #endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_1FC036B7);
 #endif
 
-s32 DmacManForKernel_D3F62265(void) {
+s32 sceKernelDmaOnDebugMode(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_A893DA2C);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpFreeLink);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dmacman", func_00001A08);

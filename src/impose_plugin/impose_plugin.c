@@ -214,7 +214,7 @@ void func_00000964(void) {
     s32 temp_s1;
     void *temp_v0;
 
-    temp_s1 = sceVshBridge_639C3CB3(0x40000000);
+    temp_s1 = vshImposeGetParam(0x40000000);
     temp_v0 = scePaf_DCE3D225(scePaf_88784487(&D_00001734), 1);
     if (temp_s1 == 0) {
         if (temp_v0 != NULL) {
@@ -237,7 +237,7 @@ void func_00000964(void) {
     s32 temp_s1;
     void *temp_v0;
 
-    temp_s1 = sceVshBridge_639C3CB3(0x40000000);
+    temp_s1 = vshImposeGetParam(0x40000000);
     temp_v0 = scePaf_338C3774(scePaf_D4FAE7D0(&D_000013A4), 1);
     if (temp_s1 == 0) {
         if (temp_v0 != NULL) {

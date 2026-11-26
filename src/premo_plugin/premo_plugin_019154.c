@@ -166,27 +166,27 @@ s32 func_0001AA34(struct Unk_func_0001AA34_0 *arg0) {
     func_00020F88(M2C_FIELD(arg0, s32 *, 0xB0), (s32) &arg0->pad0[0x8C]);
     temp_a0 = M2C_FIELD(arg0, s32 *, 0xC4);
     if (temp_a0 != 0) {
-        scePaf_B3D2C3BB(temp_a0);
+        _ZdaPv(temp_a0);
         M2C_FIELD(arg0, s32 *, 0xC4) = 0;
     }
     temp_a0_2 = arg0->unkA4;
     if (temp_a0_2 != 0) {
-        scePaf_B3D2C3BB(temp_a0_2);
+        _ZdaPv(temp_a0_2);
         arg0->unkA4 = 0;
     }
     temp_a0_3 = M2C_FIELD(arg0, s32 *, 0xA0);
     if (temp_a0_3 != 0) {
-        scePaf_B3D2C3BB(temp_a0_3);
+        _ZdaPv(temp_a0_3);
         M2C_FIELD(arg0, s32 *, 0xA0) = 0;
     }
     temp_a0_4 = M2C_FIELD(arg0, s32 *, 0xBC);
     if (temp_a0_4 != 0) {
-        scePaf_B3D2C3BB(temp_a0_4);
+        _ZdaPv(temp_a0_4);
         M2C_FIELD(arg0, s32 *, 0xBC) = 0;
     }
     temp_a0_5 = arg0->unkB4;
     if (temp_a0_5 != 0) {
-        scePaf_B3D2C3BB(temp_a0_5);
+        _ZdaPv(temp_a0_5);
         arg0->unkB4 = 0;
     }
     return 0;
@@ -395,7 +395,7 @@ s32 func_0001AF1C(struct Unk_func_0001AF1C_0 *arg0, s32 arg1) {
 
     arg0->unk4 = arg1;
     arg0->unk8 = 0;
-    temp_v0 = scePaf_F13EBB78(arg1 * 4);
+    temp_v0 = _Znaj(arg1 * 4);
     arg0->unkC = temp_v0;
     return (temp_v0 != 0) ? 0 : 0x8007000E;
 }
@@ -427,7 +427,7 @@ s32 func_0001AF60(struct Unk_func_0001AF60_0 *arg0) {
     if (temp_v0 == 0) {
 
     } else {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
     }
     return 0;
 }
@@ -585,7 +585,7 @@ void func_0001C384(void) {
 
 #if FW_VERSION < 330
 void func_0001C384(void) {
-    sceVshBridge_07EC5661();
+    vshVaudioChRelease();
 }
 #endif
 
@@ -603,7 +603,7 @@ void func_0001C3D4(struct Unk_func_0001C3D4_0 *arg0) {
 
 #if FW_VERSION < 330
 void func_0001C3D4(struct Unk_func_0001C3D4_0 *arg0) {
-    sceVshBridge_3B3D9F5D(M2C_FIELD(arg0, s32 *, 0x8C));
+    vshAudioSRCOutputBlocking(M2C_FIELD(arg0, s32 *, 0x8C));
 }
 #endif
 
@@ -1529,15 +1529,15 @@ void func_00020AE0(struct Unk_vt_func_00020AE0_arg0 **arg0) {
 
 #if FW_VERSION < 350
 void func_00019118(s32 arg0) {
-    sceMlnBridge_F9357984(arg0, 0);
+    sceMlnBridgeSetDKS(arg0, 0);
 }
 
 void func_00019134(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    sceMlnBridge_DE730A46(arg0, arg1, arg2, arg3);
+    sceMlnBridgeAesCbcEncrypt(arg0, arg1, arg2, arg3);
 }
 
 void func_00019150(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    sceMlnBridge_7770FC23(arg0, arg1, arg2, arg3);
+    sceMlnBridgeAesCbcDecrypt(arg0, arg1, arg2, arg3);
 }
 #endif
 
@@ -1842,7 +1842,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00023230);
 #if FW_VERSION < 350
 s32 func_00023230(struct Unk_func_00023230_0 *arg0, s32 arg1, s32 arg2) {
     if (arg1 == 1) {
-        scePaf_F95EA3F1((s32) &arg0->pad0[0xCC], (u8 *) arg2, 0xC);
+        sce_paf_private_memcpy((s32) &arg0->pad0[0xCC], (u8 *) arg2, 0xC);
         arg0->pad0[0xD8] = (u8) arg1;
     }
     return 0;

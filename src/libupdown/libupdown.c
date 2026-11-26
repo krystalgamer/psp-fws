@@ -193,46 +193,46 @@ INCLUDE_ASM("nonmatchings/libupdown", func_0000214C);
 
 INCLUDE_ASM("nonmatchings/libupdown", func_000021D0);
 
-INCLUDE_ASM("nonmatchings/libupdown", sceLibUpdateDL_F6690A9A);
+INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadInitEx);
 
-INCLUDE_ASM("nonmatchings/libupdown", sceLibUpdateDL_FC1AB540);
+INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadInit);
 
-INCLUDE_ASM("nonmatchings/libupdown", sceLibUpdateDL_D6A09757);
+INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadEnd);
 
-INCLUDE_ASM("nonmatchings/libupdown", sceLibUpdateDL_FD675E8D);
+INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadConnectServer);
 
-INCLUDE_ASM("nonmatchings/libupdown", sceLibUpdateDL_FA9AA797);
+INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadReadData);
 
 void func_0000258C(void) {
     sceKernelGetSystemTimeLow();
 }
 
-s32 sceLibUpdateDL_88FF3935(s32 arg0) {
+s32 sceUpdateDownloadSetDestCode(s32 arg0) {
     func_00000550(arg0 & 0xFF);
     return 0;
 }
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libupdown", sceLibUpdateDL_B5DB018D);
+INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadSetServerRegion);
 #else
-void sceLibUpdateDL_B5DB018D(s32 arg0) {
+void sceUpdateDownloadSetServerRegion(s32 arg0) {
     func_0000191C(arg0 & 0xFF);
 }
 #endif
 
-void sceLibUpdateDL_F7E66CB4(void) {
+void sceUpdateDownloadSetUrl(void) {
     func_00000D70();
 }
 
-s32 sceLibUpdateDL_C1AF1076(void) {
+s32 sceUpdateDownloadSetVersion(void) {
     func_00000564();
     return 0;
 }
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/libupdown", sceLibUpdateDL_4F49C9C1);
+INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadAbort);
 #else
-s32 sceLibUpdateDL_4F49C9C1(void) {
+s32 sceUpdateDownloadAbort(void) {
     s32 var_a0;
 
     var_a0 = 0x805F0002;

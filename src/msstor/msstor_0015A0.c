@@ -16,11 +16,11 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001794);
 
 #if FW_VERSION < 201
 void func_000013E0(s32 *arg0, s32 arg1) {
-    func_000077C4(sceMScm_driver_BE455B5D(*arg0, arg1, 8, -1));
+    func_000077C4(sceMScmReadDataPIO(*arg0, arg1, 8, -1));
 }
 
 void func_0000140C(s32 *arg0, s32 arg1, s32 arg2) {
-    func_000077C4(sceMScm_driver_BE455B5D(*arg0, arg2, arg1, -1));
+    func_000077C4(sceMScmReadDataPIO(*arg0, arg2, arg1, -1));
 }
 #endif
 
@@ -32,37 +32,37 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000047C8);
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000181C);
 
 void func_00001534(s32 *arg0, s32 arg1, s32 arg2) {
-    func_000077C4(sceMScm_driver_36921225(*arg0, arg2, arg1, -1));
+    func_000077C4(sceMScmTPCReadShortData(*arg0, arg2, arg1, -1));
 }
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001568);
 
 void func_00001590(s32 *arg0, s32 arg1) {
-    func_000077C4(sceMScm_driver_3FFE76E5(*arg0, arg1 & 0xFF, -1));
+    func_000077C4(sceMScmTPCSetCmdHelper(*arg0, arg1 & 0xFF, -1));
 }
 #else
 void func_000017BC(s32 *arg0, s32 arg1) {
-    func_000077C4(sceMScm_driver_BE455B5D(*arg0, arg1, 8, -1));
+    func_000077C4(sceMScmReadDataPIO(*arg0, arg1, 8, -1));
 }
 
 void func_000017E8(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    func_000077C4(sceMScm_driver_BE455B5D(*arg0, arg2, arg1, -1));
+    func_000077C4(sceMScmReadDataPIO(*arg0, arg2, arg1, -1));
 }
 
 void func_0000181C(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    func_000077C4(sceMScm_driver_CBB2BF6F(*arg0, arg2, arg1, -1));
+    func_000077C4(sceMScmReadMSRegHelper(*arg0, arg2, arg1, -1));
 }
 
 void func_00001850(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    func_000077C4(sceMScm_driver_36921225(*arg0, arg2, arg1, -1));
+    func_000077C4(sceMScmTPCReadShortData(*arg0, arg2, arg1, -1));
 }
 
 void func_00001884(s32 *arg0) {
-    func_000077C4(sceMScm_driver_AA67D87A(*arg0, 2));
+    func_000077C4(sceMScmResetHC(*arg0, 2));
 }
 
 void func_000018AC(s32 *arg0, s32 arg1) {
-    func_000077C4(sceMScm_driver_3FFE76E5(*arg0, arg1 & 0xFF, -1));
+    func_000077C4(sceMScmTPCSetCmdHelper(*arg0, arg1 & 0xFF, -1));
 }
 #endif
 
@@ -84,11 +84,11 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000019C8);
 
 #if FW_VERSION < 201
 void func_00001808(s32 *arg0, s32 arg1) {
-    func_000077C4(sceMScm_driver_21183216(*arg0, arg1, 8, -1));
+    func_000077C4(sceMScmWriteDataPIO(*arg0, arg1, 8, -1));
 }
 
 void func_00001834(s32 *arg0, s32 arg1, s32 arg2) {
-    func_000077C4(sceMScm_driver_21183216(*arg0, arg2, arg1, -1));
+    func_000077C4(sceMScmWriteDataPIO(*arg0, arg2, arg1, -1));
 }
 #endif
 
@@ -100,23 +100,23 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000048D4);
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001B88);
 
 void func_00001958(s32 *arg0, s32 arg1, s32 arg2) {
-    func_000077C4(sceMScm_driver_EF42A4A3(*arg0, arg2, arg1, -1));
+    func_000077C4(sceMScmTPCWriteShortData(*arg0, arg2, arg1, -1));
 }
 #else
 void func_00001B28(s32 *arg0, s32 arg1) {
-    func_000077C4(sceMScm_driver_21183216(*arg0, arg1, 8, -1));
+    func_000077C4(sceMScmWriteDataPIO(*arg0, arg1, 8, -1));
 }
 
 void func_00001B54(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    func_000077C4(sceMScm_driver_21183216(*arg0, arg2, arg1, -1));
+    func_000077C4(sceMScmWriteDataPIO(*arg0, arg2, arg1, -1));
 }
 
 void func_00001B88(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    func_000077C4(sceMScm_driver_6C8AEF0B(*arg0, arg2, arg1, -1));
+    func_000077C4(sceMScmWriteMSRegHelper(*arg0, arg2, arg1, -1));
 }
 
 void func_00001BBC(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    func_000077C4(sceMScm_driver_EF42A4A3(*arg0, arg2, arg1, -1));
+    func_000077C4(sceMScmTPCWriteShortData(*arg0, arg2, arg1, -1));
 }
 #endif
 
@@ -242,14 +242,14 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000048D4);
 #endif
 
 #if FW_VERSION < 201
-void sceMSstor_driver_6FC1E8AE(void) {
-    sceMSstor_driver_714782D6(0);
+void sceMSstorEntry(void) {
+    sceMSstorRegisterCLDMSelf(0);
 }
 
 s32 func_00004514(void) {
     s32 temp_s0;
 
-    temp_s0 = sceMScm_driver_12BD8FEC(0, &D_0000883C);
+    temp_s0 = sceMScmRegisterCLD(0, &D_0000883C);
     bzero(&D_00008AA4, 0x4E84);
     return temp_s0;
 }
@@ -266,14 +266,14 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000047C8);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000048D4);
 
-void sceMSstor_driver_6FC1E8AE(void) {
-    sceMSstor_driver_714782D6(0);
+void sceMSstorEntry(void) {
+    sceMSstorRegisterCLDMSelf(0);
 }
 
 s32 func_000049E4(void) {
     s32 temp_s1;
 
-    temp_s1 = sceMScm_driver_12BD8FEC(0, &D_000098DC);
+    temp_s1 = sceMScmRegisterCLD(0, &D_000098DC);
     bzero(&D_00009B54, 0x4E94);
     D_00009B54.unk4E88 = 0x1F4;
     func_000077A0(&D_00009B54, 1);
@@ -281,8 +281,8 @@ s32 func_000049E4(void) {
 }
 
 s32 func_00004A48(void) {
-    IoFileMgrForKernel_C7F35804(&D_00009264);
-    IoFileMgrForKernel_C7F35804(&D_00009248);
+    sceIoDelDrv(&D_00009264);
+    sceIoDelDrv(&D_00009248);
     return 0;
 }
 #endif

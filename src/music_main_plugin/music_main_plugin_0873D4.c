@@ -8,7 +8,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000873D4);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000873D4(M2C_UNK **arg0) {
     *arg0 = &D_000A20E0;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -103,7 +103,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00087474);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00087474(M2C_UNK **arg0) {
     *arg0 = &D_000A20D0;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -169,7 +169,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000878B0);
 void func_000878B0(s32 **arg0) {
     *arg0 = &D_000A20F8;
     func_00087454(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

@@ -137,7 +137,7 @@ void func_00003B64(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_FD4C9F47(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_00003F78(arg0, arg1, var_v0);
 }
@@ -151,7 +151,7 @@ void func_00003DF8(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_FD4C9F47(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_00003F78(arg0, arg1, var_v0);
 }
@@ -586,7 +586,7 @@ void func_00005C88(void) {
             temp_v0_2->unkC(0, &func_00005CE8, 0, 0);
         }
     }
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -718,7 +718,7 @@ void func_000062F0(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_CA79D58B(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_0000636C(arg0, arg1, var_v0);
 }
@@ -750,7 +750,7 @@ void func_00006584(void) {
             temp_v0_2->unkC(0, &func_000064F4, 0, 0);
         }
     }
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -844,7 +844,7 @@ void func_0000670C(void) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK), 0xC)(0, &func_0000669C, 0, 0);
         }
     }
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -860,7 +860,7 @@ void func_0000670C(void) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK), 0xC)(0, &func_0000669C, 0);
         }
     }
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -892,7 +892,7 @@ void func_00006974(void) {
             temp_v0_2->unkC(0, &func_000068E4, 0, 0);
         }
     }
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -940,7 +940,7 @@ void func_00006BF4(void) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK), 0xC)(0, &func_00006B7C, 0, 0);
         }
     }
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -956,7 +956,7 @@ void func_00006BF4(void) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK), 0xC)(0, &func_00006B7C, 0);
         }
     }
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -1196,12 +1196,12 @@ void func_0000664C(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_7EC15225(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 
 INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_000066A4);
@@ -1252,11 +1252,11 @@ void func_00007584(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = var_v0->unk4;
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_7EC15225(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 #endif

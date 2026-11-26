@@ -4,10 +4,10 @@
 #include "common.h"
 #include "pspnet_adhoc_download_decls.h"
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_13DAB550);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadCreateServer);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_2B6FB0DA);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStartServer);
 #endif
 
 #if FW_VERSION >= 350
@@ -48,12 +48,12 @@ INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003B14);
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003B20);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_F8FC359E);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadReplySession);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_D0189004);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadSend);
 
 #if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A70FDFBE);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadAbortSend);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -105,9 +105,9 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A2C);
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A21FEF45);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadInitServer);
 #else
-s32 sceNetAdhocDownload_A21FEF45(s32 arg0) {
+s32 sceNetAdhocDownloadInitServer(s32 arg0) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -123,39 +123,39 @@ s32 sceNetAdhocDownload_A21FEF45(s32 arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_2B6FB0DA);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStartServer);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_C421875C);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadAbortReplySession);
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A70FDFBE);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadAbortSend);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_F76147B1);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStopServer);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_7A483F9E);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadDeleteServer);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_117CA01A);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadTermServer);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_3082F4E2);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadInitClient);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_57A51DD0);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadCreateClient);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_314ED31E);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStartClient);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_22C2BCC6);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadGetServerList);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_4E6029F1);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadRequestSession);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_8846D2B0);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadRecv);
 
 #if FW_VERSION == 100 || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_469F6B83);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStopClient);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001950);
@@ -183,22 +183,22 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001D24);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001D68);
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_3082F4E2);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadInitClient);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_314ED31E);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStartClient);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_8A5500E0);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadAbortRequestSession);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_1AD5CC88);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadAbortRecv);
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_469F6B83);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStopClient);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_378D4311);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadDeleteClient);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_BF1433F0);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadTermClient);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_0000200C);
@@ -248,13 +248,13 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000022A8);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002300);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_3B6A7B35);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDistributeCreateServer);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_8A987F07);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDistributeStartServer);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_4C542FD1);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDistributeStopServer);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A45230D9);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDistributeDeleteServer);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_48F87AB1);
 
@@ -350,13 +350,13 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000022A4);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000022FC);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_3B6A7B35);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDistributeCreateServer);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_8A987F07);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDistributeStartServer);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_4C542FD1);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDistributeStopServer);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A45230D9);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDistributeDeleteServer);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_48F87AB1);
 
@@ -374,7 +374,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_0000330C);
 #endif
 
 #if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_48252AF0);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDistributeInitServer);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_827157E2);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDistributeTermServer);
 #endif

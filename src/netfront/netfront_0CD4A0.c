@@ -723,7 +723,7 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", inflateInit2_);
 #endif
 
 #if FW_VERSION >= 303
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_18CB51AB);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", inflateInit_);
 #endif
 
 #if FW_VERSION >= 311
@@ -964,9 +964,9 @@ INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012AF8C);
 
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B00C);
 
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_216D1BF1);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", inflate);
 
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_461C7724);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", inflateEnd);
 #endif
 
 #if FW_VERSION >= 311
@@ -1023,7 +1023,7 @@ INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B31C);
 
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B35C);
 
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_85C2B45D);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", uncompress);
 
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B3A4);
 
@@ -1255,9 +1255,9 @@ INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B458);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB6A4);
 
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_108703C2);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", jpeg_CreateDecompress);
 
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_09FA691C);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", jpeg_destroy_decompress);
 #endif
 
 void func_000DBD14(void) {
@@ -1269,7 +1269,7 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DBD30);
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB9E8);
 #else
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_26B067E3);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", jpeg_read_header);
 #endif
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC000);
@@ -1283,9 +1283,9 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DBC60);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DBD70);
 #else
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_20D27DB1);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", jpeg_finish_decompress);
 
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_1171FA01);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", jpeg_start_decompress);
 #endif
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC408);
@@ -1293,7 +1293,7 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC408);
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DBFD4);
 #else
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_F6376D31);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", jpeg_read_scanlines);
 #endif
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC61C);
@@ -1353,7 +1353,7 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DF168);
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DECCC);
 #else
-INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_AB30BEB4);
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", jpeg_resync_to_restart);
 #endif
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DF380);

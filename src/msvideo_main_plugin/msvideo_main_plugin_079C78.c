@@ -51,7 +51,7 @@ s32 func_0007A2B0(struct Unk_func_0007790C_0 *arg0, s32 *arg1) {
     if (temp_v0 == 0) {
         *arg1 = 0;
     } else {
-        *arg1 = scePaf_CA79D58B((s32 *) temp_v0) + 1;
+        *arg1 = sce_paf_private_strlen((s32 *) temp_v0) + 1;
     }
     return 0;
 }

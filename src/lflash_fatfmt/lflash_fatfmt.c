@@ -93,22 +93,22 @@ INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000008D0);
 
 #if FW_VERSION < 300
 s32 func_000008D0(void) {
-    KDebugForKernel_84F370BC("Usage: fatfmt [<option>]... <blkdev>\n");
-    KDebugForKernel_84F370BC("  <option>:\n");
-    KDebugForKernel_84F370BC("    -debug  display debug info\n");
-    KDebugForKernel_84F370BC("    -c <N>  sector/cluster\n");
-    KDebugForKernel_84F370BC("    -r <N>  reserved_sector\n");
-    KDebugForKernel_84F370BC("    -n <N>  number of fats\n");
-    KDebugForKernel_84F370BC("    -e <N>  rootdir entries\n");
-    KDebugForKernel_84F370BC("    -m <N>  media\n");
-    KDebugForKernel_84F370BC("    -u <N>  sector/track\n");
-    KDebugForKernel_84F370BC("    -h <N>  heads\n");
-    KDebugForKernel_84F370BC("    -o <N>  hiddens\n");
-    KDebugForKernel_84F370BC("    -I <N>  volume ID\n");
-    KDebugForKernel_84F370BC("    -L <S>  volume label\n");
-    KDebugForKernel_84F370BC("    -O <S>  OEM name\n");
-    KDebugForKernel_84F370BC("    -s <N>  file system size\n");
-    KDebugForKernel_84F370BC("    -[no]cluster_align     set/reset cluster alignment\n");
+    Kprintf("Usage: fatfmt [<option>]... <blkdev>\n");
+    Kprintf("  <option>:\n");
+    Kprintf("    -debug  display debug info\n");
+    Kprintf("    -c <N>  sector/cluster\n");
+    Kprintf("    -r <N>  reserved_sector\n");
+    Kprintf("    -n <N>  number of fats\n");
+    Kprintf("    -e <N>  rootdir entries\n");
+    Kprintf("    -m <N>  media\n");
+    Kprintf("    -u <N>  sector/track\n");
+    Kprintf("    -h <N>  heads\n");
+    Kprintf("    -o <N>  hiddens\n");
+    Kprintf("    -I <N>  volume ID\n");
+    Kprintf("    -L <S>  volume label\n");
+    Kprintf("    -O <S>  OEM name\n");
+    Kprintf("    -s <N>  file system size\n");
+    Kprintf("    -[no]cluster_align     set/reset cluster alignment\n");
     return 1;
 }
 #endif
@@ -119,7 +119,7 @@ INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000009A8);
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_0000131C);
 #endif
 
-void LflashFatfmt_B7A424A4(void) {
+void sceLflashFatfmtStartFatfmt(void) {
     func_000009A8();
 }
 

@@ -1,6 +1,6 @@
 {
  "funcs": {
-  "IoFileMgrForKernel_C7F35804": "M2C_UNK IoFileMgrForKernel_C7F35804(M2C_UNK *);",
+  "sceIoDelDrv": "M2C_UNK sceIoDelDrv(M2C_UNK *);",
   "bzero": "M2C_UNK bzero(M2C_UNK *, M2C_UNK);",
   "func_000001BC": "s32 func_000001BC(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);",
   "func_00000220": "s32 func_00000220(s32 arg0, M2C_UNK arg1, M2C_UNK arg2);",
@@ -66,17 +66,17 @@
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
   "sceKernelStartThread": "s32 sceKernelStartThread(s32, u32, void *);",
   "sceKernelTerminateDeleteThread": "s32 sceKernelTerminateDeleteThread(s32);",
-  "sceMScm_driver_12BD8FEC": "s32 sceMScm_driver_12BD8FEC(M2C_UNK, M2C_UNK *);",
-  "sceMScm_driver_21183216": "s32 sceMScm_driver_21183216(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
-  "sceMScm_driver_36921225": "s32 sceMScm_driver_36921225(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
-  "sceMScm_driver_3FFE76E5": "s32 sceMScm_driver_3FFE76E5(s32, s32, M2C_UNK);",
-  "sceMScm_driver_6C8AEF0B": "s32 sceMScm_driver_6C8AEF0B(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
-  "sceMScm_driver_AA67D87A": "s32 sceMScm_driver_AA67D87A(s32, M2C_UNK);",
-  "sceMScm_driver_BE455B5D": "s32 sceMScm_driver_BE455B5D(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
-  "sceMScm_driver_CBB2BF6F": "s32 sceMScm_driver_CBB2BF6F(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
-  "sceMScm_driver_EF42A4A3": "s32 sceMScm_driver_EF42A4A3(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
-  "sceMSstor_driver_6FC1E8AE": "void sceMSstor_driver_6FC1E8AE(void);",
-  "sceMSstor_driver_714782D6": "M2C_UNK sceMSstor_driver_714782D6(M2C_UNK);"
+  "sceMScmRegisterCLD": "s32 sceMScmRegisterCLD(M2C_UNK, M2C_UNK *);",
+  "sceMScmWriteDataPIO": "s32 sceMScmWriteDataPIO(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
+  "sceMScmTPCReadShortData": "s32 sceMScmTPCReadShortData(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
+  "sceMScmTPCSetCmdHelper": "s32 sceMScmTPCSetCmdHelper(s32, s32, M2C_UNK);",
+  "sceMScmWriteMSRegHelper": "s32 sceMScmWriteMSRegHelper(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
+  "sceMScmResetHC": "s32 sceMScmResetHC(s32, M2C_UNK);",
+  "sceMScmReadDataPIO": "s32 sceMScmReadDataPIO(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
+  "sceMScmReadMSRegHelper": "s32 sceMScmReadMSRegHelper(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
+  "sceMScmTPCWriteShortData": "s32 sceMScmTPCWriteShortData(s32, M2C_UNK, M2C_UNK, M2C_UNK);",
+  "sceMSstorEntry": "void sceMSstorEntry(void);",
+  "sceMSstorRegisterCLDMSelf": "M2C_UNK sceMSstorRegisterCLDMSelf(M2C_UNK);"
  },
  "types": {
   "D_000099D4_s": "struct D_000099D4_s {\n    s32 unk0;\n    u8 pad4[0x14];\n    s32 unk18;\n    u8 pad1C[0x8];\n    s32 unk24;\n    s32 unk28;\n};",

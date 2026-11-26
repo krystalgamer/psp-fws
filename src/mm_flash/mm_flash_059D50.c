@@ -44,7 +44,7 @@ void func_0005AF10(struct Unk_func_0005AF10_0 *arg0) {
         func_00090730(*func_0009F1C0(), temp_s1, 0);
     }
     arg0->unk8 = 0;
-    sceHVNetfront_Module_461C7724((u8 *)arg0 + 0x10);
+    inflateEnd((u8 *)arg0 + 0x10);
 }
 
 void func_0005AF64(struct Unk_func_0005AF64_0 *arg0) {
@@ -55,5 +55,5 @@ void func_0005AF64(struct Unk_func_0005AF64_0 *arg0) {
         func_00090730(*func_0009F1C0(), temp_s1, 0);
     }
     arg0->unk8 = 0;
-    sceHVNetfront_Module_461C7724((u8 *)arg0 + 0x10);
+    inflateEnd((u8 *)arg0 + 0x10);
 }

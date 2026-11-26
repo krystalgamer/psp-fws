@@ -1028,7 +1028,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin", func_00001CE8);
 
 #if FW_VERSION == 250
 void func_00001CE8(s32 arg0) {
-    if ((scePaf_66FE90D7(&D_00057130, arg0) == 0) && (&D_0005EEA0 != NULL)) {
+    if ((sce_paf_private_strcmp(&D_00057130, arg0) == 0) && (&D_0005EEA0 != NULL)) {
         M2C_FIELD(&D_0005EEA0, s8 *, 0x68C) = 0;
     }
 }

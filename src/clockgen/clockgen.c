@@ -3,11 +3,11 @@
 #include "clockgen_decls.h"
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_176833E1);
+INCLUDE_ASM("nonmatchings/clockgen", sceClockgenSetup);
 #else
 INCLUDE_RODATA("nonmatchings/clockgen", D_000007A8);
 
-INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_29160F5D);
+INCLUDE_ASM("nonmatchings/clockgen", sceClockgenInit);
 #endif
 
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_C9AF3102);
@@ -16,7 +16,7 @@ INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_C9AF3102);
 INCLUDE_ASM("nonmatchings/clockgen", module_start);
 #else
 s32 module_start(void) {
-    sceClockgen_driver_29160F5D();
+    sceClockgenInit();
     return 0;
 }
 #endif
@@ -29,19 +29,19 @@ s32 module_reboot_before(void) {
         sceKernelDeleteSema(D_00000930);
         D_00000930 = -1;
     }
-    sceSysEventForKernel_D7D3FDCD(&D_0000093C);
+    sceKernelUnregisterSysEventHandler(&D_0000093C);
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_29160F5D);
+INCLUDE_ASM("nonmatchings/clockgen", sceClockgenInit);
 #endif
 
-INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_36F9B49D);
+INCLUDE_ASM("nonmatchings/clockgen", sceClockgenEnd);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_C6D4C843);
+INCLUDE_ASM("nonmatchings/clockgen", sceClockgenSetProtocol);
 #endif
 
 #if FW_VERSION < 282
@@ -65,30 +65,30 @@ s32 func_0000041C(void) {
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_32C8CA86);
+INCLUDE_ASM("nonmatchings/clockgen", sceClockgenGetRevision);
 #else
-s32 sceClockgen_driver_32C8CA86(void) {
+s32 sceClockgenGetRevision(void) {
     return M2C_VFIELD(&D_00000930, u8, 4) & 0xFF;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_B9716D48);
+INCLUDE_ASM("nonmatchings/clockgen", sceClockgenGetRegValue);
 
-INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_4EB657D5);
+INCLUDE_ASM("nonmatchings/clockgen", sceClockgenAudioClkSetFreq);
 
-void sceClockgen_driver_5F8328FD(void) {
+void sceClockgenAudioClkEnable(void) {
     func_00000614(0x10, 1);
 }
 
-void sceClockgen_driver_B9FE99D1(void) {
+void sceClockgenAudioClkDisable(void) {
     func_00000614(0x10, 0);
 }
 
-void sceClockgen_driver_7FF82F6F(void) {
+void sceClockgenLeptonClkEnable(void) {
     func_00000614(8, 1);
 }
 
-void sceClockgen_driver_DBE5F283(void) {
+void sceClockgenLeptonClkDisable(void) {
     func_00000614(8, 0);
 }
 

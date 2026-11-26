@@ -1,5 +1,5 @@
 // NID-derived names
-LflashFatfmt_B7A424A4 = 0x00001190; // type:func
+sceLflashFatfmtStartFatfmt = 0x00001190; // type:func
 module_start = 0x000011AC; // type:func
 sceKernelCpuSuspendIntr = 0x000011B4; // type:func
 sceKernelCpuResumeIntr = 0x000011BC; // type:func

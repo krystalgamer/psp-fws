@@ -55,7 +55,7 @@ extern struct D_00006B80_s D_00006B80;
 extern M2C_UNK D_00006CA0;
 extern s32 D_00006DE0;
 
-M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
+M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, s32);
 s32 func_00000000(s32);
 s32 func_00000194(M2C_UNK);
 s32 func_00000234(s32 arg0, M2C_UNK arg1);
@@ -75,15 +75,15 @@ s32 module_stop(void);
 s32 sceKernelDeleteSema(s32);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
-s32 sceMSAudio_driver_135F2225(u32 arg0);
-M2C_UNK sceMSAudio_driver_3872FBE5();
-s32 sceMSAudio_driver_67E58C07(void);
-s32 sceMSAudio_driver_DA34AB8F(void);
-s32 sceMSAudio_driver_E8B25D38(void);
-s32 sceMgr_driver_02F7AB01(s32, s32, s32);
-M2C_UNK sceMgr_driver_1B8F3192(s32);
-s32 sceMgr_driver_6B908200(s32, s32, M2C_UNK, s32, s32);
-s32 sceMgr_driver_C408E3C0(s32, M2C_UNK *, M2C_UNK *, s32);
-s32 sceMgr_driver_F30E22CF(M2C_UNK);
+s32 sceMSAudioEndTrack(u32 arg0);
+M2C_UNK sceMSAudioEnd();
+s32 sceMSAudioEndFringe(void);
+s32 sceMSAudioGetMediaType(void);
+s32 sceMSAudioCalculateICVn(void);
+s32 sceMgrDecryptKc(s32, s32, s32);
+M2C_UNK sceMgrFreeKeyReg(s32);
+s32 sceMgrGenerateMACWithKbCBC(s32, s32, M2C_UNK, s32, s32);
+s32 sceMgrGenerateKb(s32, M2C_UNK *, M2C_UNK *, s32);
+s32 sceMgrAllocKeyReg(M2C_UNK);
 
 #endif

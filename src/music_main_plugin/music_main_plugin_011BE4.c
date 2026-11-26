@@ -108,6 +108,6 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_00015DCC);
 INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_00011C5C);
 #else
 s32 func_00011C5C(void) {
-    return scePaf_75062BCF() != 0;
+    return Job_isCanceled() != 0;
 }
 #endif

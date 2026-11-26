@@ -308,7 +308,7 @@ void func_0000044C(void) {
 
 #if FW_VERSION >= 260 && FW_VERSION < 350
 void func_0000044C(void) {
-    scePaf_66FE90D7();
+    sce_paf_private_strcmp();
 }
 #endif
 
@@ -329,11 +329,11 @@ void func_000003E4(void) {
     if (D_00019840 != 0) {
 
     } else {
-        temp_v0 = scePaf_D4FAE7D0(M2C_FIELD(D_0000F140, s32 *, 0x10));
+        temp_v0 = _ZN3paf4View4FindEPKc(M2C_FIELD(D_0000F140, s32 *, 0x10));
         if (temp_v0 != NULL) {
-            scePaf_5EBC648F(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1D8));
+            _ZN3paf4View12PageActivateEPv(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1D8));
         }
-        scePaf_1A45C860((void *) D_0000F140, 0);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE((void *) D_0000F140, 0);
     }
 }
 #endif
@@ -345,11 +345,11 @@ void func_000003E4(void) {
     if (D_00019840 != 0) {
 
     } else {
-        temp_v0 = scePaf_D4FAE7D0(M2C_FIELD(D_0000F140, s32 *, 0x10));
+        temp_v0 = _ZN3paf4View4FindEPKc(M2C_FIELD(D_0000F140, s32 *, 0x10));
         if (temp_v0 != NULL) {
-            scePaf_5EBC648F(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1D0));
+            _ZN3paf4View12PageActivateEPv(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1D0));
         }
-        scePaf_1A45C860((void *) D_0000F140, 0);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE((void *) D_0000F140, 0);
     }
 }
 #endif
@@ -361,11 +361,11 @@ void func_000003E4(void) {
     if (D_00015F9C != 0) {
 
     } else {
-        temp_v0 = scePaf_D4FAE7D0(M2C_FIELD(D_0000F140, s32 *, 0x10));
+        temp_v0 = _ZN3paf4View4FindEPKc(M2C_FIELD(D_0000F140, s32 *, 0x10));
         if (temp_v0 != NULL) {
-            scePaf_5EBC648F(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1CC));
+            _ZN3paf4View12PageActivateEPv(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1CC));
         }
-        scePaf_1A45C860((void *) D_0000F140, 0);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE((void *) D_0000F140, 0);
     }
 }
 #endif
@@ -377,11 +377,11 @@ void func_000003E4(void) {
     if (D_0000F164 != 0) {
 
     } else {
-        temp_v0 = scePaf_D4FAE7D0(M2C_FIELD(D_0000F140, s32 *, 0x10));
+        temp_v0 = _ZN3paf4View4FindEPKc(M2C_FIELD(D_0000F140, s32 *, 0x10));
         if (temp_v0 != NULL) {
-            scePaf_5EBC648F(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1C8));
+            _ZN3paf4View12PageActivateEPv(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1C8));
         }
-        scePaf_1A45C860((void *) D_0000F140, 0);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE((void *) D_0000F140, 0);
     }
 }
 #endif
@@ -410,7 +410,7 @@ void func_00000468(s32 arg0) {
     } else {
         func_00004C20();
         if (arg0 != 0) {
-            scePaf_F47CA1C2(arg0, 0x10001, &func_0000085C, 0);
+            _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, &func_0000085C, 0);
         }
     }
 }
@@ -1653,16 +1653,16 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00005BC4);
 s32 func_000048D8(void) {
     s32 temp_v0;
 
-    scePaf_F609FA81(D_0000F140, &D_000118CC, 1, 0);
-    scePaf_F609FA81(D_0000F140, &D_00011ABC, 0, 0);
-    scePaf_F609FA81(D_0000F140, &D_00011AC4, 0, 0);
-    scePaf_F609FA81(D_0000F140, &D_00011AD0, 0, 0);
-    scePaf_CAF05F1D(D_0000F140, &D_000118CC);
+    _ZN3paf4View8PageOpenEPKcii(D_0000F140, &D_000118CC, 1, 0);
+    _ZN3paf4View8PageOpenEPKcii(D_0000F140, &D_00011ABC, 0, 0);
+    _ZN3paf4View8PageOpenEPKcii(D_0000F140, &D_00011AC4, 0, 0);
+    _ZN3paf4View8PageOpenEPKcii(D_0000F140, &D_00011AD0, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_0000F140, &D_000118CC);
     func_000047B8();
     func_000064F0();
-    D_0001CBE0 = sceVshCommonGui_A0DE7090(0);
-    D_0001CBE4 = sceVshCommonGui_441D55D7(0);
-    temp_v0 = sceVshCommonGui_EEB86F0E(0);
+    D_0001CBE0 = _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+    D_0001CBE4 = _ZN3vsh25ShowButtonNavigation_BackEb(0);
+    temp_v0 = _ZN3vsh27ShowButtonNavigation_OptionEb(0);
     D_0001CBE8 = temp_v0;
     return temp_v0;
 }
@@ -1677,11 +1677,11 @@ void func_00005E8C(void) {
     if (D_0001CAB0 != 0) {
 
     } else {
-        temp_v0 = scePaf_D4FAE7D0(M2C_FIELD(D_0000F140, s32 *, 0x10));
+        temp_v0 = _ZN3paf4View4FindEPKc(M2C_FIELD(D_0000F140, s32 *, 0x10));
         if (temp_v0 != NULL) {
-            scePaf_5EBC648F(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1B8));
+            _ZN3paf4View12PageActivateEPv(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1B8));
         }
-        scePaf_1A45C860((void *) D_0000F140, 0);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE((void *) D_0000F140, 0);
     }
 }
 
@@ -1761,7 +1761,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00006C44);
 
 void func_00006D10(M2C_UNK **arg0) {
     *arg0 = &D_00010920;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00006B78);
@@ -1938,11 +1938,11 @@ void func_00006344(void) {
     if (D_0001D590 != 0) {
 
     } else {
-        temp_v0 = scePaf_D4FAE7D0(D_0001D580->unk10);
+        temp_v0 = _ZN3paf4View4FindEPKc(D_0001D580->unk10);
         if (temp_v0 != NULL) {
-            scePaf_5EBC648F(temp_v0, temp_v0->unk1B8);
+            _ZN3paf4View12PageActivateEPv(temp_v0, temp_v0->unk1B8);
         }
-        scePaf_1A45C860(D_0001D580, 0);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE(D_0001D580, 0);
     }
 }
 #endif
@@ -2023,7 +2023,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_000071C8);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000071C8(M2C_UNK **arg0) {
     *arg0 = &D_00012220;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -2111,7 +2111,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00001EA8);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00001F14);
 
 void func_00001B34(void) {
-    scePaf_66FE90D7();
+    sce_paf_private_strcmp();
 }
 #endif
 
@@ -2227,7 +2227,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000192C);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00001988);
 
 void func_00001B34(void) {
-    scePaf_66FE90D7();
+    sce_paf_private_strcmp();
 }
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00001B50);
@@ -2338,8 +2338,8 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00004998);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00004998(void) {
     D_00015FA8 = 0;
-    scePaf_3481F595(D_0000F140, &D_000120FC);
-    scePaf_D24E4016(scePaf_962FA087(), 6, D_000160EC);
+    _ZN3paf4View9PageCloseEPKc(D_0000F140, &D_000120FC);
+    _ZN3paf9PhSRender8SetStyleEii(_ZN3paf8PhAppear12ShadowRenderEv(), 6, D_000160EC);
     if (D_00015F9C != 0) {
 
     } else {
@@ -2362,18 +2362,18 @@ void func_00004A18(void) {
     temp_s0 = D_0000F144;
     if (temp_s0 != 0) {
         func_0000643C((void *) temp_s0);
-        scePaf_4E67BB08((void *) temp_s0);
+        _ZdlPv((void *) temp_s0);
         D_0000F144 = 0;
     }
     temp_s0_2 = D_0000F148;
     if (temp_s0_2 != NULL) {
         if (M2C_FIELD(temp_s0_2, u8 *, 0x11) != 0) {
-            scePaf_EAA5AFF6(M2C_FIELD(temp_s0_2, s32 *, 0x14), M2C_FIELD(temp_s0_2, s32 *, 0));
+            _ZN3paf9PhHandler11KillTimerCBEi(M2C_FIELD(temp_s0_2, s32 *, 0x14), M2C_FIELD(temp_s0_2, s32 *, 0));
         }
         if (M2C_FIELD(temp_s0_2, u8 *, 0x12) != 0) {
-            scePaf_EAA5AFF6(M2C_FIELD(temp_s0_2, s32 *, 0x14), M2C_FIELD(temp_s0_2, s32 *, 4));
+            _ZN3paf9PhHandler11KillTimerCBEi(M2C_FIELD(temp_s0_2, s32 *, 0x14), M2C_FIELD(temp_s0_2, s32 *, 4));
         }
-        scePaf_4E67BB08(temp_s0_2);
+        _ZdlPv(temp_s0_2);
         D_0000F148 = NULL;
     }
     func_00004998();
@@ -2417,7 +2417,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00004F50);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00004FB4);
 
 s32 func_00004FE8(s32 arg0, s32 arg1) {
-    return arg0 != M2C_FIELD(scePaf_3DD2A27B(arg1, &D_0000D384, 0x15, 0x14, func_00001B34), s8 *, 0x10);
+    return arg0 != M2C_FIELD(sce_paf_private_bsearch(arg1, &D_0000D384, 0x15, 0x14, func_00001B34), s8 *, 0x10);
 }
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000503C);
@@ -2501,7 +2501,7 @@ void func_0000772C(M2C_UNK **arg0) {
 
 void func_0000773C(M2C_UNK **arg0) {
     *arg0 = &D_00010920;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -2719,8 +2719,8 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_000077F0);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00007868);
 
 void func_000078E0(void) {
-    sceUtility_private_3CEAE1DF(0);
-    sceVshCommonUtil_249059B5();
+    sceUtilityDialogPowerLock(0);
+    RebootLock_Lock();
 }
 
 void func_00007904(void) {
@@ -2728,8 +2728,8 @@ void func_00007904(void) {
 }
 
 void func_00007920(void) {
-    sceVshCommonUtil_7683BE4D();
-    sceUtility_private_56BEDCA4(0);
+    RebootLock_Unlock();
+    sceUtilityDialogPowerUnlock(0);
 }
 
 void func_00007944(void) {
@@ -2759,7 +2759,7 @@ void func_0000643C(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 8);
     if (temp_v0 != 0) {
-        scePaf_4E67BB08(temp_v0);
+        _ZdlPv(temp_v0);
     }
     func_0000967C();
     scePaf_F93D4E1F(M2C_FIELD(arg0, s32 *, 0x420));
@@ -2781,8 +2781,8 @@ void func_00007FB0(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00007FB0(void) {
-    sceUtility_private_3CEAE1DF(0);
-    sceVshCommonUtil_249059B5();
+    sceUtilityDialogPowerLock(0);
+    RebootLock_Lock();
 }
 #endif
 
@@ -2801,8 +2801,8 @@ void func_00007FF0(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00007FF0(void) {
-    sceVshCommonUtil_7683BE4D();
-    sceUtility_private_56BEDCA4(0);
+    RebootLock_Unlock();
+    sceUtilityDialogPowerUnlock(0);
 }
 #endif
 
@@ -2950,13 +2950,13 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A064);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 void func_000079F0(void *arg0, s32 arg1) {
-    scePaf_D1EE972C(M2C_FIELD(arg0, s32 *, 0x41C), arg1, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
+    scePaf_D1EE972C(M2C_FIELD(arg0, s32 *, 0x41C), arg1, 0, _ZNK3paf6PhText13GetTextLengthEv(M2C_FIELD(arg0, s32 *, 0x41C)));
 }
 #endif
 
 #if FW_VERSION == 100
 void func_000079F0(void *arg0, s32 arg1) {
-    scePaf_D1EE972C(M2C_FIELD(arg0, s32 *, 0x418), arg1, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x418)));
+    scePaf_D1EE972C(M2C_FIELD(arg0, s32 *, 0x418), arg1, 0, _ZNK3paf6PhText13GetTextLengthEv(M2C_FIELD(arg0, s32 *, 0x418)));
 }
 #endif
 
@@ -2966,7 +2966,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000A164);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000A164(struct Unk_func_0000A164_0 *arg0, M2C_UNK arg1) {
-    scePaf_D1EE972C(arg0->unk41C, arg1, 0, scePaf_DC8B0309(arg0->unk41C));
+    scePaf_D1EE972C(arg0->unk41C, arg1, 0, _ZNK3paf6PhText13GetTextLengthEv(arg0->unk41C));
 }
 #endif
 
@@ -3129,10 +3129,10 @@ void func_0000AAE4(struct Unk_func_0000AAE4_0 *arg0) {
 
     } else {
         if (arg0->unk41C == 0) {
-            arg0->unk41C = scePaf_4708AED4(temp_a0, &D_00012230);
+            arg0->unk41C = _ZNK3paf4View10FindWidgetEPKc(temp_a0, &D_00012230);
         }
         if (arg0->unk410 == 0) {
-            arg0->unk410 = scePaf_4708AED4(arg0->unk418, &D_00012228);
+            arg0->unk410 = _ZNK3paf4View10FindWidgetEPKc(arg0->unk418, &D_00012228);
         }
         if ((arg0->unk41C != 0) && (arg0->unk410 != 0)) {
             if (arg0->unk470 == 1) {
@@ -3187,27 +3187,27 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00008408);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00008588(void *arg0) {
-    scePaf_AEEF2A7C(M2C_FIELD(arg0, s32 *, 0x41C), 0, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
-    scePaf_AEEF2A7C(M2C_FIELD(arg0, s32 *, 0x41C), 1, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
+    _ZN3paf6PhText10RemoveAttrENS_14PhTextAttrTypeEjj(M2C_FIELD(arg0, s32 *, 0x41C), 0, 0, _ZNK3paf6PhText13GetTextLengthEv(M2C_FIELD(arg0, s32 *, 0x41C)));
+    _ZN3paf6PhText10RemoveAttrENS_14PhTextAttrTypeEjj(M2C_FIELD(arg0, s32 *, 0x41C), 1, 0, _ZNK3paf6PhText13GetTextLengthEv(M2C_FIELD(arg0, s32 *, 0x41C)));
 }
 #endif
 
 #if FW_VERSION == 100
 void func_00008588(void *arg0) {
-    scePaf_AEEF2A7C(M2C_FIELD(arg0, s32 *, 0x418), 0, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x418)));
-    scePaf_AEEF2A7C(M2C_FIELD(arg0, s32 *, 0x418), 1, 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x418)));
+    _ZN3paf6PhText10RemoveAttrENS_14PhTextAttrTypeEjj(M2C_FIELD(arg0, s32 *, 0x418), 0, 0, _ZNK3paf6PhText13GetTextLengthEv(M2C_FIELD(arg0, s32 *, 0x418)));
+    _ZN3paf6PhText10RemoveAttrENS_14PhTextAttrTypeEjj(M2C_FIELD(arg0, s32 *, 0x418), 1, 0, _ZNK3paf6PhText13GetTextLengthEv(M2C_FIELD(arg0, s32 *, 0x418)));
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 void func_000085E0(void *arg0) {
-    scePaf_37DD37B8(M2C_FIELD(arg0, s32 *, 0x41C), 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x41C)));
+    _ZN3paf6PhText9EraseTextEjj(M2C_FIELD(arg0, s32 *, 0x41C), 0, _ZNK3paf6PhText13GetTextLengthEv(M2C_FIELD(arg0, s32 *, 0x41C)));
 }
 #endif
 
 #if FW_VERSION == 100
 void func_000085E0(void *arg0) {
-    scePaf_37DD37B8(M2C_FIELD(arg0, s32 *, 0x418), 0, scePaf_DC8B0309(M2C_FIELD(arg0, s32 *, 0x418)));
+    _ZN3paf6PhText9EraseTextEjj(M2C_FIELD(arg0, s32 *, 0x418), 0, _ZNK3paf6PhText13GetTextLengthEv(M2C_FIELD(arg0, s32 *, 0x418)));
 }
 #endif
 
@@ -3215,8 +3215,8 @@ void func_000085E0(void *arg0) {
 s32 func_00008618(void *arg0) {
     s32 temp_s1;
 
-    temp_s1 = scePaf_79F4AE65(M2C_FIELD(arg0, s32 *, 0x41C));
-    scePaf_B2ED6CAA(M2C_FIELD(arg0, s32 *, 0x41C));
+    temp_s1 = _ZN3paf6PhText13SetCurrentPosEj(M2C_FIELD(arg0, s32 *, 0x41C));
+    _ZN3paf6PhText13EnsureVisibleEv(M2C_FIELD(arg0, s32 *, 0x41C));
     return temp_s1;
 }
 #endif
@@ -3229,8 +3229,8 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000B024);
 s32 func_00008618(void *arg0) {
     s32 temp_s1;
 
-    temp_s1 = scePaf_79F4AE65(M2C_FIELD(arg0, s32 *, 0x418));
-    scePaf_B2ED6CAA(M2C_FIELD(arg0, s32 *, 0x418));
+    temp_s1 = _ZN3paf6PhText13SetCurrentPosEj(M2C_FIELD(arg0, s32 *, 0x418));
+    _ZN3paf6PhText13EnsureVisibleEv(M2C_FIELD(arg0, s32 *, 0x418));
     return temp_s1;
 }
 #endif
@@ -3252,8 +3252,8 @@ void func_0000AEF8(struct Unk_func_0000AEF8_0 *arg0) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000AEF8(struct Unk_func_0000AEF8_0 *arg0) {
-    scePaf_AEEF2A7C(arg0->unk41C, 0, 0, scePaf_DC8B0309(arg0->unk41C));
-    scePaf_AEEF2A7C(arg0->unk41C, 1, 0, scePaf_DC8B0309(arg0->unk41C));
+    _ZN3paf6PhText10RemoveAttrENS_14PhTextAttrTypeEjj(arg0->unk41C, 0, 0, _ZNK3paf6PhText13GetTextLengthEv(arg0->unk41C));
+    _ZN3paf6PhText10RemoveAttrENS_14PhTextAttrTypeEjj(arg0->unk41C, 1, 0, _ZNK3paf6PhText13GetTextLengthEv(arg0->unk41C));
 }
 #endif
 
@@ -3265,7 +3265,7 @@ void func_0000AF50(struct Unk_func_0000AF50_0 *arg0) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000AF50(struct Unk_func_0000AF50_0 *arg0) {
-    scePaf_37DD37B8(arg0->unk41C, 0, scePaf_DC8B0309(arg0->unk41C));
+    _ZN3paf6PhText9EraseTextEjj(arg0->unk41C, 0, _ZNK3paf6PhText13GetTextLengthEv(arg0->unk41C));
 }
 #endif
 
@@ -3277,8 +3277,8 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000AF88);
 s32 func_0000AF88(struct Unk_func_0000AF88_0 *arg0) {
     s32 temp_s1;
 
-    temp_s1 = scePaf_79F4AE65(arg0->unk41C);
-    scePaf_B2ED6CAA(arg0->unk41C);
+    temp_s1 = _ZN3paf6PhText13SetCurrentPosEj(arg0->unk41C);
+    _ZN3paf6PhText13EnsureVisibleEv(arg0->unk41C);
     return temp_s1;
 }
 #endif
@@ -3421,7 +3421,7 @@ s32 func_0000D318(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0);
     if (temp_v0 != 0) {
-        scePaf_545FE2DA(temp_v0);
+        sce_paf_private_free(temp_v0);
         M2C_FIELD(arg0, s32 *, 0) = 0;
     }
     M2C_FIELD(arg0, s16 *, 4) = 0;
@@ -3806,7 +3806,7 @@ s32 func_0000C710(struct Unk_func_0000C710_0 *arg0) {
 
     temp_v0 = arg0->unk0;
     if (temp_v0 != 0) {
-        scePaf_545FE2DA(temp_v0);
+        sce_paf_private_free(temp_v0);
         arg0->unk0 = 0;
     }
     arg0->unk4 = 0;

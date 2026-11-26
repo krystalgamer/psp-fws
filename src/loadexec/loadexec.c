@@ -260,19 +260,19 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002ED4);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_A3D5E142);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelExitVSHVSH);
 #endif
 
 #if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_6D302D3D);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelExitVSHKernel);
 
 s32 func_000017D8(void) {
-    return (KDebugForKernel_428A8DA3() != 0) ? 0 : 0x80020149;
+    return (sceKernelIsToolMode() != 0) ? 0 : 0x80020149;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_4D5C75BE);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecFromHost);
 
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_2AC9954B);
 
@@ -296,31 +296,31 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00001B64);
 #endif
 
 #if FW_VERSION < 152
-void LoadExecForKernel_AC085B9E(s32 arg0, s32 arg1, s32 arg2) {
+void sceKernelLoadExecVSHFromHost(s32 arg0, s32 arg1, s32 arg2) {
     func_00001934(arg0, arg1, arg2, 0);
 }
 #endif
 
 #if FW_VERSION < 201
-void LoadExecForKernel_1B97BDB3(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHDisc(s32 arg0, s32 arg1) {
     func_00001934(0x120, arg0, arg1, 0x10000);
 }
 
-void LoadExecForKernel_821BE114(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHDiscUpdater(s32 arg0, s32 arg1) {
     func_00001934(0x121, arg0, arg1, 0x10000);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_7B7C47EF);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecVSHDiscDebug);
 #endif
 
 #if FW_VERSION == 152
-s32 LoadExecForKernel_7B7C47EF(s32 arg0, s32 arg1) {
+s32 sceKernelLoadExecVSHDiscDebug(s32 arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0x80020002;
-    if (KDebugForKernel_428A8DA3() != 0) {
+    if (sceKernelIsToolMode() != 0) {
         var_v1 = func_00001934(0x122, arg0, arg1, 0x10000);
     }
     return var_v1;
@@ -328,33 +328,33 @@ s32 LoadExecForKernel_7B7C47EF(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION == 100
-void LoadExecForKernel_015DA036(s32 arg0, s32 arg1, s32 arg2) {
+void sceKernelLoadExecBufferVSHUsbWlan(s32 arg0, s32 arg1, s32 arg2) {
     func_00001B64(0x130, arg0, arg1, arg2, 0x10000);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void LoadExecForKernel_015DA036(s32 arg0, s32 arg1, s32 arg2) {
+void sceKernelLoadExecBufferVSHUsbWlan(s32 arg0, s32 arg1, s32 arg2) {
     func_00001D6C(0x130, arg0, arg1, arg2, 0x10000);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_4F41E75E);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferVSHUsbWlanDebug);
 #endif
 
 #if FW_VERSION == 100
-s32 LoadExecForKernel_4F41E75E(s32 arg0, s32 arg1, s32 arg2) {
+s32 sceKernelLoadExecBufferVSHUsbWlanDebug(s32 arg0, s32 arg1, s32 arg2) {
     return func_00001B64(0x131, arg0, arg1, arg2, 0x10000);
 }
 #endif
 
 #if FW_VERSION == 152
-s32 LoadExecForKernel_4F41E75E(s32 arg0, s32 arg1, s32 arg2) {
+s32 sceKernelLoadExecBufferVSHUsbWlanDebug(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
     var_v1 = 0x80020002;
-    if (KDebugForKernel_428A8DA3() != 0) {
+    if (sceKernelIsToolMode() != 0) {
         var_v1 = func_00001D6C(0x131, arg0, arg1, arg2, 0x10000);
     }
     return var_v1;
@@ -362,45 +362,45 @@ s32 LoadExecForKernel_4F41E75E(s32 arg0, s32 arg1, s32 arg2) {
 #endif
 
 #if FW_VERSION < 201
-void LoadExecForKernel_31DF42BF(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHMs1(s32 arg0, s32 arg1) {
     func_00001934(0x140, arg0, arg1, 0x10000);
 }
 
-void LoadExecForKernel_28D0D249(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHMs2(s32 arg0, s32 arg1) {
     func_00001934(0x141, arg0, arg1, 0x10000);
 }
 
-void LoadExecForKernel_70901231(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHMs3(s32 arg0, s32 arg1) {
     func_00001934(0x142, arg0, arg1, 0x10000);
 }
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_A3D5E142);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelExitVSHVSH);
 #endif
 
 #if FW_VERSION == 100
-void LoadExecForKernel_62C459E1(s32 arg0, s32 arg1, s32 arg2) {
+void sceKernelLoadExecBufferVSHPlain(s32 arg0, s32 arg1, s32 arg2) {
     func_00001B64(0x100, arg0, arg1, arg2, 0x10000);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-void LoadExecForKernel_62C459E1(s32 arg0, s32 arg1, s32 arg2) {
+void sceKernelLoadExecBufferVSHPlain(s32 arg0, s32 arg1, s32 arg2) {
     func_00001D6C(0x100, arg0, arg1, arg2, 0x10000);
 }
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_918782E8);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferVSHFromHost);
 
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_BB28E9B7);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferPlain0);
 
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_71A1D738);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferPlain);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_4D5C75BE);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecFromHost);
 #endif
 
 #if FW_VERSION < 201
@@ -408,9 +408,9 @@ INCLUDE_ASM("nonmatchings/loadexec", sceKernelRegisterExitCallback);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_D9739B89);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelUnregisterExitCallback);
 
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_659188E1);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelCheckExitCallback);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
@@ -428,15 +428,15 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002E94);
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_6D302D3D);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelExitVSHKernel);
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_659188E1);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelCheckExitCallback);
 #endif
 
 #if FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_62A27008);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelInvokeExitCallback);
 #endif
 
 #if FW_VERSION >= 350
@@ -445,7 +445,7 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForUser_2AC9954B);
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
 s32 func_00001A98(void) {
-    return (KDebugForKernel_428A8DA3() != 0) ? 0 : 0x80020149;
+    return (sceKernelIsToolMode() != 0) ? 0 : 0x80020149;
 }
 #endif
 
@@ -462,19 +462,19 @@ s32 sceKernelExitGame(void) {
 #endif
 
 #if FW_VERSION >= 201
-void LoadExecForKernel_1B97BDB3(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHDisc(s32 arg0, s32 arg1) {
     func_00001FA8(0x120, arg0, arg1, 0x10000);
 }
 
-void LoadExecForKernel_821BE114(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHDiscUpdater(s32 arg0, s32 arg1) {
     func_00001FA8(0x121, arg0, arg1, 0x10000);
 }
 
-s32 LoadExecForKernel_7B7C47EF(s32 arg0, s32 arg1) {
+s32 sceKernelLoadExecVSHDiscDebug(s32 arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 0x80020002;
-    if (KDebugForKernel_428A8DA3() != 0) {
+    if (sceKernelIsToolMode() != 0) {
         var_v1 = func_00001FA8(0x122, arg0, arg1, 0x10000);
     }
     return var_v1;
@@ -488,45 +488,45 @@ void LoadExecForKernel_6D8D3A3A(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 201
-void LoadExecForKernel_015DA036(s32 arg0, s32 arg1, s32 arg2) {
+void sceKernelLoadExecBufferVSHUsbWlan(s32 arg0, s32 arg1, s32 arg2) {
     func_00002190(0x130, arg0, arg1, arg2, 0x10000);
 }
 
-s32 LoadExecForKernel_4F41E75E(s32 arg0, s32 arg1, s32 arg2) {
+s32 sceKernelLoadExecBufferVSHUsbWlanDebug(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
     var_v1 = 0x80020002;
-    if (KDebugForKernel_428A8DA3() != 0) {
+    if (sceKernelIsToolMode() != 0) {
         var_v1 = func_00002190(0x131, arg0, arg1, arg2, 0x10000);
     }
     return var_v1;
 }
 
-void LoadExecForKernel_31DF42BF(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHMs1(s32 arg0, s32 arg1) {
     func_00001FA8(0x140, arg0, arg1, 0x10000);
 }
 
-void LoadExecForKernel_28D0D249(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHMs2(s32 arg0, s32 arg1) {
     func_00001FA8(0x141, arg0, arg1, 0x10000);
 }
 
-void LoadExecForKernel_70901231(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHMs3(s32 arg0, s32 arg1) {
     func_00001FA8(0x142, arg0, arg1, 0x10000);
 }
 #endif
 
 #if FW_VERSION >= 300
-void LoadExecForKernel_061D9514(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHMs4(s32 arg0, s32 arg1) {
     func_00001FA8(0x143, arg0, arg1, 0x10000);
 }
 
-void LoadExecForKernel_B7AB08DA(s32 arg0, s32 arg1) {
+void sceKernelLoadExecVSHMs5(s32 arg0, s32 arg1) {
     func_00001FA8(0x144, arg0, arg1, 0x10000);
 }
 #endif
 
 #if FW_VERSION >= 250
-void LoadExecForKernel_6D302D3D(s32 arg0) {
+void sceKernelExitVSHKernel(s32 arg0) {
     func_00002288(0x200, arg0);
 }
 #endif
@@ -534,18 +534,18 @@ void LoadExecForKernel_6D302D3D(s32 arg0) {
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelRegisterExitCallback);
 
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_D9739B89);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelUnregisterExitCallback);
 #endif
 
 #if FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_62A27008);
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelInvokeExitCallback);
 #endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_11412288);
 #endif
 
-INCLUDE_ASM("nonmatchings/loadexec", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/loadexec", module_bootstart);
 
 #if FW_VERSION == 280 || FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/loadexec", D_00001F7C);
@@ -626,7 +626,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00002138);
 #endif
 
 #if FW_VERSION == 100
-void RebootForKernel_72E280A8(void) {
+void sceKernelReboot(void) {
 
 }
 #endif

@@ -4,9 +4,9 @@
   "sceVaudioChReserve": "s32 sceVaudioChReserve(s32 arg0, s32 arg1, s32 arg2);",
   "sceVaudioOutputBlocking": "s32 sceVaudioOutputBlocking(s32 arg0, void *arg1);",
   "sceVaudioSetEffectType": "s32 sceVaudioSetEffectType(s32 arg0, s32 arg1);",
-  "sceVaudio_driver_5A7435B7": "s32 sceVaudio_driver_5A7435B7(void);",
-  "sceVaudio_driver_72749E84": "s32 sceVaudio_driver_72749E84(void);",
-  "sceVaudio_driver_82EF2F9D": "M2C_UNK *sceVaudio_driver_82EF2F9D(s32 arg0);",
+  "sceVaudioInit": "s32 sceVaudioInit(void);",
+  "sceVaudioEnd": "s32 sceVaudioEnd(void);",
+  "sceVaudioGetEffectString": "M2C_UNK *sceVaudioGetEffectString(s32 arg0);",
   "sceVaudio_driver_DCC18F25": "s32 sceVaudio_driver_DCC18F25(void);"
  },
  "vars": {}

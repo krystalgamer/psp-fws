@@ -72,20 +72,20 @@ INCLUDE_ASM("nonmatchings/music_common", music_common_2A9EF938);
 
 #if FW_VERSION == 271
 void func_00000494(s32 arg0, s32 arg1) {
-    if (scePaf_FCFAA39F() != 0) {
+    if (sce_paf_private_wcscasecmp() != 0) {
 
     } else {
-        scePaf_2FDC80B3(arg0, arg1);
+        sce_paf_private_wcscmp(arg0, arg1);
     }
 }
 #endif
 
 #if FW_VERSION == 260
 void music_common_58BD2898(s32 arg0, s32 arg1) {
-    if (scePaf_FCFAA39F() != 0) {
+    if (sce_paf_private_wcscasecmp() != 0) {
 
     } else {
-        scePaf_2FDC80B3(arg0, arg1);
+        sce_paf_private_wcscmp(arg0, arg1);
     }
 }
 #endif
@@ -184,8 +184,8 @@ void music_common_AD4A8D7D(void *arg0, void *arg1) {
     temp_a0 = M2C_FIELD(arg0, s32 *, 4);
     if ((temp_a0 == 0) || (temp_v0 = M2C_FIELD(arg1, s32 *, 4), (temp_v0 == 0))) {
         func_00000324(M2C_FIELD(arg0, s32 *, 8), M2C_FIELD(arg1, s32 *, 8));
-    } else if (scePaf_ED2B47FA(temp_a0, temp_v0) == 0) {
-        scePaf_66FE90D7(M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg1, s32 *, 4));
+    } else if (sce_paf_private_strcasecmp(temp_a0, temp_v0) == 0) {
+        sce_paf_private_strcmp(M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg1, s32 *, 4));
     }
 }
 #endif
@@ -257,7 +257,7 @@ INCLUDE_ASM("nonmatchings/music_common", func_00001168);
 
 void func_00001178(M2C_UNK **arg0) {
     *arg0 = &D_0001C538;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -379,7 +379,7 @@ void music_common_F6EAB2FA(void) {
     s32 temp_v0;
 
     if (D_00016DFC == 0) {
-        temp_v0 = scePaf_B7E6052B(0x14);
+        temp_v0 = _Znwj(0x14);
         func_000033B4(temp_v0);
         D_00016DFC = temp_v0;
     }

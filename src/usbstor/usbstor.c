@@ -67,9 +67,9 @@ INCLUDE_RODATA("nonmatchings/usbstor", D_000025C8);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_DC1A5833);
+INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorSendData);
 
-INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_FC4D0080);
+INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorRecvData);
 #endif
 
 #if FW_VERSION >= 282
@@ -87,7 +87,7 @@ INCLUDE_RODATA("nonmatchings/usbstor", D_000026B8);
 INCLUDE_RODATA("nonmatchings/usbstor", D_000026E8);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_DC1A5833);
+INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorSendData);
 #else
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_489E6BF1);
 #endif
@@ -95,7 +95,7 @@ INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_489E6BF1);
 INCLUDE_RODATA("nonmatchings/usbstor", D_00002724);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_FC4D0080);
+INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorRecvData);
 
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_489E6BF1);
 #else
@@ -108,9 +108,9 @@ INCLUDE_RODATA("nonmatchings/usbstor", D_00002510);
 
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_2CAFEFF1);
 
-INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_50F99EAD);
+INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorGetString);
 
-INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_driver_60066CFE);
+INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorGetStatus);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/usbstor", func_000008FC);
@@ -181,9 +181,9 @@ INCLUDE_RODATA("nonmatchings/usbstor", D_00002990);
 INCLUDE_ASM("nonmatchings/usbstor", func_00001614);
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_EC57ED1D);
+INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorGetSubClass);
 
-INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_F03FCB48);
+INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorSetSubClass);
 #endif
 
 #if FW_VERSION >= 150
@@ -194,8 +194,8 @@ s32 module_start(void) {
 
     memset(&D_000029F0, 0, 0x194);
     var_v1 = 0;
-    if (sceUsbBus_driver_B1644BE7(&D_000029A8) < 0) {
-        KDebugForKernel_84F370BC("%serror - cannot register protocol driver\n", &D_00002724);
+    if (sceUsbbdRegister(&D_000029A8) < 0) {
+        Kprintf("%serror - cannot register protocol driver\n", &D_00002724);
         var_v1 = 1;
     }
     return var_v1;

@@ -78,7 +78,7 @@ s32 func_00011C14(s32 arg0) {
     s32 temp_s1;
 
     sceKernelWaitSema(D_0002CC00, 1, 0);
-    temp_s1 = sceMlnBridge_F9357984(arg0, 0);
+    temp_s1 = sceMlnBridgeSetDKS(arg0, 0);
     scePaf_3308156F((s32) &D_0002CC10, arg0, 0x10);
     sceKernelSignalSema(D_0002CC00, 1);
     return temp_s1;
@@ -94,7 +94,7 @@ s32 func_00011C8C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_s0;
 
     sceKernelWaitSema(D_0002CC00, 1, 0);
-    temp_s0 = sceMlnBridge_DE730A46(arg0, arg1, arg2, arg3);
+    temp_s0 = sceMlnBridgeAesCbcEncrypt(arg0, arg1, arg2, arg3);
     sceKernelSignalSema(D_0002CC00, 1);
     return temp_s0;
 }
@@ -109,7 +109,7 @@ s32 func_00011D14(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_s0;
 
     sceKernelWaitSema(D_0002CC00, 1, 0);
-    temp_s0 = sceMlnBridge_7770FC23(arg0, arg1, arg2, arg3);
+    temp_s0 = sceMlnBridgeAesCbcDecrypt(arg0, arg1, arg2, arg3);
     sceKernelSignalSema(D_0002CC00, 1);
     return temp_s0;
 }
@@ -124,9 +124,9 @@ s32 func_00011D9C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_s0;
 
     sceKernelWaitSema(D_0002CC00, 1, 0);
-    sceMlnBridge_F9357984(arg4, 0);
-    temp_s0 = sceMlnBridge_DE730A46(arg0, arg1, arg2, arg3);
-    sceMlnBridge_F9357984((s32) &D_0002CC10, 0);
+    sceMlnBridgeSetDKS(arg4, 0);
+    temp_s0 = sceMlnBridgeAesCbcEncrypt(arg0, arg1, arg2, arg3);
+    sceMlnBridgeSetDKS((s32) &D_0002CC10, 0);
     sceKernelSignalSema(D_0002CC00, 1);
     return temp_s0;
 }
@@ -220,8 +220,8 @@ void func_00013398(void) {
 
 #if FW_VERSION < 350
 void func_00013398(void) {
-    scePaf_D0AD10FF();
-    scePaf_7C2C2742();
+    _ZN3paf13PhApplication14FinishDispListEv();
+    _ZN3paf13PhApplication13StartDispListEv();
 }
 #endif
 
@@ -335,7 +335,7 @@ void func_00013AD4(s32 arg0) {
 
 #if FW_VERSION < 350
 void func_00013AD4(s32 arg0) {
-    scePaf_D24E4016(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
 }
 #endif
 
@@ -351,7 +351,7 @@ void func_00013AF0(s32 arg0) {
 
 #if FW_VERSION < 350
 void func_00013AF0(s32 arg0) {
-    scePaf_1F0E9712(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
 }
 #endif
 
@@ -367,7 +367,7 @@ void func_00013B0C(s32 arg0) {
 
 #if FW_VERSION < 350
 void func_00013B0C(s32 arg0) {
-    scePaf_0CFDBE2F(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
 }
 #endif
 
@@ -419,7 +419,7 @@ void func_00013D48(s32 arg0) {
 
 #if FW_VERSION < 350
 void func_00013D48(s32 arg0) {
-    scePaf_95948FB6(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
 }
 #endif
 
@@ -435,7 +435,7 @@ void func_00013D64(s32 arg0) {
 
 #if FW_VERSION < 350
 void func_00013D64(s32 arg0) {
-    scePaf_ED89C94B(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
 }
 #endif
 
@@ -451,7 +451,7 @@ void func_00013D80(s32 arg0) {
 
 #if FW_VERSION < 350
 void func_00013D80(s32 arg0) {
-    scePaf_BA433BEF(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
 }
 #endif
 
@@ -467,7 +467,7 @@ void func_00013D9C(s32 arg0) {
 
 #if FW_VERSION < 350
 void func_00013D9C(s32 arg0) {
-    scePaf_B7865607(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
 }
 #endif
 

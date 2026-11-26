@@ -103,7 +103,7 @@ void func_000759B0(void) {
 
 #if FW_VERSION >= 310 && FW_VERSION < 350
 void func_000759B0(void) {
-    scePaf_FCFAA39F();
+    sce_paf_private_wcscasecmp();
 }
 #endif
 

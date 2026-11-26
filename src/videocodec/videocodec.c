@@ -2,30 +2,30 @@
 #include "common.h"
 #include "videocodec_decls.h"
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_2D31F5B1);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecGetEDRAM);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_4F160BF4);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecReleaseEDRAM);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_C01EC829);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecOpen);
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_17099F0A);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecInit);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_DBA273FA);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecDecode);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_A2F0564E);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecStop);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_307E6E1C);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecDelete);
 #endif
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_745A7B7A);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecSetMemory);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_2F385E7F);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecScanHeader);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_26927D19);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecGetVersion);
 
 #if FW_VERSION < 201
-s32 sceVideocodec_driver_E76D65FE(void) {
+s32 sceVideocodecStartEntry(void) {
     return 0;
 }
 #endif
@@ -37,31 +37,31 @@ s32 module_stop(void) {
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_627B7D42);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecGetSEI);
 #endif
 
 #if FW_VERSION == 201
-s32 sceVideocodec_driver_E76D65FE(void) {
+s32 sceVideocodecStartEntry(void) {
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 150
-s32 sceVideocodec_driver_CB3312D1(void) {
-    sceMePower_driver_B6FE3E62(0);
-    sceMePower_driver_05B2C420(0);
+s32 sceVideocodecEndEntry(void) {
+    sceMePowerControlDmacplusClock(0);
+    sceMePowerControlAvcPower(0);
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_17099F0A);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecInit);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_DBA273FA);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecDecode);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_A2F0564E);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecStop);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodec_307E6E1C);
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecDelete);
 #endif
 
 INCLUDE_ASM("nonmatchings/videocodec", func_00000BB0);

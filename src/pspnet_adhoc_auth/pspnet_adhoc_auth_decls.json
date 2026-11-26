@@ -36,9 +36,9 @@
   "sceKernelSendMbx": "s32 sceKernelSendMbx(u32, void *);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
-  "sceMemab_driver_0C134D3F": "M2C_UNK sceMemab_driver_0C134D3F();",
-  "sceNetAdhocAuth_driver_2E6AA271": "s32 sceNetAdhocAuth_driver_2E6AA271(void);",
-  "sceNetAdhocAuth_driver_6074D8F1": "s32 sceNetAdhocAuth_driver_6074D8F1(void);",
+  "sceAdhocBBShutdown": "M2C_UNK sceAdhocBBShutdown();",
+  "_sce_pspnet_adhoc_prp_stop": "s32 _sce_pspnet_adhoc_prp_stop(void);",
+  "sceNetAdhocAuthTerm": "s32 sceNetAdhocAuthTerm(void);",
   "sceNetIfhandle_driver_773FC77C": "M2C_UNK sceNetIfhandle_driver_773FC77C();"
  },
  "types": {

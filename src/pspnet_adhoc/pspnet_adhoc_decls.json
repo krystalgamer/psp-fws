@@ -35,11 +35,11 @@
   "func_00007298": "s32 func_00007298(s32, s32, s32);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
-  "sceNetAdhoc_FA324B4E": "void sceNetAdhoc_FA324B4E(s32 arg0, s32 arg1);",
+  "sceNetAdhocGameModeUpdateReplica": "void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1);",
   "sceNetAdhoc_lib_62B875A8": "void sceNetAdhoc_lib_62B875A8(void);",
-  "sceNetAdhoc_lib_AF6DFB15": "void sceNetAdhoc_lib_AF6DFB15(s32 arg0, s32 arg1);",
+  "sceNetAdhocGameModeUpdateReplicaInternal": "void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1);",
   "sceNetAdhoc_lib_F9240FBA": "void sceNetAdhoc_lib_F9240FBA(void);",
-  "sceNet_lib_57CC57DA": "M2C_UNK sceNet_lib_57CC57DA(void *, M2C_UNK, M2C_UNK);"
+  "sceNetMemset": "M2C_UNK sceNetMemset(void *, M2C_UNK, M2C_UNK);"
  },
  "types": {
   "D_000079C0_s": "struct D_000079C0_s {\n    s32 unk0;\n    M2C_UNK * unk4;\n};",

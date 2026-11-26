@@ -33,7 +33,7 @@ s32 func_00000250(s32 arg0) {
 #endif
 
 #if FW_VERSION == 152
-s32 sceIsofs_driver_19F9734D(s32 arg0) {
+s32 sceIsofsGetFileSystem(s32 arg0) {
     s32 temp_v0;
     s32 var_a0;
 
@@ -49,7 +49,7 @@ s32 sceIsofs_driver_19F9734D(s32 arg0) {
 #endif
 
 #if FW_VERSION < 152
-s32 sceIsofs_driver_19F9734D(s32 arg0) {
+s32 sceIsofsGetFileSystem(s32 arg0) {
     s32 temp_v0;
     s32 var_a0;
 
@@ -65,7 +65,7 @@ s32 sceIsofs_driver_19F9734D(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
-s32 sceIsofs_driver_19F9734D(s32 arg0) {
+s32 sceIsofsGetFileSystem(s32 arg0) {
     s32 temp_v0;
     s32 var_a0;
 
@@ -178,7 +178,7 @@ s32 func_00000440(struct Unk_func_00000440_0 *arg0) {
     if (temp_v0 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("%sERROR: %s: sceKernelFreeHeapMemory(%x)\n", &D_00005F30, "sceIsofsLbTerm", temp_v0);
+        Kprintf("%sERROR: %s: sceKernelFreeHeapMemory(%x)\n", &D_00005F30, "sceIsofsLbTerm", temp_v0);
     }
     return temp_v0;
 }
@@ -265,7 +265,7 @@ s32 func_00000E6C(void) {
     func_00000D28();
     SysMemForKernel_7B749390(M2C_FIELD(temp_s0, s32 *, 0x20), D_00008A80);
     sceKernelDeleteFpl(M2C_FIELD(temp_s0, s32 *, 0x24));
-    SysMemForKernel_C9805775(D_00008A90);
+    sceKernelDeleteHeap(D_00008A90);
     return 0;
 }
 #endif
@@ -311,7 +311,7 @@ s32 func_000006EC(void) {
     func_00000620();
     temp_v0 = SysMemForKernel_7B749390(M2C_FIELD(temp_s0, s32 *, 0x1C), D_000067C4);
     if (temp_v0 != 0) {
-        KDebugForKernel_84F370BC(&D_00005FE0, &D_00005F98, "sceIsofsCacheTerm", temp_v0);
+        Kprintf(&D_00005FE0, &D_00005F98, "sceIsofsCacheTerm", temp_v0);
     }
     sceKernelDeleteFpl(M2C_FIELD(temp_s0, s32 *, 0x20));
     return 0;
@@ -327,7 +327,7 @@ s32 func_000006EC(void) {
     func_00000620();
     temp_v0 = SysMemForKernel_7B749390(M2C_FIELD(temp_s0, s32 *, 0x1C), D_000065C4);
     if (temp_v0 != 0) {
-        KDebugForKernel_84F370BC(&D_00005FE0, &D_00005F98, "sceIsofsCacheTerm", temp_v0);
+        Kprintf(&D_00005FE0, &D_00005F98, "sceIsofsCacheTerm", temp_v0);
     }
     sceKernelDeleteFpl(M2C_FIELD(temp_s0, s32 *, 0x20));
     return 0;
@@ -700,7 +700,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00004E3C);
 INCLUDE_ASM("nonmatchings/isofs", func_00004F08);
 
 void func_00004FC4(void) {
-    SysMemForKernel_C9805775(D_00009AC0);
+    sceKernelDeleteHeap(D_00009AC0);
 }
 
 s32 func_00004FE8(void) {
@@ -877,7 +877,7 @@ s32 func_00003BB4(struct Unk_func_00003BB4_0 *arg0) {
 
     var_v0 = 0x80010016;
     if (arg0 != NULL) {
-        temp_v0 = sceIsofs_driver_19F9734D(arg0->unk4);
+        temp_v0 = sceIsofsGetFileSystem(arg0->unk4);
         temp_v0_2 = sceKernelWaitSema(M2C_FIELD(temp_v0, s32 *, 0x58), 1, NULL);
         if (temp_v0_2 >= 0) {
             temp_s1 = arg0->unk10;
@@ -890,7 +890,7 @@ s32 func_00003BB4(struct Unk_func_00003BB4_0 *arg0) {
             sceKernelSignalSema(M2C_FIELD(temp_v0, s32 *, 0x58), 1);
             var_v0 = temp_v0_2;
         } else {
-            KDebugForKernel_84F370BC(&D_00006200, &D_00006224, "isofs_dclose", temp_v0_2);
+            Kprintf(&D_00006200, &D_00006224, "isofs_dclose", temp_v0_2);
             var_v0 = temp_v0_2;
         }
     }
@@ -908,7 +908,7 @@ s32 func_00003BB4(struct Unk_func_00003BB4_0 *arg0) {
 
     var_v0 = 0x80010016;
     if (arg0 != NULL) {
-        temp_v0 = sceIsofs_driver_19F9734D(arg0->unk4);
+        temp_v0 = sceIsofsGetFileSystem(arg0->unk4);
         temp_v0_2 = sceKernelWaitSema(temp_v0->unk58, 1, NULL);
         if (temp_v0_2 >= 0) {
             temp_s1 = arg0->unk10;
@@ -921,7 +921,7 @@ s32 func_00003BB4(struct Unk_func_00003BB4_0 *arg0) {
             sceKernelSignalSema(temp_v0->unk58, 1);
             var_v0 = temp_v0_2;
         } else {
-            KDebugForKernel_84F370BC(&D_00006200, &D_00006224, "isofs_dclose", temp_v0_2);
+            Kprintf(&D_00006200, &D_00006224, "isofs_dclose", temp_v0_2);
             var_v0 = temp_v0_2;
         }
     }
@@ -1075,21 +1075,21 @@ INCLUDE_ASM("nonmatchings/isofs", func_00007FC0);
 
 #if FW_VERSION == 100
 s32 func_00007FC0(s32 arg0) {
-    D_00009C70 = sceUmd_BE17B77C(&func_000073FC, arg0);
+    D_00009C70 = sceUmdRegisterInsertEjectUMDCallBack(&func_000073FC, arg0);
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00007FF0(void) {
-    sceUmdMan_driver_4217E7F5(0);
+    sceUmdManUnRegisterInsertEjectUMDCallBack(0);
     return 0;
 }
 #endif
 
 #if FW_VERSION == 100
 s32 func_00007FF0(void) {
-    sceUmd_8EF268AC(D_00009C70);
+    sceUmdUnRegisterInsertEjectUMDCallBack(D_00009C70);
     return 0;
 }
 #endif
@@ -1162,7 +1162,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00005878);
 
 #if FW_VERSION >= 271
 s32 func_000054D4(s32 arg0) {
-    return __builtin_allegrex_min(sceUmdMan_driver_BF8AED79(0x20, &func_00004614, arg0), 0);
+    return __builtin_allegrex_min(sceUmdManRegisterInsertEjectUMDCallBack(0x20, &func_00004614, arg0), 0);
 }
 #endif
 
@@ -1175,10 +1175,10 @@ s32 func_00005970(s32 arg0) {
     s32 temp_s0;
     s32 var_v0;
 
-    temp_s0 = __builtin_allegrex_min(sceUmdMan_driver_BF8AED79(0x20, &func_000048CC, arg0), 0);
+    temp_s0 = __builtin_allegrex_min(sceUmdManRegisterInsertEjectUMDCallBack(0x20, &func_000048CC, arg0), 0);
     var_v0 = 0;
     if (temp_s0 != 0) {
-        KDebugForKernel_84F370BC("%sERROR: %s: sceIsofsIntrRegisterMediumCallBack(%x)\n", "isofs: ", "sceIsofsIntrInit", temp_s0);
+        Kprintf("%sERROR: %s: sceIsofsIntrRegisterMediumCallBack(%x)\n", "isofs: ", "sceIsofsIntrInit", temp_s0);
         var_v0 = temp_s0;
     }
     return var_v0;
@@ -1187,7 +1187,7 @@ s32 func_00005970(s32 arg0) {
 
 #if FW_VERSION >= 201
 s32 func_000059DC(void) {
-    sceUmdMan_driver_4217E7F5(0x20);
+    sceUmdManUnRegisterInsertEjectUMDCallBack(0x20);
     return 0;
 }
 #endif

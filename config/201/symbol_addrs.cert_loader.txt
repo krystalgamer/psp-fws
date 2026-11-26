@@ -1,12 +1,12 @@
 // NID-derived names
-sceCertLoader_DD629A24 = 0x00000000; // type:func
-sceCertLoader_driver_11391041 = 0x00000DA8; // type:func
-sceCertLoader_driver_E86A7DC1 = 0x00000DB0; // type:func
+sceLoadCertFromFlash = 0x00000000; // type:func
+sceLoadCertInit = 0x00000DA8; // type:func
+sceLoadCertEnd = 0x00000DB0; // type:func
 sceIoClose = 0x00000F1C; // type:func
 sceIoOpen = 0x00000F24; // type:func
 sceIoRead = 0x00000F2C; // type:func
 sceIoLseek = 0x00000F34; // type:func
-SysMemForKernel_FC114573 = 0x00000F3C; // type:func
+sceKernelGetCompiledSdkVersion = 0x00000F3C; // type:func
 // shared names (tools/add_version.py) begin
 func_00000D8C = 0x00000DB8; // type:func rom:0xE38
 // shared names (tools/add_version.py) end

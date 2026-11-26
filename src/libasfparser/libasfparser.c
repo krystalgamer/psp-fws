@@ -2,9 +2,9 @@
 #include "common.h"
 #include "libasfparser_decls.h"
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_91B11F3A);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfInitParser);
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_6B3AE857);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfSeekTime);
 
 #if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_C6D98C54);
@@ -81,20 +81,20 @@ s32 func_000001E0(s32 arg0, s32 arg1, s32 *arg2) {
 }
 #endif
 
-s32 sceAsfParser_B9E4BD9E(void) {
+s32 sceAsfParserStartEntry(void) {
     return 0;
 }
 
-s32 sceAsfParser_8B08301F(void) {
+s32 sceAsfParserEndEntry(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_95AD7B34);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfCheckNeedMem);
 
 #if FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_2CB147F7);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfGetFrameData);
 #else
-void sceAsfParser_2CB147F7(s32 arg0, s32 arg1, s32 arg2) {
+void sceAsfGetFrameData(s32 arg0, s32 arg1, s32 arg2) {
     void *sp0;
     if (func_000001E0(arg0, arg1, &sp0) >= 0) {
         func_00002124(arg0, sp0, arg2);
@@ -111,7 +111,7 @@ INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_320202AB);
 
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_6DA63281);
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_3CAAC462);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfReadData);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_0000058C);
 #endif

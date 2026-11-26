@@ -2,7 +2,7 @@
 #include "common.h"
 #include "libaudiocodec2_decls.h"
 
-s32 sceAudiocodec2_AA2ED267(struct Unk_sceAudiocodec2_AA2ED267_0 *arg0, s32 arg1) {
+s32 sceAudiocodec2CheckNeedMem(struct Unk_sceAudiocodec2_AA2ED267_0 *arg0, s32 arg1) {
     s32 var_v0;
     s32 var_v1;
 
@@ -20,9 +20,9 @@ s32 sceAudiocodec2_AA2ED267(struct Unk_sceAudiocodec2_AA2ED267_0 *arg0, s32 arg1
     return var_v0;
 }
 
-INCLUDE_ASM("nonmatchings/libaudiocodec2", sceAudiocodec2_E063D402);
+INCLUDE_ASM("nonmatchings/libaudiocodec2", sceAudiocodec2Init);
 
-INCLUDE_ASM("nonmatchings/libaudiocodec2", sceAudiocodec2_21D5A83F);
+INCLUDE_ASM("nonmatchings/libaudiocodec2", sceAudiocodec2Decode);
 
 s32 func_0000010C(struct Unk_func_0000010C_0 *arg0) {
     s32 temp_v0;

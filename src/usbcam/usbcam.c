@@ -194,7 +194,7 @@ INCLUDE_ASM("nonmatchings/usbcam", func_000013AC);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetupVideo);
 
-INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_CFE9E999);
+INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetupVideoEx);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamReadVideoFrame);
 #else
@@ -216,7 +216,7 @@ INCLUDE_RODATA("nonmatchings/usbcam", D_0000A414);
 #else
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetupVideo);
 
-INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_CFE9E999);
+INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetupVideoEx);
 #endif
 
 #if FW_VERSION == 282
@@ -253,7 +253,7 @@ INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamGetReadVideoFrameSize);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetupStill);
 
-INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_0A41A298);
+INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetupStillEx);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamStillInput);
 
@@ -299,10 +299,10 @@ INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamGetLensDirection);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamRegisterLensRotationCallback);
 
-INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_C72ED6D3);
+INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamEnterFwUpdateMode);
 
 #if FW_VERSION >= 282
-s32 sceUsbCam_driver_95F8901E(void) {
+s32 sceUsbCamGetFwUpdateResult(void) {
     s32 var_a1;
     u32 temp_a0;
 
@@ -378,7 +378,7 @@ s32 sceUsbCamGetBrightness(void *arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    temp_v0 = sceUsbCam_driver_1E958148(0x80000001, (s32) arg0);
+    temp_v0 = sceUsbCamIoctl(0x80000001, (s32) arg0);
     setK1(temp_s0);
     return temp_v0;
 }
@@ -388,7 +388,7 @@ INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetContrast);
 
 #if FW_VERSION < 300
 s32 sceUsbCamGetContrast(void *arg0) {
-    return sceUsbCam_driver_1E958148(0x80000002, (s32) arg0);
+    return sceUsbCamIoctl(0x80000002, (s32) arg0);
 }
 #endif
 
@@ -404,7 +404,7 @@ s32 sceUsbCamGetZoom(void *arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    temp_v0 = sceUsbCam_driver_1E958148(0x80000005, (s32) arg0);
+    temp_v0 = sceUsbCamIoctl(0x80000005, (s32) arg0);
     setK1(temp_s0);
     return temp_v0;
 }
@@ -422,7 +422,7 @@ s32 sceUsbCamGetEvLevel(void *arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    temp_v0 = sceUsbCam_driver_1E958148(0x80000014, (s32) arg0);
+    temp_v0 = sceUsbCamIoctl(0x80000014, (s32) arg0);
     setK1(temp_s0);
     return temp_v0;
 }
@@ -434,7 +434,7 @@ s32 sceUsbCamGetReverseMode(void *arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    temp_v0 = sceUsbCam_driver_1E958148(0x80000006, (s32) arg0);
+    temp_v0 = sceUsbCamIoctl(0x80000006, (s32) arg0);
     setK1(temp_s0);
     return temp_v0;
 }
@@ -444,11 +444,11 @@ INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetImageEffectMode);
 
 #if FW_VERSION < 300
 s32 sceUsbCamGetImageEffectMode(void *arg0) {
-    return sceUsbCam_driver_1E958148(0x80000007, (s32) arg0);
+    return sceUsbCamIoctl(0x80000007, (s32) arg0);
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_D865997B);
+INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetResolution);
 
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamAutoImageReverseSW);
 
@@ -459,7 +459,7 @@ s32 sceUsbCamGetAutoImageReverseState(void) {
 INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamUnregisterLensRotationCallback);
 
 #if FW_VERSION < 282
-s32 sceUsbCam_driver_95F8901E(void) {
+s32 sceUsbCamGetFwUpdateResult(void) {
     s32 var_a1;
     u32 temp_a0;
 
@@ -490,7 +490,7 @@ void func_000039F0(struct Unk_func_000039F0_0 *arg0) {
     if (temp_v1 >= 0) {
 
     } else {
-        KDebugForKernel_84F370BC("%sInterrupt IN Cmd. ret->status = %d\n", &D_0000A658, temp_v1);
+        Kprintf("%sInterrupt IN Cmd. ret->status = %d\n", &D_0000A658, temp_v1);
     }
     sceKernelSignalSema(D_0000BDB8, 1);
 }
@@ -554,7 +554,7 @@ INCLUDE_ASM("nonmatchings/usbcam", func_000057A0);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000B2E4);
 
-INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_1E958148);
+INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamIoctl);
 
 INCLUDE_ASM("nonmatchings/usbcam", func_00005D68);
 
@@ -660,7 +660,7 @@ INCLUDE_ASM("nonmatchings/usbcam", func_00007744);
 INCLUDE_ASM("nonmatchings/usbcam", func_00007934);
 #endif
 
-INCLUDE_ASM("nonmatchings/usbcam", sceUsbCam_driver_2E930264);
+INCLUDE_ASM("nonmatchings/usbcam", sceUsbCamSetupMicEx);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000B300);
 
@@ -739,10 +739,10 @@ s32 func_00008E1C(void) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = sceUsbBus_driver_C1E2A540(&D_0000B314);
+    temp_v0 = sceUsbbdUnregister(&D_0000B314);
     var_v1 = 0;
     if (temp_v0 < 0) {
-        KDebugForKernel_84F370BC("%serror - cannot unregister : 0x%08x\n", &D_0000B454, temp_v0);
+        Kprintf("%serror - cannot unregister : 0x%08x\n", &D_0000B454, temp_v0);
         var_v1 = 1;
     }
     return var_v1;
@@ -754,10 +754,10 @@ s32 func_00008E1C(void) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = sceUsbBus_driver_C1E2A540(&D_0000BF10);
+    temp_v0 = sceUsbbdUnregister(&D_0000BF10);
     var_v1 = 0;
     if (temp_v0 < 0) {
-        KDebugForKernel_84F370BC("%serror - cannot unregister : 0x%08x\n", &D_0000B454, temp_v0);
+        Kprintf("%serror - cannot unregister : 0x%08x\n", &D_0000B454, temp_v0);
         var_v1 = 1;
     }
     return var_v1;
@@ -769,10 +769,10 @@ s32 func_00008E1C(void) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = sceUsbBus_driver_C1E2A540(&D_0000BA80);
+    temp_v0 = sceUsbbdUnregister(&D_0000BA80);
     var_v1 = 0;
     if (temp_v0 < 0) {
-        KDebugForKernel_84F370BC("%serror - cannot unregister : 0x%08x\n", &D_0000B454, temp_v0);
+        Kprintf("%serror - cannot unregister : 0x%08x\n", &D_0000B454, temp_v0);
         var_v1 = 1;
     }
     return var_v1;

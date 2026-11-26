@@ -33,7 +33,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_000099FC);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_00009A48);
 
 s32 func_00009BEC(struct Unk_func_00009BEC_0 *arg0) {
-    sceNet_lib_57CC57DA((u8 *)arg0 + 0x24F4, 0, 0x2C);
+    sceNetMemset((u8 *)arg0 + 0x24F4, 0, 0x2C);
     arg0->unk2508 = 5;
     arg0->unk250C = 5;
     arg0->unk2510 = 3;
@@ -116,7 +116,7 @@ s32 func_0000A1F8(void) {
 }
 
 s32 func_0000A200(struct Unk_func_0000A200_0 *arg0) {
-    sceNet_lib_57CC57DA((u8 *)arg0 + 0x2520, 0, 0xBD8);
+    sceNetMemset((u8 *)arg0 + 0x2520, 0, 0xBD8);
     arg0->unk30EC = 5;
     return 0;
 }
@@ -136,7 +136,7 @@ s32 func_0000A354(struct Unk_func_0000A354_0 *arg0) {
     struct Unk_func_0000A354_temp_s1 *temp_s1;
 
     temp_s1 = (u8 *)arg0 + 0x2520;
-    sceNet_lib_EF097716((u8 *)arg0 + 0x2E, (u8 *)arg0 + 0x2B0C, temp_s1->unkBC8);
+    sceNetMemcpy((u8 *)arg0 + 0x2E, (u8 *)arg0 + 0x2B0C, temp_s1->unkBC8);
     func_00009098(arg0->unk18, (s32) ((u8 *)arg0 + 0x1C), (s32) ((u8 *)arg0 + 0x10), (s32) ((u8 *)arg0 + 0x2398), 1, 1, 0, (s32) (u16) temp_s1->unkBC8);
     temp_s1->unk8 = 0;
     return 0;
@@ -235,7 +235,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000A650);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000A74C);
 
 s32 func_0000A808(struct Unk_func_0000A808_0 *arg0) {
-    sceNet_lib_57CC57DA((u8 *)arg0 + 0x30F8, 0, 0x64C);
+    sceNetMemset((u8 *)arg0 + 0x30F8, 0, 0x64C);
     arg0->unk3108 = 0xA;
     func_0000B6A4((s32) arg0);
     return 0;
@@ -333,7 +333,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000B5B8);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000B6A4);
 
 void func_0000B720(void) {
-    sceNet_lib_57CC57DA(&D_000177A0, 0, 0x70);
+    sceNetMemset(&D_000177A0, 0, 0x70);
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000B748);

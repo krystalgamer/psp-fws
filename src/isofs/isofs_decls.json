@@ -1,8 +1,8 @@
 {
  "funcs": {
-  "KDebugForKernel_84F370BC": "M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);",
+  "Kprintf": "M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);",
   "SysMemForKernel_7B749390": "s32 SysMemForKernel_7B749390(s32, s32);",
-  "SysMemForKernel_C9805775": "M2C_UNK SysMemForKernel_C9805775(s32);",
+  "sceKernelDeleteHeap": "M2C_UNK sceKernelDeleteHeap(s32);",
   "func_00000250": "s32 func_00000250(s32 arg0);",
   "func_00000440": "s32 func_00000440(struct Unk_func_00000440_0 *arg0);",
   "func_00000494": "s32 func_00000494(void *arg0, s32 arg1);",
@@ -56,7 +56,7 @@
   "func_00007FC0": "s32 func_00007FC0(s32 arg0);",
   "func_00007FF0": "s32 func_00007FF0(void);",
   "sceIoDevctl": "s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);",
-  "sceIsofs_driver_19F9734D": "s32 sceIsofs_driver_19F9734D(s32 arg0);",
+  "sceIsofsGetFileSystem": "s32 sceIsofsGetFileSystem(s32 arg0);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelDeleteFpl": "s32 sceKernelDeleteFpl(s32);",
@@ -67,10 +67,10 @@
   "sceUmd9660_driver_44EF600C": "s32 sceUmd9660_driver_44EF600C();",
   "sceUmd9660_driver_C7CD9CE8": "s32 sceUmd9660_driver_C7CD9CE8();",
   "sceUmd9660_driver_DB1AC979": "M2C_UNK sceUmd9660_driver_DB1AC979(s32);",
-  "sceUmdMan_driver_4217E7F5": "M2C_UNK sceUmdMan_driver_4217E7F5(M2C_UNK);",
-  "sceUmdMan_driver_BF8AED79": "s32 sceUmdMan_driver_BF8AED79(M2C_UNK, M2C_UNK *, s32);",
-  "sceUmd_8EF268AC": "M2C_UNK sceUmd_8EF268AC(s32);",
-  "sceUmd_BE17B77C": "s32 sceUmd_BE17B77C(M2C_UNK *, s32);"
+  "sceUmdManUnRegisterInsertEjectUMDCallBack": "M2C_UNK sceUmdManUnRegisterInsertEjectUMDCallBack(M2C_UNK);",
+  "sceUmdManRegisterInsertEjectUMDCallBack": "s32 sceUmdManRegisterInsertEjectUMDCallBack(M2C_UNK, M2C_UNK *, s32);",
+  "sceUmdUnRegisterInsertEjectUMDCallBack": "M2C_UNK sceUmdUnRegisterInsertEjectUMDCallBack(s32);",
+  "sceUmdRegisterInsertEjectUMDCallBack": "s32 sceUmdRegisterInsertEjectUMDCallBack(M2C_UNK *, s32);"
  },
  "types": {
   "D_00007608_s": "struct D_00007608_s {\n    u8 pad0[0x1C];\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};",

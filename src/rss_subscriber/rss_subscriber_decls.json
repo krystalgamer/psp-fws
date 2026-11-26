@@ -28,15 +28,15 @@
   "memset": "M2C_UNK memset(void *, M2C_UNK, M2C_UNK);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelCreateSema": "s32 sceKernelCreateSema(void *, u32, s32, s32, void *);",
-  "scePaf_4E67BB08": "M2C_UNK scePaf_4E67BB08();",
+  "_ZdlPv": "M2C_UNK _ZdlPv();",
   "scePaf_5E4447F6": "s32 scePaf_5E4447F6(s32);",
   "scePaf_723D0C80": "s32 scePaf_723D0C80();",
-  "scePaf_75062BCF": "s32 scePaf_75062BCF();",
-  "scePaf_7EC15225": "M2C_UNK scePaf_7EC15225(void *);",
+  "Job_isCanceled": "s32 Job_isCanceled();",
+  "sce_paf_private_free2": "M2C_UNK sce_paf_private_free2(void *);",
   "scePaf_C1B0AA0D": "s32 scePaf_C1B0AA0D(s32);",
-  "scePaf_CA79D58B": "s32 scePaf_CA79D58B(s32);",
+  "sce_paf_private_strlen": "s32 sce_paf_private_strlen(s32);",
   "scePaf_F5001144": "M2C_UNK scePaf_F5001144(void *);",
-  "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);"
+  "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);"
  },
  "types": {
   "Unk_func_0000036C_0": "struct Unk_func_0000036C_0 {\n    M2C_UNK *unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n    s32 unk18;\n    u8 pad1C[0x4];\n    s32 unk20;\n    s32 unk24;\n    s32 unk28;\n    u8 pad2C[0x100];\n    s32 unk12C;\n    u8 pad130[0x304];\n    s32 unk434;\n    u8 pad438[0x400];\n    s32 unk838;\n    u8 pad83C[0x304];\n    s32 unkB40;\n    u8 padB44[0x100];\n    s32 unkC44;\n    s32 unkC48;\n};",

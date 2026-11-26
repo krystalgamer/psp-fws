@@ -1,14 +1,14 @@
 {
  "funcs": {
-  "StdioForKernel_11A5127A": "s32 StdioForKernel_11A5127A(s32, s32);",
-  "StdioForKernel_36B23B8B": "s32 StdioForKernel_36B23B8B(s32, s32);",
-  "StdioForKernel_4F78930A": "s32 StdioForKernel_4F78930A(s32, s32);",
-  "StdioForUser_0CBB0571": "s32 StdioForUser_0CBB0571(void);",
-  "StdioForUser_3054D478": "s32 StdioForUser_3054D478(void);",
-  "StdioForUser_924ABA61": "s32 StdioForUser_924ABA61(void);",
-  "StdioForUser_9D061C19": "s32 StdioForUser_9D061C19(void);",
-  "StdioForUser_A3B931DB": "s32 StdioForUser_A3B931DB(void);",
-  "StdioForUser_A46785C9": "void StdioForUser_A46785C9(void);",
+  "fdgets": "s32 fdgets(s32, s32);",
+  "fdputs": "s32 fdputs(s32, s32);",
+  "fdputc": "s32 fdputc(s32, s32);",
+  "sceKernelStdioLseek": "s32 sceKernelStdioLseek(void);",
+  "sceKernelStdioRead": "s32 sceKernelStdioRead(void);",
+  "sceKernelStdioOpen": "s32 sceKernelStdioOpen(void);",
+  "sceKernelStdioClose": "s32 sceKernelStdioClose(void);",
+  "sceKernelStdioWrite": "s32 sceKernelStdioWrite(void);",
+  "sceKernelStdioSendChar": "void sceKernelStdioSendChar(void);",
   "func_00000428": "s32 func_00000428(s32, s32);",
   "func_000006D0": "void func_000006D0(s32 arg0);",
   "func_000006EC": "s32 func_000006EC(void);",
@@ -35,7 +35,7 @@
   "sceKernelStderr": "s32 sceKernelStderr(void);",
   "sceKernelStdin": "s32 sceKernelStdin(void);",
   "sceKernelStdout": "s32 sceKernelStdout(void);",
-  "syslib_D3744BE0": "void syslib_D3744BE0(void);"
+  "module_bootstart": "void module_bootstart(void);"
  },
  "types": {
   "Unk_func_00000A28_0": "struct Unk_func_00000A28_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",

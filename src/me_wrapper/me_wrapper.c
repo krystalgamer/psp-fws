@@ -197,25 +197,25 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00000D84);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_4794C05C);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMeEnableFunctions);
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_05B2C420);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMePowerControlAvcPower);
 
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_B6FE3E62);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMePowerControlDmacplusClock);
 
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_55F11AF6);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMePowerSetCpuClockGear);
 
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_8EBBBBA3);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMePowerSetBusClockGear);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 300
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMePower_driver_579ACEA9);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMePowerSelectAvcClock);
 #endif
 
 #if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION >= 300
-void sceMePower_driver_579ACEA9(s32 arg0) {
+void sceMePowerSelectAvcClock(s32 arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
@@ -305,24 +305,24 @@ INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002A64);
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_63463F66);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapperInit);
 #else
-s32 sceMeWrapper_driver_63463F66(void) {
+s32 sceMeWrapperInit(void) {
     func_00001070();
-    sceSysEventForKernel_CD9E4BB5(&D_000019F0);
+    sceKernelRegisterSysEventHandler(&D_000019F0);
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C3A1D6B2);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapperEnd);
 #else
-s32 sceMeWrapper_driver_C3A1D6B2(void) {
-    sceSysreg_driver_D20581EA();
-    sceSysreg_driver_9BB70D34();
-    sceSysreg_driver_DE59DACB();
-    sceSysreg_driver_158AD4FC();
-    sceSysEventForKernel_D7D3FDCD(&D_000019F0);
+s32 sceMeWrapperEnd(void) {
+    sceSysregVmeResetEnable();
+    sceSysregAvcResetEnable();
+    sceSysregMeResetEnable();
+    sceSysregMeBusClockDisable();
+    sceKernelUnregisterSysEventHandler(&D_000019F0);
     return 0;
 }
 #endif
@@ -386,7 +386,7 @@ INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002048);
 #endif
 
 #if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_47DB48C2);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMeBootStart);
 #endif
 
 #if FW_VERSION >= 280
@@ -394,11 +394,11 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_0000210C);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMeCore_driver_4794C05C);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMeEnableFunctions);
 #endif
 
 #if FW_VERSION >= 271
-void sceMeCore_driver_4794C05C(s32 arg0) {
+void sceMeEnableFunctions(s32 arg0) {
     sceMeCore_driver_3D5F109C(0x185, arg0);
 }
 #endif

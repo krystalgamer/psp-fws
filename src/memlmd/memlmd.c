@@ -61,11 +61,11 @@ void memlmd_6A811217(s32 arg0, s32 arg1, s32 arg2) {
 #endif
 
 #if FW_VERSION < 250
-void memlmd_8BDB1A3E(s32 arg0, s32 arg1, s32 arg2) {
+void sceUtilsGetLoadModuleABLength(s32 arg0, s32 arg1, s32 arg2) {
     func_0000006C(arg0, arg1, arg2, 0);
 }
 
-void memlmd_185F0A2A(s32 arg0, s32 arg1, s32 arg2) {
+void sceUtilsGetLoadModuleABLengthByPolling(s32 arg0, s32 arg1, s32 arg2) {
     func_0000006C(arg0, arg1, arg2, 1);
 }
 #endif
@@ -77,9 +77,9 @@ INCLUDE_ASM("nonmatchings/memlmd", func_00000898);
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/memlmd", memlmd_C3A6F784);
+INCLUDE_ASM("nonmatchings/memlmd", sceUtilsPrepareGetLoadModuleABLength);
 
-INCLUDE_ASM("nonmatchings/memlmd", memlmd_DF76975E);
+INCLUDE_ASM("nonmatchings/memlmd", sceUtilsPrepareGetLoadModuleABLengthByPolling);
 #endif
 
 #if FW_VERSION == 352
@@ -138,13 +138,13 @@ INCLUDE_ASM("nonmatchings/memlmd", func_000015E8);
 
 INCLUDE_ASM("nonmatchings/memlmd", func_00001760);
 
-INCLUDE_ASM("nonmatchings/memlmd", semaphore_00EEC06A);
+INCLUDE_ASM("nonmatchings/memlmd", sceUtilsBufferCopy);
 
-INCLUDE_ASM("nonmatchings/memlmd", semaphore_8EEB7BF2);
+INCLUDE_ASM("nonmatchings/memlmd", sceUtilsBufferCopyByPolling);
 
-INCLUDE_ASM("nonmatchings/memlmd", semaphore_4C537C72);
+INCLUDE_ASM("nonmatchings/memlmd", sceUtilsBufferCopyWithRange);
 
-INCLUDE_ASM("nonmatchings/memlmd", semaphore_77E97079);
+INCLUDE_ASM("nonmatchings/memlmd", sceUtilsBufferCopyByPollingWithRange);
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/memlmd", memlmd_D1732BE4);

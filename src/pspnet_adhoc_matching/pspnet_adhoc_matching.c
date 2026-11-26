@@ -259,7 +259,7 @@ s32 func_00001AAC(void *arg0) {
     void *sp0;
     s32 temp_v0;
 
-    sceNet_lib_57CC57DA(&sp0, 0xFF, 6);
+    sceNetMemset(&sp0, 0xFF, 6);
     temp_v0 = sceNetAdhocPdpSend(M2C_FIELD(arg0, s32 *, 0x38), &sp0, (u32) M2C_FIELD(arg0, u16 *, 0x14), M2C_FIELD(arg0, void **, 0x4C), M2C_FIELD(arg0, s32 *, 0x48), 0U, 1);
     return ((temp_v0 ^ 0x80410709) == 0) ? 0 : temp_v0;
 }
@@ -295,7 +295,7 @@ s32 func_00002420(struct Unk_func_00002420_0 *arg0) {
     void *sp0;
     s32 temp_v0;
 
-    sceNet_lib_57CC57DA(&sp0, 0xFF, 6);
+    sceNetMemset(&sp0, 0xFF, 6);
     temp_v0 = sceNetAdhocPdpSend(arg0->unk38, &sp0, (u32) arg0->unk14, arg0->unk4C, arg0->unk48, 0U, 1);
     return ((temp_v0 ^ 0x80410709) == 0) ? 0 : temp_v0;
 }

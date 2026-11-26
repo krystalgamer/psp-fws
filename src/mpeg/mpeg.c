@@ -468,7 +468,7 @@ INCLUDE_ASM("nonmatchings/mpeg", func_00006F44);
 INCLUDE_ASM("nonmatchings/mpeg", func_00006F88);
 
 void func_00007108(void) {
-    sceVideocodec_4F160BF4(D_00008300);
+    sceVideocodecReleaseEDRAM(D_00008300);
 }
 
 s32 func_0000712C(s32 arg0) {
@@ -488,7 +488,7 @@ s32 func_0000718C(s32 arg0) {
     s32 temp_s1;
 
     func_00006D70(D_000084C0);
-    temp_s1 = sceVideocodec_DBA273FA(arg0, 0);
+    temp_s1 = sceVideocodecDecode(arg0, 0);
     func_00006E00(D_000084C0);
     return temp_s1;
 }
@@ -497,7 +497,7 @@ s32 func_000071E0(s32 arg0) {
     s32 temp_s1;
 
     func_00006D70(D_000084C0);
-    temp_s1 = sceVideocodec_A2F0564E(arg0, 0);
+    temp_s1 = sceVideocodecStop(arg0, 0);
     func_00006E00(D_000084C0);
     return temp_s1;
 }
@@ -510,7 +510,7 @@ s32 func_000072FC(struct Unk_func_000072FC_0 *arg0, s32 arg1) {
 
     func_00006D70(D_000084C0);
     arg0->unk54 = arg1;
-    temp_s1 = sceVideocodec_17CF7D2C(arg0, 0);
+    temp_s1 = sceVideocodecGetFrameCrop(arg0, 0);
     func_00006E00(D_000084C0);
     return temp_s1;
 }
@@ -538,7 +538,7 @@ void func_00007590(void) {
     if (D_00008400->unkC == 0) {
 
     } else {
-        sceAudiocodec_29681260(D_00008400);
+        sceAudiocodecReleaseEDRAM(D_00008400);
     }
 }
 
@@ -563,7 +563,7 @@ s32 func_00007648(s32 arg0) {
     s32 var_v0;
 
     func_00006D70(D_000084C4);
-    temp_v0 = sceAudiocodec_70A703F8(arg0, 0x1000);
+    temp_v0 = sceAudiocodecDecode(arg0, 0x1000);
     if (temp_v0 != 0) {
         func_00006E00(D_000084C4);
         var_v0 = temp_v0;

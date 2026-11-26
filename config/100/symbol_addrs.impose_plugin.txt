@@ -2,7 +2,7 @@
 module_start = 0x0000010C; // type:func
 module_stop = 0x0000013C; // type:func
 sceCtrlReadBufferPositive = 0x00000E04; // type:func
-scePaf_809A4F83 = 0x00000E0C; // type:func
+sce_paf_private_snprintf = 0x00000E0C; // type:func
 scePaf_EAA5AFF6 = 0x00000E14; // type:func
 scePaf_EF52945B = 0x00000E1C; // type:func
 scePaf_33096E46 = 0x00000E24; // type:func
@@ -18,8 +18,8 @@ scePaf_72129CFB = 0x00000E6C; // type:func
 scePaf_DAB59652 = 0x00000E74; // type:func
 scePaf_F609FA81 = 0x00000E7C; // type:func
 scePaf_97FDA760 = 0x00000E84; // type:func
-sceVshBridge_639C3CB3 = 0x00000E8C; // type:func
-sceVshBridge_5894C339 = 0x00000E94; // type:func
+vshImposeGetParam = 0x00000E8C; // type:func
+vshImposeChanges = 0x00000E94; // type:func
 // shared names (tools/add_version.py) begin
 D_00001364 = 0x00000FE8;
 D_00001370 = 0x00000FF4;

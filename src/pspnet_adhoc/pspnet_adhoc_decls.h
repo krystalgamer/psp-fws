@@ -134,10 +134,10 @@ s32 func_00006F68(void);
 s32 func_00007298(s32, s32, s32);
 s32 module_start(void);
 s32 module_stop(void);
-void sceNetAdhoc_FA324B4E(s32 arg0, s32 arg1);
+void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1);
 void sceNetAdhoc_lib_62B875A8(void);
-void sceNetAdhoc_lib_AF6DFB15(s32 arg0, s32 arg1);
+void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1);
 void sceNetAdhoc_lib_F9240FBA(void);
-M2C_UNK sceNet_lib_57CC57DA(void *, M2C_UNK, M2C_UNK);
+M2C_UNK sceNetMemset(void *, M2C_UNK, M2C_UNK);
 
 #endif

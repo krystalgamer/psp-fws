@@ -1,14 +1,14 @@
 #include "common.h"
 
-INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWispr_BD745B6D);
+INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWisprInit);
 
-INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWispr_BC05EC73);
+INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWisprTerm);
 
-INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWispr_19235F8C);
+INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWisprStart);
 
-INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWispr_757BDC9F);
+INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWisprStop);
 
-INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWispr_C856AAAC);
+INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWisprLogoffStart);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet_wispr", D_0000271C);

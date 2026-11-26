@@ -1,14 +1,14 @@
 // NID-derived names
-sceLibUpdateDL_F6690A9A = 0x000023E4; // type:func
-sceLibUpdateDL_FC1AB540 = 0x00002470; // type:func
-sceLibUpdateDL_D6A09757 = 0x0000251C; // type:func
-sceLibUpdateDL_FD675E8D = 0x000025A8; // type:func
-sceLibUpdateDL_FA9AA797 = 0x0000268C; // type:func
-sceLibUpdateDL_88FF3935 = 0x0000275C; // type:func
-sceLibUpdateDL_B5DB018D = 0x0000277C; // type:func
-sceLibUpdateDL_F7E66CB4 = 0x00002798; // type:func
-sceLibUpdateDL_C1AF1076 = 0x000027B4; // type:func
-sceLibUpdateDL_4F49C9C1 = 0x000027D4; // type:func
+sceUpdateDownloadInitEx = 0x000023E4; // type:func
+sceUpdateDownloadInit = 0x00002470; // type:func
+sceUpdateDownloadEnd = 0x0000251C; // type:func
+sceUpdateDownloadConnectServer = 0x000025A8; // type:func
+sceUpdateDownloadReadData = 0x0000268C; // type:func
+sceUpdateDownloadSetDestCode = 0x0000275C; // type:func
+sceUpdateDownloadSetServerRegion = 0x0000277C; // type:func
+sceUpdateDownloadSetUrl = 0x00002798; // type:func
+sceUpdateDownloadSetVersion = 0x000027B4; // type:func
+sceUpdateDownloadAbort = 0x000027D4; // type:func
 module_start = 0x00002960; // type:func
 module_stop = 0x00002968; // type:func
 sceKernelCreateVpl = 0x00002FDC; // type:func

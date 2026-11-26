@@ -45,12 +45,12 @@ s32 func_000145C8(struct Unk_func_000145C8_0 *arg0) {
     }
     temp_v0_2 = arg0->unk4;
     if (temp_v0_2 != 0) {
-        scePaf_B3D2C3BB(temp_v0_2);
+        _ZdaPv(temp_v0_2);
         arg0->unk4 = 0;
     }
     temp_v0_3 = arg0->unk8;
     if (temp_v0_3 != 0) {
-        scePaf_B3D2C3BB(temp_v0_3);
+        _ZdaPv(temp_v0_3);
         arg0->unk8 = 0;
     }
     return 0;

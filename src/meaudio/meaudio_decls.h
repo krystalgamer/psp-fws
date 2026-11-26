@@ -27,15 +27,15 @@ void sceAudioOutputPannedBlocking(void);
 void sceAudioPollInputEnd(void);
 void sceAudioSetChannelDataLen(void);
 void sceAudioWaitInputEnd(void);
-void sceAudio_38553111(void);
-void sceAudio_41EFADE7(void);
-void sceAudio_5C37C0AE(void);
-void sceAudio_E0727056(void);
-void sceAudio_E9D97901(void);
+void sceAudioSRCChReserve(void);
+void sceAudioOneshotOutput(void);
+void sceAudioSRCChRelease(void);
+void sceAudioSRCOutputBlocking(void);
+void sceAudioGetChannelRestLen(void);
 s32 sceKernelDelayThread(u32);
-void sceMeAudio_05115756(void);
-void sceMeAudio_5EDA8D33(void);
-M2C_UNK sceSysreg_driver_8BE2D520();
-s32 sceSysreg_driver_9FC87ED4();
+void sceMeAudioScUnlock(void);
+void sceMeAudioScLock(void);
+M2C_UNK sceSysregSemaUnlock();
+s32 sceSysregSemaTryLock();
 
 #endif

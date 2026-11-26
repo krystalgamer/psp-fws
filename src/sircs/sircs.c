@@ -6,10 +6,10 @@
 INCLUDE_ASM("nonmatchings/sircs", func_00000000);
 #endif
 
-INCLUDE_ASM("nonmatchings/sircs", sceSircs_driver_71EEF62D);
+INCLUDE_ASM("nonmatchings/sircs", sceSircsSend);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sircs", sceSircs_driver_83381633);
+INCLUDE_ASM("nonmatchings/sircs", sceSircsReceive);
 #else
 INCLUDE_ASM("nonmatchings/sircs", func_00000294);
 
@@ -38,7 +38,7 @@ s32 func_00000910(void) {
 INCLUDE_ASM("nonmatchings/sircs", module_start);
 
 s32 func_000009F4(void) {
-    InterruptManagerForKernel_F987B1F0(0xE);
+    sceKernelReleaseIntrHandler(0xE);
     sceKernelDeleteSema(D_00002770.unk1C);
     sceKernelDeleteEventFlag(D_00002770.unk20);
     func_00001AB0();
@@ -47,16 +47,16 @@ s32 func_000009F4(void) {
 }
 
 s32 module_reboot_before(void) {
-    sceGpio_driver_310F0CCF(4);
-    sceSysreg_driver_20388C9E();
-    sceSysreg_driver_26FA0928();
+    sceGpioPortSet(4);
+    sceSysregSircsClkDisable();
+    sceSysregSircsIoDisable();
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/sircs", sceSircs_driver_62411801);
+INCLUDE_ASM("nonmatchings/sircs", sceSircsInit);
 
-s32 sceSircs_driver_19155A2F(void) {
-    InterruptManagerForKernel_F987B1F0(0xE);
+s32 sceSircsEnd(void) {
+    sceKernelReleaseIntrHandler(0xE);
     sceKernelDeleteSema(D_00002770.unk1C);
     sceKernelDeleteEventFlag(D_00002770.unk20);
     func_00001AB0();
@@ -93,7 +93,7 @@ INCLUDE_ASM("nonmatchings/sircs", module_start);
 
 #if FW_VERSION == 271
 s32 func_00000634(void) {
-    InterruptManagerForKernel_F987B1F0(0xE);
+    sceKernelReleaseIntrHandler(0xE);
     sceKernelDeleteSema(M2C_VFIELD(&D_00002148, s32, 0x1C));
     sceKernelDeleteEventFlag(M2C_VFIELD(&D_00002148, s32, 0x20));
     func_00001AB0();
@@ -104,7 +104,7 @@ s32 func_00000634(void) {
 
 #if FW_VERSION >= 250 && FW_VERSION < 271
 s32 func_00000634(void) {
-    InterruptManagerForKernel_F987B1F0(0xE);
+    sceKernelReleaseIntrHandler(0xE);
     sceKernelDeleteSema(M2C_VFIELD(&D_00002148, s32, 0x10));
     sceKernelDeleteEventFlag(M2C_VFIELD(&D_00002148, s32, 0x14));
     func_00001AB0();
@@ -115,18 +115,18 @@ s32 func_00000634(void) {
 
 #if FW_VERSION < 282
 s32 module_reboot_before(void) {
-    sceGpio_driver_310F0CCF(4);
-    sceSysreg_driver_20388C9E();
-    sceSysreg_driver_26FA0928();
+    sceGpioPortSet(4);
+    sceSysregSircsClkDisable();
+    sceSysregSircsIoDisable();
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/sircs", sceSircs_driver_62411801);
+INCLUDE_ASM("nonmatchings/sircs", sceSircsInit);
 #endif
 
 #if FW_VERSION == 271
-s32 sceSircs_driver_19155A2F(void) {
-    InterruptManagerForKernel_F987B1F0(0xE);
+s32 sceSircsEnd(void) {
+    sceKernelReleaseIntrHandler(0xE);
     sceKernelDeleteSema(M2C_VFIELD(&D_00002148, s32, 0x1C));
     sceKernelDeleteEventFlag(M2C_VFIELD(&D_00002148, s32, 0x20));
     func_00001AB0();
@@ -136,8 +136,8 @@ s32 sceSircs_driver_19155A2F(void) {
 #endif
 
 #if FW_VERSION < 271
-s32 sceSircs_driver_19155A2F(void) {
-    InterruptManagerForKernel_F987B1F0(0xE);
+s32 sceSircsEnd(void) {
+    sceKernelReleaseIntrHandler(0xE);
     sceKernelDeleteSema(M2C_VFIELD(&D_00002148, s32, 0x10));
     sceKernelDeleteEventFlag(M2C_VFIELD(&D_00002148, s32, 0x14));
     func_00001AB0();
@@ -201,9 +201,9 @@ INCLUDE_ASM("nonmatchings/sircs", func_00001590);
 INCLUDE_ASM("nonmatchings/sircs", func_00001624);
 
 s32 func_00001718(void) {
-    sceSysreg_driver_BB823481(5);
-    sceSysreg_driver_7725CA08(5);
-    sceGpio_driver_310F0CCF(4);
+    sceSysregUartIoDisable(5);
+    sceSysregUartClkEnable(5);
+    sceGpioPortSet(4);
     return 0;
 }
 
@@ -361,7 +361,7 @@ void func_00001A80(s32 arg0) {
 }
 
 s32 func_00001A8C(void) {
-    IoFileMgrForKernel_8E982A74(&D_000026A8);
+    sceIoAddDrv(&D_000026A8);
     return 0;
 }
 #endif
@@ -373,7 +373,7 @@ INCLUDE_ASM("nonmatchings/sircs", func_00001AD8);
 #if FW_VERSION < 282
 s32 func_000014F8(void) {
     func_00001D5C();
-    sceSysEventForKernel_D7D3FDCD(&D_00002050);
+    sceKernelUnregisterSysEventHandler(&D_00002050);
     return 0;
 }
 
@@ -387,7 +387,7 @@ void func_00001540(void) {
 #else
 s32 func_00001B24(void) {
     func_00001D5C();
-    sceSysEventForKernel_D7D3FDCD(&D_000026E0);
+    sceKernelUnregisterSysEventHandler(&D_000026E0);
     return 0;
 }
 

@@ -9,11 +9,11 @@ INCLUDE_RODATA("nonmatchings/mpegbase", D_0000195C);
 #endif
 
 #if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_27A2982F);
+INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBaseInit);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-s32 sceMpegbase_driver_27A2982F(void) {
+s32 sceMpegBaseInit(void) {
     func_000014C0();
     func_00000C04();
     func_00001B98();
@@ -22,7 +22,7 @@ s32 sceMpegbase_driver_27A2982F(void) {
 #endif
 
 #if FW_VERSION == 100
-s32 sceMpegbase_driver_27A2982F(void) {
+s32 sceMpegBaseInit(void) {
     func_000014C0();
     func_00000C04();
     func_00001B98();
@@ -57,15 +57,15 @@ s32 module_stop(void) {
 #if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_AC9E717E);
 
-INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_492B5E4B);
+INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBaseCscInit);
 #endif
 
-INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_91929A21);
+INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBaseCscAvc);
 
-INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_CE8EB837);
+INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBaseCscVme);
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_304882E1);
+INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBaseCscAvcRange);
 #endif
 
 #if FW_VERSION < 250
@@ -109,7 +109,7 @@ INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_0530BE4E);
 #if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_AC9E717E);
 
-INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_492B5E4B);
+INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBaseCscInit);
 
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000B1C);
 #endif
@@ -150,7 +150,7 @@ INCLUDE_ASM("nonmatchings/mpegbase", func_00001130);
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000EA4);
 #endif
 
-INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_BEA18F91);
+INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBasePESpacketCopy);
 
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_000014C0);
@@ -188,10 +188,10 @@ void func_00001574(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_7AC0321A);
+INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBaseYCrCbCopy);
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_BE45C284);
+INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBaseYCrCbCopyVme);
 #endif
 
 #if FW_VERSION >= 250

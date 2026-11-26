@@ -36,12 +36,12 @@ void func_0003D464(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = var_v0->unk4;
-            scePaf_997D2809(var_v0);
+            _ZN8PSJSHeap12private_freeEPv(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_997D2809(var_a0);
+    _ZN8PSJSHeap12private_freeEPv(var_a0);
 }
 #endif
 
@@ -1659,7 +1659,7 @@ void func_0004663C(s32 arg0) {
 
 #if FW_VERSION >= 310 && FW_VERSION < 350
 s32 func_00044DC4(void) {
-    return M2C_FIELD(scePaf_5DFB5858(), s32 *, 0x9C);
+    return M2C_FIELD(_ZN3paf9Framework8InstanceEv(), s32 *, 0x9C);
 }
 #endif
 
@@ -1956,8 +1956,8 @@ void func_00049C4C(void) {
 }
 #else
 void func_00049C4C(void) {
-    scePaf_D0AD10FF();
-    scePaf_7C2C2742();
+    _ZN3paf13PhApplication14FinishDispListEv();
+    _ZN3paf13PhApplication13StartDispListEv();
 }
 #endif
 
@@ -1974,7 +1974,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0004A234);
 #else
 void func_0004A234(M2C_UNK **arg0) {
     *arg0 = &D_00056020;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -1989,7 +1989,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0004A278);
 void func_0004A278(struct Unk_func_0004A278_0 *arg0) {
     arg0->unk0 = &D_00055F88;
     arg0->unk8 = &D_00055220;
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -2005,7 +2005,7 @@ void func_0004A2D4(s32 arg0) {
 }
 #else
 void func_0004A2D4(s32 arg0) {
-    scePaf_D24E4016(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
 }
 #endif
 
@@ -2015,7 +2015,7 @@ void func_0004A2F0(s32 arg0) {
 }
 #else
 void func_0004A2F0(s32 arg0) {
-    scePaf_1F0E9712(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
 }
 #endif
 
@@ -2025,7 +2025,7 @@ void func_0004A30C(s32 arg0) {
 }
 #else
 void func_0004A30C(s32 arg0) {
-    scePaf_0CFDBE2F(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
 }
 #endif
 
@@ -2071,7 +2071,7 @@ void func_0004A548(s32 arg0) {
 }
 #else
 void func_0004A548(s32 arg0) {
-    scePaf_95948FB6(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
 }
 #endif
 
@@ -2081,7 +2081,7 @@ void func_0004A564(s32 arg0) {
 }
 #else
 void func_0004A564(s32 arg0) {
-    scePaf_ED89C94B(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
 }
 #endif
 
@@ -2091,7 +2091,7 @@ void func_0004A580(s32 arg0) {
 }
 #else
 void func_0004A580(s32 arg0) {
-    scePaf_BA433BEF(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
 }
 #endif
 
@@ -2101,7 +2101,7 @@ void func_0004A59C(s32 arg0) {
 }
 #else
 void func_0004A59C(s32 arg0) {
-    scePaf_B7865607(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
 }
 #endif
 
@@ -2406,7 +2406,7 @@ void func_0004CDE4(M2C_UNK **arg0) {
     *arg0 = &D_000565C0;
     D_00081F40 = 0;
     func_00036CC0((s32) arg0);
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -2433,7 +2433,7 @@ void func_0004CF68(M2C_UNK **arg0) {
     *arg0 = &D_00056640;
     D_00081F44 = 0;
     func_00036CC0((s32) arg0);
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -2474,12 +2474,12 @@ void func_0004CFA8(struct Unk_func_0004CFA8_0 *arg0) {
     if (temp_v0 == 0) {
 
     } else {
-        temp_v0_2 = scePaf_72514A05(temp_v0, "video_home_menu_plane", 0);
+        temp_v0_2 = _ZN3paf8PhWidget9FindChildEPKci(temp_v0, "video_home_menu_plane", 0);
         arg0->unk20 = temp_v0_2;
         if (temp_v0_2 != NULL) {
             temp_v0_2->unk1FD = 0;
             temp_v0_2->unk1FE = 0;
-            scePaf_86B41BA3(temp_v0_2);
+            _ZN3paf8PhWidget13UpdateCamerasEv(temp_v0_2);
         }
     }
 }
@@ -2520,7 +2520,7 @@ void func_0004D3DC(M2C_UNK **arg0) {
     *arg0 = &D_00056760;
     D_00081F48 = 0;
     func_00036CC0((s32) arg0);
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -2623,9 +2623,9 @@ void func_0004D890(void) {
 #else
 void func_0004D890(void) {
     void *sp0;
-    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
     func_00005878(&sp0);
-    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
     func_00005878(&sp0);
 }
 #endif
@@ -2646,8 +2646,8 @@ s32 func_0004DB00(void) {
 }
 #else
 s32 func_0004DB00(void) {
-    sceVshCommonGui_A0DE7090(0);
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     return 1;
 }
 #endif
@@ -2665,7 +2665,7 @@ void func_0004DB54(M2C_UNK **arg0) {
     *arg0 = &D_000567A0;
     D_00081F4C = 0;
     func_00036CC0((s32) arg0);
-    scePaf_4E67BB08((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 

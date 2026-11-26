@@ -1,7 +1,7 @@
 {
  "funcs": {
-  "SysclibForKernel_32C767F2": "s32 SysclibForKernel_32C767F2(s32);",
-  "SysclibForKernel_D887CACD": "M2C_UNK *SysclibForKernel_D887CACD(void);",
+  "look_ctype_table": "s32 look_ctype_table(s32);",
+  "get_ctype_table": "M2C_UNK *get_ctype_table(void);",
   "bcmp": "void bcmp(s32 arg0, s32 arg1, s32 arg2);",
   "bcopy": "void bcopy(s32 arg0, s32 arg1);",
   "func_00001B7C": "s32 func_00001B7C(void);",

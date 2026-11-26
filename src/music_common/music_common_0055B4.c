@@ -44,7 +44,7 @@ INCLUDE_ASM("nonmatchings/music_common_0055B4", func_00005B50);
 
 void func_00005B60(M2C_UNK **arg0) {
     *arg0 = &D_0001F2C8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 s32 music_common_907343F3(struct Unk_music_common_907343F3_0 *arg0) {

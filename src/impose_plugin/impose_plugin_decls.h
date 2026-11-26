@@ -45,7 +45,7 @@ M2C_UNK scePaf_B94FDC08();
 s32 scePaf_D4FAE7D0(M2C_UNK *);
 void *scePaf_DCE3D225(s32, M2C_UNK);
 M2C_UNK scePaf_FA7E6DA3();
-s32 sceVshBridge_639C3CB3(M2C_UNK);
+s32 vshImposeGetParam(M2C_UNK);
 M2C_UNK vsh_6D4C06F7(M2C_UNK);
 
 #endif

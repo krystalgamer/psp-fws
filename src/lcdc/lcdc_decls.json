@@ -2,16 +2,16 @@
  "funcs": {
   "module_reboot_before": "s32 module_reboot_before(void);",
   "module_start": "s32 module_start(void);",
-  "sceLcdc_driver_0E8E8774": "s32 sceLcdc_driver_0E8E8774(void);",
+  "sceLcdcEnd": "s32 sceLcdcEnd(void);",
   "sceLcdc_driver_825DB9C5": "s32 sceLcdc_driver_825DB9C5(void);",
-  "sceLcdc_driver_A0032C3D": "s32 sceLcdc_driver_A0032C3D(void);",
-  "sceLcdc_driver_A182B32C": "s32 sceLcdc_driver_A182B32C(void);",
-  "sceLcdc_driver_B55500A3": "s32 sceLcdc_driver_B55500A3(void);",
-  "sceLcdc_driver_DCD51769": "s32 sceLcdc_driver_DCD51769(void);",
-  "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
-  "sceSysreg_driver_63B1AADF": "M2C_UNK sceSysreg_driver_63B1AADF();",
-  "sceSysreg_driver_E89243BE": "M2C_UNK sceSysreg_driver_E89243BE();",
-  "sceSysreg_driver_F74F14E9": "M2C_UNK sceSysreg_driver_F74F14E9();"
+  "sceLcdcDisable": "s32 sceLcdcDisable(void);",
+  "sceLcdcEnable": "s32 sceLcdcEnable(void);",
+  "sceLcdcInit": "s32 sceLcdcInit(void);",
+  "sceLcdcSuspend": "s32 sceLcdcSuspend(void);",
+  "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
+  "sceSysregLcdcIoEnable": "M2C_UNK sceSysregLcdcIoEnable();",
+  "sceSysregLcdcClkDisable": "M2C_UNK sceSysregLcdcClkDisable();",
+  "sceSysregLcdcIoDisable": "M2C_UNK sceSysregLcdcIoDisable();"
  },
  "vars": {
   "D_00000C30": "extern s32 D_00000C30;",

@@ -27,7 +27,7 @@ struct Unk_sceAmctrl_driver_9951C50F_temp_v1 {
 
 
 s32 module_start(void);
-s32 sceAmctrl_driver_525B8218(struct Unk_sceAmctrl_driver_525B8218_0 *arg0, s32 arg1);
-s32 sceAmctrl_driver_9951C50F(struct Unk_sceAmctrl_driver_9951C50F_0 *arg0);
+s32 sceDrmBBMacInit(struct Unk_sceAmctrl_driver_525B8218_0 *arg0, s32 arg1);
+s32 sceDrmBBCipherFinal(struct Unk_sceAmctrl_driver_9951C50F_0 *arg0);
 
 #endif

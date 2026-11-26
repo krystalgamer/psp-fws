@@ -1,6 +1,6 @@
 {
  "funcs": {
-  "IoFileMgrForKernel_8E982A74": "M2C_UNK IoFileMgrForKernel_8E982A74(M2C_UNK *);",
+  "sceIoAddDrv": "M2C_UNK sceIoAddDrv(M2C_UNK *);",
   "func_00000528": "s32 func_00000528(void);",
   "func_00000850": "s32 func_00000850(void);",
   "func_00000A1C": "s32 func_00000A1C(struct Unk_func_00000A1C_0 *arg0);",
@@ -16,12 +16,12 @@
   "func_00000E94": "s32 func_00000E94(void);",
   "module_reboot_before": "s32 module_reboot_before(void);",
   "module_start": "s32 module_start(void);",
-  "sceGpio_driver_310F0CCF": "M2C_UNK sceGpio_driver_310F0CCF(M2C_UNK);",
+  "sceGpioPortSet": "M2C_UNK sceGpioPortSet(M2C_UNK);",
   "sceKernelSetAlarm": "s32 sceKernelSetAlarm(u32, s32, void *);",
   "sceKernelWaitEventFlag": "s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);",
-  "sceSysEventForKernel_D7D3FDCD": "M2C_UNK sceSysEventForKernel_D7D3FDCD(M2C_UNK *);",
-  "sceSysreg_driver_7725CA08": "M2C_UNK sceSysreg_driver_7725CA08(M2C_UNK);",
-  "sceSysreg_driver_BB823481": "M2C_UNK sceSysreg_driver_BB823481(M2C_UNK);"
+  "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
+  "sceSysregUartClkEnable": "M2C_UNK sceSysregUartClkEnable(M2C_UNK);",
+  "sceSysregUartIoDisable": "M2C_UNK sceSysregUartIoDisable(M2C_UNK);"
  },
  "types": {
   "Unk_func_00000A1C_0": "struct Unk_func_00000A1C_0 {\n    u8 pad0[0x4C];\n    s32 unk4C;\n};"

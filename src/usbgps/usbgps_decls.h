@@ -57,8 +57,8 @@ s32 func_00004C68(s32);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelSetEventFlag(s32, u32);
-s32 sceUsbBus_driver_B1644BE7(M2C_UNK *);
-s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);
-s32 sceUsbGps_driver_268F95CA(u32 arg0);
+s32 sceUsbbdRegister(M2C_UNK *);
+s32 sceUsbbdUnregister(M2C_UNK *);
+s32 sceUsbGpsSetInitDataLocation(u32 arg0);
 
 #endif

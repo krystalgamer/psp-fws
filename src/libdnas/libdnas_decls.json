@@ -2,7 +2,7 @@
  "funcs": {
   "func_00002888": "s32 func_00002888(s32);",
   "sceDNASCore_lib_D5E80301": "M2C_UNK sceDNASCore_lib_D5E80301();",
-  "sceDNAS_lib_BE0998D7": "void sceDNAS_lib_BE0998D7(void);",
+  "sceDNASTerm": "void sceDNASTerm(void);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
   "sceKernelTerminateDeleteThread": "s32 sceKernelTerminateDeleteThread(s32);",

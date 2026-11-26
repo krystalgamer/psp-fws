@@ -11,7 +11,7 @@ s32 func_00007DF4(s32 arg0) {
     s32 temp_s1;
 
     func_000079D8(D_00009F80);
-    temp_s1 = sceVideocodec_DBA273FA(arg0, 0);
+    temp_s1 = sceVideocodecDecode(arg0, 0);
     func_00007A68(D_00009F80);
     return temp_s1;
 }
@@ -20,7 +20,7 @@ s32 func_00007E48(s32 arg0) {
     s32 temp_s1;
 
     func_000079D8(D_00009F80);
-    temp_s1 = sceVideocodec_A2F0564E(arg0, 0);
+    temp_s1 = sceVideocodecStop(arg0, 0);
     func_00007A68(D_00009F80);
     return temp_s1;
 }
@@ -30,7 +30,7 @@ s32 func_00007E9C(s32 arg0) {
     s32 var_v0;
 
     func_000079D8(D_00009F80);
-    temp_v0 = sceVideocodec_307E6E1C(arg0, 0);
+    temp_v0 = sceVideocodecDelete(arg0, 0);
     if (temp_v0 != 0) {
         func_00007A68(D_00009F80);
         var_v0 = temp_v0;
@@ -46,7 +46,7 @@ s32 func_00007F04(struct Unk_func_00007F04_0 *arg0, s32 arg1) {
 
     func_000079D8(D_00009F80);
     arg0->unk50 = arg1;
-    temp_s1 = sceVideocodec_627B7D42(arg0, 0);
+    temp_s1 = sceVideocodecGetSEI(arg0, 0);
     func_00007A68(D_00009F80);
     return temp_s1;
 }
@@ -56,7 +56,7 @@ s32 func_00007F64(struct Unk_func_00007F64_0 *arg0, s32 arg1) {
 
     func_000079D8(D_00009F80);
     arg0->unk54 = arg1;
-    temp_s1 = sceVideocodec_17CF7D2C(arg0, 0);
+    temp_s1 = sceVideocodecGetFrameCrop(arg0, 0);
     func_00007A68(D_00009F80);
     return temp_s1;
 }
@@ -109,7 +109,7 @@ void func_00007FC0(void) {
     if (M2C_FIELD(D_00009B80, s32 *, 0xC) == 0) {
 
     } else {
-        sceAudiocodec_29681260(D_00009B80);
+        sceAudiocodecReleaseEDRAM(D_00009B80);
     }
 }
 
@@ -196,7 +196,7 @@ s32 func_00006518(s32 arg0) {
     s32 var_v0;
 
     func_000079D8(D_00007F08);
-    temp_v0 = sceAudiocodec_70A703F8(arg0, 0x1000);
+    temp_v0 = sceAudiocodecDecode(arg0, 0x1000);
     if (temp_v0 != 0) {
         func_00007A68(D_00007F08);
         var_v0 = temp_v0;
@@ -261,7 +261,7 @@ void func_00008A58(void) {
     if (D_00009EC0->unkC == 0) {
 
     } else {
-        sceAudiocodec_29681260(D_00009EC0);
+        sceAudiocodecReleaseEDRAM(D_00009EC0);
     }
 }
 

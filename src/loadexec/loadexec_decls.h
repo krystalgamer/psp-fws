@@ -5,24 +5,24 @@
 #include "m2c_macros.h"
 
 
-s32 KDebugForKernel_428A8DA3();
-void LoadExecForKernel_015DA036(s32 arg0, s32 arg1, s32 arg2);
-void LoadExecForKernel_061D9514(s32 arg0, s32 arg1);
-void LoadExecForKernel_1B97BDB3(s32 arg0, s32 arg1);
-void LoadExecForKernel_28D0D249(s32 arg0, s32 arg1);
-void LoadExecForKernel_31DF42BF(s32 arg0, s32 arg1);
-s32 LoadExecForKernel_4F41E75E(s32 arg0, s32 arg1, s32 arg2);
-void LoadExecForKernel_62C459E1(s32 arg0, s32 arg1, s32 arg2);
-void LoadExecForKernel_6D302D3D(s32 arg0);
+s32 sceKernelIsToolMode();
+void sceKernelLoadExecBufferVSHUsbWlan(s32 arg0, s32 arg1, s32 arg2);
+void sceKernelLoadExecVSHMs4(s32 arg0, s32 arg1);
+void sceKernelLoadExecVSHDisc(s32 arg0, s32 arg1);
+void sceKernelLoadExecVSHMs2(s32 arg0, s32 arg1);
+void sceKernelLoadExecVSHMs1(s32 arg0, s32 arg1);
+s32 sceKernelLoadExecBufferVSHUsbWlanDebug(s32 arg0, s32 arg1, s32 arg2);
+void sceKernelLoadExecBufferVSHPlain(s32 arg0, s32 arg1, s32 arg2);
+void sceKernelExitVSHKernel(s32 arg0);
 void LoadExecForKernel_6D8D3A3A(s32 arg0, s32 arg1);
-void LoadExecForKernel_70901231(s32 arg0, s32 arg1);
-s32 LoadExecForKernel_7B7C47EF(s32 arg0, s32 arg1);
-void LoadExecForKernel_821BE114(s32 arg0, s32 arg1);
-void LoadExecForKernel_AC085B9E(s32 arg0, s32 arg1, s32 arg2);
-void LoadExecForKernel_B7AB08DA(s32 arg0, s32 arg1);
+void sceKernelLoadExecVSHMs3(s32 arg0, s32 arg1);
+s32 sceKernelLoadExecVSHDiscDebug(s32 arg0, s32 arg1);
+void sceKernelLoadExecVSHDiscUpdater(s32 arg0, s32 arg1);
+void sceKernelLoadExecVSHFromHost(s32 arg0, s32 arg1, s32 arg2);
+void sceKernelLoadExecVSHMs5(s32 arg0, s32 arg1);
 s32 LoadExecForUser_2AC9954B(s32);
 s32 LoadExecForUser_D1FB50DC(s32);
-void RebootForKernel_72E280A8(void);
+void sceKernelReboot(void);
 s32 func_000017D8(void);
 s32 func_00001934(s32, s32, s32, s32);
 s32 func_00001A98(void);

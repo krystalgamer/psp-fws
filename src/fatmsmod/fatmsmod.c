@@ -39,7 +39,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000020);
 
 #if FW_VERSION == 100
 void func_0000022C(void) {
-    IoFileMgrForKernel_C7F35804(D_0002B568);
+    sceIoDelDrv(D_0002B568);
 }
 #endif
 
@@ -61,14 +61,14 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000004B8);
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000004B8(void) {
-    IoFileMgrForKernel_C7F35804(D_0001B790);
-    IoFileMgrForKernel_C7F35804(D_0001B6A4);
+    sceIoDelDrv(D_0001B790);
+    sceIoDelDrv(D_0001B6A4);
 }
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
 void func_000004B8(void) {
-    IoFileMgrForKernel_C7F35804(D_0002BD1C);
+    sceIoDelDrv(D_0002BD1C);
 }
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00022F3C);
@@ -92,7 +92,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00015D54);
 
 #if FW_VERSION >= 282
 void func_00000048(void) {
-    IoFileMgrForKernel_C7F35804(D_0002B568);
+    sceIoDelDrv(D_0002B568);
 }
 #endif
 

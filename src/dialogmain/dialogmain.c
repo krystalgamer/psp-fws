@@ -88,13 +88,13 @@ void func_00000130(void) {
     s32 sp4;
 
     if (D_00008918 == 0) {
-        D_00008918 = scePaf_27760582("flash0:/vsh/etc/jis2ucs.cbin", 0, 0, &sp0, 0);
+        D_00008918 = File_AllocLoad("flash0:/vsh/etc/jis2ucs.cbin", 0, 0, &sp0, 0);
     }
     if (D_0000891C == 0) {
-        D_0000891C = scePaf_27760582("flash0:/vsh/etc/ucs2jis.cbin", 0, 0, &sp4, 0);
+        D_0000891C = File_AllocLoad("flash0:/vsh/etc/ucs2jis.cbin", 0, 0, &sp4, 0);
     }
     if ((D_00008918 != 0) || (D_0000891C != 0)) {
-        scePaf_D4DAB044(D_00008918, D_0000891C);
+        sceCccSetCTable(D_00008918, D_0000891C);
     }
 }
 #endif
@@ -105,13 +105,13 @@ void func_00000130(void) {
     M2C_UNK sp4;
 
     if (D_00008918 == 0) {
-        D_00008918 = scePaf_27760582("flash0:/vsh/etc/jis2ucs.cbin", 0, 0, &sp0, 0);
+        D_00008918 = File_AllocLoad("flash0:/vsh/etc/jis2ucs.cbin", 0, 0, &sp0, 0);
     }
     if (D_0000891C == 0) {
-        D_0000891C = scePaf_27760582("flash0:/vsh/etc/ucs2jis.cbin", 0, 0, &sp4, 0);
+        D_0000891C = File_AllocLoad("flash0:/vsh/etc/ucs2jis.cbin", 0, 0, &sp4, 0);
     }
     if ((D_00008918 != 0) || (D_0000891C != 0)) {
-        scePaf_D4DAB044(D_00008918, D_0000891C);
+        sceCccSetCTable(D_00008918, D_0000891C);
     }
 }
 #endif
@@ -119,14 +119,14 @@ void func_00000130(void) {
 #if FW_VERSION < 201
 void func_000001DC(void) {
     if (D_00008918 != 0) {
-        scePaf_545FE2DA(D_00008918);
+        sce_paf_private_free(D_00008918);
         D_00008918 = 0;
     }
     if (D_0000891C != 0) {
-        scePaf_545FE2DA(D_0000891C);
+        sce_paf_private_free(D_0000891C);
         D_0000891C = 0;
     }
-    scePaf_D4DAB044(0, 0);
+    sceCccSetCTable(0, 0);
 }
 #endif
 
@@ -382,65 +382,65 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_00001024);
 
 #if FW_VERSION < 201
 void func_00001158(void) {
-    scePaf_DEDF238F();
+    sce_paf_private_cosf();
 }
 
 void func_00001174(void) {
-    scePaf_7BED034E();
+    sce_paf_private_sqrtf();
 }
 
 void func_00001190(void) {
-    scePaf_5FAC9869();
+    sce_paf_private_malloc();
 }
 
 void func_000011AC(void) {
-    scePaf_3586BE05();
+    sce_paf_private_memalign();
 }
 
 void func_000011C8(s32 arg0) {
-    scePaf_545FE2DA(arg0);
+    sce_paf_private_free(arg0);
 }
 
 void func_000011E4(void) {
-    scePaf_F95EA3F1();
+    sce_paf_private_memcpy();
 }
 
 void func_00001200(void) {
-    scePaf_6829D7AF();
+    sce_paf_private_memset();
 }
 
 void func_0000121C(void) {
-    scePaf_B3D58D25();
+    sce_paf_private_floorf();
 }
 
 void func_00001238(void) {
-    scePaf_44AAF96C();
+    sce_paf_private_acosf();
 }
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00001254);
 
 void func_00001280(void) {
-    scePaf_980228BA();
+    sce_paf_private_strcpy();
 }
 
 void func_0000129C(void) {
-    scePaf_3FBD9639();
+    sce_paf_private_memcmp();
 }
 
 void func_000012B8(void) {
-    scePaf_CA79D58B();
+    sce_paf_private_strlen();
 }
 
 void func_000012D4(void) {
-    scePaf_66FE90D7();
+    sce_paf_private_strcmp();
 }
 
 void func_000012F0(void) {
-    scePaf_10B901E7();
+    sce_paf_private_qsort();
 }
 
 void func_0000130C(void) {
-    scePaf_3DD2A27B();
+    sce_paf_private_bsearch();
 }
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00001328);
@@ -2000,7 +2000,7 @@ s32 func_00005420(void) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_C9831AFF("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
+            sce_paf_private_printf("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
         }
         temp_s0 = D_00009F88;
         if (temp_s0 == 0) {
@@ -2056,7 +2056,7 @@ s32 func_00005420(void) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_C9831AFF("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
+            sce_paf_private_printf("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
         }
         temp_s0 = D_00009E08;
         if (temp_s0 == 0) {
@@ -2112,7 +2112,7 @@ s32 func_00005420(void) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_C9831AFF("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
+            sce_paf_private_printf("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
         }
         temp_s0 = D_00009A04;
         if (temp_s0 == 0) {
@@ -2174,7 +2174,7 @@ s32 func_00005420(void) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_C9831AFF("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
+            sce_paf_private_printf("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
         }
         temp_s0 = D_00009C24;
         if (temp_s0 == 0) {
@@ -2230,7 +2230,7 @@ s32 func_00005420(void) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_C9831AFF("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
+            sce_paf_private_printf("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
         }
         temp_s0 = D_00009C64;
         if (temp_s0 == 0) {
@@ -2286,7 +2286,7 @@ s32 func_00005420(void) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_C9831AFF("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
+            sce_paf_private_printf("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
         }
         temp_s0 = D_000089D0;
         if (temp_s0 == 0) {
@@ -2342,7 +2342,7 @@ s32 func_0000602C(void) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_C9831AFF("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
+            sce_paf_private_printf("sceNetAdhocctlTerm() failed. ret = %d\n", temp_v0);
         }
         temp_s0 = D_0000A388;
         if (temp_s0 == 0) {
@@ -2525,7 +2525,7 @@ s32 func_00005E08(s32 arg0) {
 #if FW_VERSION == 100
 s32 func_00005E08(s32 arg0) {
     if (arg0 != D_00008A00) {
-        scePaf_C9831AFF("ms status changed - %d\n", arg0);
+        sce_paf_private_printf("ms status changed - %d\n", arg0);
         scePaf_A69BABE3(0x401, arg0, D_00008A00);
         D_00008A00 = arg0;
         D_00008A08 += 1;
@@ -2551,7 +2551,7 @@ s32 func_00006B78(void) {
 #if FW_VERSION == 100
 s32 func_00005E78(s32 arg0) {
     if (arg0 != D_00008A04) {
-        scePaf_C9831AFF("umd status changed - %d\n", arg0);
+        sce_paf_private_printf("umd status changed - %d\n", arg0);
         scePaf_A69BABE3(0x400, arg0, D_00008A04);
         D_00008A04 = arg0;
         D_00008A0C += 1;
@@ -2700,7 +2700,7 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_000060FC);
 
 #if FW_VERSION < 282
 void func_000062E4(void) {
-    sceVshCommonUtil_EDED68FB();
+    sceSystemFileFree();
 }
 #endif
 
@@ -2742,7 +2742,7 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_000095E8);
 INCLUDE_ASM("nonmatchings/dialogmain", func_000070F8);
 
 void func_00007468(void) {
-    sceVshCommonUtil_EDED68FB();
+    sceSystemFileFree();
 }
 #endif
 

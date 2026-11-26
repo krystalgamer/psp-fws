@@ -122,13 +122,13 @@ INCLUDE_RODATA("nonmatchings/usbgps", D_00005528);
 
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005530);
 
-INCLUDE_ASM("nonmatchings/usbgps", sceUsbGps_63D1F89D);
+INCLUDE_ASM("nonmatchings/usbgps", sceUsbGpsResetInitialPosition);
 #else
-INCLUDE_ASM("nonmatchings/usbgps", sceUsbGps_driver_A259CD67);
+INCLUDE_ASM("nonmatchings/usbgps", sceUsbGpsReset);
 #endif
 
 #if FW_VERSION >= 330
-s32 sceUsbGps_driver_268F95CA(u32 arg0) {
+s32 sceUsbGpsSetInitDataLocation(u32 arg0) {
     s32 temp_a0;
     s32 var_s0;
     u32 temp_s1;
@@ -150,7 +150,7 @@ s32 sceUsbGps_driver_268F95CA(u32 arg0) {
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 330
-s32 sceUsbGps_driver_268F95CA(u32 arg0) {
+s32 sceUsbGpsSetInitDataLocation(u32 arg0) {
     s32 temp_a0;
     s32 var_s0;
     u32 temp_s1;
@@ -172,7 +172,7 @@ s32 sceUsbGps_driver_268F95CA(u32 arg0) {
 #endif
 
 #if FW_VERSION < 300
-s32 sceUsbGps_driver_268F95CA(u32 arg0) {
+s32 sceUsbGpsSetInitDataLocation(u32 arg0) {
     s32 temp_a0;
     s32 var_s0;
     u32 temp_s1;
@@ -193,14 +193,14 @@ s32 sceUsbGps_driver_268F95CA(u32 arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/usbgps", sceUsbGps_driver_54D26AA4);
+INCLUDE_ASM("nonmatchings/usbgps", sceUsbGpsGetInitDataLocation);
 
-INCLUDE_ASM("nonmatchings/usbgps", sceUsbGps_driver_69E4AAA8);
+INCLUDE_ASM("nonmatchings/usbgps", sceUsbGpsSaveInitData);
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/usbgps", sceUsbGps_driver_9D8F99E8);
+INCLUDE_ASM("nonmatchings/usbgps", sceUsbGpsSetPowerSaveMode);
 
-INCLUDE_ASM("nonmatchings/usbgps", sceUsbGps_driver_31F95CDE);
+INCLUDE_ASM("nonmatchings/usbgps", sceUsbGpsGetPowerSaveMode);
 #endif
 
 INCLUDE_ASM("nonmatchings/usbgps", sceUsbGpsGetState);
@@ -234,11 +234,11 @@ INCLUDE_ASM("nonmatchings/usbgps", func_000013B0);
 INCLUDE_ASM("nonmatchings/usbgps", module_stop);
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/usbgps", syslib_ADF12745);
+INCLUDE_ASM("nonmatchings/usbgps", module_reboot_phase);
 #endif
 
 #if FW_VERSION >= 330
-INCLUDE_ASM("nonmatchings/usbgps", sceUsbGps_driver_A259CD67);
+INCLUDE_ASM("nonmatchings/usbgps", sceUsbGpsReset);
 #endif
 
 s32 func_00001504(s32 arg0) {
@@ -311,7 +311,7 @@ INCLUDE_ASM("nonmatchings/usbgps", func_0000268C);
 s32 func_000027AC(void) {
     s32 temp_a3;
 
-    temp_a3 = (sceUsbBus_driver_B1644BE7(&D_00005960) >= 0) ? 0 : -1;
+    temp_a3 = (sceUsbbdRegister(&D_00005960) >= 0) ? 0 : -1;
     D_00008478.unkB8 = 0x4E200;
     D_00008478.unkB1 = 0;
     D_00008478.unkBC = 0;
@@ -322,7 +322,7 @@ s32 func_000027AC(void) {
 }
 
 s32 func_00002804(void) {
-    return (sceUsbBus_driver_C1E2A540(&D_00005960) >= 0) ? 0 : -1;
+    return (sceUsbbdUnregister(&D_00005960) >= 0) ? 0 : -1;
 }
 
 INCLUDE_ASM("nonmatchings/usbgps", func_00002830);

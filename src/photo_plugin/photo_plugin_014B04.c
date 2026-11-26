@@ -44,7 +44,7 @@ void func_00015390(void) {
         }
     } else {
         func_0000B8A4();
-        scePaf_5EBC648F(D_00031B30, scePaf_CE21D21F(D_00031B30));
+        _ZN3paf4View12PageActivateEPv(D_00031B30, _ZNK3paf4View10GetTopPageEv(D_00031B30));
     }
 }
 #endif
@@ -76,7 +76,7 @@ void func_00015440(void) {
 #if FW_VERSION == 201
 void func_00015440(void) {
     func_00015390();
-    scePaf_5EBC648F(D_00031B30, scePaf_CE21D21F(D_00031B30));
+    _ZN3paf4View12PageActivateEPv(D_00031B30, _ZNK3paf4View10GetTopPageEv(D_00031B30));
 }
 #endif
 
@@ -94,7 +94,7 @@ s32 func_000155C0(void) {
     struct Unk_vt_func_000155C0_temp_v0 **temp_v0;
 
     D_00031BE4 = 1;
-    temp_v0 = scePaf_4708AED4(D_00031B30, &D_0002FEDC);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_00031B30, &D_0002FEDC);
     var_v1 = 0;
     if (temp_v0 != NULL) {
         (*temp_v0)->unkBC(temp_v0, 0, 0);
@@ -133,7 +133,7 @@ void func_000160D4(void) {
     if (D_00031BE8 == 0) {
 
     } else {
-        sceNetAdhocTransInt_83FA2BBA();
+        sceNetAdhocTransferAbortReplySession();
     }
 }
 

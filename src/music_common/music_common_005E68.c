@@ -663,7 +663,7 @@ void ***func_000079E4(void ***arg0, struct Unk_func_000079E4_1 *arg1, void **arg
     temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
     M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
-    scePaf_7EC15225(temp_v1, temp_a1);
+    sce_paf_private_free2(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
     return arg0;
@@ -856,7 +856,7 @@ s32 func_0000AD3C(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0x3A8);
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x3A8) = 0;
     }
     return 0;
@@ -911,7 +911,7 @@ s32 func_0000B244(struct Unk_func_0000B244_0 *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0x45C);
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x45C) = 0;
     }
     return 0;
@@ -924,7 +924,7 @@ s32 func_0000B244(struct Unk_func_0000B244_0 *arg0) {
 
     temp_v0 = arg0->unk458;
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
         arg0->unk458 = 0;
     }
     return 0;
@@ -1084,7 +1084,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000BD60);
 
 void func_0000BD70(M2C_UNK **arg0) {
     *arg0 = &D_0001F8D8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/music_common_005E68", music_common_AAF0AF3D);
@@ -1161,7 +1161,7 @@ s32 func_0000D278(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0x45C);
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x45C) = 0;
     }
     return 0;
@@ -1390,7 +1390,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000DBE4);
 
 void func_0000DCB0(M2C_UNK **arg0) {
     *arg0 = &D_0001CB30;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000DCD8);
@@ -1883,7 +1883,7 @@ void func_0000F17C(M2C_UNK **arg0) {
 
 void func_0000F18C(M2C_UNK **arg0) {
     *arg0 = &D_0001F8D8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 void func_0000F1B4(M2C_UNK **arg0) {
@@ -1898,7 +1898,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000F1C4);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000F1C4(M2C_UNK **arg0) {
     *arg0 = &D_0001F8C8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -2068,7 +2068,7 @@ void func_00010AA0(s32 arg0) {
 #if FW_VERSION >= 300 && FW_VERSION < 350
 void func_00010AA0(s32 arg0) {
     func_00010ACC(arg0);
-    scePaf_47E35A50(arg0);
+    _ZN3paf8PhWidget11UpdateStateEv(arg0);
 }
 #endif
 
@@ -2188,7 +2188,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_00011660);
 #if FW_VERSION >= 300 && FW_VERSION < 350
 void func_00011660(M2C_UNK **arg0) {
     *arg0 = &D_00021FB0;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -2229,7 +2229,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000F680);
 #else
 void func_0000F680(M2C_UNK **arg0) {
     *arg0 = &D_0001F980;
-    scePaf_715E8DAB();
+    _ZN3paf8PhWidgetD2Ev();
 }
 #endif
 
@@ -2238,7 +2238,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000F6A8);
 #else
 void func_0000F6A8(M2C_UNK **arg0) {
     *arg0 = &D_0001F980;
-    scePaf_715E8DAB();
+    _ZN3paf8PhWidgetD2Ev();
 }
 #endif
 
@@ -2247,8 +2247,8 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000F6D0);
 #else
 void func_0000F6D0(M2C_UNK **arg0) {
     *arg0 = &D_0001F980;
-    scePaf_715E8DAB();
-    scePaf_4E67BB08(arg0);
+    _ZN3paf8PhWidgetD2Ev();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -2315,7 +2315,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_00010438);
 #else
 void func_00010438(M2C_UNK **arg0) {
     *arg0 = &D_0001FA58;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -2391,7 +2391,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_000109F0);
 
 void func_00010AD4(M2C_UNK **arg0) {
     *arg0 = &D_000168A0;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -2416,7 +2416,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_00010508);
 #else
 void func_00010508(M2C_UNK **arg0) {
     *arg0 = &D_0001FA68;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -2474,7 +2474,7 @@ void func_0000F93C(void *arg0) {
     func_000107D4((s32) arg0);
     M2C_FIELD(arg0, s8 *, 0xB3) = 0;
     func_000046F4(arg0 + 0x90);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000F990);
@@ -2741,7 +2741,7 @@ void func_00010E50(struct Unk_func_00010E50_0 *arg0) {
     func_00011CE8((s32) arg0);
     arg0->unkB3 = 0;
     func_000046F4((u8 *)arg0 + 0x90);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_RODATA("nonmatchings/music_common_005E68", D_0001F980);
@@ -2950,7 +2950,7 @@ void ***func_00017184(void ***arg0, struct Unk_func_00017184_1 *arg1, void **arg
     temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
     M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
-    scePaf_7EC15225(temp_v1, temp_a1);
+    sce_paf_private_free2(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
     return arg0;
@@ -3043,7 +3043,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_00018338);
 void func_00018338(struct Unk_func_00018338_0 *arg0) {
     arg0->unk0 = &D_0001FE78;
     sceKernelDeleteEventFlag(arg0->unk4);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -3487,9 +3487,9 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", music_common_C1A7DF11);
 
 INCLUDE_ASM("nonmatchings/music_common_005E68", music_common_4F465C92);
 #else
-INCLUDE_ASM("nonmatchings/music_common_005E68", music_common_90E540A9);
+INCLUDE_ASM("nonmatchings/music_common_005E68", bXCeMemInitialize);
 
-INCLUDE_ASM("nonmatchings/music_common_005E68", music_common_D586C284);
+INCLUDE_ASM("nonmatchings/music_common_005E68", bXCeMemDestroy);
 #endif
 
 void func_0001B9CC(s32 arg0, s32 arg1) {

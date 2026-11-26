@@ -121,7 +121,7 @@
   "func_000138D8": "void func_000138D8(void);",
   "func_000138F8": "void func_000138F8(void);",
   "func_00013AAC": "M2C_UNK func_00013AAC(M2C_UNK, M2C_UNK);",
-  "syslib_D3744BE0": "s32 syslib_D3744BE0(void);"
+  "module_bootstart": "s32 module_bootstart(void);"
  },
  "types": {
   "Unk_func_00008F0C_0": "struct Unk_func_00008F0C_0 {\n    u8 pad0[0x10];\n    s32 unk10;\n};",

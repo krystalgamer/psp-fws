@@ -8417,7 +8417,7 @@ s32 func_00025BD8(s32 arg0, struct Unk_func_00025BD8_1 *arg1) {
             M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
             sceHVSlim_Library_B29BE9CE(arg0);
             sceHttpFlushAuthList();
-            sceHttp_DD6E7857();
+            sceHttpSaveAuthList();
         }
     }
     return 0;
@@ -8438,7 +8438,7 @@ s32 func_00025BD8(s32 arg0, struct Unk_func_00025BD8_1 *arg1) {
             M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
             sceHVSlim_Library_B29BE9CE(arg0);
             sceHttpFlushAuthList();
-            sceHttp_DD6E7857();
+            sceHttpSaveAuthList();
         }
     }
     return 0;
@@ -8459,7 +8459,7 @@ s32 func_00025BD8(s32 arg0, struct Unk_func_00025BD8_1 *arg1) {
             M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
             sceHVSlim_Library_B29BE9CE(arg0);
             sceHttpFlushAuthList();
-            sceHttp_DD6E7857();
+            sceHttpSaveAuthList();
         }
     }
     return 0;
@@ -8480,7 +8480,7 @@ s32 func_00025BD8(s32 arg0, struct Unk_func_00025BD8_1 *arg1) {
             temp_v0->unk274 = 0x32;
             sceHVSlim_Library_B29BE9CE(arg0);
             sceHttpFlushAuthList();
-            sceHttp_DD6E7857();
+            sceHttpSaveAuthList();
         }
     }
     return 0;

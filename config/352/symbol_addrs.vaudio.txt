@@ -18,11 +18,11 @@ sceKernelAllocateFpl = 0x00000DA0; // type:func
 sceKernelDeleteFpl = 0x00000DA8; // type:func
 sceKernelDcacheWritebackRange = 0x00000DB0; // type:func
 sceKernelDcacheInvalidateRange = 0x00000DB8; // type:func
-sceAudio_driver_38553111 = 0x00000DC0; // type:func
-sceAudio_driver_5C37C0AE = 0x00000DC8; // type:func
-sceAudio_driver_927AC32B = 0x00000DD0; // type:func
-sceAudio_driver_A2BEAA6C = 0x00000DD8; // type:func
-sceAudio_driver_E0727056 = 0x00000DE0; // type:func
+sceAudioSRCChReserve = 0x00000DC0; // type:func
+sceAudioSRCChRelease = 0x00000DC8; // type:func
+sceAudioSetVolumeOffset = 0x00000DD0; // type:func
+sceAudioSetFrequency = 0x00000DD8; // type:func
+sceAudioSRCOutputBlocking = 0x00000DE0; // type:func
 sceMeCore_driver_3D5F109C = 0x00000DE8; // type:func
 sceMeCore_driver_D1EA3DFD = 0x00000DF0; // type:func
 // shared names (tools/add_version.py) begin

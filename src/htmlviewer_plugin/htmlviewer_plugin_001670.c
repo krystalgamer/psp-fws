@@ -98,8 +98,8 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_001670", func_000024AC);
 void func_000024AC(void) {
     func_00003980(1);
     sceVshCommonGui_80271F41();
-    scePaf_6B1E90C7();
-    scePaf_A0ED77C4(0, &func_000018EC, 0, -1, -1, &func_00001A1C);
+    InputDevice_PspPad_Lock();
+    Job_Start(0, &func_000018EC, 0, -1, -1, &func_00001A1C);
 }
 #endif
 
@@ -122,7 +122,7 @@ void func_000026F8(void) {
         }
     }
     func_000039B0(1);
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
     sceKernelSetEventFlag(D_0000A58C, 8U);
 }
 #endif
@@ -140,7 +140,7 @@ void func_000026F8(void) {
         }
     }
     func_000039B0(1);
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -169,7 +169,7 @@ void func_0000278C(void) {
 
 void func_000021A0(s32 arg0) {
     func_000044A4(arg0);
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -192,7 +192,7 @@ void func_0000278C(void) {
 #if FW_VERSION >= 300 && FW_VERSION < 350
 void func_000027E8(void) {
     func_00005014();
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
     sceKernelSetEventFlag(D_0000A58C, 0x20U);
 }
 #endif
@@ -200,7 +200,7 @@ void func_000027E8(void) {
 #if FW_VERSION == 282
 void func_000027E8(void) {
     func_00005014();
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 

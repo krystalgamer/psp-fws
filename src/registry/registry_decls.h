@@ -67,8 +67,8 @@ M2C_UNK sceKernelDeleteVpl(s32);
 M2C_UNK sceKernelFreeVpl(s32, s32);
 s32 sceKernelLockMutex(s32, s32, void *);
 s32 sceKernelWaitSema(s32, s32, void *);
-s32 sceReg_driver_98279CF1(void);
-M2C_UNK sceReg_driver_9B25EDF1();
-s32 syslib_ADF12745(s32 arg0);
+s32 sceRegInit(void);
+M2C_UNK sceRegExit();
+s32 module_reboot_phase(s32 arg0);
 
 #endif

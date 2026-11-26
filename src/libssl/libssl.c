@@ -229,7 +229,7 @@ void *func_00003458(void) {
     void *temp_v0;
     void *var_v0;
 
-    temp_v0 = sceSsl_lib_0861D934(0x14);
+    temp_v0 = CRYPTO_malloc(0x14);
     var_v0 = NULL;
     if (temp_v0 != NULL) {
         M2C_FIELD(temp_v0, s32 *, 0) = 0;
@@ -247,7 +247,7 @@ void *func_0000349C(void) {
     struct Unk_func_0000349C_temp_v0 *temp_v0;
     void *var_v0;
 
-    temp_v0 = sceSsl_lib_0861D934(0x10C);
+    temp_v0 = CRYPTO_malloc(0x10C);
     var_v0 = NULL;
     if (temp_v0 != NULL) {
         func_000034E4(temp_v0);
@@ -395,7 +395,7 @@ void *func_0000546C(void) {
     struct Unk_func_0000546C_temp_v0 *temp_v0;
     void *var_v0;
 
-    temp_v0 = sceSsl_lib_0861D934(0x50);
+    temp_v0 = CRYPTO_malloc(0x50);
     var_v0 = NULL;
     if (temp_v0 != NULL) {
         func_000054B4(temp_v0);
@@ -740,7 +740,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_0000D3F0);
 INCLUDE_ASM("nonmatchings/libssl", func_0000D41C);
 
 void func_0000D480(void) {
-    sceSsl_lib_5E5C873A();
+    CRYPTO_free();
 }
 
 void func_0000D49C(struct Unk_func_0000D49C_0 *arg0) {
@@ -831,12 +831,12 @@ s32 func_0000DF44(void) {
     return -1;
 }
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_09C45275);
+INCLUDE_ASM("nonmatchings/libssl", EVP_PKEY_new);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_FAF333D1);
+INCLUDE_ASM("nonmatchings/libssl", EVP_PKEY_reference_inc);
 #else
-void sceSsl_lib_FAF333D1(s32 arg0) {
+void EVP_PKEY_reference_inc(s32 arg0) {
     func_0001C4F0(arg0 + 8, 1, 0xA, (s32) &D_0002C198, 0xA8);
 }
 #endif
@@ -849,7 +849,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_0000E06C);
 INCLUDE_ASM("nonmatchings/libssl", func_0000E294);
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_7317C1BC);
+INCLUDE_ASM("nonmatchings/libssl", EVP_PKEY_free);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0000E160);
 
@@ -1001,14 +1001,14 @@ void func_0000F11C(s32 arg0) {
 }
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_2FE7BB42);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_get_time_cb);
 #else
-s32 sceSsl_lib_2FE7BB42(void) {
+s32 CRYPTO_get_time_cb(void) {
     return D_000304D8;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_A7BED83B);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_time);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000F16C);
@@ -1030,7 +1030,7 @@ s32 func_0000F254(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_665D02F6);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_time_offset);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002BF7C);
 
@@ -1068,7 +1068,7 @@ s32 func_0000F944(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_9EF66756);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_time_export);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0000F988);
@@ -1094,7 +1094,7 @@ s32 func_00010110(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_E7BFC0EF);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_time_import);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00010154);
@@ -1122,7 +1122,7 @@ s32 func_000101E0(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_047AB6BB);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_time_cmp);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001027C);
@@ -1167,7 +1167,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001113C);
 void func_00011190(s32 arg0) {
     if (arg0 != 0) {
         func_00011234();
-        sceSsl_lib_5E5C873A(arg0);
+        CRYPTO_free(arg0);
     }
 }
 
@@ -1189,7 +1189,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_000111DC);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00011234);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_A920B39E);
+INCLUDE_ASM("nonmatchings/libssl", d2i_PrivateKey);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000113F0);
 
@@ -1207,7 +1207,7 @@ void func_00011BAC(struct Unk_func_00011BAC_0 *arg0) {
     if (arg0 != NULL) {
         func_00019104(arg0->unk0);
         func_00011190(arg0->unk4);
-        sceSsl_lib_5E5C873A(arg0);
+        CRYPTO_free(arg0);
     }
 }
 
@@ -1221,11 +1221,11 @@ void func_00011EDC(struct Unk_func_00011EDC_0 *arg0) {
     if (arg0 != NULL) {
         func_00011BAC(arg0->unk0);
         func_00019B68(arg0->unk4);
-        sceSsl_lib_5E5C873A(arg0);
+        CRYPTO_free(arg0);
     }
 }
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_3454E622);
+INCLUDE_ASM("nonmatchings/libssl", BIO_printf);
 
 M2C_UNK *func_00011F90(void) {
     return &D_0002E710;
@@ -1263,15 +1263,15 @@ s32 func_000129A4(struct Unk_func_000129A4_0 *arg0) {
     return arg0->unk14;
 }
 
-void sceSsl_lib_EE624680(struct Unk_sceSsl_lib_EE624680_0 *arg0) {
+void BIO_set_retry_special(struct Unk_sceSsl_lib_EE624680_0 *arg0) {
     arg0->unk14 = (s32) (arg0->unk14 | 0xC);
 }
 
-void sceSsl_lib_8A2F6963(struct Unk_sceSsl_lib_8A2F6963_0 *arg0) {
+void BIO_set_retry_read(struct Unk_sceSsl_lib_8A2F6963_0 *arg0) {
     arg0->unk14 = (s32) (arg0->unk14 | 9);
 }
 
-void sceSsl_lib_067173A8(struct Unk_sceSsl_lib_067173A8_0 *arg0) {
+void BIO_set_retry_write(struct Unk_sceSsl_lib_067173A8_0 *arg0) {
     arg0->unk14 = (s32) (arg0->unk14 | 0xA);
 }
 
@@ -1283,60 +1283,60 @@ void func_000129DC(void *arg0, s32 arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_88A96ED0);
+INCLUDE_ASM("nonmatchings/libssl", BIO_clear_retry_flags);
 
-s32 sceSsl_lib_CA6A3C74(struct Unk_sceSsl_lib_CA6A3C74_0 *arg0) {
+s32 BIO_get_retry_flags(struct Unk_sceSsl_lib_CA6A3C74_0 *arg0) {
     return arg0->unk14 & 0xF;
 }
 
-s32 sceSsl_lib_E3C30923(struct Unk_sceSsl_lib_E3C30923_0 *arg0) {
+s32 BIO_should_read(struct Unk_sceSsl_lib_E3C30923_0 *arg0) {
     return arg0->unk14 & 1;
 }
 
-s32 sceSsl_lib_089FF1F1(struct Unk_sceSsl_lib_089FF1F1_0 *arg0) {
+s32 BIO_should_write(struct Unk_sceSsl_lib_089FF1F1_0 *arg0) {
     return arg0->unk14 & 2;
 }
 
-s32 sceSsl_lib_ABCD28B8(struct Unk_sceSsl_lib_ABCD28B8_0 *arg0) {
+s32 BIO_should_io_special(struct Unk_sceSsl_lib_ABCD28B8_0 *arg0) {
     return arg0->unk14 & 4;
 }
 
-s32 sceSsl_lib_1BCA32E3(struct Unk_sceSsl_lib_1BCA32E3_0 *arg0) {
+s32 BIO_retry_type(struct Unk_sceSsl_lib_1BCA32E3_0 *arg0) {
     return arg0->unk14 & 7;
 }
 
-s32 sceSsl_lib_9052D21A(struct Unk_sceSsl_lib_9052D21A_0 *arg0) {
+s32 BIO_should_retry(struct Unk_sceSsl_lib_9052D21A_0 *arg0) {
     return arg0->unk14 & 8;
 }
 
-void sceSsl_lib_26A7CF72(struct Unk_sceSsl_lib_26A7CF72_0 *arg0, s32 arg1) {
+void BIO_set_cb(struct Unk_sceSsl_lib_26A7CF72_0 *arg0, s32 arg1) {
     arg0->unk4 = arg1;
 }
 
-void sceSsl_lib_ECE07B61(struct Unk_sceSsl_lib_ECE07B61_0 *arg0, s32 arg1) {
+void BIO_set_cb_arg(struct Unk_sceSsl_lib_ECE07B61_0 *arg0, s32 arg1) {
     arg0->unk8 = arg1;
 }
 
-s32 sceSsl_lib_EC4A18D7(struct Unk_sceSsl_lib_EC4A18D7_0 *arg0) {
+s32 BIO_get_cb_arg(struct Unk_sceSsl_lib_EC4A18D7_0 *arg0) {
     return arg0->unk8;
 }
 
-s32 sceSsl_lib_558CAA41(struct Unk_sceSsl_lib_558CAA41_0 *arg0) {
+s32 BIO_get_cb(struct Unk_sceSsl_lib_558CAA41_0 *arg0) {
     return arg0->unk4;
 }
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_0FD2F220);
+INCLUDE_ASM("nonmatchings/libssl", BIO_method_name);
 #else
-s32 sceSsl_lib_0FD2F220(struct Unk_vt_sceSsl_lib_0FD2F220_arg0 **arg0) {
+s32 BIO_method_name(struct Unk_vt_sceSsl_lib_0FD2F220_arg0 **arg0) {
     return (*arg0)->unk4;
 }
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_19A0DB42);
+INCLUDE_ASM("nonmatchings/libssl", BIO_method_type);
 #else
-s32 sceSsl_lib_19A0DB42(s32 **arg0) {
+s32 BIO_method_type(s32 **arg0) {
     return **arg0;
 }
 #endif
@@ -1344,10 +1344,10 @@ s32 sceSsl_lib_19A0DB42(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/libssl", func_00012A84);
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_58352068);
+INCLUDE_ASM("nonmatchings/libssl", BIO_new_mem);
 #else
-void sceSsl_lib_58352068(void) {
-    sceSsl_lib_5DED429A(func_00012A84());
+void BIO_new_mem(void) {
+    BIO_new(func_00012A84());
 }
 #endif
 
@@ -1386,13 +1386,13 @@ M2C_UNK *func_00012F14(void) {
 }
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_28B4DE33);
+INCLUDE_ASM("nonmatchings/libssl", BIO_new_socket);
 #else
-s32 sceSsl_lib_28B4DE33(s32 arg0, s32 arg1) {
+s32 BIO_new_socket(s32 arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_v0;
 
-    temp_v0 = sceSsl_lib_5DED429A(func_00012F14());
+    temp_v0 = BIO_new(func_00012F14());
     var_v0 = 0;
     if (temp_v0 != 0) {
         func_0001A534(temp_v0, 0x68, arg1, arg0);
@@ -1421,7 +1421,7 @@ s32 func_00012FFC(void *arg0, void *arg1, u32 arg2) {
     var_s1 = 0;
     if (arg1 != NULL) {
         var_s1 = sceNetInetRecv(M2C_FIELD(arg0, s32 *, 0x1C), arg1, arg2, 0);
-        sceSsl_lib_88A96ED0((s32) arg0);
+        BIO_clear_retry_flags((s32) arg0);
     }
     return var_s1;
 }
@@ -1431,7 +1431,7 @@ s32 func_00013048(struct Unk_func_00013048_0 *arg0, void *arg1, u32 arg2) {
     s32 temp_s0;
 
     temp_s0 = sceNetInetSend(arg0->unk1C, arg1, arg2, 0);
-    sceSsl_lib_88A96ED0((s32) arg0);
+    BIO_clear_retry_flags((s32) arg0);
     return temp_s0;
 }
 
@@ -1524,7 +1524,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_00013B14);
 
 void func_00013B38(s32 arg0) {
     if (arg0 != 0) {
-        sceSsl_lib_5E5C873A();
+        CRYPTO_free();
     }
 }
 
@@ -1600,29 +1600,29 @@ INCLUDE_ASM("nonmatchings/libssl", func_00014854);
 INCLUDE_ASM("nonmatchings/libssl", func_00014B98);
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_A2619268);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_set_mem_functions);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00014918);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B0B90785);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_get_mem_functions);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_064F5DF3);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_get_locked_mem_functions);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_6053B79C);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_malloc_locked);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_E5FC4992);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_free_locked);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_0861D934);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_malloc);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00014A0C);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_5E5C873A);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_free);
 
 void func_00014A54(s32 arg0, s32 arg1) {
     if (arg0 != 0) {
-        sceSsl_lib_5E5C873A();
+        CRYPTO_free();
     }
-    sceSsl_lib_0861D934(arg1);
+    CRYPTO_malloc(arg1);
 }
 
 #if FW_VERSION >= 271
@@ -1690,7 +1690,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_00015494);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000154BC);
 
-M2C_UNK *sceSsl_lib_A1C3AB31(void) {
+M2C_UNK *RAND_default_method(void) {
     return &D_0002FACC;
 }
 
@@ -1706,15 +1706,15 @@ INCLUDE_ASM("nonmatchings/libssl", func_000158BC);
 INCLUDE_ASM("nonmatchings/libssl", func_00015AE8);
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_1C2728A5);
+INCLUDE_ASM("nonmatchings/libssl", RAND_set_rand_method);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_4AE72675);
+INCLUDE_ASM("nonmatchings/libssl", RAND_get_rand_method);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_56E19CEB);
+INCLUDE_ASM("nonmatchings/libssl", RAND_cleanup);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_DEA6EDB2);
+INCLUDE_ASM("nonmatchings/libssl", RAND_seed);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_21F2A35C);
+INCLUDE_ASM("nonmatchings/libssl", RAND_bytes);
 
 M2C_UNK *func_00015C18(void) {
     return &D_0002FADC;
@@ -2543,7 +2543,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_00019D30);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00019E54);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_5DED429A);
+INCLUDE_ASM("nonmatchings/libssl", BIO_new);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001A094);
@@ -2551,42 +2551,42 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001A094);
 INCLUDE_ASM("nonmatchings/libssl", func_0001A498);
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_3E040FD4);
+INCLUDE_ASM("nonmatchings/libssl", BIO_free);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_675AC5AA);
+INCLUDE_ASM("nonmatchings/libssl", BIO_read);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_CED07EAE);
+INCLUDE_ASM("nonmatchings/libssl", BIO_write);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_AFD1D124);
+INCLUDE_ASM("nonmatchings/libssl", BIO_gets);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001A534);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_9566709F);
+INCLUDE_ASM("nonmatchings/libssl", BIO_ctrl);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_1EC64594);
+INCLUDE_ASM("nonmatchings/libssl", BIO_push);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_732F4E44);
+INCLUDE_ASM("nonmatchings/libssl", BIO_pop);
 
-s32 sceSsl_lib_4A6078CF(struct Unk_sceSsl_lib_4A6078CF_0 *arg0) {
+s32 BIO_get_retry_reason(struct Unk_sceSsl_lib_4A6078CF_0 *arg0) {
     return arg0->unk18;
 }
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_959557F5);
+INCLUDE_ASM("nonmatchings/libssl", BIO_free_all);
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_624CB314);
+INCLUDE_ASM("nonmatchings/libssl", BIO_copy_next_retry);
 #endif
 
 #if FW_VERSION == 271
-void sceSsl_lib_624CB314(struct Unk_func_00012994_0 *arg0) {
-    func_00012994(arg0, sceSsl_lib_CA6A3C74((struct Unk_sceSsl_lib_CA6A3C74_0 *) arg0->unk24));
+void BIO_copy_next_retry(struct Unk_func_00012994_0 *arg0) {
+    func_00012994(arg0, BIO_get_retry_flags((struct Unk_sceSsl_lib_CA6A3C74_0 *) arg0->unk24));
     arg0->unk18 = arg0->unk24->unk18;
 }
 #endif
 
 #if FW_VERSION >= 282
-void sceSsl_lib_624CB314(struct Unk_func_00012994_0 *arg0) {
-    func_00012994(arg0, sceSsl_lib_CA6A3C74(arg0->unk24));
+void BIO_copy_next_retry(struct Unk_func_00012994_0 *arg0) {
+    func_00012994(arg0, BIO_get_retry_flags(arg0->unk24));
     arg0->unk18 = (s32) arg0->unk24->unk18;
 }
 #endif
@@ -2597,7 +2597,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001A7A8);
 INCLUDE_ASM("nonmatchings/libssl", func_0001A7D4);
 #else
 void func_0001A7D4(s32 arg0, s32 arg1, s32 arg2) {
-    sceSsl_lib_0217E73C((s32) &func_0001DCB8, (s32) &D_0002D2EC, arg0, arg1, arg2);
+    PEM_ASN1_read_bio((s32) &func_0001DCB8, (s32) &D_0002D2EC, arg0, arg1, arg2);
 }
 #endif
 
@@ -2615,7 +2615,7 @@ void func_0001AAA8(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_1E257243);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_set_flag);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D2EC);
 
@@ -2625,64 +2625,64 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001AAFC);
 INCLUDE_ASM("nonmatchings/libssl", func_0001AF14);
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B1E75EA9);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_get_flag);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_0A241EDE);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_new);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_C1A2E14B);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_free);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_0FF7BA68);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_verify);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001AEF8);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_A739BFD9);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_to_binary);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_6038DEDE);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_from_binary);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_999D7614);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_reference_inc);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001B020);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_1B93AD27);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_subject_name_cmp);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_4BE9030A);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_get_issuer_name);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_12C7718F);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_get_subject_name);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B87FFE37);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_get_pubkey);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_9299C6CE);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_get_serialNumber_info);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_05E019A4);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_get_notAfter);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_341843AB);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_get_notBefore);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_45514AE3);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_NAME_new);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_ED95A457);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_NAME_free);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_338C8FDD);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_NAME_dup);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_BE4A711C);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_NAME_hash);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_7D0E41F4);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_NAME_cmp);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_D579CE04);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_NAME_from_binary);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_90BCFCE2);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_NAME_to_binary);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_4C75B8E9);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_NAME_get_entry_count);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_5040E836);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_NAME_get_entry);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_8D484361);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_NAME_ENTRY_get_info);
 
-void sceSsl_lib_6443D0EE(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    sceSsl_lib_8D484361(arg0, arg1, arg2, arg3, 0, 0, 0);
+void SSLCERT_NAME_ENTRY_get_oid_info(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    SSLCERT_NAME_ENTRY_get_info(arg0, arg1, arg2, arg3, 0, 0, 0);
 }
 
-void sceSsl_lib_6E1E9E0D(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    sceSsl_lib_8D484361(arg0, 0, 0, 0, arg1, arg2, arg3);
+void SSLCERT_NAME_ENTRY_get_data_info(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    SSLCERT_NAME_ENTRY_get_info(arg0, 0, 0, 0, arg1, arg2, arg3);
 }
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001B790);
@@ -2709,79 +2709,79 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001BC1C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001BC68);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_C6ED5C87);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_check_private_key);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_8B78A6C0);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_PEM_read_bio_SSLCERT);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_737BED1C);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_PKEY_new);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_9307DE23);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_PKEY_free);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_EDBE00D6);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_PKEY_from_PUBKEY_binary);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_E11361C2);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_PKEY_reference_inc);
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_7781A781);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_get_key_usage_int);
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_CFA2F8EB);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_get_basic_constraints_int);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D3E8);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_2B7BD166);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_OID_to_string);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_37C7B76C);
+INCLUDE_ASM("nonmatchings/libssl", SSLCERT_fingerprint);
 
 void func_0001C408(void) {
     func_0001D31C();
 }
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_6BA650E4);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_get_locking_cb);
 #else
-s32 sceSsl_lib_6BA650E4(void) {
+s32 CRYPTO_get_locking_cb(void) {
     return D_00030DF0;
 }
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_69105335);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_get_add_lock_cb);
 #else
-s32 sceSsl_lib_69105335(void) {
+s32 CRYPTO_get_add_lock_cb(void) {
     return D_00030DF4;
 }
 #endif
 
-void sceSsl_lib_A9191C17(s32 arg0) {
+void CRYPTO_set_locking_cb(s32 arg0) {
     func_0001C408();
     D_00030DF0 = arg0;
 }
 
-void sceSsl_lib_64AA4ED6(s32 arg0) {
+void CRYPTO_set_add_lock_cb(s32 arg0) {
     D_00030DF4 = arg0;
 }
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_6CDEB823);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_get_id_cb);
 #else
-s32 sceSsl_lib_6CDEB823(void) {
+s32 CRYPTO_get_id_cb(void) {
     return D_00030DF8;
 }
 #endif
 
-void sceSsl_lib_5AD14F0B(s32 arg0) {
+void CRYPTO_set_id_cb(s32 arg0) {
     D_00030DF8 = arg0;
 }
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_9D8A385E);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_thread_id);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_D84E2411);
+INCLUDE_ASM("nonmatchings/libssl", CRYPTO_lock);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001C4F0);
 
 s32 func_0001C598(void) {
-    sceSsl_lib_9CDCA0D7(9, 0x77, 0x22, 0, 0);
+    ERR_put_error(9, 0x77, 0x22, 0, 0);
     return -1;
 }
 
@@ -2827,11 +2827,11 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002DB40);
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DABC);
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_0217E73C);
+INCLUDE_ASM("nonmatchings/libssl", PEM_ASN1_read_bio);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_BE5FF9F1);
+INCLUDE_ASM("nonmatchings/libssl", PEM_do_header);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B99D89E2);
+INCLUDE_ASM("nonmatchings/libssl", PEM_get_EVP_CIPHER_CTX);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001CC80);
@@ -2871,7 +2871,7 @@ void *func_0001D3A0(void) {
     struct Unk_func_0001D3A0_temp_v0 *temp_v0;
     void *var_v0;
 
-    temp_v0 = sceSsl_lib_0861D934(0xAC);
+    temp_v0 = CRYPTO_malloc(0xAC);
     var_v0 = NULL;
     if (temp_v0 != NULL) {
         func_00029D1C((s32) temp_v0, 0, 0xAC);
@@ -3020,7 +3020,7 @@ void *func_0001E828(void) {
     void *temp_v0;
     void *var_v1;
 
-    temp_v0 = sceSsl_lib_0861D934(0x24);
+    temp_v0 = CRYPTO_malloc(0x24);
     var_v1 = NULL;
     if (temp_v0 != NULL) {
         M2C_FIELD(temp_v0, s32 *, 0) = 0;
@@ -3044,7 +3044,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_0001E3A0);
 
 void func_0001E3F0(s32 arg0) {
     if (arg0 != 0) {
-        sceSsl_lib_5E5C873A();
+        CRYPTO_free();
     }
 }
 
@@ -3082,11 +3082,11 @@ s32 func_0001E770(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001E77C);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_101D418A);
+INCLUDE_ASM("nonmatchings/libssl", ERR_free_strings);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_9CDCA0D7);
+INCLUDE_ASM("nonmatchings/libssl", ERR_put_error);
 
-void sceSsl_lib_04E677AF(void) {
+void ERR_clear_error(void) {
     struct Unk_sceSsl_lib_04E677AF_temp_v0 *temp_v0;
 
     temp_v0 = func_0001EC18();
@@ -3095,17 +3095,17 @@ void sceSsl_lib_04E677AF(void) {
 }
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_E78AD94D);
+INCLUDE_ASM("nonmatchings/libssl", ERR_get_error);
 #else
-void sceSsl_lib_E78AD94D(void) {
+void ERR_get_error(void) {
     func_0001EA04(1, 0, 0, 0, 0);
 }
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_47F7B97F);
+INCLUDE_ASM("nonmatchings/libssl", ERR_peek_error);
 #else
-void sceSsl_lib_47F7B97F(void) {
+void ERR_peek_error(void) {
     func_0001EA04(0, 0, 0, 0, 0);
 }
 #endif
@@ -3168,7 +3168,7 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002D70C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0001EA04);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_D8C05497);
+INCLUDE_ASM("nonmatchings/libssl", ERR_remove_state);
 
 s32 func_0001EBF0(s32 *arg0) {
     return *arg0 * 0xD;
@@ -3196,13 +3196,13 @@ s32 func_0001EF34(s32 arg0) {
 
     var_v1 = 0;
     if (arg0 == 0x300) {
-        var_v1 = sceSsl_lib_B40D11EA();
+        var_v1 = SSLv3_client_method();
     }
     return var_v1;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B40D11EA);
+INCLUDE_ASM("nonmatchings/libssl", SSLv3_client_method);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_0001EFFC);
@@ -3231,7 +3231,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_00020A20);
 #endif
 
 void func_00020854(s32 *arg0, s32 *arg1) {
-    sceSsl_lib_7D0E41F4(*arg0, *arg1);
+    SSLCERT_NAME_cmp(*arg0, *arg1);
 }
 
 INCLUDE_ASM("nonmatchings/libssl", func_00020874);
@@ -3485,7 +3485,7 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002D95C);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00023810);
 
-M2C_UNK *sceSsl_lib_A2CE8DCD(struct Unk_sceSsl_lib_A2CE8DCD_0 *arg0) {
+M2C_UNK *SSL_CIPHER_get_name(struct Unk_sceSsl_lib_A2CE8DCD_0 *arg0) {
     M2C_UNK *var_v0;
 
     var_v0 = &D_0002D95C;
@@ -3501,7 +3501,7 @@ s32 func_00023868(s32 *arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00023870);
 
-s32 sceSsl_lib_EF5A4BD4(struct Unk_sceSsl_lib_EF5A4BD4_0 *arg0) {
+s32 SSL_get_session(struct Unk_sceSsl_lib_EF5A4BD4_0 *arg0) {
     return arg0->unkB8;
 }
 
@@ -3535,19 +3535,19 @@ INCLUDE_ASM("nonmatchings/libssl", func_00023FD0);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00023E64);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B81AD643);
+INCLUDE_ASM("nonmatchings/libssl", SSL_CTX_remove_session);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_BDAD0841);
+INCLUDE_ASM("nonmatchings/libssl", SSL_SESSION_free);
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_86D0771E);
+INCLUDE_ASM("nonmatchings/libssl", SSL_SESSION_reference_inc);
 #else
-void sceSsl_lib_86D0771E(s32 arg0) {
+void SSL_SESSION_reference_inc(s32 arg0) {
     func_0001C4F0(arg0 + 0x98, 1, 0xE, (s32) &D_0002D970, 0x187);
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_69F1B678);
+INCLUDE_ASM("nonmatchings/libssl", SSL_set_session);
 
 s32 func_00024340(struct Unk_func_00024340_0 *arg0) {
     s32 var_v0;
@@ -3563,7 +3563,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_00024354);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0002438C);
 
-s32 sceSsl_lib_4214B7AF(struct Unk_sceSsl_lib_4214B7AF_0 *arg0, s32 arg1) {
+s32 SSL_CTX_set_timeout(struct Unk_sceSsl_lib_4214B7AF_0 *arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -3574,7 +3574,7 @@ s32 sceSsl_lib_4214B7AF(struct Unk_sceSsl_lib_4214B7AF_0 *arg0, s32 arg1) {
     return var_v0;
 }
 
-s32 sceSsl_lib_795B9EDF(struct Unk_sceSsl_lib_795B9EDF_0 *arg0) {
+s32 SSL_CTX_get_timeout(struct Unk_sceSsl_lib_795B9EDF_0 *arg0) {
     s32 var_v0;
 
     var_v0 = 0;
@@ -3588,7 +3588,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_000243F0);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D970);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_4E0F2CCC);
+INCLUDE_ASM("nonmatchings/libssl", SSL_CTX_flush_sessions);
 
 INCLUDE_ASM("nonmatchings/libssl", func_0002454C);
 
@@ -3936,7 +3936,7 @@ s32 func_000274A8(void *arg0) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00026EDC);
 
-s32 sceSsl_lib_9274BFE3(void) {
+s32 SSL_library_init_custom(void) {
     func_00028C10();
     func_00026FA0();
     func_0001A814();
@@ -3945,15 +3945,15 @@ s32 sceSsl_lib_9274BFE3(void) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_00026FA0);
 
-s32 sceSsl_lib_CF78BEFB(void) {
+s32 SSL_library_cleanup(void) {
     func_0000DE28();
-    sceSsl_lib_56E19CEB();
+    RAND_cleanup();
     func_00015028(-1);
     func_000150F0();
     func_0001BA10();
     func_00028C10();
-    sceSsl_lib_D8C05497(0);
-    sceSsl_lib_101D418A();
+    ERR_remove_state(0);
+    ERR_free_strings();
     return 1;
 }
 
@@ -3965,7 +3965,7 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002DEF4);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DF00);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_BB1564A3);
+INCLUDE_ASM("nonmatchings/libssl", SSL_get_ex_data_X509_STORE_CTX_idx);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00027114);
 
@@ -3979,43 +3979,43 @@ INCLUDE_ASM("nonmatchings/libssl", func_0002796C);
 INCLUDE_ASM("nonmatchings/libssl", func_0002735C);
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_92FA8B34);
+INCLUDE_ASM("nonmatchings/libssl", SSL_get_client_CA_list_count);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_7BDAF864);
+INCLUDE_ASM("nonmatchings/libssl", SSL_get_client_CA_list_item);
 
-void sceSsl_lib_BF55C31C(struct Unk_sceSsl_lib_BF55C31C_0 *arg0, s32 arg1) {
+void SSL_CTX_set_client_cert_cb(struct Unk_sceSsl_lib_BF55C31C_0 *arg0, s32 arg1) {
     arg0->unkC8 = arg1;
 }
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_54A7D8F3);
+INCLUDE_ASM("nonmatchings/libssl", SSL_clear);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_EBFB0E3C);
+INCLUDE_ASM("nonmatchings/libssl", SSL_new);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_84833472);
+INCLUDE_ASM("nonmatchings/libssl", SSL_free);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B9C8CCE6);
+INCLUDE_ASM("nonmatchings/libssl", SSL_set_bio);
 
-s32 sceSsl_lib_2E2E2B09(struct Unk_sceSsl_lib_2E2E2B09_0 *arg0) {
+s32 SSL_get_rbio(struct Unk_sceSsl_lib_2E2E2B09_0 *arg0) {
     return arg0->unkC;
 }
 
-s32 sceSsl_lib_868C15DF(struct Unk_sceSsl_lib_868C15DF_0 *arg0) {
+s32 SSL_get_wbio(struct Unk_sceSsl_lib_868C15DF_0 *arg0) {
     return arg0->unk10;
 }
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_D49A570C);
+INCLUDE_ASM("nonmatchings/libssl", SSL_get_default_timeout);
 #else
-void sceSsl_lib_D49A570C(struct Unk_sceSsl_lib_D49A570C_0 *arg0) {
+void SSL_get_default_timeout(struct Unk_sceSsl_lib_D49A570C_0 *arg0) {
     arg0->unk8->unk50();
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_E7C29542);
+INCLUDE_ASM("nonmatchings/libssl", SSL_read);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B7CA8717);
+INCLUDE_ASM("nonmatchings/libssl", SSL_write);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_3E3133D6);
+INCLUDE_ASM("nonmatchings/libssl", SSL_shutdown);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DF30);
 
@@ -4023,7 +4023,7 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002DF54);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DF78);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B4D78E98);
+INCLUDE_ASM("nonmatchings/libssl", SSL_CTX_ctrl);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00027CB4);
@@ -4103,16 +4103,16 @@ INCLUDE_ASM("nonmatchings/libssl", func_00027DEC);
 INCLUDE_ASM("nonmatchings/libssl", func_00027E18);
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_FB8273FE);
+INCLUDE_ASM("nonmatchings/libssl", SSL_CTX_new);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_588F2FE8);
+INCLUDE_ASM("nonmatchings/libssl", SSL_CTX_free);
 
-void sceSsl_lib_529A9477(struct Unk_sceSsl_lib_529A9477_0 *arg0, s32 arg1, s32 arg2) {
+void SSL_CTX_set_app_verify_cb(struct Unk_sceSsl_lib_529A9477_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk84 = arg1;
     arg0->unk88 = arg2;
 }
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_AEBF278B);
+INCLUDE_ASM("nonmatchings/libssl", SSL_CTX_set_verify);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_000282B8);
@@ -4128,17 +4128,17 @@ INCLUDE_ASM("nonmatchings/libssl", func_00028600);
 INCLUDE_ASM("nonmatchings/libssl", func_00028C84);
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_B3B04C58);
+INCLUDE_ASM("nonmatchings/libssl", SSL_get_error);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_80608663);
+INCLUDE_ASM("nonmatchings/libssl", SSL_set_connect_state);
 
 s32 func_0002889C(void) {
-    sceSsl_lib_9CDCA0D7(0x14, 0xC6, 0x22, 0, 0);
+    ERR_put_error(0x14, 0xC6, 0x22, 0, 0);
     return 0;
 }
 
 s32 func_000288CC(void) {
-    sceSsl_lib_9CDCA0D7(0x14, 0xA1, 0x22, 0, 0);
+    ERR_put_error(0x14, 0xA1, 0x22, 0, 0);
     return 0;
 }
 
@@ -4147,11 +4147,11 @@ INCLUDE_ASM("nonmatchings/libssl", func_000288FC);
 #else
 INCLUDE_ASM("nonmatchings/libssl", func_00028F84);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_88897D26);
+INCLUDE_ASM("nonmatchings/libssl", SSL_get_current_cipher);
 #endif
 
 #if FW_VERSION >= 271
-s32 sceSsl_lib_88897D26(struct Unk_sceSsl_lib_88897D26_0 *arg0) {
+s32 SSL_get_current_cipher(struct Unk_sceSsl_lib_88897D26_0 *arg0) {
     s32 var_v0;
     struct Unk_sceSsl_lib_88897D26_temp_v0 *temp_v0;
 
@@ -4167,19 +4167,19 @@ INCLUDE_ASM("nonmatchings/libssl", func_000289B8);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00028AD4);
 
-void sceSsl_lib_42DF4592(struct Unk_sceSsl_lib_42DF4592_0 *arg0, s32 arg1) {
+void SSL_CTX_set_quiet_shutdown(struct Unk_sceSsl_lib_42DF4592_0 *arg0, s32 arg1) {
     arg0->unkD0 = arg1;
 }
 
-s32 sceSsl_lib_E14101E4(struct Unk_sceSsl_lib_E14101E4_0 *arg0) {
+s32 SSL_CTX_get_quiet_shutdown(struct Unk_sceSsl_lib_E14101E4_0 *arg0) {
     return arg0->unkD0;
 }
 
-void sceSsl_lib_4AF959E3(struct Unk_sceSsl_lib_4AF959E3_0 *arg0, s32 arg1) {
+void SSL_set_quiet_shutdown(struct Unk_sceSsl_lib_4AF959E3_0 *arg0, s32 arg1) {
     arg0->unk2C = arg1;
 }
 
-s32 sceSsl_lib_6A19E0AA(struct Unk_sceSsl_lib_6A19E0AA_0 *arg0) {
+s32 SSL_get_quiet_shutdown(struct Unk_sceSsl_lib_6A19E0AA_0 *arg0) {
     return arg0->unk2C;
 }
 
@@ -4199,32 +4199,32 @@ s32 sceSsl_lib_340F8829(struct Unk_sceSsl_lib_340F8829_0 *arg0) {
     return arg0->unk30;
 }
 
-void sceSsl_lib_86D4034D(struct Unk_sceSsl_lib_86D4034D_0 *arg0, s32 arg1) {
+void SSL_set_shutdown(struct Unk_sceSsl_lib_86D4034D_0 *arg0, s32 arg1) {
     arg0->unk34 = arg1;
 }
 
-s32 sceSsl_lib_D1205C58(struct Unk_sceSsl_lib_D1205C58_0 *arg0) {
+s32 SSL_get_shutdown(struct Unk_sceSsl_lib_D1205C58_0 *arg0) {
     return arg0->unk34;
 }
 
-s32 sceSsl_lib_57F2E960(s32 *arg0) {
+s32 SSL_version(s32 *arg0) {
     return *arg0;
 }
 
-s32 sceSsl_lib_E92302C5(struct Unk_sceSsl_lib_E92302C5_0 *arg0) {
+s32 SSL_get_SSL_CTX(struct Unk_sceSsl_lib_E92302C5_0 *arg0) {
     return arg0->unkE4;
 }
 
-void sceSsl_lib_C270B3A8(struct Unk_sceSsl_lib_C270B3A8_0 *arg0, s32 arg1) {
+void SSL_set_info_cb(struct Unk_sceSsl_lib_C270B3A8_0 *arg0, s32 arg1) {
     arg0->unkC8 = arg1;
 }
 
-void sceSsl_lib_BE423CD1(struct Unk_sceSsl_lib_BE423CD1_0 *arg0, s32 arg1, s32 arg2) {
+void SSL_set_alert_info_cb(struct Unk_sceSsl_lib_BE423CD1_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unkCC = arg1;
     arg0->unkD0 = arg2;
 }
 
-s32 sceSsl_lib_95E346AB(struct Unk_sceSsl_lib_95E346AB_0 *arg0) {
+s32 SSL_get_info_cb(struct Unk_sceSsl_lib_95E346AB_0 *arg0) {
     return arg0->unkC8;
 }
 
@@ -4236,7 +4236,7 @@ s32 func_00028BB4(struct Unk_func_00028BB4_0 *arg0) {
     return arg0->unkD0;
 }
 
-void sceSsl_lib_9CB1A62F(struct Unk_sceSsl_lib_9CB1A62F_0 *arg0, s32 arg1, s32 arg2) {
+void SSL_set_app_data_cb(struct Unk_sceSsl_lib_9CB1A62F_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unkD4 = arg1;
     arg0->unkD8 = arg2;
 }
@@ -4249,15 +4249,15 @@ s32 func_00028BD0(struct Unk_func_00028BD0_0 *arg0) {
     return arg0->unkD8;
 }
 
-s32 sceSsl_lib_104F749D(struct Unk_sceSsl_lib_104F749D_0 *arg0) {
+s32 SSL_state(struct Unk_sceSsl_lib_104F749D_0 *arg0) {
     return arg0->unk38;
 }
 
-void sceSsl_lib_5605C9FE(struct Unk_sceSsl_lib_5605C9FE_0 *arg0, s32 arg1) {
+void SSL_set_verify_result(struct Unk_sceSsl_lib_5605C9FE_0 *arg0, s32 arg1) {
     arg0->unkEC = arg1;
 }
 
-s32 sceSsl_lib_AA3B27CF(struct Unk_sceSsl_lib_AA3B27CF_0 *arg0) {
+s32 SSL_get_verify_result(struct Unk_sceSsl_lib_AA3B27CF_0 *arg0) {
     return arg0->unkEC;
 }
 
@@ -4269,11 +4269,11 @@ s32 func_00028BF8(struct Unk_func_00028BF8_0 *arg0) {
     return arg0->unkD8;
 }
 
-s32 sceSsl_lib_C97D0510(struct Unk_sceSsl_lib_C97D0510_0 *arg0) {
+s32 SSL_want(struct Unk_sceSsl_lib_C97D0510_0 *arg0) {
     return arg0->unk18;
 }
 
-s32 sceSsl_lib_A8F0AD39(struct Unk_sceSsl_lib_A8F0AD39_0 *arg0) {
+s32 SSL_reuse(struct Unk_sceSsl_lib_A8F0AD39_0 *arg0) {
     return arg0->unk64;
 }
 
@@ -4305,11 +4305,11 @@ s32 func_00028C54(s32 arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_C0ABBB57);
+INCLUDE_ASM("nonmatchings/libssl", SSL_use_certificate);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00028D28);
 
-INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_8390B321);
+INCLUDE_ASM("nonmatchings/libssl", SSL_use_PrivateKey);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00028FA8);
 
@@ -4354,39 +4354,39 @@ INCLUDE_ASM("nonmatchings/libssl", func_00029C5C);
 INCLUDE_ASM("nonmatchings/libssl", func_00029CB0);
 
 void func_00029CE4(void) {
-    sceNet_lib_E0A81C7C();
+    sceNetMemcmp();
 }
 
 void func_00029D00(void) {
-    sceNet_lib_EF097716();
+    sceNetMemcpy();
 }
 
 INCLUDE_ASM("nonmatchings/libssl", func_00029D1C);
 
 void func_00029D38(void) {
-    sceNet_lib_8687B5AB();
+    sceNetVsprintf();
 }
 
 void func_00029D54(void) {
-    sceNet_lib_D8722983();
+    sceNetStrlen();
 }
 
 void func_00029D70(void) {
-    sceNet_lib_A0F16ABD();
+    sceNetStrcmp();
 }
 
 void func_00029D8C(void) {
-    sceNet_lib_94DCA9F0();
+    sceNetStrncmp();
 }
 
 void func_00029DA8(void) {
-    sceNet_lib_80C9F02A();
+    sceNetStrcpy();
 }
 
 void func_00029DC4(void) {
-    sceNet_lib_B5CE388A();
+    sceNetStrncpy();
 }
 
 void func_00029DE0(void) {
-    sceNet_lib_5705F6F9();
+    sceNetStrcat();
 }

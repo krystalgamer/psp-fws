@@ -50,11 +50,11 @@ INCLUDE_ASM("nonmatchings/rtc", func_00000000_v300);
 INCLUDE_ASM("nonmatchings/rtc", func_00000000);
 #endif
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_F0B5571C);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSynchronize);
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_9763C138);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSetCurrentTick);
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_17C26C00);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSetCurrentSecureTick);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetAlarmTick);
 
@@ -68,7 +68,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcUnregisterCallback);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentTick);
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_B44BDAED);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentSecureTick);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastReincarnatedTime);
@@ -85,9 +85,9 @@ s32 module_start(void) {
     D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
-    sceRtc_driver_F0B5571C();
-    sceSyscon_driver_A068B3D0((s32) &func_00000000, 0);
-    sceSysEventForKernel_CD9E4BB5(&D_00004530);
+    sceRtcSynchronize();
+    sceSysconSetAlarmCallback((s32) &func_00000000, 0);
+    sceKernelRegisterSysEventHandler(&D_00004530);
     return 0;
 }
 #endif
@@ -100,23 +100,23 @@ s32 module_start(void) {
     D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
-    sceRtc_driver_F0B5571C();
-    sceSysEventForKernel_CD9E4BB5(&D_00003BF0);
+    sceRtcSynchronize();
+    sceKernelRegisterSysEventHandler(&D_00003BF0);
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 s32 module_reboot_before(void) {
-    sceSyscon_driver_A068B3D0(0, 0);
-    sceSysEventForKernel_D7D3FDCD(&D_00004530);
+    sceSysconSetAlarmCallback(0, 0);
+    sceKernelUnregisterSysEventHandler(&D_00004530);
     return 0;
 }
 #endif
 
 #if FW_VERSION < 270
 s32 module_reboot_before(void) {
-    sceSysEventForKernel_D7D3FDCD(&D_00003BF0);
+    sceKernelUnregisterSysEventHandler(&D_00003BF0);
     return 0;
 }
 #endif
@@ -129,24 +129,24 @@ s32 module_start(void) {
     D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
-    sceRtc_driver_F0B5571C();
+    sceRtcSynchronize();
     func_00003D9C();
-    sceSyscon_driver_A068B3D0((s32) &func_00000000, 0);
-    sceSysEventForKernel_CD9E4BB5(&D_00004540);
+    sceSysconSetAlarmCallback((s32) &func_00000000, 0);
+    sceKernelRegisterSysEventHandler(&D_00004540);
     return 0;
 }
 
 s32 module_reboot_before(void) {
-    sceSyscon_driver_A068B3D0(0, 0);
-    sceSysEventForKernel_D7D3FDCD(&D_00004540);
+    sceSysconSetAlarmCallback(0, 0);
+    sceKernelUnregisterSysEventHandler(&D_00004540);
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_912BEE56);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcInit);
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
-s32 sceRtc_driver_912BEE56(void) {
+s32 sceRtcInit(void) {
     memset(&D_00004580.unk0, 0, 0x60);
     D_00004580.unk1C = -1;
     func_0000358C();
@@ -154,64 +154,64 @@ s32 sceRtc_driver_912BEE56(void) {
     D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
-    sceRtc_driver_F0B5571C();
-    sceSyscon_driver_A068B3D0((s32) &func_00000000, 0);
-    sceSysEventForKernel_CD9E4BB5(&D_00004530);
+    sceRtcSynchronize();
+    sceSysconSetAlarmCallback((s32) &func_00000000, 0);
+    sceKernelRegisterSysEventHandler(&D_00004530);
     return 0;
 }
 #endif
 
 #if FW_VERSION < 270
-s32 sceRtc_driver_912BEE56(void) {
+s32 sceRtcInit(void) {
     memset(&D_00004580.unk0, 0, 0x58);
     func_0000358C();
     D_00004580.unk0 = 0;
     D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
-    sceRtc_driver_F0B5571C();
-    sceSysEventForKernel_CD9E4BB5(&D_00003BF0);
+    sceRtcSynchronize();
+    sceKernelRegisterSysEventHandler(&D_00003BF0);
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_CE27DE2F);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcEnd);
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
-s32 sceRtc_driver_CE27DE2F(void) {
-    sceSyscon_driver_A068B3D0(0, 0);
-    sceSysEventForKernel_D7D3FDCD(&D_00004530);
+s32 sceRtcEnd(void) {
+    sceSysconSetAlarmCallback(0, 0);
+    sceKernelUnregisterSysEventHandler(&D_00004530);
     return 0;
 }
 #endif
 
 #if FW_VERSION < 270
-s32 sceRtc_driver_CE27DE2F(void) {
-    sceSysEventForKernel_D7D3FDCD(&D_00003BF0);
+s32 sceRtcEnd(void) {
+    sceKernelUnregisterSysEventHandler(&D_00003BF0);
     return 0;
 }
 #endif
 
-s32 sceRtc_driver_9CC2797E(void) {
+s32 sceRtcSuspend(void) {
     return 0;
 }
 
-s32 sceRtc_driver_48D07D70(void) {
-    sceRtc_driver_F0B5571C();
+s32 sceRtcResume(void) {
+    sceRtcSynchronize();
     return 0;
 }
 
 #if FW_VERSION >= 270
-s32 sceRtc_driver_C499AF2F(void) {
+s32 sceRtcReset(void) {
     D_00004580.unk14 = 0;
     D_00004580.unk10 = 0;
     return 0;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_759937C5);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcSetConf);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetAlarmTick);
 
@@ -219,7 +219,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentClock);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentClockLocalTime);
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtc_driver_029CA3B3);
+INCLUDE_ASM("nonmatchings/rtc", sceRtcGetAccumlativeTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcConvertUtcToLocalTime);
 
@@ -231,7 +231,7 @@ s32 func_00000DB0(s32 arg0) {
     case 0x400:
         break;
     case 0x100000:
-        sceRtc_driver_F0B5571C();
+        sceRtcSynchronize();
         break;
     }
     return 0;
@@ -244,7 +244,7 @@ s32 func_0000138C(s32 arg0) {
     case 0x400:
         break;
     case 0x100000:
-        sceRtc_driver_F0B5571C();
+        sceRtcSynchronize();
         break;
     }
     return 0;
@@ -504,11 +504,11 @@ INCLUDE_ASM("nonmatchings/rtc", func_00003D10);
 
 #if FW_VERSION < 282
 s32 func_0000358C(void) {
-    return UtilsForKernel_7B7ED3FD(&func_00003DD4, &func_00003DF4, &func_00003D10);
+    return sceKernelRegisterLibcRtcFunc(&func_00003DD4, &func_00003DF4, &func_00003D10);
 }
 #else
 void func_00003D9C(void) {
-    UtilsForKernel_23A0C5BA(&func_00003DD4, &func_00003DF4, &func_00003D10, &sceRtc_driver_B44BDAED);
+    sceKernelRegisterRtcFunc(&func_00003DD4, &func_00003DF4, &func_00003D10, &sceRtcGetCurrentSecureTick);
 }
 #endif
 

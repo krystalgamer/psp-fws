@@ -1,12 +1,12 @@
 {
  "funcs": {
   "InitForKernel_33D30F49": "s32 InitForKernel_33D30F49(void);",
-  "InitForKernel_7233B5BC": "s32 InitForKernel_7233B5BC(void);",
-  "InitForKernel_7A2333AD": "s32 InitForKernel_7A2333AD(void);",
-  "InitForKernel_A6E71B93": "s32 InitForKernel_A6E71B93(void);",
-  "InitForKernel_C4F1BA33": "s32 InitForKernel_C4F1BA33(void);",
+  "sceKernelApplicationType": "s32 sceKernelApplicationType(void);",
+  "sceKernelInitApitype": "s32 sceKernelInitApitype(void);",
+  "sceKernelInitFileName": "s32 sceKernelInitFileName(void);",
+  "sceKernelStartIntrLogging": "s32 sceKernelStartIntrLogging(void);",
   "InitForKernel_FD0F25AD": "s32 InitForKernel_FD0F25AD(void);",
-  "SysMemForKernel_A2A65F0E": "s32 SysMemForKernel_A2A65F0E(M2C_UNK, M2C_UNK);",
+  "sceKernelFillFreeBlock": "s32 sceKernelFillFreeBlock(M2C_UNK, M2C_UNK);",
   "func_00001208": "s32 func_00001208(void);",
   "func_00001284": "s32 func_00001284(void);",
   "memset": "M2C_UNK memset(M2C_UNK, M2C_UNK, M2C_UNK);",

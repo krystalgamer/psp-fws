@@ -1,13 +1,13 @@
 // NID-derived names
-sceAudiocodec_9D3F790C = 0x00000000; // type:func
-sceAudiocodec_5B37EB1D = 0x000000D4; // type:func
-sceAudiocodec_70A703F8 = 0x0000025C; // type:func
-sceAudiocodec_8ACA11D5 = 0x000003F4; // type:func
+sceAudiocodecCheckNeedMem = 0x00000000; // type:func
+sceAudiocodecInit = 0x000000D4; // type:func
+sceAudiocodecDecode = 0x0000025C; // type:func
+sceAudiocodecGetInfo = 0x000003F4; // type:func
 sceAudiocodec_6CD2A861 = 0x00000528; // type:func
-sceAudiocodec_59176A0F = 0x000005A8; // type:func
-sceAudiocodec_3A20A200 = 0x00000628; // type:func
-sceAudiocodec_29681260 = 0x000006E0; // type:func
-sceAudiocodec_driver_62518B7E = 0x00000AD8; // type:func
+sceAudiocodecAlcExtendParameter = 0x000005A8; // type:func
+sceAudiocodecGetEDRAM = 0x00000628; // type:func
+sceAudiocodecReleaseEDRAM = 0x000006E0; // type:func
+sceAudiocodecStartEntry = 0x00000AD8; // type:func
 module_stop = 0x00000AE0; // type:func
 sceKernelDcacheWritebackRange = 0x00000AE8; // type:func
 sceKernelDcacheWritebackInvalidateRange = 0x00000AF0; // type:func

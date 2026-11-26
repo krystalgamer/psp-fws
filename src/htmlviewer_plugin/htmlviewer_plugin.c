@@ -238,7 +238,7 @@ s32 func_000004F4(void *arg0) {
             func_000035A8(2);
             func_00000140();
         }
-        sceVshBridge_C58090DA(2);
+        vshReceivePowerCallback(2);
         M2C_FIELD(arg0, s32 *, 8) = 0;
     }
     return 0;
@@ -265,7 +265,7 @@ s32 func_000004F4(void *arg0) {
         if (func_0000398C() >= 2) {
             func_00001760();
         }
-        sceVshBridge_C58090DA(2);
+        vshReceivePowerCallback(2);
         M2C_FIELD(arg0, s32 *, 8) = 0;
     }
     return 0;
@@ -539,7 +539,7 @@ s32 func_0000055C(struct Unk_func_0000055C_0 *arg0) {
             func_000037A4(2);
             func_00000140();
         }
-        sceVshBridge_C58090DA(2);
+        vshReceivePowerCallback(2);
         arg0->unk8 = 0;
     }
     return 0;
@@ -997,7 +997,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_000006DC);
 
 #if FW_VERSION == 282
 s32 func_000006DC(void) {
-    scePaf_FD9DE7B9(0x40);
+    InputDevice_PspPad_EnableAnalogThreshold(0x40);
     D_000081C5 = 0;
     if (D_000081CD != 0) {
         func_00000660(0);
@@ -1160,7 +1160,7 @@ void func_00000940(struct Unk_func_00000940_0 *arg0) {
 
 #if FW_VERSION >= 310 && FW_VERSION < 350
 void func_00000940(struct Unk_func_00000940_0 *arg0) {
-    scePaf_FD9DE7B9(0x40);
+    InputDevice_PspPad_EnableAnalogThreshold(0x40);
     scePaf_F47CA1C2(arg0, 0x80005, func_000011A4, (s32) &D_0000ABD0);
     scePaf_F47CA1C2(arg0, 0x80006, func_00000AD0, (s32) &D_0000ABD0);
     scePaf_F47CA1C2(arg0, 0x10001, func_00000888, 0);
@@ -1176,7 +1176,7 @@ void func_00000940(struct Unk_func_00000940_0 *arg0) {
 #if FW_VERSION >= 300 && FW_VERSION < 310
 void func_00000940(struct Unk_func_00000940_0 *arg0) {
     void *sp0;
-    scePaf_FD9DE7B9(0x40);
+    InputDevice_PspPad_EnableAnalogThreshold(0x40);
     scePaf_F47CA1C2(arg0, 0x80006, func_00000AD0, 0);
     scePaf_F47CA1C2(arg0, 0x10001, func_00000888, 0);
     scePaf_F47CA1C2(arg0, 0x10002, func_000008B4, 0);
@@ -1218,7 +1218,7 @@ void func_00000FC4(void) {
 
 #if FW_VERSION == 250 || FW_VERSION == 282
 void func_00000940(struct Unk_func_00000940_0 *arg0) {
-    scePaf_FD9DE7B9(0x40);
+    InputDevice_PspPad_EnableAnalogThreshold(0x40);
     scePaf_F47CA1C2(arg0, 0x80006, func_00000AD0, 0);
     scePaf_F47CA1C2(arg0, 0x10001, func_00000888, 0);
     scePaf_F47CA1C2(arg0, 0x10002, func_000008B4, 0);
@@ -1289,7 +1289,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_00000D14);
 
 #if FW_VERSION == 250 || FW_VERSION == 282
 void func_00000D14(void) {
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
     func_00003980(4);
 }
 #endif
@@ -1320,7 +1320,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_00000F60);
 
 #if FW_VERSION == 250 || FW_VERSION == 282
 void func_00000F60(void) {
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
     func_00003980(4);
 }
 #endif
@@ -1480,7 +1480,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin", D_0000513C);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_00000678);
 
 s32 func_000006F4(void) {
-    scePaf_FD9DE7B9(0x40);
+    InputDevice_PspPad_EnableAnalogThreshold(0x40);
     D_000066F1 = 0;
     if (D_000066F9 != 0) {
         func_00000678(0);
@@ -1527,7 +1527,7 @@ void func_00000948(void) {
 }
 
 void func_00000968(void *arg0) {
-    scePaf_FD9DE7B9(0x40);
+    InputDevice_PspPad_EnableAnalogThreshold(0x40);
     scePaf_F47CA1C2(arg0, 0x80006, func_00000AF8, 0);
     scePaf_F47CA1C2(arg0, 0x10001, func_000008CC, 0);
     scePaf_F47CA1C2(arg0, 0x10002, func_000008F8, 0);
@@ -1562,14 +1562,14 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_00000C88);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_00000CD0);
 
 void func_00000D24(void) {
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
     func_00003980(4);
 }
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_00000D38);
 
 void func_00000F50(void) {
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
     func_00003980(4);
 }
 

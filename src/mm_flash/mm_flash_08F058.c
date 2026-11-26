@@ -94,7 +94,7 @@ INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_0008FB5C);
 INCLUDE_ASM("nonmatchings/mm_flash_08F058", func_0008FD94);
 
 void func_0008FDB4(s32 arg0) {
-    sceHVNetfront_Module_09FA691C(arg0);
+    jpeg_destroy_decompress(arg0);
     sceHVNetfront_Module_D611E938(arg0, 0, 0x474);
 }
 
@@ -266,7 +266,7 @@ void func_0009041C(void ***arg0, void *arg1) {
 }
 
 void func_00090458(s32 arg0) {
-    sceHVNetfront_Module_09FA691C(arg0);
+    jpeg_destroy_decompress(arg0);
     sceHVNetfront_Module_D611E938(arg0, 0, 0x478);
 }
 

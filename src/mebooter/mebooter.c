@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM("nonmatchings/mebooter", sceMeBooter_driver_3BCB751E);
+INCLUDE_ASM("nonmatchings/mebooter", me_init);
 
 INCLUDE_ASM("nonmatchings/mebooter", func_0000014C);
 

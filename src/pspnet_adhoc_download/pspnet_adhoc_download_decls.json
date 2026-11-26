@@ -11,7 +11,7 @@
   "module_stop": "s32 module_stop(void);",
   "sceKernelDeleteVpl": "s32 sceKernelDeleteVpl(s32);",
   "sceKernelFreeVpl": "s32 sceKernelFreeVpl(s32, void *);",
-  "sceNetAdhocDownload_A21FEF45": "s32 sceNetAdhocDownload_A21FEF45(s32 arg0);"
+  "sceNetAdhocDownloadInitServer": "s32 sceNetAdhocDownloadInitServer(s32 arg0);"
  },
  "vars": {
   "D_00002390": "extern s32 D_00002390;",

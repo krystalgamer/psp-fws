@@ -750,7 +750,7 @@ void func_00005918(void) {
         M2C_FIELD(*D_0016558C, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_0016558C, 1, 0xD, 1);
         M2C_FIELD(*D_0016558C, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_0016558C, 2, 0xD, 1);
     }
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -774,11 +774,11 @@ void func_000059AC(void) {
     if (D_00165594 == 0) {
 
     } else {
-        scePaf_6B1E90C7();
+        InputDevice_PspPad_Lock();
         M2C_FIELD(*D_0016558C, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_0016558C, 7, 0xD, 0);
         M2C_FIELD(*D_0016558C, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_0016558C, 1, 0xD, 0);
         M2C_FIELD(*D_0016558C, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK, M2C_UNK), 0x7C)(D_0016558C, 2, 0xD, 0);
-        scePaf_A0ED77C4(0, &func_0000586C, D_00165598, -1, -1, func_00005918);
+        Job_Start(0, &func_0000586C, D_00165598, -1, -1, func_00005918);
     }
 }
 #endif
@@ -2003,7 +2003,7 @@ void func_0000C660(void) {
 void func_0000C660(void) {
     sceKernelPowerUnlock(0);
     func_00008FC8(0);
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
 }
 #endif
 
@@ -2025,10 +2025,10 @@ void func_0000C68C(void) {
     if (func_00001AA8() == 0) {
         sceKernelSignalSema(D_00166C58, 1);
     } else {
-        scePaf_6B1E90C7();
+        InputDevice_PspPad_Lock();
         func_00008FC8(0);
         func_0000E4C0();
-        scePaf_A0ED77C4(0, &func_0000C628, 0, -1, -1, func_0000C660);
+        Job_Start(0, &func_0000C628, 0, -1, -1, func_0000C660);
     }
 }
 #endif

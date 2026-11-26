@@ -128,7 +128,7 @@ s32 scePaf_D4FAE7D0(M2C_UNK *);
 M2C_UNK scePaf_D88ADD11(s32);
 void *scePaf_DCE3D225(s32, M2C_UNK);
 M2C_UNK scePaf_FA05BF7B(s32);
-s32 scePaf_FD4C9F47(s32);
+s32 sce_paf_private_wcslen(s32);
 M2C_UNK scePaf_FE575092(s32);
 void sceVshCommonGui_00FBD201(void);
 void sceVshCommonGui_0131C97D(s32 *arg0);

@@ -165,7 +165,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_072B60", func_000751B4);
 #else
 void func_000751B4(M2C_UNK **arg0) {
     *arg0 = &D_000A1668;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

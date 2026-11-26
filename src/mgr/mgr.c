@@ -2,11 +2,11 @@
 #include "common.h"
 #include "mgr_decls.h"
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_BB36AD19);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrLock);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_62BF32DD);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrPollLock);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_DBEDF631);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrUnLock);
 
 INCLUDE_ASM("nonmatchings/mgr", func_0000011C);
 
@@ -65,7 +65,7 @@ void func_00000840(s32 arg0, s32 arg1, s32 arg2) {
     func_000007DC(arg1, arg2);
 }
 
-void sceMgr_driver_604EF590(void) {
+void sceMgrReset(void) {
     func_00002588();
 }
 
@@ -123,10 +123,10 @@ INCLUDE_ASM("nonmatchings/mgr", func_000008A4);
 INCLUDE_ASM("nonmatchings/mgr", func_00000898);
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_ECBC76EF);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrInit);
 
 #if FW_VERSION >= 250 && FW_VERSION < 340
-s32 sceMgr_driver_D7293451(void) {
+s32 sceMgrAesInit(void) {
     s32 temp_v0;
     s32 var_v0;
 
@@ -141,7 +141,7 @@ s32 sceMgr_driver_D7293451(void) {
 #endif
 
 #if FW_VERSION >= 340
-s32 sceMgr_driver_D7293451(void) {
+s32 sceMgrAesInit(void) {
     s32 temp_v0;
     s32 var_v0;
 
@@ -157,15 +157,15 @@ s32 sceMgr_driver_D7293451(void) {
 
 INCLUDE_ASM("nonmatchings/mgr", func_00000AC4);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_DB1160A2);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrEnd);
 
 #if FW_VERSION >= 250
-void sceMgr_driver_8429C9F3(void) {
-    sceMgr_driver_DB1160A2();
+void sceMgrAesEnd(void) {
+    sceMgrEnd();
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_194C594A);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrGetHwVersion);
 
 #if FW_VERSION < 340
 s32 func_00000B7C(void) {
@@ -261,12 +261,12 @@ s32 func_0000142C(s32 arg0, s32 arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_896EEE57);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrGetLeafID);
 
 #if FW_VERSION >= 152
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_733917D9);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrGetInitialEKB);
 #else
-u32 sceMgr_driver_733917D9(s32 arg0, u32 arg1) {
+u32 sceMgrGetInitialEKB(s32 arg0, u32 arg1) {
     s32 temp_v0;
     s32 var_v1;
     u32 var_a2;
@@ -287,7 +287,7 @@ u32 sceMgr_driver_733917D9(s32 arg0, u32 arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_4B166A14);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrGetDefaultEKB);
 
 INCLUDE_ASM("nonmatchings/mgr", func_000015A4);
 
@@ -326,7 +326,7 @@ s32 func_000018F4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, struct Unk_func_000018
 #endif
 
 void func_00001980(void) {
-    InterruptManagerForKernel_FE28C6D9();
+    sceKernelIsIntrContext();
 }
 
 INCLUDE_ASM("nonmatchings/mgr", func_0000199C);
@@ -419,11 +419,11 @@ INCLUDE_ASM("nonmatchings/mgr", func_00001E14);
 INCLUDE_ASM("nonmatchings/mgr", func_00001F80);
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_F5DFD97B);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrDESDecrypt);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_2DAD213D);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrDESEncrypt);
 
-s32 sceMgr_driver_3583068E(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 sceMgrDESDecryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 var_v0;
 
     var_v0 = 0x80501000;
@@ -436,7 +436,7 @@ s32 sceMgr_driver_3583068E(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return var_v0;
 }
 
-s32 sceMgr_driver_C507A285(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 sceMgrDESEncryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 var_v0;
 
     var_v0 = 0x80501000;
@@ -449,17 +449,17 @@ s32 sceMgr_driver_C507A285(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return var_v0;
 }
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_3054F8F1);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAESDecrypt);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_8A916574);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAESEncrypt);
 
 INCLUDE_ASM("nonmatchings/mgr", func_000023F4);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00002588);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_F30E22CF);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAllocKeyReg);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_1B8F3192);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrFreeKeyReg);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00002748);
 
@@ -482,20 +482,20 @@ void func_000027EC(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_782EB996);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrInitSeed);
 
 #if FW_VERSION < 340
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_9ACFEAF6);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrRandom);
 #else
-s32 sceMgr_driver_9ACFEAF6(s32 arg0, M2C_UNK arg1) {
+s32 sceMgrRandom(s32 arg0, M2C_UNK arg1) {
     s32 temp_v0;
     s32 var_s2;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s2 = temp_v0;
     if (temp_v0 >= 0) {
         var_s2 = func_00002934(arg0, arg1);
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s2;
 }
@@ -504,16 +504,16 @@ s32 sceMgr_driver_9ACFEAF6(s32 arg0, M2C_UNK arg1) {
 INCLUDE_ASM("nonmatchings/mgr", func_00002934);
 
 #if FW_VERSION < 340
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_4985A5A8);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrCreateKc);
 #else
-s32 sceMgr_driver_4985A5A8(s32 arg0, M2C_UNK arg1) {
+s32 sceMgrCreateKc(s32 arg0, M2C_UNK arg1) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 temp_v0_4;
     s32 var_s1;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s1 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00000424(arg0, -1, -1);
@@ -530,19 +530,19 @@ s32 sceMgr_driver_4985A5A8(s32 arg0, M2C_UNK arg1) {
                 }
             }
         }
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s1;
 }
 #endif
 
-s32 sceMgr_driver_62F480BF(s32 arg0, s32 arg1) {
+s32 sceMgrEncryptKcWithKse(s32 arg0, s32 arg1) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 var_s1;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s1 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00000424(arg1, -1, -1);
@@ -554,17 +554,17 @@ s32 sceMgr_driver_62F480BF(s32 arg0, s32 arg1) {
                 func_00000310(arg0);
             }
         }
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s1;
 }
 
-s32 sceMgr_driver_DC515D30(s32 arg0, s32 arg1) {
+s32 sceMgrDecryptKcWithKse(s32 arg0, s32 arg1) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 var_s1;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s1 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00000424(arg0, -1, -1);
@@ -573,18 +573,18 @@ s32 sceMgr_driver_DC515D30(s32 arg0, s32 arg1) {
             func_000002EC(arg1);
             var_s1 = func_000006CC(0x2400);
         }
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s1;
 }
 
-s32 sceMgr_driver_26EAC6A5(s32 arg0, s32 arg1, s32 arg2) {
+s32 sceMgrEncryptKc(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 var_s2;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s2 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00000424(arg1, arg2, -1);
@@ -596,17 +596,17 @@ s32 sceMgr_driver_26EAC6A5(s32 arg0, s32 arg1, s32 arg2) {
                 func_00000310(arg0);
             }
         }
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s2;
 }
 
-s32 sceMgr_driver_02F7AB01(s32 arg0, s32 arg1, s32 arg2) {
+s32 sceMgrDecryptKc(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 var_s2;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s2 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00000424(arg0, arg2, -1);
@@ -615,21 +615,21 @@ s32 sceMgr_driver_02F7AB01(s32 arg0, s32 arg1, s32 arg2) {
             func_000002EC(arg1);
             var_s2 = func_000007DC(0x1450, 3);
         }
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s2;
 }
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_5576E156);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrEncryptKicv);
 
-s32 sceMgr_driver_E22F96A0(s32 arg0, s32 arg1, s32 arg2) {
+s32 sceMgrDecryptKicv(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 temp_v0_4;
     s32 var_s1;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s1 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00000424(arg2, -1, -1);
@@ -647,20 +647,20 @@ s32 sceMgr_driver_E22F96A0(s32 arg0, s32 arg1, s32 arg2) {
                 }
             }
         }
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s1;
 }
 
 #if FW_VERSION < 340
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_C408E3C0);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrGenerateKb);
 #else
-s32 sceMgr_driver_C408E3C0(s32 arg0, M2C_UNK arg1, s32 arg2, s32 arg3) {
+s32 sceMgrGenerateKb(s32 arg0, M2C_UNK arg1, s32 arg2, s32 arg3) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 var_s2;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s2 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00000424(arg0, arg3, -1);
@@ -670,21 +670,21 @@ s32 sceMgr_driver_C408E3C0(s32 arg0, M2C_UNK arg1, s32 arg2, s32 arg3) {
             func_000002EC(arg2);
             var_s2 = func_000006CC(0x1102);
         }
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s2;
 }
 #endif
 
-s32 sceMgr_driver_59894938(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 sceMgrGenerateICV(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_v0;
     s32 var_s5;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s5 = temp_v0;
     if (temp_v0 >= 0) {
         var_s5 = func_00002F84(arg0, arg1, arg2, arg3, arg4);
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s5;
 }
@@ -696,23 +696,23 @@ INCLUDE_ASM("nonmatchings/mgr", func_0000310C);
 INCLUDE_ASM("nonmatchings/mgr", func_000031C8);
 
 #if FW_VERSION < 340
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_34235E6B);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrDecryptWithKbCBC);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_0846B97A);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrEncryptWithKbCBC);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_6B908200);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrGenerateMACWithKbCBC);
 
-void sceMgr_driver_2DA3D191(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+void sceMgrDecryptWithKse(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0000341C(arg0, arg1, arg2, arg3, -2, 0, 1);
 }
 
-void sceMgr_driver_4AC11456(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+void sceMgrEncryptWithKse(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0000341C(arg0, arg1, arg2, arg3, -2, 0, 0);
 }
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_2BC130E3);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrGenerateMACWithKseCBC);
 #else
-s32 sceMgr_driver_34235E6B(s32 arg0, s32 arg1, M2C_UNK *arg2, u32 arg3, s32 arg4) {
+s32 sceMgrDecryptWithKbCBC(s32 arg0, s32 arg1, M2C_UNK *arg2, u32 arg3, s32 arg4) {
     M2C_UNK *var_v1;
     s32 var_a7;
 
@@ -726,12 +726,12 @@ s32 sceMgr_driver_34235E6B(s32 arg0, s32 arg1, M2C_UNK *arg2, u32 arg3, s32 arg4
             var_a7 = func_0000341C(arg0, arg1, (s32) var_v1, (s32) arg3, arg4, 0, 1);
         }
     } else {
-        var_a7 = sceMgr_driver_3583068E(arg0, arg1, (s32) arg3, arg4, (s32) var_v1);
+        var_a7 = sceMgrDESDecryptBlock(arg0, arg1, (s32) arg3, arg4, (s32) var_v1);
     }
     return var_a7;
 }
 
-s32 sceMgr_driver_0846B97A(s32 arg0, s32 arg1, M2C_UNK *arg2, u32 arg3, s32 arg4) {
+s32 sceMgrEncryptWithKbCBC(s32 arg0, s32 arg1, M2C_UNK *arg2, u32 arg3, s32 arg4) {
     M2C_UNK *var_v1;
     s32 var_a7;
 
@@ -745,12 +745,12 @@ s32 sceMgr_driver_0846B97A(s32 arg0, s32 arg1, M2C_UNK *arg2, u32 arg3, s32 arg4
             var_a7 = func_0000341C(arg0, arg1, (s32) var_v1, (s32) arg3, arg4, 0, 0);
         }
     } else {
-        var_a7 = sceMgr_driver_C507A285(arg0, arg1, (s32) arg3, arg4, (s32) var_v1);
+        var_a7 = sceMgrDESEncryptBlock(arg0, arg1, (s32) arg3, arg4, (s32) var_v1);
     }
     return var_a7;
 }
 
-s32 sceMgr_driver_6B908200(s32 arg0, s32 arg1, M2C_UNK *arg2, s32 arg3, s32 arg4) {
+s32 sceMgrGenerateMACWithKbCBC(s32 arg0, s32 arg1, M2C_UNK *arg2, s32 arg3, s32 arg4) {
     M2C_UNK *var_a2;
     s32 var_v1;
 
@@ -765,15 +765,15 @@ s32 sceMgr_driver_6B908200(s32 arg0, s32 arg1, M2C_UNK *arg2, s32 arg3, s32 arg4
     return var_v1;
 }
 
-void sceMgr_driver_2DA3D191(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+void sceMgrDecryptWithKse(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0000341C(arg0, arg1, arg2, arg3, -2, 0, 1);
 }
 
-void sceMgr_driver_4AC11456(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+void sceMgrEncryptWithKse(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0000341C(arg0, arg1, arg2, arg3, -2, 0, 0);
 }
 
-void sceMgr_driver_2BC130E3(s32 arg0, s32 arg1, M2C_UNK *arg2, s32 arg3) {
+void sceMgrGenerateMACWithKseCBC(s32 arg0, s32 arg1, M2C_UNK *arg2, s32 arg3) {
     M2C_UNK *var_a2;
 
     var_a2 = arg2;
@@ -786,15 +786,15 @@ void sceMgr_driver_2BC130E3(s32 arg0, s32 arg1, M2C_UNK *arg2, s32 arg3) {
 
 INCLUDE_ASM("nonmatchings/mgr", func_0000341C);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_BDE09225);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrGenerateMAC1d);
 
-s32 sceMgr_driver_54166582(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 sceMgrStartSession(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 var_s2;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s2 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_000038D0(arg1, arg2);
@@ -808,7 +808,7 @@ s32 sceMgr_driver_54166582(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
                 var_s2 = func_000038D0(arg4, arg3);
             }
         }
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s2;
 }
@@ -827,15 +827,15 @@ INCLUDE_ASM("nonmatchings/mgr", func_00003578);
 INCLUDE_ASM("nonmatchings/mgr", func_0000391C);
 #endif
 
-s32 sceMgr_driver_5A260472(s32 arg0, s32 arg1, s32 arg2) {
+s32 sceMgrGenerateKse(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
     s32 var_s3;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s3 = temp_v0;
     if (temp_v0 >= 0) {
         var_s3 = func_00002F84(0, arg0, 0, arg1, arg2);
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s3;
 }
@@ -862,11 +862,11 @@ INCLUDE_ASM("nonmatchings/mgr", func_00003BA8);
 INCLUDE_ASM("nonmatchings/mgr", func_00003B90);
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_C3677CF4);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrDecryptEKB);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_B434A376);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_8407D6DC);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrDecryptLocalEKB);
 
 #if FW_VERSION >= 250 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_00004130);
@@ -915,7 +915,7 @@ INCLUDE_ASM("nonmatchings/mgr", func_00004724);
 
 INCLUDE_ASM("nonmatchings/mgr", func_000048CC);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_F817405C);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrCheckVCV);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_BB1E3C1A);
 
@@ -927,7 +927,7 @@ s32 sceMgr_driver_F98874E9(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0_5;
     s32 var_s0;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s0 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00004724(0, 0);
@@ -948,7 +948,7 @@ s32 sceMgr_driver_F98874E9(s32 arg0, s32 arg1, s32 arg2) {
             }
         }
         func_000006CC(0x8030);
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s0;
 }
@@ -965,19 +965,19 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_FCA741DE);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_F1ADC4B9);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_DB12BB23);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrNetDecryptKc);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_6B82D542);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrNetGenerateICV);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00005454);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_A1F6D85A);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAesCbcDecrypt);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_A44A5538);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAesCbcEncrypt);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_19B8F2D0);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAesEcbDecrypt);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_A45A63B6);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAesEcbEncrypt);
 #endif
 
 #if FW_VERSION < 340
@@ -999,7 +999,7 @@ s32 func_00005B88(void) {
 
 INCLUDE_ASM("nonmatchings/mgr", func_00004358);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_843ECFA2);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSGetMediaType);
 
 s32 func_000045DC(void) {
     void *sp0;
@@ -1056,7 +1056,7 @@ INCLUDE_ASM("nonmatchings/mgr", func_00004664);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00004808);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_F817405C);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrCheckVCV);
 
 s32 sceMgr_driver_BB1E3C1A(s32 arg0, M2C_UNK arg1, s32 arg2) {
     s32 temp_v0;
@@ -1066,7 +1066,7 @@ s32 sceMgr_driver_BB1E3C1A(s32 arg0, M2C_UNK arg1, s32 arg2) {
     s32 temp_v0_5;
     s32 var_s0;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s0 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00004664(0, 2);
@@ -1088,7 +1088,7 @@ s32 sceMgr_driver_BB1E3C1A(s32 arg0, M2C_UNK arg1, s32 arg2) {
             }
         }
         func_000006CC(0x8030);
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s0;
 }
@@ -1101,7 +1101,7 @@ s32 sceMgr_driver_F98874E9(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0_5;
     s32 var_s0;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s0 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00004664(0, 2);
@@ -1122,7 +1122,7 @@ s32 sceMgr_driver_F98874E9(s32 arg0, s32 arg1, s32 arg2) {
             }
         }
         func_000006CC(0x8030);
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s0;
 }
@@ -1134,7 +1134,7 @@ s32 func_00004CBC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_v0_4;
     s32 var_s1;
 
-    temp_v0 = sceMgr_driver_BB36AD19();
+    temp_v0 = sceMgrLock();
     var_s1 = temp_v0;
     if (temp_v0 >= 0) {
         temp_v0_2 = func_00004664(0, arg3);
@@ -1152,7 +1152,7 @@ s32 func_00004CBC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
             }
         }
         func_000006CC(0x8030);
-        sceMgr_driver_DBEDF631();
+        sceMgrUnLock();
     }
     return var_s1;
 }
@@ -1165,7 +1165,7 @@ void sceMgr_driver_DBB5C63E(s32 arg0, s32 arg1, s32 arg2) {
     func_00004CBC(arg0, arg1, arg2, 5);
 }
 
-void sceMgr_driver_DB12BB23(s32 arg0, s32 arg1, s32 arg2) {
+void sceMgrNetDecryptKc(s32 arg0, s32 arg1, s32 arg2) {
     func_00004CBC(arg0, arg1, arg2, 6);
 }
 
@@ -1179,17 +1179,17 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_FCA741DE);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_F1ADC4B9);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_6B82D542);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrNetGenerateICV);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00005328);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_A1F6D85A);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAesCbcDecrypt);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_A44A5538);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAesCbcEncrypt);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_19B8F2D0);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAesEcbDecrypt);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_A45A63B6);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrAesEcbEncrypt);
 
 INCLUDE_ASM("nonmatchings/mgr", func_000057CC);
 
@@ -1209,7 +1209,7 @@ s32 func_00005B88(void) {
 
 INCLUDE_ASM("nonmatchings/mgr", func_00005BC8);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_843ECFA2);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSGetMediaType);
 
 s32 func_00005E30(void) {
     void *sp0;
@@ -1219,13 +1219,13 @@ s32 func_00005E30(void) {
 
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFA0);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_D46CF098);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInit);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_9C886B02);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReset);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00005F7C);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_C9B02F91);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSEnd);
 
 #if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/mgr", func_00006030);
@@ -1264,7 +1264,7 @@ void func_000060B4(s32 arg0, s32 *arg1) {
 
 #if FW_VERSION < 152
 s32 func_00006104(void) {
-    return (-((sceMScm_driver_0A054CDA() & 0x300) == 0) & 0x7FAFE000) - 0x7FAFE000;
+    return (-((sceMScmHCLastStatus() & 0x300) == 0) & 0x7FAFE000) - 0x7FAFE000;
 }
 #endif
 
@@ -1299,7 +1299,7 @@ void func_000060B4(s32 arg0, s32 *arg1) {
 
 #if FW_VERSION >= 152
 s32 func_00006104(void) {
-    return !(sceMScm_driver_0A054CDA() & 0x300) ? 0 : 0x80502000;
+    return !(sceMScmHCLastStatus() & 0x300) ? 0 : 0x80502000;
 }
 #endif
 
@@ -1393,16 +1393,16 @@ INCLUDE_ASM("nonmatchings/mgr", func_00005768);
 INCLUDE_ASM("nonmatchings/mgr", func_00006F90);
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_91C76957);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSMount);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_C8380898);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSAuth);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00007364);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_D3A061BE);
 
 #if FW_VERSION >= 250 && FW_VERSION < 340
-s32 sceMgr_driver_4F4AE686(s32 arg0) {
+s32 sceMgrMSDeauth(s32 arg0) {
     s32 temp_v0;
     s32 var_s1;
 
@@ -1421,7 +1421,7 @@ s32 sceMgr_driver_4F4AE686(s32 arg0) {
 #endif
 
 #if FW_VERSION < 250
-s32 sceMgr_driver_4F4AE686(s32 arg0) {
+s32 sceMgrMSDeauth(s32 arg0) {
     s32 temp_v0;
     s32 var_s1;
 
@@ -1440,7 +1440,7 @@ s32 sceMgr_driver_4F4AE686(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 340
-s32 sceMgr_driver_4F4AE686(s32 arg0) {
+s32 sceMgrMSDeauth(s32 arg0) {
     s32 temp_v0;
     s32 var_s1;
 
@@ -1460,7 +1460,7 @@ s32 sceMgr_driver_4F4AE686(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mgr", func_00007644);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_839F4A67);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSGetMediaID);
 
 INCLUDE_ASM("nonmatchings/mgr", func_000077A0);
 
@@ -1544,15 +1544,15 @@ INCLUDE_ASM("nonmatchings/mgr", func_00008B04);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00008EB0);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_C655D92B);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadSeqPage);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_F26C410A);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadPoolPage);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_A9F72903);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInvalidateICV);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_6CCA97DB);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWriteSeqPage);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_A85906FC);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWritePoolPage);
 
 #if FW_VERSION >= 152 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_00008274);
@@ -1580,11 +1580,11 @@ void func_00008388(s32 arg0) {
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFD0);
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_AC136724);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSCheckICV);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_656D8FB1);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSCompareICV);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_0ED46FF9);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWriteICV);
 
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFD8);
 
@@ -1594,7 +1594,7 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_3EE1140B);
 
 INCLUDE_ASM("nonmatchings/mgr", func_0000A070);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_B7F69809);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSSetLeafID);
 
 #if FW_VERSION < 152
 s32 func_0000A1C8(s32 arg0, s32 arg1, s32 arg2) {
@@ -1625,17 +1625,17 @@ s32 func_0000A1C8(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_A01FF50C);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSGetLocalEKB);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_7D2AC9FE);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSSetRd);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_D1023CC2);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_FD2D2952);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSSetMAC2d);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_E1C0DAFE);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadIBD);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_31B4BD28);
+INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWriteIBD);
 
 s32 module_start(void) {
     return 0;

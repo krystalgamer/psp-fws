@@ -23,12 +23,12 @@ void func_000003B4(void) {
 void func_000003D4(s32 arg0) {
     s32 *temp_v0;
 
-    scePaf_6B1E90C7();
+    InputDevice_PspPad_Lock();
     D_00010048 = arg0;
-    temp_v0 = scePaf_B7E6052B(4);
+    temp_v0 = _Znwj(4);
     *temp_v0 = 0;
-    scePaf_A0ED77C4(0, &func_0000015C, temp_v0, -1, -1, &func_00000330);
-    sceVshCommonGui_80271F41();
+    Job_Start(0, &func_0000015C, temp_v0, -1, -1, &func_00000330);
+    _ZN3vsh12BusyIcon_IncEv();
 }
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_00000438);
@@ -90,7 +90,7 @@ INCLUDE_ASM("nonmatchings/license_plugin", func_0000099C);
 
 void func_000009F8(M2C_UNK **arg0) {
     *arg0 = &D_0000F498;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_00000A20);
@@ -104,7 +104,7 @@ INCLUDE_ASM("nonmatchings/license_plugin", func_00000B00);
 s32 func_00000BB0(void) {
     func_00000F5C();
     if (D_00010050 != 0) {
-        scePaf_545FE2DA(D_00010050);
+        sce_paf_private_free(D_00010050);
         D_00010050 = 0;
     }
     return 0;
@@ -379,7 +379,7 @@ INCLUDE_ASM("nonmatchings/license_plugin", func_00004850);
 
 void func_00004914(M2C_UNK **arg0) {
     *arg0 = &D_0000F890;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_0000493C);
@@ -537,12 +537,12 @@ void func_000067B0(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = var_v0->unk4;
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_7EC15225(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 
 void func_00006808(struct Unk_func_00006808_0 *arg0) {
@@ -556,7 +556,7 @@ void func_00006808(struct Unk_func_00006808_0 *arg0) {
     if (var_v0 != var_v1) {
         do {
             temp_s0 = var_v0->unk4;
-            scePaf_7EC15225(var_v0);
+            sce_paf_private_free2(var_v0);
             var_v1 = arg0->unk0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_v1);
@@ -575,7 +575,7 @@ void ***func_00006864(void ***arg0, struct Unk_func_00006864_1 *arg1, void **arg
     temp_s0 = temp_v1->unk4;
     *temp_s0 = temp_v1->unk0;
     M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
-    scePaf_7EC15225(temp_v1);
+    sce_paf_private_free2(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
     return arg0;
@@ -613,7 +613,7 @@ void func_000071B4(struct Unk_func_000071B4_0 *arg0) {
     func_00007680((u8 *)arg0 + 0x5C, 0);
     func_00007680((u8 *)arg0 + 0x60, 0);
     arg0->unk30 = -1;
-    vsh_61FE226A(arg0);
+    _ZN11PageManager4ExitEv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_00007274);
@@ -625,7 +625,7 @@ void func_000072A0(struct Unk_func_000072A0_0 *arg0, s32 arg1) {
 
 void func_000072C0(struct Unk_func_000072C0_0 *arg0) {
     arg0->unk30 = -1;
-    vsh_7ADF6A69();
+    _ZN11PageManager5ClearEv();
 }
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_000072E4);
@@ -671,15 +671,15 @@ s32 func_00007728(struct Unk_func_00007728_0 *arg0) {
 INCLUDE_ASM("nonmatchings/license_plugin", func_00007730);
 
 void func_00007754(struct Unk_func_00007754_0 *arg0) {
-    scePaf_CAF05F1D(arg0->unk4);
+    _ZN3paf4View12PageActivateEPKc(arg0->unk4);
 }
 
 void func_00007770(struct Unk_func_00007770_0 *arg0) {
-    scePaf_3481F595(arg0->unk4);
+    _ZN3paf4View9PageCloseEPKc(arg0->unk4);
 }
 
 void func_0000778C(struct Unk_func_0000778C_0 *arg0) {
-    scePaf_DAB59652(arg0->unk4);
+    _ZNK3paf4View8PageRootEPKc(arg0->unk4);
 }
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_000077A8);

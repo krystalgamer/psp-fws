@@ -20,7 +20,7 @@
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
   "sceMeWrapper_driver_3D5F109C": "M2C_UNK sceMeWrapper_driver_3D5F109C(M2C_UNK);",
-  "sceMpegbase_driver_27A2982F": "s32 sceMpegbase_driver_27A2982F(void);"
+  "sceMpegBaseInit": "s32 sceMpegBaseInit(void);"
  },
  "vars": {
   "D_000020A0": "extern s32 D_000020A0;",

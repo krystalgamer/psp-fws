@@ -14,11 +14,11 @@
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelGetSystemTimeLow": "M2C_UNK sceKernelGetSystemTimeLow();",
-  "sceLibUpdateDL_4F49C9C1": "s32 sceLibUpdateDL_4F49C9C1(void);",
-  "sceLibUpdateDL_88FF3935": "s32 sceLibUpdateDL_88FF3935(s32 arg0);",
-  "sceLibUpdateDL_B5DB018D": "void sceLibUpdateDL_B5DB018D(s32 arg0);",
-  "sceLibUpdateDL_C1AF1076": "s32 sceLibUpdateDL_C1AF1076(void);",
-  "sceLibUpdateDL_F7E66CB4": "void sceLibUpdateDL_F7E66CB4(void);"
+  "sceUpdateDownloadAbort": "s32 sceUpdateDownloadAbort(void);",
+  "sceUpdateDownloadSetDestCode": "s32 sceUpdateDownloadSetDestCode(s32 arg0);",
+  "sceUpdateDownloadSetServerRegion": "void sceUpdateDownloadSetServerRegion(s32 arg0);",
+  "sceUpdateDownloadSetVersion": "s32 sceUpdateDownloadSetVersion(void);",
+  "sceUpdateDownloadSetUrl": "void sceUpdateDownloadSetUrl(void);"
  },
  "vars": {
   "D_000030D4": "extern M2C_UNK D_000030D4;",

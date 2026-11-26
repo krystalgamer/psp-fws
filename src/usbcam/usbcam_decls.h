@@ -26,12 +26,12 @@ extern s32 D_0000BC1C;
 extern s32 D_0000BDB8;
 extern s32 D_0000BF10;
 
-M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
+M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, s32);
 void func_000039E8(void);
 void func_000039F0(struct Unk_func_000039F0_0 *arg0);
 s32 func_00008E1C(void);
 s32 sceKernelSignalSema(s32, s32);
-s32 sceUsbBus_driver_C1E2A540(M2C_UNK *);
+s32 sceUsbbdUnregister(M2C_UNK *);
 s32 sceUsbCamGetAutoImageReverseState(void);
 s32 sceUsbCamGetBrightness(void *arg0);
 s32 sceUsbCamGetContrast(void *arg0);
@@ -39,7 +39,7 @@ s32 sceUsbCamGetEvLevel(void *arg0);
 s32 sceUsbCamGetImageEffectMode(void *arg0);
 s32 sceUsbCamGetReverseMode(void *arg0);
 s32 sceUsbCamGetZoom(void *arg0);
-s32 sceUsbCam_driver_1E958148(s32, s32);
-s32 sceUsbCam_driver_95F8901E(void);
+s32 sceUsbCamIoctl(s32, s32);
+s32 sceUsbCamGetFwUpdateResult(void);
 
 #endif

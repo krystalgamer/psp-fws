@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM("nonmatchings/mebooter_umdvideo", sceMeBooter_driver_3BCB751E);
+INCLUDE_ASM("nonmatchings/mebooter_umdvideo", me_init);
 
 INCLUDE_ASM("nonmatchings/mebooter_umdvideo", func_0000014C);
 

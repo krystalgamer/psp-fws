@@ -577,9 +577,9 @@ void func_00009B68(s32 arg0) {
     if (arg0 != 0) {
 
     } else {
-        scePaf_6B1E90C7();
+        InputDevice_PspPad_Lock();
         func_0002D8D4();
-        scePaf_A0ED77C4(0, &func_00007B18, 0, -1, -1, &func_0000AADC);
+        Job_Start(0, &func_00007B18, 0, -1, -1, &func_0000AADC);
     }
 }
 #endif
@@ -1423,8 +1423,8 @@ void func_0000A1E0(s32 arg0) {
 
     } else {
         sceVshCommonGui_80271F41();
-        scePaf_6B1E90C7();
-        temp_v1 = scePaf_A0ED77C4(0, &func_0000DBF4, (s32) func_0000A1E0, -1, -1, &func_0000A544);
+        InputDevice_PspPad_Lock();
+        temp_v1 = Job_Start(0, &func_0000DBF4, (s32) func_0000A1E0, -1, -1, &func_0000A544);
         if (D_00048960 != NULL) {
             M2C_FIELD(D_00048960, s32 *, 0x24) = temp_v1;
         }
@@ -1462,7 +1462,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_007618", func_0000A50C);
 
 #if FW_VERSION == 250
 void func_0000A50C(s32 arg0) {
-    if ((scePaf_66FE90D7(&D_00058228, arg0) == 0) && (&D_0005EEA0 != NULL)) {
+    if ((sce_paf_private_strcmp(&D_00058228, arg0) == 0) && (&D_0005EEA0 != NULL)) {
         M2C_FIELD(&D_0005EEA0, s8 *, 0x68C) = 0;
     }
 }
@@ -2014,8 +2014,8 @@ void func_0000FA88(void) {
         }
     }
     sceVshCommonGui_80271F41();
-    scePaf_6B1E90C7();
-    scePaf_A0ED77C4(0, &func_000100E4, 0, -1, -1, &func_0000C5A8);
+    InputDevice_PspPad_Lock();
+    Job_Start(0, &func_000100E4, 0, -1, -1, &func_0000C5A8);
 }
 #endif
 
@@ -2025,11 +2025,11 @@ void func_0000FA88(void) {
         func_00038A9C(0);
     }
     sceVshCommonGui_80271F41();
-    scePaf_6B1E90C7();
-    if (scePaf_A0ED77C4(0, &func_000100E4, 0, -1, -1, &func_00010130) != 0) {
+    InputDevice_PspPad_Lock();
+    if (Job_Start(0, &func_000100E4, 0, -1, -1, &func_00010130) != 0) {
 
     } else {
-        scePaf_66907719();
+        InputDevice_PspPad_Unlock();
         sceVshCommonGui_1CF884A1();
     }
 }
@@ -2746,11 +2746,11 @@ void func_00011D74(void) {
         func_00038A9C(0);
     }
     sceVshCommonGui_80271F41();
-    scePaf_6B1E90C7();
-    if (scePaf_A0ED77C4(0, &func_00011FF4, 0, -1, -1, &func_000120B4) != 0) {
+    InputDevice_PspPad_Lock();
+    if (Job_Start(0, &func_00011FF4, 0, -1, -1, &func_000120B4) != 0) {
 
     } else {
-        scePaf_66907719();
+        InputDevice_PspPad_Unlock();
         sceVshCommonGui_1CF884A1();
     }
 }
@@ -3217,7 +3217,7 @@ void func_00015184(s32 arg0, s32 arg1) {
             func_00038B30(1, 1, 1);
             sceVshCommonGui_80271F41();
             temp_s0 = D_0005F7C8;
-            if ((temp_s0 == NULL) || (temp_v0 = scePaf_A0ED77C4(0, &func_0001527C, 0, -1, -1, &func_00015444), temp_s0->unk24 = temp_v0, (temp_v0 == 0))) {
+            if ((temp_s0 == NULL) || (temp_v0 = Job_Start(0, &func_0001527C, 0, -1, -1, &func_00015444), temp_s0->unk24 = temp_v0, (temp_v0 == 0))) {
                 sceVshCommonGui_1CF884A1();
             }
         }

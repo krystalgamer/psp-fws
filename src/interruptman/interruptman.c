@@ -51,21 +51,21 @@ INCLUDE_RODATA("nonmatchings/interruptman", D_00004130);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_58DD8978);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterIntrHandler);
 
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_15894D0B);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_B5A15B30);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLevel);
 
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_43A7BBDC);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_4D6E7305);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelEnableIntr);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_750E2507);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSuspendIntr);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_494D6D2B);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelResumeIntr);
 
-void InterruptManagerForKernel_55242A8B(void) {
+void ReleaseContextHooks(void) {
     s32 temp_a0;
 
     temp_a0 = sceKernelCpuSuspendIntr();
@@ -74,15 +74,15 @@ void InterruptManagerForKernel_55242A8B(void) {
     sceKernelCpuResumeIntr(temp_a0);
 }
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_272766F8);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterDebuggerIntrHandler);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_B386A459);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseDebuggerIntrHandler);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_CDC86B64);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelCallSubIntrHandler);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_D6878EB6);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelGetUserIntrStack);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_F4454E44);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelCallUserIntrHandler);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterSubIntrHandler);
 
@@ -92,11 +92,11 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelSuspendSubIntr);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_36B1EF81);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelQueryIntrHandlerInfo);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManager_D2E8363F);
+INCLUDE_ASM("nonmatchings/interruptman", QueryIntrHandlerInfo);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -112,13 +112,13 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00001764);
 
 INCLUDE_ASM("nonmatchings/interruptman", func_00001818);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_0FC68A56);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetPrimarySyscallHandler);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_02314986);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelCpuEnableIntr);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_00B6B0F3);
+INCLUDE_ASM("nonmatchings/interruptman", QueryInterruptManCB);
 #endif
 
 #if FW_VERSION == 100
@@ -130,7 +130,7 @@ s32 func_00000274(void) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = SysMemForKernel_1C1FBFE7(1, 0x100, 1, "interruptman_heap");
+    temp_v0 = sceKernelCreateHeap(1, 0x100, 1, "interruptman_heap");
     var_v1 = temp_v0;
     if (temp_v0 > 0) {
         D_00003B0C = var_v1;
@@ -149,19 +149,19 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00000348);
 #if FW_VERSION == 100
 void func_00000348(s32 arg0) {
     if (arg0 != 0) {
-        SysMemForKernel_7B749390(D_00003B0C, arg0);
+        sceKernelFreeHeapMemory(D_00003B0C, arg0);
     }
 }
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_58DD8978);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterIntrHandler);
 
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_15894D0B);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_F987B1F0);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseIntrHandler);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -169,37 +169,37 @@ INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_07E138EE);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_B5A15B30);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLevel);
 
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_43A7BBDC);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_02475AAF);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsInterruptOccurred);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_4D6E7305);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelEnableIntr);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_750E2507);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSuspendIntr);
 #endif
 
 #if FW_VERSION < 282
-void InterruptManagerForKernel_D774BA45(s32 arg0) {
-    InterruptManagerForKernel_750E2507(arg0, 0);
+void sceKernelDisableIntr(s32 arg0) {
+    sceKernelSuspendIntr(arg0, 0);
 }
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_494D6D2B);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelResumeIntr);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_2CD783A1);
+INCLUDE_ASM("nonmatchings/interruptman", RegisterContextHooks);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void InterruptManagerForKernel_2CD783A1(s32 arg0, s32 arg1) {
+void RegisterContextHooks(s32 arg0, s32 arg1) {
     s32 temp_a0;
 
     temp_a0 = sceKernelCpuSuspendIntr();
@@ -210,23 +210,23 @@ void InterruptManagerForKernel_2CD783A1(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_55242A8B);
+INCLUDE_ASM("nonmatchings/interruptman", ReleaseContextHooks);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_27BC9A45);
+INCLUDE_ASM("nonmatchings/interruptman", UnSupportIntr);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_0E224D66);
+INCLUDE_ASM("nonmatchings/interruptman", SupportIntr);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 InterruptManagerForKernel_20804B41(void) {
+s32 sceKernelGetIntrSyscallFrame(void) {
     return D_00004ABC;
 }
 #endif
 
 #if FW_VERSION >= 282
-void InterruptManagerForKernel_55242A8B(void) {
+void ReleaseContextHooks(void) {
     s32 temp_a0;
 
     temp_a0 = sceKernelCpuSuspendIntr();
@@ -237,15 +237,15 @@ void InterruptManagerForKernel_55242A8B(void) {
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_272766F8);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterDebuggerIntrHandler);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_B386A459);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseDebuggerIntrHandler);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_CDC86B64);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelCallSubIntrHandler);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_D6878EB6);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelGetUserIntrStack);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_F4454E44);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelCallUserIntrHandler);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterSubIntrHandler);
 
@@ -269,17 +269,17 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsSubInterruptOccurred);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManager_D2E8363F);
+INCLUDE_ASM("nonmatchings/interruptman", QueryIntrHandlerInfo);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
-s32 InterruptManager_D2E8363F(void) {
+s32 QueryIntrHandlerInfo(void) {
     return 0x80020001;
 }
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_36B1EF81);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelQueryIntrHandlerInfo);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
@@ -333,7 +333,7 @@ s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_0FC68A56);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetPrimarySyscallHandler);
 #endif
 
 #if FW_VERSION >= 310
@@ -341,9 +341,9 @@ INCLUDE_ASM("nonmatchings/interruptman", module_reboot_before);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_02314986);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelCpuEnableIntr);
 
-M2C_UNK *InterruptManagerForKernel_00B6B0F3(void) {
+M2C_UNK *QueryInterruptManCB(void) {
     return &D_00003E00;
 }
 #endif
@@ -353,17 +353,17 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00001978);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_F987B1F0);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseIntrHandler);
 
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_07E138EE);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_02475AAF);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsInterruptOccurred);
 
-void InterruptManagerForKernel_D774BA45(s32 arg0) {
-    InterruptManagerForKernel_750E2507(arg0, 0);
+void sceKernelDisableIntr(s32 arg0) {
+    sceKernelSuspendIntr(arg0, 0);
 }
 
-void InterruptManagerForKernel_2CD783A1(s32 arg0, s32 arg1) {
+void RegisterContextHooks(s32 arg0, s32 arg1) {
     s32 temp_a0;
 
     temp_a0 = sceKernelCpuSuspendIntr();
@@ -382,11 +382,11 @@ void InterruptManagerForKernel_7EF7500F(void) {
     D_00003E00.unk1080 = 0;
 }
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_27BC9A45);
+INCLUDE_ASM("nonmatchings/interruptman", UnSupportIntr);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_0E224D66);
+INCLUDE_ASM("nonmatchings/interruptman", SupportIntr);
 
-s32 InterruptManagerForKernel_20804B41(void) {
+s32 sceKernelGetIntrSyscallFrame(void) {
     return D_00004E7C;
 }
 
@@ -398,7 +398,7 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelResumeSubIntr);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsSubInterruptOccurred);
 
-s32 InterruptManager_D2E8363F(void) {
+s32 QueryIntrHandlerInfo(void) {
     return 0x80020001;
 }
 
@@ -421,41 +421,41 @@ s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_30C08374);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelGetCpuClockCounter);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_35634A64);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelGetCpuClockCounterWide);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_2DC9709B);
+INCLUDE_ASM("nonmatchings/interruptman", _sceKernelGetCpuClockCounterLow);
 #else
-s32 InterruptManagerForKernel_2DC9709B(void) {
+s32 _sceKernelGetCpuClockCounterLow(void) {
     return D_00003F94;
 }
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_E9E652A9);
+INCLUDE_ASM("nonmatchings/interruptman", _sceKernelGetCpuClockCounterHigh);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 InterruptManagerForKernel_E9E652A9(void) {
+s32 _sceKernelGetCpuClockCounterHigh(void) {
     return D_00003AA8;
 }
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_0FC68A56);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetPrimarySyscallHandler);
 #endif
 
 #if FW_VERSION >= 282
-s32 InterruptManagerForKernel_E9E652A9(void) {
+s32 _sceKernelGetCpuClockCounterHigh(void) {
     return D_00003F98;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_F4D443F3);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterSystemCallTable);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_8B61808B);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelQuerySystemCall);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", func_000021D4);
@@ -475,12 +475,12 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00002380);
 INCLUDE_ASM("nonmatchings/interruptman", func_000027C0);
 #endif
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_43CD40EF);
+INCLUDE_ASM("nonmatchings/interruptman", ReturnToThread);
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_FE28C6D9);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsIntrContext);
 #else
-s32 InterruptManagerForKernel_FE28C6D9(void) {
+s32 sceKernelIsIntrContext(void) {
     return D_00003F6C;
 }
 #endif
@@ -498,14 +498,14 @@ s32 InterruptManagerForKernel_53991063(void) {
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_468BC716);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelGetInterruptExitCount);
 #else
-s32 InterruptManagerForKernel_468BC716(void) {
+s32 sceKernelGetInterruptExitCount(void) {
     return D_00003F90;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_85F7766D);
+INCLUDE_ASM("nonmatchings/interruptman", SaveThreadContext);
 
 #if FW_VERSION < 282
 s32 func_00002FDC(s32 arg0) {
@@ -586,7 +586,7 @@ INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_72CE22E8);
 INCLUDE_ASM("nonmatchings/interruptman", func_00003734);
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_DD55A192);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelGetSyscallRA);
 #endif
 
 INCLUDE_ASM("nonmatchings/interruptman", func_00003780);

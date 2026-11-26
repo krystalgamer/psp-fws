@@ -207,11 +207,11 @@ s32 sceKernelWaitSema(s32, s32, void *);
 s32 sceNetAdhocctlGetAdhocId(void *arg0);
 s32 sceNetAdhocctlGetState(s32 *arg0);
 s32 sceNetAdhocctlTerm(void);
-void sceNetAdhocctl_lib_1572422C(void);
-M2C_UNK sceNet_lib_57CC57DA(s32, M2C_UNK, M2C_UNK);
-M2C_UNK sceNet_lib_AB7DD9A5(M2C_UNK *, M2C_UNK, M2C_UNK);
-M2C_UNK sceNet_lib_D2422E4D(M2C_UNK *);
+void sceNetAdhocctlRequestSuspend(void);
+M2C_UNK sceNetMemset(s32, M2C_UNK, M2C_UNK);
+M2C_UNK sceNetConfigSetIfEventFlag(M2C_UNK *, M2C_UNK, M2C_UNK);
+M2C_UNK sceNetConfigDownInterface(M2C_UNK *);
 s32 scePowerRequestSuspend(void);
-M2C_UNK sceWlanDrv_lib_C9A8CAB7();
+M2C_UNK sceWlanDevDetach();
 
 #endif

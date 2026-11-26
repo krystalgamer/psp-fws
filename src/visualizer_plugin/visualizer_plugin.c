@@ -149,7 +149,7 @@ void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
 
     temp_s0 = arg0->unk4;
     M2C_FIELD(*temp_s0, M2C_UNK (**)(void **, M2C_UNK), 0x58)(temp_s0, 1);
-    scePaf_EAA5AFF6(temp_s0, 0x01000003);
+    _ZN3paf9PhHandler11KillTimerCBEi(temp_s0, 0x01000003);
 }
 #endif
 
@@ -227,8 +227,8 @@ void func_00000A0C(void **arg0) {
 void func_00000A0C(void **arg0) {
     M2C_FIELD(arg0, void **, 0) = &D_0000CE40;
     M2C_FIELD(arg0, s32 *, 0x330) = 0;
-    scePaf_EAA5AFF6(arg0, 0);
-    scePaf_715E8DAB(arg0);
+    _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0);
+    _ZN3paf8PhWidgetD2Ev(arg0);
 }
 #endif
 
@@ -244,9 +244,9 @@ void func_00000A4C(void **arg0) {
 void func_00000A4C(void **arg0) {
     M2C_FIELD(arg0, void **, 0) = &D_0000CE40;
     M2C_FIELD(arg0, s32 *, 0x330) = 0;
-    scePaf_EAA5AFF6(arg0, 0);
-    scePaf_715E8DAB(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0);
+    _ZN3paf8PhWidgetD2Ev(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -465,7 +465,7 @@ void func_00001A68(s32 arg0) {
 }
 #else
 void func_00001A68(s32 arg0) {
-    scePaf_D24E4016(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
 }
 #endif
 
@@ -475,7 +475,7 @@ void func_00001A84(s32 arg0) {
 }
 #else
 void func_00001A84(s32 arg0) {
-    scePaf_1F0E9712(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
 }
 #endif
 
@@ -485,7 +485,7 @@ void func_00001AA0(s32 arg0) {
 }
 #else
 void func_00001AA0(s32 arg0) {
-    scePaf_0CFDBE2F(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
 }
 #endif
 
@@ -531,7 +531,7 @@ void func_00001CDC(s32 arg0) {
 }
 #else
 void func_00001CDC(s32 arg0) {
-    scePaf_95948FB6(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
 }
 #endif
 
@@ -541,7 +541,7 @@ void func_00001CF8(s32 arg0) {
 }
 #else
 void func_00001CF8(s32 arg0) {
-    scePaf_ED89C94B(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
 }
 #endif
 
@@ -551,7 +551,7 @@ void func_00001D14(s32 arg0) {
 }
 #else
 void func_00001D14(s32 arg0) {
-    scePaf_BA433BEF(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
 }
 #endif
 
@@ -561,7 +561,7 @@ void func_00001D30(s32 arg0) {
 }
 #else
 void func_00001D30(s32 arg0) {
-    scePaf_B7865607(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
 }
 #endif
 

@@ -22,16 +22,16 @@
   "sceAudioPollInputEnd": "void sceAudioPollInputEnd(void);",
   "sceAudioSetChannelDataLen": "void sceAudioSetChannelDataLen(void);",
   "sceAudioWaitInputEnd": "void sceAudioWaitInputEnd(void);",
-  "sceAudio_38553111": "void sceAudio_38553111(void);",
-  "sceAudio_41EFADE7": "void sceAudio_41EFADE7(void);",
-  "sceAudio_5C37C0AE": "void sceAudio_5C37C0AE(void);",
-  "sceAudio_E0727056": "void sceAudio_E0727056(void);",
-  "sceAudio_E9D97901": "void sceAudio_E9D97901(void);",
+  "sceAudioSRCChReserve": "void sceAudioSRCChReserve(void);",
+  "sceAudioOneshotOutput": "void sceAudioOneshotOutput(void);",
+  "sceAudioSRCChRelease": "void sceAudioSRCChRelease(void);",
+  "sceAudioSRCOutputBlocking": "void sceAudioSRCOutputBlocking(void);",
+  "sceAudioGetChannelRestLen": "void sceAudioGetChannelRestLen(void);",
   "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
-  "sceMeAudio_05115756": "void sceMeAudio_05115756(void);",
-  "sceMeAudio_5EDA8D33": "void sceMeAudio_5EDA8D33(void);",
-  "sceSysreg_driver_8BE2D520": "M2C_UNK sceSysreg_driver_8BE2D520();",
-  "sceSysreg_driver_9FC87ED4": "s32 sceSysreg_driver_9FC87ED4();"
+  "sceMeAudioScUnlock": "void sceMeAudioScUnlock(void);",
+  "sceMeAudioScLock": "void sceMeAudioScLock(void);",
+  "sceSysregSemaUnlock": "M2C_UNK sceSysregSemaUnlock();",
+  "sceSysregSemaTryLock": "s32 sceSysregSemaTryLock();"
  },
  "vars": {}
 }

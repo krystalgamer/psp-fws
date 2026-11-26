@@ -66,10 +66,10 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlInit);
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlJoin);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_A5C055CE);
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlCreateEnterGameMode);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_1FF89745);
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlJoinEnterGameMode);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetPeerList);
 
@@ -104,14 +104,14 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlCreate);
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlJoin);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_1FF89745);
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlJoinEnterGameMode);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlScan);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlDisconnect);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_CF8E084D);
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlExitGameMode);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlAddHandler);
 
@@ -214,16 +214,16 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetParameter);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetScanInfo);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_5A014CE0);
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetGameModeInfo);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_lib_EFA6AEAF);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_lib_1593C05D);
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetThreadExitDeleteEventFlag);
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_lib_F8BABD85);
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlAddInternalHandler);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_lib_1C679240);
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", LinkDiscoverSkip);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_lib_CDEA7ACB);
 #endif
@@ -233,19 +233,19 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_lib_1A2B6D03);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
-void sceNetAdhocctl_lib_1572422C(void) {
+void sceNetAdhocctlRequestSuspend(void) {
     func_0000338C();
 }
 #endif
 
 #if FW_VERSION >= 282
-void sceNetAdhocctl_lib_1572422C(void) {
+void sceNetAdhocctlRequestSuspend(void) {
     func_00003360();
 }
 #endif
 
 #if FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_lib_F6057CC4);
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlHostDiscoverStart);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_00000F98);
@@ -322,7 +322,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_0000155C);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 void func_0000155C(s32 arg0, s32 arg1) {
-    sceNet_lib_57CC57DA(arg1, 0, 0x21);
+    sceNetMemset(arg1, 0, 0x21);
     func_00001BD4(arg0, arg1, 0x47, arg0 + 0x24);
 }
 #endif
@@ -333,9 +333,9 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_000015AC);
 
 #if FW_VERSION >= 282
 void func_00002014(struct Unk_func_00002014_0 *arg0) {
-    sceNet_lib_AB7DD9A5(&D_0000610C, 0, 0);
-    sceNet_lib_D2422E4D(&D_0000610C);
-    sceWlanDrv_lib_C9A8CAB7();
+    sceNetConfigSetIfEventFlag(&D_0000610C, 0, 0);
+    sceNetConfigDownInterface(&D_0000610C);
+    sceWlanDevDetach();
     arg0->unk8 = 0;
 }
 #endif
@@ -422,7 +422,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_00002068);
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_000021BC);
 
 void func_00002280(s32 arg0, s32 arg1) {
-    sceNet_lib_57CC57DA(arg1, 0, 0x21);
+    sceNetMemset(arg1, 0, 0x21);
     func_00002068(arg0, arg1, 0x47, arg0 + 0x24);
 }
 

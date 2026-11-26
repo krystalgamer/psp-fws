@@ -106,9 +106,9 @@ INCLUDE_RODATA("nonmatchings/sc_sascore", D_000025A8);
 
 INCLUDE_RODATA("nonmatchings/sc_sascore", D_000025B0);
 
-INCLUDE_ASM("nonmatchings/sc_sascore", sceSasCore_driver_B0F9F98F);
+INCLUDE_ASM("nonmatchings/sc_sascore", sceSasCoreInit);
 
-INCLUDE_ASM("nonmatchings/sc_sascore", sceSasCore_driver_E143A1EA);
+INCLUDE_ASM("nonmatchings/sc_sascore", sceSasCoreExit);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/sc_sascore", sceP3daBridgeInit);

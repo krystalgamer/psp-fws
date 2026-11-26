@@ -859,7 +859,7 @@ s32 func_000169D0(void) {
     if (temp_v0 != NULL) {
         temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x10);
         if (temp_v0_2 != 0) {
-            scePaf_35F25BA1(0, temp_v0_2);
+            Job_Cancel(0, temp_v0_2);
             var_v1 = 0;
         }
     }
@@ -934,7 +934,7 @@ s32 func_00016A18(void *arg0, s32 arg1) {
         var_s1 -= 1;
         if ((temp_a1 != 0) && (M2C_FIELD(var_s0, void **, 8) == arg1)) {
             var_s3 += 1;
-            scePaf_35F25BA1(0, temp_a1);
+            Job_Cancel(0, temp_a1);
             temp_v0 = M2C_FIELD(var_s0, void **, 8);
             if (temp_v0 != NULL) {
                 M2C_FIELD(temp_v0, s8 *, 0x65) = 1;
@@ -1022,7 +1022,7 @@ s32 func_00016AA8(void *arg0) {
         var_s1 -= 1;
         if (temp_v0 != 0) {
             var_s2 += 1;
-            scePaf_35F25BA1(0, temp_v0);
+            Job_Cancel(0, temp_v0);
             temp_v0_2 = M2C_FIELD(var_s0, void **, 8);
             if (temp_v0_2 != NULL) {
                 M2C_FIELD(temp_v0_2, s8 *, 0x65) = 1;

@@ -2204,7 +2204,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002E044);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_0002E044(s32 arg0) {
-    return scePaf_F0B4CAE7("TAB", arg0, 3) == 0;
+    return sce_paf_private_strncmp("TAB", arg0, 3) == 0;
 }
 #endif
 
@@ -2679,10 +2679,10 @@ void func_00033BDC(s32 arg0, s32 arg1) {
                     }
                 } else {
                     sceVshCommonGui_80271F41();
-                    scePaf_6B1E90C7();
+                    InputDevice_PspPad_Lock();
                     temp_s0_2 = D_0005F8E8;
-                    if ((temp_s0_2 == NULL) || (temp_v0_2 = scePaf_A0ED77C4(0, &func_00033D08, 0, -1, -1, (s32 *) func_00033DB4), temp_s0_2->unkC = temp_v0_2, (temp_v0_2 == 0))) {
-                        scePaf_66907719();
+                    if ((temp_s0_2 == NULL) || (temp_v0_2 = Job_Start(0, &func_00033D08, 0, -1, -1, (s32 *) func_00033DB4), temp_s0_2->unkC = temp_v0_2, (temp_v0_2 == 0))) {
+                        InputDevice_PspPad_Unlock();
                         sceVshCommonGui_1CF884A1();
                     }
                 }
@@ -2705,12 +2705,12 @@ void func_00033DB4(s32 arg0) {
     if (D_0005F8E8 != NULL) {
         D_0005F8E8->unkC = 0;
     }
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
     sceVshCommonGui_1CF884A1();
     if (arg0 != 0) {
 
     } else {
-        scePaf_A0ED77C4(0, &func_00033E28, 0, -1, -1, &func_00033EA4);
+        Job_Start(0, &func_00033E28, 0, -1, -1, &func_00033EA4);
     }
 }
 #endif
@@ -3042,8 +3042,8 @@ void func_00026AFC(s32 arg0) {
 
             } else {
                 sceVshCommonGui_80271F41();
-                scePaf_6B1E90C7();
-                temp_v0 = scePaf_A0ED77C4(0, &func_00026B84, 0, -1, -1, &func_00026C30);
+                InputDevice_PspPad_Lock();
+                temp_v0 = Job_Start(0, &func_00026B84, 0, -1, -1, &func_00026C30);
                 if (D_000490C8 != NULL) {
                     M2C_FIELD(D_000490C8, s32 *, 0xB0) = temp_v0;
                 }
@@ -3057,7 +3057,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00026B84);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00026C30);
 
 void func_00026D34(s32 arg0) {
-    if ((scePaf_66FE90D7(&D_000447A8, arg0) == 0) && (&D_0005EEA0 != NULL)) {
+    if ((sce_paf_private_strcmp(&D_000447A8, arg0) == 0) && (&D_0005EEA0 != NULL)) {
         M2C_FIELD(&D_0005EEA0, s8 *, 0x68C) = 0;
     }
 }

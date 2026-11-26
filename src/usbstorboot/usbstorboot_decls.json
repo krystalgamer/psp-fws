@@ -1,6 +1,6 @@
 {
  "funcs": {
-  "KDebugForKernel_84F370BC": "M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *);",
+  "Kprintf": "M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *);",
   "func_00002474": "void func_00002474(void);",
   "func_00002490": "s32 func_00002490(void);",
   "memset": "M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);",

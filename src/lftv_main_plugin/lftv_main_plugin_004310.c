@@ -7,7 +7,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004310);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00004310(s32 arg0) {
-    scePaf_66907719();
+    InputDevice_PspPad_Unlock();
     if (arg0 != 0) {
 
     } else {

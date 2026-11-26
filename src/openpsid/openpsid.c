@@ -114,13 +114,13 @@ INCLUDE_ASM("nonmatchings/openpsid", sceOpenPSIDGetOpenPSID);
 #endif
 
 #if FW_VERSION >= 340
-INCLUDE_ASM("nonmatchings/openpsid", sceOpenPSID_driver_19D579F0);
+INCLUDE_ASM("nonmatchings/openpsid", sceOpenPSIDGetPSID);
 #endif
 
 #if FW_VERSION == 352
-INCLUDE_ASM("nonmatchings/openpsid", scePcact_driver_F9ECFDDD);
+INCLUDE_ASM("nonmatchings/openpsid", scePcactAuth1BB);
 
-INCLUDE_ASM("nonmatchings/openpsid", scePcact_driver_08BB9677);
+INCLUDE_ASM("nonmatchings/openpsid", scePcactAuth2BB);
 #endif
 
 #if FW_VERSION >= 282

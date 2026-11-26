@@ -764,7 +764,7 @@ void func_00002B68(void) {
     temp_s0 = D_000B6824;
     if (temp_s0 != 0) {
         sceVshCommonUtil_1EBD43EA(temp_s0);
-        scePaf_4E67BB08(temp_s0);
+        _ZdlPv(temp_s0);
         D_000B6824 = 0;
     }
 }
@@ -834,7 +834,7 @@ void func_00002E9C(s32 arg0) {
 void func_00002E9C(s32 arg0) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_B7E6052B(8);
+    temp_v0 = _Znwj(8);
     func_0002CB90(temp_v0);
     D_000B5FE8 = temp_v0;
     if (temp_v0 == 0) {
@@ -969,7 +969,7 @@ s32 func_00004B1C(struct Unk_func_00004B1C_0 *arg0) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_1811AD32(temp_v1, temp_v0, 0, 0);
+            _ZN3paf4View8PageOpenEPvii(temp_v1, temp_v0, 0, 0);
         }
     }
     return 0;
@@ -1015,7 +1015,7 @@ void func_00004B78(struct Unk_func_00004B78_0 *arg0) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_D05C226F(temp_v1, temp_v0);
+            _ZN3paf4View9PageCloseEPv(temp_v1, temp_v0);
         }
     }
 }
@@ -1056,7 +1056,7 @@ void func_00004BC0(struct Unk_func_00004BC0_0 *arg0) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_5EBC648F(temp_v1, temp_v0);
+            _ZN3paf4View12PageActivateEPv(temp_v1, temp_v0);
         }
     }
 }
@@ -1881,7 +1881,7 @@ void func_00009528(struct Unk_func_00009528_0 *arg0) {
     if (temp_v0 == 0) {
 
     } else {
-        scePaf_EAA5AFF6(temp_v0, 0x03000014);
+        _ZN3paf9PhHandler11KillTimerCBEi(temp_v0, 0x03000014);
     }
     if (arg0->unk54 != NULL) {
         arg0->unk54(arg0->unk58);
@@ -1930,7 +1930,7 @@ void func_0000966C(struct Unk_func_0000966C_0 *arg0) {
     if (temp_v0 == 0) {
 
     } else {
-        scePaf_EAA5AFF6(temp_v0, 0x03000015);
+        _ZN3paf9PhHandler11KillTimerCBEi(temp_v0, 0x03000015);
         temp_v0_2 = arg0->unk5C;
         if (temp_v0_2 != NULL) {
             temp_v0_2(arg0->unk60);

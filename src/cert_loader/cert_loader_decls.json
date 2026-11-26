@@ -9,8 +9,8 @@
   "func_00000614": "s32 func_00000614(void);",
   "func_0000061C": "s32 func_0000061C(void);",
   "func_00000624": "s32 func_00000624(void);",
-  "sceCertLoader_driver_11391041": "s32 sceCertLoader_driver_11391041(void);",
-  "sceCertLoader_driver_E86A7DC1": "s32 sceCertLoader_driver_E86A7DC1(void);"
+  "sceLoadCertInit": "s32 sceLoadCertInit(void);",
+  "sceLoadCertEnd": "s32 sceLoadCertEnd(void);"
  },
  "vars": {}
 }
