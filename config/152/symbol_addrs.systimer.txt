@@ -20,8 +20,9 @@ sceKernelDisableIntr = 0x000009AC; // type:func
 sceKernelRegisterSuspendHandler = 0x000009B4; // type:func
 sceKernelRegisterResumeHandler = 0x000009BC; // type:func
 // shared names (tools/add_version.py) begin
-func_000002B4 = 0x000002B0; // type:func rom:0x330
-func_000002D0 = 0x000002CC; // type:func rom:0x34C
+_sceSTimerStopCount = 0x000002B0; // type:func rom:0x330
+_sceSTimerGetCount = 0x000002CC; // type:func rom:0x34C
 func_00000878 = 0x00000870; // type:func rom:0x8F0
 func_000008F0 = 0x000008E8; // type:func rom:0x968
 // shared names (tools/add_version.py) end
+g_SYSTMR = 0x00000B30;

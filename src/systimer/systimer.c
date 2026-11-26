@@ -9,28 +9,12 @@ INCLUDE_ASM("nonmatchings/systimer", sceSTimerAlloc);
 INCLUDE_ASM("nonmatchings/systimer", func_000000E0);
 
 INCLUDE_ASM("nonmatchings/systimer", sceSTimerSetHandler);
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-void func_000002B4(void **arg0) {
-    void *temp_a2;
-
-    temp_a2 = *arg0;
-    M2C_FIELD(temp_a2, s32 *, 0) = (s32) (M2C_FIELD(temp_a2, s32 *, 0x100) & 0x7F7FFFFF);
+void _sceSTimerStopCount(SceSTimerInfo *timer) {
+    timer->regadr->timerData = timer->regadr->nowData & 0x7F7FFFFF;
 }
 
-INCLUDE_ASM("nonmatchings/systimer", func_000002D0);
-#endif
-
-#if FW_VERSION >= 282
-void func_000002B0(void **arg0) {
-    struct Unk_func_000002B0_temp_a2 *temp_a2;
-
-    temp_a2 = *arg0;
-    temp_a2->unk0 = (s32) (temp_a2->unk100 & 0x7F7FFFFF);
-}
-
-INCLUDE_ASM("nonmatchings/systimer", func_000002CC);
+INCLUDE_ASM("nonmatchings/systimer", _sceSTimerGetCount);
 #endif
 
 INCLUDE_ASM("nonmatchings/systimer", module_bootstart);
@@ -41,8 +25,8 @@ s32 module_reboot_before(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        _sceSTimerStopCount(&D_00000B20[i]);
-        sceKernelReleaseIntrHandler(D_00000B20[i].intrcode);
+        _sceSTimerStopCount(&g_SYSTMR[i]);
+        sceKernelReleaseIntrHandler(g_SYSTMR[i].intrcode);
     }
     sceKernelCpuResumeIntr(oldIntr);
     return 0;
@@ -69,11 +53,11 @@ s32 suspendSTimer(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        SceHwTimer *reg = D_00000B20[i].regadr;
+        SceHwTimer *reg = g_SYSTMR[i].regadr;
         STimerRegSave[i].Control = reg->timerData;
         STimerRegSave[i].N = reg->prsclNumerator;
         STimerRegSave[i].M = reg->prsclDenominator;
-        sceKernelDisableIntr(D_00000B20[i].intrcode);
+        sceKernelDisableIntr(g_SYSTMR[i].intrcode);
     }
     return 0;
 }
@@ -84,12 +68,12 @@ s32 resumeSTimer(void) {
     for (i = 0; i < 4; i++) {
         u32 control;
 
-        D_00000B20[i].regadr->prsclDenominator = STimerRegSave[i].M;
-        D_00000B20[i].regadr->prsclNumerator = STimerRegSave[i].N;
+        g_SYSTMR[i].regadr->prsclDenominator = STimerRegSave[i].M;
+        g_SYSTMR[i].regadr->prsclNumerator = STimerRegSave[i].N;
         control = STimerRegSave[i].Control;
-        D_00000B20[i].regadr->timerData;
-        D_00000B20[i].regadr->timerData = control & 0x7FFFFFFF;
-        sceKernelEnableIntr(D_00000B20[i].intrcode);
+        g_SYSTMR[i].regadr->timerData;
+        g_SYSTMR[i].regadr->timerData = control & 0x7FFFFFFF;
+        sceKernelEnableIntr(g_SYSTMR[i].intrcode);
     }
     return 0;
 }
@@ -107,9 +91,35 @@ INCLUDE_ASM("nonmatchings/systimer", func_000004C0);
 INCLUDE_ASM("nonmatchings/systimer", sceSTimerSetHandler);
 #endif
 
-INCLUDE_ASM("nonmatchings/systimer", sceSTimerStartCount);
+s32 sceSTimerStartCount(s32 timerId) {
+    SceSTimerInfo *timer = &g_SYSTMR[timerId & 3];
+    s32 oldIntr;
 
-INCLUDE_ASM("nonmatchings/systimer", sceSTimerStopCount);
+    if (timer->timid != timerId) {
+        return 0x80020097;
+    }
+    oldIntr = sceKernelCpuSuspendIntr();
+    if (timer->regadr->nowData & 0x800000) {
+        sceKernelCpuResumeIntr(oldIntr);
+        return 0x8002009A;
+    }
+    timer->regadr->timerData = timer->regadr->nowData | 0x800000;
+    sceKernelCpuResumeIntr(oldIntr);
+    return 0;
+}
+
+s32 sceSTimerStopCount(s32 timerId) {
+    SceSTimerInfo *timer = &g_SYSTMR[timerId & 3];
+    s32 oldIntr;
+
+    if (timer->timid != timerId) {
+        return 0x80020097;
+    }
+    oldIntr = sceKernelCpuSuspendIntr();
+    _sceSTimerStopCount(timer);
+    sceKernelCpuResumeIntr(oldIntr);
+    return 0;
+}
 
 #if FW_VERSION == 100
 void _sceSTimerStopCount(SceSTimerInfo *timer) {
@@ -117,9 +127,32 @@ void _sceSTimerStopCount(SceSTimerInfo *timer) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/systimer", sceSTimerResetCount);
+s32 sceSTimerResetCount(s32 timerId) {
+    SceSTimerInfo *timer = &g_SYSTMR[timerId & 3];
+    s32 oldIntr;
 
-INCLUDE_ASM("nonmatchings/systimer", sceSTimerGetCount);
+    if (timer->timid != timerId) {
+        return 0x80020097;
+    }
+    oldIntr = sceKernelCpuSuspendIntr();
+    timer->regadr->timerData |= 0x80000000;
+    timer->totalcount = 0;
+    sceKernelCpuResumeIntr(oldIntr);
+    return 0;
+}
+
+s32 sceSTimerGetCount(s32 timerId, s32 *count) {
+    SceSTimerInfo *timer = &g_SYSTMR[timerId & 3];
+    s32 oldIntr;
+
+    if (timer->timid != timerId) {
+        return 0x80020097;
+    }
+    oldIntr = sceKernelCpuSuspendIntr();
+    *count = _sceSTimerGetCount(timer);
+    sceKernelCpuResumeIntr(oldIntr);
+    return 0;
+}
 
 #if FW_VERSION == 100
 s32 _sceSTimerGetCount(SceSTimerInfo *timer) {

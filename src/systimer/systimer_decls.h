@@ -30,19 +30,13 @@ typedef struct {
     s32 M;
 } SceSTimerReg;
 
-struct Unk_func_000002B0_temp_a2 {
-    s32 unk0;
-    u8 pad4[0xFC];
-    s32 unk100;
-};
-
-extern SceSTimerInfo D_00000B20[4];
 extern SceSTimerReg STimerRegSave[4];
+extern SceSTimerInfo g_SYSTMR[4];
 
 s32 _sceSTimerGetCount(SceSTimerInfo *timer);
 void _sceSTimerStopCount(SceSTimerInfo *timer);
 void func_00000128(SceSTimerInfo *timer);
-void func_000002B0(void **arg0);
-void func_000002B4(void **arg0);
+void sceKernelCpuResumeIntr(s32);
+s32 sceKernelCpuSuspendIntr(void);
 
 #endif
