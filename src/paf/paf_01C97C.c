@@ -51,21 +51,13 @@ INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024248);
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001BEE8);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001CA78);
 
 INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016F890);
-#endif
 
-#if FW_VERSION == 340
-INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0017A94C);
-#endif
-
-#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016F8A4);
-#endif
 
-#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016F9E0);
 
 INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FA10);
@@ -93,7 +85,7 @@ INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_01C2FC36);
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024B6C);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 void func_000254C0(void) {
     sceKernelWaitSema(*D_001A4E30, 1, NULL);
 }
@@ -109,13 +101,27 @@ INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024BC0);
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024C94);
 #endif
 
-#if FW_VERSION < 200
+#if FW_VERSION >= 150 && FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001F918);
+#endif
 
+#if FW_VERSION == 100
+s32 func_0001F918(void) {
+    return 1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001F920);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 100
+s32 func_0001F920(void) {
+    return 1;
+}
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00025514);
 
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_000255E8);

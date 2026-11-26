@@ -2,9 +2,28 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION != 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_168290", func_00168290);
-#else
+#endif
+
+#if FW_VERSION == 100
+s32 func_00168290(s32 *arg0) {
+    s32 temp_a1;
+    s32 var_a1;
+
+    temp_a1 = *arg0;
+    var_a1 = 0x80615001;
+    if ((temp_a1 & 0xF) == 0xF) {
+        var_a1 = 0x80615004;
+        if ((u32) (temp_a1 >> 4) < 3U) {
+            var_a1 = func_00169950((s32) arg0);
+        }
+    }
+    return var_a1;
+}
+#endif
+
+#if FW_VERSION == 282
 s32 func_00168290(s32 *arg0) {
     s32 temp_a1;
     s32 var_a1;
@@ -35,7 +54,7 @@ INCLUDE_ASM("nonmatchings/paf_168290", func_00166D20);
 INCLUDE_ASM("nonmatchings/paf_168290", func_00166DA8);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_168290", func_001685B0);
 
 INCLUDE_ASM("nonmatchings/paf_168290", func_00168638);

@@ -3,20 +3,22 @@
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D6D0);
-#endif
-
-#if FW_VERSION == 282
+#else
 M2C_UNK *func_0009D6D0(void) {
     return " libpng version 1.2.10 - April 23, 2006 (header)\n";
 }
 #endif
 
-#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D6DC);
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D75C);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D75C);
+#if FW_VERSION == 100
+void func_0009D75C(s32 arg0) {
+    func_0006428C(arg0 + 0x434);
+}
 #endif
 
 #if FW_VERSION == 282
@@ -25,8 +27,14 @@ void func_0009D75C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D778);
+#endif
+
+#if FW_VERSION == 100
+s32 func_0009D778(void) {
+    return 0x27DE;
+}
 #endif
 
 #if FW_VERSION == 282
@@ -35,29 +43,17 @@ s32 func_0009D778(void) {
 }
 #endif
 
-#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D780);
 
 s32 func_0009D798(void) {
     return -1;
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/paf_09D6D0", scePaf_7894B61F);
 
-#if FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/paf_09D6D0", func_000A5134);
-
-INCLUDE_ASM("nonmatchings/paf_09D6D0", func_000A51B4);
-
-INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DB78);
-
-INCLUDE_ASM("nonmatchings/paf_09D6D0", func_000A5300);
-#else
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D8A4);
 
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D940);
-#endif
 
 #if FW_VERSION == 280
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D780_v280);
@@ -77,14 +73,12 @@ INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DA4C);
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DAA8);
 #endif
 
-#if FW_VERSION < 340
 void func_0009DB04(void *arg0) {
     scePaf_9F10613F(arg0, 1);
 }
 
 void func_0009DB20(void) {
 }
-#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DB28);
@@ -104,8 +98,14 @@ void func_0009DB28(struct Unk_func_0009DB28_0 *arg0, s32 arg1, s32 arg2, s32 arg
 }
 #endif
 
-#if FW_VERSION < 280
+#if FW_VERSION >= 150 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_00054588);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00054588(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x408);
+}
 #endif
 
 #if FW_VERSION == 282
