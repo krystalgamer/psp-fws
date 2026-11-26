@@ -15,6 +15,7 @@
   "func_00001FCC": "void func_00001FCC(s32 arg0, s32 arg1, s32 arg2);",
   "func_00001FF8": "s32 func_00001FF8(void);",
   "func_000022E0": "s32 func_000022E0(s32, s32, s32, s32, s32);",
+  "func_00002854": "s32 func_00002854(void);",
   "func_00002990": "s32 func_00002990(s32, s32, s32, s32, s32);",
   "func_0000428C": "s32 func_0000428C(s32, s32, s32, s32, s32);",
   "func_00004C44": "s32 func_00004C44(void);",
@@ -36,7 +37,7 @@
   "D_00007AC0_s": "struct D_00007AC0_s {\n    u8 pad0[0x18];\n    volatile s32 unk18;\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};"
  },
  "vars": {
-  "D_00003ABC": "extern M2C_UNK D_00003ABC;",
+  "D_00003ABC": "extern s32 D_00003ABC;",
   "D_00003B8C": "extern s32 D_00003B8C;",
   "D_00004500": "extern s32 D_00004500;",
   "D_00005AC0": "extern M2C_UNK D_00005AC0;",

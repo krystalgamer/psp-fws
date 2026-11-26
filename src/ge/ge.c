@@ -391,8 +391,14 @@ s32 func_00004C44(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 150 || (FW_VERSION >= 152 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/ge", func_00002854);
+#endif
+
+#if FW_VERSION == 151
+s32 func_00002854(void) {
+    return (D_00003ABC == 0) ? 0 : -1;
+}
 #endif
 
 #if FW_VERSION == 100

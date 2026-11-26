@@ -11,7 +11,7 @@ struct D_00007AC0_s {
     volatile s32 unk20;
 };
 
-extern M2C_UNK D_00003ABC;
+extern s32 D_00003ABC;
 extern s32 D_00003B8C;
 extern s32 D_00004500;
 extern M2C_UNK D_00005AC0;
@@ -40,6 +40,7 @@ void func_00001FA4(s32 arg0);
 void func_00001FCC(s32 arg0, s32 arg1, s32 arg2);
 s32 func_00001FF8(void);
 s32 func_000022E0(s32, s32, s32, s32, s32);
+s32 func_00002854(void);
 s32 func_00002990(s32, s32, s32, s32, s32);
 s32 func_0000428C(s32, s32, s32, s32, s32);
 s32 func_00004C44(void);
