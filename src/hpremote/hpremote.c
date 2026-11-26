@@ -278,11 +278,11 @@ s32 sceHprmReset(void) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/hpremote", sceHprmGetInternalState);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceHprmGetInternalState(s32 **arg0) {
     if (arg0 != NULL) {
         *arg0 = (s32 *) &D_00002080;
