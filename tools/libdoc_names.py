@@ -34,6 +34,11 @@ def libdoc():
             n = m[2].strip()
             if re.fullmatch(r"[A-Za-z_]\w*", n) and nid_of(n) == m[1].upper():
                 out[m[1].upper()] = n
+    # names already in the repo's symbol files (any version/module), if their hash is the NID
+    for p in glob.glob(str(ROOT / "config/*/symbol_addrs.*.txt")):
+        for n in re.findall(r"^\s*([A-Za-z_]\w*)\s*=", open(p).read(), re.M):
+            if not re.search(r"_[0-9A-F]{8}$", n) and not n.startswith(("func_", "D_", "jtbl_")):
+                out.setdefault(nid_of(n), n)
     return out
 
 
