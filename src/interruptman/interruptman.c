@@ -119,11 +119,11 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetPrimarySyscallHandler);
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelCpuEnableIntr);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", QueryInterruptManCB);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 *QueryInterruptManCB(void) {
     return &D_00003910;
 }
