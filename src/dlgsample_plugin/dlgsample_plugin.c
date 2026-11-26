@@ -1,3 +1,4 @@
+/* cflags[100]: -Os */
 #include "common.h"
 #include "dlgsample_plugin_decls.h"
 
@@ -12,7 +13,10 @@ s32 module_stop(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/dlgsample_plugin", func_0000015C);
+void func_0000015C(void) {
+    scePaf_3481F595(D_0000053C, &D_000004CC);
+    D_00000540 = 0;
+}
 
 void func_0000018C(void) {
     void *sp0;
@@ -23,11 +27,12 @@ void func_0000018C(void) {
     func_000002C4(&sp0);
 }
 
-INCLUDE_ASM("nonmatchings/dlgsample_plugin", func_00000200);
-
-u8 func_00000230(void) {
-    return D_00000540;
+void func_00000200(void) {
+    scePaf_3481F595(D_0000053C, &D_000004CC);
+    D_00000540 = 0;
 }
+
+INCLUDE_ASM("nonmatchings/dlgsample_plugin", func_00000230);
 
 INCLUDE_ASM("nonmatchings/dlgsample_plugin", func_0000023C);
 
