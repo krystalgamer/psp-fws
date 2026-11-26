@@ -697,9 +697,26 @@ s32 sceDisplayWaitVblankStart(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankStartCB);
-#else
+#endif
+
+#if FW_VERSION == 100
+s32 sceDisplayWaitVblankStartCB(void) {
+    s32 temp_v0;
+    u32 temp_s1;
+
+    temp_s1 = shiftK1();
+    temp_v0 = sceKernelWaitEventFlagCB(D_000021F0, 1U, 1, NULL, NULL);
+    if (temp_v0 < 0) {
+        Kprintf(&D_00002060, "sceDisplayWaitVblankStartCB", temp_v0);
+    }
+    setK1(temp_s1);
+    return temp_v0;
+}
+#endif
+
+#if FW_VERSION >= 282
 s32 sceDisplayIsVblank(void) {
     return sceDisplayGetCurrentHcount() < D_00003EE8;
 }
