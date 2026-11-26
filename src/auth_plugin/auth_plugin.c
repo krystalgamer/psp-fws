@@ -43,8 +43,20 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C_v201);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000238);
+#endif
+
+#if FW_VERSION == 100
+void func_00000238(void) {
+    func_00001494((s32) &D_00001E98, (s32) &D_00002AEC);
+    func_00001494((s32) &D_00001EA4, (s32) &D_00002AEC);
+    scePaf_3481F595(D_00001E8C, &D_00002AE0);
+    scePaf_F609FA81(D_00001E8C, &D_00002AE0, 0, 0);
+    scePaf_CAF05F1D(D_00001E8C, &D_00002AE0);
+}
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
