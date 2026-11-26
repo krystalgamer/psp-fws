@@ -171,7 +171,11 @@ s32 func_00024DE0(struct Unk_func_00024DE0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_00024E04);
 
-#if FW_VERSION < 352
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_00024E7C);
+#endif
+
+#if FW_VERSION < 330
 s32 func_00024E7C(struct Unk_func_00024508_0 *arg0, s32 arg1) {
     void **temp_a0;
 
@@ -186,7 +190,9 @@ s32 func_00024E7C(struct Unk_func_00024508_0 *arg0, s32 arg1) {
     }
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 352
 s32 func_00024E7C(struct Unk_func_00024508_0 *arg0, s32 arg1) {
     struct Unk_vt_func_00024E7C_temp_a0 **temp_a0;
 
@@ -204,14 +210,14 @@ s32 func_00024E7C(struct Unk_func_00024508_0 *arg0, s32 arg1) {
     }
     return 0;
 }
-#endif
-
-#if FW_VERSION < 352
+#else
 s32 func_00024F10(struct Unk_func_00024F10_0 *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x20) = arg1;
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 352
 s32 func_00024F10(struct Unk_func_00024F10_0 *arg0, s32 arg1) {
     arg0->unk24 = arg1;
     return 0;
@@ -458,7 +464,9 @@ INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_00026540);
 INCLUDE_RODATA("nonmatchings/premo_plugin_02435C", D_0002C258);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin_02435C", D_0002C2B8);
+#endif
 
+#if FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/premo_plugin_02435C", D_00025700);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin_02435C", D_00025710);
@@ -678,7 +686,7 @@ void func_000273E8(struct Unk_func_000273E8_0 *arg0) {
     arg0->unk30 = 0;
 }
 
-#if FW_VERSION == 352
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_000273F0);
 #else
 s32 func_000273F0(void) {
@@ -708,7 +716,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_0001F38C_v311);
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_0001F38C_v310);
 #endif
 
-#if FW_VERSION < 352
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_0001F4B4);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_00020000);

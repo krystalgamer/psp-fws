@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/330/.splat_cache.game_plugin
   symbol_addrs_path:
     - config/330/symbol_addrs.game_plugin.txt
+    - config/330/func_starts.game_plugin.txt
     - tmp/build/330/prx_syms.game_plugin.txt
   reloc_addrs_path: [tmp/build/330/reloc_addrs.game_plugin.txt]
   asset_path: tmp/assets/330/game_plugin
@@ -53,7 +54,13 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, game_plugin]
+      - [0xC4, c, game_plugin]
+      - [0x680, c, game_plugin_0005CC]
+      - [0x44A8, c, game_plugin_002BB0]
+      - [0x91F4, c, game_plugin_0075DC]
+      - [0x9EF8, c, game_plugin_0081A4]
+      - [0xA2D8, c, game_plugin_00856C]
+      - [0xB3F8, c, game_plugin_00968C]
       - { start: 0x13480, type: asm, name: fini, linker_section: .fini }
       - { start: 0x1349C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x13A84, type: prxpad, order: .text }
@@ -71,7 +78,13 @@ segments:
       - { start: 0x14070, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x14080, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x14084, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x140B8, rodata, game_plugin]
+      - [0x140B8, .rodata, game_plugin]
+      - [0x140D8, .rodata, game_plugin_0005CC]
+      - [0x149A0, .rodata, game_plugin_002BB0]
+      - [0x14E80, .rodata, game_plugin_0075DC]
+      - [0x1512C, .rodata, game_plugin_0081A4]
+      - [0x151E0, .rodata, game_plugin_00856C]
+      - [0x15328, .rodata, game_plugin_00968C]
       - { start: 0x155DC, type: prxpad, order: .rodata }
   - name: game_plugin_seg1
     type: code

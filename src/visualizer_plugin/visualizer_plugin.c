@@ -1,7 +1,9 @@
 #include "common.h"
 #include "visualizer_plugin_decls.h"
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000000);
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000024);
 
@@ -18,6 +20,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000015C);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000180);
 
+#if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CC04);
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CC08);
@@ -45,6 +48,7 @@ INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CE54);
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CE58);
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CE5C);
+#endif
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CE60);
 
@@ -61,7 +65,9 @@ s32 func_00000274(M2C_UNK (*arg0)(M2C_UNK)) {
     return 0;
 }
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000298);
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000002CC);
 
@@ -111,11 +117,15 @@ void func_00000660(struct Unk_func_00000660_0 *arg0) {
     arg0->unk4 = 0;
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000674);
+#else
 void func_00000674(struct Unk_func_00000674_0 *arg0) {
     arg0->unk0 = &D_0000CEB0;
     arg0->unk4 = 0;
     scePaf_6261C0A5();
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000006A0);
 
@@ -123,6 +133,15 @@ void func_000006D0(struct Unk_func_000006D0_0 *arg0) {
     func_00000AE8(arg0->unk4);
 }
 
+#if FW_VERSION == 330
+void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
+    void **temp_s0;
+
+    temp_s0 = arg0->unk4;
+    M2C_FIELD(*temp_s0, M2C_UNK (**)(void **, M2C_UNK), 0x58)(temp_s0, 1);
+    scePaf_EAA5AFF6(temp_s0, 0x01000003);
+}
+#else
 void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
     struct Unk_vt_func_000006EC_temp_s0 **temp_s0;
 
@@ -130,6 +149,7 @@ void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
     (*temp_s0)->unk58(temp_s0, 1);
     scePaf_6A82A8C6(temp_s0, 0x01000003);
 }
+#endif
 
 void func_00000730(struct Unk_func_00000730_0 *arg0) {
     func_00000CCC(arg0->unk4);
@@ -164,9 +184,11 @@ void func_00000848(struct Unk_func_00000848_0 *arg0) {
     func_00000AB0(arg0->unk4);
 }
 
+#if FW_VERSION == 352
 void func_00000864(struct Unk_func_00000864_0 *arg0) {
     func_00000A94(arg0->unk4);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000880);
 
@@ -182,13 +204,31 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000008C4);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000948);
 
+#if FW_VERSION == 330
+void func_00000A0C(void **arg0) {
+    M2C_FIELD(arg0, void **, 0) = &D_0000CE40;
+    M2C_FIELD(arg0, s32 *, 0x330) = 0;
+    scePaf_EAA5AFF6(arg0, 0);
+    scePaf_715E8DAB(arg0);
+}
+#else
 void func_00000A0C(void **arg0) {
     M2C_FIELD(arg0, void **, 0) = &D_0000CEF8;
     M2C_FIELD(arg0, s32 *, 0x330) = 0;
     scePaf_6A82A8C6(arg0, 0);
     scePaf_9E0CA28F(arg0);
 }
+#endif
 
+#if FW_VERSION == 330
+void func_00000A4C(void **arg0) {
+    M2C_FIELD(arg0, void **, 0) = &D_0000CE40;
+    M2C_FIELD(arg0, s32 *, 0x330) = 0;
+    scePaf_EAA5AFF6(arg0, 0);
+    scePaf_715E8DAB(arg0);
+    scePaf_4E67BB08(arg0);
+}
+#else
 void func_00000A4C(void **arg0) {
     M2C_FIELD(arg0, void **, 0) = &D_0000CEF8;
     M2C_FIELD(arg0, s32 *, 0x330) = 0;
@@ -198,6 +238,7 @@ void func_00000A4C(void **arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000A94);
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000AB0);
 
@@ -236,17 +277,25 @@ s32 func_00000D4C(struct Unk_func_00000D4C_0 *arg0, s32 arg1) {
     return 0;
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000D58);
+#else
 void func_00000D58(struct Unk_func_00000D58_0 *arg0) {
     arg0->unk0 = &D_0000CFD8;
     arg0->unk20 = 0;
     arg0->unk24 = 0;
 }
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000D70);
+#else
 void func_00000D70(struct Unk_func_00000D70_0 *arg0) {
     arg0->unk0 = &D_0000CFD8;
     arg0->unk20 = 0;
     arg0->unk24 = 0;
 }
+#endif
 
 void func_00000D88(M2C_UNK **arg0) {
     *arg0 = &D_0000CFD8;
@@ -256,13 +305,30 @@ void func_00000D98(M2C_UNK **arg0) {
     *arg0 = &D_0000CFD8;
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000DA8);
+#else
 void func_00000DA8(M2C_UNK **arg0) {
     *arg0 = &D_0000CFD8;
     scePaf_6261C0A5();
 }
+#endif
+
+#if FW_VERSION == 330
+void func_00005650(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000DD0);
 
+#if FW_VERSION == 330
+void func_00000DE4(struct Unk_func_00000DE4_0 *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
+}
+
+INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CE40);
+#else
 void func_00000DDC(void) {
 }
 
@@ -271,6 +337,7 @@ void func_00000DE4(struct Unk_func_00000DE4_0 *arg0, s32 arg1) {
 }
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CEF8);
+#endif
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CFC8);
 
@@ -280,9 +347,15 @@ INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CFF0);
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D000);
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CF5C);
+
+INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CF74);
+#else
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D014);
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D02C);
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000DEC);
 
@@ -294,7 +367,9 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000010B4);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001184);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000125C);
+#endif
 
 void func_000012BC(struct Unk_func_000012BC_0 *arg0, s32 arg1) {
     s32 temp_s0;
@@ -338,10 +413,14 @@ void func_000019B8(M2C_UNK **arg0) {
     *arg0 = &D_0000D1D0;
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000019C8);
+#else
 void func_000019C8(M2C_UNK **arg0) {
     *arg0 = &D_0000D1D0;
     scePaf_6261C0A5();
 }
+#endif
 
 void func_000019F0(struct Unk_func_000019F0_0 *arg0) {
     arg0->unk0 = &D_0000D138;
@@ -356,17 +435,35 @@ void func_00001A40(struct Unk_func_00001A40_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001A48);
 
+#if FW_VERSION == 330
+void func_00001A68(s32 arg0) {
+    scePaf_D24E4016(arg0 + 8);
+}
+#else
 void func_00001A68(s32 arg0) {
     scePaf_BB8E4390(arg0 + 8);
 }
+#endif
 
+#if FW_VERSION == 330
+void func_00001A84(s32 arg0) {
+    scePaf_1F0E9712(arg0 + 8);
+}
+#else
 void func_00001A84(s32 arg0) {
     scePaf_79542EEA(arg0 + 8);
 }
+#endif
 
+#if FW_VERSION == 330
+void func_00001AA0(s32 arg0) {
+    scePaf_0CFDBE2F(arg0 + 8);
+}
+#else
 void func_00001AA0(s32 arg0) {
     scePaf_291EBB2C(arg0 + 8);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001ABC);
 
@@ -404,21 +501,45 @@ void func_00001CB8(struct Unk_vt_func_00001CB8_arg0 **arg0) {
     (*arg0)->unk28();
 }
 
+#if FW_VERSION == 330
+void func_00001CDC(s32 arg0) {
+    scePaf_95948FB6(arg0 + 8);
+}
+#else
 void func_00001CDC(s32 arg0) {
     scePaf_1A314D65(arg0 + 8);
 }
+#endif
 
+#if FW_VERSION == 330
+void func_00001CF8(s32 arg0) {
+    scePaf_ED89C94B(arg0 + 8);
+}
+#else
 void func_00001CF8(s32 arg0) {
     scePaf_6FAE0AC1(arg0 + 8);
 }
+#endif
 
+#if FW_VERSION == 330
+void func_00001D14(s32 arg0) {
+    scePaf_BA433BEF(arg0 + 8);
+}
+#else
 void func_00001D14(s32 arg0) {
     scePaf_2A5E7BE9(arg0 + 8);
 }
+#endif
 
+#if FW_VERSION == 330
+void func_00001D30(s32 arg0) {
+    scePaf_B7865607(arg0 + 8);
+}
+#else
 void func_00001D30(s32 arg0) {
     scePaf_7EA9C56C(arg0 + 8);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001D4C);
 
@@ -462,6 +583,7 @@ s32 func_00001E84(void) {
 void func_00001E8C(void) {
 }
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001E94);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001F68);
@@ -473,6 +595,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00002100);
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000021C4);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00002290);
+#endif
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D0A0);
 
@@ -480,7 +603,19 @@ INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D138);
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D1D0);
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001DBC);
+
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001EF8);
+
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00002034);
+
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000020F8);
+
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000021BC);
+#else
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000022CC);
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00002364);
 
@@ -513,9 +648,11 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00003228);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00003300);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000033E0);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000341C);
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000034B0);
 
@@ -535,7 +672,11 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000049E0);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000054C8);
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000058A8);
+#else
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00005650);
+#endif
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D478);
 
@@ -543,25 +684,37 @@ INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D47C);
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D480);
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000033E0);
+#else
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000058A8);
+#endif
 
 void func_00005928(M2C_UNK **arg0) {
     *arg0 = &D_0000D518;
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00005938);
+#else
 void func_00005938(M2C_UNK **arg0) {
     *arg0 = &D_0000D518;
     scePaf_6261C0A5();
 }
+#endif
 
 void func_00005960(M2C_UNK **arg0) {
     *arg0 = &D_0000D508;
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00005970);
+#else
 void func_00005970(M2C_UNK **arg0) {
     *arg0 = &D_0000D508;
     scePaf_6261C0A5();
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00005998);
 
@@ -617,9 +770,15 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00006D60);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00006DF0);
 
+#if FW_VERSION == 330
+void func_00006E88(struct Unk_func_00006E88_0 *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
+}
+#else
 void func_00006E88(struct Unk_func_00006E88_0 *arg0, s32 arg1) {
     arg0->unk20 = arg1;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00006E90);
 
@@ -639,18 +798,28 @@ void func_00007CF4(M2C_UNK **arg0) {
     *arg0 = &D_0000D908;
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00007D04);
+#else
 void func_00007D04(M2C_UNK **arg0) {
     *arg0 = &D_0000D908;
     scePaf_6261C0A5();
 }
+#endif
 
 void func_00007D2C(struct Unk_func_00007D2C_0 *arg0, s32 arg1) {
     arg0->unk8 = arg1;
 }
 
+#if FW_VERSION == 330
+void func_00007D34(struct Unk_func_00007D34_0 *arg0) {
+    sceGumDrawArray(6, 0x19D, arg0->unk8 * 2, NULL, (void *) arg0->unk4);
+}
+#else
 void func_00007D34(struct Unk_func_00007D34_0 *arg0) {
     scePaf_0AC29BBC(6, 0x19D, arg0->unk8 * 2, 0, arg0->unk4);
 }
+#endif
 
 void func_00007D64(struct Unk_func_00007D64_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     arg0->unk4 = arg1;
@@ -672,19 +841,27 @@ s32 func_00007FC0(s32 arg0) {
     return (arg0 * 0xF0) + 0x78;
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00007FD4);
+#else
 void func_00007FD4(struct Unk_func_00007FD4_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk0 = &D_0000D948;
     arg0->unk8 = 0;
     scePaf_9479C11B(arg2, 0, func_00007FC0(arg1));
     arg0->unk4 = arg2;
 }
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000802C);
+#else
 void func_0000802C(struct Unk_func_0000802C_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk0 = &D_0000D948;
     arg0->unk8 = 0;
     scePaf_9479C11B(arg2, 0, func_00007FC0(arg1));
     arg0->unk4 = arg2;
 }
+#endif
 
 void func_00008084(M2C_UNK **arg0) {
     *arg0 = &D_0000D948;
@@ -694,10 +871,14 @@ void func_00008094(M2C_UNK **arg0) {
     *arg0 = &D_0000D948;
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000080A4);
+#else
 void func_000080A4(M2C_UNK **arg0) {
     *arg0 = &D_0000D948;
     scePaf_6261C0A5();
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000080CC);
 
@@ -713,6 +894,16 @@ void func_00008330(struct Unk_func_00008330_0 *arg0, s32 arg1) {
     arg0->unk8 = arg1;
 }
 
+#if FW_VERSION == 330
+void func_00008338(struct Unk_func_00008338_0 *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = arg0->unk8;
+    if (temp_v0 > 0) {
+        sceGumDrawArray(3, 0x183, (temp_v0 * 0xC) + 6, NULL, (void *) arg0->unk4);
+    }
+}
+#else
 void func_00008338(struct Unk_func_00008338_0 *arg0) {
     s32 temp_v0;
 
@@ -721,6 +912,7 @@ void func_00008338(struct Unk_func_00008338_0 *arg0) {
         scePaf_0AC29BBC(3, 0x183, (temp_v0 * 0xC) + 6, 0, arg0->unk4);
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000837C);
 
@@ -756,11 +948,15 @@ void func_000091C0(struct Unk_func_000091C0_0 *arg0) {
     sceKernelDeleteSema(arg0->unk4);
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000091E8);
+#else
 void func_000091E8(struct Unk_func_000091E8_0 *arg0) {
     arg0->unk0 = &D_0000D970;
     sceKernelDeleteSema(arg0->unk4);
     scePaf_6261C0A5(arg0);
 }
+#endif
 
 s32 func_00009224(s32 arg0) {
     return arg0;
@@ -860,10 +1056,14 @@ void func_0000A16C(M2C_UNK **arg0) {
     *arg0 = &D_0000DA28;
 }
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000A17C);
+#else
 void func_0000A17C(M2C_UNK **arg0) {
     *arg0 = &D_0000DA28;
     scePaf_6261C0A5();
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000A1A4);
 
@@ -1019,7 +1219,9 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000C51C);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000C680);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000C7B0);
+#endif
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000DB78);
 

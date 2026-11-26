@@ -2356,6 +2356,7 @@ void func_000486D0(struct Unk_func_000486D0_0 *arg0);
 void func_00048704(struct Unk_func_00048704_0 *arg0, s32 arg1);
 void func_0004872C(s32 arg0);
 void func_00048748(s32 arg0);
+s32 func_00048760(s32, s32, s32, s32, s32);
 void func_00048764(s32 arg0);
 void func_000488A4(struct Unk_vt_func_000488A4_arg0 **arg0);
 void func_000488C8(struct Unk_vt_func_000488C8_arg0 **arg0);

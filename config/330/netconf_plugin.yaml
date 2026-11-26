@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, netconf_plugin]
+      - [0xC4, c, netconf_plugin]
       - { start: 0x1ECE4, type: asm, name: fini, linker_section: .fini }
       - { start: 0x1ED00, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1F348, type: prxpad, order: .text }
@@ -71,7 +71,7 @@ segments:
       - { start: 0x1FE48, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x1FE60, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x1FE64, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x1FE68, rodata, netconf_plugin]
+      - [0x1FE68, .rodata, netconf_plugin]
       - { start: 0x24DF8, type: prxpad, order: .rodata }
   - name: netconf_plugin_seg1
     type: code

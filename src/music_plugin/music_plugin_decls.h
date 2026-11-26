@@ -11,6 +11,7 @@ struct Unk_func_00000F3C_temp_v0 {
 
 extern M2C_UNK D_0000206C;
 extern M2C_UNK D_0000269C;
+extern s32 D_000027FC;
 extern s32 D_0005AF74;
 extern s32 D_0005C2D8;
 extern s32 D_0005C2F0;

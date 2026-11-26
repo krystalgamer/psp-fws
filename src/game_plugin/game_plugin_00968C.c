@@ -120,7 +120,15 @@ INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000B17C);
 
 #if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/game_plugin_00968C", D_00015590);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/game_plugin_00968C", D_000153DC);
+
+INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000C318);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000C330);
 #endif
 

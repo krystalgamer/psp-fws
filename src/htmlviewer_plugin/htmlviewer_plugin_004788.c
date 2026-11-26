@@ -6,6 +6,12 @@
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_00004788);
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_000071BC);
+
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_000071C8);
+#endif
+
 #if FW_VERSION == 282
 s32 func_00004788(s32 arg0) {
     s32 temp_v0;
@@ -346,6 +352,12 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007978);
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_0000798C);
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_0000AFCC);
+
+INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_0000AFE0);
+#endif
+
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_000079A0);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_000079A4);
@@ -492,7 +504,13 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_000052C8);
 void func_00005324(void) {
     sceKernelWaitEventFlag(D_00008E64, 0x100U, 0, NULL, NULL);
 }
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_00005354);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 void func_00005354(void) {
     sceHtmlViewerHelper_C92C71B7(0);
 }

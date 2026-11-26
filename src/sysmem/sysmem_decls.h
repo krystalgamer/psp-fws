@@ -259,6 +259,7 @@ s32 func_0000AA28(s32 arg0, s32 arg1);
 s32 func_0000AD04(s32 arg0, s32 arg1);
 s32 func_0000C690(void);
 s32 func_0000C994(s32 arg0);
+s32 func_0000E3C4(s32, s32);
 s32 memcmp(s32, s32, s32);
 s32 memmove(s32, s32);
 u32 sceKernelMaxFreeMemSize(void);

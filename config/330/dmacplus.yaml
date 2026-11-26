@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, dmacplus]
+      - [0xA0, c, dmacplus]
       - { start: 0x2A28, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2B00, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x2B04, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -63,7 +63,7 @@ segments:
       - { start: 0x2BAC, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x2BE0, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x2E78, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x2EE4, rodata, dmacplus]
+      - [0x2EE4, .rodata, dmacplus]
       - { start: 0x2F74, type: prxpad, order: .rodata }
   - name: dmacplus_seg1
     type: code

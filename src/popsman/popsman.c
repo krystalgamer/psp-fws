@@ -3,6 +3,10 @@
 
 INCLUDE_RODATA("nonmatchings/popsman", D_000011A0);
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/popsman", D_00002354);
+#endif
+
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_29B3FB24);
 
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_0090B2C8);
@@ -23,13 +27,21 @@ s32 scePopsMan_driver_F74199F8(void) {
     return 0;
 }
 
-#if FW_VERSION >= 303
+#if FW_VERSION == 330
+void func_000003E8(void) {
+    func_00001008();
+}
+#endif
+
+#if FW_VERSION >= 303 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_632F80A0);
 #endif
 
+#if FW_VERSION < 330
 s32 func_0000032C(void) {
     return 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/popsman", func_00000334);
 
@@ -79,16 +91,40 @@ INCLUDE_ASM("nonmatchings/popsman", scePopsMan_065C7F0B);
 
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_B262B44F);
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_BF224726);
+#endif
 
 #if FW_VERSION >= 310
 void scePopsMan_4F7628CC(void) {
     sceGe_driver_5BAA5439(0x400000);
     sceGeEdramGetSize();
 }
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/popsman", func_00000F74);
+
+INCLUDE_ASM("nonmatchings/popsman", func_00001008);
+#endif
+
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/popsman", func_00000E34);
+#endif
 
+#if FW_VERSION == 330
+void sceMeAudio_EDD2B615(void) {
+    do {
+
+    } while (sceSysreg_driver_9FC87ED4() != 0);
+}
+
+void sceMeAudio_1AF750F2(void) {
+    sceSysreg_driver_8BE2D520();
+}
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 void sceMeAudio_5EDA8D33(void) {
     do {
 
@@ -98,25 +134,51 @@ void sceMeAudio_5EDA8D33(void) {
 void sceMeAudio_05115756(void) {
     sceSysreg_driver_8BE2D520();
 }
+#endif
 
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/popsman", func_00000F1C);
+#endif
 
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/popsman", func_00000F94);
+#endif
 
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/popsman", func_0000111C);
 
 INCLUDE_ASM("nonmatchings/popsman", func_000011CC);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/popsman", func_00001548);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/popsman", func_000013A0);
+#endif
 
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/popsman", func_00001698);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_A54D5B20);
+
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_745FB863);
+
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_6DCDC5BA);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_148E487D);
 
 INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_29798EF3);
 
 INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_DDB5FA7A);
+#endif
 
+#if FW_VERSION >= 310
 void sceAudioOutput(void) {
 
 }
@@ -214,6 +276,8 @@ void sceAudio_E9D97901(void) {
 void sceAudio_41EFADE7(void) {
 
 }
+#endif
 
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/popsman", D_00002284);
 #endif

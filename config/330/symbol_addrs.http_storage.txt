@@ -13,3 +13,9 @@ sceIoWrite = 0x00000490; // type:func
 sceIoRead = 0x00000498; // type:func
 sceIoClose = 0x000004A0; // type:func
 sceIoGetstat = 0x000004A8; // type:func
+// shared names (tools/add_version.py) begin
+D_00000600 = 0x00000618; // rom:0x6B8
+D_0000061C = 0x00000634; // rom:0x6D4
+D_00000640 = 0x00000650; // rom:0x6F0
+D_00000600_v330 = 0x00000600; // rom:0x6A0
+// shared names (tools/add_version.py) end

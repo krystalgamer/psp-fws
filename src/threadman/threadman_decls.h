@@ -223,8 +223,10 @@ extern s32 D_00017328;
 extern s32 D_00017344;
 extern s32 D_00017350;
 extern s32 D_000173BC;
+extern s32 D_000174C8;
 extern s32 D_00017968;
 extern s32 D_00017AFC;
+extern s32 D_00017B08;
 extern M2C_UNK func_00015B40;
 
 M2C_UNK ExceptionManagerForKernel_1AA6CFFA(M2C_UNK, M2C_UNK *);

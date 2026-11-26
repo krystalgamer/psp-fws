@@ -1086,6 +1086,12 @@ s32 func_00003B1C(void) {
 
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_34C36FF9);
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/syscon", func_00003968);
+
+INCLUDE_ASM("nonmatchings/syscon", func_00003A78);
+#endif
+
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_B8919D79);
 
@@ -1096,6 +1102,8 @@ INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_0E8560F9);
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_1B60C8AD);
 #endif
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/syscon", func_00003BC4);
+#endif
 
 INCLUDE_ASM("nonmatchings/syscon", func_00003D18);

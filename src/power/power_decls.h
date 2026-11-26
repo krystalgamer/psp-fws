@@ -109,6 +109,7 @@ s32 func_00004BF8(void);
 s32 func_00004C50(s32 arg0, s32 arg1, s32 arg2);
 s32 func_00004C6C(void);
 s32 func_00004FE0(void);
+s32 func_00005250(void);
 M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);
 s32 module_reboot_before(void);
 s32 sceKernelClearEventFlag(s32, u32);

@@ -1,6 +1,10 @@
 #include "common.h"
 #include "usbstorms_decls.h"
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/usbstorms", func_00000000_v330);
+#endif
+
 #if FW_VERSION == 311
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000000_v311);
 #endif
@@ -293,7 +297,15 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_000034B4);
 INCLUDE_ASM("nonmatchings/usbstorms", func_000035BC);
 
 INCLUDE_ASM("nonmatchings/usbstorms", func_0000377C);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003908);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003A5C);
+#endif
+
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/usbstorms", D_0000505C);
 
 INCLUDE_RODATA("nonmatchings/usbstorms", D_0000506C);
@@ -326,7 +338,17 @@ INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_FF0C3873);
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_ABE9F2C7);
 
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_762F7FDF);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_9C029B16);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_56AA41EA);
+
+INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_18EB011A);
+#endif
+
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/usbstorms", func_0000432C);
 
 s32 func_00004380(void) {

@@ -379,7 +379,7 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_00007744);
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00005D38);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00007760);
 #endif
 
@@ -621,7 +621,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_000006B8);
 INCLUDE_ASM("nonmatchings/update_plugin", func_00000C8C);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/update_plugin", D_000080A0);
 #endif
 

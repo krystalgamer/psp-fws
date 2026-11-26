@@ -580,7 +580,11 @@ INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_B370DF29);
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_5248A98F);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/loadcore", func_00001A6C);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/loadcore", func_00001904);
 #endif
 
@@ -642,7 +646,17 @@ M2C_UNK *LoadCoreForKernel_C99DD47A(void) {
 s32 LoadCoreForKernel_3BB7AC18(void) {
     return 0;
 }
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/loadcore", D_00008060);
+
+INCLUDE_RODATA("nonmatchings/loadcore", D_00008068);
+
+INCLUDE_RODATA("nonmatchings/loadcore", D_000080A8);
+#endif
+
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/loadcore", func_00001CF0);
 #endif
 
@@ -1098,7 +1112,13 @@ s32 func_00004D14(s32 arg0) {
     D_000074B8 = arg0;
     return 0;
 }
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_CDCAA8B2);
+#endif
+
+#if FW_VERSION >= 282
 s32 func_00004D24(void) {
     return 0;
 }
@@ -1108,19 +1128,35 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00004D2C);
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/loadcore", func_00004D54);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/loadcore", func_000059AC);
+
+INCLUDE_ASM("nonmatchings/loadcore", func_00005B68);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/loadcore", func_00004E38);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/loadcore", func_000056E0);
 #endif
 
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007308);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/loadcore", func_00005DF0);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/loadcore", func_00004F80);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", func_0000584C);
 
 INCLUDE_RODATA("nonmatchings/loadcore", D_000073A0);
@@ -1146,11 +1182,19 @@ INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_929B5C69);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_05D915DB);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/loadcore", func_00005E20);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 void func_00005E20(void) {
     SysMemForKernel_FEFC8666("SceModule", 0xD8, &D_000073A0, 0, &D_000077C4);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_52A86C21);
 #endif
 

@@ -229,7 +229,32 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000030C);
 INCLUDE_ASM("nonmatchings/threadman", func_00000408);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 330
+s32 func_00000448(s32 arg0, s32 arg1) {
+    M2C_UNK *temp_s0;
+    M2C_UNK *var_s1;
+    s32 var_s2;
+    void *temp_s3;
+    void *temp_v1;
+
+    temp_v1 = arg0 + (M2C_FIELD(D_000172B4, u8 *, 0x15) * 4);
+    var_s1 = M2C_FIELD(temp_v1, M2C_UNK **, 0xC);
+    temp_s3 = temp_v1 + 0xC;
+    var_s2 = 0;
+    if (var_s1 != temp_s3) {
+        do {
+            temp_s0 = var_s1;
+            var_s1 = M2C_FIELD(var_s1, M2C_UNK **, 0);
+            func_0000022C((s32) temp_s0);
+            var_s2 += 1;
+            M2C_FIELD(temp_s0, s32 *, 0x48) = arg1;
+        } while (var_s1 != temp_s3);
+    }
+    return var_s2;
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 330
 s32 func_00000448(s32 arg0, s32 arg1) {
     M2C_UNK *temp_s0;
     M2C_UNK *var_s1;
@@ -352,7 +377,24 @@ s32 func_000008D0(s32 arg0, struct Unk_func_000008D0_1 *arg1) {
 INCLUDE_ASM("nonmatchings/threadman", func_000008F0);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+s32 func_000009F8(void) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (D_00016C74.unk418 == 0) {
+        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+        if (temp_v0 != 0) {
+            M2C_FIELD(D_00016C74.unk0, void **, 0x104) = (void *) (D_00016C74.unk0 + 0x108);
+        }
+        var_v1 = temp_v0;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 s32 func_000009F8(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -636,7 +678,20 @@ void func_00003C3C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 330
+void func_00003CF8(struct Unk_func_00003CF8_0 *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = sceKernelCpuSuspendIntr();
+    M2C_FIELD(arg0, s32 *, 0x40) = 0;
+    if (func_0000022C((s32) arg0) > 0) {
+        D_000174C8 = 0;
+    }
+    sceKernelCpuResumeIntr(temp_v0);
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 330
 void func_00003CF8(struct Unk_func_00003CF8_0 *arg0) {
     s32 temp_v0;
 
@@ -2100,7 +2155,31 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadExitStatus);
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_BC31C1B9);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 330
+void func_000127F8(struct Unk_func_000127F8_0 *arg0, s32 arg1) {
+    void *var_s0;
+
+    if (M2C_FIELD(arg0, s32 *, 0x14) & 0x200000) {
+        sceKernelCpuResumeIntr(arg1);
+        sceKernelMemset((void *) arg0->unk88, 0, (u32) arg0->unk8C);
+        if (M2C_FIELD(arg0, s32 *, 0x14) < 0) {
+            sceKernelMemset(M2C_FIELD(arg0, void **, 0x94), 0, M2C_FIELD(arg0, u32 *, 0x98));
+            var_s0 = M2C_FIELD(arg0, void **, 0x9C);
+        } else {
+            var_s0 = M2C_FIELD(arg0, void **, 0x9C);
+        }
+        if (var_s0 != NULL) {
+            do {
+                sceKernelMemset(M2C_FIELD(var_s0, void **, 4), 0, M2C_FIELD(var_s0, u32 *, 0xC));
+                var_s0 = M2C_FIELD(var_s0, void **, 0);
+            } while (var_s0 != NULL);
+        }
+        sceKernelCpuSuspendIntr();
+    }
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 330
 void func_000127F8(struct Unk_func_000127F8_0 *arg0, s32 arg1) {
     void *var_s0;
 
@@ -2201,7 +2280,13 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013DB0);
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForUser_532A522E);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+void ThreadManForUser_532A522E(void) {
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x120), s32 *, 0x18));
+}
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 void ThreadManForUser_532A522E(void) {
     sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x11C), s32 *, 0x18));
 }

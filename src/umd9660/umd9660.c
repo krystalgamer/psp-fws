@@ -288,7 +288,13 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00001AB4);
 INCLUDE_ASM("nonmatchings/umd9660", func_00001B3C);
 
 INCLUDE_ASM("nonmatchings/umd9660", func_00001BCC);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/umd9660", func_00003CC8);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/umd9660", func_00001C60);
 
 INCLUDE_ASM("nonmatchings/umd9660", func_00001D08);
@@ -296,7 +302,13 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00001D08);
 INCLUDE_ASM("nonmatchings/umd9660", func_00001DEC);
 
 INCLUDE_ASM("nonmatchings/umd9660", func_00001E4C);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/umd9660", func_00002C3C);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/umd9660", func_0000264C);
 #endif
 
@@ -566,6 +578,10 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003830);
 INCLUDE_ASM("nonmatchings/umd9660", func_00003A18);
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/umd9660", func_000041F4);
+#endif
+
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/umd9660", func_00003EF4);
 #endif
@@ -592,7 +608,9 @@ s32 func_00003C80(s32 arg0) {
     sceKernelCpuResumeIntr(temp_s1);
     return temp_s0;
 }
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/umd9660", func_00003CC8);
 #endif
 
@@ -871,7 +889,17 @@ s32 func_00004568(void) {
 INCLUDE_ASM("nonmatchings/umd9660", func_0000458C);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+void func_000046C4(void) {
+    if (KDebugForKernel_24C32559(0x13) != 0) {
+        D_00007A50 = 0x1234;
+    } else {
+        D_00007A50 = 0;
+    }
+}
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 void func_000046C4(void) {
     D_00007690 = KDebugForKernel_24C32559(0x13);
 }

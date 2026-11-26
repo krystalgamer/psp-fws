@@ -2,6 +2,18 @@
 #include "common.h"
 #include "lfatfs_decls.h"
 
+#if FW_VERSION == 330
+s32 func_00000000_v330(s32 arg0) {
+    if (arg0 != 0x200) {
+
+    } else if (sceKernelLockMutex(D_0000E3D4, 1, NULL) == 0) {
+        func_000004C4();
+        sceKernelUnlockMutex(D_0000E3D4, 1);
+    }
+    return 0;
+}
+#endif
+
 #if FW_VERSION == 311
 s32 func_00000000_v311(s32 arg0) {
     if (arg0 != 0x200) {
@@ -814,6 +826,10 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CD7C);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CD88);
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CDE4);
+#endif
+
 #if FW_VERSION == 311
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CD94_v311);
 #endif
@@ -1485,6 +1501,10 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D940);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D94C);
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/lfatfs", func_00008610);
+#endif
+
 #if FW_VERSION == 311
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000860C_v311);
 #endif
@@ -1845,6 +1865,12 @@ s32 func_00009F74(void) {
 #if FW_VERSION >= 300
 s32 sceLFatFs_driver_F1FBA85F(void) {
     return 0;
+}
+#endif
+
+#if FW_VERSION == 330
+s32 sceLFatFs_driver_51C7F7AE(void) {
+    return 0x03030010;
 }
 #endif
 
@@ -2585,7 +2611,13 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_0000BC3C);
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000BB48);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000BC68);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000BC58);
 #endif
 
@@ -2605,7 +2637,11 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_0000BE44);
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000C254);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000C210);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000C1CC);
 #endif
 

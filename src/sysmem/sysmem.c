@@ -45,12 +45,22 @@ INCLUDE_RODATA("nonmatchings/sysmem", D_0000AB68);
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_1C1FBFE7);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/sysmem", func_0000038C);
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/sysmem", D_00012508);
+
+INCLUDE_RODATA("nonmatchings/sysmem", D_00012540);
 #endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/sysmem", func_000001A4);
+#endif
+
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/sysmem", func_00000980);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/sysmem", func_0000038C);
 #endif
 
 #if FW_VERSION >= 280
@@ -65,11 +75,17 @@ INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_EFEEBAC7);
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_2DB687E9);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/sysmem", func_00000724);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 330
 void func_00000724(void) {
     SysMemForKernel_FEFC8666((s32) "SceSysmemHeap", 0xC, (s32) &D_0000F390, 0, (s32) &D_0000FD88);
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/sysmem", func_0000075C);
 #endif
 
@@ -85,7 +101,9 @@ INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_EB7A74DB);
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_636C953B);
 #endif
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/sysmem", func_00000980);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_7B749390);
 
@@ -129,15 +147,25 @@ s32 SysMemForKernel_EFF0C6DD(void) {
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00000BC0);
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/sysmem", func_00000E18);
-#else
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/sysmem", func_00000C08);
+#else
+INCLUDE_ASM("nonmatchings/sysmem", func_00000E18);
 #endif
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00000CC0);
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00000D30);
+
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/sysmem", func_00000D80);
+#endif
+
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/sysmem", func_00000DCC);
+
+INCLUDE_ASM("nonmatchings/sysmem", func_00000E9C);
+#endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/sysmem", func_00000E0C);
@@ -209,10 +237,6 @@ INCLUDE_ASM("nonmatchings/sysmem", func_0000165C);
 s32 func_0000165C(void) {
     return 0x80020002;
 }
-#endif
-
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/sysmem", func_00000D80);
 #endif
 
 #if FW_VERSION >= 250
@@ -702,7 +726,21 @@ void func_00004238(s32 arg0, s32 arg1) {
     temp_v0 = func_00001B24(arg0, arg1);
     M2C_FIELD(temp_v0, s32 *, 4) = (s32) (M2C_FIELD(temp_v0, s32 *, 4) | 1);
 }
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/sysmem", func_000045E4);
+
+INCLUDE_RODATA("nonmatchings/sysmem", D_00012C3C);
+
+INCLUDE_RODATA("nonmatchings/sysmem", D_00012C4C);
+
+INCLUDE_RODATA("nonmatchings/sysmem", D_00012C84);
+
+INCLUDE_ASM("nonmatchings/sysmem", func_000046A0);
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/sysmem", func_00004260);
 #endif
 
@@ -780,7 +818,13 @@ INCLUDE_ASM("nonmatchings/sysmem", func_00004620);
 INCLUDE_ASM("nonmatchings/sysmem", func_00004A54);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/sysmem", func_000055E8);
+
+INCLUDE_ASM("nonmatchings/sysmem", func_0000584C);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/sysmem", func_00004704);
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00004854);
@@ -912,7 +956,11 @@ s32 func_00004A60(struct Unk_func_00004A60_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 280
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/sysmem", func_00005B74);
+#endif
+
+#if FW_VERSION >= 280 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/sysmem", func_00005608);
 #endif
 
@@ -1059,6 +1107,12 @@ s32 SysMemUserForUser_FC114573(void) {
     }
     return var_a0;
 }
+#endif
+
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/sysmem", D_00012D3C);
+
+INCLUDE_RODATA("nonmatchings/sysmem", D_00012D54);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 270
@@ -1220,6 +1274,10 @@ s32 SysMemForKernel_4852F8DD(void) {
 s32 SysMemForKernel_4EC43DC4(void) {
     return 0;
 }
+#endif
+
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/sysmem", KDebugForKernel_A2983280);
 #endif
 
 #if FW_VERSION >= 280
@@ -1807,7 +1865,11 @@ INCLUDE_ASM("nonmatchings/sysmem", SysclibForKernel_87C78FB6);
 INCLUDE_RODATA("nonmatchings/sysmem", D_0000F988);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/sysmem", D_00013064);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/sysmem", D_00012570);
 #endif
 
@@ -2336,7 +2398,13 @@ void KDebugForKernel_7CEB2C09(s32 arg0, s32 arg1) {
     D_0000F8B0 = arg0;
     D_0000F8B4 = arg1;
 }
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/sysmem", func_0000E3C4);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/sysmem", KDebugForKernel_5CE9838B);
 
 s32 KDebugForKernel_66253C4E(s32 arg0) {

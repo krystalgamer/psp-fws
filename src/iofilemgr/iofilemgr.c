@@ -3,6 +3,168 @@
 #include "k1.h"
 #include "iofilemgr_decls.h"
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/iofilemgr", func_00000000);
+
+void func_00000094(void) {
+    func_00000000();
+}
+
+s32 sceKernelStdin(void) {
+    return D_00006630;
+}
+
+s32 sceKernelStdout(void) {
+    return D_00006634;
+}
+
+s32 sceKernelStderr(void) {
+    return D_00006638;
+}
+
+s32 StdioForKernel_98220F3E(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v0;
+
+    var_v0 = 0x80020384;
+    if (D_00006634 >= 0) {
+        var_v0 = IoFileMgrForKernel_3C54E908(arg0, arg1, arg2, D_00006634);
+    }
+    return var_v0;
+}
+
+s32 StdioForKernel_FB5380C5(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_v0;
+
+    var_v0 = 0x80020384;
+    if (D_00006638 >= 0) {
+        var_v0 = IoFileMgrForKernel_3C54E908(arg0, arg1, arg2, D_00006638);
+    }
+    return var_v0;
+}
+
+INCLUDE_ASM("nonmatchings/iofilemgr", StdioForKernel_2D8551AB);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", StdioForKernel_9662BF86);
+
+INCLUDE_RODATA("nonmatchings/iofilemgr", D_00006028);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", func_0000019C);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", func_00000244);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", StdioForKernel_2CCF071A);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", printf);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", StdioForKernel_4F78930A);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", StdioForKernel_D2B2A2A7);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", StdioForKernel_11A5127A);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", putchar);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", StdioForKernel_36B23B8B);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", puts);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", getchar);
+
+void gets(s32 arg0) {
+    StdioForKernel_11A5127A(arg0, 0);
+}
+
+s32 StdioForUser_3054D478(void) {
+    return 0x80020001;
+}
+
+s32 StdioForUser_0CBB0571(void) {
+    return 0x80020001;
+}
+
+void StdioForUser_A46785C9(void) {
+
+}
+
+s32 StdioForUser_A3B931DB(void) {
+    return 0x80020001;
+}
+
+s32 StdioForUser_9D061C19(void) {
+    return 0x80020001;
+}
+
+s32 StdioForUser_924ABA61(void) {
+    return 0x80020001;
+}
+
+INCLUDE_ASM("nonmatchings/iofilemgr", func_00000980);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", func_00000A84);
+
+s32 func_00000B78(void) {
+    IoFileMgrForKernel_8E982A74((s32) &D_000060D4);
+    return 0;
+}
+
+s32 func_00000B9C(void) {
+    IoFileMgrForKernel_C7F35804((s32) &D_000060B4);
+    return 0;
+}
+
+s32 sceKernelRegisterStdoutPipe(s32 arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000D04(1, arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 sceKernelRegisterStderrPipe(s32 arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_00000D04(2, arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
+
+s32 func_00000C28(void) {
+    return 0;
+}
+
+s32 func_00000C30(void) {
+    return 0;
+}
+
+s32 func_00000C38(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 4) < 3) ? 0 : 0x80010006;
+}
+
+s32 func_00000C50(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 4) < 3) ? 0 : 0x80010006;
+}
+
+INCLUDE_ASM("nonmatchings/iofilemgr", func_00000C68);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", func_00000C78);
+
+INCLUDE_RODATA("nonmatchings/iofilemgr", D_00006054);
+
+INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000605C);
+
+INCLUDE_RODATA("nonmatchings/iofilemgr", D_000060B4);
+
+INCLUDE_RODATA("nonmatchings/iofilemgr", D_000060C0);
+
+INCLUDE_RODATA("nonmatchings/iofilemgr", D_000060D4);
+
+INCLUDE_ASM("nonmatchings/iofilemgr", func_00000D04);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChangeAsyncPriority);
 #endif

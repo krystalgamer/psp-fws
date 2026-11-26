@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, usbgps]
+      - [0xA0, c, usbgps]
       - { start: 0x4F24, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x50E4, type: prxpad, order: .text }
       - { start: 0x50F0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x51FC, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x5230, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x5410, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x54F0, rodata, usbgps]
+      - [0x54F0, .rodata, usbgps]
   - name: usbgps_seg1
     type: code
     start: 0x5840

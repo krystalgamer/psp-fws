@@ -11,6 +11,10 @@ void func_00023E68(struct Unk_func_00023E68_0 *arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("nonmatchings/premo_plugin_023E68", func_00023E74);
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/premo_plugin_023E68", func_0001D38C);
+#endif
+
 #if FW_VERSION == 311
 INCLUDE_ASM("nonmatchings/premo_plugin_023E68", func_0001C138_v311);
 #endif

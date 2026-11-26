@@ -894,6 +894,10 @@ INCLUDE_ASM("nonmatchings/power", func_00003F14);
 INCLUDE_ASM("nonmatchings/power", func_00004548);
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/power", scePower_driver_166922EC);
+#endif
+
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePower_driver_DD3D4DAC);
 #endif
@@ -1018,7 +1022,26 @@ s32 scePower_driver_B999184C(void) {
 }
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+s32 func_00004B54(void) {
+    M2C_UNK *temp_v0;
+    s32 temp_v0_2;
+
+    memset(&D_0000B3AC.unk0, 0, 0xC4);
+    temp_v0 = "ScePowerBattery";
+    M2C_VFIELD(&D_0000B3AC, s32, 0x20) = -1;
+    M2C_VFIELD(&D_0000B3AC, s32, 0x2C) = -1;
+    M2C_VFIELD(&D_0000B3AC, s32, 0x44) = -1;
+    M2C_VFIELD(&D_0000B3AC, s32, 0x4C) = -1;
+    D_0000B3AC.unk0 = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
+    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003F14, 0x40, 0x800U, 0x100001U, NULL);
+    D_0000B3AC.unk4 = temp_v0_2;
+    sceKernelStartThread(temp_v0_2, 0U, NULL);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 s32 func_00004B54(void) {
     M2C_UNK *temp_v0;
     s32 temp_v0_2;
@@ -1121,7 +1144,9 @@ s32 scePower_driver_680860E3(void) {
 }
 #endif
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/power", scePower_driver_166922EC);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/power", scePower_driver_DD3D4DAC);
@@ -1174,7 +1199,17 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_CB49F5CE);
 s32 scePower_driver_23436A4A(void) {
     return 0x802B0010;
 }
+#endif
 
+#if FW_VERSION == 330
+s32 func_00005250(void) {
+    M2C_VFIELD(&D_0000B3AC, s32, 0x20) = -1;
+    sceKernelSetEventFlag(D_0000B3AC.unk0, 0x200U);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 s32 func_00004FE0(void) {
     D_0000B404 = 0;
     return 0;

@@ -1263,6 +1263,10 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_08179C", D_000B48F0);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_08179C", D_000B48F8);
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_08179C", D_000B8190);
+#endif
+
 #if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_08179C", D_000B4900);
 #endif

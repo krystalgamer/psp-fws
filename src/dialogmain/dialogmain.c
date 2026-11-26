@@ -102,7 +102,7 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_000004B4);
 INCLUDE_ASM("nonmatchings/dialogmain", func_00000414);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/dialogmain", D_000084A0);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_000084B8);
@@ -122,10 +122,18 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_00008514);
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008528);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00000134);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dialogmain", func_000001F0);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_000004C8);
+#endif
+
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006574);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006588);
 #endif
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_0000050C);
@@ -135,6 +143,20 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_00008604);
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008610);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008638);
+
+#if FW_VERSION == 330
+void func_000005A8(s32 arg0) {
+    if (M2C_FIELD(D_00007EC4, s32 *, 0) == 0x64) {
+        if (M2C_FIELD(D_00007EC4, s32 *, 0x54) == 2) {
+            func_000011EC(arg0 + 0x50, (s32) "netplay_server_plus_utility");
+        }
+    }
+}
+
+INCLUDE_ASM("nonmatchings/dialogmain", func_000005F8);
+
+INCLUDE_ASM("nonmatchings/dialogmain", func_00000788);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dialogmain", func_00000674);
@@ -205,11 +227,15 @@ void func_00000E94(void) {
     func_0000024C();
     func_0000050C();
 }
-#else
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/dialogmain", func_00000694);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00000CC8);
+#endif
 
+#if FW_VERSION >= 282
 void func_00000DC4(void) {
     func_00006BC4();
 }
@@ -514,7 +540,49 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_00001CBC);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dialogmain", func_00001A30);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/dialogmain", D_0000662C);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006644);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_0000666C);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_0000667C);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_000066A4);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_000066B8);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_000066E4);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_000066F8);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006724);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006730);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006758);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006764);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_0000678C);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006798);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_000067C0);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_000067D4);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006804);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006810);
+
+INCLUDE_RODATA("nonmatchings/dialogmain", D_00006834);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008858);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008870);
@@ -786,7 +854,13 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_00008F78);
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008F88);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008F9C);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/dialogmain", D_000071E0);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008FB0);
 #endif
 
@@ -800,7 +874,7 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_00009014);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00009028);
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008550);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008560);
@@ -1152,7 +1226,28 @@ void func_000027AC(void) {
 }
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_000027D4);
+#endif
 
+#if FW_VERSION == 330
+void func_00002808(void) {
+    s32 temp_v0;
+
+    if (D_0000A2A4 == 0) {
+
+    } else if (((s32 (*)()) D_0000A2AC)() != 0) {
+        if (D_0000A2B8 == 0) {
+            D_0000A2B8 = ((s32 (*)(s32)) D_0000A2A4)(D_0000A2B0);
+        }
+        if (D_0000A2BC == 0) {
+            temp_v0 = scePaf_B7E6052B(0x1C);
+            scePaf_93538664(temp_v0, D_0000A2B8, 0x84800, 0);
+            D_0000A2BC = temp_v0;
+        }
+    }
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 void func_00002808(void) {
     s32 temp_v0;
 
@@ -1169,7 +1264,9 @@ void func_00002808(void) {
         }
     }
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dialogmain", func_000028B8);
 
 void func_000029D4(void) {
@@ -1382,15 +1479,29 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_000043A8);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_0000449C);
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/dialogmain", func_00004080);
+
+INCLUDE_ASM("nonmatchings/dialogmain", func_00004218);
+
+INCLUDE_ASM("nonmatchings/dialogmain", func_00004264);
+
+INCLUDE_ASM("nonmatchings/dialogmain", func_000042E8);
+
+INCLUDE_ASM("nonmatchings/dialogmain", func_0000436C);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/dialogmain", func_00004610);
 #endif
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/dialogmain", func_0000452C);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_0000475C);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_0000498C);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dialogmain", func_00004B98);
@@ -1446,7 +1557,7 @@ void func_00004F38(s32 arg0) {
 INCLUDE_ASM("nonmatchings/dialogmain", func_00004E04);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/dialogmain", func_000050B4);
 
 u8 func_00005204(void) {
@@ -2135,7 +2246,22 @@ void func_00006A44(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/dialogmain", func_000058EC);
+
+s32 func_00006BC4(void) {
+    if (!(D_00007FEC & 1)) {
+
+    } else {
+        func_00005A14();
+    }
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/dialogmain", func_00005970);
+#else
 INCLUDE_ASM("nonmatchings/dialogmain", func_00006A6C);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00007D28);
@@ -2143,7 +2269,11 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_00007D28);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_000095A0);
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/dialogmain", func_00005A14);
+#else
 INCLUDE_ASM("nonmatchings/dialogmain", func_00006BC4);
+#endif
 
 #if FW_VERSION < 282
 s32 func_00005DD8(void) {
@@ -2212,7 +2342,7 @@ s32 func_00005E78(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 330
 s32 func_00006CCC(void) {
     return D_0000A3D0;
 }
@@ -2220,7 +2350,9 @@ s32 func_00006CCC(void) {
 s32 func_00006CD8(void) {
     return D_0000A3CC;
 }
+#endif
 
+#if FW_VERSION >= 282
 s32 func_00006CE4(void) {
     return D_0000A3D4;
 }
@@ -2230,7 +2362,18 @@ s32 func_00006CF0(void) {
 }
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+s32 func_00006CFC(s32 arg0) {
+    if (arg0 != D_0000A3D4) {
+        scePaf_A69BABE3(0x409, arg0, D_0000A3D4);
+        D_0000A3D4 = arg0;
+        D_0000A3D8 += 1;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 s32 func_00006CFC(s32 arg0) {
     if (arg0 != D_0000A3CC) {
         scePaf_A69BABE3(0x409, arg0, D_0000A3CC);
@@ -2252,7 +2395,7 @@ s32 func_00006CFC(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/dialogmain", func_00006D5C);
 
 s32 func_00006DF0(void) {
@@ -2273,7 +2416,7 @@ void func_00006DF8(void) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/dialogmain", func_00006DF8);
 #endif
 
@@ -2330,7 +2473,9 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_000060FC);
 void func_000062E4(void) {
     sceVshCommonUtil_EDED68FB();
 }
-#else
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 s32 func_00006E30(void) {
     return 0;
 }
@@ -2350,9 +2495,13 @@ void func_00006EE4(void) {
 }
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00006F00);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dialogmain", func_00006F4C);
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/dialogmain", func_00006FF8);
 
 void func_000070DC(s32 arg0) {
@@ -2368,9 +2517,11 @@ void func_00007468(void) {
 }
 #endif
 
+#if FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00009674);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00009690);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008FF0);
@@ -2390,7 +2541,9 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_0000904C);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dialogmain", func_00006300);
-#else
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/dialogmain", D_000096B0);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_000096E8);

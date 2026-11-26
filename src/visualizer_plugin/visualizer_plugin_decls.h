@@ -234,6 +234,7 @@ struct Unk_vt_func_00001CB8_arg0 {
     M2C_UNK (*unk28)();
 };
 
+extern M2C_UNK D_0000CE40;
 extern M2C_UNK D_0000CEB0;
 extern void D_0000CEF8;
 extern M2C_UNK D_0000CFD8;
@@ -320,6 +321,7 @@ s32 func_00001E84(void);
 void func_00001E8C(void);
 void func_00002BA0(s32 *arg0, s32 arg1);
 M2C_UNK func_00002C38();
+void func_00005650(void *arg0, s32 arg1);
 void func_00005928(M2C_UNK **arg0);
 void func_00005938(M2C_UNK **arg0);
 void func_00005960(M2C_UNK **arg0);
@@ -360,18 +362,29 @@ void func_0000A16C(M2C_UNK **arg0);
 void func_0000A17C(M2C_UNK **arg0);
 M2C_UNK func_0000C7B0();
 s32 module_stop(void);
+void sceGumDrawArray(s32, s32, s32, void *, void *);
 s32 sceKernelDeleteSema(s32);
 M2C_UNK scePaf_0AC29BBC(M2C_UNK, M2C_UNK, s32, M2C_UNK, s32);
+M2C_UNK scePaf_0CFDBE2F(s32);
 M2C_UNK scePaf_1A314D65(s32);
+M2C_UNK scePaf_1F0E9712(s32);
 M2C_UNK scePaf_291EBB2C(s32);
 M2C_UNK scePaf_2A5E7BE9(s32);
+M2C_UNK scePaf_4E67BB08(void **);
 M2C_UNK scePaf_6261C0A5();
 M2C_UNK scePaf_6A82A8C6(void **, M2C_UNK);
 M2C_UNK scePaf_6FAE0AC1(s32);
+M2C_UNK scePaf_715E8DAB(void **);
 M2C_UNK scePaf_79542EEA(s32);
 M2C_UNK scePaf_7EA9C56C(s32);
 M2C_UNK scePaf_9479C11B(s32, M2C_UNK, s32);
+M2C_UNK scePaf_95948FB6(s32);
 M2C_UNK scePaf_9E0CA28F(void **);
+M2C_UNK scePaf_B7865607(s32);
+M2C_UNK scePaf_BA433BEF(s32);
 M2C_UNK scePaf_BB8E4390(s32);
+M2C_UNK scePaf_D24E4016(s32);
+M2C_UNK scePaf_EAA5AFF6(void **, M2C_UNK);
+M2C_UNK scePaf_ED89C94B(s32);
 
 #endif

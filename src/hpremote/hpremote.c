@@ -32,7 +32,23 @@ s32 func_00000AE4(void) {
 }
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+s32 func_00000AF4(void) {
+    s32 temp_v0;
+
+    temp_v0 = sceKernelCpuSuspendIntr();
+    M2C_VFIELD(&D_00002080, s32, 0x1E4) = 1;
+    D_00002080.unk1D0 = 0;
+    M2C_VFIELD(&D_00002080, s32, 0x1DC) = 0;
+    M2C_VFIELD(&D_00002080, s32, 0x1E0) = 0;
+    D_00002080.unk1D4 = 0;
+    D_00002080.unk1D8 = 0;
+    sceKernelCpuResumeIntr(temp_v0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 s32 func_00000AF4(void) {
     s32 temp_v0;
 
@@ -99,11 +115,20 @@ INCLUDE_ASM("nonmatchings/hpremote", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_588845DA);
 
+#if FW_VERSION == 330
+s32 sceHprm_driver_526BB7F4(void) {
+    D_00002244_v330 = 1;
+    sceSysreg_driver_BB823481(4);
+    sceSysreg_driver_7725CA08(4);
+    return 0;
+}
+#else
 s32 sceHprm_driver_526BB7F4(void) {
     sceSysreg_driver_BB823481(4);
     sceSysreg_driver_7725CA08(4);
     return 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_2C7B8B05);
 
@@ -205,7 +230,13 @@ s32 sceHprm_driver_971AE8FB(s32 *arg0) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/hpremote", func_0000134C);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 s32 func_0000134C(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x1000C:

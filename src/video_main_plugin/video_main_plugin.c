@@ -18,6 +18,38 @@ void sceVideo_9DD8CE8E(void) {
 }
 #endif
 
+#if FW_VERSION == 330
+s32 func_00000178_v330(void) {
+    return D_000563A0;
+}
+
+void func_00000184(s32 arg0) {
+    void *temp_v0;
+
+    temp_v0 = scePaf_5DFB5858();
+    if (M2C_FIELD(temp_v0, s32 *, 0x9C) != 0) {
+        if (D_00056BD5 != 0) {
+
+        } else {
+            D_00056BD8 = arg0;
+            scePaf_0CC722C1(temp_v0, arg0);
+        }
+    }
+}
+
+void func_000001DC(void) {
+    void *temp_v0;
+
+    temp_v0 = scePaf_5DFB5858();
+    if (M2C_FIELD(temp_v0, s32 *, 0x9C) != 0) {
+        scePaf_0CC722C1(temp_v0, D_000563A0);
+        D_00056BD5 = 1;
+    }
+}
+
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_00000220);
+#endif
+
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00000178);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_000001B8);
@@ -159,7 +191,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin", func_000011F8);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00001584);
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00001644);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00001674);
@@ -344,6 +376,10 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051C38);
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051C58);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051C78);
+
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051A00_v330);
+#endif
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051C98);
 

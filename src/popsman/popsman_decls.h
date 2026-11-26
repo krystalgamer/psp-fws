@@ -6,6 +6,8 @@
 
 
 s32 func_0000032C(void);
+void func_000003E8(void);
+s32 func_00001008(void);
 void sceAudioChRelease(void);
 void sceAudioChReserve(void);
 void sceAudioChangeChannelConfig(void);
@@ -32,7 +34,9 @@ u32 sceGeEdramGetSize(void);
 M2C_UNK sceGe_driver_5BAA5439(M2C_UNK);
 s32 sceKernelDelayThread(u32);
 void sceMeAudio_05115756(void);
+void sceMeAudio_1AF750F2(void);
 void sceMeAudio_5EDA8D33(void);
+void sceMeAudio_EDD2B615(void);
 void scePopsMan_4F7628CC(void);
 s32 scePopsMan_driver_8666B52F(void);
 s32 scePopsMan_driver_F74199F8(void);

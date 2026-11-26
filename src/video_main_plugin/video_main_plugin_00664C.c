@@ -2684,7 +2684,11 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_000526C8);
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000F820);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052484);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_00052184);
 #endif
 
@@ -3074,6 +3078,10 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000101DC);
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000111E4);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000106A8);
+#endif
+
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_000524C0);
 #endif
 
 #if FW_VERSION == 311

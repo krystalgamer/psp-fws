@@ -49,6 +49,7 @@ extern s32 D_000070D0;
 extern s32 D_000070D4;
 extern s32 D_000070D8;
 extern s32 D_00007690;
+extern s32 D_00007A50;
 extern u8 D_000083A4;
 extern u8 D_000083A5;
 extern u8 D_000083A6;

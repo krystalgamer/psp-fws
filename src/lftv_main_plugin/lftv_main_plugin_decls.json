@@ -730,6 +730,7 @@
   "func_00048704": "void func_00048704(struct Unk_func_00048704_0 *arg0, s32 arg1);",
   "func_0004872C": "void func_0004872C(s32 arg0);",
   "func_00048748": "void func_00048748(s32 arg0);",
+  "func_00048760": "s32 func_00048760(s32, s32, s32, s32, s32);",
   "func_00048764": "void func_00048764(s32 arg0);",
   "func_000488A4": "void func_000488A4(struct Unk_vt_func_000488A4_arg0 **arg0);",
   "func_000488C8": "void func_000488C8(struct Unk_vt_func_000488C8_arg0 **arg0);",

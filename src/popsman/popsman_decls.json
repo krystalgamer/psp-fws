@@ -1,6 +1,8 @@
 {
  "funcs": {
   "func_0000032C": "s32 func_0000032C(void);",
+  "func_000003E8": "void func_000003E8(void);",
+  "func_00001008": "s32 func_00001008(void);",
   "sceAudioChRelease": "void sceAudioChRelease(void);",
   "sceAudioChReserve": "void sceAudioChReserve(void);",
   "sceAudioChangeChannelConfig": "void sceAudioChangeChannelConfig(void);",
@@ -27,7 +29,9 @@
   "sceGe_driver_5BAA5439": "M2C_UNK sceGe_driver_5BAA5439(M2C_UNK);",
   "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
   "sceMeAudio_05115756": "void sceMeAudio_05115756(void);",
+  "sceMeAudio_1AF750F2": "void sceMeAudio_1AF750F2(void);",
   "sceMeAudio_5EDA8D33": "void sceMeAudio_5EDA8D33(void);",
+  "sceMeAudio_EDD2B615": "void sceMeAudio_EDD2B615(void);",
   "scePopsMan_4F7628CC": "void scePopsMan_4F7628CC(void);",
   "scePopsMan_driver_8666B52F": "s32 scePopsMan_driver_8666B52F(void);",
   "scePopsMan_driver_F74199F8": "s32 scePopsMan_driver_F74199F8(void);",

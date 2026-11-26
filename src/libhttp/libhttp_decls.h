@@ -86,6 +86,7 @@ void func_0000CE28(void);
 void func_0000CE44(void);
 void func_0000CE60(void);
 s32 func_0000E568(void);
+s32 func_0000F81C(s32, s32, s32, s32, s32);
 void func_00010A74(void);
 void func_00011484(void);
 void func_00011B3C(struct Unk_func_00011B3C_0 *arg0, struct Unk_func_00011B3C_1 *arg1);

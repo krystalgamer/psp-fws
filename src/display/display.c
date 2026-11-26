@@ -313,11 +313,21 @@ s32 func_000009F8(void) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/display", func_00000B30);
+
+INCLUDE_ASM("nonmatchings/display", func_00000F38);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/display", func_00000AF8);
 
 INCLUDE_ASM("nonmatchings/display", func_00000EAC);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/display", func_00001220);
 #endif
 
@@ -331,9 +341,21 @@ INCLUDE_ASM("nonmatchings/display", func_000012C0);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/display", func_00001398);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/display", func_000014FC);
+
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_432D133F);
+
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_681EE6A7);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/display", func_00001480);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/display", sceDisplaySetMode);
 
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetMode);
@@ -352,11 +374,15 @@ s32 module_start(void) {
     sceDisplay_driver_206276C2();
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_432D133F);
 
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_681EE6A7);
+#endif
 
+#if FW_VERSION >= 282
 s8 sceDisplay_driver_23CE8C51(void) {
     return D_00003E1A;
 }

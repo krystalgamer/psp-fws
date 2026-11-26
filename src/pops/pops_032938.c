@@ -92,24 +92,35 @@ INCLUDE_RODATA("nonmatchings/pops_032938", D_0010D940);
 
 INCLUDE_RODATA("nonmatchings/pops_032938", D_0010DA40);
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/pops_032938", func_000273AC);
+
+INCLUDE_ASM("nonmatchings/pops_032938", func_00029374);
+#else
 INCLUDE_ASM("nonmatchings/pops_032938", func_00033964);
+#endif
 
 INCLUDE_ASM("nonmatchings/pops_032938", func_00033B14);
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/pops_032938", func_00033DD4);
+#endif
 
 INCLUDE_ASM("nonmatchings/pops_032938", func_00034150);
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/pops_032938", func_00034288);
 
 INCLUDE_ASM("nonmatchings/pops_032938", func_00034450);
 
 INCLUDE_RODATA("nonmatchings/pops_032938", D_0010DB7C);
+#endif
 
 #if FW_VERSION == 303
 INCLUDE_RODATA("nonmatchings/pops_032938", D_0010F888);
 #endif
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/pops_032938", func_00034518);
 
 INCLUDE_ASM("nonmatchings/pops_032938", func_00034608);
@@ -171,3 +182,4 @@ void func_000348C4(void) {
 s32 func_000348E0(void) {
     return -1;
 }
+#endif

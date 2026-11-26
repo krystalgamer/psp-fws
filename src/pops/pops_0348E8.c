@@ -1,6 +1,7 @@
 #include "common.h"
 #include "pops_decls.h"
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/pops_0348E8", func_000348E8);
 
 s32 func_000348F8(void) {
@@ -57,11 +58,13 @@ s32 func_00035ACC(s32 *arg0, s32 arg1) {
     }
     return temp_v0;
 }
+#endif
 
 #if FW_VERSION == 302
 INCLUDE_ASM("nonmatchings/pops_0348E8", func_00035B28);
 #endif
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/pops_0348E8", func_00035B9C);
 
 INCLUDE_ASM("nonmatchings/pops_0348E8", func_00035E18);
@@ -125,3 +128,4 @@ INCLUDE_RODATA("nonmatchings/pops_0348E8", D_0010DD18);
 INCLUDE_RODATA("nonmatchings/pops_0348E8", D_0010DD1C);
 
 INCLUDE_RODATA("nonmatchings/pops_0348E8", D_0010DD20);
+#endif

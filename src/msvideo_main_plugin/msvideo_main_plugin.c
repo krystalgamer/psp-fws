@@ -1134,7 +1134,11 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000AD558);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000AD570);
 #endif
 
-#if FW_VERSION >= 310 && FW_VERSION < 352
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000B02AC);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000AE934);
 #endif
 
@@ -1234,17 +1238,47 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADC5C);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADC74);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADC8C);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000B09C8);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000B09F0);
+#endif
+
+#if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADCA8);
+#endif
 
+#if FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADCC4);
+#endif
 
+#if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADCEC);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000B0A50);
+#endif
+
+#if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADD14);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000B0A8C);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000B0AA4_v330);
+
+INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000B0AC0);
+#endif
+
+#if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADD34);
+#endif
 
+#if FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADD5C);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADD78);
@@ -1252,7 +1286,9 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADD78);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADD90);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADDAC);
+#endif
 
+#if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADDC8);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin", D_000ADDE0);

@@ -101,6 +101,10 @@ u8 func_000001D4(void) {
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000001E0);
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000234_v330);
+#endif
+
 #if FW_VERSION == 311
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000234_v311);
 #endif
@@ -809,6 +813,16 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000255C);
 s32 func_0000260C(void) {
     func_0000594C();
     return 0;
+}
+#endif
+
+#if FW_VERSION == 330
+void func_0000262C(void) {
+    void *sp0;
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    func_00003E08(&sp0);
+    func_00005150((s32) &D_0000E8CC);
+    D_0000EAFC_v330 = 1;
 }
 #endif
 

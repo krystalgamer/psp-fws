@@ -968,9 +968,17 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008EE3C);
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008EEEC);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008EF9C);
+#endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_000A5070);
+#endif
+
+#if FW_VERSION == 260 || (FW_VERSION >= 282 && FW_VERSION < 330)
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008F054);
+#endif
 
+#if FW_VERSION != 271
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008F094);
 
 s32 func_0008F270(void) {
@@ -978,7 +986,13 @@ s32 func_0008F270(void) {
 }
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_000A52C4);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_089BF0", D_000BAC08);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_000A59E4);
 #endif
 
@@ -986,7 +1000,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_000A59E4);
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008F278);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION >= 300 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/music_main_plugin_089BF0", D_000A26A0);
 #endif
 

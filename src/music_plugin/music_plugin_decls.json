@@ -392,6 +392,7 @@
  "vars": {
   "D_0000206C": "extern M2C_UNK D_0000206C;",
   "D_0000269C": "extern M2C_UNK D_0000269C;",
+  "D_000027FC": "extern s32 D_000027FC;",
   "D_0005AF74": "extern s32 D_0005AF74;",
   "D_0005C2D8": "extern s32 D_0005C2D8;",
   "D_0005C2F0": "extern s32 D_0005C2F0;",

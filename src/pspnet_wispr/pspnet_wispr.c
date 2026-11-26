@@ -10,6 +10,7 @@ INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWispr_757BDC9F);
 
 INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWispr_C856AAAC);
 
+#if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/pspnet_wispr", D_0000271C);
 
 INCLUDE_RODATA("nonmatchings/pspnet_wispr", D_00002720);
@@ -57,6 +58,7 @@ INCLUDE_RODATA("nonmatchings/pspnet_wispr", D_000028C4);
 INCLUDE_RODATA("nonmatchings/pspnet_wispr", D_000028C8);
 
 INCLUDE_RODATA("nonmatchings/pspnet_wispr", D_000028CC);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_wispr", func_00000124);
 

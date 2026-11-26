@@ -61,7 +61,27 @@ s32 sceLed_driver_DE91D3A4(void) {
 INCLUDE_ASM("nonmatchings/led", sceLed_driver_DE91D3A4);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 330
+s32 sceLed_driver_DE91D3A4(void) {
+    sceKernelDisableSubIntr(0x1E, 0x19);
+    sceGpio_driver_103C3EB2(0x40);
+    sceGpio_driver_317D9D2C(6, 2);
+    sceSyscon_driver_18BFBE65(1, 0);
+    if (sceSyscon_driver_EC37C549() != 0) {
+        if ((D_00000BA0 ^ 1) != 0) {
+            sceGpio_driver_310F0CCF(0x80);
+        } else {
+            sceGpio_driver_103C3EB2(0x80);
+        }
+    } else {
+        sceGpio_driver_103C3EB2(0x80);
+        sceGpio_driver_317D9D2C(6, 2);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 330
 s32 sceLed_driver_DE91D3A4(void) {
     s32 var_a2;
 

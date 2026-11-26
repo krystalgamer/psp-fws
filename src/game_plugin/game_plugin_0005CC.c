@@ -518,9 +518,13 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001AC0);
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00014424);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00014428);
+#endif
 
+#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00014468);
+#endif
 
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000144A8);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_0001492C);
@@ -532,6 +536,10 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00014944);
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_0001496C);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000062D4);
+#endif
+
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001B0C);
 #endif
 
 #if FW_VERSION == 311

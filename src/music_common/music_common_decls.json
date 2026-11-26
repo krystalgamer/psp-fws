@@ -99,9 +99,12 @@
   "func_0000AD3C": "s32 func_0000AD3C(void *arg0);",
   "func_0000B0E4": "void func_0000B0E4(void);",
   "func_0000B244": "s32 func_0000B244(struct Unk_func_0000B244_0 *arg0);",
+  "func_0000BCD8": "s32 func_0000BCD8(void *arg0, s32 arg1, s32 arg2);",
+  "func_0000BD70": "void func_0000BD70(M2C_UNK **arg0);",
   "func_0000CE80": "void func_0000CE80(void);",
   "func_0000CE88": "void func_0000CE88(void *arg0);",
   "func_0000CFBC": "s32 func_0000CFBC(void *arg0, s32 arg1, s8 arg2);",
+  "func_0000D278": "s32 func_0000D278(void *arg0);",
   "func_0000D58C": "s32 func_0000D58C(s32, s32);",
   "func_0000D7A8": "void func_0000D7A8(void);",
   "func_0000D7C8": "void func_0000D7C8(void);",
@@ -298,6 +301,9 @@
   "func_0001D7A0": "void func_0001D7A0(M2C_UNK **arg0);",
   "func_0001D7C0": "void func_0001D7C0(M2C_UNK **arg0);",
   "func_0001E098": "M2C_UNK func_0001E098();",
+  "func_00021F94": "void func_00021F94(s32 **arg0);",
+  "func_00021FBC": "void func_00021FBC(s32 **arg0);",
+  "func_00021FE4": "void func_00021FE4(s32 **arg0);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "music_common_0786CB10": "s32 music_common_0786CB10(s32 arg0);",
@@ -465,6 +471,7 @@
   "D_00020A24": "extern s32 D_00020A24;",
   "D_00021FB0": "extern M2C_UNK D_00021FB0;",
   "D_00022470": "extern M2C_UNK D_00022470;",
-  "D_00022A00": "extern s32 D_00022A00;"
+  "D_00022A00": "extern s32 D_00022A00;",
+  "D_00025320": "extern s32 D_00025320;"
  }
 }

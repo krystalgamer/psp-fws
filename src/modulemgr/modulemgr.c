@@ -262,6 +262,10 @@ void module_reboot_before(void) {
 }
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/modulemgr", D_00007AB8);
+#endif
+
 #if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/modulemgr", syslib_D3744BE0);
 #endif
@@ -388,6 +392,10 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_9F3AD1E9);
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForUser_1196472E);
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForUser_24EC0641);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
 #endif
@@ -484,6 +492,10 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006D34);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006D64);
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_RODATA("nonmatchings/modulemgr", D_00007C24);
+#endif
+
 #if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/modulemgr", D_000078BC);
 #endif
@@ -517,7 +529,7 @@ void func_00000594(void *arg0) {
 INCLUDE_ASM("nonmatchings/modulemgr", func_00004998);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 330)
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006DF4);
 #endif
 

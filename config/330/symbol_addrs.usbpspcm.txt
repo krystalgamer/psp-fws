@@ -43,3 +43,7 @@ sceUsbBus_driver_913EC15D = 0x00004230; // type:func
 sceUsbBus_driver_B1644BE7 = 0x00004238; // type:func
 sceUsbBus_driver_C1E2A540 = 0x00004240; // type:func
 sceUsbBus_driver_CC57EC9D = 0x00004248; // type:func
+// shared names (tools/add_version.py) begin
+D_000044B8 = 0x000044CC; // rom:0x456C
+D_000044B8_v330 = 0x000044B8; // rom:0x4558
+// shared names (tools/add_version.py) end

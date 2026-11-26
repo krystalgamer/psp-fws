@@ -25,3 +25,13 @@ sceAudio_driver_A2BEAA6C = 0x00000DE4; // type:func
 sceAudio_driver_E0727056 = 0x00000DEC; // type:func
 sceMeCore_driver_3D5F109C = 0x00000DF4; // type:func
 sceMeCore_driver_D1EA3DFD = 0x00000DFC; // type:func
+// shared names (tools/add_version.py) begin
+D_00000D9C = 0x00001044; // rom:0x10E4
+D_00000E48 = 0x000010F0; // rom:0x1190
+D_00000E70 = 0x00001120;
+func_00000794 = 0x000009D4; // type:func rom:0xA74
+func_0000081C = 0x00000A5C; // type:func rom:0xAFC
+func_0000093C = 0x00000B7C; // type:func rom:0xC1C
+func_00000A84 = 0x00000CC4; // type:func rom:0xD64
+D_00000E48_v330 = 0x00000E48; // rom:0xEE8
+// shared names (tools/add_version.py) end

@@ -1,6 +1,12 @@
 #include "common.h"
 #include "lflash_fatfmt_decls.h"
 
+#if FW_VERSION == 330
+void func_00000000_v330(void) {
+
+}
+#endif
+
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_00000000);
 
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000000EC);
@@ -9,7 +15,11 @@ INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000000EC);
 INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001848);
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_0000020C);
+#else
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_00000204);
+#endif
 
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000007B0);
 

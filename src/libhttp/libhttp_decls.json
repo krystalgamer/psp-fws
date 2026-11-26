@@ -46,6 +46,7 @@
   "func_0000CE44": "void func_0000CE44(void);",
   "func_0000CE60": "void func_0000CE60(void);",
   "func_0000E568": "s32 func_0000E568(void);",
+  "func_0000F81C": "s32 func_0000F81C(s32, s32, s32, s32, s32);",
   "func_00010A74": "void func_00010A74(void);",
   "func_00011484": "void func_00011484(void);",
   "func_00011B3C": "void func_00011B3C(struct Unk_func_00011B3C_0 *arg0, struct Unk_func_00011B3C_1 *arg1);",

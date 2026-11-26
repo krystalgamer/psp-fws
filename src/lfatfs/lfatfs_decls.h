@@ -133,6 +133,7 @@ M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
 M2C_UNK SysMemForKernel_7B749390(s32, s32);
 s32 func_00000000_v310(s32 arg0);
 s32 func_00000000_v311(s32 arg0);
+s32 func_00000000_v330(s32 arg0);
 s32 func_000004C4(void);
 s32 func_00000584(s32 arg0);
 s32 func_000005EC(void);

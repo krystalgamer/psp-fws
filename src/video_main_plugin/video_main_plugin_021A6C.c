@@ -739,7 +739,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025704);
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000249EC);
 #endif
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00024B24);
 #endif
 

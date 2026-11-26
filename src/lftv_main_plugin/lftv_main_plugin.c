@@ -915,6 +915,10 @@ s32 func_000029A0(struct Unk_func_000029A0_0 *arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/lftv_main_plugin", func_00002B68);
+#endif
+
 #if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/lftv_main_plugin", func_00002E58);
 #endif
@@ -937,9 +941,11 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin", func_00002A70);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin", func_00002A8C);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/lftv_main_plugin", func_00002A30);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lftv_main_plugin", func_00002B2C);
 
 s32 func_00002C18(struct Unk_func_00002C18_0 *arg0) {

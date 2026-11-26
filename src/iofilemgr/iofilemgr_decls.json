@@ -1,11 +1,33 @@
 {
  "funcs": {
+  "IoFileMgrForKernel_3C54E908": "s32 IoFileMgrForKernel_3C54E908(s32, s32, s32, s32);",
+  "IoFileMgrForKernel_8E982A74": "s32 IoFileMgrForKernel_8E982A74(s32);",
   "IoFileMgrForKernel_BD17474F": "s32 IoFileMgrForKernel_BD17474F(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0);",
+  "IoFileMgrForKernel_C7F35804": "s32 IoFileMgrForKernel_C7F35804(s32);",
   "IoFileMgrForKernel_CB05F8D6": "void IoFileMgrForKernel_CB05F8D6(s32 arg0, s32 arg1, s32 arg2);",
+  "StdioForKernel_11A5127A": "s32 StdioForKernel_11A5127A(s32, s32);",
+  "StdioForKernel_4F78930A": "s32 StdioForKernel_4F78930A(s32, s32);",
+  "StdioForKernel_98220F3E": "s32 StdioForKernel_98220F3E(s32 arg0, s32 arg1, s32 arg2);",
+  "StdioForKernel_FB5380C5": "s32 StdioForKernel_FB5380C5(s32 arg0, s32 arg1, s32 arg2);",
+  "StdioForUser_0CBB0571": "s32 StdioForUser_0CBB0571(void);",
+  "StdioForUser_3054D478": "s32 StdioForUser_3054D478(void);",
+  "StdioForUser_924ABA61": "s32 StdioForUser_924ABA61(void);",
+  "StdioForUser_9D061C19": "s32 StdioForUser_9D061C19(void);",
+  "StdioForUser_A3B931DB": "s32 StdioForUser_A3B931DB(void);",
+  "StdioForUser_A46785C9": "void StdioForUser_A46785C9(void);",
   "SysMemForKernel_7B749390": "M2C_UNK SysMemForKernel_7B749390(s32, s32);",
+  "func_00000000": "s32 func_00000000(void);",
+  "func_00000094": "void func_00000094(void);",
   "func_0000015C": "s32 func_0000015C(s32);",
   "func_00000704": "s32 func_00000704(s32, s32, s32, s32);",
   "func_00000AEC": "s32 func_00000AEC(s32, s32, s32);",
+  "func_00000B78": "s32 func_00000B78(void);",
+  "func_00000B9C": "s32 func_00000B9C(void);",
+  "func_00000C28": "s32 func_00000C28(void);",
+  "func_00000C30": "s32 func_00000C30(void);",
+  "func_00000C38": "s32 func_00000C38(void *arg0);",
+  "func_00000C50": "s32 func_00000C50(void *arg0);",
+  "func_00000D04": "s32 func_00000D04(s32, s32);",
   "func_00000D24": "s32 func_00000D24(s32, s32, s32, s32);",
   "func_000010A8": "s32 func_000010A8(s32, s32, s32, s32);",
   "func_000011EC": "s32 func_000011EC(s32, s32, s32, s32);",
@@ -26,6 +48,7 @@
   "func_00004114": "s32 func_00004114(s32, s32, s32);",
   "func_00004374": "s32 func_00004374(s32, s32, s32, s32);",
   "func_0000467C": "s32 func_0000467C(void);",
+  "gets": "void gets(s32 arg0);",
   "sceIoChdir": "s32 sceIoChdir(void *arg0);",
   "sceIoChstat": "s32 sceIoChstat(void *arg0, void *arg1, u32 arg2);",
   "sceIoClose": "s32 sceIoClose(u32 arg0);",
@@ -46,7 +69,12 @@
   "sceIoWaitAsync": "s32 sceIoWaitAsync(u32 arg0, void *arg1);",
   "sceIoWaitAsyncCB": "s32 sceIoWaitAsyncCB(u32 arg0, void *arg1);",
   "sceIoWrite": "s32 sceIoWrite(u32 arg0, void *arg1, u32 arg2);",
-  "sceIoWriteAsync": "s32 sceIoWriteAsync(u32 arg0, void *arg1, u32 arg2);"
+  "sceIoWriteAsync": "s32 sceIoWriteAsync(u32 arg0, void *arg1, u32 arg2);",
+  "sceKernelRegisterStderrPipe": "s32 sceKernelRegisterStderrPipe(s32 arg0);",
+  "sceKernelRegisterStdoutPipe": "s32 sceKernelRegisterStdoutPipe(s32 arg0);",
+  "sceKernelStderr": "s32 sceKernelStderr(void);",
+  "sceKernelStdin": "s32 sceKernelStdin(void);",
+  "sceKernelStdout": "s32 sceKernelStdout(void);"
  },
  "types": {
   "Unk_IoFileMgrForKernel_BD17474F_0": "struct Unk_IoFileMgrForKernel_BD17474F_0 {\n    u8 pad0[0x80];\n    s32 unk80;\n};",
@@ -54,6 +82,11 @@
  },
  "vars": {
   "D_00004E4C": "extern s32 D_00004E4C;",
-  "D_00005870": "extern s32 D_00005870;"
+  "D_00005870": "extern s32 D_00005870;",
+  "D_000060B4": "extern M2C_UNK D_000060B4;",
+  "D_000060D4": "extern M2C_UNK D_000060D4;",
+  "D_00006630": "extern s32 D_00006630;",
+  "D_00006634": "extern s32 D_00006634;",
+  "D_00006638": "extern s32 D_00006638;"
  }
 }

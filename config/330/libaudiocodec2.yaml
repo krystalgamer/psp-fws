@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, libaudiocodec2]
+      - [0xA0, c, libaudiocodec2]
       - { start: 0x28B4, type: prxpad, order: .text }
       - { start: 0x28C0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x28C4, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -61,7 +61,7 @@ segments:
       - { start: 0x28EC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x28F0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x2924, type: rodata, name: resident, linker_section: .rodata.sceResident }
-      - [0x295C, rodata, libaudiocodec2]
+      - [0x295C, .rodata, libaudiocodec2]
       - { start: 0x41A8, type: prxpad, order: .rodata }
   - name: libaudiocodec2_seg1
     type: code

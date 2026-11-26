@@ -38,6 +38,10 @@ INCLUDE_ASM("nonmatchings/music_common", music_common_780357F2);
 
 INCLUDE_ASM("nonmatchings/music_common", func_000002C8);
 
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/music_common", music_common_2A9EF938);
+#endif
+
 #if FW_VERSION == 271
 void func_00000494(s32 arg0, s32 arg1) {
     if (scePaf_FCFAA39F() != 0) {
@@ -58,7 +62,9 @@ void music_common_58BD2898(s32 arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/music_common", func_00000324);
+#endif
 
 INCLUDE_ASM("nonmatchings/music_common", music_common_4D43311C);
 

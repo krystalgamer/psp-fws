@@ -66,7 +66,7 @@ void func_00000180_v300(void) {
 }
 #endif
 
-#if FW_VERSION < 352
+#if FW_VERSION < 330
 void func_000001FC(void) {
     if ((sceUsbStop(&D_00020230, 0U, NULL) >= 0) && (sceUsbStop(&D_00020220, 0U, NULL) >= 0) && (sceUsbStop(&D_0002020C, 0U, NULL) >= 0)) {
         sceUsbStop(&D_000201FC, 0U, NULL);
@@ -214,7 +214,7 @@ INCLUDE_RODATA("nonmatchings/camera_plugin", D_000215F4);
 
 INCLUDE_RODATA("nonmatchings/camera_plugin", D_0002160C);
 
-#if FW_VERSION < 352
+#if FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/camera_plugin", D_000201FC);
 
 INCLUDE_RODATA("nonmatchings/camera_plugin", D_0002020C);
@@ -226,7 +226,11 @@ INCLUDE_RODATA("nonmatchings/camera_plugin", D_00020230);
 
 INCLUDE_ASM("nonmatchings/camera_plugin", func_00000180);
 
-#if FW_VERSION >= 310 && FW_VERSION < 352
+#if FW_VERSION == 330
+INCLUDE_ASM("nonmatchings/camera_plugin", func_000001D8);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 330
 void func_000001D8(void) {
     func_000019F0();
     func_000001FC();
