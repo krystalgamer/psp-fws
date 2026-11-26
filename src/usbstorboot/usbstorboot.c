@@ -118,8 +118,21 @@ s32 module_start(void) {
 }
 #endif
 
-#if FW_VERSION < 352
+#if FW_VERSION >= 152 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/usbstorboot", module_stop);
+#endif
+
+#if FW_VERSION == 100
+s32 module_stop(void) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceUsbstor_internal_2CAFEFF1(&D_00001F00) < 0) {
+        Kprintf("%serror - cannot unregister handler\n", &D_00001B60);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION == 250
