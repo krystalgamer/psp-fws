@@ -14,8 +14,24 @@ INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAcquireIntr);
 
 INCLUDE_ASM("nonmatchings/dmacplus", func_00000288);
 
-#if FW_VERSION != 282
+#if (FW_VERSION >= 150 && FW_VERSION < 282) || FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dmacplus", module_start);
+#endif
+
+#if FW_VERSION == 100
+s32 module_start(void) {
+    sceSysregDmacplusBusClockEnable();
+    D_00002F00 = 0;
+    sceKernelRegisterIntrHandler(0x15, 1, &func_00000288, 0, &D_00002EEC);
+    sceKernelEnableIntr(0x15);
+    sceDmacplusLcdcInit();
+    sceDmacplusAvcInit();
+    sceDmacplusSc2MeInit();
+    sceDmacplusMe2ScInit();
+    sceDmacplusSc128Init();
+    sceKernelRegisterSysEventHandler(&D_00002E80);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -29,9 +45,29 @@ s32 module_reboot_before(void) {
     sceKernelReleaseIntrHandler(0x15);
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusInit);
+#endif
 
+#if FW_VERSION == 100
+s32 sceDmacplusInit(void) {
+    sceSysregDmacplusBusClockEnable();
+    D_00002F00 = 0;
+    sceKernelRegisterIntrHandler(0x15, 1, &func_00000288, 0, &D_00002EEC);
+    sceKernelEnableIntr(0x15);
+    sceDmacplusLcdcInit();
+    sceDmacplusAvcInit();
+    sceDmacplusSc2MeInit();
+    sceDmacplusMe2ScInit();
+    sceDmacplusSc128Init();
+    sceKernelRegisterSysEventHandler(&D_00002E80);
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 282
 s32 sceDmacplusEnd(void) {
     sceKernelUnregisterSysEventHandler(&D_00002E80);
     sceDmacplusSc128End();
@@ -503,9 +539,29 @@ INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusSc128TryMemcpy);
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusSc128LLI);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusSc128Init);
-#else
+#endif
+
+#if FW_VERSION == 100
+s32 sceDmacplusSc128Init(void) {
+    M2C_UNK *temp_v0;
+    s32 temp_s2;
+
+    temp_s2 = sceKernelCpuSuspendIntr();
+    temp_v0 = "SceDmacplusSc128";
+    D_00004034.unk0 = sceKernelCreateSema(temp_v0, 1U, 1, 1, NULL);
+    D_00004034.unk4 = sceKernelCreateEventFlag(temp_v0, 0x201U, 0U, NULL);
+    sceKernelRegisterSubIntrHandler(0x15, 8, &func_00002198, 0);
+    sceKernelRegisterSubIntrHandler(0x15, 9, &func_00002250, 0);
+    sceKernelEnableSubIntr(0x15, 8);
+    sceKernelEnableSubIntr(0x15, 9);
+    sceKernelCpuResumeIntr(temp_s2);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 s32 sceDmacplusSc128Init(void) {
     M2C_UNK *temp_v0;
     s32 temp_s2;
