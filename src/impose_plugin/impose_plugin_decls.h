@@ -25,6 +25,7 @@ extern s32 D_0000189C;
 void func_0000015C(struct Unk_func_0000015C_0 *arg0);
 void func_00000180(struct Unk_func_00000180_0 *arg0);
 void func_000003BC_v150(s32 arg0);
+void func_000003BC_v152(s32 arg0);
 void func_00000964(void);
 void func_00000BAC(s32 arg0);
 void func_00000CDC(void);
