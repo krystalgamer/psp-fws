@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "_sce_pspnet_adhoc_prp_stop": "s32 _sce_pspnet_adhoc_prp_stop(void);",
   "func_000011F0": "s32 func_000011F0(void);",
   "func_000011F8": "s32 func_000011F8(void);",
   "func_00001290": "s32 func_00001290(void);",
@@ -31,13 +32,12 @@
   "memset": "M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
+  "sceAdhocBBShutdown": "M2C_UNK sceAdhocBBShutdown();",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(u32);",
   "sceKernelGetThreadId": "s32 sceKernelGetThreadId(void);",
   "sceKernelSendMbx": "s32 sceKernelSendMbx(u32, void *);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
-  "sceAdhocBBShutdown": "M2C_UNK sceAdhocBBShutdown();",
-  "_sce_pspnet_adhoc_prp_stop": "s32 _sce_pspnet_adhoc_prp_stop(void);",
   "sceNetAdhocAuthTerm": "s32 sceNetAdhocAuthTerm(void);",
   "sceNetIfhandle_driver_773FC77C": "M2C_UNK sceNetIfhandle_driver_773FC77C();"
  },

@@ -76,6 +76,7 @@ extern s32 D_00004610;
 extern s32 D_00004784;
 extern M2C_UNK D_00004788;
 
+s32 _sce_pspnet_adhoc_prp_stop(void);
 s32 func_000011F0(void);
 s32 func_000011F8(void);
 s32 func_00001290(void);
@@ -107,13 +108,12 @@ void func_00004064(void);
 M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);
 s32 module_start(void);
 s32 module_stop(void);
+M2C_UNK sceAdhocBBShutdown();
 s32 sceKernelDeleteSema(u32);
 s32 sceKernelGetThreadId(void);
 s32 sceKernelSendMbx(u32, void *);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
-M2C_UNK sceAdhocBBShutdown();
-s32 _sce_pspnet_adhoc_prp_stop(void);
 s32 sceNetAdhocAuthTerm(void);
 M2C_UNK sceNetIfhandle_driver_773FC77C();
 
