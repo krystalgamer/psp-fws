@@ -15,15 +15,15 @@ extern s32 D_00004764;
 extern s32 D_00004768;
 extern s32 D_0000476C;
 
-void sceKernelSetGPIMask(s32 arg0, s32 arg1);
-s32 sceKernelGzipGetCompressedData(s32 arg0);
-s32 sceKernelReleaseLibcRtcFunc(void);
-s32 sceKernelRegisterLibcRtcFunc(s32 arg0, s32 arg1, s32 arg2);
-s32 sceKernelGzipGetComment(s32 arg0);
-void sceKernelSetGPOMask(s32 arg0, s32 arg1);
-s32 sceKernelGzipGetInfo(s32, s32, s32, s32, s32, s32);
-s32 sceKernelGzipGetName(s32 arg0);
 s32 func_000010E0(void);
 s32 func_000026B4(void);
+s32 sceKernelGzipGetComment(s32 arg0);
+s32 sceKernelGzipGetCompressedData(s32 arg0);
+s32 sceKernelGzipGetInfo(s32, s32, s32, s32, s32, s32);
+s32 sceKernelGzipGetName(s32 arg0);
+s32 sceKernelRegisterLibcRtcFunc(s32 arg0, s32 arg1, s32 arg2);
+s32 sceKernelReleaseLibcRtcFunc(void);
+void sceKernelSetGPIMask(s32 arg0, s32 arg1);
+void sceKernelSetGPOMask(s32 arg0, s32 arg1);
 
 #endif

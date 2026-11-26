@@ -1,15 +1,15 @@
 {
  "funcs": {
-  "sceKernelSetGPIMask": "void sceKernelSetGPIMask(s32 arg0, s32 arg1);",
-  "sceKernelGzipGetCompressedData": "s32 sceKernelGzipGetCompressedData(s32 arg0);",
-  "sceKernelReleaseLibcRtcFunc": "s32 sceKernelReleaseLibcRtcFunc(void);",
-  "sceKernelRegisterLibcRtcFunc": "s32 sceKernelRegisterLibcRtcFunc(s32 arg0, s32 arg1, s32 arg2);",
+  "func_000010E0": "s32 func_000010E0(void);",
+  "func_000026B4": "s32 func_000026B4(void);",
   "sceKernelGzipGetComment": "s32 sceKernelGzipGetComment(s32 arg0);",
-  "sceKernelSetGPOMask": "void sceKernelSetGPOMask(s32 arg0, s32 arg1);",
+  "sceKernelGzipGetCompressedData": "s32 sceKernelGzipGetCompressedData(s32 arg0);",
   "sceKernelGzipGetInfo": "s32 sceKernelGzipGetInfo(s32, s32, s32, s32, s32, s32);",
   "sceKernelGzipGetName": "s32 sceKernelGzipGetName(s32 arg0);",
-  "func_000010E0": "s32 func_000010E0(void);",
-  "func_000026B4": "s32 func_000026B4(void);"
+  "sceKernelRegisterLibcRtcFunc": "s32 sceKernelRegisterLibcRtcFunc(s32 arg0, s32 arg1, s32 arg2);",
+  "sceKernelReleaseLibcRtcFunc": "s32 sceKernelReleaseLibcRtcFunc(void);",
+  "sceKernelSetGPIMask": "void sceKernelSetGPIMask(s32 arg0, s32 arg1);",
+  "sceKernelSetGPOMask": "void sceKernelSetGPOMask(s32 arg0, s32 arg1);"
  },
  "vars": {
   "D_000046C0": "extern s32 D_000046C0;",
