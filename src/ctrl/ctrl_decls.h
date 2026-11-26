@@ -47,18 +47,18 @@ s32 func_00001600(void);
 s32 func_0000161C(s32, s32, s32);
 s32 module_reboot_before(void);
 s32 module_start(void);
+M2C_UNK sceCtrlEnd();
+s32 sceCtrlGetIdleCancelKey(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3);
+M2C_UNK sceCtrlInit();
 s32 sceCtrlPeekBufferNegative(void *arg0, s32 arg1);
 s32 sceCtrlPeekBufferPositive(void *arg0, s32 arg1);
 s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1);
 s32 sceCtrlReadBufferPositive(void *arg0, s32 arg1);
+s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 sceCtrlSetPollingMode(s8 arg0);
 s32 sceCtrl_driver_348D99D4(u32 arg0);
-M2C_UNK sceCtrlInit();
-s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 sceCtrl_driver_AF5960F3(void);
-s32 sceCtrlGetIdleCancelKey(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3);
 s32 sceCtrl_driver_CC70B61E(void);
-M2C_UNK sceCtrlEnd();
 s32 sceKernelSetEventFlag(s32, u32);
 
 #endif
