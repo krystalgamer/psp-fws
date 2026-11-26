@@ -366,7 +366,14 @@ s32 func_00001A8C(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/sircs", func_00001AB0);
+#else
+s32 func_00001AB0(void) {
+    sceIoDelDrv(D_000026A8);
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/sircs", func_00001AD8);
 
