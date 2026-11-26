@@ -75,15 +75,15 @@ s32 module_stop(void);
 s32 sceKernelDeleteSema(s32);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
-s32 sceMSAudioEndTrack(u32 arg0);
+s32 sceMSAudioCalculateICVn(void);
 M2C_UNK sceMSAudioEnd();
 s32 sceMSAudioEndFringe(void);
+s32 sceMSAudioEndTrack(u32 arg0);
 s32 sceMSAudioGetMediaType(void);
-s32 sceMSAudioCalculateICVn(void);
+s32 sceMgrAllocKeyReg(M2C_UNK);
 s32 sceMgrDecryptKc(s32, s32, s32);
 M2C_UNK sceMgrFreeKeyReg(s32);
-s32 sceMgrGenerateMACWithKbCBC(s32, s32, M2C_UNK, s32, s32);
 s32 sceMgrGenerateKb(s32, M2C_UNK *, M2C_UNK *, s32);
-s32 sceMgrAllocKeyReg(M2C_UNK);
+s32 sceMgrGenerateMACWithKbCBC(s32, s32, M2C_UNK, s32, s32);
 
 #endif

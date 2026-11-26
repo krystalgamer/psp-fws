@@ -20,16 +20,16 @@
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
-  "sceMSAudioEndTrack": "s32 sceMSAudioEndTrack(u32 arg0);",
+  "sceMSAudioCalculateICVn": "s32 sceMSAudioCalculateICVn(void);",
   "sceMSAudioEnd": "M2C_UNK sceMSAudioEnd();",
   "sceMSAudioEndFringe": "s32 sceMSAudioEndFringe(void);",
+  "sceMSAudioEndTrack": "s32 sceMSAudioEndTrack(u32 arg0);",
   "sceMSAudioGetMediaType": "s32 sceMSAudioGetMediaType(void);",
-  "sceMSAudioCalculateICVn": "s32 sceMSAudioCalculateICVn(void);",
+  "sceMgrAllocKeyReg": "s32 sceMgrAllocKeyReg(M2C_UNK);",
   "sceMgrDecryptKc": "s32 sceMgrDecryptKc(s32, s32, s32);",
   "sceMgrFreeKeyReg": "M2C_UNK sceMgrFreeKeyReg(s32);",
-  "sceMgrGenerateMACWithKbCBC": "s32 sceMgrGenerateMACWithKbCBC(s32, s32, M2C_UNK, s32, s32);",
   "sceMgrGenerateKb": "s32 sceMgrGenerateKb(s32, M2C_UNK *, M2C_UNK *, s32);",
-  "sceMgrAllocKeyReg": "s32 sceMgrAllocKeyReg(M2C_UNK);"
+  "sceMgrGenerateMACWithKbCBC": "s32 sceMgrGenerateMACWithKbCBC(s32, s32, M2C_UNK, s32, s32);"
  },
  "types": {
   "D_00006B80_s": "struct D_00006B80_s {\n    u8 pad0[0x138];\n    volatile u32 unk138;\n    u8 pad13C[0x198];\n    volatile s32 unk2D4;\n};",
