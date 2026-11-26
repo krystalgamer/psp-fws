@@ -425,6 +425,12 @@ def guess_callees(mod, name, target="mips-gcc-c"):
     return out
 
 
+def same_decl(a, b):
+    """Declarations equal up to M2C_UNK (a typedef of s32) and whitespace."""
+    norm = lambda d: re.sub(r"\s+", " ", re.sub(r"\bM2C_UNK\b", "s32", d)).strip()
+    return norm(a) == norm(b)
+
+
 def try_func(mod, name, header_ctx):
     """Try each m2c target, with the SDK prototype of the function first."""
     own = protos.sdk_protos().get(name) if name not in mod.store["funcs"] else None
@@ -476,7 +482,7 @@ def _try_func(mod, name, header_ctx, target, seen):
             new_funcs[k] = v
     sig = body.split("{", 1)[0].strip() + ";"
     for k, v in list(new_funcs.items()) + [(name, sig)]:
-        if k in mod.store["funcs"] and mod.store["funcs"][k] != v:
+        if k in mod.store["funcs"] and not same_decl(mod.store["funcs"][k], v):
             # a function may replace its own (stale) prototype only if no C
             # code already calls it under the old one
             if k != name or re.search(rf"^(?!INCLUDE_ASM).*\b{k}\(", mod.all_text(), re.M):
@@ -485,7 +491,7 @@ def _try_func(mod, name, header_ctx, target, seen):
             if mod.shared and mod.defined_elsewhere(name):
                 return None
     for k, v in new_vars.items():
-        if k in mod.store["vars"] and mod.store["vars"][k] != v:
+        if k in mod.store["vars"] and not same_decl(mod.store["vars"][k], v):
             return None
     text = header_ctx + "\n" + "\n".join(new_vars.values()) + "\n" + "\n".join(
         v for k, v in new_funcs.items() if k not in mod.store["funcs"]) + "\n" + body
