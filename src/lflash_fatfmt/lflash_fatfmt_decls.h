@@ -6,12 +6,12 @@
 
 
 M2C_UNK Kprintf(M2C_UNK *);
-void sceLflashFatfmtStartFatfmt(void);
 void func_00000000_v330(void);
 void func_00000000_v340(void);
 s32 func_000007F8(s32 arg0);
 s32 func_000008D0(void);
 M2C_UNK func_000009A8();
 s32 module_start(void);
+void sceLflashFatfmtStartFatfmt(void);
 
 #endif
