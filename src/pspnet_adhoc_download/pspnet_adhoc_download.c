@@ -1,3 +1,4 @@
+/* cflags[150]: -Os -frename-registers */
 /* cflags[100]: -Os -frename-registers */
 #include "common.h"
 #include "pspnet_adhoc_download_decls.h"
@@ -64,9 +65,31 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000718);
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A80);
+#endif
 
+#if FW_VERSION >= 152 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A9C);
+#endif
 
+#if FW_VERSION == 150
+M2C_UNK *func_00000A9C(void *arg0) {
+    M2C_UNK *temp_a1;
+    M2C_UNK *temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, M2C_UNK **, 0xA8);
+    if (temp_v1 != NULL) {
+        temp_a1 = *temp_v1;
+        M2C_FIELD(arg0, M2C_UNK **, 0xA8) = temp_a1;
+        if (temp_a1 == NULL) {
+            M2C_FIELD(arg0, s32 *, 0xAC) = 0;
+        }
+        *temp_v1 = NULL;
+    }
+    return temp_v1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000AC4);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000B1C);
@@ -80,7 +103,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000590);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A2C);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A21FEF45);
 #else
 s32 sceNetAdhocDownload_A21FEF45(s32 arg0) {
@@ -192,7 +215,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002008);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000020D4);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002118);
 #else
 void func_00002118(void) {
@@ -205,7 +228,7 @@ void func_00002118(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002150);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000021C4);
 #else
 void func_000021C4(void *arg0) {
@@ -273,11 +296,11 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001D60);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001DD4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001E14);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 u8 *func_00001E14(u8 *arg0, u8 *arg1, s32 arg2) {
     s32 var_a2;
     u8 *var_a1;
@@ -315,13 +338,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000022E0);
 
 #if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001E74);
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001EB4);
-#endif
-
-#if FW_VERSION == 100
 void func_00001EB4(s32 arg0, s32 arg1) {
     func_00001D60(arg1, arg0);
 }

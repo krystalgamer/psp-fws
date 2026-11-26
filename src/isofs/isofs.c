@@ -618,7 +618,7 @@ void func_00002364(struct Unk_func_00002364_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/isofs", func_00002374);
 #else
 s32 func_00002374(void *arg0) {
@@ -953,11 +953,7 @@ s32 func_00006720(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/isofs", func_0000664C);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 func_0000664C(s32 arg0) {
     return (-((arg0 & 0xF02) == 0) & 0x7FFE4FFC) - 0x7FFE4FFC;
 }

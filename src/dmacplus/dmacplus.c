@@ -213,8 +213,14 @@ INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_BEC10779);
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_7AAE5443);
 
-#if FW_VERSION < 152
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_1E7483D0);
+#endif
+
+#if FW_VERSION == 150
+s32 sceDmacplus_driver_1E7483D0(void) {
+    return (D_00003F84 == 0) - 1;
+}
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
@@ -304,8 +310,14 @@ s32 sceDmacplus_driver_FD8B15BC(void) {
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_F7DEC189);
 
-#if FW_VERSION < 152
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_D0464B29);
+#endif
+
+#if FW_VERSION == 150
+s32 sceDmacplus_driver_D0464B29(void) {
+    return (D_00003FD4 == 0) - 1;
+}
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
@@ -394,7 +406,9 @@ s32 sceDmacplus_driver_1F5A80D0(void) {
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_D1E1567E);
 
 #if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_9393B40D);
+s32 sceDmacplus_driver_9393B40D(void) {
+    return (D_00003FEC == 0) - 1;
+}
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282

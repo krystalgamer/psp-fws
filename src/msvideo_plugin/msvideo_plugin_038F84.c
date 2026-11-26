@@ -60,13 +60,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_00036EF0);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002C274);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002C2A0);
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002C2CC);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION == 152
 s32 func_0002C2CC(void *arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -78,13 +72,7 @@ s32 func_0002C2CC(void *arg0, s32 arg1, s32 arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002C304);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION == 152
 s32 func_0002C304(void *arg0, s32 arg1) {
     s32 var_v1;
 
@@ -96,13 +84,7 @@ s32 func_0002C304(void *arg0, s32 arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002C33C);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION == 152
 s32 func_0002C33C(void *arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -116,11 +98,11 @@ s32 func_0002C33C(void *arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002C374);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0002C374(s32 *arg0) {
     s32 var_v1;
 
@@ -134,11 +116,11 @@ s32 func_0002C374(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002C3AC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0002C3AC(s32 *arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -152,11 +134,11 @@ s32 func_0002C3AC(s32 *arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002C3E4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0002C3E4(s32 *arg0) {
     s32 var_v1;
 
@@ -170,11 +152,11 @@ s32 func_0002C3E4(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002C41C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0002C41C(s32 *arg0) {
     s32 var_v1;
 

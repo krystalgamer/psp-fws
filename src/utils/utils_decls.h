@@ -4,8 +4,13 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern s32 D_000046C0;
+extern s32 D_000046C4;
 extern s32 D_00004700;
 extern s32 D_00004704;
+extern s32 D_00004724;
+extern s32 D_00004728;
+extern s32 D_0000472C;
 extern s32 D_00004764;
 extern s32 D_00004768;
 extern s32 D_0000476C;

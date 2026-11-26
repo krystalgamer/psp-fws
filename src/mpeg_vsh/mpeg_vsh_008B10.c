@@ -117,11 +117,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_000072D8);
 INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_000072F8);
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_0000732C);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0000732C(s32 arg0) {
     s32 var_v0;
 

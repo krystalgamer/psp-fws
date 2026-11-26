@@ -495,6 +495,7 @@ s32 func_00001954(void);
 s32 func_000019A0(void);
 s32 func_000019B0(void);
 u32 func_00001A24(s32 arg0);
+s32 func_00001C08(void);
 s32 func_00001C24(void);
 void func_00001C34(s32 arg0);
 s32 func_00001C40(void);

@@ -1,3 +1,4 @@
+/* cflags[150]: -O2 -frename-registers */
 #include "common.h"
 #include "utils_decls.h"
 
@@ -171,8 +172,14 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMt19937Init);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMt19937UInt);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_193D4036);
+#endif
+
+#if FW_VERSION == 150
+void UtilsForKernel_193D4036(s32 arg0, s32 arg1) {
+    D_000046C4 = (D_000046C4 & ~arg0) | arg1;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -181,8 +188,14 @@ void UtilsForKernel_193D4036(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_95035FEF);
+#endif
+
+#if FW_VERSION == 150
+void UtilsForKernel_95035FEF(s32 arg0, s32 arg1) {
+    D_000046C0 = (D_000046C0 & ~arg0) | arg1;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -197,9 +210,20 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelGetGPI);
 INCLUDE_ASM("nonmatchings/utils", sceKernelSetGPO);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_7B7ED3FD);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 UtilsForKernel_7B7ED3FD(s32 arg0, s32 arg1, s32 arg2) {
+    D_00004724 = arg0;
+    D_00004728 = arg1;
+    D_0000472C = arg2;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
 s32 UtilsForKernel_7B7ED3FD(s32 arg0, s32 arg1, s32 arg2) {
     D_00004764 = arg0;
     D_00004768 = arg1;
@@ -208,9 +232,20 @@ s32 UtilsForKernel_7B7ED3FD(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_6151A7C3);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 UtilsForKernel_6151A7C3(void) {
+    D_00004724 = 0;
+    D_00004728 = 0;
+    D_0000472C = 0;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
 s32 UtilsForKernel_6151A7C3(void) {
     D_00004764 = 0;
     D_00004768 = 0;
@@ -241,13 +276,28 @@ INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0CE3E29);
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_B0E9C31F);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_23FFC828);
+#endif
 
+#if FW_VERSION == 150
+s32 UtilsForKernel_23FFC828(s32 arg0) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (UtilsForKernel_B0E9C31F(arg0, 0, 0, 0, 0, &sp0) >= 0) {
+        var_v1 = sp0;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0CE3E29);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0E6BA96);
 #else
 s32 UtilsForKernel_E0E6BA96(s32 arg0) {
@@ -262,7 +312,7 @@ s32 UtilsForKernel_E0E6BA96(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_8C1FBE04);
 #else
 s32 UtilsForKernel_8C1FBE04(s32 arg0) {
@@ -275,7 +325,9 @@ s32 UtilsForKernel_8C1FBE04(s32 arg0) {
     }
     return var_v1;
 }
+#endif
 
+#if FW_VERSION == 100
 s32 UtilsForKernel_23FFC828(s32 arg0) {
     void *sp0;
     s32 var_v1;

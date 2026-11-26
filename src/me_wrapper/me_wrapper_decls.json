@@ -3,8 +3,10 @@
   "func_00001070": "s32 func_00001070(void);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
+  "sceMeCore_driver_04AFF68E": "void sceMeCore_driver_04AFF68E(void);",
   "sceMeCore_driver_3D5F109C": "M2C_UNK sceMeCore_driver_3D5F109C(M2C_UNK, s32);",
   "sceMeCore_driver_4794C05C": "void sceMeCore_driver_4794C05C(s32 arg0);",
+  "sceMeCore_driver_B97B15D7": "void sceMeCore_driver_B97B15D7(void);",
   "sceMeMemory_driver_5AD660FA": "void sceMeMemory_driver_5AD660FA(s32 arg0);",
   "sceMeMemory_driver_A177798D": "void sceMeMemory_driver_A177798D(s32 arg0);",
   "sceMePower_driver_579ACEA9": "void sceMePower_driver_579ACEA9(s32 arg0);",
@@ -21,6 +23,7 @@
  },
  "vars": {
   "D_000019F0": "extern M2C_UNK D_000019F0;",
-  "D_00001A30": "extern s32 D_00001A30;"
+  "D_00001A30": "extern s32 D_00001A30;",
+  "D_00001F60": "extern s32 D_00001F60;"
  }
 }

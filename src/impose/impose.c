@@ -7,8 +7,28 @@
 void func_00000000(u32 arg0) {
     sceKernelSetEventFlag(*D_00018648, arg0);
 }
+#endif
 
+#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/impose", func_00000028);
+#endif
+
+#if FW_VERSION == 150
+s32 func_00000028(s32 arg0) {
+    s32 var_a1;
+
+    var_a1 = 3;
+    if ((u32) (arg0 - 0x49) >= 0x1CU) {
+        var_a1 = 2;
+        if ((u32) (arg0 - 0x29) >= 0x20U) {
+            var_a1 = 1;
+            if ((u32) (arg0 - 0x19) >= 0x10U) {
+                var_a1 = (((u32) (arg0 - 1) < 0x18U) == 0) * 4;
+            }
+        }
+    }
+    return var_a1;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282

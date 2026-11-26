@@ -545,11 +545,7 @@ void func_000012F8(void) {
 }
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_D4D66154);
-#endif
-
-#if FW_VERSION == 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void sceVshCommonUtil_D4D66154(s32 *arg0) {
     if (!(*arg0 & 1)) {
 

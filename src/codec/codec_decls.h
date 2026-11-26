@@ -16,6 +16,7 @@ s32 func_00000924(s32, s32, s32, s32);
 s32 sceCodec_driver_28A49CCA(void);
 void sceCodec_driver_31B2E41E(void);
 void sceCodec_driver_359C2B9F(void);
+void sceCodec_driver_856E7487(s32 arg0, s32 arg1);
 M2C_UNK sceGpio_driver_103C3EB2(M2C_UNK);
 M2C_UNK sceGpio_driver_310F0CCF(M2C_UNK);
 M2C_UNK sceGpio_driver_317D9D2C(M2C_UNK, M2C_UNK);

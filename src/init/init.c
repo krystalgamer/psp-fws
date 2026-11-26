@@ -1,3 +1,4 @@
+/* cflags[150]: -O1 */
 /* cflags[100]: -O1 */
 #include "common.h"
 #include "init_decls.h"
@@ -166,11 +167,11 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/init", InitForKernel_7A2333AD);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 InitForKernel_7A2333AD(void) {
     return D_00002620;
 }
@@ -190,11 +191,11 @@ s32 func_00001284(void) {
 }
 #endif
 
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION >= 350
+#if (FW_VERSION >= 151 && FW_VERSION < 201) || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/init", InitForKernel_A6E71B93);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 InitForKernel_A6E71B93(void) {
     return D_00002644;
 }

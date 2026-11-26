@@ -783,7 +783,7 @@ INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_992C22C2);
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_08234E6D);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_2EE82492);
 #else
 s32 sceSyscon_driver_2EE82492(u32 arg0) {

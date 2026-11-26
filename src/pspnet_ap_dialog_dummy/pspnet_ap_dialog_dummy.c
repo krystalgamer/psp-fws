@@ -1,3 +1,4 @@
+/* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "pspnet_ap_dialog_dummy_decls.h"
@@ -6,9 +7,24 @@ INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", sceNetApDialogDummyConnect);
 
 INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", sceNetApDialogDummyInit);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", sceNetApDialogDummyTerm);
-#else
+#endif
+
+#if FW_VERSION == 150
+int sceNetApDialogDummyTerm(void) {
+    if (D_000009B0 != 0) {
+        if (D_000009A0 >= 0) {
+            sceNetApctl_lib_E11BAFAB(D_000009A0);
+        }
+        D_000009B0 = 0;
+        D_000009A0 = -1;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
 int sceNetApDialogDummyTerm(void) {
     if (D_00000990 != 0) {
         if (D_00000980 >= 0) {
@@ -51,11 +67,11 @@ INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", func_00000700);
 INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", func_0000077C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 250
+#if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/pspnet_ap_dialog_dummy", func_000007AC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 u8 *func_000007AC(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;

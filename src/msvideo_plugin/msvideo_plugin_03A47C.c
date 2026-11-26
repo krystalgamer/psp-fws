@@ -1,3 +1,4 @@
+/* cflags[150]: -Os */
 /* cflags[100]: -Os */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
@@ -16,11 +17,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002D8C0);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002D964);
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002D9B4);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0002D9B4(s32 arg0) {
     s32 temp_v0;
     s32 var_a1;
@@ -111,13 +108,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003AE64);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002DFB4);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002DFD8);
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0002E02C);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION == 152
 s32 func_0002E02C(void **arg0, u16 *arg1) {
     s32 var_v1;
     void *temp_a0;
@@ -132,11 +123,11 @@ s32 func_0002E02C(void **arg0, u16 *arg1) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_03A47C", func_0003AF58);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0003AF58(void **arg0, s32 arg1, s32 *arg2) {
     s32 temp_v0;
     s32 var_a2;

@@ -1,3 +1,4 @@
+/* cflags[150]: -O2 */
 /* cflags[100]: -O2 */
 /* cflags: -O1 */
 #include "common.h"
@@ -42,9 +43,26 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_0002F364);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_0002F56C);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_0002F954);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 func_0002F954(void *arg0, s32 *arg1) {
+    s32 var_v0;
+
+    var_v0 = func_0002B638(M2C_FIELD(arg0, void ***, 0xE4));
+    if (var_v0 != 0) {
+        var_v0 = 0x302;
+    }
+    if (arg1 != NULL) {
+        *arg1 = 0;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION == 100
 s32 func_0002F954(void *arg0, s32 *arg1) {
     s32 var_v0;
 

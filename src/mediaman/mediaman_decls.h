@@ -4,6 +4,13 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern M2C_UNK D_00000FA0;
+extern s32 D_00000FD0;
+extern s32 D_00000FD4;
+extern s32 D_00000FD8;
+extern s32 D_00000FDC;
+extern s32 D_00001000;
+extern s32 D_00001004;
 extern s32 D_000012F8;
 extern s32 D_0000132C;
 extern M2C_UNK D_00002980;
@@ -21,6 +28,7 @@ extern M2C_UNK D_00002BC0;
 
 s32 func_00000000(s32);
 s32 func_00000138(void);
+s32 func_0000042C(void);
 void func_00001448(s32 arg0);
 void func_00001524(s32 arg0);
 void func_000018DC(s32 arg0);
@@ -56,12 +64,17 @@ s32 sceUmd_27A764A1(void);
 void sceUmd_3925CBD8(s32 arg0);
 void sceUmd_3BA4EC53(void);
 s32 sceUmd_3D0DECD5(void);
+void sceUmd_4C952ACF(s32 arg0);
+s32 sceUmd_5469DC37(void);
+s32 sceUmd_6A41ED25(void);
 s32 sceUmd_725DFB14(void);
 void sceUmd_7AA26C9A(void);
 s32 sceUmd_7F38693E(s32 arg0, s32 arg1);
 s32 sceUmd_7F40CC41(void);
+void sceUmd_9B22AED7(s32 arg0);
 s32 sceUmd_A140DEC2(void);
 void sceUmd_AE53DC2D(s32 arg0);
+void sceUmd_BBB5F05C(void);
 s32 sceUmd_D01B2DC6(void);
 M2C_UNK sceUmd_D45D1FE6();
 s32 sceUmd_EB56097E(void);

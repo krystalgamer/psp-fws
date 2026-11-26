@@ -1,3 +1,4 @@
+/* cflags[150]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "loadcore_decls.h"
@@ -290,8 +291,27 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00001AA0);
 INCLUDE_ASM("nonmatchings/loadcore", func_00001560);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_DA1B09AA);
+#endif
+
+#if FW_VERSION == 150
+s32 LoadCoreForKernel_DA1B09AA(u32 arg0, u32 arg1) {
+    u32 temp_s1;
+    u32 var_s0;
+
+    temp_s1 = arg0 + ((arg1 >> 2) * 4);
+    var_s0 = arg0;
+    if (arg0 >= temp_s1) {
+
+    } else {
+        do {
+            func_00001560((s32) var_s0);
+            var_s0 += M2C_FIELD(var_s0, u8 *, 8) * 4;
+        } while (var_s0 < temp_s1);
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -1443,7 +1463,16 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000056D8);
 #endif
 
 #if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00005858);
+s32 func_00005858(s32 arg0) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (func_000056D8(arg0, 0, 0, 0, 0, &sp0) >= 0) {
+        var_v1 = sp0;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -1470,11 +1499,7 @@ s32 func_00005858(s32 arg0) {
 INCLUDE_ASM("nonmatchings/loadcore", func_00005B10);
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00005894);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 func_00005894(s32 arg0) {
     void *sp0;
     s32 var_v1;

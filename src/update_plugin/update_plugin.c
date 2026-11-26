@@ -1459,9 +1459,31 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_0000301C);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/update_plugin", func_00002558);
+#endif
 
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/update_plugin", func_0000268C);
+#endif
 
+#if FW_VERSION == 150
+s32 func_0000268C(void) {
+    void *sp0;
+    s32 temp_v0;
+    s32 var_a1;
+
+    temp_v0 = sceIoDevctl(&D_00006114, 0x02125802, NULL, 0U, &sp0, 4U);
+    var_a1 = temp_v0;
+    if (temp_v0 == 0) {
+        var_a1 = 1;
+        if (sp0 != 0x11) {
+            var_a1 = (sp0 == 0x41) * 2;
+        }
+    }
+    return var_a1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/update_plugin", func_000026EC);
 
 INCLUDE_ASM("nonmatchings/update_plugin", func_0000277C);

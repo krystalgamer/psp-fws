@@ -2732,22 +2732,22 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00005080);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00005168);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 260
+#if FW_VERSION >= 152 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00005738);
 #endif
 
-#if FW_VERSION >= 260 && FW_VERSION < 282
+#if FW_VERSION == 150 || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_00005738(s32 arg0) {
     scePaf_EAA5AFF6(arg0, 0xDC);
     scePaf_EAA5AFF6(arg0, 0xCC);
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 260
+#if FW_VERSION >= 152 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/savedata_utility", func_0000576C);
 #endif
 
-#if FW_VERSION >= 260 && FW_VERSION < 282
+#if FW_VERSION == 150 || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_0000576C(s32 arg0) {
     scePaf_EAA5AFF6(arg0, 0xC9);
     scePaf_EAA5AFF6(arg0, 0xCA);

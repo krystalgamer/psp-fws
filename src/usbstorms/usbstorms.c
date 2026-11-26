@@ -1,3 +1,4 @@
+/* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "usbstorms_decls.h"
@@ -248,7 +249,20 @@ INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_9569F268);
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_2241C828);
 #endif
 
+#if FW_VERSION != 150
 INCLUDE_ASM("nonmatchings/usbstorms", module_stop);
+#else
+s32 module_stop(void) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceUsbstor_internal_2CAFEFF1(&D_00002E10) < 0) {
+        KDebugForKernel_84F370BC("%serror - cannot unregister handler\n", &D_00002A14);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#endif
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000924);

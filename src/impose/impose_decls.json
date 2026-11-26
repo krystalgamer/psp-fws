@@ -1,6 +1,7 @@
 {
  "funcs": {
   "func_00000000": "void func_00000000(u32 arg0);",
+  "func_00000028": "s32 func_00000028(s32 arg0);",
   "func_000004C4": "s32 func_000004C4(void);",
   "func_0000070C": "s32 func_0000070C(void);",
   "func_000012B8": "s32 func_000012B8(void);",

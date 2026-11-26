@@ -43,6 +43,7 @@ void LoadCoreForKernel_C0913394(struct Unk_LoadCoreForKernel_C0913394_0 *arg0, s
 M2C_UNK *LoadCoreForKernel_C99DD47A(void);
 s32 LoadCoreForKernel_CD0F3BAC(void);
 s32 LoadCoreForKernel_D8779AC6(void);
+s32 LoadCoreForKernel_DA1B09AA(u32 arg0, u32 arg1);
 void LoadCoreForKernel_FA3101A4(void);
 M2C_UNK SysMemForKernel_636C953B(s32, s32);
 M2C_UNK SysMemForKernel_8F20C4C0(s32);
@@ -64,6 +65,7 @@ void func_00000AAC(void *arg0, void *arg1);
 s32 func_00000B4C(void);
 s32 func_00000EF4(s32, s32);
 s32 func_000014F8(s32, s32);
+s32 func_00001560(s32);
 s32 func_0000175C(s32, s32, s32, s32);
 s32 func_00001830(s32, s32, s32, s32);
 s32 func_00001B6C(s32, s32, s32);

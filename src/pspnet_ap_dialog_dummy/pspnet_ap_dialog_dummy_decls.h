@@ -104,11 +104,14 @@ struct SceNetApDialogDummyParam {
 
 extern s32 D_00000980;
 extern s32 D_00000990;
+extern s32 D_000009A0;
+extern s32 D_000009B0;
 
 u8 *func_000007AC(u8 *arg0, u8 *arg1);
 s32 module_start(void);
 s32 module_stop(void);
 int sceNetApDialogDummyTerm(void);
 M2C_UNK sceNetApctlDelHandler(s32);
+M2C_UNK sceNetApctl_lib_E11BAFAB(s32);
 
 #endif

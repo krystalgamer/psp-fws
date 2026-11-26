@@ -358,11 +358,7 @@ INCLUDE_ASM("nonmatchings/sysmem", func_00001630);
 INCLUDE_ASM("nonmatchings/sysmem", func_00001750);
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/sysmem", func_00001810);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 func_00001810(void *arg0) {
     u32 temp_v0;
     u32 var_a1;
@@ -2764,8 +2760,15 @@ s32 KDebugForKernel_B9C643C9(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/sysmem", KDebugForKernel_7D1C74F0);
+#endif
+
+#if FW_VERSION == 150
+s32 KDebugForKernel_7D1C74F0(s32 arg0) {
+    D_0000F868 = arg0;
+    return arg0;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/sysmem", syslib_D3744BE0);

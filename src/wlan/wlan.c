@@ -1577,11 +1577,7 @@ void func_0000806C(void *arg0) {
 INCLUDE_ASM("nonmatchings/wlan", func_000080E0);
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/wlan", func_000082D4);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_000082D4(s32 arg0, s32 arg1) {
     return -(func_000091D4(arg0 + 0xC, arg1) < 0);
 }

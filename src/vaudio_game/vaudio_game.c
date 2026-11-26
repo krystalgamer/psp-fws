@@ -15,7 +15,15 @@ s32 sceVaudioChRelease(void) {
 }
 
 #if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/vaudio_game", sceVaudioSetEffectType);
+s32 sceVaudioSetEffectType(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0x80000102;
+    if (arg0 == 0) {
+        var_v0 = arg1;
+    }
+    return var_v0;
+}
 #else
 s32 sceVaudioSetEffectType(s32 arg0, s32 arg1) {
     return (arg0 == 0) ? arg1 : 0x80000102;

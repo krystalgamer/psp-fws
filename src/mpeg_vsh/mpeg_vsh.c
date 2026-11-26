@@ -1,3 +1,4 @@
+/* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
@@ -313,11 +314,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001E8C);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegQueryStreamOffset);
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001FC8);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_00001FC8(s32 *arg0) {
     return (-(func_00006884(*arg0, (s32) &D_00009B98) == 0) & 0x7F9EFE02) - 0x7F9EFE02;
 }
@@ -487,7 +484,7 @@ s32 func_0000366C(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00003674);
 #else
 s32 func_00003674(void *arg0) {
@@ -830,11 +827,11 @@ u8 func_000056B8(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000056C0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_000056C0(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -865,8 +862,25 @@ s32 func_00005724(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_0000639C);
+#endif
+
+#if FW_VERSION == 150
+s32 func_0000639C(void) {
+    M2C_VFIELD(&D_00008A10, s32, 0x28) = 1;
+    M2C_VFIELD(&D_00008A10, s32, 0) = 0x95;
+    M2C_VFIELD(&D_00008A10, s32, 8) = 0xCC;
+    M2C_VFIELD(&D_00008A10, s32, 0x10) = -0x32;
+    M2C_VFIELD(&D_00008A10, s32, 0x14) = -0x68;
+    M2C_VFIELD(&D_00008A10, s32, 0x18) = 0x95;
+    M2C_VFIELD(&D_00008A10, s32, 0x1C) = 0x102;
+    M2C_VFIELD(&D_00008A10, s32, 0x24) = 0x10;
+    M2C_VFIELD(&D_00008A10, s32, 4) = 0;
+    M2C_VFIELD(&D_00008A10, s32, 0xC) = 0x95;
+    M2C_VFIELD(&D_00008A10, s32, 0x20) = 0;
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 271
@@ -1378,11 +1392,7 @@ s32 sceMpeg_988E9E12(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00005CC4);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_00005CC4(s32 arg0, s32 arg1, void *arg2, s32 *arg3) {
     s32 temp_v0;
     s32 var_v1;
@@ -1407,11 +1417,7 @@ s32 func_00005CC4(s32 arg0, s32 arg1, void *arg2, s32 *arg3) {
 }
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00005D1C);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_00005D1C(s32 arg0) {
     s32 var_v1;
 
@@ -1429,11 +1435,7 @@ s32 func_00005D1C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000079D8);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_000079D8(s32 arg0) {
     s32 var_v1;
 

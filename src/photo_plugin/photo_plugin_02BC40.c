@@ -676,11 +676,13 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001C96C);
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001C978);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001CA08);
+#endif
 
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001CB00);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0001CB00(void) {
     void *sp0;
     s32 temp_v0;

@@ -1723,8 +1723,31 @@ s32 func_00003ECC(void) {
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00003F00);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00005874);
+#endif
+
+#if FW_VERSION == 150
+s32 func_00005874(void) {
+    s32 temp_v0;
+    s32 var_s0;
+
+    temp_v0 = sceNetAdhocDownload_1AD5CC88();
+    var_s0 = temp_v0;
+    if (temp_v0 >= 0) {
+        if (D_0000EAD0 < 0) {
+            var_s0 = D_0000EAD0;
+        }
+        if (scePaf_35F25BA1(0, D_00007128) != 0) {
+            M2C_VFIELD(&D_00006EAC, s32, 0) = 4;
+            M2C_VFIELD(&D_00006EAC, s32, 4) = var_s0;
+            var_s0 = 0;
+        } else {
+            var_s0 = 0x80108604;
+        }
+    }
+    return var_s0;
+}
 #endif
 
 #if FW_VERSION == 100

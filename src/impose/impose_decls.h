@@ -12,6 +12,7 @@ extern s32 D_00012884;
 extern u32 *D_00018648;
 
 void func_00000000(u32 arg0);
+s32 func_00000028(s32 arg0);
 s32 func_000004C4(void);
 s32 func_0000070C(void);
 s32 func_000012B8(void);

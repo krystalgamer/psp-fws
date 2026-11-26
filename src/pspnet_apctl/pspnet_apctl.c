@@ -1,3 +1,4 @@
+/* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
@@ -5,7 +6,7 @@
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlInit);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlTerm);
 #else
 s32 sceNetApctlTerm(void) {
@@ -24,8 +25,21 @@ s32 sceNetApctlTerm(void) {
 }
 #endif
 
-#if FW_VERSION == 150 || FW_VERSION >= 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlAddHandler);
+#endif
+
+#if FW_VERSION == 150
+s32 sceNetApctlAddHandler(s32 arg0, s32 arg1) {
+    void *sp0;
+    s32 var_v0;
+
+    var_v0 = func_00000D60(arg0, arg1, &sp0, 0);
+    if (var_v0 >= 0) {
+        var_v0 = sp0;
+    }
+    return var_v0;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -135,8 +149,21 @@ void sceNetApctlGetState(void) {
 }
 #endif
 
-#if FW_VERSION == 150 || FW_VERSION >= 250
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctl_lib_7CFAB990);
+#endif
+
+#if FW_VERSION == 150
+s32 sceNetApctl_lib_7CFAB990(s32 arg0, s32 arg1) {
+    void *sp0;
+    s32 var_v0;
+
+    var_v0 = func_00000D60(arg0, arg1, &sp0, 1);
+    if (var_v0 >= 0) {
+        var_v0 = sp0;
+    }
+    return var_v0;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 250
@@ -265,11 +292,11 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_0000050C);
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000788);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000A30);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 func_00000A30(void *arg0, s32 arg1) {
     if (arg1 == 6) {
         if (M2C_FIELD(arg0, s32 *, 0x6C8) > 0) {

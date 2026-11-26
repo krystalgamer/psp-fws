@@ -32,47 +32,23 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_000330CC);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_00033114);
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002B7E4);
-#endif
-
-#if FW_VERSION == 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_0002B7E4(void *arg0) {
     func_000296D0(M2C_FIELD(arg0, s32 *, 0x98));
     return 0;
 }
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002B804);
-#endif
-
-#if FW_VERSION == 152
 s32 func_0002B804(void *arg0, s32 arg1, s32 arg2) {
     func_0002CFE4(M2C_FIELD(arg0, s32 *, 0x98), arg1, arg2);
     return 0;
 }
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002B824);
-#endif
-
-#if FW_VERSION == 152
 void func_0002B824(void *arg0, s32 arg1, s32 arg2) {
     func_0002B804(arg0, arg1, arg2);
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002B840);
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002BBCC);
-#endif
-
-#if FW_VERSION == 152
 s32 func_0002BBCC(s32 arg0) {
     void *temp_s0;
     void *temp_s0_2;
@@ -111,31 +87,12 @@ s32 func_0002BBCC(s32 arg0) {
     func_000250F0((s32) (temp_s0_2 + 0x10));
     return 0;
 }
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_0002BC78);
-#endif
-
-#if FW_VERSION == 152
 s32 func_0002BC78(void *arg0) {
     func_00030974(M2C_FIELD(arg0, s32 *, 0x94), M2C_FIELD(arg0, s32 *, 0x98));
     return 0;
 }
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_032F68", func_00028784);
-#endif
-
-#if FW_VERSION == 100
-s32 func_00028784(void *arg0) {
-    func_000296D0(M2C_FIELD(arg0, s32 *, 0x94));
-    return 0;
-}
-#endif
-
-#if FW_VERSION == 152
 s32 func_00028784(void *arg0) {
     func_000309A8(M2C_FIELD(arg0, s32 *, 0x94));
     return 0;
@@ -143,6 +100,11 @@ s32 func_00028784(void *arg0) {
 #endif
 
 #if FW_VERSION == 100
+s32 func_00028784(void *arg0) {
+    func_000296D0(M2C_FIELD(arg0, s32 *, 0x94));
+    return 0;
+}
+
 s32 func_000287A4(void *arg0, s32 arg1, s32 arg2) {
     func_00029D80(M2C_FIELD(arg0, s32 *, 0x94), arg1, arg2);
     return 0;

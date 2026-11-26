@@ -7,13 +7,16 @@
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceNetApDialogDummyTerm": "int sceNetApDialogDummyTerm(void);",
-  "sceNetApctlDelHandler": "M2C_UNK sceNetApctlDelHandler(s32);"
+  "sceNetApctlDelHandler": "M2C_UNK sceNetApctlDelHandler(s32);",
+  "sceNetApctl_lib_E11BAFAB": "M2C_UNK sceNetApctl_lib_E11BAFAB(s32);"
  },
  "types": {
   "000_dwarf": "/* devkit 0.6.0 DWARF (tools/dwarf_types.py) */\nstruct SceNetApDialogDummyParam;\nstruct SceNetApDialogDummyStateInfo;\nstruct pppoe;\nstruct static_ip;\nunion SceNetCnfAPCnfEntry;\nunion ip_opt;\n\nstruct static_ip {\n    char ip_address[16];\n    char netmask[16];\n    char default_route[16];\n} /* size 0x30 */;\n\nstruct pppoe {\n    char auth_name[128];\n    char auth_key[128];\n} /* size 0x100 */;\n\ntypedef short unsigned int SceUShort16;\n\nenum SceNetApctlState {\n    SCE_NET_APCTL_STATE_Detached = 0,\n    SCE_NET_APCTL_STATE_Disconnected = 1,\n    SCE_NET_APCTL_STATE_Scanning = 2,\n    SCE_NET_APCTL_STATE_Joinning = 3,\n    SCE_NET_APCTL_STATE_IPObtaining = 4,\n    SCE_NET_APCTL_STATE_IPObtained = 5,\n} /* size 0x4 */;\n\nenum SceNetApDialogDummyState {\n    SceNetApDialogDummyState_Initialized = 0,\n    SceNetApDialogDummyState_Connecting = 1,\n    SceNetApDialogDummyState_Connected = 2,\n    SceNetApDialogDummyState_Disconnecting = 3,\n    SceNetApDialogDummyState_Disconnected = 4,\n} /* size 0x4 */;\n\nenum SceNetApctlEvent {\n    SCE_NET_APCTL_EVENT_DETECT_IF = 0,\n    SCE_NET_APCTL_EVENT_CONNECT_REQ = 1,\n    SCE_NET_APCTL_EVENT_SCAN_REQ = 2,\n    SCE_NET_APCTL_EVENT_SCAN_COMPLETED = 3,\n    SCE_NET_APCTL_EVENT_ESTABLISH = 4,\n    SCE_NET_APCTL_EVENT_GET_IP = 5,\n    SCE_NET_APCTL_EVENT_DISCONNECT_REQ = 6,\n    SCE_NET_APCTL_EVENT_ERROR = 7,\n} /* size 0x4 */;\n\ntypedef char SceChar8;\n\ntypedef unsigned int SceUInt32;\n\nunion ip_opt {\n    struct static_ip static_ip;\n    struct pppoe pppoe;\n} /* size 0x100 */;\n\nstruct SceNetApDialogDummyStateInfo {\n    enum SceNetApDialogDummyState state;\n    int error_code;\n} /* size 0x8 */;\n\nunion SceNetCnfAPCnfEntry {\n    SceChar8 apcnf_name[64];\n    SceChar8 ssid[33];\n    SceUInt32 auth_proto;\n    SceChar8 wep_key[13];\n    SceUInt32 order_of_connection;\n    SceUInt32 how_to_set_ip;\n    SceChar8 ip_address[16];\n    SceChar8 netmask[16];\n    SceChar8 default_route[16];\n    SceUInt32 dns_flag;\n    SceChar8 primary_dns[16];\n    SceChar8 secondary_dns[16];\n    SceChar8 dhcp_hostname[128];\n    SceChar8 auth_name[128];\n    SceChar8 auth_key[128];\n    SceUInt32 http_proxy_flag;\n    SceChar8 http_proxy_server[128];\n    SceUInt32 http_proxy_port;\n} /* size 0x80 */;\n\nstruct SceNetApDialogDummyParam {\n    char ssid[33];\n    unsigned int auth_proto;\n    char wep_key[13];\n    unsigned int how_to_set_ip;\n    union ip_opt ip_opt;\n    unsigned int dns_flag;\n    char primary_dns[16];\n    char secondary_dns[16];\n    unsigned int http_proxy_flag;\n    char http_proxy_server[128];\n    SceUShort16 http_proxy_port;\n} /* size 0x1E8 */;"
  },
  "vars": {
   "D_00000980": "extern s32 D_00000980;",
-  "D_00000990": "extern s32 D_00000990;"
+  "D_00000990": "extern s32 D_00000990;",
+  "D_000009A0": "extern s32 D_000009A0;",
+  "D_000009B0": "extern s32 D_000009B0;"
  }
 }

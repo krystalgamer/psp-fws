@@ -61,6 +61,7 @@
   "func_000019A0": "s32 func_000019A0(void);",
   "func_000019B0": "s32 func_000019B0(void);",
   "func_00001A24": "u32 func_00001A24(s32 arg0);",
+  "func_00001C08": "s32 func_00001C08(void);",
   "func_00001C24": "s32 func_00001C24(void);",
   "func_00001C34": "void func_00001C34(s32 arg0);",
   "func_00001C40": "s32 func_00001C40(void);",

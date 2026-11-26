@@ -64,13 +64,7 @@ INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_4D6E7305);
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_750E2507);
 
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_494D6D2B);
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_55242A8B);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 282
 void InterruptManagerForKernel_55242A8B(void) {
     s32 temp_a0;
 
@@ -79,9 +73,7 @@ void InterruptManagerForKernel_55242A8B(void) {
     D_00003AB0 = (s32) func_00002FE4;
     sceKernelCpuResumeIntr(temp_a0);
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_272766F8);
 
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_B386A459);

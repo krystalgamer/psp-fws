@@ -176,7 +176,7 @@ s32 func_000013F0(void) {
 
 INCLUDE_ASM("nonmatchings/sircs", func_00001428);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/sircs", func_000014DC);
 #else
 s32 func_000014DC(void) {

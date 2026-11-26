@@ -1538,8 +1538,20 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010FDC);
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010FEC);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000A230);
+#endif
+
+#if FW_VERSION == 150
+void func_0000A230(void *arg0) {
+    s32 var_v0;
+
+    var_v0 = func_00015CEC();
+    if (var_v0 < 0) {
+        var_v0 = 1;
+    }
+    M2C_FIELD(arg0, s32 *, 0x20) = var_v0;
+}
 #endif
 
 #if FW_VERSION == 271

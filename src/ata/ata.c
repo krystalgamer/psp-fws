@@ -379,20 +379,20 @@ void sceAta_driver_7BBA095C(s32 arg0, M2C_UNK arg1) {
 }
 #endif
 
-#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 271) || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION == 152 || (FW_VERSION >= 250 && FW_VERSION < 271) || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/ata", module_start);
+#endif
+
+#if FW_VERSION == 150 || FW_VERSION == 271
+s32 module_start(void) {
+    func_00003C58();
+    return func_00000000(1) != 0;
+}
 #endif
 
 #if FW_VERSION >= 300
 s32 module_start(void) {
     func_00003FB0();
-    return func_00000000(1) != 0;
-}
-#endif
-
-#if FW_VERSION == 271
-s32 module_start(void) {
-    func_00003C58();
     return func_00000000(1) != 0;
 }
 #endif

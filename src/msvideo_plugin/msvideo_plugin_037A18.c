@@ -1,3 +1,4 @@
+/* cflags[150]: -Os */
 /* cflags[100]: -Os */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
@@ -64,11 +65,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_00038274);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_000383A8);
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002B638);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0002B638(void **arg0) {
     s32 var_v0;
     void *temp_v0;
@@ -146,11 +143,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0003884C);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_00038890);
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002BAE0);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION == 152
+#if FW_VERSION < 201
 s32 func_0002BAE0(void *arg0, s32 arg1) {
     s32 var_v0;
     void *temp_a0;
@@ -166,9 +159,7 @@ s32 func_0002BAE0(void *arg0, s32 arg1) {
     }
     return var_v0;
 }
-#endif
 
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002BB0C);
 #else
 s32 func_00038934(struct Unk_func_00038934_0 *arg0, s32 arg1) {
@@ -196,11 +187,11 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_00038A08);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_00038A70);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002C154);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0002C154(s32 *arg0) {
     s32 var_v1;
 
@@ -214,11 +205,11 @@ s32 func_0002C154(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002C18C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0002C18C(s32 *arg0) {
     s32 var_v1;
 
