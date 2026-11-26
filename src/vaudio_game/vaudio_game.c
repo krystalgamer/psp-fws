@@ -34,9 +34,20 @@ s32 sceVaudio_driver_DCC18F25(void) {
     return 0;
 }
 
-#if FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/vaudio_game", sceVaudioGetEffectString);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 *sceVaudioGetEffectString(s32 arg0) {
+    if (arg0 == 0) {
+        return "THRU";
+    }
+    return NULL;
+}
+#endif
+
+#if FW_VERSION >= 201
 M2C_UNK *sceVaudioGetEffectString(s32 arg0) {
     if (arg0 == 0) {
         return "THRU";

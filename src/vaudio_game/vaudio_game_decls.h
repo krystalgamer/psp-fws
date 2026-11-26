@@ -7,11 +7,11 @@
 
 s32 sceVaudioChRelease(void);
 s32 sceVaudioChReserve(s32 arg0, s32 arg1, s32 arg2);
+s32 sceVaudioEnd(void);
+s32 *sceVaudioGetEffectString(s32 arg0);
+s32 sceVaudioInit(void);
 s32 sceVaudioOutputBlocking(s32 arg0, void *arg1);
 s32 sceVaudioSetEffectType(s32 arg0, s32 arg1);
-s32 sceVaudioInit(void);
-s32 sceVaudioEnd(void);
-M2C_UNK *sceVaudioGetEffectString(s32 arg0);
 s32 sceVaudio_driver_DCC18F25(void);
 
 #endif
