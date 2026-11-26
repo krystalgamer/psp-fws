@@ -1,3 +1,4 @@
+/* cflags[152]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "usbstorboot_decls.h"
@@ -100,8 +101,22 @@ INCLUDE_ASM("nonmatchings/usbstorboot", module_stop);
 INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootGetDownloadSize);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 352
+#if FW_VERSION >= 250 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/usbstorboot", module_start);
+#endif
+
+#if FW_VERSION == 152
+s32 module_start(void) {
+    s32 var_v1;
+
+    memset(&D_00001F20, 0, 0x100);
+    var_v1 = 0;
+    if (sceUsbstor_internal_489E6BF1(&D_00001F00) < 0) {
+        Kprintf("%serror - cannot register handler\n", &D_00001B60);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -118,11 +133,11 @@ s32 module_start(void) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 352
+#if FW_VERSION >= 250 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/usbstorboot", module_stop);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 250
 s32 module_stop(void) {
     s32 var_v1;
 
