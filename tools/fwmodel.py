@@ -53,12 +53,18 @@ def parse(text, versions):
     out = []
     lines = text.splitlines(keepends=True)
     i, buf = 0, []
+    braces = 0  # brace depth of buf: preprocessor lines inside a function body are body text
 
     def flush(vs):
         if buf:
             _items("".join(buf), vs, out)
             buf.clear()
     while i < len(lines):
+        if braces > 0:
+            buf.append(lines[i])
+            braces += lines[i].count("{") - lines[i].count("}")
+            i += 1
+            continue
         m = FWCOND.match(lines[i].rstrip("\n"))
         if m and m[1] == "if":
             flush(allv)
@@ -111,6 +117,7 @@ def parse(text, versions):
                 out.append(Entry(allv, "other", None, "".join(blk)))
             continue
         buf.append(lines[i])
+        braces += lines[i].count("{") - lines[i].count("}")
         i += 1
     flush(allv)
     return [e for e in out if e.vers]
