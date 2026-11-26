@@ -2,8 +2,8 @@
  "funcs": {
   "Kprintf": "M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);",
   "SysMemForKernel_7B749390": "s32 SysMemForKernel_7B749390(s32, s32);",
-  "sceKernelDeleteHeap": "M2C_UNK sceKernelDeleteHeap(s32);",
   "func_00000250": "s32 func_00000250(s32 arg0);",
+  "func_000003E8": "void func_000003E8(void *arg0);",
   "func_00000440": "s32 func_00000440(struct Unk_func_00000440_0 *arg0);",
   "func_00000494": "s32 func_00000494(void *arg0, s32 arg1);",
   "func_000004E4": "s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1);",
@@ -14,6 +14,7 @@
   "func_000007FC": "s32 func_000007FC(s32, s32);",
   "func_00000D28": "s32 func_00000D28(void);",
   "func_00000E6C": "s32 func_00000E6C(void);",
+  "func_00000F9C": "s32 func_00000F9C(s32);",
   "func_00001A4C": "s32 func_00001A4C(void *arg0);",
   "func_00002328": "void func_00002328(void);",
   "func_00002364": "void func_00002364(struct Unk_func_00002364_0 *arg0);",
@@ -57,9 +58,11 @@
   "func_00007FF0": "s32 func_00007FF0(void);",
   "sceIoDevctl": "s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);",
   "sceIsofsGetFileSystem": "s32 sceIsofsGetFileSystem(s32 arg0);",
+  "sceKernelAssert": "M2C_UNK sceKernelAssert(s32, M2C_UNK);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelDeleteFpl": "s32 sceKernelDeleteFpl(s32);",
+  "sceKernelDeleteHeap": "M2C_UNK sceKernelDeleteHeap(s32);",
   "sceKernelFreeFpl": "s32 sceKernelFreeFpl(s32, void *);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
@@ -67,10 +70,10 @@
   "sceUmd9660_driver_44EF600C": "s32 sceUmd9660_driver_44EF600C();",
   "sceUmd9660_driver_C7CD9CE8": "s32 sceUmd9660_driver_C7CD9CE8();",
   "sceUmd9660_driver_DB1AC979": "M2C_UNK sceUmd9660_driver_DB1AC979(s32);",
-  "sceUmdManUnRegisterInsertEjectUMDCallBack": "M2C_UNK sceUmdManUnRegisterInsertEjectUMDCallBack(M2C_UNK);",
   "sceUmdManRegisterInsertEjectUMDCallBack": "s32 sceUmdManRegisterInsertEjectUMDCallBack(M2C_UNK, M2C_UNK *, s32);",
-  "sceUmdUnRegisterInsertEjectUMDCallBack": "M2C_UNK sceUmdUnRegisterInsertEjectUMDCallBack(s32);",
-  "sceUmdRegisterInsertEjectUMDCallBack": "s32 sceUmdRegisterInsertEjectUMDCallBack(M2C_UNK *, s32);"
+  "sceUmdManUnRegisterInsertEjectUMDCallBack": "M2C_UNK sceUmdManUnRegisterInsertEjectUMDCallBack(M2C_UNK);",
+  "sceUmdRegisterInsertEjectUMDCallBack": "s32 sceUmdRegisterInsertEjectUMDCallBack(M2C_UNK *, s32);",
+  "sceUmdUnRegisterInsertEjectUMDCallBack": "M2C_UNK sceUmdUnRegisterInsertEjectUMDCallBack(s32);"
  },
  "types": {
   "D_00007608_s": "struct D_00007608_s {\n    u8 pad0[0x1C];\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};",
@@ -83,7 +86,8 @@
  "vars": {
   "D_00005A00": "extern s32 D_00005A00;",
   "D_00005A04": "extern s32 D_00005A04;",
-  "D_00005F30": "extern M2C_UNK D_00005F30;",
+  "D_00005F30": "extern s32 D_00005F30;",
+  "D_00005F38": "extern s32 D_00005F38;",
   "D_00005F98": "extern s32 D_00005F98;",
   "D_00005FE0": "extern s32 D_00005FE0;",
   "D_00006200": "extern s32 D_00006200;",

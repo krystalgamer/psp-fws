@@ -43,7 +43,8 @@ struct Unk_func_00003BB4_temp_v0 {
 
 extern s32 D_00005A00;
 extern s32 D_00005A04;
-extern M2C_UNK D_00005F30;
+extern s32 D_00005F30;
+extern s32 D_00005F38;
 extern s32 D_00005F98;
 extern s32 D_00005FE0;
 extern s32 D_00006200;
@@ -76,8 +77,8 @@ extern M2C_UNK func_000073FC;
 
 M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);
 s32 SysMemForKernel_7B749390(s32, s32);
-M2C_UNK sceKernelDeleteHeap(s32);
 s32 func_00000250(s32 arg0);
+void func_000003E8(void *arg0);
 s32 func_00000440(struct Unk_func_00000440_0 *arg0);
 s32 func_00000494(void *arg0, s32 arg1);
 s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1);
@@ -88,6 +89,7 @@ s32 func_00000790(s32);
 s32 func_000007FC(s32, s32);
 s32 func_00000D28(void);
 s32 func_00000E6C(void);
+s32 func_00000F9C(s32);
 s32 func_00001A4C(void *arg0);
 void func_00002328(void);
 void func_00002364(struct Unk_func_00002364_0 *arg0);
@@ -131,9 +133,11 @@ s32 func_00007FC0(s32 arg0);
 s32 func_00007FF0(void);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
 s32 sceIsofsGetFileSystem(s32 arg0);
+M2C_UNK sceKernelAssert(s32, M2C_UNK);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelDeleteFpl(s32);
+M2C_UNK sceKernelDeleteHeap(s32);
 s32 sceKernelFreeFpl(s32, void *);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
@@ -141,9 +145,9 @@ u32 sceUmd9660_driver_2C6C3F4C();
 s32 sceUmd9660_driver_44EF600C();
 s32 sceUmd9660_driver_C7CD9CE8();
 M2C_UNK sceUmd9660_driver_DB1AC979(s32);
-M2C_UNK sceUmdManUnRegisterInsertEjectUMDCallBack(M2C_UNK);
 s32 sceUmdManRegisterInsertEjectUMDCallBack(M2C_UNK, M2C_UNK *, s32);
-M2C_UNK sceUmdUnRegisterInsertEjectUMDCallBack(s32);
+M2C_UNK sceUmdManUnRegisterInsertEjectUMDCallBack(M2C_UNK);
 s32 sceUmdRegisterInsertEjectUMDCallBack(M2C_UNK *, s32);
+M2C_UNK sceUmdUnRegisterInsertEjectUMDCallBack(s32);
 
 #endif
