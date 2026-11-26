@@ -45,7 +45,19 @@ s32 module_start(void) {
     return var_v1;
 }
 
-INCLUDE_ASM("nonmatchings/chnnlsv", module_stop);
+s32 module_stop(SceSize args, void *argp) {
+    u32 timeout = 1000000;
+
+    if (sceKernelWaitSema(D_00002AD4, 1, &timeout) != 0) {
+        return 1;
+    }
+    sceKernelDeleteSema(D_00002AD4);
+    if (sceKernelWaitSema(D_00002AD8, 1, &timeout) != 0) {
+        return 1;
+    }
+    sceKernelDeleteSema(D_00002AD8);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/chnnlsv", sceSdSetIndex);
 
