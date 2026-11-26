@@ -17,7 +17,7 @@ sceKernelSignalSema = 0x0000155C; // type:func
 sceKernelWaitSema = 0x00001564; // type:func
 sceKernelCreateSema = 0x0000156C; // type:func
 sceIdStorageLookup = 0x00001574; // type:func
-semaphore_4C537C72 = 0x0000157C; // type:func
+sceUtilsBufferCopyWithRange = 0x0000157C; // type:func
 // shared names (tools/add_version.py) begin
 D_00000DC0 = 0x000017C0; // rom:0x1880
 g_openPsidSema = 0x00001804;

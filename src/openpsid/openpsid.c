@@ -37,19 +37,18 @@ INCLUDE_ASM("nonmatchings/openpsid", func_00000000_v352);
 INCLUDE_ASM("nonmatchings/openpsid", func_0000004C);
 #endif
 
-#if FW_VERSION != 282
-INCLUDE_ASM("nonmatchings/openpsid", func_00000000);
-#else
 static int func_00000000(u8 *cert) {
+    int ret;
+
     if (sceIdStorageLookup(0x101, 0x1D0, cert, 0x30) < 0 && sceIdStorageLookup(0x121, 0x1D0, cert, 0x30) < 0) {
-        return 0xC0520002;
+        ret = 0xC0520002;
+    } else if (sceIdStorageLookup(0x102, 0, cert + 0x30, 0x88) < 0 && sceIdStorageLookup(0x122, 0, cert + 0x30, 0x88) < 0) {
+        ret = 0xC0520002;
+    } else {
+        ret = (sceUtilsBufferCopyWithRange(NULL, 0, cert, 0xB8, KIRK_CMD_CERTVRY) == 0) ? 0 : 0xC0520001;
     }
-    if (sceIdStorageLookup(0x102, 0, cert + 0x30, 0x88) < 0 && sceIdStorageLookup(0x122, 0, cert + 0x30, 0x88) < 0) {
-        return 0xC0520002;
-    }
-    return (sceUtilsBufferCopyWithRange(NULL, 0, cert, 0xB8, KIRK_CMD_CERTVRY) == 0) ? 0 : 0xC0520001;
+    return ret;
 }
-#endif
 
 #if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", func_000000DC);
