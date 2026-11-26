@@ -5,9 +5,42 @@
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/systimer", sceSTimerAlloc);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 271
+s32 func_000000E0(s32 arg0, SceSTimerInfo *timer, s32 arg2) {
+    u32 data;
+    u32 intrCount;
+    u32 cycle;
+
+    if (timer->cb == NULL) {
+        return -1;
+    }
+    data = timer->regadr->timerData;
+    cycle = __builtin_allegrex_ext(data, 0, 22);
+    intrCount = data >> 24;
+    if (timer->prev_tmcy != 0) {
+        intrCount--;
+        timer->totalcount += timer->prev_tmcy;
+    }
+    timer->totalcount += cycle * (intrCount - timer->prev_icnt);
+    timer->prev_tmcy = 0;
+    timer->prev_icnt = 0;
+    if (timer->cb(timer->timid, timer->totalcount + _sceSTimerGetCount(timer), (s32)timer->common, arg2) != -1) {
+        goto stop;
+    }
+    return -1;
+stop:
+    _sceSTimerStopCount(timer);
+    return -2;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/systimer", func_000000E0);
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/systimer", sceSTimerSetHandler);
 
 void _sceSTimerStopCount(SceSTimerInfo *timer) {
