@@ -65,9 +65,34 @@ void func_00000128(SceSTimerInfo *timer) {
     timer->prev_tmcy = 0;
 }
 
-INCLUDE_ASM("nonmatchings/systimer", func_00000160);
+s32 suspendSTimer(void) {
+    s32 i;
 
-INCLUDE_ASM("nonmatchings/systimer", func_000001D8);
+    for (i = 0; i < 4; i++) {
+        SceHwTimer *reg = D_00000B20[i].regadr;
+        STimerRegSave[i].Control = reg->timerData;
+        STimerRegSave[i].N = reg->prsclNumerator;
+        STimerRegSave[i].M = reg->prsclDenominator;
+        sceKernelDisableIntr(D_00000B20[i].intrcode);
+    }
+    return 0;
+}
+
+s32 resumeSTimer(void) {
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        u32 control;
+
+        D_00000B20[i].regadr->prsclDenominator = STimerRegSave[i].M;
+        D_00000B20[i].regadr->prsclNumerator = STimerRegSave[i].N;
+        control = STimerRegSave[i].Control;
+        D_00000B20[i].regadr->timerData;
+        D_00000B20[i].regadr->timerData = control & 0x7FFFFFFF;
+        sceKernelEnableIntr(D_00000B20[i].intrcode);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/systimer", sceSTimerAlloc);
 #endif
