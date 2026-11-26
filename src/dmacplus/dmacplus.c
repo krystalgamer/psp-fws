@@ -14,11 +14,11 @@ INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAcquireIntr);
 
 INCLUDE_ASM("nonmatchings/dmacplus", func_00000288);
 
-#if (FW_VERSION >= 150 && FW_VERSION < 282) || FW_VERSION >= 300
+#if (FW_VERSION >= 152 && FW_VERSION < 282) || FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dmacplus", module_start);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 module_start(void) {
     sceSysregDmacplusBusClockEnable();
     D_00002F00 = 0;
@@ -47,11 +47,11 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusInit);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 sceDmacplusInit(void) {
     sceSysregDmacplusBusClockEnable();
     D_00002F00 = 0;
@@ -539,11 +539,11 @@ INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusSc128TryMemcpy);
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusSc128LLI);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusSc128Init);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 sceDmacplusSc128Init(void) {
     M2C_UNK *temp_v0;
     s32 temp_s2;
