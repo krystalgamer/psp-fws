@@ -276,9 +276,22 @@ s32 sceHprmReset(void) {
     sceKernelSetEventFlag(D_00002078, 8U);
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/hpremote", sceHprmGetInternalState);
+#endif
 
+#if FW_VERSION == 100
+s32 sceHprmGetInternalState(s32 **arg0) {
+    if (arg0 != NULL) {
+        *arg0 = (s32 *) &D_00002080;
+    }
+    return D_00002080.unk120;
+}
+#endif
+
+#if FW_VERSION < 282
 s32 sceHprmGetIdleCancelKey(s32 *arg0) {
     if (arg0 != NULL) {
         *arg0 = D_0000213C;
