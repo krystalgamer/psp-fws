@@ -604,7 +604,17 @@ s32 func_00000420(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_00000474);
+s32 func_00000474(void) {
+    s32 temp_v0;
+
+    temp_v0 = sceKernelReleaseLibrary();
+    if (temp_v0 >= 0) {
+
+    } else {
+        Kprintf(&D_00006DA0, "ReleaseLibrary", temp_v0);
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_000004C8);
 
