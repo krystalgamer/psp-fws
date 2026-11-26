@@ -84,19 +84,6 @@ extern M2C_UNK D_0000967C;
 extern s32 D_00009694;
 
 M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *);
-void sceKernelLinkLibraryEntriesForUser(s32 arg0, s32 arg1);
-void sceKernelLinkLibraryEntries(s32 arg0, s32 arg1);
-void sceKernelRegisterLibraryForUser(s32 arg0);
-void sceKernelDeleteModule(struct Unk_LoadCoreForKernel_6B2371C2_0 *arg0);
-s32 sceKernelModuleCount(void);
-void sceKernelRegisterLibrary(s32 arg0);
-void sceKernelFreeModule(struct Unk_LoadCoreForKernel_6B2371C2_0 *arg0);
-M2C_UNK *sceKernelQueryLoadCoreCB(void);
-s32 sceKernelFindModuleByName(s32 arg0);
-s32 sceKernelUnLinkLibraryEntries(u32 arg0, u32 arg1);
-M2C_UNK sceKernelRenameUID(s32, void *);
-M2C_UNK sceKernelDeleteUID(s32);
-M2C_UNK sceKernelCallUIDObjCommonFunction();
 s32 func_00000340(void);
 void func_00000674(s32 arg0, s32 arg1);
 void func_00000690(s32 arg0, s32 arg1);
@@ -123,5 +110,18 @@ s32 func_00005F98(s32, s32, s32, s32, s32, s32);
 s32 func_000061CC();
 M2C_UNK func_000061F8(s32);
 s32 func_00006258(s32 arg0);
+M2C_UNK sceKernelCallUIDObjCommonFunction();
+void sceKernelDeleteModule(struct Unk_LoadCoreForKernel_6B2371C2_0 *arg0);
+M2C_UNK sceKernelDeleteUID(s32);
+s32 sceKernelFindModuleByName(s32 arg0);
+void sceKernelFreeModule(struct Unk_LoadCoreForKernel_6B2371C2_0 *arg0);
+void sceKernelLinkLibraryEntries(s32 arg0, s32 arg1);
+void sceKernelLinkLibraryEntriesForUser(s32 arg0, s32 arg1);
+s32 sceKernelModuleCount(void);
+M2C_UNK *sceKernelQueryLoadCoreCB(void);
+void sceKernelRegisterLibrary(s32 arg0);
+void sceKernelRegisterLibraryForUser(s32 arg0);
+M2C_UNK sceKernelRenameUID(s32, void *);
+s32 sceKernelUnLinkLibraryEntries(u32 arg0, u32 arg1);
 
 #endif
