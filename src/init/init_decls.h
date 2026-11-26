@@ -9,16 +9,16 @@ extern s32 D_00002620;
 extern s32 D_00002644;
 
 s32 InitForKernel_33D30F49(void);
-s32 sceKernelApplicationType(void);
-s32 sceKernelInitApitype(void);
-s32 sceKernelInitFileName(void);
-s32 sceKernelStartIntrLogging(void);
 s32 InitForKernel_FD0F25AD(void);
-s32 sceKernelFillFreeBlock(M2C_UNK, M2C_UNK);
 s32 func_00001208(void);
 s32 func_00001284(void);
 M2C_UNK memset(M2C_UNK, M2C_UNK, M2C_UNK);
 s32 module_reboot_before(void);
+s32 sceKernelApplicationType(void);
+s32 sceKernelFillFreeBlock(M2C_UNK, M2C_UNK);
+s32 sceKernelInitApitype(void);
+s32 sceKernelInitFileName(void);
+s32 sceKernelStartIntrLogging(void);
 s32 sceKernelVolatileMemUnlock(s32);
 
 #endif
