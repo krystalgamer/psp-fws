@@ -28,6 +28,7 @@
   "sceCtrl_driver_A88E8D22": "s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
   "sceCtrl_driver_AF5960F3": "s32 sceCtrl_driver_AF5960F3(void);",
   "sceCtrl_driver_B7CEAED4": "s32 sceCtrl_driver_B7CEAED4(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3);",
+  "sceCtrl_driver_CC70B61E": "s32 sceCtrl_driver_CC70B61E(void);",
   "sceCtrl_driver_E03956E9": "M2C_UNK sceCtrl_driver_E03956E9();",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);"
  },
@@ -40,6 +41,7 @@
   "D_00001D7F": "extern s8 D_00001D7F;",
   "D_00001D88": "extern s32 D_00001D88;",
   "D_00001D9F": "extern s8 D_00001D9F;",
+  "D_00001DCE": "extern s8 D_00001DCE;",
   "D_00002354": "extern s32 D_00002354;",
   "D_00002358": "extern s32 D_00002358;",
   "D_00002618": "extern s32 D_00002618;",

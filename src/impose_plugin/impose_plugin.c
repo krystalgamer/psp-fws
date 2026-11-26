@@ -1,6 +1,10 @@
 #include "common.h"
 #include "impose_plugin_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose_plugin", func_00000000);
+#endif
+
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000024);
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000000AC);
@@ -12,27 +16,65 @@ s32 module_stop(void) {
     func_00000DE8();
     return 0;
 }
-
-INCLUDE_ASM("nonmatchings/impose_plugin", func_0000015C);
-
-INCLUDE_ASM("nonmatchings/impose_plugin", func_00000180);
 #else
 s32 module_stop(void) {
     func_000010D0();
     return 0;
 }
+#endif
 
+#if FW_VERSION < 282 || FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose_plugin", func_0000015C);
+#else
 void func_0000015C(struct Unk_func_0000015C_0 *arg0) {
     arg0->unk1FD = 0;
     arg0->unk1FE = 0;
     scePaf_86B41BA3();
 }
+#endif
 
+#if FW_VERSION < 282 || FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose_plugin", func_00000180);
+#else
 void func_00000180(struct Unk_func_00000180_0 *arg0) {
     arg0->unk1FD = 0;
     arg0->unk1FE = 0;
     scePaf_86B41BA3();
 }
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001610);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001614);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_0000161C);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001628);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001634);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001644);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001654);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001674);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001678);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_000016E0);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_000016E4);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_000016EC);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001364);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_000016FC);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001370);
+
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001374);
 #endif
 
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001378);
@@ -43,6 +85,10 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_0000138C);
 
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001398);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001734);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013A4);
 #endif
@@ -51,13 +97,21 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013B4);
 
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013C0);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001758);
+#endif
+
 #if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_0000168C);
+#endif
 
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013A4);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013C8);
+#endif
 
 #if FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013DC);
@@ -71,6 +125,10 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001414);
 
 #if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000016F4);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_000017C0);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -107,6 +165,10 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_000003CC_v330);
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000003CC);
 #endif
 
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/impose_plugin", func_00000420);
+#endif
+
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000003BC_v152);
 #endif
@@ -117,8 +179,6 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_000003BC_v150);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000003BC);
-#else
-INCLUDE_ASM("nonmatchings/impose_plugin", func_00000420);
 #endif
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000006B8);
@@ -149,7 +209,30 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_00000924);
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000964);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 350
+void func_00000964(void) {
+    s32 temp_s1;
+    void *temp_v0;
+
+    temp_s1 = sceVshBridge_639C3CB3(0x40000000);
+    temp_v0 = scePaf_DCE3D225(scePaf_88784487(&D_00001734), 1);
+    if (temp_s1 == 0) {
+        if (temp_v0 != NULL) {
+            M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x10C)(0x1F, 1);
+        }
+        scePaf_2F94EF32(0x40D, 0, 0);
+        scePaf_1941BB4E();
+    } else {
+        scePaf_FA7E6DA3();
+        scePaf_2F94EF32(0x40D, temp_s1, temp_s1);
+        if (temp_v0 != NULL) {
+            M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x10C)(0x1F, 0);
+        }
+    }
+}
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 350
 void func_00000964(void) {
     s32 temp_s1;
     void *temp_v0;
@@ -172,15 +255,35 @@ void func_00000964(void) {
 }
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000BAC);
+#endif
 
+#if FW_VERSION == 350
+void func_00000BAC(s32 arg0) {
+    scePaf_648CA0C5();
+    scePaf_B94FDC08();
+    scePaf_6A82A8C6(arg0, 0x64);
+    scePaf_8B38372A(D_0000189C, &D_000016F4);
+    vsh_6D4C06F7(1);
+}
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000BE4);
 #endif
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/impose_plugin", func_00000A2C);
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose_plugin", func_00000B20);
 
+INCLUDE_ASM("nonmatchings/impose_plugin", func_00000D1C);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
+INCLUDE_ASM("nonmatchings/impose_plugin", func_00000A2C);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000B5C);
 #endif
 
@@ -208,3 +311,7 @@ void func_0000104C(void) {
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00001054);
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00001078);
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose_plugin", func_000010D0);
+#endif

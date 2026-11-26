@@ -156,43 +156,123 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003CE74);
 INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003D034);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003D174);
+#endif
 
+#if FW_VERSION == 350
+void func_0003D310(void) {
+    scePaf_77283661();
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D310(void) {
     scePaf_E1242646();
 }
+#endif
 
+#if FW_VERSION == 350
+void func_0003D32C(void) {
+    scePaf_EF0B4C08();
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D32C(void) {
     scePaf_0F3527DD();
 }
+#endif
 
+#if FW_VERSION == 350
+void func_0003D348(void) {
+    scePaf_77283661();
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D348(void) {
     scePaf_E1242646();
 }
+#endif
 
+#if FW_VERSION == 350
+void func_0003D364(void) {
+    scePaf_EF0B4C08();
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D364(void) {
     scePaf_0F3527DD();
 }
+#endif
 
+#if FW_VERSION == 350
+void func_0003D380(void) {
+    scePaf_77283661();
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D380(void) {
     scePaf_E1242646();
 }
+#endif
 
+#if FW_VERSION == 350
+void func_0003D39C(void) {
+    scePaf_EF0B4C08();
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D39C(void) {
     scePaf_0F3527DD();
 }
+#endif
 
+#if FW_VERSION == 350
+void func_0003D3B8(void) {
+    scePaf_77283661();
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D3B8(void) {
     scePaf_E1242646();
 }
+#endif
 
+#if FW_VERSION == 350
+void func_0003D3D4(void) {
+    scePaf_EF0B4C08();
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D3D4(void) {
     scePaf_0F3527DD();
 }
+#endif
 
+#if FW_VERSION == 350
+void func_0003D3F0(void) {
+    scePaf_77283661();
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D3F0(void) {
     scePaf_E1242646();
 }
+#endif
 
+#if FW_VERSION == 350
+void func_0003D40C(void) {
+    scePaf_EF0B4C08();
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D40C(void) {
     scePaf_0F3527DD();
 }

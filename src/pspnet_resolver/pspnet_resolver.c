@@ -248,7 +248,43 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000DE8);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000007E0);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001E2C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001E30);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001E48);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001E58);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001E68);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001E7C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001E90);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001EA4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001EB4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001EC4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001EFC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001F04);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001F10);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001F18);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001F34);
+
+INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001F38);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000908);
 #endif
 

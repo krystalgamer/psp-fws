@@ -10,7 +10,37 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00000124);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000001B4);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_0000026C);
-#else
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_0000987C);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009880);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009898);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_000098AC);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_000098C0);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_000098D4);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_000098E0);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_000098F0);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_000098F8);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009AD8);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009AF4);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009AF8);
+
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009B0C);
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegFlushStream);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegFlushAllStream);

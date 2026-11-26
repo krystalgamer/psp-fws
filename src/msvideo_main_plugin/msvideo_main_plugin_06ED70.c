@@ -58,11 +58,13 @@ void func_0006EFA0(struct Unk_func_0006EF80_0 *arg0) {
 
 #if FW_VERSION >= 310 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06ED70", func_0006EFC8);
+#endif
 
+#if FW_VERSION >= 310 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_06ED70", D_000B6228);
 #endif
 
-#if FW_VERSION >= 330 && FW_VERSION < 352
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_06ED70", D_000B7CE0);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_06ED70", D_000B7CE4);

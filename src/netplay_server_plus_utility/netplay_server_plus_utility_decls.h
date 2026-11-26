@@ -74,6 +74,7 @@ struct Unk_func_000036C4_0 {
 
 extern s32 D_00004890;
 extern s8 D_00004894;
+extern s32 D_000049C0;
 
 M2C_UNK func_0000015C();
 s32 func_000001FC(void);
@@ -81,6 +82,7 @@ void func_00000470(void);
 M2C_UNK func_000004A0(M2C_UNK, M2C_UNK);
 void func_0000052C(void);
 void func_0000054C(void);
+void func_00000618(s32 arg0, s32 arg1);
 M2C_UNK func_00000674(M2C_UNK);
 void func_00000BBC(void);
 s32 func_00000F3C(void);
@@ -106,6 +108,7 @@ s32 func_000025A0(struct Unk_func_000025A0_0 *arg0);
 s32 func_000025A8(struct Unk_func_000025A8_0 *arg0);
 s32 func_000025B0(struct Unk_func_000025B0_0 *arg0);
 s32 func_000025B8(struct Unk_func_000025B8_0 *arg0);
+void func_000025C0(void *arg0, s32 arg1);
 void func_000025E4(struct Unk_func_000025E4_0 *arg0);
 void func_00002600(struct Unk_func_00002600_0 *arg0);
 void func_0000261C(struct Unk_func_0000261C_0 *arg0);
@@ -125,9 +128,17 @@ M2C_UNK sceNetAdhocDownload_48F87AB1();
 M2C_UNK sceNetAdhocDownload_4C542FD1();
 M2C_UNK scePaf_27F64616(s32);
 M2C_UNK scePaf_3481F595(s32);
+M2C_UNK scePaf_39E62C88(s32, s32, M2C_UNK, M2C_UNK);
+s32 scePaf_5E4447F6(s32);
+M2C_UNK scePaf_82CF97B0(M2C_UNK);
+M2C_UNK scePaf_8B38372A(s32, s32);
+M2C_UNK scePaf_A013540A(s32, s32);
+s32 scePaf_C1B0AA0D(s32);
 M2C_UNK scePaf_C4BAD564(M2C_UNK);
 s32 scePaf_CA79D58B(s32);
 M2C_UNK scePaf_CAF05F1D(s32);
+M2C_UNK scePaf_CD216C47(s32);
+M2C_UNK scePaf_D1447DB7(s32);
 M2C_UNK scePaf_DAB59652(s32);
 s32 scePaf_FD4C9F47(s32);
 

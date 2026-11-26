@@ -2,6 +2,10 @@
 #include "common.h"
 #include "game_plugin_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/game_plugin", func_00000000);
+#endif
+
 INCLUDE_ASM("nonmatchings/game_plugin", func_00000024);
 
 INCLUDE_ASM("nonmatchings/game_plugin", func_000000AC);
@@ -23,6 +27,64 @@ s32 module_stop(void) {
 INCLUDE_ASM("nonmatchings/game_plugin", func_0000015C);
 
 INCLUDE_ASM("nonmatchings/game_plugin", func_000003DC);
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000183F0);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000183F4);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00018408);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00018420);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_0001842C);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00018434);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00018448);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00018454);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_0001846C);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00018480);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000184A0);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000184DC);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000184F0);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000186AC);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000186B4);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000186C0);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00018704);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00018730);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000187D4);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000187EC);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000187F4);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00018808);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00018858);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_0001897C);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00011564);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_000189B0);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00011574);
+
+INCLUDE_RODATA("nonmatchings/game_plugin", D_00011578);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/game_plugin", func_00000458);

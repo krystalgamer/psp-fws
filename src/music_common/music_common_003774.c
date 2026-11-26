@@ -1,12 +1,13 @@
 #include "common.h"
 #include "music_common_decls.h"
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/music_common_003774", music_common_100366B3);
 
 INCLUDE_ASM("nonmatchings/music_common_003774", music_common_4BAF5236);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/music_common_003774", music_common_BA8D36C8);
 
 INCLUDE_ASM("nonmatchings/music_common_003774", music_common_469373C5);
@@ -14,6 +15,7 @@ INCLUDE_ASM("nonmatchings/music_common_003774", music_common_469373C5);
 INCLUDE_ASM("nonmatchings/music_common_003774", music_common_442E45E3);
 
 INCLUDE_ASM("nonmatchings/music_common_003774", music_common_D4EA4ED1);
+#endif
 
 INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EDF0);
 
@@ -27,7 +29,13 @@ INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EE18);
 
 INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EE50);
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_common_003774", music_common_C170AB77);
+
+INCLUDE_RODATA("nonmatchings/music_common_003774", D_00024060);
+#else
 INCLUDE_ASM("nonmatchings/music_common_003774", music_common_301D0ED4);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/music_common_003774", func_000047C4);
@@ -73,7 +81,31 @@ INCLUDE_ASM("nonmatchings/music_common_003774", func_000048CC);
 INCLUDE_ASM("nonmatchings/music_common_003774", func_00003EFC);
 
 INCLUDE_ASM("nonmatchings/music_common_003774", func_00003F40);
+#endif
 
+#if FW_VERSION == 350
+void music_common_476871AE(void) {
+    s32 temp_v0;
+
+    if (D_00025B94 == 0) {
+        temp_v0 = scePaf_61A8E8EC(0x14);
+        func_00003F40(temp_v0);
+        D_00025B94 = temp_v0;
+    }
+}
+
+INCLUDE_ASM("nonmatchings/music_common_003774", music_common_4CBCDDE3);
+
+s32 music_common_A05B4714(void) {
+    return D_00025B94;
+}
+
+INCLUDE_ASM("nonmatchings/music_common_003774", music_common_DAE8616D);
+
+INCLUDE_ASM("nonmatchings/music_common_003774", music_common_E8DA3003);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void music_common_F6EAB2FA(void) {
     s32 temp_v0;
 
@@ -95,7 +127,9 @@ INCLUDE_ASM("nonmatchings/music_common_003774", music_common_F97B96B0);
 INCLUDE_ASM("nonmatchings/music_common_003774", music_common_73D4788A);
 
 INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EEA8);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/music_common_003774", D_0001EEE0);
 
 INCLUDE_ASM("nonmatchings/music_common_003774", func_00004100);

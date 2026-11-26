@@ -8,6 +8,7 @@ extern s32 D_0000F334;
 extern u32 *D_0000F510;
 extern M2C_UNK D_0000F514;
 extern s32 D_000102A4;
+extern s32 D_00012884;
 extern u32 *D_00018648;
 
 void func_00000000(u32 arg0);

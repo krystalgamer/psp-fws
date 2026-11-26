@@ -228,7 +228,19 @@ s32 sceCtrlReadBufferPositive(void *arg0, s32 arg1) {
 s32 sceCtrlReadBufferNegative(void *arg0, s32 arg1) {
     return func_0000161C((s32) arg0, arg1, 3);
 }
+#endif
 
+#if FW_VERSION == 350
+s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_VFIELD(&D_00001D70, s32, 0xA44) = arg3;
+    D_00001D70.unkA38 = arg0;
+    D_00001D70.unkA3C = arg1;
+    D_00001D70.unkA40 = arg2;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_00001D70.unkA40 = arg3;
     D_00001D70.unkA34 = arg0;
@@ -236,12 +248,20 @@ s32 sceCtrl_driver_A88E8D22(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_00001D70.unkA3C = arg2;
     return 0;
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_252D3A8D);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 sceCtrl_driver_252D3A8D(s8 arg0) {
     D_00001D7F = arg0;
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_348D99D4);
 
 s32 sceCtrl_driver_AF5960F3(void) {
@@ -250,6 +270,13 @@ s32 sceCtrl_driver_AF5960F3(void) {
 #endif
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_5C56C779);
+
+#if FW_VERSION == 350
+s32 sceCtrl_driver_CC70B61E(void) {
+    D_00001DCE = 1;
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlClearRapidFire);
 
@@ -341,11 +368,11 @@ s32 func_00001578(void) {
 INCLUDE_ASM("nonmatchings/ctrl", func_00001584);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION == 282 || FW_VERSION == 350
 INCLUDE_ASM("nonmatchings/ctrl", func_00001600);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION >= 300 && FW_VERSION < 350
 s32 func_00001600(void) {
     D_00001D70.pad0[0x11] = 0;
     D_00001D70.pad0[0xE] = D_00001D70.pad0[0x8A];
@@ -355,6 +382,56 @@ s32 func_00001600(void) {
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ctrl", func_0000161C);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001A44);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001A48);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001A5C);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001A74);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001A90);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001AB0);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001AC8);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001AE0);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001AF8);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001B10);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001B24);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001B44);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001B4C);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001BEC);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001BFC);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001CF4);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001D0C);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001D10);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001D28);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001D2C);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001D48);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001D4C);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001D50);
+
+INCLUDE_RODATA("nonmatchings/ctrl", D_00001D58);
 #endif
 
 INCLUDE_RODATA("nonmatchings/ctrl", D_00001D20);

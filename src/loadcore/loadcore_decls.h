@@ -52,6 +52,7 @@ s32 func_00000340(void);
 void func_00000674(s32 arg0, s32 arg1);
 void func_00000690(s32 arg0, s32 arg1);
 void func_00000764(s32 arg0, s32 arg1, s32 arg2);
+s32 func_00000770(void);
 void func_00000784(s32 arg0, s32 arg1);
 s32 func_000007A4(s32, s32, s32, s32);
 s32 func_000007D0(void);

@@ -6,7 +6,67 @@ INCLUDE_ASM("nonmatchings/mscm", func_00000000);
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/mscm", func_000000C8);
-#else
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/mscm", D_00006C8C);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006C90);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006CB0);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006CC8);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006CE0);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006CF8);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006D0C);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006D24);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006D38);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006D54);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006D6C);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006D84);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006D9C);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006DAC);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006DD4);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006DE4);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006F74);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006F9C);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006FB4);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006FBC);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006FC0);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00006FD4);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_0000703C);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00007044);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00007048);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_00007054);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_0000705C);
+
+INCLUDE_RODATA("nonmatchings/mscm", D_0000706C);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mscm", func_000000AC);
 #endif
 

@@ -40,10 +40,10 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C91C", func_0000CF68);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C91C", func_0000DAA0);
 
-#if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C91C", func_0000F63C);
-#else
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C91C", func_0000DE38);
+#else
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00C91C", func_0000F63C);
 #endif
 
 void func_0000DEE4(struct Unk_vt_func_0000DEE4_arg0 **arg0, s32 arg1) {

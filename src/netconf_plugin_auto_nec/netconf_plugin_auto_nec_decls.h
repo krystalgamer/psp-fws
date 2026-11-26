@@ -45,6 +45,7 @@ struct Unk_func_00003CFC_1 {
 extern s32 D_00008498;
 extern s32 D_000084A0;
 extern s32 D_000084A4;
+extern s32 D_000084A4_v350;
 extern M2C_UNK D_000084B8;
 extern s32 D_00008530;
 extern s32 D_00008534;
@@ -67,7 +68,9 @@ s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelDelayThread(u32);
 M2C_UNK sceNetApctlDisconnect();
+M2C_UNK sceUtility_netparam_internal_854ACDD6(M2C_UNK);
 M2C_UNK sceUtility_netparam_internal_9CE50172(M2C_UNK);
+s32 sceVshNetconfRaku_8D3A5DA0(void *arg0);
 s32 sceVshNetconfRaku_F3AF9DD1(void *arg0);
 
 #endif

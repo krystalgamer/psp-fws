@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/350/.splat_cache.htmlviewer_plugin
   symbol_addrs_path:
     - config/350/symbol_addrs.htmlviewer_plugin.txt
+    - config/350/func_starts.htmlviewer_plugin.txt
     - tmp/build/350/prx_syms.htmlviewer_plugin.txt
   reloc_addrs_path: [tmp/build/350/reloc_addrs.htmlviewer_plugin.txt]
   asset_path: tmp/assets/350/htmlviewer_plugin
@@ -52,7 +53,11 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, htmlviewer_plugin]
+      - [0xA0, c, htmlviewer_plugin]
+      - [0x6974, c, htmlviewer_plugin_002EB4]
+      - [0x7278, c, htmlviewer_plugin_0039A4]
+      - [0x82E4, c, htmlviewer_plugin_004788]
+      - [0x90A0, c, htmlviewer_plugin_005370]
       - { start: 0xA4A4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xA90C, type: prxpad, order: .text }
       - { start: 0xA910, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +67,11 @@ segments:
       - { start: 0xA93C, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0xAA9C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0xAAA0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0xAAD4, rodata, htmlviewer_plugin]
+      - [0xAAD4, .rodata, htmlviewer_plugin]
+      - [0xBA3C, .rodata, htmlviewer_plugin_002EB4]
+      - [0xBD5C, .rodata, htmlviewer_plugin_0039A4]
+      - [0xBE68, .rodata, htmlviewer_plugin_004788]
+      - [0xC514, .rodata, htmlviewer_plugin_005370]
       - { start: 0xC610, type: prxpad, order: .rodata }
   - name: htmlviewer_plugin_seg1
     type: code

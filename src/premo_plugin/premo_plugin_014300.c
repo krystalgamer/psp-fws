@@ -47,8 +47,8 @@ void func_00014430(M2C_UNK **arg0) {
 
 INCLUDE_RODATA("nonmatchings/premo_plugin_014300", D_0002A9E8);
 
-#if FW_VERSION < 352
-INCLUDE_RODATA("nonmatchings/premo_plugin_014300", D_00023DA0);
-#else
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/premo_plugin_014300", D_0002A9F8);
+#else
+INCLUDE_RODATA("nonmatchings/premo_plugin_014300", D_00023DA0);
 #endif

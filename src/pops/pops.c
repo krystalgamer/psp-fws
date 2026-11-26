@@ -1,11 +1,97 @@
 #include "common.h"
 #include "pops_decls.h"
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops", D_0002AED4);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AED8);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AEEC);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AEF8);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF04);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF14);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF20);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF30);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF40);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF4C);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF5C);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF6C);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF78);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF88);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AF98);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AFB0);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AFC4);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AFD8);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002AFF0);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B008);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B018);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B038);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B04C);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B054);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B05C);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B068);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B0A4);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B0B8);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B0C0);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B0D4);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B0E8);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B0EC);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B104);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B11C);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B148);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B15C);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B1B4);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B1E8);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B1F0);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B1F4);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002B240);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops", D_0002A000);
 
 INCLUDE_ASM("nonmatchings/pops", func_00000000);
-#else
+#endif
+
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/pops", func_00000040);
 
 INCLUDE_ASM("nonmatchings/pops", func_000000C8);
@@ -18,6 +104,10 @@ INCLUDE_RODATA("nonmatchings/pops", D_00038278);
 #endif
 
 INCLUDE_ASM("nonmatchings/pops", module_start);
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops", func_00000068);
+#endif
 
 #if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/pops", func_000001FC);
@@ -43,12 +133,24 @@ INCLUDE_ASM("nonmatchings/pops", module_stop);
 INCLUDE_ASM("nonmatchings/pops", func_000004F0);
 #endif
 
+#if FW_VERSION == 350
+s32 func_00000668(void) {
+    sceImpose_A9884B00(0);
+    sceKernelExitGame();
+    return 0;
+}
+#else
 s32 func_00000668(void) {
     sceKernelExitGame();
     return 0;
 }
+#endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops", func_000001D4);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops", func_0000022C);
 #endif
 

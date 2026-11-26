@@ -2,7 +2,11 @@
 #include "common.h"
 #include "camera_plugin_decls.h"
 
-#if FW_VERSION < 352
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_00000294);
+#endif
+
+#if FW_VERSION < 350
 void func_00000294(void) {
     s32 temp_v0;
     void *temp_v0_2;
@@ -17,7 +21,9 @@ void func_00000294(void) {
         }
     }
 }
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_00000294(void) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -42,7 +48,11 @@ INCLUDE_RODATA("nonmatchings/camera_plugin_000294", D_00021640);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_0000031C);
 
-#if FW_VERSION < 352
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_000004F8);
+#endif
+
+#if FW_VERSION < 350
 s32 func_000004F8(void) {
     sceVshCommonUtil_9E42444E(&D_000236A4, 1, 0);
     func_0000C718();
@@ -50,7 +60,9 @@ s32 func_000004F8(void) {
     sceVshCommonUtil_0587F20C(&D_000236A4, 1, 0);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 352
 s32 func_000004F8(void) {
     sceVshCommonUtil_DA88D006(&D_00024C5C, 1, 0);
     func_0000C718();
@@ -74,6 +86,12 @@ void func_00000614(void) {
 
 #if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_00000890);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_000006C8);
+#endif
+
+#if FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_00000900);
 #endif

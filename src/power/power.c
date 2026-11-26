@@ -173,6 +173,88 @@ u8 scePower_driver_E8685403(void) {
 
 INCLUDE_ASM("nonmatchings/power", func_00000DD4);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/power", D_00005864);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005868);
+
+INCLUDE_RODATA("nonmatchings/power", D_0000587C);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005894);
+
+INCLUDE_RODATA("nonmatchings/power", D_000058B0);
+
+INCLUDE_RODATA("nonmatchings/power", D_000058D0);
+
+INCLUDE_RODATA("nonmatchings/power", D_000058E8);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005900);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005914);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005928);
+
+INCLUDE_RODATA("nonmatchings/power", D_0000593C);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005954);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005968);
+
+INCLUDE_RODATA("nonmatchings/power", D_0000597C);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005990);
+
+INCLUDE_RODATA("nonmatchings/power", D_000059A8);
+
+INCLUDE_RODATA("nonmatchings/power", D_000059BC);
+
+INCLUDE_RODATA("nonmatchings/power", D_000059D4);
+
+INCLUDE_RODATA("nonmatchings/power", D_000059E8);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005A08);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005A14);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005C04);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005C14);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005F5C);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005F60);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005F78);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005F84);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005F94);
+
+INCLUDE_RODATA("nonmatchings/power", D_00005F98);
+
+INCLUDE_RODATA("nonmatchings/power", D_00006004);
+
+INCLUDE_RODATA("nonmatchings/power", D_00006010);
+
+INCLUDE_RODATA("nonmatchings/power", D_00006014);
+
+INCLUDE_RODATA("nonmatchings/power", D_00006024);
+
+INCLUDE_RODATA("nonmatchings/power", D_00006034);
+
+INCLUDE_RODATA("nonmatchings/power", D_00006038);
+
+INCLUDE_RODATA("nonmatchings/power", D_0000603C);
+
+INCLUDE_RODATA("nonmatchings/power", D_00006040);
+
+INCLUDE_RODATA("nonmatchings/power", D_00006054);
+
+INCLUDE_RODATA("nonmatchings/power", D_00006060);
+
+INCLUDE_RODATA("nonmatchings/power", D_000060EC);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePower_driver_23C31FFE);
 
@@ -630,10 +712,14 @@ INCLUDE_ASM("nonmatchings/power", scePowerSetCpuClockFrequency);
 
 INCLUDE_ASM("nonmatchings/power", scePowerSetBusClockFrequency);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", scePowerSetClockFrequency);
-#else
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/power", D_00006244);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", func_000032EC);
+#else
+INCLUDE_ASM("nonmatchings/power", scePowerSetClockFrequency);
 #endif
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_E0B7A95D);
@@ -779,6 +865,13 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_35B7662E);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_F9B4DEA1);
 
+#if FW_VERSION == 350
+s32 scePower_driver_F06B96D4(s32 arg0) {
+    D_0000B7D4 = arg0;
+    return 0;
+}
+#endif
+
 #if FW_VERSION >= 260 && FW_VERSION < 282
 s32 scePowerGetCpuClockFrequency(void) {
     return D_0000AF94;
@@ -872,6 +965,14 @@ void scePower_driver_A4E93389(s32 arg0, s32 arg1, s32 arg2) {
 void scePower_driver_545A7F3C(s32 arg0, s32 arg1, s32 arg2) {
     func_000032EC(arg0, arg1, arg2);
 }
+#endif
+
+#if FW_VERSION == 350
+void scePower_driver_EBD177D6(s32 arg0, s32 arg1, s32 arg2) {
+    func_000032EC(arg0, arg1, arg2);
+}
+
+INCLUDE_ASM("nonmatchings/power", func_00004BF8);
 #endif
 
 #if FW_VERSION == 282
@@ -1091,7 +1192,7 @@ s32 func_00004B54(void) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_00004BF8(void) {
     sceKernelSetEventFlag(D_0000B3AC.unk0, 0x80000000U);
     sceKernelWaitThreadEnd(D_0000B3AC.unk4, NULL);
@@ -1099,7 +1200,9 @@ s32 func_00004BF8(void) {
     sceKernelDeleteEventFlag(D_0000B3AC.unk0);
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282
 s32 func_00004C50(s32 arg0, s32 arg1, s32 arg2) {
     D_0000B3AC.unk18 = arg2;
     D_0000B3AC.unk8 = arg0;

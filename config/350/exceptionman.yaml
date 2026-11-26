@@ -52,14 +52,14 @@ segments:
     start: 0xC0
     vram: 0x0
     subsegments:
-      - [0xC0, asm, exceptionman]
+      - [0xC0, c, exceptionman]
       - { start: 0xE30, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0xE34, type: rodata, name: lib_ent, linker_section: .lib.ent }
       - { start: 0xE54, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
       - { start: 0xE58, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
       - { start: 0xE5C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0xE60, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0xE94, rodata, exceptionman]
+      - [0xE94, .rodata, exceptionman]
       - { start: 0xF18, type: prxpad, order: .rodata }
   - name: exceptionman_seg1
     type: code

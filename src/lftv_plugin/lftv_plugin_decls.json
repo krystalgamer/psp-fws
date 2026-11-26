@@ -16,6 +16,7 @@
   "func_00000D28": "s32 func_00000D28(void);",
   "func_00000DB4": "void func_00000DB4(void);",
   "func_000012C0": "s32 func_000012C0(void);",
+  "func_000016F4": "void func_000016F4(s32 arg0);",
   "func_0000186C": "void func_0000186C(void);",
   "func_00001AE0": "void func_00001AE0(void);",
   "func_000020F8": "s32 func_000020F8(void);",
@@ -46,11 +47,17 @@
   "sceKernelPowerUnlock": "M2C_UNK sceKernelPowerUnlock(M2C_UNK);",
   "scePaf_1A45C860": "M2C_UNK scePaf_1A45C860(s32, M2C_UNK *);",
   "scePaf_338C3774": "void *scePaf_338C3774(s32, M2C_UNK);",
+  "scePaf_5E4447F6": "s32 scePaf_5E4447F6(s32);",
+  "scePaf_88784487": "s32 scePaf_88784487(M2C_UNK *);",
+  "scePaf_C1B0AA0D": "s32 scePaf_C1B0AA0D(s32);",
   "scePaf_CA79D58B": "s32 scePaf_CA79D58B(s32);",
   "scePaf_D4FAE7D0": "s32 scePaf_D4FAE7D0(M2C_UNK *);",
+  "scePaf_DCE3D225": "void *scePaf_DCE3D225(s32, M2C_UNK);",
   "scePaf_FD4C9F47": "s32 scePaf_FD4C9F47(s32);",
   "sceVshCommonGui_72E652AA": "M2C_UNK sceVshCommonGui_72E652AA(s32);",
-  "sceVshCommonUtil_622815DD": "M2C_UNK sceVshCommonUtil_622815DD(M2C_UNK *, M2C_UNK *);"
+  "sceVshCommonGui_8F414E35": "M2C_UNK sceVshCommonGui_8F414E35(s32);",
+  "sceVshCommonUtil_622815DD": "M2C_UNK sceVshCommonUtil_622815DD(M2C_UNK *, M2C_UNK *);",
+  "sceVshCommonUtil_951BC384": "M2C_UNK sceVshCommonUtil_951BC384(M2C_UNK *, M2C_UNK *);"
  },
  "types": {
   "Unk_func_0000186C_temp_v0_2": "struct Unk_func_0000186C_temp_v0_2 {\n    u8 pad0[0x70];\n    M2C_UNK (*unk70)();\n};"
@@ -65,7 +72,9 @@
   "D_000033FC": "extern s32 D_000033FC;",
   "D_00003410": "extern s32 D_00003410;",
   "D_0000343C": "extern M2C_UNK D_0000343C;",
+  "D_00003CD0": "extern s32 D_00003CD0;",
   "D_00003D1C": "extern M2C_UNK D_00003D1C;",
+  "func_00001770": "extern M2C_UNK func_00001770;",
   "func_000018E0": "extern M2C_UNK func_000018E0;",
   "func_00003164": "extern M2C_UNK func_00003164;"
  }

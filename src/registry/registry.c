@@ -2,6 +2,40 @@
 #include "k1.h"
 #include "registry_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/registry", D_00006D40);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006D44);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006D5C);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006D74);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006D8C);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006DA4);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006DB4);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006DDC);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006DE4);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006EA4);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006EB4);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006F7C);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006FA0);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006FB8);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006FDC);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006FE0);
+#endif
+
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/registry", sceReg_driver_98279CF1);
 #else

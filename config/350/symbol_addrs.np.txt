@@ -138,3 +138,5 @@ sceRtcParseDateTime = 0x000104A0; // type:func
 sceSslGetNameEntryCount = 0x000104A8; // type:func
 sceSslGetIssuerName = 0x000104B0; // type:func
 sceSslGetNameEntryInfo = 0x000104B8; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

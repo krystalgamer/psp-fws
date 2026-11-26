@@ -13,6 +13,40 @@ INCLUDE_ASM("nonmatchings/vaudio", sceVaudioChRelease);
 
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudioSetEffectType);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000ED8);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000EDC);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000EF4);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000F08);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000F20);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000F38);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000F48);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000F68);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000F7C);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000FB4);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000FC0);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000FF0);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00000FF4);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00001010);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_00001018);
+
+INCLUDE_RODATA("nonmatchings/vaudio", D_0000102C);
+#endif
+
 INCLUDE_RODATA("nonmatchings/vaudio", D_00000D9C);
 
 #if FW_VERSION >= 271

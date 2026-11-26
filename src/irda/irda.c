@@ -32,6 +32,40 @@ s32 func_00000850(void) {
     return 0;
 }
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/irda", D_00001574);
+
+INCLUDE_RODATA("nonmatchings/irda", D_00001578);
+
+INCLUDE_RODATA("nonmatchings/irda", D_00001594);
+
+INCLUDE_RODATA("nonmatchings/irda", D_000015AC);
+
+INCLUDE_RODATA("nonmatchings/irda", D_000015CC);
+
+INCLUDE_RODATA("nonmatchings/irda", D_000015E4);
+
+INCLUDE_RODATA("nonmatchings/irda", D_000015FC);
+
+INCLUDE_RODATA("nonmatchings/irda", D_00001614);
+
+INCLUDE_RODATA("nonmatchings/irda", D_00001624);
+
+INCLUDE_RODATA("nonmatchings/irda", D_00001644);
+
+INCLUDE_RODATA("nonmatchings/irda", D_0000165C);
+
+INCLUDE_RODATA("nonmatchings/irda", D_00001664);
+
+INCLUDE_RODATA("nonmatchings/irda", D_00001690);
+
+INCLUDE_RODATA("nonmatchings/irda", D_0000169C);
+
+INCLUDE_RODATA("nonmatchings/irda", D_000016A4);
+
+INCLUDE_RODATA("nonmatchings/irda", D_000016AC);
+#endif
+
 INCLUDE_RODATA("nonmatchings/irda", D_000016B0);
 
 INCLUDE_RODATA("nonmatchings/irda", D_00001708);

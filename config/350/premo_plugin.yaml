@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/350/.splat_cache.premo_plugin
   symbol_addrs_path:
     - config/350/symbol_addrs.premo_plugin.txt
+    - config/350/func_starts.premo_plugin.txt
     - tmp/build/350/prx_syms.premo_plugin.txt
   reloc_addrs_path: [tmp/build/350/reloc_addrs.premo_plugin.txt]
   asset_path: tmp/assets/350/premo_plugin
@@ -52,7 +53,19 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, premo_plugin]
+      - [0xA0, c, premo_plugin]
+      - [0x9420, c, premo_plugin_009380]
+      - [0x9638, c, premo_plugin_009598]
+      - [0x118EC, c, premo_plugin_0117FC]
+      - [0x11BF0, c, premo_plugin_011B50]
+      - [0x14484, c, premo_plugin_014300]
+      - [0x144F8, c, premo_plugin_014458]
+      - [0x14A64, c, premo_plugin_0149C4]
+      - [0x14BB4, c, premo_plugin_014B14]
+      - [0x1905C, c, premo_plugin_018FBC]
+      - [0x191F4, c, premo_plugin_019154]
+      - [0x23F14, c, premo_plugin_023E68]
+      - [0x243FC, c, premo_plugin_02435C]
       - { start: 0x276A4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x280DC, type: prxpad, order: .text }
       - { start: 0x280E0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +75,14 @@ segments:
       - { start: 0x280FC, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x28298, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x2829C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x282D0, rodata, premo_plugin]
+      - [0x282D0, .rodata, premo_plugin]
+      - [0x2A100, .rodata, premo_plugin_009598]
+      - [0x2A880, .rodata, premo_plugin_011B50]
+      - [0x2AA88, .rodata, premo_plugin_014300]
+      - [0x2AB68, .rodata, premo_plugin_014458]
+      - [0x2AB80, .rodata, premo_plugin_014B14]
+      - [0x2AD90, .rodata, premo_plugin_019154]
+      - [0x2C120, .rodata, premo_plugin_02435C]
   - name: premo_plugin_seg1
     type: code
     start: 0x2C520

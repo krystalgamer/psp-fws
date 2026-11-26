@@ -143,7 +143,111 @@ INCLUDE_ASM("nonmatchings/impose", func_00000074);
 INCLUDE_ASM("nonmatchings/impose", func_000000CC);
 
 INCLUDE_ASM("nonmatchings/impose", func_00000124);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/impose", D_0000769C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000076A0);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000076BC);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000076D0);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000076E4);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007704);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000771C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007734);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007748);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007760);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007778);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000778C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000077A0);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000077B8);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000077CC);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000077E0);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000077F4);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007808);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000781C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007834);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000784C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000785C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_0000787C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007888);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007900);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007914);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000079EC);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000079FC);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007A1C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007A34);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007A54);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007A64);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007A7C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007A8C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007A90);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007A98);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007AA0);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007AA4);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007AE0);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007AE4);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007AF0);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007B00);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007B20);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007B2C);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007B40);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007B64);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007B88);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007B90);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007B98);
+
+INCLUDE_RODATA("nonmatchings/impose", D_00007B9C);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/impose", D_000064C4);
 
 INCLUDE_RODATA("nonmatchings/impose", D_00006C34);
@@ -163,7 +267,13 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000819C);
 INCLUDE_RODATA("nonmatchings/impose", D_000083BC);
 
 INCLUDE_RODATA("nonmatchings/impose", D_000085DC);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/impose", D_0000B3C8);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/impose", D_00009CEC);
 
 INCLUDE_RODATA("nonmatchings/impose", D_0000AFAC);
@@ -183,11 +293,15 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000CC0C);
 INCLUDE_RODATA("nonmatchings/impose", D_0000D00C);
 
 INCLUDE_RODATA("nonmatchings/impose", D_0000D40C);
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/impose", D_0000D80C);
 
 INCLUDE_RODATA("nonmatchings/impose", D_0000DF0C);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/impose", D_0000E60C);
 
 INCLUDE_RODATA("nonmatchings/impose", D_0000E78C);
@@ -205,7 +319,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F15C);
 INCLUDE_RODATA("nonmatchings/impose", D_0000F2D8);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/impose", D_0000FFE0);
 #endif
 
@@ -279,7 +393,23 @@ INCLUDE_ASM("nonmatchings/impose", func_00000508);
 INCLUDE_ASM("nonmatchings/impose", func_0000068C);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+s32 func_0000070C(void) {
+    func_00002E3C(7);
+    func_00002E3C(6);
+    func_00002E3C(3);
+    func_00002E3C(4);
+    if (M2C_FIELD(D_0000F510, s32 *, 0xF4) != 1) {
+
+    } else {
+        func_00002E3C(0x10);
+        func_00002E3C(0x11);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 s32 func_0000070C(void) {
     func_00002E3C(7);
     func_00002E3C(6);
@@ -321,7 +451,19 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetBatteryIconStatus);
 INCLUDE_ASM("nonmatchings/impose", func_00000EEC);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+s32 func_000012B8(void) {
+    s32 var_a0;
+
+    var_a0 = 0;
+    if (M2C_FIELD(D_0000F510, s32 *, 0x94) & 4) {
+        var_a0 = M2C_FIELD(D_0000F510, s32 *, 0xF8) != 0x400;
+    }
+    return var_a0;
+}
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 s32 func_000012B8(void) {
     s32 var_a0;
 
@@ -331,15 +473,36 @@ s32 func_000012B8(void) {
     }
     return var_a0;
 }
+#endif
 
+#if FW_VERSION == 350
+void func_000012E4(void) {
+    sceDisplaySetMode(M2C_FIELD(D_0000F510, s32 *, 0x264), M2C_FIELD(D_0000F510, s32 *, 0x268), M2C_FIELD(D_0000F510, s32 *, 0x26C));
+    sceCodec_driver_20C61103(M2C_FIELD(D_0000F510, s32 *, 0x270));
+}
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 void func_000012E4(void) {
     sceDisplaySetMode(M2C_FIELD(D_0000F510, s32 *, 0x250), M2C_FIELD(D_0000F510, s32 *, 0x254), M2C_FIELD(D_0000F510, s32 *, 0x258));
     sceCodec_driver_20C61103(M2C_FIELD(D_0000F510, s32 *, 0x25C));
 }
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", func_00001324);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", func_00001504);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_116CFF64);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", sceImpose_A9884B00);
 #endif
 
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_BDBC42A6);
@@ -348,7 +511,26 @@ INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_BDBC42A6);
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_C7E36CC7);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+s32 sceImpose_driver_C7E36CC7(void) {
+    if (M2C_FIELD(D_0000F510, s32 *, 0x94) >= 0) {
+        M2C_FIELD(D_0000F510, s32 *, 0xD0) = 1;
+        func_00000000(8U);
+        do {
+            sceKernelDelayThread(0x186A0U);
+        } while (M2C_FIELD(D_0000F510, s32 *, 0xD0) != 0);
+    }
+    sceSysEventForKernel_D7D3FDCD(&D_00012884);
+    sceKernelSetEventFlag(M2C_FIELD(D_0000F510, u32 *, 0), 0x80000000U);
+    sceKernelWaitThreadEnd(M2C_FIELD(D_0000F510, s32 *, 4), NULL);
+    sceKernelDeleteThread(M2C_FIELD(D_0000F510, s32 *, 4));
+    sceKernelDeleteEventFlag((s32) M2C_FIELD(D_0000F510, u32 *, 0));
+    sceKernelReleaseSubIntrHandler(0x1E, 0x14);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 s32 sceImpose_driver_C7E36CC7(void) {
     if (M2C_FIELD(D_0000F510, s32 *, 0x8C) >= 0) {
         M2C_FIELD(D_0000F510, s32 *, 0xC8) = 1;
@@ -568,7 +750,28 @@ s32 sceImpose_driver_C7E36CC7(void) {
 }
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+s32 syslib_ADF12745(s32 arg0) {
+    s32 temp_a2;
+
+    if (arg0 != 2) {
+
+    } else {
+        temp_a2 = M2C_FIELD(D_0000F510, s32 *, 0x94);
+        if (temp_a2 >= 0) {
+            if (temp_a2 & 2) {
+                sceImpose_driver_9C8C6C81(1);
+            }
+        } else {
+            sceDisplaySetHoldMode(arg0);
+        }
+        sceImpose_driver_C7E36CC7();
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 s32 syslib_ADF12745(s32 arg0) {
     s32 temp_a2;
 
@@ -614,7 +817,11 @@ s32 syslib_ADF12745(s32 arg0) {
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_1AEED8FE);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", func_00002108);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/impose", func_00001E48);
 #endif
 
@@ -642,7 +849,13 @@ INCLUDE_ASM("nonmatchings/impose", func_00001F2C);
 INCLUDE_ASM("nonmatchings/impose", func_00001FB0);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+s32 sceImpose_driver_1B6E3400(void) {
+    return M2C_FIELD(D_0000F510, s32 *, 0x94);
+}
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 s32 sceImpose_driver_1B6E3400(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x8C);
 }
@@ -654,7 +867,17 @@ s32 sceImpose_driver_1B6E3400(void) {
 }
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+s32 sceImpose_driver_B415FC59(void) {
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(D_0000F510, s32 *, 0xAC);
+    M2C_FIELD(D_0000F510, s32 *, 0xAC) = 0;
+    return temp_v0;
+}
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 s32 sceImpose_driver_B415FC59(void) {
     s32 temp_v0;
 
@@ -692,7 +915,19 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetUMDPopup);
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_381BD9E7);
 
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_9DBCE0C4);
+#endif
 
+#if FW_VERSION == 350
+s32 sceImpose_driver_7084E72C(void) {
+    return M2C_FIELD(D_0000F510, s32 *, 0x7C);
+}
+
+s32 sceImpose_9BA61B49(void) {
+    return M2C_FIELD(D_0000F510, s32 *, 0x80);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 sceImpose_driver_7084E72C(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x78);
 }
@@ -716,6 +951,12 @@ void sceImpose_driver_116DDED6(s32 arg0, s32 arg1, s32 arg2) {
     func_00001324(1, arg0, arg1, arg2);
     setK1(temp_s0);
 }
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", sceImpose_BB3F5DEC);
+
+INCLUDE_ASM("nonmatchings/impose", sceImpose_FF1A2F07);
 #endif
 
 #if FW_VERSION >= 282
@@ -778,7 +1019,15 @@ s32 sceAudioRoutingGetMode(void) {
 s32 sceAudioRoutingSetVolumeMode(s32 arg0) {
     return func_00004954(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+s32 sceAudioRoutingGetVolumeMode(void) {
+    return M2C_FIELD(D_0000F510, s32 *, 0x70);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 sceAudioRoutingGetVolumeMode(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x6C);
 }
@@ -1111,17 +1360,50 @@ INCLUDE_RODATA("nonmatchings/impose", D_000101D0);
 INCLUDE_RODATA("nonmatchings/impose", D_000101E0);
 
 INCLUDE_RODATA("nonmatchings/impose", D_000101F0);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/impose", D_000112C4);
+
+INCLUDE_RODATA("nonmatchings/impose", D_000112DC);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/impose", D_000101FC);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", func_00002E3C);
 
 INCLUDE_ASM("nonmatchings/impose", func_00003030);
 
 INCLUDE_ASM("nonmatchings/impose", func_00003390);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", func_00003818);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/impose", func_00003488);
+#endif
 
+#if FW_VERSION == 350
+void func_000035EC(s32 arg0) {
+    if ((M2C_FIELD(D_0000F510, s32 *, 0x94) != 0) && !(arg0 & 0x20000) && (M2C_FIELD(D_0000F510, s32 *, 0x70) == 0)) {
+        if (arg0 & 0x100000) {
+            M2C_FIELD(D_0000F510, s32 *, 0xB4) = (s32) (M2C_FIELD(D_0000F510, s32 *, 0xB4) | 0x100000);
+        }
+        if (arg0 & 0x200000) {
+            M2C_FIELD(D_0000F510, s32 *, 0xBC) = 0;
+            M2C_FIELD(D_0000F510, s32 *, 0xB4) = (s32) (M2C_FIELD(D_0000F510, s32 *, 0xB4) | 0x200000);
+        }
+        M2C_FIELD(D_0000F510, s32 *, 0x114) = 0;
+    }
+}
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 void func_000035EC(s32 arg0) {
     if ((M2C_FIELD(D_0000F510, s32 *, 0x8C) != 0) && !(arg0 & 0x20000) && (M2C_FIELD(D_0000F510, s32 *, 0x6C) == 0)) {
         if (arg0 & 0x100000) {
@@ -1134,7 +1416,17 @@ void func_000035EC(s32 arg0) {
         M2C_FIELD(D_0000F510, s32 *, 0x104) = 0;
     }
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", func_000039F4);
+
+INCLUDE_ASM("nonmatchings/impose", func_00003A80);
+
+INCLUDE_ASM("nonmatchings/impose", func_00003B1C);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 void func_00003658(s32 arg0) {
     if (arg0 & 0x80000) {
         M2C_FIELD(D_0000F510, s32 *, 0x48) = 1;
@@ -1149,19 +1441,37 @@ void func_00003658(s32 arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/impose", func_000036B4);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", func_000037F8);
 
 INCLUDE_ASM("nonmatchings/impose", func_00003D34);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", func_0000429C);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/impose", func_00003DC0);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", func_00004378);
 
 INCLUDE_ASM("nonmatchings/impose", func_00004418);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", func_00004B40);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/impose", func_000044D8);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", func_000049B4);
 #endif
 
@@ -1173,7 +1483,11 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F848);
 INCLUDE_ASM("nonmatchings/impose", func_000044B0);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", func_0000588C);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/impose", func_000050E0);
 #endif
 
@@ -1207,7 +1521,13 @@ INCLUDE_ASM("nonmatchings/impose", func_000047EC);
 INCLUDE_ASM("nonmatchings/impose", func_00004870);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", func_000059F0);
+
+INCLUDE_ASM("nonmatchings/impose", func_00005AA4);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/impose", func_0000524C);
 #endif
 
@@ -1265,7 +1585,11 @@ INCLUDE_ASM("nonmatchings/impose", func_00004A40);
 INCLUDE_ASM("nonmatchings/impose", func_00004AB4);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/impose", func_00005E74);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/impose", func_00005590);
 #endif
 

@@ -35,11 +35,19 @@ M2C_UNK *func_00002CF8(void);
 void func_00002D04(void);
 M2C_UNK func_0000334C();
 s32 module_stop(void);
+M2C_UNK scePaf_3308156F();
 M2C_UNK scePaf_3586BE05();
+M2C_UNK scePaf_3EDD45EF(M2C_UNK, M2C_UNK *, s32, M2C_UNK, M2C_UNK, M2C_UNK *);
+M2C_UNK scePaf_4729E549();
 M2C_UNK scePaf_4E67BB08();
 M2C_UNK scePaf_545FE2DA();
+s32 scePaf_5E4447F6(s32);
 M2C_UNK scePaf_6829D7AF();
+M2C_UNK scePaf_7EED9087();
+M2C_UNK scePaf_9479C11B();
 M2C_UNK scePaf_A0ED77C4(M2C_UNK, M2C_UNK *, s32, M2C_UNK, M2C_UNK, M2C_UNK *);
+M2C_UNK scePaf_B1975FE1();
+M2C_UNK scePaf_C1B0AA0D();
 M2C_UNK scePaf_CA79D58B();
 M2C_UNK scePaf_F0B4CAE7();
 M2C_UNK scePaf_F95EA3F1();
@@ -47,5 +55,6 @@ s32 scePaf_FD4C9F47(s32);
 M2C_UNK scePsheet_226D9099();
 M2C_UNK scePsheet_E16F3A48();
 M2C_UNK sceUtility_private_5BA71568();
+M2C_UNK sceUtility_private_C36E3C16();
 
 #endif

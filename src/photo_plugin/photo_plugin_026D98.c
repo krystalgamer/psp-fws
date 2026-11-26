@@ -2,7 +2,7 @@
 #include "common.h"
 #include "photo_plugin_decls.h"
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 350
 void func_00026D98(void) {
     s32 temp_s0;
     s32 temp_v0;
@@ -17,7 +17,9 @@ void func_00026D98(void) {
         D_00031E5C = scePaf_6D491648(0, temp_s0 + 0xFFD7FC00, temp_v0 + 0x280100);
     }
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00026E40);
 #endif
 
@@ -76,7 +78,13 @@ INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00027F78);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00027978);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00027EB0);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00027F08);
 
 s32 func_00027FD0(struct Unk_func_00027FD0_0 *arg0, M2C_UNK arg1) {
@@ -116,7 +124,15 @@ INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_0002878C);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00028814);
+#endif
 
+#if FW_VERSION == 350
+s32 func_000288C0(void) {
+    return scePaf_723D0C80() != 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 s32 func_000288C0(void) {
     return scePaf_75062BCF() != 0;
 }

@@ -4,10 +4,56 @@
 
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_0A771482);
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/syscon", func_00000218);
+#endif
+
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_56931095);
 
 INCLUDE_ASM("nonmatchings/syscon", func_000004C4);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/syscon", D_00003E7C);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003E80);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003E9C);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003EB0);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003ED0);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003EE8);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003F00);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003F14);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003F2C);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003F3C);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003F5C);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00003F70);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00004448);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00004464);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_0000446C_v350);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00004474_v350);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_0000448C);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00004494);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_000044B0);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_000044B8);
 #endif
 
 #if FW_VERSION < 282
@@ -28,7 +74,11 @@ INCLUDE_ASM("nonmatchings/syscon", func_00000350);
 
 INCLUDE_RODATA("nonmatchings/syscon", D_0000453C);
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/syscon", func_00000580);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/syscon", func_00000544);
 #endif
 
@@ -60,6 +110,10 @@ s32 module_start(void) {
 INCLUDE_ASM("nonmatchings/syscon", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_92D16FC7);
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/syscon", func_000016C0);
+#endif
 
 #if FW_VERSION >= 150
 s32 sceSyscon_driver_081826B4(void) {
@@ -777,11 +831,19 @@ void sceSyscon_driver_F775BC34(s32 arg0) {
 void sceSyscon_driver_A9AEF39F(s32 arg0) {
     func_00001444(arg0, 0xF);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_25F47F96);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void sceSyscon_driver_25F47F96(s32 arg0) {
     func_00001444(arg0, 0x12);
 }
+#endif
 
+#if FW_VERSION >= 282
 void sceSyscon_driver_C4D66C1D(s32 arg0) {
     func_00001444(arg0, 9);
 }

@@ -10,6 +10,34 @@ INCLUDE_ASM("nonmatchings/mpeg", func_000001B4);
 
 INCLUDE_ASM("nonmatchings/mpeg", func_0000026C);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/mpeg", D_00007E5C);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00007E60);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00007E78);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00007E8C);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00007EA0);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00007EB4);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00007EC0);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00007ED0);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00007ED8);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00008048);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00008064);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_00008068);
+
+INCLUDE_RODATA("nonmatchings/mpeg", D_0000807C);
+#endif
+
 INCLUDE_RODATA("nonmatchings/mpeg", D_00008018);
 
 INCLUDE_RODATA("nonmatchings/mpeg", D_00008030);

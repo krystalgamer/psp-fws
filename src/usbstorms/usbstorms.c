@@ -1,6 +1,10 @@
 #include "common.h"
 #include "usbstorms_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/usbstorms", func_00000000_v350);
+#endif
+
 #if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000000_v340);
 #endif
@@ -61,6 +65,72 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00000544);
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/usbstorms", func_0000082C);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005100);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005104);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005124);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_0000513C);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005154);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_0000516C);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005184);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_000051A0);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_000051B4);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_000051C8);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_000051E0);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_000051F8);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005210);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005228);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_0000523C);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_0000524C);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_0000526C);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005284);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_000052DC);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_000052E4);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005300);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005304);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005308);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_0000531C);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005364);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005368);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_0000536C);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005370);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005374);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005390);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005398);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_000053A0);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 310
@@ -309,11 +379,25 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00003908);
 INCLUDE_ASM("nonmatchings/usbstorms", func_00003A5C);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003B48);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003C04);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003CC0);
+#endif
+
 #if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/usbstorms", D_0000505C);
 
 INCLUDE_RODATA("nonmatchings/usbstorms", D_0000506C);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005A30);
+#endif
+
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/usbstorms", func_00003860);
 
 s32 func_00003944(s32 arg0, s32 arg1) {
@@ -326,7 +410,19 @@ s32 func_00003944(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/usbstorms", func_00003980);
 
 INCLUDE_ASM("nonmatchings/usbstorms", func_00003A24);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/usbstorms", func_00003FE0);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005A74);
+
+INCLUDE_RODATA("nonmatchings/usbstorms", D_00005A80);
+
+INCLUDE_ASM("nonmatchings/usbstorms", func_00004064);
+#endif
+
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_16173D42);
 
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_CF2AF7B3);

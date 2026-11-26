@@ -2,6 +2,10 @@
 #include "common.h"
 #include "netconf_plugin_auto_bfl_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00000000);
+#endif
+
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00000024);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_000000AC);
@@ -16,8 +20,69 @@ s32 module_stop(void) {
     return 0;
 }
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000044F8);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000044FC);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004508);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004518);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004530);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004554);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004560);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004570);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004580);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004590);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000045B0);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000045C4);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000045F4);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_0000461C);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004620);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_0000462C);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004638);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004658);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_0000467C);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004688);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_0000469C);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_00004698);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000046A8);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000046AC);
+#endif
+
 INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000046B0);
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_A117A521);
+
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_D77ACCB7);
+
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_8D307317);
+
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_DFF564AF);
+
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_F5C1F68A);
+#else
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_50DF536D);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_D253B522);
@@ -27,6 +92,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_653D453F);
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_AC307152);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_2AEE9D4D);
+#endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00000664);
 
@@ -38,7 +104,11 @@ s32 func_00000830(void) {
     return 0;
 }
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_E635D418);
+#else
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_47A55B8E);
+#endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00000A24);
 
@@ -169,19 +239,50 @@ INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003CD0);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003D18);
 
+#if FW_VERSION == 350
+void func_00003D94(void) {
+    scePaf_9B900798();
+}
+#else
 void func_00003D94(void) {
     malloc();
 }
+#endif
 
+#if FW_VERSION == 350
+void func_00003DB0(void) {
+    scePaf_60355B42();
+}
+#else
 void func_00003DB0(void) {
     free();
 }
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003DCC);
+#endif
 
+#if FW_VERSION == 350
+void func_00003DCC(void) {
+    scePaf_79112496();
+}
+#else
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003DE8);
+#endif
 
+#if FW_VERSION == 350
+s32 func_00003DE8(s32 arg0) {
+    scePaf_DDF24DEC();
+    return arg0;
+}
+#else
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003E10);
+#endif
+
+#if FW_VERSION == 350
+void func_00003E10(void) {
+    scePaf_7D4045E1();
+}
+#endif
 
 void func_00003E2C(s32 arg0, void *arg1, u32 arg2, s32 arg3, void *arg4, void *arg5) {
     sceNetInetRecvfrom(arg0, arg1, arg2, arg3, arg4, arg5);
@@ -227,11 +328,23 @@ s32 func_00003F10(s32 arg0) {
     return __builtin_allegrex_wsbh(arg0 & 0xFFFF) & 0xFFFF;
 }
 
+#if FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003F20);
+#else
+void func_00003F20(void) {
+    scePaf_1919C81F();
+}
 
+void func_00003F3C(void) {
+    scePaf_5FA42863();
+}
+#endif
+
+#if FW_VERSION < 350
 void func_00003F3C(void) {
     rand();
 }
+#endif
 
 void func_00003F58(s8 *arg0) {
     s8 *var_a0;
@@ -262,3 +375,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003FAC);
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_000040F8);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_0000424C);
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_000042A4);
+#endif

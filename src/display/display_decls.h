@@ -68,6 +68,7 @@ s32 sceDisplay_driver_206276C2(void);
 s8 sceDisplay_driver_23CE8C51(void);
 s32 sceDisplay_driver_5B5AEFAD(s32, s32, s32, s32, s32);
 s32 sceDisplay_driver_63E22A26(s32, s32, s32, s32, s32);
+s32 sceDisplay_driver_66961521(void);
 s32 sceDisplay_driver_69B53541(void);
 s32 sceDisplay_driver_7A10289D(void);
 s32 sceDisplay_driver_92C8F8B7(void);

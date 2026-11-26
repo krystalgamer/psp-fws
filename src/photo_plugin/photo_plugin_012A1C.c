@@ -36,7 +36,23 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000130B0);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012D5C);
+#endif
 
+#if FW_VERSION == 350
+s32 func_00012D7C(s32 *arg0, s32 arg1) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = scePaf_88784487(arg0);
+    var_v1 = 0;
+    if (temp_v0 != 0) {
+        var_v1 = scePaf_DCE3D225(temp_v0, arg1);
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 s32 func_00012D7C(s32 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_v1;
@@ -48,7 +64,9 @@ s32 func_00012D7C(s32 *arg0, s32 arg1) {
     }
     return var_v1;
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012DC0);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FDAC);
@@ -64,7 +82,13 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012E58);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012CD0);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012D90);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00031028);
+#endif
+
+#if FW_VERSION >= 260 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FDC0);
 #endif
 
@@ -142,26 +166,48 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000134E4);
 void func_00013504(M2C_UNK **arg0) {
     *arg0 = &D_0002FE68;
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013514);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 void func_00013514(M2C_UNK **arg0) {
     *arg0 = &D_0002FE68;
     scePaf_4E67BB08((s32) arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_0001353C);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 void func_0001353C(M2C_UNK **arg0) {
     *arg0 = &D_0002FE68;
     scePaf_4E67BB08((s32) arg0);
 }
+#endif
 
+#if FW_VERSION >= 201
 void func_00013564(M2C_UNK **arg0) {
     *arg0 = &D_0002FE68;
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013574);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 void func_00013574(M2C_UNK **arg0) {
     *arg0 = &D_0002FE68;
     scePaf_4E67BB08((s32) arg0);
 }
+#endif
 
+#if FW_VERSION >= 201
 void func_0001359C(M2C_UNK **arg0) {
     *arg0 = &D_0002FE68;
 }
@@ -333,7 +379,13 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00014D14);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000149E4);
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 350
+void func_00014AE8(void) {
+    sceVshCommonGui_F5A16B4D(1);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 void func_00014AE8(void) {
     sceVshCommonGui_A0DE7090(1);
 }

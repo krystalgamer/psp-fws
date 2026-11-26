@@ -32,12 +32,15 @@ extern s8 D_00002261;
 extern s8 D_00002262;
 extern s8 D_00002263;
 extern s32 D_000022B0;
+extern s32 D_000025B4;
+extern s8 D_0000263C;
 
 s32 func_0000030C(void);
 s32 func_00000AE4(void);
 s32 func_00000AF4(void);
 s32 func_00001250(s32 arg0);
 s32 func_0000134C(s32 arg0);
+void func_000016EC(s8 arg0);
 s32 func_00001924(void);
 s32 module_start(void);
 s32 sceHprmIsHeadphoneExist(void);

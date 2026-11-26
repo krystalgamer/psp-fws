@@ -17,19 +17,59 @@ INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_00000000);
 
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000000EC);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_0000130C);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001310);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001330);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001348);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001360);
+#endif
+
 #if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001848);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_0000138C);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_000013A4);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_000013B4);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_000013BC);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_000013C4);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_000013D8);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_000013E8);
+
+INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_000013F8);
+
+INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_00000188);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_0000020C);
-#else
+#endif
+
+#if FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_00000204);
 #endif
 
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000007B0);
 
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000007E0);
+
+#if FW_VERSION == 350
+s32 func_000007F8(s32 arg0) {
+    return arg0;
+}
+#endif
 
 #if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001724);
@@ -45,7 +85,9 @@ INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001744);
 INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001764);
 
 INCLUDE_RODATA("nonmatchings/lflash_fatfmt", D_00001770);
-#else
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/lflash_fatfmt", func_000008D0);
 #endif
 

@@ -58,6 +58,48 @@ INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasSetPause);
 
 INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasGetPauseFlag);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_0000262C);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_00002630);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_00002648);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_00002660);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_00002674);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_0000268C);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_0000269C);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_000026BC);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_000026D0);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_000026E0);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_000026EC);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_000027E4);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_000027F4);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_00002804);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_0000280C);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_00002824);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_00002828);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_00002838);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_00002844);
+
+INCLUDE_RODATA("nonmatchings/sc_sascore", D_0000284C);
+#endif
+
 INCLUDE_RODATA("nonmatchings/sc_sascore", D_000025A0);
 
 INCLUDE_RODATA("nonmatchings/sc_sascore", D_000025A8);

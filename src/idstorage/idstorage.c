@@ -1,6 +1,52 @@
 #include "common.h"
 #include "idstorage_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/idstorage", D_00001F80);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00001F84);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00001F98);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00001FB0);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00001FCC);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00001FEC);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00002004);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_0000201C);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00002030);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00002048);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00002058);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00002078);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_0000208C);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_0000214C);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00002154);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00002158);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00002160);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_0000217C_v350);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_00002180);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_000021BC);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_000021C4);
+
+INCLUDE_RODATA("nonmatchings/idstorage", D_000021CC);
+#endif
+
 INCLUDE_RODATA("nonmatchings/idstorage", D_0000217C);
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_AB129D20);

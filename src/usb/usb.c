@@ -43,6 +43,80 @@ INCLUDE_ASM("nonmatchings/usb", func_000005E4);
 
 INCLUDE_ASM("nonmatchings/usb", func_00000688);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/usb", D_00008E30);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008E34);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008E54);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008E68);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008E80);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008E9C);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008EB4);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008ECC);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008EE0);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008EF4);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008F08);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008F20);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008F38);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008F4C);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008F64);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008F78);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008FA8);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00008FB0);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00009008);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00009018);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00009078);
+
+INCLUDE_RODATA("nonmatchings/usb", D_0000908C);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00009104);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00009124);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00009128);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00009138);
+
+INCLUDE_RODATA("nonmatchings/usb", D_0000917C);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00009184);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00009188);
+
+INCLUDE_RODATA("nonmatchings/usb", D_00009194);
+
+INCLUDE_RODATA("nonmatchings/usb", D_0000919C);
+
+INCLUDE_RODATA("nonmatchings/usb", D_000091A0);
+
+INCLUDE_RODATA("nonmatchings/usb", D_000091AC);
+
+INCLUDE_RODATA("nonmatchings/usb", D_000091B4);
+
+INCLUDE_RODATA("nonmatchings/usb", D_000091BC);
+
+INCLUDE_RODATA("nonmatchings/usb", D_000091C8);
+#endif
+
 INCLUDE_ASM("nonmatchings/usb", func_000006D4);
 
 #if FW_VERSION >= 300

@@ -16,7 +16,9 @@
   "module_stop": "s32 module_stop(void);",
   "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
   "sceNetApctlDisconnect": "M2C_UNK sceNetApctlDisconnect();",
+  "sceUtility_netparam_internal_854ACDD6": "M2C_UNK sceUtility_netparam_internal_854ACDD6(M2C_UNK);",
   "sceUtility_netparam_internal_9CE50172": "M2C_UNK sceUtility_netparam_internal_9CE50172(M2C_UNK);",
+  "sceVshNetconfRaku_8D3A5DA0": "s32 sceVshNetconfRaku_8D3A5DA0(void *arg0);",
   "sceVshNetconfRaku_F3AF9DD1": "s32 sceVshNetconfRaku_F3AF9DD1(void *arg0);"
  },
  "types": {
@@ -29,6 +31,7 @@
   "D_00008498": "extern s32 D_00008498;",
   "D_000084A0": "extern s32 D_000084A0;",
   "D_000084A4": "extern s32 D_000084A4;",
+  "D_000084A4_v350": "extern s32 D_000084A4_v350;",
   "D_000084B8": "extern M2C_UNK D_000084B8;",
   "D_00008530": "extern s32 D_00008530;",
   "D_00008534": "extern s32 D_00008534;",

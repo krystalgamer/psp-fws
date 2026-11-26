@@ -2,7 +2,7 @@
 #include "common.h"
 #include "htmlviewer_plugin_decls.h"
 
-#if FW_VERSION >= 300
+#if FW_VERSION >= 300 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_00004788);
 #endif
 
@@ -280,7 +280,9 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007708);
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007718);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007730);
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007740);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007750);
@@ -292,9 +294,13 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007770);
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007780);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_0000778C);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_0000779C);
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_000077B0);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_000077C0);
@@ -312,7 +318,9 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007810);
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007820);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007830);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00007840);
 #endif
 
@@ -476,7 +484,13 @@ void func_00004B54(void) {
 }
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_00004B70);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_000087B4);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_00004CD4);
 #endif
 

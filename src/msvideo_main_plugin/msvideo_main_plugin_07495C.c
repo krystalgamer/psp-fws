@@ -95,15 +95,15 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_00075910);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_000759B0);
 #endif
 
-#if FW_VERSION >= 310 && FW_VERSION < 352
+#if FW_VERSION >= 350
 void func_000759B0(void) {
-    scePaf_FCFAA39F();
+    scePaf_CB4C96CE();
 }
 #endif
 
-#if FW_VERSION == 352
+#if FW_VERSION >= 310 && FW_VERSION < 350
 void func_000759B0(void) {
-    scePaf_CB4C96CE();
+    scePaf_FCFAA39F();
 }
 #endif
 

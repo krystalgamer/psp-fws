@@ -2,6 +2,46 @@
 
 INCLUDE_ASM("nonmatchings/usbmic", sceUsbMicInputInitEx);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/usbmic", D_000019E4);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_000019E8);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001A00);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001A18);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001A38);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001A4C);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001A64);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001A7C);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001A8C);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001AAC);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001AB8);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001AF0);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001B04);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001B3C);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001B44);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001B48);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001B50);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001B80);
+
+INCLUDE_RODATA("nonmatchings/usbmic", D_00001B84);
+#endif
+
 INCLUDE_RODATA("nonmatchings/usbmic", D_00001B8C);
 
 INCLUDE_RODATA("nonmatchings/usbmic", D_00001BA4);

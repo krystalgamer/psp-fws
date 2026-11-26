@@ -14,6 +14,80 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_DE2E7E89);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_E67F4E0A);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000025C8);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000025CC);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000025E4);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000025F8);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002610);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_0000262C);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002644);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002658);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002678);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002690);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000026A4);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000026BC);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000026CC);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000026EC);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002700);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000027E8);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000027FC);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_0000282C);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002840);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002868);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_0000287C);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002894);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000028A8);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000028D8);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000028EC);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002914);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002924);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002934);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002948);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002950);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002974);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002984);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002988);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002990);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002994);
+
+INCLUDE_RODATA("nonmatchings/me_wrapper", D_000029C4);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_1C6A60E1);
 #endif

@@ -489,11 +489,27 @@ INCLUDE_ASM("nonmatchings/lowio", sceGpio_driver_F856CE46);
 
 INCLUDE_ASM("nonmatchings/lowio", func_0000233C);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", func_000023E8);
+#else
+s32 func_000023E8(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_0000BB08);
+    InterruptManagerForKernel_F987B1F0(4);
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceGpio_driver_EABDB328);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceGpio_driver_4A992B24);
+#else
+s32 sceGpio_driver_4A992B24(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_0000BB08);
+    InterruptManagerForKernel_F987B1F0(4);
+    return 0;
+}
+#endif
 
 s32 sceGpio_driver_17DAA8C2(void) {
     return 0;
@@ -517,7 +533,19 @@ INCLUDE_ASM("nonmatchings/lowio", sceGpio_driver_31F34AE6);
 
 INCLUDE_ASM("nonmatchings/lowio", sceGpio_driver_BE77D1D0);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceGpio_driver_C6928224);
+#else
+s32 sceGpio_driver_C6928224(u32 arg0) {
+    s32 var_v0;
+
+    var_v0 = 0x80000102;
+    if (arg0 < 4U) {
+        var_v0 = ((u32) D_0000BD20 >> (arg0 * 8)) & 0x1F;
+    }
+    return var_v0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceGpio_driver_6B38B826);
 
@@ -556,9 +584,23 @@ s32 func_00002DE0(void) {
     return 0;
 }
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", func_00002E00);
+#else
+s32 func_00002E00(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_0000BB48);
+    return 0;
+}
+#endif
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", scePwm_driver_B3169427);
+#else
+s32 scePwm_driver_B3169427(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_0000BB48);
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", scePwm_driver_526F94FC);
 
@@ -586,11 +628,31 @@ INCLUDE_ASM("nonmatchings/lowio", sceI2c_driver_6536B1B6);
 
 INCLUDE_ASM("nonmatchings/lowio", func_00003EA4);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", func_00003F70);
+#else
+s32 func_00003F70(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_0000BB88);
+    InterruptManagerForKernel_F987B1F0(0xC);
+    sceKernelDeleteMutex(M2C_VFIELD(&D_0000BD34, s32, 4));
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_0000BD34, s32, 0));
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceI2c_driver_20ADF12A);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceI2c_driver_4809D85F);
+#else
+s32 sceI2c_driver_4809D85F(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_0000BB88);
+    InterruptManagerForKernel_F987B1F0(0xC);
+    sceKernelDeleteMutex(M2C_VFIELD(&D_0000BD34, s32, 4));
+    sceKernelDeleteEventFlag(M2C_VFIELD(&D_0000BD34, s32, 0));
+    return 0;
+}
+#endif
 
 s32 sceI2c_driver_21A8282C(void) {
     sceSysreg_driver_58F47EFD();
@@ -600,9 +662,23 @@ s32 sceI2c_driver_21A8282C(void) {
 
 INCLUDE_ASM("nonmatchings/lowio", sceI2c_driver_B952BA65);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceI2c_driver_DB6C4F9B);
+#else
+s32 sceI2c_driver_DB6C4F9B(s32 arg0) {
+    D_0000BD40 = arg0;
+    return 0;
+}
+#endif
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceI2c_driver_0397408B);
+#else
+s32 sceI2c_driver_0397408B(s32 arg0) {
+    D_0000BD3C = arg0;
+    return 0;
+}
+#endif
 
 s32 sceI2c_driver_17B0DA59(void) {
     *(s32 *)0xBE200020 = 1;
@@ -627,7 +703,23 @@ INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_0DA570C1);
 
 INCLUDE_ASM("nonmatchings/lowio", func_00004604);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", func_0000470C);
+#else
+s32 func_0000470C(void) {
+    sceSysreg_driver_678AD3ED();
+    D_0000D508 = 0;
+    InterruptManagerForKernel_58DD8978(0x15, 2, &func_00004604, 0, &D_0000B7B4);
+    InterruptManagerForKernel_4D6E7305(0x15);
+    sceDmacplus_driver_FE3F3228();
+    sceDmacplus_driver_BEC10779();
+    sceDmacplus_driver_FD8B15BC();
+    sceDmacplus_driver_1F5A80D0();
+    sceDmacplus_driver_B6592A56();
+    sceSysEventForKernel_CD9E4BB5(&D_0000BBC8);
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", func_00004790);
 
@@ -669,7 +761,22 @@ INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_29B50A82);
 
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_8AE579CD);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_241601AE);
+#else
+s32 sceDmacplus_driver_241601AE(s32 *arg0, s32 *arg1, s32 *arg2) {
+    if (arg0 != NULL) {
+        *arg0 = D_0000BD8C;
+    }
+    if (arg1 != NULL) {
+        *arg1 = D_0000BD90;
+    }
+    if (arg2 != NULL) {
+        *arg2 = D_0000BD94;
+    }
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_F8C7C180);
 
@@ -681,7 +788,13 @@ s32 sceDmacplus_driver_C3236D69(void) {
 
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_C8336549);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_58C380BB);
+#else
+s32 sceDmacplus_driver_58C380BB(void) {
+    return D_0000BD88;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_576522BC);
 
@@ -707,7 +820,13 @@ INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_BEC10779);
 
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_7AAE5443);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_1E7483D0);
+#else
+s32 sceDmacplus_driver_1E7483D0(void) {
+    return !(D_0000D50A & 2) ? 0 : -1;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_168836CF);
 
@@ -717,7 +836,15 @@ INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_B2EFA681);
 
 INCLUDE_ASM("nonmatchings/lowio", func_00005A24);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", func_00005B24);
+#else
+s32 func_00005B24(void) {
+    sceKernelSetEventFlag(D_0000CDC0, 1U);
+    M2C_VFIELD(&D_0000D508, u16, 2) = (u16) (M2C_VFIELD(&D_0000D508, u16, 2) & 0x7FFD);
+    return -1;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_4B980588);
 
@@ -729,7 +856,13 @@ INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_FD8B15BC);
 
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_F7DEC189);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_D0464B29);
+#else
+s32 sceDmacplus_driver_D0464B29(void) {
+    return !(D_0000D50A & 4) ? 0 : -1;
+}
+#endif
 
 s32 sceDmacplus_driver_FEE3392C(void) {
     return 0;
@@ -751,7 +884,13 @@ INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_1F5A80D0);
 
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_D1E1567E);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceDmacplus_driver_9393B40D);
+#else
+s32 sceDmacplus_driver_9393B40D(void) {
+    return !(D_0000D50A & 8) ? 0 : -1;
+}
+#endif
 
 s32 sceDmacplus_driver_6D4F8BD7(void) {
     return 0;
@@ -816,9 +955,23 @@ s32 func_000076D4(void) {
     return 0;
 }
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", func_000076F4);
+#else
+s32 func_000076F4(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_0000BC08);
+    return 0;
+}
+#endif
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceLcdc_driver_0E8E8774);
+#else
+s32 sceLcdc_driver_0E8E8774(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_0000BC08);
+    return 0;
+}
+#endif
 
 s32 sceLcdc_driver_DCD51769(void) {
     sceSysreg_driver_F74F14E9();
@@ -826,9 +979,25 @@ s32 sceLcdc_driver_DCD51769(void) {
     return 0;
 }
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceLcdc_driver_A182B32C);
+#else
+s32 sceLcdc_driver_A182B32C(void) {
+    sceSysreg_driver_63B1AADF();
+    D_0000CE4C = 1;
+    return 0;
+}
+#endif
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceLcdc_driver_A0032C3D);
+#else
+s32 sceLcdc_driver_A0032C3D(void) {
+    sceSysreg_driver_F74F14E9();
+    D_0000CE4C = 0;
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceLcdc_driver_00EF7E87);
 
@@ -836,7 +1005,13 @@ INCLUDE_ASM("nonmatchings/lowio", sceLcdc_driver_A2E70DA6);
 
 INCLUDE_ASM("nonmatchings/lowio", sceLcdc_driver_236095AC);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceLcdc_driver_825DB9C5);
+#else
+s32 sceLcdc_driver_825DB9C5(void) {
+    return D_0000CE58;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceLcdc_driver_965D1633);
 
@@ -890,9 +1065,31 @@ s32 func_0000869C(void) {
     return 0;
 }
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", func_000086BC);
+#else
+s32 func_000086BC(void) {
+    sceNand_driver_AE4438C7(0);
+    sceSysEventForKernel_D7D3FDCD(&D_0000BC48);
+    sceKernelDeleteSema(M2C_FIELD(&D_0000CE94, s32 *, 0));
+    sceKernelDeleteEventFlag(M2C_FIELD(&D_0000CE94, s32 *, 4));
+    InterruptManagerForKernel_F987B1F0(0x14);
+    return 0;
+}
+#endif
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_D305870E);
+#else
+s32 sceNand_driver_D305870E(void) {
+    sceNand_driver_AE4438C7(0);
+    sceSysEventForKernel_D7D3FDCD(&D_0000BC48);
+    sceKernelDeleteSema(M2C_FIELD(&D_0000CE94, s32 *, 0));
+    sceKernelDeleteEventFlag(M2C_FIELD(&D_0000CE94, s32 *, 4));
+    InterruptManagerForKernel_F987B1F0(0x14);
+    return 0;
+}
+#endif
 
 s32 sceNand_driver_73A68408(void) {
     return 0;
@@ -902,19 +1099,44 @@ INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_0F9BBBBD);
 
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_E41A11DE);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_0BEE8F36);
+#else
+s32 sceNand_driver_0BEE8F36(s32 arg0) {
+    D_0000CECC = arg0;
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_89BDCA08);
 
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_8AF0AB9F);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_E05AE88D);
+#else
+void sceNand_driver_E05AE88D(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    sceNand_driver_766756EF(arg0, arg1, arg2, arg3, 0x20);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_8932166A);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_C478C1DE);
+#else
+void sceNand_driver_C478C1DE(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    sceNand_driver_766756EF(arg0, arg1, arg2, arg3, 0x31);
+}
+#endif
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_BADD5D46);
+#else
+void sceNand_driver_BADD5D46(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    sceNand_driver_0ADC8686(arg0, arg1, arg2, arg3, 0x31);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", func_0000891C);
 
@@ -948,11 +1170,29 @@ INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_2674CFFE);
 
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_9B2AC433);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_CE9843E6);
+#else
+s32 sceNand_driver_CE9843E6(void) {
+    return D_0000D4F8;
+}
+#endif
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_B07C41D4);
+#else
+s32 sceNand_driver_B07C41D4(void) {
+    return D_0000D4FC;
+}
+#endif
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_C1376222);
+#else
+s32 sceNand_driver_C1376222(void) {
+    return D_0000D500;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_716CD2B2);
 
@@ -964,7 +1204,15 @@ INCLUDE_ASM("nonmatchings/lowio", sceNand_driver_B795D2ED);
 
 INCLUDE_ASM("nonmatchings/lowio", func_00009CD8);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lowio", func_00009F7C);
+#else
+s32 func_00009F7C(void) {
+    sceDdr_driver_17D39E17();
+    DmacManForKernel_32757C57((s32) &sceDdr_driver_87D86769);
+    return 0;
+}
+#endif
 
 s32 func_00009FA8(void) {
     DmacManForKernel_32757C57(0);

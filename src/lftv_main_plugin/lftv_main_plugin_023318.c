@@ -2,7 +2,11 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_023318", func_00023318);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00023318(void) {
     s32 temp_v0;
     struct Unk_func_00023318_temp_s0 *temp_s0;
@@ -362,11 +366,15 @@ void func_000242DC(M2C_UNK **arg0) {
     func_0002CD70((s32) arg0);
 }
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_023318", func_00024304);
+#else
 void func_00024304(M2C_UNK **arg0) {
     *arg0 = &D_0005A850;
     func_0002CD70((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_023318", D_0005A850);

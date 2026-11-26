@@ -173,3 +173,11 @@ INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_B15357C9);
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000C80);
 
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000CB0);
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/exceptionman", D_00000DD4);
+
+INCLUDE_RODATA("nonmatchings/exceptionman", D_00000DEC);
+
+INCLUDE_RODATA("nonmatchings/exceptionman", D_00000E08);
+#endif

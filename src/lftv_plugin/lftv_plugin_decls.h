@@ -18,7 +18,9 @@ extern s8 D_000033F9;
 extern s32 D_000033FC;
 extern s32 D_00003410;
 extern M2C_UNK D_0000343C;
+extern s32 D_00003CD0;
 extern M2C_UNK D_00003D1C;
+extern M2C_UNK func_00001770;
 extern M2C_UNK func_000018E0;
 extern M2C_UNK func_00003164;
 
@@ -38,6 +40,7 @@ s32 func_00000D00(void);
 s32 func_00000D28(void);
 void func_00000DB4(void);
 s32 func_000012C0(void);
+void func_000016F4(s32 arg0);
 void func_0000186C(void);
 void func_00001AE0(void);
 s32 func_000020F8(void);
@@ -68,10 +71,16 @@ M2C_UNK sceKernelPowerLock(M2C_UNK);
 M2C_UNK sceKernelPowerUnlock(M2C_UNK);
 M2C_UNK scePaf_1A45C860(s32, M2C_UNK *);
 void *scePaf_338C3774(s32, M2C_UNK);
+s32 scePaf_5E4447F6(s32);
+s32 scePaf_88784487(M2C_UNK *);
+s32 scePaf_C1B0AA0D(s32);
 s32 scePaf_CA79D58B(s32);
 s32 scePaf_D4FAE7D0(M2C_UNK *);
+void *scePaf_DCE3D225(s32, M2C_UNK);
 s32 scePaf_FD4C9F47(s32);
 M2C_UNK sceVshCommonGui_72E652AA(s32);
+M2C_UNK sceVshCommonGui_8F414E35(s32);
 M2C_UNK sceVshCommonUtil_622815DD(M2C_UNK *, M2C_UNK *);
+M2C_UNK sceVshCommonUtil_951BC384(M2C_UNK *, M2C_UNK *);
 
 #endif

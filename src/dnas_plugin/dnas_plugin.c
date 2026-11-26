@@ -1,6 +1,10 @@
 #include "common.h"
 #include "dnas_plugin_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000000);
+#endif
+
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000024);
 
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_000000AC);
@@ -12,10 +16,17 @@ s32 module_stop(void) {
     return 0;
 }
 
+#if FW_VERSION == 350
+void func_0000015C(void) {
+    scePaf_39E62C88(D_00001F4C, &D_00001AB4, 0, 0);
+    scePaf_A013540A(D_00001F4C, &D_00001AB4);
+}
+#else
 void func_0000015C(void) {
     scePaf_F609FA81(D_00001F4C, &D_00001AB4, 0, 0);
     scePaf_CAF05F1D(D_00001F4C, &D_00001AB4);
 }
+#endif
 
 void func_000001AC(void) {
     D_00001F50 = -1;
@@ -26,6 +37,50 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_000001BC);
 s32 func_00000210(void) {
     return D_00001F50 != 0;
 }
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001884);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001888);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_0000189C);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000018B4);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000018C0);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000018D8);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000018E8);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000018F4);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001914);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001918);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001934);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001940);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_0000199C);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000019CC);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000019D0);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000019E0);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000019EC);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A24);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A34_v350);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A30);
+
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A34);
+#endif
 
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A38);
 
@@ -227,3 +282,7 @@ void func_000014F0(void **arg0) {
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001510);
 
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_000015C4);
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/dnas_plugin", func_0000161C);
+#endif

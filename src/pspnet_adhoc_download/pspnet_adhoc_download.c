@@ -7,6 +7,44 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_13DAB550);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_2B6FB0DA);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_000038C4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_000038C8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_000038D8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_000038F0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003900);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_0000390C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_0000391C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003930);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003944);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003954);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003968);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003A70);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003A78);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003ACC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003AD4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003AF8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003B14);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003B20);
+#endif
+
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_F8FC359E);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_D0189004);

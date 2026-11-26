@@ -85,3 +85,21 @@ INCLUDE_ASM("nonmatchings/systimer", func_00000864);
 
 INCLUDE_ASM("nonmatchings/systimer", func_000008DC);
 #endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/systimer", D_00000A40);
+
+INCLUDE_RODATA("nonmatchings/systimer", D_00000A44);
+
+INCLUDE_RODATA("nonmatchings/systimer", D_00000A64);
+
+INCLUDE_RODATA("nonmatchings/systimer", D_00000A78);
+
+INCLUDE_RODATA("nonmatchings/systimer", D_00000A98);
+
+INCLUDE_RODATA("nonmatchings/systimer", D_00000AAC);
+
+INCLUDE_RODATA("nonmatchings/systimer", D_00000AF4);
+
+INCLUDE_RODATA("nonmatchings/systimer", D_00000B10_v350);
+#endif

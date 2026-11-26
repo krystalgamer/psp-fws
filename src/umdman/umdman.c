@@ -92,6 +92,84 @@ INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_84410A8E);
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_63ACFD28);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/umdman", D_000101A0);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000101A4);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000101C4);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000101D8);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000101EC);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010204);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_0001021C);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010238);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_0001024C);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010260);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010278);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010290);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000102A4);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000102BC);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000102D4);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000102EC);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010300);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_0001030C);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_0001031C);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_0001033C);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010350);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010680);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_0001068C);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000106B4);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000106B8);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000106BC);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000106D8);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_000106E4);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010760);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_0001076C);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_0001081C);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010824);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010828);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_0001083C);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010840);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010848);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010854);
+
+INCLUDE_RODATA("nonmatchings/umdman", D_00010860);
+#endif
+
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_8609D1E4);
 
@@ -3558,7 +3636,11 @@ INCLUDE_RODATA("nonmatchings/umdman", D_00011704);
 INCLUDE_RODATA("nonmatchings/umdman", D_0001170C);
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/umdman", func_0000E650);
+#endif
+
+#if FW_VERSION >= 271 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umdman", func_0000E45C);
 #endif
 

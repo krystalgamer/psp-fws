@@ -5,7 +5,7 @@ INCLUDE_ASM("nonmatchings/usbpspcm", func_00000000);
 
 INCLUDE_ASM("nonmatchings/usbpspcm", func_00000028);
 
-#if FW_VERSION == 352
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbpspcm", D_00004348);
 
 INCLUDE_RODATA("nonmatchings/usbpspcm", D_0000434C);

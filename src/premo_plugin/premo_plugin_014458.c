@@ -3,30 +3,11 @@
 
 INCLUDE_ASM("nonmatchings/premo_plugin_014458", func_00014458);
 
-#if FW_VERSION < 352
-s32 func_000145C8(struct Unk_func_000145C8_0 *arg0) {
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/premo_plugin_014458", func_000145C8);
+#endif
 
-    temp_v0 = arg0->unk2C;
-    if (temp_v0 >= 0) {
-        sceNetInetClose(temp_v0);
-        arg0->unk2C = -1;
-    }
-    temp_v0_2 = arg0->unk4;
-    if (temp_v0_2 != 0) {
-        scePaf_B3D2C3BB(temp_v0_2);
-        arg0->unk4 = 0;
-    }
-    temp_v0_3 = arg0->unk8;
-    if (temp_v0_3 != 0) {
-        scePaf_B3D2C3BB(temp_v0_3);
-        arg0->unk8 = 0;
-    }
-    return 0;
-}
-#else
+#if FW_VERSION == 352
 s32 func_000145C8(struct Unk_func_000145C8_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -45,6 +26,31 @@ s32 func_000145C8(struct Unk_func_000145C8_0 *arg0) {
     temp_v0_3 = arg0->unk8;
     if (temp_v0_3 != 0) {
         scePaf_CCFF20ED(temp_v0_3);
+        arg0->unk8 = 0;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 350
+s32 func_000145C8(struct Unk_func_000145C8_0 *arg0) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
+
+    temp_v0 = arg0->unk2C;
+    if (temp_v0 >= 0) {
+        sceNetInetClose(temp_v0);
+        arg0->unk2C = -1;
+    }
+    temp_v0_2 = arg0->unk4;
+    if (temp_v0_2 != 0) {
+        scePaf_B3D2C3BB(temp_v0_2);
+        arg0->unk4 = 0;
+    }
+    temp_v0_3 = arg0->unk8;
+    if (temp_v0_3 != 0) {
+        scePaf_B3D2C3BB(temp_v0_3);
         arg0->unk8 = 0;
     }
     return 0;

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "common_gui_decls.h"
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_70490BCC);
 #endif
 
@@ -26,9 +26,15 @@ INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_7B52F0E6);
 
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00003438);
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_CBD3BD66);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_F4D1E387);
-#else
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00006080);
 
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_0000608C);
@@ -112,11 +118,48 @@ INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_0000390C);
 
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000037AC);
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_3BE24617);
+
+INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_0F3E011D);
+
+INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_6C337347);
+
+INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_6DB34C38);
+
+INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_792A6ABA);
+
+INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_BEC57A6C);
+
+void sceVshCommonGui_5C700F6F(void) {
+    if (D_00004390 == 0) {
+
+    } else {
+        scePaf_9ADF22F7(D_00004390);
+    }
+    if (D_00004394 == 0) {
+
+    } else {
+        scePaf_9ADF22F7(D_00004394);
+    }
+}
+
+s32 sceVshCommonGui_C1660004(void) {
+    return D_00004344 != 0;
+}
+
+M2C_UNK *sceVshCommonGui_EBB7B7DE(void) {
+    return &D_00003920;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_607D5C82);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_891E0954);
-#else
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000061A0);
 
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000061A4);
@@ -130,6 +173,7 @@ INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000061B0);
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000061B4);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_C5B53362);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_A1C3DDD6);
@@ -137,10 +181,13 @@ INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_A1C3DDD6);
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_ADB52779);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_7C7B935B);
+#endif
 
 #if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_8EB783F5);
-#else
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 350
 void sceVshCommonGui_8EB783F5(void) {
     if (D_00003B00 == 0) {
 
@@ -155,15 +202,17 @@ void sceVshCommonGui_8EB783F5(void) {
 }
 #endif
 
+#if FW_VERSION < 350
 s32 sceVshCommonGui_F7A03543(void) {
     return D_00003934 != 0;
 }
+#endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_25D6E91D);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 350
 M2C_UNK *sceVshCommonGui_25D6E91D(void) {
     return &D_00003920;
 }
@@ -173,7 +222,11 @@ INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_0000295C);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002988);
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_429664DE);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_CD76A885);
 #endif
 
@@ -230,7 +283,11 @@ INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002EDC);
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002F50);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002D38);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00002D38(M2C_UNK **arg0) {
     *arg0 = &D_000037F0;
     scePaf_4E67BB08();
@@ -238,6 +295,10 @@ void func_00002D38(M2C_UNK **arg0) {
 #endif
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002D60);
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002DB8);
+#endif
 
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000037F0);

@@ -61,6 +61,8 @@ extern s32 D_00004560;
 extern s32 D_00004564;
 extern s32 D_00004568;
 extern struct D_00004600_s D_00004600;
+extern s32 D_00004628;
+extern s32 D_0000462C;
 
 s32 func_00001444(s32, s32);
 s32 func_000017C0(void);

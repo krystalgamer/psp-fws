@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, heaparea2]
+      - [0xA0, c, heaparea2]
       - { start: 0x43C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x464, type: prxpad, order: .text }
       - { start: 0x470, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +62,7 @@ segments:
       - { start: 0x49C, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x4C4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x4C8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x4FC, rodata, heaparea2]
+      - [0x4FC, .rodata, heaparea2]
       - { start: 0x5D8, type: prxpad, order: .rodata }
   - name: heaparea2_seg1
     type: code

@@ -2,3 +2,5 @@
 sceAudiocodec2_AA2ED267 = 0x00000000; // type:func
 sceAudiocodec2_E063D402 = 0x0000003C; // type:func
 sceAudiocodec2_21D5A83F = 0x00000094; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

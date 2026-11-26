@@ -21,13 +21,21 @@ void func_00087AB0(s32 **arg0) {
     *arg0 = &D_000A2130;
     func_000873B4(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087AD8);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00087AD8(s32 **arg0) {
     *arg0 = &D_000A2130;
     func_000873B4(arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 void func_00087B10(s32 **arg0, s32 arg1, s32 arg2) {
     func_00087424(arg0, arg1, arg2);
     *arg0 = &D_000A2120;
@@ -44,13 +52,21 @@ void func_00087B98(s32 **arg0) {
     *arg0 = &D_000A2120;
     func_00087454(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087BC0);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00087BC0(s32 **arg0) {
     *arg0 = &D_000A2120;
     func_00087454(arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087BF8);
 
 void func_00087C44(M2C_UNK **arg0) {
@@ -92,13 +108,21 @@ void func_00087DCC(s32 **arg0) {
     *arg0 = &D_000A2150;
     func_00086B7C(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087DF4);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00087DF4(s32 **arg0) {
     *arg0 = &D_000A2150;
     func_00086B7C(arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087E2C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087F0C);
@@ -112,13 +136,21 @@ void func_00087F74(M2C_UNK **arg0) {
     *arg0 = &D_000A2190;
     func_000885B8((s32) arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00087F9C);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00087F9C(M2C_UNK **arg0) {
     *arg0 = &D_000A2190;
     func_000885B8((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 s32 func_00087FD4(void) {
     return 0;
 }
@@ -146,13 +178,21 @@ void func_0008806C(M2C_UNK **arg0) {
     *arg0 = &D_000A2180;
     func_000886B0((s32) arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088094);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00088094(M2C_UNK **arg0) {
     *arg0 = &D_000A2180;
     func_000886B0((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000880CC);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000881D4);
@@ -166,13 +206,21 @@ void func_00088248(s32 **arg0) {
     *arg0 = &D_000A21B8;
     func_000873B4(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088270);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00088270(s32 **arg0) {
     *arg0 = &D_000A21B8;
     func_000873B4(arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 s32 func_000882A8(struct Unk_func_000882A8_0 *arg0) {
     return arg0->unk20;
 }
@@ -208,13 +256,21 @@ void func_00088350(s32 **arg0) {
     *arg0 = &D_000A21A8;
     func_00087454(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088378);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00088378(s32 **arg0) {
     *arg0 = &D_000A21A8;
     func_00087454(arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000883B0);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088538);
@@ -231,7 +287,13 @@ void func_000885E0(s32 **arg0) {
     *arg0 = &D_000A21E0;
     func_00086ADC(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088608);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00088608(s32 **arg0) {
     *arg0 = &D_000A21E0;
     func_00086ADC(arg0);
@@ -271,13 +333,21 @@ void func_000886D8(s32 **arg0) {
     *arg0 = &D_000A21D0;
     func_00086B7C(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088700);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00088700(s32 **arg0) {
     *arg0 = &D_000A21D0;
     func_00086B7C(arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088738);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_0008883C);
@@ -291,13 +361,21 @@ void func_0008889C(M2C_UNK **arg0) {
     *arg0 = &D_000A2208;
     func_0008B980((s32) arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000888C4);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000888C4(M2C_UNK **arg0) {
     *arg0 = &D_000A2208;
     func_0008B980((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 void func_000888FC(M2C_UNK **arg0) {
     func_0008BA14();
     *arg0 = &D_000A21F8;
@@ -317,13 +395,21 @@ void func_00088984(M2C_UNK **arg0) {
     *arg0 = &D_000A21F8;
     func_0008BA74((s32) arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000889AC);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000889AC(M2C_UNK **arg0) {
     *arg0 = &D_000A21F8;
     func_0008BA74((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000889E4);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088D18);
@@ -337,7 +423,13 @@ void func_00088D98(M2C_UNK **arg0) {
     *arg0 = &D_000A2240;
     func_000885B8((s32) arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088DC0);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00088DC0(M2C_UNK **arg0) {
     *arg0 = &D_000A2240;
     func_000885B8((s32) arg0);
@@ -401,13 +493,21 @@ void func_00088EA8(M2C_UNK **arg0) {
     *arg0 = &D_000A2230;
     func_000886B0((s32) arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088ED0);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00088ED0(M2C_UNK **arg0) {
     *arg0 = &D_000A2230;
     func_000886B0((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00088F08);
 
 void func_00089088(M2C_UNK **arg0) {
@@ -444,13 +544,21 @@ void func_000891D8(s32 **arg0) {
     *arg0 = &D_000A2260;
     func_00086B7C(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00089200);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00089200(s32 **arg0) {
     *arg0 = &D_000A2260;
     func_00086B7C(arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00089238);
 
 void func_00089310(M2C_UNK **arg0) {
@@ -487,13 +595,21 @@ void func_00089460(s32 **arg0) {
     *arg0 = &D_000A2290;
     func_00086B7C(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00089488);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00089488(s32 **arg0) {
     *arg0 = &D_000A2290;
     func_00086B7C(arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000894C0);
 
 void func_00089598(M2C_UNK **arg0) {
@@ -530,13 +646,21 @@ void func_000896E8(s32 **arg0) {
     *arg0 = &D_000A22C0;
     func_00086B7C(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00089710);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00089710(s32 **arg0) {
     *arg0 = &D_000A22C0;
     func_00086B7C(arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_00089748);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000897AC);
@@ -552,13 +676,21 @@ void func_0008988C(M2C_UNK **arg0) {
     *arg0 = &D_000A2308;
     func_000885B8((s32) arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000898B4);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000898B4(M2C_UNK **arg0) {
     *arg0 = &D_000A2308;
     func_000885B8((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 s32 func_000898EC(void) {
     return 0;
 }
@@ -622,13 +754,19 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000783B0);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_087A18", D_00097488);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000899C4);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000899C4(M2C_UNK **arg0) {
     *arg0 = &D_000A22F8;
     func_000886B0((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000899FC);
 #endif
 

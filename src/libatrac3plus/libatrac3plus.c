@@ -419,7 +419,25 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_0000219C);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002348);
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000023C0);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/libatrac3plus", D_000036C0);
+
+INCLUDE_RODATA("nonmatchings/libatrac3plus", D_000036C4);
+
+INCLUDE_RODATA("nonmatchings/libatrac3plus", D_000036D8);
+
+INCLUDE_RODATA("nonmatchings/libatrac3plus", D_000036E8);
+
+INCLUDE_RODATA("nonmatchings/libatrac3plus", D_00003718);
+
+INCLUDE_RODATA("nonmatchings/libatrac3plus", D_00003728);
+
+INCLUDE_RODATA("nonmatchings/libatrac3plus", D_00003850);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/libatrac3plus", D_000037F8);
 #endif
 

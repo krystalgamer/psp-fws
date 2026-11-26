@@ -709,6 +709,36 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000D378);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000D484);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B4EC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B4F0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B508);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B518);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B530);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B540);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B550);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B55C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B68C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B69C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B77C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B78C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B798);
+
+INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B7DC);
+#endif
+
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000D6D0);
 
 #if FW_VERSION < 282
@@ -2315,4 +2345,12 @@ void func_0002AF14(void) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetErrno);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetPspError);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_CCC18C45);
+
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_2D5868C0);
+
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_1D023504);
 #endif

@@ -63,6 +63,7 @@ void func_00009A38(void);
 s32 func_00009ADC(void);
 void func_00009DA0(void *arg0);
 s32 func_00009E68(s32);
+s32 func_0000A02C(s32);
 void func_0000A08C(s32 arg0);
 s32 func_0000A0C0();
 s32 func_0000A370(s32);

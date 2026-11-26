@@ -302,7 +302,71 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000EC8);
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000A68);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000B54);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010650);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010654);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010664);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010678);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010688);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000106A0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000106AC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000106BC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000106CC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000106E0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000106F8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010710);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010720);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010730);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_0001073C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000107A4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000107B4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000107EC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010808);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010820);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010824);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010828);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010880);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010898);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000108A0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000108C0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_000108F8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_0001095C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_00010968);
+
+INCLUDE_RODATA("nonmatchings/pspnet_apctl", D_0001096C);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000C38);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000D98);

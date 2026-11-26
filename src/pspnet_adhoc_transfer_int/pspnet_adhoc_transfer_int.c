@@ -11,6 +11,40 @@ void func_0000043C(s32 arg0) {
     sceNetAdhocSetSocketAlert(arg0, 0x3F0);
 }
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_00002130);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_00002134);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_00002140);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_00002150);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_00002160);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_00002178);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_0000218C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_000021A0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_000021B0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_000021C4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_000022B4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_000022BC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_000022F4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_000022F8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_0000231C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_00002334);
+#endif
+
 s32 func_00000464(u32 arg0) {
     s32 temp_v0;
     s32 temp_v0_2;

@@ -50,3 +50,5 @@ sceUriEscape = 0x000025C8; // type:func
 sceUtilityCheckNetParam = 0x000025D0; // type:func
 sceUtility_netparam_internal_D7BB6FFA = 0x000025D8; // type:func
 sceWlanGetEtherAddr = 0x000025E0; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

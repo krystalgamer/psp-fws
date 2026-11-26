@@ -45,6 +45,28 @@ s32 func_00000590(void) {
 INCLUDE_ASM("nonmatchings/cert_loader", func_00000598);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/cert_loader", D_00000CFC);
+
+INCLUDE_RODATA("nonmatchings/cert_loader", D_00000D00);
+
+INCLUDE_RODATA("nonmatchings/cert_loader", D_00000D14);
+
+INCLUDE_RODATA("nonmatchings/cert_loader", D_00000D28);
+
+INCLUDE_RODATA("nonmatchings/cert_loader", D_00000D38);
+
+INCLUDE_RODATA("nonmatchings/cert_loader", D_00000D50);
+
+INCLUDE_RODATA("nonmatchings/cert_loader", D_00000D60);
+
+INCLUDE_RODATA("nonmatchings/cert_loader", D_00000D70);
+
+INCLUDE_RODATA("nonmatchings/cert_loader", D_00000D78);
+
+INCLUDE_RODATA("nonmatchings/cert_loader", D_00000D88);
+#endif
+
 #if FW_VERSION == 271
 s32 func_00000598(void) {
     return 0xF;

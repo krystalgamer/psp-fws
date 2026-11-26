@@ -3,24 +3,38 @@
   "func_0000015C": "void func_0000015C(struct Unk_func_0000015C_0 *arg0);",
   "func_00000180": "void func_00000180(struct Unk_func_00000180_0 *arg0);",
   "func_00000964": "void func_00000964(void);",
+  "func_00000BAC": "void func_00000BAC(s32 arg0);",
   "func_00000D64": "void func_00000D64(void);",
   "func_00000DE8": "M2C_UNK func_00000DE8();",
   "func_0000104C": "void func_0000104C(void);",
   "func_000010D0": "M2C_UNK func_000010D0();",
   "module_stop": "s32 module_stop(void);",
+  "scePaf_1941BB4E": "M2C_UNK scePaf_1941BB4E();",
+  "scePaf_2F94EF32": "M2C_UNK scePaf_2F94EF32(M2C_UNK, s32, s32);",
   "scePaf_338C3774": "void *scePaf_338C3774(s32, M2C_UNK);",
   "scePaf_3DEE8DB4": "M2C_UNK scePaf_3DEE8DB4();",
   "scePaf_499FF48D": "M2C_UNK scePaf_499FF48D();",
+  "scePaf_648CA0C5": "M2C_UNK scePaf_648CA0C5();",
+  "scePaf_6A82A8C6": "M2C_UNK scePaf_6A82A8C6(s32, M2C_UNK);",
   "scePaf_86B41BA3": "M2C_UNK scePaf_86B41BA3();",
+  "scePaf_88784487": "s32 scePaf_88784487(M2C_UNK *);",
+  "scePaf_8B38372A": "M2C_UNK scePaf_8B38372A(s32, M2C_UNK *);",
   "scePaf_A69BABE3": "M2C_UNK scePaf_A69BABE3(M2C_UNK, s32, s32);",
+  "scePaf_B94FDC08": "M2C_UNK scePaf_B94FDC08();",
   "scePaf_D4FAE7D0": "s32 scePaf_D4FAE7D0(M2C_UNK *);",
-  "sceVshBridge_639C3CB3": "s32 sceVshBridge_639C3CB3(M2C_UNK);"
+  "scePaf_DCE3D225": "void *scePaf_DCE3D225(s32, M2C_UNK);",
+  "scePaf_FA7E6DA3": "M2C_UNK scePaf_FA7E6DA3();",
+  "sceVshBridge_639C3CB3": "s32 sceVshBridge_639C3CB3(M2C_UNK);",
+  "vsh_6D4C06F7": "M2C_UNK vsh_6D4C06F7(M2C_UNK);"
  },
  "types": {
   "Unk_func_0000015C_0": "struct Unk_func_0000015C_0 {\n    u8 pad0[0x1FD];\n    s8 unk1FD;\n    s8 unk1FE;\n};",
   "Unk_func_00000180_0": "struct Unk_func_00000180_0 {\n    u8 pad0[0x1FD];\n    s8 unk1FD;\n    s8 unk1FE;\n};"
  },
  "vars": {
-  "D_000013A4": "extern M2C_UNK D_000013A4;"
+  "D_000013A4": "extern M2C_UNK D_000013A4;",
+  "D_000016F4": "extern M2C_UNK D_000016F4;",
+  "D_00001734": "extern M2C_UNK D_00001734;",
+  "D_0000189C": "extern s32 D_0000189C;"
  }
 }

@@ -684,6 +684,44 @@ void func_00005708(struct Unk_func_00005708_0 *arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000057CC);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_00007670);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_00007674);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_00007688);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000076A0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000076B8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000076C4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000076D4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000076E8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000076F8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_00007704);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000077F4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_00007804);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_00007834);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_00007840);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_00007844);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_0000784C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_0000786C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000078C4);
+#endif
+
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_0000789C);
 
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_000078A0);

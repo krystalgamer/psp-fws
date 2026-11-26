@@ -8,6 +8,36 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00000000);
 
 INCLUDE_ASM("nonmatchings/interruptman", syslib_D3744BE0);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/interruptman", D_00003E3C);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_00003E40);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_00003E60);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_00003E78);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_00003E8C);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_00003EA0);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_00003EC0);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_00003EDC);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_000040B4);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_000040C8);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_00004110);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_0000411C);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_00004124);
+
+INCLUDE_RODATA("nonmatchings/interruptman", D_00004130);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_58DD8978);
 

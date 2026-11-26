@@ -2,6 +2,10 @@
 #include "common.h"
 #include "netconf_plugin_auto_nec_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00000000);
+#endif
+
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00000024);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_000000AC);
@@ -16,7 +20,11 @@ s32 module_stop(void) {
     return 0;
 }
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_2AFE9FD3);
+#else
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_70A22EF2);
+#endif
 
 s32 func_00000180(void) {
     D_000084A4 = -1;
@@ -31,12 +39,86 @@ INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_0000019C);
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00000500);
-#else
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_000057EC);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_000057F0);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_000057FC);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_0000580C);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005824);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005848);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005854);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005874);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005884);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005894);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_0000589C);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_000058BC);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_000058D0);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_000058F8);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005910);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005914);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005924);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005930);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005948);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_0000595C);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005960);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_0000596C_v350);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_0000596C);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_0000597C_v350);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005978);
+
+INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_0000597C);
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_000004D8);
 #endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_0000098C);
 
+#if FW_VERSION == 350
+void func_00000B1C(void) {
+    if (D_000084A4_v350 == 0) {
+        D_000084A4_v350 = 0;
+        sceNetApctlDisconnect();
+        if (D_000084A4_v350 == 0) {
+            do {
+                sceKernelDelayThread(0x7A120U);
+            } while (D_000084A4_v350 == 0);
+        }
+        D_00008540 = 0;
+    }
+    if (D_00008538 != 0) {
+        sceUtility_netparam_internal_854ACDD6(0);
+        D_00008538 = 0;
+    }
+}
+#else
 void func_00000B1C(void) {
     if (D_000084A0 == 0) {
         D_000084A0 = 0;
@@ -53,6 +135,7 @@ void func_00000B1C(void) {
         D_00008538 = 0;
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00000B98);
 
@@ -168,6 +251,26 @@ INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00004BD4);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00004C2C);
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_2A1CBBAC);
+
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_B7E8374D);
+
+s32 sceVshNetconfRaku_8D3A5DA0(void *arg0) {
+    s32 var_v1;
+
+    var_v1 = D_00008498;
+    M2C_FIELD(arg0, s32 *, 0) = (s32) D_00008530;
+    if (var_v1 != -1) {
+        var_v1 = D_00008498 - func_00004A38();
+    }
+    M2C_FIELD(arg0, s32 *, 4) = var_v1;
+    M2C_FIELD(arg0, s32 *, 8) = (s32) D_00008534;
+    return 1;
+}
+
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_1B26D858);
+#else
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_42C68F08);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_B29274F1);
@@ -186,6 +289,7 @@ s32 sceVshNetconfRaku_F3AF9DD1(void *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", sceVshNetconfRaku_D030086D);
+#endif
 
 #if FW_VERSION >= 250
 s32 func_00004FE8(void) {
@@ -200,6 +304,10 @@ s32 func_00004FE8(void) {
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00004FF0);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_00005048);
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/netconf_plugin_auto_nec", func_000055BC);
+#endif
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_nec", D_00005AF8);
 

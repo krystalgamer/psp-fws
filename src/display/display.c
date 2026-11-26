@@ -5,6 +5,92 @@
 
 INCLUDE_ASM("nonmatchings/display", module_reboot_before);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/display", D_00003A68);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003A6C);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003A80);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003A9C);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003AB0);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003AD0);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003AE8);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003B00);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003B18);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003B2C);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003B40);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003B58);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003B6C);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003B80);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003B94_v350);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003BA8);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003BC0);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003BD4);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003BEC);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003C00);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003C20);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003C2C);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003CF4);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003D08);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003E48);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003E54);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003E88);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003E8C);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003E90);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003E94);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003E9C);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003EB4);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003EBC);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003ED4);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003EF8_v350);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003F14);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003F24);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003F5C);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003F60);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003F78);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003F88);
+
+INCLUDE_RODATA("nonmatchings/display", D_00003F90);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/display", D_00002968);
 #endif
@@ -285,7 +371,13 @@ s32 sceDisplay_driver_7A10289D(void) {
     func_00002A64();
     return 0;
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/display", func_000009F8);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_000009F8(void) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -317,7 +409,13 @@ s32 func_000009F8(void) {
 
 #if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/display", func_00000B30);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/display", func_00001058);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/display", func_00000F38);
 #endif
 
@@ -335,11 +433,15 @@ INCLUDE_ASM("nonmatchings/display", func_00001220);
 INCLUDE_ASM("nonmatchings/display", func_00001288);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/display", func_000015A8);
+#endif
+
 #if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/display", func_000012C0);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/display", func_00001398);
 #endif
 
@@ -581,7 +683,15 @@ s32 sceDisplayIsVblank(void) {
 s32 sceDisplay_driver_69B53541(void) {
     return __builtin_allegrex_max(D_00003EC8.unk20 - sceDisplayGetCurrentHcount(), -1);
 }
+#endif
 
+#if FW_VERSION == 350
+s32 sceDisplay_driver_66961521(void) {
+    return __builtin_allegrex_max(M2C_VFIELD(&D_00003EC8, s32, 0x14) - sceDisplayGetCurrentHcount(), -1);
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_21038913);
 
 s32 sceDisplayWaitVblankStart(void) {

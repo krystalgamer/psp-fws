@@ -124,6 +124,12 @@ void scePaf_F639E5E1(struct Unk_scePaf_F639E5E1_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pafmini_06A490", scePaf_7F2442DC);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/pafmini_06A490", func_0006D3D0);
+
+INCLUDE_ASM("nonmatchings/pafmini_06A490", func_0006D520);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_0006A8CC);
 
@@ -310,7 +316,7 @@ s32 func_0006BD64(struct Unk_func_0006BD64_0 *arg0, s32 arg1) {
     return var_v0;
 }
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_06A490", scePaf_F89014B3);
 #endif
 
@@ -402,6 +408,10 @@ INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D96B8);
 
 INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D96C4);
 
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D9480);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D7BA0);
 #endif
@@ -431,6 +441,10 @@ INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D96D0);
 #endif
 
 INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D9744);
+
+#if FW_VERSION == 260
+INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D94FC);
+#endif
 
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/pafmini_06A490", D_000D7C1C);
@@ -1424,6 +1438,10 @@ INCLUDE_ASM("nonmatchings/pafmini_06A490", func_00074FA0);
 
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_00074FC8);
 
+#if FW_VERSION == 260
+INCLUDE_ASM("nonmatchings/pafmini_06A490", func_00077AFC);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_000768F4);
 #endif
@@ -1645,8 +1663,16 @@ INCLUDE_ASM("nonmatchings/pafmini_06A490", func_00077B8C);
 
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_00077BAC);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_000775C0);
+#endif
+
+#if FW_VERSION == 260
+void func_000775C0(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x3E8) = arg1;
+    M2C_FIELD(arg0, s32 *, 0xC28) = arg1;
+    M2C_FIELD(arg0, s32 *, 0xDA8) = arg1;
+}
 #endif
 
 #if FW_VERSION < 282

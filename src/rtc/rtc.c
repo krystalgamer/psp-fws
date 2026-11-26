@@ -2,6 +2,10 @@
 #include "common.h"
 #include "rtc_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/rtc", func_00000000_v350);
+#endif
+
 #if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/rtc", func_00000000_v340);
 #endif
@@ -344,6 +348,56 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcParseDateTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcParseRFC3339);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/rtc", D_00003EB4);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003EB8);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003ECC);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003EE8);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003F00);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003F20);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003F38);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003F50);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003F64);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003F78);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003F8C);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003FAC);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00003FB4);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_0000412C);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_0000413C);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00004314);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_0000431C);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00004320);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00004324);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00004330);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_0000433C);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00004340);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00004348);
+
+INCLUDE_RODATA("nonmatchings/rtc", D_00004350);
+#endif
+
 #if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/rtc", D_00004360);
 
@@ -354,6 +408,10 @@ INCLUDE_ASM("nonmatchings/rtc", func_00002ED4);
 INCLUDE_RODATA("nonmatchings/rtc", D_00004474);
 
 INCLUDE_ASM("nonmatchings/rtc", func_00002F78);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/rtc", D_000045D0_v350);
 #endif
 
 #if FW_VERSION == 340

@@ -30,6 +30,32 @@ INCLUDE_ASM("nonmatchings/ata", func_00000280);
 
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_52D9A4CA);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/ata", D_000041DC);
+
+INCLUDE_RODATA("nonmatchings/ata", D_000041E0);
+
+INCLUDE_RODATA("nonmatchings/ata", D_00004200);
+
+INCLUDE_RODATA("nonmatchings/ata", D_00004218);
+
+INCLUDE_RODATA("nonmatchings/ata", D_0000422C);
+
+INCLUDE_RODATA("nonmatchings/ata", D_00004240);
+
+INCLUDE_RODATA("nonmatchings/ata", D_00004258);
+
+INCLUDE_RODATA("nonmatchings/ata", D_00004268);
+
+INCLUDE_RODATA("nonmatchings/ata", D_00004450);
+
+INCLUDE_RODATA("nonmatchings/ata", D_00004458);
+
+INCLUDE_RODATA("nonmatchings/ata", D_00004460);
+
+INCLUDE_RODATA("nonmatchings/ata", D_0000446C);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/ata", D_00004470);
 

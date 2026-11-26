@@ -1,6 +1,10 @@
 #include "common.h"
 #include "heaparea2_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/heaparea2", func_00000000);
+#endif
+
 INCLUDE_ASM("nonmatchings/heaparea2", func_00000024);
 
 INCLUDE_ASM("nonmatchings/heaparea2", func_000000AC);
@@ -19,6 +23,32 @@ INCLUDE_ASM("nonmatchings/heaparea2", scePafHeaparea_F50AAE41);
 
 INCLUDE_ASM("nonmatchings/heaparea2", scePafHeaparea_ACCE25B2);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/heaparea2", D_0000045C);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_00000460);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_00000478_v350);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_0000048C_v350);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_000004B4);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_000004C4_v350);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_000004D4);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_000004D8_v350);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_00000478);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_000004F8);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_00000488);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_0000048C);
+#endif
+
 INCLUDE_ASM("nonmatchings/heaparea2", func_0000018C);
 
 void func_000002BC(void) {
@@ -30,3 +60,7 @@ void func_000002DC(void) {
 }
 
 INCLUDE_ASM("nonmatchings/heaparea2", func_000002FC);
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/heaparea2", func_00000354);
+#endif

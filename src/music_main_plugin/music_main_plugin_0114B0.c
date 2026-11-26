@@ -60,13 +60,27 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011A00);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011A90);
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/music_main_plugin_0114B0", D_000B2DE4);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_0114B0", D_000B2E04);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_0114B0", D_000B2F40);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_0114B0", D_000B2F58);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_0114B0", D_000B2F74_v350);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_0114B0", D_000B2F8C);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0114B0", D_000B2DF8);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0114B0", D_000B2E18);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0114B0", D_000B26F8);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0114B0", D_000B2710);
@@ -102,10 +116,18 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011AFC);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011B24);
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011B58);
+#else
 void func_00011B58(void) {
     D_000A43D0 = vsh_81BBD0D1(vsh_34DA1B67(), D_000A3254);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011B8C);
+#else
 void func_00011B8C(void) {
     vsh_6286E89D(vsh_34DA1B67(), D_000A3254);
 }
+#endif

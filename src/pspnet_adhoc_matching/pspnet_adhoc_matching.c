@@ -14,6 +14,44 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", sceNetAdhocMatchingStop);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", sceNetAdhocMatchingDelete);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_000045B4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_000045B8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_000045C4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_000045D4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_000045E4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_000045F4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_00004608);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_00004620);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_00004634);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_00004644);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_00004658);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_000046F8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_00004700);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_00004704);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_0000475C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_00004760);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_00004774);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_matching", D_00004784);
+#endif
+
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", sceNetAdhocMatchingSelectTarget);
 
 #if FW_VERSION < 250
@@ -414,7 +452,23 @@ void func_000020AC(void *arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 350
+void func_000029F8(struct Unk_func_000029F8_0 *arg0, struct Unk_func_000029F8_1 *arg1) {
+    s32 temp_s1;
+    s32 temp_v1;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    temp_v1 = arg1->unk54;
+    if (temp_v1 >= 0) {
+        sceKernelCancelAlarm((u32) temp_v1);
+        arg1->unk54 = -1;
+    }
+    sceKernelCpuResumeIntr(temp_s1);
+    arg1->unk54 = sceKernelSetAlarm(arg0->unk2C, (s32) func_00002C08, arg1);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000029F8(struct Unk_func_000029F8_0 *arg0, struct Unk_func_000029F8_1 *arg1) {
     s32 temp_s1;
     s32 temp_v1;
@@ -430,7 +484,23 @@ void func_000029F8(struct Unk_func_000029F8_0 *arg0, struct Unk_func_000029F8_1 
 }
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 350
+void func_00003308(void *arg0, void *arg1) {
+    s32 temp_s1;
+    s32 temp_v1;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    temp_v1 = M2C_FIELD(arg1, s32 *, 0x9C);
+    if (temp_v1 >= 0) {
+        sceKernelCancelAlarm((u32) temp_v1);
+        M2C_FIELD(arg1, s32 *, 0x9C) = -1;
+    }
+    sceKernelCpuResumeIntr(temp_s1);
+    M2C_FIELD(arg1, s32 *, 0x9C) = sceKernelSetAlarm(M2C_FIELD(arg0, u32 *, 0x2C), (s32) &func_000035DC, arg1);
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 350
 void func_00003308(void *arg0, void *arg1) {
     s32 temp_s1;
     s32 temp_v1;
@@ -633,7 +703,23 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_000023D8);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002B24);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 350
+void func_00002AF4(struct Unk_func_00002AF4_0 *arg0, u32 arg1) {
+    s32 temp_s1;
+    s32 temp_v1;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    temp_v1 = arg0->unk6C;
+    if (temp_v1 >= 0) {
+        sceKernelCancelAlarm((u32) temp_v1);
+        arg0->unk6C = -1;
+    }
+    sceKernelCpuResumeIntr(temp_s1);
+    arg0->unk6C = sceKernelSetAlarm(arg1, (s32) func_00002CC0, arg0);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00002AF4(struct Unk_func_00002AF4_0 *arg0, u32 arg1) {
     s32 temp_s1;
     s32 temp_v1;
@@ -649,7 +735,28 @@ void func_00002AF4(struct Unk_func_00002AF4_0 *arg0, u32 arg1) {
 }
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 350
+void func_00003478(void *arg0) {
+    s32 temp_s1;
+    s32 temp_v1;
+    s32 temp_v1_2;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    temp_v1 = M2C_FIELD(arg0, s32 *, 0x54);
+    if (temp_v1 >= 0) {
+        sceKernelCancelAlarm((u32) temp_v1);
+        M2C_FIELD(arg0, s32 *, 0x54) = -1;
+    }
+    temp_v1_2 = M2C_FIELD(arg0, s32 *, 0x9C);
+    if (temp_v1_2 >= 0) {
+        sceKernelCancelAlarm((u32) temp_v1_2);
+        M2C_FIELD(arg0, s32 *, 0x9C) = -1;
+    }
+    sceKernelCpuResumeIntr(temp_s1);
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 350
 void func_00003478(void *arg0) {
     s32 temp_s1;
     s32 temp_v1;
@@ -668,7 +775,24 @@ void func_00003478(void *arg0) {
     }
     sceKernelCpuResumeIntr(temp_s1);
 }
+#endif
 
+#if FW_VERSION == 350
+void func_00002B68(struct Unk_func_00002B68_0 *arg0) {
+    s32 temp_s1;
+    s32 temp_v1;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    temp_v1 = M2C_FIELD(arg0, s32 *, 0x9C);
+    if (temp_v1 >= 0) {
+        sceKernelCancelAlarm((u32) temp_v1);
+        M2C_FIELD(arg0, s32 *, 0x9C) = -1;
+    }
+    sceKernelCpuResumeIntr(temp_s1);
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 350
 void func_00002B68(struct Unk_func_00002B68_0 *arg0) {
     s32 temp_s1;
     s32 temp_v1;
@@ -698,7 +822,22 @@ void func_00002B68(struct Unk_func_00002B68_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 350
+void func_00002BB8(struct Unk_func_00002BB8_0 *arg0) {
+    s32 temp_s1;
+    s32 temp_v1;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    temp_v1 = arg0->unk6C;
+    if (temp_v1 >= 0) {
+        sceKernelCancelAlarm((u32) temp_v1);
+        arg0->unk6C = -1;
+    }
+    sceKernelCpuResumeIntr(temp_s1);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00002BB8(struct Unk_func_00002BB8_0 *arg0) {
     s32 temp_s1;
     s32 temp_v1;
@@ -711,7 +850,27 @@ void func_00002BB8(struct Unk_func_00002BB8_0 *arg0) {
     }
     sceKernelCpuResumeIntr(temp_s1);
 }
+#endif
 
+#if FW_VERSION == 350
+s32 func_00002C08(struct Unk_func_00002C08_0 *arg0) {
+    s32 temp_a2;
+
+    temp_a2 = arg0->unk50;
+    if (temp_a2 & 1) {
+
+    } else {
+        arg0->unk50 = temp_a2 | 1;
+        arg0->unk48 = 2;
+        arg0->unk4C = arg0;
+        sceKernelSendMbx(arg0->unk60, &arg0->pad0[0x40]);
+    }
+    arg0->unk54 = -1;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_00002C08(struct Unk_func_00002C08_0 *arg0) {
     s32 temp_a2;
 
@@ -733,7 +892,25 @@ s32 func_00002C08(struct Unk_func_00002C08_0 *arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_000035DC);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 350
+s32 func_00002C64(struct Unk_func_00002C64_0 *arg0) {
+    s32 temp_a2;
+
+    temp_a2 = arg0->unk50;
+    if (temp_a2 & 1) {
+
+    } else {
+        arg0->unk50 = temp_a2 | 1;
+        arg0->unk48 = 3;
+        arg0->unk4C = arg0;
+        sceKernelSendMbx(arg0->unk60, &arg0->pad0[0x40]);
+    }
+    arg0->unk54 = -1;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_00002C64(struct Unk_func_00002C64_0 *arg0) {
     s32 temp_a2;
 
@@ -749,7 +926,27 @@ s32 func_00002C64(struct Unk_func_00002C64_0 *arg0) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION == 350
+s32 func_00002CC0(struct Unk_func_00002CC0_0 *arg0) {
+    s32 temp_a2;
+
+    temp_a2 = arg0->unk60;
+    if (temp_a2 & 1) {
+
+    } else {
+        arg0->unk60 = temp_a2 | 1;
+        arg0->unk58 = 4;
+        arg0->unk5C = 0;
+        sceKernelSendMbx(arg0->unk40, &arg0->pad44[0xC]);
+    }
+    arg0->unk6C = -1;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_00002CC0(struct Unk_func_00002CC0_0 *arg0) {
     s32 temp_a2;
 

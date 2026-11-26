@@ -2365,7 +2365,9 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_00104BB4);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00104BE4);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00104C14);
+#endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0002494C);
@@ -2817,7 +2819,11 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A098);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A0A8);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B2FC);
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A944);
 #endif
 
@@ -2841,6 +2847,10 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A0E0);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E79D8);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B34C);
+#endif
+
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C18C);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C1AC);
@@ -2852,6 +2862,12 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C1BC);
 #endif
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C1C4);
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B384);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B394);
+#endif
 
 #if FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C1CC);
@@ -2871,13 +2887,25 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C1E4);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7A48);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B3C4);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B3DC);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B3EC);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B3F4);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B3FC);
+#endif
+
 #if FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C1EC);
 #endif
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C1FC);
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A120);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A138);
@@ -2893,19 +2921,21 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AA04);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AA0C);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A150);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A160);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7A80);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7A88);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7A90);
+#endif
 
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7A98);
 #endif
 
@@ -2915,9 +2945,13 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C20C);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010DF24);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B47C);
+#endif
+
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C214);
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A1D0);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A1D8);
@@ -2943,14 +2977,20 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C22C);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C23C);
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A248);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A250);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A25C);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A264);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B510);
 #endif
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C244);
@@ -2977,6 +3017,12 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A2DC);
 
 #if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A2EC);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B590);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B5A0);
 #endif
 
 #if FW_VERSION >= 303
@@ -3007,9 +3053,13 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C2C4);
 
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AC48);
+#endif
 
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AC50);
+#endif
 
+#if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AC58);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AC60);
@@ -3019,10 +3069,26 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C2D4);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C2DC);
 
-#if FW_VERSION == 340
-INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AC78);
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B628);
+#endif
 
+#if FW_VERSION >= 340
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AC78);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B640);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B648);
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AC88);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B660);
 #endif
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C2E4);
@@ -3039,7 +3105,7 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C2F0);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C2FC);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A384);
 #endif
 
@@ -3057,7 +3123,15 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002ACB8);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A394);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B690);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B6A0);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B6A8);
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002ACD8);
 #endif
 
@@ -3069,6 +3143,10 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C308);
 
 #if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7C18);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B6D8);
 #endif
 
 #if FW_VERSION == 340
@@ -3089,13 +3167,17 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A3C4);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A3D4);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AD28);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B708);
+#else
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C314);
+#endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A3F0);
 #endif
 
@@ -3105,49 +3187,57 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C320);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C32C);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C338);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C344);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C350);
+#endif
 
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AD70);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A420);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C35C);
+#endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7C60);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C368);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010E084);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010E090);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A45C);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A468);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C374);
+#endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A480);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A48C);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7C9C);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7CA8);
@@ -3157,20 +3247,23 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7CA8);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010E0A8_v303);
 #endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010E0B4);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C380);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010E0CC);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7CD8);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C38C);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C398);
@@ -3178,16 +3271,19 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C398);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C3A4);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C3B0);
+#endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A510);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A51C);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C3BC);
+#endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A534);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A540);
@@ -3197,19 +3293,23 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A540);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C3C8);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C3D4);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C3E0);
+#endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7D38);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C3EC);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C3F8);
+#endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A588);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A594);
@@ -3221,15 +3321,17 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C404);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C410);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C41C);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C428);
+#endif
 
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AF14);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7D74);
 #endif
 
@@ -3237,31 +3339,35 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7D74);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AF2C);
 #endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010E174);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C434);
+#endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A5DC);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C440);
+#endif
 
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AF68);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A5F4);
 #endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010E198);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A60C);
 #endif
 
@@ -3269,13 +3375,15 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A60C);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AF98);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C44C);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C458);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C464);
+#endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7DD4);
 #endif
 
@@ -3283,29 +3391,33 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7DD4);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7DE0);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C470);
+#endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7DF8);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A660);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A66C);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C47C);
+#endif
 
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B010);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002A684);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION >= 310 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7E10);
 #endif
 
@@ -3313,15 +3425,19 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_000E7E10);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B034);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C488);
+#endif
 
 #if FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C494);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C4A0);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C4AC);
+#endif
 
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B064);
@@ -3335,13 +3451,17 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B07C);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010E210);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C4B8);
+#endif
 
 #if FW_VERSION == 302
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C4C4);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C4D0);
+#endif
 
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B0A0_v340);
@@ -3353,17 +3473,19 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B0B8);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B0C4);
 #endif
 
+#if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C4DC);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C4E8);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010C4F4);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0010E258);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00000598);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000005C8);
@@ -3391,9 +3513,17 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AA38);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AB38);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00000B68);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002BC80);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002ACF4);
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00000F9C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00000DA0);
@@ -3423,9 +3553,43 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0000109C);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000011B4);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000011FC);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00001234);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000123C);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00001244);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000124C);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00001254);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000125C);
+
+s32 func_00001264(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00001268);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00001284);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000128C);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00001294);
+
+void func_0000129C(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000012C4);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000013A0);
@@ -3437,7 +3601,15 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_000014B4);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00001520);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00001550);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000018B4);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000019F4);
+#endif
+
+#if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000018BC);
 #endif
 
@@ -3445,7 +3617,7 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_000018BC);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AB78);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002ABF0);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002ACF4);
@@ -3453,10 +3625,14 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002ACF4);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00001ADC);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00001F20);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00002000);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00001DBC);
 #endif
 
 #if FW_VERSION >= 330
@@ -3465,15 +3641,21 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AD3C);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002AD5C);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00001EF0);
+#endif
+
 #if FW_VERSION == 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00001F3C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000201C);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000210C);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000291C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000352C);
@@ -3485,12 +3667,24 @@ void func_00002594(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000357C);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000035C0);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000035C4);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000036E4);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00003700);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000037C0);
 #endif
 
 #if FW_VERSION == 340
@@ -3531,11 +3725,19 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00003B48);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00003B88);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00003BC4);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00003C30);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00003BE0);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00003C00);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00003D94);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000412C);
@@ -3547,12 +3749,26 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00004368);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000465C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00004728);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00005120);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00004FD8);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00005BF8);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00005D7C);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C33C);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C34C);
 #endif
 
 #if FW_VERSION == 340
@@ -3681,11 +3897,21 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00009ECC);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00009F44);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000A028);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000A334);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000A450);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000A178);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000A298);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000AB54);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000AC0C);
@@ -3701,11 +3927,21 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0000ACEC);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000AD78);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000AE38);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000B0EC);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000B218);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000AF30);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000B058);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000B130);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000B1E8);
@@ -3715,7 +3951,13 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0000A26C);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000B2BC);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000B2EC);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000B4FC);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000B33C);
 #endif
 
@@ -3779,8 +4021,32 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C330);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C364);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C438);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C648);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C6CC);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C718);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C738);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C740);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C748);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C750);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C5BC);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C3E0);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C400);
 #endif
 
 #if FW_VERSION == 340
@@ -3811,7 +4077,13 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0000C7BC);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000D060);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000D094);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000D2F0);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000D148);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000D244);
@@ -3829,9 +4101,21 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0000D950);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000DA34);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000DB9C);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000E034);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000DE18);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000E23C);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000149E0);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00014AD4);
@@ -3853,7 +4137,13 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_000151D0);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00015288);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000E69C);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000ECDC);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00013498);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000E910);
@@ -3873,11 +4163,21 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0000EEFC);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000F7E8);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000F870);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0000FF08);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000101F8);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000F92C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000FBFC);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0000EEC0);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00010284);
@@ -3889,9 +4189,17 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_000103D4);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00010460);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00010498);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00010B34);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001058C);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00010768);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000107C8);
@@ -3919,17 +4227,37 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00010BF8);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00010C74);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00010DC4);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0001135C);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00011514);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00010E0C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00010FDC);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000112AC);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000117AC);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00011864);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000112DC);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000113B0);
+#endif
 
+#if FW_VERSION >= 330
 void func_000114A8(void) {
     func_0001234C();
 }
@@ -3939,6 +4267,12 @@ void func_000114C4(void) {
 }
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000114E0);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C4AC);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C5A4);
 #endif
 
 #if FW_VERSION == 340
@@ -3967,9 +4301,17 @@ void func_000116C4(void) {
 void func_000116E0(void) {
     func_00011EAC(2);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00011BA4);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000116FC);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001188C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000119E0);
@@ -3985,7 +4327,7 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00011EAC);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00011FD4);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C080);
 #endif
 
@@ -4003,7 +4345,19 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0001232C);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001234C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00012408);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00012954);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00012B64);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00012E04);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00012F50);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000124F0);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00012570);
@@ -4013,18 +4367,40 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0001269C);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000128C8);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000129B0);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00012BB4);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00012CBC);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000132E4);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00012D70);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00012F3C);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00013250);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00013838);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001325C);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0001399C);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000139D8);
 #endif
 
 #if FW_VERSION == 330
@@ -4039,7 +4415,7 @@ u8 func_00013358(void) {
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00013364);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00013398);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000134E0);
@@ -4051,9 +4427,17 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B618);
 
 #if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00013D24);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000145DC);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00013F70);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000140B4);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000144BC);
@@ -4067,17 +4451,93 @@ s32 func_000145CC(void) {
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000145D4);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00014768);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00014E58);
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C0F0);
+#endif
 
+#if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000148C0);
+#endif
 
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00014978);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C730);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C74C);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C770);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C794);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C7C0);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C7EC);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C810);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C834);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C860);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C88C);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C8B8);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C8E4);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C910);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C93C);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C968);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C994);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C9C0);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C9EC);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CA10);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CA34);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CA68);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CAA0);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CAAC);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CAD0);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CAF4);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CB14);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CB4C);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CB84);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CBA4);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CBDC);
+#endif
+
+#if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00014D14);
+#endif
 
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00014D4C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00014DF4);
@@ -4101,16 +4561,48 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_000146A0);
 
 #if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B63C);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CC54);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CC6C);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B65C);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B6A4);
+#endif
 
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B6DC);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B710);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B810);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CE94);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CED4);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CEE4);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CEF0);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00014DF8);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00014FC4);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CF74);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CFB4);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002CFBC);
 #endif
 
 #if FW_VERSION == 330
@@ -4129,7 +4621,7 @@ s32 func_00014D78(void) {
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00014D80);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00014DF8);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00014FC4);
@@ -4157,9 +4649,19 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00015240);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000152F4);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00015594);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0001628C);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000168E0);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00015668);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000167B0);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000167D4);
@@ -4167,21 +4669,35 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_000167D4);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00016820);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00016830);
+#endif
 
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000168E0);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00016934);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00016950);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000169E4);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00017D38);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00016EB8);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0001AE88);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00016A88);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00016EB8);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00019FBC);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A408);
@@ -4199,7 +4715,7 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B98C);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002B99C);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C498);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002C4A4);
@@ -4229,7 +4745,7 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A1B8);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A340);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A7E8);
 #endif
 
@@ -4241,7 +4757,7 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A37C);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A41C);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A87C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A8C0);
@@ -4257,7 +4773,7 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A4D0);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A598);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A988);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A9D8);
@@ -4279,7 +4795,7 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A688);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A69C);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001AB64);
 #endif
 
@@ -4295,7 +4811,7 @@ s32 func_0001A748(void) {
 }
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001AB8C);
 #endif
 
@@ -4307,13 +4823,21 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A754);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A7CC);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001A94C);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0001BBF0);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001ABF4);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001AC70);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001B2E8);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001AF38);
@@ -4369,9 +4893,17 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0001B78C);
 
 #if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002BA30);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002D160);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0002BA50);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003CA60);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003CD00);
@@ -4383,9 +4915,17 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003CEE0);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003CF00);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003D1C0);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00042540);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003D260);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003D340);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003D360);
@@ -4417,7 +4957,7 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003E200);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003E4A0);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00042C50);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000432B0);
@@ -4427,9 +4967,17 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_000432B0);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003E560);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003E610);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00044010);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003E630);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003E8E0);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003E900);
@@ -4443,11 +4991,21 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003F400);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003F460);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003F7B0);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00045230);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00045470);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003F850);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003FA90);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003FBE0);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0003FC20);
@@ -4461,9 +5019,17 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_00041450);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00041470);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00041CF0);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_000476F0);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00041D10);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00045190);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000451F0);
@@ -4477,9 +5043,17 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_000471D0);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00047310);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000473F0);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0004CE10);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00047430);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000478E0);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00047A00);
@@ -4521,9 +5095,17 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_00048DF0);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00048E30);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00049010);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0004EA30);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00049050);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00049F30);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00049F50);
@@ -4563,15 +5145,23 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0004DC80);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00053080);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00058E60);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_000596F8);
+#endif
+
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000581E0);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000581F8);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00053480);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005AC80);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005AE60);
@@ -4601,8 +5191,26 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005B85C);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005B870);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005B874);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00061258);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0006125C);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005B878);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00061274);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_000612A0);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_000612CC);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_000612F8);
 #endif
 
 #if FW_VERSION == 340
@@ -4747,6 +5355,12 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005BEF4);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005BF00);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0006191C);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_000619D0);
+#endif
+
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00060D1C);
 
@@ -4829,7 +5443,7 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0001BF40);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001BFF0);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001C44C);
 #endif
 
@@ -4837,7 +5451,7 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_0001C44C);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001BFFC);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001E8C4);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001ECB0);
@@ -4879,15 +5493,27 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00022EC4);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00022F24);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00022F30);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00023E04);
+#endif
+
+#if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000230D0);
+#endif
 
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000233F0);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00023780);
+#endif
 
+#if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00024B5C);
+#endif
 
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0001655C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0002439C);
@@ -4897,11 +5523,27 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00024420);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00024D38);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00024478);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00025A04);
+#endif
+
+#if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00024D70);
+#endif
 
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000244C4);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00025A7C);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00025AB8);
+#endif
+
+#if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00024DF8);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00024E3C);
@@ -4929,31 +5571,69 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005DE10);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005E210);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005E310);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00063E10);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00063F10);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005E410);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005E510);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005E610);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005E640);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005E740);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00064240);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005E840);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005E940);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00064440);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00064540);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005EA40);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005EB40);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005EC40);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00064740);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00064840);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005ED40);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005EE40);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005EF40);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0005F040);
@@ -4983,6 +5663,12 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_00061160);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00061660);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00067460);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_00067960);
+#endif
+
 #if FW_VERSION == 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000618D8);
 #endif
@@ -5009,6 +5695,18 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_000633F8);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00063400);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0006340C);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00025B2C);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00025C14);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000260FC);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000255AC);
+
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000263C8);
 #endif
 
 #if FW_VERSION == 330
@@ -5079,7 +5777,7 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_000244C4);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0002451C);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_0002458C);
 #endif
 
@@ -5101,7 +5799,19 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00025750);
 
 #if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00063440);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_00027DDC);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0006A000);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_0006A008);
+
+INCLUDE_RODATA("nonmatchings/pops_017A50", D_000718B4);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00063C40);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00063C88);
@@ -5111,7 +5821,9 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_00063C94);
 
 #if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00027370);
+#endif
 
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000275B8);
 #endif
 
@@ -5133,19 +5845,29 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00024E30);
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00026A7C);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00026D10);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00026D8C);
 
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00026E08);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00026EBC);
 #endif
 
-#if FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/pops_017A50", func_0002788C);
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0002813C);
 
+INCLUDE_ASM("nonmatchings/pops_017A50", func_000281B0);
+#endif
+
+#if FW_VERSION >= 340
+INCLUDE_ASM("nonmatchings/pops_017A50", func_0002788C);
+#endif
+
+#if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00068B08);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000718BC);
@@ -5157,7 +5879,7 @@ INCLUDE_ASM("nonmatchings/pops_017A50", func_00026F60);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00063D08);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00080000);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0008000C);
@@ -5167,7 +5889,7 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0008000C);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00080180);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00080184);
 #endif
 
@@ -5183,7 +5905,7 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_00080194);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00080198);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_0008019C);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000801A4);
@@ -5193,7 +5915,7 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_000801A4);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000801B0);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000801B8);
 #endif
 
@@ -5215,7 +5937,7 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_000801F8);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_000801FC);
 #endif
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00080260);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00080264);
@@ -5227,11 +5949,13 @@ INCLUDE_RODATA("nonmatchings/pops_017A50", D_0008028C);
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00080290);
 
 INCLUDE_RODATA("nonmatchings/pops_017A50", D_00080294);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_017A50", func_000271C8);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pops_017A50", func_00027B5C);
 #endif
 

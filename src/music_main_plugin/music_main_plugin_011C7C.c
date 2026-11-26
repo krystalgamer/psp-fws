@@ -200,6 +200,9 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_011C7C", func_00009348);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_011C7C", func_000154D8);
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_011C7C", func_00015514);
+#else
 void func_00015514(void **arg0) {
     void *temp_s0;
     struct Unk_func_00015514_var_a0 *var_a0;
@@ -217,6 +220,7 @@ void func_00015514(void **arg0) {
     }
     scePaf_7EC15225(var_a0);
 }
+#endif
 
 void func_0001556C(void) {
     func_00015A38();
@@ -253,6 +257,9 @@ s32 *func_000157C4(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
 }
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_011C7C", func_000157FC);
+#else
 void ***func_000157FC(void ***arg0, struct Unk_func_000157FC_1 *arg1, void **arg2) {
     void **temp_s0;
     struct Unk_func_000157FC_temp_v1 *temp_v1;
@@ -266,6 +273,7 @@ void ***func_000157FC(void ***arg0, struct Unk_func_000157FC_1 *arg1, void **arg
     arg1->unk4 = (s32) (arg1->unk4 - 1);
     return arg0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_011C7C", func_00015864);
 

@@ -1,35 +1,11 @@
 #include "common.h"
 #include "premo_plugin_decls.h"
 
-#if FW_VERSION < 352
-void func_00014B14(struct Unk_func_00014B14_0 *arg0) {
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014B14);
+#endif
 
-    temp_v0 = arg0->unk8;
-    if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
-        arg0->unk8 = 0;
-    }
-    temp_v0_2 = arg0->unk4;
-    if (temp_v0_2 != 0) {
-        scePaf_B3D2C3BB(temp_v0_2);
-        arg0->unk4 = 0;
-    }
-    temp_v0_3 = arg0->unkC;
-    if (temp_v0_3 != 0) {
-        scePaf_B3D2C3BB(temp_v0_3);
-        arg0->unkC = 0;
-    }
-    temp_v0_4 = arg0->unk10;
-    if (temp_v0_4 != 0) {
-        scePaf_B3D2C3BB(temp_v0_4);
-        arg0->unk10 = 0;
-    }
-}
-#else
+#if FW_VERSION == 352
 void func_00014B14(struct Unk_func_00014B14_0 *arg0) {
     s32 temp_a0;
     s32 temp_a0_2;
@@ -65,8 +41,8 @@ void func_00014B14(struct Unk_func_00014B14_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 352
-void func_00014BC0(struct Unk_func_00014BC0_0 *arg0) {
+#if FW_VERSION < 350
+void func_00014B14(struct Unk_func_00014B14_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
@@ -93,7 +69,13 @@ void func_00014BC0(struct Unk_func_00014BC0_0 *arg0) {
         arg0->unk10 = 0;
     }
 }
-#else
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014BC0);
+#endif
+
+#if FW_VERSION == 352
 void func_00014BC0(struct Unk_func_00014BC0_0 *arg0) {
     s32 temp_a0;
     s32 temp_a0_2;
@@ -125,6 +107,36 @@ void func_00014BC0(struct Unk_func_00014BC0_0 *arg0) {
     if (temp_a0_5 != 0) {
         scePaf_CCFF20ED(temp_a0_5);
         arg0->unk14 = 0;
+    }
+}
+#endif
+
+#if FW_VERSION < 350
+void func_00014BC0(struct Unk_func_00014BC0_0 *arg0) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
+    s32 temp_v0_4;
+
+    temp_v0 = arg0->unk8;
+    if (temp_v0 != 0) {
+        scePaf_B3D2C3BB(temp_v0);
+        arg0->unk8 = 0;
+    }
+    temp_v0_2 = arg0->unk4;
+    if (temp_v0_2 != 0) {
+        scePaf_B3D2C3BB(temp_v0_2);
+        arg0->unk4 = 0;
+    }
+    temp_v0_3 = arg0->unkC;
+    if (temp_v0_3 != 0) {
+        scePaf_B3D2C3BB(temp_v0_3);
+        arg0->unkC = 0;
+    }
+    temp_v0_4 = arg0->unk10;
+    if (temp_v0_4 != 0) {
+        scePaf_B3D2C3BB(temp_v0_4);
+        arg0->unk10 = 0;
     }
 }
 #endif
@@ -139,50 +151,11 @@ INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AB04);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014C6C);
 
-#if FW_VERSION < 352
-s32 func_00014D6C(struct Unk_func_00014D6C_0 *arg0) {
-    s32 temp_a0;
-    s32 temp_a0_2;
-    s32 temp_a0_3;
-    s32 temp_a0_4;
-    s32 temp_a0_5;
-    s32 temp_s1;
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014D6C);
+#endif
 
-    temp_a0 = arg0->unk0;
-    if (temp_a0 != 0) {
-        func_000156C8(temp_a0);
-        temp_s1 = arg0->unk0;
-        if (temp_s1 == 0) {
-            arg0->unk0 = 0;
-        } else {
-            func_00015400(temp_s1);
-            scePaf_4E67BB08(temp_s1);
-            arg0->unk0 = 0;
-        }
-    }
-    temp_a0_2 = arg0->unk8;
-    if (temp_a0_2 != 0) {
-        scePaf_B3D2C3BB(temp_a0_2);
-        arg0->unk8 = 0;
-    }
-    temp_a0_3 = arg0->unk4;
-    if (temp_a0_3 != 0) {
-        scePaf_B3D2C3BB(temp_a0_3);
-        arg0->unk4 = 0;
-    }
-    temp_a0_4 = arg0->unkC;
-    if (temp_a0_4 != 0) {
-        scePaf_B3D2C3BB(temp_a0_4);
-        arg0->unkC = 0;
-    }
-    temp_a0_5 = arg0->unk10;
-    if (temp_a0_5 != 0) {
-        scePaf_B3D2C3BB(temp_a0_5);
-        arg0->unk10 = 0;
-    }
-    return 0;
-}
-#else
+#if FW_VERSION == 352
 s32 func_00014D6C(struct Unk_func_00014D6C_0 *arg0) {
     s32 temp_a0;
     s32 temp_a0_2;
@@ -227,7 +200,50 @@ s32 func_00014D6C(struct Unk_func_00014D6C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 352
+#if FW_VERSION < 350
+s32 func_00014D6C(struct Unk_func_00014D6C_0 *arg0) {
+    s32 temp_a0;
+    s32 temp_a0_2;
+    s32 temp_a0_3;
+    s32 temp_a0_4;
+    s32 temp_a0_5;
+    s32 temp_s1;
+
+    temp_a0 = arg0->unk0;
+    if (temp_a0 != 0) {
+        func_000156C8(temp_a0);
+        temp_s1 = arg0->unk0;
+        if (temp_s1 == 0) {
+            arg0->unk0 = 0;
+        } else {
+            func_00015400(temp_s1);
+            scePaf_4E67BB08(temp_s1);
+            arg0->unk0 = 0;
+        }
+    }
+    temp_a0_2 = arg0->unk8;
+    if (temp_a0_2 != 0) {
+        scePaf_B3D2C3BB(temp_a0_2);
+        arg0->unk8 = 0;
+    }
+    temp_a0_3 = arg0->unk4;
+    if (temp_a0_3 != 0) {
+        scePaf_B3D2C3BB(temp_a0_3);
+        arg0->unk4 = 0;
+    }
+    temp_a0_4 = arg0->unkC;
+    if (temp_a0_4 != 0) {
+        scePaf_B3D2C3BB(temp_a0_4);
+        arg0->unkC = 0;
+    }
+    temp_a0_5 = arg0->unk10;
+    if (temp_a0_5 != 0) {
+        scePaf_B3D2C3BB(temp_a0_5);
+        arg0->unk10 = 0;
+    }
+    return 0;
+}
+
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_0000D910);
 #else
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014E48);
@@ -297,18 +313,11 @@ INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016238);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016390);
 
-#if FW_VERSION < 352
-s32 func_000163CC(struct Unk_func_000163CC_0 *arg0, s32 arg1) {
-    struct Unk_func_000163CC_temp_v0 *temp_v0;
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000163CC);
+#endif
 
-    temp_v0 = arg0->unk0;
-    arg0->unk44 = arg1;
-    if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s32 *, 0x54) = arg1;
-    }
-    return 0;
-}
-#else
+#if FW_VERSION == 352
 s32 func_000163CC(struct Unk_func_000163CC_0 *arg0, s32 arg1) {
     struct Unk_func_000163CC_temp_v0 *temp_v0;
 
@@ -316,6 +325,19 @@ s32 func_000163CC(struct Unk_func_000163CC_0 *arg0, s32 arg1) {
     arg0->unk44 = arg1;
     if (temp_v0 != NULL) {
         temp_v0->unk58 = arg1;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 350
+s32 func_000163CC(struct Unk_func_000163CC_0 *arg0, s32 arg1) {
+    struct Unk_func_000163CC_temp_v0 *temp_v0;
+
+    temp_v0 = arg0->unk0;
+    arg0->unk44 = arg1;
+    if (temp_v0 != NULL) {
+        M2C_FIELD(temp_v0, s32 *, 0x54) = arg1;
     }
     return 0;
 }
@@ -423,7 +445,7 @@ s32 func_000176F4(struct Unk_func_000176F4_0 *arg0) {
     return 0;
 }
 
-#if FW_VERSION == 352
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_0001771C);
 #else
 s32 func_0001771C(void *arg0, s32 arg1, s32 arg2) {
@@ -463,24 +485,11 @@ INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000106BC);
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017E74);
 #endif
 
-#if FW_VERSION < 352
-s32 func_00017F2C(struct Unk_func_00017F2C_0 *arg0) {
-    s32 temp_v0;
-    s32 temp_v0_2;
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017F2C);
+#endif
 
-    temp_v0 = arg0->unk9C;
-    if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
-        arg0->unk9C = 0;
-    }
-    temp_v0_2 = M2C_FIELD(arg0, s32 *, 0x94);
-    if (temp_v0_2 != 0) {
-        scePaf_B3D2C3BB(temp_v0_2);
-        M2C_FIELD(arg0, s32 *, 0x94) = 0;
-    }
-    return 0;
-}
-#else
+#if FW_VERSION == 352
 s32 func_00017F2C(struct Unk_func_00017F2C_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -499,9 +508,32 @@ s32 func_00017F2C(struct Unk_func_00017F2C_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION < 350
+s32 func_00017F2C(struct Unk_func_00017F2C_0 *arg0) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+
+    temp_v0 = arg0->unk9C;
+    if (temp_v0 != 0) {
+        scePaf_B3D2C3BB(temp_v0);
+        arg0->unk9C = 0;
+    }
+    temp_v0_2 = M2C_FIELD(arg0, s32 *, 0x94);
+    if (temp_v0_2 != 0) {
+        scePaf_B3D2C3BB(temp_v0_2);
+        M2C_FIELD(arg0, s32 *, 0x94) = 0;
+    }
+    return 0;
+}
+#endif
+
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017F88);
 
-#if FW_VERSION < 352
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018058);
+#endif
+
+#if FW_VERSION < 350
 s32 func_00018058(struct Unk_func_00018058_0 *arg0) {
     s32 temp_a1;
 
@@ -510,7 +542,9 @@ s32 func_00018058(struct Unk_func_00018058_0 *arg0) {
     M2C_FIELD(arg0, s32 *, 0x68) = (s32) (M2C_FIELD(arg0, s32 *, 0x68) + temp_a1);
     return temp_a1;
 }
-#else
+#endif
+
+#if FW_VERSION == 352
 s32 func_00018058(struct Unk_func_00018058_0 *arg0) {
     s32 temp_a1;
 
@@ -630,14 +664,20 @@ s32 func_000182E4(struct Unk_func_000182E4_0 *arg0, s32 arg1) {
     return 0;
 }
 
-#if FW_VERSION < 352
-s32 func_000182F0(struct Unk_func_000182F0_0 *arg0, s32 *arg1) {
-    scePaf_F95EA3F1(arg0->unk1C, (u8 *) arg1, *arg1);
-    return 0;
-}
-#else
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000182F0);
+#endif
+
+#if FW_VERSION == 352
 s32 func_000182F0(struct Unk_func_000182F0_0 *arg0, s32 *arg1) {
     scePaf_3308156F(arg0->unk1C, (s32) arg1, *arg1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 350
+s32 func_000182F0(struct Unk_func_000182F0_0 *arg0, s32 *arg1) {
+    scePaf_F95EA3F1(arg0->unk1C, (u8 *) arg1, *arg1);
     return 0;
 }
 #endif
@@ -766,13 +806,19 @@ s32 func_0001851C(void) {
     return 0;
 }
 
-#if FW_VERSION < 352
-s32 func_00018524(struct Unk_func_00018524_0 *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x6C);
-}
-#else
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018524);
+#endif
+
+#if FW_VERSION == 352
 s32 func_00018524(struct Unk_func_00018524_0 *arg0) {
     return arg0->unk74;
+}
+#endif
+
+#if FW_VERSION < 350
+s32 func_00018524(struct Unk_func_00018524_0 *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x6C);
 }
 #endif
 

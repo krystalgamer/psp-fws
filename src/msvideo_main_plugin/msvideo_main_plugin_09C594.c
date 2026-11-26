@@ -403,32 +403,7 @@ s32 func_0009F804(s32 *arg0) {
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_09C594", func_0009F83C);
 #endif
 
-#if FW_VERSION >= 301 && FW_VERSION < 352
-s32 func_0009F83C(s32 arg0, s32 arg1, s32 *arg2) {
-    s32 temp_v0;
-    s32 var_v1;
-
-    var_v1 = 6;
-    if (((arg0 == 0) | (arg1 == 0)) == 0) {
-        temp_v0 = scePaf_5FAC9869(0x1C);
-        var_v1 = 1;
-        if (temp_v0 != 0) {
-            M2C_FIELD(temp_v0, s32 *, 0) = arg0;
-            var_v1 = 0;
-            M2C_FIELD(temp_v0, s32 *, 0xC) = arg1;
-            M2C_FIELD(temp_v0, s32 *, 4) = 0;
-            M2C_FIELD(temp_v0, s32 *, 8) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x10) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x14) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x18) = 0;
-            *arg2 = temp_v0;
-        }
-    }
-    return var_v1;
-}
-#endif
-
-#if FW_VERSION == 352
+#if FW_VERSION >= 350
 s32 func_0009F83C(s32 arg0, s32 arg1, s32 *arg2) {
     s32 temp_v0;
     s32 var_v1;
@@ -453,30 +428,36 @@ s32 func_0009F83C(s32 arg0, s32 arg1, s32 *arg2) {
 }
 #endif
 
+#if FW_VERSION >= 301 && FW_VERSION < 350
+s32 func_0009F83C(s32 arg0, s32 arg1, s32 *arg2) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 6;
+    if (((arg0 == 0) | (arg1 == 0)) == 0) {
+        temp_v0 = scePaf_5FAC9869(0x1C);
+        var_v1 = 1;
+        if (temp_v0 != 0) {
+            M2C_FIELD(temp_v0, s32 *, 0) = arg0;
+            var_v1 = 0;
+            M2C_FIELD(temp_v0, s32 *, 0xC) = arg1;
+            M2C_FIELD(temp_v0, s32 *, 4) = 0;
+            M2C_FIELD(temp_v0, s32 *, 8) = 0;
+            M2C_FIELD(temp_v0, s32 *, 0x10) = 0;
+            M2C_FIELD(temp_v0, s32 *, 0x14) = 0;
+            M2C_FIELD(temp_v0, s32 *, 0x18) = 0;
+            *arg2 = temp_v0;
+        }
+    }
+    return var_v1;
+}
+#endif
+
 #if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_09C594", func_0009F8C4);
 #endif
 
-#if FW_VERSION >= 301 && FW_VERSION < 352
-void func_0009F8C4(s32 *arg0) {
-    s32 temp_s0;
-    s32 var_s1;
-
-    var_s1 = M2C_FIELD(arg0, s32 *, 0x14);
-    if (var_s1 != 0) {
-        do {
-            temp_s0 = func_000A0020(var_s1);
-            func_0009FFC4(var_s1);
-            var_s1 = temp_s0;
-        } while (temp_s0 != 0);
-    }
-    if (arg0 != NULL) {
-        scePaf_545FE2DA((s32) arg0);
-    }
-}
-#endif
-
-#if FW_VERSION == 352
+#if FW_VERSION >= 350
 void func_0009F8C4(s32 *arg0) {
     s32 temp_s0;
     s32 var_s1;
@@ -491,6 +472,25 @@ void func_0009F8C4(s32 *arg0) {
     }
     if (arg0 != NULL) {
         scePaf_4729E549(arg0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 301 && FW_VERSION < 350
+void func_0009F8C4(s32 *arg0) {
+    s32 temp_s0;
+    s32 var_s1;
+
+    var_s1 = M2C_FIELD(arg0, s32 *, 0x14);
+    if (var_s1 != 0) {
+        do {
+            temp_s0 = func_000A0020(var_s1);
+            func_0009FFC4(var_s1);
+            var_s1 = temp_s0;
+        } while (temp_s0 != 0);
+    }
+    if (arg0 != NULL) {
+        scePaf_545FE2DA((s32) arg0);
     }
 }
 #endif

@@ -7,6 +7,44 @@ INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_B9096E48);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_B1F5BB87);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/ifhandle", D_00003024);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_00003028);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_00003040);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_00003058);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_00003070);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_00003090);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_000030A0);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_000030B0);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_000030C0);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_000030D0);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_000030E4);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_00003204);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_0000321C);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_000033C4);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_000033CC);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_000033D0);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_000033E4);
+
+INCLUDE_RODATA("nonmatchings/ifhandle", D_0000340C);
+#endif
+
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_16042084);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_AE81C0CB);

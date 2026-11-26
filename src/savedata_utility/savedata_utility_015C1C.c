@@ -313,7 +313,29 @@ void func_0000FBB4(void **arg0) {
     }
     scePaf_7EC15225(var_a0);
 }
-#else
+#endif
+
+#if FW_VERSION == 350
+void func_00017010(void **arg0) {
+    void *temp_s0;
+    void *var_a0;
+    void *var_v0;
+
+    var_a0 = *arg0;
+    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    if (var_v0 != var_a0) {
+        do {
+            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            scePaf_F5001144(var_v0);
+            var_a0 = *arg0;
+            var_v0 = temp_s0;
+        } while (temp_s0 != var_a0);
+    }
+    scePaf_F5001144(var_a0);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00017010(void **arg0) {
     void *temp_s0;
     struct Unk_func_00017010_var_a0 *var_a0;

@@ -6,6 +6,42 @@ INCLUDE_ASM("nonmatchings/usbacc", sceUsbAccGetInfo);
 
 INCLUDE_ASM("nonmatchings/usbacc", sceUsbAcc_internal_2A100C1F);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000B2C);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000B30);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000B48);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000B5C);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000B7C);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000B94);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000BA4);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000BC4);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000BD8);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000C00);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000C0C);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000C1C);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000C30);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000C40);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000C48);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000C4C);
+
+INCLUDE_RODATA("nonmatchings/usbacc", D_00000C58);
+#endif
+
 INCLUDE_RODATA("nonmatchings/usbacc", D_00000CEC);
 
 INCLUDE_RODATA("nonmatchings/usbacc", D_00000D04);

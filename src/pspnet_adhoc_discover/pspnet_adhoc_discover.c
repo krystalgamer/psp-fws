@@ -2,6 +2,40 @@
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_discover", sceNetAdhocDiscoverInitStart);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000EEC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000EF0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000F00);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000F18);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000F28);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000F3C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000F54);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000F68);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000F78);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000F8C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000FBC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000FC4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000FDC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000FF0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000FF8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00001004);
+#endif
+
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_discover", sceNetAdhocDiscoverUpdate);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_discover", sceNetAdhocDiscoverGetStatus);

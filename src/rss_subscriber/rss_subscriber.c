@@ -2,6 +2,10 @@
 #include "common.h"
 #include "rss_subscriber_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/rss_subscriber", func_00000000);
+#endif
+
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00000030);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_000000B8);
@@ -14,6 +18,54 @@ s32 module_stop(void) {
 }
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00000168);
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_0000375C);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003760);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003774);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_0000378C);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000037A0);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000037B8);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000037C4);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000037DC);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000037F0);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003810);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_0000382C);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_0000383C);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000038B4);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000038BC);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003978);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039A4);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039A8);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039B8);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039C8_v350);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003960);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003A24);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003970);
+
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003974);
+#endif
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000018C);
 
@@ -237,6 +289,17 @@ void func_000027A4(s32 *arg0, s32 arg1) {
     func_00002A58();
 }
 
+#if FW_VERSION == 350
+void func_000027C4(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_C1B0AA0D(arg1);
+    }
+    func_00002A78(arg0, arg1, var_v0);
+}
+#else
 void func_000027C4(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -246,11 +309,23 @@ void func_000027C4(s32 arg0, s32 arg1) {
     }
     func_00002A78(arg0, arg1, var_v0);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002814);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000288C);
 
+#if FW_VERSION == 350
+void func_000028BC(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_5E4447F6(arg1);
+    }
+    func_00002B24(arg0, arg1, var_v0);
+}
+#else
 void func_000028BC(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -260,9 +335,29 @@ void func_000028BC(s32 arg0, s32 arg1) {
     }
     func_00002B24(arg0, arg1, var_v0);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000290C);
 
+#if FW_VERSION == 350
+void func_00002948(void **arg0) {
+    void *temp_s0;
+    void *var_a0;
+    void *var_v0;
+
+    var_a0 = *arg0;
+    var_v0 = M2C_FIELD(var_a0, void **, 4);
+    if (var_v0 != var_a0) {
+        do {
+            temp_s0 = M2C_FIELD(var_v0, void **, 4);
+            scePaf_F5001144(var_v0);
+            var_a0 = *arg0;
+            var_v0 = temp_s0;
+        } while (temp_s0 != var_a0);
+    }
+    scePaf_F5001144(var_a0);
+}
+#else
 void func_00002948(void **arg0) {
     void *temp_s0;
     struct Unk_func_00002948_var_a0 *var_a0;
@@ -280,6 +375,7 @@ void func_00002948(void **arg0) {
     }
     scePaf_7EC15225(var_a0);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_000029A0);
 
@@ -303,14 +399,24 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002C30);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002C5C);
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002D28);
+#else
 void func_00002D28(M2C_UNK **arg0) {
     *arg0 = &D_00003D40;
     scePaf_4E67BB08();
 }
+#endif
 
+#if FW_VERSION == 350
+s32 func_00002D50(void) {
+    return scePaf_723D0C80() != 0;
+}
+#else
 s32 func_00002D50(void) {
     return scePaf_75062BCF() != 0;
 }
+#endif
 
 void func_00002D70(M2C_UNK **arg0) {
     *arg0 = &D_00003D30;
@@ -332,6 +438,10 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002E28);
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002F80);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00003220);
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/rss_subscriber", func_00003278);
+#endif
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003D20);
 

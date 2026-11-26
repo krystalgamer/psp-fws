@@ -2,6 +2,10 @@
 #include "common.h"
 #include "msgdialog_plugin_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000000);
+#endif
+
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000024);
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_000000AC);
@@ -13,14 +17,25 @@ s32 module_stop(void) {
     func_00000CC4();
     return 0;
 }
-
-INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_0000015C);
 #else
 s32 module_stop(void) {
     func_00001014();
     return 0;
 }
+#endif
 
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_0000015C);
+#endif
+
+#if FW_VERSION == 350
+void func_0000015C(void) {
+    scePaf_39E62C88(D_00001A6C, &D_000012F0, 0, 0);
+    scePaf_A013540A(D_00001A6C, &D_000012F0);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000015C(void) {
     scePaf_F609FA81(D_00001A5C, &D_000012F0, 0, 0);
     scePaf_CAF05F1D(D_00001A5C, &D_000012F0);
@@ -40,6 +55,38 @@ INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_000001E4);
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000238);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000011B8);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000011BC);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000011D0);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000011E8);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000011F0);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001210);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001260);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000127C);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001280);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001290);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_0000129C);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012A8);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012C8);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012B4);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012B8);
+#endif
+
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012BC);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012D4);
@@ -55,7 +102,16 @@ void func_00000384(void) {
     scePaf_27F64616(D_00001A5C);
     D_00001A68 = 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 350
+void func_000003C8(void) {
+    scePaf_D1447DB7(D_00001A6C);
+    D_00001A68 = 0;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000003C8(void) {
     scePaf_27F64616(D_00001A5C);
     D_00001A68 = 0;
@@ -382,7 +438,17 @@ void func_00000998(void) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 350
+void func_00000C0C(void) {
+    void *sp0;
+    sceVshCommonGui_2EBB5C2B(&sp0, sceVshCommonGui_30FA68C3());
+    func_00000E88(&sp0);
+    sceVshCommonGui_11C48509(&sp0, sceVshCommonGui_EC899EBE());
+    func_00000E88(&sp0);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00000C0C(void) {
     void *sp0;
     sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
@@ -406,7 +472,21 @@ void func_00000B68(s32 arg0, s32 arg1) {
     }
     func_00000F08(arg0, arg1, var_v0);
 }
-#else
+#endif
+
+#if FW_VERSION == 350
+void func_00000EB8(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 != 0) {
+        var_v0 = scePaf_5E4447F6(arg1);
+    }
+    func_00000F08(arg0, arg1, var_v0);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00000EB8(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -421,3 +501,7 @@ void func_00000EB8(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000F08);
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000FBC);
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00001014);
+#endif

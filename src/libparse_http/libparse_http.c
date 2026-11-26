@@ -6,6 +6,20 @@ INCLUDE_ASM("nonmatchings/libparse_http", sceParseHttpStatusLine);
 
 INCLUDE_ASM("nonmatchings/libparse_http", sceParseHttpResponseHeader);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/libparse_http", D_00000D08);
+
+INCLUDE_RODATA("nonmatchings/libparse_http", D_00000D0C);
+
+INCLUDE_RODATA("nonmatchings/libparse_http", D_00000D20);
+
+INCLUDE_RODATA("nonmatchings/libparse_http", D_00000D30);
+
+INCLUDE_RODATA("nonmatchings/libparse_http", D_00000D40);
+
+INCLUDE_RODATA("nonmatchings/libparse_http", D_00000D50);
+#endif
+
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libparse_http", func_000003A0);
 

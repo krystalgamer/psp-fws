@@ -3,6 +3,68 @@
 #include "k1.h"
 #include "avcodec_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003E34);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003E38);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003E50);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003E68);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003E80);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003E98);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003EB0);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003EC8);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003EE0);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003EF0);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003F10);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003F24);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003F34);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003F44);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003FAC);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003FBC);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00003FFC);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00004008);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00004050);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00004064);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_000040AC);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_000040B4);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_0000410C);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_0000412C);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00004138);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00004158);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_0000416C);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00004170);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_0000417C);
+
+INCLUDE_RODATA("nonmatchings/avcodec", D_00004184);
+#endif
+
 #if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/avcodec", func_00000000);
 #else

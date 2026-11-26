@@ -1,6 +1,40 @@
 #include "common.h"
 #include "mediasync_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006E90);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006E94);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006EA8);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006EC0);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006ED8);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006EF0);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006F04);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006F10);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006F24);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006F3C);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006F4C);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006F64);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006F84);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006F88);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006FB0);
+
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006FB4);
+#endif
+
 INCLUDE_ASM("nonmatchings/mediasync", module_start);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -119,11 +153,29 @@ INCLUDE_ASM("nonmatchings/mediasync", func_00000124);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediasync", func_0000014C);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/mediasync", D_00006FEC);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediasync", func_000001E4);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/mediasync", D_00007018);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediasync", func_00000380);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/mediasync", func_0000063C);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mediasync", func_000005BC);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_000005F0);

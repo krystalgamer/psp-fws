@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/350/.splat_cache.camera_plugin
   symbol_addrs_path:
     - config/350/symbol_addrs.camera_plugin.txt
+    - config/350/func_starts.camera_plugin.txt
     - tmp/build/350/prx_syms.camera_plugin.txt
   reloc_addrs_path: [tmp/build/350/reloc_addrs.camera_plugin.txt]
   asset_path: tmp/assets/350/camera_plugin
@@ -52,7 +53,17 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, camera_plugin]
+      - [0xA0, c, camera_plugin]
+      - [0x334, c, camera_plugin_000294]
+      - [0x7F8, c, camera_plugin_000634]
+      - [0x2020, c, camera_plugin_001F80]
+      - [0x2088, c, camera_plugin_001FE8]
+      - [0xCD04, c, camera_plugin_00CC64]
+      - [0xD5F4, c, camera_plugin_00D554]
+      - [0x1BD2C, c, camera_plugin_01BC8C]
+      - [0x1BDC8, c, camera_plugin_01BD28]
+      - [0x1E0C4, c, camera_plugin_01E024]
+      - [0x1F5EC, c, camera_plugin_01F54C]
       - { start: 0x20208, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x20A70, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x20A74, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -61,7 +72,14 @@ segments:
       - { start: 0x20A8C, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x20BC4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x20BC8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x20BFC, rodata, camera_plugin]
+      - [0x20BFC, .rodata, camera_plugin]
+      - [0x216E0, .rodata, camera_plugin_000294]
+      - [0x21714, .rodata, camera_plugin_000634]
+      - [0x2187C, .rodata, camera_plugin_001FE8]
+      - [0x237E0, .rodata, camera_plugin_00D554]
+      - [0x242A0, .rodata, camera_plugin_01BD28]
+      - [0x244F4, .rodata, camera_plugin_01E024]
+      - [0x24684, .rodata, camera_plugin_01F54C]
       - { start: 0x24A0C, type: prxpad, order: .rodata }
   - name: camera_plugin_seg1
     type: code

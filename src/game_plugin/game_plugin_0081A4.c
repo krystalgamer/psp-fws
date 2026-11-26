@@ -20,7 +20,25 @@ s32 func_000075F4(void *arg0) {
     }
     return var_v0;
 }
-#else
+#endif
+
+#if FW_VERSION == 350
+s32 func_00008274(struct Unk_func_00008274_0 *arg0) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_v0 = func_000081FC();
+    var_v0 = -1;
+    if (temp_v0 != 0) {
+        scePaf_39E62C88(arg0->unk4, temp_v0, 0, 0);
+        scePaf_A013540A(arg0->unk4, temp_v0);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_00008274(struct Unk_func_00008274_0 *arg0) {
     s32 temp_v0;
     s32 var_v0;
@@ -112,19 +130,51 @@ s32 func_00008480(struct Unk_func_00008480_0 *arg0) {
 s32 func_00008488(struct Unk_func_00008488_0 *arg0) {
     return arg0->unk1C;
 }
+#endif
 
+#if FW_VERSION == 350
+void func_00008490(struct Unk_func_00008490_0 *arg0, s32 arg1) {
+    scePaf_39E62C88(arg0->unk4, arg1, 0, 0);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00008490(struct Unk_func_00008490_0 *arg0, s32 arg1) {
     scePaf_F609FA81(arg0->unk4, arg1, 0, 0);
 }
+#endif
 
+#if FW_VERSION == 350
+void func_000084B4(struct Unk_func_000084B4_0 *arg0, s32 arg1) {
+    scePaf_A013540A(arg0->unk4, arg1);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000084B4(struct Unk_func_000084B4_0 *arg0, s32 arg1) {
     scePaf_CAF05F1D(arg0->unk4, arg1);
 }
+#endif
 
+#if FW_VERSION == 350
+void func_000084D0(struct Unk_func_000084D0_0 *arg0) {
+    scePaf_8B38372A(arg0->unk4);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000084D0(struct Unk_func_000084D0_0 *arg0) {
     scePaf_3481F595(arg0->unk4);
 }
+#endif
 
+#if FW_VERSION == 350
+void func_000084EC(struct Unk_func_000084EC_0 *arg0) {
+    scePaf_CD216C47(arg0->unk4);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000084EC(struct Unk_func_000084EC_0 *arg0) {
     scePaf_DAB59652(arg0->unk4);
 }

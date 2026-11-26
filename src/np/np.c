@@ -119,7 +119,21 @@ void sceNp_66E9BD6F(void) {
 
 INCLUDE_ASM("nonmatchings/np", sceNp_D2ED28C1);
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/np", func_000006E4);
+#else
+s32 func_000006E4(void *arg0) {
+    s32 var_v0;
+
+    var_v0 = 0x80550003;
+    if (arg0 != NULL) {
+        sceNet_lib_57CC57DA(arg0, 0, 8);
+        sceNet_lib_CF705E46(arg0, "%02d.%02d", 3, 0x32);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/np", func_0000073C);
 

@@ -4,6 +4,36 @@
 
 INCLUDE_ASM("nonmatchings/led", func_00000000);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/led", D_0000099C);
+
+INCLUDE_RODATA("nonmatchings/led", D_000009A0);
+
+INCLUDE_RODATA("nonmatchings/led", D_000009BC);
+
+INCLUDE_RODATA("nonmatchings/led", D_000009DC);
+
+INCLUDE_RODATA("nonmatchings/led", D_000009F4);
+
+INCLUDE_RODATA("nonmatchings/led", D_00000A0C);
+
+INCLUDE_RODATA("nonmatchings/led", D_00000A1C);
+
+INCLUDE_RODATA("nonmatchings/led", D_00000A3C);
+
+INCLUDE_RODATA("nonmatchings/led", D_00000A4C);
+
+INCLUDE_RODATA("nonmatchings/led", D_00000A74);
+
+INCLUDE_RODATA("nonmatchings/led", D_00000A84);
+
+INCLUDE_RODATA("nonmatchings/led", D_00000A88);
+
+INCLUDE_RODATA("nonmatchings/led", D_00000A94);
+
+INCLUDE_RODATA("nonmatchings/led", D_00000A9C);
+#endif
+
 INCLUDE_RODATA("nonmatchings/led", D_00000A90);
 
 #if FW_VERSION < 282

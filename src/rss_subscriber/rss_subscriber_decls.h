@@ -99,9 +99,13 @@ M2C_UNK memset(void *, M2C_UNK, M2C_UNK);
 s32 module_stop(void);
 s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
 M2C_UNK scePaf_4E67BB08();
+s32 scePaf_5E4447F6(s32);
+s32 scePaf_723D0C80();
 s32 scePaf_75062BCF();
 M2C_UNK scePaf_7EC15225(void *);
+s32 scePaf_C1B0AA0D(s32);
 s32 scePaf_CA79D58B(s32);
+M2C_UNK scePaf_F5001144(void *);
 s32 scePaf_FD4C9F47(s32);
 
 #endif

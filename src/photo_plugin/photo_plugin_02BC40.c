@@ -6,30 +6,52 @@ void func_0002BC40(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
     func_0002B53C(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002BC68);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 void func_0002BC68(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
     func_0002B53C(arg0);
     scePaf_4E67BB08((s32) arg0);
 }
+#endif
 
+#if FW_VERSION >= 201
 void func_0002BCA0(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
     func_0002B53C(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002BCC8);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 void func_0002BCC8(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
     func_0002B53C(arg0);
     scePaf_4E67BB08((s32) arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002BD00);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 void func_0002BD00(M2C_UNK **arg0) {
     *arg0 = &D_00031678;
     func_0002B53C(arg0);
     scePaf_4E67BB08((s32) arg0);
 }
+#endif
 
+#if FW_VERSION >= 201
 void func_0002BD38(M2C_UNK **arg0) {
     *arg0 = &D_00031678;
     func_0002B53C(arg0);
@@ -39,13 +61,21 @@ void func_0002BD60(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
     func_0002B53C(arg0);
 }
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002BD88);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 void func_0002BD88(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
     func_0002B53C(arg0);
     scePaf_4E67BB08((s32) arg0);
 }
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_02BC40", D_00031648);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_02BC40", D_00031660);
@@ -1506,6 +1536,10 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002E16C);
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002E40C);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002E528);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002D248);
 #endif
 
 #if FW_VERSION < 201

@@ -1,7 +1,11 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_004310", func_00004310);
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00004310(s32 arg0) {
     scePaf_66907719();
     if (arg0 != 0) {

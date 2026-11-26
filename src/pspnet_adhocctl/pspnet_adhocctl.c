@@ -2,6 +2,64 @@
 #include "common.h"
 #include "pspnet_adhocctl_decls.h"
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005D84);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005D88);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005D98);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005DA8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005DC0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005DD4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005DE4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005DF0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005E00);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005E10);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005E28);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005E40);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005E54);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005E64);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005E74);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005F3C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005F50);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005F90);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005F94);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005F9C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005FE8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005FF0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00006010);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_0000603C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00006088);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_0000608C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00006094);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00006098);
+#endif
+
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlInit);
 
 #if FW_VERSION >= 201

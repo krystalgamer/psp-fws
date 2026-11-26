@@ -191,6 +191,48 @@ s32 func_00001718(void) {
     return 0;
 }
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/sircs", D_00002484);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_00002488);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_000024A4);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_000024BC);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_000024DC);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_000024F4);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_0000250C);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_00002524);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_00002534);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_00002554);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_00002560);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_00002570);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_00002580);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_000025A0);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_000025BC);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_000025C4);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_0000260C);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_00002618);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_00002620);
+
+INCLUDE_RODATA("nonmatchings/sircs", D_00002628);
+#endif
+
 INCLUDE_RODATA("nonmatchings/sircs", D_0000263C);
 
 #if FW_VERSION >= 271

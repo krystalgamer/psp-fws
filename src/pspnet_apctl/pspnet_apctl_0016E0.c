@@ -26,14 +26,22 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001B04);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001C6C);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001D64);
+#endif
 
+#if FW_VERSION == 350
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002110);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000201C);
 
 s32 func_000020CC(s32 *arg0) {
     *arg0 = D_00011DE4;
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000020E0);
 #endif
 

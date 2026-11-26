@@ -94,6 +94,36 @@ s32 func_00001388(void **arg0, u32 arg1) {
 
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_904110FC);
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001DF0);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001DF4);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001E14);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001E2C);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001E44);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001E5C);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001E6C);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001E94);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001EA8);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001F78);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001F94);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001F98);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001F9C);
+
+INCLUDE_RODATA("nonmatchings/dmacman", D_00001FAC);
+#endif
+
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/dmacman", func_0000108C);
 #endif

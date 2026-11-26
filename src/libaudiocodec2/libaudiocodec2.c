@@ -55,7 +55,7 @@ INCLUDE_ASM("nonmatchings/libaudiocodec2", func_000003E4);
 
 INCLUDE_ASM("nonmatchings/libaudiocodec2", func_00000520);
 
-#if FW_VERSION == 352
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/libaudiocodec2", D_00002884);
 
 INCLUDE_RODATA("nonmatchings/libaudiocodec2", D_00002894);

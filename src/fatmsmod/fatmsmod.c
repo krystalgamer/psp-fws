@@ -93,6 +93,52 @@ void func_00000048(void) {
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000068);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024030);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024034);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024054);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002406C);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024084);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024098);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_000240AC);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_000240C4);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_000240D8);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_000240F0);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002410C);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002411C_v350);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024134);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002413C);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024174);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024178);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002417C);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024194);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_000241E8);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_000241EC);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_000241F4);
+
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_000241FC);
+#endif
+
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023950);
 

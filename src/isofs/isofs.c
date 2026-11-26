@@ -191,6 +191,48 @@ s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/isofs", D_0000671C);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_00006720);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_00006740);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_00006758);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_00006770);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_00006788);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_0000679C);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_000067B0);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_000067BC);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_000067D4);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_000067E8);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_00006808);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_00006810);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_0000681C);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_00006830);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_00006864);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_0000688C);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_00006898);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_000068A0);
+
+INCLUDE_RODATA("nonmatchings/isofs", D_000068AC);
+#endif
+
 #if FW_VERSION >= 280 && FW_VERSION < 300
 s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1) {
     func_000007FC(M2C_FIELD(arg0, s32 *, 0x894), arg1);

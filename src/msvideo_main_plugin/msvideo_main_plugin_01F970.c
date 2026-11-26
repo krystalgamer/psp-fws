@@ -55,10 +55,10 @@ M2C_UNK *func_0001FC18(void) {
     return &func_0001FBFC;
 }
 
-#if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin_01F970", func_000216C0);
-#else
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_01F970", func_0001FC24);
+#else
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_01F970", func_000216C0);
 #endif
 
 void func_0001FCE4(s32 arg0) {

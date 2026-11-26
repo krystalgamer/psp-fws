@@ -82,9 +82,33 @@ INCLUDE_ASM("nonmatchings/clockgen", func_00000614);
 
 INCLUDE_ASM("nonmatchings/clockgen", func_000006C0);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_RODATA("nonmatchings/clockgen", D_000008FC);
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/clockgen", D_00000820);
 
+INCLUDE_RODATA("nonmatchings/clockgen", D_00000824);
+
+INCLUDE_RODATA("nonmatchings/clockgen", D_0000083C);
+
+INCLUDE_RODATA("nonmatchings/clockgen", D_00000858);
+
+INCLUDE_RODATA("nonmatchings/clockgen", D_00000868);
+
+INCLUDE_RODATA("nonmatchings/clockgen", D_00000888);
+
+INCLUDE_RODATA("nonmatchings/clockgen", D_0000089C);
+#endif
+
+#if (FW_VERSION >= 201 && FW_VERSION < 282) || FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/clockgen", D_000008FC);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/clockgen", D_00000910);
+
+INCLUDE_RODATA("nonmatchings/clockgen", D_0000091C);
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/clockgen", D_00000908);
 #endif
 

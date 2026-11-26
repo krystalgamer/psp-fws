@@ -40,7 +40,19 @@ void func_00000094(s32 arg0) {
     }
     sceGpio_driver_310F0CCF(0x20);
 }
+#endif
 
+#if FW_VERSION == 350
+void func_000000E4(void) {
+    if (sceSysreg_driver_E2A5D1EE() > 0x4FFFFF) {
+        func_0000004C(0x31, 0);
+        return;
+    }
+    sceGpio_driver_103C3EB2(2);
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000000E4(void) {
     if (sceSysreg_driver_E2A5D1EE() > 0x4FFFFF) {
         func_0000004C(0x31, 0x37);
@@ -48,7 +60,9 @@ void func_000000E4(void) {
     }
     sceGpio_driver_103C3EB2(2);
 }
+#endif
 
+#if FW_VERSION >= 282
 void func_00000130(void) {
     if (sceSysreg_driver_E2A5D1EE() > 0x4FFFFF) {
         func_0000004C(0x31, 0xF7);
@@ -201,6 +215,36 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_20C61103);
 #endif
 
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_02133959);
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/codec", D_000010F8);
+
+INCLUDE_RODATA("nonmatchings/codec", D_000010FC);
+
+INCLUDE_RODATA("nonmatchings/codec", D_00001114);
+
+INCLUDE_RODATA("nonmatchings/codec", D_00001130);
+
+INCLUDE_RODATA("nonmatchings/codec", D_00001144);
+
+INCLUDE_RODATA("nonmatchings/codec", D_0000115C);
+
+INCLUDE_RODATA("nonmatchings/codec", D_0000116C);
+
+INCLUDE_RODATA("nonmatchings/codec", D_0000118C);
+
+INCLUDE_RODATA("nonmatchings/codec", D_0000119C);
+
+INCLUDE_RODATA("nonmatchings/codec", D_0000120C);
+
+INCLUDE_RODATA("nonmatchings/codec", D_00001220);
+
+INCLUDE_RODATA("nonmatchings/codec", D_0000122C);
+
+INCLUDE_RODATA("nonmatchings/codec", D_00001230);
+
+INCLUDE_RODATA("nonmatchings/codec", D_00001238);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/codec", func_00000B70);

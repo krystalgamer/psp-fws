@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, wlanfirm_magpie]
+      - [0xA0, c, wlanfirm_magpie]
       - { start: 0x114, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x124, type: prxpad, order: .text }
       - { start: 0x130, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +62,7 @@ segments:
       - { start: 0x14C, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x174, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x178, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x1AC, rodata, wlanfirm_magpie]
+      - [0x1AC, .rodata, wlanfirm_magpie]
       - { start: 0x15B68, type: prxpad, order: .rodata }
   - name: wlanfirm_magpie_seg1
     type: code

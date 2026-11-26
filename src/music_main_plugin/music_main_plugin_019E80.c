@@ -258,9 +258,15 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001CBC0);
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001CE74);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B3340);
+#endif
+
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2AF8_v340);
+#endif
 
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001D15C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001D194);
@@ -376,6 +382,12 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2B30);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2B40);
 #endif
 
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B3398);
+
+INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B33A0);
+#endif
+
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2B50_v340);
 
@@ -394,6 +406,10 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2B64);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2B70);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2B7C);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B33CC);
 #endif
 
 #if FW_VERSION == 340
@@ -606,7 +622,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2DD8);
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001F294);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001F340);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001F418);
@@ -728,6 +744,10 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2FA4);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2FB4);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B2FC0);
+#endif
+
+#if FW_VERSION == 350
+INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_000B3814);
 #endif
 
 #if FW_VERSION == 340
