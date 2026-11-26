@@ -74,7 +74,8 @@ def main():
             used = True
         if used:
             for k, v in cu["types"].items():
-                if k not in have and k not in types and v:
+                bare = k.split()[-1] if k.startswith("typedef ") else k
+                if bare not in have and k not in have and k not in types and v:
                     types[k] = v
     print(f"{mod}: {len(protos)} prototypes, {len(types)} types")
     if not apply or not protos:
