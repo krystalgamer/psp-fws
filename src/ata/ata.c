@@ -288,11 +288,11 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaSetBusErrorIntr);
 
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_689FCB7D);
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", sceAtaGetAtaCallBack);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 *sceAtaGetAtaCallBack(void) {
     return &D_000046A8.unk0;
 }
@@ -363,11 +363,11 @@ s32 sceAtaGetIntrFlag(void) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", sceAtaClearDriveStat);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void sceAtaClearDriveStat(s32 arg0, s32 arg1) {
     s32 temp_s1;
     s32 temp_v0;
