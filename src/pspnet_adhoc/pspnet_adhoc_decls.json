@@ -36,8 +36,8 @@
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceNetAdhocGameModeUpdateReplica": "void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1);",
-  "sceNetAdhoc_lib_62B875A8": "void sceNetAdhoc_lib_62B875A8(void);",
   "sceNetAdhocGameModeUpdateReplicaInternal": "void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1);",
+  "sceNetAdhoc_lib_62B875A8": "void sceNetAdhoc_lib_62B875A8(void);",
   "sceNetAdhoc_lib_F9240FBA": "void sceNetAdhoc_lib_F9240FBA(void);",
   "sceNetMemset": "M2C_UNK sceNetMemset(void *, M2C_UNK, M2C_UNK);"
  },
