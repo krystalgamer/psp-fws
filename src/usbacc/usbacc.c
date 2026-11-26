@@ -6,7 +6,7 @@ INCLUDE_ASM("nonmatchings/usbacc", sceUsbAccGetInfo);
 
 INCLUDE_ASM("nonmatchings/usbacc", sceUsbAcc_internal_2A100C1F);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbacc", D_00000B2C);
 
 INCLUDE_RODATA("nonmatchings/usbacc", D_00000B30);

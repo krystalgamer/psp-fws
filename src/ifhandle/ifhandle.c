@@ -7,7 +7,7 @@ INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_B9096E48);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_B1F5BB87);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/ifhandle", D_00003024);
 
 INCLUDE_RODATA("nonmatchings/ifhandle", D_00003028);
@@ -291,9 +291,15 @@ INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_C3325FDC);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_955F2924);
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/ifhandle", D_00003668);
+#endif
+
 INCLUDE_RODATA("nonmatchings/ifhandle", D_00003470);
 
+#if FW_VERSION < 351
 INCLUDE_RODATA("nonmatchings/ifhandle", D_0000347C);
+#endif
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_9A6261EC);
 
@@ -304,6 +310,10 @@ INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_49EDBB18);
 INCLUDE_ASM("nonmatchings/ifhandle", func_00001E90);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_1560F143);
+
+#if FW_VERSION == 351
+INCLUDE_ASM("nonmatchings/ifhandle", func_000023BC);
+#endif
 
 #if FW_VERSION < 282
 void sceNetIfhandle_driver_0FB8AE0D(void) {

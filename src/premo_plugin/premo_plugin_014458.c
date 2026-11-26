@@ -3,7 +3,7 @@
 
 INCLUDE_ASM("nonmatchings/premo_plugin_014458", func_00014458);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014458", func_000145C8);
 #endif
 

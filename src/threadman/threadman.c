@@ -335,7 +335,7 @@ void func_00000534(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/threadman", D_00016340);
 
 INCLUDE_RODATA("nonmatchings/threadman", D_00016344);
@@ -421,7 +421,7 @@ s32 func_000008D0(s32 arg0, struct Unk_func_000008D0_1 *arg1) {
 INCLUDE_ASM("nonmatchings/threadman", func_000008F0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_000009F8(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -1176,7 +1176,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateMutex);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteMutex);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/threadman", func_00005FF0);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00006C80);
@@ -1206,7 +1206,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00016690);
 INCLUDE_ASM("nonmatchings/threadman", func_00006D28);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/threadman", func_00006E00);
 #endif
 
@@ -2224,7 +2224,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelResumeDispatchThread);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelChangeCurrentThreadAttr);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/threadman", func_00012050);
 #endif
 
@@ -2240,7 +2240,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadExitStatus);
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_BC31C1B9);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000127F8(struct Unk_func_000127F8_0 *arg0, s32 arg1) {
     void *var_s0;
 
@@ -2389,7 +2389,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013DB0);
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForUser_532A522E);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void ThreadManForUser_532A522E(void) {
     sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x128), s32 *, 0x18));
 }

@@ -786,6 +786,7 @@ void func_00017AC0(M2C_UNK **arg0);
 void func_00017E44(M2C_UNK **arg0);
 void func_00017E7C(struct Unk_func_00017E7C_0 *arg0, s32 arg1, s32 arg2);
 void func_00017E7C_v350(void *arg0, s32 arg1, s32 arg2);
+void func_00017E7C_v351(void *arg0, s32 arg1, s32 arg2);
 void func_00017E88(void);
 s32 func_00017E90(void);
 s32 func_00017E98(void);

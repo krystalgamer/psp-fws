@@ -249,7 +249,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002B1B4);
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002B44C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002B53C);
 #endif
 
@@ -266,7 +266,7 @@ void func_0002B53C(struct Unk_func_0002B53C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002B584);
 #endif
 
@@ -283,7 +283,7 @@ void func_0002B584(struct Unk_func_0002B584_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/photo_plugin_0292B0", func_0002B5CC);
 #endif
 

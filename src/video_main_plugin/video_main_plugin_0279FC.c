@@ -33,7 +33,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_0279FC", func_00027E10);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_0279FC", func_00027E28);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00027E54(void) {
     scePaf_3AC3E06A();
 }

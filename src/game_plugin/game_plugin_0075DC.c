@@ -2,7 +2,7 @@
 #include "common.h"
 #include "game_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000075DC);
 #endif
 
@@ -30,7 +30,7 @@ void func_000075DC(struct Unk_func_000075DC_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void ***func_00007638(void ***arg0, struct Unk_func_00007638_1 *arg1, void **arg2) {
     void **temp_s0;
     void *temp_v1;
@@ -100,7 +100,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012038);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012050);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00019AF8);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00019B1C);
@@ -190,7 +190,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00006C00);
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000078F8);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00019BD0);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_0000CCA8);
@@ -202,7 +202,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007AF4);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007ED0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_0000D118);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_0000D20C);
@@ -238,7 +238,7 @@ void func_0000740C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00008040);
 #endif
 
@@ -250,7 +250,7 @@ void func_00008040(struct Unk_func_00008040_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00008078);
 #endif
 
@@ -268,7 +268,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_000080B0);
 INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007490);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000080FC(struct Unk_func_000080FC_0 *arg0) {
     arg0->unk30 = -1;
     vsh_1122D59B();
@@ -301,7 +301,7 @@ void func_00008160(struct Unk_func_00008160_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00008180(struct Unk_func_00008180_0 *arg0) {
     arg0->unk30 = -1;
     vsh_C7D1D06C();

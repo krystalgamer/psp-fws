@@ -236,7 +236,7 @@ void func_000046F4(struct Unk_func_000046F4_0 *arg0) {
     sceKernelDeleteSema(arg0->unk4);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000471C);
 #else
 void func_0000471C(struct Unk_func_0000471C_0 *arg0) {
@@ -357,7 +357,7 @@ s32 func_00004AD0(s32 arg0) {
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00004B68);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_C394D92B);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_2591E02A);
@@ -631,7 +631,7 @@ INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_00021610);
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_00021638);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_4515BF94);
 #endif
 
@@ -669,7 +669,7 @@ INCLUDE_ASM("nonmatchings/music_common_0043C0", func_0000536C);
 INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000053EC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_97B68AC5);
 
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_FCF47242);

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "auth_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000000);
 #endif
 
@@ -91,7 +91,7 @@ s32 module_stop(void) {
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_000028D8);
 
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_000028DC);
@@ -115,9 +115,17 @@ INCLUDE_RODATA("nonmatchings/auth_plugin", D_000029F8);
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A20);
 
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A70);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A80_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A80_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A80);
 
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002A84);
@@ -131,7 +139,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00000328);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000004B0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00000574(void) {
     func_0000222C((s32) &D_00002C88, (s32) &D_00002AEC);
     func_0000222C((s32) &D_00002C94, (s32) &D_00002AEC);
@@ -555,7 +563,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00002A64);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000021FC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_0000222C(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -579,7 +587,7 @@ void func_0000222C(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_0000227C(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -638,7 +646,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00001858);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002658);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000026B0);
 #endif
 

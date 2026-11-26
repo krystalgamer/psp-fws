@@ -2,7 +2,7 @@
 #include "common.h"
 #include "game_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/game_plugin", func_00000000);
 #endif
 
@@ -28,7 +28,7 @@ INCLUDE_ASM("nonmatchings/game_plugin", func_0000015C);
 
 INCLUDE_ASM("nonmatchings/game_plugin", func_000003DC);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/game_plugin", D_000183F0);
 
 INCLUDE_RODATA("nonmatchings/game_plugin", D_000183F4);

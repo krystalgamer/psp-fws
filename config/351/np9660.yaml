@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, np9660]
+      - [0xA0, c, np9660]
       - { start: 0x43A0, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x4580, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x4584, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -61,7 +61,7 @@ segments:
       - { start: 0x45E0, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x46C0, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x46C4, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x46F8, rodata, np9660]
+      - [0x46F8, .rodata, np9660]
       - { start: 0x4CE8, type: prxpad, order: .rodata }
   - name: np9660_seg1
     type: code

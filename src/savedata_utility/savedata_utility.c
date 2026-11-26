@@ -1,7 +1,7 @@
 #include "common.h"
 #include "savedata_utility_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00000000);
 #endif
 
@@ -51,7 +51,7 @@ s32 module_stop(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024310);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024314);
@@ -69,9 +69,17 @@ INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024374);
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024380);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024398);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024660);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_000243B0_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_000243C4);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_000243E4);
@@ -81,17 +89,33 @@ INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024428);
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_0002442C);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024440);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024708);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024458_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_000245B0);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_000245B4);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_000245C0);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/savedata_utility", D_000248AC);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_000245FC_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024624);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024634);
@@ -312,7 +336,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00000704);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00000800);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_00000A78(struct Unk_func_00000A78_0 *arg0) {
     s32 temp_v0;
 
@@ -1678,7 +1702,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00001438);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_0000146C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/savedata_utility", func_000014E8);
 #endif
 
@@ -1738,7 +1762,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00001690);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00001718);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00001718(struct Unk_func_00001718_0 *arg0, s32 arg1) {
     struct Unk_func_00001718_temp_a0 *temp_a0;
 
@@ -2281,7 +2305,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00001E28);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00001EB4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00002084(struct Unk_func_00002084_0 *arg0, s32 arg1) {
     void **temp_a0;
 
@@ -2303,7 +2327,7 @@ void func_00002084(struct Unk_func_00002084_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000020F4(struct Unk_func_000020F4_0 *arg0, s32 arg1) {
     func_000068E4(arg1, scePaf_2CD3AB9E(arg0->unk4->unk4, &D_000245E4));
 }
@@ -2358,7 +2382,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00002B94);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00002C2C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00002D04);
 #endif
 
@@ -2373,7 +2397,7 @@ void func_00002D04(struct Unk_func_00002D04_0 *arg0, s32 arg1, s8 arg2) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00002D50);
 #endif
 
@@ -2394,7 +2418,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00002D9C);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00002E28);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000030D4(struct Unk_func_000030D4_0 *arg0, s32 arg1) {
     void **temp_a0;
 
@@ -2416,7 +2440,7 @@ void func_000030D4(struct Unk_func_000030D4_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00003144(struct Unk_func_00003144_0 *arg0, s32 arg1) {
     func_000068E4(arg1, scePaf_2CD3AB9E(arg0->unk4->unk4, &D_0002474C));
 }
@@ -2525,7 +2549,13 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_000049DC);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00004AFC);
 
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00004BFC);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_ASM("nonmatchings/savedata_utility", func_000049DC);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00004CB0);
 
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00004D10);
@@ -2543,7 +2573,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_0000517C);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00005474);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00005510(struct Unk_func_00005510_0 *arg0, s32 arg1) {
     func_000068E4(arg1, scePaf_2CD3AB9E(arg0->unk4->unk4, &D_000248A0));
 }
@@ -2567,7 +2597,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_000057E0);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_000058D0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00005A4C(struct Unk_func_00005A4C_0 *arg0) {
     s32 temp_v0;
 
@@ -2759,7 +2789,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_000064BC);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00006578);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_0000671C(struct Unk_vt_func_0000671C_arg0 **arg0, s32 arg1) {
     s32 var_v1;
 

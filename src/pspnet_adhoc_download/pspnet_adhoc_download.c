@@ -7,7 +7,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_13DAB550);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_2B6FB0DA);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_000038C4);
 
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_000038C8);

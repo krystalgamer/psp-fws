@@ -5,7 +5,7 @@
 
 INCLUDE_ASM("nonmatchings/wlan", func_00000000);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/wlan", D_00018B44);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_00018B48);
@@ -39,9 +39,17 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00018C7C);
 INCLUDE_RODATA("nonmatchings/wlan", D_00018CA4);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_00018CB0);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/wlan", D_00018CC8_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/wlan", D_00018CC8_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/wlan", D_00018CD8);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_00018DB8);
@@ -57,9 +65,17 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00018F24);
 INCLUDE_RODATA("nonmatchings/wlan", D_00018F28);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_00018F38);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/wlan", D_00018FD8_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/wlan", D_00018FD8_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/wlan", D_00018FDC);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_00018FE0);
@@ -1705,7 +1721,7 @@ void func_0000AC90(struct Unk_func_0000AC90_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_0000AF8C(s32 arg0) {
     func_000086B0(arg0);
     sceSysreg_driver_00C2628E(1);
@@ -2554,7 +2570,7 @@ INCLUDE_ASM("nonmatchings/wlan", func_000136A0);
 INCLUDE_ASM("nonmatchings/wlan", func_0001374C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/wlan", func_00015E14);
 #endif
 

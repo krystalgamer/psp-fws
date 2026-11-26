@@ -931,7 +931,7 @@ void func_00074190(void) {
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06EFBC", func_00075F10);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06EFBC", func_0007452C);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_06EFBC", D_000B48C8);

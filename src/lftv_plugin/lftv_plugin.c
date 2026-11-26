@@ -2,7 +2,7 @@
 #include "common.h"
 #include "lftv_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_00000000);
 #endif
 
@@ -19,7 +19,7 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_0000015C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/lftv_plugin", D_0000378C);
 
 INCLUDE_RODATA("nonmatchings/lftv_plugin", D_00003790);
@@ -279,7 +279,7 @@ INCLUDE_ASM("nonmatchings/lftv_plugin", func_00000D5C);
 
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_00000F1C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_000012C0(void) {
     s32 var_v1;
 
@@ -436,7 +436,7 @@ void func_00002334(void) {
 
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_00002350);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_0000241C(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -460,7 +460,7 @@ void func_0000241C(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_0000246C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00002500(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -540,7 +540,7 @@ INCLUDE_ASM("nonmatchings/lftv_plugin", func_00002B30);
 
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_00002B84);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00002F70(void) {
     sceVshCommonUtil_951BC384(&D_00003D1C, &func_00003164);
 }
@@ -568,7 +568,7 @@ INCLUDE_ASM("nonmatchings/lftv_plugin", func_00003138);
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_00003164);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_000031CC(void) {
     s32 temp_v0;
     void *temp_v0_2;
@@ -604,7 +604,7 @@ s32 func_000031CC(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_0000323C(void) {
     s32 temp_v0;
     void *temp_v0_2;
@@ -662,7 +662,7 @@ void func_00003424(void) {
 
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_00002C80);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lftv_plugin", func_00002CD8);
 #endif
 

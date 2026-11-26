@@ -94,7 +94,7 @@ s32 func_00001388(void **arg0, u32 arg1) {
 
 INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_904110FC);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/dmacman", D_00001DF0);
 
 INCLUDE_RODATA("nonmatchings/dmacman", D_00001DF4);

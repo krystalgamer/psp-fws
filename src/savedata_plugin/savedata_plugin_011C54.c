@@ -334,7 +334,7 @@ void func_00010BE0(void **arg0) {
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00010C38);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00013048(void **arg0) {
     void *temp_s0;
     void *var_a0;

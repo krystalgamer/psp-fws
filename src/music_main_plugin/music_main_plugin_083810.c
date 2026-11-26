@@ -1,7 +1,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00083810);
 #endif
 
@@ -94,7 +94,7 @@ void func_000842D8(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_000842E8);
 #endif
 
@@ -115,7 +115,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00084370);
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_000843A0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_000843D0);
 #endif
 
@@ -158,7 +158,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00084984);
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_000849BC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_000849F4);
 #endif
 
@@ -339,7 +339,7 @@ void func_00086794(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 260 || FW_VERSION == 350
+#if FW_VERSION == 260 || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_000867BC);
 #endif
 
@@ -386,7 +386,7 @@ void func_000868AC(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 260 || FW_VERSION == 350
+#if FW_VERSION == 260 || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_000868D4);
 #endif
 
@@ -402,7 +402,7 @@ void func_000868D4(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_0008690C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00086A54);
 #endif
 
@@ -417,7 +417,7 @@ void func_00086A54(struct Unk_func_00086A54_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00086A98);
 #endif
 
@@ -442,7 +442,7 @@ void func_00086AEC(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00086AFC);
 #endif
 
@@ -491,7 +491,7 @@ void func_00086B8C(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00086B9C);
 #endif
 
@@ -532,7 +532,7 @@ void func_00087044(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 260 || FW_VERSION == 350
+#if FW_VERSION == 260 || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_0008706C);
 #endif
 
@@ -580,7 +580,7 @@ void func_00087140(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00087168);
 #endif
 

@@ -694,97 +694,25 @@ void scePaf_56F4D69F(void) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_D7E925A1);
-#endif
-
-#if FW_VERSION == 260
-void scePaf_D7E925A1(void) {
-
-}
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_296ED0EF);
-#endif
-
-#if FW_VERSION == 260
-void scePaf_296ED0EF(void) {
-
-}
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_7DDE0658);
-#endif
-
-#if FW_VERSION == 260
-void scePaf_7DDE0658(void) {
-
-}
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_CC3CFABF);
-#endif
-
-#if FW_VERSION == 260
-void scePaf_CC3CFABF(void) {
-
-}
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_D2C94856);
-#endif
-
-#if FW_VERSION == 260
-void scePaf_D2C94856(void) {
-
-}
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_EF346632);
-#endif
-
-#if FW_VERSION == 260
-void scePaf_EF346632(void) {
-
-}
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_79293604);
-#endif
-
-#if FW_VERSION == 260
-void scePaf_79293604(void) {
-
-}
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_AECF91A9);
-#endif
-
-#if FW_VERSION == 260
-void scePaf_AECF91A9(void) {
-
-}
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pafmini", scePaf_3342C5F5);
-#endif
-
-#if FW_VERSION == 260
-void scePaf_3342C5F5(void) {
-
-}
-#endif
-
 #if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_D7E925A1);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_296ED0EF);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_7DDE0658);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_CC3CFABF);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_D2C94856);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_EF346632);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_79293604);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_AECF91A9);
+
+INCLUDE_ASM("nonmatchings/pafmini", scePaf_3342C5F5);
+
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_48B5C1C0);
 
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_D188831A);

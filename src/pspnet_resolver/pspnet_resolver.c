@@ -250,7 +250,7 @@ INCLUDE_ASM("nonmatchings/pspnet_resolver", func_00000DE8);
 INCLUDE_ASM("nonmatchings/pspnet_resolver", func_000007E0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001E2C);
 
 INCLUDE_RODATA("nonmatchings/pspnet_resolver", D_00001E30);

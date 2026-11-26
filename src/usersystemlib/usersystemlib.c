@@ -22,7 +22,7 @@ s32 sceKernelIsCpuIntrSuspended(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/usersystemlib", sceKernelIsCpuIntrEnable);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usersystemlib", D_0000017C);
 
 INCLUDE_RODATA("nonmatchings/usersystemlib", D_00000180);
@@ -34,7 +34,15 @@ INCLUDE_RODATA("nonmatchings/usersystemlib", D_000001AC);
 INCLUDE_RODATA("nonmatchings/usersystemlib", D_000001C4);
 
 INCLUDE_RODATA("nonmatchings/usersystemlib", D_000001D4);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/usersystemlib", D_000001FC_v351);
+
+INCLUDE_RODATA("nonmatchings/usersystemlib", D_00000200_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/usersystemlib", D_000001FC_v350);
 
 INCLUDE_RODATA("nonmatchings/usersystemlib", D_00000200_v350);

@@ -191,7 +191,7 @@ s32 func_00001718(void) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/sircs", D_00002484);
 
 INCLUDE_RODATA("nonmatchings/sircs", D_00002488);

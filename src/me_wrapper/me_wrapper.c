@@ -14,7 +14,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_DE2E7E89);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_E67F4E0A);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_000025C8);
 
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_000025CC);

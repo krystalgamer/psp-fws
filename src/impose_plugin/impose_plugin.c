@@ -1,7 +1,7 @@
 #include "common.h"
 #include "impose_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000000);
 #endif
 
@@ -23,7 +23,7 @@ s32 module_stop(void) {
 }
 #endif
 
-#if FW_VERSION < 282 || FW_VERSION == 350
+#if FW_VERSION < 282 || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose_plugin", func_0000015C);
 #else
 void func_0000015C(struct Unk_func_0000015C_0 *arg0) {
@@ -33,7 +33,7 @@ void func_0000015C(struct Unk_func_0000015C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 282 || FW_VERSION == 350
+#if FW_VERSION < 282 || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000180);
 #else
 void func_00000180(struct Unk_func_00000180_0 *arg0) {
@@ -43,7 +43,7 @@ void func_00000180(struct Unk_func_00000180_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001610);
 
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001614);
@@ -85,7 +85,7 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_0000138C);
 
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001398);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001734);
 #endif
 
@@ -97,7 +97,7 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013B4);
 
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013C0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001758);
 #endif
 
@@ -127,7 +127,7 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001414);
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000016F4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000017C0);
 #endif
 
@@ -209,7 +209,7 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_00000924);
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000964);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00000964(void) {
     s32 temp_s1;
     void *temp_v0;
@@ -259,7 +259,7 @@ void func_00000964(void) {
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000BAC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00000BAC(s32 arg0) {
     scePaf_648CA0C5();
     scePaf_B94FDC08();
@@ -273,7 +273,7 @@ void func_00000BAC(s32 arg0) {
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000BE4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000B20);
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000D1C);
@@ -312,6 +312,6 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_00001054);
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00001078);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000010D0);
 #endif

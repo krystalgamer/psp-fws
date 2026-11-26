@@ -90,7 +90,7 @@ INCLUDE_ASM("nonmatchings/audio", sceAudio_driver_A2BEAA6C);
 INCLUDE_ASM("nonmatchings/audio", sceAudio_driver_210567F7);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/audio", D_00002F9C);
 
 INCLUDE_RODATA("nonmatchings/audio", D_00002FA0);
@@ -290,7 +290,7 @@ INCLUDE_ASM("nonmatchings/audio", func_0000206C);
 INCLUDE_ASM("nonmatchings/audio", func_0000217C);
 #endif
 
-#if FW_VERSION == 260 || FW_VERSION == 350
+#if FW_VERSION == 260 || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/audio", func_000023B4);
 #endif
 

@@ -16,7 +16,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_83FE280A);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_891723D5);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet", D_00009B7C);
 
 INCLUDE_RODATA("nonmatchings/pspnet", D_00009B80);
@@ -1107,7 +1107,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00009390);
 
 INCLUDE_RODATA("nonmatchings/pspnet", D_0000A574);
 
-#if FW_VERSION == 260 || FW_VERSION == 350
+#if FW_VERSION == 260 || FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet", D_0000A5B4);
 #endif
 

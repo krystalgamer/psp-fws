@@ -4497,6 +4497,7 @@ s32 func_000611B4(s32);
 void func_000611DC(struct Unk_func_000611DC_0 *arg0);
 void func_00061218(void);
 void func_00061218_v350(void);
+void func_00061218_v351(void);
 s32 func_00061220(s32);
 s32 func_0006126C(s32 *arg0, M2C_UNK arg1);
 s32 func_000612B4(s32 arg0);

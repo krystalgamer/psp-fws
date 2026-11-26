@@ -173,7 +173,7 @@ u8 scePower_driver_E8685403(void) {
 
 INCLUDE_ASM("nonmatchings/power", func_00000DD4);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/power", D_00005864);
 
 INCLUDE_RODATA("nonmatchings/power", D_00005868);
@@ -712,7 +712,7 @@ INCLUDE_ASM("nonmatchings/power", scePowerSetCpuClockFrequency);
 
 INCLUDE_ASM("nonmatchings/power", scePowerSetBusClockFrequency);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/power", D_00006244);
 #endif
 
@@ -865,7 +865,7 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_35B7662E);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_F9B4DEA1);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 scePower_driver_F06B96D4(s32 arg0) {
     D_0000B7D4 = arg0;
     return 0;
@@ -967,7 +967,7 @@ void scePower_driver_545A7F3C(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void scePower_driver_EBD177D6(s32 arg0, s32 arg1, s32 arg2) {
     func_000032EC(arg0, arg1, arg2);
 }

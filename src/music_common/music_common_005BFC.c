@@ -30,7 +30,7 @@ void func_00005CC4(struct Unk_func_00005CC4_0 *arg0) {
 INCLUDE_ASM("nonmatchings/music_common_005BFC", func_00006164);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_005BFC", music_common_E12719F4);
 #endif
 
@@ -44,7 +44,7 @@ INCLUDE_ASM("nonmatchings/music_common_005BFC", music_common_28010044);
 
 INCLUDE_ASM("nonmatchings/music_common_005BFC", func_00005D74);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_005BFC", music_common_F4165FC1);
 #else
 INCLUDE_ASM("nonmatchings/music_common_005BFC", music_common_D27DF99A);
@@ -52,7 +52,7 @@ INCLUDE_ASM("nonmatchings/music_common_005BFC", music_common_D27DF99A);
 
 INCLUDE_ASM("nonmatchings/music_common_005BFC", func_00005E04);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 music_common_CC127E5B(s32 arg0) {
     return arg0 + 4;
 }

@@ -164,7 +164,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_020034", func_000213DC);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_020034", func_0002148C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 u8 func_0002148C(struct Unk_func_0002148C_0 *arg0) {
     struct Unk_func_0002148C_temp_v1 *temp_v1;
     u8 var_v0;

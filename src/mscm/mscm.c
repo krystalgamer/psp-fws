@@ -8,7 +8,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00000000);
 INCLUDE_ASM("nonmatchings/mscm", func_000000C8);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/mscm", D_00006C8C);
 
 INCLUDE_RODATA("nonmatchings/mscm", D_00006C90);

@@ -43,7 +43,7 @@ INCLUDE_ASM("nonmatchings/usb", func_000005E4);
 
 INCLUDE_ASM("nonmatchings/usb", func_00000688);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usb", D_00008E30);
 
 INCLUDE_RODATA("nonmatchings/usb", D_00008E34);

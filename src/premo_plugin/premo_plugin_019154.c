@@ -123,7 +123,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001A018);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001A0CC);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001A23C);
 #endif
 
@@ -151,7 +151,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001A42C);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001A8D8);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001AA34);
 #endif
 
@@ -308,7 +308,7 @@ s32 func_0001ACD0(void) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001ACD8);
 #endif
 
@@ -373,7 +373,7 @@ void func_0001AEF0(struct Unk_func_0001AEF0_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001AF1C);
 #endif
 
@@ -401,7 +401,7 @@ s32 func_0001AF1C(struct Unk_func_0001AF1C_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001AF60);
 #endif
 
@@ -454,7 +454,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001B1C4);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001B284);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001B324);
 #endif
 
@@ -545,7 +545,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001C0E8);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001C10C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001C130);
 #endif
 
@@ -615,7 +615,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001C4A0);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001C4F8);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001CAEC);
 #endif
 
@@ -765,7 +765,7 @@ s32 func_0001CD74(void) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001CD7C);
 #endif
 
@@ -1113,7 +1113,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001EE9C);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001F0CC);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001F338);
 #endif
 
@@ -1129,7 +1129,7 @@ void func_0001F338(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001F354);
 #endif
 
@@ -1149,7 +1149,7 @@ void func_0001F370(s32 arg0) {
     func_0001E3C4(arg0 - 0x38);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001F38C);
 #endif
 
@@ -1165,7 +1165,7 @@ void func_0001F38C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001F3A8);
 #endif
 
@@ -1197,7 +1197,7 @@ void func_0001F418(s32 arg0) {
     func_0001EAD4(arg0 - 0x38);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001F434);
 #endif
 
@@ -1411,7 +1411,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0002034C);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0002061C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00020994);
 #endif
 
@@ -1427,7 +1427,7 @@ void func_00020994(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_000209B0);
 #endif
 
@@ -1447,7 +1447,7 @@ void func_000209CC(s32 arg0) {
     func_0001F834(arg0 - 0x38);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_000209E8);
 #endif
 
@@ -1463,7 +1463,7 @@ void func_000209E8(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00020A04);
 #endif
 
@@ -1495,7 +1495,7 @@ void func_00020A74(s32 arg0) {
     func_0001FF30(arg0 - 0x38);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00020A90);
 #endif
 
@@ -1792,7 +1792,7 @@ INCLUDE_RODATA("nonmatchings/premo_plugin_019154", D_0002BEF0);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00022C50);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/premo_plugin_019154", D_0002BF2C);
 #endif
 
@@ -1813,7 +1813,7 @@ s32 func_00022E5C(struct Unk_func_00022E5C_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00022EA8);
 #endif
 
@@ -1835,7 +1835,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00022EC8);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_000230C0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00023230);
 #endif
 
@@ -1885,7 +1885,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00023A8C);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00023C7C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00023E58);
 #endif
 
@@ -1901,7 +1901,7 @@ s32 func_00023E58(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00023E60);
 #endif
 
@@ -1917,6 +1917,6 @@ s32 func_00023E60(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00023E68);
 #endif

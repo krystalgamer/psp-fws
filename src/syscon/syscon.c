@@ -4,7 +4,7 @@
 
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_0A771482);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/syscon", func_00000218);
 #endif
 
@@ -14,7 +14,7 @@ INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_56931095);
 INCLUDE_ASM("nonmatchings/syscon", func_000004C4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/syscon", D_00003E7C);
 
 INCLUDE_RODATA("nonmatchings/syscon", D_00003E80);
@@ -42,11 +42,21 @@ INCLUDE_RODATA("nonmatchings/syscon", D_00003F70);
 INCLUDE_RODATA("nonmatchings/syscon", D_00004448);
 
 INCLUDE_RODATA("nonmatchings/syscon", D_00004464);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/syscon", D_0000446C_v351);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00004474_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/syscon", D_0000446C_v350);
 
 INCLUDE_RODATA("nonmatchings/syscon", D_00004474_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/syscon", D_0000448C);
 
 INCLUDE_RODATA("nonmatchings/syscon", D_00004494);
@@ -74,7 +84,7 @@ INCLUDE_ASM("nonmatchings/syscon", func_00000350);
 
 INCLUDE_RODATA("nonmatchings/syscon", D_0000453C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/syscon", func_00000580);
 #endif
 
@@ -111,7 +121,7 @@ INCLUDE_ASM("nonmatchings/syscon", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_92D16FC7);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/syscon", func_000016C0);
 #endif
 
@@ -833,7 +843,7 @@ void sceSyscon_driver_A9AEF39F(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_25F47F96);
 #endif
 

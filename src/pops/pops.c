@@ -1,7 +1,7 @@
 #include "common.h"
 #include "pops_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pops", D_0002AED4);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002AED8);
@@ -105,7 +105,7 @@ INCLUDE_RODATA("nonmatchings/pops", D_00038278);
 
 INCLUDE_ASM("nonmatchings/pops", module_start);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/pops", func_00000068);
 #endif
 
@@ -133,7 +133,7 @@ INCLUDE_ASM("nonmatchings/pops", module_stop);
 INCLUDE_ASM("nonmatchings/pops", func_000004F0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_00000668(void) {
     sceImpose_A9884B00(0);
     sceKernelExitGame();
@@ -146,7 +146,7 @@ s32 func_00000668(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/pops", func_000001D4);
 #endif
 

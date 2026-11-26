@@ -486,7 +486,7 @@ void func_00004B54(void) {
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_00004B70);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_004788", func_000087B4);
 #endif
 

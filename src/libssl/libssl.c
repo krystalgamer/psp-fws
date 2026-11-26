@@ -261,7 +261,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_000034E4);
 
 INCLUDE_ASM("nonmatchings/libssl", func_00003518);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/libssl", D_0002A07C);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002A080);
@@ -2721,7 +2721,7 @@ INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_EDBE00D6);
 
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_E11361C2);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/libssl", sceSsl_lib_7781A781);
 #endif
 
@@ -2899,7 +2899,7 @@ void func_0001D4C0(s32 arg0) {
 INCLUDE_ASM("nonmatchings/libssl", func_0001D4F0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/libssl", func_0001D850);
 #endif
 
@@ -3449,7 +3449,7 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002D908);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D910);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DA30);
 #endif
 
@@ -4331,7 +4331,7 @@ INCLUDE_ASM("nonmatchings/libssl", sceSslGetNotAfter);
 
 INCLUDE_ASM("nonmatchings/libssl", sceSslGetNotBefore);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/libssl", sceSslGetKeyUsage);
 #endif
 
@@ -4343,7 +4343,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_00029930);
 
 INCLUDE_ASM("nonmatchings/libssl", func_000299A0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/libssl", func_00029ACC);
 #endif
 

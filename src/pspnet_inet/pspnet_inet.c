@@ -709,7 +709,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000D378);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000D484);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B4EC);
 
 INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B4F0);
@@ -2347,7 +2347,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetErrno);
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetPspError);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_CCC18C45);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_2D5868C0);

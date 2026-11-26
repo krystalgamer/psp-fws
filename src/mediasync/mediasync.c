@@ -1,7 +1,7 @@
 #include "common.h"
 #include "mediasync_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006E90);
 
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006E94);
@@ -155,7 +155,7 @@ INCLUDE_ASM("nonmatchings/mediasync", func_00000124);
 INCLUDE_ASM("nonmatchings/mediasync", func_0000014C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006FEC);
 #endif
 
@@ -163,7 +163,7 @@ INCLUDE_RODATA("nonmatchings/mediasync", D_00006FEC);
 INCLUDE_ASM("nonmatchings/mediasync", func_000001E4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/mediasync", D_00007018);
 #endif
 
@@ -171,7 +171,7 @@ INCLUDE_RODATA("nonmatchings/mediasync", D_00007018);
 INCLUDE_ASM("nonmatchings/mediasync", func_00000380);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/mediasync", func_0000063C);
 #endif
 

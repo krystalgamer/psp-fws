@@ -203,7 +203,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00000444);
 INCLUDE_ASM("nonmatchings/loadcore", func_00000560);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_00000770(void) {
     return 0x80020001;
 }
@@ -588,7 +588,7 @@ INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_7E63F86D);
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_B370DF29);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007934);
 
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007938);
@@ -808,7 +808,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00002CD0);
 INCLUDE_ASM("nonmatchings/loadcore", func_00002EA0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/loadcore", func_000039A8);
 #endif
 
@@ -940,7 +940,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00003EAC);
 INCLUDE_ASM("nonmatchings/loadcore", func_000042DC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/loadcore", LoadCoreForKernel_B4D6FECC);
 #endif
 
@@ -1218,7 +1218,7 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_00007308);
 INCLUDE_ASM("nonmatchings/loadcore", func_00005DF0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/loadcore", func_0000664C);
 #endif
 
@@ -1356,7 +1356,7 @@ s32 func_0000630C(struct Unk_func_0000630C_0 *arg0) {
 INCLUDE_ASM("nonmatchings/loadcore", func_00006470);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/loadcore", func_00007130);
 #endif
 

@@ -11,7 +11,7 @@ void func_0000043C(s32 arg0) {
     sceNetAdhocSetSocketAlert(arg0, 0x3F0);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_00002130);
 
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_transfer_int", D_00002134);

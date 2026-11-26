@@ -1,7 +1,7 @@
 #include "common.h"
 #include "dnas_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_00000000);
 #endif
 
@@ -16,7 +16,7 @@ s32 module_stop(void) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_0000015C(void) {
     scePaf_39E62C88(D_00001F4C, &D_00001AB4, 0, 0);
     scePaf_A013540A(D_00001F4C, &D_00001AB4);
@@ -38,7 +38,7 @@ s32 func_00000210(void) {
     return D_00001F50 != 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001884);
 
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001888);
@@ -74,9 +74,17 @@ INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000019E0);
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000019EC);
 
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A24);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A34_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A34_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A30);
 
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A34);
@@ -283,6 +291,6 @@ INCLUDE_ASM("nonmatchings/dnas_plugin", func_00001510);
 
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_000015C4);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/dnas_plugin", func_0000161C);
 #endif

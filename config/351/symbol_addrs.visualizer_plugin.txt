@@ -117,3 +117,5 @@ scePaf_FCD6524C = 0x0000CB4C; // type:func
 scePaf_FD34FE4A = 0x0000CB54; // type:func
 scePaf_FD587C0C = 0x0000CB5C; // type:func
 scePaf_FE445877 = 0x0000CB64; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

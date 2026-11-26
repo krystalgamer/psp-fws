@@ -174,7 +174,7 @@ INCLUDE_ASM("nonmatchings/exceptionman", func_00000C80);
 
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000CB0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/exceptionman", D_00000DD4);
 
 INCLUDE_RODATA("nonmatchings/exceptionman", D_00000DEC);

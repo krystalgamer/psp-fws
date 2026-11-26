@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/351/.splat_cache.savedata_utility
   symbol_addrs_path:
     - config/351/symbol_addrs.savedata_utility.txt
+    - config/351/func_starts.savedata_utility.txt
     - tmp/build/351/prx_syms.savedata_utility.txt
   reloc_addrs_path: [tmp/build/351/reloc_addrs.savedata_utility.txt]
   asset_path: tmp/assets/351/savedata_utility
@@ -52,7 +53,13 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, savedata_utility]
+      - [0xA0, c, savedata_utility]
+      - [0x6984, c, savedata_utility_0068E4]
+      - [0x6E74, c, savedata_utility_006DD4]
+      - [0x112A8, c, savedata_utility_010F6C]
+      - [0x11328, c, savedata_utility_010FEC]
+      - [0x15F74, c, savedata_utility_015C1C]
+      - [0x173C0, c, savedata_utility_017068]
       - { start: 0x240D0, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x24550, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x24554, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -61,7 +68,11 @@ segments:
       - { start: 0x2456C, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x24628, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x2462C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x24660, rodata, savedata_utility]
+      - [0x24660, .rodata, savedata_utility]
+      - [0x251D8, .rodata, savedata_utility_006DD4]
+      - [0x25994, .rodata, savedata_utility_010FEC]
+      - [0x25B50, .rodata, savedata_utility_015C1C]
+      - [0x25BA8, .rodata, savedata_utility_017068]
       - { start: 0x25FE4, type: prxpad, order: .rodata }
   - name: savedata_utility_seg1
     type: code

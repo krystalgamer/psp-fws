@@ -2,7 +2,7 @@
 #include "common.h"
 #include "music_common_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00002CF8(void) {
     s32 temp_v0;
 
@@ -36,7 +36,7 @@ INCLUDE_ASM("nonmatchings/music_common_002CF8", func_00002DF0);
 
 INCLUDE_ASM("nonmatchings/music_common_002CF8", func_00002E2C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_002CF8", music_common_0F283001);
 
 INCLUDE_ASM("nonmatchings/music_common_002CF8", music_common_AB01684D);
@@ -76,7 +76,7 @@ INCLUDE_ASM("nonmatchings/music_common_002CF8", func_000035A8);
 
 INCLUDE_ASM("nonmatchings/music_common_002CF8", func_000035F0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 u8 music_common_4C27C0B8(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 8);
 }

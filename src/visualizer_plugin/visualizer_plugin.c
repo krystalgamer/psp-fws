@@ -133,7 +133,7 @@ void func_000006D0(struct Unk_func_000006D0_0 *arg0) {
     func_00000AE8(arg0->unk4);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
     void **temp_s0;
 
@@ -336,7 +336,7 @@ void func_00005650(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000DD0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 void func_00000DDC(void) {
 
 }

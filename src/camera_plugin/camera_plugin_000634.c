@@ -20,7 +20,7 @@ void func_000006C8(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 void func_00000758(s32 arg0) {
     s32 temp_v0;
 
@@ -73,7 +73,7 @@ void func_000007EC(void) {
     func_00001ED0((void *) D_00024D80);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 void func_00000810(void) {
     func_00001EEC((struct Unk_func_00001EEC_0 *) D_00024D80);
 }
@@ -224,7 +224,7 @@ INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00001EB4);
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00001ED0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00001EEC);
 #endif
 

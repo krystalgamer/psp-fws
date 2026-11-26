@@ -1,7 +1,7 @@
 #include "common.h"
 #include "idstorage_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/idstorage", D_00001F80);
 
 INCLUDE_RODATA("nonmatchings/idstorage", D_00001F84);
@@ -35,9 +35,17 @@ INCLUDE_RODATA("nonmatchings/idstorage", D_00002154);
 INCLUDE_RODATA("nonmatchings/idstorage", D_00002158);
 
 INCLUDE_RODATA("nonmatchings/idstorage", D_00002160);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/idstorage", D_0000217C_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/idstorage", D_0000217C_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/idstorage", D_00002180);
 
 INCLUDE_RODATA("nonmatchings/idstorage", D_000021BC);

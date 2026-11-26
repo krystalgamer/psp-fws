@@ -6,7 +6,7 @@ INCLUDE_ASM("nonmatchings/libparse_http", sceParseHttpStatusLine);
 
 INCLUDE_ASM("nonmatchings/libparse_http", sceParseHttpResponseHeader);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/libparse_http", D_00000D08);
 
 INCLUDE_RODATA("nonmatchings/libparse_http", D_00000D0C);

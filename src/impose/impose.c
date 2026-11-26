@@ -145,7 +145,7 @@ INCLUDE_ASM("nonmatchings/impose", func_000000CC);
 INCLUDE_ASM("nonmatchings/impose", func_00000124);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/impose", D_0000769C);
 
 INCLUDE_RODATA("nonmatchings/impose", D_000076A0);
@@ -269,7 +269,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_000083BC);
 INCLUDE_RODATA("nonmatchings/impose", D_000085DC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/impose", D_0000B3C8);
 #endif
 
@@ -393,7 +393,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00000508);
 INCLUDE_ASM("nonmatchings/impose", func_0000068C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_0000070C(void) {
     func_00002E3C(7);
     func_00002E3C(6);
@@ -451,7 +451,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetBatteryIconStatus);
 INCLUDE_ASM("nonmatchings/impose", func_00000EEC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_000012B8(void) {
     s32 var_a0;
 
@@ -475,7 +475,7 @@ s32 func_000012B8(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000012E4(void) {
     sceDisplaySetMode(M2C_FIELD(D_0000F510, s32 *, 0x264), M2C_FIELD(D_0000F510, s32 *, 0x268), M2C_FIELD(D_0000F510, s32 *, 0x26C));
     sceCodec_driver_20C61103(M2C_FIELD(D_0000F510, s32 *, 0x270));
@@ -493,7 +493,7 @@ void func_000012E4(void) {
 INCLUDE_ASM("nonmatchings/impose", func_00001324);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", func_00001504);
 #endif
 
@@ -501,7 +501,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00001504);
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_116CFF64);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", sceImpose_A9884B00);
 #endif
 
@@ -511,7 +511,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_BDBC42A6);
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_C7E36CC7);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 sceImpose_driver_C7E36CC7(void) {
     if (M2C_FIELD(D_0000F510, s32 *, 0x94) >= 0) {
         M2C_FIELD(D_0000F510, s32 *, 0xD0) = 1;
@@ -750,7 +750,7 @@ s32 sceImpose_driver_C7E36CC7(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 syslib_ADF12745(s32 arg0) {
     s32 temp_a2;
 
@@ -817,7 +817,7 @@ s32 syslib_ADF12745(s32 arg0) {
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_1AEED8FE);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", func_00002108);
 #endif
 
@@ -849,7 +849,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00001F2C);
 INCLUDE_ASM("nonmatchings/impose", func_00001FB0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 sceImpose_driver_1B6E3400(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x94);
 }
@@ -867,7 +867,7 @@ s32 sceImpose_driver_1B6E3400(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 sceImpose_driver_B415FC59(void) {
     s32 temp_v0;
 
@@ -917,7 +917,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_381BD9E7);
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_9DBCE0C4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 sceImpose_driver_7084E72C(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x7C);
 }
@@ -953,7 +953,7 @@ void sceImpose_driver_116DDED6(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", sceImpose_BB3F5DEC);
 
 INCLUDE_ASM("nonmatchings/impose", sceImpose_FF1A2F07);
@@ -1021,7 +1021,7 @@ s32 sceAudioRoutingSetVolumeMode(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 sceAudioRoutingGetVolumeMode(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x70);
 }
@@ -1362,7 +1362,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_000101E0);
 INCLUDE_RODATA("nonmatchings/impose", D_000101F0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/impose", D_000112C4);
 
 INCLUDE_RODATA("nonmatchings/impose", D_000112DC);
@@ -1380,7 +1380,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00003030);
 INCLUDE_ASM("nonmatchings/impose", func_00003390);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", func_00003818);
 #endif
 
@@ -1388,7 +1388,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00003818);
 INCLUDE_ASM("nonmatchings/impose", func_00003488);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000035EC(s32 arg0) {
     if ((M2C_FIELD(D_0000F510, s32 *, 0x94) != 0) && !(arg0 & 0x20000) && (M2C_FIELD(D_0000F510, s32 *, 0x70) == 0)) {
         if (arg0 & 0x100000) {
@@ -1418,7 +1418,7 @@ void func_000035EC(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", func_000039F4);
 
 INCLUDE_ASM("nonmatchings/impose", func_00003A80);
@@ -1449,7 +1449,7 @@ INCLUDE_ASM("nonmatchings/impose", func_000037F8);
 INCLUDE_ASM("nonmatchings/impose", func_00003D34);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", func_0000429C);
 #endif
 
@@ -1463,7 +1463,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00004378);
 INCLUDE_ASM("nonmatchings/impose", func_00004418);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", func_00004B40);
 #endif
 
@@ -1483,7 +1483,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F848);
 INCLUDE_ASM("nonmatchings/impose", func_000044B0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", func_0000588C);
 #endif
 
@@ -1521,7 +1521,7 @@ INCLUDE_ASM("nonmatchings/impose", func_000047EC);
 INCLUDE_ASM("nonmatchings/impose", func_00004870);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", func_000059F0);
 
 INCLUDE_ASM("nonmatchings/impose", func_00005AA4);
@@ -1585,7 +1585,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00004A40);
 INCLUDE_ASM("nonmatchings/impose", func_00004AB4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/impose", func_00005E74);
 #endif
 

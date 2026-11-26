@@ -2,7 +2,7 @@
 #include "common.h"
 #include "netconf_plugin_auto_bfl_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00000000);
 #endif
 
@@ -20,7 +20,7 @@ s32 module_stop(void) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000044F8);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000044FC);
@@ -72,7 +72,7 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000046AC);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin_auto_bfl", D_000046B0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_A117A521);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_D77ACCB7);
@@ -104,7 +104,7 @@ s32 func_00000830(void) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_E635D418);
 #else
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", sceVshNetconfAoss_47A55B8E);
@@ -239,7 +239,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003CD0);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003D18);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00003D94(void) {
     scePaf_9B900798();
 }
@@ -249,7 +249,7 @@ void func_00003D94(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00003DB0(void) {
     scePaf_60355B42();
 }
@@ -261,7 +261,7 @@ void func_00003DB0(void) {
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003DCC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00003DCC(void) {
     scePaf_79112496();
 }
@@ -269,7 +269,7 @@ void func_00003DCC(void) {
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003DE8);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_00003DE8(s32 arg0) {
     scePaf_DDF24DEC();
     return arg0;
@@ -278,7 +278,7 @@ s32 func_00003DE8(s32 arg0) {
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_00003E10);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00003E10(void) {
     scePaf_7D4045E1();
 }
@@ -376,6 +376,6 @@ INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_000040F8);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_0000424C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netconf_plugin_auto_bfl", func_000042A4);
 #endif

@@ -10,7 +10,7 @@ INCLUDE_ASM("nonmatchings/mpeg", func_000001B4);
 
 INCLUDE_ASM("nonmatchings/mpeg", func_0000026C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/mpeg", D_00007E5C);
 
 INCLUDE_RODATA("nonmatchings/mpeg", D_00007E60);

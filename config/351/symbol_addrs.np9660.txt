@@ -89,3 +89,5 @@ scePspNpDrm_driver_04618D16 = 0x000044C0; // type:func
 scePspNpDrm_driver_0F9547E6 = 0x000044C8; // type:func
 sceSysEventForKernel_CD9E4BB5 = 0x000044D0; // type:func
 sceSysEventForKernel_D7D3FDCD = 0x000044D8; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

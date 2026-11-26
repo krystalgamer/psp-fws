@@ -4,7 +4,7 @@
 
 INCLUDE_ASM("nonmatchings/ge", func_00000000);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/ge", D_000059C4);
 
 INCLUDE_RODATA("nonmatchings/ge", D_000059C8);
@@ -46,9 +46,17 @@ INCLUDE_RODATA("nonmatchings/ge", D_00005CF4);
 INCLUDE_RODATA("nonmatchings/ge", D_00005D00);
 
 INCLUDE_RODATA("nonmatchings/ge", D_00005D04);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/ge", D_00005D18_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/ge", D_00005D18_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/ge", D_00005D24);
 
 INCLUDE_RODATA("nonmatchings/ge", D_00005D2C);

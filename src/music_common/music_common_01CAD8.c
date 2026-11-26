@@ -10,7 +10,7 @@ void func_0001CAD8(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void music_common_464F68A8(M2C_UNK **arg0) {
     *arg0 = &D_000202B0;
     func_0001CD88();
@@ -26,7 +26,7 @@ void music_common_41A6A685(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_01CAD8", func_0001CB50);
 #endif
 
@@ -49,7 +49,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CAD8", func_0001CBD4);
 INCLUDE_ASM("nonmatchings/music_common_01CAD8", func_000207EC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_01CAD8", music_common_01754AB3);
 
 INCLUDE_ASM("nonmatchings/music_common_01CAD8", music_common_059A6F10);

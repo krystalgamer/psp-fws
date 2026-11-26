@@ -315,7 +315,7 @@ void func_0000FBB4(void **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00017010(void **arg0) {
     void *temp_s0;
     void *var_a0;

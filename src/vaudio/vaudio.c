@@ -13,7 +13,7 @@ INCLUDE_ASM("nonmatchings/vaudio", sceVaudioChRelease);
 
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudioSetEffectType);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/vaudio", D_00000ED8);
 
 INCLUDE_RODATA("nonmatchings/vaudio", D_00000EDC);

@@ -1,13 +1,117 @@
 #include "common.h"
 #include "popsman_decls.h"
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/popsman", D_00002EDC);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002EE0);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002EFC);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002F10);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002F30);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002F48);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002F60);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002F74);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002F88);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002FA0);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002FB8);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002FD0);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00002FE8);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003000);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003018);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003030);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003044);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_0000305C);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003074);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003088);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003098);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000030B8);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000030C4);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003164);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003178);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003198);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000031A4);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000031CC);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000031D8);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000032D0);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000032D4);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000032DC);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000032F0);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000032F4);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_000032FC);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_0000330C);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_0000331C);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003330);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003334);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003340);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003344);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003348);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_0000334C);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003354);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003358);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003364);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_0000336C);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003370);
+#endif
+
 INCLUDE_RODATA("nonmatchings/popsman", D_000011A0);
 
-#if FW_VERSION >= 330
+#if FW_VERSION >= 330 && FW_VERSION < 351
 INCLUDE_RODATA("nonmatchings/popsman", D_00002354);
 #endif
 
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_29B3FB24);
+
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/popsman", D_000033D8_v351);
+
+INCLUDE_RODATA("nonmatchings/popsman", D_00003418);
+#endif
 
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_0090B2C8);
 
@@ -61,7 +165,7 @@ INCLUDE_ASM("nonmatchings/popsman", func_000005E8);
 INCLUDE_ASM("nonmatchings/popsman", func_000006FC);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/popsman", func_00000808);
 
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_2E18E4E9);
@@ -91,7 +195,7 @@ INCLUDE_ASM("nonmatchings/popsman", scePopsMan_03971322);
 
 INCLUDE_ASM("nonmatchings/popsman", func_00000A44);
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/popsman", func_00000EF4);
 
 INCLUDE_ASM("nonmatchings/popsman", func_000013D4);
@@ -99,7 +203,7 @@ INCLUDE_ASM("nonmatchings/popsman", func_000013D4);
 
 INCLUDE_RODATA("nonmatchings/popsman", D_000011D4);
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/popsman", D_00003390);
 
 INCLUDE_ASM("nonmatchings/popsman", func_00001460);
@@ -134,6 +238,18 @@ INCLUDE_ASM("nonmatchings/popsman", func_00001008);
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/popsman", func_00000E34);
+#endif
+
+#if FW_VERSION == 351
+void sceMeAudio_A345F290(void) {
+    do {
+
+    } while (sceSysreg_driver_9FC87ED4() != 0);
+}
+
+void sceMeAudio_7EFCF769(void) {
+    sceSysreg_driver_8BE2D520();
+}
 #endif
 
 #if FW_VERSION == 340
@@ -196,6 +312,14 @@ INCLUDE_ASM("nonmatchings/popsman", func_000013A0);
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/popsman", func_00001698);
+#endif
+
+#if FW_VERSION == 351
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_A002ED78);
+
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_C044E289);
+
+INCLUDE_ASM("nonmatchings/popsman", sceMeAudio_43D9752F);
 #endif
 
 #if FW_VERSION == 340
@@ -322,7 +446,7 @@ void sceAudio_41EFADE7(void) {
 }
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/popsman", func_000023A8);
 
 INCLUDE_ASM("nonmatchings/popsman", func_000024B0);

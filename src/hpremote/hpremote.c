@@ -2,7 +2,7 @@
 #include "common.h"
 #include "hpremote_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/hpremote", D_00002104);
 
 INCLUDE_RODATA("nonmatchings/hpremote", D_00002108);
@@ -60,13 +60,13 @@ INCLUDE_RODATA("nonmatchings/hpremote", D_00001FD8);
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_1C5BC5A0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_2C7B8B05);
 #endif
 
 INCLUDE_ASM("nonmatchings/hpremote", func_000001B8);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/hpremote", func_00000368);
 
 INCLUDE_ASM("nonmatchings/hpremote", func_000003D4);
@@ -78,7 +78,7 @@ INCLUDE_ASM("nonmatchings/hpremote", func_00000290);
 
 INCLUDE_ASM("nonmatchings/hpremote", func_0000030C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/hpremote", func_0000070C);
 #else
 INCLUDE_ASM("nonmatchings/hpremote", func_00000484);
@@ -100,7 +100,7 @@ s32 func_00000AE4(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_00000AF4(void) {
     s32 temp_v0;
 
@@ -168,7 +168,7 @@ INCLUDE_ASM("nonmatchings/hpremote", func_00000B40);
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprmRegisterCallback);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_FD7DE6CD);
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_8EC787E0);
@@ -178,7 +178,7 @@ INCLUDE_ASM("nonmatchings/hpremote", sceHprmUnregitserCallback);
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_BAD0828E);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 sceHprm_driver_4D1E622C(void) {
     sceKernelSetEventFlag(D_00002198, 8U);
     return 0;
@@ -212,7 +212,7 @@ INCLUDE_ASM("nonmatchings/hpremote", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_588845DA);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 sceHprm_driver_526BB7F4(void) {
     D_000025B4 = 1;
     sceSysreg_driver_BB823481(4);
@@ -357,7 +357,7 @@ s32 sceHprm_driver_971AE8FB(s32 *arg0) {
 INCLUDE_ASM("nonmatchings/hpremote", func_0000134C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000016EC(s8 arg0) {
     D_0000263C = arg0;
 }
@@ -384,7 +384,7 @@ INCLUDE_ASM("nonmatchings/hpremote", func_000013AC);
 
 INCLUDE_ASM("nonmatchings/hpremote", func_000013F0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/hpremote", func_00001720);
 #endif
 

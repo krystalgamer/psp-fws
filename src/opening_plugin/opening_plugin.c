@@ -2,7 +2,7 @@
 #include "common.h"
 #include "opening_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000000);
 #endif
 
@@ -21,7 +21,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_0000015C);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000001D0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00003CB8);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00003CBC);
@@ -73,7 +73,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00000258);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000002AC);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00003F04);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000005A0);
@@ -95,7 +95,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_000006F8);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000720);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000888);
 #endif
 
@@ -222,7 +222,7 @@ INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001514);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001528);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00004050);
 #endif
 
@@ -320,7 +320,7 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_000009E8);
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000009D4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000B48);
 #endif
 
@@ -455,7 +455,7 @@ void func_00000ED8(s32 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00000EF8(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -513,7 +513,7 @@ void func_000013E8(void **arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000015C0);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00001630);
@@ -612,7 +612,7 @@ void func_00000FFC(M2C_UNK **arg0) {
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00001024);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/opening_plugin", func_0000107C);
 #endif
 

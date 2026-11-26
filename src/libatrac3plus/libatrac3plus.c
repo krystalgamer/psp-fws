@@ -421,7 +421,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002348);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000023C0);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/libatrac3plus", D_000036C0);
 
 INCLUDE_RODATA("nonmatchings/libatrac3plus", D_000036C4);

@@ -80,7 +80,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00027F78);
 INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00027978);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00027EB0);
 #endif
 
@@ -126,7 +126,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_0002878C);
 INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00028814);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_000288C0(void) {
     return scePaf_723D0C80() != 0;
 }

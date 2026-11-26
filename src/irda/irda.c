@@ -32,7 +32,7 @@ s32 func_00000850(void) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/irda", D_00001574);
 
 INCLUDE_RODATA("nonmatchings/irda", D_00001578);

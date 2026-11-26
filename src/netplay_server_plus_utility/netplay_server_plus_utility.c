@@ -2,7 +2,7 @@
 #include "common.h"
 #include "netplay_server_plus_utility_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00000000);
 #endif
 
@@ -26,7 +26,7 @@ s32 func_000001FC(void) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000040E0);
 
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000040E4);
@@ -62,17 +62,33 @@ INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_00004204);
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042B4);
 
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042B8);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042E4_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042E4_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042F4);
 
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042F8);
 
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_00004308);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_00004340_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_00004340_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_00004294);
 
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000043C4);
@@ -178,7 +194,7 @@ INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00000E04);
 
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00000EB8);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_00000F3C(void) {
     func_00002CBC();
     scePaf_82CF97B0(0xC8);
@@ -223,7 +239,7 @@ void func_000014F8(void) {
 
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00001500);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00001530(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -399,7 +415,7 @@ INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_00004650);
 
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00002778);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00002AF4);
 #else
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00002AD8);
@@ -412,7 +428,7 @@ s32 func_00002C9C(void) {
 
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00002CBC);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00002EDC);
 #else
 void func_00002DE4(void) {
@@ -436,7 +452,7 @@ INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_000033BC);
 
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00003450);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00003470);
 #else
 void func_00003470(struct Unk_func_00003470_0 *arg0) {
@@ -466,7 +482,7 @@ INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00003790);
 
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00003824);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00003898(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -500,7 +516,7 @@ INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00003B74);
 
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00003BB0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netplay_server_plus_utility", func_00003C08);
 #endif
 

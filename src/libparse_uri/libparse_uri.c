@@ -14,7 +14,7 @@ INCLUDE_ASM("nonmatchings/libparse_uri", sceUriUnescape);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", sceUriParse);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002A38);
 
 INCLUDE_RODATA("nonmatchings/libparse_uri", D_00002A3C);

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "common_gui_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00000438(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -26,7 +26,7 @@ void func_00000438(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00000488);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void sceVshCommonGui_6F4C9FDB(void) {
     s32 temp_v0;
     void *temp_v0_2;
@@ -269,7 +269,7 @@ void func_0000063C(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void sceVshCommonGui_30FA68C3(void) {
     func_000005CC((s32) "msgsystem_enter");
 }

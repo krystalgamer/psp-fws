@@ -42,7 +42,7 @@ void func_00000094(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000000E4(void) {
     if (sceSysreg_driver_E2A5D1EE() > 0x4FFFFF) {
         func_0000004C(0x31, 0);
@@ -216,7 +216,7 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_20C61103);
 
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_02133959);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/codec", D_000010F8);
 
 INCLUDE_RODATA("nonmatchings/codec", D_000010FC);

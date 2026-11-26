@@ -1,7 +1,7 @@
 #include "common.h"
 #include "premo_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014B14);
 #endif
 
@@ -71,7 +71,7 @@ void func_00014B14(struct Unk_func_00014B14_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014BC0);
 #endif
 
@@ -151,7 +151,7 @@ INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AB04);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014C6C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014D6C);
 #endif
 
@@ -313,7 +313,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016238);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00016390);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000163CC);
 #endif
 
@@ -485,7 +485,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000106BC);
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017E74);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017F2C);
 #endif
 
@@ -529,7 +529,7 @@ s32 func_00017F2C(struct Unk_func_00017F2C_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00017F88);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018058);
 #endif
 
@@ -664,7 +664,7 @@ s32 func_000182E4(struct Unk_func_000182E4_0 *arg0, s32 arg1) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_000182F0);
 #endif
 
@@ -806,7 +806,7 @@ s32 func_0001851C(void) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00018524);
 #endif
 

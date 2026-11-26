@@ -2,7 +2,7 @@
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_023318", func_00023318);
 #endif
 
@@ -366,7 +366,7 @@ void func_000242DC(M2C_UNK **arg0) {
     func_0002CD70((s32) arg0);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_023318", func_00024304);
 #else
 void func_00024304(M2C_UNK **arg0) {

@@ -3,7 +3,7 @@
 #include "k1.h"
 #include "avcodec_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/avcodec", D_00003E34);
 
 INCLUDE_RODATA("nonmatchings/avcodec", D_00003E38);

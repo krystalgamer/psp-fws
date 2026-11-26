@@ -66,7 +66,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_026DBC", func_00027840);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_026DBC", func_00027864);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_026DBC", func_00027888);
 #else
 void func_00027888(s32 arg0) {
@@ -118,7 +118,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_026DBC", func_00028B78);
 INCLUDE_ASM("nonmatchings/music_main_plugin_026DBC", func_000290D4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_026DBC", func_000291A0);
 #else
 void func_000291A0(struct Unk_func_000291A0_0 *arg0, s32 arg1) {

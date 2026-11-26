@@ -2,7 +2,7 @@
 #include "common.h"
 #include "msgdialog_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000000);
 #endif
 
@@ -28,7 +28,7 @@ s32 module_stop(void) {
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_0000015C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_0000015C(void) {
     scePaf_39E62C88(D_00001A6C, &D_000012F0, 0, 0);
     scePaf_A013540A(D_00001A6C, &D_000012F0);
@@ -55,7 +55,7 @@ INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_000001E4);
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000238);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000011B8);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000011BC);
@@ -104,7 +104,7 @@ void func_00000384(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000003C8(void) {
     scePaf_D1447DB7(D_00001A6C);
     D_00001A68 = 0;
@@ -438,7 +438,7 @@ void func_00000998(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00000C0C(void) {
     void *sp0;
     sceVshCommonGui_2EBB5C2B(&sp0, sceVshCommonGui_30FA68C3());
@@ -474,7 +474,7 @@ void func_00000B68(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00000EB8(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -502,6 +502,6 @@ INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000F08);
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000FBC);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00001014);
 #endif

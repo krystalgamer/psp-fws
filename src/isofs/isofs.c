@@ -191,7 +191,7 @@ s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/isofs", D_0000671C);
 
 INCLUDE_RODATA("nonmatchings/isofs", D_00006720);

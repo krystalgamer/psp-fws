@@ -1,7 +1,7 @@
 #include "common.h"
 #include "common_gui_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/common_gui", func_00000000);
 #endif
 
@@ -19,7 +19,7 @@ s32 module_stop(void) {
     return 0;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void sceVshCommonGui_25AC25C0(void) {
     func_00002DB8();
 }

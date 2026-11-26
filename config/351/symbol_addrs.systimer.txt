@@ -19,3 +19,8 @@ InterruptManagerForKernel_F987B1F0 = 0x00000988; // type:func
 InterruptManagerForKernel_FE28C6D9 = 0x00000990; // type:func
 sceSuspendForKernel_91A77137 = 0x00000998; // type:func
 sceSuspendForKernel_B43D1A8C = 0x000009A0; // type:func
+// shared names (tools/add_version.py) begin
+D_00000B10 = 0x00000B24; // rom:0xBC4
+D_00000BA0 = 0x00000BB0;
+D_00000B10_v351 = 0x00000B10; // rom:0xBB0
+// shared names (tools/add_version.py) end

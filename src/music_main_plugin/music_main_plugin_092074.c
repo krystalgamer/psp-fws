@@ -1,7 +1,7 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_00092074);
 #endif
 
@@ -46,7 +46,7 @@ void func_00092500(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_00092510);
 #endif
 
@@ -77,7 +77,7 @@ void func_00092654(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_00092664);
 #endif
 
@@ -118,7 +118,7 @@ void func_000926EC(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_000926FC);
 #endif
 
@@ -1506,7 +1506,7 @@ void func_000928F8(M2C_UNK **arg0) {
     *arg0 = &D_000A29D8;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_00092908);
 #else
 void func_00092908(M2C_UNK **arg0) {

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "dd_helper_utility_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00000000);
 #endif
 
@@ -19,7 +19,7 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_0000015C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00006500);
 
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00006504);
@@ -137,7 +137,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000004C0);
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000005A8);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000005A8(void) {
     scePaf_39E62C88(D_00006F3C, &D_00004770, 0, 0);
     scePaf_A013540A(D_00006F3C, &D_00004770);
@@ -192,7 +192,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_0000061C);
 
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00004770);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_0000063C(void) {
     void *temp_v0;
 
@@ -235,7 +235,7 @@ void func_00000674(struct Unk_func_00000674_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000006AC(struct Unk_func_000006AC_0 *arg0) {
     sceHtmlViewerHelper_D2FC6A5A();
 }
@@ -253,9 +253,15 @@ void func_000006AC(struct Unk_func_000006AC_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00000774(void) {
     sceHtmlViewerHelper_2030683A();
+}
+#endif
+
+#if FW_VERSION == 351
+void func_00000790_v351(void) {
+    sceHtmlViewerHelper_4FA8ECCA();
 }
 #endif
 
@@ -306,7 +312,7 @@ void func_0000088C(void) {
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00000894);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_000008C4(s32 arg0, struct Unk_func_000008C4_1 *arg1) {
     s32 temp_s0;
     s32 temp_v0;
@@ -336,7 +342,7 @@ s32 func_000008C4(s32 arg0, struct Unk_func_000008C4_1 *arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00000944);
 #else
 void func_00000944(s32 arg0, s32 arg1, M2C_UNK arg2) {
@@ -523,7 +529,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001D4C);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001E18);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00001ECC(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -702,7 +708,7 @@ void func_00002128(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00002150(void *arg0) {
     s32 temp_v0;
     s32 temp_v1;
@@ -886,7 +892,7 @@ s32 *func_00003208(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00003240);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00003298(s32 *arg0) {
     func_00003014();
     scePaf_F5001144(*arg0);
@@ -970,7 +976,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00005218);
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00005270);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00004100);
 #endif
 

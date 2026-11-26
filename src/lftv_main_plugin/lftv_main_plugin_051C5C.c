@@ -14,7 +14,7 @@ void func_00051C5C(struct Unk_func_00051C5C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_00051CC4);
 #endif
 
@@ -39,7 +39,7 @@ void func_00051DD8(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_00051DE8);
 #endif
 
@@ -50,7 +50,7 @@ void func_00051DE8(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_00051E10);
 #endif
 

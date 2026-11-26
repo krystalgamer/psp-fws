@@ -140,7 +140,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00000FC0);
 INCLUDE_ASM("nonmatchings/loadexec", func_00001110);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002108);
 
 INCLUDE_RODATA("nonmatchings/loadexec", D_0000210C);
@@ -216,7 +216,7 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00003204);
 
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExec);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForUser_D1FB50DC);
 #endif
 
@@ -428,7 +428,7 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_659188E1);
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_62A27008);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForUser_2AC9954B);
 #endif
 
@@ -438,7 +438,7 @@ s32 func_00001A98(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 sceKernelExitGame(void) {
     return LoadExecForUser_D1FB50DC(0);
 }
@@ -470,7 +470,7 @@ s32 LoadExecForKernel_7B7C47EF(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void LoadExecForKernel_6D8D3A3A(s32 arg0, s32 arg1) {
     func_00001FA8(0x123, arg0, arg1, 0x10000);
 }
@@ -536,7 +536,7 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_11412288);
 
 INCLUDE_ASM("nonmatchings/loadexec", syslib_D3744BE0);
 
-#if FW_VERSION == 280 || FW_VERSION == 350
+#if FW_VERSION == 280 || FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/loadexec", D_00001F7C);
 #endif
 

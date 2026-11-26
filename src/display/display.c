@@ -5,7 +5,7 @@
 
 INCLUDE_ASM("nonmatchings/display", module_reboot_before);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/display", D_00003A68);
 
 INCLUDE_RODATA("nonmatchings/display", D_00003A6C);
@@ -33,9 +33,17 @@ INCLUDE_RODATA("nonmatchings/display", D_00003B58);
 INCLUDE_RODATA("nonmatchings/display", D_00003B6C);
 
 INCLUDE_RODATA("nonmatchings/display", D_00003B80);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/display", D_00003B94_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/display", D_00003B94_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/display", D_00003BA8);
 
 INCLUDE_RODATA("nonmatchings/display", D_00003BC0);
@@ -73,9 +81,17 @@ INCLUDE_RODATA("nonmatchings/display", D_00003EB4);
 INCLUDE_RODATA("nonmatchings/display", D_00003EBC);
 
 INCLUDE_RODATA("nonmatchings/display", D_00003ED4);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/display", D_00003EF8_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/display", D_00003EF8_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/display", D_00003F14);
 
 INCLUDE_RODATA("nonmatchings/display", D_00003F24);
@@ -373,7 +389,7 @@ s32 sceDisplay_driver_7A10289D(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/display", func_000009F8);
 #endif
 
@@ -411,7 +427,7 @@ s32 func_000009F8(void) {
 INCLUDE_ASM("nonmatchings/display", func_00000B30);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/display", func_00001058);
 #endif
 
@@ -433,7 +449,7 @@ INCLUDE_ASM("nonmatchings/display", func_00001220);
 INCLUDE_ASM("nonmatchings/display", func_00001288);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/display", func_000015A8);
 #endif
 
@@ -685,7 +701,7 @@ s32 sceDisplay_driver_69B53541(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 sceDisplay_driver_66961521(void) {
     return __builtin_allegrex_max(M2C_VFIELD(&D_00003EC8, s32, 0x14) - sceDisplayGetCurrentHcount(), -1);
 }

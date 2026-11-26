@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/351/.splat_cache.music_main_plugin
   symbol_addrs_path:
     - config/351/symbol_addrs.music_main_plugin.txt
+    - config/351/func_starts.music_main_plugin.txt
     - tmp/build/351/prx_syms.music_main_plugin.txt
   reloc_addrs_path: [tmp/build/351/reloc_addrs.music_main_plugin.txt]
   asset_path: tmp/assets/351/music_main_plugin
@@ -52,7 +53,37 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, music_main_plugin]
+      - [0xA0, c, music_main_plugin]
+      - [0xB884, c, music_main_plugin_008B64]
+      - [0xC0D4, c, music_main_plugin_0092E8]
+      - [0x16814, c, music_main_plugin_0114B0]
+      - [0x16F98, c, music_main_plugin_011BB8]
+      - [0x16FC4, c, music_main_plugin_011BE4]
+      - [0x17AB4, c, music_main_plugin_011C7C]
+      - [0x1BFBC, c, music_main_plugin_019E80]
+      - [0x227C4, c, music_main_plugin_01AAFC]
+      - [0x25E10, c, music_main_plugin_01DE20]
+      - [0x262C4, c, music_main_plugin_01E1E0]
+      - [0x2EEBC, c, music_main_plugin_026DBC]
+      - [0x33078, c, music_main_plugin_02AF6C]
+      - [0x36840, c, music_main_plugin_02E714]
+      - [0x36FBC, c, music_main_plugin_02EE90]
+      - [0x88FFC, c, music_main_plugin_072A40]
+      - [0x8911C, c, music_main_plugin_072B60]
+      - [0x8CDAC, c, music_main_plugin_076710]
+      - [0x8DA98, c, music_main_plugin_0772FC]
+      - [0x99FA0, c, music_main_plugin_083780]
+      - [0x9A030, c, music_main_plugin_083810]
+      - [0x9DB88, c, music_main_plugin_087374]
+      - [0x9DBE8, c, music_main_plugin_0873D4]
+      - [0x9E22C, c, music_main_plugin_087A18]
+      - [0xA0404, c, music_main_plugin_089BF0]
+      - [0xA8054, c, music_main_plugin_0916EC]
+      - [0xA8094, c, music_main_plugin_09172C]
+      - [0xA894C, c, music_main_plugin_091FE4]
+      - [0xA89DC, c, music_main_plugin_092074]
+      - [0xA93A4, c, music_main_plugin_092A3C]
+      - [0xA9D04, c, music_main_plugin_09339C]
       - { start: 0xAD53C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xAE2EC, type: prxpad, order: .text }
       - { start: 0xAE2F0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +93,27 @@ segments:
       - { start: 0xAE30C, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0xAE448, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0xAE44C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0xAE480, rodata, music_main_plugin]
+      - [0xAE480, .rodata, music_main_plugin]
+      - [0xB11B4, .rodata, music_main_plugin_008B64]
+      - [0xB1430, .rodata, music_main_plugin_0092E8]
+      - [0xB2D4C, .rodata, music_main_plugin_0114B0]
+      - [0xB3044, .rodata, music_main_plugin_011BE4]
+      - [0xB3098, .rodata, music_main_plugin_019E80]
+      - [0xB3A58, .rodata, music_main_plugin_01AAFC]
+      - [0xB3F60, .rodata, music_main_plugin_01E1E0]
+      - [0xB42CC, .rodata, music_main_plugin_026DBC]
+      - [0xB43E4, .rodata, music_main_plugin_02AF6C]
+      - [0xB4884, .rodata, music_main_plugin_02E714]
+      - [0xB48C8, .rodata, music_main_plugin_02EE90]
+      - [0xBA3B4, .rodata, music_main_plugin_072A40]
+      - [0xBA3BC, .rodata, music_main_plugin_072B60]
+      - [0xBA528, .rodata, music_main_plugin_076710]
+      - [0xBA580, .rodata, music_main_plugin_0772FC]
+      - [0xBAE60, .rodata, music_main_plugin_083810]
+      - [0xBAEE8, .rodata, music_main_plugin_089BF0]
+      - [0xBB678, .rodata, music_main_plugin_09172C]
+      - [0xBB7F0, .rodata, music_main_plugin_092074]
+      - [0xBB810, .rodata, music_main_plugin_09339C]
   - name: music_main_plugin_seg1
     type: code
     start: 0xBBA80

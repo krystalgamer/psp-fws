@@ -684,7 +684,7 @@ void func_00005708(struct Unk_func_00005708_0 *arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000057CC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_00007670);
 
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc", D_00007674);

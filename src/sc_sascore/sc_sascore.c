@@ -58,7 +58,7 @@ INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasSetPause);
 
 INCLUDE_ASM("nonmatchings/sc_sascore", __sceSasGetPauseFlag);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/sc_sascore", D_0000262C);
 
 INCLUDE_RODATA("nonmatchings/sc_sascore", D_00002630);

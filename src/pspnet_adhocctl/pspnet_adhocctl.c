@@ -2,7 +2,7 @@
 #include "common.h"
 #include "pspnet_adhocctl_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005D84);
 
 INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005D88);

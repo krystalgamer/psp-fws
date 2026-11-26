@@ -2,7 +2,7 @@
 #include "common.h"
 #include "video_main_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00005B3C(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -24,7 +24,7 @@ void func_00005B3C(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00005B8C(s32 arg0, s32 arg1) {
     s32 var_v0;
 

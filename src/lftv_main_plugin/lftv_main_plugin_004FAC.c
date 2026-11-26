@@ -849,7 +849,7 @@ void func_000075E0(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_000075F0);
 #endif
 

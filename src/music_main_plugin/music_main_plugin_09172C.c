@@ -139,7 +139,7 @@ void func_00091920(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION < 282 || FW_VERSION == 350
+#if FW_VERSION < 282 || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_00091930);
 #else
 void func_00091930(M2C_UNK **arg0) {
@@ -319,7 +319,7 @@ void func_00091BBC(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_00091BCC);
 #endif
 

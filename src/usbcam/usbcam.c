@@ -3,7 +3,7 @@
 #include "k1.h"
 #include "usbcam_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A168);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A16C);
@@ -31,9 +31,17 @@ INCLUDE_RODATA("nonmatchings/usbcam", D_0000A254);
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A274);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A280);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/usbcam", D_0000A450_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A450_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A464);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A62C);
@@ -43,9 +51,17 @@ INCLUDE_RODATA("nonmatchings/usbcam", D_0000A644);
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A64C);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A650);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/usbcam", D_0000A65C_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A65C_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A6C4);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A6D0);

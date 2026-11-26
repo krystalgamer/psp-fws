@@ -92,7 +92,7 @@ INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_84410A8E);
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_63ACFD28);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/umdman", D_000101A0);
 
 INCLUDE_RODATA("nonmatchings/umdman", D_000101A4);
@@ -3636,7 +3636,7 @@ INCLUDE_RODATA("nonmatchings/umdman", D_00011704);
 INCLUDE_RODATA("nonmatchings/umdman", D_0001170C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/umdman", func_0000E650);
 #endif
 

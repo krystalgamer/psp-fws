@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, pspnet_adhoc_matching]
+      - [0xA0, c, pspnet_adhoc_matching]
       - { start: 0x443C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x455C, type: prxpad, order: .text }
       - { start: 0x4560, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +62,7 @@ segments:
       - { start: 0x4590, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x461C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x4620, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x4654, rodata, pspnet_adhoc_matching]
+      - [0x4654, .rodata, pspnet_adhoc_matching]
       - { start: 0x4988, type: prxpad, order: .rodata }
   - name: pspnet_adhoc_matching_seg1
     type: code

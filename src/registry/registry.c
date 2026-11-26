@@ -2,7 +2,7 @@
 #include "k1.h"
 #include "registry_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/registry", D_00006D40);
 
 INCLUDE_RODATA("nonmatchings/registry", D_00006D44);

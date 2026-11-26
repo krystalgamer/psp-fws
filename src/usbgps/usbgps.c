@@ -17,7 +17,7 @@ INCLUDE_ASM("nonmatchings/usbgps", module_start);
 INCLUDE_ASM("nonmatchings/usbgps", func_000000AC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005190);
 
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005194);
@@ -33,13 +33,29 @@ INCLUDE_RODATA("nonmatchings/usbgps", D_000051FC);
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005214);
 
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005228);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/usbgps", D_00005240_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005240_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbgps", D_0000525C);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/usbgps", D_00005270_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005270_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005280);
 
 INCLUDE_RODATA("nonmatchings/usbgps", D_000052A8);

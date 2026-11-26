@@ -78,7 +78,7 @@ void func_00000F6C(struct Unk_func_00000F6C_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_D728DEEA);
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_DCDB7963);
@@ -96,7 +96,7 @@ INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_4B8E817A);
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00001100);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_605DF0DB);
 
 void sceVshCommonGui_8F414E35(s32 *arg0) {

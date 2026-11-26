@@ -30,7 +30,7 @@ INCLUDE_ASM("nonmatchings/ata", func_00000280);
 
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_52D9A4CA);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/ata", D_000041DC);
 
 INCLUDE_RODATA("nonmatchings/ata", D_000041E0);

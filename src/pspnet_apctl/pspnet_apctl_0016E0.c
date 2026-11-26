@@ -28,7 +28,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001C6C);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001D64);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002110);
 #endif
 

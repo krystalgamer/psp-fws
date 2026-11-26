@@ -1,7 +1,7 @@
 #include "common.h"
 #include "libhttp_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017A10);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017A14);
@@ -1112,7 +1112,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00007324);
 INCLUDE_ASM("nonmatchings/libhttp", func_000073A8);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/libhttp", func_000075FC);
 #endif
 
@@ -1146,7 +1146,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00007DBC);
 INCLUDE_ASM("nonmatchings/libhttp", func_00007F64);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/libhttp", func_000082B8);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_000089A0);
@@ -1184,7 +1184,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpsEnd);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000909C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/libhttp", sceHttp_87F1E666);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttp_3C478044);
@@ -1284,7 +1284,7 @@ s32 func_00009ADC(void) {
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsEnd);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsEnableOption);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsDisableOption);
@@ -1298,7 +1298,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00009B1C);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00009CA4);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/libhttp", func_0000A02C);
 #endif
 

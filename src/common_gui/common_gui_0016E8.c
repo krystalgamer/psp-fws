@@ -26,7 +26,7 @@ INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_7B52F0E6);
 
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00003438);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_CBD3BD66);
 #endif
 
@@ -118,7 +118,7 @@ INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_0000390C);
 
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000037AC);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_3BE24617);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_0F3E011D);
@@ -222,7 +222,7 @@ INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_0000295C);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002988);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_429664DE);
 #endif
 
@@ -283,7 +283,7 @@ INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002EDC);
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002F50);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002D38);
 #endif
 
@@ -296,7 +296,7 @@ void func_00002D38(M2C_UNK **arg0) {
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002D60);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002DB8);
 #endif
 

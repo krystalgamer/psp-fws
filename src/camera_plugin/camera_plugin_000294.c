@@ -2,7 +2,7 @@
 #include "common.h"
 #include "camera_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_00000294);
 #endif
 
@@ -48,7 +48,7 @@ INCLUDE_RODATA("nonmatchings/camera_plugin_000294", D_00021640);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_0000031C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_000004F8);
 #endif
 
@@ -88,7 +88,7 @@ void func_00000614(void) {
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_00000890);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000294", func_000006C8);
 #endif
 

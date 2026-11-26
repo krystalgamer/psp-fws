@@ -4,7 +4,7 @@
 
 INCLUDE_ASM("nonmatchings/led", func_00000000);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/led", D_0000099C);
 
 INCLUDE_RODATA("nonmatchings/led", D_000009A0);

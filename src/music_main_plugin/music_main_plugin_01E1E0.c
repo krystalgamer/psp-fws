@@ -204,7 +204,7 @@ void func_00021814(M2C_UNK **arg0) {
     func_0004E500((s32) arg0);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_0002183C);
 #else
 void func_0002183C(M2C_UNK **arg0) {
@@ -251,7 +251,7 @@ void func_00021FC4(M2C_UNK **arg0) {
     func_0002232C(arg0);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00021FFC);
 #else
 void func_00021FFC(M2C_UNK **arg0) {
@@ -296,7 +296,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00022210);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00022280);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000222BC);
 #else
 s32 func_000222BC(struct Unk_func_000222BC_0 *arg0, s32 arg1) {
@@ -358,7 +358,7 @@ void func_000224CC(s32 **arg0) {
     func_00021F8C(arg0);
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000224F4);
 #else
 void func_000224F4(s32 **arg0) {
@@ -413,7 +413,7 @@ void func_000228F8(M2C_UNK **arg0) {
     *arg0 = &D_0009C0B8;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00022908);
 #else
 void func_00022908(M2C_UNK **arg0) {
@@ -543,7 +543,7 @@ void func_00022FD0(M2C_UNK **arg0) {
     *arg0 = &D_0009C140;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00022FE0);
 #else
 void func_00022FE0(M2C_UNK **arg0) {
@@ -552,7 +552,7 @@ void func_00022FE0(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00023008);
 #else
 void func_00023008(void) {
@@ -773,7 +773,7 @@ void func_000252A8(M2C_UNK **arg0) {
     *arg0 = &D_0009C278;
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000252B8);
 #else
 void func_000252B8(M2C_UNK **arg0) {

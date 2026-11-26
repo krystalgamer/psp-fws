@@ -46,6 +46,7 @@ extern s32 D_00008498;
 extern s32 D_000084A0;
 extern s32 D_000084A4;
 extern s32 D_000084A4_v350;
+extern s32 D_000084A4_v351;
 extern M2C_UNK D_000084B8;
 extern s32 D_00008530;
 extern s32 D_00008534;

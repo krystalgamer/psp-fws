@@ -5,7 +5,7 @@ INCLUDE_ASM("nonmatchings/usbstor", func_00000000);
 
 INCLUDE_ASM("nonmatchings/usbstor", func_00000134);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbstor", D_000024A4);
 
 INCLUDE_RODATA("nonmatchings/usbstor", D_000024A8);

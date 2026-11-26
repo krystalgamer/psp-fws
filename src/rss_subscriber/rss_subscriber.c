@@ -2,7 +2,7 @@
 #include "common.h"
 #include "rss_subscriber_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00000000);
 #endif
 
@@ -19,7 +19,7 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00000168);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_0000375C);
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003760);
@@ -55,9 +55,17 @@ INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039A4);
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039A8);
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039B8);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039C8_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039C8_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003960);
 
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_00003A24);
@@ -289,7 +297,7 @@ void func_000027A4(s32 *arg0, s32 arg1) {
     func_00002A58();
 }
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000027C4(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -315,7 +323,7 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002814);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000288C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_000028BC(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -339,7 +347,7 @@ void func_000028BC(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000290C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00002948(void **arg0) {
     void *temp_s0;
     void *var_a0;
@@ -399,7 +407,7 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002C30);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002C5C);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002D28);
 #else
 void func_00002D28(M2C_UNK **arg0) {
@@ -408,7 +416,7 @@ void func_00002D28(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_00002D50(void) {
     return scePaf_723D0C80() != 0;
 }
@@ -439,7 +447,7 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002F80);
 
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00003220);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_00003278);
 #endif
 

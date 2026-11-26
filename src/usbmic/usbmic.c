@@ -2,7 +2,7 @@
 
 INCLUDE_ASM("nonmatchings/usbmic", sceUsbMicInputInitEx);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbmic", D_000019E4);
 
 INCLUDE_RODATA("nonmatchings/usbmic", D_000019E8);

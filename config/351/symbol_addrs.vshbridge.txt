@@ -281,3 +281,12 @@ sceVaudioChReserve = 0x00003F10; // type:func
 sceVaudioChReserveBuffering = 0x00003F18; // type:func
 sceVaudioChRelease = 0x00003F20; // type:func
 sceVaudioOutputBlocking = 0x00003F28; // type:func
+// shared names (tools/add_version.py) begin
+D_00003BB0 = 0x00004B40; // rom:0x4BE0
+D_00003C00 = 0x00004B90; // rom:0x4C30
+D_00003C40 = 0x00004BE0;
+D_00003C4C = 0x00004BEC;
+func_00000B6C = 0x00000BF4; // type:func rom:0xC94
+func_00000D10 = 0x00000D98; // type:func rom:0xE38
+func_00002D24 = 0x000039B8; // type:func rom:0x3A58
+// shared names (tools/add_version.py) end

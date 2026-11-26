@@ -93,7 +93,7 @@ void func_00000048(void) {
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000068);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024030);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024034);
@@ -115,9 +115,17 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_000240D8);
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_000240F0);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002410C);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002411C_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002411C_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024134);
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002413C);

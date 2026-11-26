@@ -38,7 +38,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000130B0);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012D5C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 s32 func_00012D7C(s32 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_v1;
@@ -84,7 +84,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012CD0);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012D90);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_00031028);
 #endif
 
@@ -168,7 +168,7 @@ void func_00013504(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013514);
 #endif
 
@@ -179,7 +179,7 @@ void func_00013514(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_0001353C);
 #endif
 
@@ -196,7 +196,7 @@ void func_00013564(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00013574);
 #endif
 
@@ -379,7 +379,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00014D14);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000149E4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00014AE8(void) {
     sceVshCommonGui_F5A16B4D(1);
 }

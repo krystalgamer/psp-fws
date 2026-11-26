@@ -13,7 +13,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001CE5C);
 INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001CE88);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_01CC30", music_common_BF420648);
 
 INCLUDE_ASM("nonmatchings/music_common_01CC30", music_common_98F4C0D3);
@@ -93,7 +93,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001D4BC);
 INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001D55C);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_0001D55C(void) {
     scePaf_CB4C96CE();
 }
@@ -113,7 +113,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", func_00020514);
 INCLUDE_ASM("nonmatchings/music_common_01CC30", func_000217D4);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_01CC30", music_common_761C2F81);
 #endif
 
@@ -127,7 +127,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", func_00021D38);
 INCLUDE_ASM("nonmatchings/music_common_01CC30", func_00021DDC);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_01CC30", music_common_7507015F);
 
 INCLUDE_ASM("nonmatchings/music_common_01CC30", music_common_D38D0DDA);
@@ -155,7 +155,7 @@ void func_00021FBC(s32 **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00021FE4(s32 **arg0) {
     *arg0 = &D_00025320;
     func_0001D7A0(arg0);
@@ -183,7 +183,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", func_00022244);
 INCLUDE_ASM("nonmatchings/music_common_01CC30", func_00022310);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_01CC30", music_common_4DF2BEB3);
 #endif
 
@@ -197,7 +197,7 @@ void func_0001D7A0(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void music_common_44208F71(M2C_UNK **arg0) {
     *arg0 = &D_000202D8;
 }
@@ -209,7 +209,7 @@ void music_common_9677CC87(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001D7C0);
 #endif
 
@@ -220,7 +220,7 @@ void func_0001D7C0(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_01CC30", music_common_91CA7B35);
 
 INCLUDE_ASM("nonmatchings/music_common_01CC30", music_common_234A373A);
@@ -252,7 +252,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001DDA0);
 
 INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001E040);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001E098);
 #endif
 

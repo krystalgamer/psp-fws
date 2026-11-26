@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/351/.splat_cache.game_plugin
   symbol_addrs_path:
     - config/351/symbol_addrs.game_plugin.txt
+    - config/351/func_starts.game_plugin.txt
     - tmp/build/351/prx_syms.game_plugin.txt
   reloc_addrs_path: [tmp/build/351/reloc_addrs.game_plugin.txt]
   asset_path: tmp/assets/351/game_plugin
@@ -52,7 +53,13 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, game_plugin]
+      - [0xA0, c, game_plugin]
+      - [0x680, c, game_plugin_0005CC]
+      - [0x4FEC, c, game_plugin_002BB0]
+      - [0xC6B8, c, game_plugin_0075DC]
+      - [0xD53C, c, game_plugin_0081A4]
+      - [0xD91C, c, game_plugin_00856C]
+      - [0xEB28, c, game_plugin_00968C]
       - { start: 0x17D1C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x18384, type: prxpad, order: .text }
       - { start: 0x18390, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +69,13 @@ segments:
       - { start: 0x183AC, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x18458, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x1845C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x18490, rodata, game_plugin]
+      - [0x18490, .rodata, game_plugin]
+      - [0x18B20, .rodata, game_plugin_0005CC]
+      - [0x19338, .rodata, game_plugin_002BB0]
+      - [0x19970, .rodata, game_plugin_0075DC]
+      - [0x19CE4, .rodata, game_plugin_0081A4]
+      - [0x19DA0, .rodata, game_plugin_00856C]
+      - [0x19EE8, .rodata, game_plugin_00968C]
       - { start: 0x1A17C, type: prxpad, order: .rodata }
   - name: game_plugin_seg1
     type: code

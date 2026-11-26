@@ -2,7 +2,7 @@
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_discover", sceNetAdhocDiscoverInitStart);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000EEC);
 
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_discover", D_00000EF0);

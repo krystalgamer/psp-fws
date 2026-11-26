@@ -8,7 +8,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_0149C4", func_000149C4);
 INCLUDE_ASM("nonmatchings/premo_plugin_0149C4", func_00014A10);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_0149C4", func_00014A5C);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_0149C4", func_00014AB8);

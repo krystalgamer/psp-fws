@@ -2,7 +2,7 @@
 #include "common.h"
 #include "vshbridge_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/vshbridge", D_000041B0);
 
 INCLUDE_RODATA("nonmatchings/vshbridge", D_000041B4);
@@ -270,7 +270,7 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_CC2994C8);
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_4CA1F6DA);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_7E092ADF);
 #endif
 
@@ -359,7 +359,7 @@ void sceVshBridge_41C54ADF(void) {
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_C9626587);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_A77FD0D9);
 #endif
 
@@ -565,7 +565,7 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_0E87EC0C);
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_82314DEE);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_40DC2749);
 #endif
 
@@ -621,7 +621,7 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_FDDE5CA3);
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_834FF53D);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_D01DF045);
 
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_57F60A8E);
@@ -635,7 +635,7 @@ INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_458D27BF);
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_74DB2D30);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/vshbridge", sceVshBridge_1A5FD1E6);
 #endif
 

@@ -8,7 +8,7 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00000000);
 
 INCLUDE_ASM("nonmatchings/interruptman", syslib_D3744BE0);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/interruptman", D_00003E3C);
 
 INCLUDE_RODATA("nonmatchings/interruptman", D_00003E40);

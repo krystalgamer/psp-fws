@@ -1,7 +1,7 @@
 #include "common.h"
 #include "netplay_client_plugin_decls.h"
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000000);
 #endif
 
@@ -23,7 +23,7 @@ s32 module_stop(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DAD0);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DAD4);
@@ -81,9 +81,17 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DCA8);
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DCC0);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DDB0);
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DDB4_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DDB4_v350);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DDBC);
 
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DDC0);
@@ -205,7 +213,13 @@ s32 func_000001E0(void) {
     scePaf_A013540A(D_0000EAF0, &D_0000E000);
     return 0;
 }
+#endif
 
+#if FW_VERSION == 351
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000234_v351);
+#endif
+
+#if FW_VERSION == 350
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000234_v350);
 #endif
 
@@ -928,7 +942,7 @@ s32 func_0000260C(void) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_0000262C(void) {
     void *sp0;
     sceVshCommonGui_11C48509(&sp0, sceVshCommonGui_EC899EBE());
@@ -1600,7 +1614,7 @@ void func_00003AF8(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00005208);
 #endif
 
@@ -1610,7 +1624,7 @@ void func_00005208(struct Unk_func_00005208_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00005224(struct Unk_func_00005224_0 *arg0) {
     scePaf_8B38372A(arg0->unk4);
 }
@@ -1622,7 +1636,7 @@ void func_00005224(struct Unk_func_00005224_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 void func_00005240(struct Unk_func_00005240_0 *arg0) {
     scePaf_CD216C47(arg0->unk4);
 }
@@ -1970,7 +1984,7 @@ void func_00004D78(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00006AA0);
 #endif
 
@@ -2287,7 +2301,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000D13C);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000D310);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000D368);
 #endif
 

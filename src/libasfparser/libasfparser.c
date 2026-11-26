@@ -1134,7 +1134,7 @@ INCLUDE_ASM("nonmatchings/libasfparser", func_00004AB8);
 INCLUDE_ASM("nonmatchings/libasfparser", func_00004B10);
 #endif
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00006F04);
 
 INCLUDE_RODATA("nonmatchings/libasfparser", D_00006F24);

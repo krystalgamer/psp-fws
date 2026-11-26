@@ -2,6 +2,10 @@
 #include "common.h"
 #include "rtc_decls.h"
 
+#if FW_VERSION == 351
+INCLUDE_ASM("nonmatchings/rtc", func_00000000_v351);
+#endif
+
 #if FW_VERSION == 350
 INCLUDE_ASM("nonmatchings/rtc", func_00000000_v350);
 #endif
@@ -348,7 +352,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcParseDateTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcParseRFC3339);
 
-#if FW_VERSION == 350
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/rtc", D_00003EB4);
 
 INCLUDE_RODATA("nonmatchings/rtc", D_00003EB8);
@@ -408,6 +412,10 @@ INCLUDE_ASM("nonmatchings/rtc", func_00002ED4);
 INCLUDE_RODATA("nonmatchings/rtc", D_00004474);
 
 INCLUDE_ASM("nonmatchings/rtc", func_00002F78);
+#endif
+
+#if FW_VERSION == 351
+INCLUDE_RODATA("nonmatchings/rtc", D_000045D0_v351);
 #endif
 
 #if FW_VERSION == 350
