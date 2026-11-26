@@ -223,10 +223,22 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00000700);
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000A9C);
 
 INCLUDE_RODATA("nonmatchings/usbstorms", D_00003764);
+
+INCLUDE_ASM("nonmatchings/usbstorms", module_start);
 #endif
 
-#if FW_VERSION >= 152
-INCLUDE_ASM("nonmatchings/usbstorms", module_start);
+#if FW_VERSION == 152
+s32 module_start(void) {
+    s32 var_v1;
+
+    memset(&D_00002D20, 0, 0x60);
+    var_v1 = 0;
+    if (sceUsbstor_internal_489E6BF1(&D_00002DD0) < 0) {
+        Kprintf("%serror - cannot register handler\n", &D_00002A14);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION == 151
