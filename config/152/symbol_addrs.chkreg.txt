@@ -11,8 +11,12 @@ sceIdStorageReadLeaf = 0x00000548; // type:func
 sceIdStorageLookup = 0x00000550; // type:func
 sceUtilsBufferCopyWithRange = 0x00000558; // type:func
 // shared names (tools/add_version.py) begin
-D_00000850 = 0x000006B0; // rom:0x740
-D_00000880 = 0x000006C0;
-D_00000884 = 0x000006C4;
+g_pIdStorageUMDConfig = 0x000006B0; // rom:0x740
+g_numUMDRegionCodeInfoEntries = 0x000006C0;
+g_isUMDRegionCodesObtained = 0x000006C4;
 D_00000970 = 0x000007B0;
 // shared names (tools/add_version.py) end
+g_semaId = 0x000011B8;
+g_ConsoleIdCertificate = 0x00001100;
+g_isConsoleIdCertificateObtained = 0x000006C8;
+g_idStorageUMDConfig = 0x00000700;

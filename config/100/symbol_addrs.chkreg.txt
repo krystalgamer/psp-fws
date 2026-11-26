@@ -8,8 +8,10 @@ sceKernelSignalSema = 0x00000344; // type:func
 sceKernelWaitSema = 0x0000034C; // type:func
 sceIdStorageReadLeaf = 0x00000354; // type:func
 // shared names (tools/add_version.py) begin
-D_00000850 = 0x00000470; // rom:0x500
-D_00000880 = 0x00000480;
-D_00000884 = 0x00000484;
+g_pIdStorageUMDConfig = 0x00000470; // rom:0x500
+g_numUMDRegionCodeInfoEntries = 0x00000480;
+g_isUMDRegionCodesObtained = 0x00000484;
 D_00000970 = 0x00000570;
 // shared names (tools/add_version.py) end
+g_semaId = 0x00000EC0;
+g_idStorageUMDConfig = 0x000004C0;

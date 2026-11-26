@@ -86,7 +86,9 @@ def main():
     for n in re.findall(r"\b(\w+)\s*(?:\[[^\]]*\])?;\s*$", extra, re.M) + [name]:
         hdr = re.sub(rf"^[^\n]*\b{n}\b(?:\[[^\]]*\])?;\n", "", hdr, flags=re.M) if n != name else \
             re.sub(rf"^[^\n]*\b{n}\([^\n]*\);\n", "", hdr, flags=re.M)
-    text = hdr + "\n" + extra + "\n" + body
+    fwv = re.match(r"\d+", a.ver)[0]
+    fwvar = (re.search(r"v(\d+)", a.ver) or [None, "0"])[1]
+    text = f"#define FW_VERSION {fwv}\n#define FW_VARIANT {fwvar}\n" + hdr + "\n" + extra + "\n" + body
     target = mod.target_words(name)
     comp, own = AD.Module.file_setting(mod.file_of(name))
     best = None

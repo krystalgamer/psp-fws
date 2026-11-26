@@ -4,10 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-extern u8 *D_00000850;
-extern s32 D_00000880;
-extern s32 D_00000884;
-extern s32 D_00000EC0;
+extern u8 g_ConsoleIdCertificate[0xB8];
+extern s32 g_isConsoleIdCertificateObtained;
+extern s32 g_isUMDRegionCodesObtained;
+extern s32 g_numUMDRegionCodeInfoEntries;
+extern u8 *g_pIdStorageUMDConfig;
+extern s32 g_semaId;
 
 s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
 

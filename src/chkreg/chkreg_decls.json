@@ -3,9 +3,11 @@
   "sceKernelCreateSema": "s32 sceKernelCreateSema(void *, u32, s32, s32, void *);"
  },
  "vars": {
-  "D_00000850": "extern u8 *D_00000850;",
-  "D_00000880": "extern s32 D_00000880;",
-  "D_00000884": "extern s32 D_00000884;",
-  "D_00000EC0": "extern s32 D_00000EC0;"
+  "g_ConsoleIdCertificate": "extern u8 g_ConsoleIdCertificate[0xB8];",
+  "g_isConsoleIdCertificateObtained": "extern s32 g_isConsoleIdCertificateObtained;",
+  "g_isUMDRegionCodesObtained": "extern s32 g_isUMDRegionCodesObtained;",
+  "g_numUMDRegionCodeInfoEntries": "extern s32 g_numUMDRegionCodeInfoEntries;",
+  "g_pIdStorageUMDConfig": "extern u8 *g_pIdStorageUMDConfig;",
+  "g_semaId": "extern s32 g_semaId;"
  }
 }
