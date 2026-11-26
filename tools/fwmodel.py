@@ -8,6 +8,7 @@ Conditions are written as version ranges over the versions that share the file
 stay readable as versions are added. Only conditions on FW_VERSION are
 understood; any other `#if` block is kept verbatim as one entry (compiled by all).
 """
+import functools
 import re
 from dataclasses import dataclass, field
 
@@ -16,6 +17,7 @@ ITEM = re.compile(r'^INCLUDE_ASM\("[^"]+", (\w+)\);\n|^INCLUDE_RODATA\("[^"]+", 
                   r'^(?!static\s+inline)(?=[A-Za-z_])[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{\n.*?^\}\n', re.M | re.S)
 
 
+@functools.lru_cache(maxsize=None)
 def evaluate(cond, v):
     """Value of a #if expression on FW_VERSION for version number v."""
     e = cond.replace("FW_VERSION", str(v)).replace("&&", " and ").replace("||", " or ")

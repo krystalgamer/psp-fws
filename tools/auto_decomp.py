@@ -94,14 +94,16 @@ class Module:
     def file_of(self, name):
         for f in self.files:
             t = f.read_text()
-            if f", {name});" in t or re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{$", t, re.M):
+            if f", {name});" in t or (f"{name}(" in t and re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{$", t, re.M)):
                 return f
         return self.src
 
     def defined_elsewhere(self, name):
         """A shared source still defines `name` in C (for another version)."""
-        return self.shared and any(re.search(FB.DEF.format(name=name), f.read_text(), re.M | re.S)
-                                   for f in self.files if f.exists())
+        import fwmodel as FM
+        return self.shared and any(e.kind == "cfunc" and e.name == name
+                                   for f in self.files if f.exists()
+                                   for e in FM.parse_ro(f.read_text(), self.fwvers))
 
     def revert_def(self, f, name):
         """Put INCLUDE_ASM back for the C definition of `name` (this version's, if shared)."""
@@ -249,13 +251,72 @@ def run_m2c(mod, name, ctx, target="mips-gcc-c"):
         asm = k1_as_global(asm)
     ctx = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", "-DM2CTX", f"-I{ROOT/'include'}", "-"],
                          input=ctx, capture_output=True, text=True).stdout
+    # the context lives at a path keyed by its content, so m2c's typemap cache
+    # (<ctx>.m2c next to it) is reused across functions and runs
+    import hashlib
+    cdir = ROOT / "tmp/m2c_ctx"
+    cdir.mkdir(parents=True, exist_ok=True)
+    cpath = cdir / f"{hashlib.sha1(ctx.encode()).hexdigest()}.c"
+    if not cpath.exists():
+        tmpc = cpath.with_suffix(f".{os.getpid()}.tmp")
+        tmpc.write_text(ctx)
+        tmpc.replace(cpath)
     with tempfile.TemporaryDirectory() as td:
         (Path(td) / "f.s").write_text(asm)
-        (Path(td) / "ctx.c").write_text(ctx)
-        r = subprocess.run([sys.executable, str(ROOT / "tools/m2c_allegrex.py"), "-t", target, "--valid-syntax", "--globals", "used",
-                            "--context", str(Path(td) / "ctx.c"), str(Path(td) / "f.s")],
-                           capture_output=True, text=True, timeout=120)
-    return r.stdout if r.returncode == 0 and "M2C_ERROR" not in r.stdout else None
+        argv = ["-t", target, "--valid-syntax", "--globals", "used", "--context", str(cpath), str(Path(td) / "f.s")]
+        out = m2c_inproc(argv) if not os.environ.get("M2C_SUBPROCESS") else None
+        if out is None:
+            r = subprocess.run([sys.executable, str(ROOT / "tools/m2c_allegrex.py")] + argv,
+                               capture_output=True, text=True, timeout=120)
+            out = r.stdout if r.returncode == 0 else ""
+    return out if out and "M2C_ERROR" not in out else None
+
+
+_M2C = {}
+
+
+class _M2CTimeout(Exception):
+    pass
+
+
+def m2c_inproc(argv, timeout=120):
+    """m2c in this process (no interpreter start-up, typemap kept in memory).
+    Returns its stdout, "" on failure, or None if it cannot run here."""
+    import contextlib
+    import io
+    import signal
+    import threading
+    if threading.current_thread() is not threading.main_thread():
+        return None
+    if not _M2C:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("m2c_allegrex_inproc", ROOT / "tools/m2c_allegrex.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)  # applies the Allegrex patches
+        from m2c import main as m2cmain
+        _M2C["main"] = m2cmain
+        sys.setrecursionlimit(max(sys.getrecursionlimit(), 10000))
+    m2cmain = _M2C["main"]
+
+    def alarm(*_):
+        raise _M2CTimeout()
+    buf = io.StringIO()
+    old = signal.signal(signal.SIGALRM, alarm)
+    signal.alarm(timeout)
+    try:
+        with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(io.StringIO()):
+            rc = m2cmain.run(m2cmain.parse_flags(argv))
+        return buf.getvalue() if rc == 0 else ""
+    except _M2CTimeout:
+        return ""
+    except SystemExit as e:
+        return buf.getvalue() if not e.code else ""
+    except Exception:  # noqa: BLE001
+        return ""
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, old)
 
 
 def k1_helpers(body):
@@ -640,6 +701,17 @@ def prescreen(mod, names, jobs, failed, key_of, stats_only):
 
 
 def revert(mod, args, names):
+    if mod.shared and len(names) > 1:
+        byfile = {}
+        for name in names:
+            byfile.setdefault(mod.file_of(name), []).append(name)
+        for f, ns in byfile.items():
+            f.write_text(FB.put_asm_many(f.read_text(), mod.ver, mod.fwvers, ns, mod.folder(f)))
+        for name in names:
+            if not mod.defined_elsewhere(name):
+                mod.store["funcs"].pop(name, None)
+        mod.write_decls()
+        return
     for name in names:
         f = mod.file_of(name)
         mod.revert_def(f, name)

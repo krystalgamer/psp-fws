@@ -59,3 +59,17 @@ def put_asm(text, ver, versions, name, folder):
             ents.insert(k, FM.Entry(frozenset([v]), "asm", name, f'INCLUDE_ASM("{folder}", {name});\n'))
             break
     return FM.emit(FM.dedupe(ents), versions)
+
+
+def put_asm_many(text, ver, versions, names, folder):
+    """put_asm for several functions with one parse."""
+    v = fwnum(ver)
+    names = set(names)
+    ents = FM.parse(text, versions)
+    out = []
+    for e in ents:
+        if e.kind == "cfunc" and e.name in names and v in e.vers:
+            out.append(FM.Entry(frozenset([v]), "asm", e.name, f'INCLUDE_ASM("{folder}", {e.name});\n'))
+            e.vers = e.vers - {v}
+        out.append(e)
+    return FM.emit(FM.dedupe(out), versions)
