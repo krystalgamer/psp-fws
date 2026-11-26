@@ -186,9 +186,25 @@ INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorGetSubClass);
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorSetSubClass);
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstor", module_start);
-#else
+#endif
+
+#if FW_VERSION == 152
+s32 module_start(void) {
+    s32 var_v1;
+
+    memset(&D_000029F0, 0, 0x194);
+    var_v1 = 0;
+    if (sceUsbbdRegister(&D_000029C8) < 0) {
+        Kprintf("%serror - cannot register protocol driver\n", &D_00002724);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION < 152
 s32 module_start(void) {
     s32 var_v1;
 
@@ -202,9 +218,24 @@ s32 module_start(void) {
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstor", module_stop);
-#else
+#endif
+
+#if FW_VERSION == 152
+s32 module_stop(void) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceUsbbdUnregister(&D_000029C8) < 0) {
+        Kprintf("%serror - cannot unregister protocol driver\n", &D_00002724);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION < 152
 s32 module_stop(void) {
     s32 var_v1;
 

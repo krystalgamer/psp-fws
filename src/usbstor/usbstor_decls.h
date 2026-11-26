@@ -6,6 +6,7 @@
 
 extern s32 D_00002724;
 extern s32 D_000029A8;
+extern s32 D_000029C8;
 extern s32 D_000029F0;
 
 M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *);
