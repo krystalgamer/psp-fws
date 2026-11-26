@@ -1,8 +1,13 @@
 {
  "funcs": {
   "module_start": "s32 module_start(void);",
+  "sceSdCleanList": "s32 sceSdCleanList(SceSdCtx1 *ctx);",
   "sceKernelCreateSema": "s32 sceKernelCreateSema(void *, u32, s32, s32, void *);",
-  "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);"
+  "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
+  "sceSdSetIndex": "s32 sceSdSetIndex(SceSdCtx2 *ctx, s32 mode);"
+ },
+ "types": {
+  "SceSdCtx": "typedef struct {\n    u32 mode;\n    u32 unk4;\n    u8 data[16];\n} SceSdCtx1;\ntypedef struct {\n    u32 mode;\n    u8 data[16];\n    u8 key[16];\n    u32 size;\n} SceSdCtx2;"
  },
  "vars": {
   "D_00002AD4": "extern s32 D_00002AD4;",

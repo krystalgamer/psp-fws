@@ -1,4 +1,5 @@
 #include "common.h"
+#include "k1.h"
 #include "chnnlsv_decls.h"
 
 INCLUDE_ASM("nonmatchings/chnnlsv", func_00000000);
@@ -59,7 +60,31 @@ s32 module_stop(SceSize args, void *argp) {
     return 0;
 }
 
+#if FW_VERSION < 352
+s32 sceSdSetIndex(SceSdCtx2 *ctx, s32 mode) {
+    u32 oldK1 = shiftK1();
+    s32 ret;
+    u32 i;
+
+    if (k1IsUserMode() && (s32)((u32)ctx | ((u32)ctx + sizeof(SceSdCtx2))) < 0) {
+        ret = -259;
+    } else {
+        ctx->mode = mode;
+        for (i = 0; i < 16; i++) {
+            ctx->data[i] = 0;
+        }
+        for (i = 0; i < 16; i++) {
+            ctx->key[i] = 0;
+        }
+        ctx->size = 0;
+        ret = 0;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/chnnlsv", sceSdSetIndex);
+#endif
 
 INCLUDE_ASM("nonmatchings/chnnlsv", sceSdRemoveValue);
 
@@ -69,7 +94,28 @@ INCLUDE_ASM("nonmatchings/chnnlsv", sceSdCreateList);
 
 INCLUDE_ASM("nonmatchings/chnnlsv", sceSdSetMember);
 
-INCLUDE_ASM("nonmatchings/chnnlsv", sceChnnlsv_driver_21BE78B4);
+#if FW_VERSION < 352
+s32 sceSdCleanList(SceSdCtx1 *ctx) {
+    u32 oldK1 = shiftK1();
+    s32 ret;
+    u32 i;
+
+    if (k1IsUserMode() && (s32)((u32)ctx | ((u32)ctx + sizeof(SceSdCtx1))) < 0) {
+        ret = -259;
+    } else {
+        for (i = 0; i < 16; i++) {
+            ctx->data[i] = 0;
+        }
+        ctx->mode = 0;
+        ctx->unk4 = 0;
+        ret = 0;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#else
+INCLUDE_ASM("nonmatchings/chnnlsv", sceSdCleanList);
+#endif
 
 s32 _kirk4(void *buf, u32 size, u32 scramble_code) {
     ((u32 *)buf)[3] = scramble_code;
