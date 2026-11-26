@@ -130,11 +130,15 @@ void func_000221E8(void) {
 void func_000221F0(void) {
 }
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/lftv_middleware_0207E4", func_000221F8);
+#else
 void func_000221F8(s32 **arg0) {
     *arg0 = &D_00055580;
     func_00043840((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
 void func_00022230(s32 **arg0) {
     *arg0 = &D_00055580;

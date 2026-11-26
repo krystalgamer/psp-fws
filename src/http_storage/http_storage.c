@@ -32,6 +32,10 @@ INCLUDE_RODATA("nonmatchings/http_storage", D_000005C0);
 INCLUDE_RODATA("nonmatchings/http_storage", D_000005D0);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/http_storage", D_00000600_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/http_storage", D_00000600_v351);
 #endif

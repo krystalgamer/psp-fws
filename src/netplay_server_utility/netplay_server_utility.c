@@ -90,6 +90,10 @@ INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00004018);
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00004068);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00004078_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00004078_v351);
 #endif

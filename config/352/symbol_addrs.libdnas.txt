@@ -92,3 +92,5 @@ sceSsl_lib_E7C29542 = 0x00003278; // type:func
 sceSsl_lib_EBFB0E3C = 0x00003280; // type:func
 sceSsl_lib_EF5A4BD4 = 0x00003288; // type:func
 sceSsl_lib_FB8273FE = 0x00003290; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

@@ -191,6 +191,10 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00007FA0);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00008004);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/modulemgr", D_0000803C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/modulemgr", D_0000803C_v351);
 #endif

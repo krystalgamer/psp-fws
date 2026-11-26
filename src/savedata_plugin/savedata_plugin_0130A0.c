@@ -1693,7 +1693,7 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_000229DC);
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0001851C);
 #endif
 
-#if FW_VERSION == 351
+#if FW_VERSION >= 351
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00018A44);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00018A60);

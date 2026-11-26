@@ -3827,6 +3827,10 @@ void func_00017E6C(void) {
 INCLUDE_ASM("nonmatchings/dd_helper", func_00017E74);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/dd_helper", func_00018034_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_ASM("nonmatchings/dd_helper", func_00018034_v351);
 #endif
@@ -5684,6 +5688,10 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C3AC);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C3C8);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C3E4);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C974_v352);
 #endif
 
 #if FW_VERSION == 351

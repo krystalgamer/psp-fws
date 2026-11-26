@@ -17,3 +17,20 @@ sceAmctrl_driver_525B8218 = 0x00001398; // type:func
 sceAmctrl_driver_58163FBE = 0x000013A0; // type:func
 sceAmctrl_driver_9951C50F = 0x000013A8; // type:func
 sceAmctrl_driver_EF95A213 = 0x000013B0; // type:func
+// shared names (tools/add_version.py) begin
+D_00001564 = 0x0000157C; // rom:0x161C
+D_00001588 = 0x000015A0; // rom:0x1640
+D_00001594 = 0x000015AC; // rom:0x164C
+D_000015A4 = 0x000015BC; // rom:0x165C
+D_000015D8 = 0x000015F0; // rom:0x1690
+D_000015F0 = 0x00001608; // rom:0x16A8
+D_00001600 = 0x00001618; // rom:0x16B8
+D_00001658 = 0x00001670; // rom:0x1710
+func_00000A84 = 0x00000A94; // type:func rom:0xB34
+func_00000B14 = 0x00000B24; // type:func rom:0xBC4
+func_00000B94 = 0x00000BA4; // type:func rom:0xC44
+func_00001024 = 0x00001030; // type:func rom:0x10D0
+func_000011A4 = 0x000011B0; // type:func rom:0x1250
+func_00001240 = 0x0000124C; // type:func rom:0x12EC
+D_00001564_v352 = 0x00001564; // rom:0x1604
+// shared names (tools/add_version.py) end

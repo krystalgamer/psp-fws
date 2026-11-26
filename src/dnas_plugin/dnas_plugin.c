@@ -76,6 +76,10 @@ INCLUDE_RODATA("nonmatchings/dnas_plugin", D_000019EC);
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A24);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A34_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/dnas_plugin", D_00001A34_v351);
 #endif

@@ -1,7 +1,8 @@
 {
  "funcs": {
   "module_start": "s32 module_start(void);",
-  "module_stop": "s32 module_stop(void);"
+  "module_stop": "s32 module_stop(void);",
+  "scePspNpDrm_driver_0F9547E6": "s32 scePspNpDrm_driver_0F9547E6(s32, s32, s32, s32);"
  },
  "vars": {}
 }

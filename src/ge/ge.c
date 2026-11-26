@@ -48,6 +48,10 @@ INCLUDE_RODATA("nonmatchings/ge", D_00005D00);
 INCLUDE_RODATA("nonmatchings/ge", D_00005D04);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/ge", D_00005D18_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/ge", D_00005D18_v351);
 #endif

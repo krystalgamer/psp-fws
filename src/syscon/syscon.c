@@ -44,6 +44,12 @@ INCLUDE_RODATA("nonmatchings/syscon", D_00004448);
 INCLUDE_RODATA("nonmatchings/syscon", D_00004464);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/syscon", D_0000446C_v352);
+
+INCLUDE_RODATA("nonmatchings/syscon", D_00004474_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/syscon", D_0000446C_v351);
 

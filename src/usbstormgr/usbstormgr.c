@@ -68,6 +68,36 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00000730);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000764);
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004DFC);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004E00);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004E18);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004E30);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004E48);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004E5C);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004E74);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004E84);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004E9C);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004EA8);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004EB4);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004F54);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004F6C);
+
+INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004F74);
+#endif
+
 #if FW_VERSION == 152 || (FW_VERSION >= 250 && FW_VERSION < 340)
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000087C);
 #endif
@@ -80,7 +110,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00000888);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000085C);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000086C);
 #endif
 
@@ -108,7 +138,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_0000105C);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000012E8);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000109C);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001304);
@@ -190,7 +220,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00001F6C);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002038);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001450);
 
 s32 func_000017C4(void) {
@@ -216,7 +246,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00002700);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002644);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002464);
 #endif
 
@@ -230,7 +260,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00002A08);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002948);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000272C);
 #endif
 
@@ -256,7 +286,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00002CD8);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002F1C);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002CE8);
 #endif
 
@@ -312,7 +342,7 @@ void func_00003610(void) {
 }
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00003398);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000035F4);

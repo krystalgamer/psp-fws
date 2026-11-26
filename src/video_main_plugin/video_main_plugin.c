@@ -213,6 +213,12 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin", D_000519FC);
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051A0C);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051A1C_v352);
+
+INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051A2C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051A1C_v351);
 
@@ -237,6 +243,10 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051A78);
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051A90);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051AA4_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051AA4_v351);
 #endif
@@ -255,6 +265,10 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051AE0);
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051AE8);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051B0C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051B0C_v351);
 #endif
@@ -265,6 +279,10 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051B0C_v350);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051B7C);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051B80_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -287,6 +305,10 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin", D_000520C8);
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_000520CC);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/video_main_plugin", D_000520D0_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_000520D0_v351);
 #endif
@@ -305,6 +327,10 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00052120);
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00052124);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00052154);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/video_main_plugin", D_000521A4_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -620,6 +646,10 @@ INCLUDE_ASM("nonmatchings/video_main_plugin", func_00000338);
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_0000041C);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00000450);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/video_main_plugin", func_000004A4_v352);
 #endif
 
 #if FW_VERSION == 351

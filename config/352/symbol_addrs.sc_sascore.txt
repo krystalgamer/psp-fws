@@ -43,3 +43,10 @@ sceMeCore_driver_3D5F109C = 0x00002508; // type:func
 sceMeCore_driver_D1EA3DFD = 0x00002510; // type:func
 sceMeMemory_driver_5AD660FA = 0x00002518; // type:func
 sceMeMemory_driver_C86500E3 = 0x00002520; // type:func
+// shared names (tools/add_version.py) begin
+D_000025A0 = 0x00002854; // rom:0x28F4
+D_000025A8 = 0x0000285C; // rom:0x28FC
+D_000025B0 = 0x00002864; // rom:0x2904
+D_000025D0 = 0x00002890;
+D_000025D4 = 0x00002894;
+// shared names (tools/add_version.py) end

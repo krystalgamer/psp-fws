@@ -18,3 +18,13 @@ sceKernelWaitSema = 0x00001564; // type:func
 sceKernelCreateSema = 0x0000156C; // type:func
 sceIdStorageLookup = 0x00001574; // type:func
 semaphore_4C537C72 = 0x0000157C; // type:func
+// shared names (tools/add_version.py) begin
+D_00000DC0 = 0x000017C0; // rom:0x1880
+D_00000E00 = 0x00001804;
+D_00000E40 = 0x00001840;
+D_00000F00 = 0x00001980;
+func_00000000 = 0x00000098; // type:func rom:0x138
+func_000000DC = 0x00000174; // type:func rom:0x214
+func_00000244 = 0x00000D7C; // type:func rom:0xE1C
+func_00000000_v352 = 0x00000000; // type:func rom:0xA0
+// shared names (tools/add_version.py) end

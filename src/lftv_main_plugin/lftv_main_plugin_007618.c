@@ -1271,6 +1271,10 @@ INCLUDE_RODATA("nonmatchings/lftv_main_plugin_007618", D_00058118);
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_007618", D_00058140);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/lftv_main_plugin_007618", D_0005B3C0_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_007618", D_0005B3C0_v351);
 #endif

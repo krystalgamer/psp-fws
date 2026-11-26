@@ -67,6 +67,7 @@ void func_0000013C(void);
 void func_00000144(void);
 void func_0000014C_v350(void);
 void func_0000014C_v351(void);
+void func_0000014C_v352(void);
 s32 func_00000180(s32, s32, s32);
 s32 func_000002F0(void);
 s32 func_00000CF0(void);

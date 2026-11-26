@@ -34,6 +34,10 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EEAC);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EEC4);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EED0_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EED0_v351);
 #endif
@@ -44,6 +48,10 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EED0_v350);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EEDC);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002EEEC_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -88,6 +96,16 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F038);
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F08C);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F0A8);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F320_v352);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F32C_v352);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F330_v352);
+
+INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002F334_v352);
 #endif
 
 #if FW_VERSION == 351

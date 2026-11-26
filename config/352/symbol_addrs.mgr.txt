@@ -134,3 +134,5 @@ sceMScm_driver_F82AF926 = 0x0000A7F8; // type:func
 sceMScm_driver_FF6C50D8 = 0x0000A800; // type:func
 sceKernelPowerUnlock = 0x0000A808; // type:func
 sceKernelPowerLock = 0x0000A810; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

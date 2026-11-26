@@ -9,6 +9,12 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_00000024);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_000000AC);
 
+#if FW_VERSION == 352
+s32 func_0000010C_v352(s32 arg0) {
+    return D_0000C860 + (arg0 * 0x1C);
+}
+#endif
+
 #if FW_VERSION == 351
 s32 func_0000010C_v351(s32 arg0) {
     return D_0000C860 + (arg0 * 0x1C);

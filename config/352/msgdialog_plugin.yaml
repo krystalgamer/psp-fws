@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, msgdialog_plugin]
+      - [0xA0, c, msgdialog_plugin]
       - { start: 0x10DC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x11BC, type: prxpad, order: .text }
       - { start: 0x11C0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +62,7 @@ segments:
       - { start: 0x11DC, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x1220, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x1224, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x1258, rodata, msgdialog_plugin]
+      - [0x1258, .rodata, msgdialog_plugin]
   - name: msgdialog_plugin_seg1
     type: code
     start: 0x1AA0

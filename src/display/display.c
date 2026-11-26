@@ -35,6 +35,10 @@ INCLUDE_RODATA("nonmatchings/display", D_00003B6C);
 INCLUDE_RODATA("nonmatchings/display", D_00003B80);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/display", D_00003B94_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/display", D_00003B94_v351);
 #endif
@@ -81,6 +85,10 @@ INCLUDE_RODATA("nonmatchings/display", D_00003EB4);
 INCLUDE_RODATA("nonmatchings/display", D_00003EBC);
 
 INCLUDE_RODATA("nonmatchings/display", D_00003ED4);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/display", D_00003EF8_v352);
 #endif
 
 #if FW_VERSION == 351

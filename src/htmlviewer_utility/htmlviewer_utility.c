@@ -9,6 +9,10 @@ INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00000024);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_000000AC);
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_0000010C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_0000010C_v351);
 #endif
@@ -31,6 +35,12 @@ void func_0000013C(void) {
 }
 
 void func_00000144(void) {
+
+}
+#endif
+
+#if FW_VERSION == 352
+void func_0000014C_v352(void) {
 
 }
 #endif
@@ -141,6 +151,12 @@ INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00000378);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_000003D8);
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005A40_v352);
+
+INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005A44_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005A40_v351);
 
@@ -175,6 +191,10 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005AD8);
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005AF0);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005B04_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005B04_v351);
 #endif
@@ -193,6 +213,10 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005B4C);
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005B54);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005B74_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005B74_v351);
 #endif
@@ -203,6 +227,10 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005B74_v350);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005B88);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005BD8_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -217,6 +245,10 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005BD8_v350);
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005BEC);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005BF4);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005BFC_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -1893,6 +1925,12 @@ void sceHtmlViewerHelper_8B77E777(s32 arg0) {
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", sceHtmlViewerHelper_4FA8ECCA);
 
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00004924);
+#endif
+
+#if FW_VERSION == 352
+void func_0000499C(void) {
+    func_0000014C_v352();
+}
 #endif
 
 #if FW_VERSION == 351

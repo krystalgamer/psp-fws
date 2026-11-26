@@ -57,6 +57,10 @@ INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039A8);
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039B8);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039C8_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/rss_subscriber", D_000039C8_v351);
 #endif

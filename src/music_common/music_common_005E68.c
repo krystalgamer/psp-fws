@@ -602,7 +602,7 @@ INCLUDE_RODATA("nonmatchings/music_common_005E68", D_00024654);
 INCLUDE_ASM("nonmatchings/music_common_005E68", func_00007554);
 #endif
 
-#if FW_VERSION == 351
+#if FW_VERSION >= 351
 INCLUDE_ASM("nonmatchings/music_common_005E68", func_00007BE0);
 #endif
 
@@ -1662,6 +1662,10 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000D26C);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000D5B8);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/music_common_005E68", func_0000FDAC_v352);
 #endif
 
 #if FW_VERSION == 351

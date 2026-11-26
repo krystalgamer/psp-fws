@@ -28,6 +28,16 @@ void func_0000015C(void) {
     func_0000091C();
 }
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AB40_v352);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AB44_v352);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AB54_v352);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AB5C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AB40_v351);
 
@@ -84,6 +94,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AC90);
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001ACD4);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001ACD8_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001ACD8_v351);
 #endif
@@ -98,6 +112,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AEBC);
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AED0);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AEE0_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AEE0_v351);
 #endif
@@ -108,6 +126,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AEE0_v350);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AEE8);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AEFC_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -130,6 +152,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AF28);
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AF6C);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AFCC_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AFCC_v351);
 #endif
@@ -140,6 +166,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AFCC_v350);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AFF4);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001B0C4_v352);
 #endif
 
 #if FW_VERSION == 351

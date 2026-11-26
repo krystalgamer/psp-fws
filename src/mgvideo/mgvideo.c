@@ -5,7 +5,122 @@
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00000000);
 
-#if FW_VERSION >= 303
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000018);
+
+s32 func_00000028(void *arg0) {
+    return (M2C_FIELD(arg0, u8 *, 0) << 0x18) | (M2C_FIELD(arg0, u8 *, 1) << 0x10) | (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
+}
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000054);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000080);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000000D8);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000108);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_0000016C);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000001D8);
+
+s32 sceMgVideo_driver_F5E39E17(void) {
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000218);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_0000028C);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000308);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000360);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000374);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_0000041C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000090D8);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000090DC);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000090F0);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009108);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009128);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009140);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009158);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000916C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009188);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000091A0);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000091B4);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000092AC);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000092B4);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000092C4);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000092C8);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009344);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009348);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009364);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009370);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000458);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000634);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000810);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000924);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000B40);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000D08);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000E10);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000EE8);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00000FA0);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000011F8);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00001464);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00001510);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000016E4);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000019F0);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_14186E4D);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_ADA3D270);
+
+s32 sceMgVideo_driver_3B0F6095(void) {
+    sceMgVideo_driver_ADA3D270();
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_63372201);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_2BF31464);
+#endif
+
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00007B60);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00005D30);
@@ -21,11 +136,13 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_00000108_v340);
 INCLUDE_ASM("nonmatchings/mgvideo", func_00000108_v303);
 #endif
 
+#if FW_VERSION < 352
 s32 func_00000108(void) {
     return 0;
 }
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_000001C4);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00000180);
@@ -48,7 +165,9 @@ s32 func_000003C0(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/mgvideo", func_000003F0);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00000460);
-#else
+#endif
+
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mgvideo", func_00000110);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00000180);
@@ -74,6 +193,7 @@ s32 func_0000038C(struct Unk_func_0000038C_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION < 352
 s32 func_000003B8(struct Unk_func_000003B8_0 *arg0) {
     s32 var_v1;
 
@@ -139,8 +259,9 @@ s32 func_000004DC(s32 arg0, M2C_UNK arg1) {
     }
     return var_v0;
 }
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 s32 func_000006A0(s32 arg0, s32 arg1) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -176,6 +297,7 @@ s32 func_000006A0(s32 arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION < 352
 s32 func_000005A0(s32 arg0, s32 arg1) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -223,6 +345,7 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_00000994);
 INCLUDE_ASM("nonmatchings/mgvideo", func_00000B08);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00000B5C);
+#endif
 
 #if FW_VERSION < 303
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00005D10);
@@ -234,6 +357,7 @@ INCLUDE_RODATA("nonmatchings/mgvideo", D_00006070);
 INCLUDE_RODATA("nonmatchings/mgvideo", D_0000608C);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_00000CCC);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00000F24);
@@ -251,29 +375,55 @@ s32 func_00001084(void) {
 }
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_000010B4);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_00001338);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_000014A0);
-#else
+#endif
+
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mgvideo", func_0000112C);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_0000123C);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_00001354);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_000013EC);
+#endif
 
 #if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/mgvideo", func_000017B8);
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_CE2006D8);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000021C0);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00002328);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00002688);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000027F4);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00002A58);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000093A0);
+#endif
+
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_000018BC);
-#else
+#endif
+
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mgvideo", func_00001504);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_000015E8);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00001664);
@@ -300,11 +450,13 @@ INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_02CD7137);
 INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_2E94A4B6);
 
 INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_76F716B2);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_00002178);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_6297802E);
 
 INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_6F13A2F9);
@@ -312,6 +464,7 @@ INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_6F13A2F9);
 INCLUDE_ASM("nonmatchings/mgvideo", func_0000206C);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_000020D0);
+#endif
 
 #if FW_VERSION >= 303
 INCLUDE_RODATA("nonmatchings/mgvideo", D_0000608C);
@@ -319,6 +472,55 @@ INCLUDE_RODATA("nonmatchings/mgvideo", D_0000608C);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_000060B0);
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000096EC);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_8DDA1A10);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00003200);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_EF33F67A);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_31E2889D);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00003650);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000039B8);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_281D7964);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_C58C569F);
+
+u32 func_000041E0(s32 arg0, s32 arg1) {
+    return (u32) ~(-(k1IsUserMode()) & ((arg0 + arg1) | arg0 | arg1)) >> 0x1F;
+}
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00004204);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_E5F5AB03);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_8BF2C963);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_0B34992C);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_C672B777);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_F5579FA8);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000050D0);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00005168);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_3A7EC1CD);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_802B9A79);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_B60EB3F6);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00005FF0);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_09FE4FDF);
+#else
 INCLUDE_ASM("nonmatchings/mgvideo", func_00002158);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_0000241C);
@@ -336,11 +538,35 @@ INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_63577C7E);
 INCLUDE_ASM("nonmatchings/mgvideo", func_00002BB8);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00002D8C);
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/mgvideo", func_00002F54);
+#else
 void func_00002F54(s32 arg0) {
     ThreadManForKernel_BC31C1B9(0x1400, &func_00002D8C, arg0);
 }
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_E9BE3764);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_9A9CB86C);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_0AE03125);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_1CEB8922);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000097D0);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000097D4);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_38A97269);
+
+INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_6C73EF37);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00007AF0);
+#else
 INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_10DA1B19);
 
 INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_1B82B327);
@@ -356,8 +582,9 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_000036EC);
 INCLUDE_ASM("nonmatchings/mgvideo", func_000037C8);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00003858);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_0000407C);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00004134);
@@ -365,6 +592,7 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_00004134);
 INCLUDE_ASM("nonmatchings/mgvideo", func_000042B8);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_00003A30);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00003AD8);
@@ -372,20 +600,25 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_00003AD8);
 INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_F80FED94);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00003D84);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_000047E4);
-#else
+#endif
+
+#if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mgvideo", func_00003EBC);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_00003F80);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00004098);
 
 INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_F3E7EE9B);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_00005088);
 
 INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_26AA0AF7);
@@ -428,12 +661,102 @@ INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_F56A60EC);
 INCLUDE_ASM("nonmatchings/mgvideo", func_0000607C);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", sceMgVideo_driver_F7F9279A);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00004834);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_000048B0);
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/mgvideo", func_00007CBC);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00007DF8);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00007EB0);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00007F74);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000980C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009814);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000981C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000982C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000983C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000984C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000985C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000986C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000987C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000988C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000989C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000098AC);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000098BC);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000098CC);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000098D4);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000098E0);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000098EC);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000080B8);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000081F4);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00008380);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000083D0);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000084B0);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_0000858C);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_000085FC);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00008858);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00008A08);
+
+void func_00008AE8(s32 arg0) {
+    D_0000FAE0 = arg0;
+}
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00008AF4);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00008B28);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00008CBC);
+
+INCLUDE_ASM("nonmatchings/mgvideo", func_00008CF4);
+
+s32 func_00008E14(s32 arg0) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = -2;
+    if (func_00008B28(&sp0, arg0) >= 0) {
+        var_v1 = (sceRtc_driver_17C26C00(&sp0) >= 0) ? 0 : -1;
+    }
+    return var_v1;
+}
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009908);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009910);
+#else
 s32 func_000049D0(struct Unk_func_000049D0_0 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     s32 var_s0;
     void *var_s1;
@@ -449,13 +772,15 @@ s32 func_000049D0(struct Unk_func_000049D0_0 *arg0, s32 *arg1, s32 *arg2, s32 *a
     *arg3 = func_00004834((s32) var_s1, var_s0, (s32) &D_00006100);
     return 0;
 }
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_000064D8);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00006560);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_00004A88);
 
 s32 func_00004BEC(struct Unk_func_00004BEC_0 *arg0) {
@@ -469,6 +794,7 @@ INCLUDE_ASM("nonmatchings/mgvideo", func_00004C44);
 INCLUDE_ASM("nonmatchings/mgvideo", func_00004CD8);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00004D8C);
+#endif
 
 #if FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/mgvideo", func_00004E4C);
@@ -531,16 +857,25 @@ INCLUDE_RODATA("nonmatchings/mgvideo", D_000060F0);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_000060F8);
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000992C);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009938);
+#endif
+
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006100);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006108);
 
+#if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006110);
+#endif
 
 #if FW_VERSION == 340
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00008068);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006118);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006124);
@@ -548,8 +883,9 @@ INCLUDE_RODATA("nonmatchings/mgvideo", D_00006124);
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006130);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_0000613C);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00007FB8);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00007FC4);
@@ -557,7 +893,7 @@ INCLUDE_RODATA("nonmatchings/mgvideo", D_00007FC4);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006148);
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/mgvideo", func_00006A7C);
 
 INCLUDE_ASM("nonmatchings/mgvideo", func_00006B88);
@@ -618,20 +954,25 @@ s32 func_00007660(s32 arg0) {
 INCLUDE_RODATA("nonmatchings/mgvideo", D_000080D4);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006154);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00007FFC);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006164);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006174);
+#endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/mgvideo", D_0000802C);
 #endif
 
+#if FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006184);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_00006194);
@@ -639,9 +980,18 @@ INCLUDE_RODATA("nonmatchings/mgvideo", D_00006194);
 INCLUDE_RODATA("nonmatchings/mgvideo", D_000061A4);
 
 INCLUDE_RODATA("nonmatchings/mgvideo", D_000061B4);
+#endif
+
+#if FW_VERSION >= 303 && FW_VERSION < 352
+INCLUDE_RODATA("nonmatchings/mgvideo", D_0000807C);
+#endif
 
 #if FW_VERSION >= 303
-INCLUDE_RODATA("nonmatchings/mgvideo", D_0000807C);
-
 INCLUDE_RODATA("nonmatchings/mgvideo", D_0000808C);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/mgvideo", D_00009968);
+
+INCLUDE_RODATA("nonmatchings/mgvideo", D_000099AC);
 #endif

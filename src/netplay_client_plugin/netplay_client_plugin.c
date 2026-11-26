@@ -83,6 +83,10 @@ INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DCC0);
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DDB0);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DDB4_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000DDB4_v351);
 #endif
@@ -213,6 +217,10 @@ s32 func_000001E0(void) {
     scePaf_A013540A(D_0000EAF0, &D_0000E000);
     return 0;
 }
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000234_v352);
 #endif
 
 #if FW_VERSION == 351

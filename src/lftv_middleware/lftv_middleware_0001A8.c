@@ -7,6 +7,80 @@ s32 sceVshLftvMw_304BB1BA(void) {
     return 0;
 }
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052DA0);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052DA4);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052DB0);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052DC0);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052DCC);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052DE0);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052DEC);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052E00);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052E0C);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052E20);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052E34);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052E44);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052E5C);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052E74);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052E80);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052EA8);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00052EB8);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_000531E8);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00053210);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00053288);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_0005329C);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_000532CC_v352);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_000532DC);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_000532E4);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_000532E8);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00053348);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00053358);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00053428);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00053450);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00053474);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00053480);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00053488);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_0005136C);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00053508);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_00051388);
+
+INCLUDE_RODATA("nonmatchings/lftv_middleware_0001A8", D_0005138C);
+#endif
+
 INCLUDE_ASM("nonmatchings/lftv_middleware_0001A8", sceVshLftvMw_C758B54C);
 
 #if FW_VERSION != 303

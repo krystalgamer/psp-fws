@@ -71,7 +71,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024380);
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024398);
 #endif
 
-#if FW_VERSION == 351
+#if FW_VERSION >= 351
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024660);
 #endif
 
@@ -91,7 +91,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility", D_0002442C);
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024440);
 #endif
 
-#if FW_VERSION == 351
+#if FW_VERSION >= 351
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024708);
 #endif
 
@@ -107,7 +107,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility", D_000245B4);
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_000245C0);
 #endif
 
-#if FW_VERSION == 351
+#if FW_VERSION >= 351
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_000248AC);
 #endif
 
@@ -2551,7 +2551,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00004AFC);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00004BFC);
 #endif
 
-#if FW_VERSION == 351
+#if FW_VERSION >= 351
 INCLUDE_ASM("nonmatchings/savedata_utility", func_000049DC);
 #endif
 

@@ -54,6 +54,10 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_00006684);
 INCLUDE_RODATA("nonmatchings/dialogmain", D_0000669C);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/dialogmain", D_000066A4_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/dialogmain", D_000066A4_v351);
 #endif

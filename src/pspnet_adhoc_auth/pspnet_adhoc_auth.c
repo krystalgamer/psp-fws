@@ -75,6 +75,44 @@ s32 sceNetAdhocAuth_driver_6074D8F1(void) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", module_reboot_before);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000046F0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000046F4);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_00004710);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_00004724);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_0000473C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_00004754);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_00004774);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_00004784_v352);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000047AC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000047C0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_00004830);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_00004848);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000048B8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000048C0);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000048CC);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000048D8);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_0000491C);
+
+INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_00004954);
+#endif
+
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_89F2A732);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_2E6AA271);
@@ -181,7 +219,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_AAB06250);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_015A8A64);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00001B78);
 #else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00001B84);
@@ -215,7 +253,11 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_000023B4);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00002520);
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00002700);
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_0000268C);
+#endif
 
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_0000459C);
 
@@ -237,6 +279,10 @@ INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_000045AC);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_000027F8);
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00002B64);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_0000298C);
 
@@ -255,9 +301,11 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00002A20);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00002934);
 #endif
 
-#if FW_VERSION >= 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00002A58);
+#endif
 
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00002CFC);
 #endif
 
@@ -456,7 +504,7 @@ s32 func_0000361C(void *arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00003674);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00003A54);
 #endif
 
@@ -477,7 +525,7 @@ s32 func_00003A54(void **arg0) {
 }
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00003AAC);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00003B0C);
@@ -533,6 +581,10 @@ s32 func_00003B58(struct Unk_func_00003B58_0 *arg0) {
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00003BB0);
+
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00003E34);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00003BC8);
@@ -626,10 +678,14 @@ void func_00004064(void) {
 }
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00004078);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_000040C0);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_0000439C);
 #endif
 
 s32 module_start(void) {

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "iofilemgr_dnas_decls.h"
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_RODATA("nonmatchings/iofilemgr_dnas", D_00001564);
 
 INCLUDE_RODATA("nonmatchings/iofilemgr_dnas", D_00001588);

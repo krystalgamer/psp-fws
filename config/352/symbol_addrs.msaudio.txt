@@ -71,3 +71,5 @@ sceMgr_driver_F30E22CF = 0x00006698; // type:func
 sceRtcGetCurrentClock = 0x000066A0; // type:func
 sceKernelPowerUnlock = 0x000066A8; // type:func
 sceKernelPowerLock = 0x000066B0; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

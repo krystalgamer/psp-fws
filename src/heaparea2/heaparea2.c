@@ -29,6 +29,12 @@ INCLUDE_RODATA("nonmatchings/heaparea2", D_0000045C);
 INCLUDE_RODATA("nonmatchings/heaparea2", D_00000460);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/heaparea2", D_00000478_v352);
+
+INCLUDE_RODATA("nonmatchings/heaparea2", D_0000048C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/heaparea2", D_00000478_v351);
 
@@ -45,6 +51,10 @@ INCLUDE_RODATA("nonmatchings/heaparea2", D_0000048C_v350);
 INCLUDE_RODATA("nonmatchings/heaparea2", D_000004B4);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/heaparea2", D_000004C4_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/heaparea2", D_000004C4_v351);
 #endif
@@ -55,6 +65,10 @@ INCLUDE_RODATA("nonmatchings/heaparea2", D_000004C4_v350);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/heaparea2", D_000004D4);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/heaparea2", D_000004D8_v352);
 #endif
 
 #if FW_VERSION == 351

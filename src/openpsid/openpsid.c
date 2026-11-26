@@ -31,7 +31,13 @@ static inline void ddrdb_memclr(u8 *buf, u32 size) {
     }
 }
 
-#if FW_VERSION == 340
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/openpsid", func_00000000_v352);
+
+INCLUDE_ASM("nonmatchings/openpsid", func_0000004C);
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", func_00000000);
 #else
 static int func_00000000(u8 *cert) {
@@ -45,9 +51,19 @@ static int func_00000000(u8 *cert) {
 }
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", func_000000DC);
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/openpsid", D_0000177C);
+
+INCLUDE_RODATA("nonmatchings/openpsid", D_0000178C);
+
+INCLUDE_RODATA("nonmatchings/openpsid", D_0000179C);
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", module_start);
 #else
 int module_start(SceSize args, void *argp) {
@@ -97,8 +113,14 @@ int sceOpenPSIDGetOpenPSID(u8 *psid) {
 INCLUDE_ASM("nonmatchings/openpsid", sceOpenPSIDGetOpenPSID);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", sceOpenPSID_driver_19D579F0);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/openpsid", scePcact_driver_F9ECFDDD);
+
+INCLUDE_ASM("nonmatchings/openpsid", scePcact_driver_08BB9677);
 #endif
 
 s32 func_00000244(void) {
@@ -331,7 +353,7 @@ int sceDdrdbEncrypt(u8 *buf, u32 size) {
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbEncrypt);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbDecrypt);
 #else
 int sceDdrdbDecrypt(u8 *buf, u32 size) {

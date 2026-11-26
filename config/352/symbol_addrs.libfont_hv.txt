@@ -56,3 +56,5 @@ sceIoClose = 0x0000AD68; // type:func
 sceIoGetstat = 0x0000AD70; // type:func
 sceIoOpen = 0x0000AD78; // type:func
 sceIoLseek = 0x0000AD80; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

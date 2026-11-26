@@ -17,6 +17,10 @@ INCLUDE_RODATA("nonmatchings/wlanfirm_magpie", D_00000128);
 INCLUDE_RODATA("nonmatchings/wlanfirm_magpie", D_0000013C);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/wlanfirm_magpie", D_0000015C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/wlanfirm_magpie", D_0000015C_v351);
 #endif

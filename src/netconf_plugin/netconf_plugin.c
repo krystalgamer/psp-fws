@@ -32,6 +32,10 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F490);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F4B4);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F4C4_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F4C4_v351);
 #endif
@@ -42,6 +46,10 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F4C4_v350);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F4D8);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F4F0_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -58,6 +66,10 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F4FC);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F514);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F52C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F52C_v351);
 #endif
@@ -68,6 +80,10 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F52C_v350);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F538);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001F544_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -148,6 +164,10 @@ INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001FBA0);
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001FBAC);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_0001FBF0);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000015C_v352);
 #endif
 
 #if FW_VERSION == 351

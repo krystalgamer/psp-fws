@@ -33,6 +33,10 @@ INCLUDE_RODATA("nonmatchings/usbcam", D_0000A274);
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A280);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/usbcam", D_0000A450_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A450_v351);
 #endif
@@ -51,6 +55,10 @@ INCLUDE_RODATA("nonmatchings/usbcam", D_0000A644);
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A64C);
 
 INCLUDE_RODATA("nonmatchings/usbcam", D_0000A650);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/usbcam", D_0000A65C_v352);
 #endif
 
 #if FW_VERSION == 351

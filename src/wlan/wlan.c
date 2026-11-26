@@ -41,6 +41,10 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00018CA4);
 INCLUDE_RODATA("nonmatchings/wlan", D_00018CB0);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/wlan", D_00018CC8_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/wlan", D_00018CC8_v351);
 #endif
@@ -65,6 +69,10 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00018F24);
 INCLUDE_RODATA("nonmatchings/wlan", D_00018F28);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_00018F38);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/wlan", D_00018FD8_v352);
 #endif
 
 #if FW_VERSION == 351

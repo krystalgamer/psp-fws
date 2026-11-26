@@ -59,3 +59,5 @@ sceUsbstor_internal_2CAFEFF1 = 0x00004D08; // type:func
 sceUsbstor_internal_489E6BF1 = 0x00004D10; // type:func
 sceUsbstor_internal_DC1A5833 = 0x00004D18; // type:func
 sceUsbstor_internal_FC4D0080 = 0x00004D20; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

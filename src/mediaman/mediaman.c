@@ -29,6 +29,12 @@ INCLUDE_RODATA("nonmatchings/mediaman", D_00001284);
 INCLUDE_RODATA("nonmatchings/mediaman", D_00001290);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/mediaman", D_00001300_v352);
+
+INCLUDE_RODATA("nonmatchings/mediaman", D_00001308_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/mediaman", D_00001300_v351);
 
@@ -45,6 +51,10 @@ INCLUDE_RODATA("nonmatchings/mediaman", D_00001308_v350);
 INCLUDE_RODATA("nonmatchings/mediaman", D_00001310);
 
 INCLUDE_RODATA("nonmatchings/mediaman", D_00001314);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/mediaman", D_00001328_v352);
 #endif
 
 #if FW_VERSION == 351

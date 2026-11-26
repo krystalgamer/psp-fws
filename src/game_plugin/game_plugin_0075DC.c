@@ -102,7 +102,13 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00012050);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00019AF8);
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00019C7C);
+#endif
+
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/game_plugin_0075DC", D_00019B1C);
 #endif
 

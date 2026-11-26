@@ -259,6 +259,12 @@ void func_00000774(void) {
 }
 #endif
 
+#if FW_VERSION == 352
+void func_00000790_v352(void) {
+    sceHtmlViewerHelper_4FA8ECCA();
+}
+#endif
+
 #if FW_VERSION == 351
 void func_00000790_v351(void) {
     sceHtmlViewerHelper_4FA8ECCA();

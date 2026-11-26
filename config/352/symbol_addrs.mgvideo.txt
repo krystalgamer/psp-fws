@@ -74,3 +74,17 @@ sceRtc_driver_B44BDAED = 0x00008FB8; // type:func
 sceRtcGetTickResolution = 0x00008FC0; // type:func
 sceKernelPowerUnlock = 0x00008FC8; // type:func
 sceKernelPowerLock = 0x00008FD0; // type:func
+// shared names (tools/add_version.py) begin
+D_0000608C = 0x000096DC; // rom:0x977C
+D_000060B0 = 0x000096E8; // rom:0x9788
+D_000060F0 = 0x00009918; // rom:0x99B8
+D_000060F8 = 0x00009920; // rom:0x99C0
+D_00006100 = 0x00009944; // rom:0x99E4
+D_00006108 = 0x0000994C; // rom:0x99EC
+D_00006148 = 0x00009954; // rom:0x99F4
+D_0000808C = 0x00009960; // rom:0x9A00
+func_000017B8 = 0x00001F74; // type:func rom:0x2014
+func_00002F54 = 0x00006300; // type:func rom:0x63A0
+func_00004834 = 0x00007B0C; // type:func rom:0x7BAC
+func_000048B0 = 0x00007B80; // type:func rom:0x7C20
+// shared names (tools/add_version.py) end

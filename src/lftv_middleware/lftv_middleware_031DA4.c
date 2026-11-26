@@ -219,6 +219,9 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_031DA4", func_00033404);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_031DA4", func_00033520);
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/lftv_middleware_031DA4", func_000335BC);
+#else
 s32 func_000335BC(void) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -231,6 +234,7 @@ s32 func_000335BC(void) {
     }
     return temp_v0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_031DA4", func_00033610);
 

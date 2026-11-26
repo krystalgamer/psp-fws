@@ -117,6 +117,10 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_000240F0);
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002410C);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002411C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002411C_v351);
 #endif

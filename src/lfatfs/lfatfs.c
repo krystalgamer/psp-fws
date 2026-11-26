@@ -2044,6 +2044,12 @@ s32 sceLFatFs_driver_F1FBA85F(void) {
 }
 #endif
 
+#if FW_VERSION == 352
+s32 sceLFatFs_driver_51C7F7AE(void) {
+    return 0x03050210;
+}
+#endif
+
 #if FW_VERSION == 351
 s32 sceLFatFs_driver_51C7F7AE(void) {
     return 0x03050110;

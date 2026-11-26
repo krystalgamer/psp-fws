@@ -37,6 +37,10 @@ INCLUDE_RODATA("nonmatchings/heaparea1", D_000004A4);
 INCLUDE_RODATA("nonmatchings/heaparea1", D_000004B4);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/heaparea1", D_000004C4_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/heaparea1", D_000004C4_v351);
 #endif

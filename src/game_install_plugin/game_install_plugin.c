@@ -71,6 +71,10 @@ INCLUDE_RODATA("nonmatchings/game_install_plugin", D_000038E0);
 INCLUDE_RODATA("nonmatchings/game_install_plugin", D_00003924);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/game_install_plugin", D_00003934_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/game_install_plugin", D_00003934_v351);
 #endif

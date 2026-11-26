@@ -64,6 +64,10 @@ INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042B4);
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042B8);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042E4_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042E4_v351);
 #endif
@@ -78,6 +82,10 @@ INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042F4);
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_000042F8);
 
 INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_00004308);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/netplay_server_plus_utility", D_00004340_v352);
 #endif
 
 #if FW_VERSION == 351

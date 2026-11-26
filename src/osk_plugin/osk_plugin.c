@@ -25,6 +25,10 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000015C);
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118A0_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118A0_v351);
 #endif
@@ -41,6 +45,12 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118B8);
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118D0);
 
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118DC);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_000118F4_v352);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011908_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -63,6 +73,12 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011A5C);
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011A64);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011A70_v352);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011A94_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011A70_v351);
 
@@ -77,6 +93,12 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011A94_v350);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011AA0);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011AB0_v352);
+
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011ABC_v352);
 #endif
 
 #if FW_VERSION == 351

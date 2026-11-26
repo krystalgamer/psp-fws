@@ -85,7 +85,7 @@ s32 func_00001360(s32 arg0, s32 arg1) {
     return var_v1;
 }
 
-#if FW_VERSION == 271
+#if FW_VERSION != 340
 INCLUDE_ASM("nonmatchings/psheet", func_000013D8);
 #else
 s32 func_000013D8(void) {
@@ -135,6 +135,19 @@ s32 func_00001F40(s32 *arg0) {
 
 INCLUDE_RODATA("nonmatchings/psheet", D_000029AC);
 
+#if FW_VERSION == 352
+s32 func_00001F94(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 var_v0;
+    s32 var_v1;
+
+    var_v0 = sceAmctrl_driver_1CCB66D2(&D_00002F88, 2, 1, arg3, arg2, 0);
+    if ((var_v0 < 0) || (var_v0 = sceAmctrl_driver_0785C974(&D_00002F88, arg0, arg1), (var_v0 < 0)) || (var_v0 = sceAmctrl_driver_9951C50F(&D_00002F88), var_v1 = 0, (var_v0 < 0))) {
+        KDebugForKernel_84F370BC(&D_000029C4, &D_000029E0, "data_encrypt", var_v0);
+        var_v1 = 0x80510102;
+    }
+    return var_v1;
+}
+#else
 s32 func_00001F94(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
     s32 var_v1;
@@ -146,6 +159,7 @@ s32 func_00001F94(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return var_v1;
 }
+#endif
 
 INCLUDE_RODATA("nonmatchings/psheet", D_000029C4);
 
@@ -153,7 +167,7 @@ INCLUDE_RODATA("nonmatchings/psheet", D_000029E0);
 
 INCLUDE_ASM("nonmatchings/psheet", func_00002048);
 
-#if FW_VERSION == 271
+#if FW_VERSION != 340
 INCLUDE_ASM("nonmatchings/psheet", func_0000217C);
 #else
 s32 func_0000217C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {

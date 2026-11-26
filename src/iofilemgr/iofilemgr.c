@@ -85,6 +85,10 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000608C);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000609C);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/iofilemgr", D_000060B4_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_000060B4_v351);
 #endif
@@ -861,6 +865,10 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_000038C0);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002378);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002484);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/iofilemgr", func_000033DC_v352);
 #endif
 
 #if FW_VERSION == 351

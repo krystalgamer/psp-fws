@@ -291,7 +291,7 @@ INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_C3325FDC);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_955F2924);
 
-#if FW_VERSION == 351
+#if FW_VERSION >= 351
 INCLUDE_RODATA("nonmatchings/ifhandle", D_00003668);
 #endif
 
@@ -311,7 +311,7 @@ INCLUDE_ASM("nonmatchings/ifhandle", func_00001E90);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_1560F143);
 
-#if FW_VERSION == 351
+#if FW_VERSION >= 351
 INCLUDE_ASM("nonmatchings/ifhandle", func_000023BC);
 #endif
 

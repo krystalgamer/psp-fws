@@ -89,6 +89,10 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021A18);
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021A28);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021A30_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021A30_v351);
 #endif
@@ -109,6 +113,10 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021A74);
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021A88);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021AA0);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021AB4_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -139,6 +147,10 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021D28);
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021D40);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021D80_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021D80_v351);
 #endif
@@ -155,6 +167,10 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021DA4);
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021E04);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021734);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021F98_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -883,6 +899,10 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_000023B8);
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_000024A4);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00022348_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00022348_v351);
 #endif
@@ -943,6 +963,10 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00002D74);
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_000223D0);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_000223D4);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/savedata_plugin", D_000223D8_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -2265,7 +2289,7 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin", D_000220B0);
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00007290);
 #endif
 
-#if FW_VERSION == 351
+#if FW_VERSION >= 351
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_000072F4);
 #endif
 

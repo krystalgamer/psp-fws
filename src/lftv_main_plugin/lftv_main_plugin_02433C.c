@@ -401,6 +401,10 @@ void func_00025DE8(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00025E10);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00026F24_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00026F24_v351);
 #endif
@@ -2018,6 +2022,10 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002EC34);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002EC80);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002ECC8);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002ED30_v352);
 #endif
 
 #if FW_VERSION == 351

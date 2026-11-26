@@ -72,6 +72,10 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_00007418);
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00007424);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/update_plugin", D_0000743C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/update_plugin", D_0000743C_v351);
 #endif
@@ -94,6 +98,10 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_000074A0);
 INCLUDE_RODATA("nonmatchings/update_plugin", D_000074AC);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/update_plugin", D_000074BC_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/update_plugin", D_000074BC_v351);
 #endif
@@ -112,6 +120,10 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_00007528);
 INCLUDE_RODATA("nonmatchings/update_plugin", D_00007548);
 
 INCLUDE_RODATA("nonmatchings/update_plugin", D_0000754C);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/update_plugin", D_00007650_v352);
 #endif
 
 #if FW_VERSION == 351
@@ -138,6 +150,10 @@ INCLUDE_RODATA("nonmatchings/update_plugin", D_000076C4);
 INCLUDE_RODATA("nonmatchings/update_plugin", D_000076DC);
 
 INCLUDE_RODATA("nonmatchings/update_plugin", D_000076EC);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/update_plugin", D_000077A4_v352);
 #endif
 
 #if FW_VERSION == 351

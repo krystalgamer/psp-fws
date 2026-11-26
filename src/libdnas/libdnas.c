@@ -2,6 +2,52 @@
 #include "common.h"
 #include "libdnas_decls.h"
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/libdnas", D_000033B8);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_000033BC);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_000033D4);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_000033E8);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_000033F8);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003408);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003414);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003424);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003434);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003448);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003458);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003468);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003474);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_000034B4);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_000034D8);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_000034DC);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003524);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003528);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_0000352C);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_0000354C);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_0000355C);
+
+INCLUDE_RODATA("nonmatchings/libdnas", D_00003574);
+#endif
+
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_0D560144);
 
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_CA8B8909);
@@ -18,7 +64,7 @@ INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_9FF48DD3);
 
 INCLUDE_ASM("nonmatchings/libdnas", sceDNAS_lib_45C1AAF5);
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 void sceDNAS_lib_BE0998D7(void) {
     if (D_000037B0 <= 0) {
         return;

@@ -20,7 +20,7 @@ INCLUDE_ASM("nonmatchings/libfont_hv", func_00000244);
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000AF64);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 s32 func_00000214(u8 *arg0) {
     s32 var_a1;
 
@@ -44,7 +44,23 @@ s32 func_00000244(void) {
     }
     return var_v1;
 }
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000AE20);
+
+INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000AE24);
+
+INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000AE38);
+
+INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000AE50);
+
+INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000AE60);
+
+INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000AF90);
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000AFA4);
 #endif
 
@@ -68,7 +84,7 @@ INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B3B4);
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B3C8_v271);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B384);
 
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B398);
@@ -82,7 +98,7 @@ INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B3D4);
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B3E8);
 #endif
 
-#if FW_VERSION == 250 || FW_VERSION == 340
+#if FW_VERSION == 250 || FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B3FC);
 #endif
 
@@ -94,7 +110,7 @@ INCLUDE_RODATA("nonmatchings/libfont_hv", D_000098FC);
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_00009910);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B400);
 
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B414);
@@ -252,7 +268,7 @@ INCLUDE_RODATA("nonmatchings/libfont_hv", D_00009BD0);
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B6B4);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B644);
 
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B658);
@@ -316,7 +332,7 @@ INCLUDE_ASM("nonmatchings/libfont_hv", func_000022F0);
 INCLUDE_ASM("nonmatchings/libfont_hv", func_0000259C);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/libfont_hv", func_00002344);
 
 INCLUDE_ASM("nonmatchings/libfont_hv", func_0000260C);
@@ -332,7 +348,7 @@ INCLUDE_ASM("nonmatchings/libfont_hv", func_00002988);
 INCLUDE_ASM("nonmatchings/libfont_hv", func_000090BC);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/libfont_hv", func_00002AA4);
 #endif
 
@@ -382,7 +398,7 @@ INCLUDE_ASM("nonmatchings/libfont_hv", func_00002BA4);
 INCLUDE_ASM("nonmatchings/libfont_hv", func_00001FE8);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/libfont_hv", func_00002D68);
 #endif
 
@@ -442,7 +458,7 @@ INCLUDE_ASM("nonmatchings/libfont_hv", func_00005014);
 INCLUDE_ASM("nonmatchings/libfont_hv", func_0000509C);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/libfont_hv", func_00005248);
 #endif
 
@@ -513,7 +529,7 @@ INCLUDE_ASM("nonmatchings/libfont_hv", func_00007A40);
 INCLUDE_ASM("nonmatchings/libfont_hv", func_00007D28);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/libfont_hv", func_00007ED0);
 #endif
 
@@ -664,6 +680,7 @@ INCLUDE_ASM("nonmatchings/libfont_hv", func_0000A8E8);
 
 INCLUDE_ASM("nonmatchings/libfont_hv", func_0000AA40);
 
+#if FW_VERSION < 352
 void sceReg_9B25EDF1(void) {
 }
 
@@ -711,6 +728,7 @@ void sceReg_4CA16893(void) {
 
 void sceReg_3615BC87(void) {
 }
+#endif
 
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B7EC);
 
@@ -726,7 +744,7 @@ INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B7BC);
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_00009CA4);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/libfont_hv", D_0000B7F4);
 #endif
 

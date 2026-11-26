@@ -102,6 +102,10 @@ INCLUDE_RODATA("nonmatchings/systimer", D_00000AAC);
 INCLUDE_RODATA("nonmatchings/systimer", D_00000AF4);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/systimer", D_00000B10_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/systimer", D_00000B10_v351);
 #endif

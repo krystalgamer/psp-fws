@@ -35,6 +35,10 @@ INCLUDE_RODATA("nonmatchings/usbgps", D_00005214);
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005228);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/usbgps", D_00005240_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005240_v351);
 #endif
@@ -45,6 +49,10 @@ INCLUDE_RODATA("nonmatchings/usbgps", D_00005240_v350);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/usbgps", D_0000525C);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/usbgps", D_00005270_v352);
 #endif
 
 #if FW_VERSION == 351

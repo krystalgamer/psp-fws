@@ -2,6 +2,9 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/lftv_middleware_0230EC", func_000230EC);
+#else
 s32 func_000230EC(struct Unk_func_000230EC_0 *arg0) {
     if (arg0->unk24 == 0) {
         arg0->unk24 = scePaf_F13EBB78(D_00055600);
@@ -9,6 +12,7 @@ s32 func_000230EC(struct Unk_func_000230EC_0 *arg0) {
     func_00023138((s32) arg0, 0);
     return arg0->unk24;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0230EC", func_00023138);
 
@@ -92,6 +96,9 @@ s32 func_000237BC(struct Unk_func_000237BC_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0230EC", func_000237CC);
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/lftv_middleware_0230EC", func_00023864);
+#else
 void func_00023864(struct Unk_func_00023864_0 *arg0, s32 arg1) {
     s32 temp_v0;
 
@@ -107,6 +114,7 @@ void func_00023864(struct Unk_func_00023864_0 *arg0, s32 arg1) {
         arg0->unk8 = arg1;
     }
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0230EC", func_000238C4);
 

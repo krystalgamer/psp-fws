@@ -36,6 +36,12 @@ INCLUDE_RODATA("nonmatchings/usersystemlib", D_000001C4);
 INCLUDE_RODATA("nonmatchings/usersystemlib", D_000001D4);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/usersystemlib", D_000001FC_v352);
+
+INCLUDE_RODATA("nonmatchings/usersystemlib", D_00000200_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/usersystemlib", D_000001FC_v351);
 

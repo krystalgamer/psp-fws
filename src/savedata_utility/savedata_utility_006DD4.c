@@ -2031,7 +2031,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010A18);
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010A50);
 #endif
 
-#if FW_VERSION == 351
+#if FW_VERSION >= 351
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010AA4);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010AEC);

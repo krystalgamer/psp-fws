@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, usbstormgr]
+      - [0xA0, c, usbstormgr]
       - { start: 0x4BF8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x4DC8, type: prxpad, order: .text }
       - { start: 0x4DD0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +62,7 @@ segments:
       - { start: 0x4DEC, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x4E64, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x4E68, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x4E9C, rodata, usbstormgr]
+      - [0x4E9C, .rodata, usbstormgr]
       - { start: 0x51C4, type: prxpad, order: .rodata }
   - name: usbstormgr_seg1
     type: code

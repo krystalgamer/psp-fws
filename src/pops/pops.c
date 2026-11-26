@@ -9,21 +9,41 @@ INCLUDE_RODATA("nonmatchings/pops", D_0002AED8);
 INCLUDE_RODATA("nonmatchings/pops", D_0002AEEC);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002AEF8);
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/pops", D_0002BA04);
+#endif
+
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF04);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF14);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF20);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF30);
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/pops", D_0002BA40);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002BA4C);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002BA5C);
+#endif
+
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF40);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF4C);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF5C);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF6C);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF78);
@@ -31,9 +51,17 @@ INCLUDE_RODATA("nonmatchings/pops", D_0002AF78);
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF88);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002AF98);
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/pops", D_0002BAB0);
+#endif
+
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/pops", D_0002AFB0);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pops", D_0002AFC4);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002AFD8);
@@ -69,9 +97,17 @@ INCLUDE_RODATA("nonmatchings/pops", D_0002B0EC);
 INCLUDE_RODATA("nonmatchings/pops", D_0002B104);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002B11C);
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/pops", D_0002BC4C);
+#endif
+
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/pops", D_0002B148);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pops", D_0002B15C);
 
 INCLUDE_RODATA("nonmatchings/pops", D_0002B1B4);
@@ -107,6 +143,14 @@ INCLUDE_ASM("nonmatchings/pops", module_start);
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/pops", func_00000068);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/pops", D_0002BD7C);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002BD8C);
+
+INCLUDE_RODATA("nonmatchings/pops", D_0002BD9C);
 #endif
 
 #if FW_VERSION < 330

@@ -165,6 +165,10 @@ INCLUDE_ASM("nonmatchings/ifhandle_152", func_00002400);
 
 INCLUDE_ASM("nonmatchings/ifhandle_152", sceNetIfhandle_driver_1560F143);
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/ifhandle_152", func_000028CC);
+#endif
+
 void sceNetIfhandle_driver_0FB8AE0D(void) {
     u32 temp_a1;
 

@@ -37,6 +37,10 @@ INCLUDE_RODATA("nonmatchings/idstorage", D_00002158);
 INCLUDE_RODATA("nonmatchings/idstorage", D_00002160);
 #endif
 
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/idstorage", D_0000217C_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_RODATA("nonmatchings/idstorage", D_0000217C_v351);
 #endif

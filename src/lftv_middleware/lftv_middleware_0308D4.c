@@ -14,6 +14,9 @@ void func_00030904(M2C_UNK **arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00030934);
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_00030978);
+#else
 s32 func_00030978(void) {
     s32 temp_v0;
     s32 var_v0;
@@ -26,6 +29,7 @@ s32 func_00030978(void) {
     }
     return var_v0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0308D4", func_000309C8);
 

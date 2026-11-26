@@ -36,6 +36,7 @@
   "D_00002A80": "extern struct D_00002A80_s D_00002A80;",
   "D_00002AC0": "extern M2C_UNK D_00002AC0;",
   "D_00002F30": "extern M2C_UNK D_00002F30;",
-  "D_00002F48": "extern s32 D_00002F48;"
+  "D_00002F48": "extern s32 D_00002F48;",
+  "D_00002F88": "extern s32 D_00002F88;"
  }
 }

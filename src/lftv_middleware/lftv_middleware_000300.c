@@ -312,7 +312,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_3A97BE34);
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_0F4C7566);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_BBFE6E75);
 #endif
 
@@ -628,7 +628,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_02B90A77);
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_9428A3E7);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_F607E351);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_6349EB0D);
@@ -1379,12 +1379,16 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_0000C5C4);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_0000C644);
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_0000C6A8);
+#else
 s32 func_0000C6A8(void) {
     D_0005B874 = 0;
     scePaf_99A5CD38(&D_0005B878, 0x100);
     D_0005B978 = 0;
     return 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_0000C6F0);
 
@@ -2577,7 +2581,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_20B8749E);
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_6FE56DA2);
 #endif
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_7B62D7EC);
 #endif
 
@@ -3446,9 +3450,17 @@ s32 func_00015C54(void) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_00015C80);
 
-#if FW_VERSION == 340
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_00015E94);
+#endif
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_000160DC);
+
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_00016130);
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_00015F48);
 #else
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_00015D58);

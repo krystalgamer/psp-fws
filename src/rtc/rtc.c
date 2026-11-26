@@ -2,6 +2,10 @@
 #include "common.h"
 #include "rtc_decls.h"
 
+#if FW_VERSION == 352
+INCLUDE_ASM("nonmatchings/rtc", func_00000000_v352);
+#endif
+
 #if FW_VERSION == 351
 INCLUDE_ASM("nonmatchings/rtc", func_00000000_v351);
 #endif
@@ -412,6 +416,10 @@ INCLUDE_ASM("nonmatchings/rtc", func_00002ED4);
 INCLUDE_RODATA("nonmatchings/rtc", D_00004474);
 
 INCLUDE_ASM("nonmatchings/rtc", func_00002F78);
+#endif
+
+#if FW_VERSION == 352
+INCLUDE_RODATA("nonmatchings/rtc", D_000045D0_v352);
 #endif
 
 #if FW_VERSION == 351

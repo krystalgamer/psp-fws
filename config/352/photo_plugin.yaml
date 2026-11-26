@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/352/.splat_cache.photo_plugin
   symbol_addrs_path:
     - config/352/symbol_addrs.photo_plugin.txt
+    - config/352/func_starts.photo_plugin.txt
     - tmp/build/352/prx_syms.photo_plugin.txt
   reloc_addrs_path: [tmp/build/352/reloc_addrs.photo_plugin.txt]
   asset_path: tmp/assets/352/photo_plugin
@@ -52,7 +53,15 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, photo_plugin]
+      - [0xA0, c, photo_plugin]
+      - [0x12AA4, c, photo_plugin_012A1C]
+      - [0x14CDC, c, photo_plugin_014B04]
+      - [0x16EBC, c, photo_plugin_016C00]
+      - [0x177B8, c, photo_plugin_017178]
+      - [0x27598, c, photo_plugin_026D98]
+      - [0x294BC, c, photo_plugin_0292B0]
+      - [0x2BD40, c, photo_plugin_02B79C]
+      - [0x2C0A0, c, photo_plugin_02BC40]
       - { start: 0x2E580, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2ED88, type: prxpad, order: .text }
       - { start: 0x2ED90, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -62,7 +71,13 @@ segments:
       - { start: 0x2EDAC, type: rodata, name: lib_stub, linker_section: .lib.stub }
       - { start: 0x2EEE4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x2EEE8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
-      - [0x2EF1C, rodata, photo_plugin]
+      - [0x2EF1C, .rodata, photo_plugin]
+      - [0x31090, .rodata, photo_plugin_012A1C]
+      - [0x3154C, .rodata, photo_plugin_014B04]
+      - [0x31568, .rodata, photo_plugin_016C00]
+      - [0x3158C, .rodata, photo_plugin_017178]
+      - [0x32AB4, .rodata, photo_plugin_0292B0]
+      - [0x32AE8, .rodata, photo_plugin_02BC40]
       - { start: 0x32BF8, type: prxpad, order: .rodata }
   - name: photo_plugin_seg1
     type: code
