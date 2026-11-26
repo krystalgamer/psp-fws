@@ -19,14 +19,8 @@ extern s32 D_00001564;
 extern s32 D_00001568;
 
 s32 fdgets(s32, s32);
-s32 fdputs(s32, s32);
 s32 fdputc(s32, s32);
-s32 sceKernelStdioLseek(void);
-s32 sceKernelStdioRead(void);
-s32 sceKernelStdioOpen(void);
-s32 sceKernelStdioClose(void);
-s32 sceKernelStdioWrite(void);
-void sceKernelStdioSendChar(void);
+s32 fdputs(s32, s32);
 s32 func_00000428(s32, s32);
 void func_000006D0(s32 arg0);
 s32 func_000006EC(void);
@@ -46,13 +40,19 @@ s32 func_00000AFC(s32, s32);
 s32 func_00000B0C(s32, s32);
 s32 func_00000C78(void);
 void gets(s32 arg0);
+void module_bootstart(void);
 void putchar(s32 arg0);
 void puts(s32 arg0);
 s32 sceKernelRegisterStderrPipe(s32 arg0);
 s32 sceKernelRegisterStdoutPipe(s32 arg0);
 s32 sceKernelStderr(void);
 s32 sceKernelStdin(void);
+s32 sceKernelStdioClose(void);
+s32 sceKernelStdioLseek(void);
+s32 sceKernelStdioOpen(void);
+s32 sceKernelStdioRead(void);
+void sceKernelStdioSendChar(void);
+s32 sceKernelStdioWrite(void);
 s32 sceKernelStdout(void);
-void module_bootstart(void);
 
 #endif
