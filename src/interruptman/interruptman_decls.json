@@ -33,7 +33,7 @@
   "D_00003E00_s": "struct D_00003E00_s {\n    u8 pad0[0x1AC];\n    volatile s32 unk1AC;\n    volatile s32 unk1B0;\n    u8 pad1B4[0xECC];\n    volatile s32 unk1080;\n    volatile s32 unk1084;\n};"
  },
  "vars": {
-  "D_00003910": "extern M2C_UNK D_00003910;",
+  "D_00003910": "extern s32 D_00003910;",
   "D_00003950": "extern s32 D_00003950;",
   "D_00003AA8": "extern s32 D_00003AA8;",
   "D_00003AAC": "extern s32 D_00003AAC;",
