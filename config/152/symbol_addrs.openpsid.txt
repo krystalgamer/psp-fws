@@ -8,3 +8,5 @@ sceIdStorageLookup = 0x0000026C; // type:func
 semaphore_4C537C72 = 0x00000274; // type:func
 // shared names (tools/add_version.py) begin
 // shared names (tools/add_version.py) end
+g_openPsidSema = 0x00000400;
+g_openPsidCert = 0x00000440;

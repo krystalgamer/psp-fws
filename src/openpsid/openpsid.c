@@ -63,9 +63,6 @@ INCLUDE_RODATA("nonmatchings/openpsid", D_0000178C);
 INCLUDE_RODATA("nonmatchings/openpsid", D_0000179C);
 #endif
 
-#if FW_VERSION != 282
-INCLUDE_ASM("nonmatchings/openpsid", module_start);
-#else
 int module_start(SceSize args, void *argp) {
     u32 i;
 
@@ -75,7 +72,6 @@ int module_start(SceSize args, void *argp) {
     g_openPsidSema = sceKernelCreateSema("SceOpenPSID", 0, 1, 1, NULL);
     return g_openPsidSema < 1;
 }
-#endif
 
 #ifdef NON_MATCHING
 /* Register allocation and the WaitSema success-path layout differ. */

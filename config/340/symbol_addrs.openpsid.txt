@@ -19,3 +19,5 @@ semaphore_4C537C72 = 0x00000BBC; // type:func
 // shared names (tools/add_version.py) begin
 func_00000244 = 0x000003BC; // type:func rom:0x45C
 // shared names (tools/add_version.py) end
+g_openPsidSema = 0x00000E00;
+g_openPsidCert = 0x00000E40;

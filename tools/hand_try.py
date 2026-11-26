@@ -86,9 +86,13 @@ def main():
     for n in re.findall(r"\b(\w+)\s*(?:\[[^\]]*\])?;\s*$", extra, re.M) + [name]:
         hdr = re.sub(rf"^[^\n]*\b{n}\b(?:\[[^\]]*\])?;\n", "", hdr, flags=re.M) if n != name else \
             re.sub(rf"^[^\n]*\b{n}\([^\n]*\);\n", "", hdr, flags=re.M)
+    # the source file's own prelude: includes, file-local externs and static inlines before the first entry
+    src = Path(mod.file_of(name)).read_text()
+    m = re.search(r"^(INCLUDE_ASM|INCLUDE_RODATA|#if)", src, re.M)
+    prelude = re.sub(r'^#include "\w+_decls\.h"\n', "", src[:m.start()] if m else "", flags=re.M)
     fwv = re.match(r"\d+", a.ver)[0]
     fwvar = (re.search(r"v(\d+)", a.ver) or [None, "0"])[1]
-    text = f"#define FW_VERSION {fwv}\n#define FW_VARIANT {fwvar}\n" + hdr + "\n" + extra + "\n" + body
+    text = f"#define FW_VERSION {fwv}\n#define FW_VARIANT {fwvar}\n" + hdr + "\n" + prelude + "\n" + extra + "\n" + body
     target = mod.target_words(name)
     comp, own = AD.Module.file_setting(mod.file_of(name))
     best = None
