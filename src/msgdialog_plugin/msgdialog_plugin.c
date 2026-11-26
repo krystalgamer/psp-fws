@@ -24,21 +24,21 @@ s32 module_stop(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_0000015C);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 350)
+void func_0000015C(void) {
+    _ZN3paf4View8PageOpenEPKcii(D_00001A5C, &D_000012F0, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_00001A5C, &D_000012F0);
+}
 #endif
 
 #if FW_VERSION >= 350
 void func_0000015C(void) {
     scePaf_39E62C88(D_00001A6C, &D_000012F0, 0, 0);
     scePaf_A013540A(D_00001A6C, &D_000012F0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0000015C(void) {
-    _ZN3paf4View8PageOpenEPKcii(D_00001A5C, &D_000012F0, 0, 0);
-    _ZN3paf4View12PageActivateEPKc(D_00001A5C, &D_000012F0);
 }
 #endif
 
@@ -51,7 +51,15 @@ void func_000001AC(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_000001E4);
+#else
+s32 func_000001E4(void) {
+    _ZN3paf4View8PageOpenEPKcii(D_00001A5C, &D_000012F0, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_00001A5C, &D_000012F0);
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000238);
 
