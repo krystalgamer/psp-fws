@@ -3554,11 +3554,11 @@ INCLUDE_ASM("nonmatchings/pafmini_078748", func_000B2920);
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_000B2AA4);
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 152 && FW_VERSION < 282)
+#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_000B2B88);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 201
 s32 func_000B2B88(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_v0;
 
@@ -3766,11 +3766,11 @@ s32 func_000968A0(void) {
     return 0;
 }
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_000B2F40);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_000B2F40(s32 arg0, s16 arg1, s32 arg2) {
     return 0;
 }
@@ -3938,7 +3938,7 @@ INCLUDE_RODATA("nonmatchings/pafmini_078748", D_000F5B64);
 INCLUDE_RODATA("nonmatchings/pafmini_078748", D_001083A4);
 #endif
 
-#if FW_VERSION < 151 || (FW_VERSION >= 152 && FW_VERSION < 282)
+#if FW_VERSION < 151 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_00097348);
 #else
 s32 func_00097348(s32 arg0) {
@@ -3975,11 +3975,11 @@ s32 func_000974AC(void *arg0, void *arg1, u32 arg2) {
     return var_v1;
 }
 
-#if FW_VERSION < 151 || (FW_VERSION >= 152 && FW_VERSION < 282)
+#if FW_VERSION < 151 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_000AF50C);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 201
 s32 func_000AF50C(void *arg0, void *arg1, u32 arg2) {
     s32 temp_v0;
     s32 var_s0;
@@ -4468,11 +4468,11 @@ INCLUDE_ASM("nonmatchings/pafmini_078748", func_000B747C);
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_000B74D0);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_000B760C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000B760C(void) {
     func_000B763C();
     M2C_VFIELD(&D_00122258, s8, 0x15F3) = 0;

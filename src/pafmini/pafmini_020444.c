@@ -81,11 +81,11 @@ s32 func_00041210(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 151 || (FW_VERSION >= 152 && FW_VERSION < 282)
+#if FW_VERSION < 151 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_020444", func_00041224);
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 151 && FW_VERSION < 201
 s32 func_00041224(s32 arg0) {
     return !(arg0 & 1) ? 0 : 0xFC;
 }
@@ -434,11 +434,11 @@ void func_000442D8(void *arg0) {
 
 INCLUDE_ASM("nonmatchings/pafmini_020444", func_00023AC0);
 
-#if FW_VERSION == 100 || (FW_VERSION >= 152 && FW_VERSION < 282)
+#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_020444", func_000442F8);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000442F8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x430) = (s32) (M2C_FIELD(arg0, s32 *, 0x430) | 0x1000);
 }

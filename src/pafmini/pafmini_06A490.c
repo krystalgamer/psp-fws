@@ -359,11 +359,11 @@ void func_0006BE14(struct Unk_func_0006BE14_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_0006BE44);
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_00086344);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00086344(void *arg0) {
     s32 temp_v0;
 
