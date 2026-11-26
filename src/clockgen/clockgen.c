@@ -38,7 +38,18 @@ s32 module_reboot_before(void) {
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgenInit);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgenEnd);
+#else
+s32 sceClockgenEnd(void) {
+    if (D_00000930 >= 0) {
+        sceKernelDeleteSema(D_00000930);
+        D_00000930 = -1;
+    }
+    sceKernelUnregisterSysEventHandler(&D_0000093C);
+    return 0;
+}
+#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgenSetProtocol);
