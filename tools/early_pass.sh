@@ -21,10 +21,10 @@ P
 }
 before=$(count)
 { tools/regress.sh "$v:$m" \
-  && .venv/bin/python tools/auto_decomp.py "$v" "$m" --max-size "$max" --no-cache --stats-only --jobs 4 \
+  && .venv/bin/python tools/auto_decomp.py "$v" "$m" --max-size "$max" --no-cache --stats-only --jobs "${EARLY_JOBS:-4}" \
   && cp "tmp/auto_stats/${v}_$m.json" "tmp/auto_stats/${v}_$m.full.json" \
   && .venv/bin/python tools/version_flags.py "$v" "$m" --apply \
-  && .venv/bin/python tools/auto_decomp.py "$v" "$m" --max-size "$max" --jobs 4 --fast; } >"$log" 2>&1
+  && .venv/bin/python tools/auto_decomp.py "$v" "$m" --max-size "$max" --jobs "${EARLY_JOBS:-4}" --fast; } >"$log" 2>&1
 if tools/regress.sh --shared "$v:$m" >>"$log" 2>&1; then
     echo "$v:$m: OK C $before -> $(count)"
 else
