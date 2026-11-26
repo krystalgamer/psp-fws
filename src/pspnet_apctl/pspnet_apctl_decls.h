@@ -4,6 +4,96 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+/* devkit 0.6.0 DWARF (tools/dwarf_types.py) */
+union SceNetApctlBSSDescEntry;
+union SceNetApctlInfo;
+
+typedef void (*sceNetApctlHandler)(enum SceNetApctlState, enum SceNetApctlState, enum SceNetApctlEvent, int, void *);
+
+enum SceNetApctlState {
+    SCE_NET_APCTL_STATE_Detached = 0,
+    SCE_NET_APCTL_STATE_Disconnected = 1,
+    SCE_NET_APCTL_STATE_Scanning = 2,
+    SCE_NET_APCTL_STATE_Joinning = 3,
+    SCE_NET_APCTL_STATE_IPObtaining = 4,
+    SCE_NET_APCTL_STATE_IPObtained = 5,
+} /* size 0x4 */;
+
+enum SceNetApctlEvent {
+    SCE_NET_APCTL_EVENT_DETECT_IF = 0,
+    SCE_NET_APCTL_EVENT_CONNECT_REQ = 1,
+    SCE_NET_APCTL_EVENT_SCAN_REQ = 2,
+    SCE_NET_APCTL_EVENT_SCAN_COMPLETED = 3,
+    SCE_NET_APCTL_EVENT_ESTABLISH = 4,
+    SCE_NET_APCTL_EVENT_GET_IP = 5,
+    SCE_NET_APCTL_EVENT_DISCONNECT_REQ = 6,
+    SCE_NET_APCTL_EVENT_ERROR = 7,
+} /* size 0x4 */;
+
+enum SceNetApctlBSSDescEntryCode {
+    SCE_NET_APCTL_BSSDESC_BSSID = 0,
+    SCE_NET_APCTL_BSSDESC_SSID = 1,
+    SCE_NET_APCTL_BSSDESC_SSID_LEN = 2,
+    SCE_NET_APCTL_BSSDESC_CHANNEL = 3,
+    SCE_NET_APCTL_BSSDESC_RSSI = 4,
+    SCE_NET_APCTL_BSSDESC_AUTH_PROTO = 5,
+} /* size 0x4 */;
+
+typedef unsigned char SceUChar8;
+
+typedef unsigned int SceUInt32;
+
+enum SceNetApctlInfoCode {
+    SCE_NET_APCTL_INFO_APCNF_NAME = 0,
+    SCE_NET_APCTL_INFO_BSSID = 1,
+    SCE_NET_APCTL_INFO_SSID = 2,
+    SCE_NET_APCTL_INFO_SSID_LEN = 3,
+    SCE_NET_APCTL_INFO_AUTH_PROTO = 4,
+    SCE_NET_APCTL_INFO_RSSI = 5,
+    SCE_NET_APCTL_INFO_CHANNEL = 6,
+    SCE_NET_APCTL_INFO_PWRSAVE = 7,
+    SCE_NET_APCTL_INFO_IP_ADDRESS = 8,
+    SCE_NET_APCTL_INFO_NETMASK = 9,
+    SCE_NET_APCTL_INFO_DEFAULT_ROUTE = 10,
+    SCE_NET_APCTL_INFO_PRIMARY_DNS = 11,
+    SCE_NET_APCTL_INFO_SECONDARY_DNS = 12,
+    SCE_NET_APCTL_INFO_HTTP_PROXY_FLAG = 13,
+    SCE_NET_APCTL_INFO_HTTP_PROXY_SERVER = 14,
+    SCE_NET_APCTL_INFO_HTTP_PROXY_PORT = 15,
+} /* size 0x4 */;
+
+typedef char SceChar8;
+
+typedef short unsigned int SceUShort16;
+
+union SceNetApctlBSSDescEntry {
+    SceUChar8 bssid[6];
+    SceUChar8 ssid[33];
+    SceSize ssidlen;
+    SceUChar8 channel;
+    SceUChar8 rssi;
+    SceUInt32 auth_proto;
+} /* size 0x24 */;
+
+union SceNetApctlInfo {
+    SceChar8 apcnf_name[64];
+    SceUChar8 bssid[6];
+    SceUChar8 ssid[32];
+    SceSize ssidlen;
+    SceUInt32 auth_proto;
+    SceUChar8 rssi;
+    SceUChar8 channel;
+    SceUChar8 pwrsave;
+    SceChar8 ip_address[16];
+    SceChar8 netmask[16];
+    SceChar8 default_route[16];
+    SceChar8 primary_dns[16];
+    SceChar8 secondary_dns[16];
+    SceUInt32 http_proxy_flag;
+    SceChar8 http_proxy_server[128];
+    SceUShort16 http_proxy_port;
+} /* size 0x80 */;
+
 struct Unk_D_00013F20 {
     u8 pad0[0x4];
     s32 unk4;
@@ -307,6 +397,7 @@ void sceNetApctlDelHandler(s32 arg0);
 void sceNetApctlDisconnect(void);
 void sceNetApctlGetInfo(s32 arg0, s32 arg1);
 void sceNetApctlGetState(void);
+int sceNetApctlInit(SceSize stacksize, int prio);
 s32 sceNetApctlTerm(void);
 void sceNetApctl_internal_user_04776994(s32 arg0, s32 arg1, s32 arg2);
 void sceNetApctl_internal_user_6BDDCB8C(s32 arg0, s32 arg1);

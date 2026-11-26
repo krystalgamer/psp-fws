@@ -1,11 +1,20 @@
 {
+ "dwarf": [
+  "sceParseHttpStatusLine",
+  "strncmp_uc"
+ ],
  "funcs": {
   "func_0000065C": "M2C_UNK *func_0000065C(void);",
   "func_00000704": "M2C_UNK *func_00000704(void);",
   "func_00000B4C": "u8 *func_00000B4C(u8 *arg0, u8 *arg1);",
   "func_00000C48": "u8 *func_00000C48(u8 *arg0, u8 *arg1);",
   "module_start": "s32 module_start(void);",
-  "module_stop": "s32 module_stop(void);"
+  "module_stop": "s32 module_stop(void);",
+  "sceParseHttpStatusLine": "int sceParseHttpStatusLine(const SceUChar8 *status_line, SceSize line_len, SceInt32 *http_major_ver, SceInt32 *http_minor_ver, SceInt32 *response_code, const SceUChar8 **reason_phrase, SceSize *phrase_len);",
+  "strncmp_uc": "int strncmp_uc(const char *s, const char *t, SceSize n);"
+ },
+ "types": {
+  "000_dwarf": "/* devkit 0.6.0 DWARF (tools/dwarf_types.py) */\n\n\ntypedef unsigned char SceUChar8;\n\ntypedef int SceInt32;\n\ntypedef unsigned char SceUChar;\n\ntypedef unsigned int SceUInt32;"
  },
  "vars": {
   "D_00000C41": "extern M2C_UNK D_00000C41;",

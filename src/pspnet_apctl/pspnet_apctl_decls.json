@@ -1,4 +1,7 @@
 {
+ "dwarf": [
+  "sceNetApctlInit"
+ ],
  "funcs": {
   "func_00000A30": "s32 func_00000A30(void *arg0, s32 arg1);",
   "func_00000B54": "s32 func_00000B54(s32, s32, s32);",
@@ -118,6 +121,7 @@
   "sceNetApctlDisconnect": "void sceNetApctlDisconnect(void);",
   "sceNetApctlGetInfo": "void sceNetApctlGetInfo(s32 arg0, s32 arg1);",
   "sceNetApctlGetState": "void sceNetApctlGetState(void);",
+  "sceNetApctlInit": "int sceNetApctlInit(SceSize stacksize, int prio);",
   "sceNetApctlTerm": "s32 sceNetApctlTerm(void);",
   "sceNetApctl_internal_user_04776994": "void sceNetApctl_internal_user_04776994(s32 arg0, s32 arg1, s32 arg2);",
   "sceNetApctl_internal_user_6BDDCB8C": "void sceNetApctl_internal_user_6BDDCB8C(s32 arg0, s32 arg1);",
@@ -137,6 +141,7 @@
   "sceWlanDrv_lib_C9A8CAB7": "M2C_UNK sceWlanDrv_lib_C9A8CAB7();"
  },
  "types": {
+  "000_dwarf": "/* devkit 0.6.0 DWARF (tools/dwarf_types.py) */\nunion SceNetApctlBSSDescEntry;\nunion SceNetApctlInfo;\n\ntypedef void (*sceNetApctlHandler)(enum SceNetApctlState, enum SceNetApctlState, enum SceNetApctlEvent, int, void *);\n\nenum SceNetApctlState {\n    SCE_NET_APCTL_STATE_Detached = 0,\n    SCE_NET_APCTL_STATE_Disconnected = 1,\n    SCE_NET_APCTL_STATE_Scanning = 2,\n    SCE_NET_APCTL_STATE_Joinning = 3,\n    SCE_NET_APCTL_STATE_IPObtaining = 4,\n    SCE_NET_APCTL_STATE_IPObtained = 5,\n} /* size 0x4 */;\n\nenum SceNetApctlEvent {\n    SCE_NET_APCTL_EVENT_DETECT_IF = 0,\n    SCE_NET_APCTL_EVENT_CONNECT_REQ = 1,\n    SCE_NET_APCTL_EVENT_SCAN_REQ = 2,\n    SCE_NET_APCTL_EVENT_SCAN_COMPLETED = 3,\n    SCE_NET_APCTL_EVENT_ESTABLISH = 4,\n    SCE_NET_APCTL_EVENT_GET_IP = 5,\n    SCE_NET_APCTL_EVENT_DISCONNECT_REQ = 6,\n    SCE_NET_APCTL_EVENT_ERROR = 7,\n} /* size 0x4 */;\n\nenum SceNetApctlBSSDescEntryCode {\n    SCE_NET_APCTL_BSSDESC_BSSID = 0,\n    SCE_NET_APCTL_BSSDESC_SSID = 1,\n    SCE_NET_APCTL_BSSDESC_SSID_LEN = 2,\n    SCE_NET_APCTL_BSSDESC_CHANNEL = 3,\n    SCE_NET_APCTL_BSSDESC_RSSI = 4,\n    SCE_NET_APCTL_BSSDESC_AUTH_PROTO = 5,\n} /* size 0x4 */;\n\ntypedef unsigned char SceUChar8;\n\ntypedef unsigned int SceUInt32;\n\nenum SceNetApctlInfoCode {\n    SCE_NET_APCTL_INFO_APCNF_NAME = 0,\n    SCE_NET_APCTL_INFO_BSSID = 1,\n    SCE_NET_APCTL_INFO_SSID = 2,\n    SCE_NET_APCTL_INFO_SSID_LEN = 3,\n    SCE_NET_APCTL_INFO_AUTH_PROTO = 4,\n    SCE_NET_APCTL_INFO_RSSI = 5,\n    SCE_NET_APCTL_INFO_CHANNEL = 6,\n    SCE_NET_APCTL_INFO_PWRSAVE = 7,\n    SCE_NET_APCTL_INFO_IP_ADDRESS = 8,\n    SCE_NET_APCTL_INFO_NETMASK = 9,\n    SCE_NET_APCTL_INFO_DEFAULT_ROUTE = 10,\n    SCE_NET_APCTL_INFO_PRIMARY_DNS = 11,\n    SCE_NET_APCTL_INFO_SECONDARY_DNS = 12,\n    SCE_NET_APCTL_INFO_HTTP_PROXY_FLAG = 13,\n    SCE_NET_APCTL_INFO_HTTP_PROXY_SERVER = 14,\n    SCE_NET_APCTL_INFO_HTTP_PROXY_PORT = 15,\n} /* size 0x4 */;\n\ntypedef char SceChar8;\n\ntypedef short unsigned int SceUShort16;\n\nunion SceNetApctlBSSDescEntry {\n    SceUChar8 bssid[6];\n    SceUChar8 ssid[33];\n    SceSize ssidlen;\n    SceUChar8 channel;\n    SceUChar8 rssi;\n    SceUInt32 auth_proto;\n} /* size 0x24 */;\n\nunion SceNetApctlInfo {\n    SceChar8 apcnf_name[64];\n    SceUChar8 bssid[6];\n    SceUChar8 ssid[32];\n    SceSize ssidlen;\n    SceUInt32 auth_proto;\n    SceUChar8 rssi;\n    SceUChar8 channel;\n    SceUChar8 pwrsave;\n    SceChar8 ip_address[16];\n    SceChar8 netmask[16];\n    SceChar8 default_route[16];\n    SceChar8 primary_dns[16];\n    SceChar8 secondary_dns[16];\n    SceUInt32 http_proxy_flag;\n    SceChar8 http_proxy_server[128];\n    SceUShort16 http_proxy_port;\n} /* size 0x80 */;",
   "Unk_D_00013F20": "struct Unk_D_00013F20 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_000016E0_0": "struct Unk_func_000016E0_0 {\n    u8 pad0[0x7DC];\n    s32 unk7DC;\n};",
   "Unk_func_00009850_0": "struct Unk_func_00009850_0 {\n    u8 pad0[0x2374];\n    M2C_UNK * unk2374;\n    s32 unk2378;\n    u8 pad237C[0x14];\n    s32 unk2390;\n};",

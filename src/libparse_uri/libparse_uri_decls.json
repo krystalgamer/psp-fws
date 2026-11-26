@@ -1,5 +1,27 @@
 {
+ "dwarf": [
+  "_fragment_parse",
+  "_hostname_parse",
+  "_is_scheme_char",
+  "_path_parse",
+  "_portnum_parse",
+  "_query_parse",
+  "_scheme_parse",
+  "_userinfo_parse",
+  "sceUriEscape",
+  "sceUriUnescape",
+  "uri_decoded_len",
+  "uri_encoded_lenN"
+ ],
  "funcs": {
+  "_fragment_parse": "int _fragment_parse(const SceUChar8 *str, SceUChar8 *frag, SceSize *require, SceSize prepare, SceBool output);",
+  "_hostname_parse": "int _hostname_parse(const SceUChar8 *str, SceUChar8 *pool, SceSize *require, SceSize pool_size, SceBool output);",
+  "_is_scheme_char": "int _is_scheme_char(const SceUChar8 in);",
+  "_path_parse": "int _path_parse(const SceUChar8 *str, SceUChar8 *path, SceSize *require, SceSize prepare, SceBool output);",
+  "_portnum_parse": "int _portnum_parse(const SceUChar8 *str, SceUShort16 *port);",
+  "_query_parse": "int _query_parse(const SceUChar8 *str, SceUChar8 *query, SceSize *require, SceSize prepare, SceBool output);",
+  "_scheme_parse": "int _scheme_parse(unsigned char *scheme, const unsigned char *uri, SceSize *require, SceSize prepare, SceBool output);",
+  "_userinfo_parse": "int _userinfo_parse(const SceUChar *str, SceUChar *pool, SceSize pool_size, SceSize *username_size, SceSize *password_size, SceBool output);",
   "func_0000181C": "M2C_UNK *func_0000181C(void);",
   "func_000018A0": "u8 *func_000018A0(u8 *arg0, u8 *arg1, s32 arg2);",
   "func_00001B98": "M2C_UNK *func_00001B98(void);",
@@ -7,7 +29,14 @@
   "func_00001DE4": "u8 *func_00001DE4(u8 *arg0, u8 *arg1);",
   "func_000021BC": "u8 *func_000021BC(u8 *arg0, u8 *arg1);",
   "module_start": "s32 module_start(void);",
-  "module_stop": "s32 module_stop(void);"
+  "module_stop": "s32 module_stop(void);",
+  "sceUriEscape": "int sceUriEscape(unsigned char *out, SceSize *require, SceSize prepare, const unsigned char *in);",
+  "sceUriUnescape": "int sceUriUnescape(unsigned char *out, SceSize *require, SceSize prepare, const unsigned char *in);",
+  "uri_decoded_len": "int uri_decoded_len(const unsigned char *s);",
+  "uri_encoded_lenN": "int uri_encoded_lenN(const unsigned char *s, unsigned int n);"
+ },
+ "types": {
+  "000_dwarf": "/* devkit 0.6.0 DWARF (tools/dwarf_types.py) */\nstruct SceUriElement;\n\ntypedef unsigned char SceUChar8;\n\ntypedef int SceBool;\n\ntypedef int SceInt32;\n\ntypedef short unsigned int SceUShort16;\n\ntypedef char SceChar8;\n\ntypedef unsigned char SceUChar;\n\ntypedef enum {\n    UNKNOWN = 0,\n    HTTP = 80,\n    HTTPS = 443,\n    FTP = 21,\n    SSH = 22,\n    GOPHER = 70,\n    IMAP = 143,\n    RTSP = 554,\n} /* size 0x4 */ _DEFAULT_PORT;\n\ntypedef unsigned int SceUInt32;\n\nstruct SceUriElement {\n    unsigned char *scheme;\n    unsigned char *hostname;\n    short unsigned int port;\n    unsigned char *path;\n    unsigned char *query;\n    unsigned char *username;\n    unsigned char *password;\n    unsigned char *fragment;\n    SceBool opaque;\n} /* size 0x24 */;\n\ntypedef struct SceUriElement SceUriElement;"
  },
  "vars": {
   "D_00002A19": "extern M2C_UNK D_00002A19;",
