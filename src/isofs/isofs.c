@@ -94,11 +94,7 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005F38);
 INCLUDE_ASM("nonmatchings/isofs", func_00000284);
 #endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/isofs", func_000003E8);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000003E8(void *arg0) {
     s32 temp_s0;
     s32 var_s0;
