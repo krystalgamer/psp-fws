@@ -111,7 +111,17 @@ s32 module_reboot_before(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageEnd);
+#else
+s32 sceIdStorageEnd(void) {
+    sceIdStorageFlush();
+    sceKernelUnregisterSysEventHandler(&D_000021F0);
+    sceKernelDeleteSema(M2C_VFIELD(&D_00006630, s32, 4));
+    sceKernelDeleteFpl(M2C_VFIELD(&D_00006630, s32, 0));
+    return 0;
+}
+#endif
 
 s32 sceIdStorageSuspend(void) {
     sceIdStorageFlush();
