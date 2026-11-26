@@ -23,6 +23,10 @@ typedef struct {
     u32 totalcount;
     void *common;
 } SceSTimerInfo;
+typedef struct {
+    SceSTimerInfo SYSTMR[4];
+    u32 nextid;
+} SceSTimerCB;
 
 typedef struct {
     u32 Control;
@@ -31,12 +35,15 @@ typedef struct {
 } SceSTimerReg;
 
 extern SceSTimerReg STimerRegSave[4];
-extern SceSTimerInfo g_SYSTMR[4];
+extern SceSTimerCB g_timerCB;
 
 s32 _sceSTimerGetCount(SceSTimerInfo *timer);
 void _sceSTimerStopCount(SceSTimerInfo *timer);
 void func_00000128(SceSTimerInfo *timer);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
+s32 sceKernelDisableIntr(s32);
+s32 sceKernelEnableIntr(s32);
+s32 sceKernelIsIntrContext(void);
 
 #endif

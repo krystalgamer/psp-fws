@@ -20,7 +20,7 @@ sceKernelIsIntrContext = 0x00000990; // type:func
 sceKernelRegisterSuspendHandler = 0x00000998; // type:func
 sceKernelRegisterResumeHandler = 0x000009A0; // type:func
 // shared names (tools/add_version.py) begin
-g_SYSTMR = 0x00000B24; // rom:0xBC4
+g_timerCB = 0x00000B24; // rom:0xBC4
 D_00000BA0 = 0x00000BB0;
 D_00000B10_v350 = 0x00000B10; // rom:0xBB0
 // shared names (tools/add_version.py) end
