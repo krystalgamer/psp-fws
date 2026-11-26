@@ -377,7 +377,7 @@ s32 func_00016ADC(struct Unk_func_00016ADC_0 *arg0, s32 arg1) {
     return 0;
 }
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00010484);
 #endif
 

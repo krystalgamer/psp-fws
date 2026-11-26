@@ -915,7 +915,7 @@ s32 func_000029A0(struct Unk_func_000029A0_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/lftv_main_plugin", func_00002B68);
 #endif
 

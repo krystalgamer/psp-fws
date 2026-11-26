@@ -171,7 +171,7 @@ s32 func_00024DE0(struct Unk_func_00024DE0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_00024E04);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_00024E7C);
 #endif
 

@@ -566,6 +566,10 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7C5B543C);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_EE8760C6);
 #endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/sysreg", func_00001AE8_v340);
+#endif
+
 #if FW_VERSION == 330
 INCLUDE_ASM("nonmatchings/sysreg", func_00001AE8_v330);
 #endif

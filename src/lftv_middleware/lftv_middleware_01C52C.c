@@ -227,7 +227,7 @@ s32 func_0001D204(struct Unk_func_0001D204_0 *arg0) {
     return var_v1;
 }
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001D3A8);
 #endif
 

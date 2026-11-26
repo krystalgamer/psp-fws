@@ -61,7 +61,7 @@ s32 sceLed_driver_DE91D3A4(void) {
 INCLUDE_ASM("nonmatchings/led", sceLed_driver_DE91D3A4);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 sceLed_driver_DE91D3A4(void) {
     sceKernelDisableSubIntr(0x1E, 0x19);
     sceGpio_driver_103C3EB2(0x40);

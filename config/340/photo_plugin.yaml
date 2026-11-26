@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/340/.splat_cache.photo_plugin
   symbol_addrs_path:
     - config/340/symbol_addrs.photo_plugin.txt
+    - config/340/func_starts.photo_plugin.txt
     - tmp/build/340/prx_syms.photo_plugin.txt
   reloc_addrs_path: [tmp/build/340/reloc_addrs.photo_plugin.txt]
   asset_path: tmp/assets/340/photo_plugin
@@ -53,7 +54,15 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, photo_plugin]
+      - [0xC4, c, photo_plugin]
+      - [0x12A7C, c, photo_plugin_012A1C]
+      - [0x14CB4, c, photo_plugin_014B04]
+      - [0x16E94, c, photo_plugin_016C00]
+      - [0x17790, c, photo_plugin_017178]
+      - [0x272B8, c, photo_plugin_026D98]
+      - [0x29308, c, photo_plugin_0292B0]
+      - [0x2BB8C, c, photo_plugin_02B79C]
+      - [0x2BEEC, c, photo_plugin_02BC40]
       - { start: 0x2E3B0, type: asm, name: fini, linker_section: .fini }
       - { start: 0x2E3CC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2EBD4, type: prxpad, order: .text }
@@ -71,7 +80,13 @@ segments:
       - { start: 0x2F6FC, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x2F720, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x2F724, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x2F728, rodata, photo_plugin]
+      - [0x2F728, .rodata, photo_plugin]
+      - [0x30EE0, .rodata, photo_plugin_012A1C]
+      - [0x3139C, .rodata, photo_plugin_014B04]
+      - [0x313B8, .rodata, photo_plugin_016C00]
+      - [0x313DC, .rodata, photo_plugin_017178]
+      - [0x328FC, .rodata, photo_plugin_0292B0]
+      - [0x32930, .rodata, photo_plugin_02BC40]
   - name: photo_plugin_seg1
     type: code
     start: 0x32A40

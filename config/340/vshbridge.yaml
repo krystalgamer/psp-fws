@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, vshbridge]
+      - [0xA0, c, vshbridge]
       - { start: 0x38C8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x3D20, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x3D24, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -63,7 +63,7 @@ segments:
       - { start: 0x3F6C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x3FA0, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x46BC, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x48E8, rodata, vshbridge]
+      - [0x48E8, .rodata, vshbridge]
       - { start: 0x4934, type: prxpad, order: .rodata }
   - name: vshbridge_seg1
     type: code

@@ -5,7 +5,7 @@
 
 INCLUDE_ASM("nonmatchings/stdio", func_00000000);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/stdio", func_00000190);
 
 INCLUDE_ASM("nonmatchings/stdio", func_000001E8);
@@ -252,7 +252,7 @@ INCLUDE_ASM("nonmatchings/stdio", func_00000960);
 INCLUDE_ASM("nonmatchings/stdio", func_00000988);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_00000978(s32 arg0) {
     u32 temp_s0;
 
@@ -372,7 +372,7 @@ INCLUDE_RODATA("nonmatchings/stdio", D_0000151C);
 INCLUDE_ASM("nonmatchings/stdio", func_00000C78);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/stdio", syslib_D3744BE0);
 #endif
 
@@ -382,7 +382,7 @@ void syslib_D3744BE0(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/stdio", func_00000D88);
 
 INCLUDE_ASM("nonmatchings/stdio", func_00000D94);

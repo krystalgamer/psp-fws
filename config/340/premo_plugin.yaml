@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/340/.splat_cache.premo_plugin
   symbol_addrs_path:
     - config/340/symbol_addrs.premo_plugin.txt
+    - config/340/func_starts.premo_plugin.txt
     - tmp/build/340/prx_syms.premo_plugin.txt
   reloc_addrs_path: [tmp/build/340/reloc_addrs.premo_plugin.txt]
   asset_path: tmp/assets/340/premo_plugin
@@ -54,7 +55,19 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - { start: 0xC4, type: prxpad, order: .text }
-      - [0xD0, asm, premo_plugin]
+      - [0xD0, c, premo_plugin]
+      - [0x5A0C, c, premo_plugin_009380]
+      - [0x5C24, c, premo_plugin_009598]
+      - [0xB7FC, c, premo_plugin_0117FC]
+      - [0xBB00, c, premo_plugin_011B50]
+      - [0xDE94, c, premo_plugin_014300]
+      - [0xDF08, c, premo_plugin_014458]
+      - [0xE474, c, premo_plugin_0149C4]
+      - [0xE5B4, c, premo_plugin_014B14]
+      - [0x12848, c, premo_plugin_018FBC]
+      - [0x129E0, c, premo_plugin_019154]
+      - [0x1D2E8, c, premo_plugin_023E68]
+      - [0x1D690, c, premo_plugin_02435C]
       - { start: 0x205B8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x205D4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x20F3C, type: prxpad, order: .text }
@@ -73,7 +86,14 @@ segments:
       - { start: 0x218F0, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x218F4, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x218F8, type: prxpad, order: .rodata }
-      - [0x21900, rodata, premo_plugin]
+      - [0x21900, .rodata, premo_plugin]
+      - [0x223A0, .rodata, premo_plugin_009598]
+      - [0x228A0, .rodata, premo_plugin_011B50]
+      - [0x22A88, .rodata, premo_plugin_014300]
+      - [0x22B68, .rodata, premo_plugin_014458]
+      - [0x22B80, .rodata, premo_plugin_014B14]
+      - [0x22D88, .rodata, premo_plugin_019154]
+      - [0x24118, .rodata, premo_plugin_02435C]
   - name: premo_plugin_seg1
     type: code
     start: 0x24500

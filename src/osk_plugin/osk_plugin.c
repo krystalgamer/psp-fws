@@ -109,6 +109,10 @@ INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011674);
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011688);
 #endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011C50_v340);
+#endif
+
 #if FW_VERSION == 330
 INCLUDE_RODATA("nonmatchings/osk_plugin", D_00011C50_v330);
 #endif
@@ -1381,6 +1385,10 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00000CF4);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00000D70);
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00001240);
+#endif
+
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/osk_plugin", func_0000128C_v340);
 #endif
 
 #if FW_VERSION == 330

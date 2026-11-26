@@ -256,7 +256,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00054FC0);
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00054FDC);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_000552F8);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055314);

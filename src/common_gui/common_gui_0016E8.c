@@ -82,7 +82,7 @@ INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000037A0);
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00003CA4);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00004188);
 #endif
 

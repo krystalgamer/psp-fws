@@ -62,7 +62,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_06ED70", func_0006EFC8);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_06ED70", D_000B6228);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_06ED70", D_000B7CE0);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_06ED70", D_000B7CE4);

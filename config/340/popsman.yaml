@@ -52,7 +52,7 @@ segments:
     start: 0xC0
     vram: 0x0
     subsegments:
-      - [0xC0, asm, popsman]
+      - [0xC0, c, popsman]
       - { start: 0x2B30, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2CC0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x2CC4, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x2EDC, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x32D0, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - { start: 0x3398, type: prxpad, order: .rodata }
-      - [0x33C0, rodata, popsman]
+      - [0x33C0, .rodata, popsman]
   - name: popsman_seg1
     type: code
     start: 0x3940

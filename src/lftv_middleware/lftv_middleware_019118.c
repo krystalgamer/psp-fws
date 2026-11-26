@@ -150,7 +150,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_00034DF4);
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001979C);
 #endif
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_000197F0);
 #endif
 
@@ -166,7 +166,7 @@ void func_00019834(void) {
 }
 #endif
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001992C);
 #endif
 
@@ -180,21 +180,21 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_019118", sceVshLftvMw_8F731E0A);
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", sceVshLftvMw_70B40FD8);
 #endif
 
-#if FW_VERSION == 282 || FW_VERSION == 311
+#if FW_VERSION == 282 || FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_00019920);
 #endif
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_00019964);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_00019AA0);
 #endif
 
-#if FW_VERSION == 250 || FW_VERSION == 311
+#if FW_VERSION == 250 || FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_000199EC);
 #endif
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_00019B28);
 #endif
 
@@ -296,7 +296,7 @@ void func_00019BC8(void) {
 }
 #endif
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_00019CC0);
 #endif
 
@@ -306,7 +306,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_00019C0C);
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_000351B4);
 #endif
 
-#if FW_VERSION == 250 || FW_VERSION == 311
+#if FW_VERSION == 250 || FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_00019C80);
 #endif
 
@@ -318,7 +318,7 @@ void func_00019C80(void) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_00019CC4);
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_00019D38);
 #endif
 
@@ -404,7 +404,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001A040);
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001A08C);
 #endif
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001A0D8);
 #endif
 
@@ -450,7 +450,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001A34C);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001A398);
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001A490);
 #endif
 
@@ -599,7 +599,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001B008);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001B0B0);
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001B274);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001B2E0);
@@ -656,7 +656,7 @@ s32 func_0001B250(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001B2BC);
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/lftv_middleware_019118", func_0001B434);
 #endif
 

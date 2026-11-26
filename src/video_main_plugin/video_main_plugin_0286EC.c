@@ -61,7 +61,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_0286EC", func_000292AC);
 INCLUDE_ASM("nonmatchings/video_main_plugin_0286EC", func_00029334);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/video_main_plugin_0286EC", func_00028170);
 #endif
 
@@ -166,7 +166,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_0286EC", D_00053F18);
 INCLUDE_RODATA("nonmatchings/video_main_plugin_0286EC", D_00053F24);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/video_main_plugin_0286EC", D_000538C0);
 #endif
 

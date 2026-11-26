@@ -31,6 +31,9 @@ static inline void ddrdb_memclr(u8 *buf, u32 size) {
     }
 }
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/openpsid", func_00000000);
+#else
 static int func_00000000(u8 *cert) {
     if (sceIdStorageLookup(0x101, 0x1D0, cert, 0x30) < 0 && sceIdStorageLookup(0x121, 0x1D0, cert, 0x30) < 0) {
         return 0xC0520002;
@@ -40,7 +43,13 @@ static int func_00000000(u8 *cert) {
     }
     return (sceUtilsBufferCopyWithRange(NULL, 0, cert, 0xB8, KIRK_CMD_CERTVRY) == 0) ? 0 : 0xC0520001;
 }
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/openpsid", func_000000DC);
+
+INCLUDE_ASM("nonmatchings/openpsid", module_start);
+#else
 int module_start(SceSize args, void *argp) {
     u32 i;
 
@@ -50,6 +59,7 @@ int module_start(SceSize args, void *argp) {
     g_openPsidSema = sceKernelCreateSema("SceOpenPSID", 0, 1, 1, NULL);
     return g_openPsidSema < 1;
 }
+#endif
 
 #ifdef NON_MATCHING
 /* Register allocation and the WaitSema success-path layout differ. */
@@ -87,14 +97,23 @@ int sceOpenPSIDGetOpenPSID(u8 *psid) {
 INCLUDE_ASM("nonmatchings/openpsid", sceOpenPSIDGetOpenPSID);
 #endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/openpsid", sceOpenPSID_driver_19D579F0);
+#endif
+
 s32 func_00000244(void) {
     return 0;
 }
 
+#if FW_VERSION == 282
 s32 func_0000024C(void) {
     return 0;
 }
+#else
+INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbSigvry);
+#endif
 
+#if FW_VERSION == 282
 int sceDdrdbSigvry(u8 *pubKey, u8 *digest, u8 *sig) {
     u8 *buf = g_ddrdbBufPtr;
     int ret;
@@ -111,7 +130,11 @@ int sceDdrdbSigvry(u8 *pubKey, u8 *digest, u8 *sig) {
     }
     return ret;
 }
+#else
+INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbCertvry);
+#endif
 
+#if FW_VERSION == 282
 int sceDdrdbCertvry(u8 *cert) {
     int ret;
     u32 i;
@@ -126,7 +149,11 @@ int sceDdrdbCertvry(u8 *cert) {
     }
     return ret;
 }
+#else
+INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbMul1);
+#endif
 
+#if FW_VERSION == 282
 int sceDdrdbMul1(u8 *out) {
     int ret = 0x80530300;
     u32 i;
@@ -143,7 +170,11 @@ int sceDdrdbMul1(u8 *out) {
     }
     return ret;
 }
+#else
+INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbMul2);
+#endif
 
+#if FW_VERSION == 282
 int sceDdrdbMul2(u8 *a, u8 *b, u8 *out) {
     int ret;
     u32 i;
@@ -170,7 +201,11 @@ int sceDdrdbMul2(u8 *a, u8 *b, u8 *out) {
     }
     return ret;
 }
+#else
+INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbSiggen);
+#endif
 
+#if FW_VERSION == 282
 int sceDdrdbSiggen(u8 *privKey, u8 *digest, u8 *sig) {
     int ret;
     u32 i;
@@ -197,7 +232,11 @@ int sceDdrdbSiggen(u8 *privKey, u8 *digest, u8 *sig) {
     }
     return ret;
 }
+#else
+INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbPrngen);
+#endif
 
+#if FW_VERSION == 282
 int sceDdrdbPrngen(u8 *out) {
     int ret = 0x80530300;
     u32 i;
@@ -214,7 +253,11 @@ int sceDdrdbPrngen(u8 *out) {
     }
     return ret;
 }
+#else
+INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbHash);
+#endif
 
+#if FW_VERSION == 282
 int sceDdrdbHash(u8 *data, u32 size, u8 *digest) {
     int ret;
     u32 i;
@@ -248,6 +291,7 @@ int sceDdrdbHash(u8 *data, u32 size, u8 *digest) {
     }
     return ret;
 }
+#endif
 
 #ifdef NON_MATCHING
 /* size and size + 0x14 end up in swapped saved registers. */
@@ -287,6 +331,9 @@ int sceDdrdbEncrypt(u8 *buf, u32 size) {
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbEncrypt);
 #endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbDecrypt);
+#else
 int sceDdrdbDecrypt(u8 *buf, u32 size) {
     int ret;
     u32 i;
@@ -318,3 +365,4 @@ int sceDdrdbDecrypt(u8 *buf, u32 size) {
     }
     return ret;
 }
+#endif

@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/340/.splat_cache.camera_plugin
   symbol_addrs_path:
     - config/340/symbol_addrs.camera_plugin.txt
+    - config/340/func_starts.camera_plugin.txt
     - tmp/build/340/prx_syms.camera_plugin.txt
   reloc_addrs_path: [tmp/build/340/reloc_addrs.camera_plugin.txt]
   asset_path: tmp/assets/340/camera_plugin
@@ -53,7 +54,17 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, camera_plugin]
+      - [0xC4, c, camera_plugin]
+      - [0x348, c, camera_plugin_000294]
+      - [0x7C8, c, camera_plugin_000634]
+      - [0x2090, c, camera_plugin_001F80]
+      - [0x20F8, c, camera_plugin_001FE8]
+      - [0xCD5C, c, camera_plugin_00CC64]
+      - [0xD64C, c, camera_plugin_00D554]
+      - [0x1BEC8, c, camera_plugin_01BC8C]
+      - [0x1BF64, c, camera_plugin_01BD28]
+      - [0x1E260, c, camera_plugin_01E024]
+      - [0x1F594, c, camera_plugin_01F54C]
       - { start: 0x20194, type: asm, name: fini, linker_section: .fini }
       - { start: 0x201B0, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x20A20, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -70,7 +81,14 @@ segments:
       - { start: 0x21380, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x213A8, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x213AC, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x213E0, rodata, camera_plugin]
+      - [0x213E0, .rodata, camera_plugin]
+      - [0x21698, .rodata, camera_plugin_000294]
+      - [0x216CC, .rodata, camera_plugin_000634]
+      - [0x21834, .rodata, camera_plugin_001FE8]
+      - [0x23798, .rodata, camera_plugin_00D554]
+      - [0x24258, .rodata, camera_plugin_01BD28]
+      - [0x244AC, .rodata, camera_plugin_01E024]
+      - [0x2456C, .rodata, camera_plugin_01F54C]
       - { start: 0x248F4, type: prxpad, order: .rodata }
   - name: camera_plugin_seg1
     type: code

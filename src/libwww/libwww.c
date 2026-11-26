@@ -2668,7 +2668,7 @@ void func_000134DC(s32 arg0) {
 INCLUDE_ASM("nonmatchings/libwww", func_00013A00);
 #endif
 
-#if (FW_VERSION >= 271 && FW_VERSION < 303) || FW_VERSION == 311
+#if (FW_VERSION >= 271 && FW_VERSION < 303) || FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/libwww", sceHVWWW_Library_37A06F08);
 #endif
 
@@ -4519,7 +4519,7 @@ INCLUDE_RODATA("nonmatchings/libwww", D_000D16EC);
 
 INCLUDE_RODATA("nonmatchings/libwww", D_000CF1B4);
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_RODATA("nonmatchings/libwww", D_000CF1F4);
 #endif
 

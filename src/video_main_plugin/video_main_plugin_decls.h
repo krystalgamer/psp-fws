@@ -1770,6 +1770,7 @@ extern s32 func_0002F980;
 extern M2C_UNK func_000324B8;
 
 s32 func_00000178_v330(void);
+s32 func_00000178_v340(void);
 void func_00000184(s32 arg0);
 s32 func_000001B8(s32, s32);
 void func_000001DC(void);

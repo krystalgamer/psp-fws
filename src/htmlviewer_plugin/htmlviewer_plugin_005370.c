@@ -11,7 +11,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_005370", D_00007CCC);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_005370", D_00007CDC);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_005370", D_0000B358);
 #endif
 
@@ -37,7 +37,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_000054DC);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_005370", func_00006F7C);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_000081F4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_VFIELD(&D_0000CB70, s32, 0x24) = arg3;
     M2C_VFIELD(&D_0000CB70, s32, 0xC) = arg0;
@@ -95,7 +95,7 @@ void sceHtmlViewerHelper_05E0C3D4(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 sceHtmlViewerHelper_B1B946C4(s32 arg0) {
     func_0000450C(arg0, arg0 + 4);
     M2C_FIELD(arg0, s32 *, 8) = func_000045A0();

@@ -26,6 +26,7 @@ extern u8 D_00002176;
 extern s32 D_00002198;
 extern u8 D_00002226;
 extern s32 D_00002244_v330;
+extern s32 D_00002244_v340;
 extern s32 D_0000225C;
 extern s8 D_00002261;
 extern s8 D_00002262;

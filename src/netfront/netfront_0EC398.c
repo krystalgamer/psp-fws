@@ -833,7 +833,7 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F2A78);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F2ADC);
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6830);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6898);
@@ -973,7 +973,7 @@ s32 func_000F2DC0(s32 arg0) {
     return !(arg0 & 1) ? 0 : 0xFC;
 }
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6A7C);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6A9C);
@@ -1219,7 +1219,7 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F5DE0);
 
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012E3C4);
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F9BDC);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FA0A8);
@@ -1295,6 +1295,10 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F7314);
 
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012E5B8);
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_00132AF0);
+#endif
+
 #if FW_VERSION == 311
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_00132548);
 #endif
@@ -1313,7 +1317,7 @@ INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012E638);
 
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012E660);
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_001325E4);
 #endif
 
@@ -1349,7 +1353,7 @@ void func_000F7CD4(struct Unk_func_000F7CD4_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F7CE4);
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FB9DC);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FBB04);
@@ -1665,7 +1669,7 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_0010195C);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00101990);
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_0010581C);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00105850);
@@ -1758,7 +1762,7 @@ void func_001027F4(struct Unk_func_001027F4_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk5F4 = arg2;
 }
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001064AC);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001064BC);

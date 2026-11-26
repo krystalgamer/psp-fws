@@ -186,7 +186,7 @@ void func_000027E8(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_0000280C(void) {
     func_000050D0();
     func_0000465C();

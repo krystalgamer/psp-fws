@@ -949,6 +949,10 @@ INCLUDE_ASM("nonmatchings/utility", sceUtility_private_06AE20E5);
 INCLUDE_RODATA("nonmatchings/utility", D_00007020);
 #endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/utility", D_0000695C);
+#endif
+
 #if FW_VERSION == 330
 INCLUDE_RODATA("nonmatchings/utility", D_000068F0);
 #endif

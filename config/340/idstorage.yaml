@@ -52,7 +52,7 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, idstorage]
+      - [0xA0, c, idstorage]
       - { start: 0x1DE4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1EF4, type: prxpad, order: .text }
       - { start: 0x1F00, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x1FEC, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x2020, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x21EC, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x2274, rodata, idstorage]
+      - [0x2274, .rodata, idstorage]
   - name: idstorage_seg1
     type: code
     start: 0x22E0

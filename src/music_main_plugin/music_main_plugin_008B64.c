@@ -136,7 +136,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1318);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B1320);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/music_main_plugin_008B64", D_000B0A68);
 #endif
 

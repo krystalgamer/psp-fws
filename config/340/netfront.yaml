@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/340/.splat_cache.netfront
   symbol_addrs_path:
     - config/340/symbol_addrs.netfront.txt
+    - config/340/func_starts.netfront.txt
     - tmp/build/340/prx_syms.netfront.txt
   reloc_addrs_path: [tmp/build/340/reloc_addrs.netfront.txt]
   asset_path: tmp/assets/340/netfront
@@ -54,7 +55,25 @@ segments:
     subsegments:
       - { start: 0xC0, type: asm, name: init, linker_section: .init }
       - { start: 0xE4, type: prxpad, order: .text }
-      - [0x100, asm, netfront]
+      - [0x100, c, netfront]
+      - [0x9BA4, c, netfront_009598]
+      - [0x9DE0, c, netfront_0097D4]
+      - [0x43A6C, c, netfront_03F820]
+      - [0x43ABC, c, netfront_03F870]
+      - [0x641A0, c, netfront_05FF44]
+      - [0x64254, c, netfront_05FFF8]
+      - [0x8DC60, c, netfront_089A04]
+      - [0x8E2A8, c, netfront_08A04C]
+      - [0xD10D0, c, netfront_0CCCDC]
+      - [0xD1894, c, netfront_0CD4A0]
+      - [0xF02E0, c, netfront_0EBEEC]
+      - [0xF078C, c, netfront_0EC398]
+      - [0x1108E8, c, netfront_10C5E0]
+      - [0x11578C, c, netfront_111484]
+      - [0x115DB8, c, netfront_111AB8]
+      - [0x1180DC, c, netfront_113DDC]
+      - [0x11814C, c, netfront_113E4C]
+      - [0x11EA1C, c, netfront_11A71C]
       - { start: 0x11EB5C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x11EB78, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x11F450, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -71,7 +90,16 @@ segments:
       - { start: 0x121764, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x12176C, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x121770, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x1217E8, rodata, netfront]
+      - [0x1217E8, .rodata, netfront]
+      - [0x121CE4, .rodata, netfront_0097D4]
+      - [0x123AAC, .rodata, netfront_03F870]
+      - [0x126B84, .rodata, netfront_05FFF8]
+      - [0x12A7AC, .rodata, netfront_08A04C]
+      - [0x12E2B4, .rodata, netfront_0CCCDC]
+      - [0x12E2DC, .rodata, netfront_0CD4A0]
+      - [0x1320D0, .rodata, netfront_0EC398]
+      - [0x134DF0, .rodata, netfront_10C5E0]
+      - [0x135240, .rodata, netfront_113E4C]
       - { start: 0x13551C, type: prxpad, order: .rodata }
   - name: netfront_seg1
     type: code

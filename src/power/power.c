@@ -894,7 +894,7 @@ INCLUDE_ASM("nonmatchings/power", func_00003F14);
 INCLUDE_ASM("nonmatchings/power", func_00004548);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/power", scePower_driver_166922EC);
 #endif
 
@@ -1022,7 +1022,7 @@ s32 scePower_driver_B999184C(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 func_00004B54(void) {
     M2C_UNK *temp_v0;
     s32 temp_v0_2;
@@ -1201,7 +1201,7 @@ s32 scePower_driver_23436A4A(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 func_00005250(void) {
     M2C_VFIELD(&D_0000B3AC, s32, 0x20) = -1;
     sceKernelSetEventFlag(D_0000B3AC.unk0, 0x200U);

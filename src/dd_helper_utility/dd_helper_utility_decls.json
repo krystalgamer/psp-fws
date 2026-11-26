@@ -20,6 +20,7 @@
   "func_00000770": "void func_00000770(void);",
   "func_00000774": "void func_00000774(void);",
   "func_00000790_v330": "void func_00000790_v330(void);",
+  "func_00000790_v340": "void func_00000790_v340(void);",
   "func_000007C0": "s32 func_000007C0(s32);",
   "func_000007F0": "s32 func_000007F0(s32, s32);",
   "func_0000088C": "void func_0000088C(void);",

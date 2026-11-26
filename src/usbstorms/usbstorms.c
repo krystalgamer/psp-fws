@@ -1,6 +1,10 @@
 #include "common.h"
 #include "usbstorms_decls.h"
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/usbstorms", func_00000000_v340);
+#endif
+
 #if FW_VERSION == 330
 INCLUDE_ASM("nonmatchings/usbstorms", func_00000000_v330);
 #endif
@@ -299,7 +303,7 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_000035BC);
 INCLUDE_ASM("nonmatchings/usbstorms", func_0000377C);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/usbstorms", func_00003908);
 
 INCLUDE_ASM("nonmatchings/usbstorms", func_00003A5C);
@@ -340,7 +344,7 @@ INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_ABE9F2C7);
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_762F7FDF);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_9C029B16);
 
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_56AA41EA);

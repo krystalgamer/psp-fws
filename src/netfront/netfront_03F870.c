@@ -88,7 +88,7 @@ s32 func_0003FD24(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/netfront_03F870", func_0003FD5C);
 #endif
 
@@ -2610,6 +2610,10 @@ INCLUDE_RODATA("nonmatchings/netfront_03F870", D_001207F4);
 INCLUDE_RODATA("nonmatchings/netfront_03F870", D_00120834);
 
 INCLUDE_ASM("nonmatchings/netfront_03F870", sceHVNetfront_Module_2F0F73A8);
+
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/netfront_03F870", D_00124E4C);
+#endif
 
 INCLUDE_ASM("nonmatchings/netfront_03F870", sceHVNetfront_Module_2BC805F4);
 

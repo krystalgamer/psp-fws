@@ -205,7 +205,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F15C);
 INCLUDE_RODATA("nonmatchings/impose", D_0000F2D8);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/impose", D_0000FFE0);
 #endif
 
@@ -267,7 +267,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00000374);
 INCLUDE_ASM("nonmatchings/impose", func_00000510);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", func_00000758);
 #endif
 
@@ -279,7 +279,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00000508);
 INCLUDE_ASM("nonmatchings/impose", func_0000068C);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 func_0000070C(void) {
     func_00002E3C(7);
     func_00002E3C(6);
@@ -321,7 +321,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetBatteryIconStatus);
 INCLUDE_ASM("nonmatchings/impose", func_00000EEC);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 func_000012B8(void) {
     s32 var_a0;
 
@@ -348,7 +348,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_BDBC42A6);
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_C7E36CC7);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 sceImpose_driver_C7E36CC7(void) {
     if (M2C_FIELD(D_0000F510, s32 *, 0x8C) >= 0) {
         M2C_FIELD(D_0000F510, s32 *, 0xC8) = 1;
@@ -568,7 +568,7 @@ s32 sceImpose_driver_C7E36CC7(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 syslib_ADF12745(s32 arg0) {
     s32 temp_a2;
 
@@ -614,7 +614,7 @@ s32 syslib_ADF12745(s32 arg0) {
 INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_1AEED8FE);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", func_00001E48);
 #endif
 
@@ -642,7 +642,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00001F2C);
 INCLUDE_ASM("nonmatchings/impose", func_00001FB0);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 sceImpose_driver_1B6E3400(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x8C);
 }
@@ -654,7 +654,7 @@ s32 sceImpose_driver_1B6E3400(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 sceImpose_driver_B415FC59(void) {
     s32 temp_v0;
 
@@ -708,7 +708,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeSetBacklightOffTime);
 INCLUDE_ASM("nonmatchings/impose", sceImposeGetBacklightOffTime);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void sceImpose_driver_116DDED6(s32 arg0, s32 arg1, s32 arg2) {
     u32 temp_s0;
 
@@ -1105,7 +1105,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F4A0);
 INCLUDE_RODATA("nonmatchings/impose", D_0000F4AC);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/impose", D_000101D0);
 
 INCLUDE_RODATA("nonmatchings/impose", D_000101E0);
@@ -1173,7 +1173,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F848);
 INCLUDE_ASM("nonmatchings/impose", func_000044B0);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", func_000050E0);
 #endif
 
@@ -1207,7 +1207,7 @@ INCLUDE_ASM("nonmatchings/impose", func_000047EC);
 INCLUDE_ASM("nonmatchings/impose", func_00004870);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", func_0000524C);
 #endif
 
@@ -1265,7 +1265,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00004A40);
 INCLUDE_ASM("nonmatchings/impose", func_00004AB4);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/impose", func_00005590);
 #endif
 

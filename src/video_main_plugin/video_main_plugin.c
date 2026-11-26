@@ -18,11 +18,19 @@ void sceVideo_9DD8CE8E(void) {
 }
 #endif
 
+#if FW_VERSION == 340
+s32 func_00000178_v340(void) {
+    return D_000563A0;
+}
+#endif
+
 #if FW_VERSION == 330
 s32 func_00000178_v330(void) {
     return D_000563A0;
 }
+#endif
 
+#if FW_VERSION >= 330
 void func_00000184(s32 arg0) {
     void *temp_v0;
 
@@ -376,6 +384,10 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051C38);
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051C58);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051C78);
+
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051A00_v340);
+#endif
 
 #if FW_VERSION == 330
 INCLUDE_RODATA("nonmatchings/video_main_plugin", D_00051A00_v330);

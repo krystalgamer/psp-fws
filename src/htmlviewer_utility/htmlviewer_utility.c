@@ -125,7 +125,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_000058E0);
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_0000592C);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005C80);
 #endif
 
@@ -193,7 +193,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005B7C);
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005BB0);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005EF4);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005F38);
@@ -374,7 +374,7 @@ s32 func_00001B90(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 func_00001EAC(void) {
     return 0;
 }
@@ -1045,7 +1045,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00002D10);
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00002DB4);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_0000333C);
 
 u8 func_00003348(void) {
@@ -1404,7 +1404,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_000059CC);
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_000059E0);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00007164);
 
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00007178);
@@ -1578,7 +1578,7 @@ void func_00003950(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00003980);
 #endif
 
@@ -1598,7 +1598,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005D20);
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_00005D30);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/htmlviewer_utility", D_000074F0);
 #endif
 
@@ -1666,7 +1666,7 @@ void sceHtmlViewerHelper_05E0C3D4(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/htmlviewer_utility", sceHtmlViewerHelper_B1B946C4);
 
 void func_00004804(s32 arg0, s32 arg1) {

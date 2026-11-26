@@ -92,7 +92,7 @@ INCLUDE_RODATA("nonmatchings/pops_032938", D_0010D940);
 
 INCLUDE_RODATA("nonmatchings/pops_032938", D_0010DA40);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/pops_032938", func_000273AC);
 
 INCLUDE_ASM("nonmatchings/pops_032938", func_00029374);

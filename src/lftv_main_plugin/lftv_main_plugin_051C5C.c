@@ -57,6 +57,10 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_0003B94C);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_00052014);
 #endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_00052514);
+#endif
+
 s32 func_000522F4(void) {
     func_00052E38();
     return 0;

@@ -50,3 +50,5 @@ scePaf_F0B4CAE7 = 0x0000F7E8; // type:func
 scePaf_F95EA3F1 = 0x0000F7F0; // type:func
 scePaf_FF2F98C6 = 0x0000F7F8; // type:func
 sceRtcGetCurrentClockLocalTime = 0x0000F800; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

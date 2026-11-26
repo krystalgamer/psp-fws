@@ -970,7 +970,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008EEEC);
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008EF9C);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_000A5070);
 #endif
 
@@ -986,7 +986,7 @@ s32 func_0008F270(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_000A52C4);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_089BF0", D_000BAC08);

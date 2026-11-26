@@ -32,7 +32,7 @@ s32 func_00000AE4(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 func_00000AF4(void) {
     s32 temp_v0;
 
@@ -115,6 +115,15 @@ INCLUDE_ASM("nonmatchings/hpremote", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/hpremote", sceHprm_driver_588845DA);
 
+#if FW_VERSION == 340
+s32 sceHprm_driver_526BB7F4(void) {
+    D_00002244_v340 = 1;
+    sceSysreg_driver_BB823481(4);
+    sceSysreg_driver_7725CA08(4);
+    return 0;
+}
+#endif
+
 #if FW_VERSION == 330
 s32 sceHprm_driver_526BB7F4(void) {
     D_00002244_v330 = 1;
@@ -122,7 +131,9 @@ s32 sceHprm_driver_526BB7F4(void) {
     sceSysreg_driver_7725CA08(4);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION < 330
 s32 sceHprm_driver_526BB7F4(void) {
     sceSysreg_driver_BB823481(4);
     sceSysreg_driver_7725CA08(4);
@@ -232,7 +243,7 @@ s32 sceHprm_driver_971AE8FB(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/hpremote", func_0000134C);
 #endif
 

@@ -3,7 +3,7 @@
 #include "k1.h"
 #include "iofilemgr_decls.h"
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00000000);
 
 void func_00000094(void) {

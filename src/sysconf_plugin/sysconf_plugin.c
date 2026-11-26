@@ -120,7 +120,7 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001A160);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000003B4);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_000004DC(s32 arg0) {
     D_00021380 = arg0;
 }
@@ -1202,7 +1202,7 @@ s32 func_00001C44(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 func_00001CD0(void) {
     sceUsbDeactivate();
     sceVshBridge_C62E0B0D(D_000214E4);
@@ -1285,6 +1285,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001A728);
 
 #if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001D21C);
+#endif
+
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C73C);
 #endif
 
 #if FW_VERSION == 100
@@ -1429,7 +1433,11 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00001AEC);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00002CE8);
 #endif
 
-#if FW_VERSION >= 310
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000035EC);
+#endif
+
+#if FW_VERSION >= 310 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000035CC);
 #endif
 
@@ -4154,11 +4162,17 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C06C);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C090);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001DF3C);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001DF54);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001E188);
+#endif
+
+#if FW_VERSION == 330
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001DF84);
 #endif
 
@@ -4402,6 +4416,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C264);
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C290);
 #endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001E3E4);
+#endif
+
 #if FW_VERSION == 330
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001E1E0);
 #endif
@@ -4491,6 +4509,12 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C590);
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C5BC);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C5DC);
+
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001E798);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001E7C4);
+#endif
 
 #if FW_VERSION == 330
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001E594);
@@ -5155,7 +5179,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00010584);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00010980);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00011024);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000110A0);

@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, htmlviewer_utility]
+      - [0xC4, c, htmlviewer_utility]
       - { start: 0x5464, type: asm, name: fini, linker_section: .fini }
       - { start: 0x5480, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x5788, type: prxpad, order: .text }
@@ -70,7 +70,7 @@ segments:
       - { start: 0x5C24, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x5C2C, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x5C30, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x5C34, rodata, htmlviewer_utility]
+      - [0x5C34, .rodata, htmlviewer_utility]
       - { start: 0x7630, type: prxpad, order: .rodata }
   - name: htmlviewer_utility_seg1
     type: code

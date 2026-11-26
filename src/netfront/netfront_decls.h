@@ -5302,6 +5302,7 @@ void func_0002E4C4(s32 arg0, s32 *arg1);
 s32 func_0002E62C(void);
 M2C_UNK func_0002E900(void *);
 void func_0002EE38(s32 arg0);
+s32 func_0002F278(s32 *arg0);
 s32 func_00030388(s32, s32, s32, s32, s32, s32, s32);
 s32 func_000304E0(void **arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 func_000305E8(void **arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);

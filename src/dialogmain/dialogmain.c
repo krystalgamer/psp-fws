@@ -130,7 +130,7 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_000001F0);
 INCLUDE_ASM("nonmatchings/dialogmain", func_000004C8);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00006574);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00006588);
@@ -144,7 +144,7 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_00008610);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008638);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_000005A8(s32 arg0) {
     if (M2C_FIELD(D_00007EC4, s32 *, 0) == 0x64) {
         if (M2C_FIELD(D_00007EC4, s32 *, 0x54) == 2) {
@@ -542,7 +542,7 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_00001CBC);
 INCLUDE_ASM("nonmatchings/dialogmain", func_00001A30);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dialogmain", D_0000662C);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00006644);
@@ -856,7 +856,7 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_00008F88);
 INCLUDE_RODATA("nonmatchings/dialogmain", D_00008F9C);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dialogmain", D_000071E0);
 #endif
 
@@ -1228,7 +1228,7 @@ void func_000027AC(void) {
 INCLUDE_ASM("nonmatchings/dialogmain", func_000027D4);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_00002808(void) {
     s32 temp_v0;
 
@@ -1479,7 +1479,7 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_000043A8);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_0000449C);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dialogmain", func_00004080);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00004218);
@@ -2246,7 +2246,7 @@ void func_00006A44(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dialogmain", func_000058EC);
 
 s32 func_00006BC4(void) {
@@ -2269,7 +2269,7 @@ INCLUDE_RODATA("nonmatchings/dialogmain", D_00007D28);
 
 INCLUDE_RODATA("nonmatchings/dialogmain", D_000095A0);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dialogmain", func_00005A14);
 #else
 INCLUDE_ASM("nonmatchings/dialogmain", func_00006BC4);
@@ -2362,7 +2362,7 @@ s32 func_00006CF0(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 func_00006CFC(s32 arg0) {
     if (arg0 != D_0000A3D4) {
         scePaf_A69BABE3(0x409, arg0, D_0000A3D4);

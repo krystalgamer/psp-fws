@@ -7,3 +7,19 @@ sceKernelDeleteFpl = 0x00000370; // type:func
 sceKernelFreeFpl = 0x00000378; // type:func
 sceKernelTryAllocateFpl = 0x00000380; // type:func
 sceKernelCreateFpl = 0x00000388; // type:func
+// shared names (tools/add_version.py) begin
+D_00000478 = 0x00000480; // rom:0x520
+D_00000488 = 0x00000490; // rom:0x530
+D_0000048C = 0x00000494; // rom:0x534
+D_000004C4 = 0x000004D4; // rom:0x574
+D_000004D8 = 0x000004EC; // rom:0x58C
+D_000004DC = 0x000004F0; // rom:0x590
+D_000004E0 = 0x00000500;
+D_000004E4 = 0x00000504;
+D_00000500 = 0x00000520;
+D_00000504 = 0x00000524;
+D_00000478_v340 = 0x00000478; // rom:0x518
+D_00000488_v340 = 0x00000488; // rom:0x528
+D_000004D8_v340 = 0x000004D8; // rom:0x578
+D_000004DC_v340 = 0x000004DC; // rom:0x57C
+// shared names (tools/add_version.py) end

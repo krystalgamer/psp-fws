@@ -63,7 +63,7 @@ void func_00003B28(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000063B4);
 #endif
 
@@ -133,7 +133,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_000044CC);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00005D94);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00006EE0);
 #else
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00004554);

@@ -315,7 +315,7 @@ s32 func_000009F8(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/display", func_00000B30);
 
 INCLUDE_ASM("nonmatchings/display", func_00000F38);
@@ -343,7 +343,7 @@ INCLUDE_ASM("nonmatchings/display", func_000012C0);
 INCLUDE_ASM("nonmatchings/display", func_00001398);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/display", func_000014FC);
 
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_432D133F);

@@ -480,7 +480,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B1CE8);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B1CF0);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B1438);
 #endif
 
@@ -570,7 +570,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_0009A7CC);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B1ECC);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B1610);
 #endif
 
@@ -784,7 +784,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_0000D124);
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_0000DC8C);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_0001271C);
 #endif
 
@@ -993,7 +993,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B2688);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B2690);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B1E20);
 #endif
 
@@ -1089,7 +1089,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_0009B0F8);
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00010580);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B2144);
 #endif
 
@@ -1209,7 +1209,7 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B2B50);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B2B58);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0092E8", D_000B22E8);
 #endif
 
@@ -1295,7 +1295,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00011250);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00011408);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_0092E8", func_00016478);
 #endif
 

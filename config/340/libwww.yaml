@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/340/.splat_cache.libwww
   symbol_addrs_path:
     - config/340/symbol_addrs.libwww.txt
+    - config/340/func_starts.libwww.txt
     - tmp/build/340/prx_syms.libwww.txt
   reloc_addrs_path: [tmp/build/340/reloc_addrs.libwww.txt]
   asset_path: tmp/assets/340/libwww
@@ -52,7 +53,9 @@ segments:
     start: 0xA0
     vram: 0x0
     subsegments:
-      - [0xA0, asm, libwww]
+      - [0xA0, c, libwww]
+      - [0x5246C, c, libwww_0523A0]
+      - [0x52CF0, c, libwww_052C24]
       - { start: 0xC9894, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xCAB04, type: prxpad, order: .text }
       - { start: 0xCAB10, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -65,7 +68,8 @@ segments:
       - { start: 0xCAB90, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0xCB1F0, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - { start: 0xCBB28, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
-      - [0xCC4E0, rodata, libwww]
+      - [0xCC4E0, .rodata, libwww]
+      - [0xCFDEC, .rodata, libwww_052C24]
       - { start: 0xE1748, type: prxpad, order: .rodata }
   - name: libwww_seg1
     type: code

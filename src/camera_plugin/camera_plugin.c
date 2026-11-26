@@ -226,7 +226,7 @@ INCLUDE_RODATA("nonmatchings/camera_plugin", D_00020230);
 
 INCLUDE_ASM("nonmatchings/camera_plugin", func_00000180);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin", func_000001D8);
 #endif
 

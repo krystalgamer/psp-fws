@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
-      - [0xC4, asm, heaparea2]
+      - [0xC4, c, heaparea2]
       - { start: 0x420, type: asm, name: fini, linker_section: .fini }
       - { start: 0x43C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x464, type: prxpad, order: .text }
@@ -70,7 +70,7 @@ segments:
       - { start: 0x594, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x5A0, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x5A4, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x5A8, rodata, heaparea2]
+      - [0x5A8, .rodata, heaparea2]
       - { start: 0x5D8, type: prxpad, order: .rodata }
   - name: heaparea2_seg1
     type: code

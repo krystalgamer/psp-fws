@@ -1705,6 +1705,8 @@ extern s32 D_00064384;
 extern s32 D_00064388;
 extern s32 *D_0006438C;
 extern s32 D_00064390;
+extern s32 D_000643A8;
+extern s32 D_000643AC;
 extern s32 D_000644D8;
 extern void *D_000644E0;
 extern struct D_000644E4_s D_000644E4;

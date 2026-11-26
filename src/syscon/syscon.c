@@ -1086,7 +1086,7 @@ s32 func_00003B1C(void) {
 
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_34C36FF9);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/syscon", func_00003968);
 
 INCLUDE_ASM("nonmatchings/syscon", func_00003A78);

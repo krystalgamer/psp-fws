@@ -4,7 +4,7 @@
 
 INCLUDE_ASM("nonmatchings/premo_plugin_0149C4", func_000149C4);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_0149C4", func_00014A10);
 #endif
 
@@ -34,7 +34,7 @@ s32 func_00014A10(struct Unk_func_00014A10_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_0149C4", func_0000D56C);
 #endif
 

@@ -79,7 +79,7 @@ INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00000AE0);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_000008F0);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/camera_plugin_000634", func_00000938);
 #endif
 

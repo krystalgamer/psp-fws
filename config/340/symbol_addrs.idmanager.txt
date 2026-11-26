@@ -20,3 +20,5 @@ sceKernelAllocateFpl = 0x0000078C; // type:func
 sceKernelDeleteFpl = 0x00000794; // type:func
 scePspNpDrm_driver_0F9547E6 = 0x0000079C; // type:func
 sceRtc_driver_B44BDAED = 0x000007A4; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

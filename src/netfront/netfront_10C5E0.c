@@ -175,6 +175,10 @@ INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00130C10);
 
 INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00130C14);
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00135120);
+#endif
+
 #if FW_VERSION == 311
 INCLUDE_RODATA("nonmatchings/netfront_10C5E0", D_00134B78);
 #endif

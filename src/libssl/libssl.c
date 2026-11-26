@@ -1329,9 +1329,15 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002C37C);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002C384);
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/libssl", func_00012CFC);
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/libssl", func_00012C7C);
+#endif
 
+#if FW_VERSION >= 271 && FW_VERSION < 340
+INCLUDE_ASM("nonmatchings/libssl", func_00012CFC);
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/libssl", func_00012E08);
 #else
 INCLUDE_ASM("nonmatchings/libssl", func_00012FF4);
@@ -2244,9 +2250,13 @@ s32 sceSsl_lib_72D77445(s32 arg0) {
     return arg0 | 0x4000;
 }
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/libssl", func_0001755C);
+#else
 s32 func_0001755C(s32 arg0) {
     return arg0 & ~0x4000;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/libssl", func_00017568);
 
@@ -3261,9 +3271,15 @@ s32 func_00022B14(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/libssl", func_000225E4);
 
-#if FW_VERSION >= 271
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/libssl", func_00022584);
+#endif
+
+#if FW_VERSION >= 271 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/libssl", func_0002260C);
-#else
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_00022BA8);
 #endif
 
@@ -3389,7 +3405,11 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002D908);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D910);
 
-#if FW_VERSION >= 300
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/libssl", D_0002D870);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 340
 INCLUDE_RODATA("nonmatchings/libssl", D_0002D920);
 #endif
 
@@ -3616,7 +3636,7 @@ INCLUDE_ASM("nonmatchings/libssl", func_000253EC);
 INCLUDE_ASM("nonmatchings/libssl", func_000259C0);
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 271 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/libssl", func_00025448);
 #else
 s32 func_00025448(void) {
@@ -3678,13 +3698,19 @@ INCLUDE_RODATA("nonmatchings/libssl", D_0002DA74);
 
 INCLUDE_RODATA("nonmatchings/libssl", D_0002DA78);
 
-#if FW_VERSION >= 271
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/libssl", func_000262B8);
+#endif
+
+#if FW_VERSION >= 271 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/libssl", func_00026358);
-#else
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libssl", func_0002691C);
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 271 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/libssl", func_000263E4);
 #else
 s32 func_000263E4(void) {

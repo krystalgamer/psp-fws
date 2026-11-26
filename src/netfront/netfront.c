@@ -172,12 +172,16 @@ void sceHVNetfront_Module_081DEF97(void) {
     func_00000154();
 }
 
-#if FW_VERSION == 250
+#if FW_VERSION == 250 || FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/netfront", sceHVNetfront_Module_D97D8CB2);
 #else
 void sceHVNetfront_Module_D97D8CB2(s32 arg0) {
     func_0000C108(func_00009DFC(), arg0);
 }
+#endif
+
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/netfront", sceHVNetfront_Module_6823BE76);
 #endif
 
 s32 sceHVNetfront_Module_07C7E121(void) {
@@ -478,6 +482,12 @@ INCLUDE_ASM("nonmatchings/netfront", sceHVNetfront_Module_271C1E57);
 INCLUDE_ASM("nonmatchings/netfront", sceHVNetfront_Module_6AD77DD8);
 #endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/netfront", sceHVNetfront_Module_D2A41BBC);
+
+INCLUDE_ASM("nonmatchings/netfront", sceHVNetfront_Module_6C54431F);
+#endif
+
 INCLUDE_ASM("nonmatchings/netfront", sceHVNetfront_Module_AD3824C9);
 
 INCLUDE_ASM("nonmatchings/netfront", sceHVNetfront_Module_EDB584F2);
@@ -648,7 +658,7 @@ void sceHVNetfront_Module_49A6D9F9(void) {
 }
 #endif
 
-#if FW_VERSION == 311
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/netfront", sceHVNetfront_Module_0B27B6F4);
 
 INCLUDE_ASM("nonmatchings/netfront", func_000F1458);
@@ -944,9 +954,15 @@ INCLUDE_ASM("nonmatchings/netfront", func_00005F04);
 
 INCLUDE_ASM("nonmatchings/netfront", func_00005F64);
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/netfront", func_000062D4);
+#endif
+
 #if FW_VERSION == 311
 INCLUDE_ASM("nonmatchings/netfront", func_000061A8_v311);
+#endif
 
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/netfront", func_000061B4);
 #endif
 
@@ -1151,6 +1167,10 @@ INCLUDE_ASM("nonmatchings/netfront", sceHVNetfront_Module_A0E6CD64);
 INCLUDE_ASM("nonmatchings/netfront", func_00007B3C);
 
 INCLUDE_RODATA("nonmatchings/netfront", D_0011D7CC);
+#endif
+
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/netfront", D_00121A6C_v340);
 #endif
 
 #if FW_VERSION == 311

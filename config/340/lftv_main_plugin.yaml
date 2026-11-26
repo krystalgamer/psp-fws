@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/340/.splat_cache.lftv_main_plugin
   symbol_addrs_path:
     - config/340/symbol_addrs.lftv_main_plugin.txt
+    - config/340/func_starts.lftv_main_plugin.txt
     - tmp/build/340/prx_syms.lftv_main_plugin.txt
   reloc_addrs_path: [tmp/build/340/reloc_addrs.lftv_main_plugin.txt]
   asset_path: tmp/assets/340/lftv_main_plugin
@@ -54,7 +55,21 @@ segments:
     subsegments:
       - { start: 0xC0, type: asm, name: init, linker_section: .init }
       - { start: 0xE4, type: prxpad, order: .text }
-      - [0xF0, asm, lftv_main_plugin]
+      - [0xF0, c, lftv_main_plugin]
+      - [0x3D28, c, lftv_main_plugin_003ADC]
+      - [0x455C, c, lftv_main_plugin_004310]
+      - [0x5218, c, lftv_main_plugin_004FAC]
+      - [0x7B68, c, lftv_main_plugin_007618]
+      - [0x23E08, c, lftv_main_plugin_023318]
+      - [0x24E2C, c, lftv_main_plugin_02433C]
+      - [0x388E4, c, lftv_main_plugin_036D60]
+      - [0x391C0, c, lftv_main_plugin_037634]
+      - [0x407B4, c, lftv_main_plugin_03E2F8]
+      - [0x40C44, c, lftv_main_plugin_03E688]
+      - [0x41668, c, lftv_main_plugin_03F0C4]
+      - [0x417CC, c, lftv_main_plugin_03F278]
+      - [0x54F44, c, lftv_main_plugin_051C5C]
+      - [0x55810, c, lftv_main_plugin_052314]
       - { start: 0x568B8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x568D4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x5766C, type: prxpad, order: .text }
@@ -73,7 +88,19 @@ segments:
       - { start: 0x58854, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x58858, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x5885C, type: prxpad, order: .rodata }
-      - [0x58880, rodata, lftv_main_plugin]
+      - [0x58880, .rodata, lftv_main_plugin]
+      - [0x5A118, .rodata, lftv_main_plugin_003ADC]
+      - [0x5A1B4, .rodata, lftv_main_plugin_004310]
+      - [0x5A25C, .rodata, lftv_main_plugin_004FAC]
+      - [0x5A538, .rodata, lftv_main_plugin_007618]
+      - [0x5D5DC, .rodata, lftv_main_plugin_023318]
+      - [0x5D760, .rodata, lftv_main_plugin_02433C]
+      - [0x5EC98, .rodata, lftv_main_plugin_036D60]
+      - [0x5EE58, .rodata, lftv_main_plugin_037634]
+      - [0x5F8DC, .rodata, lftv_main_plugin_03E688]
+      - [0x5F914, .rodata, lftv_main_plugin_03F0C4]
+      - [0x5F950, .rodata, lftv_main_plugin_03F278]
+      - [0x60C60, .rodata, lftv_main_plugin_052314]
       - { start: 0x6132C, type: prxpad, order: .rodata }
   - name: lftv_main_plugin_seg1
     type: code

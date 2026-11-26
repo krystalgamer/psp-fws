@@ -134,6 +134,7 @@ M2C_UNK SysMemForKernel_7B749390(s32, s32);
 s32 func_00000000_v310(s32 arg0);
 s32 func_00000000_v311(s32 arg0);
 s32 func_00000000_v330(s32 arg0);
+s32 func_00000000_v340(s32 arg0);
 s32 func_000004C4(void);
 s32 func_00000584(s32 arg0);
 s32 func_000005EC(void);

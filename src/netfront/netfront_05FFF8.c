@@ -66,6 +66,10 @@ INCLUDE_ASM("nonmatchings/netfront_05FFF8", func_000619C4);
 
 INCLUDE_ASM("nonmatchings/netfront_05FFF8", func_00061C88);
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/netfront_05FFF8", func_00065E9C);
+#endif
+
 #if FW_VERSION == 311
 INCLUDE_ASM("nonmatchings/netfront_05FFF8", func_00065900);
 #endif

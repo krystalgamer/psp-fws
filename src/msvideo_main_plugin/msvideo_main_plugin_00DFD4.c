@@ -140,7 +140,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_00010368);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_0000EB7C);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330 && FW_VERSION < 352
 s32 func_00010644(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x18);
 }
@@ -226,7 +226,7 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AFB50);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AFB94);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000B1548);
 #endif
 
@@ -242,7 +242,7 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AF3E8);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AFBF0);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000B1594);
 #endif
 
@@ -344,7 +344,7 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE85C);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_00DFD4", D_000AE874);
 #endif
 
-#if FW_VERSION != 330
+#if FW_VERSION < 330 || FW_VERSION == 352
 s32 func_0000ECC4(struct Unk_func_0000ECC4_0 *arg0) {
     return arg0->unk18;
 }
@@ -382,7 +382,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_0000EFC0);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_0000F1C8);
 #endif
 
-#if FW_VERSION != 330
+#if FW_VERSION < 330 || FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_0000F44C);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_0000F4C8);
@@ -435,7 +435,7 @@ void func_0000FC48(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION != 330
+#if FW_VERSION < 330 || FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_0000FC70);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_0000FCA4);
@@ -455,7 +455,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_0000FDA0);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_0000FE68);
 #endif
 
-#if FW_VERSION != 330
+#if FW_VERSION < 330 || FW_VERSION == 352
 s32 func_0000FF38(struct Unk_func_0000FF38_0 *arg0) {
     return arg0->unkC;
 }

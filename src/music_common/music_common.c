@@ -38,7 +38,7 @@ INCLUDE_ASM("nonmatchings/music_common", music_common_780357F2);
 
 INCLUDE_ASM("nonmatchings/music_common", func_000002C8);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/music_common", music_common_2A9EF938);
 #endif
 

@@ -408,7 +408,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_00012E94);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_00012EC0);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_00029D74);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_00029D84);
@@ -672,7 +672,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0000ABBC);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000136C);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_000014E0);
 #endif
 
@@ -724,6 +724,10 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_000131E8);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_00013200);
 #endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002A854);
+#endif
+
 #if FW_VERSION == 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002A68C);
 #endif
@@ -770,7 +774,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_0000269C);
 INCLUDE_ASM("nonmatchings/dd_helper", func_000027C4);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_00002A84(s32 arg0) {
     sceKernelDelayThread(0xF4240U);
     func_00006920(arg0 + 0x80, arg0 + 0x64, arg0 + 0x104);
@@ -1004,7 +1008,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_000045DC);
 INCLUDE_ASM("nonmatchings/dd_helper", func_00004748);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_00004C00);
 #endif
 
@@ -1107,7 +1111,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00002800);
 INCLUDE_ASM("nonmatchings/dd_helper", func_00005CC0);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_000026F0);
 #endif
 
@@ -1697,7 +1701,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_0000BFC8);
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000BFF0);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_0000C018(void) {
     sceVshBridge_39B499E0();
 }
@@ -1709,7 +1713,7 @@ void func_0000C018(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 func_0000C034(void) {
     sceVshBridge_7BB63511(0x20);
     return 0;
@@ -1723,7 +1727,7 @@ s32 func_0000C034(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_0000C054(void) {
     sceVshBridge_5317A582();
 }
@@ -1933,7 +1937,7 @@ void func_00006170(s32 arg0, void *arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/dd_helper", func_00006210);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000C950);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000CA1C);
@@ -2009,7 +2013,7 @@ void func_000066CC(struct Unk_func_000006E0_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_00006744(s32 arg0) {
     func_00007B60(arg0 + 0x7C);
 }
@@ -2073,7 +2077,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0000B204);
 INCLUDE_ASM("nonmatchings/dd_helper", func_00006804);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000694C);
 #endif
 
@@ -2083,7 +2087,7 @@ void func_0000694C(struct Unk_func_0000694C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000CF6C);
 #endif
 
@@ -2105,6 +2109,10 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_000069D0);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0000B354);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_00013C98);
+#endif
+
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002B2F8);
 #endif
 
 #if FW_VERSION == 330
@@ -2171,7 +2179,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_0000D6F0);
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000DA04);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000DF30);
 #endif
 
@@ -2235,7 +2243,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00007B6C);
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000E400);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000E798);
 
 s32 func_0000E7C8(s32 arg0, void *arg1) {
@@ -2364,9 +2372,17 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_0000EFE4);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002B430);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002B44C);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002B62C);
+#endif
+
+#if FW_VERSION == 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002B464);
+#endif
 
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000F15C);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000F2AC);
@@ -4174,7 +4190,24 @@ void func_0001E774(M2C_UNK **arg0) {
     *arg0 = &D_0002C0A8;
     scePaf_4E67BB08();
 }
+#endif
 
+#if FW_VERSION == 340
+s32 func_0001E79C(void) {
+    void *sp0;
+    func_0001EBE8((s32) &D_0002D9A4);
+    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    func_0000085C((s32) &D_0002DCB4, &sp0);
+    func_0000082C(&sp0);
+    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    func_0000085C((s32) &D_0002DCC0, &sp0);
+    return func_0000082C(&sp0);
+}
+
+INCLUDE_ASM("nonmatchings/dd_helper", func_0001E7BC);
+#endif
+
+#if FW_VERSION == 330
 s32 func_0001E79C(void) {
     return func_0001EBE8((s32) &D_0002D9A4);
 }
@@ -4189,7 +4222,9 @@ void func_0001E7BC(void) {
     func_000165B0();
     func_0001B46C(0, 0);
 }
+#endif
 
+#if FW_VERSION >= 330
 s32 func_0001E814(void) {
     s32 temp_s0;
 
@@ -4436,7 +4471,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00007F1C);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00007FE4);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C198);
 #endif
 
@@ -4482,7 +4517,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0000B4EC);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00008070);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C1F0);
 #endif
 
@@ -4494,7 +4529,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_000081B0);
 INCLUDE_ASM("nonmatchings/dd_helper", func_000081AC);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_00020A50);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00020C54);
@@ -4524,7 +4559,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00008494);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_000084EC);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 void func_00020DF0(void *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -4701,7 +4736,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_0001052C);
 INCLUDE_ASM("nonmatchings/dd_helper", func_000106B8);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_00022A38);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00022A7C);
@@ -5048,9 +5083,25 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C840);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C858);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C870);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CA58);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C890);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CA7C);
+
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CA8C);
+
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CAA4);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C8A0);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002C8B8);
@@ -5106,9 +5157,25 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CA88);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CAA0);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CAC0);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CCEC);
+
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CCFC);
+
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CD0C);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CAD4);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CD3C);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CAEC);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CAF8);
@@ -5164,9 +5231,27 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CCCC);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CCF0);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CD10);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CF98);
+
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CFAC);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CD30);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CFCC_v340);
+
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CFE4);
+
+INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CFFC);
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CD40);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002CD4C);
@@ -5312,7 +5397,7 @@ void func_000110F8(void) {
 INCLUDE_ASM("nonmatchings/dd_helper", func_000111E4);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_000265E0);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_0002665C);
@@ -5332,7 +5417,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00011310);
 INCLUDE_ASM("nonmatchings/dd_helper", func_00011384);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_00026DA4);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00026DE0);
@@ -5344,7 +5429,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_000113DC);
 INCLUDE_ASM("nonmatchings/dd_helper", func_000119B0);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper", func_00027A84);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00027DCC);
@@ -5420,7 +5505,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_00013F80);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_00013F88);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002D0E0);
 
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0002D1E0);

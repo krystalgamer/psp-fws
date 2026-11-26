@@ -2,3 +2,7 @@
 sceAudiocodec2_AA2ED267 = 0x00000000; // type:func
 sceAudiocodec2_E063D402 = 0x0000003C; // type:func
 sceAudiocodec2_21D5A83F = 0x00000094; // type:func
+// shared names (tools/add_version.py) begin
+D_000028A4 = 0x000028BC; // rom:0x295C
+D_000028A4_v340 = 0x000028A4; // rom:0x2944
+// shared names (tools/add_version.py) end

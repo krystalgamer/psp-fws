@@ -262,7 +262,7 @@ void module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00007AB8);
 #endif
 
@@ -392,7 +392,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_9F3AD1E9);
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForUser_1196472E);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForUser_24EC0641);
 #endif
 
@@ -492,7 +492,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006D34);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006D64);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00007C24);
 #endif
 

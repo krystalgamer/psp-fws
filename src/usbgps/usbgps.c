@@ -35,7 +35,7 @@ INCLUDE_ASM("nonmatchings/usbgps", sceUsbGpsOpen);
 
 INCLUDE_ASM("nonmatchings/usbgps", sceUsbGpsClose);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005518);
 
 INCLUDE_RODATA("nonmatchings/usbgps", D_00005520);
@@ -49,7 +49,7 @@ INCLUDE_ASM("nonmatchings/usbgps", sceUsbGps_63D1F89D);
 INCLUDE_ASM("nonmatchings/usbgps", sceUsbGps_driver_A259CD67);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 s32 sceUsbGps_driver_268F95CA(u32 arg0) {
     s32 temp_a0;
     s32 var_s0;
@@ -159,7 +159,7 @@ INCLUDE_ASM("nonmatchings/usbgps", module_stop);
 INCLUDE_ASM("nonmatchings/usbgps", syslib_ADF12745);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/usbgps", sceUsbGps_driver_A259CD67);
 #endif
 
@@ -174,7 +174,7 @@ INCLUDE_ASM("nonmatchings/usbgps", func_00001528);
 
 INCLUDE_ASM("nonmatchings/usbgps", func_000015BC);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/usbgps", func_000017FC);
 
 INCLUDE_ASM("nonmatchings/usbgps", func_00001914);
@@ -188,7 +188,7 @@ INCLUDE_ASM("nonmatchings/usbgps", func_00001708);
 INCLUDE_ASM("nonmatchings/usbgps", func_00001A80);
 #endif
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/usbgps", func_00001C60);
 #endif
 
@@ -275,7 +275,7 @@ INCLUDE_ASM("nonmatchings/usbgps", func_00002AEC);
 
 INCLUDE_ASM("nonmatchings/usbgps", func_00002BD0);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/usbgps", func_00003024);
 
 INCLUDE_ASM("nonmatchings/usbgps", func_00003158);
@@ -305,7 +305,7 @@ INCLUDE_ASM("nonmatchings/usbgps", func_00002F90);
 
 INCLUDE_ASM("nonmatchings/usbgps", func_00003118);
 
-#if FW_VERSION == 330
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/usbgps", func_00003528);
 #else
 INCLUDE_ASM("nonmatchings/usbgps", func_00003184);
