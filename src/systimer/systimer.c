@@ -8,7 +8,7 @@ INCLUDE_ASM("nonmatchings/systimer", sceSTimerAlloc);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 271
-s32 func_000000E0(s32 arg0, SceSTimerInfo *timer, s32 arg2) {
+s32 systimerhandler(s32 arg0, SceSTimerInfo *timer, s32 arg2) {
     u32 data;
     u32 intrCount;
     u32 cycle;
@@ -37,7 +37,7 @@ stop:
 #endif
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/systimer", func_000000E0);
+INCLUDE_ASM("nonmatchings/systimer", systimerhandler);
 #endif
 
 #if FW_VERSION >= 150

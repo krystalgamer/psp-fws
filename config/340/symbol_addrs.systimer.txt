@@ -26,3 +26,4 @@ D_00000B10_v340 = 0x00000B10; // rom:0xBB0
 // shared names (tools/add_version.py) end
 _sceSTimerGetCount = 0x000002CC; // type:func
 _sceSTimerStopCount = 0x000002B0; // type:func
+systimerhandler = 0x000000E0; // type:func

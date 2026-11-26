@@ -26,3 +26,4 @@ func_00000878 = 0x00000870; // type:func rom:0x8F0
 func_000008F0 = 0x000008E8; // type:func rom:0x968
 // shared names (tools/add_version.py) end
 g_timerCB = 0x00000B30;
+systimerhandler = 0x000000E0; // type:func
