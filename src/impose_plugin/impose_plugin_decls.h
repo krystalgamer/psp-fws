@@ -17,13 +17,14 @@ struct Unk_func_00000180_0 {
 };
 
 extern s32 D_000013A4;
-extern M2C_UNK D_00001434;
+extern s32 D_00001434;
 extern M2C_UNK D_000016F4;
 extern M2C_UNK D_00001734;
 extern s32 D_0000189C;
 
 void func_0000015C(struct Unk_func_0000015C_0 *arg0);
 void func_00000180(struct Unk_func_00000180_0 *arg0);
+void func_000003BC_v150(s32 arg0);
 void func_00000964(void);
 void func_00000BAC(s32 arg0);
 void func_00000CDC(void);

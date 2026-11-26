@@ -1,3 +1,4 @@
+/* cflags[150]: -Os */
 /* cflags[100]: -Os */
 #include "common.h"
 #include "impose_plugin_decls.h"
@@ -175,7 +176,18 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_000003BC_v152);
 #endif
 
 #if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/impose_plugin", func_000003BC_v150);
+void func_000003BC_v150(s32 arg0) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_000013A4);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(s32), 0xA4)(arg0 != 0);
+        }
+    }
+}
 #endif
 
 #if FW_VERSION < 282
@@ -292,7 +304,7 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_00000C04);
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000C70);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000CDC);
 #else
 void func_00000CDC(void) {
