@@ -70,7 +70,7 @@ s32 module_reboot_before(void) {
 INCLUDE_ASM("nonmatchings/led", module_reboot_before);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/led", sceLedInit);
 #else
 s32 sceLedInit(void) {
@@ -85,7 +85,7 @@ s32 sceLedInit(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/led", sceLedEnd);
 #else
 s32 sceLedEnd(void) {
