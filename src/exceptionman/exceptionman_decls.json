@@ -1,8 +1,5 @@
 {
  "funcs": {
-  "sceKernelRegisterExceptionHandler": "void sceKernelRegisterExceptionHandler(s32 arg0, s32 arg1);",
-  "sceKernelRegisterPriorityExceptionHandler": "s32 sceKernelRegisterPriorityExceptionHandler(s32, s32, s32);",
-  "sceKernelGetActiveDefaultExceptionHandler": "s32 sceKernelGetActiveDefaultExceptionHandler(void);",
   "func_000000F4": "s32 func_000000F4(void);",
   "func_0000011C": "void func_0000011C(void);",
   "func_0000051C": "s32 func_0000051C(void);",
@@ -11,6 +8,9 @@
   "func_00000A80": "s32 func_00000A80();",
   "func_00000AAC": "M2C_UNK func_00000AAC(s32);",
   "func_00000B0C": "s32 func_00000B0C(s32 arg0);",
+  "sceKernelGetActiveDefaultExceptionHandler": "s32 sceKernelGetActiveDefaultExceptionHandler(void);",
+  "sceKernelRegisterExceptionHandler": "void sceKernelRegisterExceptionHandler(s32 arg0, s32 arg1);",
+  "sceKernelRegisterPriorityExceptionHandler": "s32 sceKernelRegisterPriorityExceptionHandler(s32, s32, s32);",
   "syslib_D3744BE0": "M2C_UNK syslib_D3744BE0();"
  },
  "vars": {

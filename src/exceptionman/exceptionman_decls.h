@@ -7,9 +7,6 @@
 extern s32 D_00002400;
 extern M2C_UNK func_00000A28;
 
-void sceKernelRegisterExceptionHandler(s32 arg0, s32 arg1);
-s32 sceKernelRegisterPriorityExceptionHandler(s32, s32, s32);
-s32 sceKernelGetActiveDefaultExceptionHandler(void);
 s32 func_000000F4(void);
 void func_0000011C(void);
 s32 func_0000051C(void);
@@ -18,6 +15,9 @@ s32 func_00000744(s32 arg0);
 s32 func_00000A80();
 M2C_UNK func_00000AAC(s32);
 s32 func_00000B0C(s32 arg0);
+s32 sceKernelGetActiveDefaultExceptionHandler(void);
+void sceKernelRegisterExceptionHandler(s32 arg0, s32 arg1);
+s32 sceKernelRegisterPriorityExceptionHandler(s32, s32, s32);
 M2C_UNK syslib_D3744BE0();
 
 #endif
