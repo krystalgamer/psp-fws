@@ -81,6 +81,7 @@ s32 func_00005D20(s32);
 u32 func_00005DE0(u32 arg0);
 s32 func_00005EF4(s32);
 s32 func_00006388(s32);
+void func_0000646C(void *arg0, void *arg1, u32 arg2, s32 arg3);
 s32 func_0000649C(s32);
 void func_000064A8(void *arg0, void *arg1, u32 arg2, s32 arg3);
 void func_00006558(void);

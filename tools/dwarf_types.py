@@ -37,9 +37,20 @@ def header_names():
 def order(defs):
     """Definitions in an order that compiles: by-value dependencies first."""
     def deps(text):
+        is_typedef = text.startswith("typedef ")
         body = text.split("{", 1)[1] if "{" in text else text
-        d = set(re.findall(r"\b((?:struct|union|enum) \w+)\s+(?!\*)\w", body))
-        d |= {f"typedef {w}" for w in re.findall(r"\b(\w+)\b", body)}
+        d = set()
+        if not is_typedef or "[" in body:  # by-value aggregates need the definition
+            d |= set(re.findall(r"\b((?:struct|union|enum) \w+)\s+(?!\*)\w", body))
+        # typedef names used (not tags after struct/union/enum, not the declared name)
+        words = re.findall(r"(?<!struct )(?<!union )(?<!enum )\b([A-Za-z_]\w*)\b", body)
+        d |= {f"typedef {w}" for w in words}
+        if not is_typedef:
+            # a typedef'd struct used by value needs the struct itself
+            for w in re.findall(r"^\s+([A-Za-z_]\w*)\s+(?!\*)\w+\s*(?:\[[^\]]*\])*\s*[;:]", body, re.M):
+                tm = re.match(r"typedef ((?:struct|union) \w+) (\w+);$", defs.get(f"typedef {w}", ""))
+                if tm:
+                    d.add(tm[1])
         return d
     out, done, todo = [], set(), dict(defs)
     while todo:

@@ -446,7 +446,13 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000060F8);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00006380);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000646C);
+void func_0000646C(void *arg0, void *arg1, u32 arg2, s32 arg3) {
+    if (M2C_FIELD(arg0, s32 *, 4) != 1) {
+        sceNetInetSend(M2C_FIELD(arg0, s32 *, 0x24), arg1, arg2, arg3);
+    } else {
+        func_0000B598(arg0);
+    }
+}
 
 void func_000064A8(void *arg0, void *arg1, u32 arg2, s32 arg3) {
     if (M2C_FIELD(arg0, s32 *, 4) != 1) {
