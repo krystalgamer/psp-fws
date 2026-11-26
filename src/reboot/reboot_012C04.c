@@ -1,3 +1,5 @@
+/* compiler[151]: 1.6.1 */
+/* compiler[150]: 1.6.1 */
 #include "common.h"
 #include "reboot_decls.h"
 
