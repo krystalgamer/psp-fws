@@ -17,12 +17,24 @@ def fwnum(v):
 def asm_names(text, ver, versions):
     """Names whose INCLUDE_ASM is compiled for `ver`."""
     v = fwnum(ver)
-    return [e.name for e in FM.parse(text, versions) if e.kind == "asm" and v in e.vers]
+    return [e.name for e in FM.parse_ro(text, versions) if e.kind == "asm" and v in e.vers]
 
 
 def has_c(text, ver, versions, name):
     v = fwnum(ver)
-    return any(e.kind == "cfunc" and e.name == name and v in e.vers for e in FM.parse(text, versions))
+    return name in _c_names(text, tuple(versions), v)
+
+
+def _c_names(text, versions, v):
+    key = (hash(text), len(text), versions, v)
+    if key not in _CN:
+        if len(_CN) > 256:
+            _CN.clear()
+        _CN[key] = {e.name for e in FM.parse_ro(text, versions) if e.kind == "cfunc" and v in e.vers}
+    return _CN[key]
+
+
+_CN = {}
 
 
 def put_c(text, ver, versions, name, body):

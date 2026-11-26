@@ -114,6 +114,20 @@ def parse(text, versions):
     return [e for e in out if e.vers]
 
 
+_CACHE = {}
+
+
+def parse_ro(text, versions):
+    """parse() for read-only use, cached by content (shared sources are re-read
+    for every function during verification)."""
+    key = (hash(text), len(text), tuple(versions))
+    if key not in _CACHE:
+        if len(_CACHE) > 64:
+            _CACHE.clear()
+        _CACHE[key] = parse(text, versions)
+    return _CACHE[key]
+
+
 def condition(vs, versions):
     """Readable #if expression selecting exactly vs among versions."""
     order = sorted(versions)
