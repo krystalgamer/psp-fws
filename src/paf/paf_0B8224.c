@@ -78,7 +78,9 @@ s32 func_000B8C4C(void) {
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_78F94D84);
+#endif
 
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_5822F12A);
 #else
 s32 scePaf_5822F12A(void) {
@@ -110,17 +112,11 @@ s32 scePaf_EA39A7C1(void) {
     return D_001A52C0;
 }
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_6B1E90C7);
 #endif
 
-#if FW_VERSION == 100
-void scePaf_6B1E90C7(void) {
-    D_001A52BC += 1;
-}
-#endif
-
-#if FW_VERSION == 282
+#if FW_VERSION == 150 || FW_VERSION == 282
 void scePaf_6B1E90C7(void) {
     s32 temp_a0;
 
@@ -130,33 +126,39 @@ void scePaf_6B1E90C7(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 100
+void scePaf_6B1E90C7(void) {
+    D_001A52BC += 1;
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_66907719);
 #endif
 
-#if FW_VERSION == 100
-void scePaf_66907719(void) {
-    D_001A52BC -= 1;
-}
-#endif
-
-#if FW_VERSION == 282
+#if FW_VERSION == 150 || FW_VERSION == 282
 void scePaf_66907719(void) {
     s32 temp_a0;
 
     temp_a0 = sceKernelSuspendDispatchThread();
     D_001A52BC -= 1;
     sceKernelResumeDispatchThread(temp_a0);
+}
+#endif
+
+#if FW_VERSION == 100
+void scePaf_66907719(void) {
+    D_001A52BC -= 1;
 }
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_D5F3BAB1);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_AAD0EE78);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void scePaf_AAD0EE78(s32 arg0) {
     D_00138F9C = arg0;
 }
@@ -168,11 +170,11 @@ void scePaf_AAD0EE78(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_E69C3B1B);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void scePaf_E69C3B1B(s32 arg0) {
     D_00138FA0 = arg0;
 }
@@ -218,17 +220,11 @@ s32 func_000B9280(void) {
     return 1;
 }
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_A044BFC0);
 #endif
 
-#if FW_VERSION == 100
-void scePaf_A044BFC0(void) {
-    D_001A52FC += 1;
-}
-#endif
-
-#if FW_VERSION == 282
+#if FW_VERSION == 150 || FW_VERSION == 282
 void scePaf_A044BFC0(void) {
     s32 temp_a0;
 
@@ -238,23 +234,29 @@ void scePaf_A044BFC0(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 100
+void scePaf_A044BFC0(void) {
+    D_001A52FC += 1;
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_F1CF9579);
 #endif
 
-#if FW_VERSION == 100
-void scePaf_F1CF9579(void) {
-    D_001A52FC -= 1;
-}
-#endif
-
-#if FW_VERSION == 282
+#if FW_VERSION == 150 || FW_VERSION == 282
 void scePaf_F1CF9579(void) {
     s32 temp_a0;
 
     temp_a0 = sceKernelSuspendDispatchThread();
     D_001A52FC -= 1;
     sceKernelResumeDispatchThread(temp_a0);
+}
+#endif
+
+#if FW_VERSION == 100
+void scePaf_F1CF9579(void) {
+    D_001A52FC -= 1;
 }
 #endif
 

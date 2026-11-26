@@ -51,8 +51,20 @@ void scePaf_1BD0E905(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     func_0004738C(temp_v0, arg0, arg3, arg4);
     func_00042800((s32) temp_v0, arg1, arg2);
 }
-#else
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/paf_042054", scePaf_50B0C0A1);
+#endif
+
+#if FW_VERSION == 150
+void scePaf_50B0C0A1(s32 arg0, s32 arg1) {
+    void *temp_v0;
+
+    temp_v0 = scePaf_B7E6052B(0x10);
+    func_0003D9CC(temp_v0, arg0, arg1);
+    func_00042800((s32) temp_v0, 0, 4);
+}
 #endif
 
 #if FW_VERSION == 282

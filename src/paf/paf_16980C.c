@@ -2,11 +2,11 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION >= 150 && FW_VERSION < 270
+#if FW_VERSION >= 151 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_16980C", func_0016980C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void func_0016980C(struct Unk_func_0016980C_0 *arg0) {
     func_0016B084(M2C_FIELD(arg0, s32 *, 0x14) + 0x14);
 }

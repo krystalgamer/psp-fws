@@ -11,11 +11,11 @@ M2C_UNK *func_0009D6D0(void) {
 
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D6DC);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D75C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void func_0009D75C(s32 arg0) {
     func_0006428C(arg0 + 0x434);
 }
@@ -27,11 +27,11 @@ void func_0009D75C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D778);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 func_0009D778(void) {
     return 0x27DE;
 }
@@ -98,11 +98,11 @@ void func_0009DB28(struct Unk_func_0009DB28_0 *arg0, s32 arg1, s32 arg2, s32 arg
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 280
+#if FW_VERSION >= 151 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_00054588);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 func_00054588(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x408);
 }

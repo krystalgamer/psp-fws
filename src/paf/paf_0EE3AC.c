@@ -96,11 +96,11 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EED10);
 
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EED6C);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EEDD0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void func_000EEDD0(struct Unk_vt_func_000EEDD0_arg0 **arg0) {
     func_0011E438(2);
     func_0011D80C();

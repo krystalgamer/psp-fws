@@ -6,7 +6,19 @@ void func_000C31CC(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
+#if FW_VERSION != 150
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C31F4);
+#else
+void func_000C31F4(void) {
+    scePaf_D35B454A(D_001A53FC);
+    func_0007DD34(D_001A53FC);
+    sceDisplayWaitVblankStart();
+    D_001A53FC = 0;
+    D_001A5400 = 0;
+    D_001A5404 = 0;
+    func_00119F0C();
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3250);
 
@@ -43,11 +55,11 @@ M2C_UNK *func_0006B024(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
+#if FW_VERSION >= 151 && FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_0006B030);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void func_0006B030(s32 arg0) {
     D_00138860 = arg0;
 }
@@ -131,11 +143,11 @@ s32 func_000C3D20(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3D30);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_0006B960);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 func_0006B960(s32 arg0) {
     s32 temp_s0;
 

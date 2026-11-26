@@ -71,11 +71,11 @@ INCLUDE_ASM("nonmatchings/paf_117408", func_000BB08C);
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BB0D0);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
+#if FW_VERSION >= 151 && FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BB228);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 func_000BB228(void *arg0) {
     s32 temp_v0;
     void *temp_v1;
@@ -100,11 +100,11 @@ s32 func_000BB228(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
+#if FW_VERSION >= 151 && FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BB2A4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 func_000BB2A4(void *arg0) {
     s32 var_s1;
     s32 var_s2;
