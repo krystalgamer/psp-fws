@@ -70,9 +70,31 @@ s32 module_reboot_before(void) {
 INCLUDE_ASM("nonmatchings/led", module_reboot_before);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/led", sceLedInit);
+#else
+s32 sceLedInit(void) {
+    sceSysconCtrlLED(0, 1);
+    sceSysconCtrlLED(1, 1);
+    sceGpioSetPortMode(6, 0);
+    sceGpioSetPortMode(7, 0);
+    sceKernelRegisterSubIntrHandler(0x1E, 0x19, &func_00000000, 0);
+    sceKernelEnableSubIntr(0x1E, 0x19);
+    sceKernelRegisterSysEventHandler(&D_000008A0);
+    return 0;
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/led", sceLedEnd);
+#else
+s32 sceLedEnd(void) {
+    sceKernelUnregisterSysEventHandler(&D_000008A0);
+    sceKernelReleaseSubIntrHandler(0x1E, 0x19);
+    sceGpioPortClear(0xC0);
+    return 0;
+}
+#endif
 
 #if FW_VERSION < 282
 s32 sceLedSuspend(void) {

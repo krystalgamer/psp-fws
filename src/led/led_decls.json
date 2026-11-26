@@ -10,19 +10,21 @@
   "sceKernelDisableSubIntr": "M2C_UNK sceKernelDisableSubIntr(M2C_UNK, M2C_UNK);",
   "sceKernelEnableSubIntr": "M2C_UNK sceKernelEnableSubIntr(M2C_UNK, M2C_UNK);",
   "sceKernelRegisterSubIntrHandler": "M2C_UNK sceKernelRegisterSubIntrHandler(M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK);",
+  "sceKernelRegisterSysEventHandler": "M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);",
   "sceKernelReleaseSubIntrHandler": "M2C_UNK sceKernelReleaseSubIntrHandler(M2C_UNK, M2C_UNK);",
+  "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
+  "sceLedEnd": "s32 sceLedEnd(void);",
+  "sceLedInit": "s32 sceLedInit(void);",
   "sceLedResume": "s32 sceLedResume(void);",
   "sceLedSuspend": "s32 sceLedSuspend(void);",
-  "sceKernelRegisterSysEventHandler": "M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);",
-  "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
   "sceSysconCtrlLED": "M2C_UNK sceSysconCtrlLED(M2C_UNK, M2C_UNK);",
   "sceSysconGetWlanPowerCtrl": "s32 sceSysconGetWlanPowerCtrl();"
  },
  "vars": {
-  "D_000008A0": "extern M2C_UNK D_000008A0;",
+  "D_000008A0": "extern s32 D_000008A0;",
   "D_00000B30": "extern s32 D_00000B30;",
   "D_00000B80": "extern s32 D_00000B80;",
   "D_00000BA0": "extern s32 D_00000BA0;",
-  "func_00000000": "extern M2C_UNK func_00000000;"
+  "func_00000000": "extern s32 func_00000000;"
  }
 }
