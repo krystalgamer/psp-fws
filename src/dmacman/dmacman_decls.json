@@ -1,7 +1,7 @@
 {
  "funcs": {
-  "sceKernelDmaOnDebugMode": "s32 sceKernelDmaOnDebugMode(void);",
-  "func_00001388": "s32 func_00001388(void **arg0, u32 arg1);"
+  "func_00001388": "s32 func_00001388(void **arg0, u32 arg1);",
+  "sceKernelDmaOnDebugMode": "s32 sceKernelDmaOnDebugMode(void);"
  },
  "vars": {}
 }

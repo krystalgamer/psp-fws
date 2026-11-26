@@ -5,7 +5,7 @@
 #include "m2c_macros.h"
 
 
-s32 sceKernelDmaOnDebugMode(void);
 s32 func_00001388(void **arg0, u32 arg1);
+s32 sceKernelDmaOnDebugMode(void);
 
 #endif
