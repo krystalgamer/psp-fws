@@ -482,6 +482,8 @@ def main():
     ap.add_argument("--names", help="file with function names to try (one per line)")
     ap.add_argument("--fast", action="store_true", help="only compile with each file's own setting")
     ap.add_argument("--min-size", type=lambda x: int(x, 0), default=0)
+    ap.add_argument("--jobs", type=int, default=1,
+                    help="prescreen functions in parallel, then accept matches one by one")
     ap.add_argument("--no-cache", action="store_true", help="retry functions that failed in other versions")
     ap.add_argument("--stats-only", action="store_true",
                     help="only record which settings reproduce each draft (tmp/auto_stats); change nothing")
@@ -530,41 +532,62 @@ def main():
         t = re.sub(r"/\*.*?\*/", "", mod.funcs[n][2].read_text())
         t = re.sub(r"\b(?:func|D|jtbl)_[0-9A-F]{8}\b|\.L[0-9A-F]{8}\b", "@", t)
         return hashlib.sha1((t + str(mod.setting)).encode()).hexdigest()
-    for i, name in enumerate(names):
-        key = asm_key(name) if mod.shared else None
-        if key in failed:
-            print(f"[{i+1}/{len(names)}] {name}: - (failed before)", flush=True)
-            continue
-        header = mod.header()
-        try:
-            res = try_func(mod, name, header)
-        except subprocess.TimeoutExpired:
-            res = None
-        if args.stats_only:
-            print(f"[{i+1}/{len(names)}] {name}: {'match' if res else '-'} {mod.stats.get(name, [])}", flush=True)
-            continue
-        if not res and key:
-            failed.add(key)
-            if i % 50 == 0:
-                fail_path.parent.mkdir(exist_ok=True)
-                fail_path.write_text(json.dumps(sorted(failed)))
-        if res:
-            new_funcs, new_vars, sig, body = res
-            mod.store["funcs"].update(new_funcs)
-            mod.store["funcs"][name] = sig
-            mod.store["vars"].update(new_vars)
-            f = owner[name]
-            if mod.shared:
-                srcs[f] = FB.put_c(srcs[f], args.version, mod.fwvers, name, body)
-            else:
-                srcs[f] = re.sub(rf'^INCLUDE_ASM\("[^"]+", {name}\);\n', lambda _: body, srcs[f], count=1, flags=re.M)
-            if re.search(r"\b(shiftK1|k1IsUserMode|getK1|setK1)\(", body) and '#include "k1.h"' not in srcs[f]:
-                srcs[f] = srcs[f].replace('#include "common.h"\n', '#include "common.h"\n#include "k1.h"\n', 1)
-            f.write_text(srcs[f])
-            mod.write_decls()
-            matched += 1
-            accepted_now.append(name)
-        print(f"[{i+1}/{len(names)}] {name}: {'MATCH' if res else '-'}", flush=True)
+    total = len(names)
+    all_names = list(names)
+    parallel = args.jobs > 1 and len(names) > args.jobs
+    pending = list(names)
+    while True:
+        names = prescreen(mod, pending, args.jobs, failed, asm_key if mod.shared else None, args.stats_only) \
+            if parallel else pending
+        before = matched
+        before_acc = len(accepted_now)
+        for i, name in enumerate(names):
+            key = asm_key(name) if mod.shared else None
+            if key in failed:
+                print(f"[{i+1}/{len(names)}] {name}: - (failed before)", flush=True)
+                continue
+            header = mod.header()
+            try:
+                res = try_func(mod, name, header)
+            except subprocess.TimeoutExpired:
+                res = None
+            if args.stats_only:
+                print(f"[{i+1}/{len(names)}] {name}: {'match' if res else '-'} {mod.stats.get(name, [])}", flush=True)
+                continue
+            if not res and key:
+                failed.add(key)
+                if i % 50 == 0:
+                    fail_path.parent.mkdir(exist_ok=True)
+                    fail_path.write_text(json.dumps(sorted(failed)))
+            if res:
+                new_funcs, new_vars, sig, body = res
+                mod.store["funcs"].update(new_funcs)
+                mod.store["funcs"][name] = sig
+                mod.store["vars"].update(new_vars)
+                f = owner[name]
+                if mod.shared:
+                    srcs[f] = FB.put_c(srcs[f], args.version, mod.fwvers, name, body)
+                else:
+                    srcs[f] = re.sub(rf'^INCLUDE_ASM\("[^"]+", {name}\);\n', lambda _: body, srcs[f], count=1, flags=re.M)
+                if re.search(r"\b(shiftK1|k1IsUserMode|getK1|setK1)\(", body) and '#include "k1.h"' not in srcs[f]:
+                    srcs[f] = srcs[f].replace('#include "common.h"\n', '#include "common.h"\n#include "k1.h"\n', 1)
+                f.write_text(srcs[f])
+                mod.write_decls()
+                matched += 1
+                accepted_now.append(name)
+            print(f"[{i+1}/{len(names)}] {name}: {'MATCH' if res else '-'}", flush=True)
+        if not parallel or matched == before or args.stats_only:
+            break
+        # newly accepted prototypes may let earlier failures match: another
+        # round for the functions that reference what this round accepted
+        new = set(accepted_now[before_acc:])
+        pat = re.compile(r"\b(" + "|".join(map(re.escape, new)) + r")\b")
+        pending = [n for n in pending if n not in accepted_now and pat.search(mod.funcs[n][2].read_text())]
+        if not pending:
+            break
+    if parallel and mod.shared and not args.stats_only:
+        failed.update(asm_key(n) for n in all_names if n not in accepted_now)
+    names = [None] * total
     if mod.shared:
         fail_path.parent.mkdir(exist_ok=True)
         fail_path.write_text(json.dumps(sorted(failed)))
@@ -582,6 +605,38 @@ def main():
     if args.stats_only:
         return
     verify_and_revert(mod, args, accepted_now)
+
+
+_PS = {}
+
+
+def _prescreen_one(name):
+    mod, header = _PS["mod"], _PS["header"]
+    try:
+        res = try_func(mod, name, header)
+    except subprocess.TimeoutExpired:
+        res = None
+    return name, bool(res), mod.stats.get(name, []), mod.scores.get(name)
+
+
+def prescreen(mod, names, jobs, failed, key_of, stats_only):
+    """Try every function in parallel against the starting header; only the
+    ones that match are tried again (sequentially, against the growing header)."""
+    import multiprocessing as mp
+    todo = [n for n in names if not (key_of and key_of(n) in failed)]
+    _PS["mod"], _PS["header"] = mod, mod.header()
+    hits = set()
+    with mp.get_context("fork").Pool(jobs) as pool:
+        for k, (n, ok, st, sc) in enumerate(pool.imap_unordered(_prescreen_one, todo, chunksize=4)):
+            mod.stats[n] = sorted(set(mod.stats.get(n, [])) | set(st))
+            if sc is not None:
+                mod.scores[n] = sc
+            if ok:
+                hits.add(n)
+            if k % 100 == 0:
+                print(f"prescreen {k}/{len(todo)}: {len(hits)} candidates", flush=True)
+    print(f"prescreen: {len(hits)}/{len(todo)} candidates", flush=True)
+    return [n for n in names if n in hits] if not stats_only else []
 
 
 def revert(mod, args, names):
@@ -610,8 +665,55 @@ def verify_and_revert(mod, args, accepted_now=()):
         if full_build_ok(args):
             return
     rest = [n for n in accepted_now if n not in strings]
-    revert(mod, args, rest)
-    print(f"reverted {len(rest)} more functions (full build mismatch)")
+    culprits = find_culprits(mod, args, rest)
+    if culprits is None:
+        revert(mod, args, rest)
+        print(f"reverted {len(rest)} more functions (full build mismatch)")
+    else:
+        print(f"reverted {len(culprits)} functions that change other code: {', '.join(culprits[:20])}")
+
+
+def find_culprits(mod, args, names, max_builds=80):
+    """Accepted functions whose removal makes the full build match, found by
+    binary search over prefixes (each found culprit stays reverted); None if
+    that fails. Catches e.g. a new prototype changing how existing C compiles."""
+    import copy
+    texts = {f: f.read_text() for f in mod.files if f.exists()}
+    store = copy.deepcopy(mod.store)
+    builds = 0
+
+    def state(reverted):
+        nonlocal builds
+        for f, t in texts.items():
+            f.write_text(t)
+        mod.store = copy.deepcopy(store)
+        if reverted:
+            revert(mod, args, list(reverted))
+        else:
+            mod.write_decls()
+        builds += 1
+        return full_build_ok(args)
+    if not state(names):
+        state([])
+        return None
+    culprits, pool = [], list(names)
+    while not state(culprits):
+        lo, hi = 0, len(pool)  # reverting culprits + pool[:hi] works
+        while hi - lo > 1:
+            mid = (lo + hi) // 2
+            if state(culprits + pool[:mid]):
+                hi = mid
+            else:
+                lo = mid
+            if builds > max_builds:
+                state([])
+                return None
+        culprits.append(pool[hi - 1])
+        pool = pool[:hi - 1]
+        if not pool and not state(culprits):
+            state([])
+            return None
+    return culprits
 
 
 def first_displaced(mod, args):
