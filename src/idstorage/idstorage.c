@@ -99,7 +99,7 @@ s32 module_start(void) {
     return 0;
 }
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/idstorage", module_reboot_before);
 #else
 s32 module_reboot_before(void) {
@@ -111,7 +111,7 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageEnd);
 #else
 s32 sceIdStorageEnd(void) {
