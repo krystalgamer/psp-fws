@@ -1,24 +1,24 @@
 {
  "funcs": {
-  "sceKernelRegisterDebugWrite": "M2C_UNK sceKernelRegisterDebugWrite(M2C_UNK *);",
-  "sceKernelDebugEchoSet": "M2C_UNK sceKernelDebugEchoSet(M2C_UNK);",
-  "sceKernelRegisterDebugPutchar": "M2C_UNK sceKernelRegisterDebugPutchar(M2C_UNK *);",
-  "sceKernelRegisterDebugRead": "M2C_UNK sceKernelRegisterDebugRead(M2C_UNK *);",
-  "sceKernelUart4SendCharFix": "void sceKernelUart4SendCharFix(s8 arg0);",
-  "sceKernelUart4SendChar": "s32 sceKernelUart4SendChar(s8 arg0);",
-  "sceKernelUart4PostChar": "s32 sceKernelUart4PostChar(s32);",
-  "sceKernelUart4Init": "M2C_UNK sceKernelUart4Init();",
   "func_00000398": "void func_00000398(void);",
   "func_00000458": "s32 func_00000458(void);",
   "func_00000480": "void func_00000480(void);",
   "func_00000504": "void func_00000504(void);",
+  "module_bootstart": "s32 module_bootstart(void);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
-  "module_bootstart": "s32 module_bootstart(void);"
+  "sceKernelDebugEchoSet": "M2C_UNK sceKernelDebugEchoSet(M2C_UNK);",
+  "sceKernelRegisterDebugPutchar": "M2C_UNK sceKernelRegisterDebugPutchar(M2C_UNK *);",
+  "sceKernelRegisterDebugRead": "M2C_UNK sceKernelRegisterDebugRead(M2C_UNK *);",
+  "sceKernelRegisterDebugWrite": "M2C_UNK sceKernelRegisterDebugWrite(M2C_UNK *);",
+  "sceKernelUart4Init": "M2C_UNK sceKernelUart4Init();",
+  "sceKernelUart4PostChar": "s32 sceKernelUart4PostChar(s32);",
+  "sceKernelUart4SendChar": "s32 sceKernelUart4SendChar(s8 arg0);",
+  "sceKernelUart4SendCharFix": "void sceKernelUart4SendCharFix(s8 arg0);"
  },
  "vars": {
-  "sceKernelUart4SendBytesFix": "extern M2C_UNK sceKernelUart4SendBytesFix;",
+  "func_00000000": "extern M2C_UNK func_00000000;",
   "sceKernelUart4ReceiveBytesFix": "extern M2C_UNK sceKernelUart4ReceiveBytesFix;",
-  "func_00000000": "extern M2C_UNK func_00000000;"
+  "sceKernelUart4SendBytesFix": "extern M2C_UNK sceKernelUart4SendBytesFix;"
  }
 }
