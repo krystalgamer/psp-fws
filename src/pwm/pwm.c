@@ -19,7 +19,7 @@ s32 module_start(void) {
     return 0;
 }
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pwm", module_reboot_before);
 #else
 s32 module_reboot_before(void) {
@@ -28,7 +28,7 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pwm", scePwmEnd);
 #else
 s32 scePwmEnd(void) {
