@@ -1,9 +1,29 @@
 {
+ "dwarf": [
+  "_sce_pspnet_resolver_delete_ctx",
+  "_sce_pspnet_resolver_get_resolver_ctx",
+  "_sce_pspnet_resolver_net_init",
+  "_sce_pspnet_resolver_strncasecmp",
+  "create_query_message",
+  "get_domain_name",
+  "parse_dns_header",
+  "sceNetResolverCreate",
+  "sceNetResolverInit",
+  "sceNetResolverStartAtoN",
+  "sceNetResolverStartNtoA",
+  "sceNetResolverStop",
+  "send_query_message",
+  "set_domain_name",
+  "skip_question_section"
+ ],
  "funcs": {
-  "_sce_pspnet_resolver_delete_ctx": "s32 _sce_pspnet_resolver_delete_ctx(s32);",
+  "_sce_pspnet_resolver_delete_ctx": "int _sce_pspnet_resolver_delete_ctx(int id);",
+  "_sce_pspnet_resolver_get_resolver_ctx": "struct _sce_pspnet_resolver_ctx_list *_sce_pspnet_resolver_get_resolver_ctx(int id, struct _sce_pspnet_resolver_ctx_list **prev_ptr);",
   "_sce_pspnet_resolver_init": "s32 _sce_pspnet_resolver_init(void);",
-  "_sce_pspnet_resolver_net_init": "s32 _sce_pspnet_resolver_net_init(void);",
+  "_sce_pspnet_resolver_net_init": "int _sce_pspnet_resolver_net_init(void);",
+  "_sce_pspnet_resolver_strncasecmp": "int _sce_pspnet_resolver_strncasecmp(const char *s1, const char *s2, size_t len);",
   "_sce_pspnet_resolver_term": "s32 _sce_pspnet_resolver_term(void);",
+  "create_query_message": "int create_query_message(enum _sce_pspnet_resolver_flag flag, const char *hostname, char *buf, size_t *buflen, u_int16_t *id);",
   "func_0000055C": "s32 func_0000055C(void);",
   "func_000005B0": "s32 func_000005B0(void);",
   "func_0000060C": "s32 func_0000060C(s32);",
@@ -19,11 +39,24 @@
   "func_00001CB8": "u8 *func_00001CB8(u8 *arg0, u8 *arg1, s32 arg2);",
   "func_00001D58": "void func_00001D58(s32 arg0, s32 arg1);",
   "func_00001FE0": "u8 *func_00001FE0(u8 *arg0, u8 *arg1);",
+  "get_domain_name": "int get_domain_name(const char *src, const char *src_border, char *dst, char **dst_border, const char *buf_top, const char *buf_border);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
+  "parse_dns_header": "int parse_dns_header(const char **top_ptr, const char *border, u_int16_t id, u_int16_t *qdcount, u_int16_t *ancount, int *tryagain);",
   "sceKernelCheckThreadStack": "s32 sceKernelCheckThreadStack(void);",
+  "sceNetResolverCreate": "int sceNetResolverCreate(int *rid, void *buf, size_t buflen);",
   "sceNetResolverDelete": "s32 sceNetResolverDelete(s32 arg0);",
-  "sceNetResolverTerm": "s32 sceNetResolverTerm(void);"
+  "sceNetResolverInit": "int sceNetResolverInit(void);",
+  "sceNetResolverStartAtoN": "int sceNetResolverStartAtoN(int rid, const struct SceNetInetInAddr *addr, char *hostname, size_t hostname_len, u_int timeout, int retry);",
+  "sceNetResolverStartNtoA": "int sceNetResolverStartNtoA(int rid, const char *hostname, struct SceNetInetInAddr *addr, u_int timeout, int retry);",
+  "sceNetResolverStop": "int sceNetResolverStop(int rid);",
+  "sceNetResolverTerm": "s32 sceNetResolverTerm(void);",
+  "send_query_message": "int send_query_message(struct _sce_pspnet_resolver_ctx_list *entry, const char *buf, size_t buflen, const struct SceNetInetInAddr *server, u_int timeout);",
+  "set_domain_name": "int set_domain_name(char **top_ptr, char *border, const char *hostname);",
+  "skip_question_section": "int skip_question_section(const char **top_ptr, const char *border, const char *buf_top, const char *qname, const char *qname_border, u_int16_t qdcount);"
+ },
+ "types": {
+  "000_dwarf": "/* devkit 0.6.0 DWARF (tools/dwarf_types.py) */\nstruct SceKernelSysClock;\nstruct SceNetInetInAddr;\nstruct SceNetInetSockaddrIn;\nstruct _sce_pspnet_resolver_ctx_list;\nstruct _sce_pspnet_resolver_dns_header;\n\ntypedef unsigned int SceUInt32;\n\ntypedef unsigned int u_int;\n\ntypedef unsigned int size_t;\n\nenum _sce_pspnet_resolver_flag {\n    _SCE_PSPNET_RESOLVER_NTOA = 0,\n    _SCE_PSPNET_RESOLVER_ATON = 1,\n} /* size 0x4 */;\n\ntypedef short unsigned int u_int16_t;\n\ntypedef unsigned char SceUChar8;\n\ntypedef unsigned int SceUInt;\n\ntypedef unsigned char u_int8_t;\n\ntypedef short unsigned int SceUShort16;\n\ntypedef char SceChar8;\n\ntypedef unsigned int u_int32_t;\n\nstruct SceNetInetInAddr {\n    SceUInt32 s_addr;\n} /* size 0x4 */;\n\nstruct _sce_pspnet_resolver_ctx_list {\n    int rid;\n    struct _sce_pspnet_resolver_ctx_list *next;\n    void *buf;\n    size_t buflen;\n    int sockid;\n    int stopped;\n    int resolving;\n} /* size 0x1C */;\n\nstruct SceKernelSysClock {\n    SceUInt low;\n    SceUInt hi;\n} /* size 0x8 */;\n\nstruct _sce_pspnet_resolver_dns_header {\n    u_int16_t id;\n    u_int8_t rd : 1;\n    u_int8_t tc : 1;\n    u_int8_t aa : 1;\n    u_int8_t opcode : 4;\n    u_int8_t qr : 1;\n    u_int8_t rcode : 4;\n    u_int8_t z : 3;\n    u_int8_t ra : 1;\n    u_int16_t qdcount;\n    u_int16_t ancount;\n    u_int16_t nscount;\n    u_int16_t arcount;\n} /* size 0xC */;\n\nstruct SceNetInetSockaddrIn {\n    SceUChar8 sin_len;\n    SceUChar8 sin_family;\n    SceUShort16 sin_port;\n    struct SceNetInetInAddr sin_addr;\n    SceChar8 sin_zero[8];\n} /* size 0x10 */;"
  },
  "vars": {
   "D_00001F74": "extern s32 D_00001F74;",

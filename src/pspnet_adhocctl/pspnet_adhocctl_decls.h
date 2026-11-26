@@ -4,6 +4,154 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+/* devkit 0.6.0 DWARF (tools/dwarf_types.py) */
+struct SceNetAdhocctlIBSSName;
+struct SceNetAdhocctlLobbyId;
+struct SceNetAdhocctlUsername;
+struct SceNetConfig80211BssDesc;
+struct SceNetConfig80211BssDescList;
+struct SceNetConfig80211GameModeDesc;
+struct SceNetConfig80211JoinParam;
+struct SceNetConfig80211ScanParam;
+struct SceNetEtherAddr;
+struct adhocctl_internal_info;
+struct adhocctl_netcnf_ibss_param;
+struct adhocctl_realtime_info;
+struct adhocctl_ssid;
+
+enum SceNetAdhocctlState {
+    SCE_NET_ADHOCCTL_STATE_DISCONNECTED = 0,
+    SCE_NET_ADHOCCTL_STATE_JOINING_LOBBY_IBSS = 1,
+    SCE_NET_ADHOCCTL_STATE_JOINING_GAME_IBSS = 2,
+} /* size 0x4 */;
+
+typedef unsigned char SceUChar8;
+
+typedef unsigned char u_int8_t;
+
+typedef unsigned int u_int;
+
+typedef short unsigned int u_int16_t;
+
+typedef unsigned int u_int32_t;
+
+typedef long long unsigned int u_int64_t;
+
+typedef short unsigned int SceUShort16;
+
+typedef unsigned int SceUInt32;
+
+struct SceNetAdhocctlIBSSName {
+    SceUChar8 data[8];
+} /* size 0x8 */;
+
+struct SceNetAdhocctlLobbyId {
+    SceUChar8 data[9];
+    int type;
+} /* size 0x10 */;
+
+struct SceNetAdhocctlUsername {
+    SceUChar8 data[128];
+} /* size 0x80 */;
+
+struct SceNetEtherAddr {
+    SceUChar8 data[6];
+} /* size 0x6 */;
+
+struct adhocctl_ssid {
+    u_int8_t data[33];
+} /* size 0x21 */;
+
+struct SceNetConfig80211BssDesc {
+    SceUChar8 bssid[6];
+    SceUChar8 ssidlen;
+    SceUChar8 ssid[32];
+    int bsstype;
+    int beacon;
+    int dtim;
+    int timestamp;
+    int localtime;
+    SceUChar8 channel;
+    SceUShort16 atim;
+    SceUShort16 capinfo;
+    SceUChar8 rate[8];
+    SceUChar8 rssi;
+} /* size 0x4C */;
+
+struct SceNetConfig80211GameModeDesc {
+    SceUChar8 bssid[6];
+    SceUChar8 ssidlen;
+    SceUChar8 ssid[32];
+    SceUChar8 channel;
+    SceUChar8 mcastaddr[6];
+    SceUShort16 keysize;
+    SceUChar8 enckey[16];
+    SceUShort16 maxpdu;
+    SceUChar8 pwrsave;
+    SceUChar8 mystaid;
+    SceUChar8 maxsta;
+    SceUChar8 ifstype;
+    SceUChar8 ifs0;
+    SceUChar8 ifsslot;
+    SceUChar8 bcastdisable;
+    SceUShort16 aggregation;
+    SceUShort16 awakeperiod;
+    SceUShort16 sleepperiod;
+} /* size 0x50 */;
+
+struct SceNetConfig80211ScanParam {
+    int bsstype;
+    SceUChar8 bssid[6];
+    SceUChar8 ssidlen;
+    SceUChar8 ssid[32];
+    int scantype;
+    int probedelay;
+    SceUChar8 channel[14];
+    int minchantime;
+    int maxchantime;
+} /* size 0x4C */;
+
+struct adhocctl_internal_info {
+    int evfid;
+    int tid;
+    int sid;
+    enum SceNetAdhocctlState state;
+    struct SceNetAdhocctlIBSSName game_name;
+    struct SceNetAdhocctlLobbyId lobby_id;
+    int channel;
+    struct SceNetAdhocctlIBSSName lobby_name;
+    struct SceNetAdhocctlUsername username;
+} /* size 0xB4 */;
+
+struct adhocctl_realtime_info {
+    int type;
+    int num;
+    struct SceNetEtherAddr member[16];
+    u_int8_t enckey[16];
+    u_int timeout;
+    int flag;
+} /* size 0x80 */;
+
+struct adhocctl_netcnf_ibss_param {
+    struct SceNetAdhocctlIBSSName lobby_name;
+    u_int32_t lobby_name_flag;
+    u_int32_t channel;
+    u_int32_t channel_flag;
+} /* size 0x14 */;
+
+struct SceNetConfig80211JoinParam {
+    struct SceNetConfig80211BssDesc bss;
+    int timeout;
+    int probedelay;
+    SceUChar8 rate[8];
+    int disablebcntx;
+} /* size 0x60 */;
+
+struct SceNetConfig80211BssDescList {
+    struct SceNetConfig80211BssDescList *next;
+    struct SceNetConfig80211BssDesc bssdesc;
+} /* size 0x50 */;
+
 struct Unk_func_00002014_0 {
     u8 pad0[0x8];
     s32 unk8;
@@ -47,6 +195,7 @@ s32 func_00004EB4(void);
 void func_00004F10(s32 arg0);
 void func_00005870(void);
 void func_00005918(s32 arg0);
+char *get_taginfo(u_int8_t tag0, void *buf, int buflen, int *datalen);
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelCheckThreadStack(void);

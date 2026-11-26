@@ -1,4 +1,7 @@
 {
+ "dwarf": [
+  "get_taginfo"
+ ],
  "funcs": {
   "_sce_pspnet_adhocctl_get_state": "s32 _sce_pspnet_adhocctl_get_state(s32 *arg0);",
   "func_0000155C": "void func_0000155C(s32 arg0, s32 arg1);",
@@ -25,6 +28,7 @@
   "func_00004F10": "void func_00004F10(s32 arg0);",
   "func_00005870": "void func_00005870(void);",
   "func_00005918": "void func_00005918(s32 arg0);",
+  "get_taginfo": "char *get_taginfo(u_int8_t tag0, void *buf, int buflen, int *datalen);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelCheckThreadStack": "s32 sceKernelCheckThreadStack(void);",
@@ -42,6 +46,7 @@
   "sceWlanDrv_lib_C9A8CAB7": "M2C_UNK sceWlanDrv_lib_C9A8CAB7();"
  },
  "types": {
+  "000_dwarf": "/* devkit 0.6.0 DWARF (tools/dwarf_types.py) */\nstruct SceNetAdhocctlIBSSName;\nstruct SceNetAdhocctlLobbyId;\nstruct SceNetAdhocctlUsername;\nstruct SceNetConfig80211BssDesc;\nstruct SceNetConfig80211BssDescList;\nstruct SceNetConfig80211GameModeDesc;\nstruct SceNetConfig80211JoinParam;\nstruct SceNetConfig80211ScanParam;\nstruct SceNetEtherAddr;\nstruct adhocctl_internal_info;\nstruct adhocctl_netcnf_ibss_param;\nstruct adhocctl_realtime_info;\nstruct adhocctl_ssid;\n\nenum SceNetAdhocctlState {\n    SCE_NET_ADHOCCTL_STATE_DISCONNECTED = 0,\n    SCE_NET_ADHOCCTL_STATE_JOINING_LOBBY_IBSS = 1,\n    SCE_NET_ADHOCCTL_STATE_JOINING_GAME_IBSS = 2,\n} /* size 0x4 */;\n\ntypedef unsigned char SceUChar8;\n\ntypedef unsigned char u_int8_t;\n\ntypedef unsigned int u_int;\n\ntypedef short unsigned int u_int16_t;\n\ntypedef unsigned int u_int32_t;\n\ntypedef long long unsigned int u_int64_t;\n\ntypedef short unsigned int SceUShort16;\n\ntypedef unsigned int SceUInt32;\n\nstruct SceNetAdhocctlIBSSName {\n    SceUChar8 data[8];\n} /* size 0x8 */;\n\nstruct SceNetAdhocctlLobbyId {\n    SceUChar8 data[9];\n    int type;\n} /* size 0x10 */;\n\nstruct SceNetAdhocctlUsername {\n    SceUChar8 data[128];\n} /* size 0x80 */;\n\nstruct SceNetEtherAddr {\n    SceUChar8 data[6];\n} /* size 0x6 */;\n\nstruct adhocctl_ssid {\n    u_int8_t data[33];\n} /* size 0x21 */;\n\nstruct SceNetConfig80211BssDesc {\n    SceUChar8 bssid[6];\n    SceUChar8 ssidlen;\n    SceUChar8 ssid[32];\n    int bsstype;\n    int beacon;\n    int dtim;\n    int timestamp;\n    int localtime;\n    SceUChar8 channel;\n    SceUShort16 atim;\n    SceUShort16 capinfo;\n    SceUChar8 rate[8];\n    SceUChar8 rssi;\n} /* size 0x4C */;\n\nstruct SceNetConfig80211GameModeDesc {\n    SceUChar8 bssid[6];\n    SceUChar8 ssidlen;\n    SceUChar8 ssid[32];\n    SceUChar8 channel;\n    SceUChar8 mcastaddr[6];\n    SceUShort16 keysize;\n    SceUChar8 enckey[16];\n    SceUShort16 maxpdu;\n    SceUChar8 pwrsave;\n    SceUChar8 mystaid;\n    SceUChar8 maxsta;\n    SceUChar8 ifstype;\n    SceUChar8 ifs0;\n    SceUChar8 ifsslot;\n    SceUChar8 bcastdisable;\n    SceUShort16 aggregation;\n    SceUShort16 awakeperiod;\n    SceUShort16 sleepperiod;\n} /* size 0x50 */;\n\nstruct SceNetConfig80211ScanParam {\n    int bsstype;\n    SceUChar8 bssid[6];\n    SceUChar8 ssidlen;\n    SceUChar8 ssid[32];\n    int scantype;\n    int probedelay;\n    SceUChar8 channel[14];\n    int minchantime;\n    int maxchantime;\n} /* size 0x4C */;\n\nstruct adhocctl_internal_info {\n    int evfid;\n    int tid;\n    int sid;\n    enum SceNetAdhocctlState state;\n    struct SceNetAdhocctlIBSSName game_name;\n    struct SceNetAdhocctlLobbyId lobby_id;\n    int channel;\n    struct SceNetAdhocctlIBSSName lobby_name;\n    struct SceNetAdhocctlUsername username;\n} /* size 0xB4 */;\n\nstruct adhocctl_realtime_info {\n    int type;\n    int num;\n    struct SceNetEtherAddr member[16];\n    u_int8_t enckey[16];\n    u_int timeout;\n    int flag;\n} /* size 0x80 */;\n\nstruct adhocctl_netcnf_ibss_param {\n    struct SceNetAdhocctlIBSSName lobby_name;\n    u_int32_t lobby_name_flag;\n    u_int32_t channel;\n    u_int32_t channel_flag;\n} /* size 0x14 */;\n\nstruct SceNetConfig80211JoinParam {\n    struct SceNetConfig80211BssDesc bss;\n    int timeout;\n    int probedelay;\n    SceUChar8 rate[8];\n    int disablebcntx;\n} /* size 0x60 */;\n\nstruct SceNetConfig80211BssDescList {\n    struct SceNetConfig80211BssDescList *next;\n    struct SceNetConfig80211BssDesc bssdesc;\n} /* size 0x50 */;",
   "Unk_func_00002014_0": "struct Unk_func_00002014_0 {\n    u8 pad0[0x8];\n    s32 unk8;\n};"
  },
  "vars": {
