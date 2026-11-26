@@ -70,7 +70,18 @@ s32 module_reboot_before(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandEnd);
+#else
+s32 sceNandEnd(void) {
+    sceNandLock(0);
+    sceKernelUnregisterSysEventHandler(&D_00002930);
+    sceKernelDeleteSema(M2C_FIELD(&D_00002970, s32 *, 0));
+    sceKernelDeleteEventFlag(M2C_FIELD(&D_00002970, s32 *, 4));
+    sceKernelReleaseIntrHandler(0x14);
+    return 0;
+}
+#endif
 
 s32 sceNandSuspend(void) {
     return 0;
