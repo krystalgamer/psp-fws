@@ -94,8 +94,34 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005F38);
 INCLUDE_ASM("nonmatchings/isofs", func_00000284);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_000003E8);
+#endif
+
+#if FW_VERSION == 150
+void func_000003E8(void *arg0) {
+    s32 temp_s0;
+    s32 var_s0;
+    s32 var_s1;
+
+    temp_s0 = arg0 != NULL;
+    if (temp_s0 != 0) {
+
+    } else {
+        Kprintf(&D_00005F30, &D_00005F38, "sceIsofsLbTerm", 0x61);
+        sceKernelAssert(temp_s0, 0);
+    }
+    var_s1 = 0;
+    if (M2C_FIELD(arg0, u8 *, 0x50) != 0) {
+        var_s0 = 0;
+        do {
+            var_s1 += 1;
+            func_00000F9C(M2C_FIELD(arg0, s32 *, 0x98) + var_s0 + 8);
+            var_s0 += 0x2C;
+        } while (var_s1 < (s32) M2C_FIELD(arg0, u8 *, 0x50));
+    }
+    SysMemForKernel_7B749390(M2C_FIELD(arg0, s32 *, 0x40), M2C_FIELD(arg0, s32 *, 0x98));
+}
 #endif
 
 #if FW_VERSION == 100
