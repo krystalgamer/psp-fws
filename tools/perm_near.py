@@ -24,6 +24,35 @@ ROOT = ad.ROOT
 TOOLS = ad.TOOLS
 
 
+def write_perm_dir(mod, n, text, compiler, opt):
+    """Write tmp/perm/<module>/<n>/ for decomp-permuter from full C text; None if the target won't assemble."""
+    pre = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", f"-I{ROOT / 'include'}", "-"],
+                         input=text, capture_output=True, text=True).stdout
+    d = ROOT / "tmp/perm" / mod.mod / n
+    shutil.rmtree(d, ignore_errors=True)
+    d.mkdir(parents=True)
+    (d / "base.c").write_text(pre)
+    asm = mod.funcs[n][2]
+    (d / "target.s").write_text(f'.include "macro.inc"\n.set noat\n.set noreorder\n.section .text\n{asm.read_text()}')
+    r = subprocess.run([str(TOOLS / "mips-as"), "-EL", "-march=allegrex", "-G0", "--no-pad-sections",
+                        f"-I{ROOT / 'include'}", "-o", str(d / "target.o"), str(d / "target.s")], capture_output=True)
+    if r.returncode:
+        shutil.rmtree(d)
+        return None
+    (d / "compile.sh").write_text(f"""#!/bin/bash
+set -e
+IN="$1"; OUT="$3"
+{TOOLS}/cc1-{compiler} {opt} -G0 -quiet "$IN" -o "$OUT.s"
+{TOOLS}/psp-as-1.3.1 -EL -G0 -mulsw -I{ROOT} -o "$OUT" "$OUT.s"
+rm -f "$OUT.s"
+""")
+    (d / "compile.sh").chmod(0o755)
+    (d / "settings.toml").write_text(
+        f'func_name = "{n}"\ncompiler_type = "gcc"\n'
+        f'objdump_command = "{TOOLS}/mips-objdump -drz -m mips:allegrex"\n')
+    return d
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("version")
@@ -57,30 +86,9 @@ def main():
         if not body or re.search(r"\b(goto|sp|saved_reg_\w+)\b", body):
             continue
         text = ctx + "\n".join(d for d in decls) + "\n" + body
-        pre = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", f"-I{ROOT / 'include'}", "-"],
-                             input=text, capture_output=True, text=True).stdout
-        d = ROOT / "tmp/perm" / a.module / n
-        shutil.rmtree(d, ignore_errors=True)
-        d.mkdir(parents=True)
-        (d / "base.c").write_text(pre)
-        asm = mod.funcs[n][2]
-        (d / "target.s").write_text(f'.include "macro.inc"\n.set noat\n.set noreorder\n.section .text\n{asm.read_text()}')
-        r = subprocess.run([str(TOOLS / "mips-as"), "-EL", "-march=allegrex", "-G0", "--no-pad-sections",
-                            f"-I{ROOT / 'include'}", "-o", str(d / "target.o"), str(d / "target.s")], capture_output=True)
-        if r.returncode:
-            shutil.rmtree(d)
+        d = write_perm_dir(mod, n, text, compiler, opt)
+        if d is None:
             continue
-        (d / "compile.sh").write_text(f"""#!/bin/bash
-set -e
-IN="$1"; OUT="$3"
-{TOOLS}/cc1-{compiler} {opt} -G0 -quiet "$IN" -o "$OUT.s"
-{TOOLS}/psp-as-1.3.1 -EL -G0 -mulsw -I{ROOT} -o "$OUT" "$OUT.s"
-rm -f "$OUT.s"
-""")
-        (d / "compile.sh").chmod(0o755)
-        (d / "settings.toml").write_text(
-            f'func_name = "{n}"\ncompiler_type = "gcc"\n'
-            f'objdump_command = "{TOOLS}/mips-objdump -drz -m mips:allegrex"\n')
         made.append(str(d))
     print("\n".join(made))
 

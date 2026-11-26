@@ -3,7 +3,7 @@
   "sceKernelCreateSema": "s32 sceKernelCreateSema(void *, u32, s32, s32, void *);"
  },
  "vars": {
-  "D_00000850": "extern s32 D_00000850;",
+  "D_00000850": "extern u8 *D_00000850;",
   "D_00000880": "extern s32 D_00000880;",
   "D_00000884": "extern s32 D_00000884;",
   "D_00000EC0": "extern s32 D_00000EC0;"
