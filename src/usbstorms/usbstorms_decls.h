@@ -5,12 +5,12 @@
 #include "m2c_macros.h"
 
 extern s32 D_00002A14;
-extern M2C_UNK D_00002D00;
+extern s32 D_00002D00;
 extern M2C_UNK D_00002D20;
 extern s32 D_00002DB0;
 extern s32 D_00002DD0;
 extern M2C_UNK D_00002E10;
-extern M2C_UNK D_00003460;
+extern s32 D_00003460;
 
 M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *);
 s32 func_00003944(s32 arg0, s32 arg1);
