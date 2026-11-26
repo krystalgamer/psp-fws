@@ -1890,11 +1890,11 @@ void func_0000A7EC(void) {
     func_0000B024();
 }
 
-#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 282)
+#if FW_VERSION == 100 || (FW_VERSION >= 152 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini", func_0000B7F8);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_0000B7F8(void) {
     func_0000C0E8();
 }

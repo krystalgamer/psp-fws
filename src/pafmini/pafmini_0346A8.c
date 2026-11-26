@@ -1022,7 +1022,7 @@ void func_0003EAD0(M2C_UNK **arg0) {
     scePaf_4E67BB08(arg0);
 }
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0003EAF8);
 #else
 void func_0003EAF8(void) {
