@@ -1,3 +1,4 @@
+/* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "clockgen_decls.h"
@@ -21,7 +22,7 @@ s32 module_start(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/clockgen", module_reboot_before);
 #else
 s32 module_reboot_before(void) {
@@ -38,7 +39,7 @@ s32 module_reboot_before(void) {
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgenInit);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgenEnd);
 #else
 s32 sceClockgenEnd(void) {
@@ -65,9 +66,20 @@ s32 func_00000414(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/clockgen", func_0000041C);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 func_0000041C(void) {
+    func_000006C0(1, M2C_VFIELD(&D_00000930, u8, 5) & 0xFF);
+    func_000006C0(2, M2C_VFIELD(&D_00000930, u8, 6) & 0xFF);
+    sceKernelSignalSema(M2C_VFIELD(&D_00000930, s32, 0), 1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
 s32 func_0000041C(void) {
     func_000006C0(1, M2C_VFIELD(&D_00000930, u8, 5) & 0xFF);
     func_000006C0(2, M2C_VFIELD(&D_00000930, u8, 6) & 0xFF);
@@ -75,7 +87,7 @@ s32 func_0000041C(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgenGetRevision);
 #else
 s32 sceClockgenGetRevision(void) {

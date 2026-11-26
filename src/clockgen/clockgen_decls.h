@@ -23,6 +23,7 @@ s32 sceClockgenInit(void);
 void sceClockgenLeptonClkDisable(void);
 void sceClockgenLeptonClkEnable(void);
 s32 sceKernelDeleteSema(s32);
+s32 sceKernelSignalSema(s32, s32);
 M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);
 
 #endif

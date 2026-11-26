@@ -16,6 +16,7 @@
   "sceClockgenLeptonClkDisable": "void sceClockgenLeptonClkDisable(void);",
   "sceClockgenLeptonClkEnable": "void sceClockgenLeptonClkEnable(void);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
+  "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);"
  },
  "vars": {
