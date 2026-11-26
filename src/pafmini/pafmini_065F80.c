@@ -129,14 +129,8 @@ INCLUDE_ASM("nonmatchings/pafmini_065F80", scePaf_18D51B42);
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_0007E18C);
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_065F80", scePaf_2A5DDF04);
-#endif
-
-#if FW_VERSION == 250
-void scePaf_2A5DDF04(struct Unk_scePaf_2A5DDF04_0 *arg0, s32 arg1) {
-    M2C_FIELD(arg0->unk1E8, s32 *, 0x3E8) = arg1;
-}
 #endif
 
 #if FW_VERSION == 282
@@ -185,16 +179,8 @@ INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00066DB4);
 
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00066E10);
 
-#if FW_VERSION == 100 || FW_VERSION == 201
+#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00066E74);
-#endif
-
-#if FW_VERSION == 250
-void func_00066E74(struct Unk_vt_func_00066E74_arg0 **arg0) {
-    sceGumMatrixMode(2);
-    sceGumLoadIdentity();
-    (*arg0)->unk60((void **) arg0);
-}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -488,22 +474,8 @@ INCLUDE_ASM("nonmatchings/pafmini_065F80", scePaf_A9970EF5);
 
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_000698E4);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00069934);
-#endif
-
-#if FW_VERSION == 250
-s32 func_00069934(void *arg0, s32 arg1) {
-    s32 var_v1;
-
-    var_v1 = -1;
-    if (M2C_FIELD(arg0, u8 *, 0x332) != 0) {
-        var_v1 = 0;
-        M2C_FIELD(arg0, s32 *, 0x438) = arg1;
-        M2C_FIELD(arg0, s32 *, 0x5B8) = arg1;
-    }
-    return var_v1;
-}
 #endif
 
 #if FW_VERSION == 282
@@ -568,14 +540,10 @@ INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000D7950);
 
 #if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/pafmini_065F80", D_000D5D28);
-
-INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00069CB8);
 #endif
 
-#if FW_VERSION == 250
-void func_00069CB8(void) {
-    func_00069C58(1, 0xFFFF);
-}
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00069CB8);
 #endif
 
 #if FW_VERSION == 282

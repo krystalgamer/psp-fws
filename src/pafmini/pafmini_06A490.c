@@ -1645,16 +1645,8 @@ INCLUDE_ASM("nonmatchings/pafmini_06A490", func_00077B8C);
 
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_00077BAC);
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_000775C0);
-#endif
-
-#if FW_VERSION == 250
-void func_000775C0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x3E8) = arg1;
-    M2C_FIELD(arg0, s32 *, 0xC28) = arg1;
-    M2C_FIELD(arg0, s32 *, 0xDA8) = arg1;
-}
 #endif
 
 #if FW_VERSION < 282
