@@ -45,11 +45,11 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C_v201);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000015C);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000238);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void func_00000238(void) {
     func_00001494((s32) &D_00001E98, (s32) &D_00002AEC);
     func_00001494((s32) &D_00001EA4, (s32) &D_00002AEC);
