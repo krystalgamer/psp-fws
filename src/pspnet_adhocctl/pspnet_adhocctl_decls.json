@@ -5,6 +5,7 @@
  "funcs": {
   "_sce_pspnet_adhocctl_get_state": "s32 _sce_pspnet_adhocctl_get_state(s32 *arg0);",
   "func_0000155C": "void func_0000155C(s32 arg0, s32 arg1);",
+  "func_000018F8": "s32 func_000018F8(void);",
   "func_00001BD4": "s32 func_00001BD4(s32, s32, s32, s32);",
   "func_00002014": "void func_00002014(struct Unk_func_00002014_0 *arg0);",
   "func_00002068": "s32 func_00002068(s32, s32, s32, s32);",
@@ -38,6 +39,7 @@
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
   "sceNetAdhocctlGetAdhocId": "s32 sceNetAdhocctlGetAdhocId(void *arg0);",
   "sceNetAdhocctlGetState": "s32 sceNetAdhocctlGetState(s32 *arg0);",
+  "sceNetAdhocctlTerm": "s32 sceNetAdhocctlTerm(void);",
   "sceNetAdhocctl_lib_1572422C": "void sceNetAdhocctl_lib_1572422C(void);",
   "sceNet_lib_57CC57DA": "M2C_UNK sceNet_lib_57CC57DA(s32, M2C_UNK, M2C_UNK);",
   "sceNet_lib_AB7DD9A5": "M2C_UNK sceNet_lib_AB7DD9A5(M2C_UNK *, M2C_UNK, M2C_UNK);",

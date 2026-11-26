@@ -102,9 +102,13 @@ struct SceNetApDialogDummyParam {
     SceUShort16 http_proxy_port;
 } /* size 0x1E8 */;
 
+extern s32 D_00000980;
+extern s32 D_00000990;
 
+u8 *func_000007AC(u8 *arg0, u8 *arg1);
 s32 module_start(void);
 s32 module_stop(void);
 int sceNetApDialogDummyTerm(void);
+M2C_UNK sceNetApctlDelHandler(s32);
 
 #endif

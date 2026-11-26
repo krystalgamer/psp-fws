@@ -783,7 +783,24 @@ INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_992C22C2);
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_08234E6D);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_2EE82492);
+#else
+s32 sceSyscon_driver_2EE82492(u32 arg0) {
+    s32 var_v0;
+    s32 var_v1;
+
+    var_v1 = 0x800001FE;
+    if (arg0 < 0x80U) {
+        var_v0 = 0;
+        if (arg0 != 0) {
+            var_v0 = arg0 | 0x80;
+        }
+        var_v1 = func_0000193C(var_v0, 0x31, 3);
+    }
+    return var_v1;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_8CBC7987);
 

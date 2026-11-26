@@ -21,6 +21,7 @@
   "func_000017D8": "s32 func_000017D8(void);",
   "func_00001934": "s32 func_00001934(s32, s32, s32, s32);",
   "func_00001A98": "s32 func_00001A98(void);",
+  "func_00001B64": "s32 func_00001B64(s32, s32, s32, s32, s32);",
   "func_00001C70": "void func_00001C70(s32 arg0);",
   "func_00001D6C": "s32 func_00001D6C(s32, s32, s32, s32, s32);",
   "func_00001FA8": "s32 func_00001FA8(s32, s32, s32, s32);",

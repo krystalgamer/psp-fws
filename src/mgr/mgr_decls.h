@@ -35,6 +35,8 @@ struct Unk_func_000018F4_temp_a4 {
 };
 
 extern s32 D_0000955C;
+extern s32 D_00009C0C;
+extern u32 D_00009C10;
 extern M2C_UNK D_00009C58;
 extern M2C_UNK D_00009C68;
 extern M2C_UNK D_0000AEE0;
@@ -159,6 +161,7 @@ s32 sceMgr_driver_5A260472(s32 arg0, s32 arg1, s32 arg2);
 void sceMgr_driver_604EF590(void);
 s32 sceMgr_driver_62F480BF(s32 arg0, s32 arg1);
 s32 sceMgr_driver_6B908200(s32 arg0, s32 arg1, M2C_UNK *arg2, s32 arg3, s32 arg4);
+u32 sceMgr_driver_733917D9(s32 arg0, u32 arg1);
 void sceMgr_driver_8429C9F3(void);
 s32 sceMgr_driver_9ACFEAF6(s32 arg0, M2C_UNK arg1);
 s32 sceMgr_driver_BB1E3C1A(s32 arg0, M2C_UNK arg1, s32 arg2);

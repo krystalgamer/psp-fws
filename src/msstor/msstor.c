@@ -1,3 +1,4 @@
+/* cflags[100]: -Os */
 #include "common.h"
 #include "msstor_decls.h"
 
@@ -15,9 +16,19 @@ INCLUDE_ASM("nonmatchings/msstor", func_0000017C);
 INCLUDE_ASM("nonmatchings/msstor", func_000001BC);
 
 INCLUDE_ASM("nonmatchings/msstor", func_00000220);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor", func_00000288);
+#endif
 
+#if FW_VERSION == 100
+void func_00000288(void) {
+    D_00009888->unk10(D_00009B50);
+}
+#endif
+
+#if FW_VERSION < 201
 void func_00000518(s32 *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 1;
     M2C_FIELD(arg0, s32 *, 0x10) = 0;

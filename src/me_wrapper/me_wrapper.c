@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
 #include "me_wrapper_decls.h"
@@ -253,9 +254,13 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_3D5F109C);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_D1EA3DFD);
 
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_04AFF68E);
+void sceMeWrapper_driver_04AFF68E(void) {
+    sceKernelWaitSema(D_00001A30, 1, NULL);
+}
 
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_B97B15D7);
+void sceMeWrapper_driver_B97B15D7(void) {
+    sceKernelSignalSema(D_00001A30, 1);
+}
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001200);
 #endif
@@ -292,9 +297,28 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00001624);
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002A64);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_63463F66);
+#else
+s32 sceMeWrapper_driver_63463F66(void) {
+    func_00001070();
+    sceSysEventForKernel_CD9E4BB5(&D_000019F0);
+    return 0;
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C3A1D6B2);
+#else
+s32 sceMeWrapper_driver_C3A1D6B2(void) {
+    sceSysreg_driver_D20581EA();
+    sceSysreg_driver_9BB70D34();
+    sceSysreg_driver_DE59DACB();
+    sceSysreg_driver_158AD4FC();
+    sceSysEventForKernel_D7D3FDCD(&D_000019F0);
+    return 0;
+}
+#endif
 
 #if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/me_wrapper", func_000018C8);

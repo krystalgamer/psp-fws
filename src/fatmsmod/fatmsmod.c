@@ -1029,7 +1029,25 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000068C8);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006868);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006918);
+#else
+s32 func_00006918(void) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    temp_v0 = sceKernelCreateMbx("SceMsStubMsg", 0x100U, NULL);
+    D_00019E00 = temp_v0;
+    var_v0 = 0;
+    if (temp_v0 <= 0) {
+        var_v0 = 0x80020001;
+        if (temp_v0 != 0) {
+            var_v0 = temp_v0;
+        }
+    }
+    return var_v0;
+}
+#endif
 
 #if FW_VERSION < 282
 s32 func_0000465C(void) {
@@ -1121,8 +1139,20 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002495C);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007600);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004BBC);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00004BBC(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = arg0 - 0x20;
+    if ((u32) (arg0 - 0x61) >= 0x1AU) {
+        var_v1 = arg0;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282

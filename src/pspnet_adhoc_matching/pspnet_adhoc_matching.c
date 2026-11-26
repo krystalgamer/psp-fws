@@ -1140,7 +1140,9 @@ void func_000027D8(void) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_matching", func_00002708);
+s32 func_00002708(void) {
+    return (-(D_00003DC8 == 0) & 0x7FBEF7EF) - 0x7FBEF7EF;
+}
 #endif
 
 #if FW_VERSION >= 282

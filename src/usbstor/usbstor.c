@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "usbstor_decls.h"
 
@@ -183,7 +184,21 @@ INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_EC57ED1D);
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_F03FCB48);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/usbstor", module_start);
+#else
+s32 module_start(void) {
+    s32 var_v1;
+
+    memset(&D_000029F0, 0, 0x194);
+    var_v1 = 0;
+    if (sceUsbBus_driver_B1644BE7(&D_000029A8) < 0) {
+        KDebugForKernel_84F370BC("%serror - cannot register protocol driver\n", &D_00002724);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/usbstor", module_stop);
 
@@ -199,7 +214,14 @@ INCLUDE_ASM("nonmatchings/usbstor", func_00001A0C);
 
 INCLUDE_ASM("nonmatchings/usbstor", func_00001B0C);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/usbstor", func_00001BB0);
+#else
+void func_00001BB0(void) {
+    M2C_FIELD(&D_000029F0, s32 *, 0) = (s32) (M2C_FIELD(&D_000029F0, s32 *, 0) | 4);
+    sceKernelSetEventFlag(M2C_FIELD(&D_000029F0, s32 *, 0x60), 4U);
+}
+#endif
 
 #if FW_VERSION < 282
 void func_00001A40(void) {

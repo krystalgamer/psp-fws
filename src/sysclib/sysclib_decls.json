@@ -1,12 +1,18 @@
 {
  "funcs": {
+  "SysclibForKernel_32C767F2": "s32 SysclibForKernel_32C767F2(s32);",
+  "SysclibForKernel_D887CACD": "M2C_UNK *SysclibForKernel_D887CACD(void);",
   "bcmp": "void bcmp(s32 arg0, s32 arg1, s32 arg2);",
   "bcopy": "void bcopy(s32 arg0, s32 arg1);",
   "func_00001B7C": "s32 func_00001B7C(void);",
   "memcmp": "s32 memcmp(s32, s32, s32);",
   "memmove": "s32 memmove(s32, s32);",
   "module_start": "s32 module_start(void);",
-  "strcpy": "u8 *strcpy(u8 *arg0, u8 *arg1);"
+  "strcpy": "u8 *strcpy(u8 *arg0, u8 *arg1);",
+  "tolower": "s32 tolower(s32 arg0);",
+  "toupper": "s32 toupper(s32 arg0);"
  },
- "vars": {}
+ "vars": {
+  "D_000022C1": "extern M2C_UNK D_000022C1;"
+ }
 }

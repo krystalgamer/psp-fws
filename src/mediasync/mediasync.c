@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "mediasync_decls.h"
 
@@ -382,7 +383,10 @@ INCLUDE_ASM("nonmatchings/mediasync", func_0000050C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/mediasync", func_000004CC);
+s32 func_000004CC(void) {
+    sceKernelSetEventFlag(D_00000988, 1U);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 250

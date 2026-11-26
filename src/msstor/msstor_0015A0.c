@@ -1,3 +1,4 @@
+/* cflags[100]: -Os */
 #include "common.h"
 #include "msstor_decls.h"
 
@@ -398,13 +399,27 @@ s32 func_00004C88(void *arg0) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004A0C);
+s32 func_00004A0C(void *arg0, s32 arg1, s32 arg2) {
+    s32 var_v1;
+
+    var_v1 = 0x80220183;
+    if (M2C_FIELD(arg0, s32 *, 4) == 0) {
+        var_v1 = func_00004A98((s32) arg0, arg1, arg2);
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004A40);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004A98);
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004B14);
+s32 func_00004B14(void *arg0) {
+    void *temp_a0;
+
+    temp_a0 = M2C_FIELD(arg0, void **, 0x10);
+    M2C_FIELD(temp_a0, s32 *, 0x10) = (s32) (M2C_FIELD(temp_a0, s32 *, 0x10) - 1);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 201

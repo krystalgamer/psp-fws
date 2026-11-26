@@ -1,13 +1,24 @@
 {
  "funcs": {
+  "KDebugForKernel_333DCEC7": "M2C_UNK KDebugForKernel_333DCEC7(M2C_UNK *);",
+  "func_0000003C": "s32 func_0000003C(void);",
   "func_000000E8": "s32 func_000000E8(void);",
   "func_00000124": "s32 func_00000124(void);",
   "func_00000160": "s32 func_00000160(void);",
+  "func_0000016C": "s32 func_0000016C(void);",
+  "func_00000178": "s32 func_00000178(void);",
+  "func_00000184": "s32 func_00000184(void);",
+  "func_00000360": "s32 func_00000360(void);",
   "func_0000036C": "s32 func_0000036C(void);",
   "sceKernelCpuResumeIntr": "M2C_UNK sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr();"
  },
  "vars": {
-  "D_000004B0": "extern s32 D_000004B0;"
+  "D_00000478": "extern M2C_UNK D_00000478;",
+  "D_000004B0": "extern s32 D_000004B0;",
+  "D_000004B4": "extern s32 D_000004B4;",
+  "D_000004B8": "extern s32 D_000004B8;",
+  "D_000004BC": "extern s32 D_000004BC;",
+  "D_000004C0": "extern s32 D_000004C0;"
  }
 }

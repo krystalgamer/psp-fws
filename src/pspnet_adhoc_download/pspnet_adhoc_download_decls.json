@@ -1,7 +1,19 @@
 {
  "funcs": {
+  "func_00001D60": "s32 func_00001D60(s32, s32);",
+  "func_00001E14": "u8 *func_00001E14(u8 *arg0, u8 *arg1, s32 arg2);",
+  "func_00001EB4": "void func_00001EB4(s32 arg0, s32 arg1);",
+  "func_000020D4": "s32 func_000020D4(s32);",
+  "func_00002118": "void func_00002118(void);",
+  "func_000021C4": "void func_000021C4(void *arg0);",
   "module_start": "s32 module_start(void);",
-  "module_stop": "s32 module_stop(void);"
+  "module_stop": "s32 module_stop(void);",
+  "sceKernelDeleteVpl": "s32 sceKernelDeleteVpl(s32);",
+  "sceKernelFreeVpl": "s32 sceKernelFreeVpl(s32, void *);",
+  "sceNetAdhocDownload_A21FEF45": "s32 sceNetAdhocDownload_A21FEF45(s32 arg0);"
  },
- "vars": {}
+ "vars": {
+  "D_00002390": "extern s32 D_00002390;",
+  "D_00003D90": "extern s32 D_00003D90;"
+ }
 }

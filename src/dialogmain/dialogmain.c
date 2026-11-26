@@ -1587,8 +1587,21 @@ u8 func_00003850(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 201
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/dialogmain", func_0000385C);
+#endif
+
+#if FW_VERSION < 201
+s32 *func_0000385C(s32 *arg0) {
+    void **temp_v0;
+
+    func_00004DD4(arg0, 0);
+    temp_v0 = scePaf_4708AED4(D_0000A288, &D_000076E8);
+    if (temp_v0 != NULL) {
+        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xAC)(temp_v0, arg0, 0);
+    }
+    return arg0;
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -1599,19 +1612,6 @@ s32 *func_0000385C(s32 *arg0) {
     temp_v0 = scePaf_4708AED4(D_0000A288, &D_000076E8);
     if (temp_v0 != NULL) {
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xB0)(temp_v0, arg0, 0);
-    }
-    return arg0;
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 *func_0000385C(s32 *arg0) {
-    void **temp_v0;
-
-    func_00004DD4(arg0, 0);
-    temp_v0 = scePaf_4708AED4(D_0000A288, &D_000076E8);
-    if (temp_v0 != NULL) {
-        M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xAC)(temp_v0, arg0, 0);
     }
     return arg0;
 }

@@ -176,7 +176,23 @@ s32 func_000013F0(void) {
 
 INCLUDE_ASM("nonmatchings/sircs", func_00001428);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/sircs", func_000014DC);
+#else
+s32 func_000014DC(void) {
+    void *sp0;
+    s32 temp_v0;
+    s32 var_s0;
+
+    var_s0 = 0;
+    temp_v0 = sceKernelWaitEventFlag(D_00002140, 0x20U, 0x20, &sp0, NULL);
+    if (temp_v0 < 0) {
+        var_s0 = temp_v0;
+    }
+    func_00001980();
+    return var_s0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/sircs", func_00001528);
 

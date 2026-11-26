@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "usbstorboot_decls.h"
 
@@ -99,9 +100,25 @@ INCLUDE_ASM("nonmatchings/usbstorboot", module_stop);
 INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBoot_8A4F36E5);
 #endif
 
-#if FW_VERSION < 352
+#if FW_VERSION >= 152 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/usbstorboot", module_start);
+#endif
 
+#if FW_VERSION == 100
+s32 module_start(void) {
+    s32 var_v1;
+
+    memset(&D_00001F20, 0, 0x104);
+    var_v1 = 0;
+    if (sceUsbstor_internal_489E6BF1(&D_00001F00) < 0) {
+        KDebugForKernel_84F370BC("%serror - cannot register handler\n", &D_00001B60);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/usbstorboot", module_stop);
 #endif
 

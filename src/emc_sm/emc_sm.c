@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "emc_sm_decls.h"
 
@@ -54,7 +55,18 @@ s32 module_start(void) {
     return 0;
 }
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/emc_sm", module_reboot_before);
+#else
+s32 module_reboot_before(void) {
+    sceNand_driver_AE4438C7(0);
+    sceSysEventForKernel_D7D3FDCD(&D_00002930);
+    sceKernelDeleteSema(M2C_FIELD(&D_00002970, s32 *, 0));
+    sceKernelDeleteEventFlag(M2C_FIELD(&D_00002970, s32 *, 4));
+    InterruptManagerForKernel_F987B1F0(0x14);
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_D305870E);
 
@@ -101,7 +113,16 @@ INCLUDE_ASM("nonmatchings/emc_sm", func_00001044);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000F18);
+s32 func_00000F18(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 0x4004:
+        break;
+    case 0x10004:
+        sceNand_driver_0F9BBBBD();
+        break;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -148,11 +169,29 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_2674CFFE);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_9B2AC433);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_CE9843E6);
+#else
+s32 sceNand_driver_CE9843E6(void) {
+    return D_00002FD0;
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_B07C41D4);
+#else
+s32 sceNand_driver_B07C41D4(void) {
+    return D_00002FD4;
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_C1376222);
+#else
+s32 sceNand_driver_C1376222(void) {
+    return D_00002FD8;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_716CD2B2);
 

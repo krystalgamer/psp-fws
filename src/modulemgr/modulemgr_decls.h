@@ -35,10 +35,12 @@ struct Unk_func_000004C0_1 {
 };
 
 extern u32 D_00005AF0;
+extern M2C_UNK D_00006DA0;
 extern u32 D_00007160;
 extern s32 D_00008174;
 extern s32 D_00008184;
 
+M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *, s32);
 M2C_UNK LoadCoreForKernel_0DE1F600();
 M2C_UNK LoadCoreForKernel_0E760DBA();
 s32 LoadCoreForKernel_44B292AB(s32);
@@ -48,14 +50,17 @@ M2C_UNK LoadCoreForKernel_7068E6BA();
 s32 LoadCoreForKernel_74CF001A(s32);
 M2C_UNK LoadCoreForKernel_7BE1421C();
 M2C_UNK LoadCoreForKernel_99A695F0();
+s32 LoadCoreForKernel_9BAF90F6();
 s32 LoadCoreForKernel_AE7C6E76(s32);
 s32 LoadCoreForKernel_BD61D4D5(s32);
 M2C_UNK LoadCoreForKernel_BF983EF2();
 s32 LoadCoreForKernel_CCE4A157(s32);
 s32 LoadCoreForKernel_CD0F3BAC();
+void *LoadCoreForKernel_CF8A41B1();
 M2C_UNK LoadCoreForKernel_DA1B09AA();
 s32 LoadCoreForKernel_F32A2940(s32);
 void *LoadCoreForKernel_FB8AE27D();
+s32 ModuleMgrForKernel_04B7BD22(void);
 s32 ModuleMgrForKernel_25E1F458(void);
 s32 ModuleMgrForKernel_54D9E02E(void);
 s32 ModuleMgrForKernel_61EC6AB0(void);
@@ -77,6 +82,7 @@ void func_000003B0(void);
 void func_000003CC(void);
 void func_000003E8(void);
 void func_00000404(void);
+s32 func_00000420(void);
 void func_000004B0(void *arg0, void *arg1);
 void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 *arg1);
 void func_00000594(void *arg0);

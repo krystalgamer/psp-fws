@@ -1,3 +1,4 @@
+/* cflags[100]: -O0 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
@@ -108,8 +109,16 @@ s32 module_start(void) {
 }
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", sceUtility_driver_20C68C34);
+#endif
+
+#if FW_VERSION == 100
+s32 sceUtility_driver_20C68C34(void) {
+    sceSysEventForKernel_D7D3FDCD(&D_00004F80);
+    sceKernelDeleteSema(D_000050F0);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -323,9 +332,34 @@ INCLUDE_RODATA("nonmatchings/utility", D_00008FE4);
 
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", func_00000458);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", func_00000988);
+#endif
 
+#if FW_VERSION == 100
+s32 func_00000988(s32 arg0, s32 arg1) {
+    sceKernelSignalSema(D_000050F4, 1);
+    sceKernelWaitSema(D_000050F8, 1, NULL);
+    sceKernelWaitThreadEnd(D_000050FC, NULL);
+    func_000002AC(D_00005128);
+    func_000002AC(D_00005120);
+    func_000002AC(D_0000511C);
+    func_000002AC(D_00005124);
+    func_000002AC(D_00005118);
+    func_000002AC(D_00005114);
+    sceKernelWaitSema(D_000050F0, 1, NULL);
+    D_0000510C = 0;
+    D_00005104 = 0;
+    D_00005108 = 0;
+    sceKernelSignalSema(D_000050F0, 1);
+    sceKernelExitDeleteThread(0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", func_00000A78);
 
 INCLUDE_ASM("nonmatchings/utility", func_00000C08);
@@ -348,28 +382,72 @@ INCLUDE_ASM("nonmatchings/utility", sceUtility_private_1DFA62EF);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_71269BEF);
+s32 sceUtility_private_71269BEF(void) {
+    s32 sp0;
 
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_B96C67EC);
+    sp0 = func_000011D4();
+    sceKernelWaitSema(D_000050F4, 1, NULL);
+    func_00001200(sp0);
+    return 0;
+}
+
+s32 sceUtility_private_B96C67EC(void) {
+    s32 sp0;
+
+    sp0 = func_000011D4();
+    sceKernelSignalSema(D_000050F8, 1);
+    func_00001200(sp0);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_680C0EA8);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_B222E887);
+#endif
 
+#if FW_VERSION == 100
+s32 sceUtility_private_B222E887(void) {
+    return D_00005100;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_4F2206BC);
+#endif
+
+#if FW_VERSION == 100
+s32 sceUtility_private_4F2206BC(void) {
+    return D_0000510C;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_EF5BC2D1);
+
+INCLUDE_ASM("nonmatchings/utility", sceUtility_private_E01FE32A);
+#endif
+
+#if FW_VERSION == 100
+s32 sceUtility_private_E01FE32A(void) {
+    return D_00005110;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/utility", sceUtility_private_19461966);
+#endif
+
+#if FW_VERSION == 100
+s32 sceUtility_private_19461966(void) {
+    return D_00005108;
+}
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_E01FE32A);
-
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_19461966);
-
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_6F923BD3);
 #endif
 
@@ -3234,13 +3312,39 @@ INCLUDE_ASM("nonmatchings/utility", func_00003F88);
 INCLUDE_ASM("nonmatchings/utility", func_00004034);
 
 INCLUDE_ASM("nonmatchings/utility", func_00004088);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", func_00004158);
+#endif
 
+#if FW_VERSION == 100
+s32 func_00004158(void) {
+    if (D_00005134 > 0) {
+        sceReg_driver_39461B4D(D_00005138);
+        sceReg_driver_FA8A5739(D_00005138);
+        D_00005134 = 0;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", func_000041B0);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", func_000041EC);
+#endif
 
+#if FW_VERSION == 100
+s32 func_000041EC(void) {
+    sceReg_driver_39461B4D(D_00005138);
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/utility", func_00004220);
 
 INCLUDE_ASM("nonmatchings/utility", func_00004318);

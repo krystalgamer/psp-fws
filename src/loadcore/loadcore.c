@@ -1442,8 +1442,21 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000056A4);
 INCLUDE_ASM("nonmatchings/loadcore", func_000056D8);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00005858);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00005858(s32 arg0) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (func_000056D8(arg0, 0, &sp0, 0, 0, 0) >= 0) {
+        var_v1 = sp0;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 260
@@ -1457,8 +1470,21 @@ s32 func_00005858(s32 arg0) {
 INCLUDE_ASM("nonmatchings/loadcore", func_00005B10);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00005894);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00005894(s32 arg0) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (func_000056D8(arg0, 0, 0, &sp0, 0, 0) >= 0) {
+        var_v1 = sp0;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 260
@@ -1469,7 +1495,16 @@ s32 func_00005894(s32 arg0) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/loadcore", func_000058D0);
+s32 func_000058D0(s32 arg0) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (func_000056D8(arg0, 0, 0, 0, 0, &sp0) >= 0) {
+        var_v1 = sp0;
+    }
+    return var_v1;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/loadcore", func_0000665C);

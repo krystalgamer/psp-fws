@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "libupdown_decls.h"
 
@@ -165,7 +166,23 @@ INCLUDE_ASM("nonmatchings/libupdown", func_00001E30);
 
 INCLUDE_ASM("nonmatchings/libupdown", func_00001F84);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/libupdown", func_000020A0);
+#else
+void func_000020A0(s32 arg0) {
+    func_00002660((s32) &D_000030D4, arg0);
+    M2C_VFIELD(&D_00003A98, s32, 0) = 0;
+    M2C_VFIELD(&D_00003A98, s32, 0x24) = 0;
+    M2C_VFIELD(&D_00003A98, s32, 4) = 0;
+    M2C_VFIELD(&D_00003A98, s32, 8) = 0;
+    M2C_VFIELD(&D_00003A98, s32, 0xC) = 0;
+    M2C_VFIELD(&D_00003A98, s32, 0x10) = 0;
+    M2C_VFIELD(&D_00003A98, s32, 0x14) = 0;
+    M2C_VFIELD(&D_00003A98, s32, 0x18) = 0;
+    M2C_VFIELD(&D_00003A98, s32, 0x1C) = 0;
+    M2C_VFIELD(&D_00003A98, s32, 0x20) = 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/libupdown", func_000020D8);
 
@@ -209,7 +226,19 @@ s32 sceLibUpdateDL_C1AF1076(void) {
     return 0;
 }
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/libupdown", sceLibUpdateDL_4F49C9C1);
+#else
+s32 sceLibUpdateDL_4F49C9C1(void) {
+    s32 var_a0;
+
+    var_a0 = 0x805F0002;
+    if (D_00003AC0 == 1) {
+        var_a0 = func_000017D0();
+    }
+    return var_a0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/libupdown", func_00002660);
 
@@ -229,9 +258,19 @@ INCLUDE_ASM("nonmatchings/libupdown", func_00002510);
 INCLUDE_ASM("nonmatchings/libupdown", func_0000253C);
 
 INCLUDE_ASM("nonmatchings/libupdown", func_00002568);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libupdown", func_0000257C);
+#endif
 
+#if FW_VERSION == 100
+M2C_UNK *func_0000257C(void) {
+    return &D_000037C1;
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libupdown", func_00002588);
 #endif
 
@@ -243,9 +282,39 @@ INCLUDE_ASM("nonmatchings/libupdown", func_000029F0);
 INCLUDE_ASM("nonmatchings/libupdown", func_000025C0);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libupdown", func_00002600);
+#endif
 
+#if FW_VERSION == 100
+u8 *func_00002600(u8 *arg0, u8 *arg1, s32 arg2) {
+    s32 var_a2;
+    u8 *var_a1;
+    u8 *var_v0;
+    u8 *var_v1;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_a2 = arg2;
+    var_v0 = NULL;
+    if (arg0 != NULL) {
+        var_v1 = arg0;
+        if (var_a2 > 0) {
+            do {
+                temp_a3 = *var_a1;
+                var_a2 -= 1;
+                var_a1 += 1;
+                *var_v1 = temp_a3;
+                var_v1 += 1;
+            } while (var_a2 > 0);
+        }
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libupdown", func_00002634);
 #endif
 
@@ -277,6 +346,29 @@ INCLUDE_ASM("nonmatchings/libupdown", func_00002B14);
 INCLUDE_ASM("nonmatchings/libupdown", func_00002F88);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libupdown", func_00002B44);
+#endif
+
+#if FW_VERSION == 100
+u8 *func_00002B44(u8 *arg0, u8 *arg1) {
+    u8 *var_a1;
+    u8 *var_a2;
+    u8 *var_v0;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_v0 = NULL;
+    var_a2 = arg0;
+    if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
+        do {
+            temp_a3 = *var_a1;
+            var_a1 += 1;
+            *var_a2 = temp_a3;
+            var_a2 += 1;
+        } while (temp_a3 != 0);
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 #endif

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "chkreg_decls.h"
 
 INCLUDE_ASM("nonmatchings/chkreg", func_00000000);
 

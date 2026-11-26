@@ -1,7 +1,11 @@
 {
  "funcs": {
+  "func_000004CC": "s32 func_000004CC(void);",
+  "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
   "sceLFatFs_driver_8F0560E0": "void sceLFatFs_driver_8F0560E0(void);",
   "sceLFatFs_driver_933F6E29": "void sceLFatFs_driver_933F6E29(void);"
  },
- "vars": {}
+ "vars": {
+  "D_00000988": "extern s32 D_00000988;"
+ }
 }

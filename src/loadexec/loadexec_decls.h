@@ -26,6 +26,7 @@ void RebootForKernel_72E280A8(void);
 s32 func_000017D8(void);
 s32 func_00001934(s32, s32, s32, s32);
 s32 func_00001A98(void);
+s32 func_00001B64(s32, s32, s32, s32, s32);
 void func_00001C70(s32 arg0);
 s32 func_00001D6C(s32, s32, s32, s32, s32);
 s32 func_00001FA8(s32, s32, s32, s32);

@@ -159,6 +159,7 @@ void func_00002648(struct Unk_func_00002648_0 *arg0);
 void func_000026A4(s32 arg0);
 s32 func_000026F0(void);
 s32 func_000026F8(void);
+s32 func_00002708(void);
 void func_00002794(struct Unk_func_00002794_0 *arg0, s32 *arg1);
 void func_000027D8(void);
 s32 func_00002824(s32);

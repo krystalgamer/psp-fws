@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "clockgen_decls.h"
 
@@ -20,7 +21,18 @@ s32 module_start(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/clockgen", module_reboot_before);
+#else
+s32 module_reboot_before(void) {
+    if (D_00000930 >= 0) {
+        sceKernelDeleteSema(D_00000930);
+        D_00000930 = -1;
+    }
+    sceSysEventForKernel_D7D3FDCD(&D_0000093C);
+    return 0;
+}
+#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_29160F5D);
@@ -42,9 +54,23 @@ s32 func_00000414(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/clockgen", func_0000041C);
+#else
+s32 func_0000041C(void) {
+    func_000006C0(1, M2C_VFIELD(&D_00000930, u8, 5) & 0xFF);
+    func_000006C0(2, M2C_VFIELD(&D_00000930, u8, 6) & 0xFF);
+    return 0;
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_32C8CA86);
+#else
+s32 sceClockgen_driver_32C8CA86(void) {
+    return M2C_VFIELD(&D_00000930, u8, 4) & 0xFF;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_B9716D48);
 
@@ -71,7 +97,17 @@ INCLUDE_ASM("nonmatchings/clockgen", func_0000047C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/clockgen", func_00000468);
+s32 func_00000468(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 0x400:
+        break;
+    case 0x100000:
+        func_000006C0(1, M2C_VFIELD(&D_00000930, u8, 5) & 0xFF);
+        func_000006C0(2, M2C_VFIELD(&D_00000930, u8, 6) & 0xFF);
+        break;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282

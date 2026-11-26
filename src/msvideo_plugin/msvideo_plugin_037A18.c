@@ -1,3 +1,4 @@
+/* cflags[100]: -Os */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
@@ -63,8 +64,22 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_00038274);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_000383A8);
 
-#if FW_VERSION < 152
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002B638);
+#endif
+
+#if FW_VERSION == 100
+s32 func_0002B638(void **arg0) {
+    s32 var_v0;
+    void *temp_v0;
+
+    var_v0 = 0x80610103;
+    if (arg0 != NULL) {
+        temp_v0 = *arg0;
+        var_v0 = (-(func_00038820(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, s32 *, 8)) == 0) & 0x7F9E7FFA) - 0x7F9E7FFA;
+    }
+    return var_v0;
+}
 #endif
 
 #if FW_VERSION == 152
@@ -131,11 +146,11 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0003884C);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_00038890);
 
-#if FW_VERSION < 152
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002BAE0);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION == 100 || FW_VERSION == 152
 s32 func_0002BAE0(void *arg0, s32 arg1) {
     s32 var_v0;
     void *temp_a0;
@@ -181,8 +196,38 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_00038A08);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_00038A70);
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002C154);
+#endif
 
+#if FW_VERSION == 100
+s32 func_0002C154(s32 *arg0) {
+    s32 var_v1;
+
+    var_v1 = 4;
+    if (arg0 != NULL) {
+        if (*arg0 != 0) {
+            var_v1 = func_0002D26C((s32) arg0);
+        }
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002C18C);
+#endif
+
+#if FW_VERSION == 100
+s32 func_0002C18C(s32 *arg0) {
+    s32 var_v1;
+
+    var_v1 = 4;
+    if (arg0 != NULL) {
+        if (*arg0 != 0) {
+            var_v1 = func_0003A404((s32) arg0);
+        }
+    }
+    return var_v1;
+}
 #endif

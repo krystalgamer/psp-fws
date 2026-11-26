@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "mpegbase_decls.h"
 
@@ -69,12 +70,36 @@ INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_304882E1);
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000C04);
 
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000C54);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000C7C);
+#endif
 
+#if FW_VERSION == 100
+void func_00000C7C(void) {
+    sceKernelWaitSema(D_000020A0, 1, NULL);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000CA4);
+#endif
 
+#if FW_VERSION == 100
+void func_00000CA4(void) {
+    sceKernelSignalSema(D_000020A0, 1);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000CC8);
+#endif
+
+#if FW_VERSION == 100
+void func_00000CC8(void) {
+    sceKernelPollSema(D_000020A0, 1);
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_0530BE4E);
@@ -129,12 +154,36 @@ INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_BEA18F91);
 INCLUDE_ASM("nonmatchings/mpegbase", func_000014C0);
 
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001500);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001528);
+#endif
 
+#if FW_VERSION == 100
+void func_00001528(void) {
+    sceKernelWaitSema(D_00002710, 1, NULL);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001550);
+#endif
 
+#if FW_VERSION == 100
+void func_00001550(void) {
+    sceKernelSignalSema(D_00002710, 1);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001574);
+#endif
+
+#if FW_VERSION == 100
+void func_00001574(void) {
+    sceKernelPollSema(D_00002710, 1);
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_7AC0321A);
@@ -167,12 +216,38 @@ INCLUDE_RODATA("nonmatchings/mpegbase", D_00001B9C);
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001B98);
 
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001BD4);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001BFC);
+#endif
 
+#if FW_VERSION == 100
+void func_00001BFC(void) {
+    sceKernelWaitSema(D_00002740, 1, NULL);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001C24);
+#endif
 
+#if FW_VERSION == 100
+void func_00001C24(void) {
+    sceKernelSignalSema(D_00002740, 1);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001C48);
+#endif
 
+#if FW_VERSION == 100
+void func_00001C48(void) {
+    sceKernelPollSema(D_00002740, 1);
+}
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_00001C6C);
 #endif

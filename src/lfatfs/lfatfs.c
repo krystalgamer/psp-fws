@@ -1115,11 +1115,11 @@ void func_00002F10(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/lfatfs", func_00002F38);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION == 100 || (FW_VERSION >= 152 && FW_VERSION < 282)
 void func_00002F38(void *arg0) {
     func_0000464C(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8), M2C_FIELD(arg0, s32 *, 0xC));
 }

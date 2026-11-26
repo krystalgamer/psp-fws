@@ -1172,7 +1172,32 @@ INCLUDE_ASM("nonmatchings/impose", func_00003224);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/impose", func_00001D04);
+void func_00001D04(s32 arg0) {
+    s32 temp_v1;
+    s32 var_a0;
+
+    if ((arg0 & 0xC10000) && (temp_v1 = M2C_FIELD(D_00018648, s32 *, 0x58), (temp_v1 != 0)) && !(arg0 & 0x20000)) {
+        if ((arg0 & 0x10000) && !(temp_v1 & 4)) {
+            if (!(M2C_FIELD(D_00018648, s32 *, 0x60) & 0x10000)) {
+                var_a0 = 1;
+                if (!(temp_v1 & 0x10)) {
+                    var_a0 = 0xA012;
+                }
+                sceImpose_driver_9C8C6C81(var_a0);
+            }
+        }
+        if ((arg0 & 0x400000) && !(M2C_FIELD(D_00018648, s32 *, 0x60) & 0x400000)) {
+            M2C_FIELD(D_00018648, s32 *, 0xB8) = 0;
+            M2C_FIELD(D_00018648, s32 *, 0x74) = (s32) (M2C_FIELD(D_00018648, s32 *, 0x74) | 0x400000);
+        }
+        if (arg0 & 0x800000) {
+            if (!(M2C_FIELD(D_00018648, s32 *, 0x60) & 0x800000)) {
+                M2C_FIELD(D_00018648, s32 *, 0xBC) = 0;
+                M2C_FIELD(D_00018648, s32 *, 0x74) = (s32) (M2C_FIELD(D_00018648, s32 *, 0x74) | 0x800000);
+            }
+        }
+    }
+}
 
 void func_00001E08(s32 arg0) {
     if ((arg0 & 0x300000) && (M2C_FIELD(D_00018648, s32 *, 0x58) != 0) && !(arg0 & 0x20000)) {

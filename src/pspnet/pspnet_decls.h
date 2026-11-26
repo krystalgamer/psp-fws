@@ -215,6 +215,7 @@ s32 sceNet_lib_8C55B410(void);
 void sceNet_lib_92633D8D(struct Unk_sceNet_lib_92633D8D_0 *arg0, s32 *arg1);
 s32 sceNet_lib_949F1FBB(void);
 s32 sceNet_lib_991FF86D(s32 arg0);
+s32 sceNet_lib_A8B6205A(s32, s32, s32, s32);
 s32 sceNet_lib_B3A48B7F(s32 arg0, s32 arg1);
 M2C_UNK *sceNet_lib_B68E1EEA(void);
 s32 sceNet_lib_B8C4A858(s32, s32);

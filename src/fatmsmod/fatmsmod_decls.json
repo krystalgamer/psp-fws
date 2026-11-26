@@ -42,6 +42,7 @@
   "func_00004950": "void func_00004950(void);",
   "func_00004A58": "void func_00004A58(void);",
   "func_00004A74": "void func_00004A74(void);",
+  "func_00004BBC": "s32 func_00004BBC(s32 arg0);",
   "func_00004E68": "s32 func_00004E68(s8 *arg0);",
   "func_00005118": "s32 func_00005118(void);",
   "func_000053FC": "void func_000053FC(void);",
@@ -53,6 +54,7 @@
   "func_000067D4": "s8 *func_000067D4(void);",
   "func_000067E0": "s32 func_000067E0(void);",
   "func_000067EC": "s32 func_000067EC(void);",
+  "func_00006918": "s32 func_00006918(void);",
   "func_00006960": "s32 func_00006960(void);",
   "func_0000764C": "s32 func_0000764C(void);",
   "func_000076F4": "s32 func_000076F4(s32, s32);",
@@ -176,6 +178,7 @@
   "sceFatMS_driver_BCB9DEDB": "s32 sceFatMS_driver_BCB9DEDB(void);",
   "sceIoClose": "s32 sceIoClose(s32);",
   "sceIoDevctl": "s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);",
+  "sceKernelCreateMbx": "s32 sceKernelCreateMbx(void *, u32, void *);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelDeleteFpl": "M2C_UNK sceKernelDeleteFpl();",
   "sceKernelDeleteMbx": "s32 sceKernelDeleteMbx(s32);"

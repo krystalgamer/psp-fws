@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "mpeg_vsh_decls.h"
@@ -508,8 +509,20 @@ s32 func_000079D8(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A08);
 
-#if FW_VERSION < 152
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005DB8);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00005DB8(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceKernelPollSema(arg0, 0) != 0) {
+        var_v1 = 0x80000041;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
@@ -518,8 +531,20 @@ s32 func_00005DB8(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00007A68);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00007A68(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceKernelSignalSema(arg0, 1) != 0) {
+        var_v1 = 0x80000041;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -581,12 +606,32 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00005FC8);
 void func_00006048(void) {
 
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006050);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+s32 func_00006050(s32 *arg0) {
+    s32 temp_s1;
+
+    func_000079D8(D_00007F04);
+    temp_s1 = sceVideocodec_C01EC829(D_00007D40, 0);
+    *arg0 = M2C_FIELD(D_00007D40, s32 *, 0x18);
+    func_00007A68(D_00007F04);
+    return temp_s1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000060C0);
+#endif
+
+#if FW_VERSION == 100
+s32 func_000060C0(void) {
+    return M2C_FIELD(D_00007D40, s32 *, 0x14);
+}
 #endif
 
 #if FW_VERSION < 250
@@ -626,8 +671,28 @@ s32 func_00006178(s32 arg0) {
     func_00007A68(D_00007F04);
     return temp_s1;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000061CC);
+#endif
+
+#if FW_VERSION == 100
+s32 func_000061CC(s32 arg0) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    func_000079D8(D_00007F04);
+    temp_v0 = sceVideocodec_307E6E1C(arg0, 0);
+    if (temp_v0 != 0) {
+        func_00007A68(D_00007F04);
+        var_v0 = temp_v0;
+    } else {
+        func_00007A68(D_00007F04);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282

@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "modulemgr_decls.h"
@@ -591,7 +592,17 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006DA0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", func_00000420);
+s32 func_00000420(void) {
+    s32 temp_v0;
+
+    temp_v0 = LoadCoreForKernel_9BAF90F6();
+    if (temp_v0 >= 0) {
+
+    } else {
+        KDebugForKernel_84F370BC(&D_00006DA0, "CanReleaseLibrary", temp_v0);
+    }
+    return temp_v0;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000474);
 
@@ -921,15 +932,25 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelSelfStopUnloadModule);
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStopUnloadSelfModule);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_04B7BD22);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_54D9E02E);
+s32 ModuleMgrForKernel_04B7BD22(void) {
+    s32 var_v0;
+    void *temp_v0;
+
+    temp_v0 = LoadCoreForKernel_CF8A41B1();
+    var_v0 = 0x8002012E;
+    if (temp_v0 != NULL) {
+        var_v0 = M2C_FIELD(temp_v0, s32 *, 0x2C);
+    }
+    return var_v0;
+}
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION < 282
 s32 ModuleMgrForKernel_54D9E02E(void) {
     s32 var_v0;
     void *temp_v0;
@@ -941,7 +962,9 @@ s32 ModuleMgrForKernel_54D9E02E(void) {
     }
     return var_v0;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelGetModuleIdByAddress);
 #endif
 

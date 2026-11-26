@@ -208,11 +208,11 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00009B90);
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00009C6C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282 || FW_VERSION >= 350
+#if FW_VERSION == 282 || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000A25C);
 #endif
 
-#if FW_VERSION >= 300 && FW_VERSION < 350
+#if FW_VERSION == 100 || (FW_VERSION >= 300 && FW_VERSION < 350)
 void func_0000A25C(s32 arg0) {
     scePaf_EAA5AFF6(arg0, 0xDC);
     scePaf_EAA5AFF6(arg0, 0xCC);

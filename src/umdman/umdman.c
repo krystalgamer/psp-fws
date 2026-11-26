@@ -235,11 +235,38 @@ void func_00001B6C(s32 arg0) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_5A302102);
+s32 sceUmdMan_driver_5A302102(void) {
+    s32 temp_s0;
 
-INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_B4692D7F);
+    func_00002714();
+    temp_s0 = func_00002738();
+    sceKernelSetEventFlag(sceUmd_0F7E578A(), 0x40000U);
+    sceUmdMan_driver_7E2A680C(0x800);
+    sceKernelSetEventFlag(temp_s0, 0x800U);
+    sceKernelClearEventFlag(temp_s0, -0x801U);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_40BEB9D1);
+s32 sceUmdMan_driver_B4692D7F(void) {
+    s32 temp_s0;
+
+    func_00002714();
+    temp_s0 = func_00002738();
+    sceKernelSetEventFlag(sceUmd_0F7E578A(), 0x40000U);
+    sceUmdMan_driver_7E2A680C(0x1000);
+    sceKernelSetEventFlag(temp_s0, 0x1000U);
+    return 0;
+}
+
+s32 sceUmdMan_driver_40BEB9D1(void) {
+    s32 temp_s0;
+
+    sceKernelWaitSema(func_0000272C(), 1, NULL);
+    temp_s0 = func_00002738();
+    sceUmdMan_driver_7E2A680C(0x80);
+    sceKernelSetEventFlag(temp_s0, 0x80U);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 201
@@ -1597,7 +1624,9 @@ s32 func_000080B8(s32 arg0) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", func_0000A918);
+s32 func_0000A918(s32 arg0) {
+    return (-(arg0 != 0) & 0x7FFEFFEA) - 0x7FFEFFEA;
+}
 #endif
 
 #if FW_VERSION >= 201

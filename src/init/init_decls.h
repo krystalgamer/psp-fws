@@ -4,8 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+extern s32 D_00002620;
+extern s32 D_00002644;
 
 s32 InitForKernel_33D30F49(void);
+s32 InitForKernel_7A2333AD(void);
+s32 InitForKernel_A6E71B93(void);
 s32 InitForKernel_C4F1BA33(void);
 s32 InitForKernel_FD0F25AD(void);
 s32 SysMemForKernel_A2A65F0E(M2C_UNK, M2C_UNK);

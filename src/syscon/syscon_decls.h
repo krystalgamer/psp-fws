@@ -90,6 +90,7 @@ s32 sceSyscon_driver_204F23FF(void);
 void sceSyscon_driver_25F47F96(s32 arg0);
 void sceSyscon_driver_284FE366(s32 arg0);
 s32 sceSyscon_driver_2B9E6A06(s32 *arg0);
+s32 sceSyscon_driver_2EE82492(u32 arg0);
 void sceSyscon_driver_373EC933(s32 arg0);
 void sceSyscon_driver_3B657A27(s32 arg0);
 s8 sceSyscon_driver_3C739F57(void);

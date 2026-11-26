@@ -2901,7 +2901,20 @@ void vsh_8F76CA2A(void) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/vshmain", module_start);
+s32 module_start(s32 arg0, struct Unk_module_start_1 *arg1) {
+    s32 var_s1;
+    void *temp_a0;
+
+    var_s1 = arg0;
+    func_00000000();
+    temp_a0 = sceVshCommonUtil_B55DCA45();
+    if (var_s1 >= 0x401) {
+        var_s1 = 0x400;
+    }
+    scePaf_F95EA3F1(temp_a0, arg1, var_s1);
+    func_0000EAB4(0, 0);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 350
@@ -8575,7 +8588,23 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0001C534);
 INCLUDE_ASM("nonmatchings/vshmain", func_0001C5B8);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/vshmain", func_0001C6D8);
+#else
+void func_0001C6D8(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0) = -1;
+    M2C_FIELD(arg0, s32 *, 0x14) = arg1;
+    func_0000F360(arg0 + 0x18, 0);
+    func_0000F360(arg0 + 0x1C, 0);
+    func_0000F360(arg0 + 0x20, 0);
+    func_0000EFE0(arg0 + 0x24, 0);
+    func_0000F000(arg0 + 0x28, 0);
+    func_0001CA20((s32) arg0);
+    M2C_FIELD(arg0, s32 *, 4) = scePaf_3586BE05(0x10, 0x7F800);
+    M2C_FIELD(arg0, s32 *, 8) = scePaf_3586BE05(0x10, 0x38400);
+    M2C_FIELD(arg0, s32 *, 0xC) = scePaf_3586BE05(0x10, 0xB400);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/vshmain", func_0001C788);
 

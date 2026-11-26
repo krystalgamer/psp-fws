@@ -32,11 +32,18 @@
   "puts": "void puts(s32 arg0);",
   "sceKernelRegisterStderrPipe": "s32 sceKernelRegisterStderrPipe(s32 arg0);",
   "sceKernelRegisterStdoutPipe": "s32 sceKernelRegisterStdoutPipe(s32 arg0);",
+  "sceKernelStderr": "s32 sceKernelStderr(void);",
+  "sceKernelStdin": "s32 sceKernelStdin(void);",
+  "sceKernelStdout": "s32 sceKernelStdout(void);",
   "syslib_D3744BE0": "void syslib_D3744BE0(void);"
  },
  "types": {
   "Unk_func_00000A28_0": "struct Unk_func_00000A28_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_00000A40_0": "struct Unk_func_00000A40_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};"
  },
- "vars": {}
+ "vars": {
+  "D_00001560": "extern s32 D_00001560;",
+  "D_00001564": "extern s32 D_00001564;",
+  "D_00001568": "extern s32 D_00001568;"
+ }
 }

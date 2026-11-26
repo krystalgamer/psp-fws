@@ -676,11 +676,29 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001C96C);
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001C978);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001CA08);
+
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001CB00);
+#endif
+
+#if FW_VERSION == 100
+s32 func_0001CB00(void) {
+    void *sp0;
+    s32 temp_v0;
+    s32 var_a1;
+
+    temp_v0 = sceIoDevctl(&D_00024E8C, 0x02125802, NULL, 0U, &sp0, 4U);
+    var_a1 = temp_v0;
+    if (temp_v0 >= 0) {
+        var_a1 = 1;
+        if (sp0 != 0x11) {
+            var_a1 = (sp0 == 0x41) * 2;
+        }
+    }
+    return var_a1;
+}
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001CB00);
-
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001CB60);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001CBF0);

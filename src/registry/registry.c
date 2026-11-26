@@ -728,7 +728,9 @@ s32 func_00006EF0(s32 arg0) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/registry", func_00005F54);
+s32 func_00005F54(s32 arg0) {
+    return -(sceIoClose(arg0) < 0);
+}
 #endif
 
 #if FW_VERSION < 282
@@ -747,9 +749,33 @@ s32 func_00006674(s32 arg0) {
 INCLUDE_ASM("nonmatchings/registry", func_000066D0);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", func_000067A0);
+#else
+s32 func_000067A0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
+    s32 temp_v0;
+    u32 temp_lo;
 
+    temp_lo = arg1 * arg2;
+    temp_v0 = sceIoWrite(arg3, arg0, temp_lo);
+    *arg4 = temp_v0;
+    return (-((temp_v0 < (s32) temp_lo) == 0) & 6) - 6;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", func_00006828);
+#else
+s32 func_00006828(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
+    s32 temp_v0;
+    u32 temp_lo;
+
+    temp_lo = arg1 * arg2;
+    temp_v0 = sceIoRead(arg3, arg0, temp_lo);
+    *arg4 = temp_v0;
+    return (((temp_v0 < (s32) temp_lo) == 0) * 8) - 8;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/registry", func_00006888);
 

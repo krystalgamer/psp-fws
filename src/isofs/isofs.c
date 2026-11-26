@@ -618,7 +618,19 @@ void func_00002364(struct Unk_func_00002364_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/isofs", func_00002374);
+#else
+s32 func_00002374(void *arg0) {
+    s32 var_v1;
+
+    var_v1 = 0x80010016;
+    if (arg0 != NULL) {
+        var_v1 = func_00001A4C(arg0);
+    }
+    return var_v1;
+}
+#endif
 
 #if FW_VERSION >= 330
 void func_00002328(void) {
@@ -941,8 +953,14 @@ s32 func_00006720(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/isofs", func_0000664C);
+#endif
+
+#if FW_VERSION == 100
+s32 func_0000664C(s32 arg0) {
+    return (-((arg0 & 0xF02) == 0) & 0x7FFE4FFC) - 0x7FFE4FFC;
+}
 #endif
 
 #if FW_VERSION < 201

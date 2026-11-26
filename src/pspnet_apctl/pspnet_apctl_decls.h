@@ -160,6 +160,7 @@ struct Unk_func_0000E8E8_0 {
     u32 unk10;
 };
 
+extern s32 D_00008220;
 extern u32 D_00008240;
 extern s32 D_00008B34;
 extern M2C_UNK D_00011DD4;
@@ -188,7 +189,10 @@ extern s32 D_000170A8;
 extern M2C_UNK D_000177A0;
 extern u32 D_00017820;
 
+s32 func_00000A30(void *arg0, s32 arg1);
 s32 func_00000B54(s32, s32, s32);
+s32 func_00000CB0(void);
+s32 func_00000D54(s32, s32, s32);
 s32 func_00000D60(s32, s32, s32, s32);
 s32 func_00000E28(s32);
 s32 func_00000F18(s32, s32);
@@ -303,6 +307,7 @@ void sceNetApctlDelHandler(s32 arg0);
 void sceNetApctlDisconnect(void);
 void sceNetApctlGetInfo(s32 arg0, s32 arg1);
 void sceNetApctlGetState(void);
+s32 sceNetApctlTerm(void);
 void sceNetApctl_internal_user_04776994(s32 arg0, s32 arg1, s32 arg2);
 void sceNetApctl_internal_user_6BDDCB8C(s32 arg0, s32 arg1);
 void sceNetApctl_internal_user_E9B2E5E6(void);

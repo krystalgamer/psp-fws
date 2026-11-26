@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "loadexec_decls.h"
@@ -327,7 +328,9 @@ s32 LoadExecForKernel_7B7C47EF(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_015DA036);
+void LoadExecForKernel_015DA036(s32 arg0, s32 arg1, s32 arg2) {
+    func_00001B64(0x130, arg0, arg1, arg2, 0x10000);
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -336,8 +339,14 @@ void LoadExecForKernel_015DA036(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_4F41E75E);
+#endif
+
+#if FW_VERSION == 100
+s32 LoadExecForKernel_4F41E75E(s32 arg0, s32 arg1, s32 arg2) {
+    return func_00001B64(0x131, arg0, arg1, arg2, 0x10000);
+}
 #endif
 
 #if FW_VERSION == 152
@@ -371,7 +380,9 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_A3D5E142);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_62C459E1);
+void LoadExecForKernel_62C459E1(s32 arg0, s32 arg1, s32 arg2) {
+    func_00001B64(0x100, arg0, arg1, arg2, 0x10000);
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152

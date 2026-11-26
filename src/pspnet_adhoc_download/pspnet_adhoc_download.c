@@ -1,3 +1,4 @@
+/* cflags[100]: -Os -frename-registers */
 #include "common.h"
 #include "pspnet_adhoc_download_decls.h"
 
@@ -79,7 +80,25 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000590);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A2C);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_A21FEF45);
+#else
+s32 sceNetAdhocDownload_A21FEF45(s32 arg0) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0x80410C02;
+    if (D_00002390 == 0) {
+        temp_v0 = func_000020D4(arg0);
+        var_v1 = temp_v0;
+        if (temp_v0 >= 0) {
+            D_00002390 = 1;
+            var_v1 = 0;
+        }
+    }
+    return var_v1;
+}
+#endif
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownload_2B6FB0DA);
@@ -173,11 +192,26 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002008);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000020D4);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002118);
+#else
+void func_00002118(void) {
+    if (D_00003D90 > 0) {
+        sceKernelDeleteVpl(D_00003D90);
+        D_00003D90 = 0;
+    }
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00002150);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000021C4);
+#else
+void func_000021C4(void *arg0) {
+    sceKernelFreeVpl(D_00003D90, arg0);
+}
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000021F0);
@@ -237,9 +271,41 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001D28);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001D60);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001DD4);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001E14);
+#endif
 
+#if FW_VERSION == 100
+u8 *func_00001E14(u8 *arg0, u8 *arg1, s32 arg2) {
+    s32 var_a2;
+    u8 *var_a1;
+    u8 *var_v0;
+    u8 *var_v1;
+    u8 temp_a3;
+
+    var_a1 = arg1;
+    var_a2 = arg2;
+    var_v0 = NULL;
+    if (arg0 != NULL) {
+        var_v1 = arg0;
+        if (var_a2 > 0) {
+            do {
+                temp_a3 = *var_a1;
+                var_a2 -= 1;
+                var_a1 += 1;
+                *var_v1 = temp_a3;
+                var_v1 += 1;
+            } while (var_a2 > 0);
+        }
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001E48);
 #endif
 
@@ -249,8 +315,16 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000022E0);
 
 #if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001E74);
+#endif
 
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001EB4);
+#endif
+
+#if FW_VERSION == 100
+void func_00001EB4(s32 arg0, s32 arg1) {
+    func_00001D60(arg1, arg0);
+}
 #endif
 
 #if FW_VERSION < 201

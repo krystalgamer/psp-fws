@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "usbstorms_decls.h"
 
@@ -221,7 +222,21 @@ INCLUDE_ASM("nonmatchings/usbstorms", func_00000A9C);
 INCLUDE_RODATA("nonmatchings/usbstorms", D_00003764);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/usbstorms", module_start);
+#else
+s32 module_start(void) {
+    s32 var_v1;
+
+    memset(&D_00002D20, 0, 0x60);
+    var_v1 = 0;
+    if (sceUsbstor_internal_489E6BF1(&D_00002D00) < 0) {
+        KDebugForKernel_84F370BC("%serror - cannot register handler\n", &D_00003460);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#endif
 
 #if FW_VERSION >= 271 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/usbstorms", sceUSB_Stor_Ms_driver_16173D42);

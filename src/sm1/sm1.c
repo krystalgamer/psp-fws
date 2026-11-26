@@ -27,11 +27,17 @@ s32 func_00000160(void) {
     return D_000004B0;
 }
 
-INCLUDE_ASM("nonmatchings/sm1", func_0000016C);
+s32 func_0000016C(void) {
+    return D_000004B4;
+}
 
-INCLUDE_ASM("nonmatchings/sm1", func_00000178);
+s32 func_00000178(void) {
+    return D_000004B8;
+}
 
-INCLUDE_ASM("nonmatchings/sm1", func_00000184);
+s32 func_00000184(void) {
+    return D_000004BC;
+}
 
 INCLUDE_ASM("nonmatchings/sm1", func_00000190);
 
@@ -39,7 +45,9 @@ INCLUDE_ASM("nonmatchings/sm1", func_00000214);
 
 INCLUDE_ASM("nonmatchings/sm1", func_000002D0);
 
-INCLUDE_ASM("nonmatchings/sm1", func_00000360);
+s32 func_00000360(void) {
+    return D_000004C0;
+}
 
 s32 func_0000036C(void) {
     return 0;

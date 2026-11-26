@@ -1719,13 +1719,16 @@ void func_000014E8(struct Unk_vt_func_000014E8_arg0 **arg0, M2C_UNK arg1) {
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00001538);
 
 INCLUDE_ASM("nonmatchings/savedata_utility", func_0000157C);
-#endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility", func_000015C0);
 #endif
 
 #if FW_VERSION == 100
+void func_000015C0(void *arg0) {
+    func_0000FE18(M2C_FIELD(arg0, void **, 0x1C));
+    D_000205B4 = 0;
+}
+
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00001438);
 
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00001A98);
@@ -2062,7 +2065,21 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00003E04);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_utility", func_000039A8);
 
-INCLUDE_ASM("nonmatchings/savedata_utility", func_00003AA0);
+void func_00003AA0(void *arg0) {
+    s32 temp_v0;
+    void **temp_a0;
+
+    if (arg0 != NULL) {
+        func_0000C860(M2C_FIELD(arg0, void **, 0x2C));
+        func_000142C4(3, 1);
+        temp_a0 = M2C_FIELD(arg0, void ***, 0x1C);
+        temp_v0 = scePaf_DAB59652(M2C_FIELD(*temp_a0, s32 (**)(void **), 0x24)(temp_a0), &D_0002458C);
+        if (temp_v0 != 0) {
+            func_0000A940(temp_v0, (s32) arg0, 0);
+        }
+        func_000039A8((s32) arg0);
+    }
+}
 #endif
 
 #if FW_VERSION < 250

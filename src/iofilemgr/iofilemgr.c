@@ -1,3 +1,4 @@
+/* cflags[100]: -Os */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
@@ -458,7 +459,9 @@ INCLUDE_ASM("nonmatchings/iofilemgr", syslib_D3744BE0);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/iofilemgr", func_0000002C);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", module_reboot_before);
+void module_reboot_before(void) {
+    func_0000015C(0);
+}
 #endif
 
 #if FW_VERSION < 201
@@ -489,14 +492,44 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_000006C4);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00000704);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoPollAsync);
+#endif
 
+#if FW_VERSION == 100
+s32 sceIoPollAsync(u32 arg0, void *arg1) {
+    return func_00000704((s32) arg0, (s32) arg1, 1, 0);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsync);
+#endif
 
+#if FW_VERSION == 100
+s32 sceIoWaitAsync(u32 arg0, void *arg1) {
+    return func_00000704((s32) arg0, (s32) arg1, 0, 0);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsyncCB);
+#endif
 
+#if FW_VERSION == 100
+s32 sceIoWaitAsyncCB(u32 arg0, void *arg1) {
+    return func_00000704((s32) arg0, (s32) arg1, 0, 1);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_CB05F8D6);
+#endif
+
+#if FW_VERSION == 100
+void IoFileMgrForKernel_CB05F8D6(s32 arg0, s32 arg1, s32 arg2) {
+    func_00000704(arg0, arg2, arg1, 0);
+}
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
@@ -513,10 +546,24 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004594);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00000AEC);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoClose);
+#endif
 
+#if FW_VERSION == 100
+s32 sceIoClose(u32 arg0) {
+    return func_00000AEC((s32) arg0, 0, 1);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoCloseAsync);
+#endif
+
+#if FW_VERSION == 100
+s32 sceIoCloseAsync(u32 arg0) {
+    return func_00000AEC((s32) arg0, 1, 0);
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_A905B705);
@@ -565,10 +612,24 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_00005130);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00000E2C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoOpen);
+#endif
 
+#if FW_VERSION == 100
+s32 sceIoOpen(void *arg0, s32 arg1, s32 arg2) {
+    return func_00000D24((s32) arg0, arg1, arg2, 0);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoOpenAsync);
+#endif
+
+#if FW_VERSION == 100
+s32 sceIoOpenAsync(void *arg0, s32 arg1, s32 arg2) {
+    return func_00000D24((s32) arg0, arg1, arg2, 1);
+}
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
@@ -587,23 +648,47 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000466C);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_000010A8);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoRead);
+#endif
 
+#if FW_VERSION == 100
+s32 sceIoRead(u32 arg0, void *arg1, u32 arg2) {
+    return func_000010A8((s32) arg0, (s32) arg1, (s32) arg2, 0);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoReadAsync);
 #endif
 
 #if FW_VERSION == 100
+s32 sceIoReadAsync(u32 arg0, void *arg1, u32 arg2) {
+    return func_000010A8((s32) arg0, (s32) arg1, (s32) arg2, 1);
+}
+
 INCLUDE_ASM("nonmatchings/iofilemgr", func_000011EC);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWrite);
+#endif
 
+#if FW_VERSION == 100
+s32 sceIoWrite(u32 arg0, void *arg1, u32 arg2) {
+    return func_000011EC((s32) arg0, (s32) arg1, (s32) arg2, 0);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWriteAsync);
 #endif
 
 #if FW_VERSION == 100
+s32 sceIoWriteAsync(u32 arg0, void *arg1, u32 arg2) {
+    return func_000011EC((s32) arg0, (s32) arg1, (s32) arg2, 1);
+}
+
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001330);
 #endif
 
@@ -621,13 +706,25 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoLseek32Async);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_000014D4);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoIoctl);
+#endif
 
+#if FW_VERSION == 100
+s32 sceIoIoctl(u32 arg0, s32 arg1, void *arg2, u32 arg3, void *arg4, u32 arg5) {
+    return func_000014D4((s32) arg0, arg1, (s32) arg2, (s32) arg3, (s32) arg4, (s32) arg5, 0);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoIoctlAsync);
 #endif
 
 #if FW_VERSION == 100
+s32 sceIoIoctlAsync(u32 arg0, s32 arg1, void *arg2, u32 arg3, void *arg4, u32 arg5) {
+    return func_000014D4((s32) arg0, arg1, (s32) arg2, (s32) arg3, (s32) arg4, (s32) arg5, 1);
+}
+
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_000046F0);
 
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000472C);
@@ -649,12 +746,34 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoRemove);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001AB0);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoMkdir);
+#endif
 
+#if FW_VERSION == 100
+s32 sceIoMkdir(void *arg0, s32 arg1) {
+    return func_00001AB0((s32) arg0, arg1, 1);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoRmdir);
+#endif
 
+#if FW_VERSION == 100
+s32 sceIoRmdir(void *arg0) {
+    return func_00001AB0((s32) arg0, 0, 2);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChdir);
+#endif
+
+#if FW_VERSION == 100
+s32 sceIoChdir(void *arg0) {
+    return func_00001AB0((s32) arg0, 0, 0);
+}
 #endif
 
 #if FW_VERSION < 201
@@ -741,12 +860,26 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00001A24);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001AA8);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001AE4);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001B50);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00003180);
+s32 func_00001B50(void) {
+    s32 temp_v0;
+
+    temp_v0 = SysMemForKernel_636C953B(D_00004CEC, 0xC);
+    if (temp_v0 != 0) {
+        memset(temp_v0, 0, 0xC);
+    }
+    return temp_v0;
+}
+
+void func_00003180(s32 arg0) {
+    SysMemForKernel_7B749390(D_00004CEC, arg0);
+}
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_000031A4);
 #endif
@@ -761,12 +894,26 @@ void func_00001B9C(s32 arg0) {
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001BC4);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001C00);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00001C6C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/iofilemgr", func_0000332C);
+s32 func_00001C6C(void) {
+    s32 temp_v0;
+
+    temp_v0 = SysMemForKernel_636C953B(D_00004CEC, 0x70);
+    if (temp_v0 != 0) {
+        memset(temp_v0, 0, 0x70);
+    }
+    return temp_v0;
+}
+
+void func_0000332C(s32 arg0) {
+    SysMemForKernel_7B749390(D_00004CEC, arg0);
+}
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00003350);
 
@@ -895,9 +1042,17 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_000029D8);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00006374);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00003CF8);
+#endif
 
+#if FW_VERSION == 100
+s32 func_00003CF8(void) {
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00003D00);
 #endif
 
@@ -922,7 +1077,10 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00003BE8);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00003D0C);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00003D68);
+void func_00003D68(void) {
+    IoFileMgrForKernel_C7F35804((s32) &D_0000563C);
+    IoFileMgrForKernel_8E982A74((s32) &D_00004CCC);
+}
 #endif
 
 #if FW_VERSION >= 282

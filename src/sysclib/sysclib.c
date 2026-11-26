@@ -1,16 +1,47 @@
+/* cflags[100]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sysclib_decls.h"
 
 INCLUDE_ASM("nonmatchings/sysclib", SysclibForKernel_87C78FB6);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/sysclib", toupper);
+#else
+s32 toupper(s32 arg0) {
+    s32 var_v0;
 
+    var_v0 = arg0;
+    if (SysclibForKernel_32C767F2(arg0) & 2) {
+        var_v0 = (arg0 & 0xFF) - 0x20;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/sysclib", tolower);
+#else
+s32 tolower(s32 arg0) {
+    s32 var_v0;
+
+    var_v0 = arg0;
+    if (SysclibForKernel_32C767F2(arg0) & 1) {
+        var_v0 = (arg0 & 0xFF) + 0x20;
+    }
+    return var_v0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/sysclib", SysclibForKernel_32C767F2);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/sysclib", SysclibForKernel_D887CACD);
+#else
+M2C_UNK *SysclibForKernel_D887CACD(void) {
+    return &D_000022C1;
+}
+#endif
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/sysclib", strtok_r);
@@ -56,13 +87,9 @@ void bcmp(s32 arg0, s32 arg1, s32 arg2) {
     memcmp(arg0, arg1, arg2);
 }
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/sysclib", bcopy);
-#else
 void bcopy(s32 arg0, s32 arg1) {
     memmove(arg1, arg0);
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/sysclib", bzero);
 
@@ -71,7 +98,26 @@ INCLUDE_ASM("nonmatchings/sysclib", strchr);
 INCLUDE_ASM("nonmatchings/sysclib", strcmp);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/sysclib", strcpy);
+u8 *strcpy(u8 *arg0, u8 *arg1) {
+    u8 *var_a1;
+    u8 *var_a2;
+    u8 *var_v0;
+    u8 temp_v0;
+
+    var_a1 = arg1;
+    var_a2 = arg0;
+    var_v0 = NULL;
+    if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
+        do {
+            temp_v0 = *var_a1;
+            var_a1 += 1;
+            *var_a2 = temp_v0;
+            var_a2 += 1;
+        } while (temp_v0 != 0);
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 #else
 u8 *strcpy(u8 *arg0, u8 *arg1) {
     u8 *var_a1;

@@ -13,5 +13,6 @@ struct Unk_func_000002B0_temp_a2 {
 
 void func_000002B0(void **arg0);
 void func_000002B4(void **arg0);
+void func_00000798(void **arg0);
 
 #endif

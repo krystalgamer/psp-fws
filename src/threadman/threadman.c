@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "threadman_decls.h"
@@ -29,7 +30,28 @@ INCLUDE_ASM("nonmatchings/threadman", func_00000268);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00000308);
 
-INCLUDE_ASM("nonmatchings/threadman", func_000003F0);
+s32 func_000003F0(s32 arg0, s32 arg1) {
+    M2C_UNK *temp_s0;
+    M2C_UNK *var_s1;
+    s32 var_s2;
+    void *temp_a0;
+    void *temp_s3;
+
+    temp_a0 = arg0 + (M2C_FIELD(D_00015B14, u8 *, 0x15) * 4);
+    var_s1 = M2C_FIELD(temp_a0, M2C_UNK **, 0xC);
+    temp_s3 = temp_a0 + 0xC;
+    var_s2 = 0;
+    if (var_s1 != temp_s3) {
+        do {
+            temp_s0 = var_s1;
+            var_s1 = M2C_FIELD(var_s1, M2C_UNK **, 0);
+            func_00000268((s32) temp_s0);
+            var_s2 += 1;
+            M2C_FIELD(temp_s0, s32 *, 0x40) = arg1;
+        } while (var_s1 != temp_s3);
+    }
+    return var_s2;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -125,9 +147,24 @@ INCLUDE_ASM("nonmatchings/threadman", func_00000698);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/threadman", func_00000474);
 
-INCLUDE_ASM("nonmatchings/threadman", func_00000524);
+void func_00000524(s32 arg0) {
+    SysMemForKernel_5367923C(arg0, 0x85FE2B4C);
+}
 
-INCLUDE_ASM("nonmatchings/threadman", func_00000544);
+s32 func_00000544(void *arg0, void *arg1) {
+    void *temp_a0;
+    void *temp_v1;
+
+    SysMemForKernel_CE05CCB7();
+    temp_v1 = arg0 + (M2C_FIELD(arg1, u8 *, 0x15) * 4);
+    M2C_FIELD(temp_v1, s32 *, 4) = 0;
+    temp_a0 = temp_v1 + 0xC;
+    M2C_FIELD(temp_v1, s32 *, 8) = 0;
+    M2C_FIELD(temp_v1, s32 *, 0) = 0;
+    M2C_FIELD(temp_v1, void **, 0xC) = temp_a0;
+    M2C_FIELD(temp_a0, void **, 4) = temp_a0;
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -176,7 +213,13 @@ INCLUDE_ASM("nonmatchings/threadman", func_00000A38);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_00000688);
+s32 func_00000688(s32 arg0, void *arg1) {
+    void *temp_a0;
+
+    temp_a0 = arg0 + (M2C_FIELD(arg1, u8 *, 0x15) * 4);
+    M2C_FIELD(temp_a0, s32 *, 8) = (s32) (M2C_FIELD(temp_a0, s32 *, 8) - 1);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_000006A8);
 
@@ -715,7 +758,16 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitThreadEnd);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitThreadEndCB);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_00003518);
+void func_00003518(void *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = sceKernelCpuSuspendIntr();
+    M2C_FIELD(arg0, s32 *, 0x38) = 0;
+    if (func_00000268((s32) arg0) > 0) {
+        D_0001551C = 0;
+    }
+    sceKernelCpuResumeIntr(temp_v0);
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDelayThread);
@@ -1685,11 +1737,24 @@ s32 func_0000DE94(void) {
 }
 #else
 INCLUDE_ASM("nonmatchings/threadman", func_0000E61C);
+
+INCLUDE_ASM("nonmatchings/threadman", func_0000E674);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/threadman", func_0000E674);
-#else
+#if FW_VERSION == 100
+s32 func_0000E674(void *arg0, void *arg1) {
+    void *temp_v1;
+
+    SysMemForKernel_CE05CCB7();
+    temp_v1 = arg0 + (M2C_FIELD(arg1, u8 *, 0x15) * 4);
+    M2C_FIELD(temp_v1, s32 *, 0x10) = 0;
+    M2C_FIELD(temp_v1, void **, 4) = temp_v1;
+    M2C_FIELD(temp_v1, void **, 0) = temp_v1;
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_0000E674(void *arg0, void *arg1) {
     void *temp_a0;
 
@@ -2165,7 +2230,20 @@ INCLUDE_ASM("nonmatchings/threadman", func_0001415C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_0000F50C);
+void func_0000F50C(void *arg0, s32 arg1, s32 arg2) {
+    s32 var_a2;
+    s32 var_a3;
+
+    if (arg1 != 0) {
+        var_a2 = M2C_FIELD(arg0, s32 *, 0x7C);
+        var_a3 = M2C_FIELD(arg0, s32 *, 0x80);
+    } else {
+        var_a2 = M2C_FIELD(arg0, s32 *, 0x70);
+        var_a3 = M2C_FIELD(arg0, s32 *, 0x74);
+    }
+    KDebugForKernel_84F370BC("\nThread (thid=0x%x) stack overflow\n Stack = 0x%x, Stack size = 0x%x, SP = 0x%x\n", M2C_FIELD(arg0, s32 *, 8), var_a2, var_a3, arg2);
+    func_0000F378(arg0 - (M2C_FIELD(D_00015B18, u8 *, 0x15) * 4));
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000F570);
 
@@ -2386,7 +2464,9 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013DB0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", ThreadManForUser_532A522E);
+void ThreadManForUser_532A522E(void) {
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00015518, void **, 0x100), s32 *, 0x18));
+}
 #endif
 
 #if FW_VERSION >= 350
@@ -2520,7 +2600,9 @@ INCLUDE_ASM("nonmatchings/threadman", func_00012F3C);
 
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_2D69D086);
 
-INCLUDE_ASM("nonmatchings/threadman", ThreadManForKernel_FCB5EB49);
+s32 ThreadManForKernel_FCB5EB49(void) {
+    return D_00015B50;
+}
 #endif
 
 #if FW_VERSION >= 282

@@ -1,10 +1,18 @@
 {
  "funcs": {
+  "KDebugForKernel_84F370BC": "M2C_UNK KDebugForKernel_84F370BC(M2C_UNK *, M2C_UNK *);",
   "func_00003944": "s32 func_00003944(s32 arg0, s32 arg1);",
   "func_00004380": "s32 func_00004380(void);",
+  "memset": "M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);",
+  "module_start": "s32 module_start(void);",
   "sceKernelPowerUnlock": "s32 sceKernelPowerUnlock(s32);",
   "sceReg_driver_0CAE832B": "M2C_UNK sceReg_driver_0CAE832B(s32);",
-  "sceReg_driver_FA8A5739": "M2C_UNK sceReg_driver_FA8A5739(s32);"
+  "sceReg_driver_FA8A5739": "M2C_UNK sceReg_driver_FA8A5739(s32);",
+  "sceUsbstor_internal_489E6BF1": "s32 sceUsbstor_internal_489E6BF1(M2C_UNK *);"
  },
- "vars": {}
+ "vars": {
+  "D_00002D00": "extern M2C_UNK D_00002D00;",
+  "D_00002D20": "extern M2C_UNK D_00002D20;",
+  "D_00003460": "extern M2C_UNK D_00003460;"
+ }
 }

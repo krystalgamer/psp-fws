@@ -172,6 +172,7 @@ extern s32 D_00006400;
 
 s32 _sce_pspnet_adhocctl_get_state(s32 *arg0);
 void func_0000155C(s32 arg0, s32 arg1);
+s32 func_000018F8(void);
 s32 func_00001BD4(s32, s32, s32, s32);
 void func_00002014(struct Unk_func_00002014_0 *arg0);
 s32 func_00002068(s32, s32, s32, s32);
@@ -205,6 +206,7 @@ s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
 s32 sceNetAdhocctlGetAdhocId(void *arg0);
 s32 sceNetAdhocctlGetState(s32 *arg0);
+s32 sceNetAdhocctlTerm(void);
 void sceNetAdhocctl_lib_1572422C(void);
 M2C_UNK sceNet_lib_57CC57DA(s32, M2C_UNK, M2C_UNK);
 M2C_UNK sceNet_lib_AB7DD9A5(M2C_UNK *, M2C_UNK, M2C_UNK);

@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "mpeg_vsh_decls.h"
@@ -312,8 +313,14 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001E8C);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegQueryStreamOffset);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001FC8);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00001FC8(s32 *arg0) {
+    return (-(func_00006884(*arg0, (s32) &D_00009B98) == 0) & 0x7F9EFE02) - 0x7F9EFE02;
+}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
@@ -480,7 +487,30 @@ s32 func_0000366C(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00003674);
+#else
+s32 func_00003674(void *arg0) {
+    s32 *temp_v1;
+    s32 temp_s0;
+    s32 temp_v0;
+    s32 var_v0;
+    void *temp_s2;
+
+    temp_v1 = M2C_FIELD(arg0, s32 **, 0x28);
+    temp_s2 = *temp_v1;
+    temp_v0 = func_00001FC8(temp_v1);
+    if (temp_v0 != 0) {
+        var_v0 = temp_v0;
+    } else {
+        func_000079D8(M2C_FIELD(temp_s2, s32 *, 0x66C));
+        temp_s0 = M2C_FIELD(arg0, s32 *, 0xC);
+        func_00007A68(M2C_FIELD(temp_s2, s32 *, 0x66C));
+        var_v0 = temp_s0;
+    }
+    return var_v0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000036DC);
 
@@ -798,9 +828,27 @@ void *func_00005694(void *arg0, u32 arg1) {
 u8 func_000056B8(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 1);
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000056C0);
+#endif
 
+#if FW_VERSION == 100
+s32 func_000056C0(s32 arg0, s32 arg1) {
+    s32 var_v0;
+
+    var_v0 = 0;
+    if (arg1 >= 4) {
+
+    } else {
+        var_v0 = func_00009530(arg0 + (arg1 * 2) + 2);
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION < 282
 s32 func_000056FC(s32 arg0) {
     return arg0 + 0xE;
 }
@@ -940,7 +988,20 @@ s32 sceMpegInitAu(void *arg0, s32 arg1, void *arg2) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/mpeg_vsh", func_0000572C);
+s32 func_0000572C(void) {
+    M2C_VFIELD(&D_00007D00, s16, 0x14) = 1;
+    M2C_VFIELD(&D_00007D00, s16, 0) = 0x95;
+    M2C_VFIELD(&D_00007D00, s16, 4) = 0xCC;
+    M2C_VFIELD(&D_00007D00, s16, 8) = 0x3CE;
+    M2C_VFIELD(&D_00007D00, s16, 0xA) = 0x398;
+    M2C_VFIELD(&D_00007D00, s16, 0xC) = 0x95;
+    M2C_VFIELD(&D_00007D00, s16, 0xE) = 0x102;
+    M2C_VFIELD(&D_00007D00, s16, 0x12) = 0x10;
+    M2C_VFIELD(&D_00007D00, s16, 2) = 0;
+    M2C_VFIELD(&D_00007D00, s16, 6) = 0x95;
+    M2C_VFIELD(&D_00007D00, s16, 0x10) = 0;
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 271
@@ -1317,8 +1378,23 @@ s32 sceMpeg_988E9E12(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00005CC4);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00005CC4(s32 arg0, s32 arg1, void *arg2, s32 *arg3) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = sceKernelCreateSema(arg2, 0U, arg0, arg1, NULL);
+    var_v1 = 0;
+    *arg3 = temp_v0;
+    if (temp_v0 < 0) {
+        var_v1 = 0x80000041;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
@@ -1331,8 +1407,20 @@ s32 func_00005CC4(s32 arg0, s32 arg1, void *arg2, s32 *arg3) {
 }
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00005D1C);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00005D1C(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceKernelDeleteSema(arg0) != 0) {
+        var_v1 = 0x80000041;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
@@ -1341,8 +1429,20 @@ s32 func_00005D1C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000079D8);
+#endif
+
+#if FW_VERSION == 100
+s32 func_000079D8(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceKernelWaitSema(arg0, 1, NULL) != 0) {
+        var_v1 = 0x80000041;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282

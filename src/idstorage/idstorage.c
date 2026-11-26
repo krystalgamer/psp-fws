@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "idstorage_decls.h"
 
@@ -96,7 +97,17 @@ s32 module_start(void) {
     return 0;
 }
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/idstorage", module_reboot_before);
+#else
+s32 module_reboot_before(void) {
+    sceIdStorage_driver_3AD32523();
+    sceSysEventForKernel_D7D3FDCD(&D_000021F0);
+    sceKernelDeleteSema(M2C_VFIELD(&D_00006630, s32, 4));
+    sceKernelDeleteFpl(M2C_VFIELD(&D_00006630, s32, 0));
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_2CE0BE69);
 
@@ -113,9 +124,21 @@ s32 sceIdStorage_driver_EB830733(void) {
     return 0x200;
 }
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_FEFA40C2);
+#else
+u8 sceIdStorage_driver_FEFA40C2(void) {
+    return D_00006644;
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_2D633688);
+#else
+u8 sceIdStorage_driver_2D633688(void) {
+    return D_00006645;
+}
+#endif
 
 #if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/idstorage", func_00001C30);

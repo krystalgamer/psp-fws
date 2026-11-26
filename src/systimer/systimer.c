@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "systimer_decls.h"
@@ -61,7 +62,12 @@ INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_A95143E2);
 INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_4A01F9D3);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/systimer", func_00000798);
+void func_00000798(void **arg0) {
+    void *temp_a1;
+
+    temp_a1 = *arg0;
+    M2C_FIELD(temp_a1, s32 *, 0) = (s32) (M2C_FIELD(temp_a1, s32 *, 0x100) & 0x7F7FFFFF);
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/systimer", SysTimerForKernel_54BB5DB4);

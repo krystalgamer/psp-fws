@@ -78,7 +78,24 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetPeerInfo);
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetAddrByName);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlTerm);
+#else
+s32 sceNetAdhocctlTerm(void) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (D_000062B0 != 0) {
+        temp_v0 = func_000018F8();
+        if (temp_v0 >= 0) {
+            D_000062B0 = 0;
+        }
+        var_v1 = temp_v0;
+    }
+    return var_v1;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlConnect);
 
@@ -100,8 +117,23 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlAddHandler);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlDelHandler);
 
-#if FW_VERSION < 151
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetState);
+#endif
+
+#if FW_VERSION == 100
+s32 sceNetAdhocctlGetState(s32 *arg0) {
+    s32 var_v0;
+
+    var_v0 = 0x80410B08;
+    if (D_000062B0 != 0) {
+        var_v0 = 0x80410B04;
+        if (arg0 != NULL) {
+            var_v0 = _sce_pspnet_adhocctl_get_state(arg0);
+        }
+    }
+    return var_v0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -159,7 +191,7 @@ s32 sceNetAdhocctlGetState(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetAdhocId);
 #else
 s32 sceNetAdhocctlGetAdhocId(void *arg0) {
@@ -174,9 +206,7 @@ s32 sceNetAdhocctlGetAdhocId(void *arg0) {
     }
     return var_v0;
 }
-#endif
 
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetPeerList);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetAddrByName);

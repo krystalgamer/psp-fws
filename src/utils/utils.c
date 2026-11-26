@@ -247,12 +247,45 @@ INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_23FFC828);
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0CE3E29);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_E0E6BA96);
+#else
+s32 UtilsForKernel_E0E6BA96(s32 arg0) {
+    void *sp0;
+    s32 var_v1;
 
+    var_v1 = 0;
+    if (UtilsForKernel_B0E9C31F(arg0, 0, &sp0, 0, 0, 0) >= 0) {
+        var_v1 = sp0;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_8C1FBE04);
+#else
+s32 UtilsForKernel_8C1FBE04(s32 arg0) {
+    void *sp0;
+    s32 var_v1;
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/utils", UtilsForKernel_23FFC828);
+    var_v1 = 0;
+    if (UtilsForKernel_B0E9C31F(arg0, 0, 0, &sp0, 0, 0) >= 0) {
+        var_v1 = sp0;
+    }
+    return var_v1;
+}
+
+s32 UtilsForKernel_23FFC828(s32 arg0) {
+    void *sp0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (UtilsForKernel_B0E9C31F(arg0, 0, 0, 0, 0, &sp0) >= 0) {
+        var_v1 = sp0;
+    }
+    return var_v1;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/utils", syslib_D3744BE0);
