@@ -1,3 +1,4 @@
+/* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
@@ -125,7 +126,7 @@ s32 sceIdStorage_driver_EB830733(void) {
     return 0x200;
 }
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_FEFA40C2);
 #else
 u8 sceIdStorage_driver_FEFA40C2(void) {
@@ -133,7 +134,7 @@ u8 sceIdStorage_driver_FEFA40C2(void) {
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorage_driver_2D633688);
 #else
 u8 sceIdStorage_driver_2D633688(void) {

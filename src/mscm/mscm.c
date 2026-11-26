@@ -1,3 +1,4 @@
+/* cflags[152]: -Os */
 /* cflags[150]: -Os */
 /* cflags[100]: -Os */
 /* cflags: -O2 -frename-registers */
@@ -84,13 +85,7 @@ INCLUDE_RODATA("nonmatchings/mscm", D_00007120);
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/mscm", func_00000124);
-#endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/mscm", func_000001E4);
-#endif
-
-#if FW_VERSION < 152
 s32 func_000001E4(void *arg0) {
     sceSysreg_driver_18172C6A(M2C_FIELD(arg0, s32 *, 4));
     sceMScm_driver_F1924A06((s32) arg0, 1);
@@ -229,11 +224,11 @@ INCLUDE_ASM("nonmatchings/mscm", func_00001BA0);
 INCLUDE_ASM("nonmatchings/mscm", func_00001D18);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", func_00002194);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 func_00002194(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     s32 temp_s0;
     s32 temp_v0;
@@ -304,11 +299,11 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_46AAC4E5);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_907D7766);
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_B01C378C);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceMScm_driver_B01C378C(struct Unk_sceMScm_driver_B01C378C_0 *arg0) {
     sceKernelClearEventFlag(M2C_FIELD(arg0->unk8, u32 *, 0x30), 0U);
     return 0;
@@ -362,11 +357,11 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_97290A44);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_B1D1C718);
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_D6DB3199);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceMScm_driver_D6DB3199(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
 
@@ -420,11 +415,11 @@ INCLUDE_ASM("nonmatchings/mscm", func_00004DAC);
 INCLUDE_ASM("nonmatchings/mscm", func_000047C0);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0A054CDA);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceMScm_driver_0A054CDA(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
     return M2C_FIELD(arg0->unk8, s32 *, 0x18);
 }
@@ -545,7 +540,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005658);
 INCLUDE_ASM("nonmatchings/mscm", func_00005718);
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mscm", func_00005804);
 #else
 s32 func_00005804(s32 arg0) {
@@ -584,7 +579,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000591C);
 INCLUDE_ASM("nonmatchings/mscm", func_000059C0);
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mscm", func_00005A44);
 #else
 s32 func_00005A44(s32 arg0, s32 arg1, s32 arg2) {
@@ -773,11 +768,11 @@ INCLUDE_ASM("nonmatchings/mscm", func_000057F8);
 INCLUDE_ASM("nonmatchings/mscm", func_000053F4);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", func_000059CC);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 func_000059CC(void) {
     return 0x80020325;
 }
@@ -799,11 +794,11 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005EE4);
 INCLUDE_ASM("nonmatchings/mscm", func_00005A44_v100);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", func_00005AA8);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 func_00005AA8(void *arg0) {
     s32 var_v0;
 
@@ -831,11 +826,11 @@ s32 func_00005AA8(void *arg0) {
 INCLUDE_ASM("nonmatchings/mscm", func_00005AD0);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", func_00005B3C);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 func_00005B3C(void *arg0, s32 arg1) {
     s32 var_v0;
 
@@ -863,11 +858,11 @@ s32 func_00005B3C(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/mscm", func_00005B64);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_F0CC24D1);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceMScm_driver_F0CC24D1(void *arg0) {
     s32 var_v0;
 

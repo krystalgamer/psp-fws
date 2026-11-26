@@ -1,3 +1,4 @@
+/* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
@@ -215,7 +216,7 @@ INCLUDE_ASM("nonmatchings/usbstor", func_00001A0C);
 
 INCLUDE_ASM("nonmatchings/usbstor", func_00001B0C);
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstor", func_00001BB0);
 #else
 void func_00001BB0(void) {

@@ -76,6 +76,7 @@ struct Unk_func_00005054_0 {
 
 extern s32 D_00004F80;
 extern s32 D_00004FC0_v150;
+extern s32 D_00004FC0_v152;
 extern s32 D_000050F0;
 extern s32 D_000050F4;
 extern s32 D_000050F8;
@@ -94,6 +95,7 @@ extern s32 D_00005128;
 extern s32 D_00005134;
 extern s32 D_00005138;
 extern s32 D_00005138_v150;
+extern s32 D_00005138_v152;
 extern s32 D_00005144;
 extern s32 D_0000514C;
 extern s32 D_00005150;

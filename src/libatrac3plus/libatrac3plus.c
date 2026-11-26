@@ -351,8 +351,14 @@ s32 func_000022C4(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000022E4);
+#endif
+
+#if FW_VERSION == 152
+u32 func_000022E4(u32 arg0, u32 arg1) {
+    return (arg1 >= arg0) ? arg0 : arg1;
+}
 #endif
 
 #if FW_VERSION < 152
@@ -476,11 +482,11 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_000028CC);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002918);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 152 && FW_VERSION < 250)
+#if FW_VERSION == 100 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000029CC);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000029CC(void *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -592,8 +598,26 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002B44);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002C24);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002CE0);
+#endif
+
+#if FW_VERSION == 152
+s32 func_00002CE0(s32 arg0) {
+    s32 temp_a2;
+    s32 temp_s0;
+    u32 temp_v0;
+    u32 var_a0;
+
+    temp_a2 = func_0000326C(arg0);
+    var_a0 = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x38) != 2) {
+        var_a0 = M2C_FIELD(arg0, u32 *, 0x48);
+    }
+    temp_s0 = func_00003150(var_a0, M2C_FIELD(arg0, u32 *, 0x44), (u32) temp_a2, M2C_FIELD(arg0, u32 *, 8));
+    temp_v0 = func_0000302C(arg0);
+    return (temp_v0 >= (u32) temp_s0) ? temp_s0 : (s32) temp_v0;
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -618,8 +642,26 @@ u32 func_00002D4C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002D84);
+#endif
+
+#if FW_VERSION == 152
+s32 func_00002D84(s32 arg0) {
+    s32 temp_v0;
+    s32 var_s2;
+    u32 temp_a3;
+
+    var_s2 = func_00002E3C(arg0);
+    if (M2C_FIELD(arg0, s32 *, 0x24) >= 0) {
+        temp_v0 = func_000020B4(arg0, M2C_FIELD(arg0, s32 *, 0x1C));
+        temp_a3 = M2C_FIELD(arg0, s32 *, 0x28) + M2C_FIELD(arg0, s32 *, 0x3C);
+        if (temp_a3 >= (u32) (temp_v0 + 1)) {
+            var_s2 = ((s32) ((u32) ((temp_a3 - temp_v0) - 1) / (u32) ((temp_v0 - func_00002044(arg0, M2C_FIELD(arg0, s32 *, 0x18))) + 1)) >= M2C_FIELD(arg0, s32 *, 0x24)) ? -3 : var_s2;
+        }
+    }
+    return var_s2;
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -640,8 +682,17 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_00003018);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002F7C);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002FBC);
+#endif
+
+#if FW_VERSION == 152
+u32 func_00002FBC(u32 arg0, s32 arg1, u32 arg2, u32 arg3) {
+    u32 temp_v0;
+
+    temp_v0 = arg1 + arg2;
+    return !((temp_v0 < arg0) & (arg2 < arg3)) ? 0U : temp_v0;
+}
 #endif
 
 #if FW_VERSION < 152
@@ -674,8 +725,19 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002FE0);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_0000302C);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000030A8);
+#endif
+
+#if FW_VERSION == 152
+s32 func_000030A8(void *arg0) {
+    u32 temp_a2;
+    u32 temp_a3;
+
+    temp_a2 = M2C_FIELD(arg0, s32 *, 0x28) + M2C_FIELD(arg0, s32 *, 0x3C);
+    temp_a3 = M2C_FIELD(arg0, u32 *, 0x30);
+    return (temp_a2 >= temp_a3) ? 0 : (temp_a3 - temp_a2);
+}
 #endif
 
 #if FW_VERSION < 152
@@ -698,8 +760,27 @@ s32 func_000030A8(void *arg0) {
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000030D0);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00003150);
+#endif
+
+#if FW_VERSION == 152
+s32 func_00003150(u32 arg0, u32 arg1, u32 arg2, u32 arg3) {
+    s32 var_v1;
+    u32 temp_v1;
+    u32 var_a1;
+
+    var_a1 = arg1;
+    temp_v1 = arg0 + arg2;
+    if (arg0 < var_a1) {
+        var_a1 = (((u32) (var_a1 - arg0) / arg3) * arg3) + arg0;
+    }
+    var_v1 = var_a1 - temp_v1;
+    if (temp_v1 >= var_a1) {
+        var_v1 = (var_a1 >= arg2) ? (var_a1 - arg2) : 0;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282

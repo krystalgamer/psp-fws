@@ -441,13 +441,7 @@ void func_00044448(void *arg0) {
         M2C_FIELD(arg0, s32 *, 0) = (s32) (M2C_FIELD(arg0, s32 *, 0) + temp_v1);
     }
 }
-#endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/msvideo_plugin_05B564", func_0004447C);
-#endif
-
-#if FW_VERSION < 152
 void func_0004447C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 8;
     if (M2C_FIELD(arg0, s32 *, 8) != 0) {
@@ -455,9 +449,7 @@ void func_0004447C(void *arg0) {
         M2C_FIELD(arg0, s32 *, 0) = (s32) (M2C_FIELD(arg0, s32 *, 0) + M2C_FIELD(arg0, s32 *, 8));
     }
 }
-#endif
 
-#if FW_VERSION < 201
 void func_000444CC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = (s32) ((M2C_FIELD(arg0, s32 *, 0xC) * 0xC) + 0x10);
 }

@@ -616,9 +616,7 @@ void func_00002364(struct Unk_func_00002364_0 *arg0) {
     arg0->unk0 = 0x2E;
     arg0->unk1 = 0;
 }
-#endif
 
-#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/isofs", func_00002374);
 #else
 s32 func_00002374(void *arg0) {

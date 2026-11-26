@@ -1,3 +1,4 @@
+/* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags: -Os */
 #include "common.h"
@@ -153,11 +154,11 @@ s32 sceCodec_driver_28A49CCA(void) {
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_BD8E0977);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_856E7487);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void sceCodec_driver_856E7487(s32 arg0, s32 arg1) {
     func_00000924((arg0 * 2) - 1, (arg1 * 2) - 1, 0, 1);
 }

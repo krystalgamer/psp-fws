@@ -1,3 +1,4 @@
+/* cflags[152]: -O2 -frename-registers */
 /* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
@@ -168,7 +169,7 @@ INCLUDE_ASM("nonmatchings/libupdown", func_00001E30);
 
 INCLUDE_ASM("nonmatchings/libupdown", func_00001F84);
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/libupdown", func_000020A0);
 #else
 void func_000020A0(s32 arg0) {
@@ -228,7 +229,7 @@ s32 sceLibUpdateDL_C1AF1076(void) {
     return 0;
 }
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/libupdown", sceLibUpdateDL_4F49C9C1);
 #else
 s32 sceLibUpdateDL_4F49C9C1(void) {
@@ -284,11 +285,7 @@ INCLUDE_ASM("nonmatchings/libupdown", func_000029F0);
 INCLUDE_ASM("nonmatchings/libupdown", func_000025C0);
 #endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/libupdown", func_00002600);
-#endif
-
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 u8 *func_00002600(u8 *arg0, u8 *arg1, s32 arg2) {
     s32 var_a2;
     u8 *var_a1;
@@ -314,9 +311,7 @@ u8 *func_00002600(u8 *arg0, u8 *arg1, s32 arg2) {
     }
     return var_v0;
 }
-#endif
 
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libupdown", func_00002634);
 #endif
 
@@ -346,11 +341,9 @@ INCLUDE_ASM("nonmatchings/libupdown", func_00002B14);
 
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/libupdown", func_00002F88);
-
-INCLUDE_ASM("nonmatchings/libupdown", func_00002B44);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 u8 *func_00002B44(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;

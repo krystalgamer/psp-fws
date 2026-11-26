@@ -1,6 +1,7 @@
 {
  "funcs": {
   "InitForKernel_33D30F49": "s32 InitForKernel_33D30F49(void);",
+  "InitForKernel_7233B5BC": "s32 InitForKernel_7233B5BC(void);",
   "InitForKernel_7A2333AD": "s32 InitForKernel_7A2333AD(void);",
   "InitForKernel_A6E71B93": "s32 InitForKernel_A6E71B93(void);",
   "InitForKernel_C4F1BA33": "s32 InitForKernel_C4F1BA33(void);",
@@ -13,6 +14,7 @@
   "sceKernelVolatileMemUnlock": "s32 sceKernelVolatileMemUnlock(s32);"
  },
  "vars": {
+  "D_00002450": "extern s32 D_00002450;",
   "D_00002620": "extern s32 D_00002620;",
   "D_00002644": "extern s32 D_00002644;"
  }

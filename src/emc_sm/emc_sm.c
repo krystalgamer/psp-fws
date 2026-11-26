@@ -1,3 +1,4 @@
+/* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
@@ -170,7 +171,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_2674CFFE);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_9B2AC433);
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_CE9843E6);
 #else
 s32 sceNand_driver_CE9843E6(void) {
@@ -178,7 +179,7 @@ s32 sceNand_driver_CE9843E6(void) {
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_B07C41D4);
 #else
 s32 sceNand_driver_B07C41D4(void) {
@@ -186,7 +187,7 @@ s32 sceNand_driver_B07C41D4(void) {
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/emc_sm", sceNand_driver_C1376222);
 #else
 s32 sceNand_driver_C1376222(void) {

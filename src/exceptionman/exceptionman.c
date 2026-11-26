@@ -1,3 +1,4 @@
+/* cflags[152]: -O2 -frename-registers */
 #include "common.h"
 #include "exceptionman_decls.h"
 
@@ -56,8 +57,14 @@ INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_565C0B0E);
 INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_1AA6CFFA);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/exceptionman", ExceptionManagerForKernel_DF83875E);
+#endif
+
+#if FW_VERSION == 152
+s32 ExceptionManagerForKernel_DF83875E(void) {
+    return ((D_00002400 ^ (s32) &func_00000A28) == 0) ? 0 : D_00002400;
+}
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282

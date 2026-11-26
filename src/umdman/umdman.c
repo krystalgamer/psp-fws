@@ -207,7 +207,9 @@ INCLUDE_ASM("nonmatchings/umdman", func_00001A9C);
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_EFD566A8);
 
-INCLUDE_ASM("nonmatchings/umdman", func_00001BE4);
+void func_00001BE4(s32 arg0) {
+    D_00011014 = arg0;
+}
 
 INCLUDE_ASM("nonmatchings/umdman", func_00001BF0);
 #endif
@@ -516,7 +518,9 @@ void func_0000279C(void) {
 #endif
 
 #if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_0D14D540);
+s32 sceUmdMan_driver_0D14D540(void) {
+    return D_00011014;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -1335,11 +1339,17 @@ INCLUDE_ASM("nonmatchings/umdman", func_000076D4);
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_552F671A);
 
-INCLUDE_ASM("nonmatchings/umdman", func_00007BC8_v152);
+s32 func_00007BC8_v152(void) {
+    return D_00012D00;
+}
 
-INCLUDE_ASM("nonmatchings/umdman", func_00007BD4);
+void func_00007BD4(s32 arg0) {
+    D_00011114 = arg0 + 0x30000;
+}
 
-INCLUDE_ASM("nonmatchings/umdman", func_00007BE8);
+s32 func_00007BE8(void) {
+    return __builtin_allegrex_min(sceKernelAllocateFpl(D_000110A0, &D_00018940, NULL), 0);
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
@@ -1577,9 +1587,14 @@ INCLUDE_ASM("nonmatchings/umdman", func_00007DC0);
 INCLUDE_ASM("nonmatchings/umdman", func_00007E38);
 
 #if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_405B48A5);
+s32 sceUmdMan_driver_405B48A5(void) {
+    s32 cmp_tmp = func_00007BC8_v152() > 0x10001;
+    return cmp_tmp == 0;
+}
 
-INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_65D0DEC6);
+s32 sceUmdMan_driver_65D0DEC6(void) {
+    return D_00011114 + 0xFFFD0000;
+}
 #endif
 
 #if FW_VERSION >= 201

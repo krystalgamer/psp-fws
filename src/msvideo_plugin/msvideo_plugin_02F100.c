@@ -77,11 +77,27 @@ s32 func_0002F954(void *arg0, s32 *arg1) {
 }
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_00026348);
+#endif
 
+#if FW_VERSION == 152
+void func_00026348(s32 arg0) {
+    func_0002F2F4(arg0 - 0x3C);
+}
+#endif
+
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_00026364);
-#else
+#endif
+
+#if FW_VERSION == 152
+void func_00026364(s32 arg0) {
+    func_0002F324(arg0 - 0x3C);
+}
+#endif
+
+#if FW_VERSION == 201
 void func_0002F994(s32 arg0) {
     func_0002F2F4(arg0 - 0x3C);
 }

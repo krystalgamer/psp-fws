@@ -1,3 +1,4 @@
+/* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
@@ -601,11 +602,11 @@ void func_00006048(void) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_00006050);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 func_00006050(s32 *arg0) {
     s32 temp_s1;
 
@@ -617,11 +618,11 @@ s32 func_00006050(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000060C0);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 func_000060C0(void) {
     return M2C_FIELD(D_00007D40, s32 *, 0x14);
 }
@@ -666,11 +667,11 @@ s32 func_00006178(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh_005C8C", func_000061CC);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 func_000061CC(s32 arg0) {
     s32 temp_v0;
     s32 var_v0;

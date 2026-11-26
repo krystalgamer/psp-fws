@@ -17,6 +17,7 @@
   "D_00002D00": "extern M2C_UNK D_00002D00;",
   "D_00002D20": "extern M2C_UNK D_00002D20;",
   "D_00002DB0": "extern s32 D_00002DB0;",
+  "D_00002DD0": "extern s32 D_00002DD0;",
   "D_00002E10": "extern M2C_UNK D_00002E10;",
   "D_00003460": "extern M2C_UNK D_00003460;"
  }

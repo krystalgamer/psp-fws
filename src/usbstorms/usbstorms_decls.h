@@ -8,6 +8,7 @@ extern s32 D_00002A14;
 extern M2C_UNK D_00002D00;
 extern M2C_UNK D_00002D20;
 extern s32 D_00002DB0;
+extern s32 D_00002DD0;
 extern M2C_UNK D_00002E10;
 extern M2C_UNK D_00003460;
 

@@ -1,3 +1,4 @@
+/* cflags[152]: -O2 -frename-registers */
 /* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
@@ -83,13 +84,11 @@ INCLUDE_ASM("nonmatchings/mediaman", func_000002C0);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_659587F7);
-#endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_3D0DECD5);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceUmd_3D0DECD5(void) {
     return D_00000FDC;
 }
@@ -99,21 +98,21 @@ s32 sceUmd_3D0DECD5(void) {
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_D45D1FE6);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_D01B2DC6);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceUmd_D01B2DC6(void) {
     return D_00000FD0;
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_3925CBD8);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void sceUmd_3925CBD8(s32 arg0) {
     D_00000FD0 = arg0;
 }
@@ -123,11 +122,11 @@ void sceUmd_3925CBD8(s32 arg0) {
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_AE53DC2D);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_230666E3);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void sceUmd_230666E3(u32 arg0) {
     s32 temp_s1;
 
@@ -138,11 +137,11 @@ void sceUmd_230666E3(u32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_9B22AED7);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void sceUmd_9B22AED7(s32 arg0) {
     s32 temp_a0;
 
@@ -156,11 +155,7 @@ void sceUmd_9B22AED7(s32 arg0) {
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_71F81482);
 #endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/mediaman", func_0000042C);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_0000042C(void) {
     return D_00000FD8;
 }
@@ -353,11 +348,11 @@ INCLUDE_ASM("nonmatchings/mediaman", func_00001A04);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_7850F057);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_27A764A1);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceUmd_27A764A1(void) {
     s32 temp_v0;
 
@@ -374,11 +369,11 @@ s32 sceUmd_27A764A1(void) {
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_F8352373);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_5469DC37);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceUmd_5469DC37(void) {
     s32 temp_v0;
 
@@ -395,11 +390,11 @@ s32 sceUmd_5469DC37(void) {
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_319ED97C);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_BBB5F05C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void sceUmd_BBB5F05C(void) {
     s32 temp_v0;
 
@@ -449,11 +444,11 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmdWaitDriveStatCB);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdRegisterUMDCallBack);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_075F1E0B);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void sceUmd_075F1E0B(s32 arg0) {
     s32 temp_a0;
 
@@ -463,11 +458,11 @@ void sceUmd_075F1E0B(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdUnRegisterUMDCallBack);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceUmdUnRegisterUMDCallBack(s32 arg0) {
     s32 var_a0;
     u32 temp_v1;
@@ -484,11 +479,11 @@ s32 sceUmdUnRegisterUMDCallBack(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetDiscInfo);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceUmdGetDiscInfo(s32 *arg0) {
     s32 var_a1;
     u32 temp_s0;
@@ -503,11 +498,11 @@ s32 sceUmdGetDiscInfo(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_EB56097E);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceUmd_EB56097E(void) {
     return D_00001004;
 }
@@ -780,21 +775,21 @@ void sceUmdGetDriveStat(void) {
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetErrorStat);
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_6A41ED25);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceUmd_6A41ED25(void) {
     return D_00001000;
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_4C952ACF);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void sceUmd_4C952ACF(s32 arg0) {
     D_00001000 = arg0;
 }
