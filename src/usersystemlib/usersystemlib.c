@@ -1,7 +1,8 @@
+/* cflags[150]: -O2 -frename-registers */
 #include "common.h"
 #include "usersystemlib_decls.h"
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/usersystemlib", module_start);
 #else
 s32 module_start(void) {
