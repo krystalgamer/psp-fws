@@ -6,11 +6,13 @@
   "func_00001BE4": "void func_00001BE4(void);",
   "memset": "M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);",
   "module_start": "s32 module_start(void);",
+  "module_stop": "s32 module_stop(void);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
-  "sceUsbbdRegister": "s32 sceUsbbdRegister(M2C_UNK *);"
+  "sceUsbbdRegister": "s32 sceUsbbdRegister(M2C_UNK *);",
+  "sceUsbbdUnregister": "s32 sceUsbbdUnregister(M2C_UNK *);"
  },
  "vars": {
-  "D_00002724": "extern M2C_UNK D_00002724;",
+  "D_00002724": "extern s32 D_00002724;",
   "D_000029A8": "extern M2C_UNK D_000029A8;",
   "D_000029F0": "extern M2C_UNK D_000029F0;"
  }

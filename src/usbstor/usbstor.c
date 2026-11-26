@@ -202,7 +202,20 @@ s32 module_start(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/usbstor", module_stop);
+#else
+s32 module_stop(void) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceUsbbdUnregister(&D_000029A8) < 0) {
+        Kprintf("%serror - cannot unregister protocol driver\n", &D_00002724);
+        var_v1 = 1;
+    }
+    return var_v1;
+}
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/usbstor", func_00001758);
