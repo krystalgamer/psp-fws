@@ -72,7 +72,7 @@ void func_0003FB94(struct Unk_vt_func_0003FB94_arg0 **arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/netfront_03F870", func_0003FBA0);
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_0003FCBC(s32 arg0) {
     sceKernelSetEventFlag(D_00133DE8, arg0);
 }
@@ -86,14 +86,22 @@ s32 func_0003FD24(s32 *arg0) {
     void *sp0;
     return (sceKernelPollEventFlag(*arg0, 0xFFU, 1, &sp0) == 0) ? sp0 : -1;
 }
+#endif
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_03F870", func_0003FD5C);
+#endif
+
+#if FW_VERSION == 303
 void func_0003FD5C(struct Unk_func_0003FD5C_0 *arg0) {
     sceHVNetfront_Module_D611E938(arg0, 0, 0x24);
     arg0->unk14 = 0x3000;
     arg0->unk10 = sceHVNetfront_Module_24B1FCE6(0x3000);
     arg0->unk0 = sceKernelCreateEventFlag("sceHtmlViwerHttpStatus", 0x200U, 1U, NULL);
 }
+#endif
 
+#if FW_VERSION >= 303
 void func_0003FDB8(s32 *arg0) {
     sceKernelDeleteEventFlag(*arg0);
 }
@@ -1782,7 +1790,7 @@ INCLUDE_RODATA("nonmatchings/netfront_03F870", D_0012054C);
 
 INCLUDE_RODATA("nonmatchings/netfront_03F870", D_00120550);
 
-#if FW_VERSION == 250
+#if FW_VERSION != 303
 INCLUDE_ASM("nonmatchings/netfront_03F870", sceHVNetfront_Module_BF1F29EC);
 #else
 M2C_UNK *sceHVNetfront_Module_BF1F29EC(s32 arg0) {

@@ -1,10 +1,12 @@
 #include "common.h"
 
-#if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/idmanager", func_00000000);
-#else
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/idmanager", module_start);
+#else
+INCLUDE_ASM("nonmatchings/idmanager", func_00000000);
+#endif
 
+#if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/idmanager", D_000008A0);
 
 INCLUDE_RODATA("nonmatchings/idmanager", D_000008A4);
@@ -40,7 +42,9 @@ INCLUDE_RODATA("nonmatchings/idmanager", D_000009A4);
 INCLUDE_RODATA("nonmatchings/idmanager", D_000009B0);
 
 INCLUDE_RODATA("nonmatchings/idmanager", D_000009B4);
+#endif
 
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/idmanager", func_00000060);
 #endif
 
@@ -50,16 +54,16 @@ INCLUDE_ASM("nonmatchings/idmanager", func_0000034C);
 
 INCLUDE_ASM("nonmatchings/idmanager", func_0000041C);
 
-#if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/idmanager", func_0000046C);
-
-INCLUDE_ASM("nonmatchings/idmanager", func_00000534);
-
-INCLUDE_ASM("nonmatchings/idmanager", module_start);
-#else
+#if FW_VERSION >= 311
 INCLUDE_ASM("nonmatchings/idmanager", func_00000510);
 
 INCLUDE_ASM("nonmatchings/idmanager", func_000005F0);
 
 INCLUDE_ASM("nonmatchings/idmanager", sceIdMgr_driver_F464F91C);
+#else
+INCLUDE_ASM("nonmatchings/idmanager", func_0000046C);
+
+INCLUDE_ASM("nonmatchings/idmanager", func_00000534);
+
+INCLUDE_ASM("nonmatchings/idmanager", module_start);
 #endif

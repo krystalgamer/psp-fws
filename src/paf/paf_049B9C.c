@@ -22,7 +22,7 @@ s32 func_00049B9C(struct Unk_func_00049B9C_0 *arg0) {
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_000388C4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049BD0);
 #endif
 
@@ -32,7 +32,7 @@ INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049CB0);
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049D58);
 #endif
 
-#if FW_VERSION < 270
+#if FW_VERSION < 270 || FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_00049E00);
 #endif
 
@@ -61,7 +61,9 @@ void func_00049E00(struct Unk_func_00049E00_0 *arg0) {
     arg0->unk4A = 0;
     arg0->unk4C = 0;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/paf_049B9C", D_00171564);
 
 INCLUDE_RODATA("nonmatchings/paf_049B9C", D_00171580);

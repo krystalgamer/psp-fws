@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_000FEF54);
 #else
 void func_000FEF54(struct Unk_func_000FEF54_0 *arg0) {
@@ -116,7 +116,7 @@ INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100918);
 
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100A50);
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100A88);
 #else
 void func_00100A88(struct Unk_func_00100A88_0 *arg0) {
@@ -138,7 +138,7 @@ void func_00100A88(struct Unk_func_00100A88_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100AF4);
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100C44);
 #else
 u8 func_00100C44(struct Unk_func_00100C44_0 *arg0, s32 arg1) {
@@ -156,7 +156,7 @@ u8 func_00100C44(struct Unk_func_00100C44_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100C90);
 #else
 void func_00100C90(struct Unk_func_00100C90_0 *arg0, s32 arg1) {
@@ -166,7 +166,7 @@ void func_00100C90(struct Unk_func_00100C90_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100CA0);
 #else
 void func_00100CA0(struct Unk_func_00100CA0_0 *arg0) {
@@ -178,7 +178,7 @@ void func_00100CA0(struct Unk_func_00100CA0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100CC0);
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100D2C);
 #else
 s32 func_00100D2C(struct Unk_func_00100D2C_0 *arg0) {
@@ -192,7 +192,7 @@ s32 func_00100D2C(struct Unk_func_00100D2C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00100D40);
 #else
 s32 func_00100D40(struct Unk_func_00100D40_0 *arg0) {
@@ -258,7 +258,7 @@ u8 func_00101818(struct Unk_func_00101818_0 *arg0, s32 arg1) {
     return var_v1;
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_00101850);
 #else
 void func_00101850(struct Unk_func_00101850_0 *arg0, s32 arg1) {

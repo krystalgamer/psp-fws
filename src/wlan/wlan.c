@@ -123,7 +123,7 @@ INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_19E51F54);
 
 INCLUDE_ASM("nonmatchings/wlan", sceWlanGetEtherAddr);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/wlan", func_000009D0);
 #endif
 
@@ -1904,7 +1904,7 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000B328);
 INCLUDE_ASM("nonmatchings/wlan", func_0000CCC8);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/wlan", func_0000D020);
 #endif
 
@@ -2661,7 +2661,7 @@ INCLUDE_ASM("nonmatchings/wlan", func_00015A1C);
 INCLUDE_RODATA("nonmatchings/wlan", D_00019078);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/wlan", D_000195C0);
 #endif
 

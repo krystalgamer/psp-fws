@@ -3,17 +3,23 @@
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D6D0);
-#else
+#endif
+
+#if FW_VERSION == 282
 M2C_UNK *func_0009D6D0(void) {
     return " libpng version 1.2.10 - April 23, 2006 (header)\n";
 }
 #endif
 
+#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D6DC);
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D75C);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_0009D75C(s32 arg0) {
     inflateReset(arg0 + 0x434);
 }
@@ -21,23 +27,37 @@ void func_0009D75C(s32 arg0) {
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D778);
-#else
+#endif
+
+#if FW_VERSION == 282
 s32 func_0009D778(void) {
     return 0x27E2;
 }
 #endif
 
+#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D780);
 
 s32 func_0009D798(void) {
     return -1;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_09D6D0", scePaf_7894B61F);
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_09D6D0", func_000A5134);
+
+INCLUDE_ASM("nonmatchings/paf_09D6D0", func_000A51B4);
+
+INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DB78);
+
+INCLUDE_ASM("nonmatchings/paf_09D6D0", func_000A5300);
+#else
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D8A4);
 
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D940);
+#endif
 
 #if FW_VERSION == 280
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D780_v280);
@@ -57,12 +77,14 @@ INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DA4C);
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DAA8);
 #endif
 
+#if FW_VERSION < 340
 void func_0009DB04(void *arg0) {
     scePaf_9F10613F(arg0, 1);
 }
 
 void func_0009DB20(void) {
 }
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DB28);

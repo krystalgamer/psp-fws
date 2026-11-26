@@ -114,7 +114,7 @@ void func_000132C4(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_00013380(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_000134E4();

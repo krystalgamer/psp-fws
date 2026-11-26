@@ -32,7 +32,7 @@ s32 func_00000AE4(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_00000AF4(void) {
     s32 temp_v0;
 
@@ -180,7 +180,7 @@ s32 sceHprmIsMicrophoneExist(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 sceHprm_driver_C1777D84(void) {
     return D_000022B0;
 }

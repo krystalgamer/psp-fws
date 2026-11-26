@@ -352,7 +352,7 @@ s32 func_000008D0(s32 arg0, struct Unk_func_000008D0_1 *arg1) {
 INCLUDE_ASM("nonmatchings/threadman", func_000008F0);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_000009F8(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -2174,7 +2174,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_000169E0);
 INCLUDE_ASM("nonmatchings/threadman", func_00013BEC);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 module_reboot_before(void) {
     s32 temp_s0;
 
@@ -2201,7 +2201,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013DB0);
 INCLUDE_ASM("nonmatchings/threadman", ThreadManForUser_532A522E);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void ThreadManForUser_532A522E(void) {
     sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x11C), s32 *, 0x18));
 }

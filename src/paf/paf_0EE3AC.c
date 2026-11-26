@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EE3AC);
 #endif
 
@@ -16,7 +16,9 @@ void func_000EE3AC(struct Unk_func_000EE3AC_0 *arg0) {
     scePaf_715E8DAB((s32) arg0);
     scePaf_4E67BB08(arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EE3F0);
 #endif
 
@@ -48,7 +50,7 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_03064559);
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_00092630);
 #endif
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if (FW_VERSION >= 200 && FW_VERSION < 282) || FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", scePaf_2A5DDF04);
 #endif
 
@@ -96,7 +98,7 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EED10);
 
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EED6C);
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EEDD0);
 #else
 void func_000EEDD0(struct Unk_vt_func_000EEDD0_arg0 **arg0) {
@@ -128,7 +130,7 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_00092E9C);
 
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EF18C);
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EF208);
 #else
 s32 func_000EF208(s32 arg0, M2C_UNK arg1) {

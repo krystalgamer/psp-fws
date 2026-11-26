@@ -7,3 +7,10 @@ sceKernelIsCpuIntrSuspended = 0x000000C4; // type:func
 sceKernelIsCpuIntrEnable = 0x000000CC; // type:func
 sceKernelRegisterUserSpaceIntrStack = 0x000000D8; // type:func
 SysMemUserForUser_A6848DF8 = 0x000000E0; // type:func
+// shared names (tools/add_version.py) begin
+D_000001FC = 0x00000204; // rom:0x2A4
+D_00000200 = 0x00000280;
+D_00002200 = 0x00002280;
+D_000001FC_v311 = 0x000001FC; // rom:0x29C
+D_00000200_v311 = 0x00000200; // rom:0x2A0
+// shared names (tools/add_version.py) end

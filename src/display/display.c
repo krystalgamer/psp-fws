@@ -321,7 +321,7 @@ INCLUDE_ASM("nonmatchings/display", func_00000EAC);
 INCLUDE_ASM("nonmatchings/display", func_00001220);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/display", func_00001288);
 #endif
 

@@ -9,7 +9,7 @@ s32 sceVshLftvMw_304BB1BA(void) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0001A8", sceVshLftvMw_C758B54C);
 
-#if FW_VERSION < 303
+#if FW_VERSION != 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_0001A8", sceVshLftvMw_77C766AF);
 #else
 s32 sceVshLftvMw_77C766AF(void) {

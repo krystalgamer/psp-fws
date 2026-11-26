@@ -839,7 +839,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_0002411C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005444);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005B74);
 #else
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005614);
@@ -857,7 +857,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_000241C8);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005DA4);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000063E8);
 #else
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006240);
@@ -2620,7 +2620,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00013688);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000136C4);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_00013798(struct Unk_func_00013798_0 *arg0, u32 arg1) {
     u32 temp_v1;
 
@@ -2860,7 +2860,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00017DA0);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00017DE0);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00018074);
 #endif
 

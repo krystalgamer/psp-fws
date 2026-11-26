@@ -2,7 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_001689DC(struct Unk_func_001689DC_0 *arg0, s32 *arg1) {
     s32 var_v1;
 

@@ -1556,6 +1556,7 @@ extern M2C_UNK func_0000D9E8;
 
 void func_0000018C(void);
 void func_0000018C_v310(void);
+void func_0000018C_v311(void);
 s32 func_000001C4(void);
 void func_000001E4(void);
 void func_0000020C(void);

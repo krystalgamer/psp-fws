@@ -2,7 +2,7 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_00113DDC(s32 arg0) {
     func_00115C0C(arg0 & 0xFFFF);
 }

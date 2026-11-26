@@ -2,7 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 270
+#if FW_VERSION < 270 || FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/paf_16980C", func_0016980C);
 #endif
 

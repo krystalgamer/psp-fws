@@ -16,7 +16,7 @@ s32 func_000383E8(struct Unk_func_000383E8_0 *arg0) {
     return 0;
 }
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_RODATA("nonmatchings/lftv_middleware_038348", D_00056460);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_038348", D_00056480);
@@ -40,7 +40,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_038348", func_000344E8);
 INCLUDE_ASM("nonmatchings/lftv_middleware_038348", func_0005589C);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_038348", func_00038730);
 #endif
 

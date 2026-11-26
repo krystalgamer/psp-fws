@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00048F0C(struct Unk_func_00048F0C_0 *arg0) {
     struct Unk_func_00048F0C_temp_v1 *temp_v1;
 

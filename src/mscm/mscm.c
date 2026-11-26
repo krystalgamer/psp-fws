@@ -38,7 +38,7 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_4E923738);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_68C14F25);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/mscm", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00000BEC);
@@ -115,7 +115,7 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_0D8D6A54);
 INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_54B3A3F1);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/mscm", func_00001B0C);
 #endif
 
@@ -189,7 +189,7 @@ s32 func_0000254C(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/mscm", func_0000267C);
 
 INCLUDE_ASM("nonmatchings/mscm", func_000028E0);

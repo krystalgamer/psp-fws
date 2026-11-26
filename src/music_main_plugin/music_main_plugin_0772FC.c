@@ -692,7 +692,7 @@ s32 func_00080380(void) {
     return 0;
 }
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00096300);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00096314);

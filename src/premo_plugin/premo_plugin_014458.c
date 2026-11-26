@@ -3,7 +3,7 @@
 
 INCLUDE_ASM("nonmatchings/premo_plugin_014458", func_00014458);
 
-#if FW_VERSION == 310
+#if FW_VERSION < 352
 s32 func_000145C8(struct Unk_func_000145C8_0 *arg0) {
     s32 temp_v0;
     s32 temp_v0_2;

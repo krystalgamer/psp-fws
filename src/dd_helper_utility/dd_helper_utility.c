@@ -244,7 +244,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_0000495C);
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_000061F0);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00006200);
 #endif
 

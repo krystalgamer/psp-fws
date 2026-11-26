@@ -19,7 +19,7 @@ void sceVshCommonGui_68778E5A(void) {
     func_00002DB8();
 }
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_44961EFA);
 #endif
 
@@ -29,7 +29,7 @@ INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_441D55D7);
 
 INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_EEB86F0E);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_DE8FC339);
 #endif
 

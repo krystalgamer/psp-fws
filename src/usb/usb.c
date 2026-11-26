@@ -670,7 +670,7 @@ s32 func_00007504(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/usb", func_000071F0);
 #endif
 
@@ -1039,7 +1039,7 @@ s32 func_00008A30(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/usb", func_00008348);
 
 INCLUDE_RODATA("nonmatchings/usb", D_0000975C);
@@ -1165,7 +1165,7 @@ s32 sceUsbBus_driver_48CCE3C1(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/usb", func_000086CC);
 #endif
 
@@ -1175,7 +1175,7 @@ INCLUDE_ASM("nonmatchings/usb", func_00008ADC);
 INCLUDE_ASM("nonmatchings/usb", func_00008B28);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/usb", func_0000877C);
 
 INCLUDE_ASM("nonmatchings/usb", func_00008BD8);

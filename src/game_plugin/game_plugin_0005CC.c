@@ -22,7 +22,7 @@ void func_00000610(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000678);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000006FC);
@@ -137,7 +137,7 @@ void func_00000E78(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000EA0);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000010C4);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000010FC);
@@ -461,7 +461,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000014BC);
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011744);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000141B4);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_000141C4);
@@ -481,7 +481,7 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011880);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00011890);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00014340);
 
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_0001434C);
@@ -532,9 +532,17 @@ INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_00014944);
 INCLUDE_RODATA("nonmatchings/game_plugin_0005CC", D_0001496C);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000062D4);
+#endif
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001B24_v311);
+#endif
+
+#if FW_VERSION == 310
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001B24_v310);
+#endif
 
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000062F0);
 
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001C40);

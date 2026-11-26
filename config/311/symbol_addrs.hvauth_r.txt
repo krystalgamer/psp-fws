@@ -3,3 +3,5 @@ sceHVAuth_5E335DF6 = 0x00000000; // type:func
 sceHVAuth_816A5F92 = 0x000000E4; // type:func
 sceHVAuth_9DB7DE7C = 0x000005F8; // type:func
 sceKernelGetSystemTimeLow = 0x000011F0; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

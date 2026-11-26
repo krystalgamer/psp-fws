@@ -33,3 +33,11 @@ sceSysEventForKernel_D7D3FDCD = 0x00000BAC; // type:func
 sceSysreg_driver_1E9C3607 = 0x00000BB4; // type:func
 sceSysreg_driver_B627582E = 0x00000BBC; // type:func
 sceSysreg_driver_E3AECFFA = 0x00000BC4; // type:func
+// shared names (tools/add_version.py) begin
+D_00000DE4 = 0x00000DEC; // rom:0xE8C
+D_00000DEC = 0x00000DF4; // rom:0xE94
+D_00000E18 = 0x00000E20; // rom:0xEC0
+D_00000E80 = 0x00000E90;
+D_00000E94 = 0x00000EA4;
+D_00000E80_v311 = 0x00000E80; // rom:0xF20
+// shared names (tools/add_version.py) end

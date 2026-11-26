@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0E3294", func_000E3294);
 #else
 void func_000E3294(M2C_UNK **arg0) {
@@ -51,7 +51,7 @@ INCLUDE_ASM("nonmatchings/paf_0E3294", func_00089F00);
 INCLUDE_ASM("nonmatchings/paf_0E3294", func_000DD8A8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_0E3294", func_000E3794);
 
 INCLUDE_ASM("nonmatchings/paf_0E3294", func_000E38BC);
@@ -91,13 +91,13 @@ INCLUDE_ASM("nonmatchings/paf_0E3294", func_0008A2D0);
 INCLUDE_ASM("nonmatchings/paf_0E3294", func_000F0E3C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_000E414C(s32 arg0, s32 arg1, s32 arg2) {
     func_000F0E3C(arg0, arg1, arg2 & 0xFF);
 }
 #endif
 
-#if FW_VERSION < 270 || FW_VERSION == 282
+#if FW_VERSION < 270 || FW_VERSION >= 282
 s32 func_000E4168(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -123,6 +123,6 @@ INCLUDE_ASM("nonmatchings/paf_0E3294", func_000E41AC);
 INCLUDE_ASM("nonmatchings/paf_0E3294", func_0008A498);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_0E3294", scePaf_D2E0D705);
 #endif

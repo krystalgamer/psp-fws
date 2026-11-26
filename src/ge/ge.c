@@ -520,7 +520,7 @@ INCLUDE_ASM("nonmatchings/ge", func_00004DAC);
 INCLUDE_ASM("nonmatchings/ge", func_00004DFC);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/ge", func_00004FD4);
 #endif
 

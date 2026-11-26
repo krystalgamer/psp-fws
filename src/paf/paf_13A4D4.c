@@ -2,7 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_0013A4D4(void) {
     func_0013D5FC();
     D_001E27A2 = 0;
@@ -34,15 +34,17 @@ INCLUDE_ASM("nonmatchings/paf_13A4D4", func_0013AF9C);
 INCLUDE_ASM("nonmatchings/paf_13A4D4", func_0013B324);
 
 INCLUDE_ASM("nonmatchings/paf_13A4D4", func_0013B448);
-#else
-INCLUDE_ASM("nonmatchings/paf_13A4D4", func_0013B558);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION != 282
+INCLUDE_ASM("nonmatchings/paf_13A4D4", func_0013B558);
+#else
 void func_0013B558(void) {
     func_0013B448(0);
 }
-#else
+#endif
+
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_13A4D4", func_0013B574);
 #endif
 
@@ -184,7 +186,7 @@ INCLUDE_ASM("nonmatchings/paf_13A4D4", func_000EA3B0);
 INCLUDE_ASM("nonmatchings/paf_13A4D4", func_000EA454);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_0013B590(void) {
     func_0013FBEC(0);
     func_00143E94();
@@ -205,7 +207,7 @@ INCLUDE_ASM("nonmatchings/paf_13A4D4", func_0013BB30);
 INCLUDE_ASM("nonmatchings/paf_13A4D4", func_0013BB8C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 100 || FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/paf_13A4D4", func_0013BBCC);
 #endif
 

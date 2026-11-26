@@ -514,6 +514,12 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D86CC);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D87CC);
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC690);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC6E8);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAD54);
 
@@ -708,13 +714,25 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4E7C);
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D4ED8);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000D5050);
-#else
+#endif
+
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", inflateReset);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", inflateInit2_);
+#endif
 
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_18CB51AB);
+#endif
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC820);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DC84C);
+#endif
+
+#if FW_VERSION == 303
 void fixedtables(struct Unk_fixedtables_0 *arg0) {
     arg0->unk44 = &D_0012A78C;
     arg0->unk4C = 9;
@@ -949,7 +967,21 @@ INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B00C);
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_216D1BF1);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", sceHVNetfront_Module_461C7724);
+#endif
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DDF5C);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DE060);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DE0DC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DE228);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DE260);
+#endif
+
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", inflateSetDictionary);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", syncsearch);
@@ -976,7 +1008,9 @@ s32 inflateSyncPoint(struct Unk_inflateSyncPoint_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", inflateCopy);
+#endif
 
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA690);
 
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B26C);
@@ -1124,6 +1158,18 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA578);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DAC94);
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DEA48);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DEBCC);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DEBD8);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DEC04);
+
+INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DF000);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DA5B0);
 
@@ -1188,7 +1234,9 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB60C);
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB67C);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB7A4);
-#else
+#endif
+
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", adler32);
 
 M2C_UNK *get_crc_table(void) {
@@ -1200,7 +1248,9 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", crc32);
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", crc32_little);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", crc32_big);
+#endif
 
+#if FW_VERSION >= 303
 INCLUDE_RODATA("nonmatchings/netfront_0CD4A0", D_0012B458);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000DB6A4);
@@ -1758,7 +1808,7 @@ INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAAAC);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAD18);
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAD54);
 
 INCLUDE_ASM("nonmatchings/netfront_0CD4A0", func_000EAE04);

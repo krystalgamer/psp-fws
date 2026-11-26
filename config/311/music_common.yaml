@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/311/.splat_cache.music_common
   symbol_addrs_path:
     - config/311/symbol_addrs.music_common.txt
+    - config/311/func_starts.music_common.txt
     - tmp/build/311/prx_syms.music_common.txt
   reloc_addrs_path: [tmp/build/311/reloc_addrs.music_common.txt]
   asset_path: tmp/assets/311/music_common
@@ -54,7 +55,15 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - { start: 0xC4, type: prxpad, order: .text }
-      - [0xD0, asm, music_common]
+      - [0xD0, c, music_common]
+      - [0x2E0C, c, music_common_002CF8]
+      - [0x3888, c, music_common_003774]
+      - [0x44D4, c, music_common_0043C0]
+      - [0x5AD4, c, music_common_0055B4]
+      - [0x611C, c, music_common_005BFC]
+      - [0x658C, c, music_common_005E68]
+      - [0x1FA7C, c, music_common_01CAD8]
+      - [0x1FBD4, c, music_common_01CC30]
       - { start: 0x210B8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x210D4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2159C, type: prxpad, order: .text }
@@ -73,7 +82,12 @@ segments:
       - { start: 0x21E94, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x21E98, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x21E9C, type: prxpad, order: .rodata }
-      - [0x21EA0, rodata, music_common]
+      - [0x21EA0, .rodata, music_common]
+      - [0x21F08, .rodata, music_common_003774]
+      - [0x22038, .rodata, music_common_0043C0]
+      - [0x224D4, .rodata, music_common_005BFC]
+      - [0x22500, .rodata, music_common_005E68]
+      - [0x23388, .rodata, music_common_01CC30]
       - { start: 0x234D4, type: prxpad, order: .rodata }
   - name: music_common_seg1
     type: code

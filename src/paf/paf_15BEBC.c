@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_0015BEBC(void) {
 }
 
@@ -59,7 +59,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00104564);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00119458);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015D668);
 #endif
 
@@ -108,9 +108,15 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001199D4);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015DA94);
 
+#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015DABC);
+#endif
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015DC94);
+
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0016B7B8);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00106BC0);
@@ -124,7 +130,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00119D60);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00119D7C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015DDC0);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015DDEC);
@@ -132,9 +138,11 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015DDEC);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015DE14);
 
+#if FW_VERSION < 340
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2284);
+#endif
 
-#if FW_VERSION < 200 || FW_VERSION == 282
+#if FW_VERSION < 200 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2584);
 #endif
 
@@ -164,7 +172,7 @@ INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_00136EA8);
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_00136EC8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A28F8);
 
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2918);
@@ -180,7 +188,7 @@ INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A299C);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuInit);
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
+#if (FW_VERSION >= 250 && FW_VERSION < 282) || FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuTerm);
 #endif
 
@@ -201,6 +209,14 @@ INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A29C8);
 
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2A08);
 
+#if FW_VERSION >= 282
+INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2A1C);
+
+INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2A74);
+
+INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2ACC);
+#endif
+
 #if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A04CC);
 
@@ -217,7 +233,7 @@ INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_00196464);
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001964BC);
 #endif
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if FW_VERSION >= 200
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuStart);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuSetDither);
@@ -225,7 +241,9 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuSetDither);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuFinish);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuFinishId);
+#endif
 
+#if (FW_VERSION >= 200 && FW_VERSION < 282) || FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuCallMode);
 #endif
 
@@ -268,24 +286,12 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011A3BC);
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2A1C);
-
-INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2A74);
-
-INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2ACC);
-
-INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuStart);
-
-INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuSetDither);
-
-INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuFinish);
-
-INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuFinishId);
-
 void sceGuCallMode(s32 arg0) {
     D_001D7A64 = arg0;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015E50C);
 #endif
 
@@ -321,7 +327,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011A588);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011A680);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015E730);
 
 s32 func_0015E7D8(s32 *arg0) {
@@ -556,7 +562,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011C348);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011C37C);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015F864);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuDrawSprite);
@@ -594,15 +600,31 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuDepthOffset);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuOffset);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuPatchDivide);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuPatchPrim);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001606C4);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuAmbient);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuColor);
+#endif
+
+#if FW_VERSION == 282
 void sceGuColor(s32 arg0) {
     func_001607C4(7, arg0);
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0016079C);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001607C4);
@@ -1008,7 +1030,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00169128);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011D920);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00160A8C);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00160AB4);
@@ -1076,9 +1098,17 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuBlendFunc);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00161574);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001616A8);
+#endif
 
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuDebugPrint);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuSetCallback);
+#endif
+
+#if FW_VERSION == 282
 s32 sceGuSetCallback(s32 arg0, s32 arg1) {
     s32 var_a2;
 
@@ -1094,13 +1124,43 @@ s32 sceGuSetCallback(s32 arg0, s32 arg1) {
     }
     return var_a2;
 }
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0016F274);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001653F4);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0016F338);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0016F6E0);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumSetMatrixStack);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00163CA4);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumUpdateMatrix);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0016FA1C);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0016FA9C);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_001A2AF0);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumLoadIdentity);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumRotateX);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00161ADC);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00161F08);
@@ -1134,6 +1194,12 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumRotateY);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumRotateZ);
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0016FDA4);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0016FEF8);
+#endif
+
 #if FW_VERSION == 152
 INCLUDE_RODATA("nonmatchings/paf_15BEBC", D_00122B84);
 #endif
@@ -1153,6 +1219,22 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011DBE4);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumTranslate);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumScale);
+
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001701F8);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumPerspective);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00170328);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001703DC);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00170488);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00170770);
+
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00170870);
+#endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0010C0CC);
@@ -1222,6 +1304,10 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumPushMatrix);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumPopMatrix);
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00170A98);
+#endif
+
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011E548);
 #endif
@@ -1236,13 +1322,15 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011E598);
 
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00165170);
-
-INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001651D0);
-#else
-INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumDrawArray);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001651D0);
+#endif
+
+#if FW_VERSION != 282
+INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumDrawArray);
+#else
 void sceGumDrawArray(s32 arg0, s32 arg1, s32 arg2, void *arg3, void *arg4) {
     func_001653F4();
     sceGuDrawArray(arg0, arg1, arg2, arg3, arg4);
@@ -1251,7 +1339,7 @@ void sceGumDrawArray(s32 arg0, s32 arg1, s32 arg2, void *arg3, void *arg4) {
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00165280);
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001652FC);
 #else
 void func_001652FC(s32 arg0, s32 arg1, s32 arg2, void *arg3, void *arg4) {
@@ -1260,12 +1348,16 @@ void func_001652FC(s32 arg0, s32 arg1, s32 arg2, void *arg3, void *arg4) {
 }
 #endif
 
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumDrawSpline);
+#else
 void func_00165368(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     func_001653F4();
     func_0015F644(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
 }
+#endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 152 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001653F4);
 #endif
 
@@ -1273,7 +1365,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001653F4);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0010BEEC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001654B8);
 #endif
 
@@ -1341,11 +1433,11 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011F0D0);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011F170);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00165888);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001659D4);
 #endif
 
@@ -1363,7 +1455,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011F378);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011F3BC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00165A34);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceWaveGetStat);
@@ -1481,7 +1573,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001201F0);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0015E3EC);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00165F6C);
 
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00165FBC);

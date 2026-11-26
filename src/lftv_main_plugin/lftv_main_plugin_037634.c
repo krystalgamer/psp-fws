@@ -497,7 +497,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_0003A27C);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_0003A29C);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_0003A4BC);
 #endif
 

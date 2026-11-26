@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_000BDD58(struct Unk_func_000BDD58_0 *arg0, s32 *arg1) {
     s32 temp_v1;
     u8 temp_a2;
@@ -50,7 +50,13 @@ INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C0270);
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C0500);
 
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C0574);
+#endif
 
+#if FW_VERSION == 340
+INCLUDE_RODATA("nonmatchings/paf_0BDD58", D_00198C04);
+#endif
+
+#if FW_VERSION >= 282
 s32 func_000C07DC(void) {
     sceReg_FA8A5739();
     return 0;
@@ -111,7 +117,11 @@ M2C_UNK *scePaf_962FA087(void) {
     return &D_001A53C8;
 }
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_0BDD58", scePaf_D8E244A9);
+#endif
+
+#if (FW_VERSION >= 200 && FW_VERSION < 282) || FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/paf_0BDD58", scePaf_DF642973);
 #endif
 
@@ -199,7 +209,7 @@ INCLUDE_ASM("nonmatchings/paf_0BDD58", func_00069608);
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_00069740);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C182C);
 #endif
 
@@ -264,7 +274,7 @@ INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C2E0C);
 
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C2E78);
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C2EEC);
 #else
 void func_000C2EEC(s32 arg0, s32 arg1, s32 arg2) {
@@ -272,7 +282,7 @@ void func_000C2EEC(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C2F08);
 #else
 void func_000C2F08(void) {
@@ -284,7 +294,7 @@ void func_000C2F24(void) {
     scePaf_D6232F26();
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C2F40);
 #else
 void func_000C2F40(void) {
@@ -292,7 +302,7 @@ void func_000C2F40(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C2F5C);
 #else
 void func_000C2F5C(void) {
@@ -300,7 +310,7 @@ void func_000C2F5C(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C2F78);
 #else
 void func_000C2F78(void) {

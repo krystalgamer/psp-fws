@@ -6,7 +6,7 @@
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D10", func_00037D10);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_00037D10(struct Unk_func_00037D10_0 *arg0) {
     arg0->unk0 = &D_00056480;
     arg0->unk101C = 0;
@@ -23,7 +23,7 @@ void func_00037D10(struct Unk_func_00037D10_0 *arg0) {
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D10", func_00037D3C);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_00037D3C(struct Unk_func_00037D3C_0 *arg0) {
     arg0->unk0 = &D_00056480;
     arg0->unk101C = 0;

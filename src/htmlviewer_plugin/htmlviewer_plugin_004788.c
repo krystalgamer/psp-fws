@@ -214,7 +214,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00009730);
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_0000973C);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/htmlviewer_plugin_004788", D_00009D94);
 #endif
 

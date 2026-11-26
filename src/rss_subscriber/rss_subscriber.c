@@ -34,7 +34,7 @@ void func_0000034C(void) {
     func_000002B0(0, 0xFFFF);
 }
 
-#if FW_VERSION < 282 || FW_VERSION == 310
+#if FW_VERSION < 282 || FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000036C);
 #else
 void func_0000036C(struct Unk_func_0000036C_0 *arg0) {
@@ -63,7 +63,7 @@ void func_0000036C(struct Unk_func_0000036C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 282 || FW_VERSION == 310
+#if FW_VERSION < 282 || FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/rss_subscriber", func_0000044C);
 #else
 void func_0000044C(struct Unk_func_0000044C_0 *arg0) {

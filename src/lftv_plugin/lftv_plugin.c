@@ -35,7 +35,7 @@ INCLUDE_RODATA("nonmatchings/lftv_plugin", D_000031E4);
 
 INCLUDE_RODATA("nonmatchings/lftv_plugin", D_000031F8);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/lftv_plugin", D_00003A68);
 #endif
 

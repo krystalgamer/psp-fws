@@ -62,3 +62,19 @@ sceKernelExitDeleteThread = 0x000017A4; // type:func
 sceKernelStartThread = 0x000017AC; // type:func
 sceKernelPowerUnlock = 0x000017B4; // type:func
 sceKernelVolatileMemUnlock = 0x000017BC; // type:func
+// shared names (tools/add_version.py) begin
+D_00002230 = 0x00001DB4;
+D_00002248 = 0x00001DC0;
+D_000023B0 = 0x00001E00;
+D_000023D4 = 0x00001E24;
+D_00002520 = 0x00001F70;
+D_00002514 = 0x00001F74;
+D_00002528 = 0x00001F78;
+D_000023BC = 0x00001F7C;
+func_00001078 = 0x00000F8C; // type:func rom:0x102C
+func_000011D0 = 0x000010E0; // type:func rom:0x1180
+func_000012E0 = 0x000011E0; // type:func rom:0x1280
+func_00001208 = 0x00001328; // type:func rom:0x13C8
+func_000013A8 = 0x000013A0; // type:func rom:0x1440
+func_000017D8 = 0x000014EC; // type:func rom:0x158C
+// shared names (tools/add_version.py) end

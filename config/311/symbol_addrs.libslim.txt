@@ -80,3 +80,5 @@ sceHVSlim_Library_5C0C52DD = 0x000142A0; // type:func
 sceHVSlim_Library_00A9596D = 0x000142A8; // type:func
 sceRtcGetCurrentTick = 0x00014884; // type:func
 sceRtcTickAddTicks = 0x0001488C; // type:func
+// shared names (tools/add_version.py) begin
+// shared names (tools/add_version.py) end

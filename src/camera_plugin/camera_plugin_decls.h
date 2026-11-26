@@ -487,6 +487,7 @@ void func_00000180_v301(void);
 void func_00000180_v302(void);
 void func_00000180_v303(void);
 void func_00000180_v310(void);
+void func_00000180_v311(void);
 void func_000001D8(void);
 void func_000001FC(void);
 void func_00000294(void);

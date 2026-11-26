@@ -2,7 +2,7 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/netfront_0EBEEC", func_000EBEEC);
 
 INCLUDE_ASM("nonmatchings/netfront_0EBEEC", func_000EBEF8);

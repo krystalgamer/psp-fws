@@ -258,7 +258,7 @@ INCLUDE_ASM("nonmatchings/impose", func_000001FC);
 INCLUDE_ASM("nonmatchings/impose", func_00000374);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/impose", func_00000510);
 #endif
 
@@ -528,7 +528,7 @@ INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_1AEED8FE);
 INCLUDE_ASM("nonmatchings/impose", func_00001764);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/impose", func_00001AE0);
 #endif
 
@@ -676,7 +676,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00001650);
 INCLUDE_ASM("nonmatchings/impose", func_000027AC);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/impose", func_00002D08);
 #else
 INCLUDE_ASM("nonmatchings/impose", func_00002B0C);
@@ -828,7 +828,7 @@ INCLUDE_ASM("nonmatchings/impose", func_000024F8);
 INCLUDE_ASM("nonmatchings/impose", func_00002C5C);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_00002DC0(s32 arg0) {
     if ((M2C_FIELD(D_0000F510, s32 *, 0x80) != 0) && !(arg0 & 0x20000) && (M2C_FIELD(D_0000F510, s32 *, 0x6C) == 0)) {
         if (arg0 & 0x100000) {
@@ -881,7 +881,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00003500);
 INCLUDE_ASM("nonmatchings/impose", func_0000358C);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/impose", func_00003C44);
 
 INCLUDE_ASM("nonmatchings/impose", func_00003CE4);
@@ -973,7 +973,7 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F4A0);
 INCLUDE_RODATA("nonmatchings/impose", D_0000F4AC);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/impose", D_0000F848);
 
 INCLUDE_ASM("nonmatchings/impose", func_000044B0);
@@ -1065,7 +1065,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00004B58);
 INCLUDE_ASM("nonmatchings/impose", func_00005104);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/impose", func_00005C20);
 #endif
 

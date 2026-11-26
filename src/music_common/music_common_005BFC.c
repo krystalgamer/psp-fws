@@ -42,7 +42,7 @@ s32 music_common_90D09602(s32 arg0) {
     return arg0 + 4;
 }
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 music_common_D92D810F(s32 arg0) {
     return arg0 + 0x14;
 }

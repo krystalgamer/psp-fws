@@ -2,7 +2,7 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_00113E4C(s32 arg0, s32 arg1) {
     D_0013447C = arg0;
     D_00134478 = arg1;
@@ -291,7 +291,7 @@ INCLUDE_RODATA("nonmatchings/netfront_113E4C", D_00130DF8);
 
 INCLUDE_RODATA("nonmatchings/netfront_113E4C", D_00130E10);
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/netfront_113E4C", func_0011A154);
 
 INCLUDE_ASM("nonmatchings/netfront_113E4C", func_0011A34C);

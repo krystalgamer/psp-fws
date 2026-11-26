@@ -2,7 +2,7 @@
 #include "common.h"
 #include "libwww_decls.h"
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_000523A0(struct Unk_func_000523A0_0 *arg0) {
     struct Unk_func_000523A0_temp_v1 *temp_v1;
     struct Unk_func_000523A0_temp_v1_2 *temp_v1_2;

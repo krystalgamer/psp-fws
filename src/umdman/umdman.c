@@ -2918,7 +2918,7 @@ s32 func_0000AF50(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/umdman", func_0000A838);
 #endif
 
@@ -3006,7 +3006,7 @@ s32 func_0000A8D8(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/umdman", func_0000A8DC);
 
 INCLUDE_ASM("nonmatchings/umdman", func_0000A96C);

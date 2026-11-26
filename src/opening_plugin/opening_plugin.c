@@ -254,6 +254,10 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_000009E8);
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000009D4);
 #endif
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/opening_plugin", func_000009FC_v311);
+#endif
+
 #if FW_VERSION == 310
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000009FC_v310);
 #endif

@@ -2,11 +2,11 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00038870);
 #endif
 
-#if FW_VERSION < 271 || FW_VERSION == 303
+#if FW_VERSION < 271 || FW_VERSION >= 303
 INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_000564D0);
 #endif
 
@@ -50,7 +50,7 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E234);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_038870", D_0007E23C);
 #endif
 
-#if FW_VERSION == 250 || FW_VERSION == 303
+#if FW_VERSION == 250 || FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00038D3C);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00038F40);
@@ -72,7 +72,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_000351FC);
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00056688);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_038870", func_00039444);
 #endif
 

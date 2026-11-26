@@ -4,6 +4,10 @@
 
 INCLUDE_ASM("nonmatchings/memlmd", func_00000000);
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/memlmd", func_0000006C_v311);
+#endif
+
 #if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/memlmd", func_0000006C_v303);
 #endif
@@ -150,7 +154,7 @@ INCLUDE_RODATA("nonmatchings/memlmd", D_00001D14);
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001D18);
 #endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 352
+#if FW_VERSION >= 282 && FW_VERSION < 311
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001D6C);
 #endif
 
@@ -164,7 +168,9 @@ INCLUDE_RODATA("nonmatchings/memlmd", D_00001D20);
 
 #if FW_VERSION >= 282 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001D74);
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 311
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001D78);
 #endif
 
@@ -174,8 +180,12 @@ INCLUDE_RODATA("nonmatchings/memlmd", D_00001E9C);
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001EA0);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001ECC);
+#endif
+
+#if FW_VERSION == 311
+INCLUDE_RODATA("nonmatchings/memlmd", D_00001F18);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 352
@@ -246,7 +256,7 @@ INCLUDE_RODATA("nonmatchings/memlmd", D_00002134);
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001910);
 #endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 352
+#if FW_VERSION >= 282 && FW_VERSION < 311
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001F4C);
 #endif
 
@@ -262,11 +272,19 @@ INCLUDE_RODATA("nonmatchings/memlmd", D_00001F04);
 INCLUDE_RODATA("nonmatchings/memlmd", D_00001F6C);
 #endif
 
-#if FW_VERSION >= 302 && FW_VERSION < 352
+#if FW_VERSION == 311
+INCLUDE_RODATA("nonmatchings/memlmd", D_0000210C);
+#endif
+
+#if FW_VERSION >= 302 && FW_VERSION < 311
 INCLUDE_RODATA("nonmatchings/memlmd", D_000020A4);
+#endif
 
+#if FW_VERSION >= 302 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/memlmd", D_000020B4);
+#endif
 
+#if FW_VERSION >= 302 && FW_VERSION < 311
 INCLUDE_RODATA("nonmatchings/memlmd", D_000020C4);
 #endif
 

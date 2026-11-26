@@ -623,7 +623,7 @@ INCLUDE_ASM("nonmatchings/music_common_0043C0", func_000053EC);
 INCLUDE_ASM("nonmatchings/music_common_0043C0", music_common_07771D45);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_000223D4);
 
 INCLUDE_RODATA("nonmatchings/music_common_0043C0", D_000223DC);

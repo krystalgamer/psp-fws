@@ -19,7 +19,7 @@ INCLUDE_RODATA("nonmatchings/vaudio", D_00000D9C);
 INCLUDE_ASM("nonmatchings/vaudio", module_start);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 sceVaudioChReserve(s32 arg0, s32 arg1, s32 arg2) {
     return func_0000078C(arg0, arg1, arg2, 0);
 }
@@ -103,7 +103,7 @@ s32 sceVaudio_driver_DCC18F25(void) {
 INCLUDE_ASM("nonmatchings/vaudio", module_stop);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/vaudio", func_0000078C);
 #endif
 

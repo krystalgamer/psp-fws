@@ -2,7 +2,7 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 s32 func_00037308(struct Unk_func_00037308_0 *arg0) {
     arg0->unk1C = 0;
     arg0->unk20 = 0;

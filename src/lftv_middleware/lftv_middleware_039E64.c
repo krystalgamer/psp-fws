@@ -2,7 +2,7 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_00039E64(struct Unk_func_00039E64_0 *arg0) {
     arg0->unk8 = 1;
     arg0->unk0 = &D_00056648;
@@ -48,7 +48,7 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_039E64", D_0007E448);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_039E64", D_0007E464);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_00039F24);
 #endif
 
@@ -84,7 +84,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_00057470);
 INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_00057538);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_0003A0E4);
 
 void func_0003A110(u32 arg0) {
@@ -131,7 +131,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_0003AD5C);
 INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_0003ADC8);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_0003ADC8(struct Unk_func_0003ADC8_0 *arg0, s32 arg1) {
     arg0->unk2C = arg1;
 }
@@ -201,7 +201,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_0003A8E0);
 INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_000577F4);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_0003ADD0);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_0003AE70);
@@ -317,7 +317,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_0005840C);
 INCLUDE_ASM("nonmatchings/lftv_middleware_039E64", func_00058488);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_0003BB2C(struct Unk_func_0003BB2C_0 *arg0) {
     func_0003BD24(arg0->unk24);
 }

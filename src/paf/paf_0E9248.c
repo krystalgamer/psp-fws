@@ -113,6 +113,6 @@ INCLUDE_ASM("nonmatchings/paf_0E9248", scePaf_677F1705);
 INCLUDE_ASM("nonmatchings/paf_0E9248", scePaf_7C2DB482);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_0E9248", func_000E94EC);
 #endif

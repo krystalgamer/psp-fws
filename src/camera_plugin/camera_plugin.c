@@ -18,6 +18,14 @@ s32 module_stop(void) {
 
 INCLUDE_ASM("nonmatchings/camera_plugin", func_0000015C);
 
+#if FW_VERSION == 311
+void func_00000180_v311(void) {
+    if ((sceUsbStart(&D_000201FC, 0U, NULL) >= 0) && (sceUsbStart(&D_0002020C, 0U, NULL) >= 0) && (sceUsbStart(&D_00020220, 0U, NULL) >= 0)) {
+        sceUsbStart(&D_00020230, 0U, NULL);
+    }
+}
+#endif
+
 #if FW_VERSION == 310
 void func_00000180_v310(void) {
     if ((sceUsbStart(&D_000201FC, 0U, NULL) >= 0) && (sceUsbStart(&D_0002020C, 0U, NULL) >= 0) && (sceUsbStart(&D_00020220, 0U, NULL) >= 0)) {
@@ -218,7 +226,7 @@ INCLUDE_RODATA("nonmatchings/camera_plugin", D_00020230);
 
 INCLUDE_ASM("nonmatchings/camera_plugin", func_00000180);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310 && FW_VERSION < 352
 void func_000001D8(void) {
     func_000019F0();
     func_000001FC();

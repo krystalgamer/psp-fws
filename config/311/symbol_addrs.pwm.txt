@@ -16,3 +16,9 @@ sceSysreg_driver_25B0AC52 = 0x00000400; // type:func
 sceSysreg_driver_45225F8F = 0x00000408; // type:func
 sceSysreg_driver_7A5D2D15 = 0x00000410; // type:func
 sceSysreg_driver_7DCA8302 = 0x00000418; // type:func
+// shared names (tools/add_version.py) begin
+D_00000548 = 0x00000570; // rom:0x610
+D_00000550 = 0x00000580; // rom:0x620
+D_00000590 = 0x000005D0;
+func_00000350 = 0x00000370; // type:func rom:0x410
+// shared names (tools/add_version.py) end

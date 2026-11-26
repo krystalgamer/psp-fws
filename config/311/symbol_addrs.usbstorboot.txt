@@ -44,3 +44,27 @@ sceUsbstor_internal_489E6BF1 = 0x00002634; // type:func
 sceUsbstor_internal_50F99EAD = 0x0000263C; // type:func
 sceUsbstor_internal_DC1A5833 = 0x00002644; // type:func
 sceUsbstor_internal_FC4D0080 = 0x0000264C; // type:func
+// shared names (tools/add_version.py) begin
+D_00001B60 = 0x000029BC; // rom:0x2A5C
+D_00001B70 = 0x000029CC; // rom:0x2A6C
+D_00001B90 = 0x000029EC; // rom:0x2A8C
+D_00001BB4 = 0x00002A10; // rom:0x2AB0
+D_00001BD8 = 0x00002A34; // rom:0x2AD4
+D_00001F20 = 0x00002EC0;
+D_00001F3C = 0x00002EDC;
+func_000000B4 = 0x000000B0; // type:func rom:0x150
+func_00000108 = 0x00000104; // type:func rom:0x1A4
+func_00000180 = 0x0000017C; // type:func rom:0x21C
+func_00000530 = 0x00000528; // type:func rom:0x5C8
+func_000005B8 = 0x000005B0; // type:func rom:0x650
+func_000007B0 = 0x000007A4; // type:func rom:0x844
+func_00000CF0 = 0x00000D24; // type:func rom:0xDC4
+func_00001068 = 0x0000109C; // type:func rom:0x113C
+func_00001128 = 0x0000115C; // type:func rom:0x11FC
+func_00001234 = 0x00001268; // type:func rom:0x1308
+func_000012B4 = 0x000012E8; // type:func rom:0x1388
+func_0000137C = 0x000013B0; // type:func rom:0x1450
+func_00001434 = 0x00001468; // type:func rom:0x1508
+func_0000150C = 0x00001540; // type:func rom:0x15E0
+func_00001754 = 0x00001788; // type:func rom:0x1828
+// shared names (tools/add_version.py) end

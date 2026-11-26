@@ -446,7 +446,7 @@ s32 ModuleMgrForKernel_54D9E02E(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_00004750(void) {
     sceKernelLockMutex(D_00008174, 1, NULL);
 }
@@ -521,7 +521,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00004998);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006DF4);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/modulemgr", func_000051E4);
 #endif
 
@@ -1164,7 +1164,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_0000580C);
 INCLUDE_ASM("nonmatchings/modulemgr", func_000058E4);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/modulemgr", func_000064E8);
 #endif
 
@@ -1202,7 +1202,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00007E20);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00007E90);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00007E78);
 #endif
 
@@ -1230,7 +1230,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00008060);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_0000807C);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/modulemgr", D_0000805C);
 #endif
 

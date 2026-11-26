@@ -37,7 +37,7 @@ void func_00020604(struct Unk_func_00020604_0 *arg0, s8 arg1) {
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_020034", func_0002060C);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_020034", D_000B1148);
 #endif
 
@@ -190,7 +190,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_020034", func_00021664);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_020034", func_0002174C);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310 && FW_VERSION < 352
 void func_0002174C(void) {
     s32 temp_v0;
 
@@ -322,7 +322,7 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_020034", D_000B0954);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_020034", D_000B0968);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_020034", D_000B15AC);
 #endif
 

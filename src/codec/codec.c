@@ -114,7 +114,7 @@ void sceCodec_driver_31B2E41E(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/codec", func_00000C24);
 #endif
 

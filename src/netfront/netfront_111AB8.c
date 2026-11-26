@@ -42,7 +42,7 @@ INCLUDE_ASM("nonmatchings/netfront_111AB8", func_00112668);
 
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_0011290C);
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_00112E64);
 
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_00112EB8);
@@ -98,7 +98,7 @@ s32 func_001135A8(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_00113610);
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/netfront_111AB8", func_001136B4);
 
 u32 func_001136F0(s32 arg0) {

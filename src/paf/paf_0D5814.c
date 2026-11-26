@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_0D5814", func_000D5814);
 #else
 void func_000D5814(struct Unk_func_000D5814_0 *arg0) {

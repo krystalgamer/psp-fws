@@ -248,7 +248,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_000558F8);
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055904);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00054FA4);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00054FC0);
@@ -256,9 +256,17 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00054FC0);
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00054FDC);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00054FF8);
+#endif
 
+#if FW_VERSION == 311
+INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055014_v311);
+#endif
+
+#if FW_VERSION == 310
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055014_v310);
+#endif
 
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055030);
 #endif
 
@@ -286,7 +294,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0003CDF4);
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0003CED0);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_0003D104(void) {
     void *sp0;
     s32 var_v1;
@@ -309,7 +317,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0003CF74);
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0003D194);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_0003D264(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_s0;
     void **temp_a0;
@@ -377,7 +385,7 @@ s32 func_0003EAF0(struct Unk_func_0003EAF0_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_0003EB0C(struct Unk_func_0003EB0C_0 *arg0) {
     void *temp_v0;
 
@@ -401,7 +409,7 @@ s32 func_0003EB0C(struct Unk_func_0003EB0C_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_0003D93C(void *arg0) {
     void *temp_v0;
 
@@ -484,7 +492,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0003F4C8);
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0003F4F4);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_0003E498(void *arg0, s32 arg1) {
     void *temp_s0;
 
@@ -505,7 +513,7 @@ s32 func_0003F500(struct Unk_func_0003F500_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_0003E52C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x5C) = arg1;
     return 0;
@@ -672,7 +680,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00041914);
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00041A40);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_00041A40(void *arg0, s32 arg1) {
     s32 temp_s2;
 
@@ -1477,7 +1485,7 @@ void func_0004663C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_00044DC4(void) {
     return M2C_FIELD(scePaf_5DFB5858(), s32 *, 0x9C);
 }
@@ -1537,7 +1545,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00046C64);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_000470E4);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00045E84);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00046234);
@@ -1553,7 +1561,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00047ABC);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00047F38);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00047390);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_000474C4);
@@ -1578,7 +1586,7 @@ s32 func_00048788(s32 arg0, s32 *arg1, s32 arg2) {
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00048864);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_00047904(void *arg0) {
     func_00049C4C();
     func_00005DF0(arg0 + 0x1288, 0);
@@ -1595,7 +1603,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00048980);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_000489F0);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00047A40);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00047B68);
@@ -1615,7 +1623,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00048A60);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00048D9C);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_0004833C(void *arg0) {
     s32 var_v0;
 
@@ -1653,7 +1661,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_000490FC);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00049270);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00048830);
 #endif
 
@@ -1667,7 +1675,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055DE4);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055DE8);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_0005546C);
 #endif
 
@@ -1679,7 +1687,7 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055DF4);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055DF8);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055480);
 #endif
 
@@ -1699,13 +1707,13 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055E14);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_00055E34);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/video_main_plugin_03D428", D_000554CC);
 #endif
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00049354);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00048A14);
 #else
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00049438);
@@ -1713,7 +1721,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00049438);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_00049564);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_00048EB8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1358) = (s32) (((arg1 ^ 4) != 0) ? 0 : 8);
     M2C_FIELD(arg0, s32 *, 0x1350) = 0;

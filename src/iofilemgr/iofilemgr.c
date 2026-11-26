@@ -665,7 +665,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", syslib_D3744BE0);
 INCLUDE_ASM("nonmatchings/iofilemgr", module_reboot_before);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoPollAsync);
 #endif
 
@@ -675,7 +675,7 @@ s32 sceIoPollAsync(u32 arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsync);
 #endif
 
@@ -685,7 +685,7 @@ s32 sceIoWaitAsync(u32 arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsyncCB);
 #endif
 
@@ -695,7 +695,7 @@ s32 sceIoWaitAsyncCB(u32 arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_CB05F8D6);
 #endif
 

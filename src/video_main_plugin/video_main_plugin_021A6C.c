@@ -739,9 +739,15 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00025704);
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000249EC);
 #endif
 
-#if FW_VERSION == 310
-INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00052F88);
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00024B24);
+#endif
 
+#if FW_VERSION >= 310
+INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00052F88);
+#endif
+
+#if FW_VERSION == 310
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00024B24);
 #endif
 
@@ -974,7 +980,7 @@ s32 func_00026E50(s32 *arg0, struct Unk_func_00026E50_1 *arg1) {
     return 0;
 }
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_0002595C);
 #endif
 

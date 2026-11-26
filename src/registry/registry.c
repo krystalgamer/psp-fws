@@ -62,7 +62,7 @@ s32 syslib_ADF12745(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 syslib_ADF12745(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0:

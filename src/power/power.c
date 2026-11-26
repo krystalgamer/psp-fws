@@ -243,7 +243,7 @@ INCLUDE_ASM("nonmatchings/power", func_00001700);
 INCLUDE_ASM("nonmatchings/power", func_00001754);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/power", func_00002464);
 
 INCLUDE_ASM("nonmatchings/power", func_000025D8);
@@ -649,7 +649,7 @@ s32 func_000024BC(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_00003A98(void) {
     sceKernelDeleteMutex(D_0000B348);
     return 0;
@@ -1018,7 +1018,7 @@ s32 scePower_driver_B999184C(void) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 s32 func_00004B54(void) {
     M2C_UNK *temp_v0;
     s32 temp_v0_2;
@@ -1166,7 +1166,7 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_28E12023);
 
 INCLUDE_ASM("nonmatchings/power", scePower_driver_483CE86B);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/power", scePower_driver_CB49F5CE);
 #endif
 

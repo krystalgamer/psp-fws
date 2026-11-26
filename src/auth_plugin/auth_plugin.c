@@ -461,7 +461,7 @@ void func_000021AC(void) {
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000021CC);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_000023A4(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00002638();
@@ -538,7 +538,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_000023C4);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002460);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002638);
 #endif
 

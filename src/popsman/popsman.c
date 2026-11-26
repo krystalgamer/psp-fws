@@ -43,7 +43,7 @@ INCLUDE_ASM("nonmatchings/popsman", func_000005DC);
 
 INCLUDE_ASM("nonmatchings/popsman", func_000005E8);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/popsman", func_000006FC);
 #else
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_driver_92E9E38D);
@@ -53,7 +53,7 @@ INCLUDE_ASM("nonmatchings/popsman", scePopsMan_56EEB969);
 
 INCLUDE_ASM("nonmatchings/popsman", func_00000724);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/popsman", func_00000830);
 #endif
 
@@ -81,7 +81,7 @@ INCLUDE_ASM("nonmatchings/popsman", scePopsMan_B262B44F);
 
 INCLUDE_ASM("nonmatchings/popsman", scePopsMan_BF224726);
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void scePopsMan_4F7628CC(void) {
     sceGe_driver_5BAA5439(0x400000);
     sceGeEdramGetSize();

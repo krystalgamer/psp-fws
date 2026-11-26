@@ -2,7 +2,7 @@
 #include "common.h"
 #include "netfront_decls.h"
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000EC398);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000EC3DC);
@@ -436,11 +436,15 @@ void func_000F1420(s32 *arg0, s32 arg1) {
     sceHVNetfront_Module_08549708(*arg0);
     sceHVNetfront_Module_703D7675(arg1 + 0x14, arg1 + 0x38);
 }
+#endif
 
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F1458);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F151C);
+#endif
 
+#if FW_VERSION >= 303
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012DBCC);
 
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012DC2C);
@@ -512,7 +516,7 @@ void func_000F16C8(void) {
     func_000F3018();
 }
 
-#if FW_VERSION == 250
+#if FW_VERSION != 303
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F16E4);
 #else
 void func_000F16E4(struct Unk_func_000F16E4_0 *arg0) {
@@ -556,7 +560,7 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F1E18);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F1E24);
 
-#if FW_VERSION == 250
+#if FW_VERSION != 303
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F1EAC);
 #else
 void func_000F1EAC(s32 arg0) {
@@ -829,11 +833,19 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F2A78);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F2ADC);
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6830);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6898);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000EBE40);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000EBEA8);
-#else
+#endif
+
+#if FW_VERSION == 303
 s32 png_get_pHYs(s32 arg0, struct Unk_png_get_pHYs_1 *arg1, s32 *arg2, s32 *arg3, s32 *arg4) {
     s32 var_v1;
 
@@ -961,6 +973,18 @@ s32 func_000F2DC0(s32 arg0) {
     return !(arg0 & 1) ? 0 : 0xFC;
 }
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6A7C);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6A9C);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6AB0);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6AC4);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F6AD8);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000EC08C);
 
@@ -971,7 +995,9 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000EC0C0);
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000EC0D4);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000EC0E8);
-#else
+#endif
+
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_0EC398", png_get_mmx_flagmask);
 
 u8 png_get_mmx_bitdepth_threshold(struct Unk_png_get_mmx_bitdepth_threshold_0 *arg0) {
@@ -1193,6 +1219,24 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F5DE0);
 
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012E3C4);
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F9BDC);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FA0A8);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FA1A0);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FA238);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FA6F0);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FA7FC);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FAAFC);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FAB04);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000EF1EC);
 
@@ -1209,7 +1253,9 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000EFE0C);
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F010C);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F0114);
-#else
+#endif
+
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_0EC398", png_read_row);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", png_read_rows);
@@ -1249,9 +1295,15 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F7314);
 
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012E5B8);
 
+#if FW_VERSION == 311
+INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_00132548);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_00122E04);
-#else
+#endif
+
+#if FW_VERSION == 303
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012E5E8);
 #endif
 
@@ -1261,9 +1313,15 @@ INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012E638);
 
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012E660);
 
+#if FW_VERSION == 311
+INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_001325E4);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_00122EA0);
-#else
+#endif
+
+#if FW_VERSION == 303
 INCLUDE_RODATA("nonmatchings/netfront_0EC398", D_0012E684);
 #endif
 
@@ -1290,6 +1348,50 @@ void func_000F7CD4(struct Unk_func_000F7CD4_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F7CE4);
+
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FB9DC);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FBB04);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FBB1C);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FC910);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FCB98);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FD014);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FD1AC);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FD408);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FD47C);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FD678);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FD7C0);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FDBE0);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FDE50);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FE670);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FE6F8);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FF9BC);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FFF14);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00100244);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001007B4);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00100968);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001011FC);
+#endif
 
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F0FEC);
@@ -1333,7 +1435,9 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F5DC4);
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F5F78);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000F680C);
-#else
+#endif
+
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_0EC398", png_set_rgb_to_gray_fixed);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", png_set_read_user_transform_fn);
@@ -1561,6 +1665,16 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_0010195C);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00101990);
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_0010581C);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00105850);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00105910);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00105950);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FAE2C);
 
@@ -1569,7 +1683,9 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FAE60);
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FAF20);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FAF60);
-#else
+#endif
+
+#if FW_VERSION == 303
 INCLUDE_ASM("nonmatchings/netfront_0EC398", png_set_pHYs);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", png_set_PLTE);
@@ -1642,6 +1758,38 @@ void func_001027F4(struct Unk_func_001027F4_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk5F4 = arg2;
 }
 
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001064AC);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001064BC);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001064E0);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00106508);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_0010652C);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00106554);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00106578);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001065E4);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001065F8);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_0010660C);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_0010661C);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001066D8);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00106728);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_001067A4);
+
+INCLUDE_ASM("nonmatchings/netfront_0EC398", func_00106AE8);
+#endif
+
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FBABC);
 
@@ -1672,7 +1820,9 @@ INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FBD38);
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FBDB4);
 
 INCLUDE_ASM("nonmatchings/netfront_0EC398", func_000FC0F8);
-#else
+#endif
+
+#if FW_VERSION == 303
 void png_set_bgr(struct Unk_png_set_bgr_0 *arg0) {
     arg0->unk424 = (s32) (arg0->unk424 | 1);
 }

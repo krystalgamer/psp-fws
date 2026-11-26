@@ -566,7 +566,7 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003830);
 INCLUDE_ASM("nonmatchings/umd9660", func_00003A18);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/umd9660", func_00003EF4);
 #endif
 
@@ -871,7 +871,7 @@ s32 func_00004568(void) {
 INCLUDE_ASM("nonmatchings/umd9660", func_0000458C);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_000046C4(void) {
     D_00007690 = KDebugForKernel_24C32559(0x13);
 }

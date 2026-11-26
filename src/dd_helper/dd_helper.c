@@ -345,7 +345,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0000AA88);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_0000AAA0_v280);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_00001138(struct Unk_func_00001138_0 *arg0) {
     func_00003830((s32) &arg0->pad0[0x10]);
     sceKernelSetEventFlag(M2C_FIELD(arg0, s32 *, 0x104), 1);
@@ -480,7 +480,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_000131E8);
 INCLUDE_RODATA("nonmatchings/dd_helper", D_00013200);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_RODATA("nonmatchings/dd_helper", D_000132B0);
 #endif
 
@@ -498,7 +498,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00001D90);
 INCLUDE_ASM("nonmatchings/dd_helper", func_000022BC);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/dd_helper", func_000023D4);
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_0000249C);
@@ -522,7 +522,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_0000269C);
 INCLUDE_ASM("nonmatchings/dd_helper", func_000027C4);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_00002A84(s32 arg0) {
     sceKernelDelayThread(0xF4240U);
     func_00006920(arg0 + 0x10, arg0 + 0xA0, arg0 + 0xAC);
@@ -705,7 +705,7 @@ s32 func_00003998(s8 arg0) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/dd_helper", func_00003A6C);
 #endif
 
@@ -745,7 +745,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00004268);
 INCLUDE_ASM("nonmatchings/dd_helper", func_000045DC);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/dd_helper", func_00004748);
 #endif
 
@@ -2163,7 +2163,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00011058);
 INCLUDE_ASM("nonmatchings/dd_helper", func_000110F8);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_000110F8(void) {
     scePaf_FCFAA39F();
 }

@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/311/.splat_cache.premo_plugin
   symbol_addrs_path:
     - config/311/symbol_addrs.premo_plugin.txt
+    - config/311/func_starts.premo_plugin.txt
     - tmp/build/311/prx_syms.premo_plugin.txt
   reloc_addrs_path: [tmp/build/311/reloc_addrs.premo_plugin.txt]
   asset_path: tmp/assets/311/premo_plugin
@@ -54,7 +55,19 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - { start: 0xC4, type: prxpad, order: .text }
-      - [0xD0, asm, premo_plugin]
+      - [0xD0, c, premo_plugin]
+      - [0x5514, c, premo_plugin_009380]
+      - [0x572C, c, premo_plugin_009598]
+      - [0xA920, c, premo_plugin_0117FC]
+      - [0xAC24, c, premo_plugin_011B50]
+      - [0xCFB4, c, premo_plugin_014300]
+      - [0xD024, c, premo_plugin_014458]
+      - [0xD574, c, premo_plugin_0149C4]
+      - [0xD6B4, c, premo_plugin_014B14]
+      - [0x1189C, c, premo_plugin_018FBC]
+      - [0x11A34, c, premo_plugin_019154]
+      - [0x1C094, c, premo_plugin_023E68]
+      - [0x1C43C, c, premo_plugin_02435C]
       - { start: 0x21A58, type: asm, name: fini, linker_section: .fini }
       - { start: 0x21A74, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2239C, type: prxpad, order: .text }
@@ -73,7 +86,14 @@ segments:
       - { start: 0x22D10, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x22D14, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x22D18, type: prxpad, order: .rodata }
-      - [0x22D20, rodata, premo_plugin]
+      - [0x22D20, .rodata, premo_plugin]
+      - [0x23688, .rodata, premo_plugin_009598]
+      - [0x23C48, .rodata, premo_plugin_011B50]
+      - [0x23E30, .rodata, premo_plugin_014300]
+      - [0x23F10, .rodata, premo_plugin_014458]
+      - [0x23F28, .rodata, premo_plugin_014B14]
+      - [0x24128, .rodata, premo_plugin_019154]
+      - [0x25528, .rodata, premo_plugin_02435C]
   - name: premo_plugin_seg1
     type: code
     start: 0x26150

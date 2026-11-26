@@ -25,7 +25,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", music_common_BE270349);
 INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001D334);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void music_common_730D5E67(struct Unk_music_common_730D5E67_0 *arg0, struct Unk_music_common_730D5E67_1 *arg1) {
     s32 temp_a0;
     s32 temp_v0;
@@ -65,7 +65,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001D4BC);
 INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001D55C);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_0001D55C(void) {
     scePaf_FCFAA39F();
 }

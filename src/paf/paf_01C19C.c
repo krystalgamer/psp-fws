@@ -2,16 +2,14 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 282
+#if FW_VERSION != 282
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_21A0C6E0);
 #endif
 
-#if FW_VERSION >= 200 && FW_VERSION < 282
+#if (FW_VERSION >= 200 && FW_VERSION < 282) || FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_C1579C1D);
 
 INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_ED2DF238);
-
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_EB5BDCE1);
 #endif
 
 #if FW_VERSION == 282
@@ -44,7 +42,13 @@ void scePaf_ED2DF238(void **arg0, s32 arg1, s32 arg2) {
         temp_a0->unkC0 = arg1;
     }
 }
+#endif
 
+#if (FW_VERSION >= 200 && FW_VERSION < 282) || FW_VERSION == 340
+INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_EB5BDCE1);
+#endif
+
+#if FW_VERSION == 282
 void scePaf_EB5BDCE1(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct Unk_scePaf_EB5BDCE1_temp_a0 *temp_a0;
 
@@ -137,7 +141,7 @@ M2C_UNK *func_0001C964(void) {
 INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001C0A0);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 M2C_UNK *func_0001C970(void) {
     return &D_00170D48;
 }

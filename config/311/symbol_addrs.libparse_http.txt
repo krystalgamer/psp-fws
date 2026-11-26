@@ -2,3 +2,8 @@
 sceParseHttpStatusLine = 0x00000000; // type:func
 sceParseHttpResponseHeader = 0x00000118; // type:func
 sceKernelCheckThreadStack = 0x00000C80; // type:func
+// shared names (tools/add_version.py) begin
+D_00000D60 = 0x00000D64; // rom:0xE04
+D_00000D61 = 0x00000D65; // rom:0xE05
+D_00000D60_v311 = 0x00000D60; // rom:0xE00
+// shared names (tools/add_version.py) end

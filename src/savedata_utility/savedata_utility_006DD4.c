@@ -988,7 +988,7 @@ s32 func_0000CFD4(struct Unk_func_0000CFD4_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D1C8);
 #endif
 

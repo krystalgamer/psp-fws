@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/311/.splat_cache.lftv_middleware
   symbol_addrs_path:
     - config/311/symbol_addrs.lftv_middleware.txt
+    - config/311/func_starts.lftv_middleware.txt
     - tmp/build/311/prx_syms.lftv_middleware.txt
   reloc_addrs_path: [tmp/build/311/reloc_addrs.lftv_middleware.txt]
   asset_path: tmp/assets/311/lftv_middleware
@@ -54,7 +55,44 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - { start: 0xC4, type: prxpad, order: .text }
-      - [0xD0, asm, lftv_middleware]
+      - [0xD0, c, lftv_middleware]
+      - [0x1B8, c, lftv_middleware_000118]
+      - [0x248, c, lftv_middleware_0001A8]
+      - [0x3A0, c, lftv_middleware_000300]
+      - [0x17DFC, c, lftv_middleware_017CB0]
+      - [0x19264, c, lftv_middleware_019118]
+      - [0x1C680, c, lftv_middleware_01C470]
+      - [0x1C73C, c, lftv_middleware_01C52C]
+      - [0x1D83C, c, lftv_middleware_01D5EC]
+      - [0x20704, c, lftv_middleware_0204B4]
+      - [0x20A34, c, lftv_middleware_0207E4]
+      - [0x2333C, c, lftv_middleware_0230EC]
+      - [0x23BEC, c, lftv_middleware_02399C]
+      - [0x23D0C, c, lftv_middleware_023ABC]
+      - [0x2815C, c, lftv_middleware_027D08]
+      - [0x298F0, c, lftv_middleware_02949C]
+      - [0x30978, c, lftv_middleware_030524]
+      - [0x30D28, c, lftv_middleware_0308D4]
+      - [0x31A30, c, lftv_middleware_0315DC]
+      - [0x321F8, c, lftv_middleware_031DA4]
+      - [0x33E54, c, lftv_middleware_033A00]
+      - [0x3566C, c, lftv_middleware_0346EC]
+      - [0x382E8, c, lftv_middleware_036D6C]
+      - [0x38884, c, lftv_middleware_037308]
+      - [0x39294, c, lftv_middleware_037D10]
+      - [0x3930C, c, lftv_middleware_037D88]
+      - [0x398CC, c, lftv_middleware_038348]
+      - [0x39DF4, c, lftv_middleware_038870]
+      - [0x3B370, c, lftv_middleware_039DEC]
+      - [0x3B3C0, c, lftv_middleware_039E3C]
+      - [0x3B3E8, c, lftv_middleware_039E64]
+      - [0x3D13C, c, lftv_middleware_03BBB8]
+      - [0x3E270, c, lftv_middleware_03CC14]
+      - [0x3EF9C, c, lftv_middleware_03D910]
+      - [0x4AE40, c, lftv_middleware_048FC4]
+      - [0x4B4DC, c, lftv_middleware_049660]
+      - [0x4D328, c, lftv_middleware_04B4AC]
+      - [0x4E0AC, c, lftv_middleware_04C1DC]
       - { start: 0x52578, type: asm, name: fini, linker_section: .fini }
       - { start: 0x52594, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x52AC4, type: prxpad, order: .text }
@@ -73,7 +111,28 @@ segments:
       - { start: 0x5339C, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x533A0, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x53404, type: prxpad, order: .rodata }
-      - [0x53410, rodata, lftv_middleware]
+      - [0x53410, .rodata, lftv_middleware_0001A8]
+      - [0x5341C, .rodata, lftv_middleware_000300]
+      - [0x566B8, .rodata, lftv_middleware_019118]
+      - [0x568D0, .rodata, lftv_middleware_01C52C]
+      - [0x57150, .rodata, lftv_middleware_01D5EC]
+      - [0x57240, .rodata, lftv_middleware_0207E4]
+      - [0x575B0, .rodata, lftv_middleware_023ABC]
+      - [0x57AA8, .rodata, lftv_middleware_027D08]
+      - [0x57D58, .rodata, lftv_middleware_02949C]
+      - [0x57E44, .rodata, lftv_middleware_0308D4]
+      - [0x581D0, .rodata, lftv_middleware_031DA4]
+      - [0x58338, .rodata, lftv_middleware_033A00]
+      - [0x5847C, .rodata, lftv_middleware_0346EC]
+      - [0x58750, .rodata, lftv_middleware_036D6C]
+      - [0x58800, .rodata, lftv_middleware_038348]
+      - [0x58870, .rodata, lftv_middleware_038870]
+      - [0x589C8, .rodata, lftv_middleware_03BBB8]
+      - [0x58A80, .rodata, lftv_middleware_03CC14]
+      - [0x58C18, .rodata, lftv_middleware_03D910]
+      - [0x591D8, .rodata, lftv_middleware_049660]
+      - [0x591F0, .rodata, lftv_middleware_04B4AC]
+      - [0x59430, .rodata, lftv_middleware_04C1DC]
       - { start: 0x59AC8, type: prxpad, order: .rodata }
   - name: lftv_middleware_seg1
     type: code

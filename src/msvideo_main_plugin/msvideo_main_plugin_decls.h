@@ -3622,6 +3622,7 @@ void func_00020E40(M2C_UNK **arg0);
 s32 func_0002145C(void *arg0, s32 arg1, s32 arg2);
 u8 func_0002148C(struct Unk_func_0002148C_0 *arg0);
 s32 func_0002148C_v310(void *arg0, s32 arg1, s32 arg2);
+s32 func_0002148C_v311(void *arg0, s32 arg1, s32 arg2);
 s32 func_000214F8(s32);
 void func_0002174C(void);
 void func_00021A30(M2C_UNK **arg0);

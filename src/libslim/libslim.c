@@ -837,7 +837,7 @@ s32 func_00006054(struct Unk_func_00006054_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 s32 func_00006054(struct Unk_func_00006054_0 *arg0, s32 arg1) {
     s32 var_v1;
 
@@ -1109,7 +1109,7 @@ void func_00008490(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void func_00008490(s32 arg0, s32 arg1) {
     struct Unk_func_00008490_temp_v1 *temp_v1;
 
@@ -1154,7 +1154,7 @@ void *func_000084CC(void) {
 }
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 void *func_000084CC(void) {
     struct Unk_func_000084CC_temp_v0 *temp_v0;
     void *var_v0;

@@ -129,7 +129,7 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_00000924);
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000964);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 void func_00000964(void) {
     s32 temp_s1;
     void *temp_v0;

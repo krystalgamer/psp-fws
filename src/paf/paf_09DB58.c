@@ -4,7 +4,9 @@
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09DB58", func_0009DB58);
-#else
+#endif
+
+#if FW_VERSION == 282
 void func_0009DB58(struct Unk_func_0009DB58_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
         arg0->unk42C = __builtin_allegrex_ins(arg0->unk42C & arg1, 0, 0x12, 2);
@@ -12,6 +14,7 @@ void func_0009DB58(struct Unk_func_0009DB58_0 *arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION < 340
 s32 func_0009DB78(s32 arg0, struct Unk_func_0009DB78_1 *arg1, s32 arg2) {
     s32 var_v0;
 
@@ -149,6 +152,7 @@ u8 func_0009DF14(s32 arg0, struct Unk_func_0009DF14_1 *arg1) {
     }
     return var_v0;
 }
+#endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09DB58", func_00053D90);

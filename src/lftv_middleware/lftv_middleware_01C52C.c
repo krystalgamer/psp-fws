@@ -187,6 +187,10 @@ void func_0001D00C(struct Unk_func_0001D00C_0 *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+#if FW_VERSION >= 303
+INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001D03C);
+#endif
+
 #if FW_VERSION >= 271 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_00019B90);
 
@@ -207,9 +211,7 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_01C52C", D_0007B1A0);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_01C52C", D_0007AEE0);
 #endif
 
-#if FW_VERSION == 303
-INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001D03C);
-
+#if FW_VERSION >= 303
 void func_0001D1FC(struct Unk_func_0001D1FC_0 *arg0, s32 arg1) {
     arg0->unk8 = arg1;
 }
@@ -224,6 +226,10 @@ s32 func_0001D204(struct Unk_func_0001D204_0 *arg0) {
     }
     return var_v1;
 }
+
+#if FW_VERSION == 311
+INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001D3A8);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001D238);
 
@@ -300,7 +306,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001A0F0);
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_00038C0C);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001D518);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001D594);

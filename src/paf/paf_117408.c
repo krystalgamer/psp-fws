@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 void func_00117408(M2C_UNK **arg0) {
     *arg0 = &D_0019CEF8;
     scePaf_715E8DAB((s32) arg0);
@@ -13,7 +13,7 @@ void func_00117440(struct Unk_func_00117440_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 100 || FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/paf_117408", func_0011744C);
 #endif
 
@@ -135,7 +135,7 @@ INCLUDE_ASM("nonmatchings/paf_117408", func_000BE334);
 INCLUDE_ASM("nonmatchings/paf_117408", func_000BE3A8);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 s32 func_00117478(void) {
     return D_001A4934;
 }

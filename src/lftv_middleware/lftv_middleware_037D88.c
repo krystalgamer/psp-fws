@@ -10,7 +10,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00037D88);
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00037DB0);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 s32 func_00037DB0(struct Unk_func_00037DB0_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk1018 = arg1;
     arg0->unk4 = arg2;
@@ -260,7 +260,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00054A6C);
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00054B90);
 #endif
 
-#if FW_VERSION == 303
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00037DC0);
 #endif
 

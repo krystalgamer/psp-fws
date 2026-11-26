@@ -31,7 +31,7 @@ void func_00106AD4(struct Unk_func_00106AD4_0 *arg0) {
 INCLUDE_ASM("nonmatchings/paf_106A54", func_001047C4);
 #endif
 
-#if FW_VERSION == 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_106A54", func_00106B04);
 #endif
 

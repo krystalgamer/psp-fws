@@ -1132,7 +1132,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00004D38);
 INCLUDE_ASM("nonmatchings/isofs", func_00004E38);
 #endif
 
-#if FW_VERSION == 310
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/isofs", func_00005048);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00005410);
