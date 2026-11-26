@@ -19,3 +19,7 @@ g_ConsoleIdCertificate = 0x000012C0;
 g_isConsoleIdCertificateObtained = 0x00000888;
 g_idStorageUMDConfig = 0x000008C0;
 g_pWorkBuffer = 0x00000854;
+_sceChkregLookupUMDRegionCodeInfo = 0x00000000; // type:func
+_sceChkregCheckRegion = 0x00000128; // type:func
+_sceChkregLookupConsoleIdCertificate = 0x00000190; // type:func
+_sceChkregVerifyConsoleIdCertificate = 0x0000020C; // type:func

@@ -1,6 +1,11 @@
 {
  "funcs": {
-  "sceKernelCreateSema": "s32 sceKernelCreateSema(void *, u32, s32, s32, void *);"
+  "_sceChkregCheckRegion": "s32 _sceChkregCheckRegion(u32, u32);",
+  "_sceChkregLookupUMDRegionCodeInfo": "s32 _sceChkregLookupUMDRegionCodeInfo(void);",
+  "sceKernelCreateSema": "s32 sceKernelCreateSema(void *, u32, s32, s32, void *);",
+  "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
+  "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
+  "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, u32 *);"
  },
  "vars": {
   "g_ConsoleIdCertificate": "extern u8 g_ConsoleIdCertificate[0xB8];",

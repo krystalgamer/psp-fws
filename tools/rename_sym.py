@@ -61,7 +61,7 @@ def main():
                 addr = int(AUTO.match(old)[1], 16)
                 if re.search(rf"=\s*0x0*{addr:X};", t, re.M | re.I):
                     sys.exit(f"{v}: 0x{addr:X} already named")
-                new[p] = t.rstrip("\n") + f"\n{nw} = 0x{addr:08X};\n"
+                new[p] = t.rstrip("\n") + f"\n{nw} = 0x{addr:08X};" + (" // type:func" if old.startswith("func_") else "") + "\n"
             else:
                 print(f"{v}: {old} not found, skipped")
                 continue

@@ -15,3 +15,5 @@ D_00000970 = 0x00000570;
 // shared names (tools/add_version.py) end
 g_semaId = 0x00000EC0;
 g_idStorageUMDConfig = 0x000004C0;
+_sceChkregLookupUMDRegionCodeInfo = 0x00000000; // type:func
+_sceChkregCheckRegion = 0x00000128; // type:func

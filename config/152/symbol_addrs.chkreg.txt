@@ -20,3 +20,7 @@ g_semaId = 0x000011B8;
 g_ConsoleIdCertificate = 0x00001100;
 g_isConsoleIdCertificateObtained = 0x000006C8;
 g_idStorageUMDConfig = 0x00000700;
+_sceChkregLookupUMDRegionCodeInfo = 0x00000000; // type:func
+_sceChkregCheckRegion = 0x00000128; // type:func
+_sceChkregLookupConsoleIdCertificate = 0x00000190; // type:func
+_sceChkregVerifyConsoleIdCertificate = 0x0000020C; // type:func
