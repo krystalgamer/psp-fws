@@ -12,10 +12,14 @@ extern u8 *g_pIdStorageUMDConfig;
 extern s32 g_semaId;
 
 s32 _sceChkregCheckRegion(u32, u32);
+s32 _sceChkregLookupConsoleIdCertificate(void);
 s32 _sceChkregLookupUMDRegionCodeInfo(void);
+s32 _sceChkregVerifyConsoleIdCertificate(void);
+s32 sceIdStorageLookup(u16, u32, void *, u32);
 s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
 s32 sceKernelDeleteSema(s32);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, u32 *);
+s32 sceUtilsBufferCopyWithRange(void *, s32, void *, s32, s32);
 
 #endif

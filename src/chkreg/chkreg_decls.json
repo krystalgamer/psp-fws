@@ -1,11 +1,15 @@
 {
  "funcs": {
   "_sceChkregCheckRegion": "s32 _sceChkregCheckRegion(u32, u32);",
+  "_sceChkregLookupConsoleIdCertificate": "s32 _sceChkregLookupConsoleIdCertificate(void);",
   "_sceChkregLookupUMDRegionCodeInfo": "s32 _sceChkregLookupUMDRegionCodeInfo(void);",
+  "_sceChkregVerifyConsoleIdCertificate": "s32 _sceChkregVerifyConsoleIdCertificate(void);",
+  "sceIdStorageLookup": "s32 sceIdStorageLookup(u16, u32, void *, u32);",
   "sceKernelCreateSema": "s32 sceKernelCreateSema(void *, u32, s32, s32, void *);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
-  "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, u32 *);"
+  "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, u32 *);",
+  "sceUtilsBufferCopyWithRange": "s32 sceUtilsBufferCopyWithRange(void *, s32, void *, s32, s32);"
  },
  "vars": {
   "g_ConsoleIdCertificate": "extern u8 g_ConsoleIdCertificate[0xB8];",

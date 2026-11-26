@@ -6,9 +6,26 @@ INCLUDE_ASM("nonmatchings/chkreg", _sceChkregLookupUMDRegionCodeInfo);
 INCLUDE_ASM("nonmatchings/chkreg", _sceChkregCheckRegion);
 
 #if FW_VERSION >= 152
-INCLUDE_ASM("nonmatchings/chkreg", _sceChkregLookupConsoleIdCertificate);
+s32 _sceChkregLookupConsoleIdCertificate(void) {
+    if (sceIdStorageLookup(0x100, 0x38, g_ConsoleIdCertificate, 0xB8) < 0
+        && sceIdStorageLookup(0x120, 0x38, g_ConsoleIdCertificate, 0xB8) < 0) {
+        return 0x80000025;
+    }
+    g_isConsoleIdCertificateObtained = 1;
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/chkreg", _sceChkregVerifyConsoleIdCertificate);
+s32 _sceChkregVerifyConsoleIdCertificate(void) {
+    s32 status;
+
+    status = sceUtilsBufferCopyWithRange(NULL, 0, g_ConsoleIdCertificate, 0xB8, 0x12);
+    if (status != 0) {
+        status = 0x80000108;
+        goto end;
+    }
+end:
+    return status;
+}
 #endif
 
 s32 module_start(SceSize args, void *argp) {
@@ -78,7 +95,33 @@ out:
 }
 
 #if FW_VERSION >= 152
-INCLUDE_ASM("nonmatchings/chkreg", sceChkregGetPsCode);
+s32 sceChkregGetPsCode(u8 *pPsCode) {
+    s32 status = 0x80000041;
+
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0) {
+        goto out;
+    }
+    if (g_isConsoleIdCertificateObtained || (status = _sceChkregLookupConsoleIdCertificate()) == 0) {
+        status = _sceChkregVerifyConsoleIdCertificate();
+        if (status != 0) {
+            goto end;
+        }
+        pPsCode[0] = g_ConsoleIdCertificate[3];
+        pPsCode[1] = g_ConsoleIdCertificate[2];
+        pPsCode[2] = g_ConsoleIdCertificate[5];
+        pPsCode[3] = g_ConsoleIdCertificate[4];
+        pPsCode[4] = g_ConsoleIdCertificate[7];
+        pPsCode[5] = g_ConsoleIdCertificate[6];
+        pPsCode[6] = g_ConsoleIdCertificate[8] >> 2;
+        pPsCode[7] = 0;
+    }
+end:
+    if (sceKernelSignalSema(g_semaId, 1) != 0) {
+        status = 0x80000041;
+    }
+out:
+    return status;
+}
 #endif
 
 #if FW_VERSION == 352
