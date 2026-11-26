@@ -272,9 +272,25 @@ s32 func_00001730(s32 arg0, s32 *arg1) {
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00001770);
+#endif
 
+#if FW_VERSION == 100 || (FW_VERSION >= 152 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/registry", func_00001908);
+#endif
 
+#if FW_VERSION == 150
+void func_00001908(s32 arg0, s32 **arg1, s32 **arg2) {
+    if (arg0 == 1) {
+        *arg1 = "/registry/system.ireg";
+        *arg2 = "/registry/system.dreg";
+        return;
+    }
+    *arg1 = NULL;
+    *arg2 = NULL;
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00001938);
 #else
 s32 func_00001874(s32 arg0, s32 *arg1) {

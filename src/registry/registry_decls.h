@@ -38,7 +38,7 @@ s32 func_000008E4(s32);
 void *func_00000B6C();
 s32 func_00001730(s32 arg0, s32 *arg1);
 s32 func_00001874(s32 arg0, s32 *arg1);
-void func_00001908(s32 arg0, M2C_UNK **arg1, M2C_UNK **arg2);
+void func_00001908(s32 arg0, s32 **arg1, s32 **arg2);
 void func_00001A44(s32 arg0, M2C_UNK **arg1, M2C_UNK **arg2);
 s32 func_00003A3C(void);
 s32 func_00003A80(void);
