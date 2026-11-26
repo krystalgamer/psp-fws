@@ -38,7 +38,18 @@ INCLUDE_ASM("nonmatchings/systimer", module_bootstart);
 INCLUDE_ASM("nonmatchings/systimer", module_reboot_before);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/systimer", func_00000128);
+void func_00000128(SceSTimerInfo *timer) {
+    timer->regadr->timerData = 0x80000000;
+    timer->regadr->prsclNumerator = -1;
+    timer->regadr->prsclDenominator = -1;
+    timer->regadr->timerData;
+    timer->common = NULL;
+    timer->timid = -1;
+    timer->prev_icnt = 0;
+    timer->cb = NULL;
+    timer->totalcount = 0;
+    timer->prev_tmcy = 0;
+}
 
 INCLUDE_ASM("nonmatchings/systimer", func_00000160);
 
@@ -75,7 +86,11 @@ INCLUDE_ASM("nonmatchings/systimer", sceSTimerResetCount);
 INCLUDE_ASM("nonmatchings/systimer", sceSTimerGetCount);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/systimer", func_00000898);
+s32 func_00000898(SceSTimerInfo *timer) {
+    u32 now = timer->regadr->nowData & 0x3FFFFF;
+    u32 base = timer->regadr->baseTime & 0x3FFFFF;
+    return now - base;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/systimer", sceSTimerSetTMCY);
