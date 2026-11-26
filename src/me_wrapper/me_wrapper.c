@@ -314,7 +314,7 @@ s32 sceMeWrapperInit(void) {
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapperEnd);
 #else
 s32 sceMeWrapperEnd(void) {
