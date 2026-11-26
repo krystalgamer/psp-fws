@@ -68,8 +68,26 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000718);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A80);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A9C);
+#endif
+
+#if FW_VERSION == 152
+s32 *func_00000A9C(void *arg0) {
+    s32 *temp_a1;
+    s32 *temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, s32 **, 0xA8);
+    if (temp_v1 != NULL) {
+        temp_a1 = *temp_v1;
+        M2C_FIELD(arg0, s32 **, 0xA8) = temp_a1;
+        if (temp_a1 == NULL) {
+            M2C_FIELD(arg0, s32 *, 0xAC) = 0;
+        }
+        *temp_v1 = NULL;
+    }
+    return temp_v1;
+}
 #endif
 
 #if FW_VERSION == 150

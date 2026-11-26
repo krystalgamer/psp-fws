@@ -7,7 +7,7 @@
 extern s32 D_00002390;
 extern s32 D_00003D90;
 
-M2C_UNK *func_00000A9C(void *arg0);
+s32 *func_00000A9C(void *arg0);
 s32 func_00001D60(s32, s32);
 u8 *func_00001E14(u8 *arg0, u8 *arg1, s32 arg2);
 void func_00001EB4(s32 arg0, s32 arg1);
