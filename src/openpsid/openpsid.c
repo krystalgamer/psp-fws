@@ -334,6 +334,7 @@ int sceDdrdbHash(u8 *data, u32 size, u8 *digest) {
 #if FW_VERSION >= 282
 #ifdef NON_MATCHING
 /* size and size + 0x14 end up in swapped saved registers. */
+
 int sceDdrdbEncrypt(u8 *buf, u32 size) {
     int ret;
     u32 i;
@@ -366,8 +367,11 @@ int sceDdrdbEncrypt(u8 *buf, u32 size) {
     }
     return ret;
 }
+
 #else
+
 INCLUDE_ASM("nonmatchings/openpsid", sceDdrdbEncrypt);
+
 #endif
 #endif
 
