@@ -16,7 +16,8 @@ struct Unk_func_00000180_0 {
     s8 unk1FE;
 };
 
-extern M2C_UNK D_000013A4;
+extern s32 D_000013A4;
+extern M2C_UNK D_00001434;
 extern M2C_UNK D_000016F4;
 extern M2C_UNK D_00001734;
 extern s32 D_0000189C;
@@ -25,6 +26,7 @@ void func_0000015C(struct Unk_func_0000015C_0 *arg0);
 void func_00000180(struct Unk_func_00000180_0 *arg0);
 void func_00000964(void);
 void func_00000BAC(s32 arg0);
+void func_00000CDC(void);
 void func_00000D64(void);
 M2C_UNK func_00000DE8();
 void func_0000104C(void);
@@ -35,6 +37,7 @@ M2C_UNK scePaf_2F94EF32(M2C_UNK, s32, s32);
 void *scePaf_338C3774(s32, M2C_UNK);
 M2C_UNK scePaf_3DEE8DB4();
 M2C_UNK scePaf_499FF48D();
+M2C_UNK scePaf_49CE42F7(s32, M2C_UNK *);
 M2C_UNK scePaf_648CA0C5();
 M2C_UNK scePaf_6A82A8C6(s32, M2C_UNK);
 M2C_UNK scePaf_86B41BA3();

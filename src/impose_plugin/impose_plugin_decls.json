@@ -4,6 +4,7 @@
   "func_00000180": "void func_00000180(struct Unk_func_00000180_0 *arg0);",
   "func_00000964": "void func_00000964(void);",
   "func_00000BAC": "void func_00000BAC(s32 arg0);",
+  "func_00000CDC": "void func_00000CDC(void);",
   "func_00000D64": "void func_00000D64(void);",
   "func_00000DE8": "M2C_UNK func_00000DE8();",
   "func_0000104C": "void func_0000104C(void);",
@@ -14,6 +15,7 @@
   "scePaf_338C3774": "void *scePaf_338C3774(s32, M2C_UNK);",
   "scePaf_3DEE8DB4": "M2C_UNK scePaf_3DEE8DB4();",
   "scePaf_499FF48D": "M2C_UNK scePaf_499FF48D();",
+  "scePaf_49CE42F7": "M2C_UNK scePaf_49CE42F7(s32, M2C_UNK *);",
   "scePaf_648CA0C5": "M2C_UNK scePaf_648CA0C5();",
   "scePaf_6A82A8C6": "M2C_UNK scePaf_6A82A8C6(s32, M2C_UNK);",
   "scePaf_86B41BA3": "M2C_UNK scePaf_86B41BA3();",
@@ -32,7 +34,8 @@
   "Unk_func_00000180_0": "struct Unk_func_00000180_0 {\n    u8 pad0[0x1FD];\n    s8 unk1FD;\n    s8 unk1FE;\n};"
  },
  "vars": {
-  "D_000013A4": "extern M2C_UNK D_000013A4;",
+  "D_000013A4": "extern s32 D_000013A4;",
+  "D_00001434": "extern M2C_UNK D_00001434;",
   "D_000016F4": "extern M2C_UNK D_000016F4;",
   "D_00001734": "extern M2C_UNK D_00001734;",
   "D_0000189C": "extern s32 D_0000189C;"
