@@ -98,9 +98,11 @@ def main():
         t = re.sub(r"^(\w+)( =)", lambda m: (pairs.get(m[1], m[1])) + m[2], t, flags=re.M)
         # auto names of this version (func_<its own address>) need an explicit entry
         extra = []
-        vnames = built_funcs(v, mod)[0]
+        elf = ELFFile(open(ROOT / "tmp/build" / v / f"{mod}.elf", "rb"))
+        vaddr = {sy.name: sy["st_value"] for sy in elf.get_section_by_name(".symtab").iter_symbols()
+                 if sy["st_info"]["type"] == "STT_FUNC"}
         for o, n in pairs.items():
-            if o not in defined and AUTO.fullmatch(o) and vnames.get(int(o[5:], 16)) == o:
+            if o not in defined and AUTO.fullmatch(o) and vaddr.get(o) == int(o[5:], 16):
                 extra.append(f"{n} = 0x{o[5:]}; // type:func")
         if extra:
             t = t.rstrip("\n") + "\n// real names (devkit DWARF, tools/dwarf_names.py)\n" + "\n".join(extra) + "\n"
