@@ -1,4 +1,3 @@
-/* cflags: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "rebooti_decls.h"

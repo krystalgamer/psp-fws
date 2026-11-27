@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 -frename-registers */
+/* cflags[100]: -O2 -mno-split-addresses */
 #include "common.h"
 #include "rebooti_decls.h"
 
