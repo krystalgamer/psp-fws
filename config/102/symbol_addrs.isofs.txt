@@ -153,3 +153,4 @@ sceBLKStartFeatures = 0x0000811C; // type:func
 sceUmdRegisterInsertEjectUMDCallBack = 0x00008124; // type:func
 sceUmdUnRegisterInsertEjectUMDCallBack = 0x00008134; // type:func
 sceUmdSetDriveStatus = 0x00008144; // type:func
+func_00004F74 = 0x00004F38; // type:func

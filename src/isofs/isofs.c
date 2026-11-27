@@ -870,7 +870,29 @@ INCLUDE_ASM("nonmatchings/isofs", func_00004D70);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00004E3C);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00004F08);
+s32 func_00004F08(void) {
+    s32 ret;
+
+    if (D_00009B00 != 0) {
+        SysMemForKernel_7B749390(D_00009AC0, (void *)D_00009B00);
+    }
+    if (D_00009B40 != 0) {
+        ret = SysMemForKernel_7B749390(D_00009AC0, (void *)D_00009B40);
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    return 0;
+}
+
+s32 func_00004F74(void) {
+    D_00009B00 = (s32)sceKernelAllocHeapMemory(D_00009AC0, 0x800);
+    if (D_00009B00 == 0) {
+        D_00009B00 = 0;
+        return 0x8001000C;
+    }
+    return 0;
+}
 
 void func_00004FC4(void) {
     sceKernelDeleteHeap(D_00009AC0);
@@ -961,7 +983,23 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00006200);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_000050E8);
+s32 func_000050E8(SceIoIob *iob, char *path) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    s32 ret;
+
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_chdir", ISOFS_V(0xF7, 0xA3, 0xA3));
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_chdir", ISOFS_V(0xF8, 0xA4, 0xA4));
+    ISOFS_ASSERT(path != NULL, D_00006224, D_00006200, "isofs_chdir", ISOFS_V(0xF9, 0xA5, 0xA5));
+    if (iob == NULL || path == NULL) {
+        return 0x80010016;
+    }
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 271
@@ -1045,9 +1083,7 @@ end:
     sceKernelSignalSema(unit->semaId, 1);
     return ret;
 }
-#endif
 
-#if FW_VERSION < 201
 s32 func_00006028(SceIoIob *iob) {
     IsofsUnit *unit;
     IsofsMgr *mgr;
