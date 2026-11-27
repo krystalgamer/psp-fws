@@ -307,3 +307,4 @@ __udivdi3 = 0x00008E20; // type:func rom:0x8EA0
 __umoddi3 = 0x00009394; // type:func rom:0x9414
 D_0000A870_v201 = 0x0000A870;
 // shared names (tools/add_version.py) end
+ifconf = 0x00005944; // type:func

@@ -2314,9 +2314,7 @@ void func_00005744(struct Unk_func_00005744_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifioctl);
 
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet", ifconf);
-#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00005AD4);
