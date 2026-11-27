@@ -37,3 +37,6 @@ sceI2cMasterTransmit = 0x00000F10; // type:func rom:0xF90
 func_00001008 = 0x00000F18; // type:func rom:0xF98
 sceKernelUnregisterSysEventHandler = 0x00000F20; // type:func rom:0xFA0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceCodecOutputEnable = 0x00000728; // type:func
