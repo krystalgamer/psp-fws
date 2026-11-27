@@ -1,3 +1,4 @@
+/* cflags[150-352]: -O2 -frename-registers */
 #include "common.h"
 #include "dmacman_decls.h"
 
@@ -72,7 +73,7 @@ fail:
 INCLUDE_ASM("nonmatchings/dmacman", module_start);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 s32 sceKernelDmaExit(void)
 {
     s32 intr;
@@ -114,9 +115,7 @@ fail:
 }
 #else
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaExit);
-#endif
 
-#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaRegisterDdrFlush);
 #endif
 
@@ -198,13 +197,13 @@ s32 sceKernelDmaChReserve(s32 ch, s32 enable)
         g_dmaCh.reserved[dmac] &= ~bit;
     return 0;
 }
+#endif
 
 s32 sceKernelDmaSoftRequest(s32 dmac, s32 ch, s32 burst, s32 last)
 {
     SceDmacRegs *regs;
 
-    dmac = (dmac != 0);
-    regs = (SceDmacRegs *)(DMAC0_BASE + (dmac << 20));
+    regs = (SceDmacRegs *)((dmac == 0) ? DMAC0_BASE : DMAC1_BASE);
     if (last == 0) {
         if (burst != 0)
             regs->softBReq = 1 << ch;
@@ -219,9 +218,6 @@ s32 sceKernelDmaSoftRequest(s32 dmac, s32 ch, s32 burst, s32 last)
     __asm__ volatile("sync");
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaSoftRequest);
-#endif
 
 #if FW_VERSION == 100
 SceDmaOp *sceKernelDmaOpAlloc(void)
@@ -251,7 +247,9 @@ SceDmaOp *sceKernelDmaOpAlloc(void)
     sceKernelCpuResumeIntr(intr);
     return NULL;
 }
+#endif
 
+#if FW_VERSION < 201
 s32 sceKernelDmaOpFree(SceDmaOp *op)
 {
     s32 ret;
@@ -364,7 +362,7 @@ INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpEnQueue);
 
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpDeQueue);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 s32 sceKernelDmaOpAllCancel(void)
 {
     s32 intr;
@@ -397,7 +395,7 @@ s32 sceKernelDmaOpAllCancel(void)
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAllCancel);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 250
 s32 sceKernelDmaOpSetCallback(SceDmaOp *op, SceDmaOpCallback callback, void *cookie)
 {
     if (op == NULL)
@@ -418,7 +416,7 @@ s32 sceKernelDmaOpSetCallback(SceDmaOp *op, SceDmaOpCallback callback, void *coo
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpSetCallback);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 250
 s32 sceKernelDmaOpSetupMemcpy(SceDmaOp *op, u32 dst, u32 src, u32 size)
 {
     if (op == NULL)
@@ -444,7 +442,7 @@ s32 sceKernelDmaOpSetupMemcpy(SceDmaOp *op, u32 dst, u32 src, u32 size)
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpSetupMemcpy);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 250
 s32 sceKernelDmaOpSetupNormal(SceDmaOp *op, u32 config, u32 dst, u32 src, u32 control)
 {
     if (op == NULL)
@@ -480,11 +478,7 @@ INCLUDE_ASM("nonmatchings/dmacman", func_00000B28);
 INCLUDE_ASM("nonmatchings/dmacman", func_00000B2C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/dmacman", func_00000B5C);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/dmacman", _sceKernelDmaOpStop);
 #endif
 
@@ -492,7 +486,7 @@ INCLUDE_ASM("nonmatchings/dmacman", _sceKernelDmaOpStop);
 INCLUDE_ASM("nonmatchings/dmacman", func_00000B10);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 s32 sceKernelDmaOpQuit(SceDmaOp *op)
 {
     s32 ret;
@@ -589,9 +583,9 @@ INCLUDE_ASM("nonmatchings/dmacman", func_00001458);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/dmacman", func_00001114);
+INCLUDE_ASM("nonmatchings/dmacman", _sceKernelDmaInterrupt);
 
-INCLUDE_ASM("nonmatchings/dmacman", func_000014C8);
+INCLUDE_ASM("nonmatchings/dmacman", _sceKernelDmaSchedule);
 #endif
 
 #if FW_VERSION >= 282
@@ -632,7 +626,7 @@ INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpFreeLink);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/dmacman", func_00001A08);
+INCLUDE_ASM("nonmatchings/dmacman", _sceDmacManSuspendHandler);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -644,9 +638,9 @@ INCLUDE_ASM("nonmatchings/dmacman", func_00001BA4);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/dmacman", func_00001A8C);
+INCLUDE_ASM("nonmatchings/dmacman", _sceDmacManResumeHandler);
 
-INCLUDE_ASM("nonmatchings/dmacman", func_00001B00);
+INCLUDE_ASM("nonmatchings/dmacman", _sceKernelDmacClkEnable);
 #endif
 
 #if FW_VERSION == 100

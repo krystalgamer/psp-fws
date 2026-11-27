@@ -12,7 +12,7 @@ typedef struct {
     u32 control;  /* 0xC bit31 = terminal count interrupt */
 } SceDmaLLI;
 
-/* DMA operation (sceKernelDmaOperation), 1.00-2.01 layout, 0x54 bytes */
+/* DMA operation (sceKernelDmaOperation), 1.00-1.52 layout, 0x54 bytes */
 struct SceDmaOp;
 typedef s32 (*SceDmaOpCallback)(struct SceDmaOp *op, s32 status, s32 ch, void *cookie);
 typedef struct SceDmaOp {
@@ -21,8 +21,13 @@ typedef struct SceDmaOp {
     struct SceDmaOp *parent;  /* 0x08 AssignMultiple chain */
     struct SceDmaOp *child;   /* 0x0C */
     volatile u32 flag;        /* 0x10 SCE_DMAOP_* */
-    s32 chMask0;              /* 0x14 1.00: DMAC0 channel mask */
-    s32 chMask1;              /* 0x18 1.00: DMAC1 channel mask */
+#if FW_VERSION == 100
+    s32 chMask0;              /* 0x14 DMAC0 channel mask */
+    s32 chMask1;              /* 0x18 DMAC1 channel mask */
+#else
+    u32 chMask;               /* 0x14 (DMAC1 mask << 8) | DMAC0 mask */
+    u32 unk18;
+#endif
     volatile s32 ch;          /* 0x1C assigned channel (0-15), -1 none */
     volatile u32 srcAddr;     /* 0x20 shadow of SceDmacChRegs */
     volatile u32 dstAddr;     /* 0x24 */
@@ -48,8 +53,14 @@ typedef struct SceDmaOp {
 
 typedef struct {
     SceDmaOp *op[16];   /* 0x00 op running on channel */
+#if FW_VERSION == 100
     u32 excluded[2];    /* 0x40 per DMAC, bit = channel */
     u32 reserved[2];    /* 0x48 */
+#else
+    u32 excluded;       /* 0x40 bit = channel 0-15 */
+    u32 reserved;       /* 0x44 */
+    u32 unk48;
+#endif
 } SceDmaChState;
 typedef struct {
     u32 clk;            /* 0x00 0xBC100050 & 0x60 */

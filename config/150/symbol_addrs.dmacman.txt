@@ -37,3 +37,14 @@ sceKernelRegisterSuspendHandler = 0x00001C10; // type:func
 sceKernelRegisterResumeHandler = 0x00001C18; // type:func
 // shared names (tools/add_version.py) begin
 // shared names (tools/add_version.py) end
+g_dmaOps = 0x00001ED0;
+g_dmaFreeOp = 0x000048D0;
+g_dmaQueueHead = 0x000048D4;
+g_dmaQueueTail = 0x000048D8;
+g_dmaCh = 0x000048DC;
+_sceKernelDmaOpStop = 0x00000B5C; // type:func
+_sceKernelDmaInterrupt = 0x00001114; // type:func
+_sceKernelDmaSchedule = 0x000014C8; // type:func
+_sceDmacManSuspendHandler = 0x00001A08; // type:func
+_sceDmacManResumeHandler = 0x00001A8C; // type:func
+_sceKernelDmacClkEnable = 0x00001B00; // type:func

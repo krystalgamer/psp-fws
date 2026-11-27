@@ -38,5 +38,5 @@ sceKernelWaitEventFlag = 0x00001C80; // type:func
 sceKernelRegisterSuspendHandler = 0x00001C88; // type:func
 sceKernelRegisterResumeHandler = 0x00001C90; // type:func
 // shared names (tools/add_version.py) begin
-func_00001A08 = 0x00001A74; // type:func rom:0x1AF4
+_sceDmacManSuspendHandler = 0x00001A74; // type:func rom:0x1AF4
 // shared names (tools/add_version.py) end
