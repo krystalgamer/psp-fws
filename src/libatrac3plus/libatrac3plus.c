@@ -8,31 +8,21 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracReinit);
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracGetAtracID);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libatrac3plus", func_000000F0);
+#if FW_VERSION >= 102 && FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracReleaseAtracID);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracReleaseAtracID);
-
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetData);
 #endif
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetHalfwayBuffer);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libatrac3plus", func_00000204);
-
-INCLUDE_ASM("nonmatchings/libatrac3plus", func_00000350);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250)
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetDataAndGetID);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetHalfwayBufferAndGetID);
-#endif
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetMOutHalfwayBuffer);

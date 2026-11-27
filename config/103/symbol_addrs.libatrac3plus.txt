@@ -92,3 +92,8 @@ sceAudiocodecDecode = 0x00003650; // type:func rom:0x36D0
 sceAudiocodecGetEDRAM = 0x00003658; // type:func rom:0x36D8
 sceAudiocodecReleaseEDRAM = 0x00003660; // type:func rom:0x36E0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceAtracReleaseAtracID = 0x000000F0; // type:func
+sceAtracSetDataAndGetID = 0x00000204; // type:func
+sceAtracSetHalfwayBufferAndGetID = 0x00000350; // type:func
