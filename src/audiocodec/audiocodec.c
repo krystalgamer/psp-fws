@@ -1,3 +1,4 @@
+/* cflags[100]: -O3 */
 /* cflags[150]: -Os -frename-registers */
 #include "common.h"
 #include "audiocodec_decls.h"
