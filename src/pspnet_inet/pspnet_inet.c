@@ -3413,7 +3413,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014890);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000145F4);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001486C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", ip_input);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000150C8);
 
@@ -3538,7 +3538,7 @@ void ipintr(void) {
         if (m == NULL) {
             return;
         }
-        func_0001486C(m);
+        ip_input(m);
     }
 }
 
@@ -4108,7 +4108,7 @@ void func_00021458(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000214B0);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000215C4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_output);
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00021FF0);
@@ -4155,7 +4155,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000228BC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00022E84);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023030);
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_close);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024B7C);
@@ -4262,7 +4262,7 @@ s32 func_00023828(struct Unk_func_00023828_0 *arg0) {
     return (((arg0->unk2A & 0x188) ^ 0x180) != 0) ? 0 : 0xC;
 }
 #else
-struct tcpcb *func_00023840(struct tcpcb *tp, s32 errno) {
+struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno) {
     struct socket *so;
 
     if (tp->t_inpcb) {
@@ -4272,26 +4272,26 @@ struct tcpcb *func_00023840(struct tcpcb *tp, s32 errno) {
     }
     if (TCPS_HAVERCVDSYN(tp->t_state)) {
         tp->t_state = TCPS_CLOSED;
-        (void)func_000215C4(tp);
-        D_00030380.tcps_drops++;
+        (void)tcp_output(tp);
+        tcp_stat.tcps_drops++;
     } else {
-        D_00030380.tcps_conndrops++;
+        tcp_stat.tcps_conndrops++;
     }
     if (errno == 116 /* ETIMEDOUT */ && tp->t_softerror) {
         errno = tp->t_softerror;
     }
     so->so_error = errno;
-    return func_00023030(tp);
+    return tcp_close(tp);
 }
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023840);
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_drop);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023908);
 
-void func_000239E4(struct inpcb *inp, s32 error) {
+void tcp_notify(struct inpcb *inp, s32 error) {
     struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
     struct socket *so = inp->inp_socket;
 
@@ -4405,18 +4405,18 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023F70);
 #endif
 
 #if FW_VERSION < 250
-void func_00024430(void) {
+void tcp_fasttimo(void) {
     s32 s = _sce_pspnet_spllock();
     struct tcpcb *tp, *next;
-    for (tp = D_000305A4; tp != NULL; tp = next) {
+    for (tp = tcp_delacks; tp != NULL; tp = next) {
         next = tp->t_delack.le_next;
         tp->t_flags |= 0x1; /* TF_ACKNOW */
-        func_000215C4(tp);
+        tcp_output(tp);
     }
     _sce_pspnet_splunlock(s);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024430);
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_fasttimo);
 #endif
 
 void func_00024490(u8 *arg0) {
