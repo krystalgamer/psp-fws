@@ -396,7 +396,25 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if (FW_VERSION >= 150 && FW_VERSION < 271) || FW_VERSION >= 282
+#if FW_VERSION >= 150 && FW_VERSION < 271
+s32 module_reboot_before(void) {
+    s32 ret;
+
+    func_000005EC();
+    ret = sceIoUnassign(D_0000CD94);
+    if (ret < 0) {
+        Kprintf("lfatfs.c:%s:sceIoUnassign(%s) failed 0x%08x\n", "_sceLfatfsRebootBefore", D_0000CD94, ret);
+    }
+    ret = sceIoUnassign(D_0000CDB4);
+    if (ret < 0) {
+        Kprintf("lfatfs.c:%s:sceIoUnassign(%s) failed 0x%08x\n", "_sceLfatfsRebootBefore", D_0000CDB4, ret);
+    }
+    func_00009150();
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lfatfs", module_reboot_before);
 #endif
 
@@ -2333,7 +2351,22 @@ s32 func_00006008(UFatUnit *unit, u32 cluster) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/lfatfs", func_00006008);
+s32 func_00006008(UFatUnit *unit, u32 cluster) {
+    u32 next;
+    s32 ret;
+
+    if (cluster != 0) {
+        while ((s32)(cluster | ~unit->fatMask) < -10) {
+            next = func_00000FF8(unit, cluster);
+            ret = func_00005F7C(unit, cluster);
+            if (ret < 0) {
+                return ret;
+            }
+            cluster = next;
+        }
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
