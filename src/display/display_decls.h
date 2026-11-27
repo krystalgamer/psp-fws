@@ -102,6 +102,7 @@ typedef struct {
     SceUID evflg;             /* g_Vblank.evflg */
 } SceDisplayVblank;
 
+extern s32 D_00002018;
 extern s32 D_00002060;
 extern s32 D_000020D0;
 extern M2C_UNK D_00003D10;

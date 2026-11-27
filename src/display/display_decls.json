@@ -80,6 +80,7 @@
   "3_SceDisplayVblank": "typedef struct {\n    u32 subIntrMask;          /* 0x00: enabled VBLANK sub interrupts */\n    u32 vcount;               /* 0x04 */\n#if FW_VERSION == 100\n    s32 unk8;                 /* 0x08 */\n    s32 hcountPerFrame;       /* 0x0C */\n#elif FW_VERSION < 201\n    u8 pad8[0xC];\n#elif FW_VERSION < 282\n    u8 pad8[0x10];\n#else\n    u8 pad8[0xC];\n    s32 unk14;\n    u8 pad18[8];\n#endif\n    s32 vblankStart;          /* 0x10 (1.50: 0x14, 2.01: 0x18, 2.82: 0x20): hcount where the vblank starts */\n#if FW_VERSION >= 282\n    s32 unk24;\n    s32 pseudoField;          /* 0x28 */\n    s32 unk2C;\n#endif\n    SceUID evflg;             /* g_Vblank.evflg */\n} SceDisplayVblank;"
  },
  "vars": {
+  "D_00002018": "extern s32 D_00002018;",
   "D_00002060": "extern s32 D_00002060;",
   "D_000020D0": "extern s32 D_000020D0;",
   "D_00003D10": "extern M2C_UNK D_00003D10;",
