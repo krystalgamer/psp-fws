@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/usbstorms
-  src_path: src/usbstorms
+  src_path: tmp/av_src/102/usbstorms
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/usbstorms.ld
   cache_path: tmp/build/102/.splat_cache.usbstorms
@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, usbstorms]
+      - [0x80, c, usbstorms]
       - { start: 0x26F8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2808, type: prxpad, order: .text }
       - { start: 0x2810, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x28A8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x28DC, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x2988, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x2A10, rodata, usbstorms]
+      - [0x2A10, .rodata, usbstorms]
       - { start: 0x2E7C, type: prxpad, order: .rodata }
   - name: usbstorms_seg1
     type: code
