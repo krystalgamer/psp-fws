@@ -1064,6 +1064,7 @@ void func_00025B04(s8 arg0);
 u8 func_00025B24(void);
 void ***func_00025B8C(void ***arg0, struct Unk_func_00025B8C_1 *arg1, void **arg2);
 void func_00025C30(void **arg0);
+void func_00025D94(void);
 M2C_UNK func_00025DEC();
 s32 func_00025F5C(void);
 s32 func_00026578(void);

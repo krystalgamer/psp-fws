@@ -423,6 +423,7 @@
   "func_00025B24": "u8 func_00025B24(void);",
   "func_00025B8C": "void ***func_00025B8C(void ***arg0, struct Unk_func_00025B8C_1 *arg1, void **arg2);",
   "func_00025C30": "void func_00025C30(void **arg0);",
+  "func_00025D94": "void func_00025D94(void);",
   "func_00025DEC": "M2C_UNK func_00025DEC();",
   "func_00025F5C": "s32 func_00025F5C(void);",
   "func_00026578": "s32 func_00026578(void);",
