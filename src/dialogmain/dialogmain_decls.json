@@ -153,6 +153,7 @@
   "func_000070F8": "s32 func_000070F8(void);",
   "func_000073DC": "M2C_UNK func_000073DC();",
   "func_00007468": "void func_00007468(void);",
+  "func_000078E8": "void func_000078E8(void);",
   "func_00007940": "M2C_UNK func_00007940();",
   "module_reboot_before": "s32 module_reboot_before(void);",
   "module_stop": "s32 module_stop(void);",

@@ -134,7 +134,23 @@ class Module:
                 out[p.stem] = (int(m[1], 16), int(ends[-1], 16) + 4, p)
         return out
 
+    def c_range(self, name):
+        """(rom, end) of a function that is already C, from the matching build's symbol table."""
+        elfp = ROOT / "tmp/build" / self.ver / f"{self.mod}.elf"
+        if not elfp.exists():
+            return None
+        symtab = ELFFile(open(elfp, "rb")).get_section_by_name(".symtab")
+        for sym in symtab.iter_symbols():
+            if sym.name == name and sym["st_info"]["type"] == "STT_FUNC" and sym["st_size"]:
+                return self.text_off + sym["st_value"], self.text_off + sym["st_value"] + sym["st_size"]
+        return None
+
     def target_words(self, name):
+        if name not in self.funcs:
+            r = self.c_range(name)
+            if r is None:
+                raise KeyError(f"{name}: no asm and not in tmp/build/{self.ver}/{self.mod}.elf")
+            self.funcs[name] = (*r, None)
         rom, end, _ = self.funcs[name]
         words = struct.unpack_from(f"<{(end - rom) // 4}I", self.base, rom)
         out = []
@@ -147,20 +163,19 @@ class Module:
 
     def header(self, extra=""):
         """C context for m2c and test compiles: struct types, globals, prototypes."""
-        return ('#include "common.h"\n#include "k1.h"\n#include "m2c_macros.h"\n'
-                + "\n".join(self.store.get("types", {})[k] for k in sorted(self.store.get("types", {}))) + "\n"
-                + "\n".join(self.store["vars"].values()) + "\n" + "\n".join(self.store["funcs"].values()) + "\n" + extra)
+        import structify
+        cxx = any("/* lang: c++ */" in f.read_text() for f in self.srcdir.glob("*.c"))
+        funcs = [structify.cxx_proto(v) if cxx else v for v in self.store["funcs"].values()]
+        body = ("\n".join(self.store.get("types", {})[k] for k in sorted(self.store.get("types", {}))) + "\n"
+                + "\n".join(self.store["vars"].values()) + "\n" + "\n".join(funcs) + "\n")
+        if cxx:
+            body = '#ifdef __cplusplus\nextern "C" {\n#endif\n' + body + '#ifdef __cplusplus\n}\n#endif\n'
+        return '#include "common.h"\n#include "k1.h"\n#include "m2c_macros.h"\n' + body + extra
 
     def write_decls(self):
-        self.store_path.write_text(json.dumps(self.store, indent=1, sort_keys=True))
-        lines = [f"#ifndef {self.mod.upper()}_DECLS_H", f"#define {self.mod.upper()}_DECLS_H", "",
-                 '#include "common.h"', '#include "m2c_macros.h"', ""]
-        lines += [self.store["types"][k] + "\n" for k in sorted(self.store.get("types", {}))]
-        lines += [self.store["vars"][k] for k in sorted(self.store["vars"])]
-        lines.append("")
-        lines += [self.store["funcs"][k] for k in sorted(self.store["funcs"])]
-        lines += ["", "#endif", ""]
-        self.decls_h.write_text("\n".join(lines))
+        import structify
+        structify.SRC[self.mod] = self.srcdir
+        structify.write_decls(self.mod, self.store)
 
 
 # 1.3.1 and 1.7.1 have never differed, so only the module's compiler is tried.

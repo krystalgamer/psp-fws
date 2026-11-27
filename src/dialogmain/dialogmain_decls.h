@@ -304,6 +304,7 @@ void func_000070DC(s32 arg0);
 s32 func_000070F8(void);
 M2C_UNK func_000073DC();
 void func_00007468(void);
+void func_000078E8(void);
 M2C_UNK func_00007940();
 s32 module_reboot_before(void);
 s32 module_stop(void);

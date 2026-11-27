@@ -103,11 +103,11 @@ INCLUDE_ASM("nonmatchings/paf_0274C4", func_00022404);
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_00022418);
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 270)
+#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_0002244C);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION >= 150 && FW_VERSION < 200
 s32 *func_0002244C(void) {
     return &D_001703B0;
 }
@@ -169,11 +169,11 @@ INCLUDE_ASM("nonmatchings/paf_0274C4", func_00022A64);
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_00022A78);
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 270)
+#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_00022AAC);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION >= 150 && FW_VERSION < 200
 s32 *func_00022AAC(void) {
     return &D_00170F78;
 }
@@ -329,11 +329,11 @@ INCLUDE_ASM("nonmatchings/paf_0274C4", func_00025D6C);
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_00025D80);
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 270)
+#if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_00025DB4);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION >= 150 && FW_VERSION < 200
 s32 *func_00025DB4(void) {
     return &D_001261A0;
 }
@@ -917,11 +917,11 @@ INCLUDE_ASM("nonmatchings/paf_0274C4", func_0002CA24);
 
 INCLUDE_ASM("nonmatchings/paf_0274C4", _ZN13psjsname_impl6DecRefEv);
 
-#if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 282)
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_0002CB34);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 200)
+#if FW_VERSION < 200
 void func_0002CB34(s32 arg0, s32 *arg1, s32 arg2) {
     s32 temp_s0;
 

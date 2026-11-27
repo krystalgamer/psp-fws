@@ -70,6 +70,16 @@ def target_reloc_syms(mod, name):
     return [n for _, n in sorted(out)]
 
 
+def top_level_lines(text):
+    """Lines of TEXT that start at brace depth 0."""
+    out, depth = [], 0
+    for line in text.splitlines():
+        if depth == 0:
+            out.append(line)
+        depth += line.count("{") - line.count("}")
+    return out
+
+
 def _perm_score(args):
     pre, lines, idx, perm, target, comp, opt = args
     L = list(lines)
@@ -82,6 +92,84 @@ def _perm_score(args):
     return max(len(target), len(w)) - sum(b.size for b in sm.get_matching_blocks()), [l.strip() for l in perm]
 
 
+def _var_score(args):
+    pre, src, combo, target, comp, opt = args
+    w, err = AD.compile_words(pre + src, comp, opt)
+    if w is None:
+        return combo, None
+    sm = difflib.SequenceMatcher(None, target, w, autojunk=False)
+    return combo, max(len(target), len(w)) - sum(b.size for b in sm.get_matching_blocks())
+
+
+def variants(text, body, target, comp, opt, jobs):
+    """Score every combination of the body's //V{ alt0 //V| alt1 ... //V} blocks."""
+    import itertools
+    from multiprocessing import Pool
+    pre = text[:len(text) - len(body)]
+    parts = re.split(r"[ \t]*//V\{[^\n]*\n(.*?)[ \t]*//V\}[^\n]*\n", body, flags=re.S)
+    fixed = parts[0::2]
+    alts = [re.split(r"[ \t]*//V\|[^\n]*\n", p) for p in parts[1::2]]
+    if not alts:
+        sys.exit("--variants: no //V{ ... //V} blocks in the body")
+
+    def src_of(combo):
+        out = fixed[0]
+        for i, c in enumerate(combo):
+            out += alts[i][c] + fixed[i + 1]
+        return out
+    combos = list(itertools.product(*[range(len(a)) for a in alts]))
+    with Pool(jobs) as pool:
+        res = pool.map(_var_score, [(pre, src_of(c), c, target, comp, opt) for c in combos])
+    ok = sorted((sc, c) for c, sc in res if sc is not None)
+    print(f"variants: {len(combos)} combinations, {len(ok)} compiled")
+    for sc, c in ok[:5]:
+        print(f"  {sc}: {c}")
+    if ok and ok[0][0] == 0:
+        print("best variant source:\n" + src_of(ok[0][1]))
+
+
+def climb(pre, lines, idx, target, comp, opt, jobs):
+    """Many //P lines: hill-climb over moves of one line to another position (parallel per round)."""
+    import random
+    from multiprocessing import Pool
+    start = [lines[i] for i in idx]
+    rng = random.Random(1)
+    overall = (10 ** 9, start)
+    with Pool(jobs) as pool:
+        for restart in range(8):
+            cur = list(start) if restart == 0 else rng.sample(start, len(start))
+            best = _perm_score((pre, lines, idx, cur, target, comp, opt))
+            best = best[0] if best else 10 ** 9
+            best, cur = _climb1(pool, pre, lines, idx, cur, best, target, comp, opt)
+            print(f"climb restart {restart}: {best}")
+            if best < overall[0]:
+                overall = (best, cur)
+            if best == 0:
+                break
+    print(f"climb best {overall[0]}:", " | ".join(l.strip() for l in overall[1]))
+
+
+def _climb1(pool, pre, lines, idx, cur, best, target, comp, opt):
+    if True:
+        while best:
+            moves = []
+            for i in range(len(cur)):
+                for j in range(len(cur)):
+                    if i != j:
+                        c = cur[:i] + cur[i + 1:]
+                        c.insert(j, cur[i])
+                        moves.append(c)
+            res = [r for r in pool.map(_perm_score, [(pre, lines, idx, m, target, comp, opt) for m in moves]) if r]
+            if not res:
+                break
+            sc, order = min(res, key=lambda r: r[0])
+            if sc >= best:
+                break
+            best = sc
+            cur = [next(l for l in cur if l.strip() == o) for o in order]
+    return best, cur
+
+
 def permute(text, body, target, comp, opt, jobs):
     """Brute-force the order of the //P-tagged body lines (store order, statement order)."""
     import itertools
@@ -89,8 +177,8 @@ def permute(text, body, target, comp, opt, jobs):
     pre = text[:len(text) - len(body)]
     lines = body.split("\n")
     idx = [i for i, l in enumerate(lines) if "//P" in l]
-    if len(idx) > 8:
-        sys.exit(f"{len(idx)} //P lines: at most 8 (8! orders)")
+    if len(idx) > 7:
+        return climb(pre, lines, idx, target, comp, opt, jobs)
     jobsl = ((pre, lines, idx, p, target, comp, opt) for p in itertools.permutations([lines[i] for i in idx]))
     res = []
     with Pool(jobs) as pool:
@@ -114,7 +202,9 @@ def main():
     ap.add_argument("--decls")
     ap.add_argument("--diff", action="store_true")
     ap.add_argument("--permute", action="store_true",
-                    help="try every order of the body lines tagged //P (own setting), print the best")
+                    help="try every order of the body lines tagged //P (own setting); >7 lines: hill-climb over single-line moves")
+    ap.add_argument("--variants", action="store_true",
+                    help="try every combination of '//V{' ... '//V|' ... '//V}' alternative blocks in the body")
     ap.add_argument("-j", type=int, default=4, help="processes for --permute")
     ap.add_argument("--opts", help="';'-separated option sets to try instead of the standard list (own setting kept)")
     ap.add_argument("--extra", default="", help="flags appended to every tried setting, e.g. --extra=-mext")
@@ -126,12 +216,22 @@ def main():
     extra = Path(a.decls).read_text() if a.decls else ""
     # drop the decls' own prototype/vars that the hand decls redefine
     hdr = mod.header()
-    protos = re.findall(r"\b(\w+)\([^;{}]*\);\s*$", extra, re.M)
-    for n in protos:
-        hdr = re.sub(rf"^[^\n]*\b{n}\([^\n]*\);\n", "", hdr, flags=re.M)
-    for n in re.findall(r"\b(\w+)\s*(?:\[[^\]]*\])?;\s*$", extra, re.M) + [name]:
-        hdr = re.sub(rf"^[^\n]*\b{n}\b(?:\[[^\]]*\])?;\n", "", hdr, flags=re.M) if n != name else \
-            re.sub(rf"^[^\n]*\b{n}\([^\n]*\);\n", "", hdr, flags=re.M)
+    # only file-scope lines count (struct members and statements inside bodies don't)
+    top = "\n".join(top_level_lines(extra))
+    protos = re.findall(r"\b(\w+)\([^;{}]*\);\s*$", top, re.M)
+    names = set(protos)
+    varn = {n for n in re.findall(r"\b(\w+)\s*(?:\[[^\]]*\])?;\s*$", top, re.M)}
+    out, depth = [], 0
+    for line in hdr.splitlines(keepends=True):
+        drop = False
+        if depth == 0:
+            pm = re.search(r"\b(\w+)\([^\n]*\);\s*$", line)
+            vm = re.search(r"\b(\w+)\s*(?:\[[^\]]*\])?;\s*$", line)
+            drop = bool(pm and (pm[1] in names or pm[1] == name)) or bool(vm and not pm and vm[1] in varn)
+        depth += line.count("{") - line.count("}")
+        if not drop:
+            out.append(line)
+    hdr = "".join(out)
     # the source file's own prelude: includes, file-local externs and static inlines before the first entry
     src = Path(mod.file_of(name)).read_text()
     m = re.search(r"^(INCLUDE_ASM|INCLUDE_RODATA|#if)", src, re.M)
@@ -187,6 +287,8 @@ def main():
     elif best is not None:
         sm = difflib.SequenceMatcher(None, target, best, autojunk=False)
         print(f"RESULT: {max(len(target), len(best)) - sum(b.size for b in sm.get_matching_blocks())} off (own setting)")
+    if a.variants:
+        variants(text, body, target, comp, own.split(" ", 1)[1], a.j)
     if a.permute:
         permute(text, body, target, comp, own.split(" ", 1)[1], a.j)
     if a.perm:

@@ -1090,11 +1090,11 @@ INCLUDE_ASM("nonmatchings/paf_124B74", func_000D213C);
 INCLUDE_ASM("nonmatchings/paf_124B74", func_000D2190);
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 282)
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_124B74", func_000D22CC);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION >= 150 && FW_VERSION < 200
 void func_000D22CC(void) {
     func_000D22FC();
     M2C_VFIELD(&D_00162460, s8, 0x15F3) = 0;

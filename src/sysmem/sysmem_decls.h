@@ -21,15 +21,72 @@ struct D_0000F8C4_s {
     volatile s32 unk64;
 };
 
-struct Unk_SysMemForKernel_82D3CEE3_0 {
-    u8 pad0[0x8];
-    s32 unk8;
-};
+typedef struct SceSysmemHeapBlock {
+    struct SceSysmemHeapBlock *next; /* 0x0 */
+    struct SceSysmemHeapBlock *prev; /* 0x4 */
+    /* followed by the low heap */
+} SceSysmemHeapBlock;
+typedef struct {
+    s32 size; /* 0x0: bit 0 = attr */
+    s32 partId; /* 0x4 */
+    SceSysmemHeapBlock *firstBlock; /* 0x8 */
+} SceSysmemHeap; /* 1.00-2.xx: 12 bytes (6.60 adds partAddr/partSize) */
 
-struct Unk_Unk_func_0000769C_0_8 {
-    u8 pad0[0xC];
-    s32 unkC;
-};
+typedef struct {
+    u32 size; /* 0x0 */
+    u32 align; /* 0x4 */
+} SceSysmemHeapAllocOption;
+
+typedef struct SceSysmemHoldElem {
+    struct SceSysmemHoldElem *next; /* 0x0 */
+    struct SceSysmemHoldElem *prev; /* 0x4 */
+} SceSysmemHoldElem;
+typedef struct {
+    SceSysmemHoldElem hold0; /* 0x00 */
+    SceSysmemHoldElem hold1; /* 0x08 */
+    s32 count1; /* 0x10 */
+    s32 count2; /* 0x14 */
+} SceSysmemHoldHead; /* 0x18 */
+typedef struct {
+    SceSysmemHoldElem hold0; /* 0x00 */
+    SceSysmemHoldElem hold1; /* 0x08 */
+    struct SceSysmemUidCB *uid1; /* 0x10 */
+    struct SceSysmemUidCB *uid0; /* 0x14 */
+} SceSysmemHoldElement; /* 0x18 */
+
+struct SceSysmemUidLookupFunc;
+typedef struct SceSysmemUidCB {
+    struct SceSysmemUidCB *PARENT0; /* 0x00 */
+    struct SceSysmemUidCB *nextChild; /* 0x04 */
+    struct SceSysmemUidCB *meta; /* 0x08: the type */
+    SceUID uid; /* 0x0C */
+    char *name; /* 0x10 */
+    u8 childSize; /* 0x14: in words */
+    u8 size; /* 0x15: in words */
+    u16 attr; /* 0x16 */
+    union {
+        struct SceSysmemUidCB *next;
+        s32 numChild;
+    } next; /* 0x18 */
+    struct SceSysmemUidCB *PARENT1; /* 0x1C */
+    struct SceSysmemUidLookupFunc *funcTable; /* 0x20 */
+} SceSysmemUidCB; /* size 0x24 */
+
+typedef struct {
+    SceSysmemUidCB *root; /* 0x0 */
+    SceSysmemUidCB *metaRoot; /* 0x4 */
+    SceSysmemUidCB *basic; /* 0x8 */
+    s32 count; /* 0xC */
+} SceSysmemUidList;
+
+typedef s32 (*SceSysmemUidFunc)(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+typedef struct SceSysmemUidLookupFunc {
+    s32 id;
+    SceSysmemUidFunc func;
+} SceSysmemUidLookupFunc;
+
+#define UIDCB(id) ((SceSysmemUidCB *)(0x88000000 | (((u32)(id) >> 7) << 2)))
+#define UID_CB_TO_DATA(uid, typeStruct, type) ((type *)((u8 *)(uid) + (typeStruct)->size * 4))
 
 struct Unk_func_00001318_0 {
     u8 pad0[0x10];
@@ -69,18 +126,15 @@ struct Unk_func_00004A60_0 {
     s32 unk8;
 };
 
-struct Unk_func_000075EC_0 {
-    u8 pad0[0xC];
-    s32 unkC;
-};
-
-struct Unk_func_0000769C_0 {
-    u8 pad0[0x8];
-    struct Unk_Unk_func_0000769C_0_8 *unk8;
-};
-
 extern M2C_UNK D_0000A6E4;
 extern M2C_UNK D_0000A734;
+extern char D_0000AB40[];
+extern char D_0000AB60[];
+extern char D_0000AB68[];
+extern SceSysmemUidLookupFunc D_0000C1F0[];
+extern SceSysmemUidLookupFunc D_0000C290[];
+extern SceSysmemUidLookupFunc D_0000C2E8[];
+extern SceSysmemUidLookupFunc D_0000C2F8[];
 extern s32 D_0000C510;
 extern s32 D_0000C514;
 extern s32 D_0000C518;
@@ -95,11 +149,9 @@ extern s32 D_0000C840;
 extern s32 D_0000C844;
 extern s32 D_0000C848;
 extern s32 D_0000C888;
-extern s32 D_0000C924;
-extern s32 D_0000C92C;
-extern M2C_UNK D_0000C934;
 extern void *D_0000CA84;
-extern M2C_UNK D_0000F390;
+extern char D_0000EABC[];
+extern SceSysmemUidLookupFunc D_0000F390[];
 extern M2C_UNK D_0000F3C0;
 extern M2C_UNK D_0000F3F0;
 extern s32 D_0000F860;
@@ -136,16 +188,8 @@ extern s32 D_0000FC4C;
 extern s32 D_0000FC50;
 extern s32 D_0000FC54;
 extern s32 D_0000FC58;
-extern s32 D_0000FC7C;
-extern s32 D_0000FC84;
-extern M2C_UNK D_0000FC8C;
 extern s32 D_0000FC90;
-extern s32 D_0000FC98;
-extern M2C_UNK D_0000FD88;
 extern M2C_UNK D_0000FD8C;
-extern s32 D_0000FD90;
-extern M2C_UNK D_0000FD98;
-extern M2C_UNK D_0000FDA4;
 extern s32 D_0000FF24;
 extern s32 D_00010244;
 extern s32 D_000109D4;
@@ -164,16 +208,38 @@ extern s32 D_00014134;
 extern s32 D_0001413C;
 extern s32 D_00014264;
 extern s32 D_00014268;
+extern SceSysmemHeap EHeap4UID;
+extern s32 HeapCBUid;
+extern SceSysmemUidCB *g_HeapType;
+extern SceSysmemUidList g_uidTypeList;
 
+SceSysmemHoldElement *AllocSceUIDHoldElement(void);
+SceSysmemHoldHead *AllocSceUIDHoldHead(void);
+char *AllocSceUIDnamestr(const char *str1, const char *str2);
+SceSysmemUidCB *AllocSceUIDobjectCB(s32 size);
+void *AllocSceUIDtypeCB(void);
+s32 FreeSceUIDHoldElement(void *arg0);
+s32 FreeSceUIDHoldHead(void *arg0);
+s32 FreeSceUIDnamestr(void *arg0);
+s32 FreeSceUIDobjectCB(void *arg0);
+s32 FreeSceUIDtypeCB(void *arg0);
+void HeapInit(void);
+void InitUidBasic(SceSysmemUidCB *root, char *rootName, SceSysmemUidCB *metaRoot, char *metaRootName, SceSysmemUidCB *basic, char *basicName, SceSysmemUidCB *metaBasic, char *metaBasicName);
+void InitUidRoot(SceSysmemUidCB *root, char *rootName, SceSysmemUidCB *metaRoot, char *metaRootName);
+s32 Kprintf(const char *fmt, ...);
 s32 SysMemForKernel_9697CD32(s32);
 s32 SysMemForKernel_E6581468(s32);
 s32 SysMemForKernel_EF2EE8C1(void);
 void SysMemUserForUser_9697CD32(void);
 void SysMemUserForUser_E6581468(void);
+void *_AllocHeapMemory(SceSysmemHeap *heap, u32 size, u32 align);
+s32 _FreeHeapMemory(SceSysmemHeap *heap, void *addr);
+s32 _HeapTotalFreeSize(SceSysmemHeap *heap);
+s32 _sceKernelCreateUID_sub(SceSysmemUidCB *type, SceSysmemUidCB *uid, char *name, s32 attr);
+s32 _sceKernelCreateUIDtypeInherit_sub(SceSysmemUidCB *parent, SceSysmemUidCB *uidType, SceSysmemUidCB *metaUidType, char *namePtr, char *metaName, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
 void bcmp(s32 arg0, s32 arg1, s32 arg2);
 void bcopy(s32 arg0, s32 arg1);
 void func_00000724(void);
-s32 func_00000980(s32, s32);
 s32 func_00000E08(s32);
 void func_00000F60(void);
 s32 func_000011F4(void);
@@ -193,32 +259,19 @@ s32 func_00001E2C(s32, s32);
 void func_00002EC4(s32 arg0, s32 arg1);
 void func_0000373C(void);
 void func_00004238(s32 arg0, s32 arg1);
-s32 func_0000435C(void *arg0);
+s32 func_0000435C(void *lowheap);
 s32 func_000048E0(void *arg0);
 s32 func_00004A60(struct Unk_func_00004A60_0 *arg0);
-s32 func_00004C7C(s32 arg0);
-s32 func_00004CFC(s32 arg0);
-s32 func_00004DF0(s32 arg0);
-s32 func_00004E64(s32 arg0);
-s32 func_00004ED8(s32 arg0);
 void func_00004F24(u8 *arg0, u8 *arg1, u32 arg2);
+s32 func_00004F68(const char *s, s32 max);
 void func_00005430(u8 *arg0, u8 *arg1);
 void func_000054E4(u8 *arg0, u8 *arg1);
 void func_00005530(u8 *arg0, u8 *arg1, u32 arg2);
 void func_00005850(void);
-s32 func_00005EE8(void *arg0);
-s32 func_00005F98(void *arg0);
+s32 func_00005DBC(const char *s1, const char *s2);
 void func_00006080(u8 *arg0, u8 *arg1);
-s32 func_0000623C(s32 arg0);
-s32 func_000062BC(s32 arg0);
-s32 func_000063B0(s32 arg0);
-s32 func_00006424(s32 arg0);
-s32 func_00006498(s32 arg0);
 void func_000065F8(u8 *arg0, u8 *arg1);
 s32 func_00006620(void);
-s32 func_000075EC(struct Unk_func_000075EC_0 *arg0);
-s32 func_000075F4(M2C_UNK *arg0);
-s32 func_0000769C(struct Unk_func_0000769C_0 *arg0);
 s32 func_00007A38(s32 arg0, s32 arg1);
 s32 func_00008160(void);
 s32 func_0000832C(void);
@@ -235,23 +288,39 @@ s32 func_0000E3C4(s32, s32);
 M2C_UNK *get_ctype_table(void);
 s32 memcmp(s32, s32, s32);
 s32 memmove(s32, s32);
+s32 obj_do_delete(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+s32 obj_do_doseNotRecognize(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+s32 obj_do_isKindOf(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+s32 obj_do_isMemberOf(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+s32 obj_do_name(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+s32 obj_do_type(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+s32 obj_no_op(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+void resumeIntr(s32);
 void sceKernelAllocHeapMemory(s32 arg0, s32 arg1);
-s32 sceKernelAllocHeapMemoryWithOption(s32, s32, s32);
+void *sceKernelAllocHeapMemoryWithOption(SceUID id, u32 size, SceSysmemHeapAllocOption *opt);
 s32 sceKernelApiEvaliationAddData(void);
 s32 sceKernelApiEvaluationInit(void);
 s32 sceKernelApiEvaluationReport(void);
+void sceKernelAssert(s32 test, s32 lvl);
 s32 sceKernelCallGcovFunction(void);
 s32 sceKernelCallGprofFunction(void);
-s32 sceKernelCreateUIDtype(s32, s32, s32, s32, s32);
+s32 sceKernelCallUIDFunction(SceUID id, s32 funcId, ...);
+s32 sceKernelCallUIDObjFunction(SceSysmemUidCB *uid, s32 funcId, ...);
+s32 sceKernelCreateUID(SceSysmemUidCB *type, const char *name, s32 attr, SceSysmemUidCB **outUid);
+s32 sceKernelCreateUIDtype(const char *name, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
+s32 sceKernelCreateUIDtypeInherit(const char *parentName, const char *name, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
 s32 sceKernelDebugEcho(void);
 s32 sceKernelDebugEchoSet(s32 arg0);
 s32 sceKernelDeci2pReferOperations(void);
 s32 sceKernelDeci2pRegisterOperations(s32 arg0);
+s32 sceKernelDeleteHeap(SceUID id);
+s32 sceKernelDeleteUIDtype(SceSysmemUidCB *uidType);
 s32 sceKernelDevkitVersion(void);
 s32 sceKernelDipsw(u32 arg0);
 s32 sceKernelDipswAll(void);
 s32 sceKernelDipswCpTime(void);
 s32 sceKernelDipswSet(u32 arg0);
+s32 sceKernelFreeHeapMemory(SceUID id, void *addr);
 s32 sceKernelGetAWeDramSaveAddr(void);
 s32 sceKernelGetAllowReplaceUmd(s32 *arg0);
 s32 sceKernelGetCompiledSdkVersion(void);
@@ -260,22 +329,26 @@ s32 sceKernelGetDNAS(void);
 s32 sceKernelGetDebugPutchar(void);
 s32 sceKernelGetFilenameBlock(void);
 M2C_UNK *sceKernelGetGameInfo(void);
-s32 sceKernelGetHeapTypeCB(void);
+SceSysmemUidCB *sceKernelGetHeapTypeCB(void);
 s32 sceKernelGetInitialRandomValue(void);
 s32 sceKernelGetMEeDramSaveAddr(void);
 s32 sceKernelGetSystemStatus(void);
 s32 sceKernelGetUidManHeapID(void);
-s32 *sceKernelGetUidmanCB(void);
+SceSysmemUidList *sceKernelGetUidmanCB(void);
 s32 sceKernelGzipGetComment(s32 arg0);
 s32 sceKernelGzipGetCompressedData(s32 arg0);
 s32 sceKernelGzipGetInfo(s32, s32, s32, s32, s32, s32);
 s32 sceKernelGzipGetName(s32 arg0);
+s32 sceKernelHeapTotalFreeSize(SceUID id);
+s32 sceKernelHoldUID(SceUID id0, SceUID id1);
 s32 sceKernelIsDVDMode(void);
 s32 sceKernelIsDevelopmentToolMode(void);
-s32 sceKernelIsKindOf(struct Unk_SysMemForKernel_82D3CEE3_0 *arg0, s32 arg1);
+s32 sceKernelIsHold(SceSysmemUidCB *uid0, SceSysmemUidCB *uid1);
+s32 sceKernelIsKindOf(SceSysmemUidCB *uid, SceSysmemUidCB *type);
 s32 sceKernelIsUMDMode(void);
 s32 sceKernelIsValidUserAccess(s32 arg0, s32 arg1, s32 arg2);
 s32 sceKernelJointMemoryBlock(void);
+s32 sceKernelLookupUIDFunction(SceSysmemUidCB *uid, s32 id, SceSysmemUidFunc *func, SceSysmemUidCB **parentUidWithFunc);
 u32 sceKernelMaxFreeMemSize(void);
 void sceKernelMemoryCloseSize(s32 arg0);
 void sceKernelMemoryExtendSize(void);
@@ -294,6 +367,9 @@ void sceKernelRegisterKprintfHandler(s32 arg0, s32 arg1);
 s32 sceKernelRegisterLibcRtcFunc(s32 arg0, s32 arg1, s32 arg2);
 s32 sceKernelRegisterPowerHandlers(s32 arg0);
 s32 sceKernelReleaseLibcRtcFunc(void);
+s32 sceKernelReleaseUID(SceUID id0, SceUID id1);
+s32 sceKernelRenameUID(SceUID id, const char *name);
+SceUID sceKernelSearchUIDbyName(const char *name, SceUID typeId);
 s32 sceKernelSeparateMemoryBlock(void);
 s32 sceKernelSetGcovFunction(void);
 s32 sceKernelSetGprofFunction(void);
@@ -303,6 +379,10 @@ s32 sceKernelSm1RegisterOperations(s32 arg0);
 s32 sceKernelSysMemRealMemorySize(void);
 s32 sceKernelSysmemIsValidAccess(s32, s32, s32, s32);
 u32 sceKernelTotalFreeMemSize(void);
+SceSysmemUidCB *search_UIDObj_By_Name_With_Type(const char *name, SceSysmemUidCB *type);
+SceSysmemUidCB *search_UidType_By_Name(const char *name);
 u8 *strcpy(u8 *arg0, u8 *arg1);
+s32 suspendIntr(void);
+void wmemclear(void *dst, u32 size);
 
 #endif

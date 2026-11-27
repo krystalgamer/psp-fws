@@ -205,6 +205,7 @@
   "func_0000F4E8": "s32 func_0000F4E8(void);",
   "func_0000F664": "void func_0000F664(void);",
   "func_0000F894": "s32 func_0000F894(void);",
+  "func_0000FBD8": "void func_0000FBD8(void);",
   "func_000100F4": "s32 func_000100F4(void);",
   "func_00010270": "void func_00010270(void);",
   "func_00010394": "s32 func_00010394(void);",

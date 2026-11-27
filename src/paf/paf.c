@@ -2275,11 +2275,7 @@ s32 func_0001039C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/paf", func_000103D4);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION >= 150 && FW_VERSION < 200
 s32 *func_000103D4(void) {
     return &D_00138F34;
 }

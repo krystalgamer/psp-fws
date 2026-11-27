@@ -279,6 +279,7 @@ void func_00005E90(void);
 void func_00006118(void);
 void func_00006160(struct Unk_func_00006160_0 *arg0);
 s32 func_00006170(s32);
+void func_000062D4(void);
 M2C_UNK func_00006900();
 s32 module_stop(void);
 M2C_UNK sceHttpEnd();

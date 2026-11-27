@@ -41,6 +41,7 @@ void func_00000EF8(s32 arg0, s32 arg1);
 M2C_UNK func_00000F48();
 M2C_UNK func_00000F78(s32, s32, s32);
 void func_00000FFC(M2C_UNK **arg0);
+void func_00001024(void);
 M2C_UNK func_0000107C();
 s32 func_000010EC(s32, s32);
 void func_00001194(void);

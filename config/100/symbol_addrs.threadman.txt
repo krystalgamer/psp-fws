@@ -186,6 +186,7 @@ memcpy = 0x00013E64; // type:func
 memset = 0x00013E6C; // type:func
 sceKernelRegisterSuspendHandler = 0x00013E74; // type:func
 sceKernelRegisterResumeHandler = 0x00013E7C; // type:func
+g_threadmanInfo = 0x00015518; // size:0x6F4
 // shared names (tools/add_version.py) begin
 D_0001679C = 0x00014F60; // rom:0x14FE0
 D_00016928 = 0x0001502C; // rom:0x150AC

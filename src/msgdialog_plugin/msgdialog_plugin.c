@@ -126,7 +126,13 @@ void func_000003C8(void) {
 }
 #endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_000003F0);
+#else
+void func_000003F0(s32 arg0) {
+    _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_00001A2C);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000414);
 

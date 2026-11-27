@@ -3,6 +3,7 @@
   "_ZN3paf4View12PageActivateEPKc": "M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);",
   "_ZN3paf4View12PageCloseAllEv": "M2C_UNK _ZN3paf4View12PageCloseAllEv(s32);",
   "_ZN3paf4View8PageOpenEPKcii": "M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);",
+  "_ZN3paf6Module12SetInterfaceEiPv": "s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, s32);",
   "_ZN3vsh14GetString_BackE6Locale": "s32 _ZN3vsh14GetString_BackE6Locale(M2C_UNK);",
   "_ZN3vsh14GetString_BackEv": "s32 _ZN3vsh14GetString_BackEv();",
   "_ZN3vsh15GetString_EnterE6Locale": "s32 _ZN3vsh15GetString_EnterE6Locale(M2C_UNK);",
@@ -14,6 +15,7 @@
   "func_000001E4": "s32 func_000001E4(void);",
   "func_00000384": "void func_00000384(void);",
   "func_000003C8": "void func_000003C8(void);",
+  "func_000003F0": "void func_000003F0(s32 arg0);",
   "func_00000998": "void func_00000998(void);",
   "func_00000B68": "void func_00000B68(s32 arg0, s32 arg1);",
   "func_00000BC8": "void func_00000BC8(void);",
@@ -23,6 +25,7 @@
   "func_00000E88": "s32 func_00000E88(s32);",
   "func_00000EB8": "void func_00000EB8(s32 arg0, s32 arg1);",
   "func_00000F08": "M2C_UNK func_00000F08(s32, s32, s32);",
+  "func_00000FBC": "void func_00000FBC(void);",
   "func_00001014": "M2C_UNK func_00001014();",
   "module_stop": "s32 module_stop(void);",
   "scePaf_39E62C88": "M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);",
@@ -41,6 +44,7 @@
  "vars": {
   "D_000012A8": "extern func_ptr D_000012A8[];",
   "D_000012F0": "extern s32 D_000012F0;",
+  "D_00001A2C": "extern M2C_UNK D_00001A2C;",
   "D_00001A5C": "extern s32 D_00001A5C;",
   "D_00001A68": "extern s8 D_00001A68;",
   "D_00001A6C": "extern s32 D_00001A6C;"

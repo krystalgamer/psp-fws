@@ -186,7 +186,13 @@ void func_000004D0(void) {
 }
 #endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000004DC);
+#else
+void func_000004DC(s32 arg0) {
+    _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_00004570);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00000500);
 
@@ -815,9 +821,17 @@ s32 func_00001EF8(struct Unk_func_00001EF8_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001F00);
-#else
+#endif
+
+#if FW_VERSION < 201
+void func_00001F00(void *arg0, s32 arg1) {
+    _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
+}
+#endif
+
+#if FW_VERSION >= 350
 void func_00001F00(void *arg0, s32 arg1) {
     scePaf_39E62C88(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
 }

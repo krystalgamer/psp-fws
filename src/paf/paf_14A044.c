@@ -462,11 +462,7 @@ s8 sce_paf_private_tolower(s8 arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_14A044", sce_paf_private_look_ctype_table);
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/paf_14A044", func_00109EEC);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION >= 150 && FW_VERSION < 200
 s32 *func_00109EEC(void) {
     return &D_00138CC5;
 }

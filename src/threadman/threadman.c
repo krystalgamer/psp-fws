@@ -2,10 +2,46 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "threadman_decls.h"
+#include "k1.h"
 
+/* caller address for the threadman log handler, read before the $k1 shift */
+static inline void *getRa(void) {
+    void *ra;
+
+    __asm__ __volatile__("move %0, $31" : "=r"(ra));
+    return ra;
+}
+
+/* the original assert loads the file and function name before testing; compiled out in 2.01+ */
+#define THREADMAN_ASSERT(ok, fmt, file, func, line) \
+    do { \
+        const char *__file = (file); \
+        const char *__func = (func); \
+        if (FW_VERSION < 201 && !(ok)) { \
+            Kprintf((fmt), __file, __func, (line)); \
+            sceKernelAssert((ok), 0); \
+        } \
+    } while (0)
+
+#if FW_VERSION == 100
+void func_00000000(SceThreadQueue *queue, s32 waitType) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    SceThread *prev;
+
+    prev = queue->prev;
+    thread->next = (SceThread *)queue;
+    thread->prev = prev;
+    queue->prev = thread;
+    prev = thread->prev;
+    thread->status = THREAD_WAITING;
+    thread->waitType = waitType;
+    prev->next = thread;
+    thread->waitRet = 0;
+    thread->waitObj = NULL;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", func_00000000);
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000017C);
 #endif
 
@@ -30,39 +66,32 @@ INCLUDE_ASM("nonmatchings/threadman", func_00000268);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00000308);
 
-s32 func_000003F0(s32 arg0, s32 arg1) {
-    M2C_UNK *temp_s0;
-    M2C_UNK *var_s1;
-    s32 var_s2;
-    void *temp_a0;
-    void *temp_s3;
+s32 func_000003F0(SceSysmemUidCB *cb, s32 waitRet) {
+    SceWaitQ *wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
+    SceThread *next = wq->waitQueue.next;
+    s32 count = 0;
 
-    temp_a0 = arg0 + (M2C_FIELD(D_00015B14, u8 *, 0x15) * 4);
-    var_s1 = M2C_FIELD(temp_a0, M2C_UNK **, 0xC);
-    temp_s3 = temp_a0 + 0xC;
-    var_s2 = 0;
-    if (var_s1 != temp_s3) {
-        do {
-            temp_s0 = var_s1;
-            var_s1 = M2C_FIELD(var_s1, M2C_UNK **, 0);
-            func_00000268((s32) temp_s0);
-            var_s2 += 1;
-            M2C_FIELD(temp_s0, s32 *, 0x40) = arg1;
-        } while (var_s1 != temp_s3);
+    while (next != (SceThread *)&wq->waitQueue) {
+        SceThread *thread = next;
+
+        next = thread->next;
+        func_00000268(thread);
+        count++;
+        thread->waitRet = waitRet;
     }
-    return var_s2;
+    return count;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_000003F0(s32 arg0, s32 arg1) {
+s32 func_000003F0(SceSysmemUidCB *arg0, s32 arg1) {
     M2C_UNK *temp_s0;
     M2C_UNK *var_s1;
     s32 var_s2;
     void *temp_s3;
     void *temp_v1;
 
-    temp_v1 = arg0 + (M2C_FIELD(D_00016444, u8 *, 0x15) * 4);
+    temp_v1 = (u8 *)arg0 + (M2C_FIELD(D_00016444, u8 *, 0x15) * 4);
     var_s1 = M2C_FIELD(temp_v1, M2C_UNK **, 0xC);
     temp_s3 = temp_v1 + 0xC;
     var_s2 = 0;
@@ -191,7 +220,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000095C);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/threadman", func_0000059C);
 
-INCLUDE_ASM("nonmatchings/threadman", func_00000630);
+s32 func_00000630(SceSysmemUidCB *cb) {
+    s32 count = func_000003F0(cb, 0x800201A9);
+
+    if (count != 0) {
+        g_threadmanInfo.nextThread = NULL;
+        func_000007F4(0, 0);
+    }
+    return count;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -221,7 +258,12 @@ s32 func_00000688(s32 arg0, void *arg1) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/threadman", func_000006A8);
+s32 func_000006A8(void) {
+    s32 ok = sceKernelCreateUIDtype("WaitQ", 0x14, D_00015390, NULL, &g_threadmanInfo.uidWaitQType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014928, D_00014948, "initWaitQ", 0x120);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000072C);
 
@@ -232,10 +274,10 @@ s32 func_000008A0(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_VFIELD(&D_00015518, s32, 0x418) == 0) {
-        temp_v0 = M2C_VFIELD(&D_00015518, s32, 4) != (s32) M2C_FIELD(&D_00015518, void **, 0);
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(M2C_FIELD(&D_00015518, void **, 0), void **, 0xE4) = (void *) (M2C_FIELD(&D_00015518, void **, 0) + 0xE8);
+            g_threadmanInfo.currentThread->preemptCount = &g_threadmanInfo.currentThread->intrPreemptCount;
         }
         var_v1 = temp_v0;
     }
@@ -249,10 +291,10 @@ s32 func_000008A0(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_VFIELD(&D_00015E08, s32, 0x418) == 0) {
-        temp_v0 = M2C_VFIELD(&D_00015E08, s32, 4) != (s32) M2C_FIELD(&D_00015E08, void **, 0);
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(M2C_FIELD(&D_00015E08, void **, 0), void **, 0xE4) = (void *) (M2C_FIELD(&D_00015E08, void **, 0) + 0xE8);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0xE4) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0xE8);
         }
         var_v1 = temp_v0;
     }
@@ -266,10 +308,10 @@ s32 func_000008A0(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_VFIELD(&D_00015E08, s32, 0x418) == 0) {
-        temp_v0 = M2C_VFIELD(&D_00015E08, s32, 4) != (s32) M2C_FIELD(&D_00015E08, void **, 0);
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(M2C_FIELD(&D_00015E08, void **, 0), void **, 0xEC) = (void *) (M2C_FIELD(&D_00015E08, void **, 0) + 0xF0);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0xEC) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0xF0);
         }
         var_v1 = temp_v0;
     }
@@ -481,10 +523,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (D_00016C74.unk418 == 0) {
-        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(D_00016C74.unk0, void **, 0x10C) = (void *) (D_00016C74.unk0 + 0x110);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x10C) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0x110);
         }
         var_v1 = temp_v0;
     }
@@ -498,10 +540,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (D_00016C74.unk418 == 0) {
-        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(D_00016C74.unk0, void **, 0x104) = (void *) (D_00016C74.unk0 + 0x108);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x104) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0x108);
         }
         var_v1 = temp_v0;
     }
@@ -515,10 +557,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (D_00016C74.unk418 == 0) {
-        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(D_00016C74.unk0, void **, 0x100) = (void *) (D_00016C74.unk0 + 0x104);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x100) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0x104);
         }
         var_v1 = temp_v0;
     }
@@ -532,10 +574,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (D_00016C74.unk418 == 0) {
-        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(D_00016C74.unk0, void **, 0xFC) = (void *) (D_00016C74.unk0 + 0x100);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0xFC) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0x100);
         }
         var_v1 = temp_v0;
     }
@@ -549,10 +591,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (D_00016C74.unk418 == 0) {
-        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(D_00016C74.unk0, void **, 0xF4) = (void *) (D_00016C74.unk0 + 0xF8);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0xF4) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0xF8);
         }
         var_v1 = temp_v0;
     }
@@ -739,7 +781,19 @@ INCLUDE_ASM("nonmatchings/threadman", func_000029B8);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_00002614);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_0001497C[] = "WaitQ";
+
+s32 func_00002614(void) {
+    s32 ok;
+
+    ok = sceKernelCreateUIDtypeInherit(D_0001497C, "ThreadEventHandler", 0x30, D_000153C0, NULL,
+                                       &g_threadmanInfo.uidThreadEventHandlerType) == 0;
+    THREADMAN_ASSERT(ok, "Assertion failed at %s:%s:%04d\n", "thcallback.c", "initCallback", 0x40A);
+    ok = sceKernelCreateUIDtypeInherit(D_0001497C, "Callback", 0x30, D_000153D8, NULL, &g_threadmanInfo.uidCallbackType) == 0;
+    THREADMAN_ASSERT(ok, "Assertion failed at %s:%s:%04d\n", "thcallback.c", "initCallback", 0x40B);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -769,15 +823,15 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitThreadEnd);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitThreadEndCB);
 
 #if FW_VERSION == 100
-void func_00003518(void *arg0) {
-    s32 temp_v0;
+void func_00003518(SceThread *thread) {
+    s32 intr;
 
-    temp_v0 = sceKernelCpuSuspendIntr();
-    M2C_FIELD(arg0, s32 *, 0x38) = 0;
-    if (func_00000268((s32) arg0) > 0) {
-        D_0001551C = 0;
+    intr = sceKernelCpuSuspendIntr();
+    thread->unk38 = 0;
+    if (func_00000268(thread) > 0) {
+        g_threadmanInfo.nextThread = 0;
     }
-    sceKernelCpuResumeIntr(temp_v0);
+    sceKernelCpuResumeIntr(intr);
 }
 #endif
 
@@ -849,7 +903,43 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014CB0);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014CBC);
 #endif
 
+#if FW_VERSION < 270
+s32 sceKernelDeleteSema(SceUID semaid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(semaid, g_threadmanInfo.uidSemaType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x80020199;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 0x10)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x37, ra, 1, semaid);
+    }
+    ok = sceKernelDeleteUID(semaid) == 0;
+    THREADMAN_ASSERT(ok, D_00014CBC, D_00014CB0, "sceKernelDeleteSema", 0x78);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteSema);
+#endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSignalSema);
 
@@ -904,7 +994,15 @@ s32 func_00004B48(void) {
 INCLUDE_ASM("nonmatchings/threadman", func_00004B68);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_000048B0);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014CF0[] = "WaitQ";
+
+s32 func_000048B0(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014CF0, "Semaphore", 0x30, D_000153F0, NULL, &g_threadmanInfo.uidSemaType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014CBC, D_00014CB0, "initSema", 0x23E);
+    return 0;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateEventFlag);
@@ -915,11 +1013,79 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014D10);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014D1C);
 #endif
 
+#if FW_VERSION < 270
+s32 sceKernelDeleteEventFlag(SceUID evid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(evid, g_threadmanInfo.uidEventFlagType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019A;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 0x10)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x3F, ra, 1, evid);
+    }
+    ok = sceKernelDeleteUID(evid) == 0;
+    THREADMAN_ASSERT(ok, D_00014D1C, D_00014D10, "sceKernelDeleteEventFlag", 0x73);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteEventFlag);
+#endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetEventFlag);
 
+#if FW_VERSION < 270
+s32 sceKernelClearEventFlag(SceUID evid, u32 bits) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceEventFlag *ev;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    sceKernelIsIntrContext();
+    if (sceKernelGetUIDcontrolBlockWithType(evid, g_threadmanInfo.uidEventFlagType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019A;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 2)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    ev = UID_CB_TO_DATA(cb, g_threadmanInfo.uidEventFlagType, SceEventFlag);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x41, ra, 2, evid, bits);
+    }
+    ev->currentPattern &= bits;
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelClearEventFlag);
+#endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitEventFlag);
 
@@ -996,7 +1162,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_00006CB0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_000059D4);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014D58[] = "WaitQ";
+
+s32 func_000059D4(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014D58, "EventFlag", 0x30, D_00015410, NULL, &g_threadmanInfo.uidEventFlagType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014D1C, D_00014D10, "initEventFlag", 0x23A);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -1009,7 +1183,43 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014D7C);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014D88);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 270
+s32 sceKernelDeleteMbx(SceUID id) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(id, g_threadmanInfo.uidMbxType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019B;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 0x10)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x48, ra, 1, id);
+    }
+    ok = sceKernelDeleteUID(id) == 0;
+    THREADMAN_ASSERT(ok, D_00014D88, D_00014D7C, "sceKernelDeleteMbx", 0x73);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteMbx);
 #endif
 
@@ -1064,7 +1274,15 @@ s32 func_000068A0(void) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_000068C0);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014DF4[] = "WaitQ";
+
+s32 func_000068C0(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014DF4, "Mbx", 0x30, D_00015428, NULL, &g_threadmanInfo.uidMbxType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014D88, D_00014D7C, "initMbx", 0x1F5);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -1077,9 +1295,47 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014E18);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014E24);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteMsgPipe);
+#if FW_VERSION < 270
+s32 sceKernelDeleteMsgPipe(SceUID id) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
 
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(id, g_threadmanInfo.uidMsgPipeType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019E;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 0x10)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x50, ra, 1, id);
+    }
+    ok = sceKernelDeleteUID(id) == 0;
+    THREADMAN_ASSERT(ok, D_00014E24, D_00014E18, "sceKernelDeleteMsgPipe", 0xA1);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteMsgPipe);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSendMsgPipe);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSendMsgPipeCB);
@@ -1141,9 +1397,27 @@ INCLUDE_ASM("nonmatchings/threadman", func_00008CB0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_000089A0);
+s32 func_000089A0(SceSysmemUidCB *cb) {
+    SceWaitQ *wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
 
-INCLUDE_ASM("nonmatchings/threadman", func_000089F0);
+    wq->unk4 = 0;
+    if (--wq->numWaitThreads == 0) {
+        SceMsgPipe *mpp = UID_CB_TO_DATA(cb, g_threadmanInfo.uidMsgPipeType, SceMsgPipe);
+
+        mpp->unk4 = 0;
+    }
+    return 0;
+}
+
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014E5C[] = "WaitQ";
+
+s32 func_000089F0(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014E5C, "MsgPipe", 0x30, D_00015440, NULL, &g_threadmanInfo.uidMsgPipeType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014E24, D_00014E18, "initMsgPipe", 0x4C5);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -1154,9 +1428,49 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014E80);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateVpl);
+#endif
 
+#if FW_VERSION < 270
+s32 sceKernelDeleteVpl(SceUID id) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(id, g_threadmanInfo.uidVplType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019C;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 0x10)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x5A, ra, 1, id);
+    }
+    ok = sceKernelDeleteUID(id) == 0;
+    THREADMAN_ASSERT(ok, D_00014E80, D_00014E78, "sceKernelDeleteVpl", 0x8D);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteVpl);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelAllocateVpl);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelAllocateVplCB);
@@ -1192,7 +1506,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000989C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_00009918);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014EC8[] = "WaitQ";
+
+s32 func_00009918(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014EC8, "Vpl", 0x30, D_00015468, NULL, &g_threadmanInfo.uidVplType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014E80, D_00014E78, "initVpl", 0x1EC);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -1418,7 +1740,43 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000AC9C);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateFpl);
 #endif
 
+#if FW_VERSION < 270
+s32 sceKernelDeleteFpl(SceUID id) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(id, g_threadmanInfo.uidFplType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019D;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 0x10)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x62, ra, 1, id);
+    }
+    ok = sceKernelDeleteUID(id) == 0;
+    THREADMAN_ASSERT(ok, D_00014EE4, D_00014EDC, "sceKernelDeleteFpl", 0xAE);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteFpl);
+#endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelAllocateFpl);
 
@@ -1468,7 +1826,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000A8D0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_0000A968);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014F18[] = "WaitQ";
+
+s32 func_0000A968(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014F18, "Fpl", 0x30, D_00015480, NULL, &g_threadmanInfo.uidFplType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014EE4, D_00014EDC, "initFpl", 0x230);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000A9F4);
 
@@ -1544,7 +1910,9 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTime);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTimeWide);
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTimeLow);
+u32 sceKernelGetSystemTimeLow(void) {
+    return *(volatile u32 *)0xBC600000;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000B7F4);
 
@@ -1779,18 +2147,38 @@ s32 func_0000E674(void *arg0, void *arg1) {
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/threadman", func_0000DF00);
+s32 func_0000DF00(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap) {
+    SceThreadQueue *link = UID_CB_TO_DATA(cb, type, SceThreadQueue);
+    SceThread *next = link->next;
+
+    next->prev = link->prev;
+    link->prev->next = next;
+    sceKernelCallUIDObjCommonFunction(cb, type, funcId, ap);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
-s32 func_0000DF00(void) {
-    sceKernelCallUIDObjCommonFunction();
+s32 func_0000DF00(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap) {
+    sceKernelCallUIDObjCommonFunction(cb, type, funcId, ap);
     return 0;
 }
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_0000DF3C);
+s32 func_0000DF3C(void) {
+    s32 ok;
+
+    ok = sceKernelCreateUIDtype("Timer", 0x14, D_000154E0, NULL, &g_threadmanInfo.uidTimerType) == 0;
+    THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "initAlarm", 0x752);
+    ok = sceKernelCreateUIDtypeInherit("Timer", "Delay", 0x30, D_00015498, NULL, &g_threadmanInfo.uidDelayType) == 0;
+    THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "initAlarm", 0x754);
+    ok = sceKernelCreateUIDtypeInherit("Timer", "Alarm", 0x30, D_000154B0, NULL, &g_threadmanInfo.uidAlarmType) == 0;
+    THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "initAlarm", 0x755);
+    ok = sceKernelCreateUIDtypeInherit("Timer", "VTimer", 0x30, D_000154C8, NULL, &g_threadmanInfo.uidVTimerType) == 0;
+    THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "initAlarm", 0x756);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1951,7 +2339,13 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000F5B4);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", sceKernelSetThreadmanLogHandler);
+s32 sceKernelSetThreadmanLogHandler(SceThreadmanLogHandler handler, SceThreadmanInfo **info) {
+    g_threadmanInfo.logHandler = handler;
+    if (info != NULL) {
+        *info = &g_threadmanInfo;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000ED74);
 
@@ -2127,7 +2521,13 @@ INCLUDE_ASM("nonmatchings/threadman", func_00012F30);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", sceKernelSetThreadmanLogHandler);
+s32 sceKernelSetThreadmanLogHandler(SceThreadmanLogHandler handler, SceThreadmanInfo **info) {
+    g_threadmanInfo.logHandler = handler;
+    if (info != NULL) {
+        *info = &g_threadmanInfo;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_00012FD8);
 
@@ -2138,20 +2538,48 @@ INCLUDE_ASM("nonmatchings/threadman", func_0001313C);
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00015E08, void **, 0x108), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x108), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 270
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00015E08, void **, 0x100), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x100), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadId);
+SceUID sceKernelGetThreadId(void) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadCurrentPriority);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x1D, ra, 0);
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    setK1(oldK1);
+    return thread->uid;
+}
+
+s32 sceKernelGetThreadCurrentPriority(void) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x1E, ra, 1, thread->currentPriority);
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    setK1(oldK1);
+    return thread->currentPriority;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetUserLevel);
 
@@ -2201,7 +2629,16 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000EF10);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000F034);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000F08C);
+void func_0000F08C(SceThread *thread) {
+    u32 prio = thread->currentPriority;
+    SceThread *pos = g_threadmanInfo.readyQueue[prio].next;
+
+    thread->prev = pos->prev;
+    pos->prev = thread;
+    g_threadmanInfo.readyPriorityMask[prio >> 5] |= 1 << (prio & 0x1F);
+    thread->next = pos;
+    thread->prev->next = thread;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000F0E4);
 
@@ -2476,37 +2913,37 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013DB0);
 
 #if FW_VERSION == 100
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00015518, void **, 0x100), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(g_threadmanInfo.currentThread->unk100, s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION >= 350
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x128), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x128), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION >= 330 && FW_VERSION < 350
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x120), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x120), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 330
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x11C), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x11C), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x118), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x118), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION == 282
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x110), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x110), s32 *, 0x18));
 }
 #endif
 
@@ -2575,9 +3012,37 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelRotateThreadReadyQueue);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReleaseWaitThread);
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadId);
+SceUID sceKernelGetThreadId(void) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadCurrentPriority);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x1D, ra, 0);
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    setK1(oldK1);
+    return thread->uid;
+}
+
+s32 sceKernelGetThreadCurrentPriority(void) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x1E, ra, 1, thread->currentPriority);
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    setK1(oldK1);
+    return thread->currentPriority;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadExitStatus);
 
@@ -2612,7 +3077,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00012F3C);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferThreadDebugStatus);
 
 s32 sceKernelGetSystemStatusFlag(void) {
-    return D_00015B50;
+    return g_threadmanInfo.systemStatusFlag;
 }
 #endif
 
@@ -2655,7 +3120,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_000144B4);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/threadman", func_00013AC4);
 
-INCLUDE_ASM("nonmatchings/threadman", func_00013C88);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_0001536C[] = "WaitQ";
+
+s32 func_00013C88(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_0001536C, "Thread", 0x10C, D_000154F8, NULL, &g_threadmanInfo.uidThreadType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00016928, D_000150BC, "initThread", 0xCB7);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
