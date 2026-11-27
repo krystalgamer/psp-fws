@@ -372,3 +372,4 @@ func_00013A60 = 0x00013A60; // type:func
 func_00013AAC = 0x00013AAC; // type:func
 func_00013AD8 = 0x00013AD8; // type:func
 func_0001404C = 0x0001404C; // type:func
+func_00001C08 = 0x00001C08; // type:func

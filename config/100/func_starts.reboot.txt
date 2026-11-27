@@ -45,3 +45,4 @@ func_00006AB4 = 0x00006AB4; // type:func
 func_0000AD20 = 0x0000AD20; // type:func
 func_0000ED28 = 0x0000ED28; // type:func
 func_0000FAC4 = 0x0000FAC4; // type:func
+func_00001AE0 = 0x00001AE0; // type:func

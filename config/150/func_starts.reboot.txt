@@ -110,3 +110,4 @@ func_00004BE8 = 0x00004BE8; // type:func
 func_00004E18 = 0x00004E18; // type:func
 func_00004FC4 = 0x00004FC4; // type:func
 func_0000526C = 0x0000526C; // type:func
+func_00001C08 = 0x00001C08; // type:func
