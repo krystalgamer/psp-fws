@@ -298,7 +298,24 @@ void func_00003BB4(SceLoadCoreExecFileInfo *execInfo, s32 ret) {
     execInfo->isDecrypted = 0;
 }
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003BCC);
+s32 func_00003BCC(s32 arg0, SceLoadCoreExecFileInfo *arg1, s32 *arg2) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    var_v0 = 0x8002013A;
+    if (D_00015464 != NULL) {
+        temp_v0 = D_00015464(arg0, arg1->execSize);
+        if (temp_v0 >= 0) {
+
+        } else {
+            Kprintf(&D_00012FEC, "PspUncompress", arg0);
+            Kprintf("../loadcore/loadelf.c:%s:size 0x%x and 0x%x, res %d[0x%08x]\n", "PspUncompress", arg1->execSize, *arg2, temp_v0, temp_v0);
+        }
+        func_00003BB4(arg1, temp_v0);
+        var_v0 = temp_v0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003C8C);
 
