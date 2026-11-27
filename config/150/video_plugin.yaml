@@ -55,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, video_plugin]
+      - [0x23830, c, video_plugin_000214F0]
       - [0x4423C, c, video_plugin_crtend]
       - { start: 0x44294, type: asm, name: fini, linker_section: .fini }
       - { start: 0x442B0, type: asm, name: sceStub, linker_section: .sceStub.text }
@@ -74,6 +75,7 @@ segments:
       - { start: 0x45A10, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x45A14, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x45A18, .rodata, video_plugin]
+      - [0x4822C, .rodata, video_plugin_000214F0]
       - [0x4A060, .rodata, video_plugin_crtend]
       - { start: 0x4A298, type: prxpad, order: .rodata }
   - name: video_plugin_seg1

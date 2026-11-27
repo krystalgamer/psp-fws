@@ -54,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, video_plugin]
+      - [0x23B4, c, video_plugin_000214F0]
       - [0x2670, c, video_plugin_crtend]
       - { start: 0x26E4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x28E4, type: prxpad, order: .text }
