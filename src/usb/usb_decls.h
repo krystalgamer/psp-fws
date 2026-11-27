@@ -4,6 +4,133 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef struct SceUsbdDeviceRequest {
+    u8 bmRequestType;
+    u8 bRequest;
+    u16 wValue;
+    u16 wIndex;
+    u16 wLength;
+} SceUsbdDeviceRequest;
+
+typedef struct SceUsbdEndpoint {
+    s32 endpointNumber;
+    s32 busEndpointNumber; /* filled in by the bus driver */
+    s32 transmittedBytes;
+} SceUsbdEndpoint;
+
+typedef struct SceUsbdInterface {
+    s32 expectNumber; /* < 0: any */
+    s32 unk4;
+    s32 numInterfaces;
+} SceUsbdInterface;
+
+typedef struct SceUsbdDriver {
+    const char *name;
+    s32 numEndpoints;
+    SceUsbdEndpoint *endpoints;
+    SceUsbdInterface *interface;
+    void *descriptorHi;
+    void *configHi;
+    void *descriptor;
+    void *config;
+    void *stringDescriptor;
+    s32 (*processRequest)(s32, s32, SceUsbdDeviceRequest *);
+    s32 (*chFunc)(s32, s32, s32);
+    s32 (*attach)(s32, void *, void *);
+    s32 (*detach)(s32, s32, s32);
+    s32 unk34;
+    s32 (*start)(s32, void *);
+    s32 (*stop)(s32, void *);
+    struct SceUsbdDriver *link;
+} SceUsbdDriver;
+typedef char chk_SceUsbdDriver[(sizeof(SceUsbdDriver) == 0x44) ? 1 : -1];
+
+typedef struct SceUsbdDeviceReq {
+    SceUsbdEndpoint *endpoint;
+    void *data;
+    s32 size;
+    s32 isControlRequest;
+    void (*onComplete)(struct SceUsbdDeviceReq *);
+    s32 transmittedBytes;
+    s32 returnCode;
+    struct SceUsbdDeviceReq *next;
+    void *unpackedArg;
+    u32 physicalAddr; /* bus driver: (data & 0x1FFFFFFF) | user << 30 */
+} SceUsbdDeviceReq;
+typedef char chk_SceUsbdDeviceReq[(sizeof(SceUsbdDeviceReq) == 0x28) ? 1 : -1];
+
+/* per bus endpoint (g_usbbd.eps) */
+typedef struct UsbbdEpRec {
+    SceUsbdEndpoint *endpoint;
+    s32 type; /* 0: control */
+    u32 address;
+    u32 maxPacketSize;
+    SceUsbdDeviceReq *head;
+    SceUsbdDeviceReq *tail;
+} UsbbdEpRec;
+
+/* bus driver state (.data) */
+typedef struct UsbbdState {
+    SceUsbdDriver *drivers; /* started drivers */
+    UsbbdEpRec eps[9];
+    s32 started; /* 0xDC: bus driver started */
+    s32 speed;
+    u32 unkE4;
+    u32 actState; /* 0x100 deactivated, 0x200 activated */
+    u32 cableState; /* 0x10 / 0x20 */
+    u32 connState; /* 1 / 2 */
+    s32 numInterfaces;
+    s32 numEndpoints;
+    void *unkFC;
+    void *unk100;
+    void *unk104;
+    void *unk108;
+    u32 unk10C;
+    u32 unk110;
+    u32 unk114;
+    u32 unk118;
+    u32 unk11C;
+    u32 unk120;
+    u32 unk124;
+    u32 unk128;
+    u32 unk12C;
+    SceUsbdDeviceRequest setup; /* 0x130 */
+    SceUsbdEndpoint ep0; /* 0x138 */
+    SceUsbdDeviceReq ep0Req; /* 0x144 */
+    SceUID sema; /* 0x16C */
+    SceUID eventFlag;
+    u32 unk174;
+    u32 unk178;
+    u32 unk17C;
+    u32 unk180;
+    s32 (*start)(s32, void *);
+    s32 (*stop)(s32, void *);
+} UsbbdState;
+typedef char chk_UsbbdState[(sizeof(UsbbdState) == 0x18C) ? 1 : -1];
+
+/* per hardware endpoint (g_usbbdHw.eps) */
+typedef struct UsbbdHwEp {
+    UsbbdEpRec *rec;
+    u32 maxPacketSize;
+    u32 flags;
+    u32 unkC;
+    u32 unk10;
+    u32 unk14;
+    u32 unk18;
+    u32 unk1C;
+    u32 unk20;
+} UsbbdHwEp;
+
+/* bus driver hardware state (.bss) */
+typedef struct UsbbdHw {
+    UsbbdHwEp eps[15];
+    SceUsbdDeviceRequest setup; /* 0x21C */
+    SceUID fpl;
+    u32 unk228;
+    u32 *unk22C;
+} UsbbdHw;
+typedef char chk_UsbbdHw[(sizeof(UsbbdHw) == 0x230) ? 1 : -1];
+
 struct Unk_func_00008318_0 {
     u8 pad0[0x40];
     struct Unk_func_00008318_temp_a0 *unk40;
@@ -21,21 +148,20 @@ struct Unk_func_00008318_temp_a0 {
 
 extern s32 D_000094F0;
 extern s32 D_00009554;
+extern char D_00009608[];
+extern char D_00009A20[];
 extern M2C_UNK D_00009A3C;
+extern char D_00009D20[];
 extern void *D_00009FC8;
 extern s32 D_0000A034;
 extern s32 D_0000A038;
-extern s32 D_0000A9DC;
-extern s32 D_0000A9EC;
-extern s32 D_0000AA0C;
+extern char D_0000A174[];
 extern s32 D_0000AA3C;
 extern s32 D_0000AA4C;
 extern s32 D_0000AA6C;
 extern s32 D_0000AD2C;
 extern s32 D_0000AD4C;
 extern s32 D_0000AD8C;
-extern s32 D_0000AE40_v100;
-extern s32 D_0000AE80;
 extern s32 D_0000AFB0;
 extern s32 D_0000AFF0;
 extern M2C_UNK D_0000B014;
@@ -47,12 +173,16 @@ extern s32 D_0000B444;
 extern s32 D_0000B448;
 extern s32 D_0000B44C;
 extern s32 D_0000B450;
+extern UsbbdState g_usbbd;
+extern UsbbdHw g_usbbdHw;
+extern SceUsbdDriver *g_usbbdRegistered;
 
-M2C_UNK Kprintf(M2C_UNK *, s32);
+s32 Kprintf(const char *fmt, ...);
 s32 func_00000090(s32, s32);
 s32 func_00002E4C(s32, s32, s32, s32);
 s32 func_00002F64(s32, s32, s32, s32);
 void func_00003198(void);
+u32 func_00005084(void *common);
 void func_0000581C(void);
 s32 func_00005A70(void);
 s32 func_00005AF0(void);

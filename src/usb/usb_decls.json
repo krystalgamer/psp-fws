@@ -1,10 +1,11 @@
 {
  "funcs": {
-  "Kprintf": "M2C_UNK Kprintf(M2C_UNK *, s32);",
+  "Kprintf": "s32 Kprintf(const char *fmt, ...);",
   "func_00000090": "s32 func_00000090(s32, s32);",
   "func_00002E4C": "s32 func_00002E4C(s32, s32, s32, s32);",
   "func_00002F64": "s32 func_00002F64(s32, s32, s32, s32);",
   "func_00003198": "void func_00003198(void);",
+  "func_00005084": "u32 func_00005084(void *common);",
   "func_0000581C": "void func_0000581C(void);",
   "func_00005A70": "s32 func_00005A70(void);",
   "func_00005AF0": "s32 func_00005AF0(void);",
@@ -73,6 +74,7 @@
   "sceUsbWaitStateCB": "s32 sceUsbWaitStateCB(u32 arg0, s32 arg1, void *arg2);"
  },
  "types": {
+  "00_usbbd": "typedef struct SceUsbdDeviceRequest {\n    u8 bmRequestType;\n    u8 bRequest;\n    u16 wValue;\n    u16 wIndex;\n    u16 wLength;\n} SceUsbdDeviceRequest;\n\ntypedef struct SceUsbdEndpoint {\n    s32 endpointNumber;\n    s32 busEndpointNumber; /* filled in by the bus driver */\n    s32 transmittedBytes;\n} SceUsbdEndpoint;\n\ntypedef struct SceUsbdInterface {\n    s32 expectNumber; /* < 0: any */\n    s32 unk4;\n    s32 numInterfaces;\n} SceUsbdInterface;\n\ntypedef struct SceUsbdDriver {\n    const char *name;\n    s32 numEndpoints;\n    SceUsbdEndpoint *endpoints;\n    SceUsbdInterface *interface;\n    void *descriptorHi;\n    void *configHi;\n    void *descriptor;\n    void *config;\n    void *stringDescriptor;\n    s32 (*processRequest)(s32, s32, SceUsbdDeviceRequest *);\n    s32 (*chFunc)(s32, s32, s32);\n    s32 (*attach)(s32, void *, void *);\n    s32 (*detach)(s32, s32, s32);\n    s32 unk34;\n    s32 (*start)(s32, void *);\n    s32 (*stop)(s32, void *);\n    struct SceUsbdDriver *link;\n} SceUsbdDriver;\ntypedef char chk_SceUsbdDriver[(sizeof(SceUsbdDriver) == 0x44) ? 1 : -1];\n\ntypedef struct SceUsbdDeviceReq {\n    SceUsbdEndpoint *endpoint;\n    void *data;\n    s32 size;\n    s32 isControlRequest;\n    void (*onComplete)(struct SceUsbdDeviceReq *);\n    s32 transmittedBytes;\n    s32 returnCode;\n    struct SceUsbdDeviceReq *next;\n    void *unpackedArg;\n    u32 physicalAddr; /* bus driver: (data & 0x1FFFFFFF) | user << 30 */\n} SceUsbdDeviceReq;\ntypedef char chk_SceUsbdDeviceReq[(sizeof(SceUsbdDeviceReq) == 0x28) ? 1 : -1];\n\n/* per bus endpoint (g_usbbd.eps) */\ntypedef struct UsbbdEpRec {\n    SceUsbdEndpoint *endpoint;\n    s32 type; /* 0: control */\n    u32 address;\n    u32 maxPacketSize;\n    SceUsbdDeviceReq *head;\n    SceUsbdDeviceReq *tail;\n} UsbbdEpRec;\n\n/* bus driver state (.data) */\ntypedef struct UsbbdState {\n    SceUsbdDriver *drivers; /* started drivers */\n    UsbbdEpRec eps[9];\n    s32 started; /* 0xDC: bus driver started */\n    s32 speed;\n    u32 unkE4;\n    u32 actState; /* 0x100 deactivated, 0x200 activated */\n    u32 cableState; /* 0x10 / 0x20 */\n    u32 connState; /* 1 / 2 */\n    s32 numInterfaces;\n    s32 numEndpoints;\n    void *unkFC;\n    void *unk100;\n    void *unk104;\n    void *unk108;\n    u32 unk10C;\n    u32 unk110;\n    u32 unk114;\n    u32 unk118;\n    u32 unk11C;\n    u32 unk120;\n    u32 unk124;\n    u32 unk128;\n    u32 unk12C;\n    SceUsbdDeviceRequest setup; /* 0x130 */\n    SceUsbdEndpoint ep0; /* 0x138 */\n    SceUsbdDeviceReq ep0Req; /* 0x144 */\n    SceUID sema; /* 0x16C */\n    SceUID eventFlag;\n    u32 unk174;\n    u32 unk178;\n    u32 unk17C;\n    u32 unk180;\n    s32 (*start)(s32, void *);\n    s32 (*stop)(s32, void *);\n} UsbbdState;\ntypedef char chk_UsbbdState[(sizeof(UsbbdState) == 0x18C) ? 1 : -1];\n\n/* per hardware endpoint (g_usbbdHw.eps) */\ntypedef struct UsbbdHwEp {\n    UsbbdEpRec *rec;\n    u32 maxPacketSize;\n    u32 flags;\n    u32 unkC;\n    u32 unk10;\n    u32 unk14;\n    u32 unk18;\n    u32 unk1C;\n    u32 unk20;\n} UsbbdHwEp;\n\n/* bus driver hardware state (.bss) */\ntypedef struct UsbbdHw {\n    UsbbdHwEp eps[15];\n    SceUsbdDeviceRequest setup; /* 0x21C */\n    SceUID fpl;\n    u32 unk228;\n    u32 *unk22C;\n} UsbbdHw;\ntypedef char chk_UsbbdHw[(sizeof(UsbbdHw) == 0x230) ? 1 : -1];",
   "Unk_func_00008318_0": "struct Unk_func_00008318_0 {\n    u8 pad0[0x40];\n    struct Unk_func_00008318_temp_a0 *unk40;\n};",
   "Unk_func_00008318_1": "struct Unk_func_00008318_1 {\n    u8 pad0[0x40];\n    s32 unk40;\n};",
   "Unk_func_00008318_temp_a0": "struct Unk_func_00008318_temp_a0 {\n    u8 pad0[0x40];\n    void *unk40;\n};"
@@ -80,21 +82,20 @@
  "vars": {
   "D_000094F0": "extern s32 D_000094F0;",
   "D_00009554": "extern s32 D_00009554;",
+  "D_00009608": "extern char D_00009608[];",
+  "D_00009A20": "extern char D_00009A20[];",
   "D_00009A3C": "extern M2C_UNK D_00009A3C;",
+  "D_00009D20": "extern char D_00009D20[];",
   "D_00009FC8": "extern void *D_00009FC8;",
   "D_0000A034": "extern s32 D_0000A034;",
   "D_0000A038": "extern s32 D_0000A038;",
-  "D_0000A9DC": "extern s32 D_0000A9DC;",
-  "D_0000A9EC": "extern s32 D_0000A9EC;",
-  "D_0000AA0C": "extern s32 D_0000AA0C;",
+  "D_0000A174": "extern char D_0000A174[];",
   "D_0000AA3C": "extern s32 D_0000AA3C;",
   "D_0000AA4C": "extern s32 D_0000AA4C;",
   "D_0000AA6C": "extern s32 D_0000AA6C;",
   "D_0000AD2C": "extern s32 D_0000AD2C;",
   "D_0000AD4C": "extern s32 D_0000AD4C;",
   "D_0000AD8C": "extern s32 D_0000AD8C;",
-  "D_0000AE40_v100": "extern s32 D_0000AE40_v100;",
-  "D_0000AE80": "extern s32 D_0000AE80;",
   "D_0000AFB0": "extern s32 D_0000AFB0;",
   "D_0000AFF0": "extern s32 D_0000AFF0;",
   "D_0000B014": "extern M2C_UNK D_0000B014;",
@@ -105,6 +106,9 @@
   "D_0000B444": "extern s32 D_0000B444;",
   "D_0000B448": "extern s32 D_0000B448;",
   "D_0000B44C": "extern s32 D_0000B44C;",
-  "D_0000B450": "extern s32 D_0000B450;"
+  "D_0000B450": "extern s32 D_0000B450;",
+  "g_usbbd": "extern UsbbdState g_usbbd;",
+  "g_usbbdHw": "extern UsbbdHw g_usbbdHw;",
+  "g_usbbdRegistered": "extern SceUsbdDriver *g_usbbdRegistered;"
  }
 }

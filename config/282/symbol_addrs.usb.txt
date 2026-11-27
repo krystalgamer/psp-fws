@@ -85,3 +85,5 @@ sceSysregUsbIoEnable = 0x00008F18; // type:func
 sceSysregUsbBusClockDisable = 0x00008F20; // type:func
 sceSysregUsbResetEnable = 0x00008F28; // type:func
 sceSysregGetTachyonVersion = 0x00008F30; // type:func
+g_usbbd = 0x0000AE40; // rom:0xAEC0
+g_usbbdHw = 0x0000B080;
