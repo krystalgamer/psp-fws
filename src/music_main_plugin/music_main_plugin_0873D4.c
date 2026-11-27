@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
@@ -141,12 +142,12 @@ s32 func_000877F0(struct Unk_func_000877F0_0 *arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000877F8);
 
 void func_00087800(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00087424(arg0, arg1, arg2);
+    func_00087424((Unk_func_00087424_0*) arg0, arg1, arg2);
     *arg0 = &D_000A20F8;
 }
 
 void func_00087830(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00087424(arg0, arg1, arg2);
+    func_00087424((Unk_func_00087424_0*) arg0, arg1, arg2);
     *arg0 = &D_000A20F8;
 }
 

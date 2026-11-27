@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
@@ -390,7 +391,7 @@ s32 func_00022828(struct Unk_func_00022828_0 *arg0, struct Unk_func_00022828_1 *
         if (temp_v0 >= 0) {
             temp_v0_2 = func_00022280(arg0, temp_v0 + 0xA, 0);
             var_v1 = temp_v0_2;
-            temp_a1 = (u8 *)arg1 + 0xC;
+            temp_a1 = (Unk_func_00022828_temp_a1*) ((u8 *)arg1 + 0xC);
             if (temp_v0_2 >= 0) {
                 temp_s0 = (((((temp_a1->unk4 << 8) | temp_a1->unk5) << 8) | temp_a1->unk6) << 8) | temp_a1->unk7;
                 var_v1 = 0x8000FFFF;

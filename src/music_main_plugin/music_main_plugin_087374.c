@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O1 */
 #include "common.h"
 #include "music_main_plugin_decls.h"
