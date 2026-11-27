@@ -3012,16 +3012,79 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000B120);
 INCLUDE_ASM("nonmatchings/wlan", func_0000B194);
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/wlan", func_00009500);
+s32 func_00009500(SceWlanBus *bus, s32 ms) {
+    u32 timeout = ms * 1000;
+    u32 bits;
+    s32 intr;
+    u32 st;
+    s32 ret;
+
+    intr = sceKernelCpuSuspendIntr();
+    st = *bus->statusReg;
+    sceKernelCpuResumeIntrWithSync(intr);
+    if ((st & 0x1000) == 0) {
+        ret = sceKernelWaitEventFlag(bus->evf, 2, 1, &bits, (timeout != 0) ? &timeout : NULL);
+        sceKernelClearEventFlag(bus->evf, ~2);
+        if (ret == 0x800201A8)
+            return -1;
+        intr = sceKernelCpuSuspendIntr();
+        st = *bus->statusReg;
+        sceKernelCpuResumeIntrWithSync(intr);
+    }
+    if (st & 0x200)
+        return -2;
+    return ((st & 0x100) == 0) ? 0 : -1;
+}
 #else
 void func_0000B24C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     func_000161A4(arg0, arg1, arg2, arg3, arg4);
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/wlan", func_0000B268);
+s32 func_0000B268(SceWlanMac *mac) {
+    u8 v;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/wlan", func_0000B30C);
+    for (;;) {
+        ret = func_000091D4(&mac->bus, &v);
+        if (ret < 0)
+            return -3;
+        if (v == 0x80)
+            break;
+        if (v == 0xC0)
+            return -1;
+        if (v == 0xC1)
+            return -2;
+    }
+    v = 0;
+    if (func_000090E8(mac, 0x24, &v) != 0)
+        return -3;
+    return 0;
+}
+
+s32 func_0000B30C(SceWlanMac *mac, s32 bit) {
+    u8 mask = 1 << bit;
+    u8 v;
+    s32 ret = -1;
+    s32 i;
+
+    if (func_000090E8(mac, 0x25, &v) < 0)
+        goto end;
+    v |= mask;
+    if (func_00009160(mac, 0x25, &v) < 0)
+        goto end;
+    for (i = 0; i < 0x100; i++) {
+        if (func_000090E8(mac, 0x25, &v) < 0)
+            break;
+        if (v & mask) {
+            ret = 0;
+            break;
+        }
+        sceKernelDelayThread(10000);
+    }
+end:
+    return ret;
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 s32 func_0000A4C8(s32 arg0, void *arg1, s32 arg2) {
@@ -3231,7 +3294,29 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000E088);
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000E180);
 
+#if FW_VERSION < 201
+s32 func_0000E2CC(SceWlanMac *m, u8 *f) {
+    SceWlanMlmeMsg *msg = func_0000840C(m->sc, sizeof(SceWlanMlmeMsg));
+    u8 c;
+
+    memset(msg, 0, sizeof(SceWlanMlmeMsg));
+    if (((f[9] << 8) | f[8]) == 0)
+        msg->cmd = 0x10C;
+    else
+        msg->cmd = 0x10B;
+    c = f[0xA];
+    if (c & 4)
+        msg->arg = 0;
+    else if (c & 2)
+        msg->arg = 1;
+    else
+        msg->arg = 2;
+    sceKernelSendMbx(m->mbx, msg);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/wlan", func_0000E2CC);
+#endif
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000E378);
 

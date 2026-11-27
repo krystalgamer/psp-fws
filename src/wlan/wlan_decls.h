@@ -28,7 +28,8 @@ typedef struct SceWlanMlmeMsg {
     u8 pad5[3];
     u32 cmd;                        /* 0x08 */
     s32 status;                     /* 0x0C */
-    u8 data[0xC4 - 0x10];
+    u32 arg;                        /* 0x10 */
+    u8 data[0xC4 - 0x14];
 } SceWlanMlmeMsg;
 
 /* singly linked FIFO protected by suspendIntr (next pointer at +8) */
@@ -563,7 +564,7 @@ s32 func_00008FB4(void);
 s32 func_000090E8(struct Unk_func_000090E8_0 *arg0, s32 arg1, s8 *arg2);
 s32 func_00009160(struct Unk_func_00009160_0 *arg0, s32 arg1, u8 *arg2);
 s32 func_000091D4(s32, s32);
-s32 func_00009500(s32, s32);
+s32 func_00009500(SceWlanBus *bus, s32 ms);
 s32 func_00009810(void);
 s32 func_00009FA8(SceWlanMac *mac, s32 cmd, u16 len, void *buf);
 s32 func_0000A4C8(s32 arg0, void *arg1, s32 arg2);
