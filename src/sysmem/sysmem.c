@@ -264,7 +264,7 @@ INCLUDE_ASM("nonmatchings/sysmem", func_00000E18_v150);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/sysmem", func_00000EA0);
 
-INCLUDE_ASM("nonmatchings/sysmem", func_00000FBC);
+INCLUDE_ASM("nonmatchings/sysmem", MpidToCB);
 #endif
 
 #if FW_VERSION == 100
@@ -1122,7 +1122,7 @@ void func_000054E4(u8 *arg0, u8 *arg1) {
 
 INCLUDE_ASM("nonmatchings/sysmem", wmemclear);
 
-void func_00005530(u8 *arg0, u8 *arg1, u32 arg2) {
+void uidStrncpy(u8 *arg0, u8 *arg1, u32 arg2) {
     u32 var_a4;
     u8 *var_a0;
     u8 *var_a1;
@@ -1145,7 +1145,7 @@ void func_00005530(u8 *arg0, u8 *arg1, u32 arg2) {
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00005574);
 
-INCLUDE_ASM("nonmatchings/sysmem", func_000055A8);
+INCLUDE_ASM("nonmatchings/sysmem", uidStrnlen);
 
 INCLUDE_ASM("nonmatchings/sysmem", func_000055F0);
 
@@ -1638,16 +1638,16 @@ s32 FreeSceUIDobjectCB(void *arg0) {
 
 #if FW_VERSION == 100
 char *AllocSceUIDnamestr(const char *str1, const char *str2) {
-    u32 len1 = func_00004F68(str1, 31);
-    u32 len2 = func_00004F68(str2, 31);
+    u32 len1 = uidStrnlen(str1, 31);
+    u32 len2 = uidStrnlen(str2, 31);
     char *buf;
     if (len1 + len2 >= 32) {
         return NULL;
     }
     buf = _AllocHeapMemory(&EHeap4UID, len1 + len2 + 1, 0);
     if (buf != NULL) {
-        func_00004F24(buf, str1, len1);
-        func_00004F24(buf + len1, str2, len2);
+        uidStrncpy(buf, str1, len1);
+        uidStrncpy(buf + len1, str2, len2);
         buf[len1 + len2] = '\0';
     }
     return buf;
@@ -1697,7 +1697,7 @@ void wmemclear(void *dst, u32 size) {
     }
 }
 
-void func_00004F24(u8 *arg0, u8 *arg1, u32 arg2) {
+void uidStrncpy(u8 *arg0, u8 *arg1, u32 arg2) {
     u32 var_a4;
     u8 *var_a0;
     u8 *var_a1;
@@ -1718,7 +1718,7 @@ void func_00004F24(u8 *arg0, u8 *arg1, u32 arg2) {
     }
 }
 
-s32 func_00004F68(const char *s, s32 max) {
+s32 uidStrnlen(const char *s, s32 max) {
     s32 n;
     for (n = 0; *s++ != '\0' && n < max; n++) {
     }
@@ -1891,9 +1891,9 @@ INCLUDE_ASM("nonmatchings/sysmem", sceKernelSearchUIDbyName);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/sysmem", func_00006B10);
+INCLUDE_ASM("nonmatchings/sysmem", search_UidType_By_Name);
 
-INCLUDE_ASM("nonmatchings/sysmem", func_00006B90);
+INCLUDE_ASM("nonmatchings/sysmem", search_UIDObj_By_Name_With_Type);
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00006C10);
 

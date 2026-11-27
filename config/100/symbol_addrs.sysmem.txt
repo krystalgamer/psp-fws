@@ -163,3 +163,5 @@ g_MemInfo_memAddr = 0x0000CA54;
 g_MemInfo_memSize = 0x0000CA58;
 g_MemInfo_partList = 0x0000CA5C;
 _memset32 = 0x00001998; // type:func
+uidStrnlen = 0x00004F68; // type:func
+uidStrncpy = 0x00004F24; // type:func

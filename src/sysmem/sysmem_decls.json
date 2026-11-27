@@ -58,11 +58,8 @@
   "func_0000435C": "s32 func_0000435C(void *lowheap);",
   "func_000048E0": "s32 func_000048E0(void *arg0);",
   "func_00004A60": "s32 func_00004A60(struct Unk_func_00004A60_0 *arg0);",
-  "func_00004F24": "void func_00004F24(u8 *arg0, u8 *arg1, u32 arg2);",
-  "func_00004F68": "s32 func_00004F68(const char *s, s32 max);",
   "func_00005430": "void func_00005430(u8 *arg0, u8 *arg1);",
   "func_000054E4": "void func_000054E4(u8 *arg0, u8 *arg1);",
-  "func_00005530": "void func_00005530(u8 *arg0, u8 *arg1, u32 arg2);",
   "func_00005850": "void func_00005850(void);",
   "func_00005DBC": "s32 func_00005DBC(const char *s1, const char *s2);",
   "func_00006080": "void func_00006080(u8 *arg0, u8 *arg1);",
@@ -185,6 +182,8 @@
   "search_UidType_By_Name": "SceSysmemUidCB *search_UidType_By_Name(const char *name);",
   "strcpy": "u8 *strcpy(u8 *arg0, u8 *arg1);",
   "suspendIntr": "s32 suspendIntr(void);",
+  "uidStrncpy": "void uidStrncpy(u8 *arg0, u8 *arg1, u32 arg2);",
+  "uidStrnlen": "s32 uidStrnlen(const char *s, s32 max);",
   "wmemclear": "void wmemclear(void *dst, u32 size);"
  },
  "types": {

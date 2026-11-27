@@ -329,11 +329,8 @@ void func_00004238(s32 arg0, s32 arg1);
 s32 func_0000435C(void *lowheap);
 s32 func_000048E0(void *arg0);
 s32 func_00004A60(struct Unk_func_00004A60_0 *arg0);
-void func_00004F24(u8 *arg0, u8 *arg1, u32 arg2);
-s32 func_00004F68(const char *s, s32 max);
 void func_00005430(u8 *arg0, u8 *arg1);
 void func_000054E4(u8 *arg0, u8 *arg1);
-void func_00005530(u8 *arg0, u8 *arg1, u32 arg2);
 void func_00005850(void);
 s32 func_00005DBC(const char *s1, const char *s2);
 void func_00006080(u8 *arg0, u8 *arg1);
@@ -456,6 +453,8 @@ SceSysmemUidCB *search_UIDObj_By_Name_With_Type(const char *name, SceSysmemUidCB
 SceSysmemUidCB *search_UidType_By_Name(const char *name);
 u8 *strcpy(u8 *arg0, u8 *arg1);
 s32 suspendIntr(void);
+void uidStrncpy(u8 *arg0, u8 *arg1, u32 arg2);
+s32 uidStrnlen(const char *s, s32 max);
 void wmemclear(void *dst, u32 size);
 
 #endif
