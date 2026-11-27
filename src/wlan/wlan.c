@@ -2615,11 +2615,11 @@ s32 func_0000AF1C(struct Unk_func_0000AF1C_0 *arg0, s32 arg1, u16 *arg2) {
 s32 func_0000AF9C(SceWlanMac *mac, s32 a, u16 *p) {
     s32 ret;
 
-    sceKernelWaitSema(mac->cmdSema, 1, NULL);
-    ret = func_0000BE8C(&mac->cmdSema, a, (s16)__builtin_allegrex_wsbh(*p), 2);
+    sceKernelWaitSema(mac->bus.sema, 1, NULL);
+    ret = func_0000BE8C(&mac->bus, a, (s16)__builtin_allegrex_wsbh(*p), 2);
     if (ret < 0)
         ret = -1;
-    sceKernelSignalSema(mac->cmdSema, 1);
+    sceKernelSignalSema(mac->bus.sema, 1);
     return ret;
 }
 

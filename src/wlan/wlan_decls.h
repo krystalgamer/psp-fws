@@ -32,10 +32,13 @@ typedef struct SceWlanMlmeMsg {
 } SceWlanMlmeMsg;
 
 /* singly linked FIFO protected by suspendIntr (next pointer at +8) */
+/* packet buffer: pool entry (circular list) and FIFO element (next pointer at +8) */
 typedef struct SceWlanQEnt {
-    u32 unk0;
-    u32 unk4;
-    struct SceWlanQEnt *next;   /* 0x08 */
+    u32 inUse;                  /* 0x00 */
+    struct SceWlanQEnt *link;   /* 0x04 pool ring */
+    struct SceWlanQEnt *next;   /* 0x08 FIFO */
+    u32 unkC;
+    void *buf;                  /* 0x10 */
 } SceWlanQEnt;
 typedef struct {
     SceWlanQEnt *head;          /* 0x00 */
@@ -54,6 +57,22 @@ typedef struct {
     u8 unk18[4];                /* 0x18 */
 } SceWlanGPParam;
 
+/* memory-stick-style host interface of the chip (SceWlanMac.bus) */
+typedef struct {
+    SceUID sema;                /* 0x00 command lock */
+    SceUID evf;                 /* 0x04 */
+    u32 base;                   /* 0x08 controller base, 0xBD300000 = MSIF0 */
+    u32 unkC;
+    u32 unk10;
+    u32 unk14;
+    volatile u32 *reg;          /* 0x18 */
+    u8 unk1C[0x30 - 0x1C];
+} SceWlanBus;
+
+typedef struct {
+    u32 w[10];
+} SceWlanWakeUp;
+
 typedef struct SceWlanSoftc SceWlanSoftc;
 typedef struct SceWlanMac SceWlanMac;
 
@@ -63,7 +82,7 @@ struct SceWlanMac {
     u32 status;                 /* 0x000 bit 0: powered */
     u32 unk4;
     u32 flags;                  /* 0x008 */
-    SceUID cmdSema;             /* 0x00C */
+    SceWlanBus bus;             /* 0x00C */
 };
 #else
 typedef struct {
@@ -86,21 +105,25 @@ typedef struct {
 struct SceWlanMac {
     u32 status;                 /* 0x000 bit 0: powered */
     u32 unk4;
-    u32 flags;                  /* 0x008 bit 0x20: ... */
-    SceUID cmdSema;             /* 0x00C start of the chip command interface */
-    u8 unk010[0x7C - 0x10];
+    u32 flags;                  /* 0x008 bit 0: clock on, bit 0x20: ... */
+    SceWlanBus bus;             /* 0x00C */
+    u8 unk03C[0x3E];            /* 0x03C */
+    u8 unk07A[2];
 #if FW_VERSION >= 150
     u8 unk_v150[0x3C];
 #endif
-    SceWlanMlmeSync *sync;      /* 0x07C */
-    u8 unk080[0x98 - 0x80];
+    SceWlanMlmeSync *sync;      /* 0x07C mode data */
+    void (*modeStop)(SceWlanMac *);  /* 0x080 */
+    u32 unk84[5];               /* 0x084 */
     s32 (*gpSend)(SceWlanMac *, s32, void *, u32);              /* 0x098 */
     s32 (*gpRecv)(SceWlanMac *, s32, void *, u32, s32 *);       /* 0x09C */
-    u8 unk0A0[4];
+    u32 unkA0;
     s32 (*prevEstablish)(SceWlanMac *, void *);  /* 0x0A4 */
     s32 dmaOp;                  /* 0x0A8 */
     void *dmaBuf;               /* 0x0AC */
-    u8 unk0B0[0xBC - 0xB0];
+    u32 unkB0;                  /* 0x0B0 */
+    SceUID thread;              /* 0x0B4 */
+    u8 unk0B8[0xBC - 0xB8];
     SceUID mbx;                 /* 0x0BC MLME mailbox */
     SceWlanSoftc *sc;           /* 0x0C0 */
     u8 unk0C4[0xCE - 0xC4];
@@ -157,8 +180,8 @@ struct SceWlanSoftc {
     SceUID poolSema;            /* 0x228 */
     s32 poolStride;             /* 0x22C */
     s32 poolCount;              /* 0x230 */
-    void *pool;                 /* 0x234 */
-    void *poolNext;             /* 0x238 */
+    SceWlanQEnt *pool;          /* 0x234 */
+    SceWlanQEnt *poolNext;      /* 0x238 */
     u8 unk23C[0x260 - 0x23C];
     SceUID thread;              /* 0x260 SceWlanMac */
 #if FW_VERSION >= 150
@@ -173,7 +196,10 @@ struct SceWlanSoftc {
     void *ifh;                  /* 0x27C sceNetIfhandle handle */
     u32 unk280;
     void *ifhCb[4];             /* 0x284 */
-    u8 unk294[0x2BC - 0x294];
+    u8 unk294[0x2A8 - 0x294];
+    SceWlanQueue q2A8;          /* 0x2A8 */
+    SceWlanQueue q2B0;          /* 0x2B0 */
+    u8 unk2B8[4];
     u32 unk2BC;                 /* 0x2BC */
     s32 gpCallback;             /* 0x2C0 */
     s32 switchState;            /* 0x2C4 */
