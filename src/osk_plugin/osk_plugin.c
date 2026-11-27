@@ -2435,11 +2435,11 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_0000503C);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_0000515C);
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 260)
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00006B90);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 152
+#if FW_VERSION < 201
 void func_00006B90(s32 arg0) {
     _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_0000E3FC);
 }
