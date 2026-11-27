@@ -186,7 +186,7 @@ void func_000004D0(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000004DC);
 #else
 void func_000004DC(s32 arg0) {
@@ -821,11 +821,11 @@ s32 func_00001EF8(struct Unk_func_00001EF8_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001F00);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 void func_00001F00(void *arg0, s32 arg1) {
     _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
 }
