@@ -18,6 +18,8 @@ INCLUDE_RODATA("nonmatchings/music_plugin_04DA94", D_0005FA90);
 
 INCLUDE_RODATA("nonmatchings/music_plugin_04DA94", D_00060900);
 
+__asm__(".globl _ZTV14Class_00060900\n_ZTV14Class_00060900 = D_00060900 - 8\n");
+
 INCLUDE_ASM("nonmatchings/music_plugin_04DA94", func_00054030);
 
 INCLUDE_ASM("nonmatchings/music_plugin_04DA94", func_000540A8);
@@ -41,6 +43,8 @@ INCLUDE_ASM("nonmatchings/music_plugin_04DA94", func_000547BC);
 INCLUDE_RODATA("nonmatchings/music_plugin_04DA94", D_000608F0);
 
 INCLUDE_RODATA("nonmatchings/music_plugin_04DA94", D_00060900);
+
+__asm__(".globl _ZTV14Class_00060900\n_ZTV14Class_00060900 = D_00060900 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/music_plugin_04DA94", D_00060928);
 

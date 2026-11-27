@@ -3439,7 +3439,7 @@ void func_000191B4(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_000191B4(M2C_UNK **arg0) {
+void func_000191B4(s32 **arg0) {
     *arg0 = &D_0005CE78;
 }
 #endif
@@ -3625,53 +3625,8 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00019C18);
 INCLUDE_ASM("nonmatchings/music_plugin", func_00019C8C);
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_00019D84);
-#endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 260)
-INCLUDE_ASM("nonmatchings/music_plugin", func_00019DBC);
-#endif
-
-#if FW_VERSION < 150
-void func_00019DBC(s32 **arg0) {
-    *arg0 = &D_0005CF08;
-    func_0002C7F0((s32) arg0);
-}
-#endif
-
-#if FW_VERSION == 152
-void func_00019DBC(M2C_UNK **arg0) {
-    *arg0 = &D_0005CF08;
-    func_0002C7F0((s32) arg0);
-}
-#endif
-
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 260)
-INCLUDE_ASM("nonmatchings/music_plugin", func_00019DE4);
-#endif
-
-#if FW_VERSION < 150
-void func_00019DE4(s32 **arg0) {
-    *arg0 = &D_0005CF08;
-    func_0002C7F0((s32) arg0);
-}
-#endif
-
-#if FW_VERSION == 152
-void func_00019DE4(M2C_UNK **arg0) {
-    *arg0 = &D_0005CF08;
-    func_0002C7F0((s32) arg0);
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/music_plugin", func_00019E0C);
-#endif
-
-#if FW_VERSION < 150
-void func_00019E0C(s32 **arg0) {
-    *arg0 = &D_0005CF08;
-    func_0002C7F0((s32) arg0);
-    _ZdlPv(arg0);
+Class_0005CF08::~Class_0005CF08() {
 }
 #endif
 
@@ -3787,11 +3742,11 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00009364);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001A048);
+INCLUDE_ASM("nonmatchings/music_plugin", _ZN14Class_0005CF20D2Ev);
 
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001A090);
+INCLUDE_ASM("nonmatchings/music_plugin", _ZN14Class_0005CF20D1Ev);
 
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001A0D8);
+INCLUDE_ASM("nonmatchings/music_plugin", _ZN14Class_0005CF20D0Ev);
 #endif
 
 #if FW_VERSION < 250
@@ -3854,11 +3809,11 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_0001A23C);
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001A294);
 
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001A2EC);
+INCLUDE_ASM("nonmatchings/music_plugin", _ZN14Class_0005CF48D2Ev);
 
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001A334);
+INCLUDE_ASM("nonmatchings/music_plugin", _ZN14Class_0005CF48D1Ev);
 
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001A37C);
+INCLUDE_ASM("nonmatchings/music_plugin", _ZN14Class_0005CF48D0Ev);
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001A3CC);
 
@@ -4001,6 +3956,8 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_0001AD94);
 
 #if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0005CF08);
+
+__asm__(".globl _ZTV14Class_0005CF08\n_ZTV14Class_0005CF08 = D_0005CF08 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/music_plugin", D_00084AD0);
 
@@ -4185,7 +4142,7 @@ void func_0001BC1C(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_0001BC1C(M2C_UNK **arg0) {
+void func_0001BC1C(s32 **arg0) {
     *arg0 = &D_00061248;
     func_0001BCE8();
 }
@@ -4204,7 +4161,7 @@ void func_0001BC54(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_0001BC54(M2C_UNK **arg0) {
+void func_0001BC54(s32 **arg0) {
     *arg0 = &D_00061248;
     func_0001BCE8();
 }
@@ -4275,6 +4232,8 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_0001C088);
 
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0005CF08);
+
+__asm__(".globl _ZTV14Class_0005CF08\n_ZTV14Class_0005CF08 = D_0005CF08 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0008BF80);
 
@@ -4527,6 +4486,8 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_0001C7B4);
 
 #if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0005CF08);
+
+__asm__(".globl _ZTV14Class_0005CF08\n_ZTV14Class_0005CF08 = D_0005CF08 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0005CF20);
 
@@ -4990,11 +4951,11 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_0002CBF8);
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_0000EA70);
 
-INCLUDE_ASM("nonmatchings/music_plugin", func_0002CC40);
+INCLUDE_ASM("nonmatchings/music_plugin", _ZN14Class_0005E038D2Ev);
 
-INCLUDE_ASM("nonmatchings/music_plugin", func_0000EACC);
+INCLUDE_ASM("nonmatchings/music_plugin", _ZN14Class_0005E038D1Ev);
 
-INCLUDE_ASM("nonmatchings/music_plugin", func_0000EB04);
+INCLUDE_ASM("nonmatchings/music_plugin", _ZN14Class_0005E038D0Ev);
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_0000EB44);
 
@@ -5020,11 +4981,8 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_0000EECC);
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_0000EF04);
 
-INCLUDE_ASM("nonmatchings/music_plugin", func_0000EF3C);
-
-INCLUDE_ASM("nonmatchings/music_plugin", func_0000EF64);
-
-INCLUDE_ASM("nonmatchings/music_plugin", func_0000EF8C);
+Class_00084CC8::~Class_00084CC8() {
+}
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_0000EFC4);
 
@@ -5063,33 +5021,20 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_0001E0C8);
 
 #if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001FB84);
-
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001E1A8);
-
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001FBCC);
 #endif
 
 #if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001F600);
-
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001E1A8);
-
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001F648);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001F4C0);
+#endif
 
+#if FW_VERSION >= 103 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001E1A8);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/music_plugin", func_0001F508);
-#endif
-
-#if FW_VERSION == 152
-void func_0001F508(M2C_UNK **arg0) {
-    *arg0 = &D_0005D138;
+Class_0005D138::~Class_0005D138() {
 }
 #endif
 
@@ -5099,19 +5044,9 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_0001E12C);
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001E1A8);
 
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001E224);
-#endif
 
-#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 260)
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001E274);
-#endif
 
-#if FW_VERSION == 152
-void func_0001E274(M2C_UNK **arg0) {
-    *arg0 = &D_0005D138;
-}
-#endif
-
-#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001E2C4);
 #endif
 
@@ -5500,6 +5435,8 @@ INCLUDE_RODATA("nonmatchings/music_plugin", D_00084CA8);
 
 INCLUDE_RODATA("nonmatchings/music_plugin", D_00084CC8);
 
+__asm__(".globl _ZTV14Class_00084CC8\n_ZTV14Class_00084CC8 = D_00084CC8 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/music_plugin", D_00084CE8);
 #endif
 
@@ -5551,6 +5488,10 @@ INCLUDE_RODATA("nonmatchings/music_plugin", D_00061254);
 
 #if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0005D138);
+#endif
+
+#if FW_VERSION >= 103 && FW_VERSION < 260
+__asm__(".globl _ZTV14Class_0005D138\n_ZTV14Class_0005D138 = D_0005D138 - 8\n");
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
