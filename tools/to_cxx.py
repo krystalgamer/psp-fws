@@ -350,9 +350,41 @@ def fix_ptr_int_compare(lines, idx, msg):
                 if dm:
                     lines[k] = f"{dm[1]}s32 {name};"
                     return True
-        lines[idx] = lines[idx][:m.start()] + f"(s32) {name}" + lines[idx][m.start() + len(name):]
-        return True
-    return False
+    # general `A == B` / `A != B` (sign doesn't matter): compare both as s32
+    line = lines[idx]
+    done = False
+    for m in reversed(list(re.finditer(r"\s(==|!=)\s", line))):
+        lo = _operand(line, m.start(), -1)
+        hi = _operand(line, m.end(), 1)
+        if lo is None or hi is None:
+            continue
+        l, r = line[lo:m.start()].strip(), line[m.end():hi].strip()
+        if l.startswith("(s32)") or r.startswith("(s32)"):
+            continue
+        # every ==/!= on the line (we don't know which one is pointer vs int; s32 casts are neutral)
+        line = line[:lo] + f"(s32) {_paren(l)} {m[1]} (s32) {_paren(r)}" + line[hi:]
+        done = True
+    lines[idx] = line
+    return done
+
+
+def _operand(line, i, step):
+    """Span end of the operand next to a binary operator at i (scan direction step)."""
+    depth, j = 0, (i - 1 if step < 0 else i)
+    while 0 <= j < len(line):
+        c = line[j]
+        if c in ("(" if step > 0 else ")"):
+            depth += 1
+        elif c in (")" if step > 0 else "("):
+            if depth == 0:
+                break
+            depth -= 1
+        elif depth == 0 and (line.startswith("&&", j - (1 if step < 0 else 0)) or line.startswith("||", j - (1 if step < 0 else 0)) or c in ",;?:"):
+            break
+        j += step
+    if step < 0:
+        return j + 1
+    return j
 
 
 def fix_convert_return(lines, idx, msg):
