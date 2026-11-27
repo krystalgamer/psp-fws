@@ -78,6 +78,7 @@ if __name__ == "__main__":
         print("-D__cplusplus=1" if is_cxx(text) else "")
     else:
         c, f = setting(text, sys.argv[2], p.parent.name)
-        # SCE's C++ was built without exceptions (.eh_frame holds only crt's terminator);
+        # SCE's C++ was built without exceptions (.eh_frame holds only crt's terminator) and RTTI (vtables
+        # have a 0 typeinfo slot);
         # -fpermissive only relaxes diagnostics for the decompiled C-style code
-        print(("cc1plus-" if is_cxx(text) else "cc1-") + c, f + (" -fno-exceptions -fpermissive" if is_cxx(text) else ""))
+        print(("cc1plus-" if is_cxx(text) else "cc1-") + c, f + (" -fno-exceptions -fno-rtti -fpermissive" if is_cxx(text) else ""))

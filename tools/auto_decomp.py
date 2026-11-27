@@ -194,7 +194,7 @@ def compile_words(c_text, compiler="1.7.1", opt="-O2"):
         if pre.returncode:
             return None, pre.stderr
         c.write_text(pre.stdout)
-        cc, extra = (f"cc1plus-{compiler}", ["-fno-exceptions", "-fpermissive"]) if cxx else (f"cc1-{compiler}", [])
+        cc, extra = (f"cc1plus-{compiler}", ["-fno-exceptions", "-fno-rtti", "-fpermissive"]) if cxx else (f"cc1-{compiler}", [])
         r = subprocess.run([str(TOOLS / cc), *opt.split(), *extra, "-G0", "-quiet", str(c), "-o", str(s)],
                            capture_output=True, text=True)
         if r.returncode or "warning: implicit" in r.stderr:

@@ -123,6 +123,11 @@ def fix_ld_script(ld_path: Path, config_path: Path):
     # script places them right after the same object's .rodata.
     text = re.sub(r"^(\s*)(\S+\.c\.o)\(\.rodata\);\n",
                   r"\1\2(.rodata);\n\1\2(.rodata.cst4);\n\1\2(.rodata.cst8);\n", text, flags=re.M)
+    # C++ template instances and vtables are COMDAT (.gnu.linkonce.*) sections, which gcc 3.3 emits after
+    # the object's own section; take them with it (the default /DISCARD/ would silently drop them).
+    text = re.sub(r"^(\s*\S+\.c\.o)\(\.text\);", r"\1(.text .gnu.linkonce.t.*);", text, flags=re.M)
+    text = re.sub(r"^(\s*\S+\.c\.o)\(\.rodata\);", r"\1(.rodata .gnu.linkonce.r.*);", text, flags=re.M)
+    text = re.sub(r"^(\s*\S+\.c\.o)\(\.data\);", r"\1(.data .gnu.linkonce.d.*);", text, flags=re.M)
     # PRX parts are packed at their real file offsets (gaps are prxpad).
     text = re.sub(r"^\s*__romPos = ALIGN\(__romPos, \d+\);\n", "", text, flags=re.M)
     ld_path.write_text(text)
