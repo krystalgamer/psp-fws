@@ -497,7 +497,7 @@ void func_00005C58(struct ifnet *ifp);
 void func_00005D64(void *arg);
 s32 func_000064CC(struct socket *so, u32 cmd, void *data);
 s32 func_00007020(void *a0, void *a1, void *a2, void *a3);
-s32 func_00007678(void);
+s32 func_00007678(s32 poolSize);
 s32 func_000076B8(void);
 s32 func_00007738(s32 poolSize);
 s32 func_00007778(void);

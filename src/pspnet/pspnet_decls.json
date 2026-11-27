@@ -104,7 +104,7 @@
   "func_00005D64": "void func_00005D64(void *arg);",
   "func_000064CC": "s32 func_000064CC(struct socket *so, u32 cmd, void *data);",
   "func_00007020": "s32 func_00007020(void *a0, void *a1, void *a2, void *a3);",
-  "func_00007678": "s32 func_00007678(void);",
+  "func_00007678": "s32 func_00007678(s32 poolSize);",
   "func_000076B8": "s32 func_000076B8(void);",
   "func_00007738": "s32 func_00007738(s32 poolSize);",
   "func_00007778": "s32 func_00007778(void);",
