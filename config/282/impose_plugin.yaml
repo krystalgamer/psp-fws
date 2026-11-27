@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/282/.splat_cache.impose_plugin
   symbol_addrs_path:
     - config/282/symbol_addrs.impose_plugin.txt
+    - config/282/func_starts.impose_plugin.txt
     - tmp/build/282/prx_syms.impose_plugin.txt
   reloc_addrs_path: [tmp/build/282/reloc_addrs.impose_plugin.txt]
   asset_path: tmp/assets/282/impose_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, impose_plugin]
+      - [0x1118, c, impose_plugin_crtend]
       - { start: 0x1170, type: asm, name: fini, linker_section: .fini }
       - { start: 0x118C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x126C, type: prxpad, order: .text }

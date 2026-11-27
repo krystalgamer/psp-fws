@@ -351,9 +351,3 @@ void func_00001054(s32 arg0) {
     _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_000014A0);
 }
 #endif
-
-INCLUDE_ASM("nonmatchings/impose_plugin", func_00001078);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/impose_plugin", func_000010D0);
-#endif
