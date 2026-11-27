@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "music_plugin_decls.h"
@@ -198,7 +199,7 @@ INCLUDE_ASM("nonmatchings/music_plugin_00024250", func_00024EF4);
 #endif
 
 #if FW_VERSION == 100
-M2C_UNK *func_00024EF4(void) {
+const char *func_00024EF4(void) {
     return "ms0:";
 }
 #endif
@@ -208,7 +209,7 @@ INCLUDE_ASM("nonmatchings/music_plugin_00024250", func_00024F00);
 #endif
 
 #if FW_VERSION == 100
-M2C_UNK *func_00024F00(void) {
+const char *func_00024F00(void) {
     return "/HIFI";
 }
 #endif
