@@ -141,6 +141,76 @@ def decl_names(text):
     return names
 
 
+def names(a, pairs):
+    dc = c_names(a.dst_mod, a.dst_ver)
+    tok = re.compile(r"[A-Za-z_]\w*|0[xX][0-9a-fA-F]+|\d+|\S")
+    ren, bad = {}, set()
+    for n, (d, _, _) in pairs.items():
+        if d not in dc:
+            continue
+        sb, db = c_body(a.src_mod, a.src_ver, n), c_body(a.dst_mod, a.dst_ver, d)
+        if sb is None or db is None:
+            continue
+        st, dt = tok.findall(sb), tok.findall(db)
+        if len(st) != len(dt):
+            continue
+        for s, t in zip(st, dt):
+            if s != t and AUTO.fullmatch(t) and not AUTO.fullmatch(s) and re.fullmatch(r"[A-Za-z_]\w*", s):
+                if ren.get(t, s) != s:
+                    bad.add(t)
+                ren[t] = s
+    used = set(elf_syms(a.dst_ver, a.dst_mod).values()) | set(
+        json.loads((src_dir(a.dst_ver, a.dst_mod) / f"{a.dst_mod}_decls.json").read_text())["types"])
+    news = {}
+    for t, s in ren.items():
+        news.setdefault(s, []).append(t)
+    specs = [f"{a.dst_ver}:{t}={s}" for t, s in sorted(ren.items())
+             if t not in bad and s not in used and len(news[s]) == 1]
+    for t, s in sorted(ren.items()):
+        if f"{a.dst_ver}:{t}={s}" not in specs:
+            print(f"skipped {t}={s}" + (" (conflict)" if t in bad or len(news[s]) > 1 else " (name in use)"))
+    if not specs:
+        print("nothing to rename")
+        return
+    print(" ".join(specs))
+    # rename_sym only renames names the asm uses: C-only names are done here (symbol_addrs line,
+    # sources, decls; func_starts pins would keep the auto name), then the shared regress decides
+    import structify
+    sd = src_dir(a.dst_ver, a.dst_mod)
+    cfg = ROOT / "config" / a.dst_ver
+    files = [cfg / f"symbol_addrs.{a.dst_mod}.txt", cfg / f"func_starts.{a.dst_mod}.txt",
+             *sd.glob("*.c"), *sd.glob(f"{a.dst_mod}_decls.*")]
+    saved = {f: f.read_text() for f in files if f.exists()}
+    pairs_ = [s.split(":", 1)[1].split("=") for s in specs]
+    olds = dict(pairs_)
+    pat = re.compile(r"\b(" + "|".join(olds) + r")\b")
+    lines = []
+    for o, n in pairs_:
+        ad = int(o.split("_")[1], 16)
+        lines.append(f"{n} = 0x{ad:08X};" + (" // type:func" if o.startswith("func_") else ""))
+    sa = cfg / f"symbol_addrs.{a.dst_mod}.txt"
+    sa.write_text(pat.sub(lambda m: olds[m[1]], saved[sa]).rstrip("\n") + "\n// names from " +
+                  f"{a.src_mod} (tools/xport.py --names)\n" + "\n".join(
+                      l for l in lines if not re.search(rf"^{l.split()[0]} =", saved[sa], re.M)) + "\n")
+    fs = cfg / f"func_starts.{a.dst_mod}.txt"
+    if fs in saved:
+        fs.write_text("".join(l for l in saved[fs].splitlines(keepends=True)
+                              if not (m := re.match(r"\s*(\w+)\s*=", l)) or m[1] not in olds))
+    for f in saved:
+        if f.parent == sd and f.suffix in (".c", ".json"):
+            f.write_text(pat.sub(lambda m: olds[m[1]], saved[f]))
+    structify.SRC[a.dst_mod] = sd
+    structify.write_decls(a.dst_mod, json.loads((sd / f"{a.dst_mod}_decls.json").read_text()))
+    r = subprocess.run(["tools/regress.sh", "--shared", f"{a.dst_ver}:{a.dst_mod}"], cwd=ROOT,
+                       capture_output=True, text=True)
+    print(r.stdout.strip())
+    if any(": OK" not in l for l in r.stdout.splitlines()):
+        for f, s in saved.items():
+            f.write_text(s)
+        subprocess.run(["tools/regress.sh", "--shared", f"{a.dst_ver}:{a.dst_mod}"], cwd=ROOT, capture_output=True)
+        print("renames restored")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("src_mod")
@@ -151,6 +221,9 @@ def main():
     ap.add_argument("--sub", action="append", default=[], help="OLD=NEW text substitution applied first")
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--names", action="store_true",
+                    help="no scoring: give DST's auto-named functions/globals the SRC names, from pairs that are C on "
+                         "both sides (token-aligned bodies), with tools/rename_sym.py")
     ap.add_argument("--replace", action="store_true",
                     help="also pair with DST functions that are C already and replace their C (e.g. m2c drafts)")
     a = ap.parse_args()
@@ -166,6 +239,8 @@ def main():
             else:
                 print(f"{n}: no asm twin in {a.dst_mod} {a.dst_ver}")
         pairs = sel
+    if a.names:
+        return names(a, pairs)
     if a.list:
         for n, (d, k, ex) in pairs.items():
             print(f"{n} -> {d}" + (" exact" if ex else " masked") + (f" ({k} candidates)" if k > 1 else ""))

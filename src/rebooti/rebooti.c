@@ -2,9 +2,9 @@
 #include "common.h"
 #include "rebooti_decls.h"
 
-s32 func_00000000(void) {
+s32 FlashInitialize(void) {
     if (func_00005F78(0) < 0) {
-        func_00001A54("flash.c:%s:sceBootLfatfsMount failed\n", "FlashInitialize");
+        Kprintf("flash.c:%s:sceBootLfatfsMount failed\n", "FlashInitialize");
         return 0x80020001;
     }
     return 0;
@@ -18,11 +18,11 @@ s32 module_bootstart(void) {
     return 0;
 }
 
-void func_000004BC(void (*arg0)(s32)) {
+void sceKernelRegisterAssertHandler(void (*arg0)(s32)) {
     D_00015254 = arg0;
 }
 
-void func_000004C8(s32 test, u32 lvl) {
+void sceKernelAssert(s32 test, u32 lvl) {
     u32 cur = ((u32)func_00001BC0() & 0x300) >> 8;
 
     if (test != 0) {
@@ -33,11 +33,11 @@ void func_000004C8(s32 test, u32 lvl) {
             D_00015254(0);
             return;
         }
-        func_00001A54("There is no assert handler, stop\n");
+        Kprintf("There is no assert handler, stop\n");
         for (;;) {
         }
     }
-    func_00001A54("assertion ignore (level %d >= %d)\n", lvl, cur);
+    Kprintf("assertion ignore (level %d >= %d)\n", lvl, cur);
 }
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00000554);
@@ -95,7 +95,7 @@ void func_0000129C(s32 arg0) {
     D_00015264 = arg0;
 }
 
-void func_000012A8(s32 arg0, s32 arg1) {
+void sceKernelRegisterKprintfHandler(s32 arg0, s32 arg1) {
     D_00014F14 = arg0;
     D_00014F18 = arg1;
 }
@@ -132,7 +132,7 @@ INCLUDE_RODATA("nonmatchings/rebooti", D_00012AF4);
 
 INCLUDE_RODATA("nonmatchings/rebooti", D_00012AFC);
 
-INCLUDE_ASM("nonmatchings/rebooti", func_00001A54);
+INCLUDE_ASM("nonmatchings/rebooti", Kprintf);
 
 s32 func_00001B10(s32 arg0) {
     D_00015268 = arg0;

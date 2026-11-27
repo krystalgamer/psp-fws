@@ -2,12 +2,12 @@
 #include "common.h"
 #include "rebooti_decls.h"
 
-s32 func_00011950(u32 ppn, void *user, void *spare) {
-    s32 ret = func_000112BC(ppn);
+s32 sceNandWriteBlock(u32 ppn, void *user, void *spare) {
+    s32 ret = sceNandEraseBlockWithRetry(ppn);
     if (ret < 0) {
         return ret;
     }
-    ret = func_00010838(ppn, user, spare, D_00016CF8);
+    ret = sceNandWritePages(ppn, user, spare, D_00016CF8);
     if (ret >= 0) {
         return 0;
     }
@@ -16,11 +16,11 @@ s32 func_00011950(u32 ppn, void *user, void *spare) {
 
 INCLUDE_ASM("nonmatchings/rebooti_011950", func_000119B0);
 
-s32 func_00011BDC(s32 a0, s32 a1) {
+s32 sceNandVerifyEcc(s32 a0, s32 a1) {
     return func_00011C14(a0, a1, 0);
 }
 
-s32 func_00011BF8(s32 a0, s32 a1) {
+s32 sceNandCollectEcc(s32 a0, s32 a1) {
     return func_00011C14(a0, a1, 1);
 }
 
@@ -62,14 +62,14 @@ void func_00011FD8(void) {
     func_00012310(0x10, 0);
 }
 
-s32 func_00011FF8(u32 n) {
+s32 sceSysregDmacBusClockEnable(u32 n) {
     if (n < 2) {
         return func_00012310(0x20 << n, 1);
     }
     return 0x80000102;
 }
 
-s32 func_0001203C(u32 n) {
+s32 sceSysregDmacBusClockDisable(u32 n) {
     if (n < 2) {
         return func_00012310(0x20 << n, 0);
     }
@@ -100,25 +100,25 @@ void func_00012120(void) {
     func_00012310(0x200, 0);
 }
 
-s32 func_00012140(u32 n) {
+s32 sceSysregMsifBusClockEnable(u32 n) {
     if (n < 2) {
         return func_00012310(0x400 << n, 1);
     }
     return 0x80000102;
 }
 
-s32 func_00012184(u32 n) {
+s32 sceSysregMsifBusClockDisable(u32 n) {
     if (n < 2) {
         return func_00012310(0x400 << n, 0);
     }
     return 0x80000102;
 }
 
-void func_000121C8(void) {
+void sceSysregEmcddrBusClockEnable(void) {
     func_00012310(0x1000, 1);
 }
 
-void func_000121E8(void) {
+void sceSysregEmcddrBusClockDisable(void) {
     func_00012310(0x1000, 0);
 }
 
@@ -130,22 +130,22 @@ void func_00012228(void) {
     func_00012310(0x2000, 0);
 }
 
-void func_00012248(void) {
+void sceSysregApbBusClockEnable(void) {
     func_00012310(0x4000, 1);
 }
 
-void func_00012268(void) {
+void sceSysregApbBusClockDisable(void) {
     func_00012310(0x4000, 0);
 }
 
-s32 func_00012288(u32 n) {
+s32 sceSysregAudioBusClockEnable(u32 n) {
     if (n < 2) {
         return func_00012310(0x8000 << n, 1);
     }
     return 0x80000102;
 }
 
-s32 func_000122CC(u32 n) {
+s32 sceSysregAudioBusClockDisable(u32 n) {
     if (n < 2) {
         return func_00012310(0x8000 << n, 0);
     }
@@ -187,14 +187,14 @@ void func_000123DC(void) {
     func_000127F8(8, 0);
 }
 
-s32 func_000123FC(u32 n) {
+s32 sceSysregMsifIoEnable(u32 n) {
     if (n < 2) {
         return func_000127F8(0x10 << n, 1);
     }
     return 0x80000102;
 }
 
-s32 func_00012440(u32 n) {
+s32 sceSysregMsifIoDisable(u32 n) {
     if (n < 2) {
         return func_000127F8(0x10 << n, 0);
     }
@@ -209,14 +209,14 @@ void func_000124A4(void) {
     func_000127F8(0x40, 0);
 }
 
-s32 func_000124C4(u32 n) {
+s32 sceSysregAudioIoEnable(u32 n) {
     if (n < 2) {
         return func_000127F8(0x80 << n, 1);
     }
     return 0x80000102;
 }
 
-s32 func_00012508(u32 n) {
+s32 sceSysregAudioIoDisable(u32 n) {
     if (n < 2) {
         return func_000127F8(0x80 << n, 0);
     }
@@ -239,11 +239,11 @@ void func_000125AC(void) {
     func_000127F8(0x400, 0);
 }
 
-void func_000125CC(void) {
+void sceSysregAudioClkoutIoEnable(void) {
     func_000127F8(0x800, 1);
 }
 
-void func_000125EC(void) {
+void sceSysregAudioClkoutIoDisable(void) {
     func_000127F8(0x800, 0);
 }
 
@@ -263,39 +263,39 @@ void func_00012644(void) {
     func_000127F8(0x2000, 0);
 }
 
-s32 func_00012664(u32 n) {
+s32 sceSysregUartIoEnable(u32 n) {
     if (n < 6) {
         return func_000127F8(0x10000 << n, 1);
     }
     return 0x80000102;
 }
 
-s32 func_000126A8(u32 n) {
+s32 sceSysregUartIoDisable(u32 n) {
     if (n < 6) {
         return func_000127F8(0x10000 << n, 0);
     }
     return 0x80000102;
 }
 
-s32 func_000126EC(u32 n) {
+s32 sceSysregSpiIoEnable(u32 n) {
     if (n < 6) {
         return func_000127F8(0x1000000 << n, 1);
     }
     return 0x80000102;
 }
 
-s32 func_00012730(u32 n) {
+s32 sceSysregSpiIoDisable(u32 n) {
     if (n < 6) {
         return func_000127F8(0x1000000 << n, 0);
     }
     return 0x80000102;
 }
 
-s32 func_00012774(s32 a0) {
+s32 sceSysregGpioIoEnable(s32 a0) {
     return func_000127AC(a0, 1);
 }
 
-s32 func_00012790(s32 a0) {
+s32 sceSysregGpioIoDisable(s32 a0) {
     return func_000127AC(a0, 0);
 }
 

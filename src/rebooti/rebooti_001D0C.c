@@ -2,15 +2,15 @@
 #include "common.h"
 #include "rebooti_decls.h"
 
-void func_00001D0C(void *s, u32 n) {
-    func_00001E60(s, 0, n);
+void bzero(void *s, u32 n) {
+    memset(s, 0, n);
 }
 
 s32 func_00001D2C(s32 arg0) {
     s32 var_v0;
 
     var_v0 = arg0;
-    if (func_00001DA4(arg0) & 2) {
+    if (look_ctype_table(arg0) & 2) {
         var_v0 = (arg0 & 0xFF) - 0x20;
     }
     return var_v0;
@@ -20,21 +20,21 @@ s32 func_00001D68(s32 arg0) {
     s32 var_v0;
 
     var_v0 = arg0;
-    if (func_00001DA4(arg0) & 1) {
+    if (look_ctype_table(arg0) & 1) {
         var_v0 = (arg0 & 0xFF) + 0x20;
     }
     return var_v0;
 }
 
-s32 func_00001DA4(s32 c) {
+s32 look_ctype_table(s32 c) {
     return D_00014F21[c];
 }
 
-M2C_UNK *func_00001DB4(void) {
+M2C_UNK *get_ctype_table(void) {
     return &D_00014F21;
 }
 
-void *func_00001DC0(const void *s, s32 c, s32 n) {
+void *memchr(const void *s, s32 c, s32 n) {
     const u8 *p = s;
     u8 ch = c;
     if (p != NULL) {
@@ -49,11 +49,11 @@ void *func_00001DC0(const void *s, s32 c, s32 n) {
     return NULL;
 }
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001DF8);
+INCLUDE_ASM("nonmatchings/rebooti_001D0C", memcpy);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001E60);
+INCLUDE_ASM("nonmatchings/rebooti_001D0C", memset);
 
-void *func_00001ED0(void *dst, const void *src, s32 n) {
+void *memmove(void *dst, const void *src, s32 n) {
     u8 *d = dst;
     const u8 *s = src;
 
@@ -73,7 +73,7 @@ void *func_00001ED0(void *dst, const void *src, s32 n) {
     return dst;
 }
 
-s32 func_00001F44(const void *a, const void *b, s32 n) {
+s32 memcmp(const void *a, const void *b, s32 n) {
     const u8 *p = a;
     const u8 *q = b;
     while (n > 0) {
@@ -93,7 +93,7 @@ INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002004);
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002080);
 
-s32 func_000020E0(const char *s) {
+s32 strlen(const char *s) {
     s32 len = 0;
     if (s == NULL) {
         return 0;
@@ -104,7 +104,7 @@ s32 func_000020E0(const char *s) {
     return len;
 }
 
-char *func_00002114(const char *s, s32 c) {
+char *strchr(const char *s, s32 c) {
     char ch = c;
     if (s == NULL) {
         return NULL;
@@ -123,9 +123,9 @@ INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000021DC);
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002258);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000022A0);
+INCLUDE_ASM("nonmatchings/rebooti_001D0C", prnt);
 
-void func_000029B4(char **pp, s32 c) {
+void sprintf_putc(char **pp, s32 c) {
     if (c < 256) {
         *(*pp)++ = c;
     } else {
@@ -133,17 +133,17 @@ void func_000029B4(char **pp, s32 c) {
     }
 }
 
-s32 func_000029D8(char *buf, const char *fmt, ...) {
+s32 sprintf(char *buf, const char *fmt, ...) {
     __builtin_va_list ap;
     char *p = buf;
 
     __builtin_va_start(ap, fmt);
-    return func_000022A0(func_000029B4, &p, fmt, ap);
+    return prnt(sprintf_putc, &p, fmt, ap);
 }
 
-s32 func_00002A24(char *buf, const char *fmt, void *ap) {
+s32 vsprintf(char *buf, const char *fmt, void *ap) {
     char *p = buf;
-    return func_000022A0(func_000029B4, &p, fmt, ap);
+    return prnt(sprintf_putc, &p, fmt, ap);
 }
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002A58);
@@ -334,7 +334,7 @@ INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00004608);
 
 INCLUDE_RODATA("nonmatchings/rebooti_001D0C", D_00013430);
 
-s32 func_000047A8(u8 *buf, SceLoadCoreExecFileInfo *execInfo) {
+s32 sceKernelLoadExecutableObject(u8 *buf, SceLoadCoreExecFileInfo *execInfo) {
     if (func_00003ED8((SceHeader *)buf) != 0) {
         buf += 0x40;
     }
@@ -347,7 +347,7 @@ s32 func_000047A8(u8 *buf, SceLoadCoreExecFileInfo *execInfo) {
         func_0000482C(buf, execInfo);
         return 0;
     }
-    func_00001A54(D_00013430, "sceKernelLoadExecutableObject");
+    Kprintf(D_00013430, "sceKernelLoadExecutableObject");
     return -1;
 }
 
