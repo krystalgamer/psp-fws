@@ -973,6 +973,8 @@ static __inline s32 tcp_reass_lock_try(struct tcpcb *tp) {
 }
 #define TCP_REASS_LOCK_TRY(tp) tcp_reass_lock_try(tp)
 #define TCP_REASS_UNLOCK(tp) do { s32 _s = _sce_pspnet_spllock(); (tp)->t_flags &= ~0x4000; _sce_pspnet_splunlock(_s); } while (0)
+#define TCPT_RANGESET(tv, value, tvmin, tvmax) { (tv) = (value); if ((tv) < (tvmin)) (tv) = (tvmin); else if ((tv) > (tvmax)) (tv) = (tvmax); }
+#define roundup(x, y) ((((x) + ((y) - 1)) / (y)) * (y))
 
 struct SceTailqHead {
     void *tqh_first;
@@ -1305,7 +1307,7 @@ extern s32 D_0002E904; /* tcp_do_sack */
 extern s32 D_0002E908; /* tcp_do_win_scale */
 extern s32 D_0002E90C; /* tcp_do_timestamps */
 extern s32 D_0002E910; /* tcp_init_win */
-extern s32 D_0002E918;
+extern s32 D_0002E918; /* tcp_keepidle */
 extern s32 D_0002E924;
 extern s32 D_0002E95C;
 extern s8 D_0002EAB0[];
@@ -1510,7 +1512,6 @@ void func_0002373C(struct inpcb *inp, s32 errno);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
 void func_000244B0(void);
-s32 func_000251A4(void *arg0);
 void func_0002544C(void *arg0);
 void func_00025638(struct sppp *sp, u16 proto, u8 type, u8 ident, u16 len, void *data);
 void func_00025E94(void);
@@ -1570,6 +1571,7 @@ void in_pcbstate(struct inpcb *inp, s32 state);
 void in_rtchange(struct inpcb *inp, s32 errno);
 struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp);
 void ip_input(struct mbuf *m);
+s32 ip_optlen(void *inp);
 void lortrequest(s32 cmd, struct rtentry *rt);
 s32 module_start(void);
 s32 module_stop(void);
@@ -1635,12 +1637,16 @@ s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);
 struct tcpcb *tcp_close(struct tcpcb *tp);
 struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno);
+void tcp_established(struct tcpcb *tp);
 s32 tcp_freeq(struct tcpcb *tp);
+void tcp_mss_from_peer(struct tcpcb *tp, s32 offer);
 void tcp_mtudisc(struct inpcb *inp, s32 errno);
 void tcp_mtudisc_callback(struct in_addr addr);
 struct tcpcb *tcp_newtcpcb(s32 family, void *aux);
 void tcp_notify(struct inpcb *inp, s32 error);
+s32 tcp_optlen(void *tp);
 s32 tcp_output(struct tcpcb *tp);
+void tcp_rmx_rtt(struct tcpcb *tp);
 void *udp_ctlinput(s32 cmd, struct sockaddr *sa, void *v);
 void udp_notify(void *arg0, s16 arg1);
 s32 udp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);

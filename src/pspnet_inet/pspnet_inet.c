@@ -3582,7 +3582,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018328);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018478);
 
 #if FW_VERSION < 250
-s32 func_00018594(void *arg0) {
+s32 ip_optlen(void *arg0) {
     void *p = *(void **)((u8 *)arg0 + 0x4C);
     if (p != NULL && *(s32 *)((u8 *)p + 0xC) != 0) {
         return *(s32 *)((u8 *)p + 0xC);
@@ -3590,7 +3590,7 @@ s32 func_00018594(void *arg0) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018594);
+INCLUDE_ASM("nonmatchings/pspnet_inet", ip_optlen);
 #endif
 
 void ip_freemoptions(struct ip_moptions *imo) {
@@ -4324,7 +4324,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000231F8);
 #if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024C00);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024F3C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_mss_from_peer);
 #endif
 
 #if FW_VERSION >= 282
@@ -4362,20 +4362,42 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023344);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000235D0);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023704);
+void tcp_rmx_rtt(struct tcpcb *tp) {
+    struct rtentry *rt = NULL;
+    s32 rtt;
+
+    if (tp->t_inpcb) {
+        rt = in_pcbrtentry(tp->t_inpcb);
+    }
+    if (rt == NULL) {
+        return;
+    }
+    if (tp->t_srtt == 0 && (rtt = rt->rt_rmx.rmx_rtt)) {
+        if (rt->rt_rmx.rmx_locks & RTV_RTT) {
+            TCPT_RANGESET(tp->t_rttmin, rtt / (1000000 / 2), 2, 128);
+        }
+        tp->t_srtt = rtt / ((1000000 / 2) >> (3 + 2));
+        if (rt->rt_rmx.rmx_rttvar) {
+            tp->t_rttvar = rt->rt_rmx.rmx_rttvar / ((1000000 / 2) >> (2 + 2));
+        } else {
+            tp->t_rttvar = tp->t_srtt >> (3 - 2);
+        }
+        TCPT_RANGESET(tp->t_rxtcur, ((tp->t_srtt >> 2) + tp->t_rttvar) >> (1 + 2), tp->t_rttmin, 128);
+    }
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000251A4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_optlen);
 #endif
 
 #if FW_VERSION < 151
-s32 func_000251A4(void *arg0) {
+s32 tcp_optlen(void *arg0) {
     return -((M2C_FIELD(arg0, u16 *, 0x28) & 0x188) == 0x180) & 0xC;
 }
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
-s32 func_000251A4(void *arg0) {
+s32 tcp_optlen(void *arg0) {
     return (((M2C_FIELD(arg0, u16 *, 0x28) & 0x188) ^ 0x180) != 0) ? 0 : 0xC;
 }
 #endif
@@ -4412,7 +4434,7 @@ struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_drop);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023908);
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_drain);
 
 void tcp_notify(struct inpcb *inp, s32 error) {
     struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
@@ -4514,9 +4536,38 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002559C);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023BD8);
+#else
+void tcp_established(struct tcpcb *tp) {
+    struct socket *so;
+    struct rtentry *rt;
+    u32 bufsize;
+
+    so = NULL;
+    rt = NULL;
+    if (tp->t_inpcb) {
+        so = tp->t_inpcb->inp_socket;
+        rt = in_pcbrtentry(tp->t_inpcb);
+    }
+    tp->t_state = TCPS_ESTABLISHED;
+    tp->t_timer[TCPT_KEEP] = pfslowtimo_now + D_0002E918;
+    if (rt != NULL && rt->rt_rmx.rmx_recvpipe != 0) {
+        bufsize = rt->rt_rmx.rmx_recvpipe;
+    } else {
+        bufsize = so->so_rcv.sb_hiwat;
+    }
+    if (bufsize > tp->t_ourmss) {
+        bufsize = roundup(bufsize, tp->t_ourmss);
+        if (bufsize > 0x40000) {
+            bufsize = 0x40000;
+        }
+        (void)sbreserve(&so->so_rcv, bufsize);
+    }
+}
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023C5C);
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_established);
+#endif
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023D1C);
