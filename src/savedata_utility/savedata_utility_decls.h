@@ -13,6 +13,7 @@ extern "C" {
 #pragma interface
 extern "C++" {
 #include "paf.h"
+#include "vsh.h"
 }
 #endif
 
@@ -776,9 +777,6 @@ void _ZN3paf4View9PlaySoundEPKc(void *self, const char *name);
 s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, s32);
 M2C_UNK _ZN3paf8PhXmList10SetItemNumEi(s32, M2C_UNK);
 M2C_UNK _ZN3paf9PhHandler11KillTimerCBEi(s32, M2C_UNK);
-void _ZN3vsh10OptionMenu4HideEv(void);
-void _ZN3vsh10OptionMenu4ShowEv(void);
-void _ZN3vsh10OptionMenu5CloseEPN3paf4ViewEPKcS5_(void *view, const char *, const char *);
 M2C_UNK _ZN3vsh13Infobar_CloseEb(M2C_UNK);
 M2C_UNK _ZN3vsh13MessageDialog10HideDeleteEv(s32);
 s32 _ZN3vsh14GetString_BackE6Locale(M2C_UNK);
@@ -1118,7 +1116,7 @@ void func_0000FF74(void *arg0, s32 arg1, s32 arg2);
 void func_0000FFB8(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 void func_00010000(void);
 void func_0001001C(void);
-void func_00010038(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_00010038(void *arg0, paf::View *view, const char *page, const char *name);
 u8 func_00010070(void *arg0);
 s32 func_00010090(s32);
 s32 func_000100F4(s32);
