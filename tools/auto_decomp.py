@@ -246,6 +246,26 @@ def k1_as_global(asm):
     return "\n".join(out) + "\n"
 
 
+_NEW_CTX = [0]
+
+
+def _prune_ctx(cdir, keep=2000):
+    """Keep the m2c context cache bounded (each context and its typemap is ~1 MB)."""
+    _NEW_CTX[0] += 1
+    if _NEW_CTX[0] % 200:
+        return
+    try:
+        files = sorted(cdir.glob("*.c"), key=lambda p: p.stat().st_mtime)
+    except FileNotFoundError:
+        return
+    for p in files[:-keep]:
+        for q in (p, p.with_suffix(".c.m2c")):
+            try:
+                q.unlink()
+            except FileNotFoundError:
+                pass
+
+
 def run_m2c(mod, name, ctx, target="mips-gcc-c"):
     names = EABI if target.startswith("mipsee") else ABI
     asm = UNWRAP.sub(lambda m: m[1].strip(), mod.funcs[name][2].read_text())
@@ -264,6 +284,7 @@ def run_m2c(mod, name, ctx, target="mips-gcc-c"):
         tmpc = cpath.with_suffix(f".{os.getpid()}.tmp")
         tmpc.write_text(ctx)
         tmpc.replace(cpath)
+        _prune_ctx(cdir)
     with tempfile.TemporaryDirectory() as td:
         (Path(td) / "f.s").write_text(asm)
         argv = ["-t", target, "--valid-syntax", "--globals", "used", "--context", str(cpath), str(Path(td) / "f.s")]
