@@ -1,3 +1,4 @@
+/* cflags[152]: -Os -frename-registers */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "libparse_http_decls.h"
