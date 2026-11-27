@@ -4,6 +4,63 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef struct {
+    s32 val;
+    u32 key;
+} SceWlanKeyVal;
+
+/* message posted to the MAC thread's mailbox (allocated from the VPL) */
+typedef struct SceWlanMsg {
+    struct SceWlanMsg *next;    /* 0x00 SceKernelMsgPacket */
+    u8 msgPriority;             /* 0x04 */
+    u8 pad5[3];
+    u32 cmd;                    /* 0x08 0x8000000x */
+    u32 arg[4];                 /* 0x0C */
+} SceWlanMsg;
+
+/* singly linked FIFO protected by suspendIntr (next pointer at +8) */
+typedef struct SceWlanQEnt {
+    u32 unk0;
+    u32 unk4;
+    struct SceWlanQEnt *next;   /* 0x08 */
+} SceWlanQEnt;
+typedef struct {
+    SceWlanQEnt *head;          /* 0x00 */
+    SceWlanQEnt *tail;          /* 0x04 */
+} SceWlanQueue;
+
+#if FW_VERSION < 201
+/* driver state (1.00-1.52), pointed to by D_000191B0 */
+typedef struct {
+    u32 flags;                  /* 0x000 0x800: game mode, 0x200: ... */
+    u8 unk004[0x228 - 0x4];
+    SceUID poolSema;            /* 0x228 */
+    s32 poolStride;             /* 0x22C */
+    s32 poolCount;              /* 0x230 */
+    void *pool;                 /* 0x234 */
+    void *poolNext;             /* 0x238 */
+    u8 unk23C[0x264 - 0x23C];
+    SceUID lock264;             /* 0x264 */
+    SceUID lock268;             /* 0x268 */
+#if FW_VERSION >= 150
+    SceUID lock26C;
+#endif
+    SceUID mbx;                 /* 0x26C */
+    SceUID vpl;                 /* 0x270 */
+    u32 unk274;
+    u32 *hal;                   /* 0x278 (*hal & 1: powered) */
+    void *ifh;                  /* 0x27C sceNetIfhandle handle */
+    u32 unk280;
+    void *ifhCb[4];             /* 0x284 */
+    u8 unk294[0x2C0 - 0x294];
+    s32 gpCallback;             /* 0x2C0 */
+    s32 switchState;            /* 0x2C4 */
+} SceWlanSoftc;
+#if FW_VERSION < 150
+typedef char chk_SceWlanSoftc[((u32)&((SceWlanSoftc *)0)->gpCallback == 0x2C0) ? 1 : -1];
+#endif
+#endif
+
 struct D_0001925C_s {
     s32 unk0;
     s32 unk4;
@@ -262,7 +319,15 @@ struct Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0 {
     s32 unk188;
 };
 
+extern const u32 D_00018A00[15];
+extern const u16 D_00018A3C[6];
+extern const u8 D_00018A48[][14];
+extern const SceWlanKeyVal D_000190C4[5];
+#if FW_VERSION < 201
+extern SceWlanSoftc *D_000191B0;
+#else
 extern struct Unk_D_000191B0 *D_000191B0;
+#endif
 extern struct D_0001925C_s D_0001925C;
 extern s32 D_00019290;
 extern s32 D_0001929C;
