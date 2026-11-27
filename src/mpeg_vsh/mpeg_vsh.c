@@ -1,6 +1,6 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "mpeg_vsh_decls.h"
@@ -53,7 +53,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegUnRegistStream);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegRegistStream);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00007A30);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_0000033C);
@@ -91,7 +91,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegFinish);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegQueryMemSize);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00000500);
 #endif
 
@@ -165,7 +165,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeGetDecodeSEI);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeDetail);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00000D20);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00000F14);
@@ -329,7 +329,7 @@ INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009B88);
 
 INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009B98);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001168);
 #endif
 
@@ -645,7 +645,7 @@ s32 func_00004D20(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00004D2C);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00005250);
