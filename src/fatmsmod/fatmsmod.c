@@ -959,13 +959,152 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00001F04);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000203C);
 #endif
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00002190);
+#if FW_VERSION == 100
+s32 df_getstat(SceIoIob *iob, char *name, SceIoStat *stat) {
+    PfStat st;
+    SceUID heap;
+    char *path;
+    s32 ret;
+    s32 err;
+    u32 dt;
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000238C);
-
-#if FW_VERSION >= 150
-s32 df_rename(SceIoIob *iob, const char *name, const char *newName, s32 arg) {
+    if (check_reload_status(1, NULL) < 0) {
+        Kprintf(STR_DRIVER_DELETED, "df_getstat");
+        return 0x80010013;
+    }
+    path = get_heap(&heap, 0x540);
+    if (path == NULL) {
+        return 0x8001000C;
+    }
+    if (add_drive_name(path, name, iob->i_unit) < 0) {
+        free_heap(heap, path);
+        return 0x80010016;
+    }
+    if (stub_pf_fstat(path, &st) < 0) {
+        err = stub_pf_errnum();
+        free_heap(heap, path);
+        return prErr(err);
+    }
+    dt = (st.mdate << 16) | st.mtime;
+    ret = sceRtcSetDosTime(&stat->st_mtime, dt);
+    if (ret < 0) {
+        goto fail;
+    }
+    dt = (st.cdate << 16) | st.ctime;
+    ret = sceRtcSetDosTime(&stat->st_ctime, dt);
+    if (ret < 0) {
+        goto fail;
+    }
+    dt = st.adate << 16;
+    ret = sceRtcSetDosTime(&stat->st_atime, dt);
+    if (ret < 0) {
+        goto fail;
+    }
+    stat->st_attr = st.attr;
+    stat->st_size = st.size;
+    stat->st_mode = func_00001834(st.attr);
+    free_heap(heap, path);
+    return 0;
+fail:
+    free_heap(heap, path);
+    return ret;
+}
 #else
+INCLUDE_ASM("nonmatchings/fatmsmod", df_getstat);
+#endif
+
+#if FW_VERSION == 100
+s32 df_chstat(SceIoIob *iob, char *name, SceIoStat *stat, u32 bits) {
+    PfStat st;
+    PfTime ctime;
+    PfTime mtime;
+    PfDate cdate;
+    PfDate mdate;
+    SceUID heap;
+    char *path;
+    PfDate *pcdate;
+    PfTime *pctime;
+    PfDate *pmdate;
+    PfTime *pmtime;
+    s32 attr = 0;
+    s32 err;
+
+    if (check_reload_status(1, NULL) < 0) {
+        Kprintf(STR_DRIVER_DELETED, "df_chstat");
+        return 0x80010013;
+    }
+    path = get_heap(&heap, 0x540);
+    if (path == NULL) {
+        return 0x8001000C;
+    }
+    if (add_drive_name(path, name, iob->i_unit) < 0) {
+        free_heap(heap, path);
+        return 0x80010016;
+    }
+    pcdate = NULL;
+    pctime = NULL;
+    pmdate = NULL;
+    pmtime = NULL;
+    if (bits & 0x8) {
+        cdate.year = stat->st_ctime.year;
+        cdate.month = stat->st_ctime.month;
+        cdate.day = stat->st_ctime.day;
+        pcdate = &cdate;
+        pctime = &ctime;
+        ctime.hour = stat->st_ctime.hour;
+        ctime.minute = stat->st_ctime.minute;
+        ctime.second = stat->st_ctime.second;
+    }
+    if (bits & 0x20) {
+        mdate.year = stat->st_mtime.year;
+        mdate.month = stat->st_mtime.month;
+        mdate.day = stat->st_mtime.day;
+        pmdate = &mdate;
+        pmtime = &mtime;
+        mtime.hour = stat->st_mtime.hour;
+        mtime.minute = stat->st_mtime.minute;
+        mtime.second = stat->st_mtime.second;
+    }
+    if (bits & 0x28) {
+        if (stub_pf_settime(path, pcdate, pctime, pmdate, pmtime) < 0) {
+            goto err;
+        }
+    }
+    if (bits & 2) {
+        attr = stat->st_attr;
+    } else if (bits & 1) {
+        if ((stat->st_mode & 0x92) == 0) {
+            attr = 1;
+        }
+    }
+    if (stub_pf_fstat(path, &st) < 0) {
+        goto err;
+    }
+    if (bits & 3) {
+        if (st.attr & 0x10) {
+            if (stub_pf_chdmod(path, attr) < 0) {
+                goto err;
+            }
+        } else {
+            if (stub_pf_chmod(path, attr) < 0) {
+                goto err;
+            }
+        }
+    }
+    free_heap(heap, path);
+    return 0;
+err:
+    err = stub_pf_errnum();
+    free_heap(heap, path);
+    return prErr(err);
+}
+#else
+INCLUDE_ASM("nonmatchings/fatmsmod", df_chstat);
+
+s32 df_rename(SceIoIob *iob, const char *name, const char *newName, s32 arg) {
+#endif
+
+#if FW_VERSION == 100
 s32 df_rename(SceIoIob *iob, const char *name, const char *newName) {
 #endif
 
@@ -1424,7 +1563,7 @@ s32 func_00004B88(s32 a0, s32 a1) {
 }
 
 #if FW_VERSION == 100
-s32 func_00002B98(s32 a0, s32 a1) {
+s32 stub_pf_chdmod(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x18;
@@ -1526,7 +1665,7 @@ s32 stub_pf_rmdir(s32 a0, s32 a1) {
 #endif
 
 #if FW_VERSION == 100
-s32 func_00002CA0(s32 a0, s32 a1) {
+s32 stub_pf_chmod(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
     msg.cmd = 0xd;
@@ -1540,7 +1679,7 @@ s32 func_00002CA0(s32 a0, s32 a1) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_00002CA0(s32 a0, s32 a1, s32 a2) {
+s32 stub_pf_chmod(s32 a0, s32 a1, s32 a2) {
     SceMsStubMsg msg;
 
     msg.cmd = 0xd;
@@ -1762,7 +1901,7 @@ s32 stub_pf_find(s32 a0, s32 a1, s32 a2, s32 a3) {
 #endif
 
 #if FW_VERSION == 100
-s32 func_00002F8C(s32 a0, s32 a1) {
+s32 stub_pf_fstat(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
     msg.cmd = 0xc;
@@ -1776,7 +1915,7 @@ s32 func_00002F8C(s32 a0, s32 a1) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_00002F8C(s32 a0, s32 a1, s32 a2) {
+s32 stub_pf_fstat(s32 a0, s32 a1, s32 a2) {
     SceMsStubMsg msg;
 
     msg.cmd = 0xc;
@@ -1916,7 +2055,7 @@ s32 func_00005238(s32 a0, s32 a1) {
 }
 
 #if FW_VERSION == 100
-s32 func_0000527C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4) {
+s32 stub_pf_settime(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x22;
@@ -1931,7 +2070,7 @@ s32 func_0000527C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4) {
     return msg.ret;
 }
 #else
-s32 func_0000527C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
+s32 stub_pf_settime(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x22;

@@ -30,6 +30,19 @@ typedef struct {
 #endif
 } FatmsPrivate;
 
+/* PrFILE set-time arguments (stub cmd 0x22). */
+typedef struct {
+    u32 year;
+    u32 month;
+    u32 day;
+} PfDate;
+
+typedef struct {
+    u32 hour;
+    u32 minute;
+    u32 second;
+} PfTime;
+
 /* PrFILE directory search record (stub cmd 6), kept at FatmsPrivate + 0x568. */
 typedef struct {
     u8 pad0[0x118];
@@ -328,9 +341,11 @@ s32 Kprintf(const char *fmt, ...);
 s32 add_drive_name(char *buf, const char *name, s32 unit);
 s32 check_heap_alive(FatmsPrivate *priv);
 s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv);
+s32 df_chstat(); /* 1.00 df_chstat */
 s32 df_close(); /* 1.00 df_close(SceIoIob *) */
 s32 df_dclose(); /* 1.00 df_dclose */
 s32 df_dread(); /* 1.00 df_dread */
+s32 df_getstat(); /* 1.00 df_getstat */
 s32 df_ioctl(); /* 1.00 df_ioctl */
 s32 df_mkdir(); /* 1.50+ take one more trailing argument */
 s32 df_read(); /* 1.00 df_read(SceIoIob *, void *, SceSize) */
@@ -358,11 +373,9 @@ M2C_UNK func_00002708();
 s32 func_00002778(s32);
 M2C_UNK func_00002880();
 s32 func_00002B48(void);
-s32 func_00002B98(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00002CA0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00002B98(); /* 1.50+: stub cmd 0xB */
 s32 func_00002D24(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00002EFC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00002F8C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 void func_0000322C(void);
 void func_00003248(void);
 void func_0000326C(void);
@@ -404,7 +417,6 @@ s32 func_00005118(void);
 s32 func_00005124(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_000051F8(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00005238(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_0000527C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_000052D0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 void func_000053FC(void);
 s32 func_0000565C(void);
@@ -576,6 +588,8 @@ s32 sceRtcSetDosTime(ScePspDateTime *date, u32 dosTime);
 char *strcat(char *d, const char *s);
 u32 strlen(const char *s);
 char *strncpy(char *d, const char *s, SceSize n);
+s32 stub_pf_chdmod(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_chmod(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_errnum(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_fclose(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_feof(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
@@ -583,10 +597,12 @@ s32 stub_pf_ferror(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_find(); /* stub cmd 6: dir find first (pattern != NULL) / next */
 s32 stub_pf_fopen(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_fread(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_fstat(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_fwrite(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_mkdir(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_remove(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_rename(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_rmdir(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_settime(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 
 #endif

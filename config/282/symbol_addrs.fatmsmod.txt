@@ -76,3 +76,6 @@ stub_pf_mkdir = 0x00004C9C; // type:func
 stub_pf_rmdir = 0x00004CE0; // type:func
 stub_pf_rename = 0x000051B0; // type:func
 stub_pf_find = 0x00004F88; // type:func
+df_getstat = 0x00002190; // type:func
+df_chstat = 0x0000238C; // type:func
+stub_pf_settime = 0x0000527C; // type:func
