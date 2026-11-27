@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "dnas_plugin_decls.h"
 

@@ -1,5 +1,7 @@
 {
  "funcs": {
+  "_ZN3paf4View12PageActivateEPKc": "M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);",
+  "_ZN3paf4View8PageOpenEPKcii": "M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);",
   "func_0000015C": "void func_0000015C(void);",
   "func_000001AC": "void func_000001AC(void);",
   "func_00000210": "s32 func_00000210(void);",
@@ -13,9 +15,7 @@
   "func_0000161C": "M2C_UNK func_0000161C();",
   "module_stop": "s32 module_stop(void);",
   "scePaf_39E62C88": "M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);",
-  "scePaf_A013540A": "M2C_UNK scePaf_A013540A(s32, M2C_UNK *);",
-  "_ZN3paf4View12PageActivateEPKc": "M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);",
-  "_ZN3paf4View8PageOpenEPKcii": "M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);"
+  "scePaf_A013540A": "M2C_UNK scePaf_A013540A(s32, M2C_UNK *);"
  },
  "types": {
   "Unk_func_000014F0_temp_a0": "struct Unk_func_000014F0_temp_a0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};"
