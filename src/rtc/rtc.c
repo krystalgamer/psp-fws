@@ -627,7 +627,15 @@ INCLUDE_ASM("nonmatchings/rtc", func_000030C4);
 INCLUDE_ASM("nonmatchings/rtc", func_00003188);
 #endif
 
-INCLUDE_ASM("nonmatchings/rtc", func_0000328C);
+s32 func_0000328C(const char *s) {
+    s8 c0 = s[0];
+    s8 c1 = s[1];
+
+    if (c0 < '0' || c0 > '9' || c1 < '0' || c1 > '9') {
+        return -1;
+    }
+    return (c0 - '0') * 10 + (c1 - '0');
+}
 
 INCLUDE_ASM("nonmatchings/rtc", func_000032D4);
 
