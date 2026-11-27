@@ -522,7 +522,8 @@ struct sppp {
     struct ifqueue pp_fastq;        /* 0xCC */
     u8 unkE0[0x128 - 0xE0];
     struct ifqueue pp_cpq;          /* 0x128 */
-    u8 unk13C[0x150 - 0x13C];
+    s32 pp_flags;                   /* 0x13C PP_* */
+    u8 unk140[0x150 - 0x140];
     u32 pp_seq;                     /* 0x150 local sequence number */
     u8 unk154[0x170 - 0x154];
     s32 pp_phase;                   /* 0x170 */
@@ -1204,6 +1205,7 @@ void _sce_pspnet_callout_stop(void *c);
 M2C_UNK _sce_pspnet_get_thread_errno();
 s32 _sce_pspnet_hashinit(s32, void *);
 void _sce_pspnet_if_attach(struct ifnet *ifp);
+void _sce_pspnet_if_down(struct ifnet *ifp);
 void _sce_pspnet_ifafree(struct ifaddr *ifa);
 s32 _sce_pspnet_ifioctl(struct socket *so, u32 cmd, void *data, s32 p);
 void _sce_pspnet_inet_sabort(struct socket *so);
@@ -1399,6 +1401,8 @@ void func_00025F18(const struct cp *cp, struct sppp *sp, s32 newstate);
 void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);
 s32 func_00027830(struct Unk_func_00027830_0 *arg0);
 void func_00027C20(void);
+void func_00027C28(struct sppp *sp);
+void func_00028080(struct sppp *sp);
 void func_00028758(void *arg0);
 void func_00028768(struct Unk_func_00028768_0 *arg0);
 void func_00028778(void *arg0);

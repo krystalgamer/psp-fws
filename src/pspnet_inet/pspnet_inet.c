@@ -3998,7 +3998,25 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027304);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00025870);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00025F18);
+void func_00025F18(const struct cp *cp, struct sppp *sp, s32 newstate) {
+    sp->state[cp->protoidx] = newstate;
+    _sce_pspnet_callout_stop(sp->ch[cp->protoidx]);
+    switch (newstate) {
+    case STATE_INITIAL:
+    case STATE_STARTING:
+    case STATE_CLOSED:
+    case STATE_STOPPED:
+    case STATE_OPENED:
+        break;
+    case STATE_CLOSING:
+    case STATE_STOPPING:
+    case STATE_REQ_SENT:
+    case STATE_ACK_RCVD:
+    case STATE_ACK_SENT:
+        _sce_pspnet_callout_reset(sp->ch[cp->protoidx], sp->lcp_timeout, cp->TO, sp);
+        break;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00025FCC);
 
@@ -4130,11 +4148,93 @@ void func_00027C20(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027C28);
+void func_00027C28(struct sppp *sp) {
+    const struct cp *cp;
 
+    if (sp->state[IDX_LCP] == STATE_INITIAL) {
+        ((struct ifnet *)sp)->if_flags |= 0x40; /* IFF_RUNNING */
+        D_0002BB10.Open(sp);
+    }
+    cp = &D_0002BB10;
+    switch (sp->state[cp->protoidx]) {
+    case STATE_INITIAL:
+        func_00025F18(cp, sp, STATE_CLOSED);
+        break;
+    case STATE_STARTING:
+        sp->rst_counter[cp->protoidx] = sp->lcp_max_configure;
+        cp->scr(sp);
+        func_00025F18(cp, sp, STATE_REQ_SENT);
+        break;
+    }
+}
+
+#if FW_VERSION < 271
+void func_00027CD8(struct sppp *sp) {
+    const struct cp *cp = &D_0002BB10;
+
+    switch (sp->state[cp->protoidx]) {
+    case STATE_CLOSED:
+    case STATE_CLOSING:
+        func_00025F18(cp, sp, STATE_INITIAL);
+        break;
+    case STATE_STOPPED:
+        (cp->tls)(sp);
+        /* fall through */
+    case STATE_STOPPING:
+    case STATE_REQ_SENT:
+    case STATE_ACK_RCVD:
+    case STATE_ACK_SENT:
+        func_00025F18(cp, sp, STATE_STARTING);
+        break;
+    case STATE_OPENED:
+        (cp->tld)(sp);
+        func_00025F18(cp, sp, STATE_STARTING);
+        break;
+    }
+    _sce_pspnet_if_down((struct ifnet *)sp);
+    if (sp->state[IDX_LCP] != STATE_INITIAL) {
+        D_0002BB10.Close(sp);
+    } else {
+        D_0002BB10.tlf(sp);
+    }
+    ((struct ifnet *)sp)->if_flags &= ~0x40; /* IFF_RUNNING */
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027CD8);
+#endif
 
+#if FW_VERSION < 271
+void func_00027DB4(struct sppp *sp) {
+    const struct cp *cp = &D_0002BB10;
+
+    sp->pp_flags &= ~0x10; /* PP_NEEDAUTH */
+    switch (sp->state[cp->protoidx]) {
+    case STATE_INITIAL:
+        (cp->tls)(sp);
+        func_00025F18(cp, sp, STATE_STARTING);
+        break;
+    case STATE_STARTING:
+        break;
+    case STATE_CLOSED:
+        sp->rst_counter[cp->protoidx] = sp->lcp_max_configure;
+        (cp->scr)(sp);
+        func_00025F18(cp, sp, STATE_REQ_SENT);
+        break;
+    case STATE_STOPPED:
+    case STATE_STOPPING:
+    case STATE_REQ_SENT:
+    case STATE_ACK_RCVD:
+    case STATE_ACK_SENT:
+    case STATE_OPENED:
+        break;
+    case STATE_CLOSING:
+        func_00025F18(cp, sp, STATE_STOPPING);
+        break;
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027DB4);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027E8C);
 
@@ -4144,7 +4244,18 @@ void func_00027FA0(void *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027FC4);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00028080);
+void func_00028080(struct sppp *sp) {
+    s32 i;
+    u32 mask;
+
+    sp->pp_phase = SPPP_PHASE_TERMINATE;
+    for (i = 0, mask = 1; i < IDX_COUNT; i++, mask <<= 1) {
+        if ((sp->lcp_protos & mask) && ((D_0002C4E0[i])->flags & CP_LCP) == 0) {
+            (D_0002C4E0[i])->Down(sp);
+            (D_0002C4E0[i])->Close(sp);
+        }
+    }
+}
 
 void func_00028124(struct sppp *sp) {
     sp->pp_phase = SPPP_PHASE_ESTABLISH;
