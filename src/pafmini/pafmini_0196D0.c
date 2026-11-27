@@ -2,21 +2,26 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
+#if FW_VERSION < 282
+Class_000D1E30::~Class_000D1E30() {
+}
+#else
 void func_000196D0(M2C_UNK **arg0) {
     *arg0 = &D_000D1E30;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
 }
 
 void func_000196F8(M2C_UNK **arg0) {
     *arg0 = &D_000D1E30;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
 }
 
 void func_00019720(M2C_UNK **arg0) {
     *arg0 = &D_000D1E30;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00019758);
 
@@ -60,30 +65,41 @@ void func_0001A34C(M2C_UNK **arg0) {
     *arg0 = &D_000D1E74;
 }
 
+#if FW_VERSION < 282
+Class_000D1E74::~Class_000D1E74() {
+}
+#else
 void func_0001A37C(M2C_UNK **arg0) {
     *arg0 = &D_000D1E74;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
 }
 
 void func_0001A3A4(M2C_UNK **arg0) {
     *arg0 = &D_000D1E74;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
 }
 
 void func_0001A3CC(M2C_UNK **arg0) {
     *arg0 = &D_000D1E74;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001A404);
 
 INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000D1E30);
 
+#if FW_VERSION < 282
+__asm__(".globl _ZTV14Class_000D1E30\n_ZTV14Class_000D1E30 = D_000D1E30 - 8\n");
+#endif
+
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001A508);
 
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000D1E74);
+
+__asm__(".globl _ZTV14Class_000D1E74\n_ZTV14Class_000D1E74 = D_000D1E74 - 8\n");
 #endif
 
 #if FW_VERSION < 201
@@ -115,11 +131,8 @@ INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00014AE0);
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00014B10);
 
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00014B40);
-
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00014B68);
-
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00014B90);
+Class_000D1EB0::~Class_000D1EB0() {
+}
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00014BC8);
 #endif
@@ -134,6 +147,8 @@ INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00014DF4);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000CE964);
+
+__asm__(".globl _ZTV14Class_000D1EB0\n_ZTV14Class_000D1EB0 = D_000CE964 - 8\n");
 #endif
 
 #if FW_VERSION == 201
@@ -202,22 +217,22 @@ void func_00039CE4(void *arg0) {
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00013B90);
+INCLUDE_ASM("nonmatchings/pafmini_0196D0", _ZN14Class_000FF5D8D2Ev);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00039D0C);
+INCLUDE_ASM("nonmatchings/pafmini_0196D0", _ZN14Class_000FF5D8D1Ev);
 #endif
 
 #if FW_VERSION < 201
-void func_00039D0C(void *arg0) {
+void _ZN14Class_000FF5D8D1Ev(struct Unk_func_00013BA4_0 *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000FF5D8;
     M2C_FIELD(arg0, s32 *, 4) = 0;
 }
 #endif
 
 #if FW_VERSION < 282
-void func_00039D20(void *arg0) {
+void _ZN14Class_000FF5D8D0Ev(struct Unk_func_00013BB8_0 *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000FF5D8;
     M2C_FIELD(arg0, s32 *, 4) = 0;
     _ZdlPv(arg0);
@@ -289,23 +304,28 @@ void func_0001A9F8(M2C_UNK **arg0) {
 }
 #endif
 
+#if FW_VERSION < 201
+Class_000D1EB0::~Class_000D1EB0() {
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 void func_0001AA28(M2C_UNK **arg0) {
     *arg0 = &D_000D1EB0;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
 }
 
 void func_0001AA50(M2C_UNK **arg0) {
     *arg0 = &D_000D1EB0;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
 }
 
 void func_0001AA78(M2C_UNK **arg0) {
     *arg0 = &D_000D1EB0;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00016328);
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_000164A4);
@@ -399,7 +419,13 @@ INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0003B43C);
 
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000D1EB0);
+#endif
 
+#if FW_VERSION < 201
+__asm__(".globl _ZTV14Class_000D1EB0\n_ZTV14Class_000D1EB0 = D_000D1EB0 - 8\n");
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0003B548);
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0003B808);
@@ -410,17 +436,17 @@ INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0003BDC8);
 
 void func_0003BE20(s32 **arg0) {
     *arg0 = &D_000FF78C;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
 }
 
 void func_0003BE48(s32 **arg0) {
     *arg0 = &D_000FF78C;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
 }
 
 void func_0003BE70(s32 **arg0) {
     *arg0 = &D_000FF78C;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
 
@@ -485,13 +511,14 @@ INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0003D474);
 
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001A878);
+#endif
 
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001A8C8);
+#if FW_VERSION >= 250
+Class_000D0798::~Class_000D0798() {
+}
+#endif
 
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001A8F0);
-
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001A918);
-
+#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001A950);
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001AA8C);
@@ -533,6 +560,8 @@ INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000FF7E8);
 
 #if FW_VERSION == 250
 INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000D0798);
+
+__asm__(".globl _ZTV14Class_000D0798\n_ZTV14Class_000D0798 = D_000D0798 - 8\n");
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -685,6 +714,8 @@ void func_0001BEF4(struct Unk_func_0001BEF4_0 *arg0) {
 }
 
 INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000D1EB0);
+
+__asm__(".globl _ZTV14Class_000D0798\n_ZTV14Class_000D0798 = D_000D1EB0 - 8\n");
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001BF2C);
 #endif

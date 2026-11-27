@@ -5253,11 +5253,11 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0005C92C);
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0005CBB4);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0005CE3C);
+INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN14Class_000D8898D2Ev);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0005CFB4);
+INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN14Class_000D8898D1Ev);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0005D12C);
+INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN14Class_000D8898D0Ev);
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0005D2AC);
 
@@ -5892,24 +5892,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0007A8A8);
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf10PhMenuListC1EPNS_8PhWidgetEPNS_8PhAppearE);
 #endif
 
-#if FW_VERSION == 250
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf10PhMenuListD2Ev);
-#else
-void func_00061EF4(M2C_UNK **arg0) {
-    *arg0 = &D_000D8BF8;
-    func_0005CE3C((s32) arg0);
-}
-#endif
-
-void func_00061F1C(M2C_UNK **arg0) {
-    *arg0 = &D_000D8BF8;
-    func_0005CE3C((s32) arg0);
-}
-
-void func_00061F44(M2C_UNK **arg0) {
-    *arg0 = &D_000D8BF8;
-    func_0005CE3C((s32) arg0);
-    _ZdlPv(arg0);
+Class_000D8BF8::~Class_000D8BF8() {
 }
 
 #if FW_VERSION == 250
@@ -6336,6 +6319,8 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0006437C);
 INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D8BE8);
 
 INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D8BF8);
+
+__asm__(".globl _ZTV14Class_000D8BF8\n_ZTV14Class_000D8BF8 = D_000D8BF8 - 8\n");
 
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_00105D50);
