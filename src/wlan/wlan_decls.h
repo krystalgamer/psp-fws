@@ -486,6 +486,7 @@ extern s32 D_000192AC;
 extern s32 D_000192B0;
 extern s32 D_000192B4;
 extern s32 D_000194E4;
+extern SceWlanWakeUp D_0002A038;
 extern SceWlanMsg D_0002A060;
 extern SceWlanMsg D_0002A07C;
 extern SceWlanMsg D_0002A098;
