@@ -1403,7 +1403,35 @@ end:
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValueByName);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00004D6C);
+s32 func_00004D6C(SceRegIndexEntry *cat, s32 keyId, void *buf, s32 size) {
+    SceRegKeyEntry *k;
+    u32 v;
+    s32 len;
+
+    if (func_00003E60(cat) == NULL)
+        return 0x8008272E;
+    k = (SceRegKeyEntry *)(keyId ^ 0xA0F3D97B);
+    switch (k->type) {
+    case 1:
+        return 0x80082722;
+    case 2:
+        if (size < 4)
+            return 0x80082723;
+        *(u32 *)buf = k->value;
+        break;
+    case 3:
+    case 4:
+        v = k->value;
+        len = v & 0xFFFF;
+        if (size < len)
+            return 0x80082723;
+        memcpy(buf, (u8 *)cat->opened->buf + ((v >> 24) << 5), len);
+        break;
+    default:
+        return 0x8008271C;
+    }
+    return 0;
+}
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveKey);
