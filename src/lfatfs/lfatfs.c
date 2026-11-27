@@ -2923,11 +2923,39 @@ s32 func_0000881C(s32 arg0) {
     sceKernelFreeHeapMemory(D_0000D984, arg0);
     return 0;
 }
+#endif
 
+#if FW_VERSION == 100
+s32 func_00008848(void) {
+    s32 res;
+
+    res = df_close(NULL);
+    if (res < 0) {
+        Kprintf(D_0000DCE0, "test_close", res);
+        Kprintf(D_0000D874, D_0000C56C, "test_close", 0x928);
+        sceKernelAssert(0, 0);
+    }
+    return res;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/lfatfs", func_00008848);
+#endif
 
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000DCE0);
+#endif
 
+#if FW_VERSION == 100
+s32 lflash_read_only_mode(s32 mode) {
+    Kprintf("lflash.c:%s:(mode %d)\n", "lflash_read_only_mode", mode);
+    D_0000D980 = mode;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/lfatfs", lflash_read_only_mode);
 #endif
 
@@ -3048,9 +3076,7 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00009050);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000DCB4);
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000DCE0);
 
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000DCF8);
