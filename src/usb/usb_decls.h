@@ -69,6 +69,10 @@ typedef struct UsbbdEpRec {
     SceUsbdDeviceReq *tail;
 } UsbbdEpRec;
 
+typedef struct UsbbdDescRef {
+    u8 *desc;
+} UsbbdDescRef;
+
 /* bus driver state (.data) */
 typedef struct UsbbdState {
     SceUsbdDriver *drivers; /* started drivers */
@@ -81,15 +85,15 @@ typedef struct UsbbdState {
     u32 connState; /* 1 / 2 */
     s32 numInterfaces;
     s32 numEndpoints;
-    void *unkFC;
-    void *unk100;
-    void *unk104;
-    void *unk108;
+    void *unkFC; /* hi-speed device descriptor */
+    struct UsbbdDescRef *unk100; /* hi-speed configuration */
+    void *unk104; /* full-speed device descriptor */
+    struct UsbbdDescRef *unk108; /* full-speed configuration */
     u32 unk10C;
-    u32 unk110;
-    u32 unk114;
-    u32 unk118;
-    u32 unk11C;
+    void *unk110; /* GET_DESCRIPTOR buffers (FPL unk180) */
+    void *unk114;
+    void *unk118;
+    void *unk11C;
     u32 unk120;
     u32 unk124;
     u32 unk128;
@@ -102,7 +106,7 @@ typedef struct UsbbdState {
     u32 unk174;
     u32 unk178;
     u32 unk17C;
-    u32 unk180;
+    SceUID unk180;
     s32 (*start)(s32, void *);
     s32 (*stop)(s32, void *);
 } UsbbdState;
@@ -143,6 +147,55 @@ typedef struct UsbbdHw {
 } UsbbdHw;
 typedef char chk_UsbbdHw[(sizeof(UsbbdHw) == 0x230) ? 1 : -1];
 
+/* parsed descriptors (bus driver internal) */
+typedef struct UsbbdEndpointDesc {
+    u8 bLength;
+    u8 bDescriptorType;
+    u8 bEndpointAddress;
+    u8 bmAttributes;
+    u16 wMaxPacketSize;
+    u8 bInterval;
+    u8 pad7;
+    void *extra;
+    s32 extraLength;
+} UsbbdEndpointDesc;
+
+typedef struct UsbbdAltSetting {
+    u8 bLength;
+    u8 bDescriptorType;
+    u8 bInterfaceNumber;
+    u8 bAlternateSetting;
+    u8 bNumEndpoints;
+    u8 bInterfaceClass;
+    u8 bInterfaceSubClass;
+    u8 bInterfaceProtocol;
+    u8 iInterface;
+    u8 pad9[3];
+    UsbbdEndpointDesc *endpoints;
+    void *extra;
+    s32 extraLength;
+} UsbbdAltSetting;
+typedef char chk_UsbbdAltSetting[(sizeof(UsbbdAltSetting) == 0x18) ? 1 : -1];
+
+typedef struct UsbbdInterface {
+    UsbbdAltSetting *settings;
+    s32 curAlt;
+    s32 numSettings;
+} UsbbdInterface;
+
+typedef struct UsbbdConfig {
+    u8 bLength;
+    u8 bDescriptorType;
+    u16 wTotalLength;
+    u8 bNumInterfaces;
+    u8 bConfigurationValue;
+    u8 iConfiguration;
+    u8 bmAttributes;
+    u8 bMaxPower;
+    u8 pad9[3];
+    UsbbdInterface *interfaces;
+} UsbbdConfig;
+
 struct Unk_func_00008318_0 {
     u8 pad0[0x40];
     struct Unk_func_00008318_temp_a0 *unk40;
@@ -172,9 +225,13 @@ extern void *D_00009FC8;
 extern char D_0000A024[];
 extern s32 D_0000A034;
 extern s32 D_0000A038;
+extern char D_0000A050[];
 extern char D_0000A174[];
 extern char D_0000A46C[];
+extern char D_0000A48C[];
 extern char D_0000A4C0[];
+extern char D_0000A500[];
+extern char D_0000A578[];
 extern char D_0000A5A4[];
 extern char D_0000A5D4[];
 extern char D_0000A690[];
@@ -205,6 +262,8 @@ extern SceUsbdDriver *g_usbbdRegistered;
 
 s32 Kprintf(const char *fmt, ...);
 s32 func_00000090(s32, s32);
+void func_000005E4(void *dst, const void *src, s32 size);
+UsbbdDescRef *func_00000EE0(s32 speed, void *buf);
 s32 func_00002E4C(s32, s32, s32, s32);
 s32 func_00002F64(s32, s32, s32, s32);
 void func_00003198(void);
@@ -238,6 +297,7 @@ s32 func_00008318_v301(void);
 s32 func_00008318_v302(void);
 s32 func_00008318_v303(void);
 void *func_00008334(void *arg0, void *arg1);
+s32 func_00008634(SceUsbdDriver *drv);
 s32 func_00008A24(void);
 s32 func_00008A30(void);
 void func_00008AA8(void);
@@ -252,13 +312,16 @@ s32 module_start(void);
 M2C_UNK sceGpioPortClear(M2C_UNK);
 M2C_UNK sceGpioPortSet(M2C_UNK);
 s32 sceGpioSetPortMode(M2C_UNK, M2C_UNK);
+SceUID sceKernelCreateFpl(const char *name, s32 part, u32 attr, u32 size, u32 blocks, void *opt);
 s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
+void sceKernelDcacheWritebackRange(const void *p, u32 size);
 M2C_UNK sceKernelDisableIntr(M2C_UNK);
 s32 sceKernelPowerLock(s32);
 s32 sceKernelPowerUnlock(s32);
 s32 sceKernelRegisterSysEventHandler(M2C_UNK *);
 M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);
 s32 sceKernelSignalSema(s32, s32);
+s32 sceKernelTryAllocateFpl(SceUID fpl, void **data);
 s32 sceKernelUnregisterSysEventHandler(M2C_UNK *);
 s32 sceKernelWaitSema(s32, s32, void *);
 M2C_UNK sceSysregUsbAcquireIntr(M2C_UNK);

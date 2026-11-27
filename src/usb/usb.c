@@ -230,9 +230,48 @@ INCLUDE_ASM("nonmatchings/usb", func_000016C0);
 
 INCLUDE_ASM("nonmatchings/usb", func_00001790);
 
-INCLUDE_ASM("nonmatchings/usb", func_0000192C);
+void func_0000192C(u8 *src, u8 *dst) {
+    func_000005E4(dst, src, 8);
+    dst[0] = 10;
+    dst[1] = 6;
+    dst[8] = src[0x11];
+    dst[9] = 0;
+}
 
-INCLUDE_ASM("nonmatchings/usb", func_00001984);
+void func_00001984(UsbbdConfig *cfg, u8 *out) {
+    UsbbdInterface *intf;
+    UsbbdAltSetting *as;
+    UsbbdEndpointDesc *ep;
+    s32 i;
+    s32 j;
+    s32 k;
+    u8 *p;
+
+    p = out;
+    func_000005E4(p, (u8 *)cfg, 9);
+    p += 9;
+    intf = cfg->interfaces;
+    for (i = 0; i < cfg->bNumInterfaces; i++, intf++) {
+        as = intf->settings;
+        for (j = 0; j < intf->numSettings; j++, as++) {
+            func_000005E4(p, (u8 *)as, 9);
+            p += 9;
+            if (as->extraLength != 0) {
+                func_000005E4(p, as->extra, as->extraLength);
+                p += as->extraLength;
+            }
+            ep = as->endpoints;
+            for (k = 0; k < as->bNumEndpoints; k++, ep++) {
+                func_000005E4(p, (u8 *)ep, 7);
+                p += 7;
+                if (ep->extraLength != 0) {
+                    func_000005E4(p, ep->extra, ep->extraLength);
+                    p += ep->extraLength;
+                }
+            }
+        }
+    }
+}
 
 #if FW_VERSION < 282
 s32 func_00001AD0(void) {
@@ -278,7 +317,52 @@ void func_00001D94(void) {
 INCLUDE_ASM("nonmatchings/usb", func_00001D94);
 #endif
 
-INCLUDE_ASM("nonmatchings/usb", func_00001E20);
+s32 func_00001E20(s32 ifnum, s32 alt, UsbbdConfig *cfg) {
+    s32 i;
+    s32 j;
+    s32 k;
+    UsbbdInterface *intf = cfg->interfaces;
+    UsbbdAltSetting *as;
+    UsbbdEndpointDesc *ep;
+
+    for (i = 0; i < cfg->bNumInterfaces; i++, intf++) {
+        as = intf->settings;
+        if (as->bInterfaceNumber != ifnum) {
+            continue;
+        }
+        if (alt < 0) {
+            alt = 0;
+        } else {
+            for (j = 0; j < intf->numSettings; j++, as++) {
+                if (as->bAlternateSetting == intf->curAlt) {
+                    ep = as->endpoints;
+                    for (k = 0; k < as->bNumEndpoints; k++, ep++) {
+                        s32 n = ep->bEndpointAddress & 0xF;
+
+                        func_00005B68(n);
+                        func_000026E8(n);
+                        func_00003A10(n);
+                    }
+                    break;
+                }
+            }
+            as = intf->settings;
+        }
+        for (j = 0; j < intf->numSettings; j++, as++) {
+            if (as->bAlternateSetting == alt) {
+                intf->curAlt = alt;
+                ep = as->endpoints;
+                for (k = 0; k < as->bNumEndpoints; k++, ep++) {
+                    if (func_000037C4(ep) < 0) {
+                        return -1;
+                    }
+                }
+                return 0;
+            }
+        }
+    }
+    return -1;
+}
 
 INCLUDE_ASM("nonmatchings/usb", func_00001FC4);
 
