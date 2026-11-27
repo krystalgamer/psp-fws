@@ -1915,13 +1915,10 @@ s32 bpf_setif(struct bpf_d *d, struct ifreq *ifr) {
 
 #if FW_VERSION < 201
 void func_00004430(struct ifnet *ifp, struct ifreq *ifr) {
-    s32 *src = (s32 *)ifp->if_xname;
-    s32 *dst = (s32 *)ifr->ifr_name;
-
-    dst[0] = src[0];
-    dst[1] = src[1];
-    dst[2] = src[2];
-    dst[3] = src[3];
+    M2C_FIELD(ifr, s32 *, 0) = M2C_FIELD(ifp, s32 *, 0x14);
+    M2C_FIELD(ifr, s32 *, 4) = M2C_FIELD(ifp, s32 *, 0x18);
+    M2C_FIELD(ifr, s32 *, 8) = M2C_FIELD(ifp, s32 *, 0x1C);
+    M2C_FIELD(ifr, s32 *, 0xC) = M2C_FIELD(ifp, s32 *, 0x20);
 }
 #endif
 
