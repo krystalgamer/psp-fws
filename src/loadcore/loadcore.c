@@ -369,21 +369,40 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_000068AC);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00000A7C);
+void func_00000A7C(u32 *src, u32 *dst, s32 n) {
+    s32 i;
+
+    for (i = n - 1; i >= 0; i--)
+        dst[i] = src[i];
+}
 
 void func_00000AAC(void *arg0, void *arg1) {
     func_00005338(M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg1, s32 *, 4));
 }
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000ACC);
+s32 func_00000ACC(SceResidentLibrary *a, SceResidentLibrary *b) {
+    return a->version - b->version;
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000ADC);
+s32 func_00000ADC(SceResidentLibrary *lib, SceStubLibrary *stub) {
+    return lib->version - stub->version;
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000AEC);
+s32 func_00000AEC(SceResidentLibrary *lib, SceStubLibrary *stub) {
+    return func_00005338(stub->libName, lib->libName);
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000B10);
+s32 func_00000B10(SceResidentLibrary *lib, SceStubLibrary *stub) {
+    return (lib->version >> 8) - (stub->version >> 8);
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000B28);
+s32 func_00000B28(SceStubLibrary *list, SceStubLibrary *stub) {
+    for (; list != NULL; list = list->next) {
+        if (list->unk20 == stub->unk20)
+            return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00000B58);
 
@@ -391,7 +410,21 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00000B98);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00000C08);
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000CC0);
+void func_00000CC0(SceStubLibrary *stub) {
+    u32 i;
+    u32 *p;
+
+    i = stub->stubCount;
+    if (i != 0) {
+        p = stub->stubTable;
+        do {
+            i--;
+            p[0] = 0x03E00008;
+            p[1] = 0;
+            p += 2;
+        } while (i != 0);
+    }
+}
 #endif
 
 #if FW_VERSION < 152
@@ -688,12 +721,18 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelUnLinkLibraryEntries);
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelMaskLibraryEntries);
 #endif
 
-#if FW_VERSION < 150 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION < 150
+void *sceKernelQueryLoadCoreCB(void) {
+    return &D_000088FC;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelQueryLoadCoreCB);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 *sceKernelQueryLoadCoreCB(void) {
+void *sceKernelQueryLoadCoreCB(void) {
     return &D_00008C40;
 }
 #endif
@@ -937,7 +976,7 @@ s32 sceKernelMaskLibraryEntries(void) {
 #endif
 
 #if FW_VERSION >= 282
-M2C_UNK *sceKernelQueryLoadCoreCB(void) {
+void *sceKernelQueryLoadCoreCB(void) {
     return &D_000097AC;
 }
 #endif
@@ -980,7 +1019,14 @@ s32 sceKernelLoadCoreMode(void) {
 INCLUDE_ASM("nonmatchings/loadcore", func_00002808);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION == 282
+#if FW_VERSION < 150
+s32 func_000029D8(void *func) {
+    D_00007270 = func;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/loadcore", func_000029D8);
 #endif
 
@@ -1095,9 +1141,17 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00002AE0);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00002AA0);
+void func_00002AA0(SceLoadCoreExecFileInfo *execInfo, s32 ret) {
+    if (ret == 0) {
+        execInfo->isDecrypted = 1;
+        return;
+    }
+    execInfo->isDecrypted = 0;
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00002AB8);
+u32 func_00002AB8(SceModule *mod) {
+    return mod->attribute & 0x1E00;
+}
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00002AC4);
 #endif

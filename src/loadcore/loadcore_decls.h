@@ -76,6 +76,28 @@ typedef struct SceSysmemUidCB {
     u16 attr; /* 0x16 */
 } SceSysmemUidCB;
 
+/* library entry tables as in the module files (.lib.ent / .lib.stub) */
+typedef struct {
+    const char *libName; /* 0x0 */
+    u16 version; /* 0x4 */
+    u16 attribute; /* 0x6 */
+    u8 len; /* 0x8 */
+    u8 vStubCount; /* 0x9 */
+    u16 stubCount; /* 0xA */
+    u32 *entryTable; /* 0xC */
+} SceResidentLibraryEntryTable;
+typedef struct {
+    const char *libName; /* 0x0 */
+    u16 version; /* 0x4 */
+    u16 attribute; /* 0x6 */
+    u8 len; /* 0x8 */
+    u8 vStubCount; /* 0x9 */
+    u16 stubCount; /* 0xA */
+    u32 *nidTable; /* 0xC */
+    u32 *stubTable; /* 0x10 */
+    void *vStubTable; /* 0x14 */
+} SceStubLibraryEntryTable;
+
 /* systable.c (1.00 layouts confirmed in the asm) */
 typedef struct SceSysCallEntryTable {
     struct SceSysCallEntryTable *next; /* 0x0 */
@@ -118,7 +140,7 @@ typedef struct SceStubLibrary {
     u8 vStubCount; /* 0x11 */
     u16 stubCount; /* 0x12 */
     u32 *nidTable; /* 0x14 */
-    void *stubTable; /* 0x18 */
+    u32 *stubTable; /* 0x18 */
     void *vStubTable; /* 0x1C */
     u32 unk20; /* 0x20 */
     void *libStubTable; /* 0x24 */
@@ -201,6 +223,7 @@ extern SceResidentLibrary *D_00007260; /* g_FreeLibEnt */
 extern SceStubLibrary *D_00007264; /* g_FreeLibStub */
 extern SceSysCallEntryTable *D_00007268; /* g_pFreeSysEnt */
 extern SceSysCallEntryTable *D_0000726C; /* g_pSysEntControl */
+extern void *D_00007270;
 extern SceSysmemUidCB *D_00007274; /* g_ModuleType */
 extern SceResidentLibrary D_00007278[30]; /* g_LoadCoreLibEntries */
 extern M2C_UNK D_000073A0;
@@ -316,7 +339,7 @@ s32 sceKernelLoadCoreMode(void);
 s32 sceKernelMaskLibraryEntries(void);
 s32 sceKernelModuleAssign(SceModule *mod, SceLoadCoreExecFileInfo *execInfo);
 s32 sceKernelModuleCount(void);
-s32 *sceKernelQueryLoadCoreCB(void);
+void *sceKernelQueryLoadCoreCB(void);
 void sceKernelRegisterLibrary(s32 arg0);
 void sceKernelRegisterLibraryForUser(s32 arg0);
 s32 sceKernelRegisterSystemCallTable(SceSyscallTable *table);
