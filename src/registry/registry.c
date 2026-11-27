@@ -168,7 +168,7 @@ s32 module_reboot_phase(s32 arg0) {
     case 0:
         break;
     case 2:
-        sceKernelWaitSema(D_00006FDC, 1, NULL);
+        sceKernelWaitSema(g_semaId, 1, NULL);
         break;
     }
     return 0;
