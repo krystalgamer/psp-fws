@@ -111,6 +111,7 @@ def compile_errors(path, ver):
             msgs[-1] += " " + line.strip()
         else:
             msgs.append(line)
+    msgs = [re.sub(r"\s+", " ", m) for m in msgs]
     errs = []
     pending = None  # an error reported at a declaration in a header, located by the next "at this point"
     for line in msgs:
