@@ -255,7 +255,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00000280);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_0000030C);
 
-#if FW_VERSION != 150
+#if FW_VERSION == 100 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00000348);
 #else
 void func_00000348(s32 arg0) {
@@ -2140,11 +2140,11 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00005EF8);
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00005F3C);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 271
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_000068E0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000068E0(s32 arg0) {
     _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0x6E);
     _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0x78);

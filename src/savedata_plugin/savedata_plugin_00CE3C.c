@@ -283,21 +283,21 @@ void func_000099C8(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CE2C);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void func_0000CE2C(s32 **arg0) {
     *arg0 = &D_00022508;
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CE3C);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void func_0000CE3C(s32 **arg0) {
     *arg0 = &D_00022508;
     _ZdlPv();
@@ -396,22 +396,22 @@ void func_00009E38(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000D19C);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void func_0000D19C(s32 **arg0) {
     *arg0 = &D_000224F8;
     func_0000D214((s32) arg0);
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000D1C4);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void func_0000D1C4(s32 **arg0) {
     *arg0 = &D_000224F8;
     func_0000D214((s32) arg0);
