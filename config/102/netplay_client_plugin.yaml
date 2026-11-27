@@ -9,12 +9,13 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/netplay_client_plugin
-  src_path: tmp/av_src/102/netplay_client_plugin
+  src_path: src/netplay_client_plugin
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/netplay_client_plugin.ld
   cache_path: tmp/build/102/.splat_cache.netplay_client_plugin
   symbol_addrs_path:
     - config/102/symbol_addrs.netplay_client_plugin.txt
+    - config/102/func_starts.netplay_client_plugin.txt
     - tmp/build/102/prx_syms.netplay_client_plugin.txt
   reloc_addrs_path: [tmp/build/102/reloc_addrs.netplay_client_plugin.txt]
   asset_path: tmp/assets/102/netplay_client_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, netplay_client_plugin]
+      - [0x55B0, c, netplay_client_plugin_crtend]
       - { start: 0x5608, type: asm, name: fini, linker_section: .fini }
       - { start: 0x5624, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x5974, type: prxpad, order: .text }
@@ -73,6 +75,7 @@ segments:
       - { start: 0x5EE8, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x5EEC, type: prxpad, order: .rodata }
       - [0x5EF0, .rodata, netplay_client_plugin]
+      - [0x6918, .rodata, netplay_client_plugin_crtend]
   - name: netplay_client_plugin_seg1
     type: code
     start: 0x6970

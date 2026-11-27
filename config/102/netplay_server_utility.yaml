@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/netplay_server_utility
-  src_path: src/netplay_server_utility
+  src_path: tmp/av_src/102/netplay_server_utility
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/netplay_server_utility.ld
   cache_path: tmp/build/102/.splat_cache.netplay_server_utility
@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, netplay_server_utility]
+      - [0xA4, c, netplay_server_utility]
       - { start: 0x32B0, type: asm, name: fini, linker_section: .fini }
       - { start: 0x32CC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x351C, type: prxpad, order: .text }
@@ -72,7 +72,7 @@ segments:
       - { start: 0x395C, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x3960, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x3964, type: prxpad, order: .rodata }
-      - [0x3968, rodata, netplay_server_utility]
+      - [0x3968, .rodata, netplay_server_utility]
       - { start: 0x3EB8, type: prxpad, order: .rodata }
   - name: netplay_server_utility_seg1
     type: code
