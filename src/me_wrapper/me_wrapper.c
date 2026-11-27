@@ -1,12 +1,12 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
 #include "me_wrapper_decls.h"
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000000);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000124);
@@ -134,7 +134,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C00D873B);
 
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_00001F8C);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/me_wrapper", func_000007D4);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_000009D4);
@@ -206,7 +206,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C86500E3);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_5AD660FA);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000CE4);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000D10);
@@ -276,7 +276,7 @@ void sceMePowerSelectAvcClock(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001070);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/me_wrapper", func_000010AC);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_0000111C);
@@ -328,7 +328,7 @@ void sceMeWrapper_driver_B97B15D7(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001498);
 #endif
 
@@ -364,7 +364,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00001588);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001624);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001560);
 #endif
 
@@ -397,7 +397,7 @@ s32 sceMeWrapperEnd(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/me_wrapper", func_000015EC);
 #endif
 
