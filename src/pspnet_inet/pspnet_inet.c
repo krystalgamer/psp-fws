@@ -2598,7 +2598,58 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012230);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012354);
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 201
+struct in_multi *func_00012108(struct in_addr *ap, struct ifnet *ifp) {
+    struct in_multi *inm;
+    struct ifreq ifr;
+    struct in_ifaddr *ia;
+    s32 s = _sce_pspnet_spllock();
+
+    IFP_TO_IA(ifp, ia);
+    if (ia == NULL)
+        inm = NULL;
+    else {
+        for (inm = ia->ia_multiaddrs.lh_first; inm != NULL && inm->inm_addr.s_addr != ap->s_addr; inm = inm->inm_list.le_next)
+            continue;
+    }
+    if (inm != NULL) {
+        ++inm->inm_refcount;
+    } else {
+        inm = (struct in_multi *)sceNetMallocInternal(sizeof(*inm));
+        if (inm == NULL) {
+            _sce_pspnet_splunlock(s);
+            return (NULL);
+        }
+        inm->inm_addr = *ap;
+        inm->inm_ifp = ifp;
+        inm->inm_refcount = 1;
+        IFP_TO_IA(ifp, ia);
+        if (ia == NULL) {
+            sceNetFreeInternal(inm);
+            _sce_pspnet_splunlock(s);
+            return (NULL);
+        }
+        inm->inm_ia = ia;
+        inm->inm_ia->ia_ifa.ifa_refcnt++;
+        LIST_INSERT_HEAD(&ia->ia_multiaddrs, inm, inm_list);
+        ((struct sockaddr_in *)&ifr.ifr_addr)->sin_len = sizeof(struct sockaddr_in);
+        ((struct sockaddr_in *)&ifr.ifr_addr)->sin_family = AF_INET;
+        ((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr = *ap;
+        if ((ifp->if_ioctl == NULL) ||
+            (*ifp->if_ioctl)(ifp, 0x80206931, (void *)&ifr) != 0) {
+            LIST_REMOVE(inm, inm_list);
+            sceNetFreeInternal(inm);
+            _sce_pspnet_splunlock(s);
+            return (NULL);
+        }
+        igmp_joingroup(inm);
+    }
+    _sce_pspnet_splunlock(s);
+    return (inm);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012108);
 #endif
 
@@ -2679,9 +2730,53 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", in_delmulti);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000123FC);
+s32 func_000123FC(struct in_addr in) {
+    struct in_ifaddr *ia;
 
+    if (D_0002C01C) {
+        for (ia = in_ifaddrhead.tqh_first; ia != 0; ia = ia->ia_list.tqe_next) {
+            if ((in.s_addr & ia->ia_netmask) == ia->ia_net) {
+                return 1;
+            }
+        }
+    } else {
+        for (ia = in_ifaddrhead.tqh_first; ia != 0; ia = ia->ia_list.tqe_next) {
+            if ((in.s_addr & ia->ia_subnetmask) == ia->ia_subnet) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 201
+s32 func_00012490(struct in_addr in) {
+    u32 net;
+
+    if (((in.s_addr & __builtin_allegrex_wsbw(0xF0000000)) == __builtin_allegrex_wsbw(0xF0000000)) || IN_MULTICAST(in.s_addr)) {
+        return 0;
+    }
+    if ((in.s_addr & __builtin_allegrex_wsbw(0x80000000)) == __builtin_allegrex_wsbw(0)) {
+        net = in.s_addr & __builtin_allegrex_wsbw(0xFF000000);
+        if (net == 0 || net == __builtin_allegrex_wsbw(127 << 24)) {
+            return 0;
+        }
+    }
+    return 1;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012490);
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION < 201
+
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_socktrim);
+
+#endif
 #endif
 
 #if FW_VERSION < 151

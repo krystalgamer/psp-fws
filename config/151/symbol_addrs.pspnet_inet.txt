@@ -702,3 +702,4 @@ in_pcbnotifyall = 0x00013F3C; // type:func
 in_pcbbind = 0x00012EC0; // type:func
 in_selectsrc = 0x0001384C; // type:func
 udp_ctlinput = 0x0001BE04; // type:func
+in_socktrim = 0x0001250C; // type:func (unreferenced, was merged into in_canforward)
