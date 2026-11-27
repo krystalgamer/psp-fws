@@ -4261,13 +4261,52 @@ s32 func_000251A4(void *arg0) {
 s32 func_00023828(struct Unk_func_00023828_0 *arg0) {
     return (((arg0->unk2A & 0x188) ^ 0x180) != 0) ? 0 : 0xC;
 }
+#else
+struct tcpcb *func_00023840(struct tcpcb *tp, s32 errno) {
+    struct socket *so;
+
+    if (tp->t_inpcb) {
+        so = tp->t_inpcb->inp_socket;
+    } else {
+        return NULL;
+    }
+    if (TCPS_HAVERCVDSYN(tp->t_state)) {
+        tp->t_state = TCPS_CLOSED;
+        (void)func_000215C4(tp);
+        D_00030380.tcps_drops++;
+    } else {
+        D_00030380.tcps_conndrops++;
+    }
+    if (errno == 116 /* ETIMEDOUT */ && tp->t_softerror) {
+        errno = tp->t_softerror;
+    }
+    so->so_error = errno;
+    return func_00023030(tp);
+}
 #endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023840);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023908);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000239E4);
+void func_000239E4(struct inpcb *inp, s32 error) {
+    struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
+    struct socket *so = inp->inp_socket;
+
+    if (tp->t_state == TCPS_ESTABLISHED &&
+        (error == 118 /* EHOSTUNREACH */ || error == 114 /* ENETUNREACH */ || error == 117 /* EHOSTDOWN */)) {
+        return;
+    } else if (TCPS_HAVEESTABLISHED(tp->t_state) == 0 && tp->t_rxtshift > 3 && tp->t_softerror) {
+        so->so_error = error;
+    } else {
+        tp->t_softerror = error;
+    }
+    _sce_pspnet_wakeup(&so->so_timeo);
+    sorwakeup(so);
+    sowwakeup(so);
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002544C);
@@ -4368,11 +4407,11 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023F70);
 #if FW_VERSION < 250
 void func_00024430(void) {
     s32 s = _sce_pspnet_spllock();
-    u8 *p, *next;
-    for (p = D_000305A4; p != NULL; p = next) {
-        next = *(u8 **)(p + 0x38);
-        *(u16 *)(p + 0x28) |= 1;
-        func_000215C4(p);
+    struct tcpcb *tp, *next;
+    for (tp = D_000305A4; tp != NULL; tp = next) {
+        next = tp->t_delack.le_next;
+        tp->t_flags |= 0x1; /* TF_ACKNOW */
+        func_000215C4(tp);
     }
     _sce_pspnet_splunlock(s);
 }

@@ -782,6 +782,24 @@ struct tcpcb {
     s16 t_srtt;                 /* 0x88 */
     s16 t_rttvar;               /* 0x8A */
     s16 t_rttmin;               /* 0x8C */
+    u32 max_sndwnd;             /* 0x90 */
+    s8 t_oobflags;              /* 0x94 */
+    s8 t_iobc;                  /* 0x95 */
+    s16 t_softerror;            /* 0x96 */
+};
+#define TCPS_CLOSED 0
+#define TCPS_SYN_RECEIVED 3
+#define TCPS_ESTABLISHED 4
+#define TCPS_HAVERCVDSYN(s) ((s) >= TCPS_SYN_RECEIVED)
+#define TCPS_HAVEESTABLISHED(s) ((s) >= TCPS_ESTABLISHED)
+
+/* struct tcpstat (NetBSD 1.5, u_quad_t counters; partial) */
+struct tcpstat {
+    u64 tcps_connattempt;       /* 0x00 */
+    u64 tcps_accepts;           /* 0x08 */
+    u64 tcps_connects;          /* 0x10 */
+    u64 tcps_drops;             /* 0x18 */
+    u64 tcps_conndrops;         /* 0x20 */
 };
 #define TCPTV_PERSMIN 10
 #define TCPTV_PERSMAX 120
@@ -1262,7 +1280,8 @@ extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
 extern u8 D_00030218[];
-extern u8 *D_000305A4;
+extern struct tcpstat D_00030380;
+extern struct tcpcb *D_000305A4; /* tcp_delacks */
 extern const struct cp chap; /* chap */
 extern const struct cp *cps[IDX_COUNT]; /* cps */
 extern SceNetBytes4 dns_primary;
@@ -1444,10 +1463,13 @@ void func_0001C208(void);
 void func_0001C2E0(struct inpcb *inp);
 void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1);
 void func_0001D1E4(void *arg0, s16 arg1);
-void func_000215C4(void *p);
+s32 func_000215C4(struct tcpcb *tp);
+struct tcpcb *func_00023030(struct tcpcb *tp);
 s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
 void func_0002373C(struct inpcb *inp, s32 errno);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
+struct tcpcb *func_00023840(struct tcpcb *tp, s32 errno);
+void func_000239E4(struct inpcb *inp, s32 error);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
 void func_00023B08(struct inpcb *inp, s32 errno);
 void func_000244B0(void);
