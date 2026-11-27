@@ -4326,7 +4326,30 @@ void func_00028164(struct sppp *sp) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00028194);
+void func_00028194(struct sppp *sp) {
+    char opt[6 /* magicnum */ + 4 /* mru */ + 5 /* chap */];
+    s32 i = 0;
+
+    if (sp->lcp_opts & (1 << 5)) { /* LCP_OPT_MAGIC */
+        if (!sp->lcp_magic) {
+            sp->lcp_magic = sceNetRand();
+        }
+        opt[i++] = 5;
+        opt[i++] = 6;
+        opt[i++] = sp->lcp_magic >> 24;
+        opt[i++] = sp->lcp_magic >> 16;
+        opt[i++] = sp->lcp_magic >> 8;
+        opt[i++] = sp->lcp_magic;
+    }
+    if (sp->lcp_opts & (1 << 1)) { /* LCP_OPT_MRU */
+        opt[i++] = 1;
+        opt[i++] = 4;
+        opt[i++] = sp->lcp_mru >> 8;
+        opt[i++] = sp->lcp_mru;
+    }
+    sp->confid[IDX_LCP] = ++sp->pp_seq[IDX_LCP];
+    func_00025638(sp, 0xC021 /* PPP_LCP */, 1 /* CONF_REQ */, sp->confid[IDX_LCP], i, &opt);
+}
 
 void func_00028290(struct sppp *sp) {
     const struct cp *cp = &D_0002BB54;
@@ -4704,7 +4727,50 @@ void func_00028B7C(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00028B84);
+void func_00028B84(const struct cp *cp, struct sppp *sp) {
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    if (--sp->rst_counter[cp->protoidx] < 0) {
+        switch (sp->state[cp->protoidx]) {
+        case STATE_CLOSING:
+            (cp->tlf)(sp);
+            func_00025F18(cp, sp, STATE_CLOSED);
+            func_00026734(sp);
+            break;
+        case STATE_STOPPING:
+            (cp->tlf)(sp);
+            func_00025F18(cp, sp, STATE_STOPPED);
+            func_00026734(sp);
+            break;
+        case STATE_REQ_SENT:
+        case STATE_ACK_RCVD:
+        case STATE_ACK_SENT:
+            (cp->tlf)(sp);
+            func_00025F18(cp, sp, STATE_STOPPED);
+            func_00026734(sp);
+            break;
+        }
+    } else {
+        switch (sp->state[cp->protoidx]) {
+        case STATE_CLOSING:
+        case STATE_STOPPING:
+            func_00025638(sp, cp->proto, 5 /* TERM_REQ */, ++sp->pp_seq[cp->protoidx], 0, 0);
+            _sce_pspnet_callout_reset(sp->ch[cp->protoidx], sp->lcp_timeout, cp->TO, sp);
+            break;
+        case STATE_REQ_SENT:
+        case STATE_ACK_RCVD:
+            (cp->scr)(sp);
+            func_00025F18(cp, sp, STATE_REQ_SENT);
+            break;
+        case STATE_ACK_SENT:
+            (cp->scr)(sp);
+            _sce_pspnet_callout_reset(sp->ch[cp->protoidx], sp->lcp_timeout, cp->TO, sp);
+            break;
+        }
+    }
+    _sce_pspnet_splunlock(s);
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00028D50);
 
