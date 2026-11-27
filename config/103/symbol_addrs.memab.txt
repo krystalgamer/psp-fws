@@ -1,0 +1,26 @@
+// shared names (tools/add_version.py) begin
+func_000005A4 = 0x00000558; // type:func rom:0x5D8
+func_000005F8 = 0x000005AC; // type:func rom:0x62C
+func_00000648 = 0x000005FC; // type:func rom:0x67C
+func_00000708 = 0x000006BC; // type:func rom:0x73C
+func_000008C4 = 0x00000878; // type:func rom:0x8F8
+module_start = 0x000009F4; // type:func rom:0xA74
+module_stop = 0x00000A34; // type:func rom:0xAB4
+sceAdhocBBInit = 0x00000A58; // type:func rom:0xAD8
+sceAdhocBBShutdown = 0x00000B10; // type:func rom:0xB90
+sceAdhocBBAuth1 = 0x00000BB8; // type:func rom:0xC38
+sceAdhocBBAuth2 = 0x00000D24; // type:func rom:0xDA4
+sceAdhocBBAuth3 = 0x00001150; // type:func rom:0x11D0
+sceAdhocBBAuth4 = 0x000017C0; // type:func rom:0x1840
+sceAdhocBBAuth5 = 0x00001C54; // type:func rom:0x1CD4
+sceMemab_driver_E6D3ACE2 = 0x00001DCC; // type:func rom:0x1E4C
+sceMemab_driver_B54E1AA7 = 0x00001FE8; // type:func rom:0x2068
+sceMemab_driver_F1D2B9B0 = 0x000022CC; // type:func rom:0x234C
+sceMemab_driver_4DF566D3 = 0x000023DC; // type:func rom:0x245C
+sceKernelCreateSema = 0x000026C0; // type:func rom:0x2740
+sceKernelDeleteSema = 0x000026C8; // type:func rom:0x2748
+sceKernelSignalSema = 0x000026D0; // type:func rom:0x2750
+sceKernelWaitSema = 0x000026D8; // type:func rom:0x2758
+sceIdStorageLookup = 0x000026E0; // type:func rom:0x2760
+sceUtilsBufferCopyWithRange = 0x000026E8; // type:func rom:0x2768
+// shared names (tools/add_version.py) end
