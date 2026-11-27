@@ -1,6 +1,6 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100]: -O2 -frename-registers */
+/* cflags[100,102]: -O2 -frename-registers */
 #include "common.h"
 #include "usbstor_decls.h"
 
@@ -172,7 +172,7 @@ INCLUDE_RODATA("nonmatchings/usbstor", D_00002948);
 INCLUDE_RODATA("nonmatchings/usbstor", D_000027E4);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/usbstor", D_0000296C);
 #endif
 
