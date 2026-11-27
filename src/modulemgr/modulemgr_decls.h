@@ -13,6 +13,19 @@ enum ModuleMgrExecModes {
 };
 
 typedef struct {
+    s8 magic[4];
+    u32 version;
+    u32 paramOff;
+    u32 icon0Off;
+    u32 icon1Off;
+    u32 pic0Off;
+    u32 pic1Off;
+    u32 snd0Off;
+    u32 dataPSPOff;
+    u32 dataPSAROff;
+} PBPHeader;
+
+typedef struct {
     SceSize size;
     SceUID mpIdText;
     SceUID mpIdData;
@@ -43,6 +56,21 @@ typedef struct {
     s32 priority;
     u32 attribute;
 } SceKernelSMOption;
+
+#if FW_VERSION == 100
+typedef struct {
+    u8 unk0[0x14];
+    SceSize maxAllocSize;
+    SceUID decompressionMemId;
+    u8 unk1C[0x14];
+    SceSize modCodeSize;
+    u8 unk34[0x20];
+    u32 isCompressed;
+    u8 unk58[0x68];
+} SceLoadCoreExecFileInfo;
+#else
+typedef struct SceLoadCoreExecFileInfo SceLoadCoreExecFileInfo;
+#endif
 
 typedef struct SceModule {
     struct SceModule *next;
@@ -93,7 +121,7 @@ typedef struct {
     SceModuleLink list;
 } SceModuleManagerCB;
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 typedef struct SceModuleMgrParam {
     u8 modeStart;
     u8 modeFinish;
@@ -121,12 +149,25 @@ typedef struct SceModuleMgrParam {
     SceUID eventId;
     u32 unk54;
     u32 unk58;
+#if FW_VERSION >= 152
+    u32 unk5C;
+#endif
 } SceModuleMgrParam;
 #else
 typedef struct SceModuleMgrParam SceModuleMgrParam;
 #endif
 
 typedef s64 SceOff;
+
+typedef struct {
+    const char *libName;
+    u8 version[2];
+    s16 attribute;
+    u8 len;
+    u8 vStubCount;
+    u16 stubCount;
+    void *entryTable;
+} SceResidentLibraryEntryTable;
 
 typedef struct {
     SceSize size;
@@ -160,8 +201,20 @@ struct Unk_func_000004C0_1 {
     u8 unk11;
 };
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 func_000004B0(SceModuleMgrParam *modParams, SceKernelLMOption *option);
+#else
+void func_000004B0(void *arg0, void *arg1);
+#endif
+
 extern char D_00004C90[];
 extern char D_00004CF0[];
+extern char D_00005018[];
+extern char D_0000504C[];
+extern char D_0000505C[];
+extern char D_00005070[];
+extern char D_00005088[];
+extern char D_0000515C[];
 extern u32 D_00005AF0;
 extern char D_00005B90[];
 extern char D_00005BBC[];
@@ -180,7 +233,10 @@ extern s32 D_00008174;
 extern s32 D_00008184;
 extern SceModuleManagerCB modMgrCB;
 
+u32 CheckMsHeader(PBPHeader *header, SceSize *pSize);
 s32 Kprintf(const char *fmt, ...);
+s32 LoadDeviceCheck(SceUID fd, s32 apiType);
+s32 ModuleReleaseLibraries(SceModule *mod);
 s32 SelfStopUnloadModule(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);
 u32 ThreadManForKernel_DD55A192(void);
 s32 exe_thread(SceSize argSize, void *argp);
@@ -199,15 +255,15 @@ void func_00000394(void);
 void func_000003B0(void);
 void func_000003CC(void);
 void func_000003E8(void);
-void func_00000404(void);
-s32 func_00000420(void);
-s32 func_00000474(void);
-void func_000004B0(void *arg0, void *arg1);
+void func_00000404(void *libStubTable, SceSize size);
+s32 func_00000420(void *libEntry);
+s32 func_00000474(void *libEntry);
 void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 *arg1);
 void func_00000594(void *arg0);
 s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option);
-s32 func_000028EC(SceUID fd, u32 apiType);
-s32 func_00003210(s32);
+s32 func_00003210(SceModuleMgrParam *modParams);
+s32 func_0000340C(SceUID fd, s32 apiType);
+s32 func_000036B0(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);
 void func_00004750(void);
 s32 func_00004BA4(s32);
 s32 func_0000552C(s32);
@@ -218,9 +274,10 @@ s32 sceIoClose(SceUID fd);
 s32 sceIoIoctl(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen);
 SceOff sceIoLseek(SceUID fd, SceOff offset, s32 whence);
 SceUID sceIoOpen(const char *file, s32 flags, s32 mode);
+s32 sceIoRead(SceUID fd, void *data, SceSize size);
 s32 sceKernelAllocModule(s32);
 void sceKernelAssert(s32 test, s32 lvl);
-s32 sceKernelCanReleaseLibrary();
+s32 sceKernelCanReleaseLibrary(void *libEntry);
 M2C_UNK sceKernelCheckExecFile();
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
@@ -235,6 +292,7 @@ SceModule *sceKernelFindModuleByName(const char *name);
 SceModule *sceKernelFindModuleByUID(SceUID modId);
 s32 sceKernelFreeModule(s32);
 M2C_UNK sceKernelFreePartitionMemory(s32);
+SceModule *sceKernelGetModuleFromUID(SceUID modId);
 SceUID sceKernelGetThreadId(void);
 s32 sceKernelGetUserLevel(void);
 s32 sceKernelIsIntrContext(void);
@@ -254,14 +312,15 @@ s32 sceKernelQueryMemoryPartitionInfo(SceUID mpid, SceSysmemPartitionInfo *info)
 M2C_UNK sceKernelRegisterLibrary();
 M2C_UNK sceKernelRegisterLibraryForUser();
 s32 sceKernelRegisterModule(s32);
-s32 sceKernelReleaseLibrary();
+s32 sceKernelReleaseLibrary(void *libEntry);
 s32 sceKernelReleaseModule(s32);
+s32 sceKernelResizeMemoryBlock(SceUID id, s32 leftShift, s32 rightShift);
 SceUID sceKernelSearchModuleByAddress(u32 addr);
 SceUID sceKernelSearchModuleByName(const char *name);
 s32 sceKernelSignalSema(SceUID semaId, s32 signal);
 s32 sceKernelStartThread(SceUID thid, SceSize argSize, void *argp);
 s32 sceKernelSuspendThread(u32);
-M2C_UNK sceKernelUnLinkLibraryEntries();
+s32 sceKernelUnLinkLibraryEntries(void *libStubTable, SceSize size);
 s32 sceKernelWaitEventFlag(SceUID evid, u32 bits, u32 wait, u32 *outBits, void *timeout);
 s32 sceKernelWaitSema(s32, s32, void *);
 s32 start_exe_thread(SceModuleMgrParam *modParams);

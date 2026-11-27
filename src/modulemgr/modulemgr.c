@@ -90,23 +90,23 @@ void func_000004B0(void *arg0, void *arg1) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void func_000004B0(void *arg0, void *arg1) {
-    if (arg1 != NULL) {
-        M2C_FIELD(arg0, s32 *, 0x10) = (s32) M2C_FIELD(arg1, s32 *, 4);
-        M2C_FIELD(arg0, s32 *, 0x14) = (s32) M2C_FIELD(arg1, s32 *, 8);
-        M2C_FIELD(arg0, u8 *, 2) = (u8) M2C_FIELD(arg1, u8 *, 0x10);
-        M2C_FIELD(arg0, u8 *, 3) = (u8) M2C_FIELD(arg1, u8 *, 0x11);
+s32 func_000004B0(SceModuleMgrParam *modParams, SceKernelLMOption *option) {
+    if (option != NULL) {
+        modParams->mpIdText = option->mpIdText;
+        modParams->mpIdData = option->mpIdData;
+        modParams->position = option->position;
+        modParams->access = option->access;
     } else {
-        M2C_FIELD(arg0, u8 *, 3) = 1U;
-        M2C_FIELD(arg0, s32 *, 0x10) = 0;
-        M2C_FIELD(arg0, s32 *, 0x14) = 0;
-        M2C_FIELD(arg0, u8 *, 2) = 0U;
+        modParams->access = 1;
+        modParams->mpIdText = 0;
+        modParams->mpIdData = 0;
+        modParams->position = 0;
     }
-    M2C_FIELD(arg0, s32 *, 0x44) = 0;
-    M2C_FIELD(arg0, s32 *, 0x48) = 0;
-    M2C_FIELD(arg0, s32 *, 0x58) = 0;
-    M2C_FIELD(arg0, s32 *, 0x34) = 0;
-    func_00003210((s32) arg0);
+    modParams->unk44 = 0;
+    modParams->unk48 = 0;
+    modParams->unk58 = 0;
+    modParams->pExecInfo = NULL;
+    return func_00003210(modParams);
 }
 #endif
 
@@ -484,8 +484,8 @@ void func_000003E8(void) {
     sceKernelLinkLibraryEntriesForUser();
 }
 
-void func_00000404(void) {
-    sceKernelUnLinkLibraryEntries();
+void func_00000404(void *libStubTable, SceSize size) {
+    sceKernelUnLinkLibraryEntries(libStubTable, size);
 }
 #endif
 
@@ -610,9 +610,72 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_000078BC);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferWithApitype);
+SceUID sceKernelLoadModuleBufferWithApitype(void *buf, s32 flags, s32 apiType, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleByID);
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (k1IsUserMode()) {
+        Kprintf("modulemgr.c:%s:SCE_KERNEL_ERROR_ILLEGAL_PERM_CALL\n", "sceKernelLoadModuleBufferWithApitype");
+        setK1(oldK1);
+        return 0x80020149;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    modParams.modeStart = CMD_RELOCATE_MODULE;
+    modParams.apiType = apiType;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fileBase = buf;
+    modParams.fd = (SceUID)buf;
+    ret = func_000004B0(&modParams, option);
+    setK1(oldK1);
+    return ret;
+}
+
+SceUID sceKernelLoadModuleByID(SceUID fd, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode()) {
+        modParams.apiType = 0x10;
+    } else {
+        modParams.apiType = 0;
+    }
+    if (k1IsUserMode()) {
+        ret = sceIoIoctl(fd, 0x8001, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_LOADMODULE - 0x%08x\n", "sceKernelLoadModuleByID", ret);
+            setK1(oldK1);
+            return 0x80020146;
+        }
+    }
+    modParams.modeStart = CMD_LOAD_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fd = fd;
+    modParams.fileBase = NULL;
+    ret = func_000004B0(&modParams, option);
+    setK1(oldK1);
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleWithApitype);
 #endif
@@ -622,31 +685,53 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006DA0);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00000420(void) {
-    s32 temp_v0;
+s32 func_00000420(void *libEntry) {
+    s32 ret;
 
-    temp_v0 = sceKernelCanReleaseLibrary();
-    if (temp_v0 >= 0) {
-
-    } else {
-        Kprintf(&D_00006DA0, "CanReleaseLibrary", temp_v0);
+    ret = sceKernelCanReleaseLibrary(libEntry);
+    if (ret < 0) {
+        Kprintf(&D_00006DA0, "CanReleaseLibrary", ret);
     }
-    return temp_v0;
+    return ret;
 }
 
-s32 func_00000474(void) {
-    s32 temp_v0;
+s32 func_00000474(void *libEntry) {
+    s32 ret;
 
-    temp_v0 = sceKernelReleaseLibrary();
-    if (temp_v0 >= 0) {
-
-    } else {
-        Kprintf(&D_00006DA0, "ReleaseLibrary", temp_v0);
+    ret = sceKernelReleaseLibrary(libEntry);
+    if (ret < 0) {
+        Kprintf(&D_00006DA0, "ReleaseLibrary", ret);
     }
-    return temp_v0;
+    return ret;
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_000004C8);
+s32 shrink_file_block(SceLoadCoreExecFileInfo *execInfo) {
+    s32 ret;
+
+    if (execInfo->isCompressed != 0) {
+        ret = sceKernelResizeMemoryBlock(execInfo->decompressionMemId, 0, execInfo->modCodeSize - execInfo->maxAllocSize);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:sceKernelResizeMemoryBlock failed 0x%x, block 0x%08x\n", "shrink_file_block", ret,
+                    execInfo->decompressionMemId);
+            return ret;
+        }
+        execInfo->maxAllocSize = execInfo->modCodeSize;
+    }
+    return 0;
+}
+
+s32 func_0000054C(u32 addr, SceSize size, u32 base, SceSize baseSize) {
+    u32 end;
+
+    if (addr >= base && addr < base + baseSize) {
+        return 1;
+    }
+    end = addr + size - 1;
+    if (end >= base && end < base + baseSize) {
+        return 1;
+    }
+    return 0;
+}
 
 void func_00000594(void *arg0) {
     sceKernelFreePartitionMemory(M2C_FIELD(arg0, s32 *, 0x34));
@@ -673,7 +758,23 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00006390);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", IsKernelOnlyModulePartition);
+s32 IsKernelOnlyModulePartition(SceUID mpid) {
+    SceSysmemPartitionInfo info;
+    s32 ret;
+
+    info.size = sizeof(info);
+    ret = sceKernelQueryMemoryPartitionInfo(mpid, &info);
+    if (ret < 0) {
+        Kprintf(D_00006DF4, "IsKernelOnlyModulePartition", D_00006E28, ret, mpid);
+        return ret;
+    }
+    ret = 0x800200D1;
+    if (info.attr == 0xC) {
+        return 0;
+    }
+    Kprintf(D_00004C90, "IsKernelOnlyModulePartition", mpid);
+    return ret;
+}
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 310)
@@ -723,10 +824,33 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00004EA4);
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000984);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000C4C);
+
+s32 ModuleReleaseLibraries(SceModule *mod) {
+    u32 *cur;
+    u32 *end;
+    SceResidentLibraryEntryTable *ent;
+    s32 ret;
+
+    if (mod->entSize != 0) {
+        cur = mod->entTop;
+        end = cur + mod->entSize / 4;
+        while (cur < end) {
+            ent = (SceResidentLibraryEntryTable *)cur;
+            if (ent->attribute >= 0) {
+                ret = func_00000474(ent);
+                if (ret != 0) {
+                    Kprintf("modulemgr.c:%s:sceKernelReleaseLibrary failed 0x%x\n", "ModuleReleaseLibraries", ret);
+                }
+            }
+            cur += ent->len;
+        }
+    }
+    return 0;
+}
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 350)
-INCLUDE_ASM("nonmatchings/modulemgr", func_00004FCC);
+#if FW_VERSION >= 282 && FW_VERSION < 350
+INCLUDE_ASM("nonmatchings/modulemgr", ModuleReleaseLibraries);
 #endif
 
 #if FW_VERSION == 100
@@ -765,13 +889,154 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHPlain);
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferVSH);
+
+s32 sceKernelStartModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (argp != NULL && k1IsUserMode() && (s32)((u32)argp | argSize | ((u32)argp + argSize)) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (pStatus != NULL && k1IsUserMode() && (s32)pStatus < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    modParams.modeStart = CMD_START_MODULE;
+    modParams.modeFinish = CMD_START_MODULE;
+    modParams.modId = modId;
+    modParams.argSize = argSize;
+    modParams.argp = argp;
+    modParams.pStatus = pStatus;
+    if (option != NULL) {
+        modParams.threadMpIdStack = option->mpIdStack;
+        modParams.stackSize = option->stackSize;
+        modParams.threadPriority = option->priority;
+        modParams.threadAttr = option->attribute;
+    } else {
+        modParams.threadMpIdStack = 0;
+        modParams.stackSize = 0;
+        modParams.threadPriority = 0;
+        modParams.threadAttr = 0;
+    }
+    ret = func_00003210(&modParams);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:result = 0x%08x\n", "sceKernelStartModule", ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStartModule);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceKernelStopModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+    SceModuleMgrParam modParams;
+    u32 ra = (u32)getRa();
+    s32 oldK1 = shiftK1Noreorder();
+    SceModule *caller;
+    SceModule *mod;
+    s32 ret;
+
+    if (argp != NULL && k1IsUserMode() && (s32)((u32)argp | argSize | ((u32)argp + argSize)) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (pStatus != NULL && k1IsUserMode() && (s32)((u32)pStatus | ((u32)pStatus + sizeof(*pStatus))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    caller = sceKernelFindModuleByAddress(ra);
+    if (caller == NULL) {
+        Kprintf("StopModule(): panic !!! call from unknown Module !!!\n");
+        setK1(oldK1);
+        return 0x80020136;
+    }
+    memset(&modParams, 0, sizeof(modParams));
+    mod = sceKernelGetModuleFromUID(modId);
+    modParams.pMod = mod;
+    if (mod != NULL && (mod->attribute & 1)) {
+        Kprintf("modulemgr.c:%s:module has SCE_MODULE_ATTR_CANT_STOP attribute\n", "sceKernelStopModule");
+        setK1(oldK1);
+        return 0x80020136;
+    }
+    modParams.modeStart = CMD_STOP_MODULE;
+    modParams.modeFinish = CMD_STOP_MODULE;
+    modParams.modId = modId;
+    modParams.callerModId = caller->modId;
+    modParams.argSize = argSize;
+    modParams.argp = argp;
+    modParams.pStatus = pStatus;
+    if (option != NULL) {
+        modParams.threadMpIdStack = option->mpIdStack;
+        modParams.stackSize = option->stackSize;
+        modParams.threadPriority = option->priority;
+        modParams.threadAttr = option->attribute;
+    } else {
+        modParams.threadMpIdStack = 0;
+        modParams.stackSize = 0;
+        modParams.threadPriority = 0;
+        modParams.threadAttr = 0;
+    }
+    ret = func_00003210(&modParams);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStopModule);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceKernelSelfStopUnloadModule(s32 unk, SceSize argSize, void *argp) {
+    u32 ra = (u32)getRa();
+    s32 oldK1 = shiftK1Noreorder();
+    s32 ret;
+
+    if (argp != NULL && k1IsUserMode() && (s32)((u32)argp | argSize | ((u32)argp + argSize)) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode()) {
+        ra = ThreadManForKernel_DD55A192();
+    }
+    ret = func_000036B0(ra, argSize, argp, NULL, NULL);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:SelfSTopUnloadModule failed: 0x%08x\n", "sceKernelSelfStopUnloadModule", ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelSelfStopUnloadModule);
 #endif
 
@@ -868,7 +1133,37 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00002C74);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", func_00001108);
+s32 EpilogueModule(SceModule *mod) {
+    SceResidentLibraryEntryTable *ent;
+    SceSize size;
+    s32 ret;
+
+    ret = 0;
+    if (mod->entSize != 0) {
+        ent = mod->entTop;
+        size = mod->entSize;
+        do {
+            if (ent->attribute >= 0) {
+                ret = func_00000420(ent);
+                if (ret != 0) {
+                    Kprintf("modulemgr.c:%s:CanReleaseLibrary failed 0x%x\n", "EpilogueModule", ret);
+                    goto end;
+                }
+            }
+            size -= sizeof(*ent);
+            ent++;
+        } while (size != 0);
+    }
+    if ((s32)mod->stubTop != -1) {
+        func_00000404(mod->stubTop, mod->stubSize);
+    }
+    ModuleReleaseLibraries(mod);
+end:
+    if (ret < 0) {
+        Kprintf(D_0000515C, "EpilogueModule", ret);
+    }
+    return ret;
+}
 
 s32 func_000011E8(SceUID fd) {
     s32 size;
@@ -878,9 +1173,58 @@ s32 func_000011E8(SceUID fd) {
     return size;
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", CheckMsHeader);
+u32 CheckMsHeader(PBPHeader *header, SceSize *pSize) {
+    s8 *magic = header->magic;
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_000012E4);
+    if (magic[0] == 0 && magic[1] == 'P' && magic[2] == 'B' && magic[3] == 'P') {
+        if (pSize != NULL) {
+            *pSize = header->dataPSAROff - header->dataPSPOff;
+        }
+        Kprintf("modulemgr.c:%s:MsHeader detected: 0x%08x - size 0x%08x [%d]\n", "CheckMsHeader", header->dataPSPOff,
+                header->dataPSAROff - header->dataPSPOff, header->dataPSAROff - header->dataPSPOff);
+        return header->dataPSPOff;
+    }
+    if (pSize != NULL) {
+        *pSize = 0;
+    }
+    return 0;
+}
+
+s32 ReadFile(SceUID fd, void *buf, SceSize size) {
+    SceSize pbpSize;
+    u32 off;
+    SceSize chunk;
+    s32 total;
+    s32 n;
+    u8 *p;
+
+    chunk = 0xF000;
+    sceIoRead(fd, buf, 0x200);
+    off = CheckMsHeader(buf, &pbpSize);
+    sceIoLseek(fd, off, 0);
+    if (off != 0 && size < pbpSize) {
+        Kprintf("modulemgr.c:%s:filesize mismatch size 0x%08x <- max 0x%08x\n", "ReadFile", size, pbpSize);
+        size = pbpSize;
+    }
+    total = 0;
+    while (size != 0) {
+        p = (u8 *)buf + total;
+        if (size < chunk) {
+            chunk = size;
+        }
+        n = sceIoRead(fd, p, chunk);
+        if (n < 0) {
+            Kprintf("modulemgr.c:%s:sceIoread failed: 0x%08x\n", "ReadFile", n);
+            return total;
+        }
+        size -= n;
+        total += n;
+        if ((u32)n < chunk) {
+            break;
+        }
+    }
+    return total;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_000013F4);
 
@@ -1049,7 +1393,79 @@ s32 sceKernelLoadModuleBufferBootInitConfig(void) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", func_000028EC);
+s32 LoadDeviceCheck(SceUID fd, s32 apiType) {
+    s32 ret;
+
+    switch (apiType) {
+    case 0:
+        break;
+    case 0x10:
+        if (!k1IsUserMode()) {
+            break;
+        }
+        ret = sceIoIoctl(fd, 0x8001, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:WARNING(le): IOCTL_PERMIT(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8001, ret, 0x10);
+            return 0x80020146;
+        }
+        break;
+    case 0x11:
+        ret = sceIoIoctl(fd, 0x8002, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:WARNING(le): IOCTL_PERMIT(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8002, ret, 0x11);
+            return 0x80020146;
+        }
+        break;
+    case 0x20:
+        ret = sceIoIoctl(fd, 0x8003, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_XXX(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8003, ret, 0x20);
+            return 0x80020146;
+        }
+        break;
+    case 0x30:
+        break;
+    case 0x100:
+        break;
+    case 0x110:
+        ret = sceIoIoctl(fd, 0x8010, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:IOCTL_PERMIT(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8010, ret, 0x110);
+            return 0x80020146;
+        }
+        break;
+    case 0x120:
+        ret = sceIoIoctl(fd, 0x8012, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_XXX(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8012, ret, 0x120);
+            return 0x80020146;
+        }
+        break;
+    case 0x121:
+        ret = sceIoIoctl(fd, 0x8012, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_XXX(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8012, ret, 0x121);
+            return 0x80020146;
+        }
+        break;
+    case 0x130:
+    case 0x131:
+        break;
+    case 0x140:
+    case 0x141:
+    case 0x142:
+        ret = sceIoIoctl(fd, 0x8013, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_XXX(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8013, ret, apiType);
+            return 0x80020146;
+        }
+        break;
+    default:
+        Kprintf("modulemgr.c:%s:Unknown apitype 0x%08x\n", "LoadDeviceCheck", apiType);
+        return 0x80020001;
+    }
+    return 0;
+}
 
 SceUID sceKernelLoadModuleByID(SceUID fd, s32 flags, SceKernelLMOption *option) {
     SceModuleMgrParam modParams;
@@ -1120,7 +1536,7 @@ SceUID sceKernelLoadModuleWithApitype(const char *path, s32 flags, s32 apiType, 
             modParams.apiType = 0;
         }
     }
-    ret = func_000028EC(fd, modParams.apiType);
+    ret = LoadDeviceCheck(fd, modParams.apiType);
     if (ret < 0) {
         sceIoClose(fd);
         setK1(oldK1);
@@ -1564,7 +1980,31 @@ s32 sceKernelUnloadModule(SceUID modId) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceKernelUnloadModule(SceUID modId) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    modParams.modeStart = CMD_UNLOAD_MODULE;
+    modParams.modeFinish = CMD_UNLOAD_MODULE;
+    modParams.modId = modId;
+    modParams.argSize = 0;
+    modParams.argp = NULL;
+    modParams.pStatus = NULL;
+    ret = func_00003210(&modParams);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelUnloadModule);
 #endif
 
