@@ -79,6 +79,11 @@ def rewrite_not(text):
             out.append(text[i:j + 2])
             i = j + 2
     text = "".join(out)
+    # m2c's `return c ? (t | K) : t;`: cc1 folds it to shift/or, cc1plus (bool condition) to movn;
+    # the statement form gives cc1's code in C++ (video_main_plugin func_00004BD8)
+    text, k = re.subn(r"^(\s*)return (\(.*\)) \? \((\w+) \| ([\w]+)\) : \3;$",
+                      r"\1if \2 {\n\1    \3 |= \4;\n\1}\n\1return \3;", text, flags=re.M)
+    n += k
     # `if (((X) == 0)) {` -> `if ((X) == 0) {`
     text = re.sub(r"\bif \(\((\(.*\) == 0)\)\) \{$", r"if (\1) {", text, flags=re.M)
     return text, n
