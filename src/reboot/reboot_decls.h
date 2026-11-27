@@ -271,6 +271,7 @@ struct Unk_func_0000D694_0 {
     u8 unk3;
 };
 
+extern s32 D_00014EE4 SDATA;
 extern s32 D_00016DE4 SDATA;
 extern s32 D_00016DE8 SDATA;
 extern s32 D_00016DEC SDATA;
@@ -318,7 +319,7 @@ void func_0000348C(s8 arg0);
 void func_00003B50(void *arg0, s32 arg1);
 s32 func_00003DD8(void *arg0);
 M2C_UNK func_000040CC();
-s32 func_00004244(s32);
+s32 func_00004244(s8 c);
 void func_000043B8(void);
 s32 func_0000443C(void);
 s32 func_00004444(void);
