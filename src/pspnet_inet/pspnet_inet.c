@@ -590,15 +590,11 @@ s32 soaccept(struct socket *so, struct mbuf *nam) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_inet", soconnect);
-#endif
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", soaccept);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 s32 soconnect(struct socket *so, struct mbuf *nam) {
     s32 s;
     s32 error;
@@ -625,7 +621,6 @@ s32 soconnect2(struct socket *so1, struct socket *so2) {
     _sce_pspnet_splunlock(s);
     return error;
 }
-#endif
 
 s32 soshutdown(struct socket *so, s32 how) {
     struct protosw *pr = so->so_proto;
