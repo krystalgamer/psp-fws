@@ -1,3 +1,4 @@
+/* cflags[150]: -Os -frename-registers */
 /* cflags[100]: -Os */
 /* cflags[152]: -O2 -frename-registers */
 #include "common.h"
