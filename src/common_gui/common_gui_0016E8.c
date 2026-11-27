@@ -314,13 +314,3 @@ void func_00002D38(M2C_UNK **arg0) {
     _ZdlPv();
 }
 #endif
-
-INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002D60);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002DB8);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000037F0);
-#endif

@@ -58,6 +58,7 @@ segments:
       - [0x4B8, c, common_gui_000438]
       - [0x55FC, c, common_gui_0008C8]
       - [0x6118, c, common_gui_0016E8]
+      - [0x72C4, c, common_gui_crtend]
       - { start: 0x731C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x7338, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x75B8, type: prxpad, order: .text }

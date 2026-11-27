@@ -58,6 +58,7 @@ segments:
       - [0x4B8, c, common_gui_000438]
       - [0x39F8, c, common_gui_0008C8]
       - [0x4500, c, common_gui_0016E8]
+      - [0x577C, c, common_gui_crtend]
       - { start: 0x57D4, type: asm, name: fini, linker_section: .fini }
       - { start: 0x57F0, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x5A20, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }

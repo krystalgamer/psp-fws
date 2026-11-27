@@ -57,6 +57,7 @@ segments:
       - [0x5C8, c, common_gui_000438]
       - [0xA58, c, common_gui_0008C8]
       - [0x1B04, c, common_gui_0016E8]
+      - [0x38BC, c, common_gui_crtend]
       - { start: 0x3930, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x3AA0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x3AA4, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -68,6 +69,7 @@ segments:
       - [0x3B20, .rodata, common_gui_000438]
       - [0x3EAC, .rodata, common_gui_0008C8]
       - [0x4068, .rodata, common_gui_0016E8]
+      - [0x4290, .rodata, common_gui_crtend]
       - { start: 0x4298, type: prxpad, order: .rodata }
   - name: common_gui_seg1
     type: code
