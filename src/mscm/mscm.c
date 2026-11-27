@@ -86,13 +86,13 @@ INCLUDE_RODATA("nonmatchings/mscm", D_00007120);
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/mscm", func_00000124);
 
-s32 func_000001E4(void *arg0) {
-    sceSysregMsifIoDisable(M2C_FIELD(arg0, s32 *, 4));
-    sceMScmSetSlotPower((s32) arg0, 1);
+s32 func_000001E4(SceMScmHC *hc) {
+    sceSysregMsifIoDisable(hc->index);
+    sceMScmSetSlotPower(hc, 1);
     sceKernelDelayThread(0x186A0U);
-    sceMScmSetSlotPower((s32) arg0, 2);
+    sceMScmSetSlotPower(hc, 2);
     sceKernelDelayThread(0x4E20U);
-    sceSysregMsifIoEnable(M2C_FIELD(arg0, s32 *, 4));
+    sceSysregMsifIoEnable(hc->index);
     return 0;
 }
 #endif
@@ -118,13 +118,13 @@ INCLUDE_ASM("nonmatchings/mscm", func_00000BEC);
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/mscm", func_00000B9C);
 
-s32 func_00000C1C(struct Unk_func_00000C1C_0 *arg0) {
-    sceSysregMsifIoDisable(arg0->unk4);
-    sceMScmSetSlotPower((s32) arg0, 1);
+s32 func_00000C1C(SceMScmHC *hc) {
+    sceSysregMsifIoDisable(hc->index);
+    sceMScmSetSlotPower(hc, 1);
     sceKernelDelayThread(0x186A0U);
-    sceMScmSetSlotPower((s32) arg0, 2);
+    sceMScmSetSlotPower(hc, 2);
     sceKernelDelayThread(0x4E20U);
-    sceSysregMsifIoEnable(arg0->unk4);
+    sceSysregMsifIoEnable(hc->index);
     return 0;
 }
 #endif
@@ -303,16 +303,9 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmSendTPC);
 INCLUDE_ASM("nonmatchings/mscm", sceMScmClearALEvents);
 #endif
 
-#if FW_VERSION < 201
-s32 sceMScmClearALEvents(struct Unk_sceMScm_driver_B01C378C_0 *arg0) {
-    sceKernelClearEventFlag(M2C_FIELD(arg0->unk8, u32 *, 0x30), 0U);
-    return 0;
-}
-#endif
-
-#if FW_VERSION >= 250
-s32 sceMScmClearALEvents(struct Unk_sceMScm_driver_B01C378C_0 *arg0) {
-    sceKernelClearEventFlag(arg0->unk8->unk2C, 0U);
+#if FW_VERSION != 201
+s32 sceMScmClearALEvents(SceMScmHC *hc) {
+    sceKernelClearEventFlag(hc->hc->evf, 0);
     return 0;
 }
 #endif
@@ -362,14 +355,14 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_D6DB3199);
 #endif
 
 #if FW_VERSION < 201
-s32 sceMScm_driver_D6DB3199(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 sceMScm_driver_D6DB3199(SceMScmHC *hc, s32 *arg1, s32 *arg2, s32 *arg3) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
-    if (arg0 != 0) {
-        func_00003E58(arg0, arg1);
-        func_00003F48(arg0, arg2);
-        var_v0 = func_00005B3C((void *) arg0, arg3);
+    if (hc != NULL) {
+        func_00003E58(hc, arg1);
+        func_00003F48(hc, arg2);
+        var_v0 = func_00005B3C(hc, arg3);
     }
     return var_v0;
 }
@@ -420,14 +413,14 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmHCLastStatus);
 #endif
 
 #if FW_VERSION < 201
-s32 sceMScmHCLastStatus(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
-    return M2C_FIELD(arg0->unk8, s32 *, 0x18);
+s32 sceMScmHCLastStatus(SceMScmHC *hc) {
+    return hc->hc->lastStatus;
 }
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 sceMScmHCLastStatus(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
-    return arg0->unk8->unk14;
+s32 sceMScmHCLastStatus(SceMScmHC *hc) {
+    return hc->hc->lastStatus;
 }
 #endif
 
@@ -440,8 +433,8 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000488C);
 #else
 INCLUDE_ASM("nonmatchings/mscm", func_00004D94);
 
-s32 sceMScmHCLastStatus(struct Unk_sceMScm_driver_0A054CDA_0 *arg0) {
-    return arg0->unk8->unk14;
+s32 sceMScmHCLastStatus(SceMScmHC *hc) {
+    return hc->hc->lastStatus;
 }
 
 void func_00004E4C(void) {
@@ -488,8 +481,8 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmIconStartUcode);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmIconStopUcode);
 
-void sceMScmIconResetIcon(s32 arg0) {
-    sceMScmResetHC(arg0, 4);
+void sceMScmIconResetIcon(SceMScmHC *hc) {
+    sceMScmResetHC(hc, 4);
 }
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -588,8 +581,8 @@ s32 func_00005A44(s32 arg0, s32 arg1, s32 arg2) {
     var_v1 = 0x80220081;
     if (arg0 == 0) {
         var_v1 = 0x80220083;
-        if (M2C_VFIELD(&D_00006F14, s32, 0xC) != 0) {
-            var_v1 = func_00005174((s32) &D_00006F14, arg1, arg2);
+        if (D_00006F14[0].inService != 0) {
+            var_v1 = func_00005174((s32) &D_00006F14[0], arg1, arg2);
         }
     }
     return var_v1;
@@ -629,11 +622,11 @@ s32 func_0000648C(void) {
     return 0;
 }
 
-s32 func_00006494(struct Unk_func_00006494_0 *arg0) {
+s32 func_00006494(SceMScmHC *hc) {
     s32 var_a0;
 
     var_a0 = 0x80220081;
-    if (arg0->unk4 == 0) {
+    if (hc->index == 0) {
         var_a0 = (D_00007880 != 0) ? 0 : 0x80220083;
     }
     return var_a0;
@@ -653,22 +646,22 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmGetSlotState);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00006684);
 
-s32 func_000066DC(struct Unk_func_000066DC_0 *arg0) {
+s32 func_000066DC(SceMScmHC *hc) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
-    if (arg0 != NULL) {
-        var_v0 = func_000064C8(arg0->unk4);
+    if (hc != NULL) {
+        var_v0 = func_000064C8(hc->index);
     }
     return var_v0;
 }
 
-s32 func_00006704(struct Unk_func_00006704_0 *arg0, s32 arg1) {
+s32 func_00006704(SceMScmHC *hc, s32 arg1) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
-    if (arg0 != NULL) {
-        var_v0 = func_0000652C(arg0->unk4, arg1);
+    if (hc != NULL) {
+        var_v0 = func_0000652C(hc->index, arg1);
     }
     return var_v0;
 }
@@ -727,11 +720,11 @@ s32 func_000053EC(void) {
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 func_00006440(void *arg0) {
+s32 func_00006440(SceMScmHC *hc) {
     s32 var_a0;
 
     var_a0 = 0x80220081;
-    if (M2C_FIELD(arg0, s32 *, 4) == 0) {
+    if (hc->index == 0) {
         var_a0 = (D_00007800 != 0) ? 0 : 0x80220083;
     }
     return var_a0;
@@ -799,24 +792,24 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005AA8);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00005AA8(void *arg0) {
+s32 func_00005AA8(SceMScmHC *hc, s32 mode) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
-    if (arg0 != NULL) {
-        var_v0 = func_00005AD0(M2C_FIELD(arg0, s32 *, 4));
+    if (hc != NULL) {
+        var_v0 = func_00005AD0(hc->index, mode);
     }
     return var_v0;
 }
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 func_00005AA8(void *arg0) {
+s32 func_00005AA8(SceMScmHC *hc, s32 mode) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
-    if (arg0 != NULL) {
-        var_v0 = func_00006474(M2C_FIELD(arg0, s32 *, 4));
+    if (hc != NULL) {
+        var_v0 = func_00006474(hc->index, mode);
     }
     return var_v0;
 }
@@ -831,24 +824,24 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005B3C);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00005B3C(void *arg0, s32 arg1) {
+s32 func_00005B3C(SceMScmHC *hc, s32 *out) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
-    if (arg0 != NULL) {
-        var_v0 = func_00005B64(M2C_FIELD(arg0, s32 *, 4), arg1);
+    if (hc != NULL) {
+        var_v0 = func_00005B64(hc->index, out);
     }
     return var_v0;
 }
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-s32 func_00005B3C(void *arg0, s32 arg1) {
+s32 func_00005B3C(SceMScmHC *hc, s32 *out) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
-    if (arg0 != NULL) {
-        var_v0 = func_000064D8(M2C_FIELD(arg0, s32 *, 4), arg1);
+    if (hc != NULL) {
+        var_v0 = func_000064D8(hc->index, out);
     }
     return var_v0;
 }
@@ -863,12 +856,12 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownRegByDesc);
 #endif
 
 #if FW_VERSION < 201
-s32 sceMScmSetPullDownRegByDesc(void *arg0) {
+s32 sceMScmSetPullDownRegByDesc(SceMScmHC *hc, s32 on) {
     s32 var_v0;
 
     var_v0 = 0x80220081;
-    if (arg0 != NULL) {
-        var_v0 = sceMScmSetPullDownReg(M2C_FIELD(arg0, s32 *, 4));
+    if (hc != NULL) {
+        var_v0 = sceMScmSetPullDownReg(hc->index, on);
     }
     return var_v0;
 }
