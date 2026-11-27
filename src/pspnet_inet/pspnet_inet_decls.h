@@ -144,7 +144,7 @@ struct socket {
 #define sbspace(sb) \
     ((s32)imin((s32)((sb)->sb_hiwat - (sb)->sb_cc), (s32)((sb)->sb_mbmax - (sb)->sb_mbcnt)))
 #define sblock(sb, wf) ((sb)->sb_flags & SB_LOCK ? \
-        (((wf) == M_WAITOK) ? func_00005934(sb) : 11) : \
+        (((wf) == M_WAITOK) ? sb_lock(sb) : 11) : \
         ((sb)->sb_flags |= SB_LOCK), 0)
 #define sbunlock(sb) { \
     (sb)->sb_flags &= ~SB_LOCK; \
@@ -155,11 +155,11 @@ struct socket {
 }
 #define sorwakeup(so) do { \
         if (sb_notify(&(so)->so_rcv)) \
-            func_000048B8((so), &(so)->so_rcv); \
+            sowakeup((so), &(so)->so_rcv); \
     } while (0)
 #define sowwakeup(so) do { \
         if (sb_notify(&(so)->so_snd)) \
-            func_000048B8((so), &(so)->so_snd); \
+            sowakeup((so), &(so)->so_snd); \
     } while (0)
 
 /* struct ifqueue (4.4BSD if.h) */
@@ -1245,44 +1245,20 @@ s32 func_00001D78(void);
 void func_00001DD8(struct socket *so);
 void func_00001DF4(void);
 void func_00001FA4(void);
-void func_00002028(s32 cmd, struct sockaddr *sa);
-void func_000020C4(void *arg);
-void func_00002168(void *arg);
-void func_000023A8(struct socket *so);
-s32 func_0000243C(struct socket *so);
-s32 func_000025CC(struct socket *so);
-s32 func_000025FC(struct socket *so);
-void func_000038BC(struct socket *so);
 s32 func_00003A00(struct socket *so, s32 level, s32 optname, struct mbuf *m0);
 void func_000040FC(void);
 s32 func_00004124(struct socket *so, struct mbuf *nam);
-s32 func_00004190(struct socket *so, s32 backlog);
-s32 func_00004248(struct socket *so, struct mbuf *nam);
-s32 func_000042D4(struct socket *so, struct mbuf *nam);
 s32 func_0000431C(struct socket *so, struct mbuf *nam);
-s32 func_00004404(struct socket *so, s32 how);
 void func_000044AC(struct socket *so);
-void func_0000453C(struct socket *so);
-struct socket *func_00004620(struct socket *head, s32 connstatus);
 void func_000046A8(struct socket *so);
 void func_000047DC(struct socket *head, struct socket *so, s32 q);
-s32 func_00004838(struct socket *so, s32 q);
-void func_000048B8(struct socket *so, struct sockbuf *sb);
-s32 func_00004944(struct socket *so, u32 sndcc, u32 rcvcc);
-s32 func_000049EC(struct sockbuf *sb, u32 cc);
 void func_00004A3C(struct sockbuf *sb);
 void func_00004A68(struct sockbuf *sb, struct mbuf *m0);
 void func_00004E28(struct sockbuf *sb, struct mbuf *m, struct mbuf *n);
-void func_00005008(struct sockbuf *sb);
-void func_00005050(struct sockbuf *sb, s32 len);
-void func_00005308(struct sockbuf *sb);
-struct mbuf *func_00005440(void *p, s32 size, s32 type, s32 level);
 s32 func_0000562C(void);
-struct socket *func_00005700(s32 s);
 void func_00005778(struct socket *so);
 void func_0000588C(struct socket *so);
 void func_000058CC(struct socket *so);
-s32 func_00005934(struct sockbuf *sb);
 void func_00005964(struct socket *so);
 void func_00005A78(struct socket *so);
 void func_00005AB8(struct socket *so);
@@ -1446,8 +1422,18 @@ void func_0002C9B8(const void *src, void *dst, s32 len);
 u8 *func_0002CC40(u8 *arg0, u8 *arg1);
 s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
 void func_0002D420();
+struct socket *getsock(s32 s);
 s32 module_start(void);
 s32 module_stop(void);
+void pfctlinput(s32 cmd, struct sockaddr *sa);
+void pffasttimo(void *arg);
+void pfslowtimo(void *arg);
+s32 sb_lock(struct sockbuf *sb);
+struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level);
+void sbdrop(struct sockbuf *sb, s32 len);
+void sbdroprecord(struct sockbuf *sb);
+void sbflush(struct sockbuf *sb);
+s32 sbreserve(struct sockbuf *sb, u32 cc);
 s32 sceKernelSignalSema(u32, s32);
 M2C_UNK sceNetBcopy(u8 *, s32, u8);
 s32 sceNetConfigAddArp(s32, s32);
@@ -1468,6 +1454,20 @@ struct mbuf *sceNetMGetclr(s32 how, s32 type);
 void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);
+s32 soabort(struct socket *so);
+s32 soaccept(struct socket *so, struct mbuf *nam);
+s32 soclose(struct socket *so);
+s32 soconnect(struct socket *so, struct mbuf *nam);
 s32 soconnect2(struct socket *so1, struct socket *so2);
+s32 sodisconnect(struct socket *so);
+void sofree(struct socket *so);
+void soisconnected(struct socket *so);
+s32 solisten(struct socket *so, s32 backlog);
+struct socket *sonewconn1(struct socket *head, s32 connstatus);
+s32 soqremque(struct socket *so, s32 q);
+s32 soreserve(struct socket *so, u32 sndcc, u32 rcvcc);
+void sorflush(struct socket *so);
+s32 soshutdown(struct socket *so, s32 how);
+void sowakeup(struct socket *so, struct sockbuf *sb);
 
 #endif
