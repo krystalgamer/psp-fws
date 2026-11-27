@@ -307,6 +307,10 @@ s32 func_00005894(s32 arg0);
 s32 func_000058D0(s32 arg0);
 s32 func_00005998(s32 arg0);
 void func_00005E20(void);
+s32 func_000061AC(SceSysmemUidCB *type, const char *name, s32 k1, SceSysmemUidCB **cb);
+s32 func_000061BC(SceUID uid, SceSysmemUidCB *type, SceSysmemUidCB **cb);
+s32 func_00006274(SceSysmemUidCB *type, const char *name, s32 k1, SceSysmemUidCB **cb);
+s32 func_00006284(SceUID uid, SceSysmemUidCB *type, SceSysmemUidCB **cb);
 s32 func_0000630C(struct Unk_func_0000630C_0 *arg0);
 u8 *func_00006434(u8 *arg0, u8 *arg1);
 char *func_0000646C(char *dst, const char *src, s32 n); /* strncpy */
