@@ -186,7 +186,8 @@ struct SceWlanMac {
     u8 unk0B8[0xBC - 0xB8];
     SceUID mbx;                 /* 0x0BC MLME mailbox */
     SceWlanSoftc *sc;           /* 0x0C0 */
-    u8 unk0C4[0xCE - 0xC4];
+    u8 *txBuf;                  /* 0x0C4 */
+    u8 unk0C8[0xCE - 0xC8];
     s16 nAddrs;                 /* 0x0CE */
     u8 unk0D0[2];
     s16 unkD2;                  /* 0x0D2 */
