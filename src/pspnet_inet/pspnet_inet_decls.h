@@ -110,8 +110,8 @@ struct socket {
     void *so_tpcb;              /* 0x94 */
     void (*so_upcall)(struct socket *so, void *arg, s32 waitf); /* 0x98 */
     void *so_upcallarg;         /* 0x9C */
-    void *unkA0;                /* 0xA0 SCE callback (func_00002844) */
-    void *unkA4;                /* 0xA4 SCE callback (func_00002E98) */
+    s32 (*so_send)();           /* 0xA0 sosend */
+    s32 (*so_receive)();        /* 0xA4 soreceive */
     s32 so_fd;                  /* 0xA8 SCE descriptor, -1 until allocated */
     TAILQ_ENTRY(socket) so_list; /* 0xAC all sockets (D_0002CC9C) */
     struct SceNetInetWaiter *so_waiter; /* 0xB4 */
@@ -1109,14 +1109,18 @@ void func_000020C4(void *arg);
 void func_00002168(void *arg);
 void func_000023A8(struct socket *so);
 s32 func_0000243C(struct socket *so);
+s32 func_000025CC(struct socket *so);
+s32 func_000025FC(struct socket *so);
 void func_000038BC(struct socket *so);
 void func_000040FC(void);
 s32 func_00004124(struct socket *so, struct mbuf *nam);
 s32 func_00004190(struct socket *so, s32 backlog);
+s32 func_000042D4(struct socket *so, struct mbuf *nam);
 s32 func_0000431C(struct socket *so, struct mbuf *nam);
 s32 func_00004404(struct socket *so, s32 how);
 void func_000044AC(struct socket *so);
 void func_0000453C(struct socket *so);
+struct socket *func_00004620(struct socket *head, s32 connstatus);
 void func_000046A8(struct socket *so);
 void func_000047DC(struct socket *head, struct socket *so, s32 q);
 s32 func_00004838(struct socket *so, s32 q);
@@ -1296,5 +1300,6 @@ void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);
+s32 soconnect2(struct socket *so1, struct socket *so2);
 
 #endif

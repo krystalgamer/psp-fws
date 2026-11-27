@@ -137,3 +137,4 @@ _sce_pspnet_ifafree = 0x0002B230; // type:func
 sceNetMemcpy = 0x0002B238; // type:func
 _sce_pspnet_tsleep_usec = 0x0002B240; // type:func
 _sce_pspnet_if_up = 0x0002B248; // type:func
+soconnect2 = 0x00004398; // type:func (unreferenced, was merged into func_000042D4)

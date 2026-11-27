@@ -392,7 +392,57 @@ void func_000023A8(struct socket *so) {
     sceNetFreeInternal(so);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000243C);
+s32 func_0000243C(struct socket *so) {
+    struct socket *so2;
+    s32 s = _sce_pspnet_spllock();
+    s32 error = 0;
+
+    if (so->so_options & 0x2) { /* SO_ACCEPTCONN */
+        while ((so2 = so->so_q0.tqh_first) != NULL) {
+            (void)func_00004838(so2, 0);
+            (void)func_000025CC(so2);
+        }
+        while ((so2 = so->so_q.tqh_first) != NULL) {
+            (void)func_00004838(so2, 1);
+            (void)func_000025CC(so2);
+        }
+    }
+    if (so->so_pcb == NULL) {
+        goto discard;
+    }
+    if (so->so_state & SS_ISCONNECTED) {
+        if ((so->so_state & SS_ISDISCONNECTING) == 0) {
+            error = func_000025FC(so);
+            if (error) {
+                goto drop;
+            }
+        }
+        if (so->so_options & 0x80) { /* SO_LINGER */
+            if ((so->so_state & SS_ISDISCONNECTING) && (so->so_state & SS_NBIO)) {
+                goto drop;
+            }
+            while (so->so_state & SS_ISCONNECTED) {
+                error = _sce_pspnet_tsleep(&so->so_timeo, so->so_linger);
+                if (error) {
+                    break;
+                }
+            }
+        }
+    }
+drop:
+    if (so->so_pcb) {
+        s32 error2 = so->so_proto->pr_usrreq(so, PRU_DETACH, NULL, NULL, NULL);
+        if (error == 0) {
+            error = error2;
+        }
+    }
+discard:
+    so->so_fd = -1;
+    so->so_state |= SS_NOFDREF;
+    func_000023A8(so);
+    _sce_pspnet_splunlock(s);
+    return error;
+}
 
 s32 func_000025CC(struct socket *so) {
     return so->so_proto->pr_usrreq(so, PRU_ABORT, NULL, NULL, NULL);
@@ -426,7 +476,29 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00002684);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00002CAC);
 #endif
 
+#if FW_VERSION < 201
+void func_000038BC(struct socket *so) {
+    struct sockbuf *sb = &so->so_rcv;
+    struct protosw *pr = so->so_proto;
+    s32 s;
+    struct sockbuf asb;
+
+    sb->sb_flags |= SB_NOINTR;
+    (void)sblock(sb, M_WAITOK);
+    s = _sce_pspnet_spllock();
+    func_00005AB8(so);
+    sbunlock(sb);
+    asb = *sb;
+    __builtin_memset(sb, 0, sizeof(*sb));
+    _sce_pspnet_splunlock(s);
+    if (pr->pr_flags & PR_RIGHTS && pr->pr_domain->dom_dispose) {
+        pr->pr_domain->dom_dispose(asb.sb_mb);
+    }
+    func_00004A3C(&asb);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000038BC);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00003A00);
 
@@ -514,7 +586,32 @@ s32 func_00004248(struct socket *so, struct mbuf *nam) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004248);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000042D4);
+s32 func_000042D4(struct socket *so, struct mbuf *nam) {
+    s32 s;
+    s32 error;
+
+    if (so->so_options & 0x2) { /* SO_ACCEPTCONN */
+        return 95; /* EOPNOTSUPP */
+    }
+    s = _sce_pspnet_spllock();
+    if (so->so_state & (SS_ISCONNECTED | SS_ISCONNECTING) &&
+        ((so->so_proto->pr_flags & PR_CONNREQUIRED) || (error = func_000025FC(so)))) {
+        error = 127; /* EISCONN */
+    } else {
+        error = so->so_proto->pr_usrreq(so, PRU_CONNECT, NULL, nam, NULL);
+    }
+    _sce_pspnet_splunlock(s);
+    return error;
+}
+
+s32 soconnect2(struct socket *so1, struct socket *so2) {
+    s32 s = _sce_pspnet_spllock();
+    s32 error;
+
+    error = so1->so_proto->pr_usrreq(so1, 17 /* PRU_CONNECT2 */, NULL, (struct mbuf *)so2, NULL);
+    _sce_pspnet_splunlock(s);
+    return error;
+}
 
 s32 func_00004404(struct socket *so, s32 how) {
     struct protosw *pr = so->so_proto;
@@ -561,9 +658,65 @@ s32 func_000044C8(struct socket *so, u32 cmd, void *data) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000044C8);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000453C);
+void func_0000453C(struct socket *so) {
+    struct socket *head = so->so_head;
 
+    so->so_state &= ~(SS_ISCONNECTING | SS_ISDISCONNECTING | SS_ISCONFIRMING);
+    so->so_state |= SS_ISCONNECTED;
+    if (head && func_00004838(so, 0)) {
+        func_000047DC(head, so, 1);
+        sorwakeup(head);
+        _sce_pspnet_wakeup(&head->so_timeo);
+    } else {
+        _sce_pspnet_wakeup(&so->so_timeo);
+        sorwakeup(so);
+        sowwakeup(so);
+    }
+}
+
+#if FW_VERSION < 201
+struct socket *func_00004620(struct socket *head, s32 connstatus) {
+    struct socket *so;
+    s32 soqueue = connstatus ? 1 : 0;
+
+    if (head->so_qlen + head->so_q0len > 3 * head->so_qlimit / 2) {
+        return NULL;
+    }
+    so = sceNetMallocInternal(sizeof(*so));
+    if (so == NULL) {
+        return NULL;
+    }
+    func_0002C94C(so, 0, sizeof(*so));
+    so->so_type = head->so_type;
+    so->so_options = head->so_options & ~0x2;
+    so->so_linger = head->so_linger;
+    so->so_state = head->so_state | SS_NOFDREF;
+    so->so_proto = head->so_proto;
+    so->so_timeo = head->so_timeo;
+    so->so_send = head->so_send;
+    so->so_receive = head->so_receive;
+    so->so_fd = -1;
+    (void)func_00004944(so, head->so_snd.sb_hiwat, head->so_rcv.sb_hiwat);
+    func_000047DC(head, so, soqueue);
+    if (so->so_proto->pr_usrreq(so, PRU_ATTACH, NULL, NULL, NULL)) {
+        (void)func_00004838(so, soqueue);
+        sceNetFreeInternal(so);
+        return NULL;
+    }
+    if (connstatus) {
+        sorwakeup(head);
+        _sce_pspnet_wakeup(&head->so_timeo);
+        so->so_state |= connstatus;
+    }
+    so->so_list.tqe_next = NULL;
+    so->so_list.tqe_prev = D_0002CC9C.tqh_last;
+    *D_0002CC9C.tqh_last = so;
+    D_0002CC9C.tqh_last = &so->so_list.tqe_next;
+    return so;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004620);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000047DC);

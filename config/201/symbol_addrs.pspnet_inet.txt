@@ -675,3 +675,4 @@ D_0002C5D8_v201 = 0x0002C5D8;
 D_0002C614_v201 = 0x0002C614;
 D_0002DA48_v201 = 0x0002DA48;
 // shared names (tools/add_version.py) end
+soconnect2 = 0x000044A0; // type:func (unreferenced, was merged into func_000042D4)

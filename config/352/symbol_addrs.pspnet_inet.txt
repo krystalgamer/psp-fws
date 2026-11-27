@@ -777,3 +777,4 @@ func_0002AF14 = 0x0002B088; // type:func rom:0x2B128
 D_0002C008_v352 = 0x0002C008; // rom:0x2C0A8
 D_0002C030_v352 = 0x0002C030; // rom:0x2C0D0
 // shared names (tools/add_version.py) end
+soconnect2 = 0x00004384; // type:func (unreferenced, was merged into func_000042D4)

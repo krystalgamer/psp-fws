@@ -728,3 +728,4 @@ D_0002C2D4_v250 = 0x0002C2D4; // rom:0x2C354
 D_0002C2E4_v250 = 0x0002C2E4; // rom:0x2C364
 D_0002C368_v250 = 0x0002C368; // rom:0x2C3E8
 // shared names (tools/add_version.py) end
+soconnect2 = 0x00004498; // type:func (unreferenced, was merged into func_000042D4)
