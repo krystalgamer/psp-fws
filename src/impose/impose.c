@@ -91,11 +91,11 @@ s32 func_000004C4(void) {
     func_000025F0(4);
     return 0;
 }
+
+INCLUDE_ASM("nonmatchings/impose", sceImposeSetStatus);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/impose", func_000005EC);
-
 INCLUDE_ASM("nonmatchings/impose", func_00000750);
 
 INCLUDE_ASM("nonmatchings/impose", func_00000840);
@@ -104,8 +104,6 @@ INCLUDE_ASM("nonmatchings/impose", func_00000B5C);
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 270)
-INCLUDE_ASM("nonmatchings/impose", sceImposeSetStatus);
-
 INCLUDE_ASM("nonmatchings/impose", sceImposeGetParam);
 
 INCLUDE_ASM("nonmatchings/impose", sceImposeSetParam);
@@ -563,17 +561,19 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeInit);
 INCLUDE_ASM("nonmatchings/impose", sceImposeEnd);
 #endif
 
+#if FW_VERSION >= 103 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/impose", sceImposeSuspend);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", sceImposeResume);
+#endif
+
 #if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/impose", func_000011FC);
-
-INCLUDE_ASM("nonmatchings/impose", func_00001274);
-
 INCLUDE_ASM("nonmatchings/impose", func_0000131C);
 #endif
 
 #if FW_VERSION == 102
-INCLUDE_ASM("nonmatchings/impose", func_000011F8);
-
 INCLUDE_ASM("nonmatchings/impose", func_000012DC);
 #endif
 
@@ -581,24 +581,12 @@ INCLUDE_ASM("nonmatchings/impose", func_000012DC);
 INCLUDE_ASM("nonmatchings/impose", func_000013B4);
 
 INCLUDE_ASM("nonmatchings/impose", func_000013C4);
-#endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/impose", func_000014B8);
-#endif
+INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_68676C0A);
 
-#if FW_VERSION == 102
-INCLUDE_ASM("nonmatchings/impose", func_000013D8);
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/impose", func_00001428);
 
 INCLUDE_ASM("nonmatchings/impose", func_00001478);
-#endif
-
-#if FW_VERSION == 102
-INCLUDE_ASM("nonmatchings/impose", func_000014BC);
 #endif
 
 #if FW_VERSION >= 350
@@ -637,10 +625,6 @@ s32 sceImposeEnd(void) {
     sceKernelReleaseSubIntrHandler(0x1E, 0x14);
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/impose", sceImposeSuspend);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
@@ -903,7 +887,7 @@ s32 module_reboot_phase(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 103 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/impose", sceImposeSuspend);
 #endif
 
