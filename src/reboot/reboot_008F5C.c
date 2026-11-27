@@ -42,9 +42,33 @@ s32 func_000071F0(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000071F8);
+s32 func_000071F8(void) {
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000725C);
+    if (!(D_00017364 & 2)) {
+        return -1;
+    }
+    ret = func_00008D1C(D_00018468, 0);
+    if (ret != 0) {
+        return ret;
+    }
+    D_00017364 &= ~2;
+    return 0;
+}
+
+s32 func_0000725C(void) {
+    s32 ret;
+
+    if (!(D_00017364 & 4)) {
+        return -1;
+    }
+    ret = func_00008268(D_00018490);
+    if (ret != 0) {
+        return ret;
+    }
+    D_00017364 &= ~4;
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000072BC);
 
@@ -58,7 +82,21 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00006204);
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000748C);
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00007978);
+s32 func_00007978(const u8 *a, const char *b) {
+    s32 i;
+
+    for (i = 0; i < 8; i++) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    for (i = 0; i < 3; i++) {
+        if (a[i + 8] != b[i + 8]) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000079E4);
 
