@@ -354,17 +354,17 @@ s32 module_bootstart(SceSize argSize, void *argp) {
     SceModuleLink *list;
     SceUID evid;
 
-    D_00006160.threadId = sceKernelCreateThread("SceKernelModmgrWorker", func_00002140, 0x20, 0x4000, 0, NULL);
-    D_00006160.semaId = sceKernelCreateSema("SceKernelModmgr", 0, 1, 1, NULL);
-    if (D_00006160.semaId < 0) {
-        Kprintf("modulemgr.c:%s:modMgrCB.semid 0x%x\n", "ModuleMgrInit", D_00006160.semaId);
+    modMgrCB.threadId = sceKernelCreateThread("SceKernelModmgrWorker", exe_thread, 0x20, 0x4000, 0, NULL);
+    modMgrCB.semaId = sceKernelCreateSema("SceKernelModmgr", 0, 1, 1, NULL);
+    if (modMgrCB.semaId < 0) {
+        Kprintf("modulemgr.c:%s:modMgrCB.semid 0x%x\n", "ModuleMgrInit", modMgrCB.semaId);
         Kprintf(D_00006D34, D_00006D64, "ModuleMgrInit", 0xAE);
         sceKernelAssert(0, 0);
     }
     evid = sceKernelCreateEventFlag("SceKernelModmgr", 0, 0, NULL);
-    D_00006160.userThreadId = -1;
-    D_00006160.eventId = evid;
-    list = &D_00006160.list;
+    modMgrCB.userThreadId = -1;
+    modMgrCB.eventId = evid;
+    list = &modMgrCB.list;
     list->next = list;
     list->prev = list;
     return 0;
@@ -673,7 +673,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00006390);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", func_000005C4);
+INCLUDE_ASM("nonmatchings/modulemgr", IsKernelOnlyModulePartition);
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 310)
@@ -683,7 +683,7 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006E28);
 #if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00004C90);
 
-s32 func_0000066C(SceUID mpid) {
+s32 IsUserModulePartition(SceUID mpid) {
     SceSysmemPartitionInfo info;
     s32 ret;
 
@@ -878,7 +878,7 @@ s32 func_000011E8(SceUID fd) {
     return size;
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_00001244);
+INCLUDE_ASM("nonmatchings/modulemgr", CheckMsHeader);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_000012E4);
 
@@ -890,7 +890,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00001BD8);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00001D78);
 
-s32 func_00002090(SceModule *mod) {
+s32 UnloadModule(SceModule *mod) {
     u32 status;
 
     status = mod->status & 0xF;
@@ -910,9 +910,9 @@ s32 func_00002090(SceModule *mod) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_00002140);
+INCLUDE_ASM("nonmatchings/modulemgr", exe_thread);
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_0000253C);
+INCLUDE_ASM("nonmatchings/modulemgr", start_exe_thread);
 
 s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option) {
     if (option != NULL) {
@@ -930,7 +930,7 @@ s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option) {
     modParams->unk48 = 0;
     modParams->unk58 = 0;
     modParams->pExecInfo = NULL;
-    return func_0000253C(modParams);
+    return start_exe_thread(modParams);
 }
 
 s32 func_00002764(SceUID fd, s32 flags, SceKernelLMOption *option) {
@@ -1281,7 +1281,7 @@ s32 sceKernelStartModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus
         modParams.threadPriority = 0;
         modParams.threadAttr = 0;
     }
-    ret = func_0000253C(&modParams);
+    ret = start_exe_thread(&modParams);
     if (ret < 0) {
         Kprintf("modulemgr.c:%s:result = 0x%08x\n", "sceKernelStartModule", ret);
     }
@@ -1291,7 +1291,7 @@ s32 sceKernelStartModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005DE0);
 
-s32 func_00003870(SceUID modId, SceUID callerModId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+s32 StopModuleApiBody(SceUID modId, SceUID callerModId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
     SceModuleMgrParam modParams;
     s32 status;
     SceModule *mod;
@@ -1325,7 +1325,7 @@ s32 func_00003870(SceUID modId, SceUID callerModId, SceSize argSize, void *argp,
         modParams.threadPriority = 0;
         modParams.threadAttr = 0;
     }
-    return func_0000253C(&modParams);
+    return start_exe_thread(&modParams);
 }
 
 s32 sceKernelStopModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
@@ -1384,7 +1384,7 @@ s32 sceKernelStopModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus,
         modParams.threadPriority = 0;
         modParams.threadAttr = 0;
     }
-    ret = func_0000253C(&modParams);
+    ret = start_exe_thread(&modParams);
     setK1(oldK1);
     return ret;
 }
@@ -1407,7 +1407,7 @@ s32 sceKernelUnloadModule(SceUID modId) {
     modParams.argSize = 0;
     modParams.argp = NULL;
     modParams.pStatus = NULL;
-    ret = func_0000253C(&modParams);
+    ret = start_exe_thread(&modParams);
     setK1(oldK1);
     return ret;
 }
@@ -1422,7 +1422,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_2BE4807D);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00003BFC(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+s32 SelfStopUnloadModule(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
     SceModuleMgrParam modParams;
     s32 status;
     SceModule *mod;
@@ -1445,7 +1445,7 @@ s32 func_00003BFC(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSM
     } else {
         modParams.pStatus = &status;
     }
-    ret = func_0000253C(&modParams);
+    ret = start_exe_thread(&modParams);
     if (ret < 0) {
         Kprintf("modulemgr.c:%s:Cannot stop/unload module 0x%08x\n", "SelfStopUnloadModule", ret);
         return ret;
@@ -1470,7 +1470,7 @@ s32 sceKernelSelfStopUnloadModule(s32 unk, SceSize argSize, void *argp) {
     if (k1IsUserMode()) {
         ra = ThreadManForKernel_DD55A192();
     }
-    ret = func_00003BFC(ra, argSize, argp, NULL, NULL);
+    ret = SelfStopUnloadModule(ra, argSize, argp, NULL, NULL);
     if (ret < 0) {
         Kprintf("modulemgr.c:%s:SelfSTopUnloadModule failed: 0x%08x\n", "sceKernelSelfStopUnloadModule", ret);
     }
@@ -1505,7 +1505,7 @@ s32 sceKernelStopUnloadSelfModule(SceSize argSize, void *argp, s32 *pStatus, Sce
     if (k1IsUserMode()) {
         ra = ThreadManForKernel_DD55A192();
     }
-    ret = func_00003BFC(ra, argSize, argp, pStatus, option);
+    ret = SelfStopUnloadModule(ra, argSize, argp, pStatus, option);
     if (ret < 0) {
         Kprintf("modulemgr.c:%s:SelfStopUnloadModule failed: 0x%08x\n", "sceKernelStopUnloadSelfModule", ret);
     }

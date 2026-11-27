@@ -24,6 +24,20 @@ typedef struct {
 
 typedef struct {
     SceSize size;
+    u8 nsegment;
+    u8 reserved[3];
+    s32 segmentaddr[4];
+    s32 segmentsize[4];
+    u32 entry_addr;
+    u32 gp_value;
+    u32 text_addr;
+    u32 text_size;
+    u32 data_size;
+    u32 bss_size;
+} SceKernelModuleInfo;
+
+typedef struct {
+    SceSize size;
     SceUID mpIdStack;
     SceSize stackSize;
     s32 priority;
@@ -59,6 +73,10 @@ typedef struct SceModule {
     SceSize textSize;
     SceSize dataSize;
     SceSize bssSize;
+    u8 nSegment;
+    u8 padding2[3];
+    u32 segmentAddr[4];
+    SceSize segmentSize[4];
 #endif
 } SceModule;
 
@@ -152,7 +170,6 @@ extern char D_00005C3C[];
 extern char D_00005C64[];
 extern char D_00005CB0[];
 extern char D_00005DE0[];
-extern SceModuleManagerCB D_00006160;
 extern char D_00006D34[];
 extern char D_00006D64[];
 extern s32 D_00006DA0;
@@ -161,9 +178,12 @@ extern char D_00006E28[];
 extern u32 D_00007160;
 extern s32 D_00008174;
 extern s32 D_00008184;
+extern SceModuleManagerCB modMgrCB;
 
 void Kprintf(const char *fmt, ...);
+s32 SelfStopUnloadModule(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);
 u32 ThreadManForKernel_DD55A192(void);
+s32 exe_thread(SceSize argSize, void *argp);
 s32 func_00000108(void);
 s32 func_00000148(s32 arg0);
 s32 func_00000190(s32 arg0);
@@ -185,12 +205,9 @@ s32 func_00000474(void);
 void func_000004B0(void *arg0, void *arg1);
 void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 *arg1);
 void func_00000594(void *arg0);
-s32 func_00002140(SceSize argSize, void *argp);
-s32 func_0000253C(SceModuleMgrParam *modParams);
 s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option);
 s32 func_000028EC(SceUID fd, u32 apiType);
 s32 func_00003210(s32);
-s32 func_00003BFC(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);
 void func_00004750(void);
 s32 func_00004BA4(s32);
 s32 func_0000552C(s32);
@@ -215,9 +232,10 @@ s32 sceKernelDeleteModule(s32);
 s32 sceKernelExitDeleteThread(s32 status);
 SceModule *sceKernelFindModuleByAddress(u32 addr);
 SceModule *sceKernelFindModuleByName(const char *name);
-s32 sceKernelFindModuleByUID(s32);
+SceModule *sceKernelFindModuleByUID(SceUID modId);
 s32 sceKernelFreeModule(s32);
 M2C_UNK sceKernelFreePartitionMemory(s32);
+SceUID sceKernelGetThreadId(void);
 s32 sceKernelGetUserLevel(void);
 s32 sceKernelIsIntrContext(void);
 M2C_UNK sceKernelLinkLibraryEntries();
@@ -240,9 +258,13 @@ s32 sceKernelReleaseLibrary();
 s32 sceKernelReleaseModule(s32);
 SceUID sceKernelSearchModuleByAddress(u32 addr);
 SceUID sceKernelSearchModuleByName(const char *name);
+s32 sceKernelSignalSema(SceUID semaId, s32 signal);
+s32 sceKernelStartThread(SceUID thid, SceSize argSize, void *argp);
 s32 sceKernelSuspendThread(u32);
 M2C_UNK sceKernelUnLinkLibraryEntries();
+s32 sceKernelWaitEventFlag(SceUID evid, u32 bits, u32 wait, u32 *outBits, void *timeout);
 s32 sceKernelWaitSema(s32, s32, void *);
+s32 start_exe_thread(SceModuleMgrParam *modParams);
 void *wmemset(void *s, s32 c, SceSize n);
 
 #endif

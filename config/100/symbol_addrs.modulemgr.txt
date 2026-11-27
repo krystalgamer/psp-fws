@@ -91,3 +91,11 @@ D_00006E78 = 0x00004E34;
 func_00004FCC = 0x00000DCC; // type:func
 // shared names (tools/add_version.py) end
 func_00002764 = 0x00002764; // type:func
+start_exe_thread = 0x0000253C; // type:func
+exe_thread = 0x00002140; // type:func
+SelfStopUnloadModule = 0x00003BFC; // type:func
+IsKernelOnlyModulePartition = 0x000005C4; // type:func
+IsUserModulePartition = 0x0000066C; // type:func
+UnloadModule = 0x00002090; // type:func
+CheckMsHeader = 0x00001244; // type:func
+modMgrCB = 0x00006160;
