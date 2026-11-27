@@ -492,6 +492,7 @@
   "func_0001F998": "M2C_UNK func_0001F998();",
   "func_0001FA38": "s32 func_0001FA38(s32, s32);",
   "func_0001FDE8": "s32 func_0001FDE8(s32, s32);",
+  "func_00020510": "void func_00020510(void);",
   "func_00020B3C": "M2C_UNK func_00020B3C();",
   "module_stop": "s32 module_stop(void);",
   "sceIoClose": "s32 sceIoClose(s32);",

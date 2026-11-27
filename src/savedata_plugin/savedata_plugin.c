@@ -255,7 +255,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00000280);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_0000030C);
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00000348);
 #else
 void func_00000348(s32 arg0) {

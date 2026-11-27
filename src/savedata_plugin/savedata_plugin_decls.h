@@ -1123,6 +1123,7 @@ M2C_UNK func_0001C2A0(s32);
 M2C_UNK func_0001F998();
 s32 func_0001FA38(s32, s32);
 s32 func_0001FDE8(s32, s32);
+void func_00020510(void);
 M2C_UNK func_00020B3C();
 s32 module_stop(void);
 s32 sceIoClose(s32);

@@ -341,7 +341,7 @@ s32 func_00013738(struct Unk_func_00013738_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00013740);
 #else
 void func_00013740(void *arg0, s32 arg1) {
