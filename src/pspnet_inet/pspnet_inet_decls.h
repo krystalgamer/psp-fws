@@ -864,17 +864,76 @@ typedef char chk_tcpcb[(sizeof(struct tcpcb) == 0xB4) ? 1 : -1];
 #define TCPS_HAVERCVDSYN(s) ((s) >= TCPS_SYN_RECEIVED)
 #define TCPS_HAVEESTABLISHED(s) ((s) >= TCPS_ESTABLISHED)
 
-/* struct tcpstat (NetBSD 1.5, u_quad_t counters; partial) */
+/* struct tcpstat (NetBSD 1.5 + tcps_pmtublackhole, u_quad_t counters) */
 struct tcpstat {
-    u64 tcps_connattempt;       /* 0x00 */
-    u64 tcps_accepts;           /* 0x08 */
-    u64 tcps_connects;          /* 0x10 */
-    u64 tcps_drops;             /* 0x18 */
-    u64 tcps_conndrops;         /* 0x20 */
-    u64 tcps_closed;            /* 0x28 */
-    u8 unk30[0x80 - 0x30];
-    u64 tcps_connsdrained;      /* 0x80 */
-    u8 unk88[0x220 - 0x88];
+    u64 tcps_connattempt;           /* 0x0 */
+    u64 tcps_accepts;               /* 0x8 */
+    u64 tcps_connects;              /* 0x10 */
+    u64 tcps_drops;                 /* 0x18 */
+    u64 tcps_conndrops;             /* 0x20 */
+    u64 tcps_closed;                /* 0x28 */
+    u64 tcps_segstimed;             /* 0x30 */
+    u64 tcps_rttupdated;            /* 0x38 */
+    u64 tcps_delack;                /* 0x40 */
+    u64 tcps_timeoutdrop;           /* 0x48 */
+    u64 tcps_rexmttimeo;            /* 0x50 */
+    u64 tcps_persisttimeo;          /* 0x58 */
+    u64 tcps_keeptimeo;             /* 0x60 */
+    u64 tcps_keepprobe;             /* 0x68 */
+    u64 tcps_keepdrops;             /* 0x70 */
+    u64 tcps_persistdrops;          /* 0x78 */
+    u64 tcps_connsdrained;          /* 0x80 */
+    u64 tcps_pmtublackhole;         /* 0x88 */
+    u64 tcps_sndtotal;              /* 0x90 */
+    u64 tcps_sndpack;               /* 0x98 */
+    u64 tcps_sndbyte;               /* 0xA0 */
+    u64 tcps_sndrexmitpack;         /* 0xA8 */
+    u64 tcps_sndrexmitbyte;         /* 0xB0 */
+    u64 tcps_sndacks;               /* 0xB8 */
+    u64 tcps_sndprobe;              /* 0xC0 */
+    u64 tcps_sndurg;                /* 0xC8 */
+    u64 tcps_sndwinup;              /* 0xD0 */
+    u64 tcps_sndctrl;               /* 0xD8 */
+    u64 tcps_rcvtotal;              /* 0xE0 */
+    u64 tcps_rcvpack;               /* 0xE8 */
+    u64 tcps_rcvbyte;               /* 0xF0 */
+    u64 tcps_rcvbadsum;             /* 0xF8 */
+    u64 tcps_rcvbadoff;             /* 0x100 */
+    u64 tcps_rcvmemdrop;            /* 0x108 */
+    u64 tcps_rcvshort;              /* 0x110 */
+    u64 tcps_rcvduppack;            /* 0x118 */
+    u64 tcps_rcvdupbyte;            /* 0x120 */
+    u64 tcps_rcvpartduppack;        /* 0x128 */
+    u64 tcps_rcvpartdupbyte;        /* 0x130 */
+    u64 tcps_rcvoopack;             /* 0x138 */
+    u64 tcps_rcvoobyte;             /* 0x140 */
+    u64 tcps_rcvpackafterwin;       /* 0x148 */
+    u64 tcps_rcvbyteafterwin;       /* 0x150 */
+    u64 tcps_rcvafterclose;         /* 0x158 */
+    u64 tcps_rcvwinprobe;           /* 0x160 */
+    u64 tcps_rcvdupack;             /* 0x168 */
+    u64 tcps_rcvacktoomuch;         /* 0x170 */
+    u64 tcps_rcvackpack;            /* 0x178 */
+    u64 tcps_rcvackbyte;            /* 0x180 */
+    u64 tcps_rcvwinupd;             /* 0x188 */
+    u64 tcps_pawsdrop;              /* 0x190 */
+    u64 tcps_predack;               /* 0x198 */
+    u64 tcps_preddat;               /* 0x1A0 */
+    u64 tcps_pcbhashmiss;           /* 0x1A8 */
+    u64 tcps_noport;                /* 0x1B0 */
+    u64 tcps_badsyn;                /* 0x1B8 */
+    u64 tcps_sc_added;              /* 0x1C0 */
+    u64 tcps_sc_completed;          /* 0x1C8 */
+    u64 tcps_sc_timed_out;          /* 0x1D0 */
+    u64 tcps_sc_overflowed;         /* 0x1D8 */
+    u64 tcps_sc_reset;              /* 0x1E0 */
+    u64 tcps_sc_unreach;            /* 0x1E8 */
+    u64 tcps_sc_bucketoverflow;     /* 0x1F0 */
+    u64 tcps_sc_aborted;            /* 0x1F8 */
+    u64 tcps_sc_dupesyn;            /* 0x200 */
+    u64 tcps_sc_dropped;            /* 0x208 */
+    u64 tcps_sc_collisions;         /* 0x210 */
+    u64 tcps_sc_retransmitted;      /* 0x218 */
 };
 typedef char chk_tcpstat[(sizeof(struct tcpstat) == 0x220) ? 1 : -1];
 #define TCP_INITIAL_WINDOW(iw, segsz) \
@@ -1454,7 +1513,6 @@ extern s32 D_0002C318;
 extern s32 D_0002C31C;
 extern s32 D_0002C320;
 extern s32 D_0002C358;
-extern s32 D_0002C35C;
 extern s32 D_0002C360;
 extern s32 D_0002C364;
 extern s32 D_0002C368;
@@ -1509,7 +1567,6 @@ extern s32 D_0002E798;
 extern s32 D_0002E79C;
 extern s32 D_0002E7A4;
 extern s32 D_0002E7B0; /* ip_defttl */
-extern s32 D_0002E7BC; /* ip_mtudisc */
 extern struct sockaddr_in D_0002E834 __attribute__((aligned(4)));
 extern struct sockaddr_in D_0002E844 __attribute__((aligned(4)));
 extern struct sockaddr_in D_0002E854 __attribute__((aligned(4)));
@@ -1521,9 +1578,6 @@ extern s32 D_0002E904; /* tcp_do_sack */
 extern s32 D_0002E908; /* tcp_do_win_scale */
 extern s32 D_0002E90C; /* tcp_do_timestamps */
 extern s32 D_0002E910; /* tcp_init_win */
-extern s32 D_0002E918; /* tcp_keepidle */
-extern s32 D_0002E924;
-extern s32 D_0002E95C;
 extern s8 D_0002EAB0[];
 extern s32 D_0002EAB1;
 extern s32 D_0002EB40;
@@ -1552,6 +1606,7 @@ extern s32 igmp_timers_are_running; /* igmp_timers_are_running */
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
 extern s32 inetctlerrmap[]; /* inetctlerrmap */
+extern s32 ip_mtudisc; /* ip_mtudisc */
 extern s32 ip_nhops; /* ip_nhops */
 extern struct ip_srcrt_s ip_srcrt; /* ip_srcrt */
 extern const struct cp ipcp; /* ipcp */
@@ -1576,11 +1631,15 @@ extern s32 tcp_compat_42; /* tcp_compat_42 */
 extern struct tcp_ctlvar tcp_ctlvars[]; /* tcp_ctlvars */
 extern struct tcpcb *tcp_delacks; /* tcp_delacks */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
+extern s32 tcp_keepidle; /* tcp_keepidle */
+extern s32 tcp_keepintvl; /* tcp_keepintvl */
 extern s32 tcp_maxidle;
+extern s32 tcp_maxpersistidle; /* tcp_maxpersistidle */
 extern s32 tcp_mss_ifmtu;
 extern u32 tcp_recvspace; /* tcp_recvspace */
 extern u32 tcp_sendspace; /* tcp_sendspace */
 extern struct tcpstat tcp_stat;
+extern s32 tcp_totbackoff; /* tcp_totbackoff */
 extern struct inpcbtable udbtable;
 extern struct in_addr zeroin_addr; /* zeroin_addr */
 
@@ -1899,6 +1958,7 @@ struct tcpcb *tcp_newtcpcb(s32 family, void *aux);
 void tcp_notify(struct inpcb *inp, s32 error);
 s32 tcp_optlen(void *tp);
 s32 tcp_output(struct tcpcb *tp);
+s32 tcp_respond(struct tcpcb *tp, struct mbuf *template, struct mbuf *m, struct tcphdr *th0, u32 ack, u32 seq, s32 flags);
 void tcp_rmx_rtt(struct tcpcb *tp);
 struct mbuf *tcp_template(struct tcpcb *tp);
 struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer);

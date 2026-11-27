@@ -299,3 +299,5 @@ tcp_usrreq = 0x000244FC; // type:func
 in_purgeif = 0x00012AC4; // type:func
 in_pcbpurgeif = 0x000137AC; // type:func
 sbappend = 0x000059AC; // type:func
+tcp_respond = 0x000228BC; // type:func
+tcp_keepintvl = 0x0002C35C; // rom:0x2C3FC

@@ -18,7 +18,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_template);
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00022714);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000228BC);
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_respond);
 
 #if FW_VERSION < 201
 struct tcpcb *tcp_newtcpcb(s32 family, void *aux) {
@@ -58,7 +58,7 @@ struct tcpcb *tcp_newtcpcb(s32 family, void *aux) {
     switch (family) {
     case AF_INET:
         tp->t_inpcb = (struct inpcb *)aux;
-        tp->t_mtudisc = D_0002E7BC;
+        tp->t_mtudisc = ip_mtudisc;
         break;
     }
     tp->t_srtt = 0;
@@ -466,7 +466,7 @@ void tcp_established(struct tcpcb *tp) {
         rt = in_pcbrtentry(tp->t_inpcb);
     }
     tp->t_state = TCPS_ESTABLISHED;
-    tp->t_timer[TCPT_KEEP] = pfslowtimo_now + D_0002E918;
+    tp->t_timer[TCPT_KEEP] = pfslowtimo_now + tcp_keepidle;
     if (rt != NULL && rt->rt_rmx.rmx_recvpipe != 0) {
         bufsize = rt->rt_rmx.rmx_recvpipe;
     } else {
@@ -512,9 +512,115 @@ u32 tcp_new_iss(struct tcpcb *tp, u32 len, u32 addin) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023D98);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 250
+struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer) {
+    s16 rto;
+
+    switch (timer) {
+    case 3:
+        if (tp->t_state != 10 &&
+            ((tcp_maxidle == 0) || (tp->t_idle <= tcp_maxidle)))
+            tp->t_timer[3] = pfslowtimo_now + tcp_keepintvl;
+        else
+            tp = tcp_close(tp);
+        break;
+
+    case 0:
+        if (++tp->t_rxtshift > 12) {
+            tp->t_rxtshift = 12;
+            tcp_stat.tcps_timeoutdrop++;
+            tp = tcp_drop(tp, tp->t_softerror ? tp->t_softerror : 0x74);
+            break;
+        }
+        tcp_stat.tcps_rexmttimeo++;
+        rto = ((tp->t_srtt >> 3) + tp->t_rttvar) >> 2;
+        if (rto < tp->t_rttmin)
+            rto = tp->t_rttmin;
+        TCPT_RANGESET(tp->t_rxtcur, rto * tcp_backoff[tp->t_rxtshift], tp->t_rttmin, 128);
+        tp->t_timer[0] = pfslowtimo_now + tp->t_rxtcur;
+        if (ip_mtudisc && tp->t_rxtshift > 12 / 6) {
+            tcp_stat.tcps_pmtublackhole++;
+            if (tp->t_inpcb)
+                tp->t_mtudisc = 0;
+        }
+        if (tp->t_rxtshift > 12 / 4) {
+            if (tp->t_inpcb)
+                in_losing(tp->t_inpcb);
+            tp->t_rttvar += (tp->t_srtt >> 3);
+            tp->t_srtt = 0;
+        }
+        tp->snd_nxt = tp->snd_una;
+        tp->t_rtt = 0;
+        if (tp->t_state == 2)
+            tp->t_flags |= 0x400;
+        {
+            u32 win = min(tp->snd_wnd, tp->snd_cwnd) / 2 / tp->t_segsz;
+            if (win < 2)
+                win = 2;
+            tp->snd_cwnd = tp->t_segsz;
+            tp->snd_ssthresh = win * tp->t_segsz;
+            tp->t_dupacks = 0;
+        }
+        (void)tcp_output(tp);
+        break;
+
+    case 1:
+        rto = ((tp->t_srtt >> 3) + tp->t_rttvar) >> 2;
+        if (rto < tp->t_rttmin)
+            rto = tp->t_rttmin;
+        if (tp->t_rxtshift == 12 &&
+            (tp->t_idle >= tcp_maxpersistidle ||
+             tp->t_idle >= rto * tcp_totbackoff)) {
+            tcp_stat.tcps_persistdrops++;
+            tp = tcp_drop(tp, 0x74);
+            break;
+        }
+        tcp_stat.tcps_persisttimeo++;
+        tcp_setpersist(tp);
+        tp->t_force = 1;
+        (void)tcp_output(tp);
+        tp->t_force = 0;
+        break;
+
+    case 2: {
+        struct socket *so = NULL;
+
+        tcp_stat.tcps_keeptimeo++;
+        if (TCPS_HAVEESTABLISHED(tp->t_state) == 0)
+            goto dropit;
+        if (tp->t_inpcb)
+            so = tp->t_inpcb->inp_socket;
+        if (so->so_options & 0x8 && tp->t_state <= 5) {
+            if ((tcp_maxidle > 0) &&
+                (tp->t_idle >= tcp_keepidle + tcp_maxidle))
+                goto dropit;
+            tcp_stat.tcps_keepprobe++;
+            if (tcp_compat_42) {
+                (void)tcp_respond(tp, tp->t_template, (struct mbuf *)NULL, NULL,
+                                    tp->rcv_nxt - 1, tp->snd_una - 1, 0);
+            } else {
+                (void)tcp_respond(tp, tp->t_template, (struct mbuf *)NULL, NULL,
+                                    tp->rcv_nxt, tp->snd_una - 1, 0);
+            }
+            tp->t_timer[2] = pfslowtimo_now + tcp_keepintvl;
+        } else
+            tp->t_timer[2] = pfslowtimo_now + tcp_keepidle;
+        break;
+    }
+    dropit:
+        tcp_stat.tcps_keepdrops++;
+        tp = tcp_drop(tp, 0x74);
+        break;
+    }
+    return (tp);
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_timers);
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023F70);
 #endif
 
@@ -547,11 +653,11 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00025E94);
 
 #if FW_VERSION < 201
 void func_00025E94(void) {
-    D_0002E918 = 0x3840;
-    D_0002E95C = 0x1FF;
-    D_0002C35C = 0x96;
+    tcp_keepidle = 0x3840;
+    tcp_totbackoff = 0x1FF;
+    tcp_keepintvl = 0x96;
     D_0002C360 = 8;
-    D_0002E924 = 0x3840;
+    tcp_maxpersistidle = 0x3840;
     tcp_maxidle = 0;
     D_0002C5D8 = 0;
 }
@@ -561,7 +667,7 @@ void func_00025E94(void) {
 void func_000244B0(void) {
     D_0002C358 = 0x3840;
     D_0002C39C = 0x1FF;
-    D_0002C35C = 0x96;
+    tcp_keepintvl = 0x96;
     D_0002C360 = 8;
     D_0002C364 = 0x3840;
     tcp_maxidle = 0;
