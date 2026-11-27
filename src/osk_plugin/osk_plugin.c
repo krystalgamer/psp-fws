@@ -2415,11 +2415,11 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00004DE0);
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00004F50);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 260
+#if FW_VERSION >= 152 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00004FB4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s8 func_00004FB4(s32 arg0) {
     return M2C_FIELD(sce_paf_private_bsearch(arg0, &D_0000D384, 0x15, 0x14, func_00001B34), s8 *, 0x10);
 }
