@@ -1112,11 +1112,3 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000038F0);
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_0000399C);
 
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000039C4);
-
-INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00003A00);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00003A58);
-#endif
-
-INCLUDE_RODATA("nonmatchings/netplay_server_utility", D_00004490);
