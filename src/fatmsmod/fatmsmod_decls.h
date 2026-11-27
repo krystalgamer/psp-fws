@@ -197,6 +197,13 @@ struct Unk_func_00013798_0 {
     s32 unkFAE0;
 };
 
+/* "prfile_mod.c:%s:driver deleted\n" (shared rodata entry, label differs per version) */
+#if FW_VERSION >= 250 && FW_VERSION < 282
+#define STR_DRIVER_DELETED D_000243D8
+#else
+#define STR_DRIVER_DELETED D_00023B8C
+#endif
+
 extern const char D_00014704[]; /* "FATMS" */
 extern u8 D_000193F8;
 extern u8 D_000193FC;
@@ -222,6 +229,7 @@ extern M2C_UNK D_0001BCC4;
 extern s32 D_0001BCE4;
 extern char D_00023B8C[]; /* "prfile_mod.c:%s:driver deleted\n" */
 extern M2C_UNK D_0002411C;
+extern char D_000243D8[]; /* 2.50-2.71 "prfile_mod.c:%s:driver deleted\n" */
 extern void *D_000276E4;
 extern s32 (*D_000276E8)(s32, s32, s32);
 extern s32 (*D_000276EC)(s32, s32, s32);

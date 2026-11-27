@@ -279,7 +279,8 @@
   "Unk_func_0000E3D8_0": "struct Unk_func_0000E3D8_0 {\n    u32 unk0;\n    u32 unk4;\n    u8 pad8[0x18];\n    s32 unk20;\n    u8 pad24[0x2];\n    u16 unk26;\n};",
   "Unk_func_00013044_0": "struct Unk_func_00013044_0 {\n    s8 unk0;\n    s8 unk1;\n};",
   "Unk_func_000135A8_0": "struct Unk_func_000135A8_0 {\n    s8 unk0;\n    s8 unk1;\n};",
-  "Unk_func_00013798_0": "struct Unk_func_00013798_0 {\n    u8 pad0[0x20];\n    s32 unk20;\n    u8 pad24[0xFA54];\n    struct Unk_Unk_func_00013798_0_FA78 *unkFA78;\n    u8 padFA7C[0x48];\n    s32 unkFAC4;\n    u8 padFAC8[0x18];\n    s32 unkFAE0;\n};"
+  "Unk_func_00013798_0": "struct Unk_func_00013798_0 {\n    u8 pad0[0x20];\n    s32 unk20;\n    u8 pad24[0xFA54];\n    struct Unk_Unk_func_00013798_0_FA78 *unkFA78;\n    u8 padFA7C[0x48];\n    s32 unkFAC4;\n    u8 padFAC8[0x18];\n    s32 unkFAE0;\n};",
+  "zz_strDriverDeleted": "/* \"prfile_mod.c:%s:driver deleted\\n\" (shared rodata entry, label differs per version) */\n#if FW_VERSION >= 250 && FW_VERSION < 282\n#define STR_DRIVER_DELETED D_000243D8\n#else\n#define STR_DRIVER_DELETED D_00023B8C\n#endif"
  },
  "vars": {
   "D_00014704": "extern const char D_00014704[]; /* \"FATMS\" */",
@@ -307,6 +308,7 @@
   "D_0001BCE4": "extern s32 D_0001BCE4;",
   "D_00023B8C": "extern char D_00023B8C[]; /* \"prfile_mod.c:%s:driver deleted\\n\" */",
   "D_0002411C": "extern M2C_UNK D_0002411C;",
+  "D_000243D8": "extern char D_000243D8[]; /* 2.50-2.71 \"prfile_mod.c:%s:driver deleted\\n\" */",
   "D_000276E4": "extern void *D_000276E4;",
   "D_000276E8": "extern s32 (*D_000276E8)(s32, s32, s32);",
   "D_000276EC": "extern s32 (*D_000276EC)(s32, s32, s32);",

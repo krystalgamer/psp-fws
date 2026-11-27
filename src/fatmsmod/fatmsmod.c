@@ -563,7 +563,7 @@ s32 df_read(SceIoIob *iob, void *buf, SceSize size) {
     }
     priv = iob->i_private;
     if (check_reload_status(0, priv) < 0) {
-        Kprintf(D_00023B8C, "df_read");
+        Kprintf(STR_DRIVER_DELETED, "df_read");
         return 0x80010013;
     }
     if (size == 0) {
@@ -605,7 +605,7 @@ s32 df_write(SceIoIob *iob, const void *buf, SceSize size) {
     }
     priv = iob->i_private;
     if (check_reload_status(0, priv) < 0) {
-        Kprintf(D_00023B8C, "df_write");
+        Kprintf(STR_DRIVER_DELETED, "df_write");
         return 0x80010013;
     }
     if (size == 0) {
@@ -668,7 +668,7 @@ s32 df_ioctl(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata,
         return 0;
     }
     if (check_reload_status(0, iob->i_private) < 0) {
-        Kprintf(D_00023B8C, "df_ioctl");
+        Kprintf(STR_DRIVER_DELETED, "df_ioctl");
         return 0x80010013;
     }
     if (k1IsUserMode()) {
@@ -696,7 +696,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023C78);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00001064);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 260
 #if FW_VERSION >= 150
 s32 df_remove(SceIoIob *iob, char *name, s32 arg) {
 #else
@@ -707,7 +707,7 @@ s32 df_remove(SceIoIob *iob, char *name) {
     s32 err;
 
     if (check_reload_status(1, NULL) < 0) {
-        Kprintf(D_00023B8C, "df_remove");
+        Kprintf(STR_DRIVER_DELETED, "df_remove");
         return 0x80010013;
     }
     path = get_heap(&heap, 0x540);
@@ -734,7 +734,7 @@ s32 df_remove(SceIoIob *iob, char *name) {
 INCLUDE_ASM("nonmatchings/fatmsmod", df_remove);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 260
 #if FW_VERSION >= 150
 s32 df_mkdir(SceIoIob *iob, char *name, SceMode mode, s32 arg) {
 #else
@@ -745,7 +745,7 @@ s32 df_mkdir(SceIoIob *iob, char *name, SceMode mode) {
     s32 err;
 
     if (check_reload_status(1, NULL) < 0) {
-        Kprintf(D_00023B8C, "df_mkdir");
+        Kprintf(STR_DRIVER_DELETED, "df_mkdir");
         return 0x80010013;
     }
     path = get_heap(&heap, 0x540);
@@ -772,7 +772,7 @@ s32 df_mkdir(SceIoIob *iob, char *name, SceMode mode) {
 INCLUDE_ASM("nonmatchings/fatmsmod", df_mkdir);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 260
 #if FW_VERSION >= 150
 s32 df_rmdir(SceIoIob *iob, char *name, s32 arg) {
 #else
@@ -783,7 +783,7 @@ s32 df_rmdir(SceIoIob *iob, char *name) {
     s32 err;
 
     if (check_reload_status(1, NULL) < 0) {
-        Kprintf(D_00023B8C, "df_rmdir");
+        Kprintf(STR_DRIVER_DELETED, "df_rmdir");
         return 0x80010013;
     }
     path = get_heap(&heap, 0x540);
@@ -853,7 +853,7 @@ s32 df_dclose(SceIoIob *iob) {
             return 0;
         }
         fn = "df_dclose";
-        Kprintf(D_00023B8C, fn);
+        Kprintf(STR_DRIVER_DELETED, fn);
         ret = free_heap(priv->dirHeap, priv);
         if (ret < 0) {
             Kprintf("prfile_mod.c:%s:free heap retval:%d(0x%x)\n", fn, ret, ret);
@@ -933,7 +933,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00002190);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000238C);
 
-#if FW_VERSION < 250
+#if FW_VERSION < 260
 #if FW_VERSION >= 150
 s32 df_rename(SceIoIob *iob, const char *name, const char *newName, s32 arg) {
 #else
@@ -944,7 +944,7 @@ s32 df_rename(SceIoIob *iob, const char *name, const char *newName) {
     s32 err;
 
     if (check_reload_status(1, NULL) < 0) {
-        Kprintf(D_00023B8C, "df_rename");
+        Kprintf(STR_DRIVER_DELETED, "df_rename");
         return 0x80010013;
     }
     path = get_heap(&heap, 0x540);
