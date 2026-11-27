@@ -147,40 +147,40 @@ INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00012AA8);
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00012AB0);
 
-void func_000029B4(char **pp, s32 c) {
+void sprintf_putc(char **pp, s32 c) {
     if (c < 256) {
         *(*pp)++ = c;
     } else {
         **pp = 0;
     }
 }
+#endif
 
 s32 sprintf(char *buf, const char *fmt, ...) {
     __builtin_va_list ap;
     char *p = buf;
 
     __builtin_va_start(ap, fmt);
-    return prnt(func_000029B4, &p, fmt, ap);
+    return prnt(sprintf_putc, &p, fmt, ap);
 }
-#else
-INCLUDE_ASM("nonmatchings/reboot_002D0C", sprintf);
-#endif
 
-#if FW_VERSION == 100
 s32 vsprintf(char *buf, const char *fmt, void *ap) {
     char *p = buf;
-    return prnt(func_000029B4, &p, fmt, ap);
+    return prnt(sprintf_putc, &p, fmt, ap);
 }
-#else
-INCLUDE_ASM("nonmatchings/reboot_002D0C", vsprintf);
-#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot_002D0C", sceKernelDcacheWBinvAll);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", sceKernelIcacheClearAll);
 #else
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003A14);
+void sprintf_putc(char **pp, s32 c) {
+    if (c < 256) {
+        *(*pp)++ = c;
+    } else {
+        **pp = 0;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003A3C);
 

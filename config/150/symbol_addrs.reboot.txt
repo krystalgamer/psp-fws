@@ -425,3 +425,4 @@ strncpy = 0x000031B8; // type:func
 strrchr = 0x00003234; // type:func
 sprintf = 0x00003994; // type:func
 vsprintf = 0x000039E0; // type:func
+sprintf_putc = 0x00003A14; // type:func

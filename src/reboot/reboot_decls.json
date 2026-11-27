@@ -39,7 +39,6 @@
   "func_00001D64": "s32 func_00001D64(s32 arg0);",
   "func_00001D68": "s32 func_00001D68(s32 arg0);",
   "func_00001D74": "s32 func_00001D74(void);",
-  "func_000029B4": "void func_000029B4(char **pp, s32 c);",
   "func_00002A00": "void func_00002A00(u8 *arg0, u8 *arg1);",
   "func_00002A4C": "void func_00002A4C(u8 *arg0, u8 *arg1, u32 arg2);",
   "func_00002C2C": "s32 func_00002C2C(void);",
@@ -209,6 +208,7 @@
   "sceSysregSpiIoEnable": "s32 sceSysregSpiIoEnable(u32 n);",
   "sceSysregUartIoDisable": "s32 sceSysregUartIoDisable(u32 n);",
   "sceSysregUartIoEnable": "s32 sceSysregUartIoEnable(u32 n);",
+  "sprintf_putc": "void sprintf_putc(char **pp, s32 c);",
   "strchr": "char *strchr(const char *s, s32 c);",
   "strlen": "s32 strlen(const char *s);",
   "wmemset": "void *wmemset(void *s, s32 c, s32 n);"

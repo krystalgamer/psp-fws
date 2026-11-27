@@ -432,3 +432,4 @@ func_0000FC60_v100 = 0x0000FC60; // type:func rom:0xFCE0
 // shared names (tools/add_version.py) end
 sceKernelDcacheWBinvAll = 0x00002A58; // type:func
 sceKernelIcacheClearAll = 0x00002A9C; // type:func
+sprintf_putc = 0x000029B4; // type:func
