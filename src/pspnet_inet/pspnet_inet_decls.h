@@ -117,6 +117,7 @@ struct socket {
 #define SS_NBIO             0x100
 #define SS_ASYNC            0x200
 #define SS_ISCONFIRMING     0x400
+#define SS_ISDISCONNECTED   0x800
 
 /* struct mbuf (MSIZE 0x100); allocated by pspnet ifhandle (sceNetMGet...) */
 struct mbuf {
@@ -342,10 +343,14 @@ struct cp {
 
 /* struct sppp (NetBSD if_spppsubr, partial; callouts are 0x24 bytes) */
 struct sppp {
-    u8 unk0[0x170];
+    u8 unk0[0x150];
+    u32 pp_seq;                     /* 0x150 local sequence number */
+    u8 unk154[0x170 - 0x154];
     s32 pp_phase;                   /* 0x170 */
     s32 unk174;
-    u8 unk178[0x19C - 0x178];
+    u8 unk178[0x190 - 0x178];
+    u8 confid[IDX_COUNT];           /* 0x190 */
+    u8 unk194[0x19C - 0x194];
     s32 unk19C;                     /* 0x19C set from lcp.max_configure by pap.Open */
     u8 unk1A0[0x1B4 - 0x1A0];
     u8 ch[IDX_COUNT][0x24];         /* 0x1B4 per-protocol timeout callouts */
@@ -353,7 +358,12 @@ struct sppp {
     s32 lcp_protos;                 /* 0x254 lcp.protos */
     u8 unk258[0x27C - 0x258];
     u16 myauth_proto;               /* 0x27C myauth.proto */
-    u8 unk27E[0x394 - 0x27E];
+    u8 unk27E[0x280 - 0x27E];
+    u8 myauth_name[0x80];           /* 0x280 */
+    u8 myauth_secret[0x80];         /* 0x300 */
+    u8 myauth_name_len;             /* 0x380 */
+    u8 myauth_secret_len;           /* 0x381 */
+    u8 unk382[0x394 - 0x382];
     s32 lcp_timeout;                /* 0x394 */
     s32 lcp_max_configure;          /* 0x398 */
     u8 unk39C[0x4A8 - 0x39C];
@@ -392,6 +402,16 @@ struct inpcb {
     struct in_addr inp_faddr;   /* 0x48 */
 };
 
+/* struct if_data (NetBSD 1.5 if.h, u_quad_t counters, partial) */
+struct if_data {
+    u8 ifi_type;                        /* 0x00 */
+    u8 ifi_addrlen;                     /* 0x01 */
+    u8 ifi_hdrlen;                      /* 0x02 */
+    u64 ifi_mtu;                        /* 0x08 */
+    u64 ifi_metric;                     /* 0x10 */
+    u64 ifi_baudrate;                   /* 0x18 */
+};
+
 /* struct ifnet (NetBSD 1.5 if.h, partial) */
 struct ifnet {
     void *if_softc;                     /* 0x00 */
@@ -403,8 +423,12 @@ struct ifnet {
     u16 if_index;                       /* 0x2C */
     s16 if_timer;                       /* 0x2E */
     s16 if_flags;                       /* 0x30 IFF_* */
+    u8 unk32[0x38 - 0x32];
+    struct if_data if_data;             /* 0x38 */
 };
+#define if_mtu if_data.ifi_mtu
 #define IFF_UP 0x1
+#define IFF_LOOPBACK 0x8
 
 /* struct ifaddr (NetBSD 1.5 if.h, partial) */
 struct ifaddr {
@@ -443,6 +467,14 @@ typedef struct {
     u8 unk10[0x30 - 0x10];
 } SceNetConfigRouteInfo;
 
+/* struct in_ifaddr (NetBSD in_var.h, partial) */
+struct in_ifaddr {
+    struct ifaddr ia_ifa;               /* 0x00 */
+    u8 unk2C[0x54 - 0x2C];
+    TAILQ_ENTRY(in_ifaddr) ia_list;     /* 0x54 */
+};
+#define ia_ifp ia_ifa.ifa_ifp
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -453,6 +485,12 @@ typedef struct {
 } SceNetBytes4;
 
 typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
+
+struct SceNetInetKeyNode {
+    struct SceNetInetKeyNode *next;
+    struct SceNetInetKeyNode **prev;
+    void *key;
+};
 
 struct Unk_Unk_func_0001AA20_0_20 {
     u8 pad0[0x4];
@@ -690,7 +728,7 @@ struct Unk_func_0002A244_0 {
 extern const struct cp D_0002BB10; /* lcp */
 extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */
 extern const struct cp D_0002BB54; /* ipcp */
-extern M2C_UNK D_0002BB94;
+extern const struct cp D_0002BB94; /* pap */
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
 extern M2C_UNK D_0002BBD8;
 extern s32 D_0002BEC0;
@@ -738,6 +776,7 @@ extern s32 D_0002C588;
 extern s32 D_0002C58C;
 extern s32 D_0002C590;
 extern s32 D_0002C594;
+extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
 extern s32 *D_0002C5BC;
 extern s32 D_0002C5D8;
 extern u8 D_0002C5DC[];
@@ -756,6 +795,7 @@ extern s32 D_0002CF00;
 extern s32 D_0002CF0C;
 extern s32 D_0002CF10;
 extern struct SceTailqHead D_0002CFF8[];
+extern TAILQ_HEAD(, in_ifaddr) D_0002D928; /* in_ifaddr */
 extern s32 D_0002D930;
 extern s32 D_0002DBC0;
 extern M2C_UNK D_0002DBC8;
@@ -821,6 +861,7 @@ M2C_UNK _sce_pspnet_stop_of_pppoe_module_in_netintr();
 s32 _sce_pspnet_thread_enter(void);
 s32 _sce_pspnet_thread_leave(s32 t, s32 error);
 s32 _sce_pspnet_tsleep(void *chan, s32 timo);
+void _sce_pspnet_wakeup(void *chan);
 void func_00001320(void);
 s32 func_00001334(s32 req, struct sockaddr_in *dst, struct sockaddr_in *gateway, struct sockaddr_in *netmask, s32 flags);
 void func_00001584(void);
@@ -954,6 +995,7 @@ s32 func_000251A4(void *arg0);
 void func_0002544C(void *arg0);
 void func_00025E94(void);
 s32 func_00025F18(s32, s32, s32);
+void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);
 s32 func_00027830(struct Unk_func_00027830_0 *arg0);
 void func_00027C20(void);
 void func_00028758(void *arg0);
@@ -1004,6 +1046,7 @@ void sceNetInetInetAton(s32 arg0, s32 arg1);
 const char *sceNetInetInetNtop(s32 af, const void *src, char *dst, s32 size);
 s32 *sceNetInet_lib_D7928A6D(void);
 M2C_UNK sceNetMFreem(s32);
+void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand();
 

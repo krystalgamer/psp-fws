@@ -288,7 +288,23 @@ s32 func_000025CC(struct socket *so) {
     return so->so_proto->pr_usrreq(so, PRU_ABORT, NULL, NULL, NULL);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000025FC);
+s32 func_000025FC(struct socket *so) {
+    s32 s = _sce_pspnet_spllock();
+    s32 error;
+
+    if ((so->so_state & SS_ISCONNECTED) == 0) {
+        error = 128; /* ENOTCONN */
+        goto bad;
+    }
+    if (so->so_state & SS_ISDISCONNECTING) {
+        error = 120; /* EALREADY */
+        goto bad;
+    }
+    error = so->so_proto->pr_usrreq(so, PRU_DISCONNECT, NULL, NULL, NULL);
+bad:
+    _sce_pspnet_splunlock(s);
+    return error;
+}
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00002844);
@@ -512,9 +528,37 @@ void func_00005778(struct socket *so) {
 }
 #endif
 
+#if FW_VERSION < 271
+void func_0000578C(struct socket *so) {
+    so->so_state &= ~SS_ISCONNECTING;
+    so->so_state |= (SS_ISDISCONNECTING | SS_CANTRCVMORE | SS_CANTSENDMORE);
+    _sce_pspnet_wakeup(&so->so_timeo);
+    if (so->so_snd.sb_flags & SB_NOTIFY) {
+        func_000048B8(so, &so->so_snd);
+    }
+    if (so->so_rcv.sb_flags & SB_NOTIFY) {
+        func_000048B8(so, &so->so_rcv);
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000578C);
+#endif
 
+#if FW_VERSION < 271
+void func_0000580C(struct socket *so) {
+    so->so_state &= ~(SS_ISCONNECTING | SS_ISCONNECTED | SS_ISDISCONNECTING);
+    so->so_state |= (SS_CANTRCVMORE | SS_CANTSENDMORE | SS_ISDISCONNECTED);
+    _sce_pspnet_wakeup(&so->so_timeo);
+    if (so->so_snd.sb_flags & SB_NOTIFY) {
+        func_000048B8(so, &so->so_snd);
+    }
+    if (so->so_rcv.sb_flags & SB_NOTIFY) {
+        func_000048B8(so, &so->so_rcv);
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000580C);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00005A78);
@@ -1810,7 +1854,26 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000129D0);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000128AC);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001292C);
+void func_0001292C(void) {
+    struct in_ifaddr *ia;
+    struct ifnet *ifp;
+    u32 maxmtu = 0;
+
+    for (ia = D_0002D928.tqh_first; ia != NULL; ia = ia->ia_list.tqe_next) {
+        if ((ifp = ia->ia_ifp) == NULL) {
+            continue;
+        }
+        if ((ifp->if_flags & (IFF_UP | IFF_LOOPBACK)) != IFF_UP) {
+            continue;
+        }
+        if (ifp->if_mtu > maxmtu) {
+            maxmtu = ifp->if_mtu;
+        }
+    }
+    if (maxmtu) {
+        D_0002CEEC = maxmtu;
+    }
+}
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012A08);
@@ -2302,7 +2365,23 @@ s32 func_00019A98(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00019AA0);
+void func_00019AA0(void *key) {
+    struct SceNetInetKeyNode *p;
+    for (p = D_0002C5B8.lh_first; p != NULL; p = p->next) {
+        if (p->key == key) {
+            return;
+        }
+    }
+    p = sceNetMallocInternal(sizeof(*p));
+    if (p != NULL) {
+        p->key = key;
+        if ((p->next = (&D_0002C5B8)->lh_first) != NULL) {
+            (&D_0002C5B8)->lh_first->prev = &p->next;
+        }
+        (&D_0002C5B8)->lh_first = p;
+        p->prev = &(&D_0002C5B8)->lh_first;
+    }
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00019BCC);
@@ -3316,7 +3395,16 @@ void func_000288EC(struct sppp *sp) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000288EC);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00028930);
+void func_00028930(struct sppp *sp) {
+    u8 idlen, pwdlen;
+
+    pwdlen = sp->myauth_secret_len;
+    idlen = sp->myauth_name_len;
+    sp->confid[IDX_PAP] = ++sp->pp_seq;
+    func_00026FF4(&D_0002BB94, sp, 1, sp->confid[IDX_PAP],
+                  sizeof(idlen), &idlen, (u32)idlen, sp->myauth_name,
+                  sizeof(pwdlen), &pwdlen, (u32)pwdlen, sp->myauth_secret, 0);
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002A538);
