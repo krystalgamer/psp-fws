@@ -4,6 +4,23 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+/* FAT on-disk directory entry (32 bytes). */
+typedef struct {
+    char name[8]; /* 0x0 */
+    char ext[3]; /* 0x8 */
+    u8 attr; /* 0xB */
+    u8 ntres; /* 0xC */
+    u8 ctimeTenth; /* 0xD */
+    u16 ctime; /* 0xE */
+    u16 cdate; /* 0x10 */
+    u16 adate; /* 0x12 */
+    u16 clusterHi; /* 0x14 */
+    u16 wtime; /* 0x16 */
+    u16 wdate; /* 0x18 */
+    u16 clusterLo; /* 0x1A */
+    u32 size; /* 0x1C */
+} FatDirEnt;
+
 /* prfile_mod.c heap bookkeeping (g_heapTbl, 128 entries). mem = -1 while being created. */
 typedef struct {
     SceUID heap; /* 0x0 */
@@ -39,15 +56,15 @@ typedef struct {
 
 /* PrFILE set-time arguments (stub cmd 0x22). */
 typedef struct {
-    u32 year;
-    u32 month;
-    u32 day;
+    s32 year;
+    s32 month;
+    s32 day;
 } PfDate;
 
 typedef struct {
-    u32 hour;
-    u32 minute;
-    u32 second;
+    s32 hour;
+    s32 minute;
+    s32 second;
 } PfTime;
 
 typedef struct {
@@ -68,6 +85,12 @@ typedef struct {
     u16 cdate; /* 0x33E */
     u16 adate; /* 0x340 */
 } PfDirInfo;
+
+/* Drive count word: cleared as a word, read as its low byte. */
+typedef union {
+    s32 word;
+    u8 count;
+} PfDrives;
 
 /* Mounted FAT volume geometry (D_0001BCC4). */
 typedef struct {
@@ -348,7 +371,8 @@ extern s32 D_00019E04;
 extern s32 D_00019E08; /* PrFILE errnum */
 extern s8 D_00019E0C; /* current drive letter */
 extern s32 D_00019E10[26]; /* last driver error per drive, index drive - 'A' */
-extern s32 D_00019E28;
+extern s8 D_00019E1C;
+extern PfDrives D_00019E28;
 extern s32 D_0001A040;
 extern s32 D_0001B0C8;
 extern s32 D_0001B248;
@@ -362,6 +386,7 @@ extern PfFile D_0001BEFC[10];
 extern char D_00023B8C[]; /* "prfile_mod.c:%s:driver deleted\n" */
 extern M2C_UNK D_0002411C;
 extern char D_000243D8[]; /* 2.50-2.71 "prfile_mod.c:%s:driver deleted\n" */
+extern const char D_00024BF0[]; /* characters not allowed in names */
 extern PfVolume *D_000276E4; /* current volume */
 extern s32 (*D_000276E8)(s32, s32, s32);
 extern s32 (*D_000276EC)(s32, s32, s32);
@@ -480,6 +505,7 @@ s32 func_000067E0(void);
 s32 func_000067EC(void);
 s32 func_00006918(void);
 s32 func_00006960(void);
+void func_00006B10(PfDate *date, PfTime *time);
 s32 func_000075CC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_0000764C(void);
 s32 func_000076F4(s32, s32);
@@ -493,6 +519,7 @@ char *func_00007A20(char *dst, const char *src);
 s32 func_00007A5C(const char *s1, const char *s2);
 char *func_00007AB4(char *dst, const char *src, u32 n);
 s32 func_00007BB0(s32 arg0);
+u32 func_00007BD4(u32 sector);
 s32 func_00008274(s32, s32, s32, s32);
 s32 func_00008708(s32 arg0);
 s32 func_000088F8(s32 arg0);
@@ -501,17 +528,22 @@ s32 func_0000931C(void);
 void func_00009C74(void);
 s32 func_00009D50(void);
 s32 func_00009E3C(void);
+void func_00009F08(u16 *date, u16 *time);
+void func_00009F90(FatDirEnt *de, s8 create);
 s32 func_00009FA0(s32);
+void func_0000A128(void);
 s32 func_0000A3AC(s32);
 s32 func_0000A698(s32 a0, s32 a1, s32 a2);
 s32 func_0000A714(s32 a0, s32 a1, s32 n);
 s32 func_0000A744(s32 a0, s32 a1, s32 a2);
 s32 func_0000A7C0(const u8 *s);
 s32 func_0000A8F8(s32);
+s32 func_0000ACF8(void);
 s32 func_0000AE30(void);
 s32 func_0000B1D8(s32, s32);
 void func_0000B418(u8 *p, u32 v);
 s32 func_0000B440_v201(s32, s32, s32);
+s32 func_0000B50C(s8 drive, u8 *index);
 void func_0000B574(s32 arg0, s32 arg1, s32 arg2);
 void func_0000B57C(void);
 s32 func_0000B59C(s32, s32, s32);
@@ -522,7 +554,11 @@ void func_0000B818(s32 arg0);
 s32 func_0000B978(s32, s32);
 void func_0000BA20(void *arg0);
 void func_0000BAF8(u32 arg0);
+s32 func_0000BB3C(const u8 *end, const u8 *p);
 s32 func_0000BBAC(s32);
+void func_0000BC38(s32 a0, const char *path);
+void func_0000BC84(void);
+s32 func_0000BCF0(void);
 s32 func_0000C108(s32 drv);
 s32 func_0000C120(s32);
 s32 func_0000C7A8(s32, s32, s32, s32);
@@ -542,6 +578,8 @@ s32 func_0000E3CC(void *arg0, u32 arg1);
 s32 func_0000E3D8(struct Unk_func_0000E3D8_0 *arg0, u32 arg1);
 s32 func_0000E5E8(void);
 s32 func_0000E5F8(s32);
+s32 func_0000F8A4(PfFile *fp);
+s32 func_0000F8F8(PfFile *fp);
 s32 func_00010238(s32, s32, s32);
 s32 func_00010A64(s32);
 s32 func_00011318(s32);
@@ -587,6 +625,7 @@ s32 func_00017164(s32, s32);
 s32 func_00017A14(s32, s32);
 void func_000183CC(s32 arg0, s32 arg1);
 s32 func_00018520(s32, s32);
+s32 func_00018570(s8 drive);
 void func_00018638(s32 arg0, s32 arg1);
 s32 func_00019430(s32);
 void func_00019A48(s32 arg0);
