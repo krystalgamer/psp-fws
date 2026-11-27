@@ -15,7 +15,7 @@
   "sceAudioOutput2Reserve": "s32 sceAudioOutput2Reserve(s32 arg0);",
   "sceAudioSRCChRelease": "s32 sceAudioSRCChRelease(void);",
   "sceAudioSRCChReserve": "s32 sceAudioSRCChReserve(s32, s32, s32);",
-  "sceAudioSRCOutputBlocking": "s32 sceAudioSRCOutputBlocking(s32, s32);",
+  "sceAudioSRCOutputBlocking": "s32 sceAudioSRCOutputBlocking(s32 vol, void *buf);",
   "sceAudioSetVolumeOffset": "s32 sceAudioSetVolumeOffset(s32 arg0);",
   "sceCodecSetVolumeOffset": "M2C_UNK sceCodecSetVolumeOffset(s32);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",

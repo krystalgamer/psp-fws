@@ -308,7 +308,7 @@ s32 sceAudioOutput2Reserve(s32 arg0) {
 }
 
 s32 sceAudioOutput2OutputBlocking(s32 arg0, void *arg1) {
-    return sceAudioSRCOutputBlocking(arg0, (s32) arg1);
+    return sceAudioSRCOutputBlocking(arg0, arg1);
 }
 
 s32 sceAudioOutput2Release(void) {
@@ -503,7 +503,40 @@ INCLUDE_ASM("nonmatchings/audio", sceAudioSRCChReserve);
 INCLUDE_ASM("nonmatchings/audio", sceAudioSRCChRelease);
 #endif
 
+#if FW_VERSION == 100
+s32 sceAudioSRCOutputBlocking(s32 vol, void *buf) {
+    u32 oldK1;
+    s32 oldIntr;
+    s32 ret;
+    u32 size;
+
+    if ((u32)vol > 0x10000)
+        return 0x8026000B;
+    oldK1 = pspShiftK1();
+    size = g_audio.srcChSampleCnt * g_audio.numChans;
+    if (k1IsUserMode() && (s32)((u32)buf | ((u32)buf + size)) < 0) {
+        setK1(oldK1);
+        return 0x80260004;
+    }
+    oldIntr = sceKernelCpuSuspendIntr();
+    ret = audioSRCOutput(vol, buf);
+    while (ret == 0x80260002) {
+        sceKernelCpuResumeIntr(oldIntr);
+        ret = sceKernelWaitEventFlag(g_audio.evFlagId[1], 1, 0x20, 0, 0);
+        if (ret < 0)
+            break;
+        oldIntr = sceKernelCpuSuspendIntr();
+        ret = audioSRCOutput(vol, buf);
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    if (ret >= 0)
+        ret = sceKernelWaitEventFlag(g_audio.evFlagId[1], 1, 0x20, 0, 0);
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/audio", sceAudioSRCOutputBlocking);
+#endif
 
 #if FW_VERSION < 201
 s32 sceAudioSRCChRelease(void) {

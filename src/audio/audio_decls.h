@@ -84,7 +84,7 @@ s32 sceAudioOutput2Release(void);
 s32 sceAudioOutput2Reserve(s32 arg0);
 s32 sceAudioSRCChRelease(void);
 s32 sceAudioSRCChReserve(s32, s32, s32);
-s32 sceAudioSRCOutputBlocking(s32, s32);
+s32 sceAudioSRCOutputBlocking(s32 vol, void *buf);
 s32 sceAudioSetVolumeOffset(s32 arg0);
 M2C_UNK sceCodecSetVolumeOffset(s32);
 void sceKernelCpuResumeIntr(s32);
