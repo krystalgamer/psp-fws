@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "savedata_utility_decls.h"
@@ -23,7 +24,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006AC4);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006AC4(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -34,7 +35,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006AEC);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006AEC(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -55,7 +56,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006B34);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006B34(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -76,7 +77,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006B88);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006B88(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -93,7 +94,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006BCC);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006BCC(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -114,7 +115,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006C14);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006C14(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -135,7 +136,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006C68);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006C68(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -152,7 +153,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006CAC);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006CAC(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -179,7 +180,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006D18);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006D18(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -202,7 +203,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006D74);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006D74(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -219,6 +220,6 @@ INCLUDE_ASM("nonmatchings/savedata_utility_0068E4", func_00006DAC);
 #if FW_VERSION >= 150 && FW_VERSION < 350
 void func_00006DAC(M2C_UNK **arg0) {
     *arg0 = &D_00024D50;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif

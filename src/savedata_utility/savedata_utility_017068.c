@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "savedata_utility_decls.h"
 
@@ -146,15 +147,15 @@ void func_0000FFB8(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 
 #if FW_VERSION < 271
 void func_00010000(void) {
-    _ZN3vsh10OptionMenu4ShowEv();
+    vsh::OptionMenu::Show();
 }
 
 void func_0001001C(void) {
-    _ZN3vsh10OptionMenu4HideEv();
+    vsh::OptionMenu::Hide();
 }
 
-void func_00010038(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    _ZN3vsh10OptionMenu5CloseEPN3paf4ViewEPKcS5_(arg1, arg2, arg3);
+void func_00010038(void *arg0, paf::View *view, const char *page, const char *name) {
+    vsh::OptionMenu::Close(view, page, name);
     M2C_FIELD(arg0, s8 *, 0x34) = 0;
 }
 
@@ -291,6 +292,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_000124E0);
 INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_000252E0);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_00025300);
+__asm__(".globl _ZTV14Class_0001FC80\n_ZTV14Class_0001FC80 = D_00025300 - 8\n");
 
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_00017430);
 
@@ -414,6 +416,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_00025348);
 
 #if FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_0001FC80);
+__asm__(".globl _ZTV14Class_0001FC80\n_ZTV14Class_0001FC80 = D_0001FC80 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_0001FC98);
 
@@ -1661,7 +1664,7 @@ M2C_UNK *func_0001C3F8(s32 arg0) {
     M2C_UNK *var_v0;
 
     var_v0 = NULL;
-    if (!(arg0 & 0xFF)) {
+    if ((arg0 & 0xFF) == 0) {
         var_v0 = &D_00025730;
     }
     return var_v0;
@@ -1701,7 +1704,7 @@ M2C_UNK *func_0001C3B8(s32 arg0) {
     M2C_UNK *var_v0;
 
     var_v0 = NULL;
-    if (!(arg0 & 0xFF)) {
+    if ((arg0 & 0xFF) == 0) {
         var_v0 = &D_000256A8;
     }
     return var_v0;

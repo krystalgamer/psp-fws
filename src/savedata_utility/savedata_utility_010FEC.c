@@ -1,5 +1,7 @@
+/* lang: c++ */
 #include "common.h"
 #include "savedata_utility_decls.h"
+#include "paf.h"
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00010FEC);
@@ -8,7 +10,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00010FEC);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00010FEC(M2C_UNK **arg0) {
     *arg0 = &D_000250F0;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -100,16 +102,16 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00011978);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00011978(M2C_UNK **arg0) {
     *arg0 = &D_00025100;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000119A0);
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_000119A0C2Eii);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00011A1C);
 
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00011A98);
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_000119A0D2Ev);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00011AD4);
 
@@ -134,8 +136,10 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025158);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025138);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
+__asm__(".globl _ZTV14Class_00025148\n_ZTV14Class_00025148 = D_00025148 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+__asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_000251B0);
 #endif
@@ -146,10 +150,12 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0001F9F8);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025138);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
+__asm__(".globl _ZTV14Class_00025148\n_ZTV14Class_00025148 = D_00025148 - 8\n");
 #endif
 
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+__asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 #endif
 
 #if FW_VERSION < 282
@@ -712,51 +718,17 @@ void func_00013344(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013360);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000133AC);
-
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000133F8);
-#endif
-
-#if FW_VERSION < 250
-void func_000133F8(s32 **arg0) {
-    *arg0 = &D_00025160;
-}
-#endif
-
-#if FW_VERSION < 282
-void func_0000B930(M2C_UNK **arg0) {
-    *arg0 = &D_00025160;
+Class_00025160::Class_00025160(s32 owner) {
+    Reset();
+    this->owner = owner;
+    unk10 = -1;
+    unk14 = -1;
 }
 
-void func_0000B940(M2C_UNK **arg0) {
-    *arg0 = &D_00025160;
-    _ZdlPv();
-}
-#else
-void func_000133F8(M2C_UNK **arg0) {
-    *arg0 = &D_00025160;
+Class_00025160::~Class_00025160() {
 }
 
-void func_00013408(M2C_UNK **arg0) {
-    *arg0 = &D_00025160;
-}
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013418);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00013418(M2C_UNK **arg0) {
-    *arg0 = &D_00025160;
-    _ZdlPv();
-}
-#endif
-
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013440);
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_000251605ResetEv);
 
 #if FW_VERSION < 282
 void func_0000B978(void *arg0, s32 arg1) {
@@ -806,13 +778,10 @@ s32 func_0000BA10(void *arg0) {
 
 #if FW_VERSION < 282
 s32 func_0000BA20(void *arg0, s32 arg1) {
-    s32 var_v1;
-
-    var_v1 = 1;
-    if (!((M2C_FIELD(arg0, u8 *, 8) ^ 1) & 1) || (arg1 != M2C_FIELD(arg0, s32 *, 0x10))) {
-        var_v1 = 0;
+    if (!(M2C_FIELD(arg0, u8 *, 8) & 1) && arg1 == M2C_FIELD(arg0, s32 *, 0x10)) {
+        return 1;
     }
-    return var_v1;
+    return 0;
 }
 #endif
 
@@ -859,13 +828,10 @@ s32 func_00013558(struct Unk_func_00013558_0 *arg0) {
 }
 
 s32 func_00013568(struct Unk_func_00013568_0 *arg0, s32 arg1) {
-    s32 var_v1;
-
-    var_v1 = 1;
-    if (!((arg0->unk8 ^ 1) & 1) || (arg1 != arg0->unk10)) {
-        var_v1 = 0;
+    if (!(arg0->unk8 & 1) && arg1 == arg0->unk10) {
+        return 1;
     }
-    return var_v1;
+    return 0;
 }
 #endif
 
@@ -893,50 +859,17 @@ void func_00013594(struct Unk_func_00013594_0 *arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000135D4);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0001360C);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013644);
-
-#if FW_VERSION < 282
-void func_0000BB3C(s32 **arg0) {
-    *arg0 = &D_00025148;
-    func_000133F8(arg0);
+Class_00025148::Class_00025148(s32 owner) : Class_00025160(owner) {
+    Init();
 }
 
-void func_0000BB64(s32 **arg0) {
-    *arg0 = &D_00025148;
-    func_000133F8(arg0);
-    _ZdlPv(arg0);
+Class_00025148::~Class_00025148() {
 }
 
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000136CC);
-#else
-void func_0001366C(s32 **arg0) {
-    *arg0 = &D_00025148;
-    func_000133F8(arg0);
+void Class_00025148::Init() {
+    unk18 = 0;
+    unk1C = 0;
 }
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013694);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00013694(s32 **arg0) {
-    *arg0 = &D_00025148;
-    func_000133F8(arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 282
-void func_000136CC(struct Unk_func_000136CC_0 *arg0) {
-    arg0->unk18 = 0;
-    arg0->unk1C = 0;
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000136D8);
 
@@ -1027,7 +960,7 @@ void func_0000C294(M2C_UNK **arg0) {
 
 void func_0000C2A4(M2C_UNK **arg0) {
     *arg0 = &D_00025288;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #else
 void func_00013D80(M2C_UNK **arg0) {
@@ -1042,7 +975,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013D90);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00013D90(M2C_UNK **arg0) {
     *arg0 = &D_00025288;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1166,10 +1099,12 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C868);
 
 #if FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
+__asm__(".globl _ZTV14Class_00025148\n_ZTV14Class_00025148 = D_00025148 - 8\n");
 #endif
 
 #if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+__asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 260
@@ -1335,111 +1270,23 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000D674);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void func_0000D674(s32 arg0, void **arg1, s32 arg2) {
-    void *sp0;
-    s32 temp_s0;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-
-    func_0000553C(&sp0, 0);
-    temp_s0 = arg2 << 0x10;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 1);
-    if (sp0 != NULL) {
-        temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0;
-        if (temp_v0 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data");
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0);
-    if (sp0 != NULL) {
-        temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_2;
-        if (temp_v0_2 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_f");
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 7);
-    if (sp0 != NULL) {
-        temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_3;
-        if (temp_v0_3 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_s");
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 0xE);
-    if (sp0 != NULL) {
-        temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
-        if (temp_v0_4 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
+void func_0000D674(paf::View *view, paf::PhWidget *widget, s32 idx) {
+    widget->SetTexture(paf::SurfaceRCPtr<paf::Surface>(0), (idx << 16) | 1);
+    widget->SetTexture(view->GetTexture("tex_broken_data"), idx << 16);
+    widget->SetTexture(view->GetTexture("tex_broken_data_f"), (idx << 16) | 7);
+    widget->SetTexture(view->GetTexture("tex_broken_data_s"), (idx << 16) | 0xE);
 }
 #endif
 
 #if FW_VERSION == 100
-void func_0000D674(s32 arg0, void **arg1, s32 arg2) {
-    void *sp0;
-    s32 temp_s0;
-    s32 temp_s0_2;
-    s32 temp_s2;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-
-    func_0000553C(&sp0, 0);
-    temp_s2 = arg2 << 0x10;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2 | 1);
-    if ((sp0 == NULL) || (temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0, (temp_v0 > 0))) {
-
-    } else {
-        M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-    }
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FAAC);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2);
-    if ((sp0 == NULL) || (temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_2, (temp_v0_2 > 0))) {
-
-    } else {
-        M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-    }
-    temp_s0 = temp_s2 | 7;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FABC);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0);
-    if ((sp0 == NULL) || (temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_3, (temp_v0_3 > 0))) {
-
-    } else {
-        M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-    }
-    temp_s0_2 = temp_s2 | 0xE;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0_2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FAD0);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0_2);
-    if (sp0 != NULL) {
-        temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
-        if (temp_v0_4 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
+void func_0000D674(paf::View *view, paf::PhWidget *widget, s32 idx) {
+    widget->SetTexture(paf::SurfaceRCPtr<paf::Surface>(0), (idx << 16) | 1);
+    widget->SetStyle(idx << 16, 0x19, 3);
+    widget->SetTexture(view->GetTexture(D_0001FAAC), idx << 16);
+    widget->SetStyle((idx << 16) | 7, 0x19, 3);
+    widget->SetTexture(view->GetTexture(D_0001FABC), (idx << 16) | 7);
+    widget->SetStyle((idx << 16) | 0xE, 0x19, 3);
+    widget->SetTexture(view->GetTexture(D_0001FAD0), (idx << 16) | 0xE);
 }
 #endif
 
@@ -1452,54 +1299,14 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000F95C);
 #endif
 
 #if FW_VERSION == 100
-void func_0000D88C(s32 arg0, void **arg1, s32 arg2) {
-    void *sp0;
-    s32 temp_s0;
-    s32 temp_s0_2;
-    s32 temp_s2;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-
-    func_0000553C(&sp0, 0);
-    temp_s2 = arg2 << 0x10;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2 | 1);
-    if ((sp0 == NULL) || (temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0, (temp_v0 > 0))) {
-
-    } else {
-        M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-    }
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FAE4);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2);
-    if ((sp0 == NULL) || (temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_2, (temp_v0_2 > 0))) {
-
-    } else {
-        M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-    }
-    temp_s0 = temp_s2 | 7;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FAF8);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0);
-    if ((sp0 == NULL) || (temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_3, (temp_v0_3 > 0))) {
-
-    } else {
-        M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-    }
-    temp_s0_2 = temp_s2 | 0xE;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0_2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FB0C);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0_2);
-    if (sp0 != NULL) {
-        temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
-        if (temp_v0_4 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
+void func_0000D88C(paf::View *view, paf::PhWidget *widget, s32 idx) {
+    widget->SetTexture(paf::SurfaceRCPtr<paf::Surface>(0), (idx << 16) | 1);
+    widget->SetStyle(idx << 16, 0x19, 3);
+    widget->SetTexture(view->GetTexture(D_0001FAE4), idx << 16);
+    widget->SetStyle((idx << 16) | 7, 0x19, 3);
+    widget->SetTexture(view->GetTexture(D_0001FAF8), (idx << 16) | 7);
+    widget->SetStyle((idx << 16) | 0xE, 0x19, 3);
+    widget->SetTexture(view->GetTexture(D_0001FB0C), (idx << 16) | 0xE);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000DAA4);
@@ -1513,8 +1320,10 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025118);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025138);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
+__asm__(".globl _ZTV14Class_00025148\n_ZTV14Class_00025148 = D_00025148 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+__asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025170);
 
@@ -1528,173 +1337,29 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0002519C);
 #endif
 
 #if FW_VERSION >= 350
-void func_00014824(s32 arg0, struct Unk_vt_func_00014824_arg1 **arg1, s32 arg2) {
-    void *sp0;
-    s32 temp_s0;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-
-    func_0000AC4C(&sp0, 0);
-    temp_s0 = arg2 << 0x10;
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 1);
-    if (sp0 != NULL) {
-        temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0;
-        if (temp_v0 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
-    scePaf_3C5D1D0E(&sp0, arg0, "tex_broken_data");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0);
-    if (sp0 != NULL) {
-        temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_2;
-        if (temp_v0_2 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
-    scePaf_3C5D1D0E(&sp0, arg0, "tex_broken_data_f");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 7);
-    if (sp0 != NULL) {
-        temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_3;
-        if (temp_v0_3 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
-    scePaf_3C5D1D0E(&sp0, arg0, "tex_broken_data_s");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 0xE);
-    if (sp0 != NULL) {
-        temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
-        if (temp_v0_4 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
+void func_00014824(paf::View *view, paf::PhWidget *widget, s32 idx) {
+    widget->SetTexture(paf::SurfaceRCPtr<paf::Surface>(0), (idx << 16) | 1);
+    widget->SetTexture(view->GetTexture("tex_broken_data"), idx << 16);
+    widget->SetTexture(view->GetTexture("tex_broken_data_f"), (idx << 16) | 7);
+    widget->SetTexture(view->GetTexture("tex_broken_data_s"), (idx << 16) | 0xE);
 }
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 350
-void func_00014824(s32 arg0, struct Unk_vt_func_00014824_arg1 **arg1, s32 arg2) {
-    void *sp0;
-    s32 temp_s0;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-
-    func_0000AC4C(&sp0, 0);
-    temp_s0 = arg2 << 0x10;
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 1);
-    if (sp0 != NULL) {
-        temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0;
-        if (temp_v0 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0);
-    if (sp0 != NULL) {
-        temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_2;
-        if (temp_v0_2 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_f");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 7);
-    if (sp0 != NULL) {
-        temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_3;
-        if (temp_v0_3 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_s");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 0xE);
-    if (sp0 != NULL) {
-        temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
-        M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
-        if (temp_v0_4 > 0) {
-
-        } else {
-            M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
-        }
-    }
+void func_00014824(paf::View *view, paf::PhWidget *widget, s32 idx) {
+    widget->SetTexture(paf::SurfaceRCPtr<paf::Surface>(0), (idx << 16) | 1);
+    widget->SetTexture(view->GetTexture("tex_broken_data"), idx << 16);
+    widget->SetTexture(view->GetTexture("tex_broken_data_f"), (idx << 16) | 7);
+    widget->SetTexture(view->GetTexture("tex_broken_data_s"), (idx << 16) | 0xE);
 }
 #endif
 
 #if FW_VERSION == 282
-void func_00014824(s32 arg0, struct Unk_vt_func_00014824_arg1 **arg1, s32 arg2) {
-    struct Unk_func_00014824_sp0 *sp0;
-    s32 temp_s0;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-
-    func_0000AC4C(&sp0, 0);
-    temp_s0 = arg2 << 0x10;
-    (*arg1)->unkAC(arg1, &sp0, temp_s0 | 1);
-    if (sp0 != NULL) {
-        temp_v0 = sp0->unk4 - 1;
-        sp0->unk4 = temp_v0;
-        if (temp_v0 > 0) {
-
-        } else {
-            sp0->unk0->unk4(sp0);
-        }
-    }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data");
-    (*arg1)->unkAC(arg1, &sp0, temp_s0);
-    if (sp0 != NULL) {
-        temp_v0_2 = sp0->unk4 - 1;
-        sp0->unk4 = temp_v0_2;
-        if (temp_v0_2 > 0) {
-
-        } else {
-            sp0->unk0->unk4(sp0);
-        }
-    }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_f");
-    (*arg1)->unkAC(arg1, &sp0, temp_s0 | 7);
-    if (sp0 != NULL) {
-        temp_v0_3 = sp0->unk4 - 1;
-        sp0->unk4 = temp_v0_3;
-        if (temp_v0_3 > 0) {
-
-        } else {
-            sp0->unk0->unk4(sp0);
-        }
-    }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_s");
-    (*arg1)->unkAC(arg1, &sp0, temp_s0 | 0xE);
-    if (sp0 != NULL) {
-        temp_v0_4 = sp0->unk4 - 1;
-        sp0->unk4 = temp_v0_4;
-        if (temp_v0_4 > 0) {
-
-        } else {
-            sp0->unk0->unk4(sp0);
-        }
-    }
+void func_00014824(paf::View *view, paf::PhWidget *widget, s32 idx) {
+    widget->SetTexture(paf::SurfaceRCPtr<paf::Surface>(0), (idx << 16) | 1);
+    widget->SetTexture(view->GetTexture("tex_broken_data"), idx << 16);
+    widget->SetTexture(view->GetTexture("tex_broken_data_f"), (idx << 16) | 7);
+    widget->SetTexture(view->GetTexture("tex_broken_data_s"), (idx << 16) | 0xE);
 }
 #endif
 
