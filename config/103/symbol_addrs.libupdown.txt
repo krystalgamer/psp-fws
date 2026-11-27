@@ -105,3 +105,15 @@ D_000032D0_v103 = 0x000032D0; // rom:0x3350
 D_000032E0_v103 = 0x000032E0; // rom:0x3360
 func_00003044_v103 = 0x00003044; // type:func rom:0x30C4
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceUpdateDownloadInit = 0x0000246C; // type:func
+sceUpdateDownloadConnectServer = 0x000025A4; // type:func
+sceUpdateDownloadReadData = 0x00002688; // type:func
+sceKernelCreateVpl = 0x00002FDC; // type:func
+sceHttpCreateTemplate = 0x00003004; // type:func
+sceHttpSetResolveTimeOut = 0x00003034; // type:func
+sceHttpSetRecvTimeOut = 0x0000304C; // type:func
+sceHttpGetAllHeader = 0x00003074; // type:func
+sceHttpAddExtraHeader = 0x0000308C; // type:func
+sceParseHttpResponseHeader = 0x000030B4; // type:func
