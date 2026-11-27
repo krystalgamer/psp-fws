@@ -10,7 +10,25 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005EA0);
 INCLUDE_RODATA("nonmatchings/isofs", D_00005EA8);
 #endif
 
+#if FW_VERSION < 201
+s32 func_000001B8(void) {
+    IsofsMgr *mgr = isofsGetMgr();
+    s32 i;
+
+    sceKernelWaitSema(mgr->semaId, 1, NULL);
+    for (i = 0; i < mgr->maxUnits; i++) {
+        IsofsUnit *unit = &g_isofsUnits[i];
+        sceIsofsLbTerm(unit);
+        sceKernelDeleteSema(unit->semaId);
+    }
+    SysMemForKernel_7B749390(mgr->heapId, g_isofsUnits);
+    g_isofsUnits = NULL;
+    sceKernelSignalSema(mgr->semaId, 1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/isofs", func_000001B8);
+#endif
 
 #if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_00000250);
@@ -33,39 +51,35 @@ s32 func_00000250(s32 arg0) {
 #endif
 
 #if FW_VERSION == 152
-s32 sceIsofsGetFileSystem(s32 arg0) {
-    s32 temp_v0;
-    s32 var_a0;
+IsofsUnit *sceIsofsGetFileSystem(s32 unitNum) {
+    IsofsMgr *mgr = isofsGetMgr();
+    IsofsUnit *unit = NULL;
 
-    temp_v0 = func_00007700();
-    var_a0 = 0;
-    if (arg0 >= 0) {
-        if (arg0 < M2C_FIELD(temp_v0, s32 *, 0xC)) {
-            var_a0 = D_00008A40 + (arg0 * 0xA4);
+    if (unitNum >= 0) {
+        if (unitNum < mgr->maxUnits) {
+            unit = &g_isofsUnits[unitNum];
         }
     }
-    return var_a0;
+    return unit;
 }
 #endif
 
 #if FW_VERSION < 152
-s32 sceIsofsGetFileSystem(s32 arg0) {
-    s32 temp_v0;
-    s32 var_a0;
+IsofsUnit *sceIsofsGetFileSystem(s32 unitNum) {
+    IsofsMgr *mgr = isofsGetMgr();
+    IsofsUnit *unit = NULL;
 
-    temp_v0 = func_00007700();
-    var_a0 = 0;
-    if (arg0 >= 0) {
-        if (M2C_FIELD(temp_v0, s32 *, 0xC) >= arg0) {
-            var_a0 = D_00008A40 + (arg0 * 0xA4);
+    if (unitNum >= 0) {
+        if (mgr->maxUnits >= unitNum) {
+            unit = &g_isofsUnits[unitNum];
         }
     }
-    return var_a0;
+    return unit;
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
-s32 sceIsofsGetFileSystem(s32 arg0) {
+IsofsUnit *sceIsofsGetFileSystem(s32 arg0) {
     s32 temp_v0;
     s32 var_a0;
 
@@ -76,7 +90,7 @@ s32 sceIsofsGetFileSystem(s32 arg0) {
             var_a0 = D_000065C0 + (arg0 * 0xA8);
         }
     }
-    return var_a0;
+    return (IsofsUnit *) var_a0;
 }
 #endif
 
@@ -91,68 +105,57 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005F38);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00000284);
-#endif
+s32 sceIsofsLbInit(IsofsUnit *unit, s32 count, s32 filesCount) {
+    s32 ret = 0;
+    s32 i;
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-void func_000003E8(void *arg0) {
-    s32 temp_s0;
-    s32 var_s0;
-    s32 var_s1;
-
-    temp_s0 = arg0 != NULL;
-    if (temp_s0 != 0) {
-
-    } else {
-        Kprintf(&D_00005F30, &D_00005F38, "sceIsofsLbTerm", 0x61);
-        sceKernelAssert(temp_s0, 0);
+    ISOFS_ASSERT(unit != NULL, D_00005F30, D_00005F38, "sceIsofsLbInit", ISOFS_V(0x2A, 0x2F, 0x2F));
+    unit->fdw = sceKernelAllocHeapMemory(unit->heapId, count * sizeof(IsofsFdw));
+    if (unit->fdw == NULL) {
+        return 0x8001000C;
     }
-    var_s1 = 0;
-    if (M2C_FIELD(arg0, u8 *, 0x50) != 0) {
-        var_s0 = 0;
-        do {
-            var_s1 += 1;
-            func_00000F9C(M2C_FIELD(arg0, s32 *, 0x98) + var_s0 + 8);
-            var_s0 += 0x2C;
-        } while (var_s1 < (s32) M2C_FIELD(arg0, u8 *, 0x50));
+    memset(unit->fdw, 0, count * sizeof(IsofsFdw));
+    for (i = 0; i < count; i++) {
+        ret = func_00000EBC(&unit->fdw[i], i, filesCount);
+        if (ret != 0) {
+            SysMemForKernel_7B749390(unit->heapId, unit->fdw);
+            return ret;
+        }
+        unit->fdw[i].idx = i;
+        unit->fdw[i].fd.unit = unit;
+        if (i != 0) {
+            unit->fdw[i].unk4 = 0;
+        } else {
+            unit->fdw[0].unk4 = 0;
+        }
     }
-    SysMemForKernel_7B749390(M2C_FIELD(arg0, s32 *, 0x40), M2C_FIELD(arg0, s32 *, 0x98));
+    unit->fdwCount = count;
+    return ret;
 }
-#endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/isofs", func_000003E8);
-#endif
-
-#if FW_VERSION == 100
-void func_000003E8(void *arg0) {
-    s32 temp_s0;
-    s32 var_s0;
-    s32 var_s1;
-
-    temp_s0 = arg0 != NULL;
-    if (temp_s0 != 0) {
-
-    } else {
-        Kprintf(&D_00005F30, &D_00005F38, "sceIsofsLbTerm", 0x5C);
-        sceKernelAssert(temp_s0, 0);
+s32 func_000003C8(IsofsUnit *unit, u32 lbn) {
+    if (unit == NULL) {
+        return 0x80010016;
     }
-    var_s1 = 0;
-    if (M2C_FIELD(arg0, u8 *, 0x50) != 0) {
-        var_s0 = 0;
-        do {
-            var_s1 += 1;
-            func_00000F9C(M2C_FIELD(arg0, s32 *, 0x98) + var_s0 + 8);
-            var_s0 += 0x2C;
-        } while (var_s1 < (s32) M2C_FIELD(arg0, u8 *, 0x50));
-    }
-    SysMemForKernel_7B749390(M2C_FIELD(arg0, s32 *, 0x40), M2C_FIELD(arg0, s32 *, 0x98));
+    return unit->blkDev->maxLbn < lbn;
 }
-#endif
 
-#if FW_VERSION < 201
-s32 func_00000494(void *arg0, s32 arg1) {
-    func_000007FC(M2C_FIELD(arg0, s32 *, 0x98), arg1);
+void sceIsofsLbTerm(IsofsUnit *unit) {
+    s32 i;
+
+#if FW_VERSION < 150
+    ISOFS_ASSERT(unit != NULL, D_00005F30, D_00005F38, "sceIsofsLbTerm", 0x5C);
+#else
+    ISOFS_ASSERT(unit != NULL, D_00005F30, D_00005F38, "sceIsofsLbTerm", 0x61);
+#endif
+    for (i = 0; i < unit->fdwCount; i++) {
+        sceIsofsSbTerm(&unit->fdw[i].fd);
+    }
+    SysMemForKernel_7B749390(unit->heapId, unit->fdw);
+}
+
+s32 func_00000494(IsofsUnit *unit, s32 count) {
+    func_000007FC(unit->fdw, count);
     return 0;
 }
 #endif
@@ -310,17 +313,36 @@ INCLUDE_ASM("nonmatchings/isofs", func_000005B0);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00000A28);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00000D28);
+s32 func_00000D28(void) {
+    IsofsMgr *mgr = isofsGetMgr();
+    s32 i;
 
-INCLUDE_ASM("nonmatchings/isofs", func_00000DB4);
+    for (i = 0; i < 16; i++) {
+        if (g_isofsCache[i].used == 1) {
+            SysMemForKernel_7B749390(mgr->fplId, g_isofsCache[i].memory);
+        }
+    }
+    return 0;
+}
+
+s32 func_00000DB4(const char *umdId, u32 lbn, u32 size) {
+    s32 i;
+
+    for (i = 0; i < 16; i++) {
+        if (strcmp(g_isofsCache[i].umdId, umdId) == 0 && g_isofsCache[i].lbn == lbn && g_isofsCache[i].size == size) {
+            g_isofsCache[i].refCount++;
+            return 0;
+        }
+    }
+    return 0x8001B005;
+}
 
 s32 func_00000E6C(void) {
-    s32 temp_s0;
+    IsofsMgr *mgr = isofsGetMgr();
 
-    temp_s0 = func_00007700();
     func_00000D28();
-    SysMemForKernel_7B749390(M2C_FIELD(temp_s0, s32 *, 0x20), D_00008A80);
-    sceKernelDeleteFpl(M2C_FIELD(temp_s0, s32 *, 0x24));
+    SysMemForKernel_7B749390(mgr->heapId, g_isofsCache);
+    sceKernelDeleteFpl(mgr->fplId);
     sceKernelDeleteHeap(D_00008A90);
     return 0;
 }
@@ -339,9 +361,20 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005FE0);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00000EBC);
+s32 func_00000EBC(IsofsFdw *fdw, u32 idx, s32 filesCount) {
+    ISOFS_ASSERT(filesCount > 0, D_00005FCC, D_00005FE0, "sceIsofsSbInit", ISOFS_V(0x20, 0x2B, 0x2B));
+    ISOFS_ASSERT(fdw != NULL, D_00005FCC, D_00005FE0, "sceIsofsSbInit", ISOFS_V(0x21, 0x2C, 0x2C));
+    fdw->fd.idx = idx;
+    fdw->fd.filesCount = filesCount;
+    fdw->fd.fdw = fdw;
+    return sceIsofsFileInit(&fdw->fd, filesCount);
+}
 
-INCLUDE_ASM("nonmatchings/isofs", func_00000F9C);
+void sceIsofsSbTerm(IsofsFd *fd) {
+    ISOFS_ASSERT(fd != NULL, D_00005FCC, D_00005FE0, "sceIsofsSbTerm", ISOFS_V(0x3A, 0x45, 0x45));
+    sceIsofsFileTerm(fd->files);
+    fd->files = NULL;
+}
 #else
 INCLUDE_ASM("nonmatchings/isofs", func_00000620);
 #endif
@@ -402,24 +435,73 @@ INCLUDE_ASM("nonmatchings/isofs", func_0000065C);
 INCLUDE_ASM("nonmatchings/isofs", func_00000790);
 #endif
 
-INCLUDE_ASM("nonmatchings/isofs", func_000007FC);
+void func_000007FC(IsofsFdw *fdw, s32 count) {
+    s32 i;
+
+    for (i = 0; i < count / 2; i++) {
+        fdw->fd.files[i].openFlags = 0;
+        fdw->fd.files[i].flags = 0;
+        fdw->fd.files[i].unk7 = 0;
+        fdw->fd.files[i].size = 0;
+        fdw->fd.files[i].fpos = 0;
+        fdw->fd.files[i].unk8 = 0;
+        fdw->fd.files[i].readFlags = 0;
+        fdw->fd.files[i].lbn = 0;
+        fdw->fd.files[i].unk10 = 0;
+        fdw->fd.files[i].unk14 = 0;
+        fdw->fd.files[i].iob = NULL;
+        fdw->fd.files[i].fd = &fdw->fd;
+    }
+}
 
 #if FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/isofs", D_00006070);
 #endif
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_000010A4);
+#if FW_VERSION < 152
+s32 sceIsofsFileInit(IsofsFd *fd, s32 filesCount) {
+    IsofsMgr *mgr = isofsGetMgr();
+    s32 i;
 
+    ISOFS_ASSERT(fd != NULL, D_000084D8, D_00006070, "sceIsofsFileInit", 0x37);
+    ISOFS_ASSERT(filesCount > 0, D_000084D8, D_00006070, "sceIsofsFileInit", 0x38);
+    fd->heapId = mgr->heapId;
+    fd->files = sceKernelAllocHeapMemory(fd->heapId, filesCount * sizeof(IsofsFile));
+    if (fd->files == NULL) {
+        return 0x8001000C;
+    }
+    for (i = 0; i < filesCount; i++) {
+        fd->files[i].openFlags = 0;
+        fd->files[i].flags = 0;
+        fd->files[i].unk7 = 0;
+        fd->files[i].size = 0;
+        fd->files[i].fpos = 0;
+        fd->files[i].unk8 = 0;
+        fd->files[i].readFlags = 0;
+        fd->files[i].lbn = 0;
+        fd->files[i].unk10 = 0;
+        fd->files[i].unk14 = 0;
+        fd->files[i].iob = NULL;
+        fd->files[i].fd = fd;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/isofs", sceIsofsFileInit);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/isofs", D_000084D8);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00001208);
+INCLUDE_ASM("nonmatchings/isofs", sceIsofsFileAllocNfile);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00001350);
+INCLUDE_ASM("nonmatchings/isofs", sceIsofsFileAllocVfile);
 
-INCLUDE_ASM("nonmatchings/isofs", func_000014A8);
+INCLUDE_ASM("nonmatchings/isofs", isofs_init_fd);
 
-INCLUDE_ASM("nonmatchings/isofs", func_000016F4);
+INCLUDE_ASM("nonmatchings/isofs", isofs_init_vfd);
 #else
 INCLUDE_ASM("nonmatchings/isofs", func_00000890);
 
@@ -432,16 +514,51 @@ INCLUDE_ASM("nonmatchings/isofs", func_00000BE4);
 INCLUDE_ASM("nonmatchings/isofs", func_00000D00);
 #endif
 
-INCLUDE_ASM("nonmatchings/isofs", func_00000DA8);
+s32 func_00000DA8(IsofsFile *file) {
+    if (file == NULL || file->iob == NULL || file->usedFlag <= 0) {
+        return 0x80010016;
+    }
+    file->size = 0;
+    file->fpos = 0;
+    file->iob = NULL;
+    file->lbn = 0;
+    file->flags = 0;
+    file->openFlags = 0;
+    file->usedFlag = 0;
+    file->dateTime2.year = 0;
+    file->dateTime.year = 0;
+    file->dateTime2.month = 0;
+    file->dateTime.month = 0;
+    file->dateTime2.day = 0;
+    file->dateTime.day = 0;
+    file->dateTime2.hour = 0;
+    file->dateTime.hour = 0;
+    file->dateTime2.minute = 0;
+    file->dateTime.minute = 0;
+    file->dateTime2.second = 0;
+    file->dateTime.second = 0;
+    file->dateTime2.microsecond = 0;
+    file->dateTime.microsecond = 0;
+    return 0;
+}
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/isofs", func_00000CAC);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00001914);
+s32 sceIsofsFileTerm(IsofsFile *files) {
+    IsofsFd *fd = files->fd;
 
-INCLUDE_ASM("nonmatchings/isofs", func_00001A04);
+    ISOFS_ASSERT(files != NULL, D_000084D8, D_00006070, "sceIsofsFileTerm", ISOFS_V(0x1D4, 0x1D4, 0x1D5));
+    ISOFS_ASSERT(fd != NULL, D_000084D8, D_00006070, "sceIsofsFileTerm", ISOFS_V(0x1D5, 0x1D5, 0x1D6));
+    if (files == NULL || fd == NULL) {
+        return 0x80010016;
+    }
+    return SysMemForKernel_7B749390(fd->heapId, fd->files);
+}
+
+INCLUDE_ASM("nonmatchings/isofs", isofs_alloc_fd);
 #endif
 
 #if FW_VERSION == 152
@@ -449,7 +566,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00001BBC);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/isofs", func_00001B84);
+INCLUDE_ASM("nonmatchings/isofs", isofs_alloc_vfd);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
@@ -487,7 +604,7 @@ INCLUDE_RODATA("nonmatchings/isofs", D_000060F8);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00001D0C);
+INCLUDE_ASM("nonmatchings/isofs", sceIsofsLookupFile);
 #endif
 
 #if FW_VERSION < 271
@@ -497,15 +614,15 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00006128);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00001FB4);
+INCLUDE_ASM("nonmatchings/isofs", sceIsofsLookupDir);
 
-INCLUDE_ASM("nonmatchings/isofs", func_000022D0);
+INCLUDE_ASM("nonmatchings/isofs", sceIsofsGetPathTable);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00002450);
+INCLUDE_ASM("nonmatchings/isofs", isofs_new_ptbl);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00002604);
+INCLUDE_ASM("nonmatchings/isofs", isofs_get_direc_count);
 
-INCLUDE_ASM("nonmatchings/isofs", func_0000274C);
+INCLUDE_ASM("nonmatchings/isofs", isofs_create_ptbl);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
@@ -596,7 +713,24 @@ s32 func_00001A4C(void *arg0) {
 
 INCLUDE_ASM("nonmatchings/isofs", func_00001B0C);
 
+#if FW_VERSION < 151
+s32 func_00001C5C(const char *path) {
+    s32 ret = 0;
+
+    if (path != NULL) {
+        if (path[0] != '/') {
+            ret = 2;
+            if (strchr(path, '/') == NULL) {
+                return ret;
+            }
+        }
+        ret = (strncmp(path, D_000061C8, 8) == 0) ? 3 : 2;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/isofs", func_00001C5C);
+#endif
 
 #if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/isofs", func_00001CC8);
@@ -629,7 +763,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_000032D8);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_000034EC);
+INCLUDE_ASM("nonmatchings/isofs", sceIsofsCheckVFile);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -637,11 +771,34 @@ INCLUDE_ASM("nonmatchings/isofs", func_0000376C);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/isofs", func_000036B0);
+INCLUDE_ASM("nonmatchings/isofs", sceIsofsReadDirent);
+
+s32 func_00003A24(IsofsUnit *unit, u32 lbn, void *buf) {
+    IsofsMgr *mgr = isofsGetMgr();
+    u32 args[8];
+
+    args[1] = (FW_VERSION == 100) ? 1 : 3;
+    args[4] = 0x1000;
+    args[5] = 0x1000;
+    args[0] = 0;
+    args[3] = 2;
+    args[6] = 0;
+    args[7] = 0;
+    if (mgr->driveType == 2) {
+        args[2] = func_0000506C(lbn);
+    } else {
+        args[2] = lbn;
+    }
+    return sceIoDevctl(unit->blockDev, 0x1E380C0, args, 0x20, buf, args[4]);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/isofs", func_00003A24);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00003A24);
+INCLUDE_ASM("nonmatchings/isofs", func_00003AC8);
 
 void func_00003AE8(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0) = 0x2E;
@@ -695,11 +852,11 @@ void func_00002328(void) {
 #if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/isofs", D_000086B0);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00003B28);
+INCLUDE_ASM("nonmatchings/isofs", isofs_get_dirname);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00003D1C);
+INCLUDE_ASM("nonmatchings/isofs", isofs_set_topend_dirsize);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00003E30);
+INCLUDE_ASM("nonmatchings/isofs", sceIsofsReadFile);
 #else
 INCLUDE_ASM("nonmatchings/isofs", func_000023A4);
 #endif
@@ -747,13 +904,35 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00008750);
 
 INCLUDE_RODATA("nonmatchings/isofs", D_00008770);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00004A60);
+INCLUDE_ASM("nonmatchings/isofs", dvd_get_controlimg_lbn);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00004D70);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00004E3C);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00004F08);
+s32 func_00004F08(void) {
+    s32 ret;
+
+    if (D_00009B00 != 0) {
+        SysMemForKernel_7B749390(D_00009AC0, (void *)D_00009B00);
+    }
+    if (D_00009B40 != 0) {
+        ret = SysMemForKernel_7B749390(D_00009AC0, (void *)D_00009B40);
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    return 0;
+}
+
+s32 func_00004F74(void) {
+    D_00009B00 = (s32)sceKernelAllocHeapMemory(D_00009AC0, 0x800);
+    if (D_00009B00 == 0) {
+        D_00009B00 = 0;
+        return 0x8001000C;
+    }
+    return 0;
+}
 
 void func_00004FC4(void) {
     sceKernelDeleteHeap(D_00009AC0);
@@ -844,7 +1023,23 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00006200);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_000050E8);
+s32 isofs_chdir(SceIoIob *iob, char *path) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    s32 ret;
+
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_chdir", ISOFS_V(0xF7, 0xA3, 0xA3));
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_chdir", ISOFS_V(0xF8, 0xA4, 0xA4));
+    ISOFS_ASSERT(path != NULL, D_00006224, D_00006200, "isofs_chdir", ISOFS_V(0xF9, 0xA5, 0xA5));
+    if (iob == NULL || path == NULL) {
+        return 0x80010016;
+    }
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 271
@@ -874,11 +1069,11 @@ INCLUDE_ASM("nonmatchings/isofs", func_00005440);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/isofs", func_000053D4);
+INCLUDE_ASM("nonmatchings/isofs", isofs_mount);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_0000576C);
+INCLUDE_ASM("nonmatchings/isofs", isofs_release_blkdev);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00005908);
 #endif
@@ -904,15 +1099,126 @@ INCLUDE_ASM("nonmatchings/isofs", func_00005C50);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00005F50);
+s32 isofs_close(SceIoIob *iob) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/isofs", func_00006028);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_close", ISOFS_V(0x421, 0x480, 0x47E));
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    ret = 0x80010016;
+    if (iob == NULL || file == NULL) {
+        goto end;
+    }
+    ret = func_00000DA8(file);
+    if (ret != 0) {
+        goto end;
+    }
+    iob->i_private = NULL;
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
 
-INCLUDE_ASM("nonmatchings/isofs", func_00006114);
+s32 isofs_dclose(SceIoIob *iob) {
+    IsofsUnit *unit;
+    IsofsMgr *mgr;
+    IsofsDir *dir;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/isofs", func_00006248);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_dclose", ISOFS_V(0x44F, 0x4AD, 0x4AB));
+    unit = sceIsofsGetFileSystem(iob->i_unit);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    mgr = &g_isofsMgr;
+    if (iob == NULL) {
+        ret = 0x80010016;
+    } else {
+        dir = iob->i_private;
+        sceKernelFreeFpl(mgr->fplId, dir->fplData);
+        SysMemForKernel_7B749390(mgr->heapId, dir);
+        iob->i_private = NULL;
+    }
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
 
-INCLUDE_ASM("nonmatchings/isofs", func_00006324);
+#if FW_VERSION < 150
+s32 isofs_umount(SceIoIob *iob) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsMgr *mgr;
+    s32 ret;
+
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_umount", 0x482);
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_umount", 0x483);
+    if (iob == NULL) {
+        return 0x80010016;
+    }
+    mgr = &g_isofsMgr;
+    ret = sceKernelWaitSema(mgr->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00007FF0();
+    if (ret != 0) {
+        goto end;
+    }
+    ret = func_00000494(unit, mgr->maxFiles);
+    if (ret != 0) {
+        goto end;
+    }
+    ret = isofs_release_blkdev(unit->blkDev, unit->unitNum);
+end:
+    sceKernelSignalSema(mgr->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/isofs", isofs_umount);
+#endif
+
+#if FW_VERSION < 150
+s32 isofs_exit(void *entry) {
+    IsofsMgr *mgr;
+    s32 ret;
+
+    ISOFS_ASSERT(entry != NULL, D_00006224, D_00006200, "isofs_exit", 0x4B3);
+    if (entry == NULL) {
+        return 0x80010016;
+    }
+    ret = func_000001B8();
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000E6C();
+    if (ret != 0) {
+        return ret;
+    }
+    mgr = &g_isofsMgr;
+    if (mgr->driveType == 2) {
+        func_00004F08();
+        func_00004FC4();
+    }
+    sceKernelDeleteHeap(mgr->heapId);
+    sceKernelDeleteSema(mgr->semaId);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/isofs", isofs_exit);
+#endif
+
+#if FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/isofs", isofs_getstat);
 #else
 INCLUDE_ASM("nonmatchings/isofs", func_000037A4);
 
@@ -999,7 +1305,16 @@ INCLUDE_ASM("nonmatchings/isofs", func_00003F20);
 INCLUDE_ASM("nonmatchings/isofs", func_00003DD4);
 #endif
 
+#if FW_VERSION < 280
+s32 func_00004024(IsofsUnit *unit, s32 unitNum) {
+    if (unit->blkDev != NULL || unit->unitNum == unitNum || unit->unk44 != 0 || (unit->mountFlags & 0x10)) {
+        return 0x80010010;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/isofs", func_00004024);
+#endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
 s32 func_00006720(s32 arg0) {
@@ -1014,19 +1329,19 @@ s32 func_0000664C(s32 arg0) {
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_0000666C);
+INCLUDE_ASM("nonmatchings/isofs", isofs_open);
 
-INCLUDE_ASM("nonmatchings/isofs", func_0000692C);
+INCLUDE_ASM("nonmatchings/isofs", isofs_read);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00006B34);
+INCLUDE_ASM("nonmatchings/isofs", isofs_lseek);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00006C90);
+INCLUDE_ASM("nonmatchings/isofs", isofs_ioctl);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00006E18);
+INCLUDE_ASM("nonmatchings/isofs", isofs_devctl);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00006FCC);
+INCLUDE_ASM("nonmatchings/isofs", isofs_get_pvd);
 
-INCLUDE_ASM("nonmatchings/isofs", func_000072C4);
+INCLUDE_ASM("nonmatchings/isofs", isofs_get_umdpfi);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
@@ -1078,8 +1393,8 @@ INCLUDE_ASM("nonmatchings/isofs", module_start);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00007700(void) {
-    return (s32) &D_00009C40;
+IsofsMgr *isofsGetMgr(void) {
+    return &g_isofsMgr;
 }
 #endif
 
@@ -1114,21 +1429,43 @@ s32 func_00007748(void) {
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00007754);
-
-INCLUDE_ASM("nonmatchings/isofs", func_000079AC);
+INCLUDE_ASM("nonmatchings/isofs", isofs_parse_argument);
 #endif
+
+#if FW_VERSION < 201
+s32 isofs_setup_manager(s32 arg0, s32 maxUnits, s32 maxFiles, s32 fdwCount) {
+    SceUID heapId;
+
+    ISOFS_ASSERT(maxFiles > 0, D_00006224, D_00006200, "isofs_setup_manager", (FW_VERSION == 100) ? 0x883 : ISOFS_V(0x889, 0x8DF, 0x910));
+    ISOFS_ASSERT(maxUnits > 0, D_00006224, D_00006200, "isofs_setup_manager", (FW_VERSION == 100) ? 0x884 : ISOFS_V(0x88A, 0x8E0, 0x911));
+    ISOFS_ASSERT(arg0 > 0, D_00006224, D_00006200, "isofs_setup_manager", (FW_VERSION == 100) ? 0x885 : ISOFS_V(0x88B, 0x8E1, 0x912));
+    if (arg0 <= 0 || maxUnits < 0 || maxFiles < 0) {
+        return 0x80010016;
+    }
+    g_isofsMgr.maxUnits = maxUnits;
+    g_isofsMgr.maxFiles = maxFiles;
+    g_isofsMgr.fdwCount = fdwCount;
+    g_isofsMgr.maxUnits0 = arg0;
+    heapId = sceKernelCreateHeap(1, 0x10000, 1, "SceIsofsRootHeap");
+    if (heapId < 0) {
+        return heapId;
+    }
+    g_isofsMgr.heapId = heapId;
+    return 0;
+}
+#endif
+
 
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/isofs", func_00007ED8);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/isofs", func_00007B0C);
+INCLUDE_ASM("nonmatchings/isofs", isofs_exec_ioctl_cmd);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00007E48);
+INCLUDE_ASM("nonmatchings/isofs", isofs_set_lseek);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
