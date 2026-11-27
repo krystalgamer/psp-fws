@@ -824,7 +824,11 @@ struct tcpstat {
     u64 tcps_drops;             /* 0x18 */
     u64 tcps_conndrops;         /* 0x20 */
     u64 tcps_closed;            /* 0x28 */
+    u8 unk30[0x80 - 0x30];
+    u64 tcps_connsdrained;      /* 0x80 */
 };
+#define TCP_INITIAL_WINDOW(iw, segsz) \
+    (((iw) == 0) ? (min(4 * (segsz), max(2 * (segsz), 4380))) : ((segsz) * (iw)))
 #define TCPTV_PERSMIN 10
 #define TCPTV_PERSMAX 120
 #define TCP_MAXRXTSHIFT 12
@@ -956,6 +960,19 @@ struct udphdr {
 #define PRC_HOSTDEAD 6
 #define PRC_NCMDS 21
 #define PRC_IS_REDIRECT(cmd) ((u32)(cmd) - 14 <= 3)
+static __inline s32 tcp_reass_lock_try(struct tcpcb *tp) {
+    s32 s;
+    s = _sce_pspnet_spllock();
+    if (tp->t_flags & 0x4000) { /* TF_REASSEMBLING */
+        _sce_pspnet_splunlock(s);
+        return 0;
+    }
+    tp->t_flags |= 0x4000;
+    _sce_pspnet_splunlock(s);
+    return 1;
+}
+#define TCP_REASS_LOCK_TRY(tp) tcp_reass_lock_try(tp)
+#define TCP_REASS_UNLOCK(tp) do { s32 _s = _sce_pspnet_spllock(); (tp)->t_flags &= ~0x4000; _sce_pspnet_splunlock(_s); } while (0)
 
 struct SceTailqHead {
     void *tqh_first;
@@ -1080,11 +1097,6 @@ struct Unk_func_0000F2A8_1 {
     u8 pad0[0x8];
     s32 unk8;
     s32 unkC;
-};
-
-struct Unk_func_000138B4_0 {
-    u8 pad0[0x20];
-    s32 unk20;
 };
 
 struct Unk_func_00015654_0 {
@@ -1292,6 +1304,7 @@ extern s32 D_0002E900; /* tcp_do_rfc1323 */
 extern s32 D_0002E904; /* tcp_do_sack */
 extern s32 D_0002E908; /* tcp_do_win_scale */
 extern s32 D_0002E90C; /* tcp_do_timestamps */
+extern s32 D_0002E910; /* tcp_init_win */
 extern s32 D_0002E918;
 extern s32 D_0002E924;
 extern s32 D_0002E95C;
@@ -1554,7 +1567,7 @@ struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, 
 s32 in_pcbnotify(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg, s32 errno, void (*notify)(struct inpcb *, s32));
 void in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, s32 errno, void (*notify)(struct inpcb *, s32));
 void in_pcbstate(struct inpcb *inp, s32 state);
-void in_rtchange(struct Unk_func_000138B4_0 *arg0);
+void in_rtchange(struct inpcb *inp, s32 errno);
 struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp);
 void ip_input(struct mbuf *m);
 void lortrequest(s32 cmd, struct rtentry *rt);

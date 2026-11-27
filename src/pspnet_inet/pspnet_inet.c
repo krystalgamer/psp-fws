@@ -2972,13 +2972,10 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000137AC);
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", in_rtchange);
 #else
-void in_rtchange(struct Unk_func_000138B4_0 *arg0) {
-    s32 temp_v1;
-
-    temp_v1 = arg0->unk20;
-    if (temp_v1 != 0) {
-        rtfree(temp_v1);
-        arg0->unk20 = 0;
+void in_rtchange(struct inpcb *inp, s32 errno) {
+    if (inp->inp_route.ro_rt) {
+        rtfree(inp->inp_route.ro_rt);
+        inp->inp_route.ro_rt = NULL;
     }
 }
 #endif
@@ -4484,7 +4481,30 @@ void func_00023AB8(struct Unk_func_00023AB8_0 *arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023AD4);
 #endif
 
-#if FW_VERSION < 151 || FW_VERSION >= 282
+#if FW_VERSION < 151
+void tcp_mtudisc(struct inpcb *inp, s32 errno) {
+    struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
+    struct rtentry *rt = in_pcbrtentry(inp);
+
+    if (tp != 0) {
+        if (rt != 0) {
+            if ((rt->rt_flags & RTF_HOST) == 0) {
+                in_rtchange(inp, errno);
+                if ((rt = in_pcbrtentry(inp)) == 0) {
+                    return;
+                }
+            }
+            if (rt->rt_rmx.rmx_mtu != 0) {
+                tp->snd_cwnd = TCP_INITIAL_WINDOW(D_0002E910, rt->rt_rmx.rmx_mtu);
+            }
+        }
+        tp->snd_nxt = tp->snd_una;
+        tcp_output(tp);
+    }
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_mtudisc);
 #endif
 
