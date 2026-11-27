@@ -68,3 +68,15 @@ func_00002960 = 0x00002BC4; // type:func rom:0x2C44
 func_00002968 = 0x00002BCC; // type:func rom:0x2C4C
 func_00002970 = 0x00002BD4; // type:func rom:0x2C54
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceGeListDeQueue = 0x00001D5C; // type:func
+sceGeListUpdateStallAddr = 0x00001E5C; // type:func
+sceGeListSync = 0x00001F5C; // type:func
+sceGeListEnQueue = 0x00002718; // type:func
+sceGeListEnQueueHead = 0x00002740; // type:func
+sceKernelRegisterIntrHandler = 0x00002AF4; // type:func
+sceKernelSetUserModeIntrHanlerAcceptable = 0x00002AFC; // type:func
+sceKernelEnableIntr = 0x00002B0C; // type:func
+sceKernelCreateEventFlag = 0x00002B54; // type:func
+sceKernelRegisterSysEventHandler = 0x00002B8C; // type:func

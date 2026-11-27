@@ -816,21 +816,13 @@ INCLUDE_RODATA("nonmatchings/ge", g_pAwRegAdr);
 
 #if FW_VERSION == 103
 INCLUDE_RODATA("nonmatchings/ge", D_00002FF4);
-
-INCLUDE_ASM("nonmatchings/ge", _sceGeListInterrupt);
-
-INCLUDE_ASM("nonmatchings/ge", func_00001D5C);
-
-INCLUDE_ASM("nonmatchings/ge", func_00001E5C);
-
-INCLUDE_ASM("nonmatchings/ge", func_00001F5C);
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/ge", save_regs);
 #endif
 
-#if FW_VERSION < 103
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ge", _sceGeListInterrupt);
 #endif
 
@@ -875,11 +867,11 @@ s32 sceGeListDeQueue(SceGeDisplayList *dl) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 103 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeListDeQueue);
 #endif
 
-#if FW_VERSION < 103 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeListUpdateStallAddr);
 #endif
 
@@ -925,7 +917,7 @@ s32 sceGeListSync(SceGeDisplayList *dl, s32 mode) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 103 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeListSync);
 #endif
 
@@ -1112,9 +1104,9 @@ INCLUDE_ASM("nonmatchings/ge", _sceGeErrorInterrupt);
 #endif
 
 #if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/ge", func_00002718);
+INCLUDE_ASM("nonmatchings/ge", sceGeListEnQueue);
 
-INCLUDE_ASM("nonmatchings/ge", func_00002740);
+INCLUDE_ASM("nonmatchings/ge", sceGeListEnQueueHead);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
