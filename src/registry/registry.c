@@ -1494,7 +1494,16 @@ INCLUDE_ASM("nonmatchings/registry", func_000052B0);
 INCLUDE_ASM("nonmatchings/registry", func_00005390);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00005548);
+s32 func_00005548(SceRegCatData *d, const char *name) {
+    SceRegKeyEntry *k = (SceRegKeyEntry *)((u8 *)d + 0x20);
+    s32 i;
+
+    for (i = 0; i < d->numKeys; i++, k++) {
+        if (k->name[0] == name[0] && strcmp((char *)k->name, name) == 0)
+            return 0x80082728;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/registry", func_00005608);
 

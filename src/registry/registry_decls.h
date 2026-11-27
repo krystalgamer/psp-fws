@@ -18,6 +18,11 @@ typedef struct __attribute__((packed)) SceRegCatData {
     u16 numEntries;     /* 0x08 */
     u16 unkA;           /* 0x0A */
     u16 numKeys;        /* 0x0C */
+    u16 unkE;           /* 0x0E */
+    u32 unk10;          /* 0x10 */
+    u32 freeBlocks;     /* 0x14 */
+    u32 unk18;          /* 0x18 */
+    u32 bitmapOffset;   /* 0x1C */
 } SceRegCatData;
 
 /* open-category list node */
@@ -168,6 +173,7 @@ s32 func_000046A8(s32, s32);
 s32 func_00004A28(SceRegIndexEntry *cat, const char *name, s32 *keyId, s32 *type, u32 *size);
 s32 func_00004D6C(SceRegIndexEntry *cat, s32 keyId, void *buf, s32 size);
 SceRegKeyEntry *func_000050F4(SceRegIndexEntry *cat, const char *name, void **data);
+s32 func_00005548(SceRegCatData *d, const char *name);
 s32 func_00005F54(s32 fd);
 s32 func_00005F78(const char *name);
 s32 func_000061B4(s32 arg0);
