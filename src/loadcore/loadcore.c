@@ -360,8 +360,8 @@ void func_00000A7C(u32 *src, u32 *dst, s32 n) {
         dst[i] = src[i];
 }
 
-void func_00000AAC(void *arg0, void *arg1) {
-    func_00005338(M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg1, s32 *, 4));
+void func_00000AAC(SceResidentLibrary *a, SceResidentLibrary *b) {
+    func_00005338(a->libName, b->libName);
 }
 
 s32 func_00000ACC(SceResidentLibrary *a, SceResidentLibrary *b) {
@@ -1501,9 +1501,9 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00004AA0);
 #endif
 
 #if FW_VERSION < 282
-s32 func_00004B28(void *arg0) {
-    sceKernelCallUIDObjCommonFunction();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+SceUID func_00004B28(SceSysmemUidCB *cb, SceSysmemUidCB *uidWithFunc, s32 funcId, void *ap) {
+    sceKernelCallUIDObjCommonFunction(cb, uidWithFunc, funcId, ap);
+    return cb->uid;
 }
 #endif
 
@@ -1750,8 +1750,8 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleFromUID);
 #endif
 
 #if FW_VERSION < 150
-void sceKernelDeleteModule(void *arg0) {
-    sceKernelDeleteUID(M2C_FIELD(arg0, s32 *, 0x2C));
+void sceKernelDeleteModule(SceModule *mod) {
+    sceKernelDeleteUID(mod->modId);
 }
 #endif
 
@@ -1779,8 +1779,8 @@ SceModule *sceKernelAllocModule(SceLoadCoreExecFileInfo *execInfo) {
     return mod;
 }
 
-void sceKernelFreeModule(void *arg0) {
-    sceKernelDeleteModule(arg0);
+void sceKernelFreeModule(SceModule *mod) {
+    sceKernelDeleteModule(mod);
 }
 #endif
 
