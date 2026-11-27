@@ -138,11 +138,11 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_00092E9C);
 
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EF18C);
 
-#if FW_VERSION < 151 || (FW_VERSION >= 200 && FW_VERSION < 282)
+#if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EF208);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 200)
 s32 func_000EF208(s32 arg0, s32 arg1) {
     _ZN3paf9PhHandler17HandleSystemEventEPNS_7PhEventE();
     _ZN3paf9PhHandler10DoCallBackEiPNS_7PhEventE(arg0, 0x80004, arg1);

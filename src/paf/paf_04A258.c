@@ -2003,11 +2003,11 @@ INCLUDE_ASM("nonmatchings/paf_04A258", func_000535C0);
 INCLUDE_ASM("nonmatchings/paf_04A258", func_00053628);
 #endif
 
-#if FW_VERSION < 151 || (FW_VERSION >= 200 && FW_VERSION < 282)
+#if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/paf_04A258", func_00053690);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 200)
 void func_00053690(s32 **arg0) {
     *arg0 = &D_00171A5C;
 }

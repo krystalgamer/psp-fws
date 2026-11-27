@@ -119,8 +119,14 @@ u32 sceCccIsValidUCS4(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 200
+#if FW_VERSION >= 150 && FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_12038C", func_000C6C2C);
+#endif
+
+#if FW_VERSION == 100
+u32 func_000C6C2C(s32 arg0) {
+    return (u32) ~arg0 >> 0x1F;
+}
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 270

@@ -53,11 +53,11 @@ void scePaf_1BD0E905(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 200 && FW_VERSION < 282)
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_042054", _ZN3paf5Image7OpenGIMEPvj);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
+#if FW_VERSION < 200
 void _ZN3paf5Image7OpenGIMEPvj(s32 arg0, s32 arg1) {
     void *temp_v0;
 

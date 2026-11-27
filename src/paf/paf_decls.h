@@ -5911,6 +5911,7 @@ s32 func_000C68EC(M2C_UNK, M2C_UNK);
 M2C_UNK func_000C6AB4(s32, void *);
 s32 func_000C6C0C(s32 arg0);
 s32 func_000C6C1C(s32 arg0);
+u32 func_000C6C2C(s32 arg0);
 s32 func_000C6C38(u32 arg0);
 void func_000C6CDC(s32 arg0);
 void func_000C6E04(void *arg0);

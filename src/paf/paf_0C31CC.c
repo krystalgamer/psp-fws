@@ -6,7 +6,7 @@ void func_000C31CC(M2C_UNK **arg0) {
     _ZdlPv(arg0);
 }
 
-#if FW_VERSION == 100 || FW_VERSION >= 200
+#if FW_VERSION >= 200
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C31F4);
 #else
 void func_000C31F4(void) {

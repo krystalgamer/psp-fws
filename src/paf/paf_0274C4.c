@@ -917,11 +917,11 @@ INCLUDE_ASM("nonmatchings/paf_0274C4", func_0002CA24);
 
 INCLUDE_ASM("nonmatchings/paf_0274C4", _ZN13psjsname_impl6DecRefEv);
 
-#if FW_VERSION < 151 || (FW_VERSION >= 200 && FW_VERSION < 282)
+#if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_0002CB34);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 200)
 void func_0002CB34(s32 arg0, s32 *arg1, s32 arg2) {
     s32 temp_s0;
 
