@@ -312,3 +312,4 @@ __udivdi3 = 0x000087F8; // type:func rom:0x8878
 __umoddi3 = 0x00008D6C; // type:func rom:0x8DEC
 // shared names (tools/add_version.py) end
 func_00007E2C = 0x00007DB8; // type:func
+func_00005614 = 0x0000561C; // type:func

@@ -2002,6 +2002,10 @@ void func_00005744(struct Unk_func_00005744_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifioctl);
 
+#if FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/pspnet", func_00005614);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00005AD4);
 #endif
@@ -2492,11 +2496,11 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00007738);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00007738(void) {
+s32 func_00007738(s32 poolSize) {
     s32 temp_v0;
     s32 var_v0;
 
-    temp_v0 = sceNetIfhandle_lib_0C391E9F();
+    temp_v0 = sceNetIfhandle_lib_0C391E9F(poolSize);
     var_v0 = 0;
     if (temp_v0 < 0) {
         sceNetIfhandle_lib_29ED84C5();

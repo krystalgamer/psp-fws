@@ -151,6 +151,12 @@ struct ifnet {
     struct ifqueue if_snd;              /* 0xCC */
     struct sockaddr_dl *if_sadl;        /* 0xE0 */
     u8 *if_broadcastaddr;               /* 0xE4 */
+    u8 unkE8[0x100 - 0xE8];
+    /* SCE ifhandle extension */
+    s32 if_sce_sema100;                 /* 0x100 ioctl completion (sceNetIfhandle sema) */
+    s32 if_sce_sema104;                 /* 0x104 ioctl lock (sceNetIfhandle sema) */
+    s32 if_sce_unk108;                  /* 0x108 pending completions */
+    s32 if_sce_unk10C;                  /* 0x10C ioctl result */
 };
 #define if_type if_data.ifi_type
 #define if_addrlen if_data.ifi_addrlen
@@ -250,6 +256,30 @@ struct uio {
     enum uio_rw uio_rw;     /* 0x10 */
 };
 
+
+s32 func_00007DAC(const char *s1, const char *s2);
+s32 _sce_pspnet_spllock(void);
+void _sce_pspnet_splunlock(s32 arg0);
+s32 _sce_pspnet_if_nulloutput(void);
+extern struct ifnethead D_0000BE54;
+
+/* inlined copy of _sce_pspnet_ifunit (the real one is defined after its inlined users) */
+extern __inline__ struct ifnet *ifunit_inline(const char *name) {
+    struct ifnet *ifp;
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
+        if (ifp->if_output == _sce_pspnet_if_nulloutput)
+            continue;
+        if (func_00007DAC(ifp->if_xname, name) == 0) {
+            _sce_pspnet_splunlock(s);
+            return ifp;
+        }
+    }
+    _sce_pspnet_splunlock(s);
+    return NULL;
+}
 
 struct Unk_func_00004974_var_s2 {
     struct Unk_func_00004974_var_s2 *unk0;
@@ -427,7 +457,9 @@ s32 _sce_pspnet_tsleep_usec(void *ident, u32 usec);
 s32 _sce_pspnet_uiomove(void *buf, s32 n, struct uio *uio);
 void _sce_pspnet_unlock_threadinfo(struct SceNetThreadInfo *arg0);
 void _sce_pspnet_wakeup(void *ident);
+s32 func_000016BC(SceSize args, void *argp);
 s32 func_00001B7C(void);
+s32 func_00001CE0(s32 prio, s32 stackSize);
 void func_00001E74(void);
 s32 func_00001F0C(void);
 s32 func_00002248(void);
@@ -463,10 +495,11 @@ void func_00005C48(void);
 void func_00005C50(void);
 void func_00005C58(struct ifnet *ifp);
 void func_00005D64(void *arg);
+s32 func_000064CC(struct socket *so, u32 cmd, void *data);
 s32 func_00007020(void *a0, void *a1, void *a2, void *a3);
 s32 func_00007678(void);
 s32 func_000076B8(void);
-s32 func_00007738(void);
+s32 func_00007738(s32 poolSize);
 s32 func_00007778(void);
 s32 func_0000791C(void);
 s32 func_00007924(void);
@@ -531,9 +564,13 @@ void sceNetGetMallocStat(void);
 M2C_UNK sceNetGetMallocStatInternal();
 u32 sceNetGetSystemClockSec(void);
 s64 sceNetGetSystemClockUsec(void);
+s32 sceNetIfhandlePollSema(s32 sema, s32 n);
+s32 sceNetIfhandleSignalSema(s32 sema, s32 n);
 M2C_UNK sceNetIfhandleTerm();
-s32 sceNetIfhandle_lib_0C391E9F();
+s32 sceNetIfhandleWaitSema(s32 sema, s32 n, u32 *timeout);
+s32 sceNetIfhandle_lib_0C391E9F(s32 poolSize);
 M2C_UNK sceNetIfhandle_lib_29ED84C5();
+s32 sceNetInit(s32 poolSize, s32 calloutPrio, s32 calloutStack, s32 netintrPrio, s32 netintrStack);
 M2C_UNK sceNetMFreem(void *);
 void *sceNetMallocInternal(u32 size);
 u8 *sceNetMemcpy(u8 *arg0, u8 *arg1, s32 arg2);
