@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "savedata_utility_decls.h"
 
@@ -1549,7 +1550,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010FEC);
 #if FW_VERSION < 250
 void func_00010FEC(s32 **arg0) {
     *arg0 = &D_000250F0;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1855,7 +1856,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00015534);
 #if FW_VERSION < 282
 void func_00009C94(M2C_UNK **arg0) {
     *arg0 = &D_00025100;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_000119A0);

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "savedata_utility_decls.h"
 
@@ -1536,12 +1537,12 @@ void func_00006F18(M2C_UNK **arg0) {
 
 void func_00006F28(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_00006F50(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_00006F78(M2C_UNK **arg0) {
@@ -1554,7 +1555,7 @@ void func_00006F88(M2C_UNK **arg0) {
 
 void func_00006F98(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_00006FC0(void *arg0) {
@@ -1567,7 +1568,7 @@ void func_00006FDC(M2C_UNK **arg0) {
 
 void func_00006FEC(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_00007014(void *arg0) {
@@ -1576,7 +1577,7 @@ void func_00007014(void *arg0) {
 
 void func_00007030(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_00007058(M2C_UNK **arg0) {
@@ -1589,7 +1590,7 @@ void func_00007068(M2C_UNK **arg0) {
 
 void func_00007078(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_000070A0(void *arg0) {
@@ -1602,7 +1603,7 @@ void func_000070BC(M2C_UNK **arg0) {
 
 void func_000070CC(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_000070F4(void *arg0) {
@@ -1611,7 +1612,7 @@ void func_000070F4(void *arg0) {
 
 void func_00007110(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_00007138(M2C_UNK **arg0) {
@@ -1630,7 +1631,7 @@ void func_0000716C(M2C_UNK **arg0) {
 
 void func_0000717C(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_000071A4(void *arg0) {
@@ -1645,7 +1646,7 @@ void func_000071C8(M2C_UNK **arg0) {
 
 void func_000071D8(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_00007200(M2C_UNK **arg0) {
@@ -1654,7 +1655,7 @@ void func_00007200(M2C_UNK **arg0) {
 
 void func_00007210(M2C_UNK **arg0) {
     *arg0 = &D_00027328;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00007238);
