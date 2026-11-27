@@ -12,16 +12,20 @@ typedef struct {
     u32 unkC;
 } SceAtaCmdState;
 
-/* ata.prx drive descriptor (1.00 layout, only the fields umdman touches) */
+/* ata.prx drive descriptor (only the fields umdman touches) */
 typedef struct {
     s8 driveId;
     u8 pad1[0x7];
     u32 unk8;
-    u32 timeout;
+    u32 timeout;              /* 0x0C: per-command timeout, func_00005358 table */
+#if FW_VERSION == 100
     u8 pad10[0x8];
-    u32 byteLimit;
+#else
+    u8 pad10[0x4];
+#endif
+    u32 byteLimit;            /* 0x18 (1.50: 0x14): sceAtaGetByteLimitCount() */
     u8 pad1C[0x4];
-    SceAtaCmdState * volatile cmd;
+    SceAtaCmdState * volatile cmd; /* 0x20 (1.50: 0x1C): caller's stack state */
 } SceAtaDrive;
 
 /* 1.00: g_umdDrive[2], 0x40 bytes each */
@@ -243,7 +247,12 @@ s32 func_00002774(void);
 void func_0000279C(void);
 s32 func_000027F4(void);
 s32 func_00002BC4(void);
+void func_00004EC8(s32 id, s32 *stat);
+s32 func_00004EFC(s32 id, s32 stat);
+s32 func_0000530C(SceUmdDrive *drive);
+s32 func_00005338(SceUmdDrive *drive, s32 ret);
 s32 func_00005358(s32 cmd, SceUmdDrive *drive);
+s32 func_0000567C(s32 cmd, SceUmdDrive *drive);
 s32 func_00006CE0(void);
 M2C_UNK *func_00006D30(void);
 M2C_UNK *func_00006D3C(void);
