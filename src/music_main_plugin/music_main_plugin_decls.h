@@ -604,6 +604,14 @@ public:
 #endif
 
 #ifdef __cplusplus
+/* vtable _ZTV14Class_000A0870 is data (vptr = label - 8 + 8) */
+class Class_000A0870 {
+public:
+    virtual ~Class_000A0870();
+};
+#endif
+
+#ifdef __cplusplus
 /* vtable _ZTV14Class_000A0880 is data (vptr = label - 8 + 8) */
 class Class_000A0880 : public Class_00094E50 {
 public:
@@ -3816,6 +3824,8 @@ void _ZN14Class_0009EE10D2Ev(M2C_UNK **arg0);
 void _ZN14Class_000A04F0D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A04F0D1Ev(M2C_UNK **arg0);
 s32 _ZN14Class_000A04F0D2Ev(void);
+void _ZN14Class_000A0870D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000A0870D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A08F0D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A08F0D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A08F0D2Ev(M2C_UNK **arg0);

@@ -365,7 +365,6 @@ func_0005365C = 0x0005365C; // type:func
 func_00053694 = 0x00053694; // type:func
 func_0005369C = 0x0005369C; // type:func
 func_000536AC = 0x000536AC; // type:func
-func_000536BC = 0x000536BC; // type:func
 func_00053704 = 0x00053704; // type:func
 func_00053824 = 0x00053824; // type:func
 func_00053AB8 = 0x00053AB8; // type:func

@@ -10910,11 +10910,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_0005369C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_000536AC);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_000536BC);
-
-INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_0006A464);
-
-INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_0006A48C);
+Class_000A0870::~Class_000A0870() {
+}
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_00053704);
 
@@ -11345,6 +11342,8 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_02EE90", D_000A0870);
 #endif
 
 #if FW_VERSION == 260
+__asm__(".globl _ZTV14Class_000A0870\n_ZTV14Class_000A0870 = D_000A0870 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/music_main_plugin_02EE90", D_00094DD0);
 #endif
 
