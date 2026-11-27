@@ -1,4 +1,4 @@
-/* cflags[100,102]: -O2 */
+/* cflags[100,102,103]: -O2 */
 /* cflags[150-151]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
@@ -18,7 +18,7 @@ static inline void setCop0Status(u32 v) {
 /* func_00000348 inlined (gnu89 extern inline: body for inlining only, never emitted);
    1.50-2.71 still emit the out-of-line func_00000348 where it stands */
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 extern inline void freeSubIntrs(void *ptr) {
     if (ptr != NULL)
         sceKernelFreeHeapMemory(g_intrInfo.heapId, ptr);
@@ -27,7 +27,7 @@ extern inline void freeSubIntrs(void *ptr) {
 
 /* func_00000000 (1.00 only as a function; inlined from 1.50 on) */
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 extern inline u32 intrCop0Mask(s32 intrNum) {
     u32 mask;
 
