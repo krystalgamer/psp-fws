@@ -5,16 +5,11 @@
 #include "m2c_macros.h"
 
 #ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-/* vtables are still data (rodata asm): don't let cc1plus emit them (linkonce .gnu.linkonce.r) */
-#pragma interface
-extern "C++" {
 #include "paf.h"
 #include "vsh.h"
-}
+/* vtables are still data (rodata asm): keep cc1plus from emitting them */
+#pragma interface
+extern "C" {
 #endif
 
 #ifdef __cplusplus
