@@ -522,3 +522,4 @@ tcp_pulloutofband = 0x0001F30C; // type:func
 sppp_dequeue = 0x0002534C; // type:func
 tcp_disconnect = 0x00024D44; // type:func
 tcp_usrclosed = 0x00024DF8; // type:func
+intoa = 0x00008D98; // type:func

@@ -1363,6 +1363,7 @@ extern s32 D_0002C39C;
 extern s32 D_0002C4F0;
 extern s32 D_0002C4F4;
 extern s32 D_0002C504;
+extern char D_0002C519[]; /* end of intoa static buf[sizeof(".xxx.xxx.xxx.xxx")] */
 extern SceNetInetHook D_0002C51C;
 extern s32 D_0002C520;
 extern s32 D_0002C534;
@@ -1549,7 +1550,7 @@ void func_00009564(void *arg0);
 void func_00009570(s32 arg0);
 void func_0000958C(s32 arg0);
 void func_000095A4(s32 arg0);
-s32 func_000095AC();
+void func_000095AC(struct ifnet *ifp, s32 family);
 void func_000095C0(s32 arg0);
 s32 func_000095DC(void);
 void func_0000963C(void);

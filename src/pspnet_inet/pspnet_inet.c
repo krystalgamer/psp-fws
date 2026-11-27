@@ -1507,7 +1507,30 @@ s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 le
 INCLUDE_ASM("nonmatchings/pspnet_inet", sysctl_rdstruct);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008D98);
+char *intoa(u32 addr) {
+    char *cp;
+    u32 byte;
+    s32 n;
+
+    addr = __builtin_allegrex_wsbw(addr);
+    cp = D_0002C519;
+    *--cp = '\0';
+    n = 4;
+    do {
+        byte = addr & 0xff;
+        *--cp = byte % 10 + '0';
+        byte /= 10;
+        if (byte > 0) {
+            *--cp = byte % 10 + '0';
+            byte /= 10;
+            if (byte > 0)
+                *--cp = byte + '0';
+        }
+        *--cp = '.';
+        addr >>= 8;
+    } while (--n > 0);
+    return cp + 1;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008E40);
 
@@ -1560,7 +1583,23 @@ void func_0000958C(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION < 201
+void func_000095AC(struct ifnet *ifp, s32 family) {
+    struct socket so;
+    struct domain *dp;
+    struct protosw *pr;
+
+    func_0002C94C(&so, 0, sizeof(so));
+    dp = pffinddomain(family);
+    for (pr = dp->dom_protosw; pr < dp->dom_protoswNPROTOSW; pr++) {
+        so.so_proto = pr;
+        if (pr->pr_usrreq != NULL)
+            (void)(*pr->pr_usrreq)(&so, 22, NULL, NULL, (struct mbuf *)ifp);
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000095AC);
+#endif
 
 void func_00009650(struct ifnet *ifp) {
     s32 i;
