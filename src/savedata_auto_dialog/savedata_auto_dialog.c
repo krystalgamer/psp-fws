@@ -404,11 +404,11 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000234C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000225C);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000518);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00000518(s32 arg0) {
     _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_000208A8);
 }
