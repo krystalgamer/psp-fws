@@ -84,3 +84,6 @@ sceSysconWriteAlarm = 0x00003698; // type:func rom:0x3718
 sceSysconWriteScratchPad = 0x000036A0; // type:func rom:0x3720
 sceSysconReadScratchPad = 0x000036A8; // type:func rom:0x3728
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceRtcGetAccumlativeTime = 0x00000C9C; // type:func
