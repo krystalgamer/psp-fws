@@ -1514,7 +1514,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008874);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sysctl_int);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008A2C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sysctl_rdint);
 
 #if FW_VERSION < 201
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len) {

@@ -874,7 +874,9 @@ struct tcpstat {
     u64 tcps_closed;            /* 0x28 */
     u8 unk30[0x80 - 0x30];
     u64 tcps_connsdrained;      /* 0x80 */
+    u8 unk88[0x220 - 0x88];
 };
+typedef char chk_tcpstat[(sizeof(struct tcpstat) == 0x220) ? 1 : -1];
 #define TCP_INITIAL_WINDOW(iw, segsz) \
     (((iw) == 0) ? (min(4 * (segsz), max(2 * (segsz), 4380))) : ((segsz) * (iw)))
 #define TCPTV_PERSMIN 10
@@ -1186,6 +1188,14 @@ struct in_multistep {
     (step).i_inm = NULL; \
     IN_NEXT_MULTI((step), (inm)); \
 }
+
+/* struct tcp_ctlvar (NetBSD 1.5 tcp_usrreq.c sysctl table) */
+struct tcp_ctlvar {
+    u32 valid : 1;
+    u32 rdonly : 1;
+    s32 *var;
+    s32 num;
+};
 
 typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
 
@@ -1562,6 +1572,7 @@ extern s32 somaxconn; /* somaxconn */
 extern struct inpcbtable tcbtable;
 extern s32 tcp_backoff[]; /* tcp_backoff */
 extern s32 tcp_compat_42; /* tcp_compat_42 */
+extern struct tcp_ctlvar tcp_ctlvars[]; /* tcp_ctlvars */
 extern struct tcpcb *tcp_delacks; /* tcp_delacks */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
 extern s32 tcp_maxidle;
@@ -1869,6 +1880,7 @@ void sppp_pap_TO(void *arg);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
 void syn_cache_cleanup(struct tcpcb *tp);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
+s32 sysctl_rdint(void *oldp, u32 *oldlenp, void *newp, s32 val);
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);
 struct tcpcb *tcp_close(struct tcpcb *tp);
 struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno);

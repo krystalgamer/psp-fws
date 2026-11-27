@@ -772,7 +772,34 @@ struct tcpcb *tcp_usrclosed(struct tcpcb *tp) {
     return (tp);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00024EC4);
+#if FW_VERSION < 250
+s32 tcp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen) {
+    if (namelen != 1)
+        return (0x14);
+
+    if (name[0] < 0x1AU && tcp_ctlvars[name[0]].valid) {
+        if (tcp_ctlvars[name[0]].rdonly)
+            return (sysctl_rdint(oldp, oldlenp, newp, tcp_ctlvars[name[0]].num));
+        else
+            return (sysctl_int(oldp, oldlenp, newp, newlen, tcp_ctlvars[name[0]].var));
+    }
+    switch (name[0]) {
+    case 0x19:
+        return (sysctl_rdstruct(oldp, oldlenp, newp, &tcp_stat, sizeof(tcp_stat)));
+    default:
+        return (0x6D);
+    }
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_sysctl);
+#endif
+
+#if FW_VERSION < 271
+void func_00026930(void) {
+    tcp_sendspace = 0x4000;
+    tcp_recvspace = 0x4000;
+}
+#endif
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", _sce_pspnet_pppoe_init);
