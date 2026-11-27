@@ -86,7 +86,7 @@ s32 module_start(void) {
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
     sceRtcSynchronize();
-    sceSysconSetAlarmCallback((s32) &func_00000000, 0);
+    sceSysconSetAlarmCallback(func_00000000, NULL);
     sceKernelRegisterSysEventHandler(&D_00004530);
     return 0;
 }
@@ -108,7 +108,7 @@ s32 module_start(void) {
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 s32 module_reboot_before(void) {
-    sceSysconSetAlarmCallback(0, 0);
+    sceSysconSetAlarmCallback(NULL, NULL);
     sceKernelUnregisterSysEventHandler(&D_00004530);
     return 0;
 }
@@ -131,13 +131,13 @@ s32 module_start(void) {
     D_00004580.unkC = 0;
     sceRtcSynchronize();
     func_00003D9C();
-    sceSysconSetAlarmCallback((s32) &func_00000000, 0);
+    sceSysconSetAlarmCallback(func_00000000, NULL);
     sceKernelRegisterSysEventHandler(&D_00004540);
     return 0;
 }
 
 s32 module_reboot_before(void) {
-    sceSysconSetAlarmCallback(0, 0);
+    sceSysconSetAlarmCallback(NULL, NULL);
     sceKernelUnregisterSysEventHandler(&D_00004540);
     return 0;
 }
@@ -155,7 +155,7 @@ s32 sceRtcInit(void) {
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
     sceRtcSynchronize();
-    sceSysconSetAlarmCallback((s32) &func_00000000, 0);
+    sceSysconSetAlarmCallback(func_00000000, NULL);
     sceKernelRegisterSysEventHandler(&D_00004530);
     return 0;
 }
@@ -181,7 +181,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcEnd);
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 s32 sceRtcEnd(void) {
-    sceSysconSetAlarmCallback(0, 0);
+    sceSysconSetAlarmCallback(NULL, NULL);
     sceKernelUnregisterSysEventHandler(&D_00004530);
     return 0;
 }
@@ -251,20 +251,20 @@ s32 func_0000138C(s32 arg0) {
 }
 #endif
 
-s32 sceRtcIsLeapYear(s32 arg0) {
-    s32 var_a1;
+s32 sceRtcIsLeapYear(s32 year) {
+    s32 ret;
 
-    var_a1 = 0x800001FF;
-    if (arg0 > 0) {
-        var_a1 = 1;
-        if (arg0 != ((arg0 / 400) * 0x190)) {
-            var_a1 = 0;
-            if (arg0 != ((arg0 / 100) * 0x64)) {
-                var_a1 = (arg0 & 3) == 0;
+    ret = 0x800001FF;
+    if (year > 0) {
+        ret = 1;
+        if (year != (year / 400) * 400) {
+            ret = 0;
+            if (year != (year / 100) * 100) {
+                ret = (year & 3) == 0;
             }
         }
     }
-    return var_a1;
+    return ret;
 }
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetDaysInMonth);
@@ -326,8 +326,8 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime_t);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddTicks);
 
-s32 sceRtcTickAddMicroseconds(void *arg0, void *arg1, s64 arg2) {
-    return sceRtcTickAddTicks(arg0, arg1, arg2);
+s32 sceRtcTickAddMicroseconds(u64 *destTick, const u64 *srcTick, s64 num) {
+    return sceRtcTickAddTicks(destTick, srcTick, num);
 }
 
 #if FW_VERSION < 282
@@ -335,12 +335,12 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddSeconds);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddMinutes);
 #else
-s32 sceRtcTickAddSeconds(void *arg0, void *arg1, s64 arg2) {
-    return sceRtcTickAddTicks(arg0, arg1, arg2 * 0xF4240);
+s32 sceRtcTickAddSeconds(u64 *destTick, const u64 *srcTick, s64 num) {
+    return sceRtcTickAddTicks(destTick, srcTick, num * 1000000);
 }
 
-s32 sceRtcTickAddMinutes(void *arg0, void *arg1, s64 arg2) {
-    return sceRtcTickAddTicks(arg0, arg1, arg2 * 0x03938700);
+s32 sceRtcTickAddMinutes(u64 *destTick, const u64 *srcTick, s64 num) {
+    return sceRtcTickAddTicks(destTick, srcTick, num * 60000000);
 }
 #endif
 
@@ -504,11 +504,11 @@ INCLUDE_ASM("nonmatchings/rtc", func_00003D10);
 
 #if FW_VERSION < 282
 s32 func_0000358C(void) {
-    return sceKernelRegisterLibcRtcFunc(&func_00003DD4, &func_00003DF4, &func_00003D10);
+    return sceKernelRegisterLibcRtcFunc(func_00003DD4, func_00003DF4, func_00003D10);
 }
 #else
 void func_00003D9C(void) {
-    sceKernelRegisterRtcFunc(&func_00003DD4, &func_00003DF4, &func_00003D10, &sceRtcGetCurrentSecureTick);
+    sceKernelRegisterRtcFunc(func_00003DD4, func_00003DF4, func_00003D10, sceRtcGetCurrentSecureTick);
 }
 #endif
 
