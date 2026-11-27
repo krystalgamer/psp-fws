@@ -51,3 +51,4 @@ sceRtcSetDosTime = 0x00023618; // type:func
 sceKernelPowerUnlock = 0x00023620; // type:func
 sceKernelPowerLock = 0x00023628; // type:func
 sceKernelRegisterSysEventHandler = 0x00023630; // type:func
+g_msStubMbx = 0x0002DA00;

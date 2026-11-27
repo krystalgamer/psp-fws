@@ -129,3 +129,4 @@ func_0001815C = 0x0000D890; // type:func rom:0xD910
 func_00018570 = 0x0000DC8C; // type:func rom:0xDD0C
 func_0001A620 = 0x0000F668; // type:func rom:0xF6E8
 // shared names (tools/add_version.py) end
+g_msStubMbx = 0x00019E00;

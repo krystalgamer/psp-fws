@@ -254,7 +254,6 @@
   "D_00019AD4": "extern M2C_UNK D_00019AD4;",
   "D_00019B00": "extern s32 D_00019B00;",
   "D_00019B04": "extern s8 D_00019B04;",
-  "D_00019E00": "extern SceUID D_00019E00;",
   "D_00019E08": "extern s32 D_00019E08;",
   "D_00019E28": "extern s32 D_00019E28;",
   "D_0001A040": "extern s32 D_0001A040;",
@@ -276,10 +275,10 @@
   "D_0002C7CC": "extern s32 D_0002C7CC;",
   "D_0002D054": "extern s32 D_0002D054;",
   "D_0002D730": "extern s8 D_0002D730;",
-  "D_0002DA00": "extern SceUID D_0002DA00;",
   "D_0002DC10": "extern s32 D_0002DC10;",
   "D_0002EF50": "extern s32 D_0002EF50;",
   "D_0003F728": "extern void *D_0003F728;",
-  "D_00042A80": "extern M2C_UNK D_00042A80;"
+  "D_00042A80": "extern M2C_UNK D_00042A80;",
+  "g_msStubMbx": "extern SceUID g_msStubMbx;"
  }
 }

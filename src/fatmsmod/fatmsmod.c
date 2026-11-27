@@ -1511,7 +1511,7 @@ s32 func_00006918(void) {
     s32 var_v0;
 
     temp_v0 = sceKernelCreateMbx("SceMsStub", 0x100U, NULL);
-    D_00019E00 = temp_v0;
+    g_msStubMbx = temp_v0;
     var_v0 = 0;
     if (temp_v0 <= 0) {
         var_v0 = 0x80020001;
@@ -1529,7 +1529,7 @@ s32 func_00006918(void) {
     s32 var_v0;
 
     temp_v0 = sceKernelCreateMbx("SceMsStubMsg", 0x100U, NULL);
-    D_00019E00 = temp_v0;
+    g_msStubMbx = temp_v0;
     var_v0 = 0;
     if (temp_v0 <= 0) {
         var_v0 = 0x80020001;
@@ -1543,20 +1543,21 @@ s32 func_00006918(void) {
 
 #if FW_VERSION < 282
 s32 func_0000465C(void) {
-    return __builtin_allegrex_min(sceKernelDeleteMbx(D_00019E00), 0);
+    return __builtin_allegrex_min(sceKernelDeleteMbx(g_msStubMbx), 0);
 }
 #else
 s32 func_00006960(void) {
-    return __builtin_allegrex_min(sceKernelDeleteMbx(D_0002DA00), 0);
+    return __builtin_allegrex_min(sceKernelDeleteMbx(g_msStubMbx), 0);
 }
 #endif
 
-#if FW_VERSION < 282
 s32 func_00006988(SceMsStubMsg *msg) {
     SceMsStubPacket pkt;
     SceUID evf;
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 330
+    evf = sceKernelCreateEventFlag("SceFatmsSendMsg", 1, 0, NULL);
+#elif FW_VERSION >= 201
     evf = sceKernelCreateEventFlag("FcpSendMsg", 1, 0, NULL);
 #else
     evf = sceKernelCreateEventFlag("FcpSendMsg", 0, 0, NULL);
@@ -1568,7 +1569,7 @@ s32 func_00006988(SceMsStubMsg *msg) {
     pkt.hdr.msgPriority = 0;
     msg->prio = sceKernelGetThreadCurrentPriority();
     func_00007718(pkt.body, msg, sizeof(pkt.body));
-    if (sceKernelSendMbx(D_00019E00, &pkt) != 0) {
+    if (sceKernelSendMbx(g_msStubMbx, &pkt) != 0) {
         return -1;
     }
     sceKernelWaitEventFlag(evf, 0x105A, 0, NULL, NULL);
@@ -1576,9 +1577,6 @@ s32 func_00006988(SceMsStubMsg *msg) {
     func_00007718(msg, pkt.body, sizeof(pkt.body));
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00006988);
-#endif
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006A54);
 
