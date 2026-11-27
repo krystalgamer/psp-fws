@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/osk_plugin
-  src_path: src/osk_plugin
+  src_path: tmp/av_src/102/osk_plugin
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/osk_plugin.ld
   cache_path: tmp/build/102/.splat_cache.osk_plugin
@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, osk_plugin]
+      - [0xA4, c, osk_plugin]
       - { start: 0xC77C, type: asm, name: fini, linker_section: .fini }
       - { start: 0xC798, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xCAB0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -71,7 +71,7 @@ segments:
       - { start: 0xCE64, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0xCE68, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0xCE6C, type: prxpad, order: .rodata }
-      - [0xCE70, rodata, osk_plugin]
+      - [0xCE70, .rodata, osk_plugin]
   - name: osk_plugin_seg1
     type: code
     start: 0xE370
