@@ -1,3 +1,4 @@
+/* cflags[150]: -Os -frename-registers */
 /* cflags[152]: -Os -frename-registers */
 /* cflags[100]: -Os -frename-registers */
 /* cflags: -O2 -frename-registers */
