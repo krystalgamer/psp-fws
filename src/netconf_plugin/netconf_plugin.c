@@ -4098,7 +4098,9 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00002F6C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/netconf_plugin", func_00002C68);
+s32 func_00002C68(void) {
+    return func_00002C90(0);
+}
 
 s32 func_00002C84(void) {
     return D_0001307C;
@@ -4210,8 +4212,22 @@ void func_00004F54(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00003060);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00003060(void) {
+    s32 temp_s0;
+
+    temp_s0 = func_0000D204();
+    func_00005798();
+    func_00002BD0();
+    M2C_FIELD(temp_s0, s32 *, 0x9C) = 0;
+    _ZN3paf4View8PageOpenEPKcii(temp_s0, &D_0001D098, 0, 0);
+    func_00002C90(0);
+    return func_00005C24(0);
+}
 #endif
 
 #if FW_VERSION == 282
@@ -4579,7 +4595,13 @@ void func_000071D8(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00007258);
+#else
+void func_00007258(void) {
+    func_00005C24(0);
+}
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000045E8);
@@ -5216,17 +5238,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00008BAC);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00008BB8);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/netconf_plugin", func_000054B0);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION < 282
 void func_000054B0(void) {
     func_0000608C();
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00008D84(s8 arg0) {
     D_000206D8 = arg0;
 }
@@ -5386,17 +5402,13 @@ s32 func_00005E58(void) {
 void func_00005E64(s32 arg0) {
     func_00009400(arg0 & 0xFF);
 }
-#endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/netconf_plugin", func_00005E80);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00005E80(void) {
     func_0000941C();
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000065A0);
 #endif
 
@@ -6250,7 +6262,13 @@ s32 func_0000C3A0(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000C3D8);
+#else
+void func_0000C3D8(void) {
+    func_0000C3A0();
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000C418);
 
@@ -6267,9 +6285,17 @@ void func_0000C5E4(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000C610);
-#else
+#endif
+
+#if FW_VERSION == 100
+void func_0000C610(void) {
+    func_0000C3A0();
+}
+#endif
+
+#if FW_VERSION >= 282
 void func_0000C610(void) {
     func_00010494((s32) &D_0001DD88);
     func_0000C3A0();
@@ -6350,7 +6376,13 @@ s32 func_0000C77C(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000C7B4);
+#else
+void func_0000C7B4(void) {
+    func_0000C77C();
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000C7F4);
 
@@ -6363,9 +6395,17 @@ void func_0000C87C(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000C8A8);
-#else
+#endif
+
+#if FW_VERSION == 100
+void func_0000C8A8(void) {
+    func_0000C77C();
+}
+#endif
+
+#if FW_VERSION >= 282
 void func_0000C8A8(void) {
     func_00010494((s32) &D_0001DD88);
     func_0000C77C();
@@ -7714,15 +7754,13 @@ u8 func_000106F4(void) {
 }
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/netconf_plugin", func_00009640);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION < 282
 void func_00009640(void) {
     func_0000608C();
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00012E78);
 
 INCLUDE_RODATA("nonmatchings/netconf_plugin", D_00012E7C);
@@ -9865,17 +9903,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D2BC);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D2DC);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D204);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 271
+#if FW_VERSION < 271
 s32 func_0000D204(void) {
     return D_000131C0;
 }
-#endif
 
-#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D210);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D230);
@@ -9913,19 +9945,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D3B4);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D5B4);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D7E0);
-#endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D910);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 271
 void func_0000D910(void) {
     func_0000CDF8();
 }
-#endif
 
-#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D92C);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D9AC);
@@ -10006,8 +10030,16 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E2A8);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001B90);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E378);
+#endif
+
+#if FW_VERSION == 100
+s32 func_0000E378(void) {
+    sce_paf_private_memset(&D_00020984, 0, 0xC);
+    sce_paf_private_memset(&D_00020980, 1, 2);
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 282
@@ -10079,13 +10111,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00019090);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E580);
-#endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E5F0);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_0000E5F0(void *arg0, s32 arg1) {
     if (arg0 != NULL) {
         M2C_FIELD(arg0, s32 *, 4) = 0;
@@ -10196,17 +10222,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001761C);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00017658);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/netconf_plugin", func_00019610);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION < 282
 s32 func_00019610(void) {
     return D_000134C8;
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 s32 func_000193E4(struct Unk_func_000193E4_0 *arg0) {
     s32 temp_v0;
 
