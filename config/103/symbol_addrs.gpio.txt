@@ -42,3 +42,7 @@ sceSysregGpioClkEnable = 0x00000A60; // type:func rom:0xAE0
 sceSysregGpioIoEnable = 0x00000A68; // type:func rom:0xAE8
 sceSysregGpioIoDisable = 0x00000A70; // type:func rom:0xAF0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceGpioSetIntrMode = 0x000001A4; // type:func
+sceGpioResume = 0x000004CC; // type:func
