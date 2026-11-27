@@ -56,7 +56,7 @@ s32 sceRegInit(void) {
     if (id < 0)
         return 0x80082732;
     g_semaId = id;
-    if (func_000069A0(0, 0x8000) < 0)
+    if (regHeapInit(0, 0x8000) < 0)
         return 0x8008272B;
     g_initialized = 1;
     setK1(oldK1);
@@ -87,7 +87,7 @@ s32 sceRegInit(void) {
     temp_v0 = sceKernelCreateMutex("SceRegBlockAPI", 0U, 0, NULL);
     if (temp_v0 >= 0) {
         D_0000706C = temp_v0;
-        if (func_000069A0(0, 0x8000) >= 0) {
+        if (regHeapInit(0, 0x8000) >= 0) {
             g_initialized = 1;
             setK1(temp_s0);
             var_v0 = 0;
@@ -117,7 +117,7 @@ s32 sceRegExit(void) {
         sceKernelDeleteSema(g_semaId);
         g_semaId = -1;
     }
-    func_00006228();
+    regHeapDelete();
     g_openMode = 0;
     g_initialized = 0;
     setK1(oldK1);
@@ -187,22 +187,22 @@ s32 sceRegOpenRegistry(SceRegParam *param, s32 mode, s32 *handle) {
         goto fail;
     ireg = NULL;
     dreg = NULL;
-    func_00001908(param->regType, &ireg, &dreg);
-    ret = func_00000B88(param, ireg, dreg);
+    regGetFileNames(param->regType, &ireg, &dreg);
+    ret = regCheckFiles(param, ireg, dreg);
     if (ret == 0x80082731)
         goto fail;
     if (mode == 1) {
         if (ret != 0) {
-            ret = func_00001058(param, ireg, dreg);
+            ret = regCreateHive(param, ireg, dreg);
             if (ret != 0)
                 goto fail;
             g_openMode = mode;
         }
-        ret = func_00000C50(param, ireg, dreg, &index);
+        ret = regOpenHive(param, ireg, dreg, &index);
     } else if (mode == 2) {
         if (ret != 0)
             goto fail;
-        ret = func_00000C50(param, ireg, dreg, &index);
+        ret = regOpenHive(param, ireg, dreg, &index);
     } else {
         ret = 0x80084E27;
     }
@@ -236,9 +236,9 @@ s32 sceRegCloseRegistry(s32 index) {
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
     ret = 0x80082715;
-    if (func_00000B6C(index) == NULL)
+    if (regGetHive(index) == NULL)
         goto end;
-    ret = func_000006CC(index);
+    ret = regFlushHive(index);
     if (ret != 0)
         goto end;
     h = g_hiveHead;
@@ -254,10 +254,10 @@ s32 sceRegCloseRegistry(s32 index) {
     } else {
         g_openMode = 0;
         h->unk0 = 1;
-        ret = func_00005F54(h->iregFd);
+        ret = regCloseFile(h->iregFd);
         if (ret != 0)
             goto end;
-        ret = func_00005F54(h->dregFd);
+        ret = regCloseFile(h->dregFd);
         if (ret != 0)
             goto end;
         if (--g_hiveCount == 0)
@@ -266,8 +266,8 @@ s32 sceRegCloseRegistry(s32 index) {
             g_hiveHead = h->next;
         else
             prev->next = h->next;
-        func_000062E0(h->ireg);
-        func_000062E0(h);
+        regFree(h->ireg);
+        regFree(h);
     }
     ret = 0;
 end:
@@ -296,9 +296,9 @@ s32 sceRegRemoveRegistry(SceRegParam *param) {
     sceKernelPowerLock(0);
     ireg = NULL;
     dreg = NULL;
-    func_00001908(param->regType, &ireg, &dreg);
-    func_00005F78(ireg);
-    func_00005F78(dreg);
+    regGetFileNames(param->regType, &ireg, &dreg);
+    regRemoveFile(ireg);
+    regRemoveFile(dreg);
 end:
     sceKernelPowerUnlock(0);
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
@@ -322,7 +322,7 @@ s32 sceRegFlushRegistry(s32 arg0) {
     ret = 0x80082733;
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
-    ret = func_000006CC(arg0);
+    ret = regFlushHive(arg0);
 end:
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
@@ -337,7 +337,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000008BC);
 #endif
 
 #if FW_VERSION == 100
-s32 func_000006CC(s32 index) {
+s32 regFlushHive(s32 index) {
     SceRegHive *h;
     SceRegIregHeader *hdr;
     s32 size;
@@ -346,20 +346,20 @@ s32 func_000006CC(s32 index) {
 
     ret = 0x80082715;
     sceKernelPowerLock(0);
-    h = func_00000B6C(index);
+    h = regGetHive(index);
     if (h == NULL)
         goto end;
-    if (func_00003B2C(index) != 0)
+    if (regCheckHiveDirty(index) != 0)
         goto ok;
     hdr = h->ireg;
     size = hdr->bitmapSize + hdr->entriesSize + 0x28;
-    ret = func_00006888(h->iregFd, 0, 0);
+    ret = regSeekFile(h->iregFd, 0, 0);
     if (ret != 0)
         goto end;
-    ret = func_000067A0(hdr, 1, size, h->iregFd, &written);
+    ret = regWriteFile(hdr, 1, size, h->iregFd, &written);
     if (ret != 0)
         goto end;
-    func_00003FE4(index);
+    regClearHiveDirty(index);
 ok:
     ret = 0;
 end:
@@ -383,7 +383,7 @@ s32 sceRegFlushCategory(s32 arg0) {
     ret = 0x80082733;
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto out;
-    ret = func_000008E4((SceRegIndexEntry *)arg0);
+    ret = regFlushCategory((SceRegIndexEntry *)arg0);
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
     }
@@ -392,7 +392,7 @@ out:
     return ret;
 }
 
-s32 func_000008E4(SceRegIndexEntry *cat) {
+s32 regFlushCategory(SceRegIndexEntry *cat) {
     SceRegBlockRuns runs;
     s32 written;
     SceRegOpenCat *o;
@@ -403,9 +403,9 @@ s32 func_000008E4(SceRegIndexEntry *cat) {
 
     ret = 0x80082715;
     sceKernelPowerLock(0);
-    if (func_00003E60(cat) == NULL)
+    if (regIsCategoryOpen(cat) == NULL)
         goto end;
-    if (func_000040A0(cat) != 0)
+    if (regCheckCatDirty(cat) != 0)
         goto ok;
     h = cat->hive;
     o = cat->opened;
@@ -413,20 +413,20 @@ s32 func_000008E4(SceRegIndexEntry *cat) {
     if (o == NULL)
         goto end;
     buf = o->buf;
-    ret = func_00006888(h->dregFd, 0, 0);
+    ret = regSeekFile(h->dregFd, 0, 0);
     if (ret != 0)
         goto end;
     memset(&runs, 0, sizeof(runs));
-    func_00001AC4(&runs, cat->blocks);
+    regGetBlockRuns(&runs, cat->blocks);
     for (i = 0; i < runs.count; i++) {
-        ret = func_00006888(h->dregFd, runs.runs[i].start << 9, 0);
+        ret = regSeekFile(h->dregFd, runs.runs[i].start << 9, 0);
         if (ret != 0)
             goto end;
-        ret = func_000067A0(buf + i * 0x200, 1, runs.runs[i].num << 9, h->dregFd, &written);
+        ret = regWriteFile(buf + i * 0x200, 1, runs.runs[i].num << 9, h->dregFd, &written);
         if (ret != 0)
             goto end;
     }
-    func_00004058(cat);
+    regClearCatDirty(cat);
 ok:
     ret = 0;
 end:
@@ -436,11 +436,11 @@ end:
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/registry", func_000008E4);
+INCLUDE_ASM("nonmatchings/registry", regFlushCategory);
 #endif
 
 #if FW_VERSION < 282
-SceRegHive *func_00000B6C(s32 index) {
+SceRegHive *regGetHive(s32 index) {
     SceRegHive *h;
     s32 i;
 
@@ -459,19 +459,19 @@ fail:
     return NULL;
 }
 
-INCLUDE_ASM("nonmatchings/registry", func_00000B88);
+INCLUDE_ASM("nonmatchings/registry", regCheckFiles);
 #else
 INCLUDE_ASM("nonmatchings/registry", func_000009F8);
 
-INCLUDE_ASM("nonmatchings/registry", func_00000B6C);
+INCLUDE_ASM("nonmatchings/registry", regGetHive);
 
 INCLUDE_ASM("nonmatchings/registry", func_00000BC8);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00000C50);
+INCLUDE_ASM("nonmatchings/registry", regOpenHive);
 
 #if FW_VERSION < 282
-s32 func_00000CA0(SceRegParam *param, SceRegHive **hive, s32 *index) {
+s32 regFindHive(SceRegParam *param, SceRegHive **hive, s32 *index) {
     SceRegHive *h;
     s32 i;
 
@@ -495,11 +495,11 @@ INCLUDE_ASM("nonmatchings/registry", func_00000D10);
 #endif
 
 #if FW_VERSION < 271
-void func_00000D7C(SceRegHive *h) {
+void regHiveAddRef(SceRegHive *h) {
     h->openCount++;
 }
 #else
-INCLUDE_ASM("nonmatchings/registry", func_00000D7C);
+INCLUDE_ASM("nonmatchings/registry", regHiveAddRef);
 #endif
 
 #if FW_VERSION >= 201
@@ -507,7 +507,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00000DA8);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00000D9C(SceRegParam *param, const char *ireg, const char *dreg, SceRegHive **hiveOut) {
+s32 regLoadHive(SceRegParam *param, const char *ireg, const char *dreg, SceRegHive **hiveOut) {
     u32 size;
     s32 iregFd;
     s32 written;
@@ -519,25 +519,25 @@ s32 func_00000D9C(SceRegParam *param, const char *ireg, const char *dreg, SceReg
     buf = NULL;
     iregFd = 0;
     dregFd = 0;
-    ret = func_00001828(ireg, &size);
+    ret = regGetFileSize(ireg, &size);
     if (ret != 0)
         goto fail;
     ret = 0x80082712;
-    buf = func_00006A48(size);
+    buf = regAlloc(size);
     if (buf == NULL)
         goto fail;
     ret = func_00001730(ireg, &iregFd);
     if (ret != 0)
         goto fail;
-    h = func_00006A48(sizeof(SceRegHive));
+    h = regAlloc(sizeof(SceRegHive));
     ret = 0x80082712;
     if (h == NULL)
         goto fail;
     memset(h, 0, sizeof(SceRegHive));
     ret = 0x80084E24;
-    if (func_00006828(buf, 1, size, iregFd, &written) != 0)
+    if (regReadFile(buf, 1, size, iregFd, &written) != 0)
         goto fail;
-    func_00001938(buf);
+    regClearOpenedCategories(buf);
     ret = func_00001730(dreg, &dregFd);
     if (ret != 0)
         goto fail;
@@ -553,28 +553,28 @@ s32 func_00000D9C(SceRegParam *param, const char *ireg, const char *dreg, SceReg
     return 0;
 fail:
     if (iregFd != 0) {
-        func_00005F54(iregFd);
-        func_00005F78(ireg);
+        regCloseFile(iregFd);
+        regRemoveFile(ireg);
     }
     if (dregFd != 0) {
-        func_00005F54(dregFd);
-        func_00005F78(dreg);
+        regCloseFile(dregFd);
+        regRemoveFile(dreg);
     }
     if (hiveOut != NULL)
-        func_000062E0(hiveOut);
+        regFree(hiveOut);
     if (buf != NULL)
-        func_000062E0(buf);
+        regFree(buf);
     *hiveOut = NULL;
     return ret;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/registry", func_00000D9C);
+INCLUDE_ASM("nonmatchings/registry", regLoadHive);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00001058(SceRegParam *param, const char *ireg, const char *dreg) {
+s32 regCreateHive(SceRegParam *param, const char *ireg, const char *dreg) {
     SceRegIregHeader hdr;
     s32 ret;
 
@@ -590,13 +590,13 @@ s32 func_00001058(SceRegParam *param, const char *ireg, const char *dreg) {
     sceKernelPowerUnlock(0);
     return 0;
 fail:
-    func_00005F78(ireg);
-    func_00005F78(dreg);
+    regRemoveFile(ireg);
+    regRemoveFile(dreg);
     sceKernelPowerUnlock(0);
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/registry", func_00001058);
+INCLUDE_ASM("nonmatchings/registry", regCreateHive);
 #endif
 
 #if FW_VERSION < 282
@@ -633,12 +633,12 @@ INCLUDE_ASM("nonmatchings/registry", func_00001694);
 INCLUDE_ASM("nonmatchings/registry", func_00001714);
 #endif
 
-s32 func_00001828(const char *name, u32 *size) {
+s32 regGetFileSize(const char *name, u32 *size) {
     u64 sz;
     s32 ret;
 
     ret = 0x80084E29;
-    if (func_000068EC(name, &sz) == 0) {
+    if (regStatFile(name, &sz) == 0) {
         ret = 0;
         *size = sz;
     } else {
@@ -652,7 +652,7 @@ s32 func_00001730(const char *name, s32 *fd) {
     s32 ret;
     s32 res;
 
-    res = func_000065E4(name);
+    res = regOpenFile(name);
     ret = 0;
     if (res >= 0) {
         *fd = res;
@@ -669,7 +669,7 @@ s32 func_00001730(const char *arg0, s32 *arg1) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = func_000065E4(arg0);
+    temp_v0 = regOpenFile(arg0);
     var_v1 = 0;
     if (temp_v0 >= 0) {
         *arg1 = temp_v0;
@@ -682,9 +682,9 @@ s32 func_00001730(const char *arg0, s32 *arg1) {
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/registry", func_00001770);
+INCLUDE_ASM("nonmatchings/registry", regAddHive);
 
-void func_00001908(s32 type, const char **ireg, const char **dreg) {
+void regGetFileNames(s32 type, const char **ireg, const char **dreg) {
     if (type == 1) {
         *ireg = "/registry/system.ireg";
         *dreg = "/registry/system.dreg";
@@ -696,7 +696,7 @@ void func_00001908(s32 type, const char **ireg, const char **dreg) {
 #endif
 
 #if FW_VERSION == 100
-void func_00001938(SceRegIregHeader *hdr) {
+void regClearOpenedCategories(SceRegIregHeader *hdr) {
     SceRegIndexEntry *e;
     u32 i;
     u32 n;
@@ -711,7 +711,7 @@ void func_00001938(SceRegIregHeader *hdr) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/registry", func_00001938);
+INCLUDE_ASM("nonmatchings/registry", regClearOpenedCategories);
 #endif
 
 #if FW_VERSION >= 282
@@ -719,7 +719,7 @@ s32 func_00001874(s32 arg0, s32 *arg1) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = func_000065E4(arg0);
+    temp_v0 = regOpenFile(arg0);
     var_v1 = 0;
     if (temp_v0 >= 0) {
         *arg1 = temp_v0;
@@ -753,9 +753,9 @@ void func_00001A44(s32 arg0, M2C_UNK **arg1, M2C_UNK **arg2) {
 INCLUDE_ASM("nonmatchings/registry", func_00001A74);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00001AC4);
+INCLUDE_ASM("nonmatchings/registry", regGetBlockRuns);
 
-void func_00001B7C(SceRegBlockRuns *runs, u16 start, u16 num) {
+void regAddBlockRun(SceRegBlockRuns *runs, u16 start, u16 num) {
     runs->runs[runs->count].start = start;
     runs->runs[runs->count].num = num;
     runs->count++;
@@ -798,7 +798,7 @@ s32 sceRegCloseCategory(s32 hd) {
     ret = 0x80082733;
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto out;
-    ret = func_00002228((SceRegIndexEntry *)hd);
+    ret = regCloseCategory((SceRegIndexEntry *)hd);
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
     }
@@ -823,22 +823,22 @@ INCLUDE_ASM("nonmatchings/registry", func_00002A5C);
 #endif
 
 #if FW_VERSION < 152
-s32 func_00002228(SceRegIndexEntry *cat) {
+s32 regCloseCategory(SceRegIndexEntry *cat) {
     s32 ret;
 
-    if (func_00003E60(cat) == NULL)
+    if (regIsCategoryOpen(cat) == NULL)
         return 0x80082715;
-    ret = func_000008E4(cat);
+    ret = regFlushCategory(cat);
     if (ret != 0)
         return ret;
     if (cat != NULL && cat->opened == NULL)
         return 0x80082735;
-    func_00003414(cat);
+    regCatRelease(cat);
     if (cat->opened->refCount == 0) {
-        func_000062E0(cat->opened->buf);
-        func_000062E0(cat->opened);
+        regFree(cat->opened->buf);
+        regFree(cat->opened);
         cat->opened = NULL;
-        func_00003910(cat);
+        regRemoveOpenCategory(cat);
     }
     return 0;
 }
@@ -943,11 +943,11 @@ INCLUDE_ASM("nonmatchings/registry", func_00003260);
 #endif
 
 #if FW_VERSION < 152
-void func_000033C4(SceRegIndexEntry *cat) {
+void regCatAddRef(SceRegIndexEntry *cat) {
     cat->opened->refCount++;
 }
 
-u16 func_00003414(SceRegIndexEntry *cat) {
+u16 regCatRelease(SceRegIndexEntry *cat) {
     return --cat->opened->refCount;
 }
 #endif
@@ -964,7 +964,7 @@ INCLUDE_ASM("nonmatchings/registry", func_0000396C);
 INCLUDE_ASM("nonmatchings/registry", func_000039A4);
 #endif
 
-void func_000039E0(SceRegIndexEntry *e) {
+void regInitIndexEntry(SceRegIndexEntry *e) {
     e->hive = NULL;
     e->unk4 = 0;
     e->unk6 = -1;
@@ -1001,12 +1001,12 @@ INCLUDE_ASM("nonmatchings/registry", func_00003ACC);
 INCLUDE_ASM("nonmatchings/registry", func_00003C68);
 #endif
 
-void func_00003D1C(s32 hive, SceRegIndexEntry *cat) {
+void regAddOpenCategory(s32 hive, SceRegIndexEntry *cat) {
     SceRegCatNode *n;
 
-    if (func_00003E60(cat) != NULL)
+    if (regIsCategoryOpen(cat) != NULL)
         return;
-    n = func_00006A48(sizeof(SceRegCatNode));
+    n = regAlloc(sizeof(SceRegCatNode));
     n->hive = hive;
     n->cat = cat;
     n->next = NULL;
@@ -1024,7 +1024,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00003604);
 #endif
 
 #if FW_VERSION < 152
-void func_00003910(SceRegIndexEntry *cat) {
+void regRemoveOpenCategory(SceRegIndexEntry *cat) {
     SceRegCatNode *prev = NULL;
     SceRegCatNode *n = g_catHead;
     s32 i;
@@ -1044,7 +1044,7 @@ void func_00003910(SceRegIndexEntry *cat) {
         if (n == g_catTail)
             g_catTail = prev;
     }
-    func_000062E0(n);
+    regFree(n);
     g_catCount--;
 }
 #endif
@@ -1053,7 +1053,7 @@ void func_00003910(SceRegIndexEntry *cat) {
 INCLUDE_ASM("nonmatchings/registry", func_00003DAC);
 #endif
 
-SceRegIndexEntry *func_00003E60(SceRegIndexEntry *cat) {
+SceRegIndexEntry *regIsCategoryOpen(SceRegIndexEntry *cat) {
     SceRegCatNode *n = g_catHead;
     s32 i;
 
@@ -1065,7 +1065,7 @@ SceRegIndexEntry *func_00003E60(SceRegIndexEntry *cat) {
     return NULL;
 }
 
-SceRegCatNode *func_00003EA4(SceRegIndexEntry *cat) {
+SceRegCatNode *regFindCatNode(SceRegIndexEntry *cat) {
     SceRegCatNode *n = g_catHead;
     s32 i;
 
@@ -1078,11 +1078,11 @@ SceRegCatNode *func_00003EA4(SceRegIndexEntry *cat) {
 }
 
 #if FW_VERSION < 282
-s32 func_00003A3C(s32 index) {
+s32 regSetHiveDirty(s32 index) {
     s32 ret;
     SceRegHive *h;
 
-    h = func_00000B6C(index);
+    h = regGetHive(index);
     ret = 0x80082715;
     if (h != NULL) {
         h->unk4 = 1;
@@ -1093,15 +1093,15 @@ s32 func_00003A3C(s32 index) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/registry", func_00003A80);
+INCLUDE_ASM("nonmatchings/registry", regSetCatDirty);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00003A80(SceRegIndexEntry *cat) {
+s32 regSetCatDirty(SceRegIndexEntry *cat) {
     s32 ret;
     SceRegCatNode *n;
 
-    n = func_00003EA4(cat);
+    n = regFindCatNode(cat);
     ret = 0x8008272E;
     if (n != NULL) {
         n->unk4 = 1;
@@ -1116,7 +1116,7 @@ s32 func_00003EE8(s32 index) {
     s32 ret;
     SceRegHive *h;
 
-    h = func_00000B6C(index);
+    h = regGetHive(index);
     ret = 0x80082715;
     if (h != NULL) {
         h->unk4 = 1;
@@ -1128,11 +1128,11 @@ s32 func_00003EE8(s32 index) {
 INCLUDE_ASM("nonmatchings/registry", func_00003F2C);
 #endif
 
-s32 func_00003FE4(s32 index) {
+s32 regClearHiveDirty(s32 index) {
     s32 ret;
     SceRegHive *h;
 
-    h = func_00000B6C(index);
+    h = regGetHive(index);
     ret = 0x80082715;
     if (h != NULL) {
         h->unk4 = 0;
@@ -1146,7 +1146,7 @@ s32 func_00004024(SceRegIndexEntry *cat) {
     s32 ret;
     SceRegCatNode *n;
 
-    n = func_00003EA4(cat);
+    n = regFindCatNode(cat);
     ret = 0x8008272E;
     if (n != NULL) {
         n->unk4 = 0;
@@ -1155,11 +1155,11 @@ s32 func_00004024(SceRegIndexEntry *cat) {
     return ret;
 }
 #else
-s32 func_00004058(SceRegIndexEntry *cat) {
+s32 regClearCatDirty(SceRegIndexEntry *cat) {
     s32 ret;
     SceRegCatNode *n;
 
-    n = func_00003EA4(cat);
+    n = regFindCatNode(cat);
     ret = 0x8008272E;
     if (n != NULL) {
         n->unk4 = 0;
@@ -1174,15 +1174,15 @@ INCLUDE_ASM("nonmatchings/registry", func_000038A0);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/registry", func_00004058);
+INCLUDE_ASM("nonmatchings/registry", regCheckHiveDirty);
 #endif
 
 #if FW_VERSION < 152
-s32 func_00003B2C(s32 index) {
+s32 regCheckHiveDirty(s32 index) {
     s32 ret;
     SceRegHive *h;
 
-    h = func_00000B6C(index);
+    h = regGetHive(index);
     ret = 0x80082715;
     if (h != NULL) {
         if (h->unk4 == 1)
@@ -1194,11 +1194,11 @@ s32 func_00003B2C(s32 index) {
 }
 #endif
 
-s32 func_000040A0(SceRegIndexEntry *cat) {
+s32 regCheckCatDirty(SceRegIndexEntry *cat) {
     s32 ret;
     SceRegCatNode *n;
 
-    n = func_00003EA4(cat);
+    n = regFindCatNode(cat);
     ret = 0x8008272E;
     if (n != NULL) {
         if (n->unk4 == 1)
@@ -1236,9 +1236,9 @@ s32 sceRegSetKeyValue(s32 hd, const char *name, const void *buf, s32 size) {
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
     ret = 0x8008272E;
-    if (func_00003E60(cat) == NULL)
+    if (regIsCategoryOpen(cat) == NULL)
         goto end;
-    k = func_000050F4(cat, name, &data);
+    k = regFindKey(cat, name, &data);
     ret = 0x8008271D;
     if (k == NULL)
         goto end;
@@ -1258,7 +1258,7 @@ s32 sceRegSetKeyValue(s32 hd, const char *name, const void *buf, s32 size) {
         ret = 0x8008271C;
         goto end;
     }
-    func_00003A80(cat);
+    regSetCatDirty(cat);
     ret = 0;
 end:
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
@@ -1282,7 +1282,7 @@ s32 sceRegGetKeyInfo(s32 hd, const char *name, s32 *keyId, s32 *type, u32 *size)
     ret = 0x80082733;
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
-    ret = func_00004A28((SceRegIndexEntry *)hd, name, keyId, type, size);
+    ret = regGetKeyInfo((SceRegIndexEntry *)hd, name, keyId, type, size);
 end:
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
@@ -1304,7 +1304,7 @@ s32 sceRegGetKeyInfoByName(s32 hd, const char *name, s32 *type, u32 *size) {
     ret = 0x80082733;
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
-    ret = func_00004A28((SceRegIndexEntry *)hd, name, &keyId, type, size);
+    ret = regGetKeyInfo((SceRegIndexEntry *)hd, name, &keyId, type, size);
 end:
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
@@ -1313,7 +1313,7 @@ end:
     return ret;
 }
 
-s32 func_00004A28(SceRegIndexEntry *cat, const char *name, s32 *keyId, s32 *type, u32 *size) {
+s32 regGetKeyInfo(SceRegIndexEntry *cat, const char *name, s32 *keyId, s32 *type, u32 *size) {
     SceRegKeyEntry *k;
     void *data;
     s32 ret;
@@ -1322,9 +1322,9 @@ s32 func_00004A28(SceRegIndexEntry *cat, const char *name, s32 *keyId, s32 *type
     if (name == NULL)
         goto fail;
     ret = 0x8008272E;
-    if (func_00003E60(cat) == NULL)
+    if (regIsCategoryOpen(cat) == NULL)
         goto fail;
-    k = func_000050F4(cat, name, &data);
+    k = regFindKey(cat, name, &data);
     ret = 0x8008271D;
     if (k == NULL)
         goto fail;
@@ -1352,7 +1352,7 @@ fail:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/registry", func_00004A28);
+INCLUDE_ASM("nonmatchings/registry", regGetKeyInfo);
 #endif
 
 #if FW_VERSION == 100
@@ -1364,7 +1364,7 @@ s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size) {
     ret = 0x80082733;
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
-    ret = func_00004D6C((SceRegIndexEntry *)hd, keyId, buf, size);
+    ret = regGetKeyValue((SceRegIndexEntry *)hd, keyId, buf, size);
 end:
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
@@ -1388,10 +1388,10 @@ s32 sceRegGetKeyValueByName(s32 hd, const char *name, void *buf, s32 size) {
     ret = 0x80082733;
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
-    ret = func_00004A28((SceRegIndexEntry *)hd, name, &keyId, &type, &keySize);
+    ret = regGetKeyInfo((SceRegIndexEntry *)hd, name, &keyId, &type, &keySize);
     if (ret != 0)
         goto end;
-    ret = func_00004D6C((SceRegIndexEntry *)hd, keyId, buf, size);
+    ret = regGetKeyValue((SceRegIndexEntry *)hd, keyId, buf, size);
 end:
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
@@ -1403,12 +1403,12 @@ end:
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValueByName);
 #endif
 
-s32 func_00004D6C(SceRegIndexEntry *cat, s32 keyId, void *buf, s32 size) {
+s32 regGetKeyValue(SceRegIndexEntry *cat, s32 keyId, void *buf, s32 size) {
     SceRegKeyEntry *k;
     u32 v;
     s32 len;
 
-    if (func_00003E60(cat) == NULL)
+    if (regIsCategoryOpen(cat) == NULL)
         return 0x8008272E;
     k = (SceRegKeyEntry *)(keyId ^ 0xA0F3D97B);
     switch (k->type) {
@@ -1494,7 +1494,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000052B0);
 INCLUDE_ASM("nonmatchings/registry", func_00005390);
 #endif
 
-s32 func_00005548(SceRegCatData *d, const char *name) {
+s32 regKeyExists(SceRegCatData *d, const char *name) {
     SceRegKeyEntry *k = (SceRegKeyEntry *)((u8 *)d + 0x20);
     s32 i;
 
@@ -1510,7 +1510,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00005608);
 INCLUDE_ASM("nonmatchings/registry", func_00005718);
 
 #if FW_VERSION < 271
-SceRegKeyEntry *func_000050F4(SceRegIndexEntry *cat, const char *name, void **data) {
+SceRegKeyEntry *regFindKey(SceRegIndexEntry *cat, const char *name, void **data) {
     SceRegCatData *d = cat->opened->buf;
     SceRegKeyEntry *k = (SceRegKeyEntry *)((u8 *)d + 0x20);
     s32 i;
@@ -1530,7 +1530,7 @@ SceRegKeyEntry *func_000050F4(SceRegIndexEntry *cat, const char *name, void **da
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/registry", func_000050F4);
+INCLUDE_ASM("nonmatchings/registry", regFindKey);
 #endif
 
 #if FW_VERSION >= 282
@@ -1560,16 +1560,16 @@ INCLUDE_ASM("nonmatchings/registry", func_00005FF0);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00006524(const char *name) {
+s32 regCreateFile(const char *name) {
     char *path;
     s32 fd;
 
-    path = func_00006A48(0x108);
+    path = regAlloc(0x108);
     if (path == NULL)
         return 0;
     sprintf(path, D_000066DC, D_00006F8C, name);
     fd = sceIoOpen(path, 0x203, 0xFFF);
-    func_000062E0(path);
+    regFree(path);
     if (fd < 0)
         goto fail;
     return fd;
@@ -1577,24 +1577,24 @@ fail:
     return -1;
 }
 #else
-INCLUDE_ASM("nonmatchings/registry", func_00006524);
+INCLUDE_ASM("nonmatchings/registry", regCreateFile);
 #endif
 
 #if FW_VERSION < 201
-s32 func_000065E4(const char *name) {
+s32 regOpenFile(const char *name) {
     char *path;
     s32 fd;
 
-    path = func_00006A48(0x108);
+    path = regAlloc(0x108);
     if (path == NULL)
         return 0x80082712;
     sprintf(path, D_000066DC, D_00006F8C, name);
     fd = sceIoOpen(path, 3, 0);
-    func_000062E0(path);
+    regFree(path);
     return fd;
 }
 #else
-INCLUDE_ASM("nonmatchings/registry", func_000065E4);
+INCLUDE_ASM("nonmatchings/registry", regOpenFile);
 #endif
 
 #if FW_VERSION == 150
@@ -1614,13 +1614,13 @@ s32 func_00006EF0(s32 arg0) {
 #endif
 
 #if FW_VERSION == 100
-s32 func_00005F54(s32 arg0) {
+s32 regCloseFile(s32 arg0) {
     return -(sceIoClose(arg0) < 0);
 }
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/registry", func_00005F78);
+INCLUDE_ASM("nonmatchings/registry", regRemoveFile);
 #else
 s32 func_00006674(s32 arg0) {
     s32 var_v1;
@@ -1636,9 +1636,9 @@ INCLUDE_ASM("nonmatchings/registry", func_000066D0);
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/registry", func_000067A0);
+INCLUDE_ASM("nonmatchings/registry", regWriteFile);
 #else
-s32 func_000067A0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
+s32 regWriteFile(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
     s32 temp_v0;
     u32 temp_lo;
 
@@ -1650,9 +1650,9 @@ s32 func_000067A0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/registry", func_00006828);
+INCLUDE_ASM("nonmatchings/registry", regReadFile);
 #else
-s32 func_00006828(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
+s32 regReadFile(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
     s32 temp_v0;
     u32 temp_lo;
 
@@ -1664,14 +1664,14 @@ s32 func_00006828(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
 #endif
 
 #if FW_VERSION < 282
-s32 func_00006888(s32 fd, s32 offset, s32 whence) {
+s32 regSeekFile(s32 fd, s32 offset, s32 whence) {
     return ((s32)sceIoLseek(fd, offset, func_000061B4(whence)) < 0) ? -9 : 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/registry", func_00006888);
+INCLUDE_ASM("nonmatchings/registry", regSeekFile);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_000068EC);
+INCLUDE_ASM("nonmatchings/registry", regStatFile);
 
 #if FW_VERSION < 282
 s32 func_000061B4(s32 arg0) {
@@ -1700,7 +1700,7 @@ INCLUDE_RODATA("nonmatchings/registry", D_00006F94);
 #endif
 
 #if FW_VERSION == 100
-s32 func_000069A0(s32 arg0, s32 size) {
+s32 regHeapInit(s32 arg0, s32 size) {
     s32 ret;
 
     g_vplId = -1;
@@ -1714,11 +1714,11 @@ s32 func_000069A0(s32 arg0, s32 size) {
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/registry", func_000069A0);
+INCLUDE_ASM("nonmatchings/registry", regHeapInit);
 #endif
 
 #if FW_VERSION < 282
-void func_00006228(void) {
+void regHeapDelete(void) {
     if (g_vplId >= 0) {
         sceKernelDeleteVpl(g_vplId);
         g_vplId = -1;
@@ -1733,7 +1733,7 @@ void func_00006A0C(void) {
 }
 #endif
 
-void *func_00006A48(s32 size) {
+void *regAlloc(s32 size) {
     void *ptr = NULL;
     SceRegVplInfo info;
     s32 used;
@@ -1750,7 +1750,7 @@ void *func_00006A48(s32 size) {
 }
 
 #if FW_VERSION < 282
-void func_000062E0(void *ptr) {
+void regFree(void *ptr) {
     sceKernelFreeVpl(g_vplId, ptr);
 }
 #else
