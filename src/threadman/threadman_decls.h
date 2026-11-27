@@ -318,7 +318,7 @@ typedef struct SceThreadmanInfo {
     u32 readyPriorityMask[4]; /* 0x008: bit n set = readyQueue[n] not empty */
     SceThreadQueue readyQueue[128]; /* 0x018 */
     s32 dispatchDisabled; /* 0x418 */
-#if FW_VERSION == 100
+#if FW_VERSION < 103
     u8 unk41C[0x430 - 0x41C];
     u32 unk430; /* 0x430: system time low word at last update */
     u32 unk434; /* 0x434: system time high word */
