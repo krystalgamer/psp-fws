@@ -344,7 +344,13 @@ void func_0000104C(void) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00001054);
+#else
+void func_00001054(s32 arg0) {
+    scePaf_97FDA760(arg0, 1, (s32) &D_000014A0);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00001078);
 

@@ -10,6 +10,7 @@
   "func_00000D64": "void func_00000D64(void);",
   "func_00000DE8": "M2C_UNK func_00000DE8();",
   "func_0000104C": "void func_0000104C(void);",
+  "func_00001054": "void func_00001054(s32 arg0);",
   "func_000010D0": "M2C_UNK func_000010D0();",
   "module_stop": "s32 module_stop(void);",
   "scePaf_1941BB4E": "M2C_UNK scePaf_1941BB4E();",
@@ -23,6 +24,7 @@
   "scePaf_86B41BA3": "M2C_UNK scePaf_86B41BA3();",
   "scePaf_88784487": "s32 scePaf_88784487(M2C_UNK *);",
   "scePaf_8B38372A": "M2C_UNK scePaf_8B38372A(s32, M2C_UNK *);",
+  "scePaf_97FDA760": "s32 scePaf_97FDA760(s32, s32, s32);",
   "scePaf_A69BABE3": "M2C_UNK scePaf_A69BABE3(M2C_UNK, s32, s32);",
   "scePaf_B94FDC08": "M2C_UNK scePaf_B94FDC08();",
   "scePaf_D4FAE7D0": "s32 scePaf_D4FAE7D0(M2C_UNK *);",
@@ -38,6 +40,7 @@
  "vars": {
   "D_000013A4": "extern s32 D_000013A4;",
   "D_00001434": "extern s32 D_00001434;",
+  "D_000014A0": "extern M2C_UNK D_000014A0;",
   "D_000016F4": "extern M2C_UNK D_000016F4;",
   "D_00001734": "extern M2C_UNK D_00001734;",
   "D_0000189C": "extern s32 D_0000189C;"
