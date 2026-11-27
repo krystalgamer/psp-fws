@@ -76,6 +76,15 @@ TAILQ_HEAD(SceNetThreadList, SceNetThreadInfo);
 #define TI_TIMEDOUT 0x1
 #define TI_ABORTED  0x2
 
+TAILQ_HEAD(slpque, SceNetThreadInfo);
+#define SLPQUE_TABLESIZE 128
+#define LOOKUP(x) (((u32)(x) >> 8) & (SLPQUE_TABLESIZE - 1))
+
+struct timeval {
+    u32 tv_sec;
+    u32 tv_usec;
+};
+
 
 typedef struct {
     u32 low;
@@ -138,7 +147,8 @@ extern s32 D_0000AC30;
 extern s32 D_0000AC34;
 extern s32 D_0000AC38;
 extern s32 D_0000AC3C;
-extern s32 D_0000AC58;
+extern void (*D_0000AC58)(struct SceNetThreadInfo *);
+extern struct slpque D_0000AC6C[SLPQUE_TABLESIZE];
 extern s32 D_0000AF18;
 extern s32 D_0000AF1C;
 extern s32 D_0000AF20;
@@ -153,9 +163,9 @@ extern s32 D_0000AF40;
 extern struct SceNetThreadList D_0000AF44;
 extern struct calloutq D_0000AF4C;
 extern struct calloutq D_0000AF54;
-extern s32 D_0000AF5C;
-extern s32 D_0000AF60;
-extern s32 D_0000AF64;
+extern void (*D_0000AF5C)(struct SceNetThreadInfo *);
+extern void (*D_0000AF60)(s32, s32);
+extern void (*D_0000AF64)(s32);
 extern s32 D_0000AF68;
 extern s32 D_0000AF6C;
 extern s32 D_0000B06C;
@@ -186,6 +196,7 @@ extern s32 D_0000BC08;
 extern M2C_UNK D_0000BC0C;
 extern u8 D_0000BE54;
 
+void _sce_pspnet_adhoc_sabort(s32 a, s32 b);
 void _sce_pspnet_callout_cleanup(struct callout *c);
 void _sce_pspnet_callout_init(struct callout *c);
 void _sce_pspnet_callout_reset(struct callout *c, u32 ticks, void (*func)(void *), void *arg);
@@ -195,9 +206,12 @@ s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, u8 *arg3)
 s32 *_sce_pspnet_get_selwait_addr(void);
 struct SceNetThreadInfo *_sce_pspnet_get_threadinfo(SceUID thid);
 void _sce_pspnet_hashdone(void *hashtbl);
+void *_sce_pspnet_hashinit(s32 elements, u32 *hashmask);
 s32 _sce_pspnet_if_nulloutput(void);
 void _sce_pspnet_ifafree(void *ifa);
+void _sce_pspnet_inet_sabort(s32 a);
 struct SceNetThreadInfo *_sce_pspnet_lock_threadinfo(SceUID thid);
+void _sce_pspnet_microtime(struct timeval *tv);
 void _sce_pspnet_schednetintr(s32 arg0);
 void _sce_pspnet_schednetintr_with_evf(s32 arg0);
 void _sce_pspnet_selrecord(struct Unk_sceNet_lib_92633D8D_0 *arg0, s32 *arg1);
@@ -207,10 +221,10 @@ s32 _sce_pspnet_spllock_owner(void);
 void _sce_pspnet_splunlock(s32 arg0);
 s32 _sce_pspnet_start_of_adhoc_module_in_if_ethersubr_core(s32 arg0);
 s32 _sce_pspnet_start_of_adhoc_module_in_netintr(s32 arg0, s32 arg1);
-s32 _sce_pspnet_start_of_adhoc_module_in_sched(s32 arg0);
+s32 _sce_pspnet_start_of_adhoc_module_in_sched(void (*sabort)(s32, s32));
 s32 _sce_pspnet_start_of_inet_module_in_ifhandle_ether(s32 arg0);
 s32 _sce_pspnet_start_of_inet_module_in_netintr(s32 arg0, s32 arg1);
-s32 _sce_pspnet_start_of_inet_module_in_sched(s32 arg0, s32 arg1);
+s32 _sce_pspnet_start_of_inet_module_in_sched(void (*sleephook)(struct SceNetThreadInfo *), void (*sabort)(s32));
 s32 _sce_pspnet_start_of_ipv6_module_in_netintr(s32 arg0);
 s32 _sce_pspnet_start_of_pppoe_module_in_netintr(s32 arg0);
 s32 _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core(void);
@@ -225,8 +239,11 @@ void _sce_pspnet_tabort(struct SceNetThreadInfo *arg0);
 s32 _sce_pspnet_thread_busycount(void);
 struct SceNetThreadInfo *_sce_pspnet_thread_enter(void);
 s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *ti, s32 err);
-s32 _sce_pspnet_tiwakeup(s32, s32);
+void _sce_pspnet_tiwakeup(SceUID thid, void *ident);
+s32 _sce_pspnet_tsleep(void *ident, u32 timo);
+s32 _sce_pspnet_tsleep_usec(void *ident, u32 usec);
 void _sce_pspnet_unlock_threadinfo(struct SceNetThreadInfo *arg0);
+void _sce_pspnet_wakeup(void *ident);
 s32 func_00001B7C(void);
 void func_00001E74(void);
 s32 func_00001F0C(void);
@@ -236,13 +253,15 @@ void func_0000260C(void);
 void func_00002C34(void);
 s32 func_00002E8C(s32 prio, s32 stackSize);
 s32 func_00002FD8(SceSize args, void *argp);
-s32 func_00003028(void);
+void func_00003028(void);
 u32 func_000030A8(void *common);
 void func_000030A8_v100(struct SceNetThreadInfo *arg0);
 void func_00003100(struct SceNetThreadInfo *arg0);
+s32 func_0000331C(void);
 void func_00003380(void);
 void func_00003400(struct SceNetThreadInfo *arg0);
-s32 func_0000348C(void);
+void func_0000348C(void);
+s32 func_00003790(void);
 void func_000037E4(void);
 void func_00004430(s32 arg0, u8 *arg1);
 u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2);

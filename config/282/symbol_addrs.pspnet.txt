@@ -177,3 +177,5 @@ sceNetIfhandleIfDequeue = 0x00009A74; // type:func
 sceNetIfhandleIfDown = 0x00009A7C; // type:func
 sceNetMFreem = 0x00009A84; // type:func
 sceWlanDrv_lib_8D5F551B = 0x00009A8C; // type:func
+__udivdi3 = 0x00008E1C; // type:func
+__umoddi3 = 0x00009390; // type:func

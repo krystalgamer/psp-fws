@@ -317,7 +317,7 @@ func_0000885C = 0x00007BC8; // type:func rom:0x7C68
 func_00007E3C = 0x00007E5C; // type:func rom:0x7EFC
 func_00008598 = 0x000085A0; // type:func rom:0x8640
 func_00008794 = 0x0000879C; // type:func rom:0x883C
-func_00008E1C = 0x00008E28; // type:func rom:0x8EC8
-func_00009390 = 0x0000939C; // type:func rom:0x943C
+__udivdi3 = 0x00008E28; // type:func rom:0x8EC8
+__umoddi3 = 0x0000939C; // type:func rom:0x943C
 D_0000AF60_v271 = 0x0000AF60;
 // shared names (tools/add_version.py) end

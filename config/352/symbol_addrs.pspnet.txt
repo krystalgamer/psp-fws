@@ -258,3 +258,5 @@ D_0000BE54 = 0x0000BEA4;
 D_0000BE58 = 0x0000BEA8;
 D_0000BE5C = 0x0000BEAC;
 // shared names (tools/add_version.py) end
+__udivdi3 = 0x00008E1C; // type:func
+__umoddi3 = 0x00009390; // type:func
