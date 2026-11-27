@@ -466,6 +466,7 @@ extern u8 D_00027DD0[26];
 extern s32 D_00027DD4;
 extern s32 D_0002B568;
 extern s32 D_0002B5CC;
+extern s32 D_0002B8C8;
 extern s32 D_0002BA10[1][32];
 extern s32 D_0002BA90[1]; /* per-unit media status, 0x1022 = ? */
 extern M2C_UNK D_0002BAA0;
