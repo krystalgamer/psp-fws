@@ -91,3 +91,4 @@ func_00003970 = 0x00003548; // type:func rom:0x35C8
 func_00003980 = 0x00003558; // type:func rom:0x35D8
 func_0000399C = 0x00003574; // type:func rom:0x35F4
 // shared names (tools/add_version.py) end
+g_intrInfo = 0x00003950; // rom:0x3A00

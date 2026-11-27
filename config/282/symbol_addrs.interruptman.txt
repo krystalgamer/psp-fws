@@ -65,3 +65,4 @@ sceKernelAllocHeapMemory = 0x00003A00; // type:func
 sceKernelFreeHeapMemory = 0x00003A08; // type:func
 sceKernelRegisterSuspendHandler = 0x00003A10; // type:func
 sceKernelRegisterResumeHandler = 0x00003A18; // type:func
+g_intrInfo = 0x00003E00; // rom:0x3EC0

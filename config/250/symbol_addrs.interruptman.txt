@@ -59,7 +59,7 @@ sceKernelFreeHeapMemory = 0x00003688; // type:func
 sceKernelRegisterSuspendHandler = 0x00003690; // type:func
 sceKernelRegisterResumeHandler = 0x00003698; // type:func
 // shared names (tools/add_version.py) begin
-D_00003910 = 0x00003A40; // rom:0x3AC0
+g_intrInfo = 0x00003A40; // rom:0x3AC0
 D_00003928 = 0x00003A58; // rom:0x3AD8
 D_00003930 = 0x00003A60; // rom:0x3AE0
 D_00003950 = 0x00003A80; // rom:0x3B00

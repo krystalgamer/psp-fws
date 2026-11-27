@@ -57,7 +57,7 @@ sceKernelRegisterSuspendHandler = 0x00003588; // type:func
 sceKernelRegisterResumeHandler = 0x00003590; // type:func
 // shared names (tools/add_version.py) begin
 D_000035E4 = 0x000035C4; // rom:0x3644
-D_00003910 = 0x000038F0; // rom:0x3980
+g_intrInfo = 0x000038F0; // rom:0x3980
 D_00003928 = 0x00003908; // rom:0x3998
 D_00003930 = 0x00003910; // rom:0x39A0
 D_00003950 = 0x00003930; // rom:0x39C0
