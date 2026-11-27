@@ -464,6 +464,7 @@
   "D_0002EB8C": "extern s32 D_0002EB8C;",
   "D_0002EB90": "extern s32 D_0002EB90;",
   "D_0002EB94": "extern s32 D_0002EB94;",
+  "D_0002EBB0": "extern char D_0002EBB0[16]; /* inet_ntoa buf */",
   "D_0002EC1C": "extern s32 D_0002EC1C;",
   "D_0002F288": "extern char D_0002F288[18] __attribute__((aligned(4)));",
   "D_0002F500": "extern s32 D_0002F500;",

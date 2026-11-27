@@ -3050,7 +3050,12 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012550);
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000129D0);
+char *inet_ntoa(struct in_addr ina) {
+    ina.s_addr = __builtin_allegrex_wsbw(ina.s_addr);
+    func_0002CCAC(D_0002EBB0, "%d.%d.%d.%d", ina.s_addr >> 24, (ina.s_addr >> 16) & 0xff,
+                  (ina.s_addr >> 8) & 0xff, ina.s_addr & 0xff);
+    return D_0002EBB0;
+}
 #endif
 
 #if FW_VERSION >= 282

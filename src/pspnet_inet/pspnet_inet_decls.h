@@ -1522,6 +1522,7 @@ extern s32 D_0002EB88;
 extern s32 D_0002EB8C;
 extern s32 D_0002EB90;
 extern s32 D_0002EB94;
+extern char D_0002EBB0[16]; /* inet_ntoa buf */
 extern s32 D_0002EC1C;
 extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F500;
