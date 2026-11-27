@@ -1,4 +1,4 @@
-/* cflags[100,102]: -O2 */
+/* cflags[100,102,103]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "threadman_decls.h"
@@ -259,7 +259,7 @@ s32 func_00000688(s32 arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_000006A8);
 #endif
 
@@ -628,7 +628,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00000B84);
 INCLUDE_ASM("nonmatchings/threadman", func_00000BD8);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00000D9C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000010B4);
@@ -650,7 +650,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00001430);
 INCLUDE_ASM("nonmatchings/threadman", func_000014BC);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00001584);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000178C);
@@ -662,7 +662,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00001930);
 INCLUDE_ASM("nonmatchings/threadman", func_0000114C);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferThreadEventHandlerStatus);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateCallback);
@@ -716,7 +716,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00002214);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000022E4);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00001AE4);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00001CB0);
@@ -742,7 +742,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00001FC4);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000233C);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_000021B4);
 #endif
 
@@ -825,7 +825,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_000029B8);
 const char D_0001497C[] = "WaitQ";
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00002614);
 #endif
 
@@ -842,7 +842,7 @@ s32 func_00002614(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000272C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00002868);
@@ -862,7 +862,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000310C);
 INCLUDE_ASM("nonmatchings/threadman", func_0000289C);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSleepThread);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSleepThreadCB);
@@ -876,7 +876,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelWakeupThread);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDonateWakeupThread);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSuspendThread);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelResumeThread);
@@ -886,7 +886,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelSuspendAllUserThreads);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitThreadEnd);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000329C);
 #else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitThreadEndCB);
@@ -907,7 +907,7 @@ void func_00003518(SceThread *thread) {
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDelayThread);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00003580);
 #else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDelayThreadCB);
@@ -915,7 +915,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelDelayThreadCB);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDelaySysClockThread);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00003788);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000039BC);
@@ -975,7 +975,7 @@ void func_00003CF8(struct Unk_func_00003CF8_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateSema);
 #endif
 
@@ -985,7 +985,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014CB0);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014CBC);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00003B98);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00003CF4);
@@ -1152,7 +1152,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelSignalSema);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitSema);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00003F40);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00004268);
@@ -1282,7 +1282,7 @@ fail:
 INCLUDE_ASM("nonmatchings/threadman", sceKernelPollSema);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelSema);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferSemaStatus);
@@ -1333,7 +1333,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00004B68);
 const char D_00014CF0[] = "WaitQ";
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_000048B0);
 #endif
 
@@ -1346,7 +1346,7 @@ s32 func_000048B0(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00004948);
 #else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateEventFlag);
@@ -1358,7 +1358,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014D10);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014D1C);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00004AE0);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00004C3C);
@@ -1447,7 +1447,7 @@ s32 sceKernelDeleteEventFlag(SceUID evid) {
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteEventFlag);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetEventFlag);
 #endif
 
@@ -1526,7 +1526,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelClearEventFlag);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitEventFlag);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00004FD8);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000053C8);
@@ -1613,7 +1613,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00006CB0);
 const char D_00014D58[] = "WaitQ";
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_000059D4);
 #endif
 
@@ -1626,7 +1626,7 @@ s32 func_000059D4(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00005A6C);
 #endif
 
@@ -1640,7 +1640,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014D7C);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014D88);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00005BF0);
 #endif
 
@@ -1725,7 +1725,7 @@ s32 sceKernelDeleteMbx(SceUID id) {
 INCLUDE_ASM("nonmatchings/threadman", func_00005D40);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00005E18);
 #endif
 
@@ -1737,7 +1737,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelSendMbx);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReceiveMbx);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00005FD8);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00006314);
@@ -1794,7 +1794,7 @@ s32 func_000068A0(void) {
 const char D_00014DF4[] = "WaitQ";
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_000068C0);
 #endif
 
@@ -1807,7 +1807,7 @@ s32 func_000068C0(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00006958);
 #endif
 
@@ -1821,7 +1821,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014E18);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014E24);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00006BD0);
 #endif
 
@@ -1906,7 +1906,7 @@ s32 sceKernelDeleteMsgPipe(SceUID id) {
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSendMsgPipe);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00006D34);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000072D8);
@@ -1922,7 +1922,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelTrySendMsgPipe);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReceiveMsgPipe);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00007754);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00007D54);
@@ -2004,7 +2004,7 @@ s32 func_000089A0(SceSysmemUidCB *cb) {
 const char D_00014E5C[] = "WaitQ";
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_000089F0);
 #endif
 
@@ -2023,7 +2023,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014E78);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014E80);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00008A88);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00008D2C);
@@ -2114,7 +2114,7 @@ s32 sceKernelDeleteVpl(SceUID id) {
 INCLUDE_ASM("nonmatchings/threadman", sceKernelAllocateVpl);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00008E90);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000091A0);
@@ -2164,7 +2164,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000989C);
 const char D_00014EC8[] = "WaitQ";
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00009918);
 #endif
 
@@ -2177,7 +2177,7 @@ s32 func_00009918(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_000099B0);
 #endif
 
@@ -2191,7 +2191,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014EDC);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014EE4);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00009CC0);
 #endif
 
@@ -2491,7 +2491,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteFpl);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelAllocateFpl);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00009E24);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000A100);
@@ -2553,7 +2553,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000A8D0);
 const char D_00014F18[] = "WaitQ";
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000A968);
 #endif
 
@@ -2693,7 +2693,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelSetAlarm);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetSysClockAlarm);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000BC10);
 #endif
 
@@ -2711,7 +2711,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelUSec2SysClock);
 INCLUDE_ASM("nonmatchings/threadman", func_0000C46C);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelAlarm);
 #endif
 
@@ -2729,7 +2729,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000BFC0);
 INCLUDE_ASM("nonmatchings/threadman", func_0000C048);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000C0C8);
 #endif
 
@@ -2737,7 +2737,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000C0C8);
 INCLUDE_ASM("nonmatchings/threadman", func_0000C638);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferAlarmStatus);
 #endif
 
@@ -2745,7 +2745,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelReferAlarmStatus);
 INCLUDE_ASM("nonmatchings/threadman", func_0000C274);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000C30C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000C44C);
@@ -2972,7 +2972,7 @@ s32 func_0000DF00(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000DF3C);
 #endif
 
@@ -2992,7 +2992,7 @@ s32 func_0000DF3C(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000E100);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000E220);
@@ -3086,7 +3086,7 @@ s32 func_0000F264(void) {
 }
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelAllocateKTLS);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelFreeKTLS);
@@ -3108,7 +3108,7 @@ void sceKernelGetKTLS(s32 arg0) {
 INCLUDE_ASM("nonmatchings/threadman", func_0000E524);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000E628);
 #endif
 
@@ -3120,7 +3120,7 @@ void sceKernelGetKTLS(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", module_bootstart);
 #endif
 
@@ -3137,7 +3137,7 @@ s32 func_0000ED50(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000ED60);
 #endif
 
@@ -3183,7 +3183,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000ED74);
 INCLUDE_ASM("nonmatchings/threadman", func_0000EE28);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000EE44);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000EF10);
@@ -3605,7 +3605,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013B38);
 INCLUDE_ASM("nonmatchings/threadman", func_0001415C);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000F50C);
 #endif
 
@@ -3632,7 +3632,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000F570);
 INCLUDE_ASM("nonmatchings/threadman", func_0000F880);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000F994);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0001007C);
@@ -3652,7 +3652,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00010CFC);
 INCLUDE_ASM("nonmatchings/threadman", func_000102C8);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00010394);
 #endif
 
@@ -3941,7 +3941,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelExitDeleteThread);
 INCLUDE_ASM("nonmatchings/threadman", func_000109C4);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00010EF0);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00011014);
@@ -3957,7 +3957,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelTerminateDeleteThread);
 INCLUDE_ASM("nonmatchings/threadman", func_000110A0);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0001125C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00011340);
@@ -4110,7 +4110,7 @@ s32 sceKernelCheckThreadKernelStack(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_000126CC);
 #endif
 
@@ -4122,7 +4122,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCheckThreadStack);
 INCLUDE_ASM("nonmatchings/threadman", func_000126C4);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00012888);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000129FC);
@@ -4146,7 +4146,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelReferThreadRunStatus);
 INCLUDE_ASM("nonmatchings/threadman", func_00012F3C);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_000131DC);
 #endif
 
@@ -4176,7 +4176,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00015128);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000153A8);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00013428);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0001352C);
@@ -4215,7 +4215,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013AC4);
 const char D_0001536C[] = "WaitQ";
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00013C88);
 #endif
 

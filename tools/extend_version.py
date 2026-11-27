@@ -63,6 +63,16 @@ def branch(conds, v):
 
 
 def rewrite(text, ref, new, versions):
+    # a condition that names NEW explicitly was written for NEW: leave that whole line alone
+    lines = text.split("\n")
+    for i, ln in enumerate(lines):
+        if re.match(r"^\s*#\s*(?:if|elif)\b", ln) and re.search(rf"FW_VERSION\s*(?:==|!=)\s*{new}\b", ln):
+            lines[i] = ln.replace("FW_VERSION", "FW_VERSI\0ON")
+    out = _rewrite("\n".join(lines), ref, new, versions)
+    return out.replace("FW_VERSI\0ON", "FW_VERSION")
+
+
+def _rewrite(text, ref, new, versions):
     # a chain whose conditions already tell NEW apart from REF was written for NEW: leave it
     protected = []
     for st, en in chains(text):
@@ -75,8 +85,9 @@ def rewrite(text, ref, new, versions):
             # version after REF], i.e. it could not have been written without knowing NEW
             nxt = min([v for v in versions if v > ref and v != new] or [1 << 30])
             consts = [int(n) for c in conds for n in re.findall(r"FW_VERSION\s*(?:==|!=|<=|>=|<|>)\s*(\d+)", c)]
-            knows_new = any(ref < n < nxt for n in consts) or any(
-                re.search(rf"FW_VERSION\s*(?:==|!=)\s*{new}\b", c) for c in conds)
+            # only an explicit `== NEW` / `!= NEW` shows the chain was written for NEW (a bound like `< 103`
+            # written when the version before NEW was added does not)
+            knows_new = any(re.search(rf"FW_VERSION\s*(?:==|!=)\s*{new}\b", c) for c in conds)
             if len(conds) > 1 and knows_new and branch(conds, new) != branch(conds, ref):
                 protected.append((st, en))
         except ValueError:
