@@ -691,7 +691,9 @@ struct in_ifaddr {
     u8 unk34[0x54 - 0x34];
     TAILQ_ENTRY(in_ifaddr) ia_list;     /* 0x54 */
     struct sockaddr_in ia_addr;         /* 0x5C */
+    struct sockaddr_in ia_dstaddr;      /* 0x6C ia_broadaddr */
 };
+#define ia_broadaddr ia_dstaddr
 #define ia_ifp ia_ifa.ifa_ifp
 
 /* struct rt_addrinfo (4.4BSD route.h) */
@@ -877,6 +879,19 @@ struct inpcbtable {
         (elm)->field.le_next->field.le_prev = (elm)->field.le_prev; \
     *(elm)->field.le_prev = (elm)->field.le_next; \
 } while (0)
+#define IN_MULTICAST(a) (((u32)(a) & __builtin_allegrex_wsbw(0xF0000000)) == __builtin_allegrex_wsbw(0xE0000000))
+#define RTFREE(rt) do { \
+    if ((rt)->rt_refcnt <= 1) \
+        rtfree(rt); \
+    else \
+        (rt)->rt_refcnt--; \
+} while (0)
+#define IFP_TO_IA(ifp, ia) { \
+    struct ifaddr *ifa; \
+    for (ifa = (ifp)->if_addrlist.tqh_first; ifa && ifa->ifa_addr->sa_family != AF_INET; ifa = ifa->ifa_list.tqe_next) \
+        continue; \
+    (ia) = (struct in_ifaddr *)ifa; \
+}
 
 struct SceTailqHead {
     void *tqh_first;
@@ -1118,6 +1133,10 @@ struct Unk_func_0002A244_0 {
     s32 unk4BC;
 };
 
+struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
+
+struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
+
 extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
 extern s32 D_0002BEC0;
@@ -1193,6 +1212,8 @@ extern struct inpcbtable D_0002DD10;
 extern s32 D_0002DF50;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
+extern s32 D_0002E5F4; /* lowportmin */
+extern s32 D_0002E5F8; /* lowportmax */
 extern s32 D_0002E798;
 extern s32 D_0002E79C;
 extern s32 D_0002E7A4;
@@ -1452,16 +1473,22 @@ s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
 void func_0002D420();
 struct socket *getsock(s32 s);
 s32 if_rtdel(struct rtentry *rt, void *arg);
+struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr);
+struct ifaddr *ifa_ifwithladdr(struct sockaddr *addr);
 void in_losing(struct inpcb *inp);
 s32 in_pcballoc(struct socket *so, void *v);
+s32 in_pcbbind(void *v, struct mbuf *nam);
+s32 in_pcbconnect(void *v, struct mbuf *nam);
 void in_pcbdetach(void *v);
 void in_pcbdisconnect(void *v);
 void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize);
 struct inpcb *in_pcblookup_bind(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg);
 struct inpcb *in_pcblookup_connect(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg);
+struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
 s32 in_pcbnotify(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg, s32 errno, void (*notify)(struct inpcb *, s32));
 void in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, s32 errno, void (*notify)(struct inpcb *, s32));
 void in_pcbstate(struct inpcb *inp, s32 state);
+struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp);
 void lortrequest(s32 cmd, struct rtentry *rt);
 s32 module_start(void);
 s32 module_stop(void);

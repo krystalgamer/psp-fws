@@ -1524,11 +1524,11 @@ s32 if_rtdel(struct rtentry *rt, void *arg) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00009144);
+INCLUDE_ASM("nonmatchings/pspnet_inet", ifa_ifwithaddr);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00009240);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000931C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", ifa_ifwithladdr);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000093F0);
@@ -2708,15 +2708,253 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000130B8);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012EC0);
+s32 in_pcbbind(void *v, struct mbuf *nam) {
+    struct inpcb *inp = v;
+    struct socket *so = inp->inp_socket;
+    struct inpcbtable *table = inp->inp_table;
+    struct sockaddr_in *sin;
+    u16 lport = 0;
+    s32 wild = 0, reuseport = (so->so_options & 0x200); /* SO_REUSEPORT */
+
+    if (in_ifaddrhead.tqh_first == 0) {
+        return 125; /* EADDRNOTAVAIL */
+    }
+    if (inp->inp_lport || inp->inp_laddr.s_addr != __builtin_allegrex_wsbw(0)) {
+        return 22; /* EINVAL */
+    }
+    if ((so->so_options & (0x4 | 0x200)) == 0) {
+        wild = 1;
+    }
+    if (nam == 0) {
+        goto noname;
+    }
+    sin = mtod(nam, struct sockaddr_in *);
+    if (nam->m_len != sizeof(*sin)) {
+        return 22;
+    }
+    lport = sin->sin_port;
+    if (IN_MULTICAST(sin->sin_addr.s_addr)) {
+        if (so->so_options & 0x4) {
+            reuseport = 0x4 | 0x200;
+        }
+    } else if (sin->sin_addr.s_addr != __builtin_allegrex_wsbw(0)) {
+        sin->sin_port = 0;
+        if (ifa_ifwithaddr((struct sockaddr *)sin) == 0) {
+            return 125;
+        }
+    }
+    if (lport) {
+        struct inpcb *t;
+
+        t = func_00013478(table, sin->sin_addr, lport, wild);
+        if (t && (reuseport & t->inp_socket->so_options) == 0) {
+            return 112; /* EADDRINUSE */
+        }
+    }
+    inp->inp_laddr = sin->sin_addr;
+
+noname:
+    if (lport == 0) {
+        s32 cnt;
+        u16 min, max;
+        u16 *lastport;
+
+        if (inp->inp_flags & 0x20) { /* INP_LOWPORT */
+            min = D_0002E5F4;
+            max = D_0002E5F8;
+            lastport = &table->inpt_lastlow;
+        } else {
+            min = D_0002E5EC;
+            max = D_0002E5F0;
+            lastport = &table->inpt_lastport;
+        }
+        if (min > max) {
+            u16 swp;
+
+            swp = min;
+            min = max;
+            max = swp;
+        }
+        lport = *lastport - 1;
+        for (cnt = max - min + 1; cnt; cnt--, lport--) {
+            if (lport < min || lport > max) {
+                lport = max;
+            }
+            if (!func_00013478(table, inp->inp_laddr, (u16)__builtin_allegrex_wsbh(lport), 1)) {
+                goto found;
+            }
+        }
+        if (inp->inp_laddr.s_addr != __builtin_allegrex_wsbw(0)) {
+            inp->inp_laddr.s_addr = __builtin_allegrex_wsbw(0);
+        }
+        return 11; /* EAGAIN */
+    found:
+        inp->inp_flags |= 0x40; /* INP_ANONPORT */
+        *lastport = lport;
+        lport = __builtin_allegrex_wsbh(lport);
+    }
+    inp->inp_lport = lport;
+    in_pcbstate(inp, INP_BOUND);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013114);
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000133CC);
+s32 in_pcbbind(void *v, struct mbuf *nam) {
+    struct inpcb *inp = v;
+    struct socket *so = inp->inp_socket;
+    struct inpcbtable *table = inp->inp_table;
+    struct sockaddr_in *sin;
+    u16 lport = 0;
+    s32 wild = 0, reuseport = (so->so_options & 0x200); /* SO_REUSEPORT */
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013640);
+    if (in_ifaddrhead.tqh_first == 0) {
+        return 125; /* EADDRNOTAVAIL */
+    }
+    if (inp->inp_lport || inp->inp_laddr.s_addr != __builtin_allegrex_wsbw(0)) {
+        return 22; /* EINVAL */
+    }
+    if ((so->so_options & (0x4 | 0x200)) == 0) {
+        wild = 1;
+    }
+    if (nam == 0) {
+        goto noname;
+    }
+    sin = mtod(nam, struct sockaddr_in *);
+    if (nam->m_len != sizeof(*sin)) {
+        return 22;
+    }
+    lport = sin->sin_port;
+    if (IN_MULTICAST(sin->sin_addr.s_addr)) {
+        if (so->so_options & 0x4) {
+            reuseport = 0x4 | 0x200;
+        }
+    } else if (sin->sin_addr.s_addr != __builtin_allegrex_wsbw(0)) {
+        sin->sin_port = 0;
+        if (ifa_ifwithaddr((struct sockaddr *)sin) == 0) {
+            return 125;
+        }
+    }
+    if (lport) {
+        struct inpcb *t;
+
+        t = in_pcblookup_port(table, sin->sin_addr, lport, wild);
+        if (t && (reuseport & t->inp_socket->so_options) == 0) {
+            return 112; /* EADDRINUSE */
+        }
+    }
+    inp->inp_laddr = sin->sin_addr;
+
+noname:
+    if (lport == 0) {
+        s32 cnt;
+        u16 min, max;
+        u16 *lastport;
+
+        if (inp->inp_flags & 0x20) { /* INP_LOWPORT */
+            min = D_0002E5F4;
+            max = D_0002E5F8;
+            lastport = &table->inpt_lastlow;
+        } else {
+            min = D_0002E5EC;
+            max = D_0002E5F0;
+            lastport = &table->inpt_lastport;
+        }
+        if (min > max) {
+            u16 swp;
+
+            swp = min;
+            min = max;
+            max = swp;
+        }
+        lport = *lastport - 1;
+        for (cnt = max - min + 1; cnt; cnt--, lport--) {
+            if (lport < min || lport > max) {
+                lport = max;
+            }
+            if (!in_pcblookup_port(table, inp->inp_laddr, (u16)__builtin_allegrex_wsbh(lport), 1)) {
+                goto found;
+            }
+        }
+        if (inp->inp_laddr.s_addr != __builtin_allegrex_wsbw(0)) {
+            inp->inp_laddr.s_addr = __builtin_allegrex_wsbw(0);
+        }
+        return 11; /* EAGAIN */
+    found:
+        inp->inp_flags |= 0x40; /* INP_ANONPORT */
+        *lastport = lport;
+        lport = __builtin_allegrex_wsbh(lport);
+    }
+    inp->inp_lport = lport;
+    in_pcbstate(inp, INP_BOUND);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
+s32 in_pcbconnect(void *v, struct mbuf *nam) {
+    struct inpcb *inp = v;
+    struct in_ifaddr *ia;
+    struct sockaddr_in *ifaddr = NULL;
+    struct sockaddr_in *sin = mtod(nam, struct sockaddr_in *);
+    s32 error;
+
+    if (nam->m_len != sizeof(*sin)) {
+        return 22; /* EINVAL */
+    }
+    if (sin->sin_family != AF_INET) {
+        return 106; /* EAFNOSUPPORT */
+    }
+    if (sin->sin_port == 0) {
+        return 125; /* EADDRNOTAVAIL */
+    }
+    if (in_ifaddrhead.tqh_first != 0) {
+        if (sin->sin_addr.s_addr == __builtin_allegrex_wsbw(0)) {
+            sin->sin_addr = in_ifaddrhead.tqh_first->ia_addr.sin_addr;
+        } else if (sin->sin_addr.s_addr == __builtin_allegrex_wsbw(0xFFFFFFFF)) {
+            for (ia = in_ifaddrhead.tqh_first; ia != NULL; ia = ia->ia_list.tqe_next) {
+                if (ia->ia_ifp->if_flags & 0x2) { /* IFF_BROADCAST */
+                    sin->sin_addr = ia->ia_broadaddr.sin_addr;
+                    break;
+                }
+            }
+        }
+    }
+    if (inp->inp_laddr.s_addr == __builtin_allegrex_wsbw(0)) {
+        s32 error;
+        ifaddr = in_selectsrc(sin, &inp->inp_route, inp->inp_socket->so_options, inp->inp_moptions, &error);
+        if (ifaddr == NULL) {
+            if (error == 0) {
+                error = 125;
+            }
+            return error;
+        }
+    }
+    if (in_pcblookup_connect(inp->inp_table, sin->sin_addr, sin->sin_port,
+                             inp->inp_laddr.s_addr != __builtin_allegrex_wsbw(0) ? inp->inp_laddr : ifaddr->sin_addr,
+                             inp->inp_lport) != 0) {
+        return 112; /* EADDRINUSE */
+    }
+    if (inp->inp_laddr.s_addr == __builtin_allegrex_wsbw(0)) {
+        if (inp->inp_lport == 0) {
+            error = in_pcbbind(inp, NULL);
+            if (error == 11) {
+                return error;
+            }
+        }
+        inp->inp_laddr = ifaddr->sin_addr;
+    }
+    inp->inp_faddr = sin->sin_addr;
+    inp->inp_fport = sin->sin_port;
+    in_pcbstate(inp, INP_CONNECTED);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_pcbconnect);
 #endif
 
 #if FW_VERSION >= 282
@@ -2754,7 +2992,45 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001361C);
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000139A4);
+struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard) {
+    struct inpcb *inp, *match = NULL;
+    s32 matchwild = 3, wildcard;
+    u16 lport = lport_arg;
+
+    for (inp = table->inpt_queue.cqh_first; inp != (struct inpcb *)&table->inpt_queue; inp = inp->inp_queue.cqe_next) {
+        if (inp->inp_lport != lport) {
+            continue;
+        }
+        wildcard = 0;
+        if (inp->inp_faddr.s_addr != __builtin_allegrex_wsbw(0)) {
+            wildcard++;
+        }
+        if (inp->inp_laddr.s_addr == __builtin_allegrex_wsbw(0)) {
+            if (laddr.s_addr != __builtin_allegrex_wsbw(0)) {
+                wildcard++;
+            }
+        } else {
+            if (laddr.s_addr == __builtin_allegrex_wsbw(0)) {
+                wildcard++;
+            } else {
+                if (inp->inp_laddr.s_addr != laddr.s_addr) {
+                    continue;
+                }
+            }
+        }
+        if (wildcard && !lookup_wildcard) {
+            continue;
+        }
+        if (wildcard < matchwild) {
+            match = inp;
+            matchwild = wildcard;
+            if (matchwild == 0) {
+                break;
+            }
+        }
+    }
+    return match;
+}
 
 struct inpcb *in_pcblookup_connect(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg) {
     struct inpcbhead *head;
@@ -2832,11 +3108,113 @@ void in_pcbstate(struct inpcb *inp, s32 state) {
 }
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001384C);
+struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp) {
+    struct in_ifaddr *ia;
+
+    ia = NULL;
+    if (ro->ro_rt &&
+        (((struct sockaddr_in *)&ro->ro_dst)->sin_addr.s_addr != sin->sin_addr.s_addr || soopts & 0x10)) {
+        RTFREE(ro->ro_rt);
+        ro->ro_rt = NULL;
+    }
+    if ((soopts & 0x10) == 0 && (ro->ro_rt == NULL || ro->ro_rt->rt_ifp == NULL)) {
+        ro->ro_dst.sa_family = AF_INET;
+        ro->ro_dst.sa_len = sizeof(struct sockaddr_in);
+        ((struct sockaddr_in *)&ro->ro_dst)->sin_addr = sin->sin_addr;
+        rtalloc(ro);
+    }
+    if (ro->ro_rt && !(ro->ro_rt->rt_ifp->if_flags & IFF_LOOPBACK)) {
+        ia = (struct in_ifaddr *)ro->ro_rt->rt_ifa;
+    }
+    if (ia == NULL) {
+        u16 fport = sin->sin_port;
+
+        sin->sin_port = 0;
+        ia = (struct in_ifaddr *)ifa_ifwithladdr((struct sockaddr *)sin);
+        sin->sin_port = fport;
+        if (ia == 0) {
+            for (ia = in_ifaddrhead.tqh_first; ia != NULL; ia = ia->ia_list.tqe_next) {
+                if (!(ia->ia_ifp->if_flags & IFF_LOOPBACK)) {
+                    break;
+                }
+            }
+        }
+        if (ia == NULL) {
+            *errorp = 125;
+            return NULL;
+        }
+    }
+    if (IN_MULTICAST(sin->sin_addr.s_addr) && mopts != NULL) {
+        struct ip_moptions *imo;
+        struct ifnet *ifp;
+
+        imo = mopts;
+        if (imo->imo_multicast_ifp != NULL) {
+            ifp = imo->imo_multicast_ifp;
+            IFP_TO_IA(ifp, ia);
+            if (ia == 0) {
+                *errorp = 125;
+                return NULL;
+            }
+        }
+    }
+    return &ia->ia_addr;
+}
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013E54);
+struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp) {
+    struct in_ifaddr *ia;
+
+    ia = NULL;
+    if (ro->ro_rt &&
+        (((struct sockaddr_in *)&ro->ro_dst)->sin_addr.s_addr != sin->sin_addr.s_addr || soopts & 0x10)) {
+        RTFREE(ro->ro_rt);
+        ro->ro_rt = NULL;
+    }
+    if ((soopts & 0x10) == 0 && (ro->ro_rt == NULL || ro->ro_rt->rt_ifp == NULL)) {
+        ro->ro_dst.sa_family = AF_INET;
+        ro->ro_dst.sa_len = sizeof(struct sockaddr_in);
+        ((struct sockaddr_in *)&ro->ro_dst)->sin_addr = sin->sin_addr;
+        rtalloc(ro);
+    }
+    if (ro->ro_rt && !(ro->ro_rt->rt_ifp->if_flags & IFF_LOOPBACK)) {
+        ia = (struct in_ifaddr *)ro->ro_rt->rt_ifa;
+    }
+    if (ia == NULL) {
+        u16 fport = sin->sin_port;
+
+        sin->sin_port = 0;
+        ia = (struct in_ifaddr *)ifa_ifwithladdr((struct sockaddr *)sin);
+        sin->sin_port = fport;
+        if (ia == 0) {
+            for (ia = in_ifaddrhead.tqh_first; ia != NULL; ia = ia->ia_list.tqe_next) {
+                if (!(ia->ia_ifp->if_flags & IFF_LOOPBACK)) {
+                    break;
+                }
+            }
+        }
+        if (ia == NULL) {
+            *errorp = 125;
+            return NULL;
+        }
+    }
+    if (IN_MULTICAST(sin->sin_addr.s_addr) && mopts != NULL) {
+        struct ip_moptions *imo;
+        struct ifnet *ifp;
+
+        imo = mopts;
+        if (imo->imo_multicast_ifp != NULL) {
+            ifp = imo->imo_multicast_ifp;
+            IFP_TO_IA(ifp, ia);
+            if (ia == 0) {
+                *errorp = 125;
+                return NULL;
+            }
+        }
+    }
+    return &ia->ia_addr;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -2976,46 +3354,7 @@ void in_setpeeraddr(struct inpcb *inp, struct mbuf *nam) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
-s32 in_pcbnotify(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg,
-                  s32 errno, void (*notify)(struct inpcb *, s32)) {
-    struct inpcbhead *head;
-    struct inpcb *inp, *ninp;
-    u16 fport = fport_arg, lport = lport_arg;
-    s32 nmatch;
-
-    if (faddr.s_addr == __builtin_allegrex_wsbw(0) || notify == NULL) {
-        return 0;
-    }
-    nmatch = 0;
-    head = INPCBHASH_CONNECT(table, faddr, fport, laddr, lport);
-    for (inp = head->lh_first; inp != NULL; inp = ninp) {
-        ninp = inp->inp_hash.le_next;
-        if (inp->inp_faddr.s_addr == faddr.s_addr && inp->inp_fport == fport &&
-            inp->inp_lport == lport && inp->inp_laddr.s_addr == laddr.s_addr) {
-            (*notify)(inp, errno);
-            nmatch++;
-        }
-    }
-    return nmatch;
-}
-
-void in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, s32 errno, void (*notify)(struct inpcb *, s32)) {
-    struct inpcb *inp, *ninp;
-
-    if (faddr.s_addr == __builtin_allegrex_wsbw(0) || notify == NULL) {
-        return;
-    }
-    for (inp = table->inpt_queue.cqh_first; inp != (struct inpcb *)&table->inpt_queue; inp = ninp) {
-        ninp = inp->inp_queue.cqe_next;
-        if (inp->inp_faddr.s_addr == faddr.s_addr) {
-            (*notify)(inp, errno);
-        }
-    }
-}
-#endif
-
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 s32 in_pcbnotify(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg,
                   s32 errno, void (*notify)(struct inpcb *, s32)) {
     struct inpcbhead *head;

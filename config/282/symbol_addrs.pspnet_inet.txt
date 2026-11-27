@@ -232,3 +232,5 @@ in_pcballoc = 0x00013F68; // type:func
 in_pcbdisconnect = 0x00014018; // type:func
 in_pcbdetach = 0x00014120; // type:func
 udbtable = 0x0002DC10;
+ifa_ifwithladdr = 0x0000931C; // type:func
+ifa_ifwithaddr = 0x00009144; // type:func
