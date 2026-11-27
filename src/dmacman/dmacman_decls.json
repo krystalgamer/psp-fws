@@ -1,7 +1,40 @@
 {
  "funcs": {
-  "func_00001388": "s32 func_00001388(void **arg0, u32 arg1);",
-  "sceKernelDmaOnDebugMode": "s32 sceKernelDmaOnDebugMode(void);"
+  "Kprintf": "s32 Kprintf(const char *fmt, ...);",
+  "_sceDmacManResumeHandler": "s32 _sceDmacManResumeHandler(s32 unk, void *param);",
+  "_sceDmacManSuspendHandler": "s32 _sceDmacManSuspendHandler(s32 unk, void *param);",
+  "_sceKernelDmaInterrupt": "s32 _sceKernelDmaInterrupt(s32 unk, s32 dmac);",
+  "_sceKernelDmaOpChCheck": "s32 _sceKernelDmaOpChCheck(SceDmaOp **ops, u32 n);",
+  "_sceKernelDmaOpQueue": "void _sceKernelDmaOpQueue(SceDmaOp *op);",
+  "_sceKernelDmaOpStop": "void _sceKernelDmaOpStop(SceDmaOp *op);",
+  "_sceKernelDmaSchedule": "void _sceKernelDmaSchedule(void);",
+  "memset": "void *memset(void *s, s32 c, u32 n);",
+  "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
+  "sceKernelCpuResumeIntrWithSync": "void sceKernelCpuResumeIntrWithSync(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
+  "sceKernelCreateEventFlag": "SceUID sceKernelCreateEventFlag(const char *name, s32 attr, s32 bits, void *opt);",
+  "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(SceUID evid);",
+  "sceKernelDisableIntr": "s32 sceKernelDisableIntr(s32 intno);",
+  "sceKernelDmaOnDebugMode": "s32 sceKernelDmaOnDebugMode(void);",
+  "sceKernelDmaOpAllCancel": "s32 sceKernelDmaOpAllCancel(void);",
+  "sceKernelEnableIntr": "s32 sceKernelEnableIntr(s32 intno);",
+  "sceKernelRegisterIntrHandler": "s32 sceKernelRegisterIntrHandler(s32 intno, s32 no, void *handler, s32 arg, void *opt);",
+  "sceKernelRegisterResumeHandler": "s32 sceKernelRegisterResumeHandler(s32 reg, void *handler, void *param);",
+  "sceKernelRegisterSuspendHandler": "s32 sceKernelRegisterSuspendHandler(s32 reg, void *handler, void *param);",
+  "sceKernelReleaseIntrHandler": "s32 sceKernelReleaseIntrHandler(s32 intno);",
+  "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(SceUID evid, u32 bits);",
+  "sceKernelWaitEventFlag": "s32 sceKernelWaitEventFlag(SceUID evid, u32 bits, u32 wait, u32 *outBits, u32 *timeout);"
  },
- "vars": {}
+ "types": {
+  "SceDmaOp": "/* PL080 linked list item (hardware descriptor, physical addresses) */\ntypedef struct {\n    u32 srcAddr;  /* 0x0 */\n    u32 dstAddr;  /* 0x4 */\n    volatile u32 next; /* 0x8 next LLI, 0 = end */\n    u32 control;  /* 0xC bit31 = terminal count interrupt */\n} SceDmaLLI;\n\n/* DMA operation (sceKernelDmaOperation), 1.00-2.01 layout, 0x54 bytes */\nstruct SceDmaOp;\ntypedef s32 (*SceDmaOpCallback)(struct SceDmaOp *op, s32 status, s32 ch, void *cookie);\ntypedef struct SceDmaOp {\n    struct SceDmaOp *next;    /* 0x00 queue / free list */\n    struct SceDmaOp *prev;    /* 0x04 */\n    struct SceDmaOp *parent;  /* 0x08 AssignMultiple chain */\n    struct SceDmaOp *child;   /* 0x0C */\n    volatile u32 flag;        /* 0x10 SCE_DMAOP_* */\n    s32 chMask0;              /* 0x14 1.00: DMAC0 channel mask */\n    s32 chMask1;              /* 0x18 1.00: DMAC1 channel mask */\n    volatile s32 ch;          /* 0x1C assigned channel (0-15), -1 none */\n    volatile u32 srcAddr;     /* 0x20 shadow of SceDmacChRegs */\n    volatile u32 dstAddr;     /* 0x24 */\n    volatile u32 lli;         /* 0x28 */\n    volatile u32 control;     /* 0x2C */\n    volatile u32 config;      /* 0x30 */\n    u32 unk34;\n    u32 unk38;\n    u32 unk3C;\n    SceDmaLLI *headLLI;       /* 0x40 */\n    SceDmaLLI *endLLI;        /* 0x44 */\n    SceDmaOpCallback callback; /* 0x48 */\n    void *cookie;             /* 0x4C */\n    SceUID evid;              /* 0x50 per-op event flag */\n} SceDmaOp;\n#define SCE_DMAOP_QUEUED   0x1\n#define SCE_DMAOP_RUNNING  0x2\n#define SCE_DMAOP_ERROR    0x10\n#define SCE_DMAOP_QUIT     0x20\n#define SCE_DMAOP_DONE     0x40\n#define SCE_DMAOP_ASSIGNED 0x100\n#define SCE_DMAOP_FREE     0x1000\n\ntypedef struct {\n    SceDmaOp *op[16];   /* 0x00 op running on channel */\n    u32 excluded[2];    /* 0x40 per DMAC, bit = channel */\n    u32 reserved[2];    /* 0x48 */\n} SceDmaChState;\ntypedef struct {\n    u32 clk;            /* 0x00 0xBC100050 & 0x60 */\n    struct {\n        u32 config;     /* 0x30 */\n        u32 sync;       /* 0x34 */\n        u32 unk38;      /* 0x38 */\n    } dmac[2];\n} SceDmacSave;",
+  "SceDmacRegs": "/* PrimeCell PL080 DMA controller: DMAC0 at 0xBC900000, DMAC1 at 0xBCA00000 */\ntypedef struct {\n    volatile u32 srcAddr;   /* 0x00 */\n    volatile u32 dstAddr;   /* 0x04 */\n    volatile u32 lli;       /* 0x08 */\n    volatile u32 control;   /* 0x0C */\n    volatile u32 config;    /* 0x10 bit0 enable, bit17 active, bit18 halt */\n    u32 pad14[3];\n} SceDmacChRegs;\ntypedef struct {\n    volatile u32 intStatus;       /* 0x00 */\n    volatile u32 intTCStatus;     /* 0x04 */\n    volatile u32 intTCClear;      /* 0x08 */\n    volatile u32 intErrorStatus;  /* 0x0C */\n    volatile u32 intErrClr;       /* 0x10 */\n    volatile u32 rawIntTCStatus;  /* 0x14 */\n    volatile u32 rawIntErrStatus; /* 0x18 */\n    volatile u32 enbldChns;       /* 0x1C */\n    volatile u32 softBReq;        /* 0x20 */\n    volatile u32 softSReq;        /* 0x24 */\n    volatile u32 softLBReq;       /* 0x28 */\n    volatile u32 softLSReq;       /* 0x2C */\n    volatile u32 config;          /* 0x30 bit0 enable */\n    volatile u32 sync;            /* 0x34 */\n    volatile u32 unk38;           /* 0x38 (PSP specific, saved on suspend) */\n    u32 pad3C[49];\n    SceDmacChRegs ch[8];          /* 0x100 */\n} SceDmacRegs;\n#define DMAC0_BASE 0xBC900000\n#define DMAC1_BASE 0xBCA00000\n#define DMAC_CH_BASE(n) ((n) ? 0xBCA00100 : 0xBC900100)"
+ },
+ "vars": {
+  "g_dmaCh": "extern SceDmaChState g_dmaCh;",
+  "g_dmaFreeOp": "extern SceDmaOp *g_dmaFreeOp;",
+  "g_dmaOps": "extern SceDmaOp g_dmaOps[128];",
+  "g_dmaQueueHead": "extern SceDmaOp *g_dmaQueueHead;",
+  "g_dmaQueueTail": "extern SceDmaOp *g_dmaQueueTail;",
+  "g_dmacSave": "extern SceDmacSave g_dmacSave;"
+ }
 }
