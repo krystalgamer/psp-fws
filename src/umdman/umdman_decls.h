@@ -4,6 +4,49 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+/* per-command completion state, lives on the caller's stack; ata->cmd points to it */
+typedef struct {
+    u32 unk0;
+    u32 driveStat;
+    u32 unk8;
+    u32 unkC;
+} SceAtaCmdState;
+
+/* ata.prx drive descriptor (only the fields umdman touches) */
+typedef struct {
+    s8 driveId;
+    u8 pad1[0x7];
+    u32 unk8;
+    u32 timeout;              /* 0x0C: per-command timeout, func_00005358 table */
+#if FW_VERSION == 100
+    u8 pad10[0x8];
+#else
+    u8 pad10[0x4];
+#endif
+    u32 byteLimit;            /* 0x18 (1.50: 0x14): sceAtaGetByteLimitCount() */
+    u8 pad1C[0x4];
+    SceAtaCmdState * volatile cmd; /* 0x20 (1.50: 0x1C): caller's stack state */
+} SceAtaDrive;
+
+/* 1.00: g_umdDrive[2], 0x40 bytes each */
+typedef struct {
+    SceAtaDrive *ataDrive;
+    u8 pad4[0x14];
+    SceUID semaId;
+    u8 pad1C[0xC];
+    u8 sense[0x12];
+    u8 pad3A[0x6];
+} SceUmdDrive;
+
+/* MODE SENSE/SELECT(10) parameters */
+typedef struct {
+    u8 unk0;
+    u8 pageCode;
+    u8 pad2[2];
+    u16 size;
+    u8 pad6[0xA];
+} SceUmdModeParam;
+
 struct Unk_func_0000888C_0 {
     u8 pad0[0x18];
     struct Unk_func_0000888C_temp_v0 *unk18;
@@ -66,6 +109,7 @@ struct Unk_func_00008D8C_temp_v0 {
 };
 
 extern s32 D_0000E940;
+extern SceUmdDrive D_0000E9C0[2];
 extern s32 D_0000EA80;
 extern s32 D_0000EB00;
 extern s32 D_0000EB10;
@@ -114,7 +158,7 @@ extern s32 D_00012C10;
 extern M2C_UNK D_00012C20;
 extern M2C_UNK D_00012C40;
 extern M2C_UNK D_00012C80;
-extern M2C_UNK D_00012CC0;
+extern u32 D_00012CC0[];
 extern s32 D_00012CD0;
 extern s32 D_00012CD4;
 extern s32 D_00012D00;
@@ -166,9 +210,6 @@ extern s32 D_0001C034;
 extern s32 D_0001C048;
 extern s32 D_0001C050;
 extern s32 D_0001C058;
-extern M2C_UNK func_0000B2FC;
-extern M2C_UNK func_0000B330;
-extern M2C_UNK func_0000FB38;
 
 M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);
 M2C_UNK LoadExecForKernel_11412288(s32 (*)());
@@ -201,11 +242,17 @@ s32 func_00002720(void);
 s32 func_0000272C(void);
 s32 func_00002738(void);
 s32 func_00002744(void);
-void func_00002750(void);
-void func_00002774(void);
+s32 func_00002750(void);
+s32 func_00002774(void);
 void func_0000279C(void);
 s32 func_000027F4(void);
 s32 func_00002BC4(void);
+void func_00004EC8(s32 id, s32 *stat);
+s32 func_00004EFC(s32 id, s32 stat);
+s32 func_0000530C(SceUmdDrive *drive);
+s32 func_00005338(SceUmdDrive *drive, s32 ret);
+s32 func_00005358(s32 cmd, SceUmdDrive *drive);
+s32 func_0000567C(s32 cmd, SceUmdDrive *drive);
 s32 func_00006CE0(void);
 M2C_UNK *func_00006D30(void);
 M2C_UNK *func_00006D3C(void);
@@ -223,7 +270,7 @@ s32 func_00007954(s32, s32);
 s32 func_000079A4(void);
 M2C_UNK *func_000079B8(void);
 s32 func_00007A30(s32, s32);
-s32 func_00007AF0(s32);
+void func_00007AF0(u32 v);
 s32 func_00007B34(void);
 s32 func_00007B48(void);
 s32 func_00007B94(void);
@@ -233,9 +280,11 @@ s32 func_00007BE8(void);
 void func_00007C08(s32 arg0, s32 arg1);
 M2C_UNK *func_00007C24(void);
 M2C_UNK *func_00007C30(void);
+void func_00007C30_v100(s32 id, s32 *stat);
 void func_00007C5C(void);
 s32 func_00007C78(void);
 void func_00007CA8(void);
+s32 func_00007CA8_v100(s32 id, s32 stat);
 void func_00007CD0(void);
 s32 func_00007F24(s32, s32);
 s32 func_000080B8(s32 arg0);
@@ -271,7 +320,7 @@ void func_00009F10(s32 arg0);
 s32 func_00009F58(void);
 s32 func_00009FC4(void);
 s32 func_00009FE8(void);
-s32 func_0000A084(s32, s32, s32, s32, s32);
+s32 func_0000A084(void);
 s32 func_0000A190(s32 arg0, s32 arg1, s32 arg2);
 void func_0000A2B8(s32 arg0, s32 arg1);
 s32 func_0000A2EC(void);
@@ -317,7 +366,9 @@ s32 func_0000AF50(void);
 s32 func_0000AFF0(void *arg0, void *arg1);
 void func_0000B0E0(void);
 s32 func_0000B2A0(void);
+u32 func_0000B2FC(void *common);
 s32 func_0000B308(void *arg0, void *arg1);
+u32 func_0000B330(void *common);
 s32 func_0000B344(void);
 s32 func_0000B378(s32, s32, s32);
 s32 func_0000B3F4(void *arg0, void *arg1);
@@ -363,15 +414,22 @@ void func_0000EAA0(void);
 void func_0000F020(s32 arg0);
 void func_0000F4F8(void);
 void func_0000FB08(void);
+s32 func_0000FB38(void);
 void func_0000FB64(void);
 s32 func_0000FBE4(void);
 s32 func_0000FD1C(void);
 void func_0000FD4C(s32 arg0);
 s32 func_0000FD80(void);
+s32 sceAtaAccessDataPort(SceAtaDrive *drive, u32 timeout, s32 mode, u32 size);
+s32 sceAtaCheckPacketCmdComplete(SceAtaDrive *drive, s32 a1);
 M2C_UNK sceAtaClearIntrStateFlag();
 M2C_UNK sceAtaDoSoftResetBit();
+s32 sceAtaExecPacketCmd(SceAtaDrive *drive, s32 a1, u32 byteLimit, s32 a3, s32 a4, s32 cmd, void *param);
+SceAtaDrive *sceAtaGetAtaDrive(s32 id);
+u32 sceAtaGetByteLimitCount(u32 size);
 M2C_UNK sceAtaGetIntrStateFlag();
 s32 sceAtaIsDvdDrive();
+s32 sceAtaIsNormalDriveStat(s32 id);
 M2C_UNK sceAtaIsUmdDrive();
 M2C_UNK sceAtaSetIntrStateFlag();
 M2C_UNK sceAtaWaitBusBusyIE();
@@ -419,13 +477,16 @@ M2C_UNK sceSTimerStopCount(s32);
 s32 sceSysconCtrlLeptonPower(M2C_UNK);
 s32 sceSysconResetDevice(M2C_UNK, M2C_UNK);
 M2C_UNK sceUmdAssertLeptonWakeup();
+s32 sceUmdExecModSelectCmd(SceUmdDrive *drive, SceUmdModeParam *param, void *buf);
+s32 sceUmdExecModSenseCmd(SceUmdDrive *drive, SceUmdModeParam *param, void *buf);
+s32 sceUmdExecReqSenseCmd(SceUmdDrive *drive, void *buf, u32 size);
 void sceUmdManCancelAlarm(s32 arg0);
 s32 sceUmdManDVDDriveStart(void);
 void sceUmdManDeleteStateManThread(void);
 s32 sceUmdManDriveStop(void);
 s32 sceUmdManGetBootFrom(void);
 s32 sceUmdManGetCommandTimerFlag(void);
-void sceUmdManGetDriveMode(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+s32 sceUmdManGetDriveMode(void);
 s32 sceUmdManGetErrorStatus(void);
 s32 sceUmdManGetFmtVersion(void);
 void sceUmdManGetIntrStateFlag(void);
@@ -448,6 +509,7 @@ s32 sceUmdManLPNReadAlive(void);
 s32 sceUmdManLeptonAliveOnOff(void);
 s32 sceUmdManLeptonReset(void);
 void sceUmdManPollSema(void);
+s32 sceUmdManProbeRemainIcache(SceUmdDrive *drive);
 s32 sceUmdManReset(void);
 s32 sceUmdManSPKCheckAuth(void);
 s32 *sceUmdManSPKGetMKI(void);
@@ -459,6 +521,7 @@ void sceUmdManSignalSema(void);
 void sceUmdManSoftReset(void);
 void sceUmdManStartCommandTimer(void);
 void sceUmdManStopCommandTimer(void);
+s32 sceUmdManSyncState(void);
 s32 sceUmdManTaskIsInQueue(s32 arg0);
 s32 sceUmdManUMDDrivePostStart(void);
 s32 sceUmdManUMDDrivePreStart(void);
@@ -472,6 +535,7 @@ void sceUmdMan_driver_528503B3(void);
 void sceUmdMan_driver_5FB669CE(s32 arg0);
 s32 sceUmdMan_driver_65D0DEC6(void);
 void sceUmdMan_driver_7E2A680C(s32 arg0);
+s32 sceUmdMan_driver_815AA6D3(SceUmdDrive *drive);
 s32 sceUmdMan_driver_85AEA6C5(void);
 void sceUmdMan_driver_A869CAB3(void);
 s32 sceUmdMan_driver_C634697D(void);
