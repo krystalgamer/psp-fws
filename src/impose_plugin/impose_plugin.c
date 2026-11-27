@@ -241,16 +241,16 @@ void func_00000964(void) {
     void *temp_v0;
 
     temp_s1 = vshImposeGetParam(0x40000000);
-    temp_v0 = scePaf_DCE3D225(scePaf_88784487(&D_00001734), 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(_ZN3paf4View4FindEPKc(&D_00001734), 1);
     if (temp_s1 == 0) {
         if (temp_v0 != NULL) {
             M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x10C)(0x1F, 1);
         }
-        scePaf_2F94EF32(0x40D, 0, 0);
-        scePaf_1941BB4E();
+        PhiPostSystemEvent(0x40D, 0, 0);
+        scePaf_3DEE8DB4();
     } else {
-        scePaf_FA7E6DA3();
-        scePaf_2F94EF32(0x40D, temp_s1, temp_s1);
+        scePaf_499FF48D();
+        PhiPostSystemEvent(0x40D, temp_s1, temp_s1);
         if (temp_v0 != NULL) {
             M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x10C)(0x1F, 0);
         }
@@ -287,10 +287,10 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_00000BAC);
 
 #if FW_VERSION >= 350
 void func_00000BAC(s32 arg0) {
-    scePaf_648CA0C5();
-    scePaf_B94FDC08();
-    scePaf_6A82A8C6(arg0, 0x64);
-    scePaf_8B38372A(D_0000189C, &D_000016F4);
+    InputDevice_PspPad_Unlock();
+    InputDevice_PspHprm_Unlock();
+    _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0x64);
+    _ZN3paf4View9PageCloseEPKc(D_0000189C, &D_000016F4);
     vsh_6D4C06F7(1);
 }
 #endif
