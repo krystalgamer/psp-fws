@@ -285,7 +285,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000002C0);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000368);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00000390);
 #else
 void func_00000390(s32 arg0) {
@@ -1621,11 +1621,11 @@ s32 func_000051DC(struct Unk_func_000051DC_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000051E4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 void func_000051E4(void *arg0, s32 *arg1) {
     _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), (s32) arg1, 0, 0);
 }
