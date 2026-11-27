@@ -147,7 +147,7 @@ extern SceIoDeviceFunction g_nullconFunction;
 extern char *g_pathbufBuf[2];
 extern s32 g_pathbufCount;
 
-s32 IoFileMgrRebootBefore(s32);
+s32 terminate_iofm(s32);
 s32 _nulldev(void);
 void add_alias_tbl(SceIoAlias *alias);
 void add_device_list(SceIoDeviceList *list);

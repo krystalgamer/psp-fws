@@ -1,6 +1,6 @@
 {
  "funcs": {
-  "IoFileMgrRebootBefore": "s32 IoFileMgrRebootBefore(s32);",
+  "terminate_iofm": "s32 terminate_iofm(s32);",
   "_nulldev": "s32 _nulldev(void);",
   "add_alias_tbl": "void add_alias_tbl(SceIoAlias *alias);",
   "add_device_list": "void add_device_list(SceIoDeviceList *list);",

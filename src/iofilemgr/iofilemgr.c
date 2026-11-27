@@ -488,7 +488,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", module_bootstart);
 INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrInit);
 
 void module_reboot_before(void) {
-    IoFileMgrRebootBefore(0);
+    terminate_iofm(0);
 }
 #endif
 
@@ -507,7 +507,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", module_reboot_before);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrRebootBefore);
+INCLUDE_ASM("nonmatchings/iofilemgr", terminate_iofm);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", async_loop);
 
