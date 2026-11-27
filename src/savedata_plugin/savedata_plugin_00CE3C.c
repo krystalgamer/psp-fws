@@ -2358,12 +2358,12 @@ void func_00011C4C(struct Unk_func_00011C4C_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 150 || FW_VERSION == 152 || FW_VERSION == 201 || FW_VERSION == 250 || FW_VERSION == 260 || FW_VERSION == 271
+#if FW_VERSION == 100 || FW_VERSION == 102 || FW_VERSION == 103 || FW_VERSION == 150 || FW_VERSION == 152 || FW_VERSION == 201 || FW_VERSION == 250 || FW_VERSION == 260 || FW_VERSION == 271
 /* vtable of Class_00022578 (data) */
 __asm__(".globl _ZTV14Class_00022578\n_ZTV14Class_00022578 = D_00022578 - 8\n");
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 150 || FW_VERSION == 152 || FW_VERSION == 201 || FW_VERSION == 250 || FW_VERSION == 260 || FW_VERSION == 271
+#if FW_VERSION == 100 || FW_VERSION == 102 || FW_VERSION == 103 || FW_VERSION == 150 || FW_VERSION == 152 || FW_VERSION == 201 || FW_VERSION == 250 || FW_VERSION == 260 || FW_VERSION == 271
 /* vtable of Class_00022560 (data) */
 __asm__(".globl _ZTV14Class_00022560\n_ZTV14Class_00022560 = D_00022560 - 8\n");
 #endif

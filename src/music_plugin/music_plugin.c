@@ -5872,7 +5872,7 @@ INCLUDE_RODATA("nonmatchings/music_plugin", D_00085008);
 INCLUDE_ASM("nonmatchings/music_plugin", func_0001E6FC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 100 || FW_VERSION == 103
 /* vtable of Class_0005CDA0 (data) */
 __asm__(".globl _ZTV14Class_0005CDA0\n_ZTV14Class_0005CDA0 = D_0005CDA0 - 8\n");
 #endif
