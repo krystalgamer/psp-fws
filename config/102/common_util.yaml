@@ -9,12 +9,13 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/common_util
-  src_path: tmp/av_src/102/common_util
+  src_path: src/common_util
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/common_util.ld
   cache_path: tmp/build/102/.splat_cache.common_util
   symbol_addrs_path:
     - config/102/symbol_addrs.common_util.txt
+    - config/102/func_starts.common_util.txt
     - tmp/build/102/prx_syms.common_util.txt
   reloc_addrs_path: [tmp/build/102/reloc_addrs.common_util.txt]
   asset_path: tmp/assets/102/common_util
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, common_util]
+      - [0xA088, c, common_util_crtend]
       - { start: 0xA0E0, type: asm, name: fini, linker_section: .fini }
       - { start: 0xA0FC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xA27C, type: prxpad, order: .text }
@@ -72,6 +74,7 @@ segments:
       - { start: 0xA674, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0xA678, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0xA67C, .rodata, common_util]
+      - [0xAFFC, .rodata, common_util_crtend]
       - { start: 0xB004, type: prxpad, order: .rodata }
   - name: common_util_seg1
     type: code
