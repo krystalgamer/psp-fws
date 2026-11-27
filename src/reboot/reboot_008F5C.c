@@ -70,7 +70,12 @@ s32 func_0000725C(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000072BC);
+s32 func_000072BC(s32 a0, s32 a1) {
+    if (!(D_00017364 & 4)) {
+        return -1;
+    }
+    return func_000079E4(D_000184A0, a0, a1, 0);
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000072FC);
 
@@ -165,7 +170,14 @@ s64 func_00008FB4(void *iob, SceOff off, s32 whence) {
     return func_00008368(iob, (s32)off, whence);
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000900C);
+s32 func_0000900C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
+    s32 ret;
+
+    func_0000E028();
+    ret = func_0000A52C(a0, a1, a2, a3, a4, a5);
+    func_0000E028();
+    return ret;
+}
 
 s32 func_00009094(s32 arg0, s32 arg1) {
     s32 ret;
@@ -378,7 +390,23 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000BA58);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000BDB0);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000BF8C);
+s32 func_0000BF8C(UFatUnit *unit, s32 sector) {
+    s32 ret;
+
+    if (sector != unit->cachedSector) {
+        ret = func_000099D0(unit);
+        if (ret < 0) {
+            return ret;
+        }
+        unit->cachedSector = -1;
+        ret = buf_read(unit, sector << unit->sectorShift, unit->sectorBuf, 0x200);
+        if (ret < 0) {
+            return ret;
+        }
+        unit->cachedSector = sector;
+    }
+    return 0;
+}
 
 s32 func_0000BFFC(UFatUnit *unit) {
     s32 c, ret;
@@ -493,7 +521,19 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D754);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D82C);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D964);
+s32 func_0000D964(LFlashDev *dev) {
+    LFlashSegment *seg = dev->segments;
+    u32 i;
+    s32 ret;
+
+    for (i = 0; i < dev->nSegments; i++, seg++) {
+        ret = func_0000EE88(dev, seg);
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    return 0;
+}
 
 #if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D9E0);

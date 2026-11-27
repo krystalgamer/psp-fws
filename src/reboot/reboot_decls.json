@@ -268,6 +268,7 @@
   "D_00017364": "extern u32 D_00017364;",
   "D_00018468": "extern u8 D_00018468[];",
   "D_00018490": "extern u8 D_00018490[];",
+  "D_000184A0": "extern s32 D_000184A0;",
   "D_000184C0": "extern u32 D_000184C0;",
   "D_000184C8": "extern u8 D_000184C8[];",
   "D_00018BCC": "extern SceNandInfo D_00018BCC;",

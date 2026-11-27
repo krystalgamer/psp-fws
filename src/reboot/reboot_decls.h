@@ -421,6 +421,7 @@ extern void *D_0001734C;
 extern u32 D_00017364;
 extern u8 D_00018468[];
 extern u8 D_00018490[];
+extern s32 D_000184A0;
 extern u32 D_000184C0;
 extern u8 D_000184C8[];
 extern SceNandInfo D_00018BCC;
