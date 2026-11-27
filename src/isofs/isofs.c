@@ -86,12 +86,12 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005F30);
 INCLUDE_RODATA("nonmatchings/isofs", D_00005F38);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 s32 func_00000284(IsofsUnit *unit, s32 count, s32 filesCount) {
     s32 ret = 0;
     s32 i;
 
-    ISOFS_ASSERT(unit != NULL, D_00005F30, D_00005F38, "sceIsofsLbInit", 0x2A);
+    ISOFS_ASSERT(unit != NULL, D_00005F30, D_00005F38, "sceIsofsLbInit", ISOFS_V(0x2A, 0x2F, 0x2F));
     unit->fdw = sceKernelAllocHeapMemory(unit->heapId, count * sizeof(IsofsFdw));
     if (unit->fdw == NULL) {
         return 0x8001000C;
@@ -114,10 +114,6 @@ s32 func_00000284(IsofsUnit *unit, s32 count, s32 filesCount) {
     unit->fdwCount = count;
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00000284);
 #endif
 
 #if FW_VERSION < 201
@@ -328,10 +324,10 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005FCC);
 INCLUDE_RODATA("nonmatchings/isofs", D_00005FE0);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 s32 func_00000EBC(IsofsFdw *fdw, u32 idx, s32 filesCount) {
-    ISOFS_ASSERT(filesCount > 0, D_00005FCC, D_00005FE0, "sceIsofsSbInit", 0x20);
-    ISOFS_ASSERT(fdw != NULL, D_00005FCC, D_00005FE0, "sceIsofsSbInit", 0x21);
+    ISOFS_ASSERT(filesCount > 0, D_00005FCC, D_00005FE0, "sceIsofsSbInit", ISOFS_V(0x20, 0x2B, 0x2B));
+    ISOFS_ASSERT(fdw != NULL, D_00005FCC, D_00005FE0, "sceIsofsSbInit", ISOFS_V(0x21, 0x2C, 0x2C));
     fdw->fd.idx = idx;
     fdw->fd.filesCount = filesCount;
     fdw->fd.fdw = fdw;
@@ -339,20 +335,12 @@ s32 func_00000EBC(IsofsFdw *fdw, u32 idx, s32 filesCount) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00000EBC);
-#endif
-
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 void func_00000F9C(IsofsFd *fd) {
-    ISOFS_ASSERT(fd != NULL, D_00005FCC, D_00005FE0, "sceIsofsSbTerm", 0x3A);
+    ISOFS_ASSERT(fd != NULL, D_00005FCC, D_00005FE0, "sceIsofsSbTerm", ISOFS_V(0x3A, 0x45, 0x45));
     func_00001914(fd->files);
     fd->files = NULL;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00000F9C);
 #endif
 
 #if FW_VERSION >= 201
@@ -526,21 +514,17 @@ s32 func_00000DA8(IsofsFile *file) {
 INCLUDE_ASM("nonmatchings/isofs", func_00000CAC);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 func_00001914(IsofsFile *files) {
     IsofsFd *fd = files->fd;
 
-    ISOFS_ASSERT(files != NULL, D_000084D8, D_00006070, "sceIsofsFileTerm", 0x1D4);
-    ISOFS_ASSERT(fd != NULL, D_000084D8, D_00006070, "sceIsofsFileTerm", 0x1D5);
+    ISOFS_ASSERT(files != NULL, D_000084D8, D_00006070, "sceIsofsFileTerm", ISOFS_V(0x1D4, 0x1D4, 0x1D5));
+    ISOFS_ASSERT(fd != NULL, D_000084D8, D_00006070, "sceIsofsFileTerm", ISOFS_V(0x1D5, 0x1D5, 0x1D6));
     if (files == NULL || fd == NULL) {
         return 0x80010016;
     }
     return SysMemForKernel_7B749390(fd->heapId, fd->files);
 }
-#endif
-
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/isofs", func_00001914);
 #endif
 
 #if FW_VERSION < 201

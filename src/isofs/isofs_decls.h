@@ -22,6 +22,15 @@ struct D_00007608_s {
         } \
     } while (0)
 
+/* per-version constant (assert line numbers) for the 1.x family: 1.00-1.03, 1.50/1.51, 1.52 */
+#if FW_VERSION < 150
+#define ISOFS_V(v100, v150, v152) (v100)
+#elif FW_VERSION < 152
+#define ISOFS_V(v100, v150, v152) (v150)
+#else
+#define ISOFS_V(v100, v150, v152) (v152)
+#endif
+
 /* sceBLKGetDeviceData() result kept in IsofsUnit.blkDev (only maxLbn known) */
 typedef struct {
 #if FW_VERSION == 100
