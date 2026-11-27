@@ -911,11 +911,23 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00003FF8);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_000041F4);
 
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004374);
+#else
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin", _ZN14Class_000AE948D2Ev);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004448);
+#else
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin", _ZN14Class_000AE948D1Ev);
+#endif
 
+#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_0000451C);
+#else
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin", _ZN14Class_000AE948D0Ev);
+#endif
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004600);
 

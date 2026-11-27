@@ -10,6 +10,10 @@ void func_00010508(struct Unk_func_00010508_0 *arg0, s32 arg1, s32 arg2, s32 arg
     arg0->unk0 = &D_000AF5E8;
 }
 
+#if FW_VERSION < 350
+Class_000AF5E8::~Class_000AF5E8() {
+}
+#else
 void func_00010558(M2C_UNK **arg0) {
     *arg0 = &D_000AF5E8;
     func_0000FCD8((s32) arg0);
@@ -19,10 +23,13 @@ void func_00010580(M2C_UNK **arg0) {
     *arg0 = &D_000AF5E8;
     func_0000FCD8((s32) arg0);
 }
+#endif
 
-#if FW_VERSION < 352
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_010508", func_000105A8);
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_000105A8(M2C_UNK **arg0) {
     *arg0 = &D_000AF5E8;
     func_0000FCD8((s32) arg0);
