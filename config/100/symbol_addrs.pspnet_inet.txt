@@ -521,3 +521,6 @@ tcp_mss_from_peer = 0x00024F3C; // type:func
 tcp_optlen = 0x000251A4; // type:func
 ip_rtaddr = 0x00016030; // type:func
 ip_init = 0x00014890; // type:func
+in_socktrim = 0x0001298C; // type:func (unreferenced, was merged into in_canforward)
+in_localaddr = 0x00012818; // type:func
+in_canforward = 0x000128EC; // type:func

@@ -2619,9 +2619,51 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012490);
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012818);
+s32 in_localaddr(struct in_addr in) {
+    struct in_ifaddr *ia;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000128EC);
+    if (D_0002C01C) {
+        for (ia = in_ifaddrhead.tqh_first; ia != 0; ia = ia->ia_list.tqe_next) {
+            if ((in.s_addr & ia->ia_netmask) == ia->ia_net) {
+                return 1;
+            }
+        }
+    } else {
+        for (ia = in_ifaddrhead.tqh_first; ia != 0; ia = ia->ia_list.tqe_next) {
+            if ((in.s_addr & ia->ia_subnetmask) == ia->ia_subnet) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+s32 in_canforward(struct in_addr in) {
+    u32 net;
+
+    if (((in.s_addr & __builtin_allegrex_wsbw(0xF0000000)) == __builtin_allegrex_wsbw(0xF0000000)) || IN_MULTICAST(in.s_addr)) {
+        return 0;
+    }
+    if ((in.s_addr & __builtin_allegrex_wsbw(0x80000000)) == __builtin_allegrex_wsbw(0)) {
+        net = in.s_addr & __builtin_allegrex_wsbw(0xFF000000);
+        if (net == 0 || net == __builtin_allegrex_wsbw(127 << 24)) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void in_socktrim(struct sockaddr_in *ap) {
+    char *cplim = (char *)&ap->sin_addr;
+    char *cp = (char *)(&ap->sin_addr + 1);
+
+    ap->sin_len = 0;
+    while (--cp >= cplim)
+        if (*cp) {
+            (ap)->sin_len = cp - (char *)(ap) + 1;
+            break;
+        }
+}
 #endif
 
 #if FW_VERSION >= 282

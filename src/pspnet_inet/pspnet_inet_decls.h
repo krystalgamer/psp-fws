@@ -691,7 +691,13 @@ typedef struct {
 /* struct in_ifaddr (NetBSD in_var.h, partial) */
 struct in_ifaddr {
     struct ifaddr ia_ifa;               /* 0x00 */
-    u8 unk34[0x54 - 0x34];
+    s32 ifa_metric_;                    /* 0x34 ia_ifa.ifa_metric */
+    u32 ia_net;                         /* 0x38 */
+    u32 ia_netmask;                     /* 0x3C */
+    u32 ia_subnet;                      /* 0x40 */
+    u32 ia_subnetmask;                  /* 0x44 */
+    struct in_addr ia_netbroadcast;     /* 0x48 */
+    struct { struct in_ifaddr *le_next; struct in_ifaddr **le_prev; } ia_hash; /* 0x4C */
     TAILQ_ENTRY(in_ifaddr) ia_list;     /* 0x54 */
     struct sockaddr_in ia_addr;         /* 0x5C */
     struct sockaddr_in ia_dstaddr;      /* 0x6C ia_broadaddr */
