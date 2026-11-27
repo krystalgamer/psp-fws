@@ -71,5 +71,19 @@ sceSysregAudioClkoutIoEnable = 0x00002908; // type:func
 sceSysregAudioClkoutIoDisable = 0x00002910; // type:func
 // shared names (tools/add_version.py) begin
 D_000032E4 = 0x00002D64;
-func_00001330 = 0x00001158; // type:func
+audioOutput = 0x00001158; // type:func
 // shared names (tools/add_version.py) end
+g_audio = 0x00002E40;
+updateAudioBuf = 0x00000000; // type:func
+dmaUpdate = 0x00000220; // type:func
+audioMixerThread = 0x0000028C; // type:func
+audioOutputDmaCb = 0x000004CC; // type:func
+audioIntrHandler = 0x000016F0; // type:func
+audioHwInit = 0x000017A0; // type:func
+audioEventHandler = 0x000018FC; // type:func
+audioSRCOutputDmaCb = 0x000019FC; // type:func
+audioSRCOutput = 0x00001E94; // type:func
+audioInputThread = 0x0000206C; // type:func
+audioInput = 0x0000243C; // type:func
+audioInputSetup = 0x000025B8; // type:func
+audioInputDmaCb = 0x00002720; // type:func
