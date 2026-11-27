@@ -69,6 +69,10 @@ void sceMgrReset(void) {
     func_00002588();
 }
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mgr", func_000008D4);
+#endif
+
 #if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/mgr", D_0000A940);
 
@@ -123,7 +127,9 @@ INCLUDE_ASM("nonmatchings/mgr", func_000008A4);
 INCLUDE_ASM("nonmatchings/mgr", func_00000898);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/mgr", sceMgrInit);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 340
 s32 sceMgrAesInit(void) {
@@ -1420,7 +1426,11 @@ s32 func_00005E30(void) {
 
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFA0);
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mgr", func_00004624);
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInit);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReset);
 
@@ -1749,7 +1759,11 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadSeqPage);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadPoolPage);
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mgr", func_00007980);
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInvalidateICV);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWriteSeqPage);
 
@@ -1777,11 +1791,19 @@ INCLUDE_RODATA("nonmatchings/mgr", D_0000AFCC);
 void func_00008388(s32 arg0) {
     func_000065FC(arg0, (s32) "x~", 2);
 }
-#else
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mgr", func_000083CC);
+#endif
+
+#if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFD0);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSCheckICV);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSCompareICV);
 
@@ -1789,9 +1811,15 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWriteICV);
 
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFD8);
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mgr", func_000086A8);
+
+INCLUDE_ASM("nonmatchings/mgr", func_00008788);
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_016A843B);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_3EE1140B);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", func_0000A070);
 
