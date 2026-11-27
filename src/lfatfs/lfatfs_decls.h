@@ -59,7 +59,11 @@ struct UFatUnit {
     s32 flags; /* 0x0 */
     SceUID fd; /* 0x4 */
     s32 nodeCount; /* 0x8 */
-    s32 devInfo[5]; /* 0xC */
+    u32 devStart; /* 0xC */
+    s32 devSectors; /* 0x10 */
+    u32 devSectorSize; /* 0x14 */
+    s32 devShift; /* 0x18 */
+    u32 devFlags; /* 0x1C */
     s32 bytesPerSector; /* 0x20 */
     s32 sectorShift; /* 0x24 */
     u32 fatMask; /* 0x28 */
@@ -72,7 +76,8 @@ struct UFatUnit {
     s32 dataStart; /* 0x44 */
     s32 sectorsPerCluster; /* 0x48 */
     s32 clusterSize; /* 0x4C */
-    u8 pad50[0xC];
+    s32 activeFat; /* 0x50 */
+    u8 pad54[0x8];
     s32 freeCount; /* 0x5C */
     s32 nextFree; /* 0x60 */
     s32 cachedSector; /* 0x64 */
@@ -98,7 +103,7 @@ typedef struct LFlashDev LFlashDev;
 struct LFlashDev {
     u8 pad0[0x18C];
     u32 pageSize; /* 0x18C */
-    s32 unk190; /* 0x190 */
+    s32 pageShift; /* 0x190 */
     u32 pagesPerBlock; /* 0x194 */
     u8 pad198[0x14];
     u32 nSegments; /* 0x1AC */
@@ -136,13 +141,20 @@ struct UFatNode {
     struct UFatNode *prev; /* 0x4 */
     UFatUnit *unit; /* 0x8 */
     u32 startCluster; /* 0xC */
-    u8 pad10[0x4];
+    s32 size; /* 0x10 */
     s32 pos; /* 0x14 */
     s32 clusterOff; /* 0x18 */
     s32 curCluster; /* 0x1C */
     u8 pad20[0x4];
     FatDirEntry dirent; /* 0x24 */
     u8 pad44[0x10];
+};
+
+typedef struct UFatBuf UFatBuf;
+/* sector buffer cache entry (buf_lookup), size unknown */
+struct UFatBuf {
+    u8 pad0[0x14];
+    u8 *data; /* 0x14 */
 };
 
 /* 1.00: 8 bytes (no d_userfd_count yet). */

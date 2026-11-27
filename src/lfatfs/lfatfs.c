@@ -1553,8 +1553,24 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CBD4);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CBE4);
 #endif
 
-#if FW_VERSION < 282 || FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/lfatfs", func_00003CC0);
+#if FW_VERSION < 282
+s32 func_00003CC0(UFatUnit *unit, void *buf, s32 sector, s32 count) {
+    s32 ret;
+
+    if (sector < 0 || count < 1 || unit->devSectors < sector + count) {
+        return 0x80010005;
+    }
+    ret = sceIoLseek(unit->fd, (SceOff)sector << unit->devShift, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceIoRead(unit->fd, buf, count << unit->devShift);
+    if (ret < 0) {
+        Kprintf("lfatfs.c:%s:r:0x%x\n", "disk_read", ret);
+        return ret;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -1563,9 +1579,38 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00003DB8);
 INCLUDE_ASM("nonmatchings/lfatfs", func_00003A84);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/lfatfs", func_00004180);
+#if FW_VERSION == 100
+s32 func_00004180(UFatUnit *unit, s32 offset, u8 *buf, s32 size) {
+    UFatBuf *b;
+    s32 sector = offset >> 9;
+    s32 off = offset & 0x1FF;
+    s32 n, ret;
 
+    while (size > 0) {
+        n = size;
+        if (0x200 - off < size) {
+            n = 0x200 - off;
+        }
+        size -= n;
+        ret = func_00005678(&b, unit, sector, 1);
+        if (ret < 0) {
+            Kprintf("lfatfs.c:%s:buf_lookup(%d) -> %d\n", "buf_read", sector, ret);
+            return ret;
+        }
+        bcopy(b->data + off, buf, n);
+        buf += n;
+        sector++;
+        off = 0;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lfatfs", func_00004180);
+#endif
+
+#if FW_VERSION < 282
 s32 func_00004268(UFatUnit *unit, s32 sector) {
     s32 ret;
 
@@ -1805,12 +1850,30 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D290);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D2A0);
 #endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 310
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_00003CC0);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/lfatfs", func_00003DB8);
+s32 func_00003DB8(UFatUnit *unit, const void *buf, s32 sector, s32 count) {
+    s32 ret;
+
+    if (sector < 0 || count < 1 || unit->devSectors < sector + count) {
+        return 0x80010005;
+    }
+    if (unit->flags & 2) {
+        return 0x8001001E;
+    }
+    ret = sceIoLseek(unit->fd, (SceOff)sector << unit->devShift, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceIoWrite(unit->fd, buf, count << unit->devShift);
+    if (ret >= 0) {
+        return 0;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -3141,7 +3204,7 @@ s32 func_0000AC4C(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *out
         info->unk10 = part->unk4;
         info->unk14 = part->unkC;
         info->unk18 = dev->pageSize;
-        info->unk1C = dev->unk190;
+        info->unk1C = dev->pageShift;
         return 0;
     }
     return 0x80010016;
