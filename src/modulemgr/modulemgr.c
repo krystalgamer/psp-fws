@@ -349,7 +349,29 @@ void module_reboot_before(void) {
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00007AB8);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION == 100
+s32 module_bootstart(SceSize argSize, void *argp) {
+    SceModuleLink *list;
+    SceUID evid;
+
+    D_00006160.threadId = sceKernelCreateThread("SceKernelModmgrWorker", func_00002140, 0x20, 0x4000, 0, NULL);
+    D_00006160.semaId = sceKernelCreateSema("SceKernelModmgr", 0, 1, 1, NULL);
+    if (D_00006160.semaId < 0) {
+        Kprintf("modulemgr.c:%s:modMgrCB.semid 0x%x\n", "ModuleMgrInit", D_00006160.semaId);
+        Kprintf(D_00006D34, D_00006D64, "ModuleMgrInit", 0xAE);
+        sceKernelAssert(0, 0);
+    }
+    evid = sceKernelCreateEventFlag("SceKernelModmgr", 0, 0, NULL);
+    D_00006160.userThreadId = -1;
+    D_00006160.eventId = evid;
+    list = &D_00006160.list;
+    list->next = list;
+    list->prev = list;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/modulemgr", module_bootstart);
 #endif
 
@@ -1063,7 +1085,43 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00005B90);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005BBC);
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHByID);
+SceUID sceKernelLoadModuleVSHByID(SceUID fd, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        Kprintf(D_00005B90, "sceKernelLoadModuleVSHByID");
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode() && sceKernelGetUserLevel() != 4) {
+        Kprintf(D_00005C14, "sceKernelLoadModuleVSHByID");
+        setK1(oldK1);
+        return 0x80020149;
+    }
+    ret = sceIoIoctl(fd, 0x8003, NULL, 0, NULL, 0);
+    if (ret < 0) {
+        Kprintf(D_00005BBC, "sceKernelLoadModuleVSHByID", ret);
+        setK1(oldK1);
+        return 0x80020146;
+    }
+    memset(&modParams, 0, sizeof(modParams));
+    modParams.apiType = 0x20;
+    modParams.modeStart = CMD_LOAD_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fd = fd;
+    modParams.fileBase = NULL;
+    ret = func_000026F8(&modParams, option);
+    setK1(oldK1);
+    return ret;
+}
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005C14);
 
