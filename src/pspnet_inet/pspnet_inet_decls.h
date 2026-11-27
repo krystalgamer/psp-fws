@@ -4,10 +4,241 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-struct D_0002CC9C_s {
-    s32 unk0;
-    M2C_UNK * unk4;
+/* NetBSD-derived (4.4BSD-Lite2 + NetBSD 1.3-1.5 socket layer) types, offsets checked in 1.00 */
+struct mbuf;
+struct socket;
+
+#define TAILQ_HEAD(name, type) struct name { struct type *tqh_first; struct type **tqh_last; }
+#define TAILQ_ENTRY(type) struct { struct type *tqe_next; struct type **tqe_prev; }
+
+/* struct selinfo (8 bytes) */
+struct selinfo {
+    s32 sel_pid;
+    s32 sel_flags;
 };
+
+/* struct sockbuf (0x28) */
+struct sockbuf {
+    u32 sb_cc;              /* 0x00 actual chars in buffer */
+    u32 sb_hiwat;           /* 0x04 max actual char count */
+    u32 sb_mbcnt;           /* 0x08 chars of mbufs used */
+    u32 sb_mbmax;           /* 0x0C max chars of mbufs to use */
+    s32 sb_lowat;           /* 0x10 low water mark */
+    struct mbuf *sb_mb;     /* 0x14 the mbuf chain */
+    struct selinfo sb_sel;  /* 0x18 process selecting read/write */
+    s16 sb_flags;           /* 0x20 SB_* */
+    s16 unk22;
+    s32 sb_timeo;           /* 0x24 timeout for read/write */
+};
+
+#define SB_LOCK     0x01
+#define SB_WANT     0x02
+#define SB_WAIT     0x04
+#define SB_SEL      0x08
+#define SB_ASYNC    0x10
+#define SB_UPCALL   0x20
+#define SB_NOINTR   0x40
+#define SB_NOTIFY   (SB_WAIT | SB_SEL | SB_ASYNC | SB_UPCALL)
+
+/* struct protosw (4.4BSD layout, pr_usrreq without the proc argument) */
+struct protosw {
+    s16 pr_type;                    /* 0x00 */
+    struct domain *pr_domain;       /* 0x04 */
+    s16 pr_protocol;                /* 0x08 */
+    s16 pr_flags;                   /* 0x0A */
+    void (*pr_input)();             /* 0x0C */
+    s32 (*pr_output)();             /* 0x10 */
+    void *(*pr_ctlinput)();         /* 0x14 */
+    s32 (*pr_ctloutput)();          /* 0x18 */
+    s32 (*pr_usrreq)(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control); /* 0x1C */
+};
+
+#define PRU_ATTACH      0
+#define PRU_DETACH      1
+#define PRU_BIND        2
+#define PRU_LISTEN      3
+#define PRU_CONNECT     4
+#define PRU_ACCEPT      5
+#define PRU_DISCONNECT  6
+#define PRU_SHUTDOWN    7
+#define PRU_RCVD        8
+#define PRU_SEND        9
+#define PRU_ABORT       10
+#define PRU_CONTROL     11
+
+TAILQ_HEAD(soqhead, socket);
+
+/* struct socket (0xBC, malloc'd by socreate) */
+struct socket {
+    s16 so_type;                /* 0x00 */
+    s16 so_options;             /* 0x02 */
+    s16 so_linger;              /* 0x04 */
+    s16 unk6;
+    s16 so_state;               /* 0x08 SS_* */
+    s16 unkA;
+    void *so_pcb;               /* 0x0C */
+    struct protosw *so_proto;   /* 0x10 */
+    struct socket *so_head;     /* 0x14 */
+    struct soqhead *so_onq;     /* 0x18 */
+    struct soqhead so_q0;       /* 0x1C */
+    struct soqhead so_q;        /* 0x24 */
+    TAILQ_ENTRY(socket) so_qe;  /* 0x2C */
+    s16 so_q0len;               /* 0x34 */
+    s16 so_qlen;                /* 0x36 */
+    s16 so_qlimit;              /* 0x38 */
+    s16 so_timeo;               /* 0x3A */
+    u16 so_error;               /* 0x3C */
+    s16 unk3E;
+    u32 so_oobmark;             /* 0x40 */
+    struct sockbuf so_rcv;      /* 0x44 */
+    struct sockbuf so_snd;      /* 0x6C */
+    u8 unk94[0xA0 - 0x94];
+    void *unkA0;                /* 0xA0 SCE callback (func_00002844) */
+    void *unkA4;                /* 0xA4 SCE callback (func_00002E98) */
+    s32 so_fd;                  /* 0xA8 SCE descriptor, -1 until allocated */
+    TAILQ_ENTRY(socket) so_list; /* 0xAC all sockets (D_0002CC9C) */
+    struct SceNetInetWaiter *so_waiter; /* 0xB4 */
+    struct socket *so_selnext;  /* 0xB8 */
+};
+
+#define SS_NOFDREF          0x001
+#define SS_ISCONNECTED      0x002
+#define SS_ISCONNECTING     0x004
+#define SS_ISDISCONNECTING  0x008
+#define SS_CANTSENDMORE     0x010
+#define SS_CANTRCVMORE      0x020
+#define SS_RCVATMARK        0x040
+#define SS_PRIV             0x080
+#define SS_NBIO             0x100
+#define SS_ASYNC            0x200
+#define SS_ISCONFIRMING     0x400
+
+/* struct mbuf (MSIZE 0x100); allocated by pspnet ifhandle (sceNetMGet...) */
+struct mbuf {
+    struct mbuf *m_next;        /* 0x00 */
+    struct mbuf *m_nextpkt;     /* 0x04 */
+    u8 *m_data;                 /* 0x08 */
+    s32 m_len;                  /* 0x0C */
+    s16 m_type;                 /* 0x10 */
+    u16 m_flags;                /* 0x12 M_* */
+    void *m_pkthdr_rcvif;       /* 0x14 */
+    s32 m_pkthdr_len;           /* 0x18 */
+    struct mbuf *m_pkthdr_aux;  /* 0x1C */
+    u8 unk20[0x3C - 0x20];
+    u32 m_ext_size;             /* 0x3C */
+    u8 unk40[4];
+    struct mbuf *m_ext_nextref; /* 0x44 */
+    struct mbuf *m_ext_prevref; /* 0x48 */
+};
+
+#define M_EXT       0x0001
+#define M_PKTHDR    0x0002
+#define M_EOR       0x0004
+
+#define MSIZE       0x100
+#define mtod(m, t)  ((t)((m)->m_data))
+
+/* struct domain (4.4BSD) */
+struct domain {
+    s32 dom_family;                     /* 0x00 */
+    char *dom_name;                     /* 0x04 */
+    void (*dom_init)(void);             /* 0x08 */
+    s32 (*dom_externalize)();           /* 0x0C */
+    void (*dom_dispose)();              /* 0x10 */
+    struct protosw *dom_protosw;        /* 0x14 */
+    struct protosw *dom_protoswNPROTOSW; /* 0x18 */
+    struct domain *dom_next;            /* 0x1C */
+};
+
+struct sockaddr {
+    u8 sa_len;
+    u8 sa_family;
+    char sa_data[14];
+};
+
+/* 2-byte aligned in this stack: copies and bzero use halfword accesses */
+struct in_addr {
+    u32 s_addr;
+} __attribute__((packed, aligned(2)));
+
+struct sockaddr_in {
+    u8 sin_len;                 /* 0x0 */
+    u8 sin_family;              /* 0x1 */
+    u16 sin_port;               /* 0x2 */
+    struct in_addr sin_addr;    /* 0x4 */
+    s8 sin_zero[8];             /* 0x8 */
+};
+
+#define AF_INET 2
+
+/* struct rawcb (4.4BSD) */
+struct rawcb {
+    void *rcb_next;             /* 0x00 */
+    void *rcb_prev;             /* 0x04 */
+    struct socket *rcb_socket;  /* 0x08 */
+    struct sockaddr *rcb_faddr; /* 0x0C */
+    struct sockaddr *rcb_laddr; /* 0x10 */
+};
+
+/* struct radix_node (4.4BSD radix.h, 0x18) */
+struct radix_node {
+    struct radix_mask *rn_mklist;   /* 0x00 */
+    struct radix_node *rn_p;        /* 0x04 parent */
+    s16 rn_b;                       /* 0x08 bit offset; -1-index(netmask) */
+    s8 rn_bmask;                    /* 0x0A node: mask for bit test */
+    u8 rn_flags;                    /* 0x0B */
+    union {
+        struct {
+            char *rn_Key;           /* 0x0C */
+            char *rn_Mask;          /* 0x10 */
+            struct radix_node *rn_Dupedkey; /* 0x14 */
+        } rn_leaf;
+        struct {
+            s32 rn_Off;             /* 0x0C */
+            struct radix_node *rn_L; /* 0x10 */
+            struct radix_node *rn_R; /* 0x14 */
+        } rn_node;
+    } rn_u;
+};
+#define rn_dupedkey rn_u.rn_leaf.rn_Dupedkey
+#define rn_key rn_u.rn_leaf.rn_Key
+#define rn_mask rn_u.rn_leaf.rn_Mask
+#define rn_off rn_u.rn_node.rn_Off
+#define rn_l rn_u.rn_node.rn_L
+#define rn_r rn_u.rn_node.rn_R
+#define RNF_NORMAL  1
+#define RNF_ROOT    2
+#define RNF_ACTIVE  4
+
+/* SCE: per-thread select/poll waiter (socket->so_waiter) */
+struct SceNetInetWaiter {
+    u8 unk0[0x20];
+    s32 unk20;                  /* 0x20 waiting */
+    u8 unk24[0x48 - 0x24];
+    s32 flags;                  /* 0x48 */
+    SceUID sema;                /* 0x4C */
+    u8 unk50[4];
+    struct socket *sockets;     /* 0x54 list linked by so_selnext */
+};
+
+/* struct inpcb (partial) */
+struct inpcb {
+    u8 unk0[0x18];
+    u16 inp_fport;              /* 0x18 */
+    u16 inp_lport;              /* 0x1A */
+    u8 unk1C[0x44 - 0x1C];
+    struct in_addr inp_laddr;   /* 0x44 */
+    struct in_addr inp_faddr;   /* 0x48 */
+};
+
+struct SceTailqHead {
+    void *tqh_first;
+    void **tqh_last;
+};
+
+typedef struct {
+    s8 b[4];
+} SceNetBytes4;
 
 struct Unk_Unk_func_00004124_0_10 {
     u8 pad0[0x1C];
@@ -62,13 +293,6 @@ struct Unk_func_000047DC_1 {
 struct Unk_func_000047DC_temp_a0 {
     u8 pad0[0x4];
     void **unk4;
-};
-
-struct Unk_func_00004A3C_0 {
-    u8 pad0[0x4];
-    s32 unk4;
-    u8 pad8[0x4];
-    s32 unkC;
 };
 
 struct Unk_func_00005778_0 {
@@ -336,13 +560,15 @@ struct Unk_func_0002A244_0 {
     s32 unk4BC;
 };
 
+extern u8 D_0002BB10[];
+extern u8 D_0002BB54[];
 extern M2C_UNK D_0002BB94;
 extern M2C_UNK D_0002BBD8;
 extern s32 D_0002BEC0;
 extern s32 D_0002BF8C;
 extern s32 D_0002C01C;
 extern s32 D_0002C020;
-extern M2C_UNK D_0002C024;
+extern struct SceTailqHead D_0002C024;
 extern s32 D_0002C02C;
 extern s32 D_0002C030;
 extern s32 D_0002C1D4;
@@ -368,9 +594,11 @@ extern s32 D_0002C368;
 extern s32 D_0002C39C;
 extern s32 D_0002C4F0;
 extern s32 D_0002C4F4;
+extern struct domain *D_0002C500;
 extern s32 D_0002C504;
 extern s32 D_0002C51C;
 extern s32 D_0002C520;
+extern s32 D_0002C534;
 extern s32 D_0002C538;
 extern s32 D_0002C53C;
 extern s32 D_0002C540;
@@ -382,7 +610,9 @@ extern s32 D_0002C590;
 extern s32 D_0002C594;
 extern s32 D_0002C5BC;
 extern s32 D_0002C5D8;
-extern struct D_0002CC9C_s D_0002CC9C;
+extern struct soqhead D_0002CC9C;
+extern s32 D_0002CCB4;
+extern u8 D_0002CD38[];
 extern s32 D_0002CD80;
 extern s32 D_0002CEB0;
 extern s32 D_0002CEB4;
@@ -397,25 +627,27 @@ extern s32 D_0002CFF8;
 extern s32 D_0002D930;
 extern s32 D_0002DBC0;
 extern M2C_UNK D_0002DBC8;
-extern M2C_UNK D_0002DC10;
+extern struct Unk_func_00013ED4_0 D_0002DC10;
 extern s32 D_0002DC30;
 extern M2C_UNK D_0002DC78;
 extern s32 D_0002DF50;
+extern s32 D_0002E480;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
 extern s32 D_0002E918;
 extern s32 D_0002E924;
 extern s32 D_0002E95C;
+extern s8 D_0002EAB0[];
 extern s32 D_0002EAB1;
 extern s32 D_0002EB40;
 extern s32 D_0002EB44;
-extern s32 D_00030218;
+extern s32 D_0002EB54;
+extern SceNetBytes4 D_0002F544;
+extern u8 D_00030218[];
 extern struct Unk_func_00013ED4_0 D_000302C8;
 extern s32 func_00001BE4;
 extern s32 func_000095AC;
 extern s32 func_00009650;
-extern s32 func_00009764;
-extern s32 func_00009788;
 extern s32 func_0000986C;
 extern s32 func_00009944;
 extern s32 func_00009A14;
@@ -423,6 +655,25 @@ extern s32 func_00009A58;
 extern s32 func_00009B84;
 extern s32 func_00029280;
 
+void _sce_pspnet_callout_init(void *c);
+M2C_UNK _sce_pspnet_callout_reset(void *, M2C_UNK, M2C_UNK *, void *);
+M2C_UNK _sce_pspnet_callout_stop(void *);
+M2C_UNK _sce_pspnet_get_thread_errno();
+s32 _sce_pspnet_hashinit(s32, void *);
+s32 _sce_pspnet_pppoe_term(void);
+M2C_UNK _sce_pspnet_selwakeup(s32);
+s32 _sce_pspnet_spllock();
+M2C_UNK _sce_pspnet_splunlock(s32);
+M2C_UNK _sce_pspnet_start_of_inet_module_in_if_core(M2C_UNK *, void (*)(), void (*)(s32), void (*)(s32), M2C_UNK *, M2C_UNK *, void (*)(s32), void (*)(void *), void (*)(s32), void (*)(s32), s32 (*)(), M2C_UNK *, M2C_UNK *);
+M2C_UNK _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(M2C_UNK *, M2C_UNK *, M2C_UNK *, M2C_UNK *);
+M2C_UNK _sce_pspnet_start_of_inet_module_in_sched(M2C_UNK *, void (*)(void *));
+M2C_UNK _sce_pspnet_stop_of_inet_module_in_if_core();
+M2C_UNK _sce_pspnet_stop_of_inet_module_in_if_ethersubr_core();
+M2C_UNK _sce_pspnet_stop_of_inet_module_in_ifhandle_ether();
+M2C_UNK _sce_pspnet_stop_of_inet_module_in_netintr();
+M2C_UNK _sce_pspnet_stop_of_inet_module_in_sched();
+M2C_UNK _sce_pspnet_stop_of_pppoe_module_in_netintr();
+s32 _sce_pspnet_tsleep(void *chan, s32 timo);
 void func_00001320(void);
 void func_00001584(void);
 void func_00001BA0(void);
@@ -432,7 +683,7 @@ void func_00001D50(void);
 s32 func_00001D78(void);
 void func_00001DD8(void *arg0);
 void func_00001DF4(void);
-s32 func_00001FA4(void);
+void func_00001FA4(void);
 s32 func_00002028(s32, s32);
 s32 func_000023A8(s32);
 void func_000040FC(void);
@@ -442,8 +693,9 @@ void func_000044AC(s32 arg0);
 void func_000046A8(s32 arg0);
 void func_000047DC(struct Unk_func_000047DC_0 *arg0, struct Unk_func_000047DC_1 *arg1, s32 arg2);
 s32 func_000048B8(s32, s32);
-void func_00004A3C(struct Unk_func_00004A3C_0 *arg0);
-s32 func_00005008(s32);
+void func_00004A3C(struct sockbuf *sb);
+void func_00005008(struct sockbuf *sb);
+void func_00005050(struct sockbuf *sb, s32 len);
 void func_00005778(struct Unk_func_00005778_0 *arg0);
 void func_0000588C(struct Unk_func_0000588C_0 *arg0);
 void func_000058CC(struct Unk_func_000058CC_0 *arg0);
@@ -474,6 +726,8 @@ void func_000096E4(struct Unk_func_000096E4_0 *arg0);
 void func_00009724(s32 arg0);
 void func_00009740(s32 arg0);
 s32 func_0000975C(void);
+s32 func_00009764(void *arg0, s32 *arg1);
+s32 func_00009788(struct socket *so, s32 cmd, void *data, void *ifp);
 void func_000097BC(void);
 void func_00009850(void);
 void func_0000993C(void);
@@ -487,6 +741,7 @@ void func_00009B24(void);
 void func_00009B5C(void);
 s32 func_0000BEE0(s32, s32, s32, s32, s32, s32);
 s32 func_0000C998(s32, s32, s32);
+void func_0000CE98(void *arg);
 s32 func_0000D128(void);
 s32 func_0000D15C(s32);
 s32 func_0000D1F4(void);
@@ -562,40 +817,24 @@ void func_0002AF14(void);
 void func_0002BDB4(void *arg0);
 s32 func_0002C4CC(s32, s32, s32);
 s32 *func_0002C820(void);
-s32 func_0002C864(s32, s32);
+void *func_0002C864(void *dst, const void *src, s32 n);
 u8 *func_0002C918(u8 *arg0, u8 *arg1, s32 arg2);
-void func_0002C9B8(s32 arg0, s32 arg1);
+void *func_0002C94C(void *p, s32 c, s32 n);
+void func_0002C9B8(const void *src, void *dst, s32 len);
 u8 *func_0002CC40(u8 *arg0, u8 *arg1);
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelSignalSema(u32, s32);
+M2C_UNK sceNetBcopy(u8 *, s32, u8);
+s32 sceNetConfigAddArp(s32, s32);
+s32 sceNetConfigDelArp(s32, s32);
+s32 sceNetConfigGetArpInfo(s32, s32);
 M2C_UNK sceNetFreeInternal(void *);
-M2C_UNK sceNetMFreem(s32);
 s32 sceNetInetInetAddr(s32 arg0);
 void sceNetInetInetAton(s32 arg0, s32 arg1);
-s32 _sce_pspnet_pppoe_term(void);
-s32 sceNetConfigAddArp(s32, s32);
-s32 sceNetConfigGetArpInfo(s32, s32);
 s32 *sceNetInet_lib_D7928A6D(void);
-s32 sceNetConfigDelArp(s32, s32);
-u32 sceNetRand();
-M2C_UNK sceNetBcopy(u8 *, s32, u8);
-M2C_UNK _sce_pspnet_stop_of_inet_module_in_if_ethersubr_core();
-M2C_UNK _sce_pspnet_stop_of_inet_module_in_sched();
-M2C_UNK _sce_pspnet_get_thread_errno();
-M2C_UNK _sce_pspnet_stop_of_inet_module_in_if_core();
-M2C_UNK _sce_pspnet_splunlock(s32);
-M2C_UNK _sce_pspnet_stop_of_inet_module_in_ifhandle_ether();
+M2C_UNK sceNetMFreem(s32);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
-M2C_UNK _sce_pspnet_stop_of_inet_module_in_netintr();
-M2C_UNK _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(M2C_UNK *, M2C_UNK *, M2C_UNK *, M2C_UNK *);
-M2C_UNK _sce_pspnet_callout_reset(void *, M2C_UNK, M2C_UNK *, void *);
-M2C_UNK _sce_pspnet_stop_of_pppoe_module_in_netintr();
-s32 _sce_pspnet_spllock();
-M2C_UNK _sce_pspnet_start_of_inet_module_in_if_core(M2C_UNK *, void (*)(), void (*)(s32), void (*)(s32), M2C_UNK *, M2C_UNK *, void (*)(s32), void (*)(void *), void (*)(s32), void (*)(s32), s32 (*)(), M2C_UNK *, M2C_UNK *);
-M2C_UNK _sce_pspnet_callout_stop(void *);
-M2C_UNK _sce_pspnet_selwakeup(s32);
-s32 _sce_pspnet_hashinit(s32, void *);
-M2C_UNK _sce_pspnet_start_of_inet_module_in_sched(M2C_UNK *, void (*)(void *));
+u32 sceNetRand();
 
 #endif
