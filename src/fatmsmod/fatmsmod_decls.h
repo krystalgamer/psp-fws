@@ -79,7 +79,6 @@ extern s32 D_0002EF50;
 extern void *D_0003F728;
 extern M2C_UNK D_00042A80;
 
-M2C_UNK sceIoDelDrv(s32);
 M2C_UNK func_00000020();
 void func_00000048(void);
 M2C_UNK func_00000134();
@@ -263,6 +262,7 @@ s8 func_00022344(s8 arg0);
 s32 module_start(void);
 s32 sceFatMS_driver_BCB9DEDB(void);
 s32 sceIoClose(s32);
+M2C_UNK sceIoDelDrv(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
 s32 sceKernelCreateMbx(void *, u32, void *);
 s32 sceKernelDeleteEventFlag(s32);
