@@ -696,3 +696,6 @@ D_0002E5EC_v151 = 0x0002E5EC;
 soconnect2 = 0x000042EC; // type:func (unreferenced, was merged into func_000042D4)
 dns_primary = 0x0002CD48;
 dns_secondary = 0x0002CD4C;
+zeroin_addr = 0x0002D744;
+in_pcbnotify = 0x00013E20; // type:func
+in_pcbnotifyall = 0x00013F3C; // type:func

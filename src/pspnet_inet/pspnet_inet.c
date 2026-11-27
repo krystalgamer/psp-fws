@@ -2756,9 +2756,56 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001361C);
 #if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000139A4);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013A88);
+struct inpcb *in_pcblookup_connect(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg) {
+    struct inpcbhead *head;
+    struct inpcb *inp;
+    u16 fport = fport_arg, lport = lport_arg;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013BC0);
+    head = INPCBHASH_CONNECT(table, faddr, fport, laddr, lport);
+    for (inp = head->lh_first; inp != NULL; inp = inp->inp_hash.le_next) {
+        if (inp->inp_faddr.s_addr == faddr.s_addr &&
+            inp->inp_fport == fport &&
+            inp->inp_lport == lport &&
+            inp->inp_laddr.s_addr == laddr.s_addr) {
+            goto out;
+        }
+    }
+    return NULL;
+
+out:
+    if (inp != head->lh_first) {
+        LIST_REMOVE(inp, inp_hash);
+        LIST_INSERT_HEAD(head, inp, inp_hash);
+    }
+    return inp;
+}
+
+struct inpcb *in_pcblookup_bind(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg) {
+    struct inpcbhead *head;
+    struct inpcb *inp;
+    u16 lport = lport_arg;
+
+    head = INPCBHASH_BIND(table, laddr, lport);
+    for (inp = head->lh_first; inp != NULL; inp = inp->inp_hash.le_next) {
+        if (inp->inp_lport == lport && inp->inp_laddr.s_addr == laddr.s_addr) {
+            goto out;
+        }
+    }
+    head = INPCBHASH_BIND(table, zeroin_addr, lport);
+    for (inp = head->lh_first; inp != NULL; inp = inp->inp_hash.le_next) {
+        if (inp->inp_lport == lport && inp->inp_laddr.s_addr == zeroin_addr.s_addr) {
+            goto out;
+        }
+    }
+    return NULL;
+
+out:
+    if (inp != head->lh_first) {
+        LIST_REMOVE(inp, inp_hash);
+        LIST_INSERT_HEAD(head, inp, inp_hash);
+    }
+    return inp;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -2845,7 +2892,7 @@ s32 in_pcballoc(struct socket *so, void *v) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", in_pcballoc);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 201
 void in_pcbdisconnect(void *v) {
     struct inpcb *inp = v;
 
@@ -2930,15 +2977,81 @@ void in_setpeeraddr(struct inpcb *inp, struct mbuf *nam) {
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013E20);
+s32 in_pcbnotify(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg,
+                  s32 errno, void (*notify)(struct inpcb *, s32)) {
+    struct inpcbhead *head;
+    struct inpcb *inp, *ninp;
+    u16 fport = fport_arg, lport = lport_arg;
+    s32 nmatch;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013F3C);
+    if (faddr.s_addr == __builtin_allegrex_wsbw(0) || notify == NULL) {
+        return 0;
+    }
+    nmatch = 0;
+    head = INPCBHASH_CONNECT(table, faddr, fport, laddr, lport);
+    for (inp = head->lh_first; inp != NULL; inp = ninp) {
+        ninp = inp->inp_hash.le_next;
+        if (inp->inp_faddr.s_addr == faddr.s_addr && inp->inp_fport == fport &&
+            inp->inp_lport == lport && inp->inp_laddr.s_addr == laddr.s_addr) {
+            (*notify)(inp, errno);
+            nmatch++;
+        }
+    }
+    return nmatch;
+}
+
+void in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, s32 errno, void (*notify)(struct inpcb *, s32)) {
+    struct inpcb *inp, *ninp;
+
+    if (faddr.s_addr == __builtin_allegrex_wsbw(0) || notify == NULL) {
+        return;
+    }
+    for (inp = table->inpt_queue.cqh_first; inp != (struct inpcb *)&table->inpt_queue; inp = ninp) {
+        ninp = inp->inp_queue.cqe_next;
+        if (inp->inp_faddr.s_addr == faddr.s_addr) {
+            (*notify)(inp, errno);
+        }
+    }
+}
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014450);
+s32 in_pcbnotify(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg,
+                  s32 errno, void (*notify)(struct inpcb *, s32)) {
+    struct inpcbhead *head;
+    struct inpcb *inp, *ninp;
+    u16 fport = fport_arg, lport = lport_arg;
+    s32 nmatch;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014614);
+    if (faddr.s_addr == __builtin_allegrex_wsbw(0) || notify == NULL) {
+        return 0;
+    }
+    nmatch = 0;
+    head = INPCBHASH_CONNECT(table, faddr, fport, laddr, lport);
+    for (inp = head->lh_first; inp != NULL; inp = ninp) {
+        ninp = inp->inp_hash.le_next;
+        if (inp->inp_faddr.s_addr == faddr.s_addr && inp->inp_fport == fport &&
+            inp->inp_lport == lport && inp->inp_laddr.s_addr == laddr.s_addr) {
+            (*notify)(inp, errno);
+            nmatch++;
+        }
+    }
+    return nmatch;
+}
+
+void in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, s32 errno, void (*notify)(struct inpcb *, s32)) {
+    struct inpcb *inp, *ninp;
+
+    if (faddr.s_addr == __builtin_allegrex_wsbw(0) || notify == NULL) {
+        return;
+    }
+    for (inp = table->inpt_queue.cqh_first; inp != (struct inpcb *)&table->inpt_queue; inp = ninp) {
+        ninp = inp->inp_queue.cqe_next;
+        if (inp->inp_faddr.s_addr == faddr.s_addr) {
+            (*notify)(inp, errno);
+        }
+    }
+}
 #endif
 
 #if FW_VERSION < 201
@@ -3845,14 +3958,14 @@ void func_0002544C(void *arg0) {
 #endif
 
 #if FW_VERSION < 151
-void func_00025468(SceNetBytes4 addr) {
-    func_00014614(&D_0002DD10, addr, 0x7A, func_00023B08);
+void func_00025468(struct in_addr addr) {
+    in_pcbnotifyall(&D_0002DD10, addr, 0x7A, func_00023B08);
 }
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-void func_00025468(SceNetBytes4 addr) {
-    func_00013F3C(&D_0002DD10, addr, 0x7A, func_0002373C);
+void func_00025468(struct in_addr addr) {
+    in_pcbnotifyall(&D_0002DD10, addr, 0x7A, func_0002373C);
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002373C);

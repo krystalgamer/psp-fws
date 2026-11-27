@@ -502,3 +502,7 @@ dns_primary = 0x0002EB48;
 dns_secondary = 0x0002EB4C;
 zeroin_addr = 0x0002F544;
 tcbtable = 0x000302C8;
+in_pcblookup_connect = 0x00013A88; // type:func
+in_pcblookup_bind = 0x00013BC0; // type:func
+in_pcbnotify = 0x00014450; // type:func
+in_pcbnotifyall = 0x00014614; // type:func
