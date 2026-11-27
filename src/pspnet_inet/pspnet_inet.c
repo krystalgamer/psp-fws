@@ -4497,9 +4497,38 @@ void rip_init(void) {
     in_pcbinit(&rawcbtable, 1, 1);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B5FC);
+s32 rip_bind(struct inpcb *inp, struct mbuf *nam) {
+    struct sockaddr_in *addr = mtod(nam, struct sockaddr_in *);
+    TAILQ_HEAD(, ifnet) ifnet;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B6BC);
+    _sce_pspnet_get_if_core_variables(NULL, NULL, NULL, (struct ifnet **)&ifnet);
+    if (nam->m_len != sizeof(*addr))
+        return (0x16);
+    if (ifnet.tqh_first == 0)
+        return (0x7D);
+    if (addr->sin_family != AF_INET && addr->sin_family != 3)
+        return (0x6A);
+    if (addr->sin_addr.s_addr != __builtin_allegrex_wsbw(0) &&
+        ifa_ifwithaddr((struct sockaddr *)addr) == 0)
+        return (0x7D);
+    inp->inp_laddr = addr->sin_addr;
+    return (0);
+}
+
+s32 rip_connect(struct inpcb *inp, struct mbuf *nam) {
+    struct sockaddr_in *addr = mtod(nam, struct sockaddr_in *);
+    TAILQ_HEAD(, ifnet) ifnet;
+
+    _sce_pspnet_get_if_core_variables(NULL, NULL, NULL, (struct ifnet **)&ifnet);
+    if (nam->m_len != sizeof(*addr))
+        return (0x16);
+    if (ifnet.tqh_first == 0)
+        return (0x7D);
+    if (addr->sin_family != AF_INET && addr->sin_family != 3)
+        return (0x6A);
+    inp->inp_faddr = addr->sin_addr;
+    return (0);
+}
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B2E4);
@@ -4510,7 +4539,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B820);
 #endif
 
 #if FW_VERSION < 151
-void func_0001C2E0(struct inpcb *inp) {
+void rip_disconnect(struct inpcb *inp) {
     inp->inp_faddr = zeroin_addr;
 }
 #endif
