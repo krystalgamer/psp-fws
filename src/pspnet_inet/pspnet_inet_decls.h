@@ -231,6 +231,83 @@ struct inpcb {
     struct in_addr inp_faddr;   /* 0x48 */
 };
 
+/* struct rtentry (4.4BSD route.h, partial) */
+struct rtentry {
+    struct radix_node rt_nodes[2];  /* 0x00 */
+    struct sockaddr *rt_gateway;    /* 0x30 */
+    s32 rt_flags;                   /* 0x34 RTF_* */
+    s32 rt_refcnt;                  /* 0x38 */
+    u32 rt_use;                     /* 0x3C */
+    struct ifnet *rt_ifp;           /* 0x40 */
+};
+#define RTF_UP 0x1
+
+struct route {
+    struct rtentry *ro_rt;
+    struct sockaddr ro_dst;
+};
+
+/* NetBSD if_spppsubr.c control protocol descriptor (0x3C): lcp D_0002BB10, ipcp D_0002BB54, pap D_0002BB94, chap D_0002BBD8 */
+struct sppp;
+struct cp {
+    u16 proto;                      /* 0x00 */
+    u8 protoidx;                    /* 0x02 */
+    u8 flags;                       /* 0x03 CP_* */
+    const char *name;               /* 0x04 */
+    void (*Up)(struct sppp *sp);    /* 0x08 */
+    void (*Down)(struct sppp *sp);  /* 0x0C */
+    void (*Open)(struct sppp *sp);  /* 0x10 */
+    void (*Close)(struct sppp *sp); /* 0x14 */
+    void (*TO)(void *sp);           /* 0x18 */
+    s32 (*RCR)();                   /* 0x1C */
+    void (*RCN_rej)();              /* 0x20 */
+    void (*RCN_nak)();              /* 0x24 */
+    void (*tlu)(struct sppp *sp);   /* 0x28 */
+    void (*tld)(struct sppp *sp);   /* 0x2C */
+    void (*tls)(struct sppp *sp);   /* 0x30 */
+    void (*tlf)(struct sppp *sp);   /* 0x34 */
+    void (*scr)(struct sppp *sp);   /* 0x38 */
+};
+#define CP_LCP  0x01
+#define CP_AUTH 0x02
+#define CP_NCP  0x04
+#define CP_QUAL 0x08
+
+#define IDX_LCP 0
+#define IDX_IPCP 1
+#define IDX_PAP 2
+#define IDX_CHAP 3
+#define IDX_COUNT 4
+
+#define SPPP_PHASE_DEAD 0
+#define SPPP_PHASE_ESTABLISH 1
+#define SPPP_PHASE_TERMINATE 2
+#define SPPP_PHASE_AUTHENTICATE 3
+#define SPPP_PHASE_NETWORK 4
+
+#define PPP_PAP 0xC023
+
+/* struct sppp (NetBSD if_spppsubr, partial; callouts are 0x24 bytes) */
+struct sppp {
+    u8 unk0[0x170];
+    s32 pp_phase;                   /* 0x170 */
+    s32 unk174;
+    u8 unk178[0x19C - 0x178];
+    s32 unk19C;                     /* 0x19C set from lcp.max_configure by pap.Open */
+    u8 unk1A0[0x1B4 - 0x1A0];
+    u8 ch[IDX_COUNT][0x24];         /* 0x1B4 per-protocol timeout callouts */
+    u8 unk244[0x254 - 0x244];
+    s32 lcp_protos;                 /* 0x254 lcp.protos */
+    u8 unk258[0x27C - 0x258];
+    u16 myauth_proto;               /* 0x27C myauth.proto */
+    u8 unk27E[0x394 - 0x27E];
+    s32 lcp_timeout;                /* 0x394 */
+    s32 lcp_max_configure;          /* 0x398 */
+    u8 unk39C[0x4A8 - 0x39C];
+    void (*pp_tls)(struct sppp *sp);    /* 0x4A8 */
+    void (*pp_tlf)(struct sppp *sp);    /* 0x4AC */
+};
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -240,10 +317,7 @@ typedef struct {
     s8 b[4];
 } SceNetBytes4;
 
-struct Unk_Unk_func_00004124_0_10 {
-    u8 pad0[0x1C];
-    s32 (*unk1C)(void *, M2C_UNK, M2C_UNK, s32, M2C_UNK);
-};
+typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
 
 struct Unk_Unk_func_0001AA20_0_20 {
     u8 pad0[0x4];
@@ -253,65 +327,6 @@ struct Unk_Unk_func_0001AA20_0_20 {
 struct Unk_Unk_func_0001AA20_0_4 {
     u8 pad0[0x30];
     u16 unk30;
-};
-
-struct Unk_func_00001C28_0 {
-    u8 pad0[0x8];
-    u16 unk8;
-    u8 padA[0xAA];
-    struct Unk_func_00001C28_temp_v1 *unkB4;
-};
-
-struct Unk_func_00001C28_temp_v1 {
-    u8 pad0[0x20];
-    s32 unk20;
-    u8 pad24[0x24];
-    s32 unk48;
-    u32 unk4C;
-};
-
-struct Unk_func_00004124_0 {
-    u8 pad0[0x10];
-    struct Unk_Unk_func_00004124_0_10 *unk10;
-};
-
-struct Unk_func_000047DC_0 {
-    u8 pad0[0x34];
-    u16 unk34;
-    u16 unk36;
-};
-
-struct Unk_func_000047DC_1 {
-    u8 pad0[0x14];
-    void *unk14;
-    void *unk18;
-    u8 pad1C[0x10];
-    s32 unk2C;
-    void **unk30;
-};
-
-struct Unk_func_000047DC_temp_a0 {
-    u8 pad0[0x4];
-    void **unk4;
-};
-
-struct Unk_func_00005778_0 {
-    u8 pad0[0x8];
-    u16 unk8;
-};
-
-struct Unk_func_0000588C_0 {
-    u8 pad0[0x8];
-    u16 unk8;
-    u8 padA[0x82];
-    u16 unk8C;
-};
-
-struct Unk_func_000058CC_0 {
-    u8 pad0[0x8];
-    u16 unk8;
-    u8 padA[0x5A];
-    u16 unk64;
 };
 
 struct Unk_func_000090FC_0 {
@@ -560,9 +575,11 @@ struct Unk_func_0002A244_0 {
     s32 unk4BC;
 };
 
-extern u8 D_0002BB10[];
-extern u8 D_0002BB54[];
+extern const struct cp D_0002BB10; /* lcp */
+extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */
+extern const struct cp D_0002BB54; /* ipcp */
 extern M2C_UNK D_0002BB94;
+extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
 extern M2C_UNK D_0002BBD8;
 extern s32 D_0002BEC0;
 extern s32 D_0002BF8C;
@@ -592,11 +609,12 @@ extern s32 D_0002C360;
 extern s32 D_0002C364;
 extern s32 D_0002C368;
 extern s32 D_0002C39C;
+extern const struct cp *D_0002C4E0[IDX_COUNT]; /* cps */
 extern s32 D_0002C4F0;
 extern s32 D_0002C4F4;
 extern struct domain *D_0002C500;
 extern s32 D_0002C504;
-extern s32 D_0002C51C;
+extern SceNetInetHook D_0002C51C;
 extern s32 D_0002C520;
 extern s32 D_0002C534;
 extern s32 D_0002C538;
@@ -610,6 +628,7 @@ extern s32 D_0002C590;
 extern s32 D_0002C594;
 extern s32 D_0002C5BC;
 extern s32 D_0002C5D8;
+extern u8 D_0002C5DC[];
 extern struct soqhead D_0002CC9C;
 extern s32 D_0002CCB4;
 extern u8 D_0002CD38[];
@@ -623,13 +642,16 @@ extern s32 D_0002CEEC;
 extern s32 D_0002CF00;
 extern s32 D_0002CF0C;
 extern s32 D_0002CF10;
-extern s32 D_0002CFF8;
+extern struct SceTailqHead D_0002CFF8[];
 extern s32 D_0002D930;
 extern s32 D_0002DBC0;
 extern M2C_UNK D_0002DBC8;
 extern struct Unk_func_00013ED4_0 D_0002DC10;
 extern s32 D_0002DC30;
 extern M2C_UNK D_0002DC78;
+extern struct SceTailqHead D_0002DC98[13];
+extern s32 D_0002DD04;
+extern u8 D_0002DD10[];
 extern s32 D_0002DF50;
 extern s32 D_0002E480;
 extern s32 D_0002E5EC;
@@ -641,29 +663,23 @@ extern s8 D_0002EAB0[];
 extern s32 D_0002EAB1;
 extern s32 D_0002EB40;
 extern s32 D_0002EB44;
+extern SceNetBytes4 D_0002EB48;
+extern SceNetBytes4 D_0002EB4C;
 extern s32 D_0002EB54;
 extern SceNetBytes4 D_0002F544;
 extern u8 D_00030218[];
 extern struct Unk_func_00013ED4_0 D_000302C8;
-extern s32 func_00001BE4;
-extern s32 func_000095AC;
-extern s32 func_00009650;
-extern s32 func_0000986C;
-extern s32 func_00009944;
-extern s32 func_00009A14;
-extern s32 func_00009A58;
-extern s32 func_00009B84;
-extern s32 func_00029280;
+extern u8 *D_000305A4;
 
 void _sce_pspnet_callout_init(void *c);
-M2C_UNK _sce_pspnet_callout_reset(void *, M2C_UNK, M2C_UNK *, void *);
-M2C_UNK _sce_pspnet_callout_stop(void *);
+void _sce_pspnet_callout_reset(void *c, s32 ticks, void (*func)(void *), void *arg);
+void _sce_pspnet_callout_stop(void *c);
 M2C_UNK _sce_pspnet_get_thread_errno();
 s32 _sce_pspnet_hashinit(s32, void *);
 s32 _sce_pspnet_pppoe_term(void);
-M2C_UNK _sce_pspnet_selwakeup(s32);
-s32 _sce_pspnet_spllock();
-M2C_UNK _sce_pspnet_splunlock(s32);
+void _sce_pspnet_selwakeup(struct selinfo *sip);
+s32 _sce_pspnet_spllock(void);
+void _sce_pspnet_splunlock(s32 s);
 M2C_UNK _sce_pspnet_start_of_inet_module_in_if_core(M2C_UNK *, void (*)(), void (*)(s32), void (*)(s32), M2C_UNK *, M2C_UNK *, void (*)(s32), void (*)(void *), void (*)(s32), void (*)(s32), s32 (*)(), M2C_UNK *, M2C_UNK *);
 M2C_UNK _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(M2C_UNK *, M2C_UNK *, M2C_UNK *, M2C_UNK *);
 M2C_UNK _sce_pspnet_start_of_inet_module_in_sched(M2C_UNK *, void (*)(void *));
@@ -678,30 +694,31 @@ void func_00001320(void);
 void func_00001584(void);
 void func_00001BA0(void);
 void func_00001BC8(void);
-void func_00001C28(struct Unk_func_00001C28_0 *arg0);
+void func_00001BE4(struct SceNetInetWaiter *w);
+void func_00001C28(struct socket *so);
 void func_00001D50(void);
 s32 func_00001D78(void);
-void func_00001DD8(void *arg0);
+void func_00001DD8(struct socket *so);
 void func_00001DF4(void);
 void func_00001FA4(void);
 s32 func_00002028(s32, s32);
 s32 func_000023A8(s32);
 void func_000040FC(void);
-s32 func_00004124(struct Unk_func_00004124_0 *arg0, s32 arg1);
-s32 func_0000431C(void *arg0, s32 arg1);
-void func_000044AC(s32 arg0);
-void func_000046A8(s32 arg0);
-void func_000047DC(struct Unk_func_000047DC_0 *arg0, struct Unk_func_000047DC_1 *arg1, s32 arg2);
-s32 func_000048B8(s32, s32);
+s32 func_00004124(struct socket *so, struct mbuf *nam);
+s32 func_0000431C(struct socket *so, struct mbuf *nam);
+void func_000044AC(struct socket *so);
+void func_000046A8(struct socket *so);
+void func_000047DC(struct socket *head, struct socket *so, s32 q);
+void func_000048B8(struct socket *so, struct sockbuf *sb);
 void func_00004A3C(struct sockbuf *sb);
 void func_00005008(struct sockbuf *sb);
 void func_00005050(struct sockbuf *sb, s32 len);
-void func_00005778(struct Unk_func_00005778_0 *arg0);
-void func_0000588C(struct Unk_func_0000588C_0 *arg0);
-void func_000058CC(struct Unk_func_000058CC_0 *arg0);
-void func_00005964(void *arg0);
-void func_00005A78(void *arg0);
-void func_00005AB8(void *arg0);
+void func_00005778(struct socket *so);
+void func_0000588C(struct socket *so);
+void func_000058CC(struct socket *so);
+void func_00005964(struct socket *so);
+void func_00005A78(struct socket *so);
+void func_00005AB8(struct socket *so);
 s32 func_00005B8C(void);
 s32 func_00005D70(void);
 void func_000076C4(s32 arg0, s32 arg1, s32 arg2);
@@ -717,9 +734,11 @@ void func_00009564(void *arg0);
 void func_00009570(s32 arg0);
 void func_0000958C(s32 arg0);
 void func_000095A4(s32 arg0);
+s32 func_000095AC();
 void func_000095C0(s32 arg0);
 s32 func_000095DC(void);
 void func_0000963C(void);
+s32 func_00009650();
 void func_000096C8(s32 arg0);
 s32 func_000096D0(void);
 void func_000096E4(struct Unk_func_000096E4_0 *arg0);
@@ -730,15 +749,21 @@ s32 func_00009764(void *arg0, s32 *arg1);
 s32 func_00009788(struct socket *so, s32 cmd, void *data, void *ifp);
 void func_000097BC(void);
 void func_00009850(void);
+s32 func_0000986C();
 void func_0000993C(void);
+s32 func_00009944();
 s32 func_00009968(s32 arg0);
 s32 func_00009984(void);
 void func_0000999C(void);
 s32 func_000099D4(void);
+void func_00009A14(void *arg0, void *arg1, u16 arg2, void *arg3);
+s32 func_00009A58();
 s32 func_00009AF0(s32 arg0);
 s32 func_00009B0C(void);
 void func_00009B24(void);
 void func_00009B5C(void);
+s32 func_00009B84();
+struct rtentry *func_0000BA10(struct sockaddr *dst, s32 report);
 s32 func_0000BEE0(s32, s32, s32, s32, s32, s32);
 s32 func_0000C998(s32, s32, s32);
 void func_0000CE98(void *arg);
@@ -769,6 +794,7 @@ s32 func_000106E0(void);
 s32 func_00010700(void);
 void func_000138B4(struct Unk_func_000138B4_0 *arg0);
 void func_00013ED4(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2);
+void func_00014614(void *a, SceNetBytes4 addr, s32 c, void *d);
 void func_00015654(struct Unk_func_00015654_0 *arg0);
 s32 func_00019A98(void);
 void func_00019C00(struct Unk_func_00019C00_0 *arg0);
@@ -781,9 +807,11 @@ void func_0001B50C(void *arg0);
 void func_0001C208(void);
 void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1);
 void func_0001D1E4(void *arg0, s16 arg1);
+void func_000215C4(void *p);
 s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
+void func_00023B08();
 void func_000244B0(void);
 s32 func_00024B7C(void *arg0);
 s32 func_000251A4(void *arg0);
@@ -797,6 +825,7 @@ void func_00028768(struct Unk_func_00028768_0 *arg0);
 void func_00028778(void *arg0);
 void func_000287F4(void *arg0);
 void func_0002884C(void);
+void func_00028854(void *arg);
 void func_000288E4(void);
 void func_000289B0(struct Unk_func_000289B0_0 *arg0);
 void func_000289C0(void *arg0);
@@ -804,6 +833,7 @@ void func_00028A18(void);
 void func_00028B30(void);
 void func_00028B7C(void);
 s32 func_00028D50(void);
+void func_00029280(void *arg);
 s32 func_00029330(void *arg0);
 void func_0002A244(struct Unk_func_0002A244_0 *arg0);
 void func_0002A4DC(void);
@@ -822,6 +852,8 @@ u8 *func_0002C918(u8 *arg0, u8 *arg1, s32 arg2);
 void *func_0002C94C(void *p, s32 c, s32 n);
 void func_0002C9B8(const void *src, void *dst, s32 len);
 u8 *func_0002CC40(u8 *arg0, u8 *arg1);
+s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
+void func_0002D420();
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelSignalSema(u32, s32);
