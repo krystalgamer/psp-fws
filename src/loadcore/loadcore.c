@@ -27,7 +27,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00000154);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_0000019C);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_000001A0);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00000280);
@@ -45,7 +45,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00000368);
 INCLUDE_ASM("nonmatchings/loadcore", func_00000480);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00000340);
 #endif
 
@@ -124,7 +124,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_0000145C);
 INCLUDE_ASM("nonmatchings/loadcore", func_00001224);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00000370);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00000488);
@@ -142,7 +142,7 @@ void func_00000690(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_000006AC);
 #endif
 
@@ -160,7 +160,7 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_000068A0);
 INCLUDE_RODATA("nonmatchings/loadcore", D_000068AC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00000A7C);
 
 void func_00000AAC(void *arg0, void *arg1) {
@@ -190,10 +190,14 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00000CC0);
 INCLUDE_RODATA("nonmatchings/loadcore", D_000065E4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/loadcore", D_00006604);
 
 INCLUDE_RODATA("nonmatchings/loadcore", D_00006610);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_00000CF4);
 #endif
 
 #if FW_VERSION >= 282
@@ -237,7 +241,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000009D4);
 INCLUDE_ASM("nonmatchings/loadcore", module_bootstart);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00001138);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_000012EC);
@@ -382,15 +386,23 @@ void sceKernelRegisterLibraryForUser(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00001888);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00001A00);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_00001A34);
+
+INCLUDE_ASM("nonmatchings/loadcore", func_00001ACC);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelReleaseLibrary);
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", func_00000DB8);
 #endif
 
@@ -412,7 +424,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_0000141C);
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCanReleaseLibrary);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00001B6C);
 
 void sceKernelLinkLibraryEntries(s32 arg0, s32 arg1) {
@@ -442,7 +454,7 @@ s32 sceKernelMaskLibraryEntries(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00001D1C);
 #endif
 
@@ -460,7 +472,7 @@ void sceKernelLinkLibraryEntries(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/loadcore", func_00001990);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelUnLinkLibraryEntries);
 #endif
 
@@ -468,7 +480,7 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelUnLinkLibraryEntries);
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelMaskLibraryEntries);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION < 150 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelQueryLoadCoreCB);
 #endif
 
@@ -600,7 +612,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00002B18);
 INCLUDE_ASM("nonmatchings/loadcore", func_00002528);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00001ED4);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00001F94);
@@ -672,7 +684,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00001904);
 INCLUDE_ASM("nonmatchings/loadcore", func_00002050);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelSetBootCallbackLevel);
 #endif
 
@@ -760,8 +772,12 @@ s32 sceKernelLoadCoreMode(void) {
 INCLUDE_ASM("nonmatchings/loadcore", func_00002808);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION < 150 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/loadcore", func_000029D8);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_000029E8);
 #endif
 
 #if FW_VERSION >= 282
@@ -850,7 +866,9 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00003008);
 INCLUDE_ASM("nonmatchings/loadcore", func_000031C8);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCheckPspConfig);
+#endif
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/loadcore", func_00003B74);
@@ -868,7 +886,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000028B4);
 INCLUDE_ASM("nonmatchings/loadcore", func_00002AE0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00002AA0);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00002AB8);
@@ -896,6 +914,10 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_00006CD8);
 INCLUDE_RODATA("nonmatchings/loadcore", D_00006D10);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_000036BC);
+#endif
+
 #if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/loadcore", func_00003414);
 #endif
@@ -906,7 +928,9 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00003450);
 INCLUDE_ASM("nonmatchings/loadcore", func_00003534);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCheckExecFile);
+#endif
 
 #if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/loadcore", D_00006D58);
@@ -914,7 +938,11 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_00006D58);
 INCLUDE_RODATA("nonmatchings/loadcore", D_00006D78);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_0000395C);
+#else
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelProbeExecutableObject);
+#endif
 
 #if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/loadcore", func_000031EC);
@@ -926,6 +954,10 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00003138);
 
 #if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/loadcore", D_00006E0C);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_00003B18);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 152
@@ -956,12 +988,18 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_000071C4);
 INCLUDE_RODATA("nonmatchings/loadcore", D_00007104);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00003B40);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00003E60);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00004168);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_00004600);
+
+INCLUDE_ASM("nonmatchings/loadcore", func_00004844);
 #endif
 
 #if FW_VERSION >= 282
@@ -986,7 +1024,7 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_00007268);
 INCLUDE_RODATA("nonmatchings/loadcore", D_0000728C);
 #endif
 
-#if FW_VERSION < 260 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 260) || (FW_VERSION >= 282 && FW_VERSION < 350)
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelApplyElfRelSection);
 #endif
 
@@ -1014,7 +1052,9 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_000079C0_v260);
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelApplyElfRelSection);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelApplyPspRelSection);
+#endif
 
 #if FW_VERSION >= 310
 s32 func_000051C0(s32 arg0) {
@@ -1175,7 +1215,7 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByUID);
 INCLUDE_ASM("nonmatchings/loadcore", func_000054B4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00004A00);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00004A80);
@@ -1190,11 +1230,17 @@ s32 func_00004B28(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00004B50);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00004BD4);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_00004CD8);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelModuleFromUID);
 #endif
 
@@ -1264,7 +1310,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_0000584C);
 INCLUDE_RODATA("nonmatchings/loadcore", D_000073A0);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCreateModule);
 #endif
 
@@ -1302,7 +1348,7 @@ void func_00005E20(void) {
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleFromUID);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceKernelDeleteModule(void *arg0) {
     sceKernelDeleteUID(M2C_FIELD(arg0, s32 *, 0x2C));
 }
@@ -1312,7 +1358,7 @@ void sceKernelDeleteModule(void *arg0) {
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelDeleteModule);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00004DBC);
 
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelModuleAssign);
@@ -1339,18 +1385,26 @@ void sceKernelFreeModule(void *arg0) {
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCreateAssignModule);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelRegisterModule);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_00005118);
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelReleaseModule);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByName);
 
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByAddress);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_0000524C);
 #endif
 
 #if FW_VERSION >= 282
@@ -1365,11 +1419,17 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByUID);
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleListWithAlloc);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceKernelModuleCount(void) {
     return D_00008914;
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/loadcore", func_000052BC);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleList);
 #endif
 
@@ -1464,7 +1524,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00007040);
 INCLUDE_ASM("nonmatchings/loadcore", func_000055E0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_000056A4);
 #endif
 
@@ -1485,7 +1545,7 @@ s32 func_00005858(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_00005858(s32 arg0) {
     void *sp0;
     s32 var_v1;
@@ -1529,7 +1589,7 @@ s32 func_00005894(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_000058D0(s32 arg0) {
     void *sp0;
     s32 var_v1;
