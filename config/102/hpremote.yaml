@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/hpremote
-  src_path: src/hpremote
+  src_path: tmp/av_src/102/hpremote
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/hpremote.ld
   cache_path: tmp/build/102/.splat_cache.hpremote
@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, hpremote]
+      - [0x80, c, hpremote]
       - { start: 0x1A8C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1BA4, type: prxpad, order: .text }
       - { start: 0x1BB0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x1CA4, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x1CD8, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x1EB4, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x1F40, rodata, hpremote]
+      - [0x1F40, .rodata, hpremote]
       - { start: 0x1F98, type: prxpad, order: .rodata }
   - name: hpremote_seg1
     type: code
