@@ -951,9 +951,33 @@ s32 sceDisplayGetAccumulatedHcount(void)
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 150 && FW_VERSION < 271
+s32 sceDisplayGetAccumulatedHcount(void)
+{
+    s32 i = 0;
+    s32 intr;
+    u32 count;
+
+    intr = sceKernelCpuSuspendIntr();
+    do {
+        i++;
+        if (i >= 4) {
+            sceKernelCpuResumeIntr(intr);
+            return 0x80020001;
+        }
+        count = *(volatile u32 *)0xBE740004;
+    } while (*(volatile u32 *)0xBE740004 != count);
+    count += g_Vblank.unk8;
+    sceKernelCpuResumeIntr(intr);
+    return __builtin_allegrex_ext(count, 0, 31);
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetAccumulatedHcount);
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 sceDisplayGetCurrentHcount(void)
 {
     s32 i = 0;
@@ -980,9 +1004,7 @@ s32 sceDisplayGetCurrentHcount(void)
     setK1(oldK1);
     return acc;
 }
-#endif
-
-#if FW_VERSION >= 150
+#else
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetCurrentHcount);
 #endif
 

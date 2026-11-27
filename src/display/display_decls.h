@@ -85,9 +85,12 @@ typedef struct {
 #if FW_VERSION == 100
     s32 hcountPerFrame;       /* 0x0C */
 #elif FW_VERSION < 201
-    u8 padC[8];
+    s32 unkC;
+    s32 hcountPerFrame;       /* 0x10 */
 #elif FW_VERSION < 282
-    u8 padC[0xC];
+    s32 unkC;
+    s32 unk10;
+    s32 hcountPerFrame;       /* 0x14 */
 #else
     u8 padC[8];
     s32 unk14;
