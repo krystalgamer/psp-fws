@@ -55,6 +55,8 @@ INCLUDE_RODATA("nonmatchings/photo_plugin_crtend", D_00025130);
 
 #if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/photo_plugin_crtend", D_00025020);
+
+__asm__(".globl _ZTV14Class_00025020\n_ZTV14Class_00025020 = D_00025020 - 8\n");
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201

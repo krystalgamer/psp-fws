@@ -125,15 +125,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_0002878C);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00028814);
-#endif
 
-#if FW_VERSION >= 350
-s32 func_000288C0(void) {
-    return Job_isCanceled() != 0;
-}
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 350
 s32 func_000288C0(void) {
     return Job_isCanceled() != 0;
 }

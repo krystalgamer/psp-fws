@@ -1,4 +1,7 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
   "Heap_Create": "s32 Heap_Create(M2C_UNK, s32, s32);",
   "InputDevice_PspPad_Lock": "M2C_UNK InputDevice_PspPad_Lock();",
@@ -6,6 +9,12 @@
   "Job_Cancel2": "M2C_UNK Job_Cancel2(M2C_UNK, s32);",
   "Job_Start": "M2C_UNK Job_Start(M2C_UNK, void (*)(void ***), void *, M2C_UNK, M2C_UNK, M2C_UNK *);",
   "Job_isCanceled": "s32 Job_isCanceled();",
+  "_ZN14Class_00025020D0Ev": "void _ZN14Class_00025020D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_00025020D1Ev": "void _ZN14Class_00025020D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_00025020D2Ev": "void _ZN14Class_00025020D2Ev(M2C_UNK **arg0);",
+  "_ZN14Class_000250D0D0Ev": "void _ZN14Class_000250D0D0Ev(void *arg0);",
+  "_ZN14Class_000250D0D1Ev": "void _ZN14Class_000250D0D1Ev(void *arg0);",
+  "_ZN14Class_000250D0D2Ev": "s32 _ZN14Class_000250D0D2Ev(s32);",
   "_ZN3paf11SurfacePoolC1EPviPKc": "M2C_UNK _ZN3paf11SurfacePoolC1EPviPKc(void *, s32, M2C_UNK, M2C_UNK);",
   "_ZN3paf4View12PageActivateEPKc": "M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);",
   "_ZN3paf4View12PageActivateEPv": "M2C_UNK _ZN3paf4View12PageActivateEPv(s32, s32);",
@@ -543,6 +552,8 @@
   "vsh_34DA1B67": "struct Unk_ret_vsh_34DA1B67 *vsh_34DA1B67();"
  },
  "types": {
+  "Class_00025020": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00025020 is data (vptr = label - 8 + 8) */\nclass Class_00025020 : public Class_000250D0 {\npublic:\n    virtual ~Class_00025020();\n};\n#endif",
+  "Class_000250D0": "#ifdef __cplusplus\n/* dtor still asm/m2c (not trivial) */\nclass Class_000250D0 {\npublic:\n    virtual ~Class_000250D0();\n};\n#endif",
   "Unk_D_00031B40": "struct Unk_D_00031B40 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_D_00031B84": "struct Unk_D_00031B84 {\n    u8 pad0[0x4C];\n    s32 unk4C;\n};",
   "Unk_Unk_func_0000EE0C_0_0": "struct Unk_Unk_func_0000EE0C_0_0 {\n    u8 pad0[0x8];\n    M2C_UNK (*unk8)(void *, M2C_UNK, M2C_UNK, M2C_UNK);\n};",

@@ -1098,7 +1098,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001E614);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0001E614(M2C_UNK **arg0) {
     *arg0 = &D_00025020;
-    func_0002158C((s32) arg0);
+    _ZN14Class_000250D0D2Ev((s32) arg0);
 }
 #endif
 
@@ -1109,7 +1109,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001E63C);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0001E63C(M2C_UNK **arg0) {
     *arg0 = &D_00025020;
-    func_0002158C((s32) arg0);
+    _ZN14Class_000250D0D2Ev((s32) arg0);
     _ZdlPv((s32) arg0);
 }
 #endif
@@ -1401,6 +1401,8 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001DC34);
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/photo_plugin_02BC40", D_00025020);
+
+__asm__(".globl _ZTV14Class_00025020\n_ZTV14Class_00025020 = D_00025020 - 8\n");
 #endif
 
 #if FW_VERSION < 201
@@ -1611,11 +1613,11 @@ INCLUDE_RODATA("nonmatchings/photo_plugin_02BC40", D_000250A8);
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001FA64_v100);
 
-INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002158C);
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", _ZN14Class_000250D0D2Ev);
 
-INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001FBB8);
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", _ZN14Class_000250D0D1Ev);
 
-INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001FC6C);
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", _ZN14Class_000250D0D0Ev);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001FD28);
 
@@ -1637,9 +1639,9 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002153C);
 
 INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_00021564);
 
-INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002158C);
+INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", _ZN14Class_000250D0D2Ev);
 
-void func_000215CC(void *arg0) {
+void _ZN14Class_000250D0D1Ev(void *arg0) {
     s32 temp_a1;
 
     temp_a1 = M2C_FIELD(arg0, s32 *, 4);
@@ -1651,7 +1653,7 @@ void func_000215CC(void *arg0) {
     }
 }
 
-void func_0002160C(void *arg0) {
+void _ZN14Class_000250D0D0Ev(void *arg0) {
     s32 temp_v1;
 
     temp_v1 = M2C_FIELD(arg0, s32 *, 4);
@@ -1718,34 +1720,21 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_00021C20);
 
 void func_00021CE0(M2C_UNK **arg0) {
     *arg0 = &D_00025020;
-    func_0002158C((s32) arg0);
+    _ZN14Class_000250D0D2Ev((s32) arg0);
     _ZdlPv((s32) arg0);
 }
 
-void func_00021D18(M2C_UNK **arg0) {
-    *arg0 = &D_00025020;
-    func_0002158C((s32) arg0);
-}
-
-void func_00021D40(M2C_UNK **arg0) {
-    *arg0 = &D_00025020;
-    func_0002158C((s32) arg0);
-}
-
-void func_00021D68(M2C_UNK **arg0) {
-    *arg0 = &D_00025020;
-    func_0002158C((s32) arg0);
-    _ZdlPv((s32) arg0);
+Class_00025020::~Class_00025020() {
 }
 
 void func_00021DA0(M2C_UNK **arg0) {
     *arg0 = &D_00025020;
-    func_0002158C((s32) arg0);
+    _ZN14Class_000250D0D2Ev((s32) arg0);
 }
 
 void func_00021DC8(M2C_UNK **arg0) {
     *arg0 = &D_00025020;
-    func_0002158C((s32) arg0);
+    _ZN14Class_000250D0D2Ev((s32) arg0);
     _ZdlPv((s32) arg0);
 }
 #endif
@@ -1757,7 +1746,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_00021E00);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00021E00(M2C_UNK **arg0) {
     *arg0 = &D_00025100;
-    func_0002158C((s32) arg0);
+    _ZN14Class_000250D0D2Ev((s32) arg0);
     _ZdlPv((s32) arg0);
 }
 #endif
@@ -1769,6 +1758,6 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_00021E38);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00021E38(M2C_UNK **arg0) {
     *arg0 = &D_00025100;
-    func_0002158C((s32) arg0);
+    _ZN14Class_000250D0D2Ev((s32) arg0);
 }
 #endif
