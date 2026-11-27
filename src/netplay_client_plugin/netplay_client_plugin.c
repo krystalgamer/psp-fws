@@ -1093,9 +1093,24 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00002F9C);
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00001F48);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000209C);
+#endif
 
+#if FW_VERSION == 100
+void func_0000209C(s32 arg0) {
+    void *sp0;
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, scePaf_BB3CBD19(_ZN3paf4View4FindEPKc(&D_0000E140), &D_0000E158, -1));
+    func_00003E08(&sp0);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, &func_000012BC, 0);
+    Job_Start(0, &func_00002528, arg0, -1, -1, &func_000015D4);
+}
+#endif
+
+#if FW_VERSION < 201
 void func_00002138(void) {
 
 }
