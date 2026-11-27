@@ -1,4 +1,4 @@
-/* cflags[100,102]: -Os */
+/* cflags[100,102,103]: -Os */
 #include "common.h"
 #include "msstor_decls.h"
 
@@ -317,6 +317,10 @@ s32 module_reboot_before(void) {
 
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009284);
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00008368);
+#endif
+
 #if FW_VERSION == 102
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_000082D8);
 #endif
@@ -373,7 +377,7 @@ s32 func_00004990(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004990);
 #endif
 
