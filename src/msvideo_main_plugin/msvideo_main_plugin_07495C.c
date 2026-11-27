@@ -22,7 +22,7 @@ void func_000749D4(M2C_UNK **arg0) {
     *arg0 = &D_000B48E0;
     func_00075144();
     *arg0 = &D_000AF3E8;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -98,7 +98,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_000759B0);
 
 #if FW_VERSION >= 350
 void func_000759B0(void) {
-    scePaf_CB4C96CE();
+    sce_paf_private_wcscasecmp();
 }
 #endif
 
@@ -158,6 +158,6 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_000761C4);
 #if FW_VERSION == 352
 void func_000761C4(M2C_UNK **arg0) {
     *arg0 = &D_000B4A08;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif

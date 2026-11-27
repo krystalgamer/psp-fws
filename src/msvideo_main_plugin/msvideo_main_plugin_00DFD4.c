@@ -466,7 +466,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_00DFD4", func_0000FC48);
 #if FW_VERSION == 352
 void func_0000FC48(M2C_UNK **arg0) {
     *arg0 = &D_000AF3E8;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 

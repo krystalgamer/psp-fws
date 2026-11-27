@@ -28,7 +28,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0274D4", func_00027698);
 #else
 void func_00027698(M2C_UNK **arg0) {
     *arg0 = &D_000B0F78;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -41,7 +41,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0274D4", func_000276D0);
 #else
 void func_000276D0(M2C_UNK **arg0) {
     *arg0 = &D_000B0F88;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 

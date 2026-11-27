@@ -411,7 +411,7 @@ s32 func_0009F83C(s32 arg0, s32 arg1, s32 *arg2) {
 
     var_v1 = 6;
     if (((arg0 == 0) | (arg1 == 0)) == 0) {
-        temp_v0 = scePaf_3AC3E06A(0x1C);
+        temp_v0 = sce_paf_private_malloc(0x1C);
         var_v1 = 1;
         if (temp_v0 != 0) {
             M2C_FIELD(temp_v0, s32 *, 0) = arg0;

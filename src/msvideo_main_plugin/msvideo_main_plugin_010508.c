@@ -33,7 +33,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_010508", func_000105A8);
 void func_000105A8(M2C_UNK **arg0) {
     *arg0 = &D_000AF5E8;
     func_0000FCD8((s32) arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_010508", D_000AF330);

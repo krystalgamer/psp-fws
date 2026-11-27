@@ -99,7 +99,7 @@ void func_00020B3C(struct Unk_func_00020B3C_0 *arg0) {
     sceKernelDeleteSema(arg0->unk360);
     func_00020C14((s32) ((u8 *)arg0 + 0x340));
     func_00020C14((s32) ((u8 *)arg0 + 0x330));
-    scePaf_9E0CA28F(arg0);
+    _ZN3paf8PhWidgetD2Ev(arg0);
 }
 #endif
 
@@ -111,8 +111,8 @@ void func_00020B88(struct Unk_func_00020B88_0 *arg0) {
     sceKernelDeleteSema(arg0->unk360);
     func_00020C14((s32) ((u8 *)arg0 + 0x340));
     func_00020C14((s32) ((u8 *)arg0 + 0x330));
-    scePaf_9E0CA28F(arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZN3paf8PhWidgetD2Ev(arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -163,7 +163,7 @@ void func_00020E40(M2C_UNK **arg0) {
     *arg0 = &D_000B0700;
     D_000B6140 = 0;
     func_00004374((s32) arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -300,7 +300,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_020034", func_00021A58);
 void func_00021A58(M2C_UNK **arg0) {
     *arg0 = &D_000B0700;
     func_00004374((s32) arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -520,7 +520,7 @@ void func_00023FF4(M2C_UNK **arg0) {
     *arg0 = &D_000B0700;
     D_000B61E4 = 0;
     func_00004374((s32) arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -535,7 +535,7 @@ s32 func_00024034(s32 arg0, s32 arg1) {
 
     var_v0 = D_000B61E4;
     if (var_v0 == 0) {
-        temp_v0 = scePaf_61A8E8EC(0x120);
+        temp_v0 = _Znwj(0x120);
         func_00023EB0(temp_v0, arg0, arg1);
         D_000B61E4 = temp_v0;
         var_v0 = temp_v0;
@@ -606,7 +606,7 @@ void func_000258A0(struct Unk_func_000258A0_0 *arg0) {
                 temp_v0->unk1FE = 0;
                 scePaf_BE0D7212(temp_v0);
             } else {
-                scePaf_0BF42D26(temp_s1, func_0001EBE0(temp_a0));
+                _ZN3paf6PhSpin11SetSelectedEi(temp_s1, func_0001EBE0(temp_a0));
             }
         }
         if ((arg0->unk6C != 0) || (arg0->unk70 != 0) || (arg0->unk74 != 0)) {

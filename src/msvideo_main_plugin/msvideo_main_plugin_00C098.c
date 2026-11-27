@@ -13,7 +13,7 @@ void func_0000C098(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_0000C2B4(arg0, arg1, var_v0);
 }

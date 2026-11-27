@@ -808,7 +808,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0105E0", func_000164C4);
 void func_000164C4(M2C_UNK **arg0) {
     *arg0 = &D_000AF7B0;
     func_00016C58((s32) arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -845,7 +845,7 @@ s32 func_000169D0(void) {
     if (temp_v0 != NULL) {
         temp_v0_2 = M2C_FIELD(temp_v0, s32 *, 0x10);
         if (temp_v0_2 != 0) {
-            scePaf_47B886E3(0, temp_v0_2);
+            Job_Cancel(0, temp_v0_2);
             var_v1 = 0;
         }
     }
@@ -883,7 +883,7 @@ s32 func_000169D0(void) {
     if (temp_v0 != NULL) {
         temp_v0_2 = temp_v0->unk10;
         if (temp_v0_2 != 0) {
-            scePaf_47B886E3(0, temp_v0_2);
+            Job_Cancel(0, temp_v0_2);
             var_v1 = 0;
         }
     }
@@ -911,7 +911,7 @@ s32 func_00016A18(void *arg0, s32 arg1) {
         var_s1 -= 1;
         if (((s32) temp_a1 != (s32) 0) && ((s32) (M2C_FIELD(var_s0, void **, 8)) == (s32) arg1)) {
             var_s3 += 1;
-            scePaf_47B886E3(0, temp_a1);
+            Job_Cancel(0, temp_a1);
             temp_v0 = M2C_FIELD(var_s0, void **, 8);
             if (temp_v0 != NULL) {
                 M2C_FIELD(temp_v0, s8 *, 0x65) = 1;
@@ -967,7 +967,7 @@ s32 func_00016A18(void *arg0, s32 arg1) {
         var_s1 -= 1;
         if (((s32) temp_a1 != (s32) 0) && ((s32) (M2C_FIELD(var_s0, void **, 8)) == (s32) arg1)) {
             var_s3 += 1;
-            scePaf_47B886E3(0, temp_a1);
+            Job_Cancel(0, temp_a1);
             temp_v0 = M2C_FIELD(var_s0, void **, 8);
             if (temp_v0 != NULL) {
                 temp_v0->unk65 = 1;
@@ -999,7 +999,7 @@ s32 func_00016AA8(void *arg0) {
         var_s1 -= 1;
         if (temp_v0 != 0) {
             var_s2 += 1;
-            scePaf_47B886E3(0, temp_v0);
+            Job_Cancel(0, temp_v0);
             temp_v0_2 = M2C_FIELD(var_s0, void **, 8);
             if (temp_v0_2 != NULL) {
                 M2C_FIELD(temp_v0_2, s8 *, 0x65) = 1;
@@ -1055,7 +1055,7 @@ s32 func_00016AA8(void *arg0) {
         var_s1 -= 1;
         if (temp_v0 != 0) {
             var_s2 += 1;
-            scePaf_47B886E3(0, temp_v0);
+            Job_Cancel(0, temp_v0);
             temp_v0_2 = M2C_FIELD(var_s0, void **, 8);
             if (temp_v0_2 != NULL) {
                 temp_v0_2->unk65 = 1;
@@ -1168,7 +1168,7 @@ void func_00016EA4(M2C_UNK **arg0) {
     *arg0 = &D_000AF830;
     D_000B60EC = 0;
     func_000466D4((s32) arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_0105E0", D_000AF7A0);
@@ -1233,7 +1233,7 @@ void func_000172D8(M2C_UNK **arg0) {
     *arg0 = &D_000AF8F0;
     D_000B60F0 = 0;
     func_000466D4((s32) arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -1258,7 +1258,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0105E0", func_000174DC);
 #else
 void func_000174DC(M2C_UNK **arg0) {
     *arg0 = &D_000AFD48;
-    sceVshCommonGui_891DD627(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     D_000B60F4 = 0;
     func_00004374((s32) arg0);
 }
@@ -1269,7 +1269,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0105E0", func_00017520);
 #else
 void func_00017520(M2C_UNK **arg0) {
     *arg0 = &D_000AFD48;
-    sceVshCommonGui_891DD627(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     D_000B60F4 = 0;
     func_00004374((s32) arg0);
 }
@@ -1446,7 +1446,7 @@ void func_00019F98(M2C_UNK **arg0) {
     *arg0 = &D_000AFF00;
     D_000B60F8 = 0;
     func_00004374((s32) arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -1544,7 +1544,7 @@ void func_0001B274(s32 **arg0) {
     *arg0 = &D_000B00D8;
     D_000B6110 = 0;
     func_00019F40(arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -1587,7 +1587,7 @@ s32 func_0001BDB0(s32 arg0) {
 
     var_v0 = D_000B6118;
     if (var_v0 == 0) {
-        temp_v0 = scePaf_61A8E8EC(0xD4);
+        temp_v0 = _Znwj(0xD4);
         func_0001BF6C(temp_v0, arg0);
         D_000B6118 = temp_v0;
         var_v0 = temp_v0;
