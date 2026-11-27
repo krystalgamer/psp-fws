@@ -1,0 +1,26 @@
+// shared names (tools/add_version.py) begin
+D_00002AD4 = 0x00002514;
+D_00002AD8 = 0x00002518;
+module_start = 0x000001EC; // type:func rom:0x26C
+module_stop = 0x00000278; // type:func rom:0x2F8
+sceSdSetIndex = 0x000002FC; // type:func rom:0x37C
+sceSdRemoveValue = 0x0000036C; // type:func rom:0x3EC
+sceSdGetLastIndex = 0x000005F0; // type:func rom:0x670
+sceSdCreateList = 0x00000A58; // type:func rom:0xAD8
+sceSdSetMember = 0x00000CBC; // type:func rom:0xD3C
+sceSdCleanList = 0x00000E54; // type:func rom:0xED4
+_kirk4 = 0x00000EA8; // type:func rom:0xF28
+_kirk7 = 0x00000EFC; // type:func rom:0xF7C
+_kirk5 = 0x00000F50; // type:func rom:0xFD0
+_kirk8 = 0x00000FA8; // type:func rom:0x1028
+_kirk4Xor = 0x00001000; // type:func rom:0x1080
+_kirk7Xor = 0x000010A0; // type:func rom:0x1120
+_kirk5Xor = 0x00001150; // type:func rom:0x11D0
+_kirk8Xor = 0x000011EC; // type:func rom:0x126C
+_kirk14 = 0x00001298; // type:func rom:0x1318
+sceKernelCreateSema = 0x000012D0; // type:func rom:0x1350
+sceKernelDeleteSema = 0x000012D8; // type:func rom:0x1358
+sceKernelSignalSema = 0x000012E0; // type:func rom:0x1360
+sceKernelWaitSema = 0x000012E8; // type:func rom:0x1368
+sceUtilsBufferCopyWithRange = 0x000012F0; // type:func rom:0x1370
+// shared names (tools/add_version.py) end
