@@ -1223,11 +1223,57 @@ INCLUDE_ASM("nonmatchings/registry", func_00004270);
 
 INCLUDE_ASM("nonmatchings/registry", sceRegCreateKey);
 
+#if FW_VERSION == 100
+s32 sceRegSetKeyValue(s32 hd, const char *name, const void *buf, s32 size) {
+    SceRegIndexEntry *cat = (SceRegIndexEntry *)hd;
+    SceRegKeyEntry *k;
+    void *data;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    ret = 0x80082733;
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
+        goto end;
+    ret = 0x8008272E;
+    if (func_00003E60(cat) == NULL)
+        goto end;
+    k = func_000050F4(cat, name, &data);
+    ret = 0x8008271D;
+    if (k == NULL)
+        goto end;
+    switch (k->type) {
+    case 2:
+        k->value = *(u32 *)buf;
+        break;
+    case 3:
+    case 4:
+        ret = 0x80082729;
+        if ((s32)(((k->value >> 16) & 0xFF) << 5) < size)
+            goto end;
+        k->value = (k->value & 0xFFFF0000) | (size & 0xFFFF);
+        memcpy(data, buf, size);
+        break;
+    default:
+        ret = 0x8008271C;
+        goto end;
+    }
+    func_00003A80(cat);
+    ret = 0;
+end:
+    if (sceKernelSignalSema(g_semaId, 1) != 0) {
+        ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/registry", sceRegSetKeyValue);
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfo);
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 sceRegGetKeyInfo(s32 hd, const char *name, s32 *keyId, s32 *type, u32 *size) {
     s32 ret;
     u32 oldK1;
@@ -1244,11 +1290,11 @@ end:
     setK1(oldK1);
     return ret;
 }
+#else
+INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfoByName);
 #endif
 
-#if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfoByName);
-#else
+#if FW_VERSION == 100
 s32 sceRegGetKeyInfoByName(s32 hd, const char *name, s32 *type, u32 *size) {
     s32 keyId;
     s32 ret;
@@ -1266,12 +1312,51 @@ end:
     setK1(oldK1);
     return ret;
 }
+
+s32 func_00004A28(SceRegIndexEntry *cat, const char *name, s32 *keyId, s32 *type, u32 *size) {
+    SceRegKeyEntry *k;
+    void *data;
+    s32 ret;
+
+    ret = 0x80082737;
+    if (name == NULL)
+        goto fail;
+    ret = 0x8008272E;
+    if (func_00003E60(cat) == NULL)
+        goto fail;
+    k = func_000050F4(cat, name, &data);
+    ret = 0x8008271D;
+    if (k == NULL)
+        goto fail;
+    *type = k->type;
+    switch (k->type) {
+    case 1:
+        *size = 0;
+        break;
+    case 2:
+        *size = 4;
+        break;
+    case 3:
+    case 4:
+        *size = k->value & 0xFFFF;
+        break;
+    default:
+        ret = 0x8008271C;
+        goto fail;
+    }
+    *keyId = (u32)k ^ 0xA0F3D97B;
+    return 0;
+fail:
+    *type = 0;
+    *size = 0;
+    return ret;
+}
+#else
+INCLUDE_ASM("nonmatchings/registry", func_00004A28);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00004A28);
-
 #if FW_VERSION == 100
-s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, u32 size) {
+s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size) {
     s32 ret;
     u32 oldK1;
 
@@ -1292,7 +1377,7 @@ INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValue);
 #endif
 
 #if FW_VERSION == 100
-s32 sceRegGetKeyValueByName(s32 hd, const char *name, void *buf, u32 size) {
+s32 sceRegGetKeyValueByName(s32 hd, const char *name, void *buf, s32 size) {
     s32 keyId;
     s32 type;
     u32 keySize;
@@ -1387,9 +1472,31 @@ INCLUDE_ASM("nonmatchings/registry", func_00005608);
 
 INCLUDE_ASM("nonmatchings/registry", func_00005718);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
+SceRegKeyEntry *func_000050F4(SceRegIndexEntry *cat, const char *name, void **data) {
+    SceRegCatData *d = cat->opened->buf;
+    SceRegKeyEntry *k = (SceRegKeyEntry *)((u8 *)d + 0x20);
+    s32 i;
+
+    for (i = 0; i < d->numEntries; i++, k++) {
+        if (k->name[0] == name[0] && strcmp((char *)k->name, name) == 0) {
+            if (k->type == 3 || k->type == 4)
+                *data = (u8 *)d + ((k->value & 0xFF000000) >> 19);
+            else
+                *data = NULL;
+            return k;
+        }
+    }
+    *data = NULL;
+    return NULL;
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/registry", func_000050F4);
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_0000589C);
 #endif
 

@@ -12,6 +12,14 @@ typedef struct {
     } runs[4];
 } SceRegBlockRuns;
 
+/* header of a category's data (system.dreg), key entries follow at 0x20 */
+typedef struct __attribute__((packed)) SceRegCatData {
+    u8 unk0[8];
+    u16 numEntries;     /* 0x08 */
+    u16 unkA;           /* 0x0A */
+    u16 numKeys;        /* 0x0C */
+} SceRegCatData;
+
 /* open-category list node */
 typedef struct SceRegCatNode {
     s32 hive;                   /* 0x0: hive index */
@@ -38,7 +46,8 @@ typedef struct __attribute__((packed)) SceRegIndexEntry {
     struct SceRegHive *hive; /* 0x00: runtime only */
     u16 unk4;               /* 0x04 */
     u32 unk6;               /* 0x06 */
-    u8 unkA[4];             /* 0x0A */
+    u16 numKeys;            /* 0x0A: copy of the data's numKeys */
+    u16 unkC;               /* 0x0C */
     char name[0x1B];        /* 0x0E */
     u8 unk29[3];            /* 0x29 */
     u16 blocks[4];          /* 0x2C: system.dreg blocks, 0xFFFF = none */
@@ -68,6 +77,13 @@ typedef struct __attribute__((packed)) SceRegIregHeader {
     u32 entriesSize;    /* 0x20: blockCount * sizeof(SceRegIndexEntry) */
     u32 entriesOffset;  /* 0x24: headerSize + bitmapSize */
 } SceRegIregHeader;
+
+/* key entry in a category's data (system.dreg), 0x20 bytes, unaligned */
+typedef struct __attribute__((packed)) SceRegKeyEntry {
+    u8 type;            /* 0x00: 1 = dir, 2 = int, 3 = string, 4 = binary */
+    u8 name[27];        /* 0x01 */
+    u32 value;          /* 0x1C: int value, or size (bits 0-15), blocks of 32 bytes (16-23), data offset / 32 (24-31) */
+} SceRegKeyEntry;
 
 /* runtime state of an open category (pointed to by its index entry), unaligned */
 typedef struct __attribute__((packed)) SceRegOpenCat {
@@ -150,7 +166,8 @@ s32 func_00004058(SceRegIndexEntry *cat);
 s32 func_000040A0(SceRegIndexEntry *cat);
 s32 func_000046A8(s32, s32);
 s32 func_00004A28(SceRegIndexEntry *cat, const char *name, s32 *keyId, s32 *type, u32 *size);
-s32 func_00004D6C(SceRegIndexEntry *cat, s32 keyId, void *buf, u32 size);
+s32 func_00004D6C(SceRegIndexEntry *cat, s32 keyId, void *buf, s32 size);
+SceRegKeyEntry *func_000050F4(SceRegIndexEntry *cat, const char *name, void **data);
 s32 func_00005F54(s32 fd);
 s32 func_00005F78(const char *name);
 s32 func_000061B4(s32 arg0);
@@ -169,6 +186,7 @@ void func_00006A0C(void);
 void *func_00006A48(s32 size);
 void func_00006AC0(void *ptr);
 s32 func_00006EF0(s32 arg0);
+void *memcpy(void *, const void *, u32);
 void *memset(void *, s32, u32);
 s32 module_reboot_before(void);
 s32 module_reboot_phase(s32 arg0);
@@ -201,12 +219,14 @@ s32 sceRegFlushCategory(s32 arg0);
 s32 sceRegFlushRegistry(s32 arg0);
 s32 sceRegGetKeyInfo(s32 hd, const char *name, s32 *keyId, s32 *type, u32 *size);
 s32 sceRegGetKeyInfoByName(s32 hd, const char *name, s32 *type, u32 *size);
-s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, u32 size);
-s32 sceRegGetKeyValueByName(s32 hd, const char *name, void *buf, u32 size);
+s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size);
+s32 sceRegGetKeyValueByName(s32 hd, const char *name, void *buf, s32 size);
 s32 sceRegInit(void);
 s32 sceRegOpenRegistry(SceRegParam *param, s32 mode, s32 *handle);
 s32 sceRegRemoveKey(s32 arg0, s32 arg1);
 s32 sceRegRemoveRegistry(SceRegParam *param);
+s32 sceRegSetKeyValue(s32 hd, const char *name, const void *buf, s32 size);
 s32 sprintf(char *, const char *, ...);
+s32 strcmp(const char *, const char *);
 
 #endif
