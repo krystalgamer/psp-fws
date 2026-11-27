@@ -61,16 +61,38 @@ def main():
             if len(cf) > a.max_c:
                 continue
             hdr = mod.header()
+            # C function ranges from the current (matching) build
+            from elftools.elf.elffile import ELFFile
+            import struct
+            elf = ELFFile(open(ROOT / "tmp/build" / a.ver / f"{m}.elf", "rb"))
+            sec = elf.get_section_by_name(f".{m}") or elf.get_section_by_name(".text")
+            rng = {sy.name: (sy["st_value"], sy["st_size"]) for sy in elf.get_section_by_name(".symtab").iter_symbols()
+                   if sy["st_info"]["type"] == "STT_FUNC" and sy["st_size"]}
+
+            def c_target(name):
+                if name not in rng:
+                    return None
+                lo, size = rng[name]
+                rom = mod.text_off + lo
+                out = []
+                for i, w in enumerate(struct.unpack_from(f"<{size // 4}I", mod.base, rom)):
+                    kind = mod.relocs.get(rom + 4 * i)
+                    if kind is None and w >> 26 in (2, 3):
+                        kind = "26"
+                    out.append(AD.mask(w, kind))
+                return out
+            mstart = re.search(r"^(INCLUDE_ASM|INCLUDE_RODATA|#if)", text, re.M)
+            prelude = re.sub(r'^#include "\w+_decls\.h"\n', "", text[:mstart.start()] if mstart else "", flags=re.M)
             cons = []
             for o in sorted(better, key=lambda o: tot[o]):
                 ok = True
                 for e in cf:
-                    try:
-                        target = mod.target_words(e.name)
-                    except Exception:
-                        continue
+                    target = c_target(e.name)
+                    if target is None:
+                        ok = False
+                        break
                     body = re.sub(rf"^[^\n]*\b{e.name}\([^\n]*\);\n", "", hdr, flags=re.M)
-                    words, _ = AD.compile_words(f"#define FW_VERSION {v}\n" + body + "\n" + e.text, comp, o)
+                    words, _ = AD.compile_words(f"#define FW_VERSION {v}\n" + body + "\n" + prelude + "\n" + e.text, comp, o)
                     if words != target:
                         ok = False
                         break
