@@ -1,6 +1,6 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100]: -O2 -frename-registers */
+/* cflags[100,102]: -O2 -frename-registers */
 #include "common.h"
 #include "emc_sm_decls.h"
 
@@ -24,6 +24,14 @@ INCLUDE_ASM("nonmatchings/emc_sm", func_0000014C);
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000160);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/emc_sm", func_00000508);
+
+INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
+
+INCLUDE_ASM("nonmatchings/emc_sm", func_0000060C);
+#endif
+
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
 #endif
@@ -36,9 +44,11 @@ INCLUDE_ASM("nonmatchings/emc_sm", func_0000015C);
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandUnlock);
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReset);
 
@@ -87,7 +97,11 @@ s32 sceNandSuspend(void) {
     return 0;
 }
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/emc_sm", func_00000E1C);
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandResume);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
@@ -117,7 +131,7 @@ void sceNandWritePagesRawAll(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     sceNandWriteAccess(arg0, arg1, arg2, arg3, 0x31);
 }
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 102 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000FD4);
 #endif
 
