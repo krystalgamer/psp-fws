@@ -1,5 +1,5 @@
 /* lang: c++ */
-/* cflags[100,150,152,250,260]: -Os */
+/* cflags[100,150,152,250,260,102]: -Os */
 /* cflags: -O2 */
 #include "common.h"
 #include "savedata_utility_decls.h"
@@ -24,6 +24,10 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_000252A0);
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_000252A8);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000F118);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00010360);
 #endif
@@ -46,9 +50,9 @@ void func_0000E818(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000E820);
 #endif
 
-
 /* 1.00-2.60: the class is built -O2 but this splat TU is -Os (the real TU starts at the
    C2 ctor), so it stays asm/m2c there */
+
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80C2Eii);
 
@@ -60,13 +64,23 @@ void _ZN14Class_0001FC80C1Eii(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
     _ZN14Class_0001FC8011LoadTextureEv(arg0);
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000F304);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80D2Ev);
+#endif
 
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80D1Ev);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80D0Ev);
-#elif FW_VERSION == 271
+#endif
+
+#if FW_VERSION == 271
 Class_0001FC80::Class_0001FC80(s32 owner, s32 arg2) : Class_00025160(owner), tex(0) {
     unk28 = arg2;
     unk1C = 0;
@@ -76,9 +90,7 @@ Class_0001FC80::Class_0001FC80(s32 owner, s32 arg2) : Class_00025160(owner), tex
 Class_0001FC80::~Class_0001FC80() {
     Clear();
 }
-#endif
-
-#if FW_VERSION != 271
+#else
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_000252B8);
 #endif
 
@@ -108,15 +120,17 @@ INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00015FD0);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00016138);
 
+#if FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000EBF4);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000ECD0);
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_000170F0);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000EBF4);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000ECD0);
-
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000EDB8);
 #endif
 
@@ -210,7 +224,7 @@ s32 func_00016828(void) {
 
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00016830);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_0001FBF8);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_0001FC18);
@@ -240,7 +254,7 @@ s32 func_0000F968(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000F970);
 #endif
 
@@ -248,7 +262,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000F970);
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00016D5C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000FA70);
 #endif
 
@@ -266,6 +280,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00016E94);
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_00025320);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_00025340);
+
 __asm__(".globl _ZTV14Class_0001FC80\n_ZTV14Class_0001FC80 = D_00025340 - 8\n");
 #endif
 
@@ -273,6 +288,7 @@ __asm__(".globl _ZTV14Class_0001FC80\n_ZTV14Class_0001FC80 = D_00025340 - 8\n");
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_00025348);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_0001FC80);
+
 __asm__(".globl _ZTV14Class_0001FC80\n_ZTV14Class_0001FC80 = D_0001FC80 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_0001FC98);
