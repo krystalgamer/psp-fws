@@ -334,7 +334,7 @@ s32 sceKernelWaitSema(SceUID semaid, s32 signal, u32 *timeout);
 s32 sceKernelSignalSema(SceUID semaid, s32 signal);
 s32 sceKernelPowerLock(s32);
 s32 sceKernelPowerUnlock(s32);
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 static inline s32 wait_sema(SceUID sema) {
     s32 ret = sceKernelWaitSema(sema, 1, NULL);
 
