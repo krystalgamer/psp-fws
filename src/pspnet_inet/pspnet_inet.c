@@ -865,7 +865,7 @@ struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", sbcreatecontrol);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000562C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", falloc);
 
 struct socket *getsock(s32 s) {
     struct socket *so;
@@ -996,11 +996,11 @@ s32 sb_lock(struct sockbuf *sb) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000059AC);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00005D70);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sce_alignbytes);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00005D70(void) {
+s32 sce_alignbytes(void) {
     return 3;
 }
 #endif
@@ -1138,7 +1138,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetpeername);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00007490(struct mbuf **mp, const void *buf, u32 buflen, s32 type) {
+s32 sockargs(struct mbuf **mp, const void *buf, u32 buflen, s32 type) {
     struct sockaddr *sa;
     struct mbuf *m;
 
@@ -1166,7 +1166,7 @@ s32 func_00007490(struct mbuf **mp, const void *buf, u32 buflen, s32 type) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00007490);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sockargs);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetSelect);
@@ -1243,7 +1243,7 @@ s32 sceNetInetBind(s32 s, const struct sockaddr *name, s32 namelen) {
     error = 9; /* EBADF */
     if (so != NULL) {
         SO_WAITER_ATTACH(w, so);
-        error = func_00007490(&nam, name, namelen, MT_SONAME);
+        error = sockargs(&nam, name, namelen, MT_SONAME);
         if (error) {
             goto bad;
         }
@@ -1514,9 +1514,9 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008E40);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008FC8);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000090FC);
+INCLUDE_ASM("nonmatchings/pspnet_inet", if_rtdel);
 #else
-s32 func_000090FC(struct rtentry *rt, void *arg) {
+s32 if_rtdel(struct rtentry *rt, void *arg) {
     if (rt->rt_ifp == arg) {
         func_0000BEE0(2, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, rt->rt_flags, NULL);
     }
@@ -1568,7 +1568,7 @@ void func_00009650(struct ifnet *ifp) {
     for (i = 0; i < 32; i++) {
         rnh = D_0002CCB8[i];
         if (rnh != NULL) {
-            rnh->rnh_walktree(rnh, func_000090FC, ifp);
+            rnh->rnh_walktree(rnh, if_rtdel, ifp);
         }
     }
 }
@@ -1826,7 +1826,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000AFE0);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000B41C);
 
-struct radix_node *func_0000B580(void *v_arg, struct radix_node *head, void *m_arg) {
+struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg) {
     struct radix_node *x;
     char *v = v_arg, *m = m_arg;
 
@@ -1842,7 +1842,7 @@ struct radix_node *func_0000B580(void *v_arg, struct radix_node *head, void *m_a
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000B5E0);
 
-struct radix_node *func_0000B6C0(void *v_arg, void *m_arg, struct radix_node_head *head) {
+struct radix_node *rn_lookup(void *v_arg, void *m_arg, struct radix_node_head *head) {
     struct radix_node *x;
     char *netmask = NULL;
 
@@ -1861,7 +1861,7 @@ struct radix_node *func_0000B6C0(void *v_arg, void *m_arg, struct radix_node_hea
     return x;
 }
 
-struct radix_node *func_0000B774(void *v, s32 b, struct radix_node nodes[2]) {
+struct radix_node *rn_newpair(void *v, s32 b, struct radix_node nodes[2]) {
     struct radix_node *tt = nodes, *t = tt + 1;
     t->rn_b = b;
     t->rn_bmask = 0x80 >> (b & 7);
@@ -1889,7 +1889,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000BEE0);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000C6D4);
 
 #if FW_VERSION < 201
-void func_0000C818(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *netmask) {
+void rt_maskedcopy(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *netmask) {
     u8 *cp1 = (u8 *)src;
     u8 *cp2 = (u8 *)dst;
     u8 *cp3 = (u8 *)netmask;
@@ -1912,7 +1912,7 @@ void func_0000C818(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000C818);
+INCLUDE_ASM("nonmatchings/pspnet_inet", rt_maskedcopy);
 #endif
 
 #if FW_VERSION >= 282
@@ -1923,7 +1923,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000C998);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000CC00);
 
-void func_0000CCE8(struct rtentry *rt) {
+void rt_timer_remove_all(struct rtentry *rt) {
     struct rttimer *r;
     while ((r = rt->rt_timer) != NULL) {
         if (r->rtt_link.le_next != NULL) {
@@ -1960,14 +1960,14 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000CF68);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000D048);
 #endif
 
-void func_0000D104(struct route *ro) {
+void rtalloc(struct route *ro) {
     if (ro->ro_rt != NULL && ro->ro_rt->rt_ifp != NULL && (ro->ro_rt->rt_flags & RTF_UP)) {
         return;
     }
     ro->ro_rt = func_0000BA10(&ro->ro_dst, 1);
 }
 
-void func_0000D15C(struct rtentry *rt) {
+void rtfree(struct rtentry *rt) {
     struct ifaddr *ifa;
 
     rt->rt_refcnt--;
@@ -1976,7 +1976,7 @@ void func_0000D15C(struct rtentry *rt) {
         if (rt->rt_refcnt < 0) {
             return;
         }
-        func_0000CCE8(rt);
+        rt_timer_remove_all(rt);
         ifa = rt->rt_ifa;
         if (--ifa->ifa_refcnt == 0) {
             _sce_pspnet_ifafree(ifa);
@@ -2132,7 +2132,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000DF80);
 #define ROUNDUP(a) ((a) > 0 ? (1 + (((a) - 1) | (sizeof(s32) - 1))) : sizeof(s32))
 #define ADVANCE(x, n) (x += ROUNDUP((n)->sa_len))
 
-void func_0000DDC0(u8 *cp, u8 *cplim, struct rt_addrinfo *rtinfo) {
+void rt_xaddrs(u8 *cp, u8 *cplim, struct rt_addrinfo *rtinfo) {
     struct sockaddr *sa;
     s32 i;
 
@@ -2200,7 +2200,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000E928);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000EACC);
 
-s32 func_0000ED18(struct socket *so, s32 proto) {
+s32 raw_attach(struct socket *so, s32 proto) {
     struct rawcb *rp = (struct rawcb *)so->so_pcb;
     s32 error;
 
@@ -2328,25 +2328,25 @@ s32 func_0000F204(void) {
     return 0;
 }
 
-void func_0000F20C(struct rawcb *rp, struct mbuf *nam) {
+void raw_setsockaddr(struct rawcb *rp, struct mbuf *nam) {
     nam->m_len = rp->rcb_laddr->sa_len;
     func_0002C9B8(rp->rcb_laddr, mtod(nam, u8 *), nam->m_len);
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000F20C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", raw_setsockaddr);
 #endif
 
 #if FW_VERSION < 201
-void func_0000F238(struct rawcb *rp, struct mbuf *nam) {
+void raw_setpeeraddr(struct rawcb *rp, struct mbuf *nam) {
     nam->m_len = rp->rcb_faddr->sa_len;
     func_0002C9B8(rp->rcb_faddr, mtod(nam, u8 *), nam->m_len);
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000F238);
+INCLUDE_ASM("nonmatchings/pspnet_inet", raw_setpeeraddr);
 #endif
 
 #if FW_VERSION >= 282
@@ -2381,13 +2381,13 @@ void func_0000F2A8(struct Unk_func_0000F2A8_0 *arg0, struct Unk_func_0000F2A8_1 
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000F2D4);
 
-s32 func_0000F61C(struct ifnet *ifp, u32 cmd, void *data) {
+s32 loioctl(struct ifnet *ifp, u32 cmd, void *data) {
     s32 error = 0;
     switch (cmd) {
     case 0x8020690C: /* SIOCSIFADDR */
         ifp->if_flags |= 1; /* IFF_UP */
         if (data != NULL) {
-            ((struct ifaddr *)data)->ifa_rtrequest = func_0000F71C;
+            ((struct ifaddr *)data)->ifa_rtrequest = lortrequest;
         }
         break;
     case 0x80206931: /* SIOCADDMULTI */
@@ -2412,14 +2412,14 @@ s32 func_0000F61C(struct ifnet *ifp, u32 cmd, void *data) {
 }
 
 #if FW_VERSION < 201
-void func_0000F690(void) {
+void loopattach(void) {
     struct ifnet *ifp = &D_0002F3D8;
 
     func_0002CCAC(ifp->if_xname, "lo%d", 0);
     ifp->if_softc = NULL; //P
     ifp->if_mtu = 0x81BC; //P
     ifp->if_flags = IFF_LOOPBACK | IFF_MULTICAST; //P
-    ifp->if_ioctl = func_0000F61C; //P
+    ifp->if_ioctl = loioctl; //P
     ifp->if_output = func_0000F2D4; //P
     ifp->if_type = IFT_LOOP; //P
     ifp->if_hdrlen = 0; //P
@@ -2427,10 +2427,10 @@ void func_0000F690(void) {
     _sce_pspnet_if_attach(ifp);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000F690);
+INCLUDE_ASM("nonmatchings/pspnet_inet", loopattach);
 #endif
 
-void func_0000F71C(s32 cmd, struct rtentry *rt) {
+void lortrequest(s32 cmd, struct rtentry *rt) {
     if (rt != NULL) {
         rt->rt_rmx.rmx_mtu = 0x81BC; /* LOMTU */
     }
@@ -2467,7 +2467,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010378);
 #endif
 
 #if FW_VERSION < 151
-void func_000106E8(struct ifnet *ifp, struct ifaddr *ifa) {
+void arp_ifinit(struct ifnet *ifp, struct ifaddr *ifa) {
     struct in_addr *ip;
 
     ip = &((struct in_ifaddr *)ifa)->ia_addr.sin_addr;
@@ -2488,7 +2488,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010708);
 #endif
 
 #if FW_VERSION < 250
-void func_00010770(struct mbuf *m) {
+void arpintr(struct mbuf *m) {
     struct arphdr *ar;
 
     if (m->m_len >= sizeof(struct arphdr)) {
@@ -2505,7 +2505,7 @@ void func_00010770(struct mbuf *m) {
     sceNetMFreem(m);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010770);
+INCLUDE_ASM("nonmatchings/pspnet_inet", arpintr);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000107F8);
@@ -2644,7 +2644,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000129D0);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000128AC);
 #endif
 
-void func_0001292C(void) {
+void in_setmaxmtu(void) {
     struct in_ifaddr *ia;
     struct ifnet *ifp;
     u32 maxmtu = 0;
@@ -2739,7 +2739,7 @@ void func_000138B4(struct Unk_func_000138B4_0 *arg0) {
 
     temp_v1 = arg0->unk20;
     if (temp_v1 != 0) {
-        func_0000D15C(temp_v1);
+        rtfree(temp_v1);
         arg0->unk20 = 0;
     }
 }
@@ -2780,11 +2780,11 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013E54);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013ED4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_pcbinit);
 #endif
 
 #if FW_VERSION < 201
-void func_00013ED4(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2) {
+void in_pcbinit(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
 
     arg0->unk0 = arg0;
@@ -2800,7 +2800,7 @@ void func_00013ED4(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2) {
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013CC4);
 
-void func_00013ED4(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2) {
+void in_pcbinit(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
 
     arg0->unk0 = arg0;
@@ -2826,7 +2826,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000142CC);
 #endif
 
 #if FW_VERSION < 201
-void func_000143A8(struct inpcb *inp, struct mbuf *nam) {
+void in_setsockaddr(struct inpcb *inp, struct mbuf *nam) {
     struct sockaddr_in *sin;
 
     nam->m_len = sizeof(*sin);
@@ -2838,7 +2838,7 @@ void func_000143A8(struct inpcb *inp, struct mbuf *nam) {
     sin->sin_addr = inp->inp_laddr;
 }
 
-void func_000143FC(struct inpcb *inp, struct mbuf *nam) {
+void in_setpeeraddr(struct inpcb *inp, struct mbuf *nam) {
     struct sockaddr_in *sin;
 
     nam->m_len = sizeof(*sin);
@@ -2864,7 +2864,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014614);
 #endif
 
 #if FW_VERSION < 201
-void func_00014710(struct inpcb *inp) {
+void in_losing(struct inpcb *inp) {
     struct rtentry *rt;
     struct rt_addrinfo info;
 
@@ -2878,14 +2878,14 @@ void func_00014710(struct inpcb *inp) {
         if (rt->rt_flags & RTF_DYNAMIC) {
             (void)func_0000BEE0(RTM_DELETE, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, rt->rt_flags, NULL);
         } else {
-            func_0000D15C(rt);
+            rtfree(rt);
         }
     }
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014710);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_losing);
 #endif
 
 #if FW_VERSION >= 282
@@ -2900,14 +2900,14 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000143E0);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014480);
 #endif
 
-struct rtentry *func_00014524(struct inpcb *inp) {
+struct rtentry *in_pcbrtentry(struct inpcb *inp) {
     struct route *ro = &inp->inp_route;
 
     if (ro->ro_rt == NULL && inp->inp_faddr.s_addr != __builtin_allegrex_wsbw(0)) {
         ro->ro_dst.sa_family = AF_INET;
         ro->ro_dst.sa_len = sizeof(struct sockaddr_in);
         ((struct sockaddr_in *)&ro->ro_dst)->sin_addr = inp->inp_faddr;
-        func_0000D104(ro);
+        rtalloc(ro);
     }
     return ro->ro_rt;
 }
@@ -3052,7 +3052,7 @@ INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B764);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000161F0);
 
-void func_000165BC(void) {
+void ipintr(void) {
     struct mbuf *m;
     s32 s;
 
@@ -3121,7 +3121,7 @@ s32 func_00018594(void *arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018594);
 #endif
 
-void func_000185BC(struct ip_moptions *imo) {
+void ip_freemoptions(struct ip_moptions *imo) {
     s32 i;
     if (imo != NULL) {
         for (i = 0; i < imo->imo_num_memberships; i++) {
@@ -3163,7 +3163,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00019034);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000195B8);
 
-u32 func_00019668(void) {
+u32 iptime(void) {
     struct timeval atv;
     u32 t;
     _sce_pspnet_microtime(&atv);
@@ -3367,7 +3367,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B1B0);
 void func_0001B5C0(void) {
     D_0002C30C = 0x2000;
     D_0002C310 = 0x2000;
-    func_00013ED4(&D_0002DC10, 1, 1);
+    in_pcbinit(&D_0002DC10, 1, 1);
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B5FC);
@@ -3412,7 +3412,7 @@ void func_0001CE38(void) {
     D_0002C320 = 0xA280;
     D_0002C314 = 1;
     func_0002C94C(&D_0002DC30, 0, 0x48);
-    func_00013ED4(&D_000302C8, D_0002E8D8, D_0002E8D8);
+    in_pcbinit(&D_000302C8, D_0002E8D8, D_0002E8D8);
 }
 #endif
 
@@ -3434,7 +3434,7 @@ void func_0001C208(void) {
     D_0002C320 = 0xA280;
     D_0002C314 = 1;
     sceNetMemset(&D_0002DC30, 0, 0x48);
-    func_00013ED4(&D_0002DC78, D_0002C318, D_0002C318);
+    in_pcbinit(&D_0002DC78, D_0002C318, D_0002C318);
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001C26C);
@@ -3597,7 +3597,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00021FF0);
 #endif
 
 #if FW_VERSION < 151
-void func_00023BE4(struct tcpcb *tp) {
+void tcp_setpersist(struct tcpcb *tp) {
     s32 t = ((tp->t_srtt >> 2) + tp->t_rttvar) >> (1 + 2);
     s32 nticks;
 
@@ -3816,7 +3816,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023C5C);
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023D1C);
 #else
-u32 func_000256DC(struct tcpcb *tp, u32 len, u32 addin) {
+u32 tcp_new_iss(struct tcpcb *tp, u32 len, u32 addin) {
     u32 tcp_iss;
 
     tcp_iss = sceNetRand();
@@ -3935,7 +3935,7 @@ s32 _sce_pspnet_pppoe_term(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024FB0);
 
-void func_000252BC(struct sppp *sp) {
+void sppp_flush(struct sppp *sp) {
     struct mbuf *m;
 
     for (;;) {
@@ -3998,7 +3998,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027304);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00025870);
 #endif
 
-void func_00025F18(const struct cp *cp, struct sppp *sp, s32 newstate) {
+void sppp_cp_change_state(const struct cp *cp, struct sppp *sp, s32 newstate) {
     sp->state[cp->protoidx] = newstate;
     _sce_pspnet_callout_stop(sp->ch[cp->protoidx]);
     switch (newstate) {
@@ -4024,7 +4024,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000263D0);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00026500);
 
-s32 func_000266E4(struct sppp *sp) {
+s32 sppp_ncp_check(struct sppp *sp) {
     s32 i, mask;
     for (i = 0, mask = 1; i < IDX_COUNT; i++, mask <<= 1) {
         if ((sp->lcp_protos & mask) && (D_0002C4E0[i]->flags & CP_NCP)) {
@@ -4034,11 +4034,11 @@ s32 func_000266E4(struct sppp *sp) {
     return 0;
 }
 
-void func_00026734(struct sppp *sp) {
+void sppp_lcp_check_and_close(struct sppp *sp) {
     if (sp->pp_phase < SPPP_PHASE_NETWORK) {
         return;
     }
-    if (func_000266E4(sp)) {
+    if (sppp_ncp_check(sp)) {
         return;
     }
     D_0002BB24(sp);
@@ -4148,7 +4148,7 @@ void func_00027C20(void) {
 }
 #endif
 
-void func_00027C28(struct sppp *sp) {
+void sppp_lcp_up(struct sppp *sp) {
     const struct cp *cp;
 
     if (sp->state[IDX_LCP] == STATE_INITIAL) {
@@ -4158,24 +4158,24 @@ void func_00027C28(struct sppp *sp) {
     cp = &D_0002BB10;
     switch (sp->state[cp->protoidx]) {
     case STATE_INITIAL:
-        func_00025F18(cp, sp, STATE_CLOSED);
+        sppp_cp_change_state(cp, sp, STATE_CLOSED);
         break;
     case STATE_STARTING:
         sp->rst_counter[cp->protoidx] = sp->lcp_max_configure;
         cp->scr(sp);
-        func_00025F18(cp, sp, STATE_REQ_SENT);
+        sppp_cp_change_state(cp, sp, STATE_REQ_SENT);
         break;
     }
 }
 
 #if FW_VERSION < 271
-void func_00027CD8(struct sppp *sp) {
+void sppp_lcp_down(struct sppp *sp) {
     const struct cp *cp = &D_0002BB10;
 
     switch (sp->state[cp->protoidx]) {
     case STATE_CLOSED:
     case STATE_CLOSING:
-        func_00025F18(cp, sp, STATE_INITIAL);
+        sppp_cp_change_state(cp, sp, STATE_INITIAL);
         break;
     case STATE_STOPPED:
         (cp->tls)(sp);
@@ -4184,11 +4184,11 @@ void func_00027CD8(struct sppp *sp) {
     case STATE_REQ_SENT:
     case STATE_ACK_RCVD:
     case STATE_ACK_SENT:
-        func_00025F18(cp, sp, STATE_STARTING);
+        sppp_cp_change_state(cp, sp, STATE_STARTING);
         break;
     case STATE_OPENED:
         (cp->tld)(sp);
-        func_00025F18(cp, sp, STATE_STARTING);
+        sppp_cp_change_state(cp, sp, STATE_STARTING);
         break;
     }
     _sce_pspnet_if_down((struct ifnet *)sp);
@@ -4200,25 +4200,25 @@ void func_00027CD8(struct sppp *sp) {
     ((struct ifnet *)sp)->if_flags &= ~0x40; /* IFF_RUNNING */
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027CD8);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sppp_lcp_down);
 #endif
 
 #if FW_VERSION < 271
-void func_00027DB4(struct sppp *sp) {
+void sppp_lcp_open(struct sppp *sp) {
     const struct cp *cp = &D_0002BB10;
 
     sp->pp_flags &= ~0x10; /* PP_NEEDAUTH */
     switch (sp->state[cp->protoidx]) {
     case STATE_INITIAL:
         (cp->tls)(sp);
-        func_00025F18(cp, sp, STATE_STARTING);
+        sppp_cp_change_state(cp, sp, STATE_STARTING);
         break;
     case STATE_STARTING:
         break;
     case STATE_CLOSED:
         sp->rst_counter[cp->protoidx] = sp->lcp_max_configure;
         (cp->scr)(sp);
-        func_00025F18(cp, sp, STATE_REQ_SENT);
+        sppp_cp_change_state(cp, sp, STATE_REQ_SENT);
         break;
     case STATE_STOPPED:
     case STATE_STOPPING:
@@ -4228,15 +4228,15 @@ void func_00027DB4(struct sppp *sp) {
     case STATE_OPENED:
         break;
     case STATE_CLOSING:
-        func_00025F18(cp, sp, STATE_STOPPING);
+        sppp_cp_change_state(cp, sp, STATE_STOPPING);
         break;
     }
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027DB4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sppp_lcp_open);
 #endif
 
-void func_00027E8C(struct sppp *sp) {
+void sppp_lcp_close(struct sppp *sp) {
     const struct cp *cp = &D_0002BB10;
 
     switch (sp->state[cp->protoidx]) {
@@ -4246,13 +4246,13 @@ void func_00027E8C(struct sppp *sp) {
         break;
     case STATE_STARTING:
         (cp->tlf)(sp);
-        func_00025F18(cp, sp, STATE_INITIAL);
+        sppp_cp_change_state(cp, sp, STATE_INITIAL);
         break;
     case STATE_STOPPED:
-        func_00025F18(cp, sp, STATE_CLOSED);
+        sppp_cp_change_state(cp, sp, STATE_CLOSED);
         break;
     case STATE_STOPPING:
-        func_00025F18(cp, sp, STATE_CLOSING);
+        sppp_cp_change_state(cp, sp, STATE_CLOSING);
         break;
     case STATE_OPENED:
         (cp->tld)(sp);
@@ -4262,17 +4262,17 @@ void func_00027E8C(struct sppp *sp) {
     case STATE_ACK_SENT:
         sp->rst_counter[cp->protoidx] = sp->lcp_max_terminate;
         func_00025638(sp, cp->proto, 5 /* TERM_REQ */, ++sp->pp_seq[cp->protoidx], 0, 0);
-        func_00025F18(cp, sp, STATE_CLOSING);
+        sppp_cp_change_state(cp, sp, STATE_CLOSING);
         break;
     }
 }
 
-void func_00027FA0(void *arg0) {
-    func_00028B84(&D_0002BB10, arg0);
+void sppp_lcp_TO(void *arg0) {
+    sppp_to_event(&D_0002BB10, arg0);
 }
 
 #if FW_VERSION < 271
-void func_00027FC4(struct sppp *sp, u8 *h, s32 len) {
+void sppp_lcp_RCN_rej(struct sppp *sp, u8 *h, s32 len) {
     u8 *buf, *p;
 
     len -= 4;
@@ -4295,10 +4295,10 @@ void func_00027FC4(struct sppp *sp, u8 *h, s32 len) {
     sceNetFreeInternal(buf);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027FC4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sppp_lcp_RCN_rej);
 #endif
 
-void func_00028080(struct sppp *sp) {
+void sppp_lcp_tld(struct sppp *sp) {
     s32 i;
     u32 mask;
 
@@ -4311,7 +4311,7 @@ void func_00028080(struct sppp *sp) {
     }
 }
 
-void func_00028124(struct sppp *sp) {
+void sppp_lcp_tls(struct sppp *sp) {
     sp->pp_phase = SPPP_PHASE_ESTABLISH;
     sp->unk174 = (sp->unk174 > 1) ? sp->unk174 : 1;
     if (sp->pp_tls != NULL) {
@@ -4319,14 +4319,14 @@ void func_00028124(struct sppp *sp) {
     }
 }
 
-void func_00028164(struct sppp *sp) {
+void sppp_lcp_tlf(struct sppp *sp) {
     sp->pp_phase = SPPP_PHASE_DEAD;
     if (sp->pp_tlf != NULL) {
         sp->pp_tlf(sp);
     }
 }
 
-void func_00028194(struct sppp *sp) {
+void sppp_lcp_scr(struct sppp *sp) {
     char opt[6 /* magicnum */ + 4 /* mru */ + 5 /* chap */];
     s32 i = 0;
 
@@ -4351,28 +4351,28 @@ void func_00028194(struct sppp *sp) {
     func_00025638(sp, 0xC021 /* PPP_LCP */, 1 /* CONF_REQ */, sp->confid[IDX_LCP], i, &opt);
 }
 
-void func_00028290(struct sppp *sp) {
+void sppp_ipcp_up(struct sppp *sp) {
     const struct cp *cp = &D_0002BB54;
 
     switch (sp->state[cp->protoidx]) {
     case STATE_INITIAL:
-        func_00025F18(cp, sp, STATE_CLOSED);
+        sppp_cp_change_state(cp, sp, STATE_CLOSED);
         break;
     case STATE_STARTING:
         sp->rst_counter[cp->protoidx] = sp->lcp_max_configure;
         cp->scr(sp);
-        func_00025F18(cp, sp, STATE_REQ_SENT);
+        sppp_cp_change_state(cp, sp, STATE_REQ_SENT);
         break;
     }
 }
 
-void func_00028318(struct sppp *sp) {
+void sppp_ipcp_down(struct sppp *sp) {
     const struct cp *cp = &D_0002BB54;
 
     switch (sp->state[cp->protoidx]) {
     case STATE_CLOSED:
     case STATE_CLOSING:
-        func_00025F18(cp, sp, STATE_INITIAL);
+        sppp_cp_change_state(cp, sp, STATE_INITIAL);
         break;
     case STATE_STOPPED:
         (cp->tls)(sp);
@@ -4381,16 +4381,16 @@ void func_00028318(struct sppp *sp) {
     case STATE_REQ_SENT:
     case STATE_ACK_RCVD:
     case STATE_ACK_SENT:
-        func_00025F18(cp, sp, STATE_STARTING);
+        sppp_cp_change_state(cp, sp, STATE_STARTING);
         break;
     case STATE_OPENED:
         (cp->tld)(sp);
-        func_00025F18(cp, sp, STATE_STARTING);
+        sppp_cp_change_state(cp, sp, STATE_STARTING);
         break;
     }
 }
 
-void func_000283B8(struct sppp *sp) {
+void sppp_ipcp_open(struct sppp *sp) {
     const struct cp *cp = &D_0002BB54;
 
     sp->ipcp_flags = 0;
@@ -4404,14 +4404,14 @@ void func_000283B8(struct sppp *sp) {
     switch (sp->state[cp->protoidx]) {
     case STATE_INITIAL:
         (cp->tls)(sp);
-        func_00025F18(cp, sp, STATE_STARTING);
+        sppp_cp_change_state(cp, sp, STATE_STARTING);
         break;
     case STATE_STARTING:
         break;
     case STATE_CLOSED:
         sp->rst_counter[cp->protoidx] = sp->lcp_max_configure;
         (cp->scr)(sp);
-        func_00025F18(cp, sp, STATE_REQ_SENT);
+        sppp_cp_change_state(cp, sp, STATE_REQ_SENT);
         break;
     case STATE_STOPPED:
     case STATE_STOPPING:
@@ -4421,13 +4421,13 @@ void func_000283B8(struct sppp *sp) {
     case STATE_OPENED:
         break;
     case STATE_CLOSING:
-        func_00025F18(cp, sp, STATE_STOPPING);
+        sppp_cp_change_state(cp, sp, STATE_STOPPING);
         break;
     }
 }
 
 #if FW_VERSION < 151
-void func_000284B4(struct sppp *sp) {
+void sppp_ipcp_close(struct sppp *sp) {
     const struct cp *cp = &D_0002BB54;
 
     switch (sp->state[cp->protoidx]) {
@@ -4437,13 +4437,13 @@ void func_000284B4(struct sppp *sp) {
         break;
     case STATE_STARTING:
         (cp->tlf)(sp);
-        func_00025F18(cp, sp, STATE_INITIAL);
+        sppp_cp_change_state(cp, sp, STATE_INITIAL);
         break;
     case STATE_STOPPED:
-        func_00025F18(cp, sp, STATE_CLOSED);
+        sppp_cp_change_state(cp, sp, STATE_CLOSED);
         break;
     case STATE_STOPPING:
-        func_00025F18(cp, sp, STATE_CLOSING);
+        sppp_cp_change_state(cp, sp, STATE_CLOSING);
         break;
     case STATE_OPENED:
         (cp->tld)(sp);
@@ -4453,7 +4453,7 @@ void func_000284B4(struct sppp *sp) {
     case STATE_ACK_SENT:
         sp->rst_counter[cp->protoidx] = sp->lcp_max_terminate;
         func_00025638(sp, cp->proto, 5 /* TERM_REQ */, ++sp->pp_seq[cp->protoidx], 0, 0);
-        func_00025F18(cp, sp, STATE_CLOSING);
+        sppp_cp_change_state(cp, sp, STATE_CLOSING);
         break;
     }
     if (sp->pp_saved_mtu) {
@@ -4462,15 +4462,15 @@ void func_000284B4(struct sppp *sp) {
     }
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000284B4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sppp_ipcp_close);
 #endif
 
-void func_00028608(void *arg0) {
-    func_00028B84(&D_0002BB54, arg0);
+void sppp_ipcp_TO(void *arg0) {
+    sppp_to_event(&D_0002BB54, arg0);
 }
 
 #if FW_VERSION < 271
-void func_0002862C(struct sppp *sp, u8 *h, s32 len) {
+void sppp_ipcp_RCN_rej(struct sppp *sp, u8 *h, s32 len) {
     u8 *p;
 
     len -= 4;
@@ -4490,10 +4490,10 @@ void func_0002862C(struct sppp *sp, u8 *h, s32 len) {
     }
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002862C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sppp_ipcp_RCN_rej);
 #endif
 
-void func_000286C8(struct sppp *sp) {
+void sppp_ipcp_tlu(struct sppp *sp) {
     struct ifnet *ifp = (struct ifnet *)sp;
 
     sp->unk174 = 2;
@@ -4540,15 +4540,15 @@ void func_00028778(void *arg0) {
 #endif
 
 #if FW_VERSION == 100
-void func_00028788(struct sppp *sp) {
+void sppp_pap_open(struct sppp *sp) {
     if (sp->myauth_proto == PPP_PAP) {
         D_0002BBCC(sp);
-        _sce_pspnet_callout_reset(sp->ch[IDX_PAP], sp->unk394, func_00028854, sp);
+        _sce_pspnet_callout_reset(sp->ch[IDX_PAP], sp->unk394, sppp_pap_TO, sp);
         sp->rst_counter[IDX_PAP] = sp->unk398;
     }
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00028788);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sppp_pap_open);
 #endif
 
 #if FW_VERSION >= 201
@@ -4558,7 +4558,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000287F4);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000287F4(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x188) != 2) {
-        func_00025F18(&D_0002BB94, arg0, STATE_CLOSED);
+        sppp_cp_change_state(&D_0002BB94, arg0, STATE_CLOSED);
     }
     _sce_pspnet_callout_stop(arg0 + 0x1FC);
     M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) & ~4);
@@ -4568,7 +4568,7 @@ void func_000287F4(void *arg0) {
 #if FW_VERSION == 100
 void func_000287F4(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x188) != 2) {
-        func_00025F18(&D_0002BB94, arg0, STATE_CLOSED);
+        sppp_cp_change_state(&D_0002BB94, arg0, STATE_CLOSED);
     }
 }
 #endif
@@ -4588,7 +4588,7 @@ void func_0002884C(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00028854);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sppp_pap_TO);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000288E4);
@@ -4606,16 +4606,16 @@ void func_000288E4(void) {
 #endif
 
 #if FW_VERSION < 271
-void func_000288EC(struct sppp *sp) {
+void sppp_pap_tld(struct sppp *sp) {
     _sce_pspnet_callout_stop(sp->ch[IDX_PAP]);
     sp->lcp_protos &= ~(1 << IDX_PAP);
     D_0002BB24(sp);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000288EC);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sppp_pap_tld);
 #endif
 
-void func_00028930(struct sppp *sp) {
+void sppp_pap_scr(struct sppp *sp) {
     u8 idlen, pwdlen;
 
     pwdlen = sp->myauth_secret_len;
@@ -4643,7 +4643,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002A548);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0002A548(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x18C) != 2) {
-        func_00025F18(&D_0002BBD8, arg0, STATE_CLOSED);
+        sppp_cp_change_state(&D_0002BBD8, arg0, STATE_CLOSED);
     }
     _sce_pspnet_callout_stop(arg0 + 0x220);
     M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) & ~8);
@@ -4671,7 +4671,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000289C0);
 #if FW_VERSION == 100
 void func_000289C0(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x18C) != 2) {
-        func_00025F18(&D_0002BBD8, arg0, STATE_CLOSED);
+        sppp_cp_change_state(&D_0002BBD8, arg0, STATE_CLOSED);
     }
 }
 
@@ -4727,7 +4727,7 @@ void func_00028B7C(void) {
 }
 #endif
 
-void func_00028B84(const struct cp *cp, struct sppp *sp) {
+void sppp_to_event(const struct cp *cp, struct sppp *sp) {
     s32 s;
 
     s = _sce_pspnet_spllock();
@@ -4735,20 +4735,20 @@ void func_00028B84(const struct cp *cp, struct sppp *sp) {
         switch (sp->state[cp->protoidx]) {
         case STATE_CLOSING:
             (cp->tlf)(sp);
-            func_00025F18(cp, sp, STATE_CLOSED);
-            func_00026734(sp);
+            sppp_cp_change_state(cp, sp, STATE_CLOSED);
+            sppp_lcp_check_and_close(sp);
             break;
         case STATE_STOPPING:
             (cp->tlf)(sp);
-            func_00025F18(cp, sp, STATE_STOPPED);
-            func_00026734(sp);
+            sppp_cp_change_state(cp, sp, STATE_STOPPED);
+            sppp_lcp_check_and_close(sp);
             break;
         case STATE_REQ_SENT:
         case STATE_ACK_RCVD:
         case STATE_ACK_SENT:
             (cp->tlf)(sp);
-            func_00025F18(cp, sp, STATE_STOPPED);
-            func_00026734(sp);
+            sppp_cp_change_state(cp, sp, STATE_STOPPED);
+            sppp_lcp_check_and_close(sp);
             break;
         }
     } else {
@@ -4761,7 +4761,7 @@ void func_00028B84(const struct cp *cp, struct sppp *sp) {
         case STATE_REQ_SENT:
         case STATE_ACK_RCVD:
             (cp->scr)(sp);
-            func_00025F18(cp, sp, STATE_REQ_SENT);
+            sppp_cp_change_state(cp, sp, STATE_REQ_SENT);
             break;
         case STATE_ACK_SENT:
             (cp->scr)(sp);
