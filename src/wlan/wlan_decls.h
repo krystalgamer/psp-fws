@@ -40,7 +40,8 @@ typedef struct SceWlanMlmeMsg {
         void *buf;                  /* 0x14 */
         u32 arg2;
     };
-    u8 data[0xC4 - 0x18];
+    void *buf18;                    /* 0x18 */
+    u8 data[0xC4 - 0x1C];
 } SceWlanMlmeMsg;
 
 /* singly linked FIFO protected by suspendIntr (next pointer at +8) */
@@ -89,8 +90,39 @@ typedef struct {
     u8 *info;                   /* 0x0C */
 } SceWlanBssEnt;
 
+typedef struct {
+    u16 id[3];                  /* 0x00 */
+    u8 unk6[0x3E - 6];
+} SceWlanChipInfo;
+
+/* HAL request block passed to func_0000A98C */
+typedef struct {
+    u32 cmd;                    /* 0x00 */
+    u32 len;                    /* 0x04 */
+    u8 *data;                   /* 0x08 */
+} SceWlanHalReq;
+
+/* unaligned word (byte-wise struct copy) */
+typedef struct {
+    u8 b[4];
+} SceWlanBytes4;
+
 typedef struct SceWlanSoftc SceWlanSoftc;
 typedef struct SceWlanMac SceWlanMac;
+
+/* per-chip operation table (D_0001379C in 1.00), copied into SceWlanMac at attach */
+typedef struct {
+    u16 id[3];                                  /* 0x00 matched against SceWlanMac.chip.id */
+    u16 pad6;
+    void *(*init)(SceWlanMac *);                /* 0x08 -> SceWlanMac.sync */
+    void (*stop)(SceWlanMac *);                 /* 0x0C */
+    u32 fn[4];                                  /* 0x10 */
+    s32 (*regWrite)(SceWlanMac *, s32, void *); /* 0x20 */
+    s32 (*gpSend)(SceWlanMac *, s32, void *, u32);          /* 0x24 */
+    s32 (*gpRecv)(SceWlanMac *, s32, void *, u32, s32 *);   /* 0x28 */
+    s32 (*prevEstablish)(SceWlanMac *, void *); /* 0x2C */
+    u32 unk30;                                  /* 0x30 */
+} SceWlanChipOps;
 
 #if FW_VERSION >= 201
 /* only the common head is known for 2.00+ */
@@ -134,7 +166,7 @@ struct SceWlanMac {
     u32 unk4;
     u32 flags;                  /* 0x008 bit 0: clock on, bit 0x20: ... */
     SceWlanBus bus;             /* 0x00C */
-    u8 unk03C[0x3E];            /* 0x03C */
+    SceWlanChipInfo chip;       /* 0x03C */
     u8 unk07A[2];
 #if FW_VERSION >= 150
     u8 unk_v150[0x3C];
@@ -495,6 +527,7 @@ struct Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0 {
     s32 unk188;
 };
 
+extern SceWlanChipOps D_0001379C;
 extern const u32 D_00018A00[15];
 extern const u16 D_00018A3C[6];
 extern const u8 D_00018A48[][14];

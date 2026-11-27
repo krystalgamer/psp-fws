@@ -2274,7 +2274,7 @@ s32 func_000067D4(SceWlanMac *mac) {
             sceKernelTerminateDeleteThread(mac->thread);
             if (mac->modeStop != NULL)
                 mac->modeStop(mac);
-            memset(mac->unk03C, 0, sizeof(mac->unk03C));
+            memset(&mac->chip, 0, sizeof(mac->chip));
             mac->sync = NULL;
             mac->modeStop = NULL;
             mac->unk84[0] = 0;
@@ -3009,7 +3009,27 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000B08C);
 INCLUDE_ASM("nonmatchings/wlan", func_0000B120);
 #endif
 
+#if FW_VERSION < 310
+void func_0000B194(u8 *p, s32 len) {
+    s32 n = len >> 2;
+    s32 rem = len - n * 4;
+    u32 w;
+    s32 i;
+
+    for (i = 0; i < n; i++) {
+        *(SceWlanBytes4 *)&w = *(SceWlanBytes4 *)&p[i * 4];
+        w = __builtin_allegrex_wsbw(w);
+        *(SceWlanBytes4 *)&p[i * 4] = *(SceWlanBytes4 *)&w;
+    }
+    if (rem != 0) {
+        *(SceWlanBytes4 *)&w = *(SceWlanBytes4 *)&p[i * 4];
+        w = __builtin_allegrex_wsbw(w) << ((4 - rem) * 8);
+        memcpy(&p[i * 4], &w, rem);
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/wlan", func_0000B194);
+#endif
 
 #if FW_VERSION < 282
 s32 func_00009500(SceWlanBus *bus, s32 ms) {
@@ -3770,7 +3790,23 @@ s32 func_00011E78(SceWlanMac *m, u8 *f) {
 INCLUDE_ASM("nonmatchings/wlan", func_00011E78);
 #endif
 
+#if FW_VERSION < 201
+s32 func_00011EF8(SceWlanMac *m, u8 *f) {
+    SceWlanMlmeMsg *msg = func_0000840C(m->sc, sizeof(SceWlanMlmeMsg));
+
+    memset(msg, 0, sizeof(SceWlanMlmeMsg));
+    msg->cmd = (((f[9] << 8) | f[8]) == 0) ? 0x102 : 0x101;
+    msg->status = (f[7] << 8) | f[6];
+    msg->arg = func_00016010((f[0xB] << 8) | f[0xA]);
+    msg->arg2 = (f[0xD] << 8) | f[0xC];
+    msg->buf18 = func_0000840C(m->sc, 4);
+    memcpy(msg->buf18, &f[0xE], msg->arg2);
+    sceKernelSendMbx(m->mbx, msg);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/wlan", func_00011EF8);
+#endif
 
 #if FW_VERSION < 201
 s32 func_00011FE0(SceWlanMac *m, u8 *f) {
