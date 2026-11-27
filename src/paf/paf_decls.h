@@ -7044,6 +7044,7 @@ s32 func_00169C20(s32, s32, s32);
 s32 func_0016B04C(struct Unk_func_0016B04C_0 *arg0);
 s32 func_0016B064(struct Unk_func_0016B064_0 *arg0);
 s32 func_0016B084(s32);
+void func_0016B0B0(void);
 M2C_UNK func_0016BE0C();
 void fwrite(void);
 M2C_UNK inflateReset(s32);

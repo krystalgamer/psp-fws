@@ -114,13 +114,17 @@ def main():
         # words are compared with relocated fields masked; check the symbols too
         mine = compiled_reloc_syms(text, comp, own.split(" ", 1)[1])
         want = target_reloc_syms(mod, name)
-        if len(mine) != len(want) or any(m is not None and m != w for m, w in zip(mine, want)):
+        # splat names an address inside a global's extent D_XXXXXXXX; the C reaches it as sym+off
+        interior = lambda m, w: re.fullmatch(r"D_[0-9A-F]{8}", w) and not re.fullmatch(r"D_[0-9A-F]{8}", m)
+        bad = [(i, w, m) for i, (w, m) in enumerate(zip(want, mine)) if m is not None and m != w]
+        if len(mine) != len(want) or any(not interior(m, w) for _, w, m in bad):
             print("relocation symbols differ:")
-            for i, (w, m) in enumerate(zip(want, mine)):
-                if m is not None and m != w:
-                    print(f"  reloc {i}: target {w}, mine {m}")
+            for i, w, m in bad:
+                print(f"  reloc {i}: target {w}, mine {m}")
         else:
             print("relocation symbols match")
+            for i, w, m in bad:
+                print(f"  (reloc {i}: target label {w} assumed inside {m}; check the offset)")
     if a.perm:
         import perm_near
         d = perm_near.write_perm_dir(mod, name, text, comp, own.split(" ", 1)[1])
