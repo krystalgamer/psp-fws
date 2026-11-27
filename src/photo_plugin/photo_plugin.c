@@ -16,7 +16,7 @@ s32 module_stop(void) {
     return 0;
 }
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/photo_plugin", func_0000015C);
 #else
 void func_0000015C(s32 arg0) {
@@ -168,11 +168,11 @@ INCLUDE_RODATA("nonmatchings/photo_plugin", D_0002E540);
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00000458);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 271
+#if FW_VERSION >= 152 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000004EC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 void func_000004EC(s32 arg0) {
     _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80004, (s32) &func_00000180, 0);
 }
@@ -462,11 +462,11 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00000984);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000009C8);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/photo_plugin", func_000009D0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 void func_000009D0(s32 arg0) {
     _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80004, (s32) &func_00000180, 0);
 }
@@ -482,7 +482,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00000B28);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00000B78);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00000D2C);
 #else
 void func_00000D2C(s32 arg0) {
@@ -494,7 +494,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00000D58);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00000D80);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00000EBC);
 #else
 void func_00000EBC(s32 arg0) {
@@ -675,7 +675,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00002B54);
 
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00002B98);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/photo_plugin", func_00002E40);
 #else
 void func_00002E40(s32 arg0) {
