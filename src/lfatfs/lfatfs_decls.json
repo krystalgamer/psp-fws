@@ -1,12 +1,14 @@
 {
  "funcs": {
   "Kprintf": "s32 Kprintf(const char *fmt, ...);",
+  "Malloc": "s32 Malloc(s32);",
   "UFatChdir": "s32 UFatChdir(SceIoIob *iob, char *name);",
   "UFatDclose": "s32 UFatDclose(void *arg0);",
   "UFatRename": "s32 UFatRename(SceIoIob *iob, const char *oldname, const char *newname);",
   "bcmp": "s32 bcmp(const void *a, const void *b, SceSize n);",
   "bcopy": "void bcopy(const void *src, void *dst, SceSize n);",
   "bzero": "void bzero(void *s, SceSize n);",
+  "del_lflash_driver": "s32 del_lflash_driver(void);",
   "df_close": "s32 df_close(SceIoIob *iob);",
   "df_dclose": "s32 df_dclose(void *arg0);",
   "df_dread": "s32 df_dread(void *arg0);",
@@ -63,7 +65,6 @@
   "func_00003C6C": "void func_00003C6C(s32 *args);",
   "func_00003CA0": "void func_00003CA0(s32 *args);",
   "func_00003F94": "s32 func_00003F94(s32, s32);",
-  "func_00004258": "s32 func_00004258(s32, s32);",
   "func_000042D8": "s32 func_000042D8(s32, s32, s32, s32);",
   "func_00004398": "s32 func_00004398(s32, s32);",
   "func_00004458": "s32 func_00004458(s32, s32, s32);",
@@ -88,7 +89,6 @@
   "func_000089C0": "void func_000089C0(void);",
   "func_000089C8": "void func_000089C8(void);",
   "func_00008A4C": "s32 func_00008A4C(s32);",
-  "func_00008B14": "s32 func_00008B14(s32);",
   "func_00008C9C": "s32 func_00008C9C(s32);",
   "func_00009150": "s32 func_00009150(void);",
   "func_000091C0": "s32 func_000091C0(void);",
@@ -116,7 +116,6 @@
   "func_00009F04": "s32 func_00009F04(void);",
   "func_00009F74": "s32 func_00009F74(void);",
   "func_00009F94": "void func_00009F94(s32 arg0);",
-  "func_00009F98": "s32 func_00009F98(void);",
   "func_0000A098": "void func_0000A098(void *arg0);",
   "func_0000A320": "s32 func_0000A320(void);",
   "func_0000A32C": "s32 func_0000A32C(void);",
@@ -192,7 +191,8 @@
   "strcmp": "s32 strcmp(const char *a, const char *b);",
   "strlen": "SceSize strlen(const char *s);",
   "strncmp": "s32 strncmp(const char *a, const char *b, SceSize n);",
-  "strrchr": "char *strrchr(const char *s, s32 c);"
+  "strrchr": "char *strrchr(const char *s, s32 c);",
+  "ufat_dopen": "s32 ufat_dopen(s32, s32);"
  },
  "types": {
   "00_typedefs": "typedef int SceMode;\ntypedef s64 SceOff;\ntypedef s32 SceSSize;\ntypedef struct SceIoStat SceIoStat;\ntypedef struct SceIoDirent SceIoDirent;\ntypedef struct SceIoIob SceIoIob;\ntypedef struct SceIoDeviceEntry SceIoDeviceEntry;\ntypedef struct SceIoDeviceTable SceIoDeviceTable;\ntypedef struct SceIoDeviceFunction SceIoDeviceFunction;",
