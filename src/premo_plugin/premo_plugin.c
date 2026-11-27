@@ -835,24 +835,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin", func_00001AC4);
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00001B64);
-#endif
-
-#if FW_VERSION == 352
-void func_00001B64(struct Unk_func_00001B64_0 *arg0) {
-    s32 temp_v0;
-
-    func_00001CF4(arg0);
-    temp_v0 = arg0->unk0;
-    if (temp_v0 != 0) {
-        vsh_FE0FDCDB(temp_v0);
-        arg0->unk0 = 0;
-    }
-    sceKernelDeleteSema(arg0->unk8);
-    sceKernelDeleteSema(arg0->unk4);
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00001B64(struct Unk_func_00001B64_0 *arg0) {
     s32 temp_v0;
 
@@ -869,24 +852,7 @@ void func_00001B64(struct Unk_func_00001B64_0 *arg0) {
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin", func_00001BB4);
-#endif
-
-#if FW_VERSION == 352
-void func_00001BB4(struct Unk_func_00001B64_0 *arg0) {
-    s32 temp_v0;
-
-    func_00001CF4(arg0);
-    temp_v0 = arg0->unk0;
-    if (temp_v0 != 0) {
-        vsh_FE0FDCDB(temp_v0);
-        arg0->unk0 = 0;
-    }
-    sceKernelDeleteSema(arg0->unk8);
-    sceKernelDeleteSema(arg0->unk4);
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00001BB4(struct Unk_func_00001B64_0 *arg0) {
     s32 temp_v0;
 

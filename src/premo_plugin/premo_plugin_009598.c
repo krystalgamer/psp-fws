@@ -79,21 +79,7 @@ void func_00009808(struct Unk_func_00009808_0 *arg0) {
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_009598", func_00009840);
-#endif
-
-#if FW_VERSION == 352
-void func_00009840(struct Unk_func_00009840_0 *arg0) {
-    s32 temp_v0;
-
-    if (arg0->unk10 == 0) {
-        temp_v0 = _Znwj(4);
-        _ZN3vsh9PowerLockC1Ei(temp_v0, 0);
-        arg0->unk10 = temp_v0;
-    }
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00009840(struct Unk_func_00009840_0 *arg0) {
     s32 temp_v0;
 
