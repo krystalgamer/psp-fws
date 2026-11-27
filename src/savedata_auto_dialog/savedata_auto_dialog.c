@@ -3416,11 +3416,11 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007FCC);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007DD8);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001151C);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0001151C(s32 arg0) {
     sce_paf_private_memset(&D_00047D24, 0, 0x10);
     sce_paf_private_memcpy(&D_00047D24, arg0, 0x10);
