@@ -325,7 +325,7 @@ s32 sceI2cSetClock(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceI2cSetClock(s32 arg0, s32 arg1) {
     M2C_VFIELD(&D_000015B0, s32, 0x10) = arg1;
     M2C_VFIELD(&D_000015B0, s32, 0xC) = arg0;
@@ -337,7 +337,7 @@ s32 sceI2cSetClock(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/i2c", func_000011B0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/i2c", func_0000109C);
 #endif
 
