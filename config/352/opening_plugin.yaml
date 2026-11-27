@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/352/.splat_cache.opening_plugin
   symbol_addrs_path:
     - config/352/symbol_addrs.opening_plugin.txt
+    - config/352/func_starts.opening_plugin.txt
     - tmp/build/352/prx_syms.opening_plugin.txt
   reloc_addrs_path: [tmp/build/352/reloc_addrs.opening_plugin.txt]
   asset_path: tmp/assets/352/opening_plugin
@@ -53,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, opening_plugin]
+      - [0x3990, c, opening_plugin_crtend]
       - { start: 0x3A04, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x3C64, type: prxpad, order: .text }
       - { start: 0x3C70, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }

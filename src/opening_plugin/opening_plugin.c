@@ -615,15 +615,3 @@ void func_00000FFC(M2C_UNK **arg0) {
     _ZdlPv();
 }
 #endif
-
-INCLUDE_ASM("nonmatchings/opening_plugin", func_00001024);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/opening_plugin", func_0000107C);
-#endif
-
-#if FW_VERSION < 250
-INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001638);
-
-INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001648);
-#endif

@@ -9,6 +9,9 @@ struct Unk_func_00000790_temp_v0_2 {
     M2C_UNK (*unk10)(M2C_UNK);
 };
 
+typedef void (*func_ptr)(void);
+
+extern func_ptr D_000013D4[];
 extern M2C_UNK D_00001648;
 extern s32 D_0000177C;
 extern s32 D_00001780;

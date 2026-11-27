@@ -41,9 +41,11 @@
   "sce_paf_private_strlen": "s32 sce_paf_private_strlen(s32);"
  },
  "types": {
-  "Unk_func_00000790_temp_v0_2": "struct Unk_func_00000790_temp_v0_2 {\n    u8 pad0[0x10];\n    M2C_UNK (*unk10)(M2C_UNK);\n};"
+  "Unk_func_00000790_temp_v0_2": "struct Unk_func_00000790_temp_v0_2 {\n    u8 pad0[0x10];\n    M2C_UNK (*unk10)(M2C_UNK);\n};",
+  "hand_func_00001024": "typedef void (*func_ptr)(void);"
  },
  "vars": {
+  "D_000013D4": "extern func_ptr D_000013D4[];",
   "D_00001648": "extern M2C_UNK D_00001648;",
   "D_0000177C": "extern s32 D_0000177C;",
   "D_00001780": "extern s32 D_00001780;",
