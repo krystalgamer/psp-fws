@@ -1552,7 +1552,7 @@ char *intoa(u32 addr) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008E40);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008FC8);
+INCLUDE_ASM("nonmatchings/pspnet_inet", ifaof_ifpforaddr);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", if_rtdel);
@@ -1736,7 +1736,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000963C);
 
 #if FW_VERSION < 201
 void func_0000963C(void) {
-    _sce_pspnet_start_of_inet_module_in_if_core(&func_0000986C, func_000097BC, func_000093F0, func_0000940C, &func_000095AC, &func_00009650, func_00009548, func_00009564, func_000095A4, func_000095C0, func_000095DC, &func_00009764, &func_00009788);
+    _sce_pspnet_start_of_inet_module_in_if_core(&link_rtrequest, func_000097BC, func_000093F0, func_0000940C, &func_000095AC, &func_00009650, func_00009548, func_00009564, func_000095A4, func_000095C0, func_000095DC, &func_00009764, &func_00009788);
 }
 #endif
 
@@ -1752,7 +1752,7 @@ s32 func_000096D0(void) {
 
 #if FW_VERSION >= 282
 void func_000097BC(void) {
-    _sce_pspnet_start_of_inet_module_in_if_core(&func_0000986C, func_0000993C, func_00009570, func_0000958C, &func_000095AC, &func_00009650, func_000096C8, func_000096E4, func_00009724, func_00009740, func_0000975C, &func_00009764, &func_00009788);
+    _sce_pspnet_start_of_inet_module_in_if_core(&link_rtrequest, func_0000993C, func_00009570, func_0000958C, &func_000095AC, &func_00009650, func_000096C8, func_000096E4, func_00009724, func_00009740, func_0000975C, &func_00009764, &func_00009788);
 }
 
 void func_00009850(void) {
@@ -1760,7 +1760,23 @@ void func_00009850(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000986C);
+void link_rtrequest(s32 cmd, struct rtentry *rt, struct sockaddr *sa) {
+    struct ifaddr *ifa;
+    struct sockaddr *dst;
+    struct ifnet *ifp;
+
+    if ((cmd != 1) || ((ifa = rt->rt_ifa) == 0) ||
+        ((ifp = ifa->ifa_ifp) == 0) || ((dst = rt_key(rt)) == 0))
+        return;
+    if ((ifa = ifaof_ifpforaddr(dst, ifp)) != NULL) {
+        if (--rt->rt_ifa->ifa_refcnt == 0)
+            _sce_pspnet_ifafree(rt->rt_ifa);
+        rt->rt_ifa = ifa;
+        ifa->ifa_refcnt++;
+        if (ifa->ifa_rtrequest && ifa->ifa_rtrequest != (void *)_sce_pspnet_link_rtrequest)
+            ifa->ifa_rtrequest(cmd, rt, sa);
+    }
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000097BC);
@@ -1777,7 +1793,32 @@ void func_0000993C(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00009944);
+#if FW_VERSION < 151
+s32 ether_multiaddr(struct sockaddr *sa, u8 *addrlo, u8 *addrhi) {
+    struct sockaddr_in *sin;
+
+    switch (sa->sa_family) {
+    case AF_INET:
+        sin = (struct sockaddr_in *)sa;
+        if (sin->sin_addr.s_addr == __builtin_allegrex_wsbw(0)) {
+            func_0002C9B8(ether_ipmulticast_min, addrlo, 6);
+            func_0002C9B8(ether_ipmulticast_max, addrhi, 6);
+        } else {
+            addrlo[0] = 0x01;
+            addrlo[1] = 0x00;
+            addrlo[2] = 0x5e;
+            addrlo[3] = ((u8 *)&sin->sin_addr)[1] & 0x7f;
+            addrlo[4] = ((u8 *)&sin->sin_addr)[2];
+            addrlo[5] = ((u8 *)&sin->sin_addr)[3];
+            func_0002C9B8(addrlo, addrhi, 6);
+        }
+        break;
+    }
+    return 0;
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", ether_multiaddr);
+#endif
 
 void func_00009A14(void *arg0, void *arg1, u16 arg2, void *arg3) {
     if (D_0002C520 > 0) {
@@ -1817,7 +1858,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000999C);
 
 #if FW_VERSION < 201
 void func_0000999C(void) {
-    _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(&func_00009B84, &func_00009A14, &func_00009A58, &func_00009944);
+    _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(&func_00009B84, &func_00009A14, &func_00009A58, &ether_multiaddr);
 }
 #endif
 
@@ -1849,7 +1890,7 @@ s32 func_00009B0C(void) {
 }
 
 void func_00009B24(void) {
-    _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(&func_00009B84, &func_00009A14, &func_00009A58, &func_00009944);
+    _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(&func_00009B84, &func_00009A14, &func_00009A58, &ether_multiaddr);
 }
 
 void func_00009B5C(void) {

@@ -276,3 +276,6 @@ tcp_usrclosed = 0x00024DF8; // type:func
 intoa = 0x00008D98; // type:func
 pollscan = 0x00007D50; // type:func
 soo_poll = 0x00003F68; // type:func
+ether_multiaddr = 0x00009944; // type:func
+link_rtrequest = 0x0000986C; // type:func
+ifaof_ifpforaddr = 0x00008FC8; // type:func

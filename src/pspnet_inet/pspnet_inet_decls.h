@@ -443,6 +443,7 @@ struct rtentry {
     struct rtentry *rt_gwroute;     /* 0x78 */
     struct rttimer *rt_timer;       /* 0x7C LIST_HEAD of rttimer */
 };
+#define rt_key(r) ((struct sockaddr *)((r)->rt_nodes[0].rn_key))
 
 /* NetBSD 1.4 rttimer (no rtq_count yet) */
 struct rttimer_queue {
@@ -682,7 +683,7 @@ struct ifaddr {
     struct ifnet *ifa_ifp;              /* 0x0C */
     TAILQ_ENTRY(ifaddr) ifa_list;       /* 0x10 */
     u8 ifa_data[0x10];                  /* 0x18 struct ifaddr_data (u_quad_t in/out bytes) */
-    void (*ifa_rtrequest)(s32 cmd, struct rtentry *rt); /* 0x28 */
+    void (*ifa_rtrequest)(s32 cmd, struct rtentry *rt, struct sockaddr *sa); /* 0x28 */
     u32 ifa_flags;                      /* 0x2C */
     s32 ifa_refcnt;                     /* 0x30 */
     s32 ifa_metric;                     /* 0x34 */
@@ -1457,6 +1458,8 @@ extern const struct cp *cps[IDX_COUNT]; /* cps */
 extern SceNetBytes4 dns_primary;
 extern SceNetBytes4 dns_secondary;
 extern struct domain *domains;
+extern u8 ether_ipmulticast_max[6]; /* ether_ipmulticast_max */
+extern u8 ether_ipmulticast_min[6]; /* ether_ipmulticast_min */
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
 extern s32 inetctlerrmap[]; /* inetctlerrmap */
@@ -1497,6 +1500,7 @@ void _sce_pspnet_if_down(struct ifnet *ifp);
 void _sce_pspnet_ifafree(struct ifaddr *ifa);
 s32 _sce_pspnet_ifioctl(struct socket *so, u32 cmd, void *data, s32 p);
 void _sce_pspnet_inet_sabort(struct socket *so);
+void _sce_pspnet_link_rtrequest(s32 cmd, struct rtentry *rt, struct sockaddr *sa);
 void _sce_pspnet_microtime(struct timeval *tv);
 s32 _sce_pspnet_pppoe_term(void);
 void _sce_pspnet_selwakeup(struct selinfo *sip);
@@ -1515,6 +1519,7 @@ struct SceNetInetWaiter *_sce_pspnet_thread_enter(void);
 s32 _sce_pspnet_thread_leave(struct SceNetInetWaiter *w, s32 error);
 s32 _sce_pspnet_tsleep(void *chan, s32 timo);
 void _sce_pspnet_wakeup(void *chan);
+s32 ether_multiaddr(struct sockaddr *sa, u8 *addrlo, u8 *addrhi);
 s32 falloc(void);
 void func_00001320(void);
 s32 func_00001334(s32 req, struct sockaddr_in *dst, struct sockaddr_in *gateway, struct sockaddr_in *netmask, s32 flags);
@@ -1574,9 +1579,7 @@ s32 func_00009764(void *arg0, s32 *arg1);
 s32 func_00009788(struct socket *so, s32 cmd, void *data, void *ifp);
 void func_000097BC(void);
 void func_00009850(void);
-s32 func_0000986C();
 void func_0000993C(void);
-s32 func_00009944();
 s32 func_00009968(s32 arg0);
 s32 func_00009984(void);
 void func_0000999C(void);
@@ -1712,6 +1715,7 @@ struct in_ifaddr *ip_rtaddr(struct in_addr dst);
 void ip_savecontrol(struct inpcb *inp, struct mbuf **mp, struct ip *ip, struct mbuf *m);
 void ip_slowtimo(void);
 void ip_stripoptions(struct mbuf *m, struct mbuf *mopt);
+void link_rtrequest(s32 cmd, struct rtentry *rt, struct sockaddr *sa);
 void lortrequest(s32 cmd, struct rtentry *rt);
 s32 module_start(void);
 s32 module_stop(void);
