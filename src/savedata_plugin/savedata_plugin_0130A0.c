@@ -61,7 +61,7 @@ void ***func_000132BC(void ***arg0, struct Unk_func_000132BC_1 *arg1, void **arg
     temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
     *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_F5001144(temp_v1);
+    sce_paf_private_free2(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 -= 1;
     return arg0;
@@ -148,7 +148,7 @@ void func_00011160(void *arg0, s32 arg1, s32 arg2) {
 
 #if FW_VERSION >= 350
 s32 func_0001346C(struct Unk_func_0001346C_0 *arg0) {
-    scePaf_D1447DB7(arg0->unk4);
+    _ZN3paf4View12PageCloseAllEv(arg0->unk4);
     return 0;
 }
 #endif
@@ -227,7 +227,7 @@ u8 func_0001125C(void *arg0) {
 
 #if FW_VERSION >= 350
 void func_00013540(struct Unk_func_00013540_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    sceVshCommonGui_CBD3BD66(arg1, arg2, arg3, arg4, arg5, arg6, 0);
+    sceVshCommonGui_F4D1E387(arg1, arg2, arg3, arg4, arg5, arg6, 0);
     arg0->unk34 = 1;
 }
 #endif
@@ -241,7 +241,7 @@ void func_00013540(struct Unk_func_00013540_0 *arg0, s32 arg1, s32 arg2, s32 arg
 
 #if FW_VERSION >= 350
 void func_0001358C(void) {
-    sceVshCommonGui_6C337347();
+    _ZN3vsh10OptionMenu4ShowEv();
 }
 #endif
 
@@ -253,7 +253,7 @@ void func_0001358C(void) {
 
 #if FW_VERSION >= 350
 void func_000135A8(void) {
-    sceVshCommonGui_6DB34C38();
+    _ZN3vsh10OptionMenu4HideEv();
 }
 #endif
 
@@ -359,8 +359,8 @@ void func_000113E0(void *arg0) {
     _ZN3paf4View9PageCloseEPKc(M2C_FIELD(arg0, s32 *, 4));
 }
 
-void func_000113FC(void *arg0) {
-    _ZNK3paf4View8PageRootEPKc(M2C_FIELD(arg0, s32 *, 4));
+void func_000113FC(void *arg0, s32 arg1) {
+    _ZNK3paf4View8PageRootEPKc(M2C_FIELD(arg0, s32 *, 4), arg1);
 }
 #endif
 
@@ -394,7 +394,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00011658);
 
 #if FW_VERSION >= 350
 void func_00013764(struct Unk_func_00013764_0 *arg0) {
-    scePaf_A013540A(arg0->unk4);
+    _ZN3paf4View12PageActivateEPKc(arg0->unk4);
 }
 #endif
 
@@ -406,7 +406,7 @@ void func_00013764(struct Unk_func_00013764_0 *arg0) {
 
 #if FW_VERSION >= 350
 void func_00013780(struct Unk_func_00013780_0 *arg0) {
-    scePaf_8B38372A(arg0->unk4);
+    _ZN3paf4View9PageCloseEPKc(arg0->unk4);
 }
 #endif
 
@@ -421,8 +421,8 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0001379C);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0001379C(struct Unk_func_0001379C_0 *arg0) {
-    _ZNK3paf4View8PageRootEPKc(arg0->unk4);
+void func_0001379C(struct Unk_func_0001379C_0 *arg0, s32 arg1) {
+    _ZNK3paf4View8PageRootEPKc(arg0->unk4, arg1);
 }
 #endif
 

@@ -686,7 +686,7 @@ s32 func_00001478(struct Unk_func_00001478_0 *arg0, s32 arg1) {
         var_v1 = 0x8010300B;
         if (arg0->unk60 == 0) {
             var_v1 = -1;
-            if (scePaf_723D0C80(arg1) == 0) {
+            if (Job_isCanceled(arg1) == 0) {
                 var_v1 = func_0000D3D4(arg0->unk0->unk10(arg0), 0, 0x800, (s32) &func_000011A8, arg1);
             }
         }
@@ -1313,8 +1313,8 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_000032B0);
 void func_000041D4(struct Unk_func_000041D4_0 *arg0, s32 arg1) {
     s32 temp_s1;
 
-    temp_s1 = scePaf_61A8E8EC(0x50);
-    vsh_B1D44540(temp_s1, arg1, 0, 0, scePaf_79A4A59D(arg1, "savedata_list", 0));
+    temp_s1 = _Znwj(0x50);
+    vsh_DE027583(temp_s1, arg1, 0, 0, _ZN3paf8PhWidget9FindChildEPKci(arg1, "savedata_list", 0));
     arg0->unk1C = temp_s1;
 }
 #endif
@@ -1377,7 +1377,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_0000468C);
 
 #if FW_VERSION >= 350
 void func_00004A94(struct Unk_func_00004A94_0 *arg0) {
-    vsh_3E6BFF60(arg0->unk10->unk24->unk1C, &func_00004AC4, arg0);
+    vsh_FA1DE461(arg0->unk10->unk24->unk1C, &func_00004AC4, arg0);
 }
 #endif
 
@@ -2282,7 +2282,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00007114);
 void func_00007114(void *arg0) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_CD216C47(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), s32 *, 4), &D_00022088);
+    temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(M2C_FIELD(arg0, void **, 0x18), s32 *, 4), (char*) &D_00022088);
     if (temp_v0 == 0) {
 
     } else {
@@ -2622,7 +2622,7 @@ void func_00008D14(struct Unk_func_00008D14_0 *arg0, struct Unk_func_00008D14_1 
 
     func_00010104(3, 1);
     func_0000767C(3);
-    scePaf_ACA8017B(&sp10, scePaf_2CD3AB9E(arg1->unk4, &D_00022270), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    _ZN3paf12FormatStringEPKwS1_S1_S1_S1_S1_S1_S1_S1_S1_(&sp10, _ZNK3paf4View9GetStringEPKc(arg1->unk4, &D_00022270), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     func_00010184((struct Unk_func_00010184_0 *) arg1->unk1C, arg0->unk1D0, (s32) &sp10, 5, (s32) &func_00008F6C, 5, 0, (s32) arg1);
     func_000020C4((s32) &sp10);
 }
@@ -2755,7 +2755,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_000099B0);
 void func_000099B0(void *arg0) {
     s32 temp_v0;
 
-    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x1C)), temp_v0 = scePaf_CD216C47(M2C_FIELD(arg0, s32 *, 4), &D_00022378), (temp_v0 == 0))) {
+    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x1C)), temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(arg0, s32 *, 4), (char*) &D_00022378), (temp_v0 == 0))) {
 
     } else {
         func_00008DC4(temp_v0, (s32) arg0);
@@ -2769,7 +2769,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00009A08);
 void func_00009A08(void *arg0) {
     s32 temp_v0;
 
-    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x1C)), temp_v0 = scePaf_CD216C47(M2C_FIELD(arg0, s32 *, 4), &D_00022378), (temp_v0 == 0))) {
+    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x1C)), temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(arg0, s32 *, 4), (char*) &D_00022378), (temp_v0 == 0))) {
 
     } else {
         func_00008E98(temp_v0, (s32) arg0);
@@ -2783,7 +2783,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00009A60);
 void func_00009A60(void *arg0) {
     s32 temp_v0;
 
-    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x1C)), temp_v0 = scePaf_CD216C47(M2C_FIELD(arg0, s32 *, 4), &D_00022378), (temp_v0 == 0))) {
+    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x1C)), temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(arg0, s32 *, 4), (char*) &D_00022378), (temp_v0 == 0))) {
 
     } else {
         func_00008DC4(temp_v0, (s32) arg0);
@@ -2797,7 +2797,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00009AB8);
 void func_00009AB8(void *arg0) {
     s32 temp_v0;
 
-    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x1C)), temp_v0 = scePaf_CD216C47(M2C_FIELD(arg0, s32 *, 4), &D_00022378), (temp_v0 == 0))) {
+    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x1C)), temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(arg0, s32 *, 4), (char*) &D_00022378), (temp_v0 == 0))) {
 
     } else {
         func_00008E98(temp_v0, (s32) arg0);

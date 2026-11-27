@@ -952,7 +952,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000E688);
 
 #if FW_VERSION >= 350
 void func_0000E768(struct Unk_func_0000E768_0 *arg0) {
-    arg0->unk38 = scePaf_3EDD45EF(0, &func_0000E2F8, arg0, -1, -1, &func_0000E34C);
+    arg0->unk38 = Job_Start(0, &func_0000E2F8, arg0, -1, -1, &func_0000E34C);
 }
 #endif
 
@@ -1035,12 +1035,12 @@ void func_0000E9F4(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_F5001144(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_F5001144(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 #endif
 
@@ -1165,7 +1165,7 @@ void ***func_0000ED50(void ***arg0, struct Unk_func_0000ED50_1 *arg1, void **arg
     temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
     *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_F5001144(temp_v1);
+    sce_paf_private_free2(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 -= 1;
     return arg0;
@@ -1224,7 +1224,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F054);
 
 #if FW_VERSION >= 350
 void func_0000F130(void) {
-    scePaf_3AC3E06A();
+    sce_paf_private_malloc();
 }
 #endif
 
@@ -1236,7 +1236,7 @@ void func_0000F130(void) {
 
 #if FW_VERSION >= 350
 void func_0000F14C(void) {
-    scePaf_7EED9087();
+    sce_paf_private_memalign();
 }
 #endif
 
@@ -1248,7 +1248,7 @@ void func_0000F14C(void) {
 
 #if FW_VERSION >= 350
 void func_0000F168(void) {
-    scePaf_4729E549();
+    sce_paf_private_free();
 }
 #endif
 
@@ -1260,7 +1260,7 @@ void func_0000F168(void) {
 
 #if FW_VERSION >= 350
 void func_0000F184(void) {
-    scePaf_F6921CAB();
+    sce_paf_private_qsort();
 }
 #endif
 
@@ -1644,11 +1644,11 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000FFF8);
 #if FW_VERSION >= 350
 void func_0001009C(void) {
     void *sp0;
-    sceVshCommonGui_2EBB5C2B(&sp0, sceVshCommonGui_30FA68C3());
+    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
     func_000020C4(&sp0);
-    sceVshCommonGui_11C48509(&sp0, sceVshCommonGui_EC899EBE());
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
     func_000020C4(&sp0);
-    sceVshCommonGui_73765E63(&sp0, sceVshCommonGui_C9529428());
+    _ZN3vsh32SetButtonNavigationString_OptionEPKw(&sp0, _ZN3vsh16GetString_OptionEv());
     func_000020C4(&sp0);
 }
 #endif
@@ -1699,7 +1699,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000D850);
 void func_00010184(struct Unk_func_00010184_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     func_00010224(arg0);
     arg0->unkC = arg3;
-    arg0->unk10 = sceVshCommonGui_D728DEEA(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    arg0->unk10 = sceVshCommonGui_10906D79(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 }
 #endif
 
@@ -1717,7 +1717,7 @@ void func_00010224(struct Unk_func_00010184_0 *arg0) {
 
     temp_v0 = arg0->unk10;
     if (temp_v0 != 0) {
-        sceVshCommonGui_8F414E35(temp_v0);
+        _ZN3vsh13MessageDialog10HideDeleteEv(temp_v0);
         arg0->unk10 = 0;
     }
 }
@@ -2103,7 +2103,7 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    scePaf_3C5D1D0E((s32*) &sp0, arg0, "tex_broken_data");
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data");
     (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0);
     if (sp0 != NULL) {
         temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1;
@@ -2114,7 +2114,7 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    scePaf_3C5D1D0E((s32*) &sp0, arg0, "tex_broken_data_f");
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data_f");
     (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0 | 7);
     if (sp0 != NULL) {
         temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1;
@@ -2125,7 +2125,7 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    scePaf_3C5D1D0E((s32*) &sp0, arg0, "tex_broken_data_s");
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data_s");
     (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0 | 0xE);
     if (sp0 != NULL) {
         temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
@@ -2375,7 +2375,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_000117F8);
 
 #if FW_VERSION >= 350
 void func_00011834(s32 arg0) {
-    scePaf_9479C11B(arg0 + 0xA20, 0, 0x10);
+    sce_paf_private_memset(arg0 + 0xA20, 0, 0x10);
     func_0001186C(arg0);
 }
 #endif
