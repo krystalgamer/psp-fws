@@ -313,7 +313,7 @@ end:
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveRegistry);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceRegFlushRegistry(s32 index) {
     s32 res;
     s32 ret;
@@ -327,7 +327,8 @@ s32 sceRegFlushRegistry(s32 index) {
     ret = func_000008BC(index);
 end:
     if (res == 0) {
-        if (sceKernelSignalSema(g_semaId, 1) != 0)
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
             ret = 0x80082734;
     }
     setK1(oldK1);
@@ -335,7 +336,7 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushRegistry);
 #endif
 
