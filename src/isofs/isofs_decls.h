@@ -31,6 +31,44 @@ struct D_00007608_s {
 #define ISOFS_V(v100, v150, v152) (v152)
 #endif
 
+/* ISO9660 recording date/time (7 bytes) */
+typedef struct __attribute__((packed)) {
+    u8 yearsSince1900;
+    u8 month;
+    u8 day;
+    u8 hour;
+    u8 minute;
+    u8 second;
+    s8 offset;
+} IsoDirectoryDateTime;
+
+/* ISO9660 directory record (both-endian fields: LSB first, MSB copy) */
+typedef struct __attribute__((packed)) {
+    u8 recLen; /* 0x0 */
+    u8 earLen; /* 0x1 */
+    u32 lbn; /* 0x2 */
+    u32 lbnMsb; /* 0x6 */
+    u32 size; /* 0xA */
+    u32 sizeMsb; /* 0xE */
+    IsoDirectoryDateTime dateTime; /* 0x12 */
+    u8 flags; /* 0x19, 2 = directory */
+    u8 fileUnitSize; /* 0x1A */
+    u8 interleaveGap; /* 0x1B */
+    u16 volSeqNum; /* 0x1C */
+    u16 volSeqNumMsb; /* 0x1E */
+    u8 nameLen; /* 0x20 */
+    char name[0]; /* 0x21 */
+} IsoDirectory;
+
+/* ISO9660 path table record (L table) */
+typedef struct __attribute__((packed)) {
+    u8 nameLen; /* 0x0 */
+    u8 earLen; /* 0x1 */
+    u32 lbn; /* 0x2 */
+    u16 parentNum; /* 0x6 */
+    char name[0]; /* 0x8 */
+} IsoPath;
+
 /* sceBLKGetDeviceData() result kept in IsofsUnit.blkDev (only maxLbn known) */
 typedef struct {
 #if FW_VERSION == 100
@@ -43,19 +81,15 @@ typedef struct {
 
 /* cache entry (0x30), 16 of them */
 typedef struct {
-    u32 unk0;
-    u32 unk4;
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-    u32 unk14;
-    u32 unk18;
-    u32 unk1C;
+    union {
+        char umdId[32]; /* 0x0 */
+        u32 umdIdW[8];
+    };
     s8 used; /* 0x20 */
     s8 unk21;
-    s16 unk22;
-    u32 unk24;
-    u32 unk28;
+    s16 refCount; /* 0x22 */
+    u32 lbn; /* 0x24 */
+    u32 size; /* 0x28 */
     void *memory; /* 0x2C */
 } IsofsCacheEntry;
 typedef char chk_IsofsCacheEntry[(sizeof(IsofsCacheEntry) == 0x30) ? 1 : -1];
@@ -101,7 +135,7 @@ typedef char chk_IsofsFdw[(sizeof(IsofsFdw) == 0x2C) ? 1 : -1];
 struct IsofsFile {
     u32 readFlags; /* 0x0 */
     u8 openFlags; /* 0x4, 3 = raw (sce_lbn), 2 = normal, 0 = free */
-    u8 flags; /* 0x5 */
+    s8 flags; /* 0x5 */
     s8 usedFlag; /* 0x6 */
     u8 unk7;
     u16 unk8;
@@ -244,6 +278,7 @@ extern IsofsUnit *g_isofsUnits;
 
 s32 Kprintf(const char *fmt, ...);
 s32 SysMemForKernel_7B749390(SceUID heapId, void *p);
+s32 func_000001B8(void);
 s32 func_00000250(s32 arg0);
 s32 func_00000284(IsofsUnit *unit, s32 count, s32 filesCount);
 s32 func_000003C8(IsofsUnit *unit, u32 lbn);
@@ -258,6 +293,7 @@ s32 func_00000790(s32);
 void func_000007FC(IsofsFdw *fdw, s32 count);
 s32 func_00000D28(void);
 s32 func_00000DA8(IsofsFile *file);
+s32 func_00000DB4(const char *umdId, u32 lbn, u32 size);
 s32 func_00000E6C(void);
 s32 func_00000EBC(IsofsFdw *fdw, u32 idx, s32 filesCount);
 void func_00000F9C(IsofsFd *fd);
@@ -314,11 +350,13 @@ void *sceKernelAllocHeapMemory(SceUID heapId, SceSize size);
 void sceKernelAssert(s32 ok, s32 lvl);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
+SceUID sceKernelCreateFpl(const char *name, s32 part, s32 attr, SceSize size, SceSize blocks, void *opt);
 s32 sceKernelDeleteFpl(s32);
 M2C_UNK sceKernelDeleteHeap(s32);
+s32 sceKernelDeleteSema(SceUID semaId);
 s32 sceKernelFreeFpl(s32, void *);
-s32 sceKernelSignalSema(s32, s32);
-s32 sceKernelWaitSema(s32, s32, void *);
+s32 sceKernelSignalSema(SceUID semaId, s32 count);
+s32 sceKernelWaitSema(SceUID semaId, s32 count, u32 *timeout);
 u32 sceUmd9660_driver_2C6C3F4C();
 s32 sceUmd9660_driver_44EF600C();
 s32 sceUmd9660_driver_C7CD9CE8();

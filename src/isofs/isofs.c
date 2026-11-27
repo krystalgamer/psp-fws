@@ -10,7 +10,25 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00005EA0);
 INCLUDE_RODATA("nonmatchings/isofs", D_00005EA8);
 #endif
 
+#if FW_VERSION < 201
+s32 func_000001B8(void) {
+    IsofsMgr *mgr = isofsGetMgr();
+    s32 i;
+
+    sceKernelWaitSema(mgr->semaId, 1, NULL);
+    for (i = 0; i < mgr->maxUnits; i++) {
+        IsofsUnit *unit = &g_isofsUnits[i];
+        func_000003E8(unit);
+        sceKernelDeleteSema(unit->semaId);
+    }
+    SysMemForKernel_7B749390(mgr->heapId, g_isofsUnits);
+    g_isofsUnits = NULL;
+    sceKernelSignalSema(mgr->semaId, 1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/isofs", func_000001B8);
+#endif
 
 #if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/isofs", func_00000250);
@@ -114,9 +132,7 @@ s32 func_00000284(IsofsUnit *unit, s32 count, s32 filesCount) {
     unit->fdwCount = count;
     return ret;
 }
-#endif
 
-#if FW_VERSION < 201
 s32 func_000003C8(IsofsUnit *unit, u32 lbn) {
     if (unit == NULL) {
         return 0x80010016;
@@ -297,9 +313,29 @@ INCLUDE_ASM("nonmatchings/isofs", func_000005B0);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00000A28);
 
-INCLUDE_ASM("nonmatchings/isofs", func_00000D28);
+s32 func_00000D28(void) {
+    IsofsMgr *mgr = isofsGetMgr();
+    s32 i;
 
-INCLUDE_ASM("nonmatchings/isofs", func_00000DB4);
+    for (i = 0; i < 16; i++) {
+        if (g_isofsCache[i].used == 1) {
+            SysMemForKernel_7B749390(mgr->fplId, g_isofsCache[i].memory);
+        }
+    }
+    return 0;
+}
+
+s32 func_00000DB4(const char *umdId, u32 lbn, u32 size) {
+    s32 i;
+
+    for (i = 0; i < 16; i++) {
+        if (strcmp(g_isofsCache[i].umdId, umdId) == 0 && g_isofsCache[i].lbn == lbn && g_isofsCache[i].size == size) {
+            g_isofsCache[i].refCount++;
+            return 0;
+        }
+    }
+    return 0x8001B005;
+}
 
 s32 func_00000E6C(void) {
     IsofsMgr *mgr = isofsGetMgr();
@@ -333,17 +369,13 @@ s32 func_00000EBC(IsofsFdw *fdw, u32 idx, s32 filesCount) {
     fdw->fd.fdw = fdw;
     return func_000010A4(&fdw->fd, filesCount);
 }
-#endif
 
-#if FW_VERSION < 201
 void func_00000F9C(IsofsFd *fd) {
     ISOFS_ASSERT(fd != NULL, D_00005FCC, D_00005FE0, "sceIsofsSbTerm", ISOFS_V(0x3A, 0x45, 0x45));
     func_00001914(fd->files);
     fd->files = NULL;
 }
-#endif
-
-#if FW_VERSION >= 201
+#else
 INCLUDE_ASM("nonmatchings/isofs", func_00000620);
 #endif
 
@@ -525,9 +557,7 @@ s32 func_00001914(IsofsFile *files) {
     }
     return SysMemForKernel_7B749390(fd->heapId, fd->files);
 }
-#endif
 
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_00001A04);
 #endif
 
