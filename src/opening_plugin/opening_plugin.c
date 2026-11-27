@@ -405,7 +405,13 @@ void func_00000D8C(void) {
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000E28);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000E84);
+#else
+void func_00000E84(s32 arg0) {
+    _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_000017A8);
+}
+#endif
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000010EC);

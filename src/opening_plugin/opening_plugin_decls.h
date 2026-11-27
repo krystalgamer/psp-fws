@@ -12,6 +12,7 @@ struct Unk_func_00000790_temp_v0_2 {
 extern M2C_UNK D_00001648;
 extern s32 D_0000177C;
 extern s32 D_00001780;
+extern M2C_UNK D_000017A8;
 extern s32 D_000017FC;
 extern s32 D_00001804;
 extern M2C_UNK D_00003F04;
@@ -19,6 +20,7 @@ extern s32 D_0001045C;
 extern s8 D_00010480;
 
 s32 _ZN3paf4View4FindEPKc(M2C_UNK *);
+s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, s32);
 void *_ZNK3paf4View12GetInterfaceEi(s32, M2C_UNK);
 M2C_UNK _ZdlPv();
 s32 func_00000570(void);
@@ -30,6 +32,7 @@ void func_00000D8C(void);
 void func_00000DE8(s32 *arg0, s32 arg1);
 void func_00000E00(void);
 void func_00000E08(s32 arg0, s32 arg1);
+void func_00000E84(s32 arg0);
 void func_00000ED8(s32 *arg0, s32 arg1);
 void func_00000EF8(s32 arg0, s32 arg1);
 M2C_UNK func_00000F48();
