@@ -11,11 +11,14 @@ struct Unk_D_00002D50 {
     s32 unk30;
 };
 
+typedef void (*func_ptr)(void);
+
 extern M2C_UNK D_00001D38;
 extern s32 D_00001E8C;
 extern s32 D_00001E90;
 extern M2C_UNK D_00001E98;
 extern M2C_UNK D_00001EA4;
+extern func_ptr D_00002A70[];
 extern s32 D_00002AE0;
 extern M2C_UNK D_00002AEC;
 extern s32 D_00002C7C;
@@ -24,6 +27,10 @@ extern M2C_UNK D_00002C94;
 extern struct Unk_D_00002D50 *D_00002D50;
 extern void *D_000032D8;
 
+M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);
+M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
+M2C_UNK _ZN3paf4View9PageCloseEPKc(s32, M2C_UNK *);
+M2C_UNK _ZN3paf4View9PlaySoundEPKc(s32, M2C_UNK *);
 s32 func_0000015C(s32);
 void func_00000238(void);
 s32 func_000004B0(s32);
@@ -59,15 +66,11 @@ M2C_UNK func_00002584(s32, s32, s32);
 M2C_UNK func_00002638();
 M2C_UNK func_000026B0();
 s32 module_stop(void);
-M2C_UNK _ZN3paf4View9PageCloseEPKc(s32, M2C_UNK *);
 M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
-M2C_UNK _ZN3paf4View9PlaySoundEPKc(s32, M2C_UNK *);
 s32 scePaf_5E4447F6(s32);
 M2C_UNK scePaf_8B38372A(s32, M2C_UNK *);
 M2C_UNK scePaf_A013540A(s32, M2C_UNK *);
 s32 scePaf_C1B0AA0D(s32);
-M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);
-M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
 s32 sce_paf_private_strlen(s32);
 s32 sce_paf_private_wcslen(s32);
 

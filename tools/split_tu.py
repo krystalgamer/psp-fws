@@ -6,7 +6,8 @@ Each new TU starts at the given function and gets its own C file
 optionally, its own cflags. Text and rodata stay in the same order, so the
 link layout is unchanged; the module is re-split and must still match.
 
-Usage: tools/split_tu.py VERSION MODULE FUNC[:CFLAGS] [FUNC[:CFLAGS] ...]
+Usage: tools/split_tu.py VERSION MODULE FUNC[:CFLAGS] [FUNC[:CFLAGS] ...] [--config-only] [--stem=NAME]
+  --config-only: only the config of VERSION (shared sources: tools/split_shared_tail.py)
   e.g. tools/split_tu.py 303 lftv_middleware func_00000300:-O0 func_00015FC0
 Needs a current build (tmp/build/<ver>/<mod>.elf) and split asm.
 """
@@ -26,7 +27,11 @@ def run(*cmd):
 
 
 def main():
-    ver, mod, specs = sys.argv[1], sys.argv[2], sys.argv[3:]
+    args = sys.argv[1:]
+    config_only = "--config-only" in args
+    stem_opt = next((a.split("=", 1)[1] for a in args if a.startswith("--stem=")), None)
+    args = [a for a in args if a != "--config-only" and not a.startswith("--stem=")]
+    ver, mod, specs = args[0], args[1], args[2:]
     cfg = ROOT / "config" / ver / f"{mod}.yaml"
     from srcdir import src_dir as _sd
     src_dir = _sd(ver, mod)
@@ -86,6 +91,15 @@ def main():
                                     f"    - config/{ver}/symbol_addrs.{mod}.txt\n    - {rel}\n", 1)
     for owner, cut_list in cuts.items():
         lines = owner.read_text().splitlines(keepends=True)
+        if config_only:
+            # shared source: only this version's entries, without conditions
+            import fwmodel as FM
+            from srcdir import sharing_versions
+            fv = sorted({int(re.match(r"\d+", x)[0]) for x in sharing_versions(ver, mod)})
+            vn = int(re.match(r"\d+", ver)[0])
+            lines = "".join(e.text if e.text.endswith("\n") else e.text + "\n"
+                            for e in FM.parse(owner.read_text(), fv) if vn in e.vers).splitlines(keepends=True)
+            lines = [l for l in lines if not re.match(r"^#\s*(if|else|elif|endif)", l)]
         first = next(i for i, l in enumerate(lines) if l.startswith(("INCLUDE_ASM", "INCLUDE_RODATA")) or re.match(r"^\w[\w \*]*\b\w+\(.*\)\s*\{$", l))
         header = lines[:first]
         starts = []
@@ -97,7 +111,7 @@ def main():
         bounds = [s[0] for s in starts] + [len(lines)]
         pieces.append((owner.stem, None, lines[first:bounds[0]]))
         for k, (idx, name, cflags) in enumerate(starts):
-            pieces.append((f"{mod}_{addr[name]:06X}", (name, cflags), lines[idx:bounds[k + 1]]))
+            pieces.append((stem_opt or f"{mod}_{addr[name]:06X}", (name, cflags), lines[idx:bounds[k + 1]]))
 
         def rodata_start(body, stem):
             lo = None
@@ -125,7 +139,8 @@ def main():
             if ro is not None:
                 prev_ro = ro
             if cut is None:
-                owner.write_text("".join(header + body))
+                if not config_only:
+                    owner.write_text("".join(header + body))
                 continue
             name, cflags = cut
             h = "".join(header)
@@ -135,7 +150,8 @@ def main():
                 else:
                     h = f"/* cflags: {cflags} */\n" + h
             text = h + "".join(body).replace(f'nonmatchings/{owner.stem}"', f'nonmatchings/{stem}"')
-            (src_dir / f"{stem}.c").write_text(text)
+            if not config_only:
+                (src_dir / f"{stem}.c").write_text(text)
             new_c.append(f"      - [0x{addr[name] + text_off:X}, c, {stem}]")
             if ro is not None:
                 new_ro.append(f"      - [0x{ro + text_off:X}, .rodata, {stem}]")
@@ -158,6 +174,8 @@ def main():
         if new_ro:
             cfg_text = insert(cfg_text, ".rodata", new_ro)
     cfg.write_text(cfg_text)
+    if config_only:
+        return
     rc, out = run("tools/regress.sh", "--shared", f"{ver}:{mod}")
     print(out.strip())
     sys.exit(rc)

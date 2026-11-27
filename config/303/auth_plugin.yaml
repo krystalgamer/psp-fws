@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/303/.splat_cache.auth_plugin
   symbol_addrs_path:
     - config/303/symbol_addrs.auth_plugin.txt
+    - config/303/func_starts.auth_plugin.txt
     - tmp/build/303/prx_syms.auth_plugin.txt
   reloc_addrs_path: [tmp/build/303/reloc_addrs.auth_plugin.txt]
   asset_path: tmp/assets/303/auth_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, auth_plugin]
+      - [0x26F8, c, auth_plugin_crtend]
       - { start: 0x2750, type: asm, name: fini, linker_section: .fini }
       - { start: 0x276C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x28DC, type: prxpad, order: .text }
@@ -72,6 +74,7 @@ segments:
       - { start: 0x2B28, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x2B2C, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x2B30, .rodata, auth_plugin]
+      - [0x2CA8, .rodata, auth_plugin_crtend]
   - name: auth_plugin_seg1
     type: code
     start: 0x2CD0

@@ -659,21 +659,3 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00002638);
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00001858);
 #endif
-
-INCLUDE_ASM("nonmatchings/auth_plugin", func_00002658);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/auth_plugin", func_000026B0);
-#endif
-
-#if FW_VERSION == 271
-INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002C00_v271);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002C00);
-#endif
-
-#if FW_VERSION >= 271
-INCLUDE_RODATA("nonmatchings/auth_plugin", D_00002C10);
-#endif
