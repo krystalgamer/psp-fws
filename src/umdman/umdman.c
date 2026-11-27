@@ -2239,9 +2239,79 @@ end:
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/umdman", sceUmdExecModSenseCmd);
+s32 sceUmdExecModSenseCmd(SceUmdDrive *drive, SceUmdModeParam *param, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/umdman", sceUmdExecModSelectCmd);
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL || buf == NULL)
+        return 0x80010016;
+    ret = func_0000530C(drive);
+    if (ret != 0)
+        return ret;
+    func_00004EC8(drive->ataDrive->driveId, &stat);
+    ret = func_00004EFC(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ret = func_0000567C(90, drive);
+    if (ret != 0)
+        goto end;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (drive->ataDrive != NULL) {
+            drive->ataDrive->cmd = (SceAtaCmdState *)&state;
+            state.unkC = (u32)buf;
+            drive->ataDrive->cmd->driveStat = st;
+            ret = sceAtaExecPacketCmd(drive->ataDrive, 1, 0x2000, 0, 0, 90, param);
+            if (ret == 0) {
+                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param->size);
+                if (ret == 0)
+                    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param->size);
+            }
+        }
+    }
+end:
+    func_00005338(drive, ret);
+    return ret;
+}
+
+s32 sceUmdExecModSelectCmd(SceUmdDrive *drive, SceUmdModeParam *param, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 ret;
+
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL || buf == NULL)
+        return 0x80010016;
+    ret = func_0000530C(drive);
+    if (ret != 0)
+        return ret;
+    func_00004EC8(drive->ataDrive->driveId, &stat);
+    ret = func_00004EFC(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ret = func_0000567C(85, drive);
+    if (ret != 0)
+        goto end;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (drive->ataDrive != NULL) {
+            drive->ataDrive->cmd = (SceAtaCmdState *)&state;
+            state.unkC = (u32)buf;
+            drive->ataDrive->cmd->driveStat = st;
+            ret = sceAtaExecPacketCmd(drive->ataDrive, 1, 0x2000, 0, 0, 85, param);
+            if (ret == 0) {
+                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param->size);
+                if (ret == 0)
+                    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param->size);
+            }
+        }
+    }
+end:
+    func_00005338(drive, ret);
+    return ret;
+}
 
 s32 sceUmdExecGetEventStatusCmd(SceUmdDrive *drive, u16 *param, void *buf) {
     volatile SceAtaCmdState state;
