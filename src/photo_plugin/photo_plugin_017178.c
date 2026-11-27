@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "photo_plugin_decls.h"
 
@@ -958,7 +959,7 @@ void func_000191D0(void) {
 
     temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_00031B30, &D_000302C8);
     if (temp_v0 != NULL) {
-        if (!(_ZN3paf9PhHandler9IsTimerCBEi(temp_v0, 1) & 0xFF)) {
+        if ((_ZN3paf9PhHandler9IsTimerCBEi(temp_v0, 1) & 0xFF) == 0) {
 
         } else {
             _ZN3paf9PhHandler11KillTimerCBEi(temp_v0, 1);
@@ -1078,8 +1079,8 @@ void func_0001B674(struct Unk_func_0001B674_0 *arg0) {
     func_0001D298();
     temp_a0 = arg0->unk4;
     if (temp_a0->unk0->unk10(temp_a0) == 0) {
-        temp_s0 = arg0->unk4;
-        func_00004460(temp_s0);
+        temp_s0 = (Unk_func_0001B674_temp_s0*) arg0->unk4;
+        func_00004460((Unk_func_00004460_0*) temp_s0);
         func_00020EB8(temp_s0->unk8, temp_s0);
     }
 }

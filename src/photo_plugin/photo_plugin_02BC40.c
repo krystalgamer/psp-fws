@@ -1,10 +1,11 @@
+/* lang: c++ */
 #include "common.h"
 #include "photo_plugin_decls.h"
 
 #if FW_VERSION >= 201
 void func_0002BC40(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
-    func_0002B53C(arg0);
+    func_0002B53C((Unk_func_0002B53C_0*) arg0);
 }
 #endif
 
@@ -15,7 +16,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002BC68);
 #if FW_VERSION >= 201 && FW_VERSION < 350
 void func_0002BC68(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
-    func_0002B53C(arg0);
+    func_0002B53C((Unk_func_0002B53C_0*) arg0);
     _ZdlPv((s32) arg0);
 }
 #endif
@@ -23,7 +24,7 @@ void func_0002BC68(M2C_UNK **arg0) {
 #if FW_VERSION >= 201
 void func_0002BCA0(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
-    func_0002B53C(arg0);
+    func_0002B53C((Unk_func_0002B53C_0*) arg0);
 }
 #endif
 
@@ -34,7 +35,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002BCC8);
 #if FW_VERSION >= 201 && FW_VERSION < 350
 void func_0002BCC8(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
-    func_0002B53C(arg0);
+    func_0002B53C((Unk_func_0002B53C_0*) arg0);
     _ZdlPv((s32) arg0);
 }
 #endif
@@ -46,7 +47,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002BD00);
 #if FW_VERSION >= 201 && FW_VERSION < 350
 void func_0002BD00(M2C_UNK **arg0) {
     *arg0 = &D_00031678;
-    func_0002B53C(arg0);
+    func_0002B53C((Unk_func_0002B53C_0*) arg0);
     _ZdlPv((s32) arg0);
 }
 #endif
@@ -54,12 +55,12 @@ void func_0002BD00(M2C_UNK **arg0) {
 #if FW_VERSION >= 201
 void func_0002BD38(M2C_UNK **arg0) {
     *arg0 = &D_00031678;
-    func_0002B53C(arg0);
+    func_0002B53C((Unk_func_0002B53C_0*) arg0);
 }
 
 void func_0002BD60(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
-    func_0002B53C(arg0);
+    func_0002B53C((Unk_func_0002B53C_0*) arg0);
 }
 #endif
 
@@ -70,7 +71,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0002BD88);
 #if FW_VERSION >= 201 && FW_VERSION < 350
 void func_0002BD88(M2C_UNK **arg0) {
     *arg0 = &D_000316C0;
-    func_0002B53C(arg0);
+    func_0002B53C((Unk_func_0002B53C_0*) arg0);
     _ZdlPv((s32) arg0);
 }
 #endif
@@ -684,7 +685,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_02BC40", func_0001CB00);
 
 #if FW_VERSION < 152
 s32 func_0001CB00(void) {
-    void *sp0;
+    s32 sp0;
     s32 temp_v0;
     s32 var_a1;
 
@@ -693,7 +694,7 @@ s32 func_0001CB00(void) {
     if (temp_v0 >= 0) {
         var_a1 = 1;
         if (sp0 != 0x11) {
-            var_a1 = (sp0 == 0x41) * 2;
+            var_a1 = ((s32) sp0 == 0x41) * 2;
         }
     }
     return var_a1;

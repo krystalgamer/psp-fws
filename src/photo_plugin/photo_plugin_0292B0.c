@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "photo_plugin_decls.h"
 
@@ -111,23 +112,23 @@ void func_00029D94(M2C_UNK **arg0, struct Unk_func_00029D94_1 *arg1) {
     M2C_UNK *temp_v0;
     struct Unk_func_00029D94_temp_v1 *temp_v1;
 
-    temp_v1 = arg1->unk8;
-    temp_a2 = arg1->unk0;
+    temp_v1 = (Unk_func_00029D94_temp_v1*) arg1->unk8;
+    temp_a2 = (Unk_func_00029D94_temp_a2*) arg1->unk0;
     temp_v0 = temp_v1->unk4;
-    arg1->unk0 = temp_v1;
-    temp_v1->unk4 = arg1;
+    arg1->unk0 = (M2C_UNK*) temp_v1;
+    temp_v1->unk4 = (M2C_UNK*) arg1;
     arg1->unk8 = temp_v0;
     if (temp_v0 != NULL) {
         *temp_v0 = arg1;
     }
     if (temp_a2 == NULL) {
-        *arg0 = temp_v1;
+        *arg0 = (M2C_UNK*) temp_v1;
     } else if (temp_a2->unk4 == arg1) {
-        temp_a2->unk4 = temp_v1;
+        temp_a2->unk4 = (M2C_UNK*) temp_v1;
     } else {
-        temp_a2->unk8 = temp_v1;
+        temp_a2->unk8 = (M2C_UNK*) temp_v1;
     }
-    temp_v1->unk0 = temp_a2;
+    temp_v1->unk0 = (M2C_UNK*) temp_a2;
 }
 
 void func_00029DD4(M2C_UNK **arg0, struct Unk_func_00029DD4_1 *arg1) {
@@ -135,23 +136,23 @@ void func_00029DD4(M2C_UNK **arg0, struct Unk_func_00029DD4_1 *arg1) {
     M2C_UNK *temp_v0;
     struct Unk_func_00029DD4_temp_v1 *temp_v1;
 
-    temp_v1 = arg1->unk4;
-    temp_a2 = arg1->unk0;
+    temp_v1 = (Unk_func_00029DD4_temp_v1*) arg1->unk4;
+    temp_a2 = (Unk_func_00029DD4_temp_a2*) arg1->unk0;
     temp_v0 = temp_v1->unk8;
-    arg1->unk0 = temp_v1;
+    arg1->unk0 = (M2C_UNK*) temp_v1;
     arg1->unk4 = temp_v0;
-    temp_v1->unk8 = arg1;
+    temp_v1->unk8 = (M2C_UNK*) arg1;
     if (temp_v0 != NULL) {
         *temp_v0 = arg1;
     }
     if (temp_a2 == NULL) {
-        *arg0 = temp_v1;
+        *arg0 = (M2C_UNK*) temp_v1;
     } else if (temp_a2->unk4 == arg1) {
-        temp_a2->unk4 = temp_v1;
+        temp_a2->unk4 = (M2C_UNK*) temp_v1;
     } else {
-        temp_a2->unk8 = temp_v1;
+        temp_a2->unk8 = (M2C_UNK*) temp_v1;
     }
-    temp_v1->unk0 = temp_a2;
+    temp_v1->unk0 = (M2C_UNK*) temp_a2;
 }
 #endif
 
