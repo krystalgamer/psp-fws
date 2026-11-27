@@ -81,6 +81,7 @@ segments:
       - [0xC95E8, c, pafmini_0ABE50]
       - [0xCF638, c, pafmini_0AD564]
       - [0xD9B70, c, pafmini_0BB9C0]
+      - [0xE8000, c, pafmini_crtend]
       - { start: 0xE8D84, type: asm, name: fini, linker_section: .fini }
       - { start: 0xE8DA0, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xE8F88, type: prxpad, order: .text }
@@ -112,6 +113,7 @@ segments:
       - [0xF49A8, .rodata, pafmini_078748]
       - [0xF94D4, .rodata, pafmini_0AD564]
       - [0xF9A7C, .rodata, pafmini_0BB9C0]
+      - [0xFAE98, .rodata, pafmini_crtend]
   - name: pafmini_seg1
     type: code
     start: 0xFAF10
