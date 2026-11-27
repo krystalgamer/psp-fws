@@ -19,7 +19,10 @@ struct Unk_func_00007EF0_0 {
     s32 unk10;
 };
 
+extern s32 (*D_00014F14)(); /* (void *arg, const char *fmt, va_list ap[, 0 in 1.50]) */
+extern void *D_00014F18;
 extern M2C_UNK D_00014F21;
+extern void (*D_00015254)(s32);
 extern void *D_00015474;
 extern void **D_00015478;
 extern void *D_0001547C;
@@ -30,15 +33,15 @@ extern M2C_UNK D_0001B9B8;
 
 M2C_UNK func_0000004C();
 void func_00000768(void);
-s32 func_00001A54(s32, s32, s32, s32);
+s32 func_00001A54(const char *fmt, ...);
 s32 func_00001CB8(s32 arg0);
-void func_00001CCC(s32 arg0, M2C_UNK arg1);
+void func_00001CCC(const void *src, void *dst, u32 n);
 void func_00001CF0(void);
 s32 func_00001D2C(s32 arg0);
 s32 func_00001D68(s32 arg0);
 s32 func_00001DA4();
 M2C_UNK *func_00001DB4(void);
-M2C_UNK func_00001ED0(M2C_UNK, s32);
+void *func_00001ED0(void *dst, const void *src, s32 n);
 M2C_UNK func_00001F44();
 M2C_UNK func_00003174();
 s32 func_000032CC(s8);
