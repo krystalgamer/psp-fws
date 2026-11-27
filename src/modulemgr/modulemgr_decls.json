@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "CheckMsHeader": "u32 CheckMsHeader(PBPHeader *header, SceSize *pSize);",
   "Kprintf": "s32 Kprintf(const char *fmt, ...);",
   "SelfStopUnloadModule": "s32 SelfStopUnloadModule(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);",
   "ThreadManForKernel_DD55A192": "u32 ThreadManForKernel_DD55A192(void);",
@@ -89,6 +90,7 @@
  },
  "types": {
   "ModuleMgrExecModes": "enum ModuleMgrExecModes {\n    CMD_LOAD_MODULE,\n    CMD_RELOCATE_MODULE,\n    CMD_START_MODULE,\n    CMD_STOP_MODULE,\n    CMD_UNLOAD_MODULE\n};",
+  "PBPHeader": "typedef struct {\n    s8 magic[4];\n    u32 version;\n    u32 paramOff;\n    u32 icon0Off;\n    u32 icon1Off;\n    u32 pic0Off;\n    u32 pic1Off;\n    u32 snd0Off;\n    u32 dataPSPOff;\n    u32 dataPSAROff;\n} PBPHeader;",
   "SceKernelLMOption": "typedef struct {\n    SceSize size;\n    SceUID mpIdText;\n    SceUID mpIdData;\n    u32 flags;\n    u8 position;\n    u8 access;\n    u8 cReserved[2];\n} SceKernelLMOption;",
   "SceKernelModuleInfo": "typedef struct {\n    SceSize size;\n    u8 nsegment;\n    u8 reserved[3];\n    s32 segmentaddr[4];\n    s32 segmentsize[4];\n    u32 entry_addr;\n    u32 gp_value;\n    u32 text_addr;\n    u32 text_size;\n    u32 data_size;\n    u32 bss_size;\n} SceKernelModuleInfo;",
   "SceKernelSMOption": "typedef struct {\n    SceSize size;\n    SceUID mpIdStack;\n    SceSize stackSize;\n    s32 priority;\n    u32 attribute;\n} SceKernelSMOption;",

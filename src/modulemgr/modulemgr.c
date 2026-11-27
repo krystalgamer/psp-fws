@@ -894,7 +894,22 @@ s32 func_000011E8(SceUID fd) {
     return size;
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", CheckMsHeader);
+u32 CheckMsHeader(PBPHeader *header, SceSize *pSize) {
+    s8 *magic = header->magic;
+
+    if (magic[0] == 0 && magic[1] == 'P' && magic[2] == 'B' && magic[3] == 'P') {
+        if (pSize != NULL) {
+            *pSize = header->dataPSAROff - header->dataPSPOff;
+        }
+        Kprintf("modulemgr.c:%s:MsHeader detected: 0x%08x - size 0x%08x [%d]\n", "CheckMsHeader", header->dataPSPOff,
+                header->dataPSAROff - header->dataPSPOff, header->dataPSAROff - header->dataPSPOff);
+        return header->dataPSPOff;
+    }
+    if (pSize != NULL) {
+        *pSize = 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_000012E4);
 

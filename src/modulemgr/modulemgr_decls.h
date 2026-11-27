@@ -13,6 +13,19 @@ enum ModuleMgrExecModes {
 };
 
 typedef struct {
+    s8 magic[4];
+    u32 version;
+    u32 paramOff;
+    u32 icon0Off;
+    u32 icon1Off;
+    u32 pic0Off;
+    u32 pic1Off;
+    u32 snd0Off;
+    u32 dataPSPOff;
+    u32 dataPSAROff;
+} PBPHeader;
+
+typedef struct {
     SceSize size;
     SceUID mpIdText;
     SceUID mpIdData;
@@ -180,6 +193,7 @@ extern s32 D_00008174;
 extern s32 D_00008184;
 extern SceModuleManagerCB modMgrCB;
 
+u32 CheckMsHeader(PBPHeader *header, SceSize *pSize);
 s32 Kprintf(const char *fmt, ...);
 s32 SelfStopUnloadModule(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);
 u32 ThreadManForKernel_DD55A192(void);
