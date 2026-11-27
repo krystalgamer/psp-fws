@@ -41,6 +41,7 @@
   "func_00004148": "s32 func_00004148(s32 *arg0);",
   "func_00004164": "s32 func_00004164(struct Unk_func_00004164_0 *arg0);",
   "func_0000420C": "s32 func_0000420C(void);",
+  "func_00004250": "s32 func_00004250(SceUmdDiscInfo *info);",
   "func_00004264": "s32 func_00004264(s32 *arg0);",
   "func_00004300": "s32 func_00004300(s32);",
   "func_00004308": "s32 func_00004308(void);",
@@ -93,6 +94,8 @@
   "sceUmd9660_driver_C7CD9CE8": "s32 sceUmd9660_driver_C7CD9CE8(void);",
   "sceUmd9660_driver_CAAFFE8D": "s32 sceUmd9660_driver_CAAFFE8D(void);",
   "sceUmd9660_driver_F42C0AEE": "s32 sceUmd9660_driver_F42C0AEE(void);",
+  "sceUmdManGetDiscInfo": "s32 sceUmdManGetDiscInfo(SceUmdDiscInfo *info);",
+  "sceUmdManGetDiscInfo4VSH": "s32 sceUmdManGetDiscInfo4VSH(SceUmdDiscInfo *info);",
   "sceUmdManGetInquiry": "s32 sceUmdManGetInquiry(SceUmdDrive *umd, s32 size, void *buf);",
   "sceUmdManGetIntrStateFlag": "s32 sceUmdManGetIntrStateFlag();",
   "sceUmdManIsDvdDrive": "s32 sceUmdManIsDvdDrive();",
@@ -107,7 +110,8 @@
   "sceUmdMan_driver_85AEA6C5": "s32 sceUmdMan_driver_85AEA6C5();",
   "sceUmdMan_driver_E192C10A": "struct Unk_ret_sceUmdMan_driver_E192C10A *sceUmdMan_driver_E192C10A();",
   "sceUmdRegisterGetUMDInfoCallBack": "M2C_UNK sceUmdRegisterGetUMDInfoCallBack(M2C_UNK *, M2C_UNK *);",
-  "sceUmdUnRegisterGetUMDInfoCallBack": "M2C_UNK sceUmdUnRegisterGetUMDInfoCallBack();"
+  "sceUmdUnRegisterGetUMDInfoCallBack": "M2C_UNK sceUmdUnRegisterGetUMDInfoCallBack();",
+  "strlen": "SceSize strlen(const char *s);"
  },
  "types": {
   "SceIoIob": "/* iofilemgr file descriptor block (first 0x20 bytes) */\ntypedef struct SceIoIob {\n    s32 i_flgs; /* 0x0 */\n    s32 i_unit; /* 0x4 */\n    void *i_de; /* 0x8 */\n    s32 d_type; /* 0xC */\n    void *i_private; /* 0x10 */\n    void *i_cwd; /* 0x14 */\n    SceOff i_fpos; /* 0x18 */\n} SceIoIob;",
@@ -118,6 +122,7 @@
   "SceUmd9660Drive": "/* one per unit (g_umd9660Drives[2], 0x864 bytes in 1.00, 0x868 in 1.02+); the sceBLK device data */\ntypedef struct {\n    u8 sectorBuf[0x800]; /* 0x000 */\n    char name[0x20]; /* 0x800: \"umd%01x:\" (sceBLKRegister name) */\n    SceUID semaId; /* 0x820 */\n    s32 unk824[3]; /* 0x824 */\n    s32 unk830[3]; /* 0x830: [2] = BLK open count */\n    SceUmd9660DiscInfo disc; /* 0x83C */\n    struct SceUmdDrive *umdDrive; /* 0x860 (1.02+: 0x864) */\n} SceUmd9660Drive;\ntypedef char chk_SceUmd9660Drive[(sizeof(SceUmd9660Drive) == ((FW_VERSION == 100) ? 0x864 : 0x868)) ? 1 : -1];",
   "SceUmd9660File": "/* open file (g_umd9660Files[maxFiles], 0x60 bytes) */\ntypedef struct {\n    SceOff pos; /* 0x00: current sector */\n    char devName[0x20]; /* 0x08 */\n    char path[0x20]; /* 0x28 */\n    s32 state; /* 0x48: 1 = free, 0x80 = allocated */\n    s32 mode; /* 0x4C: (flags >> 16) & 0xF */\n    u32 numSectors; /* 0x50 */\n    u32 size; /* 0x54: numSectors * 0x800 */\n    SceIoIob *iob; /* 0x58 */\n    SceUmd9660Drive *drive; /* 0x5C */\n} SceUmd9660File;\ntypedef char chk_SceUmd9660File[(sizeof(SceUmd9660File) == 0x60) ? 1 : -1];",
   "SceUmd9660Mgr": "/* g_umd9660Mgr */\ntypedef struct {\n    SceUID semaId; /* 0x00: \"SceUmd9660Mgr\" */\n    u32 unk4; /* 0x04 */\n    u32 unk8; /* 0x08 */\n    u32 unkC; /* 0x0C */\n    u32 unk10; /* 0x10 */\n    s32 maxFiles; /* 0x14 */\n    SceUID heapId; /* 0x18 */\n} SceUmd9660Mgr;",
+  "SceUmdDiscInfo": "/* sceUmdGetDiscInfo result */\ntypedef struct {\n    u32 size; /* 0x0 */\n    u32 type; /* 0x4 */\n    u32 unk8; /* 0x8 */\n} SceUmdDiscInfo;",
   "SceUmdDrive": "/* umdman drive (sceUmdManGetUmdDrive), only the fields umd9660 touches */\ntypedef struct SceUmdDrive {\n    struct { s8 driveId; } *ataDrive; /* 0x00 */\n    u8 pad4[0x24];\n    s32 unk28; /* 0x28 */\n    s32 unk2C; /* 0x2C */\n    s32 unk30; /* 0x30 */\n    s32 unk34; /* 0x34 */\n    s32 unk38; /* 0x38 */\n    s32 unk3C; /* 0x3C */\n} SceUmdDrive;",
   "SceUmdLbnParam": "/* umdman read request (1.00: uOFW LbnParams without unk20) */\ntypedef struct {\n    u32 unk0;\n    u32 cmd;\n    u32 lbn;\n    u32 lbnSize;\n    u32 size;\n    u32 byteSizeMiddle;\n    u32 byteSizeFirst;\n    u32 byteSizeLast;\n} SceUmdLbnParam;",
   "UMD9660_ASSERT": "/* SCE assert: Kprintf(fmt, __FILE__, __FUNCTION__, __LINE__) */\n#define UMD9660_ASSERT(cond, fmt, file, func, line) \\\n    do { \\\n        const char *_file = (file); \\\n        const char *_func = (func); \\\n        s32 _ok = (cond); \\\n        if (!_ok) { \\\n            Kprintf((fmt), _file, _func, (line)); \\\n            sceKernelAssert(_ok, 0); \\\n        } \\\n    } while (0)",
@@ -126,7 +131,7 @@
   "Unk_func_00003FF0_0": "struct Unk_func_00003FF0_0 {\n    u8 pad0[0x64];\n    struct Unk_Unk_func_00003FF0_0_64 *unk64;\n};",
   "Unk_func_00003FFC_0": "struct Unk_func_00003FFC_0 {\n    u8 pad0[0x64];\n    s32 unk64;\n};",
   "Unk_func_00004164_0": "struct Unk_func_00004164_0 {\n    u8 pad0[0x64];\n    s32 unk64;\n};",
-  "Unk_ret_sceUmdMan_driver_E192C10A": "struct Unk_ret_sceUmdMan_driver_E192C10A {\n    u8 pad0[0x74];\n    s32 unk74;\n};"
+  "Unk_ret_sceUmdMan_driver_E192C10A": "struct Unk_ret_sceUmdMan_driver_E192C10A {\n    u8 pad0[0x64];\n    u8 unk64; /* 0x64 */\n    u8 unk65; /* 0x65 */\n    u8 unk66; /* 0x66 */\n    u8 unk67; /* 0x67 */\n    u8 unk68; /* 0x68 */\n    u32 unk6C; /* 0x6C */\n    u32 unk70; /* 0x70 */\n    s32 unk74; /* 0x74 */\n};"
  },
  "vars": {
   "D_00005A70": "extern char D_00005A70[];",
@@ -166,7 +171,6 @@
   "D_000083D0": "extern s32 D_000083D0;",
   "D_00008CA0": "extern s32 D_00008CA0;",
   "D_00008CB0": "extern s32 D_00008CB0;",
-  "func_000036D8": "extern M2C_UNK func_000036D8;",
-  "func_00004250": "extern s32 func_00004250;"
+  "func_000036D8": "extern M2C_UNK func_000036D8;"
  }
 }

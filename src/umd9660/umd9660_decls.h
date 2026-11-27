@@ -101,6 +101,13 @@ typedef struct {
     SceUID heapId; /* 0x18 */
 } SceUmd9660Mgr;
 
+/* sceUmdGetDiscInfo result */
+typedef struct {
+    u32 size; /* 0x0 */
+    u32 type; /* 0x4 */
+    u32 unk8; /* 0x8 */
+} SceUmdDiscInfo;
+
 /* umdman drive (sceUmdManGetUmdDrive), only the fields umd9660 touches */
 typedef struct SceUmdDrive {
     struct { s8 driveId; } *ataDrive; /* 0x00 */
@@ -171,8 +178,15 @@ struct Unk_func_00004164_0 {
 };
 
 struct Unk_ret_sceUmdMan_driver_E192C10A {
-    u8 pad0[0x74];
-    s32 unk74;
+    u8 pad0[0x64];
+    u8 unk64; /* 0x64 */
+    u8 unk65; /* 0x65 */
+    u8 unk66; /* 0x66 */
+    u8 unk67; /* 0x67 */
+    u8 unk68; /* 0x68 */
+    u32 unk6C; /* 0x6C */
+    u32 unk70; /* 0x70 */
+    s32 unk74; /* 0x74 */
 };
 
 extern char D_00005A70[];
@@ -213,7 +227,6 @@ extern s32 D_000083D0;
 extern s32 D_00008CA0;
 extern s32 D_00008CB0;
 extern M2C_UNK func_000036D8;
-extern s32 func_00004250;
 
 s32 Kprintf(const char *fmt, ...);
 s32 func_00000964(s32 arg0);
@@ -256,6 +269,7 @@ s32 func_00004124(void *arg0, s32 arg1);
 s32 func_00004148(s32 *arg0);
 s32 func_00004164(struct Unk_func_00004164_0 *arg0);
 s32 func_0000420C(void);
+s32 func_00004250(SceUmdDiscInfo *info);
 s32 func_00004264(s32 *arg0);
 s32 func_00004300(s32);
 s32 func_00004308(void);
@@ -308,6 +322,8 @@ s32 sceUmd9660_driver_B23266CA(void);
 s32 sceUmd9660_driver_C7CD9CE8(void);
 s32 sceUmd9660_driver_CAAFFE8D(void);
 s32 sceUmd9660_driver_F42C0AEE(void);
+s32 sceUmdManGetDiscInfo(SceUmdDiscInfo *info);
+s32 sceUmdManGetDiscInfo4VSH(SceUmdDiscInfo *info);
 s32 sceUmdManGetInquiry(SceUmdDrive *umd, s32 size, void *buf);
 s32 sceUmdManGetIntrStateFlag();
 s32 sceUmdManIsDvdDrive();
@@ -323,5 +339,6 @@ s32 sceUmdMan_driver_85AEA6C5();
 struct Unk_ret_sceUmdMan_driver_E192C10A *sceUmdMan_driver_E192C10A();
 M2C_UNK sceUmdRegisterGetUMDInfoCallBack(M2C_UNK *, M2C_UNK *);
 M2C_UNK sceUmdUnRegisterGetUMDInfoCallBack();
+SceSize strlen(const char *s);
 
 #endif
