@@ -155,7 +155,19 @@ INCLUDE_RODATA("nonmatchings/reboot", D_00012894);
 
 INCLUDE_RODATA("nonmatchings/reboot", D_0001289C);
 
-INCLUDE_ASM("nonmatchings/reboot", Kprintf);
+s32 Kprintf(const char *fmt, ...) {
+    __builtin_va_list ap;
+    s32 intr;
+    s32 ret = 0;
+
+    intr = func_00002C2C();
+    __builtin_va_start(ap, fmt);
+    if (D_00016DE4 != NULL) {
+        ret = D_00016DE4(D_00016DE8, fmt, ap);
+    }
+    func_00002C58(intr);
+    return ret;
+}
 
 s32 func_00001AE0(void) {
     if (D_00017138 != NULL) {

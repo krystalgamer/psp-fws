@@ -244,7 +244,7 @@
   "D_00014EE4": "extern s32 (*D_00014EE4)(s32, s32);",
   "D_00015D38": "extern char D_00015D38[];",
   "D_00016C14": "extern const SceNandChipEntry D_00016C14[17];",
-  "D_00016DE4": "extern s32 (*D_00016DE4)(void *, const char *, void *);",
+  "D_00016DE4": "extern s32 (*D_00016DE4)(); /* (void *arg, const char *fmt, va_list ap[, 0 in 1.50]) */",
   "D_00016DE8": "extern void *D_00016DE8;",
   "D_00016DEC": "extern s32 D_00016DEC;",
   "D_00016DF1": "extern s8 D_00016DF1[];",

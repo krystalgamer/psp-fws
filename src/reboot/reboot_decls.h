@@ -290,7 +290,7 @@ extern void *D_00014D00;
 extern s32 (*D_00014EE4)(s32, s32);
 extern char D_00015D38[];
 extern const SceNandChipEntry D_00016C14[17];
-extern s32 (*D_00016DE4)(void *, const char *, void *);
+extern s32 (*D_00016DE4)(); /* (void *arg, const char *fmt, va_list ap[, 0 in 1.50]) */
 extern void *D_00016DE8;
 extern s32 D_00016DEC;
 extern s8 D_00016DF1[];
