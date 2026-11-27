@@ -3048,3 +3048,6 @@ func_00041800_v150 = 0x00041800; // type:func rom:0x41880
 func_00041CCC_v150 = 0x00041CCC; // type:func rom:0x41D4C
 func_0004C7B4_v150 = 0x0004C7B4; // type:func rom:0x4C834
 // shared names (tools/add_version.py) end
+_ZN14Class_00062628D2Ev = 0x0002C618; // type:func
+_ZN14Class_00062628D1Ev = 0x0002C640; // type:func
+_ZN14Class_00062628D0Ev = 0x0002C668; // type:func

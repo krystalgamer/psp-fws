@@ -7,7 +7,192 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005CDA0 (vptr D_0005CDA0) */
+class Class_0005CDA0 : public paf::PhWidget {
+public:
+    virtual ~Class_0005CDA0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00062628 (vptr D_00062628) */
+class Class_00062628 : public paf::PhWidget {
+public:
+    virtual ~Class_00062628();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00084E40 (vptr D_00084E40) */
+class Class_00084E40 {
+public:
+    virtual ~Class_00084E40();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00087060 (vptr D_00087060) */
+class Class_00087060 {
+public:
+    virtual ~Class_00087060();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00061F10 (vptr D_00061F10) */
+class Class_00061F10 : public Class_00087060 {
+public:
+    virtual ~Class_00061F10();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00085D40 (vptr D_00085D40) */
+class Class_00085D40 : public Class_00087060 {
+public:
+    virtual ~Class_00085D40();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00085F70 (vptr D_00085F70) */
+class Class_00085F70 : public Class_00087060 {
+public:
+    virtual ~Class_00085F70();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00086100 (vptr D_00086100) */
+class Class_00086100 : public Class_00087060 {
+public:
+    virtual ~Class_00086100();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00086180 (vptr D_00086180) */
+class Class_00086180 : public Class_00087060 {
+public:
+    virtual ~Class_00086180();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000862D0 (vptr D_000862D0) */
+class Class_000862D0 : public Class_00087060 {
+public:
+    virtual ~Class_000862D0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00086480 (vptr D_00086480) */
+class Class_00086480 : public Class_00087060 {
+public:
+    virtual ~Class_00086480();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000875F0 (vptr D_000875F0) */
+class Class_000875F0 : public Class_00087060 {
+public:
+    virtual ~Class_000875F0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00088640 (vptr D_00088640) */
+class Class_00088640 {
+public:
+    virtual ~Class_00088640();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00088748 (vptr D_00088748) */
+class Class_00088748 {
+public:
+    virtual ~Class_00088748();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00088870 (vptr D_00088870) */
+class Class_00088870 {
+public:
+    virtual ~Class_00088870();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00088888 (vptr D_00088888) */
+class Class_00088888 {
+public:
+    virtual ~Class_00088888();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0008BBC8 (vptr D_0008BBC8) */
+class Class_0008BBC8 {
+public:
+    virtual ~Class_0008BBC8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0008BD20 (vptr D_0008BD20) */
+class Class_0008BD20 {
+public:
+    virtual ~Class_0008BD20();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0008BD68 (vptr D_0008BD68) */
+class Class_0008BD68 {
+public:
+    virtual ~Class_0008BD68();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0008BD78 (vptr D_0008BD78) */
+class Class_0008BD78 {
+public:
+    virtual ~Class_0008BD78();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0008BDB0 (vptr D_0008BDB0) */
+class Class_0008BDB0 {
+public:
+    virtual ~Class_0008BDB0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00090590 (vptr D_00090590) */
+class Class_00090590 {
+public:
+    virtual ~Class_00090590();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00091740 (vptr D_00091740) */
+class Class_00091740 {
+public:
+    virtual ~Class_00091740();
+};
 #endif
 
 struct Unk_func_00000F3C_temp_v0 {
@@ -353,9 +538,6 @@ s32 func_000145A8(void);
 s32 func_000145CC(void);
 s32 func_0001461C(void);
 s32 func_00014A68(s32, s32, s32, s32, s32);
-void func_00014CF4(M2C_UNK **arg0);
-void func_00014D1C(M2C_UNK **arg0);
-void func_00014D44(s32 **arg0);
 s32 func_00015560(void *arg0);
 s32 func_000155BC(void *arg0, s32 arg1);
 s32 func_000155C8(void);
@@ -694,7 +876,6 @@ s32 func_0002FBC4(void);
 s32 func_00030354(s32);
 s32 func_00030E44(void);
 s32 func_00031220(s32);
-s32 func_00031250(void);
 s32 func_000312A4(s32, s32);
 s32 func_00031B38(s32, s32);
 s32 func_00031E10(void);

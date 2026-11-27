@@ -338,3 +338,6 @@ func_0000166C = 0x0001BDDC; // type:func rom:0x1BE5C
 func_00001B64 = 0x00057FFC; // type:func rom:0x5807C
 func_00001BBC = 0x000598C0; // type:func rom:0x59940
 // shared names (tools/add_version.py) end
+_ZN14Class_0005CDA0D2Ev = 0x00014CF4; // type:func
+_ZN14Class_0005CDA0D1Ev = 0x00014D1C; // type:func
+_ZN14Class_0005CDA0D0Ev = 0x00014D44; // type:func
