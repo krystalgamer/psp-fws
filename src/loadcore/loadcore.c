@@ -1581,14 +1581,14 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00004DBC);
 
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelModuleAssign);
 
-s32 sceKernelAllocModule(s32 execInfo) {
-    void *mod;
+SceModule *sceKernelAllocModule(SceLoadCoreExecFileInfo *execInfo) {
+    SceModule *mod;
 
-    mod = (void *)sceKernelCreateModule();
+    mod = sceKernelCreateModule();
     if (mod == NULL)
-        return 0;
-    sceKernelModuleAssign((s32)mod, execInfo);
-    return (s32)mod;
+        return NULL;
+    sceKernelModuleAssign(mod, execInfo);
+    return mod;
 }
 
 void sceKernelFreeModule(void *arg0) {
