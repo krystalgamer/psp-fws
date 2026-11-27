@@ -757,7 +757,35 @@ s32 sceIoWriteAsync(SceUID fd, const void *data, SceSize size) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/iofilemgr", do_lseek);
+SceOff do_lseek(SceUID fd, SceOff offset, s32 whence, s32 async) {
+    SceIoIob *iob;
+    u32 oldK1;
+    s64 ret;
+
+    oldK1 = shiftK1();
+    ret = validate_fd(fd, 0, 4, 0, &iob);
+    if (ret < 0) {
+        setK1(oldK1);
+        return ret;
+    }
+    if ((u32)whence >= 3) {
+        setK1(oldK1);
+        return 0x80020324;
+    }
+    if (iob->i_de->d_dp->dt_func->df_lseek == NULL) {
+        setK1(oldK1);
+        return 0x80020325;
+    }
+    if (!async) {
+        ret = iob->i_de->d_dp->dt_func->df_lseek(iob, offset, whence);
+    } else {
+        *(SceOff *)&iob->asyncArgs[0] = offset;
+        iob->asyncArgs[2] = whence;
+        ret = start_async(iob, 5);
+    }
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -779,7 +807,49 @@ s32 sceIoLseek32Async(SceUID fd, s32 offset, s32 whence) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/iofilemgr", do_ioctl);
+s32 do_ioctl(SceUID fd, s32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen, s32 async) {
+    SceIoIob *iob;
+    u32 oldK1;
+    s32 ret;
+
+    oldK1 = shiftK1();
+    if (k1IsUserMode() && (s32)((u32)indata | inlen | ((u32)indata + inlen)) < 0) {
+        Kprintf("iofilemgr.c:%s:Overrange pointer and size, argp: 0x%x %d\n", D_00004758, indata, inlen);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (k1IsUserMode() && (s32)((u32)outdata | outlen | ((u32)outdata + outlen)) < 0) {
+        Kprintf(D_000046F0, D_00004758, outdata, outlen);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (k1IsUserMode() && ((cmd >> 15) & 1)) {
+        Kprintf(D_0000472C, D_00004758);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    ret = validate_fd(fd, 0, 2, 0, &iob);
+    if (ret < 0) {
+        setK1(oldK1);
+        return ret;
+    }
+    if (iob->i_de->d_dp->dt_func->df_ioctl == NULL) {
+        setK1(oldK1);
+        return 0x80020325;
+    }
+    if (!async) {
+        ret = iob->i_de->d_dp->dt_func->df_ioctl(iob, cmd, indata, inlen, outdata, outlen);
+    } else {
+        iob->asyncArgs[0] = cmd;
+        iob->asyncArgs[1] = (s32)indata;
+        iob->asyncArgs[2] = inlen;
+        iob->asyncArgs[3] = (s32)outdata;
+        iob->asyncArgs[4] = outlen;
+        ret = start_async(iob, 6);
+    }
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -1392,11 +1462,132 @@ INCLUDE_ASM("nonmatchings/iofilemgr", xx_stat);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00003730);
+char *parsedev(const char *path, SceIoDeviceEntry **dev, s32 *unit) {
+    char buf[32];
+    char *colon;
+    char *end;
+    SceIoDeviceList *list;
+    s32 len;
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00003830);
+    while (*path == ' ') {
+        path++;
+    }
+    colon = strchr(path, ':');
+    if (colon == NULL) {
+        return NULL;
+    }
+    *unit = 0;
+    len = colon - path;
+    strncpy(buf, path, len);
+    end = &buf[len];
+    *end = '\0';
+    if (look_ctype_table(end[-1]) & 4) {
+        while (look_ctype_table(end[-1]) & 4) {
+            end--;
+        }
+        *unit = strtol(end, NULL, 10);
+    }
+    *end = '\0';
+    list = lookup_device_list(buf);
+    if (list == NULL) {
+        return NULL;
+    }
+    *dev = &list->arg;
+    return colon + 1;
+}
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_000038C0);
+SceIoAlias *parse_alias(const char *path) {
+    char buf[32];
+    char *colon;
+    s32 len;
+
+    while (*path == ' ') {
+        path++;
+    }
+    colon = strchr(path, ':');
+    if (colon == NULL) {
+        return NULL;
+    }
+    len = colon - path;
+    strncpy(buf, path, len);
+    buf[len] = '\0';
+    return lookup_alias_tbl(buf);
+}
+
+s32 parsefile(const char *path, SceIoDeviceEntry **dev, s32 *unit, char **outPath) {
+    char buf[32];
+    char *colon;
+    const char *p;
+    char *end;
+    char **cwd;
+    SceIoAlias *alias;
+    SceIoDeviceList *list;
+    s32 len;
+    s32 ret;
+
+    while (*path == ' ') {
+        path++;
+    }
+    colon = strchr(path, ':');
+    if (colon != NULL) {
+        p = path;
+    } else {
+        cwd = sceKernelGetKTLS(g_ktls);
+        if (cwd == NULL || *cwd == NULL) {
+            Kprintf("iofilemgr.c:%s:Unset CWD, Unknown device '%s'\n", "parsefile", path);
+            return 0x8002032C;
+        }
+        strcpy(*outPath, *cwd);
+        colon = *outPath + strlen(*outPath) - 1;
+        if (*colon != '/' && *colon != ':') {
+            if (*path != '/') {
+                colon[1] = '/';
+                colon[2] = '\0';
+            }
+        } else if (*colon == '/' && *path == '/') {
+            *colon = '\0';
+        }
+        if (strlen(*outPath) + strlen(path) >= 0x3FF) {
+            Kprintf("iofilemgr.c:%s:File name too long '%s'\n", "parsefile", path);
+            return 0x8002032D;
+        }
+        strcat(*outPath, path);
+        p = *outPath;
+        colon = strchr(p, ':');
+        if (colon == NULL) {
+            Kprintf("iofilemgr.c:%s:CWD: Unknown device '%s'\n", "parsefile", p);
+            return 0x80020321;
+        }
+    }
+    len = colon - p;
+    strncpy(buf, p, len);
+    buf[len] = '\0';
+    end = &buf[len];
+    *unit = 0;
+    if (look_ctype_table(end[-1]) & 4) {
+        while (look_ctype_table(end[-1]) & 4) {
+            end--;
+        }
+        *unit = strtol(end, NULL, 10);
+    }
+    alias = lookup_alias_tbl(buf);
+    if (alias == NULL) {
+        *end = '\0';
+        list = lookup_device_list(buf);
+        if (list == NULL) {
+            Kprintf("iofilemgr.c:%s:Unknown device '%s'\n", "parsefile", buf);
+            return 0x80020321;
+        }
+        *dev = &list->arg;
+        ret = list->arg.d_dp->dt_type;
+    } else {
+        *unit = alias->i_unit;
+        *dev = alias->dev;
+        ret = alias->attr;
+    }
+    *outPath = colon + 1;
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 282

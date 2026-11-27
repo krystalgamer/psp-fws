@@ -145,3 +145,6 @@ validate_fd = 0x000033A4; // type:func
 alloc_iob = 0x000034F8; // type:func
 free_iob = 0x000035CC; // type:func
 xx_stat = 0x00001DAC; // type:func
+parsefile = 0x000038C0; // type:func
+parsedev = 0x00003730; // type:func
+parse_alias = 0x00003830; // type:func
