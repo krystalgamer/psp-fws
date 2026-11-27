@@ -141,11 +141,13 @@ def main():
     comp, own = AD.Module.file_setting(mod.file_of(name))
     best = None
     opts = list(AD.OPTS)
+    if own.split(" ", 1)[1] not in opts:  # file flags beyond the standard sets (e.g. -fno-merge-constants)
+        opts.append(own.split(" ", 1)[1])
     if a.opts:
         opts = [o.strip() for o in a.opts.split(";") if o.strip()]
         opts += [own.split(" ", 1)[1]] if own.split(" ", 1)[1] not in opts else []
     if a.extra:
-        opts = [f"{o} {a.extra}" for o in AD.OPTS]
+        opts = [f"{o} {a.extra}" for o in opts]
         own = f"{own} {a.extra}"
     for opt in opts:
         words, err = AD.compile_words(text, comp, opt)
