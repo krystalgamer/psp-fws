@@ -1979,7 +1979,16 @@ INCLUDE_ASM("nonmatchings/loadcore", func_0000646C);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_000064E8);
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00006550);
+s32 func_00006550(const char *s) {
+    s32 len;
+
+    len = 0;
+    if (s == NULL)
+        return len;
+    while (*s++ != '\0')
+        len++;
+    return len;
+}
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00006584);
 
