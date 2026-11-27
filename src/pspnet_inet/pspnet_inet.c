@@ -3024,11 +3024,8 @@ s32 in_localaddr(struct in_addr in) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_inet", in_canforward);
-#endif
 
-#if FW_VERSION == 100 || FW_VERSION == 150
+#if FW_VERSION < 151
 s32 in_canforward(struct in_addr in) {
     u32 net;
 
@@ -3122,15 +3119,12 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000129AC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012AC4);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_inet", in_broadcast);
-#endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012730);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 150
+#if FW_VERSION < 151
 s32 in_broadcast(struct in_addr in, struct ifnet *ifp) {
     struct ifaddr *ifa;
 

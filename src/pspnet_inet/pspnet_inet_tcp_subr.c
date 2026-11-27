@@ -2038,11 +2038,8 @@ void func_0002C9DC(u8 *p, s32 n) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002CA04);
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
+#if FW_VERSION < 201
 s32 func_0002CA04(const char *s1, const char *s2) {
     if (s1 == NULL || s2 == NULL) {
         if (s1 == s2)

@@ -540,3 +540,6 @@ tcp_sendspace = 0x0002E960; // rom:0x2E9E0
 tcp_recvspace = 0x0002E964; // rom:0x2E9E4
 func_00026930 = 0x00026930; // type:func (split from func_00024EC4)
 tcp_ctlvars = 0x0002E968; // rom:0x2E9E8
+in_socktrim = 0x0001298C; // type:func (unreferenced, was merged into in_canforward)
+func_00012CD8 = 0x00012CD8; // type:func (split from in_broadcast)
+func_0002CA84 = 0x0002CA84; // type:func (split from func_0002CA04)
