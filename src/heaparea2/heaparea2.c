@@ -98,9 +98,3 @@ void func_000002BC(void) {
 void func_000002DC(void) {
     func_0000018C(0, 0xFFFF);
 }
-
-INCLUDE_ASM("nonmatchings/heaparea2", func_000002FC);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/heaparea2", func_00000354);
-#endif

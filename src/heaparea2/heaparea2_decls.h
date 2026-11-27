@@ -4,6 +4,9 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef void (*func_ptr)(void);
+
+extern func_ptr D_00000478[];
 
 M2C_UNK func_00000000();
 M2C_UNK func_0000018C(M2C_UNK, M2C_UNK);

@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/352/.splat_cache.heaparea2
   symbol_addrs_path:
     - config/352/symbol_addrs.heaparea2.txt
+    - config/352/func_starts.heaparea2.txt
     - tmp/build/352/prx_syms.heaparea2.txt
   reloc_addrs_path: [tmp/build/352/reloc_addrs.heaparea2.txt]
   asset_path: tmp/assets/352/heaparea2
@@ -53,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, heaparea2]
+      - [0x3C8, c, heaparea2_crtend]
       - { start: 0x43C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x464, type: prxpad, order: .text }
       - { start: 0x470, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
