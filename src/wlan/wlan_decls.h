@@ -569,7 +569,7 @@ extern M2C_UNK func_00003F08;
 
 s32 func_000010E0(SceSize args, void *argp);
 s32 func_00001118(SceSize args, void *argp);
-void func_00001B5C(s32 sw, void *arg);
+void func_00001B5C(s32 sw, SceWlanSoftc *sc);
 void func_00002188(void *arg0);
 void func_000021AC(void *arg0);
 void func_0000227C(void *arg0);
@@ -641,7 +641,7 @@ s32 func_0000B018(struct Unk_func_0000B018_0 *arg0, s32 arg1, s32 *arg2);
 void func_0000B24C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 func_0000B3CC(s32 arg0, struct Unk_func_0000B3CC_1 *arg1, M2C_UNK arg2);
 s32 func_0000BC54(s32, s32, s32);
-s32 func_0000BD90(s32, s32, s32, s32);
+s32 func_0000BD90(SceWlanBus *bus, u32 cmd, s32 len, void *out);
 s32 func_0000BE8C(s32, s32, s32, s32);
 s32 func_0000BF70(void);
 s32 func_0000C5E4(void *arg0);
