@@ -61,3 +61,9 @@ D_00007FB8 = 0x00003D9C;
 func_00001BA4 = 0x00000B90; // type:func
 func_00004C44 = 0x0000219C; // type:func
 // shared names (tools/add_version.py) end
+// ge driver state (1.00 layout)
+g_GeIntrOpt = 0x00002B00; // size:0xC
+g_GeSysEv = 0x00002B0C; // size:0x40
+g_GeSubIntrFunc = 0x00002B50; // size:0x2C
+g_AwQueue = 0x0000337C; // size:0xA18
+g_GeSuspend = 0x00003D94; // size:0x8
