@@ -339,6 +339,8 @@ s32 func_00005DBC(const char *s1, const char *s2);
 void func_00006080(u8 *arg0, u8 *arg1);
 void func_000065F8(u8 *arg0, u8 *arg1);
 s32 func_00006620(void);
+void *func_000070E0(const void *s, s32 c, s32 n);
+s32 func_00007118(const char *s);
 s32 func_00007A38(s32 arg0, s32 arg1);
 s32 func_00008160(void);
 s32 func_0000832C(void);

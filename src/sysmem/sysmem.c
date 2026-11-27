@@ -2525,9 +2525,31 @@ void sceKernelRegisterKprintfHandler(s32 arg0, s32 arg1) {
     D_0000C514 = arg1;
 }
 
-INCLUDE_ASM("nonmatchings/sysmem", func_000070E0);
+void *func_000070E0(const void *s, s32 c, s32 n) {
+    const u8 *p = s;
+    u8 ch = c;
+    if (p != NULL) {
+        while (n > 0) {
+            if (*p == ch) {
+                return (void *)p;
+            }
+            p++;
+            n--;
+        }
+    }
+    return NULL;
+}
 
-INCLUDE_ASM("nonmatchings/sysmem", func_00007118);
+s32 func_00007118(const char *s) {
+    s32 len = 0;
+    if (s == NULL) {
+        return 0;
+    }
+    while (*s++ != '\0') {
+        len++;
+    }
+    return len;
+}
 
 INCLUDE_ASM("nonmatchings/sysmem", func_0000714C);
 
