@@ -208,7 +208,12 @@ def fix_too_few(lines, idx, msg):
             return False
         dm = re.match(r"^(.*?\b(\w+))\((.*)\)(\s*\{\s*)$", lines[j])
         ps = [] if dm[3].strip() in ("", "void") else [dm[3]]
-        ps += [f"s32 arg{i}" for i in range(len(mine), need)]
+        # the callee's parameter types: a float passes through in $f12.., not in $aN
+        def ctype(x):
+            x = x.strip().replace("const ", "")
+            return {"int": "s32", "unsigned int": "u32", "short": "s16", "unsigned short": "u16",
+                    "char": "s8", "unsigned char": "u8", "bool": "s32"}.get(x, x)
+        ps += [f"{ctype(params[i])} arg{i}" for i in range(len(mine), need)]
         lines[j] = f"{dm[1]}({', '.join(ps)}){dm[4]}"
         CHANGED_PROTOS[dm[2]] = f"{dm[1]}({', '.join(ps)});"
         mine = [f"arg{i}" for i in range(need)]
@@ -439,15 +444,22 @@ def unify_arity(files, store):
 
         def widen(m):
             ps, want = plist(m[3]), longest.get(m[2])
-            if ps is None or want is None or len(ps) >= len(want):
+            if ps is None or want is None or len(ps) > len(want) or ps == want:
                 return m[0]
-            return f"{m[1]}{m[2]}({', '.join(ps + want[len(ps):])}){m[4]}"
+            # differing types at a position are only taken over when both are pointers
+            # (same registers); a value type change would move the argument
+            for x, y in zip(ps, want):
+                if x != y and not ("*" in x and "*" in y):
+                    return m[0]
+            return f"{m[1]}{m[2]}({', '.join(want)}){m[4]}"
         u = DEF.sub(widen, t)
         if u != t:
             f.write_text(u)
     for name, want in longest.items():
         pm = re.match(rf"^(.*?\b{name})\((.*)\);$", store["funcs"][name])
-        if pm and plist(pm[2]) is not None and len(plist(pm[2])) < len(want):
+        have = plist(pm[2]) if pm else None
+        if have is not None and have != want and len(have) <= len(want) and \
+                all(x == y or ("*" in x and "*" in y) for x, y in zip(have, want)):
             store["funcs"][name] = f"{pm[1]}({', '.join(want)});"
 
 
@@ -525,14 +537,12 @@ def main():
                 else:
                     fixed += 1
             f.write_text("\n".join(lines))
-        unify_arity(files, store)
-        CHANGED_PROTOS.setdefault("", "")
-        if CHANGED_PROTOS:
-            for name, proto in CHANGED_PROTOS.items():
-                if name and name in store["funcs"]:
-                    store["funcs"][name] = proto
-            CHANGED_PROTOS.clear()
-            structify.write_decls(mod, store)
+        for name, proto in CHANGED_PROTOS.items():
+            if name and name in store["funcs"]:
+                store["funcs"][name] = proto
+        CHANGED_PROTOS.clear()
+        unify_arity(files, store)  # after the fixers' prototypes: they may differ per version copy
+        structify.write_decls(mod, store)
         print(f"round {rnd + 1}: {n} error lines, {fixed} fixed")
         if not fixed:
             break
