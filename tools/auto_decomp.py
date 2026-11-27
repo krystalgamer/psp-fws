@@ -423,9 +423,43 @@ def guess_callees(mod, name, target="mips-gcc-c"):
             p = protos.guess(c, mod.funcs[c][2] if c in mod.funcs else None)
             if p and not target.startswith("mipsee") and c in mod.funcs:
                 p = re.sub(r"\((s32(?:, s32){4,})\)", "(s32, s32, s32, s32)", p)  # o32: 4 register args
+            if not p and c not in mod.funcs and not os.environ.get("AUTO_NO_PASSTHROUGH"):
+                p = passthrough_proto(c, mod.funcs[name][2].read_text())
             if p:
                 out[c] = p
     return out
+
+
+ARG_WRITE = re.compile(r"^\s*/\*[^*]*\*/\s+(?!s[bhw]\b|b\w*\b|j\w*\b)\w[\w.]*\s+\$([4-9]|1[01])\b")
+
+
+def passthrough_proto(callee, asm):
+    """Prototype for an import called with a gap in its argument registers
+    (e.g. $a1/$a2 set, $a0 passed through from the caller): m2c would drop the
+    unset ones. All s32, as many as the highest argument register written."""
+    lines = asm.splitlines()
+    top = -1
+    gap = False
+    for i, l in enumerate(lines):
+        if not re.search(rf"\bjal\s+{callee}\b", l):
+            continue
+        written = set()
+        for j in range(i + 1, i - 16, -1):  # delay slot, then back to the previous call/branch/label
+            if j < 0 or j >= len(lines):
+                break
+            t = lines[j]
+            if j < i and (re.search(r"\s(jal|jr|b\w*|j)\s", t) or re.match(r"^\s*\.L\w+:", t) or "glabel" in t):
+                break
+            m = ARG_WRITE.match(t)
+            if m:
+                written.add(int(m[1]) - 4)
+        if written:
+            hi = max(written)
+            top = max(top, hi)
+            gap = gap or len(written) <= hi
+    if top < 1 or not gap:
+        return None
+    return f"s32 {callee}(" + ", ".join(["s32"] * (top + 1)) + ");"
 
 
 def same_decl(a, b):
