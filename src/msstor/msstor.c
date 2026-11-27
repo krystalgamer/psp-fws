@@ -14,11 +14,7 @@ INCLUDE_ASM("nonmatchings/msstor", func_00000134);
 
 INCLUDE_ASM("nonmatchings/msstor", func_0000017C);
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/msstor", func_000001BC);
-#endif
-
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 func_000001BC(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -31,13 +27,7 @@ s32 func_000001BC(s32 arg0, s32 arg1, s32 arg2) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/msstor", func_00000220);
-#endif
-
-#if FW_VERSION < 152
 s32 func_00000220(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_a4;
 
@@ -50,9 +40,7 @@ s32 func_00000220(s32 arg0, s32 arg1, s32 arg2) {
     }
     return var_a4;
 }
-#endif
 
-#if FW_VERSION < 201
 void func_00000288(void) {
     D_00009888->unk10(D_00009B50);
 }
