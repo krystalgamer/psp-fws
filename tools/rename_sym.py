@@ -61,7 +61,15 @@ def main():
                 addr = int(AUTO.match(old)[1], 16)
                 if re.search(rf"=\s*0x0*{addr:X};", t, re.M | re.I):
                     sys.exit(f"{v}: 0x{addr:X} already named")
-                new[p] = t.rstrip("\n") + f"\n{nw} = 0x{addr:08X};" + (" // type:func" if old.startswith("func_") else "") + "\n"
+                ann = ["type:func"] if old.startswith("func_") else []
+                if old.startswith("D_"):
+                    # data VMAs overlap other segments: pin the rom offset splat printed for the label
+                    for s in (ROOT / "tmp/asm" / v / mod / "data").glob("*.s"):
+                        rm = re.search(rf"^dlabel {old}\n\s*/\* ([0-9A-F]+) {old[2:]} ", s.read_text(), re.M)
+                        if rm:
+                            ann.append(f"rom:0x{int(rm[1], 16):X}")
+                            break
+                new[p] = t.rstrip("\n") + f"\n{nw} = 0x{addr:08X};" + (" // " + " ".join(ann) if ann else "") + "\n"
             else:
                 print(f"{v}: {old} not found, skipped")
                 continue

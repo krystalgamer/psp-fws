@@ -87,3 +87,4 @@ audioInputThread = 0x0000206C; // type:func
 audioInput = 0x0000243C; // type:func
 audioInputSetup = 0x000025B8; // type:func
 audioInputDmaCb = 0x00002720; // type:func
+g_audioEvent = 0x00002DC0; // rom:0x2E40

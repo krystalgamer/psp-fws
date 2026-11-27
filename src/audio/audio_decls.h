@@ -72,7 +72,7 @@ typedef struct SceSysEventHandler {
     s32 reserved[9];
 } SceSysEventHandler;
 
-extern SceSysEventHandler D_00002DC0;
+extern SceSysEventHandler g_audioEvent;
 extern SceAudio g_audio;
 
 void audioHwInit(void);

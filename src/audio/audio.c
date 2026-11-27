@@ -421,7 +421,7 @@ s32 sceAudioEnd(void) {
         sceKernelDeleteEventFlag(g_audio.evFlagId[i]);
         sceKernelDmaOpFree(g_audio.dmaPtr[i]);
     }
-    sceKernelUnregisterSysEventHandler(&D_00002DC0);
+    sceKernelUnregisterSysEventHandler(&g_audioEvent);
     sceCodecOutputEnable(0, 0);
     sceCodecInputDisable();
     sceSysregAudioClkoutIoDisable();

@@ -51,7 +51,7 @@
   "SceSysEventHandler": "typedef struct SceSysEventHandler {\n    s32 size;\n    char *name;\n    s32 typeMask;\n    s32 (*handler)(s32 ev_id, char *ev_name, void *param, s32 *result);\n    s32 r28;\n    s32 busy;\n    struct SceSysEventHandler *next;\n    s32 reserved[9];\n} SceSysEventHandler;"
  },
  "vars": {
-  "D_00002DC0": "extern SceSysEventHandler D_00002DC0;",
+  "g_audioEvent": "extern SceSysEventHandler g_audioEvent;",
   "g_audio": "extern SceAudio g_audio;"
  }
 }
