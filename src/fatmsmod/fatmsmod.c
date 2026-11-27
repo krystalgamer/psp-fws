@@ -97,7 +97,7 @@ void func_00000048(void) {
 #endif
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000068);
+INCLUDE_ASM("nonmatchings/fatmsmod", check_reload_status);
 #endif
 
 #if FW_VERSION >= 350
@@ -165,7 +165,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023958);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00000068(s32 checkMedia, FatmsPrivate *priv) {
+s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv) {
     s32 ret = 0;
     s32 intr;
 
@@ -184,7 +184,7 @@ s32 func_00000068(s32 checkMedia, FatmsPrivate *priv) {
     }
     ret = 0;
     if (priv != NULL) {
-        ret = func_000007C0(priv);
+        ret = check_heap_alive(priv);
         if (ret < 0) {
             return -0x3EA;
         }
@@ -194,7 +194,7 @@ s32 func_00000068(s32 checkMedia, FatmsPrivate *priv) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 300
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000068);
+INCLUDE_ASM("nonmatchings/fatmsmod", check_reload_status);
 #endif
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000134);
@@ -206,7 +206,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000318);
 #endif
 
 #if FW_VERSION == 100
-void *func_00000594(SceUID *heap, SceSize size) {
+void *get_heap(SceUID *heap, SceSize size) {
     s32 intr;
     FatmsHeapEnt *p;
     void *mem;
@@ -236,7 +236,7 @@ void *func_00000594(SceUID *heap, SceSize size) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000594);
+INCLUDE_ASM("nonmatchings/fatmsmod", get_heap);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -280,7 +280,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000444);
 #endif
 
 #if FW_VERSION == 100
-s32 func_000004F4(void) {
+s32 free_heap_all(void) {
     FatmsHeapEnt *p;
 
     for (p = D_00019558; p < &D_00019558[128]; p++) {
@@ -293,7 +293,7 @@ s32 func_000004F4(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000004F4);
+INCLUDE_ASM("nonmatchings/fatmsmod", free_heap_all);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -335,7 +335,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023A64);
 #endif
 
 #if FW_VERSION == 100
-s32 func_000007C0(FatmsPrivate *priv) {
+s32 check_heap_alive(FatmsPrivate *priv) {
     SceUID heap;
     FatmsHeapEnt *p;
 
@@ -355,7 +355,7 @@ s32 func_000007C0(FatmsPrivate *priv) {
     return -1;
 }
 
-s32 func_00000850(char *buf, const char *name, s32 unit) {
+s32 add_drive_name(char *buf, const char *name, s32 unit) {
     if (unit != 0) {
         return 0x80020001;
     }
@@ -378,7 +378,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000654);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000006E8);
+INCLUDE_ASM("nonmatchings/fatmsmod", prErr);
 #endif
 
 #if FW_VERSION < 201
@@ -412,7 +412,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023BD8);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00000BFC(SceIoIob *iob) {
+s32 df_close(SceIoIob *iob) {
     FatmsPrivate *priv;
     s32 ret;
 
@@ -420,7 +420,7 @@ s32 func_00000BFC(SceIoIob *iob) {
         return 0x80010016;
     }
     priv = iob->i_private;
-    ret = func_00000068(0, priv);
+    ret = check_reload_status(0, priv);
     if (ret < 0) {
         if (ret == -0x3EA) {
             return 0;
@@ -436,7 +436,7 @@ s32 func_00000BFC(SceIoIob *iob) {
         return 0x80010016;
     }
     if (func_00004D6C(priv->unk4) < 0) {
-        return func_000006E8(func_000050AC());
+        return prErr(func_000050AC());
     }
     ret = func_00000678(priv->fileHeap, priv);
     if (ret > 0) {
@@ -445,11 +445,11 @@ s32 func_00000BFC(SceIoIob *iob) {
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000BFC);
+INCLUDE_ASM("nonmatchings/fatmsmod", df_close);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00000DC8(SceIoIob *iob, void *buf, SceSize size) {
+s32 df_read(SceIoIob *iob, void *buf, SceSize size) {
     FatmsPrivate *priv;
     s32 fp;
     s32 n;
@@ -460,7 +460,7 @@ s32 func_00000DC8(SceIoIob *iob, void *buf, SceSize size) {
         return 0x80010016;
     }
     priv = iob->i_private;
-    if (func_00000068(0, priv) < 0) {
+    if (check_reload_status(0, priv) < 0) {
         Kprintf(D_00023B8C, "df_read");
         return 0x80010013;
     }
@@ -483,16 +483,16 @@ s32 func_00000DC8(SceIoIob *iob, void *buf, SceSize size) {
     if (err == -1) {
         err = 9;
     }
-    return func_000006E8(err);
+    return prErr(err);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000DC8);
+INCLUDE_ASM("nonmatchings/fatmsmod", df_read);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00000ED4(SceIoIob *iob, const void *buf, SceSize size) {
+s32 df_write(SceIoIob *iob, const void *buf, SceSize size) {
     FatmsPrivate *priv;
     s32 fp;
     s32 n;
@@ -502,7 +502,7 @@ s32 func_00000ED4(SceIoIob *iob, const void *buf, SceSize size) {
         return 0x80010016;
     }
     priv = iob->i_private;
-    if (func_00000068(0, priv) < 0) {
+    if (check_reload_status(0, priv) < 0) {
         Kprintf(D_00023B8C, "df_write");
         return 0x80010013;
     }
@@ -524,12 +524,12 @@ s32 func_00000ED4(SceIoIob *iob, const void *buf, SceSize size) {
     if (err == -1) {
         err = 9;
     }
-    return func_000006E8(err);
+    return prErr(err);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000ED4);
+INCLUDE_ASM("nonmatchings/fatmsmod", df_write);
 #endif
 
 #if FW_VERSION >= 282
@@ -565,93 +565,93 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00001064);
 #endif
 
 #if FW_VERSION == 100
-s32 func_0000170C(SceIoIob *iob, char *name) {
+s32 df_remove(SceIoIob *iob, char *name) {
     SceUID heap;
     char *path;
     s32 err;
 
-    if (func_00000068(1, NULL) < 0) {
+    if (check_reload_status(1, NULL) < 0) {
         Kprintf(D_00023B8C, "df_remove");
         return 0x80010013;
     }
-    path = func_00000594(&heap, 0x540);
+    path = get_heap(&heap, 0x540);
     if (path == NULL) {
         return 0x8001000C;
     }
-    if (func_00000850(path, name, iob->i_unit) < 0) {
+    if (add_drive_name(path, name, iob->i_unit) < 0) {
         func_00000678(heap, path);
         return 0x80010016;
     }
     if (func_00002E74(path) < 0) {
         err = func_000050AC();
         func_00000678(heap, path);
-        return func_000006E8(err);
+        return prErr(err);
     }
     func_00000678(heap, path);
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000170C);
+INCLUDE_ASM("nonmatchings/fatmsmod", df_remove);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00001810(SceIoIob *iob, char *name, SceMode mode) {
+s32 df_mkdir(SceIoIob *iob, char *name, SceMode mode) {
     SceUID heap;
     char *path;
     s32 err;
 
-    if (func_00000068(1, NULL) < 0) {
+    if (check_reload_status(1, NULL) < 0) {
         Kprintf(D_00023B8C, "df_mkdir");
         return 0x80010013;
     }
-    path = func_00000594(&heap, 0x540);
+    path = get_heap(&heap, 0x540);
     if (path == NULL) {
         return 0x8001000C;
     }
-    if (func_00000850(path, name, iob->i_unit) < 0) {
+    if (add_drive_name(path, name, iob->i_unit) < 0) {
         func_00000678(heap, path);
         return 0x80010016;
     }
     if (func_00002C20(path) < 0) {
         err = func_000050AC();
         func_00000678(heap, path);
-        return func_000006E8(err);
+        return prErr(err);
     }
     func_00000678(heap, path);
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00001810);
+INCLUDE_ASM("nonmatchings/fatmsmod", df_mkdir);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00001914(SceIoIob *iob, char *name) {
+s32 df_rmdir(SceIoIob *iob, char *name) {
     SceUID heap;
     char *path;
     s32 err;
 
-    if (func_00000068(1, NULL) < 0) {
+    if (check_reload_status(1, NULL) < 0) {
         Kprintf(D_00023B8C, "df_rmdir");
         return 0x80010013;
     }
-    path = func_00000594(&heap, 0x540);
+    path = get_heap(&heap, 0x540);
     if (path == NULL) {
         return 0x8001000C;
     }
-    if (func_00000850(path, name, iob->i_unit) < 0) {
+    if (add_drive_name(path, name, iob->i_unit) < 0) {
         func_00000678(heap, path);
         return 0x80010016;
     }
     if (func_00002C60(path) < 0) {
         err = func_000050AC();
         func_00000678(heap, path);
-        return func_000006E8(err);
+        return prErr(err);
     }
     func_00000678(heap, path);
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00001914);
+INCLUDE_ASM("nonmatchings/fatmsmod", df_rmdir);
 #endif
 
 char *func_00001A18(char *s) {
@@ -886,7 +886,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00003298);
 
 #if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_00003298(void) {
-    func_00000BFC();
+    df_close();
 }
 #endif
 
@@ -896,7 +896,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000032B4);
 
 #if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_000032B4(s32 arg0, s32 arg1, s32 arg2) {
-    func_00000DC8(arg0, arg1, arg2);
+    df_read(arg0, arg1, arg2);
 }
 #endif
 
@@ -906,7 +906,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000032D0);
 
 #if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_000032D0(s32 arg0, s32 arg1, s32 arg2) {
-    func_00000ED4(arg0, arg1, arg2);
+    df_write(arg0, arg1, arg2);
 }
 #endif
 
@@ -992,15 +992,15 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00003624);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003674);
 
 void func_000036A8(void) {
-    func_00000BFC();
+    df_close();
 }
 
 void func_000036C4(s32 arg0, s32 arg1, s32 arg2) {
-    func_00000DC8(arg0, arg1, arg2);
+    df_read(arg0, arg1, arg2);
 }
 
 void func_000036E0(s32 arg0, s32 arg1, s32 arg2) {
-    func_00000ED4(arg0, arg1, arg2);
+    df_write(arg0, arg1, arg2);
 }
 
 void func_000036FC(void) {
@@ -1102,7 +1102,7 @@ void func_00004778(void) {
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004794);
 
 void func_000047C8(void) {
-    func_00000BFC();
+    df_close();
 }
 
 void func_000047E4(void) {
@@ -1160,7 +1160,7 @@ s32 func_00004B88(s32 a0, s32 a1) {
     msg.cmd = 0x10;
     msg.drive = a0;
     msg.p0 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1173,7 +1173,7 @@ s32 func_00002B98(s32 a0, s32 a1) {
     msg.cmd = 0x18;
     msg.p2 = a0;
     msg.p0 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1187,7 +1187,7 @@ s32 func_00002B98(s32 a0, s32 a1) {
     msg.cmd = 0xb;
     msg.p2 = a0;
     msg.p7 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1208,7 +1208,7 @@ s32 func_00004C58(s32 a0, s32 a1) {
     msg.cmd = 0xf;
     msg.drive = a0;
     msg.p2 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1220,7 +1220,7 @@ s32 func_00002C20(s32 a0) {
 
     msg.cmd = 0x9;
     msg.p2 = a0;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1234,7 +1234,7 @@ s32 func_00002C20(s32 a0, s32 a1) {
     msg.cmd = 0x9;
     msg.p2 = a0;
     msg.p7 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1247,7 +1247,7 @@ s32 func_00002C60(s32 a0) {
 
     msg.cmd = 0xa;
     msg.p2 = a0;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1261,7 +1261,7 @@ s32 func_00002C60(s32 a0, s32 a1) {
     msg.cmd = 0xa;
     msg.p2 = a0;
     msg.p7 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1275,7 +1275,7 @@ s32 func_00002CA0(s32 a0, s32 a1) {
     msg.cmd = 0xd;
     msg.p2 = a0;
     msg.p0 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1290,7 +1290,7 @@ s32 func_00002CA0(s32 a0, s32 a1, s32 a2) {
     msg.p2 = a0;
     msg.p0 = a1;
     msg.p7 = a2;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1310,7 +1310,7 @@ s32 func_00004D6C(s32 a0) {
 
     msg.cmd = 0x2;
     msg.p2 = a0;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1322,7 +1322,7 @@ s32 func_00002D24(s32 a0) {
 
     msg.cmd = 0x1b;
     msg.x2 = a0;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1336,7 +1336,7 @@ s32 func_00002D24(s32 a0, s32 a1) {
     msg.cmd = 0x1b;
     msg.x2 = a0;
     msg.p7 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1352,7 +1352,7 @@ s32 func_00004DF0(s32 a0) {
 
     msg.cmd = 0x12;
     msg.p2 = a0;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1363,7 +1363,7 @@ s32 func_00004E30(s32 a0) {
 
     msg.cmd = 0x11;
     msg.p2 = a0;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1376,7 +1376,7 @@ s32 func_00002DE4(s32 a0, s32 a1) {
     msg.cmd = 0x1;
     msg.p2 = a0;
     msg.p3 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return 0;
     }
     return msg.ret;
@@ -1391,7 +1391,7 @@ s32 func_00002DE4(s32 a0, s32 a1, s32 a2) {
     msg.p2 = a0;
     msg.p3 = a1;
     msg.p7 = a2;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return 0;
     }
     return msg.ret;
@@ -1410,7 +1410,7 @@ s32 func_00004EB0(s32 a0, s32 a1, s32 a2, s32 a3) {
     msg.p3 = a0;
     msg.p0 = a1;
     msg.p1 = a2;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1422,7 +1422,7 @@ s32 func_00002E74(s32 a0) {
 
     msg.cmd = 0x7;
     msg.p2 = a0;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1436,7 +1436,7 @@ s32 func_00002E74(s32 a0, s32 a1) {
     msg.cmd = 0x7;
     msg.p2 = a0;
     msg.p7 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1454,7 +1454,7 @@ s32 func_00004F40(s32 a0, s32 a1, s32 a2) {
     msg.p2 = a0;
     msg.p1 = a1;
     msg.p0 = a2;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1468,7 +1468,7 @@ s32 func_00002EFC(s32 a0, s32 a1, s32 a2) {
     msg.p3 = a0;
     msg.x1 = a1;
     msg.p0 = a2;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1483,7 +1483,7 @@ s32 func_00004F88(s32 a0, s32 a1, s32 a2) {
     msg.p2 = a0;
     msg.p0 = a1;
     msg.p3 = a2;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1497,7 +1497,7 @@ s32 func_00004F88(s32 a0, s32 a1, s32 a2, s32 a3) {
     msg.p0 = a1;
     msg.p3 = a2;
     msg.p7 = a3;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1511,7 +1511,7 @@ s32 func_00002F8C(s32 a0, s32 a1) {
     msg.cmd = 0xc;
     msg.p2 = a0;
     msg.p3 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1526,7 +1526,7 @@ s32 func_00002F8C(s32 a0, s32 a1, s32 a2) {
     msg.p2 = a0;
     msg.p3 = a1;
     msg.p7 = a2;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1545,7 +1545,7 @@ s32 func_0000501C(s32 a0, s32 a1, s32 a2, s32 a3) {
     msg.p3 = a0;
     msg.p0 = a1;
     msg.p1 = a2;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1557,7 +1557,7 @@ s32 func_00005068(s32 a0, s32 a1) {
     msg.cmd = 0x14;
     msg.drive = a0;
     msg.p2 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1567,7 +1567,7 @@ s32 func_000050AC(void) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x13;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1578,7 +1578,7 @@ s32 func_000050E4(s32 a0) {
 
     msg.cmd = 0x19;
     msg.x0 = a0;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1590,7 +1590,7 @@ s32 func_00005124(s32 a0, s32 a1) {
     msg.cmd = 0x16;
     msg.drive = a0;
     msg.p2 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1607,7 +1607,7 @@ s32 func_0000311C(s32 a0, s32 a1) {
     msg.cmd = 0x8;
     msg.p2 = a0;
     msg.p3 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1622,7 +1622,7 @@ s32 func_0000311C(s32 a0, s32 a1, s32 a2) {
     msg.p2 = a0;
     msg.p3 = a1;
     msg.p7 = a2;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1640,7 +1640,7 @@ s32 func_000051F8(s32 a0) {
 
     msg.cmd = 0x17;
     msg.drive = a0;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1652,7 +1652,7 @@ s32 func_00005238(s32 a0, s32 a1) {
     msg.cmd = 0x15;
     msg.drive = a0;
     msg.p2 = a1;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1668,7 +1668,7 @@ s32 func_0000527C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4) {
     msg.p4 = a2;
     msg.p5 = a3;
     msg.p6 = a4;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1684,7 +1684,7 @@ s32 func_0000527C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
     msg.p5 = a3;
     msg.p6 = a4;
     msg.p7 = a5;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1695,7 +1695,7 @@ s32 func_000052D0(void) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x30;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;
@@ -1913,7 +1913,7 @@ s32 func_00006960(void) {
 }
 #endif
 
-s32 func_00006988(SceMsStubMsg *msg) {
+s32 FcpSendMsg(SceMsStubMsg *msg) {
     SceMsStubPacket pkt;
     SceUID evf;
 
@@ -1981,7 +1981,7 @@ s32 func_000075CC(s32 a0) {
 
     msg.cmd = 0xe;
     msg.p2 = a0;
-    if (func_00006988(&msg) == -1) {
+    if (FcpSendMsg(&msg) == -1) {
         return -1;
     }
     return msg.ret;

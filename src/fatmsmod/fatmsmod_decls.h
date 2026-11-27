@@ -235,25 +235,24 @@ extern void *D_0003F728;
 extern M2C_UNK D_00042A80;
 extern SceUID g_msStubMbx;
 
+s32 FcpSendMsg(SceMsStubMsg *msg);
 s32 Kprintf(const char *fmt, ...);
+s32 add_drive_name(char *buf, const char *name, s32 unit);
+s32 check_heap_alive(FatmsPrivate *priv);
+s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv);
+s32 df_close(); /* 1.00 df_close(SceIoIob *) */
+s32 df_read(); /* 1.00 df_read(SceIoIob *, void *, SceSize) */
+s32 df_write(); /* 1.00 df_write(SceIoIob *, const void *, SceSize) */
+s32 free_heap_all(void);
 M2C_UNK func_00000020();
 void func_00000048(void);
-s32 func_00000068(s32 checkMedia, FatmsPrivate *priv);
 M2C_UNK func_00000134();
 void func_0000022C(void);
 M2C_UNK func_00000264();
 void func_000004B8(void);
-s32 func_000004F4(void);
-void *func_00000594(SceUID *heap, SceSize size);
 s32 func_00000678(SceUID heap, void *mem);
-s32 func_000006E8(s32 err);
-s32 func_000007C0(FatmsPrivate *priv);
-s32 func_00000850(char *buf, const char *name, s32 unit);
-s32 func_00000BFC(); /* 1.00 df_close(SceIoIob *) */
 M2C_UNK func_00000CE4();
-s32 func_00000DC8(); /* 1.00 df_read(SceIoIob *, void *, SceSize) */
 M2C_UNK func_00000E00();
-s32 func_00000ED4(); /* 1.00 df_write(SceIoIob *, const void *, SceSize) */
 M2C_UNK func_00000EF8();
 s32 func_00001834(u32 attr);
 char *func_00001A18(char *s);
@@ -334,7 +333,6 @@ s32 func_000067E0(void);
 s32 func_000067EC(void);
 s32 func_00006918(void);
 s32 func_00006960(void);
-s32 func_00006988(SceMsStubMsg *msg);
 s32 func_000075CC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_0000764C(void);
 s32 func_000076F4(s32, s32);
@@ -466,7 +464,9 @@ s32 func_0002214C(s32 arg0);
 s8 func_00022338(s8 arg0);
 s32 func_0002233C(s32 arg0);
 s8 func_00022344(s8 arg0);
+void *get_heap(SceUID *heap, SceSize size);
 s32 module_start(void);
+s32 prErr(s32 err);
 s32 sceFatMS_driver_BCB9DEDB(void);
 s32 sceIoClose(s32);
 M2C_UNK sceIoDelDrv(s32);
