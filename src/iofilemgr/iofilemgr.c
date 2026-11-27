@@ -515,8 +515,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoPollAsync);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoPollAsync(u32 arg0, void *arg1) {
-    return do_get_async_stat((s32) arg0, (s32) arg1, 1, 0);
+s32 sceIoPollAsync(SceUID fd, s64 *res) {
+    return do_get_async_stat(fd, res, 1, 0);
 }
 #endif
 
@@ -525,8 +525,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsync);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoWaitAsync(u32 arg0, void *arg1) {
-    return do_get_async_stat((s32) arg0, (s32) arg1, 0, 0);
+s32 sceIoWaitAsync(SceUID fd, s64 *res) {
+    return do_get_async_stat(fd, res, 0, 0);
 }
 #endif
 
@@ -535,8 +535,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsyncCB);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoWaitAsyncCB(u32 arg0, void *arg1) {
-    return do_get_async_stat((s32) arg0, (s32) arg1, 0, 1);
+s32 sceIoWaitAsyncCB(SceUID fd, s64 *res) {
+    return do_get_async_stat(fd, res, 0, 1);
 }
 #endif
 
@@ -545,8 +545,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetAsyncStat);
 #endif
 
 #if FW_VERSION < 201
-void sceIoGetAsyncStat(s32 arg0, s32 arg1, s32 arg2) {
-    do_get_async_stat(arg0, arg2, arg1, 0);
+s32 sceIoGetAsyncStat(SceUID fd, s32 poll, s64 *res) {
+    do_get_async_stat(fd, res, poll, 0);
 }
 #endif
 
@@ -569,8 +569,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoClose);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoClose(u32 arg0) {
-    return do_close((s32) arg0, 0, 1);
+s32 sceIoClose(SceUID fd) {
+    return do_close(fd, 0, 1);
 }
 #endif
 
@@ -579,8 +579,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoCloseAsync);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoCloseAsync(u32 arg0) {
-    return do_close((s32) arg0, 1, 0);
+s32 sceIoCloseAsync(SceUID fd) {
+    return do_close(fd, 1, 0);
 }
 #endif
 
@@ -635,8 +635,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoOpen);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoOpen(void *arg0, s32 arg1, s32 arg2) {
-    return do_open((s32) arg0, arg1, arg2, 0);
+SceUID sceIoOpen(const char *file, s32 flags, SceMode mode) {
+    return do_open(file, flags, mode, 0);
 }
 #endif
 
@@ -645,8 +645,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoOpenAsync);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoOpenAsync(void *arg0, s32 arg1, s32 arg2) {
-    return do_open((s32) arg0, arg1, arg2, 1);
+SceUID sceIoOpenAsync(const char *file, s32 flags, SceMode mode) {
+    return do_open(file, flags, mode, 1);
 }
 #endif
 
@@ -671,8 +671,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoRead);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoRead(u32 arg0, void *arg1, u32 arg2) {
-    return do_read((s32) arg0, (s32) arg1, (s32) arg2, 0);
+s32 sceIoRead(SceUID fd, void *data, SceSize size) {
+    return do_read(fd, data, size, 0);
 }
 #endif
 
@@ -681,8 +681,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoReadAsync);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoReadAsync(u32 arg0, void *arg1, u32 arg2) {
-    return do_read((s32) arg0, (s32) arg1, (s32) arg2, 1);
+s32 sceIoReadAsync(SceUID fd, void *data, SceSize size) {
+    return do_read(fd, data, size, 1);
 }
 #endif
 
@@ -695,8 +695,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWrite);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoWrite(u32 arg0, void *arg1, u32 arg2) {
-    return do_write((s32) arg0, (s32) arg1, (s32) arg2, 0);
+s32 sceIoWrite(SceUID fd, const void *data, SceSize size) {
+    return do_write(fd, data, size, 0);
 }
 #endif
 
@@ -705,8 +705,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWriteAsync);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoWriteAsync(u32 arg0, void *arg1, u32 arg2) {
-    return do_write((s32) arg0, (s32) arg1, (s32) arg2, 1);
+s32 sceIoWriteAsync(SceUID fd, const void *data, SceSize size) {
+    return do_write(fd, data, size, 1);
 }
 #endif
 
@@ -733,8 +733,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoIoctl);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoIoctl(u32 arg0, s32 arg1, void *arg2, u32 arg3, void *arg4, u32 arg5) {
-    return do_ioctl((s32) arg0, arg1, (s32) arg2, (s32) arg3, (s32) arg4, (s32) arg5, 0);
+s32 sceIoIoctl(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen) {
+    return do_ioctl(fd, cmd, indata, inlen, outdata, outlen, 0);
 }
 #endif
 
@@ -743,8 +743,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoIoctlAsync);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoIoctlAsync(u32 arg0, s32 arg1, void *arg2, u32 arg3, void *arg4, u32 arg5) {
-    return do_ioctl((s32) arg0, arg1, (s32) arg2, (s32) arg3, (s32) arg4, (s32) arg5, 1);
+s32 sceIoIoctlAsync(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen) {
+    return do_ioctl(fd, cmd, indata, inlen, outdata, outlen, 1);
 }
 #endif
 
@@ -775,8 +775,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoMkdir);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoMkdir(void *arg0, s32 arg1) {
-    return xx_dir((s32) arg0, arg1, 1);
+s32 sceIoMkdir(const char *path, SceMode mode) {
+    return xx_dir(path, mode, 1);
 }
 #endif
 
@@ -785,8 +785,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoRmdir);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoRmdir(void *arg0) {
-    return xx_dir((s32) arg0, 0, 2);
+s32 sceIoRmdir(const char *path) {
+    return xx_dir(path, 0, 2);
 }
 #endif
 
@@ -795,8 +795,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChdir);
 #endif
 
 #if FW_VERSION < 201
-s32 sceIoChdir(void *arg0) {
-    return xx_dir((s32) arg0, 0, 0);
+s32 sceIoChdir(const char *path) {
+    return xx_dir(path, 0, 0);
 }
 
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoSync);
@@ -895,18 +895,18 @@ INCLUDE_ASM("nonmatchings/iofilemgr", alloc_device_list);
 #endif
 
 #if FW_VERSION == 100
-s32 alloc_device_list(void) {
-    s32 temp_v0;
+SceIoDeviceList *alloc_device_list(void) {
+    SceIoDeviceList *list;
 
-    temp_v0 = sceKernelAllocHeapMemory(g_heap, 0xC);
-    if (temp_v0 != 0) {
-        memset(temp_v0, 0, 0xC);
+    list = sceKernelAllocHeapMemory(g_heap, sizeof(SceIoDeviceList));
+    if (list != NULL) {
+        memset(list, 0, sizeof(SceIoDeviceList));
     }
-    return temp_v0;
+    return list;
 }
 
-void free_device_list(s32 arg0) {
-    sceKernelFreeHeapMemory(g_heap, arg0);
+void free_device_list(SceIoDeviceList *list) {
+    sceKernelFreeHeapMemory(g_heap, list);
 }
 
 INCLUDE_ASM("nonmatchings/iofilemgr", lookup_alias_tbl);
@@ -929,18 +929,18 @@ INCLUDE_ASM("nonmatchings/iofilemgr", alloc_alias_tbl);
 #endif
 
 #if FW_VERSION == 100
-s32 alloc_alias_tbl(void) {
-    s32 temp_v0;
+SceIoAlias *alloc_alias_tbl(void) {
+    SceIoAlias *alias;
 
-    temp_v0 = sceKernelAllocHeapMemory(g_heap, 0x70);
-    if (temp_v0 != 0) {
-        memset(temp_v0, 0, 0x70);
+    alias = sceKernelAllocHeapMemory(g_heap, sizeof(SceIoAlias));
+    if (alias != NULL) {
+        memset(alias, 0, sizeof(SceIoAlias));
     }
-    return temp_v0;
+    return alias;
 }
 
-void free_alias_tbl(s32 arg0) {
-    sceKernelFreeHeapMemory(g_heap, arg0);
+void free_alias_tbl(SceIoAlias *alias) {
+    sceKernelFreeHeapMemory(g_heap, alias);
 }
 
 INCLUDE_ASM("nonmatchings/iofilemgr", init_iob_table);
@@ -995,13 +995,13 @@ INCLUDE_ASM("nonmatchings/iofilemgr", free_cwd);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void free_cwd(s32 *arg0) {
-    s32 temp_v1;
+void free_cwd(char **ktls) {
+    u32 cwd;
 
-    temp_v1 = *arg0;
-    if (temp_v1 != 0) {
-        sceKernelFreeHeapMemory(D_00004E4C, temp_v1);
-        *arg0 = 0;
+    cwd = (u32)*ktls;
+    if (cwd != 0) {
+        sceKernelFreeHeapMemory(D_00004E4C, (void *)cwd);
+        *ktls = NULL;
     }
 }
 #endif
@@ -1126,8 +1126,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00003BE8);
 INCLUDE_ASM("nonmatchings/iofilemgr", _nulldev_write);
 
 void func_00003D68(void) {
-    sceIoDelDrv((s32) &D_0000563C);
-    sceIoAddDrv((s32) &g_dummyconDriver);
+    sceIoDelDrv(D_0000563C);
+    sceIoAddDrv(&g_dummyconDriver);
 }
 #endif
 
@@ -1160,8 +1160,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoPollAsync);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
-s32 sceIoPollAsync(u32 arg0, void *arg1) {
-    return func_00003570((s32) arg0, (s32) arg1, 1, 0);
+s32 sceIoPollAsync(SceUID fd, s64 *res) {
+    return do_get_async_stat(fd, res, 1, 0);
 }
 #endif
 
@@ -1170,8 +1170,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsync);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
-s32 sceIoWaitAsync(u32 arg0, void *arg1) {
-    return func_00003570((s32) arg0, (s32) arg1, 0, 0);
+s32 sceIoWaitAsync(SceUID fd, s64 *res) {
+    return do_get_async_stat(fd, res, 0, 0);
 }
 #endif
 
@@ -1180,8 +1180,8 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoWaitAsyncCB);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
-s32 sceIoWaitAsyncCB(u32 arg0, void *arg1) {
-    return func_00003570((s32) arg0, (s32) arg1, 0, 1);
+s32 sceIoWaitAsyncCB(SceUID fd, s64 *res) {
+    return do_get_async_stat(fd, res, 0, 1);
 }
 #endif
 
@@ -1190,90 +1190,84 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetAsyncStat);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
-void sceIoGetAsyncStat(s32 arg0, s32 arg1, s32 arg2) {
-    func_00003570(arg0, arg2, arg1, 0);
+s32 sceIoGetAsyncStat(SceUID fd, s32 poll, s64 *res) {
+    do_get_async_stat(fd, res, poll, 0);
 }
 #endif
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoSetAsyncCallback);
 
-s32 sceIoClose(u32 arg0) {
-    return func_00003748((s32) arg0, 0, 1);
+s32 sceIoClose(SceUID fd) {
+    return do_close(fd, 0, 1);
 }
 
-s32 sceIoCloseAsync(u32 arg0) {
-    return func_00003748((s32) arg0, 1, 0);
+s32 sceIoCloseAsync(SceUID fd) {
+    return do_close(fd, 1, 0);
 }
 
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoOpen);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoOpenAsync);
 
-s32 sceIoRead(u32 arg0, void *arg1, u32 arg2) {
-    return func_00003AD4((s32) arg0, (s32) arg1, (s32) arg2, 0);
+s32 sceIoRead(SceUID fd, void *data, SceSize size) {
+    return do_read(fd, data, size, 0);
 }
 
-s32 sceIoReadAsync(u32 arg0, void *arg1, u32 arg2) {
-    return func_00003AD4((s32) arg0, (s32) arg1, (s32) arg2, 1);
+s32 sceIoReadAsync(SceUID fd, void *data, SceSize size) {
+    return do_read(fd, data, size, 1);
 }
 
-s32 sceIoWrite(u32 arg0, void *arg1, u32 arg2) {
-    return func_00003C34((s32) arg0, (s32) arg1, (s32) arg2, 0);
+s32 sceIoWrite(SceUID fd, const void *data, SceSize size) {
+    return do_write(fd, data, size, 0);
 }
 
-s32 sceIoWriteAsync(u32 arg0, void *arg1, u32 arg2) {
-    return func_00003C34((s32) arg0, (s32) arg1, (s32) arg2, 1);
+s32 sceIoWriteAsync(SceUID fd, const void *data, SceSize size) {
+    return do_write(fd, data, size, 1);
 }
 
-void sceIoLseek(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    func_00003D94(arg0, arg1, arg2, arg3, arg4, 0);
+SceOff sceIoLseek(SceUID fd, SceOff offset, s32 whence) {
+    return do_lseek(fd, offset, whence, 0);
 }
 
-void sceIoLseekAsync(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    func_00003D94(arg0, arg1, arg2, arg3, arg4, 1);
+SceOff sceIoLseekAsync(SceUID fd, SceOff offset, s32 whence) {
+    return do_lseek(fd, offset, whence, 1);
 }
 
-s32 sceIoLseek32(u32 arg0, s32 arg1, s32 arg2) {
-    s32 temp_a1;
-
-    temp_a1 = arg1 >> 0x1F;
-    return func_00003D94((s32) arg0, temp_a1, arg1, temp_a1, arg2, 0);
+s32 sceIoLseek32(SceUID fd, s32 offset, s32 whence) {
+    return do_lseek(fd, offset, whence, 0);
 }
 
-s32 sceIoLseek32Async(u32 arg0, s32 arg1, s32 arg2) {
-    s32 temp_a1;
-
-    temp_a1 = arg1 >> 0x1F;
-    return func_00003D94((s32) arg0, temp_a1, arg1, temp_a1, arg2, 1);
+s32 sceIoLseek32Async(SceUID fd, s32 offset, s32 whence) {
+    return do_lseek(fd, offset, whence, 1);
 }
 
-s32 sceIoIoctl(u32 arg0, s32 arg1, void *arg2, u32 arg3, void *arg4, u32 arg5) {
-    return func_00003F24((s32) arg0, arg1, (s32) arg2, (s32) arg3, (s32) arg4, (s32) arg5, 0);
+s32 sceIoIoctl(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen) {
+    return do_ioctl(fd, cmd, indata, inlen, outdata, outlen, 0);
 }
 
-s32 sceIoIoctlAsync(u32 arg0, s32 arg1, void *arg2, u32 arg3, void *arg4, u32 arg5) {
-    return func_00003F24((s32) arg0, arg1, (s32) arg2, (s32) arg3, (s32) arg4, (s32) arg5, 1);
+s32 sceIoIoctlAsync(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen) {
+    return do_ioctl(fd, cmd, indata, inlen, outdata, outlen, 1);
 }
 
-s32 sceIoMkdir(void *arg0, s32 arg1) {
-    return func_00004114((s32) arg0, arg1, 1);
+s32 sceIoMkdir(const char *path, SceMode mode) {
+    return xx_dir(path, mode, 1);
 }
 
-s32 sceIoRmdir(void *arg0) {
-    return func_00004114((s32) arg0, 0, 2);
+s32 sceIoRmdir(const char *path) {
+    return xx_dir(path, 0, 2);
 }
 
-s32 sceIoChdir(void *arg0) {
-    return func_00004114((s32) arg0, 0, 0);
+s32 sceIoChdir(const char *path) {
+    return xx_dir(path, 0, 0);
 }
 
-s32 sceIoGetstat(void *arg0, void *arg1) {
-    return func_00004374((s32) arg0, (s32) arg1, 0, 1);
+s32 sceIoGetstat(const char *file, SceIoStat *stat) {
+    return xx_stat(file, stat, 0, 1);
 }
 
-s32 sceIoChstat(void *arg0, void *arg1, u32 arg2) {
-    return func_00004374((s32) arg0, (s32) arg1, (s32) arg2, 0);
+s32 sceIoChstat(const char *file, SceIoStat *stat, u32 bits) {
+    return xx_stat(file, stat, bits, 0);
 }
 
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoSync);
@@ -1330,23 +1324,23 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_000033E8);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_000033F8);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00003570);
+INCLUDE_ASM("nonmatchings/iofilemgr", do_get_async_stat);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00003748);
+INCLUDE_ASM("nonmatchings/iofilemgr", do_close);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_000039A8);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00003AD4);
+INCLUDE_ASM("nonmatchings/iofilemgr", do_read);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00003C34);
+INCLUDE_ASM("nonmatchings/iofilemgr", do_write);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00003D94);
+INCLUDE_ASM("nonmatchings/iofilemgr", do_lseek);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00003F24);
+INCLUDE_ASM("nonmatchings/iofilemgr", do_ioctl);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00004114);
+INCLUDE_ASM("nonmatchings/iofilemgr", xx_dir);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", func_00004374);
+INCLUDE_ASM("nonmatchings/iofilemgr", xx_stat);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00004534);
 
