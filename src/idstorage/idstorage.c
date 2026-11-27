@@ -66,9 +66,36 @@ INCLUDE_RODATA("nonmatchings/idstorage", D_0000217C);
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageInit);
 
+#if FW_VERSION < 201
+s32 func_000002A4(s32 id, char *name, void *param, s32 *res) {
+    if (id == 256) {
+        if (sceIdStorageIsDirty()) {
+            return 0x80000021;
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/idstorage", func_000002A4);
+#endif
 
+#if FW_VERSION < 201
+s32 sceIdStorageIsDirty(void) {
+    s32 i;
+
+    if (D_00006630.dirty) {
+        return 1;
+    }
+    for (i = 0; i < 32; i++) {
+        if (D_00006630.store[i].state == 3) {
+            return 1;
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageIsDirty);
+#endif
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageFormat);
 
@@ -105,8 +132,8 @@ INCLUDE_ASM("nonmatchings/idstorage", module_reboot_before);
 s32 module_reboot_before(void) {
     sceIdStorageFlush();
     sceKernelUnregisterSysEventHandler(&D_000021F0);
-    sceKernelDeleteSema(M2C_VFIELD(&D_00006630, s32, 4));
-    sceKernelDeleteFpl(M2C_VFIELD(&D_00006630, s32, 0));
+    sceKernelDeleteSema(D_00006630.sema);
+    sceKernelDeleteFpl(D_00006630.fpl);
     return 0;
 }
 #endif
@@ -117,8 +144,8 @@ INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageEnd);
 s32 sceIdStorageEnd(void) {
     sceIdStorageFlush();
     sceKernelUnregisterSysEventHandler(&D_000021F0);
-    sceKernelDeleteSema(M2C_VFIELD(&D_00006630, s32, 4));
-    sceKernelDeleteFpl(M2C_VFIELD(&D_00006630, s32, 0));
+    sceKernelDeleteSema(D_00006630.sema);
+    sceKernelDeleteFpl(D_00006630.fpl);
     return 0;
 }
 #endif
@@ -158,4 +185,22 @@ INCLUDE_ASM("nonmatchings/idstorage", func_00001C30);
 
 INCLUDE_ASM("nonmatchings/idstorage", func_00001CA0);
 
+#if FW_VERSION < 201
+s32 func_00001D20(u16 id) {
+    s32 i;
+    s32 pos = -1;
+
+    for (i = 0; i < 512; i++) {
+        if (D_00006630.index[i] == id) {
+            pos = i;
+            break;
+        }
+    }
+    if (pos < 0) {
+        return 0x80000025;
+    }
+    return pos;
+}
+#else
 INCLUDE_ASM("nonmatchings/idstorage", func_00001D20);
+#endif

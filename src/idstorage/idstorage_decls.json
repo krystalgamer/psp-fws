@@ -3,20 +3,24 @@
   "module_reboot_before": "s32 module_reboot_before(void);",
   "module_start": "s32 module_start(void);",
   "sceIdStorageEnd": "s32 sceIdStorageEnd(void);",
-  "sceIdStorageFlush": "M2C_UNK sceIdStorageFlush();",
+  "sceIdStorageFlush": "s32 sceIdStorageFlush(void);",
   "sceIdStorageGetLeafSize": "s32 sceIdStorageGetLeafSize(void);",
   "sceIdStorageInit": "M2C_UNK sceIdStorageInit();",
+  "sceIdStorageIsDirty": "s32 sceIdStorageIsDirty(void);",
   "sceIdStorageIsFormatted": "u8 sceIdStorageIsFormatted(void);",
   "sceIdStorageIsReadOnly": "u8 sceIdStorageIsReadOnly(void);",
   "sceIdStorageResume": "s32 sceIdStorageResume(void);",
   "sceIdStorageSuspend": "s32 sceIdStorageSuspend(void);",
   "sceKernelDeleteFpl": "s32 sceKernelDeleteFpl(s32);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
-  "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);"
+  "sceKernelUnregisterSysEventHandler": "s32 sceKernelUnregisterSysEventHandler(void *);"
+ },
+ "types": {
+  "SceIdStorage": "typedef struct {\n    u16 keyId;\n    u8 state;\n    u8 unk3;\n} SceIdStorageItem;\ntypedef struct {\n    s32 fpl;\n    s32 sema;\n    s32 pagesPerBlock;\n    s32 unkC;\n    u8 unk10[6];\n    u8 dirty;\n    u8 unk17;\n    u32 unk18;\n    u32 unk1C;\n    u16 index[512];\n    SceIdStorageItem store[32];\n    void *pool;\n} SceIdStorage;"
  },
  "vars": {
   "D_000021F0": "extern s32 D_000021F0;",
-  "D_00006630": "extern M2C_UNK D_00006630;",
+  "D_00006630": "extern SceIdStorage D_00006630;",
   "D_00006644": "extern u8 D_00006644;",
   "D_00006645": "extern u8 D_00006645;"
  }
