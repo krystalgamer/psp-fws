@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "video_main_plugin_decls.h"
 
@@ -1116,7 +1117,10 @@ s32 func_00004BD8(void) {
     s32 temp_v0;
 
     temp_v0 = D_00057224 != 0;
-    return (D_000571F0 != 0) ? (temp_v0 | 2) : temp_v0;
+    if (D_000571F0 != 0) {
+        temp_v0 |= 2;
+    }
+    return temp_v0;
 }
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00004BF8);

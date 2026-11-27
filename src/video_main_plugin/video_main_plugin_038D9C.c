@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O1 */
 #include "common.h"
 #include "video_main_plugin_decls.h"
@@ -95,7 +96,7 @@ s32 func_0003B588(void) {
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003B590);
 
-M2C_UNK *func_0003B634(void) {
+const char *func_0003B634(void) {
     return "play";
 }
 
@@ -103,7 +104,7 @@ void func_0003B640(struct Unk_func_0003B640_0 *arg0, struct Unk_func_0003B640_1 
     func_0003807C(arg1->unk28, arg0->unk8, arg0->unkC, arg0->unkD);
 }
 
-M2C_UNK *func_0003B66C(void) {
+const char *func_0003B66C(void) {
     return "stop";
 }
 
@@ -111,25 +112,25 @@ void func_0003B678(struct Unk_func_0003B678_0 *arg0, struct Unk_func_0003B678_1 
     func_00037FC0(arg1->unk28, arg0->unk6);
 }
 
-M2C_UNK *func_0003B69C(void) {
+const char *func_0003B69C(void) {
     return "resume";
 }
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003B6A8);
 
-M2C_UNK *func_0003B6CC(void) {
+const char *func_0003B6CC(void) {
     return "playStep";
 }
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003B6D8);
 
-M2C_UNK *func_0003B744(void) {
+const char *func_0003B744(void) {
     return "changeStream";
 }
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003B750);
 
-M2C_UNK *func_0003B778(void) {
+const char *func_0003B778(void) {
     return "changeResumeInfo";
 }
 
@@ -159,121 +160,121 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003D174);
 #endif
 
 #if FW_VERSION >= 350
-void func_0003D310(void) {
+void func_0003D310(u32 arg0) {
     scePaf_77283661();
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D310(void) {
-    _Z11PSJS_Mallocj();
+void func_0003D310(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
 #if FW_VERSION >= 350
-void func_0003D32C(void) {
+void func_0003D32C(void* arg0) {
     scePaf_EF0B4C08();
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D32C(void) {
-    _Z9PSJS_FreePv();
+void func_0003D32C(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
 #if FW_VERSION >= 350
-void func_0003D348(void) {
+void func_0003D348(u32 arg0) {
     scePaf_77283661();
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D348(void) {
-    _Z11PSJS_Mallocj();
+void func_0003D348(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
 #if FW_VERSION >= 350
-void func_0003D364(void) {
+void func_0003D364(void* arg0) {
     scePaf_EF0B4C08();
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D364(void) {
-    _Z9PSJS_FreePv();
+void func_0003D364(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
 #if FW_VERSION >= 350
-void func_0003D380(void) {
+void func_0003D380(u32 arg0) {
     scePaf_77283661();
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D380(void) {
-    _Z11PSJS_Mallocj();
+void func_0003D380(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
 #if FW_VERSION >= 350
-void func_0003D39C(void) {
+void func_0003D39C(void* arg0) {
     scePaf_EF0B4C08();
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D39C(void) {
-    _Z9PSJS_FreePv();
+void func_0003D39C(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
 #if FW_VERSION >= 350
-void func_0003D3B8(void) {
+void func_0003D3B8(u32 arg0) {
     scePaf_77283661();
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D3B8(void) {
-    _Z11PSJS_Mallocj();
+void func_0003D3B8(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
 #if FW_VERSION >= 350
-void func_0003D3D4(void) {
+void func_0003D3D4(void* arg0) {
     scePaf_EF0B4C08();
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D3D4(void) {
-    _Z9PSJS_FreePv();
+void func_0003D3D4(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
 #if FW_VERSION >= 350
-void func_0003D3F0(void) {
+void func_0003D3F0(u32 arg0) {
     scePaf_77283661();
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D3F0(void) {
-    _Z11PSJS_Mallocj();
+void func_0003D3F0(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
 #if FW_VERSION >= 350
-void func_0003D40C(void) {
+void func_0003D40C(void* arg0) {
     scePaf_EF0B4C08();
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D40C(void) {
-    _Z9PSJS_FreePv();
+void func_0003D40C(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
