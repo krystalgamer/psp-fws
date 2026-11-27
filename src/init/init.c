@@ -21,8 +21,24 @@ INCLUDE_ASM("nonmatchings/init", func_00000028);
 INCLUDE_ASM("nonmatchings/init", func_0000007C);
 
 INCLUDE_ASM("nonmatchings/init", func_000000DC);
-#else
+#endif
+
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/init", sceKernelGetChunk);
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION == 150
+s32 sceKernelGetChunk(s32 arg0) {
+    s32 var_v0;
+
+    if ((u32) arg0 < 0x10U) {
+        var_v0 = D_00002248[arg0];
+    } else {
+        Kprintf(D_00001DC8, "sceKernelGetChunk");
+        var_v0 = 0x800200DE;
+    }
+    return var_v0;
+}
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
