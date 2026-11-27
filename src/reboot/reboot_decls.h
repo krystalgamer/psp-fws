@@ -4,6 +4,13 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+/* COP0 $22: non-zero when a hardware debugger (DTL-T) is attached */
+static inline u32 getCop0Reg22(void) {
+    u32 v;
+    __asm__ __volatile__("mfc0 %0, $22" : "=r"(v));
+    return v;
+}
+
 typedef int SceMode;
 typedef s64 SceOff;
 typedef s32 SceSSize;
@@ -176,7 +183,20 @@ typedef struct {
     u32 totalBlocks; /* 0x8 */
 } SceNandChipEntry;
 
-/* loadcore exec file info (1.00 copy in loadelf.c). Offsets 0x10, 0x20, 0x48 confirmed in the 1.00 asm;
+/* .rodata.sceModuleInfo */
+typedef struct {
+    u16 modAttribute; /* 0x0 */
+    u8 modVersion[2]; /* 0x2 */
+    char modName[27]; /* 0x4 */
+    char terminal; /* 0x1F */
+    void *gpValue; /* 0x20 */
+    void *entTop; /* 0x24 */
+    void *entEnd; /* 0x28 */
+    void *stubTop; /* 0x2C */
+    void *stubEnd; /* 0x30 */
+} SceModuleInfo;
+
+/* loadcore exec file info (1.00 copy in loadelf.c). Offsets 0x8, 0x10, 0x20, 0x48-0x58 confirmed in the 1.00 asm;
    names from uOFW (6.60 layout, same offsets up to here). */
 typedef struct {
     u32 unk0;
@@ -198,12 +218,61 @@ typedef struct {
     u32 partitionId; /* 0x40 */
     u32 isKernelMod; /* 0x44 */
     u32 isDecrypted; /* 0x48 */
+    u32 moduleInfoOffset; /* 0x4C */
+    SceModuleInfo *moduleInfo; /* 0x50 */
+    u32 isCompressed; /* 0x54 */
+    u16 modInfoAttribute; /* 0x58 */
+    u16 execAttribute; /* 0x5A */
 } SceLoadCoreExecFileInfo;
 /* "~SCE" wrapper header in front of a module (magic 0x4543537E, size at 4) */
 typedef struct {
     u32 magic; /* 0x0 */
     u32 size; /* 0x4 */
 } SceHeader;
+
+/* standard ELF32 structures (loadelf.c) */
+typedef struct {
+    u8 e_ident[16]; /* 0x0 */
+    u16 e_type; /* 0x10, 0xFFA0 = PRX */
+    u16 e_machine; /* 0x12 */
+    u32 e_version; /* 0x14 */
+    u32 e_entry; /* 0x18 */
+    u32 e_phoff; /* 0x1C */
+    u32 e_shoff; /* 0x20 */
+    u32 e_flags; /* 0x24 */
+    u16 e_ehsize; /* 0x28 */
+    u16 e_phentsize; /* 0x2A */
+    u16 e_phnum; /* 0x2C */
+    u16 e_shentsize; /* 0x2E */
+    u16 e_shnum; /* 0x30 */
+    u16 e_shstrndx; /* 0x32 */
+} Elf32_Ehdr;
+typedef struct {
+    u32 p_type; /* 0x0 */
+    u32 p_offset; /* 0x4 */
+    u32 p_vaddr; /* 0x8 */
+    u32 p_paddr; /* 0xC */
+    u32 p_filesz; /* 0x10 */
+    u32 p_memsz; /* 0x14 */
+    u32 p_flags; /* 0x18 */
+    u32 p_align; /* 0x1C */
+} Elf32_Phdr;
+typedef struct {
+    u32 sh_name; /* 0x0 */
+    u32 sh_type; /* 0x4 */
+    u32 sh_flags; /* 0x8 */
+    u32 sh_addr; /* 0xC */
+    u32 sh_offset; /* 0x10 */
+    u32 sh_size; /* 0x14 */
+    u32 sh_link; /* 0x18 */
+    u32 sh_info; /* 0x1C */
+    u32 sh_addralign; /* 0x20 */
+    u32 sh_entsize; /* 0x24 */
+} Elf32_Shdr;
+typedef struct {
+    u32 r_offset; /* 0x0 */
+    u32 r_info; /* 0x4 */
+} Elf32_Rel;
 
 /* 1.00: 8 bytes (no d_userfd_count yet). */
 struct SceIoDeviceEntry {
