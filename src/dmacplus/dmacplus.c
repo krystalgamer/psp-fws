@@ -249,7 +249,7 @@ INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAvcInit);
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAvcEnd);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAvcQuerySuspend);
 #endif
 
@@ -346,7 +346,7 @@ s32 sceDmacplusSc2MeInit(void) {
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusSc2MeEnd);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusSc2MeQuerySuspend);
 #endif
 
@@ -372,6 +372,10 @@ s32 sceDmacplusSc2MeQuerySuspend(void) {
 s32 sceDmacplusSc2MeSuspend(void) {
     return 0;
 }
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusSc2MeResume);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -441,6 +445,10 @@ s32 sceDmacplusMe2ScInit(void) {
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusMe2ScEnd);
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusMe2ScQuerySuspend);
+#endif
+
 #if FW_VERSION == 150
 s32 sceDmacplusMe2ScQuerySuspend(void) {
     return (D_00003FEC == 0) - 1;
@@ -476,6 +484,10 @@ s32 sceDmacplusMe2ScQuerySuspend(void) {
 s32 sceDmacplusMe2ScSuspend(void) {
     return 0;
 }
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusMe2ScResume);
 #endif
 
 #if FW_VERSION == 100

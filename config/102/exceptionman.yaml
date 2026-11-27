@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/exceptionman
-  src_path: tmp/av_src/102/exceptionman
+  src_path: src/exceptionman
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/exceptionman.ld
   cache_path: tmp/build/102/.splat_cache.exceptionman
