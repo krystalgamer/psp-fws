@@ -4,8 +4,8 @@
 #if FW_VERSION < 270 || FW_VERSION == 282
 void func_000E4304(M2C_UNK **arg0) {
     *arg0 = &D_0019A4A0;
-    scePaf_715E8DAB((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf8PhWidgetD2Ev((s32) arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -26,7 +26,7 @@ void func_000E4368(struct Unk_func_000E4368_0 *arg0) {
     func_000CEE18(arg0->unk1E8->unk20);
 }
 
-void scePaf_6E1B5B50(struct Unk_scePaf_6E1B5B50_0 *arg0) {
+void _ZN3paf11PhLabelText14ReleaseSurfaceEv(struct Unk_scePaf_6E1B5B50_0 *arg0) {
     func_000D0648(arg0->unk1E8->unk20);
 }
 
@@ -36,17 +36,17 @@ void func_000E43A8(struct Unk_func_000E43A8_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E43C8);
 
-void scePaf_BFFAEE83(struct Unk_scePaf_BFFAEE83_0 *arg0) {
-    scePaf_14CE7F6F(arg0->unk1E8->unk20);
+void _ZN3paf11PhLabelText15SetColumnOffsetEf(struct Unk_scePaf_BFFAEE83_0 *arg0) {
+    _ZN3paf7PhSText15SetColumnOffsetEf(arg0->unk1E8->unk20);
 }
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_9AFD4AD4);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZNK3paf11PhLabelText12GetTextWidthEv);
 
 void func_000E4408(struct Unk_func_000E4408_0 *arg0) {
     func_000D0E94(arg0->unk1E8->unk20);
 }
 
-void scePaf_7116224C(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
+void _ZN3paf11PhLabelText21SetPrivateSurfacePoolEPNS_11SurfacePoolE(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
     arg0->unk1E8->unk20->unk194 = arg1;
 }
 
@@ -60,7 +60,7 @@ s32 func_000E445C(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A47D0 != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }
@@ -82,7 +82,7 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A628);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_D2E0D705);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf11PhLabelTextC1EPNS_8PhWidgetEPNS_8PhAppearE);
 #endif
 
 #if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 282)
@@ -92,14 +92,14 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A838);
 #if FW_VERSION >= 151 && FW_VERSION < 200
 void func_0008A838(s32 **arg0) {
     *arg0 = &D_0012EA98;
-    scePaf_715E8DAB((s32) arg0);
+    _ZN3paf8PhWidgetD2Ev((s32) arg0);
 }
 #endif
 
 #if FW_VERSION == 100
 void func_0008A838(M2C_UNK **arg0) {
     *arg0 = &D_0012EA98;
-    scePaf_715E8DAB((s32) arg0);
+    _ZN3paf8PhWidgetD2Ev((s32) arg0);
 }
 #endif
 
@@ -110,16 +110,16 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A860);
 #if FW_VERSION >= 151 && FW_VERSION < 200
 void func_0008A860(s32 **arg0) {
     *arg0 = &D_0012EA98;
-    scePaf_715E8DAB((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf8PhWidgetD2Ev((s32) arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
 #if FW_VERSION == 100
 void func_0008A860(M2C_UNK **arg0) {
     *arg0 = &D_0012EA98;
-    scePaf_715E8DAB((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf8PhWidgetD2Ev((s32) arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -150,11 +150,11 @@ void func_0008A8A8(void *arg0) {
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_6E1B5B50);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf11PhLabelText14ReleaseSurfaceEv);
 #endif
 
 #if FW_VERSION < 200
-void scePaf_6E1B5B50(struct Unk_scePaf_6E1B5B50_0 *arg0) {
+void _ZN3paf11PhLabelText14ReleaseSurfaceEv(struct Unk_scePaf_6E1B5B50_0 *arg0) {
     func_000D0648(M2C_FIELD(arg0->unk1E8, s32 *, 0x1C));
 }
 #endif
@@ -168,17 +168,17 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A8E8);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_BFFAEE83);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf11PhLabelText15SetColumnOffsetEf);
 #endif
 
 #if FW_VERSION < 200
-void scePaf_BFFAEE83(struct Unk_scePaf_BFFAEE83_0 *arg0) {
-    scePaf_14CE7F6F(M2C_FIELD(arg0->unk1E8, s32 *, 0x1C));
+void _ZN3paf11PhLabelText15SetColumnOffsetEf(struct Unk_scePaf_BFFAEE83_0 *arg0) {
+    _ZN3paf7PhSText15SetColumnOffsetEf(M2C_FIELD(arg0->unk1E8, s32 *, 0x1C));
 }
 #endif
 
 #if FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_9AFD4AD4);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZNK3paf11PhLabelText12GetTextWidthEv);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 280
@@ -192,11 +192,11 @@ void func_0008CBA4(void *arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_7116224C);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf11PhLabelText21SetPrivateSurfacePoolEPNS_11SurfacePoolE);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void scePaf_7116224C(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
+void _ZN3paf11PhLabelText21SetPrivateSurfacePoolEPNS_11SurfacePoolE(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
     M2C_FIELD(M2C_FIELD(arg0->unk1E8, void **, 0x1C), s32 *, 0x194) = arg1;
 }
 #endif
@@ -214,19 +214,19 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E408C);
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A8A8);
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_6E1B5B50);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf11PhLabelText14ReleaseSurfaceEv);
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E40DC);
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E40FC);
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_BFFAEE83);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf11PhLabelText15SetColumnOffsetEf);
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_9AFD4AD4);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZNK3paf11PhLabelText12GetTextWidthEv);
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008CBA4);
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_7116224C);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf11PhLabelText21SetPrivateSurfacePoolEPNS_11SurfacePoolE);
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E416C);
 #endif
@@ -241,7 +241,7 @@ s32 func_0008A944(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_00138A54 != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }
@@ -396,13 +396,13 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E4C40);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_CD3A094C);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList22HandleFocusSwitchEventEPNS_7PhEventE);
 #endif
 
 #if FW_VERSION < 250 || FW_VERSION == 282
 s32 func_000E4F0C(struct Unk_func_000E4F0C_0 *arg0, struct Unk_func_000E4F0C_1 *arg1) {
     if (((u32) (arg1->unk8 - 1) >= 2U) || (arg0->unk331 != 0)) {
-        scePaf_360956CC(arg0, arg1);
+        _ZN3paf8PhWidget22HandleFocusSwitchEventEPNS_7PhEventE(arg0, arg1);
     }
     arg0->unk331 = 0U;
     return 0;
@@ -420,7 +420,7 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E4E08);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_75F11CEB);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList11RemoveChildEPKNS_8PhWidgetE);
 #endif
 
 #if FW_VERSION < 200
@@ -448,7 +448,7 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E50C4);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_201F42F6);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList8DrawThisEv);
 #endif
 
 #if FW_VERSION == 282
@@ -474,9 +474,9 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E52D8);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_F06D84E9);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList8GetStyleEiRi);
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_86D5A2F6);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList8GetStyleEiRf);
 #endif
 
 #if FW_VERSION < 250
@@ -531,9 +531,9 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E6130);
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E67A0);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_A76B9604);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList12SetShowStateEii);
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_5075C799);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList12GetShowStateEi);
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E63C0);
@@ -550,19 +550,19 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E6E18);
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E700C);
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_A72594EF);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList10SetItemNumEi);
 #endif
 
 #if FW_VERSION < 200 || FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_7B6F0E32);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList12PushBackItemEi);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_A72594EF);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList10SetItemNumEi);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_7B6F0E32);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList12PushBackItemEi);
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E0FB0);
 #endif
@@ -576,25 +576,25 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E7374);
 #endif
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_F88ABAE1);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList18PushBackLabelImageEi);
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_522A877E);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList19PushBackLabelShadowEi);
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_BEF0151C);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList12PopBackLabelEi);
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E7C18);
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_E1C76B22);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList15SetShadowRenderEPNS_9PhSRenderE);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_44EB8C62);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList6RedrawEv);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void scePaf_44EB8C62(struct Unk_scePaf_44EB8C62_0 *arg0) {
+void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
     s32 temp_a1;
     s32 var_s0;
 
@@ -612,7 +612,7 @@ void scePaf_44EB8C62(struct Unk_scePaf_44EB8C62_0 *arg0) {
 #endif
 
 #if FW_VERSION == 100
-void scePaf_44EB8C62(struct Unk_scePaf_44EB8C62_0 *arg0) {
+void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
     s32 temp_a1;
     s32 var_s0;
 
@@ -634,7 +634,7 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E7C00);
 #endif
 
 #if FW_VERSION == 282
-void scePaf_44EB8C62(struct Unk_scePaf_44EB8C62_0 *arg0) {
+void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
     s32 temp_a1;
     s32 var_s0;
 
@@ -802,7 +802,7 @@ s32 func_000E90A0(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A47D4 != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }
@@ -825,13 +825,13 @@ void func_000E9100(struct Unk_func_000E9100_0 *arg0, s32 arg1, s32 arg2) {
 
     var_a2 = arg2;
     if (var_a2 == 0) {
-        temp_v0 = scePaf_B7E6052B(0x70);
+        temp_v0 = _Znwj(0x70);
         func_000FF148(temp_v0, arg0);
         var_a2 = temp_v0;
     }
-    scePaf_87516C3B(arg0, arg1, var_a2);
+    _ZN3paf8PhWidgetC2EPS0_PNS_8PhAppearE(arg0, arg1, var_a2);
     arg0->unk0 = &D_0019A7B8;
     arg0->unk14 = 0x100;
 }
 
-INCLUDE_ASM("nonmatchings/paf_0E4304", scePaf_4ADAEF94);
+INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf7PhMiconC1EPNS_8PhWidgetEPNS_8PhAppearE);

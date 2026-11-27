@@ -22,7 +22,7 @@ s32 sceLcdcEnd(void);
 s32 sceLcdcInit(void);
 s32 sceLcdcResume(void);
 s32 sceLcdcSuspend(void);
-s32 sceLcdc_driver_825DB9C5(void);
+s32 sceLcdcGetCyclesPerPixel(void);
 s32 sceSysregLcdcClkDisable(void);
 s32 sceSysregLcdcIoDisable(void);
 M2C_UNK sceSysregLcdcIoEnable();

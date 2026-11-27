@@ -7,7 +7,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_0230EC", func_000230EC);
 #else
 s32 func_000230EC(struct Unk_func_000230EC_0 *arg0) {
     if (arg0->unk24 == 0) {
-        arg0->unk24 = scePaf_F13EBB78(D_00055600);
+        arg0->unk24 = _Znaj(D_00055600);
     }
     func_00023138((s32) arg0, 0);
     return arg0->unk24;
@@ -108,7 +108,7 @@ void func_00023864(struct Unk_func_00023864_0 *arg0, s32 arg1) {
     arg0->unk10 = 0;
     arg0->unk14 = 0;
     arg0->unkC = 0;
-    temp_v0 = scePaf_F13EBB78(arg1);
+    temp_v0 = _Znaj(arg1);
     arg0->unk4 = temp_v0;
     if (temp_v0 != 0) {
         arg0->unk8 = arg1;

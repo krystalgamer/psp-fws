@@ -117,7 +117,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00024EC8);
 void func_00024EC8(M2C_UNK **arg0) {
     *arg0 = &D_0005A900;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -247,7 +247,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002596C);
 void func_0002596C(M2C_UNK **arg0) {
     *arg0 = &D_0005AA70;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -334,7 +334,7 @@ void func_00020934(void) {
         if (temp_v0 != NULL) {
             M2C_FIELD(temp_v0, s8 *, 0x1FD) = 1;
             M2C_FIELD(temp_v0, s8 *, 0x1FE) = 1;
-            scePaf_86B41BA3(temp_v0);
+            _ZN3paf8PhWidget13UpdateCamerasEv(temp_v0);
         }
     }
 }
@@ -359,7 +359,7 @@ void func_0002097C(void) {
                 } else {
                     M2C_FIELD(temp_v1_2, u8 *, 0x1FD) = 0U;
                     M2C_FIELD(temp_v1_2, s8 *, 0x1FE) = 0;
-                    scePaf_86B41BA3(temp_v1_2);
+                    _ZN3paf8PhWidget13UpdateCamerasEv(temp_v1_2);
                 }
             }
         }
@@ -413,7 +413,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00026F24_v351);
 void func_00025E10(M2C_UNK **arg0) {
     *arg0 = &D_0005AB30;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -468,7 +468,7 @@ void func_00026338(void) {
         if (temp_v0 != NULL) {
             temp_v0->unk1FD = 1;
             temp_v0->unk1FE = 1;
-            scePaf_86B41BA3(temp_v0);
+            _ZN3paf8PhWidget13UpdateCamerasEv(temp_v0);
         }
     }
 }
@@ -502,7 +502,7 @@ s32 func_00026380(void) {
                 } else {
                     temp_v1_2->unk1FD = 0U;
                     temp_v1_2->unk1FE = 0;
-                    var_v0 = scePaf_86B41BA3(temp_v1_2);
+                    var_v0 = _ZN3paf8PhWidget13UpdateCamerasEv(temp_v1_2);
                 }
             }
         }
@@ -530,7 +530,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00026514);
 void func_00026514(M2C_UNK **arg0) {
     *arg0 = &D_0005ABB0;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -677,7 +677,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00026EEC);
 void func_00026EEC(M2C_UNK **arg0) {
     *arg0 = &D_0005B8C0;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1447,9 +1447,9 @@ void func_0002B048(struct Unk_func_0002B048_0 *arg0) {
 
     temp_v0 = arg0->unk4;
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_DAB59652(temp_v0, &D_0005B578);
+        temp_v0_2 = _ZNK3paf4View8PageRootEPKc(temp_v0, &D_0005B578);
         if (temp_v0_2 != 0) {
-            scePaf_EAA5AFF6(temp_v0_2, 0x3E8);
+            _ZN3paf9PhHandler11KillTimerCBEi(temp_v0_2, 0x3E8);
         }
     }
     func_0002D230(arg0);
@@ -1600,7 +1600,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002B2B0);
 void func_0002B2B0(M2C_UNK **arg0) {
     *arg0 = &D_0005B608;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1818,7 +1818,7 @@ void func_0002CBA0(M2C_UNK **arg0) {
 void func_0002CBC8(M2C_UNK **arg0) {
     *arg0 = &D_0005B810;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1890,7 +1890,7 @@ s32 func_0002D1D8(struct Unk_func_0002D1D8_0 *arg0) {
 
         } else {
             arg0->unk10 = 0;
-            scePaf_D05C226F(temp_a0, temp_v0);
+            _ZN3paf4View9PageCloseEPv(temp_a0, temp_v0);
         }
     }
     return 0;
@@ -1913,7 +1913,7 @@ void func_0002D230(struct Unk_func_0002B048_0 *arg0) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_1811AD32(temp_v1, temp_v0, 0, 0);
+            _ZN3paf4View8PageOpenEPvii(temp_v1, temp_v0, 0, 0);
         }
     }
 }
@@ -1935,7 +1935,7 @@ void func_0002D278(void *arg0) {
 
         } else {
             M2C_FIELD(arg0, s32 *, 0x10) = 0;
-            scePaf_D05C226F(temp_a0, temp_v0);
+            _ZN3paf4View9PageCloseEPv(temp_a0, temp_v0);
         }
     }
 }
@@ -1956,7 +1956,7 @@ void func_0002D330(struct Unk_func_0002D330_0 *arg0) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_5EBC648F(temp_v1, temp_v0);
+            _ZN3paf4View12PageActivateEPv(temp_v1, temp_v0);
         }
     }
 }
@@ -2166,7 +2166,7 @@ void func_0002DFDC(M2C_UNK **arg0) {
 void func_0002E004(M2C_UNK **arg0) {
     *arg0 = &D_0005B8C0;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 s32 func_0002E03C(void) {
@@ -2250,7 +2250,7 @@ void func_0002E858(struct Unk_func_0002E858_0 *arg0, M2C_UNK arg1) {
 
     temp_v0 = arg0->unk14;
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
     }
     arg0->unk14 = func_0002E0F4(arg1);
 }
@@ -2266,7 +2266,7 @@ void func_0002E8AC(struct Unk_func_0002E8AC_0 *arg0, s32 arg1) {
 
     temp_v0 = arg0->unk18;
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
     }
     arg0->unk18 = func_0002E0F4(arg1);
 }
@@ -2282,7 +2282,7 @@ void func_0002E900(struct Unk_func_0002E900_0 *arg0, s32 arg1) {
 
     temp_v0 = arg0->unk1C;
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
     }
     arg0->unk1C = func_0002E0F4(arg1);
 }
@@ -2298,7 +2298,7 @@ void func_0002E954(struct Unk_func_0002E954_0 *arg0, s32 arg1) {
 
     temp_v0 = arg0->unk20;
     if (temp_v0 != 0) {
-        scePaf_B3D2C3BB(temp_v0);
+        _ZdaPv(temp_v0);
     }
     arg0->unk20 = func_0002E0F4(arg1);
 }
@@ -2678,12 +2678,12 @@ void func_00033BDC(s32 arg0, s32 arg1) {
                         func_0002D0DC((void *) temp_s0);
                     }
                 } else {
-                    sceVshCommonGui_80271F41();
+                    _ZN3vsh12BusyIcon_IncEv();
                     InputDevice_PspPad_Lock();
                     temp_s0_2 = D_0005F8E8;
                     if ((temp_s0_2 == NULL) || (temp_v0_2 = Job_Start(0, &func_00033D08, 0, -1, -1, (s32 *) func_00033DB4), temp_s0_2->unkC = temp_v0_2, (temp_v0_2 == 0))) {
                         InputDevice_PspPad_Unlock();
-                        sceVshCommonGui_1CF884A1();
+                        _ZN3vsh12BusyIcon_DecEv();
                     }
                 }
             }
@@ -2706,7 +2706,7 @@ void func_00033DB4(s32 arg0) {
         D_0005F8E8->unkC = 0;
     }
     InputDevice_PspPad_Unlock();
-    sceVshCommonGui_1CF884A1();
+    _ZN3vsh12BusyIcon_DecEv();
     if (arg0 != 0) {
 
     } else {
@@ -2813,7 +2813,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00034A00);
 void func_00034A00(struct Unk_func_00034A00_0 *arg0) {
     arg0->unk0 = &D_0005BD70;
     sceKernelDeleteSema(arg0->unk24);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -3041,7 +3041,7 @@ void func_00026AFC(s32 arg0) {
             if (arg0 != 0) {
 
             } else {
-                sceVshCommonGui_80271F41();
+                _ZN3vsh12BusyIcon_IncEv();
                 InputDevice_PspPad_Lock();
                 temp_v0 = Job_Start(0, &func_00026B84, 0, -1, -1, &func_00026C30);
                 if (D_000490C8 != NULL) {

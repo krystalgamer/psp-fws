@@ -25,8 +25,8 @@ extern s32 D_00006630;
 extern s32 D_00006634;
 extern s32 D_00006638;
 
-s32 IoFileMgrForKernel_BD17474F(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0);
-M2C_UNK SysMemForKernel_CE05CCB7();
+s32 sceIoGetIobUserLevel(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0);
+M2C_UNK sceKernelCallUIDObjCommonFunction();
 s32 fdgets(s32, s32);
 s32 fdputc(s32, s32);
 s32 func_00000000(void);

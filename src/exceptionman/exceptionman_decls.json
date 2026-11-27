@@ -11,7 +11,7 @@
   "sceKernelGetActiveDefaultExceptionHandler": "s32 sceKernelGetActiveDefaultExceptionHandler(void);",
   "sceKernelRegisterExceptionHandler": "void sceKernelRegisterExceptionHandler(s32 arg0, s32 arg1);",
   "sceKernelRegisterPriorityExceptionHandler": "s32 sceKernelRegisterPriorityExceptionHandler(s32, s32, s32);",
-  "syslib_D3744BE0": "M2C_UNK syslib_D3744BE0();"
+  "module_bootstart": "M2C_UNK module_bootstart();"
  },
  "vars": {
   "D_00002400": "extern s32 D_00002400;",

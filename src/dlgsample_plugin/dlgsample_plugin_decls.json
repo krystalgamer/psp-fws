@@ -9,13 +9,13 @@
   "func_000002C4": "s32 func_000002C4(s32);",
   "func_0000034C": "M2C_UNK func_0000034C();",
   "module_stop": "s32 module_stop(void);",
-  "scePaf_3481F595": "M2C_UNK scePaf_3481F595(s32, M2C_UNK *);",
-  "scePaf_97FDA760": "s32 scePaf_97FDA760(s32, s32, void *);",
-  "scePaf_CAF05F1D": "M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);",
-  "scePaf_F609FA81": "M2C_UNK scePaf_F609FA81(s32, M2C_UNK *, M2C_UNK, M2C_UNK);",
-  "sceVshCommonGui_441D55D7": "M2C_UNK sceVshCommonGui_441D55D7(M2C_UNK);",
-  "sceVshCommonGui_54BC644C": "M2C_UNK sceVshCommonGui_54BC644C(void *, s32);",
-  "sceVshCommonGui_5C161337": "s32 sceVshCommonGui_5C161337(M2C_UNK);"
+  "_ZN3paf4View9PageCloseEPKc": "M2C_UNK _ZN3paf4View9PageCloseEPKc(s32, M2C_UNK *);",
+  "_ZN3paf6Module12SetInterfaceEiPv": "s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, void *);",
+  "_ZN3paf4View12PageActivateEPKc": "M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);",
+  "_ZN3paf4View8PageOpenEPKcii": "M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);",
+  "_ZN3vsh25ShowButtonNavigation_BackEb": "M2C_UNK _ZN3vsh25ShowButtonNavigation_BackEb(M2C_UNK);",
+  "_ZN3vsh30SetButtonNavigationString_BackEPKw": "M2C_UNK _ZN3vsh30SetButtonNavigationString_BackEPKw(void *, s32);",
+  "_ZN3vsh14GetString_BackE6Locale": "s32 _ZN3vsh14GetString_BackE6Locale(M2C_UNK);"
  },
  "types": {
   "hand_func_000002F4": "typedef void (*func_ptr)(void);"

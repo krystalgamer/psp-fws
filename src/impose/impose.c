@@ -701,7 +701,7 @@ s32 sceImposeEnd(void) {
     return 0;
 }
 
-s32 syslib_ADF12745(s32 arg0) {
+s32 module_reboot_phase(s32 arg0) {
     if (arg0 != 2) {
 
     } else {
@@ -721,7 +721,7 @@ s32 syslib_ADF12745(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 270
-s32 syslib_ADF12745(s32 arg0) {
+s32 module_reboot_phase(s32 arg0) {
     if (arg0 != 2) {
 
     } else {
@@ -771,7 +771,7 @@ s32 sceImposeEnd(void) {
 #endif
 
 #if FW_VERSION >= 350
-s32 syslib_ADF12745(s32 arg0) {
+s32 module_reboot_phase(s32 arg0) {
     s32 temp_a2;
 
     if (arg0 != 2) {
@@ -792,7 +792,7 @@ s32 syslib_ADF12745(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 330 && FW_VERSION < 350
-s32 syslib_ADF12745(s32 arg0) {
+s32 module_reboot_phase(s32 arg0) {
     s32 temp_a2;
 
     if (arg0 != 2) {
@@ -813,7 +813,7 @@ s32 syslib_ADF12745(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 330
-s32 syslib_ADF12745(s32 arg0) {
+s32 module_reboot_phase(s32 arg0) {
     s32 temp_a2;
 
     if (arg0 != 2) {
@@ -934,25 +934,25 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetUMDPopup);
 
 INCLUDE_ASM("nonmatchings/impose", sceImposeHomeButton);
 
-INCLUDE_ASM("nonmatchings/impose", sceImpose_driver_9DBCE0C4);
+INCLUDE_ASM("nonmatchings/impose", sceImposeSetSpecialButtonMode);
 #endif
 
 #if FW_VERSION >= 350
-s32 sceImpose_driver_7084E72C(void) {
+s32 sceImposeGetSpecialButtonMode(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x7C);
 }
 
-s32 sceImpose_9BA61B49(void) {
+s32 sceImposeReadSpecialButton(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x80);
 }
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-s32 sceImpose_driver_7084E72C(void) {
+s32 sceImposeGetSpecialButtonMode(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x78);
 }
 
-s32 sceImpose_9BA61B49(void) {
+s32 sceImposeReadSpecialButton(void) {
     return M2C_FIELD(D_0000F510, s32 *, 0x7C);
 }
 #endif
@@ -984,7 +984,7 @@ INCLUDE_ASM("nonmatchings/impose", module_start);
 #endif
 
 #if FW_VERSION == 282
-s32 syslib_ADF12745(s32 arg0) {
+s32 module_reboot_phase(s32 arg0) {
     if (arg0 != 2) {
 
     } else {

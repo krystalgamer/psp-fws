@@ -3,7 +3,7 @@
 
 void func_0011E928(M2C_UNK **arg0) {
     *arg0 = &D_0019D390;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 #if FW_VERSION >= 271 && FW_VERSION < 282
@@ -15,7 +15,7 @@ INCLUDE_ASM("nonmatchings/paf_11E928", func_0011D2A8_v270);
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_11E928", scePaf_93538664);
+INCLUDE_ASM("nonmatchings/paf_11E928", _ZN3paf11SurfacePoolC1EPviPKc);
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_0011D6F0);
 
@@ -39,7 +39,7 @@ INCLUDE_ASM("nonmatchings/paf_11E928", func_0011DB48);
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_0011DB84);
 
-INCLUDE_ASM("nonmatchings/paf_11E928", scePaf_2F3C4ED2);
+INCLUDE_ASM("nonmatchings/paf_11E928", _ZN3paf7Surface10SetFeatureENS0_7FeatureEb);
 #endif
 
 #if FW_VERSION < 260
@@ -83,11 +83,11 @@ INCLUDE_ASM("nonmatchings/paf_11E928", func_000C543C);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_11E928", scePaf_952CE8AF);
+INCLUDE_ASM("nonmatchings/paf_11E928", _ZN3paf7Surface11GetPageSizeEii9ImageMode10ImageOrder);
 #endif
 
 #if FW_VERSION < 200
-s32 scePaf_952CE8AF(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 _ZN3paf7Surface11GetPageSizeEii9ImageMode10ImageOrder(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_s0;
     s32 var_s2;
 
@@ -245,7 +245,7 @@ INCLUDE_ASM("nonmatchings/paf_11E928", func_000C6034);
 #if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C6134);
 
-s32 scePaf_08DD2D50(struct Unk_scePaf_08DD2D50_0 *arg0, s32 arg1) {
+s32 _ZNK3paf11SurfaceBase13PixelsToBytesEi(struct Unk_scePaf_08DD2D50_0 *arg0, s32 arg1) {
     return (s32) ((arg1 << arg0->unkC) + 7) >> 3;
 }
 #endif
@@ -299,7 +299,7 @@ void func_000C5508(void) {
 #if FW_VERSION < 270 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_11E928", func_0011E950);
 
-INCLUDE_ASM("nonmatchings/paf_11E928", scePaf_93538664);
+INCLUDE_ASM("nonmatchings/paf_11E928", _ZN3paf11SurfacePoolC1EPviPKc);
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_0011ED98);
 
@@ -339,7 +339,7 @@ void ***func_0011F188(void ***arg0, struct Unk_func_0011F188_1 *arg1, void **arg
     temp_a1 = temp_v1->unk0;
     *temp_s0 = temp_a1;
     M2C_FIELD(temp_v1->unk0, void ***, 4) = temp_s0;
-    scePaf_7EC15225(temp_v1, temp_a1);
+    sce_paf_private_free2(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 = (s32) (arg1->unk4 - 1);
     return arg0;
@@ -351,7 +351,7 @@ INCLUDE_ASM("nonmatchings/paf_11E928", func_0011F22C);
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/paf_11E928", scePaf_2F3C4ED2);
+INCLUDE_ASM("nonmatchings/paf_11E928", _ZN3paf7Surface10SetFeatureENS0_7FeatureEb);
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_0011F29C);
 
@@ -363,7 +363,7 @@ INCLUDE_ASM("nonmatchings/paf_11E928", func_0011F4EC);
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_0011F54C);
 
-INCLUDE_ASM("nonmatchings/paf_11E928", scePaf_952CE8AF);
+INCLUDE_ASM("nonmatchings/paf_11E928", _ZN3paf7Surface11GetPageSizeEii9ImageMode10ImageOrder);
 
 INCLUDE_ASM("nonmatchings/paf_11E928", func_0011F614);
 

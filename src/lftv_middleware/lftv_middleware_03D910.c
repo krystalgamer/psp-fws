@@ -13,7 +13,7 @@ s32 func_0003D910(s32 arg0, s32 *arg1) {
     var_v0 = 0x16;
     if (arg0 != 0) {
         temp_s0 = sce_paf_private_strlen() + 1;
-        temp_v0 = scePaf_F13EBB78(temp_s0);
+        temp_v0 = _Znaj(temp_s0);
         var_v0 = 0xC;
         if (temp_v0 != 0) {
             sce_paf_private_memcpy(temp_v0, arg0, temp_s0);
@@ -34,7 +34,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_0003D9AC);
 #else
 void func_0003D9AC(s32 arg0) {
     if (arg0 != 0) {
-        scePaf_B3D2C3BB();
+        _ZdaPv();
     }
 }
 #endif
@@ -260,7 +260,7 @@ void func_0003F1C0(s32 **arg0) {
     *arg0 = &D_00056890;
     func_0003E13C((s32) arg0);
     func_0003ED60(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1203,7 +1203,7 @@ s32 func_00045B4C(s32 arg0) {
     s32 temp_v0;
 
     temp_s0 = sce_paf_private_strlen() + 1;
-    temp_v0 = scePaf_F13EBB78(temp_s0);
+    temp_v0 = _Znaj(temp_s0);
     if (temp_v0 != 0) {
         sce_paf_private_memcpy(temp_v0, arg0, temp_s0);
     }
@@ -1235,11 +1235,11 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00046174);
 s32 func_00046174(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_F13EBB78(arg2);
+    temp_v0 = _Znaj(arg2);
     if (temp_v0 != 0) {
         sce_paf_private_memcpy(temp_v0, arg0, arg1);
         if (arg0 != 0) {
-            scePaf_B3D2C3BB(arg0);
+            _ZdaPv(arg0);
         }
     }
     return temp_v0;
@@ -1356,7 +1356,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_000467A8);
 void func_000467A8(s32 **arg0) {
     *arg0 = &D_00056D30;
     func_000486F4(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

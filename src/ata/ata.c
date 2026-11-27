@@ -78,11 +78,11 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaWaitBusBusy2);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaSelectDevice);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_1F05F48C);
+INCLUDE_ASM("nonmatchings/ata", sceAtaCheckXferReady);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaAccessDataPort);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_84E14690);
+INCLUDE_ASM("nonmatchings/ata", sceAtaCheckPacketCmdComplete);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaScanDevice);
 
@@ -141,13 +141,13 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaWaitBusBusyIE);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaAccessDataPortIE);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_BA09142A);
+INCLUDE_ASM("nonmatchings/ata", sceAtaCheckXferReadyIE);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_C7B02795);
+INCLUDE_ASM("nonmatchings/ata", sceAtaCheckPacketCmdCompleteIE);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_EFE3C7FA);
+INCLUDE_ASM("nonmatchings/ata", sceAtaAccessDataPortTS);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -204,11 +204,11 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaWaitBusBusyIE);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaAccessDataPortIE);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_BA09142A);
+INCLUDE_ASM("nonmatchings/ata", sceAtaCheckXferReadyIE);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_C7B02795);
+INCLUDE_ASM("nonmatchings/ata", sceAtaCheckPacketCmdCompleteIE);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_EFE3C7FA);
+INCLUDE_ASM("nonmatchings/ata", sceAtaAccessDataPortTS);
 
 s32 sceAtaGetIntrStateFlag(void) {
     return D_000046EC;
@@ -276,13 +276,13 @@ INCLUDE_ASM("nonmatchings/ata", func_000019F0);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaSetupAtaBlock);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_ACCEE63F);
+INCLUDE_ASM("nonmatchings/ata", sceAtaDoSoftResetBit);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaCheckDeviceReady);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaSetDeviceIntr);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_2AE26E08);
+INCLUDE_ASM("nonmatchings/ata", sceAtaSetDescriptorTableIntr);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaSetBusErrorIntr);
 
@@ -333,9 +333,9 @@ s32 sceAtaGetDriveStat(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_ACFF7CB5);
+INCLUDE_ASM("nonmatchings/ata", sceAtaIsReadableDriveStat);
 #else
-s32 sceAta_driver_ACFF7CB5(void) {
+s32 sceAtaIsReadableDriveStat(void) {
     s32 temp_v0;
     s32 var_v0;
 
@@ -462,9 +462,9 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetPioCtl);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetPioTiming);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_D6BF0B85);
+INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetMDMATiming);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_322460B6);
+INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetAHBCtl);
 #endif
 
 #if FW_VERSION >= 282
@@ -619,7 +619,7 @@ INCLUDE_ASM("nonmatchings/ata", func_0000229C);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/ata", sceAtaBufferSelectSemaphore);
 
-s32 sceAta_driver_AC84FF0A(void) {
+s32 sceAtaAhbSetUDMATiming(void) {
     return 0x80211004;
 }
 #endif
@@ -637,9 +637,9 @@ INCLUDE_ASM("nonmatchings/ata", func_0000233C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_B985F2B0);
+INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetDDRSize);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_8CADA96B);
+INCLUDE_ASM("nonmatchings/ata", sceAtaAhbGetDDRSize);
 #endif
 
 #if FW_VERSION >= 282
@@ -662,7 +662,7 @@ INCLUDE_ASM("nonmatchings/ata", func_00001F14);
 INCLUDE_ASM("nonmatchings/ata", func_00001F5C);
 #endif
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_0B53CAD8);
+INCLUDE_ASM("nonmatchings/ata", sceAtaGetByteLimitCount);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaExecSetFeaturesCmd);
 
@@ -737,7 +737,7 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaExecDeviceResetCmd);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaExecPSPResetCmd);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_9CA52F94);
+INCLUDE_ASM("nonmatchings/ata", sceAtaExecIPDCmd);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaExecIdleStandbyCmd);
 
@@ -827,7 +827,7 @@ INCLUDE_ASM("nonmatchings/ata", func_000030F8);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_FC7B031E);
+INCLUDE_ASM("nonmatchings/ata", sceAtaExecPacketCmdTS);
 
 INCLUDE_ASM("nonmatchings/ata", func_0000349C);
 #endif
@@ -845,7 +845,7 @@ INCLUDE_ASM("nonmatchings/ata", func_00002FAC);
 
 INCLUDE_ASM("nonmatchings/ata", func_00003194);
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_FC7B031E);
+INCLUDE_ASM("nonmatchings/ata", sceAtaExecPacketCmdTS);
 
 INCLUDE_ASM("nonmatchings/ata", func_00003410);
 #endif
@@ -943,11 +943,11 @@ s32 func_0000371C(void) {
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_BE07B3A7);
 
 #if FW_VERSION < 282
-void sceAta_driver_6FD8E2AB(void) {
+void sceAtaDisplayReqSense(void) {
 
 }
 #else
-void sceAta_driver_6FD8E2AB(void) {
+void sceAtaDisplayReqSense(void) {
 }
 #endif
 

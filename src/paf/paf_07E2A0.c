@@ -27,7 +27,7 @@ void func_0007E3A8(struct Unk_func_0007E3A8_0 *arg0) {
 
     temp_s0 = arg0->unk15C;
     if (temp_s0 != NULL) {
-        if (scePaf_8F12B63A((u8 *)temp_s0 + 0x250) != 0) {
+        if (sce_paf_private_setjmp((u8 *)temp_s0 + 0x250) != 0) {
 
         } else {
             jpeg_destroy((s32) temp_s0);

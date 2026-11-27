@@ -297,7 +297,7 @@ s32 func_000012C0(void) {
 
     var_v1 = -1;
     if (D_00003410 != 0) {
-        sceVshCommonGui_72E652AA(D_00003410);
+        _ZN3vsh13MessageDialog10HideDeleteEv(D_00003410);
         D_00003410 = 0;
         var_v1 = 0;
     }
@@ -352,17 +352,17 @@ void func_0000186C(void) {
     s32 temp_v0_3;
     struct Unk_func_0000186C_temp_v0_2 *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_000031AC);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_000031AC);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             temp_v0_2->unk70();
         }
     }
-    temp_v0_3 = scePaf_D4FAE7D0(&D_0000329C);
+    temp_v0_3 = _ZN3paf4View4FindEPKc(&D_0000329C);
     if (temp_v0_3 != 0) {
         D_000033F9 = 1;
-        scePaf_1A45C860(temp_v0_3, &func_000018E0);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE(temp_v0_3, &func_000018E0);
     }
 }
 #endif
@@ -591,9 +591,9 @@ s32 func_000031CC(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0("netconf_plugin");
+    temp_v0 = _ZN3paf4View4FindEPKc("netconf_plugin");
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             func_000030E8(0x04000000, -1);
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(), 4)();
@@ -627,9 +627,9 @@ s32 func_0000323C(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0("osk");
+    temp_v0 = _ZN3paf4View4FindEPKc("osk");
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             func_000030E8(0x400000, -1);
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(), 4)();

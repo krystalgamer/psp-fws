@@ -7,9 +7,9 @@ INCLUDE_ASM("nonmatchings/libasfparser", sceAsfInitParser);
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfSeekTime);
 
 #if FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_C6D98C54);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfGetStreamObjectInfo);
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_685E0DA7);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfGetNonStreamObjectInfo);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
@@ -35,7 +35,7 @@ s32 func_00000214(s32 arg0, s32 arg1, void **arg2) {
 #endif
 
 #if FW_VERSION == 250
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_49E09367);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfGetVariableObjectInfo);
 #endif
 
 #if FW_VERSION >= 282
@@ -109,7 +109,7 @@ INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_24DB62B1);
 
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_320202AB);
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_6DA63281);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfReadUChar8);
 
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfReadData);
 
@@ -141,22 +141,22 @@ INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_F4502CB5);
 
 INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_002052FF);
 
-void sceAsfParser_385E1320(s32 arg0, s32 arg1, s32 arg2) {
+void sceAsfGetAudioStreamInfo(s32 arg0, s32 arg1, s32 arg2) {
     void *sp0;
     if (func_000001E0(arg0, arg1, &sp0) >= 0) {
         func_000033E4(sp0, arg2);
     }
 }
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_EFC704C3);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfGetHeaderExtension);
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_D2DD1778);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfGetContentDescription);
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_F5F356F6);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfGetExtContentDescription);
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_AA881A7B);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfGetExtContent);
 
-INCLUDE_ASM("nonmatchings/libasfparser", sceAsfParser_5EC678CB);
+INCLUDE_ASM("nonmatchings/libasfparser", sceAsfGetVariableObject);
 
 INCLUDE_ASM("nonmatchings/libasfparser", func_00000474);
 #endif

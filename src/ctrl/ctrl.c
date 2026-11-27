@@ -178,11 +178,11 @@ s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_348D99D4);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSuspendingExtraSamples);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 sceCtrl_driver_348D99D4(u32 arg0) {
+s32 sceCtrlSetSuspendingExtraSamples(u32 arg0) {
     s32 var_v1;
 
     var_v1 = 0x800001FE;
@@ -195,7 +195,7 @@ s32 sceCtrl_driver_348D99D4(u32 arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 sceCtrl_driver_AF5960F3(void) {
+s32 sceCtrlGetSuspendingExtraSamples(void) {
     return (s32) D_00001BFC;
 }
 #endif
@@ -262,14 +262,14 @@ s32 sceCtrlSetPollingMode(s8 arg0) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_348D99D4);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSuspendingExtraSamples);
 
-s32 sceCtrl_driver_AF5960F3(void) {
+s32 sceCtrlGetSuspendingExtraSamples(void) {
     return D_00001D88;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrl_driver_5C56C779);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSpecialButtonCallback);
 
 #if FW_VERSION >= 350
 s32 sceCtrl_driver_CC70B61E(void) {

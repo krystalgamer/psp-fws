@@ -4,7 +4,7 @@
 #if FW_VERSION == 282
 void func_000E960C(M2C_UNK **arg0) {
     *arg0 = &D_0019A890;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -42,7 +42,7 @@ s32 func_000E9660(void) {
 }
 #endif
 
-s32 scePaf_7C31F453(void) {
+s32 _ZN3paf10PhMenuList10WidgetTypeEv(void) {
     return D_001A47D8;
 }
 
@@ -89,7 +89,7 @@ INCLUDE_ASM("nonmatchings/paf_0E960C", func_000E93AC);
 #if FW_VERSION >= 250 && FW_VERSION < 280
 INCLUDE_RODATA("nonmatchings/paf_0E960C", D_00192CA8);
 
-INCLUDE_ASM("nonmatchings/paf_0E960C", scePaf_DDAF43EC);
+INCLUDE_ASM("nonmatchings/paf_0E960C", _ZN3paf10PhMenuListC2EPNS_8PhWidgetEPNS_8PhAppearE);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
@@ -109,7 +109,7 @@ INCLUDE_ASM("nonmatchings/paf_0E960C", func_0008E964);
 #endif
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_0E960C", scePaf_F60816FE);
+INCLUDE_ASM("nonmatchings/paf_0E960C", _ZN3paf10PhMenuListC1EPNS_8PhWidgetEPNS_8PhAppearE);
 #endif
 
 #if FW_VERSION == 280
@@ -117,5 +117,5 @@ INCLUDE_ASM("nonmatchings/paf_0E960C", func_000E979C);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E960C", scePaf_02F6DB7E);
+INCLUDE_ASM("nonmatchings/paf_0E960C", _ZN3paf10PhMenuListD2Ev);
 #endif

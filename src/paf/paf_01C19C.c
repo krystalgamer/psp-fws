@@ -3,11 +3,11 @@
 #include "paf_decls.h"
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_21A0C6E0);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _ZN11PSJSContext22SetHeapIsEmptyCallbackEPFvPvES0_);
 #endif
 
 #if FW_VERSION < 200
-void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
+void _ZN11PSJSContext22SetHeapIsEmptyCallbackEPFvPvES0_(void **arg0, s32 arg1, s32 arg2) {
     void *temp_a0;
 
     temp_a0 = *arg0;
@@ -19,13 +19,13 @@ void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_C1579C1D);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _ZN11PSJSContext17SetStdOutCallbackEPFvPKtiPvES2_);
 
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_ED2DF238);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _ZN11PSJSContext17SetStdErrCallbackEPFvPKtiPvES2_);
 #endif
 
 #if FW_VERSION == 282
-void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
+void _ZN11PSJSContext22SetHeapIsEmptyCallbackEPFvPvES0_(void **arg0, s32 arg1, s32 arg2) {
     struct Unk_scePaf_21A0C6E0_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
@@ -35,7 +35,7 @@ void scePaf_21A0C6E0(void **arg0, s32 arg1, s32 arg2) {
     }
 }
 
-void scePaf_C1579C1D(void **arg0, s32 arg1, s32 arg2) {
+void _ZN11PSJSContext17SetStdOutCallbackEPFvPKtiPvES2_(void **arg0, s32 arg1, s32 arg2) {
     struct Unk_scePaf_C1579C1D_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
@@ -45,7 +45,7 @@ void scePaf_C1579C1D(void **arg0, s32 arg1, s32 arg2) {
     }
 }
 
-void scePaf_ED2DF238(void **arg0, s32 arg1, s32 arg2) {
+void _ZN11PSJSContext17SetStdErrCallbackEPFvPKtiPvES2_(void **arg0, s32 arg1, s32 arg2) {
     struct Unk_scePaf_ED2DF238_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
@@ -57,11 +57,11 @@ void scePaf_ED2DF238(void **arg0, s32 arg1, s32 arg2) {
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_EB5BDCE1);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _ZN11PSJSContext22SetExecMonitorCallbackEjPFbbPvES0_);
 #endif
 
 #if FW_VERSION == 282
-void scePaf_EB5BDCE1(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
+void _ZN11PSJSContext22SetExecMonitorCallbackEjPFbbPvES0_(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct Unk_scePaf_EB5BDCE1_temp_a0 *temp_a0;
 
     temp_a0 = *arg0;
@@ -74,12 +74,12 @@ void scePaf_EB5BDCE1(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
 #endif
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_D9D3EEBA);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _ZN11PSJSContext12SetExceptionERK9PSJSValue);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_81FD71A9);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _Z26PSJS_BuildValueImpl_ObjectRK11PSJSContext);
 
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_17308FC9);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _Z25PSJS_BuildValueImpl_ArrayRK11PSJSContextiP9PSJSValue);
 
 INCLUDE_RODATA("nonmatchings/paf_01C19C", D_0016F5D8);
 
@@ -109,17 +109,17 @@ INCLUDE_RODATA("nonmatchings/paf_01C19C", D_0016F764);
 
 INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001C3F8);
 
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_F3967AF5);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _Z25PSJS_BuildValueImpl_ErrorRK11PSJSContext19PSJS_EXCEPTION_TYPEPKc);
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_E6134C53);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _Z30PSJS_BuildValueImpl_NativeFuncRK11PSJSContextPFbS1_R9PSJSValue12PSJSCallTypeiPS2_S5_Eh);
 #else
 INCLUDE_ASM("nonmatchings/paf_01C19C", func_0001BBB4);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_BBBF145C);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _Z31PSJS_BuildValue_TemporaryObjectRK11PSJSContext);
 
-INCLUDE_ASM("nonmatchings/paf_01C19C", scePaf_B52E43FB);
+INCLUDE_ASM("nonmatchings/paf_01C19C", _Z33PSJS_RecycleValue_TemporaryObjectRK11PSJSContextR9PSJSValue);
 
 M2C_UNK *func_0001C91C(void) {
     return &D_0016FE80;
@@ -133,15 +133,15 @@ M2C_UNK *func_0001C934(void) {
     return &D_001705A0;
 }
 
-M2C_UNK *scePaf_39B36025(void) {
+M2C_UNK *_Z20PSJS_ClassType_Arrayv(void) {
     return &D_00170F78;
 }
 
-M2C_UNK *scePaf_34C973B6(void) {
+M2C_UNK *_Z25PSJS_ClassType_NativeFuncv(void) {
     return &D_001702B8;
 }
 
-M2C_UNK *scePaf_4C8C2E25(void) {
+M2C_UNK *_Z25PSJS_ClassType_ScriptFuncv(void) {
     return &D_001704F0;
 }
 

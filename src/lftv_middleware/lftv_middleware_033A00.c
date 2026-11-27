@@ -250,7 +250,7 @@ s32 func_000343D0(void) {
 
     var_v0 = D_0005C5B8;
     if (var_v0 == 0) {
-        temp_v0 = scePaf_B7E6052B(0x10);
+        temp_v0 = _Znwj(0x10);
         var_v0 = func_000342B4(temp_v0);
         D_0005C5B8 = temp_v0;
     }

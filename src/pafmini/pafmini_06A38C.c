@@ -2,7 +2,7 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-s32 scePaf_79F4AE65(struct Unk_scePaf_79F4AE65_0 *arg0) {
+s32 _ZN3paf6PhText13SetCurrentPosEj(struct Unk_scePaf_79F4AE65_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -14,7 +14,7 @@ s32 scePaf_79F4AE65(struct Unk_scePaf_79F4AE65_0 *arg0) {
     return var_v1;
 }
 
-s32 scePaf_B6F52424(struct Unk_scePaf_B6F52424_0 *arg0) {
+s32 _ZN3paf6PhText8CharLeftEj(struct Unk_scePaf_B6F52424_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -26,7 +26,7 @@ s32 scePaf_B6F52424(struct Unk_scePaf_B6F52424_0 *arg0) {
     return var_v1;
 }
 
-s32 scePaf_BA6B8B02(struct Unk_scePaf_BA6B8B02_0 *arg0) {
+s32 _ZN3paf6PhText9CharRightEj(struct Unk_scePaf_BA6B8B02_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -38,7 +38,7 @@ s32 scePaf_BA6B8B02(struct Unk_scePaf_BA6B8B02_0 *arg0) {
     return var_v1;
 }
 
-s32 scePaf_4D810FDC(struct Unk_scePaf_4D810FDC_0 *arg0) {
+s32 _ZN3paf6PhText6LineUpEj(struct Unk_scePaf_4D810FDC_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -50,7 +50,7 @@ s32 scePaf_4D810FDC(struct Unk_scePaf_4D810FDC_0 *arg0) {
     return var_v1;
 }
 
-s32 scePaf_ABCBC1C5(struct Unk_scePaf_ABCBC1C5_0 *arg0) {
+s32 _ZN3paf6PhText8LineDownEj(struct Unk_scePaf_ABCBC1C5_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 

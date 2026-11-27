@@ -25,7 +25,7 @@ s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
 s32 sceKernelDeleteEventFlag(s32);
 s32 sceKernelDeleteSema(u32);
 M2C_UNK sceMePowerControlAvcPower(M2C_UNK);
-M2C_UNK sceMePower_driver_B6FE3E62(M2C_UNK);
+M2C_UNK sceMePowerControlDmacplusClock(M2C_UNK);
 void sceMpegBaseCscInit(s32 arg0);
 s32 sceMpegbase_driver_AC9E717E(s32, s32);
 

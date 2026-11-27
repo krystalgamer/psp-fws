@@ -14,8 +14,8 @@ s32 func_000075F4(void *arg0) {
     temp_v0 = func_000081FC();
     var_v0 = -1;
     if (temp_v0 != 0) {
-        scePaf_F609FA81(M2C_FIELD(arg0, s32 *, 4), temp_v0, 0, 0);
-        scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4), temp_v0);
+        _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), temp_v0, 0, 0);
+        _ZN3paf4View12PageActivateEPKc(M2C_FIELD(arg0, s32 *, 4), temp_v0);
         var_v0 = 0;
     }
     return var_v0;
@@ -46,8 +46,8 @@ s32 func_00008274(struct Unk_func_00008274_0 *arg0) {
     temp_v0 = func_000081FC();
     var_v0 = -1;
     if (temp_v0 != 0) {
-        scePaf_F609FA81(arg0->unk4, temp_v0, 0, 0);
-        scePaf_CAF05F1D(arg0->unk4, temp_v0);
+        _ZN3paf4View8PageOpenEPKcii(arg0->unk4, temp_v0, 0, 0);
+        _ZN3paf4View12PageActivateEPKc(arg0->unk4, temp_v0);
         var_v0 = 0;
     }
     return var_v0;
@@ -88,19 +88,19 @@ s32 func_00007808(void *arg0) {
 }
 
 void func_00007810(void *arg0, s32 arg1) {
-    scePaf_F609FA81(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
+    _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
 }
 
 void func_00007834(void *arg0, s32 arg1) {
-    scePaf_CAF05F1D(M2C_FIELD(arg0, s32 *, 4), arg1);
+    _ZN3paf4View12PageActivateEPKc(M2C_FIELD(arg0, s32 *, 4), arg1);
 }
 
 void func_00007850(void *arg0) {
-    scePaf_3481F595(M2C_FIELD(arg0, s32 *, 4));
+    _ZN3paf4View9PageCloseEPKc(M2C_FIELD(arg0, s32 *, 4));
 }
 
 void func_0000786C(void *arg0) {
-    scePaf_DAB59652(M2C_FIELD(arg0, s32 *, 4));
+    _ZNK3paf4View8PageRootEPKc(M2C_FIELD(arg0, s32 *, 4));
 }
 #else
 s32 func_00008458(struct Unk_func_00008458_0 *arg0) {
@@ -140,7 +140,7 @@ void func_00008490(struct Unk_func_00008490_0 *arg0, s32 arg1) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00008490(struct Unk_func_00008490_0 *arg0, s32 arg1) {
-    scePaf_F609FA81(arg0->unk4, arg1, 0, 0);
+    _ZN3paf4View8PageOpenEPKcii(arg0->unk4, arg1, 0, 0);
 }
 #endif
 
@@ -152,7 +152,7 @@ void func_000084B4(struct Unk_func_000084B4_0 *arg0, s32 arg1) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000084B4(struct Unk_func_000084B4_0 *arg0, s32 arg1) {
-    scePaf_CAF05F1D(arg0->unk4, arg1);
+    _ZN3paf4View12PageActivateEPKc(arg0->unk4, arg1);
 }
 #endif
 
@@ -164,7 +164,7 @@ void func_000084D0(struct Unk_func_000084D0_0 *arg0) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000084D0(struct Unk_func_000084D0_0 *arg0) {
-    scePaf_3481F595(arg0->unk4);
+    _ZN3paf4View9PageCloseEPKc(arg0->unk4);
 }
 #endif
 
@@ -176,7 +176,7 @@ void func_000084EC(struct Unk_func_000084EC_0 *arg0) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000084EC(struct Unk_func_000084EC_0 *arg0) {
-    scePaf_DAB59652(arg0->unk4);
+    _ZNK3paf4View8PageRootEPKc(arg0->unk4);
 }
 #endif
 

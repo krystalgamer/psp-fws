@@ -13,7 +13,7 @@ void func_0000CC38(struct Unk_func_0000CC38_0 *arg0) {
         arg0->unk18 = temp_v1;
         if (temp_v1 > 0) {
             do {
-                scePaf_66907719();
+                InputDevice_PspPad_Unlock();
                 temp_v0 = arg0->unk14 - 1;
                 arg0->unk14 = temp_v0;
             } while (temp_v0 > 0);
@@ -31,7 +31,7 @@ void func_0000CC8C(struct Unk_func_0000CC8C_0 *arg0) {
         arg0->unk14 = temp_v0;
         if (temp_v0 > 0) {
             do {
-                scePaf_6B1E90C7();
+                InputDevice_PspPad_Lock();
                 temp_v0_2 = arg0->unk18 - 1;
                 arg0->unk18 = temp_v0_2;
             } while (temp_v0_2 > 0);
@@ -70,9 +70,9 @@ INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D644);
 
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000D704);
 
-INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_72A0044D);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", _ZN3paf6ModuleC1EPKcS2_i);
 
-INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_4612DB4B);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", _ZN3paf6ModuleD1Ev);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_78219D10);
@@ -86,7 +86,7 @@ s32 scePaf_78219D10(s32 arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_97FDA760);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", _ZN3paf6Module12SetInterfaceEiPv);
 
 INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D19F4);
 
@@ -96,7 +96,7 @@ INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D1A0C);
 INCLUDE_RODATA("nonmatchings/pafmini_00CC38", D_000D1A24);
 #endif
 
-INCLUDE_ASM("nonmatchings/pafmini_00CC38", scePaf_298246CD);
+INCLUDE_ASM("nonmatchings/pafmini_00CC38", _ZNK3paf6Module12GetInterfaceEi);
 
 INCLUDE_ASM("nonmatchings/pafmini_00CC38", func_0000DC68);
 

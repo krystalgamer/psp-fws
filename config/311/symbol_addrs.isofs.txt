@@ -43,7 +43,7 @@ sceUmd9660_driver_2C6C3F4C = 0x000064EC; // type:func
 sceUmd9660_driver_44EF600C = 0x000064F4; // type:func
 sceUmd9660_driver_C7CD9CE8 = 0x000064FC; // type:func
 sceUmdManUnRegisterInsertEjectUMDCallBack = 0x00006504; // type:func
-sceUmdMan_driver_60933ECD = 0x0000650C; // type:func
+sceUmdManIsDvdDrive = 0x0000650C; // type:func
 sceUmdManRegisterInsertEjectUMDCallBack = 0x00006514; // type:func
 // shared names (tools/add_version.py) begin
 D_000060F8 = 0x000067FC; // rom:0x689C

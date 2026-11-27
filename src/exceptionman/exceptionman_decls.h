@@ -18,6 +18,6 @@ s32 func_00000B0C(s32 arg0);
 s32 sceKernelGetActiveDefaultExceptionHandler(void);
 void sceKernelRegisterExceptionHandler(s32 arg0, s32 arg1);
 s32 sceKernelRegisterPriorityExceptionHandler(s32, s32, s32);
-M2C_UNK syslib_D3744BE0();
+M2C_UNK module_bootstart();
 
 #endif

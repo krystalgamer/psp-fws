@@ -31,8 +31,8 @@ extern s32 D_00004ABC;
 extern s32 D_00004E7C;
 
 s32 InterruptManagerForKernel_53991063(void);
-void InterruptManagerForKernel_7A05D976(s32 arg0, s32 arg1);
-void InterruptManagerForKernel_7EF7500F(void);
+void RegisterSubIntrruptMonitor(s32 arg0, s32 arg1);
+void ReleaseSubIntrruptMonitor(void);
 s32 *QueryInterruptManCB(void);
 s32 QueryIntrHandlerInfo(void);
 void RegisterContextHooks(s32 arg0, s32 arg1);

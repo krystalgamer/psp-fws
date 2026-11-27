@@ -397,9 +397,9 @@ void sceVshCommonUtil_107EDCD9(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_B9578145);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh17AllocateCccBufferEjj);
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_29B75E11);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh19DeallocateCccBufferEv);
 
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_68EB85B4);
 #endif
@@ -417,27 +417,27 @@ INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_34AC94F9);
 
 INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_F67C5B26);
 #else
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_7A1C6D74);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh20FormatFileSizeStringEPwij);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_FC8E3CEF);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh23FormatFileSizeString_KBEPwij);
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_BFC546B6);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh17FormatFreeSize_KBEPwij);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_util", func_00000724);
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_FA969B6A);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh9PowerLockC1Ei);
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_D4D66154);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh9PowerLockD1Ev);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void sceVshCommonUtil_D4D66154(s32 *arg0) {
+void _ZN3vsh9PowerLockD1Ev(s32 *arg0) {
     if (!(*arg0 & 1)) {
 
     } else {
@@ -452,7 +452,7 @@ void sceVshCommonUtil_D4D66154(s32 *arg0) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-void sceVshCommonUtil_5A0B7762(s32 arg0, s32 arg1) {
+void _ZN3vsh9PowerLock10SetHandlerEPFiiES2_(s32 arg0, s32 arg1) {
     D_000080C0 = arg0;
     D_000080C4 = arg1;
 }
@@ -478,9 +478,9 @@ void sceVshCommonUtil_50B05438(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_FA969B6A);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh9PowerLockC1Ei);
 
-void sceVshCommonUtil_D4D66154(s32 *arg0) {
+void _ZN3vsh9PowerLockD1Ev(s32 *arg0) {
     if (!(*arg0 & 1)) {
 
     } else {
@@ -493,7 +493,7 @@ void sceVshCommonUtil_D4D66154(s32 *arg0) {
     }
 }
 
-void sceVshCommonUtil_5A0B7762(s32 arg0, s32 arg1) {
+void _ZN3vsh9PowerLock10SetHandlerEPFiiES2_(s32 arg0, s32 arg1) {
     D_00008BF0 = arg0;
     D_00008BF4 = arg1;
 }
@@ -522,13 +522,13 @@ INCLUDE_RODATA("nonmatchings/common_util", D_0000B99C);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_B296D591);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh9GetMsInfoEPjS0_S0_S0_);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/common_util", func_00001A44);
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_FA969B6A);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh9PowerLockC1Ei);
 #endif
 
 #if FW_VERSION == 100
@@ -536,7 +536,7 @@ void func_000012C0(void) {
     sceKernelPowerLock(0);
 }
 
-void sceVshCommonUtil_4DE8BDCB(void) {
+void _ZN3vsh9PowerLockC1Ev(void) {
     sceKernelPowerLock(0);
 }
 
@@ -546,7 +546,7 @@ void func_000012F8(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void sceVshCommonUtil_D4D66154(s32 *arg0) {
+void _ZN3vsh9PowerLockD1Ev(s32 *arg0) {
     if (!(*arg0 & 1)) {
 
     } else {
@@ -561,45 +561,45 @@ void sceVshCommonUtil_D4D66154(s32 *arg0) {
 #endif
 
 #if FW_VERSION == 100
-void sceVshCommonUtil_D4D66154(s32 *arg0) {
+void _ZN3vsh9PowerLockD1Ev(s32 *arg0) {
     sceKernelPowerUnlock(0);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void sceVshCommonUtil_5A0B7762(s32 arg0, s32 arg1) {
+void _ZN3vsh9PowerLock10SetHandlerEPFiiES2_(s32 arg0, s32 arg1) {
     D_0000E79C = arg0;
     D_0000E7A0 = arg1;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void sceVshCommonUtil_12F5429A(void) {
+void _ZN3vsh10RebootLock4InitEv(void) {
     D_0000E7A4 = 0;
     D_0000E7A8 = sceKernelCreateEventFlag("SceVshRebootLock", 0x200U, 3U, NULL);
 }
 
-void sceVshCommonUtil_0713D516(void) {
+void _ZN3vsh10RebootLock4ExitEv(void) {
     sceKernelDeleteEventFlag(D_0000E7A8);
 }
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_249059B5);
+INCLUDE_ASM("nonmatchings/common_util", RebootLock_Lock);
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_7683BE4D);
+INCLUDE_ASM("nonmatchings/common_util", RebootLock_Unlock);
 
-void sceVshCommonUtil_0AF412FC(void) {
-    sceVshCommonUtil_249059B5();
+void _ZN3vsh10RebootLockC1Ev(void) {
+    RebootLock_Lock();
 }
 
 void func_00001D08(void) {
-    sceVshCommonUtil_7683BE4D();
+    RebootLock_Unlock();
 }
 
-void sceVshCommonUtil_686AAA1A(void) {
-    sceVshCommonUtil_7683BE4D();
+void _ZN3vsh10RebootLockD1Ev(void) {
+    RebootLock_Unlock();
 }
 
-void sceVshCommonUtil_3FAF35EC(void) {
+void _ZN3vsh10RebootLock6RebootEv(void) {
     sceKernelClearEventFlag(D_0000E7A8, -3U);
     sceKernelWaitEventFlag(D_0000E7A8, 1U, 0, NULL, NULL);
 }
@@ -610,9 +610,9 @@ M2C_UNK *sceVshCommonUtil_B55DCA45(void) {
     return &D_0000DBFC;
 }
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_2B8B7775);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh16RebootSafeMemory8SetBlockENS0_5BlockEPvj);
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_741C9BE1);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh16RebootSafeMemory8GetBlockENS0_5BlockEPvj);
 #endif
 
 #if FW_VERSION < 282
@@ -653,21 +653,21 @@ void sceVshCommonUtil_9480072F(void) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void sceVshCommonUtil_12F5429A(void) {
+void _ZN3vsh10RebootLock4InitEv(void) {
     D_00008BF8 = 0;
     D_00008BFC = sceKernelCreateEventFlag("SceVshRebootLock", 0x200U, 3U, NULL);
 }
 
-void sceVshCommonUtil_0713D516(void) {
+void _ZN3vsh10RebootLock4ExitEv(void) {
     sceKernelDeleteEventFlag(D_00008BFC);
 }
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_249059B5);
+INCLUDE_ASM("nonmatchings/common_util", RebootLock_Lock);
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_7683BE4D);
+INCLUDE_ASM("nonmatchings/common_util", RebootLock_Unlock);
 
-void sceVshCommonUtil_0AF412FC(void) {
-    sceVshCommonUtil_249059B5();
+void _ZN3vsh10RebootLockC1Ev(void) {
+    RebootLock_Lock();
 }
 #endif
 
@@ -679,7 +679,7 @@ void func_00000978(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00000978(void) {
-    sceVshCommonUtil_7683BE4D();
+    RebootLock_Unlock();
 }
 #endif
 
@@ -695,11 +695,11 @@ void sceVshCommonUtil_A2A69900(void) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void sceVshCommonUtil_686AAA1A(void) {
-    sceVshCommonUtil_7683BE4D();
+void _ZN3vsh10RebootLockD1Ev(void) {
+    RebootLock_Unlock();
 }
 
-void sceVshCommonUtil_3FAF35EC(void) {
+void _ZN3vsh10RebootLock6RebootEv(void) {
     sceKernelClearEventFlag(D_00008BFC, -3U);
     sceKernelWaitEventFlag(D_00008BFC, 1U, 0, NULL, NULL);
 }
@@ -838,7 +838,7 @@ INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_394CBE00);
 #endif
 
 #if FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_B48D135B);
+INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh22SetDateTimeDisplayTypeEii);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 350
@@ -1082,7 +1082,7 @@ INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_22EEE769);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_024CEB82);
+INCLUDE_ASM("nonmatchings/common_util", sceSystemFileSaveToMemW);
 #endif
 
 #if FW_VERSION >= 282
@@ -1300,7 +1300,7 @@ INCLUDE_ASM("nonmatchings/common_util", func_000053A4);
 
 INCLUDE_ASM("nonmatchings/common_util", func_000054FC);
 
-INCLUDE_ASM("nonmatchings/common_util", sceVshCommonUtil_024CEB82);
+INCLUDE_ASM("nonmatchings/common_util", sceSystemFileSaveToMemW);
 
 INCLUDE_ASM("nonmatchings/common_util", func_00006148);
 

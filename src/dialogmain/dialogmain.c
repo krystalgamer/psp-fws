@@ -336,7 +336,7 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_00000E04);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 void func_00000F4C(void) {
-    sceVshCommonUtil_29B75E11();
+    _ZN3vsh19DeallocateCccBufferEv();
     func_00000E78();
     func_000004B4();
 }
@@ -368,7 +368,7 @@ void func_00000E6C(void) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00000E6C(void) {
-    sceVshCommonUtil_29B75E11();
+    _ZN3vsh19DeallocateCccBufferEv();
     func_00000DC4();
     func_000004C8();
 }
@@ -555,7 +555,7 @@ INCLUDE_ASM("nonmatchings/dialogmain", module_start);
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 module_stop(void) {
     func_000073DC();
-    sceVshCommonUtil_0713D516();
+    _ZN3vsh10RebootLock4ExitEv();
     return 0;
 }
 #endif
@@ -578,7 +578,7 @@ s32 module_stop(void) {
 #if FW_VERSION >= 282 && FW_VERSION < 350
 s32 module_stop(void) {
     func_00007940();
-    sceVshCommonUtil_0713D516();
+    _ZN3vsh10RebootLock4ExitEv();
     return 0;
 }
 #endif
@@ -592,7 +592,7 @@ s32 module_reboot_before(void) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 350
 s32 module_reboot_before(void) {
-    sceVshCommonUtil_3FAF35EC();
+    _ZN3vsh10RebootLock6RebootEv();
     return 0;
 }
 #endif
@@ -604,17 +604,17 @@ void func_00001888(void) {
     void **temp_v0;
     void **temp_v0_2;
 
-    temp_v0 = scePaf_4708AED4(D_00008944, &D_000088A8);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_00008944, &D_000088A8);
     if (temp_v0 != NULL) {
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 0x19, 3);
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 7, 0x10);
     }
-    temp_v0_2 = scePaf_4708AED4(D_00008944, &D_00008034);
+    temp_v0_2 = _ZNK3paf4View10FindWidgetEPKc(D_00008944, &D_00008034);
     if (temp_v0_2 != NULL) {
         M2C_FIELD(M2C_FIELD(temp_v0_2, void **, 0), M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0_2, 0x19, 9);
         M2C_FIELD(temp_v0_2, s8 *, 0x1FD) = 0;
         M2C_FIELD(temp_v0_2, s8 *, 0x1FE) = 0;
-        scePaf_86B41BA3(temp_v0_2);
+        _ZN3paf8PhWidget13UpdateCamerasEv(temp_v0_2);
     }
 }
 #endif
@@ -644,17 +644,17 @@ void func_00001950(void) {
     struct Unk_vt_func_00001950_temp_v0 **temp_v0;
     void **temp_v0_2;
 
-    temp_v0 = scePaf_4708AED4(D_0000A284, &D_00008858);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_0000A284, &D_00008858);
     if (temp_v0 != NULL) {
         (*temp_v0)->unk70(temp_v0, 0x19, 3);
         (*temp_v0)->unk70(temp_v0, 7, 0x10);
     }
-    temp_v0_2 = scePaf_4708AED4(D_0000A284, &D_00008870);
+    temp_v0_2 = _ZNK3paf4View10FindWidgetEPKc(D_0000A284, &D_00008870);
     if (temp_v0_2 != NULL) {
         M2C_FIELD(M2C_FIELD(temp_v0_2, void **, 0), M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0_2, 0x19, 9);
         M2C_FIELD(temp_v0_2, s8 *, 0x1FD) = 0;
         M2C_FIELD(temp_v0_2, s8 *, 0x1FE) = 0;
-        scePaf_86B41BA3(temp_v0_2);
+        _ZN3paf8PhWidget13UpdateCamerasEv(temp_v0_2);
     }
 }
 #endif
@@ -1230,8 +1230,8 @@ void func_00002744(void) {
             D_00009934 = ((s32 (*)(s32)) D_00009924)(D_00009930);
         }
         if (D_00009938 == 0) {
-            temp_v0 = scePaf_B7E6052B(0x1C);
-            scePaf_93538664(temp_v0, D_00009934, 0x81400, 0);
+            temp_v0 = _Znwj(0x1C);
+            _ZN3paf11SurfacePoolC1EPviPKc(temp_v0, D_00009934, 0x81400, 0);
             D_00009938 = temp_v0;
         }
     }
@@ -1403,8 +1403,8 @@ void func_00002808(void) {
             D_0000A2B8 = ((s32 (*)(s32)) D_0000A2A4)(D_0000A2B0);
         }
         if (D_0000A2BC == 0) {
-            temp_v0 = scePaf_B7E6052B(0x1C);
-            scePaf_93538664(temp_v0, D_0000A2B8, 0x84800, 0);
+            temp_v0 = _Znwj(0x1C);
+            _ZN3paf11SurfacePoolC1EPviPKc(temp_v0, D_0000A2B8, 0x84800, 0);
             D_0000A2BC = temp_v0;
         }
     }
@@ -1422,8 +1422,8 @@ void func_00002808(void) {
             D_0000A2B8 = ((s32 (*)(s32)) D_0000A2A4)(D_0000A2B0);
         }
         if (D_0000A2BC == 0) {
-            temp_v0 = scePaf_B7E6052B(0x1C);
-            scePaf_93538664(temp_v0, D_0000A2B8, 0x81400, 0);
+            temp_v0 = _Znwj(0x1C);
+            _ZN3paf11SurfacePoolC1EPviPKc(temp_v0, D_0000A2B8, 0x81400, 0);
             D_0000A2BC = temp_v0;
         }
     }
@@ -1480,28 +1480,28 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_00003150);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00003150(void *arg0) {
     if (arg0 != NULL) {
-        M2C_FIELD(arg0, s32 *, 0x94) = scePaf_D7215544(D_00009B80, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0x98) = scePaf_D7215544(D_00009B80, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0x9C) = scePaf_D7215544(D_00009B80, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xA0) = scePaf_D7215544(D_00009B80, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xA4) = scePaf_D7215544(D_00009B80, &D_00008D84);
-        M2C_FIELD(arg0, s32 *, 0xA8) = scePaf_D7215544(D_00009B80, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xAC) = scePaf_D7215544(D_00009B80, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xB0) = scePaf_D7215544(D_00009B80, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xB4) = scePaf_D7215544(D_00009B80, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xB8) = scePaf_D7215544(D_00009B80, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xBC) = scePaf_D7215544(D_00009B80, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xC0) = scePaf_D7215544(D_00009B80, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xC4) = scePaf_D7215544(D_00009B80, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xC8) = scePaf_D7215544(D_00009B80, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xCC) = scePaf_D7215544(D_00009B80, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xD0) = scePaf_D7215544(D_00009B80, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xD4) = scePaf_D7215544(D_00009B80, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xD8) = scePaf_D7215544(D_00009B80, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xDC) = scePaf_D7215544(D_00009B80, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xE0) = scePaf_D7215544(D_00009B80, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xE4) = scePaf_D7215544(D_00009B80, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xE8) = scePaf_D7215544(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0x94) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0x98) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0x9C) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xA0) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xA4) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D84);
+        M2C_FIELD(arg0, s32 *, 0xA8) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xAC) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xB0) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xB4) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xB8) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xBC) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xC0) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xC4) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xC8) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xCC) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xD0) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xD4) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xD8) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xDC) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xE0) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xE4) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xE8) = _ZN3paf4View8GetSoundEPKc(D_00009B80, &D_00008D78);
     }
 }
 #endif
@@ -1509,28 +1509,28 @@ void func_00003150(void *arg0) {
 #if FW_VERSION == 100
 void func_00003150(void *arg0) {
     if (arg0 != NULL) {
-        M2C_FIELD(arg0, s32 *, 0x90) = scePaf_D7215544(D_00008940_v100, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0x94) = scePaf_D7215544(D_00008940_v100, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0x98) = scePaf_D7215544(D_00008940_v100, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0x9C) = scePaf_D7215544(D_00008940_v100, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xA0) = scePaf_D7215544(D_00008940_v100, &D_00008D84);
-        M2C_FIELD(arg0, s32 *, 0xA4) = scePaf_D7215544(D_00008940_v100, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xA8) = scePaf_D7215544(D_00008940_v100, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xAC) = scePaf_D7215544(D_00008940_v100, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xB0) = scePaf_D7215544(D_00008940_v100, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xB4) = scePaf_D7215544(D_00008940_v100, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xB8) = scePaf_D7215544(D_00008940_v100, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xBC) = scePaf_D7215544(D_00008940_v100, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xC0) = scePaf_D7215544(D_00008940_v100, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xC4) = scePaf_D7215544(D_00008940_v100, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xC8) = scePaf_D7215544(D_00008940_v100, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xCC) = scePaf_D7215544(D_00008940_v100, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xD0) = scePaf_D7215544(D_00008940_v100, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xD4) = scePaf_D7215544(D_00008940_v100, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xD8) = scePaf_D7215544(D_00008940_v100, &D_00008D78);
-        M2C_FIELD(arg0, s32 *, 0xDC) = scePaf_D7215544(D_00008940_v100, &D_00008D60);
-        M2C_FIELD(arg0, s32 *, 0xE0) = scePaf_D7215544(D_00008940_v100, &D_00008D6C);
-        M2C_FIELD(arg0, s32 *, 0xE4) = scePaf_D7215544(D_00008940_v100, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0x90) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0x94) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0x98) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0x9C) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xA0) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D84);
+        M2C_FIELD(arg0, s32 *, 0xA4) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xA8) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xAC) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xB0) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xB4) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xB8) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xBC) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xC0) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xC4) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xC8) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xCC) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xD0) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xD4) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xD8) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xDC) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xE0) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xE4) = _ZN3paf4View8GetSoundEPKc(D_00008940_v100, &D_00008D78);
     }
 }
 #endif
@@ -1567,28 +1567,28 @@ void func_00003660(struct Unk_func_00003660_0 *arg0) {
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00003660(struct Unk_func_00003660_0 *arg0) {
     if (arg0 != NULL) {
-        arg0->unk98 = scePaf_D7215544(D_0000A280, &D_00008D60);
-        arg0->unk9C = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        arg0->unkA0 = scePaf_D7215544(D_0000A280, &D_00008D78);
-        arg0->unkA4 = scePaf_D7215544(D_0000A280, &D_00008D78);
-        arg0->unkA8 = scePaf_D7215544(D_0000A280, &D_00008D84);
-        arg0->unkAC = scePaf_D7215544(D_0000A280, &D_00008D78);
-        arg0->unkB0 = scePaf_D7215544(D_0000A280, &D_00008D60);
-        arg0->unkB4 = scePaf_D7215544(D_0000A280, &D_00008D78);
-        arg0->unkB8 = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        arg0->unkBC = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        arg0->unkC0 = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        arg0->unkC4 = scePaf_D7215544(D_0000A280, &D_00008D60);
-        arg0->unkC8 = scePaf_D7215544(D_0000A280, &D_00008D78);
-        arg0->unkCC = scePaf_D7215544(D_0000A280, &D_00008D60);
-        arg0->unkD0 = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        arg0->unkD4 = scePaf_D7215544(D_0000A280, &D_00008D78);
-        arg0->unkD8 = scePaf_D7215544(D_0000A280, &D_00008D60);
-        arg0->unkDC = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        arg0->unkE0 = scePaf_D7215544(D_0000A280, &D_00008D78);
-        arg0->unkE4 = scePaf_D7215544(D_0000A280, &D_00008D60);
-        arg0->unkE8 = scePaf_D7215544(D_0000A280, &D_00008D6C);
-        arg0->unkEC = scePaf_D7215544(D_0000A280, &D_00008D78);
+        arg0->unk98 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D60);
+        arg0->unk9C = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D6C);
+        arg0->unkA0 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D78);
+        arg0->unkA4 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D78);
+        arg0->unkA8 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D84);
+        arg0->unkAC = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D78);
+        arg0->unkB0 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D60);
+        arg0->unkB4 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D78);
+        arg0->unkB8 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D6C);
+        arg0->unkBC = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D6C);
+        arg0->unkC0 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D6C);
+        arg0->unkC4 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D60);
+        arg0->unkC8 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D78);
+        arg0->unkCC = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D60);
+        arg0->unkD0 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D6C);
+        arg0->unkD4 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D78);
+        arg0->unkD8 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D60);
+        arg0->unkDC = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D6C);
+        arg0->unkE0 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D78);
+        arg0->unkE4 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D60);
+        arg0->unkE8 = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D6C);
+        arg0->unkEC = _ZN3paf4View8GetSoundEPKc(D_0000A280, &D_00008D78);
     }
 }
 #endif
@@ -1654,7 +1654,7 @@ s32 *func_0000385C(s32 *arg0) {
     void **temp_v0;
 
     func_00004DD4(arg0, 0);
-    temp_v0 = scePaf_4708AED4(D_0000A288, &D_000076E8);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_0000A288, &D_000076E8);
     if (temp_v0 != NULL) {
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xAC)(temp_v0, arg0, 0);
     }
@@ -1667,7 +1667,7 @@ s32 *func_0000385C(s32 *arg0) {
     void **temp_v0;
 
     func_0000585C(arg0, 0);
-    temp_v0 = scePaf_4708AED4(D_0000A288, &D_000076E8);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_0000A288, &D_000076E8);
     if (temp_v0 != NULL) {
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xB0)(temp_v0, arg0, 0);
     }
@@ -1701,7 +1701,7 @@ s32 *func_00003FD4(s32 *arg0) {
     struct Unk_vt_func_00003FD4_temp_v0 **temp_v0;
 
     func_000059A0(arg0, 0);
-    temp_v0 = scePaf_4708AED4(D_0000A288, &D_00008DC8);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_0000A288, &D_00008DC8);
     if (temp_v0 != NULL) {
         (*temp_v0)->unkB0(temp_v0, arg0, 0);
     }
@@ -2064,32 +2064,32 @@ s32 func_00005420(void) {
         if (temp_s0 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0);
-            scePaf_4E67BB08(temp_s0);
+            _ZN3paf6ModuleD1Ev(temp_s0);
+            _ZdlPv(temp_s0);
         }
         temp_s0_2 = D_00009F94;
         D_00009F88 = 0;
         if (temp_s0_2 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_2);
-            scePaf_4E67BB08(temp_s0_2);
+            _ZN3paf6ModuleD1Ev(temp_s0_2);
+            _ZdlPv(temp_s0_2);
         }
         temp_s0_3 = D_00009F90;
         D_00009F94 = 0;
         if (temp_s0_3 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_3);
-            scePaf_4E67BB08(temp_s0_3);
+            _ZN3paf6ModuleD1Ev(temp_s0_3);
+            _ZdlPv(temp_s0_3);
         }
         temp_s0_4 = D_00009F8C;
         D_00009F90 = 0;
         if (temp_s0_4 == 0) {
             D_00009F8C = 0;
         } else {
-            scePaf_4612DB4B(temp_s0_4);
-            scePaf_4E67BB08(temp_s0_4);
+            _ZN3paf6ModuleD1Ev(temp_s0_4);
+            _ZdlPv(temp_s0_4);
             D_00009F8C = 0;
         }
     }
@@ -2120,32 +2120,32 @@ s32 func_00005420(void) {
         if (temp_s0 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0);
-            scePaf_4E67BB08(temp_s0);
+            _ZN3paf6ModuleD1Ev(temp_s0);
+            _ZdlPv(temp_s0);
         }
         temp_s0_2 = D_00009E14;
         D_00009E08 = 0;
         if (temp_s0_2 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_2);
-            scePaf_4E67BB08(temp_s0_2);
+            _ZN3paf6ModuleD1Ev(temp_s0_2);
+            _ZdlPv(temp_s0_2);
         }
         temp_s0_3 = D_00009E10;
         D_00009E14 = 0;
         if (temp_s0_3 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_3);
-            scePaf_4E67BB08(temp_s0_3);
+            _ZN3paf6ModuleD1Ev(temp_s0_3);
+            _ZdlPv(temp_s0_3);
         }
         temp_s0_4 = D_00009E0C;
         D_00009E10 = 0;
         if (temp_s0_4 == 0) {
             D_00009E0C = 0;
         } else {
-            scePaf_4612DB4B(temp_s0_4);
-            scePaf_4E67BB08(temp_s0_4);
+            _ZN3paf6ModuleD1Ev(temp_s0_4);
+            _ZdlPv(temp_s0_4);
             D_00009E0C = 0;
         }
     }
@@ -2176,32 +2176,32 @@ s32 func_00005420(void) {
         if (temp_s0 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0);
-            scePaf_4E67BB08(temp_s0);
+            _ZN3paf6ModuleD1Ev(temp_s0);
+            _ZdlPv(temp_s0);
         }
         temp_s0_2 = D_00009A10;
         D_00009A04 = 0;
         if (temp_s0_2 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_2);
-            scePaf_4E67BB08(temp_s0_2);
+            _ZN3paf6ModuleD1Ev(temp_s0_2);
+            _ZdlPv(temp_s0_2);
         }
         temp_s0_3 = D_00009A0C;
         D_00009A10 = 0;
         if (temp_s0_3 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_3);
-            scePaf_4E67BB08(temp_s0_3);
+            _ZN3paf6ModuleD1Ev(temp_s0_3);
+            _ZdlPv(temp_s0_3);
         }
         temp_s0_4 = D_00009A08;
         D_00009A0C = 0;
         if (temp_s0_4 == 0) {
             D_00009A08 = 0;
         } else {
-            scePaf_4612DB4B(temp_s0_4);
-            scePaf_4E67BB08(temp_s0_4);
+            _ZN3paf6ModuleD1Ev(temp_s0_4);
+            _ZdlPv(temp_s0_4);
             D_00009A08 = 0;
         }
     }
@@ -2238,32 +2238,32 @@ s32 func_00005420(void) {
         if (temp_s0 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0);
-            scePaf_4E67BB08(temp_s0);
+            _ZN3paf6ModuleD1Ev(temp_s0);
+            _ZdlPv(temp_s0);
         }
         temp_s0_2 = D_00009C30;
         D_00009C24 = 0;
         if (temp_s0_2 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_2);
-            scePaf_4E67BB08(temp_s0_2);
+            _ZN3paf6ModuleD1Ev(temp_s0_2);
+            _ZdlPv(temp_s0_2);
         }
         temp_s0_3 = D_00009C2C_v152;
         D_00009C30 = 0;
         if (temp_s0_3 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_3);
-            scePaf_4E67BB08(temp_s0_3);
+            _ZN3paf6ModuleD1Ev(temp_s0_3);
+            _ZdlPv(temp_s0_3);
         }
         temp_s0_4 = D_00009C28;
         D_00009C2C_v152 = 0;
         if (temp_s0_4 == 0) {
             D_00009C28 = 0;
         } else {
-            scePaf_4612DB4B(temp_s0_4);
-            scePaf_4E67BB08(temp_s0_4);
+            _ZN3paf6ModuleD1Ev(temp_s0_4);
+            _ZdlPv(temp_s0_4);
             D_00009C28 = 0;
         }
     }
@@ -2294,32 +2294,32 @@ s32 func_00005420(void) {
         if (temp_s0 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0);
-            scePaf_4E67BB08(temp_s0);
+            _ZN3paf6ModuleD1Ev(temp_s0);
+            _ZdlPv(temp_s0);
         }
         temp_s0_2 = D_00009C70;
         D_00009C64 = 0;
         if (temp_s0_2 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_2);
-            scePaf_4E67BB08(temp_s0_2);
+            _ZN3paf6ModuleD1Ev(temp_s0_2);
+            _ZdlPv(temp_s0_2);
         }
         temp_s0_3 = D_00009C6C;
         D_00009C70 = 0;
         if (temp_s0_3 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_3);
-            scePaf_4E67BB08(temp_s0_3);
+            _ZN3paf6ModuleD1Ev(temp_s0_3);
+            _ZdlPv(temp_s0_3);
         }
         temp_s0_4 = D_00009C68;
         D_00009C6C = 0;
         if (temp_s0_4 == 0) {
             D_00009C68 = 0;
         } else {
-            scePaf_4612DB4B(temp_s0_4);
-            scePaf_4E67BB08(temp_s0_4);
+            _ZN3paf6ModuleD1Ev(temp_s0_4);
+            _ZdlPv(temp_s0_4);
             D_00009C68 = 0;
         }
     }
@@ -2350,32 +2350,32 @@ s32 func_00005420(void) {
         if (temp_s0 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0);
-            scePaf_4E67BB08(temp_s0);
+            _ZN3paf6ModuleD1Ev(temp_s0);
+            _ZdlPv(temp_s0);
         }
         temp_s0_2 = D_000089DC;
         D_000089D0 = 0;
         if (temp_s0_2 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_2);
-            scePaf_4E67BB08(temp_s0_2);
+            _ZN3paf6ModuleD1Ev(temp_s0_2);
+            _ZdlPv(temp_s0_2);
         }
         temp_s0_3 = D_000089D8;
         D_000089DC = 0;
         if (temp_s0_3 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_3);
-            scePaf_4E67BB08(temp_s0_3);
+            _ZN3paf6ModuleD1Ev(temp_s0_3);
+            _ZdlPv(temp_s0_3);
         }
         temp_s0_4 = D_000089D4;
         D_000089D8 = 0;
         if (temp_s0_4 == 0) {
             D_000089D4 = 0;
         } else {
-            scePaf_4612DB4B(temp_s0_4);
-            scePaf_4E67BB08(temp_s0_4);
+            _ZN3paf6ModuleD1Ev(temp_s0_4);
+            _ZdlPv(temp_s0_4);
             D_000089D4 = 0;
         }
     }
@@ -2406,32 +2406,32 @@ s32 func_0000602C(void) {
         if (temp_s0 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0);
-            scePaf_4E67BB08(temp_s0);
+            _ZN3paf6ModuleD1Ev(temp_s0);
+            _ZdlPv(temp_s0);
         }
         temp_s0_2 = D_0000A394;
         D_0000A388 = 0;
         if (temp_s0_2 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_2);
-            scePaf_4E67BB08(temp_s0_2);
+            _ZN3paf6ModuleD1Ev(temp_s0_2);
+            _ZdlPv(temp_s0_2);
         }
         temp_s0_3 = D_0000A390;
         D_0000A394 = 0;
         if (temp_s0_3 == 0) {
 
         } else {
-            scePaf_4612DB4B(temp_s0_3);
-            scePaf_4E67BB08(temp_s0_3);
+            _ZN3paf6ModuleD1Ev(temp_s0_3);
+            _ZdlPv(temp_s0_3);
         }
         temp_s0_4 = D_0000A38C;
         D_0000A390 = 0;
         if (temp_s0_4 == 0) {
             D_0000A38C = 0;
         } else {
-            scePaf_4612DB4B(temp_s0_4);
-            scePaf_4E67BB08(temp_s0_4);
+            _ZN3paf6ModuleD1Ev(temp_s0_4);
+            _ZdlPv(temp_s0_4);
             D_0000A38C = 0;
         }
     }
@@ -2572,7 +2572,7 @@ s32 func_00005DFC(void) {
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00005E08(s32 arg0) {
     if (arg0 != D_00008A00) {
-        scePaf_A69BABE3(0x401, arg0, D_00008A00);
+        PhiPostSystemEvent(0x401, arg0, D_00008A00);
         D_00008A00 = arg0;
         D_00008A08 += 1;
     }
@@ -2584,7 +2584,7 @@ s32 func_00005E08(s32 arg0) {
 s32 func_00005E08(s32 arg0) {
     if (arg0 != D_00008A00) {
         sce_paf_private_printf("ms status changed - %d\n", arg0);
-        scePaf_A69BABE3(0x401, arg0, D_00008A00);
+        PhiPostSystemEvent(0x401, arg0, D_00008A00);
         D_00008A00 = arg0;
         D_00008A08 += 1;
     }
@@ -2610,7 +2610,7 @@ s32 func_00006B78(void) {
 s32 func_00005E78(s32 arg0) {
     if (arg0 != D_00008A04) {
         sce_paf_private_printf("umd status changed - %d\n", arg0);
-        scePaf_A69BABE3(0x400, arg0, D_00008A04);
+        PhiPostSystemEvent(0x400, arg0, D_00008A04);
         D_00008A04 = arg0;
         D_00008A0C += 1;
     }
@@ -2652,7 +2652,7 @@ s32 func_00006CFC(s32 arg0) {
 #if FW_VERSION >= 330 && FW_VERSION < 350
 s32 func_00006CFC(s32 arg0) {
     if (arg0 != D_0000A3D4) {
-        scePaf_A69BABE3(0x409, arg0, D_0000A3D4);
+        PhiPostSystemEvent(0x409, arg0, D_0000A3D4);
         D_0000A3D4 = arg0;
         D_0000A3D8 += 1;
     }
@@ -2663,7 +2663,7 @@ s32 func_00006CFC(s32 arg0) {
 #if FW_VERSION >= 310 && FW_VERSION < 330
 s32 func_00006CFC(s32 arg0) {
     if (arg0 != D_0000A3CC) {
-        scePaf_A69BABE3(0x409, arg0, D_0000A3CC);
+        PhiPostSystemEvent(0x409, arg0, D_0000A3CC);
         D_0000A3CC = arg0;
         D_0000A3D4 += 1;
     }
@@ -2674,7 +2674,7 @@ s32 func_00006CFC(s32 arg0) {
 #if FW_VERSION >= 282 && FW_VERSION < 310
 s32 func_00006CFC(s32 arg0) {
     if (arg0 != D_0000A3CC) {
-        scePaf_A69BABE3(0x401, arg0, D_0000A3CC);
+        PhiPostSystemEvent(0x401, arg0, D_0000A3CC);
         D_0000A3CC = arg0;
         D_0000A3D4 += 1;
     }

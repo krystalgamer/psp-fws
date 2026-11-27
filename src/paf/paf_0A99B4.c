@@ -33,7 +33,7 @@ INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000AA884);
 
 void func_000AABD0(s32 arg0, struct Unk_func_000AABD0_1 *arg1, M2C_UNK arg2) {
     if (((arg0 == 0) | (arg1 == NULL)) == 0) {
-        scePaf_F95EA3F1((u8 *)arg1 + 0x52, arg2, 0xA);
+        sce_paf_private_memcpy((u8 *)arg1 + 0x52, arg2, 0xA);
         arg1->unk8 = (s32) (arg1->unk8 | 0x20);
     }
 }
@@ -132,7 +132,7 @@ INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000AB894);
 
 void func_000AB98C(s32 arg0, struct Unk_func_000AB98C_1 *arg1, M2C_UNK arg2) {
     if (((arg0 == 0) | (arg1 == NULL)) == 0) {
-        scePaf_F95EA3F1((u8 *)arg1 + 0x3C, arg2, 5);
+        sce_paf_private_memcpy((u8 *)arg1 + 0x3C, arg2, 5);
         arg1->unk8 = (s32) (arg1->unk8 | 2);
     }
 }
@@ -211,9 +211,9 @@ void func_000AC600(struct Unk_func_000AC600_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/paf_0A99B4", scePaf_7333E75A);
+INCLUDE_ASM("nonmatchings/paf_0A99B4", png_set_packing);
 
-void scePaf_C6624F24(struct Unk_scePaf_C6624F24_0 *arg0) {
+void png_set_packswap(struct Unk_scePaf_C6624F24_0 *arg0) {
     if ((u8) arg0->unk4E7 < 8U) {
         arg0->unk430 = (s32) (arg0->unk430 | 0x10000);
     }
@@ -484,8 +484,8 @@ INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000AE678);
 
 void func_000AE724(struct Unk_func_000AE724_0 *arg0) {
     if (arg0 != NULL) {
-        scePaf_545FE2DA(arg0->unk8);
-        scePaf_545FE2DA(arg0);
+        sce_paf_private_free(arg0->unk8);
+        sce_paf_private_free(arg0);
     }
 }
 
@@ -1047,18 +1047,18 @@ INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000B1BF4);
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/paf_0A99B4", scePaf_FD3FF4AA);
+INCLUDE_ASM("nonmatchings/paf_0A99B4", File_Save);
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000B7554);
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_0A99B4", scePaf_D6759EEF);
+INCLUDE_ASM("nonmatchings/paf_0A99B4", File_Load);
 #else
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_00066EC8);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0A99B4", scePaf_27760582);
+INCLUDE_ASM("nonmatchings/paf_0A99B4", File_AllocLoad);
 
 s32 func_000B77C4(s32 arg0) {
     s32 var_a1;
@@ -1086,7 +1086,7 @@ INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000B7C18);
 
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000B7CAC);
 
-INCLUDE_ASM("nonmatchings/paf_0A99B4", scePaf_A0ED77C4);
+INCLUDE_ASM("nonmatchings/paf_0A99B4", Job_Start);
 
 s32 func_000B7EB0(void) {
     return D_001A5240;
@@ -1094,10 +1094,10 @@ s32 func_000B7EB0(void) {
 
 INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000B7EBC);
 
-INCLUDE_ASM("nonmatchings/paf_0A99B4", scePaf_35F25BA1);
+INCLUDE_ASM("nonmatchings/paf_0A99B4", Job_Cancel);
 
-INCLUDE_ASM("nonmatchings/paf_0A99B4", scePaf_79493F8F);
+INCLUDE_ASM("nonmatchings/paf_0A99B4", Job_Cancel2);
 
-s32 scePaf_75062BCF(struct Unk_scePaf_75062BCF_0 *arg0) {
+s32 Job_isCanceled(struct Unk_scePaf_75062BCF_0 *arg0) {
     return arg0->unk18 == 3;
 }

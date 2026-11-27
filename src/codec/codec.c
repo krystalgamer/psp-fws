@@ -282,7 +282,7 @@ INCLUDE_ASM("nonmatchings/codec", func_00000C50);
 
 #if FW_VERSION < 201
 s32 func_00000CF8(void) {
-    KDebugUnkIf *p = KDebugForKernel_E892D9A1();
+    KDebugUnkIf *p = sceKernelSm1ReferOperations();
     s32 type;
 
     if (p == NULL) {

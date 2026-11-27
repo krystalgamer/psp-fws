@@ -1,19 +1,19 @@
 // NID-derived names
 sceAsfInitParser = 0x00000000; // type:func
 sceAsfSeekTime = 0x0000007C; // type:func
-sceAsfParser_49E09367 = 0x000000F0; // type:func
+sceAsfGetVariableObjectInfo = 0x000000F0; // type:func
 sceAsfParserStartEntry = 0x00000228; // type:func
 sceAsfParserEndEntry = 0x00000230; // type:func
 sceAsfCheckNeedMem = 0x00000238; // type:func
 sceAsfGetFrameData = 0x00000274; // type:func
 sceAsfParser_F4502CB5 = 0x000002BC; // type:func
 sceAsfParser_002052FF = 0x000002F8; // type:func
-sceAsfParser_385E1320 = 0x00000328; // type:func
-sceAsfParser_EFC704C3 = 0x00000360; // type:func
-sceAsfParser_D2DD1778 = 0x0000039C; // type:func
-sceAsfParser_F5F356F6 = 0x000003D8; // type:func
-sceAsfParser_AA881A7B = 0x00000414; // type:func
-sceAsfParser_5EC678CB = 0x00000444; // type:func
+sceAsfGetAudioStreamInfo = 0x00000328; // type:func
+sceAsfGetHeaderExtension = 0x00000360; // type:func
+sceAsfGetContentDescription = 0x0000039C; // type:func
+sceAsfGetExtContentDescription = 0x000003D8; // type:func
+sceAsfGetExtContent = 0x00000414; // type:func
+sceAsfGetVariableObject = 0x00000444; // type:func
 // shared names (tools/add_version.py) begin
 D_00006FC8 = 0x00007868; // rom:0x78E8
 D_00006FD8 = 0x00007888; // rom:0x7908

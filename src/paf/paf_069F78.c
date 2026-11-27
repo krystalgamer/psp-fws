@@ -104,21 +104,21 @@ INCLUDE_ASM("nonmatchings/paf_069F78", func_0006A4B4);
 INCLUDE_ASM("nonmatchings/paf_069F78", func_0006A52C);
 
 void func_0006A5FC(void) {
-    scePaf_5FAC9869();
+    sce_paf_private_malloc();
 }
 
 INCLUDE_ASM("nonmatchings/paf_069F78", func_0006A618);
 
 void func_0006A634(void) {
-    scePaf_8FC65EB0();
+    sce_paf_private_realloc();
 }
 
 void func_0006A650(void) {
-    scePaf_6829D7AF();
+    sce_paf_private_memset();
 }
 
 void func_0006A66C(void) {
-    scePaf_F95EA3F1();
+    sce_paf_private_memcpy();
 }
 #endif
 
@@ -128,7 +128,7 @@ INCLUDE_ASM("nonmatchings/paf_069F78", func_0006A688);
 
 #if FW_VERSION == 282
 void func_0006A688(void) {
-    scePaf_3FBD9639();
+    sce_paf_private_memcmp();
 }
 #endif
 
@@ -981,7 +981,7 @@ s32 func_00074AA0(s32 arg0) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         jpeg_set_defaults(arg0);
         var_v1 = 1;
     }
@@ -992,7 +992,7 @@ s32 func_00074AE8(s32 arg0, M2C_UNK arg1) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         jpeg_set_colorspace(arg0, arg1);
         var_v1 = 1;
     }
@@ -1003,7 +1003,7 @@ s32 func_00074B40(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         jpeg_set_quality(arg0, arg1, arg2);
         var_v1 = 1;
     }
@@ -1014,7 +1014,7 @@ s32 func_00074BA8(s32 arg0, M2C_UNK arg1) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         func_0008458C(arg0, arg1);
         var_v1 = 1;
     }
@@ -1025,7 +1025,7 @@ s32 func_00074C00(s32 arg0, M2C_UNK arg1) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         func_000849A8(arg0, arg1);
         var_v1 = 1;
     }
@@ -1036,7 +1036,7 @@ s32 func_00074C58(void *arg0, void *arg1, s32 arg2) {
     s32 var_v1;
 
     var_v1 = -1;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         var_v1 = func_00084A70(arg0, arg1, arg2);
     }
     return var_v1;
@@ -1046,7 +1046,7 @@ s32 func_00074CC0(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 var_v1;
 
     var_v1 = -1;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         var_v1 = func_00084BA4(arg0, arg1, arg2);
     }
     return var_v1;
@@ -1056,7 +1056,7 @@ s32 func_00074D28(s32 arg0) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         func_000845E4(arg0);
         var_v1 = 1;
     }
@@ -1067,7 +1067,7 @@ s32 func_00074D70(s32 arg0) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         func_00084910(arg0);
         var_v1 = 1;
     }
@@ -1080,7 +1080,7 @@ s32 func_00074E0C(s32 arg0) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         func_0008A69C(arg0);
         var_v1 = 1;
     }
@@ -1091,7 +1091,7 @@ s32 func_00074E54(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
     var_v1 = -1;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         var_v1 = func_0008A928(arg0, arg1, arg2);
     }
     return var_v1;
@@ -1101,7 +1101,7 @@ s32 func_00074EBC(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 var_v1;
 
     var_v1 = -1;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         var_v1 = func_0008AA20(arg0, arg1, arg2);
     }
     return var_v1;
@@ -1111,7 +1111,7 @@ s32 func_00074F24(s32 arg0) {
     s32 var_v1;
 
     var_v1 = -1;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         var_v1 = func_0008A588(arg0);
     }
     return var_v1;
@@ -1121,7 +1121,7 @@ s32 func_00074F6C(s32 arg0) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         jpeg_abort(arg0);
         var_v1 = 1;
     }
@@ -1132,7 +1132,7 @@ s32 func_00074FB4(s32 arg0) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A(arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp(arg0 + 0x254) == 0) {
         jpeg_destroy(arg0);
         var_v1 = 1;
     }
@@ -1143,7 +1143,7 @@ s32 func_00074FFC(struct Unk_func_00074FFC_0 *arg0, M2C_UNK arg1, M2C_UNK arg2, 
     s32 var_v1;
 
     var_v1 = 0;
-    if (scePaf_8F12B63A((u8 *)arg0 + 0x254) == 0) {
+    if (sce_paf_private_setjmp((u8 *)arg0 + 0x254) == 0) {
         var_v1 = arg0->unk4->unk8(arg0, arg1, arg2, arg3);
     }
     return var_v1;

@@ -6,7 +6,7 @@
 
 extern M2C_UNK sceDdrFlush;
 
-M2C_UNK DmacManForKernel_32757C57(M2C_UNK);
+M2C_UNK sceKernelDmaRegisterDdrFlush(M2C_UNK);
 s32 module_reboot_before(void);
 s32 module_start(void);
 s32 sceDdrEnd(void);

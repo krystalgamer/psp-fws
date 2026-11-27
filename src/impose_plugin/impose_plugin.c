@@ -32,7 +32,7 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_0000015C);
 void func_0000015C(struct Unk_func_0000015C_0 *arg0) {
     arg0->unk1FD = 0;
     arg0->unk1FE = 0;
-    scePaf_86B41BA3();
+    _ZN3paf8PhWidget13UpdateCamerasEv();
 }
 #endif
 
@@ -42,7 +42,7 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_00000180);
 void func_00000180(struct Unk_func_00000180_0 *arg0) {
     arg0->unk1FD = 0;
     arg0->unk1FE = 0;
-    scePaf_86B41BA3();
+    _ZN3paf8PhWidget13UpdateCamerasEv();
 }
 #endif
 
@@ -177,9 +177,9 @@ void func_000003BC_v152(s32 arg0) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_000013A4);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_000013A4);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(s32), 0xA4)(arg0 != 0);
         }
@@ -192,9 +192,9 @@ void func_000003BC_v150(s32 arg0) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_000013A4);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_000013A4);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(s32), 0xA4)(arg0 != 0);
         }
@@ -263,16 +263,16 @@ void func_00000964(void) {
     void *temp_v0;
 
     temp_s1 = vshImposeGetParam(0x40000000);
-    temp_v0 = scePaf_338C3774(scePaf_D4FAE7D0(&D_000013A4), 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(_ZN3paf4View4FindEPKc(&D_000013A4), 1);
     if (temp_s1 == 0) {
         if (temp_v0 != NULL) {
             M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x10C)(0x1F, 1);
         }
-        scePaf_A69BABE3(0x40D, 0, 0);
+        PhiPostSystemEvent(0x40D, 0, 0);
         scePaf_3DEE8DB4();
     } else {
         scePaf_499FF48D();
-        scePaf_A69BABE3(0x40D, temp_s1, temp_s1);
+        PhiPostSystemEvent(0x40D, temp_s1, temp_s1);
         if (temp_v0 != NULL) {
             M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK, M2C_UNK), 0x10C)(0x1F, 0);
         }
@@ -322,9 +322,9 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_00000CDC);
 void func_00000CDC(void) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_000013A4);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_000013A4);
     if (temp_v0 != 0) {
-        scePaf_49CE42F7(temp_v0, &D_00001434);
+        _ZN3paf4View9PlaySoundEPKc(temp_v0, &D_00001434);
     }
 }
 #endif
@@ -348,7 +348,7 @@ void func_0000104C(void) {
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00001054);
 #else
 void func_00001054(s32 arg0) {
-    scePaf_97FDA760(arg0, 1, (s32) &D_000014A0);
+    _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_000014A0);
 }
 #endif
 

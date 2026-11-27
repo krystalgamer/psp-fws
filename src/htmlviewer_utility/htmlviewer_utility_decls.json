@@ -115,9 +115,9 @@
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
   "sceKernelWaitEventFlag": "s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);",
-  "sceUtility_943CBA46": "s32 sceUtility_943CBA46(M2C_UNK *);",
+  "sceUtilityAuthDialogInitStart": "s32 sceUtilityAuthDialogInitStart(M2C_UNK *);",
   "sceUtility_private_167260AF": "s32 sceUtility_private_167260AF();",
-  "sceUtility_private_4B677BA1": "s32 sceUtility_private_4B677BA1();"
+  "sceUtilityAppletGetStructVersion": "s32 sceUtilityAppletGetStructVersion();"
  },
  "types": {
   "D_0000616C_s": "struct D_0000616C_s {\n    u8 pad0[0x30];\n    s32 unk30;\n};",

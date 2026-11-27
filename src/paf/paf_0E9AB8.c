@@ -4,7 +4,7 @@
 void func_000E9AB8(M2C_UNK **arg0) {
     *arg0 = &D_0019AA20;
     func_000E49B0((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 #if FW_VERSION == 280
@@ -40,33 +40,33 @@ INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EA380);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_C6DF54AD);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList18HandleKeycodeEventEPNS_7PhEventE);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_3C4AA878);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList19HandleFocusOutEventEPNS_7PhEventE);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_7BC88D19);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList8SetFocusEPNS_7PhEventEb);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_A0100F5B);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList11UpdateStateEv);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_020A7084);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList8SetStyleEib);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_829C3411);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList8SetStyleEii);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_F59525B2);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList8SetStyleEif);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_7CEC4010);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList8SetStyleEiib);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_4ACED608);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList8SetStyleEiii);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_BAEAB61A);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList8SetStyleEiif);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_8ECB2367);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList8SetStyleEiiRK4vec4);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_C3AD96FE);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList10SetTextureERKNS_12SurfaceRCPtrINS_7SurfaceEEEi);
 
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_D44604DD);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_DF92BA98);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList15SetSize_ontimerERK4vec4);
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
@@ -80,9 +80,9 @@ INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EA534);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_256DE321);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList6CreateEiiii);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_A37BC366);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList10UpdateItemEi);
 #endif
 
 #if FW_VERSION < 250 || FW_VERSION == 282
@@ -163,7 +163,7 @@ s32 func_000EA314(s32 arg0, s32 arg1, s32 arg2) {
         temp_v0 = M2C_FIELD(arg0, struct Unk_scePaf_86B41BA3_0 **, 0x700);
         M2C_FIELD(temp_v0, s8 *, 0x1FE) = 0;
         M2C_FIELD(temp_v0, s8 *, 0x1FF) = 0;
-        scePaf_86B41BA3(temp_v0);
+        _ZN3paf8PhWidget13UpdateCamerasEv(temp_v0);
         break;
     case 14:
         M2C_FIELD(M2C_FIELD(arg0, void **, 0), M2C_UNK (**)(s32, M2C_UNK, M2C_UNK, s32), 0x7C)(arg0, 0xA, 0xE, arg2 & ~0xF0);
@@ -357,16 +357,16 @@ INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EA800);
 #endif
 
 #if FW_VERSION == 280
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_5A99AE67);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList10SetItemNumEi);
 #endif
 
 #if FW_VERSION == 282
-s32 scePaf_5A99AE67(s32 arg0) {
+s32 _ZN3paf10PhMenuList10SetItemNumEi(s32 arg0) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_A72594EF();
+    temp_v0 = _ZN3paf6PhList10SetItemNumEi();
     if (temp_v0 >= 0) {
-        scePaf_EAA5AFF6(arg0, 0x0100000C);
+        _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0x0100000C);
     }
     return temp_v0;
 }
@@ -374,7 +374,7 @@ s32 scePaf_5A99AE67(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EAAE4);
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_D5F5E68F);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList11SetSelectedEi);
 
 #if FW_VERSION == 280
 INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000EAB70);
@@ -387,7 +387,7 @@ INCLUDE_ASM("nonmatchings/paf_0E9AB8", func_000924FC);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_B6DD6FC6);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList8ShowItemEii);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
@@ -467,7 +467,7 @@ s32 func_000EBB74(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A47DC != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }
@@ -476,7 +476,7 @@ s32 func_000EBBA0(void) {
     return D_001A47DC;
 }
 
-s32 scePaf_C6F44EF9(void) {
+s32 _ZN3paf7PhModel10WidgetTypeEv(void) {
     return D_001A47DC;
 }
 
@@ -486,15 +486,15 @@ void func_000EBBB8(struct Unk_func_000EBBB8_0 *arg0, s32 arg1, s32 arg2) {
 
     var_a2 = arg2;
     if (var_a2 == 0) {
-        temp_v0 = scePaf_B7E6052B(0x1AC);
+        temp_v0 = _Znwj(0x1AC);
         func_001026B4(temp_v0, arg0);
         var_a2 = temp_v0;
     }
-    scePaf_87516C3B(arg0, arg1, var_a2);
+    _ZN3paf8PhWidgetC2EPS0_PNS_8PhAppearE(arg0, arg1, var_a2);
     arg0->unk14 = 0x100;
     arg0->unk0 = &D_0019AB08;
     arg0->unk334 = 0;
     arg0->unk330 = 0;
 }
 
-INCLUDE_ASM("nonmatchings/paf_0E9AB8", scePaf_D180ACBA);
+INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf7PhModelC1EPNS_8PhWidgetEPNS_8PhAppearE);

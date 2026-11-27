@@ -18,7 +18,7 @@ s32 func_00000000(s32 arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/interruptman", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/interruptman", module_bootstart);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/interruptman", D_00003E3C);
@@ -53,11 +53,11 @@ INCLUDE_RODATA("nonmatchings/interruptman", D_00004130);
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterIntrHandler);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_15894D0B);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetUserModeIntrHanlerAcceptable);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLevel);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_43A7BBDC);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLogging);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelEnableIntr);
 
@@ -169,7 +169,7 @@ void func_00000348(s32 arg0) {
 #if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterIntrHandler);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_15894D0B);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetUserModeIntrHanlerAcceptable);
 #endif
 
 #if FW_VERSION < 282
@@ -177,13 +177,13 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseIntrHandler);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_07E138EE);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelClearIntrLogging);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLevel);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_43A7BBDC);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLogging);
 #endif
 
 #if FW_VERSION < 282
@@ -367,7 +367,7 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00001978);
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseIntrHandler);
 
-INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_07E138EE);
+INCLUDE_ASM("nonmatchings/interruptman", sceKernelClearIntrLogging);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsInterruptOccurred);
 
@@ -384,12 +384,12 @@ void RegisterContextHooks(s32 arg0, s32 arg1) {
     sceKernelCpuResumeIntr(temp_a0);
 }
 
-void InterruptManagerForKernel_7A05D976(s32 arg0, s32 arg1) {
+void RegisterSubIntrruptMonitor(s32 arg0, s32 arg1) {
     D_00003E00.unk1084 = arg1;
     D_00003E00.unk1080 = arg0;
 }
 
-void InterruptManagerForKernel_7EF7500F(void) {
+void ReleaseSubIntrruptMonitor(void) {
     D_00003E00.unk1084 = 0;
     D_00003E00.unk1080 = 0;
 }

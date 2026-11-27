@@ -3,16 +3,16 @@
 
 void func_000EF6AC(M2C_UNK **arg0) {
     *arg0 = &D_0019B058;
-    scePaf_715E8DAB((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf8PhWidgetD2Ev((s32) arg0);
+    _ZdlPv(arg0);
 }
 
 #if FW_VERSION >= 270
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_2D94D547);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf8PhScroll11SetMaxValueEf);
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_752AB253);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf8PhScroll16SetVisibleAmountEf);
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_12D445E1);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf8PhScroll8SetValueEf);
 #else
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_00093450);
 
@@ -26,11 +26,11 @@ INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000EF900);
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000EF9C0);
 
 #if (FW_VERSION >= 200 && FW_VERSION < 282) || FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_C07B7162);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf8PhScroll15SetShadowRenderEPNS_9PhSRenderE);
 #endif
 
 #if FW_VERSION == 282
-void scePaf_C07B7162(struct Unk_scePaf_C07B7162_0 *arg0) {
+void _ZN3paf8PhScroll15SetShadowRenderEPNS_9PhSRenderE(struct Unk_scePaf_C07B7162_0 *arg0) {
     func_00106250(arg0->unk1E8);
 }
 #endif
@@ -45,7 +45,7 @@ s32 func_000EFBD4(void) {
     return D_001A481C;
 }
 
-s32 scePaf_5A818E41(void) {
+s32 _ZN3paf6PhSpin10WidgetTypeEv(void) {
     return D_001A481C;
 }
 
@@ -158,7 +158,7 @@ INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F0920);
 #else
 s32 func_000F0920(struct Unk_func_000E4F0C_0 *arg0, struct Unk_func_000E4F0C_1 *arg1) {
     if (((u32) (arg1->unk8 - 1) >= 4U) || (arg0->unk331 == 0) || (arg0->unk1EC != 5)) {
-        scePaf_360956CC(arg0, arg1);
+        _ZN3paf8PhWidget22HandleFocusSwitchEventEPNS_7PhEventE(arg0, arg1);
     }
     arg0->unk334 = 0;
     return 0;
@@ -190,10 +190,10 @@ s32 func_000F0DB8(struct Unk_func_000F0DB8_0 *arg0, s32 arg1) {
     s32 temp_s0;
 
     temp_s0 = arg1 == 5;
-    scePaf_ED83B18F((u8 *)arg0 + 0x370, 0xD, temp_s0);
-    scePaf_ED83B18F((u8 *)arg0 + 0x430, 0xD, temp_s0);
-    scePaf_ED83B18F((u8 *)arg0 + 0x4F0, 0xD, temp_s0);
-    scePaf_ED83B18F((u8 *)arg0 + 0x5B0, 0xD, temp_s0);
+    _ZN3paf7PhSPrim8SetStyleEib((u8 *)arg0 + 0x370, 0xD, temp_s0);
+    _ZN3paf7PhSPrim8SetStyleEib((u8 *)arg0 + 0x430, 0xD, temp_s0);
+    _ZN3paf7PhSPrim8SetStyleEib((u8 *)arg0 + 0x4F0, 0xD, temp_s0);
+    _ZN3paf7PhSPrim8SetStyleEib((u8 *)arg0 + 0x5B0, 0xD, temp_s0);
     arg0->unk1EC = arg1;
     return 0;
 }
@@ -232,14 +232,14 @@ INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F1544);
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F15A4);
 
 #if FW_VERSION < 340
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_8DB4B066);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhSpin14SetMaxSelectedEi);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_C2C25056);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhSpin11SetSelectedEi);
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_06EA7CDE);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhSpin14ChangeSelectedEii);
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_A9970EF5);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhSpin11SetAnimTimeEf);
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F1840);
 
@@ -356,7 +356,7 @@ s32 func_000F1C74(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A4820 != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }
@@ -365,13 +365,13 @@ s32 func_000F1CA0(void) {
     return D_001A4820;
 }
 
-s32 scePaf_96C46364(void) {
+s32 _ZN3paf6PhText10WidgetTypeEv(void) {
     return D_001A4820;
 }
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F1CB8);
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_2A2EB136);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhTextC1EPNS_8PhWidgetEPNS_8PhAppearE);
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F1DD0);
 
@@ -381,36 +381,36 @@ INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B2A8);
 INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B378);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_BB457D6F);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhText7SetSizeEfff);
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_0ED80B09);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhText7SetSizeERK4vec4);
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_777635B9);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhText12SetFontStyleERKNS_11PhFontStyleE);
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_70BECA15);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhText15SetShadowRenderEPNS_9PhSRenderE);
 #endif
 
 void func_000F202C(struct Unk_func_000F202C_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk334 = 1;
-    scePaf_3F52824F((s32) arg0, arg1, arg2 & 0xFF);
+    _ZN3paf8PhWidget8SetStyleEib((s32) arg0, arg1, arg2 & 0xFF);
 }
 
 void func_000F2050(struct Unk_func_000F2050_0 *arg0) {
     arg0->unk334 = 1;
-    scePaf_672036FE();
+    _ZN3paf8PhWidget8SetStyleEii();
 }
 
 void func_000F2074(struct Unk_func_000F2074_0 *arg0) {
     arg0->unk334 = 1;
     arg0->unk335 = 1;
-    scePaf_1C286704((s32) arg0);
+    _ZN3paf8PhWidget8SetStyleEif((s32) arg0);
 }
 
 void func_000F209C(struct Unk_func_000F209C_0 *arg0) {
     arg0->unk334 = 1;
     arg0->unk335 = 1;
-    scePaf_2E6CA751((s32) arg0);
+    _ZN3paf8PhWidget8SetStyleEiRK4vec4((s32) arg0);
 }
 
 void func_000F20C4(struct Unk_func_000F20C4_0 *arg0) {
@@ -430,19 +430,19 @@ s32 scePaf_D1EE972C(struct Unk_scePaf_D1EE972C_0 *arg0, s32 arg1, s32 arg2, s32 
     return var_v1;
 }
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_E732CF74);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhText12SetFirstLineEf);
 
-void scePaf_FA758B05(struct Unk_scePaf_FA758B05_0 *arg0) {
+void _ZNK3paf6PhText12GetFirstLineEv(struct Unk_scePaf_FA758B05_0 *arg0) {
     func_00106ABC(arg0->unk1E8);
 }
 
 #if FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_608F02C6);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhText15SetColumnOffsetEf);
 #else
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_00095D40);
 #endif
 
-s32 scePaf_DC8B0309(struct Unk_scePaf_DC8B0309_0 *arg0) {
+s32 _ZNK3paf6PhText13GetTextLengthEv(struct Unk_scePaf_DC8B0309_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -454,7 +454,7 @@ s32 scePaf_DC8B0309(struct Unk_scePaf_DC8B0309_0 *arg0) {
     return var_v1;
 }
 
-s32 scePaf_FA87D725(struct Unk_scePaf_FA87D725_0 *arg0) {
+s32 _ZNK3paf6PhText12GetLineCountEv(struct Unk_scePaf_FA87D725_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -466,7 +466,7 @@ s32 scePaf_FA87D725(struct Unk_scePaf_FA87D725_0 *arg0) {
     return var_v1;
 }
 
-s32 scePaf_409E25A3(struct Unk_scePaf_409E25A3_0 *arg0) {
+s32 _ZNK3paf6PhText13GetCurrentPosEv(struct Unk_scePaf_409E25A3_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -478,6 +478,6 @@ s32 scePaf_409E25A3(struct Unk_scePaf_409E25A3_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_64775957);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZNK3paf6PhText15GetVisibleLinesEv);
 
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", scePaf_FC37FABD);
+INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZNK3paf6PhText13GetLineHeightEv);

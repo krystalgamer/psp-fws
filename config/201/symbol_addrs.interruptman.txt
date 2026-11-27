@@ -1,9 +1,9 @@
 // NID-derived names
-syslib_D3744BE0 = 0x00000000; // type:func
+module_bootstart = 0x00000000; // type:func
 sceKernelRegisterIntrHandler = 0x00000198; // type:func
-InterruptManagerForKernel_15894D0B = 0x000003F8; // type:func
+sceKernelSetUserModeIntrHanlerAcceptable = 0x000003F8; // type:func
 sceKernelSetIntrLevel = 0x00000570; // type:func
-InterruptManagerForKernel_43A7BBDC = 0x000006B8; // type:func
+sceKernelSetIntrLogging = 0x000006B8; // type:func
 sceKernelEnableIntr = 0x00000748; // type:func
 sceKernelSuspendIntr = 0x0000082C; // type:func
 sceKernelResumeIntr = 0x00000958; // type:func

@@ -289,7 +289,7 @@ INCLUDE_ASM("nonmatchings/ifhandle", sceNetMFreem);
 
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetMPrepend);
 
-INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_955F2924);
+INCLUDE_ASM("nonmatchings/ifhandle", sceNetMCopypacket);
 
 #if FW_VERSION >= 351
 INCLUDE_RODATA("nonmatchings/ifhandle", D_00003668);

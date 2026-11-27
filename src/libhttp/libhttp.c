@@ -273,7 +273,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateConnection);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_2A6C3296);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetAuthInfoCB);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpAddExtraHeader);
 
@@ -283,7 +283,7 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_0000D6F8);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_4E4A284A);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpCloneTemplate);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttp_A909F2AE);
 
@@ -552,7 +552,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteRequest);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_4E4A284A);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpCloneTemplate);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -780,9 +780,9 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000035B4);
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_000037D4);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_77EE5319);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpLoadAuthList);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_DD6E7857);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpSaveAuthList);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00003ECC);
 
@@ -880,9 +880,9 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000036B8);
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", func_000038CC);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_77EE5319);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpLoadAuthList);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_DD6E7857);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpSaveAuthList);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00003FA4);
 
@@ -955,7 +955,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000051BC);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_457D221D);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpFlushCookie);
 #endif
 
 #if FW_VERSION == 271
@@ -1218,7 +1218,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00005174);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00005264);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_457D221D);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpFlushCookie);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00005628);
 
@@ -1349,9 +1349,9 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000909C);
 #endif
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_87F1E666);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpsEnableOptionPrivate);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_3C478044);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpsDisableOptionPrivate);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
@@ -1478,16 +1478,16 @@ void func_000097A4(void *arg0) {
 
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x48);
     if (temp_v1 != 0) {
-        sceSsl_lib_3E3133D6(temp_v1);
-        sceSsl_lib_54A7D8F3(M2C_FIELD(arg0, s32 *, 0x48));
-        sceSsl_lib_69F1B678(M2C_FIELD(arg0, s32 *, 0x48), 0);
-        sceSsl_lib_B9C8CCE6(M2C_FIELD(arg0, s32 *, 0x48), 0, 0);
-        sceSsl_lib_84833472(M2C_FIELD(arg0, s32 *, 0x48));
+        SSL_shutdown(temp_v1);
+        SSL_clear(M2C_FIELD(arg0, s32 *, 0x48));
+        SSL_set_session(M2C_FIELD(arg0, s32 *, 0x48), 0);
+        SSL_set_bio(M2C_FIELD(arg0, s32 *, 0x48), 0, 0);
+        SSL_free(M2C_FIELD(arg0, s32 *, 0x48));
         M2C_FIELD(arg0, s32 *, 0x48) = 0;
     }
     temp_v1_2 = M2C_FIELD(arg0, s32 *, 0x4C);
     if (temp_v1_2 != 0) {
-        sceSsl_lib_588F2FE8(temp_v1_2);
+        SSL_CTX_free(temp_v1_2);
         M2C_FIELD(arg0, s32 *, 0x4C) = 0;
     }
 }
@@ -1500,16 +1500,16 @@ void func_000097A4(void *arg0) {
 
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x40);
     if (temp_v1 != 0) {
-        sceSsl_lib_3E3133D6(temp_v1);
-        sceSsl_lib_54A7D8F3(M2C_FIELD(arg0, s32 *, 0x40));
-        sceSsl_lib_69F1B678(M2C_FIELD(arg0, s32 *, 0x40), 0);
-        sceSsl_lib_B9C8CCE6(M2C_FIELD(arg0, s32 *, 0x40), 0, 0);
-        sceSsl_lib_84833472(M2C_FIELD(arg0, s32 *, 0x40));
+        SSL_shutdown(temp_v1);
+        SSL_clear(M2C_FIELD(arg0, s32 *, 0x40));
+        SSL_set_session(M2C_FIELD(arg0, s32 *, 0x40), 0);
+        SSL_set_bio(M2C_FIELD(arg0, s32 *, 0x40), 0, 0);
+        SSL_free(M2C_FIELD(arg0, s32 *, 0x40));
         M2C_FIELD(arg0, s32 *, 0x40) = 0;
     }
     temp_v1_2 = M2C_FIELD(arg0, s32 *, 0x44);
     if (temp_v1_2 != 0) {
-        sceSsl_lib_588F2FE8(temp_v1_2);
+        SSL_CTX_free(temp_v1_2);
         M2C_FIELD(arg0, s32 *, 0x44) = 0;
     }
 }
@@ -1539,7 +1539,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00009AC0);
 s32 func_0000B598(void *arg0) {
     s32 var_v0;
 
-    var_v0 = sceSsl_lib_B7CA8717(M2C_FIELD(arg0, s32 *, 0x40));
+    var_v0 = SSL_write(M2C_FIELD(arg0, s32 *, 0x40));
     if (var_v0 < 0) {
         var_v0 = 0x80431075;
     }
@@ -1752,7 +1752,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableCache);
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableCache);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_2A6C3296);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetAuthInfoCB);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -1802,7 +1802,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetProxy);
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableCache);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_8046E250);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableExternalCache);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpAddExtraHeader);
 
@@ -2331,11 +2331,11 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpFlushCache);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpEndCache);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_739C2D79);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpInitExternalCache);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_B0257723);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpFlushExternalCache);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_A461A167);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpEndExternalCache);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00011F88);
 
@@ -2837,9 +2837,9 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetSendTimeOut);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetRecvTimeOut);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_CC920C12);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableNagle);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_D29163DA);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableNagle);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetResHeaderMaxSize);
 
@@ -2861,9 +2861,9 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableAuth);
 #endif
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_CDB0DC58);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableProxyAuth);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_951D310E);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableProxyAuth);
 #endif
 
 #if FW_VERSION >= 330
@@ -2881,7 +2881,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpChangeHttpVersion);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableCache);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_2A6C3296);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetAuthInfoCB);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetAuthInfoCallback);
 
@@ -2903,7 +2903,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetProxy);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableCache);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_8046E250);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableExternalCache);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpAddExtraHeader);
 
@@ -3018,7 +3018,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000108A8);
 INCLUDE_ASM("nonmatchings/libhttp", func_00010970);
 
 void func_00010A74(void) {
-    sceNet_lib_57CC57DA(&D_0001AE08, 0, 0x194);
+    sceNetMemset(&D_0001AE08, 0, 0x194);
     D_0001AE08 = 0x01000000;
 }
 
@@ -3039,7 +3039,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00011100);
 INCLUDE_ASM("nonmatchings/libhttp", func_000111BC);
 
 void func_00011484(void) {
-    sceNet_lib_57CC57DA(&D_0001AF9C, 0, 0xB0);
+    sceNetMemset(&D_0001AF9C, 0, 0xB0);
     D_0001AF9C = 0;
 }
 #endif
@@ -3105,11 +3105,11 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpFlushCache);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpEndCache);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_739C2D79);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpInitExternalCache);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_B0257723);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpFlushExternalCache);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttp_A461A167);
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpEndExternalCache);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0001211C);
 
@@ -3340,7 +3340,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000157F0);
 
 #if FW_VERSION >= 282
 void func_00015A40(void) {
-    sceHttpStorage_CDA3D8F6();
+    sceHttpStorageClose();
 }
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00015A5C);

@@ -158,7 +158,7 @@ INCLUDE_ASM("nonmatchings/init", func_00001404);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/init", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/init", module_bootstart);
 #endif
 
 #if FW_VERSION >= 350
@@ -262,11 +262,11 @@ s32 sceKernelStartIntrLogging(void) {
     return 0;
 }
 
-s32 InitForKernel_33D30F49(void) {
+s32 sceKernelShowIntrHandlerInfo(void) {
     return 0;
 }
 
-s32 InitForKernel_FD0F25AD(void) {
+s32 sceKernelShowIntrMaskTime(void) {
     return 0;
 }
 #endif
@@ -280,7 +280,7 @@ INCLUDE_ASM("nonmatchings/init", func_00000E40);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 310
-INCLUDE_ASM("nonmatchings/init", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/init", module_bootstart);
 #endif
 
 #if FW_VERSION == 201

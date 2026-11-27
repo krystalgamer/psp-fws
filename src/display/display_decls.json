@@ -38,7 +38,7 @@
   "sceGeEdramGetSize": "u32 sceGeEdramGetSize(void);",
   "sceGeEdramSetAddrTranslation": "s32 sceGeEdramSetAddrTranslation(s32);",
   "sceGeEdramSetSize": "M2C_UNK sceGeEdramSetSize(s32);",
-  "sceGe_driver_C576E897": "s32 sceGe_driver_C576E897();",
+  "sceGeEdramGetHwSize": "s32 sceGeEdramGetHwSize();",
   "sceKernelDcacheWritebackAll": "void sceKernelDcacheWritebackAll(void);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelDisableIntr": "M2C_UNK sceKernelDisableIntr(M2C_UNK);",
@@ -51,7 +51,7 @@
   "sceKernelWaitEventFlagCB": "s32 sceKernelWaitEventFlagCB(s32, u32, s32, void *, void *);",
   "sceLcdcGetVsyncFreq": "M2C_UNK sceLcdcGetVsyncFreq();",
   "sceSysregApbTimerClkDisable": "M2C_UNK sceSysregApbTimerClkDisable(M2C_UNK);",
-  "sceSysreg_driver_E88B77ED": "M2C_UNK sceSysreg_driver_E88B77ED(M2C_UNK);"
+  "sceSysregVblankIRQPolar": "M2C_UNK sceSysregVblankIRQPolar(M2C_UNK);"
  },
  "types": {
   "D_00003DB0_s": "struct D_00003DB0_s {\n    u8 pad0[0x60];\n    volatile s32 unk60;\n};",

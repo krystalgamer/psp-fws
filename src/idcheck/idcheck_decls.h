@@ -30,6 +30,6 @@ s32 func_000009E8(void);
 s32 func_000009F0(struct Unk_func_000009F0_0 *arg0);
 s32 func_00000A08(struct Unk_func_00000A08_0 *arg0);
 s32 func_00000AB8(s32, s32);
-s32 syslib_D3744BE0(void);
+s32 module_bootstart(void);
 
 #endif

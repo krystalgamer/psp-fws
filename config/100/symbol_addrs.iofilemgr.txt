@@ -1,5 +1,5 @@
 // NID-derived names
-syslib_D3744BE0 = 0x00000000; // type:func
+module_bootstart = 0x00000000; // type:func
 module_reboot_before = 0x00000140; // type:func
 sceIoPollAsync = 0x00000890; // type:func
 sceIoWaitAsync = 0x000008B0; // type:func

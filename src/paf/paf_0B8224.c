@@ -17,7 +17,7 @@ s32 *func_000B8224(s32 **arg0, s32 arg1) {
     return temp_s1;
 }
 
-void scePaf_C4BAD564(s32 arg0) {
+void _ZN3paf5SleepEi(s32 arg0) {
     sceKernelDelayThread(arg0 * 0x3E8);
 }
 
@@ -31,23 +31,23 @@ INCLUDE_RODATA("nonmatchings/paf_0B8224", D_0019877C);
 
 INCLUDE_RODATA("nonmatchings/paf_0B8224", D_00198784);
 
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_BAE16A39);
+INCLUDE_ASM("nonmatchings/paf_0B8224", _ZN3paf8DateTime6FormatEPwjPKw);
 
 #if FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_41F702EA);
+INCLUDE_ASM("nonmatchings/paf_0B8224", _ZN3paf8DateTime3UTCEv);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_D27DE19A);
+INCLUDE_ASM("nonmatchings/paf_0B8224", _ZN3paf8DateTime3NowEv);
 
-void scePaf_2CFAE498(s32 arg0) {
+void _ZN3paf8DateTime13SetDateFormatEPKw(s32 arg0) {
     func_0000C480((s32) &D_001A5244, arg0);
 }
 
-void scePaf_58846DF3(s32 arg0) {
+void _ZN3paf8DateTime13SetTimeFormatEPKw(s32 arg0) {
     func_0000C480((s32) &D_001A5250, arg0);
 }
 
-void scePaf_E357380E(s32 arg0) {
+void _ZN3paf8DateTime17SetDateTimeFormatEPKw(s32 arg0) {
     func_0000C480((s32) &D_001A525C, arg0);
 }
 
@@ -77,13 +77,13 @@ s32 func_000B8C4C(void) {
 }
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_78F94D84);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspPad_IsAnalogMode);
 #endif
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_5822F12A);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspPad_EnableAnalog);
 #else
-s32 scePaf_5822F12A(void) {
+s32 InputDevice_PspPad_EnableAnalog(void) {
     s32 temp_v0;
 
     temp_v0 = sceCtrlSetSamplingMode(1U);
@@ -93,31 +93,31 @@ s32 scePaf_5822F12A(void) {
     if (D_00138FA0 != 0) {
 
     } else {
-        scePaf_E69C3B1B((s32) &func_000B8804);
+        InputDevice_PspPad_SetAnalogHandler((s32) &func_000B8804);
     }
     return temp_v0;
 }
 #endif
 
-void scePaf_FD9DE7B9(s32 arg0) {
+void InputDevice_PspPad_EnableAnalogThreshold(s32 arg0) {
     D_001A3CC0 = arg0 * arg0;
-    scePaf_5822F12A();
+    InputDevice_PspPad_EnableAnalog();
 }
 
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_E618F7A8);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspPad_DisableAnalog);
 
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_AD43F865);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspPad_SetKeyAssign);
 
-s32 scePaf_EA39A7C1(void) {
+s32 InputDevice_PspPad_GetKeyAssign(void) {
     return D_001A52C0;
 }
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_6B1E90C7);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspPad_Lock);
 #endif
 
 #if (FW_VERSION >= 150 && FW_VERSION < 200) || FW_VERSION == 282
-void scePaf_6B1E90C7(void) {
+void InputDevice_PspPad_Lock(void) {
     s32 temp_a0;
 
     temp_a0 = sceKernelSuspendDispatchThread();
@@ -127,17 +127,17 @@ void scePaf_6B1E90C7(void) {
 #endif
 
 #if FW_VERSION == 100
-void scePaf_6B1E90C7(void) {
+void InputDevice_PspPad_Lock(void) {
     D_001A52BC += 1;
 }
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_66907719);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspPad_Unlock);
 #endif
 
 #if (FW_VERSION >= 150 && FW_VERSION < 200) || FW_VERSION == 282
-void scePaf_66907719(void) {
+void InputDevice_PspPad_Unlock(void) {
     s32 temp_a0;
 
     temp_a0 = sceKernelSuspendDispatchThread();
@@ -147,41 +147,41 @@ void scePaf_66907719(void) {
 #endif
 
 #if FW_VERSION == 100
-void scePaf_66907719(void) {
+void InputDevice_PspPad_Unlock(void) {
     D_001A52BC -= 1;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_D5F3BAB1);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspPad_SetModifierKey);
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_AAD0EE78);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspPad_SetDigitalHandler);
 #endif
 
 #if FW_VERSION < 200
-void scePaf_AAD0EE78(s32 arg0) {
+void InputDevice_PspPad_SetDigitalHandler(s32 arg0) {
     D_00138F9C = arg0;
 }
 #endif
 
 #if FW_VERSION == 282
-void scePaf_AAD0EE78(s32 arg0) {
+void InputDevice_PspPad_SetDigitalHandler(s32 arg0) {
     D_001A5270 = arg0;
 }
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_E69C3B1B);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspPad_SetAnalogHandler);
 #endif
 
 #if FW_VERSION < 200
-void scePaf_E69C3B1B(s32 arg0) {
+void InputDevice_PspPad_SetAnalogHandler(s32 arg0) {
     D_00138FA0 = arg0;
 }
 #endif
 
 #if FW_VERSION == 282
-void scePaf_E69C3B1B(s32 arg0) {
+void InputDevice_PspPad_SetAnalogHandler(s32 arg0) {
     D_001A5274 = arg0;
 }
 #endif
@@ -206,7 +206,7 @@ void scePaf_C2911954(s32 arg0) {
 }
 #endif
 
-s32 scePaf_872F948B(void) {
+s32 InputDevice_PspPad_Get(void) {
     return D_001A5280;
 }
 
@@ -221,11 +221,11 @@ s32 func_000B9280(void) {
 }
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_A044BFC0);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspHprm_Lock);
 #endif
 
 #if (FW_VERSION >= 150 && FW_VERSION < 200) || FW_VERSION == 282
-void scePaf_A044BFC0(void) {
+void InputDevice_PspHprm_Lock(void) {
     s32 temp_a0;
 
     temp_a0 = sceKernelSuspendDispatchThread();
@@ -235,17 +235,17 @@ void scePaf_A044BFC0(void) {
 #endif
 
 #if FW_VERSION == 100
-void scePaf_A044BFC0(void) {
+void InputDevice_PspHprm_Lock(void) {
     D_001A52FC += 1;
 }
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_F1CF9579);
+INCLUDE_ASM("nonmatchings/paf_0B8224", InputDevice_PspHprm_Unlock);
 #endif
 
 #if (FW_VERSION >= 150 && FW_VERSION < 200) || FW_VERSION == 282
-void scePaf_F1CF9579(void) {
+void InputDevice_PspHprm_Unlock(void) {
     s32 temp_a0;
 
     temp_a0 = sceKernelSuspendDispatchThread();
@@ -255,22 +255,22 @@ void scePaf_F1CF9579(void) {
 #endif
 
 #if FW_VERSION == 100
-void scePaf_F1CF9579(void) {
+void InputDevice_PspHprm_Unlock(void) {
     D_001A52FC -= 1;
 }
 #endif
 
-void scePaf_D726F4A2(s32 arg0) {
+void InputDevice_PspHprm_SetDigitalHandler(s32 arg0) {
     D_001A52D4 = arg0;
 }
 
-s32 scePaf_132148FD(void) {
+s32 InputDevice_PspHprm_Get(void) {
     return D_001A52DC;
 }
 
-INCLUDE_ASM("nonmatchings/paf_0B8224", scePaf_533F3856);
+INCLUDE_ASM("nonmatchings/paf_0B8224", _ZN3paf12FormatStringEPKwS1_S1_S1_S1_S1_S1_S1_S1_S1_);
 
-void scePaf_139D9047(s32 arg0) {
+void _ZN3paf23SetFormatStringCallbackEPFPKwwE(s32 arg0) {
     D_001A5300 = arg0;
 }
 

@@ -1,7 +1,7 @@
 {
  "funcs": {
-  "InitForKernel_33D30F49": "s32 InitForKernel_33D30F49(void);",
-  "InitForKernel_FD0F25AD": "s32 InitForKernel_FD0F25AD(void);",
+  "sceKernelShowIntrHandlerInfo": "s32 sceKernelShowIntrHandlerInfo(void);",
+  "sceKernelShowIntrMaskTime": "s32 sceKernelShowIntrMaskTime(void);",
   "func_00001208": "s32 func_00001208(void);",
   "func_00001284": "s32 func_00001284(void);",
   "memset": "M2C_UNK memset(M2C_UNK, M2C_UNK, M2C_UNK);",

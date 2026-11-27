@@ -74,7 +74,7 @@ void * sceGeEdramGetAddr(void);
 u32 sceGeEdramGetSize(void);
 s32 sceGeEdramSetAddrTranslation(s32);
 M2C_UNK sceGeEdramSetSize(s32);
-s32 sceGe_driver_C576E897();
+s32 sceGeEdramGetHwSize();
 void sceKernelDcacheWritebackAll(void);
 s32 sceKernelDeleteEventFlag(s32);
 M2C_UNK sceKernelDisableIntr(M2C_UNK);
@@ -87,6 +87,6 @@ s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);
 s32 sceKernelWaitEventFlagCB(s32, u32, s32, void *, void *);
 M2C_UNK sceLcdcGetVsyncFreq();
 M2C_UNK sceSysregApbTimerClkDisable(M2C_UNK);
-M2C_UNK sceSysreg_driver_E88B77ED(M2C_UNK);
+M2C_UNK sceSysregVblankIRQPolar(M2C_UNK);
 
 #endif

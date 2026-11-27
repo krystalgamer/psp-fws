@@ -15,7 +15,7 @@
   "func_000009F0": "s32 func_000009F0(struct Unk_func_000009F0_0 *arg0);",
   "func_00000A08": "s32 func_00000A08(struct Unk_func_00000A08_0 *arg0);",
   "func_00000AB8": "s32 func_00000AB8(s32, s32);",
-  "syslib_D3744BE0": "s32 syslib_D3744BE0(void);"
+  "module_bootstart": "s32 module_bootstart(void);"
  },
  "types": {
   "Unk_func_000009F0_0": "struct Unk_func_000009F0_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",

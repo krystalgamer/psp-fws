@@ -16,7 +16,7 @@ void func_00017270(struct Unk_func_00017270_0 *arg0, struct Unk_func_00017270_1 
     if (((u32) arg1->unk8 >> 8) & 0x80) {
 
     } else {
-        scePaf_C01BF169(arg2 + 0xF4, (s32) &func_000173DC, arg2, arg0->unk1C, 0, 0);
+        _ZN8PSJSExec10RegistExecEPFvPvS0_S0_bES0_S0_S0_b(arg2 + 0xF4, (s32) &func_000173DC, arg2, arg0->unk1C, 0, 0);
     }
 }
 #endif
@@ -26,7 +26,7 @@ void func_00017270(struct Unk_func_00017270_0 *arg0, struct Unk_func_00017270_1 
     if (((u32) arg1->unk8 >> 8) & 0x80) {
 
     } else {
-        scePaf_C01BF169(arg2 + 0xF0, (s32) &func_000173DC, arg2, arg0->unk1C, 0, 0);
+        _ZN8PSJSExec10RegistExecEPFvPvS0_S0_bES0_S0_S0_b(arg2 + 0xF0, (s32) &func_000173DC, arg2, arg0->unk1C, 0, 0);
     }
 }
 #endif
@@ -36,7 +36,7 @@ void func_00017270(struct Unk_func_00017270_0 *arg0, struct Unk_func_00017270_1 
     if (((u32) arg1->unk8 >> 8) & 0x80) {
 
     } else {
-        scePaf_C01BF169(arg2 + 0xF8, (s32) &func_000173DC, arg2, arg0->unk1C, 0, 0);
+        _ZN8PSJSExec10RegistExecEPFvPvS0_S0_bES0_S0_S0_b(arg2 + 0xF8, (s32) &func_000173DC, arg2, arg0->unk1C, 0, 0);
     }
 }
 #endif
@@ -208,11 +208,11 @@ INCLUDE_ASM("nonmatchings/paf_016744", func_0001B870);
 INCLUDE_ASM("nonmatchings/paf_016744", func_0001BACC);
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_52CF8D80);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZN11PSJSContextC1Ev);
 #endif
 
 #if FW_VERSION == 282
-void scePaf_52CF8D80(s32 *arg0) {
+void _ZN11PSJSContextC1Ev(s32 *arg0) {
     *arg0 = 0;
 }
 #endif
@@ -234,11 +234,11 @@ void func_0001BB84(s32 **arg0, s32 **arg1) {
 }
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_0880B827);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZN11PSJSContextC1ERKS_);
 #endif
 
 #if FW_VERSION == 282
-void scePaf_0880B827(s32 **arg0, s32 **arg1) {
+void _ZN11PSJSContextC1ERKS_(s32 **arg0, s32 **arg1) {
     s32 *temp_a1;
 
     temp_a1 = *arg1;
@@ -250,15 +250,15 @@ void scePaf_0880B827(s32 **arg0, s32 **arg1) {
 #endif
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_F3397557);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZN11PSJSContextaSERKS_);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_DF58706C);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZN11PSJSContextD1Ev);
 #endif
 
 #if FW_VERSION == 282
-void scePaf_DF58706C(s32 **arg0) {
+void _ZN11PSJSContextD1Ev(s32 **arg0) {
     s32 *temp_s0;
     s32 temp_v0;
 
@@ -270,7 +270,7 @@ void scePaf_DF58706C(s32 **arg0) {
 
         } else {
             func_0001B198(temp_s0);
-            scePaf_4E67BB08(temp_s0);
+            _ZdlPv(temp_s0);
         }
     }
 }
@@ -301,24 +301,24 @@ void func_0001B2F8(s32 **arg0) {
 
         } else {
             func_0001B198(temp_s0);
-            scePaf_4E67BB08(temp_s0);
+            _ZdlPv(temp_s0);
         }
     }
 }
 
 INCLUDE_ASM("nonmatchings/paf_016744", func_0001B34C);
 #else
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_C07624F0);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZN11PSJSContext4LoadEPK8PSJSFile);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_296ED0EF);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZN11PSJSContext12RegistGlobalEPKcP13PSJSValueImpl);
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_C904DA17);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZN11PSJSContext12RegistGlobalEPKci);
 
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_2AFA99B1);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZNK11PSJSContext10FindGlobalEPKc);
 
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_66E3AAA9);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZN11PSJSContext17RegistMethodToObjER9PSJSValuePK12PSJSAPIEntry);
 #else
 INCLUDE_ASM("nonmatchings/paf_016744", func_0001B4DC);
 
@@ -326,11 +326,11 @@ INCLUDE_ASM("nonmatchings/paf_016744", scePaf_DBD69B7B);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_D8739C4C);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZNK11PSJSContext11GetUserDataEv);
 #endif
 
 #if FW_VERSION < 200
-s32 scePaf_D8739C4C(void **arg0) {
+s32 _ZNK11PSJSContext11GetUserDataEv(void **arg0) {
     s32 var_v0;
     void *temp_a0;
 
@@ -344,7 +344,7 @@ s32 scePaf_D8739C4C(void **arg0) {
 #endif
 
 #if FW_VERSION == 282
-s32 scePaf_D8739C4C(void **arg0) {
+s32 _ZNK11PSJSContext11GetUserDataEv(void **arg0) {
     s32 var_v0;
     struct Unk_scePaf_D8739C4C_temp_a0 *temp_a0;
 
@@ -358,11 +358,11 @@ s32 scePaf_D8739C4C(void **arg0) {
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_016744", scePaf_D7E925A1);
+INCLUDE_ASM("nonmatchings/paf_016744", _ZN11PSJSContext11SetUserDataEPv);
 #endif
 
 #if FW_VERSION < 200
-s32 scePaf_D7E925A1(void **arg0, s32 arg1) {
+s32 _ZN11PSJSContext11SetUserDataEPv(void **arg0, s32 arg1) {
     s32 var_v0;
     void *temp_a0;
 
@@ -377,7 +377,7 @@ s32 scePaf_D7E925A1(void **arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION == 282
-s32 scePaf_D7E925A1(void **arg0, s32 arg1) {
+s32 _ZN11PSJSContext11SetUserDataEPv(void **arg0, s32 arg1) {
     s32 var_v0;
     struct Unk_scePaf_D7E925A1_temp_a0 *temp_a0;
 

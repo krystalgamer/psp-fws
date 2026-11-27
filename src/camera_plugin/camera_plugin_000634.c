@@ -42,7 +42,7 @@ void func_00000758(s32 arg0) {
     if (D_00024D80 != 0) {
 
     } else {
-        temp_v0 = scePaf_B7E6052B(0x340);
+        temp_v0 = _Znwj(0x340);
         func_00001DA8(temp_v0, arg0, 0);
         D_00024D80 = temp_v0;
         func_00001EB4((struct Unk_func_00001EB4_0 *) temp_v0);
@@ -137,7 +137,7 @@ void func_00001294(void) {
 }
 #else
 void func_00001294(void) {
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     if (D_00165444 == 0) {
 
     } else {

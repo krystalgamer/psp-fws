@@ -86,10 +86,10 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00000198);
 #else
 void func_00000198(void) {
     void *sp0;
-    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
     func_000007F0((s32) &D_00004B7C, &sp0);
     func_000007C0(&sp0);
-    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
     func_000007F0((s32) &D_00004B88, &sp0);
     func_000007C0(&sp0);
 }
@@ -184,7 +184,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000005F4);
 #if FW_VERSION < 330
 void func_000005F4(M2C_UNK **arg0) {
     *arg0 = &D_000047C8;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -208,9 +208,9 @@ void func_0000063C(void) {
 void func_0000063C(void) {
     void *temp_v0;
 
-    temp_v0 = scePaf_D4FAE7D0("htmlviewer_plugin");
+    temp_v0 = _ZN3paf4View4FindEPKc("htmlviewer_plugin");
     if (temp_v0 != NULL) {
-        scePaf_5EBC648F(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1B8));
+        _ZN3paf4View12PageActivateEPv(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1B8));
     }
     sceHtmlViewerHelper_05E0C3D4(0);
 }
@@ -220,9 +220,9 @@ void func_0000063C(void) {
 void func_0000063C(void) {
     struct Unk_func_0000063C_temp_v0 *temp_v0;
 
-    temp_v0 = scePaf_D4FAE7D0("htmlviewer_plugin");
+    temp_v0 = _ZN3paf4View4FindEPKc("htmlviewer_plugin");
     if (temp_v0 != NULL) {
-        scePaf_5EBC648F(temp_v0, temp_v0->unk1B8);
+        _ZN3paf4View12PageActivateEPv(temp_v0, temp_v0->unk1B8);
     }
     sceHtmlViewerHelper_05E0C3D4(0);
 }
@@ -231,7 +231,7 @@ void func_0000063C(void) {
 #if FW_VERSION < 330
 void func_00000674(struct Unk_func_00000674_0 *arg0) {
     sceHtmlViewerHelper_05E0C3D4(1);
-    scePaf_CAF05F1D(arg0->unk4, &D_00004770);
+    _ZN3paf4View12PageActivateEPKc(arg0->unk4, &D_00004770);
 }
 #endif
 
@@ -750,7 +750,7 @@ void func_00002150(void *arg0) {
     }
     sceHttpDeleteTemplate(M2C_FIELD(arg0, s32 *, 4));
     sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x18));
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

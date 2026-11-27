@@ -21,12 +21,12 @@ void func_00000298(void);
 s32 func_000002C4(s32);
 M2C_UNK func_0000034C();
 s32 module_stop(void);
-M2C_UNK scePaf_3481F595(s32, M2C_UNK *);
-s32 scePaf_97FDA760(s32, s32, void *);
-M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);
-M2C_UNK scePaf_F609FA81(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
-M2C_UNK sceVshCommonGui_441D55D7(M2C_UNK);
-M2C_UNK sceVshCommonGui_54BC644C(void *, s32);
-s32 sceVshCommonGui_5C161337(M2C_UNK);
+M2C_UNK _ZN3paf4View9PageCloseEPKc(s32, M2C_UNK *);
+s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, void *);
+M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);
+M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
+M2C_UNK _ZN3vsh25ShowButtonNavigation_BackEb(M2C_UNK);
+M2C_UNK _ZN3vsh30SetButtonNavigationString_BackEPKw(void *, s32);
+s32 _ZN3vsh14GetString_BackE6Locale(M2C_UNK);
 
 #endif

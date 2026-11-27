@@ -4,6 +4,6 @@
 #if FW_VERSION != 270
 void func_000E42DC(M2C_UNK **arg0) {
     *arg0 = &D_0019A4A0;
-    scePaf_715E8DAB((s32) arg0);
+    _ZN3paf8PhWidgetD2Ev((s32) arg0);
 }
 #endif

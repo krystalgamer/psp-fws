@@ -98,7 +98,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_0F42084B);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_1D700DE1);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_5DCBF455);
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", EasyRegUtil_Base_getMode);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_5D47C0F2);
 
@@ -332,9 +332,9 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_9B6045FA);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_000024C8);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_A39AF99E);
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", EasyRegUtil_discovery);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_C31DB15F);
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", EasyRegUtil_registration);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_BF50FCE1);
@@ -506,7 +506,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_00003700);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_8EA1D2D5);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_FFC9E6E4);
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", EasyRegUtil_Initialize);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_CDBD700D);
 
@@ -1855,7 +1855,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_0000CE6C);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_000300", D_0004E7E0);
 #endif
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_651CA450);
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", NetAVMgr_setbitrate);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_00010330);
 
@@ -1896,8 +1896,8 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_B35F5B54);
 #if FW_VERSION == 303
 s32 sceVshLftvMw_B35F5B54(void) {
     D_0005BA44 = 1;
-    sceVshLftvMw_B45A02C2();
-    sceVshLftvMw_FF42F668();
+    NetAVMgr_Cleanup();
+    NetAVMgr_Init();
     D_0005BA44 = 0;
     return 0;
 }
@@ -1925,13 +1925,13 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_0001066C);
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_000106A8);
 #endif
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_FF42F668);
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", NetAVMgr_Init);
 
 #if FW_VERSION >= 303
 INCLUDE_RODATA("nonmatchings/lftv_middleware_000300", D_00053904);
 #endif
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_B45A02C2);
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", NetAVMgr_Cleanup);
 
 #if FW_VERSION >= 260 && FW_VERSION < 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_000178F4);
@@ -3246,9 +3246,9 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_00027F88);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_DC43D852);
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", TvMgr_CH_Enter);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_1E1128CD);
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", TvMgr_Input_Select);
 #endif
 
 #if FW_VERSION < 271
@@ -3287,7 +3287,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_000300", func_0001538C);
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_B80CA89E);
 #endif
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_7C7EE31C);
+INCLUDE_ASM("nonmatchings/lftv_middleware_000300", TvMgr_ChangeAudioBli);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_000300", sceVshLftvMw_D65A6887);
 

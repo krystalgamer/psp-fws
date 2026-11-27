@@ -13,9 +13,9 @@ void func_00000294(void) {
 
     sceVshCommonUtil_622815DD(&D_000236A4, func_000004F8);
     func_0000E048(0);
-    temp_v0 = scePaf_D4FAE7D0(&D_00021640);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_00021640);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             D_00165490 = M2C_FIELD(temp_v0_2, s32 (**)(), 0x2C)();
         }

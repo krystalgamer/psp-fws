@@ -8499,7 +8499,7 @@ s32 func_00025C84(s32 arg0, struct Unk_func_00025C84_1 *arg1) {
             M2C_FIELD(temp_v0, s32 *, 0x25C) = func_0003E4A0(M2C_FIELD(temp_v0, s32 *, 0), 3, 0);
             func_00010A68(&temp_s1->pad0[0x14DC], M2C_FIELD(temp_v0, s32 *, 0));
             M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
-            sceHttp_B0257723();
+            sceHttpFlushExternalCache();
             sceHVSlim_Library_B29BE9CE(arg0);
         }
     }
@@ -8519,7 +8519,7 @@ s32 func_00025C84(s32 arg0, struct Unk_func_00025C84_1 *arg1) {
             M2C_FIELD(temp_v0, s32 *, 0x25C) = func_0003E4A0(M2C_FIELD(temp_v0, s32 *, 0), 3, 0);
             func_00010A68(&temp_s1->pad0[0x14D8], M2C_FIELD(temp_v0, s32 *, 0));
             M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
-            sceHttp_B0257723();
+            sceHttpFlushExternalCache();
             sceHVSlim_Library_B29BE9CE(arg0);
         }
     }
@@ -8539,7 +8539,7 @@ s32 func_00025C84(s32 arg0, struct Unk_func_00025C84_1 *arg1) {
             M2C_FIELD(temp_v0, s32 *, 0x25C) = func_0003E4A0(M2C_FIELD(temp_v0, s32 *, 0), 3, 0);
             func_00010A68(&temp_s1->pad0[0x14D4], M2C_FIELD(temp_v0, s32 *, 0));
             M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
-            sceHttp_B0257723();
+            sceHttpFlushExternalCache();
             sceHVSlim_Library_B29BE9CE(arg0);
         }
     }
@@ -8559,7 +8559,7 @@ s32 func_00025C84(s32 arg0, struct Unk_func_00025C84_1 *arg1) {
             temp_v0->unk25C = func_0003E4A0(temp_v0->unk0, 3, 0);
             func_00010A68(temp_s1 + 0x14DC, temp_v0->unk0);
             temp_v0->unk274 = 0x32;
-            sceHttp_B0257723();
+            sceHttpFlushExternalCache();
             sceHVSlim_Library_B29BE9CE(arg0);
         }
     }
@@ -8580,7 +8580,7 @@ s32 func_00025D24(s32 arg0, struct Unk_func_00025D24_1 *arg1) {
             func_00010A68(&temp_s1->pad0[0x14DC], M2C_FIELD(temp_v0, s32 *, 0));
             M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
             sceHVSlim_Library_B29BE9CE(arg0);
-            sceHttp_457D221D();
+            sceHttpFlushCookie();
             sceHttpSaveSystemCookie();
         }
     }
@@ -8601,7 +8601,7 @@ s32 func_00025D24(s32 arg0, struct Unk_func_00025D24_1 *arg1) {
             func_00010A68(&temp_s1->pad0[0x14D8], M2C_FIELD(temp_v0, s32 *, 0));
             M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
             sceHVSlim_Library_B29BE9CE(arg0);
-            sceHttp_457D221D();
+            sceHttpFlushCookie();
             sceHttpSaveSystemCookie();
         }
     }
@@ -8622,7 +8622,7 @@ s32 func_00025D24(s32 arg0, struct Unk_func_00025D24_1 *arg1) {
             func_00010A68(&temp_s1->pad0[0x14D4], M2C_FIELD(temp_v0, s32 *, 0));
             M2C_FIELD(temp_v0, s32 *, 0x274) = 0x32;
             sceHVSlim_Library_B29BE9CE(arg0);
-            sceHttp_457D221D();
+            sceHttpFlushCookie();
             sceHttpSaveSystemCookie();
         }
     }
@@ -8643,7 +8643,7 @@ s32 func_00025D24(s32 arg0, struct Unk_func_00025D24_1 *arg1) {
             func_00010A68(temp_s1 + 0x14DC, temp_v0->unk0);
             temp_v0->unk274 = 0x32;
             sceHVSlim_Library_B29BE9CE(arg0);
-            sceHttp_457D221D();
+            sceHttpFlushCookie();
             sceHttpSaveSystemCookie();
         }
     }

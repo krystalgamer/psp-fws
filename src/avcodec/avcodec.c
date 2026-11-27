@@ -103,7 +103,7 @@ INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodecGetInfo);
 INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodecAlcExtendParameter);
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
-INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodec_E066B45F);
+INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodecSetInfo);
 #endif
 
 INCLUDE_ASM("nonmatchings/avcodec", sceAudiocodecGetEDRAM);
@@ -161,7 +161,7 @@ INCLUDE_ASM("nonmatchings/avcodec", sceVideocodec_893B32B1);
 #endif
 
 s32 func_000012AC(void) {
-    sceMePower_driver_B6FE3E62(0);
+    sceMePowerControlDmacplusClock(0);
     sceMePowerControlAvcPower(0);
     return 0;
 }
@@ -220,7 +220,7 @@ INCLUDE_ASM("nonmatchings/avcodec", func_00001FC0);
 
 INCLUDE_ASM("nonmatchings/avcodec", func_0000203C);
 
-INCLUDE_ASM("nonmatchings/avcodec", sceMpegbase_driver_BEA18F91);
+INCLUDE_ASM("nonmatchings/avcodec", sceMpegBasePESpacketCopy);
 
 INCLUDE_ASM("nonmatchings/avcodec", sceJpegInitMJpeg);
 

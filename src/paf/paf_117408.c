@@ -4,8 +4,8 @@
 #if FW_VERSION == 282
 void func_00117408(M2C_UNK **arg0) {
     *arg0 = &D_0019CEF8;
-    scePaf_715E8DAB((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf8PhWidgetD2Ev((s32) arg0);
+    _ZdlPv(arg0);
 }
 
 void func_00117440(struct Unk_func_00117440_0 *arg0, s32 arg1) {
@@ -23,7 +23,7 @@ s32 func_0011744C(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A4934 != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }

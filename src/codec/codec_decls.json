@@ -1,6 +1,6 @@
 {
  "funcs": {
-  "KDebugForKernel_E892D9A1": "KDebugUnkIf *KDebugForKernel_E892D9A1(void);",
+  "sceKernelSm1ReferOperations": "KDebugUnkIf *sceKernelSm1ReferOperations(void);",
   "func_0000004C": "M2C_UNK func_0000004C(M2C_UNK, M2C_UNK);",
   "func_00000094": "void func_00000094(s32 arg0);",
   "func_000000E0": "void func_000000E0(void);",

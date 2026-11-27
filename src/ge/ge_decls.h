@@ -53,9 +53,9 @@ u32 sceGeEdramGetSize(void);
 s32 sceGeInit(void);
 s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3);
 s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3);
-s32 sceGe_driver_9DA4A75F(s32 arg0);
-s32 sceGe_driver_BAD6E1CA(s32 arg0);
-s32 sceGe_driver_C576E897(void);
+s32 sceGeSetGeometryClock(s32 arg0);
+s32 sceGeRegisterLogHandler(s32 arg0);
+s32 sceGeEdramGetHwSize(void);
 s32 sceKernelDeleteEventFlag(s32);
 
 #endif

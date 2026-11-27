@@ -70,16 +70,16 @@ INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024E24);
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024E74);
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_752F182C);
+INCLUDE_ASM("nonmatchings/paf_01C97C", _Z9PSJS_ExecRK11PSJSContext);
 
-INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_81817B66);
+INCLUDE_ASM("nonmatchings/paf_01C97C", _Z9PSJS_ExecRK11PSJSContextP9PSJSValue);
 #else
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_0001F474);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_10C1DB70);
+INCLUDE_ASM("nonmatchings/paf_01C97C", _Z13PSJS_ExecFuncRK11PSJSContextRK9PSJSValueRS2_iPS2_S6_);
 
-INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_01C2FC36);
+INCLUDE_ASM("nonmatchings/paf_01C97C", _Z21PSJS_InternalExecFuncRK11PSJSContextRK9PSJSValueRS2_iPS2_S6_);
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_00024B6C);
@@ -142,9 +142,9 @@ INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FB54);
 INCLUDE_RODATA("nonmatchings/paf_01C97C", D_0016FB68);
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_AAE8A6B6);
+INCLUDE_ASM("nonmatchings/paf_01C97C", _ZN11PSJSContext14RegistStandardEv);
 
-INCLUDE_ASM("nonmatchings/paf_01C97C", scePaf_CEFBDE33);
+INCLUDE_ASM("nonmatchings/paf_01C97C", _ZN11PSJSContext21RegistExtensionVectorEv);
 #else
 INCLUDE_ASM("nonmatchings/paf_01C97C", func_0002013C);
 #endif
@@ -208,12 +208,12 @@ void func_000273B8(struct Unk_func_000273B8_0 *arg0) {
                 temp_v1 = M2C_FIELD((var_a1 + var_v0), s32 *, 4);
                 var_s0 -= 1;
                 if (temp_v1 != 0) {
-                    scePaf_48B5C1C0(temp_v1);
+                    _ZN13PSJSValueImpl6DecRefEv(temp_v1);
                     var_a1 = arg0->unk0;
                 }
                 var_v0 = var_s0 * 8;
             } while (var_s0 >= 0);
         }
-        scePaf_997D2809(var_a1);
+        _ZN8PSJSHeap12private_freeEPv(var_a1);
     }
 }

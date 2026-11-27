@@ -1,22 +1,22 @@
 #include "common.h"
 #include "paf_decls.h"
 
-s32 scePaf_D3AB4076(void) {
+s32 _ZN3paf5Image12GetErrorTypeEv(void) {
     return D_001A34E4;
 }
 
-s32 scePaf_87E5F9C7(struct Unk_scePaf_87E5F9C7_0 *arg0, s32 arg1, s32 arg2) {
+s32 _ZN3paf5Image13SetCancelFuncEPFbPvES1_(struct Unk_scePaf_87E5F9C7_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unkA0 = arg1;
     arg0->unkA4 = arg2;
     return 1;
 }
 
 #if (FW_VERSION >= 200 && FW_VERSION < 282) || FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/paf_043468", scePaf_D726DDD3);
+INCLUDE_ASM("nonmatchings/paf_043468", _ZN3paf5Image12CopyWithEdgeEv);
 #endif
 
 #if (FW_VERSION >= 250 && FW_VERSION < 282) || FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/paf_043468", scePaf_8A8FE0A1);
+INCLUDE_ASM("nonmatchings/paf_043468", _ZN3paf5Image6MirrorEv);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
@@ -24,11 +24,11 @@ INCLUDE_ASM("nonmatchings/paf_043468", func_00040864);
 #endif
 
 #if FW_VERSION == 282
-s32 scePaf_D726DDD3(s32 arg0) {
+s32 _ZN3paf5Image12CopyWithEdgeEv(s32 arg0) {
     s32 **temp_v0;
     s32 var_v0;
 
-    temp_v0 = scePaf_B7E6052B(8);
+    temp_v0 = _Znwj(8);
     func_0004B580(temp_v0);
     var_v0 = 0;
     if (temp_v0 != NULL) {
@@ -37,11 +37,11 @@ s32 scePaf_D726DDD3(s32 arg0) {
     return var_v0;
 }
 
-s32 scePaf_8A8FE0A1(s32 arg0) {
+s32 _ZN3paf5Image6MirrorEv(s32 arg0) {
     s32 **temp_v0;
     s32 var_v0;
 
-    temp_v0 = scePaf_B7E6052B(8);
+    temp_v0 = _Znwj(8);
     func_000439FC(temp_v0);
     var_v0 = 0;
     if (temp_v0 != NULL) {
@@ -94,7 +94,7 @@ void func_00043A54(M2C_UNK **arg0) {
 void func_00043A7C(M2C_UNK **arg0) {
     *arg0 = &D_00171338;
     func_0004417C((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/paf_043468", func_00043AB4);
@@ -131,7 +131,7 @@ void func_00044190(struct Unk_func_00044190_0 *arg0) {
 void func_000441A4(struct Unk_func_000441A4_0 *arg0) {
     arg0->unk0 = &D_00171380;
     arg0->unk4 = 0;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 s32 func_000441D0(struct Unk_func_000441D0_0 *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
@@ -171,7 +171,7 @@ void func_00044680(M2C_UNK **arg0) {
 
 void func_00044690(M2C_UNK **arg0) {
     *arg0 = &D_00171380;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/paf_043468", func_000446B8);
@@ -191,7 +191,7 @@ void func_00044798(M2C_UNK **arg0) {
 void func_000447C0(M2C_UNK **arg0) {
     *arg0 = &D_001714B0;
     func_0004417C((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/paf_043468", func_000447F8);

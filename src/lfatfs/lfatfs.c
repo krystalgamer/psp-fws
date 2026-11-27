@@ -361,7 +361,7 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CE50);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/lfatfs", syslib_ADF12745);
+INCLUDE_ASM("nonmatchings/lfatfs", module_reboot_phase);
 
 INCLUDE_ASM("nonmatchings/lfatfs", sceLfatfsWaitReady);
 
@@ -379,7 +379,7 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000C990);
 
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000C9C0);
 
-INCLUDE_ASM("nonmatchings/lfatfs", syslib_ADF12745);
+INCLUDE_ASM("nonmatchings/lfatfs", module_reboot_phase);
 
 INCLUDE_ASM("nonmatchings/lfatfs", sceLfatfsWaitReady);
 

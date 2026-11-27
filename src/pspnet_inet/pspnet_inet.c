@@ -11,46 +11,46 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetErrno);
 #endif
 
 #if FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_5155EC8A);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigGetIfaddr);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_4F68DB0E);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigSetIfaddr);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_6A046357);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigDelIfaddr);
 
 #if FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_5155EC8A);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigGetIfaddr);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_E6F67D14);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigFlushRoute);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_3D905F34);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigGetRouteInfo);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_59561561);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigAddArp);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_DC38FEE9);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigDelArp);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_DE9E5174);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigFlushArp);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_824CBC6D);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigGetArpInfo);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_4459EAAF);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigAddRoute);
 
 #if FW_VERSION >= 152
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_A94A75E7);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigAddMRoute);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_EB7A7E4F);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigDelRoute);
 
 #if FW_VERSION >= 152
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_FDE938A7);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigDelMRoute);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_7776A492);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigSetDefaultRoute);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_3FDDB0BA);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigDelDefaultRoute);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_8FE19FC4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigGetDefaultRoute);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001584);
@@ -76,9 +76,9 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000014DC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001624);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_AC9D90A5);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigGetDNS);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_AAF4895A);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigSetDNS);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetTcpcbstat);
 
@@ -90,7 +90,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001D50);
 
 #if FW_VERSION < 201
 void func_00001D50(void) {
-    sceNet_lib_E155112D(&func_00001BE4, func_00001DD8);
+    _sce_pspnet_start_of_inet_module_in_sched(&func_00001BE4, func_00001DD8);
 }
 #endif
 
@@ -100,17 +100,17 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001D78);
 
 #if FW_VERSION < 201
 s32 func_00001D78(void) {
-    return sceNet_lib_41621EB0();
+    return _sce_pspnet_stop_of_inet_module_in_sched();
 }
 #endif
 
 #if FW_VERSION >= 282
 void func_00001BA0(void) {
-    sceNet_lib_E155112D(&func_00001BE4, func_00001C28);
+    _sce_pspnet_start_of_inet_module_in_sched(&func_00001BE4, func_00001C28);
 }
 
 void func_00001BC8(void) {
-    sceNet_lib_41621EB0();
+    _sce_pspnet_stop_of_inet_module_in_sched();
 }
 #endif
 
@@ -214,9 +214,9 @@ s32 func_0000431C(void *arg0, s32 arg1) {
     s32 temp_s1;
     s32 temp_s2;
 
-    temp_s2 = sceNet_lib_94B44F26();
+    temp_s2 = _sce_pspnet_spllock();
     temp_s1 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x10), s32 (**)(void *, M2C_UNK, M2C_UNK, s32, M2C_UNK), 0x1C)(arg0, 2, 0, arg1, 0);
-    sceNet_lib_515B2F33(temp_s2);
+    _sce_pspnet_splunlock(temp_s2);
     return temp_s1;
 }
 #endif
@@ -233,9 +233,9 @@ s32 func_00004124(struct Unk_func_00004124_0 *arg0, s32 arg1) {
     s32 temp_s1;
     s32 temp_s2;
 
-    temp_s2 = sceNet_lib_94B44F26();
+    temp_s2 = _sce_pspnet_spllock();
     temp_s1 = arg0->unk10->unk1C(arg0, 2, 0, arg1, 0);
-    sceNet_lib_515B2F33(temp_s2);
+    _sce_pspnet_splunlock(temp_s2);
     return temp_s1;
 }
 #endif
@@ -254,13 +254,13 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000046A8);
 
 #if FW_VERSION < 201
 void func_000046A8(s32 arg0) {
-    sceNet_lib_B9C780C7(arg0 + 0x5C);
+    _sce_pspnet_selwakeup(arg0 + 0x5C);
 }
 #endif
 
 #if FW_VERSION >= 282
 void func_000044AC(s32 arg0) {
-    sceNet_lib_B9C780C7(arg0 + 0x5C);
+    _sce_pspnet_selwakeup(arg0 + 0x5C);
 }
 #endif
 
@@ -558,7 +558,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00007E00);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00007E78);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_AEE60F84);
+INCLUDE_ASM("nonmatchings/pspnet_inet", _sce_pspnet_ioctl_wait);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_B3FF98EB);
 
@@ -763,7 +763,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000963C);
 
 #if FW_VERSION < 201
 void func_0000963C(void) {
-    sceNet_lib_976AB1E9(&func_0000986C, func_000097BC, func_000093F0, func_0000940C, &func_000095AC, &func_00009650, func_00009548, func_00009564, func_000095A4, func_000095C0, func_000095DC, &func_00009764, &func_00009788);
+    _sce_pspnet_start_of_inet_module_in_if_core(&func_0000986C, func_000097BC, func_000093F0, func_0000940C, &func_000095AC, &func_00009650, func_00009548, func_00009564, func_000095A4, func_000095C0, func_000095DC, &func_00009764, &func_00009788);
 }
 #endif
 
@@ -773,17 +773,17 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000096D0);
 
 #if FW_VERSION < 201
 s32 func_000096D0(void) {
-    return sceNet_lib_4C8FD452();
+    return _sce_pspnet_stop_of_inet_module_in_if_core();
 }
 #endif
 
 #if FW_VERSION >= 282
 void func_000097BC(void) {
-    sceNet_lib_976AB1E9(&func_0000986C, func_0000993C, func_00009570, func_0000958C, &func_000095AC, &func_00009650, func_000096C8, func_000096E4, func_00009724, func_00009740, func_0000975C, &func_00009764, &func_00009788);
+    _sce_pspnet_start_of_inet_module_in_if_core(&func_0000986C, func_0000993C, func_00009570, func_0000958C, &func_000095AC, &func_00009650, func_000096C8, func_000096E4, func_00009724, func_00009740, func_0000975C, &func_00009764, &func_00009788);
 }
 
 void func_00009850(void) {
-    sceNet_lib_4C8FD452();
+    _sce_pspnet_stop_of_inet_module_in_if_core();
 }
 #endif
 
@@ -840,7 +840,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000999C);
 
 #if FW_VERSION < 201
 void func_0000999C(void) {
-    sceNet_lib_5ED457BE(&func_00009B84, &func_00009A14, &func_00009A58, &func_00009944);
+    _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(&func_00009B84, &func_00009A14, &func_00009A58, &func_00009944);
 }
 #endif
 
@@ -850,7 +850,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000099D4);
 
 #if FW_VERSION < 201
 s32 func_000099D4(void) {
-    return sceNet_lib_31F3CDA1();
+    return _sce_pspnet_stop_of_inet_module_in_if_ethersubr_core();
 }
 #endif
 
@@ -878,11 +878,11 @@ s32 func_00009B0C(void) {
 }
 
 void func_00009B24(void) {
-    sceNet_lib_5ED457BE(&func_00009B84, &func_00009A14, &func_00009A58, &func_00009944);
+    _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(&func_00009B84, &func_00009A14, &func_00009A58, &func_00009944);
 }
 
 void func_00009B5C(void) {
-    sceNet_lib_31F3CDA1();
+    _sce_pspnet_stop_of_inet_module_in_if_ethersubr_core();
 }
 
 M2C_UNK *sceNetInet_lib_D7928A6D(void) {
@@ -1181,7 +1181,7 @@ void func_0000ED48(void *arg0) {
         M2C_FIELD(temp_v1, void ***, 4) = (void **) M2C_FIELD(arg0, void ***, 4);
     }
     *M2C_FIELD(arg0, void ***, 4) = temp_v1;
-    sceNetIfhandle_lib_76BAD213(arg0);
+    sceNetFreeInternal(arg0);
 }
 #endif
 
@@ -1205,7 +1205,7 @@ void func_0000ED94(void *arg0) {
             M2C_FIELD(temp_v1_2, void ***, 4) = (void **) M2C_FIELD(arg0, void ***, 4);
         }
         *M2C_FIELD(arg0, void ***, 4) = temp_v1_2;
-        sceNetIfhandle_lib_76BAD213(arg0);
+        sceNetFreeInternal(arg0);
     }
 }
 #endif
@@ -1223,7 +1223,7 @@ void func_0000EDB8(struct Unk_func_0000EDB8_0 *arg0) {
         temp_v1->unk4 = (void **) arg0->unk4;
     }
     *arg0->unk4 = temp_v1;
-    sceNetIfhandle_lib_76BAD213(arg0);
+    sceNetFreeInternal(arg0);
 }
 
 void func_0000EE04(struct Unk_func_0000EE04_0 *arg0) {
@@ -1241,7 +1241,7 @@ void func_0000EE04(struct Unk_func_0000EE04_0 *arg0) {
             temp_v1_2->unk4 = (void **) arg0->unk4;
         }
         *arg0->unk4 = temp_v1_2;
-        sceNetIfhandle_lib_76BAD213(arg0);
+        sceNetFreeInternal(arg0);
     }
 }
 #endif
@@ -1292,7 +1292,7 @@ void func_0000F27C(struct Unk_func_0000F27C_0 *arg0, struct Unk_func_0000F27C_1 
     temp_a0 = arg0->unk10;
     temp_a2 = *temp_a0;
     arg1->unkC = (s32) temp_a2;
-    sceNet_lib_2F305274(temp_a0, arg1->unk8, temp_a2);
+    sceNetBcopy(temp_a0, arg1->unk8, temp_a2);
 }
 
 void func_0000F2A8(struct Unk_func_0000F2A8_0 *arg0, struct Unk_func_0000F2A8_1 *arg1) {
@@ -1302,7 +1302,7 @@ void func_0000F2A8(struct Unk_func_0000F2A8_0 *arg0, struct Unk_func_0000F2A8_1 
     temp_a0 = arg0->unkC;
     temp_a2 = *temp_a0;
     arg1->unkC = (s32) temp_a2;
-    sceNet_lib_2F305274(temp_a0, arg1->unk8, temp_a2);
+    sceNetBcopy(temp_a0, arg1->unk8, temp_a2);
 }
 #endif
 
@@ -1586,11 +1586,11 @@ void func_00013ED4(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2) {
 
     arg0->unk0 = arg0;
     arg0->unk4 = arg0;
-    arg0->unk8 = sceNet_lib_C4261339(arg1, arg0->pad10);
-    temp_v0 = sceNet_lib_C4261339(arg2, &arg0->pad10[4]);
+    arg0->unk8 = _sce_pspnet_hashinit(arg1, arg0->pad10);
+    temp_v0 = _sce_pspnet_hashinit(arg2, &arg0->pad10[4]);
     arg0->unk1A = 0x3FF;
     arg0->unkC = temp_v0;
-    arg0->unk18 = (u16) D_0002E5EC + (sceNet_lib_1858883D() % (u32) ((D_0002E5F0 - D_0002E5EC) + 1));
+    arg0->unk18 = (u16) D_0002E5EC + (sceNetRand() % (u32) ((D_0002E5F0 - D_0002E5EC) + 1));
 }
 #endif
 
@@ -1602,11 +1602,11 @@ void func_00013ED4(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2) {
 
     arg0->unk0 = arg0;
     arg0->unk4 = arg0;
-    arg0->unk8 = sceNet_lib_C4261339(arg1, (u8 *)arg0 + 0x10);
-    temp_v0 = sceNet_lib_C4261339(arg2, (u8 *)arg0 + 0x14);
+    arg0->unk8 = _sce_pspnet_hashinit(arg1, (u8 *)arg0 + 0x10);
+    temp_v0 = _sce_pspnet_hashinit(arg2, (u8 *)arg0 + 0x14);
     arg0->unk1A = 0x3FF;
     arg0->unkC = temp_v0;
-    arg0->unk18 = (s16) ((u16) D_0002C02C + (sceNet_lib_1858883D() % (u32) ((D_0002C030 - D_0002C02C) + 1)));
+    arg0->unk18 = (s16) ((u16) D_0002C02C + (sceNetRand() % (u32) ((D_0002C030 - D_0002C02C) + 1)));
 }
 #endif
 
@@ -1691,7 +1691,7 @@ void func_00015654(struct Unk_func_00015654_0 *arg0) {
     if (var_s0 != NULL) {
         do {
             temp_s1 = var_s0->unk0;
-            sceNetIfhandle_lib_F56FAC82(var_s0->unkC);
+            sceNetMFreem(var_s0->unkC);
             temp_v1 = var_s0->unk0;
             temp_a0 = var_s0;
             if (temp_v1 != NULL) {
@@ -1700,7 +1700,7 @@ void func_00015654(struct Unk_func_00015654_0 *arg0) {
             temp_a1 = var_s0->unk4;
             var_s0 = (struct Unk_func_00015654_var_s0 *) temp_s1;
             *temp_a1 = temp_v1;
-            sceNetIfhandle_lib_76BAD213(temp_a0);
+            sceNetFreeInternal(temp_a0);
         } while (temp_s1 != NULL);
     }
     temp_v1_2 = arg0->unk0;
@@ -1708,7 +1708,7 @@ void func_00015654(struct Unk_func_00015654_0 *arg0) {
         temp_v1_2->unk4 = arg0->unk4;
     }
     *arg0->unk4 = temp_v1_2;
-    sceNetIfhandle_lib_76BAD213(arg0);
+    sceNetFreeInternal(arg0);
     D_0002C57C -= 1;
 }
 #endif
@@ -1738,7 +1738,7 @@ void func_00015654(struct Unk_func_00015654_0 *arg0) {
     if (var_s0 != NULL) {
         do {
             temp_s1 = var_s0->unk0;
-            sceNetIfhandle_lib_F56FAC82(var_s0->unkC);
+            sceNetMFreem(var_s0->unkC);
             temp_v1 = var_s0->unk0;
             temp_a0 = var_s0;
             if (temp_v1 != NULL) {
@@ -1747,7 +1747,7 @@ void func_00015654(struct Unk_func_00015654_0 *arg0) {
             temp_a1 = var_s0->unk4;
             var_s0 = temp_s1;
             *temp_a1 = temp_v1;
-            sceNetIfhandle_lib_76BAD213(temp_a0);
+            sceNetFreeInternal(temp_a0);
         } while (temp_s1 != NULL);
     }
     temp_v1_2 = arg0->unk0;
@@ -1755,7 +1755,7 @@ void func_00015654(struct Unk_func_00015654_0 *arg0) {
         temp_v1_2->unk4 = (void **) arg0->unk4;
     }
     *arg0->unk4 = temp_v1_2;
-    sceNetIfhandle_lib_76BAD213(arg0);
+    sceNetFreeInternal(arg0);
     D_0002C57C -= 1;
 }
 
@@ -1950,7 +1950,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001A714);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B398);
 #else
 void func_0001A8AC(void) {
-    sceNet_lib_57CC57DA(&D_0002DBC8, 0, 0x48);
+    sceNetMemset(&D_0002DBC8, 0, 0x48);
     D_0002DBC0 = 0;
     D_0002C5BC = 0;
 }
@@ -2065,7 +2065,7 @@ void func_0001C208(void) {
     D_0002C31C = 0x2400;
     D_0002C320 = 0xA280;
     D_0002C314 = 1;
-    sceNet_lib_57CC57DA(&D_0002DC30, 0, 0x48);
+    sceNetMemset(&D_0002DC30, 0, 0x48);
     func_00013ED4(&D_0002DC78, D_0002C318, D_0002C318);
 }
 
@@ -2269,8 +2269,8 @@ s32 func_00024B7C(void *arg0) {
                 M2C_FIELD(temp_v1_2, void ***, 0x18) = (void **) M2C_FIELD(var_s0, void ***, 0x18);
             }
             *M2C_FIELD(var_s0, void ***, 0x18) = temp_v1_2;
-            sceNetIfhandle_lib_F56FAC82(M2C_FIELD(var_s0, s32 *, 0xC));
-            sceNetIfhandle_lib_76BAD213(var_s0);
+            sceNetMFreem(M2C_FIELD(var_s0, s32 *, 0xC));
+            sceNetFreeInternal(var_s0);
             var_s0 = M2C_FIELD(arg0, void **, 4);
             var_v0 = 1;
         } while (var_s0 != NULL);
@@ -2312,8 +2312,8 @@ s32 func_000232C0(struct Unk_func_000232C0_0 *arg0) {
                 temp_v1_2->unk18 = (void **) var_s0->unk18;
             }
             *var_s0->unk18 = temp_v1_2;
-            sceNetIfhandle_lib_F56FAC82(var_s0->unkC);
-            sceNetIfhandle_lib_76BAD213(var_s0);
+            sceNetMFreem(var_s0->unkC);
+            sceNetFreeInternal(var_s0);
             var_s0 = arg0->unk4;
             var_v0 = 1;
         } while (var_s0 != NULL);
@@ -2483,16 +2483,16 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024DF8);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024EC4);
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_7CB1D9E3);
+INCLUDE_ASM("nonmatchings/pspnet_inet", _sce_pspnet_pppoe_init);
 
-s32 sceNetInet_lib_4C13BE10(void) {
+s32 _sce_pspnet_pppoe_term(void) {
     s32 temp_s0;
 
-    temp_s0 = sceNet_lib_94B44F26();
+    temp_s0 = _sce_pspnet_spllock();
     func_00009984();
-    sceNet_lib_87DC7A7E();
+    _sce_pspnet_stop_of_pppoe_module_in_netintr();
     func_00028D50();
-    sceNet_lib_515B2F33(temp_s0);
+    _sce_pspnet_splunlock(temp_s0);
     return 0;
 }
 #endif
@@ -2591,11 +2591,11 @@ s32 func_00029330(void *arg0) {
     s32 var_s1;
 
     var_s1 = 0;
-    temp_a0 = sceNet_lib_94B44F26();
+    temp_a0 = _sce_pspnet_spllock();
     if ((M2C_FIELD(arg0, s32 *, 0x130) == 0) && (M2C_FIELD(arg0, s32 *, 0xD4) == 0)) {
         var_s1 = 1;
     }
-    sceNet_lib_515B2F33(temp_a0);
+    _sce_pspnet_splunlock(temp_a0);
     return var_s1;
 }
 #endif
@@ -2606,11 +2606,11 @@ s32 func_00029330(void *arg0) {
     s32 var_s1;
 
     var_s1 = 0;
-    temp_a0 = sceNet_lib_94B44F26();
+    temp_a0 = _sce_pspnet_spllock();
     if (M2C_FIELD(arg0, s32 *, 0x130) == 0) {
         var_s1 = M2C_FIELD(arg0, s32 *, 0xD4) == 0;
     }
-    sceNet_lib_515B2F33(temp_a0);
+    _sce_pspnet_splunlock(temp_a0);
     return var_s1;
 }
 #endif
@@ -2635,11 +2635,11 @@ s32 func_00027830(struct Unk_func_00027830_0 *arg0) {
     s32 var_s1;
 
     var_s1 = 0;
-    temp_a0 = sceNet_lib_94B44F26();
+    temp_a0 = _sce_pspnet_spllock();
     if (arg0->unk130 == 0) {
         var_s1 = arg0->unkD4 == 0;
     }
-    sceNet_lib_515B2F33(temp_a0);
+    _sce_pspnet_splunlock(temp_a0);
     return var_s1;
 }
 
@@ -2726,7 +2726,7 @@ void func_000287F4(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x188) != 2) {
         func_00025F18((s32) &D_0002BB94, (s32) arg0, 2);
     }
-    sceNet_lib_A93A93E9(arg0 + 0x1FC);
+    _sce_pspnet_callout_stop(arg0 + 0x1FC);
     M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) & ~4);
 }
 #endif
@@ -2794,7 +2794,7 @@ void func_0002A548(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x18C) != 2) {
         func_00025F18((s32) &D_0002BBD8, (s32) arg0, 2);
     }
-    sceNet_lib_A93A93E9(arg0 + 0x220);
+    _sce_pspnet_callout_stop(arg0 + 0x220);
     M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) & ~8);
 }
 #endif
@@ -2936,7 +2936,7 @@ void func_0002BDB4(void *arg0) {
 
     } else {
         M2C_FIELD(arg0, s32 *, 0x4BC) = 4;
-        sceNet_lib_7C86FBA4(arg0 + 0x4D8, 2, &func_00029280, arg0);
+        _sce_pspnet_callout_reset(arg0 + 0x4D8, 2, &func_00029280, arg0);
     }
 }
 #endif
@@ -2955,7 +2955,7 @@ void func_0002A244(struct Unk_func_0002A244_0 *arg0) {
 
     } else {
         arg0->unk4BC = 4;
-        sceNet_lib_7C86FBA4((u8 *)arg0 + 0x4D8, 2, &func_00029280, arg0);
+        _sce_pspnet_callout_reset((u8 *)arg0 + 0x4D8, 2, &func_00029280, arg0);
     }
 }
 
@@ -2965,22 +2965,22 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002A290);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002A570);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_7CB1D9E3);
+INCLUDE_ASM("nonmatchings/pspnet_inet", _sce_pspnet_pppoe_init);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_4C13BE10);
+INCLUDE_ASM("nonmatchings/pspnet_inet", _sce_pspnet_pppoe_term);
 #endif
 
 #if FW_VERSION >= 282
-s32 sceNetInet_lib_4C13BE10(void) {
+s32 _sce_pspnet_pppoe_term(void) {
     s32 temp_s0;
 
-    temp_s0 = sceNet_lib_94B44F26();
+    temp_s0 = _sce_pspnet_spllock();
     func_00009B0C();
-    sceNet_lib_87DC7A7E();
+    _sce_pspnet_stop_of_pppoe_module_in_netintr();
     func_00028D50();
-    sceNet_lib_515B2F33(temp_s0);
+    _sce_pspnet_splunlock(temp_s0);
     return 0;
 }
 #endif
@@ -3199,7 +3199,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetInit);
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetTerm);
 
 void func_0002AF14(void) {
-    sceNet_lib_435843CB();
+    _sce_pspnet_get_thread_errno();
 }
 #endif
 
@@ -3210,9 +3210,9 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetPspError);
 #endif
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_CCC18C45);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetAddArp);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_2D5868C0);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetDelArp);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_1D023504);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetArpInfo);
 #endif

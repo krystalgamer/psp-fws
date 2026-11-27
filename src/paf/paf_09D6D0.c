@@ -49,7 +49,7 @@ s32 func_0009D798(void) {
     return -1;
 }
 
-INCLUDE_ASM("nonmatchings/paf_09D6D0", scePaf_7894B61F);
+INCLUDE_ASM("nonmatchings/paf_09D6D0", png_error);
 
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D8A4);
 
@@ -74,7 +74,7 @@ INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009DAA8);
 #endif
 
 void func_0009DB04(void *arg0) {
-    scePaf_9F10613F(arg0, 1);
+    sce_paf_private_longjmp(arg0, 1);
 }
 
 void func_0009DB20(void) {

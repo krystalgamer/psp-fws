@@ -46,7 +46,7 @@ s32 func_0002D538(s32 arg0, s32 arg1) {
 
     var_a2 = 1;
     if (arg1 != &D_001702B8) {
-        var_a2 = scePaf_F2E5FDEB(arg0, arg1);
+        var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
 }
@@ -69,13 +69,13 @@ INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002DB58);
 
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002DBA8);
 
-INCLUDE_ASM("nonmatchings/paf_02CFF4", scePaf_56F4D69F);
+INCLUDE_ASM("nonmatchings/paf_02CFF4", _ZN10PSJSObjectC2ERK11PSJSContext);
 
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002DC70);
 
 INCLUDE_ASM("nonmatchings/paf_02CFF4", func_0002DCE0);
 
-INCLUDE_ASM("nonmatchings/paf_02CFF4", scePaf_F2E5FDEB);
+INCLUDE_ASM("nonmatchings/paf_02CFF4", _ZNK10PSJSObject10IsSubClassEPKt);
 
 M2C_UNK *func_0002DD08(void) {
     return &D_001703B0;

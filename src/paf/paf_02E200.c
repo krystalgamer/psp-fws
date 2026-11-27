@@ -10,7 +10,7 @@ void func_0002E200(struct Unk_func_0002E200_0 *arg0) {
     if (temp_v0 == 0) {
         arg0->unk14 = 0;
     } else {
-        scePaf_48B5C1C0(temp_v0);
+        _ZN13PSJSValueImpl6DecRefEv(temp_v0);
         arg0->unk14 = 0;
     }
 }
@@ -29,20 +29,20 @@ INCLUDE_ASM("nonmatchings/paf_02E200", func_0002E484);
 
 INCLUDE_ASM("nonmatchings/paf_02E200", func_0002E884);
 
-void scePaf_79E57CAF(void) {
-    scePaf_E1242646();
+void _ZN10PSJSObjectnwEj(void) {
+    _Z11PSJS_Mallocj();
 }
 
-void scePaf_548AA4E7(void) {
-    scePaf_0F3527DD();
+void _ZN10PSJSObjectdlEPv(void) {
+    _Z9PSJS_FreePv();
 }
 
 void func_0002E988(void) {
-    scePaf_E1242646();
+    _Z11PSJS_Mallocj();
 }
 
 void func_0002E9A4(void) {
-    scePaf_0F3527DD();
+    _Z9PSJS_FreePv();
 }
 
 void func_0002E9C0(void) {

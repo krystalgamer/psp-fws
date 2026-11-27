@@ -42,7 +42,7 @@ INCLUDE_ASM("nonmatchings/camera_plugin_001FE8", func_00002090);
 s32 func_00002090(void) {
     s32 var_v1;
 
-    sceVshCommonGui_80271F41();
+    _ZN3vsh12BusyIcon_IncEv();
     var_v1 = 1;
     if (func_0000C09C() < 0) {
         func_00002574();
@@ -107,7 +107,7 @@ void func_000025BC(void) {
 }
 #else
 void func_000025BC(void) {
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     func_00002428();
 }
 #endif
@@ -120,7 +120,7 @@ void func_00002718(void) {
 }
 #else
 void func_00002718(void) {
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
 }
 #endif
 
@@ -626,7 +626,7 @@ void func_00003E18(void) {
 void func_00003E18(void) {
     func_0000E16C();
     func_0000BFF0(func_0000C134());
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
 }
 #endif
 
@@ -637,7 +637,7 @@ void func_00003E4C(void) {
 }
 #else
 void func_00003E4C(void) {
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     func_0000FDBC((s32) func_00003E18);
 }
 #endif
@@ -669,7 +669,7 @@ s32 func_00003E74(void) {
 
     func_0000B990();
     var_s0 = -1;
-    sceVshCommonGui_80271F41();
+    _ZN3vsh12BusyIcon_IncEv();
     func_000021E4();
     if (func_0000241C() == 0) {
         var_s0 = func_000102E8();
@@ -719,7 +719,7 @@ void func_000055B0(void) {
 }
 #else
 void func_000055B0(void) {
-    sceVshCommonGui_A0DE7090(1);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(1);
     func_0000E16C();
 }
 #endif
@@ -807,7 +807,7 @@ void func_00005CB4(s32 arg0) {
 }
 #else
 void func_00005CB4(s32 arg0) {
-    scePaf_C2C25056(arg0, func_0000EBC4(func_0000BD64()));
+    _ZN3paf6PhSpin11SetSelectedEi(arg0, func_0000EBC4(func_0000BD64()));
 }
 #endif
 
@@ -824,9 +824,9 @@ void func_00005D48(s32 arg0) {
 
 #if FW_VERSION < 350
 void func_00005D48(s32 arg0) {
-    scePaf_C2C25056(arg0, func_0000EBC4(func_0000BD64()));
+    _ZN3paf6PhSpin11SetSelectedEi(arg0, func_0000EBC4(func_0000BD64()));
     M2C_FIELD(*D_00165590, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0xBC)(D_00165590, 0, 0);
-    sceVshCommonGui_EEB86F0E(0);
+    _ZN3vsh27ShowButtonNavigation_OptionEb(0);
     D_00165594 = 0;
 }
 #endif
@@ -866,7 +866,7 @@ INCLUDE_ASM("nonmatchings/camera_plugin_001FE8", func_00005FC0);
 #else
 void func_00005FC0(M2C_UNK **arg0) {
     *arg0 = &D_00022AE8;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -880,10 +880,10 @@ void func_00006050(void *arg0) {
     s32 temp_v0_2;
 
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00022B28;
-    temp_v0 = scePaf_B7E6052B(4);
+    temp_v0 = _Znwj(4);
     scePaf_0E106561(temp_v0, &D_00022AA8, 0, 0, 0, 0);
     M2C_FIELD(arg0, s32 *, 4) = temp_v0;
-    temp_v0_2 = scePaf_B7E6052B(4);
+    temp_v0_2 = _Znwj(4);
     scePaf_0E106561(temp_v0_2, &D_00022AC0, 0, 0, 0, 0);
     M2C_FIELD(arg0, s32 *, 8) = temp_v0_2;
 }
@@ -1185,8 +1185,8 @@ void func_000066C0(void) {
 #else
 void func_000066C0(void) {
     func_0000E454(6);
-    sceVshCommonGui_A0DE7090(1);
-    sceVshCommonGui_441D55D7(1);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(1);
+    _ZN3vsh25ShowButtonNavigation_BackEb(1);
 }
 #endif
 
@@ -1725,9 +1725,9 @@ void func_0000B388(void) {
     func_0000BB10();
     if ((func_0000C438() == 0) && (D_00166C3C == 3)) {
         func_0000BFF0(D_00166C40);
-        sceVshCommonGui_A0DE7090(0);
-        sceVshCommonGui_441D55D7(0);
-        sceVshCommonGui_EEB86F0E(0);
+        _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+        _ZN3vsh25ShowButtonNavigation_BackEb(0);
+        _ZN3vsh27ShowButtonNavigation_OptionEb(0);
     }
     if (func_0000E0BC() != 4) {
         if (func_0000E0BC() != 6) {
@@ -1745,9 +1745,9 @@ void func_0000B388(void) {
 void func_0000B388(void) {
     if ((D_001656E4 == 0) && (D_00166C3C == 3)) {
         func_0000BFF0(D_00166C40);
-        sceVshCommonGui_A0DE7090(0);
-        sceVshCommonGui_441D55D7(0);
-        sceVshCommonGui_EEB86F0E(0);
+        _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+        _ZN3vsh25ShowButtonNavigation_BackEb(0);
+        _ZN3vsh27ShowButtonNavigation_OptionEb(0);
     }
     if (func_0000E0BC() != 4) {
         if (func_0000E0BC() != 6) {
@@ -1966,7 +1966,7 @@ void func_0000C370(void) {
 
 #if FW_VERSION < 350
 void func_0000C370(void) {
-    scePaf_338C3774(scePaf_D4FAE7D0("system_plugin"), 1);
+    _ZNK3paf4View12GetInterfaceEi(_ZN3paf4View4FindEPKc("system_plugin"), 1);
 }
 #endif
 
@@ -2082,7 +2082,7 @@ INCLUDE_ASM("nonmatchings/camera_plugin_001FE8", func_0000CA3C);
 
 #if FW_VERSION < 350
 void func_0000CA3C(void) {
-    vsh_81BBD0D1(vsh_34DA1B67(), &D_00023724);
+    _ZN3vsh10FixedAlloc4LockEPKc(_ZN3vsh10FixedAlloc8InstanceEv(), &D_00023724);
 }
 #endif
 
@@ -2098,7 +2098,7 @@ INCLUDE_ASM("nonmatchings/camera_plugin_001FE8", func_0000CA68);
 
 #if FW_VERSION < 350
 void func_0000CA68(void) {
-    vsh_6286E89D(vsh_34DA1B67(), &D_00023724);
+    _ZN3vsh10FixedAlloc6UnlockEPKc(_ZN3vsh10FixedAlloc8InstanceEv(), &D_00023724);
 }
 #endif
 

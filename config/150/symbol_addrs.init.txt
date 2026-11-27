@@ -2,7 +2,7 @@
 sceKernelGetChunk = 0x00000028; // type:func
 sceKernelRegisterChunk = 0x0000007C; // type:func
 sceKernelReleaseChunk = 0x000000DC; // type:func
-syslib_D3744BE0 = 0x00001118; // type:func
+module_bootstart = 0x00001118; // type:func
 module_reboot_before = 0x0000122C; // type:func
 sceKernelInitApitype = 0x00001234; // type:func
 sceKernelBootFrom = 0x00001240; // type:func
@@ -13,7 +13,7 @@ sceIoOpen = 0x00001F80; // type:func
 sceIoRead = 0x00001F88; // type:func
 sceIoLseek = 0x00001F90; // type:func
 Kprintf = 0x00001F98; // type:func
-KDebugForKernel_B7251823 = 0x00001FA0; // type:func
+sceKernelDeci2pReferOperations = 0x00001FA0; // type:func
 sceKernelCheckPspConfig = 0x00001FA8; // type:func
 sceKernelFindModuleByAddress = 0x00001FB0; // type:func
 sceKernelExitVSHVSH = 0x00001FB8; // type:func

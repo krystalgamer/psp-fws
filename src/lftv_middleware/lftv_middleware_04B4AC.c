@@ -66,7 +66,7 @@ void sceVshLftvMw_323FA41B(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_04B4AC", sceVshLftvMw_948EDB31);
+INCLUDE_ASM("nonmatchings/lftv_middleware_04B4AC", uninit_private_stdio);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_04B4AC", func_0004B7B4);
 

@@ -1,7 +1,7 @@
 // NID-derived names
 module_start = 0x00000C34; // type:func
 module_reboot_before = 0x00000E54; // type:func
-syslib_ADF12745 = 0x00000EF8; // type:func
+module_reboot_phase = 0x00000EF8; // type:func
 sceLfatfsWaitReady = 0x00000FCC; // type:func
 sceLfatfsStop = 0x00001008; // type:func
 sceKernelCpuSuspendIntr = 0x0000BFA8; // type:func

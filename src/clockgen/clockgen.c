@@ -12,7 +12,7 @@ INCLUDE_RODATA("nonmatchings/clockgen", D_000007A8);
 INCLUDE_ASM("nonmatchings/clockgen", sceClockgenInit);
 #endif
 
-INCLUDE_ASM("nonmatchings/clockgen", sceClockgen_driver_C9AF3102);
+INCLUDE_ASM("nonmatchings/clockgen", sceClockgenSetSpectrumSpreading);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/clockgen", module_start);

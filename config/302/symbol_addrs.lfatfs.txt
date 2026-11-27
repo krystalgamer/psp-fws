@@ -1,6 +1,6 @@
 // NID-derived names
 module_start = 0x00000B48; // type:func
-syslib_ADF12745 = 0x00000DF8; // type:func
+module_reboot_phase = 0x00000DF8; // type:func
 sceLfatfsWaitReady = 0x00000E80; // type:func
 sceLfatfsStop = 0x00000EBC; // type:func
 module_reboot_before = 0x00000EC4; // type:func
@@ -18,7 +18,7 @@ sceIoUnassign = 0x0000C608; // type:func
 sceIoClose = 0x0000C610; // type:func
 sceIoAddDrv = 0x0000C618; // type:func
 sceIoAssign = 0x0000C620; // type:func
-IoFileMgrForKernel_BD17474F = 0x0000C628; // type:func
+sceIoGetIobUserLevel = 0x0000C628; // type:func
 sceIoDelDrv = 0x0000C630; // type:func
 Kprintf = 0x0000C638; // type:func
 bcopy = 0x0000C640; // type:func

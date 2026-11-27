@@ -1,7 +1,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_B2ED6CAA);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", _ZN3paf6PhText13EnsureVisibleEv);
 
 s32 scePaf_1232B7A3(struct Unk_scePaf_1232B7A3_0 *arg0, s32 arg1, s32 arg2) {
     s32 var_a3;
@@ -18,9 +18,9 @@ s32 scePaf_1232B7A3(struct Unk_scePaf_1232B7A3_0 *arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F2484);
 
-INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_37DD37B8);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", _ZN3paf6PhText9EraseTextEjj);
 
-s32 scePaf_B9BE69FD(struct Unk_scePaf_B9BE69FD_0 *arg0, s32 arg1) {
+s32 _ZN3paf6PhText9EraseTextEi(struct Unk_scePaf_B9BE69FD_0 *arg0, s32 arg1) {
     s32 var_a2;
     void *temp_v0;
 
@@ -46,7 +46,7 @@ s32 scePaf_8D7FC7DB(struct Unk_scePaf_8D7FC7DB_0 *arg0, s32 arg1, s32 arg2, s32 
     return var_a4;
 }
 
-void scePaf_905CF2A7(struct Unk_scePaf_905CF2A7_0 *arg0, s32 arg1) {
+void _ZN3paf6PhText9ShowCaretEb(struct Unk_scePaf_905CF2A7_0 *arg0, s32 arg1) {
     s32 temp_v0;
 
     temp_v0 = arg0->unk1E8;
@@ -57,7 +57,7 @@ void scePaf_905CF2A7(struct Unk_scePaf_905CF2A7_0 *arg0, s32 arg1) {
     }
 }
 
-s32 scePaf_55CC4749(struct Unk_scePaf_55CC4749_0 *arg0) {
+s32 _ZN3paf6PhText7AddAttrENS_14PhTextAttrTypeEjj(struct Unk_scePaf_55CC4749_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -69,7 +69,7 @@ s32 scePaf_55CC4749(struct Unk_scePaf_55CC4749_0 *arg0) {
     return var_v1;
 }
 
-s32 scePaf_AEEF2A7C(struct Unk_scePaf_AEEF2A7C_0 *arg0) {
+s32 _ZN3paf6PhText10RemoveAttrENS_14PhTextAttrTypeEjj(struct Unk_scePaf_AEEF2A7C_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -81,11 +81,11 @@ s32 scePaf_AEEF2A7C(struct Unk_scePaf_AEEF2A7C_0 *arg0) {
     return var_v1;
 }
 
-INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_B711DC69);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", _ZN3paf6PhText14RemoveAllAttrsEv);
 
-INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_ECE59E24);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", _ZNK3paf6PhText12GetTextWidthEv);
 
-void scePaf_A574DB92(struct Unk_scePaf_A574DB92_0 *arg0) {
+void _ZN3paf6PhText14ReleaseSurfaceEv(struct Unk_scePaf_A574DB92_0 *arg0) {
     s32 temp_v0;
 
     temp_v0 = arg0->unk1E8;
@@ -97,11 +97,11 @@ void scePaf_A574DB92(struct Unk_scePaf_A574DB92_0 *arg0) {
 }
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_F639E5E1);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", _ZN3paf6PhText21SetPrivateSurfacePoolEPNS_11SurfacePoolE);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void scePaf_F639E5E1(struct Unk_scePaf_F639E5E1_0 *arg0) {
+void _ZN3paf6PhText21SetPrivateSurfacePoolEPNS_11SurfacePoolE(struct Unk_scePaf_F639E5E1_0 *arg0) {
     s32 temp_v0;
 
     temp_v0 = arg0->unk1E8;
@@ -114,7 +114,7 @@ void scePaf_F639E5E1(struct Unk_scePaf_F639E5E1_0 *arg0) {
 #endif
 
 #if FW_VERSION == 282
-void scePaf_F639E5E1(struct Unk_scePaf_F639E5E1_0 *arg0) {
+void _ZN3paf6PhText21SetPrivateSurfacePoolEPNS_11SurfacePoolE(struct Unk_scePaf_F639E5E1_0 *arg0) {
     s32 temp_v0;
 
     temp_v0 = arg0->unk1E8;
@@ -126,7 +126,7 @@ void scePaf_F639E5E1(struct Unk_scePaf_F639E5E1_0 *arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0F23EC", scePaf_7F2442DC);
+INCLUDE_ASM("nonmatchings/paf_0F23EC", _ZN3paf6PhText10SetVScrollEPNS_8PhScrollE);
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F0848);

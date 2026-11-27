@@ -175,8 +175,8 @@ s32 sceKernelCreateEventFlag(void *, u32, u32, void *);
 s32 sceKernelDeleteEventFlag(s32);
 s32 sceKernelSetEventFlag(s32, u32);
 s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);
-s32 sceUtility_943CBA46(M2C_UNK *);
+s32 sceUtilityAuthDialogInitStart(M2C_UNK *);
 s32 sceUtility_private_167260AF();
-s32 sceUtility_private_4B677BA1();
+s32 sceUtilityAppletGetStructVersion();
 
 #endif

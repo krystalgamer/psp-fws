@@ -46,7 +46,7 @@ void func_0003C01C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x3C) = 0;
     M2C_FIELD(arg0, s32 *, 0x50) = 0;
     M2C_FIELD(arg0, s32 *, 0x54) = 0;
-    temp_v0 = scePaf_B7E6052B(0x414);
+    temp_v0 = _Znwj(0x414);
     func_0004A268(temp_v0);
     M2C_FIELD(arg0, s32 *, 0x3C) = temp_v0;
     D_0005C5FC += 1;
@@ -127,7 +127,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03BBB8", func_0003CBB0);
 s32 func_0003CBB0(void) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_F13EBB78(0xE);
+    temp_v0 = _Znaj(0xE);
     if (temp_v0 != 0) {
         sce_paf_private_srand(func_0004C108(0));
         sce_paf_private_snprintf(temp_v0, 4, "%d", sce_paf_private_rand());

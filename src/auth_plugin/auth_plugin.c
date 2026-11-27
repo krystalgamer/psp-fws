@@ -53,9 +53,9 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00000238);
 void func_00000238(void) {
     func_00001494((s32) &D_00001E98, (s32) &D_00002AEC);
     func_00001494((s32) &D_00001EA4, (s32) &D_00002AEC);
-    scePaf_3481F595(D_00001E8C, &D_00002AE0);
-    scePaf_F609FA81(D_00001E8C, &D_00002AE0, 0, 0);
-    scePaf_CAF05F1D(D_00001E8C, &D_00002AE0);
+    _ZN3paf4View9PageCloseEPKc(D_00001E8C, &D_00002AE0);
+    _ZN3paf4View8PageOpenEPKcii(D_00001E8C, &D_00002AE0, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_00001E8C, &D_00002AE0);
 }
 #endif
 
@@ -169,9 +169,9 @@ void func_00000574(void) {
 void func_00000574(void) {
     func_0000222C((s32) &D_00002C88, (s32) &D_00002AEC);
     func_0000222C((s32) &D_00002C94, (s32) &D_00002AEC);
-    scePaf_3481F595(D_00002C7C, &D_00002AE0);
-    scePaf_F609FA81(D_00002C7C, &D_00002AE0, 0, 0);
-    scePaf_CAF05F1D(D_00002C7C, &D_00002AE0);
+    _ZN3paf4View9PageCloseEPKc(D_00002C7C, &D_00002AE0);
+    _ZN3paf4View8PageOpenEPKcii(D_00002C7C, &D_00002AE0, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_00002C7C, &D_00002AE0);
 }
 #endif
 
@@ -381,7 +381,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00001448);
 
 #if FW_VERSION == 201
 void func_00002364(void) {
-    scePaf_49CE42F7(D_00001E90, &D_00001D38);
+    _ZN3paf4View9PlaySoundEPKc(D_00001E90, &D_00001D38);
     func_0000015C(1);
     if (D_000032D8 != NULL) {
         M2C_FIELD(D_000032D8, s32 *, 0x1C) = 1;

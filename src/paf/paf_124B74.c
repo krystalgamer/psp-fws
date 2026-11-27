@@ -552,7 +552,7 @@ s32 func_00125B30(void *arg0, s32 arg1, s32 arg2) {
     }
     var_v1 = 0;
     if (var_s2 < arg2) {
-        scePaf_6829D7AF(arg1, 0, arg2);
+        sce_paf_private_memset(arg1, 0, arg2);
         var_v1 = -1;
     }
     return var_v1;

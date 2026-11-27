@@ -26,7 +26,7 @@ void func_00118580(struct Unk_func_00118580_0 *arg0) {
     }
 }
 
-s32 scePaf_EB346F51(struct Unk_scePaf_EB346F51_0 *arg0, s32 arg1, s32 arg2) {
+s32 _ZN3paf8SyncCall4CallEPFiPvES1_(struct Unk_scePaf_EB346F51_0 *arg0, s32 arg1, s32 arg2) {
     s32 temp_s1;
 
     sceKernelWaitEventFlag(arg0->unk0, 4U, 0x20, NULL, NULL);
@@ -70,7 +70,7 @@ INCLUDE_RODATA("nonmatchings/paf_118500", D_0019D204);
 
 INCLUDE_RODATA("nonmatchings/paf_118500", D_0019D210);
 
-INCLUDE_ASM("nonmatchings/paf_118500", scePaf_96857E81);
+INCLUDE_ASM("nonmatchings/paf_118500", _ZN3paf6ThreadC2EjjPKcj);
 
-INCLUDE_ASM("nonmatchings/paf_118500", scePaf_E977B833);
+INCLUDE_ASM("nonmatchings/paf_118500", _ZN3paf6ThreadD2Ev);
 #endif

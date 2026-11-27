@@ -10,7 +10,7 @@ INCLUDE_ASM("nonmatchings/paf_095A44", func_00095A64);
 INCLUDE_ASM("nonmatchings/paf_095A44", func_00095A84);
 
 void func_00095AF4(s32 arg0, M2C_UNK arg1, s32 arg2) {
-    scePaf_F95EA3F1(arg1, arg0, arg2 << 7);
+    sce_paf_private_memcpy(arg1, arg0, arg2 << 7);
 }
 
 INCLUDE_ASM("nonmatchings/paf_095A44", func_00095B1C);
@@ -708,13 +708,13 @@ INCLUDE_RODATA("nonmatchings/paf_095A44", D_00192D84);
 INCLUDE_RODATA("nonmatchings/paf_095A44", D_00192DA0);
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_095A44", scePaf_1A1F232F);
+INCLUDE_ASM("nonmatchings/paf_095A44", png_set_sig_bytes);
 #else
-void scePaf_1A1F232F(struct Unk_scePaf_1A1F232F_0 *arg0, s32 arg1) {
+void png_set_sig_bytes(struct Unk_scePaf_1A1F232F_0 *arg0, s32 arg1) {
     if (arg1 < 9) {
 
     } else {
-        scePaf_7894B61F((s32) arg0, (s32) "Too many bytes for PNG signature.");
+        png_error((s32) arg0, (s32) "Too many bytes for PNG signature.");
     }
     arg0->unk4EC = __builtin_allegrex_max(arg1, 0);
 }
@@ -760,7 +760,7 @@ void func_0009CF90(struct Unk_func_0009CF90_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/paf_095A44", func_0009CFC4);
 
-INCLUDE_ASM("nonmatchings/paf_095A44", scePaf_7AFD6B74);
+INCLUDE_ASM("nonmatchings/paf_095A44", png_create_info_struct);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_095A44", func_00053B5C);

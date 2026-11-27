@@ -27,7 +27,7 @@ void func_00051CC4(struct Unk_func_00051CC4_0 *arg0) {
     func_00050DFC(&arg0->unk14);
     func_00051884((s32) ((u8 *)arg0 + 4));
     arg0->unk0 = &D_0005DB00;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -46,7 +46,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_00051DE8);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00051DE8(M2C_UNK **arg0) {
     *arg0 = &D_0005DB00;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -58,7 +58,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_051C5C", func_00051E10);
 void func_00051E10(M2C_UNK **arg0) {
     *arg0 = &D_0005DAD0;
     func_00050DFC(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

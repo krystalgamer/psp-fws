@@ -7,7 +7,7 @@ INCLUDE_ASM("nonmatchings/paf_0E3294", func_000E3294);
 void func_000E3294(M2C_UNK **arg0) {
     *arg0 = &D_0019A3B8;
     func_000F022C((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -111,7 +111,7 @@ s32 func_000E4168(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A47CC != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }
@@ -132,5 +132,5 @@ INCLUDE_ASM("nonmatchings/paf_0E3294", func_0008A498);
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/paf_0E3294", scePaf_D2E0D705);
+INCLUDE_ASM("nonmatchings/paf_0E3294", _ZN3paf11PhLabelTextC1EPNS_8PhWidgetEPNS_8PhAppearE);
 #endif

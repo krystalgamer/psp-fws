@@ -40,8 +40,8 @@
   "sceImposeSetStatus": "s32 sceImposeSetStatus(s32);",
   "sceImposeSetUMDPopup": "s32 sceImposeSetUMDPopup(s32 arg0);",
   "sceImposeSetVideoOutMode": "void sceImposeSetVideoOutMode(s32 arg0, s32 arg1, s32 arg2);",
-  "sceImpose_9BA61B49": "s32 sceImpose_9BA61B49(void);",
-  "sceImpose_driver_7084E72C": "s32 sceImpose_driver_7084E72C(void);",
+  "sceImposeReadSpecialButton": "s32 sceImposeReadSpecialButton(void);",
+  "sceImposeGetSpecialButtonMode": "s32 sceImposeGetSpecialButtonMode(void);",
   "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelDeleteThread": "s32 sceKernelDeleteThread(s32);",
@@ -49,7 +49,7 @@
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(u32, u32);",
   "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
   "sceKernelWaitThreadEnd": "s32 sceKernelWaitThreadEnd(s32, void *);",
-  "syslib_ADF12745": "s32 syslib_ADF12745(s32 arg0);"
+  "module_reboot_phase": "s32 module_reboot_phase(s32 arg0);"
  },
  "vars": {
   "D_0000F334": "extern s32 D_0000F334;",

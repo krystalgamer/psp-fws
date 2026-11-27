@@ -93,7 +93,7 @@ s32 func_000002F0(void) {
     func_00004520((s32) &D_00004D70, 0, 0x34);
     func_00000180((s32) &D_00004D70, (s32) D_000060E4, 0x34);
     M2C_FIELD(&D_00004D70, s32 *, 0x30) = 0;
-    temp_v0 = sceUtility_943CBA46(&D_00004D70);
+    temp_v0 = sceUtilityAuthDialogInitStart(&D_00004D70);
     if (temp_v0 != 0) {
         D_000060E4->unk1C = temp_v0;
         func_00001538(2);
@@ -114,7 +114,7 @@ s32 func_000002F0(void) {
     func_00004520((s32) &D_000033AC, 0, 0x34);
     func_00000180((s32) &D_000033AC, (s32) D_000060E4, 0x34);
     M2C_FIELD(&D_000033AC, s32 *, 0x30) = 0;
-    temp_v0 = sceUtility_943CBA46(&D_000033AC);
+    temp_v0 = sceUtilityAuthDialogInitStart(&D_000033AC);
     if (temp_v0 != 0) {
         func_00001538(2);
         var_v0 = temp_v0;
@@ -134,7 +134,7 @@ s32 func_000002F0(void) {
     func_00004520((s32) &D_0000616C, 0, 0x34);
     func_00000180((s32) &D_0000616C, (s32) D_000060E4, 0x34);
     D_0000616C.unk30 = 0;
-    temp_v0 = sceUtility_943CBA46(&D_0000616C);
+    temp_v0 = sceUtilityAuthDialogInitStart(&D_0000616C);
     if (temp_v0 != 0) {
         D_000060E4->unk1C = temp_v0;
         func_00001FDC(2);
@@ -566,7 +566,7 @@ void func_00001A5C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00001A5C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_00003014(arg0, arg1, arg2, arg3, (sceUtility_private_4B677BA1() < 0x118) * 2);
+    func_00003014(arg0, arg1, arg2, arg3, (sceUtilityAppletGetStructVersion() < 0x118) * 2);
 }
 #endif
 
@@ -576,7 +576,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_utility", func_00001AC4);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00001AC4(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    func_000030E8(arg0, arg1, arg2, (sceUtility_private_4B677BA1() < 0x118) * 2);
+    func_000030E8(arg0, arg1, arg2, (sceUtilityAppletGetStructVersion() < 0x118) * 2);
 }
 #endif
 

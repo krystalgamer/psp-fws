@@ -6,7 +6,7 @@ INCLUDE_ASM("nonmatchings/dmacman", module_start);
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaExit);
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_32757C57);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaRegisterDdrFlush);
 #endif
 
 #if FW_VERSION == 100
@@ -71,7 +71,7 @@ INCLUDE_ASM("nonmatchings/dmacman", func_00000B10);
 
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpQuit);
 
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_E18A93A5);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpConcatenate);
 
 #if FW_VERSION == 100
 s32 func_00001388(void **arg0, u32 arg1) {
@@ -155,7 +155,7 @@ INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAssign);
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/dmacman", DmacManForKernel_1FC036B7);
+INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpLLIConcatenate);
 #endif
 
 s32 sceKernelDmaOnDebugMode(void) {

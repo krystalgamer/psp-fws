@@ -2,9 +2,9 @@
 #include "paf_decls.h"
 
 #if FW_VERSION != 151
-INCLUDE_ASM("nonmatchings/paf_16730C", sceReg_3615BC87);
+INCLUDE_ASM("nonmatchings/paf_16730C", sceRegRemoveKey);
 #else
-void sceReg_3615BC87(void) {
+void sceRegRemoveKey(void) {
 
 }
 #endif

@@ -17,7 +17,7 @@ s32 *func_00033B18(s32 **arg0, s32 arg1) {
     return temp_s1;
 }
 
-void scePaf_C4BAD564(s32 arg0) {
+void _ZN3paf5SleepEi(s32 arg0) {
     sceKernelDelayThread(arg0 * 0x3E8);
 }
 
@@ -31,23 +31,23 @@ INCLUDE_RODATA("nonmatchings/pafmini_033B18", D_000D6BDC);
 
 INCLUDE_RODATA("nonmatchings/pafmini_033B18", D_000D6BE4);
 
-INCLUDE_ASM("nonmatchings/pafmini_033B18", scePaf_BAE16A39);
+INCLUDE_ASM("nonmatchings/pafmini_033B18", _ZN3paf8DateTime6FormatEPwjPKw);
 
 #if FW_VERSION >= 260
-INCLUDE_ASM("nonmatchings/pafmini_033B18", scePaf_41F702EA);
+INCLUDE_ASM("nonmatchings/pafmini_033B18", _ZN3paf8DateTime3UTCEv);
 #endif
 
-INCLUDE_ASM("nonmatchings/pafmini_033B18", scePaf_D27DE19A);
+INCLUDE_ASM("nonmatchings/pafmini_033B18", _ZN3paf8DateTime3NowEv);
 
-void scePaf_2CFAE498(s32 arg0) {
+void _ZN3paf8DateTime13SetDateFormatEPKw(s32 arg0) {
     func_000340C4((s32) &D_000E15CC, arg0);
 }
 
-void scePaf_58846DF3(s32 arg0) {
+void _ZN3paf8DateTime13SetTimeFormatEPKw(s32 arg0) {
     func_000340C4((s32) &D_000E15D8, arg0);
 }
 
-void scePaf_E357380E(s32 arg0) {
+void _ZN3paf8DateTime17SetDateTimeFormatEPKw(s32 arg0) {
     func_000340C4((s32) &D_000E15E4, arg0);
 }
 

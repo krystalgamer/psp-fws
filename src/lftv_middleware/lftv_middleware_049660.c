@@ -72,7 +72,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_049660", func_00049A9C);
 s32 func_00049A9C(void) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_B7E6052B(8);
+    temp_v0 = _Znwj(8);
     func_0004A91C(temp_v0);
     return temp_v0;
 }
@@ -84,7 +84,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_049660", func_00049AD0);
 s32 func_00049AD0(void) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_B7E6052B(0xC);
+    temp_v0 = _Znwj(0xC);
     func_0004AC1C(temp_v0);
     return temp_v0;
 }

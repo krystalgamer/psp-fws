@@ -98,7 +98,7 @@ INCLUDE_ASM("nonmatchings/idcheck", func_00000AB8);
 
 INCLUDE_ASM("nonmatchings/idcheck", func_00000C34);
 
-s32 syslib_D3744BE0(void) {
+s32 module_bootstart(void) {
     return 1;
 }
 

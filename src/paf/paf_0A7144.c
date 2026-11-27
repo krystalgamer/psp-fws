@@ -11,7 +11,7 @@ s32 func_000A7144(s32 arg0, struct Unk_func_000A7144_1 *arg1) {
     if (temp_v0 >= 0) {
 
     } else {
-        scePaf_7894B61F(arg0, (s32) "PNG unsigned integer out of range.");
+        png_error(arg0, (s32) "PNG unsigned integer out of range.");
     }
     return temp_v0;
 }

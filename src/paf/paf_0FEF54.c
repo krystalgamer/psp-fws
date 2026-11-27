@@ -17,13 +17,13 @@ void func_000FEF54(struct Unk_func_000FEF54_0 *arg0) {
 }
 #endif
 
-void scePaf_8DEB3DB3(void *arg0) {
+void _ZN3paf12MiconPointee6AddRefEv(void *arg0) {
     sceKernelWaitSema(D_001A5C80, 1, NULL);
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) + 1);
     sceKernelSignalSema((s32) D_001A5C80, 1);
 }
 
-INCLUDE_ASM("nonmatchings/paf_0FEF54", scePaf_BA09CF46);
+INCLUDE_ASM("nonmatchings/paf_0FEF54", _ZN3paf12MiconPointee7ReleaseEv);
 
 INCLUDE_ASM("nonmatchings/paf_0FEF54", func_000FF044);
 
@@ -140,7 +140,7 @@ void func_00100A88(struct Unk_func_00100A88_0 *arg0) {
 
         } else {
             func_00100918(arg0);
-            scePaf_4E67BB08(arg0);
+            _ZdlPv(arg0);
         }
     }
 }
@@ -158,7 +158,7 @@ void func_00100A88(struct Unk_func_00100A88_0 *arg0) {
 
         } else {
             func_00100918(arg0);
-            scePaf_4E67BB08(arg0);
+            _ZdlPv(arg0);
         }
     }
 }
@@ -330,7 +330,7 @@ void func_001017B4(struct Unk_func_001017B4_0 *arg0) {
 
         } else {
             func_00101718(arg0);
-            scePaf_4E67BB08(arg0);
+            _ZdlPv(arg0);
         }
     }
 }

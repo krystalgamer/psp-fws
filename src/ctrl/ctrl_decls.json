@@ -27,8 +27,8 @@
   "sceCtrlReadBufferPositive": "s32 sceCtrlReadBufferPositive(void *arg0, s32 arg1);",
   "sceCtrlSetIdleCancelKey": "s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
   "sceCtrlSetPollingMode": "s32 sceCtrlSetPollingMode(s8 arg0);",
-  "sceCtrl_driver_348D99D4": "s32 sceCtrl_driver_348D99D4(u32 arg0);",
-  "sceCtrl_driver_AF5960F3": "s32 sceCtrl_driver_AF5960F3(void);",
+  "sceCtrlSetSuspendingExtraSamples": "s32 sceCtrlSetSuspendingExtraSamples(u32 arg0);",
+  "sceCtrlGetSuspendingExtraSamples": "s32 sceCtrlGetSuspendingExtraSamples(void);",
   "sceCtrl_driver_CC70B61E": "s32 sceCtrl_driver_CC70B61E(void);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);"
  },

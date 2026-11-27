@@ -17,7 +17,7 @@ INCLUDE_RODATA("nonmatchings/blkdev", D_00001034);
 
 INCLUDE_ASM("nonmatchings/blkdev", sceBLKGetUnitNum);
 
-INCLUDE_ASM("nonmatchings/blkdev", sceBLK_driver_A86B6778);
+INCLUDE_ASM("nonmatchings/blkdev", sceBLKInvalidateDeviceName);
 
 INCLUDE_ASM("nonmatchings/blkdev", sceBLKGetDeviceData);
 

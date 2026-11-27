@@ -44,7 +44,7 @@ INCLUDE_ASM("nonmatchings/paf_106DCC", func_00106F04);
 
 INCLUDE_ASM("nonmatchings/paf_106DCC", func_00106F18);
 
-void scePaf_D4C6CC7A(struct Unk_scePaf_D4C6CC7A_0 *arg0) {
+void _ZN3paf14PhAppearXmItem20SetDefaultLabelColorERK4vec4(struct Unk_scePaf_D4C6CC7A_0 *arg0) {
     D_001A7CC0.unk0 = (s32) arg0->unk0;
     D_001A7CC0.unk4 = (s32) arg0->unk4;
     D_001A7CC0.unk8 = (s32) arg0->unk8;
@@ -1139,7 +1139,7 @@ s32 func_00117274(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A4930 != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }

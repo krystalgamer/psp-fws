@@ -50,11 +50,11 @@ INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_44961EFA);
 #endif
 
 #if FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_A0DE7090);
+INCLUDE_ASM("nonmatchings/common_gui", _ZN3vsh26ShowButtonNavigation_EnterEb);
 
-INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_441D55D7);
+INCLUDE_ASM("nonmatchings/common_gui", _ZN3vsh25ShowButtonNavigation_BackEb);
 
-INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_EEB86F0E);
+INCLUDE_ASM("nonmatchings/common_gui", _ZN3vsh27ShowButtonNavigation_OptionEb);
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 350
@@ -62,9 +62,9 @@ INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_DE8FC339);
 #endif
 
 #if FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_6C81492F);
+INCLUDE_ASM("nonmatchings/common_gui", _ZN3vsh31SetButtonNavigationString_EnterEPKw);
 
-INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_54BC644C);
+INCLUDE_ASM("nonmatchings/common_gui", _ZN3vsh30SetButtonNavigationString_BackEPKw);
 
-INCLUDE_ASM("nonmatchings/common_gui", sceVshCommonGui_BAA1F762);
+INCLUDE_ASM("nonmatchings/common_gui", _ZN3vsh32SetButtonNavigationString_OptionEPKw);
 #endif

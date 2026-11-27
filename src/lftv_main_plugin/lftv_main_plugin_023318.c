@@ -12,12 +12,12 @@ void func_00023318(void) {
     struct Unk_func_00023318_temp_s0 *temp_s0;
 
     func_00038A9C(0);
-    sceVshCommonGui_80271F41();
+    _ZN3vsh12BusyIcon_IncEv();
     InputDevice_PspPad_Lock();
     temp_s0 = D_0005F848;
     if ((temp_s0 == NULL) || (temp_v0 = Job_Start(0, &func_000234F8, 0, -1, -1, &func_0002365C), temp_s0->unk3C = temp_v0, (temp_v0 == 0))) {
         InputDevice_PspPad_Unlock();
-        sceVshCommonGui_1CF884A1();
+        _ZN3vsh12BusyIcon_DecEv();
     }
 }
 #endif
@@ -70,7 +70,7 @@ void func_0001D444(M2C_UNK **arg0) {
 void func_0001D46C(M2C_UNK **arg0) {
     *arg0 = &D_00043CD8;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -223,7 +223,7 @@ void func_0001E898(M2C_UNK **arg0) {
 void func_0001E8C0(M2C_UNK **arg0) {
     *arg0 = &D_00043D80;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_023318", func_0001E8F8);
@@ -372,7 +372,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_023318", func_00024304);
 void func_00024304(M2C_UNK **arg0) {
     *arg0 = &D_0005A850;
     func_0002CD70((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

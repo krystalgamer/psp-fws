@@ -226,7 +226,7 @@ s32 func_000335BC(void) {
     s32 temp_v0;
     s32 temp_v0_2;
 
-    temp_v0 = scePaf_B7E6052B(0x10);
+    temp_v0 = _Znwj(0x10);
     func_000332CC(temp_v0);
     temp_v0_2 = func_00034490();
     if (temp_v0_2 != 0) {

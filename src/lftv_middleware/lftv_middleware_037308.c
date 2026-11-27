@@ -80,7 +80,7 @@ void func_000378F8(s32 **arg0) {
     *arg0 = &D_00056460;
     func_00037ABC((s32) arg0);
     func_00039E1C(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

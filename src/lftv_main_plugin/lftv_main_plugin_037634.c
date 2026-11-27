@@ -9,7 +9,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00037634);
 void func_00037634(M2C_UNK **arg0) {
     *arg0 = &D_0005BF60;
     func_0004AC3C((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -328,7 +328,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000383A0);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000383A0(M2C_UNK **arg0) {
     *arg0 = &D_0005C018;
-    scePaf_715E8DAB();
+    _ZN3paf8PhWidgetD2Ev();
 }
 #endif
 
@@ -343,7 +343,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000383C8);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000383C8(M2C_UNK **arg0) {
     *arg0 = &D_0005C018;
-    scePaf_715E8DAB();
+    _ZN3paf8PhWidgetD2Ev();
 }
 #endif
 
@@ -360,9 +360,9 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_0002C84C);
 
 void func_0002C98C(M2C_UNK **arg0) {
     *arg0 = &D_0005C300;
-    scePaf_EAA5AFF6((s32) arg0, 0x01000009);
-    scePaf_EAA5AFF6((s32) arg0, 0x0100000A);
-    scePaf_715E8DAB(arg0);
+    _ZN3paf9PhHandler11KillTimerCBEi((s32) arg0, 0x01000009);
+    _ZN3paf9PhHandler11KillTimerCBEi((s32) arg0, 0x0100000A);
+    _ZN3paf8PhWidgetD2Ev(arg0);
 }
 #endif
 
@@ -373,8 +373,8 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000383F0);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000383F0(M2C_UNK **arg0) {
     *arg0 = &D_0005C018;
-    scePaf_715E8DAB();
-    scePaf_4E67BB08(arg0);
+    _ZN3paf8PhWidgetD2Ev();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -426,7 +426,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000388DC);
 #if FW_VERSION == 250 || (FW_VERSION >= 282 && FW_VERSION < 350)
 void func_000388DC(M2C_UNK **arg0) {
     *arg0 = &D_0005C0F0;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -612,7 +612,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039B00);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00039B00(M2C_UNK **arg0) {
     *arg0 = &D_0005C300;
-    scePaf_715E8DAB();
+    _ZN3paf8PhWidgetD2Ev();
 }
 #endif
 
@@ -623,8 +623,8 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039B28);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00039B28(M2C_UNK **arg0) {
     *arg0 = &D_0005C300;
-    scePaf_715E8DAB();
-    scePaf_4E67BB08(arg0);
+    _ZN3paf8PhWidgetD2Ev();
+    _ZdlPv(arg0);
 }
 #endif
 

@@ -471,7 +471,7 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004F34);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/iofilemgr", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/iofilemgr", module_bootstart);
 #endif
 
 #if FW_VERSION == 100
@@ -837,11 +837,11 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetThreadCwd);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrForKernel_BD17474F);
+INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetIobUserLevel);
 #endif
 
 #if FW_VERSION == 152
-s32 IoFileMgrForKernel_BD17474F(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0) {
+s32 sceIoGetIobUserLevel(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0) {
     return arg0->unk80;
 }
 #endif
@@ -1150,7 +1150,7 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_00006404);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/iofilemgr", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/iofilemgr", module_bootstart);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", module_reboot_before);
 #endif
@@ -1308,7 +1308,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoTerminateFd);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoAddHook);
 
-s32 IoFileMgrForKernel_BD17474F(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0) {
+s32 sceIoGetIobUserLevel(struct Unk_IoFileMgrForKernel_BD17474F_0 *arg0) {
     return arg0->unk80;
 }
 
@@ -1361,12 +1361,12 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00004690);
 
 #if FW_VERSION >= 350
 s32 func_0000557C(void *arg0) {
-    SysMemForKernel_CE05CCB7();
+    sceKernelCallUIDObjCommonFunction();
     return M2C_FIELD(arg0, s32 *, 0xC);
 }
 
 s32 func_000055A4(void) {
-    SysMemForKernel_CE05CCB7();
+    sceKernelCallUIDObjCommonFunction();
     return 0;
 }
 #endif

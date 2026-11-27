@@ -23,7 +23,7 @@ void func_00106AD4(struct Unk_func_00106AD4_0 *arg0) {
     if (temp_v0 == 0) {
 
     } else {
-        scePaf_14CE7F6F(temp_v0);
+        _ZN3paf7PhSText15SetColumnOffsetEf(temp_v0);
     }
 }
 

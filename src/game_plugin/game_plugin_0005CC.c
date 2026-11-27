@@ -162,7 +162,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000E78);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00000E78(M2C_UNK **arg0) {
     *arg0 = &D_00011890;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -194,7 +194,7 @@ void func_00001208(void) {
     if (D_00015B0D != 0) {
 
     } else {
-        scePaf_D4FAE7D0(&D_00014340);
+        _ZN3paf4View4FindEPKc(&D_00014340);
         func_000081A4((s32) &D_0001247C);
     }
 }
@@ -212,7 +212,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00001298);
 void func_00001298(s32 arg0) {
     void *temp_v0;
 
-    temp_v0 = scePaf_338C3774(arg0, 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(arg0, 1);
     if (temp_v0 != NULL) {
         M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK *, M2C_UNK), 4)(&func_00001260, 0);
     }
@@ -530,7 +530,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000E78);
 #if FW_VERSION < 201
 void func_00000E78(s32 **arg0) {
     *arg0 = &D_00011890;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -621,8 +621,8 @@ void func_00001730(s32 arg0) {
 void func_00001730(s32 arg0) {
     if (arg0 == 0) {
         D_00015B0C = 1;
-        sceVshCommonGui_A0DE7090(arg0);
-        sceVshCommonGui_441D55D7(0);
+        _ZN3vsh26ShowButtonNavigation_EnterEb(arg0);
+        _ZN3vsh25ShowButtonNavigation_BackEb(0);
         M2C_FIELD(D_00015840, M2C_UNK (**)(M2C_UNK, void *), 0x10)(1, D_00015840);
         func_000012D0(D_00015AEC);
     } else {
@@ -916,10 +916,10 @@ void func_00002640(s32 arg0) {
     if (func_00002CEC() == 0) {
 
     } else {
-        scePaf_EAA5AFF6(arg0, 2);
+        _ZN3paf9PhHandler11KillTimerCBEi(arg0, 2);
         temp_s1 = D_00011620;
-        scePaf_F609FA81(temp_s1, (s32) &D_00011980, 0, 0);
-        scePaf_CAF05F1D(temp_s1, (s32) &D_00011980);
+        _ZN3paf4View8PageOpenEPKcii(temp_s1, (s32) &D_00011980, 0, 0);
+        _ZN3paf4View12PageActivateEPKc(temp_s1, (s32) &D_00011980);
         InputDevice_PspPad_Unlock();
     }
 }
@@ -933,10 +933,10 @@ void func_00002640(s32 arg0) {
         if (D_00012A98 == 0) {
 
         } else {
-            scePaf_EAA5AFF6(arg0, 2);
+            _ZN3paf9PhHandler11KillTimerCBEi(arg0, 2);
             temp_s1 = D_00011580;
-            scePaf_F609FA81(temp_s1, (s32) &D_00011980, 0, 0);
-            scePaf_CAF05F1D(temp_s1, (s32) &D_00011980);
+            _ZN3paf4View8PageOpenEPKcii(temp_s1, (s32) &D_00011980, 0, 0);
+            _ZN3paf4View12PageActivateEPKc(temp_s1, (s32) &D_00011980);
             InputDevice_PspPad_Unlock();
         }
     }
@@ -951,10 +951,10 @@ void func_00002640(s32 arg0) {
         if (D_00011680 == 0) {
 
         } else {
-            scePaf_EAA5AFF6(arg0, 2);
+            _ZN3paf9PhHandler11KillTimerCBEi(arg0, 2);
             temp_s1 = D_00011580;
-            scePaf_F609FA81(temp_s1, (s32) &D_00011980, 0, 0);
-            scePaf_CAF05F1D(temp_s1, (s32) &D_00011980);
+            _ZN3paf4View8PageOpenEPKcii(temp_s1, (s32) &D_00011980, 0, 0);
+            _ZN3paf4View12PageActivateEPKc(temp_s1, (s32) &D_00011980);
         }
     }
 }
@@ -983,18 +983,18 @@ void func_00002880(s32 arg0) {
     if (D_0001167C != 0) {
 
     } else {
-        scePaf_EAA5AFF6(arg0, 1);
+        _ZN3paf9PhHandler11KillTimerCBEi(arg0, 1);
         temp_s0 = D_00011678;
         if (temp_s0 == 0) {
 
         } else {
             sceVshCommonGui_57F57F40(temp_s0);
-            scePaf_4E67BB08(temp_s0);
+            _ZdlPv(temp_s0);
         }
         D_00011678 = 0;
-        sceVshCommonGui_A0DE7090(0);
-        sceVshCommonGui_441D55D7(0);
-        vsh_0B8DE38E(&D_0001157C, 2);
+        _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+        _ZN3vsh25ShowButtonNavigation_BackEb(0);
+        _ZN11PageManager13ReturnTopmenuEi(&D_0001157C, 2);
         InputDevice_PspPad_Unlock();
     }
 }

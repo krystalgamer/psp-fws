@@ -5,12 +5,12 @@
 #if FW_VERSION >= 201
 s32 module_start(void) {
     sceDdrInit();
-    DmacManForKernel_32757C57((s32) &sceDdrFlush);
+    sceKernelDmaRegisterDdrFlush((s32) &sceDdrFlush);
     return 0;
 }
 
 s32 module_reboot_before(void) {
-    DmacManForKernel_32757C57(0);
+    sceKernelDmaRegisterDdrFlush(0);
     sceDdrEnd();
     return 0;
 }
@@ -38,7 +38,7 @@ INCLUDE_ASM("nonmatchings/emc_ddr", sceDdrSetPowerDownCounter);
 
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdrGetPowerDownCounter);
 
-INCLUDE_ASM("nonmatchings/emc_ddr", sceDdr_driver_6078F911);
+INCLUDE_ASM("nonmatchings/emc_ddr", sceDdrReadDllDelay);
 
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdrExecSeqCmd);
 

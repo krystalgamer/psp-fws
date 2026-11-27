@@ -149,7 +149,7 @@ INCLUDE_ASM("nonmatchings/ifhandle_152", sceNetMFreem);
 
 INCLUDE_ASM("nonmatchings/ifhandle_152", sceNetMPrepend);
 
-INCLUDE_ASM("nonmatchings/ifhandle_152", sceNetIfhandle_driver_955F2924);
+INCLUDE_ASM("nonmatchings/ifhandle_152", sceNetMCopypacket);
 
 INCLUDE_RODATA("nonmatchings/ifhandle_152", D_000039F4);
 

@@ -14,21 +14,21 @@ s32 module_stop(void) {
 }
 
 void func_0000015C(void) {
-    scePaf_3481F595(D_0000053C, &D_000004CC);
+    _ZN3paf4View9PageCloseEPKc(D_0000053C, &D_000004CC);
     D_00000540 = 0;
 }
 
 void func_0000018C(void) {
     void *sp0;
-    scePaf_F609FA81(D_0000053C, &D_000004CC, 0, 0);
-    scePaf_CAF05F1D(D_0000053C, &D_000004CC);
-    sceVshCommonGui_441D55D7(1);
-    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_5C161337(-1));
+    _ZN3paf4View8PageOpenEPKcii(D_0000053C, &D_000004CC, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_0000053C, &D_000004CC);
+    _ZN3vsh25ShowButtonNavigation_BackEb(1);
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackE6Locale(-1));
     func_000002C4(&sp0);
 }
 
 void func_00000200(void) {
-    scePaf_3481F595(D_0000053C, &D_000004CC);
+    _ZN3paf4View9PageCloseEPKc(D_0000053C, &D_000004CC);
     D_00000540 = 0;
 }
 
@@ -43,7 +43,7 @@ void func_00000298(void) {
 }
 
 void func_000002A0(s32 arg0) {
-    scePaf_97FDA760(arg0, 1, &D_0000050C);
+    _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, &D_0000050C);
 }
 
 INCLUDE_ASM("nonmatchings/dlgsample_plugin", func_000002C4);

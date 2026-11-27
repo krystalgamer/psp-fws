@@ -23,8 +23,8 @@ void func_0000015C(void) {
 }
 #else
 void func_0000015C(void) {
-    scePaf_F609FA81(D_00001F4C, &D_00001AB4, 0, 0);
-    scePaf_CAF05F1D(D_00001F4C, &D_00001AB4);
+    _ZN3paf4View8PageOpenEPKcii(D_00001F4C, &D_00001AB4, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_00001F4C, &D_00001AB4);
 }
 #endif
 

@@ -4,7 +4,7 @@
 #include "common.h"
 #include "exceptionman_decls.h"
 
-INCLUDE_ASM("nonmatchings/exceptionman", syslib_D3744BE0);
+INCLUDE_ASM("nonmatchings/exceptionman", module_bootstart);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/exceptionman", sceKernelRegisterPriorityExceptionHandler);
@@ -34,14 +34,14 @@ s32 func_000000F4(void) {
 #if FW_VERSION >= 150 && FW_VERSION < 282
 void func_0000011C(void) {
     func_00000AAC(func_00000A80());
-    syslib_D3744BE0();
+    module_bootstart();
 }
 #endif
 
 #if FW_VERSION == 100
 void func_0000011C(void) {
     func_000000F4();
-    syslib_D3744BE0();
+    module_bootstart();
 }
 #endif
 
@@ -105,7 +105,7 @@ s32 func_0000051C(void) {
 
 void func_00000544(void) {
     func_00000AAC(func_00000A80());
-    syslib_D3744BE0();
+    module_bootstart();
 }
 #endif
 

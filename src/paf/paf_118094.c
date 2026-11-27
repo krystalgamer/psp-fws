@@ -2,7 +2,7 @@
 #include "paf_decls.h"
 
 #if FW_VERSION >= 282
-void scePaf_B884B031(struct Unk_scePaf_B884B031_0 *arg0) {
+void _ZN3paf15CriticalSectionC1Ev(struct Unk_scePaf_B884B031_0 *arg0) {
     arg0->unk4 = 0;
     arg0->unk8 = 0;
     arg0->unk0 = sceKernelCreateEventFlag(&D_0019D1F0, 0x200U, 3U, NULL);
@@ -12,11 +12,11 @@ void func_001180D8(s32 *arg0) {
     sceKernelDeleteEventFlag(*arg0);
 }
 
-void scePaf_9399AF50(s32 *arg0) {
+void _ZN3paf15CriticalSectionD1Ev(s32 *arg0) {
     sceKernelDeleteEventFlag(*arg0);
 }
 
-void scePaf_C1F72218(struct Unk_scePaf_C1F72218_0 *arg0) {
+void _ZN3paf15CriticalSection5EnterEv(struct Unk_scePaf_C1F72218_0 *arg0) {
     u32 temp_v0;
 
     sceKernelWaitEventFlag(arg0->unk0, 1U, 0x20, NULL, NULL);
@@ -30,7 +30,7 @@ void scePaf_C1F72218(struct Unk_scePaf_C1F72218_0 *arg0) {
     sceKernelSetEventFlag((s32) arg0->unk0, 1);
 }
 
-void scePaf_539F2583(struct Unk_scePaf_539F2583_0 *arg0) {
+void _ZN3paf15CriticalSection5LeaveEv(struct Unk_scePaf_539F2583_0 *arg0) {
     s32 temp_v1;
 
     sceKernelWaitEventFlag(arg0->unk0, 1U, 0x20, NULL, NULL);

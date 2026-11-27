@@ -3,14 +3,14 @@
 
 void func_000C31CC(M2C_UNK **arg0) {
     *arg0 = &D_00199150;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 #if FW_VERSION == 100 || FW_VERSION >= 200
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C31F4);
 #else
 void func_000C31F4(void) {
-    scePaf_D35B454A(D_001A53FC);
+    _ZN3paf8PhWidget13DestroyWidgetEv(D_001A53FC);
     func_0007DD34(D_001A53FC);
     sceDisplayWaitVblankStart();
     D_001A53FC = 0;
@@ -23,17 +23,17 @@ void func_000C31F4(void) {
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3250);
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_7C2C2742);
+INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf13PhApplication13StartDispListEv);
 #else
-void scePaf_7C2C2742(void) {
+void _ZN3paf13PhApplication13StartDispListEv(void) {
     sceGuStart(0, D_001A5420, D_001A5424);
 }
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_D0AD10FF);
+INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf13PhApplication14FinishDispListEv);
 #else
-void scePaf_D0AD10FF(void) {
+void _ZN3paf13PhApplication14FinishDispListEv(void) {
     sceGuFinish();
     sceGuSync(0, 0);
 }
@@ -42,7 +42,7 @@ void scePaf_D0AD10FF(void) {
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3338);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_B0C3E598);
+INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf13PhApplication14GetRootSurfaceEv);
 #endif
 
 #if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 250)
@@ -68,17 +68,17 @@ void func_0006B030(s32 arg0) {
 #endif
 
 #if FW_VERSION == 282
-M2C_UNK *scePaf_B0C3E598(void) {
+M2C_UNK *_ZN3paf13PhApplication14GetRootSurfaceEv(void) {
     return &D_001A542C;
 }
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_2A7CDE78);
+INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf13PhApplication25SetRootSurfaceClearPolicyEi);
 #endif
 
 #if FW_VERSION == 282
-void scePaf_2A7CDE78(s32 arg0) {
+void _ZN3paf13PhApplication25SetRootSurfaceClearPolicyEi(s32 arg0) {
     D_001A45D8 = arg0;
 }
 #endif
@@ -88,7 +88,7 @@ INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C33A0);
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C34F0);
 
 #if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_81773E1C);
+INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf13PhApplication11CancelEventEPKNS_7PhEventEj);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
@@ -167,11 +167,11 @@ INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3D70);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_2AD8DE45);
+INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf13PhApplication25SetInitialShadowBlendModeEi);
 #endif
 
 #if FW_VERSION == 282
-s32 scePaf_2AD8DE45(s32 arg0) {
+s32 _ZN3paf13PhApplication25SetInitialShadowBlendModeEi(s32 arg0) {
     s32 temp_v0;
 
     temp_v0 = D_001A45DC;
@@ -246,7 +246,7 @@ INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C47E4);
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C4844);
 
-INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_2FF0A287);
+INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf12PhDispatcher14SetEventIgnoreEifb);
 
 INCLUDE_RODATA("nonmatchings/paf_0C31CC", D_00199150);
 
@@ -256,7 +256,7 @@ INCLUDE_RODATA("nonmatchings/paf_0C31CC", D_00199168);
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C4988);
 
-INCLUDE_ASM("nonmatchings/paf_0C31CC", scePaf_FF74C932);
+INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf12PhDispatcher9EventExecEPNS_7PhEventE);
 
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C4AD8);
 
@@ -307,7 +307,7 @@ void func_000C5250(struct Unk_func_000C5250_0 *arg0) {
     arg0->unk1C = 0;
 }
 
-void scePaf_2313DDCA(struct Unk_scePaf_2313DDCA_0 *arg0) {
+void _ZN3paf7PhEventC1Ev(struct Unk_scePaf_2313DDCA_0 *arg0) {
     arg0->unk0 = &D_0016EE68;
     arg0->unk4 = 0x110000;
     arg0->unk8 = 0;

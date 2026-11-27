@@ -23,11 +23,11 @@ s32 func_00034590(void) {
 }
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/pafmini_0340C4", scePaf_78F94D84);
+INCLUDE_ASM("nonmatchings/pafmini_0340C4", InputDevice_PspPad_IsAnalogMode);
 
-INCLUDE_ASM("nonmatchings/pafmini_0340C4", scePaf_5822F12A);
+INCLUDE_ASM("nonmatchings/pafmini_0340C4", InputDevice_PspPad_EnableAnalog);
 #else
-s32 scePaf_5822F12A(void) {
+s32 InputDevice_PspPad_EnableAnalog(void) {
     s32 temp_v0;
 
     temp_v0 = sceCtrlSetSamplingMode(1U);
@@ -37,13 +37,13 @@ s32 scePaf_5822F12A(void) {
     if (D_0010F20C != 0) {
 
     } else {
-        scePaf_E69C3B1B((s32) &func_00034148);
+        InputDevice_PspPad_SetAnalogHandler((s32) &func_00034148);
     }
     return temp_v0;
 }
 #endif
 
-void scePaf_FD9DE7B9(s32 arg0) {
+void InputDevice_PspPad_EnableAnalogThreshold(s32 arg0) {
     D_000E072C = arg0 * arg0;
-    scePaf_5822F12A();
+    InputDevice_PspPad_EnableAnalog();
 }

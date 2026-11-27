@@ -1,7 +1,7 @@
 // NID-derived names
 module_start = 0x00000000; // type:func
 sceKernelDmaExit = 0x00000168; // type:func
-DmacManForKernel_32757C57 = 0x000002C0; // type:func
+sceKernelDmaRegisterDdrFlush = 0x000002C0; // type:func
 sceKernelDmaSoftRequest = 0x000002E8; // type:func
 sceKernelDmaOpFree = 0x00000348; // type:func
 sceKernelDmaOpEnQueue = 0x00000440; // type:func
@@ -13,13 +13,13 @@ sceKernelDmaOpSetupNormal = 0x00000860; // type:func
 sceKernelDmaOpSetupLink = 0x000008F0; // type:func
 sceKernelDmaOpSync = 0x00000A08; // type:func
 sceKernelDmaOpQuit = 0x00000C0C; // type:func
-DmacManForKernel_E18A93A5 = 0x00000D1C; // type:func
+sceKernelDmaOpConcatenate = 0x00000D1C; // type:func
 sceKernelDmaOpAssignMultiple = 0x00000F5C; // type:func
 sceKernelDmaChExclude = 0x00001780; // type:func
 sceKernelDmaChReserve = 0x00001848; // type:func
 sceKernelDmaOpAlloc = 0x000018E0; // type:func
 sceKernelDmaOpAssign = 0x00001998; // type:func
-DmacManForKernel_1FC036B7 = 0x00001A10; // type:func
+sceKernelDmaOpLLIConcatenate = 0x00001A10; // type:func
 sceKernelDmaOnDebugMode = 0x00001A8C; // type:func
 sceKernelDmaOpFreeLink = 0x00001A94; // type:func
 sceKernelCpuSuspendIntr = 0x00001C7C; // type:func

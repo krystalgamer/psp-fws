@@ -15,7 +15,7 @@ extern s8 D_000011F0[];
 extern u8 D_00001230[];
 extern s8 D_00001280[];
 
-KDebugUnkIf *KDebugForKernel_E892D9A1(void);
+KDebugUnkIf *sceKernelSm1ReferOperations(void);
 M2C_UNK func_0000004C(M2C_UNK, M2C_UNK);
 void func_00000094(s32 arg0);
 void func_000000E0(void);

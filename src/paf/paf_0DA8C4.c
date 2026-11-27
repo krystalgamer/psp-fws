@@ -3,17 +3,17 @@
 
 void func_000DA8C4(M2C_UNK **arg0) {
     *arg0 = &D_00199D28;
-    scePaf_715E8DAB((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf8PhWidgetD2Ev((s32) arg0);
+    _ZdlPv(arg0);
 }
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_8BA04801);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf8PhButton18HandleKeycodeEventEPNS_7PhEventE);
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_93A60B78);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf8PhButton22HandleFocusSwitchEventEPNS_7PhEventE);
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_AEE1CBAD);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf8PhButton19HandleFocusOutEventEPNS_7PhEventE);
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_19A779E2);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf8PhButton8SetFocusEPNS_7PhEventEb);
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DABFC);
 
@@ -22,7 +22,7 @@ s32 func_000DAC28(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A47B8 != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }
@@ -67,7 +67,7 @@ INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DB370);
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DB3C8);
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_4FF65BDC);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf8PhCamera16SetVirtualScreenEfff);
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DB45C);
 
@@ -116,7 +116,7 @@ s32 func_000DC0B8(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A47BC != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }
@@ -125,13 +125,13 @@ s32 func_000DC0E4(void) {
     return D_001A47BC;
 }
 
-s32 scePaf_A0A25707(void) {
+s32 _ZN3paf7PhClock10WidgetTypeEv(void) {
     return D_001A47BC;
 }
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DC0FC);
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_7B099943);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf7PhClockC1EPNS_8PhWidgetE);
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DC284);
 
@@ -153,9 +153,9 @@ INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DCD28);
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DCDD8);
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_CB7CCB28);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf7PhClock7SetTimeERKNS0_10datetime_tE);
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_0A189A1A);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf7PhClock7GetTimeERNS0_10datetime_tE);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_00085868);
@@ -220,7 +220,7 @@ INCLUDE_RODATA("nonmatchings/paf_0DA8C4", D_0011BE64);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_F6AB6655);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf7PhClock13SetDateFormatEi);
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_C6CF9352);
 
@@ -238,7 +238,7 @@ INCLUDE_RODATA("nonmatchings/paf_0DA8C4", D_00199FBC);
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_E5BAC873);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf7PhClock9SetFormatEii);
 #endif
 
 #if FW_VERSION == 280
@@ -270,7 +270,7 @@ INCLUDE_RODATA("nonmatchings/paf_0DA8C4", D_0018D960);
 #endif
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_38876947);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf7PhClock15SetShadowRenderEPNS_9PhSRenderE);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
@@ -326,7 +326,7 @@ INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DDA68);
 
 void func_000DDAF0(s32 arg0) {
     func_000DDB1C();
-    scePaf_47E35A50(arg0);
+    _ZN3paf8PhWidget11UpdateStateEv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DDB1C);
@@ -398,7 +398,7 @@ s32 func_000DE514(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A47C0 != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }
@@ -407,7 +407,7 @@ s32 func_000DE540(void) {
     return D_001A47C0;
 }
 
-s32 scePaf_CAE6374A(void) {
+s32 _ZN3paf10PhInfoList10WidgetTypeEv(void) {
     return D_001A47C0;
 }
 
@@ -432,7 +432,7 @@ INCLUDE_RODATA("nonmatchings/paf_0DA8C4", D_0019A0E4);
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DE558);
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_E6C072E4);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf10PhInfoListC1EPNS_8PhWidgetEPNS_8PhAppearE);
 #else
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_00084DE8);
 #endif
@@ -502,21 +502,21 @@ INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DF8B0);
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DFB68);
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_66B35152);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf10PhInfoList6CreateEif);
 #else
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_00086270);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_D2463C79);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf10PhInfoList10SetItemNumEi);
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000DFEEC);
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_58CAE908);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf10PhInfoList15SetShadowRenderEPNS_9PhSRenderE);
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_9DD9CA07);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf10PhInfoList21SetPrivateSurfacePoolEPNS_11SurfacePoolE);
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000E019C);
@@ -667,7 +667,7 @@ s32 func_000E1B08(s32 arg0, s32 arg1) {
 
     var_v0 = 1;
     if (D_001A47C4 != arg1) {
-        var_v0 = scePaf_5CA7F421(arg0, arg1);
+        var_v0 = _ZNK3paf8PhWidget9IsInheritEPKc(arg0, arg1);
     }
     return var_v0;
 }
@@ -676,7 +676,7 @@ s32 func_000E1B34(void) {
     return D_001A47C4;
 }
 
-s32 scePaf_9C9B6732(void) {
+s32 _ZN3paf8PhIPAddr10WidgetTypeEv(void) {
     return D_001A47C4;
 }
 
@@ -716,12 +716,12 @@ INCLUDE_RODATA("nonmatchings/paf_0DA8C4", D_0019A24C);
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000E1E30);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_DF9138A8);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf8PhIPAddr8SetValueEPh);
 
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_78054045);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf8PhIPAddr8GetValueEPhi);
 
 #if FW_VERSION >= 271 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_95DA7A68);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf8PhIPAddr15SetShadowRenderEPNS_9PhSRenderE);
 
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000E1C2C);
 
@@ -747,7 +747,7 @@ INCLUDE_RODATA("nonmatchings/paf_0DA8C4", D_00197D00);
 #endif
 
 #if (FW_VERSION >= 200 && FW_VERSION < 271) || FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/paf_0DA8C4", scePaf_95DA7A68);
+INCLUDE_ASM("nonmatchings/paf_0DA8C4", _ZN3paf8PhIPAddr15SetShadowRenderEPNS_9PhSRenderE);
 #endif
 
 #if FW_VERSION == 270
@@ -807,7 +807,7 @@ void func_000E2878(void *arg0) {
         temp_a1 = M2C_FIELD(var_s0, s32 *, 0x338);
         var_s1 -= 1;
         var_s0 += 4;
-        scePaf_C2C25056(temp_a0, temp_a1);
+        _ZN3paf6PhSpin11SetSelectedEi(temp_a0, temp_a1);
     } while (var_s1 >= 0);
 }
 #endif
@@ -934,7 +934,7 @@ s32 func_000E31BC(void) {
     return D_001A47C8;
 }
 
-s32 scePaf_ED3E4EB1(void) {
+s32 _ZN3paf10PhItemSpin10WidgetTypeEv(void) {
     return D_001A47C8;
 }
 

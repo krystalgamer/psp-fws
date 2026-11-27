@@ -8,8 +8,8 @@ extern s32 D_00002450;
 extern s32 D_00002620;
 extern s32 D_00002644;
 
-s32 InitForKernel_33D30F49(void);
-s32 InitForKernel_FD0F25AD(void);
+s32 sceKernelShowIntrHandlerInfo(void);
+s32 sceKernelShowIntrMaskTime(void);
 s32 func_00001208(void);
 s32 func_00001284(void);
 M2C_UNK memset(M2C_UNK, M2C_UNK, M2C_UNK);

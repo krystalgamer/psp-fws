@@ -856,6 +856,6 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_000075F0);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000075F0(M2C_UNK **arg0) {
     *arg0 = &D_000576E8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif

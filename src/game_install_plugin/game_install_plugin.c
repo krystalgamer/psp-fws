@@ -222,7 +222,7 @@ INCLUDE_ASM("nonmatchings/game_install_plugin", func_00001490);
 #else
 void func_00001490(M2C_UNK **arg0) {
     *arg0 = &D_00003CC0;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 

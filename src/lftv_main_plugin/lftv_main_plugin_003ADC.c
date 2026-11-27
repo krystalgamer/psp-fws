@@ -10,9 +10,9 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_003ADC", func_00003ADC);
 s32 func_00003ADC(void) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_000572A0);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_000572A0);
     if (temp_v0 != 0) {
-        scePaf_1A45C860(temp_v0, (s32) &func_00003A28);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE(temp_v0, (s32) &func_00003A28);
     }
     return 0;
 }

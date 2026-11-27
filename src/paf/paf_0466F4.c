@@ -22,7 +22,7 @@ void func_00046770(M2C_UNK **arg0) {
 void func_00046798(M2C_UNK **arg0) {
     *arg0 = &D_00171564;
     func_0004417C((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_RODATA("nonmatchings/paf_0466F4", D_001714B0);
@@ -144,7 +144,7 @@ void func_00048724(M2C_UNK **arg0) {
 void func_0004874C(M2C_UNK **arg0) {
     *arg0 = &D_001715E0;
     func_0004417C((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/paf_0466F4", func_00048784);

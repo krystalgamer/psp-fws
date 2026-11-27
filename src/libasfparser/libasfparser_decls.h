@@ -286,7 +286,7 @@ s32 func_00006760(struct Unk_func_00006760_0 *arg0);
 u32 func_00006774(struct Unk_func_00006774_0 *arg0);
 void func_00006780(struct Unk_func_00006780_0 *arg0);
 void sceAsfGetFrameData(s32 arg0, s32 arg1, s32 arg2);
-void sceAsfParser_385E1320(s32 arg0, s32 arg1, s32 arg2);
+void sceAsfGetAudioStreamInfo(s32 arg0, s32 arg1, s32 arg2);
 s32 sceAsfParserEndEntry(void);
 s32 sceAsfParserStartEntry(void);
 

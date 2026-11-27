@@ -27,7 +27,7 @@ M2C_UNK func_0000161C();
 s32 module_stop(void);
 M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
 M2C_UNK scePaf_A013540A(s32, M2C_UNK *);
-M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);
-M2C_UNK scePaf_F609FA81(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
+M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);
+M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
 
 #endif

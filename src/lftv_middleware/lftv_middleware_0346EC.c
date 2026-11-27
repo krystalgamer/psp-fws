@@ -110,7 +110,7 @@ void func_00035140(s32 **arg0) {
     *arg0 = &D_00056340;
     func_000354F4((s32) arg0);
     func_00039E1C(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

@@ -39,7 +39,7 @@ void scePaf_C8E7B03F(s32 arg0) {
     D_001A7DE0 = arg0;
 }
 
-INCLUDE_ASM("nonmatchings/paf_12038C", scePaf_D4DAB044);
+INCLUDE_ASM("nonmatchings/paf_12038C", sceCccSetCTable);
 
 INCLUDE_ASM("nonmatchings/paf_12038C", scePaf_15939BB8);
 
@@ -727,7 +727,7 @@ void func_00122458(void) {
 }
 
 void func_00122474(void) {
-    scePaf_D4DAB044();
+    sceCccSetCTable();
 }
 
 void func_00122490(s32 arg0) {

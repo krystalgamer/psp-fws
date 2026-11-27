@@ -113,12 +113,12 @@ void func_0000020C(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000063C0;
     sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
     M2C_FIELD(arg0, s8 *, 0xC) = 1;
-    scePaf_CA5EF446((s32) temp_s1);
+    _ZN3paf4Cond6NotifyEv((s32) temp_s1);
     sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
-    scePaf_5775283A(arg0);
-    scePaf_1B043852((s32) temp_s1);
+    _ZN3paf6Thread4JoinEv(arg0);
+    _ZN3paf4CondD1Ev((s32) temp_s1);
     sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
-    scePaf_E977B833(arg0);
+    _ZN3paf6ThreadD2Ev(arg0);
 }
 #endif
 
@@ -130,12 +130,12 @@ void func_0000020C(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00005C40_v260;
     sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
     M2C_FIELD(arg0, s8 *, 0xC) = 1;
-    scePaf_CA5EF446(temp_s1);
+    _ZN3paf4Cond6NotifyEv(temp_s1);
     sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
-    scePaf_5775283A(arg0);
-    scePaf_1B043852(temp_s1);
+    _ZN3paf6Thread4JoinEv(arg0);
+    _ZN3paf4CondD1Ev(temp_s1);
     sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
-    scePaf_E977B833(arg0);
+    _ZN3paf6ThreadD2Ev(arg0);
 }
 #endif
 
@@ -147,12 +147,12 @@ void func_00000290(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000063C0;
     sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
     M2C_FIELD(arg0, s8 *, 0xC) = 1;
-    scePaf_CA5EF446((s32) temp_s1);
+    _ZN3paf4Cond6NotifyEv((s32) temp_s1);
     sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
-    scePaf_5775283A(arg0);
-    scePaf_1B043852((s32) temp_s1);
+    _ZN3paf6Thread4JoinEv(arg0);
+    _ZN3paf4CondD1Ev((s32) temp_s1);
     sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
-    scePaf_E977B833(arg0);
+    _ZN3paf6ThreadD2Ev(arg0);
 }
 #endif
 
@@ -164,12 +164,12 @@ void func_00000290(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00005C40_v260;
     sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
     M2C_FIELD(arg0, s8 *, 0xC) = 1;
-    scePaf_CA5EF446(temp_s1);
+    _ZN3paf4Cond6NotifyEv(temp_s1);
     sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
-    scePaf_5775283A(arg0);
-    scePaf_1B043852(temp_s1);
+    _ZN3paf6Thread4JoinEv(arg0);
+    _ZN3paf4CondD1Ev(temp_s1);
     sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
-    scePaf_E977B833(arg0);
+    _ZN3paf6ThreadD2Ev(arg0);
 }
 #endif
 
@@ -181,13 +181,13 @@ void func_00000314(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000063C0;
     sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
     M2C_FIELD(arg0, s8 *, 0xC) = 1;
-    scePaf_CA5EF446((s32) temp_s1);
+    _ZN3paf4Cond6NotifyEv((s32) temp_s1);
     sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
-    scePaf_5775283A(arg0);
-    scePaf_1B043852((s32) temp_s1);
+    _ZN3paf6Thread4JoinEv(arg0);
+    _ZN3paf4CondD1Ev((s32) temp_s1);
     sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
-    scePaf_E977B833(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf6ThreadD2Ev(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -199,13 +199,13 @@ void func_00000314(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00005C40_v260;
     sceKernelWaitSema(M2C_FIELD(arg0, s32 *, 0x10), 1, NULL);
     M2C_FIELD(arg0, s8 *, 0xC) = 1;
-    scePaf_CA5EF446(temp_s1);
+    _ZN3paf4Cond6NotifyEv(temp_s1);
     sceKernelSignalSema(M2C_FIELD(arg0, s32 *, 0x10), 1);
-    scePaf_5775283A(arg0);
-    scePaf_1B043852(temp_s1);
+    _ZN3paf6Thread4JoinEv(arg0);
+    _ZN3paf4CondD1Ev(temp_s1);
     sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x10));
-    scePaf_E977B833(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf6ThreadD2Ev(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -358,12 +358,12 @@ void func_00000274(struct Unk_func_00000274_0 *arg0) {
     arg0->unk0 = &D_00007200;
     sceKernelWaitSema(arg0->unk10, 1, NULL);
     arg0->unkC = 1;
-    scePaf_CA5EF446(temp_s1);
+    _ZN3paf4Cond6NotifyEv(temp_s1);
     sceKernelSignalSema(arg0->unk10, 1);
-    scePaf_5775283A(arg0);
-    scePaf_1B043852(temp_s1);
+    _ZN3paf6Thread4JoinEv(arg0);
+    _ZN3paf4CondD1Ev(temp_s1);
     sceKernelDeleteSema(arg0->unk10);
-    scePaf_E977B833(arg0);
+    _ZN3paf6ThreadD2Ev(arg0);
 }
 #endif
 
@@ -379,12 +379,12 @@ void func_000002F8(struct Unk_func_000002F8_0 *arg0) {
     arg0->unk0 = &D_00007200;
     sceKernelWaitSema(arg0->unk10, 1, NULL);
     arg0->unkC = 1;
-    scePaf_CA5EF446(temp_s1);
+    _ZN3paf4Cond6NotifyEv(temp_s1);
     sceKernelSignalSema(arg0->unk10, 1);
-    scePaf_5775283A(arg0);
-    scePaf_1B043852(temp_s1);
+    _ZN3paf6Thread4JoinEv(arg0);
+    _ZN3paf4CondD1Ev(temp_s1);
     sceKernelDeleteSema(arg0->unk10);
-    scePaf_E977B833(arg0);
+    _ZN3paf6ThreadD2Ev(arg0);
 }
 #endif
 
@@ -400,13 +400,13 @@ void func_0000037C(struct Unk_func_0000037C_0 *arg0) {
     arg0->unk0 = &D_00007200;
     sceKernelWaitSema(arg0->unk10, 1, NULL);
     arg0->unkC = 1;
-    scePaf_CA5EF446(temp_s1);
+    _ZN3paf4Cond6NotifyEv(temp_s1);
     sceKernelSignalSema(arg0->unk10, 1);
-    scePaf_5775283A(arg0);
-    scePaf_1B043852(temp_s1);
+    _ZN3paf6Thread4JoinEv(arg0);
+    _ZN3paf4CondD1Ev(temp_s1);
     sceKernelDeleteSema(arg0->unk10);
-    scePaf_E977B833(arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf6ThreadD2Ev(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -546,7 +546,7 @@ s32 func_0000055C(struct Unk_func_0000055C_0 *arg0) {
 }
 
 void func_00000614(void) {
-    scePaf_CAF05F1D(D_000080A4, D_00007E48);
+    _ZN3paf4View12PageActivateEPKc(D_000080A4, D_00007E48);
     func_00001304(0);
     func_00001418(0, 0, 0, 0);
     func_00003BDC(0);
@@ -687,7 +687,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_0000010C);
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 void func_00000614(void) {
-    scePaf_CAF05F1D(D_000080A4, D_00007E48);
+    _ZN3paf4View12PageActivateEPKc(D_000080A4, D_00007E48);
     func_00001304(0);
     func_00001478(0, 0, 0, 0);
     func_00003BDC(0);
@@ -702,7 +702,7 @@ INCLUDE_RODATA("nonmatchings/htmlviewer_plugin", D_00005968);
 
 #if FW_VERSION == 260
 void func_00000614(void) {
-    scePaf_CAF05F1D(D_000080A4, D_00007E48);
+    _ZN3paf4View12PageActivateEPKc(D_000080A4, D_00007E48);
     func_00001304(0);
     func_00000E38(0, 0, 0);
     func_00003BDC(0);
@@ -1082,10 +1082,10 @@ void func_00000C10(s32 arg0) {
 
     } else {
         sceKernelSetEventFlag(D_0000A58C, 1U);
-        temp_v0 = scePaf_D4FAE7D0(&D_00008CC4);
+        temp_v0 = _ZN3paf4View4FindEPKc(&D_00008CC4);
         if (temp_v0 != 0) {
             sceKernelSetEventFlag(D_0000A360, 1U);
-            scePaf_1A45C860(temp_v0, NULL);
+            _ZN3paf4View6UnloadEPS0_PFvPKcE(temp_v0, NULL);
         }
     }
 }
@@ -1161,15 +1161,15 @@ void func_00000940(struct Unk_func_00000940_0 *arg0) {
 #if FW_VERSION >= 310 && FW_VERSION < 350
 void func_00000940(struct Unk_func_00000940_0 *arg0) {
     InputDevice_PspPad_EnableAnalogThreshold(0x40);
-    scePaf_F47CA1C2(arg0, 0x80005, func_000011A4, (s32) &D_0000ABD0);
-    scePaf_F47CA1C2(arg0, 0x80006, func_00000AD0, (s32) &D_0000ABD0);
-    scePaf_F47CA1C2(arg0, 0x10001, func_00000888, 0);
-    scePaf_F47CA1C2(arg0, 0x10002, func_000008B4, 0);
-    scePaf_F47CA1C2(arg0, 0x10006, func_000008E0, 0);
-    scePaf_F47CA1C2(arg0, 0x10007, func_00000920, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80005, func_000011A4, (s32) &D_0000ABD0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80006, func_00000AD0, (s32) &D_0000ABD0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, func_00000888, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10002, func_000008B4, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10006, func_000008E0, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10007, func_00000920, 0);
     arg0->unk14 |= 0x20;
-    M2C_FIELD(&D_0000ABD0, s32 *, 0) = (s32) M2C_FIELD(scePaf_5DFB5858(), s32 *, 0x9C);
-    M2C_FIELD(&D_0000ABD0, s32 *, 4) = (s32) M2C_FIELD(scePaf_5DFB5858(), s32 *, 0xA0);
+    M2C_FIELD(&D_0000ABD0, s32 *, 0) = (s32) M2C_FIELD(_ZN3paf9Framework8InstanceEv(), s32 *, 0x9C);
+    M2C_FIELD(&D_0000ABD0, s32 *, 4) = (s32) M2C_FIELD(_ZN3paf9Framework8InstanceEv(), s32 *, 0xA0);
 }
 #endif
 
@@ -1177,16 +1177,16 @@ void func_00000940(struct Unk_func_00000940_0 *arg0) {
 void func_00000940(struct Unk_func_00000940_0 *arg0) {
     void *sp0;
     InputDevice_PspPad_EnableAnalogThreshold(0x40);
-    scePaf_F47CA1C2(arg0, 0x80006, func_00000AD0, 0);
-    scePaf_F47CA1C2(arg0, 0x10001, func_00000888, 0);
-    scePaf_F47CA1C2(arg0, 0x10002, func_000008B4, 0);
-    scePaf_F47CA1C2(arg0, 0x10006, func_000008E0, 0);
-    scePaf_F47CA1C2(arg0, 0x10007, func_00000920, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80006, func_00000AD0, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, func_00000888, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10002, func_000008B4, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10006, func_000008E0, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10007, func_00000920, 0);
     arg0->unk14 |= 0x20;
-    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
     func_00003FAC((s32) &D_0000A570, &sp0);
     func_00003F7C(&sp0);
-    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
     func_00003FAC((s32) &D_0000A57C, &sp0);
     func_00003F7C(&sp0);
 }
@@ -1207,10 +1207,10 @@ void func_00000FC4(void) {
 #if FW_VERSION >= 310 && FW_VERSION < 350
 void func_00000FC4(void) {
     void *sp0;
-    sceVshCommonGui_6C81492F(&sp0, sceVshCommonGui_764A5495());
+    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
     func_00003FAC((s32) &D_0000A570, &sp0);
     func_00003F7C(&sp0);
-    sceVshCommonGui_54BC644C(&sp0, sceVshCommonGui_DBEE94DC());
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
     func_00003FAC((s32) &D_0000A57C, &sp0);
     func_00003F7C(&sp0);
 }
@@ -1219,11 +1219,11 @@ void func_00000FC4(void) {
 #if FW_VERSION == 250 || FW_VERSION == 282
 void func_00000940(struct Unk_func_00000940_0 *arg0) {
     InputDevice_PspPad_EnableAnalogThreshold(0x40);
-    scePaf_F47CA1C2(arg0, 0x80006, func_00000AD0, 0);
-    scePaf_F47CA1C2(arg0, 0x10001, func_00000888, 0);
-    scePaf_F47CA1C2(arg0, 0x10002, func_000008B4, 0);
-    scePaf_F47CA1C2(arg0, 0x10006, func_000008E0, 0);
-    scePaf_F47CA1C2(arg0, 0x10007, func_00000920, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80006, func_00000AD0, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, func_00000888, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10002, func_000008B4, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10006, func_000008E0, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10007, func_00000920, 0);
     arg0->unk14 = (s32) (arg0->unk14 | 0x20);
 }
 #endif
@@ -1248,13 +1248,13 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_00000AD0);
 
 #if FW_VERSION == 250 || (FW_VERSION >= 282 && FW_VERSION < 310)
 void func_00000AD0(void) {
-    scePaf_D0AD10FF();
+    _ZN3paf13PhApplication14FinishDispListEv();
     func_00003A18();
-    scePaf_7C2C2742();
+    _ZN3paf13PhApplication13StartDispListEv();
     if ((u32) (func_0000398C() - 2) >= 2U) {
 
     } else {
-        scePaf_DF642973(3);
+        _ZN3paf8PhAppear18SetShadowBlendModeEi(3);
     }
 }
 #endif
@@ -1362,7 +1362,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_000018C4);
 #if FW_VERSION >= 330 && FW_VERSION < 350
 void func_000018C4(s32 arg0) {
     func_00004554(2, arg0);
-    scePaf_CAF05F1D(D_000080A4, D_00007E48);
+    _ZN3paf4View12PageActivateEPKc(D_000080A4, D_00007E48);
 }
 #endif
 
@@ -1528,11 +1528,11 @@ void func_00000948(void) {
 
 void func_00000968(void *arg0) {
     InputDevice_PspPad_EnableAnalogThreshold(0x40);
-    scePaf_F47CA1C2(arg0, 0x80006, func_00000AF8, 0);
-    scePaf_F47CA1C2(arg0, 0x10001, func_000008CC, 0);
-    scePaf_F47CA1C2(arg0, 0x10002, func_000008F8, 0);
-    scePaf_F47CA1C2(arg0, 0x10006, func_00000924, 0);
-    scePaf_F47CA1C2(arg0, 0x10007, func_00000948, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80006, func_00000AF8, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, func_000008CC, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10002, func_000008F8, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10006, func_00000924, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10007, func_00000948, 0);
     M2C_FIELD(arg0, s32 *, 0x14) = (s32) (M2C_FIELD(arg0, s32 *, 0x14) | 0x20);
 }
 
@@ -1541,13 +1541,13 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_00000A28);
 INCLUDE_ASM("nonmatchings/htmlviewer_plugin", func_00000AB8);
 
 void func_00000AF8(void) {
-    scePaf_D0AD10FF();
+    _ZN3paf13PhApplication14FinishDispListEv();
     func_00003A18();
-    scePaf_7C2C2742();
+    _ZN3paf13PhApplication13StartDispListEv();
     if ((u32) (func_0000398C() - 2) >= 2U) {
 
     } else {
-        scePaf_DF642973(3);
+        _ZN3paf8PhAppear18SetShadowBlendModeEi(3);
     }
 }
 
@@ -1604,7 +1604,7 @@ void func_00001238(void) {
 }
 #else
 void func_00001238(void) {
-    vsh_AA8B9556();
+    _ZN3vsh15RaiseFatalErrorEj();
 }
 #endif
 

@@ -11,7 +11,7 @@
   "sceLcdcInit": "s32 sceLcdcInit(void);",
   "sceLcdcResume": "s32 sceLcdcResume(void);",
   "sceLcdcSuspend": "s32 sceLcdcSuspend(void);",
-  "sceLcdc_driver_825DB9C5": "s32 sceLcdc_driver_825DB9C5(void);",
+  "sceLcdcGetCyclesPerPixel": "s32 sceLcdcGetCyclesPerPixel(void);",
   "sceSysregLcdcClkDisable": "s32 sceSysregLcdcClkDisable(void);",
   "sceSysregLcdcIoDisable": "s32 sceSysregLcdcIoDisable(void);",
   "sceSysregLcdcIoEnable": "M2C_UNK sceSysregLcdcIoEnable();"

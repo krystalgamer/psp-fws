@@ -170,7 +170,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00003F78);
 #if FW_VERSION >= 250 && FW_VERSION < 282
 void func_000040DC(M2C_UNK **arg0) {
     *arg0 = &D_00011AC8;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 
 INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00004104);
@@ -179,7 +179,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00004104);
 #if FW_VERSION < 282
 void func_00003F18(M2C_UNK **arg0) {
     *arg0 = &D_00011AE8;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -190,7 +190,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_0000403C);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000403C(M2C_UNK **arg0) {
     *arg0 = &D_00011AD8;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -205,7 +205,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_0000412C);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000412C(M2C_UNK **arg0) {
     *arg0 = &D_00011AE8;
-    scePaf_4E67BB08();
+    _ZdlPv();
 }
 #endif
 
@@ -307,8 +307,8 @@ void func_000043D4(void) {
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000043D4(void) {
     func_00006768();
-    scePaf_49CE42F7(D_00012984, &D_00010C3C);
-    sceVshCommonGui_441D55D7(0);
+    _ZN3paf4View9PlaySoundEPKc(D_00012984, &D_00010C3C);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     func_000042D8();
 }
 #endif
@@ -316,7 +316,7 @@ void func_000043D4(void) {
 #if FW_VERSION == 100
 void func_000043D4(void) {
     func_00006768();
-    sceVshCommonGui_441D55D7(0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(0);
     func_000042D8();
 }
 #endif
@@ -579,9 +579,9 @@ void func_00005C88(void) {
     s32 temp_v0;
     struct Unk_func_00005C88_temp_v0_2 *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_00011CFC);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_00011CFC);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             temp_v0_2->unkC(0, &func_00005CE8, 0, 0);
         }
@@ -743,9 +743,9 @@ void func_00006584(void) {
     s32 temp_v0;
     struct Unk_func_00006584_temp_v0_2 *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_00011D88);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_00011D88);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             temp_v0_2->unkC(0, &func_000064F4, 0, 0);
         }
@@ -837,9 +837,9 @@ void func_0000670C(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_00011DEC);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_00011DEC);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK), 0xC)(0, &func_0000669C, 0, 0);
         }
@@ -853,9 +853,9 @@ void func_0000670C(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_00011DEC);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_00011DEC);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK), 0xC)(0, &func_0000669C, 0);
         }
@@ -885,9 +885,9 @@ void func_00006974(void) {
     s32 temp_v0;
     struct Unk_func_00006974_temp_v0_2 *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_00011DEC);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_00011DEC);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             temp_v0_2->unkC(0, &func_000068E4, 0, 0);
         }
@@ -933,9 +933,9 @@ void func_00006BF4(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_00010E80);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_00010E80);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK), 0xC)(0, &func_00006B7C, 0, 0);
         }
@@ -949,9 +949,9 @@ void func_00006BF4(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_D4FAE7D0(&D_00010E80);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_00010E80);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(M2C_UNK, M2C_UNK *, M2C_UNK), 0xC)(0, &func_00006B7C, 0);
         }
@@ -1060,7 +1060,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00005F40);
 void func_00006030(s32 arg0) {
     void *temp_v0;
 
-    temp_v0 = scePaf_338C3774(arg0, 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(arg0, 1);
     if (temp_v0 != NULL) {
         M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK *), 4)(&func_00006F0C);
     }
@@ -1072,7 +1072,7 @@ void func_00006030(s32 arg0) {
     void *temp_v0;
 
     D_00012AC8 = arg0;
-    temp_v0 = scePaf_338C3774(arg0, 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(arg0, 1);
     if (temp_v0 != NULL) {
         M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK *), 4)(&func_00005F40);
     }
@@ -1088,7 +1088,7 @@ void func_00006030(s32 arg0) {
     void *temp_v0;
 
     D_000116AC_v100 = arg0;
-    temp_v0 = scePaf_338C3774(arg0, 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(arg0, 1);
     if (temp_v0 != NULL) {
         M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK *), 4)(&func_00005F40);
     }
@@ -1119,7 +1119,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_0000613C);
 void func_00007024(s32 arg0) {
     struct Unk_func_00007024_temp_v0 *temp_v0;
 
-    temp_v0 = scePaf_338C3774(arg0, 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(arg0, 1);
     if (temp_v0 != NULL) {
         temp_v0->unk4(&func_00007058);
     }
@@ -1219,8 +1219,8 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00006768);
 #if FW_VERSION >= 201 && FW_VERSION < 282
 s32 func_00006768(void) {
     D_0001176C = 0;
-    sceVshCommonGui_A0DE7090(0);
-    return sceVshCommonGui_441D55D7(0);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+    return _ZN3vsh25ShowButtonNavigation_BackEb(0);
 }
 #endif
 

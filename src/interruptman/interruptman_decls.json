@@ -1,8 +1,8 @@
 {
  "funcs": {
   "InterruptManagerForKernel_53991063": "s32 InterruptManagerForKernel_53991063(void);",
-  "InterruptManagerForKernel_7A05D976": "void InterruptManagerForKernel_7A05D976(s32 arg0, s32 arg1);",
-  "InterruptManagerForKernel_7EF7500F": "void InterruptManagerForKernel_7EF7500F(void);",
+  "RegisterSubIntrruptMonitor": "void RegisterSubIntrruptMonitor(s32 arg0, s32 arg1);",
+  "ReleaseSubIntrruptMonitor": "void ReleaseSubIntrruptMonitor(void);",
   "QueryInterruptManCB": "s32 *QueryInterruptManCB(void);",
   "QueryIntrHandlerInfo": "s32 QueryIntrHandlerInfo(void);",
   "RegisterContextHooks": "void RegisterContextHooks(s32 arg0, s32 arg1);",

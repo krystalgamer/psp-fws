@@ -136,8 +136,8 @@ INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_2025D016);
 #else
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_FE305D6D);
 
-void sceVshCommonGui_72E652AA(s32 *arg0) {
-    scePaf_41BCFB59(*arg0);
+void _ZN3vsh13MessageDialog10HideDeleteEv(s32 *arg0) {
+    _ZN3paf10MessageBox10HideDeleteEv(*arg0);
 }
 #endif
 
@@ -166,7 +166,7 @@ void sceVshCommonGui_9F196654(s32 *arg0) {
 #endif
 
 #if FW_VERSION < 350
-s32 sceVshCommonGui_ACFE7BE7(void **arg0) {
+s32 _ZN3vsh13MessageDialog12GetBasePlaneEv(void **arg0) {
     s32 var_v0;
     struct Unk_sceVshCommonGui_ACFE7BE7_temp_a0 *temp_a0;
 
@@ -180,12 +180,12 @@ s32 sceVshCommonGui_ACFE7BE7(void **arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 350
-void sceVshCommonGui_88F5E3A8(struct Unk_sceVshCommonGui_88F5E3A8_0 *arg0, s32 arg1, s32 arg2) {
+void _ZN3vsh13MessageDialog16SetDeleteHandlerEPFvPvES1_(struct Unk_sceVshCommonGui_88F5E3A8_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk14 = arg2;
     arg0->unkC = arg1;
 }
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_70490BCC);
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", _ZN3vsh13MessageDialog20ResetDialogCloseTimeEv);
 #endif

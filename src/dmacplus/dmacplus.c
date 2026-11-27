@@ -214,9 +214,9 @@ s32 func_00000D18(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_1D73DDA8);
+INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAvcDoAVCdec);
 
-INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_74323807);
+INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAvcDoVME);
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAvcSync);
 
@@ -281,7 +281,7 @@ INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAvcSuspend);
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAvcResume);
 
-INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplus_driver_B2EFA681);
+INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusAvcSetDestConf);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dmacplus", func_00001678);

@@ -1,5 +1,5 @@
 // NID-derived names
-syslib_D3744BE0 = 0x00000000; // type:func
+module_bootstart = 0x00000000; // type:func
 sceKernelRegisterPriorityExceptionHandler = 0x0000012C; // type:func
 sceKernelRegisterDefaultExceptionHandler = 0x00000224; // type:func
 sceKernelReleaseExceptionHandler = 0x000002B8; // type:func

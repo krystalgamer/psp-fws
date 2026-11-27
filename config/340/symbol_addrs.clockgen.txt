@@ -1,6 +1,6 @@
 // NID-derived names
 sceClockgenSetup = 0x00000000; // type:func
-sceClockgen_driver_C9AF3102 = 0x000000F8; // type:func
+sceClockgenSetSpectrumSpreading = 0x000000F8; // type:func
 module_start = 0x000002A4; // type:func
 module_reboot_before = 0x00000310; // type:func
 sceClockgenInit = 0x0000035C; // type:func

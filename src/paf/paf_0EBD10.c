@@ -3,27 +3,27 @@
 
 void func_000EBD10(M2C_UNK **arg0) {
     *arg0 = &D_0019AB08;
-    scePaf_715E8DAB((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZN3paf8PhWidgetD2Ev((s32) arg0);
+    _ZdlPv(arg0);
 }
 
-void scePaf_22B0D7D8(struct Unk_scePaf_22B0D7D8_0 *arg0) {
+void _ZN3paf7PhModel15SetTextureImageERKNS_12SurfaceRCPtrINS_7SurfaceEEEi(struct Unk_scePaf_22B0D7D8_0 *arg0) {
     func_00102B50(arg0->unk1E8);
 }
 
-void scePaf_FCABD0E7(struct Unk_scePaf_FCABD0E7_0 *arg0) {
+void _ZNK3paf7PhModel15GetTextureImageERNS_12SurfaceRCPtrINS_7SurfaceEEEi(struct Unk_scePaf_FCABD0E7_0 *arg0) {
     func_00102CFC(arg0->unk1E8);
 }
 
-void scePaf_CA8CDF32(struct Unk_scePaf_CA8CDF32_0 *arg0) {
+void _ZN3paf7PhModel17SetTexturePaletteERKNS_12SurfaceRCPtrINS_7SurfaceEEEif(struct Unk_scePaf_CA8CDF32_0 *arg0) {
     func_00102D38(arg0->unk1E8);
 }
 
-void scePaf_EE10AEF1(struct Unk_scePaf_EE10AEF1_0 *arg0) {
+void _ZNK3paf7PhModel17GetTexturePaletteERNS_12SurfaceRCPtrINS_7SurfaceEEEi(struct Unk_scePaf_EE10AEF1_0 *arg0) {
     func_00102FCC(arg0->unk1E8);
 }
 
-void scePaf_E15A64EA(struct Unk_scePaf_E15A64EA_0 *arg0) {
+void _ZN3paf7PhModel8SetModelEPvi(struct Unk_scePaf_E15A64EA_0 *arg0) {
     func_00103008(arg0->unk1E8);
 }
 
@@ -31,27 +31,27 @@ void func_000EBDD4(struct Unk_func_000EBDD4_0 *arg0) {
     func_0010308C(arg0->unk1E8);
 }
 
-void scePaf_4C5F6657(struct Unk_scePaf_4C5F6657_0 *arg0) {
+void _ZNK3paf7PhModel14GetMotionCountEv(struct Unk_scePaf_4C5F6657_0 *arg0) {
     func_00103094(arg0->unk1E8);
 }
 
-void scePaf_6A772BF7(struct Unk_scePaf_6A772BF7_0 *arg0) {
+void _ZN3paf7PhModel16SetCurrentMotionEif(struct Unk_scePaf_6A772BF7_0 *arg0) {
     func_001030B0(arg0->unk1E8);
 }
 
-void scePaf_8CDEDC6F(struct Unk_scePaf_8CDEDC6F_0 *arg0) {
+void _ZNK3paf7PhModel16GetCurrentMotionEv(struct Unk_scePaf_8CDEDC6F_0 *arg0) {
     func_00103104(arg0->unk1E8);
 }
 
-void scePaf_CFAF88AB(struct Unk_scePaf_CFAF88AB_0 *arg0) {
+void _ZN3paf7PhModel8SetFrameEf(struct Unk_scePaf_CFAF88AB_0 *arg0) {
     func_00103120(arg0->unk1E8);
 }
 
-void scePaf_DFB912CB(struct Unk_scePaf_DFB912CB_0 *arg0) {
+void _ZNK3paf7PhModel8GetFrameEv(struct Unk_scePaf_DFB912CB_0 *arg0) {
     func_0010313C(arg0->unk1E8);
 }
 
-void scePaf_D34D0B82(struct Unk_scePaf_D34D0B82_0 *arg0) {
+void _ZN3paf7PhModel12SetFrameRateEf(struct Unk_scePaf_D34D0B82_0 *arg0) {
     func_00103158(arg0->unk1E8);
 }
 
@@ -59,7 +59,7 @@ void func_000EBE98(struct Unk_func_000EBE98_0 *arg0) {
     func_00103174(arg0->unk1E8);
 }
 
-void scePaf_BAA76FDE(struct Unk_scePaf_BAA76FDE_0 *arg0) {
+void _ZN3paf7PhModel12SetFrameLoopEff(struct Unk_scePaf_BAA76FDE_0 *arg0) {
     func_00103190(arg0->unk1E8);
 }
 
@@ -67,7 +67,7 @@ void func_000EBED0(struct Unk_func_000EBED0_0 *arg0) {
     func_001031AC(arg0->unk1E8);
 }
 
-void scePaf_6CF44237(struct Unk_scePaf_6CF44237_0 *arg0) {
+void _ZN3paf7PhModel14SetFrameRepeatEi(struct Unk_scePaf_6CF44237_0 *arg0) {
     func_001031C8(arg0->unk1E8);
 }
 
@@ -79,7 +79,7 @@ void func_000EBF24(struct Unk_func_000EBF24_0 *arg0) {
     func_00103200(arg0->unk1E8);
 }
 
-void scePaf_6B678D44(struct Unk_scePaf_6B678D44_0 *arg0) {
+void _ZN3paf7PhModel14SetPatchDivideEi(struct Unk_scePaf_6B678D44_0 *arg0) {
     func_00103208(arg0->unk1E8);
 }
 
@@ -97,13 +97,13 @@ s32 func_000EBF88(void) {
     return D_001A4808;
 }
 
-s32 scePaf_9A8E343E(void) {
+s32 _ZN3paf9PhNumSpin10WidgetTypeEv(void) {
     return D_001A4808;
 }
 
 INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000EBFA0);
 
-INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_D1159069);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", _ZN3paf9PhNumSpinC1EPNS_8PhWidgetEPNS_8PhAppearE);
 
 INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000EC168);
 
@@ -189,20 +189,20 @@ INCLUDE_ASM("nonmatchings/paf_0EBD10", func_000ED100);
 INCLUDE_ASM("nonmatchings/paf_0EBD10", func_0009156C);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_AE02F241);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", _ZN3paf9PhNumSpin6CreateEiibiPPNS_7PhSTextEPKi);
 
 #if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_E3840566);
 #endif
 
-INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_95040C08);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", _ZN3paf9PhNumSpin14SetDigitMaxTblEPKi);
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_07BA4C80);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", _ZN3paf9PhNumSpin15SetVisibleDigitEi);
 #endif
 
 #if FW_VERSION >= 200
-INCLUDE_ASM("nonmatchings/paf_0EBD10", scePaf_252F37A3);
+INCLUDE_ASM("nonmatchings/paf_0EBD10", _ZN3paf9PhNumSpin15SetShadowRenderEPNS_9PhSRenderE);
 #endif
 
 #if FW_VERSION == 340

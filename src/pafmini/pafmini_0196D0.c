@@ -14,7 +14,7 @@ void func_000196F8(M2C_UNK **arg0) {
 void func_00019720(M2C_UNK **arg0) {
     *arg0 = &D_000D1E30;
     func_00013B90((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00019758);
@@ -72,7 +72,7 @@ void func_0001A3A4(M2C_UNK **arg0) {
 void func_0001A3CC(M2C_UNK **arg0) {
     *arg0 = &D_000D1E74;
     func_00013B90((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001A404);
@@ -219,7 +219,7 @@ void func_00039D0C(void *arg0) {
 void func_00039D20(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000FF5D8;
     M2C_FIELD(arg0, s32 *, 4) = 0;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -278,14 +278,14 @@ void func_0003A1BC(M2C_UNK **arg0) {
 #if FW_VERSION == 100
 void func_0003A1CC(s32 **arg0) {
     *arg0 = &D_000FF5D8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 void func_0003A1CC(M2C_UNK **arg0) {
     *arg0 = &D_000FF5D8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -320,7 +320,7 @@ void func_0001AA50(M2C_UNK **arg0) {
 void func_0001AA78(M2C_UNK **arg0) {
     *arg0 = &D_000D1EB0;
     func_00013B90((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -459,7 +459,7 @@ void func_0003BE48(M2C_UNK **arg0) {
 void func_0003BE70(s32 **arg0) {
     *arg0 = &D_000FF78C;
     func_00013B90((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -467,7 +467,7 @@ void func_0003BE70(s32 **arg0) {
 void func_0003BE70(M2C_UNK **arg0) {
     *arg0 = &D_000FF78C;
     func_00013B90((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -726,7 +726,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001BE1C);
 
 void func_0001BEF4(struct Unk_func_0001BEF4_0 *arg0) {
     if (arg0->unk0 != 0) {
-        scePaf_ABBBB335(arg0->unk4);
+        sce_paf_private_fopen(arg0->unk4);
     } else {
         func_000C001C(arg0->unk10);
     }
@@ -819,7 +819,7 @@ void func_0001CA10(M2C_UNK **arg0) {
 
 void func_0001CA20(M2C_UNK **arg0) {
     *arg0 = &D_000D1ED8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 s32 func_0001CA48(void) {
@@ -874,7 +874,7 @@ void func_0001CFB4(M2C_UNK **arg0) {
 
 void func_0001CFC4(M2C_UNK **arg0) {
     *arg0 = &D_000D1ED8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 #if FW_VERSION >= 201
@@ -907,7 +907,7 @@ void func_0001D044(M2C_UNK **arg0) {
 
 void func_0001D054(M2C_UNK **arg0) {
     *arg0 = &D_000D1ED8;
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 
 s32 func_0001D07C(s32 arg0, u32 arg1) {
@@ -1065,9 +1065,9 @@ void func_0001E4F0(struct Unk_func_0001E4F0_0 *arg0) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_83944053(temp_v0);
+            sce_paf_private_fclose(temp_v0);
         }
-        scePaf_211A764A(&arg0->pad1[3], &arg0->pad1[7], &arg0->pad1[0xB]);
+        png_destroy_read_struct(&arg0->pad1[3], &arg0->pad1[7], &arg0->pad1[0xB]);
     }
 }
 #endif
@@ -1081,16 +1081,16 @@ void func_0001E4F0(struct Unk_func_0001E4F0_0 *arg0) {
         if (temp_v0 == 0) {
 
         } else {
-            scePaf_83944053(temp_v0);
+            sce_paf_private_fclose(temp_v0);
         }
         if (arg0->unk40 != 0) {
-            scePaf_545FE2DA(arg0->unk40);
+            sce_paf_private_free(arg0->unk40);
             arg0->unk40 = 0;
         }
         arg0->unk44 = 0;
         arg0->unk48 = 0;
         arg0->unk4C = 0;
-        scePaf_211A764A((u8 *)arg0 + 4, (u8 *)arg0 + 8, (u8 *)arg0 + 0xC);
+        png_destroy_read_struct((u8 *)arg0 + 4, (u8 *)arg0 + 8, (u8 *)arg0 + 0xC);
     }
 }
 #endif
@@ -1112,7 +1112,7 @@ void func_0001E8B4(struct Unk_func_0001E8B4_0 *arg0) {
 }
 
 void func_0001E8D0(struct Unk_func_0001E8D0_0 *arg0) {
-    scePaf_7333E75A(arg0->unk4);
+    png_set_packing(arg0->unk4);
 }
 
 void func_0001E8EC(struct Unk_func_0001E8EC_0 *arg0) {
@@ -1216,13 +1216,13 @@ INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000D213C);
 INCLUDE_RODATA("nonmatchings/pafmini_0196D0", D_000D2158);
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", scePaf_1A1F232F);
+INCLUDE_ASM("nonmatchings/pafmini_0196D0", png_set_sig_bytes);
 #else
-void scePaf_1A1F232F(struct Unk_scePaf_1A1F232F_0 *arg0, s32 arg1) {
+void png_set_sig_bytes(struct Unk_scePaf_1A1F232F_0 *arg0, s32 arg1) {
     if (arg1 < 9) {
 
     } else {
-        scePaf_7894B61F((s32) arg0, (s32) "Too many bytes for PNG signature.");
+        png_error((s32) arg0, (s32) "Too many bytes for PNG signature.");
     }
     arg0->unk4EC = __builtin_allegrex_max(arg1, 0);
 }
@@ -1268,7 +1268,7 @@ void func_0001F488(struct Unk_func_0001F488_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001F4BC);
 
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", scePaf_7AFD6B74);
+INCLUDE_ASM("nonmatchings/pafmini_0196D0", png_create_info_struct);
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001F5D0);
 
@@ -1332,7 +1332,7 @@ s32 func_0001FC90(void) {
     return -1;
 }
 
-INCLUDE_ASM("nonmatchings/pafmini_0196D0", scePaf_7894B61F);
+INCLUDE_ASM("nonmatchings/pafmini_0196D0", png_error);
 
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001FD9C);
 

@@ -19,7 +19,7 @@ void func_00101AC0(struct Unk_func_00101AC0_0 *arg0, s32 arg1, s32 arg2) {
         temp_v0_2 = sceKernelCreateSema(&D_0019BD0C, 0U, 0, 0xFF, NULL);
         arg0->unk8 = temp_v0_2;
         if ((s32) temp_v0_2 > 0) {
-            temp_v0_3 = scePaf_3586BE05(0x40, arg0->unk10 * 4);
+            temp_v0_3 = sce_paf_private_memalign(0x40, arg0->unk10 * 4);
             arg0->unkC = temp_v0_3;
             if (temp_v0_3 != 0) {
                 arg0->unk0 = 1;
@@ -40,7 +40,7 @@ void func_00101B74(struct Unk_func_00101B74_0 *arg0) {
     if (temp_v0_2 > 0) {
         sceKernelDeleteSema(temp_v0_2);
     }
-    scePaf_545FE2DA(arg0->unkC);
+    sce_paf_private_free(arg0->unkC);
 }
 
 void func_00101BC4(struct Unk_func_00101BC4_0 *arg0) {
@@ -55,7 +55,7 @@ void func_00101BC4(struct Unk_func_00101BC4_0 *arg0) {
     if (temp_v0_2 > 0) {
         sceKernelDeleteSema(temp_v0_2);
     }
-    scePaf_545FE2DA(arg0->unkC);
+    sce_paf_private_free(arg0->unkC);
 }
 
 void func_00101C14(struct Unk_func_00101BC4_0 *arg0) {
@@ -74,7 +74,7 @@ void func_00101C14(struct Unk_func_00101BC4_0 *arg0) {
             sceKernelCancelSema(temp_v0_2, -1, &sp0);
         }
         func_00101BC4(arg0);
-        scePaf_4E67BB08(arg0);
+        _ZdlPv(arg0);
     }
 }
 
@@ -129,7 +129,7 @@ void func_00102094(struct Unk_func_00102094_0 *arg0) {
     if (temp_v0_2 > 0) {
         sceKernelDeleteSema(temp_v0_2);
     }
-    scePaf_545FE2DA(arg0->unk14);
+    sce_paf_private_free(arg0->unk14);
 }
 
 void func_001020E4(struct Unk_func_00102094_0 *arg0) {
@@ -151,7 +151,7 @@ void func_001020E4(struct Unk_func_00102094_0 *arg0) {
 
         } else {
             func_00102094(arg0);
-            scePaf_4E67BB08(arg0);
+            _ZdlPv(arg0);
         }
     }
 }
@@ -356,7 +356,7 @@ INCLUDE_ASM("nonmatchings/paf_101AC0", func_00103820);
 INCLUDE_ASM("nonmatchings/paf_101AC0", func_001038BC);
 
 void func_00103960(s32 arg0, M2C_UNK arg1) {
-    scePaf_D6232F26(arg0 + 0x20, 0x12, arg1);
+    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0 + 0x20, 0x12, arg1);
 }
 
 INCLUDE_ASM("nonmatchings/paf_101AC0", func_00103984);
@@ -368,7 +368,7 @@ void func_001039D4(s32 arg0, s32 arg1) {
     if ((u32) (arg1 - 0xD) < 0xDU) {
         func_00069170(arg0 + 0x20, arg1);
     } else {
-        scePaf_D24E4016(arg0 + 8);
+        _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
     }
 }
 #endif
@@ -393,7 +393,7 @@ INCLUDE_ASM("nonmatchings/paf_101AC0", func_00103BA8);
 INCLUDE_ASM("nonmatchings/paf_101AC0", func_00103C44);
 
 void func_00103CE8(s32 arg0, M2C_UNK arg1) {
-    scePaf_D6232F26(arg0 + 0x20, 0x12, arg1);
+    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0 + 0x20, 0x12, arg1);
 }
 
 INCLUDE_ASM("nonmatchings/paf_101AC0", func_00103D0C);

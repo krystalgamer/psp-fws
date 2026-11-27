@@ -170,7 +170,7 @@ INCLUDE_ASM("nonmatchings/ge", module_reboot_before);
 INCLUDE_ASM("nonmatchings/ge", sceGeEnd);
 
 #if FW_VERSION < 282
-s32 sceGe_driver_9DA4A75F(s32 arg0) {
+s32 sceGeSetGeometryClock(s32 arg0) {
     s32 temp_a3;
 
     temp_a3 = *(s32 *)0xBD400200;
@@ -204,12 +204,12 @@ INCLUDE_ASM("nonmatchings/ge", func_00000EA8);
 #endif
 
 #if FW_VERSION >= 282
-s32 sceGe_driver_BAD6E1CA(s32 arg0) {
+s32 sceGeRegisterLogHandler(s32 arg0) {
     D_00006240 = arg0;
     return 0;
 }
 
-s32 sceGe_driver_9DA4A75F(s32 arg0) {
+s32 sceGeSetGeometryClock(s32 arg0) {
     s32 temp_a3;
 
     temp_a3 = *(s32 *)0xBD400200;
@@ -242,7 +242,7 @@ INCLUDE_ASM("nonmatchings/ge", func_00002110);
 INCLUDE_ASM("nonmatchings/ge", sceGeEdramInit);
 #endif
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_114E1745);
+INCLUDE_ASM("nonmatchings/ge", sceGeEdramSetRefreshParam);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeEdramSetSize);
@@ -337,15 +337,15 @@ INCLUDE_ASM("nonmatchings/ge", sceGeSetCallback);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_AEC21518);
+INCLUDE_ASM("nonmatchings/ge", sceGePutBreakpoint);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_7B481502);
+INCLUDE_ASM("nonmatchings/ge", sceGeGetBreakpoint);
 
 INCLUDE_ASM("nonmatchings/ge", sceGeGetListIdList);
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_3EFC0D64);
+INCLUDE_ASM("nonmatchings/ge", sceGeDecodeListId);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -424,7 +424,7 @@ u32 sceGeEdramGetSize(void) {
     return D_00006A84;
 }
 
-s32 sceGe_driver_C576E897(void) {
+s32 sceGeEdramGetHwSize(void) {
     return D_00006A80;
 }
 
@@ -515,9 +515,9 @@ s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_AEC21518);
+INCLUDE_ASM("nonmatchings/ge", sceGePutBreakpoint);
 
-INCLUDE_ASM("nonmatchings/ge", sceGe_driver_7B481502);
+INCLUDE_ASM("nonmatchings/ge", sceGeGetBreakpoint);
 
 INCLUDE_ASM("nonmatchings/ge", sceGeGetListIdList);
 

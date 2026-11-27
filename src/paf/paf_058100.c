@@ -12,21 +12,21 @@ void func_00058420(struct Unk_func_00058420_0 *arg0) {
     if (temp_v0 == 0) {
 
     } else {
-        scePaf_545FE2DA(temp_v0);
+        sce_paf_private_free(temp_v0);
     }
     if (arg0->unk10 == 0) {
 
     } else {
-        scePaf_83944053(arg0->unk10);
+        sce_paf_private_fclose(arg0->unk10);
     }
 }
 
 void func_00058478(s32 arg0, s32 arg1, s32 arg2) {
-    scePaf_503BA324(arg1, 1, arg2, arg0);
+    sce_paf_private_fread(arg1, 1, arg2, arg0);
 }
 
 void func_0005849C(s32 arg0, s32 arg1, s32 arg2) {
-    scePaf_2FA84441(arg0, arg1, arg2);
+    sce_paf_private_fseek(arg0, arg1, arg2);
 }
 
 INCLUDE_ASM("nonmatchings/paf_058100", func_000584B8);
@@ -3113,7 +3113,7 @@ void _TIFFsetByteArray(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 void _TIFFsetString(s32 arg0, M2C_UNK arg1) {
-    setByteArray(arg0, arg1, scePaf_CA79D58B(arg1) + 1, 1);
+    setByteArray(arg0, arg1, sce_paf_private_strlen(arg1) + 1, 1);
 }
 
 void _TIFFsetNString(s32 arg0, s32 arg1, s32 arg2) {
@@ -3605,7 +3605,7 @@ INCLUDE_ASM("nonmatchings/paf_058100", _TIFFSetupFieldInfo);
 INCLUDE_ASM("nonmatchings/paf_058100", tagCompare);
 
 void func_0005C508(struct Unk_vt_func_0005C508_arg0 **arg0, struct Unk_vt_func_0005C508_arg1 **arg1) {
-    scePaf_66FE90D7((*arg0)->unk10, (*arg1)->unk10);
+    sce_paf_private_strcmp((*arg0)->unk10, (*arg1)->unk10);
 }
 
 INCLUDE_ASM("nonmatchings/paf_058100", func_0005C530);

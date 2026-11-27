@@ -17,7 +17,7 @@ sceGpioSetPortMode = 0x00000884; // type:func
 sceKernelRegisterSysEventHandler = 0x0000088C; // type:func
 sceKernelUnregisterSysEventHandler = 0x00000894; // type:func
 sceSysconCtrlLED = 0x0000089C; // type:func
-sceSyscon_driver_E00BFC9E = 0x000008A4; // type:func
+_sceSysconGetBaryonVersion = 0x000008A4; // type:func
 sceSysconGetWlanPowerCtrl = 0x000008AC; // type:func
 // shared names (tools/add_version.py) begin
 D_00000A90 = 0x00000A98; // rom:0xB38

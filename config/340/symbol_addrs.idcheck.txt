@@ -1,12 +1,12 @@
 // NID-derived names
-syslib_D3744BE0 = 0x00000D80; // type:func
+module_bootstart = 0x00000D80; // type:func
 sceIoOpen = 0x00000F3C; // type:func
 sceIoReopen = 0x00000F44; // type:func
 sceIoWrite = 0x00000F4C; // type:func
 sceIoRead = 0x00000F54; // type:func
 sceIoClose = 0x00000F5C; // type:func
 sceIoAddDrv = 0x00000F64; // type:func
-IoFileMgrForKernel_BD17474F = 0x00000F6C; // type:func
+sceIoGetIobUserLevel = 0x00000F6C; // type:func
 sceIoDelDrv = 0x00000F74; // type:func
 sceKernelDipsw = 0x00000F7C; // type:func
 sceKernelDebugWrite = 0x00000F84; // type:func

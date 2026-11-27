@@ -165,7 +165,7 @@ INCLUDE_ASM("nonmatchings/lcdc", sceLcdcReset);
 #endif
 
 #if FW_VERSION == 271
-s32 sceLcdc_driver_825DB9C5(void) {
+s32 sceLcdcGetCyclesPerPixel(void) {
     return D_00000DA8;
 }
 #endif
@@ -179,7 +179,7 @@ INCLUDE_RODATA("nonmatchings/lcdc", D_00000BF0);
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdcGetLcdcClockFreq);
 
-s32 sceLcdc_driver_825DB9C5(void) {
+s32 sceLcdcGetCyclesPerPixel(void) {
     return D_00000F3C;
 }
 #endif
@@ -190,7 +190,7 @@ INCLUDE_ASM("nonmatchings/lcdc", sceLcdcGetHsyncFreq);
 
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdcGetVsyncFreq);
 
-s32 sceLcdc_driver_E08B076B(void) {
+s32 sceLcdcReadUnderflow(void) {
     s32 v = *(volatile s32 *)0xBE140050;
 
     if (v == 1) {

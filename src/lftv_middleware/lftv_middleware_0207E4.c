@@ -136,7 +136,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_0207E4", func_000221F8);
 void func_000221F8(s32 **arg0) {
     *arg0 = &D_00055580;
     func_00043840((s32) arg0);
-    scePaf_4E67BB08(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

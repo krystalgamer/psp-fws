@@ -39,7 +39,7 @@ M2C_UNK scePaf_3308156F();
 M2C_UNK sce_paf_private_memalign();
 M2C_UNK scePaf_3EDD45EF(M2C_UNK, M2C_UNK *, s32, M2C_UNK, M2C_UNK, M2C_UNK *);
 M2C_UNK scePaf_4729E549();
-M2C_UNK scePaf_4E67BB08();
+M2C_UNK _ZdlPv();
 M2C_UNK sce_paf_private_free();
 s32 scePaf_5E4447F6(s32);
 M2C_UNK sce_paf_private_memset();

@@ -421,7 +421,7 @@ s32 func_000009F8(void) {
         sceDisplay_driver_63E22A26(2, 0, 0, 3, 1);
         sceDisplayWaitVblankStart();
         sceGeEdramSetAddrTranslation(0x400);
-        temp_v0_2 = sceGe_driver_C576E897();
+        temp_v0_2 = sceGeEdramGetHwSize();
         sceGeEdramSetSize(temp_v0_2);
         sceKernelMemset32(sceGeEdramGetAddr(), 0, temp_v0_2);
         sceKernelDcacheWritebackAll();
@@ -601,7 +601,7 @@ INCLUDE_ASM("nonmatchings/display", func_00001748);
 
 #if FW_VERSION == 100
 s32 func_00001748(void) {
-    sceSysreg_driver_E88B77ED(1);
+    sceSysregVblankIRQPolar(1);
     func_000023B8();
     return 0;
 }
