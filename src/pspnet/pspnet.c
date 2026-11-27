@@ -1331,7 +1331,27 @@ again:
     return fd;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfOpen);
+s32 sceNetBpfOpen(void) {
+    s32 error;
+    struct SceNetThreadInfo *ti;
+    s32 fd;
+    s32 i;
+
+    fd = 0;
+    i = 0;
+    ti = _sce_pspnet_thread_enter(&error);
+    if (ti == NULL)
+        return -1;
+again:
+    error = bpfopen(i);
+    if (error == 0) {
+        fd = i;
+    } else if (error == 16) {
+        i++;
+        goto again;
+    }
+    return (_sce_pspnet_thread_leave(ti, error) < 0) ? -1 : fd;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -1344,7 +1364,17 @@ s32 sceNetBpfClose(s32 fd) {
     return _sce_pspnet_thread_leave(ti, bpfclose(fd));
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfClose);
+s32 sceNetBpfClose(s32 fd) {
+    s32 error;
+    struct SceNetThreadInfo *ti;
+
+    ti = _sce_pspnet_thread_enter(&error);
+    if (ti == NULL)
+        return -1;
+    error = bpfclose(fd);
+    error = _sce_pspnet_thread_leave(ti, error);
+    return error;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -1372,7 +1402,27 @@ s32 sceNetBpfRead(s32 fd, void *buf, s32 len) {
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfRead);
+s32 sceNetBpfRead(s32 fd, void *buf, s32 len) {
+    struct uio uio;
+    struct iovec iov;
+    s32 error;
+    struct SceNetThreadInfo *ti;
+    s32 ret;
+
+    ti = _sce_pspnet_thread_enter(&error);
+    if (ti == NULL)
+        return -1;
+    uio.uio_iov = &iov;
+    uio.uio_iovcnt = 1;
+    iov.iov_base = buf;
+    uio.uio_rw = UIO_READ;
+    uio.uio_offset = 0;
+    uio.uio_resid = len;
+    iov.iov_len = len;
+    error = bpfread(fd, &uio);
+    ret = len - uio.uio_resid;
+    return (_sce_pspnet_thread_leave(ti, error) < 0) ? -1 : ret;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfWrite);
@@ -1387,7 +1437,17 @@ s32 sceNetBpfIoctl(s32 fd, u32 cmd, void *data) {
     return _sce_pspnet_thread_leave(ti, bpfioctl(fd, cmd, data));
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfIoctl);
+s32 sceNetBpfIoctl(s32 fd, u32 cmd, void *data) {
+    s32 error;
+    struct SceNetThreadInfo *ti;
+
+    ti = _sce_pspnet_thread_enter(&error);
+    if (ti == NULL)
+        return -1;
+    error = bpfioctl(fd, cmd, data);
+    error = _sce_pspnet_thread_leave(ti, error);
+    return error;
+}
 #endif
 
 void callout_shutdown(void) {
