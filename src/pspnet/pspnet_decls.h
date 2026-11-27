@@ -445,6 +445,33 @@ struct bpf_version {
     u16 bv_major;
     u16 bv_minor;
 };
+#define BPF_LDX 0x01
+#define BPF_STX 0x03
+#define BPF_MISC 0x07
+#define BPF_W 0x00
+#define BPF_H 0x08
+#define BPF_B 0x10
+#define BPF_IMM 0x00
+#define BPF_ABS 0x20
+#define BPF_IND 0x40
+#define BPF_LEN 0x80
+#define BPF_MSH 0xa0
+#define BPF_ADD 0x00
+#define BPF_SUB 0x10
+#define BPF_MUL 0x20
+#define BPF_OR 0x40
+#define BPF_AND 0x50
+#define BPF_LSH 0x60
+#define BPF_RSH 0x70
+#define BPF_NEG 0x80
+#define BPF_JEQ 0x10
+#define BPF_JGT 0x20
+#define BPF_JGE 0x30
+#define BPF_JSET 0x40
+#define BPF_X 0x08
+#define BPF_A 0x10
+#define BPF_TAX 0x00
+#define BPF_TXA 0x80
 
 
 s32 sceNetStrcmp(const char *s1, const char *s2);
@@ -635,7 +662,7 @@ s32 _sce_pspnet_uiomove(void *buf, s32 n, struct uio *uio);
 void _sce_pspnet_unlock_threadinfo(struct SceNetThreadInfo *arg0);
 void _sce_pspnet_wakeup(void *ident);
 s32 bpf_allocbufs(struct bpf_d *d);
-u32 bpf_filter(void *pc, u8 *p, u32 wirelen, u32 buflen);
+u32 bpf_filter(struct bpf_insn *pc, u8 *p, u32 wirelen, u32 buflen);
 u8 *bpf_mcpy(u8 *arg0, void *arg1, u32 arg2);
 void bpf_mtap(void *arg, struct mbuf *m);
 s32 bpf_setf(struct bpf_d *d, struct bpf_program *fp);

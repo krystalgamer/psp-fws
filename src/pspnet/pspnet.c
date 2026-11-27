@@ -2280,7 +2280,230 @@ void catchpacket(struct bpf_d *d, u8 *pkt, u32 pktlen, u32 snaplen, u8 *(*cpfn)(
 INCLUDE_ASM("nonmatchings/pspnet", catchpacket);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet", bpf_filter);
+u32 bpf_filter(struct bpf_insn *pc, u8 *p, u32 wirelen, u32 buflen)
+{
+	u32 A, X;
+	int k;
+	s32 mem[BPF_MEMWORDS];
+	if (pc == 0)
+		return (u32)-1;
+	A = 0;
+	X = 0;
+	--pc;
+	while (1) {
+		++pc;
+		switch (pc->code) {
+		default:
+			return 0;
+		case BPF_RET|BPF_K:
+			return (u32)pc->k;
+		case BPF_RET|BPF_A:
+			return (u32)A;
+		case BPF_LD|BPF_W|BPF_ABS:
+			k = pc->k;
+			if (k + sizeof(s32) > buflen) {
+				int merr;
+				if (buflen != 0)
+					return 0;
+				A = m_xword((struct mbuf *)p, k, &merr);
+				if (merr != 0)
+					return 0;
+				continue;
+			}
+			A = EXTRACT_LONG(&p[k]);
+			continue;
+		case BPF_LD|BPF_H|BPF_ABS:
+			k = pc->k;
+			if (k + sizeof(s16) > buflen) {
+				int merr;
+				if (buflen != 0)
+					return 0;
+				A = m_xhalf((struct mbuf *)p, k, &merr);
+				continue;
+			}
+			A = EXTRACT_SHORT(&p[k]);
+			continue;
+		case BPF_LD|BPF_B|BPF_ABS:
+			k = pc->k;
+			if (k >= buflen) {
+				struct mbuf *m;
+				int len;
+				if (buflen != 0)
+					return 0;
+				m = (struct mbuf *)p;
+				MINDEX(len, m, k);
+				A = mtod(m, u8 *)[k];
+				continue;
+			}
+			A = p[k];
+			continue;
+		case BPF_LD|BPF_W|BPF_LEN:
+			A = wirelen;
+			continue;
+		case BPF_LDX|BPF_W|BPF_LEN:
+			X = wirelen;
+			continue;
+		case BPF_LD|BPF_W|BPF_IND:
+			k = X + pc->k;
+			if (k + sizeof(s32) > buflen) {
+				int merr;
+				if (buflen != 0)
+					return 0;
+				A = m_xword((struct mbuf *)p, k, &merr);
+				if (merr != 0)
+					return 0;
+				continue;
+			}
+			A = EXTRACT_LONG(&p[k]);
+			continue;
+		case BPF_LD|BPF_H|BPF_IND:
+			k = X + pc->k;
+			if (k + sizeof(s16) > buflen) {
+				int merr;
+				if (buflen != 0)
+					return 0;
+				A = m_xhalf((struct mbuf *)p, k, &merr);
+				if (merr != 0)
+					return 0;
+				continue;
+			}
+			A = EXTRACT_SHORT(&p[k]);
+			continue;
+		case BPF_LD|BPF_B|BPF_IND:
+			k = X + pc->k;
+			if (k >= buflen) {
+				struct mbuf *m;
+				int len;
+				if (buflen != 0)
+					return 0;
+				m = (struct mbuf *)p;
+				MINDEX(len, m, k);
+				A = mtod(m, u8 *)[k];
+				continue;
+			}
+			A = p[k];
+			continue;
+		case BPF_LDX|BPF_MSH|BPF_B:
+			k = pc->k;
+			if (k >= buflen) {
+				struct mbuf *m;
+				int len;
+				if (buflen != 0)
+					return 0;
+				m = (struct mbuf *)p;
+				MINDEX(len, m, k);
+				X = (mtod(m, char *)[k] & 0xf) << 2;
+				continue;
+			}
+			X = (p[pc->k] & 0xf) << 2;
+			continue;
+		case BPF_LD|BPF_IMM:
+			A = pc->k;
+			continue;
+		case BPF_LDX|BPF_IMM:
+			X = pc->k;
+			continue;
+		case BPF_LD|BPF_MEM:
+			A = mem[pc->k];
+			continue;
+		case BPF_LDX|BPF_MEM:
+			X = mem[pc->k];
+			continue;
+		case BPF_ST:
+			mem[pc->k] = A;
+			continue;
+		case BPF_STX:
+			mem[pc->k] = X;
+			continue;
+		case BPF_JMP|BPF_JA:
+			pc += pc->k;
+			continue;
+		case BPF_JMP|BPF_JGT|BPF_K:
+			pc += (A > pc->k) ? pc->jt : pc->jf;
+			continue;
+		case BPF_JMP|BPF_JGE|BPF_K:
+			pc += (A >= pc->k) ? pc->jt : pc->jf;
+			continue;
+		case BPF_JMP|BPF_JEQ|BPF_K:
+			pc += (A == pc->k) ? pc->jt : pc->jf;
+			continue;
+		case BPF_JMP|BPF_JSET|BPF_K:
+			pc += (A & pc->k) ? pc->jt : pc->jf;
+			continue;
+		case BPF_JMP|BPF_JGT|BPF_X:
+			pc += (A > X) ? pc->jt : pc->jf;
+			continue;
+		case BPF_JMP|BPF_JGE|BPF_X:
+			pc += (A >= X) ? pc->jt : pc->jf;
+			continue;
+		case BPF_JMP|BPF_JEQ|BPF_X:
+			pc += (A == X) ? pc->jt : pc->jf;
+			continue;
+		case BPF_JMP|BPF_JSET|BPF_X:
+			pc += (A & X) ? pc->jt : pc->jf;
+			continue;
+		case BPF_ALU|BPF_ADD|BPF_X:
+			A += X;
+			continue;
+		case BPF_ALU|BPF_SUB|BPF_X:
+			A -= X;
+			continue;
+		case BPF_ALU|BPF_MUL|BPF_X:
+			A *= X;
+			continue;
+		case BPF_ALU|BPF_DIV|BPF_X:
+			if (X == 0)
+				return 0;
+			A /= X;
+			continue;
+		case BPF_ALU|BPF_AND|BPF_X:
+			A &= X;
+			continue;
+		case BPF_ALU|BPF_OR|BPF_X:
+			A |= X;
+			continue;
+		case BPF_ALU|BPF_LSH|BPF_X:
+			A <<= X;
+			continue;
+		case BPF_ALU|BPF_RSH|BPF_X:
+			A >>= X;
+			continue;
+		case BPF_ALU|BPF_ADD|BPF_K:
+			A += pc->k;
+			continue;
+		case BPF_ALU|BPF_SUB|BPF_K:
+			A -= pc->k;
+			continue;
+		case BPF_ALU|BPF_MUL|BPF_K:
+			A *= pc->k;
+			continue;
+		case BPF_ALU|BPF_DIV|BPF_K:
+			A /= pc->k;
+			continue;
+		case BPF_ALU|BPF_AND|BPF_K:
+			A &= pc->k;
+			continue;
+		case BPF_ALU|BPF_OR|BPF_K:
+			A |= pc->k;
+			continue;
+		case BPF_ALU|BPF_LSH|BPF_K:
+			A <<= pc->k;
+			continue;
+		case BPF_ALU|BPF_RSH|BPF_K:
+			A >>= pc->k;
+			continue;
+		case BPF_ALU|BPF_NEG:
+			A = -A;
+			continue;
+		case BPF_MISC|BPF_TAX:
+			X = A;
+			continue;
+		case BPF_MISC|BPF_TXA:
+			A = X;
+			continue;
+		}
+	}
+}
 
 s32 bpf_validate(struct bpf_insn *f, s32 len) {
     s32 i;
