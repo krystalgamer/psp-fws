@@ -10,6 +10,139 @@ struct D_00007608_s {
     volatile s32 unk20;
 };
 
+/* cache entry (0x30), 16 of them */
+typedef struct {
+    u32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+    u32 unk14;
+    u32 unk18;
+    u32 unk1C;
+    s8 used; /* 0x20 */
+    s8 unk21;
+    s16 unk22;
+    u32 unk24;
+    u32 unk28;
+    void *memory; /* 0x2C */
+} IsofsCacheEntry;
+typedef char chk_IsofsCacheEntry[(sizeof(IsofsCacheEntry) == 0x30) ? 1 : -1];
+
+typedef s64 SceOff;
+typedef int SceMode;
+typedef struct SceIoIob SceIoIob;
+typedef struct {
+    u16 year;
+    u16 month;
+    u16 day;
+    u16 hour;
+    u16 minute;
+    u16 second;
+    u32 microsecond;
+} ScePspDateTime;
+typedef struct IsofsFdw IsofsFdw;
+typedef struct IsofsUnit IsofsUnit;
+typedef struct IsofsFile IsofsFile;
+/* list of file slots (0x24) */
+typedef struct IsofsFd {
+    u16 unk0;
+    u16 filesCount; /* 0x2 */
+    u32 idx; /* 0x4 */
+    u32 unk8;
+    u32 unkC;
+    SceUID heapId; /* 0x10 */
+    u32 unk14;
+    IsofsFile *files; /* 0x18 */
+    IsofsFdw *fdw; /* 0x1C */
+    IsofsUnit *unit; /* 0x20 */
+} IsofsFd;
+
+/* "super block" (sceIsofsSb*) (0x2C) */
+struct IsofsFdw {
+    u32 idx; /* 0x0 */
+    u32 unk4;
+    IsofsFd fd; /* 0x8 */
+};
+typedef char chk_IsofsFdw[(sizeof(IsofsFdw) == 0x2C) ? 1 : -1];
+
+/* open file slot (0x80) */
+struct IsofsFile {
+    u32 readFlags; /* 0x0 */
+    u8 openFlags; /* 0x4, 3 = raw (sce_lbn), 2 = normal, 0 = free */
+    u8 flags; /* 0x5 */
+    s8 usedFlag; /* 0x6 */
+    u8 unk7;
+    u16 unk8;
+    s16 unkA;
+    u32 lbn; /* 0xC */
+    u32 unk10;
+    u32 unk14;
+    SceOff size; /* 0x18 */
+    SceOff fpos; /* 0x20 */
+    ScePspDateTime dateTime; /* 0x28 */
+    u32 unk38[4];
+    ScePspDateTime dateTime2; /* 0x48 */
+    SceIoIob *iob; /* 0x58 */
+    IsofsFd *fd; /* 0x5C */
+    char umdId[32]; /* 0x60 */
+};
+typedef char chk_IsofsFile[(sizeof(IsofsFile) == 0x80) ? 1 : -1];
+
+/* global manager (1.00: 0x30) */
+typedef struct {
+    s32 maxUnits0; /* 0x0, setup arg 0 */
+    s32 unk4;
+    s32 unk8;
+    s32 maxUnits; /* 0xC */
+    s32 maxFiles; /* 0x10 */
+    s32 fdwCount; /* 0x14 */
+    SceUID semaId; /* 0x18 */
+    s32 unk1C;
+    SceUID heapId; /* 0x20 */
+    SceUID fplId; /* 0x24, cache data fpl */
+    s32 unk28;
+    s32 driveType; /* 0x2C */
+} IsofsMgr;
+typedef char chk_IsofsMgr[(sizeof(IsofsMgr) == 0x30) ? 1 : -1];
+
+/* one mounted ISO9660 unit ("layer", sceIsofsLb*) (1.00: 0xA4) */
+struct IsofsUnit {
+    char umdId[32]; /* 0x0 */
+    char blockDev[32]; /* 0x20 */
+    SceUID heapId; /* 0x40 */
+    u16 unk44;
+    s16 unk46;
+    s16 unitNum; /* 0x48 */
+    u16 unk4A;
+    u16 mountFlags; /* 0x4C */
+    u16 pathTableEntryCount; /* 0x4E */
+    u8 fdwCount; /* 0x50 */
+    u8 unk51;
+    u16 mountState; /* 0x52 */
+    u32 pathTableSize; /* 0x54 */
+    SceUID semaId; /* 0x58 */
+    u32 pathTableLbn; /* 0x5C */
+    u32 rootDirLbn; /* 0x60 */
+    u32 rootDirSize; /* 0x64 */
+    u32 unkNextLbn; /* 0x68 */
+    u32 lastLbn; /* 0x6C */
+    u32 unkLbnTillEnd; /* 0x70 */
+    u32 totalSectors; /* 0x74 */
+    u32 unkCurrentLbn; /* 0x78 */
+    u32 unk7C;
+    u32 unk80;
+    u32 unk84;
+    u32 unk88;
+    u32 unk8C;
+    u32 unk90;
+    void *paths; /* 0x94 */
+    IsofsFdw *fdw; /* 0x98 */
+    void *pathTable; /* 0x9C */
+    void *umd; /* 0xA0, umd9660 handle */
+};
+typedef char chk_IsofsUnit[(sizeof(IsofsUnit) == 0xA4) ? 1 : -1];
+
 struct Unk_func_00000440_0 {
     u8 pad0[0x40];
     s32 unk40;
@@ -54,8 +187,6 @@ extern s32 D_000065C4;
 extern s32 D_000067C4;
 extern struct D_00007608_s D_00007608;
 extern s32 D_00007B40;
-extern s32 D_00008A40;
-extern s32 D_00008A80;
 extern s32 D_00008A90;
 extern s32 D_00009AC0;
 extern s32 D_00009B00;
@@ -63,7 +194,6 @@ extern s32 D_00009B40;
 extern s32 D_00009B80;
 extern s32 D_00009BC0;
 extern s32 D_00009C00;
-extern M2C_UNK D_00009C40;
 extern s32 D_00009C70;
 extern u8 D_00009C81;
 extern u8 D_00009C82;
@@ -74,9 +204,12 @@ extern s32 D_00009C8C;
 extern s32 func_00004614;
 extern M2C_UNK func_000048CC;
 extern M2C_UNK func_000073FC;
+extern IsofsCacheEntry *g_isofsCache;
+extern IsofsMgr g_isofsMgr;
+extern IsofsUnit *g_isofsUnits;
 
 M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);
-s32 SysMemForKernel_7B749390(s32, s32);
+s32 SysMemForKernel_7B749390(SceUID heapId, void *p);
 s32 func_00000250(s32 arg0);
 void func_000003E8(void *arg0);
 s32 func_00000440(struct Unk_func_00000440_0 *arg0);
@@ -122,7 +255,6 @@ s32 func_00005E10(void);
 void func_00005E1C(s32 arg0, void *arg1, u32 arg2);
 s32 func_0000664C(s32 arg0);
 s32 func_00006720(s32 arg0);
-s32 func_00007700(void);
 s32 func_0000770C(void);
 s32 func_00007718(void);
 s32 func_00007724(void);
@@ -131,8 +263,9 @@ s32 func_0000773C(void);
 s32 func_00007748(void);
 s32 func_00007FC0(s32 arg0);
 s32 func_00007FF0(void);
+IsofsMgr *isofsGetMgr(void);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
-s32 sceIsofsGetFileSystem(s32 arg0);
+IsofsUnit *sceIsofsGetFileSystem(s32 unitNum);
 M2C_UNK sceKernelAssert(s32, M2C_UNK);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);

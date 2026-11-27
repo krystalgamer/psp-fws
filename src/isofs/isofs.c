@@ -33,39 +33,35 @@ s32 func_00000250(s32 arg0) {
 #endif
 
 #if FW_VERSION == 152
-s32 sceIsofsGetFileSystem(s32 arg0) {
-    s32 temp_v0;
-    s32 var_a0;
+IsofsUnit *sceIsofsGetFileSystem(s32 unitNum) {
+    IsofsMgr *mgr = isofsGetMgr();
+    IsofsUnit *unit = NULL;
 
-    temp_v0 = func_00007700();
-    var_a0 = 0;
-    if (arg0 >= 0) {
-        if (arg0 < M2C_FIELD(temp_v0, s32 *, 0xC)) {
-            var_a0 = D_00008A40 + (arg0 * 0xA4);
+    if (unitNum >= 0) {
+        if (unitNum < mgr->maxUnits) {
+            unit = &g_isofsUnits[unitNum];
         }
     }
-    return var_a0;
+    return unit;
 }
 #endif
 
 #if FW_VERSION < 152
-s32 sceIsofsGetFileSystem(s32 arg0) {
-    s32 temp_v0;
-    s32 var_a0;
+IsofsUnit *sceIsofsGetFileSystem(s32 unitNum) {
+    IsofsMgr *mgr = isofsGetMgr();
+    IsofsUnit *unit = NULL;
 
-    temp_v0 = func_00007700();
-    var_a0 = 0;
-    if (arg0 >= 0) {
-        if (M2C_FIELD(temp_v0, s32 *, 0xC) >= arg0) {
-            var_a0 = D_00008A40 + (arg0 * 0xA4);
+    if (unitNum >= 0) {
+        if (mgr->maxUnits >= unitNum) {
+            unit = &g_isofsUnits[unitNum];
         }
     }
-    return var_a0;
+    return unit;
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
-s32 sceIsofsGetFileSystem(s32 arg0) {
+IsofsUnit *sceIsofsGetFileSystem(s32 arg0) {
     s32 temp_v0;
     s32 var_a0;
 
@@ -76,7 +72,7 @@ s32 sceIsofsGetFileSystem(s32 arg0) {
             var_a0 = D_000065C0 + (arg0 * 0xA8);
         }
     }
-    return var_a0;
+    return (IsofsUnit *) var_a0;
 }
 #endif
 
@@ -315,12 +311,11 @@ INCLUDE_ASM("nonmatchings/isofs", func_00000D28);
 INCLUDE_ASM("nonmatchings/isofs", func_00000DB4);
 
 s32 func_00000E6C(void) {
-    s32 temp_s0;
+    IsofsMgr *mgr = isofsGetMgr();
 
-    temp_s0 = func_00007700();
     func_00000D28();
-    SysMemForKernel_7B749390(M2C_FIELD(temp_s0, s32 *, 0x20), D_00008A80);
-    sceKernelDeleteFpl(M2C_FIELD(temp_s0, s32 *, 0x24));
+    SysMemForKernel_7B749390(mgr->heapId, g_isofsCache);
+    sceKernelDeleteFpl(mgr->fplId);
     sceKernelDeleteHeap(D_00008A90);
     return 0;
 }
@@ -1078,8 +1073,8 @@ INCLUDE_ASM("nonmatchings/isofs", module_start);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00007700(void) {
-    return (s32) &D_00009C40;
+IsofsMgr *isofsGetMgr(void) {
+    return &g_isofsMgr;
 }
 #endif
 

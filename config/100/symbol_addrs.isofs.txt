@@ -70,3 +70,7 @@ func_000028B4 = 0x000042AC; // type:func
 func_00002E28 = 0x00005248; // type:func
 func_00004024 = 0x0000660C; // type:func
 // shared names (tools/add_version.py) end
+g_isofsUnits = 0x00008A40;
+g_isofsCache = 0x00008A80;
+g_isofsMgr = 0x00009C40;
+isofsGetMgr = 0x00007700; // type:func
