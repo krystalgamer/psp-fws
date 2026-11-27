@@ -38,3 +38,13 @@ sceDmacplusAvcSync = 0x00001440; // type:func rom:0x14C0
 sceDmacplusMe2ScNormal16 = 0x00001458; // type:func rom:0x14D8
 sceDmacplusMe2ScSync = 0x00001460; // type:func rom:0x14E0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceMpegBaseInit = 0x00000000; // type:func
+module_stop = 0x00000030; // type:func
+sceMpegBasePESpacketCopy = 0x0000099C; // type:func
+sceKernelDcacheWritebackInvalidateRange = 0x00001420; // type:func
+sceDmacplusSc2MeLLI = 0x00001448; // type:func
+sceDmacplusSc2MeSync = 0x00001450; // type:func
+sceMeCore_driver_3D5F109C = 0x00001468; // type:func
+sceSysregGetTachyonVersion = 0x00001470; // type:func
