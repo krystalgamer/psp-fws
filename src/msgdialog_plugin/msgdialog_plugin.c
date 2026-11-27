@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "msgdialog_plugin_decls.h"
