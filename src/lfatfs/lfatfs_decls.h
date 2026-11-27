@@ -35,6 +35,74 @@ struct SceIoStat {
     u32 st_private[6]; /* 0x40 */
 };
 
+typedef struct UFatUnit UFatUnit;
+/* FAT volume (unit), 1.00: 0x274 bytes, array at D_0000D608, count D_0000D604 */
+struct UFatUnit {
+    s32 flags; /* 0x0 */
+    SceUID fd; /* 0x4 */
+    s32 nodeCount; /* 0x8 */
+    s32 devInfo[5]; /* 0xC */
+    s32 bytesPerSector; /* 0x20 */
+    s32 sectorShift; /* 0x24 */
+    u32 fatMask; /* 0x28 */
+    s32 fatStart; /* 0x2C */
+    s32 nClusters; /* 0x30 */
+    s32 sectorsPerFat; /* 0x34 */
+    s32 numFats; /* 0x38 */
+    s32 rootDirStart; /* 0x3C */
+    s32 rootEntries; /* 0x40 */
+    s32 dataStart; /* 0x44 */
+    s32 sectorsPerCluster; /* 0x48 */
+    s32 clusterSize; /* 0x4C */
+    u8 pad50[0xC];
+    s32 freeCount; /* 0x5C */
+    s32 nextFree; /* 0x60 */
+    s32 cachedSector; /* 0x64 */
+    u8 sectorBuf[0x200]; /* 0x68 */
+    s32 nameMode; /* 0x268 */
+    u8 pad26C[0x8];
+};
+
+typedef struct LFlashSegment LFlashSegment;
+/* lflash segment, 0x1C bytes */
+struct LFlashSegment {
+    u8 pad0[0x1C];
+};
+
+typedef struct LFlashDev LFlashDev;
+/* lflash device state (D_0000EED0), 1.00: 0x1C8 bytes */
+struct LFlashDev {
+    u8 pad0[0x18C];
+    s32 unk18C; /* 0x18C */
+    s32 unk190; /* 0x190 */
+    u8 pad194[0x18];
+    u32 nSegments; /* 0x1AC */
+    LFlashSegment *segments; /* 0x1B0 */
+    s32 unk1B4; /* 0x1B4 */
+    u8 pad1B8[0x10];
+};
+
+typedef struct LFlashPart LFlashPart;
+/* lflash partition (iob->i_private of lflash0:), size unknown */
+struct LFlashPart {
+    u8 pad0[0x4];
+    u32 unk4; /* 0x4 */
+    u8 pad8[0x4];
+    u32 unkC; /* 0xC */
+};
+
+typedef struct LFlashDevInfo LFlashDevInfo;
+/* ioctl 0x3D001 output (0x44 bytes); fields 0x10..0x20 copied to UFatUnit.devInfo */
+struct LFlashDevInfo {
+    u8 pad0[0x10];
+    u32 unk10; /* 0x10 */
+    u32 unk14; /* 0x14 */
+    u32 unk18; /* 0x18 */
+    u32 unk1C; /* 0x1C */
+    u32 flags; /* 0x20 */
+    u8 pad24[0x20];
+};
+
 /* 1.00: 8 bytes (no d_userfd_count yet). */
 struct SceIoDeviceEntry {
     SceIoDeviceTable *d_dp; /* 0x0 */
@@ -203,6 +271,7 @@ struct Unk_func_0000A3DC_0 {
     s32 ** unk8;
 };
 
+extern char D_0000C56C[];
 extern char D_0000C5B4[];
 extern M2C_UNK D_0000CD94;
 extern M2C_UNK D_0000CDB4;
@@ -210,12 +279,16 @@ extern char D_0000CF5C[];
 extern char D_0000CF6C[];
 extern char D_0000CF84[];
 extern char D_0000CF9C[];
+extern char D_0000D03C[];
 extern char D_0000D084[];
 extern char D_0000D22C[];
+extern volatile SceUID D_0000D360;
 extern void *D_0000D60C;
 extern void **D_0000D610;
 extern void *D_0000D614;
 extern s32 D_0000D72C;
+extern char D_0000D874[];
+extern char D_0000D8C0[];
 extern s32 D_0000D984;
 extern M2C_UNK D_0000DA50;
 extern char D_0000DCE0[];
@@ -234,7 +307,7 @@ extern M2C_UNK D_0000ECA8;
 extern void *D_0000EDAC;
 extern void **D_0000EDB0;
 extern void *D_0000EDB4;
-extern M2C_UNK D_0000EED0;
+extern LFlashDev D_0000EED0;
 
 s32 Kprintf(const char *fmt, ...);
 s32 bcmp(const void *a, const void *b, SceSize n);
@@ -260,8 +333,8 @@ s32 func_000022A4(void *arg0);
 s32 func_0000286C(struct Unk_func_0000286C_0 *arg0);
 s32 func_000028E8(void);
 s32 func_00002C24(void);
-s32 func_00002C6C(void);
-s32 func_00002CAC(void);
+s32 func_00002C6C(SceIoIob *iob, const char *oldname, const char *newname);
+s32 func_00002CAC(SceIoIob *iob, char *name);
 void func_00002D98(void *arg0);
 void func_00002DC4(s32 arg0);
 void func_00002DE0(void *arg0);
@@ -352,8 +425,8 @@ s32 func_0000A508(void);
 s32 func_0000A514(void);
 void func_0000A528(void *arg0);
 s32 func_0000A7AC(void);
-s32 func_0000ACF0(void);
-s32 func_0000AD24(void);
+s32 func_0000ACF0(SceIoIob *iob, char *name);
+s32 func_0000AD24(SceIoIob *iob, char *name);
 s32 func_0000ADC0(void *arg0);
 s32 func_0000ADFC(void *arg0);
 s32 func_0000AF24(void);

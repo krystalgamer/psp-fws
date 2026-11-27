@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers -fno-builtin */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "lfatfs_decls.h"
@@ -323,7 +324,14 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00000C00);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/lfatfs", sceLfatfsWaitReady);
+s32 sceLfatfsWaitReady(void) {
+    s32 ret = 0;
+
+    if (D_0000D360 >= 0) {
+        ret = sceKernelWaitThreadEnd(D_0000D360, NULL);
+    }
+    return ret;
+}
 
 s32 sceLfatfsStop(void) {
     return 0;
@@ -420,7 +428,21 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00000F4C);
 INCLUDE_ASM("nonmatchings/lfatfs", func_00001134);
 #endif
 
-INCLUDE_ASM("nonmatchings/lfatfs", func_00001620);
+s32 func_00001620(const u8 *a, const char *b) {
+    s32 i;
+
+    for (i = 0; i < 8; i++) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    for (i = 0; i < 3; i++) {
+        if (a[i + 8] != b[i + 8]) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000168C);
 
@@ -841,11 +863,11 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00002B34);
 #endif
 
 #if FW_VERSION >= 300
-s32 func_00002C6C(void) {
+s32 func_00002C6C(SceIoIob *iob, const char *oldname, const char *newname) {
     return 0x80010086;
 }
 
-s32 func_00002CAC(void) {
+s32 func_00002CAC(SceIoIob *iob, char *name) {
     return 0x80010086;
 }
 #endif
@@ -967,9 +989,25 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00002CC8);
 INCLUDE_ASM("nonmatchings/lfatfs", func_00002578);
 #endif
 
-#if FW_VERSION < 300
-INCLUDE_ASM("nonmatchings/lfatfs", func_00002C6C);
+#if FW_VERSION < 201
+s32 func_00002C6C(SceIoIob *iob, const char *oldname, const char *newname) {
+    Kprintf("%s: iob=%p oldname=%s newname=%s\n", "UFatRename", iob, oldname, newname);
+    return 0x8001B000;
+}
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 300
+INCLUDE_ASM("nonmatchings/lfatfs", func_00002C6C);
+#endif
+
+#if FW_VERSION < 201
+s32 func_00002CAC(SceIoIob *iob, char *name) {
+    Kprintf("%s: iob=%p name=%s\n", "UFatChdir", iob, name);
+    return 0x8001B000;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/lfatfs", func_00002CAC);
 #endif
 
@@ -1089,9 +1127,13 @@ void func_00003B14(struct Unk_func_00003B14_0 *arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/lfatfs", func_00003B3C);
+void func_00003B3C(s32 *args) {
+    func_00004918(args[0], args[1], args[2], args[3], args[4], args[5]);
+}
 
-INCLUDE_ASM("nonmatchings/lfatfs", func_00003B70);
+void func_00003B70(s32 *args) {
+    func_00004BA8(args[0], args[1]);
+}
 
 #if FW_VERSION < 282
 void func_00002E88(void *arg0) {
@@ -1143,9 +1185,13 @@ void func_00003C40(struct Unk_func_00003C40_0 *arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/lfatfs", func_00003C6C);
+void func_00003C6C(s32 *args) {
+    func_00005D18(args[0], args[1], args[2], args[3], args[4], args[5]);
+}
 
-INCLUDE_ASM("nonmatchings/lfatfs", func_00003CA0);
+void func_00003CA0(s32 *args) {
+    func_00006600(args[0], args[1]);
+}
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lfatfs", func_00003694);
@@ -1186,7 +1232,23 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00003A84);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_00004180);
 
-INCLUDE_ASM("nonmatchings/lfatfs", func_00004268);
+s32 func_00004268(UFatUnit *unit, s32 sector) {
+    s32 ret;
+
+    if (sector != unit->cachedSector) {
+        ret = func_00005DC0(unit);
+        if (ret < 0) {
+            return ret;
+        }
+        unit->cachedSector = -1;
+        ret = func_00004180(unit, sector << unit->sectorShift, unit->sectorBuf, 0x200);
+        if (ret < 0) {
+            return ret;
+        }
+        unit->cachedSector = sector;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 152
@@ -1561,7 +1623,27 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00008130);
 INCLUDE_ASM("nonmatchings/lfatfs", func_00008894);
 #endif
 
+#if FW_VERSION < 300
+s32 func_00008A68(LFlashDev *dev) {
+    u32 i = 0;
+    LFlashSegment *seg = dev->segments;
+    s32 ret;
+
+    if (dev->nSegments != 0) {
+        do {
+            ret = func_0000AF14(dev, seg);
+            i++;
+            seg++;
+            if (ret < 0) {
+                return ret;
+            }
+        } while (i < dev->nSegments);
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/lfatfs", func_00008A68);
+#endif
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/lfatfs", func_000085D8);
@@ -2567,30 +2649,57 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_0000A85C);
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000A9C4);
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000AAF8);
+#endif
 
+#if FW_VERSION == 100
+s32 func_0000AC4C(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    LFlashPart *part = iob->i_private;
+    LFlashDev *dev = &D_0000EED0;
+    LFlashDevInfo *info = outdata;
+
+    switch (cmd) {
+    case 0x3D001:
+        if (outlen < sizeof(LFlashDevInfo)) {
+            return 0x80010016;
+        }
+        if (info == NULL) {
+            return 0x80010016;
+        }
+        bzero(info, sizeof(LFlashDevInfo));
+        info->unk10 = part->unk4;
+        info->unk14 = part->unkC;
+        info->unk18 = dev->unk18C;
+        info->unk1C = dev->unk190;
+        return 0;
+    }
+    return 0x80010016;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000AC4C);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-s32 func_0000ACF0(void) {
+s32 func_0000ACF0(SceIoIob *iob, char *name) {
     return 0x80010086;
 }
 #endif
 
 #if FW_VERSION == 152
-s32 func_0000ACF0(void) {
+s32 func_0000ACF0(SceIoIob *iob, char *name) {
     return 0x8001B000;
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-s32 func_0000AD24(void) {
+s32 func_0000AD24(SceIoIob *iob, char *name) {
     return 0x80010086;
 }
 #endif
 
 #if FW_VERSION == 152
-s32 func_0000AD24(void) {
+s32 func_0000AD24(SceIoIob *iob, char *name) {
     return 0x8001B000;
 }
 #endif
@@ -2600,16 +2709,40 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D03C);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/lfatfs", func_0000ACF0);
+s32 func_0000ACF0(SceIoIob *iob, char *name) {
+    Kprintf(D_0000D03C, "df_remove", name);
+    return 0x8001B000;
+}
 
-INCLUDE_ASM("nonmatchings/lfatfs", func_0000AD24);
+s32 func_0000AD24(SceIoIob *iob, char *name) {
+    Kprintf(D_0000D03C, "df_mkdir", name);
+    return 0x8001B000;
+}
+#endif
+
+#if FW_VERSION < 201
+s32 func_0000AD58(SceIoIob *iob, char *name) {
+    Kprintf(D_0000D03C, "df_rmdir", name);
+    return 0x8001B000;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000AD58);
+#endif
+
+#if FW_VERSION < 201
+s32 func_0000AD8C(SceIoIob *iob, char *name) {
+    Kprintf(D_0000D03C, "df_dopen", name);
+    return 0x8001B000;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000AD8C);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/lfatfs", func_0000AD58);
-
-INCLUDE_ASM("nonmatchings/lfatfs", func_0000AD8C);
-
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D084);
 #endif
 
@@ -2639,19 +2772,49 @@ s32 func_0000ADFC(void *arg0) {
     Kprintf(D_0000D084, "df_dread", **M2C_FIELD(arg0, s32 ***, 8));
     return 0x8001B000;
 }
-#endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/lfatfs", func_0000AE38);
-
-INCLUDE_ASM("nonmatchings/lfatfs", func_0000AE88);
-
-INCLUDE_ASM("nonmatchings/lfatfs", func_0000AEBC);
-
-INCLUDE_ASM("nonmatchings/lfatfs", func_0000AEF0);
+s32 func_0000AE38(SceIoIob *iob, char *name, SceIoStat *stat) {
+    Kprintf("lflash.c:%s:\n", "df_getstat");
+    return (stat == NULL) ? 0x80010016 : 0x8001B000;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000AE38);
+#endif
+
+#if FW_VERSION < 201
+s32 func_0000AE88(SceIoIob *iob, char *name) {
+    Kprintf("lflash.c:%s:filename:%s\n", "df_chstat", name);
+    return 0x8001B000;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000AE88);
+#endif
+
+#if FW_VERSION < 201
+s32 func_0000AEBC(SceIoIob *iob, const char *oldname) {
+    Kprintf("lflash.c:%s:oldfile: %s\n", "df_rename", oldname);
+    return 0x8001B000;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000AEBC);
+#endif
+
+#if FW_VERSION < 201
+s32 func_0000AEF0(SceIoIob *iob, char *name) {
+    Kprintf("lflash.c:%s:, path name: %s\n", "df_chdir", name);
+    return 0x8001B000;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000AEF0);
+
 s32 func_0000AF24(void) {
     return 0x80010086;
 }

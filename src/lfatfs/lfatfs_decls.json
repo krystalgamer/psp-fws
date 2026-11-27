@@ -24,8 +24,8 @@
   "func_0000286C": "s32 func_0000286C(struct Unk_func_0000286C_0 *arg0);",
   "func_000028E8": "s32 func_000028E8(void);",
   "func_00002C24": "s32 func_00002C24(void);",
-  "func_00002C6C": "s32 func_00002C6C(void);",
-  "func_00002CAC": "s32 func_00002CAC(void);",
+  "func_00002C6C": "s32 func_00002C6C(SceIoIob *iob, const char *oldname, const char *newname);",
+  "func_00002CAC": "s32 func_00002CAC(SceIoIob *iob, char *name);",
   "func_00002D98": "void func_00002D98(void *arg0);",
   "func_00002DC4": "void func_00002DC4(s32 arg0);",
   "func_00002DE0": "void func_00002DE0(void *arg0);",
@@ -116,8 +116,8 @@
   "func_0000A514": "s32 func_0000A514(void);",
   "func_0000A528": "void func_0000A528(void *arg0);",
   "func_0000A7AC": "s32 func_0000A7AC(void);",
-  "func_0000ACF0": "s32 func_0000ACF0(void);",
-  "func_0000AD24": "s32 func_0000AD24(void);",
+  "func_0000ACF0": "s32 func_0000ACF0(SceIoIob *iob, char *name);",
+  "func_0000AD24": "s32 func_0000AD24(SceIoIob *iob, char *name);",
   "func_0000ADC0": "s32 func_0000ADC0(void *arg0);",
   "func_0000ADFC": "s32 func_0000ADFC(void *arg0);",
   "func_0000AF24": "s32 func_0000AF24(void);",
@@ -184,6 +184,11 @@
  "types": {
   "00_typedefs": "typedef int SceMode;\ntypedef s64 SceOff;\ntypedef s32 SceSSize;\ntypedef struct SceIoStat SceIoStat;\ntypedef struct SceIoDirent SceIoDirent;\ntypedef struct SceIoIob SceIoIob;\ntypedef struct SceIoDeviceEntry SceIoDeviceEntry;\ntypedef struct SceIoDeviceTable SceIoDeviceTable;\ntypedef struct SceIoDeviceFunction SceIoDeviceFunction;",
   "01_SceIoStat": "typedef struct {\n    u16 year; /* 0x0 */\n    u16 month; /* 0x2 */\n    u16 day; /* 0x4 */\n    u16 hour; /* 0x6 */\n    u16 minute; /* 0x8 */\n    u16 second; /* 0xA */\n    u32 microsecond; /* 0xC */\n} ScePspDateTime;\n\n/* 0x58 bytes */\nstruct SceIoStat {\n    SceMode st_mode; /* 0x0 */\n    u32 st_attr; /* 0x4 */\n    SceOff st_size; /* 0x8 */\n    ScePspDateTime st_ctime; /* 0x10 */\n    ScePspDateTime st_atime; /* 0x20 */\n    ScePspDateTime st_mtime; /* 0x30 */\n    u32 st_private[6]; /* 0x40 */\n};",
+  "10_UFatUnit": "typedef struct UFatUnit UFatUnit;\n/* FAT volume (unit), 1.00: 0x274 bytes, array at D_0000D608, count D_0000D604 */\nstruct UFatUnit {\n    s32 flags; /* 0x0 */\n    SceUID fd; /* 0x4 */\n    s32 nodeCount; /* 0x8 */\n    s32 devInfo[5]; /* 0xC */\n    s32 bytesPerSector; /* 0x20 */\n    s32 sectorShift; /* 0x24 */\n    u32 fatMask; /* 0x28 */\n    s32 fatStart; /* 0x2C */\n    s32 nClusters; /* 0x30 */\n    s32 sectorsPerFat; /* 0x34 */\n    s32 numFats; /* 0x38 */\n    s32 rootDirStart; /* 0x3C */\n    s32 rootEntries; /* 0x40 */\n    s32 dataStart; /* 0x44 */\n    s32 sectorsPerCluster; /* 0x48 */\n    s32 clusterSize; /* 0x4C */\n    u8 pad50[0xC];\n    s32 freeCount; /* 0x5C */\n    s32 nextFree; /* 0x60 */\n    s32 cachedSector; /* 0x64 */\n    u8 sectorBuf[0x200]; /* 0x68 */\n    s32 nameMode; /* 0x268 */\n    u8 pad26C[0x8];\n};",
+  "11_LFlashSegment": "typedef struct LFlashSegment LFlashSegment;\n/* lflash segment, 0x1C bytes */\nstruct LFlashSegment {\n    u8 pad0[0x1C];\n};",
+  "12_LFlashDev": "typedef struct LFlashDev LFlashDev;\n/* lflash device state (D_0000EED0), 1.00: 0x1C8 bytes */\nstruct LFlashDev {\n    u8 pad0[0x18C];\n    s32 unk18C; /* 0x18C */\n    s32 unk190; /* 0x190 */\n    u8 pad194[0x18];\n    u32 nSegments; /* 0x1AC */\n    LFlashSegment *segments; /* 0x1B0 */\n    s32 unk1B4; /* 0x1B4 */\n    u8 pad1B8[0x10];\n};",
+  "13_LFlashPart": "typedef struct LFlashPart LFlashPart;\n/* lflash partition (iob->i_private of lflash0:), size unknown */\nstruct LFlashPart {\n    u8 pad0[0x4];\n    u32 unk4; /* 0x4 */\n    u8 pad8[0x4];\n    u32 unkC; /* 0xC */\n};",
+  "14_LFlashDevInfo": "typedef struct LFlashDevInfo LFlashDevInfo;\n/* ioctl 0x3D001 output (0x44 bytes); fields 0x10..0x20 copied to UFatUnit.devInfo */\nstruct LFlashDevInfo {\n    u8 pad0[0x10];\n    u32 unk10; /* 0x10 */\n    u32 unk14; /* 0x14 */\n    u32 unk18; /* 0x18 */\n    u32 unk1C; /* 0x1C */\n    u32 flags; /* 0x20 */\n    u8 pad24[0x20];\n};",
   "SceIoDeviceEntry": "/* 1.00: 8 bytes (no d_userfd_count yet). */\nstruct SceIoDeviceEntry {\n    SceIoDeviceTable *d_dp; /* 0x0 */\n    void *d_private; /* 0x4 */\n};",
   "SceIoDeviceFunction": "/* Driver function table (22 entries in 1.00, e.g. _nullcon_function). */\nstruct SceIoDeviceFunction {\n    s32 (*df_init)(SceIoDeviceEntry *); /* 0x0 */\n    s32 (*df_exit)(SceIoDeviceEntry *); /* 0x4 */\n    s32 (*df_open)(SceIoIob *, char *, s32, SceMode); /* 0x8 */\n    s32 (*df_close)(SceIoIob *); /* 0xC */\n    SceSSize (*df_read)(SceIoIob *, void *, SceSize); /* 0x10 */\n    SceSSize (*df_write)(SceIoIob *, const void *, SceSize); /* 0x14 */\n    SceOff (*df_lseek)(SceIoIob *, SceOff, s32); /* 0x18 */\n    s32 (*df_ioctl)(SceIoIob *, s32, void *, SceSize, void *, SceSize); /* 0x1C */\n    s32 (*df_remove)(SceIoIob *, char *); /* 0x20 */\n    s32 (*df_mkdir)(SceIoIob *, char *, SceMode); /* 0x24 */\n    s32 (*df_rmdir)(SceIoIob *, char *); /* 0x28 */\n    s32 (*df_dopen)(SceIoIob *, char *); /* 0x2C */\n    s32 (*df_dclose)(SceIoIob *); /* 0x30 */\n    s32 (*df_dread)(SceIoIob *, SceIoDirent *); /* 0x34 */\n    s32 (*df_getstat)(SceIoIob *, char *, SceIoStat *); /* 0x38 */\n    s32 (*df_chstat)(SceIoIob *, char *, SceIoStat *, u32); /* 0x3C */\n    s32 (*df_rename)(SceIoIob *, const char *, const char *); /* 0x40 */\n    s32 (*df_chdir)(SceIoIob *, char *); /* 0x44 */\n    s32 (*df_mount)(SceIoIob *, const char *, const char *, s32, void *, s32); /* 0x48 */\n    s32 (*df_umount)(SceIoIob *, char *); /* 0x4C */\n    s32 (*df_devctl)(SceIoIob *, char *, s32, void *, SceSize, void *, SceSize); /* 0x50 */\n    s32 (*df_cancel)(SceIoIob *); /* 0x54 */\n};",
   "SceIoDeviceTable": "/* Driver descriptor passed to sceIoAddDrv (0x14 bytes). */\nstruct SceIoDeviceTable {\n    char *dt_string; /* 0x0, device name */\n    s32 dt_type; /* 0x4 */\n    s32 dt_size; /* 0x8 */\n    char *dt_desc; /* 0xC */\n    SceIoDeviceFunction *dt_func; /* 0x10 */\n};",
@@ -207,6 +212,7 @@
   "Unk_func_0000A3DC_0": "struct Unk_func_0000A3DC_0 {\n    u8 pad0[0x8];\n    s32 ** unk8;\n};"
  },
  "vars": {
+  "D_0000C56C": "extern char D_0000C56C[];",
   "D_0000C5B4": "extern char D_0000C5B4[];",
   "D_0000CD94": "extern M2C_UNK D_0000CD94;",
   "D_0000CDB4": "extern M2C_UNK D_0000CDB4;",
@@ -214,12 +220,16 @@
   "D_0000CF6C": "extern char D_0000CF6C[];",
   "D_0000CF84": "extern char D_0000CF84[];",
   "D_0000CF9C": "extern char D_0000CF9C[];",
+  "D_0000D03C": "extern char D_0000D03C[];",
   "D_0000D084": "extern char D_0000D084[];",
   "D_0000D22C": "extern char D_0000D22C[];",
+  "D_0000D360": "extern volatile SceUID D_0000D360;",
   "D_0000D60C": "extern void *D_0000D60C;",
   "D_0000D610": "extern void **D_0000D610;",
   "D_0000D614": "extern void *D_0000D614;",
   "D_0000D72C": "extern s32 D_0000D72C;",
+  "D_0000D874": "extern char D_0000D874[];",
+  "D_0000D8C0": "extern char D_0000D8C0[];",
   "D_0000D984": "extern s32 D_0000D984;",
   "D_0000DA50": "extern M2C_UNK D_0000DA50;",
   "D_0000DCE0": "extern char D_0000DCE0[];",
@@ -238,6 +248,6 @@
   "D_0000EDAC": "extern void *D_0000EDAC;",
   "D_0000EDB0": "extern void **D_0000EDB0;",
   "D_0000EDB4": "extern void *D_0000EDB4;",
-  "D_0000EED0": "extern M2C_UNK D_0000EED0;"
+  "D_0000EED0": "extern LFlashDev D_0000EED0;"
  }
 }
