@@ -17,7 +17,11 @@
   "sceVshCommonGui_54BC644C": "M2C_UNK sceVshCommonGui_54BC644C(void *, s32);",
   "sceVshCommonGui_5C161337": "s32 sceVshCommonGui_5C161337(M2C_UNK);"
  },
+ "types": {
+  "hand_func_000002F4": "typedef void (*func_ptr)(void);"
+ },
  "vars": {
+  "D_000004B8": "extern func_ptr D_000004B8[];",
   "D_000004CC": "extern s32 D_000004CC;",
   "D_0000050C": "extern s32 D_0000050C;",
   "D_0000053C": "extern s32 D_0000053C;",

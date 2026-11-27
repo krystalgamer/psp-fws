@@ -48,8 +48,3 @@ void func_000002A0(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/dlgsample_plugin", func_000002C4);
 
-INCLUDE_ASM("nonmatchings/dlgsample_plugin", func_000002F4);
-
-INCLUDE_RODATA("nonmatchings/dlgsample_plugin", D_000004CC);
-
-INCLUDE_RODATA("nonmatchings/dlgsample_plugin", D_000004D4);

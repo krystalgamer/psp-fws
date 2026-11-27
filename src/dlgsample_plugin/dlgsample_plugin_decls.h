@@ -4,6 +4,9 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef void (*func_ptr)(void);
+
+extern func_ptr D_000004B8[];
 extern s32 D_000004CC;
 extern s32 D_0000050C;
 extern s32 D_0000053C;
