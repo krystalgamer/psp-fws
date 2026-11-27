@@ -1,0 +1,17 @@
+// shared names (tools/add_version.py) begin
+D_00005718 = 0x0000570C; // rom:0x578C
+D_00005724 = 0x00005718; // rom:0x5798
+D_00005730 = 0x00005724; // rom:0x57A4
+D_00005738 = 0x0000572C; // rom:0x57AC
+D_00005740 = 0x00005734; // rom:0x57B4
+D_00005748 = 0x0000573C; // rom:0x57BC
+D_00005748_v100 = 0x00005748; // rom:0x57C8
+sceSemawm_77C42467 = 0x0000018C; // type:func rom:0x20C
+sceSemawm_51E51869 = 0x000001CC; // type:func rom:0x24C
+sceSemawm_4C268535 = 0x000001F8; // type:func rom:0x278
+sceSemawm_5B6C204D = 0x0000091C; // type:func rom:0x99C
+sceSemawm_6FEA0A45 = 0x00001074; // type:func rom:0x10F4
+module_start = 0x000055E0; // type:func rom:0x5660
+module_stop = 0x00005608; // type:func rom:0x5688
+sceUtilsBufferCopyWithRange = 0x00005630; // type:func rom:0x56B0
+// shared names (tools/add_version.py) end
