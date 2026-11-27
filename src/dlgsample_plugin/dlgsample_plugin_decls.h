@@ -5,6 +5,7 @@
 #include "m2c_macros.h"
 
 extern s32 D_000004CC;
+extern s32 D_0000050C;
 extern s32 D_0000053C;
 extern u8 D_00000540;
 
@@ -18,6 +19,7 @@ s32 func_000002C4(s32);
 M2C_UNK func_0000034C();
 s32 module_stop(void);
 M2C_UNK scePaf_3481F595(s32, M2C_UNK *);
+s32 scePaf_97FDA760(s32, s32, void *);
 M2C_UNK scePaf_CAF05F1D(s32, M2C_UNK *);
 M2C_UNK scePaf_F609FA81(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
 M2C_UNK sceVshCommonGui_441D55D7(M2C_UNK);

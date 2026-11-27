@@ -42,7 +42,9 @@ void func_00000290(void) {
 void func_00000298(void) {
 }
 
-INCLUDE_ASM("nonmatchings/dlgsample_plugin", func_000002A0);
+void func_000002A0(s32 arg0) {
+    scePaf_97FDA760(arg0, 1, &D_0000050C);
+}
 
 INCLUDE_ASM("nonmatchings/dlgsample_plugin", func_000002C4);
 
