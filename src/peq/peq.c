@@ -3,7 +3,7 @@
 #include "k1.h"
 #include "peq_decls.h"
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/peq", func_00000000);
 #endif
 

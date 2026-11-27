@@ -1,0 +1,7 @@
+// shared names (tools/add_version.py) begin
+scePeqEntry = 0x00000120; // type:func rom:0x1A0
+scePeqInit = 0x00000128; // type:func rom:0x1A8
+scePEQ_FC45514B = 0x000001D4; // type:func rom:0x254
+func_00000238 = 0x00000274; // type:func rom:0x2F4
+sceMeWrapper_driver_D1EA3DFD = 0x000002F8; // type:func rom:0x378
+// shared names (tools/add_version.py) end
