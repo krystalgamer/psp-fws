@@ -9,12 +9,13 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/osk_plugin
-  src_path: tmp/av_src/102/osk_plugin
+  src_path: src/osk_plugin
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/osk_plugin.ld
   cache_path: tmp/build/102/.splat_cache.osk_plugin
   symbol_addrs_path:
     - config/102/symbol_addrs.osk_plugin.txt
+    - config/102/func_starts.osk_plugin.txt
     - tmp/build/102/prx_syms.osk_plugin.txt
   reloc_addrs_path: [tmp/build/102/reloc_addrs.osk_plugin.txt]
   asset_path: tmp/assets/102/osk_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, osk_plugin]
+      - [0xB478, c, osk_plugin_crtend]
       - { start: 0xC77C, type: asm, name: fini, linker_section: .fini }
       - { start: 0xC798, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xCAB0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -72,6 +74,7 @@ segments:
       - { start: 0xCE68, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0xCE6C, type: prxpad, order: .rodata }
       - [0xCE70, .rodata, osk_plugin]
+      - [0xE358, .rodata, osk_plugin_crtend]
   - name: osk_plugin_seg1
     type: code
     start: 0xE370
