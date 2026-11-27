@@ -944,11 +944,63 @@ out:
     sceKernelSignalSema(D_0000A874, 1);
     return error;
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_tsleep_usec);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION >= 150 && FW_VERSION < 271
+s32 _sce_pspnet_tsleep_usec(void *ident, u32 usec) {
+    struct SceNetThreadInfo *ti;
+    struct slpque *qp;
+    s32 error;
+    s32 relock;
+
+    relock = 0;
+    error = 0;
+    ti = _sce_pspnet_get_threadinfo(sceKernelGetThreadId());
+    sceKernelWaitSema(D_0000A874, 1, NULL);
+    if (D_0000AF6C > 0)
+        D_0000AC58(ti);
+    if (ti->ti_flags & TI_ABORTED) {
+        ti->ti_flags &= ~TI_ABORTED;
+        error = 4;
+        goto out;
+    }
+    qp = &D_0000AC6C[LOOKUP(ident)];
+    ti->ti_wchan = ident;
+    TAILQ_INSERT_TAIL(qp, ti, ti_slplink);
+    sceKernelSignalSema(D_0000A874, 1);
+    if (usec != 0)
+        _sce_pspnet_callout_reset_usec(&ti->ti_callout, usec, (void (*)(void *))func_00003100, ti);
+    if (_sce_pspnet_spllock_owner() == sceKernelGetThreadId()) {
+        relock = 1;
+        _sce_pspnet_splunlock(1);
+    }
+    sceKernelWaitSema(ti->ti_sema, 1, NULL);
+    if (relock)
+        _sce_pspnet_spllock();
+    if (usec != 0)
+        _sce_pspnet_callout_stop(&ti->ti_callout);
+    sceKernelWaitSema(D_0000A874, 1, NULL);
+    TAILQ_REMOVE(qp, ti, ti_slplink);
+    ti->ti_slplink.tqe_next = NULL;
+    ti->ti_slplink.tqe_prev = NULL;
+    if (ti->ti_flags & TI_TIMEDOUT) {
+        ti->ti_flags &= ~TI_TIMEDOUT;
+        error = 11;
+        goto out;
+    }
+    if (ti->ti_flags & TI_ABORTED) {
+        ti->ti_flags &= ~TI_ABORTED;
+        error = 4;
+    }
+out:
+    sceKernelSignalSema(D_0000A874, 1);
+    return error;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_tsleep_usec);
+#else
 s32 func_0000331C(void) {
     s32 i;
     s32 ret;
@@ -961,7 +1013,9 @@ s32 func_0000331C(void) {
         return 0;
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet", func_0000331C);
 #endif
 
@@ -1254,7 +1308,13 @@ void _sce_pspnet_microtime(struct timeval *tv) {
     tv->tv_usec = t % 1000000;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_microtime);
+void _sce_pspnet_microtime(struct timeval *tv) {
+    u64 t;
+
+    t = sceKernelGetSystemTimeWide();
+    tv->tv_sec = t / 1000000;
+    tv->tv_usec = t % 1000000;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_uiomove);

@@ -314,6 +314,7 @@ s32 sceKernelDeleteEventFlag(s32);
 s32 sceKernelDeleteSema(s32);
 s32 sceKernelDeleteThread(s32);
 s32 sceKernelGetSystemTime(SceKernelSysClock *clock);
+s64 sceKernelGetSystemTimeWide(void);
 s32 sceKernelGetThreadId(void);
 s32 sceKernelSetEventFlag(s32, u32);
 s32 sceKernelSignalSema(s32, s32);

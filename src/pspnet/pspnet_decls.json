@@ -118,6 +118,7 @@
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
   "sceKernelDeleteThread": "s32 sceKernelDeleteThread(s32);",
   "sceKernelGetSystemTime": "s32 sceKernelGetSystemTime(SceKernelSysClock *clock);",
+  "sceKernelGetSystemTimeWide": "s64 sceKernelGetSystemTimeWide(void);",
   "sceKernelGetThreadId": "s32 sceKernelGetThreadId(void);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
