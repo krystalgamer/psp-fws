@@ -4,29 +4,17 @@
 #include "common.h"
 #include "audiocodec_decls.h"
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/audiocodec", func_00000000);
-
-INCLUDE_ASM("nonmatchings/audiocodec", func_000000D4);
-
-INCLUDE_ASM("nonmatchings/audiocodec", func_0000025C);
-
-INCLUDE_ASM("nonmatchings/audiocodec", func_000003F4);
-#else
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecCheckNeedMem);
 
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecInit);
-#endif
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_3DD7EE1A);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecDecode);
 
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecGetInfo);
-#endif
 
 #if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_6CD2A861);
@@ -34,11 +22,7 @@ INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_6CD2A861);
 
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecAlcExtendParameter);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/audiocodec", func_00000628);
-#else
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecGetEDRAM);
-#endif
 
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecReleaseEDRAM);
 
