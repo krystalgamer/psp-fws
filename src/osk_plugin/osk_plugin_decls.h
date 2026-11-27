@@ -112,6 +112,7 @@ struct Unk_func_0000D85C_0 {
 };
 
 extern s32 D_0000D384;
+extern M2C_UNK D_0000E3FC;
 extern M2C_UNK D_0000E48C;
 extern M2C_UNK D_0000E684;
 extern M2C_UNK D_0000E87C;
@@ -189,6 +190,7 @@ void *_ZN3paf4View4FindEPKc(s32);
 M2C_UNK _ZN3paf4View6UnloadEPS0_PFvPKcE(void *, M2C_UNK);
 M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
 M2C_UNK _ZN3paf4View9PageCloseEPKc(s32, M2C_UNK *);
+s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, s32);
 M2C_UNK _ZN3paf6PhText10RemoveAttrENS_14PhTextAttrTypeEjj(s32, M2C_UNK, M2C_UNK, s32);
 M2C_UNK _ZN3paf6PhText13EnsureVisibleEv(s32);
 s32 _ZN3paf6PhText13SetCurrentPosEj(s32);
@@ -261,6 +263,7 @@ void func_00006880(void);
 void func_00006900(s32 *arg0, s32 arg1);
 void func_00006920(s32 *arg0, s32 *arg1);
 s32 func_00006AA4(s32);
+void func_00006B90(s32 arg0);
 M2C_UNK func_00006BB4(M2C_UNK, M2C_UNK);
 void func_00006D10(M2C_UNK **arg0);
 void func_00006D18(void);
