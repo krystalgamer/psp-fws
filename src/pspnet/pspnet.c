@@ -2097,9 +2097,55 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00004B34);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00005010);
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00005120);
+s32 func_00005120(struct mbuf *m, s32 k, s32 *err) {
+    s32 len;
+    u8 *cp, *np;
+    struct mbuf *m0;
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00005234);
+    MINDEX(len, m, k);
+    cp = mtod(m, u8 *) + k;
+    if (len - k >= 4) {
+        *err = 0;
+        return EXTRACT_LONG(cp);
+    }
+    m0 = m->m_next;
+    if (m0 == 0 || m0->m_len + len - k < 4)
+        goto bad;
+    *err = 0;
+    np = mtod(m0, u8 *);
+    switch (len - k) {
+    case 1:
+        return (cp[0] << 24) | (np[0] << 16) | (np[1] << 8) | np[2];
+    case 2:
+        return (cp[0] << 24) | (cp[1] << 16) | (np[0] << 8) | np[1];
+    default:
+        return (cp[0] << 24) | (cp[1] << 16) | (cp[2] << 8) | np[0];
+    }
+bad:
+    *err = 1;
+    return 0;
+}
+
+s32 func_00005234(struct mbuf *m, s32 k, s32 *err) {
+    s32 len;
+    u8 *cp;
+    struct mbuf *m0;
+
+    MINDEX(len, m, k);
+    cp = mtod(m, u8 *) + k;
+    if (len - k >= 2) {
+        *err = 0;
+        return EXTRACT_SHORT(cp);
+    }
+    m0 = m->m_next;
+    if (m0 == 0)
+        goto bad;
+    *err = 0;
+    return (cp[0] << 8) | mtod(m0, u8 *)[0];
+bad:
+    *err = 1;
+    return 0;
+}
 
 #if FW_VERSION < 152
 void _sce_pspnet_if_attach(struct ifnet *ifp) {

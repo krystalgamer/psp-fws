@@ -118,6 +118,7 @@ struct mbuf {
     s16 m_type;                 /* 0x10 */
     s16 m_flags;                /* 0x12 */
 };
+#define mtod(m, t) ((t)((m)->m_data))
 
 
 struct mbuf;
@@ -310,6 +311,25 @@ struct bpf_hdr {
     _sce_pspnet_wakeup(d); \
     _sce_pspnet_selwakeup(&(d)->bd_sel); \
 } while (0)
+#define EXTRACT_SHORT(p) \
+    ((u16)((u16)*((u8 *)p + 0) << 8 | \
+           (u16)*((u8 *)p + 1) << 0))
+#define EXTRACT_LONG(p) \
+    ((u32)*((u8 *)p + 0) << 24 | \
+     (u32)*((u8 *)p + 1) << 16 | \
+     (u32)*((u8 *)p + 2) << 8 | \
+     (u32)*((u8 *)p + 3) << 0)
+#define MINDEX(len, m, k) \
+{ \
+    len = m->m_len; \
+    while (k >= len) { \
+        k -= len; \
+        m = m->m_next; \
+        if (m == 0) \
+            return 0; \
+        len = m->m_len; \
+    } \
+}
 
 
 /* struct iovec / struct uio (NetBSD uio.h; SCE: 32-bit offset, no segflg/proc) */
@@ -561,6 +581,8 @@ void func_000048F4(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrl
 u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2);
 void func_000049F4(struct bpf_d *d, u8 *pkt, u32 pktlen, u32 snaplen, u8 *(*cpfn)());
 u32 func_00004B34(void *pc, u8 *p, u32 wirelen, u32 buflen);
+s32 func_00005120(struct mbuf *m, s32 k, s32 *err);
+s32 func_00005234(struct mbuf *m, s32 k, s32 *err);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);
 void func_00005C28(void);
