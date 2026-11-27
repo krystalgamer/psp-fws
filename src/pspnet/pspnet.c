@@ -3144,7 +3144,24 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00006B10);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00006BBC);
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00006C28);
+u32 func_00006C28(const u8 *buf, u32 len) {
+    u32 i, crc, carry;
+    u32 bit;
+    u32 rem;
+
+    crc = 0xffffffffU;
+    for (i = 0; i < len; i++) {
+        rem = buf[i];
+        for (bit = 0; bit < 8; bit++) {
+            carry = ((crc & 0x80000000U) ? 1 : 0) ^ (rem & 0x01);
+            crc <<= 1;
+            rem >>= 1;
+            if (carry)
+                crc = (crc ^ 0x04c11db6) | carry;
+        }
+    }
+    return crc;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -3231,7 +3248,18 @@ INCLUDE_ASM("nonmatchings/pspnet", func_000071FC);
 INCLUDE_ASM("nonmatchings/pspnet", func_00007054);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet", func_000075C0);
+void func_000075C0(struct ifnet *ifp) {
+    struct mbuf *m;
+
+    for (;;) {
+        IF_DEQUEUE(&ifp->if_snd, m);
+        if (m == NULL)
+            break;
+        if (ifp->if_bpf)
+            bpf_mtap(ifp->if_bpf, m);
+        sceNetIfhandleIfStart(ifp, m);
+    }
+}
 
 #if FW_VERSION < 282
 s32 _sce_pspnet_start_of_inet_module_in_ifhandle_ether(s32 arg0) {

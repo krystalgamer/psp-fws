@@ -293,6 +293,15 @@ typedef char chk_ifaddr[(sizeof(struct ifaddr) == 0x38) ? 1 : -1];
     (ifq)->ifq_tail = m; \
     (ifq)->ifq_len++; \
 }
+#define IF_DEQUEUE(ifq, m) { \
+    (m) = (ifq)->ifq_head; \
+    if (m) { \
+        if (((ifq)->ifq_head = (m)->m_nextpkt) == 0) \
+            (ifq)->ifq_tail = 0; \
+        (m)->m_nextpkt = 0; \
+        (ifq)->ifq_len--; \
+    } \
+}
 
 
 #define IFNAMSIZ 16
@@ -694,7 +703,9 @@ void func_000044C0(struct ifnet *ifp);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);
 s32 func_000064CC(struct socket *so, u32 cmd, void *data);
+u32 func_00006C28(const u8 *buf, u32 len);
 s32 func_00007020(void *a0, void *a1, void *a2, void *a3);
+void func_000075C0(struct ifnet *ifp);
 s32 func_00007678(s32 poolSize);
 s32 func_000076B8(void);
 s32 func_00007738(s32 poolSize);
@@ -762,6 +773,7 @@ void sceNetGetMallocStat(void);
 M2C_UNK sceNetGetMallocStatInternal();
 u32 sceNetGetSystemClockSec(void);
 s64 sceNetGetSystemClockUsec(void);
+s32 sceNetIfhandleIfStart(struct ifnet *ifp, struct mbuf *m);
 s32 sceNetIfhandlePollSema(s32 sema, s32 n);
 s32 sceNetIfhandleSignalSema(s32 sema, s32 n);
 M2C_UNK sceNetIfhandleTerm();
