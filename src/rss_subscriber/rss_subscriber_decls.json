@@ -30,10 +30,6 @@
   "memset": "M2C_UNK memset(void *, M2C_UNK, M2C_UNK);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelCreateSema": "s32 sceKernelCreateSema(void *, u32, s32, s32, void *);",
-  "scePaf_5E4447F6": "s32 scePaf_5E4447F6(s32);",
-  "scePaf_723D0C80": "s32 scePaf_723D0C80();",
-  "scePaf_C1B0AA0D": "s32 scePaf_C1B0AA0D(s32);",
-  "scePaf_F5001144": "M2C_UNK scePaf_F5001144(void *);",
   "sce_paf_private_free2": "M2C_UNK sce_paf_private_free2(void *);",
   "sce_paf_private_strlen": "s32 sce_paf_private_strlen(s32);",
   "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);"

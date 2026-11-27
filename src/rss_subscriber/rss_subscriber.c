@@ -308,7 +308,7 @@ void func_000027C4(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_C1B0AA0D(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_00002A78(arg0, arg1, var_v0);
 }
@@ -334,7 +334,7 @@ void func_000028BC(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_00002B24(arg0, arg1, var_v0);
 }
@@ -363,12 +363,12 @@ void func_00002948(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_F5001144(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_F5001144(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 #else
 void func_00002948(void **arg0) {
@@ -423,7 +423,7 @@ void func_00002D28(M2C_UNK **arg0) {
 
 #if FW_VERSION >= 350
 s32 func_00002D50(void) {
-    return scePaf_723D0C80() != 0;
+    return Job_isCanceled() != 0;
 }
 #else
 s32 func_00002D50(void) {
