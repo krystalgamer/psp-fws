@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "pafmini_decls.h"
 
@@ -50,12 +51,12 @@ s32 func_00013B60(void) {
 #endif
 
 void func_0001A31C(M2C_UNK **arg0) {
-    func_00013B68(arg0);
+    func_00013B68((Unk_func_00013B68_0*) arg0);
     *arg0 = &D_000D1E74;
 }
 
 void func_0001A34C(M2C_UNK **arg0) {
-    func_00013B68(arg0);
+    func_00013B68((Unk_func_00013B68_0*) arg0);
     *arg0 = &D_000D1E74;
 }
 
@@ -270,7 +271,7 @@ void func_0003A1BC(s32 **arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void func_0003A1BC(M2C_UNK **arg0) {
+void func_0003A1BC(s32 **arg0) {
     *arg0 = &D_000FF5D8;
 }
 #endif
@@ -283,7 +284,7 @@ void func_0003A1CC(s32 **arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void func_0003A1CC(M2C_UNK **arg0) {
+void func_0003A1CC(s32 **arg0) {
     *arg0 = &D_000FF5D8;
     _ZdlPv(arg0);
 }
@@ -293,7 +294,7 @@ void func_0003A1CC(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001A9C8);
 #else
 void func_0001A9C8(M2C_UNK **arg0) {
-    func_00013B68(arg0);
+    func_00013B68((Unk_func_00013B68_0*) arg0);
     *arg0 = &D_000D1EB0;
 }
 #endif
@@ -302,7 +303,7 @@ void func_0001A9C8(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001A9F8);
 #else
 void func_0001A9F8(M2C_UNK **arg0) {
-    func_00013B68(arg0);
+    func_00013B68((Unk_func_00013B68_0*) arg0);
     *arg0 = &D_000D1EB0;
 }
 #endif
@@ -435,7 +436,7 @@ void func_0003BE20(s32 **arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void func_0003BE20(M2C_UNK **arg0) {
+void func_0003BE20(s32 **arg0) {
     *arg0 = &D_000FF78C;
     func_00013B90((s32) arg0);
 }
@@ -449,7 +450,7 @@ void func_0003BE48(s32 **arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void func_0003BE48(M2C_UNK **arg0) {
+void func_0003BE48(s32 **arg0) {
     *arg0 = &D_000FF78C;
     func_00013B90((s32) arg0);
 }
@@ -464,7 +465,7 @@ void func_0003BE70(s32 **arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void func_0003BE70(M2C_UNK **arg0) {
+void func_0003BE70(s32 **arg0) {
     *arg0 = &D_000FF78C;
     func_00013B90((s32) arg0);
     _ZdlPv(arg0);
@@ -698,7 +699,7 @@ void func_0001B9F4(struct Unk_func_0001B9F4_0 *arg0, s32 arg1) {
     struct Unk_func_0001B9F4_temp_v1 *temp_v1;
 
     arg0->unk0 = 1;
-    temp_v1 = &arg0->unk4;
+    temp_v1 = (Unk_func_0001B9F4_temp_v1*) &arg0->unk4;
     arg0->unk4 = &D_000E6030;
     temp_v1->unk4 = 0;
     func_00002F1C((s32) temp_v1, arg1);
@@ -709,7 +710,7 @@ void func_0001BA3C(struct Unk_func_0001BA3C_0 *arg0, s32 arg1) {
     struct Unk_func_0001BA3C_temp_v1 *temp_v1;
 
     arg0->unk0 = 1;
-    temp_v1 = &arg0->unk4;
+    temp_v1 = (Unk_func_0001BA3C_temp_v1*) &arg0->unk4;
     arg0->unk4 = &D_000E6030;
     temp_v1->unk4 = 0;
     func_00002F1C((s32) temp_v1, arg1);
@@ -1039,7 +1040,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001E0BC);
 void func_0001E1C8(struct Unk_func_0001E1C8_0 *arg0) {
     struct Unk_func_0001E1C8_temp_v1 *temp_v1;
 
-    temp_v1 = &arg0->unk14;
+    temp_v1 = (Unk_func_0001E1C8_temp_v1*) &arg0->unk14;
     arg0->unk14 = 0;
     temp_v1->unk4 = 0;
     temp_v1->unk8 = 0;
@@ -1281,7 +1282,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001FB40);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_0001FBA4);
 #else
-M2C_UNK *func_0001FBA4(void) {
+const char *func_0001FBA4(void) {
     return "\n libpng version 1.2.10 - April 23, 2006\n   Copyright (c) 1998-2006 Glenn Randers-Pehrson\n   Copyright (c) 1996-1997 Andreas Dilger\n   Copyright (c) 1995-1996 Guy Eric Schalnat, Group 42, Inc.\n";
 }
 #endif

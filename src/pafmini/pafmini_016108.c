@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "pafmini_decls.h"
@@ -39,7 +40,7 @@ INCLUDE_ASM("nonmatchings/pafmini_016108", func_00016A0C);
 
 void func_00016CF0(struct Unk_func_00016CF0_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0->unk0 = &D_000D1DB4;
-    func_0001BA3C((u8 *)arg0 + 4, arg1);
+    func_0001BA3C((Unk_func_0001BA3C_0*) ((u8 *)arg0 + 4), arg1);
     arg0->unk18 = arg2;
     arg0->unk1C = arg3;
     arg0->unk20 = 0;

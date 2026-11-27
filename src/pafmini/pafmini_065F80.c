@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "pafmini_decls.h"
 
@@ -227,7 +228,7 @@ INCLUDE_ASM("nonmatchings/pafmini_065F80", func_000672AC);
 
 #if FW_VERSION < 201
 s32 func_000672AC(s32 arg0, s32 arg1) {
-    _ZN3paf9PhHandler17HandleSystemEventEPNS_7PhEventE();
+    _ZN3paf9PhHandler17HandleSystemEventEPNS_7PhEventE(arg0, arg1);
     _ZN3paf9PhHandler10DoCallBackEiPNS_7PhEventE(arg0, 0x80004, arg1);
     return 1;
 }
@@ -235,7 +236,7 @@ s32 func_000672AC(s32 arg0, s32 arg1) {
 
 #if FW_VERSION == 282
 s32 func_000672AC(s32 arg0, M2C_UNK arg1) {
-    _ZN3paf9PhHandler17HandleSystemEventEPNS_7PhEventE();
+    _ZN3paf9PhHandler17HandleSystemEventEPNS_7PhEventE(arg0, arg1);
     _ZN3paf9PhHandler10DoCallBackEiPNS_7PhEventE(arg0, 0x80005, arg1);
     return 1;
 }
@@ -609,9 +610,9 @@ void func_0006A0D0(struct Unk_func_0006A0D0_0 *arg0, s32 arg1, s32 arg2) {
     _ZN3paf8PhWidget8SetStyleEib((s32) arg0, arg1, arg2 & 0xFF);
 }
 
-void func_0006A0F4(struct Unk_func_0006A0F4_0 *arg0) {
+void func_0006A0F4(struct Unk_func_0006A0F4_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk334 = 1;
-    _ZN3paf8PhWidget8SetStyleEii();
+    _ZN3paf8PhWidget8SetStyleEii(arg0, arg1, arg2);
 }
 
 void func_0006A118(struct Unk_func_0006A118_0 *arg0) {

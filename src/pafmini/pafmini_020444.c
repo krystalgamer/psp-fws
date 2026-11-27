@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "pafmini_decls.h"
 
@@ -85,7 +86,7 @@ INCLUDE_ASM("nonmatchings/pafmini_020444", func_00041224);
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
 s32 func_00041224(s32 arg0) {
-    return !(arg0 & 1) ? 0 : 0xFC;
+    return ((arg0 & 1) == 0) ? 0 : 0xFC;
 }
 #endif
 
@@ -173,7 +174,7 @@ s32 png_get_asm_flags(struct Unk_png_get_asm_flags_0 *arg0) {
 }
 
 s32 png_get_asm_flagmask(s32 arg0) {
-    return !(arg0 & 1) ? 0 : 0xFC;
+    return ((arg0 & 1) == 0) ? 0 : 0xFC;
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_020444", png_get_mmx_flagmask);

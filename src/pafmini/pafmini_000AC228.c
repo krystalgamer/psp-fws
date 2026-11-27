@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "pafmini_decls.h"
 
@@ -3730,7 +3731,7 @@ INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AB0A0);
 void func_000AB0A0(void) {
     struct Unk_func_000AB0A0_temp_s0 *temp_s0;
 
-    temp_s0 = D_00108A2C;
+    temp_s0 = (Unk_func_000AB0A0_temp_s0*) D_00108A2C;
     temp_s0->unk28 = func_000AB0D4(temp_s0->unk2C, (s32) temp_s0->unk4);
 }
 #endif

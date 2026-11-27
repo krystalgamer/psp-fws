@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "pafmini_decls.h"
 
@@ -8,7 +9,7 @@ s32 *func_00033B18(s32 **arg0, s32 arg1) {
     temp_s1 = func_00033ADC(arg0, arg1);
     var_a2 = arg0;
     if (arg1 != 0) {
-        var_a2 = func_00033ADC(arg0, arg1 - 1);
+        var_a2 = (s32**) (func_00033ADC(arg0, arg1 - 1));
     }
     *var_a2 = (s32 *) *temp_s1;
     if (M2C_FIELD(arg0, s32 ***, 4) == temp_s1) {
