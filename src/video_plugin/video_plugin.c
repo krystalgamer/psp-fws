@@ -7471,11 +7471,11 @@ s32 func_00020534(s32 arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/video_plugin", func_00020578);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 260
+#if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/video_plugin", func_000205CC);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 u8 func_000205CC(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x820);
 }
