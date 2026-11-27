@@ -49,6 +49,15 @@ def load(ver, mod):
     return names, starts, raw, segs
 
 
+def shape_of(ws):
+    # opcode + registers, immediates/targets masked: compares across versions
+    out = []
+    for w in ws:
+        op = w >> 26
+        out.append(w & 0xFC000000 if op in (2, 3) else (w & 0xFFFF0000 if op >= 4 else w))
+    return tuple(out)
+
+
 def word(raw, segs, a):
     for s in segs:
         if s["p_vaddr"] <= a < s["p_vaddr"] + s["p_filesz"]:
@@ -69,13 +78,7 @@ def groups(ver, mod):
     def rel(ws, base):
         return [((w & 0xFC000000) | ((((w & 0x3FFFFFF) << 2) - base) & 0x3FFFFFF)) if w >> 26 == 2 else w for w in ws]
 
-    def shape(ws):
-        # opcode + registers, immediates/targets masked: compares across versions
-        out = []
-        for w in ws:
-            op = w >> 26
-            out.append(w & 0xFC000000 if op in (2, 3) else (w & 0xFFFF0000 if op >= 4 else w))
-        return tuple(out)
+    shape = shape_of
 
     def calls(ws):
         return [(w & 0x3FFFFFF) << 2 for w in ws if w >> 26 == 3]
@@ -114,6 +117,7 @@ def groups(ver, mod):
                 "funcs": [(x, starts[x]) for x, _ in g],
                 "sizes": [y - x for x, y in g],
                 "shape": shape(ws),
+                "shapes": [shape(words(x, y)) for x, y in g],
                 "vptr": vp,
                 "vptr_label": names.get(vp) if vp is not None else None,
                 "vtable_zero": vp is not None and word(raw, segs, vp - 8) == 0 and word(raw, segs, vp - 4) == 0,

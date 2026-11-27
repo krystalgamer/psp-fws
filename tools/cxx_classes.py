@@ -44,6 +44,48 @@ MANGLED = re.compile(r"^_ZN(\d+)(Class_\w+?)D[012]Ev$")
 TRIVIAL = ((0x10, 0x10, 0x28), (0x28, 0x28, 0x38))
 
 
+TEMPLATES = {
+    0x10: "class A { public: virtual ~A(); };\nA::~A() {}\n",
+    0x28: "class B { public: virtual ~B(); };\nclass A : public B { public: virtual ~A(); };\nA::~A() {}\n",
+}
+_tpl = {}
+
+
+def template_shapes(flags, size):
+    """Opcode shapes of D2/D1/D0 of a trivial dtor compiled with a unit's compiler and flags."""
+    key = (flags, size)
+    if key not in _tpl:
+        from elftools.elf.elffile import ELFFile
+        d = ROOT / "tmp/scratch/cxx_tpl"
+        d.mkdir(parents=True, exist_ok=True)
+        cc, *fl = flags.split()
+        src, asm, obj = d / f"t{size:x}.ii", d / f"t{size:x}.s", d / f"t{size:x}.o"
+        src.write_text(TEMPLATES[size])
+        subprocess.run([str(ROOT / "tmp/toolchains/bin" / cc), *fl, "-G0", "-quiet", "-o", str(asm), str(src)],
+                       check=True, cwd=ROOT)
+        subprocess.run([str(ROOT / "tmp/toolchains/bin/psp-as-1.3.1"), "-EL", "-G0", "-mulsw", "-o", str(obj), str(asm)],
+                       check=True, cwd=ROOT)  # as the Makefile assembles C
+        with open(obj, "rb") as fh:
+            e = ELFFile(fh)
+            text = e.get_section_by_name(".text").data()
+            syms = sorted((s["st_value"], s.name) for s in e.get_section_by_name(".symtab").iter_symbols()
+                          if s["st_info"]["type"] == "STT_FUNC")
+        ws = [int.from_bytes(text[i:i + 4], "little") for i in range(0, len(text), 4)]
+        bounds = [a for a, _ in syms] + [len(text)]
+        _tpl[key] = [list(CG.shape_of(ws[a // 4:z // 4])) for a, z in zip(bounds, bounds[1:])]
+    return _tpl[key]
+
+
+_flags = {}
+
+
+def unit_flags(f, v):
+    if (f, v) not in _flags:
+        _flags[(f, v)] = subprocess.run([sys.executable, str(ROOT / "tools/cc_of.py"), str(f), v],
+                                        capture_output=True, text=True, cwd=ROOT).stdout.strip()
+    return _flags[(f, v)]
+
+
 def fwnum(v):
     return int(re.match(r"\d+", v)[0])
 
@@ -192,6 +234,10 @@ def main():
                     where = where or "split"
             if not isinstance(where, tuple):
                 why["entries not consecutive" if where == "split" else "entries not found"] += 1
+                continue
+            flags = unit_flags(where[0], v)
+            if not flags.startswith("cc1plus") or template_shapes(flags, sizes[0]) != [list(x) for x in g["shapes"]]:
+                why["code differs from the unit's compiler"] += 1
                 continue
             lu = label_unit(v, g["vptr_label"])
             if lu is None:
