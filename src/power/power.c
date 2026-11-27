@@ -1430,7 +1430,25 @@ s32 scePowerGetBatteryElec(s32 *elec) {
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryElec);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+s32 scePowerGetInnerTemp(float *temp) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if (k1IsUserMode() && (s32)temp < 0) {
+        ret = 0x80000023;
+    } else if (g_Battery.innerTempStatus != 1) {
+        ret = 0x802B0010;
+    } else {
+        *temp = g_Battery.innerTemp;
+        ret = 0;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerGetInnerTemp);
 #endif
 
