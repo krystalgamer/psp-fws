@@ -295,3 +295,7 @@ tcp_canceltimers = 0x00024490; // type:func
 tcp_attach = 0x00024C58; // type:func
 tcp_sysctl = 0x00024EC4; // type:func
 sysctl_rdint = 0x00008A2C; // type:func
+tcp_usrreq = 0x000244FC; // type:func
+in_purgeif = 0x00012AC4; // type:func
+in_pcbpurgeif = 0x000137AC; // type:func
+sbappend = 0x000059AC; // type:func

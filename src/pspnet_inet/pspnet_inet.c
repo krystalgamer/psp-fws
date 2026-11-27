@@ -890,11 +890,11 @@ struct socket *getsock(s32 s) {
 }
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00005964);
+INCLUDE_ASM("nonmatchings/pspnet_inet", soisconnecting);
 #endif
 
 #if FW_VERSION < 201
-void func_00005964(struct socket *so) {
+void soisconnecting(struct socket *so) {
     so->so_state &= ~(SS_ISCONNECTED | SS_ISDISCONNECTING);
     so->so_state |= SS_ISCONNECTING;
 }
@@ -940,11 +940,11 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", soisdisconnected);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00005A78);
+INCLUDE_ASM("nonmatchings/pspnet_inet", socantsendmore);
 #endif
 
 #if FW_VERSION < 201
-void func_00005A78(struct socket *so) {
+void socantsendmore(struct socket *so) {
     so->so_state |= SS_CANTSENDMORE;
     if (so->so_snd.sb_flags & SB_NOTIFY) {
         sowakeup(so, &so->so_snd);
@@ -999,7 +999,7 @@ s32 sb_lock(struct sockbuf *sb) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000059AC);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sbappend);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", sce_alignbytes);
@@ -2759,7 +2759,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010874);
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010C04);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_control);
 #endif
 
 #if FW_VERSION >= 282
@@ -3115,7 +3115,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012A08);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000129AC);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012AC4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_purgeif);
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012730);
@@ -3431,7 +3431,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013338);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001358C);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000137AC);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_pcbpurgeif);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", in_rtchange);
