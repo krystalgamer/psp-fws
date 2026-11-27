@@ -264,3 +264,17 @@ sceKernelPowerLock = 0x00008FB8; // type:func rom:0x9038
 sceKernelPowerUnlock = 0x00008FC0; // type:func rom:0x9040
 D_00009570_v102 = 0x00009570; // rom:0x95F0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceMgrInit = 0x000008D4; // type:func
+sceMgrMSInit = 0x00004624; // type:func
+sceMgrMSInvalidateICV = 0x00007980; // type:func
+sceKernelCpuSuspendIntr = 0x00008E68; // type:func
+sceKernelCpuResumeIntr = 0x00008E70; // type:func
+sceKernelRegisterIntrHandler = 0x00008E80; // type:func
+sceKernelEnableIntr = 0x00008E90; // type:func
+Kprintf = 0x00008EC8; // type:func
+sceKernelCreateSema = 0x00008EF0; // type:func
+sceKernelCreateEventFlag = 0x00008F18; // type:func
+sceKernelSuspendDispatchThread = 0x00008F48; // type:func
+sceKernelResumeDispatchThread = 0x00008F50; // type:func

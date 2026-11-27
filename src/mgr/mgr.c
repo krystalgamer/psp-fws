@@ -69,10 +69,6 @@ void sceMgrReset(void) {
     func_00002588();
 }
 
-#if FW_VERSION >= 102 && FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/mgr", func_000008D4);
-#endif
-
 #if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/mgr", D_0000A940);
 
@@ -127,9 +123,7 @@ INCLUDE_ASM("nonmatchings/mgr", func_000008A4);
 INCLUDE_ASM("nonmatchings/mgr", func_00000898);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/mgr", sceMgrInit);
-#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 340
 s32 sceMgrAesInit(void) {
@@ -1426,11 +1420,7 @@ s32 func_00005E30(void) {
 
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFA0);
 
-#if FW_VERSION >= 102 && FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/mgr", func_00004624);
-#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInit);
-#endif
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReset);
 
@@ -1759,21 +1749,9 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadSeqPage);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadPoolPage);
 
-#if FW_VERSION >= 102 && FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/mgr", func_00007980);
-#endif
-
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/mgr", func_00007B34);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInvalidateICV);
-#endif
 
-#if FW_VERSION != 103
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWriteSeqPage);
-#endif
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWritePoolPage);
 
