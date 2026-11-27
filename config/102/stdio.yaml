@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/stdio
-  src_path: tmp/av_src/102/stdio
+  src_path: src/stdio
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/stdio.ld
   cache_path: tmp/build/102/.splat_cache.stdio
