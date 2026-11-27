@@ -913,7 +913,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00001F8C);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00001994(SceIoIob *iob, SceIoDirent *dirent) {
+s32 df_dread(SceIoIob *iob, SceIoDirent *dirent) {
     FatmsPrivate *priv;
     s32 ret;
     s32 err;
@@ -932,10 +932,10 @@ s32 func_00001994(SceIoIob *iob, SceIoDirent *dirent) {
     }
     info = (u8 *)priv + 0x568;
     if (priv->unk4 == 0) {
-        ret = func_00004F88((u8 *)priv + 0xC, 0x80, info);
+        ret = stub_pf_find((u8 *)priv + 0xC, 0x80, info);
         priv->unk4 = 0x30;
     } else if (priv->unk4 == 0x30) {
-        ret = func_00004F88(NULL, 0, info);
+        ret = stub_pf_find(NULL, 0, info);
     } else {
         return 0x80010016;
     }
@@ -1733,7 +1733,7 @@ s32 func_00002EFC(s32 a0, s32 a1, s32 a2) {
 #endif
 
 #if FW_VERSION == 100
-s32 func_00004F88(s32 a0, s32 a1, s32 a2) {
+s32 stub_pf_find(s32 a0, s32 a1, s32 a2) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x6;
@@ -1746,7 +1746,7 @@ s32 func_00004F88(s32 a0, s32 a1, s32 a2) {
     return msg.ret;
 }
 #else
-s32 func_00004F88(s32 a0, s32 a1, s32 a2, s32 a3) {
+s32 stub_pf_find(s32 a0, s32 a1, s32 a2, s32 a3) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x6;

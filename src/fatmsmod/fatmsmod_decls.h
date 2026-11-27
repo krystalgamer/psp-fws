@@ -330,6 +330,7 @@ s32 check_heap_alive(FatmsPrivate *priv);
 s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv);
 s32 df_close(); /* 1.00 df_close(SceIoIob *) */
 s32 df_dclose(); /* 1.00 df_dclose */
+s32 df_dread(); /* 1.00 df_dread */
 s32 df_ioctl(); /* 1.00 df_ioctl */
 s32 df_mkdir(); /* 1.50+ take one more trailing argument */
 s32 df_read(); /* 1.00 df_read(SceIoIob *, void *, SceSize) */
@@ -349,7 +350,6 @@ M2C_UNK func_00000CE4();
 M2C_UNK func_00000E00();
 M2C_UNK func_00000EF8();
 s32 func_00001834(u32 attr);
-s32 func_00001994(); /* 1.00 df_dread */
 char *func_00001A18(char *s);
 s32 func_00001DCC(FatmsPrivate *priv, SceIoDirent *dirent);
 s32 func_00001F98(void);
@@ -398,7 +398,6 @@ s32 func_00004BBC(s32 arg0);
 s32 func_00004C58(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00004E68(s8 *arg0);
 s32 func_00004F40(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00004F88(); /* stub cmd 6: dir find first (pattern != NULL) / next */
 s32 func_00005068(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_000050E4(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00005118(void);
@@ -581,6 +580,7 @@ s32 stub_pf_errnum(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_fclose(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_feof(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_ferror(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_find(); /* stub cmd 6: dir find first (pattern != NULL) / next */
 s32 stub_pf_fopen(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_fread(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_fwrite(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
