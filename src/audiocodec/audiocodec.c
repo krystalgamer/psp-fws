@@ -1,10 +1,10 @@
 /* cflags[152]: -Os -frename-registers */
-/* cflags[100,102]: -O3 */
+/* cflags[100,102,103]: -O3 */
 /* cflags[150]: -Os -frename-registers */
 #include "common.h"
 #include "audiocodec_decls.h"
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/audiocodec", func_00000000);
 
 INCLUDE_ASM("nonmatchings/audiocodec", func_000000D4);
@@ -22,7 +22,7 @@ INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecInit);
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_3DD7EE1A);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecDecode);
 
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecGetInfo);
@@ -34,7 +34,7 @@ INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodec_6CD2A861);
 
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecAlcExtendParameter);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/audiocodec", func_00000628);
 #else
 INCLUDE_ASM("nonmatchings/audiocodec", sceAudiocodecGetEDRAM);
