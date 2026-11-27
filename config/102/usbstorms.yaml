@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/usbstorms
-  src_path: tmp/av_src/102/usbstorms
+  src_path: src/usbstorms
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/usbstorms.ld
   cache_path: tmp/build/102/.splat_cache.usbstorms
