@@ -1228,7 +1228,7 @@ INCLUDE_ASM("nonmatchings/registry", sceRegSetKeyValue);
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfo);
 #else
-s32 sceRegGetKeyInfo(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 sceRegGetKeyInfo(s32 hd, const char *name, s32 *keyId, s32 *type, u32 *size) {
     s32 ret;
     u32 oldK1;
 
@@ -1236,7 +1236,7 @@ s32 sceRegGetKeyInfo(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     ret = 0x80082733;
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
-    ret = func_00004A28(arg0, arg1, arg2, arg3, arg4);
+    ret = func_00004A28((SceRegIndexEntry *)hd, name, keyId, type, size);
 end:
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
@@ -1249,8 +1249,8 @@ end:
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfoByName);
 #else
-s32 sceRegGetKeyInfoByName(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    void *sp0;
+s32 sceRegGetKeyInfoByName(s32 hd, const char *name, s32 *type, u32 *size) {
+    s32 keyId;
     s32 ret;
     u32 oldK1;
 
@@ -1258,7 +1258,7 @@ s32 sceRegGetKeyInfoByName(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     ret = 0x80082733;
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
-    ret = func_00004A28(arg0, arg1, &sp0, arg2, arg3);
+    ret = func_00004A28((SceRegIndexEntry *)hd, name, &keyId, type, size);
 end:
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
@@ -1270,9 +1270,53 @@ end:
 
 INCLUDE_ASM("nonmatchings/registry", func_00004A28);
 
-INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValue);
+#if FW_VERSION == 100
+s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, u32 size) {
+    s32 ret;
+    u32 oldK1;
 
+    oldK1 = shiftK1();
+    ret = 0x80082733;
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
+        goto end;
+    ret = func_00004D6C((SceRegIndexEntry *)hd, keyId, buf, size);
+end:
+    if (sceKernelSignalSema(g_semaId, 1) != 0) {
+        ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#else
+INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValue);
+#endif
+
+#if FW_VERSION == 100
+s32 sceRegGetKeyValueByName(s32 hd, const char *name, void *buf, u32 size) {
+    s32 keyId;
+    s32 type;
+    u32 keySize;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    ret = 0x80082733;
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
+        goto end;
+    ret = func_00004A28((SceRegIndexEntry *)hd, name, &keyId, &type, &keySize);
+    if (ret != 0)
+        goto end;
+    ret = func_00004D6C((SceRegIndexEntry *)hd, keyId, buf, size);
+end:
+    if (sceKernelSignalSema(g_semaId, 1) != 0) {
+        ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValueByName);
+#endif
 
 INCLUDE_ASM("nonmatchings/registry", func_00004D6C);
 
