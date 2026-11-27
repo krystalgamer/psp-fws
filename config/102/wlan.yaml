@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, wlan]
+      - [0x80, c, wlan]
       - { start: 0x12B00, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x12DC8, type: prxpad, order: .text }
       - { start: 0x12DD0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x12F10, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x12F44, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x13208, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x1336C, rodata, wlan]
+      - [0x1336C, .rodata, wlan]
   - name: wlan_seg1
     type: code
     start: 0x13860
