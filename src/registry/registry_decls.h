@@ -134,6 +134,7 @@ extern s32 g_vplMaxUsed;
 
 s32 func_0000086C(s32 index);
 s32 func_000008BC(s32 index);
+s32 func_000009F8(SceRegIndexEntry *cat);
 void func_000010B8(SceRegParam *param, SceRegIregHeader *hdr);
 s32 func_000012B0(const char *name, SceRegIregHeader *hdr);
 s32 func_00001560(const char *name, SceRegIregHeader *hdr);
@@ -142,6 +143,7 @@ s32 func_00001E2C(const char *path, u32 count);
 s32 func_00002350(SceRegIndexEntry *cat);
 s32 func_0000236C(SceRegIndexEntry *cat, s32 size);
 s32 func_00002630(s32 index, SceRegIregHeader *hdr, s32 parentIdx, s32 idx, const char *name, SceRegIndexEntry **cat);
+s32 func_0000263C(SceRegIndexEntry *cat);
 s32 func_00002884(SceRegIregHeader *hdr, s32 *index);
 s32 func_00002948(s32 index, SceRegIregHeader *hdr, s32 parentIdx, s32 idx, const char *name, SceRegIndexEntry **cat, SceRegIndexEntry **parentCat);
 s32 func_00002C3C(const char *path, char *parent, char *name);

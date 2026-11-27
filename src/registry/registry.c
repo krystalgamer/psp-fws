@@ -430,7 +430,28 @@ out:
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 310
+s32 sceRegFlushCategory(s32 hd) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto out;
+    ret = func_000009F8((SceRegIndexEntry *)hd);
+    res = sceKernelSignalSema(g_semaId, 1);
+    if (res != 0)
+        ret = 0x80082734;
+out:
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushCategory);
 #endif
 
@@ -872,7 +893,28 @@ out:
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 310
+s32 sceRegCloseCategory(s32 hd) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto out;
+    ret = func_0000263C((SceRegIndexEntry *)hd);
+    res = sceKernelSignalSema(g_semaId, 1);
+    if (res != 0)
+        ret = 0x80082734;
+out:
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/registry", sceRegCloseCategory);
 #endif
 

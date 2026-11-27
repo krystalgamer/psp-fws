@@ -2,6 +2,7 @@
  "funcs": {
   "func_0000086C": "s32 func_0000086C(s32 index);",
   "func_000008BC": "s32 func_000008BC(s32 index);",
+  "func_000009F8": "s32 func_000009F8(SceRegIndexEntry *cat);",
   "func_000010B8": "void func_000010B8(SceRegParam *param, SceRegIregHeader *hdr);",
   "func_000012B0": "s32 func_000012B0(const char *name, SceRegIregHeader *hdr);",
   "func_00001560": "s32 func_00001560(const char *name, SceRegIregHeader *hdr);",
@@ -10,6 +11,7 @@
   "func_00002350": "s32 func_00002350(SceRegIndexEntry *cat);",
   "func_0000236C": "s32 func_0000236C(SceRegIndexEntry *cat, s32 size);",
   "func_00002630": "s32 func_00002630(s32 index, SceRegIregHeader *hdr, s32 parentIdx, s32 idx, const char *name, SceRegIndexEntry **cat);",
+  "func_0000263C": "s32 func_0000263C(SceRegIndexEntry *cat);",
   "func_00002884": "s32 func_00002884(SceRegIregHeader *hdr, s32 *index);",
   "func_00002948": "s32 func_00002948(s32 index, SceRegIregHeader *hdr, s32 parentIdx, s32 idx, const char *name, SceRegIndexEntry **cat, SceRegIndexEntry **parentCat);",
   "func_00002C3C": "s32 func_00002C3C(const char *path, char *parent, char *name);",
