@@ -13,6 +13,7 @@ import argparse
 import os
 import difflib
 import re
+import struct
 import subprocess
 import sys
 from pathlib import Path
@@ -50,15 +51,28 @@ def compiled_reloc_syms(c_text, comp, opt):
                        capture_output=True)
         elf = ELFFile(open(o, "rb"))
         symtab = elf.get_section_by_name(".symtab")
-        out = []
+        text = elf.get_section_by_name(".text").data()
+        out, strs, hi = [], {}, {}
         for sec in elf.iter_sections():
             if isinstance(sec, RelocationSection) and sec.name == ".rel.text":
-                for rel in sec.iter_relocations():
+                for rel in sorted(sec.iter_relocations(), key=lambda r: r["r_offset"]):
                     if rel["r_info_type"] not in (5, 6):  # HI16/LO16 only; calls to stubs aren't in reloc_addrs
                         continue
                     sym = symtab.get_symbol(rel["r_info_sym"])
-                    out.append((rel["r_offset"], sym.name if sym["st_info"]["type"] != "STT_SECTION" else None))
-        return [n for _, n in sorted(out)]
+                    is_sec = sym["st_info"]["type"] == "STT_SECTION"
+                    out.append((rel["r_offset"], sym.name if not is_sec else None))
+                    imm = struct.unpack_from("<I", text, rel["r_offset"])[0] & 0xFFFF
+                    if rel["r_info_type"] == 5:
+                        hi[rel["r_info_sym"]] = imm
+                    elif is_sec:
+                        target = elf.get_section(sym["st_shndx"])
+                        if target.name.startswith(".rodata"):
+                            off = (hi.get(rel["r_info_sym"], 0) << 16) + (imm - 0x10000 if imm & 0x8000 else imm)
+                            d = target.data()
+                            strs[rel["r_offset"]] = d[off:d.find(b"\0", off)] if 0 <= off < len(d) else None
+        names = [n for _, n in sorted(out)]
+        compiled_reloc_syms.strings = [strs.get(o2) for o2, _ in sorted(out)]
+        return names
 
 
 def target_reloc_syms(mod, name):
@@ -307,7 +321,19 @@ def main():
             print("relocation symbols match")
             for i, w, m in bad:
                 print(f"  (reloc {i}: target label {w} assumed inside {m}; check the offset)")
-            print("RESULT: MATCH")
+            # string literals the C emits must equal the original's (hand_try compares no other rodata)
+            bad_str = []
+            for (w, ms) in zip(want, compiled_reloc_syms.strings):
+                m2 = re.fullmatch(r"D_([0-9A-F]{8})", w)
+                if ms is None or not m2:
+                    continue
+                at = mod.text_off + int(m2[1], 16)
+                ts = mod.base[at:mod.base.find(b"\0", at)]
+                if ts != ms:
+                    bad_str.append((w, ts, ms))
+            for w, ts, ms in dict.fromkeys(bad_str):
+                print(f"  string literal for {w} differs: target {ts!r}, mine {ms!r}")
+            print("RESULT: words match, STRING LITERALS DIFFER (not a match)" if bad_str else "RESULT: MATCH")
     elif best is not None:
         sm = difflib.SequenceMatcher(None, target, best, autojunk=False)
         print(f"RESULT: {max(len(target), len(best)) - sum(b.size for b in sm.get_matching_blocks())} off (own setting)")
