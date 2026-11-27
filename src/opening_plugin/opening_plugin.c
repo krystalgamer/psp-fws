@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "opening_plugin_decls.h"
@@ -612,6 +613,6 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_000035DC);
 #if FW_VERSION < 250
 void func_00000FFC(M2C_UNK **arg0) {
     *arg0 = &D_00001648;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif

@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O2 */
 #include "common.h"
 #include "opening_plugin_decls.h"
