@@ -102,6 +102,16 @@ def main():
               f"{', name already used' if best in new_by else ''})")
         if ok:
             mapping[n] = best
+    # two new NIDs onto one old name: keep the better attested one (splat rejects duplicate names)
+    by_best = collections.defaultdict(list)
+    for n, best in mapping.items():
+        by_best[best].append(n)
+    for best, ns in by_best.items():
+        if len(ns) > 1:
+            ns.sort(key=lambda n: -votes[n][best])
+            for n in ns[1:]:
+                print(f"dropped {n} -> {best} (also {ns[0]})")
+                del mapping[n]
     if not a.apply or not mapping:
         return
     for v in targets:
