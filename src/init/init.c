@@ -25,7 +25,7 @@ INCLUDE_ASM("nonmatchings/init", func_000000DC);
 INCLUDE_ASM("nonmatchings/init", sceKernelGetChunk);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 s32 sceKernelRegisterChunk(u32 chunkId, s32 blockId) {
     if (chunkId < 16) {
         D_00002248[chunkId] = blockId;
@@ -36,11 +36,11 @@ s32 sceKernelRegisterChunk(u32 chunkId, s32 blockId) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/init", sceKernelRegisterChunk);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 152)
 s32 sceKernelReleaseChunk(u32 chunkId) {
     if (chunkId < 16) {
         D_00002248[chunkId] = -1;
@@ -51,7 +51,7 @@ s32 sceKernelReleaseChunk(u32 chunkId) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/init", sceKernelReleaseChunk);
 #endif
 
