@@ -64,3 +64,37 @@ look_ctype_table = 0x00002644; // type:func rom:0x26C4
 D_00002B48_v103 = 0x00002B48; // rom:0x2BC8
 D_00002B54_v103 = 0x00002B54; // rom:0x2BD4
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelLoadExecVSHDiscDebug = 0x00001ED4; // type:func
+sceKernelLoadExecBufferVSHUsbWlanDebug = 0x00001F68; // type:func
+sceKernelLoadExecBufferVSHFromHost = 0x00002270; // type:func
+sceKernelUnregisterExitCallback = 0x000024A8; // type:func
+sceKernelCheckExitCallback = 0x000024C4; // type:func
+sceIoClose = 0x0000256C; // type:func
+sceIoOpen = 0x00002574; // type:func
+sceIoRead = 0x0000257C; // type:func
+sceIoDevctl = 0x00002584; // type:func
+sceIoAssign = 0x0000258C; // type:func
+Kprintf = 0x00002594; // type:func
+sceKernelFindModuleByName = 0x000025B4; // type:func
+sceKernelLoadModule = 0x000025BC; // type:func
+sceKernelStartModule = 0x000025C4; // type:func
+sceKernelSearchModuleByName = 0x000025CC; // type:func
+sceKernelRebootBeforeForUser = 0x000025D4; // type:func
+sceKernelRebootBeforeForKernel = 0x000025DC; // type:func
+sceKernelQueryMemoryInfo = 0x000025E4; // type:func
+sceKernelQueryMemoryBlockInfo = 0x000025F4; // type:func
+strcat = 0x00002604; // type:func
+strcpy = 0x00002614; // type:func
+strncpy = 0x0000261C; // type:func
+strlen = 0x00002624; // type:func
+memcpy = 0x0000262C; // type:func
+sceKernelNotifyCallback = 0x0000264C; // type:func
+sceKernelSuspendAllUserThreads = 0x00002654; // type:func
+sceKernelWaitThreadEnd = 0x0000265C; // type:func
+sceKernelCreateThread = 0x00002664; // type:func
+sceKernelStartThread = 0x0000266C; // type:func
+sceKernelExitThread = 0x00002674; // type:func
+sceKernelGetUserLevel = 0x0000267C; // type:func
+sceKernelPowerRebootStart = 0x00002684; // type:func
