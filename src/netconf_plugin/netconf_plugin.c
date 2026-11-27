@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "netconf_plugin_decls.h"
 
@@ -780,7 +781,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001D64);
 #if FW_VERSION >= 300 && FW_VERSION < 350
 void func_00001D64(void) {
     void *sp0;
-    if (!(D_00024848 & 0x80)) {
+    if ((D_00024848 & 0x80) == 0) {
         _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
         func_000032EC(&sp0);
         _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
@@ -4075,7 +4076,7 @@ void func_00002BD0(void) {
     void *sp0;
     s32 temp_s0;
 
-    if (!(D_000142F0 & 0x80)) {
+    if ((D_000142F0 & 0x80) == 0) {
         temp_s0 = M2C_FIELD(_ZN3paf9Framework8InstanceEv(), s32 *, 0x90);
         _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterE6Locale(temp_s0));
         func_000032EC(&sp0);
@@ -4128,7 +4129,7 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_000054F8);
 #if FW_VERSION == 282
 void func_0000554C(void) {
     void *sp0;
-    if (!(D_00020654 & 0x80)) {
+    if ((D_00020654 & 0x80) == 0) {
         _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
         func_000032EC(&sp0);
         _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
@@ -8487,7 +8488,7 @@ void func_00012D34(struct Unk_func_00012D34_0 *arg0) {
     func_000056A8(0);
     temp_a0 = func_00012348();
     D_0002085C = arg0->unk1D0;
-    func_00000314(temp_a0, &D_0002085C, (s32) &func_00012D90);
+    func_00000314(temp_a0, (Unk_func_00000314_1*) &D_0002085C, (s32) &func_00012D90);
 }
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00012D90);
@@ -8762,7 +8763,7 @@ void func_00014A8C(struct Unk_func_00014A8C_0 *arg0) {
     func_000022FC();
     func_000065FC(1);
     D_000208A8 = arg0->unk1D0;
-    func_00000784(D_000208A4, &D_000208A8, (s32) &func_00014AF0);
+    func_00000784(D_000208A4, (Unk_func_00000784_1*) &D_000208A8, (s32) &func_00014AF0);
 }
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00014AF0);
