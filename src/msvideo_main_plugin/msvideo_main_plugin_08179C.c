@@ -1274,7 +1274,9 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_08179C", D_000B4900);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_08179C", D_000B4A08);
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 350
+__asm__(".globl _ZTV14Class_000B4A08\n_ZTV14Class_000B4A08 = D_000B4A08 - 8\n");
+#else
 __asm__(".globl _ZTV14Class_000B4A08\n_ZTV14Class_000B4A08 = D_000B4A08 - 8\n");
 #endif
 

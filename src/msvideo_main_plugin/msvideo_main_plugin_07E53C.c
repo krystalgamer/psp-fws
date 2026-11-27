@@ -338,15 +338,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07E53C", func_00080C20);
 
 #if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07E53C", func_00080C40);
-#endif
-
-#if FW_VERSION >= 350
-void func_00080C40(void) {
-    sce_paf_private_malloc();
-}
-#endif
-
-#if FW_VERSION >= 301 && FW_VERSION < 350
+#else
 void func_00080C40(void) {
     sce_paf_private_malloc();
 }

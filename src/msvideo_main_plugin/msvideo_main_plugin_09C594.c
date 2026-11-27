@@ -402,34 +402,7 @@ s32 func_0009F804(s32 *arg0) {
 
 #if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_09C594", func_0009F83C);
-#endif
-
-#if FW_VERSION >= 350
-s32 func_0009F83C(s32 arg0, s32 arg1, s32 *arg2) {
-    s32 temp_v0;
-    s32 var_v1;
-
-    var_v1 = 6;
-    if (((arg0 == 0) | (arg1 == 0)) == 0) {
-        temp_v0 = sce_paf_private_malloc(0x1C);
-        var_v1 = 1;
-        if (temp_v0 != 0) {
-            M2C_FIELD(temp_v0, s32 *, 0) = arg0;
-            var_v1 = 0;
-            M2C_FIELD(temp_v0, s32 *, 0xC) = arg1;
-            M2C_FIELD(temp_v0, s32 *, 4) = 0;
-            M2C_FIELD(temp_v0, s32 *, 8) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x10) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x14) = 0;
-            M2C_FIELD(temp_v0, s32 *, 0x18) = 0;
-            *arg2 = temp_v0;
-        }
-    }
-    return var_v1;
-}
-#endif
-
-#if FW_VERSION >= 301 && FW_VERSION < 350
+#else
 s32 func_0009F83C(s32 arg0, s32 arg1, s32 *arg2) {
     s32 temp_v0;
     s32 var_v1;
