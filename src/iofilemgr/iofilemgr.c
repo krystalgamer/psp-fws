@@ -1,4 +1,4 @@
-/* cflags[100,102]: -O2 -fno-builtin */
+/* cflags[100,102,103]: -O2 -fno-builtin */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
