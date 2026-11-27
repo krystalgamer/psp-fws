@@ -7,7 +7,48 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00057290 is data (vptr = label - 8 + 8) */
+class Class_00057290 {
+public:
+    virtual ~Class_00057290();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000576E8 is data (vptr = label - 8 + 8) */
+class Class_000576E8 {
+public:
+    virtual ~Class_000576E8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005C018 is data (vptr = label - 8 + 8) */
+class Class_0005C018 : public paf::PhWidget {
+public:
+    virtual ~Class_0005C018();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005D8A0 is data (vptr = label - 8 + 8) */
+class Class_0005D8A0 {
+public:
+    virtual ~Class_0005D8A0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005D948 is data (vptr = label - 8 + 8) */
+class Class_0005D948 {
+public:
+    virtual ~Class_0005D948();
+};
 #endif
 
 struct D_0005EEA0_s {
@@ -1608,6 +1649,7 @@ M2C_UNK _Z29netconf_clear_temporary_apcnfv(void);
 s32 _Z29netconf_write_temporary_apcnfv(void);
 M2C_UNK _ZN13PSJSValueImpl6DecRefEv(s32);
 M2C_UNK _ZN13psjsname_impl6DecRefEv(s32);
+void _ZN14Class_0005D948D2Ev(void *self);
 M2C_UNK _ZN3paf10PhMenuListD2Ev(void);
 M2C_UNK _ZN3paf13PhApplication13StartDispListEv(void);
 M2C_UNK _ZN3paf13PhApplication14FinishDispListEv(void);

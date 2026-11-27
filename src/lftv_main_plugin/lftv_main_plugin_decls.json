@@ -1,4 +1,7 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
   "Heap_Alloc": "M2C_UNK Heap_Alloc(s32, M2C_UNK, s32);",
   "InputDevice_PspPad_Lock": "M2C_UNK InputDevice_PspPad_Lock();",
@@ -8,6 +11,7 @@
   "_Z29netconf_write_temporary_apcnfv": "s32 _Z29netconf_write_temporary_apcnfv();",
   "_ZN13PSJSValueImpl6DecRefEv": "M2C_UNK _ZN13PSJSValueImpl6DecRefEv(s32);",
   "_ZN13psjsname_impl6DecRefEv": "M2C_UNK _ZN13psjsname_impl6DecRefEv(s32);",
+  "_ZN14Class_0005D948D2Ev": "void _ZN14Class_0005D948D2Ev(void *self);",
   "_ZN3paf10PhMenuListD2Ev": "M2C_UNK _ZN3paf10PhMenuListD2Ev();",
   "_ZN3paf13PhApplication13StartDispListEv": "M2C_UNK _ZN3paf13PhApplication13StartDispListEv();",
   "_ZN3paf13PhApplication14FinishDispListEv": "M2C_UNK _ZN3paf13PhApplication14FinishDispListEv();",
@@ -1029,6 +1033,11 @@
   "vsh_58925420": "M2C_UNK vsh_58925420();"
  },
  "types": {
+  "Class_00057290": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00057290 is data (vptr = label - 8 + 8) */\nclass Class_00057290 {\npublic:\n    virtual ~Class_00057290();\n};\n#endif",
+  "Class_000576E8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000576E8 is data (vptr = label - 8 + 8) */\nclass Class_000576E8 {\npublic:\n    virtual ~Class_000576E8();\n};\n#endif",
+  "Class_0005C018": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0005C018 is data (vptr = label - 8 + 8) */\nclass Class_0005C018 : public paf::PhWidget {\npublic:\n    virtual ~Class_0005C018();\n};\n#endif",
+  "Class_0005D8A0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0005D8A0 is data (vptr = label - 8 + 8) */\nclass Class_0005D8A0 {\npublic:\n    virtual ~Class_0005D8A0();\n};\n#endif",
+  "Class_0005D948": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0005D948 is data (vptr = label - 8 + 8) */\nclass Class_0005D948 {\npublic:\n    virtual ~Class_0005D948();\n};\n#endif",
   "D_0005EEA0_s": "struct D_0005EEA0_s {\n    u8 pad0[0x160];\n    s32 unk160;\n};",
   "Unk_D_0005F10C": "struct Unk_D_0005F10C {\n    u8 pad0[0x34];\n    s8 unk34;\n};",
   "Unk_D_0005F114": "struct Unk_D_0005F114 {\n    u8 pad0[0x24];\n    s32 unk24;\n};",

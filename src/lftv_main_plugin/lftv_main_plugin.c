@@ -1584,6 +1584,10 @@ INCLUDE_RODATA("nonmatchings/lftv_main_plugin", D_00057280);
 
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin", D_00057290);
 
+#if FW_VERSION < 270
+__asm__(".globl _ZTV14Class_00057290\n_ZTV14Class_00057290 = D_00057290 - 8\n");
+#endif
+
 #if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin", D_00040180);
 #endif

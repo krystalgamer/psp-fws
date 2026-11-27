@@ -320,35 +320,20 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_0002C570);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00038030);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000381E8);
-#endif
 
-#if FW_VERSION < 270 || FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000383A0);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_000383A0(M2C_UNK **arg0) {
-    *arg0 = &D_0005C018;
-    _ZN3paf8PhWidgetD2Ev(arg0);
+Class_0005C018::~Class_0005C018() {
 }
+#endif
+
+#if FW_VERSION < 270
+INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000383A0);
 #endif
 
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_0002C698);
-#endif
 
-#if FW_VERSION == 250 || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000383C8);
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_000383C8(M2C_UNK **arg0) {
-    *arg0 = &D_0005C018;
-    _ZN3paf8PhWidgetD2Ev(arg0);
-}
-#endif
-
-#if FW_VERSION == 250
 s32 func_0002C710(void) {
     return D_0004814C;
 }
@@ -365,21 +350,9 @@ void func_0002C98C(M2C_UNK **arg0) {
     _ZN3paf9PhHandler11KillTimerCBEi((s32) arg0, 0x0100000A);
     _ZN3paf8PhWidgetD2Ev(arg0);
 }
-#endif
 
-#if FW_VERSION == 250 || FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000383F0);
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_000383F0(M2C_UNK **arg0) {
-    *arg0 = &D_0005C018;
-    _ZN3paf8PhWidgetD2Ev(arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_0002CA34);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_0002CABC);
@@ -441,6 +414,8 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_0003890C);
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_037634", D_0005F2D0);
+
+__asm__(".globl _ZTV14Class_0005C018\n_ZTV14Class_0005C018 = D_0005F2D0 - 8\n");
 #endif
 
 #if FW_VERSION >= 282
@@ -454,6 +429,8 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_0003896C);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_037634", D_0005C018);
+
+__asm__(".globl _ZTV14Class_0005C018\n_ZTV14Class_0005C018 = D_0005C018 - 8\n");
 #endif
 
 #if FW_VERSION >= 282

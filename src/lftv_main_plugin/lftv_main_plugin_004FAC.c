@@ -68,13 +68,8 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_00004F50);
 #if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_00004FA0);
 
-void func_00004FF0(M2C_UNK **arg0) {
-    *arg0 = &D_000576E8;
+Class_000576E8::~Class_000576E8() {
 }
-
-INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_000075E0);
-
-INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_000075F0);
 #endif
 
 #if FW_VERSION >= 282
