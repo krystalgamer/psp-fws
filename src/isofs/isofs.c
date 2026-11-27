@@ -772,9 +772,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_0000376C);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/isofs", sceIsofsReadDirent);
-#endif
 
-#if FW_VERSION < 150
 s32 func_00003A24(IsofsUnit *unit, u32 lbn, void *buf) {
     IsofsMgr *mgr = isofsGetMgr();
     u32 args[8];
@@ -1432,9 +1430,31 @@ s32 func_00007748(void) {
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofs_parse_argument);
-
-INCLUDE_ASM("nonmatchings/isofs", isofs_setup_manager);
 #endif
+
+#if FW_VERSION < 201
+s32 isofs_setup_manager(s32 arg0, s32 maxUnits, s32 maxFiles, s32 fdwCount) {
+    SceUID heapId;
+
+    ISOFS_ASSERT(maxFiles > 0, D_00006224, D_00006200, "isofs_setup_manager", (FW_VERSION == 100) ? 0x883 : ISOFS_V(0x889, 0x8DF, 0x910));
+    ISOFS_ASSERT(maxUnits > 0, D_00006224, D_00006200, "isofs_setup_manager", (FW_VERSION == 100) ? 0x884 : ISOFS_V(0x88A, 0x8E0, 0x911));
+    ISOFS_ASSERT(arg0 > 0, D_00006224, D_00006200, "isofs_setup_manager", (FW_VERSION == 100) ? 0x885 : ISOFS_V(0x88B, 0x8E1, 0x912));
+    if (arg0 <= 0 || maxUnits < 0 || maxFiles < 0) {
+        return 0x80010016;
+    }
+    g_isofsMgr.maxUnits = maxUnits;
+    g_isofsMgr.maxFiles = maxFiles;
+    g_isofsMgr.fdwCount = fdwCount;
+    g_isofsMgr.maxUnits0 = arg0;
+    heapId = sceKernelCreateHeap(1, 0x10000, 1, "SceIsofsRootHeap");
+    if (heapId < 0) {
+        return heapId;
+    }
+    g_isofsMgr.heapId = heapId;
+    return 0;
+}
+#endif
+
 
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/isofs", func_00007ED8);
