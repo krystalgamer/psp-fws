@@ -36,8 +36,8 @@ typedef struct SceUsbdDriver {
     void *stringDescriptor;
     s32 (*processRequest)(s32, s32, SceUsbdDeviceRequest *);
     s32 (*chFunc)(s32, s32, s32);
-    s32 (*attach)(s32, void *, void *);
-    s32 (*detach)(s32, s32, s32);
+    s32 (*attach)(s32 speed);
+    s32 (*detach)(void);
     s32 unk34;
     s32 (*start)(s32, void *);
     s32 (*stop)(s32, void *);
@@ -114,20 +114,32 @@ typedef struct UsbbdHwEp {
     u32 maxPacketSize;
     u32 flags;
     u32 unkC;
-    u32 unk10;
+    u32 *unk10;
     u32 unk14;
     u32 unk18;
     u32 unk1C;
     u32 unk20;
 } UsbbdHwEp;
 
+typedef struct UsbbdHwUnk14 {
+    u32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u32 unkC;
+    u32 *unk10;
+} UsbbdHwUnk14;
+
 /* bus driver hardware state (.bss) */
 typedef struct UsbbdHw {
-    UsbbdHwEp eps[15];
-    SceUsbdDeviceRequest setup; /* 0x21C */
+    UsbbdHwEp eps[10]; /* [9]: EP0 OUT */
+    UsbbdHwUnk14 unk168[9];
+    u16 unk21C; /* endpoint bitmasks */
+    u16 unk21E;
+    u16 unk220;
+    u16 unk222;
     SceUID fpl;
-    u32 unk228;
-    u32 *unk22C;
+    SceUID alarm;
+    u32 unk22C; /* setup packet DMA descriptor address */
 } UsbbdHw;
 typedef char chk_UsbbdHw[(sizeof(UsbbdHw) == 0x230) ? 1 : -1];
 
@@ -147,10 +159,13 @@ struct Unk_func_00008318_temp_a0 {
 };
 
 extern s32 D_000094F0;
+extern char D_00009550[];
 extern s32 D_00009554;
+extern char D_00009584[];
 extern char D_00009608[];
 extern char D_00009A20[];
 extern M2C_UNK D_00009A3C;
+extern char D_00009B28[];
 extern char D_00009D20[];
 extern void *D_00009FC8;
 extern s32 D_0000A034;

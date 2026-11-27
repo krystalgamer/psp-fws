@@ -166,7 +166,38 @@ void func_000009AC(void) {
 INCLUDE_ASM("nonmatchings/usb", func_00000A58);
 
 INCLUDE_ASM("nonmatchings/usb", func_00000AF4);
-#else
+#endif
+
+#if FW_VERSION < 282
+s32 func_00000A38(s32 arg0) {
+    u8 buf[0x30];
+
+    if (func_00000C90(arg0, buf) < 0) {
+        return -1;
+    }
+    g_usbbd.unk108 = func_00000EE0(1, buf);
+    if (g_usbbd.unk108 == NULL) {
+        if (sceKernelDeleteFpl(g_usbbd.unk174) < 0) {
+            Kprintf(D_00009550);
+        }
+    }
+    if (g_usbbd.unkFC != NULL) {
+        g_usbbd.unk100 = func_00000EE0(2, buf);
+        if (g_usbbd.unk100 == NULL) {
+            if (sceKernelDeleteFpl(g_usbbd.unk178) < 0) {
+                Kprintf(D_00009584);
+            }
+            if (sceKernelDeleteFpl(g_usbbd.unk174) < 0) {
+                Kprintf(D_00009550);
+            }
+            return -1;
+        }
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/usb", func_00000A38);
 #endif
 
@@ -220,7 +251,23 @@ INCLUDE_ASM("nonmatchings/usb", func_00001AD0);
 
 INCLUDE_ASM("nonmatchings/usb", func_00001B54);
 
+#if FW_VERSION < 282
+void func_00001D94(void) {
+    SceUsbdDriver *drv = g_usbbd.drivers;
+
+    if (g_usbbd.connState == 2) {
+        s32 recip = g_usbbd.setup.bmRequestType & 0x1F;
+
+        for (; drv != NULL; drv = drv->link) {
+            if (drv->processRequest != NULL) {
+                drv->processRequest(recip, -1, &g_usbbd.setup);
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/usb", func_00001D94);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", func_00001E20);
 
@@ -278,7 +325,33 @@ INCLUDE_ASM("nonmatchings/usb", func_00002A48);
 INCLUDE_ASM("nonmatchings/usb", func_00002B90);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 300)
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
+s32 module_stop(void) {
+    s32 ret;
+    u32 timeout = 1000000;
+
+    ret = sceKernelWaitSema(g_usbbd.sema, 1, &timeout);
+    if (ret < 0) {
+        Kprintf("usbbd ERROR : Exit() wait semaphore : 0x%08x\n", ret);
+        return 1;
+    }
+    if (g_usbbd.started == 1) {
+        Kprintf("usbbd ERROR : bus driver is not stopped\n");
+        sceKernelSignalSema(g_usbbd.sema, 1);
+        return 1;
+    }
+    func_00008A40();
+    func_00005B10();
+    ret = sceKernelDeleteSema(g_usbbd.sema);
+    if (ret < 0) {
+        Kprintf(D_00009B28, ret);
+    }
+    g_usbbd.sema = 0;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 271 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/usb", module_stop);
 #endif
 
@@ -460,9 +533,41 @@ s32 module_start(void) {
     }
     return var_v0;
 }
+
+s32 func_00003164(SceUsbdDeviceReq *req) {
+    s32 n;
+    s32 ret;
+
+    if (g_usbbd.actState != 0x200 || g_usbbd.cableState != 0x20 || g_usbbd.connState == 4) {
+        return 0x80243007;
+    }
+    ret = 0x80243002;
+    if (req == NULL) {
+        return 0x80243002;
+    }
+    if (__builtin_allegrex_ext((u32)req->data, 27, 2) != 1
+        || ((0x35 >> __builtin_allegrex_ext((u32)req->data, 29, 3)) & 1) == 0) {
+        Kprintf("usbbd ERROR : Not DDR address 0x%p\n", req->data);
+        return ret;
+    }
+    n = req->endpoint->busEndpointNumber;
+    do {
+        if (n != req->endpoint->busEndpointNumber) {
+            return 0x80243002;
+        }
+        if (req->returnCode > 0) {
+            return 0x80243001;
+        }
+        if (req->size == 0 && req->isControlRequest == 0) {
+            return ret;
+        }
+        req = req->next;
+    } while (req != NULL);
+    return 0;
+}
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 102 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/usb", func_00003164);
 #endif
 
@@ -510,7 +615,25 @@ void func_00003198(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/usb", func_000033F8);
+s32 func_000033F8(void) {
+    SceUsbdDriver *drv;
+    s32 i;
+
+    for (i = 0; i < 9; i++) {
+        g_usbbdHw.unk168[i].unk4 = 0;
+    }
+    for (drv = g_usbbd.drivers; drv != NULL; drv = drv->link) {
+        if (drv->descriptorHi != NULL) {
+            if (func_00003490(drv, drv->descriptorHi, drv->configHi) < 0) {
+                return -1;
+            }
+        }
+        if (func_00003490(drv, drv->descriptor, drv->config) < 0) {
+            return -1;
+        }
+    }
+    return 0;
+}
 
 #if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_00009D20);
@@ -602,7 +725,28 @@ INCLUDE_ASM("nonmatchings/usb", func_000047AC);
 INCLUDE_ASM("nonmatchings/usb", func_000049D0);
 #endif
 
-INCLUDE_ASM("nonmatchings/usb", func_00004E94);
+s32 func_00004E94(UsbbdHwEp *ep) {
+    s32 n = ep->rec->endpoint->busEndpointNumber;
+    u32 sts = *(volatile u32 *)(0xBD800004 + n * 32);
+    u32 ctl = *(volatile u32 *)(0xBD800000 + n * 32);
+
+    if ((sts & 0x680) == 0) {
+        Kprintf("usbbd ERROR : EP%d IN field is not set\n", n);
+        ep->unk20 = 0;
+    } else {
+        if ((*ep->unk10 >> 30) != 2) {
+            return 500;
+        }
+        if (ctl & 8) {
+            return 500;
+        }
+        if (((*(volatile u32 *)0xBD800414 >> n) & 1) == 0) {
+            ep->unk20 = 0;
+            func_0000526C(n);
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/usb", func_00004F58);
 
@@ -647,7 +791,19 @@ void func_0000581C(void) {
 INCLUDE_ASM("nonmatchings/usb", func_00005B1C);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/usb", func_00005914);
+void func_00005914(void) {
+    if (g_usbbdHw.alarm > 0) {
+        sceKernelCancelAlarm(g_usbbdHw.alarm);
+        g_usbbdHw.alarm = -1;
+    }
+    sceKernelDisableIntr(0x1A);
+    sceKernelDisableIntr(0x39);
+    sceKernelDisableIntr(0x38);
+    if (g_usbbd.cableState == 0x20) {
+        *(volatile u32 *)0xBD800404 |= 0x400;
+    }
+    sceSysreg_driver_A46E9CA8();
+}
 #endif
 
 void func_00005B68(s32 n) {
@@ -849,7 +1005,25 @@ INCLUDE_ASM("nonmatchings/usb", func_000066A0);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/usb", func_000061EC);
+void func_000061EC(void) {
+    u32 m = (u16)(g_usbbdHw.unk21E | g_usbbdHw.unk220);
+    s32 i;
+
+    if (m == 0) {
+        if ((g_usbbdHw.eps[0].flags >> 3) & 1) {
+            *(volatile u32 *)0xBD800200 |= 0x100;
+        }
+    }
+    for (i = 1; i < g_usbbd.numEndpoints; i++) {
+        if ((g_usbbdHw.eps[i].flags >> 3) & 1) {
+            if (g_usbbd.eps[i].address != 0x80) {
+                if (m == 0) {
+                    ((volatile u32 *)0xBD800200)[i * 8] |= 0x100;
+                }
+            }
+        }
+    }
+}
 #endif
 
 #if FW_VERSION == 152
@@ -888,7 +1062,25 @@ INCLUDE_ASM("nonmatchings/usb", func_000067B0);
 INCLUDE_ASM("nonmatchings/usb", func_00006C28);
 #endif
 
+#if FW_VERSION == 100
+s32 func_000070E8(void) {
+    sceSysregUsbAcquireIntr(1);
+    g_usbbd.cableState = 0x20;
+    func_00000688();
+    if (g_usbbd.actState == 0x200 && g_usbbd.unkE4 == 0x10) {
+        sceSysregUsbResetEnable();
+        sceSysregUsbResetDisable();
+        if (sceSysregUsbQueryIntr() & 4) {
+            sceSysregUsbAcquireIntr(4);
+        }
+        __asm__ __volatile__("sync");
+        sceKernelEnableIntr(0x39);
+    }
+    return -1;
+}
+#else
 INCLUDE_ASM("nonmatchings/usb", func_000070E8);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", func_00007188);
 
@@ -896,8 +1088,8 @@ INCLUDE_ASM("nonmatchings/usb", func_00007188);
 s32 func_000072A0(void) {
     sceSysregUsbAcquireIntr(4);
     if (g_usbbd.cableState != 0x10) {
-        g_usbbdHw.unk228 = sceKernelSetAlarm(3000, func_00005084, &g_usbbdHw);
-        if ((s32)g_usbbdHw.unk228 < 0) {
+        g_usbbdHw.alarm = sceKernelSetAlarm(3000, func_00005084, &g_usbbdHw);
+        if (g_usbbdHw.alarm < 0) {
             Kprintf("usbbd ERROR : cannot set alarm handler\n");
         }
     }
@@ -1155,7 +1347,32 @@ s32 func_00007554(s32 arg0) {
 INCLUDE_ASM("nonmatchings/usb", func_000075A4);
 #endif
 
+#if FW_VERSION == 100
+s32 func_000076B4(void) {
+    if (g_usbbd.unkE4 != 0x10) {
+        sceSysregUsbAcquireIntr(sceSysregUsbQueryIntr());
+        __asm__ __volatile__("sync");
+        sceSysregUsbIoEnable();
+        g_usbbd.unkE4 = 0x10;
+        if (sceSysregUsbGetConnectStatus() != 0) {
+            g_usbbd.cableState = 0x20;
+        }
+        func_00000688();
+        sceKernelEnableIntr(0x3A);
+        sceKernelEnableIntr(0x3B);
+        if (g_usbbd.actState == 0x200) {
+            sceSysregUsbClkEnable(1);
+            sceSysregUsbBusClockEnable();
+            if (g_usbbd.cableState == 0x20) {
+                func_00005B1C();
+            }
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/usb", func_000076B4);
+#endif
 
 #if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_0000A46C);
