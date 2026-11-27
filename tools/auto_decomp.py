@@ -173,12 +173,14 @@ OPTS = ("-O2", "-O1", "-Os", "-O0", "-O3", "-O2 -frename-registers", "-Os -frena
 def compile_words(c_text, compiler="1.7.1", opt="-O2"):
     with tempfile.TemporaryDirectory() as td:
         c, s, o = Path(td) / "f.c", Path(td) / "f.s", Path(td) / "f.o"
-        pre = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", f"-I{ROOT/'include'}", "-"],
+        cxx = "/* lang: c++ */" in c_text
+        pre = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", f"-I{ROOT/'include'}"] + (["-D__cplusplus=1"] if cxx else []) + ["-"],
                              input=c_text, capture_output=True, text=True)
         if pre.returncode:
             return None, pre.stderr
         c.write_text(pre.stdout)
-        r = subprocess.run([str(TOOLS / f"cc1-{compiler}"), *opt.split(), "-G0", "-quiet", str(c), "-o", str(s)],
+        cc, extra = (f"cc1plus-{compiler}", ["-fno-exceptions", "-fpermissive"]) if cxx else (f"cc1-{compiler}", [])
+        r = subprocess.run([str(TOOLS / cc), *opt.split(), *extra, "-G0", "-quiet", str(c), "-o", str(s)],
                            capture_output=True, text=True)
         if r.returncode or "warning: implicit" in r.stderr:
             return None, r.stderr

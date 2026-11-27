@@ -59,15 +59,71 @@ def decl(t, name):
     return f"{t}{'' if t.endswith('*') else ' '}{name}"
 
 
+_CXX_TYPES = {"int": "s32", "unsigned int": "u32", "short": "s16", "unsigned short": "u16", "char": "char",
+              "signed char": "s8", "unsigned char": "u8", "long": "s32", "unsigned long": "u32", "float": "f32",
+              "double": "f64", "long long": "s64", "unsigned long long": "u64", "bool": "bool", "wchar_t": "u16",
+              "void": "void"}
+
+
+def _cxx_param(t):
+    t = t.strip()
+    base = re.sub(r"\s*(const|volatile)\s*", " ", t).replace("&", "*").strip()
+    stars = base.count("*")
+    core = base.replace("*", "").strip()
+    if core in _CXX_TYPES and not (core == "void" and stars == 0):
+        return _CXX_TYPES[core] + " " + "*" * stars if stars else _CXX_TYPES[core]
+    return "void *" if stars or core else "void *"  # class/struct/enum/function types: opaque
+
+
+def cxx_proto(line):
+    """C++ units: an unprototyped `R f();` is `R f(void)` in C++. Mangled names give the real parameters
+    (member functions get `void *self` first); other unknown prototypes become `(...)`."""
+    m = re.match(r"^(.*?)\b(\w+)\(\);$", line)
+    if not m:
+        return line
+    ret, name = m[1], m[2]
+    if name.startswith("_Z"):
+        dm = subprocess.run(["c++filt", name], capture_output=True, text=True).stdout.strip()
+        pm = re.match(r"^(.*?)\((.*)\)( const)?$", dm)
+        if pm and dm != name:
+            qual, args = pm[1], pm[2]
+            params = [] if args in ("", "void") else [_cxx_param(a) for a in _split_args(args)]
+            # Ns::Class::method / ctor / dtor -> this; plain Ns::func can't be told apart, assume member
+            # unless the qualifier is a single namespace level known to be free functions
+            if "::" in qual and not re.match(r"^(vsh|paf|sce\w*)::\w+$", qual):
+                params = ["void *self"] + params
+            elif re.match(r"^(vsh|paf)::[A-Z]\w*::", qual + "::") and qual.count("::") >= 1 and not re.match(r"^(vsh|paf)::\w+$", qual):
+                params = ["void *self"] + params
+            return f"{ret}{name}({', '.join(params) or 'void'});"
+    return f"{ret}{name}(...);"
+
+
+def _split_args(args):
+    out, depth, cur = [], 0, ""
+    for ch in args:
+        depth += ch in "<(" ; depth -= ch in ">)"
+        if ch == "," and depth == 0:
+            out.append(cur); cur = ""
+        else:
+            cur += ch
+    return out + [cur]
+
+
 def write_decls(mod, store):
     src = sdir(mod)
     (src / f"{mod}_decls.json").write_text(json.dumps(store, indent=1, sort_keys=True))
     lines = [f"#ifndef {mod.upper()}_DECLS_H", f"#define {mod.upper()}_DECLS_H", "",
              '#include "common.h"', '#include "m2c_macros.h"', ""]
+    # C++ units: the decompiled names keep C linkage (a later definition inherits it)
+    cxx = any("/* lang: c++ */" in f.read_text() for f in src.glob("*.c"))
+    if cxx:
+        lines += ["#ifdef __cplusplus", 'extern "C" {', "#endif", ""]
     lines += [store["types"][k] + "\n" for k in sorted(store.get("types", {}))]
     lines += [store["vars"][k] for k in sorted(store["vars"])]
     lines.append("")
-    lines += [store["funcs"][k] for k in sorted(store["funcs"])]
+    lines += [cxx_proto(store["funcs"][k]) if cxx else store["funcs"][k] for k in sorted(store["funcs"])]
+    if cxx:
+        lines += ["", "#ifdef __cplusplus", "}", "#endif"]
     lines += ["", "#endif", ""]
     (src / f"{mod}_decls.h").write_text("\n".join(lines))
 

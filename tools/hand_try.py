@@ -39,9 +39,11 @@ def compiled_reloc_syms(c_text, comp, opt):
     from elftools.elf.relocation import RelocationSection
     with tempfile.TemporaryDirectory() as td:
         c, sf, o = Path(td) / "f.c", Path(td) / "f.s", Path(td) / "f.o"
-        c.write_text(subprocess.run(["cpp", "-P", "-undef", "-nostdinc", f"-I{ROOT / 'include'}", "-"],
+        cxx = "/* lang: c++ */" in c_text
+        c.write_text(subprocess.run(["cpp", "-P", "-undef", "-nostdinc", f"-I{ROOT / 'include'}"] + (["-D__cplusplus=1"] if cxx else []) + ["-"],
                                     input=c_text, capture_output=True, text=True).stdout)
-        subprocess.run([str(AD.TOOLS / f"cc1-{comp}"), *opt.split(), "-G0", "-quiet", str(c), "-o", str(sf)],
+        cc, extra = (f"cc1plus-{comp}", ["-fno-exceptions", "-fpermissive"]) if cxx else (f"cc1-{comp}", [])
+        subprocess.run([str(AD.TOOLS / cc), *opt.split(), *extra, "-G0", "-quiet", str(c), "-o", str(sf)],
                        capture_output=True)
         subprocess.run([str(AD.TOOLS / "psp-as-1.3.1"), "-EL", "-G0", "-mulsw", "-o", str(o), str(sf)],
                        capture_output=True)
