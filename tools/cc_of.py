@@ -37,7 +37,11 @@ def _pick(text, key, value_re, ver, default):
 ROOT = Path(__file__).resolve().parent.parent
 # psp-gcc release named in a binary's .comment -> cc1 we have for it
 KNOWN = {"1.3.1": "1.3.1", "1.5.1": "1.5.1", "1.5.1.internal": "1.5.1",
-         "1.6.1": "1.6.1", "1.6.1.internal": "1.6.1"}
+         "1.6.1": "1.6.1", "1.6.1.internal": "1.6.1",
+         # psp-gcc 1.8.x generates 1.7.1's code (psp-compiler-ground FINDINGS; 1.8.4 checked
+         # against every 1.51/1.52 C file built with 1.7.1: identical)
+         "1.7.1": "1.7.1", "1.8.0": "1.7.1", "1.8.0.internal": "1.7.1", "1.8.3": "1.7.1",
+         "1.8.3.internal": "1.7.1", "1.8.4": "1.7.1", "1.8.4.internal": "1.7.1"}
 
 
 def from_comment(mod, ver):
