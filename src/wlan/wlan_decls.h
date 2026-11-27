@@ -32,8 +32,14 @@ typedef struct SceWlanMlmeMsg {
     u8 pad5[3];
     u32 cmd;                        /* 0x08 */
     s32 status;                     /* 0x0C */
-    u32 arg;                        /* 0x10 (or a 6-byte address, cmd 7) */
-    void *buf;                      /* 0x14 */
+    union {
+        u32 arg;                    /* 0x10 (or a 6-byte address, cmd 7) */
+        u16 arg16;
+    };
+    union {
+        void *buf;                  /* 0x14 */
+        u32 arg2;
+    };
     u8 data[0xC4 - 0x18];
 } SceWlanMlmeMsg;
 
@@ -75,6 +81,14 @@ typedef struct {
     u32 w[10];
 } SceWlanWakeUp;
 
+/* scan result entry */
+typedef struct {
+    u8 bssid[6];                /* 0x00 */
+    u8 unk6[2];
+    u32 flags;                  /* 0x08 bit 0: new */
+    u8 *info;                   /* 0x0C */
+} SceWlanBssEnt;
+
 typedef struct SceWlanSoftc SceWlanSoftc;
 typedef struct SceWlanMac SceWlanMac;
 
@@ -103,7 +117,8 @@ typedef struct {
     u16 unk14;                  /* 0x14 */
     u8 unk16[2];
     u32 unk18;                  /* 0x18 */
-    u8 unk1C[0x34 - 0x1C];
+    u8 unk1C[0x30 - 0x1C];
+    s32 unk30;                  /* 0x30 */
     SceUID evf34;               /* 0x34 */
     SceUID evf38;               /* 0x38 */
     SceUID sema3C;              /* 0x3C */
@@ -144,7 +159,7 @@ struct SceWlanMac {
     u8 unk0D0[2];
     s16 unkD2;                  /* 0x0D2 */
     u8 unk0D4[0xE0 - 0xD4];
-    u8 **addrs;                 /* 0x0E0 */
+    SceWlanBssEnt **bss;        /* 0x0E0 */
     u8 unk0E4[4];
     u16 unkE8[3];               /* 0x0E8 */
     u8 unk0EE[2];
