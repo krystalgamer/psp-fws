@@ -390,6 +390,7 @@ s32 func_0000F16C(void);
 s32 func_0000F4E8(void);
 void func_0000F664(void);
 s32 func_0000F894(void);
+void func_0000FBD8(void);
 s32 func_000100F4(void);
 void func_00010270(void);
 s32 func_00010394(void);
