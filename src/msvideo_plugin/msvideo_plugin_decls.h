@@ -3777,6 +3777,7 @@ void func_0005E4B4(struct Unk_func_0005E4B4_0 *arg0);
 void func_0005E504(struct Unk_func_0005E504_0 *arg0);
 M2C_UNK func_0005EBB0(void *);
 s32 func_0005ECC4(struct Unk_func_0005ECC4_0 *arg0);
+void func_0005ECE0(void);
 M2C_UNK func_0005FF5C();
 s32 module_stop(void);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
