@@ -108,3 +108,4 @@ xx_stat = 0x00003778; // type:func rom:0x37F8
 _nulldev = 0x00003958; // type:func rom:0x39D8
 _nulldev_offt = 0x00003960; // type:func rom:0x39E0
 // shared names (tools/add_version.py) end
+g_ktls = 0x00004E50;
