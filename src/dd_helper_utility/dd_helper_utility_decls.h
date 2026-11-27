@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_000005A4_0 {
     M2C_UNK * unk0;
     s32 unk4;
@@ -48,6 +54,14 @@ extern M2C_UNK D_00004B7C;
 extern M2C_UNK D_00004B88;
 extern s32 D_00006F3C;
 
+M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);
+M2C_UNK _ZN3paf4View12PageActivateEPv(void *, s32);
+void *_ZN3paf4View4FindEPKc(const char *);
+s32 _ZN3vsh14GetString_BackEv(void);
+s32 _ZN3vsh15GetString_EnterEv(void);
+M2C_UNK _ZN3vsh30SetButtonNavigationString_BackEPKw(void *, s32);
+M2C_UNK _ZN3vsh31SetButtonNavigationString_EnterEPKw(void *, s32);
+M2C_UNK _ZdlPv(void *);
 void func_00000198(void);
 void func_00000204(void);
 s32 func_00000320(void);
@@ -92,17 +106,17 @@ s32 *func_00002760(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 s32 func_0000292C(M2C_UNK, M2C_UNK);
 void func_00002A3C(s32 arg0);
 void func_00002A68(s32 arg0);
-M2C_UNK func_00002C24();
+M2C_UNK func_00002C24(...);
 void func_00002FC0(void);
 M2C_UNK func_00002FDC(s32);
 void func_00002FF8(void);
-M2C_UNK func_00003014();
+M2C_UNK func_00003014(...);
 void func_000030DC(void);
 s32 *func_00003208(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
-M2C_UNK func_00003240();
+M2C_UNK func_00003240(...);
 void func_00003298(s32 *arg0);
-M2C_UNK func_000032C4();
-M2C_UNK func_000032F0();
+M2C_UNK func_000032C4(...);
+M2C_UNK func_000032F0(...);
 void func_00003370(void *arg0);
 void func_00003618(void *arg0);
 s32 func_00003738(M2C_UNK, M2C_UNK);
@@ -112,18 +126,18 @@ void func_000039D8(void *arg0, void *arg1, void *arg2);
 void func_000039F4(void *arg0, void *arg1, u32 arg2);
 void func_00003A10(void *arg0, void *arg1);
 s32 func_00003A2C(s32);
-M2C_UNK func_00004100();
+M2C_UNK func_00004100(...);
 void func_00004294(void *arg0);
 void func_000042DC(void *arg0);
 s32 module_stop(void);
 M2C_UNK sceCccUTF8toUTF16(s32, s32, s32);
 M2C_UNK sceHtmlViewerHelper_05E0C3D4(M2C_UNK);
-M2C_UNK sceHtmlViewerHelper_2030683A();
-M2C_UNK sceHtmlViewerHelper_4FA8ECCA();
+M2C_UNK sceHtmlViewerHelper_2030683A(...);
+M2C_UNK sceHtmlViewerHelper_4FA8ECCA(...);
 M2C_UNK sceHtmlViewerHelper_8B77E777(M2C_UNK);
-M2C_UNK sceHtmlViewerHelper_B1B946C4();
-M2C_UNK sceHtmlViewerHelper_C92C71B7();
-M2C_UNK sceHtmlViewerHelper_D2FC6A5A();
+M2C_UNK sceHtmlViewerHelper_B1B946C4(...);
+M2C_UNK sceHtmlViewerHelper_C92C71B7(...);
+M2C_UNK sceHtmlViewerHelper_D2FC6A5A(...);
 M2C_UNK sceHtmlViewerHelper_F27998C2(s32);
 s32 sceHttpAbortRequest(s32);
 s32 sceHttpDeleteConnection(s32);
@@ -138,26 +152,22 @@ s32 sceKernelDeleteSema(s32);
 M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
 s32 scePaf_3AC3E06A(s32);
 M2C_UNK scePaf_4729E549(s32);
-M2C_UNK sce_paf_private_swprintf(s32, s32, s32, M2C_UNK);
-M2C_UNK _ZdlPv();
-M2C_UNK sce_paf_private_free(s32);
-M2C_UNK _ZN3paf4View12PageActivateEPv(void *, s32);
-s32 sce_paf_private_malloc(s32);
 M2C_UNK scePaf_6261C0A5(void *);
 M2C_UNK scePaf_731CAA5B(s32, s32, s32);
-M2C_UNK sce_paf_private_free2(s32);
-void *scePaf_88784487(M2C_UNK *);
+void *scePaf_88784487(const char *);
 M2C_UNK scePaf_A013540A(s32, M2C_UNK *);
 s32 scePaf_C1B0AA0D(s32);
 M2C_UNK scePaf_C5DBD12F(void *, s32);
-s32 sce_paf_private_strlen(s32);
-M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);
-void *_ZN3paf4View4FindEPKc(M2C_UNK *);
 M2C_UNK scePaf_F5001144(s32);
+M2C_UNK sce_paf_private_free(s32);
+M2C_UNK sce_paf_private_free2(s32);
+s32 sce_paf_private_malloc(s32);
+s32 sce_paf_private_strlen(s32);
+M2C_UNK sce_paf_private_swprintf(s32, s32, s32, M2C_UNK);
 s32 sce_paf_private_wcslen(s32);
-M2C_UNK _ZN3vsh30SetButtonNavigationString_BackEPKw(void *, s32);
-M2C_UNK _ZN3vsh31SetButtonNavigationString_EnterEPKw(void *, s32);
-s32 _ZN3vsh15GetString_EnterEv();
-s32 _ZN3vsh14GetString_BackEv();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

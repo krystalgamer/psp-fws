@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "dd_helper_utility_decls.h"
@@ -184,7 +185,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000005F4);
 #if FW_VERSION < 330
 void func_000005F4(M2C_UNK **arg0) {
     *arg0 = &D_000047C8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
