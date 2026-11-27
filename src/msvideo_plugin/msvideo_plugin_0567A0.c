@@ -767,11 +767,11 @@ void func_000450C8(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_0567A0", func_0004188C);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION == 100 || FW_VERSION == 152
 void func_0004188C(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00065A58;
     M2C_FIELD(arg0, s32 *, 4) = 0;

@@ -49,7 +49,29 @@ void func_0005BB14(struct Unk_func_0005BB14_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_05B564", func_0005BB6C);
+#else
+void func_0005BB6C(s32 **arg0) {
+    s32 **temp_s0;
+    s32 **var_v0;
+
+    M2C_FIELD(arg0, s32 **, 0) = &D_00065A58;
+    if (M2C_FIELD(arg0, s32 *, 4) != 0) {
+        var_v0 = M2C_FIELD(arg0, s32 ***, 8);
+        if (var_v0 != NULL) {
+            do {
+                temp_s0 = M2C_FIELD(var_v0, s32 ***, 8);
+                if (var_v0 != NULL) {
+                    _ZdlPv(var_v0);
+                }
+                var_v0 = temp_s0;
+            } while (temp_s0 != NULL);
+        }
+    }
+    _ZdlPv(arg0);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_05B564", func_0005BBD8);
 
