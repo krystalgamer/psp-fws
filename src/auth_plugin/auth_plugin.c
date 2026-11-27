@@ -491,7 +491,13 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00001F64);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00001FCC);
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002058);
+#else
+void func_00002058(s32 arg0) {
+    _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_00002C4C);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_0000207C);
 
