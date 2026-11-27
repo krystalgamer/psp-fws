@@ -78,8 +78,8 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastAdjustedTime);
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 s32 module_start(void) {
-    memset(&D_00004580.unk0, 0, 0x60);
-    D_00004580.unk1C = -1;
+    memset(&D_00004580, 0, sizeof(D_00004580));
+    D_00004580.cbId = -1;
     func_0000358C();
     D_00004580.unk0 = 0;
     D_00004580.unk8 = 0;
@@ -94,7 +94,7 @@ s32 module_start(void) {
 
 #if FW_VERSION < 270
 s32 module_start(void) {
-    memset(&D_00004580.unk0, 0, 0x58);
+    memset(&D_00004580, 0, sizeof(D_00004580));
     func_0000358C();
     D_00004580.unk0 = 0;
     D_00004580.unk8 = 0;
@@ -123,8 +123,8 @@ s32 module_reboot_before(void) {
 
 #if FW_VERSION >= 282
 s32 module_start(void) {
-    memset(&D_00004580, 0, 0x60);
-    D_00004580.unk1C = -1;
+    memset(&D_00004580, 0, sizeof(D_00004580));
+    D_00004580.cbId = -1;
     D_00004580.unk0 = 0;
     D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
@@ -147,8 +147,8 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcInit);
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 s32 sceRtcInit(void) {
-    memset(&D_00004580.unk0, 0, 0x60);
-    D_00004580.unk1C = -1;
+    memset(&D_00004580, 0, sizeof(D_00004580));
+    D_00004580.cbId = -1;
     func_0000358C();
     D_00004580.unk0 = 0;
     D_00004580.unk8 = 0;
@@ -163,7 +163,7 @@ s32 sceRtcInit(void) {
 
 #if FW_VERSION < 270
 s32 sceRtcInit(void) {
-    memset(&D_00004580.unk0, 0, 0x58);
+    memset(&D_00004580, 0, sizeof(D_00004580));
     func_0000358C();
     D_00004580.unk0 = 0;
     D_00004580.unk8 = 0;
@@ -205,8 +205,8 @@ s32 sceRtcResume(void) {
 
 #if FW_VERSION >= 270
 s32 sceRtcReset(void) {
-    D_00004580.unk14 = 0;
-    D_00004580.unk10 = 0;
+    D_00004580.secureTickValid = 0;
+    D_00004580.tickValid = 0;
     return 0;
 }
 #endif
@@ -481,16 +481,16 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC2822);
 INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC3339);
 
 #if FW_VERSION < 282
-s32 func_000032D0(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s8 *, 0) = (s8) (((arg1 / 10) % 10) + 0x30);
-    M2C_FIELD(arg0, s8 *, 1) = (s8) ((arg1 % 10) + 0x30);
-    return arg0 + 2;
+char *func_000032D0(char *buf, s32 n) {
+    buf[0] = (n / 10) % 10 + '0';
+    buf[1] = n % 10 + '0';
+    return buf + 2;
 }
 #else
-s32 func_00003AF8(struct Unk_func_00003AF8_0 *arg0, s32 arg1) {
-    arg0->unk0 = (s8) (((arg1 / 10) % 10) + 0x30);
-    arg0->unk1 = (s8) ((arg1 % 10) + 0x30);
-    return (u8 *)arg0 + 2;
+char *func_00003AF8(char *buf, s32 n) {
+    buf[0] = (n / 10) % 10 + '0';
+    buf[1] = n % 10 + '0';
+    return buf + 2;
 }
 #endif
 
