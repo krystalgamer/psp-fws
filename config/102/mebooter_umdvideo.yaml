@@ -1,0 +1,71 @@
+name: mebooter_umdvideo (102)
+sha1: 4d0c172e14fc3a2ac9f96e621d2071ddc7c61174
+options:
+  basename: mebooter_umdvideo
+  target_path: tmp/baserom/102/mebooter_umdvideo.prx
+  elf_path: tmp/build/102/mebooter_umdvideo.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/102/mebooter_umdvideo
+  src_path: src/mebooter_umdvideo
+  build_path: tmp/build/102
+  ld_script_path: tmp/build/102/mebooter_umdvideo.ld
+  cache_path: tmp/build/102/.splat_cache.mebooter_umdvideo
+  symbol_addrs_path:
+    - config/102/symbol_addrs.mebooter_umdvideo.txt
+    - tmp/build/102/prx_syms.mebooter_umdvideo.txt
+  reloc_addrs_path: [tmp/build/102/reloc_addrs.mebooter_umdvideo.txt]
+  asset_path: tmp/assets/102/mebooter_umdvideo
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/102/undefined_funcs_auto.mebooter_umdvideo.txt
+  undefined_syms_auto_path: tmp/build/102/undefined_syms_auto.mebooter_umdvideo.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x7FF0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x1E5B8
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: mebooter_umdvideo
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, mebooter_umdvideo]
+      - { start: 0x244, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x284, type: prxpad, order: .text }
+      - { start: 0x290, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x294, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x2B4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x2B8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x2BC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x30C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x310, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x344, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x3C8, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x3E8, type: prxpad, order: .rodata }
+      - [0x3F0, rodata, mebooter_umdvideo]
+      - { start: 0x1E628, type: prxpad, order: .rodata }
+  - [0x1E630, bin, elf_trailer]
+  - [0x1EC9C]
