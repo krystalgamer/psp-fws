@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_D_0001D580 {
     u8 pad0[0x10];
     s32 unk10;
@@ -185,8 +191,8 @@ extern s32 D_0001D78C;
 extern s32 D_0001E390;
 extern M2C_UNK func_0000085C;
 
-M2C_UNK RebootLock_Lock();
-M2C_UNK RebootLock_Unlock();
+M2C_UNK RebootLock_Lock(...);
+M2C_UNK RebootLock_Unlock(...);
 M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);
 M2C_UNK _ZN3paf4View12PageActivateEPv(void *, s32);
 void *_ZN3paf4View4FindEPKc(s32);
@@ -198,7 +204,7 @@ M2C_UNK _ZN3paf6PhText10RemoveAttrENS_14PhTextAttrTypeEjj(s32, M2C_UNK, M2C_UNK,
 M2C_UNK _ZN3paf6PhText13EnsureVisibleEv(s32);
 s32 _ZN3paf6PhText13SetCurrentPosEj(s32);
 M2C_UNK _ZN3paf6PhText9EraseTextEjj(s32, M2C_UNK, s32);
-s32 _ZN3paf8PhAppear12ShadowRenderEv();
+s32 _ZN3paf8PhAppear12ShadowRenderEv(void);
 M2C_UNK _ZN3paf9PhHandler11KillTimerCBEi(s32, s32);
 M2C_UNK _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(s32, M2C_UNK, M2C_UNK *, M2C_UNK);
 M2C_UNK _ZN3paf9PhSRender8SetStyleEii(s32, M2C_UNK, s32);
@@ -207,7 +213,7 @@ s32 _ZN3vsh26ShowButtonNavigation_EnterEb(M2C_UNK);
 s32 _ZN3vsh27ShowButtonNavigation_OptionEb(M2C_UNK);
 s32 _ZNK3paf4View10FindWidgetEPKc(s32, M2C_UNK *);
 s32 _ZNK3paf6PhText13GetTextLengthEv(s32);
-M2C_UNK _ZdlPv();
+M2C_UNK _ZdlPv(void *);
 void func_00000330(void);
 s32 func_00000338(void *arg0, s32 arg1);
 void func_00000368(void);
@@ -255,7 +261,7 @@ M2C_UNK func_00005B8C(s32, M2C_UNK);
 void func_00005BA4(void);
 void func_00005E8C(void);
 s32 func_0000601C(struct Unk_func_0000601C_0 *arg0, s32 arg1);
-M2C_UNK func_00006134();
+M2C_UNK func_00006134(...);
 void func_00006344(void);
 void func_0000643C(void *arg0);
 s32 func_000064F0(void);
@@ -272,7 +278,7 @@ void func_00006D10(M2C_UNK **arg0);
 void func_00006D18(void);
 void func_00006D38(void);
 void func_00006DB8(s32 *arg0, s32 arg1);
-M2C_UNK func_00006F5C();
+M2C_UNK func_00006F5C(...);
 void func_000071C8(M2C_UNK **arg0);
 void func_0000772C(M2C_UNK **arg0);
 void func_0000773C(M2C_UNK **arg0);
@@ -309,7 +315,7 @@ s32 func_0000B074(void);
 void func_0000B328(void);
 M2C_UNK func_0000B80C(s32);
 s32 func_0000B868(s32, s32);
-M2C_UNK func_0000B888();
+M2C_UNK func_0000B888(...);
 s32 func_0000BDF4(s32);
 s32 func_0000C710(struct Unk_func_0000C710_0 *arg0);
 s32 func_0000C79C(s32);
@@ -380,7 +386,7 @@ void func_0000E450(void *arg0, s32 arg1);
 u16 func_0000E468(void *arg0);
 s32 func_0000E6A0(s32 arg0, s32 arg1);
 s32 func_0000E7F0(s32, s32);
-M2C_UNK func_0000E870();
+M2C_UNK func_0000E870(...);
 s32 func_0000EA70(void);
 s32 func_0000EA7C(void);
 s32 func_0000EAC8(s32);
@@ -395,7 +401,7 @@ s32 func_000100F4(void);
 void func_00010270(void);
 s32 func_00010394(void);
 s32 func_000104A0(void);
-M2C_UNK func_00010E74();
+M2C_UNK func_00010E74(...);
 s32 module_stop(void);
 M2C_UNK sceKernelPowerLock(M2C_UNK);
 M2C_UNK sceKernelPowerUnlock(M2C_UNK);
@@ -404,7 +410,7 @@ M2C_UNK scePaf_08350B98(s32, M2C_UNK, M2C_UNK *, M2C_UNK);
 M2C_UNK scePaf_205BA4F0(s32, s32);
 s32 scePaf_2AFF2618(s32);
 s32 scePaf_4F20E8B0(s32, M2C_UNK *);
-M2C_UNK scePaf_51618363();
+M2C_UNK scePaf_51618363(...);
 M2C_UNK scePaf_58DF4B4F(struct Unk_D_0001D580 *, M2C_UNK);
 M2C_UNK scePaf_6268D8D2(s32);
 void *scePaf_88784487(s32);
@@ -417,10 +423,14 @@ M2C_UNK sceUtilityDialogPowerLock(M2C_UNK);
 M2C_UNK sceUtilityDialogPowerUnlock(M2C_UNK);
 M2C_UNK sceUtility_private_0C804C87(M2C_UNK);
 M2C_UNK sceUtility_private_3187AC5B(M2C_UNK);
-M2C_UNK sceVshCommonUtil_8BC15F89();
-M2C_UNK sceVshCommonUtil_EA163CDB();
+M2C_UNK sceVshCommonUtil_8BC15F89(...);
+M2C_UNK sceVshCommonUtil_EA163CDB(...);
 void *sce_paf_private_bsearch(s32, M2C_UNK *, M2C_UNK, M2C_UNK, void (*)());
 M2C_UNK sce_paf_private_free(s32);
-M2C_UNK sce_paf_private_strcmp();
+M2C_UNK sce_paf_private_strcmp(...);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

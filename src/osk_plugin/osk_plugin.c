@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "osk_plugin_decls.h"
 
@@ -1761,7 +1762,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_00006C44);
 
 void func_00006D10(M2C_UNK **arg0) {
     *arg0 = &D_00010920;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/osk_plugin", func_00006B78);
@@ -2023,7 +2024,7 @@ INCLUDE_ASM("nonmatchings/osk_plugin", func_000071C8);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000071C8(M2C_UNK **arg0) {
     *arg0 = &D_00012220;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -2521,7 +2522,7 @@ void func_0000772C(M2C_UNK **arg0) {
 
 void func_0000773C(M2C_UNK **arg0) {
     *arg0 = &D_00010920;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
