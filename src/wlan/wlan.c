@@ -471,7 +471,36 @@ s32 sceWlanDevSetGPIO(u32 pin, s32 val) {
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceWlanDevSetGPIO(u32 pin, s32 val) {
+    SceWlanSoftc *sc = D_000191B0;
+    u32 oldK1 = shiftK1();
+    s32 ret;
+    u32 set[4];
+    u32 dir[4];
+
+    if (pin >= 8) {
+        ret = 0x800001FE;
+    } else {
+        if ((sc->flags & 0x80) == 0)
+            func_0000970C(sc->mac, 1);
+        dir[0] = pin;
+        dir[1] = 1;
+        func_0000B050(sc->mac, 0x206, dir);
+        set[0] = pin;
+        set[1] = (val == 1);
+        ret = func_0000B050(sc->mac, 0x208, set);
+        if ((sc->flags & 0x80) == 0)
+            func_00009678(sc->mac, 1);
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDevSetGPIO);
 #endif
 
