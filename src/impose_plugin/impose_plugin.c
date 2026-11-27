@@ -344,7 +344,7 @@ void func_0000104C(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00001054);
 #else
 void func_00001054(s32 arg0) {
