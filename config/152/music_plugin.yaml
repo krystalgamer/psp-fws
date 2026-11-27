@@ -55,7 +55,14 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, music_plugin]
+      - [0x1FCFC, c, music_plugin_0001E7E0]
+      - [0x257A4, c, music_plugin_00024250]
+      - [0x2A664, c, music_plugin_00029198]
+      - [0x38A24, c, music_plugin_000363AC]
+      - [0x454E8, c, music_plugin_00041D54]
+      - [0x4EAB0, c, music_plugin_0004B204]
       - [0x5135C, c, music_plugin_04DA94]
+      - [0x53158, c, music_plugin_0004F644]
       - [0x5C0B4, c, music_plugin_crtend]
       - { start: 0x5D9A0, type: asm, name: fini, linker_section: .fini }
       - { start: 0x5D9BC, type: asm, name: sceStub, linker_section: .sceStub.text }
@@ -75,7 +82,14 @@ segments:
       - { start: 0x5EE60, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x5EE64, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x5EE98, .rodata, music_plugin]
+      - [0x61324, .rodata, music_plugin_0001E7E0]
+      - [0x61808, .rodata, music_plugin_00024250]
+      - [0x61C80, .rodata, music_plugin_00029198]
+      - [0x62A24, .rodata, music_plugin_000363AC]
+      - [0x63CC8, .rodata, music_plugin_00041D54]
+      - [0x64CB8, .rodata, music_plugin_0004B204]
       - [0x64CE8, .rodata, music_plugin_04DA94]
+      - [0x64DB8, .rodata, music_plugin_0004F644]
       - [0x65558, .rodata, music_plugin_crtend]
       - { start: 0x65760, type: prxpad, order: .rodata }
   - name: music_plugin_seg1

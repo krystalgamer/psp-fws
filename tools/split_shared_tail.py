@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Move the tail of a shared module source, from one function to the end, into its own TU.
 
-    tools/split_shared_tail.py VER MODULE FUNC STEM [CFLAGS]
+    tools/split_shared_tail.py VER MODULE FUNC STEM [CFLAGS] [--no-check]
+
+--no-check: no builds before or after (current builds of every version must
+match; verify after a batch of cuts, which don't move anything).
 
 For objects linked last that were built separately (e.g. crtend's
 __do_global_ctors_aux at -O2 in an -Os module). FUNC is the entry name in the
@@ -35,8 +38,10 @@ def run(*cmd):
 
 
 def main():
-    ver, mod, func, stem = sys.argv[1:5]
-    cflags = sys.argv[5] if len(sys.argv) > 5 else ""
+    nocheck = "--no-check" in sys.argv
+    argv = [a for a in sys.argv if a != "--no-check"]
+    ver, mod, func, stem = argv[1:5]
+    cflags = argv[5] if len(argv) > 5 else ""
     sd = src_dir(ver, mod)
     vers = sharing_versions(ver, mod)
     fv = sorted({fw(v) for v in vers})
@@ -75,10 +80,11 @@ def main():
 
     # configs first (from current builds, before the source moves)
     for v in targets:
-        rc, out = run("tools/regress.sh", f"{v}:{mod}")
-        if rc or ": OK" not in out:
-            restore()
-            sys.exit(f"{v}:{mod}: does not build before the split")
+        if not nocheck:
+            rc, out = run("tools/regress.sh", f"{v}:{mod}")
+            if rc or ": OK" not in out:
+                restore()
+                sys.exit(f"{v}:{mod}: does not build before the split")
         rc, out = run(".venv/bin/python", "tools/split_tu.py", v, mod, f"{first[v]}:{cflags}", "--config-only", f"--stem={stem}")
         if rc:
             restore()
@@ -92,6 +98,9 @@ def main():
     body = FM.emit(tail, fv).replace(f'nonmatchings/{owner.stem}"', f'nonmatchings/{stem}"')
     (sd / f"{stem}.c").write_text(header + body.lstrip("\n"))
     owner.write_text(FM.emit(ents[:k], fv).rstrip("\n") + "\n")
+    if nocheck:
+        print(f"{mod}: {func} -> {stem}.c (unverified) for {targets}")
+        return
     rc, out = run("tools/regress.sh", "--shared", f"{ver}:{mod}")
     bad = [l for l in out.splitlines() if ": OK" not in l and l.strip()]
     if bad:

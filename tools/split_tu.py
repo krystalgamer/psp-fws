@@ -120,7 +120,7 @@ def main():
                 cands = [m[1]] if m else []
                 m = re.search(r"INCLUDE_ASM\(\"([^\"]+)\", (\w+)\)", l)
                 if m:
-                    s = ROOT / m[1] / f"{m[2]}.s"
+                    s = ROOT / "tmp/asm" / ver / mod / m[1] / f"{m[2]}.s"
                     if s.exists():
                         for sec in re.split(r"^\s*\.section\s+", s.read_text(), flags=re.M)[1:]:
                             if sec.startswith((".rodata", ".late_rodata")):
@@ -164,7 +164,10 @@ def main():
             if not existing:
                 sys.exit(f"no {kind} subsegment in config")
             last = max(i for _, i in existing)
-            allc = sorted([(int(re.search(r"0x[0-9A-Fa-f]+", l)[0], 16), l) for _, i in existing for l in [lines_[i]]]
+            new_at = {int(re.search(r"0x[0-9A-Fa-f]+", e)[0], 16) for e in entries}
+            # an existing piece starting where a new one starts is empty in this version: replaced
+            allc = sorted([(int(re.search(r"0x[0-9A-Fa-f]+", l)[0], 16), l) for _, i in existing for l in [lines_[i]]
+                           if int(re.search(r"0x[0-9A-Fa-f]+", l)[0], 16) not in new_at]
                           + [(int(re.search(r"0x[0-9A-Fa-f]+", e)[0], 16), e) for e in entries])
             first_i = min(i for _, i in existing)
             out = lines_[:first_i] + [l for _, l in allc] + lines_[last + 1:]
