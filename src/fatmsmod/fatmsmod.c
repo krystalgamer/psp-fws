@@ -260,7 +260,37 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000134);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000264);
 
-#if FW_VERSION >= 151
+#if FW_VERSION >= 151 && FW_VERSION < 260
+void *get_heap(SceUID *heap, SceSize size) {
+    s32 intr;
+    FatmsHeapEnt *p;
+    void *mem;
+
+    intr = sceKernelCpuSuspendIntr();
+    p = D_0001B298;
+    while (p->mem != NULL) {
+        p++;
+        if (p > &D_0001B298[128]) {
+            sceKernelCpuResumeIntr(intr);
+            return NULL;
+        }
+    }
+    p->mem = (void *)-1;
+    sceKernelCpuResumeIntr(intr);
+    *heap = sceKernelCreateHeap(1, size, 1, D_00015B80);
+    if (*heap < 0) {
+        Kprintf("prfile_mod.c:%s:Cannot create heap:0x%x\n", "get_heap", *heap);
+        p->mem = NULL;
+        return NULL;
+    }
+    mem = sceKernelAllocHeapMemory(*heap, size);
+    p->mem = mem;
+    p->heap = *heap;
+    return mem;
+}
+#endif
+
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/fatmsmod", get_heap);
 #endif
 

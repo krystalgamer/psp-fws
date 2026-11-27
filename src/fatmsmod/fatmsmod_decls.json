@@ -113,6 +113,8 @@
   "func_00008708": "s32 func_00008708(s32 arg0);",
   "func_000088F8": "s32 func_000088F8(s32 arg0);",
   "func_00008900": "s8 func_00008900(s8 arg0);",
+  "func_00008954": "s32 func_00008954(u32 cl, u32 value); /* set FAT entry */",
+  "func_000090A8": "s32 func_000090A8(u32 cl, u32 *newcl); /* allocate a free cluster after cl */",
   "func_0000931C": "s32 func_0000931C(void);",
   "func_00009C74": "void func_00009C74(void);",
   "func_00009D50": "s32 func_00009D50(void);",
@@ -321,6 +323,7 @@
  },
  "vars": {
   "D_00014704": "extern const char D_00014704[]; /* \"FATMS\" */",
+  "D_00015B80": "extern const char D_00015B80[]; /* \"FATMS\" (1.5x) */",
   "D_000193F8": "extern u8 D_000193F8;",
   "D_000193FC": "extern u8 D_000193FC;",
   "D_00019500": "extern s32 D_00019500; /* mount count */",

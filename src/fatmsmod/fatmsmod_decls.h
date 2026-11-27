@@ -375,6 +375,7 @@ struct Unk_func_00013798_0 {
 #endif
 
 extern const char D_00014704[]; /* "FATMS" */
+extern const char D_00015B80[]; /* "FATMS" (1.5x) */
 extern u8 D_000193F8;
 extern u8 D_000193FC;
 extern s32 D_00019500; /* mount count */
@@ -546,6 +547,8 @@ s32 func_00008274(s32, s32, s32, s32);
 s32 func_00008708(s32 arg0);
 s32 func_000088F8(s32 arg0);
 s8 func_00008900(s8 arg0);
+s32 func_00008954(u32 cl, u32 value); /* set FAT entry */
+s32 func_000090A8(u32 cl, u32 *newcl); /* allocate a free cluster after cl */
 s32 func_0000931C(void);
 void func_00009C74(void);
 s32 func_00009D50(void);
