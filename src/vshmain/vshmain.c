@@ -1793,11 +1793,11 @@ INCLUDE_ASM("nonmatchings/vshmain", func_000041B4);
 INCLUDE_ASM("nonmatchings/vshmain", func_0000438C);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/vshmain", func_000041D0);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 s32 *func_000041D0(s32 *arg0, s32 arg1, s32 arg2) {
     *arg0 = func_00004524(arg1, arg2);
     return arg0;
@@ -4701,7 +4701,7 @@ void func_0000EC84(void) {
 }
 #endif
 
-#if FW_VERSION >= 151
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshmain", func_0000ECA4);
 #else
 void func_0000ECA4(s32 arg0) {
@@ -9116,11 +9116,11 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0001E6F4);
 INCLUDE_ASM("nonmatchings/vshmain", func_0001E960);
 #endif
 
-#if FW_VERSION >= 151
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/vshmain", func_0001E734);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_0001E734(s32 arg0) {
     void **temp_v0;
 
@@ -9891,11 +9891,11 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0002053C);
 
 INCLUDE_ASM("nonmatchings/vshmain", func_00020578);
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/vshmain", func_00011988);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 void func_00011988(void *arg0) {
     if (arg0 != NULL) {
         M2C_FIELD(arg0, s32 *, 0x94) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B1F4);
@@ -11349,11 +11349,11 @@ s32 func_00023E70(struct Unk_func_00023E70_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/vshmain", func_00023E78);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 152
 void func_00023E78(void *arg0, s32 *arg1) {
     _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), (s32) arg1, 0, 0);
 }
