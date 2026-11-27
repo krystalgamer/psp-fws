@@ -3,19 +3,9 @@
 #include "k1.h"
 #include "power_decls.h"
 
-/* shiftK1 whose `srl $k1` the assembler can't move into a call's delay slot:
-   no power version has it in one (1.00 scePowerIsPowerOnline keeps
-   `jal sceSysconIsAcSupplied; nop`). */
 /* The request/resume-count readers access the switch state as volatile (base
    address kept in a register); its initialisation stores plainly. */
 #define g_PowerSwitchV (*(volatile ScePowerSwitch *)&g_PowerSwitch)
-
-static inline u32 shiftK1NoSlot(void) {
-    u32 oldK1;
-
-    __asm__ __volatile__(".set noreorder\n\tmove %0, $27\n\tsrl $27, $27, 16\n\t.set reorder" : "=r"(oldK1));
-    return oldK1;
-}
 
 #if FW_VERSION == 100
 s32 scePowerInit(void) {
@@ -983,7 +973,7 @@ s32 scePowerSetCpuClockFrequency(s32 freq) {
     if (freq <= 0 || freq > g_PowerFreq.pllClockFrequencyInt) {
         return 0x800001FE;
     }
-    oldK1 = shiftK1NoSlot();
+    oldK1 = shiftK1Noreorder();
     intr = sceKernelCpuSuspendIntr();
     if (freq < g_PowerFreq.scCpuClockLowerLimit) {
         freq = g_PowerFreq.scCpuClockLowerLimit;
@@ -1010,7 +1000,7 @@ s32 scePowerSetBusClockFrequency(s32 freq) {
     if (freq <= 0 || freq > g_PowerFreq.pllClockFrequencyInt / 2) {
         return 0x800001FE;
     }
-    oldK1 = shiftK1NoSlot();
+    oldK1 = shiftK1Noreorder();
     intr = sceKernelCpuSuspendIntr();
     if (freq < g_PowerFreq.scBusClockLowerLimit) {
         freq = g_PowerFreq.scBusClockLowerLimit;
@@ -1738,7 +1728,7 @@ s32 scePowerBatteryPermitCharging(void) {
 
 s32 scePowerIsPowerOnline(void) {
     s32 ret;
-    u32 oldK1 = shiftK1NoSlot();
+    u32 oldK1 = shiftK1Noreorder();
 
     ret = sceSysconIsAcSupplied();
     setK1(oldK1);
