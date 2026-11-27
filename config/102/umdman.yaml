@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, umdman]
+      - [0x80, c, umdman]
       - { start: 0xDE70, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xE248, type: prxpad, order: .text }
       - { start: 0xE250, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -65,7 +65,7 @@ segments:
       - { start: 0xE3B8, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0xE858, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - { start: 0xEA44, type: prxpad, order: .rodata }
-      - [0xEA80, rodata, umdman]
+      - [0xEA80, .rodata, umdman]
       - { start: 0xF01C, type: prxpad, order: .rodata }
   - name: umdman_seg1
     type: code
