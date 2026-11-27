@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/mediaman
-  src_path: src/mediaman
+  src_path: tmp/av_src/102/mediaman
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/mediaman.ld
   cache_path: tmp/build/102/.splat_cache.mediaman
@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, mediaman]
+      - [0x80, c, mediaman]
       - { start: 0x2640, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2750, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x2754, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -63,7 +63,7 @@ segments:
       - { start: 0x281C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x2850, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x2AC0, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x2B48, rodata, mediaman]
+      - [0x2B48, .rodata, mediaman]
       - { start: 0x2B9C, type: prxpad, order: .rodata }
   - name: mediaman_seg1
     type: code
