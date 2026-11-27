@@ -51,7 +51,11 @@ typedef struct {
     s8 unk55;
     u8 pad56[0xA];
     volatile s32 unk60;
-    u8 pad64[0x3C];
+    u8 pad64[0x18];
+    s32 brightness;           /* 0x7C */
+    s32 unk80;
+    s32 brightnessFade;       /* 0x84 */
+    u8 pad88[0x18];
     s32 resumeMode;           /* 0xA0 */
 #else
     u8 pad0[0x60];
@@ -63,7 +67,11 @@ typedef struct {
 #if FW_VERSION >= 310
     u8 pad6B[0x91];
 #else
-    u8 pad6B[0x95];
+    u8 pad6B[0x6D];
+    s32 brightness;           /* 0xD8 */
+    s32 unkDC;
+    s32 brightnessFade;       /* 0xE0 */
+    u8 padE4[0x1C];
 #endif
 #else
     u8 pad65[7];
@@ -148,7 +156,7 @@ s32 module_start(void);
 s32 sceDisplayEnd(void);
 s32 sceDisplayGetCurrentHcount(void);
 s8 sceDisplayGetForegroundLevel(void);
-s32 sceDisplayGetFrameBuf(void *arg0, void *arg1, void *arg2, s32 arg3);
+s32 sceDisplayGetFrameBuf(void **topaddr, s32 *bufferWidth, s32 *pixelFormat, s32 sync);
 void sceDisplayGetFramePerSec(void);
 s32 sceDisplayGetVblankRest(void);
 s32 sceDisplayGetVcount(void);
@@ -162,7 +170,7 @@ s32 sceDisplaySetResumeMode(s32 arg0);
 s32 sceDisplayWaitVblankStart(void);
 s32 sceDisplayWaitVblankStartCB(void);
 s8 sceDisplay_driver_23CE8C51(void);
-s32 sceDisplay_driver_5B5AEFAD(s32, s32, s32, s32, s32);
+s32 sceDisplay_driver_5B5AEFAD(s32 pri, void **topaddr, s32 *bufferWidth, s32 *pixelFormat, s32 sync);
 s32 sceDisplay_driver_63E22A26(s32, s32, s32, s32, s32);
 s32 sceDisplay_driver_66961521(void);
 s32 sceDmacplusLcdcDisable(void);
