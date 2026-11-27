@@ -176,6 +176,35 @@ typedef struct {
     u32 totalBlocks; /* 0x8 */
 } SceNandChipEntry;
 
+/* loadcore exec file info (1.00 copy in loadelf.c). Offsets 0x10, 0x20, 0x48 confirmed in the 1.00 asm;
+   names from uOFW (6.60 layout, same offsets up to here). */
+typedef struct {
+    u32 unk0;
+    u32 modeAttribute; /* 0x4 */
+    u32 apiType; /* 0x8 */
+    u32 unkC;
+    u32 execSize; /* 0x10 */
+    u32 maxAllocSize; /* 0x14 */
+    s32 decompressionMemId; /* 0x18 */
+    void *fileBase; /* 0x1C */
+    s32 elfType; /* 0x20, 1 = PRX, 2 = ELF */
+    void *topAddr; /* 0x24 */
+    u32 entryAddr; /* 0x28 */
+    u32 unk2C;
+    u32 modCodeSize; /* 0x30 */
+    u32 textSize; /* 0x34 */
+    u32 dataSize; /* 0x38 */
+    u32 bssSize; /* 0x3C */
+    u32 partitionId; /* 0x40 */
+    u32 isKernelMod; /* 0x44 */
+    u32 isDecrypted; /* 0x48 */
+} SceLoadCoreExecFileInfo;
+/* "~SCE" wrapper header in front of a module (magic 0x4543537E, size at 4) */
+typedef struct {
+    u32 magic; /* 0x0 */
+    u32 size; /* 0x4 */
+} SceHeader;
+
 /* 1.00: 8 bytes (no d_userfd_count yet). */
 struct SceIoDeviceEntry {
     SceIoDeviceTable *d_dp; /* 0x0 */
@@ -287,7 +316,7 @@ struct Unk_func_0000D694_0 {
 };
 
 extern void *D_00014D00;
-extern s32 (*D_00014EE4)(s32, s32);
+extern s32 (*D_00014EE4)(s32, u32);
 extern char D_00015D38[];
 extern const SceNandChipEntry D_00016C14[17];
 extern s32 (*D_00016DE4)(); /* (void *arg, const char *fmt, va_list ap[, 0 in 1.50]) */
@@ -333,7 +362,6 @@ s32 df_remove(void *iob, char *name);
 s32 df_rename(void *iob, const char *oldname);
 s32 df_rmdir(void *iob, char *name);
 s32 func_00000000(s32);
-void func_000003BC(void (*arg0)(s32));
 void func_00000768(s32 arg0);
 void *func_000012BC(const void *s, s32 c, s32 n);
 s32 func_000012F4(const char *s);
@@ -342,7 +370,6 @@ s32 func_00001B94(u32 bit);
 s32 func_00001BCC(u32 bit);
 s32 func_00001C08(void);
 void func_00001C14(s32 arg0);
-void func_00001C20(s32 arg0, s32 arg1);
 s32 func_00001C64(s32 arg0);
 s32 func_00001C74(void);
 s32 func_00001CA4(s32 (*arg0)(void));
@@ -368,9 +395,9 @@ s32 func_000033C4(void);
 s32 func_000033EC(void);
 void func_0000348C(s8 arg0);
 s32 func_00003AC8(s32 arg0);
-void func_00003B50(void *arg0, s32 arg1);
-s32 func_00003B68(s32 arg0, void *arg1);
-s32 func_00003DD8(void *arg0);
+void func_00003B50(SceLoadCoreExecFileInfo *execInfo, s32 ret);
+s32 func_00003B68(s32 arg0, SceLoadCoreExecFileInfo *execInfo);
+s32 func_00003DD8(SceHeader *hdr);
 M2C_UNK func_000040CC();
 s32 func_00004244(s8 c);
 s32 func_0000436C(u8 *buf, s32 n);
@@ -488,6 +515,9 @@ void *memmove(void *dst, const void *src, s32 n);
 void *memset(void *s, s32 c, s32 n);
 s32 module_bootstart(void);
 s32 prnt(void (*put)(char **, s32), char **arg, const char *fmt, void *ap);
+s32 sceKernelLoadExecutableObject(u8 *buf, SceLoadCoreExecFileInfo *execInfo);
+void sceKernelRegisterAssertHandler(void (*arg0)(s32));
+void sceKernelRegisterKprintfHandler(s32 arg0, s32 arg1);
 s32 sceNandCollectEcc(s32 a0, s32 a1);
 s32 sceNandEraseBlockWithRetry(u32 ppn);
 s32 sceNandReadBlockWithRetry(u32 ppn, void *user, void *spare);

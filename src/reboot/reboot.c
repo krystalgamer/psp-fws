@@ -6,7 +6,7 @@
 #include "reboot_decls.h"
 
 #if FW_VERSION == 100
-s32 func_00000000_v100(void) {
+s32 FlashInitialize(void) {
     if (func_00006FA4(0) < 0) {
         Kprintf("flash.c:%s:sceBootLfatfsMount failed\n", "FlashInitialize");
         return 0x80020001;
@@ -23,12 +23,12 @@ s32 module_bootstart(void) {
     return 0;
 }
 
-void func_000003BC(void (*arg0)(s32)) {
+void sceKernelRegisterAssertHandler(void (*arg0)(s32)) {
     D_00017124 = arg0;
 }
 
 #if FW_VERSION == 100
-void func_000003C8(s32 test, u32 lvl) {
+void sceKernelAssert(s32 test, u32 lvl) {
     u32 cur = ((u32)func_00001D14() & 0x300) >> 8;
 
     if (test != 0) {
@@ -46,7 +46,7 @@ void func_000003C8(s32 test, u32 lvl) {
     Kprintf("assertion ignore (level %d >= %d)\n", lvl, cur);
 }
 #else
-void func_000003C8(s32 test, s32 lvl) {
+void sceKernelAssert(s32 test, s32 lvl) {
     s32 cur = __builtin_allegrex_ext(func_00001D14(), 8, 2);
 
     if (test != 0) {
@@ -144,7 +144,7 @@ void func_00001C14(s32 arg0) {
     D_00017134 = arg0;
 }
 
-void func_00001C20(s32 arg0, s32 arg1) {
+void sceKernelRegisterKprintfHandler(s32 arg0, s32 arg1) {
     D_00016DE4 = arg0;
     D_00016DE8 = arg1;
 }

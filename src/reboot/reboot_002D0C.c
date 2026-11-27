@@ -356,21 +356,21 @@ INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00014EAC);
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004B70);
 
 #if FW_VERSION == 100
-void func_00003B50(void *arg0, s32 arg1) {
-    if (arg1 == 0) {
-        M2C_FIELD(arg0, s32 *, 0x48) = 1;
+void func_00003B50(SceLoadCoreExecFileInfo *execInfo, s32 ret) {
+    if (ret == 0) {
+        execInfo->isDecrypted = 1;
         return;
     }
-    M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    execInfo->isDecrypted = 0;
 }
 
-s32 func_00003B68(s32 arg0, void *arg1) {
+s32 func_00003B68(s32 arg0, SceLoadCoreExecFileInfo *arg1) {
     s32 temp_v0;
     s32 var_v0;
 
     var_v0 = 0x8002013A;
     if (D_00014EE4 != NULL) {
-        temp_v0 = D_00014EE4(arg0, M2C_FIELD(arg1, s32 *, 0x10));
+        temp_v0 = D_00014EE4(arg0, arg1->execSize);
         func_00003B50(arg1, temp_v0);
         var_v0 = temp_v0;
     }
@@ -379,14 +379,14 @@ s32 func_00003B68(s32 arg0, void *arg1) {
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003BC4_v100);
 
-s32 func_00003DD8(void *arg0) {
-    s32 var_a1;
+s32 func_00003DD8(SceHeader *hdr) {
+    s32 size;
 
-    var_a1 = 0;
-    if (M2C_FIELD(arg0, s32 *, 0) == 0x4543537E) {
-        var_a1 = M2C_FIELD(arg0, s32 *, 4);
+    size = 0;
+    if (hdr->magic == 0x4543537E) {
+        size = hdr->size;
     }
-    return var_a1;
+    return size;
 }
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003DFC);
@@ -427,11 +427,11 @@ INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00015164);
 #if FW_VERSION == 100
 extern char D_00015164[];
 
-s32 func_000045FC(u8 *buf, void *execInfo) {
-    if (func_00003DD8(buf) != 0) {
+s32 sceKernelLoadExecutableObject(u8 *buf, SceLoadCoreExecFileInfo *execInfo) {
+    if (func_00003DD8((SceHeader *)buf) != 0) {
         buf += 0x40;
     }
-    switch (M2C_FIELD(execInfo, s32 *, 0x20)) {
+    switch (execInfo->elfType) {
     case -1:
     case 0:
         break;

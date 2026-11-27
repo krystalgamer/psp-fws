@@ -1,7 +1,7 @@
 // function starts pinned by tools/split_tu.py
 func_00000000 = 0x00000000; // type:func
-func_000003BC = 0x000003BC; // type:func
-func_000003C8 = 0x000003C8; // type:func
+sceKernelRegisterAssertHandler = 0x000003BC; // type:func
+sceKernelAssert = 0x000003C8; // type:func
 func_00000450 = 0x00000450; // type:func
 func_00000554 = 0x00000554; // type:func
 func_00000720 = 0x00000720; // type:func
@@ -12,7 +12,7 @@ func_000011B4 = 0x000011B4; // type:func
 func_00001AAC = 0x00001AAC; // type:func
 Kprintf = 0x00001B78; // type:func
 func_00001C14 = 0x00001C14; // type:func
-func_00001C20 = 0x00001C20; // type:func
+sceKernelRegisterKprintfHandler = 0x00001C20; // type:func
 func_00001C34 = 0x00001C34; // type:func
 func_00001C64 = 0x00001C64; // type:func
 func_00001C74 = 0x00001C74; // type:func

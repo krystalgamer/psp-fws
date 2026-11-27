@@ -51,3 +51,4 @@ sceNandDoMarkAsBadBlock = 0x00012670; // type:func
 sceNandTestBlock = 0x00012A30; // type:func
 sceNandWriteBlock = 0x00012C04; // type:func
 sprintf_putc = 0x00003A14; // type:func
+sceKernelAssert = 0x000003C8; // type:func
