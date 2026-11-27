@@ -2,10 +2,6 @@
 #include "common.h"
 #include "pspnet_adhocctl_decls.h"
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_00000000);
-#endif
-
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00005D84);
 
@@ -64,9 +60,7 @@ INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00006094);
 INCLUDE_RODATA("nonmatchings/pspnet_adhocctl", D_00006098);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlInit);
-#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlJoin);
@@ -226,17 +220,13 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_lib_EFA6AEAF);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetThreadExitDeleteEventFlag);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_00000854);
-
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", func_00000890);
-#endif
-
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlAddInternalHandler);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", LinkDiscoverSkip);
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctl_lib_CDEA7ACB);
 #endif
 
