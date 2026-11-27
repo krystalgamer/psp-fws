@@ -4,6 +4,10 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+/* small-data globals: these TUs were built with -G8 (gp-size 8) and assembled with -G0,
+   so gcc emits `sw $4,sym` macros that gas expands with $at */
+#define SDATA __attribute__((section(".sdata")))
+
 typedef int SceMode;
 typedef s64 SceOff;
 typedef s32 SceSSize;
@@ -267,11 +271,17 @@ struct Unk_func_0000D694_0 {
     u8 unk3;
 };
 
-extern s32 D_00016DEC;
+extern s32 D_00016DE4 SDATA;
+extern s32 D_00016DE8 SDATA;
+extern s32 D_00016DEC SDATA;
 extern M2C_UNK D_00016DF1;
-extern s32 D_00017140;
-extern s32 D_00017144;
-extern s32 D_00017148;
+extern s32 D_00017124 SDATA;
+extern s32 D_00017134 SDATA;
+extern s32 D_00017138 SDATA;
+extern s32 (*D_0001713C)(void) SDATA;
+extern u32 D_00017140 SDATA;
+extern s32 D_00017144 SDATA;
+extern s32 D_00017148 SDATA;
 extern void *D_00017344;
 extern void **D_00017348;
 extern void *D_0001734C;

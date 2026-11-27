@@ -15,7 +15,9 @@ s32 module_bootstart(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/reboot", func_000003BC);
+void func_000003BC(s32 arg0) {
+    D_00017124 = arg0;
+}
 
 INCLUDE_ASM("nonmatchings/reboot", func_000003C8);
 
@@ -63,9 +65,14 @@ INCLUDE_ASM("nonmatchings/reboot", func_00001AAC);
 INCLUDE_ASM("nonmatchings/reboot", func_00001B78);
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot", func_00001C14);
+void func_00001C14(s32 arg0) {
+    D_00017134 = arg0;
+}
 
-INCLUDE_ASM("nonmatchings/reboot", func_00001C20);
+void func_00001C20(s32 arg0, s32 arg1) {
+    D_00016DE4 = arg0;
+    D_00016DE8 = arg1;
+}
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot", func_000012BC);
@@ -83,8 +90,24 @@ INCLUDE_ASM("nonmatchings/reboot", func_00001B78);
 INCLUDE_ASM("nonmatchings/reboot", func_00001C34);
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot", func_00001C64);
+s32 func_00001C64(s32 arg0) {
+    D_00017138 = arg0;
+    return 0;
+}
 
+#if FW_VERSION == 100
+s32 func_00001C74(void) {
+    s32 (*f)(void) = D_0001713C;
+    if (f != NULL) {
+        return f();
+    }
+    return 0x80020001;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot", func_00001C74);
+#endif
 
-INCLUDE_ASM("nonmatchings/reboot", func_00001CA4);
+s32 func_00001CA4(s32 (*arg0)(void)) {
+    D_0001713C = arg0;
+    return 0;
+}

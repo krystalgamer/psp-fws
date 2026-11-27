@@ -124,6 +124,7 @@
   "module_bootstart": "s32 module_bootstart(void);"
  },
  "types": {
+  "000_sdata": "/* small-data globals: these TUs were built with -G8 (gp-size 8) and assembled with -G0,\n   so gcc emits `sw $4,sym` macros that gas expands with $at */\n#define SDATA __attribute__((section(\".sdata\")))",
   "00_typedefs": "typedef int SceMode;\ntypedef s64 SceOff;\ntypedef s32 SceSSize;\ntypedef struct SceIoStat SceIoStat;\ntypedef struct SceIoDirent SceIoDirent;\ntypedef struct SceIoIob SceIoIob;\ntypedef struct SceIoDeviceEntry SceIoDeviceEntry;\ntypedef struct SceIoDeviceTable SceIoDeviceTable;\ntypedef struct SceIoDeviceFunction SceIoDeviceFunction;",
   "01_SceIoStat": "typedef struct {\n    u16 year; /* 0x0 */\n    u16 month; /* 0x2 */\n    u16 day; /* 0x4 */\n    u16 hour; /* 0x6 */\n    u16 minute; /* 0x8 */\n    u16 second; /* 0xA */\n    u32 microsecond; /* 0xC */\n} ScePspDateTime;\n\n/* 0x58 bytes */\nstruct SceIoStat {\n    SceMode st_mode; /* 0x0 */\n    u32 st_attr; /* 0x4 */\n    SceOff st_size; /* 0x8 */\n    ScePspDateTime st_ctime; /* 0x10 */\n    ScePspDateTime st_atime; /* 0x20 */\n    ScePspDateTime st_mtime; /* 0x30 */\n    u32 st_private[6]; /* 0x40 */\n};",
   "09_FatDirEntry": "typedef struct FatDirEntry FatDirEntry;\n/* FAT 8.3 directory entry (32 bytes) */\nstruct FatDirEntry {\n    u8 name[8]; /* 0x0 */\n    u8 ext[3]; /* 0x8 */\n    u8 attr; /* 0xB */\n    u8 ntRes; /* 0xC */\n    u8 crtTimeTenth; /* 0xD */\n    u16 crtTime; /* 0xE */\n    u16 crtDate; /* 0x10 */\n    u16 lstAccDate; /* 0x12 */\n    u16 fstClusHi; /* 0x14 */\n    u16 wrtTime; /* 0x16 */\n    u16 wrtDate; /* 0x18 */\n    u16 fstClusLo; /* 0x1A */\n    u32 fileSize; /* 0x1C */\n};",
@@ -147,11 +148,17 @@
   "Unk_func_0000D694_0": "struct Unk_func_0000D694_0 {\n    u8 pad0[0x2];\n    u8 unk2;\n    u8 unk3;\n};"
  },
  "vars": {
-  "D_00016DEC": "extern s32 D_00016DEC;",
+  "D_00016DE4": "extern s32 D_00016DE4 SDATA;",
+  "D_00016DE8": "extern s32 D_00016DE8 SDATA;",
+  "D_00016DEC": "extern s32 D_00016DEC SDATA;",
   "D_00016DF1": "extern M2C_UNK D_00016DF1;",
-  "D_00017140": "extern s32 D_00017140;",
-  "D_00017144": "extern s32 D_00017144;",
-  "D_00017148": "extern s32 D_00017148;",
+  "D_00017124": "extern s32 D_00017124 SDATA;",
+  "D_00017134": "extern s32 D_00017134 SDATA;",
+  "D_00017138": "extern s32 D_00017138 SDATA;",
+  "D_0001713C": "extern s32 (*D_0001713C)(void) SDATA;",
+  "D_00017140": "extern u32 D_00017140 SDATA;",
+  "D_00017144": "extern s32 D_00017144 SDATA;",
+  "D_00017148": "extern s32 D_00017148 SDATA;",
   "D_00017344": "extern void *D_00017344;",
   "D_00017348": "extern void **D_00017348;",
   "D_0001734C": "extern void *D_0001734C;",
