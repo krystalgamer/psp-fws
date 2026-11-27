@@ -297,3 +297,16 @@ D_0000A6E0_v103 = 0x0000A6E0; // rom:0xA760
 D_0000AF78_v103 = 0x0000AF78; // rom:0xAFF8
 func_000012D4_v103 = 0x000012D4; // type:func rom:0x1354
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+vshRegSysconfGetParentalLockLevel = 0x0000089C; // type:func
+vshRegSysconfGetSummerTimeMode = 0x00000E00; // type:func
+vshRegSysconfGetDateTimeFormat = 0x00000F04; // type:func
+_ZN3vsh23FormatFileSizeString_KBEPwij = 0x00001204; // type:func
+_ZN3vsh17FormatFreeSize_KBEPwij = 0x00001274; // type:func
+_ZN3vsh9PowerLockC1Ei = 0x00001440; // type:func
+sceIoMkdir = 0x0000A144; // type:func
+sceIoDevctl = 0x0000A154; // type:func
+scePowerCancelRequest = 0x0000A254; // type:func
+sceKernelPowerLock = 0x0000A2AC; // type:func
+sceKernelPowerUnlock = 0x0000A2B4; // type:func
