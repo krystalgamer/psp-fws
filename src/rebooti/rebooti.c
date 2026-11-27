@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "rebooti_decls.h"
 
@@ -87,9 +88,7 @@ s32 func_00001CB8(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00001CC0);
 
-void func_00001CCC(s32 arg0, M2C_UNK arg1) {
-    func_00001ED0(arg1, arg0);
-}
+INCLUDE_ASM("nonmatchings/rebooti", func_00001CCC);
 
 void func_00001CF0(void) {
     func_00001F44();
@@ -97,31 +96,13 @@ void func_00001CF0(void) {
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00001D0C);
 
-s32 func_00001D2C(s32 arg0) {
-    s32 var_v0;
+INCLUDE_ASM("nonmatchings/rebooti", func_00001D2C);
 
-    var_v0 = arg0;
-    if (func_00001DA4() & 2) {
-        var_v0 = (arg0 & 0xFF) - 0x20;
-    }
-    return var_v0;
-}
-
-s32 func_00001D68(s32 arg0) {
-    s32 var_v0;
-
-    var_v0 = arg0;
-    if (func_00001DA4() & 1) {
-        var_v0 = (arg0 & 0xFF) + 0x20;
-    }
-    return var_v0;
-}
+INCLUDE_ASM("nonmatchings/rebooti", func_00001D68);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00001DA4);
 
-M2C_UNK *func_00001DB4(void) {
-    return &D_00014F21;
-}
+INCLUDE_ASM("nonmatchings/rebooti", func_00001DB4);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00001DC0);
 
@@ -264,27 +245,13 @@ INCLUDE_RODATA("nonmatchings/rebooti", D_00012FEC);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00003AD8);
 
-void func_00003BB4(struct Unk_func_00003BB4_0 *arg0, s32 arg1) {
-    if (arg1 == 0) {
-        arg0->unk48 = 1;
-        return;
-    }
-    arg0->unk48 = 0;
-}
+INCLUDE_ASM("nonmatchings/rebooti", func_00003BB4);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00003BCC);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00003C8C);
 
-s32 func_00003ED8(struct Unk_func_00003ED8_0 *arg0) {
-    s32 var_a1;
-
-    var_a1 = 0;
-    if (arg0->unk0 == 0x4543537E) {
-        var_a1 = arg0->unk4;
-    }
-    return var_a1;
-}
+INCLUDE_ASM("nonmatchings/rebooti", func_00003ED8);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00003EFC);
 
@@ -425,7 +392,14 @@ void func_00007EF0(struct Unk_func_00007EF0_0 *arg0, M2C_UNK arg1, M2C_UNK arg2)
     func_000069D4(arg0->unk10, arg1, arg2, 0);
 }
 
-INCLUDE_ASM("nonmatchings/rebooti", func_00007F40);
+s32 func_00007F40(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_s1;
+
+    func_0000CE50();
+    temp_s1 = func_00009284(arg0, arg1, arg2);
+    func_0000CE50();
+    return temp_s1;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00007F98);
 
@@ -433,13 +407,64 @@ INCLUDE_ASM("nonmatchings/rebooti", func_00007FF0);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00008078);
 
-INCLUDE_ASM("nonmatchings/rebooti", func_000080C0);
+s32 func_000080C0(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_s1;
 
-INCLUDE_ASM("nonmatchings/rebooti", func_00008118);
+    func_0000CE50();
+    temp_s1 = func_00009630(arg0, arg1, arg2);
+    func_0000CE50();
+    return temp_s1;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti", func_00008160);
+s32 func_00008118(s32 arg0, s32 arg1) {
+    s32 temp_s1;
 
-INCLUDE_ASM("nonmatchings/rebooti", func_000081A8);
+    func_0000CE50();
+    temp_s1 = func_00009A08(arg0, arg1);
+    func_0000CE50();
+    return temp_s1;
+}
+
+s32 func_00008160(s32 arg0, s32 arg1) {
+    s32 temp_s1;
+
+    func_0000CE50();
+    temp_s1 = func_00009CCC(arg0, arg1);
+    func_0000CE50();
+    return temp_s1;
+}
+
+s32 func_000081A8(void *arg0) {
+    void **temp_a2;
+    void **temp_v0;
+    void *temp_a0;
+    void *temp_a1;
+    void *temp_a3;
+
+    func_0000CE50();
+    temp_a0 = M2C_FIELD(arg0, void **, 0x10);
+    if (temp_a0 != NULL) {
+        temp_a3 = M2C_FIELD(temp_a0, void **, 8);
+        temp_a1 = M2C_FIELD(temp_a0, void **, 0);
+        temp_a2 = M2C_FIELD(temp_a0, void ***, 4);
+        M2C_FIELD(temp_a3, s32 *, 8) = (s32) (M2C_FIELD(temp_a3, s32 *, 8) - 1);
+        if (temp_a1 != NULL) {
+            M2C_FIELD(temp_a1, void ***, 4) = temp_a2;
+        } else {
+            D_00015478 = temp_a2;
+        }
+        temp_v0 = M2C_FIELD(temp_a0, void ***, 4);
+        if (temp_v0 != NULL) {
+            *temp_v0 = temp_a1;
+        } else {
+            D_00015474 = temp_a1;
+        }
+        M2C_FIELD(temp_a0, void **, 0) = (void *) D_0001547C;
+        D_0001547C = temp_a0;
+    }
+    func_0000CE50(temp_a0);
+    return 0;
+}
 
 void func_00008238(s32 arg0, M2C_UNK arg1) {
     func_0000CE50();
@@ -455,7 +480,10 @@ INCLUDE_ASM("nonmatchings/rebooti", func_000082C0);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00008328);
 
-INCLUDE_ASM("nonmatchings/rebooti", func_00008368);
+s32 func_00008368(s32 arg0, s32 arg1) {
+    func_00001A54((s32) "%s: iob=%p name=%s\n", (s32) "UFatChdir", arg0, arg1);
+    return 0x8001B000;
+}
 
 s32 func_000083A0(void) {
     s32 temp_s0;
@@ -473,7 +501,9 @@ s32 func_000083CC(void) {
     return temp_s0;
 }
 
-INCLUDE_ASM("nonmatchings/rebooti", func_000083F8);
+s32 func_000083F8(void) {
+    return 0x8001B000;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00008404);
 
@@ -555,7 +585,9 @@ INCLUDE_ASM("nonmatchings/rebooti", func_0000C2C0);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000C3C8);
 
-INCLUDE_ASM("nonmatchings/rebooti", func_0000C4D4);
+s32 func_0000C4D4(void *arg0) {
+    return (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
+}
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000C4E8);
 
@@ -604,9 +636,13 @@ s32 func_0000CE94(void) {
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000CEB4);
 
-INCLUDE_ASM("nonmatchings/rebooti", func_0000CEE4);
+void func_0000CEE4(void) {
+    func_0000D0EC((s32) &D_0001B9B8);
+}
 
-INCLUDE_ASM("nonmatchings/rebooti", func_0000CF04);
+void func_0000CF04(void) {
+    func_0000E190((s32) &D_0001B9B8);
+}
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000CF24);
 
@@ -618,7 +654,9 @@ INCLUDE_ASM("nonmatchings/rebooti", func_0000D02C);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000D090);
 
-INCLUDE_ASM("nonmatchings/rebooti", func_0000D0E0);
+s32 func_0000D0E0(void) {
+    return 0x8001B000;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000D0EC);
 
@@ -690,7 +728,17 @@ INCLUDE_RODATA("nonmatchings/rebooti", D_00014A2C);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000EF84);
 
-INCLUDE_ASM("nonmatchings/rebooti", func_0000F0FC);
+void func_0000F0FC(s32 arg0) {
+    s32 var_a1;
+    s8 *temp_v0;
+
+    var_a1 = 0;
+    do {
+        temp_v0 = arg0 + var_a1;
+        var_a1 += 1;
+        *temp_v0 = -1;
+    } while (var_a1 < 0xC);
+}
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000F120);
 
@@ -732,13 +780,19 @@ INCLUDE_ASM("nonmatchings/rebooti", func_0000FB78);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000FBAC);
 
-INCLUDE_ASM("nonmatchings/rebooti", func_0000FBE0);
+s32 func_0000FBE0(void) {
+    return 0x8001B000;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti", func_0000FBEC);
+s32 func_0000FBEC(void) {
+    return 0x8001B000;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000FBF8);
 
-INCLUDE_ASM("nonmatchings/rebooti", func_0000FC94);
+s32 func_0000FC94(void) {
+    return 0x8001B000;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0000FCA0);
 
@@ -816,11 +870,17 @@ INCLUDE_ASM("nonmatchings/rebooti", func_00011648);
 
 INCLUDE_ASM("nonmatchings/rebooti", func_0001177C);
 
-INCLUDE_ASM("nonmatchings/rebooti", func_0001192C);
+s32 func_0001192C(void) {
+    return D_00016CF4;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti", func_00011938);
+s32 func_00011938(void) {
+    return D_00016CF8;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti", func_00011944);
+s32 func_00011944(void) {
+    return D_00016CFC;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti", func_00011950);
 
@@ -994,9 +1054,13 @@ void func_000125EC(void) {
     func_000127F8(0x800, 0);
 }
 
-INCLUDE_ASM("nonmatchings/rebooti", func_0001260C);
+s32 func_0001260C(void) {
+    return 0x80000004;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti", func_00012618);
+s32 func_00012618(void) {
+    return 0x80000004;
+}
 
 void func_00012624(void) {
     func_000127F8(0x2000, 1);
