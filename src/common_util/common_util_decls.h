@@ -52,12 +52,12 @@ s32 sceKernelPowerUnlock(s32);
 s32 sceKernelResumeDispatchThread(s32);
 s32 sceKernelSuspendDispatchThread(void);
 s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);
-M2C_UNK sce_paf_private_printf(M2C_UNK *);
 M2C_UNK scePowerCancelRequest();
 M2C_UNK sceRegCloseCategory(s32);
+M2C_UNK sceRegCloseRegistry(s32);
 M2C_UNK sceRegFlushCategory(s32);
 M2C_UNK sceRegFlushRegistry(s32);
-M2C_UNK sceRegCloseRegistry(s32);
+s32 sceSystemFileFree(s32);
 void sceVshCommonUtil_0587F20C(void);
 void sceVshCommonUtil_0713D516(void);
 void sceVshCommonUtil_0AF412FC(void);
@@ -92,8 +92,8 @@ void sceVshCommonUtil_E3761034(void);
 void sceVshCommonUtil_E8297686(void *arg0);
 void sceVshCommonUtil_E85C45FF(void *arg0);
 s32 sceVshCommonUtil_EA163CDB(void);
-s32 sceSystemFileFree(s32);
 void sceVshCommonUtil_F25CBB92(void);
 void sceVshCommonUtil_F6567B66(void);
+M2C_UNK sce_paf_private_printf(M2C_UNK *);
 
 #endif
