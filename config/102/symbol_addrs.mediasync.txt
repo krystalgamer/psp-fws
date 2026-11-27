@@ -15,3 +15,22 @@ sceLfatfsStop = 0x00000544; // type:func rom:0x5C4
 sceKernelSetEventFlag = 0x000005A4; // type:func rom:0x624
 sceUmdGetErrorStat = 0x000005CC; // type:func rom:0x64C
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+module_start = 0x00000000; // type:func
+sceKernelGetChunk = 0x0000054C; // type:func
+sceKernelInitApitype = 0x00000554; // type:func
+sceKernelInitFileName = 0x0000055C; // type:func
+sceIoDevctl = 0x00000564; // type:func
+Kprintf = 0x0000056C; // type:func
+sceKernelGetBlockHeadAddr = 0x00000574; // type:func
+strncmp = 0x0000057C; // type:func
+sceKernelCreateCallback = 0x00000584; // type:func
+sceKernelDeleteCallback = 0x0000058C; // type:func
+sceKernelCreateEventFlag = 0x00000594; // type:func
+sceKernelDeleteEventFlag = 0x0000059C; // type:func
+sceKernelWaitEventFlagCB = 0x000005AC; // type:func
+sceUmdCheckMedium = 0x000005B4; // type:func
+sceUmdWaitDriveStat = 0x000005C4; // type:func
+sceUmdRegisterUMDCallBack = 0x000005D4; // type:func
+sceUmdUnRegisterUMDCallBack = 0x000005DC; // type:func
