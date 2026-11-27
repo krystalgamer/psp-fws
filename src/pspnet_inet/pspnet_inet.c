@@ -582,10 +582,17 @@ s32 soaccept(struct socket *so, struct mbuf *nam) {
     _sce_pspnet_splunlock(s);
     return error;
 }
-#else
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/pspnet_inet", soconnect);
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", soaccept);
 #endif
 
+#if FW_VERSION != 102
 s32 soconnect(struct socket *so, struct mbuf *nam) {
     s32 s;
     s32 error;
@@ -612,6 +619,7 @@ s32 soconnect2(struct socket *so1, struct socket *so2) {
     _sce_pspnet_splunlock(s);
     return error;
 }
+#endif
 
 s32 soshutdown(struct socket *so, s32 how) {
     struct protosw *pr = so->so_proto;
@@ -3008,7 +3016,13 @@ s32 in_localaddr(struct in_addr in) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_canforward);
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION == 150
 s32 in_canforward(struct in_addr in) {
     u32 net;
 
@@ -3102,11 +3116,15 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000129AC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012AC4);
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_broadcast);
+#endif
+
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012730);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION == 100 || FW_VERSION == 150
 s32 in_broadcast(struct in_addr in, struct ifnet *ifp) {
     struct ifaddr *ifa;
 
@@ -3342,7 +3360,7 @@ noname:
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 in_pcbconnect(void *v, struct mbuf *nam) {
     struct inpcb *inp = v;
     struct in_ifaddr *ia;
@@ -5660,7 +5678,7 @@ INCLUDE_RODATA("nonmatchings/pspnet_inet", chap);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002590C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002DFB4);
 #endif
 
@@ -6213,7 +6231,7 @@ void func_00028778(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sppp_pap_open(struct sppp *sp) {
     if (sp->myauth_proto == PPP_PAP) {
         D_0002BBCC(sp);
@@ -6239,7 +6257,7 @@ void func_000287F4(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_000287F4(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x188) != 2) {
         sppp_cp_change_state(&pap, arg0, STATE_CLOSED);
@@ -6342,7 +6360,7 @@ void func_000289B0(struct Unk_func_000289B0_0 *arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000289C0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_000289C0(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x18C) != 2) {
         sppp_cp_change_state(&chap, arg0, STATE_CLOSED);
@@ -6780,7 +6798,13 @@ void func_0002C9DC(u8 *p, s32 n) {
         }
     }
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002CA04);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 s32 func_0002CA04(const char *s1, const char *s2) {
     if (s1 == NULL || s2 == NULL) {
         if (s1 == s2)
@@ -6806,7 +6830,9 @@ char *func_0002CA84(const char *s, s32 c) {
     } while (*s++ != '\0');
     return NULL;
 }
+#endif
 
+#if FW_VERSION < 201
 char *func_0002CAB4(char *s, char c) {
     char *p = s;
     if (s == NULL) {
