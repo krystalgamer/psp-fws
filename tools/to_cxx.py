@@ -156,8 +156,8 @@ def _call_span(line, name, start=0):
     return None
 
 
-def _enclosing_params(lines, idx):
-    """Parameter names of the function definition containing line idx."""
+def _enclosing_def(lines, idx):
+    """Index and parameter names of the function definition containing line idx."""
     for j in range(idx, -1, -1):
         m = re.match(r"^[\w][^;{]*?\b\w+\((.*)\)\s*\{\s*$", lines[j])
         if m:
@@ -166,10 +166,18 @@ def _enclosing_params(lines, idx):
                 pm = re.search(r"(\w+)\s*(\[[^\]]*\])?\s*$", p.strip())
                 if pm and p.strip() not in ("void", ""):
                     names.append(pm[1])
-            return names
+            return j, names
         if lines[j].startswith("}"):
-            return []
-    return []
+            return None, []
+    return None, []
+
+
+def _enclosing_params(lines, idx):
+    return _enclosing_def(lines, idx)[1]
+
+
+# definitions whose parameter list a fixer changed: name -> new prototype (the driver updates the decls)
+CHANGED_PROTOS = {}
 
 
 def _mangled_short(name):
@@ -187,10 +195,20 @@ def fix_too_few(lines, idx, msg):
         return False
     o, c, args = span
     have = len(args)
-    mine = _enclosing_params(lines, idx)
+    j, mine = _enclosing_def(lines, idx)
     need = len(params)
-    if len(mine) < need:
+    if j is None:
         return False
+    if len(mine) < need:
+        # the caller passes its own a0..aN through untouched, so m2c saw no use: add the parameters
+        if any(not re.fullmatch(r"arg\d+", n) for n in mine) or [f"arg{i}" for i in range(len(mine))] != mine:
+            return False
+        dm = re.match(r"^(.*?\b(\w+))\((.*)\)(\s*\{\s*)$", lines[j])
+        ps = [] if dm[3].strip() in ("", "void") else [dm[3]]
+        ps += [f"s32 arg{i}" for i in range(len(mine), need)]
+        lines[j] = f"{dm[1]}({', '.join(ps)}){dm[4]}"
+        CHANGED_PROTOS[dm[2]] = f"{dm[1]}({', '.join(ps)});"
+        mine = [f"arg{i}" for i in range(need)]
     extra = mine[have:need]
     new = ", ".join([lines[idx][a:b].strip() for a, b in args] + extra)
     lines[idx] = lines[idx][:o + 1] + new + lines[idx][c:]
@@ -211,11 +229,35 @@ def _cast_arg(lines, idx, name, argno, typ):
     return True
 
 
+STORE = {}
+
+
+def _set_param(name, argno, typ):
+    """Retype parameter argno of a decls prototype (m2c guessed M2C_UNK * for strings)."""
+    proto = STORE.get("funcs", {}).get(name)
+    if not proto:
+        return False
+    pm = re.match(r"^(.*?\b" + re.escape(name) + r")\((.*)\);$", proto)
+    if not pm:
+        return False
+    ps = [x.strip() for x in structify._split_args(pm[2])]
+    if argno > len(ps) or ps[argno - 1] == "...":
+        return False
+    pname = re.search(r"\b(arg\d+)$", ps[argno - 1])
+    ps[argno - 1] = typ + (f" {pname[1]}" if pname else "")
+    CHANGED_PROTOS[name] = f"{pm[1]}({', '.join(ps)});"
+    return True
+
+
 def fix_convert_arg(lines, idx, msg):
-    """`cannot convert `A*' to `B*' for argument `N' to `R f(...)'`: m2c structs of one object; cast."""
+    """`cannot convert `A*' to `B*' for argument `N' to `R f(...)'`: string literals retype the
+    callee's parameter to `const char *`; m2c's per-function structs of one object get a cast."""
     m = re.search(r"cannot convert `(.+?)' to `(.+?)' for argument `(\d+)' to `(?:.*?)\b(\w+)\(", msg)
     if not m:
         return False
+    if m[1] == "const char*" and re.fullmatch(r"(M2C_UNK|s32|u32|s8|u8|void|char)\s*\*", m[2]):
+        if m[4] in CHANGED_PROTOS or _set_param(m[4], int(m[3]), "const char *"):
+            return True
     return _cast_arg(lines, idx, m[4], int(m[3]), m[2])
 
 
@@ -283,6 +325,9 @@ def main():
     store_p = sd / f"{mod}_decls.json"
     structify.SRC[mod] = sd
     store = __import__("json").loads(store_p.read_text()) if store_p.exists() else {"funcs": {}, "vars": {}, "types": {}}
+    STORE.clear()
+    STORE.update(store)
+    store = STORE
     structify.write_decls(mod, store)
     print(f"{mod}: {len(files)} units marked C++, {nots} `!(x & K)` rewritten, versions {' '.join(vers)}")
 
@@ -309,6 +354,12 @@ def main():
                 else:
                     fixed += 1
             f.write_text("\n".join(lines))
+        if CHANGED_PROTOS:
+            for name, proto in CHANGED_PROTOS.items():
+                if name in store["funcs"]:
+                    store["funcs"][name] = proto
+            CHANGED_PROTOS.clear()
+            structify.write_decls(mod, store)
         print(f"round {rnd + 1}: {n} error lines, {fixed} fixed")
         if not fixed:
             break
