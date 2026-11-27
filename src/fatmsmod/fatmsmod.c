@@ -261,7 +261,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000134);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000264);
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000318);
+INCLUDE_ASM("nonmatchings/fatmsmod", get_heap);
 #endif
 
 #if FW_VERSION == 100
@@ -359,7 +359,7 @@ s32 free_heap(SceUID heap, void *mem) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000320);
+INCLUDE_ASM("nonmatchings/fatmsmod", get_heap);
 #endif
 
 #if FW_VERSION >= 150
@@ -476,7 +476,7 @@ s32 add_drive_name(char *buf, const char *name, s32 unit) {
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000058C);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000654);
+INCLUDE_ASM("nonmatchings/fatmsmod", add_drive_name);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
@@ -696,7 +696,6 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023C78);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00001064);
 #endif
 
-#if FW_VERSION < 260
 #if FW_VERSION >= 150
 s32 df_remove(SceIoIob *iob, char *name, s32 arg) {
 #else
@@ -730,11 +729,7 @@ s32 df_remove(SceIoIob *iob, char *name) {
     free_heap(heap, path);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/fatmsmod", df_remove);
-#endif
 
-#if FW_VERSION < 260
 #if FW_VERSION >= 150
 s32 df_mkdir(SceIoIob *iob, char *name, SceMode mode, s32 arg) {
 #else
@@ -768,11 +763,7 @@ s32 df_mkdir(SceIoIob *iob, char *name, SceMode mode) {
     free_heap(heap, path);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/fatmsmod", df_mkdir);
-#endif
 
-#if FW_VERSION < 260
 #if FW_VERSION >= 150
 s32 df_rmdir(SceIoIob *iob, char *name, s32 arg) {
 #else
@@ -806,9 +797,6 @@ s32 df_rmdir(SceIoIob *iob, char *name) {
     free_heap(heap, path);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/fatmsmod", df_rmdir);
-#endif
 
 char *func_00001A18(char *s) {
     if (s == NULL) {
@@ -933,7 +921,6 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00002190);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000238C);
 
-#if FW_VERSION < 260
 #if FW_VERSION >= 150
 s32 df_rename(SceIoIob *iob, const char *name, const char *newName, s32 arg) {
 #else
@@ -967,9 +954,6 @@ s32 df_rename(SceIoIob *iob, const char *name, const char *newName) {
     free_heap(heap, path);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/fatmsmod", df_rename);
-#endif
 
 #if FW_VERSION < 282
 s32 func_00001F98(void) {
@@ -1526,9 +1510,9 @@ s32 func_00002CA0(s32 a0, s32 a1, s32 a2) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00004C9C);
+INCLUDE_ASM("nonmatchings/fatmsmod", stub_pf_mkdir);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00004CE0);
+INCLUDE_ASM("nonmatchings/fatmsmod", stub_pf_rmdir);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004D24);
 #endif
@@ -1672,7 +1656,7 @@ s32 stub_pf_remove(s32 a0, s32 a1) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00004EFC);
+INCLUDE_ASM("nonmatchings/fatmsmod", stub_pf_remove);
 #endif
 
 s32 func_00004F40(s32 a0, s32 a1, s32 a2) {
@@ -1860,7 +1844,7 @@ s32 stub_pf_rename(s32 a0, s32 a1, s32 a2) {
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005168);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000051B0);
+INCLUDE_ASM("nonmatchings/fatmsmod", stub_pf_rename);
 #endif
 
 s32 func_000051F8(s32 a0) {

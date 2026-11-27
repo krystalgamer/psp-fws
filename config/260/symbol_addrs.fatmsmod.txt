@@ -652,3 +652,4 @@ func_000158BC = 0x00022A20; // type:func rom:0x22AA0
 func_00023368 = 0x00022A60; // type:func rom:0x22AE0
 func_00023384 = 0x00022A7C; // type:func rom:0x22AFC
 // shared names (tools/add_version.py) end
+get_heap = 0x00000318; // type:func
