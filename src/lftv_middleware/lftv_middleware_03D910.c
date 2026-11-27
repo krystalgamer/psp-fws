@@ -673,7 +673,7 @@ s32 func_00041DB0(struct Unk_func_00041DB0_0 *arg0) {
     arg0->unk4 = 0;
     temp_s0 = func_00044718((s32) ((u8 *)arg0 + 8));
     temp_s1 = temp_s0 + func_000411C8((s32) ((u8 *)arg0 + 0x1C));
-    return temp_s1 + func_0003DF2C((Unk_func_0003DF2C_0*) ((u8 *)arg0 + 0x34)) + 2;
+    return temp_s1 + func_0003DF2C((Unk_func_0003DF2C_0*) (((u8 *)arg0 + 0x34))) + 2;
 }
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00041E0C);
@@ -860,14 +860,14 @@ void func_00043F04(M2C_UNK **arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00043F2C);
 
-void func_00043F64(struct Unk_func_00043F64_0 *arg0) {
+void func_00043F64(struct Unk_func_00041CEC_0 *arg0) {
     arg0->unk4 = 0;
-    func_00041CEC((Unk_func_00041CEC_0*) arg0);
+    func_00041CEC(arg0);
 }
 
-void func_00043F84(struct Unk_func_00043F84_0 *arg0) {
+void func_00043F84(struct Unk_func_00041CF8_0 *arg0) {
     arg0->unk4 = 0;
-    func_00041CF8((Unk_func_00041CF8_0*) arg0);
+    func_00041CF8(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00043FA4);
