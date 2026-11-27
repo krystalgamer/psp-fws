@@ -118,6 +118,7 @@ s32 _sceKernelDmaOpChCheck(SceDmaOp **ops, u32 n);
 void _sceKernelDmaOpQueue(SceDmaOp *op);
 void _sceKernelDmaOpStop(SceDmaOp *op);
 void _sceKernelDmaSchedule(void);
+void _sceKernelDmacClkEnable(u32 dmac);
 void *memset(void *s, s32 c, u32 n);
 void sceKernelCpuResumeIntr(s32);
 void sceKernelCpuResumeIntrWithSync(s32);

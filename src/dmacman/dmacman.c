@@ -69,11 +69,62 @@ fail:
     sceKernelCpuResumeIntr(intr);
     return 0x800202BC;
 }
-#else
-INCLUDE_ASM("nonmatchings/dmacman", module_start);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 module_start(SceSize args, void *argp)
+{
+    s32 intr;
+    s32 i;
+
+    intr = sceKernelCpuSuspendIntr();
+    memset(g_dmaOps, 0, sizeof(g_dmaOps));
+    g_dmaOps[0].next = &g_dmaOps[1];
+    g_dmaFreeOp = &g_dmaOps[0];
+    for (i = 1; i < 128; i++) {
+        g_dmaOps[i].prev = &g_dmaOps[i - 1];
+        g_dmaOps[i].next = &g_dmaOps[i + 1];
+        g_dmaOps[i - 1].flag = SCE_DMAOP_FREE;
+    }
+    g_dmaQueueHead = NULL;
+    g_dmaOps[127].next = NULL;
+    g_dmaQueueTail = NULL;
+    g_dmaOps[127].flag = SCE_DMAOP_FREE;
+    sceKernelRegisterSuspendHandler(20, _sceDmacManSuspendHandler, NULL);
+    sceKernelRegisterResumeHandler(20, _sceDmacManResumeHandler, NULL);
+    if (sceKernelRegisterIntrHandler(22, 1, _sceKernelDmaInterrupt, 0, NULL) < 0)
+        goto fail22;
+    if (sceKernelRegisterIntrHandler(23, 1, _sceKernelDmaInterrupt, 1, NULL) < 0)
+        goto fail23;
+    if (sceKernelEnableIntr(22) < 0)
+        goto failEn22;
+    if (sceKernelEnableIntr(23) < 0)
+        goto failEn23;
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+
+failEn23:
+    sceKernelReleaseIntrHandler(23);
+    sceKernelReleaseIntrHandler(22);
+    goto fail;
+failEn22:
+    sceKernelReleaseIntrHandler(22);
+    sceKernelReleaseIntrHandler(23);
+    goto fail;
+fail23:
+    sceKernelReleaseIntrHandler(22);
+    goto fail;
+fail22:
+    sceKernelReleaseIntrHandler(23);
+fail:
+    sceKernelCpuResumeIntr(intr);
+    return 0x800202BC;
+}
+#endif
+
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/dmacman", module_start);
+#else
 s32 sceKernelDmaExit(void)
 {
     s32 intr;
@@ -113,7 +164,9 @@ fail:
     sceKernelCpuResumeIntr(intr);
     return 0x800202BC;
 }
-#else
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaExit);
 
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaRegisterDdrFlush);
@@ -592,13 +645,98 @@ INCLUDE_ASM("nonmatchings/dmacman", _sceKernelDmaSchedule);
 INCLUDE_ASM("nonmatchings/dmacman", func_00001418);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceKernelDmaChExclude(s32 ch, s32 enable)
+{
+    u32 bit = 1 << ch;
+
+    if (g_dmaCh.reserved & bit)
+        return 0x800202C8;
+    if (enable != 0) {
+        g_dmaCh.excluded |= bit;
+        _sceKernelDmacClkEnable((u32)ch >> 3);
+    } else {
+        g_dmaCh.excluded &= ~bit;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaChExclude);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceKernelDmaChReserve(s32 ch, s32 enable)
+{
+    u32 bit = 1 << ch;
+
+    if (g_dmaCh.excluded & bit)
+        return 0x800202C9;
+    if (enable >= 0)
+        g_dmaCh.reserved |= bit;
+    else
+        g_dmaCh.reserved &= ~bit;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaChReserve);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+SceDmaOp *sceKernelDmaOpAlloc(void)
+{
+    s32 intr;
+    SceDmaOp *op;
+
+    intr = sceKernelCpuSuspendIntr();
+    op = g_dmaFreeOp;
+    if (op != NULL) {
+        if (!(op->flag & SCE_DMAOP_FREE)) {
+            sceKernelCpuResumeIntr(intr);
+            return NULL;
+        }
+        op->chMask = 0xFFFF;
+        op->flag = 0;
+        op->callback = NULL;
+        op->ch = -1;
+        op->evid = sceKernelCreateEventFlag("SceDmacmanEvflag", 0, 0, NULL);
+        g_dmaFreeOp = op->next;
+        op->child = NULL;
+        op->parent = NULL;
+        sceKernelCpuResumeIntr(intr);
+        return op;
+    }
+    sceKernelCpuResumeIntr(intr);
+    return NULL;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAlloc);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 250
+s32 sceKernelDmaOpAssign(SceDmaOp *op, s32 chMask0, s32 chMask1, u32 config)
+{
+    if (op == NULL)
+        return 0x800202CF;
+    if (op->flag & SCE_DMAOP_FREE)
+        return 0x800202C3;
+    if (op->flag & SCE_DMAOP_QUEUED)
+        return 0x800202BE;
+    if (op->flag & SCE_DMAOP_RUNNING)
+        return 0x800202C0;
+    op->config = config;
+    op->chMask = ((chMask1 & 0xFF) << 8) | (chMask0 & 0xFF);
+    op->flag = SCE_DMAOP_ASSIGNED;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAssign);
 #endif
 
@@ -625,11 +763,26 @@ s32 sceKernelDmaOpFreeLink(SceDmaOp *op)
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpFreeLink);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/dmacman", _sceDmacManSuspendHandler);
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 _sceDmacManSuspendHandler(s32 unk, void *param)
+{
+    s32 i;
+
+    for (i = 0; i < 16; i++) {
+        if (g_dmaCh.op[i] != NULL)
+            _sceKernelDmaOpStop(g_dmaCh.op[i]);
+    }
+    g_dmaCh.unk48 = 0;
+    sceKernelDmaOpAllCancel();
+    sceKernelDisableIntr(22);
+    sceKernelDisableIntr(23);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/dmacman", _sceDmacManSuspendHandler);
+
 INCLUDE_ASM("nonmatchings/dmacman", func_00001B04);
 
 INCLUDE_ASM("nonmatchings/dmacman", func_00001B84);
@@ -638,8 +791,48 @@ INCLUDE_ASM("nonmatchings/dmacman", func_00001BA4);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/dmacman", _sceDmacManResumeHandler);
+s32 _sceDmacManResumeHandler(s32 unk, void *param)
+{
+    if (g_dmaCh.excluded & 0xFF00)
+        _sceKernelDmacClkEnable(1);
+    if (g_dmaCh.excluded & 0xFF)
+        _sceKernelDmacClkEnable(0);
+    sceKernelEnableIntr(22);
+    sceKernelEnableIntr(23);
+    return 0;
+}
+#endif
 
+#if FW_VERSION == 152
+void _sceKernelDmacClkEnable(u32 dmac)
+{
+    s32 intr;
+    s32 i;
+    SceDmacRegs *regs;
+    u32 clk;
+
+    intr = sceKernelCpuSuspendIntr();
+    clk = *(volatile u32 *)0xBC100050;
+    if (!(clk & (0x20 << dmac))) {
+        *(volatile u32 *)0xBC100050 = clk | (0x20 << dmac);
+        regs = (SceDmacRegs *)((dmac == 0) ? DMAC0_BASE : DMAC1_BASE);
+        regs->config |= 1;
+        regs->sync = 0;
+        for (i = 0; i < 8; i++) {
+            regs->ch[i].srcAddr = 0;
+            regs->ch[i].dstAddr = 0;
+            regs->ch[i].lli = 0;
+            regs->ch[i].control = 0;
+            regs->ch[i].config = 0;
+        }
+        regs->intTCClear = 0xFF;
+        regs->intErrClr = 0xFF;
+    }
+    sceKernelCpuResumeIntr(intr);
+}
+#endif
+
+#if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/dmacman", _sceKernelDmacClkEnable);
 #endif
 

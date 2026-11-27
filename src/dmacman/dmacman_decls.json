@@ -8,6 +8,7 @@
   "_sceKernelDmaOpQueue": "void _sceKernelDmaOpQueue(SceDmaOp *op);",
   "_sceKernelDmaOpStop": "void _sceKernelDmaOpStop(SceDmaOp *op);",
   "_sceKernelDmaSchedule": "void _sceKernelDmaSchedule(void);",
+  "_sceKernelDmacClkEnable": "void _sceKernelDmacClkEnable(u32 dmac);",
   "memset": "void *memset(void *s, s32 c, u32 n);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuResumeIntrWithSync": "void sceKernelCpuResumeIntrWithSync(s32);",
