@@ -1,4 +1,4 @@
-/* cflags[100]: -Os */
+/* cflags[100,102]: -Os */
 /* cflags[151]: -Os */
 #include "common.h"
 #include "usbstormgr_decls.h"
@@ -110,6 +110,10 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00000730);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000764);
 
+#if (FW_VERSION >= 102 && FW_VERSION < 152) || FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/usbstormgr", func_00000888);
+#endif
+
 #if FW_VERSION == 352
 INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004DFC);
 
@@ -144,10 +148,6 @@ INCLUDE_RODATA("nonmatchings/usbstormgr", D_00004F74);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000087C);
 #endif
 
-#if FW_VERSION == 151 || FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/usbstormgr", func_00000888);
-#endif
-
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000085C);
 #endif
@@ -168,7 +168,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00000F68);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000FD4);
 
-#if FW_VERSION >= 151 && FW_VERSION < 340
+#if FW_VERSION >= 102 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001088);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000012B4);
@@ -202,6 +202,10 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00001440);
 
 #if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001444);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/usbstormgr", func_00001840);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 340
@@ -238,7 +242,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_000018B8);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001D04);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 340
+#if FW_VERSION >= 102 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001F0C);
 #endif
 
@@ -280,7 +284,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00001E58);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002370);
 
-#if FW_VERSION >= 151 && FW_VERSION < 340
+#if FW_VERSION >= 102 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002700);
 #endif
 
@@ -294,7 +298,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00002464);
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002638);
 
-#if FW_VERSION >= 151 && FW_VERSION < 340
+#if FW_VERSION >= 102 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00002A08);
 #endif
 

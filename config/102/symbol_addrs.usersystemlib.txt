@@ -1,0 +1,10 @@
+// shared names (tools/add_version.py) begin
+D_000001FC = 0x000001BC; // rom:0x23C
+module_start = 0x00000000; // type:func rom:0x80
+sceKernelCpuSuspendIntr = 0x0000002C; // type:func rom:0xAC
+sceKernelCpuResumeIntr = 0x00000058; // type:func rom:0xD8
+sceKernelCpuResumeIntrWithSync = 0x00000080; // type:func rom:0x100
+sceKernelIsCpuIntrSuspended = 0x000000B8; // type:func rom:0x138
+sceKernelIsCpuIntrEnable = 0x000000C0; // type:func rom:0x140
+sceKernelRegisterUserSpaceIntrStack = 0x000000CC; // type:func rom:0x14C
+// shared names (tools/add_version.py) end
