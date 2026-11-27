@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/netconf_plugin
-  src_path: src/netconf_plugin
+  src_path: tmp/av_src/102/netconf_plugin
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/netconf_plugin.ld
   cache_path: tmp/build/102/.splat_cache.netconf_plugin
@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, netconf_plugin]
+      - [0xA4, c, netconf_plugin]
       - { start: 0xFA38, type: asm, name: fini, linker_section: .fini }
       - { start: 0xFA54, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xFE94, type: prxpad, order: .text }
@@ -71,7 +71,7 @@ segments:
       - { start: 0x105B0, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x105C0, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x105C4, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x105C8, rodata, netconf_plugin]
+      - [0x105C8, .rodata, netconf_plugin]
       - { start: 0x131AC, type: prxpad, order: .rodata }
   - name: netconf_plugin_seg1
     type: code
