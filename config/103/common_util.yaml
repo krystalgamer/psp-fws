@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/103/.splat_cache.common_util
   symbol_addrs_path:
     - config/103/symbol_addrs.common_util.txt
+    - config/103/func_starts.common_util.txt
     - tmp/build/103/prx_syms.common_util.txt
   reloc_addrs_path: [tmp/build/103/reloc_addrs.common_util.txt]
   asset_path: tmp/assets/103/common_util
@@ -53,7 +54,8 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, common_util]
+      - [0xA4, c, common_util]
+      - [0xA138, c, common_util_crtend]
       - { start: 0xA190, type: asm, name: fini, linker_section: .fini }
       - { start: 0xA1AC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xA33C, type: prxpad, order: .text }
@@ -71,7 +73,8 @@ segments:
       - { start: 0xA760, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0xA768, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0xA76C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0xA770, rodata, common_util]
+      - [0xA770, .rodata, common_util]
+      - [0xB140, .rodata, common_util_crtend]
       - { start: 0xB148, type: prxpad, order: .rodata }
   - name: common_util_seg1
     type: code
