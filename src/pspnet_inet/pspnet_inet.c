@@ -504,7 +504,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00003A00);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00003D28);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00003F68);
+INCLUDE_ASM("nonmatchings/pspnet_inet", soo_poll);
 
 #if FW_VERSION < 282
 void func_000042F4(void) {
@@ -1205,7 +1205,25 @@ void func_00007AA4(s32 arg0, s32 arg1, s32 arg2) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetPoll);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00007D50);
+s32 pollscan(void *p, struct pollfd *fds, s32 nfd, s32 *retval) {
+    s32 i;
+    s32 n = 0;
+    struct socket *so;
+
+    for (i = 0; i < nfd; i++, fds++) {
+        so = getsock(fds->fd);
+        if (so == NULL) {
+            fds->revents = POLLNVAL;
+            n++;
+        } else {
+            fds->revents = soo_poll(so, fds->events | POLLERR | POLLHUP, p);
+            if (fds->revents)
+                n++;
+        }
+    }
+    *retval = n;
+    return 0;
+}
 
 void func_00007E00(struct SceNetInetWaiter *w, struct SceNetInetPollfd *fds, s32 n) {
     struct socket *so;
@@ -6415,7 +6433,31 @@ void func_0002C9DC(u8 *p, s32 n) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002CA04);
+s32 func_0002CA04(const char *s1, const char *s2) {
+    if (s1 == NULL || s2 == NULL) {
+        if (s1 == s2)
+            return 0;
+        return (s1 == NULL) ? -1 : 1;
+    }
+    while (*s1 == *s2++) {
+        if (*s1++ == '\0')
+            return 0;
+    }
+    return *s1 - *(s2 - 1);
+}
+
+char *func_0002CA84(const char *s, s32 c) {
+    char ch = c;
+    if (s == NULL) {
+        return NULL;
+    }
+    do {
+        if (*s == ch) {
+            return (char *)s;
+        }
+    } while (*s++ != '\0');
+    return NULL;
+}
 
 char *func_0002CAB4(char *s, char c) {
     char *p = s;

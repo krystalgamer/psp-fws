@@ -1098,6 +1098,15 @@ static __inline void arp_unlock(void) {
     _sce_pspnet_splunlock(s);
 }
 
+struct pollfd {
+    s32 fd;                             /* 0x00 */
+    s16 events;                         /* 0x04 */
+    s16 revents;                        /* 0x06 */
+};
+#define POLLERR 0x0008
+#define POLLHUP 0x0010
+#define POLLNVAL 0x0020
+
 typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
 
 struct SceNetInetKeyNode {
@@ -1753,6 +1762,7 @@ void sofree(struct socket *so);
 void soisconnected(struct socket *so);
 s32 solisten(struct socket *so, s32 backlog);
 struct socket *sonewconn1(struct socket *head, s32 connstatus);
+s32 soo_poll(struct socket *so, s32 events, void *p);
 s32 soqremque(struct socket *so, s32 q);
 s32 soreserve(struct socket *so, u32 sndcc, u32 rcvcc);
 void sorflush(struct socket *so);
