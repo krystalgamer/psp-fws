@@ -37,7 +37,7 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226B8);
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226C0);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000FD28);
 #endif
 
@@ -308,6 +308,10 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_00022738);
 #endif
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012EF8);
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011728);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011D6C);

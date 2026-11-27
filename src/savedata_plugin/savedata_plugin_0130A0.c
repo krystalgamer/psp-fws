@@ -34,6 +34,10 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000130FC);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0001317C);
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0001196C);
+#endif
+
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000131FC);
 
 #if FW_VERSION < 282
@@ -118,7 +122,7 @@ s32 func_00011024(void) {
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0001227C);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 103 || FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00011044);
 #endif
 
@@ -144,7 +148,15 @@ void func_00011160(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x30) = arg2;
     func_00018DC4((s32) arg0, arg1);
 }
-#else
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0001351C);
+
+INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00011D98);
+#endif
+
+#if FW_VERSION >= 282
 s32 func_0001346C(struct Unk_func_0001346C_0 *arg0) {
     _ZN3paf4View12PageCloseAllEv(arg0->unk4);
     return 0;
@@ -182,7 +194,9 @@ void func_000134FC(struct Unk_func_000134FC_0 *arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
+#if FW_VERSION != 103
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0001351C);
+#endif
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000111A4);
@@ -419,7 +433,7 @@ s32 func_000128E4(void *arg0, void *arg1) {
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00011840);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00012064);
 #endif
 
@@ -476,7 +490,7 @@ s32 func_00013C24(struct Unk_func_00013C24_0 *arg0, struct Unk_func_00013C24_1 *
 }
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00013C5C);
 #endif
 
@@ -705,11 +719,19 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00014038);
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00014358);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 103 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000143D4);
+#endif
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_000220CC);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_000229AC);
+#endif
 
+#if FW_VERSION >= 103 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0001445C);
 #endif
 
@@ -719,7 +741,7 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_00022830);
 INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_0002283C);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 103
 INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_000213EC);
 #endif
 
@@ -727,11 +749,11 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_000213EC);
 INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_000213F8);
 #endif
 
-#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION < 103 || (FW_VERSION >= 282 && FW_VERSION < 350)
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000143D4);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
+#if FW_VERSION < 103 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_00022838);
 #endif
 
@@ -751,7 +773,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000151DC);
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000152E0);
 #endif
 
-#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION < 103 || (FW_VERSION >= 282 && FW_VERSION < 350)
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0001445C);
 #endif
 
@@ -785,7 +807,7 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_0002287C);
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00012568);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00012C80);
 #endif
 
@@ -863,7 +885,13 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00013234);
 
 #if FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00015094);
+#endif
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_000213EC);
+#endif
+
+#if FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000150F8);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00015180);
@@ -887,7 +915,7 @@ void func_00013530(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00013554);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00013C44);
 #endif
 
@@ -929,7 +957,7 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_000228D4);
 INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_000228DC);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00013DE0);
 #endif
 
@@ -941,7 +969,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0001378C);
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000139C4);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000141C0);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00014218);
@@ -1027,11 +1055,15 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000141A4);
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000141D4);
 #endif
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00014D5C_v103);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00015460);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 103
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00014284);
 #endif
 
@@ -1039,7 +1071,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00014284);
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000142E8);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000148EC);
 #endif
 
@@ -1086,7 +1118,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00015650);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000156D4);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00014EEC);
 #endif
 

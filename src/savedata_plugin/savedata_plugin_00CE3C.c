@@ -13,7 +13,7 @@ void func_0000CE3C(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION == 102 || FW_VERSION >= 282
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CE64);
 #endif
 
@@ -44,7 +44,7 @@ s32 func_0000CE94(struct Unk_func_0000CE94_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 102 || FW_VERSION >= 282
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CE9C);
 #endif
 
@@ -357,7 +357,11 @@ s32 func_00009B04(void *arg0, u32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_00009B04);
+#endif
+
+#if FW_VERSION < 103
 s32 func_00009B04(void *arg0, u32 arg1) {
     s32 var_v1;
     u32 temp_v0;
@@ -852,7 +856,7 @@ void func_0000B964(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000C164);
 #endif
 
@@ -1116,7 +1120,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000EBA4);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000ECAC);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CB0C);
 #endif
 
@@ -1445,7 +1449,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F518);
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CC00);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000D36C);
 #endif
 
@@ -1621,7 +1625,11 @@ void func_0000E840(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000D7B0);
+#endif
+
+#if FW_VERSION < 103
 void func_0000D7B0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     func_0000D850(arg0);
     M2C_FIELD(arg0, s32 *, 8) = arg3;
@@ -1737,6 +1745,10 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_00CE3C", D_00021608);
 INCLUDE_RODATA("nonmatchings/savedata_plugin_00CE3C", D_0002258C);
 #endif
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/savedata_plugin_00CE3C", D_00021DCC);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/savedata_plugin_00CE3C", D_00022710);
 #endif
@@ -1789,7 +1801,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_00010268);
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000E364);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000EB50);
 #endif
 
@@ -1926,7 +1938,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000FC10_v150);
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000FE54);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000E8B8);
 #endif
 
@@ -1984,6 +1996,10 @@ void func_0000E8B8(s32 arg0, void **arg1, s32 arg2) {
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000EAD0);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F778);
 #endif
 
 #if FW_VERSION >= 282
@@ -2249,7 +2265,7 @@ void func_00011834(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_00011834);
 #endif
 
@@ -2271,7 +2287,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_000118F4);
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0001195C);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F480);
 #endif
 
@@ -2319,7 +2335,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_000119D4);
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_000119F0);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F644);
 #endif
 
