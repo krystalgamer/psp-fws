@@ -1784,7 +1784,65 @@ out:
 }
 #endif
 
-#if FW_VERSION == 150 || FW_VERSION >= 271
+#if FW_VERSION == 271
+s32 sceRegRemoveKey(s32 hd, const char *name) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto out;
+    ret = (s32)(-k1IsUserMode() & (u32)name) < 0;
+    if (ret != 0) {
+        ret = 0x8008273B;
+        goto out;
+    }
+    ret = func_00004778((SceRegIndexEntry *)hd, name);
+end:
+    if (res == 0) {
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
+            ret = 0x80082734;
+    }
+out:
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
+s32 sceRegRemoveKey(s32 hd, const char *name) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto out;
+    ret = (s32)(-k1IsUserMode() & (u32)name) < 0;
+    if (ret != 0) {
+        ret = 0x8008273B;
+        goto out;
+    }
+    ret = func_00004F2C((SceRegIndexEntry *)hd, name);
+end:
+    if (res == 0) {
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
+            ret = 0x80082734;
+    }
+out:
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 150 || FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveKey);
 #endif
 

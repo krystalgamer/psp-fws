@@ -151,6 +151,7 @@ s32 func_00002F10(s32 created, SceRegHive *h, SceRegIndexEntry *cat);
 s32 func_000046A8(SceRegIndexEntry *cat, const char *name);
 s32 func_00004778(SceRegIndexEntry *cat, const char *name);
 s32 func_00004AF0(SceRegIndexEntry *cat, const char *name);
+s32 func_00004F2C(SceRegIndexEntry *cat, const char *name);
 s32 func_00005608(SceRegCatData *d, const char *name);
 s32 func_00005718(SceRegCatData *d, s32 type, const char *name, s32 size);
 s32 func_000058D8(SceRegIndexEntry *cat, SceRegCatData *d);
