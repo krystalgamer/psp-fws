@@ -104,13 +104,26 @@ typedef struct {
     u32 rootStart; /* 0x0, first root-directory sector */
     u32 dataStart; /* 0x4, first sector of cluster 2 */
     u32 unk8;
-    u32 unkC;
-    u32 unk10;
+    u32 clusterCount; /* 0xC, first invalid cluster number */
+    u32 cacheSectors; /* 0x10, FAT sectors held in the FAT buffer */
     u32 unk14;
     u32 clusterShift; /* 0x18, log2(sectors per cluster) */
     u32 unk1C;
     u32 rootSectors; /* 0x20 */
 } PfFatInfo;
+
+/* Current volume geometry (D_0002790C, 0x28 bytes copied from PfDrive.geometry). */
+typedef struct {
+    u16 bytesPerSector; /* 0x0 */
+    u16 sectorsPerCluster; /* 0x2 */
+    u16 fatStart; /* 0x4, first FAT sector */
+    u8 pad6[0xA];
+    u32 fatSectors; /* 0x10, sectors per FAT */
+    u8 pad14[4];
+    u16 unk18; /* 0x18 */
+    u8 pad1A[0xE];
+} PfGeometry;
+typedef char chk_PfGeometry[(sizeof(PfGeometry) == 0x28) ? 1 : -1];
 
 /* Saved directory-entry position (D_00019E2C), restored by func_00013E3C. */
 typedef struct {
@@ -156,8 +169,11 @@ typedef struct {
 
 /* PrFILE volume / drive record (partial; D_000276E4 points at the current one). */
 typedef struct {
-    u32 flags; /* 0x0, bit 0 = mounted */
-    u8 pad4[0x18];
+    u32 flags; /* 0x0, bit 0 = mounted, 0x8000 = FAT16, 0x1000 = FAT32 (neither = FAT12) */
+    u32 fatBufSector; /* 0x4, first sector in fatBuf (-1 = invalid) */
+    u8 pad8[4];
+    u8 *fatBuf; /* 0xC, FAT sector buffer */
+    u8 pad10[0xC];
     s32 unk1C; /* 0x1C */
 } PfVolume;
 
@@ -441,8 +457,7 @@ extern char D_000276FC[0x104];
 extern PfDirCursor *D_00027800;
 extern char D_00027804[0x104]; /* current path */
 extern s32 D_00027908;
-extern u16 D_0002790C;
-extern u16 D_0002790E; /* sectors per cluster */
+extern PfGeometry D_0002790C;
 extern PfDirCursor D_00027934;
 extern char D_00027B98[]; /* name being created */
 extern u32 D_00027CC4[1]; /* per drive: first freed cluster hint */
@@ -577,6 +592,8 @@ char *func_00007AB4(char *dst, const char *src, u32 n);
 s32 func_00007BB0(s32 arg0);
 u32 func_00007BD4(u32 sector);
 s32 func_00008274(s32, s32, s32, s32);
+s32 func_00008314(u32 cl, u32 *off, u32 *sector); /* locate the FAT entry and load its sector */
+s32 func_000085D4(u32 sector, u8 **buf); /* read a FAT sector */
 s32 func_000086E8(u32 cl, u32 *next); /* get FAT entry */
 s32 func_00008708(s32 arg0);
 s32 func_000088F8(s32 arg0);
@@ -584,6 +601,7 @@ s8 func_00008900(s8 arg0);
 s32 func_00008954(u32 cl, u32 value); /* set FAT entry */
 s32 func_000090A8(u32 cl, u32 *newcl); /* allocate a free cluster after cl */
 s32 func_0000931C(void);
+s32 func_00009BF0(void);
 void func_00009C74(void);
 s32 func_00009D50(void);
 s32 func_00009E3C(void);

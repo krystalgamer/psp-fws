@@ -3288,7 +3288,7 @@ u32 func_00007BD4(u32 sector) {
             n = __builtin_allegrex_min(D_0001BCC4.dataStart - sector, D_0001BCC4.rootSectors);
         }
     } else {
-        n = D_0002790E - (sector - D_0001BCC4.dataStart) % D_0002790E;
+        n = D_0002790C.sectorsPerCluster - (sector - D_0001BCC4.dataStart) % D_0002790C.sectorsPerCluster;
     }
     return n;
 }
@@ -3540,7 +3540,7 @@ s32 func_0000ACF8(void) {
         D_00019E08 = 0xD;
         return -1;
     }
-    if (D_0002790C == 0) {
+    if (D_0002790C.bytesPerSector == 0) {
         D_00019E08 = 0xD;
         return -1;
     }
@@ -3963,7 +3963,7 @@ void func_0000BC84(void) {
     if (D_00027800->sector < D_0001BCC4.dataStart) {
         D_0001BCE8.unk4 = 0;
     } else {
-        D_0001BCE8.unk4 = (D_00027800->sector - D_0001BCC4.dataStart) / D_0002790E + 2;
+        D_0001BCE8.unk4 = (D_00027800->sector - D_0001BCC4.dataStart) / D_0002790C.sectorsPerCluster + 2;
     }
     D_0001BCE8.unk8 = D_00027800->sector;
 }
