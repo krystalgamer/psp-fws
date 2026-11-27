@@ -1,7 +1,7 @@
 /* lang: c++ */
 /* cflags[152]: -Os */
 /* cflags[150]: -Os */
-/* cflags[100,102]: -Os */
+/* cflags[100,102,103]: -Os */
 #include "common.h"
 #include "impose_plugin_decls.h"
 
@@ -127,7 +127,7 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001404);
 
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001414);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001234);
 #endif
 
@@ -161,7 +161,7 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_0000145C);
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000001A4);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000003BC_v102);
 #endif
 

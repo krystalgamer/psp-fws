@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/103/.splat_cache.impose_plugin
   symbol_addrs_path:
     - config/103/symbol_addrs.impose_plugin.txt
+    - config/103/func_starts.impose_plugin.txt
     - tmp/build/103/prx_syms.impose_plugin.txt
   reloc_addrs_path: [tmp/build/103/reloc_addrs.impose_plugin.txt]
   asset_path: tmp/assets/103/impose_plugin
@@ -53,7 +54,8 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, impose_plugin]
+      - [0xA4, c, impose_plugin]
+      - [0xF28, c, impose_plugin_crtend]
       - { start: 0xF80, type: asm, name: fini, linker_section: .fini }
       - { start: 0xF9C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1064, type: prxpad, order: .text }
@@ -71,7 +73,7 @@ segments:
       - { start: 0x11F8, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x1200, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x1204, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x1208, rodata, impose_plugin]
+      - [0x1208, .rodata, impose_plugin]
       - { start: 0x131C, type: prxpad, order: .rodata }
   - name: impose_plugin_seg1
     type: code
