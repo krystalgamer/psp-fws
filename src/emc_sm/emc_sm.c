@@ -24,14 +24,6 @@ INCLUDE_ASM("nonmatchings/emc_sm", func_0000014C);
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000160);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000508);
-
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
-
-INCLUDE_ASM("nonmatchings/emc_sm", func_0000060C);
-#endif
-
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
 #endif
@@ -40,15 +32,13 @@ INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000015C);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandUnlock);
-#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReset);
 
@@ -97,11 +87,7 @@ s32 sceNandSuspend(void) {
     return 0;
 }
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000E1C);
-#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandResume);
-#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
