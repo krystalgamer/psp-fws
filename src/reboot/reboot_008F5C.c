@@ -245,7 +245,14 @@ void func_00009290(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
     func_0000B148(arg0, arg1, arg2);
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000092DC);
+s32 func_000092DC(s32 a0, s32 a1, s32 a2, s32 a3) {
+    s32 ret;
+
+    func_0000E028();
+    ret = func_0000B284(a0, a1, a2, a3);
+    func_0000E028();
+    return ret;
+}
 
 #if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/reboot_008F5C", UFatRename);
@@ -652,13 +659,40 @@ s32 func_0000E128(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E178);
+s32 func_0000E178(void) {
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E1DC);
+    if (!(D_000184C0 & 2)) {
+        return 0x80010016;
+    }
+    ret = func_0000DC9C(D_000184C8);
+    if (ret != 0) {
+        return ret;
+    }
+    D_000184C0 &= ~2;
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E230);
+s32 func_0000E1DC(void *arg) {
+    if (!(D_000184C0 & 2)) {
+        return 0x80010016;
+    }
+    return func_0000FBBC(D_000184C8, 0x3D001, 0, 0, arg, 0x44);
+}
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E294);
+s64 func_0000E230(SceOff off, s32 whence) {
+    if (!(D_000184C0 & 2)) {
+        return 0x80010016LL;
+    }
+    return func_0000FAE0(D_000184C8, off, whence);
+}
+
+s32 func_0000E294(s32 a0, s32 a1) {
+    if (!(D_000184C0 & 2)) {
+        return 0x80010016;
+    }
+    return func_0000F990(D_000184C8, a0, a1);
+}
 
 s32 func_0000E2E4(void) {
     return 0x8001B000;
