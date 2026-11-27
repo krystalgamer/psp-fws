@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Compiler and options for one C file and firmware version.
 
-    tools/cc_of.py FILE FW_VERSION   ->   "<compiler> <cflags>"
+    tools/cc_of.py FILE FW_VERSION         ->   "cc1-<compiler> <cflags>" (cc1plus- for C++)
+    tools/cc_of.py FILE FW_VERSION --cpp   ->   extra preprocessor flags
 
 The file header names them; entries with a version list override the default
 for those versions (FW numbers, ranges inclusive):
@@ -65,7 +66,16 @@ def setting(text, ver, mod=None):
     return _pick(text, "compiler", r"[\w.\-]+", vnum, default), _pick(text, "cflags", FLAGS, vnum, "-O2")
 
 
+def is_cxx(text):
+    """A `/* lang: c++ */` unit is C++, built by cc1plus."""
+    return "/* lang: c++ */" in text
+
+
 if __name__ == "__main__":
     p = Path(sys.argv[1])
-    c, f = setting(p.read_text(), sys.argv[2], p.parent.name)
-    print(c, f)
+    text = p.read_text()
+    if "--cpp" in sys.argv:  # extra preprocessor flags
+        print("-D__cplusplus=1" if is_cxx(text) else "")
+    else:
+        c, f = setting(text, sys.argv[2], p.parent.name)
+        print(("cc1plus-" if is_cxx(text) else "cc1-") + c, f)

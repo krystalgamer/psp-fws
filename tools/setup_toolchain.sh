@@ -62,4 +62,18 @@ rm -f "$T/bin/cc1-1.5.1.bin" "$T/bin/cc1-1.5.1-sony" "$T/bin/cc1-1.6.1-sony"
 printf '#!/bin/sh\nexec "%s/tmp/toolchains/bin/cc1-1.5.1" -mno-ulsw "$@"\n' "$PCG" > "$T/bin/cc1-1.5.1"
 printf '#!/bin/sh\nexec "%s/tmp/toolchains/bin/cc1-1.6.1" "$@"\n' "$PCG" > "$T/bin/cc1-1.6.1"
 chmod +x "$T/bin/cc1-1.5.1" "$T/bin/cc1-1.6.1"
+# C++: cc1plus for 1.5.1/1.6.1 from a later psp-compiler-ground (build_gcc.sh --cxx; same
+# trees, its cc1 output equals the 848efe94 ones), the release ones for 1.3.1/1.7.1
+CGH="$T/cg-head"
+if [ ! -x "$CGH/tmp/toolchains/bin/cc1plus-1.5.1-head.bin" ] || [ ! -x "$CGH/tmp/toolchains/bin/cc1plus-1.6.1-head.bin" ]; then
+    [ -d "$CGH" ] || git -C "$PCG" worktree add -q --detach "$CGH" 765f3b48
+    mkdir -p "$CGH/tmp" && ln -sfn "$PCG/tmp/toolchains" "$CGH/tmp/toolchains"
+    "$CGH/tools/build_gcc.sh" 1.5.1-head "$CGH/gcc1.5.1_src" --cxx >/dev/null
+    "$CGH/tools/build_gcc.sh" 1.6.1-head "$CGH/gcc1.6.1_src" --cxx >/dev/null
+fi
+printf '#!/bin/sh\nexec "%s/tmp/toolchains/bin/cc1plus-1.5.1-head" -mno-ulsw "$@"\n' "$PCG" > "$T/bin/cc1plus-1.5.1"
+printf '#!/bin/sh\nexec "%s/tmp/toolchains/bin/cc1plus-1.6.1-head" "$@"\n' "$PCG" > "$T/bin/cc1plus-1.6.1"
+chmod +x "$T/bin/cc1plus-1.5.1" "$T/bin/cc1plus-1.6.1"
+wrap_i386 cc1plus-1.7.1 "$T"/1.7.1/lib/gcc-lib/psp/*/cc1plus
+wrap_i386 cc1plus-1.3.1 "$T"/1.3.1/lib/gcc-lib/psp/*/cc1plus -mno-ulsw
 echo "toolchains ready in $T/bin"
