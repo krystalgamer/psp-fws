@@ -25,7 +25,7 @@ INCLUDE_ASM("nonmatchings/memab", func_00000708);
 
 INCLUDE_ASM("nonmatchings/memab", func_000008C4);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 352
 s32 module_start(void) {
     s32 temp_v0;
 
@@ -55,7 +55,7 @@ s32 module_start(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 352
 s32 module_stop(void) {
     sceKernelDeleteSema(D_000028E0);
     return 0;
