@@ -376,84 +376,84 @@ INCLUDE_ASM("nonmatchings/modulemgr", module_bootstart);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00000108(void) {
-    s32 temp_s0;
-    s32 temp_s1;
+SceModule *func_00000108(void) {
+    s32 intr;
+    SceModule *mod;
 
-    temp_s0 = sceKernelCpuSuspendIntr();
-    temp_s1 = sceKernelCreateModule();
-    sceKernelCpuResumeIntr(temp_s0);
-    return temp_s1;
+    intr = sceKernelCpuSuspendIntr();
+    mod = sceKernelCreateModule();
+    sceKernelCpuResumeIntr(intr);
+    return mod;
 }
 
-s32 func_00000148(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+SceModule *func_00000148(s32 arg0) {
+    SceModule *ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelAllocModule(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelAllocModule(arg0);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_00000190(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+s32 func_00000190(SceModule *mod) {
+    s32 ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelRegisterModule(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelRegisterModule(mod);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_000001D8(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+s32 func_000001D8(SceModule *mod) {
+    s32 ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelReleaseModule(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelReleaseModule(mod);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_00000220(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+s32 func_00000220(SceModule *mod) {
+    s32 ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelDeleteModule(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelDeleteModule(mod);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_00000268(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+s32 func_00000268(SceModule *mod) {
+    s32 ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelFreeModule(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelFreeModule(mod);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_000002B0(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+SceModule *func_000002B0(SceUID modId) {
+    SceModule *ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelModuleFromUID(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelModuleFromUID(modId);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_000002F8(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+SceModule *func_000002F8(SceUID modId) {
+    SceModule *ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelFindModuleByUID(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelFindModuleByUID(modId);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
 void func_00000340(void) {
@@ -733,9 +733,9 @@ s32 func_0000054C(u32 addr, SceSize size, u32 base, SceSize baseSize) {
     return 0;
 }
 
-void func_00000594(void *arg0) {
-    sceKernelFreePartitionMemory(M2C_FIELD(arg0, s32 *, 0x34));
-    func_00000268((s32) arg0);
+void func_00000594(SceModule *mod) {
+    sceKernelFreePartitionMemory(mod->memId);
+    func_00000268(mod);
 }
 #endif
 
@@ -1285,7 +1285,7 @@ s32 UnloadModule(SceModule *mod) {
     wmemset((void *)mod->textAddr, 0x4D, mod->textSize);
     memset((void *)(mod->textAddr + mod->textSize), -1, mod->dataSize + mod->bssSize);
     func_00000594(mod);
-    func_000001D8((s32)mod);
+    func_000001D8(mod);
     return 0;
 }
 
