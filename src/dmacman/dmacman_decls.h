@@ -8,7 +8,7 @@
 typedef struct {
     u32 srcAddr;  /* 0x0 */
     u32 dstAddr;  /* 0x4 */
-    u32 next;     /* 0x8 next LLI, 0 = end */
+    volatile u32 next; /* 0x8 next LLI, 0 = end */
     u32 control;  /* 0xC bit31 = terminal count interrupt */
 } SceDmaLLI;
 
@@ -23,7 +23,7 @@ typedef struct SceDmaOp {
     volatile u32 flag;        /* 0x10 SCE_DMAOP_* */
     s32 chMask0;              /* 0x14 1.00: DMAC0 channel mask */
     s32 chMask1;              /* 0x18 1.00: DMAC1 channel mask */
-    s32 ch;                   /* 0x1C assigned channel (0-15), -1 none */
+    volatile s32 ch;          /* 0x1C assigned channel (0-15), -1 none */
     volatile u32 srcAddr;     /* 0x20 shadow of SceDmacChRegs */
     volatile u32 dstAddr;     /* 0x24 */
     volatile u32 lli;         /* 0x28 */
@@ -100,7 +100,13 @@ extern SceDmaOp *g_dmaQueueTail;
 extern SceDmacSave g_dmacSave;
 
 s32 Kprintf(const char *fmt, ...);
+s32 _sceDmacManResumeHandler(s32 unk, void *param);
+s32 _sceDmacManSuspendHandler(s32 unk, void *param);
+s32 _sceKernelDmaInterrupt(s32 unk, s32 dmac);
 s32 _sceKernelDmaOpChCheck(SceDmaOp **ops, u32 n);
+void _sceKernelDmaOpQueue(SceDmaOp *op);
+void _sceKernelDmaOpStop(SceDmaOp *op);
+void _sceKernelDmaSchedule(void);
 void *memset(void *s, s32 c, u32 n);
 void sceKernelCpuResumeIntr(s32);
 void sceKernelCpuResumeIntrWithSync(s32);
@@ -109,6 +115,7 @@ SceUID sceKernelCreateEventFlag(const char *name, s32 attr, s32 bits, void *opt)
 s32 sceKernelDeleteEventFlag(SceUID evid);
 s32 sceKernelDisableIntr(s32 intno);
 s32 sceKernelDmaOnDebugMode(void);
+s32 sceKernelDmaOpAllCancel(void);
 s32 sceKernelEnableIntr(s32 intno);
 s32 sceKernelRegisterIntrHandler(s32 intno, s32 no, void *handler, s32 arg, void *opt);
 s32 sceKernelRegisterResumeHandler(s32 reg, void *handler, void *param);
