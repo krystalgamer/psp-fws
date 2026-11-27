@@ -10,6 +10,28 @@ struct D_00007608_s {
     volatile s32 unk20;
 };
 
+/* SCE assert: Kprintf(fmt, __FILE__, __FUNCTION__, __LINE__) */
+#define ISOFS_ASSERT(cond, fmt, file, func, line) \
+    do { \
+        const char *_file = (file); \
+        const char *_func = (func); \
+        s32 _ok = (cond); \
+        if (!_ok) { \
+            Kprintf((fmt), _file, _func, (line)); \
+            sceKernelAssert(_ok, 0); \
+        } \
+    } while (0)
+
+/* sceBLKGetDeviceData() result kept in IsofsUnit.blkDev (only maxLbn known) */
+typedef struct {
+#if FW_VERSION == 100
+    u8 unk0[0x854];
+#else
+    u8 unk0[0x858];
+#endif
+    u32 maxLbn;
+} IsofsBlkDevData;
+
 /* cache entry (0x30), 16 of them */
 typedef struct {
     u32 unk0;
@@ -139,7 +161,7 @@ struct IsofsUnit {
     void *paths; /* 0x94 */
     IsofsFdw *fdw; /* 0x98 */
     void *pathTable; /* 0x9C */
-    void *umd; /* 0xA0, umd9660 handle */
+    IsofsBlkDevData *blkDev; /* 0xA0, sceBLKGetDeviceData() */
 };
 typedef char chk_IsofsUnit[(sizeof(IsofsUnit) == 0xA4) ? 1 : -1];
 
@@ -176,10 +198,12 @@ struct Unk_func_00003BB4_temp_v0 {
 
 extern s32 D_00005A00;
 extern s32 D_00005A04;
-extern s32 D_00005F30;
-extern s32 D_00005F38;
+extern char D_00005F30[];
+extern char D_00005F38[];
 extern s32 D_00005F98;
-extern s32 D_00005FE0;
+extern char D_00005FCC[];
+extern char D_00005FE0[];
+extern char D_00006070[];
 extern s32 D_00006200;
 extern s32 D_00006224;
 extern s32 D_000065C0;
@@ -187,6 +211,7 @@ extern s32 D_000065C4;
 extern s32 D_000067C4;
 extern struct D_00007608_s D_00007608;
 extern s32 D_00007B40;
+extern char D_000084D8[];
 extern s32 D_00008A90;
 extern s32 D_00009AC0;
 extern s32 D_00009B00;
@@ -208,21 +233,27 @@ extern IsofsCacheEntry *g_isofsCache;
 extern IsofsMgr g_isofsMgr;
 extern IsofsUnit *g_isofsUnits;
 
-M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, M2C_UNK *, s32);
+s32 Kprintf(const char *fmt, ...);
 s32 SysMemForKernel_7B749390(SceUID heapId, void *p);
 s32 func_00000250(s32 arg0);
-void func_000003E8(void *arg0);
+s32 func_00000284(IsofsUnit *unit, s32 count, s32 filesCount);
+s32 func_000003C8(IsofsUnit *unit, u32 lbn);
+void func_000003E8(IsofsUnit *unit);
 s32 func_00000440(struct Unk_func_00000440_0 *arg0);
-s32 func_00000494(void *arg0, s32 arg1);
+s32 func_00000494(IsofsUnit *unit, s32 count);
 s32 func_000004E4(struct Unk_func_000004E4_0 *arg0, s32 arg1);
 s32 func_00000620(void);
 s32 func_0000065C(s32);
 s32 func_000006EC(void);
 s32 func_00000790(s32);
-s32 func_000007FC(s32, s32);
+void func_000007FC(IsofsFdw *fdw, s32 count);
 s32 func_00000D28(void);
+s32 func_00000DA8(IsofsFile *file);
 s32 func_00000E6C(void);
-s32 func_00000F9C(s32);
+s32 func_00000EBC(IsofsFdw *fdw, u32 idx, s32 filesCount);
+void func_00000F9C(IsofsFd *fd);
+s32 func_000010A4(IsofsFd *fd, s32 filesCount);
+s32 func_00001914(IsofsFile *files);
 s32 func_00001A4C(void *arg0);
 void func_00002328(void);
 void func_00002364(struct Unk_func_00002364_0 *arg0);
@@ -230,6 +261,7 @@ s32 func_00002374(void *arg0);
 s32 func_00002D7C(void);
 void func_00003AE8(void *arg0);
 s32 func_00003BB4(struct Unk_func_00003BB4_0 *arg0);
+s32 func_00004024(IsofsUnit *unit, s32 unitNum);
 s32 func_00004064(s32 arg0);
 s32 func_00004DB0(void);
 s32 func_00004E30(s32);
@@ -264,9 +296,13 @@ s32 func_00007748(void);
 s32 func_00007FC0(s32 arg0);
 s32 func_00007FF0(void);
 IsofsMgr *isofsGetMgr(void);
+s32 memcmp(const void *a, const void *b, SceSize n);
+void *memcpy(void *dst, const void *src, SceSize n);
+void *memset(void *s, s32 c, SceSize n);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
 IsofsUnit *sceIsofsGetFileSystem(s32 unitNum);
-M2C_UNK sceKernelAssert(s32, M2C_UNK);
+void *sceKernelAllocHeapMemory(SceUID heapId, SceSize size);
+void sceKernelAssert(s32 ok, s32 lvl);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelDeleteFpl(s32);
@@ -282,5 +318,11 @@ s32 sceUmdManRegisterInsertEjectUMDCallBack(M2C_UNK, M2C_UNK *, s32);
 M2C_UNK sceUmdManUnRegisterInsertEjectUMDCallBack(M2C_UNK);
 s32 sceUmdRegisterInsertEjectUMDCallBack(M2C_UNK *, s32);
 M2C_UNK sceUmdUnRegisterInsertEjectUMDCallBack(s32);
+char *strchr(const char *s, s32 c);
+s32 strcmp(const char *a, const char *b);
+SceSize strlen(const char *s);
+s32 strncmp(const char *a, const char *b, SceSize n);
+char *strrchr(const char *s, s32 c);
+s32 strtol(const char *s, char **end, s32 base);
 
 #endif

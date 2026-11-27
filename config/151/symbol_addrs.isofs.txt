@@ -172,3 +172,4 @@ func_00007FC0 = 0x0000831C; // type:func rom:0x839C
 func_00007FF0 = 0x00008348; // type:func rom:0x83C8
 D_0000873C_v151 = 0x0000873C; // rom:0x87BC
 // shared names (tools/add_version.py) end
+func_000003C8 = 0x000003EC; // type:func
