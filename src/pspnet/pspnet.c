@@ -847,11 +847,11 @@ void sceNet_lib_B9C780C7(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_B68E1EEA);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 *sceNet_lib_B68E1EEA(void) {
     return &D_0000B91C;
 }
@@ -1576,11 +1576,11 @@ INCLUDE_ASM("nonmatchings/pspnet", func_0000881C);
 INCLUDE_ASM("nonmatchings/pspnet", func_00008848);
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", func_0000885C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 *func_0000885C(void) {
     return &D_0000A10D;
 }
