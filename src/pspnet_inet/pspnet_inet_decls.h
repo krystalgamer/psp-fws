@@ -97,7 +97,9 @@ struct socket {
     u32 so_oobmark;             /* 0x40 */
     struct sockbuf so_rcv;      /* 0x44 */
     struct sockbuf so_snd;      /* 0x6C */
-    u8 unk94[0xA0 - 0x94];
+    void *so_tpcb;              /* 0x94 */
+    void (*so_upcall)(struct socket *so, void *arg, s32 waitf); /* 0x98 */
+    void *so_upcallarg;         /* 0x9C */
     void *unkA0;                /* 0xA0 SCE callback (func_00002844) */
     void *unkA4;                /* 0xA4 SCE callback (func_00002E98) */
     s32 so_fd;                  /* 0xA8 SCE descriptor, -1 until allocated */
@@ -162,10 +164,10 @@ struct sockaddr {
     char sa_data[14];
 };
 
-/* 2-byte aligned in this stack: copies and bzero use halfword accesses */
+/* packed like pspsdk's netinet/in.h: accesses follow the containing object's alignment */
 struct in_addr {
     u32 s_addr;
-} __attribute__((packed, aligned(2)));
+} __attribute__((packed));
 
 struct sockaddr_in {
     u8 sin_len;                 /* 0x0 */
@@ -292,6 +294,7 @@ struct radix_node_head {
 #define RTF_GATEWAY 0x2
 #define RTF_HOST 0x4
 #define RTF_DYNAMIC 0x10
+#define RTF_CLONING 0x100
 #define RTF_STATIC 0x800
 #define RTM_ADD 1
 #define RTM_DELETE 2
@@ -341,6 +344,17 @@ struct cp {
 
 #define PPP_PAP 0xC023
 
+#define STATE_INITIAL 0
+#define STATE_STARTING 1
+#define STATE_CLOSED 2
+#define STATE_STOPPED 3
+#define STATE_CLOSING 4
+#define STATE_STOPPING 5
+#define STATE_REQ_SENT 6
+#define STATE_ACK_RCVD 7
+#define STATE_ACK_SENT 8
+#define STATE_OPENED 9
+
 /* struct sppp (NetBSD if_spppsubr, partial; callouts are 0x24 bytes) */
 struct sppp {
     u8 unk0[0x150];
@@ -348,15 +362,23 @@ struct sppp {
     u8 unk154[0x170 - 0x154];
     s32 pp_phase;                   /* 0x170 */
     s32 unk174;
-    u8 unk178[0x190 - 0x178];
+    u8 unk178[0x180 - 0x178];
+    s32 state[IDX_COUNT];           /* 0x180 STATE_* per control protocol */
     u8 confid[IDX_COUNT];           /* 0x190 */
-    u8 unk194[0x19C - 0x194];
-    s32 unk19C;                     /* 0x19C set from lcp.max_configure by pap.Open */
-    u8 unk1A0[0x1B4 - 0x1A0];
+    s32 rst_counter[IDX_COUNT];     /* 0x194 */
+    u8 unk1A4[0x1B4 - 0x1A4];
     u8 ch[IDX_COUNT][0x24];         /* 0x1B4 per-protocol timeout callouts */
-    u8 unk244[0x254 - 0x244];
+    u32 lcp_opts;                   /* 0x244 lcp.opts */
+    u32 lcp_magic;                  /* 0x248 */
+    u32 lcp_mru;                    /* 0x24C */
+    u32 lcp_their_mru;              /* 0x250 */
     s32 lcp_protos;                 /* 0x254 lcp.protos */
-    u8 unk258[0x27C - 0x258];
+    u32 lcp_echoid;                 /* 0x258 */
+    s32 lcp_timeout;                /* 0x25C */
+    s32 lcp_max_terminate;          /* 0x260 */
+    s32 lcp_max_configure;          /* 0x264 */
+    s32 lcp_max_failure;            /* 0x268 */
+    u8 unk26C[0x27C - 0x26C];
     u16 myauth_proto;               /* 0x27C myauth.proto */
     u8 unk27E[0x280 - 0x27E];
     u8 myauth_name[0x80];           /* 0x280 */
@@ -364,8 +386,8 @@ struct sppp {
     u8 myauth_name_len;             /* 0x380 */
     u8 myauth_secret_len;           /* 0x381 */
     u8 unk382[0x394 - 0x382];
-    s32 lcp_timeout;                /* 0x394 */
-    s32 lcp_max_configure;          /* 0x398 */
+    s32 unk394;                     /* 0x394 pap request timeout */
+    s32 unk398;                     /* 0x398 pap request retries */
     u8 unk39C[0x4A8 - 0x39C];
     void (*pp_tls)(struct sppp *sp);    /* 0x4A8 */
     void (*pp_tlf)(struct sppp *sp);    /* 0x4AC */
@@ -425,7 +447,20 @@ struct ifnet {
     s16 if_flags;                       /* 0x30 IFF_* */
     u8 unk32[0x38 - 0x32];
     struct if_data if_data;             /* 0x38 */
+    u8 unk58[0xC];
+    u8 unk64[0xB0 - 0x58 - 0xC];
+    s32 (*if_output)();                 /* 0xB0 */
+    void (*if_start)(struct ifnet *ifp); /* 0xB4 */
+    u8 unkB8[4];
+    s32 (*if_ioctl)(struct ifnet *ifp, u32 cmd, void *data); /* 0xBC */
+    u8 unkC0[0xE0 - 0xC0];
+    struct sockaddr_dl *if_sadl;        /* 0xE0 */
 };
+#define if_type if_data.ifi_type
+#define if_addrlen if_data.ifi_addrlen
+#define if_hdrlen if_data.ifi_hdrlen
+#define IFF_MULTICAST 0x8000
+#define IFT_LOOP 0x18
 #define if_mtu if_data.ifi_mtu
 #define IFF_UP 0x1
 #define IFF_LOOPBACK 0x8
@@ -439,6 +474,7 @@ struct ifaddr {
     TAILQ_ENTRY(ifaddr) ifa_list;       /* 0x10 */
     u8 ifa_data[0x10];                  /* 0x18 struct ifaddr_data (u_quad_t in/out bytes) */
     void (*ifa_rtrequest)(s32 cmd, struct rtentry *rt); /* 0x28 */
+    u32 ifa_flags;                      /* 0x2C */
 };
 
 struct timeval {
@@ -453,11 +489,6 @@ struct SceNetInetPollfd {
     s16 revents;
 };
 
-/* API in_addr: byte-aligned */
-struct SceNetInAddrPacked {
-    u32 s_addr;
-} __attribute__((packed));
-
 /* sceNetConfigGetRouteInfo entry (0x24) */
 typedef struct {
     u32 unk0;
@@ -470,10 +501,72 @@ typedef struct {
 /* struct in_ifaddr (NetBSD in_var.h, partial) */
 struct in_ifaddr {
     struct ifaddr ia_ifa;               /* 0x00 */
-    u8 unk2C[0x54 - 0x2C];
+    u8 unk30[0x54 - 0x30];
     TAILQ_ENTRY(in_ifaddr) ia_list;     /* 0x54 */
+    struct sockaddr_in ia_addr;         /* 0x5C */
 };
 #define ia_ifp ia_ifa.ifa_ifp
+
+/* struct rt_addrinfo (4.4BSD route.h) */
+#define RTAX_MAX 8
+struct rt_addrinfo {
+    s32 rti_addrs;                      /* 0x00 */
+    struct sockaddr *rti_info[RTAX_MAX]; /* 0x04 */
+};
+
+/* struct arphdr (if_arp.h), byte-aligned */
+struct arphdr {
+    u16 ar_hrd;
+    u16 ar_pro;
+    u8 ar_hln;
+    u8 ar_pln;
+    u16 ar_op;
+} __attribute__((packed));
+#define ETHERTYPE_IP 0x0800
+#define ETHERTYPE_IPTRAILERS 0x1000
+
+/* struct sockaddr_dl (if_dl.h) */
+struct sockaddr_dl {
+    u8 sdl_len;
+    u8 sdl_family;
+    u16 sdl_index;
+    u8 sdl_type;
+    u8 sdl_nlen;        /* 0x5 */
+    u8 sdl_alen;
+    u8 sdl_slen;
+    char sdl_data[12];  /* 0x8 */
+};
+#define LLADDR(s) ((u8 *)((s)->sdl_data + (s)->sdl_nlen))
+
+#define IF_DEQUEUE(ifq, m) { \
+    (m) = (ifq)->ifq_head; \
+    if (m) { \
+        if (((ifq)->ifq_head = (m)->m_nextpkt) == 0) \
+            (ifq)->ifq_tail = 0; \
+        (m)->m_nextpkt = 0; \
+        (ifq)->ifq_len--; \
+    } \
+}
+
+/* struct tcpcb (NetBSD 1.5 tcp_var.h, partial; SCE timers hold absolute tcp_now ticks) */
+#define TCPT_NTIMERS 4
+#define TCPT_REXMT 0
+#define TCPT_PERSIST 1
+#define TCPT_KEEP 2
+#define TCPT_2MSL 3
+struct tcpcb {
+    u8 unk0[8];
+    s32 t_timer[TCPT_NTIMERS];  /* 0x08 */
+    u8 unk18[2];
+    s16 t_rxtshift;             /* 0x1A */
+    u8 unk1C[0x88 - 0x1C];
+    s16 t_srtt;                 /* 0x88 */
+    s16 t_rttvar;               /* 0x8A */
+    s16 t_rttmin;               /* 0x8C */
+};
+#define TCPTV_PERSMIN 10
+#define TCPTV_PERSMAX 120
+#define TCP_MAXRXTSHIFT 12
 
 struct SceTailqHead {
     void *tqh_first;
@@ -844,6 +937,7 @@ void _sce_pspnet_callout_stop(void *c);
 M2C_UNK _sce_pspnet_get_thread_errno();
 s32 _sce_pspnet_hashinit(s32, void *);
 s32 _sce_pspnet_ifioctl(struct socket *so, u32 cmd, void *data, s32 p);
+void _sce_pspnet_inet_sabort(struct socket *so);
 void _sce_pspnet_microtime(struct timeval *tv);
 s32 _sce_pspnet_pppoe_term(void);
 void _sce_pspnet_selwakeup(struct selinfo *sip);
@@ -966,6 +1060,9 @@ s32 func_0000F274(void);
 void func_0000F27C(struct Unk_func_0000F27C_0 *arg0, struct Unk_func_0000F27C_1 *arg1);
 void func_0000F2A8(struct Unk_func_0000F2A8_0 *arg0, struct Unk_func_0000F2A8_1 *arg1);
 void func_0000F71C(s32 cmd, struct rtentry *rt);
+void func_0000F730(s32 req, struct rtentry *rt);
+void func_0000FA70(struct ifnet *ifp, struct in_addr *sip, struct in_addr *tip, u8 *enaddr);
+void func_00010528(struct mbuf *m);
 s32 func_000106E0(void);
 s32 func_00010700(void);
 void func_00012684(struct in_multi *inm);
@@ -1045,7 +1142,7 @@ s32 sceNetInetInetAddr(s32 arg0);
 void sceNetInetInetAton(s32 arg0, s32 arg1);
 const char *sceNetInetInetNtop(s32 af, const void *src, char *dst, s32 size);
 s32 *sceNetInet_lib_D7928A6D(void);
-M2C_UNK sceNetMFreem(s32);
+void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand();
