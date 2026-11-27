@@ -1784,6 +1784,7 @@ void in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, s32 errno, 
 void in_pcbstate(struct inpcb *inp, s32 state);
 void in_rtchange(struct inpcb *inp, s32 errno);
 struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp);
+s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **m);
 void ip_drain(void);
 void ip_freef();
 void ip_input(struct mbuf *m);

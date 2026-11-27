@@ -4168,7 +4168,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", ip_optcopy);
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001788C);
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00017F60);
+INCLUDE_ASM("nonmatchings/pspnet_inet", ip_ctloutput);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00017BF0);
@@ -4574,7 +4574,57 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001AAFC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001AE68);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B094);
+#if FW_VERSION < 250
+s32 rip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **m) {
+    struct inpcb *inp = (struct inpcb *)so->so_pcb;
+    s32 error = 0;
+
+    if (level != 0) {
+        error = 0x6D;
+        if (op == 1 && *m != 0)
+            (void)sceNetMFree(*m);
+    } else switch (op) {
+    case 1:
+        switch (optname) {
+        case 2:
+            if (*m == 0 || (*m)->m_len < sizeof(s32))
+                error = 0x16;
+            else {
+                if (*mtod(*m, s32 *))
+                    inp->inp_flags |= 0x8;
+                else
+                    inp->inp_flags &= ~0x8;
+            }
+            if (*m != 0)
+                (void)sceNetMFree(*m);
+            break;
+        default:
+            error = ip_ctloutput(op, so, level, optname, m);
+            break;
+        }
+        break;
+    case 0:
+        switch (optname) {
+        case 2:
+            *m = sceNetMGet(0, 10);
+            if (*m == NULL) {
+                error = 0x69;
+                break;
+            }
+            (*m)->m_len = sizeof(s32);
+            *mtod(*m, s32 *) = (inp->inp_flags & 0x8) ? 1 : 0;
+            break;
+        default:
+            error = ip_ctloutput(op, so, level, optname, m);
+            break;
+        }
+        break;
+    }
+    return (error);
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", rip_ctloutput);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B1B0);
 
