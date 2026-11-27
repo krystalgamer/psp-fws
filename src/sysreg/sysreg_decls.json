@@ -1,8 +1,5 @@
 {
  "funcs": {
-  "sceKernelEnableIntr": "M2C_UNK sceKernelEnableIntr(M2C_UNK);",
-  "sceKernelRegisterIntrHandler": "M2C_UNK sceKernelRegisterIntrHandler(M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);",
-  "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
   "func_000000B4": "s32 func_000000B4(void);",
   "func_000000BC": "s32 func_000000BC(void);",
   "func_000000C4": "s32 func_000000C4(void);",
@@ -11,22 +8,26 @@
   "module_start": "s32 module_start(void);",
   "sceKernelCpuResumeIntrWithSync": "void sceKernelCpuResumeIntrWithSync(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
+  "sceKernelEnableIntr": "M2C_UNK sceKernelEnableIntr(M2C_UNK);",
+  "sceKernelRegisterIntrHandler": "M2C_UNK sceKernelRegisterIntrHandler(M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);",
   "sceKernelRegisterSysEventHandler": "M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);",
+  "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
   "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
+  "sceSysregEnd": "s32 sceSysregEnd(void);",
   "sceSysregGpioIoDisable": "void sceSysregGpioIoDisable(s32 arg0);",
-  "sceSysregIntrInit": "s32 sceSysregIntrInit(void);",
-  "sceSysregIntrEnd": "s32 sceSysregIntrEnd(void);",
-  "sceSysregKeyIoDisable": "s32 sceSysregKeyIoDisable(void);",
-  "sceSysregUsbAcquireIntr": "s32 sceSysregUsbAcquireIntr(s32 arg0);",
-  "sceSysregKeyIoEnable": "s32 sceSysregKeyIoEnable(void);",
-  "sceSysregKeyClkDisable": "s32 sceSysregKeyClkDisable(void);",
   "sceSysregGpioIoEnable": "void sceSysregGpioIoEnable(s32 arg0);",
-  "sceSysregPllUpdateFrequency": "s32 sceSysregPllUpdateFrequency(void);",
+  "sceSysregInit": "s32 sceSysregInit(void);",
+  "sceSysregIntrEnd": "s32 sceSysregIntrEnd(void);",
+  "sceSysregIntrInit": "s32 sceSysregIntrInit(void);",
+  "sceSysregKeyClkDisable": "s32 sceSysregKeyClkDisable(void);",
   "sceSysregKeyClkEnable": "s32 sceSysregKeyClkEnable(void);",
-  "sceSysregEnd": "s32 sceSysregEnd(void);"
+  "sceSysregKeyIoDisable": "s32 sceSysregKeyIoDisable(void);",
+  "sceSysregKeyIoEnable": "s32 sceSysregKeyIoEnable(void);",
+  "sceSysregPllUpdateFrequency": "s32 sceSysregPllUpdateFrequency(void);",
+  "sceSysregUsbAcquireIntr": "s32 sceSysregUsbAcquireIntr(s32 arg0);"
  },
  "vars": {
-  "D_000025C0": "extern M2C_UNK D_000025C0;",
+  "D_000025C0": "extern s32 D_000025C0;",
   "D_00002BD0": "extern M2C_UNK D_00002BD0;",
   "func_00001814": "extern M2C_UNK func_00001814;"
  }
