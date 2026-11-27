@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_00001EC8_0 {
     u8 pad0[0x4];
     s32 unk4;
@@ -98,11 +104,11 @@ s32 _ZN3paf4View8PageOpenEPKcii(s32, s32, s32, s32);
 M2C_UNK _ZN3paf4View9PageCloseEPKc(s32);
 M2C_UNK _ZN3paf5SleepEi(M2C_UNK);
 s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, s32);
-s32 _ZN3vsh16GetString_CancelEv();
+s32 _ZN3vsh16GetString_CancelEv(void);
 M2C_UNK _ZN3vsh26ShowButtonNavigation_EnterEb(M2C_UNK);
 M2C_UNK _ZN3vsh30SetButtonNavigationString_BackEPKw(void *, s32);
 M2C_UNK _ZNK3paf4View8PageRootEPKc(s32);
-M2C_UNK func_0000015C();
+M2C_UNK func_0000015C(...);
 s32 func_000001FC(void);
 void func_00000430(void);
 void func_000004AC(void);
@@ -177,19 +183,19 @@ void func_000025E4(void *arg0);
 s32 func_00002638(void);
 s32 func_000026F8(void);
 s32 func_00002A38(void);
-M2C_UNK func_00002F64();
-M2C_UNK func_0000320C();
-M2C_UNK func_000032A0();
+M2C_UNK func_00002F64(...);
+M2C_UNK func_0000320C(...);
+M2C_UNK func_000032A0(...);
 void func_000032C0(struct Unk_func_000032C0_0 *arg0);
 void func_00003514(struct Unk_func_00003514_0 *arg0);
-M2C_UNK func_00003520();
+M2C_UNK func_00003520(...);
 M2C_UNK func_00003558(void *);
 void func_000036E8(s32 arg0, s32 arg1);
 M2C_UNK func_000038F0(s32, s32, s32);
 void func_00003A00(void);
-M2C_UNK func_00003A58();
+M2C_UNK func_00003A58(...);
 s32 module_stop(void);
-s32 sceNetAdhocDownloadAbortReplySession();
+s32 sceNetAdhocDownloadAbortReplySession(...);
 M2C_UNK scePaf_39E62C88(s32, s32, M2C_UNK, M2C_UNK);
 M2C_UNK scePaf_3EDD45EF(M2C_UNK, M2C_UNK *, s32, M2C_UNK, M2C_UNK, M2C_UNK *);
 s32 scePaf_5E4447F6(s32);
@@ -201,9 +207,13 @@ s32 scePaf_C1B0AA0D(s32);
 M2C_UNK scePaf_CD216C47(s32);
 M2C_UNK scePaf_D1447DB7(s32);
 M2C_UNK sceVshCommonGui_11C48509(void *, s32);
-s32 sceVshCommonGui_6BC16C05();
+s32 sceVshCommonGui_6BC16C05(...);
 M2C_UNK sceVshCommonGui_F5A16B4D(M2C_UNK);
 s32 sce_paf_private_strlen(s32);
 s32 sce_paf_private_wcslen(s32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
