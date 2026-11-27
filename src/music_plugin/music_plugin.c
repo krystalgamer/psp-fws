@@ -329,9 +329,9 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00000318);
 void func_00000318(void) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_88784487(&D_0000206C);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_0000206C);
     if (temp_v0 != 0) {
-        scePaf_58DF4B4F(temp_v0, func_00000F04);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE(temp_v0, func_00000F04);
     }
 }
 #endif
@@ -371,7 +371,7 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00000610);
 
 #if FW_VERSION >= 350
 void func_00000A04(s32 arg0) {
-    sceVshCommonUtil_F6567B66(&D_00002C10, 0x80, arg0);
+    sceVshCommonUtil_0587F20C(&D_00002C10, 0x80, arg0);
 }
 #endif
 
@@ -391,7 +391,7 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00000A9C);
 
 #if FW_VERSION >= 350
 void func_00000A54(s32 arg0) {
-    sceVshCommonUtil_21EF453A(&D_00002C10, arg0);
+    sceVshCommonUtil_8584376D(&D_00002C10, arg0);
 }
 #endif
 
@@ -455,9 +455,9 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00000F04);
 void func_00000F04(void) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_88784487(&D_000027FC);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_000027FC);
     if (temp_v0 != 0) {
-        scePaf_58DF4B4F(temp_v0, NULL);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE(temp_v0, NULL);
     }
 }
 #endif
@@ -479,9 +479,9 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00001000);
 void func_00001000(void) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_88784487(&D_000027FC);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_000027FC);
     if (temp_v0 != 0) {
-        scePaf_58DF4B4F(temp_v0, func_00000F20);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE(temp_v0, func_00000F20);
     }
 }
 #endif
@@ -504,9 +504,9 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00001074);
 void func_00001074(void) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_88784487(&D_000027FC);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_000027FC);
     if (temp_v0 != 0) {
-        scePaf_58DF4B4F(temp_v0, func_00001140);
+        _ZN3paf4View6UnloadEPS0_PFvPKcE(temp_v0, func_00001140);
     }
 }
 #endif
@@ -1844,7 +1844,7 @@ void func_000012F0(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_0000150C(arg0, arg1, var_v0);
 }
@@ -1907,7 +1907,7 @@ void func_00001340(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_C1B0AA0D(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_000015C0(arg0, arg1, var_v0);
 }
