@@ -1,6 +1,7 @@
 /* cflags[100]: -O2 -frename-registers -fno-builtin */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "lfatfs_decls.h"
 
 #if FW_VERSION >= 350
@@ -799,7 +800,33 @@ s32 UFatWrite(SceIoIob *iob, const void *data, SceSize size) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION == 152
+s32 UFatWrite(SceIoIob *iob, const void *data, SceSize size) {
+    s32 args[3];
+    s32 ret;
+
+    if (iob->i_unit == 0 && func_00009514(iob) != 0) {
+        ret = 0x8001000D;
+        Kprintf(D_0000D13C, "UFatWrite", ret);
+        return ret;
+    }
+    ret = wait_sema(D_0000E094);
+    if (ret != 0) {
+        Kprintf(D_0000CF9C, "UFatWrite", ret);
+        return 0x80010005;
+    }
+    args[0] = (s32)iob;
+    args[1] = (s32)data;
+    args[2] = (s32)size;
+    func_00009150();
+    ret = sceKernelExtendKernelStack(0x1000, func_00002E0C, args);
+    func_00009150();
+    signal_sema(D_0000E094);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", UFatWrite);
 #endif
 
@@ -907,7 +934,35 @@ s32 UFatIoctl2(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdat
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION == 152
+s32 UFatIoctl2(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    s32 args[6];
+    s32 ret;
+
+    if (func_00009514(iob) != 0) {
+        Kprintf(D_0000D09C_v152, "UFatIoctl2");
+        return 0x8001000D;
+    }
+    ret = wait_sema(D_0000E094);
+    if (ret != 0) {
+        Kprintf(D_0000CF9C, "UFatIoctl2", ret);
+        return 0x80010005;
+    }
+    args[0] = (s32)iob;
+    args[1] = (s32)cmd;
+    args[2] = (s32)indata;
+    args[3] = (s32)inlen;
+    args[4] = (s32)outdata;
+    args[5] = (s32)outlen;
+    func_00009150();
+    ret = sceKernelExtendKernelStack(0x1000, func_00003B3C, args);
+    func_00009150();
+    signal_sema(D_0000E094);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", UFatIoctl2);
 #endif
 
@@ -951,7 +1006,30 @@ s32 UFatRemove(SceIoIob *iob, char *name) {
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION == 152
+s32 UFatRemove(SceIoIob *iob, char *name) {
+    s32 args[2];
+    s32 ret;
+
+    if (iob->i_unit == 0 && func_00009514(iob) != 0) {
+        return 0x8001000D;
+    }
+    ret = wait_sema(D_0000E094);
+    if (ret != 0) {
+        Kprintf(D_0000CF9C, "UFatRemove", ret);
+        return 0x80010005;
+    }
+    args[0] = (s32)iob;
+    args[1] = (s32)name;
+    func_00009150();
+    ret = sceKernelExtendKernelStack(0x1000, func_00003B70, args);
+    func_00009150();
+    signal_sema(D_0000E094);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/lfatfs", UFatRemove);
 #endif
 
@@ -997,7 +1075,31 @@ s32 UFatMkdir(SceIoIob *iob, char *name, SceMode mode) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION == 152
+s32 UFatMkdir(SceIoIob *iob, char *name, SceMode mode) {
+    s32 args[3];
+    s32 ret;
+
+    if (iob->i_unit == 0 && func_00009514(iob) != 0) {
+        return 0x8001000D;
+    }
+    ret = wait_sema(D_0000E094);
+    if (ret != 0) {
+        Kprintf(D_0000CF9C, "UFatMkdir", ret);
+        return 0x80010005;
+    }
+    args[0] = (s32)iob;
+    args[1] = (s32)name;
+    args[2] = (s32)mode;
+    func_00009150();
+    ret = sceKernelExtendKernelStack(0x1000, func_00002E88, args);
+    func_00009150();
+    signal_sema(D_0000E094);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", UFatMkdir);
 #endif
 
@@ -1045,7 +1147,30 @@ s32 UFatRmdir(SceIoIob *iob, char *name) {
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION == 152
+s32 UFatRmdir(SceIoIob *iob, char *name) {
+    s32 args[2];
+    s32 ret;
+
+    if (iob->i_unit == 0 && func_00009514(iob) != 0) {
+        return 0x8001000D;
+    }
+    ret = wait_sema(D_0000E094);
+    if (ret != 0) {
+        Kprintf(D_0000CF9C, "UFatRmdir", ret);
+        return 0x80010005;
+    }
+    args[0] = (s32)iob;
+    args[1] = (s32)name;
+    func_00009150();
+    ret = sceKernelExtendKernelStack(0x1000, func_00002EB0, args);
+    func_00009150();
+    signal_sema(D_0000E094);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/lfatfs", UFatRmdir);
 #endif
 
@@ -1544,7 +1669,32 @@ s32 UFatChstat(SceIoIob *iob, char *file, SceIoStat *stat, s32 bits) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION == 152
+s32 UFatChstat(SceIoIob *iob, char *file, SceIoStat *stat, s32 bits) {
+    s32 args[4];
+    s32 ret;
+
+    if (iob->i_unit == 0 && func_00009514(iob) != 0) {
+        return 0x8001000D;
+    }
+    ret = wait_sema(D_0000E094);
+    if (ret != 0) {
+        Kprintf(D_0000CF9C, "UFatChstat", ret);
+        return 0x80010005;
+    }
+    args[0] = (s32)iob;
+    args[1] = (s32)file;
+    args[2] = (s32)stat;
+    args[3] = (s32)bits;
+    func_00009150();
+    ret = sceKernelExtendKernelStack(0x1000, func_00002F38, args);
+    func_00009150();
+    signal_sema(D_0000E094);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", UFatChstat);
 #endif
 
@@ -1620,7 +1770,34 @@ s32 UFatMount(SceIoIob *iob, const char *fs, const char *blockDev, s32 mode, voi
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 152
+s32 UFatMount(SceIoIob *iob, const char *fs, const char *blockDev, s32 mode, void *data, s32 len) {
+    s32 args[6];
+    s32 ret;
+
+    if (func_00009514(iob) != 0) {
+        Kprintf(D_0000D09C_v152, "UFatMount");
+        return 0x8001000D;
+    }
+    ret = wait_sema(D_0000E094);
+    if (ret != 0) {
+        Kprintf(D_0000CF9C, "UFatMount", ret);
+        return 0x80010005;
+    }
+    args[0] = (s32)iob;
+    args[1] = (s32)fs;
+    args[2] = (s32)blockDev;
+    args[3] = (s32)mode;
+    args[4] = (s32)data;
+    args[5] = (s32)len;
+    ret = sceKernelExtendKernelStack(0x1000, func_00003C6C, args);
+    func_00009150();
+    signal_sema(D_0000E094);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/lfatfs", UFatMount);
 #endif
 
@@ -1666,7 +1843,29 @@ s32 UFatUmount(SceIoIob *iob, char *blockDev) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 300
+#if FW_VERSION == 152
+s32 UFatUmount(SceIoIob *iob, char *blockDev) {
+    s32 args[6];
+    s32 ret;
+
+    if (func_00009514(iob) != 0) {
+        return 0x8001000D;
+    }
+    ret = wait_sema(D_0000E094);
+    if (ret != 0) {
+        Kprintf(D_0000CF9C, "UFatUmount", ret);
+        return 0x80010005;
+    }
+    args[0] = (s32)iob;
+    args[1] = (s32)blockDev;
+    ret = sceKernelExtendKernelStack(0x1000, func_00003CA0, args);
+    func_00009150();
+    signal_sema(D_0000E094);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/lfatfs", UFatUmount);
 #endif
 
@@ -2643,9 +2842,22 @@ s32 func_0000881C(s32 arg0) {
 INCLUDE_ASM("nonmatchings/lfatfs", func_00008848);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/lfatfs", func_00009514);
+#if FW_VERSION == 152
+s32 func_00009514(SceIoIob *iob) {
+    if (k1IsUserMode()) {
+        if (sceIoGetIobUserLevel(iob) < 4) {
+            return 0x8001000D;
+        }
+    }
+    return 0;
+}
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lfatfs", func_00009514);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000955C);
 #endif
 
