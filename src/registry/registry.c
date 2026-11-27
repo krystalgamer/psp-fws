@@ -1,7 +1,9 @@
-/* cflags[100]: -O2 */
+/* cflags[100-303]: -O2 -fno-thread-jumps */
 #include "common.h"
 #include "k1.h"
 #include "registry_decls.h"
+
+#define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/registry", D_00006D40);
@@ -309,7 +311,32 @@ end:
 }
 #else
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveRegistry);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
+s32 sceRegFlushRegistry(s32 index) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto end;
+    ret = func_000008BC(index);
+end:
+    if (res == 0) {
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
+            ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushRegistry);
 #endif
 
@@ -372,9 +399,32 @@ end:
 INCLUDE_ASM("nonmatchings/registry", func_0000086C);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
+s32 sceRegFlushCategory(s32 hd) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto out;
+    ret = regFlushCategory((SceRegIndexEntry *)hd);
+    res = sceKernelSignalSema(g_semaId, 1);
+    if (res != 0)
+        ret = 0x80082734;
+out:
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushCategory);
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 sceRegFlushCategory(s32 arg0) {
     s32 ret;
     u32 oldK1;
@@ -634,13 +684,13 @@ INCLUDE_ASM("nonmatchings/registry", func_00001714);
 #endif
 
 s32 regGetFileSize(const char *name, u32 *size) {
-    u64 sz;
+    u32 sz[2];
     s32 ret;
 
     ret = 0x80084E29;
-    if (regStatFile(name, &sz) == 0) {
+    if (regStatFile(name, sz) == 0) {
         ret = 0;
-        *size = sz;
+        *size = sz[0];
     } else {
         *size = 0;
     }
@@ -662,9 +712,7 @@ s32 regOpenFileFd(const char *name, s32 *fd) {
     }
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#else
 s32 regOpenFileFd(const char *arg0, s32 *arg1) {
     s32 temp_v0;
     s32 var_v1;
@@ -715,21 +763,6 @@ INCLUDE_ASM("nonmatchings/registry", regClearOpenedCategories);
 #endif
 
 #if FW_VERSION >= 282
-s32 regOpenFileFd(const char *arg0, s32 *arg1) {
-    s32 temp_v0;
-    s32 var_v1;
-
-    temp_v0 = regOpenFile(arg0);
-    var_v1 = 0;
-    if (temp_v0 >= 0) {
-        *arg1 = temp_v0;
-    } else {
-        *arg1 = 0;
-        var_v1 = temp_v0;
-    }
-    return var_v1;
-}
-
 INCLUDE_ASM("nonmatchings/registry", func_000018B4);
 #endif
 
@@ -806,7 +839,30 @@ out:
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
+s32 sceRegCloseCategory(s32 hd) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto out;
+    ret = func_00002350((SceRegIndexEntry *)hd);
+    res = sceKernelSignalSema(g_semaId, 1);
+    if (res != 0)
+        ret = 0x80082734;
+out:
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", sceRegCloseCategory);
 #endif
 
@@ -1077,7 +1133,6 @@ SceRegCatNode *regFindCatNode(SceRegIndexEntry *cat) {
     return NULL;
 }
 
-#if FW_VERSION < 282
 s32 regSetHiveDirty(s32 index) {
     s32 ret;
     SceRegHive *h;
@@ -1090,7 +1145,6 @@ s32 regSetHiveDirty(s32 index) {
     }
     return ret;
 }
-#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", regSetCatDirty);
@@ -1112,19 +1166,6 @@ s32 regSetCatDirty(SceRegIndexEntry *cat) {
 #endif
 
 #if FW_VERSION >= 282
-s32 regSetHiveDirty(s32 index) {
-    s32 ret;
-    SceRegHive *h;
-
-    h = regGetHive(index);
-    ret = 0x80082715;
-    if (h != NULL) {
-        h->unk4 = 1;
-        ret = 0;
-    }
-    return ret;
-}
-
 INCLUDE_ASM("nonmatchings/registry", func_00003F2C);
 #endif
 
@@ -1141,7 +1182,6 @@ s32 regClearHiveDirty(s32 index) {
     return ret;
 }
 
-#if FW_VERSION >= 282
 s32 regClearCatDirty(SceRegIndexEntry *cat) {
     s32 ret;
     SceRegCatNode *n;
@@ -1154,20 +1194,6 @@ s32 regClearCatDirty(SceRegIndexEntry *cat) {
     }
     return ret;
 }
-#else
-s32 regClearCatDirty(SceRegIndexEntry *cat) {
-    s32 ret;
-    SceRegCatNode *n;
-
-    n = regFindCatNode(cat);
-    ret = 0x8008272E;
-    if (n != NULL) {
-        n->unk4 = 0;
-        ret = 0;
-    }
-    return ret;
-}
-#endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_000038A0);
@@ -1372,7 +1398,91 @@ end:
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION == 152
+s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto end;
+    if ((k1IsUserMode() && IS_USER_ADDR(keyId) == 0) ||
+        (k1IsUserMode() && IS_USER_ADDR((u32)buf | size | ((u32)buf + size)) == 0)) {
+        ret = 0x8008273B;
+        goto end;
+    }
+    ret = regGetKeyValue((SceRegIndexEntry *)hd, keyId, buf, size);
+end:
+    if (res == 0) {
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
+            ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
+s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto end;
+    if (k1IsUserMode() && IS_USER_ADDR((u32)buf | size | ((u32)buf + size)) == 0) {
+        ret = 0x8008273B;
+        goto end;
+    }
+    ret = regGetKeyValue((SceRegIndexEntry *)hd, keyId, buf, size);
+end:
+    if (res == 0) {
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
+            ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 271
+s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto end;
+    if ((s32)(-k1IsUserMode() & (((u32)buf + size) | (u32)buf | size)) < 0) {
+        ret = 0x8008273B;
+        goto end;
+    }
+    ret = regGetKeyValue((SceRegIndexEntry *)hd, keyId, buf, size);
+end:
+    if (res == 0) {
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
+            ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValue);
 #endif
 
@@ -1557,204 +1667,4 @@ INCLUDE_ASM("nonmatchings/registry", func_00005F74);
 INCLUDE_ASM("nonmatchings/registry", func_000058D8);
 #else
 INCLUDE_ASM("nonmatchings/registry", func_00005FF0);
-#endif
-
-#if FW_VERSION == 100
-s32 regCreateFile(const char *name) {
-    char *path;
-    s32 fd;
-
-    path = regAlloc(0x108);
-    if (path == NULL)
-        return 0;
-    sprintf(path, D_000066DC, D_00006F8C, name);
-    fd = sceIoOpen(path, 0x203, 0xFFF);
-    regFree(path);
-    if (fd < 0)
-        goto fail;
-    return fd;
-fail:
-    return -1;
-}
-#else
-INCLUDE_ASM("nonmatchings/registry", regCreateFile);
-#endif
-
-#if FW_VERSION < 201
-s32 regOpenFile(const char *name) {
-    char *path;
-    s32 fd;
-
-    path = regAlloc(0x108);
-    if (path == NULL)
-        return 0x80082712;
-    sprintf(path, D_000066DC, D_00006F8C, name);
-    fd = sceIoOpen(path, 3, 0);
-    regFree(path);
-    return fd;
-}
-#else
-INCLUDE_ASM("nonmatchings/registry", regOpenFile);
-#endif
-
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/registry", func_00006EF0);
-#endif
-
-#if FW_VERSION >= 152 && FW_VERSION < 282
-s32 func_00006EF0(s32 arg0) {
-    s32 var_v1;
-
-    var_v1 = -1;
-    if (sceIoClose(arg0) >= 0) {
-        var_v1 = (sceIoDevctl(&D_00006F8C, 0x5802, NULL, 0U, NULL, 0U) >= 0) ? 0 : 0x80084E2B;
-    }
-    return var_v1;
-}
-#endif
-
-#if FW_VERSION == 100
-s32 regCloseFile(s32 arg0) {
-    return -(sceIoClose(arg0) < 0);
-}
-#endif
-
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/registry", regRemoveFile);
-#else
-s32 func_00006674(s32 arg0) {
-    s32 var_v1;
-
-    var_v1 = -1;
-    if (sceIoClose(arg0) >= 0) {
-        var_v1 = (sceIoDevctl(&D_00006F8C, 0x5802, NULL, 0U, NULL, 0U) >= 0) ? 0 : 0x80084E2B;
-    }
-    return var_v1;
-}
-
-INCLUDE_ASM("nonmatchings/registry", func_000066D0);
-#endif
-
-#if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/registry", regWriteFile);
-#else
-s32 regWriteFile(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
-    s32 temp_v0;
-    u32 temp_lo;
-
-    temp_lo = arg1 * arg2;
-    temp_v0 = sceIoWrite(arg3, arg0, temp_lo);
-    *arg4 = temp_v0;
-    return (-((temp_v0 < (s32) temp_lo) == 0) & 6) - 6;
-}
-#endif
-
-#if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/registry", regReadFile);
-#else
-s32 regReadFile(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
-    s32 temp_v0;
-    u32 temp_lo;
-
-    temp_lo = arg1 * arg2;
-    temp_v0 = sceIoRead(arg3, arg0, temp_lo);
-    *arg4 = temp_v0;
-    return (((temp_v0 < (s32) temp_lo) == 0) * 8) - 8;
-}
-#endif
-
-#if FW_VERSION < 282
-s32 regSeekFile(s32 fd, s32 offset, s32 whence) {
-    return ((s32)sceIoLseek(fd, offset, func_000061B4(whence)) < 0) ? -9 : 0;
-}
-#else
-INCLUDE_ASM("nonmatchings/registry", regSeekFile);
-#endif
-
-INCLUDE_ASM("nonmatchings/registry", regStatFile);
-
-#if FW_VERSION < 282
-s32 func_000061B4(s32 arg0) {
-    return arg0;
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_RODATA("nonmatchings/registry", D_00006F8C);
-#endif
-
-#if FW_VERSION < 282
-INCLUDE_RODATA("nonmatchings/registry", D_000066DC);
-#else
-s32 func_00006998(s32 arg0) {
-    return arg0;
-}
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_RODATA("nonmatchings/registry", D_00006F8C);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_RODATA("nonmatchings/registry", D_00006F94);
-#endif
-
-#if FW_VERSION == 100
-s32 regHeapInit(s32 arg0, s32 size) {
-    s32 ret;
-
-    g_vplId = -1;
-    g_vplMaxUsed = -1;
-    g_vplId = sceKernelCreateVpl("reg", 1, 0, size, NULL);
-    ret = g_vplId;
-    if (g_vplId >= 0) {
-        g_vplMaxUsed = 0;
-        ret = 0;
-    }
-    return ret;
-}
-#else
-INCLUDE_ASM("nonmatchings/registry", regHeapInit);
-#endif
-
-#if FW_VERSION < 282
-void regHeapDelete(void) {
-    if (g_vplId >= 0) {
-        sceKernelDeleteVpl(g_vplId);
-        g_vplId = -1;
-    }
-}
-#else
-void regHeapDelete(void) {
-    if (g_vplId >= 0) {
-        sceKernelDeleteVpl(g_vplId);
-        g_vplId = -1;
-    }
-}
-#endif
-
-void *regAlloc(s32 size) {
-    void *ptr = NULL;
-    SceRegVplInfo info;
-    s32 used;
-
-    if (sceKernelTryAllocateVpl(g_vplId, size, &ptr) < 0)
-        return NULL;
-    info.size = sizeof(info);
-    if (sceKernelReferVplStatus(g_vplId, &info) == 0) {
-        used = info.poolSize - info.freeSize;
-        if (g_vplMaxUsed < used)
-            g_vplMaxUsed = used;
-    }
-    return ptr;
-}
-
-#if FW_VERSION < 282
-void regFree(void *ptr) {
-    sceKernelFreeVpl(g_vplId, ptr);
-}
-#else
-void regFree(void *ptr) {
-    sceKernelFreeVpl(g_vplId, ptr);
-}
 #endif

@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/330/.splat_cache.registry
   symbol_addrs_path:
     - config/330/symbol_addrs.registry.txt
+    - config/330/func_starts.registry.txt
     - tmp/build/330/prx_syms.registry.txt
   reloc_addrs_path: [tmp/build/330/reloc_addrs.registry.txt]
   asset_path: tmp/assets/330/registry
@@ -53,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, registry]
+      - [0x6660, c, regio]
       - { start: 0x6C28, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x6D00, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x6D04, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -64,6 +66,7 @@ segments:
       - { start: 0x6DE0, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x701C, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - [0x7088, .rodata, registry]
+      - [0x70D4, .rodata, regio]
       - { start: 0x70F4, type: prxpad, order: .rodata }
   - name: registry_seg1
     type: code
