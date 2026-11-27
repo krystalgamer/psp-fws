@@ -79,10 +79,11 @@ typedef struct {
     u32 sector; /* 0x30 (2.01+: 0x40), sector holding the entry */
     u8 pad34[4];
     s32 unk38; /* 0x38 */
-    u8 pad3C[8];
+    u32 dirtyMask; /* 0x3C, dirty sectors of the directory buffer */
+    u8 pad40[4];
     s32 unk44; /* 0x44 */
     u8 pad48[4];
-    s32 unk4C; /* 0x4C (2.01+: 0x5C) */
+    u32 unk4C; /* 0x4C (2.01+: 0x5C), flags: 2 = buffer dirty, 0x10 */
     u8 pad50[8];
     s32 unk58; /* 0x58 */
 #if FW_VERSION < 201
@@ -614,7 +615,7 @@ s32 func_0000A3AC(s32);
 s32 func_0000A460(s8 drive, s32 a1, s32 a2, s32 a3, s32 a4);
 s32 func_0000A698(s32 a0, s32 a1, s32 a2);
 s32 func_0000A714(s32 a0, s32 a1, s32 n);
-s32 func_0000A744(s32 a0, s32 a1, s32 a2);
+s32 func_0000A744(s32 a0, s32 a1, s32 a2); /* driver write (buf, sector, count) */
 s32 func_0000A7C0(const u8 *s);
 s32 func_0000A8F8(s32);
 s32 func_0000ACF8(void);
