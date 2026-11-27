@@ -70,6 +70,7 @@ segments:
       - [0x37F98, c, msvideo_plugin_042460]
       - [0x4400C, c, msvideo_plugin_0567A0]
       - [0x45228, c, msvideo_plugin_05B564]
+      - [0x481C0, c, msvideo_plugin_crtend]
       - { start: 0x48218, type: asm, name: fini, linker_section: .fini }
       - { start: 0x48234, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x48B14, type: prxpad, order: .text }
