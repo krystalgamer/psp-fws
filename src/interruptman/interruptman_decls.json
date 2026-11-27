@@ -14,6 +14,10 @@
   "func_000002B8": "Interrupt **func_000002B8(s32 num);",
   "func_00000348": "void func_00000348(void *ptr);",
   "func_000015F8": "void *func_000015F8(void *dst, u8 c, s32 n);",
+  "func_00001628": "void func_00001628(s32 intrNum);",
+  "func_00001850": "void func_00001850(void);",
+  "func_00001DF8": "void func_00001DF8(s32 intrNum);",
+  "func_00001E9C": "s32 func_00001E9C(s32 intrNum);",
   "func_00002FDC": "s32 func_00002FDC(s32 arg0);",
   "func_00002FE4": "s32 func_00002FE4(void);",
   "func_000030AC": "s32 func_000030AC(s32 arg0);",
@@ -25,6 +29,7 @@
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelCreateHeap": "s32 sceKernelCreateHeap(s32 partitionId, s32 size, s32 attr, const char *name);",
   "sceKernelDisableIntr": "void sceKernelDisableIntr(s32 arg0);",
+  "sceKernelFindModuleByAddress": "SceModule *sceKernelFindModuleByAddress(u32 addr);",
   "sceKernelFreeHeapMemory": "s32 sceKernelFreeHeapMemory(s32 heapId, void *ptr);",
   "sceKernelGetCpuClockCounterWide": "u64 sceKernelGetCpuClockCounterWide(void);",
   "sceKernelGetInterruptExitCount": "s32 sceKernelGetInterruptExitCount(void);",
@@ -32,6 +37,7 @@
   "sceKernelIsIntrContext": "s32 sceKernelIsIntrContext(void);",
   "sceKernelRegisterUserSpaceIntrStack": "s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1);",
   "sceKernelReleaseIntrHandler": "s32 sceKernelReleaseIntrHandler(u32 intrNum);",
+  "sceKernelSetIntrLevel": "s32 sceKernelSetIntrLevel(u32 intrNum, s32 level);",
   "sceKernelSetIntrLogging": "s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable);",
   "sceKernelSuspendIntr": "s32 sceKernelSuspendIntr(s32, s32);"
  },
@@ -40,7 +46,8 @@
   "Interrupt": "/* 1.00: one interrupt or sub-interrupt entry, 0x38 bytes */\ntypedef struct Interrupt {\n    s32 handler;    /* 0x00: func | 2 (user) / 1 (released) */\n    s32 gp;         /* 0x04 */\n    void *arg;      /* 0x08 */\n    s32 unkC;\n    s32 unk10;      /* 0x10: -1 at init */\n    s32 unk14;      /* 0x14: -1 at init */\n    s32 unk18;\n    s32 unk1C;\n    s32 unk20;\n    s32 unk24;\n    struct Interrupt **subIntrs; /* 0x28 */\n    struct SceIntrCb *cb;  /* 0x2C */\n    u32 numSubIntrs : 8;    /* 0x30 */\n    u32 noLogging : 1;      /* bit 8 */\n    u32 level : 2;          /* bits 9-10 */\n    u32 userAcceptable : 1; /* bit 11 (sub-interrupts) */\n    u32 isSubIntr : 1;      /* bit 12 */\n    u32 hasUserSub : 1;     /* bit 13: some sub-interrupt accepts user mode */\n    u32 unk30_14 : 18;\n    s32 unk34;\n} Interrupt;",
   "InterruptInfo": "/* 1.00 interrupt manager state, 0x107C bytes (memset by module_bootstart) */\ntypedef struct InterruptInfo {\n    u64 levelMasks[4];          /* 0x000: intrs enabled at each level */\n    u32 unk20[16];              /* 0x020 */\n    Interrupt *intrPtrs[67];    /* 0x060 */\n    s32 isIntrContext;          /* 0x16C */\n    s32 unk170[4];              /* 0x170 */\n    s32 unk180;                 /* 0x180 */\n    s32 unk184;                 /* 0x184 */\n    s32 unk188;                 /* 0x188 */\n    s32 unk18C;                 /* 0x18C: InterruptManagerForKernel_53991063 */\n    s32 interruptExitCount;     /* 0x190 */\n    u32 clockCounterLo;         /* 0x194 */\n    u32 clockCounterHi;         /* 0x198 */\n    s32 (*hookAfter)(s32);      /* 0x19C */\n    s32 (*hookBefore)(void);    /* 0x1A0 */\n    void *intrStack;            /* 0x1A4 */\n    s32 intrStackSize;          /* 0x1A8 */\n    s32 userIntrStack;          /* 0x1AC */\n    s32 userIntrStackSize;      /* 0x1B0 */\n    s32 unk1B4;                 /* 0x1B4 */\n    void *syscallTable;         /* 0x1B8 */\n    s32 heapId;                 /* 0x1BC */\n    s32 unk1C0;                 /* 0x1C0 */\n    s32 intcState[2];           /* 0x1C4 */\n    s32 count;                  /* 0x1CC: cop0 Count saved at suspend */\n    s32 compare;                /* 0x1D0: cop0 Compare saved at suspend */\n    Interrupt intr[67];         /* 0x1D4 */\n} InterruptInfo;",
   "SceIntrCb": "typedef struct SceIntrCb {\n    s32 size;\n    s32 unk4;\n    s32 (*cbRegBefore)(s32 intrNum, s32 subIntrNum, void *handler, void *arg); /* 0x08 */\n    s32 (*cbRegAfter)(s32 intrNum, s32 subIntrNum, void *handler, void *arg);  /* 0x0C */\n    s32 (*cbRelBefore)(s32 intrNum, s32 subIntrNum); /* 0x10 */\n    s32 (*cbRelAfter)(s32 intrNum, s32 subIntrNum);  /* 0x14 */\n    s32 (*cbEnable)(s32 intrNum, s32 subIntrNum);    /* 0x18 */\n    s32 (*cbDisable)(s32 intrNum, s32 subIntrNum);   /* 0x1C */\n    s32 (*cbSuspend)(s32 intrNum, s32 subIntrNum, s32 *state); /* 0x20 */\n    s32 (*cbResume)(s32 intrNum, s32 subIntrNum, s32 state);   /* 0x24 */\n    s32 (*cbIsOccurred)(s32 intrNum, s32 subIntrNum); /* 0x28 */\n} SceIntrCb;",
-  "SceIntrHandler": "typedef struct SceIntrHandler {\n    s32 size;          /* must be 12 */\n    s32 numSubIntrs;   /* 0x04 */\n    SceIntrCb *cb;     /* 0x08 */\n} SceIntrHandler;"
+  "SceIntrHandler": "typedef struct SceIntrHandler {\n    s32 size;          /* must be 12 */\n    s32 numSubIntrs;   /* 0x04 */\n    SceIntrCb *cb;     /* 0x08 */\n} SceIntrHandler;",
+  "SceModule": "/* only the field interruptman uses (1.00) */\ntypedef struct SceModule {\n    u8 unk0[0x64];\n    s32 gpValue; /* 0x64 */\n} SceModule;"
  },
  "vars": {
   "D_00003910": "extern s32 D_00003910;",

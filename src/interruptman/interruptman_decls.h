@@ -87,6 +87,12 @@ typedef struct SceIntrHandler {
     SceIntrCb *cb;     /* 0x08 */
 } SceIntrHandler;
 
+/* only the field interruptman uses (1.00) */
+typedef struct SceModule {
+    u8 unk0[0x64];
+    s32 gpValue; /* 0x64 */
+} SceModule;
+
 extern s32 D_00003910;
 extern InterruptInfo D_00003950;
 extern s32 D_00003AA8;
@@ -118,6 +124,10 @@ s32 func_00000274(void);
 Interrupt **func_000002B8(s32 num);
 void func_00000348(void *ptr);
 void *func_000015F8(void *dst, u8 c, s32 n);
+void func_00001628(s32 intrNum);
+void func_00001850(void);
+void func_00001DF8(s32 intrNum);
+s32 func_00001E9C(s32 intrNum);
 s32 func_00002FDC(s32 arg0);
 s32 func_00002FE4(void);
 s32 func_000030AC(s32 arg0);
@@ -129,6 +139,7 @@ void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelCreateHeap(s32 partitionId, s32 size, s32 attr, const char *name);
 void sceKernelDisableIntr(s32 arg0);
+SceModule *sceKernelFindModuleByAddress(u32 addr);
 s32 sceKernelFreeHeapMemory(s32 heapId, void *ptr);
 u64 sceKernelGetCpuClockCounterWide(void);
 s32 sceKernelGetInterruptExitCount(void);
@@ -136,6 +147,7 @@ s32 sceKernelGetIntrSyscallFrame(void);
 s32 sceKernelIsIntrContext(void);
 s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1);
 s32 sceKernelReleaseIntrHandler(u32 intrNum);
+s32 sceKernelSetIntrLevel(u32 intrNum, s32 level);
 s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable);
 s32 sceKernelSuspendIntr(s32, s32);
 
