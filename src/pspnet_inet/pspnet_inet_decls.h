@@ -523,13 +523,14 @@ struct sppp {
     u8 unkE0[0x128 - 0xE0];
     struct ifqueue pp_cpq;          /* 0x128 */
     s32 pp_flags;                   /* 0x13C PP_* */
-    u8 unk140[0x150 - 0x140];
-    u32 pp_seq;                     /* 0x150 local sequence number */
-    u8 unk154[0x168 - 0x154];
+    u8 unk140[0x148 - 0x140];
+    u32 pp_seq[IDX_COUNT];          /* 0x148 local sequence numbers */
+    u8 unk158[0x168 - 0x158];
     u64 pp_saved_mtu;               /* 0x168 SCE: if_mtu before ipcp.tlu clamped it */
     s32 pp_phase;                   /* 0x170 */
     s32 unk174;
-    u8 unk178[0x180 - 0x178];
+    s32 unk178;
+    s32 unk17C;
     s32 state[IDX_COUNT];           /* 0x180 STATE_* per control protocol */
     u8 confid[IDX_COUNT];           /* 0x190 */
     s32 rst_counter[IDX_COUNT];     /* 0x194 */
@@ -547,7 +548,8 @@ struct sppp {
     s32 lcp_max_failure;            /* 0x268 */
     u32 ipcp_opts;                  /* 0x26C ipcp.opts */
     u32 ipcp_flags;                 /* 0x270 ipcp.flags */
-    u8 unk274[0x27C - 0x274];
+    u32 unk274;
+    u32 unk278;
     u16 myauth_proto;               /* 0x27C myauth.proto */
     u8 unk27E[0x280 - 0x27E];
     u8 myauth_name[0x80];           /* 0x280 */
@@ -1400,6 +1402,7 @@ void func_000244B0(void);
 s32 func_00024B7C(void *arg0);
 s32 func_000251A4(void *arg0);
 void func_0002544C(void *arg0);
+void func_00025638(struct sppp *sp, u16 proto, u8 type, u8 ident, s32 len, void *data);
 void func_00025E94(void);
 void func_00025F18(const struct cp *cp, struct sppp *sp, s32 newstate);
 void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);

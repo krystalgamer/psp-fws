@@ -4236,7 +4236,36 @@ void func_00027DB4(struct sppp *sp) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027DB4);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027E8C);
+void func_00027E8C(struct sppp *sp) {
+    const struct cp *cp = &D_0002BB10;
+
+    switch (sp->state[cp->protoidx]) {
+    case STATE_INITIAL:
+    case STATE_CLOSED:
+    case STATE_CLOSING:
+        break;
+    case STATE_STARTING:
+        (cp->tlf)(sp);
+        func_00025F18(cp, sp, STATE_INITIAL);
+        break;
+    case STATE_STOPPED:
+        func_00025F18(cp, sp, STATE_CLOSED);
+        break;
+    case STATE_STOPPING:
+        func_00025F18(cp, sp, STATE_CLOSING);
+        break;
+    case STATE_OPENED:
+        (cp->tld)(sp);
+        /* fall through */
+    case STATE_REQ_SENT:
+    case STATE_ACK_RCVD:
+    case STATE_ACK_SENT:
+        sp->rst_counter[cp->protoidx] = sp->lcp_max_terminate;
+        func_00025638(sp, cp->proto, 5 /* TERM_REQ */, ++sp->pp_seq[cp->protoidx], 0, 0);
+        func_00025F18(cp, sp, STATE_CLOSING);
+        break;
+    }
+}
 
 void func_00027FA0(void *arg0) {
     func_00028B84(&D_0002BB10, arg0);
@@ -4316,7 +4345,41 @@ void func_00028290(struct sppp *sp) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00028318);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000283B8);
+void func_000283B8(struct sppp *sp) {
+    const struct cp *cp = &D_0002BB54;
+
+    sp->ipcp_flags = 0;
+    sp->ipcp_opts |= (1 << 3);
+    sp->ipcp_opts |= (1 << 29);
+    sp->ipcp_opts |= (1 << 31);
+    sp->unk274 = 0;
+    sp->unk278 = 0;
+    sp->unk178 = 0;
+    sp->unk17C = 0;
+    switch (sp->state[cp->protoidx]) {
+    case STATE_INITIAL:
+        (cp->tls)(sp);
+        func_00025F18(cp, sp, STATE_STARTING);
+        break;
+    case STATE_STARTING:
+        break;
+    case STATE_CLOSED:
+        sp->rst_counter[cp->protoidx] = sp->lcp_max_configure;
+        (cp->scr)(sp);
+        func_00025F18(cp, sp, STATE_REQ_SENT);
+        break;
+    case STATE_STOPPED:
+    case STATE_STOPPING:
+    case STATE_REQ_SENT:
+    case STATE_ACK_RCVD:
+    case STATE_ACK_SENT:
+    case STATE_OPENED:
+        break;
+    case STATE_CLOSING:
+        func_00025F18(cp, sp, STATE_STOPPING);
+        break;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000284B4);
 
@@ -4475,7 +4538,7 @@ void func_00028930(struct sppp *sp) {
 
     pwdlen = sp->myauth_secret_len;
     idlen = sp->myauth_name_len;
-    sp->confid[IDX_PAP] = ++sp->pp_seq;
+    sp->confid[IDX_PAP] = ++sp->pp_seq[IDX_PAP];
     func_00026FF4(&D_0002BB94, sp, 1, sp->confid[IDX_PAP],
                   sizeof(idlen), &idlen, (u32)idlen, sp->myauth_name,
                   sizeof(pwdlen), &pwdlen, (u32)pwdlen, sp->myauth_secret, 0);
