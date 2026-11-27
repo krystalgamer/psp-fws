@@ -145,10 +145,25 @@ def main():
             name, cflags = cut
             h = "".join(header)
             if cflags:
-                if "cflags:" in h:
-                    h = re.sub(r"/\* cflags: [^*]*\*/", f"/* cflags: {cflags} */", h)
-                else:
-                    h = f"/* cflags: {cflags} */\n" + h
+                # a per-version `cflags[...]` line covering this version overrides the plain one: rewrite that
+                vnum = int(re.match(r"\d+", str(ver))[0])
+
+                def covers(spec):
+                    for part in spec.replace(" ", "").split(","):
+                        lo, _, hi = part.partition("-")
+                        if int(lo) <= vnum <= int(hi or lo):
+                            return True
+                    return False
+                done_v = False
+                for m in list(re.finditer(r"/\* cflags\[([0-9,\- ]+)\]: [^*]*\*/", h)):
+                    if covers(m[1]):
+                        h = h.replace(m[0], f"/* cflags[{m[1]}]: {cflags} */", 1)
+                        done_v = True
+                if not done_v:
+                    if re.search(r"/\* cflags: [^*]*\*/", h):
+                        h = re.sub(r"/\* cflags: [^*]*\*/", f"/* cflags: {cflags} */", h)
+                    else:
+                        h = f"/* cflags: {cflags} */\n" + h
             text = h + "".join(body).replace(f'nonmatchings/{owner.stem}"', f'nonmatchings/{stem}"')
             if not config_only:
                 (src_dir / f"{stem}.c").write_text(text)

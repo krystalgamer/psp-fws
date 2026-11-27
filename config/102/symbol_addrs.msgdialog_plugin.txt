@@ -74,3 +74,15 @@ _ZN3vsh30SetButtonNavigationString_BackEPKw = 0x00000DAC; // type:func rom:0xE2C
 _ZN3vsh31SetButtonNavigationString_EnterEPKw = 0x00000DB4; // type:func rom:0xE34
 D_000012BC_v102 = 0x000012BC; // rom:0x133C
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sce_paf_private_strlen = 0x00000D0C; // type:func
+_ZN3paf4View15SetEventHandlerEPKNS_18EventFunctionEntryE = 0x00000D2C; // type:func
+_ZNK3paf4View6GetArgEPKc = 0x00000D34; // type:func
+_ZNK3paf4View8ArgumentcviEv = 0x00000D3C; // type:func
+_ZN3paf4View4FindEPKc = 0x00000D44; // type:func
+_ZNK3paf4View12GetInterfaceEi = 0x00000D4C; // type:func
+scePaf_BB3CBD19 = 0x00000D54; // type:func
+_ZN3paf4View12SetInterfaceEiPv = 0x00000D64; // type:func
+sceVshCommonGui_1A6F3382 = 0x00000D8C; // type:func
+sceVshCommonUtil_7EEFA381 = 0x00000DBC; // type:func

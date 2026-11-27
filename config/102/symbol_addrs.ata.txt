@@ -159,3 +159,17 @@ sceSysregAtaClkSelect = 0x00004A24; // type:func rom:0x4AA4
 sceSysregAtaIoEnable = 0x00004A2C; // type:func rom:0x4AAC
 sceSysregAtaIoDisable = 0x00004A34; // type:func rom:0x4AB4
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceAtaCheckPacketCmdComplete = 0x00000F14; // type:func
+sceAtaWaitBusBusyIE = 0x000014D8; // type:func
+sceAtaAccessDataPortIE = 0x00001598; // type:func
+sceAtaCheckXferReadyIE = 0x00001788; // type:func
+sceAtaCheckPacketCmdCompleteIE = 0x000019E4; // type:func
+sceAtaDoSoftResetBit = 0x00001CF4; // type:func
+sceAtaExecPacketCmd = 0x000030F4; // type:func
+sceKernelAssert = 0x00004994; // type:func
+Kprintf = 0x0000499C; // type:func
+sceKernelDelayThread = 0x000049AC; // type:func
+sceKernelCreateSema = 0x000049B4; // type:func
+sceKernelCreateEventFlag = 0x000049D4; // type:func

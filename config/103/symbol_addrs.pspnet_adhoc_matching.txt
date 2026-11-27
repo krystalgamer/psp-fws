@@ -106,3 +106,7 @@ sceNetAdhocPdpSend = 0x0000307C; // type:func rom:0x30FC
 sceNetAdhocPdpRecv = 0x00003084; // type:func rom:0x3104
 sceNetAdhocPdpDelete = 0x0000308C; // type:func rom:0x310C
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceNetAdhocMatchingSelectTarget = 0x00000530; // type:func
+sceKernelCreateMbx = 0x00002FFC; // type:func

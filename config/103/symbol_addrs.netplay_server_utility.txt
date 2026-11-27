@@ -222,3 +222,34 @@ D_00004094_v103 = 0x00004094;
 func_00003450_v103 = 0x00003450; // type:func rom:0x34D0
 func_00003558_v103 = 0x00003558; // type:func rom:0x35D8
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceNetInit = 0x00003320; // type:func
+sceNetAdhocInit = 0x00003330; // type:func
+sceNetAdhocDownloadInitServer = 0x00003340; // type:func
+sceNetAdhocDownloadReplySession = 0x00003358; // type:func
+sceNetAdhocMatchingInit = 0x00003390; // type:func
+sceNetAdhocctlInit = 0x000033A0; // type:func
+sceNetAdhocctlConnect = 0x000033B0; // type:func
+sceNetAdhocctlAddHandler = 0x000033C0; // type:func
+sceNetAdhocctlAddInternalHandler = 0x000033D0; // type:func
+sce_paf_private_printf = 0x000033E0; // type:func
+_ZN3paf7PhScene10WidgetTypeEv = 0x00003448; // type:func
+_ZN3paf4View9PlaySoundEPKc = 0x00003460; // type:func
+_ZN3paf4View15SetEventHandlerEPKNS_18EventFunctionEntryE = 0x00003470; // type:func
+_ZNK3paf4View6GetArgEPKc = 0x00003478; // type:func
+_ZNK3paf4View8ArgumentcviEv = 0x00003480; // type:func
+_ZNK3paf4View12GetInterfaceEi = 0x00003490; // type:func
+_ZNK3paf4View10GetTextureEPKc = 0x00003498; // type:func
+_ZN3paf4View12SetInterfaceEiPv = 0x000034B0; // type:func
+_ZN3paf12FormatStringEPKwS1_S1_S1_S1_S1_S1_S1_S1_S1_ = 0x000034E0; // type:func
+sceUtilityGetSystemParamString = 0x00003500; // type:func
+sceVshCommonGui_D4353F96 = 0x00003508; // type:func
+_ZN3vsh13Infobar_CloseEb = 0x00003510; // type:func
+_ZN3vsh13MessageDialog10HideDeleteEv = 0x00003518; // type:func
+_ZN3vsh14GetString_BackE6Locale = 0x00003528; // type:func
+_ZN3vsh15GetString_EnterE6Locale = 0x00003530; // type:func
+_ZN3vsh25ShowButtonNavigation_BackEb = 0x00003538; // type:func
+_ZN3vsh31SetButtonNavigationString_EnterEPKw = 0x00003550; // type:func
+sceVshCommonUtil_7EEFA381 = 0x00003560; // type:func
+sceWlanGetSwitchState = 0x00003568; // type:func

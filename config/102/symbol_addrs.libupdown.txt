@@ -90,3 +90,23 @@ sceNetApctlDelHandler = 0x0000306C; // type:func rom:0x30EC
 D_000030A8_v102 = 0x000030A8; // rom:0x3128
 D_000030AC_v102 = 0x000030AC; // rom:0x312C
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceUpdateDownloadInit = 0x0000246C; // type:func
+sceKernelCreateVpl = 0x00002F9C; // type:func
+sceHttpCreateTemplate = 0x00002FC4; // type:func
+sceHttpCreateConnectionWithURL = 0x00002FD4; // type:func
+sceHttpCreateRequestWithURL = 0x00002FE4; // type:func
+sceHttpSetResolveTimeOut = 0x00002FF4; // type:func
+sceHttpSetConnectTimeOut = 0x00002FFC; // type:func
+sceHttpSetSendTimeOut = 0x00003004; // type:func
+sceHttpSetRecvTimeOut = 0x0000300C; // type:func
+sceHttpSendRequest = 0x00003014; // type:func
+sceHttpGetContentLength = 0x00003024; // type:func
+sceHttpGetStatusCode = 0x0000302C; // type:func
+sceHttpGetAllHeader = 0x00003034; // type:func
+sceHttpReadData = 0x0000303C; // type:func
+sceHttpDeleteHeader = 0x00003044; // type:func
+sceHttpAddExtraHeader = 0x0000304C; // type:func
+sceHttpGetNetworkErrno = 0x00003054; // type:func
+sceParseHttpResponseHeader = 0x00003074; // type:func

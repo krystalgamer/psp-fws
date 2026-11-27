@@ -61,3 +61,25 @@ _ZN3paf6Module12SetInterfaceEiPv = 0x000019D4; // type:func rom:0x1A54
 _ZN3vsh25ShowButtonNavigation_BackEb = 0x000019F4; // type:func rom:0x1A74
 _ZN3vsh26ShowButtonNavigation_EnterEb = 0x000019FC; // type:func rom:0x1A7C
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sce_paf_private_memset = 0x0000191C; // type:func
+sce_paf_private_strcmp = 0x0000192C; // type:func
+sce_paf_private_snprintf = 0x00001934; // type:func
+_Znwj = 0x0000193C; // type:func
+_ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_ = 0x00001944; // type:func
+_ZN3paf8PhWidget14SetPos_ontimerERK4vec4PS0_ = 0x00001954; // type:func
+_ZN3paf7PhScene10WidgetTypeEv = 0x0000195C; // type:func
+_ZN3paf11PhLabelTextC1EPNS_8PhWidgetEPNS_8PhAppearE = 0x00001964; // type:func
+_ZN3paf9PhNumSpin6CreateEiibiPPNS_7PhSTextEPKi = 0x0000196C; // type:func
+_ZN3paf9PhNumSpinC1EPNS_8PhWidgetEPNS_8PhAppearE = 0x00001974; // type:func
+_ZNK3paf4View10GetTextureEPKc = 0x000019AC; // type:func
+scePaf_BB3CBD19 = 0x000019B4; // type:func
+sceVshCommonGui_1A6F3382 = 0x000019DC; // type:func
+_ZN3vsh14GetString_BackE6Locale = 0x000019E4; // type:func
+_ZN3vsh15GetString_EnterE6Locale = 0x000019EC; // type:func
+_ZN3vsh30SetButtonNavigationString_BackEPKw = 0x00001A04; // type:func
+_ZN3vsh31SetButtonNavigationString_EnterEPKw = 0x00001A0C; // type:func
+_ZN3vsh13MessageDialog12GetBasePlaneEv = 0x00001A14; // type:func
+sceVshCommonGui_A06734FF = 0x00001A1C; // type:func
+vshRegSysconfGetAuthPassword = 0x00001A24; // type:func

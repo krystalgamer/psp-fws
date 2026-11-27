@@ -119,3 +119,17 @@ func_00006548 = 0x00006FB4; // type:func rom:0x7034
 sceKernelPowerLock = 0x00006FC4; // type:func rom:0x7044
 sceKernelPowerUnlock = 0x00006FCC; // type:func rom:0x704C
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceRegInit = 0x00000000; // type:func
+sceRegExit = 0x000000D8; // type:func
+module_reboot_before = 0x0000024C; // type:func
+sceRegCloseRegistry = 0x000003C4; // type:func
+sceRegOpenCategory = 0x00002170; // type:func
+sceRegRemoveCategory = 0x00002554; // type:func
+sceIoClose = 0x00006EFC; // type:func
+sceIoDevctl = 0x00006F3C; // type:func
+memcmp = 0x00006F64; // type:func
+sceKernelCreateSema = 0x00006F74; // type:func
+sceKernelCreateVpl = 0x00006F94; // type:func
+sceKernelUtilsSha1Digest = 0x00006FBC; // type:func

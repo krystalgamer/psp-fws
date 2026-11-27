@@ -48,3 +48,8 @@ D_00000C18_v102 = 0x00000C18; // rom:0xC98
 D_00000C1C_v102 = 0x00000C1C; // rom:0xC9C
 D_00000C94_v102 = 0x00000C94; // rom:0xD14
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+module_start = 0x00000524; // type:func
+sceLcdcInit = 0x000006D0; // type:func
+sceKernelRegisterSysEventHandler = 0x00000BB4; // type:func

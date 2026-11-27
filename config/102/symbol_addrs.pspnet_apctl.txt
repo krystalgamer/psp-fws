@@ -173,3 +173,30 @@ sceWlanDevAttach = 0x00007A5C; // type:func rom:0x7ADC
 sceWlanDevDetach = 0x00007A64; // type:func rom:0x7AE4
 func_00001DB8_v102 = 0x00001DB8; // type:func rom:0x1E38
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceNetApctlAddHandler = 0x000000B0; // type:func
+sceNetApctlAddInternalHandler = 0x000001B8; // type:func
+sceNetApctlDelInternalHandler = 0x000001E0; // type:func
+sceNetApctlScanUser = 0x000001FC; // type:func
+sceNetApctlGetBSSDescIDListUser = 0x00000218; // type:func
+sceNetApctlGetBSSDescEntryUser = 0x00000234; // type:func
+sceKernelCreateThread = 0x0000786C; // type:func
+sceKernelStartThread = 0x0000787C; // type:func
+sceKernelExitThread = 0x00007884; // type:func
+sceKernelCreateSema = 0x000078A4; // type:func
+sceKernelCreateEventFlag = 0x000078CC; // type:func
+sceKernelSetEventFlag = 0x000078DC; // type:func
+sceNetInetInetPton = 0x0000793C; // type:func
+sceNetConfigGetDefaultRoute = 0x00007964; // type:func
+sceNetConfigAddArp = 0x00007974; // type:func
+sceNetConfigDelArp = 0x0000797C; // type:func
+sceNetConfigGetDNS = 0x00007984; // type:func
+_sce_pspnet_pppoe_init = 0x0000799C; // type:func
+sceNetBpfOpen = 0x000079AC; // type:func
+sceNetConfig80211GetPowerSave = 0x00007A0C; // type:func
+sceNetConfig80211GetIfInfo = 0x00007A14; // type:func
+sceNetConfig80211GetBssDesc = 0x00007A1C; // type:func
+sceNetConfigGetEtherAddr = 0x00007A24; // type:func
+sceNetRand = 0x00007A2C; // type:func
+sceUtilityCheckNetParam = 0x00007A44; // type:func

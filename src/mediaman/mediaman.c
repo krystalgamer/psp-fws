@@ -838,9 +838,9 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetErrorStat);
 #endif
 
 #if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/mediaman", func_0000252C);
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetSuspendResumeMode);
 
-INCLUDE_ASM("nonmatchings/mediaman", func_00002538);
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetSuspendResumeMode);
 #endif
 
 #if FW_VERSION < 150

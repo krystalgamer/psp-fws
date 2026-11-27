@@ -56,3 +56,22 @@ sceKernelWaitEventFlag = 0x000015C4; // type:func rom:0x1644
 sceDisplayWaitVblankStart = 0x000015DC; // type:func rom:0x165C
 sceKernelUnregisterSysEventHandler = 0x000015F4; // type:func rom:0x1674
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceCtrlReadLatch = 0x00000BBC; // type:func
+sceCtrlSetButtonIntercept = 0x00000D10; // type:func
+sceCtrlGetButtonIntercept = 0x00000DD0; // type:func
+sceCtrlSetRapidFire = 0x00000E40; // type:func
+sceCtrlSetSuspendingExtraSamples = 0x000011B4; // type:func
+sceCtrlGetSuspendingExtraSamples = 0x000011D8; // type:func
+sceCtrlClearRapidFire = 0x00001274; // type:func
+sceKernelRegisterSubIntrHandler = 0x0000154C; // type:func
+sceSTimerSetPrscl = 0x0000157C; // type:func
+memset = 0x0000159C; // type:func
+sceKernelCreateEventFlag = 0x000015A4; // type:func
+sceKernelSetEventFlag = 0x000015B4; // type:func
+sceKernelGetSystemTimeLow = 0x000015CC; // type:func
+sceKernelSetAlarm = 0x000015D4; // type:func
+sceKernelPowerTick = 0x000015E4; // type:func
+sceKernelRegisterSysEventHandler = 0x000015EC; // type:func
+sceSysconCmdExecAsync = 0x000015FC; // type:func

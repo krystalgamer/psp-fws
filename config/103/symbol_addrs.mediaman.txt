@@ -127,3 +127,15 @@ func_000026C0 = 0x00002878; // type:func rom:0x28F8
 sceKernelRegisterSysEventHandler = 0x00002880; // type:func rom:0x2900
 func_00000000_v103 = 0x00000000; // type:func rom:0x80
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceUmdGetSuspendResumeMode = 0x0000252C; // type:func
+sceUmdSetSuspendResumeMode = 0x00002538; // type:func
+sceIoAssign = 0x000027A0; // type:func
+sceKernelCreateSema = 0x000027D8; // type:func
+sceKernelSignalSema = 0x000027E8; // type:func
+sceKernelWaitSema = 0x000027F0; // type:func
+sceKernelPollSema = 0x000027F8; // type:func
+sceKernelCreateEventFlag = 0x00002800; // type:func
+sceKernelCreateThread = 0x00002830; // type:func
+sceKernelStartThread = 0x00002840; // type:func

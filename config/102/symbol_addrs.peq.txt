@@ -5,3 +5,9 @@ scePEQ_FC45514B = 0x000001D4; // type:func rom:0x254
 func_00000238 = 0x00000274; // type:func rom:0x2F4
 sceMeWrapper_driver_D1EA3DFD = 0x000002F8; // type:func rom:0x378
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+scePeqProc = 0x00000000; // type:func
+sceKernelDcacheWritebackRange = 0x000002E8; // type:func
+sceKernelDcacheInvalidateRange = 0x000002F0; // type:func
+sceMeCore_driver_3D5F109C = 0x00000300; // type:func

@@ -24,3 +24,11 @@ sceKernelWaitSema = 0x00000FE0; // type:func rom:0x1060
 sceI2cMasterTransmit = 0x00001000; // type:func rom:0x1080
 sceKernelUnregisterSysEventHandler = 0x00001010; // type:func rom:0x1090
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelDelayThread = 0x00000FC0; // type:func
+sceKernelCreateSema = 0x00000FC8; // type:func
+sceGpioPortSet = 0x00000FE8; // type:func
+sceGpioPortClear = 0x00000FF0; // type:func
+sceGpioSetPortMode = 0x00000FF8; // type:func
+sceKernelRegisterSysEventHandler = 0x00001008; // type:func

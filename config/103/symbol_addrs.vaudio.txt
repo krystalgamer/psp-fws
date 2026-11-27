@@ -19,3 +19,12 @@ func_00000714 = 0x00000718; // type:func rom:0x798
 func_0000071C = 0x00000720; // type:func rom:0x7A0
 func_00000734 = 0x00000738; // type:func rom:0x7B8
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceVaudioOutputBlocking = 0x00000000; // type:func
+sceKernelCreateSema = 0x000006D0; // type:func
+sceKernelCreateFpl = 0x000006F0; // type:func
+sceKernelAllocateFpl = 0x00000700; // type:func
+sceAudioSRCOutputBlocking = 0x00000728; // type:func
+scePEQ_FC45514B = 0x00000730; // type:func
+scePeqProc = 0x00000740; // type:func

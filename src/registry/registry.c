@@ -5,12 +5,14 @@
 
 #define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
 
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 282 && FW_VERSION < 310)
+INCLUDE_ASM("nonmatchings/registry", sceRegInit);
+#endif
+
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/registry", func_00000000);
+INCLUDE_ASM("nonmatchings/registry", sceRegExit);
 
-INCLUDE_ASM("nonmatchings/registry", func_000000D8);
-
-INCLUDE_ASM("nonmatchings/registry", func_0000024C);
+INCLUDE_ASM("nonmatchings/registry", module_reboot_before);
 #endif
 
 #if FW_VERSION >= 350
@@ -72,10 +74,6 @@ s32 sceRegInit(void) {
     setK1(oldK1);
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 310
-INCLUDE_ASM("nonmatchings/registry", sceRegInit);
 #endif
 
 #if FW_VERSION >= 310
@@ -218,13 +216,7 @@ end:
     setK1(oldK1);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/registry", func_000003C4);
-#endif
-
-#if FW_VERSION >= 150
+#else
 INCLUDE_ASM("nonmatchings/registry", sceRegOpenRegistry);
 #endif
 
@@ -282,11 +274,11 @@ end:
     setK1(oldK1);
     return ret;
 }
+#else
+INCLUDE_ASM("nonmatchings/registry", sceRegCloseRegistry);
 #endif
 
-#if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/registry", sceRegCloseRegistry);
-#else
+#if FW_VERSION < 150
 s32 sceRegRemoveRegistry(SceRegParam *param) {
     const char *ireg;
     const char *dreg;
@@ -312,9 +304,7 @@ end:
     setK1(oldK1);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 150
+#else
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveRegistry);
 #endif
 
@@ -895,15 +885,9 @@ INCLUDE_ASM("nonmatchings/registry", func_00001D7C);
 
 INCLUDE_ASM("nonmatchings/registry", func_00001E2C);
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/registry", func_00002170);
-
-INCLUDE_ASM("nonmatchings/registry", func_00002554);
-#else
 INCLUDE_ASM("nonmatchings/registry", sceRegOpenCategory);
 
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveCategory);
-#endif
 
 #if FW_VERSION < 152
 s32 sceRegCloseCategory(s32 hd) {

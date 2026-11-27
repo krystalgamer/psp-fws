@@ -79,23 +79,6 @@ INCLUDE_RODATA("nonmatchings/usbstorboot", D_00001BD8);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_000007B0);
 
-#if FW_VERSION >= 102 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/usbstorboot", func_00000868);
-
-INCLUDE_ASM("nonmatchings/usbstorboot", func_000008E4);
-
-INCLUDE_ASM("nonmatchings/usbstorboot", func_00000960);
-
-INCLUDE_ASM("nonmatchings/usbstorboot", func_00000A04);
-
-INCLUDE_ASM("nonmatchings/usbstorboot", func_00000AAC);
-
-INCLUDE_ASM("nonmatchings/usbstorboot", func_00000B68);
-
-INCLUDE_ASM("nonmatchings/usbstorboot", func_00000C44);
-
-INCLUDE_ASM("nonmatchings/usbstorboot", func_00000CA4);
-#else
 INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootSetCapacity);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootSetLoadAddr);
@@ -107,9 +90,8 @@ INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootSetStatus);
 INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootRegisterNotify);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", sceUsbstorBootUnregisterNotify);
-#endif
 
-#if FW_VERSION == 352
+#if (FW_VERSION >= 102 && FW_VERSION < 152) || FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/usbstorboot", module_start);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", module_stop);

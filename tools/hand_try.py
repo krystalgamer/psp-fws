@@ -84,6 +84,38 @@ def compiled_reloc_syms(c_text, comp, opt):
         return names
 
 
+def build_map_addrs(mod):
+    """name -> address from the current build map (segment-relative, like the original's immediates)."""
+    mp = ROOT / "tmp/build" / mod.ver / f"{mod.mod}.map"
+    out = {}
+    if mp.exists():
+        for m in re.finditer(r"^\s+0x([0-9a-f]+)\s+([A-Za-z_]\w*)$", mp.read_text(), re.M):
+            if not m[2].endswith("NON_MATCHING"):
+                out.setdefault(m[2], int(m[1], 16))
+    return out
+
+
+def target_calls_from_words(mod, name):
+    """j/jal targets of an already-C function, read from the original's words and named via the build map
+    (the function is C in this version, so splat wrote no asm for it). Jumps inside the function are None."""
+    mp = ROOT / "tmp/build" / mod.ver / f"{mod.mod}.map"
+    if not mp.exists():
+        return None
+    names = {}
+    for m in re.finditer(r"^\s+0x([0-9a-f]+)\s+([A-Za-z_]\w*)$", mp.read_text(), re.M):
+        if not m[2].endswith("NON_MATCHING"):
+            names.setdefault(int(m[1], 16), m[2])
+    rom, end, _ = mod.funcs[name]
+    out = []
+    for r in range(rom, end, 4):
+        w = struct.unpack_from("<I", mod.base, r)[0]
+        if w >> 26 in (2, 3):
+            tgt = (w & 0x3FFFFFF) << 2
+            lo, hi = rom - mod.text_off, end - mod.text_off
+            out.append(None if lo <= tgt < hi else names.get(tgt))
+    return out
+
+
 def target_reloc_syms(mod, name):
     rom, end, _ = mod.funcs[name]
     out = []
@@ -342,6 +374,18 @@ def main():
             mm = re.fullmatch(r"D_([0-9A-F]{8})", m)
             return not mm or int(mm[1], 16) < int(w[2:], 16)
         bad = [(i, w, m) for i, (w, m) in enumerate(zip(want, mine)) if m is not None and m != w]
+        # by address: my symbol (from the build map) + addend == the address the original's immediates give
+        taddrs = getattr(target_reloc_syms, "addrs", [])
+        adds = getattr(compiled_reloc_syms, "addends", [])
+        symaddr = build_map_addrs(mod)
+
+        def same_addr(i, m):
+            ta = taddrs[i] if i < len(taddrs) else None
+            ad = adds[i] if i < len(adds) else None
+            if ta is None or ad is None or m not in symaddr:
+                return False
+            return (symaddr[m] + ad) & 0xFFFFFFFF == ta & 0xFFFFFFFF
+        bad = [(i, w, m) for i, w, m in bad if not same_addr(i, m)]
         if len(mine) != len(want) or any(not interior(m, w) for _, w, m in bad):
             print("relocation symbols differ:")
             for i, w, m in bad:
@@ -363,6 +407,10 @@ def main():
                     continue
                 at = mod.text_off + ta
                 ts = mod.base[at:mod.base.find(b"\0", at)]
+                # only compare text (jump tables and other rodata referenced through .rodata relocs aren't strings)
+                printable = lambda b: b and all(32 <= c < 127 or c in (9, 10, 13) for c in b)  # noqa: E731
+                if not (printable(ms) and printable(ts)) and not (printable(ms) and not ts):
+                    continue
                 if ts != ms:
                     bad_str.append((w, ts, ms))
             for w, ts, ms in dict.fromkeys(bad_str):
@@ -370,10 +418,14 @@ def main():
             # call targets: the original's jal names (from its asm) must be the functions the C calls
             bad_call = []
             asm_path = mod.funcs[name][2]
+            want_calls = None
             if asm_path is not None:
                 # j/jal in program order; local labels (.L) are jumps, not calls
                 want_calls = [None if c.startswith(".") else c
                               for c in re.findall(r"\bj(?:al)?\s+(\.?[A-Za-z_]\w*)", asm_path.read_text())]
+            else:
+                want_calls = target_calls_from_words(mod, name)
+            if want_calls is not None:
                 got = compiled_reloc_syms.calls
                 if len(want_calls) == len(got):
                     bad_call = [(w, g) for w, g in zip(want_calls, got) if None not in (w, g) and g != w]
@@ -383,6 +435,13 @@ def main():
                         bad_call = [(w, g) for w, g in zip(wc, gc) if g != w]
             for w, g in dict.fromkeys(bad_call):
                 print(f"  call target differs: target {w}, mine {g}")
+            # a literal whose original label is still INCLUDE_RODATA in this version would be emitted twice
+            src_all = "".join(f.read_text() for f in Path(mod.file_of(name)).parent.glob("*.c"))
+            dup = [w for i, (w, ms) in enumerate(zip(want, compiled_reloc_syms.strings))
+                   if ms is not None and re.search(rf"INCLUDE_RODATA\([^)]*\b{w}\)", src_all)]
+            for w in dict.fromkeys(dup):
+                print(f"  WARNING: your C emits the literal for {w}, which the source still has as INCLUDE_RODATA "
+                      f"(it would be in .rodata twice): use `extern char {w}[];` or drop that entry for this version")
             if bad_str:
                 print("RESULT: words match, STRING LITERALS DIFFER (not a match)")
             elif bad_call:

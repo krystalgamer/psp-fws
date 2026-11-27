@@ -177,7 +177,19 @@ s32 sceDmacplusLcdcGetFormat(s32 *arg0, s32 *arg1, s32 *arg2) {
 
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusLcdcEnable);
 
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/dmacplus", sceDmacplusLcdcEnd);
+#else
+s32 sceDmacplusLcdcEnd(void) {
+    s32 temp_s0;
+
+    temp_s0 = sceKernelCpuSuspendIntr();
+    *(s32 *)0xBC800110 &= ~2;
+    sceKernelReleaseSubIntrHandler(0x15, 1);
+    sceKernelCpuResumeIntr(temp_s0);
+    return 0;
+}
+#endif
 
 s32 sceDmacplusLcdcQuerySuspend(void) {
     return 0;

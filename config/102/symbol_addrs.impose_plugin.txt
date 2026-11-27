@@ -58,3 +58,21 @@ vshImposeGetParam = 0x00000FDC; // type:func rom:0x105C
 D_000010D4_v102 = 0x000010D4; // rom:0x1154
 func_000003BC_v102 = 0x000003BC; // type:func rom:0x43C
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceCtrlPeekBufferPositive = 0x00000F1C; // type:func
+sce_paf_private_snprintf = 0x00000F2C; // type:func
+_ZN3paf8PhWidget11SetIntervalEifPFvPS0_PNS_7PhTimerEiPvES4_ = 0x00000F44; // type:func
+_ZN3paf4View9PageCloseEPKc = 0x00000F6C; // type:func
+_ZN3paf4View15SetEventHandlerEPKNS_18EventFunctionEntryE = 0x00000F74; // type:func
+_ZNK3paf4View12GetInterfaceEi = 0x00000F84; // type:func
+_ZNK3paf4View10GetTextureEPKc = 0x00000F8C; // type:func
+_ZN3paf4View12SetInterfaceEiPv = 0x00000F94; // type:func
+_ZNK3paf4View8PageRootEPKc = 0x00000F9C; // type:func
+_ZN3paf4View8PageOpenEPKcii = 0x00000FA4; // type:func
+InputDevice_PspPad_Lock = 0x00000FB4; // type:func
+InputDevice_PspPad_Unlock = 0x00000FBC; // type:func
+InputDevice_PspHprm_Lock = 0x00000FC4; // type:func
+InputDevice_PspHprm_Unlock = 0x00000FCC; // type:func
+scePowerIsSuspendRequired = 0x00000FD4; // type:func
+vshImposeChanges = 0x00000FE4; // type:func

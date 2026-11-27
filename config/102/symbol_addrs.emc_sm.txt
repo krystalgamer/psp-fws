@@ -62,3 +62,27 @@ sceKernelDeleteSema = 0x0000248C; // type:func rom:0x250C
 sceKernelDeleteEventFlag = 0x000024AC; // type:func rom:0x252C
 sceKernelUnregisterSysEventHandler = 0x000024D4; // type:func rom:0x2554
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceNandSetWriteProtect = 0x00000508; // type:func
+sceNandUnlock = 0x0000060C; // type:func
+sceNandResume = 0x00000E1C; // type:func
+sceKernelCpuSuspendIntr = 0x0000242C; // type:func
+sceKernelCpuResumeIntrWithSync = 0x00002434; // type:func
+sceKernelIsIntrContext = 0x0000243C; // type:func
+sceKernelRegisterIntrHandler = 0x00002444; // type:func
+sceKernelEnableIntr = 0x00002454; // type:func
+Kprintf = 0x0000245C; // type:func
+sceKernelSm1ReferOperations = 0x00002464; // type:func
+sceKernelDelayThread = 0x0000247C; // type:func
+sceKernelCreateSema = 0x00002484; // type:func
+sceKernelSignalSema = 0x00002494; // type:func
+sceKernelWaitSema = 0x0000249C; // type:func
+sceKernelCreateEventFlag = 0x000024A4; // type:func
+sceKernelSetEventFlag = 0x000024B4; // type:func
+sceKernelWaitEventFlag = 0x000024BC; // type:func
+sceKernelGetSystemTimeLow = 0x000024C4; // type:func
+sceKernelRegisterSysEventHandler = 0x000024CC; // type:func
+sceSysregEmcsmBusClockEnable = 0x000024DC; // type:func
+sceSysregEmcsmBusClockDisable = 0x000024E4; // type:func
+sceSysregEmcsmIoEnable = 0x000024EC; // type:func

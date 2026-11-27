@@ -563,6 +563,15 @@ def once(retrying=False):
         def asm_entry(nn, nk, folder):
             macro = "INCLUDE_ASM" if nk == "func" else "INCLUDE_RODATA"
             return FM.Entry(NV, "asm" if nk == "func" else "rodata", renamed(nn), f'{macro}("{folder}", {renamed(nn)});\n')
+        # names referenced by the C of REF functions that NEW gets as asm (modified / not shared)
+        asm_users = set()
+        for st in stems:
+            for e2 in FM.parse((src / f"{st}.c").read_text(), S):
+                if e2.kind == "cfunc" and rv in e2.vers and status.get(e2.name) != "shared":
+                    asm_users.update(re.findall(r"\b\w+\b", e2.text))
+        new_labels = set()
+        for p in (ROOT / "tmp/asm" / new / mod).rglob("*.s"):
+            new_labels.update(re.findall(r"^\s*(?:dlabel|glabel)\s+(\w+)", p.read_text(), re.M))
         lead = after.pop(None, [])
         stats = {"shared": 0, "modified": 0, "ref_only": 0, "new_only": sum(len(v) for v in after.values()) + len(lead)}
         done = set()
@@ -573,7 +582,11 @@ def once(retrying=False):
             placed_lead = st != stems[0]
             for e in FM.parse(cfile.read_text(), S):
                 if e.kind == "other":
-                    if rv in e.vers:
+                    # C data definitions (e.g. `const char D_X[] = "...";`) whose label NEW's asm defines
+                    # itself stay with REF; NEW includes that data from its asm
+                    defs = set(re.findall(r"^[^\n;#(]*?\b(D_[0-9A-F]{8}|\w+)\s*(?:\[[^\]]*\])*\s*=", e.text, re.M))
+                    # ... or that a function NEW keeps as asm uses (that asm migrates its own copy)
+                    if rv in e.vers and not (defs & new_labels) and not (defs & asm_users):
                         e.vers = e.vers | NV
                     out.append(e)
                     continue

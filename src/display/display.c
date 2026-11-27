@@ -6,11 +6,7 @@
 #define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
 #define K1_BAD_ADDR(p) ((-k1IsUserMode() & (u32)(p)) >> 31)
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/display", func_00000000);
-#else
 INCLUDE_ASM("nonmatchings/display", module_reboot_before);
-#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/display", D_00003A68);

@@ -186,3 +186,27 @@ sceSysregMsifGetConnectStatus = 0x000061F0; // type:func rom:0x6270
 sceSysregMsifQueryConnectIntr = 0x000061F8; // type:func rom:0x6278
 sceSysregMsifAcquireConnectIntr = 0x00006200; // type:func rom:0x6280
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceMScmStartModule = 0x00000430; // type:func
+sceMScmRegisterCLD = 0x000009D4; // type:func
+sceMScmQueryMSCMStatus = 0x0000172C; // type:func
+sceIoClose = 0x00006008; // type:func
+sceIoOpen = 0x00006010; // type:func
+sceKernelAssert = 0x00006028; // type:func
+Kprintf = 0x00006030; // type:func
+sceKernelGetUIDcontrolBlock = 0x00006038; // type:func
+sceKernelNotifyCallback = 0x00006068; // type:func
+sceKernelCreateSema = 0x00006078; // type:func
+sceKernelCreateVpl = 0x000060C0; // type:func
+sceKernelUSec2SysClock = 0x000060E0; // type:func
+sceKernelCreateThread = 0x000060F0; // type:func
+sceKernelStartThread = 0x000060F8; // type:func
+sceKernelSuspendDispatchThread = 0x00006108; // type:func
+sceKernelResumeDispatchThread = 0x00006110; // type:func
+sceLedSetMode = 0x00006138; // type:func
+sceKernelPowerLock = 0x00006140; // type:func
+sceKernelPowerUnlock = 0x00006148; // type:func
+sceKernelRegisterSysEventHandler = 0x00006158; // type:func
+sceSysreg_driver_7B9E9A53 = 0x000061E0; // type:func
+sceSysreg_driver_7BDF0556 = 0x000061E8; // type:func

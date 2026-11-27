@@ -11,3 +11,23 @@ sceKernelDcacheInvalidateRange = 0x00000F3C; // type:func rom:0xFBC
 sceMeWrapper_driver_C86500E3 = 0x00000F44; // type:func rom:0xFC4
 sceMeWrapper_driver_5AD660FA = 0x00000F4C; // type:func rom:0xFCC
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceVideocodecOpen = 0x0000012C; // type:func
+sceVideocodecInit = 0x00000244; // type:func
+sceVideocodecDecode = 0x00000370; // type:func
+sceVideocodecStop = 0x000004EC; // type:func
+sceVideocodecDelete = 0x00000624; // type:func
+sceVideocodecSetMemory = 0x00000714; // type:func
+sceVideocodecScanHeader = 0x00000800; // type:func
+sceVideocodecGetVersion = 0x0000097C; // type:func
+sceVideocodecEndEntry = 0x00000A58; // type:func
+sceKernelDcacheWritebackInvalidateRange = 0x00000F34; // type:func
+sceMePowerControlDmacplusClock = 0x00000F54; // type:func
+sceMePowerControlAvcPower = 0x00000F5C; // type:func
+sceMeVideo_driver_B655AD4E = 0x00000F64; // type:func
+sceMeVideo_driver_06F0236A = 0x00000F6C; // type:func
+sceMeVideo_driver_176BBE07 = 0x00000F74; // type:func
+sceMeVideo_driver_DE2E7E89 = 0x00000F7C; // type:func
+sceMeVideo_driver_E67F4E0A = 0x00000F84; // type:func
+sceMeVideo_driver_1C6A60E1 = 0x00000F8C; // type:func

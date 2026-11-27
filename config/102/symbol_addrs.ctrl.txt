@@ -55,3 +55,13 @@ sceKernelGetSystemTimeLow = 0x00001598; // type:func rom:0x1618
 sceDisplayWaitVblankStart = 0x000015A8; // type:func rom:0x1628
 sceKernelUnregisterSysEventHandler = 0x000015C0; // type:func rom:0x1640
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelRegisterSubIntrHandler = 0x00001518; // type:func
+sceSTimerAlloc = 0x00001538; // type:func
+memset = 0x00001568; // type:func
+sceKernelCreateEventFlag = 0x00001570; // type:func
+sceKernelSetAlarm = 0x000015A0; // type:func
+sceKernelPowerTick = 0x000015B0; // type:func
+sceKernelRegisterSysEventHandler = 0x000015B8; // type:func
+sceSysconCmdExecAsync = 0x000015C8; // type:func

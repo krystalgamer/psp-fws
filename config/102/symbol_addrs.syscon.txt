@@ -154,3 +154,12 @@ sceSysregSpiClkEnable = 0x000031A0; // type:func rom:0x3220
 sceSysregSpiClkSelect = 0x000031A8; // type:func rom:0x3228
 sceSysregSpiIoEnable = 0x000031B0; // type:func rom:0x3230
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+Kprintf = 0x00003100; // type:func
+sceKernelSm1ReferOperations = 0x00003108; // type:func
+sceKernelCreateSema = 0x00003128; // type:func
+sceKernelDeleteSema = 0x00003130; // type:func
+sceKernelWaitSema = 0x00003140; // type:func
+sceKernelDcacheWritebackAll = 0x00003150; // type:func
+sceKernelIcacheInvalidateAll = 0x00003158; // type:func

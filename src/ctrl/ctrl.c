@@ -56,22 +56,10 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSamplingCycle);
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlPeekLatch);
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/ctrl", func_00000BBC);
-#else
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlReadLatch);
-#endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ctrl", func_00000CC4);
-#endif
-
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/ctrl", func_00000D10);
-
-INCLUDE_ASM("nonmatchings/ctrl", func_00000DD0);
-
-INCLUDE_ASM("nonmatchings/ctrl", func_00000E40);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -116,9 +104,7 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetIdleCancelThreshold);
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetIdleCancelThreshold);
 #endif
 
-#if FW_VERSION != 103
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetButtonIntercept);
-#endif
 
 #if FW_VERSION < 103
 s32 sceCtrlGetButtonIntercept(u32 mask) {
@@ -138,15 +124,11 @@ s32 sceCtrlGetButtonIntercept(u32 mask) {
     sceKernelCpuResumeIntr(intr);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 150
+#else
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetButtonIntercept);
 #endif
 
-#if FW_VERSION != 103
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetRapidFire);
-#endif
 
 s32 module_start(void) {
     sceCtrlInit();
@@ -212,17 +194,13 @@ INCLUDE_ASM("nonmatchings/ctrl", func_00001190);
 #endif
 
 #if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/ctrl", func_000011B4);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSuspendingExtraSamples);
 
-INCLUDE_ASM("nonmatchings/ctrl", func_000011D8);
+INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetSuspendingExtraSamples);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ctrl", func_000011B0);
-#endif
-
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/ctrl", func_00001274);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
@@ -371,9 +349,7 @@ s32 sceCtrlClearRapidFire(u32 slot) {
     D_00001D70.rapidFire[slot].uiMask = 0;
     return 0;
 }
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 260) || FW_VERSION >= 350
+#else
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlClearRapidFire);
 #endif
 

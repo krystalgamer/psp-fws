@@ -107,3 +107,30 @@ Heap_Free = 0x00001218; // type:func rom:0x1298
 D_00001658_v102 = 0x00001658; // rom:0x16D8
 D_000017C4_v102 = 0x000017C4;
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sce_paf_private_strcmp = 0x000010E8; // type:func
+_Znwj = 0x000010F8; // type:func
+_ZN3paf9PhHandler11KillTimerCBEi = 0x00001108; // type:func
+_ZN3paf8PhWidget16SetScale_ontimerERK4vec4 = 0x00001110; // type:func
+_ZNK3paf7PhScene9GetCameraEi = 0x00001118; // type:func
+_ZN3paf8PhWidget14SetPos_ontimerERK4vec4PS0_ = 0x00001120; // type:func
+sceCryptSampleData = 0x00001128; // type:func
+_ZN3paf8PhWidget11SetIntervalEifPFvPS0_PNS_7PhTimerEiPvES4_ = 0x00001130; // type:func
+_ZN3paf8PhWidget13DestroyWidgetEv = 0x00001138; // type:func
+_ZN3paf12MiconPointee7ReleaseEv = 0x00001148; // type:func
+_ZN3paf7PhMiconC1EPNS_8PhWidgetEPNS_8PhAppearE = 0x00001150; // type:func
+_ZN3paf7PhMicon8SetMovieERKNS_10MiconRCPtrINS_13MovieResourceEEE = 0x00001158; // type:func
+_ZN3paf7PhMicon4PlayEv = 0x00001160; // type:func
+_ZN3paf7PhMicon6EnableEib = 0x00001168; // type:func
+_ZN3paf4View15SetDrawPriorityEi = 0x00001198; // type:func
+_ZNK3paf4View10FindWidgetEPKc = 0x000011A0; // type:func
+_ZN3paf4View9PlaySoundEPKc = 0x000011B0; // type:func
+_ZN3paf4View16PlayAnimSequenceEPNS_8PhWidgetEPKc = 0x000011B8; // type:func
+_ZNK3paf4View6GetArgEPKc = 0x000011C8; // type:func
+_ZNK3paf4View8ArgumentcviEv = 0x000011D0; // type:func
+_ZNK3paf4View8PageRootEPKc = 0x000011F0; // type:func
+_ZN3paf4View6UnloadEPS0_PFvPKcE = 0x000011F8; // type:func
+_ZN3paf4View8PageOpenEPKcii = 0x00001200; // type:func
+File_AllocLoad = 0x00001210; // type:func
+_ZN3paf8DateTime3NowEv = 0x00001220; // type:func

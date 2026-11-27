@@ -105,11 +105,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000027C);
 INCLUDE_ASM("nonmatchings/mscm", func_00000244);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/mscm", func_00000430);
-#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartModule);
-#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStopModule);
 
@@ -150,11 +146,7 @@ void func_00000930(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/mscm", func_000009D4);
-#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLD);
-#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmUnRegisterCLD);
 
@@ -194,16 +186,12 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 INCLUDE_ASM("nonmatchings/mscm", sceMScmGetCLDM);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/mscm", func_0000172C);
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 #endif
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/mscm", func_00001B0C);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282

@@ -19,3 +19,7 @@ sceKernelCpuSuspendIntr = 0x00000398; // type:func rom:0x418
 sceKernelCpuResumeIntr = 0x000003A0; // type:func rom:0x420
 sceKernelCpuResumeIntrWithSync = 0x000003A8; // type:func rom:0x428
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+module_start = 0x00000000; // type:func
+sceKernelSm1RegisterOperations = 0x000003B0; // type:func

@@ -137,10 +137,6 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_56494D70);
 INCLUDE_ASM("nonmatchings/codec", func_000007A0);
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/codec", func_00000728);
-#endif
-
 #if FW_VERSION >= 282
 void sceCodecInputDisable(void) {
     func_000002A8(0, 0, -1, 0);
@@ -171,7 +167,7 @@ s32 sceCodecAudioClkoutClkDisable(void) {
 INCLUDE_ASM("nonmatchings/codec", sceCodecInitEntry);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION == 103 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/codec", sceCodecOutputEnable);
 #endif
 

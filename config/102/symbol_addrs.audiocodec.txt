@@ -11,3 +11,15 @@ sceAudiocodecStartEntry = 0x00000AD8; // type:func rom:0xB58
 module_stop = 0x00000AE0; // type:func rom:0xB60
 sceMeWrapper_driver_5AD660FA = 0x00000B20; // type:func rom:0xBA0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceAudiocodecCheckNeedMem = 0x00000000; // type:func
+sceAudiocodecInit = 0x000000D4; // type:func
+sceAudiocodecDecode = 0x0000025C; // type:func
+sceAudiocodecGetInfo = 0x000003F4; // type:func
+sceAudiocodecGetEDRAM = 0x00000628; // type:func
+sceKernelDcacheWritebackRange = 0x00000AE8; // type:func
+sceMeAudio_driver_FEE0A97D = 0x00000B00; // type:func
+sceMeAudio_driver_BAC7C2BE = 0x00000B08; // type:func
+sceMeAudio_driver_39F06790 = 0x00000B10; // type:func
+sceMeMalloc = 0x00000B18; // type:func

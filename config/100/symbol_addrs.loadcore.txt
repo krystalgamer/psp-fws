@@ -66,3 +66,12 @@ func_00006688 = 0x00005938; // type:func
 func_000066B0 = 0x00005960; // type:func
 func_000066F0 = 0x000059A0; // type:func
 // shared names (tools/add_version.py) end
+func_00000214 = 0x00000214; // type:func
+g_FreeLibEnt = 0x00007260;
+g_FreeLibStub = 0x00007264;
+g_pSysEntControl = 0x0000726C;
+g_LoadCoreLibEntries = 0x00007278;
+g_LoadCoreLibStubs = 0x000076B0;
+initialSysEntTable = 0x00008628;
+g_loadCore = 0x000088FC;
+g_ModuleType = 0x00007274;

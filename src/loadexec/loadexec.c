@@ -1,4 +1,4 @@
-/* cflags[100,102,103]: -O2 */
+/* cflags[100,102,103]: -O2 -mno-split-addresses */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "loadexec_decls.h"
@@ -319,11 +319,7 @@ void sceKernelLoadExecVSHDiscUpdater(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/loadexec", func_00001ED4);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 103 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecVSHDiscDebug);
 #endif
 
@@ -345,17 +341,13 @@ void sceKernelLoadExecBufferVSHUsbWlan(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/loadexec", func_00001F68);
-#endif
-
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void sceKernelLoadExecBufferVSHUsbWlan(s32 arg0, s32 arg1, s32 arg2) {
     func_00001D6C(0x130, arg0, arg1, arg2, 0x10000);
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 103 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferVSHUsbWlanDebug);
 #endif
 
@@ -405,21 +397,15 @@ void sceKernelLoadExecBufferVSHPlain(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/loadexec", func_00002270);
-#endif
-
 #if FW_VERSION >= 150 && FW_VERSION < 152
 void sceKernelLoadExecBufferVSHPlain(s32 arg0, s32 arg1, s32 arg2) {
     func_00001D6C(0x100, arg0, arg1, arg2, 0x10000);
 }
 #endif
 
-#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 152)
-INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferVSHFromHost);
-#endif
-
 #if FW_VERSION < 152
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferVSHFromHost);
+
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferPlain0);
 
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferPlain);
@@ -427,19 +413,18 @@ INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferPlain);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecFromHost);
-#endif
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/loadexec", sceKernelRegisterExitCallback);
-#endif
-
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/loadexec", func_000024A8);
-
-INCLUDE_ASM("nonmatchings/loadexec", func_000024C4);
+s32 sceKernelRegisterExitCallback(s32 arg0) {
+    D_00003060 = arg0;
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/loadexec", sceKernelRegisterExitCallback);
+#endif
+
+#if FW_VERSION >= 103 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelUnregisterExitCallback);
 
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelCheckExitCallback);
@@ -581,7 +566,14 @@ INCLUDE_ASM("nonmatchings/loadexec", sceKernelInvokeExitCallback);
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_11412288);
 #endif
 
+#if FW_VERSION < 150
+s32 module_bootstart(void) {
+    D_00003060 = 0;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/loadexec", module_bootstart);
+#endif
 
 #if FW_VERSION == 280 || FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/loadexec", D_00001F7C);

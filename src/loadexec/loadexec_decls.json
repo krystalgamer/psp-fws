@@ -12,6 +12,7 @@
   "func_00001FA8": "s32 func_00001FA8(s32, s32, s32, s32);",
   "func_00002190": "s32 func_00002190(s32, s32, s32, s32, s32);",
   "func_00002288": "s32 func_00002288(s32, s32);",
+  "module_bootstart": "s32 module_bootstart(void);",
   "sceKernelExitGame": "s32 sceKernelExitGame(void);",
   "sceKernelExitVSHKernel": "void sceKernelExitVSHKernel(s32 arg0);",
   "sceKernelIsToolMode": "s32 sceKernelIsToolMode();",
@@ -27,7 +28,10 @@
   "sceKernelLoadExecVSHMs3": "void sceKernelLoadExecVSHMs3(s32 arg0, s32 arg1);",
   "sceKernelLoadExecVSHMs4": "void sceKernelLoadExecVSHMs4(s32 arg0, s32 arg1);",
   "sceKernelLoadExecVSHMs5": "void sceKernelLoadExecVSHMs5(s32 arg0, s32 arg1);",
-  "sceKernelReboot": "void sceKernelReboot(void);"
+  "sceKernelReboot": "void sceKernelReboot(void);",
+  "sceKernelRegisterExitCallback": "s32 sceKernelRegisterExitCallback(s32 arg0);"
  },
- "vars": {}
+ "vars": {
+  "D_00003060": "extern s32 D_00003060;"
+ }
 }

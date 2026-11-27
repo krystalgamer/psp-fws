@@ -87,3 +87,10 @@ memset = 0x000039D8; // type:func rom:0x3A58
 D_00003DF0_v103 = 0x00003DF0; // rom:0x3E70
 D_00003F58_v103 = 0x00003F58; // rom:0x3FD8
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceUtilsKernelDcacheWBinvRange = 0x00000A14; // type:func
+sceKernelAssert = 0x00003998; // type:func
+Kprintf = 0x000039A0; // type:func
+printf = 0x000039B0; // type:func
+__udivdi3 = 0x000039C0; // type:func

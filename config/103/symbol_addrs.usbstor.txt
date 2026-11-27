@@ -77,3 +77,16 @@ sceUsbbdReqSend = 0x000021E4; // type:func rom:0x2264
 sceUsbbdReqRecv = 0x000021EC; // type:func rom:0x226C
 sceUsbbdReqCancelAll = 0x000021F4; // type:func rom:0x2274
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceUsbstor_internal_489E6BF1 = 0x00000428; // type:func
+sceUsbstor_internal_2CAFEFF1 = 0x00000650; // type:func
+sceKernelCreateEventFlag = 0x00002144; // type:func
+sceKernelCreateFpl = 0x0000216C; // type:func
+sceKernelTryAllocateFpl = 0x0000217C; // type:func
+sceKernelCreateThread = 0x00002184; // type:func
+sceKernelDeleteThread = 0x0000218C; // type:func
+sceKernelStartThread = 0x00002194; // type:func
+sceIdStorageIsFormatted = 0x000021B4; // type:func
+sceIdStorageLookup = 0x000021BC; // type:func
+sceUsbbdStall = 0x000021DC; // type:func

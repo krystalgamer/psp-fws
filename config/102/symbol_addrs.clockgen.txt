@@ -23,3 +23,10 @@ sceKernelWaitSema = 0x00000630; // type:func rom:0x6B0
 sceI2cMasterTransmit = 0x00000648; // type:func rom:0x6C8
 sceKernelUnregisterSysEventHandler = 0x00000660; // type:func rom:0x6E0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelCreateSema = 0x00000618; // type:func
+sceKernelPollSema = 0x00000638; // type:func
+sceI2cSetClock = 0x00000640; // type:func
+sceI2cMasterTransmitReceive = 0x00000650; // type:func
+sceKernelRegisterSysEventHandler = 0x00000658; // type:func

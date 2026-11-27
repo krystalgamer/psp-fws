@@ -98,3 +98,24 @@ sceGpioSetPortMode = 0x000026B8; // type:func rom:0x2738
 sceKernelRegisterSysEventHandler = 0x000026C8; // type:func rom:0x2748
 func_00000000_v102 = 0x00000000; // type:func rom:0x80
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelRegisterSubIntrHandler = 0x000025D0; // type:func
+sceIoAssign = 0x000025F0; // type:func
+sceIoUnassign = 0x000025F8; // type:func
+sceKernelDipswAll = 0x00002600; // type:func
+sceKernelNotifyCallback = 0x00002620; // type:func
+sceKernelCreateSema = 0x00002628; // type:func
+sceKernelDeleteSema = 0x00002630; // type:func
+sceKernelSignalSema = 0x00002638; // type:func
+sceKernelWaitSema = 0x00002640; // type:func
+sceKernelCreateEventFlag = 0x00002648; // type:func
+sceKernelDeleteEventFlag = 0x00002650; // type:func
+sceKernelWaitEventFlagCB = 0x00002670; // type:func
+sceKernelCreateThread = 0x00002678; // type:func
+sceKernelDeleteThread = 0x00002680; // type:func
+sceKernelStartThread = 0x00002688; // type:func
+sceKernelChangeThreadPriority = 0x00002690; // type:func
+sceKernelGetThreadmanIdType = 0x00002698; // type:func
+sceGpioPortSet = 0x000026A8; // type:func
+sceGpioSetIntrMode = 0x000026C0; // type:func

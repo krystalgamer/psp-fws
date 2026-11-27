@@ -104,3 +104,25 @@ sceKernelWaitSema = 0x00006520; // type:func rom:0x65A0
 sceKernelPowerLock = 0x00006550; // type:func rom:0x65D0
 sceKernelPowerUnlock = 0x00006558; // type:func rom:0x65D8
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceRegInit = 0x00000000; // type:func
+sceRegExit = 0x000000D8; // type:func
+module_reboot_before = 0x0000024C; // type:func
+sceRegCloseRegistry = 0x000003C4; // type:func
+sceIoClose = 0x000064A0; // type:func
+sceIoOpen = 0x000064A8; // type:func
+sceIoRead = 0x000064B0; // type:func
+sceIoWrite = 0x000064B8; // type:func
+sceIoLseek = 0x000064C0; // type:func
+sceIoIoctl = 0x000064C8; // type:func
+sceIoRemove = 0x000064D0; // type:func
+sceIoGetstat = 0x000064D8; // type:func
+sprintf = 0x00006500; // type:func
+sceKernelCreateSema = 0x00006508; // type:func
+sceKernelDeleteSema = 0x00006510; // type:func
+sceKernelCreateVpl = 0x00006528; // type:func
+sceKernelDeleteVpl = 0x00006530; // type:func
+sceKernelTryAllocateVpl = 0x00006538; // type:func
+sceKernelFreeVpl = 0x00006540; // type:func
+sceKernelReferVplStatus = 0x00006548; // type:func

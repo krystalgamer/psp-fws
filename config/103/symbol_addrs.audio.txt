@@ -81,3 +81,21 @@ sceSysregAudioIoDisable = 0x00002B0C; // type:func rom:0x2B8C
 func_00002AA0 = 0x00002B14; // type:func rom:0x2B94
 sceSysregAudioClkoutIoDisable = 0x00002B1C; // type:func rom:0x2B9C
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceAudioOutputBlocking = 0x000005F4; // type:func
+sceAudioOutputPannedBlocking = 0x00000888; // type:func
+sceAudioGetChannelRestLen = 0x00001124; // type:func
+sceAudioSetFrequency = 0x000011F4; // type:func
+sceAudioInit = 0x000012D8; // type:func
+sceAudioSetVolumeOffset = 0x000016B8; // type:func
+sceKernelDmaOpAlloc = 0x000029A4; // type:func
+sceKernelCpuResumeIntrWithSync = 0x000029FC; // type:func
+sceKernelRegisterIntrHandler = 0x00002A04; // type:func
+sceKernelEnableIntr = 0x00002A0C; // type:func
+sceKernelCreateEventFlag = 0x00002A24; // type:func
+sceKernelClearEventFlag = 0x00002A3C; // type:func
+sceKernelCreateThread = 0x00002A4C; // type:func
+sceKernelStartThread = 0x00002A54; // type:func
+sceKernelDcacheWritebackInvalidateRange = 0x00002A6C; // type:func
+sceKernelRegisterSysEventHandler = 0x00002AB4; // type:func

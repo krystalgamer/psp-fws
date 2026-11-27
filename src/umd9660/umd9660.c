@@ -316,17 +316,11 @@ s32 func_00001E24(void) {
 INCLUDE_ASM("nonmatchings/umd9660", func_00001E30);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/umd9660", func_00001FF0);
-#endif
-
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/umd9660", func_00001440);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660Init);
-#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660SetPFI);

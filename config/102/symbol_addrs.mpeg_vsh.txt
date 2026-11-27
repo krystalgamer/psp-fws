@@ -162,3 +162,14 @@ sceVideocodecStop = 0x0000783C; // type:func rom:0x78BC
 sceVideocodecDelete = 0x00007844; // type:func rom:0x78C4
 sceVideocodecSetMemory = 0x0000784C; // type:func rom:0x78CC
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceMpegInit = 0x0000033C; // type:func
+sceMpegCreate = 0x00000500; // type:func
+sceMpegAvcDecode = 0x00000D20; // type:func
+sceMpegAvcDecodeStop = 0x00000F14; // type:func
+sceMpegQueryStreamOffset = 0x00001168; // type:func
+sceKernelDcacheWritebackInvalidateRange = 0x000077E4; // type:func
+sceMpegBasePESpacketCopy = 0x00007804; // type:func
+sceMpegBaseCscInit = 0x0000780C; // type:func
+sceMpegBaseCscAvc = 0x0000781C; // type:func

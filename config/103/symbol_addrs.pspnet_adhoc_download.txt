@@ -76,3 +76,14 @@ sceNetAdhocMatchingStop = 0x00002414; // type:func rom:0x2494
 sceNetAdhocMatchingDelete = 0x0000241C; // type:func rom:0x249C
 sceUtilityGetSystemParamString = 0x00002434; // type:func rom:0x24B4
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceNetAdhocDownloadCreateServer = 0x00000000; // type:func
+sceNetAdhocDownloadReplySession = 0x000001E4; // type:func
+sceNetAdhocDownloadStopServer = 0x00000D48; // type:func
+sceKernelCreateSema = 0x0000234C; // type:func
+sceKernelCreateEventFlag = 0x0000236C; // type:func
+sceKernelDeleteEventFlag = 0x00002374; // type:func
+sceKernelWaitEventFlag = 0x00002384; // type:func
+sceNetAdhocMatchingSelectTarget = 0x00002424; // type:func
+sceNetAdhocMatchingCancelTarget = 0x0000242C; // type:func

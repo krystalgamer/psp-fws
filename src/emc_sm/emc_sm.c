@@ -24,14 +24,6 @@ INCLUDE_ASM("nonmatchings/emc_sm", func_0000014C);
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000160);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000508);
-
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
-
-INCLUDE_ASM("nonmatchings/emc_sm", func_0000060C);
-#endif
-
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
 #endif
@@ -40,15 +32,13 @@ INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000015C);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandUnlock);
-#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReset);
 
@@ -97,11 +87,7 @@ s32 sceNandSuspend(void) {
     return 0;
 }
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000E1C);
-#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandResume);
-#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
@@ -115,7 +101,19 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetScramble);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadPages);
 
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWritePages);
+#else
+s32 sceNandWritePages(u32 arg0, void *arg1, void *arg2, u32 arg3) {
+    s32 var_a4;
+
+    var_a4 = (arg1 == NULL) * 0x10;
+    if (arg2 == NULL) {
+        var_a4 |= 0x20;
+    }
+    return sceNandWriteAccess((s32) arg0, (s32) arg1, (s32) arg2, (s32) arg3, var_a4);
+}
+#endif
 
 void sceNandReadPagesRawExtra(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     sceNandReadAccess(arg0, arg1, arg2, arg3, 0x20);
@@ -220,7 +218,19 @@ s32 sceNandGetTotalBlocks(void) {
 }
 #endif
 
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWriteBlock);
+#else
+s32 sceNandWriteBlock(u32 arg0, void *arg1, void *arg2) {
+    s32 var_v0;
+
+    var_v0 = sceNandEraseBlockWithRetry(arg0);
+    if (var_v0 >= 0) {
+        var_v0 = __builtin_allegrex_min(sceNandWritePages(arg0, arg1, arg2, (u32) D_00002FD4), 0);
+    }
+    return var_v0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandCalcEcc);
 

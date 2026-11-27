@@ -101,3 +101,21 @@ func_00001CC8_v103 = 0x00001CC8; // type:func rom:0x1D48
 func_00001D48_v103 = 0x00001D48; // type:func rom:0x1DC8
 func_00001D50_v103 = 0x00001D50; // type:func rom:0x1DD0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+module_reboot_before = 0x00000000; // type:func
+sceKernelRegisterIntrHandler = 0x00001CE8; // type:func
+sceKernelSetUserModeIntrHanlerAcceptable = 0x00001CF0; // type:func
+sceKernelRegisterSubIntrHandler = 0x00001D18; // type:func
+sceKernelEnableSubIntr = 0x00001D28; // type:func
+Kprintf = 0x00001D30; // type:func
+sceKernelSm1ReferOperations = 0x00001D38; // type:func
+sceKernelWaitEventFlag = 0x00001D70; // type:func
+sceKernelWaitEventFlagCB = 0x00001D78; // type:func
+sceGpioPortRead = 0x00001DC8; // type:func
+sceGpioPortSet = 0x00001DD0; // type:func
+sceGpioPortClear = 0x00001DD8; // type:func
+sceGpioSetPortMode = 0x00001DE0; // type:func
+sceLcdcReset = 0x00001DF8; // type:func
+scePwmReferDuty = 0x00001E28; // type:func
+sceKernelRegisterSysEventHandler = 0x00001E30; // type:func

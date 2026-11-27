@@ -211,23 +211,13 @@ INCLUDE_ASM("nonmatchings/libupdown", func_000021D0);
 
 INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadInitEx);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libupdown", func_0000246C);
-#else
 INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadInit);
-#endif
 
 INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadEnd);
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/libupdown", func_000025A4);
-
-INCLUDE_ASM("nonmatchings/libupdown", func_00002688);
-#else
 INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadConnectServer);
 
 INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadReadData);
-#endif
 
 void func_0000258C(void) {
     sceKernelGetSystemTimeLow();

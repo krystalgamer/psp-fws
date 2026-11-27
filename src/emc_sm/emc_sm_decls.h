@@ -18,6 +18,7 @@ s32 sceKernelDeleteSema(s32);
 M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);
 M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);
 s32 sceNandEnd(void);
+s32 sceNandEraseBlockWithRetry(u32);
 s32 sceNandGetPageSize(void);
 s32 sceNandGetPagesPerBlock(void);
 s32 sceNandGetTotalBlocks(void);
@@ -29,6 +30,8 @@ void sceNandReadPagesRawExtra(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 sceNandResume(void);
 s32 sceNandSuspend(void);
 s32 sceNandWriteAccess(s32, s32, s32, s32, s32);
+s32 sceNandWriteBlock(u32 arg0, void *arg1, void *arg2);
+s32 sceNandWritePages(u32 arg0, void *arg1, void *arg2, u32 arg3);
 void sceNandWritePagesRawAll(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 #endif

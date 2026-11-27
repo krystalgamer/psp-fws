@@ -1,14 +1,12 @@
 #include "common.h"
 #include "vaudio_decls.h"
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/vaudio", func_00000000);
+INCLUDE_ASM("nonmatchings/vaudio", sceVaudioOutputBlocking);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/vaudio", func_0000020C);
 
 INCLUDE_ASM("nonmatchings/vaudio", func_00000340);
-#else
-INCLUDE_ASM("nonmatchings/vaudio", sceVaudioOutputBlocking);
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 310)

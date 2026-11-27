@@ -58,3 +58,23 @@ sceSysconSetHPConnectCallback = 0x00001ADC; // type:func rom:0x1B5C
 sceSysregUartClkEnable = 0x00001B0C; // type:func rom:0x1B8C
 sceSysregUartIoDisable = 0x00001B1C; // type:func rom:0x1B9C
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelRegisterIntrHandler = 0x00001A1C; // type:func
+sceKernelEnableIntr = 0x00001A2C; // type:func
+sceKernelRegisterSubIntrHandler = 0x00001A34; // type:func
+sceKernelEnableSubIntr = 0x00001A44; // type:func
+Kprintf = 0x00001A4C; // type:func
+memset = 0x00001A5C; // type:func
+sceKernelCreateEventFlag = 0x00001A74; // type:func
+sceKernelPollEventFlag = 0x00001A9C; // type:func
+sceKernelCreateThread = 0x00001AA4; // type:func
+sceKernelStartThread = 0x00001AB4; // type:func
+sceKernelPowerTick = 0x00001AC4; // type:func
+sceKernelRegisterSysEventHandler = 0x00001ACC; // type:func
+sceSysconSetHRPowerCallback = 0x00001AE4; // type:func
+sceSysconGetHPConnect = 0x00001AEC; // type:func
+sceSysconGetHoldSwitch = 0x00001AF4; // type:func
+sceSysconGetHRPowerStatus = 0x00001AFC; // type:func
+sceSysconCtrlHRPower = 0x00001B04; // type:func
+sceSysregUartIoEnable = 0x00001B14; // type:func

@@ -79,3 +79,20 @@ sceNetMFreem = 0x00003B38; // type:func rom:0x3BB8
 sceNetIfhandle_driver_0542835F = 0x00003B40; // type:func rom:0x3BC0
 sceNetIfhandle_driver_773FC77C = 0x00003B48; // type:func rom:0x3BC8
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+_sce_pspnet_adhoc_prp_start = 0x0000035C; // type:func
+sceNetAdhocAuth_driver_6CE209A3 = 0x00000870; // type:func
+sceNetAdhocAuth_driver_2AD8C677 = 0x000009D4; // type:func
+memset = 0x00003A28; // type:func
+sceKernelCreateSema = 0x00003A40; // type:func
+sceKernelCreateMbx = 0x00003A60; // type:func
+sceKernelReceiveMbx = 0x00003A78; // type:func
+sceKernelCreateThread = 0x00003A90; // type:func
+sceKernelStartThread = 0x00003AA0; // type:func
+sceAdhocBBInit = 0x00003AB8; // type:func
+sceAdhocBBAuth2 = 0x00003AD0; // type:func
+sceAdhocBBAuth3 = 0x00003AD8; // type:func
+sceAdhocBBAuth4 = 0x00003AE0; // type:func
+sceAdhocBBAuth5 = 0x00003AE8; // type:func
+sceNetIfhandle_driver_9CBA24D4 = 0x00003B50; // type:func

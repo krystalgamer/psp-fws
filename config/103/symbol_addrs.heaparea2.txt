@@ -4,3 +4,9 @@ module_stop = 0x0000012C; // type:func rom:0x1AC
 sce_paf_private_getheaparea1 = 0x0000014C; // type:func rom:0x1CC
 sce_paf_private_getheaparea2 = 0x0000016C; // type:func rom:0x1EC
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelCreateFpl = 0x00000370; // type:func
+sceKernelDeleteFpl = 0x00000378; // type:func
+sceKernelTryAllocateFpl = 0x00000380; // type:func
+sceKernelFreeFpl = 0x00000388; // type:func

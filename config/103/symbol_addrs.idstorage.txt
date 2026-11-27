@@ -53,3 +53,16 @@ sceKernelPowerLock = 0x00001E34; // type:func rom:0x1EB4
 sceKernelPowerUnlock = 0x00001E3C; // type:func rom:0x1EBC
 sceKernelUnregisterSysEventHandler = 0x00001E4C; // type:func rom:0x1ECC
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+Kprintf = 0x00001D6C; // type:func
+sceKernelCreateSema = 0x00001D84; // type:func
+sceKernelCreateFpl = 0x00001DA4; // type:func
+sceKernelAllocateFpl = 0x00001DB4; // type:func
+sceNandReadPages = 0x00001DD4; // type:func
+sceNandReadExtraOnly = 0x00001DF4; // type:func
+sceNandCollectEcc = 0x00001DFC; // type:func
+sceNandGetPagesPerBlock = 0x00001E04; // type:func
+sceNandWriteBlockWithVerify = 0x00001E0C; // type:func
+sceNandReadBlockWithRetry = 0x00001E14; // type:func
+sceKernelRegisterSysEventHandler = 0x00001E44; // type:func
