@@ -432,7 +432,6 @@
   "D_0002DC78": "extern struct inpcbtable D_0002DC78;",
   "D_0002DC98": "extern struct SceTailqHead D_0002DC98[13];",
   "D_0002DD04": "extern s32 D_0002DD04;",
-  "D_0002DF50": "extern s32 D_0002DF50;",
   "D_0002E5EC": "extern s32 D_0002E5EC;",
   "D_0002E5F0": "extern s32 D_0002E5F0;",
   "D_0002E5F4": "extern s32 D_0002E5F4; /* lowportmin */",
@@ -508,6 +507,7 @@
   "tcp_compat_42": "extern s32 tcp_compat_42; /* tcp_compat_42 */",
   "tcp_delacks": "extern struct tcpcb *tcp_delacks; /* tcp_delacks */",
   "tcp_iss_seq": "extern u32 tcp_iss_seq; /* tcp_iss_seq */",
+  "tcp_maxidle": "extern s32 tcp_maxidle;",
   "tcp_stat": "extern struct tcpstat tcp_stat;",
   "udbtable": "extern struct inpcbtable udbtable;",
   "zeroin_addr": "extern struct in_addr zeroin_addr; /* zeroin_addr */"

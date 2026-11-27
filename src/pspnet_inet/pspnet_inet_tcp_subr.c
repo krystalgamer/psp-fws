@@ -545,7 +545,7 @@ void func_00025E94(void) {
     D_0002C35C = 0x96;
     D_0002C360 = 8;
     D_0002E924 = 0x3840;
-    D_0002DF50 = 0;
+    tcp_maxidle = 0;
     D_0002C5D8 = 0;
 }
 #endif
@@ -557,7 +557,7 @@ void func_000244B0(void) {
     D_0002C35C = 0x96;
     D_0002C360 = 8;
     D_0002C364 = 0x3840;
-    D_0002DF50 = 0;
+    tcp_maxidle = 0;
     D_0002C5D8 = 0;
 }
 #endif
@@ -600,7 +600,35 @@ struct tcpcb *tcp_disconnect(struct tcpcb *tp) {
     return (tp);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_usrclosed);
+struct tcpcb *tcp_usrclosed(struct tcpcb *tp) {
+    switch (tp->t_state) {
+    case 0:
+    case 1:
+    case 2:
+        tp->t_state = 0;
+        tp = tcp_close(tp);
+        break;
+    case 3:
+    case 4:
+        tp->t_state = 6;
+        break;
+    case 5:
+        tp->t_state = 8;
+        break;
+    }
+    if (tp && tp->t_state >= 9) {
+        struct socket *so;
+
+        if (tp->t_inpcb)
+            so = tp->t_inpcb->inp_socket;
+        else
+            so = NULL;
+        soisdisconnected(so);
+        if ((tp->t_state == 9) && (tcp_maxidle > 0))
+            tp->t_timer[3] = pfslowtimo_now + tcp_maxidle;
+    }
+    return (tp);
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00024EC4);
 

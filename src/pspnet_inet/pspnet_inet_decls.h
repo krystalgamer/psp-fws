@@ -1490,7 +1490,6 @@ extern s32 D_0002DC30;
 extern struct inpcbtable D_0002DC78;
 extern struct SceTailqHead D_0002DC98[13];
 extern s32 D_0002DD04;
-extern s32 D_0002DF50;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
 extern s32 D_0002E5F4; /* lowportmin */
@@ -1566,6 +1565,7 @@ extern s32 tcp_backoff[]; /* tcp_backoff */
 extern s32 tcp_compat_42; /* tcp_compat_42 */
 extern struct tcpcb *tcp_delacks; /* tcp_delacks */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
+extern s32 tcp_maxidle;
 extern struct tcpstat tcp_stat;
 extern struct inpcbtable udbtable;
 extern struct in_addr zeroin_addr; /* zeroin_addr */
