@@ -28,11 +28,11 @@ void func_0000140C(s32 *arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000047C8);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000181C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 void func_0000181C(s32 *arg0, s32 arg1, s32 arg2) {
     func_000077C4(sceMScmReadMSRegHelper(*arg0, arg2, arg1, -1));
 }
@@ -104,11 +104,11 @@ void func_00001834(s32 *arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000048D4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001B88);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 void func_00001B88(s32 *arg0, s32 arg1, s32 arg2) {
     func_000077C4(sceMScmWriteMSRegHelper(*arg0, arg2, arg1, -1));
 }
@@ -271,11 +271,11 @@ s32 func_00004514(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004558);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_00004558(void) {
     sceIoDelDrv(&D_00009264);
     sceIoDelDrv(&D_00009248);
@@ -327,11 +327,11 @@ INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009270);
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004588);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msstor_0015A0", module_reboot_before);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 module_reboot_before(void) {
     sceKernelWaitSema(D_00008934, 1, NULL);
     sceIoDelDrv(&D_00009264);

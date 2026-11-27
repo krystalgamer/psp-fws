@@ -14,11 +14,11 @@ INCLUDE_ASM("nonmatchings/msstor", func_00000134);
 
 INCLUDE_ASM("nonmatchings/msstor", func_0000017C);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msstor", func_000001BC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_000001BC(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
@@ -33,11 +33,11 @@ s32 func_000001BC(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msstor", func_00000220);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_00000220(s32 arg0, s32 arg1, s32 arg2) {
     s32 var_a4;
 
