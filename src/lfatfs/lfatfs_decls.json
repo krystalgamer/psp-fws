@@ -262,6 +262,8 @@
   "D_0000E160": "extern char D_0000E160[];",
   "D_0000E3D4": "extern s32 D_0000E3D4;",
   "D_0000E554": "extern s32 D_0000E554;",
+  "D_0000E650": "extern s32 D_0000E650;",
+  "D_0000E6C0": "extern s32 D_0000E6C0;",
   "D_0000E80C": "extern void *D_0000E80C;",
   "D_0000E810": "extern void **D_0000E810;",
   "D_0000E814": "extern void *D_0000E814;",
@@ -272,6 +274,7 @@
   "D_0000EDAC": "extern void *D_0000EDAC;",
   "D_0000EDB0": "extern void **D_0000EDB0;",
   "D_0000EDB4": "extern void *D_0000EDB4;",
+  "D_0000EDF0": "extern s32 D_0000EDF0;",
   "D_0000EED0": "extern LFlashDev D_0000EED0;"
  }
 }

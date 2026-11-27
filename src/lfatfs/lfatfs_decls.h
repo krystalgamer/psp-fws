@@ -399,6 +399,8 @@ extern volatile SceUID D_0000E0A0;
 extern char D_0000E160[];
 extern s32 D_0000E3D4;
 extern s32 D_0000E554;
+extern s32 D_0000E650;
+extern s32 D_0000E6C0;
 extern void *D_0000E80C;
 extern void **D_0000E810;
 extern void *D_0000E814;
@@ -409,6 +411,7 @@ extern M2C_UNK D_0000ECA8;
 extern void *D_0000EDAC;
 extern void **D_0000EDB0;
 extern void *D_0000EDB4;
+extern s32 D_0000EDF0;
 extern LFlashDev D_0000EED0;
 
 s32 Kprintf(const char *fmt, ...);

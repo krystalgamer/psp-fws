@@ -2939,8 +2939,32 @@ s32 func_00008848(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/lfatfs", func_00008848);
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 func_00008848(void) {
+    s32 res;
+
+    res = df_close(NULL);
+    if (res < 0) {
+        Kprintf(D_0000DCE0, "test_close", res);
+        Kprintf(D_0000D874, D_0000C56C, "test_close", 0xA4A);
+        sceKernelAssert(0, 0);
+    }
+    return res;
+}
+#endif
+
+#if FW_VERSION == 152
+s32 func_00008848(void) {
+    s32 res;
+
+    res = df_close(NULL);
+    if (res < 0) {
+        Kprintf(D_0000DCE0, "test_close", res);
+        Kprintf(D_0000D874, D_0000C56C, "test_close", 0xA4D);
+        sceKernelAssert(0, 0);
+    }
+    return res;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -2955,11 +2979,29 @@ s32 lflash_read_only_mode(s32 mode) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/lfatfs", lflash_read_only_mode);
+#if FW_VERSION == 150
+s32 lflash_read_only_mode(s32 mode) {
+    Kprintf("lflash.c:%s:(mode %d)\n", "lflash_read_only_mode", mode);
+    D_0000E6C0 = mode;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 151
+s32 lflash_read_only_mode(s32 mode) {
+    Kprintf("lflash.c:%s:(mode %d)\n", "lflash_read_only_mode", mode);
+    D_0000E650 = mode;
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 152
+s32 lflash_read_only_mode(s32 mode) {
+    Kprintf("lflash.c:%s:(mode %d)\n", "lflash_read_only_mode", mode);
+    D_0000EDF0 = mode;
+    return 0;
+}
+
 s32 func_00009514(SceIoIob *iob) {
     if (k1IsUserMode()) {
         if (sceIoGetIobUserLevel(iob) < 4) {
