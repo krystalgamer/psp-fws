@@ -111,7 +111,24 @@ struct Unk_sceIoGetDevType_sp0 {
     u8 unkC;
 };
 
+typedef struct SceSysmemUidCB {
+    struct SceSysmemUidCB *PARENT0;
+    struct SceSysmemUidCB *nextChild;
+    struct SceSysmemUidCB *meta;
+    SceUID uid;
+    char *name;
+    u8 childSize;
+    u8 size;
+    u16 attr;
+    struct SceSysmemUidCB *next;
+    struct SceSysmemUidCB *PARENT1;
+    void *funcTable;
+} SceSysmemUidCB;
+
+extern char D_00004594[];
+extern char D_0000466C[];
 extern s32 D_00004E4C;
+extern char D_00005118[];
 extern char D_0000563C[];
 extern s32 D_00005870;
 extern M2C_UNK D_000060B4;
@@ -221,6 +238,8 @@ M2C_UNK sceKernelCallUIDObjCommonFunction();
 void sceKernelCpuResumeIntr(s32 intr);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelFreeHeapMemory(SceUID heapId, void *block);
+void *sceKernelGetKTLS(SceUID id);
+s32 sceKernelGetUIDcontrolBlock(SceUID uid, SceSysmemUidCB **block);
 s32 sceKernelRegisterStderrPipe(s32 arg0);
 s32 sceKernelRegisterStdoutPipe(s32 arg0);
 s32 sceKernelStderr(void);
@@ -236,6 +255,8 @@ s32 sceKernelStdout(void);
 s32 sceKernelStdoutReopen(s32 arg0, s32 arg1, s32 arg2);
 s32 start_async(SceIoIob *iob, s32 cmd);
 s32 strcmp_bs(const char *s1, const char *s2);
+char *strcpy(char *d, const char *s);
+SceSize strlen(const char *s);
 s32 validate_fd(SceUID fd, s32 flags, s32 arg2, s32 arg3, SceIoIob **outIob);
 s32 xx_dir(const char *path, SceMode mode, s32 action);
 s32 xx_stat(const char *file, SceIoStat *stat, u32 bits, s32 get);

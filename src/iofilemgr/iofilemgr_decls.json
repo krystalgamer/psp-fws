@@ -91,6 +91,8 @@
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32 intr);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelFreeHeapMemory": "s32 sceKernelFreeHeapMemory(SceUID heapId, void *block);",
+  "sceKernelGetKTLS": "void *sceKernelGetKTLS(SceUID id);",
+  "sceKernelGetUIDcontrolBlock": "s32 sceKernelGetUIDcontrolBlock(SceUID uid, SceSysmemUidCB **block);",
   "sceKernelRegisterStderrPipe": "s32 sceKernelRegisterStderrPipe(s32 arg0);",
   "sceKernelRegisterStdoutPipe": "s32 sceKernelRegisterStdoutPipe(s32 arg0);",
   "sceKernelStderr": "s32 sceKernelStderr(void);",
@@ -106,6 +108,8 @@
   "sceKernelStdoutReopen": "s32 sceKernelStdoutReopen(s32 arg0, s32 arg1, s32 arg2);",
   "start_async": "s32 start_async(SceIoIob *iob, s32 cmd);",
   "strcmp_bs": "s32 strcmp_bs(const char *s1, const char *s2);",
+  "strcpy": "char *strcpy(char *d, const char *s);",
+  "strlen": "SceSize strlen(const char *s);",
   "validate_fd": "s32 validate_fd(SceUID fd, s32 flags, s32 arg2, s32 arg3, SceIoIob **outIob);",
   "xx_dir": "s32 xx_dir(const char *path, SceMode mode, s32 action);",
   "xx_stat": "s32 xx_stat(const char *file, SceIoStat *stat, u32 bits, s32 get);"
@@ -119,10 +123,14 @@
   "SceIoDeviceTable": "/* Driver descriptor passed to sceIoAddDrv (0x14 bytes). */\nstruct SceIoDeviceTable {\n    char *dt_string; /* 0x0, device name */\n    s32 dt_type; /* 0x4 */\n    s32 dt_size; /* 0x8 */\n    char *dt_desc; /* 0xC */\n    SceIoDeviceFunction *dt_func; /* 0x10 */\n};",
   "SceIoIob": "/* File descriptor block. 1.00/1.50: static table g_iob[64] of 0x80 bytes, fd = index. */\nstruct SceIoIob {\n    s32 i_flgs; /* 0x0, 1 = read, 2 = write, 0x8 = dir, 0x1000000 = thread-owned, 0x2000000 = power lock */\n    s32 i_unit; /* 0x4 */\n    SceIoDeviceEntry *i_de; /* 0x8 */\n    s32 d_type; /* 0xC */\n    void *i_private; /* 0x10 */\n    void *i_cwd; /* 0x14 */\n    SceOff i_fpos; /* 0x18 */\n    SceUID i_thread; /* 0x20 */\n    s32 unk24; /* 0x24 */\n    s32 fd; /* 0x28, own index; -1 = free */\n    SceUID curThread; /* 0x2C */\n    s32 userMode; /* 0x30 */\n    s32 powerLocked; /* 0x34 */\n    s32 asyncPrio; /* 0x38 */\n    SceUID asyncThread; /* 0x3C */\n    SceUID asyncSema; /* 0x40 */\n    SceUID asyncEvFlag; /* 0x44 */\n    SceUID asyncCb; /* 0x48 */\n    void *asyncCbArgp; /* 0x4C */\n    s32 asyncClosed; /* 0x50, uOFW unk050: free the iob when the async result is collected */\n    char *asyncCwd; /* 0x54, copy of the caller's cwd for an async open */\n    u32 k1; /* 0x58 */\n    s32 asyncCmd; /* 0x5C, 0 = close (deleted dev), 1 = open, 2 = close, 3 = read, 4 = write, 5 = lseek, 6 = ioctl */\n    s64 asyncRet; /* 0x60 */\n    s32 asyncArgs[6]; /* 0x68 */\n};",
   "Unk_IoFileMgrForKernel_BD17474F_0": "struct Unk_IoFileMgrForKernel_BD17474F_0 {\n    u8 pad0[0x80];\n    s32 unk80;\n};",
-  "Unk_sceIoGetDevType_sp0": "struct Unk_sceIoGetDevType_sp0 {\n    u8 pad0[0xC];\n    u8 unkC;\n};"
+  "Unk_sceIoGetDevType_sp0": "struct Unk_sceIoGetDevType_sp0 {\n    u8 pad0[0xC];\n    u8 unkC;\n};",
+  "hand_sceIoDread": "typedef struct SceSysmemUidCB {\n    struct SceSysmemUidCB *PARENT0;\n    struct SceSysmemUidCB *nextChild;\n    struct SceSysmemUidCB *meta;\n    SceUID uid;\n    char *name;\n    u8 childSize;\n    u8 size;\n    u16 attr;\n    struct SceSysmemUidCB *next;\n    struct SceSysmemUidCB *PARENT1;\n    void *funcTable;\n} SceSysmemUidCB;"
  },
  "vars": {
+  "D_00004594": "extern char D_00004594[];",
+  "D_0000466C": "extern char D_0000466C[];",
   "D_00004E4C": "extern s32 D_00004E4C;",
+  "D_00005118": "extern char D_00005118[];",
   "D_0000563C": "extern char D_0000563C[];",
   "D_00005870": "extern s32 D_00005870;",
   "D_000060B4": "extern M2C_UNK D_000060B4;",
