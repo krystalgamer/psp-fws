@@ -9,12 +9,13 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/vshmain
-  src_path: tmp/av_src/102/vshmain
+  src_path: src/vshmain
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/vshmain.ld
   cache_path: tmp/build/102/.splat_cache.vshmain
   symbol_addrs_path:
     - config/102/symbol_addrs.vshmain.txt
+    - config/102/func_starts.vshmain.txt
     - tmp/build/102/prx_syms.vshmain.txt
   reloc_addrs_path: [tmp/build/102/reloc_addrs.vshmain.txt]
   asset_path: tmp/assets/102/vshmain
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, vshmain]
+      - [0x182FC, c, vshmain_crtend]
       - { start: 0x18354, type: asm, name: fini, linker_section: .fini }
       - { start: 0x18370, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x18C60, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
