@@ -417,7 +417,33 @@ INCLUDE_ASM("nonmatchings/power", func_00002464);
 
 INCLUDE_ASM("nonmatchings/power", func_000025D8);
 #else
-INCLUDE_ASM("nonmatchings/power", func_00002414);
+s32 func_00002414(s32 arg0) {
+    s32 i;
+
+    sceGpioPortClear(0x2800001);
+    for (i = 0; i < 6; i++) {
+        if (i != 2 && i != 3) {
+            sceSysregUartIoDisable(i);
+        }
+    }
+    for (i = 0; i < 6; i++) {
+        if (i != 0) {
+            sceSysregSpiIoDisable(i);
+        }
+    }
+    for (i = 0; i < 32; i++) {
+        if (i == 3 || i == 4) {
+            continue;
+        }
+        if (i != 7) {
+            sceSysregGpioIoDisable(i);
+        }
+    }
+    if (arg0 != 0) {
+        sceSysregGpioIoDisable(7);
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 100
