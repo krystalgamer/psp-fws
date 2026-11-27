@@ -6,6 +6,9 @@
 /* 1 if p is below 0x80000000 (user space); SCE compares the result with 0 */
 #define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
 
+/* 2.70+: nonzero if the caller is a user and p is a kernel address */
+#define K1_BAD_ADDR(p) ((-k1IsUserMode() & (u32)(p)) >> 31)
+
 #if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/rtc", func_00000000_v352);
 #endif
@@ -548,7 +551,17 @@ s32 sceRtcTickAddTicks(u64 *destTick, const u64 *srcTick, s64 numTicks) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddTicks);
+s32 sceRtcTickAddTicks(u64 *destTick, const u64 *srcTick, s64 numTicks) {
+    u32 oldK1 = shiftK1();
+
+    if (K1_BAD_ADDR(destTick) || K1_BAD_ADDR(srcTick)) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    *destTick = *srcTick + numTicks;
+    setK1(oldK1);
+    return 0;
+}
 #endif
 
 s32 sceRtcTickAddMicroseconds(u64 *destTick, const u64 *srcTick, s64 num) {
@@ -770,7 +783,18 @@ s32 sceRtcFormatRFC2822LocalTime(char *pszDateTime, const u64 *pUtc) {
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC2822LocalTime);
+s32 sceRtcFormatRFC2822LocalTime(char *pszDateTime, const u64 *pUtc) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if (K1_BAD_ADDR(pszDateTime) || K1_BAD_ADDR(pUtc)) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    ret = sceRtcFormatRFC2822(pszDateTime, pUtc, g_rtc.unkC + g_rtc.unk8);
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 270
@@ -787,7 +811,18 @@ s32 sceRtcFormatRFC3339LocalTime(char *pszDateTime, const u64 *pUtc) {
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC3339LocalTime);
+s32 sceRtcFormatRFC3339LocalTime(char *pszDateTime, const u64 *pUtc) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if (K1_BAD_ADDR(pszDateTime) || K1_BAD_ADDR(pUtc)) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    ret = sceRtcFormatRFC3339(pszDateTime, pUtc, g_rtc.unkC + g_rtc.unk8);
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/rtc", func_00003D10);
