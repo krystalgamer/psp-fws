@@ -4,6 +4,131 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef struct SceSysmemUidLookupFunc {
+    s32 id;
+    void *func;
+} SceSysmemUidLookupFunc;
+
+typedef struct SceSysmemUidCB {
+    struct SceSysmemUidCB *PARENT0; /* 0x00 */
+    struct SceSysmemUidCB *nextChild; /* 0x04 */
+    struct SceSysmemUidCB *meta; /* 0x08: the type UID */
+    SceUID uid; /* 0x0C */
+    char *name; /* 0x10 */
+    u8 childSize; /* 0x14 */
+    u8 size; /* 0x15: offset of this type's data, in words */
+    u16 attr; /* 0x16 */
+    union {
+        struct SceSysmemUidCB *next;
+        s32 numChild;
+    } next; /* 0x18 */
+    struct SceSysmemUidCB *PARENT1; /* 0x1C */
+    SceSysmemUidLookupFunc *funcTable; /* 0x20 */
+} SceSysmemUidCB;
+
+#define UID_CB_TO_DATA(cb, type, T) ((T *)((u8 *)(cb) + (type)->size * 4))
+
+struct SceThread;
+
+/* circular list head; a thread links in through its first two words */
+typedef struct SceThreadQueue {
+    struct SceThread *next;
+    struct SceThread *prev;
+} SceThreadQueue;
+
+/* common data of every waitable object ("WaitQ" uid type, 0x14 bytes) */
+typedef struct SceWaitQ {
+    u32 attr; /* 0x00 */
+    s32 unk4; /* 0x04 */
+    s32 numWaitThreads; /* 0x08 */
+    SceThreadQueue waitQueue; /* 0x0C */
+} SceWaitQ;
+
+enum SceThreadStatus {
+    THREAD_RUNNING = 1,
+    THREAD_READY = 2,
+    THREAD_WAITING = 4,
+    THREAD_SUSPEND = 8,
+    THREAD_WAITING_SUSPEND = 0xC,
+    THREAD_STOPPED = 0x10,
+    THREAD_KILLED = 0x20
+};
+
+/* "Thread" uid type data, 0x10C bytes (1.00) */
+typedef struct SceThread {
+    struct SceThread *next; /* 0x00 */
+    struct SceThread *prev; /* 0x04 */
+    SceUID uid; /* 0x08 */
+    s32 status; /* 0x0C */
+    s32 currentPriority; /* 0x10 */
+    s32 wakeupCount; /* 0x14 */
+    s32 exitStatus; /* 0x18 */
+    s32 waitType; /* 0x1C */
+    SceSysmemUidCB *waitObj; /* 0x20 */
+    u8 unk24[0x38 - 0x24];
+    s32 unk38; /* 0x38 */
+    s32 unk3C; /* 0x3C */
+    s32 waitRet; /* 0x40 */
+    u8 unk44[0x60 - 0x44];
+    s32 initPriority; /* 0x60 */
+    u8 unk64[0x6C - 0x64];
+    void *entry; /* 0x6C */
+    void *stack; /* 0x70 */
+    s32 stackSize; /* 0x74 */
+    u8 unk78[0x7C - 0x78];
+    void *kStack; /* 0x7C */
+    s32 kStackSize; /* 0x80 */
+    u8 unk84[0x88 - 0x84];
+    void *gpReg; /* 0x88 */
+    u8 unk8C[0xD0 - 0x8C];
+    u32 attr; /* 0xD0 */
+    u8 unkD4[0xE4 - 0xD4];
+    s32 *preemptCount; /* 0xE4: &intrPreemptCount or &threadPreemptCount */
+    s32 intrPreemptCount; /* 0xE8 */
+    s32 threadPreemptCount; /* 0xEC */
+    s32 releaseCount; /* 0xF0 */
+    u8 unkF4[0x100 - 0xF4];
+    void *unk100; /* 0x100 */
+    u8 unk104[0x10C - 0x104];
+} SceThread;
+
+typedef s32 (*SceThreadmanLogHandler)(s32 id, void *ra, s32 nargs, ...);
+
+/* the thread manager state (1.00: 0x6F4 bytes at 0x15518) */
+typedef struct SceThreadmanInfo {
+    SceThread *currentThread; /* 0x000 */
+    SceThread *nextThread; /* 0x004 */
+    SceThreadQueue readyQueue[128]; /* 0x008 */
+    u32 readyPriorityMask[4]; /* 0x408 */
+    s32 dispatchDisabled; /* 0x418 */
+    u8 unk41C[0x5EC - 0x41C];
+    SceThreadQueue suspendedThreads; /* 0x5EC */
+    u8 unk5F4[0x5FC - 0x5F4];
+    SceSysmemUidCB *uidWaitQType; /* 0x5FC */
+    SceSysmemUidCB *uidThreadType; /* 0x600 */
+    SceSysmemUidCB *uidSemaType; /* 0x604 */
+    SceSysmemUidCB *uidEventFlagType; /* 0x608 */
+    SceSysmemUidCB *uidMbxType; /* 0x60C */
+    SceSysmemUidCB *uidMsgPipeType; /* 0x610 */
+    SceSysmemUidCB *uidVplType; /* 0x614 */
+    SceSysmemUidCB *uidFplType; /* 0x618 */
+    SceSysmemUidCB *uidThreadEventHandlerType; /* 0x61C */
+    SceSysmemUidCB *uidCallbackType; /* 0x620 */
+    SceSysmemUidCB *uidTimerType; /* 0x624 */
+    SceSysmemUidCB *uidDelayType; /* 0x628 */
+    SceSysmemUidCB *uidAlarmType; /* 0x62C */
+    SceSysmemUidCB *uidVTimerType; /* 0x630 */
+    s32 heapId; /* 0x634 */
+    s32 systemStatusFlag; /* 0x638 */
+    u8 unk63C[0x660 - 0x63C];
+    union {
+        u32 size;
+        u8 buf[0x84];
+    } tmpInfo; /* 0x660: refer-status scratch buffer */
+    u8 unk6E4[0x6F0 - 0x6E4];
+    SceThreadmanLogHandler logHandler; /* 0x6F0 */
+} SceThreadmanInfo;
+
 struct D_00016C74_s {
     void * unk0;
     volatile s32 unk4;
@@ -234,13 +359,14 @@ extern s32 D_00017AFC;
 extern s32 D_00017B08;
 extern s32 D_00017DC8;
 extern M2C_UNK func_00015B40;
+extern SceThreadmanInfo g_threadmanInfo;
 
 M2C_UNK Kprintf(M2C_UNK *, s32, s32, s32, s32);
 void _sceKernelExitThread(void);
 s32 _sceKernelReturnFromTimerHandler(void);
 s32 func_0000022C(s32);
-s32 func_00000268(s32);
-s32 func_000003F0(s32 arg0, s32 arg1);
+s32 func_00000268(SceThread *thread);
+s32 func_000003F0(SceSysmemUidCB *cb, s32 waitRet);
 s32 func_00000448(s32 arg0, s32 arg1);
 void func_000004CC(struct Unk_func_000004CC_0 *arg0);
 void func_00000524(s32 arg0);
@@ -260,7 +386,7 @@ s32 func_00002394(void *arg0);
 s32 func_000024D4(void *arg0);
 s32 func_0000261C(struct Unk_func_0000261C_0 *arg0);
 s32 func_0000275C(struct Unk_func_0000275C_0 *arg0);
-void func_00003518(void *arg0);
+void func_00003518(SceThread *thread);
 void func_00003C3C(void *arg0);
 void func_00003CF8(struct Unk_func_00003CF8_0 *arg0);
 s32 func_000047B8(void *arg0);

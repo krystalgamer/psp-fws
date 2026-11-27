@@ -3,9 +3,25 @@
 #include "common.h"
 #include "threadman_decls.h"
 
+#if FW_VERSION == 100
+void func_00000000(SceThreadQueue *queue, s32 waitType) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    SceThread *prev;
+
+    prev = queue->prev;
+    thread->next = (SceThread *)queue;
+    thread->prev = prev;
+    queue->prev = thread;
+    prev = thread->prev;
+    thread->status = THREAD_WAITING;
+    thread->waitType = waitType;
+    prev->next = thread;
+    thread->waitRet = 0;
+    thread->waitObj = NULL;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", func_00000000);
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000017C);
 #endif
 
@@ -30,39 +46,32 @@ INCLUDE_ASM("nonmatchings/threadman", func_00000268);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00000308);
 
-s32 func_000003F0(s32 arg0, s32 arg1) {
-    M2C_UNK *temp_s0;
-    M2C_UNK *var_s1;
-    s32 var_s2;
-    void *temp_a0;
-    void *temp_s3;
+s32 func_000003F0(SceSysmemUidCB *cb, s32 waitRet) {
+    SceWaitQ *wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
+    SceThread *next = wq->waitQueue.next;
+    s32 count = 0;
 
-    temp_a0 = arg0 + (M2C_FIELD(D_00015B14, u8 *, 0x15) * 4);
-    var_s1 = M2C_FIELD(temp_a0, M2C_UNK **, 0xC);
-    temp_s3 = temp_a0 + 0xC;
-    var_s2 = 0;
-    if (var_s1 != temp_s3) {
-        do {
-            temp_s0 = var_s1;
-            var_s1 = M2C_FIELD(var_s1, M2C_UNK **, 0);
-            func_00000268((s32) temp_s0);
-            var_s2 += 1;
-            M2C_FIELD(temp_s0, s32 *, 0x40) = arg1;
-        } while (var_s1 != temp_s3);
+    while (next != (SceThread *)&wq->waitQueue) {
+        SceThread *thread = next;
+
+        next = thread->next;
+        func_00000268(thread);
+        count++;
+        thread->waitRet = waitRet;
     }
-    return var_s2;
+    return count;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_000003F0(s32 arg0, s32 arg1) {
+s32 func_000003F0(SceSysmemUidCB *arg0, s32 arg1) {
     M2C_UNK *temp_s0;
     M2C_UNK *var_s1;
     s32 var_s2;
     void *temp_s3;
     void *temp_v1;
 
-    temp_v1 = arg0 + (M2C_FIELD(D_00016444, u8 *, 0x15) * 4);
+    temp_v1 = (u8 *)arg0 + (M2C_FIELD(D_00016444, u8 *, 0x15) * 4);
     var_s1 = M2C_FIELD(temp_v1, M2C_UNK **, 0xC);
     temp_s3 = temp_v1 + 0xC;
     var_s2 = 0;
@@ -232,10 +241,10 @@ s32 func_000008A0(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_VFIELD(&D_00015518, s32, 0x418) == 0) {
-        temp_v0 = M2C_VFIELD(&D_00015518, s32, 4) != (s32) M2C_FIELD(&D_00015518, void **, 0);
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(M2C_FIELD(&D_00015518, void **, 0), void **, 0xE4) = (void *) (M2C_FIELD(&D_00015518, void **, 0) + 0xE8);
+            g_threadmanInfo.currentThread->preemptCount = &g_threadmanInfo.currentThread->intrPreemptCount;
         }
         var_v1 = temp_v0;
     }
@@ -769,15 +778,15 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitThreadEnd);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitThreadEndCB);
 
 #if FW_VERSION == 100
-void func_00003518(void *arg0) {
-    s32 temp_v0;
+void func_00003518(SceThread *thread) {
+    s32 intr;
 
-    temp_v0 = sceKernelCpuSuspendIntr();
-    M2C_FIELD(arg0, s32 *, 0x38) = 0;
-    if (func_00000268((s32) arg0) > 0) {
-        D_0001551C = 0;
+    intr = sceKernelCpuSuspendIntr();
+    thread->unk38 = 0;
+    if (func_00000268(thread) > 0) {
+        g_threadmanInfo.nextThread = 0;
     }
-    sceKernelCpuResumeIntr(temp_v0);
+    sceKernelCpuResumeIntr(intr);
 }
 #endif
 
@@ -2476,7 +2485,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00013DB0);
 
 #if FW_VERSION == 100
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00015518, void **, 0x100), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(g_threadmanInfo.currentThread->unk100, s32 *, 0x18));
 }
 #endif
 
@@ -2612,7 +2621,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_00012F3C);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferThreadDebugStatus);
 
 s32 sceKernelGetSystemStatusFlag(void) {
-    return D_00015B50;
+    return g_threadmanInfo.systemStatusFlag;
 }
 #endif
 
