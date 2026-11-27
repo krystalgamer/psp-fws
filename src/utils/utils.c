@@ -59,9 +59,17 @@ INCLUDE_ASM("nonmatchings/utils", func_00000704);
 INCLUDE_ASM("nonmatchings/utils", func_000007EC);
 
 INCLUDE_ASM("nonmatchings/utils", func_000008F0);
+#endif
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/utils", func_00000A14);
+#endif
+
+#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/utils", sceUtilsKernelDcacheWBinvRange);
+#endif
 
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", func_00000AFC);
 
 INCLUDE_ASM("nonmatchings/utils", func_00000BE4);
@@ -490,6 +498,10 @@ INCLUDE_ASM("nonmatchings/utils", func_000024A0);
 
 INCLUDE_RODATA("nonmatchings/utils", D_00002940);
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/utils", D_000045C0);
+#else
 INCLUDE_RODATA("nonmatchings/utils", D_00002A40);
+#endif
 
 INCLUDE_RODATA("nonmatchings/utils", D_00002A80);
