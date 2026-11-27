@@ -2681,8 +2681,14 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000BAD4);
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BB00);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BB14);
+#endif
+
+#if FW_VERSION == 150
+s32 *func_0000BB14(void) {
+    return &D_0000DC35;
+}
 #endif
 
 #if FW_VERSION == 100
