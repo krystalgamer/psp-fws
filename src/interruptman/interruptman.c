@@ -15,6 +15,15 @@ static inline void setCop0Status(u32 v) {
     __asm__ __volatile__("mtc0 %0, $12" : : "r"(v));
 }
 
+#if FW_VERSION >= 150
+/* func_00000348 inlined (gnu89 extern inline: body for inlining only, never emitted);
+   1.50-2.71 still emit the out-of-line func_00000348 where it stands */
+extern inline void freeSubIntrs(void *ptr) {
+    if (ptr != NULL)
+        sceKernelFreeHeapMemory(g_intrInfo.heapId, ptr);
+}
+#endif
+
 static inline u32 getCop0Count(void) {
     u32 v;
 
@@ -294,7 +303,10 @@ Interrupt **func_000002B8(s32 num) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", func_00000348);
+void func_00000348(void *ptr) {
+    if (ptr != NULL)
+        sceKernelFreeHeapMemory(g_intrInfo.heapId, ptr);
+}
 #endif
 
 #if FW_VERSION == 100
@@ -420,7 +432,29 @@ s32 sceKernelReleaseIntrHandler(u32 intrNum) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseIntrHandler);
+s32 sceKernelReleaseIntrHandler(u32 intrNum) {
+    s32 ret = 0;
+    s32 oldIntr;
+    Interrupt *intr;
+
+    if (sceKernelIsIntrContext() != 0)
+        return 0x80020064;
+    if (intrNum >= 67)
+        return 0x80020065;
+    oldIntr = sceKernelCpuSuspendIntr();
+    intr = &g_intrInfo.intr[intrNum];
+    if (intr->handler == 0) {
+        ret = 0x80020068;
+    } else {
+        sceKernelSuspendIntr(intrNum, 0);
+        freeSubIntrs(intr->subIntrs);
+        intr->subIntrs = NULL;
+        intr->cb = NULL;
+        intr->handler = 0;
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -768,7 +802,30 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00001978);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseIntrHandler);
+s32 sceKernelReleaseIntrHandler(u32 intrNum) {
+    s32 ret = 0;
+    s32 oldIntr;
+    Interrupt *intr;
+
+    if (sceKernelIsIntrContext() != 0)
+        return 0x80020064;
+    if (intrNum >= 67)
+        return 0x80020065;
+    oldIntr = sceKernelCpuSuspendIntr();
+    intr = &g_intrInfo.intr[intrNum];
+    if (intr->handler == 0) {
+        ret = 0x80020068;
+    } else {
+        sceKernelSuspendIntr(intrNum, 0);
+        freeSubIntrs(intr->subIntrs);
+        intr->subIntrs = NULL;
+        intr->cb = NULL;
+        intr->handler = 0;
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    return ret;
+}
+
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelClearIntrLogging);
 
