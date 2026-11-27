@@ -2568,6 +2568,7 @@ void func_000155A8(s32 arg0);
 M2C_UNK func_000155D4(s32);
 void func_00015670(s32 arg0);
 void func_0001568C(s32 arg0);
+void func_000156A8(s32 arg0);
 void func_000156C4(s32 arg0, s32 arg1);
 void func_000156E0(s32 arg0);
 void func_000156FC(s32 arg0);
