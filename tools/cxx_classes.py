@@ -66,6 +66,30 @@ def demangled_class(dname):
     return m[1] if m else None
 
 
+def migrate_aliases(files, ents, fv):
+    """Older runs put `_ZTV` aliases at the end of a unit under an explicit version list; move
+    each next to the vtable label's INCLUDE_RODATA in every version it selects."""
+    moved = 0
+    for f in files:
+        for e in list(ents[f]):
+            ms = list(re.finditer(r'/\* vtable of \w+ \(data\) \*/\n(__asm__\("\.globl (\w+)\\n\w+ = (\w+) - 8\\n"\);\n)', e.text))
+            if e.kind != "other" or not ms:
+                continue
+            ents[f].remove(e)
+            for m in ms:
+                asm, vt, label = m[1], m[2], m[3]
+                for n in e.vers:
+                    for g, es in ents.items():
+                        pos = next((k + 1 for k, x in enumerate(es) if x.kind == "rodata" and x.name == label and n in x.vers), None)
+                        if pos is not None:
+                            es.insert(pos, FM.Entry(frozenset([n]), "alias", vt, asm))
+                            break
+                    else:
+                        raise SystemExit(f"{vt}: no INCLUDE_RODATA of {label} for {n}")
+                moved += 1
+    return moved
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("module")
@@ -73,6 +97,7 @@ def main():
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--no-build", action="store_true")
     ap.add_argument("-v", action="store_true")
+    ap.add_argument("--migrate", action="store_true", help="only move old version-listed vtable aliases")
     a = ap.parse_args()
     mod = a.module
     have = sorted((p.parent.name for p in ROOT.glob(f"config/*/{mod}.yaml")), key=lambda v: (fwnum(v), v))
@@ -82,6 +107,12 @@ def main():
     sd = src_dir(ver, mod)
     files = sorted(sd.glob("*.c"))
     ents = {f: FM.parse(f.read_text(), fv) for f in files}
+    if a.migrate:
+        n = migrate_aliases(files, ents, fv)
+        for f in files:
+            f.write_text(FM.emit(FM.dedupe(ents[f]), fv))
+        print(f"{mod}: {n} vtable aliases moved next to their labels")
+        return
     per = {v: CG.groups(v, mod) for v in vers}
     clusters = [c for c in CG.cluster(per, vers) if c["key"][0] == "dtor"]
 

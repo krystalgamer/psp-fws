@@ -1146,6 +1146,8 @@ INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_00091710);
 
 INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_00091740);
 
+__asm__(".globl _ZTV14Class_00091740\n_ZTV14Class_00091740 = D_00091740 - 8\n");
+
 INCLUDE_ASM("nonmatchings/music_plugin_0004F644", func_00062254);
 
 INCLUDE_ASM("nonmatchings/music_plugin_0004F644", func_00062530);
@@ -3827,6 +3829,8 @@ INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_000610E0);
 
 #if FW_VERSION == 201
 INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_0008BBC8);
+
+__asm__(".globl _ZTV14Class_0008BBC8\n_ZTV14Class_0008BBC8 = D_0008BBC8 - 8\n");
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
@@ -4129,6 +4133,8 @@ INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_00061108);
 
 INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_0008BD20);
 
+__asm__(".globl _ZTV14Class_0008BD20\n_ZTV14Class_0008BD20 = D_0008BD20 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_0008BD30);
 #endif
 
@@ -4221,6 +4227,8 @@ INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_00061108);
 
 INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_0008BD20);
 
+__asm__(".globl _ZTV14Class_0008BD20\n_ZTV14Class_0008BD20 = D_0008BD20 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_0008BD30);
 
 INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_0008BD38);
@@ -4237,7 +4245,11 @@ INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_0008BD58);
 #if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_0008BD68);
 
+__asm__(".globl _ZTV14Class_0008BD68\n_ZTV14Class_0008BD68 = D_0008BD68 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_0008BD78);
+
+__asm__(".globl _ZTV14Class_0008BD78\n_ZTV14Class_0008BD78 = D_0008BD78 - 8\n");
 #endif
 
 #if FW_VERSION == 152
@@ -4346,6 +4358,8 @@ void func_000570E4(s32 **arg0) {
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/music_plugin_0004F644", D_0008BDB0);
+
+__asm__(".globl _ZTV14Class_0008BDB0\n_ZTV14Class_0008BDB0 = D_0008BDB0 - 8\n");
 #endif
 
 #if FW_VERSION < 201
@@ -5672,34 +5686,4 @@ INCLUDE_ASM("nonmatchings/music_plugin_0004F644", func_00001984);
 INCLUDE_ASM("nonmatchings/music_plugin_0004F644", func_00001ABC);
 
 INCLUDE_ASM("nonmatchings/music_plugin_0004F644", func_00001B10);
-#endif
-
-#if FW_VERSION == 201
-/* vtable of Class_0008BBC8 (data) */
-__asm__(".globl _ZTV14Class_0008BBC8\n_ZTV14Class_0008BBC8 = D_0008BBC8 - 8\n");
-#endif
-
-#if FW_VERSION == 201 || FW_VERSION == 250
-/* vtable of Class_0008BD20 (data) */
-__asm__(".globl _ZTV14Class_0008BD20\n_ZTV14Class_0008BD20 = D_0008BD20 - 8\n");
-#endif
-
-#if FW_VERSION == 201 || FW_VERSION == 250
-/* vtable of Class_0008BD68 (data) */
-__asm__(".globl _ZTV14Class_0008BD68\n_ZTV14Class_0008BD68 = D_0008BD68 - 8\n");
-#endif
-
-#if FW_VERSION == 201 || FW_VERSION == 250
-/* vtable of Class_0008BD78 (data) */
-__asm__(".globl _ZTV14Class_0008BD78\n_ZTV14Class_0008BD78 = D_0008BD78 - 8\n");
-#endif
-
-#if FW_VERSION == 201 || FW_VERSION == 250
-/* vtable of Class_0008BDB0 (data) */
-__asm__(".globl _ZTV14Class_0008BDB0\n_ZTV14Class_0008BDB0 = D_0008BDB0 - 8\n");
-#endif
-
-#if FW_VERSION == 250
-/* vtable of Class_00091740 (data) */
-__asm__(".globl _ZTV14Class_00091740\n_ZTV14Class_00091740 = D_00091740 - 8\n");
 #endif

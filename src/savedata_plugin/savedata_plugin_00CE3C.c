@@ -225,6 +225,8 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CE04);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin_00CE3C", D_00023078);
 
+__asm__(".globl _ZTV14Class_00023078\n_ZTV14Class_00023078 = D_00023078 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/savedata_plugin_00CE3C", D_00023088);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000D05C);
@@ -1566,7 +1568,11 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000DB9C);
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_plugin_00CE3C", D_00022560);
 
+__asm__(".globl _ZTV14Class_00022560\n_ZTV14Class_00022560 = D_00022560 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/savedata_plugin_00CE3C", D_00022578);
+
+__asm__(".globl _ZTV14Class_00022578\n_ZTV14Class_00022578 = D_00022578 - 8\n");
 #endif
 
 #if FW_VERSION == 271
@@ -2279,15 +2285,4 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_00011C24);
 void func_00011C4C(struct Unk_func_00011C4C_0 *arg0, s32 arg1) {
     arg0->unk10 = arg1;
 }
-#else
-/* vtable of Class_00022578 (data) */
-__asm__(".globl _ZTV14Class_00022578\n_ZTV14Class_00022578 = D_00022578 - 8\n");
-
-/* vtable of Class_00022560 (data) */
-__asm__(".globl _ZTV14Class_00022560\n_ZTV14Class_00022560 = D_00022560 - 8\n");
-#endif
-
-#if FW_VERSION >= 260 && FW_VERSION < 282
-/* vtable of Class_00023078 (data) */
-__asm__(".globl _ZTV14Class_00023078\n_ZTV14Class_00023078 = D_00023078 - 8\n");
 #endif
