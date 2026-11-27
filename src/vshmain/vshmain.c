@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "vshmain_decls.h"
 
@@ -3302,23 +3303,23 @@ void func_0000B764(M2C_UNK **arg0, struct Unk_func_0000B764_1 *arg1) {
     M2C_UNK *temp_v0;
     struct Unk_func_0000B764_temp_v1 *temp_v1;
 
-    temp_v1 = arg1->unk8;
-    temp_a2 = arg1->unk0;
+    temp_v1 = (Unk_func_0000B764_temp_v1*) arg1->unk8;
+    temp_a2 = (Unk_func_0000B764_temp_a2*) arg1->unk0;
     temp_v0 = temp_v1->unk4;
-    arg1->unk0 = temp_v1;
-    temp_v1->unk4 = arg1;
+    arg1->unk0 = (M2C_UNK*) temp_v1;
+    temp_v1->unk4 = (M2C_UNK*) arg1;
     arg1->unk8 = temp_v0;
     if (temp_v0 != NULL) {
         *temp_v0 = arg1;
     }
     if (temp_a2 == NULL) {
-        *arg0 = temp_v1;
+        *arg0 = (M2C_UNK*) temp_v1;
     } else if (temp_a2->unk4 == arg1) {
-        temp_a2->unk4 = temp_v1;
+        temp_a2->unk4 = (M2C_UNK*) temp_v1;
     } else {
-        temp_a2->unk8 = temp_v1;
+        temp_a2->unk8 = (M2C_UNK*) temp_v1;
     }
-    temp_v1->unk0 = temp_a2;
+    temp_v1->unk0 = (M2C_UNK*) temp_a2;
 }
 
 void func_0000B7A4(M2C_UNK **arg0, struct Unk_func_0000B7A4_1 *arg1) {
@@ -3326,23 +3327,23 @@ void func_0000B7A4(M2C_UNK **arg0, struct Unk_func_0000B7A4_1 *arg1) {
     M2C_UNK *temp_v0;
     struct Unk_func_0000B7A4_temp_v1 *temp_v1;
 
-    temp_v1 = arg1->unk4;
-    temp_a2 = arg1->unk0;
+    temp_v1 = (Unk_func_0000B7A4_temp_v1*) arg1->unk4;
+    temp_a2 = (Unk_func_0000B7A4_temp_a2*) arg1->unk0;
     temp_v0 = temp_v1->unk8;
-    arg1->unk0 = temp_v1;
+    arg1->unk0 = (M2C_UNK*) temp_v1;
     arg1->unk4 = temp_v0;
-    temp_v1->unk8 = arg1;
+    temp_v1->unk8 = (M2C_UNK*) arg1;
     if (temp_v0 != NULL) {
         *temp_v0 = arg1;
     }
     if (temp_a2 == NULL) {
-        *arg0 = temp_v1;
+        *arg0 = (M2C_UNK*) temp_v1;
     } else if (temp_a2->unk4 == arg1) {
-        temp_a2->unk4 = temp_v1;
+        temp_a2->unk4 = (M2C_UNK*) temp_v1;
     } else {
-        temp_a2->unk8 = temp_v1;
+        temp_a2->unk8 = (M2C_UNK*) temp_v1;
     }
-    temp_v1->unk0 = temp_a2;
+    temp_v1->unk0 = (M2C_UNK*) temp_a2;
 }
 #endif
 
@@ -5837,7 +5838,7 @@ void func_00012AA4(void) {
     if (D_0003089C->unkCC == 0) {
 
     } else if ((func_00015B4C((s32) D_0003089C) != 0) && (M2C_FIELD(D_0003089C->unk4AC, s32 (**)(), 0x74)() != 0)) {
-        if (func_0001AE48(D_0003089C) == 0) {
+        if (func_0001AE48((Unk_func_0001AE48_0*) D_0003089C) == 0) {
             func_00012EEC(0, 0);
         }
     }
@@ -7402,8 +7403,8 @@ void func_0000B150(void *arg0) {
     s32 var_s2;
 
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x90);
-    if (!(temp_v1 & 0x100)) {
-        if (!(temp_v1 & 0x400)) {
+    if ((temp_v1 & 0x100) == 0) {
+        if ((temp_v1 & 0x400) == 0) {
             if (temp_v1 & 0x200) {
                 var_s0 = func_0000A620((s32) arg0, 1);
                 var_s2 = 2;
@@ -9272,12 +9273,12 @@ void func_0001EBF0(void) {
     struct Unk_vt_func_0001EBF0_temp_v0 **temp_v0;
     void **temp_v0_2;
 
-    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_000308B8, &D_0002ACEC);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_000308B8, (const char*) &D_0002ACEC);
     if (temp_v0 != NULL) {
         (*temp_v0)->unk70(temp_v0, 0x19, 3);
         (*temp_v0)->unk70(temp_v0, 7, 0x10);
     }
-    temp_v0_2 = _ZNK3paf4View10FindWidgetEPKc(D_000308B8, &D_0002AD04);
+    temp_v0_2 = _ZNK3paf4View10FindWidgetEPKc(D_000308B8, (const char*) &D_0002AD04);
     if (temp_v0_2 != NULL) {
         M2C_FIELD(M2C_FIELD(temp_v0_2, void **, 0), M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0_2, 0x19, 9);
         M2C_FIELD(temp_v0_2, s8 *, 0x1FD) = 0;
@@ -10077,7 +10078,7 @@ s32 *func_00012094(s32 *arg0) {
     void **temp_v0;
 
     func_00013700(arg0, 0);
-    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_000308BC, &D_00018CA0);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_000308BC, (const char*) &D_00018CA0);
     if (temp_v0 != NULL) {
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xAC)(temp_v0, arg0, 0);
     }
@@ -10090,7 +10091,7 @@ s32 *func_00012094(s32 *arg0) {
     void **temp_v0;
 
     func_0000F360(arg0, 0);
-    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_000308BC, &D_00018CA0);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_000308BC, (const char*) &D_00018CA0);
     if (temp_v0 != NULL) {
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xAC)(temp_v0, arg0, 0);
     }
@@ -10124,7 +10125,7 @@ s32 *func_0002129C(s32 *arg0) {
     struct Unk_vt_func_0002129C_temp_v0 **temp_v0;
 
     func_00009464(arg0, 0);
-    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_000308BC, &D_0002B25C);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_000308BC, (const char*) &D_0002B25C);
     if (temp_v0 != NULL) {
         (*temp_v0)->unkB0(temp_v0, arg0, 0);
     }
@@ -12055,7 +12056,7 @@ void func_000252DC(void) {
     M2C_UNK *temp_s0;
     s32 temp_v0;
 
-    temp_s0 = "SceVshVolatileMemory";
+    temp_s0 = (M2C_UNK*) "SceVshVolatileMemory";
     D_00030A10 = sceKernelCreateEventFlag(temp_s0, 0x200U, 1U, NULL);
     temp_v0 = sceKernelCreateCallback(temp_s0, (s32) &func_00025388, NULL);
     D_0003A850 = temp_v0;
@@ -12072,7 +12073,7 @@ void func_000252DC(void) {
     M2C_UNK *temp_s0;
     s32 temp_v0;
 
-    temp_s0 = "SceVshVolatileMemory";
+    temp_s0 = (M2C_UNK*) "SceVshVolatileMemory";
     D_00030A10 = sceKernelCreateEventFlag(temp_s0, 0x200U, 1U, NULL);
     temp_v0 = sceKernelCreateCallback(temp_s0, (s32) &func_00025388, NULL);
     D_00030A14 = temp_v0;
