@@ -57,6 +57,7 @@ s32 func_00000DB0(s32 arg0);
 s32 func_0000138C(s32 arg0);
 s32 func_0000328C(const char *s);
 char *func_000032D0(char *buf, s32 n);
+s32 func_000032D4(const char *s);
 s32 func_0000358C(void);
 char *func_00003AF8(char *buf, s32 n);
 char *func_00003B60(char *buf, s32 n);

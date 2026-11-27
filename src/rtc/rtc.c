@@ -637,7 +637,17 @@ s32 func_0000328C(const char *s) {
     return (c0 - '0') * 10 + (c1 - '0');
 }
 
-INCLUDE_ASM("nonmatchings/rtc", func_000032D4);
+s32 func_000032D4(const char *s) {
+    s8 c0 = s[0];
+    s8 c1 = s[1];
+    s8 c2 = s[2];
+    s8 c3 = s[3];
+
+    if (c0 < '0' || c0 > '9' || c1 < '0' || c1 > '9' || c2 < '0' || c2 > '9' || c3 < '0' || c3 > '9') {
+        return -1;
+    }
+    return (c0 - '0') * 1000 + (c1 - '0') * 100 + (c2 - '0') * 10 + (c3 - '0');
+}
 
 INCLUDE_ASM("nonmatchings/rtc", func_00003374);
 

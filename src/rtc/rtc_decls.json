@@ -6,6 +6,7 @@
   "func_0000138C": "s32 func_0000138C(s32 arg0);",
   "func_0000328C": "s32 func_0000328C(const char *s);",
   "func_000032D0": "char *func_000032D0(char *buf, s32 n);",
+  "func_000032D4": "s32 func_000032D4(const char *s);",
   "func_0000358C": "s32 func_0000358C(void);",
   "func_00003AF8": "char *func_00003AF8(char *buf, s32 n);",
   "func_00003B60": "char *func_00003B60(char *buf, s32 n);",
