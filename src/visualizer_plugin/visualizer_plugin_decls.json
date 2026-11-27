@@ -1,5 +1,20 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
+  "_ZN14Class_0000CFD8D0Ev": "void _ZN14Class_0000CFD8D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000CFD8D1Ev": "void _ZN14Class_0000CFD8D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000CFD8D2Ev": "void _ZN14Class_0000CFD8D2Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000D908D0Ev": "void _ZN14Class_0000D908D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000D908D1Ev": "void _ZN14Class_0000D908D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000D908D2Ev": "void _ZN14Class_0000D908D2Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000D948D0Ev": "void _ZN14Class_0000D948D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000D948D1Ev": "void _ZN14Class_0000D948D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000D948D2Ev": "void _ZN14Class_0000D948D2Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000DA28D0Ev": "void _ZN14Class_0000DA28D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000DA28D1Ev": "void _ZN14Class_0000DA28D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000DA28D2Ev": "void _ZN14Class_0000DA28D2Ev(M2C_UNK **arg0);",
   "_ZN3paf8PhWidgetD2Ev": "M2C_UNK _ZN3paf8PhWidgetD2Ev(void **);",
   "_ZN3paf9PhHandler11KillTimerCBEi": "M2C_UNK _ZN3paf9PhHandler11KillTimerCBEi(void **, M2C_UNK);",
   "_ZN3paf9PhSRender8SetStyleEiRK4vec4": "M2C_UNK _ZN3paf9PhSRender8SetStyleEiRK4vec4(s32);",
@@ -127,6 +142,10 @@
   "sce_paf_private_memset": "M2C_UNK sce_paf_private_memset(s32, M2C_UNK, s32);"
  },
  "types": {
+  "Class_0000CFD8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0000CFD8 is data (vptr = label - 8 + 8) */\nclass Class_0000CFD8 {\npublic:\n    virtual ~Class_0000CFD8();\n};\n#endif",
+  "Class_0000D908": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0000D908 is data (vptr = label - 8 + 8) */\nclass Class_0000D908 {\npublic:\n    virtual ~Class_0000D908();\n};\n#endif",
+  "Class_0000D948": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0000D948 is data (vptr = label - 8 + 8) */\nclass Class_0000D948 {\npublic:\n    virtual ~Class_0000D948();\n};\n#endif",
+  "Class_0000DA28": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0000DA28 is data (vptr = label - 8 + 8) */\nclass Class_0000DA28 {\npublic:\n    virtual ~Class_0000DA28();\n};\n#endif",
   "Unk_func_0000064C_0": "struct Unk_func_0000064C_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n};",
   "Unk_func_00000660_0": "struct Unk_func_00000660_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n};",
   "Unk_func_00000674_0": "struct Unk_func_00000674_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n};",

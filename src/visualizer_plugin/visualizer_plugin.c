@@ -134,7 +134,7 @@ void func_000006D0(struct Unk_func_000006D0_0 *arg0) {
     func_00000AE8(arg0->unk4);
 }
 
-#if FW_VERSION >= 350 && FW_VERSION < 352
+#if FW_VERSION < 352
 void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
     void **temp_s0;
 
@@ -142,19 +142,7 @@ void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
     M2C_FIELD(*temp_s0, M2C_UNK (**)(void **, M2C_UNK), 0x58)(temp_s0, 1);
     _ZN3paf9PhHandler11KillTimerCBEi(temp_s0, 0x01000003);
 }
-#endif
-
-#if FW_VERSION < 350
-void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
-    void **temp_s0;
-
-    temp_s0 = arg0->unk4;
-    M2C_FIELD(*temp_s0, M2C_UNK (**)(void **, M2C_UNK), 0x58)(temp_s0, 1);
-    _ZN3paf9PhHandler11KillTimerCBEi(temp_s0, 0x01000003);
-}
-#endif
-
-#if FW_VERSION == 352
+#else
 void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
     struct Unk_vt_func_000006EC_temp_s0 **temp_s0;
 
@@ -312,6 +300,10 @@ void func_00000D70(struct Unk_func_00000D70_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION < 350
+Class_0000CFD8::~Class_0000CFD8() {
+}
+#else
 void func_00000D88(M2C_UNK **arg0) {
     *arg0 = &D_0000CFD8;
 }
@@ -319,10 +311,13 @@ void func_00000D88(M2C_UNK **arg0) {
 void func_00000D98(M2C_UNK **arg0) {
     *arg0 = &D_0000CFD8;
 }
+#endif
 
-#if FW_VERSION < 352
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000DA8);
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_00000DA8(M2C_UNK **arg0) {
     *arg0 = &D_0000CFD8;
     _ZdlPv(arg0);
@@ -367,6 +362,10 @@ INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CEF8);
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CFC8);
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CFD8);
+
+#if FW_VERSION < 350
+__asm__(".globl _ZTV14Class_0000CFD8\n_ZTV14Class_0000CFD8 = D_0000CFD8 - 8\n");
+#endif
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000CFF0);
 
@@ -460,35 +459,17 @@ void func_00001A40(struct Unk_func_00001A40_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001A48);
 
-#if FW_VERSION >= 350
 void func_00001A68(s32 arg0) {
     _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
 }
-#else
-void func_00001A68(s32 arg0) {
-    _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
-}
-#endif
 
-#if FW_VERSION >= 350
 void func_00001A84(s32 arg0) {
     _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
 }
-#else
-void func_00001A84(s32 arg0) {
-    _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
-}
-#endif
 
-#if FW_VERSION >= 350
 void func_00001AA0(s32 arg0) {
     _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
 }
-#else
-void func_00001AA0(s32 arg0) {
-    _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001ABC);
 
@@ -526,45 +507,21 @@ void func_00001CB8(struct Unk_vt_func_00001CB8_arg0 **arg0) {
     (*arg0)->unk28();
 }
 
-#if FW_VERSION >= 350
 void func_00001CDC(s32 arg0) {
     _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
 }
-#else
-void func_00001CDC(s32 arg0) {
-    _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
-}
-#endif
 
-#if FW_VERSION >= 350
 void func_00001CF8(s32 arg0) {
     _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
 }
-#else
-void func_00001CF8(s32 arg0) {
-    _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
-}
-#endif
 
-#if FW_VERSION >= 350
 void func_00001D14(s32 arg0) {
     _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
 }
-#else
-void func_00001D14(s32 arg0) {
-    _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
-}
-#endif
 
-#if FW_VERSION >= 350
 void func_00001D30(s32 arg0) {
     _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
 }
-#else
-void func_00001D30(s32 arg0) {
-    _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001D4C);
 
@@ -815,6 +772,10 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00007B7C);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00007C30);
 
+#if FW_VERSION < 350
+Class_0000D908::~Class_0000D908() {
+}
+#else
 void func_00007CE4(M2C_UNK **arg0) {
     *arg0 = &D_0000D908;
 }
@@ -822,10 +783,13 @@ void func_00007CE4(M2C_UNK **arg0) {
 void func_00007CF4(M2C_UNK **arg0) {
     *arg0 = &D_0000D908;
 }
+#endif
 
-#if FW_VERSION < 352
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00007D04);
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_00007D04(M2C_UNK **arg0) {
     *arg0 = &D_0000D908;
     _ZdlPv(arg0);
@@ -856,6 +820,10 @@ void func_00007D64(struct Unk_func_00007D64_0 *arg0, s32 arg1, s32 arg2, s32 arg
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D8E8);
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D908);
+
+#if FW_VERSION < 350
+__asm__(".globl _ZTV14Class_0000D908\n_ZTV14Class_0000D908 = D_0000D908 - 8\n");
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00007D78);
 
@@ -888,6 +856,10 @@ void func_0000802C(struct Unk_func_0000802C_0 *arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
+#if FW_VERSION < 350
+Class_0000D948::~Class_0000D948() {
+}
+#else
 void func_00008084(M2C_UNK **arg0) {
     *arg0 = &D_0000D948;
 }
@@ -895,10 +867,13 @@ void func_00008084(M2C_UNK **arg0) {
 void func_00008094(M2C_UNK **arg0) {
     *arg0 = &D_0000D948;
 }
+#endif
 
-#if FW_VERSION < 352
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000080A4);
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_000080A4(M2C_UNK **arg0) {
     *arg0 = &D_0000D948;
     _ZdlPv(arg0);
@@ -942,6 +917,10 @@ void func_00008338(struct Unk_func_00008338_0 *arg0) {
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000837C);
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000D948);
+
+#if FW_VERSION < 350
+__asm__(".globl _ZTV14Class_0000D948\n_ZTV14Class_0000D948 = D_0000D948 - 8\n");
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00008850);
 
@@ -1073,6 +1052,10 @@ void func_0000A14C(M2C_UNK **arg0) {
     *arg0 = &D_0000DA28;
 }
 
+#if FW_VERSION < 350
+Class_0000DA28::~Class_0000DA28() {
+}
+#else
 void func_0000A15C(M2C_UNK **arg0) {
     *arg0 = &D_0000DA28;
 }
@@ -1080,10 +1063,13 @@ void func_0000A15C(M2C_UNK **arg0) {
 void func_0000A16C(M2C_UNK **arg0) {
     *arg0 = &D_0000DA28;
 }
+#endif
 
-#if FW_VERSION < 352
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000A17C);
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_0000A17C(M2C_UNK **arg0) {
     *arg0 = &D_0000DA28;
     _ZdlPv(arg0);
@@ -1123,6 +1109,10 @@ INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000DA18);
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000DA1C);
 
 INCLUDE_RODATA("nonmatchings/visualizer_plugin", D_0000DA28);
+
+#if FW_VERSION < 350
+__asm__(".globl _ZTV14Class_0000DA28\n_ZTV14Class_0000DA28 = D_0000DA28 - 8\n");
+#endif
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000A6F0);
 
