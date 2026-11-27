@@ -145,10 +145,10 @@ typedef struct SceModule {
     SceSize entSize; /* 0x44 */
     void *stubTop; /* 0x48 */
     SceSize stubSize; /* 0x4C */
-    void *moduleStart; /* 0x50 */
-    void *moduleStop; /* 0x54 */
-    void *moduleBootstart; /* 0x58 */
-    void *moduleRebootBefore; /* 0x5C */
+    u32 moduleStart; /* 0x50 */
+    u32 moduleStop; /* 0x54 */
+    u32 moduleBootstart; /* 0x58 */
+    u32 moduleRebootBefore; /* 0x5C */
     u32 entryAddr; /* 0x60 */
     u32 gpValue; /* 0x64 */
     u32 textAddr; /* 0x68 */

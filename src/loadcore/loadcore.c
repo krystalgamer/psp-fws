@@ -1434,9 +1434,30 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000054B4);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00004A00);
+void func_00004A00(u32 *src, u32 *dst, u32 size) {
+    u32 *end;
+    u32 *p;
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00004A80);
+    if (dst == src)
+        return;
+    if (dst < src) {
+        end = src + (size >> 2);
+        while (src < end)
+            *dst++ = *src++;
+    } else {
+        p = src + (size >> 2);
+        dst += size >> 2;
+        while (src < p)
+            *--dst = *--p;
+    }
+}
+
+void func_00004A80(u32 *p, s32 n) {
+    while (n > 0) {
+        n--;
+        *p++ = 0;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00004AA0);
 #endif
@@ -1459,7 +1480,24 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00004CD8);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelModuleFromUID);
+SceModule *sceKernelModuleFromUID(SceUID uid) {
+    SceSysmemUidCB *cb;
+    SceModule *mod;
+    s32 intr;
+    s32 ret;
+
+    intr = func_0000665C();
+    ret = sceKernelGetUIDcontrolBlockWithType(uid, D_00007274, &cb);
+    if (ret < 0) {
+        mod = sceKernelFindModuleByUID(uid);
+        if (mod == NULL)
+            Kprintf("module.c:%s:failed: uid[0x%08x] ret=0x%08x\n", "sceKernelModuleFromUID", uid, ret);
+    } else {
+        mod = (SceModule *)((u8 *)cb + D_00007274->size * 4);
+    }
+    func_00006688(intr);
+    return mod;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1528,7 +1566,30 @@ INCLUDE_ASM("nonmatchings/loadcore", func_0000584C);
 INCLUDE_RODATA("nonmatchings/loadcore", D_000073A0);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
+#if FW_VERSION == 100
+SceModule *sceKernelCreateModule(void) {
+    SceSysmemUidCB *cb;
+    SceModule *mod;
+
+    sceKernelCreateUID(D_00007274, "module", 0, &cb);
+    mod = (SceModule *)((u8 *)cb + D_00007274->size * 4);
+    if (mod == NULL)
+        return NULL;
+    mod->modId = cb->uid;
+    mod->moduleStartThreadPriority = -1;
+    mod->moduleStartThreadStacksize = -1;
+    mod->moduleStartThreadAttr = -1;
+    mod->moduleStopThreadPriority = -1;
+    mod->moduleStopThreadStacksize = -1;
+    mod->moduleStopThreadAttr = -1;
+    mod->moduleRebootBeforeThreadPriority = -1;
+    mod->moduleRebootBeforeThreadStacksize = -1;
+    mod->moduleRebootBeforeThreadAttr = -1;
+    return mod;
+}
+#endif
+
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCreateModule);
 #endif
 
@@ -1577,7 +1638,12 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelDeleteModule);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00004DBC);
+void func_00004DBC(SceModule *mod) {
+    char *name = mod->modName;
+
+    if (mod->moduleBlockId > 0)
+        sceKernelRenameUID(mod->moduleBlockId, name);
+}
 
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelModuleAssign);
 
@@ -1600,7 +1666,23 @@ void sceKernelFreeModule(void *arg0) {
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCreateAssignModule);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
+#if FW_VERSION < 150
+s32 sceKernelRegisterModule(SceModule *mod) {
+    SceModule *prev;
+
+    func_00004DBC(mod);
+    prev = (SceModule *)&D_000088FC.registeredMods;
+    mod->secId = D_000088FC.secModId++;
+    for (; prev->next != NULL; prev = prev->next)
+        ;
+    mod->next = prev->next;
+    prev->next = mod;
+    D_000088FC.regModCount++;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelRegisterModule);
 #endif
 
@@ -1609,12 +1691,52 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00005118);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelReleaseModule);
+s32 sceKernelReleaseModule(SceModule *mod) {
+    SceModule *prev;
+
+    if (mod == NULL)
+        return 0x80020324;
+    for (prev = (SceModule *)&D_000088FC.registeredMods; prev->next != NULL; prev = prev->next) {
+        if (prev->next == mod) {
+            prev->next = mod->next;
+            D_000088FC.regModCount--;
+            return 0;
+        }
+    }
+    Kprintf("module.c:%s:Cannot found modcb 0x%p\n", "sceKernelReleaseModule", mod);
+    return 0x80020001;
+}
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByName);
+#if FW_VERSION < 150
+SceModule *sceKernelFindModuleByName(const char *name) {
+    s32 intr;
+    SceModule *mod;
 
+    intr = func_0000665C();
+    mod = func_00004BD4(name);
+    func_00006688(intr);
+    return mod;
+}
+#endif
+
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByName);
+#endif
+
+#if FW_VERSION < 150
+SceModule *sceKernelFindModuleByAddress(u32 addr) {
+    SceModule *mod;
+
+    for (mod = D_000088FC.registeredMods; mod != NULL; mod = mod->next) {
+        if (addr >= mod->textAddr && addr < mod->textAddr + mod->textSize + mod->dataSize + mod->bssSize)
+            return mod;
+    }
+    return NULL;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByAddress);
 #endif
 
@@ -1626,7 +1748,22 @@ INCLUDE_ASM("nonmatchings/loadcore", func_0000524C);
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleGPByAddressForKernel);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION == 100
+SceModule *sceKernelFindModuleByUID(SceUID uid) {
+    SceModule *mod;
+
+    for (mod = D_000088FC.registeredMods; mod != NULL; mod = mod->next) {
+        if (mod->modId == uid)
+            return mod;
+        if (mod->secId == uid)
+            return mod;
+    }
+    Kprintf("module.c:%s:0x%08x not found\n", "sceKernelFindModuleByUID", uid);
+    return NULL;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByUID);
 #endif
 
@@ -1645,7 +1782,20 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000052BC);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleList);
+s32 sceKernelGetModuleList(u32 size, SceUID *list) {
+    SceModule *mod;
+
+    if (size < D_000088FC.regModCount) {
+        Kprintf("module.c:%s:size 0x%x < 0x%x\n", "sceKernelGetModuleList", size, D_000088FC.regModCount);
+        return 0x80020145;
+    }
+    for (mod = D_000088FC.registeredMods; mod != NULL; mod = mod->next)
+        *list++ = mod->modId;
+    return 0;
+}
+
+/* zero words after module.c's strings (start of the next object's .rodata?) */
+const u32 D_0000714C[13] = { 0 };
 #endif
 
 #if FW_VERSION >= 282
