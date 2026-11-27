@@ -446,11 +446,6 @@ s32 sceRtcTickAddMicroseconds(u64 *destTick, const u64 *srcTick, s64 num) {
     return sceRtcTickAddTicks(destTick, srcTick, num);
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddSeconds);
-
-INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddMinutes);
-#else
 s32 sceRtcTickAddSeconds(u64 *destTick, const u64 *srcTick, s64 num) {
     return sceRtcTickAddTicks(destTick, srcTick, num * 1000000);
 }
@@ -458,13 +453,18 @@ s32 sceRtcTickAddSeconds(u64 *destTick, const u64 *srcTick, s64 num) {
 s32 sceRtcTickAddMinutes(u64 *destTick, const u64 *srcTick, s64 num) {
     return sceRtcTickAddTicks(destTick, srcTick, num * 60000000);
 }
-#endif
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddHours);
+s32 sceRtcTickAddHours(u64 *destTick, const u64 *srcTick, s32 num) {
+    return sceRtcTickAddTicks(destTick, srcTick, num * 3600000000ULL);
+}
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddDays);
+s32 sceRtcTickAddDays(u64 *destTick, const u64 *srcTick, s32 num) {
+    return sceRtcTickAddTicks(destTick, srcTick, num * 86400000000ULL);
+}
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddWeeks);
+s32 sceRtcTickAddWeeks(u64 *destTick, const u64 *srcTick, s32 num) {
+    return sceRtcTickAddTicks(destTick, srcTick, num * 604800000000ULL);
+}
 
 s32 sceRtcCompareTick(const u64 *tick1, const u64 *tick2) {
     if (*tick1 < *tick2) {
