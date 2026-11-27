@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Put a hand-written C function into a shared source and keep it where it matches.
 
-    tools/hand.py VER MODULE FILE.c [--decls DECLS.h]
+    tools/hand.py VER MODULE FILE.c [FILE2.c ...] [--decls DECLS.h]
 
 FILE.c holds one function definition (its name must be an INCLUDE_ASM entry
 compiled for VER). The C replaces that entry for every version compiling the
@@ -36,13 +36,40 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ver")
     ap.add_argument("module")
-    ap.add_argument("cfile")
-    ap.add_argument("--decls")
+    ap.add_argument("cfiles", nargs="+", help="one function per file; several files share one final regress")
+    ap.add_argument("--decls", help="applied with the first file")
     a = ap.parse_args()
-    body = Path(a.cfile).read_text().strip("\n") + "\n"
+    sd = src_dir(a.ver, a.module)
+    snap = {p: p.read_text() for p in list(sd.glob("*.c")) + list(sd.glob("*_decls.*"))}
+    done = []
+    for i, cf in enumerate(a.cfiles):
+        r = one(a, cf, a.decls if i == 0 else None)
+        if r:
+            done.append(r)
+    if not done:
+        sys.exit(1)
+    # everything sharing the source must still match
+    r = subprocess.run(["tools/regress.sh", "--shared", f"{a.ver}:{a.module}"], cwd=ROOT, capture_output=True, text=True)
+    bad = [l for l in r.stdout.splitlines() if ": OK" not in l]
+    if bad:
+        for p, t in snap.items():
+            p.write_text(t)
+        print(f"shared regress failed, all of {[n for n, _, _ in done]} restored "
+              f"(retry them one per call to find the culprit): {bad[:3]}")
+        sys.exit(1)
+    for name, keep, drop in done:
+        print(f"{name}: C for {keep}" + (f", asm kept for {drop}" if drop else ""))
+    if len(done) < len(a.cfiles):
+        sys.exit(1)
+
+
+def one(a, cfile, decls):
+    """Insert one function; returns (name, keep, drop), or None (sources restored)."""
+    body = Path(cfile).read_text().strip("\n") + "\n"
     m = re.search(r"^(?!static)[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)
     if not m:
-        sys.exit("no function definition in " + a.cfile)
+        print("no function definition in " + cfile)
+        return None
     name = m[1]
     sd = src_dir(a.ver, a.module)
     vers_s = sharing_versions(a.ver, a.module)
@@ -53,15 +80,16 @@ def main():
     f = next((p for p in sd.glob("*.c") if any(e.kind == "asm" and e.name == name and fw(a.ver) in e.vers
                                               for e in FM.parse(p.read_text(), fv))), None)
     if not f:
-        sys.exit(f"{name}: no INCLUDE_ASM entry for {a.ver}")
+        print(f"{name}: no INCLUDE_ASM entry for {a.ver}")
+        return None
     orig = {p: p.read_text() for p in list(sd.glob("*.c")) + list(sd.glob("*_decls.*"))}
     ents = FM.parse(orig[f], fv)
     k = next(i for i, e in enumerate(ents) if e.kind == "asm" and e.name == name and fw(a.ver) in e.vers)
     cand = ents[k].vers
-    if a.decls:
+    if decls:
         store_p = sd / f"{a.module}_decls.json"
         store = json.loads(store_p.read_text())
-        extra = Path(a.decls).read_text()
+        extra = Path(decls).read_text()
         for line in extra.splitlines():
             vm = re.match(r"^extern .*?\b(\w+)(\[[^\]]*\])*;$", line.strip())
             fm = re.match(r"^(?!extern|typedef|struct|union|enum)[\w\s\*]+?\b(\w+)\(.*\);$", line.strip())
@@ -115,22 +143,14 @@ def main():
         errs = [l for l in out.splitlines() if re.search(r"error:|warning: implicit|differ|FAILED|mismatch", l)]
         print(f"{name}: no version matches; build output for {a.ver}:")
         print("\n".join((errs or out.splitlines())[-15:]))
-        sys.exit(1)
+        return None
     if drop:
         ents = FM.parse(orig[f], fv)
         k = next(i for i, e in enumerate(ents) if e.kind == "asm" and e.name == name and fw(a.ver) in e.vers)
         ents[k].vers = frozenset(drop)
         ents.insert(k, FM.Entry(frozenset(keep), "cfunc", name, body))
         f.write_text(FM.emit(FM.dedupe(ents), fv))
-    # everything sharing the source must still match
-    r = subprocess.run(["tools/regress.sh", "--shared", f"{a.ver}:{a.module}"], cwd=ROOT, capture_output=True, text=True)
-    bad = [l for l in r.stdout.splitlines() if ": OK" not in l]
-    if bad:
-        for p, t in orig.items():
-            p.write_text(t)
-        print(f"{name}: shared regress failed: {bad[:3]}")
-        sys.exit(1)
-    print(f"{name}: C for {keep}" + (f", asm kept for {drop}" if drop else ""))
+    return name, keep, drop
 
 
 if __name__ == "__main__":
