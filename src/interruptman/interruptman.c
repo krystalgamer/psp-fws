@@ -271,7 +271,7 @@ s32 func_00000274(void) {
     temp_v0 = sceKernelCreateHeap(1, 0x100, 1, "interruptman_heap");
     var_v1 = temp_v0;
     if (temp_v0 > 0) {
-        D_00003B0C = var_v1;
+        g_intrInfo.heapId = var_v1;
         var_v1 = 0;
     }
     return var_v1;
@@ -728,7 +728,23 @@ INCLUDE_ASM("nonmatchings/interruptman", IntrUpdateMask);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterUserSpaceIntrStack);
+s32 sceKernelRegisterUserSpaceIntrStack(s32 stack, s32 size) {
+    s32 oldIntr;
+    s32 ret;
+
+    oldIntr = sceKernelCpuSuspendIntr();
+    ret = 0x8002006D;
+    if (g_intrInfo.userIntrStack == 0) {
+        ret = 0x8002006C;
+        if (stack >= 0) {
+            g_intrInfo.userIntrStackSize = size;
+            ret = 0;
+            g_intrInfo.userIntrStack = stack;
+        }
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 282
