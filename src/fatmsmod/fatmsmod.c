@@ -3629,7 +3629,22 @@ void func_0000B57C(void) {
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B5CC);
+s32 func_0000B5CC(void) {
+    s8 cur;
+
+    if (D_00019E0C != (s8)D_000193F8) {
+        cur = D_00019E0C;
+        D_00019E0C = D_000193F8;
+        D_000193F8 = cur;
+        if (func_00009FF4() == -1) {
+            D_000193F8 = cur;
+            D_00019E08 = D_00019E04;
+            return -1;
+        }
+        D_000193F8 = D_00019E0C;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
@@ -4940,7 +4955,18 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0001C594);
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000F95C);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000FD04);
+void func_0000FD04(PfFile *fp) {
+    fp->flags = 0x80;
+    fp->unk54++;
+    fp->unk30 = 0;
+    fp->unk4C = 0;
+    fp->unk50 = 0;
+    fp->pos = 0;
+    fp->unk3C = 0;
+    fp->unk24 = 0;
+    fp->unk28 = 0;
+    fp->unk40 = 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000FD3C);
 

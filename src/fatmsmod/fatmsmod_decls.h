@@ -82,20 +82,6 @@ typedef struct {
     s32 unk58; /* 0x58 */
 } PfDirCursor;
 
-/* PrFILE directory search record (stub cmd 6), kept at FatmsPrivate + 0x568. */
-typedef struct {
-    u8 pad0[0x118];
-    u16 mtime; /* 0x118 */
-    u16 mdate; /* 0x11A */
-    u32 size; /* 0x11C */
-    s8 attr; /* 0x120 */
-    char shortName[13]; /* 0x121 */
-    char longName[0x20E]; /* 0x12E */
-    u16 ctime; /* 0x33C */
-    u16 cdate; /* 0x33E */
-    u16 adate; /* 0x340 */
-} PfDirInfo;
-
 /* Drive count word: cleared as a word, read as its low byte. */
 typedef union {
     s32 word;
@@ -114,6 +100,45 @@ typedef struct {
     u32 unk1C;
     u32 rootSectors; /* 0x20 */
 } PfFatInfo;
+
+/* PrFILE stat result (stub cmd 0xC), FAT DOS date/time words. */
+typedef struct {
+    u16 mtime; /* 0x0 */
+    u16 pad2;
+    u16 mdate; /* 0x4 */
+    u16 pad6;
+    u32 size; /* 0x8 */
+    s8 attr; /* 0xC */
+    u8 padD[3];
+    u16 ctime; /* 0x10 */
+    u16 pad12;
+    u16 cdate; /* 0x14 */
+    u16 pad16;
+    u16 adate; /* 0x18 */
+    u16 pad1A;
+    u8 pad1C[4];
+} PfStat;
+
+/* PrFILE directory search record (stub cmd 6), kept at FatmsPrivate + 0x568. */
+typedef struct {
+    u8 pad0[0x118];
+    u16 mtime; /* 0x118 */
+    u16 mdate; /* 0x11A */
+    u32 size; /* 0x11C */
+    s8 attr; /* 0x120 */
+    char shortName[13]; /* 0x121 */
+    char longName[0x20E]; /* 0x12E */
+    u16 ctime; /* 0x33C */
+    u16 cdate; /* 0x33E */
+    u16 adate; /* 0x340 */
+} PfDirInfo;
+
+/* PrFILE volume / drive record (partial; D_000276E4 points at the current one). */
+typedef struct {
+    u32 flags; /* 0x0, bit 0 = mounted */
+    u8 pad4[0x18];
+    s32 unk1C; /* 0x1C */
+} PfVolume;
 
 /* PrFILE open-file record (table D_0001BEFC[10]; 0x264 bytes in 1.x, 0x700 in 2.01+). */
 typedef struct {
@@ -142,31 +167,6 @@ typedef struct {
     u8 pad55[0x264 - 0x55];
 #endif
 } PfFile;
-
-/* PrFILE stat result (stub cmd 0xC), FAT DOS date/time words. */
-typedef struct {
-    u16 mtime; /* 0x0 */
-    u16 pad2;
-    u16 mdate; /* 0x4 */
-    u16 pad6;
-    u32 size; /* 0x8 */
-    s8 attr; /* 0xC */
-    u8 padD[3];
-    u16 ctime; /* 0x10 */
-    u16 pad12;
-    u16 cdate; /* 0x14 */
-    u16 pad16;
-    u16 adate; /* 0x18 */
-    u16 pad1A;
-    u8 pad1C[4];
-} PfStat;
-
-/* PrFILE volume / drive record (partial; D_000276E4 points at the current one). */
-typedef struct {
-    u32 flags; /* 0x0, bit 0 = mounted */
-    u8 pad4[0x18];
-    s32 unk1C; /* 0x1C */
-} PfVolume;
 
 typedef int SceMode;
 typedef s64 SceOff;
@@ -569,6 +569,7 @@ s32 func_0000B50C(s8 drive, u8 *index);
 void func_0000B574(s32 arg0, s32 arg1, s32 arg2);
 void func_0000B57C(void);
 s32 func_0000B59C(s32, s32, s32);
+s32 func_0000B5CC(void);
 s32 func_0000B71C(s32, s32);
 s32 func_0000B738(s32, s32, s32, s32);
 s32 func_0000B7E4(void *arg0);
@@ -602,6 +603,7 @@ s32 func_0000E5E8(void);
 s32 func_0000E5F8(s32);
 s32 func_0000F8A4(PfFile *fp);
 s32 func_0000F8F8(PfFile *fp);
+void func_0000FD04(PfFile *fp);
 s32 func_00010238(s32, s32, s32);
 s32 func_00010A64(s32);
 s32 func_00011318(s32);
