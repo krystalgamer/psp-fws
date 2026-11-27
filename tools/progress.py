@@ -42,7 +42,13 @@ def main():
     elf = ELFFile(open(elfp, "rb"))
     addr = {}
     for s in elf.get_section_by_name(".symtab").iter_symbols():
-        if s.name in kind and s["st_shndx"] != "SHN_UNDEF":
+        if s["st_shndx"] == "SHN_UNDEF":
+            continue
+        if s.name in kind:
+            addr.setdefault(s.name, s["st_value"])
+        elif s.name.startswith("_Z") and s["st_info"]["type"] == "STT_FUNC":
+            # C++ definitions are named by their mangled symbols (ctor/dtor variants are separate copies)
+            kind[s.name] = "c"
             addr.setdefault(s.name, s["st_value"])
     # sizes: distance to the next entry (asm labels have no st_size)
     order = sorted((v, n) for n, v in addr.items())
