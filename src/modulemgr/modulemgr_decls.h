@@ -110,10 +110,15 @@ typedef struct SceModule {
     u8 padding2[3];
     u32 segmentAddr[4];
     SceSize segmentSize[4];
-    u8 unk9C[0x18];
-    s32 threadPriority;
-    SceSize stackSize;
-    u32 threadAttr;
+    s32 moduleStartThreadPriority;
+    SceSize moduleStartThreadStacksize;
+    u32 moduleStartThreadAttr;
+    s32 moduleStopThreadPriority;
+    SceSize moduleStopThreadStacksize;
+    u32 moduleStopThreadAttr;
+    s32 moduleRebootBeforeThreadPriority;
+    SceSize moduleRebootBeforeThreadStacksize;
+    u32 moduleRebootBeforeThreadAttr;
 #endif
 } SceModule;
 
