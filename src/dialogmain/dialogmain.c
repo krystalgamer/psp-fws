@@ -361,7 +361,7 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_00000F78);
 
 #if FW_VERSION >= 350
 void func_00000E6C(void) {
-    sceVshCommonUtil_7A17D5B8();
+    _ZN3vsh19DeallocateCccBufferEv();
     func_00000DC4();
     func_000004C8();
 }
@@ -571,7 +571,7 @@ s32 module_stop(void) {
 #if FW_VERSION >= 350
 s32 module_stop(void) {
     func_00005EC0();
-    sceVshCommonUtil_92DFBA5B();
+    _ZN3vsh10RebootLock4ExitEv();
     return 0;
 }
 #endif
@@ -586,7 +586,7 @@ s32 module_stop(void) {
 
 #if FW_VERSION >= 350
 s32 module_reboot_before(void) {
-    sceVshCommonUtil_A2A69900();
+    _ZN3vsh10RebootLock6RebootEv();
     return 0;
 }
 #endif
@@ -625,17 +625,17 @@ void func_00001950(void) {
     void **temp_v0;
     void **temp_v0_2;
 
-    temp_v0 = scePaf_4F20E8B0(D_00008244, &D_00008858);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_00008244, &D_00008858);
     if (temp_v0 != NULL) {
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 0x19, 3);
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 7, 0x10);
     }
-    temp_v0_2 = scePaf_4F20E8B0(D_00008244, &D_00008870);
+    temp_v0_2 = _ZNK3paf4View10FindWidgetEPKc(D_00008244, &D_00008870);
     if (temp_v0_2 != NULL) {
         M2C_FIELD(M2C_FIELD(temp_v0_2, void **, 0), M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0_2, 0x19, 9);
         M2C_FIELD(temp_v0_2, s8 *, 0x1FD) = 0;
         M2C_FIELD(temp_v0_2, s8 *, 0x1FE) = 0;
-        scePaf_BE0D7212(temp_v0_2);
+        _ZN3paf8PhWidget13UpdateCamerasEv(temp_v0_2);
     }
 }
 #endif
@@ -1385,8 +1385,8 @@ void func_00002808(void) {
             D_00008278 = ((s32 (*)(s32)) D_0000A2A4)(D_0000A2B0);
         }
         if (D_0000827C == 0) {
-            temp_v0 = scePaf_61A8E8EC(0x1C);
-            scePaf_D539C351(temp_v0, D_00008278, 0x84800, 0);
+            temp_v0 = _Znwj(0x1C);
+            _ZN3paf11SurfacePoolC1EPviPKc(temp_v0, D_00008278, 0x84800, 0);
             D_0000827C = temp_v0;
         }
     }
@@ -1539,28 +1539,28 @@ void func_00003150(void *arg0) {
 #if FW_VERSION >= 350
 void func_00003660(struct Unk_func_00003660_0 *arg0) {
     if (arg0 != NULL) {
-        arg0->unk98 = scePaf_AD66D039(D_00008240, &D_00008D60);
-        arg0->unk9C = scePaf_AD66D039(D_00008240, &D_00008D6C);
-        arg0->unkA0 = scePaf_AD66D039(D_00008240, &D_00008D78);
-        arg0->unkA4 = scePaf_AD66D039(D_00008240, &D_00008D78);
-        arg0->unkA8 = scePaf_AD66D039(D_00008240, &D_00008D84);
-        arg0->unkAC = scePaf_AD66D039(D_00008240, &D_00008D78);
-        arg0->unkB0 = scePaf_AD66D039(D_00008240, &D_00008D60);
-        arg0->unkB4 = scePaf_AD66D039(D_00008240, &D_00008D78);
-        arg0->unkB8 = scePaf_AD66D039(D_00008240, &D_00008D6C);
-        arg0->unkBC = scePaf_AD66D039(D_00008240, &D_00008D6C);
-        arg0->unkC0 = scePaf_AD66D039(D_00008240, &D_00008D6C);
-        arg0->unkC4 = scePaf_AD66D039(D_00008240, &D_00008D60);
-        arg0->unkC8 = scePaf_AD66D039(D_00008240, &D_00008D78);
-        arg0->unkCC = scePaf_AD66D039(D_00008240, &D_00008D60);
-        arg0->unkD0 = scePaf_AD66D039(D_00008240, &D_00008D6C);
-        arg0->unkD4 = scePaf_AD66D039(D_00008240, &D_00008D78);
-        arg0->unkD8 = scePaf_AD66D039(D_00008240, &D_00008D60);
-        arg0->unkDC = scePaf_AD66D039(D_00008240, &D_00008D6C);
-        arg0->unkE0 = scePaf_AD66D039(D_00008240, &D_00008D78);
-        arg0->unkE4 = scePaf_AD66D039(D_00008240, &D_00008D60);
-        arg0->unkE8 = scePaf_AD66D039(D_00008240, &D_00008D6C);
-        arg0->unkEC = scePaf_AD66D039(D_00008240, &D_00008D78);
+        arg0->unk98 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D60);
+        arg0->unk9C = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D6C);
+        arg0->unkA0 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D78);
+        arg0->unkA4 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D78);
+        arg0->unkA8 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D84);
+        arg0->unkAC = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D78);
+        arg0->unkB0 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D60);
+        arg0->unkB4 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D78);
+        arg0->unkB8 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D6C);
+        arg0->unkBC = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D6C);
+        arg0->unkC0 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D6C);
+        arg0->unkC4 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D60);
+        arg0->unkC8 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D78);
+        arg0->unkCC = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D60);
+        arg0->unkD0 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D6C);
+        arg0->unkD4 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D78);
+        arg0->unkD8 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D60);
+        arg0->unkDC = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D6C);
+        arg0->unkE0 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D78);
+        arg0->unkE4 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D60);
+        arg0->unkE8 = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D6C);
+        arg0->unkEC = _ZN3paf4View8GetSoundEPKc(D_00008240, &D_00008D78);
     }
 }
 #endif
@@ -1689,7 +1689,7 @@ s32 *func_00003FD4(s32 *arg0) {
     void **temp_v0;
 
     func_000059A0(arg0, 0);
-    temp_v0 = scePaf_4F20E8B0(D_00008248, &D_00008DC8);
+    temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_00008248, &D_00008DC8);
     if (temp_v0 != NULL) {
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, s32 *, M2C_UNK), 0xB0)(temp_v0, arg0, 0);
     }
@@ -2642,7 +2642,7 @@ s32 func_00006CF0(void) {
 #if FW_VERSION >= 350
 s32 func_00006CFC(s32 arg0) {
     if (arg0 != D_0000A3D4) {
-        scePaf_2F94EF32(0x409, arg0, D_0000A3D4);
+        PhiPostSystemEvent(0x409, arg0, D_0000A3D4);
         D_0000A3D4 = arg0;
         D_0000A3D8 += 1;
     }
