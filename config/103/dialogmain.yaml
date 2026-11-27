@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/103/.splat_cache.dialogmain
   symbol_addrs_path:
     - config/103/symbol_addrs.dialogmain.txt
+    - config/103/func_starts.dialogmain.txt
     - tmp/build/103/prx_syms.dialogmain.txt
   reloc_addrs_path: [tmp/build/103/reloc_addrs.dialogmain.txt]
   asset_path: tmp/assets/103/dialogmain
@@ -53,7 +54,8 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, dialogmain]
+      - [0xA4, c, dialogmain]
+      - [0x72E4, c, dialogmain_crtend]
       - { start: 0x733C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x7358, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x7838, type: prxpad, order: .text }
@@ -71,7 +73,7 @@ segments:
       - { start: 0x7E38, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x7E44, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x7E48, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x7E4C, rodata, dialogmain]
+      - [0x7E4C, .rodata, dialogmain]
       - { start: 0x9038, type: prxpad, order: .rodata }
   - name: dialogmain_seg1
     type: code
