@@ -5,7 +5,7 @@
 
 #define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
 
-#if FW_VERSION < 103
+#if FW_VERSION < 150
 s32 regCreateFile(const char *name) {
     char *path;
     s32 fd;
@@ -59,7 +59,7 @@ s32 func_00006EF0(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 103
+#if FW_VERSION < 150
 s32 regCloseFile(s32 arg0) {
     return -(sceIoClose(arg0) < 0);
 }
@@ -176,7 +176,7 @@ s32 func_00006998(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 103 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/regio", D_00006F8C);
 #endif
 
@@ -184,7 +184,7 @@ INCLUDE_RODATA("nonmatchings/regio", D_00006F8C);
 INCLUDE_RODATA("nonmatchings/regio", D_00006F94);
 #endif
 
-#if FW_VERSION < 103
+#if FW_VERSION < 150
 s32 regHeapInit(s32 arg0, s32 size) {
     s32 ret;
 
