@@ -1473,6 +1473,7 @@ extern u8 D_0002CC50[]; /* pffasttimo_ch */
 extern u8 D_0002CC74[]; /* pfslowtimo_ch */
 extern s32 D_0002CCB4;
 extern u8 D_0002CD38[];
+extern char D_0002CDB0[16]; /* 1.5x inet_ntoa buf */
 extern s32 D_0002CEB0;
 extern s32 D_0002CEBC;
 extern s32 D_0002CEC0;
