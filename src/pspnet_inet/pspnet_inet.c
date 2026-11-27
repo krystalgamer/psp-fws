@@ -4402,11 +4402,59 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00019C5C);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001A5C8);
 
+#if FW_VERSION < 201
+void igmp_sendpkt(struct in_multi *inm, s32 type) {
+    struct mbuf *m;
+    struct igmp *igmp;
+    struct ip *ip;
+    struct ip_moptions imo;
+    s32 max_linkhdr;
+
+    m = sceNetMallocInternal(MSIZE);
+    if (m == NULL)
+        return;
+    m->m_type = MT_HEADER;
+    m->m_flags = M_PKTHDR;
+    m->m_data = (u8 *)&m->m_ext;
+    m->m_next = NULL;
+    m->m_nextpkt = NULL;
+    m->m_pkthdr.aux = NULL;
+    sceNetIfhandle_lib_5FB31C72(&max_linkhdr, NULL, NULL, NULL);
+    m->m_data += max_linkhdr;
+    m->m_len = sizeof(struct ip) + 8;
+    m->m_pkthdr.len = sizeof(struct ip) + 8;
+    ip = mtod(m, struct ip *);
+    ip->ip_tos = 0;
+    ip->ip_len = sizeof(struct ip) + 8;
+    ip->ip_off = 0;
+    ip->ip_p = 2;
+    ip->ip_src = zeroin_addr;
+    ip->ip_dst = inm->inm_addr;
+
+    m->m_data += sizeof(struct ip);
+    m->m_len -= sizeof(struct ip);
+    igmp = mtod(m, struct igmp *);
+    igmp->igmp_type = type;
+    igmp->igmp_code = 0;
+    igmp->igmp_group = inm->inm_addr;
+    igmp->igmp_cksum = 0;
+    igmp->igmp_cksum = in_cksum(m, 8);
+    m->m_data -= sizeof(struct ip);
+    m->m_len += sizeof(struct ip);
+
+    imo.imo_multicast_ifp = inm->inm_ifp;
+    imo.imo_multicast_ttl = 1;
+    imo.imo_multicast_loop = 0;
+    ip_output(m, (struct mbuf *)0, (struct route *)0, 0, &imo);
+    ++igmp_stat.igps_snd_reports;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", igmp_sendpkt);
+#endif
 
 #if FW_VERSION < 201
 void func_0001B398(void) {
-    func_0002C94C(&D_00030218, 0, 0x48);
+    func_0002C94C(&igmp_stat, 0, 0x48);
     igmp_timers_are_running = 0;
     rti_head = 0;
 }

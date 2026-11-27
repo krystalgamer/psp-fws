@@ -595,7 +595,7 @@ struct ip_moptions {
     u8 imo_multicast_ttl;               /* 0x4 */
     u8 imo_multicast_loop;              /* 0x5 */
     u16 imo_num_memberships;            /* 0x6 */
-    struct in_multi *imo_membership[1]; /* 0x8 */
+    struct in_multi *imo_membership[20]; /* 0x8 IP_MAX_MEMBERSHIPS */
 };
 
 /* struct ip (netinet/ip.h, packed) */
@@ -1141,6 +1141,27 @@ static __inline s32 rti_fill(struct in_multi *inm) {
     return (0x16);
 }
 
+/* struct igmp (netinet/igmp.h, packed) */
+struct igmp {
+    u8 igmp_type;                       /* 0x0 */
+    u8 igmp_code;                       /* 0x1 */
+    u16 igmp_cksum;                     /* 0x2 */
+    struct in_addr igmp_group;          /* 0x4 */
+} __attribute__((packed));
+
+/* struct igmpstat (netinet/igmp_var.h; SCE u64 counters) */
+struct igmpstat {
+    u64 igps_rcv_total;                 /* 0x00 */
+    u64 igps_rcv_tooshort;              /* 0x08 */
+    u64 igps_rcv_badsum;                /* 0x10 */
+    u64 igps_rcv_queries;               /* 0x18 */
+    u64 igps_rcv_badqueries;            /* 0x20 */
+    u64 igps_rcv_reports;               /* 0x28 */
+    u64 igps_rcv_badreports;            /* 0x30 */
+    u64 igps_rcv_ourreports;            /* 0x38 */
+    u64 igps_snd_reports;               /* 0x40 */
+};
+
 typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
 
 struct SceNetInetKeyNode {
@@ -1482,7 +1503,6 @@ extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
 extern struct route D_0002FF98; /* ipforward_rt */
-extern u8 D_00030218[];
 extern s32 arp_locked; /* arp_locked */
 extern const struct cp chap; /* chap */
 extern const struct cp *cps[IDX_COUNT]; /* cps */
@@ -1491,6 +1511,7 @@ extern SceNetBytes4 dns_secondary;
 extern struct domain *domains;
 extern u8 ether_ipmulticast_max[6]; /* ether_ipmulticast_max */
 extern u8 ether_ipmulticast_min[6]; /* ether_ipmulticast_min */
+extern struct igmpstat igmp_stat; /* igmpstat */
 extern s32 igmp_timers_are_running; /* igmp_timers_are_running */
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
@@ -1775,6 +1796,7 @@ s32 sceNetConfigDelArp(s32, s32);
 s32 sceNetConfigGetArpInfo(s32, s32);
 s32 sceNetConfigGetRouteInfo(s32 *len, void *buf);
 void sceNetFreeInternal(void *p);
+s32 sceNetIfhandle_lib_5FB31C72(s32 *max_linkhdr, s32 *a1, s32 *a2, s32 *a3);
 s32 sceNetInetInetAddr(s32 arg0);
 void sceNetInetInetAton(s32 arg0, s32 arg1);
 const char *sceNetInetInetNtop(s32 af, const void *src, char *dst, s32 size);

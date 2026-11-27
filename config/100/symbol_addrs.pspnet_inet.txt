@@ -534,3 +534,4 @@ ip_srcrt = 0x0002EBD4;
 func_0002CA84 = 0x0002CA84; // type:func (split from func_0002CA04)
 ether_ipmulticast_min = 0x0002E498; // rom:0x2E518
 ether_ipmulticast_max = 0x0002E4A0; // rom:0x2E520
+igmp_stat = 0x00030218;
