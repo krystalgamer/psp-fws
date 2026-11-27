@@ -35,6 +35,24 @@ struct SceIoStat {
     u32 st_private[6]; /* 0x40 */
 };
 
+typedef struct FatDirEntry FatDirEntry;
+/* FAT 8.3 directory entry (32 bytes) */
+struct FatDirEntry {
+    u8 name[8]; /* 0x0 */
+    u8 ext[3]; /* 0x8 */
+    u8 attr; /* 0xB */
+    u8 ntRes; /* 0xC */
+    u8 crtTimeTenth; /* 0xD */
+    u16 crtTime; /* 0xE */
+    u16 crtDate; /* 0x10 */
+    u16 lstAccDate; /* 0x12 */
+    u16 fstClusHi; /* 0x14 */
+    u16 wrtTime; /* 0x16 */
+    u16 wrtDate; /* 0x18 */
+    u16 fstClusLo; /* 0x1A */
+    u32 fileSize; /* 0x1C */
+};
+
 typedef struct UFatUnit UFatUnit;
 /* FAT volume (unit), 1.00: 0x274 bytes, array at D_0000D608, count D_0000D604 */
 struct UFatUnit {
@@ -66,7 +84,13 @@ struct UFatUnit {
 typedef struct LFlashSegment LFlashSegment;
 /* lflash segment, 0x1C bytes */
 struct LFlashSegment {
-    u8 pad0[0x1C];
+    u8 pad0[0x4];
+    u16 firstLbn; /* 0x4 */
+    u8 pad6[0x2];
+    u16 maxLbn; /* 0x8 */
+    u8 padA[0x2];
+    u16 *lpTable; /* 0xC */
+    u8 pad10[0xC];
 };
 
 typedef struct LFlashDev LFlashDev;
@@ -103,6 +127,22 @@ struct LFlashDevInfo {
     u32 unk1C; /* 0x1C */
     u32 flags; /* 0x20 */
     u8 pad24[0x20];
+};
+
+typedef struct UFatNode UFatNode;
+/* open file/dir node (0x54 bytes); lists D_0000D60C (head) / D_0000D610 (tail), free list D_0000D614 */
+struct UFatNode {
+    struct UFatNode *next; /* 0x0 */
+    struct UFatNode *prev; /* 0x4 */
+    UFatUnit *unit; /* 0x8 */
+    u32 startCluster; /* 0xC */
+    u8 pad10[0x4];
+    s32 pos; /* 0x14 */
+    s32 clusterOff; /* 0x18 */
+    s32 curCluster; /* 0x1C */
+    u8 pad20[0x4];
+    FatDirEntry dirent; /* 0x24 */
+    u8 pad44[0x10];
 };
 
 /* 1.00: 8 bytes (no d_userfd_count yet). */
@@ -286,6 +326,7 @@ extern char D_0000D03C[];
 extern char D_0000D084[];
 extern char D_0000D22C[];
 extern volatile SceUID D_0000D360;
+extern u8 D_0000D464[256];
 extern void *D_0000D60C;
 extern void **D_0000D610;
 extern void *D_0000D614;
@@ -435,6 +476,7 @@ s32 func_0000ADFC(void *arg0);
 s32 func_0000AF24(void);
 s32 func_0000AF30(void);
 s32 func_0000AF98(void);
+const char *func_0000B448(const char *s, s32 *out);
 void func_0000B9D4(void *arg0);
 void *memcpy(void *dst, const void *src, SceSize n);
 void *memset(void *s, s32 c, SceSize n);

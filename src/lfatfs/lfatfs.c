@@ -1347,7 +1347,29 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00005DC0);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/lfatfs", func_00005EC4);
+s32 func_00005EC4(UFatUnit *unit) {
+    s32 c, ret;
+
+    for (c = unit->nextFree; c < unit->nClusters; c++) {
+        ret = func_00000FF8(unit, c);
+        if (ret < 0) {
+            return ret;
+        }
+        if (ret == 0) {
+            ret = func_000075C8(unit, c, -8);
+            if (ret < 0) {
+                return ret;
+            }
+            unit->nextFree = c + 1;
+            if (unit->freeCount != -1) {
+                unit->freeCount--;
+            }
+            return c;
+        }
+    }
+    unit->nextFree = 2;
+    return 0x8001001C;
+}
 
 s32 func_00005F7C(UFatUnit *unit, s32 cluster) {
     s32 ret;
@@ -2743,9 +2765,40 @@ s32 func_0000A7AC(void) {
 }
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/lfatfs", func_0000A7B4);
+#if FW_VERSION < 151
+s32 func_0000A7B4(const char *s, s32 *unit, s32 *part, s32 *single) {
+    const char *p;
+    s32 ret;
 
+    *single = 0;
+    *part = 0;
+    *unit = 0;
+    p = func_0000B448(s, unit);
+    if (*p == '\0') {
+        return 0;
+    }
+    if (*p != ',') {
+        return -1;
+    }
+    p++;
+    if (strcmp("single", p) == 0) {
+        *single = 1;
+        return 0;
+    }
+    p = func_0000B448(p, part);
+    ret = -1;
+    if (*p == '\0') {
+        ret = 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000A7B4);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000A85C);
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000A9C4);
