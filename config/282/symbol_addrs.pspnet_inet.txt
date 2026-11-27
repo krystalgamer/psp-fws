@@ -263,3 +263,5 @@ ip_savecontrol = 0x000160E4; // type:func
 ip_stripoptions = 0x00016938; // type:func
 icmp_sysctl = 0x000196DC; // type:func
 ip_optcopy = 0x000177A4; // type:func
+in_delmulti = 0x00012684; // type:func
+igmp_joingroup = 0x0001A8E4; // type:func

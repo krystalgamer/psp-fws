@@ -701,6 +701,25 @@ struct in_ifaddr {
     TAILQ_ENTRY(in_ifaddr) ia_list;     /* 0x54 */
     struct sockaddr_in ia_addr;         /* 0x5C */
     struct sockaddr_in ia_dstaddr;      /* 0x6C ia_broadaddr */
+    struct sockaddr_in ia_sockmask;     /* 0x7C */
+    struct { struct in_multi *lh_first; } ia_multiaddrs; /* 0x8C */
+};
+
+/* struct in_multi (netinet/in_var.h; SCE field order) */
+struct in_multi {
+    struct in_addr inm_addr;            /* 0x00 */
+    struct ifnet *inm_ifp;              /* 0x04 */
+    struct in_ifaddr *inm_ia;           /* 0x08 */
+    u32 inm_refcount;                   /* 0x0C */
+    u32 inm_timer;                      /* 0x10 */
+    struct { struct in_multi *le_next; struct in_multi **le_prev; } inm_list; /* 0x14 */
+    u8 inm_unk1C[0x8];                  /* 0x1C */
+};
+typedef char chk_in_multi[(sizeof(struct in_multi) == 0x24) ? 1 : -1];
+
+struct ifreq {
+    char ifr_name[16];                  /* 0x00 */
+    struct sockaddr ifr_addr;           /* 0x10 */
 };
 #define ia_broadaddr ia_dstaddr
 #define ia_ifp ia_ifa.ifa_ifp
@@ -1544,7 +1563,6 @@ void func_0000FA70(struct ifnet *ifp, struct in_addr *sip, struct in_addr *tip, 
 void func_00010528(struct mbuf *m);
 s32 func_000106E0(void);
 s32 func_00010700(void);
-void func_00012684(struct in_multi *inm);
 s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
@@ -1553,7 +1571,6 @@ void func_0001A548(struct rtentry *rt);
 s32 func_0001A714(s32, s32);
 void func_0001A8AC(void);
 void func_0001AA20(struct Unk_func_0001AA20_0 *arg0);
-void func_0001B50C(void *arg0);
 void func_0001C208(void);
 void func_0001C2E0(struct inpcb *inp);
 void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1);
@@ -1607,7 +1624,9 @@ s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u3
 s32 if_rtdel(struct rtentry *rt, void *arg);
 struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr);
 struct ifaddr *ifa_ifwithladdr(struct sockaddr *addr);
+void igmp_leavegroup(void *arg0);
 s32 in_cksum(struct mbuf *m, s32 len);
+void in_delmulti(struct in_multi *inm);
 void in_losing(struct inpcb *inp);
 s32 in_pcballoc(struct socket *so, void *v);
 s32 in_pcbbind(void *v, struct mbuf *nam);
