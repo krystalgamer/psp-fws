@@ -847,11 +847,11 @@ void sceNet_lib_B9C780C7(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_B68E1EEA);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 *sceNet_lib_B68E1EEA(void) {
     return &D_0000B91C;
 }
