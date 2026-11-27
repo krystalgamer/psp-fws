@@ -1,4 +1,4 @@
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags: -Os */
@@ -117,7 +117,7 @@ void sceCodecOutputDisable(void) {
 INCLUDE_ASM("nonmatchings/codec", sceCodecSetFrequency);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/codec", func_0000042C);
 #endif
 
@@ -133,8 +133,12 @@ INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_3064C53D);
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_56494D70);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/codec", func_000007A0);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/codec", func_00000728);
 #endif
 
 #if FW_VERSION >= 282
@@ -181,7 +185,7 @@ void sceCodecOutputEnable(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/codec", sceCodecSetOutputVolume);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/codec", func_000008C4);
 
 INCLUDE_ASM("nonmatchings/codec", func_0000096C);
@@ -254,7 +258,7 @@ INCLUDE_ASM("nonmatchings/codec", sceCodecSelectVolumeTable);
 
 INCLUDE_ASM("nonmatchings/codec", sceCodecStopEntry);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/codec", func_00000A64);
 
 INCLUDE_ASM("nonmatchings/codec", func_00000924);
@@ -367,7 +371,7 @@ s32 func_00000E60(void) {
 INCLUDE_RODATA("nonmatchings/codec", D_00001160);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 103
 INCLUDE_RODATA("nonmatchings/codec", D_000011B8);
 #endif
 
