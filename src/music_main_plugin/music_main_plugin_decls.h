@@ -7,7 +7,280 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097B40 (vptr D_00097B40) */
+class Class_00097B40 {
+public:
+    virtual ~Class_00097B40();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097B98 (vptr D_00097B98) */
+class Class_00097B98 {
+public:
+    virtual ~Class_00097B98();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097BD0 (vptr D_00097BD0) */
+class Class_00097BD0 {
+public:
+    virtual ~Class_00097BD0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097CF0 (vptr D_00097CF0) */
+class Class_00097CF0 {
+public:
+    virtual ~Class_00097CF0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097D00 (vptr D_00097D00) */
+class Class_00097D00 {
+public:
+    virtual ~Class_00097D00();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097D48 (vptr D_00097D48) */
+class Class_00097D48 {
+public:
+    virtual ~Class_00097D48();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097D58 (vptr D_00097D58) */
+class Class_00097D58 {
+public:
+    virtual ~Class_00097D58();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097D70 (vptr D_00097D70) */
+class Class_00097D70 : public Class_00097D48 {
+public:
+    virtual ~Class_00097D70();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097D98 (vptr D_00097D98) */
+class Class_00097D98 : public Class_00097D48 {
+public:
+    virtual ~Class_00097D98();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097CA8 (vptr D_00097CA8) */
+class Class_00097CA8 : public Class_00097D98 {
+public:
+    virtual ~Class_00097CA8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097DA8 (vptr D_00097DA8) */
+class Class_00097DA8 : public Class_00097D58 {
+public:
+    virtual ~Class_00097DA8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097DC8 (vptr D_00097DC8) */
+class Class_00097DC8 : public Class_00097CF0 {
+public:
+    virtual ~Class_00097DC8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097DD8 (vptr D_00097DD8) */
+class Class_00097DD8 : public Class_00097D00 {
+public:
+    virtual ~Class_00097DD8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097EB0 (vptr D_00097EB0) */
+class Class_00097EB0 : public Class_00097CF0 {
+public:
+    virtual ~Class_00097EB0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097EE0 (vptr D_00097EE0) */
+class Class_00097EE0 : public Class_00097CF0 {
+public:
+    virtual ~Class_00097EE0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097EF0 (vptr D_00097EF0) */
+class Class_00097EF0 : public Class_00097D00 {
+public:
+    virtual ~Class_00097EF0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097F10 (vptr D_00097F10) */
+class Class_00097F10 : public Class_00097CF0 {
+public:
+    virtual ~Class_00097F10();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097F20 (vptr D_00097F20) */
+class Class_00097F20 : public Class_00097D00 {
+public:
+    virtual ~Class_00097F20();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097F78 (vptr D_00097F78) */
+class Class_00097F78 : public Class_00097CF0 {
+public:
+    virtual ~Class_00097F78();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097D20 (vptr D_00097D20) */
+class Class_00097D20 : public Class_00097F78 {
+public:
+    virtual ~Class_00097D20();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097F88 (vptr D_00097F88) */
+class Class_00097F88 : public Class_00097D00 {
+public:
+    virtual ~Class_00097F88();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00097D30 (vptr D_00097D30) */
+class Class_00097D30 : public Class_00097F88 {
+public:
+    virtual ~Class_00097D30();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00098188 (vptr D_00098188) */
+class Class_00098188 : public Class_00097CF0 {
+public:
+    virtual ~Class_00098188();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00098198 (vptr D_00098198) */
+class Class_00098198 : public Class_00097D00 {
+public:
+    virtual ~Class_00098198();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0009B2A8 (vptr D_0009B2A8) */
+class Class_0009B2A8 {
+public:
+    virtual ~Class_0009B2A8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0009F0F8 (vptr D_0009F0F8) */
+class Class_0009F0F8 : public Class_00097CF0 {
+public:
+    virtual ~Class_0009F0F8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0009F108 (vptr D_0009F108) */
+class Class_0009F108 : public Class_00097D00 {
+public:
+    virtual ~Class_0009F108();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0009F560 (vptr D_0009F560) */
+class Class_0009F560 {
+public:
+    virtual ~Class_0009F560();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0009F580 (vptr D_0009F580) */
+class Class_0009F580 {
+public:
+    virtual ~Class_0009F580();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000A2948 (vptr D_000A2948) */
+class Class_000A2948 {
+public:
+    virtual ~Class_000A2948();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B6100 (vptr D_000B6100) */
+class Class_000B6100 {
+public:
+    virtual ~Class_000B6100();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B9700 (vptr D_000B9700) */
+class Class_000B9700 {
+public:
+    virtual ~Class_000B9700();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B9740 (vptr D_000B9740) */
+class Class_000B9740 {
+public:
+    virtual ~Class_000B9740();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000BB2F8 (vptr D_000BB2F8) */
+class Class_000BB2F8 {
+public:
+    virtual ~Class_000BB2F8();
+};
 #endif
 
 struct D_000A3690_s {
@@ -3340,7 +3613,6 @@ s32 func_0005506C(struct Unk_func_0005506C_0 *arg0);
 s32 func_00055074(void);
 s32 func_0005507C(void);
 M2C_UNK func_00055D84(s32);
-s32 func_00055F48(void);
 s32 func_00055F90(void);
 void func_00056D80(s32 arg0);
 void func_00056D9C(s32 arg0);

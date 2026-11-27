@@ -5663,3 +5663,6 @@ func_0005A314_v340 = 0x0005A314; // type:func rom:0x5A3B4
 func_0005A3DC_v340 = 0x0005A3DC; // type:func rom:0x5A47C
 func_0005B788_v340 = 0x0005B788; // type:func rom:0x5B828
 // shared names (tools/add_version.py) end
+_ZN14Class_000B6100D2Ev = 0x00055F48; // type:func
+_ZN14Class_000B6100D1Ev = 0x00055F58; // type:func
+_ZN14Class_000B6100D0Ev = 0x00055F68; // type:func
