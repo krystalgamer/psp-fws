@@ -1,0 +1,10 @@
+// NID-derived names
+module_start = 0x00000000; // type:func
+Kprintf = 0x000000D8; // type:func
+sceKernelDipswCpTime = 0x000000E0; // type:func
+sceCtrlReadBufferPositive = 0x000000E8; // type:func
+sceRtcSetCurrentTick = 0x000000F0; // type:func
+sceRtcSetTime_t = 0x000000F8; // type:func
+sceRtcGetTick = 0x00000100; // type:func
+sceRtcFormatRFC2822 = 0x00000108; // type:func
+sceSysconWriteScratchPad = 0x00000110; // type:func
