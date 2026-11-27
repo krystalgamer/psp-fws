@@ -1,4 +1,4 @@
-/* cflags[100]: -Os */
+/* cflags[100]: -O2 -fno-builtin */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
@@ -470,7 +470,17 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004AB0);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004F34);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+s32 module_bootstart(s32 args, void *argp) {
+    s32 arg = 0;
+    if (args >= 4) {
+        arg = *(s32 *)argp;
+    }
+    return IoFileMgrInit(arg);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", module_bootstart);
 #endif
 
@@ -505,7 +515,13 @@ INCLUDE_ASM("nonmatchings/iofilemgr", create_async_thread);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", start_async);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", is_async_busy);
+s32 is_async_busy(SceIoIob *iob) {
+    s32 ret = 0;
+    if (iob->asyncThread != 0) {
+        ret = sceKernelPollEventFlag(iob->asyncEvFlag, 1, 1, 0) == 0;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/iofilemgr", do_get_async_stat);
 #endif
@@ -715,13 +731,21 @@ INCLUDE_ASM("nonmatchings/iofilemgr", do_lseek);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/iofilemgr", sceIoLseek);
+SceOff sceIoLseek(SceUID fd, SceOff offset, s32 whence) {
+    return do_lseek(fd, offset, whence, 0);
+}
 
-INCLUDE_ASM("nonmatchings/iofilemgr", sceIoLseekAsync);
+SceOff sceIoLseekAsync(SceUID fd, SceOff offset, s32 whence) {
+    return do_lseek(fd, offset, whence, 1);
+}
 
-INCLUDE_ASM("nonmatchings/iofilemgr", sceIoLseek32);
+s32 sceIoLseek32(SceUID fd, s32 offset, s32 whence) {
+    return do_lseek(fd, offset, whence, 0);
+}
 
-INCLUDE_ASM("nonmatchings/iofilemgr", sceIoLseek32Async);
+s32 sceIoLseek32Async(SceUID fd, s32 offset, s32 whence) {
+    return do_lseek(fd, offset, whence, 1);
+}
 #endif
 
 #if FW_VERSION == 100
@@ -799,7 +823,12 @@ s32 sceIoChdir(const char *path) {
     return xx_dir(path, 0, 0);
 }
 
-INCLUDE_ASM("nonmatchings/iofilemgr", sceIoSync);
+s32 sceIoSync(const char *device, u32 unk) {
+    u32 oldK1 = shiftK1();
+    s32 ret = sceIoDevctl(device, 0x100, &unk, 4, NULL, 0);
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -807,9 +836,13 @@ INCLUDE_ASM("nonmatchings/iofilemgr", xx_stat);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetstat);
+s32 sceIoGetstat(const char *file, SceIoStat *stat) {
+    return xx_stat(file, stat, 0, 1);
+}
 
-INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChstat);
+s32 sceIoChstat(const char *file, SceIoStat *stat, u32 bits) {
+    return xx_stat(file, stat, bits, 0);
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -884,9 +917,22 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00002FA4);
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", lookup_device_list);
+#endif
 
+#if FW_VERSION == 100
+void add_device_list(SceIoDeviceList *list) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    list->next = g_devList;
+    g_devList = list;
+    sceKernelCpuResumeIntr(intr);
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", add_device_list);
+#endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", delete_device_list);
 #endif
 
@@ -918,9 +964,20 @@ void func_00001B9C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/iofilemgr", add_alias_tbl);
+#if FW_VERSION == 100
+void add_alias_tbl(SceIoAlias *alias) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    alias->next = g_aliasList;
+    g_aliasList = alias;
+    sceKernelCpuResumeIntr(intr);
+}
+#endif
 
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/iofilemgr", add_alias_tbl);
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", delete_alias_tbl);
 #endif
 
@@ -943,7 +1000,15 @@ void free_alias_tbl(SceIoAlias *alias) {
     sceKernelFreeHeapMemory(g_heap, alias);
 }
 
-INCLUDE_ASM("nonmatchings/iofilemgr", init_iob_table);
+s32 init_iob_table(void) {
+    s32 i;
+
+    memset(g_iob, 0, sizeof(g_iob));
+    for (i = 0; i < 64; i++) {
+        g_iob[i].fd = -1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/iofilemgr", validate_fd);
 
@@ -985,12 +1050,44 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00002254);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/iofilemgr", iob_power_lock);
+s32 iob_power_lock(SceIoIob *iob) {
+    if (iob->powerLocked == 0) {
+        iob->powerLocked = 1;
+        if (iob->userMode != 0) {
+            sceKernelPowerLockForUser(0);
+        } else {
+            sceKernelPowerLock(0);
+        }
+    }
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/iofilemgr", iob_power_unlock);
+s32 iob_power_unlock(SceIoIob *iob) {
+    if (iob->powerLocked != 0) {
+        iob->powerLocked = 0;
+        if (iob->userMode != 0) {
+            sceKernelPowerUnlockForUser(0);
+        } else {
+            sceKernelPowerUnlock(0);
+        }
+    }
+    return 0;
+}
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION == 100
+void free_cwd(char **ktls) {
+    u32 cwd;
+
+    cwd = (u32)*ktls;
+    if (cwd != 0) {
+        sceKernelFreeHeapMemory(g_heap, (void *)cwd);
+        *ktls = NULL;
+    }
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", free_cwd);
 #endif
 
@@ -1101,7 +1198,9 @@ s32 _nulldev(void) {
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/iofilemgr", _nulldev_offt);
+SceOff _nulldev_offt(void) {
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 271
@@ -1123,7 +1222,12 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00003BE8);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/iofilemgr", _nulldev_write);
+s32 _nulldev_write(SceIoIob *iob, const char *data, s32 len) {
+    if (sceKernelDipsw(15) == 1) {
+        sceKernelDebugWrite(0, data, len);
+    }
+    return len;
+}
 
 void func_00003D68(void) {
     sceIoDelDrv(D_0000563C);
