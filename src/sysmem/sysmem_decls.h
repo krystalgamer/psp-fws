@@ -54,12 +54,27 @@ typedef struct {
     struct SceSysmemUidCB *uid0; /* 0x14 */
 } SceSysmemHoldElement; /* 0x18 */
 
+typedef struct {
+    u32 addr; /* 0x0 */
+    u32 size; /* 0x4 */
+} SceSysmemMemoryBlock; /* 1.00 memory block UID data (prefix) */
+
 typedef struct SceSysmemSeg {
     struct SceSysmemSeg *next; /* 0x0 */
-    u32 used : 1; /* 0x4 */
-    u32 unk4 : 31;
-    u32 flags : 2; /* 0x8 */
-    u32 size : 30; /* in 0x100 units */
+    union {
+        u32 word4;
+        struct {
+            u32 used : 1;
+            u32 unk4 : 31;
+        };
+    }; /* 0x4 */
+    union {
+        u32 word8;
+        struct {
+            u32 flags : 2;
+            u32 size : 30; /* in 0x100 units */
+        };
+    }; /* 0x8 */
 } SceSysmemSeg; /* 1.00: 12 bytes */
 typedef struct SceSysmemCtlBlk {
     struct SceSysmemCtlBlk *next; /* 0x0 */
@@ -249,6 +264,7 @@ extern s32 D_00014268;
 extern SceSysmemHeap EHeap4UID;
 extern s32 HeapCBUid;
 extern SceSysmemUidCB *g_HeapType;
+extern SceSysmemUidCB *g_MemBlockType;
 extern u32 g_MemInfo_memAddr;
 extern u32 g_MemInfo_memSize;
 extern SceSysmemMemoryPartition *g_MemInfo_partList;
@@ -299,9 +315,13 @@ s32 func_00001650(void);
 s32 func_0000165C(void);
 s32 func_000017D8(struct Unk_func_000017D8_0 *arg0);
 s32 func_000017E0(struct Unk_func_000017E0_0 *arg0);
+s32 func_00001A80(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
 s32 func_00001B24(s32, s32);
 s32 func_00001B6C(void *arg0);
 s32 func_00001B74(void *arg0);
+s32 func_00001B7C(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+u32 func_00001CC0(SceUID id);
+SceUID func_00001D60(u32 addr);
 s32 func_00001E2C(s32, s32);
 void func_00002EC4(s32 arg0, s32 arg1);
 void func_0000373C(void);
@@ -352,6 +372,7 @@ void sceKernelAssert(s32 test, s32 lvl);
 s32 sceKernelCallGcovFunction(void);
 s32 sceKernelCallGprofFunction(void);
 s32 sceKernelCallUIDFunction(SceUID id, s32 funcId, ...);
+s32 sceKernelCallUIDObjCommonFunction(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
 s32 sceKernelCallUIDObjFunction(SceSysmemUidCB *uid, s32 funcId, ...);
 s32 sceKernelCreateUID(SceSysmemUidCB *type, const char *name, s32 attr, SceSysmemUidCB **outUid);
 s32 sceKernelCreateUIDtype(const char *name, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
@@ -368,8 +389,10 @@ s32 sceKernelDipswAll(void);
 s32 sceKernelDipswCpTime(void);
 s32 sceKernelDipswSet(u32 arg0);
 s32 sceKernelFreeHeapMemory(SceUID id, void *addr);
+s32 sceKernelFreePartitionMemory(SceUID id);
 s32 sceKernelGetAWeDramSaveAddr(void);
 s32 sceKernelGetAllowReplaceUmd(s32 *arg0);
+u32 sceKernelGetBlockHeadAddr(SceUID id);
 s32 sceKernelGetCompiledSdkVersion(void);
 s32 sceKernelGetCompilerVersion(void);
 s32 sceKernelGetDNAS(void);
