@@ -182,3 +182,4 @@ LFlashUmount = 0x0000945C; // type:func
 ReadLogicalPage = 0x0000AFA4; // type:func
 WriteLogicalPageWithCache = 0x0000B2AC; // type:func
 test_open = 0x0000840C; // type:func
+test_close = 0x00008848; // type:func

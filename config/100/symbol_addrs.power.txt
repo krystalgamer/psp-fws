@@ -176,3 +176,4 @@ _scePowerBatterySetParam = 0x00002E6C; // type:func
 _scePowerBatterySuspend = 0x00002E84; // type:func
 _scePowerBatteryResume = 0x00002F0C; // type:func
 _scePowerBatteryIsBusy = 0x00002EFC; // type:func
+_scePowerUnlock = 0x0000157C; // type:func

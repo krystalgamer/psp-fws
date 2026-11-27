@@ -106,3 +106,5 @@ regLoadHive = 0x00000D9C; // type:func
 regCheckFiles = 0x00000B88; // type:func
 regFindKey = 0x000050F4; // type:func
 regOpenFileFd = 0x00001730; // type:func
+regCatRelease = 0x00003414; // type:func
+regCheckHiveDirty = 0x00003B2C; // type:func
