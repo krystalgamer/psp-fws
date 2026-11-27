@@ -60,6 +60,7 @@ segments:
       - [0x11328, c, savedata_utility_010FEC]
       - [0x15F74, c, savedata_utility_015C1C]
       - [0x173C0, c, savedata_utility_017068]
+      - [0x2405C, c, savedata_utility_crtend]
       - { start: 0x240D0, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x24550, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0x24554, type: rodata, name: lib_ent, linker_section: .lib.ent }
@@ -73,6 +74,7 @@ segments:
       - [0x25994, .rodata, savedata_utility_010FEC]
       - [0x25B50, .rodata, savedata_utility_015C1C]
       - [0x25BA8, .rodata, savedata_utility_017068]
+      - [0x25FDC, .rodata, savedata_utility_crtend]
       - { start: 0x25FE4, type: prxpad, order: .rodata }
   - name: savedata_utility_seg1
     type: code

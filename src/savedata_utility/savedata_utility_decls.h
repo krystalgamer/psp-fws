@@ -601,6 +601,8 @@ struct Unk_vt_func_00014824_arg1 {
     M2C_UNK (*unkAC)(void **, s32 *, s32);
 };
 
+typedef void (*func_ptr)(void);
+
 extern M2C_UNK D_0001F6D0;
 extern M2C_UNK D_0001F908;
 extern s32 D_0001F958;
@@ -619,6 +621,7 @@ extern s32 D_000205BC;
 extern s32 D_00021ABC;
 extern s8 D_000225C4;
 extern s32 D_000225C8;
+extern func_ptr D_00024264[];
 extern M2C_UNK D_00024494;
 extern s32 D_0002458C;
 extern M2C_UNK D_000245CC;

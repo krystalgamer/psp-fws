@@ -2140,19 +2140,3 @@ INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_00023380);
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_00023484);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_000235F4);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_000237C8);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_00023820);
-#endif
-
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_0001E1FC);
-#endif
-
-INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_000256F0);
-
-#if FW_VERSION < 250
-INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_00020358);
-#endif
