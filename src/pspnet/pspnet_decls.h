@@ -565,6 +565,7 @@ extern s32 D_0000AC3C;
 extern struct calloutq D_0000AC4C;
 extern void (*D_0000AC58)(struct SceNetThreadInfo *);
 extern struct slpque D_0000AC6C[SLPQUE_TABLESIZE];
+extern s32 D_0000AE70;
 extern s32 D_0000AF18;
 extern s32 D_0000AF1C;
 extern s32 D_0000AF20;

@@ -23,7 +23,26 @@ s32 sceNetConfig80211LeaveRequest(const char *name, s32 *out) {
 end:
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+s32 sceNetConfig80211LeaveRequest(const char *name, s32 *out) {
+    struct SceNetIfreq1 req;
+    s32 ret;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    ret = _sce_pspnet_ifioctl(NULL, 0xC01469D8, &req, 1);
+    D_0000AE70 = 0;
+    if (ret != 0)
+        goto end;
+    *out = req.args[0];
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211LeaveRequest);
 #endif
 
@@ -36,7 +55,14 @@ s32 sceNetConfig80211SetAuth(const char *name, s32 auth) {
     return _sce_pspnet_ifioctl(NULL, 0x801469DD, &req, 1);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211SetAuth);
+s32 sceNetConfig80211SetAuth(const char *name, s32 auth) {
+    struct SceNetIfreq1 req;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    req.args[0] = auth;
+    return _sce_pspnet_ifioctl(NULL, 0x801469DD, &req, 1);
+}
 #endif
 
 #if FW_VERSION < 201
@@ -48,7 +74,14 @@ s32 sceNetConfig80211SetPowerSave(const char *name, s32 arg) {
     return _sce_pspnet_ifioctl(NULL, 0x801469DF, &req, 1);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211SetPowerSave);
+s32 sceNetConfig80211SetPowerSave(const char *name, s32 arg) {
+    struct SceNetIfreq1 req;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    req.args[0] = arg;
+    return _sce_pspnet_ifioctl(NULL, 0x801469DF, &req, 1);
+}
 #endif
 
 #if FW_VERSION >= 350
@@ -96,7 +129,14 @@ s32 sceNetConfig80211GetBssDesc(const char *name, s32 arg) {
     return _sce_pspnet_ifioctl(NULL, 0xC01469D7, &req, 1);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211GetBssDesc);
+s32 sceNetConfig80211GetBssDesc(const char *name, s32 arg) {
+    struct SceNetIfreq1 req;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    req.args[0] = arg;
+    return _sce_pspnet_ifioctl(NULL, 0xC01469D7, &req, 1);
+}
 #endif
 
 #if FW_VERSION < 201
@@ -117,7 +157,23 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211ScanRequest);
+s32 sceNetConfig80211ScanRequest(const char *name, s32 arg0, s32 *inout, s32 arg2, s32 *out) {
+    struct SceNetIfreq4 req;
+    s32 ret;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    req.args[0] = arg0;
+    req.args[1] = *inout;
+    req.args[2] = arg2;
+    ret = _sce_pspnet_ifioctl(NULL, 0xC02069D4, &req, 1);
+    if (ret != 0)
+        goto end;
+    *inout = req.args[1];
+    *out = req.args[3];
+end:
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -135,7 +191,20 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211CreateRequest);
+s32 sceNetConfig80211CreateRequest(const char *name, s32 arg, s32 *out) {
+    struct SceNetIfreq2 req;
+    s32 ret;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    req.args[0] = arg;
+    ret = _sce_pspnet_ifioctl(NULL, 0xC01869D5, &req, 1);
+    if (ret != 0)
+        goto end;
+    *out = req.args[1];
+end:
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -153,7 +222,20 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211JoinRequest);
+s32 sceNetConfig80211JoinRequest(const char *name, s32 arg, s32 *out) {
+    struct SceNetIfreq2 req;
+    s32 ret;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    req.args[0] = arg;
+    ret = _sce_pspnet_ifioctl(NULL, 0xC01869D6, &req, 1);
+    if (ret != 0)
+        goto end;
+    *out = req.args[1];
+end:
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_EB38431E);
 #endif
@@ -167,7 +249,14 @@ s32 sceNetConfig80211SetConf(const char *name, s32 arg) {
     return _sce_pspnet_ifioctl(NULL, 0x801469D2, &req, 1);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211SetConf);
+s32 sceNetConfig80211SetConf(const char *name, s32 arg) {
+    struct SceNetIfreq1 req;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    req.args[0] = arg;
+    return _sce_pspnet_ifioctl(NULL, 0x801469D2, &req, 1);
+}
 #endif
 
 #if FW_VERSION < 201
@@ -179,7 +268,14 @@ s32 sceNetConfig80211GetConf(const char *name, void *buf) {
     return _sce_pspnet_ifioctl(NULL, 0x401469D3, &req, 1);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211GetConf);
+s32 sceNetConfig80211GetConf(const char *name, void *buf) {
+    struct SceNetIfreq1 req;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    req.args[0] = (s32)buf;
+    return _sce_pspnet_ifioctl(NULL, 0x401469D3, &req, 1);
+}
 #endif
 
 #if FW_VERSION < 201
@@ -191,7 +287,14 @@ s32 sceNetConfig80211GetAuth(const char *name, void *buf) {
     return _sce_pspnet_ifioctl(NULL, 0x401469DE, &req, 1);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211GetAuth);
+s32 sceNetConfig80211GetAuth(const char *name, void *buf) {
+    struct SceNetIfreq1 req;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    req.args[0] = (s32)buf;
+    return _sce_pspnet_ifioctl(NULL, 0x401469DE, &req, 1);
+}
 #endif
 
 #if FW_VERSION < 201
@@ -208,7 +311,19 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211GetPowerSave);
+s32 sceNetConfig80211GetPowerSave(const char *name, s32 *out) {
+    struct SceNetIfreq1 req;
+    s32 ret;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    ret = _sce_pspnet_ifioctl(NULL, 0x401469E0, &req, 1);
+    if (ret != 0)
+        goto end;
+    *out = req.args[0];
+end:
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -227,7 +342,21 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211EnterGameMode);
+s32 sceNetConfig80211EnterGameMode(const char *name, s32 arg0, s32 arg1, s32 *out) {
+    struct SceNetIfreq3 req;
+    s32 ret;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    req.args[0] = arg0;
+    req.args[1] = arg1;
+    ret = _sce_pspnet_ifioctl(NULL, 0xC01C69E1, &req, 1);
+    if (ret != 0)
+        goto end;
+    *out = req.args[2];
+end:
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_AB375964);
 
@@ -249,7 +378,20 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfigUpInterface);
+s32 sceNetConfigUpInterface(const char *name) {
+    struct ifreq ifr;
+    s32 ret;
+
+    sceNetMemset(&ifr, 0, sizeof(ifr));
+    sceNetStrncpy(ifr.ifr_name, name, IFNAMSIZ);
+    ret = _sce_pspnet_ifioctl(NULL, SIOCGIFFLAGS, &ifr, 1);
+    if (ret != 0)
+        goto end;
+    ifr.ifr_flags |= IFF_UP;
+    ret = _sce_pspnet_ifioctl(NULL, SIOCSIFFLAGS, &ifr, 1);
+end:
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -266,7 +408,26 @@ s32 sceNetConfigDownInterface(const char *name) {
 end:
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
+s32 sceNetConfigDownInterface(const char *name) {
+    struct ifreq ifr;
+    s32 ret;
+
+    sceNetMemset(&ifr, 0, sizeof(ifr));
+    sceNetStrncpy(ifr.ifr_name, name, IFNAMSIZ);
+    ret = _sce_pspnet_ifioctl(NULL, SIOCGIFFLAGS, &ifr, 1);
+    if (ret != 0)
+        goto end;
+    ifr.ifr_flags &= ~IFF_UP;
+    ret = _sce_pspnet_ifioctl(NULL, SIOCSIFFLAGS, &ifr, 1);
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet", sceNetConfigDownInterface);
 #endif
 
@@ -325,7 +486,23 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfigGetIfEvent);
+s32 sceNetConfigGetIfEvent(const char *name, s32 *out0, s32 *out1) {
+    struct ifreq ifr;
+    struct SceNetIfEvent ev;
+    s32 ret;
+
+    sceNetMemset(&ifr, 0, sizeof(ifr));
+    sceNetStrncpy(ifr.ifr_name, name, IFNAMSIZ);
+    ifr.ifr_data = &ev;
+    sceNetMemset(&ev, 0, sizeof(ev));
+    ret = _sce_pspnet_ifioctl(NULL, 0xC020693D, &ifr, 1);
+    if (ret != 0)
+        goto end;
+    *out0 = ev.unk0;
+    *out1 = ev.unk4;
+end:
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -340,7 +517,17 @@ s32 sceNetConfigSetIfEventFlag(const char *name, s32 arg0, s32 arg1) {
     return _sce_pspnet_ifioctl(NULL, 0x8020693E, &ifr, 1);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfigSetIfEventFlag);
+s32 sceNetConfigSetIfEventFlag(const char *name, s32 arg0, s32 arg1) {
+    struct ifreq ifr;
+    struct SceNetIfEvent ev;
+
+    sceNetMemset(&ifr, 0, sizeof(ifr));
+    sceNetStrncpy(ifr.ifr_name, name, IFNAMSIZ);
+    ifr.ifr_data = &ev;
+    ev.unk0 = arg0;
+    ev.unk4 = arg1;
+    return _sce_pspnet_ifioctl(NULL, 0x8020693E, &ifr, 1);
+}
 #endif
 
 #if FW_VERSION < 201
@@ -362,7 +549,23 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfigGetIfEventFlag);
+s32 sceNetConfigGetIfEventFlag(const char *name, s32 *out0, s32 *out1) {
+    struct ifreq ifr;
+    struct SceNetIfEvent ev;
+    s32 ret;
+
+    sceNetMemset(&ifr, 0, sizeof(ifr));
+    sceNetStrncpy(ifr.ifr_name, name, IFNAMSIZ);
+    ifr.ifr_data = &ev;
+    sceNetMemset(&ev, 0, sizeof(ev));
+    ret = _sce_pspnet_ifioctl(NULL, 0xC020693E, &ifr, 1);
+    if (ret != 0)
+        goto end;
+    *out0 = ev.unk0;
+    *out1 = ev.unk4;
+end:
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_C1D2A7FB);
 
