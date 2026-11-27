@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "update_plugin_decls.h"
 
@@ -282,14 +283,14 @@ void func_000002A4(void) {
     struct Unk_func_000002A4_temp_v0 *temp_v0;
 
     D_00007ED0 = 1;
-    temp_v0 = func_00005364();
+    temp_v0 = (Unk_func_000002A4_temp_v0*) func_00005364();
     if (temp_v0->unk61 == 0) {
 
     } else {
         sceUpdateDownloadAbort();
     }
     sceKernelWaitSema(D_00007EC0, 1, NULL);
-    func_00005CA0(temp_v0);
+    func_00005CA0((Unk_func_00005CA0_0*) temp_v0);
     func_00000210();
 }
 
@@ -1467,7 +1468,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_0000268C);
 
 #if FW_VERSION == 150
 s32 func_0000268C(void) {
-    void *sp0;
+    s32 sp0;
     s32 temp_v0;
     s32 var_a1;
 
@@ -1476,7 +1477,7 @@ s32 func_0000268C(void) {
     if (temp_v0 == 0) {
         var_a1 = 1;
         if (sp0 != 0x11) {
-            var_a1 = (sp0 == 0x41) * 2;
+            var_a1 = ((s32) sp0 == 0x41) * 2;
         }
     }
     return var_a1;
@@ -1588,7 +1589,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00003358);
 void func_00003358(s32 arg0) {
     struct Unk_func_00003358_temp_v0 *temp_v0;
 
-    temp_v0 = func_00005364();
+    temp_v0 = (Unk_func_00003358_temp_v0*) func_00005364();
     if (temp_v0->unk84 != 0) {
 
     } else {
@@ -2321,7 +2322,7 @@ s32 func_00004010(void) {
     s32 var_v1;
     void *temp_v0;
 
-    temp_v0 = _ZNK3paf4View12GetInterfaceEi(_ZN3paf4View4FindEPKc(&D_000073BC), 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(_ZN3paf4View4FindEPKc(D_000073BC), 1);
     var_v1 = 0;
     if (temp_v0 != NULL) {
         var_v1 = M2C_FIELD(temp_v0, s32 (**)(), 0x78)();
