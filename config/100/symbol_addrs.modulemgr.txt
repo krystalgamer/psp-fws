@@ -88,7 +88,7 @@ D_00006DF4 = 0x00004C20;
 D_00006E28 = 0x00004C6C;
 D_00006E3C = 0x00004DF8;
 D_00006E78 = 0x00004E34;
-func_00004FCC = 0x00000DCC; // type:func
+ModuleReleaseLibraries = 0x00000DCC; // type:func
 // shared names (tools/add_version.py) end
 func_00002764 = 0x00002764; // type:func
 start_exe_thread = 0x0000253C; // type:func
@@ -102,3 +102,4 @@ modMgrCB = 0x00006160;
 ReadFile = 0x000012E4; // type:func
 EpilogueModule = 0x00001108; // type:func
 func_0000054C = 0x0000054C; // type:func
+shrink_file_block = 0x000004C8; // type:func

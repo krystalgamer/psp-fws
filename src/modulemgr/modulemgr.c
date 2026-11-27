@@ -642,7 +642,7 @@ s32 func_00000474(void *libEntry) {
     return ret;
 }
 
-s32 func_000004C8(SceLoadCoreExecFileInfo *execInfo) {
+s32 shrink_file_block(SceLoadCoreExecFileInfo *execInfo) {
     s32 ret;
 
     if (execInfo->isCompressed != 0) {
@@ -762,7 +762,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00000984);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000C4C);
 
-s32 func_00004FCC(SceModule *mod) {
+s32 ModuleReleaseLibraries(SceModule *mod) {
     u32 *cur;
     u32 *end;
     SceResidentLibraryEntryTable *ent;
@@ -787,7 +787,7 @@ s32 func_00004FCC(SceModule *mod) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/modulemgr", func_00004FCC);
+INCLUDE_ASM("nonmatchings/modulemgr", ModuleReleaseLibraries);
 #endif
 
 #if FW_VERSION == 100
@@ -953,7 +953,7 @@ s32 EpilogueModule(SceModule *mod) {
     if ((s32)mod->stubTop != -1) {
         func_00000404(mod->stubTop, mod->stubSize);
     }
-    func_00004FCC(mod);
+    ModuleReleaseLibraries(mod);
 end:
     if (ret < 0) {
         Kprintf(D_0000515C, "EpilogueModule", ret);

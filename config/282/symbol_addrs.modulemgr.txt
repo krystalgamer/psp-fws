@@ -113,3 +113,4 @@ sceKernelStartThread = 0x0000661C; // type:func
 sceKernelGetUserLevel = 0x00006624; // type:func
 sceKernelDcacheWritebackAll = 0x0000662C; // type:func
 sceKernelIcacheInvalidateAll = 0x00006634; // type:func
+ModuleReleaseLibraries = 0x00004FCC; // type:func
