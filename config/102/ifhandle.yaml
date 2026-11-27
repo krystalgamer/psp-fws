@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/ifhandle
-  src_path: tmp/av_src/102/ifhandle
+  src_path: src/ifhandle
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/ifhandle.ld
   cache_path: tmp/build/102/.splat_cache.ifhandle
