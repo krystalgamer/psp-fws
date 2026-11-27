@@ -95,7 +95,10 @@ class Module:
     def file_of(self, name):
         for f in self.files:
             t = f.read_text()
-            if f", {name});" in t or (f"{name}(" in t and re.search(rf"^[^\n;]*\b{name}\([^;{{]*\)\s*{{$", t, re.M)):
+            # a definition starts at column 0 (statements like `if (f(x) == 0) {` are indented)
+            if f", {name});" in t or (f"{name}(" in t and re.search(
+                    rf"^(?!(?:if|while|for|switch|return|else)\b)[A-Za-z_][^\n;=]*\b{name}\([^;{{]*\)\s*(?:const\s*)?(?::[^;{{]*)?{{$",
+                    t, re.M)):
                 return f
         return self.src
 

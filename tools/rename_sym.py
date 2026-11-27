@@ -29,6 +29,7 @@ def main():
     ap.add_argument("module")
     ap.add_argument("specs", nargs="+")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--force", action="store_true", help="NEW may already be used (same function/global in other versions)")
     a = ap.parse_args()
     mod = a.module
     allv = sorted(p.parent.name for p in (ROOT / "config").glob(f"*/{mod}.yaml"))
@@ -50,6 +51,10 @@ def main():
             sys.exit(f"bad spec {spec}")
         vers = m[1].split(",") if m[1] else allv
         old, nw = m[2], m[3]
+        csrc = "\n".join(t for p2, t in texts.items() if p2.suffix in (".c", ".h"))
+        if not a.force and nw != old and re.search(rf"\b{nw}\b", csrc) and nw not in src_renames.values():
+            sys.exit(f"{nw}: already used in the module's sources (another function or global?) — pick another name "
+                     f"or rename that one first (--force if it is the same function/global in other versions)")
         for v in vers:
             p = ROOT / "config" / v / f"symbol_addrs.{mod}.txt"
             t = new.get(p, "")
