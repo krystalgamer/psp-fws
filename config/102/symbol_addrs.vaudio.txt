@@ -7,3 +7,18 @@ func_000005DC = 0x00000644; // type:func rom:0x6C4
 sceKernelSignalSema = 0x000006DC; // type:func rom:0x75C
 sceKernelWaitSema = 0x000006E4; // type:func rom:0x764
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceVaudioOutputBlocking = 0x00000000; // type:func
+sceKernelDeleteSema = 0x000006D4; // type:func
+sceKernelCreateFpl = 0x000006EC; // type:func
+sceKernelDeleteFpl = 0x000006F4; // type:func
+sceKernelAllocateFpl = 0x000006FC; // type:func
+sceAudioSetFrequency = 0x00000704; // type:func
+sceAudioSetVolumeOffset = 0x0000070C; // type:func
+sceAudioSRCChReserve = 0x00000714; // type:func
+sceAudioSRCChRelease = 0x0000071C; // type:func
+sceAudioSRCOutputBlocking = 0x00000724; // type:func
+scePEQ_FC45514B = 0x0000072C; // type:func
+scePeqInit = 0x00000734; // type:func
+scePeqProc = 0x0000073C; // type:func
