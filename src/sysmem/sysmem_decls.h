@@ -54,6 +54,34 @@ typedef struct {
     struct SceSysmemUidCB *uid0; /* 0x14 */
 } SceSysmemHoldElement; /* 0x18 */
 
+typedef struct SceSysmemSeg {
+    struct SceSysmemSeg *next; /* 0x0 */
+    u32 used : 1; /* 0x4 */
+    u32 unk4 : 31;
+    u32 flags : 2; /* 0x8 */
+    u32 size : 30; /* in 0x100 units */
+} SceSysmemSeg; /* 1.00: 12 bytes */
+typedef struct SceSysmemCtlBlk {
+    struct SceSysmemCtlBlk *next; /* 0x0 */
+    SceSysmemSeg segs[20]; /* 0x4 */
+} SceSysmemCtlBlk; /* 1.00: 0xF4 */
+typedef struct SceSysmemMemoryPartition {
+    struct SceSysmemMemoryPartition *next; /* 0x00 */
+    u32 addr; /* 0x04 */
+    u32 size; /* 0x08 */
+    u32 attr : 4; /* 0x0C */
+    u32 unkC : 28;
+    SceSysmemCtlBlk *firstCtlBlk; /* 0x10 */
+    u32 ctlBlkCount; /* 0x14 */
+    u32 unk18; /* 0x18 */
+} SceSysmemMemoryPartition; /* 1.00: 0x1C (UID data) */
+typedef struct {
+    u32 size; /* 0x0 */
+    u32 startAddr; /* 0x4 */
+    u32 memSize; /* 0x8 */
+    u32 attr; /* 0xC */
+} SceSysmemPartitionInfo;
+
 struct SceSysmemUidLookupFunc;
 typedef struct SceSysmemUidCB {
     struct SceSysmemUidCB *PARENT0; /* 0x00 */
@@ -131,7 +159,11 @@ extern M2C_UNK D_0000A734;
 extern char D_0000AB40[];
 extern char D_0000AB60[];
 extern char D_0000AB68[];
+extern char D_0000AED8[];
+extern char D_0000AEE4[];
+extern char D_0000AF60[];
 extern SceSysmemUidLookupFunc D_0000C1F0[];
+extern SceSysmemUidLookupFunc D_0000C220[];
 extern SceSysmemUidLookupFunc D_0000C290[];
 extern SceSysmemUidLookupFunc D_0000C2E8[];
 extern SceSysmemUidLookupFunc D_0000C2F8[];
@@ -149,7 +181,13 @@ extern s32 D_0000C840;
 extern s32 D_0000C844;
 extern s32 D_0000C848;
 extern s32 D_0000C888;
-extern void *D_0000CA84;
+extern SceSysmemMemoryPartition *D_0000CA70;
+extern SceSysmemMemoryPartition *D_0000CA74;
+extern SceSysmemMemoryPartition *D_0000CA78;
+extern SceSysmemMemoryPartition *D_0000CA7C;
+extern SceSysmemMemoryPartition *D_0000CA80;
+extern SceSysmemMemoryPartition *D_0000CA84;
+extern SceSysmemMemoryPartition *D_0000CA88;
 extern char D_0000EABC[];
 extern SceSysmemUidLookupFunc D_0000F390[];
 extern M2C_UNK D_0000F3C0;
@@ -211,6 +249,10 @@ extern s32 D_00014268;
 extern SceSysmemHeap EHeap4UID;
 extern s32 HeapCBUid;
 extern SceSysmemUidCB *g_HeapType;
+extern u32 g_MemInfo_memAddr;
+extern u32 g_MemInfo_memSize;
+extern SceSysmemMemoryPartition *g_MemInfo_partList;
+extern SceSysmemUidCB *g_PartType;
 extern SceSysmemUidList g_uidTypeList;
 
 SceSysmemHoldElement *AllocSceUIDHoldElement(void);
@@ -227,14 +269,20 @@ void HeapInit(void);
 void InitUidBasic(SceSysmemUidCB *root, char *rootName, SceSysmemUidCB *metaRoot, char *metaRootName, SceSysmemUidCB *basic, char *basicName, SceSysmemUidCB *metaBasic, char *metaBasicName);
 void InitUidRoot(SceSysmemUidCB *root, char *rootName, SceSysmemUidCB *metaRoot, char *metaRootName);
 s32 Kprintf(const char *fmt, ...);
-s32 SysMemForKernel_9697CD32(s32);
-s32 SysMemForKernel_E6581468(s32);
+SceSysmemMemoryPartition *MpidToCB(s32 mpid);
+void PartitionInit(SceSysmemMemoryPartition *part);
+u32 PartitionQueryMaxFreeMemSize(SceSysmemMemoryPartition *part);
+u32 PartitionQueryTotalFreeMemSize(SceSysmemMemoryPartition *part);
+void PartitionServiceInit(void);
+u32 SysMemForKernel_9697CD32(s32 mpid);
+u32 SysMemForKernel_E6581468(s32 mpid);
 s32 SysMemForKernel_EF2EE8C1(void);
 void SysMemUserForUser_9697CD32(void);
 void SysMemUserForUser_E6581468(void);
 void *_AllocHeapMemory(SceSysmemHeap *heap, u32 size, u32 align);
 s32 _FreeHeapMemory(SceSysmemHeap *heap, void *addr);
 s32 _HeapTotalFreeSize(SceSysmemHeap *heap);
+void _memset32(void *dst, u32 size, u32 c);
 s32 _sceKernelCreateUID_sub(SceSysmemUidCB *type, SceSysmemUidCB *uid, char *name, s32 attr);
 s32 _sceKernelCreateUIDtypeInherit_sub(SceSysmemUidCB *parent, SceSysmemUidCB *uidType, SceSysmemUidCB *metaUidType, char *namePtr, char *metaName, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
 void bcmp(s32 arg0, s32 arg1, s32 arg2);
@@ -246,12 +294,11 @@ s32 func_000011F4(void);
 s32 func_00001200(void);
 s32 func_00001318(struct Unk_func_00001318_0 *arg0);
 s32 func_00001478(struct Unk_func_00001478_0 *arg0);
+s32 func_00001580(SceSysmemMemoryPartition *part);
 s32 func_00001650(void);
 s32 func_0000165C(void);
 s32 func_000017D8(struct Unk_func_000017D8_0 *arg0);
 s32 func_000017E0(struct Unk_func_000017E0_0 *arg0);
-s32 func_00001810(void *arg0);
-s32 func_000018D8(void *arg0);
 s32 func_00001B24(s32, s32);
 s32 func_00001B6C(void *arg0);
 s32 func_00001B74(void *arg0);
@@ -356,6 +403,7 @@ void sceKernelMemoryShrinkSize(void);
 s32 sceKernelPowerLock(s32 arg0);
 s32 sceKernelPowerTick(s32 arg0);
 s32 sceKernelPowerUnlock(s32 arg0);
+s32 sceKernelQueryMemoryPartitionInfo(s32 mpid, SceSysmemPartitionInfo *info);
 s32 sceKernelReferSysEventHandlers(void);
 s32 sceKernelRegisterApiEvaluation(void);
 void sceKernelRegisterAssertHandler(s32 arg0);
