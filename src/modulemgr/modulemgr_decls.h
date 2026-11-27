@@ -57,6 +57,11 @@ typedef struct {
     u32 attribute;
 } SceKernelSMOption;
 
+typedef struct {
+    SceSize size;
+    SceUID stackMpid;
+} SceKernelThreadOptParam;
+
 #if FW_VERSION == 100
 typedef struct {
     u8 unk0[0x14];
@@ -105,6 +110,10 @@ typedef struct SceModule {
     u8 padding2[3];
     u32 segmentAddr[4];
     SceSize segmentSize[4];
+    u8 unk9C[0x18];
+    s32 threadPriority;
+    SceSize stackSize;
+    u32 threadAttr;
 #endif
 } SceModule;
 
@@ -225,6 +234,7 @@ extern char D_00005CB0[];
 extern char D_00005DE0[];
 extern char D_0000602C[];
 extern char D_00006060[];
+extern char D_000060A8[];
 extern char D_000060C8[];
 extern char D_00006100[];
 extern char D_00006D34[];
@@ -276,6 +286,7 @@ s32 func_000036B0(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSM
 void func_00004750(void);
 s32 func_00004BA4(s32);
 s32 func_0000552C(s32);
+void *memcpy(void *dst, const void *src, SceSize n);
 void *memset(void *s, s32 c, SceSize n);
 void module_reboot_before(void);
 s32 module_reboot_phase(void);
@@ -295,8 +306,9 @@ s32 sceKernelCpuSuspendIntr(void);
 SceUID sceKernelCreateEventFlag(const char *name, u32 attr, u32 initPattern, void *option);
 SceModule *sceKernelCreateModule(void);
 SceUID sceKernelCreateSema(const char *name, u32 attr, s32 initVal, s32 maxVal, void *option);
-SceUID sceKernelCreateThread(const char *name, void *entry, s32 initPriority, s32 stackSize, u32 attr, void *option);
+SceUID sceKernelCreateThread(const char *name, void *entry, s32 initPriority, s32 stackSize, u32 attr, SceKernelThreadOptParam *option);
 s32 sceKernelDeleteModule(SceModule *mod);
+s32 sceKernelDeleteThread(SceUID thid);
 s32 sceKernelExitDeleteThread(s32 status);
 SceModule *sceKernelFindModuleByAddress(u32 addr);
 SceModule *sceKernelFindModuleByName(const char *name);
@@ -338,6 +350,7 @@ s32 sceKernelSuspendThread(u32);
 s32 sceKernelUnLinkLibraryEntries(void *libStubTable, SceSize size);
 s32 sceKernelWaitEventFlag(SceUID evid, u32 bits, u32 wait, u32 *outBits, void *timeout);
 s32 sceKernelWaitSema(s32, s32, void *);
+s32 sceKernelWaitThreadEnd(SceUID thid, u32 *timeout);
 s32 start_exe_thread(SceModuleMgrParam *modParams);
 void *wmemset(void *s, s32 c, SceSize n);
 

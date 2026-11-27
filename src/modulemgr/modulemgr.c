@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 */
+/* cflags[100]: -O2 -fno-builtin */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "modulemgr_decls.h"
