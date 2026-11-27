@@ -1,6 +1,6 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 #include "common.h"
 #include "emc_sm_decls.h"
 
@@ -24,7 +24,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", func_0000014C);
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000160);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000508);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
@@ -44,7 +44,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", func_0000015C);
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandUnlock);
@@ -97,7 +97,7 @@ s32 sceNandSuspend(void) {
     return 0;
 }
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/emc_sm", func_00000E1C);
 #else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandResume);
