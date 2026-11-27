@@ -113,7 +113,7 @@ struct socket {
     s32 (*so_send)();           /* 0xA0 sosend */
     s32 (*so_receive)();        /* 0xA4 soreceive */
     s32 so_fd;                  /* 0xA8 SCE descriptor, -1 until allocated */
-    TAILQ_ENTRY(socket) so_list; /* 0xAC all sockets (D_0002CC9C) */
+    TAILQ_ENTRY(socket) so_list; /* 0xAC all sockets (so_list) */
     struct SceNetInetWaiter *so_waiter; /* 0xB4 */
     struct socket *so_selnext;  /* 0xB8 */
 };
@@ -465,7 +465,7 @@ struct route {
     struct sockaddr ro_dst;
 };
 
-/* NetBSD if_spppsubr.c control protocol descriptor (0x3C): lcp D_0002BB10, ipcp D_0002BB54, pap D_0002BB94, chap D_0002BBD8 */
+/* NetBSD if_spppsubr.c control protocol descriptor (0x3C): lcp lcp, ipcp ipcp, pap pap, chap chap */
 struct sppp;
 struct cp {
     u16 proto;                      /* 0x00 */
@@ -1075,15 +1075,9 @@ struct Unk_func_0002A244_0 {
     s32 unk4BC;
 };
 
-extern const struct cp D_0002BB10; /* lcp */
 extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */
-extern const struct cp D_0002BB54; /* ipcp */
-extern const struct cp D_0002BB94; /* pap */
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
-extern const struct cp D_0002BBD8; /* chap */
 extern s32 D_0002BEC0;
-extern u32 D_0002BF78; /* raw_sendspace */
-extern u32 D_0002BF7C; /* raw_recvspace */
 extern struct ifqueue D_0002BF8C;
 extern s32 D_0002C01C;
 extern s32 D_0002C020;
@@ -1112,10 +1106,8 @@ extern s32 D_0002C360;
 extern s32 D_0002C364;
 extern s32 D_0002C368;
 extern s32 D_0002C39C;
-extern const struct cp *D_0002C4E0[IDX_COUNT]; /* cps */
 extern s32 D_0002C4F0;
 extern s32 D_0002C4F4;
-extern struct domain *D_0002C500;
 extern s32 D_0002C504;
 extern SceNetInetHook D_0002C51C;
 extern s32 D_0002C520;
@@ -1132,31 +1124,21 @@ extern s32 D_0002C594;
 extern s32 D_0002C5B4;
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
 extern s32 *D_0002C5BC;
-extern u32 D_0002C5D4; /* tcp_iss_seq */
 extern s32 D_0002C5D8;
 extern u8 D_0002C5DC[];
-extern s32 D_0002CC4C; /* pfslowtimo_now (SCE tcp timers are absolute slowtimo ticks) */
 extern u8 D_0002CC50[]; /* pffasttimo_ch */
 extern u8 D_0002CC74[]; /* pfslowtimo_ch */
-extern s32 D_0002CC98; /* pffasttimo_now */
-extern struct soqhead D_0002CC9C;
-extern s32 D_0002CCB0; /* rttrash */
 extern s32 D_0002CCB4;
-extern struct radix_node_head *D_0002CCB8[32]; /* rt_tables */
 extern u8 D_0002CD38[];
-extern struct { struct rawcb *lh_first; } D_0002CD80; /* rawcb */
 extern s32 D_0002CEB0;
 extern s32 D_0002CEB4;
 extern s32 D_0002CEB8;
 extern s32 D_0002CEBC;
 extern s32 D_0002CEC0;
-extern u32 D_0002CEEC;
 extern s32 D_0002CF00;
 extern s32 D_0002CF0C;
 extern s32 D_0002CF10;
 extern struct SceTailqHead D_0002CFF8[];
-extern TAILQ_HEAD(, in_ifaddr) D_0002D928; /* in_ifaddr */
-extern struct ifqueue D_0002D930; /* ipintrq, exported by sceNetInet_lib_D7928A6D */
 extern u8 D_0002DA50[0x170];
 extern s32 D_0002DBC0;
 extern M2C_UNK D_0002DBC8;
@@ -1167,7 +1149,6 @@ extern struct SceTailqHead D_0002DC98[13];
 extern s32 D_0002DD04;
 extern u8 D_0002DD10[];
 extern s32 D_0002DF50;
-extern s32 D_0002E480; /* somaxconn */
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
 extern s32 D_0002E798;
@@ -1180,23 +1161,18 @@ extern s32 D_0002E8D8;
 extern u32 D_0002E8F8;
 extern s32 D_0002E918;
 extern s32 D_0002E924;
-extern s32 D_0002E928[]; /* tcp_backoff */
 extern s32 D_0002E95C;
 extern s8 D_0002EAB0[];
 extern s32 D_0002EAB1;
 extern s32 D_0002EB40;
 extern s32 D_0002EB44;
-extern SceNetBytes4 D_0002EB48;
-extern SceNetBytes4 D_0002EB4C;
 extern s32 D_0002EB54;
 extern s32 D_0002EB88;
 extern s32 D_0002EB8C;
 extern s32 D_0002EB90;
 extern s32 D_0002EB94;
 extern s32 D_0002EC1C;
-extern s32 D_0002EC20; /* tcp_compat_42 */
 extern char D_0002F288[18] __attribute__((aligned(4)));
-extern struct ifnet D_0002F3D8; /* loif */
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
@@ -1204,6 +1180,30 @@ extern SceNetBytes4 D_0002F544;
 extern u8 D_00030218[];
 extern struct Unk_func_00013ED4_0 D_000302C8;
 extern u8 *D_000305A4;
+extern const struct cp chap; /* chap */
+extern const struct cp *cps[IDX_COUNT]; /* cps */
+extern SceNetBytes4 dns_primary;
+extern SceNetBytes4 dns_secondary;
+extern struct domain *domains;
+extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
+extern u32 in_maxmtu;
+extern const struct cp ipcp; /* ipcp */
+extern struct ifqueue ipintrq; /* ipintrq, exported by sceNetInet_lib_D7928A6D */
+extern const struct cp lcp; /* lcp */
+extern struct ifnet loif; /* loif */
+extern const struct cp pap; /* pap */
+extern s32 pffasttimo_now; /* pffasttimo_now */
+extern s32 pfslowtimo_now; /* pfslowtimo_now (SCE tcp timers are absolute slowtimo ticks) */
+extern u32 raw_recvspace; /* raw_recvspace */
+extern u32 raw_sendspace; /* raw_sendspace */
+extern struct { struct rawcb *lh_first; } rawcb; /* rawcb */
+extern struct radix_node_head *rt_tables[32]; /* rt_tables */
+extern s32 rttrash; /* rttrash */
+extern struct soqhead so_list;
+extern s32 somaxconn; /* somaxconn */
+extern s32 tcp_backoff[]; /* tcp_backoff */
+extern s32 tcp_compat_42; /* tcp_compat_42 */
+extern u32 tcp_iss_seq; /* tcp_iss_seq */
 
 void _sce_pspnet_callout_init(void *c);
 void _sce_pspnet_callout_reset(void *c, s32 ticks, void (*func)(void *), void *arg);
