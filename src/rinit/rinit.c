@@ -726,31 +726,3 @@ INCLUDE_ASM("nonmatchings/rinit", func_0000A9E8);
 INCLUDE_ASM("nonmatchings/rinit", func_0000AC84);
 
 INCLUDE_ASM("nonmatchings/rinit", func_0000ADA0);
-
-INCLUDE_ASM("nonmatchings/rinit", func_0000AEF0);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000BF00);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000BF10);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000BFD8);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000BFF8);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000BFFC);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000C028);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000C02C);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000C030);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000C034);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000C038);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000C03C);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000C040);
-
-INCLUDE_RODATA("nonmatchings/rinit", D_0000C058);

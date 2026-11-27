@@ -45,6 +45,9 @@ struct Unk_func_00008A4C_0 {
     s16 unkE;
 };
 
+typedef void (*func_ptr)(void);
+
+extern func_ptr D_0000B28C[];
 extern M2C_UNK D_0000BEBC;
 extern s32 D_0000F138;
 extern s32 D_0000F598;

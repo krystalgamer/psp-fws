@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/100/.splat_cache.rinit
   symbol_addrs_path:
     - config/100/symbol_addrs.rinit.txt
+    - config/100/func_starts.rinit.txt
     - tmp/build/100/prx_syms.rinit.txt
   reloc_addrs_path: [tmp/build/100/reloc_addrs.rinit.txt]
   asset_path: tmp/assets/100/rinit
@@ -55,6 +56,7 @@ segments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - { start: 0xA4, type: prxpad, order: .text }
       - [0xC0, c, rinit]
+      - [0xAF70, c, rinit_crtend]
       - { start: 0xAFC8, type: asm, name: fini, linker_section: .fini }
       - { start: 0xAFE4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xB0DC, type: prxpad, order: .text }
@@ -72,6 +74,7 @@ segments:
       - { start: 0xB318, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0xB31C, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0xB380, .rodata, rinit]
+      - [0xBF80, .rodata, rinit_crtend]
       - { start: 0xC1D8, type: prxpad, order: .rodata }
   - name: rinit_seg1
     type: code
