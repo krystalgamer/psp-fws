@@ -223,6 +223,19 @@ struct mbuf {
         MCLINITREFERENCE(m); \
     } \
 } while (0)
+#define MEXTMALLOC(m, size, how) do { \
+    (m)->m_ext.ext_buf = sceNetMallocInternal(size); \
+    if ((m)->m_ext.ext_buf != NULL) { \
+        (m)->m_data = (m)->m_ext.ext_buf; \
+        (m)->m_flags |= M_EXT; \
+        (m)->m_flags &= ~M_CLUSTER; \
+        (m)->m_ext.ext_size = (size); \
+        (m)->m_ext.ext_free = NULL; \
+        (m)->m_ext.ext_arg = NULL; \
+        (m)->m_ext.ext_type = (m)->m_type; \
+        MCLINITREFERENCE(m); \
+    } \
+} while (0)
 #define _MEXTREMOVE(m) do { \
     if (MCLISREFERENCED(m)) { \
         _MCLDEREFERENCE(m); \
@@ -1232,9 +1245,11 @@ s32 func_0000243C(struct socket *so);
 s32 func_000025CC(struct socket *so);
 s32 func_000025FC(struct socket *so);
 void func_000038BC(struct socket *so);
+s32 func_00003A00(struct socket *so, s32 level, s32 optname, struct mbuf *m0);
 void func_000040FC(void);
 s32 func_00004124(struct socket *so, struct mbuf *nam);
 s32 func_00004190(struct socket *so, s32 backlog);
+s32 func_00004248(struct socket *so, struct mbuf *nam);
 s32 func_000042D4(struct socket *so, struct mbuf *nam);
 s32 func_0000431C(struct socket *so, struct mbuf *nam);
 s32 func_00004404(struct socket *so, s32 how);
@@ -1254,6 +1269,7 @@ void func_00005008(struct sockbuf *sb);
 void func_00005050(struct sockbuf *sb, s32 len);
 void func_00005308(struct sockbuf *sb);
 struct mbuf *func_00005440(void *p, s32 size, s32 type, s32 level);
+s32 func_0000562C(void);
 struct socket *func_00005700(s32 s);
 void func_00005778(struct socket *so);
 void func_0000588C(struct socket *so);
@@ -1266,7 +1282,7 @@ s32 func_00005B8C(void);
 s32 func_00005D70(void);
 s32 func_00006568(struct SceNetInetWaiter *w, s32 s, struct msghdr *mp, s32 flags, s32 *retsize);
 s32 func_00006AB0(struct SceNetInetWaiter *w, s32 s, struct msghdr *mp, u32 *namelenp, s32 *retsize);
-s32 func_00007490(struct mbuf **mp, const void *buf, s32 buflen, s32 type);
+s32 func_00007490(struct mbuf **mp, const void *buf, u32 buflen, s32 type);
 void func_000076C4(s32 arg0, s32 arg1, s32 arg2);
 void func_000076E0(s32 arg0, s32 arg1, s32 arg2);
 void func_00007A88(s32 arg0, s32 arg1, s32 arg2);

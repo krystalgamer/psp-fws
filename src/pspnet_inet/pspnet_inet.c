@@ -1049,7 +1049,43 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetRecvmsg);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00006AB0);
 
+#if FW_VERSION < 201
+s32 sceNetInetSetsockopt(s32 s, s32 level, s32 name, const void *val, u32 valsize) {
+    struct SceNetInetWaiter *w;
+    struct socket *so;
+    struct mbuf *m = NULL;
+    s32 error;
+
+    w = _sce_pspnet_thread_enter();
+    if (w == NULL) {
+        return -1;
+    }
+    so = func_00005700(s);
+    error = 9; /* EBADF */
+    if (so != NULL) {
+        SO_WAITER_ATTACH(w, so);
+        if (valsize > MLEN) {
+            error = 22; /* EINVAL */
+            goto out;
+        }
+        if (val) {
+            m = sceNetMGet(M_WAITOK, MT_SOOPTS);
+            if (m == NULL) {
+                error = 12; /* ENOMEM */
+                goto out;
+            }
+            func_0002C9B8(val, mtod(m, u8 *), valsize);
+            m->m_len = valsize;
+        }
+        error = func_00003A00(so, level, name, m);
+    out:
+        SO_WAITER_DETACH(w, so);
+    }
+    return _sce_pspnet_thread_leave(w, error);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetSetsockopt);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetsockopt);
 
@@ -1101,7 +1137,37 @@ s32 sceNetInetGetpeername(s32 s, struct sockaddr *asa, u32 *alen) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetpeername);
 #endif
 
+#if FW_VERSION < 201
+s32 func_00007490(struct mbuf **mp, const void *buf, u32 buflen, s32 type) {
+    struct sockaddr *sa;
+    struct mbuf *m;
+
+    if (type == MT_SONAME && buflen > 255) {
+        return 22; /* EINVAL */
+    }
+    m = sceNetMGet(M_WAITOK, type);
+    if (m == NULL) {
+        return 12; /* ENOMEM */
+    }
+    if (buflen > MLEN) {
+        MEXTMALLOC(m, buflen, M_WAITOK);
+        if ((m->m_flags & M_EXT) == 0) {
+            sceNetMFree(m);
+            return 12;
+        }
+    }
+    m->m_len = buflen;
+    func_0002C9B8(buf, mtod(m, u8 *), buflen);
+    *mp = m;
+    if (type == MT_SONAME) {
+        sa = mtod(m, struct sockaddr *);
+        sa->sa_len = buflen;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00007490);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetSelect);
 
