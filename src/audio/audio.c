@@ -491,7 +491,45 @@ s32 sceAudioSetVolumeOffset(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/audio", audioIntrHandler);
 
+#if FW_VERSION == 100
+void audioHwInit(void) {
+    sceClockgenAudioClkEnable();
+    sceClockgenAudioClkSetFreq(g_audio.freq);
+    sceCodecSetFrequency(g_audio.freq);
+    sceSysregAudioClkSelect(0, 1);
+    sceSysregAudioBusClockEnable(0);
+    sceSysregAudioClkEnable(0);
+    sceSysregAudioIoEnable(0);
+    sceSysregAudioClkoutClkSelect(0);
+    sceSysregAudioClkoutIoEnable();
+    sceSysregAudioClkoutClkEnable();
+    HW(0xBE000000) = 1;
+    HW(0xBE000004) = 0;
+    while ((HW(0xBE00000C) & 7) != 0)
+        ;
+    HW(0xBE00002C) = 7;
+    while ((HW(0xBE000028) & 0x30) != 0x30)
+        ;
+    HW(0xBE000024) = 0;
+    HW(0xBE000020) = 7;
+    HW(0xBE000008) = 7;
+    HW(0xBE000014) = 0x1208;
+    while ((HW(0xBE000050) & 0x10000) != 0)
+        ;
+    HW(0xBE000050) = 0x8000;
+    g_audio.srcVol = 0x400;
+    HW(0xBE000018) = 0;
+    if (g_audio.freq == 48000) {
+        HW(0xBE000038) = 0x100;
+    } else {
+        g_audio.freq = 44100;
+        HW(0xBE000038) = 0x80;
+    }
+    HW(0xBE000040) = 1;
+}
+#else
 INCLUDE_ASM("nonmatchings/audio", audioHwInit);
+#endif
 
 INCLUDE_ASM("nonmatchings/audio", audioEventHandler);
 
