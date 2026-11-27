@@ -82,8 +82,8 @@ void func_000008D0(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION == 100
-void sceUmdManGetDriveMode(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    func_0000A084(arg0, arg1, arg2, arg3, arg4);
+s32 sceUmdManGetDriveMode(void) {
+    return func_0000A084();
 }
 #endif
 
@@ -1035,7 +1035,7 @@ INCLUDE_ASM("nonmatchings/umdman", sceUmdExecReadCapacityCmd);
 #endif
 
 #if FW_VERSION == 100
-s32 sceUmdExecModSenseCmd(SceUmdDrive *drive, u16 *param, void *buf) {
+s32 sceUmdExecModSenseCmd(SceUmdDrive *drive, SceUmdModeParam *param, void *buf) {
     volatile SceAtaCmdState state;
     s32 stat;
     s32 dipsw;
@@ -1070,9 +1070,9 @@ s32 sceUmdExecModSenseCmd(SceUmdDrive *drive, u16 *param, void *buf) {
             drive->ataDrive->cmd->driveStat = st;
             ret = sceAtaExecPacketCmd(drive->ataDrive, 0, 0x2000, 0, 0, 90, param);
             if (ret == 0) {
-                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param[2]);
+                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param->size);
                 if (ret == 0)
-                    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param[2]);
+                    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param->size);
             }
         }
     }
@@ -1090,7 +1090,7 @@ INCLUDE_ASM("nonmatchings/umdman", sceUmdExecModSenseCmd);
 #endif
 
 #if FW_VERSION == 100
-s32 sceUmdExecModSelectCmd(SceUmdDrive *drive, u16 *param, void *buf) {
+s32 sceUmdExecModSelectCmd(SceUmdDrive *drive, SceUmdModeParam *param, void *buf) {
     volatile SceAtaCmdState state;
     s32 stat;
     s32 dipsw;
@@ -1125,9 +1125,9 @@ s32 sceUmdExecModSelectCmd(SceUmdDrive *drive, u16 *param, void *buf) {
             drive->ataDrive->cmd->driveStat = st;
             ret = sceAtaExecPacketCmd(drive->ataDrive, 0, 0x2000, 0, 0, 85, param);
             if (ret == 0) {
-                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param[2]);
+                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param->size);
                 if (ret == 0)
-                    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param[2]);
+                    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param->size);
             }
         }
     }
@@ -2103,7 +2103,14 @@ INCLUDE_ASM("nonmatchings/umdman", func_000057C0);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00005828);
 
-INCLUDE_ASM("nonmatchings/umdman", func_000058D8);
+s32 func_000058D8(void) {
+    __asm__ volatile("sync");
+    if (*(volatile u32 *)0xBDF00008 == 0) {
+        *(volatile u32 *)0xBDF00008 |= 1;
+        __asm__ volatile("sync");
+    }
+    return 0;
+}
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_000087C4);
@@ -2135,7 +2142,16 @@ INCLUDE_ASM("nonmatchings/umdman", func_00005AC0);
 INCLUDE_ASM("nonmatchings/umdman", func_00005B6C);
 #endif
 
-INCLUDE_ASM("nonmatchings/umdman", func_00005BD0);
+u32 func_00005BD0(void) {
+    u32 v;
+
+    __asm__ volatile("sync");
+    v = *(volatile u32 *)0xBDF0001C;
+    __asm__ volatile("sync");
+    if (v & 1)
+        return 1;
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/umdman", func_00005BE8);
 
@@ -2143,7 +2159,11 @@ INCLUDE_ASM("nonmatchings/umdman", func_00005CBC);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00005DCC);
 
-INCLUDE_ASM("nonmatchings/umdman", func_00005F0C);
+void func_00005F0C(u32 *out) {
+    __asm__ volatile("sync");
+    *out = *(volatile u32 *)0xBDF00020;
+    __asm__ volatile("sync");
+}
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_0000625C);
@@ -2454,11 +2474,21 @@ INCLUDE_ASM("nonmatchings/umdman", func_000076F8);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKEnableIntr);
+void sceUmdManSPKEnableIntr(u32 mask) {
+    __asm__ volatile("sync");
+    *(volatile u32 *)0xBDF00028 |= mask;
+    __asm__ volatile("sync");
+}
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKAuthentication);
 
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKInitConfiguration);
+void sceUmdManSPKInitConfiguration(void) {
+    u32 v = *(volatile u32 *)0xBDF00038;
+
+    __asm__ volatile("sync");
+    *(volatile u32 *)0xBDF00038 = v | 4;
+    __asm__ volatile("sync");
+}
 
 s32 func_00009FC4(void) {
     return __builtin_allegrex_min(sceKernelAllocateFpl(D_0000EC10, &D_0000EC80, NULL), 0);
@@ -2537,13 +2567,30 @@ M2C_UNK *func_000079B8(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_000079B8);
 #endif
 
-INCLUDE_ASM("nonmatchings/umdman", func_000079C4);
+void func_000079C4(u32 v) {
+    __asm__ volatile("sync");
+    *(volatile u32 *)0xBDF00090 = v;
+    __asm__ volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/umdman", func_000079E0);
+s32 func_000079E0(u32 *out) {
+    if (out == NULL)
+        return 0x80010016;
+    __asm__ volatile("sync");
+    *out = *(volatile u32 *)0xBDF0001C;
+    __asm__ volatile("sync");
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/umdman", func_00007A0C);
+u32 func_00007A0C(void) {
+    __asm__ volatile("sync");
+    return *(volatile u32 *)0xBDF00000;
+}
 
-INCLUDE_ASM("nonmatchings/umdman", func_00007A1C);
+u32 func_00007A1C(void) {
+    __asm__ volatile("sync");
+    return *(volatile u32 *)0xBDF00004;
+}
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_00007954);
@@ -2554,7 +2601,14 @@ INCLUDE_ASM("nonmatchings/umdman", func_00007CD0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", func_0000A084);
+s32 func_0000A084(void) {
+    u32 v;
+
+    __asm__ volatile("sync");
+    v = *(volatile u32 *)0xBDF00018 & 0x1FF;
+    __asm__ volatile("sync");
+    return (v == 0x111) ? 0xC0 : 0xB0;
+}
 #endif
 
 #if FW_VERSION < 152
@@ -2567,20 +2621,40 @@ INCLUDE_ASM("nonmatchings/umdman", func_00007A30);
 INCLUDE_ASM("nonmatchings/umdman", func_00007A58);
 #endif
 
-INCLUDE_ASM("nonmatchings/umdman", func_00007AF0);
+void func_00007AF0(u32 v) {
+    __asm__ volatile("sync");
+    *(volatile u32 *)0xBDF00028 = v & 0xFFFF;
+    __asm__ volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/umdman", func_00007B10);
+void func_00007B10(u32 mask) {
+    __asm__ volatile("sync");
+    *(volatile u32 *)0xBDF00024 |= mask;
+    __asm__ volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/umdman", func_00007B34);
+s32 func_00007B34(void) {
+    __asm__ volatile("sync");
+    return *(volatile s32 *)0xBDF00044;
+}
 
-INCLUDE_ASM("nonmatchings/umdman", func_00007B48);
+s32 func_00007B48(void) {
+    __asm__ volatile("sync");
+    return *(volatile s32 *)0xBDF000B8;
+}
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_00007A74);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKStartStep0);
+s32 sceUmdManSPKStartStep0(void) {
+    s32 ret = func_000057C0();
+
+    if (ret < 0)
+        return ret;
+    return func_00005828(ret);
+}
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKStartStep1);
 #endif
@@ -2601,7 +2675,16 @@ s32 func_00007B94(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_00007B94);
 #endif
 
+#if FW_VERSION < 201
+void func_00007BC8(u32 *src, u32 size) {
+    u32 i;
+
+    for (i = 0; i < size / 4; i++)
+        D_00012CC0[i] = src[i];
+}
+#else
 INCLUDE_ASM("nonmatchings/umdman", func_00007BC8);
+#endif
 
 #if FW_VERSION < 201
 void func_0000A2B8(s32 arg0, s32 arg1) {
@@ -2629,7 +2712,11 @@ M2C_UNK *func_00007C30(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_00007C30);
 #endif
 
-INCLUDE_ASM("nonmatchings/umdman", func_00007C3C);
+void func_00007C3C(u32 v) {
+    __asm__ volatile("sync");
+    *(volatile u32 *)0xBDF00094 = v & 1;
+    __asm__ volatile("sync");
+}
 
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/umdman", func_00007ED4);
@@ -2646,7 +2733,11 @@ INCLUDE_ASM("nonmatchings/umdman", func_00007B80);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKDisableIntr);
+void sceUmdManSPKDisableIntr(u32 mask) {
+    __asm__ volatile("sync");
+    *(volatile u32 *)0xBDF0002C |= mask;
+    __asm__ volatile("sync");
+}
 #endif
 
 #if FW_VERSION < 201
@@ -4332,9 +4423,19 @@ s32 func_0000A92C(s32 arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/umdman", func_0000B2AC);
 #endif
 
+#if FW_VERSION == 100
+u32 func_0000B2FC(void *common) {
+    func_0000C06C(1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/umdman", func_0000B2FC);
+#endif
 
-INCLUDE_ASM("nonmatchings/umdman", func_0000B330);
+u32 func_0000B330(void *common) {
+    D_0001BE68 = 1;
+    return 0;
+}
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_0000ADBC(void) {
@@ -4991,7 +5092,14 @@ void func_0000FB08(void) {
 }
 #endif
 
+#if FW_VERSION == 100
+s32 func_0000FB38(void) {
+    func_0000C06C(1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/umdman", func_0000FB38);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0000EAA0(void) {
