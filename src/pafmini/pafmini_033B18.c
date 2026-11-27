@@ -34,7 +34,7 @@ INCLUDE_RODATA("nonmatchings/pafmini_033B18", D_000D6BE4);
 
 INCLUDE_ASM("nonmatchings/pafmini_033B18", _ZN3paf8DateTime6FormatEPwjPKw);
 
-#if FW_VERSION >= 260
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_033B18", _ZN3paf8DateTime3UTCEv);
 #endif
 

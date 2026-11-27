@@ -1,4 +1,7 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
   "Heap_Alloc": "s32 Heap_Alloc(s32, s32, s32);",
   "Heap_CheckMemoryBounds": "s32 Heap_CheckMemoryBounds(void);",
@@ -2226,6 +2229,10 @@
   "zlibCompileFlags": "s32 zlibCompileFlags(void);"
  },
  "types": {
+  "Class_000D1ED8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000D1ED8 is data (vptr = label - 8 + 8) */\nclass Class_000D1ED8 {\npublic:\n    virtual ~Class_000D1ED8();\n};\n#endif",
+  "Class_000D75B0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000D75B0 is data (vptr = label - 8 + 8) */\nclass Class_000D75B0 {\npublic:\n    virtual ~Class_000D75B0();\n};\n#endif",
+  "Class_000D8188": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000D8188 is data (vptr = label - 8 + 8) */\nclass Class_000D8188 : public paf::PhWidget {\npublic:\n    virtual ~Class_000D8188();\n};\n#endif",
+  "Class_000DB140": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000DB140 is data (vptr = label - 8 + 8) */\nclass Class_000DB140 {\npublic:\n    virtual ~Class_000DB140();\n};\n#endif",
   "D_000E164C_s": "struct D_000E164C_s {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "D_000E2000_s": "struct D_000E2000_s {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
   "D_000E202C_s": "struct D_000E202C_s {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n    s32 unk18;\n    s32 unk1C;\n};",

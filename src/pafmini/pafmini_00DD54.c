@@ -2050,23 +2050,12 @@ INCLUDE_RODATA("nonmatchings/pafmini_00DD54", D_000FEA18);
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00025980);
 
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_000259D0);
-#endif
 
-#if FW_VERSION == 100
 void func_00025A58(s32 **arg0) {
     _ZN10PSJSObjectC2ERK11PSJSContext();
     *arg0 = &D_000FE988;
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-void func_00025A58(s32 **arg0) {
-    _ZN10PSJSObjectC2ERK11PSJSContext();
-    *arg0 = &D_000FE988;
-}
-#endif
-
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00025A88);
 
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00025A9C);

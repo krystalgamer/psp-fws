@@ -1008,17 +1008,7 @@ INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D7588);
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0003EA60);
 
-void func_0003EAB0(M2C_UNK **arg0) {
-    *arg0 = &D_000D75B0;
-}
-
-void func_0003EAC0(M2C_UNK **arg0) {
-    *arg0 = &D_000D75B0;
-}
-
-void func_0003EAD0(M2C_UNK **arg0) {
-    *arg0 = &D_000D75B0;
-    _ZdlPv(arg0);
+Class_000D75B0::~Class_000D75B0() {
 }
 
 #if FW_VERSION >= 201
@@ -1260,6 +1250,8 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00040148);
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf12PhDispatcher14SetEventIgnoreEifb);
 
 INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D75B0);
+
+__asm__(".globl _ZTV14Class_000D75B0\n_ZTV14Class_000D75B0 = D_000D75B0 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D75C0);
 
@@ -4016,20 +4008,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhButtonC1EPNS_8PhWidgetEPNS_
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0006CDC0);
 #endif
 
-void _ZN3paf8PhButtonD2Ev(M2C_UNK **arg0) {
-    *arg0 = &D_000D8188;
-    _ZN3paf8PhWidgetD2Ev((s32) arg0);
-}
-
-void func_0005615C(M2C_UNK **arg0) {
-    *arg0 = &D_000D8188;
-    _ZN3paf8PhWidgetD2Ev((s32) arg0);
-}
-
-void func_00056184(M2C_UNK **arg0) {
-    *arg0 = &D_000D8188;
-    _ZN3paf8PhWidgetD2Ev((s32) arg0);
-    _ZdlPv(arg0);
+Class_000D8188::~Class_000D8188() {
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhButton18HandleKeycodeEventEPNS_7PhEventE);
@@ -4077,6 +4056,8 @@ INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D8168);
 INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D8174);
 
 INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D8188);
+
+__asm__(".globl _ZTV14Class_000D8188\n_ZTV14Class_000D8188 = D_000D8188 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D8258);
 
@@ -5111,31 +5092,12 @@ s32 func_0005C920(void) {
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0007656C);
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf11PhLabelTextC1EPNS_8PhWidgetEPNS_8PhAppearE);
-#endif
 
-#if FW_VERSION == 100
 void func_0007677C(s32 **arg0) {
     *arg0 = &D_001057D8;
     _ZN3paf8PhWidgetD2Ev((s32) arg0);
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-void func_0007677C(s32 **arg0) {
-    *arg0 = &D_001057D8;
-    _ZN3paf8PhWidgetD2Ev((s32) arg0);
-}
-#endif
-
-#if FW_VERSION == 100
-void func_000767A4(s32 **arg0) {
-    *arg0 = &D_001057D8;
-    _ZN3paf8PhWidgetD2Ev((s32) arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_000767A4(s32 **arg0) {
     *arg0 = &D_001057D8;
     _ZN3paf8PhWidgetD2Ev((s32) arg0);

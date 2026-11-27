@@ -2236,6 +2236,8 @@ INCLUDE_RODATA("nonmatchings/pafmini_078748", D_001081E8);
 
 INCLUDE_RODATA("nonmatchings/pafmini_078748", D_000DB140);
 
+__asm__(".globl _ZTV14Class_000DB140\n_ZTV14Class_000DB140 = D_000DB140 - 8\n");
+
 INCLUDE_ASM("nonmatchings/pafmini_078748", _ZNK3paf7Surface13GetActivePageENS0_8PageModeE);
 #else
 s16 _ZNK3paf7Surface13GetActivePageENS0_8PageModeE(struct Unk_scePaf_0598FFD6_0 *arg0, s32 arg1) {
@@ -2388,6 +2390,8 @@ INCLUDE_RODATA("nonmatchings/pafmini_078748", D_000DB110);
 INCLUDE_RODATA("nonmatchings/pafmini_078748", D_000DB130);
 
 INCLUDE_RODATA("nonmatchings/pafmini_078748", D_000DB140);
+
+__asm__(".globl _ZTV14Class_000DB140\n_ZTV14Class_000DB140 = D_000DB140 - 8\n");
 #endif
 
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_00090100);
@@ -2405,17 +2409,7 @@ void func_0009025C(M2C_UNK **arg0) {
     _ZdlPv(arg0);
 }
 
-void func_00090284(M2C_UNK **arg0) {
-    *arg0 = &D_000DB140;
-}
-
-void func_00090294(M2C_UNK **arg0) {
-    *arg0 = &D_000DB140;
-}
-
-void func_000902A4(M2C_UNK **arg0) {
-    *arg0 = &D_000DB140;
-    _ZdlPv(arg0);
+Class_000DB140::~Class_000DB140() {
 }
 
 #if FW_VERSION < 282

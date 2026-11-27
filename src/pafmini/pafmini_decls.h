@@ -7,7 +7,40 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D1ED8 is data (vptr = label - 8 + 8) */
+class Class_000D1ED8 {
+public:
+    virtual ~Class_000D1ED8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D75B0 is data (vptr = label - 8 + 8) */
+class Class_000D75B0 {
+public:
+    virtual ~Class_000D75B0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D8188 is data (vptr = label - 8 + 8) */
+class Class_000D8188 : public paf::PhWidget {
+public:
+    virtual ~Class_000D8188();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000DB140 is data (vptr = label - 8 + 8) */
+class Class_000DB140 {
+public:
+    virtual ~Class_000DB140();
+};
 #endif
 
 struct D_000E164C_s {

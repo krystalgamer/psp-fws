@@ -28,10 +28,6 @@ void func_00078450(struct Unk_func_00078450_0 *arg0) {
     }
 }
 
-#if FW_VERSION == 260
-INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_0007ABF0);
-#endif
-
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_0783D0", func_00078480);
 #endif
