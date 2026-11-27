@@ -2704,7 +2704,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012D84);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000130B8);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_cksum);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
@@ -2960,7 +2960,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", in_pcbconnect);
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012D0C);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000130B8);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_cksum);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013338);
 
@@ -3403,7 +3403,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014668);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014890);
+INCLUDE_ASM("nonmatchings/pspnet_inet", ip_init);
 #endif
 
 #if FW_VERSION >= 282
@@ -3415,11 +3415,11 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", ip_input);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000150C8);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00015654);
+INCLUDE_ASM("nonmatchings/pspnet_inet", ip_freef);
 #endif
 
 #if FW_VERSION < 201
-void func_00015654(struct Unk_func_00015654_0 *arg0) {
+void ip_freef(struct Unk_func_00015654_0 *arg0) {
     struct Unk_func_00015654_temp_v1 *temp_s1;
     struct Unk_func_00015654_temp_v1 *temp_v1;
     struct Unk_func_00015654_temp_v1_2 *temp_v1_2;
@@ -3462,11 +3462,29 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00015764);
 #if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00015ADC);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016030);
+struct in_ifaddr *ip_rtaddr(struct in_addr dst) {
+    struct sockaddr_in *sin;
+
+    sin = (struct sockaddr_in *)&D_0002FF98.ro_dst;
+    if (D_0002FF98.ro_rt == 0 || dst.s_addr != sin->sin_addr.s_addr) {
+        if (D_0002FF98.ro_rt) {
+            RTFREE(D_0002FF98.ro_rt);
+            D_0002FF98.ro_rt = 0;
+        }
+        sin->sin_family = AF_INET;
+        sin->sin_len = sizeof(*sin);
+        sin->sin_addr = dst;
+        rtalloc(&D_0002FF98);
+    }
+    if (D_0002FF98.ro_rt == 0) {
+        return NULL;
+    }
+    return (struct in_ifaddr *)D_0002FF98.ro_rt->rt_ifa;
+}
 #endif
 
 #if FW_VERSION >= 282
-void func_00015654(struct Unk_func_00015654_0 *arg0) {
+void ip_freef(struct Unk_func_00015654_0 *arg0) {
     void **temp_a1;
     void *temp_a0;
     void *temp_s1;
@@ -3539,9 +3557,39 @@ void ipintr(void) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016644);
+void ip_slowtimo(void) {
+    struct ipq *fp, *nfp;
+    s32 s = _sce_pspnet_spllock();
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016788);
+    ipq_lock_try();
+    for (fp = D_0002DA48.lh_first; fp != NULL; fp = nfp) {
+        nfp = fp->ipq_q.le_next;
+        if (--fp->ipq_ttl == 0) {
+            D_0002D960.ips_fragtimeout++;
+            ip_freef(fp);
+        }
+    }
+    if (D_0002C208 < 0) {
+        ;
+    } else {
+        while (D_0002C57C > D_0002C208 && D_0002DA48.lh_first) {
+            ip_freef(D_0002DA48.lh_first);
+        }
+    }
+    ipq_unlock();
+    _sce_pspnet_splunlock(s);
+}
+
+void ip_drain(void) {
+    if (ipq_lock_try() == 0) {
+        return;
+    }
+    while (D_0002DA48.lh_first != NULL) {
+        D_0002D960.ips_fragdropped++;
+        ip_freef(D_0002DA48.lh_first);
+    }
+    ipq_unlock();
+}
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016830);
@@ -3551,7 +3599,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016D78);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016938);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000169EC);
+INCLUDE_ASM("nonmatchings/pspnet_inet", ip_output);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000175DC);
 
@@ -3633,7 +3681,21 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018A90);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00019034);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000195B8);
+void icmp_send(struct mbuf *m, struct mbuf *opts) {
+    struct ip *ip = mtod(m, struct ip *);
+    s32 hlen;
+    struct icmp *icp;
+
+    hlen = (ip->ip_hl_v & 0xF) << 2;
+    m->m_data += hlen;
+    m->m_len -= hlen;
+    icp = mtod(m, struct icmp *);
+    icp->icmp_cksum = 0;
+    icp->icmp_cksum = in_cksum(m, ip->ip_len - hlen);
+    m->m_data -= hlen;
+    m->m_len += hlen;
+    (void)ip_output(m, opts, NULL, 0, NULL);
+}
 
 u32 iptime(void) {
     struct timeval atv;

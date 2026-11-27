@@ -976,6 +976,46 @@ static __inline s32 tcp_reass_lock_try(struct tcpcb *tp) {
 #define TCPT_RANGESET(tv, value, tvmin, tvmax) { (tv) = (value); if ((tv) < (tvmin)) (tv) = (tvmin); else if ((tv) > (tvmax)) (tv) = (tvmax); }
 #define roundup(x, y) ((((x) + ((y) - 1)) / (y)) * (y))
 
+/* struct icmp (partial) */
+struct icmp {
+    u8 icmp_type;
+    u8 icmp_code;
+    u16 icmp_cksum;
+};
+
+/* struct ipq (NetBSD 1.5 ip_var.h, partial) */
+struct ipq {
+    struct { struct ipq *le_next; struct ipq **le_prev; } ipq_q; /* 0x00 */
+    u8 ipq_ttl;                     /* 0x08 */
+};
+
+/* struct ipstat (u_quad_t counters, partial) */
+struct ipstat {
+    u8 unk0[0x38];
+    u64 ips_fragdropped;            /* 0x38 */
+    u64 ips_fragtimeout;            /* 0x40 */
+};
+extern s32 D_0002D944; /* ipq_locked */
+s32 _sce_pspnet_spllock(void);
+void _sce_pspnet_splunlock(s32 s);
+static __inline s32 ipq_lock_try(void) {
+    s32 s;
+    s = _sce_pspnet_spllock();
+    if (D_0002D944) {
+        _sce_pspnet_splunlock(s);
+        return 0;
+    }
+    D_0002D944 = 1;
+    _sce_pspnet_splunlock(s);
+    return 1;
+}
+static __inline void ipq_unlock(void) {
+    s32 s;
+    s = _sce_pspnet_spllock();
+    D_0002D944 = 0;
+    _sce_pspnet_splunlock(s);
+}
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1230,6 +1270,7 @@ extern s32 D_0002C1DC;
 extern s32 D_0002C1E0;
 extern s32 D_0002C1E4;
 extern s32 D_0002C1E8;
+extern s32 D_0002C208; /* ip_maxfragpackets */
 extern s32 D_0002C228;
 extern s32 D_0002C22C;
 extern s32 D_0002C234;
@@ -1256,7 +1297,7 @@ extern s32 D_0002C538;
 extern s32 D_0002C53C;
 extern s32 D_0002C540;
 extern s32 D_0002C544;
-extern s32 D_0002C57C;
+extern s32 D_0002C57C; /* ip_nfragpackets */
 extern s32 D_0002C588;
 extern s32 D_0002C58C;
 extern s32 D_0002C590;
@@ -1279,6 +1320,9 @@ extern s32 D_0002CF00;
 extern s32 D_0002CF0C;
 extern s32 D_0002CF10;
 extern struct SceTailqHead D_0002CFF8[];
+extern s32 D_0002D944; /* ipq_locked */
+extern struct ipstat D_0002D960; /* ipstat */
+extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
 extern u8 D_0002DA50[0x170];
 extern s32 D_0002DBC0;
 extern M2C_UNK D_0002DBC8;
@@ -1324,6 +1368,7 @@ extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
+extern struct route D_0002FF98; /* ipforward_rt */
 extern u8 D_00030218[];
 extern const struct cp chap; /* chap */
 extern const struct cp *cps[IDX_COUNT]; /* cps */
@@ -1494,7 +1539,6 @@ void func_00010528(struct mbuf *m);
 s32 func_000106E0(void);
 s32 func_00010700(void);
 void func_00012684(struct in_multi *inm);
-void func_00015654(struct Unk_func_00015654_0 *arg0);
 s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
@@ -1552,9 +1596,11 @@ u8 *func_0002CC40(u8 *arg0, u8 *arg1);
 s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
 void func_0002D420();
 struct socket *getsock(s32 s);
+void icmp_send(struct mbuf *m, struct mbuf *opts);
 s32 if_rtdel(struct rtentry *rt, void *arg);
 struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr);
 struct ifaddr *ifa_ifwithladdr(struct sockaddr *addr);
+s32 in_cksum(struct mbuf *m, s32 len);
 void in_losing(struct inpcb *inp);
 s32 in_pcballoc(struct socket *so, void *v);
 s32 in_pcbbind(void *v, struct mbuf *nam);
@@ -1570,8 +1616,13 @@ void in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, s32 errno, 
 void in_pcbstate(struct inpcb *inp, s32 state);
 void in_rtchange(struct inpcb *inp, s32 errno);
 struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp);
+void ip_drain(void);
+void ip_freef();
 void ip_input(struct mbuf *m);
 s32 ip_optlen(void *inp);
+s32 ip_output(struct mbuf *m0, struct mbuf *opt, struct route *ro, s32 flags, struct ip_moptions *imo);
+struct in_ifaddr *ip_rtaddr(struct in_addr dst);
+void ip_slowtimo(void);
 void lortrequest(s32 cmd, struct rtentry *rt);
 s32 module_start(void);
 s32 module_stop(void);
