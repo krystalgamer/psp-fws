@@ -633,11 +633,11 @@ void func_000241C0(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 271)
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_000241DC);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000241DC(s32 arg0) {
     func_000205CC(arg0 - 0x3C);
 }
