@@ -62,10 +62,7 @@ s32 sceAtracReleaseAtracID(s32);
 s32 sceKernelPowerUnlock(s32);
 M2C_UNK scePaf_37219A3B(s32, s32, M2C_UNK *);
 M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
-s32 scePaf_88784487(M2C_UNK *);
-s32 scePaf_C1B0AA0D(s32);
 s32 scePaf_CD216C47(s32, M2C_UNK *);
-void *scePaf_DCE3D225(s32, M2C_UNK);
 M2C_UNK scePowerCancelRequest(...);
 s32 sce_paf_private_strlen(s32);
 

@@ -34,10 +34,7 @@
   "sceKernelPowerUnlock": "s32 sceKernelPowerUnlock(s32);",
   "scePaf_37219A3B": "M2C_UNK scePaf_37219A3B(s32, s32, M2C_UNK *);",
   "scePaf_39E62C88": "M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);",
-  "scePaf_88784487": "s32 scePaf_88784487(M2C_UNK *);",
-  "scePaf_C1B0AA0D": "s32 scePaf_C1B0AA0D(s32);",
   "scePaf_CD216C47": "s32 scePaf_CD216C47(s32, M2C_UNK *);",
-  "scePaf_DCE3D225": "void *scePaf_DCE3D225(s32, M2C_UNK);",
   "scePowerCancelRequest": "M2C_UNK scePowerCancelRequest();",
   "sce_paf_private_strlen": "s32 sce_paf_private_strlen(s32);"
  },
