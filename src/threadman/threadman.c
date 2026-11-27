@@ -209,7 +209,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000095C);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/threadman", func_0000059C);
 
-INCLUDE_ASM("nonmatchings/threadman", func_00000630);
+s32 func_00000630(SceSysmemUidCB *cb) {
+    s32 count = func_000003F0(cb, 0x800201A9);
+
+    if (count != 0) {
+        g_threadmanInfo.nextThread = NULL;
+        func_000007F4(0, 0);
+    }
+    return count;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -1159,7 +1167,17 @@ INCLUDE_ASM("nonmatchings/threadman", func_00008CB0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_000089A0);
+s32 func_000089A0(SceSysmemUidCB *cb) {
+    SceWaitQ *wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
+
+    wq->unk4 = 0;
+    if (--wq->numWaitThreads == 0) {
+        SceMsgPipe *mpp = UID_CB_TO_DATA(cb, g_threadmanInfo.uidMsgPipeType, SceMsgPipe);
+
+        mpp->unk4 = 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_000089F0);
 #endif
@@ -2161,7 +2179,13 @@ INCLUDE_ASM("nonmatchings/threadman", func_00012F30);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", sceKernelSetThreadmanLogHandler);
+s32 sceKernelSetThreadmanLogHandler(SceThreadmanLogHandler handler, SceThreadmanInfo **info) {
+    g_threadmanInfo.logHandler = handler;
+    if (info != NULL) {
+        *info = &g_threadmanInfo;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_00012FD8);
 
@@ -2183,9 +2207,37 @@ void _sceKernelExitThread(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadId);
+SceUID sceKernelGetThreadId(void) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadCurrentPriority);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x1D, ra, 0);
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    setK1(oldK1);
+    return thread->uid;
+}
+
+s32 sceKernelGetThreadCurrentPriority(void) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x1E, ra, 1, thread->currentPriority);
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    setK1(oldK1);
+    return thread->currentPriority;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetUserLevel);
 
@@ -2235,7 +2287,16 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000EF10);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000F034);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000F08C);
+void func_0000F08C(SceThread *thread) {
+    u32 prio = thread->currentPriority;
+    SceThread *pos = g_threadmanInfo.readyQueue[prio].next;
+
+    thread->prev = pos->prev;
+    pos->prev = thread;
+    g_threadmanInfo.readyPriorityMask[prio >> 5] |= 1 << (prio & 0x1F);
+    thread->next = pos;
+    thread->prev->next = thread;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000F0E4);
 

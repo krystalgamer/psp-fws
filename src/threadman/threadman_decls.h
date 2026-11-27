@@ -54,6 +54,12 @@ enum SceThreadStatus {
     THREAD_KILLED = 0x20
 };
 
+/* "MsgPipe" uid type data (partial) */
+typedef struct SceMsgPipe {
+    s32 unk0;
+    s32 unk4; /* 0x04: cleared when the last waiting thread leaves */
+} SceMsgPipe;
+
 /* "Thread" uid type data, 0x10C bytes (1.00) */
 typedef struct SceThread {
     struct SceThread *next; /* 0x00 */
@@ -114,8 +120,8 @@ typedef s32 (*SceThreadmanLogHandler)(s32 id, void *ra, s32 nargs, ...);
 typedef struct SceThreadmanInfo {
     SceThread *currentThread; /* 0x000 */
     SceThread *nextThread; /* 0x004 */
-    SceThreadQueue readyQueue[128]; /* 0x008 */
-    u32 readyPriorityMask[4]; /* 0x408 */
+    u32 readyPriorityMask[4]; /* 0x008: bit n set = readyQueue[n] not empty */
+    SceThreadQueue readyQueue[128]; /* 0x018 */
     s32 dispatchDisabled; /* 0x418 */
 #if FW_VERSION == 100
     u8 unk41C[0x430 - 0x41C];
@@ -318,8 +324,28 @@ struct Unk_func_000127F8_var_s0 {
     u32 unkC;
 };
 
-extern s32 D_00015410;
+extern char D_00014928[];
+extern char D_00014948[];
+extern char D_00014CB0[];
+extern char D_00014CBC[];
+extern char D_00014D10[];
+extern char D_00014D1C[];
+extern char D_00014D7C[];
+extern char D_00014D88[];
+extern char D_00014E18[];
+extern char D_00014E24[];
+extern char D_00014E78[];
+extern char D_00014E80[];
+extern char D_00014EDC[];
+extern char D_00014EE4[];
+extern SceSysmemUidLookupFunc D_00015390[];
+extern SceSysmemUidLookupFunc D_000153F0[];
+extern SceSysmemUidLookupFunc D_00015410[];
+extern SceSysmemUidLookupFunc D_00015428[];
+extern SceSysmemUidLookupFunc D_00015440[];
+extern SceSysmemUidLookupFunc D_00015468[];
 extern s32 D_00015470;
+extern SceSysmemUidLookupFunc D_00015480[];
 extern s32 D_00015490;
 extern s32 D_000154A8;
 extern s32 D_000154C0;
@@ -375,7 +401,7 @@ extern s32 D_00017DC8;
 extern M2C_UNK func_00015B40;
 extern SceThreadmanInfo g_threadmanInfo;
 
-M2C_UNK Kprintf(M2C_UNK *, s32, s32, s32, s32);
+s32 Kprintf(const char *fmt, ...);
 void _sceKernelExitThread(void);
 s32 _sceKernelReturnFromTimerHandler(void);
 s32 func_0000022C(s32);
@@ -425,6 +451,7 @@ s32 func_00009B94(struct Unk_func_00009B94_0 *arg0);
 s32 func_00009BBC(s32 arg0, struct Unk_func_00009BBC_1 *arg1, s32 arg2, s32 arg3);
 s32 func_0000A8A8(void *arg0);
 s32 func_0000ABD8(struct Unk_func_0000ABD8_0 *arg0);
+u64 func_0000B634(void);
 s32 func_0000BCAC(struct Unk_func_0000BCAC_0 *arg0);
 s32 func_0000DAF4(s32, s32);
 s32 func_0000DDDC(void *arg0);
@@ -455,18 +482,20 @@ s32 func_000136C0(void);
 s32 func_0001444C(void);
 M2C_UNK memset(s32, M2C_UNK, s32);
 s32 module_reboot_before(void);
+void sceKernelAssert(s32 test, s32 lvl);
 M2C_UNK sceKernelCallUIDObjCommonFunction();
 M2C_UNK sceKernelCallUIDObjFunction(s32, M2C_UNK);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
-M2C_UNK sceKernelCreateUIDtype(M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, void **);
-M2C_UNK sceKernelCreateUIDtypeInherit(M2C_UNK *, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);
+s32 sceKernelCreateUIDtype(const char *name, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
+s32 sceKernelCreateUIDtypeInherit(const char *parentName, const char *name, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
 s32 sceKernelExitDeleteThread(s32);
 s32 sceKernelExitThread(s32);
 M2C_UNK sceKernelFreePartitionMemory(s32, u8);
 void sceKernelGetKTLS(s32 arg0);
 s32 sceKernelGetSystemStatusFlag(void);
 s32 sceKernelGetThreadKTLS(s32, s32, s32);
+s32 sceKernelIsIntrContext(void);
 void * sceKernelMemset(void *, s32, u32);
 s32 sceKernelRegisterDeadThreadHandler(s32 arg0);
 M2C_UNK sceKernelReleaseExceptionHandler(M2C_UNK, M2C_UNK *);
