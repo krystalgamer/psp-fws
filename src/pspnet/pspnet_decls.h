@@ -42,7 +42,7 @@ typedef char chk_callout[(sizeof(struct callout) == 0x24) ? 1 : -1];
 #define CALLOUT_PENDING 0x0002
 TAILQ_HEAD(calloutq, callout);
 
-/* SCE per-thread info ("SceNetThreadInfo", 0x64 bytes in 1.00) */
+/* SCE per-thread info ("SceNetThreadInfo", 0x64 bytes in 1.00, 0x60 in 1.50-2.50, 0x5C from 2.60) */
 struct SceNetThreadInfo {
     TAILQ_ENTRY(SceNetThreadInfo) ti_link;      /* 0x00 on the thread list */
     SceUID ti_thid;                             /* 0x08 */
@@ -55,9 +55,23 @@ struct SceNetThreadInfo {
     struct callout ti_callout;                  /* 0x24 tsleep timeout */
     s32 ti_flags;                               /* 0x48 TI_* */
     SceUID ti_sema;                             /* 0x4C */
-    s16 ti_sleepcnt;                            /* 0x50 */
-    u8 unk52[0x64 - 0x52];
+#if FW_VERSION < 150
+    s16 ti_sleepcnt;                            /* 0x50 enter/leave nesting; ti_sema lives while > 0 */
+    u8 unk52[2];
+#endif
+#if FW_VERSION < 260
+    u8 unk50[0x10];                             /* 0x54 (1.00) / 0x50: used by pspnet_inet (waiter sockets) */
+#else
+    u8 unk50[0xC];
+#endif
 };
+#if FW_VERSION < 150
+typedef char chk_SceNetThreadInfo[(sizeof(struct SceNetThreadInfo) == 0x64) ? 1 : -1];
+#elif FW_VERSION < 260
+typedef char chk_SceNetThreadInfo[(sizeof(struct SceNetThreadInfo) == 0x60) ? 1 : -1];
+#else
+typedef char chk_SceNetThreadInfo[(sizeof(struct SceNetThreadInfo) == 0x5C) ? 1 : -1];
+#endif
 TAILQ_HEAD(SceNetThreadList, SceNetThreadInfo);
 #define TI_TIMEDOUT 0x1
 #define TI_ABORTED  0x2
@@ -164,16 +178,18 @@ extern s32 D_0000B91C;
 extern M2C_UNK D_0000BC0C;
 extern u8 D_0000BE54;
 
-void _sce_pspnet_callout_cleanup(void);
+void _sce_pspnet_callout_cleanup(struct callout *c);
 void _sce_pspnet_callout_init(struct callout *c);
 void _sce_pspnet_callout_reset(struct callout *c, u32 ticks, void (*func)(void *), void *arg);
 void _sce_pspnet_callout_reset_usec(struct callout *c, u32 usec, void (*func)(void *), void *arg);
 void _sce_pspnet_callout_stop(struct callout *c);
 s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, u8 *arg3);
 s32 *_sce_pspnet_get_selwait_addr(void);
-void _sce_pspnet_hashdone(void);
+struct SceNetThreadInfo *_sce_pspnet_get_threadinfo(SceUID thid);
+void _sce_pspnet_hashdone(void *hashtbl);
 s32 _sce_pspnet_if_nulloutput(void);
-void _sce_pspnet_ifafree(void);
+void _sce_pspnet_ifafree(void *ifa);
+struct SceNetThreadInfo *_sce_pspnet_lock_threadinfo(SceUID thid);
 void _sce_pspnet_schednetintr(s32 arg0);
 void _sce_pspnet_schednetintr_with_evf(s32 arg0);
 void _sce_pspnet_selrecord(struct Unk_sceNet_lib_92633D8D_0 *arg0, s32 *arg1);
@@ -199,13 +215,15 @@ s32 _sce_pspnet_stop_of_ipv6_module_in_netintr(void);
 s32 _sce_pspnet_stop_of_pppoe_module_in_netintr(void);
 void _sce_pspnet_tabort(struct SceNetThreadInfo *arg0);
 s32 _sce_pspnet_thread_busycount(void);
-s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *arg0, s32 arg1);
+struct SceNetThreadInfo *_sce_pspnet_thread_enter(void);
+s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *ti, s32 err);
 s32 _sce_pspnet_tiwakeup(s32, s32);
 void _sce_pspnet_unlock_threadinfo(struct SceNetThreadInfo *arg0);
 s32 func_00001B7C(void);
 void func_00001E74(void);
+s32 func_00001F0C(void);
 s32 func_00002248(void);
-s32 func_00002300(void);
+void func_00002300(void);
 void func_0000260C(void);
 void func_00002C34(void);
 s32 func_00002E8C(s32 prio, s32 stackSize);
@@ -239,6 +257,7 @@ s32 func_000079E4(void);
 M2C_UNK *func_00007BBC(void);
 s32 func_00007C0C(s32, s32);
 u8 *func_00007CC0(u8 *arg0, u8 *arg1, s32 arg2);
+void *func_00007CF4(void *s, s32 c, s32 n);
 void func_00007D60(s32 arg0, s32 arg1);
 u8 *func_00007FE8(u8 *arg0, u8 *arg1);
 s32 func_00008054(s32, s32, s32, s32, s32, s32, s32, s32);
@@ -258,17 +277,20 @@ s32 sceKernelTerminateThread(s32);
 s32 sceKernelWaitSema(s32, s32, void *);
 void sceNetAtoi(s32 arg0);
 void sceNetEtherNtostr(struct Unk_sceNetEtherNtostr_0 *arg0, s32 arg1);
-M2C_UNK sceNetFreeInternal();
+void sceNetFreeInternal(void *p);
+s32 sceNetFreeThreadinfo(SceUID thid);
 void sceNetGetMallocStat(void);
 M2C_UNK sceNetGetMallocStatInternal();
 M2C_UNK sceNetIfhandleTerm();
 s32 sceNetIfhandle_lib_0C391E9F();
 M2C_UNK sceNetIfhandle_lib_29ED84C5();
 M2C_UNK sceNetMFreem(void *);
+void *sceNetMallocInternal(u32 size);
 u8 *sceNetMemcpy(u8 *arg0, u8 *arg1, s32 arg2);
 s32 sceNetSprintf(s32, s32, s32, s32, s32, s32, s32, s32);
 u8 *sceNetStrcpy(u8 *arg0, u8 *arg1);
 s32 sceNetTerm(void);
+s32 sceNetThreadAbort(SceUID thid);
 M2C_UNK sceWlanDrv_lib_8D5F551B(M2C_UNK);
 
 #endif
