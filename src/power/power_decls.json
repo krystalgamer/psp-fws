@@ -130,14 +130,9 @@
   "SceSysEventHandler": "typedef struct SceSysEventHandler {\n    s32 size;\n    char *name;\n    s32 typeMask;\n    s32 (*handler)(s32 eventId, char *eventName, void *param, s32 *result);\n    s32 gp;\n    s32 busy;\n    struct SceSysEventHandler *next;\n    s32 reserved[9];\n} SceSysEventHandler;"
  },
  "vars": {
-  "D_00003B7C": "extern ScePowerHandlers D_00003B7C;",
-  "D_00003C60": "extern SceSysEventHandler D_00003C60;",
-  "D_00003CC0": "extern ScePower D_00003CC0;",
   "D_00003DC4": "extern s32 D_00003DC4;",
-  "D_00003E00": "extern ScePowerSwitch D_00003E00;",
   "D_00003E08": "extern s32 D_00003E08;",
   "D_00003E20": "extern s32 D_00003E20;",
-  "D_00003E40": "extern ScePowerResume D_00003E40;",
   "D_00004FC5": "extern u8 D_00004FC5;",
   "D_00004FC6": "extern u8 D_00004FC6;",
   "D_00004FC9": "extern u8 D_00004FC9;",
@@ -150,10 +145,7 @@
   "D_00006180": "extern struct D_00006180_s D_00006180;",
   "D_0000618C": "extern s32 D_0000618C;",
   "D_000061B8": "extern s32 D_000061B8;",
-  "D_00008E80": "extern ScePowerIdle D_00008E80;",
-  "D_00008F84": "extern ScePowerFrequency D_00008F84;",
   "D_00008F90": "extern s32 D_00008F90;",
-  "D_00008FC8": "extern ScePowerBattery D_00008FC8;",
   "D_00008FD4": "extern s32 D_00008FD4;",
   "D_00008FD8": "extern s32 D_00008FD8;",
   "D_00008FDC": "extern s32 D_00008FDC;",
@@ -187,6 +179,14 @@
   "D_0000B3DC": "extern s32 D_0000B3DC;",
   "D_0000B404": "extern s32 D_0000B404;",
   "D_0000B40C": "extern s32 D_0000B40C;",
-  "D_0000B7D4": "extern s32 D_0000B7D4;"
+  "D_0000B7D4": "extern s32 D_0000B7D4;",
+  "g_Battery": "extern ScePowerBattery g_Battery;",
+  "g_Power": "extern ScePower g_Power;",
+  "g_PowerFreq": "extern ScePowerFrequency g_PowerFreq;",
+  "g_PowerHandler": "extern ScePowerHandlers g_PowerHandler;",
+  "g_PowerIdle": "extern ScePowerIdle g_PowerIdle;",
+  "g_PowerSwitch": "extern ScePowerSwitch g_PowerSwitch;",
+  "g_PowerSysEv": "extern SceSysEventHandler g_PowerSysEv;",
+  "g_Resume": "extern ScePowerResume g_Resume;"
  }
 }
