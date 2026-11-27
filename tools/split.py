@@ -119,6 +119,10 @@ def fix_ld_script(ld_path: Path, config_path: Path):
                 off = sub["vram"] - base
                 text = re.sub(rf"^(\s*\.{name}_bss)( 0x[0-9A-Fa-f]+)? \(NOLOAD\)", rf"\1 0x{off:X} (NOLOAD)", text, flags=re.M)
     text = re.sub(r"^(\s*\.\w+_bss) \(NOLOAD\)", r"\1 0x0 (NOLOAD)", text, flags=re.M)
+    # cc1 puts float/double constants in .rodata.cst4/.cst8; GNU ld's default
+    # script places them right after the same object's .rodata.
+    text = re.sub(r"^(\s*)(\S+\.c\.o)\(\.rodata\);\n",
+                  r"\1\2(.rodata);\n\1\2(.rodata.cst4);\n\1\2(.rodata.cst8);\n", text, flags=re.M)
     # PRX parts are packed at their real file offsets (gaps are prxpad).
     text = re.sub(r"^\s*__romPos = ALIGN\(__romPos, \d+\);\n", "", text, flags=re.M)
     ld_path.write_text(text)
