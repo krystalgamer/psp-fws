@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_00018B54_0 {
     u8 pad0[0x20];
     s32 unk20;
@@ -1231,7 +1237,13 @@ extern M2C_UNK func_0001D2F4;
 extern M2C_UNK func_0001D518;
 extern M2C_UNK func_00038B88;
 
-M2C_UNK func_00000000();
+s32 NetAVMgr_Cleanup(void);
+s32 NetAVMgr_Init(void);
+M2C_UNK _ZdaPv(void *);
+M2C_UNK _ZdlPv(M2C_UNK **);
+s32 _Znaj(s32);
+s32 _Znwj(M2C_UNK);
+M2C_UNK func_00000000(...);
 s32 func_00000EA0(s32);
 s32 func_00000EB0(s32);
 void func_00001990(void);
@@ -1903,7 +1915,7 @@ s32 func_0004BB50(s32, s32, s32);
 s32 func_0004C108(s32);
 s32 func_0004DFF0(s32, s32, s32);
 s32 func_0004E0C0(s32, s32, s32);
-M2C_UNK func_00050620();
+M2C_UNK func_00050620(...);
 s32 func_000695B4(s32);
 M2C_UNK memset(void *, M2C_UNK, M2C_UNK);
 s32 module_start(s32 arg0, s32 arg1);
@@ -1927,8 +1939,8 @@ s32 sceKernelResumeThread(s32);
 s32 sceKernelRotateThreadReadyQueue(s32);
 s32 sceKernelSignalSema(u32, s32);
 s32 sceKernelWaitSema(u32, s32, void *);
-s32 sceMpegDelete(void *);
 M2C_UNK sceMpegBaseCscVme(s32, s32, s32, void *);
+s32 sceMpegDelete(void *);
 s32 sceNetInetAccept(s32, void *, void *);
 s32 sceNetInetBind(s32, void *, s32);
 s32 sceNetInetConnect(s32, void *, s32);
@@ -1936,7 +1948,7 @@ s32 sceNetInetGetErrno(void);
 s32 sceNetInetGetpeername(s32, void *, void *);
 s32 sceNetInetGetsockname(s32, void *, void *);
 s32 sceNetInetGetsockopt(s32, s32, s32, void *, void *);
-s32 sceNetInetInetAton();
+s32 sceNetInetInetAton(...);
 s32 sceNetInetListen(s32, s32);
 s32 sceNetInetRecv(s32, void *, u32, s32);
 s32 sceNetInetRecvfrom(s32, void *, u32, s32, void *, void *);
@@ -1950,32 +1962,17 @@ s32 sceNetInetSocket(s32, s32, s32);
 s32 sceNetThreadAbort(u32);
 M2C_UNK scePaf_3308156F(s32, s32, s32);
 M2C_UNK scePaf_3316CB7D(s32, M2C_UNK, M2C_UNK *, s32);
-s32 sce_paf_private_rand();
-M2C_UNK _ZdlPv(M2C_UNK **);
 s32 scePaf_4E8B4F27(s32);
 s32 scePaf_51618363(s32, M2C_UNK *);
-M2C_UNK sce_paf_private___assert(M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK *);
 s32 scePaf_61A8E8EC(M2C_UNK);
 M2C_UNK scePaf_6261C0A5(M2C_UNK **);
-s32 sce_paf_private_strcmp(s32, M2C_UNK *);
-M2C_UNK sce_paf_private_memset(s32 *, M2C_UNK, M2C_UNK);
-s32 sce_paf_private_atoi(s32);
 M2C_UNK scePaf_763E82C9(M2C_UNK *, M2C_UNK);
 M2C_UNK scePaf_7D4045E1(s8 *, M2C_UNK, M2C_UNK);
-M2C_UNK sce_paf_private_snprintf(s32, M2C_UNK, M2C_UNK *, s32);
 M2C_UNK scePaf_89350C40(s32);
 M2C_UNK scePaf_9479C11B(s32 *, M2C_UNK, M2C_UNK);
-M2C_UNK sce_paf_private_bzero(M2C_UNK *, M2C_UNK);
-M2C_UNK sce_paf_private_srand(s32);
-M2C_UNK _ZdaPv();
-s32 _Znwj(M2C_UNK);
-s32 scePaf_C1B0AA0D();
-M2C_UNK sce_paf_private_printf(M2C_UNK *, M2C_UNK *);
-s32 scePaf_C9F53C2F();
-s32 sce_paf_private_strlen();
-M2C_UNK scePaf_CCFF20ED();
-s32 _Znaj(s32);
-M2C_UNK sce_paf_private_memcpy(s32, s32, s32);
+s32 scePaf_C1B0AA0D(...);
+s32 scePaf_C9F53C2F(...);
+M2C_UNK scePaf_CCFF20ED(...);
 s32 sceRtcGetCurrentTick(void *);
 void sceVshLftvMw_00070401(void);
 void sceVshLftvMw_01CCE03C(void);
@@ -1993,9 +1990,22 @@ s32 sceVshLftvMw_77C766AF(void);
 void sceVshLftvMw_90F61DE5(void);
 void sceVshLftvMw_AEAC8F33(void);
 s32 sceVshLftvMw_B35F5B54(void);
-s32 NetAVMgr_Cleanup(void);
 s32 sceVshLftvMw_C76755BE(void);
 void sceVshLftvMw_F094575C(void);
-s32 NetAVMgr_Init(void);
+M2C_UNK sce_paf_private___assert(M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK *);
+s32 sce_paf_private_atoi(s32);
+M2C_UNK sce_paf_private_bzero(M2C_UNK *, M2C_UNK);
+M2C_UNK sce_paf_private_memcpy(s32, s32, s32);
+M2C_UNK sce_paf_private_memset(s32 *, M2C_UNK, M2C_UNK);
+M2C_UNK sce_paf_private_printf(M2C_UNK *, M2C_UNK *);
+s32 sce_paf_private_rand(...);
+M2C_UNK sce_paf_private_snprintf(s32, M2C_UNK, const char *, s32);
+M2C_UNK sce_paf_private_srand(s32);
+s32 sce_paf_private_strcmp(s32, const char *);
+s32 sce_paf_private_strlen(...);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
