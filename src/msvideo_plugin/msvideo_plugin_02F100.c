@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags[150]: -O2 */
 /* cflags[100]: -O2 */
 /* cflags: -O1 */

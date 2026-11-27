@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags[100]: -O2 */
 /* cflags: -Os */
 #include "common.h"

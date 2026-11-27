@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
@@ -1011,7 +1012,7 @@ s32 func_0001F080(void **arg0) {
     s32 var_v1;
 
     var_v1 = -1;
-    if (func_00039C34(arg0, &sp0) == 0) {
+    if (func_00039C34(arg0, (s32*) &sp0) == 0) {
         var_v1 = sp0 != 0;
     }
     return var_v1;

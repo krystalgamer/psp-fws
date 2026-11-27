@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
@@ -219,7 +220,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_00522C", func_00006904);
 
 #if FW_VERSION < 201
 s32 func_00005800(void) {
-    void *sp0;
+    s32 sp0;
     s32 var_v1;
 
     var_v1 = 0;
@@ -230,7 +231,7 @@ s32 func_00005800(void) {
 }
 #else
 s32 func_00006988(void) {
-    void *sp0;
+    s32 sp0;
     s32 var_v1;
 
     var_v1 = 0;

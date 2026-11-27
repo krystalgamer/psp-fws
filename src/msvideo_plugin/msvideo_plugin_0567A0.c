@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
@@ -847,12 +848,12 @@ void func_0005AD3C(void) {
 }
 
 void func_0005AD5C(M2C_UNK **arg0) {
-    func_00059F54(arg0);
+    func_00059F54((Unk_func_00059F54_0*) arg0);
     *arg0 = &D_000658B0;
 }
 
 void func_0005AD8C(M2C_UNK **arg0) {
-    func_00059F54(arg0);
+    func_00059F54((Unk_func_00059F54_0*) arg0);
     *arg0 = &D_000658B0;
 }
 

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
@@ -490,7 +491,7 @@ void func_0005E480(struct Unk_func_0005E480_0 *arg0) {
 void func_0005E4B4(struct Unk_func_0005E4B4_0 *arg0) {
     arg0->unk0 = 8;
     if (arg0->unk8 != 0) {
-        func_0005E504(&arg0->unk8);
+        func_0005E504((Unk_func_0005E504_0*) &arg0->unk8);
         arg0->unk0 = (s32) (arg0->unk0 + arg0->unk8);
     }
 }
