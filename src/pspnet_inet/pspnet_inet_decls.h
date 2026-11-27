@@ -758,6 +758,26 @@ struct tcpcb {
 #define TCPTV_PERSMAX 120
 #define TCP_MAXRXTSHIFT 12
 
+/* SCE: a socket used by an API call is linked on the calling thread's waiter */
+#define SO_WAITER_ATTACH(w, so) do { \
+    (so)->so_waiter = (w); \
+    (so)->so_selnext = (w)->sockets; \
+    (w)->sockets = (so); \
+} while (0)
+#define SO_WAITER_DETACH(w, so) do { \
+    (so)->so_waiter = NULL; \
+    if ((w)->sockets == (so)) { \
+        (w)->sockets = (so)->so_selnext; \
+    } else { \
+        struct socket *_p; \
+        for (_p = (w)->sockets; _p != NULL && _p->so_selnext != (so); _p = _p->so_selnext) { \
+        } \
+        if (_p != NULL) { \
+            _p->so_selnext = (so)->so_selnext; \
+        } \
+    } \
+} while (0)
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1030,6 +1050,7 @@ extern s32 D_0002C1E8;
 extern s32 D_0002C228;
 extern s32 D_0002C22C;
 extern s32 D_0002C234;
+extern s32 D_0002C270;
 extern s32 D_0002C30C;
 extern s32 D_0002C310;
 extern s32 D_0002C314;
@@ -1059,6 +1080,7 @@ extern s32 D_0002C588;
 extern s32 D_0002C58C;
 extern s32 D_0002C590;
 extern s32 D_0002C594;
+extern s32 D_0002C5B4;
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
 extern s32 *D_0002C5BC;
 extern u32 D_0002C5D4; /* tcp_iss_seq */
@@ -1085,6 +1107,7 @@ extern s32 D_0002CF10;
 extern struct SceTailqHead D_0002CFF8[];
 extern TAILQ_HEAD(, in_ifaddr) D_0002D928; /* in_ifaddr */
 extern struct ifqueue D_0002D930; /* ipintrq, exported by sceNetInet_lib_D7928A6D */
+extern u8 D_0002DA50[0x170];
 extern s32 D_0002DBC0;
 extern M2C_UNK D_0002DBC8;
 extern struct Unk_func_00013ED4_0 D_0002DC10;
@@ -1100,6 +1123,9 @@ extern s32 D_0002E5F0;
 extern s32 D_0002E798;
 extern s32 D_0002E79C;
 extern s32 D_0002E7A4;
+extern struct sockaddr_in D_0002E834 __attribute__((aligned(4)));
+extern struct sockaddr_in D_0002E844 __attribute__((aligned(4)));
+extern struct sockaddr_in D_0002E854 __attribute__((aligned(4)));
 extern s32 D_0002E8D8;
 extern u32 D_0002E8F8;
 extern s32 D_0002E918;
@@ -1151,8 +1177,8 @@ M2C_UNK _sce_pspnet_stop_of_inet_module_in_ifhandle_ether();
 M2C_UNK _sce_pspnet_stop_of_inet_module_in_netintr();
 M2C_UNK _sce_pspnet_stop_of_inet_module_in_sched();
 M2C_UNK _sce_pspnet_stop_of_pppoe_module_in_netintr();
-s32 _sce_pspnet_thread_enter(void);
-s32 _sce_pspnet_thread_leave(s32 t, s32 error);
+struct SceNetInetWaiter *_sce_pspnet_thread_enter(void);
+s32 _sce_pspnet_thread_leave(struct SceNetInetWaiter *w, s32 error);
 s32 _sce_pspnet_tsleep(void *chan, s32 timo);
 void _sce_pspnet_wakeup(void *chan);
 void func_00001320(void);
@@ -1207,6 +1233,7 @@ void func_00005A78(struct socket *so);
 void func_00005AB8(struct socket *so);
 s32 func_00005B8C(void);
 s32 func_00005D70(void);
+s32 func_00007490(struct mbuf **mp, const void *buf, s32 buflen, s32 type);
 void func_000076C4(s32 arg0, s32 arg1, s32 arg2);
 void func_000076E0(s32 arg0, s32 arg1, s32 arg2);
 void func_00007A88(s32 arg0, s32 arg1, s32 arg2);
@@ -1249,12 +1276,15 @@ s32 func_00009B0C(void);
 void func_00009B24(void);
 void func_00009B5C(void);
 s32 func_00009B84();
+struct radix_node *func_0000A144(void *v_arg, struct radix_node_head *head);
+struct radix_node *func_0000A61C(void *n_arg, s32 search, s32 skip);
+struct radix_node *func_0000B6C0(void *v_arg, void *m_arg, struct radix_node_head *head);
 struct rtentry *func_0000BA10(struct sockaddr *dst, s32 report);
 s32 func_0000BEE0(s32 req, void *dst, void *gateway, void *netmask, s32 flags, struct rtentry **ret_nrt);
 s32 func_0000C998(s32, s32, s32);
 void func_0000CE98(void *arg);
 s32 func_0000D128(u32 cmd, void *data);
-s32 func_0000D15C(s32);
+void func_0000D15C(struct rtentry *rt);
 s32 func_0000D1F4(void);
 void func_0000D25C(s32 *arg0, s32 arg1);
 s32 func_0000D264(void *arg0, s32 arg1);
@@ -1263,6 +1293,7 @@ s32 func_0000D338(struct Unk_func_0000D338_0 *arg0, s32 arg1);
 s32 func_0000D378(s32);
 void func_0000DD34(s32 arg0, void *arg1, void *arg2);
 void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0000DDCC_2 *arg2);
+void func_0000E318(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error);
 s32 func_0000E3F0(s32);
 s32 func_0000E448(s32, s32);
 s32 func_0000E4E4(s32, s32);
@@ -1287,11 +1318,13 @@ void func_00012684(struct in_multi *inm);
 void func_000138B4(struct Unk_func_000138B4_0 *arg0);
 void func_00013ED4(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2);
 void func_00014614(void *a, SceNetBytes4 addr, s32 c, void *d);
+void func_00014710(struct inpcb *inp);
 void func_0001486C(struct mbuf *m);
 void func_00015654(struct Unk_func_00015654_0 *arg0);
 s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
+void func_0001A49C(void);
 void func_0001A548(struct rtentry *rt);
 s32 func_0001A714(s32, s32);
 void func_0001A8AC(void);

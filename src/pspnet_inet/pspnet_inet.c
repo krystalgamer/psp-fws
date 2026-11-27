@@ -1150,12 +1150,12 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000084B4);
 
 #if FW_VERSION < 201
 s32 sceNetInetClose(s32 s) {
-    s32 t;
+    struct SceNetInetWaiter *t;
     struct socket *so;
     s32 error;
 
     t = _sce_pspnet_thread_enter();
-    if (t == 0) {
+    if (t == NULL) {
         return -1;
     }
     so = func_00005700(s);
@@ -1171,12 +1171,12 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetClose);
 
 #if FW_VERSION < 201
 s32 sceNetInetCloseWithRST(s32 s) {
-    s32 t;
+    struct SceNetInetWaiter *t;
     struct socket *so;
     s32 error;
 
     t = _sce_pspnet_thread_enter();
-    if (t == 0) {
+    if (t == NULL) {
         return -1;
     }
     so = func_00005700(s);
@@ -1194,12 +1194,12 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetCloseWithRST);
 #if FW_VERSION < 201
 s32 sceNetInetSocketAbort(s32 s) {
     s32 error = 0;
-    s32 t;
+    struct SceNetInetWaiter *t;
     s32 x;
     struct socket *so;
 
     t = _sce_pspnet_thread_enter();
-    if (t == 0) {
+    if (t == NULL) {
         return -1;
     }
     x = _sce_pspnet_spllock();
@@ -1582,7 +1582,24 @@ struct radix_node *func_0000B580(void *v_arg, struct radix_node *head, void *m_a
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000B5E0);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000B6C0);
+struct radix_node *func_0000B6C0(void *v_arg, void *m_arg, struct radix_node_head *head) {
+    struct radix_node *x;
+    char *netmask = NULL;
+
+    if (m_arg) {
+        if ((x = func_0000A61C(m_arg, 1, head->rnh_treetop->rn_off)) == NULL) {
+            return NULL;
+        }
+        netmask = x->rn_key;
+    }
+    x = func_0000A144(v_arg, head);
+    if (x && netmask) {
+        while (x && x->rn_mask != netmask) {
+            x = x->rn_dupedkey;
+        }
+    }
+    return x;
+}
 
 struct radix_node *func_0000B774(void *v, s32 b, struct radix_node nodes[2]) {
     struct radix_node *tt = nodes, *t = tt + 1;
@@ -2525,9 +2542,32 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014450);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014614);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
+void func_00014710(struct inpcb *inp) {
+    struct rtentry *rt;
+    struct rt_addrinfo info;
+
+    if ((rt = inp->inp_route.ro_rt)) {
+        inp->inp_route.ro_rt = NULL;
+        __builtin_memset(&info, 0, sizeof(info));
+        info.rti_info[0] = &inp->inp_route.ro_dst;
+        info.rti_info[1] = rt->rt_gateway;
+        info.rti_info[2] = (struct sockaddr *)rt->rt_nodes[0].rn_mask;
+        func_0000E318(5, &info, rt->rt_flags, 0);
+        if (rt->rt_flags & RTF_DYNAMIC) {
+            (void)func_0000BEE0(RTM_DELETE, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, rt->rt_flags, NULL);
+        } else {
+            func_0000D15C(rt);
+        }
+    }
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014710);
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000141EC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014258);
@@ -2853,7 +2893,21 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00019BCC);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001A49C);
+void func_0001A49C(void) {
+    D_0002C270 = 8;
+    D_0002C5B4 = 0;
+    func_0002C94C(D_0002DA50, 0, 0x170);
+    __builtin_memset(&D_0002E834, 0, sizeof(D_0002E834));
+    D_0002E834.sin_len = sizeof(struct sockaddr_in);
+    D_0002E834.sin_family = AF_INET;
+    __builtin_memset(&D_0002E844, 0, sizeof(D_0002E844));
+    D_0002E844.sin_len = sizeof(struct sockaddr_in);
+    D_0002E844.sin_family = AF_INET;
+    __builtin_memset(&D_0002E854, 0, sizeof(D_0002E854));
+    D_0002E854.sin_len = sizeof(struct sockaddr_in);
+    D_0002E854.sin_family = AF_INET;
+    D_0002C5B8.lh_first = NULL;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
