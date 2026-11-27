@@ -184,7 +184,7 @@ void func_00001BC8(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 271
 void func_00001BE4(struct SceNetInetWaiter *w) {
     struct socket *so;
     for (so = w->sockets; so != NULL; so = so->so_selnext) {
@@ -1055,7 +1055,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetsockopt);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetsockname);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 s32 sceNetInetGetpeername(s32 s, struct sockaddr *asa, u32 *alen) {
     struct SceNetInetWaiter *w;
     struct socket *so;
@@ -1141,7 +1141,6 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetPoll);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00007D50);
 
-#if FW_VERSION == 100
 void func_00007E00(struct SceNetInetWaiter *w, struct SceNetInetPollfd *fds, s32 n) {
     struct socket *so;
     s32 i;
@@ -1154,9 +1153,6 @@ void func_00007E00(struct SceNetInetWaiter *w, struct SceNetInetPollfd *fds, s32
         }
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00007E00);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00007E78);
 
@@ -1166,9 +1162,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_B3FF98EB);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetSocket);
-#endif
-
-#if FW_VERSION == 100
+#else
 s32 sceNetInetBind(s32 s, const struct sockaddr *name, s32 namelen) {
     struct SceNetInetWaiter *w;
     struct socket *so;
@@ -1194,13 +1188,7 @@ s32 sceNetInetBind(s32 s, const struct sockaddr *name, s32 namelen) {
     }
     return _sce_pspnet_thread_leave(w, error);
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetBind);
-#endif
-
-#if FW_VERSION == 100
 s32 sceNetInetListen(s32 s, s32 backlog) {
     struct SceNetInetWaiter *w;
     struct socket *so;
@@ -1219,11 +1207,11 @@ s32 sceNetInetListen(s32 s, s32 backlog) {
     }
     return _sce_pspnet_thread_leave(w, error);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetListen);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetListen);
+#else
 s32 sceNetInetSend(s32 s, const void *buf, u32 len, s32 flags) {
     struct SceNetInetWaiter *w;
     struct msghdr msg;
@@ -1321,9 +1309,7 @@ s32 sceNetInetRecvfrom(s32 s, void *buf, u32 len, s32 flags, struct sockaddr *fr
     }
     return retsize;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 sceNetInetShutdown(s32 s, s32 how) {
     struct SceNetInetWaiter *w;
     struct socket *so;
@@ -1342,7 +1328,9 @@ s32 sceNetInetShutdown(s32 s, s32 how) {
     }
     return _sce_pspnet_thread_leave(w, error);
 }
-#else
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetShutdown);
 #endif
 
