@@ -273,19 +273,11 @@ void func_00015670(s32 arg0) {
 void func_0001568C(s32 arg0) {
     func_00016D60(arg0 - 0x3C);
 }
-#endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/msvideo_plugin_00013558", func_000156A8);
-#endif
-
-#if FW_VERSION == 150
 void func_000156A8(s32 arg0) {
     func_000125EC(arg0 - 0x3C);
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000156C4(s32 arg0, s32 arg1) {
     func_000125F4(arg0 - 0x3C, arg1);
 }
