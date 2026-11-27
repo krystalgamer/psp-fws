@@ -380,18 +380,7 @@ M2C_UNK func_0000C7B0(...);
 s32 module_stop(void);
 void sceGumDrawArray(s32, s32, s32, void *, void *);
 s32 sceKernelDeleteSema(s32);
-M2C_UNK scePaf_0AC29BBC(M2C_UNK, M2C_UNK, s32, M2C_UNK, s32);
-M2C_UNK scePaf_1A314D65(s32);
-M2C_UNK scePaf_291EBB2C(s32);
-M2C_UNK scePaf_2A5E7BE9(s32);
-M2C_UNK scePaf_6261C0A5(...);
-M2C_UNK scePaf_6A82A8C6(void **, M2C_UNK);
-M2C_UNK scePaf_6FAE0AC1(s32);
-M2C_UNK scePaf_79542EEA(s32);
-M2C_UNK scePaf_7EA9C56C(s32);
-M2C_UNK scePaf_9479C11B(s32, M2C_UNK, s32);
-M2C_UNK scePaf_9E0CA28F(void **);
-M2C_UNK scePaf_BB8E4390(s32);
+M2C_UNK sce_paf_private_memset(s32, M2C_UNK, s32);
 
 #ifdef __cplusplus
 }
