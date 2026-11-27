@@ -9,7 +9,7 @@ void func_00000438(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_00000488(arg0, arg1, var_v0);
 }
@@ -32,9 +32,9 @@ void sceVshCommonGui_6F4C9FDB(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_88784487(&D_00003264);
+    temp_v0 = _ZN3paf4View4FindEPKc(&D_00003264);
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_DCE3D225(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(), 0x6C)();
         }

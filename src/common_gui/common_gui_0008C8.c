@@ -101,7 +101,7 @@ INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00001100);
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_605DF0DB);
 
 void sceVshCommonGui_8F414E35(s32 *arg0) {
-    scePaf_CA8AFB1B(*arg0);
+    _ZN3paf10MessageBox10HideDeleteEv(*arg0);
 }
 
 void sceVshCommonGui_82535BC4(s32 *arg0) {
