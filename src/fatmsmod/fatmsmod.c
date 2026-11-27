@@ -600,11 +600,11 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000034F8);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003514);
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003530);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00003530(s32 arg0) {
     func_00002778(arg0);
 }
@@ -628,49 +628,23 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000035D4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003624);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003674);
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000036A8);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 201
 void func_000036A8(void) {
     func_00000BFC();
 }
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000036C4);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 201
 void func_000036C4(s32 arg0, s32 arg1, s32 arg2) {
     func_00000DC8(arg0, arg1, arg2);
 }
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000036E0);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 201
 void func_000036E0(s32 arg0, s32 arg1, s32 arg2) {
     func_00000ED4(arg0, arg1, arg2);
 }
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000036FC);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 201
 void func_000036FC(void) {
     func_00000EF8();
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003718);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000374C);
@@ -680,19 +654,11 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00003780);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000037B4);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000037E8);
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000381C);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 201
 void func_0000381C(void) {
     func_00001CD0();
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003838);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000386C);
@@ -704,19 +670,11 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000038D4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003908);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003924);
-#endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00003940);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 201
 void func_00003940(s32 arg0) {
     func_00002778(arg0);
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000395C);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000039D0);
