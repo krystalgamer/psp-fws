@@ -16,14 +16,70 @@ typedef struct {
     u8 pad4[0x48];
 } FatmsMountInfo;
 
-/* Per-iob private block checked by check_heap_alive: mode 0x10 = file (heap at 0x6C), 2 = directory (heap at 0x8). */
+/* Per-iob private block checked by check_heap_alive: mode 0x10 = file, 2 = directory.
+   2.60+ moved the file's heap/pool id to 0xC. */
 typedef struct {
     s32 mode; /* 0x0 */
-    s32 unk4; /* 0x4 */
+    s32 unk4; /* 0x4, PrFILE file/dir handle */
     SceUID dirHeap; /* 0x8 */
+#if FW_VERSION >= 260
+    SceUID fileHeap; /* 0xC */
+#else
     u8 padC[0x60];
     SceUID fileHeap; /* 0x6C */
+#endif
 } FatmsPrivate;
+
+/* PrFILE set-time arguments (stub cmd 0x22). */
+typedef struct {
+    u32 year;
+    u32 month;
+    u32 day;
+} PfDate;
+
+typedef struct {
+    u32 hour;
+    u32 minute;
+    u32 second;
+} PfTime;
+
+/* PrFILE directory search record (stub cmd 6), kept at FatmsPrivate + 0x568. */
+typedef struct {
+    u8 pad0[0x118];
+    u16 mtime; /* 0x118 */
+    u16 mdate; /* 0x11A */
+    u32 size; /* 0x11C */
+    s8 attr; /* 0x120 */
+    char shortName[13]; /* 0x121 */
+    char longName[0x20E]; /* 0x12E */
+    u16 ctime; /* 0x33C */
+    u16 cdate; /* 0x33E */
+    u16 adate; /* 0x340 */
+} PfDirInfo;
+
+/* PrFILE open-file record (partial). */
+typedef struct {
+    u8 pad0[0x20];
+    u32 pos; /* 0x20, current file position */
+} PfFile;
+
+/* PrFILE stat result (stub cmd 0xC), FAT DOS date/time words. */
+typedef struct {
+    u16 mtime; /* 0x0 */
+    u16 pad2;
+    u16 mdate; /* 0x4 */
+    u16 pad6;
+    u32 size; /* 0x8 */
+    s8 attr; /* 0xC */
+    u8 padD[3];
+    u16 ctime; /* 0x10 */
+    u16 pad12;
+    u16 cdate; /* 0x14 */
+    u16 pad16;
+    u16 adate; /* 0x18 */
+    u16 pad1A;
+    u8 pad1C[4];
+} PfStat;
 
 typedef int SceMode;
 typedef s64 SceOff;
@@ -155,6 +211,33 @@ typedef struct {
     u8 body[sizeof(SceMsStubMsg)]; /* 0x8 */
 } SceMsStubPacket;
 
+typedef struct {
+    u16 year;
+    u16 month;
+    u16 day;
+    u16 hour;
+    u16 minute;
+    u16 second;
+    u32 microsecond;
+} ScePspDateTime;
+
+struct SceIoStat {
+    SceMode st_mode; /* 0x0 */
+    u32 st_attr; /* 0x4 */
+    SceOff st_size; /* 0x8 */
+    ScePspDateTime st_ctime; /* 0x10 */
+    ScePspDateTime st_atime; /* 0x20 */
+    ScePspDateTime st_mtime; /* 0x30 */
+    u32 st_private[6]; /* 0x40 */
+};
+
+struct SceIoDirent {
+    SceIoStat d_stat; /* 0x0 */
+    char d_name[256]; /* 0x58 */
+    void *d_private; /* 0x158 */
+    s32 dummy; /* 0x15C */
+};
+
 struct Unk_Unk_func_00013798_0_FA78 {
     u8 pad0[0x40];
     u32 unk40;
@@ -197,6 +280,13 @@ struct Unk_func_00013798_0 {
     s32 unkFAE0;
 };
 
+/* "prfile_mod.c:%s:driver deleted\n" (shared rodata entry, label differs per version) */
+#if FW_VERSION >= 250 && FW_VERSION < 282
+#define STR_DRIVER_DELETED D_000243D8
+#else
+#define STR_DRIVER_DELETED D_00023B8C
+#endif
+
 extern const char D_00014704[]; /* "FATMS" */
 extern u8 D_000193F8;
 extern u8 D_000193FC;
@@ -222,6 +312,7 @@ extern M2C_UNK D_0001BCC4;
 extern s32 D_0001BCE4;
 extern char D_00023B8C[]; /* "prfile_mod.c:%s:driver deleted\n" */
 extern M2C_UNK D_0002411C;
+extern char D_000243D8[]; /* 2.50-2.71 "prfile_mod.c:%s:driver deleted\n" */
 extern void *D_000276E4;
 extern s32 (*D_000276E8)(s32, s32, s32);
 extern s32 (*D_000276EC)(s32, s32, s32);
@@ -250,11 +341,17 @@ s32 Kprintf(const char *fmt, ...);
 s32 add_drive_name(char *buf, const char *name, s32 unit);
 s32 check_heap_alive(FatmsPrivate *priv);
 s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv);
+s32 df_chstat(); /* 1.00 df_chstat */
 s32 df_close(); /* 1.00 df_close(SceIoIob *) */
 s32 df_dclose(); /* 1.00 df_dclose */
+s32 df_dread(); /* 1.00 df_dread */
+s32 df_getstat(); /* 1.50+ take one more trailing argument */
 s32 df_ioctl(); /* 1.00 df_ioctl */
+s32 df_mkdir(); /* 1.50+ take one more trailing argument */
 s32 df_read(); /* 1.00 df_read(SceIoIob *, void *, SceSize) */
-s32 df_rename(); /* 1.00 df_rename */
+s32 df_remove(); /* 1.50+ take one more trailing argument */
+s32 df_rename(); /* 1.50+ take one more trailing argument */
+s32 df_rmdir(); /* 1.50+ take one more trailing argument */
 s32 df_write(); /* 1.00 df_write(SceIoIob *, const void *, SceSize) */
 s32 free_heap(SceUID heap, void *mem);
 s32 free_heap_all(void);
@@ -269,31 +366,30 @@ M2C_UNK func_00000E00();
 M2C_UNK func_00000EF8();
 s32 func_00001834(u32 attr);
 char *func_00001A18(char *s);
+s32 func_00001DCC(FatmsPrivate *priv, SceIoDirent *dirent);
 s32 func_00001F98(void);
 s32 func_000026FC(void);
 M2C_UNK func_00002708();
 s32 func_00002778(s32);
 M2C_UNK func_00002880();
 s32 func_00002B48(void);
-s32 func_00002B98(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00002CA0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00002B98(); /* 1.50+: stub cmd 0xB */
 s32 func_00002D24(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00002EFC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00002F8C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 void func_0000322C(void);
 void func_00003248(void);
 void func_0000326C(void);
-void func_00003298(void);
+void func_00003298(SceIoIob *iob);
 void func_000032B4(s32 arg0, s32 arg1, s32 arg2);
 void func_000032D0(s32 arg0, s32 arg1, s32 arg2);
 void func_000032EC(void);
-void func_0000340C(void);
+void func_0000340C(SceIoIob *iob);
 void func_00003530(s32 arg0);
-void func_000036A8(void);
+void func_000036A8(SceIoIob *iob);
 void func_000036C4(s32 arg0, s32 arg1, s32 arg2);
 void func_000036E0(s32 arg0, s32 arg1, s32 arg2);
 void func_000036FC(void);
-void func_0000381C(void);
+void func_0000381C(SceIoIob *iob);
 void func_00003940(s32 arg0);
 s32 func_00003A34(s32 unit, s32 stat);
 s32 func_00003CD8(void);
@@ -303,11 +399,11 @@ s32 func_00004600(void);
 s32 func_0000465C(void);
 void func_0000475C(void);
 void func_00004778(void);
-void func_000047C8(void);
+void func_000047C8(SceIoIob *iob);
 void func_000047E4(void);
 void func_00004800(void);
 void func_0000481C(void);
-void func_00004950(void);
+void func_00004950(SceIoIob *iob);
 void func_00004A58(void);
 void func_00004A74(void);
 s32 func_00004B88(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
@@ -315,14 +411,12 @@ s32 func_00004BBC(s32 arg0);
 s32 func_00004C58(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00004E68(s8 *arg0);
 s32 func_00004F40(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00004F88(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00005068(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_000050E4(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00005118(void);
 s32 func_00005124(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_000051F8(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00005238(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_0000527C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_000052D0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 void func_000053FC(void);
 s32 func_0000565C(void);
@@ -490,18 +584,25 @@ s32 sceKernelReceiveMbx(SceUID mbx, void **msg, u32 *timeout);
 s32 sceKernelSendMbx(SceUID mbx, void *msg);
 s32 sceKernelSetEventFlag(SceUID evf, u32 bits);
 s32 sceKernelWaitEventFlag(SceUID evf, u32 bits, u32 wait, u32 *outBits, u32 *timeout);
+s32 sceRtcSetDosTime(ScePspDateTime *date, u32 dosTime);
 char *strcat(char *d, const char *s);
 u32 strlen(const char *s);
+char *strncpy(char *d, const char *s, SceSize n);
+s32 stub_pf_chdmod(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_chmod(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_errnum(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_fclose(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_feof(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_ferror(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_find(); /* stub cmd 6: dir find first (pattern != NULL) / next */
 s32 stub_pf_fopen(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_fread(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_fstat(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_fwrite(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_mkdir(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_remove(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_rename(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_rmdir(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_settime(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 
 #endif
