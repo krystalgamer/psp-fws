@@ -72,6 +72,8 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005F30);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_0001F6D0);
+
+__asm__(".globl _ZTV14Class_0001F6D0\n_ZTV14Class_0001F6D0 = D_0001F6D0 - 8\n");
 #endif
 
 #if FW_VERSION >= 282
@@ -91,30 +93,9 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007A2C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007BF8);
 
-void func_00007C50(M2C_UNK **arg0) {
-    *arg0 = &D_00024E28;
-    func_00011324((s32) arg0);
+Class_00024E28::~Class_00024E28() {
 }
 
-void func_00007C78(M2C_UNK **arg0) {
-    *arg0 = &D_00024E28;
-    func_00011324((s32) arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007CA0);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00007CA0(M2C_UNK **arg0) {
-    *arg0 = &D_00024E28;
-    func_00011324((s32) arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007CD8);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007D30);
@@ -170,31 +151,16 @@ void func_00009448(struct Unk_func_00009448_0 *arg0, s32 arg1) {
     arg0->unk18 = 1;
 }
 
-void func_00009480(M2C_UNK **arg0) {
-    *arg0 = &D_00024EF8;
-    func_00013D70();
-}
-
-void func_000094A8(M2C_UNK **arg0) {
-    *arg0 = &D_00024EF8;
-    func_00013D70();
-}
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_000094D0);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_000094D0(M2C_UNK **arg0) {
-    *arg0 = &D_00024EF8;
-    func_00013D70();
-    _ZdlPv(arg0);
+Class_0001F6D0::~Class_0001F6D0() {
 }
 #endif
 
 #if FW_VERSION < 103 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024E28);
+#endif
+
+#if FW_VERSION >= 282
+__asm__(".globl _ZTV14Class_00024E28\n_ZTV14Class_00024E28 = D_00024E28 - 8\n");
 #endif
 
 #if FW_VERSION < 150
@@ -319,11 +285,8 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005E78);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005EA8);
 
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005ED8);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN14Class_00024F10D1Ev);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN14Class_00024F10D0Ev);
+Class_00024F10::~Class_00024F10() {
+}
 #endif
 
 /* the key function (vfunc00) is still asm, so the vtable stays data */
@@ -386,6 +349,8 @@ void func_000063C0(void *arg0, s32 arg1) {
 
 #if FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_0001F6D0);
+
+__asm__(".globl _ZTV14Class_0001F6D0\n_ZTV14Class_0001F6D0 = D_0001F6D0 - 8\n");
 #endif
 
 #if FW_VERSION < 282
@@ -407,20 +372,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005BC0);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005C8C);
 
-void func_00005CBC(M2C_UNK **arg0) {
-    *arg0 = &D_0001F908;
-    func_00015770((s32) arg0);
-}
-
-void func_00005CE4(M2C_UNK **arg0) {
-    *arg0 = &D_0001F908;
-    func_00015770((s32) arg0);
-}
-
-void func_00005D0C(M2C_UNK **arg0) {
-    *arg0 = &D_0001F908;
-    func_00015770((s32) arg0);
-    _ZdlPv(arg0);
+Class_0001F908::~Class_0001F908() {
 }
 #endif
 
@@ -516,6 +468,8 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024F10);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
+__asm__(".globl _ZTV14Class_00024F10\n_ZTV14Class_00024F10 = D_00024F10 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_000203A0);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_000071BC);
@@ -576,30 +530,9 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007844);
 #endif
 
 #if FW_VERSION >= 282
-void func_0000AF90(M2C_UNK **arg0) {
-    *arg0 = &D_00024F40;
-    func_00015770((s32) arg0);
+Class_0001F908::~Class_0001F908() {
 }
 
-void func_0000AFB8(M2C_UNK **arg0) {
-    *arg0 = &D_00024F40;
-    func_00015770((s32) arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AFE0);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0000AFE0(M2C_UNK **arg0) {
-    *arg0 = &D_00024F40;
-    func_00015770((s32) arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B018);
 
 void func_0000B0CC(struct Unk_func_0000B0CC_0 *arg0, struct Unk_func_0000B0CC_1 *arg1) {
@@ -614,6 +547,8 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B0F4);
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B218);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024EF8);
+
+__asm__(".globl _ZTV14Class_0001F6D0\n_ZTV14Class_0001F6D0 = D_00024EF8 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024F10);
 
@@ -752,6 +687,8 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007320);
 
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_0001F908);
+
+__asm__(".globl _ZTV14Class_0001F908\n_ZTV14Class_0001F908 = D_0001F908 - 8\n");
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -768,6 +705,8 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00027544);
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000BCEC);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024F40);
+
+__asm__(".globl _ZTV14Class_0001F908\n_ZTV14Class_0001F908 = D_00024F40 - 8\n");
 
 #if FW_VERSION < 271
 __asm__(".globl _ZTV14Class_00024FC8\n_ZTV14Class_00024FC8 = D_00024F40 - 8\n");
@@ -870,6 +809,8 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00020438);
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024F40);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00020470);
+
+__asm__(".globl _ZTV14Class_00020470\n_ZTV14Class_00020470 = D_00020470 - 8\n");
 #endif
 
 #if FW_VERSION >= 282
@@ -1128,11 +1069,8 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000923C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000926C);
 
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000929C);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_000092C4);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_000092EC);
+Class_00020470::~Class_00020470() {
+}
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00009324);
 #endif
@@ -1579,29 +1517,13 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000A184);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D47C);
+#else
+Class_000250F0::~Class_000250F0() {
+}
 #endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D570);
-
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010FDC);
-#endif
-
-#if FW_VERSION < 250
-void func_00010FDC(s32 **arg0) {
-    *arg0 = &D_000250F0;
-}
-#endif
-
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010FEC);
-#endif
-
-#if FW_VERSION < 250
-void func_00010FEC(s32 **arg0) {
-    *arg0 = &D_000250F0;
-    _ZdlPv(arg0);
-}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
@@ -1676,7 +1598,9 @@ void func_00008D74(M2C_UNK **arg0) {
     *arg0 = &D_000250E0;
     func_00008E24((s32) arg0);
 }
+#endif
 
+#if FW_VERSION < 250
 void func_00008D9C(M2C_UNK **arg0) {
     *arg0 = &D_000250E0;
     func_00008E40((s32) arg0);
@@ -1684,7 +1608,12 @@ void func_00008D9C(M2C_UNK **arg0) {
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0001134C);
+void _ZN14Class_000250E0D2Ev(M2C_UNK **arg0) {
+    *arg0 = &D_000250E0;
+    func_00008E40((s32) arg0);
+}
+
+INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN14Class_000250E0D1Ev);
 #endif
 
 #if FW_VERSION < 250
@@ -1695,7 +1624,7 @@ void func_0001134C(s32 **arg0) {
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00011374);
+INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN14Class_000250E0D0Ev);
 #endif
 
 #if FW_VERSION < 250

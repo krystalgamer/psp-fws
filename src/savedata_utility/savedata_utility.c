@@ -2217,6 +2217,8 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00003EAC);
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00024E58);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00027400);
+
+__asm__(".globl _ZTV14Class_00027400\n_ZTV14Class_00027400 = D_00027400 - 8\n");
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -2273,33 +2275,28 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00001BA8);
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00001C90);
 #endif
 
-#if FW_VERSION >= 250
+#if FW_VERSION >= 250 && FW_VERSION < 282
+Class_00027400::~Class_00027400() {
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00001D3C);
-#else
+#endif
+
+#if FW_VERSION < 250
 void func_00001D3C(s32 arg0) {
     func_00002DA8(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00003DF0);
-#endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_utility", func_00003EEC);
-#endif
-
-#if FW_VERSION < 250
 void func_00003EEC(s32 arg0) {
     func_00003C60(arg0);
 }
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-void func_00008134(s32 **arg0) {
-    *arg0 = &D_00027400;
-    func_00008D9C(arg0);
-    _ZdlPv(arg0);
-}
-
 INCLUDE_ASM("nonmatchings/savedata_utility", func_0000816C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility", func_000081C4);
@@ -2311,6 +2308,8 @@ INCLUDE_ASM("nonmatchings/savedata_utility", func_00008320);
 
 #if FW_VERSION >= 250 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/savedata_utility", D_00027400);
+
+__asm__(".globl _ZTV14Class_00027400\n_ZTV14Class_00027400 = D_00027400 - 8\n");
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -2764,20 +2763,7 @@ void func_0000644C(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION < 282
-void func_00004290(M2C_UNK **arg0) {
-    *arg0 = &D_0001F6D0;
-    func_00013D70();
-}
-
-void func_000042B8(M2C_UNK **arg0) {
-    *arg0 = &D_0001F6D0;
-    func_00013D70();
-}
-
-void func_00006484(M2C_UNK **arg0) {
-    *arg0 = &D_0001F6D0;
-    func_00013D70();
-    _ZdlPv(arg0);
+Class_0001F6D0::~Class_0001F6D0() {
 }
 #endif
 
