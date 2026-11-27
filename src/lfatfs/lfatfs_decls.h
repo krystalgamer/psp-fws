@@ -91,9 +91,9 @@ typedef struct LFlashSegment LFlashSegment;
 struct LFlashSegment {
     u8 pad0[0x4];
     u16 firstLbn; /* 0x4 */
-    u8 pad6[0x2];
+    u16 firstPbn; /* 0x6 */
     u16 maxLbn; /* 0x8 */
-    u8 padA[0x2];
+    u16 maxPbn; /* 0xA */
     u16 *lpTable; /* 0xC */
     u8 pad10[0xC];
 };
@@ -325,12 +325,16 @@ struct Unk_func_0000A3DC_0 {
     s32 ** unk8;
 };
 
-/* lfatfs.c wait_sema(): inlined into every UFat* entry point. */
-extern SceUID D_0000D354;
+/* lfatfs.c wait_sema() (1.00) / wait_sema_lock() (1.50+, with a power lock), inlined into every UFat* entry point. */
 extern char D_0000CF5C[];
+extern char D_0000C5B4[];
 extern char D_0000CF6C[];
 s32 Kprintf(const char *fmt, ...);
 s32 sceKernelWaitSema(SceUID semaid, s32 signal, u32 *timeout);
+s32 sceKernelSignalSema(SceUID semaid, s32 signal);
+s32 sceKernelPowerLock(s32);
+s32 sceKernelPowerUnlock(s32);
+#if FW_VERSION == 100
 static inline s32 wait_sema(SceUID sema) {
     s32 ret = sceKernelWaitSema(sema, 1, NULL);
 
@@ -339,6 +343,28 @@ static inline s32 wait_sema(SceUID sema) {
     }
     return ret;
 }
+
+static inline void signal_sema(SceUID sema) {
+    sceKernelSignalSema(sema, 1);
+}
+#else
+static inline s32 wait_sema(SceUID sema) {
+    s32 ret;
+
+    sceKernelPowerLock(0);
+    ret = sceKernelWaitSema(sema, 1, NULL);
+    if (ret != 0) {
+        Kprintf(D_0000C5B4, D_0000CF6C, ret);
+        sceKernelPowerUnlock(0);
+    }
+    return ret;
+}
+
+static inline void signal_sema(SceUID sema) {
+    sceKernelSignalSema(sema, 1);
+    sceKernelPowerUnlock(0);
+}
+#endif
 
 extern char D_0000C56C[];
 extern char D_0000C5B4[];
@@ -351,6 +377,8 @@ extern char D_0000CF84[];
 extern char D_0000CF9C[];
 extern char D_0000D03C[];
 extern char D_0000D084[];
+extern char D_0000D09C_v152[];
+extern char D_0000D13C[];
 extern char D_0000D22C[];
 extern SceUID D_0000D354;
 extern volatile SceUID D_0000D360;
@@ -361,14 +389,18 @@ extern void *D_0000D614;
 extern s32 D_0000D72C;
 extern char D_0000D874[];
 extern char D_0000D8C0[];
+extern s32 D_0000D980;
 extern s32 D_0000D984;
 extern M2C_UNK D_0000DA50;
 extern char D_0000DCE0[];
 extern M2C_UNK D_0000E050;
 extern s32 D_0000E094;
+extern volatile SceUID D_0000E0A0;
 extern char D_0000E160[];
 extern s32 D_0000E3D4;
 extern s32 D_0000E554;
+extern s32 D_0000E650;
+extern s32 D_0000E6C0;
 extern void *D_0000E80C;
 extern void **D_0000E810;
 extern void *D_0000E814;
@@ -379,15 +411,19 @@ extern M2C_UNK D_0000ECA8;
 extern void *D_0000EDAC;
 extern void **D_0000EDB0;
 extern void *D_0000EDB4;
+extern s32 D_0000EDF0;
 extern LFlashDev D_0000EED0;
 
 s32 Kprintf(const char *fmt, ...);
+void *Malloc(SceSize size);
 s32 UFatChdir(SceIoIob *iob, char *name);
 s32 UFatDclose(void *arg0);
 s32 UFatRename(SceIoIob *iob, const char *oldname, const char *newname);
 s32 bcmp(const void *a, const void *b, SceSize n);
 void bcopy(const void *src, void *dst, SceSize n);
 void bzero(void *s, SceSize n);
+s32 del_lflash_driver(void);
+s32 df_close(SceIoIob *iob);
 s32 df_dclose(void *arg0);
 s32 df_dread(void *arg0);
 s32 df_mkdir(SceIoIob *iob, char *name);
@@ -411,6 +447,8 @@ s32 func_00001C48(void);
 s32 func_0000286C(struct Unk_func_0000286C_0 *arg0);
 s32 func_000028E8(void);
 s32 func_00002C24(void);
+s32 func_00002C6C(SceIoIob *iob, const char *oldname, const char *newname);
+s32 func_00002CAC(SceIoIob *iob, char *name);
 void func_00002D98(void *arg0);
 void func_00002DC4(s32 arg0);
 void func_00002DE0(void *arg0);
@@ -441,7 +479,6 @@ void func_00003C40(struct Unk_func_00003C40_0 *arg0);
 void func_00003C6C(s32 *args);
 void func_00003CA0(s32 *args);
 s32 func_00003F94(s32, s32);
-s32 func_00004258(s32, s32);
 s32 func_000042D8(s32, s32, s32, s32);
 s32 func_00004398(s32, s32);
 s32 func_00004458(s32, s32, s32);
@@ -466,7 +503,6 @@ s32 func_00008958(void);
 void func_000089C0(void);
 void func_000089C8(void);
 s32 func_00008A4C(s32);
-s32 func_00008B14(s32);
 s32 func_00008C9C(s32);
 s32 func_00009150(void);
 s32 func_000091C0(void);
@@ -483,6 +519,7 @@ s32 func_0000931C(void);
 void func_000093E8(void);
 void func_000093F0(void);
 void func_000093F8(void);
+s32 func_00009514(SceIoIob *iob);
 s32 func_00009638(s32);
 s32 func_000097A8(void);
 void func_00009838(void);
@@ -493,7 +530,6 @@ s32 func_00009EBC(void);
 s32 func_00009F04(void);
 s32 func_00009F74(void);
 void func_00009F94(s32 arg0);
-s32 func_00009F98(void);
 void func_0000A098(void *arg0);
 s32 func_0000A320(void);
 s32 func_0000A32C(void);
@@ -505,11 +541,14 @@ s32 func_0000A508(void);
 s32 func_0000A514(void);
 void func_0000A528(void *arg0);
 s32 func_0000A7AC(void);
+s32 func_0000ACF0(SceIoIob *iob, char *name);
+s32 func_0000AD24(SceIoIob *iob, char *name);
 s32 func_0000AF24(void);
 s32 func_0000AF30(void);
 s32 func_0000AF98(void);
 const char *func_0000B448(const char *s, s32 *out);
 void func_0000B9D4(void *arg0);
+const char *func_0000BD64(const char *s, s32 *out);
 void *memcpy(void *dst, const void *src, SceSize n);
 void *memset(void *s, s32 c, SceSize n);
 s32 module_reboot_before(void);
@@ -517,6 +556,7 @@ s32 sceIoAddDrv(SceIoDeviceTable *drv);
 s32 sceIoAssign(const char *dev1, const char *dev2, const char *dev3, s32 mode, void *unk1, s32 unk2);
 s32 sceIoClose(SceUID fd);
 s32 sceIoDelDrv(const char *name);
+s32 sceIoGetIobUserLevel(SceIoIob *iob);
 s32 sceIoIoctl(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen);
 SceOff sceIoLseek(SceUID fd, SceOff offset, s32 whence);
 SceUID sceIoOpen(const char *file, s32 flags, SceMode mode);
@@ -566,5 +606,6 @@ s32 strcmp(const char *a, const char *b);
 SceSize strlen(const char *s);
 s32 strncmp(const char *a, const char *b, SceSize n);
 char *strrchr(const char *s, s32 c);
+s32 ufat_dopen(s32, s32);
 
 #endif
