@@ -12,12 +12,12 @@ static inline void *getRa(void) {
     return ra;
 }
 
-/* the original assert loads the file and function name before testing */
+/* the original assert loads the file and function name before testing; compiled out in 2.01+ */
 #define THREADMAN_ASSERT(ok, fmt, file, func, line) \
     do { \
         const char *__file = (file); \
         const char *__func = (func); \
-        if (!(ok)) { \
+        if (FW_VERSION < 201 && !(ok)) { \
             Kprintf((fmt), __file, __func, (line)); \
             sceKernelAssert((ok), 0); \
         } \
@@ -903,7 +903,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014CB0);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014CBC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 270
 s32 sceKernelDeleteSema(SceUID semaid) {
     SceSysmemUidCB *cb;
     SceSysmemUidCB *uid;
@@ -1013,7 +1013,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014D10);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014D1C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 270
 s32 sceKernelDeleteEventFlag(SceUID evid) {
     SceSysmemUidCB *cb;
     SceSysmemUidCB *uid;
@@ -1053,7 +1053,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteEventFlag);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetEventFlag);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 270
 s32 sceKernelClearEventFlag(SceUID evid, u32 bits) {
     SceSysmemUidCB *cb;
     SceSysmemUidCB *uid;
@@ -1183,7 +1183,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014D7C);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014D88);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 270
 s32 sceKernelDeleteMbx(SceUID id) {
     SceSysmemUidCB *cb;
     SceSysmemUidCB *uid;
@@ -1219,7 +1219,7 @@ s32 sceKernelDeleteMbx(SceUID id) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteMbx);
 #endif
 
@@ -1295,7 +1295,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014E18);
 INCLUDE_RODATA("nonmatchings/threadman", D_00014E24);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 270
 s32 sceKernelDeleteMsgPipe(SceUID id) {
     SceSysmemUidCB *cb;
     SceSysmemUidCB *uid;
@@ -1331,7 +1331,7 @@ s32 sceKernelDeleteMsgPipe(SceUID id) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteMsgPipe);
 #endif
 
@@ -1430,7 +1430,7 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014E80);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateVpl);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 270
 s32 sceKernelDeleteVpl(SceUID id) {
     SceSysmemUidCB *cb;
     SceSysmemUidCB *uid;
@@ -1466,7 +1466,7 @@ s32 sceKernelDeleteVpl(SceUID id) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteVpl);
 #endif
 
@@ -1740,7 +1740,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000AC9C);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateFpl);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 270
 s32 sceKernelDeleteFpl(SceUID id) {
     SceSysmemUidCB *cb;
     SceSysmemUidCB *uid;
