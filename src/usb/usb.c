@@ -1846,7 +1846,58 @@ void *func_00008318(struct Unk_func_00008318_0 *arg0, struct Unk_func_00008318_1
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
+s32 sceUsbbdRegister(SceUsbdDriver *drv) {
+    u32 timeout = 1000000;
+    s32 ret;
+
+    if (drv == NULL) {
+        Kprintf(D_0000A86C);
+        return 0x80243002;
+    }
+    if (drv->name == NULL) {
+        Kprintf("usbbd ERROR : need driver name\n");
+        return 0x80243002;
+    }
+    if (drv->start == NULL || drv->stop == NULL) {
+        Kprintf("usbbd ERROR : need start/stop entry\n");
+        return 0x80243002;
+    }
+    if (drv->interface->expectNumber >= 0) {
+        if (drv->interface->expectNumber + drv->interface->numInterfaces >= 9) {
+            Kprintf("usbbd ERROR : interface number is over limitation\n");
+            Kprintf(D_0000A7FC, drv->interface->expectNumber, drv->interface->numInterfaces, 8);
+            return 0x80243002;
+        }
+    } else if (drv->interface->numInterfaces >= 9) {
+        Kprintf(D_0000A82C, drv->interface->numInterfaces, 8);
+        return 0x80243002;
+    }
+    ret = sceKernelWaitSema(g_usbbd.sema, 1, &timeout);
+    if (ret < 0) {
+        Kprintf(D_0000A7C8, ret);
+        return ret;
+    }
+    if (func_00008244(g_usbbd.drivers, drv->name) != NULL) {
+        goto dup;
+    }
+    if (func_00008244(g_usbbdRegistered, drv->name) != NULL) {
+dup:
+        Kprintf("usbbd ERROR : already registered %s\n", drv->name);
+        ret = 0x80243001;
+        goto end;
+    }
+    if (func_00008334(g_usbbdRegistered, drv) == NULL) {
+        g_usbbdRegistered = drv;
+    }
+    ret = 0;
+end:
+    sceKernelSignalSema(g_usbbd.sema, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/usb", sceUsbbdRegister);
 #endif
 
