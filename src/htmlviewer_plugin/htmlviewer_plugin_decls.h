@@ -386,24 +386,13 @@ s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);
 s32 sceKernelWaitSema(s32, s32, void *);
 s32 sceNetResolverInit(...);
-M2C_UNK scePaf_08350B98(struct Unk_func_00000940_0 *, M2C_UNK, void (*)(), M2C_UNK *);
-M2C_UNK scePaf_268370AF(M2C_UNK);
-M2C_UNK scePaf_58DF4B4F(s32, M2C_UNK);
 M2C_UNK scePaf_6CFE0C10(s32, M2C_UNK, M2C_UNK);
-s32 scePaf_88784487(s32 *);
-s32 scePaf_F77E3DC0(...);
 M2C_UNK sceVshBridge_5434B104(M2C_UNK, s32);
 s32 sceVshBridge_CE32A06A(...);
-M2C_UNK sceVshCommonGui_11C48509(void *, s32);
-M2C_UNK sceVshCommonGui_2EBB5C2B(void *, s32);
-s32 sceVshCommonGui_30FA68C3(...);
-s32 sceVshCommonGui_EC899EBE(...);
 s32 sce_paf_private_wcslen(s32);
 M2C_UNK vshReceivePowerCallback(M2C_UNK);
 M2C_UNK vshRegisterPowerCallback(M2C_UNK, s32);
 M2C_UNK vsh_388428D3(s32);
-M2C_UNK vsh_8C1E8A38(s32);
-M2C_UNK vsh_BF3477CB(...);
 
 #ifdef __cplusplus
 }

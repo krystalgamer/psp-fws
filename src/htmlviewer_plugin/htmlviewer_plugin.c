@@ -326,7 +326,7 @@ void func_0000010C(void) {
     if (D_0000C9E0 == 0) {
 
     } else {
-        vsh_8C1E8A38(D_0000C9E0);
+        vsh_388428D3(D_0000C9E0);
     }
 }
 #endif
@@ -979,7 +979,7 @@ void func_000012D4(void) {
     if (sceVshBridge_CE32A06A() != 1) {
 
     } else {
-        scePaf_6CFE0C10(scePaf_F77E3DC0(), 0xF, 0);
+        scePaf_6CFE0C10(_ZN3paf9Framework8InstanceEv(), 0xF, 0);
     }
 }
 #endif
@@ -1066,10 +1066,10 @@ void func_00000C10(s32 arg0) {
 
     } else {
         sceKernelSetEventFlag(D_0000CC20, 1U);
-        temp_v0 = scePaf_88784487(&D_00008CC4);
+        temp_v0 = _ZN3paf4View4FindEPKc(&D_00008CC4);
         if (temp_v0 != 0) {
             sceKernelSetEventFlag(D_0000C9F4, 1U);
-            scePaf_58DF4B4F(temp_v0, 0);
+            _ZN3paf4View6UnloadEPS0_PFvPKcE(temp_v0, 0);
         }
     }
 }
@@ -1146,16 +1146,16 @@ void func_00000920(void) {
 
 #if FW_VERSION >= 350
 void func_00000940(struct Unk_func_00000940_0 *arg0) {
-    scePaf_268370AF(0x40);
-    scePaf_08350B98(arg0, 0x80005, func_000011A4, &D_0000CC24);
-    scePaf_08350B98(arg0, 0x80006, func_00000AD0, &D_0000CC24);
-    scePaf_08350B98(arg0, 0x10001, func_00000888, NULL);
-    scePaf_08350B98(arg0, 0x10002, func_000008B4, NULL);
-    scePaf_08350B98(arg0, 0x10006, func_000008E0, NULL);
-    scePaf_08350B98(arg0, 0x10007, func_00000920, NULL);
+    InputDevice_PspPad_EnableAnalogThreshold(0x40);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80005, func_000011A4, &D_0000CC24);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80006, func_00000AD0, &D_0000CC24);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, func_00000888, NULL);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10002, func_000008B4, NULL);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10006, func_000008E0, NULL);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10007, func_00000920, NULL);
     arg0->unk14 |= 0x20;
-    M2C_FIELD(&D_0000CC24, s32 *, 0) = (s32) M2C_FIELD(scePaf_F77E3DC0(), s32 *, 0x9C);
-    M2C_FIELD(&D_0000CC24, s32 *, 4) = (s32) M2C_FIELD(scePaf_F77E3DC0(), s32 *, 0xA0);
+    M2C_FIELD(&D_0000CC24, s32 *, 0) = (s32) M2C_FIELD(_ZN3paf9Framework8InstanceEv(), s32 *, 0x9C);
+    M2C_FIELD(&D_0000CC24, s32 *, 4) = (s32) M2C_FIELD(_ZN3paf9Framework8InstanceEv(), s32 *, 0xA0);
 }
 #endif
 
@@ -1196,10 +1196,10 @@ void func_00000940(struct Unk_func_00000940_0 *arg0) {
 #if FW_VERSION >= 350
 void func_00000FC4(void) {
     void *sp0;
-    sceVshCommonGui_2EBB5C2B(&sp0, sceVshCommonGui_30FA68C3());
+    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
     func_00005FCC((s32) &D_0000CC04, &sp0);
     func_00005F9C(&sp0);
-    sceVshCommonGui_11C48509(&sp0, sceVshCommonGui_EC899EBE());
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
     func_00005FCC((s32) &D_0000CC10, &sp0);
     func_00005F9C(&sp0);
 }
@@ -1601,7 +1601,7 @@ s32 func_00001208(void) {
 
 #if FW_VERSION >= 350
 void func_00001238(s32 arg0) {
-    vsh_BF3477CB();
+    _ZN3vsh15RaiseFatalErrorEj(arg0);
 }
 #else
 void func_00001238(s32 arg0) {
