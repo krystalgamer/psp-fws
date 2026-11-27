@@ -145,6 +145,7 @@ def variants(text, body, target, comp, opt, jobs):
         print(f"  {sc}: {c}")
     if ok and ok[0][0] == 0:
         print("best variant source:\n" + src_of(ok[0][1]))
+    return src_of(ok[0][1]) if ok else None
 
 
 def climb(pre, lines, idx, target, comp, opt, jobs):
@@ -242,6 +243,7 @@ def main():
                     help="try every order of the body lines tagged //P (own setting); >7 lines: hill-climb over single-line moves")
     ap.add_argument("--variants", action="store_true",
                     help="try every combination of '//V{' ... '//V|' ... '//V}' alternative blocks in the body")
+    ap.add_argument("--write", action="store_true", help="with --variants: write the best combination back to FILE.c")
     ap.add_argument("-j", type=int, default=4, help="processes for --permute")
     ap.add_argument("--opts", help="';'-separated option sets to try instead of the standard list (own setting kept)")
     ap.add_argument("--extra", default="", help="flags appended to every tried setting, e.g. --extra=-mext")
@@ -357,7 +359,10 @@ def main():
         sm = difflib.SequenceMatcher(None, target, best, autojunk=False)
         print(f"RESULT: {max(len(target), len(best)) - sum(b.size for b in sm.get_matching_blocks())} off (own setting)")
     if a.variants:
-        variants(text, body, target, comp, own.split(" ", 1)[1], a.j)
+        bestsrc = variants(text, body, target, comp, own.split(" ", 1)[1], a.j)
+        if a.write and bestsrc is not None:
+            Path(a.cfile).write_text(bestsrc)
+            print(f"wrote the best combination to {a.cfile}")
     if a.permute:
         permute(text, body, target, comp, own.split(" ", 1)[1], a.j)
     if a.perm:

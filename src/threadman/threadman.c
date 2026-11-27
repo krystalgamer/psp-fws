@@ -2516,7 +2516,9 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTime);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTimeWide);
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTimeLow);
+u32 sceKernelGetSystemTimeLow(void) {
+    return *(volatile u32 *)0xBC600000;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282

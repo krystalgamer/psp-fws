@@ -134,7 +134,7 @@ s32 regSeekFile(s32 fd, s32 offset, s32 whence) {
 INCLUDE_ASM("nonmatchings/regio", regSeekFile);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 s32 regStatFile(const char *name, u32 *size) {
     SceRegIoStat st;
     char *path;

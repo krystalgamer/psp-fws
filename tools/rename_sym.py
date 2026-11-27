@@ -87,6 +87,20 @@ def main():
         src_renames[old] = nw
         # the source rename is global: OLD must not also name data (INCLUDE_RODATA) or remain in other versions
         rest = [v for v in allv if v not in vers]
+        if rest:
+            import fwmodel as FM
+            fv = sorted({int(re.match(r"\d+", x)[0]) for x in allv})
+            restn = {int(re.match(r"\d+", x)[0]) for x in rest}
+            mine = {int(re.match(r"\d+", x)[0]) for x in vers}
+            for p2, t in texts.items():
+                if p2.suffix != ".c":
+                    continue
+                for e in FM.parse(t, fv):
+                    if e.name == old and e.kind in ("cfunc", "asm") and (e.vers & restn) and not (e.vers <= mine):
+                        other = sorted(e.vers & restn)
+                        sys.exit(f"{old}: {p2.name} has its own {e.kind} entry for versions {other} not being renamed; "
+                                 f"the source rename is global — include those versions (if it is the same function) "
+                                 f"or give that entry a different name first")
         joined = "\n".join(t for p2, t in texts.items() if p2.suffix == ".c")
         if re.search(rf"INCLUDE_RODATA\([^)]*\b{old}\)", joined) and not old.startswith("func_"):
             sys.exit(f"{old}: also an INCLUDE_RODATA entry in the shared source; renaming the C identifier would break "
