@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/100/.splat_cache.osk_plugin
   symbol_addrs_path:
     - config/100/symbol_addrs.osk_plugin.txt
+    - config/100/func_starts.osk_plugin.txt
     - tmp/build/100/prx_syms.osk_plugin.txt
   reloc_addrs_path: [tmp/build/100/reloc_addrs.osk_plugin.txt]
   asset_path: tmp/assets/100/osk_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, osk_plugin]
+      - [0xA604, c, osk_plugin_crtend]
       - { start: 0xB908, type: asm, name: fini, linker_section: .fini }
       - { start: 0xB924, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xBBCC, type: prxpad, order: .text }
@@ -73,6 +75,7 @@ segments:
       - { start: 0xBEF8, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0xBEFC, type: prxpad, order: .rodata }
       - [0xBF00, .rodata, osk_plugin]
+      - [0xD3D0, .rodata, osk_plugin_crtend]
       - { start: 0xD3E8, type: prxpad, order: .rodata }
   - name: osk_plugin_seg1
     type: code
