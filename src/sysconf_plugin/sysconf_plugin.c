@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "sysconf_plugin_decls.h"
@@ -1211,7 +1212,7 @@ void func_00000E64(void) {
 void func_00000E64(void) {
     _ZN3vsh26ShowButtonNavigation_EnterEb(0);
     _ZN3vsh25ShowButtonNavigation_BackEb(0);
-    func_00017A18(&D_0001F31C);
+    func_00017A18((Unk_func_00017A18_0*) &D_0001F31C);
 }
 #endif
 
@@ -1300,7 +1301,7 @@ void func_00001C54(M2C_UNK **arg0) {
 
 void func_00001C64(M2C_UNK **arg0) {
     *arg0 = &D_000187C8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_000187C8);
@@ -1414,7 +1415,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00001C1C);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00001C1C(M2C_UNK **arg0) {
     *arg0 = &D_0001A668;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -6150,7 +6151,7 @@ void func_00014338(void) {
 void func_00014338(void) {
     _ZN3vsh26ShowButtonNavigation_EnterEb(0);
     _ZN3vsh25ShowButtonNavigation_BackEb(0);
-    func_00017A18(&D_0001F31C);
+    func_00017A18((Unk_func_00017A18_0*) &D_0001F31C);
 }
 #endif
 
@@ -6459,7 +6460,7 @@ void func_000155D8(void) {
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000155D8(void) {
     _ZN3paf4View9PlaySoundEPKc(D_0001F31C.unk8, &D_0001CE90);
-    func_00017A18(&D_0001F31C);
+    func_00017A18((Unk_func_00017A18_0*) &D_0001F31C);
     InputDevice_PspPad_Unlock();
 }
 #endif
@@ -7016,7 +7017,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00017694);
 void func_0000E700(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x30) = -1;
     M2C_FIELD(arg0, s32 *, 0x34) = 0;
-    _ZN11PageManager5ClearEv();
+    _ZN11PageManager5ClearEv(arg0);
 }
 #endif
 
@@ -7040,7 +7041,7 @@ void func_000176C4(struct Unk_func_000176C4_0 *arg0) {
 void func_000176C4(struct Unk_func_000176C4_0 *arg0) {
     arg0->unk30 = -1;
     arg0->unk34 = 0;
-    _ZN11PageManager5ClearEv();
+    _ZN11PageManager5ClearEv(arg0);
 }
 #endif
 

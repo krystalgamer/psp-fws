@@ -351,7 +351,7 @@
   "sceVshCommonUtil_DA88D006": "M2C_UNK sceVshCommonUtil_DA88D006(M2C_UNK *, M2C_UNK, M2C_UNK);",
   "sceVshCommonUtil_F6567B66": "M2C_UNK sceVshCommonUtil_F6567B66(M2C_UNK *, M2C_UNK, s32);",
   "sce_paf_private_free2": "M2C_UNK sce_paf_private_free2(void *);",
-  "sce_paf_private_printf": "M2C_UNK sce_paf_private_printf(M2C_UNK *, M2C_UNK *, M2C_UNK *);",
+  "sce_paf_private_printf": "M2C_UNK sce_paf_private_printf(M2C_UNK *, M2C_UNK *, const char *);",
   "sce_paf_private_strlen": "s32 sce_paf_private_strlen(s32);",
   "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);",
   "vshUsbstorMsUnregisterEventFlag": "M2C_UNK vshUsbstorMsUnregisterEventFlag(s32);",
