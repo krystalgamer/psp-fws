@@ -2050,7 +2050,37 @@ s32 bpf_allocbufs(struct bpf_d *d) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_000044C0);
+void func_000044C0(struct ifnet *ifp) {
+    struct bpf_if *bp, **pbp;
+    struct bpf_d *d;
+    s32 i, s;
+
+    for (i = 0; i < NBPFILTER; ++i) {
+        d = &D_0000BC14[i];
+        if (!D_ISFREE(d) && d->bd_bif != NULL && d->bd_bif->bif_ifp == ifp) {
+            struct bpf_if *obp;
+            struct bpf_d **p;
+
+            s = _sce_pspnet_spllock();
+            obp = d->bd_bif;
+            p = &obp->bif_dlist;
+            while (*p != d)
+                p = &(*p)->bd_next;
+            *p = (*p)->bd_next;
+            if (obp->bif_dlist == NULL)
+                *obp->bif_driverp = NULL;
+            d->bd_bif = NULL;
+            _sce_pspnet_splunlock(s);
+        }
+    }
+    for (bp = D_0000BC10, pbp = &D_0000BC10; bp != NULL; pbp = &bp->bif_next, bp = bp->bif_next) {
+        if (bp->bif_ifp == ifp) {
+            *pbp = bp->bif_next;
+            sceNetFreeInternal(bp);
+            break;
+        }
+    }
+}
 
 void bpfilterattach(s32 n) {
     s32 i;

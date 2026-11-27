@@ -663,6 +663,7 @@ void func_00003380(void);
 void func_00003400(struct SceNetThreadInfo *arg0);
 void func_000037E4(void);
 void func_00004430(struct ifnet *ifp, struct ifreq *ifr);
+void func_000044C0(struct ifnet *ifp);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);
 s32 func_000064CC(struct socket *so, u32 cmd, void *data);
