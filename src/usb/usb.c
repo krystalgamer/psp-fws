@@ -405,7 +405,7 @@ s32 func_000026E8(s32 n) {
 INCLUDE_ASM("nonmatchings/usb", func_000026E8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 void func_00002808(UsbbdEpRec *rec, s32 status) {
     SceUsbdDeviceReq *req = rec->head;
     SceUsbdDeviceReq *next;
@@ -417,7 +417,11 @@ void func_00002808(UsbbdEpRec *rec, s32 status) {
     if (req->next == NULL) {
         rec->tail = NULL;
         rec->head = NULL;
+#if FW_VERSION == 100
         if (g_usbbd.actState == 0x200) {
+#else
+        if (g_usbbd.actState == 0x200 && g_usbbd.unkE4 != 0x20) {
+#endif
             if (rec->address == 0) {
                 func_00003F5C(req->endpoint->busEndpointNumber);
             } else {
@@ -430,7 +434,11 @@ void func_00002808(UsbbdEpRec *rec, s32 status) {
     } else {
         next = req->next;
         rec->head = next;
+#if FW_VERSION == 100
         if (g_usbbd.actState == 0x200) {
+#else
+        if (g_usbbd.actState == 0x200 && g_usbbd.unkE4 != 0x20) {
+#endif
             if (status != -2) {
                 if (next->returnCode == 2) {
                     func_00004100(req->endpoint->busEndpointNumber);
