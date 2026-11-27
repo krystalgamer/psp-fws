@@ -53,6 +53,11 @@ def main():
         for v in vers:
             p = ROOT / "config" / v / f"symbol_addrs.{mod}.txt"
             t = new.get(p, "")
+            has_old = re.search(rf"^\s*{old}\s*=", t, re.M) or (
+                AUTO.match(old) and any(old in s.read_text() for s in (ROOT / "tmp/asm" / v / mod).rglob("*.s")))
+            if not has_old:
+                print(f"{v}: {old} not found, skipped")
+                continue
             if re.search(rf"^\s*{nw}\s*=", t, re.M):
                 sys.exit(f"{v}: {nw} already defined")
             if re.search(rf"^\s*{old}\s*=", t, re.M):
@@ -76,15 +81,39 @@ def main():
             print(f"{v}: {old} -> {nw}")
         src_renames[old] = nw
     for p, t in list(new.items()):
-        if p.suffix in (".c", ".h", ".json"):
+        if p.suffix in (".c", ".h"):
             for o, n in src_renames.items():
                 t = re.sub(rf"\b{o}\b", n, t)
             new[p] = t
+        elif p.suffix == ".json":
+            # decls store: rename keys and values; merging into an existing key must agree
+            import json
+            store = json.loads(t)
+            for sec, d in store.items():
+                if not isinstance(d, dict):
+                    continue
+                out = {}
+                for k, val in d.items():
+                    for o, n in src_renames.items():
+                        k = re.sub(rf"\b{o}\b", n, k)
+                        val = re.sub(rf"\b{o}\b", n, val) if isinstance(val, str) else val
+                    if k in out and out[k] != val:
+                        sys.exit(f"{p.name}: {sec} '{k}' gets two different declarations:\n  {out[k]}\n  {val}")
+                    out[k] = val
+                store[sec] = out
+            new[p] = json.dumps(store, indent=1, sort_keys=True)
     if a.dry_run:
         return
     for p, t in new.items():
         if t != texts[p]:
             p.write_text(t)
+    import json
+    import structify
+    for p, t in new.items():
+        if p.suffix == ".json" and p.name.endswith("_decls.json") and t != texts[p]:
+            m = p.name[:-len("_decls.json")]
+            structify.SRC[m] = p.parent
+            structify.write_decls(m, json.loads(t))
     r = subprocess.run(["tools/regress.sh"] + [f"{v}:{mod}" for v in allv], cwd=ROOT, capture_output=True, text=True)
     bad = [l for l in r.stdout.splitlines() if ": OK" not in l]
     if bad:
