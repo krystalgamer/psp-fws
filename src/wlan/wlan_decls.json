@@ -33,7 +33,7 @@
   "func_00006458": "s32 func_00006458(void *arg0, void *arg1);",
   "func_00006574": "s32 func_00006574(void *arg0, void *arg1);",
   "func_000065D4": "s32 func_000065D4(void *arg0);",
-  "func_000065E4": "void func_000065E4(void);",
+  "func_000065E4": "void func_000065E4(SceWlanQueue *q);",
   "func_000066FC": "s32 func_000066FC(s32 *arg0);",
   "func_00006708": "void func_00006708(u32 arg0);",
   "func_00006738": "void func_00006738(u32 arg0);",
@@ -63,7 +63,7 @@
   "func_00009FA8": "s32 func_00009FA8(SceWlanMac *mac, s32 cmd, u16 len, void *buf);",
   "func_0000A4C8": "s32 func_0000A4C8(s32 arg0, void *arg1, s32 arg2);",
   "func_0000AB18": "void func_0000AB18(struct Unk_func_00008470_1 *arg0);",
-  "func_0000ABB4": "s32 func_0000ABB4(void);",
+  "func_0000ABB4": "s32 func_0000ABB4(SceWlanMac *mac, u8 *frame, s32 a, s32 b);",
   "func_0000AC3C": "void func_0000AC3C(void);",
   "func_0000AC90": "void func_0000AC90(struct Unk_func_0000AC90_0 *arg0);",
   "func_0000ACB8": "s32 func_0000ACB8(void);",
@@ -196,7 +196,9 @@
   "Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0": "struct Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0 {\n    u8 pad0[0x188];\n    s32 unk188;\n};"
  },
  "vars": {
+  "D_0001373C": "extern u8 D_0001373C[];",
   "D_0001379C": "extern SceWlanChipOps D_0001379C;",
+  "D_000137D0": "extern s32 (*D_000137D0[0x50])(SceWlanMac *, u8 *, s32, s32);",
   "D_00018A00": "extern const u32 D_00018A00[15];",
   "D_00018A3C": "extern const u16 D_00018A3C[6];",
   "D_00018A48": "extern const u8 D_00018A48[][14];",
