@@ -227,7 +227,20 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000072C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_000007F4);
 
-INCLUDE_ASM("nonmatchings/threadman", func_000008A0);
+s32 func_000008A0(void) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (M2C_VFIELD(&D_00015518, s32, 0x418) == 0) {
+        temp_v0 = M2C_VFIELD(&D_00015518, s32, 4) != (s32) M2C_FIELD(&D_00015518, void **, 0);
+        if (temp_v0 != 0) {
+            M2C_FIELD(M2C_FIELD(&D_00015518, void **, 0), void **, 0xE4) = (void *) (M2C_FIELD(&D_00015518, void **, 0) + 0xE8);
+        }
+        var_v1 = temp_v0;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 270
