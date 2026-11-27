@@ -3,7 +3,9 @@
 #include "common.h"
 #include "reboot_decls.h"
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D0C);
+void func_00002D0C(void *s, u32 n) {
+    func_00002E30(s, 0, n);
+}
 
 #if FW_VERSION == 100
 s32 func_00001D2C(s32 arg0) {
@@ -37,15 +39,70 @@ M2C_UNK *func_00002D84(void) {
     return &D_00016DF1;
 }
 
+#if FW_VERSION == 100
+void *func_00002D90(const void *s, s32 c, s32 n) {
+    const u8 *p = s;
+    u8 ch = c;
+    if (p != NULL) {
+        while (n > 0) {
+            if (*p == ch) {
+                return (void *)p;
+            }
+            p++;
+            n--;
+        }
+    }
+    return NULL;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D90);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002DC8);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002E30);
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002EA0);
+#if FW_VERSION == 100
+void *func_00002EA0(void *dst, const void *src, s32 n) {
+    u8 *d = dst;
+    const u8 *s = src;
 
+    if (dst == NULL) {
+        return NULL;
+    }
+    if (d >= s) {
+        while (--n >= 0) {
+            d[n] = s[n];
+        }
+    } else {
+        while (n > 0) {
+            *d++ = *s++;
+            n--;
+        }
+    }
+    return dst;
+}
+#else
+INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002EA0);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00002F14(const void *a, const void *b, s32 n) {
+    const u8 *p = a;
+    const u8 *q = b;
+    while (n > 0) {
+        if (*p != *q) {
+            return (*p < *q) ? -1 : 1;
+        }
+        p++;
+        q++;
+        n--;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002F14);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00001F84);
@@ -57,9 +114,33 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002FDC);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003058);
 
+#if FW_VERSION == 100
+s32 func_000030B8(const char *s) {
+    s32 len = 0;
+    if (s == NULL) {
+        return 0;
+    }
+    while (*s++ != '\0') {
+        len++;
+    }
+    return len;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000030B8);
+#endif
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000030EC);
+char *func_000030EC(const char *s, s32 c) {
+    char ch = c;
+    if (s == NULL) {
+        return NULL;
+    }
+    do {
+        if (*s == ch) {
+            return (char *)s;
+        }
+    } while (*s++ != '\0');
+    return NULL;
+}
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002144);
@@ -78,7 +159,13 @@ INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00012AA8);
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00012AB0);
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000029B4);
+void func_000029B4(char **pp, s32 c) {
+    if (c < 256) {
+        *(*pp)++ = c;
+    } else {
+        **pp = 0;
+    }
+}
 #else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000327C);
 #endif
