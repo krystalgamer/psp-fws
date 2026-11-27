@@ -16,13 +16,18 @@
   "func_00001C24": "void func_00001C24(void);",
   "func_00001C48": "void func_00001C48(void);",
   "module_stop": "s32 module_stop(void);",
+  "sceDmacplusAvcSetDestConf": "s32 sceDmacplusAvcSetDestConf(s32, s32, void *);",
   "sceKernelPollSema": "s32 sceKernelPollSema(s32, s32);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
-  "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
+  "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, u32 *);",
   "sceMeWrapper_driver_3D5F109C": "M2C_UNK sceMeWrapper_driver_3D5F109C(M2C_UNK);",
   "sceMpegBaseInit": "s32 sceMpegBaseInit(void);"
  },
+ "types": {
+  "hand_sceMpegbase_driver_0530BE4E": "typedef struct {\n    s16 coef[11];\n    s16 unk16;\n    s32 unk18;\n    s32 unk1C;\n    s32 sema;\n} SceMpegBaseCsc;"
+ },
  "vars": {
+  "D_00002080": "extern SceMpegBaseCsc D_00002080;",
   "D_000020A0": "extern s32 D_000020A0;",
   "D_00002710": "extern s32 D_00002710;",
   "D_00002740": "extern s32 D_00002740;"

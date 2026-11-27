@@ -4,6 +4,15 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef struct {
+    s16 coef[11];
+    s16 unk16;
+    s32 unk18;
+    s32 unk1C;
+    s32 sema;
+} SceMpegBaseCsc;
+
+extern SceMpegBaseCsc D_00002080;
 extern s32 D_000020A0;
 extern s32 D_00002710;
 extern s32 D_00002740;
@@ -24,9 +33,10 @@ void func_00001BFC(void);
 void func_00001C24(void);
 void func_00001C48(void);
 s32 module_stop(void);
+s32 sceDmacplusAvcSetDestConf(s32, s32, void *);
 s32 sceKernelPollSema(s32, s32);
 s32 sceKernelSignalSema(s32, s32);
-s32 sceKernelWaitSema(s32, s32, void *);
+s32 sceKernelWaitSema(s32, s32, u32 *);
 M2C_UNK sceMeWrapper_driver_3D5F109C(M2C_UNK);
 s32 sceMpegBaseInit(void);
 

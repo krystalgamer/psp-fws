@@ -2,6 +2,7 @@
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100]: -O2 -frename-registers */
 #include "common.h"
+#include "k1.h"
 #include "mpegbase_decls.h"
 
 #if FW_VERSION == 260
@@ -102,9 +103,25 @@ INCLUDE_ASM("nonmatchings/mpegbase", func_00000CC8);
 void func_00000CC8(void) {
     sceKernelPollSema(D_000020A0, 1);
 }
-#endif
 
+s32 sceMpegbase_driver_0530BE4E(s32 arg0) {
+    u32 oldK1 = shiftK1();
+    s32 ret;
+
+    ret = sceKernelWaitSema(D_00002080.sema, 1, NULL);
+    if (ret < 0) {
+        setK1(oldK1);
+        return ret;
+    }
+    D_00002080.unk1C = arg0;
+    ret = sceDmacplusAvcSetDestConf(arg0, D_00002080.unk18, &D_00002080);
+    sceKernelSignalSema(D_00002080.sema, 1);
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_0530BE4E);
+#endif
 
 #if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_AC9E717E);
