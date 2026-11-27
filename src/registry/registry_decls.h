@@ -17,21 +17,19 @@ struct Unk_func_00004024_temp_v0 {
     s32 unk4;
 };
 
-extern s32 D_000066F0;
-extern s32 D_0000671C;
-extern s32 D_0000674C;
 extern M2C_UNK D_00006F8C;
-extern s32 D_00006FB0;
-extern s32 D_00006FC4;
-extern s32 D_00006FC8;
-extern s32 D_00006FCC;
-extern s32 D_00006FD0;
-extern s32 D_00006FD4;
-extern s32 D_00006FD8;
 extern s32 D_00006FDC;
 extern s32 D_00007050;
 extern s32 D_0000706C;
 extern s32 D_00007070;
+extern s32 g_catCount;
+extern s32 g_catHead;
+extern s32 g_catTail;
+extern s32 g_hiveCount;
+extern s32 g_hiveHead;
+extern s32 g_hiveTail;
+extern s32 g_semaId;
+extern s32 g_vplId;
 
 s32 func_000006CC(s32);
 s32 func_000008E4(s32);

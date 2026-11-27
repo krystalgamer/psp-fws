@@ -50,10 +50,10 @@ sceKernelPowerUnlock = 0x00006320; // type:func
 // shared names (tools/add_version.py) begin
 D_00006F8C = 0x000066F4; // rom:0x6774
 D_000066DC = 0x000066FC; // rom:0x677C
-D_000066F0 = 0x00006720; // rom:0x67A0
-D_00006FD0 = 0x00006740;
-D_00006FD4 = 0x00006744;
-D_00006FD8 = 0x00006748;
+g_vplId = 0x00006720; // rom:0x67A0
+g_catCount = 0x00006740;
+g_catHead = 0x00006744;
+g_catTail = 0x00006748;
 func_000008BC = 0x00000760; // type:func rom:0x7E0
 func_000008E4 = 0x000008EC; // type:func rom:0x96C
 func_00000B6C = 0x00000A60; // type:func rom:0xAE0
@@ -118,3 +118,8 @@ func_00006228 = 0x00006170; // type:func rom:0x61F0
 func_00006A48 = 0x000061AC; // type:func rom:0x622C
 func_000062E0 = 0x00006224; // type:func rom:0x62A4
 // shared names (tools/add_version.py) end
+g_hiveCount = 0x00006734;
+g_hiveHead = 0x00006738;
+g_hiveTail = 0x0000673C;
+g_vplMaxUsed = 0x00006724; // rom:0x67A4
+g_semaId = 0x0000674C;

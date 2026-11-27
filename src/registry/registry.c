@@ -48,12 +48,12 @@ s32 sceRegInit(void) {
     temp_s0 = shiftK1();
     D_0000706C = -1;
     D_00007070 = 0;
-    D_00006FC4 = 0;
-    D_00006FC8 = 0;
-    D_00006FCC = 0;
-    D_00006FD0 = 0;
-    D_00006FD4 = 0;
-    D_00006FD8 = 0;
+    g_hiveCount = 0;
+    g_hiveHead = 0;
+    g_hiveTail = 0;
+    g_catCount = 0;
+    g_catHead = 0;
+    g_catTail = 0;
     D_00007050 = 0;
     temp_v0 = sceKernelCreateMutex("SceRegBlockAPI", 0U, 0, NULL);
     if (temp_v0 >= 0) {
@@ -90,7 +90,7 @@ s32 module_reboot_phase(s32 arg0) {
     case 0:
         break;
     case 2:
-        sceKernelWaitSema(D_0000674C, 1, NULL);
+        sceKernelWaitSema(g_semaId, 1, NULL);
         break;
     }
     return 0;
@@ -138,11 +138,11 @@ s32 sceRegFlushRegistry(s32 arg0) {
 
     oldK1 = shiftK1();
     ret = 0x80082733;
-    if (sceKernelWaitSema(D_0000671C, 1, NULL) != 0)
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
     ret = func_000006CC(arg0);
 end:
-    if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+    if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
     }
     setK1(oldK1);
@@ -171,10 +171,10 @@ s32 sceRegFlushCategory(s32 arg0) {
 
     oldK1 = shiftK1();
     ret = 0x80082733;
-    if (sceKernelWaitSema(D_0000671C, 1, NULL) != 0)
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto out;
     ret = func_000008E4(arg0);
-    if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+    if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
     }
 out:
@@ -673,11 +673,11 @@ s32 sceRegGetKeyInfo(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 
     oldK1 = shiftK1();
     ret = 0x80082733;
-    if (sceKernelWaitSema(D_0000671C, 1, NULL) != 0)
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
     ret = func_00004A28(arg0, arg1, arg2, arg3, arg4);
 end:
-    if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+    if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
     }
     setK1(oldK1);
@@ -695,11 +695,11 @@ s32 sceRegGetKeyInfoByName(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     oldK1 = shiftK1();
     ret = 0x80082733;
-    if (sceKernelWaitSema(D_0000671C, 1, NULL) != 0)
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto end;
     ret = func_00004A28(arg0, arg1, &sp0, arg2, arg3);
 end:
-    if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+    if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
     }
     setK1(oldK1);
@@ -724,10 +724,10 @@ s32 sceRegRemoveKey(s32 arg0, s32 arg1) {
 
     oldK1 = shiftK1();
     ret = 0x80082733;
-    if (sceKernelWaitSema(D_0000671C, 1, NULL) != 0)
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto out;
     ret = func_000046A8(arg0, arg1);
-    if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+    if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
     }
 out:
@@ -918,18 +918,18 @@ INCLUDE_ASM("nonmatchings/registry", func_00006228);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00006228(void) {
-    if (D_000066F0 >= 0) {
-        sceKernelDeleteVpl(D_000066F0);
-        D_000066F0 = -1;
+    if (g_vplId >= 0) {
+        sceKernelDeleteVpl(g_vplId);
+        g_vplId = -1;
     }
 }
 #endif
 
 #if FW_VERSION >= 282
 void func_00006A0C(void) {
-    if (D_00006FB0 >= 0) {
-        sceKernelDeleteVpl(D_00006FB0);
-        D_00006FB0 = -1;
+    if (g_vplId >= 0) {
+        sceKernelDeleteVpl(g_vplId);
+        g_vplId = -1;
     }
 }
 #endif
@@ -938,10 +938,10 @@ INCLUDE_ASM("nonmatchings/registry", func_00006A48);
 
 #if FW_VERSION < 282
 void func_000062E0(s32 arg0) {
-    sceKernelFreeVpl(D_000066F0, arg0);
+    sceKernelFreeVpl(g_vplId, arg0);
 }
 #else
 void func_00006AC0(s32 arg0) {
-    sceKernelFreeVpl(D_00006FB0, arg0);
+    sceKernelFreeVpl(g_vplId, arg0);
 }
 #endif

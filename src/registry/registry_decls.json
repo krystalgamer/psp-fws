@@ -54,20 +54,18 @@
   "Unk_func_00004024_temp_v0": "struct Unk_func_00004024_temp_v0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};"
  },
  "vars": {
-  "D_000066F0": "extern s32 D_000066F0;",
-  "D_0000671C": "extern s32 D_0000671C;",
-  "D_0000674C": "extern s32 D_0000674C;",
   "D_00006F8C": "extern M2C_UNK D_00006F8C;",
-  "D_00006FB0": "extern s32 D_00006FB0;",
-  "D_00006FC4": "extern s32 D_00006FC4;",
-  "D_00006FC8": "extern s32 D_00006FC8;",
-  "D_00006FCC": "extern s32 D_00006FCC;",
-  "D_00006FD0": "extern s32 D_00006FD0;",
-  "D_00006FD4": "extern s32 D_00006FD4;",
-  "D_00006FD8": "extern s32 D_00006FD8;",
   "D_00006FDC": "extern s32 D_00006FDC;",
   "D_00007050": "extern s32 D_00007050;",
   "D_0000706C": "extern s32 D_0000706C;",
-  "D_00007070": "extern s32 D_00007070;"
+  "D_00007070": "extern s32 D_00007070;",
+  "g_catCount": "extern s32 g_catCount;",
+  "g_catHead": "extern s32 g_catHead;",
+  "g_catTail": "extern s32 g_catTail;",
+  "g_hiveCount": "extern s32 g_hiveCount;",
+  "g_hiveHead": "extern s32 g_hiveHead;",
+  "g_hiveTail": "extern s32 g_hiveTail;",
+  "g_semaId": "extern s32 g_semaId;",
+  "g_vplId": "extern s32 g_vplId;"
  }
 }
