@@ -248,8 +248,42 @@ s32 sceRtcGetCurrentClock(pspTime *time, s32 tz) {
     setK1(oldK1);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentClock);
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 270
+s32 sceRtcGetCurrentClock(pspTime *time, s32 tz) {
+    u64 tick;
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if (k1IsUserMode() && (s32)time < 0) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    ret = sceRtcGetCurrentTick(&tick);
+    sceRtcTickAddMinutes(&tick, &tick, tz);
+    sceRtcSetTick(time, &tick);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 270
+s32 sceRtcGetCurrentClock(pspTime *time, s32 tz) {
+    u64 tick;
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if ((s32)(-k1IsUserMode() & (u32)time) < 0) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    ret = sceRtcGetCurrentTick(&tick);
+    sceRtcTickAddMinutes(&tick, &tick, tz);
+    sceRtcSetTick(time, &tick);
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 250
@@ -264,7 +298,24 @@ s32 sceRtcGetCurrentClockLocalTime(pspTime *time) {
     setK1(oldK1);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 270
+s32 sceRtcGetCurrentClockLocalTime(pspTime *time) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if (k1IsUserMode() && (s32)time < 0) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    ret = sceRtcGetCurrentClock(time, g_rtc.unkC + g_rtc.unk8);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 270
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentClockLocalTime);
 #endif
 
@@ -275,7 +326,11 @@ u64 sceRtcGetAccumlativeTime(void) {
     return base + (sceKernelGetSystemTimeWide() - g_rtc.sysTimeAtSync);
 }
 #else
-INCLUDE_ASM("nonmatchings/rtc", sceRtcGetAccumlativeTime);
+u64 sceRtcGetAccumlativeTime(void) {
+    u64 base = (u64)g_rtc.clockAdjust * 500000 + g_rtc.clockUs;
+
+    return base + (sceKernelGetSystemTimeWide() - g_rtc.sysTimeAtSync);
+}
 #endif
 
 s32 sceRtcConvertUtcToLocalTime(const u64 *tickUTC, u64 *tickLocal) {
