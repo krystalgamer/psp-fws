@@ -1162,6 +1162,31 @@ struct igmpstat {
     u64 igps_snd_reports;               /* 0x40 */
 };
 
+struct in_multistep {
+    struct in_ifaddr *i_ia;
+    struct in_multi *i_inm;
+};
+#define IN_NEXT_MULTI(step, inm) \
+{ \
+    if (((inm) = (step).i_inm) != NULL) \
+        (step).i_inm = (inm)->inm_list.le_next; \
+    else \
+        while ((step).i_ia != NULL) { \
+            (inm) = (step).i_ia->ia_multiaddrs.lh_first; \
+            (step).i_ia = (step).i_ia->ia_list.tqe_next; \
+            if ((inm) != NULL) { \
+                (step).i_inm = (inm)->inm_list.le_next; \
+                break; \
+            } \
+        } \
+}
+#define IN_FIRST_MULTI(step, inm) \
+{ \
+    (step).i_ia = in_ifaddrhead.tqh_first; \
+    (step).i_inm = NULL; \
+    IN_NEXT_MULTI((step), (inm)); \
+}
+
 typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
 
 struct SceNetInetKeyNode {

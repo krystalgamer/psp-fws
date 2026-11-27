@@ -4400,7 +4400,33 @@ void func_00019C00(struct rtentry *rt) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00019C5C);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001A5C8);
+void igmp_fasttimo(void) {
+    struct in_multi *inm;
+    struct in_multistep step;
+    s32 s;
+
+    if (!igmp_timers_are_running)
+        return;
+    s = _sce_pspnet_spllock();
+    igmp_timers_are_running = 0;
+    IN_FIRST_MULTI(step, inm);
+    while (inm != NULL) {
+        if (inm->inm_timer == 0) {
+        } else if (--inm->inm_timer == 0) {
+            if (inm->inm_state == 1) {
+                if (inm->inm_rti->rti_type == 1)
+                    igmp_sendpkt(inm, 0x12);
+                else
+                    igmp_sendpkt(inm, 0x16);
+                inm->inm_state = 2;
+            }
+        } else {
+            igmp_timers_are_running = 1;
+        }
+        IN_NEXT_MULTI(step, inm);
+    }
+    _sce_pspnet_splunlock(s);
+}
 
 #if FW_VERSION < 201
 void igmp_sendpkt(struct in_multi *inm, s32 type) {
