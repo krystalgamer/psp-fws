@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
@@ -2123,7 +2124,7 @@ void func_0000B248(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_0000B26C);
 #else
 void func_0000B26C(struct Unk_func_0000B26C_0 *arg0, s32 arg1, s32 arg2) {
-    func_0000B2C8((s32) arg0, arg1, scePaf_2CD3AB9E(arg0->unk4, "msg_error_data_updated"), arg2);
+    func_0000B2C8((s32) arg0, arg1, scePaf_2CD3AB9E(arg0->unk4, (M2C_UNK*) ("msg_error_data_updated")), arg2);
 }
 #endif
 

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
@@ -5985,7 +5986,7 @@ void func_00062098(struct Unk_func_00062098_0 *arg0, s32 *arg1) {
 
     temp_s2 = (u8 *)arg0 + 0xC;
     func_00061094(temp_s2);
-    func_00061F8C(arg0, arg0->unk8, arg1);
+    func_00061F8C((Unk_func_00061F8C_0*) arg0, arg0->unk8, arg1);
     func_000610B0(temp_s2);
 }
 
@@ -6033,7 +6034,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00062A0C);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00062AE8);
 
 s32 func_00062B9C(void) {
-    void *sp0;
+    s32 sp0;
     s32 var_v1;
 
     var_v1 = 0;
@@ -6108,7 +6109,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00062260);
 
 #if FW_VERSION >= 310 && FW_VERSION < 350
 s32 func_00063384(void) {
-    void *sp0;
+    s32 sp0;
     s32 var_v1;
 
     var_v1 = 0;

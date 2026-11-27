@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
@@ -904,7 +905,7 @@ s32 func_00016A18(void *arg0, s32 arg1) {
     do {
         temp_a1 = M2C_FIELD(var_s0, s32 *, 0x18);
         var_s1 -= 1;
-        if ((temp_a1 != 0) && (M2C_FIELD(var_s0, void **, 8) == arg1)) {
+        if (((s32) temp_a1 != (s32) 0) && ((s32) (M2C_FIELD(var_s0, void **, 8)) == (s32) arg1)) {
             var_s3 += 1;
             scePaf_47B886E3(0, temp_a1);
             temp_v0 = M2C_FIELD(var_s0, void **, 8);
@@ -932,7 +933,7 @@ s32 func_00016A18(void *arg0, s32 arg1) {
     do {
         temp_a1 = M2C_FIELD(var_s0, s32 *, 0x18);
         var_s1 -= 1;
-        if ((temp_a1 != 0) && (M2C_FIELD(var_s0, void **, 8) == arg1)) {
+        if (((s32) temp_a1 != (s32) 0) && ((s32) (M2C_FIELD(var_s0, void **, 8)) == (s32) arg1)) {
             var_s3 += 1;
             Job_Cancel(0, temp_a1);
             temp_v0 = M2C_FIELD(var_s0, void **, 8);
@@ -960,7 +961,7 @@ s32 func_00016A18(void *arg0, s32 arg1) {
     do {
         temp_a1 = M2C_FIELD(var_s0, s32 *, 0x18);
         var_s1 -= 1;
-        if ((temp_a1 != 0) && (M2C_FIELD(var_s0, void **, 8) == arg1)) {
+        if (((s32) temp_a1 != (s32) 0) && ((s32) (M2C_FIELD(var_s0, void **, 8)) == (s32) arg1)) {
             var_s3 += 1;
             scePaf_47B886E3(0, temp_a1);
             temp_v0 = M2C_FIELD(var_s0, void **, 8);
@@ -1448,7 +1449,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0105E0", func_0001AF98);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_0105E0", func_0001B020);
 
 s32 func_0001B0A4(void) {
-    void *sp0;
+    s32 sp0;
     s32 var_v1;
 
     var_v1 = 0;
