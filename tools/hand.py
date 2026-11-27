@@ -95,15 +95,24 @@ def main():
     ents[k].vers = frozenset()
     ents.insert(k, FM.Entry(cand, "cfunc", name, body))
     f.write_text(FM.emit(ents, fv))
-    keep, drop = [], []
+    keep, drop, fails = [], [], {}
     for n in sorted(cand):
-        ok = all(build(v, a.module)[0] for v in byfw[n])
+        ok = True
+        for v in byfw[n]:
+            good, out = build(v, a.module)
+            if not good:
+                ok = False
+                fails.setdefault(n, out)
+                break
         (keep if ok else drop).append(n)
     if not keep:
+        out = fails.get(fw(a.ver)) or next(iter(fails.values()), "")
         for p, t in orig.items():
             p.write_text(t)
-        _, out = build(a.ver, a.module)
-        print(f"{name}: no version matches")
+        build(a.ver, a.module)
+        errs = [l for l in out.splitlines() if re.search(r"error|Error|differ|FAIL|mismatch", l)]
+        print(f"{name}: no version matches; build output for {a.ver}:")
+        print("\n".join((errs or out.splitlines())[-15:]))
         sys.exit(1)
     if drop:
         ents = FM.parse(orig[f], fv)

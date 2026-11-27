@@ -114,6 +114,7 @@ def main():
     ap.add_argument("--permute", action="store_true",
                     help="try every order of the body lines tagged //P (own setting), print the best")
     ap.add_argument("-j", type=int, default=4, help="processes for --permute")
+    ap.add_argument("--opts", help="';'-separated option sets to try instead of the standard list (own setting kept)")
     ap.add_argument("--extra", default="", help="flags appended to every tried setting, e.g. --extra=-mext")
     ap.add_argument("--perm", action="store_true", help="write tmp/perm/MODULE/FUNC for decomp-permuter (own setting)")
     a = ap.parse_args()
@@ -139,7 +140,10 @@ def main():
     target = mod.target_words(name)
     comp, own = AD.Module.file_setting(mod.file_of(name))
     best = None
-    opts = AD.OPTS
+    opts = list(AD.OPTS)
+    if a.opts:
+        opts = [o.strip() for o in a.opts.split(";") if o.strip()]
+        opts += [own.split(" ", 1)[1]] if own.split(" ", 1)[1] not in opts else []
     if a.extra:
         opts = [f"{o} {a.extra}" for o in AD.OPTS]
         own = f"{own} {a.extra}"
@@ -159,7 +163,12 @@ def main():
         mine = compiled_reloc_syms(text, comp, own.split(" ", 1)[1])
         want = target_reloc_syms(mod, name)
         # splat names an address inside a global's extent D_XXXXXXXX; the C reaches it as sym+off
-        interior = lambda m, w: re.fullmatch(r"D_[0-9A-F]{8}", w) and not re.fullmatch(r"D_[0-9A-F]{8}", m)
+        # (also auto-named: splat labels each referenced word of a big struct, the C uses the base + field offset)
+        def interior(m, w):
+            if not re.fullmatch(r"D_[0-9A-F]{8}", w):
+                return False
+            mm = re.fullmatch(r"D_([0-9A-F]{8})", m)
+            return not mm or int(mm[1], 16) < int(w[2:], 16)
         bad = [(i, w, m) for i, (w, m) in enumerate(zip(want, mine)) if m is not None and m != w]
         if len(mine) != len(want) or any(not interior(m, w) for _, w, m in bad):
             print("relocation symbols differ:")
