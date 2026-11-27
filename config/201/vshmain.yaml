@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/201/.splat_cache.vshmain
   symbol_addrs_path:
     - config/201/symbol_addrs.vshmain.txt
+    - config/201/func_starts.vshmain.txt
     - tmp/build/201/prx_syms.vshmain.txt
   reloc_addrs_path: [tmp/build/201/reloc_addrs.vshmain.txt]
   asset_path: tmp/assets/201/vshmain
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, vshmain]
+      - [0x25E14, c, vshmain_crtend]
       - { start: 0x25E6C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x25E88, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x26948, type: prxpad, order: .text }

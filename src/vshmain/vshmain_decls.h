@@ -347,6 +347,8 @@ struct Unk_vt_func_0002129C_temp_v0 {
     M2C_UNK (*unkB0)(void **, s32 *, M2C_UNK);
 };
 
+typedef void (*func_ptr)(void);
+
 extern s32 D_00018CA0;
 extern M2C_UNK D_000193BC;
 extern s32 D_0001A85C;
@@ -447,6 +449,7 @@ extern s32 D_0002124C;
 extern s32 D_00021250;
 extern s32 D_00021254;
 extern s32 D_00021258;
+extern func_ptr D_00027820[];
 extern s32 D_000283F4;
 extern M2C_UNK D_00028D50;
 extern M2C_UNK D_00029CAC;

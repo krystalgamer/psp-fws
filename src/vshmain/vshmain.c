@@ -12490,15 +12490,3 @@ void sceResmgr_9DC14891(void) {
 
 }
 #endif
-
-#if FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/vshmain", func_00025D94);
-#endif
-
-#if FW_VERSION >= 300 && FW_VERSION < 310
-INCLUDE_ASM("nonmatchings/vshmain", func_0002A604);
-
-INCLUDE_ASM("nonmatchings/vshmain", func_0002AB78);
-
-INCLUDE_RODATA("nonmatchings/vshmain", D_000386DC);
-#endif

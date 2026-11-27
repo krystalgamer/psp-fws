@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/270/.splat_cache.vshmain
   symbol_addrs_path:
     - config/270/symbol_addrs.vshmain.txt
+    - config/270/func_starts.vshmain.txt
     - tmp/build/270/prx_syms.vshmain.txt
   reloc_addrs_path: [tmp/build/270/reloc_addrs.vshmain.txt]
   asset_path: tmp/assets/270/vshmain
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, vshmain]
+      - [0x26BA4, c, vshmain_crtend]
       - { start: 0x26BFC, type: asm, name: fini, linker_section: .fini }
       - { start: 0x26C18, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x27710, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
