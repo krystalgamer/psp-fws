@@ -1473,8 +1473,37 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_00003258);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00003294);
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dialogmain", func_00003150);
+#endif
+
+#if FW_VERSION == 150
+void func_00003150(void *arg0) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x94) = scePaf_D7215544(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0x98) = scePaf_D7215544(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0x9C) = scePaf_D7215544(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xA0) = scePaf_D7215544(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xA4) = scePaf_D7215544(D_00009B80, &D_00008D84);
+        M2C_FIELD(arg0, s32 *, 0xA8) = scePaf_D7215544(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xAC) = scePaf_D7215544(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xB0) = scePaf_D7215544(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xB4) = scePaf_D7215544(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xB8) = scePaf_D7215544(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xBC) = scePaf_D7215544(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xC0) = scePaf_D7215544(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xC4) = scePaf_D7215544(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xC8) = scePaf_D7215544(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xCC) = scePaf_D7215544(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xD0) = scePaf_D7215544(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xD4) = scePaf_D7215544(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xD8) = scePaf_D7215544(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xDC) = scePaf_D7215544(D_00009B80, &D_00008D78);
+        M2C_FIELD(arg0, s32 *, 0xE0) = scePaf_D7215544(D_00009B80, &D_00008D60);
+        M2C_FIELD(arg0, s32 *, 0xE4) = scePaf_D7215544(D_00009B80, &D_00008D6C);
+        M2C_FIELD(arg0, s32 *, 0xE8) = scePaf_D7215544(D_00009B80, &D_00008D78);
+    }
+}
 #endif
 
 #if FW_VERSION == 100

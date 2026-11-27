@@ -89,6 +89,7 @@ extern s32 D_00009A04;
 extern s32 D_00009A08;
 extern s32 D_00009A0C;
 extern s32 D_00009A10;
+extern s32 D_00009B80;
 extern u8 D_00009BA0;
 extern void **D_00009BD8;
 extern void **D_00009BE4;
