@@ -10574,9 +10574,3 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00019E14);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00019F98);
 #endif
-
-INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001A008);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/netconf_plugin", func_0001A060);
-#endif

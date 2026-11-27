@@ -156,6 +156,8 @@ struct Unk_func_00019D48_0 {
     s32 unk8;
 };
 
+typedef void (*func_ptr)(void);
+
 extern s32 D_00011730;
 extern s32 D_00012B38;
 extern s32 D_00012BD8;
@@ -206,6 +208,7 @@ extern s32 D_00014330;
 extern M2C_UNK D_0001433C;
 extern s32 D_0001434C;
 extern M2C_UNK D_0001437C;
+extern func_ptr D_0001B0D4[];
 extern M2C_UNK D_0001C004;
 extern M2C_UNK D_0001C498;
 extern M2C_UNK D_0001CECC;

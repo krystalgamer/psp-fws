@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/282/.splat_cache.netconf_plugin
   symbol_addrs_path:
     - config/282/symbol_addrs.netconf_plugin.txt
+    - config/282/func_starts.netconf_plugin.txt
     - tmp/build/282/prx_syms.netconf_plugin.txt
   reloc_addrs_path: [tmp/build/282/reloc_addrs.netconf_plugin.txt]
   asset_path: tmp/assets/282/netconf_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, netconf_plugin]
+      - [0x1A0A8, c, netconf_plugin_crtend]
       - { start: 0x1A100, type: asm, name: fini, linker_section: .fini }
       - { start: 0x1A11C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1A71C, type: prxpad, order: .text }
