@@ -45,11 +45,11 @@ INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3338);
 INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf13PhApplication14GetRootSurfaceEv);
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 200 && FW_VERSION < 250)
+#if FW_VERSION >= 200 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_0C31CC", func_0006B024);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 200
+#if FW_VERSION >= 150 && FW_VERSION < 200
 s32 *func_0006B024(void) {
     return &D_001A542C;
 }
