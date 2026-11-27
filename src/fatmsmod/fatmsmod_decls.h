@@ -16,13 +16,18 @@ typedef struct {
     u8 pad4[0x48];
 } FatmsMountInfo;
 
-/* Per-iob private block checked by check_heap_alive: mode 0x10 = file (heap at 0x6C), 2 = directory (heap at 0x8). */
+/* Per-iob private block checked by check_heap_alive: mode 0x10 = file, 2 = directory.
+   2.60+ moved the file's heap/pool id to 0xC. */
 typedef struct {
     s32 mode; /* 0x0 */
-    s32 unk4; /* 0x4 */
+    s32 unk4; /* 0x4, PrFILE file/dir handle */
     SceUID dirHeap; /* 0x8 */
+#if FW_VERSION >= 260
+    SceUID fileHeap; /* 0xC */
+#else
     u8 padC[0x60];
     SceUID fileHeap; /* 0x6C */
+#endif
 } FatmsPrivate;
 
 typedef int SceMode;
