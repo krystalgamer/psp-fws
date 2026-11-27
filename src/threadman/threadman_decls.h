@@ -539,6 +539,7 @@ s32 func_00009B94(struct Unk_func_00009B94_0 *arg0);
 s32 func_00009BBC(s32 arg0, struct Unk_func_00009BBC_1 *arg1, s32 arg2, s32 arg3);
 s32 func_0000A8A8(void *arg0);
 s32 func_0000ABD8(struct Unk_func_0000ABD8_0 *arg0);
+u64 func_0000B490(void);
 u64 func_0000B634(void);
 s32 func_0000BCAC(struct Unk_func_0000BCAC_0 *arg0);
 s32 func_0000DAF4(s32, s32);

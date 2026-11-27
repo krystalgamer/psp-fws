@@ -46,13 +46,22 @@ INCLUDE_ASM("nonmatchings/systimer", sceSTimerSetHandler);
 void _sceSTimerStopCount(SceSTimerInfo *timer) {
     timer->regadr->timerData = timer->regadr->nowData & 0x7F7FFFFF;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 271
+s32 _sceSTimerGetCount(SceSTimerInfo *timer) {
+    u32 now = timer->regadr->nowData & 0x3FFFFF;
+    u32 base = timer->regadr->baseTime & 0x3FFFFF;
+    return now - base;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/systimer", _sceSTimerGetCount);
 #endif
 
 INCLUDE_ASM("nonmatchings/systimer", module_bootstart);
 
-#if FW_VERSION == 100
 s32 module_reboot_before(void) {
     s32 oldIntr = sceKernelCpuSuspendIntr();
     s32 i;
@@ -64,9 +73,6 @@ s32 module_reboot_before(void) {
     sceKernelCpuResumeIntr(oldIntr);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/systimer", module_reboot_before);
-#endif
 
 #if FW_VERSION == 100
 void func_00000128(SceSTimerInfo *timer) {

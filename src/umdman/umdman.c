@@ -4462,13 +4462,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_0000A024);
 INCLUDE_ASM("nonmatchings/umdman", func_0000A0EC);
 
 INCLUDE_RODATA("nonmatchings/umdman", D_0000FF50);
-#endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/umdman", func_0000A2EC);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_0000A2EC(void) {
     s32 temp_s1;
     s32 temp_v0;
@@ -4481,9 +4475,7 @@ s32 func_0000A2EC(void) {
     sceKernelCpuResumeIntr(temp_s1);
     return temp_v0;
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/umdman", D_0000FF9C);
 #endif
 
@@ -4755,11 +4747,7 @@ s32 func_0000C1B8(void) {
 }
 #endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/umdman", func_0000AD24);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_0000AD24(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
 

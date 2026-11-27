@@ -213,6 +213,9 @@ extern s8 D_00019E0C; /* current drive letter */
 extern s32 D_00019E10[26]; /* last driver error per drive, index drive - 'A' */
 extern s32 D_00019E28;
 extern s32 D_0001A040;
+extern s32 D_0001B0C8;
+extern s32 D_0001B248;
+extern FatmsHeapEnt D_0001B298[128];
 extern s32 D_0001B6A4;
 extern s32 D_0001B790;
 extern M2C_UNK D_0001BCC4;

@@ -194,7 +194,65 @@ s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 300
+#if FW_VERSION == 150
+s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv) {
+    s32 ret = 0;
+    s32 intr;
+
+    intr = sceKernelCpuSuspendIntr();
+    if (D_0001B248 == -0xF) {
+        sceKernelCpuResumeIntr(intr);
+        Kprintf("prfile_mod.c:%s:Formatting!!\n", "check_reload_status");
+        return -2;
+    }
+    if (checkMedia != 0 && D_0002BA90[0] == 0x1022) {
+        ret = -1;
+    }
+    sceKernelCpuResumeIntr(intr);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = 0;
+    if (priv != NULL) {
+        ret = check_heap_alive(priv);
+        if (ret < 0) {
+            return -0x3EA;
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 152
+s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv) {
+    s32 ret = 0;
+    s32 intr;
+
+    intr = sceKernelCpuSuspendIntr();
+    if (D_0001B0C8 == -0xF) {
+        sceKernelCpuResumeIntr(intr);
+        Kprintf("prfile_mod.c:%s:Formatting!!\n", "check_reload_status");
+        return -2;
+    }
+    if (checkMedia != 0 && D_0002BA90[0] == 0x1022) {
+        ret = -1;
+    }
+    sceKernelCpuResumeIntr(intr);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = 0;
+    if (priv != NULL) {
+        ret = check_heap_alive(priv);
+        if (ret < 0) {
+            return -0x3EA;
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 151 || (FW_VERSION >= 201 && FW_VERSION < 300)
 INCLUDE_ASM("nonmatchings/fatmsmod", check_reload_status);
 #endif
 
@@ -236,7 +294,37 @@ void *get_heap(SceUID *heap, SceSize size) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 260
+#if FW_VERSION == 150
+void *get_heap(SceUID *heap, SceSize size) {
+    s32 intr;
+    FatmsHeapEnt *p;
+    void *mem;
+
+    intr = sceKernelCpuSuspendIntr();
+    p = D_0001B298;
+    while (p->mem != NULL) {
+        p++;
+        if (p > &D_0001B298[128]) {
+            sceKernelCpuResumeIntr(intr);
+            return NULL;
+        }
+    }
+    p->mem = (void *)-1;
+    sceKernelCpuResumeIntr(intr);
+    *heap = sceKernelCreateHeap(1, size, 1, D_00014704);
+    if (*heap < 0) {
+        Kprintf("prfile_mod.c:%s:Cannot create heap:0x%x\n", "get_heap", *heap);
+        p->mem = NULL;
+        return NULL;
+    }
+    mem = sceKernelAllocHeapMemory(*heap, size);
+    p->mem = mem;
+    p->heap = *heap;
+    return mem;
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/fatmsmod", get_heap);
 #endif
 
@@ -291,7 +379,22 @@ s32 free_heap_all(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 150 && FW_VERSION < 260
+s32 free_heap_all(void) {
+    FatmsHeapEnt *p;
+
+    for (p = D_0001B298; p < &D_0001B298[128]; p++) {
+        if (p->mem != NULL) {
+            if (free_heap(p->heap, p->mem) < 0) {
+                Kprintf("prfile_mod.c:%s:free heap error\n", "free_heap_all");
+            }
+        }
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/fatmsmod", free_heap_all);
 #endif
 
