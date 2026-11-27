@@ -419,6 +419,38 @@ def fix_undeclared(lines, idx, msg):
 FIXERS = [fix_too_few, fix_too_many, fix_convert_return, fix_undeclared, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
 
 
+def unify_arity(files, store):
+    """m2c definitions of one function with different (pass-through) parameter counts per version are
+    different overloads in C++ (callers then miss the C symbol): give every definition and the
+    prototype the longest `argN` parameter list (fixers can add parameters to one version's copy)."""
+    DEF = re.compile(r"^((?:static )?[\w \*]+?\b)(\w+)\(([^()]*)\)(\s*\{)$", re.M)
+
+    def plist(s):
+        ps = [x.strip() for x in structify._split_args(s) if x.strip() not in ("", "void")]
+        return ps if all(re.fullmatch(rf"[\w \*]+\barg{i}", x) for i, x in enumerate(ps)) else None
+    longest = {}
+    for f in files:
+        for m in DEF.finditer(f.read_text()):
+            ps = plist(m[3])
+            if ps is not None and m[2] in store["funcs"] and len(ps) > len(longest.get(m[2], [])):
+                longest[m[2]] = ps
+    for f in files:
+        t = f.read_text()
+
+        def widen(m):
+            ps, want = plist(m[3]), longest.get(m[2])
+            if ps is None or want is None or len(ps) >= len(want):
+                return m[0]
+            return f"{m[1]}{m[2]}({', '.join(ps + want[len(ps):])}){m[4]}"
+        u = DEF.sub(widen, t)
+        if u != t:
+            f.write_text(u)
+    for name, want in longest.items():
+        pm = re.match(rf"^(.*?\b{name})\((.*)\);$", store["funcs"][name])
+        if pm and plist(pm[2]) is not None and len(plist(pm[2])) < len(want):
+            store["funcs"][name] = f"{pm[1]}({', '.join(want)});"
+
+
 # ---------------------------------------------------------------- driver
 
 def main():
@@ -462,6 +494,7 @@ def main():
     # C accepts `extern void D;` (only &D is used); C++ doesn't
     for k, v in store.get("vars", {}).items():
         store["vars"][k] = re.sub(r"^extern (volatile )?void (\w+);$", r"extern \1u8 \2;", v)
+    unify_arity(files, store)
     structify.write_decls(mod, store)
     print(f"{mod}: {len(files)} units marked C++, {nots} `!(x & K)` rewritten, versions {' '.join(vers)}")
 
@@ -492,6 +525,8 @@ def main():
                 else:
                     fixed += 1
             f.write_text("\n".join(lines))
+        unify_arity(files, store)
+        CHANGED_PROTOS.setdefault("", "")
         if CHANGED_PROTOS:
             for name, proto in CHANGED_PROTOS.items():
                 if name and name in store["funcs"]:
