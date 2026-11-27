@@ -825,6 +825,28 @@ struct msghdr {
     s32 msg_flags;              /* 0x18 */
 };
 
+/* struct inpcbtable (NetBSD 1.5 in_pcb.h) */
+struct inpcbhead {
+    struct inpcb *lh_first;
+};
+struct inpcbtable {
+    struct { struct inpcb *cqh_first; struct inpcb *cqh_last; } inpt_queue; /* 0x00 */
+    struct inpcbhead *inpt_bindhashtbl;     /* 0x08 */
+    struct inpcbhead *inpt_connecthashtbl;  /* 0x0C */
+    u32 inpt_bindhash;                      /* 0x10 */
+    u32 inpt_connecthash;                   /* 0x14 */
+    u16 inpt_lastport;                      /* 0x18 */
+    u16 inpt_lastlow;                       /* 0x1A */
+};
+#define INP_ATTACHED 0
+#define INP_BOUND 1
+#define INP_CONNECTED 2
+#define INPCBHASH_BIND(table, laddr, lport) \
+    &(table)->inpt_bindhashtbl[((__builtin_allegrex_wsbw((laddr).s_addr) + (u16)__builtin_allegrex_wsbh(lport))) & (table)->inpt_bindhash]
+#define INPCBHASH_CONNECT(table, faddr, fport, laddr, lport) \
+    &(table)->inpt_connecthashtbl[((__builtin_allegrex_wsbw((faddr).s_addr) + (u16)__builtin_allegrex_wsbh(fport)) + \
+        (__builtin_allegrex_wsbw((laddr).s_addr) + (u16)__builtin_allegrex_wsbh(lport))) & (table)->inpt_connecthash]
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -953,16 +975,6 @@ struct Unk_func_0000F2A8_1 {
 struct Unk_func_000138B4_0 {
     u8 pad0[0x20];
     s32 unk20;
-};
-
-struct Unk_func_00013ED4_0 {
-    void *unk0;
-    void *unk4;
-    s32 unk8;
-    s32 unkC;
-    u8 pad10[0x8];
-    s16 unk18;
-    s16 unk1A;
 };
 
 struct Unk_func_00015654_0 {
@@ -1142,9 +1154,9 @@ extern struct SceTailqHead D_0002CFF8[];
 extern u8 D_0002DA50[0x170];
 extern s32 D_0002DBC0;
 extern M2C_UNK D_0002DBC8;
-extern struct Unk_func_00013ED4_0 D_0002DC10;
+extern struct inpcbtable D_0002DC10;
 extern s32 D_0002DC30;
-extern M2C_UNK D_0002DC78;
+extern struct inpcbtable D_0002DC78;
 extern struct SceTailqHead D_0002DC98[13];
 extern s32 D_0002DD04;
 extern u8 D_0002DD10[];
@@ -1178,7 +1190,7 @@ extern s32 D_0002F50C;
 extern s32 D_0002F510;
 extern SceNetBytes4 D_0002F544;
 extern u8 D_00030218[];
-extern struct Unk_func_00013ED4_0 D_000302C8;
+extern struct inpcbtable D_000302C8;
 extern u8 *D_000305A4;
 extern const struct cp chap; /* chap */
 extern const struct cp *cps[IDX_COUNT]; /* cps */
@@ -1209,7 +1221,7 @@ void _sce_pspnet_callout_init(void *c);
 void _sce_pspnet_callout_reset(void *c, s32 ticks, void (*func)(void *), void *arg);
 void _sce_pspnet_callout_stop(void *c);
 M2C_UNK _sce_pspnet_get_thread_errno();
-s32 _sce_pspnet_hashinit(s32, void *);
+void *_sce_pspnet_hashinit(s32 elements, u32 *hashmask);
 void _sce_pspnet_if_attach(struct ifnet *ifp);
 void _sce_pspnet_if_down(struct ifnet *ifp);
 void _sce_pspnet_ifafree(struct ifaddr *ifa);
@@ -1410,7 +1422,7 @@ void func_0002D420();
 struct socket *getsock(s32 s);
 s32 if_rtdel(struct rtentry *rt, void *arg);
 void in_losing(struct inpcb *inp);
-void in_pcbinit(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2);
+void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize);
 void lortrequest(s32 cmd, struct rtentry *rt);
 s32 module_start(void);
 s32 module_stop(void);

@@ -2784,32 +2784,26 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", in_pcbinit);
 #endif
 
 #if FW_VERSION < 201
-void in_pcbinit(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2) {
-    s32 temp_v0;
-
-    arg0->unk0 = arg0;
-    arg0->unk4 = arg0;
-    arg0->unk8 = _sce_pspnet_hashinit(arg1, arg0->pad10);
-    temp_v0 = _sce_pspnet_hashinit(arg2, &arg0->pad10[4]);
-    arg0->unk1A = 0x3FF;
-    arg0->unkC = temp_v0;
-    arg0->unk18 = (u16) D_0002E5EC + (sceNetRand() % (u32) ((D_0002E5F0 - D_0002E5EC) + 1));
+void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize) {
+    table->inpt_queue.cqh_first = (struct inpcb *)table;
+    table->inpt_queue.cqh_last = (struct inpcb *)table;
+    table->inpt_bindhashtbl = _sce_pspnet_hashinit(bindhashsize, &table->inpt_bindhash);
+    table->inpt_connecthashtbl = _sce_pspnet_hashinit(connecthashsize, &table->inpt_connecthash);
+    table->inpt_lastlow = 0x3FF; /* IPPORT_RESERVEDMAX */
+    table->inpt_lastport = (u16)D_0002E5EC + (sceNetRand() % (u32)((D_0002E5F0 - D_0002E5EC) + 1));
 }
 #endif
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013CC4);
 
-void in_pcbinit(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2) {
-    s32 temp_v0;
-
-    arg0->unk0 = arg0;
-    arg0->unk4 = arg0;
-    arg0->unk8 = _sce_pspnet_hashinit(arg1, (u8 *)arg0 + 0x10);
-    temp_v0 = _sce_pspnet_hashinit(arg2, (u8 *)arg0 + 0x14);
-    arg0->unk1A = 0x3FF;
-    arg0->unkC = temp_v0;
-    arg0->unk18 = (s16) ((u16) D_0002C02C + (sceNetRand() % (u32) ((D_0002C030 - D_0002C02C) + 1)));
+void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize) {
+    table->inpt_queue.cqh_first = (struct inpcb *)table;
+    table->inpt_queue.cqh_last = (struct inpcb *)table;
+    table->inpt_bindhashtbl = _sce_pspnet_hashinit(bindhashsize, &table->inpt_bindhash);
+    table->inpt_connecthashtbl = _sce_pspnet_hashinit(connecthashsize, &table->inpt_connecthash);
+    table->inpt_lastlow = 0x3FF; /* IPPORT_RESERVEDMAX */
+    table->inpt_lastport = (u16)D_0002C02C + (sceNetRand() % (u32)((D_0002C030 - D_0002C02C) + 1));
 }
 #endif
 
