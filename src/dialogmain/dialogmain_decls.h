@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_00003660_0 {
     u8 pad0[0x98];
     s32 unk98;
@@ -151,15 +157,15 @@ extern s32 D_0000A3D4;
 extern s32 D_0000A3D8;
 extern M2C_UNK func_0000292C;
 
-s32 File_AllocLoad(M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK);
+s32 File_AllocLoad(const char *, M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK);
 M2C_UNK PhiPostSystemEvent(M2C_UNK, s32, s32);
 M2C_UNK _ZN3paf11SurfacePoolC1EPviPKc(s32, s32, M2C_UNK, M2C_UNK);
 s32 _ZN3paf4View8GetSoundEPKc(s32, M2C_UNK *);
 M2C_UNK _ZN3paf6ModuleD1Ev(s32);
 M2C_UNK _ZN3paf8PhWidget13UpdateCamerasEv(void **);
-M2C_UNK _ZN3vsh10RebootLock4ExitEv();
-M2C_UNK _ZN3vsh10RebootLock6RebootEv();
-M2C_UNK _ZN3vsh19DeallocateCccBufferEv();
+M2C_UNK _ZN3vsh10RebootLock4ExitEv(void);
+M2C_UNK _ZN3vsh10RebootLock6RebootEv(void);
+M2C_UNK _ZN3vsh19DeallocateCccBufferEv(void);
 void **_ZNK3paf4View10FindWidgetEPKc(s32, M2C_UNK *);
 M2C_UNK _ZdlPv(s32);
 s32 _Znwj(M2C_UNK);
@@ -277,7 +283,7 @@ void func_000062E4(void);
 s32 func_000062FC(void);
 s32 func_00006300_v250(void);
 s32 func_00006430(void);
-M2C_UNK func_00006484();
+M2C_UNK func_00006484(...);
 s32 func_000065CC(void);
 s32 func_000066FC(void);
 s32 func_00006744(s32, s32, s32, s32, s32);
@@ -302,42 +308,46 @@ void func_00006E54(void);
 void func_00006EE4(void);
 void func_000070DC(s32 arg0);
 s32 func_000070F8(void);
-M2C_UNK func_000073DC();
+M2C_UNK func_000073DC(...);
 void func_00007468(void);
 void func_000078E8(void);
-M2C_UNK func_00007940();
+M2C_UNK func_00007940(...);
 s32 module_reboot_before(void);
 s32 module_stop(void);
 M2C_UNK sceCccSetCTable(s32, s32);
 s32 sceIoClose(s32);
-s32 sceNetAdhocctlTerm();
+s32 sceNetAdhocctlTerm(...);
 M2C_UNK scePaf_2F94EF32(M2C_UNK, s32, s32);
 void **scePaf_4F20E8B0(s32, M2C_UNK *);
 s32 scePaf_61A8E8EC(M2C_UNK);
 s32 scePaf_AD66D039(s32, M2C_UNK *);
 M2C_UNK scePaf_BE0D7212(void **);
 M2C_UNK scePaf_D539C351(s32, s32, M2C_UNK, M2C_UNK);
-M2C_UNK sceSystemFileFree();
+M2C_UNK sceSystemFileFree(...);
 s32 sceUmdActivate(s32, void *);
 M2C_UNK sceUmdDeactivate(M2C_UNK, M2C_UNK *);
-M2C_UNK sceVshCommonUtil_7A17D5B8();
-M2C_UNK sceVshCommonUtil_92DFBA5B();
-M2C_UNK sceVshCommonUtil_A2A69900();
-M2C_UNK sce_paf_private_acosf();
-M2C_UNK sce_paf_private_bsearch();
-M2C_UNK sce_paf_private_cosf();
-M2C_UNK sce_paf_private_floorf();
+M2C_UNK sceVshCommonUtil_7A17D5B8(...);
+M2C_UNK sceVshCommonUtil_92DFBA5B(...);
+M2C_UNK sceVshCommonUtil_A2A69900(...);
+M2C_UNK sce_paf_private_acosf(...);
+M2C_UNK sce_paf_private_bsearch(...);
+M2C_UNK sce_paf_private_cosf(...);
+M2C_UNK sce_paf_private_floorf(...);
 M2C_UNK sce_paf_private_free(s32);
-M2C_UNK sce_paf_private_malloc();
-M2C_UNK sce_paf_private_memalign();
-M2C_UNK sce_paf_private_memcmp();
-M2C_UNK sce_paf_private_memcpy();
-M2C_UNK sce_paf_private_memset();
-M2C_UNK sce_paf_private_printf(M2C_UNK *, s32);
-M2C_UNK sce_paf_private_qsort();
-M2C_UNK sce_paf_private_sqrtf();
-M2C_UNK sce_paf_private_strcmp();
-M2C_UNK sce_paf_private_strcpy();
-M2C_UNK sce_paf_private_strlen();
+M2C_UNK sce_paf_private_malloc(...);
+M2C_UNK sce_paf_private_memalign(...);
+M2C_UNK sce_paf_private_memcmp(...);
+M2C_UNK sce_paf_private_memcpy(...);
+M2C_UNK sce_paf_private_memset(...);
+M2C_UNK sce_paf_private_printf(const char *, s32);
+M2C_UNK sce_paf_private_qsort(...);
+M2C_UNK sce_paf_private_sqrtf(...);
+M2C_UNK sce_paf_private_strcmp(...);
+M2C_UNK sce_paf_private_strcpy(...);
+M2C_UNK sce_paf_private_strlen(...);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

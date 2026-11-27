@@ -1,6 +1,6 @@
 {
  "funcs": {
-  "File_AllocLoad": "s32 File_AllocLoad(M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK);",
+  "File_AllocLoad": "s32 File_AllocLoad(const char *, M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK);",
   "PhiPostSystemEvent": "M2C_UNK PhiPostSystemEvent(M2C_UNK, s32, s32);",
   "_ZN3paf11SurfacePoolC1EPviPKc": "M2C_UNK _ZN3paf11SurfacePoolC1EPviPKc(s32, s32, M2C_UNK, M2C_UNK);",
   "_ZN3paf4View8GetSoundEPKc": "s32 _ZN3paf4View8GetSoundEPKc(s32, M2C_UNK *);",
@@ -182,7 +182,7 @@
   "sce_paf_private_memcmp": "M2C_UNK sce_paf_private_memcmp();",
   "sce_paf_private_memcpy": "M2C_UNK sce_paf_private_memcpy();",
   "sce_paf_private_memset": "M2C_UNK sce_paf_private_memset();",
-  "sce_paf_private_printf": "M2C_UNK sce_paf_private_printf(M2C_UNK *, s32);",
+  "sce_paf_private_printf": "M2C_UNK sce_paf_private_printf(const char *, s32);",
   "sce_paf_private_qsort": "M2C_UNK sce_paf_private_qsort();",
   "sce_paf_private_sqrtf": "M2C_UNK sce_paf_private_sqrtf();",
   "sce_paf_private_strcmp": "M2C_UNK sce_paf_private_strcmp();",

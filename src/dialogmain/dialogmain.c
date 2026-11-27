@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O2 */
 #include "common.h"
 #include "dialogmain_decls.h"
@@ -88,7 +89,7 @@ void func_00000130(void) {
     s32 sp4;
 
     if (D_00008918 == 0) {
-        D_00008918 = File_AllocLoad("flash0:/vsh/etc/jis2ucs.cbin", 0, 0, &sp0, 0);
+        D_00008918 = File_AllocLoad("flash0:/vsh/etc/jis2ucs.cbin", 0, 0, (M2C_UNK*) &sp0, 0);
     }
     if (D_0000891C == 0) {
         D_0000891C = File_AllocLoad("flash0:/vsh/etc/ucs2jis.cbin", 0, 0, &sp4, 0);
@@ -105,7 +106,7 @@ void func_00000130(void) {
     M2C_UNK sp4;
 
     if (D_00008918 == 0) {
-        D_00008918 = File_AllocLoad("flash0:/vsh/etc/jis2ucs.cbin", 0, 0, &sp0, 0);
+        D_00008918 = File_AllocLoad("flash0:/vsh/etc/jis2ucs.cbin", 0, 0, (M2C_UNK*) &sp0, 0);
     }
     if (D_0000891C == 0) {
         D_0000891C = File_AllocLoad("flash0:/vsh/etc/ucs2jis.cbin", 0, 0, &sp4, 0);
@@ -2526,7 +2527,7 @@ void func_00006A44(s32 arg0) {
 INCLUDE_ASM("nonmatchings/dialogmain", func_000058EC);
 
 s32 func_00006BC4(void) {
-    if (!(D_00007FEC & 1)) {
+    if ((D_00007FEC & 1) == 0) {
 
     } else {
         func_00005A14();
