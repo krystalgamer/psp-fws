@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/modulemgr
-  src_path: src/modulemgr
+  src_path: tmp/av_src/102/modulemgr
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/modulemgr.ld
   cache_path: tmp/build/102/.splat_cache.modulemgr
@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, modulemgr]
+      - [0x80, c, modulemgr]
       - { start: 0x460C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x47EC, type: prxpad, order: .text }
       - { start: 0x47F0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x48D0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x4904, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x4AF8, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x4BE8, rodata, modulemgr]
+      - [0x4BE8, .rodata, modulemgr]
       - { start: 0x62C8, type: prxpad, order: .rodata }
   - name: modulemgr_seg1
     type: code
