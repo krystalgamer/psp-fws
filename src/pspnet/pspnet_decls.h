@@ -105,6 +105,16 @@ struct timeval {
     u32 tv_usec;
 };
 
+/* struct mbuf (NetBSD 1.5 mbuf.h, partial; full layout in pspnet_inet_decls) */
+struct mbuf {
+    struct mbuf *m_next;        /* 0x00 */
+    struct mbuf *m_nextpkt;     /* 0x04 */
+    u8 *m_data;                 /* 0x08 */
+    s32 m_len;                  /* 0x0C */
+    s16 m_type;                 /* 0x10 */
+    s16 m_flags;                /* 0x12 */
+};
+
 
 struct mbuf;
 /* struct ifqueue (4.4BSD if.h) */
@@ -257,14 +267,26 @@ struct bpf_d {
     void *bd_filter;            /* 0x24 struct bpf_insn * */
     u32 bd_rcount;              /* 0x28 */
     u32 bd_dcount;              /* 0x2C */
-    u8 unk30[0x40 - 0x30];
+    u8 bd_promisc;              /* 0x30 */
+    u8 bd_state;                /* 0x31 */
+    u8 bd_immediate;            /* 0x32 */
+    s32 unk34;
+    s32 bd_sel;                 /* 0x38 selinfo: waiting thread id */
+    s32 unk3C;
 };
 typedef char chk_bpf_d[(sizeof(struct bpf_d) == 0x40) ? 1 : -1];
 struct bpf_if {
     struct bpf_if *bif_next;    /* 0x00 */
     struct bpf_d *bif_dlist;    /* 0x04 */
     struct bpf_if **bif_driverp; /* 0x08 */
+    u32 bif_dlt;                /* 0x0C */
+    u32 bif_hdrlen;             /* 0x10 */
+    struct ifnet *bif_ifp;      /* 0x14 */
 };
+#define SIZEOF_BPF_HDR 20
+#define BPF_WORDALIGN(x) (((x) + 3) & ~3)
+#define POLLIN 0x0001
+#define POLLRDNORM 0x0040
 #define NBPFILTER 8
 #define D_ISFREE(d) ((d) == (d)->bd_next)
 #define D_MARKFREE(d) ((d)->bd_next = (d))
@@ -325,11 +347,6 @@ struct Unk_func_00005744_0 {
 struct Unk_func_00005744_var_s0 {
     u8 pad0[0x4];
     struct Unk_func_00005744_var_s0 *unk4;
-};
-
-struct Unk_sceNet_lib_92633D8D_0 {
-    u8 pad0[0x8];
-    s32 unk8;
 };
 
 extern s32 D_0000A0D0;
@@ -454,7 +471,7 @@ struct SceNetThreadInfo *_sce_pspnet_lock_threadinfo(SceUID thid);
 void _sce_pspnet_microtime(struct timeval *tv);
 void _sce_pspnet_schednetintr(s32 arg0);
 void _sce_pspnet_schednetintr_with_evf(s32 arg0);
-void _sce_pspnet_selrecord(struct Unk_sceNet_lib_92633D8D_0 *arg0, s32 *arg1);
+void _sce_pspnet_selrecord(struct SceNetThreadInfo *ti, s32 *sip);
 void _sce_pspnet_selwakeup(s32 *arg0);
 s32 _sce_pspnet_spllock(void);
 s32 _sce_pspnet_spllock_owner(void);
@@ -518,7 +535,12 @@ s32 func_0000445C(struct bpf_d *d);
 void func_000045CC(s32 n);
 s32 func_0000460C(s32 minor);
 s32 func_00004678(s32 minor);
+s32 func_00004770(s32 minor, s32 events, struct SceNetThreadInfo *p);
+void func_00004820(void *arg, struct mbuf *m);
+void func_000048F4(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrlen);
 u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2);
+void func_000049F4(struct bpf_d *d, u8 *pkt, u32 pktlen, u32 snaplen, u8 *(*cpfn)());
+u32 func_00004B34(void *pc, u8 *p, u32 wirelen, u32 buflen);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);
 void func_00005C28(void);

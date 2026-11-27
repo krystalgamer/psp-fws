@@ -1799,8 +1799,8 @@ void _sce_pspnet_hashdone(void *hashtbl) {
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_selrecord);
 #else
-void _sce_pspnet_selrecord(struct Unk_sceNet_lib_92633D8D_0 *arg0, s32 *arg1) {
-    *arg1 = arg0->unk8;
+void _sce_pspnet_selrecord(struct SceNetThreadInfo *ti, s32 *sip) {
+    *sip = ti->ti_thid;
 }
 #endif
 
@@ -1948,11 +1948,59 @@ s32 func_00004678(s32 minor) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00004770);
+s32 func_00004770(s32 minor, s32 events, struct SceNetThreadInfo *p) {
+    struct bpf_d *d = &D_0000BC14[minor];
+    s32 revents = 0;
+    s32 s;
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00004820);
+    s = _sce_pspnet_spllock();
+    if (events & (POLLIN | POLLRDNORM)) {
+        if (d->bd_hlen != 0 || (d->bd_immediate && d->bd_slen != 0))
+            revents |= events & (POLLIN | POLLRDNORM);
+        else
+            _sce_pspnet_selrecord(p, &d->bd_sel);
+    }
+    _sce_pspnet_splunlock(s);
+    return revents;
+}
 
+void func_00004820(void *arg, struct mbuf *m) {
+    struct bpf_if *bp = arg;
+    struct bpf_d *d;
+    u32 pktlen, slen;
+    struct mbuf *m0;
+    s32 s;
+
+    pktlen = 0;
+    for (m0 = m; m0 != NULL; m0 = m0->m_next)
+        pktlen += m0->m_len;
+    s = _sce_pspnet_spllock();
+    for (d = bp->bif_dlist; d != NULL; d = d->bd_next) {
+        ++d->bd_rcount;
+        slen = func_00004B34(d->bd_filter, (u8 *)m, pktlen, 0);
+        if (slen != 0)
+            func_000049F4(d, (u8 *)m, pktlen, slen, func_00004974);
+    }
+    _sce_pspnet_splunlock(s);
+}
+
+#if FW_VERSION < 271
+void func_000048F4(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrlen) {
+    struct bpf_if *bp;
+
+    bp = sceNetMallocInternal(sizeof(*bp));
+    bp->bif_dlist = NULL;
+    bp->bif_driverp = driverp;
+    bp->bif_ifp = ifp;
+    bp->bif_dlt = dlt;
+    bp->bif_next = D_0000BC10;
+    D_0000BC10 = bp;
+    *bp->bif_driverp = NULL;
+    bp->bif_hdrlen = BPF_WORDALIGN(hdrlen + SIZEOF_BPF_HDR) - hdrlen;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", func_000048F4);
+#endif
 
 #if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pspnet", func_00004974);
