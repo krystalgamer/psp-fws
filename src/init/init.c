@@ -23,9 +23,35 @@ INCLUDE_ASM("nonmatchings/init", func_0000007C);
 INCLUDE_ASM("nonmatchings/init", func_000000DC);
 #else
 INCLUDE_ASM("nonmatchings/init", sceKernelGetChunk);
+#endif
 
+#if FW_VERSION == 100
+s32 sceKernelRegisterChunk(u32 chunkId, s32 blockId) {
+    if (chunkId < 16) {
+        D_00002248[chunkId] = blockId;
+        return blockId;
+    }
+    Kprintf(D_00001DC8, "sceKernelRegisterChunk");
+    return 0x800200DE;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/init", sceKernelRegisterChunk);
+#endif
 
+#if FW_VERSION == 100
+s32 sceKernelReleaseChunk(u32 chunkId) {
+    if (chunkId < 16) {
+        D_00002248[chunkId] = -1;
+        return -1;
+    }
+    Kprintf(D_00001DC8, "sceKernelReleaseChunk");
+    return 0x800200DE;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/init", sceKernelReleaseChunk);
 #endif
 
