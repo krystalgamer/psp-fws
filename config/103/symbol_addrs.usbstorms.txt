@@ -73,3 +73,12 @@ func_00002708_v103 = 0x00002708; // type:func rom:0x2788
 func_00002710_v103 = 0x00002710; // type:func rom:0x2790
 func_00002768_v103 = 0x00002768; // type:func rom:0x27E8
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelCreateFpl = 0x00002730; // type:func
+sceKernelDeleteFpl = 0x00002738; // type:func
+sceKernelTryAllocateFpl = 0x00002740; // type:func
+sceKernelCreateThread = 0x00002748; // type:func
+sceKernelDeleteThread = 0x00002750; // type:func
+sceKernelStartThread = 0x00002758; // type:func
+sceKernelTerminateThread = 0x00002760; // type:func
