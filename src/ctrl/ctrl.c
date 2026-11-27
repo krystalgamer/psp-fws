@@ -132,7 +132,14 @@ s32 module_reboot_before(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSuspend);
+s32 sceCtrlSuspend(void) {
+    if (D_00001D70.samplingCycle == 0) {
+        sceKernelDisableSubIntr(30, 19);
+    } else {
+        sceSTimerStopCount(D_00001D70.timerID);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlResume);
 
@@ -378,9 +385,15 @@ s32 func_00001220(void) {
     sceKernelSetEventFlag(M2C_VFIELD(&D_00001D70, s32, 4), 1U);
     return 0;
 }
+
+s32 func_00001270(void) {
+    D_00001D70.unk14 &= ~2;
+    D_00001D70.unk10 = D_00001D70.unk8A;
+    return 0;
+}
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/ctrl", func_00001270);
 #endif
 

@@ -14,13 +14,24 @@ typedef struct {
     u8 unkF;
 } SceCtrlRapidFire;
 struct D_00001D70_s {
-    u8 pad0[0xC];
-    s32 samplingMode;
-    u8 padC[0x91C - 0x10];
-    SceCtrlRapidFire rapidFire[16];
-    u8 padA1C[0x10];
-    u32 maskSupportButtons;
-    u32 maskApplyButtons;
+    union {
+        u8 pad0[0xA34];
+        struct {
+            s32 timerID;
+            s32 unk4;
+            s32 samplingCycle;
+            s32 samplingMode;
+            s32 unk10;
+            u32 unk14;
+            u8 pad18[0x8A - 0x18];
+            u8 unk8A;
+            u8 pad8B[0x91C - 0x8B];
+            SceCtrlRapidFire rapidFire[16];
+            u8 padA1C[0x10];
+            u32 maskSupportButtons;
+            u32 maskApplyButtons;
+        };
+    };
     volatile s32 unkA34;
     volatile s32 unkA38;
     volatile s32 unkA3C;
@@ -76,6 +87,8 @@ s32 sceCtrlSetSuspendingExtraSamples(u32 arg0);
 s32 sceCtrl_driver_CC70B61E(void);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
+s32 sceKernelDisableSubIntr(s32, s32);
 s32 sceKernelSetEventFlag(s32, u32);
+s32 sceSTimerStopCount(s32);
 
 #endif
