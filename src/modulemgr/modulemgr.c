@@ -1077,9 +1077,77 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00005CB0);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHPlain);
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
+SceUID sceKernelLoadModuleBufferUsbWlan(SceSize bufSize, void *buf, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferVSH);
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        goto bad;
+    }
+    if (k1IsUserMode() && (s32)((u32)buf | bufSize | ((u32)buf + bufSize)) < 0) {
+        goto bad;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode() && sceKernelGetUserLevel() != 2) {
+        Kprintf("modulemgr.c:%s:This API for USBWLAN only\n", "sceKernelLoadModuleBufferUsbWlan");
+        setK1(oldK1);
+        return 0x80020149;
+    }
+    modParams.apiType = 0x30;
+    modParams.modeStart = CMD_RELOCATE_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fileBase = buf;
+    modParams.fd = (SceUID)buf;
+    ret = func_000026F8(&modParams, option);
+    setK1(oldK1);
+    return ret;
+bad:
+    Kprintf(D_00005B90, "sceKernelLoadModuleBufferUsbWlan");
+    setK1(oldK1);
+    return 0x800200D3;
+}
+
+SceUID sceKernelLoadModuleBufferVSH(SceSize bufSize, void *buf, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        goto bad;
+    }
+    if (k1IsUserMode() && (s32)((u32)buf | bufSize | ((u32)buf + bufSize)) < 0) {
+        goto bad;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode() && sceKernelGetUserLevel() != 4) {
+        Kprintf(D_00005C3C, "sceKernelLoadModuleBufferVSH");
+        setK1(oldK1);
+        return 0x80020149;
+    }
+    modParams.apiType = 0x20;
+    modParams.modeStart = CMD_RELOCATE_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fileBase = buf;
+    modParams.fd = (SceUID)buf;
+    ret = func_000026F8(&modParams, option);
+    setK1(oldK1);
+    return ret;
+bad:
+    Kprintf(D_00005B90, "sceKernelLoadModuleBufferVSH");
+    setK1(oldK1);
+    return 0x800200D3;
+}
 
 s32 sceKernelStartModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
     SceModuleMgrParam modParams;
@@ -1263,12 +1331,99 @@ INCLUDE_ASM("nonmatchings/modulemgr", ModuleMgrForKernel_2BE4807D);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", func_00003BFC);
+s32 func_00003BFC(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 status;
+    SceModule *mod;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelSelfStopUnloadModule);
+    mod = sceKernelFindModuleByAddress(ra);
+    if (mod == NULL) {
+        Kprintf("modulemgr.c:%s:call from unknown Module !!!\n", "SelfStopUnloadModule");
+        return 0x80020136;
+    }
+    memset(&modParams, 0, sizeof(modParams));
+    modParams.modeStart = CMD_STOP_MODULE;
+    modParams.modeFinish = CMD_UNLOAD_MODULE;
+    modParams.modId = mod->modId;
+    modParams.callerModId = mod->modId;
+    modParams.argSize = argSize;
+    modParams.argp = argp;
+    if (pStatus != NULL) {
+        modParams.pStatus = pStatus;
+    } else {
+        modParams.pStatus = &status;
+    }
+    ret = func_0000253C(&modParams);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:Cannot stop/unload module 0x%08x\n", "SelfStopUnloadModule", ret);
+        return ret;
+    }
+    sceKernelExitDeleteThread(ret);
+    return ret;
+}
+
+s32 sceKernelSelfStopUnloadModule(s32 unk, SceSize argSize, void *argp) {
+    u32 ra = (u32)getRa();
+    s32 oldK1 = shiftK1Noreorder();
+    s32 ret;
+
+    if (argp != NULL && k1IsUserMode() && (s32)((u32)argp | argSize | ((u32)argp + argSize)) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode()) {
+        ra = ThreadManForKernel_DD55A192();
+    }
+    ret = func_00003BFC(ra, argSize, argp, NULL, NULL);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:SelfSTopUnloadModule failed: 0x%08x\n", "sceKernelSelfStopUnloadModule", ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
+
+s32 sceKernelStopUnloadSelfModule(SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+    SceModuleMgrParam modParams;
+    u32 ra = (u32)getRa();
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (argp != NULL && k1IsUserMode() && (s32)((u32)argp | argSize | ((u32)argp + argSize)) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (pStatus != NULL && k1IsUserMode() && (s32)((u32)pStatus | ((u32)pStatus + sizeof(*pStatus))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode()) {
+        ra = ThreadManForKernel_DD55A192();
+    }
+    ret = func_00003BFC(ra, argSize, argp, pStatus, option);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:SelfStopUnloadModule failed: 0x%08x\n", "sceKernelStopUnloadSelfModule", ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 271
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStopUnloadSelfModule);
 #endif
 
