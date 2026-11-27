@@ -405,7 +405,7 @@ void func_00000D8C(void) {
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000E28);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000E84);
 #else
 void func_00000E84(s32 arg0) {
