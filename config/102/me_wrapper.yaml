@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/me_wrapper
-  src_path: tmp/av_src/102/me_wrapper
+  src_path: src/me_wrapper
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/me_wrapper.ld
   cache_path: tmp/build/102/.splat_cache.me_wrapper
