@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/dialogmain
-  src_path: src/dialogmain
+  src_path: tmp/av_src/102/dialogmain
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/dialogmain.ld
   cache_path: tmp/build/102/.splat_cache.dialogmain
@@ -53,7 +53,7 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, dialogmain]
+      - [0xA4, c, dialogmain]
       - { start: 0x7154, type: asm, name: fini, linker_section: .fini }
       - { start: 0x7170, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x7640, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -70,7 +70,7 @@ segments:
       - { start: 0x7C30, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x7C3C, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x7C40, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x7C44, rodata, dialogmain]
+      - [0x7C44, .rodata, dialogmain]
       - { start: 0x8D5C, type: prxpad, order: .rodata }
   - name: dialogmain_seg1
     type: code
