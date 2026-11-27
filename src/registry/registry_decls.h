@@ -131,6 +131,7 @@ extern s32 g_semaId;
 extern s32 g_vplId;
 extern s32 g_vplMaxUsed;
 
+s32 func_000008BC(s32 index);
 void func_000010B8(SceRegParam *param, SceRegIregHeader *hdr);
 s32 func_000012B0(const char *name, SceRegIregHeader *hdr);
 s32 func_00001560(const char *name, SceRegIregHeader *hdr);

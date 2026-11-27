@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 */
+/* cflags[100-303]: -O2 -fno-thread-jumps */
 #include "common.h"
 #include "k1.h"
 #include "registry_decls.h"
@@ -311,7 +311,31 @@ end:
 }
 #else
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveRegistry);
+#endif
 
+#if FW_VERSION == 150
+s32 sceRegFlushRegistry(s32 index) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto end;
+    ret = func_000008BC(index);
+end:
+    if (res == 0) {
+        if (sceKernelSignalSema(g_semaId, 1) != 0)
+            ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushRegistry);
 #endif
 
@@ -664,9 +688,7 @@ s32 regOpenFileFd(const char *name, s32 *fd) {
     }
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#else
 s32 regOpenFileFd(const char *arg0, s32 *arg1) {
     s32 temp_v0;
     s32 var_v1;
@@ -717,21 +739,6 @@ INCLUDE_ASM("nonmatchings/registry", regClearOpenedCategories);
 #endif
 
 #if FW_VERSION >= 282
-s32 regOpenFileFd(const char *arg0, s32 *arg1) {
-    s32 temp_v0;
-    s32 var_v1;
-
-    temp_v0 = regOpenFile(arg0);
-    var_v1 = 0;
-    if (temp_v0 >= 0) {
-        *arg1 = temp_v0;
-    } else {
-        *arg1 = 0;
-        var_v1 = temp_v0;
-    }
-    return var_v1;
-}
-
 INCLUDE_ASM("nonmatchings/registry", func_000018B4);
 #endif
 
@@ -1079,7 +1086,6 @@ SceRegCatNode *regFindCatNode(SceRegIndexEntry *cat) {
     return NULL;
 }
 
-#if FW_VERSION < 282
 s32 regSetHiveDirty(s32 index) {
     s32 ret;
     SceRegHive *h;
@@ -1092,7 +1098,6 @@ s32 regSetHiveDirty(s32 index) {
     }
     return ret;
 }
-#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", regSetCatDirty);
@@ -1114,19 +1119,6 @@ s32 regSetCatDirty(SceRegIndexEntry *cat) {
 #endif
 
 #if FW_VERSION >= 282
-s32 regSetHiveDirty(s32 index) {
-    s32 ret;
-    SceRegHive *h;
-
-    h = regGetHive(index);
-    ret = 0x80082715;
-    if (h != NULL) {
-        h->unk4 = 1;
-        ret = 0;
-    }
-    return ret;
-}
-
 INCLUDE_ASM("nonmatchings/registry", func_00003F2C);
 #endif
 

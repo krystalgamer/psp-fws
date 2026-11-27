@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "func_000008BC": "s32 func_000008BC(s32 index);",
   "func_000010B8": "void func_000010B8(SceRegParam *param, SceRegIregHeader *hdr);",
   "func_000012B0": "s32 func_000012B0(const char *name, SceRegIregHeader *hdr);",
   "func_00001560": "s32 func_00001560(const char *name, SceRegIregHeader *hdr);",

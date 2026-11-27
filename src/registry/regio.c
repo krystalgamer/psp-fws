@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 -fno-thread-jumps */
+/* cflags[100-303]: -O2 -fno-thread-jumps */
 #include "common.h"
 #include "k1.h"
 #include "registry_decls.h"
