@@ -1,3 +1,4 @@
+/* cflags[100]: -Os */
 /* cflags[151]: -Os */
 #include "common.h"
 #include "usbstormgr_decls.h"
@@ -57,17 +58,11 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_000003C4);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000480);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000004E0);
 #endif
 
-#if FW_VERSION == 152
-s32 func_000004E0(s32 arg0, s32 arg1) {
-    return (sceUsbstorSendData(arg0, arg1, 0xF4240) >= 0) ? 0 : -1;
-}
-#endif
-
-#if FW_VERSION == 151
+#if FW_VERSION < 152
 s32 func_000004E0(s32 arg0, s32 arg1) {
     s32 var_v1;
 
@@ -79,17 +74,17 @@ s32 func_000004E0(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/usbstormgr", func_0000050C);
-#endif
-
 #if FW_VERSION == 152
-s32 func_0000050C(s32 arg0, s32 arg1) {
-    return (sceUsbstorRecvData(arg0, arg1, 0xF4240) >= 0) ? 0 : -1;
+s32 func_000004E0(s32 arg0, s32 arg1) {
+    return (sceUsbstorSendData(arg0, arg1, 0xF4240) >= 0) ? 0 : -1;
 }
 #endif
 
-#if FW_VERSION == 151
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/usbstormgr", func_0000050C);
+#endif
+
+#if FW_VERSION < 152
 s32 func_0000050C(s32 arg0, s32 arg1) {
     s32 var_v1;
 
@@ -98,6 +93,12 @@ s32 func_0000050C(s32 arg0, s32 arg1) {
         var_v1 = -1;
     }
     return var_v1;
+}
+#endif
+
+#if FW_VERSION == 152
+s32 func_0000050C(s32 arg0, s32 arg1) {
+    return (sceUsbstorRecvData(arg0, arg1, 0xF4240) >= 0) ? 0 : -1;
 }
 #endif
 
