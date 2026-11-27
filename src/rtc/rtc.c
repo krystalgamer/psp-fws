@@ -211,9 +211,26 @@ s32 sceRtcReset(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtcSetConf);
+s32 sceRtcSetConf(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 intr = sceKernelCpuSuspendIntr();
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtcGetAlarmTick);
+    g_rtc.unk0 = arg0;
+    g_rtc.unk4 = arg1;
+    g_rtc.unkC = arg2;
+    g_rtc.unk8 = arg3;
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
+
+s32 sceRtcGetAlarmTick(u64 *tick) {
+    s32 ret = 0x80000103;
+
+    if (tick != NULL) {
+        *tick = g_rtc.alarmTick;
+        ret = 0;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentClock);
 
@@ -221,9 +238,13 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentClockLocalTime);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcGetAccumlativeTime);
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtcConvertUtcToLocalTime);
+s32 sceRtcConvertUtcToLocalTime(const u64 *tickUTC, u64 *tickLocal) {
+    return sceRtcTickAddMinutes(tickLocal, tickUTC, g_rtc.unkC + g_rtc.unk8);
+}
 
-INCLUDE_ASM("nonmatchings/rtc", sceRtcConvertLocalTimeToUTC);
+s32 sceRtcConvertLocalTimeToUTC(const u64 *tickLocal, u64 *tickUTC) {
+    return sceRtcTickAddMinutes(tickUTC, tickLocal, -(g_rtc.unkC + g_rtc.unk8));
+}
 
 #if FW_VERSION < 282
 s32 func_00000DB0(s32 arg0) {
