@@ -79,13 +79,7 @@ s32 module_stop(void);
 M2C_UNK sceKernelDelayThread(M2C_UNK);
 M2C_UNK sceKernelPowerLock(M2C_UNK);
 M2C_UNK sceKernelPowerUnlock(M2C_UNK);
-s32 scePaf_5E4447F6(s32);
-s32 scePaf_88784487(M2C_UNK *);
-s32 scePaf_C1B0AA0D(s32);
-void *scePaf_DCE3D225(s32, M2C_UNK);
-M2C_UNK sceVshCommonGui_8F414E35(s32);
 M2C_UNK sceVshCommonUtil_622815DD(M2C_UNK *, M2C_UNK *);
-M2C_UNK sceVshCommonUtil_951BC384(M2C_UNK *, M2C_UNK *);
 s32 sce_paf_private_strlen(s32);
 s32 sce_paf_private_wcslen(s32);
 
