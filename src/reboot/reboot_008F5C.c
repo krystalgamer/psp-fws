@@ -90,9 +90,9 @@ void func_00009290(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000092DC);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009344);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", UFatRename);
 
-s32 func_00009384(s32 arg0, s32 arg1) {
+s32 UFatChdir(s32 arg0, s32 arg1) {
     Kprintf((s32) "%s: iob=%p name=%s\n", (s32) "UFatChdir", arg0, arg1);
     return 0x8001B000;
 }
@@ -125,7 +125,7 @@ s32 func_00009484(void) {
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009490);
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009550);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", buf_read);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009638);
 
@@ -280,7 +280,7 @@ s32 func_0000D3DC(UFatUnit *unit) {
     s32 i, n = 0, off = 0;
 
     for (i = 0; i < unit->rootEntries; i++, off += 32) {
-        if (func_00009550(unit, (unit->rootDirStart << unit->sectorShift) + off, ent, 32) >= 0) {
+        if (buf_read(unit, (unit->rootDirStart << unit->sectorShift) + off, ent, 32) >= 0) {
             if (ent[0] == 0 || ent[0] == 0xE5) {
                 n++;
             }
@@ -324,7 +324,7 @@ s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
 
     if (&D_0002B79C != NULL) {
-        var_v0 = func_0000F78C(arg0, arg1, arg2, arg3, (s32) &D_0002B79C);
+        var_v0 = df_open_locked(arg0, arg1, arg2, arg3, (s32) &D_0002B79C);
     } else {
         Kprintf((s32) "lflash.c:%s:Mallocfailed: 0x%08x\n", (s32) "df_open", 0, arg3);
         var_v0 = 0x8001000C;
@@ -338,7 +338,7 @@ s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
 
     if (&D_0002DB34 != NULL) {
-        var_v0 = func_0000F78C(arg0, arg1, arg2, arg3, (s32) &D_0002DB34);
+        var_v0 = df_open_locked(arg0, arg1, arg2, arg3, (s32) &D_0002DB34);
     } else {
         Kprintf((s32) "lflash.c:%s:Mallocfailed: 0x%08x\n", (s32) "df_open", 0, arg3);
         var_v0 = 0x8001000C;
@@ -352,7 +352,7 @@ s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v0;
 
     if (&D_0002DBF4 != NULL) {
-        var_v0 = func_0000F78C(arg0, arg1, arg2, arg3, (s32) &D_0002DBF4);
+        var_v0 = df_open_locked(arg0, arg1, arg2, arg3, (s32) &D_0002DBF4);
     } else {
         Kprintf((s32) "lflash.c:%s:Mallocfailed: 0x%08x\n", (s32) "df_open", 0, arg3);
         var_v0 = 0x8001000C;
@@ -474,7 +474,7 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000F2F0);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000F3D8);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000F78C);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", df_open_locked);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000F990);
 
@@ -536,28 +536,28 @@ INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_000169E8);
 
 extern char D_000169E8[];
 
-s32 func_00010BDC(void *iob, char *name) {
+s32 df_remove(void *iob, char *name) {
     Kprintf(D_000169E8, "df_remove", name);
     return 0x8001B000;
 }
 
 extern char D_000169E8[];
 
-s32 func_00010C10(void *iob, char *name) {
+s32 df_mkdir(void *iob, char *name) {
     Kprintf(D_000169E8, "df_mkdir", name);
     return 0x8001B000;
 }
 
 extern char D_000169E8[];
 
-s32 func_00010C44(void *iob, char *name) {
+s32 df_rmdir(void *iob, char *name) {
     Kprintf(D_000169E8, "df_rmdir", name);
     return 0x8001B000;
 }
 
 extern char D_000169E8[];
 
-s32 func_00010C78(void *iob, char *name) {
+s32 df_dopen(void *iob, char *name) {
     Kprintf(D_000169E8, "df_dopen", name);
     return 0x8001B000;
 }
@@ -566,34 +566,34 @@ INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00016A30);
 
 extern char D_00016A30[];
 
-s32 func_00010CAC(void *arg0) {
+s32 df_dclose(void *arg0) {
     Kprintf(D_00016A30, "df_dclose", **M2C_FIELD(arg0, s32 ***, 8));
     return 0x8001B000;
 }
 
 extern char D_00016A30[];
 
-s32 func_00010CE8(void *arg0) {
+s32 df_dread(void *arg0) {
     Kprintf(D_00016A30, "df_dread", **M2C_FIELD(arg0, s32 ***, 8));
     return 0x8001B000;
 }
 
-s32 func_00010D24(void *iob, char *name, void *stat) {
+s32 df_getstat(void *iob, char *name, void *stat) {
     Kprintf("lflash.c:%s:\n", "df_getstat");
     return (stat == NULL) ? 0x80010016 : 0x8001B000;
 }
 
-s32 func_00010D6C(void *iob, char *name) {
+s32 df_chstat(void *iob, char *name) {
     Kprintf("lflash.c:%s:filename:%s\n", "df_chstat", name);
     return 0x8001B000;
 }
 
-s32 func_00010DA0(void *iob, const char *oldname) {
+s32 df_rename(void *iob, const char *oldname) {
     Kprintf("lflash.c:%s:oldfile: %s\n", "df_rename", oldname);
     return 0x8001B000;
 }
 
-s32 func_00010DD4(void *iob, char *name) {
+s32 df_chdir(void *iob, char *name) {
     Kprintf("lflash.c:%s:, path name: %s\n", "df_chdir", name);
     return 0x8001B000;
 }
@@ -623,12 +623,12 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010F48);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011160);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011284);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandSetWriteProtect);
 #endif
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000112F8);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011384);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandReadId);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000113DC);
 
@@ -644,10 +644,10 @@ s32 func_000119F0(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000119F8);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandResume);
 
 #if FW_VERSION == 100
-s32 func_00011284(s32 protect) {
+s32 sceNandSetWriteProtect(s32 protect) {
     u32 v = *(volatile u32 *)0xBD101004;
     s32 old = __builtin_allegrex_ext(v ^ 0x80, 7, 1);
     if (protect) {
@@ -660,7 +660,7 @@ s32 func_00011284(s32 protect) {
 }
 #endif
 
-s32 func_00011A4C(void) {
+s32 sceNandReadStatus(void) {
     u32 v;
     *(volatile u32 *)0xBD101008 = 0x70;
     v = *(volatile u32 *)0xBD101300;
@@ -685,27 +685,27 @@ s32 func_00011AB0(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011AB8);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandReadPages);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011AFC);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandWritePages);
 
-s32 func_00011B24(s32 a0, s32 a1, s32 a2, s32 a3) {
+s32 sceNandReadPagesRawExtra(s32 a0, s32 a1, s32 a2, s32 a3) {
     return func_000113DC(a0, a1, a2, a3, 0x20);
 }
 
 #if FW_VERSION == 100
-s32 func_00011B40(s32 a0, s32 a1, s32 a2, s32 a3) {
+s32 sceNandWritePagesRawExtra(s32 a0, s32 a1, s32 a2, s32 a3) {
     return func_000115B8(a0, a1, a2, a3, (a1 == 0) ? 0x30 : 0x20);
 }
 #else
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011B40);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandWritePagesRawExtra);
 #endif
 
-s32 func_00011B64(s32 a0, s32 a1, s32 a2, s32 a3) {
+s32 sceNandReadPagesRawAll(s32 a0, s32 a1, s32 a2, s32 a3) {
     return func_000113DC(a0, a1, a2, a3, 0x31);
 }
 
-void func_00011B80(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+void sceNandWritePagesRawAll(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_000115B8(arg0, arg1, arg2, arg3, 0x31);
 }
 
@@ -715,25 +715,25 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011D88);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000120D4);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00012220);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandDetectChip);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000122E8);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandWriteBlockWithVerify);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0001239C);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandReadBlockWithRetry);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00012420);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandVerifyBlockWithRetry);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00012570);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandEraseBlockWithRetry);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000125E4);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandIsBadBlock);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00012670);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandDoMarkAsBadBlock);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0001277C);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000128FC);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00012A30);
+INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandTestBlock);
 
 s32 func_00012BE0(void) {
     return D_00018BCC;

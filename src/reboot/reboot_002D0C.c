@@ -160,9 +160,9 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", sprintf);
 INCLUDE_ASM("nonmatchings/reboot_002D0C", vsprintf);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002A58);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", sceKernelDcacheWBinvAll);
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002A9C);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", sceKernelIcacheClearAll);
 #else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003A14);
 
