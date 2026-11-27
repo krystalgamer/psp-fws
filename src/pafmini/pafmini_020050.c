@@ -2,19 +2,13 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pafmini_020050", func_00020050);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION < 282
 void func_00020050(struct Unk_func_00020050_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
         arg0->unk42C = arg0->unk42C & arg1 & 0xFFF3FFFF;
     }
 }
-#endif
-
-#if FW_VERSION == 282
+#else
 void func_00020050(struct Unk_func_00020050_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
         arg0->unk42C = __builtin_allegrex_ins(arg0->unk42C & arg1, 0, 0x12, 2);

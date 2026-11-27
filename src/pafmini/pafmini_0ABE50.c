@@ -1,3 +1,4 @@
+/* cflags[100]: -O0 */
 /* cflags: -O1 */
 #include "common.h"
 #include "pafmini_decls.h"
@@ -37,7 +38,9 @@ INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000ACDC4);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000ACED4);
+void func_000ACED4(void) {
+    func_000D1904(0);
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -53,7 +56,9 @@ void func_000ACED4(void) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000ACEF0);
+void func_000ACEF0(void) {
+    func_000D1904(1);
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -94,17 +99,44 @@ INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000CE3E4);
 
 INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000CE844);
 
-INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000CE8CC);
+void func_000CE8CC(void) {
+    D_001360CE = 0;
+    D_001360D0 = 0;
+    if (D_00138088 == 1) {
+        D_001360D0 = 1;
+    }
+    if (D_001360CA == -1) {
+        if (D_001360CC & 0x200) {
+            D_001360CE = 1;
+        }
+        D_001360CC &= 0xFF;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000CE960);
 
-INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000CEA9C);
+void func_000CEA9C(void) {
+    func_000C67B8(0);
+    D_0013AC34 = 0;
+    D_00137E24 = 0;
+    D_001360B6 = 0;
+    D_001360B8 = 0;
+    D_001360D8 = 0;
+    D_001360D2 = 0;
+    D_001360EA = 0;
+    D_001360BC = 0;
+    D_001360F6 = 1;
+}
 
 INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000CEB14);
 
 INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000CEB48);
 
-INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000CEE68);
+void func_000CEE68(void) {
+    if (D_001360B8 < D_001360B6) {
+        func_000D5AD4((s32) (s16) ((u16) D_001360B8 + 1), (s32) D_001360B8, (s32) (s16) ((u16) D_001360B6 - (u16) D_001360B8));
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pafmini_0ABE50", func_000CEEE8);
 

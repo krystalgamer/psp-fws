@@ -179,11 +179,11 @@ INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00066DB4);
 
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00066E10);
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00066E74);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION < 201
 void func_00066E74(struct Unk_vt_func_00066E74_arg0 **arg0) {
     func_000F865C(2);
     func_000F7A30();
@@ -221,11 +221,11 @@ INCLUDE_ASM("nonmatchings/pafmini_065F80", func_0007E9F8);
 
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_00067230);
 
-#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if (FW_VERSION >= 150 && FW_VERSION < 152) || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_065F80", func_000672AC);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION == 100 || FW_VERSION == 152
 s32 func_000672AC(s32 arg0, s32 arg1) {
     scePaf_DC544921();
     scePaf_4E60E34C(arg0, 0x80004, arg1);
