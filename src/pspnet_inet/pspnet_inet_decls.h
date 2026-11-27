@@ -1423,9 +1423,9 @@ struct Unk_func_0002A244_0 {
     s32 unk4BC;
 };
 
-struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
+struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
 
-struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
+struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
 
 extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
@@ -1732,7 +1732,6 @@ void func_0001AA20(struct Unk_func_0001AA20_0 *arg0);
 void func_0001C208(void);
 void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1);
 s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
-void func_0002373C(struct inpcb *inp, s32 errno);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
 void func_000244B0(void);

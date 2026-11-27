@@ -2669,7 +2669,7 @@ s32 func_000106E0(void) {
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-void func_00010378(struct ifnet *ifp, struct ifaddr *ifa) {
+void arp_ifinit(struct ifnet *ifp, struct ifaddr *ifa) {
     struct in_addr *ip;
 
     ip = &((struct in_ifaddr *)ifa)->ia_addr.sin_addr;
@@ -3210,7 +3210,7 @@ s32 in_pcbbind(void *v, struct mbuf *nam) {
     if (lport) {
         struct inpcb *t;
 
-        t = func_00013478(table, sin->sin_addr, lport, wild);
+        t = in_pcblookup_port(table, sin->sin_addr, lport, wild);
         if (t && (reuseport & t->inp_socket->so_options) == 0) {
             return 112; /* EADDRINUSE */
         }
@@ -3244,7 +3244,7 @@ noname:
             if (lport < min || lport > max) {
                 lport = max;
             }
-            if (!func_00013478(table, inp->inp_laddr, (u16)__builtin_allegrex_wsbh(lport), 1)) {
+            if (!in_pcblookup_port(table, inp->inp_laddr, (u16)__builtin_allegrex_wsbh(lport), 1)) {
                 goto found;
             }
         }
@@ -3445,7 +3445,7 @@ void in_rtchange(struct inpcb *inp, s32 errno) {
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard) {
+struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard) {
     struct inpcb *inp, *match = NULL;
     s32 matchwild = 3, wildcard;
     u16 lport = lport_arg;
@@ -3485,7 +3485,7 @@ struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 
     return match;
 }
 
-struct inpcb *func_00013530(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg) {
+struct inpcb *in_pcblookup_connect(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg) {
     struct inpcbhead *head;
     struct inpcb *inp;
     u16 fport = fport_arg, lport = lport_arg;
@@ -3511,7 +3511,7 @@ out:
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
-struct inpcb *func_0001361C(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg) {
+struct inpcb *in_pcblookup_bind(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg) {
     struct inpcbhead *head;
     struct inpcb *inp;
     u16 lport = lport_arg;
@@ -3540,7 +3540,7 @@ out:
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001361C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_pcblookup_bind);
 #endif
 
 #if FW_VERSION < 151
@@ -4788,13 +4788,13 @@ s32 rip_connect(struct inpcb *inp, struct mbuf *nam) {
 }
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
-void func_0001B2E4(struct inpcb *inp) {
+void rip_disconnect(struct inpcb *inp) {
     inp->inp_faddr = zeroin_addr;
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B2E4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", rip_disconnect);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B820);
 #endif
@@ -5105,7 +5105,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000214B0);
 INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_output);
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-void func_00021FF0(struct tcpcb *tp) {
+void tcp_setpersist(struct tcpcb *tp) {
     s32 t = ((tp->t_srtt >> 2) + tp->t_rttvar) >> (1 + 2);
     s32 nticks;
 

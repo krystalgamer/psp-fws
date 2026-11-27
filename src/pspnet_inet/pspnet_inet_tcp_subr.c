@@ -190,7 +190,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00022F68);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 250
-void func_000231F8(struct tcpcb *tp, s32 offer) {
+void tcp_mss_from_peer(struct tcpcb *tp, s32 offer) {
     struct socket *so;
     struct rtentry *rt;
     u32 bufsize;
@@ -234,7 +234,7 @@ void func_000231F8(struct tcpcb *tp, s32 offer) {
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000231F8);
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mss_from_peer);
 #endif
 
 #if FW_VERSION < 151
@@ -432,10 +432,10 @@ void tcp_mtudisc_callback(struct in_addr addr) {
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 void tcp_mtudisc_callback(struct in_addr addr) {
-    in_pcbnotifyall(&tcbtable, addr, 0x7A, func_0002373C);
+    in_pcbnotifyall(&tcbtable, addr, 0x7A, tcp_mtudisc);
 }
 
-void func_0002373C(struct inpcb *inp, s32 errno) {
+void tcp_mtudisc(struct inpcb *inp, s32 errno) {
     struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
     struct rtentry *rt = in_pcbrtentry(inp);
 
@@ -462,7 +462,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023CD0);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 250
-u32 func_0002380C(struct ifnet *ifp, s32 af) {
+u32 tcp_mss_to_advertise(struct ifnet *ifp, s32 af) {
     u32 mss = 0;
     u32 hdrsiz;
 

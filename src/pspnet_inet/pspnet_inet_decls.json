@@ -148,7 +148,6 @@
   "func_0001C208": "void func_0001C208(void);",
   "func_0001C57C": "void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1);",
   "func_000232C0": "s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);",
-  "func_0002373C": "void func_0002373C(struct inpcb *inp, s32 errno);",
   "func_00023828": "s32 func_00023828(struct Unk_func_00023828_0 *arg0);",
   "func_00023AB8": "void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);",
   "func_000244B0": "void func_000244B0(void);",
@@ -356,8 +355,8 @@
   "Unk_func_00028768_0": "struct Unk_func_00028768_0 {\n    u8 pad0[0x254];\n    s32 unk254;\n};",
   "Unk_func_000289B0_0": "struct Unk_func_000289B0_0 {\n    u8 pad0[0x254];\n    s32 unk254;\n};",
   "Unk_func_0002A244_0": "struct Unk_func_0002A244_0 {\n    u8 pad0[0x4BC];\n    s32 unk4BC;\n};",
-  "hand_func_00012EC0": "struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);",
-  "hand_func_0001384C": "struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);"
+  "hand_func_00012EC0": "struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);",
+  "hand_func_0001384C": "struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);"
  },
  "vars": {
   "D_0002BB24": "extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */",
