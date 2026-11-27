@@ -1,6 +1,10 @@
 #include "common.h"
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mebooter", func_00000000);
+#else
 INCLUDE_ASM("nonmatchings/mebooter", me_init);
+#endif
 
 INCLUDE_ASM("nonmatchings/mebooter", func_0000014C);
 
@@ -8,7 +12,7 @@ INCLUDE_ASM("nonmatchings/mebooter", func_0000014C);
 INCLUDE_RODATA("nonmatchings/mebooter", D_00000370);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/mebooter", D_0001E760);
 #endif
 
