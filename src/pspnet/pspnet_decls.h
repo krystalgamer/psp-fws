@@ -644,7 +644,7 @@ s32 bpf_validate(struct bpf_insn *f, s32 len);
 void bpfattach(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrlen);
 s32 bpfclose(s32 minor);
 void bpfilterattach(s32 n);
-s32 bpfioctl(s32 fd, u32 cmd, void *data);
+s32 bpfioctl(s32 minor, u32 cmd, void *addr);
 s32 bpfopen(s32 minor);
 s32 bpfpoll(s32 minor, s32 events, struct SceNetThreadInfo *p);
 s32 bpfread(s32 minor, struct uio *uio);

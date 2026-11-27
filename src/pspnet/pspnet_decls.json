@@ -74,7 +74,7 @@
   "bpfattach": "void bpfattach(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrlen);",
   "bpfclose": "s32 bpfclose(s32 minor);",
   "bpfilterattach": "void bpfilterattach(s32 n);",
-  "bpfioctl": "s32 bpfioctl(s32 fd, u32 cmd, void *data);",
+  "bpfioctl": "s32 bpfioctl(s32 minor, u32 cmd, void *addr);",
   "bpfopen": "s32 bpfopen(s32 minor);",
   "bpfpoll": "s32 bpfpoll(s32 minor, s32 events, struct SceNetThreadInfo *p);",
   "bpfread": "s32 bpfread(s32 minor, struct uio *uio);",

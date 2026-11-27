@@ -1832,7 +1832,111 @@ INCLUDE_ASM("nonmatchings/pspnet", bpfread);
 
 INCLUDE_ASM("nonmatchings/pspnet", bpfwrite);
 
-INCLUDE_ASM("nonmatchings/pspnet", bpfioctl);
+s32 bpfioctl(s32 minor, u32 cmd, void *addr) {
+    struct bpf_d *d = &D_0000BC14[minor];
+    s32 s, error = 0;
+
+    switch (cmd) {
+    default:
+        error = 22;
+        break;
+    case 0x4004667F: {
+        s32 n;
+
+        s = _sce_pspnet_spllock();
+        n = d->bd_slen;
+        if (d->bd_hbuf)
+            n += d->bd_hlen;
+        _sce_pspnet_splunlock(s);
+        *(s32 *)addr = n;
+        break;
+    }
+    case 0x40044266:
+        *(u32 *)addr = d->bd_bufsize;
+        break;
+    case 0xC0044266:
+        if (d->bd_bif != 0)
+            error = 22;
+        else {
+            u32 size = *(u32 *)addr;
+
+            if (size > 0x8000)
+                *(u32 *)addr = size = 0x8000;
+            else if (size < 32)
+                *(u32 *)addr = size = 32;
+            d->bd_bufsize = size;
+        }
+        break;
+    case 0x80084267:
+        error = bpf_setf(d, (struct bpf_program *)addr);
+        break;
+    case 0x20004268:
+        s = _sce_pspnet_spllock();
+        reset_d(d);
+        _sce_pspnet_splunlock(s);
+        break;
+    case 0x4004426A:
+        if (d->bd_bif == 0)
+            error = 22;
+        else
+            *(u32 *)addr = d->bd_bif->bif_dlt;
+        break;
+    case 0x4020426B:
+        if (d->bd_bif == 0)
+            error = 22;
+        else
+            func_00004430(d->bd_bif->bif_ifp, (struct ifreq *)addr);
+        break;
+    case 0x8020426C:
+        error = bpf_setif(d, (struct ifreq *)addr);
+        break;
+    case 0x8008426D: {
+        struct timeval *tv = (struct timeval *)addr;
+
+        d->bd_rtout = tv->tv_sec * 100 + tv->tv_usec / 10000;
+        if ((d->bd_rtout == 0) && (tv->tv_usec != 0))
+            d->bd_rtout = 1;
+        break;
+    }
+    case 0x4008426E: {
+        struct timeval *tv = (struct timeval *)addr;
+
+        tv->tv_sec = d->bd_rtout / 100;
+        tv->tv_usec = (d->bd_rtout % 100) * 10000;
+        break;
+    }
+    case 0x4008426F: {
+        struct bpf_stat *bs = (struct bpf_stat *)addr;
+
+        bs->bs_recv = d->bd_rcount;
+        bs->bs_drop = d->bd_dcount;
+        break;
+    }
+    case 0x80044270:
+        d->bd_immediate = *(u32 *)addr;
+        break;
+    case 0x40044271: {
+        struct bpf_version *bv = (struct bpf_version *)addr;
+
+        bv->bv_major = 1;
+        bv->bv_minor = 1;
+        break;
+    }
+    case 0x40044274:
+        *(u32 *)addr = d->bd_hdrcmplt;
+        break;
+    case 0x80044275:
+        d->bd_hdrcmplt = *(u32 *)addr ? 1 : 0;
+        break;
+    case 0x8004667E:
+        if (*(s32 *)addr)
+            d->bd_rtout = -1;
+        else
+            d->bd_rtout = 0;
+        break;
+    }
+    return error;
+}
 
 s32 bpf_setf(struct bpf_d *d, struct bpf_program *fp) {
     struct bpf_insn *fcode, *old;
