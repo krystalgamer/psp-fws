@@ -4,6 +4,15 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct SceTailqHead {
+    void *tqh_first;
+    void **tqh_last;
+};
+
+typedef struct {
+    s8 b[4];
+} SceNetBytes4;
+
 /* NetBSD-derived (4.4BSD-Lite2 + NetBSD 1.3-1.5 socket layer) types, offsets checked in 1.00 */
 struct mbuf;
 struct socket;
@@ -388,7 +397,16 @@ struct SceNetInetWaiter {
     u8 unk50[4];
 #endif
     struct socket *sockets;     /* 0x54 (1.00) / 0x50 (1.50+): list linked by so_selnext */
+#if FW_VERSION < 260
+    u8 unk_tail[0xC];
+#endif
 };
+/* == pspnet's SceNetThreadInfo: 0x64 in 1.00, 0x60 in 1.50-2.50, 0x5C in 2.60+ */
+#if FW_VERSION < 150
+typedef char chk_SceNetInetWaiter[(sizeof(struct SceNetInetWaiter) == 0x64) ? 1 : -1];
+#elif FW_VERSION < 260
+typedef char chk_SceNetInetWaiter[(sizeof(struct SceNetInetWaiter) == 0x60) ? 1 : -1];
+#endif
 
 
 
@@ -639,11 +657,13 @@ struct ifnet {
     u8 unk58[0xC];
     u8 unk64[0xB0 - 0x58 - 0xC];
     s32 (*if_output)();                 /* 0xB0 */
-    void (*if_start)(struct ifnet *ifp); /* 0xB4 */
-    u8 unkB8[4];
+    void (*if_input)(struct ifnet *ifp, struct mbuf *m); /* 0xB4 */
+    void (*if_start)(struct ifnet *ifp); /* 0xB8 */
     s32 (*if_ioctl)(struct ifnet *ifp, u32 cmd, void *data); /* 0xBC */
-    u8 unkC0[0xE0 - 0xC0];
+    u8 unkC0[0xCC - 0xC0];
+    u8 if_snd[0xE0 - 0xCC];             /* 0xCC struct ifqueue */
     struct sockaddr_dl *if_sadl;        /* 0xE0 */
+    u8 *if_broadcastaddr;               /* 0xE4 */
 };
 #define if_type if_data.ifi_type
 #define if_addrlen if_data.ifi_addrlen
@@ -665,7 +685,9 @@ struct ifaddr {
     void (*ifa_rtrequest)(s32 cmd, struct rtentry *rt); /* 0x28 */
     u32 ifa_flags;                      /* 0x2C */
     s32 ifa_refcnt;                     /* 0x30 */
+    s32 ifa_metric;                     /* 0x34 */
 };
+typedef char chk_ifaddr[(sizeof(struct ifaddr) == 0x38) ? 1 : -1];
 
 struct timeval {
     u32 tv_sec;
@@ -691,7 +713,6 @@ typedef struct {
 /* struct in_ifaddr (NetBSD in_var.h, partial) */
 struct in_ifaddr {
     struct ifaddr ia_ifa;               /* 0x00 */
-    s32 ifa_metric_;                    /* 0x34 ia_ifa.ifa_metric */
     u32 ia_net;                         /* 0x38 */
     u32 ia_netmask;                     /* 0x3C */
     u32 ia_subnet;                      /* 0x40 */
@@ -1040,15 +1061,6 @@ static __inline void ipq_unlock(void) {
     D_0002D944 = 0;
     _sce_pspnet_splunlock(s);
 }
-
-struct SceTailqHead {
-    void *tqh_first;
-    void **tqh_last;
-};
-
-typedef struct {
-    s8 b[4];
-} SceNetBytes4;
 
 typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
 
