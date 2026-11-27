@@ -9,7 +9,7 @@ void func_0000CC64(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_C1B0AA0D(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_0000CEF0(arg0, arg1, var_v0);
 }
