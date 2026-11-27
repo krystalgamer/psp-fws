@@ -1,5 +1,6 @@
 /* compiler[151]: 1.6.1 */
 /* compiler[150]: 1.6.1 */
+/* cflags[150,151]: -O2 -frename-registers */
 #include "common.h"
 #include "reboot_decls.h"
 
@@ -39,7 +40,6 @@ M2C_UNK *func_00002D84(void) {
     return &D_00016DF1;
 }
 
-#if FW_VERSION == 100
 void *func_00002D90(const void *s, s32 c, s32 n) {
     const u8 *p = s;
     u8 ch = c;
@@ -54,15 +54,11 @@ void *func_00002D90(const void *s, s32 c, s32 n) {
     }
     return NULL;
 }
-#else
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D90);
-#endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002DC8);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002E30);
 
-#if FW_VERSION == 100
 void *func_00002EA0(void *dst, const void *src, s32 n) {
     u8 *d = dst;
     const u8 *s = src;
@@ -82,11 +78,7 @@ void *func_00002EA0(void *dst, const void *src, s32 n) {
     }
     return dst;
 }
-#else
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002EA0);
-#endif
 
-#if FW_VERSION == 100
 s32 func_00002F14(const void *a, const void *b, s32 n) {
     const u8 *p = a;
     const u8 *q = b;
@@ -100,9 +92,6 @@ s32 func_00002F14(const void *a, const void *b, s32 n) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002F14);
-#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00001F84);
@@ -114,7 +103,6 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002FDC);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003058);
 
-#if FW_VERSION == 100
 s32 func_000030B8(const char *s) {
     s32 len = 0;
     if (s == NULL) {
@@ -125,9 +113,6 @@ s32 func_000030B8(const char *s) {
     }
     return len;
 }
-#else
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000030B8);
-#endif
 
 char *func_000030EC(const char *s, s32 c) {
     char ch = c;
