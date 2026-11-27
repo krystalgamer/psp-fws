@@ -43,7 +43,7 @@ void func_0000015C(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_000001AC);
 #else
 void func_000001AC(void) {
@@ -453,17 +453,7 @@ void func_00000998(void) {
 }
 #endif
 
-#if FW_VERSION >= 350
-void func_00000C0C(void) {
-    void *sp0;
-    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
-    func_00000E88(&sp0);
-    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
-    func_00000E88(&sp0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION >= 282
 void func_00000C0C(void) {
     void *sp0;
     _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
@@ -487,21 +477,7 @@ void func_00000B68(s32 arg0, s32 arg1) {
     }
     func_00000F08(arg0, arg1, var_v0);
 }
-#endif
-
-#if FW_VERSION >= 350
-void func_00000EB8(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = sce_paf_private_wcslen(arg1);
-    }
-    func_00000F08(arg0, arg1, var_v0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#else
 void func_00000EB8(s32 arg0, s32 arg1) {
     s32 var_v0;
 
