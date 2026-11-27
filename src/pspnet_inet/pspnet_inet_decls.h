@@ -1566,6 +1566,8 @@ extern struct tcpcb *tcp_delacks; /* tcp_delacks */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
 extern s32 tcp_maxidle;
 extern s32 tcp_mss_ifmtu;
+extern u32 tcp_recvspace; /* tcp_recvspace */
+extern u32 tcp_sendspace; /* tcp_sendspace */
 extern struct tcpstat tcp_stat;
 extern struct inpcbtable udbtable;
 extern struct in_addr zeroin_addr; /* zeroin_addr */

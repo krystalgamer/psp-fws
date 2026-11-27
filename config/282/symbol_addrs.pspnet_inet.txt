@@ -292,3 +292,4 @@ udp4_sendup = 0x0001C448; // type:func
 sbappendaddr = 0x00004B40; // type:func
 tcp_maxidle = 0x0002DF50;
 tcp_canceltimers = 0x00024490; // type:func
+tcp_attach = 0x00024C58; // type:func

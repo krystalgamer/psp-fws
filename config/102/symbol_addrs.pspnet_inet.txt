@@ -384,7 +384,7 @@ func_00023D98 = 0x00025768; // type:func rom:0x257E8
 tcp_fasttimo = 0x00025E14; // type:func rom:0x25E94
 tcp_canceltimers = 0x00025E74; // type:func rom:0x25EF4
 func_000244FC = 0x00025EE0; // type:func rom:0x25F60
-func_00024C58 = 0x000265F0; // type:func rom:0x26670
+tcp_attach = 0x000265F0; // type:func rom:0x26670
 tcp_disconnect = 0x000266D8; // type:func rom:0x26758
 tcp_usrclosed = 0x0002678C; // type:func rom:0x2680C
 func_00024EC4 = 0x00026858; // type:func rom:0x268D8
@@ -536,3 +536,5 @@ _sce_pspnet_stop_of_inet_module_in_ifhandle_ether = 0x0002D670; // type:func rom
 // shared names (tools/add_version.py) end
 tcp_mss_ifmtu = 0x0002EC1C;
 tcp_ctloutput = 0x000263E0; // type:func
+tcp_sendspace = 0x0002E960; // rom:0x2E9E0
+tcp_recvspace = 0x0002E964; // rom:0x2E9E4

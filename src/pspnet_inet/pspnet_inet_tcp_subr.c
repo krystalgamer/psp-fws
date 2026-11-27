@@ -682,7 +682,43 @@ s32 tcp_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000249FC);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00024C58);
+#if FW_VERSION < 271
+s32 tcp_attach(struct socket *so) {
+    struct tcpcb *tp;
+    struct inpcb *inp;
+    s32 error;
+    s32 family;
+
+    family = so->so_proto->pr_domain->dom_family;
+    if (so->so_snd.sb_hiwat == 0 || so->so_rcv.sb_hiwat == 0) {
+        error = soreserve(so, tcp_sendspace, tcp_recvspace);
+        if (error)
+            return (error);
+    }
+    if (family != AF_INET)
+        return (0x6A);
+    error = in_pcballoc(so, &tcbtable);
+    if (error)
+        return (error);
+    inp = (struct inpcb *)so->so_pcb;
+    if (inp)
+        tp = tcp_newtcpcb(family, (void *)inp);
+    else
+        tp = NULL;
+    if (tp == 0) {
+        s32 nofd = so->so_state & 0x1;
+        so->so_state &= ~0x1;
+        if (inp)
+            in_pcbdetach(inp);
+        so->so_state |= nofd;
+        return (0x69);
+    }
+    tp->t_state = 0;
+    return (0);
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_attach);
+#endif
 
 struct tcpcb *tcp_disconnect(struct tcpcb *tp) {
     struct socket *so;

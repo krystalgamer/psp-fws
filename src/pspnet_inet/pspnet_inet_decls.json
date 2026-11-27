@@ -508,6 +508,8 @@
   "tcp_iss_seq": "extern u32 tcp_iss_seq; /* tcp_iss_seq */",
   "tcp_maxidle": "extern s32 tcp_maxidle;",
   "tcp_mss_ifmtu": "extern s32 tcp_mss_ifmtu;",
+  "tcp_recvspace": "extern u32 tcp_recvspace; /* tcp_recvspace */",
+  "tcp_sendspace": "extern u32 tcp_sendspace; /* tcp_sendspace */",
   "tcp_stat": "extern struct tcpstat tcp_stat;",
   "udbtable": "extern struct inpcbtable udbtable;",
   "zeroin_addr": "extern struct in_addr zeroin_addr; /* zeroin_addr */"
