@@ -984,7 +984,81 @@ s32 sceKernelDeleteSema(SceUID semaid) {
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteSema);
 #endif
 
+#if FW_VERSION == 100
+s32 sceKernelSignalSema(SceUID semaid, s32 signal) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceSema *sema;
+    SceWaitQ *wq;
+    SceThread *thread;
+    SceThread *next;
+    SceThread *last = NULL;
+    s32 count;
+    s32 n;
+    s32 isIntr;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    isIntr = sceKernelIsIntrContext();
+    if (sceKernelGetUIDcontrolBlockWithType(semaid, g_threadmanInfo.uidSemaType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x80020199;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 2)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    sema = UID_CB_TO_DATA(cb, g_threadmanInfo.uidSemaType, SceSema);
+    wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x38, ra, 2, semaid, signal);
+    }
+    count = sema->currentCount + signal;
+    for (next = wq->waitQueue.next; next != (SceThread *)&wq->waitQueue; next = next->next) {
+        count -= next->waitArg0;
+    }
+    if (sema->maxCount < count) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800201AE;
+    }
+    sema->currentCount += signal;
+    n = 0;
+    next = wq->waitQueue.next;
+    while (next != (SceThread *)&wq->waitQueue) {
+        thread = next;
+        next = thread->next;
+        if (sema->currentCount < thread->waitArg0) {
+            break;
+        }
+        sema->currentCount -= thread->waitArg0;
+        if (func_00000268(thread) > 0) {
+            last = thread;
+            n++;
+        }
+    }
+    if (!isIntr) {
+        if (n == 1) {
+            func_0000F0E4(last, last->currentPriority);
+            func_0000F13C(last, intr);
+        } else if (n > 0) {
+            g_threadmanInfo.nextThread = NULL;
+            func_000007F4(0, intr);
+        }
+    } else if (n > 0) {
+        g_threadmanInfo.nextThread = NULL;
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSignalSema);
+#endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitSema);
 
