@@ -12,7 +12,12 @@ INCLUDE_ASM("nonmatchings/pwm", scePwmChangeDuty);
 
 INCLUDE_ASM("nonmatchings/pwm", scePwmReferDuty);
 
-INCLUDE_ASM("nonmatchings/pwm", scePwmIsLoading);
+s32 scePwmIsLoading(u32 id) {
+    if (id >= 3) {
+        return 0x80000102;
+    }
+    return *(volatile u32 *)(0xBE300008 + (id << 5)) & 1;
+}
 
 s32 module_start(void) {
     scePwmInit();
@@ -37,7 +42,16 @@ s32 scePwmEnd(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pwm", scePwmSuspend);
+s32 scePwmSuspend(void) {
+    s32 i;
+
+    sceSysregPwmIoDisable();
+    sceSysregPwmClkDisable();
+    for (i = 0; i < 3; i++) {
+        D_00000590[i] = 0;
+    }
+    return 0;
+}
 
 s32 scePwmResume(void) {
     sceSysregPwmClkEnable();
