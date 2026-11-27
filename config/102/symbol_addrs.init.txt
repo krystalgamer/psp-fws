@@ -1,0 +1,24 @@
+// shared names (tools/add_version.py) begin
+D_00001DC8 = 0x00001EE0; // rom:0x1F60
+D_00001E44 = 0x00001F5C; // rom:0x1FDC
+D_00002010 = 0x00002044; // rom:0x20C4
+D_0000213C = 0x0000211C; // rom:0x219C
+D_00002184 = 0x00002164; // rom:0x21E4
+D_00002248_v100 = 0x00002228; // rom:0x22A8
+D_00002248 = 0x00002558;
+D_00002620 = 0x000026C0;
+D_00002644 = 0x000026E4;
+func_00000720 = 0x00000654; // type:func rom:0x6D4
+func_00000908 = 0x0000083C; // type:func rom:0x8BC
+func_00000A5C = 0x00000990; // type:func rom:0xA10
+func_00000C18 = 0x00000B4C; // type:func rom:0xBCC
+func_00001008 = 0x00000F3C; // type:func rom:0xFBC
+func_000012D0 = 0x00001208; // type:func rom:0x1288
+func_00001328 = 0x00001260; // type:func rom:0x12E0
+func_00001404 = 0x0000133C; // type:func rom:0x13BC
+module_reboot_before = 0x00001A68; // type:func rom:0x1AE8
+sceKernelInitApitype = 0x00001A70; // type:func rom:0x1AF0
+sceKernelInitFileName = 0x00001ACC; // type:func rom:0x1B4C
+sceKernelQueryMemoryPartitionInfo = 0x00001B60; // type:func rom:0x1BE0
+look_ctype_table = 0x00001BB0; // type:func rom:0x1C30
+// shared names (tools/add_version.py) end

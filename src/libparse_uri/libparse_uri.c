@@ -64,7 +64,7 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_000010AC);
 INCLUDE_ASM("nonmatchings/libparse_uri", func_000011FC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libparse_uri", uri_encoded_lenN);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", uri_decoded_len);
@@ -134,7 +134,7 @@ INCLUDE_ASM("nonmatchings/libparse_uri", func_000019F8);
 INCLUDE_ASM("nonmatchings/libparse_uri", func_00001A7C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libparse_uri", _path_parse);
 
 INCLUDE_ASM("nonmatchings/libparse_uri", _fragment_parse);

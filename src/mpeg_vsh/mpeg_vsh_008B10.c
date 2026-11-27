@@ -187,6 +187,10 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh_008B10", func_00009594);
 
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009BC8);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00007C04);
+#endif
+
 #if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009C64);
 #endif
@@ -195,7 +199,7 @@ INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009C64);
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00009ACC);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 INCLUDE_RODATA("nonmatchings/mpeg_vsh_008B10", D_00007B08);
 #endif
 

@@ -1,0 +1,17 @@
+// shared names (tools/add_version.py) begin
+D_00006E10 = 0x000008FC; // rom:0x97C
+D_00006E38 = 0x0000093C; // rom:0x9BC
+D_00000858 = 0x00000974; // rom:0x9F4
+D_00000864 = 0x00000980; // rom:0xA00
+D_00000894 = 0x000009B0; // rom:0xA30
+D_000008D4 = 0x000009F0; // rom:0xA70
+D_00000984 = 0x00000AD4;
+D_00000988 = 0x00000AD8;
+func_00000124 = 0x0000011C; // type:func rom:0x19C
+func_00000298 = 0x00000290; // type:func rom:0x310
+func_00000454 = 0x00000464; // type:func rom:0x4E4
+sceLfatfsWaitReady = 0x0000053C; // type:func rom:0x5BC
+sceLfatfsStop = 0x00000544; // type:func rom:0x5C4
+sceKernelSetEventFlag = 0x000005A4; // type:func rom:0x624
+sceUmdGetErrorStat = 0x000005CC; // type:func rom:0x64C
+// shared names (tools/add_version.py) end

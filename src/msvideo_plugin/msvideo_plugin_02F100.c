@@ -1,6 +1,6 @@
 /* lang: c++ */
 /* cflags[150]: -O2 */
-/* cflags[100]: -O2 */
+/* cflags[100,103]: -O2 */
 /* cflags: -O1 */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
@@ -44,7 +44,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_0002F364);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_0002F56C);
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION == 103 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_0002F954);
 #endif
 
@@ -84,6 +84,10 @@ void func_00026348(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_00026348);
+#endif
+
 #if FW_VERSION == 100
 void func_00026348(s32 arg0) {
     func_0002F2F4(arg0 - 0x38);
@@ -94,6 +98,10 @@ void func_00026348(s32 arg0) {
 void func_00026364(s32 arg0) {
     func_0002F324(arg0 - 0x3C);
 }
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/msvideo_plugin_02F100", func_00026364);
 #endif
 
 #if FW_VERSION == 100

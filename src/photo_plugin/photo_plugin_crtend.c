@@ -53,7 +53,7 @@ INCLUDE_RODATA("nonmatchings/photo_plugin_crtend", D_00025118);
 INCLUDE_RODATA("nonmatchings/photo_plugin_crtend", D_00025130);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/photo_plugin_crtend", D_00025020);
 #endif
 

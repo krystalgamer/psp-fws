@@ -41,6 +41,12 @@ s32 func_00039020(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     return var_v1;
 }
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002ECE8);
+
+INCLUDE_ASM("nonmatchings/msvideo_plugin_038F84", func_0002ED14);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_0002F860(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_v1;

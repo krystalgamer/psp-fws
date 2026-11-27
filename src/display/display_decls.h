@@ -90,7 +90,7 @@ typedef struct {
     u32 subIntrMask;          /* 0x00: enabled VBLANK sub interrupts */
     u32 vcount;               /* 0x04 */
     s32 unk8;                 /* 0x08: 1.50+: sceDisplayAdjustAccumulatedHcount offset */
-#if FW_VERSION == 100
+#if FW_VERSION < 150
     s32 hcountPerFrame;       /* 0x0C */
 #elif FW_VERSION < 201
     s32 unkC;

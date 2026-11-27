@@ -1,7 +1,7 @@
 /* lang: c++ */
 /* cflags[152]: -Os */
 /* cflags[150]: -Os */
-/* cflags[100]: -Os */
+/* cflags[100,102,103]: -Os */
 #include "common.h"
 #include "impose_plugin_decls.h"
 
@@ -89,12 +89,12 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_0000138C);
 
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001398);
 
-#if FW_VERSION >= 350
-INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001734);
+#if FW_VERSION >= 102 && FW_VERSION < 330
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013A4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 330
-INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013A4);
+#if FW_VERSION >= 350
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001734);
 #endif
 
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000013B4);
@@ -127,6 +127,10 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001404);
 
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001414);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001234);
+#endif
+
 #if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_000016F4);
 #endif
@@ -156,6 +160,10 @@ INCLUDE_RODATA("nonmatchings/impose_plugin", D_00001450);
 INCLUDE_RODATA("nonmatchings/impose_plugin", D_0000145C);
 
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000001A4);
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose_plugin", func_000003BC_v102);
+#endif
 
 #if FW_VERSION == 340
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000003CC_v340);
@@ -219,7 +227,7 @@ INCLUDE_ASM("nonmatchings/impose_plugin", func_0000082C);
 INCLUDE_ASM("nonmatchings/impose_plugin", func_000008DC);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 102 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose_plugin", func_00000980);
 #endif
 

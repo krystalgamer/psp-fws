@@ -247,7 +247,11 @@ s32 sceHprmSuspend(void) {
 }
 #endif
 
-#if FW_VERSION < 350
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/hpremote", func_00001138);
+#endif
+
+#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 350)
 INCLUDE_ASM("nonmatchings/hpremote", sceHprmResume);
 #endif
 
@@ -300,7 +304,7 @@ s32 sceHprmGetIdleCancelKey(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/hpremote", func_00001250);
 #endif
 

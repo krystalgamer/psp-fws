@@ -291,13 +291,17 @@ def main():
     hdr = "".join(out)
     # the source file's own prelude: includes, file-local externs and static inlines before the first entry
     src = Path(mod.file_of(name)).read_text()
-    m = re.search(r"^(INCLUDE_ASM|INCLUDE_RODATA|#if)", src, re.M)
+    # (stops at the first non-static function definition too: earlier C functions would be compiled into the score)
+    m = re.search(r"^(INCLUDE_ASM|INCLUDE_RODATA|#if|(?!static)[^\n;#]*?\b\w+\([^;{}]*\)\s*\{)", src, re.M)
     prelude = re.sub(r'^#include "\w+_decls\.h"\n', "", src[:m.start()] if m else "", flags=re.M)
     fwv = re.match(r"\d+", a.ver)[0]
     fwvar = (re.search(r"v(\d+)", a.ver) or [None, "0"])[1]
     text = f"#define FW_VERSION {fwv}\n#define FW_VARIANT {fwvar}\n" + hdr + "\n" + prelude + "\n" + extra + "\n" + body
     target = mod.target_words(name)
     comp, own = AD.Module.file_setting(mod.file_of(name))
+    if os.environ.get("HT_COMP"):  # try another compiler release with the file's flags
+        comp = os.environ["HT_COMP"]
+        own = comp + " " + own.split(" ", 1)[1]
     best = diff_words = None
     opts = list(AD.OPTS)
     if own.split(" ", 1)[1] not in opts:  # file flags beyond the standard sets (e.g. -fno-merge-constants)

@@ -8,6 +8,10 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracReinit);
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracGetAtracID);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/libatrac3plus", func_000000F0);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracReleaseAtracID);
 
@@ -16,11 +20,19 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetData);
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetHalfwayBuffer);
 
-#if FW_VERSION < 250
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/libatrac3plus", func_00000204);
+
+INCLUDE_ASM("nonmatchings/libatrac3plus", func_00000350);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250)
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetDataAndGetID);
 #endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetHalfwayBufferAndGetID);
+#endif
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetMOutHalfwayBuffer);
@@ -101,7 +113,7 @@ s32 func_00001288(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 u8 *func_00001140(u8 *arg0, u32 arg1, u32 arg2, s32 arg3) {
     s32 var_v0_2;
     u8 *var_v0;
@@ -133,7 +145,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracEndEntry);
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracReleaseAtracID);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libatrac3plus", sceAtracSetData);
 #endif
 
@@ -452,7 +464,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_000027F8);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000028A8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 u32 func_000028B4(s32 arg0, u32 arg1, u32 arg2) {
     u32 var_v0;
 
@@ -470,7 +482,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_000028CC);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002918);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 201
+#if FW_VERSION < 150 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000029CC);
 #endif
 
@@ -570,6 +582,10 @@ INCLUDE_RODATA("nonmatchings/libatrac3plus", D_000038A4);
 INCLUDE_RODATA("nonmatchings/libatrac3plus", D_000038B4);
 #endif
 
+#if FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002A78);
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002660);
 
@@ -579,8 +595,6 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002814);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002A78);
-
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002B44);
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002C24);
@@ -588,6 +602,10 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002C24);
 
 #if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002CE0);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002CC8);
 #endif
 
 #if FW_VERSION == 152
@@ -666,7 +684,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002E3C);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00003018);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002F7C);
 #endif
 
@@ -874,7 +892,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_000032D4);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000033A0_v150);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_00003168(s32 arg0, u32 arg1, s32 arg2, u32 arg3) {
     s32 var_v1;
     u32 temp_a0;
@@ -914,7 +932,7 @@ INCLUDE_ASM("nonmatchings/libatrac3plus", func_000035F4);
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00003780);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00003478);
 
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_000035A4);

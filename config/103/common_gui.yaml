@@ -1,0 +1,93 @@
+name: common_gui (103)
+sha1: 6d3f363a7b64e2e11d8ae555490e7feee13cd657
+options:
+  basename: common_gui
+  target_path: tmp/baserom/103/common_gui.prx
+  elf_path: tmp/build/103/common_gui.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/103/common_gui
+  src_path: src/common_gui
+  build_path: tmp/build/103
+  ld_script_path: tmp/build/103/common_gui.ld
+  cache_path: tmp/build/103/.splat_cache.common_gui
+  symbol_addrs_path:
+    - config/103/symbol_addrs.common_gui.txt
+    - config/103/func_starts.common_gui.txt
+    - tmp/build/103/prx_syms.common_gui.txt
+  reloc_addrs_path: [tmp/build/103/reloc_addrs.common_gui.txt]
+  asset_path: tmp/assets/103/common_gui
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/103/undefined_funcs_auto.common_gui.txt
+  undefined_syms_auto_path: tmp/build/103/undefined_syms_auto.common_gui.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x80F0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x8340
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: common_gui
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - [0xA4, c, common_gui]
+      - [0x4B8, c, common_gui_000438]
+      - [0x54D0, c, common_gui_0008C8]
+      - [0x5FEC, c, common_gui_0016E8]
+      - [0x7388, c, common_gui_crtend]
+      - { start: 0x73E0, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x73FC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x7664, type: prxpad, order: .text }
+      - { start: 0x7670, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x7674, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x7694, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x7698, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x769C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x76B4, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x76B8, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x76EC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x78F0, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x7A24, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x7A54, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x7A60, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x7A6C, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x7A70, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - { start: 0x7A74, type: prxpad, order: .rodata }
+      - [0x7A78, .rodata, common_gui_000438]
+      - [0x7D48, .rodata, common_gui_0008C8]
+      - [0x7E68, .rodata, common_gui_0016E8]
+      - { start: 0x8058, type: prxpad, order: .rodata }
+  - name: common_gui_seg1
+    type: code
+    start: 0x8060
+    vram: 0x7FE0
+    bss_size: 0x25C
+    subsegments:
+      - [0x8060, data, common_gui_data]
+      - { start: 0x8154, type: bss, vram: 0x80E0 }
+  - [0x8154, bin, elf_trailer]
+  - [0xC100]

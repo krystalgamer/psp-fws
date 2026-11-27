@@ -1,0 +1,77 @@
+name: deci2p (102)
+sha1: 96f653fa18e46b0d4dda282641ec93e2439bf2c8
+options:
+  basename: deci2p
+  target_path: tmp/baserom/102/deci2p.prx
+  elf_path: tmp/build/102/deci2p.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/102/deci2p
+  src_path: src/deci2p
+  build_path: tmp/build/102
+  ld_script_path: tmp/build/102/deci2p.ld
+  cache_path: tmp/build/102/.splat_cache.deci2p
+  symbol_addrs_path:
+    - config/102/symbol_addrs.deci2p.txt
+    - tmp/build/102/prx_syms.deci2p.txt
+  reloc_addrs_path: [tmp/build/102/reloc_addrs.deci2p.txt]
+  asset_path: tmp/assets/102/deci2p
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/102/undefined_funcs_auto.deci2p.txt
+  undefined_syms_auto_path: tmp/build/102/undefined_syms_auto.deci2p.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x84C0
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x21E34
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: deci2p
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, deci2p]
+      - { start: 0x11218, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x113F0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x113F4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x11414, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x11418, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x1141C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x114E8, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x114EC, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x11520, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x116E8, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x117D4, rodata, deci2p]
+      - { start: 0x13B84, type: prxpad, order: .rodata }
+  - name: deci2p_seg1
+    type: code
+    start: 0x13B90
+    vram: 0x13B10
+    bss_size: 0xDE50
+    subsegments:
+      - [0x13B90, data, deci2p_data]
+      - { start: 0x14054, type: bss, vram: 0x13FE0 }
+  - [0x14054, bin, elf_trailer]
+  - [0x1C304]

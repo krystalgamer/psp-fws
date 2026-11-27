@@ -1,0 +1,6 @@
+// shared names (tools/add_version.py) begin
+module_start = 0x0000010C; // type:func rom:0x18C
+module_stop = 0x0000012C; // type:func rom:0x1AC
+sce_paf_private_getheaparea1 = 0x0000014C; // type:func rom:0x1CC
+sce_paf_private_getheaparea2 = 0x0000016C; // type:func rom:0x1EC
+// shared names (tools/add_version.py) end

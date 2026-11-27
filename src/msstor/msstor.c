@@ -1,6 +1,6 @@
 /* cflags[152]: -Os */
 /* cflags[150]: -Os */
-/* cflags[100]: -Os */
+/* cflags[100,102,103]: -Os */
 #include "common.h"
 #include "msstor_decls.h"
 

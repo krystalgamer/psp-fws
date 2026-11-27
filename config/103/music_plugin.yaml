@@ -1,0 +1,105 @@
+name: music_plugin (103)
+sha1: 4175ee13cf10abe715a7156c3f530d890617ea09
+options:
+  basename: music_plugin
+  target_path: tmp/baserom/103/music_plugin.prx
+  elf_path: tmp/build/103/music_plugin.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/103/music_plugin
+  src_path: src/music_plugin
+  build_path: tmp/build/103
+  ld_script_path: tmp/build/103/music_plugin.ld
+  cache_path: tmp/build/103/.splat_cache.music_plugin
+  symbol_addrs_path:
+    - config/103/symbol_addrs.music_plugin.txt
+    - config/103/func_starts.music_plugin.txt
+    - tmp/build/103/prx_syms.music_plugin.txt
+  reloc_addrs_path: [tmp/build/103/reloc_addrs.music_plugin.txt]
+  asset_path: tmp/assets/103/music_plugin
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/103/undefined_funcs_auto.music_plugin.txt
+  undefined_syms_auto_path: tmp/build/103/undefined_syms_auto.music_plugin.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8980
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x65E78
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: music_plugin
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - [0xA4, c, music_plugin]
+      - [0x203C0, c, music_plugin_0001E7E0]
+      - [0x25EE8, c, music_plugin_00024250]
+      - [0x2AE30, c, music_plugin_00029198]
+      - [0x37DE4, c, music_plugin_000363AC]
+      - [0x4446C, c, music_plugin_00041D54]
+      - [0x4D8B0, c, music_plugin_0004B204]
+      - [0x5015C, c, music_plugin_04DA94]
+      - [0x51CD4, c, music_plugin_0004F60C]
+      - [0x51D0C, c, music_plugin_0004F644]
+      - [0x5ABFC, c, music_plugin_crtend]
+      - { start: 0x5C4C0, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x5C4DC, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x5CE8C, type: prxpad, order: .text }
+      - { start: 0x5CE90, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x5CE94, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x5CEA4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x5CEA8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x5CEAC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x5CF84, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x5CF88, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x5CFBC, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x5D09C, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x5D574, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x5D8C0, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x5D8E0, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x5D900, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x5D904, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x5D938, .rodata, music_plugin]
+      - [0x5FE54, .rodata, music_plugin_0001E7E0]
+      - [0x60338, .rodata, music_plugin_00024250]
+      - [0x607B0, .rodata, music_plugin_00029198]
+      - [0x613CC, .rodata, music_plugin_000363AC]
+      - [0x62650, .rodata, music_plugin_00041D54]
+      - [0x63640, .rodata, music_plugin_0004B204]
+      - [0x63670, .rodata, music_plugin_04DA94]
+      - [0x63740, .rodata, music_plugin_0004F644]
+      - [0x63EE0, .rodata, music_plugin_crtend]
+      - { start: 0x640E8, type: prxpad, order: .rodata }
+  - name: music_plugin_seg1
+    type: code
+    start: 0x64100
+    vram: 0x64070
+    bss_size: 0x1470
+    subsegments:
+      - [0x64100, data, music_plugin_data]
+      - { start: 0x64A88, type: bss, vram: 0x64A00 }
+  - [0x64A88, bin, elf_trailer]
+  - [0x91EB0]

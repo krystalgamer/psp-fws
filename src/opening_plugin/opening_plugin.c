@@ -108,7 +108,7 @@ INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001420);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001434);
 
-#if FW_VERSION == 271
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/opening_plugin", func_0000076C);
 #endif
 
@@ -197,6 +197,10 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00000840);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001468);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001430);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001510);
 #endif
@@ -240,6 +244,10 @@ INCLUDE_RODATA("nonmatchings/opening_plugin", D_000015A0);
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_000015B8);
 
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_000015C8);
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001590);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/opening_plugin", D_00001670);
@@ -313,6 +321,10 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_0000093C);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000988);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/opening_plugin", func_000009B0);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/opening_plugin", func_000009E8);
 #endif
@@ -385,6 +397,10 @@ INCLUDE_ASM("nonmatchings/opening_plugin", func_00000A90);
 
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000AE0);
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/opening_plugin", func_00000DD0);
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/opening_plugin", func_00000E44);
 #endif
@@ -396,7 +412,7 @@ void func_00000E00(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 103
 void func_00000D8C(void) {
 
 }
@@ -460,21 +476,7 @@ void func_00000ED8(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00000F48();
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_00000EF8(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = sce_paf_private_strlen(arg1);
-    }
-    func_00000F78(arg0, arg1, var_v0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00000EF8(s32 arg0, s32 arg1) {
     s32 var_v0;
 

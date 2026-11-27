@@ -81,3 +81,4 @@ _aw_ctx = 0x00002B7C;
 g_pAwRegAdr = 0x00002A34;
 save_regs = 0x00002A84;
 _sceGeQueueStatus = 0x000021C4; // type:func
+_sceGeErrorInterrupt = 0x00001350; // type:func

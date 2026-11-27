@@ -1,0 +1,33 @@
+// shared names (tools/add_version.py) begin
+D_00001F8C = 0x00001E88; // rom:0x1F08
+D_00002048 = 0x00001F44; // rom:0x1FC4
+D_000019F0 = 0x00001F50; // rom:0x1FD0
+D_00001A30 = 0x00001F90;
+D_00001A34 = 0x00001F94;
+sceMeWrapper_driver_A177798D = 0x00000C80; // type:func rom:0xD00
+sceMeWrapper_driver_C86500E3 = 0x00000CA0; // type:func rom:0xD20
+sceMeWrapper_driver_5AD660FA = 0x00000CC4; // type:func rom:0xD44
+func_00001070 = 0x00000FF4; // type:func rom:0x1074
+sceMeWrapper_driver_3D5F109C = 0x00001240; // type:func rom:0x12C0
+sceMeWrapper_driver_D1EA3DFD = 0x00001344; // type:func rom:0x13C4
+sceMeWrapper_driver_04AFF68E = 0x0000144C; // type:func rom:0x14CC
+sceMeWrapper_driver_B97B15D7 = 0x00001474; // type:func rom:0x14F4
+func_00001624 = 0x0000153C; // type:func rom:0x15BC
+sceMeWrapperEnd = 0x000015A8; // type:func rom:0x1628
+func_00001368 = 0x000016CC; // type:func rom:0x174C
+func_0000145C = 0x000017D0; // type:func rom:0x1850
+func_00001918 = 0x0000180C; // type:func rom:0x188C
+sceKernelSignalSema = 0x00001904; // type:func rom:0x1984
+sceKernelWaitSema = 0x0000190C; // type:func rom:0x198C
+sceKernelSetEventFlag = 0x00001924; // type:func rom:0x19A4
+sceKernelWaitEventFlag = 0x0000192C; // type:func rom:0x19AC
+sceKernelDcacheWritebackInvalidateAll = 0x00001934; // type:func rom:0x19B4
+sceDdrFlush = 0x00001944; // type:func rom:0x19C4
+sceKernelUnregisterSysEventHandler = 0x00001954; // type:func rom:0x19D4
+sceSysregMeResetEnable = 0x00001964; // type:func rom:0x19E4
+sceSysregVmeResetEnable = 0x00001974; // type:func rom:0x19F4
+sceSysregAvcResetEnable = 0x00001984; // type:func rom:0x1A04
+sceSysregMeBusClockDisable = 0x000019A4; // type:func rom:0x1A24
+sceSysregInterruptToOther = 0x000019B4; // type:func rom:0x1A34
+D_00001A34_v103 = 0x00001A34; // rom:0x1AB4
+// shared names (tools/add_version.py) end

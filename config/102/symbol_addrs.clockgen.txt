@@ -1,0 +1,25 @@
+// shared names (tools/add_version.py) begin
+D_000007A8 = 0x000007FC; // rom:0x87C
+D_00000930 = 0x00000820; // rom:0x8A0
+D_0000093C = 0x00000828; // rom:0x8A8
+sceClockgenInit = 0x00000000; // type:func rom:0x80
+sceClockgenSetSpectrumSpreading = 0x000000EC; // type:func rom:0x16C
+module_start = 0x00000260; // type:func rom:0x2E0
+module_reboot_before = 0x00000280; // type:func rom:0x300
+sceClockgenEnd = 0x000002CC; // type:func rom:0x34C
+func_0000041C = 0x00000320; // type:func rom:0x3A0
+sceClockgenGetRevision = 0x0000037C; // type:func rom:0x3FC
+sceClockgenGetRegValue = 0x00000390; // type:func rom:0x410
+sceClockgenAudioClkSetFreq = 0x000003BC; // type:func rom:0x43C
+sceClockgenAudioClkEnable = 0x000003FC; // type:func rom:0x47C
+sceClockgenAudioClkDisable = 0x0000041C; // type:func rom:0x49C
+sceClockgenLeptonClkEnable = 0x0000043C; // type:func rom:0x4BC
+sceClockgenLeptonClkDisable = 0x0000045C; // type:func rom:0x4DC
+func_00000614 = 0x00000518; // type:func rom:0x598
+func_000006C0 = 0x000005C4; // type:func rom:0x644
+sceKernelDeleteSema = 0x00000620; // type:func rom:0x6A0
+sceKernelSignalSema = 0x00000628; // type:func rom:0x6A8
+sceKernelWaitSema = 0x00000630; // type:func rom:0x6B0
+sceI2cMasterTransmit = 0x00000648; // type:func rom:0x6C8
+sceKernelUnregisterSysEventHandler = 0x00000660; // type:func rom:0x6E0
+// shared names (tools/add_version.py) end

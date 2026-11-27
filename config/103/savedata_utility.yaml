@@ -1,0 +1,96 @@
+name: savedata_utility (103)
+sha1: 2ac133ec3499c7f76e580f3e5f422b01caacd840
+options:
+  basename: savedata_utility
+  target_path: tmp/baserom/103/savedata_utility.prx
+  elf_path: tmp/build/103/savedata_utility.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/103/savedata_utility
+  src_path: src/savedata_utility
+  build_path: tmp/build/103
+  ld_script_path: tmp/build/103/savedata_utility.ld
+  cache_path: tmp/build/103/.splat_cache.savedata_utility
+  symbol_addrs_path:
+    - config/103/symbol_addrs.savedata_utility.txt
+    - config/103/func_starts.savedata_utility.txt
+    - tmp/build/103/prx_syms.savedata_utility.txt
+  reloc_addrs_path: [tmp/build/103/reloc_addrs.savedata_utility.txt]
+  asset_path: tmp/assets/103/savedata_utility
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/103/undefined_funcs_auto.savedata_utility.txt
+  undefined_syms_auto_path: tmp/build/103/undefined_syms_auto.savedata_utility.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8120
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x21344
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: savedata_utility
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - [0xA4, c, savedata_utility]
+      - [0x52C8, c, savedata_utility_006DD4]
+      - [0xAE18, c, savedata_utility_010FEC]
+      - [0xF410, c, savedata_utility_015C1C]
+      - [0x10A0C, c, savedata_utility_017068]
+      - [0x1F014, c, savedata_utility_crtend]
+      - { start: 0x1F61C, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x1F638, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x1FA90, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x1FA94, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x1FAA4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x1FAA8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x1FAAC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x1FB44, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x1FB48, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x1FB7C, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x1FC18, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x1FE44, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x20004, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x20010, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x2001C, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x20020, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - { start: 0x20054, type: prxpad, order: .rodata }
+      - [0x20058, .rodata, savedata_utility]
+      - [0x20568, .rodata, savedata_utility_006DD4]
+      - [0x208D8, .rodata, savedata_utility_010FEC]
+      - [0x20A90, .rodata, savedata_utility_015C1C]
+      - [0x20B58, .rodata, savedata_utility_017068]
+      - [0x21120, .rodata, savedata_utility_crtend]
+      - { start: 0x21228, type: prxpad, order: .rodata }
+  - name: savedata_utility_seg1
+    type: code
+    start: 0x21230
+    vram: 0x211B0
+    bss_size: 0x54
+    subsegments:
+      - [0x21230, data, savedata_utility_data]
+      - { start: 0x21360, type: bss, vram: 0x212E0 }
+  - [0x21360, bin, elf_trailer]
+  - [0x2B46C]

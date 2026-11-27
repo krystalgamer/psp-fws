@@ -1,5 +1,6 @@
 /* compiler[151]: 1.6.1 */
 /* compiler[150]: 1.6.1 */
+/* cflags[100]: -O2 -mno-split-addresses */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "reboot_decls.h"
@@ -47,14 +48,10 @@ s32 func_00002CB8(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002CC0);
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002CCC);
-#else
-void func_00002CCC(s32 arg0, s32 arg1) {
-    func_00002EA0(arg1, arg0);
+void bcopy(const void *src, void *dst, u32 n) {
+    memmove(dst, src, n);
 }
-#endif
 
-void func_00002CF0(void) {
-    func_00002F14();
+void bcmp(const void *a, const void *b, s32 n) {
+    memcmp(a, b, n);
 }

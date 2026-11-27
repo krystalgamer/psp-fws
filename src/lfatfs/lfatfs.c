@@ -1,8 +1,12 @@
-/* cflags[100]: -O2 -frename-registers -fno-builtin */
+/* cflags[100,102,103]: -O2 -frename-registers -fno-builtin */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
 #include "lfatfs_decls.h"
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/lfatfs", D_0000BF7C);
+#endif
 
 #if FW_VERSION >= 350
 s32 func_00000000(s32 arg0) {
@@ -304,7 +308,11 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CD2C);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CD34);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00000AF4);
+#else
 INCLUDE_ASM("nonmatchings/lfatfs", module_start);
+#endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CF8C);
@@ -314,13 +322,17 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CF8C);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CD94);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00000C00);
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CEA0);
 
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CEAC);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250)
 INCLUDE_ASM("nonmatchings/lfatfs", assign_thread);
 #endif
 
@@ -367,6 +379,16 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00000C1C);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CE20);
 
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CE50);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00000D10);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00000DD0);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00000E00);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00000E3C);
 #endif
 
 #if FW_VERSION >= 282
@@ -575,6 +597,12 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00001CC0);
 INCLUDE_ASM("nonmatchings/lfatfs", func_000017FC);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00001954);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00001978);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 152
 s32 func_00001C24(void) {
     sceKernelRegisterSysEventHandler(&D_0000E050);
@@ -635,7 +663,7 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00001C8C);
 INCLUDE_ASM("nonmatchings/lfatfs", func_00001CE0);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 310)
+#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 310)
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CF5C);
 #endif
 
@@ -649,6 +677,36 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CF84);
 
 #if FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CF9C);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000199C);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00001AAC);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00001B90);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00001C90);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00001D94);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00001EC0);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00001FF4);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_000020E8);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_000021EC);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_000022E0);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_000023D4);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_000024F0);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_000025E0);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_000026E0);
 #endif
 
 #if FW_VERSION == 100
@@ -1741,6 +1799,14 @@ s32 UFatChdir(SceIoIob *iob, char *name) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000286C);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00002998);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00002A84);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/lfatfs", UFatChdir);
 #endif
@@ -1910,6 +1976,10 @@ s32 func_000028E8(void) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00002B88);
+#endif
+
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_00003074);
 
@@ -1924,17 +1994,27 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_000031E8);
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_000033EC);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00005DC0);
+#endif
+
 INCLUDE_ASM("nonmatchings/lfatfs", func_00003580);
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_00003674);
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000372C);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00003114);
+#endif
+
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000382C);
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_000038E4);
-#else
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 300)
 INCLUDE_ASM("nonmatchings/lfatfs", ufat_lseek);
 #endif
 
@@ -1966,7 +2046,7 @@ void func_00002E0C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_00002E0C(void *arg0) {
     func_0000372C_v100(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 8));
 }
@@ -2060,6 +2140,14 @@ void func_00003CA0(s32 *args) {
     ufat_umount(args[0], args[1]);
 }
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", disk_read);
+
+INCLUDE_ASM("nonmatchings/lfatfs", buf_read);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_000031E8);
+#endif
+
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/lfatfs", func_00003694);
 #endif
@@ -2086,7 +2174,7 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CBD4);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CBE4);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 s32 disk_read(UFatUnit *unit, void *buf, s32 sector, s32 count) {
     s32 ret;
 
@@ -2230,7 +2318,7 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_000046C4);
 INCLUDE_ASM("nonmatchings/lfatfs", func_00004754);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000372C_v100);
 #endif
 
@@ -2262,6 +2350,12 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_0000464C);
 INCLUDE_ASM("nonmatchings/lfatfs", ufat_mount);
 
 INCLUDE_ASM("nonmatchings/lfatfs", ufat_umount);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00003DB8);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00005E68);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -2331,7 +2425,7 @@ s32 func_00005F7C(UFatUnit *unit, s32 cluster) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_00006008(UFatUnit *unit, u32 cluster) {
     u32 next;
     s32 ret;
@@ -2391,28 +2485,28 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_000065DC);
 INCLUDE_ASM("nonmatchings/lfatfs", func_00006718);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/lfatfs", func_000071FC);
-
-INCLUDE_ASM("nonmatchings/lfatfs", func_000074F8);
-#endif
-
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/lfatfs", node_attach);
 
 INCLUDE_ASM("nonmatchings/lfatfs", add_direntry);
 #endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lfatfs", func_000071FC);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_000074F8);
+#endif
+
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_00006DFC);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/lfatfs", func_00007AF8);
-#endif
-
 #if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/lfatfs", create_file);
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lfatfs", func_00007AF8);
 #endif
 
 #if FW_VERSION < 282
@@ -2639,6 +2733,10 @@ s32 func_00007F58(void *arg0) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00008358);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000862C);
 
@@ -2729,11 +2827,17 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00008388);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000C56C);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00008424);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000851C);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_00008794);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/lfatfs", EraseAndFreeBlock);
 
 INCLUDE_ASM("nonmatchings/lfatfs", CreateLPTable);
@@ -2797,6 +2901,12 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00008AC8);
 
 #if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D8C0);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00008768);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_000087F8);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -2870,7 +2980,7 @@ void LFlashBlockBufferWritePage(LFlashDev *dev, s32 page, u8 *data) {
 INCLUDE_ASM("nonmatchings/lfatfs", LFlashBlockBufferWritePage);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/lfatfs", test_open);
 #endif
 
@@ -2969,6 +3079,14 @@ s32 func_0000881C(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00008C34);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/lfatfs", func_00008D74);
+#endif
+
 #if FW_VERSION == 100
 s32 test_close(void) {
     s32 res;
@@ -3011,7 +3129,7 @@ s32 test_close(void) {
 }
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000DCE0);
 #endif
 
@@ -3064,7 +3182,7 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00009514);
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000955C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_00008914(void) {
     s32 var_v1;
 
@@ -3080,6 +3198,14 @@ s32 func_00008958(void) {
     sceIoAddDrv(&D_0000D72C);
     return 0;
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CC2C);
+
+INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CC44);
+
+INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CC5C);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
@@ -3421,7 +3547,7 @@ s32 del_lflash_driver(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 del_lflash_driver(void) {
     s32 *temp_v1;
 
@@ -3446,7 +3572,11 @@ void func_000089C8(void) {
 INCLUDE_ASM("nonmatchings/lfatfs", df_close);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/lfatfs", Malloc);
+#endif
+
+#if FW_VERSION < 103
 void *Malloc(SceSize size) {
     void *p;
 
@@ -3457,6 +3587,10 @@ void *Malloc(SceSize size) {
     }
     return p;
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00008F74);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
@@ -3499,12 +3633,16 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_000092B4);
 INCLUDE_ASM("nonmatchings/lfatfs", func_00009354);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/lfatfs", SegmentAddFreeBlock);
 #endif
 
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/lfatfs", func_00008C9C);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_000092DC);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
@@ -3746,7 +3884,7 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_0000AA60);
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000A7C4);
 #endif
 
-#if FW_VERSION < 250 || (FW_VERSION >= 282 && FW_VERSION < 310)
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250) || (FW_VERSION >= 282 && FW_VERSION < 310)
 INCLUDE_ASM("nonmatchings/lfatfs", SegmentCreateLpt);
 #endif
 
@@ -3754,6 +3892,16 @@ INCLUDE_ASM("nonmatchings/lfatfs", SegmentCreateLpt);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000E5D8);
 
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000E5F8);
+#endif
+
+#if FW_VERSION < 250 || FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/lfatfs", SegmentLbnConfirm);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00009848);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00009990);
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 350
@@ -3786,15 +3934,11 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000E1AC);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000E1DC);
 #endif
 
-#if FW_VERSION < 250 || FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/lfatfs", SegmentLbnConfirm);
-#endif
-
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/lfatfs", func_00009BF4);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/lfatfs", LFlashUmount);
 #endif
 
@@ -3802,7 +3946,7 @@ INCLUDE_ASM("nonmatchings/lfatfs", LFlashUmount);
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000A314);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 152)
 INCLUDE_ASM("nonmatchings/lfatfs", df_open_locked);
 #endif
 
@@ -3814,7 +3958,17 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_000097A8);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CB54);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_00009D5C);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_00009E0C);
+
+INCLUDE_ASM("nonmatchings/lfatfs", df_init);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000A024);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250)
 INCLUDE_ASM("nonmatchings/lfatfs", SegmentSetLPEntry);
 #endif
 
@@ -3822,11 +3976,11 @@ INCLUDE_ASM("nonmatchings/lfatfs", SegmentSetLPEntry);
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000A308);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/lfatfs", SegmentGetFreeBlock);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250)
 INCLUDE_ASM("nonmatchings/lfatfs", df_init);
 #endif
 
@@ -3834,7 +3988,7 @@ INCLUDE_ASM("nonmatchings/lfatfs", df_init);
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000A4DC);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION == 100 || FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/lfatfs", ReadPhysicalPageExtraOnly);
 #endif
 
@@ -3842,7 +3996,13 @@ INCLUDE_ASM("nonmatchings/lfatfs", ReadPhysicalPageExtraOnly);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CD6C);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000A19C);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000A22C);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250)
 s32 IsBadBlock(LFlashDev *dev, s32 block) {
     s32 ret = sceKernelCheckThreadKernelStack();
 
@@ -3880,7 +4040,17 @@ void func_00009F94(s32 arg0) {
         *temp_v0 = -1;
     } while (var_a1 < 0xC);
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000A3A4);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000A488);
+
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000A5C4);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/lfatfs", BootSequence);
 
 INCLUDE_ASM("nonmatchings/lfatfs", SegmentInit);
@@ -3902,7 +4072,11 @@ s32 func_0000A7AC(void) {
 }
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000A7B4);
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION == 150
 s32 func_0000A7B4(const char *s, s32 *unit, s32 *part, s32 *single) {
     const char *p;
     s32 ret;
@@ -3968,7 +4142,7 @@ INCLUDE_ASM("nonmatchings/lfatfs", df_write);
 INCLUDE_ASM("nonmatchings/lfatfs", df_lseek);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000AC4C(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
     LFlashPart *part = iob->i_private;
     LFlashDev *dev = &D_0000EED0;
@@ -4179,6 +4353,10 @@ s32 func_0000AF98(void) {
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D14C);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000B390);
+#endif
+
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000B8D4);
 
@@ -4195,7 +4373,7 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000E3E4);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000E414);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/lfatfs", ReadLogicalPage);
 #endif
 
@@ -4213,6 +4391,10 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_0000A7FC);
 
 #if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D27C);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/lfatfs", func_0000B698);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282

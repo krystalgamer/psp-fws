@@ -1,5 +1,5 @@
 /* cflags[150]: -Os -frename-registers */
-/* cflags[100]: -Os */
+/* cflags[100,102,103]: -Os */
 /* cflags[152]: -O2 -frename-registers */
 #include "common.h"
 #include "exceptionman_decls.h"
@@ -38,7 +38,7 @@ void func_0000011C(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_0000011C(void) {
     func_000000F4();
     module_bootstart();
@@ -51,7 +51,7 @@ void sceKernelRegisterExceptionHandler(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", sceKernelRegisterPriorityExceptionHandler);
 
 INCLUDE_ASM("nonmatchings/exceptionman", sceKernelRegisterDefaultExceptionHandler);
@@ -69,11 +69,11 @@ s32 sceKernelGetActiveDefaultExceptionHandler(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", sceKernelReleaseDefaultExceptionHandler);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000470);
 #endif
 
@@ -81,11 +81,11 @@ INCLUDE_ASM("nonmatchings/exceptionman", func_00000470);
 INCLUDE_ASM("nonmatchings/exceptionman", func_000003D8);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_000004AC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/exceptionman", func_00000570);
 #endif
 
@@ -93,7 +93,7 @@ INCLUDE_ASM("nonmatchings/exceptionman", func_00000570);
 INCLUDE_ASM("nonmatchings/exceptionman", func_000004D0);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/exceptionman", func_000004E8);
 #endif
 

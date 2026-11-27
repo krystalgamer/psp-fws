@@ -1,0 +1,3 @@
+// shared names (tools/add_version.py) begin
+func_0000014C = 0x00000104; // type:func rom:0x184
+// shared names (tools/add_version.py) end

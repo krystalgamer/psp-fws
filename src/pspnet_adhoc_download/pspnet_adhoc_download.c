@@ -1,10 +1,36 @@
 /* cflags[152]: -Os -frename-registers */
 /* cflags[150]: -Os -frename-registers */
-/* cflags[100]: -Os -frename-registers */
+/* cflags[100,102,103]: -Os -frename-registers */
 #include "common.h"
 #include "pspnet_adhoc_download_decls.h"
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000000);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000001E4);
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadCreateServer);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000001D8);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000368);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000006F0);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A58);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A74);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000A9C);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000AF4);
+#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStartServer);
@@ -48,9 +74,11 @@ INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003B14);
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_download", D_00003B20);
 #endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadReplySession);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadSend);
+#endif
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadAbortSend);
@@ -114,7 +142,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000AC4);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000B1C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 103
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000590);
 #endif
 
@@ -150,7 +178,11 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadAbortReplyS
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadAbortSend);
 #endif
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000D48);
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStopServer);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadDeleteServer);
 
@@ -168,11 +200,17 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStartClient
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadGetServerList);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000E40);
+
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000FC4);
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadRequestSession);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadRecv);
+#endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION < 150 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStopClient);
 #endif
 
@@ -200,9 +238,15 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001D24);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001D68);
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadInitClient);
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001818);
+#endif
 
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadInitClient);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStartClient);
 #endif
 
@@ -293,7 +337,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00003310);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000020E4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00001CC8_v100);
 #endif
 

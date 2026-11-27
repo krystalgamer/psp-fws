@@ -39,7 +39,7 @@ INCLUDE_ASM("nonmatchings/libparse_http", func_0000044C);
 INCLUDE_ASM("nonmatchings/libparse_http", func_000004DC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libparse_http", strncmp_uc);
 #endif
 

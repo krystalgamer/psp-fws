@@ -472,6 +472,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_000190EC);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00019104);
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00010A84);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011214);
 #endif
@@ -955,7 +959,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00000400);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000004C0);
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 271
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 250 && FW_VERSION < 271)
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00000580);
 #endif
 
@@ -1042,7 +1046,7 @@ void func_0000075C(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00010910);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00010928);
@@ -1374,9 +1378,7 @@ void func_00001A68(void) {
 }
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00001A88);
-#endif
 
-#if FW_VERSION >= 350
 void func_00001B08(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -1386,21 +1388,7 @@ void func_00001B08(s32 arg0, s32 arg1) {
     }
     func_00001B58(arg0, arg1, var_v0);
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00001B08(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = sce_paf_private_wcslen(arg1);
-    }
-    func_00001B58(arg0, arg1, var_v0);
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00001B58);
 
 void func_00001C0C(M2C_UNK **arg0) {
@@ -1490,11 +1478,19 @@ s32 func_00001CD0(void) {
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001A690);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00010AE4);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011B34);
 #endif
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001A6A0);
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00010B04);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011B54);
@@ -1600,6 +1596,12 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00001D40);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00001DF0);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00000BEC);
+
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00000C48);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00001C90);
 #endif
@@ -1632,6 +1634,10 @@ void func_00000C34(void) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00000C34);
+#endif
+
 #if FW_VERSION == 100
 void func_00000C34(void) {
     sceKernelPowerTick(0);
@@ -1649,6 +1655,10 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00002214);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00002780);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000283C);
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00001774);
+#endif
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000030B4);
@@ -1676,7 +1686,9 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00001994);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000016C8);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00001AEC);
 #endif
 
@@ -1738,7 +1750,6 @@ void func_000037C4(void) {
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000037E0);
 #endif
 
-#if FW_VERSION >= 350
 void func_000038AC(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -1748,17 +1759,6 @@ void func_000038AC(s32 arg0, s32 arg1) {
     }
     func_00003BCC(arg0, arg1, var_v0);
 }
-#else
-void func_000038AC(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = sce_paf_private_strlen(arg1);
-    }
-    func_00003BCC(arg0, arg1, var_v0);
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000038FC);
 
@@ -2511,7 +2511,7 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00015B64);
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00015B88);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001117C);
 #endif
 
@@ -2827,7 +2827,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000549C);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00005958);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00004334);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000443C);
@@ -2873,9 +2873,7 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001AEFC);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00005190);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000052C4);
-#endif
 
-#if FW_VERSION >= 350
 void func_00005650(void) {
     void *sp0;
     _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
@@ -2889,17 +2887,6 @@ void func_00005650(void) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00005650(void) {
-    void *sp0;
-    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
-    func_00000B48(&sp0);
-    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
-    func_00000B48(&sp0);
-    _ZN3vsh26ShowButtonNavigation_EnterEb(1);
-    _ZN3vsh25ShowButtonNavigation_BackEb(1);
-    InputDevice_PspPad_Unlock();
-}
-
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000056B4);
 #endif
 
@@ -3072,7 +3059,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00005B00);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000484C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00004B44);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00004BA0);
@@ -3236,7 +3223,7 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001242C);
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011260);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011284);
 #endif
 
@@ -3244,25 +3231,7 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011284);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00006B70);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00006C38);
-#endif
 
-#if FW_VERSION >= 350
-s32 func_00006CFC(struct Unk_func_00006CFC_0 *arg0) {
-    s32 temp_v0;
-    s32 var_v1;
-
-    var_v1 = 0;
-    if (arg0 != NULL) {
-        temp_v0 = arg0->unk1D0;
-        if (temp_v0 != 0) {
-            var_v1 = _ZNK3paf8PhWidget8GetChildEi(temp_v0, 1);
-        }
-    }
-    return var_v1;
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_00006CFC(struct Unk_func_00006CFC_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
@@ -3330,29 +3299,18 @@ void func_000052A4(void) {
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00004E3C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000052C0);
 #endif
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00006F88);
-#endif
 
-#if FW_VERSION >= 350
 void func_00007088(void) {
     InputDevice_PspPad_Unlock();
     _ZN3vsh12BusyIcon_DecEv();
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00007088(void) {
-    InputDevice_PspPad_Unlock();
-    _ZN3vsh12BusyIcon_DecEv();
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000070AC);
 #endif
 
@@ -3482,7 +3440,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00008430);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00006264);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000064BC);
 #endif
 
@@ -3532,7 +3490,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00008F0C);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00009028);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000067E0);
 
 void func_0000680C(void) {
@@ -3737,9 +3695,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000096F0);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00009794);
-#endif
 
-#if FW_VERSION >= 350
 s32 func_00009828(s32 arg0) {
     void *sp0;
     s32 var_s0;
@@ -3757,29 +3713,7 @@ s32 func_00009828(s32 arg0) {
     _ZN3vsh9PowerLockD1Ev(&sp0);
     return var_s1;
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-s32 func_00009828(s32 arg0) {
-    void *sp0;
-    s32 var_s0;
-    s32 var_s1;
-
-    var_s0 = arg0;
-    var_s1 = 0;
-    _ZN3vsh9PowerLockC1Ei(&sp0, 0);
-    if (var_s0 > 0) {
-        do {
-            var_s0 -= 1;
-            var_s1 = sceKernelDelayThread(0xF4240U);
-        } while (var_s0 != 0);
-    }
-    _ZN3vsh9PowerLockD1Ev(&sp0);
-    return var_s1;
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001B720);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001B730);
@@ -4038,6 +3972,42 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000B0A8);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000B0D0);
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012088);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001208C);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012090);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012094);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012098);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_000120CC);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_000120FC);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011724);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011728);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001172C);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011730);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011734);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011768);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011798);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_000117C0);
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A4EC);
 #endif
@@ -4191,6 +4161,10 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000B79C);
 void func_0000B79C(s32 arg0) {
     _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000079C4, 0);
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00007B80);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
@@ -4381,7 +4355,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00009988);
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001BBD0);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001BBDC);
 #endif
 
@@ -4469,6 +4443,12 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001BDE0);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001BDEC);
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_000119B4);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_000119C8);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001491C);
 #endif
@@ -4479,13 +4459,13 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001BDF8);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001BE10);
 
-#if FW_VERSION >= 150 && FW_VERSION < 250
+#if FW_VERSION >= 103 && FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011980);
 #endif
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001BE38);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 103
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011980);
 #endif
 
@@ -4582,6 +4562,14 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C06C);
 #endif
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C090);
+
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_000124B8);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011B78);
+#endif
 
 #if FW_VERSION >= 330
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001DF3C);
@@ -4682,6 +4670,10 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C0DC);
 #endif
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C0F0);
+
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012504);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012DF4);
@@ -4946,6 +4938,18 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C590);
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C5BC);
 
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001C5DC);
+
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012610);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001262C);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011CAC);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011CC8_v102);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001EEF4);
@@ -5253,7 +5257,13 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000CCB0);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000CD40);
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00009108);
+
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00009168);
+#else
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000CE0C);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000C1C0);
@@ -5267,7 +5277,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000093CC);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00009420);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 103
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00008F64);
 #endif
 
@@ -5338,6 +5348,10 @@ void func_00009408(void) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00009408);
+#endif
+
 #if FW_VERSION == 100
 void func_00009408(void) {
     vsh_7485813E(8);
@@ -5350,9 +5364,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D1C4);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D380);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D500);
-#endif
 
-#if FW_VERSION >= 350
 s32 func_0000D604(struct Unk_func_0000D604_0 *arg0) {
     s32 temp_v0;
     s32 var_v1;
@@ -5366,43 +5378,15 @@ s32 func_0000D604(struct Unk_func_0000D604_0 *arg0) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-s32 func_0000D604(struct Unk_func_0000D604_0 *arg0) {
-    s32 temp_v0;
-    s32 var_v1;
-
-    var_v1 = 0;
-    if (arg0 != NULL) {
-        temp_v0 = arg0->unk1D0;
-        if (temp_v0 != 0) {
-            var_v1 = _ZNK3paf8PhWidget8GetChildEi(temp_v0, 1);
-        }
-    }
-    return var_v1;
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D640);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D750);
-#endif
 
-#if FW_VERSION >= 350
 void func_0000D864(void) {
     InputDevice_PspPad_Unlock();
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0000D864(void) {
-    InputDevice_PspPad_Unlock();
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D880);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D8D8);
@@ -5427,15 +5411,7 @@ s32 func_0000DA5C(void) {
     sceKernelPowerLock(0);
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_0000DA7C(void) {
-    vsh_8F76CA2A();
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000DA7C(void) {
     vsh_8F76CA2A();
 }
@@ -5454,7 +5430,11 @@ void func_00009974(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00009458);
+#endif
+
+#if FW_VERSION < 103
 s32 func_00009458(void) {
     void *sp0;
     s32 temp_s0;
@@ -5467,20 +5447,7 @@ s32 func_00009458(void) {
 }
 #endif
 
-#if FW_VERSION >= 350
-s32 func_0000DAEC(void) {
-    void *sp0;
-    s32 temp_s0;
-
-    _ZN3vsh9PowerLockC1Ei(&sp0, 1);
-    _ZN3paf5SleepEi(0x1F4);
-    temp_s0 = func_000008E0();
-    _ZN3vsh9PowerLockD1Ev(&sp0);
-    return temp_s0;
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION >= 282
 s32 func_0000DAEC(void) {
     void *sp0;
     s32 temp_s0;
@@ -5546,12 +5513,18 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000AB24);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000AD14);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00009FB8);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A250);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A360);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A6A8);
+
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A898);
 #endif
 
 #if FW_VERSION < 282
@@ -5609,7 +5582,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000C3EC);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000AFB8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A750);
 #endif
 
@@ -5617,7 +5590,9 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A750);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000F22C);
 #endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000F450);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000C6D4);
@@ -5650,7 +5625,7 @@ void func_0000E02C(void) {
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000F064_v260);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A92C);
 #endif
 
@@ -5668,22 +5643,7 @@ void func_0000A9F0(s32 arg0) {
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000F510);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000F56C);
-#endif
 
-#if FW_VERSION >= 350
-void func_0000F8F8(void) {
-    void *sp0;
-    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
-    func_00000B48(&sp0);
-    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
-    func_00000B48(&sp0);
-    _ZN3vsh26ShowButtonNavigation_EnterEb(1);
-    _ZN3vsh25ShowButtonNavigation_BackEb(1);
-    InputDevice_PspPad_Unlock();
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000F8F8(void) {
     void *sp0;
     _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
@@ -5758,7 +5718,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000ABA8);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000B440);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000AC10);
 #endif
 
@@ -5820,7 +5780,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00012700);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000128B0);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000128F8);
 #endif
 
@@ -5854,6 +5814,10 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00012958);
 
 #if FW_VERSION < 201 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00012A08);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000BBB0);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -6619,6 +6583,32 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000FE6C);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D430);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011F2C);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011F3C);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011F58);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011F70);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011F88);
+
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011FA8);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00012934);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00011FCC);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D530);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00013238);
 
@@ -6825,12 +6815,18 @@ void func_0000DED0(void) {
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000EBEC);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000DED0);
+#endif
+
 #if FW_VERSION == 100
 void func_0000DED0(void) {
     InputDevice_PspPad_Lock();
     func_00000A94();
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000DEF4);
 #endif
 
@@ -6840,6 +6836,10 @@ void func_00016BEC(s32 arg0) {
     _ZN3vsh12BusyIcon_IncEv();
     Job_Start(0, (s32 (*)()) func_0000DED0, arg0, -1, -1, func_0000EBEC);
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00016BEC);
 #endif
 
 #if FW_VERSION == 100
@@ -6908,6 +6908,16 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00016DD4);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00016EF0);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00016F78);
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000EB34);
+
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000EE10);
+
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000EE30);
+
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000EEA8);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000F284);
@@ -6987,14 +6997,7 @@ void func_0000E6A4(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 350
-void func_00017644(struct Unk_func_00017644_0 *arg0) {
-    arg0->unk30 = -1;
-    _ZN11PageManager4ExitEv();
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION >= 282
 void func_00017644(struct Unk_func_00017644_0 *arg0) {
     arg0->unk30 = -1;
     _ZN11PageManager4ExitEv();
@@ -7029,15 +7032,7 @@ void func_0000E700(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 350
-void func_000176C4(struct Unk_func_000176C4_0 *arg0) {
-    arg0->unk30 = -1;
-    arg0->unk34 = 0;
-    _ZN11PageManager5ClearEv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION >= 282
 void func_000176C4(struct Unk_func_000176C4_0 *arg0) {
     arg0->unk30 = -1;
     arg0->unk34 = 0;
@@ -7147,9 +7142,7 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00017840);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000178A8);
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00017924);
-#endif
 
-#if FW_VERSION >= 350
 s32 func_00017A18(struct Unk_func_00017A18_0 *arg0) {
     s32 temp_s1;
     s32 var_v0;
@@ -7162,24 +7155,7 @@ s32 func_00017A18(struct Unk_func_00017A18_0 *arg0) {
     }
     return var_v0;
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-s32 func_00017A18(struct Unk_func_00017A18_0 *arg0) {
-    s32 temp_s1;
-    s32 var_v0;
-
-    var_v0 = -1;
-    temp_s1 = arg0->unk34;
-    if (temp_s1 != 0) {
-        _ZN3vsh10OptionMenu5CloseEPN3paf4ViewEPKcS5_(arg0->unk4, temp_s1, func_00017728());
-        var_v0 = 0;
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION >= 282
 s32 func_00017A68(struct Unk_func_00017A68_0 *arg0) {
     return arg0->unk4;
 }
@@ -7207,15 +7183,7 @@ s32 func_00017A90(struct Unk_func_00017A90_0 *arg0) {
 s32 func_00017A98(struct Unk_func_00017A98_0 *arg0) {
     return arg0->unk1C;
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_00017AA0(struct Unk_func_00017AA0_0 *arg0, s32 *arg1) {
-    _ZN3paf4View8PageOpenEPKcii(arg0->unk4, arg1, 0, 0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00017AA0(struct Unk_func_00017AA0_0 *arg0, s32 *arg1) {
     _ZN3paf4View8PageOpenEPKcii(arg0->unk4, arg1, 0, 0);
 }
@@ -7241,27 +7209,19 @@ void func_00017AE0(struct Unk_func_00017AE0_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION >= 350
+#if FW_VERSION >= 282
 void func_00017AFC(struct Unk_func_00017AFC_0 *arg0) {
     _ZNK3paf4View8PageRootEPKc(arg0->unk4);
 }
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00017AFC(struct Unk_func_00017AFC_0 *arg0) {
-    _ZNK3paf4View8PageRootEPKc(arg0->unk4);
-}
-#endif
-
-#if FW_VERSION < 282
+#else
 void func_00017B18(void *arg0, s32 arg1) {
     _ZN3paf4View12PageActivateEPKc(M2C_FIELD(arg0, s32 *, 4), arg1);
 }
-#else
-INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00017B18);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00017B18);
+#else
 void func_0000EE2C(void *arg0, s32 arg1) {
     _ZN3paf4View9PageCloseEPKc(M2C_FIELD(arg0, s32 *, 4), arg1);
 }

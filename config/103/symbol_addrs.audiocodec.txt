@@ -1,0 +1,13 @@
+// shared names (tools/add_version.py) begin
+sceAudiocodec_6CD2A861 = 0x00000528; // type:func rom:0x5A8
+sceAudiocodecAlcExtendParameter = 0x000005A8; // type:func rom:0x628
+sceAudiocodecReleaseEDRAM = 0x000006E0; // type:func rom:0x760
+func_000007D4 = 0x000007B4; // type:func rom:0x834
+func_000008B4 = 0x00000894; // type:func rom:0x914
+func_00000970 = 0x00000958; // type:func rom:0x9D8
+func_00000A58 = 0x00000A40; // type:func rom:0xAC0
+func_00000AAC = 0x00000A94; // type:func rom:0xB14
+sceAudiocodecStartEntry = 0x00000AD8; // type:func rom:0xB58
+module_stop = 0x00000AE0; // type:func rom:0xB60
+sceMeWrapper_driver_5AD660FA = 0x00000B20; // type:func rom:0xBA0
+// shared names (tools/add_version.py) end

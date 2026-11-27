@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 */
+/* cflags[100,102,103]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "loadexec_decls.h"
@@ -25,7 +25,7 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002B5C);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002B70);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadexec", func_00000130);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00000214);
@@ -79,7 +79,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00000BD8);
 INCLUDE_ASM("nonmatchings/loadexec", func_00000AD0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002974);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00000A68);
@@ -105,7 +105,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00001014);
 INCLUDE_ASM("nonmatchings/loadexec", func_00000FCC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadexec", func_00000DAC);
 
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002AF4);
@@ -121,17 +121,25 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002B54);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002B88);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 280)
+#if FW_VERSION < 150 || (FW_VERSION >= 201 && FW_VERSION < 280)
 INCLUDE_ASM("nonmatchings/loadexec", func_00000EB0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadexec", func_00001148);
 
 INCLUDE_ASM("nonmatchings/loadexec", func_00001250);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/loadexec", func_00001568);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/loadexec", func_00001350);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadexec", func_0000162C);
 #endif
 
@@ -225,7 +233,7 @@ INCLUDE_ASM("nonmatchings/loadexec", LoadExecForUser_D1FB50DC);
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForUser_2AC9954B);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_2AC9954B);
 
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelExitGame);
@@ -235,7 +243,7 @@ INCLUDE_ASM("nonmatchings/loadexec", sceKernelExitGame);
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002E40);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002E48);
 
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002E60);
@@ -285,7 +293,7 @@ s32 sceKernelExitGame(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadexec", func_00001934);
 
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002F20);
@@ -311,6 +319,10 @@ void sceKernelLoadExecVSHDiscUpdater(s32 arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/loadexec", func_00001ED4);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecVSHDiscDebug);
 #endif
@@ -327,10 +339,14 @@ s32 sceKernelLoadExecVSHDiscDebug(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceKernelLoadExecBufferVSHUsbWlan(s32 arg0, s32 arg1, s32 arg2) {
     func_00001B64(0x130, arg0, arg1, arg2, 0x10000);
 }
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/loadexec", func_00001F68);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -343,7 +359,7 @@ void sceKernelLoadExecBufferVSHUsbWlan(s32 arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferVSHUsbWlanDebug);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 103
 s32 sceKernelLoadExecBufferVSHUsbWlanDebug(s32 arg0, s32 arg1, s32 arg2) {
     return func_00001B64(0x131, arg0, arg1, arg2, 0x10000);
 }
@@ -375,14 +391,22 @@ void sceKernelLoadExecVSHMs3(s32 arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/loadexec", func_00001F74);
+#endif
+
 #if FW_VERSION == 100 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelExitVSHVSH);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceKernelLoadExecBufferVSHPlain(s32 arg0, s32 arg1, s32 arg2) {
     func_00001B64(0x100, arg0, arg1, arg2, 0x10000);
 }
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/loadexec", func_00002270);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
@@ -391,20 +415,28 @@ void sceKernelLoadExecBufferVSHPlain(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 152)
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferVSHFromHost);
+#endif
 
+#if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferPlain0);
 
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferPlain);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecFromHost);
 #endif
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelRegisterExitCallback);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/loadexec", func_000024A8);
+
+INCLUDE_ASM("nonmatchings/loadexec", func_000024C4);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -421,6 +453,10 @@ INCLUDE_RODATA("nonmatchings/loadexec", D_00002E54);
 
 #if FW_VERSION < 152
 INCLUDE_RODATA("nonmatchings/loadexec", D_00002FD4);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/loadexec", func_000023C0);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
@@ -537,7 +573,7 @@ INCLUDE_ASM("nonmatchings/loadexec", sceKernelRegisterExitCallback);
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelUnregisterExitCallback);
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 260)
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelInvokeExitCallback);
 #endif
 
@@ -625,7 +661,7 @@ INCLUDE_ASM("nonmatchings/loadexec", func_00001FF0);
 INCLUDE_ASM("nonmatchings/loadexec", func_00002138);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceKernelReboot(void) {
 
 }

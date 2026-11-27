@@ -326,6 +326,10 @@ s32 _sceGeInterrupt(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/ge", func_00000B94);
+#endif
+
 #if FW_VERSION >= 282
 void func_00001790(s32 arg0) {
     func_000017E0(2, 0, arg0, 0);
@@ -412,7 +416,9 @@ s32 _sceGeSysEventHandler(s32 ev, char *name, void *param, s32 *result) {
     }
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/ge", _sceGeSysEventHandler);
 #endif
 
@@ -457,6 +463,10 @@ s32 sceGeSetGeometryClock(s32 arg0) {
     *(s32 *)0xBD400200 = arg0 & 1;
     return temp_a3 & 1;
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/ge", func_00000E64);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -590,6 +600,12 @@ u32 sceGeEdramGetSize(void) {
 void *sceGeEdramGetAddr(void) {
     return (void *)0x04000000;
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/ge", func_000013CC);
+
+INCLUDE_ASM("nonmatchings/ge", func_00001568);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -760,13 +776,13 @@ s32 _sceGeQueueResume(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 void _sceGeErrorInterrupt(u32 attr, u32 unk1, s32 arg2) {
 
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ge", _sceGeFinishInterrupt);
 #endif
 
@@ -786,15 +802,35 @@ INCLUDE_ASM("nonmatchings/ge", func_000025F0);
 INCLUDE_ASM("nonmatchings/ge", func_000028BC);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/ge", D_00005E34);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_RODATA("nonmatchings/ge", g_pAwRegAdr);
-
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/ge", save_regs);
+#endif
 
+#if FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/ge", g_pAwRegAdr);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/ge", D_00002FF4);
+
+INCLUDE_ASM("nonmatchings/ge", _sceGeListInterrupt);
+
+INCLUDE_ASM("nonmatchings/ge", func_00001D5C);
+
+INCLUDE_ASM("nonmatchings/ge", func_00001E5C);
+
+INCLUDE_ASM("nonmatchings/ge", func_00001F5C);
+#endif
+
+#if FW_VERSION == 100
+INCLUDE_RODATA("nonmatchings/ge", save_regs);
+#endif
+
+#if FW_VERSION < 103
 INCLUDE_ASM("nonmatchings/ge", _sceGeListInterrupt);
 #endif
 
@@ -804,7 +840,7 @@ INCLUDE_ASM("nonmatchings/ge", func_000029A8);
 INCLUDE_ASM("nonmatchings/ge", func_00002E78);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 103
 s32 sceGeListDeQueue(SceGeDisplayList *dl) {
     u32 oldK1 = geShiftK1();
     s32 oldIntr;
@@ -843,11 +879,11 @@ s32 sceGeListDeQueue(SceGeDisplayList *dl) {
 INCLUDE_ASM("nonmatchings/ge", sceGeListDeQueue);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 103 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeListUpdateStallAddr);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 103
 s32 sceGeListSync(SceGeDisplayList *dl, s32 mode) {
     u32 oldK1 = geShiftK1();
     s32 ret;
@@ -893,7 +929,7 @@ s32 sceGeListSync(SceGeDisplayList *dl, s32 mode) {
 INCLUDE_ASM("nonmatchings/ge", sceGeListSync);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceGeDrawSync(s32 mode) {
     u32 oldK1 = geShiftK1();
     s32 ret;
@@ -931,7 +967,7 @@ s32 sceGeDrawSync(s32 mode) {
 INCLUDE_ASM("nonmatchings/ge", sceGeDrawSync);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceGeBreak(u32 resetQueue, u32 *buf) {
     u32 oldK1 = geShiftK1();
     s32 oldIntr;
@@ -999,7 +1035,7 @@ s32 sceGeBreak(u32 resetQueue, u32 *buf) {
 INCLUDE_ASM("nonmatchings/ge", sceGeBreak);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceGeContinue(void) {
     s32 ret = 0;
     u32 oldK1 = geShiftK1();
@@ -1035,8 +1071,12 @@ s32 sceGeContinue(void) {
 INCLUDE_ASM("nonmatchings/ge", sceGeContinue);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeSetCallback);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/ge", func_000023F0);
 #endif
 
 #if FW_VERSION == 100
@@ -1056,13 +1096,25 @@ s32 _sceGeQueueInit(void) {
     g_AwQueue.drawingEvFlagId = sceKernelCreateEventFlag("SceGeQueue", 0x201, 2, NULL);
     return 0;
 }
+#endif
 
+#if FW_VERSION < 150
 s32 _sceGeQueueEnd(void) {
     sceKernelDeleteEventFlag(g_AwQueue.drawingEvFlagId);
     return 0;
 }
 
 INCLUDE_ASM("nonmatchings/ge", _sceGeQueueStatus);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/ge", _sceGeErrorInterrupt);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/ge", func_00002718);
+
+INCLUDE_ASM("nonmatchings/ge", func_00002740);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -1077,7 +1129,7 @@ s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 103
 s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3) {
     return _sceGeListEnQueue((s32) arg0, (s32) arg1, arg2, (s32) arg3, 0);
 }
@@ -1095,7 +1147,7 @@ s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 103
 s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3) {
     return _sceGeListEnQueue((s32) arg0, (s32) arg1, arg2, (s32) arg3, 1);
 }
@@ -1182,7 +1234,7 @@ INCLUDE_ASM("nonmatchings/ge", func_000046DC);
 INCLUDE_ASM("nonmatchings/ge", func_00002990);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ge", _sceGeListEnQueue);
 #endif
 

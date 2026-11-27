@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 -fno-builtin */
+/* cflags[100,102,103]: -O2 -fno-builtin */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
@@ -572,7 +572,7 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004AB0);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004F34);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 module_bootstart(s32 args, void *argp) {
     s32 arg = 0;
     if (args >= 4) {
@@ -586,7 +586,7 @@ s32 module_bootstart(s32 args, void *argp) {
 INCLUDE_ASM("nonmatchings/iofilemgr", module_bootstart);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 init_iofm(s32 arg) {
     if ((g_heap = sceKernelCreateHeap(1, 0x2000, 1, "SceIofile")) < 0) {
         Kprintf("iofilemgr.c:%s:sceKernelCreateHeap failed: 0x%08x\n", "init_iofm", g_heap);
@@ -622,7 +622,7 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004B38);
 INCLUDE_ASM("nonmatchings/iofilemgr", module_reboot_before);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/iofilemgr", terminate_iofm);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", async_loop);
@@ -712,7 +712,7 @@ s32 sceIoGetAsyncStat(SceUID fd, s32 poll, s64 *res) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChangeAsyncPriority);
 #endif
 
@@ -720,7 +720,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChangeAsyncPriority);
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoSetAsyncCallback);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004594);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", do_close);
@@ -772,11 +772,11 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDevctl);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_000050C0);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00005118);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 SceUID do_open(const char *path, s32 flags, SceMode mode, s32 async) {
     SceIoIob *iob;
     u32 oldK1;
@@ -815,11 +815,11 @@ SceUID do_open(const char *path, s32 flags, SceMode mode, s32 async) {
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000511C);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 350)
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00005130);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/iofilemgr", open_main);
 #endif
 
@@ -849,11 +849,11 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_000001E4);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00000364);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 350)
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoReopen);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000466C);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", do_read);
@@ -879,7 +879,7 @@ s32 sceIoReadAsync(SceUID fd, void *data, SceSize size) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/iofilemgr", do_write);
 #endif
 
@@ -903,7 +903,7 @@ s32 sceIoWriteAsync(SceUID fd, const void *data, SceSize size) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 SceOff do_lseek(SceUID fd, SceOff offset, s32 whence, s32 async) {
     SceIoIob *iob;
     u32 oldK1;
@@ -953,7 +953,7 @@ s32 sceIoLseek32Async(SceUID fd, s32 offset, s32 whence) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 do_ioctl(SceUID fd, s32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen, s32 async) {
     SceIoIob *iob;
     u32 oldK1;
@@ -1019,7 +1019,7 @@ s32 sceIoIoctlAsync(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, 
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_000046F0);
 
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000472C);
@@ -1027,11 +1027,11 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000472C);
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00004758);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 350)
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDopen);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceIoDread(SceUID fd, SceIoDirent *dir) {
     SceIoIob *iob;
     u32 oldK1;
@@ -1059,7 +1059,7 @@ s32 sceIoDread(SceUID fd, SceIoDirent *dir) {
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDread);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceIoDclose(SceUID fd) {
     SceIoIob *iob;
     u32 oldK1;
@@ -1092,11 +1092,11 @@ free:
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDclose);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 350)
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoRemove);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/iofilemgr", xx_dir);
 #endif
 
@@ -1137,7 +1137,7 @@ s32 sceIoSync(const char *device, u32 unk) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/iofilemgr", xx_stat);
 #endif
 
@@ -1155,13 +1155,13 @@ s32 sceIoChstat(const char *file, SceIoStat *stat, u32 bits) {
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoSync);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 350)
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoRename);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDevctl);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceIoGetDevType(SceUID fd) {
     SceIoIob *iob;
     u32 oldK1;
@@ -1199,13 +1199,13 @@ s32 sceIoGetDevType(SceUID fd) {
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetDevType);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoAssign);
 
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoUnassign);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceIoGetThreadCwd(SceUID thid, char *dir, SceSize len) {
     char **cwd;
     SceSize n;
@@ -1275,7 +1275,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00002BAC);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002E64);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChangeThreadCwd);
 
 s32 sceIoCancel(SceUID fd) {
@@ -1320,7 +1320,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetFdList);
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetFdDebugInfo);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceIoAddDrv(SceIoDeviceTable *drv) {
     SceIoDeviceList *list;
     u32 oldK1;
@@ -1363,7 +1363,7 @@ s32 sceIoAddDrv(SceIoDeviceTable *drv) {
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoAddDrv);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_00002E18(SceIoDeviceEntry *dev) {
     SceIoIob *iob;
     s32 intr;
@@ -1416,7 +1416,7 @@ s32 sceIoDelDrv(const char *drv) {
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDelDrv);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_00002FA4(void) {
     SceIoDeviceList *cur;
 
@@ -1447,7 +1447,7 @@ SceIoDeviceList *lookup_device_list(const char *drive) {
 INCLUDE_ASM("nonmatchings/iofilemgr", lookup_device_list);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void add_device_list(SceIoDeviceList *list) {
     s32 intr = sceKernelCpuSuspendIntr();
     list->next = g_devList;
@@ -1460,7 +1460,7 @@ void add_device_list(SceIoDeviceList *list) {
 INCLUDE_ASM("nonmatchings/iofilemgr", add_device_list);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 delete_device_list(SceIoDeviceList *list) {
     s32 intr;
     SceIoDeviceList *prev;
@@ -1484,7 +1484,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", delete_device_list);
 INCLUDE_ASM("nonmatchings/iofilemgr", alloc_device_list);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 SceIoDeviceList *alloc_device_list(void) {
     SceIoDeviceList *list;
 
@@ -1521,7 +1521,7 @@ void func_00001B9C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void add_alias_tbl(SceIoAlias *alias) {
     s32 intr = sceKernelCpuSuspendIntr();
     alias->next = g_aliasList;
@@ -1534,7 +1534,7 @@ void add_alias_tbl(SceIoAlias *alias) {
 INCLUDE_ASM("nonmatchings/iofilemgr", add_alias_tbl);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 delete_alias_tbl(SceIoAlias *alias) {
     s32 intr;
     SceIoAlias *prev;
@@ -1558,7 +1558,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", delete_alias_tbl);
 INCLUDE_ASM("nonmatchings/iofilemgr", alloc_alias_tbl);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 SceIoAlias *alloc_alias_tbl(void) {
     SceIoAlias *alias;
 
@@ -1683,7 +1683,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00002168);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002254);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 s32 iob_power_lock(SceIoIob *iob) {
     if (iob->powerLocked == 0) {
         iob->powerLocked = 1;
@@ -1709,7 +1709,7 @@ s32 iob_power_unlock(SceIoIob *iob) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void free_cwd(char **ktls) {
     u32 cwd;
 
@@ -1854,7 +1854,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", xx_dir);
 INCLUDE_ASM("nonmatchings/iofilemgr", xx_stat);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 char *parsedev(const char *path, SceIoDeviceEntry **dev, s32 *unit) {
     char buf[32];
     char *colon;
@@ -2005,11 +2005,11 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_000033DC_v350);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00002578);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", strcmp_bs);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 char *alloc_pathbuf(void) {
     s32 intr;
     char *path;
@@ -2029,7 +2029,7 @@ char *alloc_pathbuf(void) {
 INCLUDE_ASM("nonmatchings/iofilemgr", alloc_pathbuf);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void free_pathbuf(char *ptr) {
     s32 intr;
 
@@ -2085,7 +2085,7 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00003A6C);
 INCLUDE_ASM("nonmatchings/iofilemgr", func_00003BE8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 _nulldev_write(SceIoIob *iob, const char *data, s32 len) {
     if (sceKernelDipsw(15) == 1) {
         sceKernelDebugWrite(0, data, len);
@@ -2103,7 +2103,7 @@ void func_00003D68(void) {
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_000055E4);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_0000563C);
 
 INCLUDE_RODATA("nonmatchings/iofilemgr", D_00005650);

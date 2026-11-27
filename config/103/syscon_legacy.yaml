@@ -1,0 +1,77 @@
+name: syscon_legacy (103)
+sha1: f963c1b995d43bb93ea16af540e78a54c05f9eb2
+options:
+  basename: syscon_legacy
+  target_path: tmp/baserom/103/syscon_legacy.prx
+  elf_path: tmp/build/103/syscon_legacy.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/103/syscon_legacy
+  src_path: src/syscon_legacy
+  build_path: tmp/build/103
+  ld_script_path: tmp/build/103/syscon_legacy.ld
+  cache_path: tmp/build/103/.splat_cache.syscon_legacy
+  symbol_addrs_path:
+    - config/103/symbol_addrs.syscon_legacy.txt
+    - tmp/build/103/prx_syms.syscon_legacy.txt
+  reloc_addrs_path: [tmp/build/103/reloc_addrs.syscon_legacy.txt]
+  asset_path: tmp/assets/103/syscon_legacy
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/103/undefined_funcs_auto.syscon_legacy.txt
+  undefined_syms_auto_path: tmp/build/103/undefined_syms_auto.syscon_legacy.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8030
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x4140
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: syscon_legacy
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, asm, syscon_legacy]
+      - { start: 0x38F4, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x39EC, type: prxpad, order: .text }
+      - { start: 0x39F0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x39F4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x3A14, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x3A18, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x3A1C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x3ABC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x3AC0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x3AF4, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x3F68, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x3FE4, rodata, syscon_legacy]
+  - name: syscon_legacy_seg1
+    type: code
+    start: 0x4030
+    vram: 0x3FB0
+    bss_size: 0x140
+    subsegments:
+      - [0x4030, data, syscon_legacy_data]
+      - { start: 0x4070, type: bss, vram: 0x3FF0 }
+  - [0x4070, bin, elf_trailer]
+  - [0x5B0C]

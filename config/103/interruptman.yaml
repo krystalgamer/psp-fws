@@ -1,0 +1,78 @@
+name: interruptman (103)
+sha1: d242a47d22f998bc4d10994daddb9d18fdcd5596
+options:
+  basename: interruptman
+  target_path: tmp/baserom/103/interruptman.prx
+  elf_path: tmp/build/103/interruptman.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/103/interruptman
+  src_path: src/interruptman
+  build_path: tmp/build/103
+  ld_script_path: tmp/build/103/interruptman.ld
+  cache_path: tmp/build/103/.splat_cache.interruptman
+  symbol_addrs_path:
+    - config/103/symbol_addrs.interruptman.txt
+    - tmp/build/103/prx_syms.interruptman.txt
+  reloc_addrs_path: [tmp/build/103/reloc_addrs.interruptman.txt]
+  asset_path: tmp/assets/103/interruptman
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/103/undefined_funcs_auto.interruptman.txt
+  undefined_syms_auto_path: tmp/build/103/undefined_syms_auto.interruptman.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x9190
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x6B10
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: interruptman
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - [0x80, c, interruptman]
+      - { start: 0x3630, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x3678, type: prxpad, order: .text }
+      - { start: 0x3680, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x3684, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x36B4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x36B8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x36BC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x370C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x3710, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x3744, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x3998, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - [0x39BC, .rodata, interruptman]
+      - { start: 0x39D0, type: prxpad, order: .rodata }
+  - name: interruptman_seg1
+    type: code
+    start: 0x3A00
+    vram: 0x3950
+    bss_size: 0x201C
+    subsegments:
+      - [0x3A00, data, interruptman_data]
+      - { start: 0x4B94, type: bss, vram: 0x4B00 }
+  - [0x4B94, bin, elf_trailer]
+  - [0x61B4]

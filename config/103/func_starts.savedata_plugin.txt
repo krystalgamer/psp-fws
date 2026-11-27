@@ -1,0 +1,22 @@
+// function starts pinned by tools/add_version.py
+func_00000024 = 0x00000024; // type:func
+func_000000AC = 0x000000AC; // type:func
+func_00000164 = 0x00000164; // type:func
+func_00000170 = 0x00000170; // type:func
+func_000001D0 = 0x000001D0; // type:func
+func_000002A0 = 0x000002A0; // type:func
+func_00001564 = 0x00001564; // type:func
+func_00001DE4 = 0x00001DE4; // type:func
+func_000020C8 = 0x000020C8; // type:func
+func_000020FC = 0x000020FC; // type:func
+func_000022B8 = 0x000022B8; // type:func
+func_00002338 = 0x00002338; // type:func
+func_00002354 = 0x00002354; // type:func
+func_0000583C = 0x0000583C; // type:func
+func_00006464 = 0x00006464; // type:func
+func_000074D4 = 0x000074D4; // type:func
+func_00007630 = 0x00007630; // type:func
+func_0000F778 = 0x0000F778; // type:func
+func_00011728 = 0x00011728; // type:func
+func_0001196C = 0x0001196C; // type:func
+func_00011D98 = 0x00011D98; // type:func

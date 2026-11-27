@@ -117,7 +117,7 @@ s32 module_start(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 module_start(void) {
     s32 temp_v0;
     s32 temp_v0_2;
