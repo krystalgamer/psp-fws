@@ -3402,8 +3402,43 @@ void func_000089C8(void) {
 INCLUDE_ASM("nonmatchings/lfatfs", df_close);
 #endif
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/lfatfs", Malloc);
+#if FW_VERSION == 100
+void *Malloc(SceSize size) {
+    void *p;
+
+    p = sceKernelAllocHeapMemory(D_0000D984, size);
+    if (p == NULL) {
+        Kprintf(D_0000D874, D_0000C56C, D_0000D8C0, 0x1CA);
+        sceKernelAssert(0, 0);
+    }
+    return p;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
+void *Malloc(SceSize size) {
+    void *p;
+
+    p = sceKernelAllocHeapMemory(D_0000D984, size);
+    if (p == NULL) {
+        Kprintf(D_0000D874, D_0000C56C, D_0000D8C0, 0x2D1);
+        sceKernelAssert(0, 0);
+    }
+    return p;
+}
+#endif
+
+#if FW_VERSION == 152
+void *Malloc(SceSize size) {
+    void *p;
+
+    p = sceKernelAllocHeapMemory(D_0000D984, size);
+    if (p == NULL) {
+        Kprintf(D_0000D874, D_0000C56C, D_0000D8C0, 0x2D4);
+        sceKernelAssert(0, 0);
+    }
+    return p;
+}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282

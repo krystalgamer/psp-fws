@@ -415,7 +415,7 @@ extern s32 D_0000EDF0;
 extern LFlashDev D_0000EED0;
 
 s32 Kprintf(const char *fmt, ...);
-s32 Malloc(s32);
+void *Malloc(SceSize size);
 s32 UFatChdir(SceIoIob *iob, char *name);
 s32 UFatDclose(void *arg0);
 s32 UFatRename(SceIoIob *iob, const char *oldname, const char *newname);

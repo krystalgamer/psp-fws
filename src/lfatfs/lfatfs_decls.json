@@ -1,7 +1,7 @@
 {
  "funcs": {
   "Kprintf": "s32 Kprintf(const char *fmt, ...);",
-  "Malloc": "s32 Malloc(s32);",
+  "Malloc": "void *Malloc(SceSize size);",
   "UFatChdir": "s32 UFatChdir(SceIoIob *iob, char *name);",
   "UFatDclose": "s32 UFatDclose(void *arg0);",
   "UFatRename": "s32 UFatRename(SceIoIob *iob, const char *oldname, const char *newname);",
