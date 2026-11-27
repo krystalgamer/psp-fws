@@ -1,11 +1,21 @@
-/* cflags[100]: -O1 -frename-registers */
 /* cflags[100]: -Os */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "interruptman_decls.h"
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", func_00000000);
+s32 func_00000000(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0x100;
+    if (arg0 != 0x40) {
+        var_v1 = 0x200;
+        if (arg0 != 0x41) {
+            var_v1 = (arg0 == 0x42) << 0xF;
+        }
+    }
+    return var_v1;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/interruptman", syslib_D3744BE0);
@@ -109,7 +119,7 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetPrimarySyscallHandler);
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelCpuEnableIntr);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", QueryInterruptManCB);
 #endif
 
@@ -120,17 +130,40 @@ s32 *QueryInterruptManCB(void) {
 #endif
 
 #if FW_VERSION == 100
+s32 *QueryInterruptManCB(void) {
+    return &D_00003950;
+}
+
 INCLUDE_ASM("nonmatchings/interruptman", func_000001E0);
 
 INCLUDE_ASM("nonmatchings/interruptman", func_00000230);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00000274);
+s32 func_00000274(void) {
+    s32 temp_v0;
+    s32 var_v1;
+
+    temp_v0 = sceKernelCreateHeap(1, 0x100, 1, "interruptman_heap");
+    var_v1 = temp_v0;
+    if (temp_v0 > 0) {
+        D_00003B0C = var_v1;
+        var_v1 = 0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("nonmatchings/interruptman", func_000002B8);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", func_00000348);
+#endif
+
+#if FW_VERSION == 100
+void func_00000348(s32 arg0) {
+    if (arg0 != 0) {
+        sceKernelFreeHeapMemory(D_00003B0C, arg0);
+    }
+}
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
@@ -456,7 +489,13 @@ INCLUDE_ASM("nonmatchings/interruptman", func_000027C0);
 
 INCLUDE_ASM("nonmatchings/interruptman", ReturnToThread);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsIntrContext);
+#else
+s32 sceKernelIsIntrContext(void) {
+    return D_00003F6C;
+}
+#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_7AD28215);
