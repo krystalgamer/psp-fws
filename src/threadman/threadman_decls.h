@@ -82,6 +82,12 @@ typedef struct SceSema {
     s32 initCount; /* 0x0C */
 } SceSema;
 
+/* "EventFlag" uid type data (partial) */
+typedef struct SceEventFlag {
+    u32 initPattern; /* 0x00 */
+    u32 currentPattern; /* 0x04 */
+} SceEventFlag;
+
 /* "MsgPipe" uid type data (partial) */
 typedef struct SceMsgPipe {
     s32 unk0;
@@ -144,6 +150,17 @@ typedef s32 (*SceThreadmanLogHandler)(s32 id, void *ra, s32 nargs, ...);
 #define THREADMAN_LOG_OFF 0x770
 #endif
 
+#if FW_VERSION < 282
+#define THREADMAN_UID_OFF 0x63C
+#else
+#define THREADMAN_UID_OFF 0x640
+#endif
+#if FW_VERSION < 270
+#define THREADMAN_NUM_UID 14
+#else
+#define THREADMAN_NUM_UID 15
+#endif
+
 /* the thread manager state (1.00: 0x6F4 bytes at 0x15518) */
 typedef struct SceThreadmanInfo {
     SceThread *currentThread; /* 0x000 */
@@ -182,6 +199,27 @@ typedef struct SceThreadmanInfo {
         u8 buf[0x84];
     } tmpInfo; /* 0x660: refer-status scratch buffer */
     u8 unk6E4[0x6F0 - 0x6E4];
+#elif FW_VERSION < 330
+    /* 1.50-3.20: same uid type block as 1.00 (Mutex added in 2.70) */
+    u8 unk41C[THREADMAN_UID_OFF - 0x41C];
+    SceSysmemUidCB *uidWaitQType;
+    SceSysmemUidCB *uidThreadType;
+    SceSysmemUidCB *uidSemaType;
+    SceSysmemUidCB *uidEventFlagType;
+#if FW_VERSION >= 270
+    SceSysmemUidCB *uidMutexType;
+#endif
+    SceSysmemUidCB *uidMbxType;
+    SceSysmemUidCB *uidMsgPipeType;
+    SceSysmemUidCB *uidVplType;
+    SceSysmemUidCB *uidFplType;
+    SceSysmemUidCB *uidThreadEventHandlerType;
+    SceSysmemUidCB *uidCallbackType;
+    SceSysmemUidCB *uidTimerType;
+    SceSysmemUidCB *uidDelayType;
+    SceSysmemUidCB *uidAlarmType;
+    SceSysmemUidCB *uidVTimerType;
+    u8 unkUidEnd[THREADMAN_LOG_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4];
 #else
     u8 unk41C[THREADMAN_LOG_OFF - 0x41C];
 #endif
