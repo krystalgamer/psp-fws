@@ -1018,13 +1018,15 @@ INCLUDE_ASM("nonmatchings/isofs", func_00005CD4);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/isofs", func_00005C50);
+#endif
 
+#if FW_VERSION < 201
 s32 func_00005F50(SceIoIob *iob) {
     IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
     IsofsFile *file;
     s32 ret;
 
-    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_close", 0x421);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_close", ISOFS_V(0x421, 0x480, 0x47E));
     ret = sceKernelWaitSema(unit->semaId, 1, NULL);
     if (ret < 0) {
         return ret;
@@ -1045,18 +1047,14 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00005F50);
-#endif
-
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 s32 func_00006028(SceIoIob *iob) {
     IsofsUnit *unit;
     IsofsMgr *mgr;
     IsofsDir *dir;
     s32 ret;
 
-    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_dclose", 0x44F);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_dclose", ISOFS_V(0x44F, 0x4AD, 0x4AB));
     unit = sceIsofsGetFileSystem(iob->i_unit);
     ret = sceKernelWaitSema(unit->semaId, 1, NULL);
     if (ret < 0) {
@@ -1074,10 +1072,6 @@ s32 func_00006028(SceIoIob *iob) {
     sceKernelSignalSema(unit->semaId, 1);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00006028);
 #endif
 
 #if FW_VERSION < 150
