@@ -227,7 +227,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_0000145C);
 INCLUDE_ASM("nonmatchings/loadcore", func_00001224);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_00000370(u32 seed, SceSyscallTable **syscallTable) {
     s32 i;
     s32 status;
@@ -260,13 +260,7 @@ s32 func_00000370(u32 seed, SceSyscallTable **syscallTable) {
     *syscallTable = tbl;
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00000370);
-#endif
-
-#if FW_VERSION == 100
 s32 func_00000488(s32 numEntries) {
     SceSysCallEntryTable *cur;
     SceSysCallEntryTable *ent;
@@ -293,13 +287,7 @@ s32 func_00000488(s32 numEntries) {
     Kprintf("systable.c:%s:Automatic SyscallTable grow needed\n", "AllocSysTable");
     return 0x80020001;
 }
-#endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00000488);
-#endif
-
-#if FW_VERSION == 100
 SceSysCallEntryTable *func_00000570(u32 addr) {
     SceSysCallEntryTable *cur;
     SceSysCallEntryTable *prev;
@@ -334,10 +322,6 @@ SceSysCallEntryTable *func_00000570(u32 addr) {
     func_000002CC(next);
     return cur;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00000570);
 #endif
 
 #if FW_VERSION < 152
@@ -1901,9 +1885,7 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleListWithAlloc);
 s32 sceKernelModuleCount(void) {
     return D_00008914;
 }
-#endif
 
-#if FW_VERSION < 150
 s32 sceKernelGetModuleList(u32 size, SceUID *list) {
     SceModule *mod;
 
