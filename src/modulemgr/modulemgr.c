@@ -871,9 +871,47 @@ s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option) {
     return func_0000253C(modParams);
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_00002764);
+s32 func_00002764(SceUID fd, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferWithApitype);
+    memset(&modParams, 0, sizeof(modParams));
+    modParams.modeStart = CMD_LOAD_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fd = fd;
+    modParams.fileBase = NULL;
+    return func_000026F8(&modParams, option);
+}
+
+SceUID sceKernelLoadModuleBufferWithApitype(void *buf, s32 flags, s32 apiType, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (k1IsUserMode()) {
+        Kprintf("modulemgr.c:%s:SCE_KERNEL_ERROR_ILLEGAL_PERM_CALL\n", "sceKernelLoadModuleBufferWithApitype");
+        setK1(oldK1);
+        return 0x80020149;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    memset(&modParams, 0, sizeof(modParams));
+    modParams.modeStart = CMD_RELOCATE_MODULE;
+    modParams.apiType = apiType;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fileBase = buf;
+    modParams.fd = (SceUID)buf;
+    ret = func_000026F8(&modParams, option);
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 152
@@ -911,9 +949,96 @@ s32 sceKernelLoadModuleBufferBootInitConfig(void) {
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/modulemgr", func_000028EC);
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleByID);
+SceUID sceKernelLoadModuleByID(SceUID fd, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleWithApitype);
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    memset(&modParams, 0, sizeof(modParams));
+    if (k1IsUserMode()) {
+        modParams.apiType = 0x10;
+    } else {
+        modParams.apiType = 0;
+    }
+    if (k1IsUserMode()) {
+        ret = sceIoIoctl(fd, 0x8001, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_LOADMODULE - 0x%08x\n", "sceKernelLoadModuleByID", ret);
+            setK1(oldK1);
+            return 0x80020146;
+        }
+    }
+    modParams.modeStart = CMD_LOAD_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fd = fd;
+    modParams.fileBase = NULL;
+    ret = func_000026F8(&modParams, option);
+    setK1(oldK1);
+    return ret;
+}
+
+SceUID sceKernelLoadModuleWithApitype(const char *path, s32 flags, s32 apiType, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    SceUID fd;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (path == NULL || (k1IsUserMode() && (s32)path < 0)) {
+        goto bad;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        goto bad;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    fd = sceIoOpen(path, 1, 0x1FF);
+    if (fd < 0) {
+        Kprintf("modulemgr.c:%s:open failed [%s] apitype 0x%08x\n", "sceKernelLoadModuleWithApitype", path, apiType);
+        return fd;
+    }
+    modParams.apiType = apiType;
+    if (apiType == 0x10 || apiType == 0) {
+        if (k1IsUserMode()) {
+            modParams.apiType = 0x10;
+        } else {
+            modParams.apiType = 0;
+        }
+    }
+    ret = func_000028EC(fd, modParams.apiType);
+    if (ret < 0) {
+        sceIoClose(fd);
+        setK1(oldK1);
+        return ret;
+    }
+    modParams.modeStart = CMD_LOAD_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fileBase = NULL;
+    modParams.fd = fd;
+    ret = func_000026F8(&modParams, option);
+    sceIoClose(fd);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:sceKernelLoadModule failed 0x%08x\n", "sceKernelLoadModuleWithApitype", ret);
+        return ret;
+    }
+    return ret;
+bad:
+    setK1(oldK1);
+    return 0x800200D3;
+}
 #endif
 
 #if FW_VERSION < 152

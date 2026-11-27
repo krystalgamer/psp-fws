@@ -145,6 +145,7 @@ void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 
 void func_00000594(void *arg0);
 s32 func_0000253C(SceModuleMgrParam *modParams);
 s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option);
+s32 func_000028EC(SceUID fd, u32 apiType);
 s32 func_00003210(s32);
 void func_00004750(void);
 s32 func_00004BA4(s32);
@@ -152,7 +153,10 @@ s32 func_0000552C(s32);
 void *memset(void *s, s32 c, SceSize n);
 void module_reboot_before(void);
 s32 module_reboot_phase(void);
+s32 sceIoClose(SceUID fd);
+s32 sceIoIoctl(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen);
 SceOff sceIoLseek(SceUID fd, SceOff offset, s32 whence);
+SceUID sceIoOpen(const char *file, s32 flags, s32 mode);
 s32 sceKernelAllocModule(s32);
 s32 sceKernelCanReleaseLibrary();
 M2C_UNK sceKernelCheckExecFile();
