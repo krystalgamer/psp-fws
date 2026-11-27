@@ -54,6 +54,25 @@ def elf_funcs(ver, mod):
     return out
 
 
+def elf_syms(ver, mod):
+    """function address -> name"""
+    with open(ROOT / "tmp/build" / ver / f"{mod}.elf", "rb") as f:
+        return {y["st_value"]: y.name for s in ELFFile(f).iter_sections() if isinstance(s, SymbolTableSection)
+                for y in s.iter_symbols() if y.name and y["st_info"]["type"] == "STT_FUNC"}
+
+
+def call_map(sb, db, ssyms, dsyms):
+    """SRC callee name -> DST callee name, from the jal pairs of two twin functions."""
+    out = {}
+    for i in range(0, min(len(sb), len(db)) - 3, 4):
+        ws, wd = int.from_bytes(sb[i:i + 4], "little"), int.from_bytes(db[i:i + 4], "little")
+        if ws >> 26 == 3 and wd >> 26 == 3:
+            s, d = ssyms.get((ws & 0x3FFFFFF) << 2), dsyms.get((wd & 0x3FFFFFF) << 2)
+            if s and d:
+                out[s] = d
+    return out
+
+
 def masked(b):
     r = []
     for i in range(0, len(b) - 3, 4):
@@ -81,6 +100,7 @@ def is_asm(mod, ver, name):
 def pair(a):
     src, dst = elf_funcs(a.src_ver, a.src_mod), elf_funcs(a.dst_ver, a.dst_mod)
     have_c = c_names(a.src_mod, a.src_ver)
+    dst_c = c_names(a.dst_mod, a.dst_ver)
     sidx, didx = {}, {}
     for n, (ad, b) in src.items():
         if len(b) >= 8:
@@ -90,21 +110,25 @@ def pair(a):
             didx.setdefault(masked(b), []).append(n)
     anchors = sorted((src[ns[0]][0], dst[didx[k][0]][0]) for k, ns in sidx.items()
                      if len(ns) == 1 and len(didx.get(k, [])) == 1)
-    pairs, taken = {}, set()
-    for n in sorted(have_c, key=lambda n: src.get(n, (0,))[0]):
+    # greedy assignment: identical bytes first, then nearest to the predicted address
+    opts = []
+    for n in have_c:
         if n not in src or len(src[n][1]) < 8:
             continue
         cands = didx.get(masked(src[n][1]), [])
-        if not cands:
-            continue
         sa = src[n][0]
         before = [d - s for s, d in anchors if s <= sa]
         guess = sa + (before[-1] if before else 0)
-        best = min(cands, key=lambda c: abs(dst[c][0] - guess))
-        if best not in taken and is_asm(a.dst_mod, a.dst_ver, best):
-            taken.add(best)
-            exact = src[n][1] == dst[best][1]
-            pairs[n] = (best, len(cands), exact)
+        for c in cands:
+            opts.append((src[n][1] != dst[c][1], abs(dst[c][0] - guess), n, c, len(cands)))
+    pairs, taken = {}, set()
+    for notexact, _, n, c, k in sorted(opts):
+        if n in pairs or c in taken:
+            continue
+        taken.add(c)
+        if is_asm(a.dst_mod, a.dst_ver, c) or (a.replace and c in dst_c):
+            pairs[n] = (c, k, not notexact)
+    pairs = dict(sorted(pairs.items(), key=lambda x: src[x[0]][0]))
     return pairs
 
 
@@ -127,6 +151,8 @@ def main():
     ap.add_argument("--sub", action="append", default=[], help="OLD=NEW text substitution applied first")
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--replace", action="store_true",
+                    help="also pair with DST functions that are C already and replace their C (e.g. m2c drafts)")
     a = ap.parse_args()
     pairs = pair(a)
     if a.funcs:
@@ -153,9 +179,12 @@ def main():
     # SRC types DST lacks, in SRC's order (dependencies first)
     new_types = [(k, t) for k, t in sorted(sstore.get("types", {}).items()) if not (decl_names(t) & dtypes)]
     work = ROOT / "tmp/xport" / a.dst_mod / a.dst_ver
+    ssyms, dsyms = elf_syms(a.src_ver, a.src_mod), elf_syms(a.dst_ver, a.dst_mod)
+    sfun, dfun = elf_funcs(a.src_ver, a.src_mod), elf_funcs(a.dst_ver, a.dst_mod)
     work.mkdir(parents=True, exist_ok=True)
     matched, used_types, new_decls = [], {}, {}
     dc = c_names(a.dst_mod, a.dst_ver)
+    repl = {d for d, _, _ in pairs.values() if d in dc}
     for name, (dname, ncand, _) in pairs.items():
         body = c_body(a.src_mod, a.src_ver, name)
         if body is None:
@@ -167,7 +196,18 @@ def main():
             o, n = s.split("=", 1)
             body = re.sub(rf"\b{re.escape(o)}\b", n, body)
         cf, df = work / f"{dname}.c", work / f"{dname}.h"
+        # callees: DST's names from the twin jal pairs; other SRC auto names (func_00000000 may be another
+        # function in DST) get placeholders, so that hand_try reports DST's name for each
         ren = {}
+        calls = call_map(sfun[name][1], dfun[dname][1], ssyms, dsyms) if name in sfun and dname in dfun else {}
+        for n in sorted(idents):
+            if n in calls:
+                ren[n] = calls[n]
+            elif AUTO.fullmatch(n) and (n in sstore["funcs"] or n in sstore["vars"]):
+                ren[n] = f"xp_{n}"
+        if ren:
+            pat = re.compile(r"\b(" + "|".join(map(re.escape, ren)) + r")\b")
+            body = pat.sub(lambda m: ren[m[1]], body)
         result = "?"
         for _ in range(5):
             decl, dmap = [], {}
@@ -176,7 +216,7 @@ def main():
                 if kind:
                     t = ren.get(n, n)
                     line = re.sub(rf"\b{n}\b", t, sstore[kind][n])
-                    if kind == "funcs" and t in dc:  # DST's definition decides the prototype
+                    if kind == "funcs" and t in dc and t not in repl:  # DST's definition decides the prototype
                         continue
                     decl.append(line)
                     dmap[t] = (kind, line)
@@ -206,6 +246,8 @@ def main():
                 body = re.sub(rf"\b{mine}\b", tgt, body)
                 orig = next((o for o, r in ren.items() if r == mine), mine)
                 ren[orig] = tgt
+        if "RESULT: MATCH" in result and "xp_" in body:
+            result = "unresolved names: " + " ".join(sorted(set(re.findall(r"xp_\w+", body))))
         print(f"{name} -> {a.dst_mod} {a.dst_ver}:{dname}: {result}" + (f" [{ncand} candidates]" if ncand > 1 else ""))
         if "RESULT: MATCH" in result:
             matched.append((cf, df))
@@ -226,8 +268,43 @@ def main():
             other = "vars" if kind == "funcs" else "funcs"
             store[other].pop(n, None)
             store[kind][n] = line
+        # C that replaces DST's C (--replace): in place, DST's version only
+        saved.update({p: p.read_text() for p in sd.glob("*.c")})
+        asm_files = []
+        fv = sorted({fw(v) for v in sharing_versions(a.dst_ver, a.dst_mod)})
+        for cf, _ in matched:
+            dname = cf.stem
+            if dname not in repl:
+                asm_files.append(cf)
+                continue
+            body = cf.read_text().strip("\n") + "\n"
+            for f in sd.glob("*.c"):
+                ents = FM.parse(f.read_text(), fv)
+                hit = [e for e in ents if e.kind == "cfunc" and e.name == dname and fw(a.dst_ver) in e.vers]
+                if not hit:
+                    continue
+                if len(hit[0].vers) > 1:
+                    print(f"{dname}: C shared with other versions, not replaced")
+                    break
+                hit[0].text = body
+                f.write_text(FM.emit(ents, fv))
+                sig = re.match(r"^(?!static)([^\n;#{]*?\b" + re.escape(dname) + r"\([^;{}]*\))\s*\{", body, re.M)
+                if sig:
+                    store["funcs"][dname] = " ".join(sig[1].split()) + ";"
+                print(f"{dname}: C replaced")
+                break
         structify.SRC[a.dst_mod] = sd
         structify.write_decls(a.dst_mod, store)
+        if not asm_files:
+            r = subprocess.run(["tools/regress.sh", "--shared", f"{a.dst_ver}:{a.dst_mod}"], cwd=ROOT,
+                               capture_output=True, text=True)
+            print(r.stdout.strip())
+            if any(": OK" not in l for l in r.stdout.splitlines()):
+                for p, s in saved.items():
+                    p.write_text(s)
+                print("restored")
+            return
+        matched = [(cf, None) for cf in asm_files]
         r = subprocess.run([str(ROOT / ".venv/bin/python"), str(ROOT / "tools/hand.py"), a.dst_ver, a.dst_mod,
                             *[str(cf) for cf, _ in matched]], cwd=ROOT, capture_output=True, text=True)
         print(r.stdout.strip() or r.stderr.strip()[-2000:])

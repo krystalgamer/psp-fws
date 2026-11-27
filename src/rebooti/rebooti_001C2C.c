@@ -18,6 +18,6 @@ void func_00001CCC(const void *src, void *dst, u32 n) {
     func_00001ED0(dst, src, n);
 }
 
-void func_00001CF0(void) {
-    func_00001F44();
+void func_00001CF0(const void *a, const void *b, s32 n) {
+    func_00001F44(a, b, n);
 }

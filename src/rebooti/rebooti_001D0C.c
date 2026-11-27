@@ -2,25 +2,90 @@
 #include "common.h"
 #include "rebooti_decls.h"
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001D0C);
+void func_00001D0C(void *s, u32 n) {
+    func_00001E60(s, 0, n);
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001D2C);
+s32 func_00001D2C(s32 arg0) {
+    s32 var_v0;
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001D68);
+    var_v0 = arg0;
+    if (func_00001DA4(arg0) & 2) {
+        var_v0 = (arg0 & 0xFF) - 0x20;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001DA4);
+s32 func_00001D68(s32 arg0) {
+    s32 var_v0;
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001DB4);
+    var_v0 = arg0;
+    if (func_00001DA4(arg0) & 1) {
+        var_v0 = (arg0 & 0xFF) + 0x20;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001DC0);
+s32 func_00001DA4(s32 c) {
+    return D_00014F21[c];
+}
+
+M2C_UNK *func_00001DB4(void) {
+    return &D_00014F21;
+}
+
+void *func_00001DC0(const void *s, s32 c, s32 n) {
+    const u8 *p = s;
+    u8 ch = c;
+    if (p != NULL) {
+        while (n > 0) {
+            if (*p == ch) {
+                return (void *)p;
+            }
+            p++;
+            n--;
+        }
+    }
+    return NULL;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001DF8);
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001E60);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001ED0);
+void *func_00001ED0(void *dst, const void *src, s32 n) {
+    u8 *d = dst;
+    const u8 *s = src;
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001F44);
+    if (dst == NULL) {
+        return NULL;
+    }
+    if (d >= s) {
+        while (--n >= 0) {
+            d[n] = s[n];
+        }
+    } else {
+        while (n > 0) {
+            *d++ = *s++;
+            n--;
+        }
+    }
+    return dst;
+}
+
+s32 func_00001F44(const void *a, const void *b, s32 n) {
+    const u8 *p = a;
+    const u8 *q = b;
+    while (n > 0) {
+        if (*p != *q) {
+            return (*p < *q) ? -1 : 1;
+        }
+        p++;
+        q++;
+        n--;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00001F84);
 
@@ -28,9 +93,29 @@ INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002004);
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002080);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000020E0);
+s32 func_000020E0(const char *s) {
+    s32 len = 0;
+    if (s == NULL) {
+        return 0;
+    }
+    while (*s++ != '\0') {
+        len++;
+    }
+    return len;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002114);
+char *func_00002114(const char *s, s32 c) {
+    char ch = c;
+    if (s == NULL) {
+        return NULL;
+    }
+    do {
+        if (*s == ch) {
+            return (char *)s;
+        }
+    } while (*s++ != '\0');
+    return NULL;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002144);
 
@@ -40,11 +125,26 @@ INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002258);
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000022A0);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000029B4);
+void func_000029B4(char **pp, s32 c) {
+    if (c < 256) {
+        *(*pp)++ = c;
+    } else {
+        **pp = 0;
+    }
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000029D8);
+s32 func_000029D8(char *buf, const char *fmt, ...) {
+    __builtin_va_list ap;
+    char *p = buf;
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002A24);
+    __builtin_va_start(ap, fmt);
+    return func_000022A0(func_000029B4, &p, fmt, ap);
+}
+
+s32 func_00002A24(char *buf, const char *fmt, void *ap) {
+    char *p = buf;
+    return func_000022A0(func_000029B4, &p, fmt, ap);
+}
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00002A58);
 
@@ -88,28 +188,62 @@ INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000030F0);
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003174);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_0000326C);
+s32 func_0000326C(s32 baud) {
+    volatile u32 *uart = (volatile u32 *)0xBE4C0000;
+    u32 div = 96000000 / baud;
+    s32 intr = func_00001C2C();
+    uart[9] = div >> 6;
+    uart[10] = (div + 32) & 0x3F;
+    func_00001C58(intr);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000032CC);
+s32 func_000032CC(s8 c) {
+    if (*(volatile u32 *)0xBE4C0018 & 0x20) {
+        return -1;
+    }
+    *(volatile u32 *)0xBE4C0000 = c;
+    return 0;
+}
 
 s32 func_000032F8(s8 arg0) {
     do {
 
-    } while (func_000032CC(arg0) < 0);
+    } while (func_000032CC((s32) arg0) < 0);
     return 0;
 }
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003328);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000033C4);
-
-void func_000033EC(void) {
-    do {
-
-    } while (func_000033C4() < 0);
+s32 func_000033C4(void) {
+    if (*(volatile u32 *)0xBE4C0018 & 0x10) {
+        return -1;
+    }
+    return *(volatile u32 *)0xBE4C0000 & 0xFF;
 }
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_0000340C);
+s32 func_000033EC(void) {
+    s32 c;
+
+    do {
+        c = func_000033C4();
+    } while (c < 0);
+    return c;
+}
+
+s32 func_0000340C(u8 *buf, s32 n) {
+    s32 i;
+    s32 c;
+
+    for (i = 0; i < n; i++) {
+        c = func_000033EC();
+        if (c < 0) {
+            break;
+        }
+        *buf++ = c;
+    }
+    return i;
+}
 
 void func_00003470(void) {
     func_00003174();
@@ -119,9 +253,13 @@ void func_0000348C(s8 arg0) {
     func_000032F8(arg0);
 }
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000034A8);
+s32 func_000034A8(s32 unused, s32 a1, s32 a2) {
+    return func_00003328(a1, a2);
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000034C8);
+s32 func_000034C8(s32 unused, s32 a1, s32 a2) {
+    return func_0000340C(a1, a2);
+}
 
 s32 func_000034E8(void) {
     return 0;
@@ -139,7 +277,10 @@ INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003698);
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000036F4);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003AC8);
+s32 func_00003AC8(s32 arg0) {
+    D_00015464 = arg0;
+    return 0;
+}
 
 INCLUDE_RODATA("nonmatchings/rebooti_001D0C", D_00012F58);
 
@@ -149,13 +290,27 @@ INCLUDE_RODATA("nonmatchings/rebooti_001D0C", D_00012FEC);
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003AD8);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003BB4);
+void func_00003BB4(SceLoadCoreExecFileInfo *execInfo, s32 ret) {
+    if (ret == 0) {
+        execInfo->isDecrypted = 1;
+        return;
+    }
+    execInfo->isDecrypted = 0;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003BCC);
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003C8C);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003ED8);
+s32 func_00003ED8(SceHeader *hdr) {
+    s32 size;
+
+    size = 0;
+    if (hdr->magic == 0x4543537E) {
+        size = hdr->size;
+    }
+    return size;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00003EFC);
 
@@ -195,5 +350,9 @@ INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000051D4);
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_0000546C);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000054EC);
-
+void func_000054EC(u32 *p, s32 n) {
+    while (n > 0) {
+        n--;
+        *p++ = 0;
+    }
+}
