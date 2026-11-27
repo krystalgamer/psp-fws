@@ -7,7 +7,80 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001FE08 is data (vptr = label - 8 + 8) */
+class Class_0001FE08 {
+public:
+    virtual ~Class_0001FE08();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_0001FE30 {
+public:
+    virtual ~Class_0001FE30();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001F988 is data (vptr = label - 8 + 8) */
+class Class_0001F988 : public Class_0001FE30 {
+public:
+    virtual ~Class_0001F988();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001FEA0 is data (vptr = label - 8 + 8) */
+class Class_0001FEA0 {
+public:
+    virtual ~Class_0001FEA0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001FE90 is data (vptr = label - 8 + 8) */
+class Class_0001FE90 : public Class_0001FEA0 {
+public:
+    virtual ~Class_0001FE90();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001FFC8 is data (vptr = label - 8 + 8) */
+class Class_0001FFC8 {
+public:
+    virtual ~Class_0001FFC8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001F790 is data (vptr = label - 8 + 8) */
+class Class_0001F790 : public Class_0001FFC8 {
+public:
+    virtual ~Class_0001F790();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_00020010 {
+public:
+    virtual ~Class_00020010();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001F5F8 is data (vptr = label - 8 + 8) */
+class Class_0001F5F8 : public Class_00020010 {
+public:
+    virtual ~Class_0001F5F8();
+};
 #endif
 
 struct D_0001C24C_s {
@@ -259,6 +332,30 @@ extern M2C_UNK func_00049314;
 
 M2C_UNK Job_Cancel(M2C_UNK, s32);
 s32 Job_isCanceled(s32);
+void _ZN14Class_0001F5F8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F5F8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F5F8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F790D0Ev(s32 **arg0);
+void _ZN14Class_0001F790D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F790D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F988D0Ev(s32 **arg0);
+void _ZN14Class_0001F988D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F988D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0001FE08D0Ev(s32 **arg0);
+void _ZN14Class_0001FE08D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0001FE08D2Ev(M2C_UNK **arg0);
+M2C_UNK _ZN14Class_0001FE30D0Ev(s32);
+s32 _ZN14Class_0001FE30D2Ev(s32);
+void _ZN14Class_0001FE90D0Ev(s32 **arg0);
+void _ZN14Class_0001FE90D1Ev(s32 **arg0);
+s32 _ZN14Class_0001FE90D2Ev(s32);
+void _ZN14Class_0001FEA0D0Ev(s32 **arg0);
+void _ZN14Class_0001FEA0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0001FEA0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0001FFC8D0Ev(s32 **arg0);
+void _ZN14Class_0001FFC8D1Ev(M2C_UNK **arg0);
+s32 _ZN14Class_0001FFC8D2Ev(void);
+s32 _ZN14Class_00020010D2Ev(s32);
 M2C_UNK _ZN3paf4View12PageActivateEPKc(s32);
 M2C_UNK _ZN3paf4View12PageCloseAllEv(s32);
 s32 _ZN3paf4View8PageOpenEPKcii(s32, s32, s32, s32);
