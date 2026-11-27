@@ -270,6 +270,7 @@ s32 func_00003A5C(s32, s32, s32);
 M2C_UNK func_00003BCC(s32, s32, s32);
 void func_0000407C(void);
 void func_00004084(s32 arg0);
+void func_00004128(s32 arg0);
 void func_000043B4(void);
 void func_000046F4(void);
 s32 func_00004ACC(s32);
