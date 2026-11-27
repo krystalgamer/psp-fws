@@ -68,6 +68,8 @@ def main():
     if bad:
         for p, t in snap.items():
             p.write_text(t)
+        # tmp/asm was split from the broken state: rebuild every sharing version from the restored sources
+        subprocess.run(["tools/regress.sh", "--shared", f"{a.ver}:{a.module}"], cwd=ROOT, capture_output=True, text=True)
         print(f"shared regress failed, all of {[n for n, _, _ in done]} restored "
               f"(retry them one per call to find the culprit): {bad[:3]}")
         sys.exit(1)
@@ -104,15 +106,24 @@ def one(a, cfile, decls):
         store_p = sd / f"{a.module}_decls.json"
         store = json.loads(store_p.read_text())
         extra = Path(decls).read_text()
+        # comments may contain ';' or look like declarations
+        extra = re.sub(r"/\*.*?\*/", "", extra, flags=re.S)
+        extra = re.sub(r"//[^\n]*", "", extra)
+        kept = []
         for line in extra.splitlines():
-            vm = re.match(r"^extern .*?\b(\w+)(\[[^\]]*\])*;$", line.strip())
-            fm = re.match(r"^(?!extern|typedef|struct|union|enum)[\w\s\*]+?\b(\w+)\(.*\);$", line.strip())
-            if vm:
-                store["vars"][vm[1]] = line.strip()
+            st = line.strip()
+            fpm = re.match(r"^extern .*\(\s*\*\s*(\w+)\s*\)\s*\(.*\);$", st)  # extern T (*fp)(...);
+            vm = re.match(r"^extern .*?\b(\w+)(\[[^\]]*\])*;$", st)
+            fm = re.match(r"^(?!extern|typedef|struct|union|enum)[\w\s\*]+?\b(\w+)\(.*\);$", st)
+            if fpm:
+                store["vars"][fpm[1]] = st
+            elif vm:
+                store["vars"][vm[1]] = st
             elif fm:
-                store["funcs"][fm[1]] = line.strip()
-        types = "\n".join(l for l in extra.splitlines()
-                          if not re.match(r"^\s*extern\b", l) and not re.match(r"^(?!typedef|struct|union|enum)[\w\s\*]+?\b\w+\(.*\);\s*$", l))
+                store["funcs"][fm[1]] = st
+            else:
+                kept.append(line)
+        types = "\n".join(kept)
         # drop type definitions the store already has (re-runs with the same --decls)
         have = "\n".join(v for k2, v in store.get("types", {}).items() if k2 != f"hand_{name}")
         defined = set(re.findall(r"\b(?:struct|union|enum)\s+(\w+)\s*\{", have)) | \

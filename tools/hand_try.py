@@ -84,6 +84,27 @@ def compiled_reloc_syms(c_text, comp, opt):
         return names
 
 
+def target_calls_from_words(mod, name):
+    """j/jal targets of an already-C function, read from the original's words and named via the build map
+    (the function is C in this version, so splat wrote no asm for it). Jumps inside the function are None."""
+    mp = ROOT / "tmp/build" / mod.ver / f"{mod.mod}.map"
+    if not mp.exists():
+        return None
+    names = {}
+    for m in re.finditer(r"^\s+0x([0-9a-f]+)\s+([A-Za-z_]\w*)$", mp.read_text(), re.M):
+        if not m[2].endswith("NON_MATCHING"):
+            names.setdefault(int(m[1], 16), m[2])
+    rom, end, _ = mod.funcs[name]
+    out = []
+    for r in range(rom, end, 4):
+        w = struct.unpack_from("<I", mod.base, r)[0]
+        if w >> 26 in (2, 3):
+            tgt = (w & 0x3FFFFFF) << 2
+            lo, hi = rom - mod.text_off, end - mod.text_off
+            out.append(None if lo <= tgt < hi else names.get(tgt))
+    return out
+
+
 def target_reloc_syms(mod, name):
     rom, end, _ = mod.funcs[name]
     out = []
@@ -370,10 +391,14 @@ def main():
             # call targets: the original's jal names (from its asm) must be the functions the C calls
             bad_call = []
             asm_path = mod.funcs[name][2]
+            want_calls = None
             if asm_path is not None:
                 # j/jal in program order; local labels (.L) are jumps, not calls
                 want_calls = [None if c.startswith(".") else c
                               for c in re.findall(r"\bj(?:al)?\s+(\.?[A-Za-z_]\w*)", asm_path.read_text())]
+            else:
+                want_calls = target_calls_from_words(mod, name)
+            if want_calls is not None:
                 got = compiled_reloc_syms.calls
                 if len(want_calls) == len(got):
                     bad_call = [(w, g) for w, g in zip(want_calls, got) if None not in (w, g) and g != w]
