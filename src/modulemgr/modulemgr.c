@@ -642,7 +642,33 @@ s32 func_00000474(void *libEntry) {
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_000004C8);
+s32 func_000004C8(SceLoadCoreExecFileInfo *execInfo) {
+    s32 ret;
+
+    if (execInfo->isCompressed != 0) {
+        ret = sceKernelResizeMemoryBlock(execInfo->decompressionMemId, 0, execInfo->modCodeSize - execInfo->maxAllocSize);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:sceKernelResizeMemoryBlock failed 0x%x, block 0x%08x\n", "shrink_file_block", ret,
+                    execInfo->decompressionMemId);
+            return ret;
+        }
+        execInfo->maxAllocSize = execInfo->modCodeSize;
+    }
+    return 0;
+}
+
+s32 func_0000054C(u32 addr, SceSize size, u32 base, SceSize baseSize) {
+    u32 end;
+
+    if (addr >= base && addr < base + baseSize) {
+        return 1;
+    }
+    end = addr + size - 1;
+    if (end >= base && end < base + baseSize) {
+        return 1;
+    }
+    return 0;
+}
 
 void func_00000594(void *arg0) {
     sceKernelFreePartitionMemory(M2C_FIELD(arg0, s32 *, 0x34));
@@ -735,9 +761,32 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00004EA4);
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000984);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000C4C);
+
+s32 func_00004FCC(SceModule *mod) {
+    u32 *cur;
+    u32 *end;
+    SceResidentLibraryEntryTable *ent;
+    s32 ret;
+
+    if (mod->entSize != 0) {
+        cur = mod->entTop;
+        end = cur + mod->entSize / 4;
+        while (cur < end) {
+            ent = (SceResidentLibraryEntryTable *)cur;
+            if (ent->attribute >= 0) {
+                ret = func_00000474(ent);
+                if (ret != 0) {
+                    Kprintf("modulemgr.c:%s:sceKernelReleaseLibrary failed 0x%x\n", "ModuleReleaseLibraries", ret);
+                }
+            }
+            cur += ent->len;
+        }
+    }
+    return 0;
+}
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/modulemgr", func_00004FCC);
 #endif
 

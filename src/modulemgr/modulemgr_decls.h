@@ -57,6 +57,21 @@ typedef struct {
     u32 attribute;
 } SceKernelSMOption;
 
+#if FW_VERSION == 100
+typedef struct {
+    u8 unk0[0x14];
+    SceSize maxAllocSize;
+    SceUID decompressionMemId;
+    u8 unk1C[0x14];
+    SceSize modCodeSize;
+    u8 unk34[0x20];
+    u32 isCompressed;
+    u8 unk58[0x68];
+} SceLoadCoreExecFileInfo;
+#else
+typedef struct SceLoadCoreExecFileInfo SceLoadCoreExecFileInfo;
+#endif
+
 typedef struct SceModule {
     struct SceModule *next;
     u16 attribute;
@@ -235,7 +250,7 @@ s32 func_000028EC(SceUID fd, u32 apiType);
 s32 func_00003210(s32);
 void func_00004750(void);
 s32 func_00004BA4(s32);
-void func_00004FCC(SceModule *mod);
+s32 func_00004FCC(SceModule *mod);
 s32 func_0000552C(s32);
 void *memset(void *s, s32 c, SceSize n);
 void module_reboot_before(void);
@@ -283,6 +298,7 @@ M2C_UNK sceKernelRegisterLibraryForUser();
 s32 sceKernelRegisterModule(s32);
 s32 sceKernelReleaseLibrary(void *libEntry);
 s32 sceKernelReleaseModule(s32);
+s32 sceKernelResizeMemoryBlock(SceUID id, s32 leftShift, s32 rightShift);
 SceUID sceKernelSearchModuleByAddress(u32 addr);
 SceUID sceKernelSearchModuleByName(const char *name);
 s32 sceKernelSignalSema(SceUID semaId, s32 signal);
