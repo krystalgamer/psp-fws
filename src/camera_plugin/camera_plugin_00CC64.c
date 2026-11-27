@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "camera_plugin_decls.h"

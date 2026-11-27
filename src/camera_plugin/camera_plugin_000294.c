@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "camera_plugin_decls.h"
@@ -13,7 +14,7 @@ void func_00000294(void) {
 
     sceVshCommonUtil_622815DD(&D_000236A4, func_000004F8);
     func_0000E048(0);
-    temp_v0 = _ZN3paf4View4FindEPKc(&D_00021640);
+    temp_v0 = _ZN3paf4View4FindEPKc(( const char*) &D_00021640);
     if (temp_v0 != 0) {
         temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
@@ -30,7 +31,7 @@ void func_00000294(void) {
 
     sceVshCommonUtil_951BC384(&D_00024C5C, func_000004F8);
     func_0000E048(0);
-    temp_v0 = scePaf_88784487(&D_00021640);
+    temp_v0 = scePaf_88784487(( const char*) &D_00021640);
     if (temp_v0 != 0) {
         temp_v0_2 = scePaf_DCE3D225(temp_v0, 1);
         if (temp_v0_2 != 0) {

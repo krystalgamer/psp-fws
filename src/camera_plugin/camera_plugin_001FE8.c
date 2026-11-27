@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "camera_plugin_decls.h"
 
@@ -866,7 +867,7 @@ INCLUDE_ASM("nonmatchings/camera_plugin_001FE8", func_00005FC0);
 #else
 void func_00005FC0(M2C_UNK **arg0) {
     *arg0 = &D_00022AE8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
