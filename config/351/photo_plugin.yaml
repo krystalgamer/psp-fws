@@ -62,6 +62,7 @@ segments:
       - [0x294BC, c, photo_plugin_0292B0]
       - [0x2BD40, c, photo_plugin_02B79C]
       - [0x2C0A0, c, photo_plugin_02BC40]
+      - [0x2D6D8, c, photo_plugin_crtend]
       - { start: 0x2E580, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2ED88, type: prxpad, order: .text }
       - { start: 0x2ED90, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }

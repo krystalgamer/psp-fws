@@ -63,6 +63,7 @@ segments:
       - [0x29184, c, photo_plugin_0292B0]
       - [0x2BA08, c, photo_plugin_02B79C]
       - [0x2BD68, c, photo_plugin_02BC40]
+      - [0x2D3A0, c, photo_plugin_crtend]
       - { start: 0x2E22C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x2E248, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2EA38, type: prxpad, order: .text }

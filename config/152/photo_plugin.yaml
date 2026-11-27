@@ -57,6 +57,7 @@ segments:
       - [0xA4, c, photo_plugin]
       - [0x3A20, c, photo_plugin_017178]
       - [0x18DF0, c, photo_plugin_02BC40]
+      - [0x21E30, c, photo_plugin_crtend]
       - { start: 0x21E88, type: asm, name: fini, linker_section: .fini }
       - { start: 0x21EA4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x22434, type: prxpad, order: .text }
@@ -78,6 +79,7 @@ segments:
       - [0x22C28, .rodata, photo_plugin]
       - [0x234C4, .rodata, photo_plugin_017178]
       - [0x24DD0, .rodata, photo_plugin_02BC40]
+      - [0x250A0, .rodata, photo_plugin_crtend]
       - { start: 0x25128, type: prxpad, order: .rodata }
   - name: photo_plugin_seg1
     type: code
