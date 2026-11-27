@@ -763,19 +763,37 @@ INCLUDE_ASM("nonmatchings/rebooti_00550C", func_0000F890);
 
 INCLUDE_RODATA("nonmatchings/rebooti_00550C", D_00014C70);
 
-INCLUDE_ASM("nonmatchings/rebooti_00550C", func_0000F9AC);
+s32 func_0000F9AC(void *iob, char *name) {
+    func_00001A54(D_00014C70, "df_remove", name);
+    return 0x8001B000;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_00550C", func_0000F9E0);
+s32 func_0000F9E0(void *iob, char *name) {
+    func_00001A54(D_00014C70, "df_mkdir", name);
+    return 0x8001B000;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_00550C", func_0000FA14);
+s32 func_0000FA14(void *iob, char *name) {
+    func_00001A54(D_00014C70, "df_rmdir", name);
+    return 0x8001B000;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_00550C", func_0000FA48);
+s32 func_0000FA48(void *iob, char *name) {
+    func_00001A54(D_00014C70, "df_dopen", name);
+    return 0x8001B000;
+}
 
 INCLUDE_RODATA("nonmatchings/rebooti_00550C", D_00014CB8);
 
-INCLUDE_ASM("nonmatchings/rebooti_00550C", func_0000FA7C);
+s32 func_0000FA7C(void *arg0) {
+    func_00001A54(D_00014CB8, "df_dclose", **M2C_FIELD(arg0, s32 ***, 8));
+    return 0x8001B000;
+}
 
-INCLUDE_ASM("nonmatchings/rebooti_00550C", func_0000FAB8);
+s32 func_0000FAB8(void *arg0) {
+    func_00001A54(D_00014CB8, "df_dread", **M2C_FIELD(arg0, s32 ***, 8));
+    return 0x8001B000;
+}
 
 s32 func_0000FAF4(void *iob, char *name, void *stat) {
     func_00001A54("lflash.c:%s:\n", "df_getstat");

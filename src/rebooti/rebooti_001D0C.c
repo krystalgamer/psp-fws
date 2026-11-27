@@ -334,7 +334,22 @@ INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_00004608);
 
 INCLUDE_RODATA("nonmatchings/rebooti_001D0C", D_00013430);
 
-INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_000047A8);
+s32 func_000047A8(u8 *buf, SceLoadCoreExecFileInfo *execInfo) {
+    if (func_00003ED8((SceHeader *)buf) != 0) {
+        buf += 0x40;
+    }
+    switch (execInfo->elfType) {
+    case -1:
+    case 0:
+        break;
+    case 1:
+    case 2:
+        func_0000482C(buf, execInfo);
+        return 0;
+    }
+    func_00001A54(D_00013430, "sceKernelLoadExecutableObject");
+    return -1;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti_001D0C", func_0000482C);
 
