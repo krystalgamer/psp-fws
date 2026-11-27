@@ -18,7 +18,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000010C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", module_start);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 201
+#if FW_VERSION < 150 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", module_stop);
 #endif
 
@@ -70,7 +70,7 @@ s32 func_000002A4(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 201
+#if FW_VERSION < 150 || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000015C);
 #endif
 
@@ -211,7 +211,7 @@ void func_00000884(void) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000510);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000002B4);
 #endif
 
@@ -219,6 +219,10 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000002B4);
 void func_00000340(void) {
     D_00010839 = 1;
 }
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000340);
 #endif
 
 #if FW_VERSION == 100
@@ -917,7 +921,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000CA0);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000DB4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000056C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000059C);
@@ -939,7 +943,15 @@ void func_0000061C(M2C_UNK **arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000654);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000007C4);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000908);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000006BC);
 
 void func_00000784(void *arg0, s32 arg1) {
@@ -951,6 +963,10 @@ void func_00000784(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000007A0);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000974);
+#endif
+
 #if FW_VERSION == 100
 void func_00000974(void *arg0, void *arg1) {
     if (arg1 != NULL) {
@@ -958,9 +974,17 @@ void func_00000974(void *arg0, void *arg1) {
     }
     func_0000EA3C((s32) arg0, (s32) arg1);
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000099C);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000C48);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000A2C);
 #endif
 
@@ -1086,13 +1110,21 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000DE0);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000F60);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_00020174);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001244);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000015B0);
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000FCC);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000013A8);
 #endif
 
@@ -1108,19 +1140,37 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001AF8);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001DE4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000141C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000143C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001470);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000181C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000018E0);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000019A4);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F5F8);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001A70);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001B78);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000014A4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001870);
 #endif
 
@@ -1128,7 +1178,13 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001870);
 s32 func_00001870(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), s32 *, 0x30);
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001BF4);
+#endif
+
+#if FW_VERSION < 150
 void func_0000187C(s32 arg0) {
     func_00001EC8(arg0, 0x8010300B);
 }
@@ -1138,22 +1194,60 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000189C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001AA0);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001AF0);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000201C8_v102);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F618);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001B9C);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_00020210);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002234);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001EA4);
+#endif
+
+#if FW_VERSION == 100
 void func_00001EA4(void *arg0) {
     func_000101F8(M2C_FIELD(arg0, void **, 0x1C));
     D_00020A24 = 0;
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000022D0);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001EC8);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002458);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002744);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002AD0);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001F34);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002140);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000024C4);
+#endif
+
+#if FW_VERSION == 100
 void func_000024C4(void) {
     func_0000187C(D_00020A20);
 }
@@ -1221,7 +1315,7 @@ M2C_UNK *func_000066AC(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 u8 func_000024E8(void) {
     return D_00020A24;
 }
@@ -1378,7 +1472,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000110C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000011F4);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001ABBC);
 #endif
 
@@ -1418,7 +1512,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002658);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000272C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001ABD0);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001ABDC);
@@ -1456,11 +1550,11 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002DE8);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002E58);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001AC00);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F6D8);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F6EC);
@@ -1546,7 +1640,13 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003924);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003AAC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003ADC);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000042A8);
+#endif
+
+#if FW_VERSION < 150
 void func_00003B2C(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
     func_00003B4C((s32) arg0);
@@ -1606,17 +1706,33 @@ void func_000045D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000045EC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000474C);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005078);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000047BC);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000487C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000493C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004A04);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005434);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004AF4);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F988);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004C6C);
@@ -1674,9 +1790,13 @@ void func_00005C50(s32 *arg0, s32 *arg1) {
     *arg0 = *arg1;
     func_00003B4C((s32) arg0);
 }
+#endif
 
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005C70);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005CE8);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005D68);
@@ -1690,15 +1810,37 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F9E0);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F9F8);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FA18);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000205F0);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005EB4);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006838);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00005F78);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006038);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000069F0);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000060A0);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000618C);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FAB4);
@@ -1778,8 +1920,12 @@ s32 func_00004504(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000456C);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006674);
 #endif
 
 #if FW_VERSION == 100
@@ -1800,11 +1946,23 @@ void func_00006674(void *arg0, void *arg1) {
         }
     }
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007064);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000070CC);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000070F8);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006714);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000067C8);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000068B4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000069B0);
@@ -1834,13 +1992,19 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000045D0);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000046A0);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001ACB8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006A1C);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006BB8);
+#endif
+
+#if FW_VERSION == 100
 void func_00006BB8(s32 arg0, void *arg1) {
     if (arg1 != NULL) {
         func_0000CAE4(3, 0);
@@ -1852,7 +2016,9 @@ void func_00006BB8(s32 arg0, void *arg1) {
         }
     }
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006C28);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FBD0);
@@ -1870,9 +2036,17 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FC18);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FC1C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006F0C);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000079B0);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007034);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000070E4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007224);
@@ -1908,7 +2082,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004C3C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004CB8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_00004D0C(s32 arg0) {
     func_00006E94(arg0);
 }
@@ -1918,7 +2092,7 @@ void func_00004D0C(s32 arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004D0C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_00004D50(s32 arg0) {
     func_00006F0C(arg0);
 }
@@ -1928,11 +2102,17 @@ void func_00004D50(s32 arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004D50);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000072E4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007308);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007458);
+#endif
+
+#if FW_VERSION == 100
 s32 func_00007458(void *arg0, s32 arg1) {
     s32 var_v1;
 
@@ -1942,9 +2122,17 @@ s32 func_00007458(void *arg0, s32 arg1) {
     }
     return var_v1;
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007E30);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000074A4);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FC30);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FC40);
@@ -1954,31 +2142,65 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FC44);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FC5C);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FC74);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0002085C);
+
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0002087C);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FC94);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FCB4);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FCD4);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FCEC);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FD04);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000208E0);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FD18);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000757C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000075EC);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008290);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008664);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000078D0);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007C6C);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000809C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000817C);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008D84);
+#endif
+
+#if FW_VERSION == 100
 void func_00008274(void *arg0) {
     s32 temp_v0;
     void **temp_a0;
@@ -1994,7 +2216,9 @@ void func_00008274(void *arg0) {
         func_0000817C((s32) arg0);
     }
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FD5C);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FD6C);
@@ -2004,9 +2228,19 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FD84);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FD88);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FDA4);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008E2C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008F30);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000082F8);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008434);
 
 void func_00004D94(s32 arg0) {
@@ -2018,7 +2252,7 @@ void func_00004D94(s32 arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004D94);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000085C4);
 
 void func_00004DD8(s32 arg0) {
@@ -2030,15 +2264,23 @@ void func_00004DD8(s32 arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004DD8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_000086DC(s32 arg0) {
     func_00008434(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000086F8);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009404);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000087B0);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000087CC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008814);
@@ -2065,9 +2307,17 @@ void func_00008AA4(s32 **arg0) {
     func_0000BEF4((s32) arg0);
     _ZdlPv(arg0);
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000980C);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008ADC);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008CAC);
 
 void func_00008D0C(M2C_UNK **arg0) {
@@ -2084,7 +2334,13 @@ void func_00008D2C(s32 **arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008D54);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FDE0);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008E80);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008FC8);
@@ -2215,9 +2471,13 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A284);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A2DC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A2F4);
+#endif
 
+#if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FDE0);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FDE8);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FDF8);
@@ -2301,7 +2561,13 @@ void func_0000AD10(void) {
 void func_0000AD18(void) {
 
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000BA3C);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000AD20);
 
 void func_0000AD70(s32 arg0) {
@@ -2403,7 +2669,9 @@ void func_0000B5E8(void *arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B644);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B6CC);
+#endif
 
+#if FW_VERSION == 100
 void ***func_0000B740(void ***arg0, void *arg1, void **arg2) {
     void **temp_s0;
     void *temp_v1;
@@ -2417,7 +2685,9 @@ void ***func_0000B740(void ***arg0, void *arg1, void **arg2) {
     M2C_FIELD(arg1, s32 *, 4) = (s32) (M2C_FIELD(arg1, s32 *, 4) - 1);
     return arg0;
 }
+#endif
 
+#if FW_VERSION < 150
 void func_0000B7A8(void *arg0) {
     s32 temp_v0;
     s32 temp_v1;
@@ -2433,7 +2703,13 @@ void func_0000B7A8(void *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B7EC);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C3E4);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B888);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000B914);
@@ -2757,11 +3033,11 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006F8C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006FE8);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001AD3C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FED4);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FEDC);
@@ -2795,9 +3071,21 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000D534);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000D694);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000D718);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E428);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000D86C);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000DA54);
+#endif
+
+#if FW_VERSION == 100
 void func_0000DA54(s32 arg0, void **arg1, s32 arg2) {
     void *sp0;
     s32 temp_s0;
@@ -2847,7 +3135,13 @@ void func_0000DA54(s32 arg0, void **arg1, s32 arg2) {
         }
     }
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000DC6C);
+#endif
+
+#if FW_VERSION == 100
 void func_0000DC6C(s32 arg0, void **arg1, s32 arg2) {
     void *sp0;
     s32 temp_s0;
@@ -2897,7 +3191,9 @@ void func_0000DC6C(s32 arg0, void **arg1, s32 arg2) {
         }
     }
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000DE84);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E0B4);
@@ -2942,7 +3238,13 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E764);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E7A4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E7E0);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E834);
+#endif
+
+#if FW_VERSION == 100
 void func_0000E834(void *arg0) {
     s32 temp_v0;
 
@@ -2952,13 +3254,25 @@ void func_0000E834(void *arg0) {
         M2C_FIELD(arg0, s32 *, 0xA34) = 0;
     }
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000F314);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E870);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E900);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E95C);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E9F8);
+#endif
+
+#if FW_VERSION == 100
 void func_0000E9F8(void *arg0) {
     s32 temp_v0;
 
@@ -2970,7 +3284,9 @@ void func_0000E9F8(void *arg0) {
         M2C_FIELD(arg0, s32 *, 0xA28) = 0;
     }
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000EA3C);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FFC8);
@@ -2978,9 +3294,17 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FFC8);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FFD8);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FFE0);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000F600);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000EB0C);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000EB74);
 #endif
 
@@ -3004,11 +3328,11 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000770C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000778C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007824);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000EC00);
 
 void func_0000EC20(void *arg0, s32 arg1, s32 arg2) {
@@ -3115,9 +3439,17 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000FD50);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000FDE8);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000FEA0);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010A54);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000FEA8);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000FECC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000FF58);
@@ -3302,11 +3634,21 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010930);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000109B4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010A34);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001177C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010BE4);
+#endif
+
+#if FW_VERSION == 100
 s32 func_00010BE4(void) {
     return 1;
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010BEC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010C5C);
@@ -3443,7 +3785,7 @@ void func_0001151C(s32 arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00007DD8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_0001151C(s32 arg0) {
     sce_paf_private_memset(&D_00047D24, 0, 0x10);
     sce_paf_private_memcpy(&D_00047D24, arg0, 0x10);
@@ -3454,7 +3796,7 @@ void func_0001151C(s32 arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001156C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000201C8);
 #endif
 
@@ -3542,7 +3884,7 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_00020234);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001020C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00011834);
 #endif
 
@@ -3576,7 +3918,7 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001027C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008724);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00011E08);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000202BC);
@@ -3590,11 +3932,11 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_000202C8);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008300);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 350)
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000869C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001ADEC);
 #endif
 
@@ -3602,7 +3944,7 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001ADEC);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008740);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008724);
 #endif
 
@@ -3656,6 +3998,10 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008160);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012000);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00012C44);
+#endif
+
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002FAC);
 #endif
@@ -3702,7 +4048,9 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002FD4);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000120BC);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001212C);
 #endif
 
@@ -3953,6 +4301,12 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001AF08);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001AF10);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013B2C);
+
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000141DC);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003E0C);
 #endif
@@ -4031,12 +4385,16 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013C6C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004AD0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013D1C);
 #endif
 
 #if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013D80);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000148B0);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 260
@@ -4049,7 +4407,9 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004E48);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00013E4C);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001400C);
 #endif
 
@@ -4086,11 +4446,17 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000050D4);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00009AAC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014224);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000142A8);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014EB0);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014398);
 #endif
 
@@ -4515,7 +4881,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000158B8);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00006AB4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00015A90);
 #endif
 
