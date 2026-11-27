@@ -345,7 +345,7 @@ s32 df_chstat(); /* 1.00 df_chstat */
 s32 df_close(); /* 1.00 df_close(SceIoIob *) */
 s32 df_dclose(); /* 1.00 df_dclose */
 s32 df_dread(); /* 1.00 df_dread */
-s32 df_getstat(); /* 1.00 df_getstat */
+s32 df_getstat(); /* 1.50+ take one more trailing argument */
 s32 df_ioctl(); /* 1.00 df_ioctl */
 s32 df_mkdir(); /* 1.50+ take one more trailing argument */
 s32 df_read(); /* 1.00 df_read(SceIoIob *, void *, SceSize) */

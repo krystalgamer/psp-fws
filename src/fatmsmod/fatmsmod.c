@@ -959,8 +959,12 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00001F04);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000203C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
+#if FW_VERSION >= 150
+s32 df_getstat(SceIoIob *iob, char *name, SceIoStat *stat, s32 arg) {
+#else
 s32 df_getstat(SceIoIob *iob, char *name, SceIoStat *stat) {
+#endif
     PfStat st;
     SceUID heap;
     char *path;
@@ -980,7 +984,11 @@ s32 df_getstat(SceIoIob *iob, char *name, SceIoStat *stat) {
         free_heap(heap, path);
         return 0x80010016;
     }
+#if FW_VERSION >= 150
+    if (stub_pf_fstat(path, &st, arg) < 0) {
+#else
     if (stub_pf_fstat(path, &st) < 0) {
+#endif
         err = stub_pf_errnum();
         free_heap(heap, path);
         return prErr(err);
