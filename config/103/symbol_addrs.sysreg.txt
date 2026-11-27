@@ -181,3 +181,8 @@ sceKernelCallSubIntrHandler = 0x00002530; // type:func rom:0x25B0
 sceKernelRegisterSysEventHandler = 0x00002538; // type:func rom:0x25B8
 sceKernelUnregisterSysEventHandler = 0x00002540; // type:func rom:0x25C0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceSysregGetFuseId = 0x000002F0; // type:func
+sceClkcSetCpuFrequency = 0x00002398; // type:func
+sceClkcSetBusFrequency = 0x00002448; // type:func

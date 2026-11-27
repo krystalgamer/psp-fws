@@ -65,11 +65,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregGenerateVblankIRQ);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSetMasterPriv);
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/sysreg", func_000002F0);
-#endif
-
-#if FW_VERSION >= 150
+#if FW_VERSION >= 103
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetFuseId);
 #endif
 
@@ -615,18 +611,10 @@ INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetBusGear);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetBusGear);
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/sysreg", func_00002398);
-#else
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetCpuFrequency);
-#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetCpuFrequency);
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/sysreg", func_00002448);
-#else
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetBusFrequency);
-#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetBusFrequency);
