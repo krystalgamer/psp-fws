@@ -123,6 +123,15 @@ def one(a, cfile, decls):
         import structify
         structify.SRC[a.module] = sd
         structify.write_decls(a.module, store)
+    # the function's own prototype follows its definition (a stale m2c guess would conflict)
+    store_p = sd / f"{a.module}_decls.json"
+    store = json.loads(store_p.read_text())
+    sig = re.match(r"^(?!static)([^\n;#{]*?\b" + re.escape(name) + r"\([^;{}]*\))\s*\{", body, re.M)
+    if sig and name in store["funcs"] and store["funcs"][name] != " ".join(sig[1].split()) + ";":
+        store["funcs"][name] = " ".join(sig[1].split()) + ";"
+        import structify
+        structify.SRC[a.module] = sd
+        structify.write_decls(a.module, store)
     # C for all candidate versions first
     ents[k].vers = frozenset()
     ents.insert(k, FM.Entry(cand, "cfunc", name, body))
