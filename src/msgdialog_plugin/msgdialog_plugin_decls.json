@@ -35,7 +35,11 @@
   "sceVshCommonGui_EC899EBE": "s32 sceVshCommonGui_EC899EBE();",
   "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);"
  },
+ "types": {
+  "hand_func_00000FBC": "typedef void (*func_ptr)(void);"
+ },
  "vars": {
+  "D_000012A8": "extern func_ptr D_000012A8[];",
   "D_000012F0": "extern s32 D_000012F0;",
   "D_00001A5C": "extern s32 D_00001A5C;",
   "D_00001A68": "extern s8 D_00001A68;",

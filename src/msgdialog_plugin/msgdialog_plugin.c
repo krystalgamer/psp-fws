@@ -507,9 +507,3 @@ void func_00000EB8(s32 arg0, s32 arg1) {
 #endif
 
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000F08);
-
-INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00000FBC);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_00001014);
-#endif

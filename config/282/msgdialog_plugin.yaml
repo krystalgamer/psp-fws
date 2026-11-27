@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/282/.splat_cache.msgdialog_plugin
   symbol_addrs_path:
     - config/282/symbol_addrs.msgdialog_plugin.txt
+    - config/282/func_starts.msgdialog_plugin.txt
     - tmp/build/282/prx_syms.msgdialog_plugin.txt
   reloc_addrs_path: [tmp/build/282/reloc_addrs.msgdialog_plugin.txt]
   asset_path: tmp/assets/282/msgdialog_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, msgdialog_plugin]
+      - [0x105C, c, msgdialog_plugin_crtend]
       - { start: 0x10B4, type: asm, name: fini, linker_section: .fini }
       - { start: 0x10D0, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x11B0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
