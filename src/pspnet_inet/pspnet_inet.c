@@ -1550,7 +1550,48 @@ char *intoa(u32 addr) {
     return cp + 1;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008E40);
+struct ifaddr *ifa_ifwithnet(struct sockaddr *addr) {
+    struct ifnet *ifp;
+    struct ifaddr *ifa;
+    struct sockaddr_dl *sdl;
+    struct ifaddr *ifa_maybe = 0;
+    u32 af = addr->sa_family;
+    char *addr_data = addr->sa_data, *cplim;
+    TAILQ_HEAD(, ifnet) ifnet;
+    s32 if_index;
+    struct ifnet **ifindex2ifnet;
+    struct ifaddr **ifnet_addrs;
+
+    _sce_pspnet_get_if_core_variables(&if_index, &ifindex2ifnet, &ifnet_addrs, (struct ifnet **)&ifnet);
+    if (af == 18) {
+        sdl = (struct sockaddr_dl *)addr;
+        if (sdl->sdl_index && sdl->sdl_index <= if_index &&
+            ifindex2ifnet[sdl->sdl_index]->if_output != _sce_pspnet_if_nulloutput)
+            return (ifnet_addrs[sdl->sdl_index]);
+    }
+    for (ifp = ifnet.tqh_first; ifp != 0; ifp = ifp->if_list.tqe_next) {
+        if (ifp->if_output == _sce_pspnet_if_nulloutput)
+            continue;
+        for (ifa = ifp->if_addrlist.tqh_first; ifa != 0; ifa = ifa->ifa_list.tqe_next) {
+            char *cp, *cp2, *cp3;
+
+            if (ifa->ifa_addr->sa_family != af || ifa->ifa_netmask == 0)
+ next:          continue;
+            cp = addr_data;
+            cp2 = ifa->ifa_addr->sa_data;
+            cp3 = ifa->ifa_netmask->sa_data;
+            cplim = (char *)ifa->ifa_netmask + ifa->ifa_netmask->sa_len;
+            while (cp3 < cplim) {
+                if ((*cp++ ^ *cp2++) & *cp3++)
+                    goto next;
+            }
+            if (ifa_maybe == 0 ||
+                rn_refines((char *)ifa->ifa_netmask, (char *)ifa_maybe->ifa_netmask))
+                ifa_maybe = ifa;
+        }
+    }
+    return (ifa_maybe);
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", ifaof_ifpforaddr);
 
@@ -1565,9 +1606,56 @@ s32 if_rtdel(struct rtentry *rt, void *arg) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", ifa_ifwithaddr);
+#if FW_VERSION < 201
+struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr) {
+    struct ifnet *ifp;
+    struct ifaddr *ifa;
+    TAILQ_HEAD(, ifnet) ifnet;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00009240);
+    _sce_pspnet_get_if_core_variables(NULL, NULL, NULL, (struct ifnet **)&ifnet);
+    for (ifp = ifnet.tqh_first; ifp != 0; ifp = ifp->if_list.tqe_next) {
+        if (ifp->if_output == _sce_pspnet_if_nulloutput)
+            continue;
+        for (ifa = ifp->if_addrlist.tqh_first; ifa != 0; ifa = ifa->ifa_list.tqe_next) {
+            if (ifa->ifa_addr->sa_family != addr->sa_family)
+                continue;
+            if (func_0002C978(addr, ifa->ifa_addr, addr->sa_len) == 0)
+                return (ifa);
+            if ((ifp->if_flags & 0x2) && ifa->ifa_dstaddr &&
+                ifa->ifa_dstaddr->sa_len != 0 &&
+                func_0002C978(ifa->ifa_dstaddr, addr, ifa->ifa_dstaddr->sa_len) == 0)
+                return (ifa);
+        }
+    }
+    return ((struct ifaddr *)0);
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", ifa_ifwithaddr);
+#endif
+
+#if FW_VERSION < 201
+struct ifaddr *ifa_ifwithdstaddr(struct sockaddr *addr) {
+    struct ifnet *ifp;
+    struct ifaddr *ifa;
+    TAILQ_HEAD(, ifnet) ifnet;
+
+    _sce_pspnet_get_if_core_variables(NULL, NULL, NULL, (struct ifnet **)&ifnet);
+    for (ifp = ifnet.tqh_first; ifp != 0; ifp = ifp->if_list.tqe_next) {
+        if (ifp->if_output == _sce_pspnet_if_nulloutput)
+            continue;
+        if (ifp->if_flags & 0x10)
+            for (ifa = ifp->if_addrlist.tqh_first; ifa != 0; ifa = ifa->ifa_list.tqe_next) {
+                if (ifa->ifa_addr->sa_family != addr->sa_family || ifa->ifa_dstaddr == NULL)
+                    continue;
+                if (func_0002C978(addr, ifa->ifa_dstaddr, addr->sa_len) == 0)
+                    return (ifa);
+            }
+    }
+    return (NULL);
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", ifa_ifwithdstaddr);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", ifa_ifwithladdr);
 
@@ -1938,7 +2026,7 @@ struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg
     return x;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000B5E0);
+INCLUDE_ASM("nonmatchings/pspnet_inet", rn_refines);
 
 struct radix_node *rn_lookup(void *v_arg, void *m_arg, struct radix_node_head *head) {
     struct radix_node *x;

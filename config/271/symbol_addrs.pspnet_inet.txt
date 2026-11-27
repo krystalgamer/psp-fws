@@ -528,3 +528,6 @@ soo_poll = 0x00003F68; // type:func
 ether_multiaddr = 0x00009944; // type:func
 link_rtrequest = 0x0000986C; // type:func
 ifaof_ifpforaddr = 0x00008FC8; // type:func
+ifa_ifwithnet = 0x00008E40; // type:func
+ifa_ifwithdstaddr = 0x00009240; // type:func
+rn_refines = 0x0000B5E0; // type:func

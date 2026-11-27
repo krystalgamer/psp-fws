@@ -1493,10 +1493,12 @@ extern struct in_addr zeroin_addr; /* zeroin_addr */
 void _sce_pspnet_callout_init(void *c);
 void _sce_pspnet_callout_reset(void *c, s32 ticks, void (*func)(void *), void *arg);
 void _sce_pspnet_callout_stop(void *c);
+s32 _sce_pspnet_get_if_core_variables(s32 *if_indexp, struct ifnet ***ifindex2ifnetp, struct ifaddr ***ifnet_addrsp, struct ifnet **ifnetp);
 M2C_UNK _sce_pspnet_get_thread_errno();
 void *_sce_pspnet_hashinit(s32 elements, u32 *hashmask);
 void _sce_pspnet_if_attach(struct ifnet *ifp);
 void _sce_pspnet_if_down(struct ifnet *ifp);
+s32 _sce_pspnet_if_nulloutput();
 void _sce_pspnet_ifafree(struct ifaddr *ifa);
 s32 _sce_pspnet_ifioctl(struct socket *so, u32 cmd, void *data, s32 p);
 void _sce_pspnet_inet_sabort(struct socket *so);
