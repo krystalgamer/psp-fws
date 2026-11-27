@@ -1,6 +1,6 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 #include "common.h"
 #include "usbstor_decls.h"
 
@@ -86,9 +86,15 @@ INCLUDE_RODATA("nonmatchings/usbstor", D_000026B8);
 
 INCLUDE_RODATA("nonmatchings/usbstor", D_000026E8);
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/usbstor", func_00000428);
+#endif
+
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorSendData);
-#else
+#endif
+
+#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_489E6BF1);
 #endif
 
@@ -106,7 +112,11 @@ INCLUDE_RODATA("nonmatchings/usbstor", D_000024E0);
 INCLUDE_RODATA("nonmatchings/usbstor", D_00002510);
 #endif
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/usbstor", func_00000650);
+#else
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstor_internal_2CAFEFF1);
+#endif
 
 INCLUDE_ASM("nonmatchings/usbstor", sceUsbstorGetString);
 
@@ -172,7 +182,7 @@ INCLUDE_RODATA("nonmatchings/usbstor", D_00002948);
 INCLUDE_RODATA("nonmatchings/usbstor", D_000027E4);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
+#if FW_VERSION < 103 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/usbstor", D_0000296C);
 #endif
 
