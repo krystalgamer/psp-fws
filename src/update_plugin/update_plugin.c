@@ -2471,23 +2471,3 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_000045D4);
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/update_plugin", func_00004870);
 #endif
-
-INCLUDE_ASM("nonmatchings/update_plugin", func_000062D4);
-
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/update_plugin", func_00006294);
-
-INCLUDE_RODATA("nonmatchings/update_plugin", D_00007C50);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/update_plugin", func_0000632C);
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/update_plugin", func_00006900);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_RODATA("nonmatchings/update_plugin", D_00007CF0);
-#endif

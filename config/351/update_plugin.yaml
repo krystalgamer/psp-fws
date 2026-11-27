@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/351/.splat_cache.update_plugin
   symbol_addrs_path:
     - config/351/symbol_addrs.update_plugin.txt
+    - config/351/func_starts.update_plugin.txt
     - tmp/build/351/prx_syms.update_plugin.txt
   reloc_addrs_path: [tmp/build/351/reloc_addrs.update_plugin.txt]
   asset_path: tmp/assets/351/update_plugin
@@ -53,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, update_plugin]
+      - [0x68DC, c, update_plugin_crtend]
       - { start: 0x6F24, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x7324, type: prxpad, order: .text }
       - { start: 0x7330, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -63,6 +65,7 @@ segments:
       - { start: 0x7448, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x744C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - [0x7480, .rodata, update_plugin]
+      - [0x82F4, .rodata, update_plugin_crtend]
       - { start: 0x83F4, type: prxpad, order: .rodata }
   - name: update_plugin_seg1
     type: code

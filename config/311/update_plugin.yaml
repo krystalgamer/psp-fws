@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/311/.splat_cache.update_plugin
   symbol_addrs_path:
     - config/311/symbol_addrs.update_plugin.txt
+    - config/311/func_starts.update_plugin.txt
     - tmp/build/311/prx_syms.update_plugin.txt
   reloc_addrs_path: [tmp/build/311/reloc_addrs.update_plugin.txt]
   asset_path: tmp/assets/311/update_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, update_plugin]
+      - [0x68F0, c, update_plugin_crtend]
       - { start: 0x6F1C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x6F38, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x7338, type: prxpad, order: .text }
@@ -72,6 +74,7 @@ segments:
       - { start: 0x78CC, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x78D0, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x7904, .rodata, update_plugin]
+      - [0x832C, .rodata, update_plugin_crtend]
       - { start: 0x842C, type: prxpad, order: .rodata }
   - name: update_plugin_seg1
     type: code

@@ -95,12 +95,15 @@ struct Unk_vt_func_0000086C_temp_v0 {
     M2C_UNK (*unk70)(void **, M2C_UNK, M2C_UNK);
 };
 
+typedef void (*func_ptr)(void);
+
 extern M2C_UNK D_00005224;
 extern M2C_UNK D_000059F8;
 extern M2C_UNK D_00005BB0;
 extern M2C_UNK D_00006114;
 extern s32 D_00006298;
 extern s32 D_00006364;
+extern func_ptr D_00007280[];
 extern s32 D_000073BC;
 extern s32 D_0000751C;
 extern M2C_UNK D_00007520;

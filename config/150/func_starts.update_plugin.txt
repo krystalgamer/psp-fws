@@ -1,0 +1,23 @@
+// function starts pinned by tools/split_tu.py
+func_00000000 = 0x00000000; // type:func
+func_00000024 = 0x00000024; // type:func
+func_000000AC = 0x000000AC; // type:func
+func_0000015C = 0x0000015C; // type:func
+func_00000748 = 0x00000748; // type:func
+func_00000984 = 0x00000984; // type:func
+func_00000C40 = 0x00000C40; // type:func
+func_00000D8C = 0x00000D8C; // type:func
+func_00000E3C = 0x00000E3C; // type:func
+func_000011A8 = 0x000011A8; // type:func
+func_00001290 = 0x00001290; // type:func
+func_000014C4 = 0x000014C4; // type:func
+func_00001C64 = 0x00001C64; // type:func
+func_00002558 = 0x00002558; // type:func
+func_0000268C = 0x0000268C; // type:func
+func_000026EC = 0x000026EC; // type:func
+func_0000277C = 0x0000277C; // type:func
+func_00002808 = 0x00002808; // type:func
+func_0000283C = 0x0000283C; // type:func
+func_00002858 = 0x00002858; // type:func
+func_000028D4 = 0x000028D4; // type:func
+func_00004C44 = 0x00004C44; // type:func
