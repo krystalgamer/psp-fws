@@ -143,6 +143,8 @@ struct Unk_func_0000769C_0 {
 
 extern M2C_UNK D_0000A6E4;
 extern M2C_UNK D_0000A734;
+extern SceSysmemUidLookupFunc D_0000C290[];
+extern SceSysmemUidLookupFunc D_0000C2E8[];
 extern SceSysmemUidLookupFunc D_0000C2F8[];
 extern s32 D_0000C510;
 extern s32 D_0000C514;

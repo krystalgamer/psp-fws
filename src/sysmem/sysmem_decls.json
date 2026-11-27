@@ -191,6 +191,8 @@
  "vars": {
   "D_0000A6E4": "extern M2C_UNK D_0000A6E4;",
   "D_0000A734": "extern M2C_UNK D_0000A734;",
+  "D_0000C290": "extern SceSysmemUidLookupFunc D_0000C290[];",
+  "D_0000C2E8": "extern SceSysmemUidLookupFunc D_0000C2E8[];",
   "D_0000C2F8": "extern SceSysmemUidLookupFunc D_0000C2F8[];",
   "D_0000C510": "extern s32 D_0000C510;",
   "D_0000C514": "extern s32 D_0000C514;",

@@ -2104,7 +2104,16 @@ void func_00006080(u8 *arg0, u8 *arg1) {
     *var_a0 = 0;
 }
 
-INCLUDE_ASM("nonmatchings/sysmem", func_000060A8);
+static const char D_0000BA94[] = "Basic";
+static const char D_0000BA9C[] = "MetaBasic";
+void func_000060A8(SceSysmemUidCB *root, char *rootName, SceSysmemUidCB *metaRoot, char *metaRootName, SceSysmemUidCB *basic, char *basicName, SceSysmemUidCB *metaBasic, char *metaBasicName) {
+    s32 oldIntr = suspendIntr();
+    func_000052A4(root, rootName, metaRoot, metaRootName);
+    func_000065F8((u8 *)basicName, (u8 *)D_0000BA94);
+    func_000065F8((u8 *)metaBasicName, (u8 *)D_0000BA9C);
+    func_00005418(g_uidTypeList.root, basic, metaBasic, basicName, metaBasicName, 4, D_0000C2F8, NULL, &g_uidTypeList.basic);
+    resumeIntr(oldIntr);
+}
 #endif
 
 s32 sceKernelIsHold(SceSysmemUidCB *uid0, SceSysmemUidCB *uid1) {
