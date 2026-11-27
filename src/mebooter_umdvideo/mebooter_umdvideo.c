@@ -1,6 +1,6 @@
 #include "common.h"
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mebooter_umdvideo", func_00000000);
 #else
 INCLUDE_ASM("nonmatchings/mebooter_umdvideo", me_init);
