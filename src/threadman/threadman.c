@@ -937,7 +937,50 @@ s32 sceKernelDeleteSema(SceUID semaid) {
     setK1(oldK1);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
+s32 sceKernelDeleteSema(SceUID semaid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    u32 attr;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(semaid, g_threadmanInfo.uidSemaType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x80020199;
+    }
+    cb = uid;
+    attr = cb->attr & 0x10;
+    if (!k1IsUserMode()) {
+        attr = 0x10;
+    }
+    if (attr == 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x37, ra, 1, semaid);
+    }
+    ok = sceKernelDeleteUID(semaid) == 0;
+    THREADMAN_ASSERT(ok, D_00014CBC, D_00014CB0, "sceKernelDeleteSema", 0x78);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteSema);
 #endif
 
@@ -1047,7 +1090,50 @@ s32 sceKernelDeleteEventFlag(SceUID evid) {
     setK1(oldK1);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
+s32 sceKernelDeleteEventFlag(SceUID evid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    u32 attr;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(evid, g_threadmanInfo.uidEventFlagType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019A;
+    }
+    cb = uid;
+    attr = cb->attr & 0x10;
+    if (!k1IsUserMode()) {
+        attr = 0x10;
+    }
+    if (attr == 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x3F, ra, 1, evid);
+    }
+    ok = sceKernelDeleteUID(evid) == 0;
+    THREADMAN_ASSERT(ok, D_00014D1C, D_00014D10, "sceKernelDeleteEventFlag", 0x73);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteEventFlag);
 #endif
 
@@ -1083,7 +1169,46 @@ s32 sceKernelClearEventFlag(SceUID evid, u32 bits) {
     setK1(oldK1);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
+s32 sceKernelClearEventFlag(SceUID evid, u32 bits) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    u32 attr;
+    SceEventFlag *ev;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    sceKernelIsIntrContext();
+    if (sceKernelGetUIDcontrolBlockWithType(evid, g_threadmanInfo.uidEventFlagType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019A;
+    }
+    cb = uid;
+    attr = cb->attr & 2;
+    if (!k1IsUserMode()) {
+        attr = 2;
+    }
+    if (attr == 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    ev = UID_CB_TO_DATA(cb, g_threadmanInfo.uidEventFlagType, SceEventFlag);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x41, ra, 2, evid, bits);
+    }
+    ev->currentPattern &= bits;
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelClearEventFlag);
 #endif
 
@@ -1220,7 +1345,44 @@ s32 sceKernelDeleteMbx(SceUID id) {
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteMbx);
+s32 sceKernelDeleteMbx(SceUID id) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    u32 attr;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(id, g_threadmanInfo.uidMbxType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019B;
+    }
+    cb = uid;
+    attr = cb->attr & 0x10;
+    if (!k1IsUserMode()) {
+        attr = 0x10;
+    }
+    if (attr == 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x50, ra, 1, id);
+    }
+    ok = sceKernelDeleteUID(id) == 0;
+    THREADMAN_ASSERT(ok, D_00014D88, D_00014D7C, "sceKernelDeleteMbx", 0x73);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -1332,7 +1494,44 @@ s32 sceKernelDeleteMsgPipe(SceUID id) {
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteMsgPipe);
+s32 sceKernelDeleteMsgPipe(SceUID id) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    u32 attr;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(id, g_threadmanInfo.uidMsgPipeType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019E;
+    }
+    cb = uid;
+    attr = cb->attr & 0x10;
+    if (!k1IsUserMode()) {
+        attr = 0x10;
+    }
+    if (attr == 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x58, ra, 1, id);
+    }
+    ok = sceKernelDeleteUID(id) == 0;
+    THREADMAN_ASSERT(ok, D_00014E24, D_00014E18, "sceKernelDeleteMsgPipe", 0xA1);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -1467,7 +1666,44 @@ s32 sceKernelDeleteVpl(SceUID id) {
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteVpl);
+s32 sceKernelDeleteVpl(SceUID id) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    u32 attr;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(id, g_threadmanInfo.uidVplType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019C;
+    }
+    cb = uid;
+    attr = cb->attr & 0x10;
+    if (!k1IsUserMode()) {
+        attr = 0x10;
+    }
+    if (attr == 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x62, ra, 1, id);
+    }
+    ok = sceKernelDeleteUID(id) == 0;
+    THREADMAN_ASSERT(ok, D_00014E80, D_00014E78, "sceKernelDeleteVpl", 0x8D);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -1774,7 +2010,50 @@ s32 sceKernelDeleteFpl(SceUID id) {
     setK1(oldK1);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
+s32 sceKernelDeleteFpl(SceUID id) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    u32 attr;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(id, g_threadmanInfo.uidFplType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019D;
+    }
+    cb = uid;
+    attr = cb->attr & 0x10;
+    if (!k1IsUserMode()) {
+        attr = 0x10;
+    }
+    if (attr == 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x6A, ra, 1, id);
+    }
+    ok = sceKernelDeleteUID(id) == 0;
+    THREADMAN_ASSERT(ok, D_00014EE4, D_00014EDC, "sceKernelDeleteFpl", 0xAE);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteFpl);
 #endif
 
