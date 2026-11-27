@@ -235,7 +235,7 @@ void func_00009290(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000092DC);
 
-#if FW_VERSION >= 150
+#if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/reboot_008F5C", UFatRename);
 #else
 s32 UFatRename(s32 arg0, s32 arg1, s32 arg2) {
@@ -476,7 +476,7 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D82C);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D964);
 
-#if FW_VERSION >= 150
+#if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D9E0);
 #else
 void func_0000D9E0(void *arg0, s32 arg1, u8 *arg2) {
@@ -600,7 +600,7 @@ s32 func_0000E098(void) {
     return 0;
 }
 
-#if FW_VERSION >= 150
+#if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E0B8);
 #else
 s32 func_0000E0B8(void) {

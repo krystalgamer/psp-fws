@@ -351,6 +351,7 @@ s32 func_00001CA4(s32 (*arg0)(void));
 s32 func_00001CB4(void);
 s32 func_00001CC0(s32 arg0);
 s32 func_00001CD0(u32 arg0, s32 arg1);
+s32 func_00001CE8(u32 arg0);
 s32 func_00001D14(void);
 s32 func_00001D2C(s32 arg0);
 s32 func_00001D58(void);

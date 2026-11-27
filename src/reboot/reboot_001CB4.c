@@ -1,3 +1,4 @@
+/* cflags[150]: -O2 -frename-registers */
 /* compiler[151]: 1.6.1 */
 /* compiler[150]: 1.6.1 */
 /* cflags[100]: -O2 */
@@ -27,8 +28,22 @@ s32 func_00001B94(u32 bit) {
     }
     return 0x80020001;
 }
-#else
+#endif
+
+#if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/reboot_001CB4", func_00001CE8);
+#endif
+
+#if FW_VERSION == 150
+s32 func_00001CE8(u32 arg0) {
+    s32 var_a0;
+
+    var_a0 = 0x80020001;
+    if (arg0 < 0x20U) {
+        var_a0 = ((u32) D_00017140 >> arg0) & 1;
+    }
+    return var_a0;
+}
 #endif
 
 s32 func_00001D14(void) {
