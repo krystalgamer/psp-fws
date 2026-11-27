@@ -159,17 +159,17 @@ INCLUDE_ASM("nonmatchings/interruptman", QueryIntrHandlerInfo);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", func_000015B4);
+INCLUDE_ASM("nonmatchings/interruptman", mymemset);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_000015E4);
+INCLUDE_ASM("nonmatchings/interruptman", IntrDisableLevels);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_0000165C);
+INCLUDE_ASM("nonmatchings/interruptman", IntrEnableLevels);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_000016FC);
+INCLUDE_ASM("nonmatchings/interruptman", IntrIsEnabled);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00001764);
+INCLUDE_ASM("nonmatchings/interruptman", IntrDisableAll);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00001818);
+INCLUDE_ASM("nonmatchings/interruptman", IntrUpdateMask);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetPrimarySyscallHandler);
 #endif
@@ -213,7 +213,7 @@ Interrupt **func_000002B8(s32 num) {
 
     ptrs = sceKernelAllocHeapMemory(g_intrInfo.heapId, num * 60);
     if (ptrs != NULL) {
-        func_000015F8(ptrs, 0, num * 60);
+        mymemset(ptrs, 0, num * 60);
         subs = (Interrupt *)&ptrs[num];
         for (i = 0; i < num; i++)
             ptrs[i] = &subs[i];
@@ -229,7 +229,7 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00000348);
 #if FW_VERSION == 100
 void func_00000348(void *ptr) {
     if (ptr != NULL)
-        sceKernelFreeHeapMemory(D_00003B0C, ptr);
+        sceKernelFreeHeapMemory(g_intrInfo.heapId, ptr);
 }
 
 s32 sceKernelRegisterIntrHandler(u32 intrNum, s32 arg1, void *func, void *arg, SceIntrHandler *handler) {
@@ -375,12 +375,12 @@ s32 sceKernelSetIntrLevel(u32 intrNum, s32 level) {
         sceKernelCpuResumeIntr(oldIntr);
         return 0x80020069;
     }
-    if (func_00001E9C(intrNum)) {
+    if (IntrIsEnabled(intrNum)) {
         if (intr->level < level)
-            func_00001628(intrNum);
+            IntrDisableLevels(intrNum);
         intr->level = level;
-        func_00001DF8(intrNum);
-        func_00001850();
+        IntrEnableLevels(intrNum);
+        IntrUpdateMask();
     } else {
         intr->level = level;
     }
@@ -440,10 +440,10 @@ s32 sceKernelSuspendIntr(u32 intrNum, s32 *state) {
             status = getCop0Status() & 0xFF00;
             *state = status & mask;
         } else
-            *state = func_00001E9C(intrNum);
+            *state = IntrIsEnabled(intrNum);
     }
     if ((s32)intrNum < 64)
-        func_00001F04(intrNum);
+        IntrDisableAll(intrNum);
     else {
         bits = mask & 0xFF00;
         setCop0Status(getCop0Status() & ~bits);
@@ -635,7 +635,7 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelQueryIntrHandlerInfo);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-void *func_000015F8(void *dst, u8 c, s32 n) {
+void *mymemset(void *dst, u8 c, s32 n) {
     u8 *p = dst;
 
     if (dst != NULL) {
@@ -645,27 +645,27 @@ void *func_000015F8(void *dst, u8 c, s32 n) {
     return dst;
 }
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00001628);
+INCLUDE_ASM("nonmatchings/interruptman", IntrDisableLevels);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", func_00001DF8);
+INCLUDE_ASM("nonmatchings/interruptman", IntrEnableLevels);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00001E9C);
+INCLUDE_ASM("nonmatchings/interruptman", IntrIsEnabled);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00001F04);
+INCLUDE_ASM("nonmatchings/interruptman", IntrDisableAll);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", func_000016A0);
+INCLUDE_ASM("nonmatchings/interruptman", IntrEnableLevels);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00001740);
+INCLUDE_ASM("nonmatchings/interruptman", IntrIsEnabled);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_0000179C);
+INCLUDE_ASM("nonmatchings/interruptman", IntrDisableAll);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", func_00001850);
+INCLUDE_ASM("nonmatchings/interruptman", IntrUpdateMask);
 #endif
 
 #if FW_VERSION == 100
