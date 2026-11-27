@@ -125,16 +125,8 @@ def groups(ver, mod):
     return out
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("module")
-    ap.add_argument("--ver", default="100")
-    ap.add_argument("--versions", help="comma list (default: every version sharing the source)")
-    ap.add_argument("--json", type=Path)
-    a = ap.parse_args()
-    vers = a.versions.split(",") if a.versions else [a.ver] + [v for v in sharing_versions(a.ver, a.module) if v != a.ver]
-    per = {v: groups(v, a.module) for v in vers}
-    # cluster by shape, then by evidence: shared function names, base call, vptr label
+def cluster(per, vers):
+    """Groups of all versions clustered: by shape, then by shared names, base call or vptr label."""
     clusters = []
     for v in vers:
         for g in per[v]:
@@ -154,6 +146,19 @@ def main():
                 best["by"][v] = g
             else:
                 clusters.append({"key": key, "by": {v: g}})
+    return clusters
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("module")
+    ap.add_argument("--ver", default="100")
+    ap.add_argument("--versions", help="comma list (default: every version sharing the source)")
+    ap.add_argument("--json", type=Path)
+    a = ap.parse_args()
+    vers = a.versions.split(",") if a.versions else [a.ver] + [v for v in sharing_versions(a.ver, a.module) if v != a.ver]
+    per = {v: groups(v, a.module) for v in vers}
+    clusters = cluster(per, vers)
     # a name used for different clusters in different versions
     owner = {}
     for ci, c in enumerate(clusters):
