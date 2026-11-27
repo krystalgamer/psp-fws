@@ -762,17 +762,21 @@ INCLUDE_RODATA("nonmatchings/usb", D_00009FE8);
 
 INCLUDE_ASM("nonmatchings/usb", func_0000574C);
 
-#if FW_VERSION == 100
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 void func_00005870(void) {
     if (sceKernelDeleteFpl(g_usbbdHw.fpl) < 0) {
         Kprintf(D_00009D20);
     }
     sceSysregUsbBusClockDisable();
+#if FW_VERSION == 100
     sceSysregUsbClkDisable(1);
+#else
+    sceSysregUsbClkDisable(9);
+#endif
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 282
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/usb", func_00005870);
 #endif
 
@@ -1062,13 +1066,15 @@ INCLUDE_ASM("nonmatchings/usb", func_000067B0);
 INCLUDE_ASM("nonmatchings/usb", func_00006C28);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 s32 func_000070E8(void) {
     sceSysregUsbAcquireIntr(1);
     g_usbbd.cableState = 0x20;
     func_00000688();
     if (g_usbbd.actState == 0x200 && g_usbbd.unkE4 == 0x10) {
+#if FW_VERSION == 100
         sceSysregUsbResetEnable();
+#endif
         sceSysregUsbResetDisable();
         if (sceSysregUsbQueryIntr() & 4) {
             sceSysregUsbAcquireIntr(4);
