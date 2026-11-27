@@ -859,7 +859,22 @@ void _scePowerHoldSwCallback(s32 enable, void *argp) {
 }
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/power", func_000016D8);
+s32 func_000016D8(u16 val) {
+    u8 param[8];
+    s32 ret;
+
+    ret = sceSysconReceiveSetParam(param);
+    if (ret < 0) {
+        return ret;
+    }
+    param[0] = val;
+    param[1] = val >> 8;
+    ret = sceSysconSendSetParam(param);
+    if (ret >= 0) {
+        return 0;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 310
@@ -887,7 +902,34 @@ s32 scePowerTick(s32 slots) {
 INCLUDE_ASM("nonmatchings/power", scePowerTick);
 #endif
 
+#if FW_VERSION < 282
+s32 scePowerSetIdleCallback(u32 slot, u32 attr, u32 dueTime, s32 (*callback)(s32, s32, void *), void *arg) {
+    s32 intr;
+    u32 now;
+
+    if (slot >= 8) {
+        return 0x80000102;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (callback != NULL && g_PowerIdle.idleTimerCb[slot].callback != NULL) {
+        sceKernelCpuResumeIntr(intr);
+        return 0x80000020;
+    }
+    g_PowerIdle.idleTimerCb[slot].attr = attr;
+    now = sceKernelGetSystemTimeLow();
+    g_PowerIdle.idleTimerCb[slot].isDueTimeReached = -1;
+    g_PowerIdle.idleTimerCb[slot].baseTime = now;
+    g_PowerIdle.idleTimerCb[slot].dueTime = dueTime;
+    g_PowerIdle.idleTimerCb[slot].callback = callback;
+    g_PowerIdle.idleTimerCb[slot].gp = (u32)&GetGp;
+    g_PowerIdle.idleTimerCb[slot].callbackArg = arg;
+    g_PowerIdle.idleTimerCb[slot].isResetted = 0;
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/power", scePowerSetIdleCallback);
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", _scePowerVblankInterrupt);
