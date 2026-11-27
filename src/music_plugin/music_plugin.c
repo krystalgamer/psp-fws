@@ -17,7 +17,13 @@ s32 module_stop(void) {
     return 0;
 }
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/music_plugin", func_0000015C);
+#else
+void func_0000015C(s32 arg0) {
+    _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_00002238);
+}
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/music_plugin", D_0000253C);

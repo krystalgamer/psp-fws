@@ -191,11 +191,29 @@ INCLUDE_ASM("nonmatchings/music_plugin_00024250", func_00024DFC);
 INCLUDE_RODATA("nonmatchings/music_plugin_00024250", D_0005D6C8);
 
 INCLUDE_RODATA("nonmatchings/music_plugin_00024250", D_0005D728);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/music_plugin_00024250", func_00024EF4);
+#endif
 
+#if FW_VERSION == 100
+M2C_UNK *func_00024EF4(void) {
+    return "ms0:";
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/music_plugin_00024250", func_00024F00);
+#endif
 
+#if FW_VERSION == 100
+M2C_UNK *func_00024F00(void) {
+    return "/HIFI";
+}
+#endif
+
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/music_plugin_00024250", func_00024F0C);
 
 INCLUDE_ASM("nonmatchings/music_plugin_00024250", func_00024F5C);

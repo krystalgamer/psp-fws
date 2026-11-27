@@ -1981,10 +1981,30 @@ INCLUDE_RODATA("nonmatchings/music_plugin_00041D54", D_00060588);
 INCLUDE_ASM("nonmatchings/music_plugin_00041D54", func_00053A38);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/music_plugin_00041D54", func_0004AD0C);
+#endif
 
+#if FW_VERSION == 100
+s32 func_0004AD0C(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (arg0 != 0) {
+        var_v1 = sce_paf_private_memcmp(arg0, (s32) "ID3", 3) == 0;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/music_plugin_00041D54", func_0004AD44);
+#endif
+
+#if FW_VERSION == 100
+s32 func_0004AD44(s32 arg0) {
+    return sce_paf_private_memcmp(arg0, (s32) "3DI", 3) == 0;
+}
 #endif
 
 #if FW_VERSION == 150

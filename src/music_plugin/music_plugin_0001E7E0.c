@@ -606,9 +606,19 @@ INCLUDE_ASM("nonmatchings/music_plugin_0001E7E0", func_00023778);
 INCLUDE_ASM("nonmatchings/music_plugin_0001E7E0", func_00023804);
 
 INCLUDE_ASM("nonmatchings/music_plugin_0001E7E0", func_0002384C);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/music_plugin_0001E7E0", func_00023864);
+#endif
 
+#if FW_VERSION == 100
+M2C_UNK *func_00023864(void) {
+    return "msstor0:";
+}
+#endif
+
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/music_plugin_0001E7E0", func_00023870);
 #endif
 

@@ -1712,8 +1712,16 @@ INCLUDE_RODATA("nonmatchings/music_plugin_000363AC", D_0005F880);
 INCLUDE_ASM("nonmatchings/music_plugin_000363AC", func_00041B1C);
 
 INCLUDE_ASM("nonmatchings/music_plugin_000363AC", func_00041B78);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/music_plugin_000363AC", func_00041BDC);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00041BDC(s32 arg0) {
+    return sce_paf_private_memcmp(arg0, (s32) "VBRI", 4) == 0;
+}
 #endif
 
 #if FW_VERSION == 150

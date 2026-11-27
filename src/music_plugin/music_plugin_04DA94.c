@@ -208,8 +208,14 @@ void func_0004EF00(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/music_plugin_04DA94", func_0004EF08);
+#endif
+
+#if FW_VERSION == 100
+s32 func_0004EF08(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x30);
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
