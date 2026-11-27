@@ -294,3 +294,4 @@ D_0000D60C_v152 = 0x0000D60C; // rom:0xD68C
 D_0000E028_v152 = 0x0000E028; // rom:0xE0A8
 D_0000E410_v152 = 0x0000E410; // rom:0xE490
 // shared names (tools/add_version.py) end
+lflash_read_only_mode = 0x000094D0; // type:func

@@ -158,3 +158,4 @@ df_init = 0x00009B40; // type:func
 df_close = 0x000089D0; // type:func
 df_open = 0x00008694; // type:func
 df_open_locked = 0x000095A4; // type:func
+lflash_read_only_mode = 0x000088D0; // type:func

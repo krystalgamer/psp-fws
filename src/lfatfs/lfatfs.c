@@ -2925,6 +2925,10 @@ s32 func_0000881C(s32 arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_00008848);
+
+INCLUDE_RODATA("nonmatchings/lfatfs", D_0000DCE0);
+
+INCLUDE_ASM("nonmatchings/lfatfs", lflash_read_only_mode);
 #endif
 
 #if FW_VERSION == 152
@@ -3046,7 +3050,7 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00009050);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000DCB4);
 #endif
 
-#if FW_VERSION < 201 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION >= 282 && FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000DCE0);
 
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000DCF8);
