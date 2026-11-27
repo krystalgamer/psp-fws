@@ -1,5 +1,8 @@
 {
  "funcs": {
+  "func_00000238": "s32 func_00000238(s32);",
+  "sceMeCore_driver_D1EA3DFD": "s32 sceMeCore_driver_D1EA3DFD(s32, void *, u32, u32);",
+  "sceMeWrapper_driver_D1EA3DFD": "s32 sceMeWrapper_driver_D1EA3DFD(s32, void *, u32, u32);",
   "scePeqEntry": "s32 scePeqEntry(void);"
  },
  "vars": {}
