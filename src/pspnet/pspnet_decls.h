@@ -289,6 +289,11 @@ struct SceNetIfEvent {
     s32 unk4;
 };
 
+struct ifconf {
+    s32 ifc_len;                /* 0x0 */
+    struct ifreq *ifc_req;      /* 0x4 */
+};
+
 
 /* NetBSD 1.5 bpfdesc.h, SCE layout (0x40 bytes) */
 struct bpf_if;
@@ -458,6 +463,8 @@ extern void (*D_0000AF64)(s32);
 extern s32 D_0000AF68;
 extern s32 D_0000AF6C;
 extern s32 D_0000B06C;
+extern void (*D_0000B0A4)();
+extern s32 D_0000B0AC;
 extern s32 D_0000B0B0;
 extern struct ifnet **D_0000B0B8;
 extern s32 D_0000B0CC;
@@ -495,6 +502,8 @@ extern s32 D_0000B3DC;
 extern s32 D_0000B3E0;
 extern u32 D_0000B3E4[521];
 extern s32 D_0000B91C;
+extern struct ifaddr *D_0000BB24[8];
+extern struct ifnet *D_0000BB44[8];
 extern s32 D_0000BC08;
 extern M2C_UNK D_0000BC0C;
 extern struct bpf_if *D_0000BC10;
@@ -627,6 +636,8 @@ s32 if_nullreset(void);
 void if_nullstart(void);
 void if_nullwatchdog(void);
 void if_slowtimo(void *arg);
+s32 ifconf(u32 cmd, void *data);
+void ifinit(void);
 s32 m_xhalf(struct mbuf *m, s32 k, s32 *err);
 s32 m_xword(struct mbuf *m, s32 k, s32 *err);
 s32 module_start(void);

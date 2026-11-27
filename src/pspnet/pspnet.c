@@ -2314,7 +2314,49 @@ void func_00005744(struct Unk_func_00005744_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifioctl);
 
+#if FW_VERSION < 201
+s32 ifconf(u32 cmd, void *data) {
+    struct ifconf *ifc = (struct ifconf *)data;
+    struct ifnet *ifp;
+    struct ifaddr *ifa;
+    struct ifreq ifr, *ifrp;
+    s32 space = ifc->ifc_len;
+
+    ifrp = ifc->ifc_req;
+    for (ifp = D_0000BE54.tqh_first; ifp != 0; ifp = ifp->if_list.tqe_next) {
+        sceNetBcopy(ifp->if_xname, ifr.ifr_name, IFNAMSIZ);
+        if ((ifa = ifp->if_addrlist.tqh_first) == 0) {
+            __builtin_memset(&ifr.ifr_addr, 0, sizeof(ifr.ifr_addr));
+            if (space >= (s32)sizeof(ifr))
+                sceNetBcopy(&ifr, ifrp, sizeof(ifr));
+            space -= sizeof(ifr), ifrp++;
+        } else
+            for (; ifa != 0; ifa = ifa->ifa_list.tqe_next) {
+                struct sockaddr *sa = ifa->ifa_addr;
+
+                if (sa->sa_len <= sizeof(*sa)) {
+                    ifr.ifr_addr = *sa;
+                    if (space >= (s32)sizeof(ifr)) {
+                        sceNetBcopy(&ifr, ifrp, sizeof(ifr));
+                        ifrp++;
+                    }
+                } else {
+                    space -= sa->sa_len - sizeof(*sa);
+                    if (space >= (s32)sizeof(ifr)) {
+                        sceNetBcopy(&ifr, ifrp, sizeof(ifr.ifr_name));
+                        sceNetBcopy(sa, &ifrp->ifr_addr, sa->sa_len);
+                        ifrp = (struct ifreq *)(sa->sa_len + (char *)&ifrp->ifr_addr);
+                    }
+                }
+                space -= sizeof(ifr);
+            }
+    }
+    ifc->ifc_len -= space;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", ifconf);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00005AD4);
