@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, sysmem]
+      - [0x80, c, sysmem]
       - { start: 0xAC20, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0xAC24, type: rodata, name: lib_ent, linker_section: .lib.ent }
       - { start: 0xAC94, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
@@ -60,7 +60,7 @@ segments:
       - { start: 0xAC9C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0xACA0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0xACD4, type: rodata, name: resident, linker_section: .rodata.sceResident }
-      - [0xB0A0, rodata, sysmem]
+      - [0xB0A0, .rodata, sysmem]
   - name: sysmem_seg1
     type: code
     start: 0xC760
