@@ -644,7 +644,8 @@
   "Unk_func_00018F94_0": "struct Unk_func_00018F94_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n};",
   "Unk_func_00018FA4_0": "struct Unk_func_00018FA4_0 {\n    u8 pad0[0x8];\n    s32 unk8;\n};",
   "Unk_func_0001906C_0": "struct Unk_func_0001906C_0 {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n};",
-  "Unk_vt_func_00010664_arg1": "struct Unk_vt_func_00010664_arg1 {\n    u8 pad0[0xAC];\n    M2C_UNK (*unkAC)(void **, s32 *, s32);\n};"
+  "Unk_vt_func_00010664_arg1": "struct Unk_vt_func_00010664_arg1 {\n    u8 pad0[0xAC];\n    M2C_UNK (*unkAC)(void **, s32 *, s32);\n};",
+  "hand_func_00020510": "typedef void (*func_ptr)(void);"
  },
  "vars": {
   "D_000210EC": "extern s32 D_000210EC;",
@@ -657,6 +658,7 @@
   "D_000212D8": "extern M2C_UNK D_000212D8;",
   "D_000213E4": "extern M2C_UNK D_000213E4;",
   "D_000213EC": "extern M2C_UNK D_000213EC;",
+  "D_00021734": "extern func_ptr D_00021734[];",
   "D_0002197C": "extern M2C_UNK D_0002197C;",
   "D_00021CA4": "extern s8 D_00021CA4;",
   "D_00021CA8": "extern s32 D_00021CA8;",

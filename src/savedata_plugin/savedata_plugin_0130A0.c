@@ -2252,27 +2252,3 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000200C8);
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000201CC);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_0002033C);
-
-INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00020510);
-
-#if FW_VERSION >= 260 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00021158);
-#endif
-
-#if FW_VERSION < 201 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00020568);
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00020B3C);
-#endif
-
-INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_00022BD8);
-
-#if FW_VERSION >= 260 && FW_VERSION < 282
-INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_00023828);
-#endif
-
-#if FW_VERSION < 201 || FW_VERSION >= 282
-INCLUDE_RODATA("nonmatchings/savedata_plugin_0130A0", D_00022BE0);
-#endif
