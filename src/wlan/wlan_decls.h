@@ -42,6 +42,18 @@ typedef struct {
     SceWlanQEnt *tail;          /* 0x04 */
 } SceWlanQueue;
 
+typedef struct {
+    u8 addr[6];
+} SceWlanEtherAddr;
+
+/* sceWlanDrv_lib_81579D36 parameter block */
+typedef struct {
+    u32 unk0[4];                /* 0x00 */
+    u32 unk10;                  /* 0x10 */
+    u8 unk14[4];                /* 0x14 */
+    u8 unk18[4];                /* 0x18 */
+} SceWlanGPParam;
+
 typedef struct SceWlanSoftc SceWlanSoftc;
 typedef struct SceWlanMac SceWlanMac;
 
@@ -81,9 +93,14 @@ struct SceWlanMac {
     u8 unk_v150[0x3C];
 #endif
     SceWlanMlmeSync *sync;      /* 0x07C */
-    u8 unk080[0xA4 - 0x80];
+    u8 unk080[0x98 - 0x80];
+    s32 (*gpSend)(SceWlanMac *, s32, void *, u32);              /* 0x098 */
+    s32 (*gpRecv)(SceWlanMac *, s32, void *, u32, s32 *);       /* 0x09C */
+    u8 unk0A0[4];
     s32 (*prevEstablish)(SceWlanMac *, void *);  /* 0x0A4 */
-    u8 unk0A8[0xBC - 0xA8];
+    s32 dmaOp;                  /* 0x0A8 */
+    void *dmaBuf;               /* 0x0AC */
+    u8 unk0B0[0xBC - 0xB0];
     SceUID mbx;                 /* 0x0BC MLME mailbox */
     SceWlanSoftc *sc;           /* 0x0C0 */
     u8 unk0C4[0xCE - 0xC4];
@@ -96,16 +113,18 @@ struct SceWlanMac {
     u16 unkE8[3];               /* 0x0E8 */
     u8 unk0EE[2];
     s32 unkF0;                  /* 0x0F0 */
-    u8 unk0F4[0x104 - 0xF4];
+    u32 unkF4[4];               /* 0x0F4 */
     s32 unk104;                 /* 0x104 */
     u8 unk108[0x40];            /* 0x108 */
     u16 unk148;                 /* 0x148 */
     u16 unk14A;                 /* 0x14A */
     u32 unk14C;                 /* 0x14C */
     u32 unk150;                 /* 0x150 */
-    u32 unk154;
+    u32 unk154;                 /* 0x154 */
     u32 unk158;                 /* 0x158 */
     u32 unk15C;                 /* 0x15C */
+    u8 unk160[4];               /* 0x160 */
+    u8 unk164[4];               /* 0x164 */
 };
 #if FW_VERSION < 150
 typedef char chk_SceWlanMac[((u32)&((SceWlanMac *)0)->unk15C == 0x15C) ? 1 : -1];
@@ -113,14 +132,28 @@ typedef char chk_SceWlanMac[((u32)&((SceWlanMac *)0)->unk15C == 0x15C) ? 1 : -1]
 
 /* driver state (1.00-1.52), pointed to by D_000191B0; offsets are 1.00's */
 struct SceWlanSoftc {
-    u32 flags;                  /* 0x000 0x800: game mode, 0x200: ..., 0x2000: ... */
-    u8 unk004[0xA0 - 0x4];
+    u32 flags;                  /* 0x000 0x800: game mode, 0x200: MAC address valid, 0x2000: ... */
+    u8 unk004[0x90 - 0x4];
+    u32 unk90;                  /* 0x090 */
+    u32 unk94;                  /* 0x094 */
+    u32 unk98;                  /* 0x098 */
+    u32 unk9C;                  /* 0x09C */
     u16 unkA0;                  /* 0x0A0 from idstorage key 0x45 */
     u8 unkA2;                   /* 0x0A2 */
     u8 unkA3;
     u32 unkA4;
-    s16 etherAddr[3];           /* 0x0A8 */
-    u8 unk0AE[0x228 - 0xAE];
+    SceWlanEtherAddr etherAddr; /* 0x0A8 */
+    u8 unk0AE[0x178 - 0xAE];
+    u32 unk178;                 /* 0x178 */
+    u32 unk17C;                 /* 0x17C */
+    u16 unk180;                 /* 0x180 */
+    u16 unk182;                 /* 0x182 */
+    u8 unk184;                  /* 0x184 */
+    u8 unk185;
+    u16 unk186;                 /* 0x186 */
+    u16 unk188;                 /* 0x188 */
+    u16 unk18A;                 /* 0x18A */
+    u8 unk18C[0x228 - 0x18C];
     SceUID poolSema;            /* 0x228 */
     s32 poolStride;             /* 0x22C */
     s32 poolCount;              /* 0x230 */
@@ -446,6 +479,7 @@ extern M2C_UNK func_00003F08;
 
 s32 func_000010E0(SceSize args, void *argp);
 s32 func_00001118(SceSize args, void *argp);
+void func_00001B5C(s32 sw, void *arg);
 void func_00002188(void *arg0);
 void func_000021AC(void *arg0);
 void func_0000227C(void *arg0);
@@ -503,6 +537,7 @@ s32 func_00009160(struct Unk_func_00009160_0 *arg0, s32 arg1, u8 *arg2);
 s32 func_000091D4(s32, s32);
 s32 func_00009500(s32, s32);
 s32 func_00009810(void);
+s32 func_00009FA8(SceWlanMac *mac, s32 cmd, u16 len, void *buf);
 s32 func_0000A4C8(s32 arg0, void *arg1, s32 arg2);
 void func_0000AB18(struct Unk_func_00008470_1 *arg0);
 s32 func_0000ABB4(void);
