@@ -186,7 +186,24 @@ out:
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_000008E4);
 
-INCLUDE_ASM("nonmatchings/registry", func_00000B6C);
+SceRegHive *func_00000B6C(s32 index) {
+    SceRegHive *h;
+    s32 i;
+
+    if (g_hiveHead == NULL)
+        goto fail;
+    h = g_hiveHead;
+    for (i = 0; i < g_hiveCount; i++) {
+        if (index == i)
+            break;
+        h = h->next;
+    }
+    if (i == g_hiveCount)
+        goto fail;
+    return h;
+fail:
+    return NULL;
+}
 
 INCLUDE_ASM("nonmatchings/registry", func_00000B88);
 #else
@@ -200,12 +217,36 @@ INCLUDE_ASM("nonmatchings/registry", func_00000BC8);
 INCLUDE_ASM("nonmatchings/registry", func_00000C50);
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/registry", func_00000CA0);
+s32 func_00000CA0(u32 *regType, SceRegHive **hive, s32 *index) {
+    SceRegHive *h;
+    s32 i;
+
+    if (g_hiveHead == NULL) {
+        *hive = NULL;
+        return 0x80082713;
+    }
+    h = g_hiveHead;
+    for (i = 0; i < g_hiveCount; i++) {
+        if (h->regType == *regType) {
+            *hive = h;
+            *index = i;
+            break;
+        }
+        h = h->next;
+    }
+    return 0;
+}
 #else
 INCLUDE_ASM("nonmatchings/registry", func_00000D10);
 #endif
 
+#if FW_VERSION < 271
+void func_00000D7C(SceRegHive *h) {
+    h->openCount++;
+}
+#else
 INCLUDE_ASM("nonmatchings/registry", func_00000D7C);
+#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/registry", func_00000DA8);
@@ -249,7 +290,19 @@ INCLUDE_ASM("nonmatchings/registry", func_00001694);
 INCLUDE_ASM("nonmatchings/registry", func_00001714);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00001828);
+s32 func_00001828(const char *name, u32 *size) {
+    u64 sz;
+    s32 ret;
+
+    ret = 0x80084E29;
+    if (func_000068EC(name, &sz) == 0) {
+        ret = 0;
+        *size = sz;
+    } else {
+        *size = 0;
+    }
+    return ret;
+}
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/registry", func_00001730);
@@ -274,13 +327,7 @@ s32 func_00001730(s32 arg0, s32 *arg1) {
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00001770);
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/registry", func_00001908);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00001908(s32 type, const char **ireg, const char **dreg) {
     if (type == 1) {
         *ireg = "/registry/system.ireg";
@@ -292,9 +339,26 @@ void func_00001908(s32 type, const char **ireg, const char **dreg) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+void func_00001938(SceRegIregHeader *hdr) {
+    SceRegIndexEntry *e;
+    u32 i;
+    u32 n;
+
+    e = (SceRegIndexEntry *)((u8 *)hdr + hdr->entriesOffset);
+    n = hdr->entriesSize / sizeof(SceRegIndexEntry);
+    for (i = n; i != 0; i--) {
+        e->opened = NULL;
+        e++;
+    }
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00001938);
-#else
+#endif
+
+#if FW_VERSION >= 282
 s32 func_00001874(s32 arg0, s32 *arg1) {
     s32 temp_v0;
     s32 var_v1;
@@ -335,7 +399,11 @@ INCLUDE_ASM("nonmatchings/registry", func_00001A74);
 
 INCLUDE_ASM("nonmatchings/registry", func_00001AC4);
 
-INCLUDE_ASM("nonmatchings/registry", func_00001B7C);
+void func_00001B7C(SceRegBlockRuns *runs, u16 start, u16 num) {
+    runs->runs[runs->count].start = start;
+    runs->runs[runs->count].num = num;
+    runs->count++;
+}
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00001EC4);
@@ -499,7 +567,14 @@ INCLUDE_ASM("nonmatchings/registry", func_0000396C);
 INCLUDE_ASM("nonmatchings/registry", func_000039A4);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_000039E0);
+void func_000039E0(SceRegIndexEntry *e) {
+    e->unk0 = 0;
+    e->unk2 = 0;
+    e->unk6 = -1;
+    memset(e->name, 0, sizeof(e->name));
+    memset(e->blocks, 0xFFFF, sizeof(e->blocks));
+    e->opened = NULL;
+}
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00003318);
@@ -529,7 +604,23 @@ INCLUDE_ASM("nonmatchings/registry", func_00003ACC);
 INCLUDE_ASM("nonmatchings/registry", func_00003C68);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00003D1C);
+void func_00003D1C(s32 hive, SceRegIndexEntry *cat) {
+    SceRegCatNode *n;
+
+    if (func_00003E60(cat) != NULL)
+        return;
+    n = func_00006A48(sizeof(SceRegCatNode));
+    n->hive = hive;
+    n->cat = cat;
+    n->next = NULL;
+    n->unk4 = 0;
+    if (g_catHead == NULL)
+        g_catHead = n;
+    else
+        g_catTail->next = n;
+    g_catTail = n;
+    g_catCount++;
+}
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_00003604);
@@ -543,9 +634,29 @@ INCLUDE_ASM("nonmatchings/registry", func_00003910);
 INCLUDE_ASM("nonmatchings/registry", func_00003DAC);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00003E60);
+SceRegIndexEntry *func_00003E60(SceRegIndexEntry *cat) {
+    SceRegCatNode *n = g_catHead;
+    s32 i;
 
-INCLUDE_ASM("nonmatchings/registry", func_00003EA4);
+    for (i = 0; i < g_catCount; i++) {
+        if (n->cat == cat)
+            return cat;
+        n = n->next;
+    }
+    return NULL;
+}
+
+SceRegCatNode *func_00003EA4(SceRegIndexEntry *cat) {
+    SceRegCatNode *n = g_catHead;
+    s32 i;
+
+    for (i = 0; i < g_catCount; i++) {
+        if (n->cat == cat)
+            return n;
+        n = n->next;
+    }
+    return NULL;
+}
 
 #if FW_VERSION < 282
 s32 func_00003A3C(s32 index) {
@@ -804,9 +915,43 @@ INCLUDE_ASM("nonmatchings/registry", func_000058D8);
 INCLUDE_ASM("nonmatchings/registry", func_00005FF0);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00006524);
+#if FW_VERSION == 100
+s32 func_00006524(const char *name) {
+    char *path;
+    s32 fd;
 
+    path = func_00006A48(0x108);
+    if (path == NULL)
+        return 0;
+    sprintf(path, D_000066DC, D_00006F8C, name);
+    fd = sceIoOpen(path, 0x203, 0xFFF);
+    func_000062E0(path);
+    if (fd < 0)
+        goto fail;
+    return fd;
+fail:
+    return -1;
+}
+#else
+INCLUDE_ASM("nonmatchings/registry", func_00006524);
+#endif
+
+#if FW_VERSION < 201
+s32 func_000065E4(const char *name) {
+    char *path;
+    s32 fd;
+
+    path = func_00006A48(0x108);
+    if (path == NULL)
+        return 0x80082712;
+    sprintf(path, D_000066DC, D_00006F8C, name);
+    fd = sceIoOpen(path, 3, 0);
+    func_000062E0(path);
+    return fd;
+}
+#else
 INCLUDE_ASM("nonmatchings/registry", func_000065E4);
+#endif
 
 #if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/registry", func_00006EF0);
@@ -874,7 +1019,13 @@ s32 func_00006828(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
 }
 #endif
 
+#if FW_VERSION < 282
+s32 func_00006888(s32 fd, s32 offset, s32 whence) {
+    return ((s32)sceIoLseek(fd, offset, func_000061B4(whence)) < 0) ? -9 : 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/registry", func_00006888);
+#endif
 
 INCLUDE_ASM("nonmatchings/registry", func_000068EC);
 
@@ -904,22 +1055,32 @@ INCLUDE_RODATA("nonmatchings/registry", D_00006F8C);
 INCLUDE_RODATA("nonmatchings/registry", D_00006F94);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_000069A0);
-
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/registry", func_00006228);
+s32 func_000069A0(s32 arg0, s32 size) {
+    s32 ret;
+
+    g_vplId = -1;
+    g_vplMaxUsed = -1;
+    g_vplId = sceKernelCreateVpl("reg", 1, 0, size, NULL);
+    ret = g_vplId;
+    if (g_vplId >= 0) {
+        g_vplMaxUsed = 0;
+        ret = 0;
+    }
+    return ret;
+}
+#else
+INCLUDE_ASM("nonmatchings/registry", func_000069A0);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION < 282
 void func_00006228(void) {
     if (g_vplId >= 0) {
         sceKernelDeleteVpl(g_vplId);
         g_vplId = -1;
     }
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00006A0C(void) {
     if (g_vplId >= 0) {
         sceKernelDeleteVpl(g_vplId);
@@ -928,7 +1089,21 @@ void func_00006A0C(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00006A48);
+void *func_00006A48(s32 size) {
+    void *ptr = NULL;
+    SceRegVplInfo info;
+    s32 used;
+
+    if (sceKernelTryAllocateVpl(g_vplId, size, &ptr) < 0)
+        return NULL;
+    info.size = sizeof(info);
+    if (sceKernelReferVplStatus(g_vplId, &info) == 0) {
+        used = info.poolSize - info.freeSize;
+        if (g_vplMaxUsed < used)
+            g_vplMaxUsed = used;
+    }
+    return ptr;
+}
 
 #if FW_VERSION < 282
 void func_000062E0(void *ptr) {

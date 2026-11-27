@@ -54,21 +54,36 @@ typedef struct {
     u32 st_private[6];
 } SceRegIoStat;
 
-/* system.ireg file header (unaligned) */
+/* system.ireg file header, 0x28 bytes (unaligned) */
 typedef struct __attribute__((packed)) SceRegIregHeader {
-    u8 unk0[0x10];
-    u32 unk10;          /* 0x10 */
-    u8 unk14[0xC];
-    u32 entriesSize;    /* 0x20: bytes of index entries */
-    u32 entriesOffset;  /* 0x24: offset of the first index entry */
+    u8 unk0;            /* 0x00 */
+    u8 magic[4];        /* 0x01: "IRFP" */
+    u8 unk5[3];         /* 0x05 */
+    u32 dregSize;       /* 0x08: RegParam.unk2 << 17 */
+    u32 blockSize;      /* 0x0C: RegParam.unk3 << 9 */
+    u32 blockCount;     /* 0x10: dregSize / blockSize */
+    u32 unk14;          /* 0x14: blockCount */
+    u32 bitmapSize;     /* 0x18: blockCount / 8, the block bitmap follows the header */
+    u32 headerSize;     /* 0x1C: 0x28 */
+    u32 entriesSize;    /* 0x20: blockCount * sizeof(SceRegIndexEntry) */
+    u32 entriesOffset;  /* 0x24: headerSize + bitmapSize */
 } SceRegIregHeader;
 
-/* runtime state of an open category (pointed to by its index entry) */
-typedef struct SceRegOpenCat {
+/* runtime state of an open category (pointed to by its index entry), unaligned */
+typedef struct __attribute__((packed)) SceRegOpenCat {
     u16 refCount;   /* 0x00 */
     u16 unk2;       /* 0x02 */
     void *buf;      /* 0x04 */
 } SceRegOpenCat;
+
+/* sceRegOpenRegistry parameter (pspsdk RegParam) */
+typedef struct SceRegParam {
+    u32 regType;        /* 0x000 */
+    char name[256];     /* 0x004 */
+    u32 nameLen;        /* 0x104 */
+    u32 unk2;           /* 0x108: dreg size in 128 KiB units */
+    u32 unk3;           /* 0x10C: block size in 512-byte units */
+} SceRegParam;
 
 typedef struct {
     s32 size;
