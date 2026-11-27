@@ -1,4 +1,4 @@
-/* cflags[100]: -Os */
+/* cflags[100]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "interruptman_decls.h"
@@ -124,13 +124,13 @@ INCLUDE_ASM("nonmatchings/interruptman", QueryInterruptManCB);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 *QueryInterruptManCB(void) {
+void *QueryInterruptManCB(void) {
     return &D_00003910;
 }
 #endif
 
 #if FW_VERSION == 100
-s32 *QueryInterruptManCB(void) {
+void *QueryInterruptManCB(void) {
     return &D_00003950;
 }
 
@@ -159,10 +159,9 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00000348);
 #endif
 
 #if FW_VERSION == 100
-void func_00000348(s32 arg0) {
-    if (arg0 != 0) {
-        sceKernelFreeHeapMemory(D_00003B0C, arg0);
-    }
+void func_00000348(void *ptr) {
+    if (ptr != NULL)
+        sceKernelFreeHeapMemory(D_00003B0C, ptr);
 }
 #endif
 
@@ -172,7 +171,33 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterIntrHandler);
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetUserModeIntrHanlerAcceptable);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+s32 sceKernelReleaseIntrHandler(u32 intrNum) {
+    s32 ret = 0;
+    s32 oldIntr;
+    Interrupt *intr;
+
+    if (sceKernelIsIntrContext() != 0)
+        return 0x80020064;
+    if (intrNum >= 67)
+        return 0x80020065;
+    oldIntr = sceKernelCpuSuspendIntr();
+    intr = &D_00003950.intr[intrNum];
+    if (intr->handler == 0) {
+        ret = 0x80020068;
+    } else {
+        sceKernelSuspendIntr(intrNum, 0);
+        func_00000348(intr->subIntrs);
+        intr->subIntrs = NULL;
+        intr->cb = NULL;
+        intr->handler = 0;
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseIntrHandler);
 #endif
 
@@ -355,7 +380,7 @@ INCLUDE_ASM("nonmatchings/interruptman", module_reboot_before);
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelCpuEnableIntr);
 
-M2C_UNK *QueryInterruptManCB(void) {
+void *QueryInterruptManCB(void) {
     return &D_00003E00;
 }
 #endif
@@ -489,33 +514,15 @@ INCLUDE_ASM("nonmatchings/interruptman", func_000027C0);
 
 INCLUDE_ASM("nonmatchings/interruptman", ReturnToThread);
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsIntrContext);
-#else
-s32 sceKernelIsIntrContext(void) {
-    return D_00003F6C;
-}
-#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_7AD28215);
 #endif
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/interruptman", InterruptManagerForKernel_53991063);
-#else
-s32 InterruptManagerForKernel_53991063(void) {
-    return D_00003F8C;
-}
-#endif
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelGetInterruptExitCount);
-#else
-s32 sceKernelGetInterruptExitCount(void) {
-    return D_00003F90;
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/interruptman", SaveThreadContext);
 
