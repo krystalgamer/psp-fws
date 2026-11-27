@@ -298,37 +298,16 @@ M2C_UNK sceKernelPowerTick(M2C_UNK);
 s32 sceKernelPowerUnlock(s32);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
-M2C_UNK scePaf_08350B98(s32, M2C_UNK, void (*)(s32, struct Unk_func_00002FE4_1 *), M2C_UNK);
-M2C_UNK scePaf_0CFD27E9(...);
-M2C_UNK scePaf_3AC3E06A(...);
-M2C_UNK scePaf_3EDD45EF(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK *);
-M2C_UNK scePaf_4729E549(...);
-M2C_UNK scePaf_6261C0A5(s32);
-M2C_UNK scePaf_6A82A8C6(s32, M2C_UNK);
-void **scePaf_79A4A59D(s32, const char *, M2C_UNK);
-s32 scePaf_88784487(const char *);
-M2C_UNK scePaf_8E7F9126(s32);
-void *scePaf_DCE3D225(s32, M2C_UNK);
 M2C_UNK scePowerCancelRequest(...);
 M2C_UNK sceUpdateDownloadAbort(...);
 M2C_UNK sceUpdateDownloadEnd(...);
-M2C_UNK sceVshCommonGui_11C48509(void *, s32);
-M2C_UNK sceVshCommonGui_2EBB5C2B(void *, s32);
-s32 sceVshCommonGui_30FA68C3(...);
-s32 sceVshCommonGui_6BC16C05(...);
-M2C_UNK sceVshCommonGui_6F4C9FDB(...);
-M2C_UNK sceVshCommonGui_891DD627(M2C_UNK);
-M2C_UNK sceVshCommonGui_8F414E35(s32);
 M2C_UNK sceVshCommonUtil_0587F20C(M2C_UNK *, M2C_UNK, M2C_UNK);
-M2C_UNK sceVshCommonUtil_21EF453A(M2C_UNK *, s32);
 M2C_UNK sceVshCommonUtil_8584376D(M2C_UNK *, s32);
 M2C_UNK sce_paf_private_free(...);
 M2C_UNK sce_paf_private_malloc(...);
 M2C_UNK sce_paf_private_printf(const char *);
-M2C_UNK vsh_0E5502FC(s32);
 M2C_UNK vsh_388428D3(s32);
 M2C_UNK vsh_475ABD41(s32);
-M2C_UNK vsh_8C1E8A38(s32);
 
 #ifdef __cplusplus
 }

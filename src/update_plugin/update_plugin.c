@@ -245,7 +245,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_0000043C);
 #if FW_VERSION >= 350
 void func_00000210(void) {
     if ((D_00008448 != 0) && (D_00008449 != 0)) {
-        vsh_0E5502FC(D_0000844C);
+        vsh_475ABD41(D_0000844C);
         D_00008449 = 0;
     }
 }
@@ -263,7 +263,7 @@ void func_00000210(void) {
 #if FW_VERSION >= 350
 void func_00000258(void) {
     if ((D_00008448 != 0) && (D_00008449 == 0)) {
-        vsh_8C1E8A38(D_0000844C);
+        vsh_388428D3(D_0000844C);
         D_00008449 = 1;
     }
 }
@@ -402,14 +402,14 @@ void func_0000086C(s32 arg0) {
 
     func_00005364()->unk84 = 0;
     func_00001714();
-    sceVshCommonGui_2EBB5C2B(&sp0, sceVshCommonGui_30FA68C3());
+    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
     func_000036EC(&sp0);
-    sceVshCommonGui_11C48509(&sp0, sceVshCommonGui_6BC16C05());
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh16GetString_CancelEv());
     func_000036EC(&sp0);
-    sceVshCommonGui_891DD627(1);
-    sceVshCommonGui_6F4C9FDB();
-    scePaf_08350B98(arg0, 0x10001, func_00002FE4, 0);
-    temp_v0 = scePaf_79A4A59D(arg0, "update_network_check_version_text", 0);
+    _ZN3vsh25ShowButtonNavigation_BackEb(1);
+    _ZN3vsh12BusyIcon_IncEv();
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, func_00002FE4, 0);
+    temp_v0 = _ZN3paf8PhWidget9FindChildEPKci(arg0, "update_network_check_version_text", 0);
     M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 0xF, 0x20);
 }
 #endif
@@ -884,7 +884,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00001040);
 #if FW_VERSION >= 350
 void func_00001714(void) {
     func_00005364()->unk40 = 1;
-    scePaf_3EDD45EF(0, &func_0000175C, 0, -1, -1, &func_00001940);
+    Job_Start(0, &func_0000175C, 0, -1, -1, &func_00001940);
 }
 #endif
 
@@ -922,8 +922,8 @@ void func_00001CA4(void) {
     if (temp_s0 == 0) {
         D_0000843C = 0;
     } else {
-        scePaf_8E7F9126(temp_s0);
-        scePaf_6261C0A5(temp_s0);
+        _ZN3paf6ModuleD1Ev(temp_s0);
+        _ZdlPv(temp_s0);
         D_0000843C = 0;
     }
 }
@@ -967,7 +967,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00001ED0);
 
 #if FW_VERSION >= 350
 void func_00001FD0(s32 arg0) {
-    sceVshCommonUtil_21EF453A(&D_00008454, arg0);
+    sceVshCommonUtil_8584376D(&D_00008454, arg0);
 }
 #endif
 
@@ -1195,8 +1195,8 @@ void func_000022C0(void) {
     temp_s0 = D_0000843C;
     D_00008564 = 1;
     if (temp_s0 != 0) {
-        scePaf_8E7F9126(temp_s0);
-        scePaf_6261C0A5(temp_s0);
+        _ZN3paf6ModuleD1Ev(temp_s0);
+        _ZdlPv(temp_s0);
     }
     D_0000843C = 0;
     func_00000180();
@@ -1281,9 +1281,9 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_0000269C);
 
 #if FW_VERSION >= 350
 void func_00002770(void) {
-    scePaf_0CFD27E9();
-    sceVshCommonGui_6F4C9FDB();
-    scePaf_3EDD45EF(0, (s32 *) func_00002654, 0, -1, -1, &func_0000269C);
+    InputDevice_PspPad_Lock();
+    _ZN3vsh12BusyIcon_IncEv();
+    Job_Start(0, (s32 *) func_00002654, 0, -1, -1, &func_0000269C);
 }
 #endif
 
@@ -1604,7 +1604,7 @@ void func_000033B8(s32 arg0) {
     if (func_00005364()->unk40 != 0) {
 
     } else {
-        scePaf_6A82A8C6(arg0, 3);
+        _ZN3paf9PhHandler11KillTimerCBEi(arg0, 3);
         func_000028A8((s32) &func_00002870);
     }
 }
@@ -1987,7 +1987,7 @@ void func_000053BC(void) {
         func_000034F0(temp_s0 + 0x64);
         func_000034F0(temp_s0 + 0x14);
         func_00006170(temp_s0 + 4);
-        scePaf_6261C0A5(temp_s0);
+        _ZdlPv(temp_s0);
         D_00008570 = 0;
     }
 }
@@ -2018,7 +2018,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_000054B4);
 
 #if FW_VERSION >= 350
 void func_0000553C(struct Unk_func_0000553C_0 *arg0) {
-    sceVshCommonGui_8F414E35(arg0->unk58);
+    _ZN3vsh13MessageDialog10HideDeleteEv(arg0->unk58);
 }
 #endif
 
@@ -2160,7 +2160,7 @@ s32 func_00005BA4(struct Unk_func_00005BA4_0 *arg0) {
 
 #if FW_VERSION >= 350
 void func_00005BD8(void) {
-    scePaf_3AC3E06A();
+    sce_paf_private_malloc();
 }
 #endif
 
@@ -2172,7 +2172,7 @@ void func_00005BD8(void) {
 
 #if FW_VERSION >= 350
 void func_00005BF4(void) {
-    scePaf_4729E549();
+    sce_paf_private_free();
 }
 #endif
 
@@ -2251,8 +2251,8 @@ s32 func_00005CA0(struct Unk_func_00005CA0_0 *arg0) {
         if (temp_s1 == 0) {
             arg0->unk80 = 0;
         } else {
-            scePaf_8E7F9126(temp_s1);
-            scePaf_6261C0A5(temp_s1);
+            _ZN3paf6ModuleD1Ev(temp_s1);
+            _ZdlPv(temp_s1);
             arg0->unk80 = 0;
         }
     }
@@ -2350,7 +2350,7 @@ s32 func_00005DD4(void) {
     s32 var_v1;
     void *temp_v0;
 
-    temp_v0 = scePaf_DCE3D225(scePaf_88784487("system_plugin"), 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(_ZN3paf4View4FindEPKc("system_plugin"), 1);
     var_v1 = 0;
     if (temp_v0 != NULL) {
         var_v1 = M2C_FIELD(temp_v0, s32 (**)(), 0x7C)();
@@ -2425,8 +2425,8 @@ void func_00006118(void) {
     if (temp_s0 == 0) {
 
     } else {
-        scePaf_8E7F9126(temp_s0);
-        scePaf_6261C0A5(temp_s0);
+        _ZN3paf6ModuleD1Ev(temp_s0);
+        _ZdlPv(temp_s0);
     }
 }
 #endif
