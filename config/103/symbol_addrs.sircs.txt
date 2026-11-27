@@ -94,3 +94,8 @@ sceSysregSircsIoEnable = 0x00001CFC; // type:func rom:0x1D7C
 sceSysregSircsIoDisable = 0x00001D04; // type:func rom:0x1D84
 sceSysregUartIoDisable = 0x00001D14; // type:func rom:0x1D94
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelCreateFpl = 0x00001C6C; // type:func
+sceKernelTryAllocateFpl = 0x00001C7C; // type:func
+sceSysregUartIoEnable = 0x00001D0C; // type:func
