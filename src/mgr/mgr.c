@@ -69,7 +69,7 @@ void sceMgrReset(void) {
     func_00002588();
 }
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/mgr", func_000008D4);
 #endif
 
@@ -127,7 +127,7 @@ INCLUDE_ASM("nonmatchings/mgr", func_000008A4);
 INCLUDE_ASM("nonmatchings/mgr", func_00000898);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/mgr", sceMgrInit);
 #endif
 
@@ -1426,7 +1426,7 @@ s32 func_00005E30(void) {
 
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFA0);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/mgr", func_00004624);
 #else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInit);
@@ -1759,13 +1759,21 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadSeqPage);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadPoolPage);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/mgr", func_00007980);
-#else
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/mgr", func_00007B34);
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInvalidateICV);
 #endif
 
+#if FW_VERSION != 103
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWriteSeqPage);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWritePoolPage);
 
@@ -1793,7 +1801,7 @@ void func_00008388(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/mgr", func_000083CC);
 #endif
 
@@ -1801,7 +1809,7 @@ INCLUDE_ASM("nonmatchings/mgr", func_000083CC);
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFD0);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSCheckICV);
 #endif
 
@@ -1811,7 +1819,7 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWriteICV);
 
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFD8);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/mgr", func_000086A8);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00008788);
