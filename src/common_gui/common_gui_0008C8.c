@@ -97,7 +97,7 @@ INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_4B8E817A);
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00001100);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00005DAC);
 #endif
 
@@ -188,7 +188,7 @@ s32 _ZN3vsh13MessageDialog12GetBasePlaneEv(void **arg0) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00005F5C);
 #endif
 

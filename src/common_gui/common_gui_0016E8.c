@@ -17,7 +17,7 @@ void func_000017C4(void) {
 void func_000017CC(void) {
 }
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00006000);
 #endif
 
@@ -51,7 +51,7 @@ INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00003454);
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000060C8);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_0000687C);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00006994);
@@ -188,7 +188,7 @@ INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000061B0);
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_000061B4);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00006A0C);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00006A74);
@@ -233,7 +233,7 @@ s32 _ZN3vsh10OptionMenu6IsOpenEv(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00006DB8);
 #endif
 
@@ -271,7 +271,7 @@ INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00008148);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002C7C);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/common_gui_0016E8", D_00007FB8);
 #endif
 
@@ -283,7 +283,7 @@ void func_00002CE8(void) {
     func_00002C7C(1, 0xFFFF);
 }
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_000072AC);
 
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_000072CC);

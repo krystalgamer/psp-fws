@@ -115,9 +115,15 @@ INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003260);
 
 INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003264);
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/common_gui_000438", func_000005CC_v103);
+#endif
+
 #if FW_VERSION == 102
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_000005CC_v102);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00000E44);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00001E74);
@@ -175,7 +181,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", func_00003044);
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00001C78);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00003418);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_000035BC);
@@ -217,7 +223,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", func_00002BF0);
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00002DC0);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00004634);
 #endif
 
@@ -229,7 +235,13 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", _ZN3vsh11ContentInfo12DeleteMotion
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00002F78);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/common_gui_000438", func_00004844);
+
+INCLUDE_ASM("nonmatchings/common_gui_000438", func_0000493C);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00007C04);
 
 INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00007C08);
@@ -275,15 +287,21 @@ INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00007B98);
 INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00007B9C);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/common_gui_000438", _ZN3vsh11ContentInfo8SetMovieERKN3paf10MiconRCPtrINS1_13MovieResourceEEEb);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", _ZN3vsh11ContentInfo8SetMusicERKN3paf10MiconRCPtrINS1_13MusicResourceEEE);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_000049F4);
+#endif
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00007C50);
+#endif
+
+#if FW_VERSION == 102
 INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00007C40);
 #endif
 
@@ -299,7 +317,7 @@ INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00007BC0);
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_B97EAE7A);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00004CBC);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00004D60);
@@ -318,7 +336,7 @@ void _ZN3vsh11ContentInfo13SetOnplayFuncEPFvPvES1_(void *arg0, s32 arg1, s32 arg
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00004DC4);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00004ECC);
@@ -470,7 +488,7 @@ void sceVshCommonGui_E9B8D6AB(void) {
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_D4353F96);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00005244);
 #endif
 
@@ -502,7 +520,7 @@ void func_00000888(void **arg0, void **arg1) {
     func_000008A8(arg0);
 }
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_0000530C);
 
 INCLUDE_ASM("nonmatchings/common_gui_000438", func_00005330);
