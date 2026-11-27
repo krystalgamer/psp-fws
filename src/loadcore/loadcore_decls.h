@@ -219,28 +219,28 @@ struct Unk_func_0000630C_0 {
     s32 unkC;
 };
 
-extern SceResidentLibrary *D_00007260; /* g_FreeLibEnt */
-extern SceStubLibrary *D_00007264; /* g_FreeLibStub */
 extern SceSysCallEntryTable *D_00007268; /* g_pFreeSysEnt */
-extern SceSysCallEntryTable *D_0000726C; /* g_pSysEntControl */
 extern void *D_00007270;
-extern SceSysmemUidCB *D_00007274; /* g_ModuleType */
-extern SceResidentLibrary D_00007278[30]; /* g_LoadCoreLibEntries */
 extern M2C_UNK D_000073A0;
 extern s32 D_000074B4;
 extern s32 D_000074B8;
 extern s32 D_000075B4;
 extern s32 D_000075B8;
-extern SceStubLibrary D_000076B0[90]; /* g_LoadCoreLibStubs */
 extern M2C_UNK D_000077C4;
 extern s32 D_000079C0;
 extern s32 D_000079C8;
 extern s32 D_00007F08;
-extern SceSysCallEntryTable D_00008628[60]; /* initialSysEntTable */
-extern SceLoadCore D_000088FC; /* g_loadCore */
 extern s32 D_00008914;
 extern s32 D_00008C40;
 extern M2C_UNK D_000097AC;
+extern SceResidentLibrary *g_FreeLibEnt; /* g_FreeLibEnt */
+extern SceStubLibrary *g_FreeLibStub; /* g_FreeLibStub */
+extern SceResidentLibrary g_LoadCoreLibEntries[30]; /* g_LoadCoreLibEntries */
+extern SceStubLibrary g_LoadCoreLibStubs[90]; /* g_LoadCoreLibStubs */
+extern SceSysmemUidCB *g_ModuleType; /* g_ModuleType */
+extern SceLoadCore g_loadCore; /* g_loadCore */
+extern SceSysCallEntryTable *g_pSysEntControl; /* g_pSysEntControl */
+extern SceSysCallEntryTable initialSysEntTable[60]; /* initialSysEntTable */
 
 s32 Kprintf(const char *fmt, ...);
 void LoadCoreForKernel_4440853B(void);
