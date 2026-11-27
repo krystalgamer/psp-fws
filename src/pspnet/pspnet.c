@@ -3133,7 +3133,29 @@ s32 _sce_pspnet_stop_of_inet_module_in_if_core(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet", func_000064CC);
 
+#if FW_VERSION < 201
+void func_000069DC(struct ifnet *ifp, const u8 *lla) {
+    struct sockaddr_dl *sdl;
+
+    ifp->if_type = IFT_ETHER;
+    ifp->if_addrlen = 6;
+    ifp->if_hdrlen = 14;
+    ifp->if_mtu = 1500;
+    ifp->if_output = func_00007020;
+    ifp->if_input = func_00006C8C;
+    if (ifp->if_baudrate == 0)
+        ifp->if_baudrate = 10000000;
+    if ((sdl = ifp->if_sadl) && sdl->sdl_family == AF_LINK) {
+        sdl->sdl_type = IFT_ETHER;
+        sdl->sdl_alen = ifp->if_addrlen;
+        sceNetBcopy(lla, LLADDR(sdl), ifp->if_addrlen);
+    }
+    ((struct ethercom *)ifp)->ec_multiaddrs.lh_first = NULL;
+    ifp->if_broadcastaddr = D_0000A0F0;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", func_000069DC);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00006AA0);

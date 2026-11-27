@@ -325,6 +325,10 @@ typedef char chk_ifnet[(sizeof(struct ifnet) == 0x110) ? 1 : -1];
     *(elm)->field.le_prev = (elm)->field.le_next; \
 } while (0)
 #define AF_UNSPEC 0
+#define if_hdrlen if_data.ifi_hdrlen
+#define if_mtu if_data.ifi_mtu
+#define if_baudrate if_data.ifi_baudrate
+#define IFT_ETHER 0x6
 
 
 #define IFNAMSIZ 16
@@ -533,6 +537,7 @@ extern __inline__ struct ifnet *ifunit_inline(const char *name) {
 extern s32 D_0000A0D0;
 extern s32 D_0000A0E4;
 extern s32 D_0000A0EC;
+extern u8 D_0000A0F0[6];
 extern s32 D_0000A0FC;
 extern s32 D_0000A10D;
 extern s32 D_0000A860;
@@ -726,9 +731,11 @@ void func_000044C0(struct ifnet *ifp);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);
 s32 func_000064CC(struct socket *so, u32 cmd, void *data);
+void func_000069DC(struct ifnet *ifp, const u8 *lla);
 s32 func_00006AE8(struct sockaddr *sa, u8 *addrlo, u8 *addrhi);
 void func_00006B10(struct ifnet *ifp);
 u32 func_00006C28(const u8 *buf, u32 len);
+void func_00006C8C();
 s32 func_00007020(void *a0, void *a1, void *a2, void *a3);
 void func_000075C0(struct ifnet *ifp);
 s32 func_00007678(s32 poolSize);
