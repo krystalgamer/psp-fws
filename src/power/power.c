@@ -949,9 +949,65 @@ INCLUDE_ASM("nonmatchings/power", func_00001BAC);
 INCLUDE_ASM("nonmatchings/power", func_00002FA0);
 #endif
 
-INCLUDE_ASM("nonmatchings/power", scePowerSetCpuClockFrequency);
+#if FW_VERSION == 100
+s32 scePowerSetCpuClockFrequency(s32 freq) {
+    s32 intr;
+    u32 oldK1;
 
+    if (freq <= 0 || freq > D_00008F84.pllClockFrequencyInt) {
+        return 0x800001FE;
+    }
+    oldK1 = shiftK1NoSlot();
+    intr = sceKernelCpuSuspendIntr();
+    if (freq < D_00008F84.scCpuClockLowerLimit) {
+        freq = D_00008F84.scCpuClockLowerLimit;
+    } else if (freq > D_00008F84.scCpuClockUpperLimit) {
+        freq = D_00008F84.scCpuClockUpperLimit;
+    }
+    sceClkcSetCpuFrequency(freq);
+    D_00008F84.cpuClockFrequencyInt = sceClkcGetCpuFrequency();
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
+INCLUDE_ASM("nonmatchings/power", scePowerSetCpuClockFrequency);
+#endif
+
+#if FW_VERSION == 100
+s32 scePowerSetBusClockFrequency(s32 freq) {
+    s32 intr;
+    s32 ret;
+    u32 oldK1;
+    s32 (**ops)(void);
+
+    if (freq <= 0 || freq > D_00008F84.pllClockFrequencyInt / 2) {
+        return 0x800001FE;
+    }
+    oldK1 = shiftK1NoSlot();
+    intr = sceKernelCpuSuspendIntr();
+    if (freq < D_00008F84.scBusClockLowerLimit) {
+        freq = D_00008F84.scBusClockLowerLimit;
+    } else if (freq > D_00008F84.scBusClockUpperLimit) {
+        freq = D_00008F84.scBusClockUpperLimit;
+    }
+    if (freq < D_00008F84.pllClockFrequencyInt / 4) {
+        freq = D_00008F84.pllClockFrequencyInt / 4;
+    }
+    ret = sceClkcSetBusFrequency(freq);
+    D_00008F84.busClockFrequencyInt = sceClkcGetBusFrequency();
+    scePowerSetGeEdramRefreshMode(scePowerGetGeEdramRefreshMode());
+    ops = (s32 (**)(void))sceKernelSm1ReferOperations();
+    if (ops != NULL) {
+        ops[11]();
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/power", scePowerSetBusClockFrequency);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/power", D_00006244);
