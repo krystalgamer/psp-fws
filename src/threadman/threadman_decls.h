@@ -113,7 +113,8 @@ typedef struct SceThread {
     s32 exitStatus; /* 0x18 */
     s32 waitType; /* 0x1C */
     SceSysmemUidCB *waitObj; /* 0x20 */
-    u8 unk24[0x38 - 0x24];
+    s32 waitArg0; /* 0x24: e.g. the count a sema waiter needs */
+    u8 unk28[0x38 - 0x28];
     s32 unk38; /* 0x38 */
     s32 unk3C; /* 0x3C */
     s32 waitRet; /* 0x40 */
