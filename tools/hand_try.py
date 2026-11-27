@@ -353,10 +353,16 @@ def main():
             bad_call = []
             asm_path = mod.funcs[name][2]
             if asm_path is not None:
-                want_calls = re.findall(r"\bjal\s+(\w+)", asm_path.read_text())
+                # j/jal in program order; local labels (.L) are jumps, not calls
+                want_calls = [None if c.startswith(".") else c
+                              for c in re.findall(r"\bj(?:al)?\s+(\.?[A-Za-z_]\w*)", asm_path.read_text())]
                 got = compiled_reloc_syms.calls
                 if len(want_calls) == len(got):
-                    bad_call = [(w, g) for w, g in zip(want_calls, got) if g is not None and g != w]
+                    bad_call = [(w, g) for w, g in zip(want_calls, got) if None not in (w, g) and g != w]
+                else:
+                    wc, gc = [c for c in want_calls if c], [c for c in got if c]
+                    if len(wc) == len(gc):
+                        bad_call = [(w, g) for w, g in zip(wc, gc) if g != w]
             for w, g in dict.fromkeys(bad_call):
                 print(f"  call target differs: target {w}, mine {g}")
             if bad_str:

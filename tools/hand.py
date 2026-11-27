@@ -41,13 +41,13 @@ def main():
     ap.add_argument("ver")
     ap.add_argument("module")
     ap.add_argument("cfiles", nargs="+", help="one function per file; several files share one final regress")
-    ap.add_argument("--decls", help="applied with the first file")
+    ap.add_argument("--decls", help="applied with every file (idempotent)")
     a = ap.parse_args()
     sd = src_dir(a.ver, a.module)
     snap = {p: p.read_text() for p in list(sd.glob("*.c")) + list(sd.glob("*_decls.*"))}
     done = []
     for i, cf in enumerate(a.cfiles):
-        r = one(a, cf, a.decls if i == 0 else None)
+        r = one(a, cf, a.decls)
         if r:
             done.append(r)
     if not done:

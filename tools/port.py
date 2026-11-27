@@ -89,7 +89,12 @@ def main():
             # base address of the global in DST = target label - offset of the reference
             inside = [(f"D_{int(t[2:], 16) - int(o or '0', 16):08X}", m, int(o or "0", 16)) for t, m, o in inside
                       if not re.fullmatch(r"D_[0-9A-F]{8}", m)]
-            if "RESULT: MATCH" in result or not pairs:
+            # auto names are per version: a SRC D_ label is DST's label at the same place
+            raw = re.findall(r"target label (D_[0-9A-F]{8}) assumed inside (D_[0-9A-F]{8});[^\[\n]*(?:\[\w+\+0x([0-9A-F]+)\])?", out)
+            for t, m, o in raw:
+                if int(o or "0", 16) == 0 and t != m:
+                    pairs.append((t, m))
+            if ("RESULT: MATCH" in result and not raw) or not pairs:
                 break
             for tgt, mine in dict.fromkeys(pairs):
                 body = re.sub(rf"\b{mine}\b", tgt, body)
