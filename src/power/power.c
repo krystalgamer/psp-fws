@@ -121,7 +121,7 @@ s32 scePowerCheckWlanCondition(s32 arg0) {
 INCLUDE_ASM("nonmatchings/power", scePowerWlanActivate);
 #else
 s32 scePowerWlanActivate(void) {
-    if (D_00003DC4 == 0) {
+    if (D_00003CC0.isWlanSuppressChargingEnabled == 0) {
 
     } else {
         scePowerBatteryForbidCharging();
@@ -134,7 +134,7 @@ s32 scePowerWlanActivate(void) {
 INCLUDE_ASM("nonmatchings/power", scePowerWlanDeactivate);
 #else
 s32 scePowerWlanDeactivate(void) {
-    if (D_00003DC4 == 0) {
+    if (D_00003CC0.isWlanSuppressChargingEnabled == 0) {
 
     } else {
         scePowerBatteryPermitCharging();
@@ -341,13 +341,13 @@ INCLUDE_ASM("nonmatchings/power", func_0000250C);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_0000250C(void) {
-    sceKernelSetEventFlag(M2C_FIELD(&D_00003E00, s32 *, 0), 0x80000000U);
-    sceKernelWaitThreadEnd(M2C_FIELD(&D_00003E00, s32 *, 8), NULL);
+    sceKernelSetEventFlag(D_00003E00.eventId, 0x80000000U);
+    sceKernelWaitThreadEnd(D_00003E00.workerThreadId, NULL);
     sceKernelRegisterPowerHandlers(0);
     sceSysconSetPowerSwitchCallback(0, 0);
     sceSysconSetHoldSwitchCallback(0, 0);
-    sceKernelDeleteSema(M2C_FIELD(&D_00003E00, s32 *, 4));
-    sceKernelDeleteEventFlag(M2C_FIELD(&D_00003E00, s32 *, 0));
+    sceKernelDeleteSema(D_00003E00.volatileMemorySemaId);
+    sceKernelDeleteEventFlag(D_00003E00.eventId);
     sceKernelSetDdrMemoryProtection(sceKernelGetMEeDramSaveAddr(), 0x200000, 0xF);
     sceKernelSetDdrMemoryProtection(sceKernelGetAWeDramSaveAddr(), 0x200000, 0xF);
     return 0;
@@ -356,24 +356,24 @@ s32 func_0000250C(void) {
 
 #if FW_VERSION == 100
 s32 func_0000250C(void) {
-    sceKernelSetEventFlag(M2C_FIELD(&D_00003E00, s32 *, 0), 0x80000000U);
-    sceKernelWaitThreadEnd(M2C_FIELD(&D_00003E00, s32 *, 4), NULL);
+    sceKernelSetEventFlag(D_00003E00.eventId, 0x80000000U);
+    sceKernelWaitThreadEnd(D_00003E00.workerThreadId, NULL);
     sceKernelRegisterPowerHandlers(0);
     sceSysconSetPowerSwitchCallback(0, 0);
     sceSysconSetHoldSwitchCallback(0, 0);
-    sceKernelDeleteEventFlag(M2C_FIELD(&D_00003E00, s32 *, 0));
+    sceKernelDeleteEventFlag(D_00003E00.eventId);
     return 0;
 }
 #endif
 
 #if FW_VERSION < 282
 s32 scePowerSetPowerSwMode(s32 arg0) {
-    D_00003E08 = arg0 & 3;
+    D_00003E00.mode = arg0 & 3;
     return 0;
 }
 
 s32 scePowerGetPowerSwMode(void) {
-    return D_00003E08;
+    return D_00003E00.mode;
 }
 #endif
 
@@ -387,10 +387,10 @@ s32 scePowerRebootStart(void) {
     temp_s0 = shiftK1();
     func_00001EF4(0, 1);
     setK1(temp_s0);
-    M2C_VFIELD(&D_00003E00, s32, 0x28) = 1;
+    D_00003E00.isRebootPowerLockExist = 1;
     temp_s1 = sceKernelCpuSuspendIntr();
-    sceKernelClearEventFlag(M2C_VFIELD(&D_00003E00, s32, 0), 0xFFFEFFFFU);
-    sceKernelSetEventFlag(M2C_VFIELD(&D_00003E00, s32, 0), 0x40000U);
+    sceKernelClearEventFlag(D_00003E00.eventId, 0xFFFEFFFFU);
+    sceKernelSetEventFlag(D_00003E00.eventId, 0x40000U);
     sceKernelCpuResumeIntr(temp_s1);
     return 0;
 }
@@ -462,45 +462,26 @@ INCLUDE_ASM("nonmatchings/power", func_00001364);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 s32 scePowerIsRequest(void) {
-    return (M2C_VFIELD(&D_00003E00, s32, 0x20) | M2C_VFIELD(&D_00003E00, s32, 0x24)) != 0;
+    return (D_00003E00.curHardwarePowerSwitchRequest | D_00003E00.curSoftwarePowerSwitchRequest) != 0;
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION < 201
 s32 scePowerIsRequest(void) {
-    return M2C_VFIELD(&D_00003E00, s32, 0x20);
+    return D_00003E00.curHardwarePowerSwitchRequest;
 }
 #endif
 
-#if FW_VERSION == 100
-s32 scePowerIsRequest(void) {
-    return M2C_VFIELD(&D_00003E00, s32, 0x18);
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION < 282
 s32 scePowerCancelRequest(void) {
-    s32 temp_s0;
-    s32 temp_v0;
+    s32 request;
+    s32 intr;
 
-    temp_v0 = sceKernelCpuSuspendIntr();
-    temp_s0 = M2C_VFIELD(&D_00003E00, s32, 0x20);
-    M2C_VFIELD(&D_00003E00, s32, 0x20) = 0;
-    sceKernelCpuResumeIntr(temp_v0);
-    return temp_s0;
-}
-#endif
-
-#if FW_VERSION == 100
-s32 scePowerCancelRequest(void) {
-    s32 temp_s0;
-    s32 temp_v0;
-
-    temp_v0 = sceKernelCpuSuspendIntr();
-    temp_s0 = M2C_VFIELD(&D_00003E00, s32, 0x18);
-    M2C_VFIELD(&D_00003E00, s32, 0x18) = 0;
-    sceKernelCpuResumeIntr(temp_v0);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    request = D_00003E00.curHardwarePowerSwitchRequest;
+    D_00003E00.curHardwarePowerSwitchRequest = 0;
+    sceKernelCpuResumeIntr(intr);
+    return request;
 }
 #endif
 
@@ -513,7 +494,7 @@ s32 scePowerRequestStandby(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    sceKernelSetEventFlag(D_00003E00, 0x10U);
+    sceKernelSetEventFlag(D_00003E00.eventId, 0x10U);
     setK1(temp_s0);
     return 0;
 }
@@ -528,7 +509,7 @@ s32 scePowerRequestSuspend(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    sceKernelSetEventFlag(D_00003E00, 0x20U);
+    sceKernelSetEventFlag(D_00003E00.eventId, 0x20U);
     setK1(temp_s0);
     return 0;
 }
@@ -543,7 +524,7 @@ s32 scePowerRequestSuspendTouchAndGo(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    sceKernelSetEventFlag(D_00003E00, 0x40U);
+    sceKernelSetEventFlag(D_00003E00.eventId, 0x40U);
     setK1(temp_s0);
     return 0;
 }
@@ -552,26 +533,17 @@ s32 scePowerRequestSuspendTouchAndGo(void) {
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerRequestColdReset);
 
-s32 scePowerGetResumeCount(void) {
-    return M2C_VFIELD(&D_00003E00, s32, 0x34);
-}
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION < 282
 s32 scePowerGetResumeCount(void) {
-    return M2C_VFIELD(&D_00003E00, s32, 0x30);
-}
-#endif
-
-#if FW_VERSION == 100
-s32 scePowerGetResumeCount(void) {
-    return M2C_VFIELD(&D_00003E00, s32, 0x24);
+    return D_00003E00.resumeCount;
 }
 #endif
 
 #if FW_VERSION < 282
 s32 scePowerSetWakeupCondition(s32 arg0) {
-    D_00003E20 = arg0;
+    D_00003E00.wakeupCondition = arg0;
     return 0;
 }
 #endif
@@ -598,13 +570,13 @@ void func_00001624(s32 arg0) {
     s32 var_a1;
 
     if (arg0 != 0) {
-        sceKernelSetEventFlag(D_00003E00, 1U);
-        sceKernelClearEventFlag(D_00003E00, -3U);
+        sceKernelSetEventFlag(D_00003E00.eventId, 1U);
+        sceKernelClearEventFlag(D_00003E00.eventId, -3U);
         var_a0 = 0;
         var_a1 = 0x80000000;
     } else {
-        sceKernelSetEventFlag(D_00003E00, 2U);
-        sceKernelClearEventFlag(D_00003E00, -2U);
+        sceKernelSetEventFlag(D_00003E00.eventId, 2U);
+        sceKernelClearEventFlag(D_00003E00.eventId, -2U);
         var_a0 = 0x80000000;
         var_a1 = 0;
     }
@@ -714,7 +686,7 @@ INCLUDE_ASM("nonmatchings/power", func_00002C78);
 #if FW_VERSION < 282
 s32 func_00002DD0(void) {
     memset(&D_00008E80, 0, 0x104);
-    D_00008E80 = sceKernelGetSystemTimeLow();
+    D_00008E80.curSystemTime = sceKernelGetSystemTimeLow();
     sceKernelRegisterSubIntrHandler(0x1E, 0x1A, &func_00001978, 0);
     sceKernelEnableSubIntr(0x1E, 0x1A);
     return 0;
@@ -789,7 +761,7 @@ s32 scePowerGetGeEdramRefreshMode(void) {
 
 #if FW_VERSION < 282
 s32 func_000024BC(void) {
-    sceKernelDeleteSema(D_00008F84);
+    sceKernelDeleteSema(D_00008F84.semaId);
     return 0;
 }
 #endif
@@ -975,7 +947,7 @@ INCLUDE_ASM("nonmatchings/power", func_00003814);
 
 #if FW_VERSION == 100
 s32 scePowerGetCpuClockFrequency(void) {
-    return D_00008F90;
+    return D_00008F84.cpuClockFrequencyInt;
 }
 
 s32 scePowerGetBusClockFrequency(void) {
@@ -1093,11 +1065,11 @@ s32 func_00002D70(void) {
 
     memset(&D_00008FC8, 0, 0x58);
     temp_v0 = "ScePowerBattery";
-    M2C_FIELD(&D_00008FC8, s32 *, 8) = -1;
+    D_00008FC8.innerTempStatus = -1;
     M2C_FIELD(&D_00008FC8, s32 *, 0x24) = -1;
-    M2C_FIELD(&D_00008FC8, s32 *, 0) = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
+    D_00008FC8.batteryEventFlagId = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
     temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003220, 0x40, 0x800U, 1U, NULL);
-    M2C_FIELD(&D_00008FC8, s32 *, 4) = temp_v0_2;
+    D_00008FC8.workerThreadId = temp_v0_2;
     sceKernelStartThread(temp_v0_2, 0U, NULL);
     return 0;
 }
@@ -1110,11 +1082,11 @@ s32 func_00002D70(void) {
 
     memset(&D_00008FC8, 0, 0x58);
     temp_v0 = "ScePowerBattery";
-    M2C_FIELD(&D_00008FC8, s32 *, 8) = -1;
+    D_00008FC8.innerTempStatus = -1;
     M2C_FIELD(&D_00008FC8, s32 *, 0x24) = -1;
-    M2C_FIELD(&D_00008FC8, s32 *, 0) = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
+    D_00008FC8.batteryEventFlagId = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
     temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003220, 0x40, 0x400U, 1U, NULL);
-    M2C_FIELD(&D_00008FC8, s32 *, 4) = temp_v0_2;
+    D_00008FC8.workerThreadId = temp_v0_2;
     sceKernelStartThread(temp_v0_2, 0U, NULL);
     return 0;
 }
@@ -1127,10 +1099,10 @@ s32 func_00002D70(void) {
 
     memset(&D_00008FC8, 0, 0x50);
     temp_v0 = "ScePowerBattery";
-    M2C_FIELD(&D_00008FC8, s32 *, 8) = -1;
-    M2C_FIELD(&D_00008FC8, s32 *, 0) = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
+    D_00008FC8.innerTempStatus = -1;
+    D_00008FC8.batteryEventFlagId = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
     temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00002600, 0x40, 0x400U, 1U, NULL);
-    M2C_FIELD(&D_00008FC8, s32 *, 4) = temp_v0_2;
+    D_00008FC8.workerThreadId = temp_v0_2;
     sceKernelStartThread(temp_v0_2, 0U, NULL);
     return 0;
 }
@@ -1138,23 +1110,23 @@ s32 func_00002D70(void) {
 
 #if FW_VERSION < 282
 s32 func_00002E14(void) {
-    sceKernelSetEventFlag(M2C_FIELD(&D_00008FC8, s32 *, 0), 0x80000000U);
-    sceKernelWaitThreadEnd(M2C_FIELD(&D_00008FC8, s32 *, 4), NULL);
-    sceKernelDeleteThread(M2C_FIELD(&D_00008FC8, s32 *, 4));
-    sceKernelDeleteEventFlag(M2C_FIELD(&D_00008FC8, s32 *, 0));
+    sceKernelSetEventFlag(D_00008FC8.batteryEventFlagId, 0x80000000U);
+    sceKernelWaitThreadEnd(D_00008FC8.workerThreadId, NULL);
+    sceKernelDeleteThread(D_00008FC8.workerThreadId);
+    sceKernelDeleteEventFlag(D_00008FC8.batteryEventFlagId);
     return 0;
 }
 
 s32 func_00002E6C(s32 arg0, s32 arg1) {
-    M2C_VFIELD(&D_00008FC8, s32, 0x10) = arg1;
-    M2C_VFIELD(&D_00008FC8, s32, 0xC) = arg0;
+    D_00008FC8.forceSuspendCapacity = arg0;
+    D_00008FC8.lowBatteryCapacity = arg1;
     return 0;
 }
 
 INCLUDE_ASM("nonmatchings/power", func_00002E84);
 
 s32 func_00002EFC(void) {
-    return D_00008FDC == 0;
+    return D_00008FC8.isBatteryPollingSuspended == 0;
 }
 
 INCLUDE_ASM("nonmatchings/power", func_00002F0C);
@@ -1165,8 +1137,8 @@ s32 scePowerBatteryUpdateInfo(void) {
     s32 temp_s1;
 
     temp_s1 = sceKernelCpuSuspendIntr();
-    sceKernelSetEventFlag(D_00008FC8, 0x10000000U);
-    sceKernelClearEventFlag(D_00008FC8, 0xEFFFFFFFU);
+    sceKernelSetEventFlag(D_00008FC8.batteryEventFlagId, 0x10000000U);
+    sceKernelClearEventFlag(D_00008FC8.batteryEventFlagId, 0xEFFFFFFFU);
     sceKernelCpuResumeIntr(temp_s1);
     return 0;
 }
@@ -1174,11 +1146,11 @@ s32 scePowerBatteryUpdateInfo(void) {
 
 #if FW_VERSION < 282
 s32 scePowerGetForceSuspendCapacity(void) {
-    return D_00008FD4;
+    return D_00008FC8.forceSuspendCapacity;
 }
 
 s32 scePowerGetLowBatteryCapacity(void) {
-    return D_00008FD8;
+    return D_00008FC8.lowBatteryCapacity;
 }
 #endif
 
