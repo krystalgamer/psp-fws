@@ -977,7 +977,7 @@ s32 func_0002B7B8(void) {
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_027C8C", func_0002B7D8);
 
 void func_0002B840(s32 arg0) {
-    struct Unk_ret_scePaf_F77E3DC0 *temp_v0;
+    struct Unk_func_0002B840_temp_v0 *temp_v0;
 
     temp_v0 = scePaf_F77E3DC0();
     if (temp_v0->unk9C == 0) {
@@ -1126,7 +1126,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_027C8C", func_0002B7D8);
 void func_0002B840(s32 arg0) {
     struct Unk_func_0002B840_temp_v0 *temp_v0;
 
-    temp_v0 = (Unk_func_0002B840_temp_v0*) (scePaf_F77E3DC0());
+    temp_v0 = (scePaf_F77E3DC0());
     if (temp_v0->unk9C == 0) {
 
     } else {

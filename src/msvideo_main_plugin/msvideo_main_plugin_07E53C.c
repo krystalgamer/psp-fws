@@ -113,7 +113,7 @@ s32 func_0007ED7C(struct Unk_func_0007ED7C_0 *arg0) {
     } else {
         do {
             if (func_000815B8(arg0, var_s2) != NULL) {
-                temp_s0 = (Unk_func_0007ED7C_temp_s0*) (func_000815B8(arg0, var_s2));
+                temp_s0 = (func_000815B8(arg0, var_s2));
                 if ((s32) temp_s0->unk29C != (s32) (((u8 *)func_000815B8(arg0, var_s2) + 0x180))) {
                     func_000A4400(func_000815B8(arg0, var_s2)->unk29C);
                 }

@@ -932,7 +932,7 @@ s32 func_0009555C(struct Unk_func_0009555C_0 *arg0, u32 arg1, s32 arg2) {
         temp_v1 = temp_v0->unk4;
         var_a4 = 0x2002;
         if ((arg1 >= temp_v1) && (arg1 < (u32) (temp_v1 + arg0->unkD0))) {
-            func_000938F4((Unk_func_000938F4_0*) ((u8 *)arg0 + 0xC0), arg1 - temp_v1, arg2);
+            func_000938F4((Unk_func_000938F4_0*) (((u8 *)arg0 + 0xC0)), arg1 - temp_v1, arg2);
             var_a4 = 0;
         }
     }

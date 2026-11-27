@@ -79,6 +79,11 @@ def rewrite_not(text):
             out.append(text[i:j + 2])
             i = j + 2
     text = "".join(out)
+    # m2c's `return c ? (t | K) : t;`: cc1 folds it to shift/or, cc1plus (bool condition) to movn;
+    # the statement form gives cc1's code in C++ (video_main_plugin func_00004BD8)
+    text, k = re.subn(r"^(\s*)return (\(.*\)) \? \((\w+) \| ([\w]+)\) : \3;$",
+                      r"\1if \2 {\n\1    \3 |= \4;\n\1}\n\1return \3;", text, flags=re.M)
+    n += k
     # `if (((X) == 0)) {` -> `if ((X) == 0) {`
     text = re.sub(r"\bif \(\((\(.*\) == 0)\)\) \{$", r"if (\1) {", text, flags=re.M)
     return text, n
@@ -111,7 +116,7 @@ def compile_errors(path, ver):
             msgs[-1] += " " + line.strip()
         else:
             msgs.append(line)
-    msgs = [re.sub(r"\s+", " ", m) for m in msgs]
+    msgs = [re.sub(r"`\s+", "`", re.sub(r"\s+", " ", m)) for m in msgs]  # wraps leave "` T'" too
     errs = []
     pending = None  # an error reported at a declaration in a header, located by the next "at this point"
     for line in msgs:
@@ -208,7 +213,12 @@ def fix_too_few(lines, idx, msg):
             return False
         dm = re.match(r"^(.*?\b(\w+))\((.*)\)(\s*\{\s*)$", lines[j])
         ps = [] if dm[3].strip() in ("", "void") else [dm[3]]
-        ps += [f"s32 arg{i}" for i in range(len(mine), need)]
+        # the callee's parameter types: a float passes through in $f12.., not in $aN
+        def ctype(x):
+            x = x.strip().replace("const ", "")
+            return {"int": "s32", "unsigned int": "u32", "short": "s16", "unsigned short": "u16",
+                    "char": "s8", "unsigned char": "u8", "bool": "s32"}.get(x, x)
+        ps += [f"{ctype(params[i])} arg{i}" for i in range(len(mine), need)]
         lines[j] = f"{dm[1]}({', '.join(ps)}){dm[4]}"
         CHANGED_PROTOS[dm[2]] = f"{dm[1]}({', '.join(ps)});"
         mine = [f"arg{i}" for i in range(need)]
@@ -419,6 +429,45 @@ def fix_undeclared(lines, idx, msg):
 FIXERS = [fix_too_few, fix_too_many, fix_convert_return, fix_undeclared, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
 
 
+def unify_arity(files, store):
+    """m2c definitions of one function with different (pass-through) parameter counts per version are
+    different overloads in C++ (callers then miss the C symbol): give every definition and the
+    prototype the longest `argN` parameter list (fixers can add parameters to one version's copy)."""
+    DEF = re.compile(r"^((?:static )?[\w \*]+?\b)(\w+)\(([^()]*)\)(\s*\{)$", re.M)
+
+    def plist(s):
+        ps = [x.strip() for x in structify._split_args(s) if x.strip() not in ("", "void")]
+        return ps if all(re.fullmatch(rf"[\w \*]+\barg{i}", x) for i, x in enumerate(ps)) else None
+    longest = {}
+    for f in files:
+        for m in DEF.finditer(f.read_text()):
+            ps = plist(m[3])
+            if ps is not None and m[2] in store["funcs"] and len(ps) > len(longest.get(m[2], [])):
+                longest[m[2]] = ps
+    for f in files:
+        t = f.read_text()
+
+        def widen(m):
+            ps, want = plist(m[3]), longest.get(m[2])
+            if ps is None or want is None or len(ps) > len(want) or ps == want:
+                return m[0]
+            # differing types at a position are only taken over when both are pointers
+            # (same registers); a value type change would move the argument
+            for x, y in zip(ps, want):
+                if x != y and not ("*" in x and "*" in y):
+                    return m[0]
+            return f"{m[1]}{m[2]}({', '.join(want)}){m[4]}"
+        u = DEF.sub(widen, t)
+        if u != t:
+            f.write_text(u)
+    for name, want in longest.items():
+        pm = re.match(rf"^(.*?\b{name})\((.*)\);$", store["funcs"][name])
+        have = plist(pm[2]) if pm else None
+        if have is not None and have != want and len(have) <= len(want) and \
+                all(x == y or ("*" in x and "*" in y) for x, y in zip(have, want)):
+            store["funcs"][name] = f"{pm[1]}({', '.join(want)});"
+
+
 # ---------------------------------------------------------------- driver
 
 def main():
@@ -462,6 +511,7 @@ def main():
     # C accepts `extern void D;` (only &D is used); C++ doesn't
     for k, v in store.get("vars", {}).items():
         store["vars"][k] = re.sub(r"^extern (volatile )?void (\w+);$", r"extern \1u8 \2;", v)
+    unify_arity(files, store)
     structify.write_decls(mod, store)
     print(f"{mod}: {len(files)} units marked C++, {nots} `!(x & K)` rewritten, versions {' '.join(vers)}")
 
@@ -492,12 +542,12 @@ def main():
                 else:
                     fixed += 1
             f.write_text("\n".join(lines))
-        if CHANGED_PROTOS:
-            for name, proto in CHANGED_PROTOS.items():
-                if name and name in store["funcs"]:
-                    store["funcs"][name] = proto
-            CHANGED_PROTOS.clear()
-            structify.write_decls(mod, store)
+        for name, proto in CHANGED_PROTOS.items():
+            if name and name in store["funcs"]:
+                store["funcs"][name] = proto
+        CHANGED_PROTOS.clear()
+        unify_arity(files, store)  # after the fixers' prototypes: they may differ per version copy
+        structify.write_decls(mod, store)
         print(f"round {rnd + 1}: {n} error lines, {fixed} fixed")
         if not fixed:
             break

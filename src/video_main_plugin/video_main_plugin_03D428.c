@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "video_main_plugin_decls.h"
 
@@ -58,7 +59,7 @@ void func_0003D5F4(M2C_UNK **arg0) {
 
 void func_0003D604(M2C_UNK **arg0) {
     *arg0 = &D_00055890;
-    func_0003D40C();
+    func_0003D40C(arg0);
 }
 
 void func_0003D62C(M2C_UNK **arg0) {
@@ -67,7 +68,7 @@ void func_0003D62C(M2C_UNK **arg0) {
 
 void func_0003D63C(M2C_UNK **arg0) {
     *arg0 = &D_00055890;
-    func_0003D40C();
+    func_0003D40C(arg0);
 }
 
 void func_0003D664(M2C_UNK **arg0) {
@@ -76,7 +77,7 @@ void func_0003D664(M2C_UNK **arg0) {
 
 void func_0003D674(M2C_UNK **arg0) {
     *arg0 = &D_00055890;
-    func_0003D40C();
+    func_0003D40C(arg0);
 }
 
 void func_0003D69C(M2C_UNK **arg0) {
@@ -85,7 +86,7 @@ void func_0003D69C(M2C_UNK **arg0) {
 
 void func_0003D6AC(M2C_UNK **arg0) {
     *arg0 = &D_00055890;
-    func_0003D40C();
+    func_0003D40C(arg0);
 }
 
 void func_0003D6D4(M2C_UNK **arg0) {
@@ -94,7 +95,7 @@ void func_0003D6D4(M2C_UNK **arg0) {
 
 void func_0003D6E4(M2C_UNK **arg0) {
     *arg0 = &D_00055890;
-    func_0003D40C();
+    func_0003D40C(arg0);
 }
 
 void func_0003D70C(M2C_UNK **arg0) {
@@ -103,7 +104,7 @@ void func_0003D70C(M2C_UNK **arg0) {
 
 void func_0003D71C(M2C_UNK **arg0) {
     *arg0 = &D_00055890;
-    func_0003D40C();
+    func_0003D40C(arg0);
 }
 
 void func_0003D744(M2C_UNK **arg0) {
@@ -112,7 +113,7 @@ void func_0003D744(M2C_UNK **arg0) {
 
 void func_0003D754(M2C_UNK **arg0) {
     *arg0 = &D_00055890;
-    func_0003D40C();
+    func_0003D40C(arg0);
 }
 #endif
 
@@ -171,7 +172,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0003D144);
 INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0003D220);
 
 s32 func_0003D2D4(void) {
-    void *sp0;
+    s32 sp0;
     s32 var_v1;
 
     var_v1 = 0;
@@ -381,7 +382,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_03D428", func_0003CED0);
 
 #if FW_VERSION >= 310 && FW_VERSION < 350
 s32 func_0003D104(void) {
-    void *sp0;
+    s32 sp0;
     s32 var_v1;
 
     var_v1 = 0;

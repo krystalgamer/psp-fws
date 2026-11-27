@@ -9,7 +9,7 @@ void func_000005CC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_000125F4 = arg1;
     D_00012608 = arg2;
     D_0001260C = arg3;
-    func_00008274((Unk_func_00008274_0*) &D_0001247C);
+    func_00008274(( Unk_func_00008274_0*) &D_0001247C);
 }
 
 void func_00000610(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
@@ -19,7 +19,7 @@ void func_00000610(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     D_000125FC = arg3;
     D_00012608 = arg4;
     D_0001260C = arg5;
-    func_00008274((Unk_func_00008274_0*) &D_0001247C);
+    func_00008274(( Unk_func_00008274_0*) &D_0001247C);
 }
 #endif
 

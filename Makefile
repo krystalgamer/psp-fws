@@ -49,7 +49,7 @@ extract: $(BASEROM)
 
 split: $(BASEROM)
 	rm -rf $(BUILD)/.splat_cache $(BUILD)/.splat_cache.$(MODULE)
-	$(PYTHON) tools/prx_relocs.py $(BASEROM) $(BUILD)/reloc_addrs.$(MODULE).txt $(BUILD)/prx_syms.$(MODULE).txt --names config/$(VERSION)/symbol_addrs.$(MODULE).txt
+	$(PYTHON) tools/prx_relocs.py $(BASEROM) $(BUILD)/reloc_addrs.$(MODULE).txt $(BUILD)/prx_syms.$(MODULE).txt --names config/$(VERSION)/symbol_addrs.$(MODULE).txt $(addprefix --names ,$(wildcard config/$(VERSION)/func_starts.$(MODULE).txt))
 	$(PYTHON) tools/split.py $(CONFIG)
 
 $(BUILD)/%.s.o: %.s

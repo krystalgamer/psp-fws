@@ -3,15 +3,15 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-void func_000315DC(struct Unk_func_000315DC_0 *arg0, s32 arg1, s32 arg2) {
-    func_000314B4((Unk_func_000314B4_0*) arg0);
+void func_000315DC(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
+    func_000314B4(arg0);
     arg0->unk18 = arg1;
     arg0->unk0 = &D_00056208;
     arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2 == 1, 1, NULL);
 }
 
-void func_00031654(struct Unk_func_00031654_0 *arg0, s32 arg1, s32 arg2) {
-    func_000314B4((Unk_func_000314B4_0*) arg0);
+void func_00031654(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
+    func_000314B4(arg0);
     arg0->unk18 = arg1;
     arg0->unk0 = &D_00056208;
     arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2 == 1, 1, NULL);
@@ -43,15 +43,15 @@ s32 func_000318F4(void) {
     return 0;
 }
 
-void func_000318FC(struct Unk_func_000318FC_0 *arg0, s32 arg1, s32 arg2) {
-    func_000314B4((Unk_func_000314B4_0*) arg0);
+void func_000318FC(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
+    func_000314B4(arg0);
     arg0->unk18 = arg1;
     arg0->unk0 = &D_000561E0;
     arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2, arg2, NULL);
 }
 
-void func_0003196C(struct Unk_func_0003196C_0 *arg0, s32 arg1, s32 arg2) {
-    func_000314B4((Unk_func_000314B4_0*) arg0);
+void func_0003196C(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
+    func_000314B4(arg0);
     arg0->unk18 = arg1;
     arg0->unk0 = &D_000561E0;
     arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2, arg2, NULL);
@@ -83,8 +83,8 @@ s32 func_00031BFC(void) {
     return 0;
 }
 
-void func_00031C04(struct Unk_func_00031C04_0 *arg0, s32 arg1) {
-    func_000314B4((Unk_func_000314B4_0*) arg0);
+void func_00031C04(struct Unk_func_000314B4_0 *arg0, s32 arg1) {
+    func_000314B4(arg0);
     arg0->unk0 = &D_000561B8;
     arg0->unk18 = arg1;
     arg0->unk4 = 1;
@@ -93,8 +93,8 @@ void func_00031C04(struct Unk_func_00031C04_0 *arg0, s32 arg1) {
     arg0->unk24 = sceKernelCreateEventFlag(&D_000561A4, 0x200U, 3U, NULL);
 }
 
-void func_00031C70(struct Unk_func_00031C70_0 *arg0, s32 arg1) {
-    func_000314B4((Unk_func_000314B4_0*) arg0);
+void func_00031C70(struct Unk_func_000314B4_0 *arg0, s32 arg1) {
+    func_000314B4(arg0);
     arg0->unk0 = &D_000561B8;
     arg0->unk18 = arg1;
     arg0->unk4 = 1;

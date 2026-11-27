@@ -196,7 +196,7 @@ void func_0001E72C(void) {
     temp_s0 = M2C_VFIELD(&D_0005EEA0, s32, 0x5C);
     if (temp_s0 != 0) {
         func_0002CF90(temp_s0);
-        func_0002D0DC((struct Unk_func_0002D0DC_0 *) temp_s0);
+        func_0002D0DC((struct Unk_func_0001879C_temp_s0 *) temp_s0);
     }
     if (M2C_VFIELD(&D_0005EEA0, s32, 0x64) != 0) {
         func_0001A6F4();
@@ -323,7 +323,7 @@ void func_0001F240(void) {
     temp_s0 = M2C_VFIELD(&D_0005EEA0, s32, 0x5C);
     if (temp_s0 != 0) {
         func_0002CF90(temp_s0);
-        func_0002D0DC((struct Unk_func_0002D0DC_0 *) temp_s0);
+        func_0002D0DC((struct Unk_func_0001879C_temp_s0 *) temp_s0);
     }
     if (M2C_VFIELD(&D_0005EEA0, s32, 0x64) != 0) {
         func_0001A6F4();

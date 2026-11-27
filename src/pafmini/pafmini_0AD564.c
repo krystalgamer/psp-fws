@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags[100]: -O0 */
 #include "common.h"
 #include "pafmini_decls.h"
@@ -569,7 +570,7 @@ void func_000D41D4(void) {
         if (D_001360FA & 2) {
             func_000D42F4();
         }
-    } while (!(D_001360FA & 0x20));
+    } while (((D_001360FA & 0x20) == 0));
     func_000C67B8(0);
 }
 

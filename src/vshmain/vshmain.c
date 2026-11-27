@@ -3420,8 +3420,8 @@ void func_0000B764(M2C_UNK **arg0, struct Unk_func_0000B764_1 *arg1) {
     M2C_UNK *temp_v0;
     struct Unk_func_0000B764_temp_v1 *temp_v1;
 
-    temp_v1 = (Unk_func_0000B764_temp_v1*) arg1->unk8;
-    temp_a2 = (Unk_func_0000B764_temp_a2*) arg1->unk0;
+    temp_v1 = ( Unk_func_0000B764_temp_v1*) arg1->unk8;
+    temp_a2 = ( Unk_func_0000B764_temp_a2*) arg1->unk0;
     temp_v0 = temp_v1->unk4;
     arg1->unk0 = (M2C_UNK*) temp_v1;
     temp_v1->unk4 = (M2C_UNK*) arg1;
@@ -3444,8 +3444,8 @@ void func_0000B7A4(M2C_UNK **arg0, struct Unk_func_0000B7A4_1 *arg1) {
     M2C_UNK *temp_v0;
     struct Unk_func_0000B7A4_temp_v1 *temp_v1;
 
-    temp_v1 = (Unk_func_0000B7A4_temp_v1*) arg1->unk4;
-    temp_a2 = (Unk_func_0000B7A4_temp_a2*) arg1->unk0;
+    temp_v1 = ( Unk_func_0000B7A4_temp_v1*) arg1->unk4;
+    temp_a2 = ( Unk_func_0000B7A4_temp_a2*) arg1->unk0;
     temp_v0 = temp_v1->unk8;
     arg1->unk0 = (M2C_UNK*) temp_v1;
     arg1->unk4 = temp_v0;
@@ -6133,7 +6133,7 @@ void func_00012AA4(void) {
     if (D_0003089C->padCD[0x2B] == 0) {
 
     } else if ((func_00015B4C((s32) D_0003089C) != 0) && (M2C_FIELD(M2C_FIELD(D_0003089C, void **, 0x978), s32 (**)(), 0x78)() != 0)) {
-        if (func_0001AE48((struct Unk_func_0001AE48_0 *) D_0003089C) == 0) {
+        if (func_0001AE48((struct Unk_D_0003089C *) D_0003089C) == 0) {
             func_00013CB4(M2C_FIELD(D_0003089C, s32 *, 0xE4));
             M2C_FIELD(D_0003089C, s32 *, 0xE8) = 1;
             func_00012EEC(0, 0);
@@ -6147,7 +6147,7 @@ void func_00012AA4(void) {
     if (D_0003089C->padCD[0x27] == 0) {
 
     } else if ((func_00015B4C((s32) D_0003089C) != 0) && (M2C_FIELD(M2C_FIELD(D_0003089C, void **, 0x8F4), s32 (**)(), 0x78)() != 0)) {
-        if (func_0001AE48((struct Unk_func_0001AE48_0 *) D_0003089C) == 0) {
+        if (func_0001AE48((struct Unk_D_0003089C *) D_0003089C) == 0) {
             func_00013CB4(M2C_FIELD(D_0003089C, s32 *, 0xE0));
             M2C_FIELD(D_0003089C, s32 *, 0xE4) = 1;
             func_00012EEC(0, 0);
@@ -6161,7 +6161,7 @@ void func_00012AA4(void) {
     if (D_0003089C->padCD[0x1B] == 0) {
 
     } else if ((func_00015B4C((s32) D_0003089C) != 0) && (M2C_FIELD(M2C_FIELD(D_0003089C, void **, 0x8E0), s32 (**)(), 0x78)() != 0)) {
-        if (func_0001AE48((struct Unk_func_0001AE48_0 *) D_0003089C) == 0) {
+        if (func_0001AE48((struct Unk_D_0003089C *) D_0003089C) == 0) {
             func_00013570(M2C_FIELD(D_0003089C, s32 *, 0xD4));
             M2C_FIELD(D_0003089C, s32 *, 0xD8) = 1;
             func_00012EEC(0, 0);
@@ -6175,7 +6175,7 @@ void func_00012AA4(void) {
     if (D_0003089C->padCD[0xF] == 0) {
 
     } else if ((func_00015B4C((s32) D_0003089C) != 0) && (M2C_FIELD(M2C_FIELD(D_0003089C, void **, 0x4BC), s32 (**)(), 0x78)() != 0)) {
-        if (func_0001AE48((struct Unk_func_0001AE48_0 *) D_0003089C) == 0) {
+        if (func_0001AE48((struct Unk_D_0003089C *) D_0003089C) == 0) {
             func_00011AC4(M2C_FIELD(D_0003089C, s32 *, 0xC8));
             M2C_FIELD(D_0003089C, s32 *, 0xCC) = 1;
             func_00012EEC(0, 0);
@@ -6189,7 +6189,7 @@ void func_00012AA4(void) {
     if (D_0003089C->padCD[0xB] == 0) {
 
     } else if ((func_00015B4C((s32) D_0003089C) != 0) && (M2C_FIELD(M2C_FIELD(D_0003089C, void **, 0x4B8), s32 (**)(), 0x78)() != 0)) {
-        if (func_0001AE48((struct Unk_func_0001AE48_0 *) D_0003089C) == 0) {
+        if (func_0001AE48((struct Unk_D_0003089C *) D_0003089C) == 0) {
             func_00011AC4(M2C_FIELD(D_0003089C, s32 *, 0xC4));
             M2C_FIELD(D_0003089C, s32 *, 0xC8) = 1;
             func_00012EEC(0, 0);
@@ -6203,7 +6203,7 @@ void func_00012AA4(void) {
     if (D_0003089C->padCD[7] == 0) {
 
     } else if ((func_00015B4C((s32) D_0003089C) != 0) && (M2C_FIELD(M2C_FIELD(D_0003089C, void **, 0x4B4), s32 (**)(), 0x78)() != 0)) {
-        if (func_0001AE48((struct Unk_func_0001AE48_0 *) D_0003089C) == 0) {
+        if (func_0001AE48((struct Unk_D_0003089C *) D_0003089C) == 0) {
             func_00012EEC(0, 0);
         }
     }
@@ -6219,7 +6219,7 @@ void func_00012AA4(void) {
     if (D_0003089C->unkCC == 0) {
 
     } else if ((func_00015B4C((s32) D_0003089C) != 0) && (M2C_FIELD(D_0003089C->unk4AC, s32 (**)(), 0x74)() != 0)) {
-        if (func_0001AE48((Unk_func_0001AE48_0*) D_0003089C) == 0) {
+        if (func_0001AE48(D_0003089C) == 0) {
             func_00012EEC(0, 0);
         }
     }
@@ -8660,7 +8660,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0001E974);
 #endif
 
 #if FW_VERSION >= 330
-u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
+u8 func_0001AE48(struct Unk_D_0003089C *arg0) {
     u8 var_v0;
     void *temp_v1;
 
@@ -8674,7 +8674,7 @@ u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 330
-u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
+u8 func_0001AE48(struct Unk_D_0003089C *arg0) {
     u8 var_v0;
     void *temp_v1;
 
@@ -8688,7 +8688,7 @@ u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
+u8 func_0001AE48(struct Unk_D_0003089C *arg0) {
     u8 var_v0;
     void *temp_v1;
 
@@ -8702,7 +8702,7 @@ u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
 #endif
 
 #if FW_VERSION >= 271 && FW_VERSION < 300
-u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
+u8 func_0001AE48(struct Unk_D_0003089C *arg0) {
     u8 var_v0;
     void *temp_v1;
 
@@ -8716,7 +8716,7 @@ u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
 #endif
 
 #if FW_VERSION == 270
-u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
+u8 func_0001AE48(struct Unk_D_0003089C *arg0) {
     u8 var_v0;
     void *temp_v1;
 
@@ -8730,7 +8730,7 @@ u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 270
-u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
+u8 func_0001AE48(struct Unk_D_0003089C *arg0) {
     u8 var_v0;
     void *temp_v1;
 
@@ -8744,7 +8744,7 @@ u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
 #endif
 
 #if FW_VERSION == 201
-u8 func_0001AE48(struct Unk_func_0001AE48_0 *arg0) {
+u8 func_0001AE48(struct Unk_D_0003089C *arg0) {
     u8 var_v0;
     struct Unk_func_0001AE48_temp_v1 *temp_v1;
 

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "pafmini_decls.h"
 
@@ -947,36 +948,36 @@ void func_0003E7F0(s32 arg0, s32 arg1, s32 arg2) {
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0003E80C);
 #else
-void func_0003E80C(void) {
-    _ZN3paf7PhSPrim8SetStyleEif();
+void func_0003E80C(void* arg0, s32 arg1, float arg2) {
+    _ZN3paf7PhSPrim8SetStyleEif(arg0, arg1, arg2);
 }
 #endif
 
-void func_0003E828(void) {
-    _ZN3paf7PhSPrim8SetStyleEiRK4vec4();
+void func_0003E828(void* arg0, s32 arg1, void* arg2) {
+    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0, arg1, arg2);
 }
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0003E844);
 #else
-void func_0003E844(void) {
-    _ZNK3paf7PhSPrim8GetStyleEiRb();
+void func_0003E844(void* arg0, s32 arg1, bool* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiRb(arg0, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0003E860);
 #else
-void func_0003E860(void) {
-    _ZNK3paf7PhSPrim8GetStyleEiRf();
+void func_0003E860(void* arg0, s32 arg1, float* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiRf(arg0, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0003E87C);
 #else
-void func_0003E87C(void) {
-    _ZNK3paf7PhSPrim8GetStyleEiR4vec4();
+void func_0003E87C(void* arg0, s32 arg1, void* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiR4vec4(arg0, arg1, arg2);
 }
 #endif
 
@@ -1950,7 +1951,7 @@ s32 _ZN3paf9PhHandler13PauseTimerAllEv(struct Unk_scePaf_01CF521E_0 *arg0) {
 
     temp_v0 = arg0->unk10;
     var_a1 = 1;
-    if (!(((u32) temp_v0 >> 0x10) & 1)) {
+    if ((((u32) temp_v0 >> 0x10) & 1) == 0) {
         arg0->unk10 = temp_v0 | 0x10000;
         var_a1 = 0;
     }
@@ -1994,7 +1995,7 @@ s32 func_0005BD9C(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, u32 *, 0x10);
     var_a1 = 1;
-    if (!((temp_v0 >> 0x10) & 1)) {
+    if (((temp_v0 >> 0x10) & 1) == 0) {
         M2C_FIELD(arg0, u32 *, 0x10) = (u32) (temp_v0 | 0x10000);
         var_a1 = 0;
     }
@@ -3435,7 +3436,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_000510D4);
 #else
 void func_000510D4(struct Unk_func_000510D4_0 *arg0) {
     arg0->unk0 = &D_000D7E70;
-    _ZN3paf4CondD1Ev((u8 *)arg0 + 0x28);
+    _ZN3paf4CondD1Ev((Unk_scePaf_1B043852_0*) ((u8 *)arg0 + 0x28));
     sceKernelDeleteSema(arg0->unk24);
     func_00051184((s32) ((u8 *)arg0 + 0x14));
     func_00051184((s32) ((u8 *)arg0 + 8));
@@ -3448,7 +3449,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00051128);
 #else
 void func_00051128(struct Unk_func_00051128_0 *arg0) {
     arg0->unk0 = &D_000D7E70;
-    _ZN3paf4CondD1Ev((u8 *)arg0 + 0x28);
+    _ZN3paf4CondD1Ev((Unk_scePaf_1B043852_0*) ((u8 *)arg0 + 0x28));
     sceKernelDeleteSema(arg0->unk24);
     func_00051184((s32) ((u8 *)arg0 + 0x14));
     func_00051184((s32) ((u8 *)arg0 + 8));
@@ -5120,7 +5121,7 @@ void func_0007677C(s32 **arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void func_0007677C(M2C_UNK **arg0) {
+void func_0007677C(s32 **arg0) {
     *arg0 = &D_001057D8;
     _ZN3paf8PhWidgetD2Ev((s32) arg0);
 }
@@ -5135,7 +5136,7 @@ void func_000767A4(s32 **arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void func_000767A4(M2C_UNK **arg0) {
+void func_000767A4(s32 **arg0) {
     *arg0 = &D_001057D8;
     _ZN3paf8PhWidgetD2Ev((s32) arg0);
     _ZdlPv(arg0);
@@ -6251,10 +6252,10 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00062BD8);
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00062C8C);
 
-s32 _ZN3paf10PhMenuList10SetItemNumEi(s32 arg0) {
+s32 _ZN3paf10PhMenuList10SetItemNumEi(s32 arg0, s32 arg1) {
     s32 temp_v0;
 
-    temp_v0 = _ZN3paf6PhList10SetItemNumEi();
+    temp_v0 = _ZN3paf6PhList10SetItemNumEi(arg0, arg1);
     if (temp_v0 >= 0) {
         _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0x0100000C);
     }

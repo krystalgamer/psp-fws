@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "pafmini_decls.h"
 
@@ -899,7 +900,7 @@ s32 func_00015210(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_000FDF48) {
+    if ((s32) arg1 != (s32) &D_000FDF48) {
         var_a2 = func_000148A4(arg0, arg1);
     }
     return var_a2;
@@ -931,7 +932,7 @@ s32 func_00015874(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_000FDF54) {
+    if ((s32) arg1 != (s32) &D_000FDF54) {
         var_a2 = func_000148A4(arg0, arg1);
     }
     return var_a2;
@@ -951,7 +952,7 @@ s32 func_00015968(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_000FDF60) {
+    if ((s32) arg1 != (s32) &D_000FDF60) {
         var_a2 = func_000148A4(arg0, arg1);
     }
     return var_a2;
@@ -975,7 +976,7 @@ s32 func_0001609C(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_000FDF6C) {
+    if ((s32) arg1 != (s32) &D_000FDF6C) {
         var_a2 = func_000148A4(arg0, arg1);
     }
     return var_a2;
@@ -1143,7 +1144,7 @@ s32 func_00014A18(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_000FDF48) {
+    if ((s32) arg1 != (s32) &D_000FDF48) {
         var_a2 = func_000140C4(arg0, arg1);
     }
     return var_a2;
@@ -1175,7 +1176,7 @@ s32 func_00015064(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_000FDF54) {
+    if ((s32) arg1 != (s32) &D_000FDF54) {
         var_a2 = func_000140C4(arg0, arg1);
     }
     return var_a2;
@@ -1195,7 +1196,7 @@ s32 func_00015158(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_000FDF60) {
+    if ((s32) arg1 != (s32) &D_000FDF60) {
         var_a2 = func_000140C4(arg0, arg1);
     }
     return var_a2;
@@ -1219,7 +1220,7 @@ s32 func_00015874(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_000FDF6C) {
+    if ((s32) arg1 != (s32) &D_000FDF6C) {
         var_a2 = func_000140C4(arg0, arg1);
     }
     return var_a2;
@@ -2059,7 +2060,7 @@ void func_00025A58(s32 **arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void func_00025A58(M2C_UNK **arg0) {
+void func_00025A58(s32 **arg0) {
     _ZN10PSJSObjectC2ERK11PSJSContext();
     *arg0 = &D_000FE988;
 }
@@ -4072,7 +4073,7 @@ INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_000131F8);
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", scePaf_891B7F7F);
 
 void func_00013410(M2C_UNK **arg0) {
-    func_00013B68(arg0);
+    func_00013B68((Unk_func_00013B68_0*) arg0);
     *arg0 = &D_000D1B28;
 }
 

@@ -880,10 +880,10 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_000375B4);
 #if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_000360B4);
 #else
-void func_000360B4(struct Unk_func_000360B4_0 *arg0) {
+void func_000360B4(struct Unk_func_00031804_0 *arg0) {
     s32 temp_v0;
 
-    func_00031804((Unk_func_00031804_0*) arg0);
+    func_00031804(arg0);
     arg0->unk0 = &D_000B25E0;
     temp_v0 = scePaf_3AC3E06A(0x1C8);
     arg0->unk6DC = temp_v0;

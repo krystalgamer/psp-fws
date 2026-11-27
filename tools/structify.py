@@ -60,8 +60,8 @@ def decl(t, name):
 
 
 _CXX_TYPES = {"int": "s32", "unsigned int": "u32", "short": "s16", "unsigned short": "u16", "char": "char",
-              "signed char": "s8", "unsigned char": "u8", "long": "s32", "unsigned long": "u32", "float": "f32",
-              "double": "f64", "long long": "s64", "unsigned long long": "u64", "bool": "bool", "wchar_t": "u16",
+              "signed char": "s8", "unsigned char": "u8", "long": "s32", "unsigned long": "u32", "float": "float",
+              "double": "double", "long long": "s64", "unsigned long long": "u64", "bool": "bool", "wchar_t": "u16",
               "void": "void"}
 
 

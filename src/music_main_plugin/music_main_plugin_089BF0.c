@@ -11,8 +11,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_00089CB8);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_00089D1C);
 
-void func_00089E34(struct Unk_func_00086F9C_0 *arg0, s32 arg1) {
-    func_00086A54((Unk_func_00086A54_0*) arg0, arg1);
+void func_00089E34(struct Unk_func_00086A54_0 *arg0, s32 arg1) {
+    func_00086A54(arg0, arg1);
     M2C_FIELD(arg0, s32 **, 0) = &D_000A2338;
     arg0->unk18 = 0;
     arg0->unk1C = 0;

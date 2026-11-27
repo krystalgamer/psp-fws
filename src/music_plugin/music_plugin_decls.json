@@ -1,4 +1,7 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
   "Job_isCanceled": "s32 Job_isCanceled();",
   "_ZN3paf4View4FindEPKc": "s32 _ZN3paf4View4FindEPKc(M2C_UNK *);",
@@ -89,9 +92,6 @@
   "func_000145CC": "s32 func_000145CC(void);",
   "func_0001461C": "s32 func_0001461C(void);",
   "func_00014A68": "s32 func_00014A68(s32, s32, s32, s32, s32);",
-  "func_00014CF4": "void func_00014CF4(M2C_UNK **arg0);",
-  "func_00014D1C": "void func_00014D1C(M2C_UNK **arg0);",
-  "func_00014D44": "void func_00014D44(s32 **arg0);",
   "func_00015560": "s32 func_00015560(void *arg0);",
   "func_000155BC": "s32 func_000155BC(void *arg0, s32 arg1);",
   "func_000155C8": "s32 func_000155C8(void);",
@@ -430,7 +430,6 @@
   "func_00030354": "s32 func_00030354(s32);",
   "func_00030E44": "s32 func_00030E44(void);",
   "func_00031220": "s32 func_00031220(s32);",
-  "func_00031250": "s32 func_00031250(void);",
   "func_000312A4": "s32 func_000312A4(s32, s32);",
   "func_00031B38": "s32 func_00031B38(s32, s32);",
   "func_00031E10": "s32 func_00031E10(void);",
@@ -1079,6 +1078,29 @@
   "vshMSAudioGetICVInfo": "s32 vshMSAudioGetICVInfo();"
  },
  "types": {
+  "Class_0005CDA0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0005CDA0 (vptr D_0005CDA0) */\nclass Class_0005CDA0 : public paf::PhWidget {\npublic:\n    virtual ~Class_0005CDA0();\n};\n#endif",
+  "Class_00061F10": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00061F10 (vptr D_00061F10) */\nclass Class_00061F10 : public Class_00087060 {\npublic:\n    virtual ~Class_00061F10();\n};\n#endif",
+  "Class_00062628": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00062628 (vptr D_00062628) */\nclass Class_00062628 : public paf::PhWidget {\npublic:\n    virtual ~Class_00062628();\n};\n#endif",
+  "Class_00084E40": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00084E40 (vptr D_00084E40) */\nclass Class_00084E40 {\npublic:\n    virtual ~Class_00084E40();\n};\n#endif",
+  "Class_00085D40": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00085D40 (vptr D_00085D40) */\nclass Class_00085D40 : public Class_00087060 {\npublic:\n    virtual ~Class_00085D40();\n};\n#endif",
+  "Class_00085F70": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00085F70 (vptr D_00085F70) */\nclass Class_00085F70 : public Class_00087060 {\npublic:\n    virtual ~Class_00085F70();\n};\n#endif",
+  "Class_00086100": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00086100 (vptr D_00086100) */\nclass Class_00086100 : public Class_00087060 {\npublic:\n    virtual ~Class_00086100();\n};\n#endif",
+  "Class_00086180": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00086180 (vptr D_00086180) */\nclass Class_00086180 : public Class_00087060 {\npublic:\n    virtual ~Class_00086180();\n};\n#endif",
+  "Class_000862D0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000862D0 (vptr D_000862D0) */\nclass Class_000862D0 : public Class_00087060 {\npublic:\n    virtual ~Class_000862D0();\n};\n#endif",
+  "Class_00086480": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00086480 (vptr D_00086480) */\nclass Class_00086480 : public Class_00087060 {\npublic:\n    virtual ~Class_00086480();\n};\n#endif",
+  "Class_00087060": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00087060 (vptr D_00087060) */\nclass Class_00087060 {\npublic:\n    virtual ~Class_00087060();\n};\n#endif",
+  "Class_000875F0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000875F0 (vptr D_000875F0) */\nclass Class_000875F0 : public Class_00087060 {\npublic:\n    virtual ~Class_000875F0();\n};\n#endif",
+  "Class_00088640": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00088640 (vptr D_00088640) */\nclass Class_00088640 {\npublic:\n    virtual ~Class_00088640();\n};\n#endif",
+  "Class_00088748": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00088748 (vptr D_00088748) */\nclass Class_00088748 {\npublic:\n    virtual ~Class_00088748();\n};\n#endif",
+  "Class_00088870": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00088870 (vptr D_00088870) */\nclass Class_00088870 {\npublic:\n    virtual ~Class_00088870();\n};\n#endif",
+  "Class_00088888": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00088888 (vptr D_00088888) */\nclass Class_00088888 {\npublic:\n    virtual ~Class_00088888();\n};\n#endif",
+  "Class_0008BBC8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0008BBC8 (vptr D_0008BBC8) */\nclass Class_0008BBC8 {\npublic:\n    virtual ~Class_0008BBC8();\n};\n#endif",
+  "Class_0008BD20": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0008BD20 (vptr D_0008BD20) */\nclass Class_0008BD20 {\npublic:\n    virtual ~Class_0008BD20();\n};\n#endif",
+  "Class_0008BD68": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0008BD68 (vptr D_0008BD68) */\nclass Class_0008BD68 {\npublic:\n    virtual ~Class_0008BD68();\n};\n#endif",
+  "Class_0008BD78": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0008BD78 (vptr D_0008BD78) */\nclass Class_0008BD78 {\npublic:\n    virtual ~Class_0008BD78();\n};\n#endif",
+  "Class_0008BDB0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0008BDB0 (vptr D_0008BDB0) */\nclass Class_0008BDB0 {\npublic:\n    virtual ~Class_0008BDB0();\n};\n#endif",
+  "Class_00090590": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00090590 (vptr D_00090590) */\nclass Class_00090590 {\npublic:\n    virtual ~Class_00090590();\n};\n#endif",
+  "Class_00091740": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00091740 (vptr D_00091740) */\nclass Class_00091740 {\npublic:\n    virtual ~Class_00091740();\n};\n#endif",
   "Unk_func_00000F3C_temp_v0": "struct Unk_func_00000F3C_temp_v0 {\n    u8 pad0[0x4];\n    M2C_UNK (*unk4)(M2C_UNK *, M2C_UNK);\n};",
   "hand_func_00001B64": "typedef void (*func_ptr)(void);"
  },

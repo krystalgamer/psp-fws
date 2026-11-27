@@ -1175,14 +1175,14 @@ void func_000182F8(void *arg0) {
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
 void func_0001B674(struct Unk_func_0001B674_0 *arg0) {
-    struct Unk_func_0001B674_temp_a0 *temp_a0;
-    struct Unk_func_0001B674_temp_s0 *temp_s0;
+    struct Unk_func_00004460_0 *temp_a0;
+    struct Unk_func_00004460_0 *temp_s0;
 
     func_0001D298();
     temp_a0 = arg0->unk4;
     if (temp_a0->unk0->unk10(temp_a0) == 0) {
-        temp_s0 = (Unk_func_0001B674_temp_s0*) arg0->unk4;
-        func_00004460((Unk_func_00004460_0*) temp_s0);
+        temp_s0 = arg0->unk4;
+        func_00004460(temp_s0);
         func_00020EB8(temp_s0->unk8, temp_s0);
     }
 }

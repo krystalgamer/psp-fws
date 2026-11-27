@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "pafmini_decls.h"
 
@@ -1805,13 +1806,13 @@ INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf4View9PlaySoundEPKc);
 #endif
 
 #if FW_VERSION == 100
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0) {
+void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
     s32 temp_v0;
 
     if (M2C_FIELD(arg0, u8 *, 0x1D0) == 0) {
 
     } else {
-        temp_v0 = _ZN3paf4View8GetSoundEPKc();
+        temp_v0 = _ZN3paf4View8GetSoundEPKc(arg0, arg1);
         if (temp_v0 != 0) {
             func_00009D9C(arg0, temp_v0);
         }
@@ -1820,13 +1821,13 @@ void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0) {
+void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
     s32 temp_v0;
 
     if (M2C_FIELD(arg0, u8 *, 0x1D4) == 0) {
 
     } else {
-        temp_v0 = _ZN3paf4View8GetSoundEPKc();
+        temp_v0 = _ZN3paf4View8GetSoundEPKc(arg0, arg1);
         if (temp_v0 != 0) {
             func_00009D9C(arg0, temp_v0);
         }
@@ -1835,13 +1836,13 @@ void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0) {
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0) {
+void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
     s32 temp_v0;
 
     if (arg0->unk1C0 == 0) {
 
     } else {
-        temp_v0 = _ZN3paf4View8GetSoundEPKc();
+        temp_v0 = _ZN3paf4View8GetSoundEPKc(arg0, arg1);
         if (temp_v0 != 0) {
             func_00009D9C(arg0, temp_v0);
         }

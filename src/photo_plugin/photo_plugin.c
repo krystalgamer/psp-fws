@@ -986,8 +986,8 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00003FB8);
 #if FW_VERSION >= 201 && FW_VERSION < 260
 void func_00003FB8(M2C_UNK **arg0) {
     *arg0 = &D_0002F120;
-    func_00004460((Unk_func_00004460_0*) arg0);
-    func_00003DCC((Unk_func_00003DCC_0*) arg0);
+    func_00004460(( Unk_func_00004460_0*) arg0);
+    func_00003DCC(( Unk_func_00003DCC_0*) arg0);
 }
 #endif
 
@@ -998,8 +998,8 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00003FF0);
 #if FW_VERSION >= 201 && FW_VERSION < 260
 void func_00003FF0(M2C_UNK **arg0) {
     *arg0 = &D_0002F120;
-    func_00004460((Unk_func_00004460_0*) arg0);
-    func_00003DCC((Unk_func_00003DCC_0*) arg0);
+    func_00004460(( Unk_func_00004460_0*) arg0);
+    func_00003DCC(( Unk_func_00003DCC_0*) arg0);
 }
 #endif
 
@@ -1010,8 +1010,8 @@ INCLUDE_ASM("nonmatchings/photo_plugin", func_00004028);
 #if FW_VERSION >= 201 && FW_VERSION < 260
 void func_00004028(M2C_UNK **arg0) {
     *arg0 = &D_0002F120;
-    func_00004460((Unk_func_00004460_0*) arg0);
-    func_00003DCC((Unk_func_00003DCC_0*) arg0);
+    func_00004460(( Unk_func_00004460_0*) arg0);
+    func_00003DCC(( Unk_func_00003DCC_0*) arg0);
     _ZdlPv((s32) arg0);
 }
 #endif
@@ -1385,11 +1385,11 @@ void func_00005870(void) {
 
 #if FW_VERSION >= 201 && FW_VERSION < 280
 void func_00005870(void) {
-    struct Unk_func_00005870_temp_s0 *temp_s0;
+    struct Unk_D_00031B84 *temp_s0;
 
     if ((D_00031B84 == NULL) || (D_00031B84->unk4C == 0)) {
         func_0000608C((s32) D_00031B84);
-        temp_s0 = (Unk_func_00005870_temp_s0*) D_00031B84;
+        temp_s0 = D_00031B84;
         temp_s0->unk4C = Job_Start(0, func_00006BF4, NULL, -1, -1, &func_00006C34);
     }
 }

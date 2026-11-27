@@ -11,8 +11,17 @@ extern "C" {
 #endif
 
 struct Unk_func_000002A4_temp_v0 {
-    u8 pad0[0x61];
+    u8 pad0[0x40];
+    u8 unk40;
+    u8 pad41[0x3];
+    s32 unk44;
+    u8 pad48[0x4];
+    s32 unk4C;
+    u8 pad50[0x11];
     u8 unk61;
+    u8 pad62[0x1E];
+    s32 unk80;
+    s8 unk84;
 };
 
 struct Unk_func_00002360_temp_v0 {
@@ -67,13 +76,6 @@ struct Unk_func_00005BA4_0 {
     s32 unk5C;
 };
 
-struct Unk_func_00005CA0_0 {
-    u8 pad0[0x61];
-    u8 unk61;
-    u8 pad62[0x1E];
-    s32 unk80;
-};
-
 struct Unk_func_00005DD4_temp_v0 {
     u8 pad0[0x7C];
     s32 (*unk7C)();
@@ -83,17 +85,6 @@ struct Unk_func_00006160_0 {
     s32 unk0;
     s32 unk4;
     s32 unk8;
-};
-
-struct Unk_ret_func_00005364 {
-    u8 pad0[0x40];
-    u8 unk40;
-    u8 pad41[0x3];
-    s32 unk44;
-    u8 pad48[0x4];
-    s32 unk4C;
-    u8 pad50[0x34];
-    s8 unk84;
 };
 
 struct Unk_vt_func_0000086C_temp_v0 {
@@ -267,7 +258,7 @@ void func_00004F5C(struct Unk_func_00004F5C_0 *arg0);
 M2C_UNK func_00004FD0(s32, M2C_UNK);
 s32 func_00005130(s32, s32);
 void func_00005138(void *arg0);
-struct Unk_ret_func_00005364 *func_00005364(...);
+struct Unk_func_000002A4_temp_v0 *func_00005364(...);
 void func_000053BC(void);
 s32 func_00005530(void);
 void func_0000553C(struct Unk_func_0000553C_0 *arg0);
@@ -278,7 +269,7 @@ void func_00005B74(struct Unk_func_00005B74_0 *arg0);
 s32 func_00005BA4(struct Unk_func_00005BA4_0 *arg0);
 void func_00005BD8(void);
 void func_00005BF4(void);
-s32 func_00005CA0(struct Unk_func_00005CA0_0 *arg0);
+s32 func_00005CA0(struct Unk_func_000002A4_temp_v0 *arg0);
 M2C_UNK func_00005D10(s32);
 s32 func_00005DD4(void);
 void func_00005E90(void);

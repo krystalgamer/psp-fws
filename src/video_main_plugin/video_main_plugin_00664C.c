@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "video_main_plugin_decls.h"
 
@@ -2318,44 +2319,44 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_000523C8_v271);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_00664C", D_000523E0);
 
-void func_00020B24(void) {
-    _Z11PSJS_Mallocj();
+void func_00020B24(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_00020B40(void) {
-    _Z9PSJS_FreePv();
+void func_00020B40(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_00020B5C(void) {
-    _Z11PSJS_Mallocj();
+void func_00020B5C(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_00020B78(void) {
-    _Z9PSJS_FreePv();
+void func_00020B78(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_00020B94(void) {
-    _Z11PSJS_Mallocj();
+void func_00020B94(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_00020BB0(void) {
-    _Z9PSJS_FreePv();
+void func_00020BB0(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_00020BCC(void) {
-    _Z11PSJS_Mallocj();
+void func_00020BCC(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_00020BE8(void) {
-    _Z9PSJS_FreePv();
+void func_00020BE8(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_00020C04(void) {
-    _Z11PSJS_Mallocj();
+void func_00020C04(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_00020C20(void) {
-    _Z9PSJS_FreePv();
+void func_00020C20(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00020C3C);
@@ -2390,7 +2391,7 @@ void func_00020E08(M2C_UNK **arg0) {
 
 void func_00020E18(M2C_UNK **arg0) {
     *arg0 = &D_000523C8_v271;
-    func_00020C20();
+    func_00020C20(arg0);
 }
 
 void func_00020E40(M2C_UNK **arg0) {
@@ -2399,7 +2400,7 @@ void func_00020E40(M2C_UNK **arg0) {
 
 void func_00020E50(M2C_UNK **arg0) {
     *arg0 = &D_000523C8_v271;
-    func_00020C20();
+    func_00020C20(arg0);
 }
 
 void func_00020E78(M2C_UNK **arg0) {
@@ -2408,7 +2409,7 @@ void func_00020E78(M2C_UNK **arg0) {
 
 void func_00020E88(M2C_UNK **arg0) {
     *arg0 = &D_000523C8_v271;
-    func_00020C20();
+    func_00020C20(arg0);
 }
 
 void func_00020EB0_v271(M2C_UNK **arg0) {
@@ -2417,7 +2418,7 @@ void func_00020EB0_v271(M2C_UNK **arg0) {
 
 void func_00020EC0(M2C_UNK **arg0) {
     *arg0 = &D_000523C8_v271;
-    func_00020C20();
+    func_00020C20(arg0);
 }
 
 void func_00020EE8(M2C_UNK **arg0) {
@@ -2426,7 +2427,7 @@ void func_00020EE8(M2C_UNK **arg0) {
 
 void func_00020EF8(M2C_UNK **arg0) {
     *arg0 = &D_000523C8_v271;
-    func_00020C20();
+    func_00020C20(arg0);
 }
 
 void func_00020F20(M2C_UNK **arg0) {
@@ -2435,7 +2436,7 @@ void func_00020F20(M2C_UNK **arg0) {
 
 void func_00020F30(M2C_UNK **arg0) {
     *arg0 = &D_000523C8_v271;
-    func_00020C20();
+    func_00020C20(arg0);
 }
 
 void func_00020F58(M2C_UNK **arg0) {
@@ -2444,7 +2445,7 @@ void func_00020F58(M2C_UNK **arg0) {
 
 void func_00020F68(M2C_UNK **arg0) {
     *arg0 = &D_000523C8_v271;
-    func_00020C20();
+    func_00020C20(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00020F90);
@@ -5253,11 +5254,11 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_000201C4);
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0002025C);
 
 void func_00020324(struct Unk_func_00020324_0 *arg0) {
-    func_00021868((u8 *)arg0 + 0xC);
-    func_00021950((u8 *)arg0 + 0x14);
-    func_00021A58((u8 *)arg0 + 0x1C);
-    func_0002015C((u8 *)arg0 + 0x24);
-    func_0002015C((u8 *)arg0 + 0x28);
+    func_00021868((Unk_func_00021868_0*) ((u8 *)arg0 + 0xC));
+    func_00021950((Unk_func_00021950_0*) ((u8 *)arg0 + 0x14));
+    func_00021A58((Unk_func_00021A58_0*) ((u8 *)arg0 + 0x1C));
+    func_0002015C((s32*) ((u8 *)arg0 + 0x24));
+    func_0002015C((s32*) ((u8 *)arg0 + 0x28));
     arg0->unk0 = -1;
     arg0->unk4 = 0;
     arg0->unk8 = 0;
@@ -5270,8 +5271,8 @@ s32 func_0002037C(struct Unk_func_0002037C_0 *arg0) {
     func_00021874((u8 *)arg0 + 0xC);
     func_00021964((u8 *)arg0 + 0x14);
     func_00021A6C((u8 *)arg0 + 0x1C);
-    func_00020164((u8 *)arg0 + 0x24);
-    func_00020164((u8 *)arg0 + 0x28);
+    func_00020164((s32*) ((u8 *)arg0 + 0x24));
+    func_00020164((s32*) ((u8 *)arg0 + 0x28));
     return 0;
 }
 
@@ -5338,7 +5339,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00020C48);
 INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_00020C90);
 
 void func_00020CD8(struct Unk_func_00020CD8_0 *arg0) {
-    func_00020324((u8 *)arg0 + 0xC);
+    func_00020324((Unk_func_00020324_0*) ((u8 *)arg0 + 0xC));
     func_0001FDD4((u8 *)arg0 + 0x38);
     func_000211A8((u8 *)arg0 + 0x4C);
     arg0->unk0 = 0;
@@ -5347,7 +5348,7 @@ void func_00020CD8(struct Unk_func_00020CD8_0 *arg0) {
 }
 
 void func_00020D1C(struct Unk_func_00020D1C_0 *arg0) {
-    func_00020324((u8 *)arg0 + 0xC);
+    func_00020324((Unk_func_00020324_0*) ((u8 *)arg0 + 0xC));
     func_0001FDD4((u8 *)arg0 + 0x38);
     func_000211A8((u8 *)arg0 + 0x4C);
     arg0->unk0 = 0;

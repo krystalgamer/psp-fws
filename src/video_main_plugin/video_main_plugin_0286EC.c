@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "video_main_plugin_decls.h"
 

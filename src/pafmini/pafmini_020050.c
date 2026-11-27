@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "pafmini_decls.h"
@@ -160,7 +161,7 @@ INCLUDE_ASM("nonmatchings/pafmini_020050", func_0003FC2C);
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
 s32 func_0003FC2C(s32 arg0, s32 arg1) {
-    return !((arg0 != 0) & (arg1 != 0)) ? 0 : (arg1 + 0x20);
+    return (((arg0 != 0) & (arg1 != 0)) == 0) ? 0 : (arg1 + 0x20);
 }
 #endif
 
@@ -170,6 +171,6 @@ INCLUDE_ASM("nonmatchings/pafmini_020050", func_00040934);
 
 #if FW_VERSION == 282
 s32 func_0002042C(s32 arg0, s32 arg1) {
-    return !((arg0 != 0) & (arg1 != 0)) ? 0 : (arg1 + 0x20);
+    return (((arg0 != 0) & (arg1 != 0)) == 0) ? 0 : (arg1 + 0x20);
 }
 #endif
