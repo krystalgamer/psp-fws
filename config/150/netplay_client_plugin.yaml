@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/150/.splat_cache.netplay_client_plugin
   symbol_addrs_path:
     - config/150/symbol_addrs.netplay_client_plugin.txt
+    - config/150/func_starts.netplay_client_plugin.txt
     - tmp/build/150/prx_syms.netplay_client_plugin.txt
   reloc_addrs_path: [tmp/build/150/reloc_addrs.netplay_client_plugin.txt]
   asset_path: tmp/assets/150/netplay_client_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, netplay_client_plugin]
+      - [0x5900, c, netplay_client_plugin_crtend]
       - { start: 0x5958, type: asm, name: fini, linker_section: .fini }
       - { start: 0x5974, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x5CDC, type: prxpad, order: .text }
@@ -72,6 +74,7 @@ segments:
       - { start: 0x6278, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x627C, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x6280, .rodata, netplay_client_plugin]
+      - [0x6D10, .rodata, netplay_client_plugin_crtend]
       - { start: 0x6D68, type: prxpad, order: .rodata }
   - name: netplay_client_plugin_seg1
     type: code

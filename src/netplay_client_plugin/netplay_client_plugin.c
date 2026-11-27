@@ -2344,21 +2344,3 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000CFCC);
 
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000D13C);
 #endif
-
-INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000D310);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000D368);
-#endif
-
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E658);
-#endif
-
-#if FW_VERSION < 250
-INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E6C0);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_RODATA("nonmatchings/netplay_client_plugin", D_0000E740);
-#endif

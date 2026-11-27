@@ -90,6 +90,8 @@ struct Unk_func_00006E54_0 {
     s32 unk8;
 };
 
+typedef void (*func_ptr)(void);
+
 extern M2C_UNK D_000065BC;
 extern s32 D_00006718;
 extern s32 D_00006730;
@@ -109,6 +111,7 @@ extern M2C_UNK D_00007748;
 extern M2C_UNK D_000077FC;
 extern M2C_UNK D_00007814;
 extern s32 D_000081B0;
+extern func_ptr D_0000DD68[];
 extern s32 D_0000E000;
 extern M2C_UNK D_0000E0B0;
 extern M2C_UNK D_0000E0C4;
