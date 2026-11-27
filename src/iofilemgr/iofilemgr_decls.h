@@ -125,6 +125,8 @@ typedef struct SceSysmemUidCB {
     void *funcTable;
 } SceSysmemUidCB;
 
+extern char D_0000447C[];
+extern char D_0000449C[];
 extern char D_00004594[];
 extern char D_0000466C[];
 extern char D_000046F0[];
@@ -238,11 +240,15 @@ s32 sceIoWaitAsyncCB(SceUID fd, s64 *res);
 s32 sceIoWrite(SceUID fd, const void *data, SceSize size);
 s32 sceIoWriteAsync(SceUID fd, const void *data, SceSize size);
 void *sceKernelAllocHeapMemory(SceUID heapId, SceSize size);
+SceUID sceKernelAllocateKTLS(s32 size, void *cb, void *arg);
+void sceKernelAssert(s32 test, s32 lvl);
 M2C_UNK sceKernelCallUIDObjCommonFunction();
 void sceKernelCpuResumeIntr(s32 intr);
 s32 sceKernelCpuSuspendIntr(void);
+SceUID sceKernelCreateHeap(SceUID partitionid, SceSize size, s32 unk, const char *name);
 s32 sceKernelFreeHeapMemory(SceUID heapId, void *block);
 void *sceKernelGetKTLS(SceUID id);
+void *sceKernelGetThreadKTLS(SceUID id, SceUID thid, s32 mode);
 s32 sceKernelGetUIDcontrolBlock(SceUID uid, SceSysmemUidCB **block);
 s32 sceKernelRegisterStderrPipe(s32 arg0);
 s32 sceKernelRegisterStdoutPipe(s32 arg0);

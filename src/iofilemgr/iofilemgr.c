@@ -476,7 +476,7 @@ s32 module_bootstart(s32 args, void *argp) {
     if (args >= 4) {
         arg = *(s32 *)argp;
     }
-    return IoFileMgrInit(arg);
+    return init_iofm(arg);
 }
 #endif
 
@@ -485,7 +485,21 @@ INCLUDE_ASM("nonmatchings/iofilemgr", module_bootstart);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/iofilemgr", IoFileMgrInit);
+s32 init_iofm(s32 arg) {
+    if ((g_heap = sceKernelCreateHeap(1, 0x2000, 1, "SceIofile")) < 0) {
+        Kprintf("iofilemgr.c:%s:sceKernelCreateHeap failed: 0x%08x\n", "init_iofm", g_heap);
+        Kprintf(D_0000447C, D_0000449C, "init_iofm", 185);
+        sceKernelAssert(0, 0);
+    }
+    init_iob_table();
+    if ((g_ktls = sceKernelAllocateKTLS(4, (void *)free_cwd, 0)) < 0) {
+        Kprintf("iofilemgr.c:%s:sceKernelAllocateKTLS failed: 0x%08x\n", "init_iofm", g_ktls);
+        Kprintf(D_0000447C, D_0000449C, "init_iofm", 193);
+        sceKernelAssert(0, 0);
+    }
+    func_00003D68();
+    return 0;
+}
 
 void module_reboot_before(void) {
     terminate_iofm(0);
@@ -1070,7 +1084,31 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoAssign);
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoUnassign);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+s32 sceIoGetThreadCwd(SceUID thid, char *dir, SceSize len) {
+    char **cwd;
+    SceSize n;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    if (k1IsUserMode() && (s32)((u32)dir | len | ((u32)dir + len)) < 0) {
+        Kprintf(D_0000466C, "sceIoGetThreadCwd", dir, len);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    cwd = sceKernelGetThreadKTLS(g_ktls, thid, 0);
+    if (cwd == NULL || *cwd == NULL) {
+        setK1(oldK1);
+        return 0;
+    }
+    n = strlen(*cwd) + 1;
+    strncpy(dir, *cwd, (len < n) ? len : n);
+    setK1(oldK1);
+    return n;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetThreadCwd);
 #endif
 
