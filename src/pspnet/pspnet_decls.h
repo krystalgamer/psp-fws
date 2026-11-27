@@ -8,6 +8,44 @@ typedef __builtin_va_list va_list;
 #define va_start(v, l) __builtin_stdarg_start((v), l)
 #define va_end(v) __builtin_va_end(v)
 
+typedef struct {
+    u32 low;
+    u32 hi;
+} SceKernelSysClock;
+
+/* struct iovec / struct uio (NetBSD uio.h; SCE: 32-bit offset, no segflg/proc) */
+struct iovec {
+    void *iov_base;     /* 0x0 */
+    u32 iov_len;        /* 0x4 */
+};
+enum uio_rw { UIO_READ, UIO_WRITE };
+struct uio {
+    struct iovec *uio_iov;  /* 0x00 */
+    s32 uio_iovcnt;         /* 0x04 */
+    s32 uio_offset;         /* 0x08 */
+    s32 uio_resid;          /* 0x0C */
+    enum uio_rw uio_rw;     /* 0x10 */
+};
+
+
+struct Unk_func_00004974_var_s2 {
+    struct Unk_func_00004974_var_s2 *unk0;
+    u8 pad4[0x4];
+    u8 *unk8;
+    u32 unkC;
+};
+
+struct Unk_func_00005744_0 {
+    struct Unk_func_00005744_var_s0 *unk0;
+    s32 unk4;
+    s32 unk8;
+};
+
+struct Unk_func_00005744_var_s0 {
+    u8 pad0[0x4];
+    struct Unk_func_00005744_var_s0 *unk4;
+};
+
 struct socket;
 struct ifnet;
 static __inline u32 min(u32 a, u32 b) {
@@ -221,11 +259,6 @@ typedef char chk_ifaddr[(sizeof(struct ifaddr) == 0x38) ? 1 : -1];
 } while (0)
 
 
-typedef struct {
-    u32 low;
-    u32 hi;
-} SceKernelSysClock;
-
 #define IFNAMSIZ 16
 
 /* struct ifreq (NetBSD 1.5 if.h), 0x20 bytes */
@@ -350,21 +383,6 @@ struct bpf_insn {
 #define BPF_MEMWORDS 16
 
 
-/* struct iovec / struct uio (NetBSD uio.h; SCE: 32-bit offset, no segflg/proc) */
-struct iovec {
-    void *iov_base;     /* 0x0 */
-    u32 iov_len;        /* 0x4 */
-};
-enum uio_rw { UIO_READ, UIO_WRITE };
-struct uio {
-    struct iovec *uio_iov;  /* 0x00 */
-    s32 uio_iovcnt;         /* 0x04 */
-    s32 uio_offset;         /* 0x08 */
-    s32 uio_resid;          /* 0x0C */
-    enum uio_rw uio_rw;     /* 0x10 */
-};
-
-
 s32 sceNetStrcmp(const char *s1, const char *s2);
 s32 _sce_pspnet_spllock(void);
 void _sce_pspnet_splunlock(s32 arg0);
@@ -388,24 +406,6 @@ extern __inline__ struct ifnet *ifunit_inline(const char *name) {
     _sce_pspnet_splunlock(s);
     return NULL;
 }
-
-struct Unk_func_00004974_var_s2 {
-    struct Unk_func_00004974_var_s2 *unk0;
-    u8 pad4[0x4];
-    u8 *unk8;
-    u32 unkC;
-};
-
-struct Unk_func_00005744_0 {
-    struct Unk_func_00005744_var_s0 *unk0;
-    s32 unk4;
-    s32 unk8;
-};
-
-struct Unk_func_00005744_var_s0 {
-    u8 pad0[0x4];
-    struct Unk_func_00005744_var_s0 *unk4;
-};
 
 extern s32 D_0000A0D0;
 extern s32 D_0000A0E4;
@@ -434,6 +434,7 @@ extern s32 D_0000AC30;
 extern s32 D_0000AC34;
 extern s32 D_0000AC38;
 extern s32 D_0000AC3C;
+extern struct calloutq D_0000AC4C;
 extern void (*D_0000AC58)(struct SceNetThreadInfo *);
 extern struct slpque D_0000AC6C[SLPQUE_TABLESIZE];
 extern s32 D_0000AF18;
@@ -450,6 +451,7 @@ extern s32 D_0000AF40;
 extern struct SceNetThreadList D_0000AF44;
 extern struct calloutq D_0000AF4C;
 extern struct calloutq D_0000AF54;
+extern struct calloutq D_0000AF58;
 extern void (*D_0000AF5C)(struct SceNetThreadInfo *);
 extern void (*D_0000AF60)(s32, s32);
 extern void (*D_0000AF64)(s32);
@@ -530,7 +532,7 @@ void _sce_pspnet_microtime(struct timeval *tv);
 void _sce_pspnet_schednetintr(s32 arg0);
 void _sce_pspnet_schednetintr_with_evf(s32 arg0);
 void _sce_pspnet_selrecord(struct SceNetThreadInfo *ti, s32 *sip);
-void _sce_pspnet_selwakeup(s32 *sip);
+void _sce_pspnet_selwakeup(s32 *arg0);
 s32 _sce_pspnet_spllock(void);
 s32 _sce_pspnet_spllock_owner(void);
 void _sce_pspnet_splunlock(s32 arg0);
@@ -606,6 +608,7 @@ s32 func_000079E4(void);
 s32 func_00007A68(char c);
 char func_00007B50(char c);
 M2C_UNK *func_00007BBC(void);
+void *func_00007C0C(void *dst, const void *src, s32 n);
 s32 func_00007D20(const void *s1, const void *s2, s32 n);
 s32 func_00007E3C(void (*putc)(char **pp, s32 c), char **pp, const char *fmt, va_list ap);
 s32 func_00007E50(void (*putc)(char **pp, s32 c), char **pp, const char *fmt, va_list ap);
