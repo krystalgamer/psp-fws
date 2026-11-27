@@ -67,11 +67,11 @@ INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003244);
 INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003248);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_80271F41);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 void sceVshCommonGui_80271F41(void) {
     s32 temp_v0;
     void *temp_v0_2;
@@ -101,11 +101,11 @@ void sceVshCommonGui_80271F41(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 350
+#if FW_VERSION >= 152 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_1CF884A1);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 void sceVshCommonGui_1CF884A1(void) {
     s32 temp_v0;
     void *temp_v0_2;

@@ -73,6 +73,7 @@ extern s32 D_00004344;
 extern s32 D_00004390;
 extern s32 D_00004394;
 extern M2C_UNK D_00008148;
+extern s32 D_0000826C;
 
 M2C_UNK func_00000000();
 void func_00000438(s32 arg0, s32 arg1);
@@ -133,7 +134,7 @@ void sceVshCommonGui_00FBD201(void);
 void sceVshCommonGui_0131C97D(s32 *arg0);
 void sceVshCommonGui_1CF884A1(void);
 void sceVshCommonGui_25AC25C0(void);
-M2C_UNK *sceVshCommonGui_25D6E91D(void);
+s32 *sceVshCommonGui_25D6E91D(void);
 void sceVshCommonGui_30FA68C3(void);
 s32 sceVshCommonGui_37296C55(void **arg0);
 void sceVshCommonGui_3E737100(void);

@@ -208,8 +208,14 @@ s32 sceVshCommonGui_F7A03543(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_gui_0016E8", sceVshCommonGui_25D6E91D);
+#endif
+
+#if FW_VERSION == 150
+s32 *sceVshCommonGui_25D6E91D(void) {
+    return &D_0000826C;
+}
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350

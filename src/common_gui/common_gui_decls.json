@@ -59,7 +59,7 @@
   "sceVshCommonGui_0131C97D": "void sceVshCommonGui_0131C97D(s32 *arg0);",
   "sceVshCommonGui_1CF884A1": "void sceVshCommonGui_1CF884A1(void);",
   "sceVshCommonGui_25AC25C0": "void sceVshCommonGui_25AC25C0(void);",
-  "sceVshCommonGui_25D6E91D": "M2C_UNK *sceVshCommonGui_25D6E91D(void);",
+  "sceVshCommonGui_25D6E91D": "s32 *sceVshCommonGui_25D6E91D(void);",
   "sceVshCommonGui_30FA68C3": "void sceVshCommonGui_30FA68C3(void);",
   "sceVshCommonGui_37296C55": "s32 sceVshCommonGui_37296C55(void **arg0);",
   "sceVshCommonGui_3E737100": "void sceVshCommonGui_3E737100(void);",
@@ -116,6 +116,7 @@
   "D_00004344": "extern s32 D_00004344;",
   "D_00004390": "extern s32 D_00004390;",
   "D_00004394": "extern s32 D_00004394;",
-  "D_00008148": "extern M2C_UNK D_00008148;"
+  "D_00008148": "extern M2C_UNK D_00008148;",
+  "D_0000826C": "extern s32 D_0000826C;"
  }
 }
