@@ -2028,19 +2028,88 @@ M2C_UNK *func_0000885C(void) {
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", sceNetMemcmp);
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetMemcpy);
+u8 *sceNetMemcpy(u8 *arg0, u8 *arg1, s32 arg2) {
+    s32 var_a2;
+    u8 *var_a1;
+    u8 *var_v0;
+    u8 *var_v1;
+    u8 temp_a3;
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetMemset);
+    var_a1 = arg1;
+    var_a2 = arg2;
+    var_v0 = NULL;
+    if (arg0 != NULL) {
+        var_v1 = arg0;
+        if (var_a2 > 0) {
+            do {
+                temp_a3 = *var_a1;
+                var_a2 -= 1;
+                var_a1 += 1;
+                *var_v1 = temp_a3;
+                var_v1 += 1;
+            } while (var_a2 > 0);
+        }
+        var_v0 = arg0;
+    }
+    return var_v0;
+}
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetMemchr);
+void *sceNetMemset(void *s, s32 c, s32 n) {
+    u8 *p;
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetMemmove);
+    if (s != NULL) {
+        c &= 0xFF;
+        for (p = s; n > 0; n--)
+            *p++ = c;
+    }
+    return s;
+}
+
+void *sceNetMemchr(const void *s, s32 c, s32 n) {
+    const u8 *p;
+    u8 ch = c;
+
+    if (s != NULL) {
+        for (p = s; n > 0; n--, p++) {
+            if (*p == ch)
+                return (void *)p;
+        }
+    }
+    return NULL;
+}
+
+void *sceNetMemmove(void *dst, const void *src, s32 n) {
+    u8 *d;
+    const u8 *s;
+
+    d = dst;
+    s = src;
+    if (dst == NULL)
+        return NULL;
+    if (d >= s) {
+        for (n--; n >= 0; n--)
+            d[n] = s[n];
+    } else {
+        while (n > 0) {
+            *d++ = *s++;
+            n--;
+        }
+    }
+    return dst;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBcmp);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBcopy);
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetBzero);
+void sceNetBzero(void *s, s32 n) {
+    u8 *p;
+
+    if (s != NULL) {
+        for (p = s; n > 0; n--)
+            *p++ = 0;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetSprintf);
 
@@ -2090,17 +2159,62 @@ u8 *sceNetMemcpy(u8 *arg0, u8 *arg1, s32 arg2) {
     return var_v0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetMemset);
+void *sceNetMemset(void *s, s32 c, s32 n) {
+    u8 *p;
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetMemchr);
+    if (s != NULL) {
+        c &= 0xFF;
+        for (p = s; n > 0; n--)
+            *p++ = c;
+    }
+    return s;
+}
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetMemmove);
+void *sceNetMemchr(const void *s, s32 c, s32 n) {
+    const u8 *p;
+    u8 ch = c;
+
+    if (s != NULL) {
+        for (p = s; n > 0; n--, p++) {
+            if (*p == ch)
+                return (void *)p;
+        }
+    }
+    return NULL;
+}
+
+void *sceNetMemmove(void *dst, const void *src, s32 n) {
+    u8 *d;
+    const u8 *s;
+
+    d = dst;
+    s = src;
+    if (dst == NULL)
+        return NULL;
+    if (d >= s) {
+        for (n--; n >= 0; n--)
+            d[n] = s[n];
+    } else {
+        while (n > 0) {
+            *d++ = *s++;
+            n--;
+        }
+    }
+    return dst;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBcmp);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBcopy);
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetBzero);
+void sceNetBzero(void *s, s32 n) {
+    u8 *p;
+
+    if (s != NULL) {
+        for (p = s; n > 0; n--)
+            *p++ = 0;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetSprintf);
 
@@ -2120,14 +2234,19 @@ void sceNetAtoi(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet", sceNetStrcmp);
-#endif
+s32 sceNetStrcmp(const char *s1, const char *s2) {
+    if (s1 == NULL || s2 == NULL) {
+        if (s1 == s2)
+            return 0;
+        return (s1 == NULL) ? -1 : 1;
+    }
+    while (*s1 == *s2++) {
+        if (*s1++ == 0)
+            return 0;
+    }
+    return *s1 - *(s2 - 1);
+}
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", sceNetStrcpy);
-#endif
-
-#if FW_VERSION >= 282
 u8 *sceNetStrcpy(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;
@@ -2148,16 +2267,61 @@ u8 *sceNetStrcpy(u8 *arg0, u8 *arg1) {
     }
     return var_v0;
 }
-#endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet", sceNetStrlen);
+s32 sceNetStrlen(const char *s) {
+    s32 n;
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetStrncmp);
+    n = 0;
+    if (s == NULL)
+        return 0;
+    while (*s++ != 0)
+        n++;
+    return n;
+}
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetStrncpy);
+s32 sceNetStrncmp(const char *s1, const char *s2, s32 n) {
+    if (s1 == NULL || s2 == NULL) {
+        if (s1 == s2)
+            return 0;
+        return (s1 == NULL) ? -1 : 1;
+    }
+    n--;
+    while (n >= 0 && *s1 == *s2++) {
+        if (*s1++ == 0)
+            return 0;
+        n--;
+    }
+    return (n < 0) ? 0 : *s1 - *(s2 - 1);
+}
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetStrchr);
+char *sceNetStrncpy(char *dst, const char *src, s32 n) {
+    char *d;
+    s32 i;
+
+    d = dst;
+    if (dst == NULL || src == NULL)
+        return NULL;
+    for (i = 0; i < n; i++) {
+        if ((*d++ = *src++) == 0) {
+            for (i++; i < n; i++)
+                *d++ = 0;
+            return dst;
+        }
+    }
+    return dst;
+}
+
+char *sceNetStrchr(const char *s, s32 c) {
+    char ch = c;
+
+    if (s == NULL)
+        return NULL;
+    do {
+        if (*s == ch)
+            return (char *)s;
+    } while (*s++ != 0);
+    return NULL;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetStrcasecmp);
 
@@ -2165,7 +2329,22 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetStrncasecmp);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetStrcat);
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetStrrchr);
+char *sceNetStrrchr(const char *s, s32 c) {
+    const char *p;
+    char ch = c;
+
+    p = s;
+    if (s == NULL)
+        return NULL;
+    while (*p++ != 0)
+        ;
+    p--;
+    do {
+        if (*p == ch)
+            return (char *)p;
+    } while (s < p--);
+    return NULL;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00008E1C);
