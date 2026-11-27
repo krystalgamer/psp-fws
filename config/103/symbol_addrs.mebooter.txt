@@ -1,3 +1,14 @@
 // shared names (tools/add_version.py) begin
 func_0000014C = 0x00000104; // type:func rom:0x184
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+me_init = 0x00000000; // type:func
+memcpy = 0x000001C4; // type:func
+sceKernelDcacheWritebackInvalidateAll = 0x000001CC; // type:func
+sceKernelGzipDecompress = 0x000001D4; // type:func
+sceDdrFlush = 0x000001DC; // type:func
+sceSysregMeResetEnable = 0x000001E4; // type:func
+sceSysregMeResetDisable = 0x000001EC; // type:func
+sceSysregVmeResetDisable = 0x000001F4; // type:func
+sceSysregMeBusClockEnable = 0x000001FC; // type:func
