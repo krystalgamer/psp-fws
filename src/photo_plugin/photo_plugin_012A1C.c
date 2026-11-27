@@ -44,10 +44,10 @@ s32 func_00012D7C(s32 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_v1;
 
-    temp_v0 = scePaf_88784487(arg0);
+    temp_v0 = _ZN3paf4View4FindEPKc(arg0);
     var_v1 = 0;
     if (temp_v0 != 0) {
-        var_v1 = scePaf_DCE3D225(temp_v0, arg1);
+        var_v1 = _ZNK3paf4View12GetInterfaceEi(temp_v0, arg1);
     }
     return var_v1;
 }
@@ -382,7 +382,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000149E4);
 
 #if FW_VERSION >= 350
 void func_00014AE8(void) {
-    sceVshCommonGui_F5A16B4D(1);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(1);
 }
 #endif
 

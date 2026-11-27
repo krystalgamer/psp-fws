@@ -989,7 +989,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_017178", func_00019E78);
 void func_0001AC50(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x1FD) = 0;
     M2C_FIELD(arg0, s8 *, 0x1FE) = 0;
-    scePaf_BE0D7212();
+    _ZN3paf8PhWidget13UpdateCamerasEv();
 }
 #endif
 
@@ -1104,7 +1104,7 @@ void func_0001B74C(struct Unk_func_0001B74C_0 *arg0) {
 
 #if FW_VERSION >= 350
 void func_0001B74C(struct Unk_func_0001B74C_0 *arg0) {
-    sceVshCommonGui_1F02F9D5(0);
+    _ZN3vsh13Infobar_CloseEb(0);
     M2C_FIELD(arg0, s8 *, 0x52) = 0;
 }
 #endif
@@ -1148,8 +1148,8 @@ void func_0001BDB4(struct Unk_func_0001BDB4_0 *arg0, s32 arg1) {
     if (temp_s0 == 0) {
         arg0->unk8 = arg1;
     } else {
-        scePaf_BC513A6B(temp_s0);
-        scePaf_6261C0A5(temp_s0);
+        _ZN3paf5ImageD1Ev(temp_s0);
+        _ZdlPv(temp_s0);
         arg0->unk8 = arg1;
     }
 }
@@ -1262,7 +1262,7 @@ void func_0001D0BC(s32 arg0) {
 
 #if FW_VERSION >= 350
 void func_0001D0BC(s32 arg0) {
-    scePaf_BD5018AA(arg0 + 0x54);
+    sce_paf_private_strcpy(arg0 + 0x54);
 }
 #endif
 
@@ -1328,10 +1328,10 @@ void func_0001D0D8(s32 arg0) {
     void **temp_v0;
 
     temp_s0 = arg0 + 0x54;
-    if (scePaf_51618363(temp_s0, &D_000301C0) == 0) {
+    if (sce_paf_private_strcmp(temp_s0, &D_000301C0) == 0) {
 
     } else {
-        temp_v0 = scePaf_4F20E8B0(D_00032F68, temp_s0);
+        temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_00032F68, temp_s0);
         if (temp_v0 != NULL) {
             M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0xBC)(temp_v0, 0, 0);
         }
@@ -1441,8 +1441,8 @@ void func_0001EEBC(s32 arg0) {
     if (arg0 != -1) {
 
     } else {
-        scePaf_8B38372A(D_00032F68, &D_000301E8);
-        sceVshCommonGui_891DD627(0);
+        _ZN3paf4View9PageCloseEPKc(D_00032F68, &D_000301E8);
+        _ZN3vsh25ShowButtonNavigation_BackEb(0);
         D_0003304C = 0;
         if (D_00031B40 != NULL) {
             func_0001B7B4((s32) D_00031B40);
@@ -3005,8 +3005,8 @@ void func_00024B7C(void) {
     if (D_00032F68 == 0) {
 
     } else {
-        scePaf_8B38372A(D_00032F68, &D_00030C94);
-        scePaf_8B38372A(D_00032F68, &D_00030CAC);
+        _ZN3paf4View9PageCloseEPKc(D_00032F68, &D_00030C94);
+        _ZN3paf4View9PageCloseEPKc(D_00032F68, &D_00030CAC);
     }
 }
 #endif
