@@ -205,6 +205,7 @@
   "D_0000A0D0": "extern s32 D_0000A0D0;",
   "D_0000A0E4": "extern s32 D_0000A0E4;",
   "D_0000A0EC": "extern s32 D_0000A0EC;",
+  "D_0000A0FC": "extern s32 D_0000A0FC;",
   "D_0000A10D": "extern s32 D_0000A10D;",
   "D_0000A860": "extern s32 D_0000A860;",
   "D_0000A864": "extern s32 D_0000A864;",

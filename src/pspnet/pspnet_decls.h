@@ -307,6 +307,7 @@ struct Unk_sceNet_lib_92633D8D_0 {
 extern s32 D_0000A0D0;
 extern s32 D_0000A0E4;
 extern s32 D_0000A0EC;
+extern s32 D_0000A0FC;
 extern s32 D_0000A10D;
 extern s32 D_0000A860;
 extern s32 D_0000A864;
