@@ -404,17 +404,11 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000234C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000225C);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000518);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION < 201
 void func_00000518(s32 arg0) {
     _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_000208A8);
 }
-#endif
 
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000053C);
 #endif
 
@@ -1530,9 +1524,15 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F770);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002EE4);
 
-INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003328);
+void func_00003328(s32 arg0) {
+    _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0xDC);
+    _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0xCC);
+}
 
-INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000335C);
+void func_0000335C(s32 arg0) {
+    _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0xC9);
+    _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0xCA);
+}
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003390);
 
@@ -3270,7 +3270,9 @@ s32 func_0001058C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x1C);
 }
 
-INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00010594);
+void func_00010594(void *arg0, s32 arg1) {
+    _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
+}
 
 void func_000105B8(void *arg0) {
     _ZN3paf4View12PageActivateEPKc(M2C_FIELD(arg0, s32 *, 4));
