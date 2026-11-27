@@ -319,19 +319,3 @@ void func_0004F5F0(s32 arg0, s32 arg1) {
 #if FW_VERSION == 150
 INCLUDE_ASM("nonmatchings/music_plugin_04DA94", func_0004F60C);
 #endif
-
-#if FW_VERSION == 100 || FW_VERSION == 152
-void func_0004F60C(s32 arg0) {
-    func_0004EF08(arg0 - 4);
-}
-#endif
-
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/music_plugin_04DA94", func_0004F628);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION == 152
-void func_0004F628(s32 arg0) {
-    func_0004EF10(arg0 - 4);
-}
-#endif

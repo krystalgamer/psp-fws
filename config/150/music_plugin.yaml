@@ -62,6 +62,7 @@ segments:
       - [0x45A68, c, music_plugin_00041D54]
       - [0x4F138, c, music_plugin_0004B204]
       - [0x519E4, c, music_plugin_04DA94]
+      - [0x537D8, c, music_plugin_0004F60C]
       - [0x537F4, c, music_plugin_0004F644]
       - [0x5C714, c, music_plugin_crtend]
       - { start: 0x5DFD8, type: asm, name: fini, linker_section: .fini }
