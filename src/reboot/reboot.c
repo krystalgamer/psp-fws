@@ -1,6 +1,6 @@
 /* compiler[151]: 1.6.1 */
 /* compiler[150]: 1.6.1 */
-/* cflags[150,151]: -O2 -mno-split-addresses */
+/* cflags[150,151]: -O2 -frename-registers -mno-split-addresses */
 /* cflags[100]: -O2 -mno-split-addresses */
 #include "common.h"
 #include "reboot_decls.h"
@@ -46,7 +46,23 @@ void func_000003C8(s32 test, u32 lvl) {
     Kprintf("assertion ignore (level %d >= %d)\n", lvl, cur);
 }
 #else
-INCLUDE_ASM("nonmatchings/reboot", func_000003C8);
+void func_000003C8(s32 test, s32 lvl) {
+    s32 cur = __builtin_allegrex_ext(func_00001D14(), 8, 2);
+
+    if (test != 0) {
+        return;
+    }
+    if (lvl < cur) {
+        if (D_00017124 != NULL) {
+            D_00017124(0);
+            return;
+        }
+        Kprintf("There is no assert handler, stop\n");
+        for (;;) {
+        }
+    }
+    Kprintf("assertion ignore (level %d >= %d)\n", lvl, cur);
+}
 #endif
 
 #if FW_VERSION == 100
