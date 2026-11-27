@@ -2,6 +2,15 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "threadman_decls.h"
+#include "k1.h"
+
+/* caller address for the threadman log handler, read before the $k1 shift */
+static inline void *getRa(void) {
+    void *ra;
+
+    __asm__ __volatile__("move %0, $31" : "=r"(ra));
+    return ra;
+}
 
 #if FW_VERSION == 100
 void func_00000000(SceThreadQueue *queue, s32 waitType) {
@@ -258,10 +267,10 @@ s32 func_000008A0(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_VFIELD(&D_00015E08, s32, 0x418) == 0) {
-        temp_v0 = M2C_VFIELD(&D_00015E08, s32, 4) != (s32) M2C_FIELD(&D_00015E08, void **, 0);
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(M2C_FIELD(&D_00015E08, void **, 0), void **, 0xE4) = (void *) (M2C_FIELD(&D_00015E08, void **, 0) + 0xE8);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0xE4) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0xE8);
         }
         var_v1 = temp_v0;
     }
@@ -275,10 +284,10 @@ s32 func_000008A0(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (M2C_VFIELD(&D_00015E08, s32, 0x418) == 0) {
-        temp_v0 = M2C_VFIELD(&D_00015E08, s32, 4) != (s32) M2C_FIELD(&D_00015E08, void **, 0);
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(M2C_FIELD(&D_00015E08, void **, 0), void **, 0xEC) = (void *) (M2C_FIELD(&D_00015E08, void **, 0) + 0xF0);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0xEC) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0xF0);
         }
         var_v1 = temp_v0;
     }
@@ -490,10 +499,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (D_00016C74.unk418 == 0) {
-        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(D_00016C74.unk0, void **, 0x10C) = (void *) (D_00016C74.unk0 + 0x110);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x10C) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0x110);
         }
         var_v1 = temp_v0;
     }
@@ -507,10 +516,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (D_00016C74.unk418 == 0) {
-        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(D_00016C74.unk0, void **, 0x104) = (void *) (D_00016C74.unk0 + 0x108);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x104) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0x108);
         }
         var_v1 = temp_v0;
     }
@@ -524,10 +533,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (D_00016C74.unk418 == 0) {
-        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(D_00016C74.unk0, void **, 0x100) = (void *) (D_00016C74.unk0 + 0x104);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x100) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0x104);
         }
         var_v1 = temp_v0;
     }
@@ -541,10 +550,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (D_00016C74.unk418 == 0) {
-        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(D_00016C74.unk0, void **, 0xFC) = (void *) (D_00016C74.unk0 + 0x100);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0xFC) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0x100);
         }
         var_v1 = temp_v0;
     }
@@ -558,10 +567,10 @@ s32 func_000009F8(void) {
     s32 var_v1;
 
     var_v1 = 0;
-    if (D_00016C74.unk418 == 0) {
-        temp_v0 = D_00016C74.unk4 != (s32) D_00016C74.unk0;
+    if (((volatile SceThreadmanInfo *)&g_threadmanInfo)->dispatchDisabled == 0) {
+        temp_v0 = ((volatile SceThreadmanInfo *)&g_threadmanInfo)->nextThread != g_threadmanInfo.currentThread;
         if (temp_v0 != 0) {
-            M2C_FIELD(D_00016C74.unk0, void **, 0xF4) = (void *) (D_00016C74.unk0 + 0xF8);
+            M2C_FIELD(g_threadmanInfo.currentThread, void **, 0xF4) = (void *) ((u8 *)g_threadmanInfo.currentThread + 0xF8);
         }
         var_v1 = temp_v0;
     }
@@ -1553,7 +1562,9 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTime);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTimeWide);
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTimeLow);
+u32 sceKernelGetSystemTimeLow(void) {
+    return *(volatile u32 *)0xBC600000;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000B7F4);
 
@@ -1788,12 +1799,20 @@ s32 func_0000E674(void *arg0, void *arg1) {
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/threadman", func_0000DF00);
+s32 func_0000DF00(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap) {
+    SceThreadQueue *link = UID_CB_TO_DATA(cb, type, SceThreadQueue);
+    SceThread *next = link->next;
+
+    next->prev = link->prev;
+    link->prev->next = next;
+    sceKernelCallUIDObjCommonFunction(cb, type, funcId, ap);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
-s32 func_0000DF00(void) {
-    sceKernelCallUIDObjCommonFunction();
+s32 func_0000DF00(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap) {
+    sceKernelCallUIDObjCommonFunction(cb, type, funcId, ap);
     return 0;
 }
 #endif
@@ -1960,7 +1979,13 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000F5B4);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", sceKernelSetThreadmanLogHandler);
+s32 sceKernelSetThreadmanLogHandler(SceThreadmanLogHandler handler, SceThreadmanInfo **info) {
+    g_threadmanInfo.logHandler = handler;
+    if (info != NULL) {
+        *info = &g_threadmanInfo;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000ED74);
 
@@ -2147,13 +2172,13 @@ INCLUDE_ASM("nonmatchings/threadman", func_0001313C);
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00015E08, void **, 0x108), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x108), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 270
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00015E08, void **, 0x100), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x100), s32 *, 0x18));
 }
 #endif
 
@@ -2491,31 +2516,31 @@ void _sceKernelExitThread(void) {
 
 #if FW_VERSION >= 350
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x128), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x128), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION >= 330 && FW_VERSION < 350
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x120), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x120), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 330
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x11C), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x11C), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x118), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x118), s32 *, 0x18));
 }
 #endif
 
 #if FW_VERSION == 282
 void _sceKernelExitThread(void) {
-    sceKernelExitThread(M2C_FIELD(M2C_FIELD(D_00016C74.unk0, void **, 0x110), s32 *, 0x18));
+    sceKernelExitThread(M2C_FIELD(M2C_FIELD(g_threadmanInfo.currentThread, void **, 0x110), s32 *, 0x18));
 }
 #endif
 
@@ -2584,9 +2609,37 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelRotateThreadReadyQueue);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReleaseWaitThread);
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadId);
+SceUID sceKernelGetThreadId(void) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadCurrentPriority);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x1D, ra, 0);
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    setK1(oldK1);
+    return thread->uid;
+}
+
+s32 sceKernelGetThreadCurrentPriority(void) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x1E, ra, 1, thread->currentPriority);
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    setK1(oldK1);
+    return thread->currentPriority;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadExitStatus);
 

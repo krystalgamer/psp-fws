@@ -94,6 +94,22 @@ typedef struct SceThread {
 
 typedef s32 (*SceThreadmanLogHandler)(s32 id, void *ra, s32 nargs, ...);
 
+#if FW_VERSION == 100
+#define THREADMAN_LOG_OFF 0x6F0
+#elif FW_VERSION < 152
+#define THREADMAN_LOG_OFF 0x738
+#elif FW_VERSION < 201
+#define THREADMAN_LOG_OFF 0x73C
+#elif FW_VERSION < 270
+#define THREADMAN_LOG_OFF 0x740
+#elif FW_VERSION < 282
+#define THREADMAN_LOG_OFF 0x748
+#elif FW_VERSION < 330
+#define THREADMAN_LOG_OFF 0x74C
+#else
+#define THREADMAN_LOG_OFF 0x770
+#endif
+
 /* the thread manager state (1.00: 0x6F4 bytes at 0x15518) */
 typedef struct SceThreadmanInfo {
     SceThread *currentThread; /* 0x000 */
@@ -101,7 +117,11 @@ typedef struct SceThreadmanInfo {
     SceThreadQueue readyQueue[128]; /* 0x008 */
     u32 readyPriorityMask[4]; /* 0x408 */
     s32 dispatchDisabled; /* 0x418 */
-    u8 unk41C[0x5EC - 0x41C];
+#if FW_VERSION == 100
+    u8 unk41C[0x430 - 0x41C];
+    u32 unk430; /* 0x430: system time low word at last update */
+    u32 unk434; /* 0x434: system time high word */
+    u8 unk438[0x5EC - 0x438];
     SceThreadQueue suspendedThreads; /* 0x5EC */
     u8 unk5F4[0x5FC - 0x5F4];
     SceSysmemUidCB *uidWaitQType; /* 0x5FC */
@@ -126,15 +146,11 @@ typedef struct SceThreadmanInfo {
         u8 buf[0x84];
     } tmpInfo; /* 0x660: refer-status scratch buffer */
     u8 unk6E4[0x6F0 - 0x6E4];
-    SceThreadmanLogHandler logHandler; /* 0x6F0 */
+#else
+    u8 unk41C[THREADMAN_LOG_OFF - 0x41C];
+#endif
+    SceThreadmanLogHandler logHandler; /* 0x6F0 (1.00) */
 } SceThreadmanInfo;
-
-struct D_00016C74_s {
-    void * unk0;
-    volatile s32 unk4;
-    u8 pad8[0x410];
-    volatile s32 unk418;
-};
 
 struct Unk_func_00000448_temp_s0 {
     struct Unk_func_00000448_temp_s0 *unk0;
@@ -323,7 +339,6 @@ extern s32 D_00015BE8;
 extern s32 D_00015BEC;
 extern s32 D_00015BF0;
 extern s32 D_00015CD4;
-extern void *D_00015E08;
 extern s32 D_00015E0C;
 extern M2C_UNK D_00016414;
 extern void *D_00016444;
@@ -337,7 +352,6 @@ extern s32 D_0001671C;
 extern s32 D_00016754;
 extern s32 D_00016778;
 extern s32 D_000169E0;
-extern struct D_00016C74_s D_00016C74;
 extern s32 D_00016C78;
 extern void *D_000172B4;
 extern s32 D_000172B8;
@@ -419,7 +433,7 @@ s32 func_0000DE24(void *arg0);
 s32 func_0000DE4C(void);
 s32 func_0000DE6C(void *arg0);
 s32 func_0000DE94(void);
-s32 func_0000DF00(void);
+s32 func_0000DF00(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap);
 s32 func_0000E674(void *arg0, void *arg1);
 s32 func_0000EA04(s32, s32);
 s32 func_0000ED30(void);

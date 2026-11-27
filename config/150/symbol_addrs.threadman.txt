@@ -263,3 +263,4 @@ func_000153A8 = 0x00014398; // type:func rom:0x14418
 func_00013A4C = 0x0001443C; // type:func rom:0x144BC
 func_00000544_v150 = 0x00000544; // type:func rom:0x5C4
 // shared names (tools/add_version.py) end
+g_threadmanInfo = 0x00015E08;
