@@ -136,7 +136,28 @@ INCLUDE_RODATA("nonmatchings/usb", D_000091BC);
 INCLUDE_RODATA("nonmatchings/usb", D_000091C8);
 #endif
 
-INCLUDE_ASM("nonmatchings/usb", func_000006D4);
+s32 func_000006D4(void) {
+    SceUsbdDriver *drv;
+    s32 ret;
+    u8 cls;
+
+    drv = g_usbbd.drivers;
+    ret = 0;
+    if (drv->link != NULL) {
+        while (drv != NULL) {
+            cls = ((u8 *)drv->descriptor)[4];
+            if (cls != 0) {
+                Kprintf("usbbd ERROR : %s has Device Class : 0x%02x.\nSo cannot activate with other protocol drivers\n", drv->name, cls);
+                ret = -1;
+                goto end;
+            }
+            drv = drv->link;
+        }
+        ret = 0;
+    }
+end:
+    return ret;
+}
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/usb", func_0000077C);
@@ -285,7 +306,30 @@ INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqRecv);
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqCancel);
 
+#if FW_VERSION == 100
+s32 func_000026E8(s32 n) {
+    UsbbdEpRec *rec = &g_usbbd.eps[n];
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    if (g_usbbd.actState != 0x200 || g_usbbd.cableState != 0x20 || g_usbbd.connState == 4) {
+        while (rec->head != NULL) {
+            func_00002808(rec, -2);
+        }
+    } else if (rec->head != NULL) {
+        if (func_00004280(n, -2) != 0) {
+            sceKernelCpuResumeIntr(intr);
+            return 0x80243006;
+        }
+        while (rec->head != NULL) {
+            func_00002808(rec, -2);
+        }
+    }
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/usb", func_000026E8);
+#endif
 
 #if FW_VERSION == 100
 void func_00002808(UsbbdEpRec *rec, s32 status) {
@@ -554,7 +598,20 @@ s32 sceUsbbdReqCancelAll(SceUsbdEndpoint *ep) {
 INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqCancelAll);
 #endif
 
+#if FW_VERSION == 100
+s32 func_00002E80(s32 n) {
+    UsbbdEpRec *rec = &g_usbbd.eps[n];
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    while (rec->head != NULL) {
+        func_00002808(rec, -2);
+    }
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/usb", func_00002E80);
+#endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/usb", func_00002F3C);
