@@ -588,10 +588,7 @@ s32 soaccept(struct socket *so, struct mbuf *nam) {
     _sce_pspnet_splunlock(s);
     return error;
 }
-#endif
-
-
-#if FW_VERSION >= 271
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", soaccept);
 #endif
 
@@ -1890,7 +1887,7 @@ void func_0000993C(void) {
 }
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 151 || FW_VERSION == 152
 s32 ether_multiaddr(struct sockaddr *sa, u8 *addrlo, u8 *addrhi) {
     struct sockaddr_in *sin;
 
@@ -2672,7 +2669,16 @@ s32 func_000106E0(void) {
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010378);
+void func_00010378(struct ifnet *ifp, struct ifaddr *ifa) {
+    struct in_addr *ip;
+
+    ip = &((struct in_ifaddr *)ifa)->ia_addr.sin_addr;
+    if (ip->s_addr != __builtin_allegrex_wsbw(0)) {
+        func_0000FA70(ifp, ip, ip, LLADDR(ifp->if_sadl));
+    }
+    ifa->ifa_rtrequest = func_0000F730;
+    ifa->ifa_flags |= RTF_CLONING;
+}
 #endif
 
 #if FW_VERSION < 151
@@ -3017,10 +3023,7 @@ s32 in_localaddr(struct in_addr in) {
     }
     return 0;
 }
-#endif
 
-
-#if FW_VERSION < 151
 s32 in_canforward(struct in_addr in) {
     u32 net;
 
@@ -3113,7 +3116,6 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000129AC);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012AC4);
-
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012730);
@@ -3443,10 +3445,101 @@ void in_rtchange(struct inpcb *inp, s32 errno) {
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013478);
+struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard) {
+    struct inpcb *inp, *match = NULL;
+    s32 matchwild = 3, wildcard;
+    u16 lport = lport_arg;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013530);
+    for (inp = table->inpt_queue.cqh_first; inp != (struct inpcb *)&table->inpt_queue; inp = inp->inp_queue.cqe_next) {
+        if (inp->inp_lport != lport) {
+            continue;
+        }
+        wildcard = 0;
+        if (inp->inp_faddr.s_addr != __builtin_allegrex_wsbw(0)) {
+            wildcard++;
+        }
+        if (inp->inp_laddr.s_addr == __builtin_allegrex_wsbw(0)) {
+            if (laddr.s_addr != __builtin_allegrex_wsbw(0)) {
+                wildcard++;
+            }
+        } else {
+            if (laddr.s_addr == __builtin_allegrex_wsbw(0)) {
+                wildcard++;
+            } else {
+                if (inp->inp_laddr.s_addr != laddr.s_addr) {
+                    continue;
+                }
+            }
+        }
+        if (wildcard && !lookup_wildcard) {
+            continue;
+        }
+        if (wildcard < matchwild) {
+            match = inp;
+            matchwild = wildcard;
+            if (matchwild == 0) {
+                break;
+            }
+        }
+    }
+    return match;
+}
 
+struct inpcb *func_00013530(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg) {
+    struct inpcbhead *head;
+    struct inpcb *inp;
+    u16 fport = fport_arg, lport = lport_arg;
+
+    head = INPCBHASH_CONNECT(table, faddr, fport, laddr, lport);
+    for (inp = head->lh_first; inp != NULL; inp = inp->inp_hash.le_next) {
+        if (inp->inp_faddr.s_addr == faddr.s_addr &&
+            inp->inp_fport == fport &&
+            inp->inp_lport == lport &&
+            inp->inp_laddr.s_addr == laddr.s_addr) {
+            goto out;
+        }
+    }
+    return NULL;
+
+out:
+    if (inp != head->lh_first) {
+        LIST_REMOVE(inp, inp_hash);
+        LIST_INSERT_HEAD(head, inp, inp_hash);
+    }
+    return inp;
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 201
+struct inpcb *func_0001361C(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg) {
+    struct inpcbhead *head;
+    struct inpcb *inp;
+    u16 lport = lport_arg;
+
+    head = INPCBHASH_BIND(table, laddr, lport);
+    for (inp = head->lh_first; inp != NULL; inp = inp->inp_hash.le_next) {
+        if (inp->inp_lport == lport && inp->inp_laddr.s_addr == laddr.s_addr) {
+            goto out;
+        }
+    }
+    head = INPCBHASH_BIND(table, zeroin_addr, lport);
+    for (inp = head->lh_first; inp != NULL; inp = inp->inp_hash.le_next) {
+        if (inp->inp_lport == lport && inp->inp_laddr.s_addr == zeroin_addr.s_addr) {
+            goto out;
+        }
+    }
+    return NULL;
+
+out:
+    if (inp != head->lh_first) {
+        LIST_REMOVE(inp, inp_hash);
+        LIST_INSERT_HEAD(head, inp, inp_hash);
+    }
+    return inp;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001361C);
 #endif
 
@@ -4694,11 +4787,15 @@ s32 rip_connect(struct inpcb *inp, struct mbuf *nam) {
     return (0);
 }
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B2E4);
+#if FW_VERSION >= 151 && FW_VERSION < 201
+void func_0001B2E4(struct inpcb *inp) {
+    inp->inp_faddr = zeroin_addr;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B2E4);
+
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B820);
 #endif
 
@@ -4740,11 +4837,7 @@ void udp_init(void) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", udp_init);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", udp_ctlinput);
-#endif
-
-#if FW_VERSION < 151
+#if FW_VERSION < 151 || FW_VERSION == 152
 void *udp_ctlinput(s32 cmd, struct sockaddr *sa, void *v) {
     struct ip *ip = v;
     struct tcphdr *th;
@@ -4773,6 +4866,10 @@ void *udp_ctlinput(s32 cmd, struct sockaddr *sa, void *v) {
     }
     return NULL;
 }
+#endif
+
+#if FW_VERSION == 151 || (FW_VERSION >= 201 && FW_VERSION < 282)
+INCLUDE_ASM("nonmatchings/pspnet_inet", udp_ctlinput);
 #endif
 
 #if FW_VERSION >= 282
@@ -5008,7 +5105,24 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000214B0);
 INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_output);
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00021FF0);
+void func_00021FF0(struct tcpcb *tp) {
+    s32 t = ((tp->t_srtt >> 2) + tp->t_rttvar) >> (1 + 2);
+    s32 nticks;
+
+    if (t < tp->t_rttmin) {
+        t = tp->t_rttmin;
+    }
+    nticks = t * tcp_backoff[tp->t_rxtshift];
+    if (nticks < TCPTV_PERSMIN) {
+        nticks = TCPTV_PERSMIN;
+    } else if (nticks > TCPTV_PERSMAX) {
+        nticks = TCPTV_PERSMAX;
+    }
+    tp->t_timer[TCPT_PERSIST] = pfslowtimo_now + nticks;
+    if (tp->t_rxtshift < TCP_MAXRXTSHIFT) {
+        tp->t_rxtshift++;
+    }
+}
 #endif
 
 #if FW_VERSION < 151
