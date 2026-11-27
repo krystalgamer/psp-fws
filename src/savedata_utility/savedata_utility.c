@@ -179,7 +179,7 @@ void func_000003D8(void) {
 
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00000404);
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00000440);
 #else
 void func_00000440(s32 arg0) {

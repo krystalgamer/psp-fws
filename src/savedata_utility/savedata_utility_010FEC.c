@@ -716,11 +716,11 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013360);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000133AC);
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000133F8);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 250
 void func_000133F8(s32 **arg0) {
     *arg0 = &D_00025160;
 }

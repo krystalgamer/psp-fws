@@ -195,11 +195,11 @@ s32 func_000101AC(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 271
+#if FW_VERSION >= 250 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_000101B4);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 250
 void func_000101B4(void *arg0, s32 arg1) {
     _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
 }
@@ -381,11 +381,11 @@ INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_00017678);
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_0001769C);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_00010898);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 250
 void func_00010898(void *arg0) {
     sce_paf_private_memset((s32) &D_00025B2C, 0, 0x10);
     sce_paf_private_memcpy(&D_00025B2C, arg0, 0x10);
