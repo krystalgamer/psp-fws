@@ -1,7 +1,7 @@
 /* cflags[152]: -O1 */
 /* cflags[151]: -O1 */
 /* cflags[150]: -O1 */
-/* cflags[100,102]: -O1 */
+/* cflags[100,102]: -O2 -mno-split-addresses */
 #include "common.h"
 #include "init_decls.h"
 
