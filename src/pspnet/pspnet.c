@@ -393,8 +393,8 @@ s32 sceNetInit(s32 poolSize, s32 calloutPrio, s32 calloutStack, s32 netintrPrio,
     ret = netintr_init(netintrPrio, netintrStack);
     if (ret < 0)
         goto fail;
-    func_000057D8();
-    func_000045CC(8);
+    ifinit();
+    bpfilterattach(8);
     return 0;
 
 fail:
@@ -432,8 +432,8 @@ s32 sceNetInit(s32 poolSize, s32 calloutPrio, s32 calloutStack, s32 netintrPrio,
     ret = netintr_init(netintrPrio, netintrStack);
     if (ret < 0)
         goto fail;
-    func_000057D8();
-    func_000045CC(8);
+    ifinit();
+    bpfilterattach(8);
     sceWlanDrv_lib_8D5F551B(0x10500);
     return 0;
 
@@ -1128,7 +1128,7 @@ s32 sceNetBpfOpen(void) {
     if (ti == NULL)
         return -1;
 again:
-    error = func_0000460C(i);
+    error = bpfopen(i);
     if (error == 0) {
         fd = i;
     } else if (error == 16) {
@@ -1150,7 +1150,7 @@ s32 sceNetBpfClose(s32 fd) {
     ti = _sce_pspnet_thread_enter();
     if (ti == NULL)
         return -1;
-    return _sce_pspnet_thread_leave(ti, func_00004678(fd));
+    return _sce_pspnet_thread_leave(ti, bpfclose(fd));
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfClose);
@@ -1174,7 +1174,7 @@ s32 sceNetBpfRead(s32 fd, void *buf, s32 len) {
     uio.uio_offset = 0;
     uio.uio_resid = len;
     iov.iov_len = len;
-    error = func_00003B30(fd, &uio);
+    error = bpfread(fd, &uio);
     ret = len - uio.uio_resid;
     if (_sce_pspnet_thread_leave(ti, error) < 0)
         return -1;
@@ -1193,7 +1193,7 @@ s32 sceNetBpfIoctl(s32 fd, u32 cmd, void *data) {
     ti = _sce_pspnet_thread_enter();
     if (ti == NULL)
         return -1;
-    return _sce_pspnet_thread_leave(ti, func_00003E78(fd, cmd, data));
+    return _sce_pspnet_thread_leave(ti, bpfioctl(fd, cmd, data));
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfIoctl);
@@ -1846,11 +1846,11 @@ M2C_UNK *_sce_pspnet_get_selwait_addr(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00003B30);
+INCLUDE_ASM("nonmatchings/pspnet", bpfread);
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00003C98);
+INCLUDE_ASM("nonmatchings/pspnet", bpfwrite);
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00003E78);
+INCLUDE_ASM("nonmatchings/pspnet", bpfioctl);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_000041D8);
 
@@ -1875,7 +1875,7 @@ void func_00004430(s32 arg0, u8 *arg1) {
 }
 #endif
 
-s32 func_0000445C(struct bpf_d *d) {
+s32 bpf_allocbufs(struct bpf_d *d) {
     d->bd_fbuf = sceNetMallocInternal(d->bd_bufsize);
     if (d->bd_fbuf == NULL)
         return 12;
@@ -1891,7 +1891,7 @@ s32 func_0000445C(struct bpf_d *d) {
 
 INCLUDE_ASM("nonmatchings/pspnet", func_000044C0);
 
-void func_000045CC(s32 n) {
+void bpfilterattach(s32 n) {
     s32 i;
 
     D_0000A87C = 0x2000;
@@ -1901,7 +1901,7 @@ void func_000045CC(s32 n) {
 }
 
 #if FW_VERSION < 201
-s32 func_0000460C(s32 minor) {
+s32 bpfopen(s32 minor) {
     struct bpf_d *d;
 
     if ((u32)minor >= NBPFILTER)
@@ -1914,10 +1914,10 @@ s32 func_0000460C(s32 minor) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", func_0000460C);
+INCLUDE_ASM("nonmatchings/pspnet", bpfopen);
 #endif
 
-s32 func_00004678(s32 minor) {
+s32 bpfclose(s32 minor) {
     struct bpf_d *d = &D_0000BC14[minor];
     struct bpf_if *bp;
     struct bpf_d **p;
@@ -1948,7 +1948,7 @@ s32 func_00004678(s32 minor) {
     return 0;
 }
 
-s32 func_00004770(s32 minor, s32 events, struct SceNetThreadInfo *p) {
+s32 bpfpoll(s32 minor, s32 events, struct SceNetThreadInfo *p) {
     struct bpf_d *d = &D_0000BC14[minor];
     s32 revents = 0;
     s32 s;
@@ -1964,7 +1964,7 @@ s32 func_00004770(s32 minor, s32 events, struct SceNetThreadInfo *p) {
     return revents;
 }
 
-void func_00004820(void *arg, struct mbuf *m) {
+void bpf_mtap(void *arg, struct mbuf *m) {
     struct bpf_if *bp = arg;
     struct bpf_d *d;
     u32 pktlen, slen;
@@ -1977,15 +1977,15 @@ void func_00004820(void *arg, struct mbuf *m) {
     s = _sce_pspnet_spllock();
     for (d = bp->bif_dlist; d != NULL; d = d->bd_next) {
         ++d->bd_rcount;
-        slen = func_00004B34(d->bd_filter, (u8 *)m, pktlen, 0);
+        slen = bpf_filter(d->bd_filter, (u8 *)m, pktlen, 0);
         if (slen != 0)
-            func_000049F4(d, (u8 *)m, pktlen, slen, func_00004974);
+            catchpacket(d, (u8 *)m, pktlen, slen, bpf_mcpy);
     }
     _sce_pspnet_splunlock(s);
 }
 
 #if FW_VERSION < 271
-void func_000048F4(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrlen) {
+void bpfattach(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrlen) {
     struct bpf_if *bp;
 
     bp = sceNetMallocInternal(sizeof(*bp));
@@ -1999,15 +1999,15 @@ void func_000048F4(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrl
     bp->bif_hdrlen = BPF_WORDALIGN(hdrlen + SIZEOF_BPF_HDR) - hdrlen;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", func_000048F4);
+INCLUDE_ASM("nonmatchings/pspnet", bpfattach);
 #endif
 
 #if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", func_00004974);
+INCLUDE_ASM("nonmatchings/pspnet", bpf_mcpy);
 #endif
 
 #if FW_VERSION == 152
-u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2) {
+u8 *bpf_mcpy(u8 *arg0, void *arg1, u32 arg2) {
     u32 temp_a2;
     u32 temp_s0;
     u32 temp_s0_2;
@@ -2034,7 +2034,7 @@ u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2) {
 #endif
 
 #if FW_VERSION >= 282
-u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2) {
+u8 *bpf_mcpy(u8 *arg0, void *arg1, u32 arg2) {
     u32 temp_a2;
     u32 temp_s0;
     u32 temp_s0_2;
@@ -2061,7 +2061,7 @@ u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2) {
 #endif
 
 #if FW_VERSION < 271
-void func_000049F4(struct bpf_d *d, u8 *pkt, u32 pktlen, u32 snaplen, u8 *(*cpfn)()) {
+void catchpacket(struct bpf_d *d, u8 *pkt, u32 pktlen, u32 snaplen, u8 *(*cpfn)()) {
     struct bpf_hdr *hp;
     s32 totlen, curlen;
     s32 hdrlen = d->bd_bif->bif_hdrlen;
@@ -2090,12 +2090,12 @@ void func_000049F4(struct bpf_d *d, u8 *pkt, u32 pktlen, u32 snaplen, u8 *(*cpfn
     d->bd_slen = curlen + totlen;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", func_000049F4);
+INCLUDE_ASM("nonmatchings/pspnet", catchpacket);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00004B34);
+INCLUDE_ASM("nonmatchings/pspnet", bpf_filter);
 
-s32 func_00005010(struct bpf_insn *f, s32 len) {
+s32 bpf_validate(struct bpf_insn *f, s32 len) {
     s32 i;
     struct bpf_insn *p;
 
@@ -2124,7 +2124,7 @@ s32 func_00005010(struct bpf_insn *f, s32 len) {
     return BPF_CLASS(f[len - 1].code) == BPF_RET;
 }
 
-s32 func_00005120(struct mbuf *m, s32 k, s32 *err) {
+s32 m_xword(struct mbuf *m, s32 k, s32 *err) {
     s32 len;
     u8 *cp, *np;
     struct mbuf *m0;
@@ -2153,7 +2153,7 @@ bad:
     return 0;
 }
 
-s32 func_00005234(struct mbuf *m, s32 k, s32 *err) {
+s32 m_xhalf(struct mbuf *m, s32 k, s32 *err) {
     s32 len;
     u8 *cp;
     struct mbuf *m0;
@@ -2393,7 +2393,7 @@ void func_00005744(struct Unk_func_00005744_0 *arg0) {
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifioctl);
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet", func_00005614);
+INCLUDE_ASM("nonmatchings/pspnet", ifconf);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -2401,7 +2401,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00005AD4);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet", func_000057D8);
+INCLUDE_ASM("nonmatchings/pspnet", ifinit);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -2415,61 +2415,61 @@ s32 _sce_pspnet_if_nulloutput(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", func_00005C28);
+INCLUDE_ASM("nonmatchings/pspnet", if_nullinput);
 #endif
 
 #if FW_VERSION < 201
-void func_00005C28(void) {
+void if_nullinput(void) {
 
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", func_00005C30);
+INCLUDE_ASM("nonmatchings/pspnet", if_nullstart);
 #endif
 
 #if FW_VERSION < 201
-void func_00005C30(void) {
+void if_nullstart(void) {
 
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", func_00005C38);
+INCLUDE_ASM("nonmatchings/pspnet", if_nullioctl);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00005C38(void) {
+s32 if_nullioctl(void) {
     return 6;
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", func_00005C40);
+INCLUDE_ASM("nonmatchings/pspnet", if_nullreset);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00005C40(void) {
+s32 if_nullreset(void) {
     return 6;
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", func_00005C48);
+INCLUDE_ASM("nonmatchings/pspnet", if_nullwatchdog);
 #endif
 
 #if FW_VERSION < 201
-void func_00005C48(void) {
+void if_nullwatchdog(void) {
 
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", func_00005C50);
+INCLUDE_ASM("nonmatchings/pspnet", if_nulldrain);
 #endif
 
 #if FW_VERSION < 201
-void func_00005C50(void) {
+void if_nulldrain(void) {
 
 }
 #endif
@@ -2481,38 +2481,38 @@ s32 _sce_pspnet_if_nulloutput(void) {
     return 6;
 }
 
-void func_00005C28(void) {
+void if_nullinput(void) {
 }
 
-void func_00005C30(void) {
+void if_nullstart(void) {
 }
 
-s32 func_00005C38(void) {
+s32 if_nullioctl(void) {
     return 6;
 }
 
-s32 func_00005C40(void) {
+s32 if_nullreset(void) {
     return 6;
 }
 
-void func_00005C48(void) {
+void if_nullwatchdog(void) {
 }
 
-void func_00005C50(void) {
+void if_nulldrain(void) {
 }
 #endif
 
-void func_00005C58(struct ifnet *ifp) {
+void if_deactivate(struct ifnet *ifp) {
     s32 s;
 
     s = _sce_pspnet_spllock();
     ifp->if_output = _sce_pspnet_if_nulloutput;
-    ifp->if_input = func_00005C28;
-    ifp->if_start = func_00005C30;
-    ifp->if_ioctl = func_00005C38;
-    ifp->if_reset = func_00005C40;
-    ifp->if_watchdog = func_00005C48;
-    ifp->if_drain = func_00005C50;
+    ifp->if_input = if_nullinput;
+    ifp->if_start = if_nullstart;
+    ifp->if_ioctl = if_nullioctl;
+    ifp->if_reset = if_nullreset;
+    ifp->if_watchdog = if_nullwatchdog;
+    ifp->if_drain = if_nulldrain;
     ifp->if_snd.ifq_maxlen = 0;
     _sce_pspnet_splunlock(s);
 }
@@ -2536,7 +2536,7 @@ void _sce_pspnet_if_up(struct ifnet *ifp) {
         D_0000B398(ifp);
 }
 
-void func_00005D64(void *arg) {
+void if_slowtimo(void *arg) {
     struct ifnet *ifp;
     s32 s;
 
@@ -2548,7 +2548,7 @@ void func_00005D64(void *arg) {
             (*ifp->if_watchdog)(ifp);
     }
     _sce_pspnet_splunlock(s);
-    _sce_pspnet_callout_reset(&D_0000BE5C, 100, func_00005D64, NULL);
+    _sce_pspnet_callout_reset(&D_0000BE5C, 100, if_slowtimo, NULL);
 }
 
 #if FW_VERSION < 201
