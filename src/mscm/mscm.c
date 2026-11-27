@@ -1,6 +1,6 @@
 /* cflags[152]: -Os */
 /* cflags[150]: -Os */
-/* cflags[100]: -Os */
+/* cflags[100,102]: -Os */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "mscm_decls.h"
@@ -101,11 +101,15 @@ s32 func_000001E4(void *arg0) {
 INCLUDE_ASM("nonmatchings/mscm", func_0000027C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mscm", func_00000244);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mscm", func_00000430);
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartModule);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStopModule);
 
@@ -146,7 +150,11 @@ void func_00000930(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mscm", func_000009D4);
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLD);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmUnRegisterCLD);
 
@@ -186,11 +194,15 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 INCLUDE_ASM("nonmatchings/mscm", sceMScmGetCLDM);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mscm", func_0000172C);
+#endif
+
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/mscm", func_00001B0C);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 #endif
 
@@ -258,7 +270,7 @@ s32 func_00002194(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 
 INCLUDE_ASM("nonmatchings/mscm", func_0000244C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mscm", func_00002238);
 #endif
 
@@ -790,7 +802,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_000059E0);
 INCLUDE_ASM("nonmatchings/mscm", func_00005EE4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mscm", func_00005A44_v100);
 #endif
 
