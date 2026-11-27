@@ -300,9 +300,83 @@ INCLUDE_ASM("nonmatchings/usb", func_00002214);
 INCLUDE_ASM("nonmatchings/usb", func_000022AC);
 #endif
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqSend);
+s32 sceUsbbdReqSend(SceUsbdDeviceReq *req) {
+    s32 ret;
+    s32 n;
+    UsbbdEpRec *rec;
+    s32 intr;
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqRecv);
+    ret = func_00003164(req);
+    if (ret < 0) {
+        return ret;
+    }
+    n = req->endpoint->busEndpointNumber;
+    rec = &g_usbbd.eps[n];
+    if (rec->type == 0) {
+        req->isControlRequest = 1;
+    }
+    req->returnCode = 1;
+    req->physicalAddr = __builtin_allegrex_ins((((u32)req->data >> 31) ^ 1) << 30, (u32)req->data, 0, 29);
+    req->transmittedBytes = 0;
+    intr = sceKernelCpuSuspendIntr();
+    if (rec->tail != NULL) {
+        rec->tail->next = req;
+    } else {
+        rec->head = req;
+    }
+    while (req->next != NULL) {
+        req = req->next;
+        if (rec->type == 0) {
+            req->isControlRequest = 1;
+        }
+        req->transmittedBytes = 0;
+        req->physicalAddr = __builtin_allegrex_ins((((u32)req->data >> 31) ^ 1) << 30, (u32)req->data, 0, 29);
+        req->returnCode = 1;
+    }
+    rec->tail = req;
+    func_00003EB8(n);
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
+
+s32 sceUsbbdReqRecv(SceUsbdDeviceReq *req) {
+    s32 ret;
+    s32 n;
+    UsbbdEpRec *rec;
+    s32 intr;
+
+    ret = func_00003164(req);
+    if (ret < 0) {
+        return ret;
+    }
+    n = req->endpoint->busEndpointNumber;
+    rec = &g_usbbd.eps[n];
+    if (rec->type == 0) {
+        req->isControlRequest = 1;
+    }
+    req->returnCode = 2;
+    req->physicalAddr = __builtin_allegrex_ins((((u32)req->data >> 31) ^ 1) << 30, (u32)req->data, 0, 29);
+    req->transmittedBytes = 0;
+    intr = sceKernelCpuSuspendIntr();
+    if (rec->tail != NULL) {
+        rec->tail->next = req;
+    } else {
+        rec->head = req;
+    }
+    while (req->next != NULL) {
+        req = req->next;
+        if (rec->type == 0) {
+            req->isControlRequest = 1;
+        }
+        req->transmittedBytes = 0;
+        req->physicalAddr = __builtin_allegrex_ins((((u32)req->data >> 31) ^ 1) << 30, (u32)req->data, 0, 29);
+        req->returnCode = 2;
+    }
+    rec->tail = req;
+    func_00004100(n);
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqCancel);
 
@@ -1788,7 +1862,47 @@ INCLUDE_RODATA("nonmatchings/usb", D_0000A86C);
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/usb", func_000084F4);
-#else
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
+s32 sceUsbbdUnregister(SceUsbdDriver *drv) {
+    u32 timeout = 1000000;
+    SceUsbdDriver *prev;
+    SceUsbdDriver *d;
+    s32 ret;
+
+    if (drv == NULL) {
+        Kprintf(D_0000A86C);
+        return 0x80243002;
+    }
+    ret = sceKernelWaitSema(g_usbbd.sema, 1, &timeout);
+    if (ret < 0) {
+        Kprintf(D_0000A7C8, ret);
+        return ret;
+    }
+    d = func_000082A4(g_usbbdRegistered, &prev, drv->name);
+    if (d == NULL) {
+        if (func_00008244(g_usbbd.drivers, drv->name) != NULL) {
+            Kprintf("usbbd ERROR : driver is in progress\n");
+            ret = 0x80243006;
+        } else {
+            Kprintf(D_0000A024);
+            ret = 0x80243005;
+        }
+    } else {
+        if (prev != NULL) {
+            prev->link = d->link;
+        } else {
+            g_usbbdRegistered = d->link;
+        }
+        ret = 0;
+    }
+    sceKernelSignalSema(g_usbbd.sema, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/usb", sceUsbbdUnregister);
 #endif
 
