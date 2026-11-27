@@ -21,7 +21,31 @@ s32 func_00000000(s32 slot) {
     sceMScmResetHC(hc, 4);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 201
+s32 func_00000000(s32 slot) {
+    SceMScmHC *hc = &D_00006F14[slot];
+    s32 pow;
+
+    sceSysregMsifIoDisable(slot);
+    sceMScmSetPullDownReg(slot, 0);
+    sceSysreg_driver_7B9E9A53(slot);
+    func_00005AD0(slot, 2);
+    func_00005E58(slot, 0);
+    func_00005EB0(slot);
+    func_00005E58(slot, 1);
+    sceMScmGetSlotPower(hc, &pow);
+    if (pow != 1) {
+        sceMScmSetSlotPower(hc, 1);
+    }
+    sceMScmResetHC(hc, 2);
+    sceMScmResetHC(hc, 4);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mscm", func_00000000);
 #endif
 
@@ -99,11 +123,28 @@ s32 func_000000AC(s32 slot) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", func_000000AC);
+#if FW_VERSION >= 102 && FW_VERSION < 201
+s32 func_000000AC(s32 slot) {
+    SceMScmHC *hc;
+    s32 pow;
+
+    sceSysregMsifIoDisable(slot);
+    sceMScmSetPullDownReg(slot, 0);
+    sceSysreg_driver_7BDF0556(slot);
+    func_00005AD0(slot, 1);
+    func_00005E58(slot, 0);
+    hc = &D_00006F14[slot];
+    sceMScmGetSlotPower(hc, &pow);
+    if (pow != 1) {
+        sceMScmSetSlotPower(hc, 1);
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mscm", func_000000AC);
+
 INCLUDE_ASM("nonmatchings/mscm", func_0000015C);
 
 INCLUDE_ASM("nonmatchings/mscm", func_000001E0);
@@ -139,7 +180,28 @@ s32 func_00000124(s32 slot) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/mscm", func_00000124);
+s32 func_00000124(s32 slot) {
+    SceMScmHC *hc = &D_00006F14[0];
+    s32 ok = (hc != NULL);
+    s32 ret;
+
+    ret = 0x80220081;
+    if (slot == 0) {
+        const char *fn = "_sceMScmReinitializeHC", *file = "init.c";
+        if (!ok) {
+            Kprintf("Assertion failed at %s:%s:%04d\n", file, fn, 0x87);
+            sceKernelAssert(ok, 0);
+        }
+        func_00005E58(0, 0);
+        func_00005EB0(0);
+        func_00005E58(0, 1);
+        sceMScmResetHC(hc, 2);
+        sceMScmResetHC(hc, 4);
+        sceMScmSetHCTransferMode(hc, 1, 1, 2);
+        return 0;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
