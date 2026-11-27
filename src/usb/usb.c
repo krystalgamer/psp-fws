@@ -723,7 +723,7 @@ s32 sceUsbbdReqCancelAll(SceUsbdEndpoint *ep) {
 INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqCancelAll);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 s32 func_00002E80(s32 n) {
     UsbbdEpRec *rec = &g_usbbd.eps[n];
     s32 intr = sceKernelCpuSuspendIntr();
@@ -822,7 +822,6 @@ s32 module_start(void) {
     }
     return var_v0;
 }
-
 #endif
 
 #if FW_VERSION < 250
@@ -1111,9 +1110,11 @@ void func_0000581C(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 void func_00005B1C(void) {
+#if FW_VERSION == 100
     sceSysregUsbResetEnable();
+#endif
     sceSysregUsbResetDisable();
     if (sceSysregUsbQueryIntr() & 4) {
         sceSysregUsbAcquireIntr(4);
@@ -1421,7 +1422,7 @@ INCLUDE_ASM("nonmatchings/usb", func_000070E8);
 
 INCLUDE_ASM("nonmatchings/usb", func_00007188);
 
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
+#if FW_VERSION < 271
 s32 func_000072A0(void) {
     sceSysregUsbAcquireIntr(4);
     if (g_usbbd.cableState != 0x10) {
