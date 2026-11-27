@@ -1189,7 +1189,79 @@ s32 sceKernelLoadModuleBufferBootInitConfig(void) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", func_000028EC);
+s32 LoadDeviceCheck(SceUID fd, s32 apiType) {
+    s32 ret;
+
+    switch (apiType) {
+    case 0:
+        break;
+    case 0x10:
+        if (!k1IsUserMode()) {
+            break;
+        }
+        ret = sceIoIoctl(fd, 0x8001, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:WARNING(le): IOCTL_PERMIT(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8001, ret, 0x10);
+            return 0x80020146;
+        }
+        break;
+    case 0x11:
+        ret = sceIoIoctl(fd, 0x8002, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:WARNING(le): IOCTL_PERMIT(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8002, ret, 0x11);
+            return 0x80020146;
+        }
+        break;
+    case 0x20:
+        ret = sceIoIoctl(fd, 0x8003, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_XXX(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8003, ret, 0x20);
+            return 0x80020146;
+        }
+        break;
+    case 0x30:
+        break;
+    case 0x100:
+        break;
+    case 0x110:
+        ret = sceIoIoctl(fd, 0x8010, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:IOCTL_PERMIT(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8010, ret, 0x110);
+            return 0x80020146;
+        }
+        break;
+    case 0x120:
+        ret = sceIoIoctl(fd, 0x8012, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_XXX(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8012, ret, 0x120);
+            return 0x80020146;
+        }
+        break;
+    case 0x121:
+        ret = sceIoIoctl(fd, 0x8012, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_XXX(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8012, ret, 0x121);
+            return 0x80020146;
+        }
+        break;
+    case 0x130:
+    case 0x131:
+        break;
+    case 0x140:
+    case 0x141:
+    case 0x142:
+        ret = sceIoIoctl(fd, 0x8013, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_XXX(0x%08x) failed 0x%08x, 0x%08x\n", "LoadDeviceCheck", 0x8013, ret, apiType);
+            return 0x80020146;
+        }
+        break;
+    default:
+        Kprintf("modulemgr.c:%s:Unknown apitype 0x%08x\n", "LoadDeviceCheck", apiType);
+        return 0x80020001;
+    }
+    return 0;
+}
 
 SceUID sceKernelLoadModuleByID(SceUID fd, s32 flags, SceKernelLMOption *option) {
     SceModuleMgrParam modParams;
@@ -1260,7 +1332,7 @@ SceUID sceKernelLoadModuleWithApitype(const char *path, s32 flags, s32 apiType, 
             modParams.apiType = 0;
         }
     }
-    ret = func_000028EC(fd, modParams.apiType);
+    ret = LoadDeviceCheck(fd, modParams.apiType);
     if (ret < 0) {
         sceIoClose(fd);
         setK1(oldK1);

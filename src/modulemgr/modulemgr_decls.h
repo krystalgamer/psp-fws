@@ -221,6 +221,7 @@ extern SceModuleManagerCB modMgrCB;
 
 u32 CheckMsHeader(PBPHeader *header, SceSize *pSize);
 s32 Kprintf(const char *fmt, ...);
+s32 LoadDeviceCheck(SceUID fd, s32 apiType);
 s32 ModuleReleaseLibraries(SceModule *mod);
 s32 SelfStopUnloadModule(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);
 u32 ThreadManForKernel_DD55A192(void);
@@ -247,7 +248,6 @@ void func_000004B0(void *arg0, void *arg1);
 void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 *arg1);
 void func_00000594(void *arg0);
 s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option);
-s32 func_000028EC(SceUID fd, u32 apiType);
 s32 func_00003210(s32);
 void func_00004750(void);
 s32 func_00004BA4(s32);

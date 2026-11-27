@@ -2,6 +2,7 @@
  "funcs": {
   "CheckMsHeader": "u32 CheckMsHeader(PBPHeader *header, SceSize *pSize);",
   "Kprintf": "s32 Kprintf(const char *fmt, ...);",
+  "LoadDeviceCheck": "s32 LoadDeviceCheck(SceUID fd, s32 apiType);",
   "ModuleReleaseLibraries": "s32 ModuleReleaseLibraries(SceModule *mod);",
   "SelfStopUnloadModule": "s32 SelfStopUnloadModule(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);",
   "ThreadManForKernel_DD55A192": "u32 ThreadManForKernel_DD55A192(void);",
@@ -28,7 +29,6 @@
   "func_000004C0": "void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 *arg1);",
   "func_00000594": "void func_00000594(void *arg0);",
   "func_000026F8": "s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option);",
-  "func_000028EC": "s32 func_000028EC(SceUID fd, u32 apiType);",
   "func_00003210": "s32 func_00003210(s32);",
   "func_00004750": "void func_00004750(void);",
   "func_00004BA4": "s32 func_00004BA4(s32);",
