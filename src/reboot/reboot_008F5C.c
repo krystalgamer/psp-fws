@@ -647,12 +647,39 @@ s32 func_000119F0(void) {
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000119F8);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011284);
+s32 func_00011284(s32 protect) {
+    u32 v = *(volatile u32 *)0xBD101004;
+    s32 old = __builtin_allegrex_ext(v ^ 0x80, 7, 1);
+    if (protect) {
+        v &= ~0x80;
+    } else {
+        v |= 0x80;
+    }
+    *(volatile u32 *)0xBD101004 = v;
+    return old;
+}
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011A4C);
+s32 func_00011A4C(void) {
+    u32 v;
+    *(volatile u32 *)0xBD101008 = 0x70;
+    v = *(volatile u32 *)0xBD101300;
+    *(volatile u32 *)0xBD101014 = 1;
+    return v & 0xFF;
+}
 
+#if FW_VERSION == 100
+s32 func_00011A80(s32 a0) {
+    if (a0) {
+        *(volatile u32 *)0xBD101004 |= 0x80;
+    } else {
+        *(volatile u32 *)0xBD101004 &= ~0x80;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011A80);
+#endif
 
 s32 func_00011AB0(void) {
     return 0;
@@ -662,11 +689,21 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011AB8);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011AFC);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011B24);
+s32 func_00011B24(s32 a0, s32 a1, s32 a2, s32 a3) {
+    return func_000113DC(a0, a1, a2, a3, 0x20);
+}
 
+#if FW_VERSION == 100
+s32 func_00011B40(s32 a0, s32 a1, s32 a2, s32 a3) {
+    return func_000115B8(a0, a1, a2, a3, (a1 == 0) ? 0x30 : 0x20);
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011B40);
+#endif
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011B64);
+s32 func_00011B64(s32 a0, s32 a1, s32 a2, s32 a3) {
+    return func_000113DC(a0, a1, a2, a3, 0x31);
+}
 
 void func_00011B80(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_000115B8(arg0, arg1, arg2, arg3, 0x31);

@@ -109,7 +109,7 @@
   "func_000134DC": "void func_000134DC(void);",
   "func_000134FC": "void func_000134FC(void);",
   "func_0001351C": "void func_0001351C(void);",
-  "func_000135C4": "M2C_UNK func_000135C4(M2C_UNK, M2C_UNK);",
+  "func_000135C4": "s32 func_000135C4(u32 mask, s32 on);",
   "func_000135F0": "void func_000135F0(void);",
   "func_00013610": "void func_00013610(void);",
   "func_00013630": "void func_00013630(void);",

@@ -402,7 +402,7 @@ void func_000134BC(void);
 void func_000134DC(void);
 void func_000134FC(void);
 void func_0001351C(void);
-M2C_UNK func_000135C4(M2C_UNK, M2C_UNK);
+s32 func_000135C4(u32 mask, s32 on);
 void func_000135F0(void);
 void func_00013610(void);
 void func_00013630(void);

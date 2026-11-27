@@ -1,5 +1,6 @@
 /* compiler[151]: 1.6.1 */
 /* compiler[150]: 1.6.1 */
+/* cflags[100]: -O2 -frename-registers */
 #include "common.h"
 #include "reboot_decls.h"
 
@@ -7,9 +8,13 @@ INCLUDE_ASM("nonmatchings/reboot_012C04", func_00012C04);
 
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_00012C64);
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_00012E90);
+s32 func_00012E90(s32 a0, s32 a1) {
+    return func_00012EC8(a0, a1, 0);
+}
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_00012EAC);
+s32 func_00012EAC(s32 a0, s32 a1) {
+    return func_00012EC8(a0, a1, 1);
+}
 
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_00012EC8);
 
@@ -109,7 +114,20 @@ INCLUDE_ASM("nonmatchings/reboot_012C04", func_0001353C);
 
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013580);
 
+#if FW_VERSION == 100
+s32 func_000135C4(u32 mask, s32 on) {
+    u32 v = *(volatile u32 *)0xBC100050;
+    u32 n = v & ~mask;
+    s32 old = (v & mask) != 0;
+    if (on) {
+        n = v | mask;
+    }
+    *(volatile u32 *)0xBC100050 = n;
+    return old;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_000135C4);
+#endif
 
 void func_000135F0(void) {
     func_00013AAC(2, 1);
@@ -175,9 +193,21 @@ void func_000138A0(void) {
     func_00013AAC(0x800, 0);
 }
 
+#if FW_VERSION == 100
+s32 func_000138C0(void) {
+    return 0x80000004;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_000138C0);
+#endif
 
+#if FW_VERSION == 100
+s32 func_000138CC(void) {
+    return 0x80000004;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_000138CC);
+#endif
 
 void func_000138D8(void) {
     func_00013AAC(0x2000, 1);
@@ -195,9 +225,13 @@ INCLUDE_ASM("nonmatchings/reboot_012C04", func_000139A0);
 
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_000139E4);
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013A28);
+s32 func_00013A28(s32 a0) {
+    return func_00013A60(a0, 1);
+}
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013A44);
+s32 func_00013A44(s32 a0) {
+    return func_00013A60(a0, 0);
+}
 
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013A60);
 
