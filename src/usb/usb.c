@@ -547,11 +547,7 @@ s32 func_00002A48(s32 size, void *args) {
 INCLUDE_ASM("nonmatchings/usb", func_00002A48);
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 271 && FW_VERSION < 300)
-INCLUDE_ASM("nonmatchings/usb", module_stop);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
+#if FW_VERSION < 271
 s32 module_stop(void) {
     s32 ret;
     u32 timeout = 1000000;
@@ -577,13 +573,15 @@ s32 module_stop(void) {
 }
 #endif
 
+#if FW_VERSION >= 271 && FW_VERSION < 300
+INCLUDE_ASM("nonmatchings/usb", module_stop);
+#endif
+
 #if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_00009B28);
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/usb", module_reboot_before);
-#else
+#if FW_VERSION < 282
 s32 module_reboot_before(void) {
     struct {
         s32 size;
@@ -615,6 +613,8 @@ s32 module_reboot_before(void) {
     g_usbbd.sema = 0;
     return 0;
 }
+#else
+INCLUDE_ASM("nonmatchings/usb", module_reboot_before);
 #endif
 
 s32 sceUsbGetState(void) {
@@ -679,9 +679,7 @@ s32 func_00002DC8(u8 *desc) {
     return 0;
 }
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqCancelAll);
-#else
+#if FW_VERSION < 300
 s32 sceUsbbdReqCancelAll(SceUsbdEndpoint *ep) {
     if (ep == NULL) {
         Kprintf(D_00009A20);
@@ -693,6 +691,8 @@ s32 sceUsbbdReqCancelAll(SceUsbdEndpoint *ep) {
     }
     return func_000026E8(ep->busEndpointNumber);
 }
+#else
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqCancelAll);
 #endif
 
 #if FW_VERSION < 282
@@ -1120,13 +1120,7 @@ void func_00005B68(s32 n) {
 
 #if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_0000A174);
-#endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/usb", sceUsbbdClearFIFO);
-
-INCLUDE_ASM("nonmatchings/usb", sceUsbbdStall);
-#else
 s32 sceUsbbdClearFIFO(SceUsbdEndpoint *ep) {
     if (ep == NULL) {
         Kprintf(D_0000A174);
@@ -1138,7 +1132,11 @@ s32 sceUsbbdClearFIFO(SceUsbdEndpoint *ep) {
     }
     return func_00003A10(ep->busEndpointNumber);
 }
+#else
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdClearFIFO);
+#endif
 
+#if FW_VERSION < 300
 s32 sceUsbbdStall(SceUsbdEndpoint *ep) {
     if (ep == NULL) {
         Kprintf(D_0000A174);
@@ -1150,6 +1148,8 @@ s32 sceUsbbdStall(SceUsbdEndpoint *ep) {
     }
     return func_00003C34(ep->busEndpointNumber);
 }
+#else
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdStall);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -1804,7 +1804,7 @@ void *func_00008318(struct Unk_func_00008318_0 *arg0, struct Unk_func_00008318_1
 }
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
+#if FW_VERSION < 282
 s32 sceUsbbdRegister(SceUsbdDriver *drv) {
     u32 timeout = 1000000;
     s32 ret;
@@ -1867,9 +1867,7 @@ INCLUDE_RODATA("nonmatchings/usb", D_0000A82C);
 INCLUDE_RODATA("nonmatchings/usb", D_0000A86C);
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/usb", sceUsbbdUnregister);
-#else
+#if FW_VERSION < 271
 s32 sceUsbbdUnregister(SceUsbdDriver *drv) {
     u32 timeout = 1000000;
     SceUsbdDriver *prev;
@@ -1905,6 +1903,8 @@ s32 sceUsbbdUnregister(SceUsbdDriver *drv) {
     sceKernelSignalSema(g_usbbd.sema, 1);
     return ret;
 }
+#else
+INCLUDE_ASM("nonmatchings/usb", sceUsbbdUnregister);
 #endif
 
 #if FW_VERSION >= 300
