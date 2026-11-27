@@ -641,7 +641,7 @@ s32 UFatOpen(SceIoIob *iob, char *file, s32 flags, SceMode mode) {
     args[3] = mode;
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00002D98, args);
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -662,7 +662,7 @@ s32 UFatClose(SceIoIob *iob) {
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00002DC4, iob);
     func_00008914();
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -686,7 +686,7 @@ s32 UFatRead(SceIoIob *iob, void *data, SceSize size) {
     args[2] = (s32)size;
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00002DE0, args);
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -715,7 +715,7 @@ s32 UFatWrite(SceIoIob *iob, const void *data, SceSize size) {
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00002E0C, args);
     func_00008914();
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -749,7 +749,7 @@ SceOff UFatLseek(SceIoIob *iob, SceOff offset, s32 whence) {
         return 0x80010005;
     }
     ret = func_000037B4(iob, (s32)offset, whence);
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -781,7 +781,7 @@ s32 UFatIoctl2(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdat
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00003B3C, args);
     func_00008914();
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -805,7 +805,7 @@ s32 UFatRemove(SceIoIob *iob, char *name) {
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00003B70, args);
     func_00008914();
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #else
@@ -828,7 +828,7 @@ s32 UFatMkdir(SceIoIob *iob, char *name, SceMode mode) {
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00002E88, args);
     func_00008914();
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -856,7 +856,7 @@ s32 UFatRmdir(SceIoIob *iob, char *name) {
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00002EB0, args);
     func_00008914();
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #else
@@ -888,7 +888,7 @@ s32 UFatDopen(SceIoIob *iob, char *dirname) {
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00002ED0, args);
     func_00008914();
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -1095,7 +1095,7 @@ s32 UFatDread(SceIoIob *iob, SceIoDirent *dir) {
     args[1] = (s32)dir;
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00002EF0, args);
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -1119,7 +1119,7 @@ s32 UFatGetstat(SceIoIob *iob, char *file, SceIoStat *stat) {
     args[2] = (s32)stat;
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00002F10, args);
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -1272,7 +1272,7 @@ s32 UFatChstat(SceIoIob *iob, char *file, SceIoStat *stat, s32 bits) {
     func_00008914();
     ret = sceKernelExtendKernelStack(0x1000, func_00002F38, args);
     func_00008914();
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -1325,7 +1325,7 @@ s32 UFatMount(SceIoIob *iob, const char *fs, const char *blockDev, s32 mode, voi
     args[5] = (s32)len;
     ret = sceKernelExtendKernelStack(0x1000, func_00003C6C, args);
     func_00008914();
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif
@@ -1352,7 +1352,7 @@ s32 UFatUmount(SceIoIob *iob, char *blockDev) {
     args[1] = (s32)blockDev;
     ret = sceKernelExtendKernelStack(0x1000, func_00003CA0, args);
     func_00008914();
-    sceKernelSignalSema(D_0000D354, 1);
+    signal_sema(D_0000D354);
     return ret;
 }
 #endif

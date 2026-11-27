@@ -325,12 +325,16 @@ struct Unk_func_0000A3DC_0 {
     s32 ** unk8;
 };
 
-/* lfatfs.c wait_sema(): inlined into every UFat* entry point. */
-extern SceUID D_0000D354;
+/* lfatfs.c wait_sema() (1.00) / wait_sema_lock() (1.50+, with a power lock), inlined into every UFat* entry point. */
 extern char D_0000CF5C[];
+extern char D_0000C5B4[];
 extern char D_0000CF6C[];
 s32 Kprintf(const char *fmt, ...);
 s32 sceKernelWaitSema(SceUID semaid, s32 signal, u32 *timeout);
+s32 sceKernelSignalSema(SceUID semaid, s32 signal);
+s32 sceKernelPowerLock(s32);
+s32 sceKernelPowerUnlock(s32);
+#if FW_VERSION == 100
 static inline s32 wait_sema(SceUID sema) {
     s32 ret = sceKernelWaitSema(sema, 1, NULL);
 
@@ -339,6 +343,28 @@ static inline s32 wait_sema(SceUID sema) {
     }
     return ret;
 }
+
+static inline void signal_sema(SceUID sema) {
+    sceKernelSignalSema(sema, 1);
+}
+#else
+static inline s32 wait_sema(SceUID sema) {
+    s32 ret;
+
+    sceKernelPowerLock(0);
+    ret = sceKernelWaitSema(sema, 1, NULL);
+    if (ret != 0) {
+        Kprintf(D_0000C5B4, D_0000CF6C, ret);
+        sceKernelPowerUnlock(0);
+    }
+    return ret;
+}
+
+static inline void signal_sema(SceUID sema) {
+    sceKernelSignalSema(sema, 1);
+    sceKernelPowerUnlock(0);
+}
+#endif
 
 extern char D_0000C56C[];
 extern char D_0000C5B4[];
@@ -411,6 +437,8 @@ s32 func_00001C48(void);
 s32 func_0000286C(struct Unk_func_0000286C_0 *arg0);
 s32 func_000028E8(void);
 s32 func_00002C24(void);
+s32 func_00002C6C(SceIoIob *iob, const char *oldname, const char *newname);
+s32 func_00002CAC(SceIoIob *iob, char *name);
 void func_00002D98(void *arg0);
 void func_00002DC4(s32 arg0);
 void func_00002DE0(void *arg0);
@@ -505,6 +533,8 @@ s32 func_0000A508(void);
 s32 func_0000A514(void);
 void func_0000A528(void *arg0);
 s32 func_0000A7AC(void);
+s32 func_0000ACF0(SceIoIob *iob, char *name);
+s32 func_0000AD24(SceIoIob *iob, char *name);
 s32 func_0000AF24(void);
 s32 func_0000AF30(void);
 s32 func_0000AF98(void);
