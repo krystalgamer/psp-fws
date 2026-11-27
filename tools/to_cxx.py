@@ -259,7 +259,45 @@ def fix_convert_arg(lines, idx, msg):
     if m[1] == "const char*" and re.fullmatch(r"(M2C_UNK|s32|u32|s8|u8|void|char)\s*\*", m[2]):
         if m[4] in CHANGED_PROTOS or _set_param(m[4], int(m[3]), "const char *"):
             return True
+    if m[2] == "const char*" and _string_var(lines, idx, m[4], int(m[3])):
+        return True
     return _cast_arg(lines, idx, m[4], int(m[3]), m[2])
+
+
+def _string_var(lines, idx, name, argno):
+    """A global passed where a string is expected (rodata string symbol): retype it `const char D[]`."""
+    span = _call_span(lines[idx], name)
+    if not span or argno > len(span[2]):
+        return False
+    a, b = span[2][argno - 1]
+    arg = lines[idx][a:b].strip()
+    vm = re.fullmatch(r"&?(D_\w+)", arg)
+    vars_ = STORE.get("vars", {})
+    if not vm or vm[1] not in vars_:
+        return False
+    if not re.fullmatch(rf"extern (M2C_UNK|s32|u32|s8|u8|char|const char) {vm[1]}(\[\])?;", vars_[vm[1]]):
+        return False
+    vars_[vm[1]] = f"extern const char {vm[1]}[];"
+    CHANGED_PROTOS.setdefault("", "")  # forces a decls rewrite
+    # &D (array address) and D are the same pointer; keep the call text but drop the `&`
+    for k in range(len(lines)):
+        lines[k] = re.sub(rf"&{vm[1]}\b", vm[1], lines[k])
+    return True
+
+
+def fix_too_many(lines, idx, msg):
+    """`too many arguments to function `R _Z...(...)'`: m2c guessed the prototype from fewer uses;
+    a mangled name gives the real parameters."""
+    m = re.search(r"too many arguments to function `(.*?)\b(_Z\w+)\(", msg)
+    if not m or m[2] not in STORE.get("funcs", {}):
+        return False
+    old = STORE["funcs"][m[2]]
+    rm = re.match(rf"^(.*?)\b{m[2]}\(", old)
+    new = structify.cxx_proto(f"{rm[1] if rm else 'M2C_UNK '}{m[2]}();")
+    if new == old or new.endswith("(...);"):
+        return False
+    CHANGED_PROTOS[m[2]] = new
+    return True
 
 
 def fix_convert_passing(lines, idx, msg):
@@ -310,7 +348,7 @@ def fix_ptr_int_compare(lines, idx, msg):
     return False
 
 
-FIXERS = [fix_too_few, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
+FIXERS = [fix_too_few, fix_too_many, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
 
 
 # ---------------------------------------------------------------- driver
@@ -376,7 +414,7 @@ def main():
             f.write_text("\n".join(lines))
         if CHANGED_PROTOS:
             for name, proto in CHANGED_PROTOS.items():
-                if name in store["funcs"]:
+                if name and name in store["funcs"]:
                     store["funcs"][name] = proto
             CHANGED_PROTOS.clear()
             structify.write_decls(mod, store)
