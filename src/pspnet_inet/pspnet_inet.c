@@ -1480,12 +1480,12 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008704);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008874);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008970);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sysctl_int);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008A2C);
 
 #if FW_VERSION < 201
-s32 func_00008D34(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len) {
+s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len) {
     if (newp != NULL) {
         return 1;
     }
@@ -1504,7 +1504,7 @@ s32 func_00008D34(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len)
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008D34);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sysctl_rdstruct);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00008D98);
@@ -2970,9 +2970,9 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001358C);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000137AC);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000138B4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_rtchange);
 #else
-void func_000138B4(struct Unk_func_000138B4_0 *arg0) {
+void in_rtchange(struct Unk_func_000138B4_0 *arg0) {
     s32 temp_v1;
 
     temp_v1 = arg0->unk20;
@@ -3107,62 +3107,7 @@ void in_pcbstate(struct inpcb *inp, s32 state) {
     inp->inp_state = state;
 }
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
-struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp) {
-    struct in_ifaddr *ia;
-
-    ia = NULL;
-    if (ro->ro_rt &&
-        (((struct sockaddr_in *)&ro->ro_dst)->sin_addr.s_addr != sin->sin_addr.s_addr || soopts & 0x10)) {
-        RTFREE(ro->ro_rt);
-        ro->ro_rt = NULL;
-    }
-    if ((soopts & 0x10) == 0 && (ro->ro_rt == NULL || ro->ro_rt->rt_ifp == NULL)) {
-        ro->ro_dst.sa_family = AF_INET;
-        ro->ro_dst.sa_len = sizeof(struct sockaddr_in);
-        ((struct sockaddr_in *)&ro->ro_dst)->sin_addr = sin->sin_addr;
-        rtalloc(ro);
-    }
-    if (ro->ro_rt && !(ro->ro_rt->rt_ifp->if_flags & IFF_LOOPBACK)) {
-        ia = (struct in_ifaddr *)ro->ro_rt->rt_ifa;
-    }
-    if (ia == NULL) {
-        u16 fport = sin->sin_port;
-
-        sin->sin_port = 0;
-        ia = (struct in_ifaddr *)ifa_ifwithladdr((struct sockaddr *)sin);
-        sin->sin_port = fport;
-        if (ia == 0) {
-            for (ia = in_ifaddrhead.tqh_first; ia != NULL; ia = ia->ia_list.tqe_next) {
-                if (!(ia->ia_ifp->if_flags & IFF_LOOPBACK)) {
-                    break;
-                }
-            }
-        }
-        if (ia == NULL) {
-            *errorp = 125;
-            return NULL;
-        }
-    }
-    if (IN_MULTICAST(sin->sin_addr.s_addr) && mopts != NULL) {
-        struct ip_moptions *imo;
-        struct ifnet *ifp;
-
-        imo = mopts;
-        if (imo->imo_multicast_ifp != NULL) {
-            ifp = imo->imo_multicast_ifp;
-            IFP_TO_IA(ifp, ia);
-            if (ia == 0) {
-                *errorp = 125;
-                return NULL;
-            }
-        }
-    }
-    return &ia->ia_addr;
-}
-#endif
-
-#if FW_VERSION < 151
+#if FW_VERSION < 282
 struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp) {
     struct in_ifaddr *ia;
 
@@ -3951,11 +3896,38 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001CE38);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001BE04);
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_ctlinput);
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001CE9C);
+void *tcp_ctlinput(s32 cmd, struct sockaddr *sa, void *v) {
+    struct ip *ip = v;
+    struct tcphdr *th;
+    void (*notify)() = func_0001D1E4;
+    s32 errno;
+
+    if (sa->sa_family != AF_INET || sa->sa_len != sizeof(struct sockaddr_in)) {
+        return NULL;
+    }
+    if ((u32)cmd >= PRC_NCMDS) {
+        return NULL;
+    }
+    errno = inetctlerrmap[cmd];
+    if (PRC_IS_REDIRECT(cmd)) {
+        notify = in_rtchange, ip = 0;
+    } else if (cmd == PRC_HOSTDEAD) {
+        ip = 0;
+    } else if (errno == 0) {
+        return NULL;
+    }
+    if (ip) {
+        th = (struct tcphdr *)((u8 *)ip + ((ip->ip_hl_v & 0xF) << 2));
+        in_pcbnotify(&tcbtable, ((struct sockaddr_in *)sa)->sin_addr, th->th_dport, ip->ip_src, th->th_sport, errno, notify);
+    } else {
+        in_pcbnotifyall(&tcbtable, ((struct sockaddr_in *)sa)->sin_addr, errno, notify);
+    }
+    return NULL;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -3970,7 +3942,23 @@ void func_0001C208(void) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001C26C);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001C374);
+s32 tcp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen) {
+    if (namelen != 1) {
+        return 20; /* ENOTDIR */
+    }
+    switch (name[0]) {
+    case 1: /* TCPCTL_RFC1323 */
+        return sysctl_int(oldp, oldlenp, newp, newlen, &D_0002C314);
+    case 2: /* TCPCTL_SENDSPACE */
+        return sysctl_int(oldp, oldlenp, newp, newlen, &D_0002C31C);
+    case 3: /* TCPCTL_RECVSPACE */
+        return sysctl_int(oldp, oldlenp, newp, newlen, &D_0002C320);
+    case 4: /* SCE: tcpstat */
+        return sysctl_rdstruct(oldp, oldlenp, newp, &D_0002DC30, 0x48);
+    default:
+        return 109; /* ENOPROTOOPT */
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001C448);
 

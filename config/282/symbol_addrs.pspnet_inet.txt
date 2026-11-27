@@ -234,3 +234,7 @@ in_pcbdetach = 0x00014120; // type:func
 udbtable = 0x0002DC10;
 ifa_ifwithladdr = 0x0000931C; // type:func
 ifa_ifwithaddr = 0x00009144; // type:func
+tcp_sysctl = 0x0001C374; // type:func
+sysctl_int = 0x00008970; // type:func
+sysctl_rdstruct = 0x00008D34; // type:func
+in_rtchange = 0x000138B4; // type:func

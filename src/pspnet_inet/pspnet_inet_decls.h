@@ -893,6 +893,28 @@ struct inpcbtable {
     (ia) = (struct in_ifaddr *)ifa; \
 }
 
+/* struct tcphdr / udphdr (byte-aligned) */
+struct tcphdr {
+    u16 th_sport;
+    u16 th_dport;
+    u32 th_seq;
+    u32 th_ack;
+    u8 th_x2_off;
+    u8 th_flags;
+    u16 th_win;
+    u16 th_sum;
+    u16 th_urp;
+} __attribute__((packed));
+struct udphdr {
+    u16 uh_sport;
+    u16 uh_dport;
+    u16 uh_ulen;
+    u16 uh_sum;
+} __attribute__((packed));
+#define PRC_HOSTDEAD 6
+#define PRC_NCMDS 21
+#define PRC_IS_REDIRECT(cmd) ((u32)(cmd) - 14 <= 3)
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1248,6 +1270,7 @@ extern SceNetBytes4 dns_secondary;
 extern struct domain *domains;
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
+extern s32 inetctlerrmap[]; /* inetctlerrmap */
 extern const struct cp ipcp; /* ipcp */
 extern struct ifqueue ipintrq; /* ipintrq, exported by sceNetInet_lib_D7928A6D */
 extern const struct cp lcp; /* lcp */
@@ -1406,7 +1429,6 @@ void func_00010528(struct mbuf *m);
 s32 func_000106E0(void);
 s32 func_00010700(void);
 void func_00012684(struct in_multi *inm);
-void func_000138B4(struct Unk_func_000138B4_0 *arg0);
 void func_0001486C(struct mbuf *m);
 void func_00015654(struct Unk_func_00015654_0 *arg0);
 s32 func_00019A98(void);
@@ -1488,6 +1510,7 @@ struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, 
 s32 in_pcbnotify(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg, s32 errno, void (*notify)(struct inpcb *, s32));
 void in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, s32 errno, void (*notify)(struct inpcb *, s32));
 void in_pcbstate(struct inpcb *inp, s32 state);
+void in_rtchange(struct Unk_func_000138B4_0 *arg0);
 struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp);
 void lortrequest(s32 cmd, struct rtentry *rt);
 s32 module_start(void);
@@ -1549,5 +1572,9 @@ void sppp_lcp_tld(struct sppp *sp);
 void sppp_lcp_up(struct sppp *sp);
 void sppp_pap_TO(void *arg);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
+s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
+s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);
+void *tcp_ctlinput(s32 cmd, struct sockaddr *sa, void *v);
+s32 tcp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
 
 #endif
