@@ -68,7 +68,11 @@ def main():
     args = ap.parse_args()
 
     name = args.name or Path(args.module).stem
-    data = zipfile.ZipFile(ROOT / "inputs/fws.zip").read(f"fws/{args.version}/F0/{args.module}")
+    import extract_baserom
+    if args.version in extract_baserom.PRERELEASE:
+        data, _ = extract_baserom.prerelease(args.version, args.module)
+    else:
+        data = zipfile.ZipFile(ROOT / "inputs/fws.zip").read(f"fws/{args.version}/F0/{args.module}")
     sha1 = hashlib.sha1(data).hexdigest()
     import io
     elf = ELFFile(io.BytesIO(data))

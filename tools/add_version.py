@@ -34,6 +34,9 @@ import fwmodel as FM  # noqa: E402
 from srcdir import sharing_versions  # noqa: E402
 
 SYM = re.compile(r"\b(?:func|D|jtbl|L)_[0-9A-F]{8}\b|\.L[0-9A-F]{8}\b")
+# every symbol in operand position (real names too: REF's globals/helpers may be named, NEW's still auto)
+OPER = re.compile(r"\b(?:func|D|jtbl|L)_[0-9A-F]{8}\b|\.L[0-9A-F]{8}\b|(?<=%hi\()[A-Za-z_]\w*|(?<=%lo\()[A-Za-z_]\w*"
+                  r"|(?<=\bjal)\s+[A-Za-z_]\w*|(?<=\bj)\s+[A-Za-z_]\w*|(?<=\.word)\s+[A-Za-z_]\w*")
 AUTO = re.compile(r"(?:func|D|jtbl)_[0-9A-F]{8}")
 LINES = {}  # hash -> normalised lines (for similarity pairing)
 BEGIN, END = "// shared names (tools/add_version.py) begin", "// shared names (tools/add_version.py) end"
@@ -81,11 +84,13 @@ def normalise(path, names):
 
         def sub(mm):
             s = mm[0]
+            lead = s[:len(s) - len(s.lstrip())]
+            s = s.strip()
             if s.startswith(".L"):
-                return f".L+{int(s[2:], 16) - (base or 0):X}"
+                return f"{lead}.L+{int(s[2:], 16) - (base or 0):X}"
             syms.append(s)
-            return "@"
-        body = SYM.sub(sub, body)
+            return lead + "@"
+        body = OPER.sub(sub, body)
         # named symbols (not func_/D_) must match literally; record them too
         for nm in re.findall(r"\b(?:glabel|jlabel|dlabel|endlabel|enddlabel)\s+(\w+)", line):
             if not SYM.fullmatch(nm):
@@ -328,6 +333,8 @@ def once(retrying=False):
     ap.add_argument("module")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--keep", action="store_true", help="leave the state on failure (debugging)")
+    ap.add_argument("--extend", action="store_true",
+                    help="first make NEW evaluate like REF in the sources (tools/extend_version.py): flag ranges, FW_VERSION tests")
     a = ap.parse_args()
     ref, new, mod = a.ref, a.new, a.module
     nv = fwnum(new)
@@ -346,6 +353,8 @@ def once(retrying=False):
     if run("git", "diff", "--quiet", "--", f"src/{mod}", f"config/{new}/{mod}.yaml", f"config/{ref}/{mod}.yaml",
            *([] if retrying else [f"config/{new}/symbol_addrs.{mod}.txt"]))[0]:
         sys.exit(f"{mod}: local changes, aborting")
+    if a.extend and not retrying:
+        run(sys.executable, "tools/extend_version.py", mod, ref, new, check=True)
     stems = list(dict.fromkeys(x[2] for x in rsub))
     symf = ROOT / "config" / new / f"symbol_addrs.{mod}.txt"
     sym0 = symf.read_text() if symf.exists() else ""
@@ -404,7 +413,8 @@ def once(retrying=False):
         def consistent(rs, ns):
             loc = {}
             for x, y in zip(rs, ns):
-                if (not AUTO.fullmatch(x) or not AUTO.fullmatch(y)) and x != y:
+                # NEW's auto names may take REF's names (incl. real names of globals); real NEW names must agree
+                if not AUTO.fullmatch(y) and x != y:
                     return None
                 if mapping.get(y, x) != x or rev.get(x, y) != y or loc.get(y, x) != x:
                     return None

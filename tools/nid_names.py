@@ -43,7 +43,8 @@ def candidates():
 
 def load_cache():
     cache = ROOT / "tmp/sdk/nid_cache.txt"
-    if not cache.exists():
+    newest = max((p.stat().st_mtime for p in (ROOT / "config").rglob("symbol_addrs.*.txt")), default=0)
+    if not cache.exists() or cache.stat().st_mtime < newest:
         candidates()
     out = {}
     for line in cache.read_text().splitlines():
