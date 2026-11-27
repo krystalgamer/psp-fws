@@ -1,3 +1,4 @@
+/* cflags[271-352]: -O2 -mext */
 #include "common.h"
 #include "fatmsmod_decls.h"
 #include "k1.h"
