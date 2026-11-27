@@ -70,14 +70,14 @@ typedef struct {
 /* PrFILE directory cursor: the current directory entry and its position (D_00027934; D_00027800 points at one). */
 typedef struct {
     FatDirEnt de; /* 0x0 */
-#if FW_VERSION >= 260
+#if FW_VERSION >= 201
     u8 pad20[0x20];
 #else
     u8 pad20[0x10];
 #endif
-    u32 sector; /* 0x30 (2.60: 0x40), sector holding the entry */
+    u32 sector; /* 0x30 (2.01+: 0x40), sector holding the entry */
     u8 pad34[0x18];
-    s32 unk4C; /* 0x4C (2.60: 0x5C) */
+    s32 unk4C; /* 0x4C (2.01+: 0x5C) */
     u8 pad50[8];
     s32 unk58; /* 0x58 */
 } PfDirCursor;
@@ -115,13 +115,16 @@ typedef struct {
     u32 rootSectors; /* 0x20 */
 } PfFatInfo;
 
-/* PrFILE open-file record (0x264 bytes, table D_0001BEFC[10]). */
+/* PrFILE open-file record (table D_0001BEFC[10]; 0x264 bytes in 1.x, 0x700 in 2.01+). */
 typedef struct {
     u8 pad0[0xD];
     s8 flags; /* 0xD, bit 7 = in use */
     u8 padE[0xE];
     u32 size; /* 0x1C */
     u32 pos; /* 0x20, current file position */
+#if FW_VERSION >= 201
+    u8 pad24_201[0x10]; /* placement of the 2.01 insertion within 0x24..0x60 is a guess */
+#endif
     s32 unk24;
     s32 unk28;
     u8 pad2C[4];
@@ -131,9 +134,13 @@ typedef struct {
     s32 unk40;
     u8 pad44[8];
     s32 unk4C;
-    s32 unk50;
+    s32 unk50; /* 0x50 (2.01+: 0x60) */
     u8 unk54;
+#if FW_VERSION >= 201
+    u8 pad55[0x700 - 0x65];
+#else
     u8 pad55[0x264 - 0x55];
+#endif
 } PfFile;
 
 /* PrFILE stat result (stub cmd 0xC), FAT DOS date/time words. */
