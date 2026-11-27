@@ -428,6 +428,7 @@ extern s32 D_0002D054;
 extern s8 D_0002D730;
 extern s32 D_0002DC10;
 extern s32 D_0002EF50;
+extern PfFile D_0002F578[10];
 extern void *D_0003F728;
 extern M2C_UNK D_00042A80;
 extern SceUID g_msStubMbx;

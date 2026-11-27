@@ -4857,7 +4857,22 @@ s32 func_0000F8A4(PfFile *fp) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000F8A4);
+s32 func_0000F8A4(PfFile *fp) {
+    s32 i;
+
+    for (i = 0; i < 10; i++) {
+        if (fp == &D_0002F578[i]) {
+            break;
+        }
+    }
+    if (i == 10 || fp->flags >= 0) {
+        return -1;
+    }
+    if (fp->pos < fp->size) {
+        return 0;
+    }
+    return 1;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -4878,7 +4893,20 @@ s32 func_0000F8F8(PfFile *fp) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000F8F8);
+s32 func_0000F8F8(PfFile *fp) {
+    s32 i;
+
+    func_0000A128();
+    for (i = 0; i < 10; i++) {
+        if (fp == &D_0002F578[i]) {
+            break;
+        }
+    }
+    if (i == 10 || fp->flags >= 0) {
+        return -1;
+    }
+    return fp->unk50;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001BEB0);
 #endif
