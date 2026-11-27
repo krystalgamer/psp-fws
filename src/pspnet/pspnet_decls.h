@@ -10,6 +10,10 @@ typedef __builtin_va_list va_list;
 
 struct socket;
 struct ifnet;
+static __inline u32 min(u32 a, u32 b) {
+    return (a < b) ? a : b;
+}
+
 /* NetBSD 1.5 sys/queue.h */
 #define TAILQ_HEAD(name, type) struct name { struct type *tqh_first; struct type **tqh_last; }
 #define TAILQ_ENTRY(type) struct { struct type *tqe_next; struct type **tqe_prev; }
@@ -290,6 +294,22 @@ struct bpf_if {
 #define NBPFILTER 8
 #define D_ISFREE(d) ((d) == (d)->bd_next)
 #define D_MARKFREE(d) ((d)->bd_next = (d))
+struct bpf_hdr {
+    struct timeval bh_tstamp;   /* 0x00 */
+    u32 bh_caplen;              /* 0x08 */
+    u32 bh_datalen;             /* 0x0C */
+    u16 bh_hdrlen;              /* 0x10 */
+};
+#define ROTATE_BUFFERS(d) \
+    (d)->bd_hbuf = (d)->bd_sbuf; \
+    (d)->bd_hlen = (d)->bd_slen; \
+    (d)->bd_sbuf = (d)->bd_fbuf; \
+    (d)->bd_slen = 0; \
+    (d)->bd_fbuf = 0;
+#define bpf_wakeup(d) do { \
+    _sce_pspnet_wakeup(d); \
+    _sce_pspnet_selwakeup(&(d)->bd_sel); \
+} while (0)
 
 
 /* struct iovec / struct uio (NetBSD uio.h; SCE: 32-bit offset, no segflg/proc) */
@@ -472,7 +492,7 @@ void _sce_pspnet_microtime(struct timeval *tv);
 void _sce_pspnet_schednetintr(s32 arg0);
 void _sce_pspnet_schednetintr_with_evf(s32 arg0);
 void _sce_pspnet_selrecord(struct SceNetThreadInfo *ti, s32 *sip);
-void _sce_pspnet_selwakeup(s32 *arg0);
+void _sce_pspnet_selwakeup(s32 *sip);
 s32 _sce_pspnet_spllock(void);
 s32 _sce_pspnet_spllock_owner(void);
 void _sce_pspnet_splunlock(s32 arg0);

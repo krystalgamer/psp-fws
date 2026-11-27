@@ -2060,7 +2060,38 @@ u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2) {
 }
 #endif
 
+#if FW_VERSION < 271
+void func_000049F4(struct bpf_d *d, u8 *pkt, u32 pktlen, u32 snaplen, u8 *(*cpfn)()) {
+    struct bpf_hdr *hp;
+    s32 totlen, curlen;
+    s32 hdrlen = d->bd_bif->bif_hdrlen;
+    struct timeval tv;
+
+    totlen = hdrlen + min(snaplen, pktlen);
+    if (totlen > d->bd_bufsize)
+        totlen = d->bd_bufsize;
+    curlen = BPF_WORDALIGN(d->bd_slen);
+    if (curlen + totlen > d->bd_bufsize) {
+        if (d->bd_fbuf == 0) {
+            ++d->bd_dcount;
+            return;
+        }
+        ROTATE_BUFFERS(d);
+        bpf_wakeup(d);
+        curlen = 0;
+    } else if (d->bd_immediate)
+        bpf_wakeup(d);
+    hp = (struct bpf_hdr *)(d->bd_sbuf + curlen);
+    _sce_pspnet_microtime(&tv);
+    hp->bh_tstamp = tv;
+    hp->bh_datalen = pktlen;
+    hp->bh_hdrlen = hdrlen;
+    (*cpfn)((u8 *)hp + hdrlen, pkt, (hp->bh_caplen = totlen - hdrlen));
+    d->bd_slen = curlen + totlen;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", func_000049F4);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00004B34);
 
