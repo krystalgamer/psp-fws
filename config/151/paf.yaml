@@ -169,6 +169,7 @@ segments:
       - [0x10D8E8, c, paf_16B04C]
       - [0x10D900, c, paf_16B064]
       - [0x10D94C, c, paf_16B0B0]
+      - [0x10D94C, c, paf_crtend]
       - { start: 0x10E6E8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x10E704, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x10EA04, type: prxpad, order: .text }
@@ -239,6 +240,7 @@ segments:
       - [0x1222D8, .rodata, paf_15BEBC]
       - [0x122C1C, .rodata, paf_168290]
       - [0x122C98, .rodata, paf_16B0B0]
+      - [0x122C98, .rodata, paf_crtend]
   - name: paf_seg1
     type: code
     start: 0x122D40

@@ -158,6 +158,7 @@ segments:
       - [0x16AE3C, c, paf_16B04C]
       - [0x16AE54, c, paf_16B064]
       - [0x16AEA0, c, paf_16B0B0]
+      - [0x16AEA0, c, paf_crtend]
       - { start: 0x16BBFC, type: asm, name: fini, linker_section: .fini }
       - { start: 0x16BC18, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x16BF20, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -224,6 +225,7 @@ segments:
       - [0x1A1EC8, .rodata, paf_15BEBC]
       - [0x1A284C, .rodata, paf_168290]
       - [0x1A29C0, .rodata, paf_16B0B0]
+      - [0x1A29C0, .rodata, paf_crtend]
       - { start: 0x1A2A68, type: prxpad, order: .rodata }
   - name: paf_seg1
     type: code
