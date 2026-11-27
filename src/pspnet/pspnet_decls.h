@@ -668,7 +668,7 @@ void _sce_pspnet_selrecord(struct SceNetThreadInfo *ti, s32 *sip);
 void _sce_pspnet_selwakeup(s32 *arg0);
 s32 _sce_pspnet_spllock(void);
 s32 _sce_pspnet_spllock_owner(void);
-void _sce_pspnet_splunlock(s32 arg0);
+void _sce_pspnet_splunlock(s32 s);
 s32 _sce_pspnet_start_of_adhoc_module_in_if_ethersubr_core(s32 arg0);
 s32 _sce_pspnet_start_of_adhoc_module_in_netintr(s32 arg0, s32 arg1);
 s32 _sce_pspnet_start_of_adhoc_module_in_sched(void (*sabort)(s32, s32));
