@@ -1049,6 +1049,7 @@ s32 func_00019CCC(s32);
 void func_00019D48(struct Unk_func_00019D48_0 *arg0, s32 arg1);
 s32 func_00019DBC(void *arg0);
 s32 func_00019E14(s32);
+void func_0001A008(void);
 M2C_UNK func_0001A060();
 s32 func_0001D608(s32, s32);
 s32 module_stop(void);
