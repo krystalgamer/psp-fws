@@ -192,11 +192,11 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuTerm);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00119E44);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION >= 200 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00119F0C);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 200
 void func_00119F0C(void) {
     sceKernelDeleteEventFlag(D_0016B3F0);
     sceGeUnsetCallback(D_0016B3F4);
@@ -509,11 +509,11 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuAmbient);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00109540);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGuColor);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 200
 void sceGuColor(s32 arg0) {
     func_0011C1AC(7, arg0);
 }
@@ -962,11 +962,7 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumSetMatrixStack);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumLoadIdentity);
 #endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011D0A0);
-#endif
-
-#if FW_VERSION < 152
+#if FW_VERSION < 200
 s32 func_0011D0A0(s32 arg0, s32 arg1) {
     s32 var_a2;
 
@@ -1046,11 +1042,11 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0011D6CC);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumUpdateMatrix);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION >= 200 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_0010ADE0);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 200
 void func_0010ADE0(void) {
     func_001653F4();
 }
@@ -1340,11 +1336,11 @@ INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00165170);
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001651D0);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", sceGumDrawArray);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 200
 void sceGumDrawArray(s32 arg0, s32 arg1, s32 arg2, void *arg3, void *arg4) {
     func_001653F4();
     func_0011ADA8(arg0, arg1, arg2, (s32) arg3, (s32) arg4);
@@ -1358,7 +1354,7 @@ void sceGumDrawArray(s32 arg0, s32 arg1, s32 arg2, void *arg3, void *arg4) {
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 200
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_00165280);
 #else
 void func_00165280(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
@@ -1367,11 +1363,11 @@ void func_00165280(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_15BEBC", func_001652FC);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 200
 void func_001652FC(s32 arg0, s32 arg1, s32 arg2, void *arg3, void *arg4) {
     func_001653F4();
     func_0011AF64(arg0, arg1, arg2, (s32) arg3, (s32) arg4);
